@@ -1,5 +1,13 @@
 SECTION "bank0",HOME[0]
-INCBIN "baserom.gbc",$0,$4000
+INCBIN "baserom.gbc",$0,$100
+
+SECTION "romheader",HOME[$100]
+nop
+jp Start
+
+Section "start",HOME[$150]
+Start:
+INCBIN "baserom.gbc",$150,$4000 - $150
 
 SECTION "bank1",DATA,BANK[$1]
 INCBIN "baserom.gbc",$4000,$4000
