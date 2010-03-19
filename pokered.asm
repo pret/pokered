@@ -441,7 +441,19 @@ jp Start
 
 Section "start",HOME[$150]
 Start:
-INCBIN "baserom.gbc",$150,$4000 - $150
+INCBIN "baserom.gbc",$150,$3A87 - $150
+
+AddNTimes: ; 3A87
+; add bc to hl a times
+	and a
+	ret z
+.loop\@
+	add hl,bc
+	dec a
+	jr nz,.loop\@
+	ret
+
+INCBIN "baserom.gbc",$3A8E,$4000 - $3A8E
 
 SECTION "bank1",DATA,BANK[$1]
 INCBIN "baserom.gbc",$4000,$4000
@@ -1745,7 +1757,7 @@ ReadTrainer: ; 5C53
         ld d,[hl]
         ld hl,W_ENEMYMON1MOVE3
         ld bc,W_ENEMYMON2MOVE3 - W_ENEMYMON1MOVE3
-        call $3A87
+        call AddNTimes
         ld [hl],d
         jr .FinishUp\@
 .AddTeamAttack\@
