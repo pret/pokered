@@ -1,3 +1,13 @@
+; wram locations
+W_CURMAP EQU $D35E
+
+W_GRASSRATE EQU $D887
+W_GRASSMONS EQU $D888
+W_WATERRATE EQU $D8A4
+W_WATERMONS EQU $D8A5
+
+
+; pokemon name constants
 RHYDON     EQU $01
 KANGASKHAN EQU $02
 NIDORAN_M  EQU $03
@@ -175,7 +185,7 @@ INCBIN "baserom.gbc",$C000,$EB8
 
 LoadWildData: ; 4EB8
         ld hl,WildDataPointers
-        ld a,[$D35E] ; current map number
+        ld a,[W_CURMAP] ; current map number
 
 	; get wild data for current map
         ld c,a
@@ -186,11 +196,11 @@ LoadWildData: ; 4EB8
         ld h,[hl]
         ld l,a       ; hl now points to wild data for current map
         ld a,[hli]
-        ld [$D887],a ; grass encounter rate
+        ld [W_GRASSRATE],a ; grass encounter rate
         and a
         jr z,.NoGrassData\@ ; if no grass data, skip to surfing data
         push hl
-        ld de,$D888 ; otherwise, load grass data
+        ld de,W_GRASSMONS ; otherwise, load grass data
         ld bc,$0014
         call $B5 ; copy data
         pop hl
@@ -198,10 +208,10 @@ LoadWildData: ; 4EB8
         add hl,bc
 .NoGrassData\@
         ld a,[hli]
-        ld [$D8A4],a ; surfing encounter rate
+        ld [W_WATERRATE],a ; surfing encounter rate
         and a
         ret z        ; if no water data, we're done
-        ld de,$D8A5  ; otherwise, load surfing data
+        ld de,W_WATERMONS  ; otherwise, load surfing data
         ld bc,$0014
         jp $B5 ; copy data
 
