@@ -185,7 +185,7 @@ INCBIN "baserom.gbc",$C000,$EB8
 
 LoadWildData: ; 4EB8
         ld hl,WildDataPointers
-        ld a,[W_CURMAP] ; current map number
+        ld a,[W_CURMAP]
 
 	; get wild data for current map
         ld c,a
@@ -196,7 +196,7 @@ LoadWildData: ; 4EB8
         ld h,[hl]
         ld l,a       ; hl now points to wild data for current map
         ld a,[hli]
-        ld [W_GRASSRATE],a ; grass encounter rate
+        ld [W_GRASSRATE],a
         and a
         jr z,.NoGrassData\@ ; if no grass data, skip to surfing data
         push hl
@@ -208,7 +208,7 @@ LoadWildData: ; 4EB8
         add hl,bc
 .NoGrassData\@
         ld a,[hli]
-        ld [W_WATERRATE],a ; surfing encounter rate
+        ld [W_WATERRATE],a
         and a
         ret z        ; if no water data, we're done
         ld de,W_WATERMONS  ; otherwise, load surfing data
