@@ -1,10 +1,36 @@
 ; wram locations
+W_CUROPPONENT EQU $D059 ; in a wild battle, this is the species of pokemon
+			; in a trainer battle, this is the trainer class
+
+W_LONEATTACKNO EQU $D05C ; which entry in LoneAttacks to use
+W_TRAINERNO    EQU $D05D ; which instance of [youngster, lass, etc] is this?
+
+W_CURENEMYLVL EQU $D127
+
+W_ISLINKBATTLE EQU $D12B
+
 W_CURMAP EQU $D35E
+
+W_RIVALSTARTER EQU $D715
 
 W_GRASSRATE EQU $D887
 W_GRASSMONS EQU $D888
 W_WATERRATE EQU $D8A4
 W_WATERMONS EQU $D8A5
+
+W_ENEMYMONCOUNT  EQU $D89C
+
+W_ENEMYMON1MOVE3 EQU $D8AE
+
+W_ENEMYMON2MOVE3 EQU $D8DA
+
+W_ENEMYMON3MOVE3 EQU $D906
+
+W_ENEMYMON4MOVE3 EQU $D932
+
+W_ENEMYMON5MOVE3 EQU $D95E
+
+W_ENEMYMON6MOVE3 EQU $D98A
 
 
 ; pokemon name constants
@@ -1620,14 +1646,181 @@ SECTION "bankD",DATA,BANK[$D]
 INCBIN "baserom.gbc",$34000,$4000
 
 SECTION "bankE",DATA,BANK[$E]
-INCBIN "baserom.gbc",$38000,$1D22
+INCBIN "baserom.gbc",$38000,$1C53
 
-; trainer data: from 5D22 to 652E
+; trainer data: from 5C53 to 652E
+
+ReadTrainer: ; 5C53
+
+; don't change any moves in a link battle
+        ld a,[W_ISLINKBATTLE]
+        and a
+        ret nz
+
+; set [W_ENEMYMONCOUNT] to 0, [$D89D] to FF
+; first is total enemy pokemon?
+; second is species of first pokemon?
+        ld hl,W_ENEMYMONCOUNT
+        xor a
+        ld [hli],a
+        dec a
+        ld [hl],a
+
+; get the pointer to trainer data for this class
+        ld a,[W_CUROPPONENT]
+        sub $C9 ; convert value from pokemon to trainer
+        add a,a
+        ld hl,TrainerDataPointers
+        ld c,a
+        ld b,0
+        add hl,bc ; hl points to trainer class
+        ld a,[hli]
+        ld h,[hl]
+        ld l,a
+        ld a,[W_TRAINERNO]
+        ld b,a
+; at this point b contains the trainer number,
+; and hl points to the trainer class.
+; the next function is to iterate through the trainers,
+; decrementing b each time, until we get to the right one
+.outer\@
+        dec b
+        jr z,.IterateTrainer
+.inner\@
+        ld a,[hli]
+        and a
+        jr nz,.inner\@
+        jr .outer\@
+
+; if the first byte of trainer data is FF,
+; - each pokemon has a specific level
+;      (as opposed to the whole team being of the same level)
+; - if [W_LONEATTACKNO] != 0, one pokemon on the team has a special move
+; else the first byte is the level of every pokemon on the team
+.IterateTrainer
+        ld a,[hli]
+        cp $FF ; is the trainer special?
+        jr z,.SpecialTrainer\@ ; if so, check for special attacks
+        ld [W_CURENEMYLVL],a
+.LoopTrainerData\@
+        ld a,[hli]
+        and a ; have we reached the end of the trainer data?
+        jr z,.FinishUp\@
+        ld [$CF91],a ; write species somewhere (why?)
+        ld a,1
+        ld [$CC49],a
+        push hl
+        call $3927
+        pop hl
+        jr .LoopTrainerData\@
+.SpecialTrainer\@
+; if this code is being run:
+; - each pokemon has a specific level
+;      (as opposed to the whole team being of the same level)
+; - if [W_LONEATTACKNO] != 0, one pokemon on the team has a special move
+        ld a,[hli]
+        and a ; have we reached the end of the trainer data?
+        jr z,.AddLoneAttack\@
+        ld [W_CURENEMYLVL],a
+        ld a,[hli]
+        ld [$CF91],a
+        ld a,1
+        ld [$CC49],a
+        push hl
+        call $3927
+        pop hl
+        jr .SpecialTrainer\@
+.AddLoneAttack\@
+; does the trainer have a single monster with a different move
+        ld a,[W_LONEATTACKNO] ; Brock is 01, Misty is 02, Erika is 04, etc
+        and a
+        jr z,.AddTeamAttack\@
+        dec a
+        add a,a
+        ld c,a
+        ld b,0
+        ld hl,LoneAttacks
+        add hl,bc
+        ld a,[hli]
+        ld d,[hl]
+        ld hl,W_ENEMYMON1MOVE3
+        ld bc,W_ENEMYMON2MOVE3 - W_ENEMYMON1MOVE3
+        call $3A87
+        ld [hl],d
+        jr .FinishUp\@
+.AddTeamAttack\@
+; check if our trainer's team has special moves
+
+; get trainer class number
+        ld a,[$D059]
+        sub $C8
+        ld b,a
+        ld hl,TeamAttacks
+
+; iterate through entries in TeamAttacks, checking each for our trainer class
+.IterateTeamAttacks\@
+        ld a,[hli]
+        cp b
+        jr z,.GiveTeamAttacks\@ ; is there a match?
+        inc hl ; if not, go to the next entry
+        inc a
+        jr nz,.IterateTeamAttacks\@
+
+        ; no matches found. is this trainer champion rival?
+        ld a,b
+        cp SONY3
+        jr z,.ChampionRival\@
+        jr .FinishUp\@ ; nope
+.GiveTeamAttacks\@
+        ld a,[hl]
+        ld [$D95E],a
+        jr .FinishUp\@
+.ChampionRival\@ ; give attacks to his team
+
+; pidgeot
+        ld a,SKY_ATTACK
+        ld [W_ENEMYMON1MOVE3],a
+
+; starter
+        ld a,[W_RIVALSTARTER]
+        cp BULBASAUR
+        ld b,MEGA_DRAIN
+        jr z,.GiveStarterMove\@
+        cp CHARMANDER
+        ld b,FIRE_BLAST
+        jr z,.GiveStarterMove\@
+        ld b,BLIZZARD ; must be squirtle
+.GiveStarterMove\@
+        ld a,b
+        ld [W_ENEMYMON6MOVE3],a
+.FinishUp\@ ; this needs documenting
+        xor a       ; clear D079-D07B
+        ld de,$D079
+        ld [de],a
+        inc de
+        ld [de],a
+        inc de
+        ld [de],a
+        ld a,[W_CURENEMYLVL]
+        ld b,a
+.LastLoop\@
+        ld hl,$D047
+        ld c,2
+        push bc
+        ld a,$B
+        call $3E6D
+        pop bc
+        inc de
+        inc de
+        dec b
+        jr nz,.LastLoop\@
+        ret
 
 LoneAttacks: ; 5D22
 ; these are used for gym leaders.
-; this is not automatic! you have to write the move you want to $D05C first.
-; e.g., erika's script writes 4 to $D05C to get mega drain.
+; this is not automatic! you have to write the number you want to W_LONEATTACKNO
+; first. e.g., erika's script writes 4 to W_LONEATTACKNO to get mega drain,
+; the fourth entry in the list.
 
 ; first byte:  pokemon in the trainer's party that gets the move
 ; second byte: move
