@@ -162,7 +162,32 @@ VICTREEBEL EQU $BE
 
 
 SECTION "bank0",HOME[0]
-INCBIN "baserom.gbc",$0,$100
+INCBIN "baserom.gbc",$0,$9D
+
+FarCopyData: ; 009D
+; copy bc bytes of data from a:hl to de
+	ld [$CEE9],a ; save future bank # for later
+	ld a,[$FFB8] ; get current bank #
+	push af
+	ld a,[$CEE9] ; get future bank #, switch
+	ld [$FFB8],a
+	ld [$2000],a
+	call CopyData
+	pop af       ; okay, done, time to switch back
+	ld [$FFB8],a
+	ld [$2000],a
+	ret
+CopyData: ; 00B5
+; copy bc bytes of data from hl to de
+	ld a,[hli]
+	ld [de],a
+	inc de
+	dec bc
+	ld a,c
+	or b
+	jr nz,CopyData
+	ret
+
 
 SECTION "romheader",HOME[$100]
 nop
@@ -202,7 +227,7 @@ LoadWildData: ; 4EB8
         push hl
         ld de,W_GRASSMONS ; otherwise, load grass data
         ld bc,$0014
-        call $B5 ; copy data
+        call CopyData
         pop hl
         ld bc,$0014
         add hl,bc
@@ -213,7 +238,7 @@ LoadWildData: ; 4EB8
         ret z        ; if no water data, we're done
         ld de,W_WATERMONS  ; otherwise, load surfing data
         ld bc,$0014
-        jp $B5 ; copy data
+        jp CopyData
 
 ; XXX replace "WildMonster__" with real location names
 WildDataPointers: ; 4EEB
