@@ -1,8 +1,8 @@
 pokered.gbc: pokered.asm
-	rgbasm -opokered.obj pokered.asm
-	xlink -z0 pokered.link
-	rgbfix -p0 "-tPOKEMON RED" -k01 -s -j -b13 -m3 -v pokered.gbc
+	rgbasm -o pokered.o pokered.asm
+	rgblink -o pokered.gbc pokered.o
+	rgbfix -jsv -k 01 -m 0x13 -p 0 -r 03 -t "POKEMON RED" pokered.gbc
 	cmp baserom.gbc pokered.gbc
 
 clean:
-	rm -f pokered.obj pokered.gbc
+	rm -f pokered.o pokered.gbc
