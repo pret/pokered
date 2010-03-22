@@ -498,7 +498,6 @@ LoadWildData: ; 4EB8
         ld bc,$0014
         jp CopyData
 
-; XXX replace "WildMonster__" with real location names
 WildDataPointers: ; 4EEB
         dw NoMons ; PalletTown
         dw NoMons ; ViridianCity
@@ -559,9 +558,9 @@ WildDataPointers: ; 4EEB
         dw NoMons
         dw NoMons
         dw NoMons
-        dw WildMonsters06
-        dw WildMonsters07
-        dw WildMonsters08
+        dw MoonMons1
+        dw MoonMonsB1
+        dw MoonMonsB2
         dw NoMons
         dw NoMons
         dw NoMons
@@ -582,7 +581,7 @@ WildDataPointers: ; 4EEB
         dw NoMons
         dw NoMons
         dw NoMons
-        dw WildMonsters16
+        dw TunnelMonsB1
         dw PowerPlantMons
         dw NoMons
         dw NoMons
@@ -608,7 +607,7 @@ WildDataPointers: ; 4EEB
         dw NoMons
         dw NoMons
         dw NoMons
-        dw WildMonsters57
+        dw PlateauMons1
         dw NoMons
         dw NoMons
         dw NoMons
@@ -642,13 +641,13 @@ WildDataPointers: ; 4EEB
         dw NoMons
         dw NoMons
         dw NoMons
-        dw WildMonsters22
-        dw WildMonsters23
-        dw WildMonsters24
-        dw WildMonsters25
-        dw WildMonsters26
-        dw WildMonsters27
-        dw WildMonsters28
+        dw TowerMons1
+        dw TowerMons2
+        dw TowerMons3
+        dw TowerMons4
+        dw TowerMons5
+        dw TowerMons6
+        dw TowerMons7
         dw NoMons
         dw NoMons
         dw NoMons
@@ -659,13 +658,13 @@ WildDataPointers: ; 4EEB
         dw NoMons
         dw NoMons
         dw NoMons
-        dw WildMonsters41
-        dw WildMonsters42
-        dw WildMonsters43
-        dw WildMonsters44
+        dw IslandMonsB1
+        dw IslandMonsB2
+        dw IslandMonsB3
+        dw IslandMonsB4
         dw NoMons
         dw NoMons
-        dw WildMonsters45
+        dw MansionMons1
         dw NoMons
         dw NoMons
         dw NoMons
@@ -692,13 +691,13 @@ WildDataPointers: ; 4EEB
         dw NoMons
         dw NoMons
         dw NoMons
-        dw WildMonsters40
+        dw IslandMons1
         dw NoMons
-        dw WildMonsters55
+        dw PlateauMons2
         dw NoMons
         dw NoMons
-        dw WildMonsters58
-        dw WildMonsters56
+        dw CaveMons
+        dw PlateauMons3
         dw NoMons
         dw NoMons
         dw NoMons
@@ -714,25 +713,25 @@ WildDataPointers: ; 4EEB
         dw NoMons
         dw NoMons
         dw NoMons
-        dw WildMonsters46
-        dw WildMonsters47
-        dw WildMonsters48
-        dw WildMonsters36
-        dw WildMonsters37
-        dw WildMonsters38
-        dw WildMonsters35
+        dw MansionMons2
+        dw MansionMons3
+        dw MansionMonsB1
+        dw ZoneMons1
+        dw ZoneMons2
+        dw ZoneMons3
+        dw ZoneMonsCenter
         dw NoMons
         dw NoMons
         dw NoMons
         dw NoMons
         dw NoMons
-        dw WildMonsters51
-        dw WildMonsters52
-        dw WildMonsters50
+        dw DungeonMons2
+        dw DungeonMonsB1
+        dw DungeonMons1
         dw NoMons
         dw NoMons
         dw NoMons
-        dw WildMonsters17
+        dw TunnelMonsB2
         dw NoMons
         dw NoMons
         dw NoMons
@@ -840,7 +839,7 @@ Route3Mons:
 
 	db 0
 
-WildMonsters06:
+MoonMons1:
 	db $0A
 	db 8,ZUBAT
 	db 7,ZUBAT
@@ -855,7 +854,7 @@ WildMonsters06:
 
 	db 0
 
-WildMonsters07:
+MoonMonsB1:
 	db $0A
 	db 8,ZUBAT
 	db 7,ZUBAT
@@ -870,7 +869,7 @@ WildMonsters07:
 
 	db 0
 
-WildMonsters08:
+MoonMonsB2:
 	db $0A
 	db 9,ZUBAT
 	db 9,GEODUDE
@@ -990,7 +989,7 @@ Route11Mons:
 
 	db 0
 
-WildMonsters16:
+TunnelMonsB1:
 	db $0F
 	db 16,ZUBAT
 	db 17,ZUBAT
@@ -1005,7 +1004,7 @@ WildMonsters16:
 
 	db 0
 
-WildMonsters17:
+TunnelMonsB2:
 	db $0F
 	db 16,ZUBAT
 	db 17,ZUBAT
@@ -1080,15 +1079,15 @@ Route7Mons:
 
 	db 0
 
-WildMonsters22:
+TowerMons1:
 	db 0
 	db 0
 
-WildMonsters23:
+TowerMons2:
 	db 0
 	db 0
 
-WildMonsters24:
+TowerMons3:
 	db $0A
 	db 20,GASTLY
 	db 21,GASTLY
@@ -1103,7 +1102,7 @@ WildMonsters24:
 
 	db 0
 
-WildMonsters25:
+TowerMons4:
 	db $0A
 	db 20,GASTLY
 	db 21,GASTLY
@@ -1118,7 +1117,7 @@ WildMonsters25:
 
 	db 0
 
-WildMonsters26:
+TowerMons5:
 	db $0A
 	db 20,GASTLY
 	db 21,GASTLY
@@ -1133,7 +1132,7 @@ WildMonsters26:
 
 	db 0
 
-WildMonsters27:
+TowerMons6:
 	db $0F
 	db 21,GASTLY
 	db 22,GASTLY
@@ -1148,7 +1147,7 @@ WildMonsters27:
 
 	db 0
 
-WildMonsters28:
+TowerMons7:
 	db $0F
 	db 21,GASTLY
 	db 22,GASTLY
@@ -1253,7 +1252,7 @@ Route18Mons:
 
 	db 0
 
-WildMonsters35:
+ZoneMonsCenter:
 	db $1E
 	db 22,NIDORAN_M
 	db 25,RHYHORN
@@ -1268,7 +1267,7 @@ WildMonsters35:
 
 	db 0
 
-WildMonsters36:
+ZoneMons1:
 	db $1E
 	db 24,NIDORAN_M
 	db 26,DODUO
@@ -1283,7 +1282,7 @@ WildMonsters36:
 
 	db 0
 
-WildMonsters37:
+ZoneMons2:
 	db $1E
 	db 22,NIDORAN_M
 	db 26,RHYHORN
@@ -1298,7 +1297,7 @@ WildMonsters37:
 
 	db 0
 
-WildMonsters38:
+ZoneMons3:
 	db $1E
 	db 25,NIDORAN_M
 	db 26,DODUO
@@ -1328,7 +1327,7 @@ WaterMons:
 	db 35,  TENTACOOL
 	db 40,  TENTACOOL
 
-WildMonsters40:
+IslandMons1:
 	db $0F
 	db 30,SEEL
 	db 30,SLOWPOKE
@@ -1343,7 +1342,7 @@ WildMonsters40:
 
 	db 0
 
-WildMonsters41:
+IslandMonsB1:
 	db $0A
 	db 30,STARYU
 	db 30,HORSEA
@@ -1358,7 +1357,7 @@ WildMonsters41:
 
 	db 0
 
-WildMonsters42:
+IslandMonsB2:
 	db $0A
 	db 30,SEEL
 	db 30,SLOWPOKE
@@ -1373,7 +1372,7 @@ WildMonsters42:
 
 	db 0
 
-WildMonsters43:
+IslandMonsB3:
 	db $0A
 	db 31,SLOWPOKE
 	db 31,SEEL
@@ -1388,7 +1387,7 @@ WildMonsters43:
 
 	db 0
 
-WildMonsters44:
+IslandMonsB4:
 	db $0A
 	db 31,HORSEA
 	db 31,SHELLDER
@@ -1403,7 +1402,7 @@ WildMonsters44:
 
 	db 0
 
-WildMonsters45:
+MansionMons1:
 	db $0A
 	db 32,KOFFING
 	db 30,KOFFING
@@ -1418,7 +1417,7 @@ WildMonsters45:
 
 	db 0
 
-WildMonsters46:
+MansionMons2:
 	db $0A
 	db 32,GROWLITHE
 	db 34,KOFFING
@@ -1433,7 +1432,7 @@ WildMonsters46:
 
 	db 0
 
-WildMonsters47:
+MansionMons3:
 	db $0A
 	db 31,KOFFING
 	db 33,GROWLITHE
@@ -1448,7 +1447,7 @@ WildMonsters47:
 
 	db 0
 
-WildMonsters48:
+MansionMonsB1:
 	db $0A
 	db 33,KOFFING
 	db 31,KOFFING
@@ -1488,7 +1487,7 @@ Route21Mons:
 	db 35,TENTACOOL
 	db 40,TENTACOOL
 
-WildMonsters50:
+DungeonMons1:
 	db $0A
 	db 46,GOLBAT
 	db 46,HYPNO
@@ -1503,7 +1502,7 @@ WildMonsters50:
 
 	db 0
 
-WildMonsters51:
+DungeonMons2:
 	db $0F
 	db 51,DODRIO
 	db 51,VENOMOTH
@@ -1518,7 +1517,7 @@ WildMonsters51:
 
 	db 0
 
-WildMonsters52:
+DungeonMonsB1:
 	db $19
 	db 55,RHYDON
 	db 55,MAROWAK
@@ -1563,7 +1562,7 @@ Route23Mons:
 
 	db 0
 
-WildMonsters55:
+PlateauMons2:
 	db $0A
 	db 22,MACHOP
 	db 24,GEODUDE
@@ -1578,7 +1577,7 @@ WildMonsters55:
 
 	db 0
 
-WildMonsters56:
+PlateauMons3:
 	db $0F
 	db 24,MACHOP
 	db 26,GEODUDE
@@ -1593,7 +1592,7 @@ WildMonsters56:
 
 	db 0
 
-WildMonsters57:
+PlateauMons1:
 	db $0F
 	db 24,MACHOP
 	db 26,GEODUDE
@@ -1608,7 +1607,7 @@ WildMonsters57:
 
 	db 0
 
-WildMonsters58:
+CaveMons:
 	db $14
 	db 18,DIGLETT
 	db 19,DIGLETT
