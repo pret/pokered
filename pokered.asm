@@ -441,7 +441,58 @@ jp Start
 
 Section "start",HOME[$150]
 Start:
-INCBIN "baserom.gbc",$150,$3A87 - $150
+INCBIN "baserom.gbc",$150,$1627 - $150
+
+
+;XXX what does this do
+;XXX what points to this
+; offset 1627
+	ld bc,$D0B8
+	add hl,bc
+	ld a,[hli]
+	ld [$D0AB],a
+	ld a,[hl]
+	ld [$D0AC],a
+
+; offset 1633
+; define (by index number) the bank that a pokemon's image is in
+; index == Mew, bank 1
+; index == Kabutops fossil, bank $B
+;        index < $1F, bank 9
+; $1F <= index < $4A, bank $A
+; $4A <= index < $74, bank $B
+; $74 <= index < $99, bank $C
+; $99 <= index,       bank $D
+	ld a,[$CF91] ; XXX name for this ram location
+	ld b,a
+	cp $15
+	ld a,$01
+	jr z,.GotBank\@
+	ld a,b
+	cp $B6
+	ld a,$0B
+	jr z,.GotBank\@
+	ld a,b
+	cp $1F
+	ld a,$09
+	jr c,.GotBank\@
+	ld a,b
+	cp $4A
+	ld a,$0A
+	jr c,.GotBank\@
+	ld a,b
+	cp $74
+	ld a,$0B
+	jr c,.GotBank\@
+	ld a,b
+	cp $99
+	ld a,$0C
+	jr c,.GotBank\@
+	ld a,$0D
+.GotBank\@
+	jp $24FD
+
+INCBIN "baserom.gbc",$1665,$3A87 - $1665
 
 AddNTimes: ; 3A87
 ; add bc to hl a times
