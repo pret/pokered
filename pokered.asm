@@ -2420,8 +2420,8 @@ ReadTrainer: ; 5C53
 	ret nz
 
 ; set [W_ENEMYMONCOUNT] to 0, [$D89D] to FF
-; first is total enemy pokemon?
-; second is species of first pokemon?
+; XXX first is total enemy pokemon?
+; XXX second is species of first pokemon?
 	ld hl,W_ENEMYMONCOUNT
 	xor a
 	ld [hli],a
@@ -2468,7 +2468,7 @@ ReadTrainer: ; 5C53
 	ld a,[hli]
 	and a ; have we reached the end of the trainer data?
 	jr z,.FinishUp\@
-	ld [$CF91],a ; write species somewhere (why?)
+	ld [$CF91],a ; write species somewhere (XXX why?)
 	ld a,1
 	ld [$CC49],a
 	push hl
@@ -2555,7 +2555,7 @@ ReadTrainer: ; 5C53
 .GiveStarterMove\@
 	ld a,b
 	ld [W_ENEMYMON6MOVE3],a
-.FinishUp\@ ; this needs documenting
+.FinishUp\@ ; XXX this needs documenting
 	xor a       ; clear D079-D07B
 	ld de,$D079
 	ld [de],a
