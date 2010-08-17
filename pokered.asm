@@ -2441,10 +2441,10 @@ ReadTrainer: ; 5C53
 	ld l,a
 	ld a,[W_TRAINERNO]
 	ld b,a
-; at this point b contains the trainer number,
+; At this point b contains the trainer number,
 ; and hl points to the trainer class.
-; the next function is to iterate through the trainers,
-; decrementing b each time, until we get to the right one
+; Our next task is to iterate through the trainers,
+; decrementing b each time, until we get to the right one.
 .outer\@
 	dec b
 	jr z,.IterateTrainer
