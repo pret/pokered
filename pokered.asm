@@ -59,7 +59,7 @@ CUBONE     EQU $11
 RHYHORN    EQU $12
 LAPRAS     EQU $13
 ARCANINE   EQU $14
-MEW        EQU $15
+MEW	EQU $15
 GYARADOS   EQU $16
 SHELLDER   EQU $17
 TENTACOOL  EQU $18
@@ -150,7 +150,7 @@ GOLBAT     EQU $82
 MEWTWO     EQU $83
 SNORLAX    EQU $84
 MAGIKARP   EQU $85
-MUK        EQU $88
+MUK	EQU $88
 KINGLER    EQU $8A
 CLOYSTER   EQU $8B
 ELECTRODE  EQU $8D
@@ -196,51 +196,51 @@ VICTREEBEL EQU $BE
 ; sometimes it's necessary to add $C8 to these values
 YOUNGSTER     EQU $01
 BUG_CATCHER   EQU $02
-LASS          EQU $03
-SAILOR        EQU $04
+LASS	  EQU $03
+SAILOR	EQU $04
 JR__TRAINER_M EQU $05
 JR__TRAINER_F EQU $06
 POKEMANIAC    EQU $07
 SUPER_NERD    EQU $08
-HIKER         EQU $09
-BIKER         EQU $0A
+HIKER	 EQU $09
+BIKER	 EQU $0A
 BURGLAR       EQU $0B
 ENGINEER      EQU $0C
 JUGGLER_X     EQU $0D
-FISHER        EQU $0E
+FISHER	EQU $0E
 SWIMMER       EQU $0F
 CUE_BALL      EQU $10
 GAMBLER       EQU $11
-BEAUTY        EQU $12
+BEAUTY	EQU $12
 PSYCHIC_T     EQU $13
-ROCKER        EQU $14
+ROCKER	EQU $14
 JUGGLER       EQU $15
-TAMER         EQU $16
+TAMER	 EQU $16
 BIRD_KEEPER   EQU $17
 BLACKBELT     EQU $18
-SONY1         EQU $19
+SONY1	 EQU $19
 PROF_OAK      EQU $1A
-CHIEF         EQU $1B
+CHIEF	 EQU $1B
 SCIENTIST     EQU $1C
 GIOVANNI      EQU $1D
-ROCKET        EQU $1E
+ROCKET	EQU $1E
 COOLTRAINER_M EQU $1F
 COOLTRAINER_F EQU $20
-BRUNO         EQU $21
-BROCK         EQU $22
-MISTY         EQU $23
+BRUNO	 EQU $21
+BROCK	 EQU $22
+MISTY	 EQU $23
 LT__SURGE     EQU $24
-ERIKA         EQU $25
-KOGA          EQU $26
-BLAINE        EQU $27
+ERIKA	 EQU $25
+KOGA	  EQU $26
+BLAINE	EQU $27
 SABRINA       EQU $28
 GENTLEMAN     EQU $29
-SONY2         EQU $2A
-SONY3         EQU $2B
+SONY2	 EQU $2A
+SONY3	 EQU $2B
 LORELEI       EQU $2C
 CHANNELER     EQU $2D
-AGATHA        EQU $2E
-LANCE         EQU $2F
+AGATHA	EQU $2E
+LANCE	 EQU $2F
 
 ; pokemon dex numbers
 DEX_BULBASAUR  EQU 1
@@ -331,7 +331,7 @@ DEX_DODRIO     EQU 85
 DEX_SEEL       EQU 86
 DEX_DEWGONG    EQU 87
 DEX_GRIMER     EQU 88
-DEX_MUK        EQU 89
+DEX_MUK	EQU 89
 DEX_SHELLDER   EQU 90
 DEX_CLOYSTER   EQU 91
 DEX_GASTLY     EQU 92
@@ -393,7 +393,7 @@ DEX_DRATINI    EQU 147
 DEX_DRAGONAIR  EQU 148
 DEX_DRAGONITE  EQU 149
 DEX_MEWTWO     EQU 150
-DEX_MEW        EQU 151
+DEX_MEW	EQU 151
 
 
 ; move name constants
@@ -411,15 +411,15 @@ VICEGRIP     EQU $0B
 GUILLOTINE   EQU $0C
 RAZOR_WIND   EQU $0D
 SWORDS_DANCE EQU $0E
-CUT          EQU $0F
-GUST         EQU $10
+CUT	  EQU $0F
+GUST	 EQU $10
 WING_ATTACK  EQU $11
 WHIRLWIND    EQU $12
-FLY          EQU $13
-BIND         EQU $14
-SLAM         EQU $15
+FLY	  EQU $13
+BIND	 EQU $14
+SLAM	 EQU $15
 VINE_WHIP    EQU $16
-STOMP        EQU $17
+STOMP	EQU $17
 DOUBLE_KICK  EQU $18
 MEGA_KICK    EQU $19
 JUMP_KICK    EQU $1A
@@ -431,7 +431,7 @@ FURY_ATTACK  EQU $1F
 HORN_DRILL   EQU $20
 TACKLE       EQU $21
 BODY_SLAM    EQU $22
-WRAP         EQU $23
+WRAP	 EQU $23
 TAKE_DOWN    EQU $24
 THRASH       EQU $25
 DOUBLE_EDGE  EQU $26
@@ -439,28 +439,28 @@ TAIL_WHIP    EQU $27
 POISON_STING EQU $28
 TWINEEDLE    EQU $29
 PIN_MISSILE  EQU $2A
-LEER         EQU $2B
-BITE         EQU $2C
-GROWL        EQU $2D
-ROAR         EQU $2E
-SING         EQU $2F
+LEER	 EQU $2B
+BITE	 EQU $2C
+GROWL	EQU $2D
+ROAR	 EQU $2E
+SING	 EQU $2F
 SUPERSONIC   EQU $30
 SONICBOOM    EQU $31
 DISABLE      EQU $32
-ACID         EQU $33
-EMBER        EQU $34
+ACID	 EQU $33
+EMBER	EQU $34
 FLAMETHROWER EQU $35
-MIST         EQU $36
+MIST	 EQU $36
 WATER_GUN    EQU $37
 HYDRO_PUMP   EQU $38
-SURF         EQU $39
+SURF	 EQU $39
 ICE_BEAM     EQU $3A
 BLIZZARD     EQU $3B
 PSYBEAM      EQU $3C
 BUBBLEBEAM   EQU $3D
 AURORA_BEAM  EQU $3E
 HYPER_BEAM   EQU $3F
-PECK         EQU $40
+PECK	 EQU $40
 DRILL_PECK   EQU $41
 SUBMISSION   EQU $42
 LOW_KICK     EQU $43
@@ -487,18 +487,18 @@ THUNDER      EQU $57
 ROCK_THROW   EQU $58
 EARTHQUAKE   EQU $59
 FISSURE      EQU $5A
-DIG          EQU $5B
-TOXIC        EQU $5C
+DIG	  EQU $5B
+TOXIC	EQU $5C
 CONFUSION    EQU $5D
 PSYCHIC_M    EQU $5E
 HYPNOSIS     EQU $5F
 MEDITATE     EQU $60
 AGILITY      EQU $61
 QUICK_ATTACK EQU $62
-RAGE         EQU $63
+RAGE	 EQU $63
 TELEPORT     EQU $64
 NIGHT_SHADE  EQU $65
-MIMIC        EQU $66
+MIMIC	EQU $66
 SCREECH      EQU $67
 DOUBLE_TEAM  EQU $68
 RECOVER      EQU $69
@@ -510,22 +510,22 @@ WITHDRAW     EQU $6E
 DEFENSE_CURL EQU $6F
 BARRIER      EQU $70
 LIGHT_SCREEN EQU $71
-HAZE         EQU $72
+HAZE	 EQU $72
 REFLECT      EQU $73
 FOCUS_ENERGY EQU $74
-BIDE         EQU $75
+BIDE	 EQU $75
 METRONOME    EQU $76
 MIRROR_MOVE  EQU $77
 SELFDESTRUCT EQU $78
 EGG_BOMB     EQU $79
-LICK         EQU $7A
-SMOG         EQU $7B
+LICK	 EQU $7A
+SMOG	 EQU $7B
 SLUDGE       EQU $7C
 BONE_CLUB    EQU $7D
 FIRE_BLAST   EQU $7E
 WATERFALL    EQU $7F
-CLAMP        EQU $80
-SWIFT        EQU $81
+CLAMP	EQU $80
+SWIFT	EQU $81
 SKULL_BASH   EQU $82
 SPIKE_CANNON EQU $83
 CONSTRICT    EQU $84
@@ -533,7 +533,7 @@ AMNESIA      EQU $85
 KINESIS      EQU $86
 SOFTBOILED   EQU $87
 HI_JUMP_KICK EQU $88
-GLARE        EQU $89
+GLARE	EQU $89
 DREAM_EATER  EQU $8A
 POISON_GAS   EQU $8B
 BARRAGE      EQU $8C
@@ -543,8 +543,8 @@ SKY_ATTACK   EQU $8F
 TRANSFORM    EQU $90
 BUBBLE       EQU $91
 DIZZY_PUNCH  EQU $92
-SPORE        EQU $93
-FLASH        EQU $94
+SPORE	EQU $93
+FLASH	EQU $94
 PSYWAVE      EQU $95
 SPLASH       EQU $96
 ACID_ARMOR   EQU $97
@@ -552,14 +552,14 @@ CRABHAMMER   EQU $98
 EXPLOSION    EQU $99
 FURY_SWIPES  EQU $9A
 BONEMERANG   EQU $9B
-REST         EQU $9C
+REST	 EQU $9C
 ROCK_SLIDE   EQU $9D
 HYPER_FANG   EQU $9E
 SHARPEN      EQU $9F
 CONVERSION   EQU $A0
 TRI_ATTACK   EQU $A1
 SUPER_FANG   EQU $A2
-SLASH        EQU $A3
+SLASH	EQU $A3
 SUBSTITUTE   EQU $A4
 STRUGGLE     EQU $A5
 
@@ -905,7 +905,7 @@ incbin "baserom.gbc",$39E,$1627 - $39E
 ; define (by index number) the bank that a pokemon's image is in
 ; index == Mew, bank 1
 ; index == Kabutops fossil, bank $B
-;        index < $1F, bank 9
+;	index < $1F, bank 9
 ; $1F <= index < $4A, bank $A
 ; $4A <= index < $74, bank $B
 ; $74 <= index < $99, bank $C
@@ -1218,36 +1218,36 @@ INCBIN "baserom.gbc",$C335,$CEB8 - $C335
 ; wild pokemon data: from 4EB8 to 55C7
 
 LoadWildData: ; 4EB8
-        ld hl,WildDataPointers
-        ld a,[W_CURMAP]
+	ld hl,WildDataPointers
+	ld a,[W_CURMAP]
 
 	; get wild data for current map
-        ld c,a
-        ld b,0
-        add hl,bc
-        add hl,bc
-        ld a,[hli]
-        ld h,[hl]
-        ld l,a       ; hl now points to wild data for current map
-        ld a,[hli]
-        ld [W_GRASSRATE],a
-        and a
-        jr z,.NoGrassData\@ ; if no grass data, skip to surfing data
-        push hl
-        ld de,W_GRASSMONS ; otherwise, load grass data
-        ld bc,$0014
-        call CopyData
-        pop hl
-        ld bc,$0014
-        add hl,bc
+	ld c,a
+	ld b,0
+	add hl,bc
+	add hl,bc
+	ld a,[hli]
+	ld h,[hl]
+	ld l,a       ; hl now points to wild data for current map
+	ld a,[hli]
+	ld [W_GRASSRATE],a
+	and a
+	jr z,.NoGrassData\@ ; if no grass data, skip to surfing data
+	push hl
+	ld de,W_GRASSMONS ; otherwise, load grass data
+	ld bc,$0014
+	call CopyData
+	pop hl
+	ld bc,$0014
+	add hl,bc
 .NoGrassData\@
-        ld a,[hli]
-        ld [W_WATERRATE],a
-        and a
-        ret z        ; if no water data, we're done
-        ld de,W_WATERMONS  ; otherwise, load surfing data
-        ld bc,$0014
-        jp CopyData
+	ld a,[hli]
+	ld [W_WATERRATE],a
+	and a
+	ret z        ; if no water data, we're done
+	ld de,W_WATERMONS  ; otherwise, load surfing data
+	ld bc,$0014
+	jp CopyData
 
 WildDataPointers: ; 4EEB
 	dw NoMons      ; PALLET_TOWN
@@ -1288,217 +1288,217 @@ WildDataPointers: ; 4EEB
 	dw Route24Mons ; ROUTE_24
 	dw Route25Mons ; ROUTE_25
 	dw NoMons      ; REDS_HOUSE_1F
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw ForestMons ; ViridianForest
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw MoonMons1
-        dw MoonMonsB1
-        dw MoonMonsB2
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw TunnelMonsB1
-        dw PowerPlantMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw PlateauMons1
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw TowerMons1
-        dw TowerMons2
-        dw TowerMons3
-        dw TowerMons4
-        dw TowerMons5
-        dw TowerMons6
-        dw TowerMons7
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw IslandMonsB1
-        dw IslandMonsB2
-        dw IslandMonsB3
-        dw IslandMonsB4
-        dw NoMons
-        dw NoMons
-        dw MansionMons1
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw IslandMons1
-        dw NoMons
-        dw PlateauMons2
-        dw NoMons
-        dw NoMons
-        dw CaveMons
-        dw PlateauMons3
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw MansionMons2
-        dw MansionMons3
-        dw MansionMonsB1
-        dw ZoneMons1
-        dw ZoneMons2
-        dw ZoneMons3
-        dw ZoneMonsCenter
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw DungeonMons2
-        dw DungeonMonsB1
-        dw DungeonMons1
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw TunnelMonsB2
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw NoMons
-        dw $FFFF
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw ForestMons ; ViridianForest
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw MoonMons1
+	dw MoonMonsB1
+	dw MoonMonsB2
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw TunnelMonsB1
+	dw PowerPlantMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw PlateauMons1
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw TowerMons1
+	dw TowerMons2
+	dw TowerMons3
+	dw TowerMons4
+	dw TowerMons5
+	dw TowerMons6
+	dw TowerMons7
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw IslandMonsB1
+	dw IslandMonsB2
+	dw IslandMonsB3
+	dw IslandMonsB4
+	dw NoMons
+	dw NoMons
+	dw MansionMons1
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw IslandMons1
+	dw NoMons
+	dw PlateauMons2
+	dw NoMons
+	dw NoMons
+	dw CaveMons
+	dw PlateauMons3
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw MansionMons2
+	dw MansionMons3
+	dw MansionMonsB1
+	dw ZoneMons1
+	dw ZoneMons2
+	dw ZoneMons3
+	dw ZoneMonsCenter
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw DungeonMons2
+	dw DungeonMonsB1
+	dw DungeonMons1
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw TunnelMonsB2
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw NoMons
+	dw $FFFF
 
 ; wild pokemon data is divided into two parts.
 ; first part:  pokemon found in grass
@@ -2415,44 +2415,44 @@ INCBIN "baserom.gbc",$38000,$1C53
 ReadTrainer: ; 5C53
 
 ; don't change any moves in a link battle
-        ld a,[W_ISLINKBATTLE]
-        and a
-        ret nz
+	ld a,[W_ISLINKBATTLE]
+	and a
+	ret nz
 
 ; set [W_ENEMYMONCOUNT] to 0, [$D89D] to FF
 ; first is total enemy pokemon?
 ; second is species of first pokemon?
-        ld hl,W_ENEMYMONCOUNT
-        xor a
-        ld [hli],a
-        dec a
-        ld [hl],a
+	ld hl,W_ENEMYMONCOUNT
+	xor a
+	ld [hli],a
+	dec a
+	ld [hl],a
 
 ; get the pointer to trainer data for this class
-        ld a,[W_CUROPPONENT]
-        sub $C9 ; convert value from pokemon to trainer
-        add a,a
-        ld hl,TrainerDataPointers
-        ld c,a
-        ld b,0
-        add hl,bc ; hl points to trainer class
-        ld a,[hli]
-        ld h,[hl]
-        ld l,a
-        ld a,[W_TRAINERNO]
-        ld b,a
+	ld a,[W_CUROPPONENT]
+	sub $C9 ; convert value from pokemon to trainer
+	add a,a
+	ld hl,TrainerDataPointers
+	ld c,a
+	ld b,0
+	add hl,bc ; hl points to trainer class
+	ld a,[hli]
+	ld h,[hl]
+	ld l,a
+	ld a,[W_TRAINERNO]
+	ld b,a
 ; at this point b contains the trainer number,
 ; and hl points to the trainer class.
 ; the next function is to iterate through the trainers,
 ; decrementing b each time, until we get to the right one
 .outer\@
-        dec b
-        jr z,.IterateTrainer
+	dec b
+	jr z,.IterateTrainer
 .inner\@
-        ld a,[hli]
-        and a
-        jr nz,.inner\@
-        jr .outer\@
+	ld a,[hli]
+	and a
+	jr nz,.inner\@
+	jr .outer\@
 
 ; if the first byte of trainer data is FF,
 ; - each pokemon has a specific level
@@ -2460,123 +2460,123 @@ ReadTrainer: ; 5C53
 ; - if [W_LONEATTACKNO] != 0, one pokemon on the team has a special move
 ; else the first byte is the level of every pokemon on the team
 .IterateTrainer
-        ld a,[hli]
-        cp $FF ; is the trainer special?
-        jr z,.SpecialTrainer\@ ; if so, check for special attacks
-        ld [W_CURENEMYLVL],a
+	ld a,[hli]
+	cp $FF ; is the trainer special?
+	jr z,.SpecialTrainer\@ ; if so, check for special attacks
+	ld [W_CURENEMYLVL],a
 .LoopTrainerData\@
-        ld a,[hli]
-        and a ; have we reached the end of the trainer data?
-        jr z,.FinishUp\@
-        ld [$CF91],a ; write species somewhere (why?)
-        ld a,1
-        ld [$CC49],a
-        push hl
-        call $3927
-        pop hl
-        jr .LoopTrainerData\@
+	ld a,[hli]
+	and a ; have we reached the end of the trainer data?
+	jr z,.FinishUp\@
+	ld [$CF91],a ; write species somewhere (why?)
+	ld a,1
+	ld [$CC49],a
+	push hl
+	call $3927
+	pop hl
+	jr .LoopTrainerData\@
 .SpecialTrainer\@
 ; if this code is being run:
 ; - each pokemon has a specific level
 ;      (as opposed to the whole team being of the same level)
 ; - if [W_LONEATTACKNO] != 0, one pokemon on the team has a special move
-        ld a,[hli]
-        and a ; have we reached the end of the trainer data?
-        jr z,.AddLoneAttack\@
-        ld [W_CURENEMYLVL],a
-        ld a,[hli]
-        ld [$CF91],a
-        ld a,1
-        ld [$CC49],a
-        push hl
-        call $3927
-        pop hl
-        jr .SpecialTrainer\@
+	ld a,[hli]
+	and a ; have we reached the end of the trainer data?
+	jr z,.AddLoneAttack\@
+	ld [W_CURENEMYLVL],a
+	ld a,[hli]
+	ld [$CF91],a
+	ld a,1
+	ld [$CC49],a
+	push hl
+	call $3927
+	pop hl
+	jr .SpecialTrainer\@
 .AddLoneAttack\@
 ; does the trainer have a single monster with a different move
-        ld a,[W_LONEATTACKNO] ; Brock is 01, Misty is 02, Erika is 04, etc
-        and a
-        jr z,.AddTeamAttack\@
-        dec a
-        add a,a
-        ld c,a
-        ld b,0
-        ld hl,LoneAttacks
-        add hl,bc
-        ld a,[hli]
-        ld d,[hl]
-        ld hl,W_ENEMYMON1MOVE3
-        ld bc,W_ENEMYMON2MOVE3 - W_ENEMYMON1MOVE3
-        call AddNTimes
-        ld [hl],d
-        jr .FinishUp\@
+	ld a,[W_LONEATTACKNO] ; Brock is 01, Misty is 02, Erika is 04, etc
+	and a
+	jr z,.AddTeamAttack\@
+	dec a
+	add a,a
+	ld c,a
+	ld b,0
+	ld hl,LoneAttacks
+	add hl,bc
+	ld a,[hli]
+	ld d,[hl]
+	ld hl,W_ENEMYMON1MOVE3
+	ld bc,W_ENEMYMON2MOVE3 - W_ENEMYMON1MOVE3
+	call AddNTimes
+	ld [hl],d
+	jr .FinishUp\@
 .AddTeamAttack\@
 ; check if our trainer's team has special moves
 
 ; get trainer class number
-        ld a,[$D059]
-        sub $C8
-        ld b,a
-        ld hl,TeamAttacks
+	ld a,[$D059]
+	sub $C8
+	ld b,a
+	ld hl,TeamAttacks
 
 ; iterate through entries in TeamAttacks, checking each for our trainer class
 .IterateTeamAttacks\@
-        ld a,[hli]
-        cp b
-        jr z,.GiveTeamAttacks\@ ; is there a match?
-        inc hl ; if not, go to the next entry
-        inc a
-        jr nz,.IterateTeamAttacks\@
+	ld a,[hli]
+	cp b
+	jr z,.GiveTeamAttacks\@ ; is there a match?
+	inc hl ; if not, go to the next entry
+	inc a
+	jr nz,.IterateTeamAttacks\@
 
-        ; no matches found. is this trainer champion rival?
-        ld a,b
-        cp SONY3
-        jr z,.ChampionRival\@
-        jr .FinishUp\@ ; nope
+	; no matches found. is this trainer champion rival?
+	ld a,b
+	cp SONY3
+	jr z,.ChampionRival\@
+	jr .FinishUp\@ ; nope
 .GiveTeamAttacks\@
-        ld a,[hl]
-        ld [$D95E],a
-        jr .FinishUp\@
+	ld a,[hl]
+	ld [$D95E],a
+	jr .FinishUp\@
 .ChampionRival\@ ; give attacks to his team
 
 ; pidgeot
-        ld a,SKY_ATTACK
-        ld [W_ENEMYMON1MOVE3],a
+	ld a,SKY_ATTACK
+	ld [W_ENEMYMON1MOVE3],a
 
 ; starter
-        ld a,[W_RIVALSTARTER]
-        cp BULBASAUR
-        ld b,MEGA_DRAIN
-        jr z,.GiveStarterMove\@
-        cp CHARMANDER
-        ld b,FIRE_BLAST
-        jr z,.GiveStarterMove\@
-        ld b,BLIZZARD ; must be squirtle
+	ld a,[W_RIVALSTARTER]
+	cp BULBASAUR
+	ld b,MEGA_DRAIN
+	jr z,.GiveStarterMove\@
+	cp CHARMANDER
+	ld b,FIRE_BLAST
+	jr z,.GiveStarterMove\@
+	ld b,BLIZZARD ; must be squirtle
 .GiveStarterMove\@
-        ld a,b
-        ld [W_ENEMYMON6MOVE3],a
+	ld a,b
+	ld [W_ENEMYMON6MOVE3],a
 .FinishUp\@ ; this needs documenting
-        xor a       ; clear D079-D07B
-        ld de,$D079
-        ld [de],a
-        inc de
-        ld [de],a
-        inc de
-        ld [de],a
-        ld a,[W_CURENEMYLVL]
-        ld b,a
+	xor a       ; clear D079-D07B
+	ld de,$D079
+	ld [de],a
+	inc de
+	ld [de],a
+	inc de
+	ld [de],a
+	ld a,[W_CURENEMYLVL]
+	ld b,a
 .LastLoop\@
-        ld hl,$D047
-        ld c,2
-        push bc
-        ld a,$B
-        call $3E6D
-        pop bc
-        inc de
-        inc de
-        dec b
-        jr nz,.LastLoop\@
-        ret
+	ld hl,$D047
+	ld c,2
+	push bc
+	ld a,$B
+	call $3E6D
+	pop bc
+	inc de
+	inc de
+	dec b
+	jr nz,.LastLoop\@
+	ret
 
 LoneAttacks: ; 5D22
 ; these are used for gym leaders.
@@ -3110,7 +3110,7 @@ PokedexOrder: ; 5024
 	db DEX_RHYHORN    ; RHYHORN
 	db DEX_LAPRAS     ; LAPRAS
 	db DEX_ARCANINE   ; ARCANINE
-	db DEX_MEW        ; MEW
+	db DEX_MEW	; MEW
 	db DEX_GYARADOS   ; GYARADOS
 	db DEX_SHELLDER   ; SHELLDER
 	db DEX_TENTACOOL  ; TENTACOOL
@@ -3120,8 +3120,8 @@ PokedexOrder: ; 5024
 	db DEX_BLASTOISE  ; BLASTOISE
 	db DEX_PINSIR     ; PINSIR
 	db DEX_TANGELA    ; TANGELA
-	db 0              ; MISSINGNO.
-	db 0              ; MISSINGNO.
+	db 0	      ; MISSINGNO.
+	db 0	      ; MISSINGNO.
 	db DEX_GROWLITHE  ; GROWLITHE
 	db DEX_ONIX       ; ONIX
 	db DEX_FEAROW     ; FEAROW
@@ -3139,26 +3139,26 @@ PokedexOrder: ; 5024
 	db DEX_PSYDUCK    ; PSYDUCK
 	db DEX_DROWZEE    ; DROWZEE
 	db DEX_GOLEM      ; GOLEM
-	db 0              ; MISSINGNO.
+	db 0	      ; MISSINGNO.
 	db DEX_MAGMAR     ; MAGMAR
-	db 0              ; MISSINGNO.
+	db 0	      ; MISSINGNO.
 	db DEX_ELECTABUZZ ; ELECTABUZZ
 	db DEX_MAGNETON   ; MAGNETON
 	db DEX_KOFFING    ; KOFFING
-	db 0              ; MISSINGNO.
+	db 0	      ; MISSINGNO.
 	db DEX_MANKEY     ; MANKEY
 	db DEX_SEEL       ; SEEL
 	db DEX_DIGLETT    ; DIGLETT
 	db DEX_TAUROS     ; TAUROS
-	db 0              ; MISSINGNO.
-	db 0              ; MISSINGNO.
-	db 0              ; MISSINGNO.
+	db 0	      ; MISSINGNO.
+	db 0	      ; MISSINGNO.
+	db 0	      ; MISSINGNO.
 	db DEX_FARFETCH_D ; FARFETCH_D
 	db DEX_VENONAT    ; VENONAT
 	db DEX_DRAGONITE  ; DRAGONITE
-	db 0              ; MISSINGNO.
-	db 0              ; MISSINGNO.
-	db 0              ; MISSINGNO.
+	db 0	      ; MISSINGNO.
+	db 0	      ; MISSINGNO.
+	db 0	      ; MISSINGNO.
 	db DEX_DODUO      ; DODUO
 	db DEX_POLIWAG    ; POLIWAG
 	db DEX_JYNX       ; JYNX
@@ -3168,23 +3168,23 @@ PokedexOrder: ; 5024
 	db DEX_DITTO      ; DITTO
 	db DEX_MEOWTH     ; MEOWTH
 	db DEX_KRABBY     ; KRABBY
-	db 0              ; MISSINGNO.
-	db 0              ; MISSINGNO.
-	db 0              ; MISSINGNO.
+	db 0	      ; MISSINGNO.
+	db 0	      ; MISSINGNO.
+	db 0	      ; MISSINGNO.
 	db DEX_VULPIX     ; VULPIX
 	db DEX_NINETALES  ; NINETALES
 	db DEX_PIKACHU    ; PIKACHU
 	db DEX_RAICHU     ; RAICHU
-	db 0              ; MISSINGNO.
-	db 0              ; MISSINGNO.
+	db 0	      ; MISSINGNO.
+	db 0	      ; MISSINGNO.
 	db DEX_DRATINI    ; DRATINI
 	db DEX_DRAGONAIR  ; DRAGONAIR
 	db DEX_KABUTO     ; KABUTO
 	db DEX_KABUTOPS   ; KABUTOPS
 	db DEX_HORSEA     ; HORSEA
 	db DEX_SEADRA     ; SEADRA
-	db 0              ; MISSINGNO.
-	db 0              ; MISSINGNO.
+	db 0	      ; MISSINGNO.
+	db 0	      ; MISSINGNO.
 	db DEX_SANDSHREW  ; SANDSHREW
 	db DEX_SANDSLASH  ; SANDSLASH
 	db DEX_OMANYTE    ; OMANYTE
@@ -3204,38 +3204,38 @@ PokedexOrder: ; 5024
 	db DEX_WEEDLE     ; WEEDLE
 	db DEX_KAKUNA     ; KAKUNA
 	db DEX_BEEDRILL   ; BEEDRILL
-	db 0              ; MISSINGNO.
+	db 0	      ; MISSINGNO.
 	db DEX_DODRIO     ; DODRIO
 	db DEX_PRIMEAPE   ; PRIMEAPE
 	db DEX_DUGTRIO    ; DUGTRIO
 	db DEX_VENOMOTH   ; VENOMOTH
 	db DEX_DEWGONG    ; DEWGONG
-	db 0              ; MISSINGNO.
-	db 0              ; MISSINGNO.
+	db 0	      ; MISSINGNO.
+	db 0	      ; MISSINGNO.
 	db DEX_CATERPIE   ; CATERPIE
 	db DEX_METAPOD    ; METAPOD
 	db DEX_BUTTERFREE ; BUTTERFREE
 	db DEX_MACHAMP    ; MACHAMP
-	db 0              ; MISSINGNO.
+	db 0	      ; MISSINGNO.
 	db DEX_GOLDUCK    ; GOLDUCK
 	db DEX_HYPNO      ; HYPNO
 	db DEX_GOLBAT     ; GOLBAT
 	db DEX_MEWTWO     ; MEWTWO
 	db DEX_SNORLAX    ; SNORLAX
 	db DEX_MAGIKARP   ; MAGIKARP
-	db 0              ; MISSINGNO.
-	db 0              ; MISSINGNO.
-	db DEX_MUK        ; MUK
-	db 0              ; MISSINGNO.
+	db 0	      ; MISSINGNO.
+	db 0	      ; MISSINGNO.
+	db DEX_MUK	; MUK
+	db 0	      ; MISSINGNO.
 	db DEX_KINGLER    ; KINGLER
 	db DEX_CLOYSTER   ; CLOYSTER
-	db 0              ; MISSINGNO.
+	db 0	      ; MISSINGNO.
 	db DEX_ELECTRODE  ; ELECTRODE
 	db DEX_CLEFABLE   ; CLEFABLE
 	db DEX_WEEZING    ; WEEZING
 	db DEX_PERSIAN    ; PERSIAN
 	db DEX_MAROWAK    ; MAROWAK
-	db 0              ; MISSINGNO.
+	db 0	      ; MISSINGNO.
 	db DEX_HAUNTER    ; HAUNTER
 	db DEX_ABRA       ; ABRA
 	db DEX_ALAKAZAM   ; ALAKAZAM
@@ -3245,13 +3245,13 @@ PokedexOrder: ; 5024
 	db DEX_BULBASAUR  ; BULBASAUR
 	db DEX_VENUSAUR   ; VENUSAUR
 	db DEX_TENTACRUEL ; TENTACRUEL
-	db 0              ; MISSINGNO.
+	db 0	      ; MISSINGNO.
 	db DEX_GOLDEEN    ; GOLDEEN
 	db DEX_SEAKING    ; SEAKING
-	db 0              ; MISSINGNO.
-	db 0              ; MISSINGNO.
-	db 0              ; MISSINGNO.
-	db 0              ; MISSINGNO.
+	db 0	      ; MISSINGNO.
+	db 0	      ; MISSINGNO.
+	db 0	      ; MISSINGNO.
+	db 0	      ; MISSINGNO.
 	db DEX_PONYTA     ; PONYTA
 	db DEX_RAPIDASH   ; RAPIDASH
 	db DEX_RATTATA    ; RATTATA
@@ -3261,19 +3261,19 @@ PokedexOrder: ; 5024
 	db DEX_GEODUDE    ; GEODUDE
 	db DEX_PORYGON    ; PORYGON
 	db DEX_AERODACTYL ; AERODACTYL
-	db 0              ; MISSINGNO.
+	db 0	      ; MISSINGNO.
 	db DEX_MAGNEMITE  ; MAGNEMITE
-	db 0              ; MISSINGNO.
-	db 0              ; MISSINGNO.
+	db 0	      ; MISSINGNO.
+	db 0	      ; MISSINGNO.
 	db DEX_CHARMANDER ; CHARMANDER
 	db DEX_SQUIRTLE   ; SQUIRTLE
 	db DEX_CHARMELEON ; CHARMELEON
 	db DEX_WARTORTLE  ; WARTORTLE
 	db DEX_CHARIZARD  ; CHARIZARD
-	db 0              ; MISSINGNO.
-	db 0              ; MISSINGNO.
-	db 0              ; MISSINGNO.
-	db 0              ; MISSINGNO.
+	db 0	      ; MISSINGNO.
+	db 0	      ; MISSINGNO.
+	db 0	      ; MISSINGNO.
+	db 0	      ; MISSINGNO.
 	db DEX_ODDISH     ; ODDISH
 	db DEX_GLOOM      ; GLOOM
 	db DEX_VILEPLUME  ; VILEPLUME
