@@ -7,7 +7,8 @@ Pokemon Red (UE) [S][!].gb
 To assemble, first install RGBDS and put it in your path.
 
 The version of RGBDS needed is rgbds-linux:
-git clone git://github.com/bentley/rgbds-linux.git
+http://github.com/bentley/rgbds-linux/
+git://github.com/bentley/rgbds-linux.git
 
 Then copy the Pokémon ROM to this directory as "baserom.gbc".
 Then run "make" in your shell.
