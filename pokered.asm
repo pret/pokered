@@ -639,44 +639,44 @@ Start:
 INCBIN "baserom.gbc",$150,$1AE - $150
 ; see also MapHeaderBanks
 MapHeaderPointers: ; $01AE
-	dw $42a1
-	dw $4357
-	dw $4554
-	dw $474e
-	dw $4000
-	dw $4998
-	dw $4000
-	dw $4ba7
-	dw $4000
-	dw $491e
-	dw $49a4
-	dw $49a4
-	dw $40c3
-	dw $4000
-	dw $41e6
-	dw $4390
-	dw $4581
-	dw $4000
-	dw $4000
-	dw $412d
-	dw $4686
-	dw $42d4
-	dw $44be
-	dw $466d
-	dw $480c
-	dw $4999
-	dw $492c
-	dw $4ada
-	dw $4b20
-	dw $4c38
-	dw $4e78
-	dw $40f1
-	dw $4fff
-	dw $4000
-	dw $433f
-	dw $4682
-	dw $479b
-	dw $415c
+	dw $42a1 ; PALLET_TOWN
+	dw $4357 ; VIRIDIAN_CITY
+	dw $4554 ; PEWTER_CITY
+	dw $474e ; CERULEAN_CITY
+	dw $4000 ; LAVENDER_TOWN
+	dw $4998 ; VERMILION_CITY
+	dw $4000 ; CELADON_CITY
+	dw $4ba7 ; FUCHSIA_CITY
+	dw $4000 ; CINNABAR_ISLAND
+	dw $491e ; INDIGO_PLATEAU
+	dw $49a4 ; SAFFRON_CITY
+	dw $49a4 ; unused
+	dw $40c3 ; ROUTE_1
+	dw $4000 ; ROUTE_2
+	dw $41e6 ; ROUTE_3
+	dw $4390 ; ROUTE_4
+	dw $4581 ; ROUTE_5
+	dw $4000 ; ROUTE_6
+	dw $4000 ; ROUTE_7
+	dw $412d ; ROUTE_8
+	dw $4686 ; ROUTE_9
+	dw $42d4 ; ROUTE_10
+	dw $44be ; ROUTE_11
+	dw $466d ; ROUTE_12
+	dw $480c ; ROUTE_13
+	dw $4999 ; ROUTE_14
+	dw $492c ; ROUTE_15
+	dw $4ada ; ROUTE_16
+	dw $4b20 ; ROUTE_17
+	dw $4c38 ; ROUTE_18
+	dw $4e78 ; ROUTE_19
+	dw $40f1 ; ROUTE_20
+	dw $4fff ; ROUTE_21
+	dw $4000 ; ROUTE_22
+	dw $433f ; ROUTE_23
+	dw $4682 ; ROUTE_24
+	dw $479b ; ROUTE_25
+	dw $415c ; REDS_HOUSE_1F
 	dw $40a4
 	dw $5b2f
 	dw $4b02
@@ -964,44 +964,44 @@ INCBIN "baserom.gbc",$C000,$C23D - $C000
 
 ; see also MapHeaderPointers
 MapHeaderBanks: ; 423D
-	db $06
-	db $06
-	db $06
-	db $06
-	db $11
-	db $06
-	db $06
-	db $06
-	db $07
-	db $14
-	db $14
-	db $01
-	db $07
-	db $15
-	db $15
-	db $15
-	db $15
-	db $16
-	db $12
-	db $16
-	db $15
-	db $16
-	db $16
-	db $16
-	db $15
-	db $15
-	db $16
-	db $16
-	db $15
-	db $16
-	db $15
-	db $14
-	db $15
-	db $14
-	db $14
-	db $14
-	db $14
-	db $12
+	db $06 ; PALLET_TOWN
+	db $06 ; VIRIDIAN_CITY
+	db $06 ; PEWTER_CITY
+	db $06 ; CERULEAN_CITY
+	db $11 ; LAVENDER_TOWN
+	db $06 ; VERMILION_CITY
+	db $06 ; CELADON_CITY
+	db $06 ; FUCHSIA_CITY
+	db $07 ; CINNABAR_ISLAND
+	db $14 ; INDIGO_PLATEAU
+	db $14 ; SAFFRON_CITY
+	db $01 ; unused
+	db $07 ; ROUTE_1
+	db $15 ; ROUTE_2
+	db $15 ; ROUTE_3
+	db $15 ; ROUTE_4
+	db $15 ; ROUTE_5
+	db $16 ; ROUTE_6
+	db $12 ; ROUTE_7
+	db $16 ; ROUTE_8
+	db $15 ; ROUTE_9
+	db $16 ; ROUTE_10
+	db $16 ; ROUTE_11
+	db $16 ; ROUTE_12
+	db $15 ; ROUTE_13
+	db $15 ; ROUTE_14
+	db $16 ; ROUTE_15
+	db $16 ; ROUTE_16
+	db $15 ; ROUTE_17
+	db $16 ; ROUTE_18
+	db $15 ; ROUTE_19
+	db $14 ; ROUTE_20
+	db $15 ; ROUTE_21
+	db $14 ; ROUTE_22
+	db $14 ; ROUTE_23
+	db $14 ; ROUTE_24
+	db $14 ; ROUTE_25
+	db $12 ; REDS_HOUSE_1F
 	db $17
 	db $06
 	db $07
@@ -1250,44 +1250,44 @@ LoadWildData: ; 4EB8
         jp CopyData
 
 WildDataPointers: ; 4EEB
-        dw NoMons ; PalletTown
-        dw NoMons ; ViridianCity
-        dw NoMons ; PewterCity
-        dw NoMons ; CeruleanCity
-        dw NoMons ; LavenderTown
-        dw NoMons ; VermilionCity
-        dw NoMons ; CeladonCity
-        dw NoMons ; FuchsiaCity
-        dw NoMons ; CinnibarIsland
-        dw NoMons ; IndigoPlateau
-        dw NoMons ; SaffronCity
-        dw NoMons ; not a real map
-        dw Route1Mons
-        dw Route2Mons
-        dw Route3Mons
-        dw Route4Mons
-        dw Route5Mons
-        dw Route6Mons
-        dw Route7Mons
-        dw Route8Mons
-        dw Route9Mons
-        dw Route10Mons
-        dw Route11Mons
-        dw Route12Mons
-        dw Route13Mons
-        dw Route14Mons
-        dw Route15Mons
-        dw Route16Mons
-        dw Route17Mons
-        dw Route18Mons
-        dw WaterMons ; Route19
-        dw WaterMons ; Route20
-        dw Route21Mons
-        dw Route22Mons
-        dw Route23Mons
-        dw Route24Mons
-        dw Route25Mons
-        dw NoMons
+	dw NoMons      ; PALLET_TOWN
+	dw NoMons      ; VIRIDIAN_CITY
+	dw NoMons      ; PEWTER_CITY
+	dw NoMons      ; CERULEAN_CITY
+	dw NoMons      ; LAVENDER_TOWN
+	dw NoMons      ; VERMILION_CITY
+	dw NoMons      ; CELADON_CITY
+	dw NoMons      ; FUCHSIA_CITY
+	dw NoMons      ; CINNABAR_ISLAND
+	dw NoMons      ; INDIGO_PLATEAU
+	dw NoMons      ; SAFFRON_CITY
+	dw NoMons      ; unused
+	dw Route1Mons  ; ROUTE_1
+	dw Route2Mons  ; ROUTE_2
+	dw Route3Mons  ; ROUTE_3
+	dw Route4Mons  ; ROUTE_4
+	dw Route5Mons  ; ROUTE_5
+	dw Route6Mons  ; ROUTE_6
+	dw Route7Mons  ; ROUTE_7
+	dw Route8Mons  ; ROUTE_8
+	dw Route9Mons  ; ROUTE_9
+	dw Route10Mons ; ROUTE_10
+	dw Route11Mons ; ROUTE_11
+	dw Route12Mons ; ROUTE_12
+	dw Route13Mons ; ROUTE_13
+	dw Route14Mons ; ROUTE_14
+	dw Route15Mons ; ROUTE_15
+	dw Route16Mons ; ROUTE_16
+	dw Route17Mons ; ROUTE_17
+	dw Route18Mons ; ROUTE_18
+	dw WaterMons   ; ROUTE_19
+	dw WaterMons   ; ROUTE_20
+	dw Route21Mons ; ROUTE_21
+	dw Route22Mons ; ROUTE_22
+	dw Route23Mons ; ROUTE_23
+	dw Route24Mons ; ROUTE_24
+	dw Route25Mons ; ROUTE_25
+	dw NoMons      ; REDS_HOUSE_1F
         dw NoMons
         dw NoMons
         dw NoMons
