@@ -3308,148 +3308,270 @@ TrainerAIPointers: ; 655C
 ; XXX first byte, ???
 ; next two bytes, pointer to AI subroutine for trainer class
 	db 3
-	dw $6693
+	dw GenericAI
 
 	db 3
-	dw $6693
+	dw GenericAI
 
 	db 3
-	dw $6693
+	dw GenericAI
 
 	db 3
-	dw $6693
+	dw GenericAI
 
 	db 3
-	dw $6693
+	dw GenericAI
 
 	db 3
-	dw $6693
+	dw GenericAI
 
 	db 3
-	dw $6693
+	dw GenericAI
 
 	db 3
-	dw $6693
+	dw GenericAI
 
 	db 3
-	dw $6693
+	dw GenericAI
 
 	db 3
-	dw $6693
+	dw GenericAI
 
 	db 3
-	dw $6693
+	dw GenericAI
 
 	db 3
-	dw $6693
+	dw GenericAI
 
 	db 3 ; juggler_x
-	dw $65E9
+	dw JugglerAI
 
 	db 3
-	dw $6693
+	dw GenericAI
 
 	db 3
-	dw $6693
+	dw GenericAI
 
 	db 3
-	dw $6693
+	dw GenericAI
 
 	db 3
-	dw $6693
+	dw GenericAI
 
 	db 3
-	dw $6693
+	dw GenericAI
 
 	db 3
-	dw $6693
+	dw GenericAI
 
 	db 3
-	dw $6693
+	dw GenericAI
 
 	db 3 ; juggler
-	dw $65E9
+	dw JugglerAI
 
 	db 3
-	dw $6693
+	dw GenericAI
 
 	db 3
-	dw $6693
+	dw GenericAI
 
 	db 2 ; blackbelt
-	dw $65EF
+	dw BlackbeltAI
 
 	db 3
-	dw $6693
+	dw GenericAI
 
 	db 3
-	dw $6693
+	dw GenericAI
 
 	db 1 ; chief
-	dw $6693
+	dw GenericAI
 
 	db 3
-	dw $6693
+	dw GenericAI
 
 	db 1 ; giovanni
-	dw $65F5
+	dw GiovanniAI
 
 	db 3
-	dw $6693
+	dw GenericAI
 
 	db 2 ; cooltrainerm
-	dw $65FB
+	dw CooltrainerMAI
 
 	db 1 ; cooltrainerf
-	dw $6601
+	dw CooltrainerFAI
 
 	db 2 ; bruno
-	dw $6670
+	dw BrunoAI
 
 	db 5 ; brock
-	dw $6614
+	dw BrockAI
 
 	db 1 ; misty
-	dw $661C
+	dw MistyAI
 
 	db 1 ; surge
-	dw $6622
+	dw LtSurgeAI
 
 	db 1 ; erika
-	dw $6628
+	dw ErikaAI
 
 	db 2 ; koga
-	dw $6634
+	dw KogaAI
 
 	db 2 ; blaine
-	dw $663A
+	dw BlaineAI
 
 	db 1 ; sabrina
-	dw $6640
+	dw SabrinaAI
 
 	db 3
-	dw $6693
+	dw GenericAI
 
 	db 1 ; sony2
-	dw $664C
+	dw Sony2AI
 
 	db 1 ; sony3
-	dw $6658
+	dw Sony3AI
 
 	db 2 ; lorelei
-	dw $6664
+	dw LoreleiAI
 
 	db 3
-	dw $6693
+	dw GenericAI
 
 	db 2 ; agatha
-	dw $6676
+	dw AgathaAI
 
 	db 1 ; lance
-	dw $6687
+	dw LanceAI
 
+JugglerAI:
+	cp $40
+	ret nc
+	jp $672A
 
-INCBIN "baserom.gbc",$3A5E9,$3C000 - $3A5E9
+BlackbeltAI:
+	cp $20
+	ret nc
+	jp $67F2
+
+GiovanniAI:
+	cp $40
+	ret nc
+	jp $67B5
+
+CooltrainerMAI:
+	cp $40
+	ret nc
+	jp $67F2
+
+CooltrainerFAI:
+	cp $40
+	ld a,$A
+	call $67CF
+	jp c,$66D6
+	ld a,5
+	call $67CF
+	ret nc
+	jp $672A
+
+BrockAI:
+	ld a,[$CFE9]
+	and a
+	ret z
+	jp $6786
+
+MistyAI:
+	cp $40
+	ret nc
+	jp $67F8
+
+LtSurgeAI:
+	cp $40
+	ret nc
+	jp $67FE
+
+ErikaAI:
+	cp $80
+	ret nc
+	ld a,$A
+	call $67CF
+	ret nc
+	jp $66D0
+
+KogaAI:
+	cp $40
+	ret nc
+	jp $67F2
+
+BlaineAI:
+	cp $40
+	ret nc
+	jp $66D0
+
+SabrinaAI:
+	cp $40
+	ret nc
+	ld a,$A
+	call $67CF
+	ret nc
+	jp $66D6
+
+Sony2AI:
+	cp $20
+	ret nc
+	ld a,5
+	call $67CF
+	ret nc
+	jp $66CA
+
+Sony3AI:
+	cp $20
+	ret nc
+	ld a,5
+	call $67CF
+	ret nc
+	jp $66A0
+
+LoreleiAI:
+	cp $80
+	ret nc
+	ld a,5
+	call $67CF
+	ret nc
+	jp $66D0
+
+BrunoAI:
+	cp $40
+	ret nc
+	jp $67F8
+
+AgathaAI:
+	cp $14
+	jp c,$672A
+	cp $80
+	ret nc
+	ld a,4
+	call $67CF
+	ret nc
+	jp $66D0
+
+LanceAI:
+	cp $80
+	ret nc
+	ld a,5
+	call $67CF
+	ret nc
+	jp $66D6
+
+GenericAI:
+	and a
+	ret
+
+INCBIN "baserom.gbc",$3A695,$3C000 - $3A695
 
 SECTION "bankF",DATA,BANK[$F]
 INCBIN "baserom.gbc",$3C000,$4000
