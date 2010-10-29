@@ -3472,7 +3472,7 @@ CooltrainerFAI:
 	cp $40
 	ld a,$A
 	call $67CF
-	jp c,$66D6
+	jp c,AIUseHyperPotion
 	ld a,5
 	call $67CF
 	ret nc
@@ -3500,7 +3500,7 @@ ErikaAI:
 	ld a,$A
 	call $67CF
 	ret nc
-	jp $66D0
+	jp AIUseSuperPotion
 
 KogaAI:
 	cp $40
@@ -3510,7 +3510,7 @@ KogaAI:
 BlaineAI:
 	cp $40
 	ret nc
-	jp $66D0
+	jp AIUseSuperPotion
 
 SabrinaAI:
 	cp $40
@@ -3518,7 +3518,7 @@ SabrinaAI:
 	ld a,$A
 	call $67CF
 	ret nc
-	jp $66D6
+	jp AIUseHyperPotion
 
 Sony2AI:
 	cp $20
@@ -3526,7 +3526,7 @@ Sony2AI:
 	ld a,5
 	call $67CF
 	ret nc
-	jp $66CA
+	jp AIUsePotion
 
 Sony3AI:
 	cp $20
@@ -3542,7 +3542,7 @@ LoreleiAI:
 	ld a,5
 	call $67CF
 	ret nc
-	jp $66D0
+	jp AIUseSuperPotion
 
 BrunoAI:
 	cp $40
@@ -3557,7 +3557,7 @@ AgathaAI:
 	ld a,4
 	call $67CF
 	ret nc
-	jp $66D0
+	jp AIUseSuperPotion
 
 LanceAI:
 	cp $80
@@ -3565,13 +3565,120 @@ LanceAI:
 	ld a,5
 	call $67CF
 	ret nc
-	jp $66D6
+	jp AIUseHyperPotion
 
 GenericAI:
 	and a
 	ret
 
-INCBIN "baserom.gbc",$3A695,$3C000 - $3A695
+; end of individual trainer AI routines
+
+Function6695: ; 6695
+; XXX what does this do
+	ld hl,$CCDF
+	dec [hl]
+	scf
+	ret
+
+Function669B: ; 669B
+; XXX what does this do
+	ld a,$8E
+	jp $3740
+
+Function66A0: ; 66A0
+; XXX what does this do
+	call $6791
+	ld a,$10
+	ld [$CF05],a
+	ld de,$CEEB
+	ld hl,$CFE7
+	ld a,[hld]
+	ld [de],a
+	inc de
+	ld a,[hl]
+	ld [de],a
+	inc de
+	ld hl,$CFF5
+	ld a,[hld]
+	ld [de],a
+	inc de
+	ld [$CEE9],a
+	ld [$CFE7],a
+	ld a,[hl]
+	ld [de],a
+	ld [$CEEA],a
+	ld [$CFE6],a
+	jr Function6718
+
+AIUsePotion:
+; enemy trainer heals his monster with a potion
+	ld a,POTION
+	ld b,20
+	jr AIRecoverHP
+
+AIUseSuperPotion:
+; enemy trainer heals his monster with a super potion
+	ld a,SUPER_POTION
+	ld b,50
+	jr AIRecoverHP
+
+AIUseHyperPotion:
+; enemy trainer heals his monster with a hyper potion
+	ld a,HYPER_POTION
+	ld b,200
+	; fallthrough
+
+AIRecoverHP: ; 66DA
+; heal b HP and print "trainer used $(a) on pokemon!"
+	ld [$CF05],a
+	ld hl,$CFE7
+	ld a,[hl]
+	ld [$CEEB],a
+	add b
+	ld [hld],a
+	ld [$CEED],a
+	ld a,[hl]
+	ld [$CEEC],a
+	ld [$CEEE],a
+	jr nc,.next\@
+	inc a
+	ld [hl],a
+	ld [$CEEE],a
+.next\@
+	inc hl
+	ld a,[hld]
+	ld b,a
+	ld de,$CFF5
+	ld a,[de]
+	dec de
+	ld [$CEE9],a
+	sub b
+	ld a,[hli]
+	ld b,a
+	ld a,[de]
+	ld [$CEEA],a
+	sbc b
+	jr nc,Function6718
+	inc de
+	ld a,[de]
+	dec de
+	ld [hld],a
+	ld [$CEED],a
+	ld a,[de]
+	ld [hl],a
+	ld [$CEEE],a
+	; fallthrough
+
+Function6718: ; 6718
+	call $6835 ; print "used x on y" text?
+	ld hl,$C3CA
+	xor a
+	ld [$CF94],a
+	ld a,$48
+	call $3E6D
+	jp $6695
+
+INCBIN "baserom.gbc",$3A72A,$3C000 - $3A72A
 
 SECTION "bankF",DATA,BANK[$F]
 INCBIN "baserom.gbc",$3C000,$4000
