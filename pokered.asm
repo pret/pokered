@@ -8,6 +8,7 @@ W_CUROPPONENT EQU $D059 ; in a wild battle, this is the species of pokemon
 			; in a trainer battle, this is the trainer class
 
 W_LONEATTACKNO EQU $D05C ; which entry in LoneAttacks to use
+W_ISTRAINERBATTLE EQU $D057 ; boolean
 W_TRAINERNO    EQU $D05D ; which instance of [youngster, lass, etc] is this?
 
 W_CURENEMYLVL EQU $D127
@@ -3269,9 +3270,186 @@ LanceData:
 	db $FF,58,GYARADOS,56,DRAGONAIR,56,DRAGONAIR,60,AERODACTYL ;\
 		db 62,DRAGONITE,0
 
+TrainerAI: ; 652E
+;XXX called at 34964, 3c342, 3c398
+	and a
+	ld a,[W_ISTRAINERBATTLE]
+	dec a
+	ret z ; if not a trainer, we're done here
+	ld a,[$D12B]
+	cp 4
+	ret z
+	ld a,[$D031] ; what trainer class is this?
+	dec a
+	ld c,a
+	ld b,0
+	ld hl,TrainerAIPointers
+	add hl,bc
+	add hl,bc
+	add hl,bc
+	ld a,[$CCDF] ; XXX 340b0,3a548,3a553,3a696,3c943,3ef74
+	and a
+	ret z ; if XXX, we're done here
+	inc hl
+	inc a
+	jr nz,.getpointer\@
+	dec hl
+	ld a,[hli]
+	ld [$CCDF],a
+.getpointer\@
+	ld a,[hli]
+	ld h,[hl]
+	ld l,a
+	call $3E5C
+	jp [hl]
+
+TrainerAIPointers: ; 655C
+; one entry per trainer class
+; XXX first byte, ???
+; next two bytes, pointer to AI subroutine for trainer class
+	db 3
+	dw $6693
+
+	db 3
+	dw $6693
+
+	db 3
+	dw $6693
+
+	db 3
+	dw $6693
+
+	db 3
+	dw $6693
+
+	db 3
+	dw $6693
+
+	db 3
+	dw $6693
+
+	db 3
+	dw $6693
+
+	db 3
+	dw $6693
+
+	db 3
+	dw $6693
+
+	db 3
+	dw $6693
+
+	db 3
+	dw $6693
+
+	db 3 ; juggler_x
+	dw $65E9
+
+	db 3
+	dw $6693
+
+	db 3
+	dw $6693
+
+	db 3
+	dw $6693
+
+	db 3
+	dw $6693
+
+	db 3
+	dw $6693
+
+	db 3
+	dw $6693
+
+	db 3
+	dw $6693
+
+	db 3 ; juggler
+	dw $65E9
+
+	db 3
+	dw $6693
+
+	db 3
+	dw $6693
+
+	db 2 ; blackbelt
+	dw $65EF
+
+	db 3
+	dw $6693
+
+	db 3
+	dw $6693
+
+	db 1 ; chief
+	dw $6693
+
+	db 3
+	dw $6693
+
+	db 1 ; giovanni
+	dw $65F5
+
+	db 3
+	dw $6693
+
+	db 2 ; cooltrainerm
+	dw $65FB
+
+	db 1 ; cooltrainerf
+	dw $6601
+
+	db 2 ; bruno
+	dw $6670
+
+	db 5 ; brock
+	dw $6614
+
+	db 1 ; misty
+	dw $661C
+
+	db 1 ; surge
+	dw $6622
+
+	db 1 ; erika
+	dw $6628
+
+	db 2 ; koga
+	dw $6634
+
+	db 2 ; blaine
+	dw $663A
+
+	db 1 ; sabrina
+	dw $6640
+
+	db 3
+	dw $6693
+
+	db 1 ; sony2
+	dw $664C
+
+	db 1 ; sony3
+	dw $6658
+
+	db 2 ; lorelei
+	dw $6664
+
+	db 3
+	dw $6693
+
+	db 2 ; agatha
+	dw $6676
+
+	db 1 ; lance
+	dw $6687
 
 
-INCBIN "baserom.gbc",$3A52E,$3C000 - $3A52E
+INCBIN "baserom.gbc",$3A5E9,$3C000 - $3A5E9
 
 SECTION "bankF",DATA,BANK[$F]
 INCBIN "baserom.gbc",$3C000,$4000
