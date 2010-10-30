@@ -1233,7 +1233,44 @@ TechnicalPrefix:
 HiddenPrefix:
 	db $87,$8C ; "HM"
 
-INCBIN "baserom.gbc",$3040,$3A87 - $3040
+INCBIN "baserom.gbc",$3040,$35BC - $3040
+BankswitchHome: ; 35BC
+; switches to bank # in a
+; Only use this when in the home bank!
+	ld [$CF09],a
+	ld a,[$FFB8]
+	ld [$CF08],a
+	ld a,[$CF09]
+	ld [$FFB8],a
+	ld [$2000],a
+	ret
+
+BankswitchBack: ; 35CD
+; returns from BankswitchHome
+	ld a,[$CF08]
+	ld [$FFB8],a
+	ld [$2000],a
+	ret
+
+Bankswitch: ; 35D6
+; self-contained bankswitch, use this when not in the home bank
+; switches to the bank in b
+	ld a,[$FFB8]
+	push af
+	ld a,b
+	ld [$FFB8],a
+	ld [$2000],a
+	ld bc,.Return\@
+	push bc
+	jp [hl]
+.Return\@
+	pop bc
+	ld a,b
+	ld [$FFB8],a
+	ld [$2000],a
+	ret
+
+INCBIN "baserom.gbc",$35EC,$3A87 - $35EC
 
 AddNTimes: ; 3A87
 ; add bc to hl a times
@@ -3840,7 +3877,7 @@ Function674B: ; 674B
 	ld [$D11D],a
 	ld hl,$490E
 	ld b,$F
-	call $35D6 ; bankswitch
+	call Bankswitch
 	xor a
 	ld [$D11D],a
 	ld a,[$D12B]
@@ -3953,7 +3990,7 @@ AIIncreaseStat:
 	ld [hl],b
 	ld hl,$7428
 	ld b,$F
-	call $35D6 ; bankswitch
+	call Bankswitch
 	pop hl
 	pop af
 	ld [hli],a
