@@ -1139,7 +1139,90 @@ MartInventories: ; 2442
 	db $FE,7,ULTRA_BALL,GREAT_BALL,FULL_RESTORE,MAX_POTION,FULL_HEAL
 	db REVIVE,MAX_REPEL,$FF
 
-INCBIN "baserom.gbc",$24D6,$3A87 - $24D6
+INCBIN "baserom.gbc",$24D6,$2FCF - $24D6
+
+GetItemName: ; 2FCF
+; given an item ID at [$D11E], store the name of the item into a string
+;     starting at $CD6D
+	push hl
+	push bc
+	ld a,[$D11E]
+	cp HM_01 ; is this a TM/HM?
+	jr nc,.Machine\@
+	ld [$D0B5],a
+	ld a,4
+	ld [$D0B6],a
+	ld a,1
+	ld [$D0B7],a
+	call $376B
+	jr .Finish\@
+.Machine\@
+	call GetMachineName
+.Finish\@
+	ld de,$CD6D ; pointer to where item name is stored in RAM
+	pop bc
+	pop hl
+	ret
+
+GetMachineName:
+; copies the name of the TM/HM in [$D11E] to $CD6D
+	push hl
+	push de
+	push bc
+	ld a,[$D11E]
+	push af
+	cp TM_01 ; is this a TM? [not HM]
+	jr nc,.WriteTM\@
+; if HM, then write "HM" and add 5 to the item ID, so we can reuse the
+; TM printing code
+	add 5
+	ld [$D11E],a
+	ld hl,HiddenPrefix ; points to "HM"
+	ld bc,2
+	jr .WriteMachinePrefix\@
+.WriteTM\@
+	ld hl,TechnicalPrefix ; points to "TM"
+	ld bc,2
+.WriteMachinePrefix\@
+	ld de,$CD6D
+	call CopyData
+
+; now get the machine number and convert it to text
+	ld a,[$D11E]
+	sub TM_01 - 1
+	ld b,$F6 ; "0"
+.FirstDigit\@
+	sub 10
+	jr c,.SecondDigit\@
+	inc b
+	jr .FirstDigit\@
+.SecondDigit\@
+	add 10
+	push af
+	ld a,b
+	ld [de],a
+	inc de
+	pop af
+	ld b,$F6 ; "0"
+	add b
+	ld [de],a
+	inc de
+	ld a,$50 ; text null
+	ld [de],a
+
+	pop af
+	ld [$D11E],a
+	pop bc
+	pop de
+	pop hl
+	ret
+
+TechnicalPrefix:
+	db $93,$8C ; "TM"
+HiddenPrefix:
+	db $87,$8C ; "HM"
+
+INCBIN "baserom.gbc",$3040,$3A87 - $3040
 
 AddNTimes: ; 3A87
 ; add bc to hl a times
@@ -3878,7 +3961,7 @@ AIPrintItemUse_:
 ; print "x used [$CF05] on z!"
 	ld a,[$CF05]
 	ld [$D11E],a
-	call $2FCF ; get item name
+	call GetItemName
 	ld hl,AIBattleUseItemText
 	jp PrintText
 
