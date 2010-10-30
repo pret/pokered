@@ -3601,7 +3601,7 @@ BrockAI:
 	ld a,[W_OPPONENTSTATUS]
 	and a
 	ret z
-	jp $6786
+	jp AIUseFullHeal
 
 MistyAI:
 	cp $40
@@ -3788,7 +3788,7 @@ AIRecoverHP: ; 66DA
 	; fallthrough
 
 Function6718: ; 6718
-	call $6835 ; print "used x on y" text?
+	call AIPrintItemUse_
 	ld hl,$C3CA
 	xor a
 	ld [$CF94],a
