@@ -15,6 +15,8 @@ TX_NULL: MACRO
 	ENDM
 
 ; wram locations
+W_OPPONENTHP     EQU $CFE6 ; active opponent's hp (16 bits)
+W_OPPONENTNUMBER EQU $CFE8 ; active opponent's position in team (0 to 5)
 W_OPPONENTSTATUS EQU $CFE9 ; active opponent's status condition
 	; bit 0 slp
 	; bit 1 slp
@@ -25,8 +27,11 @@ W_OPPONENTSTATUS EQU $CFE9 ; active opponent's status condition
 	; bit 6 par
 	; unused? (XXX confirm)
 
+
+W_TRAINERCLASS EQU $D031
+
 W_CUROPPONENT EQU $D059 ; in a wild battle, this is the species of pokemon
-			; in a trainer battle, this is the trainer class
+			; in a trainer battle, this is the trainer class + $C8
 
 W_LONEATTACKNO EQU $D05C ; which entry in LoneAttacks to use
 W_ISTRAINERBATTLE EQU $D057 ; boolean
@@ -42,10 +47,12 @@ W_RIVALSTARTER EQU $D715
 
 W_GRASSRATE EQU $D887
 W_GRASSMONS EQU $D888
-W_WATERRATE EQU $D8A4
-W_WATERMONS EQU $D8A5
+W_WATERRATE EQU $D8A4 ; OVERLOADED
+W_WATERMONS EQU $D8A5 ; OVERLOADED
 
 W_ENEMYMONCOUNT  EQU $D89C
+
+W_ENEMYMON1HP EQU $D8A5 ; 16 bits
 
 W_ENEMYMON1MOVE3 EQU $D8AE
 
@@ -3431,10 +3438,10 @@ TrainerAI: ; 652E
 	ld a,[W_ISTRAINERBATTLE]
 	dec a
 	ret z ; if not a trainer, we're done here
-	ld a,[$D12B]
+	ld a,[W_ISLINKBATTLE]
 	cp 4
 	ret z
-	ld a,[$D031] ; what trainer class is this?
+	ld a,[W_TRAINERCLASS] ; what trainer class is this?
 	dec a
 	ld c,a
 	ld b,0
@@ -3762,7 +3769,7 @@ AIUseFullRestore:
 	ld a,[hl]
 	ld [de],a
 	ld [$CEEA],a
-	ld [$CFE6],a
+	ld [W_OPPONENTHP],a
 	jr Function6718
 
 AIUsePotion:
@@ -3834,18 +3841,18 @@ Function6718: ; 6718
 	jp $6695
 
 Function672A: ; 672A
-	ld a,[$D89C]
+	ld a,[W_ENEMYMONCOUNT]
 	ld c,a
-	ld hl,$D8A5
+	ld hl,W_ENEMYMON1HP
 	ld d,0
 .next2\@
 	ld a,[hli]
 	ld b,a
 	ld a,[hld]
 	or b
-	jr z,.next\@
+	jr z,.Fainted\@ ; has monster fainted?
 	inc d
-.next\@
+.Fainted\@
 	push bc
 	ld bc,$2C
 	add hl,bc
@@ -3859,15 +3866,16 @@ Function672A: ; 672A
 	ret
 
 Function674B: ; 674B
-	ld a,[$CFE8] ; pokemon in party to switch to?
 
-; copy current enemy hp and two more bytes (XXX) to a position in the party
-	ld hl,$D8A5
+; prepare to withdraw the active monster: copy hp, (XXX), and status to roster
+
+	ld a,[W_OPPONENTNUMBER]
+	ld hl,W_ENEMYMON1HP
 	ld bc,$2C
 	call AddNTimes
 	ld d,h
 	ld e,l
-	ld hl,$CFE6
+	ld hl,W_OPPONENTHP
 	ld bc,4
 	call CopyData
 
@@ -3880,7 +3888,7 @@ Function674B: ; 674B
 	call Bankswitch
 	xor a
 	ld [$D11D],a
-	ld a,[$D12B]
+	ld a,[W_ISLINKBATTLE]
 	cp 4
 	ret z
 	scf
@@ -3897,7 +3905,7 @@ AIUseFullHeal:
 	jp AIPrintItemUse
 
 AICureStatus:
-	ld a,[$CFE8]
+	ld a,[W_OPPONENTNUMBER]
 	ld hl,$D8A8
 	ld bc,$2C
 	call AddNTimes
