@@ -1151,7 +1151,21 @@ AddNTimes: ; 3A87
 	jr nz,.loop\@
 	ret
 
-INCBIN "baserom.gbc",$3A8E,$4000 - $3A8E
+INCBIN "baserom.gbc",$3A8E,$3C49 - $3A8E
+
+PrintText: ; 3C49
+; given a pointer in hl, print the text there
+	push hl
+	ld a,1
+	ld [$D125],a
+	call $30E8
+	call $2429
+	call $3DD7
+	pop hl
+	ld bc,$C4B9
+	jp $1B40
+
+INCBIN "baserom.gbc",$3C5F,$4000 - $3C5F
 
 SECTION "bank1",DATA,BANK[$1]
 INCBIN "baserom.gbc",$4000,$4000
@@ -3727,7 +3741,7 @@ Function674B: ; 674B
 	call CopyData
 
 	ld hl,BattleWithdrawText
-	call $3C49 ; print text
+	call PrintText
 	ld a,1
 	ld [$D11D],a
 	ld hl,$490E
@@ -3866,7 +3880,7 @@ AIPrintItemUse_:
 	ld [$D11E],a
 	call $2FCF ; get item name
 	ld hl,AIBattleUseItemText
-	jp $3C49 ; print text
+	jp PrintText
 
 AIBattleUseItemText:
 	db $17
