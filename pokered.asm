@@ -3844,8 +3844,11 @@ Function672A: ; 672A
 	ld a,[W_ENEMYMONCOUNT]
 	ld c,a
 	ld hl,W_ENEMYMON1HP
-	ld d,0
-.next2\@
+
+	ld d,0 ; keep count of unfainted monsters
+
+	; count how many monsters haven't fainted yet
+.loop\@
 	ld a,[hli]
 	ld b,a
 	ld a,[hld]
@@ -3858,16 +3861,17 @@ Function672A: ; 672A
 	add hl,bc
 	pop bc
 	dec c
-	jr nz,.next2\@
-	ld a,d
-	cp 2
-	jp nc,Function674B
+	jr nz,.loop\@
+
+	ld a,d ; how many available monsters are there?
+	cp 2 ; don't bother if only 1 or 2
+	jp nc,Function674B ; XXX check, does this jump when a = 2?
 	and a
 	ret
 
 Function674B: ; 674B
 
-; prepare to withdraw the active monster: copy hp, (XXX), and status to roster
+; prepare to withdraw the active monster: copy hp, number, and status to roster
 
 	ld a,[W_OPPONENTNUMBER]
 	ld hl,W_ENEMYMON1HP
@@ -3881,13 +3885,15 @@ Function674B: ; 674B
 
 	ld hl,AIBattleWithdrawText
 	call PrintText
+
 	ld a,1
 	ld [$D11D],a
-	ld hl,$490E
-	ld b,$F
+	ld hl,EnemySendOut
+	ld b,BANK(EnemySendOut)
 	call Bankswitch
 	xor a
 	ld [$D11D],a
+
 	ld a,[W_ISLINKBATTLE]
 	cp 4
 	ret z
@@ -3905,6 +3911,7 @@ AIUseFullHeal:
 	jp AIPrintItemUse
 
 AICureStatus:
+; cures the status of enemy's active pokemon
 	ld a,[W_OPPONENTNUMBER]
 	ld hl,$D8A8
 	ld bc,$2C
@@ -4027,7 +4034,187 @@ AIBattleUseItemText:
 INCBIN "baserom.gbc",$3A849,$3C000 - $3A849
 
 SECTION "bankF",DATA,BANK[$F]
-INCBIN "baserom.gbc",$3C000,$4000
+INCBIN "baserom.gbc",$3C000,$90E
+
+EnemySendOut: ; 490E
+	ld hl,$D058
+	xor a
+	ld [hl],a
+	ld a,[$CC2F]
+	ld c,a
+	ld b,1
+	push bc
+	ld a,$10
+	call $3E6D
+	ld hl,$CCF5
+	xor a
+	ld [hl],a
+	pop bc
+	ld a,$10
+	call $3E6D
+	xor a
+	ld hl,$D065
+	ld [hli],a
+	ld [hli],a
+	ld [hli],a
+	ld [hli],a
+	ld [hl],a
+	ld [$D072],a
+	ld [$CCEF],a
+	ld [$CCF3],a
+	ld hl,$CCF1
+	ld [hli],a
+	ld [hl],a
+	dec a
+	ld [$CCDF],a
+	ld hl,$D062
+	res 5,[hl]
+	ld hl,$C3B2
+	ld a,8
+	call $48DF
+	call $6E94
+	call $3719
+	ld a,[$D12B]
+	cp 4
+	jr nz,.next\@
+	ld a,[$CC3E]
+	sub 4
+	ld [$CF92],a
+	jr .next3\@
+.next\@
+	ld b,$FF
+.next2\@
+	inc b
+	ld a,[$CFE8]
+	cp b
+	jr z,.next2\@
+	ld hl,$D8A4
+	ld a,b
+	ld [$CF92],a
+	push bc
+	ld bc,$2C
+	call $3A87
+	pop bc
+	inc hl
+	ld a,[hli]
+	ld c,a
+	ld a,[hl]
+	or c
+	jr z,.next2\@
+.next3\@
+	ld a,[$CF92]
+	ld hl,$D8C5
+	ld bc,$2C
+	call $3A87
+	ld a,[hl]
+	ld [$D127],a
+	ld a,[$CF92]
+	inc a
+	ld hl,$D89C
+	ld c,a
+	ld b,0
+	add hl,bc
+	ld a,[hl]
+	ld [$CFD8],a
+	ld [$CF91],a
+	call $6B01
+	ld hl,$CFE6
+	ld a,[hli]
+	ld [$CCE3],a
+	ld a,[hl]
+	ld [$CCE4],a
+	ld a,1
+	ld [$CC26],a
+	ld a,[$D11D]
+	dec a
+	jr z,.next4\@
+	ld a,[$D163]
+	dec a
+	jr z,.next4\@
+	ld a,[$D12B]
+	cp 4
+	jr z,.next4\@
+	ld a,[$D355]
+	bit 6,a
+	jr nz,.next4\@
+	ld hl,$4A79
+	call $3C49
+	ld hl,$C42C
+	ld bc,$0801
+	ld a,$14
+	ld [$D125],a
+	call $30E8
+	ld a,[$CC26]
+	and a
+	jr nz,.next4\@
+	ld a,2
+	ld [$D07D],a
+	call $13FC
+.next9\@
+	ld a,1
+	ld [$CC26],a
+	jr c,.next7\@
+	ld hl,$CC2F
+	ld a,[$CF92]
+	cp [hl]
+	jr nz,.next6\@
+	ld hl,$51F5
+	call $3C49
+.next8\@
+	call $1411
+	jr .next9\@
+.next6\@
+	call $4A97
+	jr z,.next8\@
+	xor a
+	ld [$CC26],a
+.next7\@
+	call $3DE5
+	call $6E5B
+	call $3725
+.next4\@
+	call $0082
+	ld hl,$C3A0
+	ld bc,$040B
+	call $18C4
+	ld b,1
+	call $3DEF
+	call $3DDC
+	ld hl,$4A7E
+	call $3C49
+	ld a,[$CFD8]
+	ld [$CF91],a
+	ld [$D0B5],a
+	call $1537
+	ld de,$9000
+	call $1665
+	ld a,$CF
+	ld [$FFE1],a
+	ld hl,$C427
+	ld a,2
+	call $3E6D
+	ld a,[$CFD8]
+	call $13D0
+	call $4DEC
+	ld a,[$CC26]
+	and a
+	ret nz
+	xor a
+	ld [$D058],a
+	ld [$CCF5],a
+	call $3719
+	jp $51BA
+
+	db $17
+	dw $5784
+	db $22
+	db $50
+	db $17
+	dw $57B4
+	db $22
+	db $50
+
+INCBIN "baserom.gbc",$3CA83,$40000 - $3CA83
 
 SECTION "bank10",DATA,BANK[$10]
 INCBIN "baserom.gbc",$40000,$1024
