@@ -3,6 +3,17 @@ RGB: MACRO
 	dw (\3 << 10 | \2 << 5 | \1)
 	ENDM
 
+; text macros
+TX_FAR: MACRO
+	db $17
+	dw \1
+	db BANK(\1)
+	ENDM
+
+TX_NULL: MACRO
+	db $50
+	ENDM
+
 ; wram locations
 W_OPPONENTSTATUS EQU $CFE9 ; active opponent's status condition
 	; bit 0 slp
@@ -3823,7 +3834,7 @@ Function674B: ; 674B
 	ld bc,4
 	call CopyData
 
-	ld hl,BattleWithdrawText
+	ld hl,AIBattleWithdrawText
 	call PrintText
 	ld a,1
 	ld [$D11D],a
@@ -3838,11 +3849,9 @@ Function674B: ; 674B
 	scf
 	ret
 
-BattleWithdrawText:
-	db $17
-	dw $40BE
-	db $22
-	db $50
+AIBattleWithdrawText:
+	TX_FAR _AIBattleWithdrawText
+	TX_NULL
 
 AIUseFullHeal:
 	call $669B
@@ -3966,10 +3975,8 @@ AIPrintItemUse_:
 	jp PrintText
 
 AIBattleUseItemText:
-	db $17
-	dw $40D5
-	db $22
-	db $50
+	TX_FAR _AIBattleUseItemText
+	TX_NULL
 
 
 INCBIN "baserom.gbc",$3A849,$3C000 - $3A849
@@ -4532,7 +4539,14 @@ SECTION "bank21",DATA,BANK[$21]
 INCBIN "baserom.gbc",$84000,$4000
 
 SECTION "bank22",DATA,BANK[$22]
-INCBIN "baserom.gbc",$88000,$4000
+INCBIN "baserom.gbc",$88000,$BE
+
+_AIBattleWithdrawText:
+	INCBIN "baserom.gbc",$880BE,$17
+_AIBattleUseItemText:
+	INCBIN "baserom.gbc",$880D5,$1A
+
+INCBIN "baserom.gbc",$880EF,$2C0A
 
 SECTION "bank23",DATA,BANK[$23]
 INCBIN "baserom.gbc",$8C000,$4000
