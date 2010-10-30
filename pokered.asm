@@ -4,6 +4,16 @@ RGB: MACRO
 	ENDM
 
 ; wram locations
+W_OPPONENTSTATUS EQU $CFE9 ; active opponent's status condition
+	; bit 0 slp
+	; bit 1 slp
+	; bit 2 slp
+	; bit 3 psn
+	; bit 4 brn
+	; bit 5 frz
+	; bit 6 par
+	; unused? (XXX confirm)
+
 W_CUROPPONENT EQU $D059 ; in a wild battle, this is the species of pokemon
 			; in a trainer battle, this is the trainer class
 
@@ -3456,17 +3466,17 @@ JugglerAI:
 BlackbeltAI:
 	cp $20
 	ret nc
-	jp $67F2
+	jp AIUseXAttack
 
 GiovanniAI:
 	cp $40
 	ret nc
-	jp $67B5
+	jp AIUseGuardSpec
 
 CooltrainerMAI:
 	cp $40
 	ret nc
-	jp $67F2
+	jp AIUseXAttack
 
 CooltrainerFAI:
 	cp $40
@@ -3479,7 +3489,8 @@ CooltrainerFAI:
 	jp $672A
 
 BrockAI:
-	ld a,[$CFE9]
+; if his active monster has a status condition, use a full heal
+	ld a,[W_OPPONENTSTATUS]
 	and a
 	ret z
 	jp $6786
@@ -3487,12 +3498,12 @@ BrockAI:
 MistyAI:
 	cp $40
 	ret nc
-	jp $67F8
+	jp AIUseXDefend
 
 LtSurgeAI:
 	cp $40
 	ret nc
-	jp $67FE
+	jp AIUseXSpeed
 
 ErikaAI:
 	cp $80
@@ -3505,7 +3516,7 @@ ErikaAI:
 KogaAI:
 	cp $40
 	ret nc
-	jp $67F2
+	jp AIUseXAttack
 
 BlaineAI:
 	cp $40
@@ -3534,7 +3545,7 @@ Sony3AI:
 	ld a,5
 	call $67CF
 	ret nc
-	jp $66A0
+	jp AIUseFullRestore
 
 LoreleiAI:
 	cp $80
@@ -3547,7 +3558,7 @@ LoreleiAI:
 BrunoAI:
 	cp $40
 	ret nc
-	jp $67F8
+	jp AIUseXDefend
 
 AgathaAI:
 	cp $14
@@ -3585,10 +3596,9 @@ Function669B: ; 669B
 	ld a,$8E
 	jp $3740
 
-Function66A0: ; 66A0
-; XXX what does this do
-	call $6791
-	ld a,$10
+AIUseFullRestore:
+	call AICureStatus
+	ld a,FULL_RESTORE
 	ld [$CF05],a
 	ld de,$CEEB
 	ld hl,$CFE7
@@ -3678,7 +3688,194 @@ Function6718: ; 6718
 	call $3E6D
 	jp $6695
 
-INCBIN "baserom.gbc",$3A72A,$3C000 - $3A72A
+Function672A: ; 672A
+	ld a,[$D89C]
+	ld c,a
+	ld hl,$D8A5
+	ld d,0
+.next2\@
+	ld a,[hli]
+	ld b,a
+	ld a,[hld]
+	or b
+	jr z,.next\@
+	inc d
+.next\@
+	push bc
+	ld bc,$2C
+	add hl,bc
+	pop bc
+	dec c
+	jr nz,.next2\@
+	ld a,d
+	cp 2
+	jp nc,Function674B
+	and a
+	ret
+
+Function674B: ; 674B
+	ld a,[$CFE8] ; pokemon in party to switch to?
+
+; copy current enemy hp and two more bytes (XXX) to a position in the party
+	ld hl,$D8A5
+	ld bc,$2C
+	call AddNTimes
+	ld d,h
+	ld e,l
+	ld hl,$CFE6
+	ld bc,4
+	call CopyData
+
+	ld hl,BattleWithdrawText
+	call $3C49 ; print text
+	ld a,1
+	ld [$D11D],a
+	ld hl,$490E
+	ld b,$F
+	call $35D6 ; bankswitch
+	xor a
+	ld [$D11D],a
+	ld a,[$D12B]
+	cp 4
+	ret z
+	scf
+	ret
+
+BattleWithdrawText:
+	db $17
+	dw $40BE
+	db $22
+	db $50
+
+AIUseFullHeal:
+	call $669B
+	call AICureStatus
+	ld a,FULL_HEAL
+	jp AIPrintItemUse
+
+AICureStatus:
+	ld a,[$CFE8]
+	ld hl,$D8A8
+	ld bc,$2C
+	call AddNTimes
+	xor a
+	ld [hl],a ; clear status in enemy team roster
+	ld [W_OPPONENTSTATUS],a ; clear status of active enemy
+	ld hl,$D069
+	res 0,[hl]
+	ret
+
+AIUseXAccuracy: ; unused
+	call $669B
+	ld hl,$D068
+	set 0,[hl]
+	ld a,X_ACCURACY
+	jp AIPrintItemUse
+
+AIUseGuardSpec:
+	call $669B
+	ld hl,$D068
+	set 1,[hl]
+	ld a,GUARD_SPEC_
+	jp AIPrintItemUse
+
+AIUseDireHit: ; unused
+	call $669B
+	ld hl,$D068
+	set 2,[hl]
+	ld a,DIRE_HIT
+	jp AIPrintItemUse
+
+Function67CF: ; 67CF
+	ld [$FF99],a
+	ld hl,$CFF4
+	ld a,[hli]
+	ld [$FF95],a
+	ld a,[hl]
+	ld [$FF96],a
+	ld b,2
+	call $38B9
+	ld a,[$FF98]
+	ld c,a
+	ld a,[$FF97]
+	ld b,a
+	ld hl,$CFE7
+	ld a,[hld]
+	ld e,a
+	ld a,[hl]
+	ld d,a
+	ld a,d
+	sub b
+	ret nz
+	ld a,e
+	sub c
+	ret
+
+AIUseXAttack:
+	ld b,$A
+	ld a,X_ATTACK
+	jr AIIncreaseStat
+
+AIUseXDefend:
+	ld b,$B
+	ld a,X_DEFEND
+	jr AIIncreaseStat
+
+AIUseXSpeed:
+	ld b,$C
+	ld a,X_SPEED
+	jr AIIncreaseStat
+
+AIUseXSpecial:
+	ld b,$D
+	ld a,X_SPECIAL
+	; fallthrough
+
+AIIncreaseStat:
+	ld [$CF05],a
+	push bc
+	call AIPrintItemUse_
+	pop bc
+	ld hl,$CFCD
+	ld a,[hld]
+	push af
+	ld a,[hl]
+	push af
+	push hl
+	ld a,$AF
+	ld [hli],a
+	ld [hl],b
+	ld hl,$7428
+	ld b,$F
+	call $35D6 ; bankswitch
+	pop hl
+	pop af
+	ld [hli],a
+	pop af
+	ld [hl],a
+	jp $6695
+
+AIPrintItemUse:
+	ld [$CF05],a
+	call AIPrintItemUse_
+	jp $6695
+
+AIPrintItemUse_:
+; print "x used [$CF05] on z!"
+	ld a,[$CF05]
+	ld [$D11E],a
+	call $2FCF ; get item name
+	ld hl,AIBattleUseItemText
+	jp $3C49 ; print text
+
+AIBattleUseItemText:
+	db $17
+	dw $40D5
+	db $22
+	db $50
+
+
+INCBIN "baserom.gbc",$3A849,$3C000 - $3A849
 
 SECTION "bankF",DATA,BANK[$F]
 INCBIN "baserom.gbc",$3C000,$4000
