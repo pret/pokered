@@ -4093,7 +4093,7 @@ EnemySendOut: ; 490E
 	ld [$CF92],a
 	push bc
 	ld bc,$2C
-	call $3A87
+	call AddNTimes
 	pop bc
 	inc hl
 	ld a,[hli]
@@ -4105,7 +4105,7 @@ EnemySendOut: ; 490E
 	ld a,[$CF92]
 	ld hl,$D8C5
 	ld bc,$2C
-	call $3A87
+	call AddNTimes
 	ld a,[hl]
 	ld [$D127],a
 	ld a,[$CF92]
@@ -4138,7 +4138,7 @@ EnemySendOut: ; 490E
 	bit 6,a
 	jr nz,.next4\@
 	ld hl,$4A79
-	call $3C49
+	call PrintText
 	ld hl,$C42C
 	ld bc,$0801
 	ld a,$14
@@ -4159,7 +4159,7 @@ EnemySendOut: ; 490E
 	cp [hl]
 	jr nz,.next6\@
 	ld hl,$51F5
-	call $3C49
+	call PrintText
 .next8\@
 	call $1411
 	jr .next9\@
@@ -4181,7 +4181,7 @@ EnemySendOut: ; 490E
 	call $3DEF
 	call $3DDC
 	ld hl,$4A7E
-	call $3C49
+	call PrintText
 	ld a,[$CFD8]
 	ld [$CF91],a
 	ld [$D0B5],a
