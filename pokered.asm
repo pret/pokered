@@ -530,7 +530,39 @@ PrintText: ; 3C49
 	ld bc,$C4B9
 	jp $1B40
 
-INCBIN "baserom.gbc",$3C5F,$4000 - $3C5F
+INCBIN "baserom.gbc",$3C5F,$3E6D - $3C5F
+
+Predef: ; 3E6D
+; runs a predefined ASM command, where the command ID is read from $D0B7
+
+	ld [$CC4E],a ; save the predef routine's ID for later
+
+	ld a,[$FFB8]
+	ld [$CF12],a
+
+	; save bank and call 13:7E49
+	push af
+	ld a,BANK(GetPredefPointer)
+	ld [$FFB8],a
+	ld [$2000],a
+	call GetPredefPointer
+
+	; call the predef function
+	; ($D0B7 has the bank of the predef routine)
+	ld a,[$D0B7]
+	ld [$FFB8],a
+	ld [$2000],a
+	ld de,.Return\@
+	push de
+	jp [hl]
+	; after the predefined function finishes it returns here
+.Return\@
+	pop af
+	ld [$FFB8],a
+	ld [$2000],a
+	ret
+
+INCBIN "baserom.gbc",$3E94,$4000 - $3E94
 
 SECTION "bank1",DATA,BANK[$1]
 INCBIN "baserom.gbc",$4000,$4000
@@ -3645,7 +3677,267 @@ SECTION "bank12",DATA,BANK[$12]
 INCBIN "baserom.gbc",$48000,$4000
 
 SECTION "bank13",DATA,BANK[$13]
-INCBIN "baserom.gbc",$4C000,$4000
+INCBIN "baserom.gbc",$4C000,$3E49
+
+GetPredefPointer:
+; stores hl in $CC4F,$CC50
+; stores de in $CC51,$CC52
+; stores bc in $CC53,$CC54
+; grabs a byte "n" from $CC4E,
+;    and gets the nth (3-byte) pointer in PredefPointers
+; stores the bank of said pointer in [$D0B7]
+; stores the pointer in hl and returns
+        ; ld $CC4F,hl
+        ld a,h
+        ld [$CC4F],a
+        ld a,l
+        ld [$CC50],a
+
+        ; ld $CC51,de
+        ld hl,$CC51
+        ld a,d
+        ld [hli],a
+        ld a,e
+        ld [hli],a
+
+        ; ld $CC53,bc
+        ld a,b
+        ld [hli],a
+        ld [hl],c
+
+        ld hl,PredefPointers
+        ld de,0
+
+        ; de = 3 * [$CC4E]
+        ld a,[$CC4E]
+        ld e,a
+        add a,a
+        add a,e
+        ld e,a
+        jr nc,.next\@
+        inc d
+
+.next\@
+        add hl,de
+        ld d,h
+        ld e,l
+
+	; get bank of predef routine
+        ld a,[de]
+        ld [$D0B7],a
+
+	; get pointer
+        inc de
+        ld a,[de]
+        ld l,a
+        inc de
+        ld a,[de]
+        ld h,a
+
+        ret
+
+PredefPointers: ; 7E79
+; these are pointers to ASM routines.
+; they appear to be used in overworld map scripts.
+        db $0F
+        dw $4D60
+        db $0F
+        dw $70C6
+        db $0F
+        dw $7073
+        db $0B
+        dw $7E40
+        db $0F
+        dw $7103
+        db $1E
+        dw $5ABA
+        db $03
+        dw $7132
+        db $03
+        dw $76A5
+        db $1E
+        dw $4D5E
+        db $03
+        dw $771E
+        db $03
+        dw $771E
+        db $03
+        dw $781D
+        db $03
+        dw $7836
+        db $03
+        dw $771E
+        db $03
+        dw $771E
+        db $03
+        dw $7850
+        db $03
+        dw $7666
+        db $03
+        dw $71D7
+        db $03
+        dw $71A6
+        db $03
+        dw $469C
+        db $0F
+        dw $4A83
+        db $03
+        dw $71C8
+        db $03
+        dw $71C8
+        db $03
+        dw $6E9E
+        db $03
+        dw $7850
+        db $03
+        dw $4754
+        db $0E
+        dw $6F5B
+        db $01
+        dw $6E43
+        db $03
+        dw $78A5
+        db $03
+        dw $3EB5
+        db $03
+        dw $3E2E
+        db $12
+        dw $40EB
+        db $03
+        dw $78BA
+        db $12
+        dw $40FF
+        db $03
+        dw $7929
+        db $03
+        dw $79A0
+        db $12
+        dw $4125
+        db $03
+        dw $7A1D
+        db $03
+        dw $79DC
+        db $01
+        dw $5AB0
+        db $0F
+        dw $6D02
+        db $10
+        dw $4000
+        db $0E
+        dw $6D1C
+        db $1C
+        dw $778C
+        db $0F
+        dw $6F18
+        db $01
+        dw $5A5F
+        db $03
+        dw $6A03
+        db $10
+        dw $50F3
+        db $1C
+        dw $496D
+        db $1E
+        dw $5DDA
+        db $10
+        dw $5682
+        db $1E
+        dw $5869
+        db $1C
+        dw $4B5D
+        db $03
+        dw $4586
+        db $04
+        dw $6953
+        db $04
+        dw $6B57
+        db $10
+        dw $50E2
+        db $15
+        dw $690F
+        db $10
+        dw $5010
+        db $01
+        dw $62A1
+        db $03
+        dw $6F54
+        db $10
+        dw $42D1
+        db $0E
+        dw $6FB8
+        db $1C
+        dw $770A
+        db $1C
+        dw $602B
+        db $03
+        dw $7113
+	db $17
+        dw $5B5E
+        db $04
+        dw $773E
+        db $04
+        dw $7763
+        db $1C
+        dw $5DDF
+        db $17  ; 46 load dex screen
+        dw $40DC; 46 load dex screen
+        db $03
+        dw $72E5
+        db $03
+        dw $7A1D
+        db $0F
+        dw $4DEC
+        db $1C
+        dw $4F60
+        db $09
+        dw $7D6B
+        db $05  ; 4C player exclamation
+        dw $7C47; 4C player exclamation
+        db $01
+        dw $5AAF
+        db $01
+        dw $64EB
+        db $0D
+        dw $7CA1
+        db $1C
+        dw $780F
+        db $1C
+        dw $76BD
+        db $1C
+        dw $75E8
+        db $1C
+        dw $77E2
+        db $1C
+        dw $5AD9
+        db $1D
+        dw $405C
+        db $11
+        dw $4169
+        db $1E
+        dw $45BA
+        db $1E
+        dw $4510
+        db $03
+        dw $45BE
+        db $03
+        dw $460B
+        db $03
+        dw $4D99
+        db $01
+        dw $4DE1
+        db $09
+        dw $7D98
+        db $03
+        dw $7473
+        db $04
+        dw $68EF
+        db $04
+        dw $68F6
+        db $07
+        dw $49C6
+        db $16
+        dw $5035
+
 
 SECTION "bank14",DATA,BANK[$14]
 INCBIN "baserom.gbc",$50000,$4000
