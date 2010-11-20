@@ -2181,7 +2181,7 @@ ReadTrainer: ; 5C53
 	ld c,2
 	push bc
 	ld a,$B
-	call $3E6D
+	call Predef
 	pop bc
 	inc de
 	inc de
@@ -3096,7 +3096,7 @@ Function6718: ; 6718
 	xor a
 	ld [$CF94],a
 	ld a,$48
-	call $3E6D
+	call Predef
 	jp $6695
 
 Function672A: ; 672A
@@ -3305,13 +3305,13 @@ EnemySendOut: ; 490E
 	ld b,1
 	push bc
 	ld a,$10
-	call $3E6D
+	call Predef
 	ld hl,$CCF5
 	xor a
 	ld [hl],a
 	pop bc
 	ld a,$10
-	call $3E6D
+	call Predef
 	xor a
 	ld hl,$D065
 	ld [hli],a
@@ -3452,7 +3452,7 @@ EnemySendOut: ; 490E
 	ld [$FFE1],a
 	ld hl,$C427
 	ld a,2
-	call $3E6D
+	call Predef
 	ld a,[$CFD8]
 	call $13D0
 	call $4DEC
