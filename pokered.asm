@@ -337,7 +337,24 @@ incbin "baserom.gbc",$39E,$1627 - $39E
 .GotBank\@
 	jp $24FD
 
-INCBIN "baserom.gbc",$1665,$2442 - $1665
+INCBIN "baserom.gbc",$1665,$20AF - $1665
+
+ConserveBattery: ; 20AF
+; loads 1 into $FFD6 and returns when $FFD6 == 0
+; delays by halting to conserve battery power
+; XXX what zeroes $FFD6?
+	ld a,1
+	ld [$FFD6],a
+.halt\@
+	db $76 ; XXX this is a hack--rgbasm adds a nop after this instr
+	       ; even when ints are enabled
+	ld a,[$FFD6]
+	and a
+	jr nz,.halt\@
+	ret
+
+INCBIN "baserom.gbc",$20BA,$2442 - $20BA
+
 ; XXX where is the pointer to this data?
 MartInventories: ; 2442
 	; first byte $FE, next byte # of items, last byte $FF
