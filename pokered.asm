@@ -614,7 +614,140 @@ Predef: ; 3E6D
 INCBIN "baserom.gbc",$3E94,$4000 - $3E94
 
 SECTION "bank1",DATA,BANK[$1]
-INCBIN "baserom.gbc",$4000,$4000
+INCBIN "baserom.gbc",$4000,$2115
+
+OakSpeech: ; 6115
+	ld a,$FF
+	call $23B1
+	ld a,2
+	ld c,a
+	ld a,$EF    ; song #
+	call $23A1  ; plays music?
+	call ClearScreen
+	call $36A0
+	call $60CA
+	ld a,$18
+	call Predef
+	ld hl,$D53A
+	ld a,$14
+	ld [$CF91],a
+	ld a,1
+	ld [$CF96],a
+	call $2BCF
+	ld a,[$D07C]
+	ld [$D71A],a
+	call $62CE
+	xor a
+	ld [$FFD7],a
+	ld a,[$D732]
+	bit 1,a
+	jp nz,$61BC
+	ld de,$615F
+	ld bc,$1300
+	call $62A4   ; displays Oak sprite?
+	call $6271   ; fades in the sprite?
+	ld hl,HelloWelcomeText
+	call PrintText      ; prints text box
+	call $20D8
+	call ClearScreen
+	ld a,NIDORINO
+	ld [$D0B5],a    ; sprite displayed is stored at this location
+	ld [$CF91],a
+	call $1537      ; this is also related to the sprite
+	ld hl,$C3F6     ; position on tilemap the sprite is displayed
+	call $1384      ; displays sprite?
+	call $6288
+	ld hl,WorldFilledWithText
+	call PrintText      ; Prints text box
+	call $20D8
+	call ClearScreen
+	ld de,$6EDE
+	ld bc,$0400     ; affects the position of the player sprite
+	call $62A4      ; displays player sprite?
+	call $6288
+	ld hl,FirstWhatIsYourNameText
+	call PrintText
+	call $695D ; brings up NewName/Red/etc menu
+	call $20D8
+	call ClearScreen
+	ld de,$6049
+	ld bc,$1300
+	call $62A4 ; displays rival sprite
+	call $6271
+	ld hl,ThisIsMyGrandsonText
+	call PrintText
+	call $69A4
+	call $20D8
+	call ClearScreen
+	ld de,$6EDE
+	ld bc,$0400
+	call $62A4
+	call $20F6
+	ld a,[$D72D]
+	and a
+	jr nz,.next\@
+	ld hl,YourOwnLegendText
+	call PrintText
+.next\@	ld a,[$FFB8]
+	push af
+	ld a,$9C
+	call $23B1
+	pop af
+	ld [$FFB8],a
+	ld [$2000],a
+	ld c,4
+	call Delay
+	ld de,$4180
+	ld hl,$8000
+	ld bc,$050C
+	call $1848
+	ld de,$6FE8
+	ld bc,$0400
+	call $62A4
+	ld c,4
+	call Delay
+	ld de,$7042
+	ld bc,$0400
+	call $62A4
+	call $28A6
+	ld a,[$FFB8]
+	push af
+	ld a,2
+	ld [$C0EF],a
+	ld [$C0F0],a
+	ld a,$A
+	ld [$CFC7],a
+	ld a,$FF
+	ld [$C0EE],a
+	call $23B1
+	pop af
+	ld [$FFB8],a
+	ld [$2000],a
+	ld c,$14
+	call Delay
+	ld hl,$C40A
+	ld b,7
+	ld c,7
+	call $18C4
+	call $36A0
+	ld a,1
+	ld [$CFCB],a
+	ld c,$32
+	call Delay
+	call $20D8
+	jp ClearScreen
+HelloWelcomeText:
+	db $17,$25,$64,$22,$50 ; "Hello welcome to the world of pokemon ..."
+WorldFilledWithText:
+	db $17,$7F,$64,$22,$14,$17,$B3,$64,$22,$50 ; "This world is filled with creatures ..."
+FirstWhatIsYourNameText:
+	db $17,$19,$65,$22,$50 ; "First, what is your name?"
+ThisIsMyGrandsonText:
+	db $17,$34,$65,$22,$50 ; "This is my grandson ..."
+YourOwnLegendText:
+	db $17,$97,$65,$22,$50 ; "Ninten! Your very own legend ..."
+INCBIN "baserom.gbc",$6271,$1D8F
+
 
 SECTION "bank2",DATA,BANK[$2]
 INCBIN "baserom.gbc",$8000,$4000
