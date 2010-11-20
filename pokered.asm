@@ -337,7 +337,24 @@ incbin "baserom.gbc",$39E,$1627 - $39E
 .GotBank\@
 	jp $24FD
 
-INCBIN "baserom.gbc",$1665,$20AF - $1665
+INCBIN "baserom.gbc",$1665,$190F - $1665
+
+ClearScreen: ; 190F
+; clears all tiles in the tilemap,
+; then (writes 1 to $FFD3, waits for it to become 0) three times (XXX why?)
+	ld bc,$0168 ; tilemap size
+	inc b
+	ld hl,$C3A0 ; TILEMAP_START
+	ld a,$7F    ; $7F is blank tile
+.loop\@
+	ld [hli],a
+	dec c
+	jr nz,.loop\@
+	dec b
+	jr nz,.loop\@
+	jp Delay3
+
+INCBIN "baserom.gbc",$1922,$20AF - $1922
 
 ConserveBattery: ; 20AF
 ; loads 1 into $FFD6 and returns when $FFD6 == 0
