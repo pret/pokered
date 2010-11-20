@@ -3295,6 +3295,7 @@ INCBIN "baserom.gbc",$3A849,$3C000 - $3A849
 SECTION "bankF",DATA,BANK[$F]
 INCBIN "baserom.gbc",$3C000,$90E
 
+; XXX this needs cleaning up. it's what runs when a juggler switches pokemon
 EnemySendOut: ; 490E
 	ld hl,$D058
 	xor a
