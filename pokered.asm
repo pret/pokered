@@ -521,7 +521,16 @@ Bankswitch: ; 35D6
 	ld [$2000],a
 	ret
 
-INCBIN "baserom.gbc",$35EC,$3A87 - $35EC
+INCBIN "baserom.gbc",$35EC,$3739 - $35EC
+
+Delay: ; 3739
+; wait n times, where n is the value in c
+	call ConserveBattery
+	dec c
+	jr nz,Delay
+	ret
+
+INCBIN "baserom.gbc",$3740,$3A87 - $3740
 
 AddNTimes: ; 3A87
 ; add bc to hl a times
@@ -547,7 +556,13 @@ PrintText: ; 3C49
 	ld bc,$C4B9
 	jp $1B40
 
-INCBIN "baserom.gbc",$3C5F,$3E6D - $3C5F
+INCBIN "baserom.gbc",$3C5F,$3DD7 - $3C5F
+Delay3: ; 3DD7
+; call Delay with a parameter of 3
+	ld c,3
+	jp Delay
+
+INCBIN "baserom.gbc",$3DDC,$3E6D - $3DDC
 
 Predef: ; 3E6D
 ; runs a predefined ASM command, where the command ID is read from $D0B7
