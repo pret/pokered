@@ -618,11 +618,12 @@ INCBIN "baserom.gbc",$4000,$2115
 
 OakSpeech: ; 6115
 	ld a,$FF
-	call $23B1
-	ld a,2
+	call $23B1 ; stop music
+	ld a,2     ; bank of song
 	ld c,a
 	ld a,$EF    ; song #
-	call $23A1  ; plays music?
+	ld a,$D9
+	call $23A1  ; plays music
 	call ClearScreen
 	call $36A0
 	call $60CA
@@ -719,7 +720,7 @@ OakSpeech: ; 6115
 	ld [$CFC7],a
 	ld a,$FF
 	ld [$C0EE],a
-	call $23B1
+	call $23B1 ; stop music
 	pop af
 	ld [$FFB8],a
 	ld [$2000],a
