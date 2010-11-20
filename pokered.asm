@@ -2728,146 +2728,53 @@ TrainerAIPointers: ; 655C
 ; one entry per trainer class
 ; XXX first byte, ???
 ; next two bytes, pointer to AI subroutine for trainer class
-	db 3
-	dw GenericAI
-
-	db 3
-	dw GenericAI
-
-	db 3
-	dw GenericAI
-
-	db 3
-	dw GenericAI
-
-	db 3
-	dw GenericAI
-
-	db 3
-	dw GenericAI
-
-	db 3
-	dw GenericAI
-
-	db 3
-	dw GenericAI
-
-	db 3
-	dw GenericAI
-
-	db 3
-	dw GenericAI
-
-	db 3
-	dw GenericAI
-
-	db 3
-	dw GenericAI
-
-	db 3 ; juggler_x
-	dw JugglerAI
-
-	db 3
-	dw GenericAI
-
-	db 3
-	dw GenericAI
-
-	db 3
-	dw GenericAI
-
-	db 3
-	dw GenericAI
-
-	db 3
-	dw GenericAI
-
-	db 3
-	dw GenericAI
-
-	db 3
-	dw GenericAI
-
-	db 3 ; juggler
-	dw JugglerAI
-
-	db 3
-	dw GenericAI
-
-	db 3
-	dw GenericAI
-
-	db 2 ; blackbelt
-	dw BlackbeltAI
-
-	db 3
-	dw GenericAI
-
-	db 3
-	dw GenericAI
-
-	db 1 ; chief
-	dw GenericAI
-
-	db 3
-	dw GenericAI
-
-	db 1 ; giovanni
-	dw GiovanniAI
-
-	db 3
-	dw GenericAI
-
-	db 2 ; cooltrainerm
-	dw CooltrainerMAI
-
-	db 1 ; cooltrainerf
-	dw CooltrainerFAI
-
-	db 2 ; bruno
-	dw BrunoAI
-
-	db 5 ; brock
-	dw BrockAI
-
-	db 1 ; misty
-	dw MistyAI
-
-	db 1 ; surge
-	dw LtSurgeAI
-
-	db 1 ; erika
-	dw ErikaAI
-
-	db 2 ; koga
-	dw KogaAI
-
-	db 2 ; blaine
-	dw BlaineAI
-
-	db 1 ; sabrina
-	dw SabrinaAI
-
-	db 3
-	dw GenericAI
-
-	db 1 ; sony2
-	dw Sony2AI
-
-	db 1 ; sony3
-	dw Sony3AI
-
-	db 2 ; lorelei
-	dw LoreleiAI
-
-	db 3
-	dw GenericAI
-
-	db 2 ; agatha
-	dw AgathaAI
-
-	db 1 ; lance
-	dw LanceAI
+	dbw 3,GenericAI
+	dbw 3,GenericAI
+	dbw 3,GenericAI
+	dbw 3,GenericAI
+	dbw 3,GenericAI
+	dbw 3,GenericAI
+	dbw 3,GenericAI
+	dbw 3,GenericAI
+	dbw 3,GenericAI
+	dbw 3,GenericAI
+	dbw 3,GenericAI
+	dbw 3,GenericAI
+	dbw 3,JugglerAI ; juggler_x
+	dbw 3,GenericAI
+	dbw 3,GenericAI
+	dbw 3,GenericAI
+	dbw 3,GenericAI
+	dbw 3,GenericAI
+	dbw 3,GenericAI
+	dbw 3,GenericAI
+	dbw 3,JugglerAI ; juggler
+	dbw 3,GenericAI
+	dbw 3,GenericAI
+	dbw 2,BlackbeltAI ; blackbelt
+	dbw 3,GenericAI
+	dbw 3,GenericAI
+	dbw 1,GenericAI ; chief
+	dbw 3,GenericAI
+	dbw 1,GiovanniAI ; giovanni
+	dbw 3,GenericAI
+	dbw 2,CooltrainerMAI ; cooltrainerm
+	dbw 1,CooltrainerFAI ; cooltrainerf
+	dbw 2,BrunoAI ; bruno
+	dbw 5,BrockAI ; brock
+	dbw 1,MistyAI ; misty
+	dbw 1,LtSurgeAI ; surge
+	dbw 1,ErikaAI ; erika
+	dbw 2,KogaAI ; koga
+	dbw 2,BlaineAI ; blaine
+	dbw 1,SabrinaAI ; sabrina
+	dbw 3,GenericAI
+	dbw 1,Sony2AI ; sony2
+	dbw 1,Sony3AI ; sony3
+	dbw 2,LoreleiAI ; lorelei
+	dbw 3,GenericAI
+	dbw 2,AgathaAI ; agatha
+	dbw 1,LanceAI ; lance
 
 JugglerAI:
 	cp $40
@@ -3740,205 +3647,105 @@ GetPredefPointer:
 PredefPointers: ; 7E79
 ; these are pointers to ASM routines.
 ; they appear to be used in overworld map scripts.
-        db $0F
-        dw $4D60
-        db $0F
-        dw $70C6
-        db $0F
-        dw $7073
-        db $0B
-        dw $7E40
-        db $0F
-        dw $7103
-        db $1E
-        dw $5ABA
-        db $03
-        dw $7132
-        db $03
-        dw $76A5
-        db $1E
-        dw $4D5E
-        db $03
-        dw $771E
-        db $03
-        dw $771E
-        db $03
-        dw $781D
-        db $03
-        dw $7836
-        db $03
-        dw $771E
-        db $03
-        dw $771E
-        db $03
-        dw $7850
-        db $03
-        dw $7666
-        db $03
-        dw $71D7
-        db $03
-        dw $71A6
-        db $03
-        dw $469C
-        db $0F
-        dw $4A83
-        db $03
-        dw $71C8
-        db $03
-        dw $71C8
-        db $03
-        dw $6E9E
-        db $03
-        dw $7850
-        db $03
-        dw $4754
-        db $0E
-        dw $6F5B
-        db $01
-        dw $6E43
-        db $03
-        dw $78A5
-        db $03
-        dw $3EB5
-        db $03
-        dw $3E2E
-        db $12
-        dw $40EB
-        db $03
-        dw $78BA
-        db $12
-        dw $40FF
-        db $03
-        dw $7929
-        db $03
-        dw $79A0
-        db $12
-        dw $4125
-        db $03
-        dw $7A1D
-        db $03
-        dw $79DC
-        db $01
-        dw $5AB0
-        db $0F
-        dw $6D02
-        db $10
-        dw $4000
-        db $0E
-        dw $6D1C
-        db $1C
-        dw $778C
-        db $0F
-        dw $6F18
-        db $01
-        dw $5A5F
-        db $03
-        dw $6A03
-        db $10
-        dw $50F3
-        db $1C
-        dw $496D
-        db $1E
-        dw $5DDA
-        db $10
-        dw $5682
-        db $1E
-        dw $5869
-        db $1C
-        dw $4B5D
-        db $03
-        dw $4586
-        db $04
-        dw $6953
-        db $04
-        dw $6B57
-        db $10
-        dw $50E2
-        db $15
-        dw $690F
-        db $10
-        dw $5010
-        db $01
-        dw $62A1
-        db $03
-        dw $6F54
-        db $10
-        dw $42D1
-        db $0E
-        dw $6FB8
-        db $1C
-        dw $770A
-        db $1C
-        dw $602B
-        db $03
-        dw $7113
-	db $17
-        dw $5B5E
-        db $04
-        dw $773E
-        db $04
-        dw $7763
-        db $1C
-        dw $5DDF
-        db $17  ; 46 load dex screen
-        dw $40DC; 46 load dex screen
-        db $03
-        dw $72E5
-        db $03
-        dw $7A1D
-        db $0F
-        dw $4DEC
-        db $1C
-        dw $4F60
-        db $09
-        dw $7D6B
-        db $05  ; 4C player exclamation
-        dw $7C47; 4C player exclamation
-        db $01
-        dw $5AAF
-        db $01
-        dw $64EB
-        db $0D
-        dw $7CA1
-        db $1C
-        dw $780F
-        db $1C
-        dw $76BD
-        db $1C
-        dw $75E8
-        db $1C
-        dw $77E2
-        db $1C
-        dw $5AD9
-        db $1D
-        dw $405C
-        db $11
-        dw $4169
-        db $1E
-        dw $45BA
-        db $1E
-        dw $4510
-        db $03
-        dw $45BE
-        db $03
-        dw $460B
-        db $03
-        dw $4D99
-        db $01
-        dw $4DE1
-        db $09
-        dw $7D98
-        db $03
-        dw $7473
-        db $04
-        dw $68EF
-        db $04
-        dw $68F6
-        db $07
-        dw $49C6
-        db $16
-        dw $5035
-
+        dbw $0F,$4D60
+        dbw $0F,$70C6
+        dbw $0F,$7073
+        dbw $0B,$7E40
+        dbw $0F,$7103
+        dbw $1E,$5ABA
+        dbw $03,$7132
+        dbw $03,$76A5
+        dbw $1E,$4D5E
+        dbw $03,$771E
+        dbw $03,$771E
+        dbw $03,$781D
+        dbw $03,$7836
+        dbw $03,$771E
+        dbw $03,$771E
+        dbw $03,$7850
+        dbw $03,$7666
+        dbw $03,$71D7
+        dbw $03,$71A6
+        dbw $03,$469C
+        dbw $0F,$4A83
+        dbw $03,$71C8
+        dbw $03,$71C8
+        dbw $03,$6E9E
+        dbw $03,$7850
+        dbw $03,$4754
+        dbw $0E,$6F5B
+        dbw $01,$6E43
+        dbw $03,$78A5
+        dbw $03,$3EB5
+        dbw $03,$3E2E
+        dbw $12,$40EB
+        dbw $03,$78BA
+        dbw $12,$40FF
+        dbw $03,$7929
+        dbw $03,$79A0
+        dbw $12,$4125
+        dbw $03,$7A1D
+        dbw $03,$79DC
+        dbw $01,$5AB0
+        dbw $0F,$6D02
+        dbw $10,$4000
+        dbw $0E,$6D1C
+        dbw $1C,$778C
+        dbw $0F,$6F18
+        dbw $01,$5A5F
+        dbw $03,$6A03
+        dbw $10,$50F3
+        dbw $1C,$496D
+        dbw $1E,$5DDA
+        dbw $10,$5682
+        dbw $1E,$5869
+        dbw $1C,$4B5D
+        dbw $03,$4586
+        dbw $04,$6953
+        dbw $04,$6B57
+        dbw $10,$50E2
+        dbw $15,$690F
+        dbw $10,$5010
+        dbw $01,$62A1
+        dbw $03,$6F54
+        dbw $10,$42D1
+        dbw $0E,$6FB8
+        dbw $1C,$770A
+        dbw $1C,$602B
+        dbw $03,$7113
+	dbw $17,$5B5E
+        dbw $04,$773E
+        dbw $04,$7763
+        dbw $1C,$5DDF
+        dbw $17,$40DC; 46 load dex screen
+        dbw $03,$72E5
+        dbw $03,$7A1D
+        dbw $0F,$4DEC
+        dbw $1C,$4F60
+        dbw $09,$7D6B
+        dbw $05,$7C47; 4C player exclamation
+        dbw $01,$5AAF
+        dbw $01,$64EB
+        dbw $0D,$7CA1
+        dbw $1C,$780F
+        dbw $1C,$76BD
+        dbw $1C,$75E8
+        dbw $1C,$77E2
+        dbw $1C,$5AD9
+        dbw $1D,$405C
+        dbw $11,$4169
+        dbw $1E,$45BA
+        dbw $1E,$4510
+        dbw $03,$45BE
+        dbw $03,$460B
+        dbw $03,$4D99
+        dbw $01,$4DE1
+        dbw $09,$7D98
+        dbw $03,$7473
+        dbw $04,$68EF
+        dbw $04,$68F6
+        dbw $07,$49C6
+        dbw $16,$5035
 
 SECTION "bank14",DATA,BANK[$14]
 INCBIN "baserom.gbc",$50000,$4000
