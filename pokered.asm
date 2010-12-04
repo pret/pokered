@@ -622,7 +622,6 @@ OakSpeech: ; 6115
 	ld a,2     ; bank of song
 	ld c,a
 	ld a,$EF    ; song #
-	ld a,$D9
 	call $23A1  ; plays music
 	call ClearScreen
 	call $36A0
