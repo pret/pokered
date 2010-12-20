@@ -1,3 +1,10 @@
+; tilesets' headers macro
+TSETHEAD: MACRO
+	db BANK(\2)
+	dw \1,\2,\3
+	db \4,\5,\6,\7,\8
+	ENDM
+
 ; macro for putting a byte then a word
 dbw: MACRO
 	db \1

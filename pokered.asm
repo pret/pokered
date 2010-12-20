@@ -337,7 +337,46 @@ incbin "baserom.gbc",$39E,$1627 - $39E
 .GotBank\@
 	jp $24FD
 
-INCBIN "baserom.gbc",$1665,$190F - $1665
+INCBIN "baserom.gbc",$1665,$172F - $1665
+
+Tset0B_Coll:
+	INCBIN "baserom.gbc",$172F,$1735-$172F
+Tset00_Coll:
+	INCBIN "baserom.gbc",$1735,$1749-$1735
+Tset01_Coll:
+	INCBIN "baserom.gbc",$1749,$1753-$1749
+Tset02_Coll:
+	INCBIN "baserom.gbc",$1753,$1759-$1753
+Tset05_Coll:
+	INCBIN "baserom.gbc",$1759,$1765-$1759
+Tset03_Coll:
+	INCBIN "baserom.gbc",$1765,$1775-$1765
+Tset08_Coll:
+	INCBIN "baserom.gbc",$1775,$177F-$1775
+Tset09_Coll:
+	INCBIN "baserom.gbc",$177F,$178A-$177F
+Tset0D_Coll:
+	INCBIN "baserom.gbc",$178A,$1795-$178A
+Tset0E_Coll:
+	INCBIN "baserom.gbc",$1795,$179A-$1795
+Tset0F_Coll:
+	INCBIN "baserom.gbc",$179A,$17A2-$179A
+Tset10_Coll:
+	INCBIN "baserom.gbc",$17A2,$17AC-$17A2
+Tset11_Coll:
+	INCBIN "baserom.gbc",$17AC,$17B8-$17AC
+Tset12_Coll:
+	INCBIN "baserom.gbc",$17B8,$17C0-$17B8
+Tset13_Coll:
+	INCBIN "baserom.gbc",$17C0,$17CA-$17C0
+Tset14_Coll:
+	INCBIN "baserom.gbc",$17CA,$17D1-$17CA
+Tset15_Coll:
+	INCBIN "baserom.gbc",$17D1,$17DD-$17D1
+Tset16_Coll:
+	INCBIN "baserom.gbc",$17DD,$17F0-$17DD
+Tset17_Coll:
+	INCBIN "baserom.gbc",$17F0,$190F-$17F0
 
 ClearScreen: ; 190F
 ; clears all tiles in the tilemap,
@@ -1006,7 +1045,35 @@ MapHeaderBanks: ; 423D
 	db $1D
 	db $1D
 
-INCBIN "baserom.gbc",$C335,$CEB8 - $C335
+INCBIN "baserom.gbc",$C335,$C766-$C335
+	ld hl,TilesetsHeadPtr
+INCBIN "baserom.gbc",$C769,$C7BE-$C769
+TilesetsHeadPtr:
+	TSETHEAD Tset00_Block,Tset00_GFX,Tset00_Coll,$FF,$FF,$FF,$52,2
+	TSETHEAD Tset01_Block,Tset01_GFX,Tset01_Coll,$FF,$FF,$FF,$FF,0
+	TSETHEAD Tset02_Block,Tset02_GFX,Tset02_Coll,$18,$19,$1E,$FF,0
+	TSETHEAD Tset03_Block,Tset03_GFX,Tset03_Coll,$FF,$FF,$FF,$20,1
+	TSETHEAD Tset01_Block,Tset01_GFX,Tset01_Coll,$FF,$FF,$FF,$FF,0
+	TSETHEAD Tset05_Block,Tset05_GFX,Tset05_Coll,$3A,$FF,$FF,$FF,2
+	TSETHEAD Tset02_Block,Tset02_GFX,Tset02_Coll,$18,$19,$1E,$FF,0
+	TSETHEAD Tset05_Block,Tset05_GFX,Tset05_Coll,$3A,$FF,$FF,$FF,2
+	TSETHEAD Tset08_Block,Tset08_GFX,Tset08_Coll,$FF,$FF,$FF,$FF,0
+	TSETHEAD Tset09_Block,Tset09_GFX,Tset09_Coll,$17,$32,$FF,$FF,0
+	TSETHEAD Tset09_Block,Tset09_GFX,Tset09_Coll,$17,$32,$FF,$FF,0
+	TSETHEAD Tset0B_Block,Tset0B_GFX,Tset0B_Coll,$FF,$FF,$FF,$FF,0
+	TSETHEAD Tset09_Block,Tset09_GFX,Tset09_Coll,$17,$32,$FF,$FF,0
+	TSETHEAD Tset0D_Block,Tset0D_GFX,Tset0D_Coll,$FF,$FF,$FF,$FF,1
+	TSETHEAD Tset0E_Block,Tset0E_GFX,Tset0E_Coll,$FF,$FF,$FF,$FF,1
+	TSETHEAD Tset0F_Block,Tset0F_GFX,Tset0F_Coll,$12,$FF,$FF,$FF,0
+	TSETHEAD Tset10_Block,Tset10_GFX,Tset10_Coll,$FF,$FF,$FF,$FF,0
+	TSETHEAD Tset11_Block,Tset11_GFX,Tset11_Coll,$FF,$FF,$FF,$FF,1
+	TSETHEAD Tset12_Block,Tset12_GFX,Tset12_Coll,$15,$36,$FF,$FF,0
+	TSETHEAD Tset13_Block,Tset13_GFX,Tset13_Coll,$FF,$FF,$FF,$FF,0
+	TSETHEAD Tset14_Block,Tset14_GFX,Tset14_Coll,$FF,$FF,$FF,$FF,0
+	TSETHEAD Tset15_Block,Tset15_GFX,Tset15_Coll,$07,$17,$FF,$FF,0
+	TSETHEAD Tset16_Block,Tset16_GFX,Tset16_Coll,$12,$FF,$FF,$FF,1
+	TSETHEAD Tset17_Block,Tset17_GFX,Tset17_Coll,$FF,$FF,$FF,$45,1
+INCBIN "baserom.gbc",$C8DE,$CEB8-$C8DE
 
 ; wild pokemon data: from 4EB8 to 55C7
 
@@ -3945,13 +4012,87 @@ SECTION "bank18",DATA,BANK[$18]
 INCBIN "baserom.gbc",$60000,$4000
 
 SECTION "bank19",DATA,BANK[$19]
-INCBIN "baserom.gbc",$64000,$4000
+Tset00_GFX:
+	INCBIN "baserom.gbc",$64000,$645E0-$64000
+Tset00_Block:
+	INCBIN "baserom.gbc",$645E0,$64DE0-$645E0
+Tset01_GFX:
+	INCBIN "baserom.gbc",$64DE0,$65270-$64DE0
+Tset01_Block:
+	INCBIN "baserom.gbc",$65270,$653A0-$65270
+Tset08_GFX:
+	INCBIN "baserom.gbc",$653A0,$65980-$653A0
+Tset08_Block:
+	INCBIN "baserom.gbc",$65980,$65BB0-$65980
+Tset13_GFX:
+	INCBIN "baserom.gbc",$65BB0,$66190-$65BB0
+Tset13_Block:
+	INCBIN "baserom.gbc",$66190,$66610-$66190
+Tset0E_GFX:
+	INCBIN "baserom.gbc",$66610,$66BF0-$66610
+Tset0E_Block:
+	INCBIN "baserom.gbc",$66BF0,$66D60-$66BF0
+Tset10_GFX:
+	INCBIN "baserom.gbc",$66D60,$67350-$66D60
+Tset10_Block:
+	INCBIN "baserom.gbc",$67350,$676F0-$67350
+Tset17_GFX:
+	INCBIN "baserom.gbc",$676F0,$67B50-$676F0
+Tset17_Block:
+	INCBIN "baserom.gbc",$67B50,$68000-$67B50
 
 SECTION "bank1A",DATA,BANK[$1A]
-INCBIN "baserom.gbc",$68000,$4000
+INCBIN "baserom.gbc",$68000,$6807F-$68000
+Tset05_GFX:
+	INCBIN "baserom.gbc",$6807F,$6867F-$6807F
+Tset05_Block:
+	INCBIN "baserom.gbc",$6867F,$68DBF-$6867F
+Tset02_GFX:
+	INCBIN "baserom.gbc",$68DBF,$693BF-$68DBF
+Tset02_Block:
+	INCBIN "baserom.gbc",$693BF,$6960F-$693BF
+Tset09_GFX:
+	INCBIN "baserom.gbc",$6960F,$69BFF-$6960F
+Tset09_Block:
+	INCBIN "baserom.gbc",$69BFF,$6A3FF-$69BFF
+Tset03_GFX:
+	INCBIN "baserom.gbc",$6A3FF,$6A9FF-$6A3FF
+Tset03_Block:
+	INCBIN "baserom.gbc",$6A9FF,$6B1FF-$6A9FF
+Tset16_GFX:
+	INCBIN "baserom.gbc",$6B1FF,$6B7FF-$6B1FF
+Tset16_Block:
+	INCBIN "baserom.gbc",$6B7FF,$6C000-$6B7FF
 
 SECTION "bank1B",DATA,BANK[$1B]
-INCBIN "baserom.gbc",$6C000,$4000
+Tset0F_GFX:
+	INCBIN "baserom.gbc",$6C000,$6C5C0-$6C000
+Tset0F_Block:
+	INCBIN "baserom.gbc",$6C5C0,$6CCA0-$6C5C0
+Tset11_GFX:
+	INCBIN "baserom.gbc",$6CCA0,$6D0C0-$6CCA0
+Tset11_Block:
+	INCBIN "baserom.gbc",$6D0C0,$6D8C0-$6D0C0
+Tset12_GFX:
+	INCBIN "baserom.gbc",$6D8C0,$6DEA0-$6D8C0
+Tset12_Block:
+	INCBIN "baserom.gbc",$6DEA0,$6E390-$6DEA0
+Tset0D_GFX:
+	INCBIN "baserom.gbc",$6E390,$6E930-$6E390
+Tset0D_Block:
+	INCBIN "baserom.gbc",$6E930,$6ED10-$6E930
+Tset14_GFX:
+	INCBIN "baserom.gbc",$6ED10,$6F2D0-$6ED10
+Tset14_Block:
+	INCBIN "baserom.gbc",$6F2D0,$6F670-$6F2D0
+Tset15_GFX:
+	INCBIN "baserom.gbc",$6F670,$6FB20-$6F670
+Tset15_Block:
+	INCBIN "baserom.gbc",$6FB20,$6FD60-$6FB20
+Tset0B_GFX:
+	INCBIN "baserom.gbc",$6FD60,$6FEF0-$6FD60
+Tset0B_Block:
+	INCBIN "baserom.gbc",$6FEF0,$70000-$6FEF0
 
 SECTION "bank1C",DATA,BANK[$1C]
 INCBIN "baserom.gbc",$70000,$25C8
