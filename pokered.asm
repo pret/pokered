@@ -4095,7 +4095,219 @@ Tset0B_Block:
 	INCBIN "baserom.gbc",$6FEF0,$70000-$6FEF0
 
 SECTION "bank1C",DATA,BANK[$1C]
-INCBIN "baserom.gbc",$70000,$25C8
+INCBIN "baserom.gbc",$70000,$1313
+
+ExternalMapEntries: ; 5313
+	EMAP $2,$B,PalletTownName
+	EMAP $2,$8,ViridianCityName
+	EMAP $2,$3,PewterCityName
+	EMAP $A,$2,CeruleanCityName
+	EMAP $E,$5,LavenderTownName
+	EMAP $A,$9,VermilionCityName
+	EMAP $7,$5,CeladonCityName
+	EMAP $8,$D,FuchsiaCityName
+	EMAP $2,$F,CinnabarIslandName
+	EMAP $0,$2,IndigoPlateauName
+	EMAP $A,$5,SaffronCityName
+	EMAP $0,$0,PalletTownName ; unused
+	EMAP $2,$A,Route1Name
+	EMAP $2,$6,Route2Name
+	EMAP $4,$3,Route3Name
+	EMAP $8,$2,Route4Name
+	EMAP $A,$3,Route5Name
+	EMAP $A,$8,Route6Name
+	EMAP $8,$5,Route7Name
+	EMAP $D,$5,Route8Name
+	EMAP $D,$2,Route9Name
+	EMAP $E,$4,Route10Name
+	EMAP $C,$9,Route11Name
+	EMAP $E,$9,Route12Name
+	EMAP $D,$B,Route13Name
+	EMAP $B,$C,Route14Name
+	EMAP $A,$D,Route15Name
+	EMAP $5,$5,Route16Name
+	EMAP $4,$8,Route17Name
+	EMAP $6,$D,Route18Name
+	EMAP $6,$F,Route19Name
+	EMAP $4,$F,Route20Name
+	EMAP $2,$D,Route21Name
+	EMAP $0,$8,Route22Name
+	EMAP $0,$6,Route23Name
+	EMAP $A,$1,Route24Name
+	EMAP $B,$0,Route25Name
+
+InternalMapEntries: ; 5382
+	IMAP $29,$2,$B,PalletTownName
+	IMAP $2E,$2,$8,ViridianCityName
+	IMAP $33,$2,$6,Route2Name
+	IMAP $34,$2,$4,ViridianForestName
+	IMAP $3B,$2,$3,PewterCityName
+	IMAP $3E,$6,$2,MountMoonName
+	IMAP $44,$A,$2,CeruleanCityName
+	IMAP $45,$5,$2,Route4Name
+	IMAP $46,$A,$2,CeruleanCityName
+	IMAP $49,$A,$4,Route5Name
+	IMAP $4C,$A,$6,Route6Name
+	IMAP $4F,$9,$5,Route7Name
+	IMAP $51,$B,$5,Route8Name
+	IMAP $53,$E,$3,RockTunnelName
+	IMAP $54,$F,$4,PowerPlantName
+	IMAP $57,$D,$9,Route11Name
+	IMAP $58,$E,$7,Route12Name
+	IMAP $59,$C,$0,SeaCottageName
+	IMAP $5F,$A,$9,VermilionCityName
+	IMAP $69,$9,$A,SSAnneName
+	IMAP $6D,$0,$4,VictoryRoadName
+	IMAP $77,$0,$2,PokemonLeagueName
+	IMAP $78,$A,$5,UndergroundPathName
+	IMAP $79,$0,$2,PokemonLeagueName
+	IMAP $7A,$A,$5,UndergroundPathName
+	IMAP $8D,$7,$5,CeladonCityName
+	IMAP $8E,$E,$5,LavenderTownName
+	IMAP $95,$F,$5,PokemonTowerName
+	IMAP $98,$E,$5,LavenderTownName
+	IMAP $9C,$8,$D,FuchsiaCityName
+	IMAP $9D,$8,$C,SafariZoneName
+	IMAP $9F,$8,$D,FuchsiaCityName
+	IMAP $A3,$5,$F,SeafoamIslandsName
+	IMAP $A4,$A,$9,VermilionCityName
+	IMAP $A5,$8,$D,FuchsiaCityName
+	IMAP $A6,$2,$F,PokemonMansionName
+	IMAP $AE,$2,$F,CinnabarIslandName
+	IMAP $AF,$0,$2,IndigoPlateauName
+	IMAP $B8,$A,$5,SaffronCityName
+	IMAP $BA,$9,$D,Route15Name
+	IMAP $BD,$4,$5,Route16Name
+	IMAP $BE,$E,$A,Route12Name
+	IMAP $C0,$7,$D,Route18Name
+	IMAP $C1,$5,$F,SeafoamIslandsName
+	IMAP $C2,$0,$7,Route22Name
+	IMAP $C3,$0,$4,VictoryRoadName
+	IMAP $C4,$E,$7,Route12Name
+	IMAP $C5,$A,$9,VermilionCityName
+	IMAP $C6,$3,$4,DiglettsCaveName
+	IMAP $C7,$0,$4,VictoryRoadName
+	IMAP $CF,$7,$5,RocketHQName
+	IMAP $D6,$A,$5,SilphCoName
+	IMAP $D9,$2,$F,PokemonMansionName
+	IMAP $E2,$8,$C,SafariZoneName
+	IMAP $E5,$9,$1,CeruleanCaveName
+	IMAP $E6,$E,$5,LavenderTownName
+	IMAP $E7,$A,$2,CeruleanCityName
+	IMAP $E9,$E,$3,RockTunnelName
+	IMAP $ED,$A,$5,SilphCoName
+	IMAP $F8,$0,$2,PokemonLeagueName
+	db $FF
+
+MapNames: ; 5473
+PalletTownName:
+db $8f,$80,$8b,$8b,$84,$93,$7f,$93,$8e,$96,$8d,$50
+ViridianCityName:
+db $95,$88,$91,$88,$83,$88,$80,$8d,$7f,$82,$88,$93,$98,$50
+PewterCityName:
+db $8f,$84,$96,$93,$84,$91,$7f,$82,$88,$93,$98,$50
+CeruleanCityName:
+db $82,$84,$91,$94,$8b,$84,$80,$8d,$7f,$82,$88,$93,$98,$50
+LavenderTownName:
+db $8b,$80,$95,$84,$8d,$83,$84,$91,$7f,$93,$8e,$96,$8d,$50
+VermilionCityName:
+db $95,$84,$91,$8c,$88,$8b,$88,$8e,$8d,$7f,$82,$88,$93,$98,$50
+CeladonCityName:
+db $82,$84,$8b,$80,$83,$8e,$8d,$7f,$82,$88,$93,$98,$50
+FuchsiaCityName:
+db $85,$94,$82,$87,$92,$88,$80,$7f,$82,$88,$93,$98,$50
+CinnabarIslandName:
+db $82,$88,$8d,$8d,$80,$81,$80,$91,$7f,$88,$92,$8b,$80,$8d,$83,$50
+IndigoPlateauName:
+db $88,$8d,$83,$88,$86,$8e,$7f,$8f,$8b,$80,$93,$84,$80,$94,$50
+SaffronCityName:
+db $92,$80,$85,$85,$91,$8e,$8d,$7f,$82,$88,$93,$98,$50
+Route1Name:
+db $91,$8e,$94,$93,$84,$7f,$f7,$50
+Route2Name:
+db $91,$8e,$94,$93,$84,$7f,$f8,$50
+Route3Name:
+db $91,$8e,$94,$93,$84,$7f,$f9,$50
+Route4Name:
+db $91,$8e,$94,$93,$84,$7f,$fa,$50
+Route5Name:
+db $91,$8e,$94,$93,$84,$7f,$fb,$50
+Route6Name:
+db $91,$8e,$94,$93,$84,$7f,$fc,$50
+Route7Name:
+db $91,$8e,$94,$93,$84,$7f,$fd,$50
+Route8Name:
+db $91,$8e,$94,$93,$84,$7f,$fe,$50
+Route9Name:
+db $91,$8e,$94,$93,$84,$7f,$ff,$50
+Route10Name:
+db $91,$8e,$94,$93,$84,$7f,$f7,$f6,$50
+Route11Name:
+db $91,$8e,$94,$93,$84,$7f,$f7,$f7,$50
+Route12Name:
+db $91,$8e,$94,$93,$84,$7f,$f7,$f8,$50
+Route13Name:
+db $91,$8e,$94,$93,$84,$7f,$f7,$f9,$50
+Route14Name:
+db $91,$8e,$94,$93,$84,$7f,$f7,$fa,$50
+Route15Name:
+db $91,$8e,$94,$93,$84,$7f,$f7,$fb,$50
+Route16Name:
+db $91,$8e,$94,$93,$84,$7f,$f7,$fc,$50
+Route17Name:
+db $91,$8e,$94,$93,$84,$7f,$f7,$fd,$50
+Route18Name:
+db $91,$8e,$94,$93,$84,$7f,$f7,$fe,$50
+Route19Name:
+db $92,$84,$80,$7f,$91,$8e,$94,$93,$84,$7f,$f7,$ff,$50
+Route20Name:
+db $92,$84,$80,$7f,$91,$8e,$94,$93,$84,$7f,$f8,$f6,$50
+Route21Name:
+db $92,$84,$80,$7f,$91,$8e,$94,$93,$84,$7f,$f8,$f7,$50
+Route22Name:
+db $91,$8e,$94,$93,$84,$7f,$f8,$f8,$50
+Route23Name:
+db $91,$8e,$94,$93,$84,$7f,$f8,$f9,$50
+Route24Name:
+db $91,$8e,$94,$93,$84,$7f,$f8,$fa,$50
+Route25Name:
+db $91,$8e,$94,$93,$84,$7f,$f8,$fb,$50
+ViridianForestName:
+db $95,$88,$91,$88,$83,$88,$80,$8d,$7f,$85,$8e,$91,$84,$92,$93,$50
+MountMoonName:
+db $8c,$93,$e8,$8c,$8e,$8e,$8d,$50
+RockTunnelName:
+db $91,$8e,$82,$8a,$7f,$93,$94,$8d,$8d,$84,$8b,$50
+SeaCottageName:
+db $92,$84,$80,$7f,$82,$8e,$93,$93,$80,$86,$84,$50
+SSAnneName:
+db $92,$e8,$92,$e8,$80,$8d,$8d,$84,$50
+PokemonLeagueName:
+db $54,$8c,$8e,$8d,$7f,$8b,$84,$80,$86,$94,$84,$50
+UndergroundPathName:
+db $94,$8d,$83,$84,$91,$86,$91,$8e,$94,$8d,$83,$7f,$8f,$80,$93,$87,$50
+PokemonTowerName:
+db $54,$8c,$8e,$8d,$7f,$93,$8e,$96,$84,$91,$50
+SeafoamIslandsName:
+db $92,$84,$80,$85,$8e,$80,$8c,$7f,$88,$92,$8b,$80,$8d,$83,$92,$50
+VictoryRoadName:
+db $95,$88,$82,$93,$8e,$91,$98,$7f,$91,$8e,$80,$83,$50
+DiglettsCaveName:
+db $83,$88,$86,$8b,$84,$93,$93,$bd,$7f,$82,$80,$95,$84,$50
+RocketHQName:
+db $91,$8e,$82,$8a,$84,$93,$7f,$87,$90,$50
+SilphCoName:
+db $92,$88,$8b,$8f,$87,$7f,$82,$8e,$e8,$50
+PokemonMansionName:
+db $4a,$7f,$8c,$80,$8d,$92,$88,$8e,$8d,$50
+SafariZoneName:
+db $92,$80,$85,$80,$91,$88,$7f,$99,$8e,$8d,$84,$50
+CeruleanCaveName:
+db $82,$84,$91,$94,$8b,$84,$80,$8d,$7f,$82,$80,$95,$84,$50
+PowerPlantName:
+db $8f,$8e,$96,$84,$91,$7f,$8f,$8b,$80,$8d,$93,$50
+
+INCBIN "baserom.gbc",$716BE,$725C8-$716BE
 
 MonsterPalettes: ; 65C8
 	db PAL_MEWMON    ; MISSINGNO

@@ -1,3 +1,25 @@
+; external map entry macro
+EMAP: MACRO ; emap x-coordinate,y-coordinate,textpointer
+; the appearance of towns and routes in the town map, indexed by map id
+	; nybble: y-coordinate
+	; nybble: x-coordinate
+	; word  : pointer to map name
+	db (\1 + (\2 << 4))
+	dw \3
+	ENDM
+
+; internal map entry macro
+IMAP: MACRO ; imap mapid_less_than,x-coordinate,y-coordinate,textpointer
+; the appearance of buildings and dungeons in the town map
+	; byte  : maximum map id subject to this rule
+	; nybble: y-coordinate
+	; nybble: x-coordinate
+	; word  : pointer to map name
+	db \1
+	db \2 + \3 << 4
+	dw \4
+	ENDM
+
 ; tilesets' headers macro
 TSETHEAD: MACRO
 	db BANK(\2)
