@@ -7,5 +7,8 @@ pokered.gbc: pokered.o
 pokered.o: pokered.asm constants.asm
 	rgbasm -o pokered.o pokered.asm
 
+redrle: extras/redrle.c
+	${CC} -o $@ $>
+
 clean:
 	rm -f pokered.o pokered.gbc
