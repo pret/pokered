@@ -4095,7 +4095,13 @@ Tset0B_Block:
 	INCBIN "baserom.gbc",$6FEF0,$70000-$6FEF0
 
 SECTION "bank1C",DATA,BANK[$1C]
-INCBIN "baserom.gbc",$70000,$1313
+INCBIN "baserom.gbc",$70000,$1100
+
+CompressedMap: ; 5100
+; you can decompress this file with the redrle program in the extras/ dir
+	INCBIN "baserom.gbc",$71100,$711AB-$71100
+
+INCBIN "baserom.gbc",$711AB,$71313-$711AB
 
 ExternalMapEntries: ; 5313
 	EMAP $2,$B,PalletTownName
