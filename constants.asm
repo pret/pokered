@@ -846,3 +846,8 @@ ROUTE_22        EQU $21
 ROUTE_23        EQU $22
 ROUTE_24        EQU $23
 ROUTE_25        EQU $24
+
+; Evolution types
+EV_LEVEL	EQU 1
+EV_ITEM 	EQU 2
+EV_TRADE	EQU 3
