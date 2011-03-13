@@ -6487,7 +6487,32 @@ db $82,$84,$91,$94,$8b,$84,$80,$8d,$7f,$82,$80,$95,$84,$50
 PowerPlantName:
 db $8f,$8e,$96,$84,$91,$7f,$8f,$8b,$80,$8d,$93,$50
 
-INCBIN "baserom.gbc",$716BE,$725C8-$716BE
+INCBIN "baserom.gbc",$716BE,$71B7B-$716BE
+
+TradeMons: ; 5B7B
+; givemonster, getmonster, textstring, nickname (11 bytes), 14 bytes total
+	; TERRY
+	db NIDORINO,NIDORINA,0,$93,$84,$91,$91,$98,$50,$50,$50,$50,$50,$50
+	; MARCEL
+	db ABRA,MR__MIME,0,$8C,$80,$91,$82,$84,$8B,$50,$50,$50,$50,$50
+	; CHIKUCHIKU
+	db BUTTERFREE,BEEDRILL,2,$82,$87,$88,$8A,$94,$82,$87,$88,$8A,$94,$50
+	; SAILOR
+	db PONYTA,SEEL,0,$92,$80,$88,$8B,$8E,$91,$50,$50,$50,$50,$50
+	; DUX
+	db SPEAROW,FARFETCH_D,2,$83,$94,$97,$50,$50,$50,$50,$50,$50,$50,$50
+	; MARC
+	db SLOWBRO,LICKITUNG,0,$8C,$80,$91,$82,$50,$50,$50,$50,$50,$50,$50
+	; LOLA
+	db POLIWHIRL,JYNX,1,$8B,$8E,$8B,$80,$50,$50,$50,$50,$50,$50,$50
+	; DORIS
+	db RAICHU,ELECTRODE,1,$83,$8E,$91,$88,$92,$50,$50,$50,$50,$50,$50
+	; CRINKLES
+	db VENONAT,TANGELA,2,$82,$91,$88,$8D,$8A,$8B,$84,$92,$50,$50,$50
+	; SPOT
+	db NIDORAN_M,NIDORAN_F,2,$92,$8F,$8E,$93,$50,$50,$50,$50,$50,$50,$50
+
+INCBIN "baserom.gbc",$71C07,$725C8-$71C07
 
 MonsterPalettes: ; 65C8
 	db PAL_MEWMON    ; MISSINGNO
