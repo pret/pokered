@@ -64,11 +64,11 @@ main(int argc, char *argv[])
 		for (;;) {
 			int i, count;
 			int byte = fgetc(infile);
+			if (byte == 0)
+				break;
 			count = byte & 0xF;
 			byte >>= 4;
 
-			if (byte == 0)
-				break;
 			if (feof(infile)) {
 				fprintf(stderr, "Decompress error: reached "
 				    "end of file without finding terminating "
@@ -98,12 +98,6 @@ main(int argc, char *argv[])
 			if (byte > 0xF) {
 				fprintf(stderr, "Compress error: read a byte "
 				    "greater than 0xF.\n");
-				exit(1);
-			}
-
-			if (byte == 0) {
-				fprintf(stderr, "Compress error: read a byte "
-				    "of 0x00.\n");
 				exit(1);
 			}
 
