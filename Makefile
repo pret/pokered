@@ -11,4 +11,4 @@ redrle: extras/redrle.c
 	${CC} -o $@ $>
 
 clean:
-	rm -f pokered.o pokered.gbc
+	rm -f pokered.o pokered.gbc redrle
