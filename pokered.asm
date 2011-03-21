@@ -1073,7 +1073,587 @@ TilesetsHeadPtr:
 	TSETHEAD Tset15_Block,Tset15_GFX,Tset15_Coll,$07,$17,$FF,$FF,0
 	TSETHEAD Tset16_Block,Tset16_GFX,Tset16_Coll,$12,$FF,$FF,$FF,1
 	TSETHEAD Tset17_Block,Tset17_GFX,Tset17_Coll,$FF,$FF,$FF,$45,1
-INCBIN "baserom.gbc",$C8DE,$CEB8-$C8DE
+
+INCBIN "baserom.gbc",$C8DE,$C8F5-$C8DE
+
+; data for default hidden/shown
+; objects for each map ($00-$F8)
+
+; Table of 2-Byte pointers, one pointer per map,
+; goes up to Map_F7, ends with $FFFF.
+MapHSPointers: ; 48F5
+	dw MapHS00
+	dw MapHS01
+	dw MapHS02
+	dw MapHS03
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHS0A
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHS0D
+	dw MapHSXX
+	dw MapHS0F
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHS14
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHS17
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHS1A
+	dw MapHS1B
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHS21
+	dw MapHSXX
+	dw MapHS23
+	dw MapHS24
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHS27
+	dw MapHS28
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHS2D
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHS33
+	dw MapHS34
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHS3B
+	dw MapHSXX
+	dw MapHS3D
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHS53
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHS58
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHS60
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHS66
+	dw MapHS67
+	dw MapHS68
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHS6C
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHS78
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHS84
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHS87
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHS8F
+	dw MapHS90
+	dw MapHS91
+	dw MapHS92
+	dw MapHS93
+	dw MapHS94
+	dw MapHS95
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHS9B
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHS9F
+	dw MapHSA0
+	dw MapHSA1
+	dw MapHSA2
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSA5
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSB1
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSB5
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSC0
+	dw MapHSXX
+	dw MapHSC2
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSC6
+	dw MapHSC7
+	dw MapHSC8
+	dw MapHSC9
+	dw MapHSCA
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSCF
+	dw MapHSD0
+	dw MapHSD1
+	dw MapHSD2
+	dw MapHSD3
+	dw MapHSD4
+	dw MapHSD5
+	dw MapHSD6
+	dw MapHSD7
+	dw MapHSD8
+	dw MapHSD9
+	dw MapHSDA
+	dw MapHSDB
+	dw MapHSDC
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSE2
+	dw MapHSE3
+	dw MapHSE4
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSE9
+	dw MapHSEA
+	dw MapHSEB
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSF4
+	dw MapHSXX
+	dw MapHSXX
+	dw MapHSXX
+	dw $FFFF
+
+; Structure:
+; 3 bytes per object
+; [Map_ID][Object_ID][H/S]
+;
+; Program stops reading when either:
+; a) Map_ID = $FF
+; b) Map_ID ≠ currentMapID
+;
+; This Data is loaded into RAM at $D5CE-$D5F?.
+
+; These constants come from the bytes for Predef functions:
+Hide	equ $11
+Show	equ $15
+
+MapHSXX:
+	db $FF,$FF,$FF
+MapHS00:
+	db $00,$01,Hide
+MapHS01:
+	db $01,$05,Show
+	db $01,$07,Hide
+MapHS02:
+	db $02,$03,Show
+	db $02,$05,Show
+MapHS03:
+	db $03,$01,Hide
+	db $03,$02,Show
+	db $03,$06,Hide
+	db $03,$0A,Show
+	db $03,$0B,Show
+MapHS0A:
+	db $0A,$01,Show
+	db $0A,$02,Show
+	db $0A,$03,Show
+	db $0A,$04,Show
+	db $0A,$05,Show
+	db $0A,$06,Show
+	db $0A,$07,Show
+	db $0A,$08,Hide
+	db $0A,$09,Hide
+	db $0A,$0A,Hide
+	db $0A,$0B,Hide
+	db $0A,$0C,Hide
+	db $0A,$0D,Hide
+	db $0A,$0E,Show
+	db $0A,$0F,Hide
+MapHS0D:
+	db $0D,$01,Show
+	db $0D,$02,Show
+MapHS0F:
+	db $0F,$03,Show
+MapHS14:
+	db $14,$0A,Show
+MapHS17:
+	db $17,$01,Show
+	db $17,$09,Show
+	db $17,$0A,Show
+MapHS1A:
+	db $1A,$0B,Show
+MapHS1B:
+	db $1B,$07,Show
+MapHS21:
+	db $21,$01,Hide
+	db $21,$02,Hide
+MapHS23:
+	db $23,$01,Show
+	db $23,$08,Show
+MapHS24:
+	db $24,$0A,Show
+MapHS27:
+	db $27,$01,Show
+	db $27,$02,Hide
+	db $27,$03,Show
+MapHS28:
+	db $28,$01,Show
+	db $28,$02,Show
+	db $28,$03,Show
+	db $28,$04,Show
+	db $28,$05,Hide
+	db $28,$06,Show
+	db $28,$07,Show
+	db $28,$08,Hide
+MapHS2D:
+	db $2D,$01,Show
+	db $2D,$0B,Show
+MapHS34:
+	db $34,$05,Show
+MapHSE4:
+	db $E4,$01,Show
+	db $E4,$02,Show
+	db $E4,$03,Show
+MapHS8F:
+	db $8F,$01,Show
+MapHS90:
+	db $90,$04,Show
+MapHS91:
+	db $91,$04,Show
+	db $91,$05,Show
+	db $91,$06,Show
+MapHS92:
+	db $92,$06,Show
+MapHS93:
+	db $93,$04,Show
+	db $93,$05,Show
+MapHS94:
+	db $94,$01,Show
+	db $94,$02,Show
+	db $94,$03,Show
+	db $94,$04,Show
+MapHS95:
+	db $95,$05,Hide
+MapHS84:
+	db $84,$02,Show
+MapHS87:
+	db $87,$0B,Show
+MapHS9B:
+	db $9B,$02,Show
+MapHSA5:
+	db $A5,$02,Show
+	db $A5,$03,Show
+MapHSB1:
+	db $B1,$06,Show
+	db $B1,$07,Show
+MapHSB5:
+	db $B5,$01,Hide
+MapHS53:
+	db $53,$01,Show
+	db $53,$02,Show
+	db $53,$03,Show
+	db $53,$04,Show
+	db $53,$05,Show
+	db $53,$06,Show
+	db $53,$07,Show
+	db $53,$08,Show
+	db $53,$09,Show
+	db $53,$0A,Show
+	db $53,$0B,Show
+	db $53,$0C,Show
+	db $53,$0D,Show
+	db $53,$0E,Show
+MapHSC2:
+	db $C2,$06,Show
+	db $C2,$07,Show
+	db $C2,$08,Show
+	db $C2,$09,Show
+	db $C2,$0A,Show
+	db $C2,$0D,Show
+MapHS58:
+	db $58,$01,Show
+	db $58,$02,Hide
+	db $58,$03,Hide
+MapHS33:
+	db $33,$05,Show
+	db $33,$06,Show
+	db $33,$07,Show
+MapHS3B:
+	db $3B,$08,Show
+	db $3B,$09,Show
+	db $3B,$0A,Show
+	db $3B,$0B,Show
+	db $3B,$0C,Show
+	db $3B,$0D,Show
+MapHS3D:
+	db $3D,$06,Show
+	db $3D,$07,Show
+	db $3D,$08,Show
+	db $3D,$09,Show
+MapHS60:
+	db $60,$02,Hide
+MapHS66:
+	db $66,$0A,Show
+MapHS67:
+	db $67,$06,Show
+	db $67,$09,Show
+MapHS68:
+	db $68,$09,Show
+	db $68,$0A,Show
+	db $68,$0B,Show
+MapHSC6:
+	db $C6,$05,Show
+	db $C6,$06,Show
+	db $C6,$0A,Show
+MapHSC7:
+	db $C7,$06,Show
+	db $C7,$07,Show
+MapHSC8:
+	db $C8,$02,Show
+	db $C8,$03,Show
+	db $C8,$04,Show
+	db $C8,$05,Show
+MapHSC9:
+	db $C9,$03,Show
+	db $C9,$04,Show
+MapHSCA:
+	db $CA,$01,Show
+	db $CA,$05,Show
+	db $CA,$06,Show
+	db $CA,$07,Show
+	db $CA,$08,Hide
+	db $CA,$09,Hide
+MapHSCF:
+	db $CF,$01,Show
+	db $CF,$02,Show
+	db $CF,$03,Show
+	db $CF,$04,Show
+	db $CF,$05,Show
+MapHSD0:
+	db $D0,$02,Show
+	db $D0,$03,Show
+	db $D0,$04,Show
+MapHSD1:
+	db $D1,$02,Show
+	db $D1,$03,Show
+	db $D1,$04,Show
+	db $D1,$05,Show
+	db $D1,$06,Show
+	db $D1,$07,Show
+MapHSD2:
+	db $D2,$02,Show
+	db $D2,$03,Show
+	db $D2,$04,Show
+	db $D2,$05,Show
+	db $D2,$06,Show
+	db $D2,$07,Show
+	db $D2,$08,Show
+MapHSD3:
+	db $D3,$06,Show
+	db $D3,$07,Show
+	db $D3,$08,Show
+	db $D3,$09,Show
+	db $D3,$0A,Show
+MapHSD4:
+	db $D4,$05,Show
+	db $D4,$06,Show
+	db $D4,$07,Show
+	db $D4,$08,Show
+	db $D4,$09,Show
+	db $D4,$0A,Show
+	db $D4,$0B,Show
+	db $D4,$0C,Show
+MapHSD5:
+	db $D5,$02,Show
+	db $D5,$03,Show
+	db $D5,$04,Show
+MapHSE9:
+	db $E9,$02,Show
+	db $E9,$03,Show
+	db $E9,$04,Show
+MapHSEA:
+	db $EA,$01,Show
+	db $EA,$02,Show
+	db $EA,$03,Show
+	db $EA,$04,Show
+	db $EA,$05,Show
+	db $EA,$06,Show
+MapHSEB:
+	db $EB,$03,Show
+	db $EB,$04,Show
+	db $EB,$05,Show
+MapHSF4:
+	db $F4,$02,Show
+MapHSD6:
+	db $D6,$02,Show
+MapHSD7:
+	db $D7,$03,Show
+	db $D7,$04,Show
+MapHSD8:
+	db $D8,$03,Show
+	db $D8,$04,Show
+	db $D8,$05,Show
+	db $D8,$06,Show
+	db $D8,$08,Show
+MapHSD9:
+	db $D9,$01,Show
+	db $D9,$02,Show
+	db $D9,$03,Show
+	db $D9,$04,Show
+MapHSDA:
+	db $DA,$01,Show
+	db $DA,$02,Show
+MapHSDB:
+	db $DB,$01,Show
+	db $DB,$02,Show
+	db $DB,$03,Show
+	db $DB,$04,Show
+MapHSDC:
+	db $DC,$01,Show
+MapHSE2:
+	db $E2,$01,Show
+	db $E2,$02,Show
+	db $E2,$03,Show
+MapHSE3:
+	db $E3,$01,Show
+	db $E3,$02,Show
+	db $E3,$03,Show
+MapHS6C:
+	db $6C,$03,Show
+	db $6C,$04,Show
+MapHS78:
+	db $78,$02,Hide
+MapHSC0:
+	db $C0,$01,Show
+	db $C0,$02,Show
+MapHS9F:
+	db $9F,$01,Hide
+	db $9F,$02,Hide
+MapHSA0:
+	db $A0,$01,Hide
+	db $A0,$02,Hide
+MapHSA1:
+	db $A1,$02,Show
+	db $A1,$03,Show
+	db $A1,$05,Hide
+	db $A1,$06,Hide
+MapHSA2:
+	db $A2,$01,Hide
+	db $A2,$02,Hide
+	db $A2,$03,Show
+
+	db $FF
+
+INCBIN "baserom.gbc",$CD97,$CEB8-$CD97
 
 ; wild pokemon data: from 4EB8 to 55C7
 
