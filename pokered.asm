@@ -410,7 +410,106 @@ DelayFrame: ; 20AF
 
 	ret
 
-INCBIN "baserom.gbc",$20BA,$2442 - $20BA
+; These routines manage gradual fading
+; (e.g., entering a doorway)
+LoadGBPal: ; 20BA
+	ld a,[$d35d]		;tells if cur.map is dark
+	ld b,a			;(requires HM5_FLASH?)
+	ld hl,GBPalTable_00	;16
+	ld a,l
+	sub b
+	ld l,a
+	jr nc,.jr0\@
+	dec h
+.jr0\@
+	ld a,[hli]
+	ld [$ff47],a
+	ld a,[hli]
+	ld [$ff48],a
+	ld a,[hli]
+	ld [$ff49],a
+	ret
+
+GBFadeOut1: ; 20D1
+	ld hl,IncGradGBPalTable_01	;0d
+	ld b,$04
+	jr GBFadeOutCommon
+
+GBFadeOut2: ; 20D8
+	ld hl,IncGradGBPalTable_02	;1c
+	ld b,$03
+
+GBFadeOutCommon:
+	ld a,[hli]
+	ld [$ff47],a
+	ld a,[hli]
+	ld [$ff48],a
+	ld a,[hli]
+	ld [$ff49],a
+	ld c,8
+	call DelayFrames
+	dec b
+	jr nz,GBFadeOutCommon
+	ret
+
+GBFadeIn1: ; 20EF
+	ld hl,DecGradGBPalTable_01	;18
+	ld b,$04
+	jr GBFadeInCommon
+
+GBFadeIn2: ; 20F6
+	ld hl,DecGradGBPalTable_02	;21
+	ld b,$03
+
+GBFadeInCommon:
+	ld a,[hld]
+	ld [$ff49],a
+	ld a,[hld]
+	ld [$ff48],a
+	ld a,[hld]
+	ld [$ff47],a
+	ld c,8
+	call DelayFrames
+	dec b
+	jr nz,GBFadeInCommon
+	ret
+
+IncGradGBPalTable_01: ; 210D
+	db %11111111	;BG Pal
+	db %11111111	;OBJ Pal 1
+	db %11111111	;OBJ Pal 2
+			;and so on...
+	db %11111110
+	db %11111110
+	db %11111000
+
+	db %11111001
+	db %11100100
+	db %11100100
+GBPalTable_00:		;16
+	db %11100100
+	db %11010000
+DecGradGBPalTable_01:	;18
+	db %11100000
+	;19
+	db %11100100
+	db %11010000
+	db %11100000
+IncGradGBPalTable_02:	;1c
+	db %10010000
+	db %10000000
+	db %10010000
+
+	db %01000000
+	db %01000000
+DecGradGBPalTable_02:	;21
+	db %01000000
+
+	db %00000000
+	db %00000000
+	db %00000000
+
+INCBIN "baserom.gbc",$2125,$2442 - $2125
 
 ; XXX where is the pointer to this data?
 MartInventories: ; 2442
@@ -688,7 +787,7 @@ OakSpeech: ; 6115
 	call FadeInIntroPic
 	ld hl,HelloWelcomeText
 	call PrintText      ; prints text box
-	call $20D8
+	call GBFadeOut2
 	call ClearScreen
 	ld a,NIDORINO
 	ld [$D0B5],a    ; pic displayed is stored at this location
@@ -699,7 +798,7 @@ OakSpeech: ; 6115
 	call MovePicLeft
 	ld hl,WorldFilledWithText
 	call PrintText      ; Prints text box
-	call $20D8
+	call GBFadeOut2
 	call ClearScreen
 	ld de,$6EDE
 	ld bc,$0400     ; affects the position of the player pic
@@ -708,7 +807,7 @@ OakSpeech: ; 6115
 	ld hl,FirstWhatIsYourNameText
 	call PrintText
 	call $695D ; brings up NewName/Red/etc menu
-	call $20D8
+	call GBFadeOut2
 	call ClearScreen
 	ld de,$6049
 	ld bc,$1300
@@ -718,12 +817,12 @@ OakSpeech: ; 6115
 	call PrintText
 	call $69A4
 Function61BC:
-	call $20D8
+	call GBFadeOut2
 	call ClearScreen
 	ld de,$6EDE
 	ld bc,$0400
 	call IntroPredef3B
-	call $20F6
+	call GBFadeIn2
 	ld a,[$D72D]
 	and a
 	jr nz,.next\@
@@ -775,7 +874,7 @@ Function61BC:
 	ld [$CFCB],a
 	ld c,$32
 	call DelayFrames
-	call $20D8
+	call GBFadeOut2
 	jp ClearScreen
 HelloWelcomeText:
 	db $17,$25,$64,$22,$50 ; "Hello welcome to the world of pokemon ..."
