@@ -101,6 +101,11 @@ W_ENEMYMON5MOVE3 EQU $D95E
 
 W_ENEMYMON6MOVE3 EQU $D98A
 
+; hardware registers, from the pandocs http://nocash.emubase.de/pandocs.htm
+rBGP EQU $FF47
+rOBP0 EQU $FF48
+rOBP1 EQU $FF49
+
 
 ; pokemon name constants
 RHYDON     EQU $01

@@ -423,11 +423,11 @@ LoadGBPal: ; 20BA
 	dec h
 .jr0\@
 	ld a,[hli]
-	ld [$ff47],a
+	ld [rBGP],a
 	ld a,[hli]
-	ld [$ff48],a
+	ld [rOBP0],a
 	ld a,[hli]
-	ld [$ff49],a
+	ld [rOBP1],a
 	ret
 
 GBFadeOut1: ; 20D1
@@ -441,11 +441,11 @@ GBFadeOut2: ; 20D8
 
 GBFadeOutCommon:
 	ld a,[hli]
-	ld [$ff47],a
+	ld [rBGP],a
 	ld a,[hli]
-	ld [$ff48],a
+	ld [rOBP0],a
 	ld a,[hli]
-	ld [$ff49],a
+	ld [rOBP1],a
 	ld c,8
 	call DelayFrames
 	dec b
@@ -463,11 +463,11 @@ GBFadeIn2: ; 20F6
 
 GBFadeInCommon:
 	ld a,[hld]
-	ld [$ff49],a
+	ld [rOBP1],a
 	ld a,[hld]
-	ld [$ff48],a
+	ld [rOBP0],a
 	ld a,[hld]
-	ld [$ff47],a
+	ld [rBGP],a
 	ld c,8
 	call DelayFrames
 	dec b
@@ -892,7 +892,7 @@ FadeInIntroPic:
 	ld b,6
 .next\@
 	ld a,[hli]
-	ld [$FF47],a
+	ld [rBGP],a
 	ld c,10
 	call DelayFrames
 	dec b
@@ -913,7 +913,7 @@ MovePicLeft:
 	call DelayFrame
 
 	ld a,$E4
-	ld [$FF47],a
+	ld [rBGP],a
 .next\@
 	call DelayFrame
 	ld a,[$FF4B]
