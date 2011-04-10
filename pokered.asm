@@ -331,13 +331,13 @@ incbin "baserom.gbc",$39E,$1627 - $39E
 
 ; offset 1633
 ; define (by index number) the bank that a pokemon's image is in
-; index == Mew, bank 1
-; index == Kabutops fossil, bank $B
+; index = Mew, bank 1
+; index = Kabutops fossil, bank $B
 ;	index < $1F, bank 9
-; $1F <= index < $4A, bank $A
-; $4A <= index < $74, bank $B
-; $74 <= index < $99, bank $C
-; $99 <= index,       bank $D
+; $1F ≤ index < $4A, bank $A
+; $4A ≤ index < $74, bank $B
+; $74 ≤ index < $99, bank $C
+; $99 ≤ index,       bank $D
 	ld a,[$CF91] ; XXX name for this ram location
 	ld b,a
 	cp $15
