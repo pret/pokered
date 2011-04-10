@@ -684,26 +684,26 @@ OakSpeech: ; 6115
 	jp nz,$61BC
 	ld de,$615F
 	ld bc,$1300
-	call $62A4   ; displays Oak sprite?
-	call FadeInIntroSprite   ; fades in the sprite?
+	call $62A4   ; displays Oak pic?
+	call FadeInIntroPic
 	ld hl,HelloWelcomeText
 	call PrintText      ; prints text box
 	call $20D8
 	call ClearScreen
 	ld a,NIDORINO
-	ld [$D0B5],a    ; sprite displayed is stored at this location
+	ld [$D0B5],a    ; pic displayed is stored at this location
 	ld [$CF91],a
-	call $1537      ; this is also related to the sprite
-	ld hl,$C3F6     ; position on tilemap the sprite is displayed
-	call $1384      ; displays sprite?
+	call $1537      ; this is also related to the pic
+	ld hl,$C3F6     ; position on tilemap the pic is displayed
+	call $1384      ; displays pic?
 	call MovePicLeft
 	ld hl,WorldFilledWithText
 	call PrintText      ; Prints text box
 	call $20D8
 	call ClearScreen
 	ld de,$6EDE
-	ld bc,$0400     ; affects the position of the player sprite
-	call $62A4      ; displays player sprite?
+	ld bc,$0400     ; affects the position of the player pic
+	call $62A4      ; displays player pic?
 	call MovePicLeft
 	ld hl,FirstWhatIsYourNameText
 	call PrintText
@@ -712,8 +712,8 @@ OakSpeech: ; 6115
 	call ClearScreen
 	ld de,$6049
 	ld bc,$1300
-	call $62A4 ; displays rival sprite
-	call FadeInIntroSprite
+	call $62A4 ; displays rival pic
+	call FadeInIntroPic
 	ld hl,ThisIsMyGrandsonText
 	call PrintText
 	call $69A4
@@ -787,7 +787,7 @@ ThisIsMyGrandsonText:
 YourOwnLegendText:
 	db $17,$97,$65,$22,$50 ; "Ninten! Your very own legend ..."
 
-FadeInIntroSprite:
+FadeInIntroPic:
 	ld hl,IntroFadePalettes
 	ld b,6
 .next\@
