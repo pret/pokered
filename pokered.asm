@@ -696,7 +696,7 @@ OakSpeech: ; 6115
 	call $1537      ; this is also related to the sprite
 	ld hl,$C3F6     ; position on tilemap the sprite is displayed
 	call $1384      ; displays sprite?
-	call $6288
+	call MovePicLeft
 	ld hl,WorldFilledWithText
 	call PrintText      ; Prints text box
 	call $20D8
@@ -704,7 +704,7 @@ OakSpeech: ; 6115
 	ld de,$6EDE
 	ld bc,$0400     ; affects the position of the player sprite
 	call $62A4      ; displays player sprite?
-	call $6288
+	call MovePicLeft
 	ld hl,FirstWhatIsYourNameText
 	call PrintText
 	call $695D ; brings up NewName/Red/etc menu
@@ -788,7 +788,7 @@ YourOwnLegendText:
 	db $17,$97,$65,$22,$50 ; "Ninten! Your very own legend ..."
 
 FadeInIntroSprite:
-	ld hl,$6282
+	ld hl,IntroFadePalettes
 	ld b,6
 .next\@
 	ld a,[hli]
@@ -799,7 +799,31 @@ FadeInIntroSprite:
 	jr nz,.next\@
 	ret
 
-INCBIN "baserom.gbc",$6282,$8000 - $6282
+IntroFadePalettes:
+	db %01010100
+	db %10101000
+	db %11111100
+	db %11111000
+	db %11110100
+	db %11100100
+
+MovePicLeft:
+	ld a,119
+	ld [$FF4B],a
+	call DelayFrame
+
+	ld a,$E4
+	ld [$FF47],a
+.next\@
+	call DelayFrame
+	ld a,[$FF4B]
+	sub 8
+	cp $FF
+	ret z
+	ld [$FF4B],a
+	jr .next\@
+
+INCBIN "baserom.gbc",$62A1,$8000 - $62A1
 
 
 SECTION "bank2",DATA,BANK[$2]
