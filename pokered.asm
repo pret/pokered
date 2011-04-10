@@ -1,7 +1,37 @@
 INCLUDE "constants.asm"
 
-SECTION "bank0",HOME[0]
-INCBIN "baserom.gbc",$0,$9D
+; the rst vectors are unused
+SECTION "rst00",HOME[0]
+	db $FF
+SECTION "rst08",HOME[8]
+	db $FF
+SECTION "rst10",HOME[$10]
+	db $FF
+SECTION "rst18",HOME[$18]
+	db $FF
+SECTION "rst20",HOME[$20]
+	db $FF
+SECTION "rst28",HOME[$28]
+	db $FF
+SECTION "rst30",HOME[$30]
+	db $FF
+SECTION "rst38",HOME[$38]
+	db $FF
+
+; interrupts
+SECTION "vblank",HOME[$40]
+	jp $2024
+SECTION "lcdc",HOME[$48]
+	db $FF
+SECTION "timer",HOME[$50]
+	jp $2306
+SECTION "serial",HOME[$58]
+	jp $2125
+SECTION "joypad",HOME[$60]
+	reti
+
+SECTION "bank0",HOME[$61]
+INCBIN "baserom.gbc",$61,$9D-$61
 
 FarCopyData: ; 009D
 ; copy bc bytes of data from a:hl to de
