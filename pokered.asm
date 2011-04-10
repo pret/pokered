@@ -395,18 +395,19 @@ ClearScreen: ; 190F
 
 INCBIN "baserom.gbc",$1922,$20AF - $1922
 
-ConserveBattery: ; 20AF
-; loads 1 into $FFD6 and returns when $FFD6 == 0
-; delays by halting to conserve battery power
-; XXX what zeroes $FFD6?
+DelayFrame: ; 20AF
+; delay for one frame
 	ld a,1
 	ld [$FFD6],a
+
+; wait for the next Vblank, halting to conserve battery
 .halt\@
 	db $76 ; XXX this is a hack--rgbasm adds a nop after this instr
 	       ; even when ints are enabled
 	ld a,[$FFD6]
 	and a
 	jr nz,.halt\@
+
 	ret
 
 INCBIN "baserom.gbc",$20BA,$2442 - $20BA
@@ -579,11 +580,11 @@ Bankswitch: ; 35D6
 
 INCBIN "baserom.gbc",$35EC,$3739 - $35EC
 
-Delay: ; 3739
-; wait n times, where n is the value in c
-	call ConserveBattery
+DelayFrames: ; 3739
+; wait n frames, where n is the value in c
+	call DelayFrame
 	dec c
-	jr nz,Delay
+	jr nz,DelayFrames
 	ret
 
 INCBIN "baserom.gbc",$3740,$3A87 - $3740
@@ -616,7 +617,7 @@ INCBIN "baserom.gbc",$3C5F,$3DD7 - $3C5F
 Delay3: ; 3DD7
 ; call Delay with a parameter of 3
 	ld c,3
-	jp Delay
+	jp DelayFrames
 
 INCBIN "baserom.gbc",$3DDC,$3E6D - $3DDC
 
@@ -735,7 +736,7 @@ OakSpeech: ; 6115
 	ld [$FFB8],a
 	ld [$2000],a
 	ld c,4
-	call Delay
+	call DelayFrames
 	ld de,$4180
 	ld hl,$8000
 	ld bc,$050C
@@ -744,7 +745,7 @@ OakSpeech: ; 6115
 	ld bc,$0400
 	call $62A4
 	ld c,4
-	call Delay
+	call DelayFrames
 	ld de,$7042
 	ld bc,$0400
 	call $62A4
@@ -763,7 +764,7 @@ OakSpeech: ; 6115
 	ld [$FFB8],a
 	ld [$2000],a
 	ld c,$14
-	call Delay
+	call DelayFrames
 	ld hl,$C40A
 	ld b,7
 	ld c,7
@@ -772,7 +773,7 @@ OakSpeech: ; 6115
 	ld a,1
 	ld [$CFCB],a
 	ld c,$32
-	call Delay
+	call DelayFrames
 	call $20D8
 	jp ClearScreen
 HelloWelcomeText:
@@ -792,8 +793,8 @@ FadeInIntroSprite:
 .next\@
 	ld a,[hli]
 	ld [$FF47],a
-	ld c,$A
-	call Delay
+	ld c,10
+	call DelayFrames
 	dec b
 	jr nz,.next\@
 	ret
