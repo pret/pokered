@@ -684,7 +684,7 @@ OakSpeech: ; 6115
 	ld de,$615F
 	ld bc,$1300
 	call $62A4   ; displays Oak sprite?
-	call $6271   ; fades in the sprite?
+	call FadeInIntroSprite   ; fades in the sprite?
 	ld hl,HelloWelcomeText
 	call PrintText      ; prints text box
 	call $20D8
@@ -712,7 +712,7 @@ OakSpeech: ; 6115
 	ld de,$6049
 	ld bc,$1300
 	call $62A4 ; displays rival sprite
-	call $6271
+	call FadeInIntroSprite
 	ld hl,ThisIsMyGrandsonText
 	call PrintText
 	call $69A4
@@ -785,7 +785,20 @@ ThisIsMyGrandsonText:
 	db $17,$34,$65,$22,$50 ; "This is my grandson ..."
 YourOwnLegendText:
 	db $17,$97,$65,$22,$50 ; "Ninten! Your very own legend ..."
-INCBIN "baserom.gbc",$6271,$1D8F
+
+FadeInIntroSprite:
+	ld hl,$6282
+	ld b,6
+.next\@
+	ld a,[hli]
+	ld [$FF47],a
+	ld c,$A
+	call Delay
+	dec b
+	jr nz,.next\@
+	ret
+
+INCBIN "baserom.gbc",$6282,$8000 - $6282
 
 
 SECTION "bank2",DATA,BANK[$2]
