@@ -676,15 +676,15 @@ OakSpeech: ; 6115
 	call $2BCF
 	ld a,[$D07C]
 	ld [$D71A],a
-	call $62CE
+	call Function62CE
 	xor a
 	ld [$FFD7],a
 	ld a,[$D732]
-	bit 1,a
-	jp nz,$61BC
+	bit 1,a ; XXX when is bit 1 set?
+	jp nz,Function61BC ; easter egg: skip the intro
 	ld de,$615F
 	ld bc,$1300
-	call $62A4   ; displays Oak pic?
+	call IntroPredef3B   ; displays Oak pic?
 	call FadeInIntroPic
 	ld hl,HelloWelcomeText
 	call PrintText      ; prints text box
@@ -703,7 +703,7 @@ OakSpeech: ; 6115
 	call ClearScreen
 	ld de,$6EDE
 	ld bc,$0400     ; affects the position of the player pic
-	call $62A4      ; displays player pic?
+	call IntroPredef3B      ; displays player pic?
 	call MovePicLeft
 	ld hl,FirstWhatIsYourNameText
 	call PrintText
@@ -712,16 +712,17 @@ OakSpeech: ; 6115
 	call ClearScreen
 	ld de,$6049
 	ld bc,$1300
-	call $62A4 ; displays rival pic
+	call IntroPredef3B ; displays rival pic
 	call FadeInIntroPic
 	ld hl,ThisIsMyGrandsonText
 	call PrintText
 	call $69A4
+Function61BC:
 	call $20D8
 	call ClearScreen
 	ld de,$6EDE
 	ld bc,$0400
-	call $62A4
+	call IntroPredef3B
 	call $20F6
 	ld a,[$D72D]
 	and a
@@ -743,12 +744,12 @@ OakSpeech: ; 6115
 	call $1848
 	ld de,$6FE8
 	ld bc,$0400
-	call $62A4
+	call IntroPredef3B
 	ld c,4
 	call DelayFrames
 	ld de,$7042
 	ld bc,$0400
-	call $62A4
+	call IntroPredef3B
 	call $28A6
 	ld a,[$FFB8]
 	push af
@@ -823,7 +824,60 @@ MovePicLeft:
 	ld [$FF4B],a
 	jr .next\@
 
-INCBIN "baserom.gbc",$62A1,$8000 - $62A1
+Predef3B: ; 62A1
+	call $3E94
+IntroPredef3B: ; 62A4
+	push bc
+	ld a,b
+	call $36EB
+	ld hl,$A188
+	ld de,$A000
+	ld bc,$0310
+	call CopyData
+	ld de,$9000
+	call $16EA
+	pop bc
+	ld a,c
+	and a
+	ld hl,$C3C3
+	jr nz,.next\@
+	ld hl,$C3F6
+.next\@
+	xor a
+	ld [$FFE1],a
+	ld a,1
+	jp $3E6D
+
+Function62CE: ; 62CE, XXX called by 4B2 948 989 5BF9 5D15
+	call $62FF
+	ld a,$19
+	call $3E6D
+	ld hl,$D732
+	bit 2,[hl]
+	res 2,[hl]
+	jr z,.next\@
+	ld a,[$D71A]
+	jr .next2\@
+.next\@
+	bit 1,[hl]
+	jr z,.next3\@
+	call $64EA
+.next3\@
+	ld a,0
+.next2\@
+	ld b,a
+	ld a,[$D72D]
+	and a
+	jr nz,.next4\@
+	ld a,b
+.next4\@
+	ld hl,$D732
+	bit 4,[hl]
+	ret nz
+	ld [$D365],a
+	ret
+
+INCBIN "baserom.gbc",$62FF,$8000 - $62FF
 
 
 SECTION "bank2",DATA,BANK[$2]
@@ -6747,7 +6801,7 @@ PredefPointers: ; 7E79
         dbw $10,$50E2
         dbw $15,$690F
         dbw $10,$5010
-        dbw $01,$62A1
+        dbw BANK(Predef3B),Predef3B; 3B display pic?
         dbw $03,$6F54
         dbw $10,$42D1
         dbw $0E,$6FB8
