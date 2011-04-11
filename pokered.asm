@@ -3239,7 +3239,24 @@ db SUBSTITUTE  ,$4F,$00,NORMAL,$FF,10
 db STRUGGLE    ,$30,$32,NORMAL,$FF,10
 ; trainer data: from 5C53 to 652E
 
-INCBIN "baserom.gbc",$383DE,$39C53 - $383DE
+INCBIN "baserom.gbc",$383DE,$39884 - $383DE
+
+ReadAttack: ; 5884
+	push hl
+	push de
+	push bc
+	dec a
+	ld hl,Attacks
+	ld bc,6
+	call AddNTimes
+	ld de,$CFCC
+	call CopyData
+	pop bc
+	pop de
+	pop hl
+	ret
+
+INCBIN "baserom.gbc",$3989B,$39C53 - $3989B
 ReadTrainer: ; 5C53
 
 ; don't change any moves in a link battle
