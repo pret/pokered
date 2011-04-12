@@ -6789,7 +6789,15 @@ EnemySendOut: ; 490E
 	db $22
 	db $50
 
-INCBIN "baserom.gbc",$3CA83,$40000 - $3CA83
+INCBIN "baserom.gbc",$3CA83,$3EF07 - $3CA83
+
+PlayAttackAnimation: ; 6F07
+	ld [$D07C],a
+	call Delay3
+	ld a,8
+	jp Predef
+
+INCBIN "baserom.gbc",$3EF12,$40000 - $3EF12
 
 SECTION "bank10",DATA,BANK[$10]
 INCBIN "baserom.gbc",$40000,$1024
@@ -7063,7 +7071,7 @@ PredefPointers: ; 7E79
         dbw $1E,$5ABA
         dbw $03,$7132
         dbw $03,$76A5
-        dbw $1E,$4D5E
+        dbw BANK(AttackAnimation),AttackAnimation; 08 play attack animation
         dbw $03,$771E
         dbw $03,$771E
         dbw $03,$781D
@@ -7811,7 +7819,239 @@ SECTION "bank1D",DATA,BANK[$1D]
 INCBIN "baserom.gbc",$74000,$4000
 
 SECTION "bank1E",DATA,BANK[$1E]
-INCBIN "baserom.gbc",$78000,$4000
+INCBIN "baserom.gbc",$78000,$F1
+
+PlayAnimation: ; 40F1
+	xor a
+	ld [$FF8B],a
+	ld [$D08B],a
+	ld a,[$D07C]
+	dec a
+	ld l,a
+	ld h,0
+	add hl,hl
+	ld de,$607D
+	add hl,de
+	ld a,[hli]
+	ld h,[hl]
+	ld l,a
+.next7\@
+	ld a,[hli]
+	cp a,$FF
+	jr z,.AnimationOver\@
+	cp a,$C0 ; is this animation for a monster onscreen?
+	jr c,.next2\@
+	ld c,a
+	ld de,$50DA
+.next4\@
+	ld a,[de]
+	cp c
+	jr z,.next3\@
+	inc de
+	inc de
+	inc de
+	jr .next4\@
+.next3\@
+	ld a,[hli]
+	cp a,$FF
+	jr z,.next5\@
+	ld [$CF07],a
+	push hl
+	push de
+	call $586F
+	call $23B1
+	pop de
+	pop hl
+.next5\@
+	push hl
+	inc de
+	ld a,[de]
+	ld l,a
+	inc de
+	ld a,[de]
+	ld h,a
+	ld de,.next6\@
+	push de
+	jp [hl]
+.next2\@
+	ld c,a
+	and a,$3F
+	ld [$D086],a
+	xor a
+	sla c
+	rla
+	sla c
+	rla
+	ld [$D09F],a
+	ld a,[hli]
+	ld [$CF07],a
+	ld a,[hli]
+	ld c,l
+	ld b,h
+	ld l,a
+	ld h,0
+	add hl,hl
+	ld de,$676D
+	add hl,de
+	ld a,l
+	ld [$D094],a
+	ld a,h
+	ld [$D095],a
+	ld l,c
+	ld h,b
+	push hl
+	ld a,[rOBP0]
+	push af
+	ld a,[$CC79]
+	ld [rOBP0],a
+	call $41D2
+	call $417C
+	call $4E53 ; play the actual animation
+	pop af
+	ld [rOBP0],a
+.next6\@
+	pop hl
+	jr .next7\@
+.AnimationOver\@ ; 417B
+	ret
+
+INCBIN "baserom.gbc",$7817C,$78D5E - $7817C
+
+AttackAnimation: ; 4D5E
+	push hl
+	push de
+	push bc
+	push af
+	call $3748
+	call $4E23
+	ld a,[$D07C]
+	and a
+	jr z,.AnimationFinished\@
+
+	; if throwing a Poké Ball, skip the regular animation code
+	cp a,TOSS_ANIM
+	jr nz,.AttackAnimation\@
+	ld de,.AnimationFinished\@
+	push de
+	jp TossBallAnimation
+
+.AttackAnimation\@
+	; check if battle animations are disabled in the options
+	ld a,[$D355]
+	bit 7,a
+	jr nz,.AnimationsDisabled\@
+	call ShareAttackAnimations
+	call PlayAnimation
+	jr .next4\@
+.AnimationsDisabled\@
+	ld c,30
+	call DelayFrames
+.next4\@
+	call $4DBD ; reload pic and flash the pic in and out (to show damage)
+.AnimationFinished\@
+	call $3748
+	xor a
+	ld [$D096],a
+	ld [$D09B],a
+	ld [$D08B],a
+	dec a
+	ld [$CF07],a
+	pop af
+	pop bc
+	pop de
+	pop hl
+	ret
+
+ShareAttackAnimations: ; 4DA6
+; some moves just reuse animations from status conditions
+	ld a,[$FFF3]
+	and a
+	ret z
+
+	ld a,[$D07C]
+
+	cp a,AMNESIA
+	ld b,CONF_ANIM
+	jr z,.Replace\@
+
+	cp a,REST
+	ld b,SLP_ANIM
+	ret nz
+
+.Replace\@
+	ld a,b
+	ld [$D07C],a
+	ret
+
+Function4DBD: ; 4DBD
+	ld a,[$CC5B]
+	and a
+	ret z
+	dec a
+	add a
+	ld c,a
+	ld b,0
+	ld hl,Pointer4DCF
+	add hl,bc
+	ld a,[hli]
+	ld h,[hl]
+	ld l,a
+	jp [hl]
+
+Pointer4DCF: ; 4DCF
+	dw $4DDB,$4DE3,$4DEB,$4DF0,$4DF6,$4DFE
+
+INCBIN "baserom.gbc",$78DDB,$79E16 - $78DDB
+
+TossBallAnimation: ; 5E16
+	ld a,[$D057]
+	cp a,2
+	jr z,.next4\@
+	ld a,[$D11E]
+	ld b,a
+	and a,$F0
+	swap a
+	ld c,a
+	ld a,b
+	and a,$F
+	ld [$CD3D],a
+	ld hl,.Pointer5E50
+	ld a,[$CF91]
+	cp a,4
+	ld b,$C1
+	jr z,.next2\@
+	cp a,3
+	ld b,$C5
+	jr z,.next2\@
+	ld b,$C6
+.next2\@
+	ld a,b
+.next3\@
+	ld [$D07C],a
+	push bc
+	push hl
+	call $40F1
+	pop hl
+	ld a,[hli]
+	pop bc
+	dec c
+	jr nz,.next3\@
+	ret
+
+.Pointer5E50: ; 5E50
+	db $C3,$C8,$C2,$C3,$A6 ; XXX what is this
+
+.next4\@ ; 5E55
+	ld a,$C1
+	ld [$D07C],a
+	call $40F1
+	ld a,$95
+	call $23B1
+	ld a,$C4
+	ld [$D07C],a
+	jp $40F1
+
+INCBIN "baserom.gbc",$79E6A,$7C000 - $79E6A
 
 SECTION "bank1F",DATA,BANK[$1F]
 INCBIN "baserom.gbc",$7C000,$4000

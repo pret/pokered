@@ -773,6 +773,11 @@ SUPER_FANG   EQU $A2
 SLASH        EQU $A3
 SUBSTITUTE   EQU $A4
 STRUGGLE     EQU $A5
+; these do double duty as animation identifiers
+SLP_ANIM     EQU $BD ; sleeping monster
+CONF_ANIM    EQU $BF ; confused monster
+TOSS_ANIM    EQU $C1 ; try to catch a monster
+SEND_ANIM    EQU $C3 ; send out a monster
 
 ; super game boy palettes
 PAL_ROUTE     EQU $00
