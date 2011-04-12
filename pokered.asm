@@ -3237,7 +3237,6 @@ db SUPER_FANG  ,$28,$01,NORMAL,$E5,10
 db SLASH       ,$00,$46,NORMAL,$FF,20
 db SUBSTITUTE  ,$4F,$00,NORMAL,$FF,10
 db STRUGGLE    ,$30,$32,NORMAL,$FF,10
-; trainer data: from 5C53 to 652E
 
 INCBIN "baserom.gbc",$383DE,$39884 - $383DE
 
@@ -3256,6 +3255,7 @@ ReadAttack: ; 5884
 	pop hl
 	ret
 
+; trainer data: from 5C53 to 652E
 INCBIN "baserom.gbc",$3989B,$39C53 - $3989B
 ReadTrainer: ; 5C53
 
