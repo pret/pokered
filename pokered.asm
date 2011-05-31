@@ -875,7 +875,7 @@ MainMenu:
 	FuncCoord 0,0
 	ld hl,Coord
 	ld b,6
-	ld c,$D
+	ld c,13
 	call TextBoxBorder
 	FuncCoord 2,2
 	ld hl,Coord
@@ -886,7 +886,7 @@ MainMenu:
 	FuncCoord 0,0
 	ld hl,Coord
 	ld b,4
-	ld c,$D
+	ld c,13
 	call TextBoxBorder
 	FuncCoord 2,2
 	ld hl,Coord
