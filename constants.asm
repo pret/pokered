@@ -1,3 +1,7 @@
+FuncCoord: MACRO
+Coord = $C3A0 + 20 * \2 + \1
+	ENDM
+
 ; external map entry macro
 EMAP: MACRO ; emap x-coordinate,y-coordinate,textpointer
 ; the appearance of towns and routes in the town map, indexed by map id

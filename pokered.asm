@@ -423,7 +423,58 @@ ClearScreen: ; 190F
 	jr nz,.loop\@
 	jp Delay3
 
-INCBIN "baserom.gbc",$1922,$20AF - $1922
+TextBoxBorder: ; 1922
+; draw a text box
+; upper-left corner at coordinates hl
+; height b
+; width c
+
+	; first row
+	push hl
+	ld a,$79 ; upper-left border ┌
+	ld [hli],a
+	inc a    ; horizontal border ─
+	call NPlaceChar
+	inc a    ; upper-right border ┐
+	ld [hl],a
+
+	; middle rows
+	pop hl
+	ld de,20
+	add hl,de ; skip the top row
+
+.PlaceRow\@
+	push hl
+	ld a,$7C ; vertical border │
+	ld [hli],a
+	ld a,$7F ; blank space ‘ ’
+	call NPlaceChar
+	ld [hl],$7C ; vertical border │
+
+	pop hl
+	ld de,20
+	add hl,de ; move to next row
+	dec b
+	jr nz,.PlaceRow\@
+
+	; bottom row
+	ld a,$7D ; lower-left border └
+	ld [hli],a
+	ld a,$7A    ; horizontal border ─
+	call NPlaceChar
+	ld [hl],$7E ; lower-right border ┘
+	ret
+
+NPlaceChar:
+; place a row of width c of identical characters
+	ld d,c
+.loop\@
+	ld [hli],a
+	dec d
+	jr nz,.loop\@
+	ret
+
+INCBIN "baserom.gbc",$1955,$20AF - $1955
 
 DelayFrame: ; 20AF
 ; delay for one frame
@@ -783,7 +834,144 @@ Predef: ; 3E6D
 INCBIN "baserom.gbc",$3E94,$4000 - $3E94
 
 SECTION "bank1",DATA,BANK[$1]
-INCBIN "baserom.gbc",$4000,$2115
+INCBIN "baserom.gbc",$4000,$1AF2
+
+MainMenu:
+; Check save file
+	call Func_5bff
+	xor a
+	ld [$D08A],a
+	inc a
+	ld [$D088],a
+	call $609E
+	jr nc,.next0\@
+
+	; Predef 52 loads the save from SRAM to RAM
+	ld a,$52
+	call Predef
+
+.next0\@
+	ld c,20
+	call DelayFrames
+	xor a
+	ld [$D12B],a
+	ld hl,$CC2B
+	ld [hli],a
+	ld [hli],a
+	ld [hli],a
+	ld [hl],a
+	ld [$D07C],a
+	ld hl,$D72E
+	res 6,[hl]
+	call ClearScreen
+	call $3DED
+	call $36A0 ; load some graphics in VRAM
+	call $3680 ; load fonts in VRAM
+	ld hl,$D730
+	set 6,[hl]
+	ld a,[$D088]
+	cp a,1
+	jr z,.next1\@
+	FuncCoord 0,0
+	ld hl,Coord
+	ld b,6
+	ld c,$D
+	call TextBoxBorder
+	FuncCoord 2,2
+	ld hl,Coord
+	ld de,$5D7E
+	call $1955 ; print text
+	jr .next2\@
+.next1\@
+	FuncCoord 0,0
+	ld hl,Coord
+	ld b,4
+	ld c,$D
+	call TextBoxBorder
+	FuncCoord 2,2
+	ld hl,Coord
+	ld de,$5D87
+	call $1955 ; print text
+.next2\@
+	ld hl,$D730
+	res 6,[hl]
+	call $2429 ; OAM?
+	xor a
+	ld [$CC26],a
+	ld [$CC2A],a
+	ld [$CC34],a
+	inc a
+	ld [$CC25],a
+	inc a
+	ld [$CC24],a
+	ld a,$B
+	ld [$CC29],a
+	ld a,[$D088]
+	ld [$CC28],a
+	call $3ABE
+	bit 1,a
+	jp nz,$42DD ; load title screen (gfx and arrangement)
+	ld c,20
+	call DelayFrames
+	ld a,[$CC26]
+	ld b,a
+	ld a,[$D088]
+	cp a,2
+	jp z,.next3\@
+	inc b ; adjust MenuArrow_Counter
+.next3\@
+	ld a,b
+	and a
+	jr z,.next4\@ ; if press_A on Continue
+	cp a,1
+	jp z,$5D52 ; if press_A on NewGame
+	call $5E8A ; if press_a on Options
+	ld a,1
+	ld [$D08A],a
+	jp .next0\@
+.next4\@
+	call $5DB5
+	ld hl,$D126
+	set 5,[hl]
+.next6\@
+	xor a
+	ld [$FFB3],a
+	ld [$FFB2],a
+	ld [$FFB4],a
+	call $19A
+	ld a,[$FFB4]
+	bit 0,a
+	jr nz,.next5\@
+	bit 1,a
+	jp nz,.next0\@
+	jr .next6\@
+.next5\@
+	call $3DD4
+	call ClearScreen
+	ld a,4
+	ld [$D52A],a
+	ld c,10
+	call DelayFrames
+	ld a,[$D5A2]
+	and a
+	jp z,$5D5F
+	ld a,[$D35E] ; map ID
+	cp a,$76 ; Hall of Fame
+	jp nz,$5D5F
+	xor a
+	ld [$D71A],a
+	ld hl,$D732
+	set 2,[hl]
+	call $62CE
+	jp $5D5F
+Func_5bff:
+	ld a,1
+	ld [$D358],a
+	ld a,3
+	ld [$D355],a
+	ret
+
+INCBIN "baserom.gbc",$5C0A,$6115 - $5C0A
 
 OakSpeech: ; 6115
 	ld a,$FF
