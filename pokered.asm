@@ -464,7 +464,7 @@ TextBoxBorder: ; 1922
 	call NPlaceChar
 	ld [hl],$7E ; lower-right border ┘
 	ret
-
+;
 NPlaceChar:
 ; place a row of width c of identical characters
 	ld d,c
@@ -474,7 +474,88 @@ NPlaceChar:
 	jr nz,.loop\@
 	ret
 
-INCBIN "baserom.gbc",$1955,$20AF - $1955
+PlaceString: ; 1955
+	push hl
+.Start\@
+	ld a,[de]
+
+	; $50 ends a string
+	cp $50
+	jr nz,.PlaceText\@
+	ld b,h
+	ld c,l
+	pop hl
+	ret
+
+.PlaceText\@
+	cp $4E
+	jr nz,.next\@
+	ld bc,$0028
+	ld a,[$FFF6]
+	bit 2,a
+	jr z,.next2\@
+	ld bc,$14
+.next2\@
+	pop hl
+	add hl,bc
+	push hl
+	jp $19E8
+
+.next\@
+	cp $4F
+	jr nz,.next3\@
+	pop hl
+	ld hl,$C4E1
+	push hl
+	jp $19E8
+
+.next3\@
+	and a
+	jp z,$19EC
+	cp $4C
+	jp z,$1B0A
+	cp $4B
+	jp z,$1AF8
+	cp $51
+	jp z,$1AB4
+	cp $49
+	jp z,$1AD5
+	cp $52
+	jp z,$19F9
+	cp $53
+	jp z,$19FF
+	cp $54
+	jp z,$1A1D
+	cp $5B
+	jp z,$1A11
+	cp $5E
+	jp z,$1A17
+	cp $5C
+	jp z,$1A0B
+	cp $5D
+	jp z,$1A05
+	cp $55
+	jp z,$1A7C
+	cp $56
+	jp z,$1A23
+	cp $57
+	jp z,$1AAD
+	cp $58
+	jp z,$1A95
+	cp $4A
+	jp z,$1A29
+	cp $5F
+	jp z,$1A91
+	cp $59
+	jp z,$1A2F
+	cp $5A
+	jp z,$1A35
+	ld [hli],a
+	call $38D3
+	inc de
+	jp .Start\@
+
+INCBIN "baserom.gbc",$19EC,$20AF - $19EC
 
 DelayFrame: ; 20AF
 ; delay for one frame
@@ -880,7 +961,7 @@ MainMenu:
 	FuncCoord 2,2
 	ld hl,Coord
 	ld de,$5D7E
-	call $1955 ; print text
+	call PlaceString
 	jr .next2\@
 .next1\@
 	FuncCoord 0,0
@@ -891,7 +972,7 @@ MainMenu:
 	FuncCoord 2,2
 	ld hl,Coord
 	ld de,$5D87
-	call $1955 ; print text
+	call PlaceString
 .next2\@
 	ld hl,$D730
 	res 6,[hl]
