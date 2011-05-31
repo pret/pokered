@@ -509,9 +509,9 @@ PlaceString: ; 1955
 	push hl
 	jp $19E8
 
-.next3\@
+.next3\@ ; Check against a dictionary
 	and a
-	jp z,$19EC
+	jp z,Char00
 	cp $4C
 	jp z,$1B0A
 	cp $4B
@@ -521,23 +521,23 @@ PlaceString: ; 1955
 	cp $49
 	jp z,$1AD5
 	cp $52
-	jp z,$19F9
+	jp z,Char52
 	cp $53
-	jp z,$19FF
+	jp z,Char53
 	cp $54
-	jp z,$1A1D
+	jp z,Char54
 	cp $5B
-	jp z,$1A11
+	jp z,Char5B
 	cp $5E
-	jp z,$1A17
+	jp z,Char5E
 	cp $5C
-	jp z,$1A0B
+	jp z,Char5C
 	cp $5D
-	jp z,$1A05
+	jp z,Char5D
 	cp $55
 	jp z,$1A7C
 	cp $56
-	jp z,$1A23
+	jp z,Char56
 	cp $57
 	jp z,$1AAD
 	cp $58
@@ -555,7 +555,68 @@ PlaceString: ; 1955
 	inc de
 	jp .Start\@
 
-INCBIN "baserom.gbc",$19EC,$20AF - $19EC
+Char00:
+	ld b,h
+	ld c,l
+	pop hl
+	ld de,$19F4
+	dec de
+	ret
+
+Char00Text: ; “%d ERROR.”
+	db $17
+	dw $6696
+	db $22
+	TX_NULL
+
+Char52: ; player’s name
+	push de
+	ld de,$D158
+	jr Next
+
+Char53: ; rival’s name
+	push de
+	ld de,$D34A
+	jr Next
+
+Char5D: ; TRAINER
+	push de
+	ld de,$1A58
+	jr Next
+
+Char5C: ; TM
+	push de
+	ld de,$1A55
+	jr Next
+
+Char5B: ; PC
+	push de
+	ld de,$1A60
+	jr Next
+
+Char5E: ; ROCKET
+	push de
+	ld de,$1A63
+	jr Next
+
+Char54: ; POKé
+	push de
+	ld de,$1A6A
+	jr Next
+
+Char56: ; XXX
+	push de
+	ld de,$1A6F
+	jr Next
+
+Char4A: ; XXX
+	push de
+	ld de,$1A79
+	jr Next
+
+INCBIN "baserom.gbc",$1A2F,$1A4B - $1A2F
+Next:
+INCBIN "baserom.gbc",$1A4B,$20AF - $1A4B
 
 DelayFrame: ; 20AF
 ; delay for one frame
