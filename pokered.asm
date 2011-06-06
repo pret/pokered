@@ -476,7 +476,7 @@ NPlaceChar:
 
 PlaceString: ; 1955
 	push hl
-.Start\@
+PlaceNextChar: ; 1956
 	ld a,[de]
 
 	; $50 ends a string
@@ -543,17 +543,17 @@ PlaceString: ; 1955
 	cp $58
 	jp z,$1A95
 	cp $4A
-	jp z,$1A29
+	jp z,Char4A
 	cp $5F
-	jp z,$1A91
+	jp z,Char5F
 	cp $59
-	jp z,$1A2F
+	jp z,Char59
 	cp $5A
-	jp z,$1A35
+	jp z,Char5A
 	ld [hli],a
 	call $38D3
 	inc de
-	jp .Start\@
+	jp PlaceNextChar
 
 Char00:
 	ld b,h
@@ -572,51 +572,131 @@ Char00Text: ; “%d ERROR.”
 Char52: ; player’s name
 	push de
 	ld de,$D158
-	jr Next
+	jr FinishDTE
 
 Char53: ; rival’s name
 	push de
 	ld de,$D34A
-	jr Next
+	jr FinishDTE
 
 Char5D: ; TRAINER
 	push de
-	ld de,$1A58
-	jr Next
+	ld de,Char5DText
+	jr FinishDTE
 
 Char5C: ; TM
 	push de
-	ld de,$1A55
-	jr Next
+	ld de,Char5CText
+	jr FinishDTE
 
 Char5B: ; PC
 	push de
-	ld de,$1A60
-	jr Next
+	ld de,Char5BText
+	jr FinishDTE
 
 Char5E: ; ROCKET
 	push de
-	ld de,$1A63
-	jr Next
+	ld de,Char5EText
+	jr FinishDTE
 
 Char54: ; POKé
 	push de
-	ld de,$1A6A
-	jr Next
+	ld de,Char54Text
+	jr FinishDTE
 
-Char56: ; XXX
+Char56: ; ……
 	push de
-	ld de,$1A6F
-	jr Next
+	ld de,Char56Text
+	jr FinishDTE
 
-Char4A: ; XXX
+Char4A: ; PKMN
 	push de
-	ld de,$1A79
-	jr Next
+	ld de,Char4AText
+	jr FinishDTE
 
-INCBIN "baserom.gbc",$1A2F,$1A4B - $1A2F
-Next:
-INCBIN "baserom.gbc",$1A4B,$20AF - $1A4B
+Char59:
+; depending on whose turn it is, print
+; player active monster’s name
+; or
+; enemy active monster’s name, prefixed with “Enemy ”
+; (XXX what is the purpose of this vs. Char5A)
+	ld a,[$FFF3]
+	xor 1
+	jr MonsterNameCharsCommon
+
+Char5A:
+; depending on whose turn it is, print
+; player active monster’s name
+; or
+; enemy active monster’s name, prefixed with “Enemy ”
+	ld a,[$FFF3]
+MonsterNameCharsCommon:
+	push de
+	and a
+	jr nz,.Enemy\@
+	ld de,$D009 ; player active monster name
+	jr FinishDTE
+
+.Enemy\@ ; 1A40
+	; print “Enemy ”
+	ld de,Char5AText
+	call PlaceString
+
+	ld h,b
+	ld l,c
+	ld de,$CFDA ; enemy active monster name
+
+FinishDTE:
+	call PlaceString
+	ld h,b
+	ld l,c
+	pop de
+	inc de
+	jp PlaceNextChar
+
+Char5CText:
+	db $93,$8C,$50 ; TM
+Char5DText:
+	db $93,$91,$80,$88,$8D,$84,$91,$50 ; TRAINER
+Char5BText:
+	db $8F,$82,$50 ; PC
+Char5EText:
+	db $91,$8E,$82,$8A,$84,$93,$50 ; ROCKET
+Char54Text:
+	db $8F,$8E,$8A,$BA,$50 ; POKé
+Char56Text:
+	db $75,$75,$50 ; ……
+Char5AText:
+	db $84,$AD,$A4,$AC,$B8,$7F,$50 ; “Enemy ”
+Char4AText:
+	db $E1,$E2,$50 ; PKMN
+
+Char55:
+	push de
+	ld b,h
+	ld c,l
+	ld hl,Char55Text
+	call $1B40
+	ld h,b
+	ld l,c
+	pop de
+	inc de
+	jp PlaceNextChar
+
+Char55Text:
+; equivalent to Char4B
+	db $17
+	dw $66A3
+	db $22
+	db $50
+
+Char5F:
+	ld [hl],$E8 ; .
+	pop hl
+	ret
+
+; 1A95
+INCBIN "baserom.gbc",$1A95,$20AF - $1A95
 
 DelayFrame: ; 20AF
 ; delay for one frame
