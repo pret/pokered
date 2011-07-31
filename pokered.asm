@@ -3506,7 +3506,110 @@ Next628E:
 	ld [hl],a
 	ret
 
-INCBIN "baserom.gbc",$E2B4,$10000 - $E2B4
+INCBIN "baserom.gbc",$E2B4,$E919 - $E2B4
+
+; super rod data
+; map, pointer to fishing group
+SuperRodData: ; 6919
+	dbw $00,FishingGroup1
+	dbw $01,FishingGroup1
+	dbw $03,FishingGroup3
+	dbw $05,FishingGroup4
+	dbw $06,FishingGroup5
+	dbw $07,FishingGroup10
+	dbw $08,FishingGroup8
+	dbw $0F,FishingGroup3
+	dbw $11,FishingGroup4
+	dbw $15,FishingGroup5
+	dbw $16,FishingGroup4
+	dbw $17,FishingGroup7
+	dbw $18,FishingGroup7
+	dbw $1C,FishingGroup7
+	dbw $1D,FishingGroup7
+	dbw $1E,FishingGroup8
+	dbw $1F,FishingGroup8
+	dbw $20,FishingGroup8
+	dbw $21,FishingGroup2
+	dbw $22,FishingGroup9
+	dbw $23,FishingGroup3
+	dbw $24,FishingGroup3
+	dbw $41,FishingGroup3
+	dbw $5E,FishingGroup4
+	dbw $A1,FishingGroup8
+	dbw $A2,FishingGroup8
+	dbw $D9,FishingGroup6
+	dbw $DA,FishingGroup6
+	dbw $DB,FishingGroup6
+	dbw $DC,FishingGroup6
+	dbw $E2,FishingGroup9
+	dbw $E3,FishingGroup9
+	dbw $E4,FishingGroup9
+	db $FF
+
+; fishing groups
+; number of monsters, followed by level/monster pairs
+FishingGroup1:
+	db 2
+	db 15,TENTACOOL
+	db 15,POLIWAG
+
+FishingGroup2:
+	db 2
+	db 15,GOLDEEN
+	db 15,POLIWAG
+
+FishingGroup3:
+	db 3
+	db 15,PSYDUCK
+	db 15,GOLDEEN
+	db 15,KRABBY
+
+FishingGroup4:
+	db 2
+	db 15,KRABBY
+	db 15,SHELLDER
+
+FishingGroup5:
+	db 2
+	db 23,POLIWHIRL
+	db 15,SLOWPOKE
+
+FishingGroup6:
+	db 4
+	db 15,DRATINI
+	db 15,KRABBY
+	db 15,PSYDUCK
+	db 15,SLOWPOKE
+
+FishingGroup7:
+	db 4
+	db 5,TENTACOOL
+	db 15,KRABBY
+	db 15,GOLDEEN
+	db 15,MAGIKARP
+
+FishingGroup8:
+	db 4
+	db 15,STARYU
+	db 15,HORSEA
+	db 15,SHELLDER
+	db 15,GOLDEEN
+
+FishingGroup9:
+	db 4
+	db 23,SLOWBRO
+	db 23,SEAKING
+	db 23,KINGLER
+	db 23,SEADRA
+
+FishingGroup10:
+	db 4
+	db 23,SEAKING
+	db 15,KRABBY
+	db 15,GOLDEEN
+	db 15,MAGIKARP
+
+INCBIN "baserom.gbc",$E9C5,$10000 - $E9C5
 
 SECTION "bank4",DATA,BANK[$4]
 INCBIN "baserom.gbc",$10000,$4000
