@@ -541,7 +541,7 @@ PlaceNextChar: ; 1956
 	cp $57
 	jp z,$1AAD
 	cp $58
-	jp z,$1A95
+	jp z,Char58
 	cp $4A
 	jp z,Char4A
 	cp $5F
@@ -695,8 +695,26 @@ Char5F:
 	pop hl
 	ret
 
-; 1A95
-INCBIN "baserom.gbc",$1A95,$20AF - $1A95
+Char58:
+	ld a,[$D12B]
+	cp 4
+	jp z,Next1AA2
+	ld a,$EE
+	ld [$C4F2],a
+Next1AA2:
+	call $1B3A
+	call $3898
+	ld a,$7F
+	ld [$C4F2],a
+	pop hl
+	ld de,Char58Text
+	dec de
+	ret
+
+Char58Text:
+	db $50
+
+INCBIN "baserom.gbc",$1AB4,$20AF - $1AB4
 
 DelayFrame: ; 20AF
 ; delay for one frame
