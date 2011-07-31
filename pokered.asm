@@ -499,7 +499,7 @@ PlaceNextChar: ; 1956
 	pop hl
 	add hl,bc
 	push hl
-	jp $19E8
+	jp Next19E8
 
 .next\@
 	cp $4F
@@ -507,7 +507,7 @@ PlaceNextChar: ; 1956
 	pop hl
 	ld hl,$C4E1
 	push hl
-	jp $19E8
+	jp Next19E8
 
 .next3\@ ; Check against a dictionary
 	and a
@@ -515,11 +515,11 @@ PlaceNextChar: ; 1956
 	cp $4C
 	jp z,$1B0A
 	cp $4B
-	jp z,$1AF8
+	jp z,Char4B
 	cp $51
-	jp z,$1AB4
+	jp z,Char51
 	cp $49
-	jp z,$1AD5
+	jp z,Char49
 	cp $52
 	jp z,Char52
 	cp $53
@@ -552,6 +552,7 @@ PlaceNextChar: ; 1956
 	jp z,Char5A
 	ld [hli],a
 	call $38D3
+Next19E8:
 	inc de
 	jp PlaceNextChar
 
@@ -702,7 +703,7 @@ Char58:
 	ld a,$EE
 	ld [$C4F2],a
 Next1AA2:
-	call $1B3A
+	call ProtectedDelay3
 	call $3898
 	ld a,$7F
 	ld [$C4F2],a
@@ -714,7 +715,88 @@ Next1AA2:
 Char58Text:
 	db $50
 
-INCBIN "baserom.gbc",$1AB4,$20AF - $1AB4
+Char51:
+	push de
+	ld a,$EE
+	ld [$C4F2],a
+	call ProtectedDelay3
+	call $3898
+	ld hl,$C4A5
+	ld bc,$0412
+	call $18C4
+	ld c,$14
+	call $3739
+	pop de
+	ld hl,$C4B9
+	jp Next19E8
+
+Char49:
+	push de
+	ld a,$EE
+	ld [$C4F2],a
+	call ProtectedDelay3
+	call $3898
+	ld hl,$C469
+	ld bc,$0712
+	call $18C4
+	ld c,$14
+	call $3739
+	pop de
+	pop hl
+	ld hl,$C47D
+	push hl
+	jp Next19E8
+
+Char4B:
+	ld a,$EE
+	ld [$C4F2],a
+	call ProtectedDelay3
+	push de
+	call $3898
+	pop de
+	ld a,$7F
+	ld [$C4F2],a
+	push de
+	call Next1B18
+	call Next1B18
+	ld hl,$C4E1
+	pop de
+	jp Next19E8
+
+Next1B18:
+	ld hl,$C4B8
+	ld de,$C4A4
+	ld b,$3C
+.next\@
+	ld a,[hli]
+	ld [de],a
+	inc de
+	dec b
+	jr nz,.next\@
+	ld hl,$C4E1
+	ld a,$7F
+	ld b,$12
+.next2\@
+	ld [hli],a
+	dec b
+	jr nz,.next2\@
+
+	; wait five frames
+	ld b,5
+.WaitFrame\@
+	call DelayFrame
+	dec b
+	jr nz,.WaitFrame\@
+
+	ret
+
+ProtectedDelay3:
+	push bc
+	call Delay3
+	pop bc
+	ret
+
+INCBIN "baserom.gbc",$1B40,$20AF - $1B40
 
 DelayFrame: ; 20AF
 ; delay for one frame
@@ -1028,7 +1110,7 @@ PrintText: ; 3C49
 	ld [$D125],a
 	call $30E8
 	call $2429
-	call $3DD7
+	call Delay3
 	pop hl
 	ld bc,$C4B9
 	jp $1B40
