@@ -559,7 +559,7 @@ Char00:
 	ld b,h
 	ld c,l
 	pop hl
-	ld de,$19F4
+	ld de,Char00Text
 	dec de
 	ret
 
