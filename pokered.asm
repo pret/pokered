@@ -3444,9 +3444,69 @@ CaveMons:
 
 	db 0
 
+INCBIN "baserom.gbc",$D5C7,$E259 - $D5C7
 
+GoodRodCode: ; 6259
+	call $62B4
+	jp c,$6581
+Next625F:
+	call $3E5C
+	srl a
+	jr c,Next6278
+	and 3
+	cp 2
+	jr nc,Next625F
+	; choose which monster appears
+	ld hl,GoodRodMons
+	add a,a
+	ld c,a
+	ld b,0
+	add hl,bc
+	ld b,[hl]
+	inc hl
+	ld c,[hl]
+	and a
+Next6278:
+	ld a,0
+	rla
+	xor 1
+	jr Next628E
 
-INCBIN "baserom.gbc",$D5C7,$10000 - $D5C7
+GoodRodMons:
+	db 10,GOLDEEN
+	db 10,POLIWAG
+
+Next6283:
+	call $62B4
+	jp c,$6581
+Next6289:
+	call $68EA
+	ld a,e
+Next628E:
+	ld [$CD3D],a
+	dec a
+	jr nz,.next\@
+	ld a,1
+	ld [$D05F],a
+	ld a,b
+	ld [$D127],a
+	ld a,c
+	ld [$D059],a
+.next\@
+	ld hl,$D700
+	ld a,[hl]
+	push af
+	push hl
+	ld [hl],0
+	ld b,$1C
+	ld hl,$47B6
+	call Bankswitch
+	pop hl
+	pop af
+	ld [hl],a
+	ret
+
+INCBIN "baserom.gbc",$E2B4,$10000 - $E2B4
 
 SECTION "bank4",DATA,BANK[$4]
 INCBIN "baserom.gbc",$10000,$4000
