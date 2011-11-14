@@ -3800,11 +3800,10 @@ PalletTownScript:
 	set 6,[hl]
 .next\@
 	call $3C3C
-	ld hl,$4E73
+	ld hl,PalletTownScriptPointers
 	ld a,[$D5F1]
 	jp $3D97
 
-; 4E73
 PalletTownScriptPointers:
 	dw PalletTownScript1,PalletTownScript2,PalletTownScript3,PalletTownScript4,PalletTownScript5,PalletTownScript6,PalletTownScript7
 
@@ -9050,14 +9049,14 @@ RedsHouse2F_h:
 
 RedsHouse2FScript:
 	call $3C3C
-	ld hl,RedsHouse2FPointer1
+	ld hl,RedsHouse2FScriptPointers
 	ld a,[$D60C]
 	jp $3D97
 
-RedsHouse2FPointer1: ; XXX what is the purpose of this
-	dw RedsHouse2FPointer2,RedsHouse2FPointer3
+RedsHouse2FScriptPointers:
+	dw RedsHouse2FScript1,RedsHouse2FScript2
 
-RedsHouse2FPointer2:
+RedsHouse2FScript1:
 	xor a
 	ld [$FFB4],a
 	ld a,8
@@ -9066,7 +9065,7 @@ RedsHouse2FPointer2:
 	ld [$D60C],a
 	ret
 
-RedsHouse2FPointer3:
+RedsHouse2FScript2:
 	ret
 
 RedsHouse2FTexts:
