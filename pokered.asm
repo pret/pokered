@@ -105,7 +105,7 @@ MapHeaderPointers: ; $01AE
 	dw $4682 ; ROUTE_24
 	dw $479b ; ROUTE_25
 	dw RedsHouse1F_h
-	dw $40a4
+	dw RedsHouse2F_h
 	dw $5b2f
 	dw $4b02
 	dw $4251
@@ -1573,7 +1573,7 @@ MapHeaderBanks: ; 423D
 	db $14 ; ROUTE_24
 	db $14 ; ROUTE_25
 	db BANK(RedsHouse1F_h)
-	db $17
+	db BANK(RedsHouse2F_h)
 	db $06
 	db $07
 	db $11
@@ -8765,7 +8765,59 @@ SECTION "bank16",DATA,BANK[$16]
 INCBIN "baserom.gbc",$58000,$4000
 
 SECTION "bank17",DATA,BANK[$17]
-INCBIN "baserom.gbc",$5C000,$4000
+
+INCBIN "baserom.gbc",$5C000,$10
+
+RedsHouse2FBlocks:
+	INCBIN "maps/redshouse2f.blk"
+
+INCBIN "baserom.gbc",$5C020,$84
+
+RedsHouse2F_h:
+	db $04 ; tileset
+	db $04,$04 ; dimensions
+	dw RedsHouse2FBlocks,RedsHouse2FTexts,RedsHouse2FScript
+	db 0 ; no connections
+	dw RedsHouse2FObject
+
+RedsHouse2FScript:
+	call $3C3C
+	ld hl,RedsHouse2FPointer1
+	ld a,[$D60C]
+	jp $3D97
+
+RedsHouse2FPointer1: ; XXX what is the purpose of this
+	dw RedsHouse2FPointer2,RedsHouse2FPointer3
+
+RedsHouse2FPointer2:
+	xor a
+	ld [$FFB4],a
+	ld a,8
+	ld [$D528],a
+	ld a,1
+	ld [$D60C],a
+	ret
+
+RedsHouse2FPointer3:
+	ret
+
+RedsHouse2FTexts:
+	db $50
+
+RedsHouse2FObject:
+	db $0A ; border tile
+
+	db 1 ; warps
+	db 1,7,2,$25
+
+	db 0 ; signs
+
+	db 0 ; people
+
+	dw $C6EF + 4 + (4 + 6) * 0 + 3
+	db 1,7
+
+INCBIN "baserom.gbc",$5C0DC,$4000-$DC
 
 SECTION "bank18",DATA,BANK[$18]
 INCBIN "baserom.gbc",$60000,$4000
