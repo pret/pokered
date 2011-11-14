@@ -106,7 +106,7 @@ MapHeaderPointers: ; $01AE
 	dw $479b ; ROUTE_25
 	dw RedsHouse1F_h
 	dw RedsHouse2F_h
-	dw $5b2f
+	dw BluesHouse_h
 	dw $4b02
 	dw $4251
 	dw $5462
@@ -1574,7 +1574,7 @@ MapHeaderBanks: ; 423D
 	db $14 ; ROUTE_25
 	db BANK(RedsHouse1F_h)
 	db BANK(RedsHouse2F_h)
-	db $06
+	db BANK(BluesHouse_h)
 	db $07
 	db $11
 	db $07
@@ -4004,7 +4004,6 @@ PalletTownText7: ; sign by Blue’s house
 
 INCBIN "baserom.gbc",$18FF1,$1B2F-$FF1
 
-; 5B2F
 BluesHouse_h:
 	db $08 ; tileset
 	db $04,$04 ; dimensions
