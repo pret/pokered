@@ -887,3 +887,7 @@ EAST EQU 1
 WEST EQU 2
 SOUTH EQU 4
 NORTH EQU 8
+
+; different kinds of people events
+ITEM EQU $80
+TRAINER EQU $40

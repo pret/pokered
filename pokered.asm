@@ -4002,7 +4002,116 @@ PalletTownText6: ; sign by Red’s house
 PalletTownText7: ; sign by Blue’s house
 	db $17,$C1,$43,$29,$50 ; “Blue’s House”
 
-INCBIN "baserom.gbc",$18FF1,$4000-$FF1
+INCBIN "baserom.gbc",$18FF1,$1B2F-$FF1
+
+; 5B2F
+BluesHouse_h:
+	db $08 ; tileset
+	db $04,$04 ; dimensions
+	dw BluesHouseBlocks,BluesHouseTexts,BluesHouseScript
+	db 0
+	dw BluesHouseObject
+
+BluesHouseScript:
+	call $3C3C
+	ld hl,BluesHouseScriptPointers
+	ld a,[$D5F3]
+	jp $3D97
+
+BluesHouseScriptPointers:
+	dw BluesHouseScript1,BluesHouseScript2
+
+BluesHouseScript1:
+	ld hl,$D74A
+	set 1,[hl]
+
+	; trigger the next script
+	ld a,1
+	ld [$D5F3],a
+	ret
+
+BluesHouseScript2:
+	ret
+
+BluesHouseTexts:
+	dw BluesHouseText1,BluesHouseText2,BluesHouseText3
+
+BluesHouseText1:
+	db 8
+	ld a,[$D74A]
+	bit 0,a
+	jr nz,.GotMap\@
+	ld a,[$D74B]
+	bit 5,a
+	jr nz,.GiveMap\@
+	ld hl,DaisyInitialText
+	call PrintText
+	jr .done\@
+.GiveMap\@
+	ld hl,DaisyOfferMapText
+	call PrintText
+	ld bc,(TOWN_MAP << 8) | 1
+	call $3E2E
+	jr nc,.BagFull\@
+	ld a,$29
+	ld [$CC4D],a
+	ld a,$11
+	call Predef ; hide table map object
+	ld hl,GotMapText
+	call PrintText
+	ld hl,$D74A
+	set 0,[hl]
+	jr .done\@
+.GotMap\@
+	ld hl,DaisyUseMapText
+	call PrintText
+	jr .done\@
+.BagFull\@
+	ld hl,DaisyBagFullText
+	call PrintText
+.done\@
+	jp $24D7
+
+DaisyInitialText:
+	db $17,$3C,$4C,$25,$50 ; “Hi! Blue is out…”
+DaisyOfferMapText: ; 5BAF
+	db $17,$5D,$4C,$25,$50 ; “Grandpa asked you to run an errand?…”
+GotMapText: ; 5BB4
+	db $17,$9C,$4C,$25,$11,$50 ; “Red got a Town Map!”
+DaisyBagFullText: ; 5BBA
+	db $17,$AD,$4C,$25,$50 ; “You have too much stuff with you.”
+DaisyUseMapText: ; 5BBF
+	db $17,$D0,$4C,$25,$50 ; “Use the Town Map to…”
+BluesHouseText2: ; 5BC4
+	db $17,$FD,$4C,$25,$50 ; “Pokémon are living things!…”
+BluesHouseText3: ; the map on the table, which Daisy gives the player
+	db $17,$3B,$4D,$25,$50 ; “It’s a big map!…”
+
+BluesHouseObject:
+	db $0A ; border tile
+
+	db 2 ; warps
+	db 7,2,1,$FF
+	db 7,3,1,$FF
+
+	db 0 ; signs
+
+	db 3 ; people
+	db $11,4+3,4+2,$FF,$D3,1 ; Daisy, sitting by map
+	db $11,4+4,4+6,$FE,1,ITEM|2,0 ; map on table
+	db $41,4+3,4+3,$FF,$FF,ITEM|3,0 ; Daisy, walking around
+
+	; warp-to
+	dw $C712
+	db 7,2
+
+	dw $C712
+	db 7,3
+
+BluesHouseBlocks:
+	INCBIN "maps/blueshouse.blk"
+
+INCBIN "baserom.gbc",$19C06,$4000-$1C06
 
 SECTION "bank7",DATA,BANK[$7]
 INCBIN "baserom.gbc",$1C000,$4000
