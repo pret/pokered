@@ -67,7 +67,7 @@ Start:
 INCBIN "baserom.gbc",$150,$1AE - $150
 ; see also MapHeaderBanks
 MapHeaderPointers: ; $01AE
-	dw $42a1 ; PALLET_TOWN
+	dw PalletTown_h
 	dw $4357 ; VIRIDIAN_CITY
 	dw $4554 ; PEWTER_CITY
 	dw $474e ; CERULEAN_CITY
@@ -1535,7 +1535,7 @@ INCBIN "baserom.gbc",$C000,$C23D - $C000
 
 ; see also MapHeaderPointers
 MapHeaderBanks: ; 423D
-	db $06 ; PALLET_TOWN
+	db BANK(PalletTown_h)
 	db $06 ; VIRIDIAN_CITY
 	db $06 ; PEWTER_CITY
 	db $06 ; CERULEAN_CITY
@@ -3735,7 +3735,275 @@ SECTION "bank5",DATA,BANK[$5]
 INCBIN "baserom.gbc",$14000,$4000
 
 SECTION "bank6",DATA,BANK[$6]
-INCBIN "baserom.gbc",$18000,$4000
+INCBIN "baserom.gbc",$18000,$2A1
+
+PalletTown_h:
+	db $00 ; tileset
+	db $09,$0A ; dimensions
+	dw PalletTownBlocks,PalletTownTexts,PalletTownScript
+	db NORTH | SOUTH ; connections
+
+	db $0C ; Route 1
+	dw $4192,$C6EB ; pointers
+	db $0A,$0A ; bigness, width
+	db $23,$00 ; alignments
+	dw $C809 ; window
+
+	db $20 ; Route 21
+	dw $506D,$C7AB ; pointers
+	db $0A,$0A ; bigness, width
+	db $00,$00 ; alignments
+	dw $C6F9 ; window
+
+	dw PalletTownObject
+
+PalletTownObject: ; 182C3
+	db $0B ; border tile
+
+	db 3 ; warps
+	db 5,5,0,$25 ; Red’s house 1F
+	db 5,$D,0,$27 ; Blue’s house
+	db $B,$C,1,$28 ; Oak’s Lab
+
+	db 4 ; signs
+	db $D,$D,4 ; sign by lab
+	db 9,7,5 ; Pallet Town sign
+	db 5,3,6 ; sign by Red’s house
+	db 5,$B,7 ; sign by Blue’s house
+
+	db 3 ; people
+	db 3,5+4,8+4,$FF,$FF,1 ; Oak
+	db $D,8+4,3+4,$FE,0,2 ; girl
+	db $2F,$E+4,$B+4,$FE,0,3 ; fat man
+
+	; warp‐to
+
+	dw $C71B
+	db 5,5
+
+	dw $C71F
+	db 5,$D
+
+	dw $C74F
+	db $B,$C
+
+PalletTownBlocks:
+	INCBIN "maps/pallettown.blk"
+
+	INCBIN "baserom.gbc",$18357,$18E5B-$18357
+
+PalletTownScript:
+	ld a,[$D74B]
+	bit 4,a
+	jr z,.next\@
+	ld hl,$D747
+	set 6,[hl]
+.next\@
+	call $3C3C
+	ld hl,$4E73
+	ld a,[$D5F1]
+	jp $3D97
+
+; 4E73
+PalletTownScriptPointers:
+	dw PalletTownScript1,PalletTownScript2,PalletTownScript3,PalletTownScript4,PalletTownScript5,PalletTownScript6,PalletTownScript7
+
+PalletTownScript1:
+	ld a,[$D747]
+	bit 0,a
+	ret nz
+	ld a,[$D361]
+	cp 1
+	ret nz
+	xor a
+	ld [$FFB4],a
+	ld a,4
+	ld [$D528],a
+	ld a,$FF
+	call $23B1 ; stop music
+	ld a,2
+	ld c,a ; song bank
+	ld a,$DB ; “oak appears” music
+	call $23A1 ; plays music
+	ld a,$FC
+	ld [$CD6B],a
+	ld hl,$D74B
+	set 7,[hl]
+
+	; trigger the next script
+	ld a,1
+	ld [$D5F1],a
+	ret
+
+PalletTownScript2:
+	xor a
+	ld [$CF0D],a
+	ld a,1
+	ld [$FF8C],a
+	call $2920
+	ld a,$FF
+	ld [$CD6B],a
+	ld a,0
+	ld [$CC4D],a
+	ld a,$15
+	call Predef
+
+	; trigger the next script
+	ld a,2
+	ld [$D5F1],a
+	ret
+
+PalletTownScript3:
+	ld a,1
+	ld [$FF8C],a
+	ld a,4
+	ld [$FF8D],a
+	call $34A6
+	call Delay3
+	ld a,1
+	ld [$D361],a
+	ld a,1
+	ld [$FF9B],a
+	ld a,1
+	swap a
+	ld [$FF95],a
+	ld a,$22
+	call Predef
+	ld hl,$FF95
+	dec [hl]
+	ld a,$20
+	call Predef
+	ld de,$CC97
+	ld a,1
+	ld [$FF8C],a
+	call $363A
+	ld a,$FF
+	ld [$CD6B],a
+
+	; trigger the next script
+	ld a,3
+	ld [$D5F1],a
+	ret
+
+PalletTownScript4:
+	ld a,[$D730]
+	bit 0,a
+	ret nz
+	xor a
+	ld [$C109],a
+	ld a,1
+	ld [$CF0D],a
+	ld a,$FC
+	ld [$CD6B],a
+	ld a,1
+	ld [$FF8C],a
+	call $2920
+	ld a,$FF
+	ld [$CD6B],a
+	ld a,1
+	ld [$CF13],a
+	xor a
+	ld [$CF10],a
+	ld a,1
+	ld [$CC57],a
+	ld a,[$FFB8]
+	ld [$CC58],a
+
+	; trigger the next script
+	ld a,4
+	ld [$D5F1],a
+	ret
+
+PalletTownScript5:
+	ld a,[$CC57]
+	and a
+	ret nz
+
+	; trigger the next script
+	ld a,5
+	ld [$D5F1],a
+	ret
+
+PalletTownScript6:
+	ld a,[$D74A]
+	bit 2,a
+	jr nz,.next\@
+	and 3
+	cp 3
+	jr nz,.next\@
+	ld hl,$D74A
+	set 2,[hl]
+	ld a,$27
+	ld [$CC4D],a
+	ld a,$11
+	call Predef
+	ld a,$28
+	ld [$CC4D],a
+	ld a,$15
+	jp Predef
+.next\@
+	ld a,[$D74B]
+	bit 4,a
+	ret z
+	ld hl,$D74B
+	set 6,[hl]
+PalletTownScript7:
+	ret
+
+PalletTownTexts:
+	dw PalletTownText1,PalletTownText2,PalletTownText3,PalletTownText4,PalletTownText5,PalletTownText6,PalletTownText7
+
+PalletTownText1:
+	db 8
+	ld a,[$CF0D]
+	and a
+	jr nz,.next\@
+	ld a,1
+	ld [$CC3C],a
+	ld hl,OakAppearsText
+	jr .done\@
+.next\@
+	ld hl,OakWalksUpText
+.done\@
+	call PrintText
+	jp $24D7
+
+OakAppearsText:
+	db $17,$45,$42,$29 ; “Hey! Wait! Don’t go out!…”
+	db 8
+	ld c,10
+	call DelayFrames
+	xor a
+	ld [$CD4F],a
+	ld [$CD50],a
+	ld a,$4C
+	call Predef ; display ! over head
+	ld a,4
+	ld [$D528],a
+	jp $24D7
+
+OakWalksUpText:
+	db $17,$64,$42,$29,$50 ; “It’s unsafe! Wild Pokémon…”
+
+PalletTownText2: ; girl
+	db $17,$DC,$42,$29,$50 ; “I’m raising Pokémon too!…”
+
+PalletTownText3: ; fat man
+	db $17,$1D,$43,$29,$50 ; “Technology is incredible!…”
+
+PalletTownText4: ; sign by lab
+	db $17,$74,$43,$29,$50 ; “Oak Pokémon Research Lab”
+
+PalletTownText5: ; sign by fence
+	db $17,$8B,$43,$29,$50 ; “Pallet Town: Shades of your journey…”
+
+PalletTownText6: ; sign by Red’s house
+	db $17,$B6,$43,$29,$50 ; “Red’s House”
+
+PalletTownText7: ; sign by Blue’s house
+	db $17,$C1,$43,$29,$50 ; “Blue’s House”
+
+INCBIN "baserom.gbc",$18FF1,$4000-$FF1
 
 SECTION "bank7",DATA,BANK[$7]
 INCBIN "baserom.gbc",$1C000,$4000
