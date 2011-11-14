@@ -3811,8 +3811,8 @@ PalletTownScript1:
 	ld a,[$D747]
 	bit 0,a
 	ret nz
-	ld a,[$D361]
-	cp 1
+	ld a,[W_YCOORD]
+	cp 1 ; is player near north exit?
 	ret nz
 	xor a
 	ld [$FFB4],a
@@ -3860,7 +3860,7 @@ PalletTownScript3:
 	call $34A6
 	call Delay3
 	ld a,1
-	ld [$D361],a
+	ld [W_YCOORD],a
 	ld a,1
 	ld [$FF9B],a
 	ld a,1
@@ -3871,7 +3871,7 @@ PalletTownScript3:
 	ld hl,$FF95
 	dec [hl]
 	ld a,$20
-	call Predef
+	call Predef ; load Oak’s movement into $CC97
 	ld de,$CC97
 	ld a,1
 	ld [$FF8C],a
