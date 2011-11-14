@@ -725,7 +725,7 @@ Char51:
 	ld bc,$0412
 	call $18C4
 	ld c,$14
-	call $3739
+	call DelayFrames
 	pop de
 	ld hl,$C4B9
 	jp Next19E8
@@ -740,7 +740,7 @@ Char49:
 	ld bc,$0712
 	call $18C4
 	ld c,$14
-	call $3739
+	call DelayFrames
 	pop de
 	pop hl
 	ld hl,$C47D
