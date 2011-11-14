@@ -104,7 +104,7 @@ MapHeaderPointers: ; $01AE
 	dw $433f ; ROUTE_23
 	dw $4682 ; ROUTE_24
 	dw $479b ; ROUTE_25
-	dw $415c ; REDS_HOUSE_1F
+	dw RedsHouse1F_h
 	dw $40a4
 	dw $5b2f
 	dw $4b02
@@ -1572,7 +1572,7 @@ MapHeaderBanks: ; 423D
 	db $14 ; ROUTE_23
 	db $14 ; ROUTE_24
 	db $14 ; ROUTE_25
-	db $12 ; REDS_HOUSE_1F
+	db BANK(RedsHouse1F_h)
 	db $17
 	db $06
 	db $07
@@ -8397,7 +8397,7 @@ INCBIN "baserom.gbc",$44000,$4000
 SECTION "bank12",DATA,BANK[$12]
 INCBIN "baserom.gbc",$48000,$15C
 
-RedsHouse1F: ; 415C
+RedsHouse1F_h: ; 415C
 	db $01 ; tileset
 	db $04,$04 ; dimensions
 	dw RedsHouse1FBlocks,RedsHouse1FTexts,RedsHouse1FScript
