@@ -8395,7 +8395,109 @@ SECTION "bank11",DATA,BANK[$11]
 INCBIN "baserom.gbc",$44000,$4000
 
 SECTION "bank12",DATA,BANK[$12]
-INCBIN "baserom.gbc",$48000,$4000
+INCBIN "baserom.gbc",$48000,$15C
+
+RedsHouse1F: ; 415C
+	db $01 ; tileset
+	db $04,$04 ; dimensions
+	dw RedsHouse1FBlocks,RedsHouse1FTexts,RedsHouse1FScript
+	db 0 ; no connections
+	dw RedsHouse1FObject
+
+RedsHouse1FScript: ; 4168
+	jp $3C3C
+
+RedsHouse1FTexts: ; 416B
+	dw RedsHouse1FText1,RedsHouse1FText2
+
+RedsHouse1FText1: ; Mom
+	db 8
+	ld a,[$D72E]
+	bit 3,a
+	jr nz,.heal\@ ; if player has received a Pokémon from Oak, heal team
+	ld hl,MomWakeUpText
+	call PrintText
+	jr .done\@
+.heal\@
+	call MomHealPokemon
+.done\@
+	jp $24D7
+
+MomWakeUpText:
+	db $17,$07,$4B,$25,$50 ; “All boys leave home some day…”
+
+MomHealPokemon:
+	ld hl,MomHealText1
+	call PrintText
+	call GBFadeOut2
+	call $3071
+	ld a,7
+	call Predef
+	ld a,$E8
+	ld [$C0EE],a
+	call $23B1 ; play sound?
+.next\@
+	ld a,[$C026]
+	cp $E8
+	jr z,.next\@
+	ld a,[$D35B]
+	ld [$C0EE],a
+	call $23B1
+	call GBFadeIn2
+	ld hl,MomHealText2
+	jp PrintText
+
+MomHealText1:
+	db $17,$6D,$4B,$25,$50 ; "Red! You should take a quick rest…"
+MomHealText2:
+	db $17,$94,$4B,$25,$50 ; “Oh good! …”
+
+RedsHouse1FText2: ; TV
+	db 8
+	ld a,[$C109]
+	cp 4
+	ld hl,TVWrongSideText
+	jr nz,.done\@ ; if player is not facing up
+	ld hl,StandByMeText
+.done\@
+	call PrintText
+	jp $24D7
+
+StandByMeText:
+	db $17,$D7,$4B,$25,$50 ; “Four boys are walking…”
+
+TVWrongSideText:
+	db $17,$29,$4C,$25,$50 ; “Oops, wrong side.”
+
+RedsHouse1FObject:
+	db $0A ; border tile
+
+	db 3 ; warps
+	db 7,2,0,$FF ; exit1
+	db 7,3,0,$FF ; exit2
+	db 1,7,0,$26 ; staircase
+
+	db 1 ; signs
+	db 1,3,2 ; TV
+
+	db 1 ; people
+	db $33,4+4,5+4,$FF,$D2,1 ; Mom
+
+	; warp-to
+
+	dw $C6EF + 4 + (4 + 6) * (3) + 1
+	db 7,2
+
+	dw $C6EF + 4 + (4 + 6) * (3) + 1
+	db 7,3
+
+	dw $C6EF + 4 + (4 + 6) * (0) + 3
+	db 1,7
+
+RedsHouse1FBlocks:
+	INCBIN "maps/redshouse1f.blk"
+
+INCBIN "baserom.gbc",$48219,$4000 - $219
 
 SECTION "bank13",DATA,BANK[$13]
 
