@@ -112,7 +112,11 @@ W_ENEMYMON5MOVE3 EQU $D95E
 
 W_ENEMYMON6MOVE3 EQU $D98A
 
+H_RAND1 EQU $FFD3
+H_RAND2 EQU $FFD4
+
 ; hardware registers, from the pandocs http://nocash.emubase.de/pandocs.htm
+rDIV EQU $FF04
 rBGP EQU $FF47
 rOBP0 EQU $FF48
 rOBP1 EQU $FF49

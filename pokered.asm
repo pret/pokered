@@ -1121,7 +1121,21 @@ Delay3: ; 3DD7
 	ld c,3
 	jp DelayFrames
 
-INCBIN "baserom.gbc",$3DDC,$3E6D - $3DDC
+INCBIN "baserom.gbc",$3DDC,$3E5C - $3DDC
+
+GenRandom: ; 3E5C
+; store a random 8-bit value in a
+	push hl
+	push de
+	push bc
+	ld b,BANK(GenRandom_)
+	ld hl,GenRandom_
+	call Bankswitch
+	ld a,[H_RAND1]
+	pop bc
+	pop de
+	pop hl
+	ret
 
 Predef: ; 3E6D
 ; runs a predefined ASM command, where the command ID is read from $D0B7
@@ -3558,7 +3572,7 @@ GoodRodCode: ; 6259
 	call $62B4
 	jp c,$6581
 Next625F:
-	call $3E5C
+	call GenRandom
 	srl a
 	jr c,Next6278
 	and 3
@@ -3729,7 +3743,21 @@ ShrinkPic1:
 ShrinkPic2:
 	INCBIN "pic/trainer/shrink2.pic"
 
-INCBIN "baserom.gbc",$13074,$13AA0-$13074
+INCBIN "baserom.gbc",$13074,$13A8F-$13074
+
+GenRandom_: ; 7A8F
+; generate a random 16-bit integer and store it at $FFD3,$FFD4
+	ld a,[rDIV]
+	ld b,a
+	ld a,[H_RAND1]
+	adc b
+	ld [H_RAND1],a
+	ld a,[rDIV]
+	ld b,a
+	ld a,[H_RAND2]
+	sbc b
+	ld [H_RAND2],a
+	ret
 
 SECTION "bank5",DATA,BANK[$5]
 INCBIN "baserom.gbc",$14000,$4000
@@ -5635,7 +5663,7 @@ TrainerAI: ; 652E
 	ld a,[hli]
 	ld h,[hl]
 	ld l,a
-	call $3E5C
+	call GenRandom
 	jp [hl]
 
 TrainerAIPointers: ; 655C
