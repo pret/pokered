@@ -4780,6 +4780,7 @@ SECTION "bankE",DATA,BANK[$E]
 
 Attacks: ; 4000
 ; characteristics of each attack
+; animation, effect, power, type, accuracy, PP
 db POUND       ,$00,$28,NORMAL,$FF,35
 db KARATE_CHOP ,$00,$32,NORMAL,$FF,25
 db DOUBLESLAP  ,$1D,$0F,NORMAL,$D8,10
@@ -5839,13 +5840,12 @@ LanceAI:
 	jp AIUseHyperPotion
 
 GenericAI:
-	and a
+	and a ; clear carry
 	ret
 
 ; end of individual trainer AI routines
 
 DecrementAICount: ; 6695
-; XXX what does this do
 	ld hl,W_AICOUNT
 	dec [hl]
 	scf
