@@ -54,6 +54,8 @@ TX_NULL: MACRO
 	ENDM
 
 ; wram locations
+W_AICOUNT EQU $CCDF ; number of times remaining that AI action can occur
+
 W_OPPONENTHP     EQU $CFE6 ; active opponent's hp (16 bits)
 W_OPPONENTNUMBER EQU $CFE8 ; active opponent's position in team (0 to 5)
 W_OPPONENTSTATUS EQU $CFE9 ; active opponent's status condition

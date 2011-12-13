@@ -5622,15 +5622,15 @@ TrainerAI: ; 652E
 	add hl,bc
 	add hl,bc
 	add hl,bc
-	ld a,[$CCDF] ; XXX 340b0,3a548,3a553,3a696,3c943,3ef74
+	ld a,[W_AICOUNT]
 	and a
-	ret z ; if XXX, we're done here
+	ret z ; if no AI uses left, we're done here
 	inc hl
 	inc a
 	jr nz,.getpointer\@
 	dec hl
 	ld a,[hli]
-	ld [$CCDF],a
+	ld [W_AICOUNT],a
 .getpointer\@
 	ld a,[hli]
 	ld h,[hl]
@@ -5640,7 +5640,7 @@ TrainerAI: ; 652E
 
 TrainerAIPointers: ; 655C
 ; one entry per trainer class
-; XXX first byte, ???
+; first byte, number of times (per Pokémon) it can occur
 ; next two bytes, pointer to AI subroutine for trainer class
 	dbw 3,GenericAI
 	dbw 3,GenericAI
@@ -5816,9 +5816,9 @@ GenericAI:
 
 ; end of individual trainer AI routines
 
-Function6695: ; 6695
+DecrementAICount: ; 6695
 ; XXX what does this do
-	ld hl,$CCDF
+	ld hl,W_AICOUNT
 	dec [hl]
 	scf
 	ret
@@ -5918,7 +5918,7 @@ Function6718: ; 6718
 	ld [$CF94],a
 	ld a,$48
 	call Predef
-	jp $6695
+	jp DecrementAICount
 
 Function672A: ; 672A
 	ld a,[W_ENEMYMONCOUNT]
@@ -6091,12 +6091,12 @@ AIIncreaseStat:
 	ld [hli],a
 	pop af
 	ld [hl],a
-	jp $6695
+	jp DecrementAICount
 
 AIPrintItemUse:
 	ld [$CF05],a
 	call AIPrintItemUse_
-	jp $6695
+	jp DecrementAICount
 
 AIPrintItemUse_:
 ; print "x used [$CF05] on z!"
@@ -8321,7 +8321,7 @@ EnemySendOut: ; 490E
 	ld [hli],a
 	ld [hl],a
 	dec a
-	ld [$CCDF],a
+	ld [W_AICOUNT],a
 	ld hl,$D062
 	res 5,[hl]
 	ld hl,$C3B2
