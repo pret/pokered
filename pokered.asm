@@ -1178,7 +1178,28 @@ MewPicFront:
 MewPicBack:
 	INCBIN "pic/monback/mewb.pic"
 
-INCBIN "baserom.gbc",$425B,$5AF2-$425B
+INCBIN "baserom.gbc",$425B,$4588-$425B
+
+TitleMons: ; 4588
+; mons on the title screen are randomly chosen from here
+	db CHARMANDER
+	db SQUIRTLE
+	db BULBASAUR
+	db WEEDLE
+	db NIDORAN_M
+	db SCYTHER
+	db PIKACHU
+	db CLEFAIRY
+	db RHYDON
+	db ABRA
+	db GASTLY
+	db DITTO
+	db PIDGEOTTO
+	db ONIX
+	db PONYTA
+	db MAGIKARP
+
+INCBIN "baserom.gbc",$4598,$5AF2-$4598
 
 MainMenu:
 ; Check save file
