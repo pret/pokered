@@ -410,7 +410,7 @@ Tset17_Coll:
 
 ClearScreen: ; 190F
 ; clears all tiles in the tilemap,
-; then (writes 1 to $FFD3, waits for it to become 0) three times (XXX why?)
+; then wait three frames
 	ld bc,$0168 ; tilemap size
 	inc b
 	ld hl,$C3A0 ; TILEMAP_START
