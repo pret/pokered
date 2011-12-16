@@ -10109,7 +10109,7 @@ Pointer4DCF: ; 4DCF
 
 INCBIN "baserom.gbc",$78DDB,$78E53-$78DDB
 RealPlayAnimation: ; 4E53
-	ld a,[$CF07]
+	ld a,[$CF07] ; get animation # − 1
 	cp a,$FF
 	jr z,.Next4E60
 	call $586F
@@ -10173,7 +10173,230 @@ RealPlayAnimation: ; 4E53
 	ld [$D096],a
 	jp $4E73
 
-INCBIN "baserom.gbc",$78EC8,$79E16 - $78EC8
+INCBIN "baserom.gbc",$78EC8,$7986F - $78EC8
+
+Func586F: ; 586F
+	ld hl,MoveSoundTable
+	ld e,a
+	ld d,0
+	add hl,de
+	add hl,de
+	add hl,de
+	ld a,[hli]
+	ld b,a
+	call IsCryMove
+	jr nc,.NotCryMove
+	ld a,[$FFF3]
+	and a
+	jr nz,.next\@
+	ld a,[$D014] ; get number of current monster
+	jr .Continue\@
+.next\@
+	ld a,[$CFE5]
+.Continue\@
+	push hl
+	call $13D9
+	ld b,a
+	pop hl
+	ld a,[$C0F1]
+	add [hl]
+	ld [$C0F1],a
+	inc hl
+	ld a,[$C0F2]
+	add [hl]
+	ld [$C0F2],a
+	jr .done\@
+.NotCryMove
+	ld a,[hli]
+	ld [$C0F1],a
+	ld a,[hli]
+	ld [$C0F2],a
+.done\@
+	ld a,b
+	ret
+IsCryMove:
+; set carry if the attack animation involves playing a monster cry
+	ld a,[$D07C]
+	cp a,GROWL
+	jr z,.CryMove
+	cp a,ROAR
+	jr z,.CryMove
+	and a ; clear carry
+	ret
+.CryMove
+	scf
+	ret
+
+MoveSoundTable:
+	db $a0,$00,$80
+	db $a2,$10,$80
+	db $b3,$00,$80
+	db $a1,$01,$80
+	db $a3,$00,$40
+	db $e9,$00,$ff
+	db $a3,$10,$60
+	db $a3,$20,$80
+	db $a3,$00,$a0
+	db $a6,$00,$80
+	db $a5,$20,$40
+	db $a5,$00,$80
+	db $a4,$00,$a0
+	db $a7,$10,$c0
+	db $a7,$00,$a0
+	db $a8,$00,$c0
+	db $a8,$10,$a0
+	db $a9,$00,$e0
+	db $a7,$20,$c0
+	db $aa,$00,$80
+	db $b9,$00,$80
+	db $ab,$01,$80
+	db $b7,$00,$80
+	db $ad,$f0,$40
+	db $b0,$00,$80
+	db $ad,$00,$80
+	db $b8,$10,$80
+	db $b1,$01,$a0
+	db $ae,$00,$80
+	db $b4,$00,$60
+	db $b4,$01,$40
+	db $b6,$00,$a0
+	db $b0,$10,$a0
+	db $b7,$00,$c0
+	db $aa,$10,$60
+	db $b0,$00,$a0
+	db $b9,$11,$c0
+	db $b0,$20,$c0
+	db $b8,$00,$80
+	db $b1,$00,$80
+	db $b1,$20,$c0
+	db $af,$00,$80
+	db $db,$ff,$40
+	db $b4,$00,$80
+	db $a1,$00,$c0
+	db $a1,$00,$40
+	db $e4,$00,$80
+	db $bf,$40,$60
+	db $bf,$00,$80
+	db $bf,$ff,$40
+	db $c7,$80,$c0
+	db $af,$10,$a0
+	db $af,$21,$e0
+	db $c5,$00,$80
+	db $bb,$20,$60
+	db $c7,$00,$80
+	db $cc,$00,$80
+	db $c2,$40,$80
+	db $c5,$f0,$e0
+	db $cf,$00,$80
+	db $c7,$f0,$60
+	db $c2,$00,$80
+	db $e6,$00,$80
+	db $9d,$01,$a0
+	db $a9,$f0,$20
+	db $ba,$01,$c0
+	db $ba,$00,$80
+	db $b0,$00,$e0
+	db $be,$01,$60
+	db $be,$20,$40
+	db $bb,$00,$80
+	db $bb,$40,$c0
+	db $b1,$03,$60
+	db $bd,$11,$e0
+	db $a8,$20,$e0
+	db $d2,$00,$80
+	db $b2,$00,$80
+	db $b2,$11,$a0
+	db $b2,$01,$c0
+	db $a9,$14,$c0
+	db $b1,$02,$a0
+	db $c5,$f0,$80
+	db $c5,$20,$c0
+	db $d5,$00,$20
+	db $d5,$20,$80
+	db $d2,$12,$60
+	db $be,$00,$80
+	db $aa,$01,$e0
+	db $c5,$0f,$e0
+	db $c5,$11,$20
+	db $a6,$10,$40
+	db $a5,$10,$c0
+	db $aa,$00,$20
+	db $d8,$00,$80
+	db $e4,$11,$18
+	db $9f,$20,$c0
+	db $9e,$20,$c0
+	db $bd,$00,$10
+	db $be,$f0,$20
+	db $df,$f0,$c0
+	db $a7,$f0,$e0
+	db $9f,$f0,$40
+	db $db,$00,$80
+	db $df,$80,$40
+	db $df,$00,$80
+	db $aa,$11,$20
+	db $aa,$22,$10
+	db $b1,$f1,$ff
+	db $a9,$f1,$ff
+	db $aa,$33,$30
+	db $dd,$40,$c0
+	db $a4,$20,$20
+	db $a4,$f0,$10
+	db $a5,$f8,$10
+	db $a7,$f0,$10
+	db $bd,$00,$80
+	db $ae,$00,$c0
+	db $dd,$c0,$ff
+	db $9f,$f2,$20
+	db $e1,$00,$80
+	db $e1,$00,$40
+	db $9f,$00,$40
+	db $a7,$10,$ff
+	db $c7,$20,$20
+	db $dd,$00,$80
+	db $c5,$1f,$20
+	db $bd,$2f,$80
+	db $a5,$1f,$ff
+	db $ca,$1f,$60
+	db $be,$1e,$20
+	db $be,$1f,$18
+	db $aa,$0f,$80
+	db $9f,$f8,$10
+	db $9e,$18,$20
+	db $dd,$08,$40
+	db $ad,$01,$e0
+	db $a7,$09,$ff
+	db $e4,$42,$01
+	db $b2,$00,$ff
+	db $dd,$08,$e0
+	db $bb,$00,$80
+	db $9f,$88,$10
+	db $bd,$48,$ff
+	db $9e,$ff,$ff
+	db $bb,$ff,$10
+	db $9e,$ff,$04
+	db $b2,$01,$ff
+	db $a9,$f8,$ff
+	db $a2,$f0,$f0
+	db $a5,$08,$10
+	db $a3,$f0,$ff
+	db $b0,$f0,$ff
+	db $e1,$10,$ff
+	db $a4,$f0,$20
+	db $ca,$f0,$60
+	db $b8,$12,$10
+	db $e6,$f0,$20
+	db $b4,$12,$ff
+	db $db,$80,$04
+	db $df,$f0,$10
+	db $c5,$f8,$ff
+	db $be,$f0,$ff
+	db $a7,$01,$ff
+	db $cc,$d8,$04
+	db $a1,$00,$80
+	db $a1,$00,$80
+
+
+INCBIN "baserom.gbc",$79AAE,$79E16 - $79AAE
 
 TossBallAnimation: ; 5E16
 	ld a,[W_BATTLETYPE]
