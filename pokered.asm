@@ -9931,7 +9931,7 @@ PlayAnimation: ; 40F1
 	xor a
 	ld [$FF8B],a
 	ld [$D08B],a
-	ld a,[$D07C]
+	ld a,[$D07C] ; get animation number
 	dec a
 	ld l,a
 	ld h,0
@@ -10012,7 +10012,7 @@ PlayAnimation: ; 40F1
 	ld [rOBP0],a
 	call $41D2
 	call $417C
-	call $4E53 ; play the actual animation
+	call RealPlayAnimation
 	pop af
 	ld [rOBP0],a
 .next6\@
@@ -10107,7 +10107,73 @@ Function4DBD: ; 4DBD
 Pointer4DCF: ; 4DCF
 	dw $4DDB,$4DE3,$4DEB,$4DF0,$4DF6,$4DFE
 
-INCBIN "baserom.gbc",$78DDB,$79E16 - $78DDB
+INCBIN "baserom.gbc",$78DDB,$78E53-$78DDB
+RealPlayAnimation: ; 4E53
+	ld a,[$CF07]
+	cp a,$FF
+	jr z,.Next4E60
+	call $586F
+	call $23B1 ; play sound effect
+.Next4E60
+	ld hl,$C300
+	ld a,l
+	ld [$D09D],a
+	ld a,h
+	ld [$D09C],a
+	ld a,[$D097]
+	ld h,a
+	ld a,[$D096]
+	ld l,a
+	push hl
+	ld c,[hl]
+	ld b,0
+	ld hl,PointerTable6F74
+	add hl,bc
+	add hl,bc
+	ld a,[hli]
+	ld c,a
+	ld a,[hli]
+	ld b,a
+	pop hl
+	inc hl
+	push hl
+	ld e,[hl]
+	ld d,0
+	ld hl,$7C85
+	add hl,de
+	add hl,de
+	ld a,[hli]
+	ld [$D082],a
+	ld a,[hl]
+	ld [$D081],a
+	pop hl
+	inc hl
+	ld a,[hl]
+	ld [$D09E],a
+	call $4000
+	call $4ED7
+	ld a,[$D087]
+	dec a
+	ld [$D087],a
+	ret z
+	ld a,[$D097]
+	ld h,a
+	ld a,[$D096]
+	ld l,a
+	ld a,[$D08B]
+	cp a,4
+	ld bc,3
+	jr nz,.Next4EBC
+	ld bc,$FFFD
+.Next4EBC
+	add hl,bc
+	ld a,h
+	ld [$D097],a
+	ld a,l
+	ld [$D096],a
+	jp $4E73
+
+INCBIN "baserom.gbc",$78EC8,$79E16 - $78EC8
 
 TossBallAnimation: ; 5E16
 	ld a,[W_BATTLETYPE]
@@ -10166,7 +10232,133 @@ TossBallAnimation: ; 5E16
 	ld [$D07C],a
 	jp PlayAnimation
 
-INCBIN "baserom.gbc",$79E6A,$7C000 - $79E6A
+INCBIN "baserom.gbc",$79E6A,$7AF74 - $79E6A
+
+PointerTable6F74: ; 6F74
+	dw $7de7
+	dw $7068
+	dw $708d
+	dw $70ce
+	dw $70df
+	dw $70f0
+	dw $7101
+	dw $7132
+	dw $7173
+	dw $71b4
+	dw $71e5
+	dw $7216
+	dw $7227
+	dw $7238
+	dw $7259
+	dw $726a
+	dw $727b
+	dw $729c
+	dw $72bd
+	dw $72ca
+	dw $72db
+	dw $72fc
+	dw $732d
+	dw $734e
+	dw $735f
+	dw $7364
+	dw $736d
+	dw $7376
+	dw $737f
+	dw $7388
+	dw $7391
+	dw $73ab
+	dw $73b4
+	dw $73cd
+	dw $73fe
+	dw $744b
+	dw $745c
+	dw $7465
+	dw $7496
+	dw $74a7
+	dw $74bc
+	dw $74d5
+	dw $74e6
+	dw $74f7
+	dw $7500
+	dw $7505
+	dw $7526
+	dw $7547
+	dw $7558
+	dw $7569
+	dw $756e
+	dw $758b
+	dw $75a8
+	dw $75ad
+	dw $75c6
+	dw $75d7
+	dw $75e8
+	dw $75f9
+	dw $760a
+	dw $761b
+	dw $7630
+	dw $7649
+	dw $7666
+	dw $7687
+	dw $76a8
+	dw $76b5
+	dw $76c6
+	dw $76f3
+	dw $7720
+	dw $7731
+	dw $7742
+	dw $7753
+	dw $7764
+	dw $7775
+	dw $785a
+	dw $786b
+	dw $787c
+	dw $788d
+	dw $789e
+	dw $78bf
+	dw $78f0
+	dw $7911
+	dw $7932
+	dw $7943
+	dw $7950
+	dw $7961
+	dw $796e
+	dw $7987
+	dw $79ac
+	dw $79c9
+	dw $79ce
+	dw $79ff
+	dw $7a10
+	dw $7a31
+	dw $7a5e
+	dw $7a9b
+	dw $7aac
+	dw $7acd
+	dw $7afe
+	dw $7b3f
+	dw $7b58
+	dw $7b71
+	dw $7b8a
+	dw $7b93
+	dw $7b98
+	dw $7ba9
+	dw $7bae
+	dw $7bcf
+	dw $7bf0
+	dw $7c11
+	dw $7c1a
+	dw $7c2b
+	dw $7c3c
+	dw $77b6
+	dw $77f7
+	dw $7828
+	dw $7849
+	dw $739a
+	dw $7c4d
+	dw $7c6a
+	dw $7c7b
+	dw $7c80
+
+INCBIN "baserom.gbc",$7B068,$7C000 - $7B068
 
 SECTION "bank1F",DATA,BANK[$1F]
 INCBIN "baserom.gbc",$7C000,$4000
