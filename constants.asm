@@ -1,3 +1,7 @@
+RED EQU 1
+BLUE EQU 0
+GREEN EQU 0
+
 FuncCoord: MACRO
 Coord = $C3A0 + 20 * \2 + \1
 	ENDM

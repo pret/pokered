@@ -1182,6 +1182,7 @@ INCBIN "baserom.gbc",$425B,$4588-$425B
 
 TitleMons: ; 4588
 ; mons on the title screen are randomly chosen from here
+IF RED
 	db CHARMANDER
 	db SQUIRTLE
 	db BULBASAUR
@@ -1198,6 +1199,43 @@ TitleMons: ; 4588
 	db ONIX
 	db PONYTA
 	db MAGIKARP
+ENDC
+IF GREEN
+	db BULBASAUR
+	db CHARMANDER
+	db SQUIRTLE
+	db CATERPIE
+	db NIDORAN_F
+	db PINSIR
+	db PIKACHU
+	db CLEFAIRY
+	db RHYDON
+	db ABRA
+	db GASTLY
+	db DITTO
+	db PIDGEOTTO
+	db ONIX
+	db PONYTA
+	db MAGIKARP
+ENDC
+IF BLUE
+	db SQUIRTLE
+	db CHARMANDER
+	db BULBASAUR
+	db MANKEY
+	db HITMONLEE
+	db VULPIX
+	db CHANSEY
+	db AERODACTYL
+	db JOLTEON
+	db SNORLAX
+	db GLOOM
+	db POLIWAG
+	db DODUO
+	db PORYGON
+	db GENGAR
+	db RAICHU
+ENDC
 
 INCBIN "baserom.gbc",$4598,$5AF2-$4598
 
