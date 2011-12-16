@@ -71,11 +71,13 @@ W_OPPONENTSTATUS EQU $CFE9 ; active opponent's status condition
 
 W_TRAINERCLASS EQU $D031
 
+W_BATTLETYPE EQU $D057 ; in a wild battle, this is 1
+                       ; in a trainer battle, this is 2
+
 W_CUROPPONENT EQU $D059 ; in a wild battle, this is the species of pokemon
 			; in a trainer battle, this is the trainer class + $C8
 
 W_LONEATTACKNO EQU $D05C ; which entry in LoneAttacks to use
-W_ISTRAINERBATTLE EQU $D057 ; boolean
 W_TRAINERNO    EQU $D05D ; which instance of [youngster, lass, etc] is this?
 
 W_CURENEMYLVL EQU $D127
@@ -789,10 +791,15 @@ SLASH        EQU $A3
 SUBSTITUTE   EQU $A4
 STRUGGLE     EQU $A5
 ; these do double duty as animation identifiers
+SHOWPIC_ANIM EQU $A6 ; redraw monster pic
 SLP_ANIM     EQU $BD ; sleeping monster
 CONF_ANIM    EQU $BF ; confused monster
-TOSS_ANIM    EQU $C1 ; try to catch a monster
-SEND_ANIM    EQU $C3 ; send out a monster
+TOSS_ANIM    EQU $C1 ; toss Poké Ball
+POOF_ANIM    EQU $C3 ; puff of smoke
+BLOCKBALL_ANIM EQU $C4 ; trainer knocks away Poké Ball
+GREATTOSS_ANIM EQU $C5 ; toss Great Ball
+ULTRATOSS_ANIM EQU $C6 ; toss Ultra Ball or Master Ball
+HIDEPIC_ANIM EQU $C8 ; monster disappears
 
 ; super game boy palettes
 PAL_ROUTE     EQU $00

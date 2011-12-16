@@ -5658,7 +5658,7 @@ LanceData:
 TrainerAI: ; 652E
 ;XXX called at 34964, 3c342, 3c398
 	and a
-	ld a,[W_ISTRAINERBATTLE]
+	ld a,[W_BATTLETYPE]
 	dec a
 	ret z ; if not a trainer, we're done here
 	ld a,[W_ISLINKBATTLE]
@@ -10072,52 +10072,61 @@ Pointer4DCF: ; 4DCF
 INCBIN "baserom.gbc",$78DDB,$79E16 - $78DDB
 
 TossBallAnimation: ; 5E16
-	ld a,[$D057]
+	ld a,[W_BATTLETYPE]
 	cp a,2
-	jr z,.next4\@
+	jr z,.BlockBall\@ ; if in trainer battle, play different animation
 	ld a,[$D11E]
 	ld b,a
+
+	; upper nybble: how many animations (from PokeBallAnimations) to play
+	; this will be 4 for successful capture, 6 for breakout
 	and a,$F0
 	swap a
 	ld c,a
+
+	; lower nybble: number of shakes
+	; store these for later
 	ld a,b
 	and a,$F
 	ld [$CD3D],a
-	ld hl,.Pointer5E50
+
+	ld hl,.PokeBallAnimations
+	; choose which toss animation to use
 	ld a,[$CF91]
-	cp a,4
-	ld b,$C1
-	jr z,.next2\@
-	cp a,3
-	ld b,$C5
-	jr z,.next2\@
-	ld b,$C6
-.next2\@
+	cp a,POKE_BALL
+	ld b,TOSS_ANIM
+	jr z,.done\@
+	cp a,GREAT_BALL
+	ld b,GREATTOSS_ANIM
+	jr z,.done\@
+	ld b,ULTRATOSS_ANIM
+.done\@
 	ld a,b
-.next3\@
+.PlayNextAnimation\@
 	ld [$D07C],a
 	push bc
 	push hl
-	call $40F1
+	call PlayAnimation
 	pop hl
 	ld a,[hli]
 	pop bc
 	dec c
-	jr nz,.next3\@
+	jr nz,.PlayNextAnimation\@
 	ret
 
-.Pointer5E50: ; 5E50
-	db $C3,$C8,$C2,$C3,$A6 ; XXX what is this
+.PokeBallAnimations: ; 5E50
+; sequence of animations that make up the Poké Ball toss
+	db POOF_ANIM,HIDEPIC_ANIM,$C2,POOF_ANIM,SHOWPIC_ANIM
 
-.next4\@ ; 5E55
+.BlockBall\@ ; 5E55
 	ld a,$C1
 	ld [$D07C],a
-	call $40F1
+	call PlayAnimation
 	ld a,$95
-	call $23B1
-	ld a,$C4
+	call $23B1 ; play sound effect
+	ld a,BLOCKBALL_ANIM
 	ld [$D07C],a
-	jp $40F1
+	jp PlayAnimation
 
 INCBIN "baserom.gbc",$79E6A,$7C000 - $79E6A
 
