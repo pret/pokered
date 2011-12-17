@@ -1,15 +1,6 @@
 BEGIN {
 FS = "\""
-}
 
-# skip lines that actually do use ASCII in quotes
-tolower($1) ~ /section/ ||
-tolower($1) ~ /include/ || 
-tolower($1) ~ /incbin/
-
-!(tolower($1) ~ /section/ || tolower($1) ~ /include/ || tolower($1) ~ /incbin/) {
-i = 1
-ORS = ""
 char[" "] = "$7F"
 char["A"] = "$80"
 char["B"] = "$81"
@@ -80,6 +71,16 @@ char["6"] = "$FC"
 char["7"] = "$FD"
 char["8"] = "$FE"
 char["9"] = "$FF"
+}
+
+# skip lines that actually do use ASCII in quotes
+tolower($1) ~ /section/ ||
+tolower($1) ~ /include/ || 
+tolower($1) ~ /incbin/
+
+!(tolower($1) ~ /section/ || tolower($1) ~ /include/ || tolower($1) ~ /incbin/) {
+i = 1
+ORS = ""
 
 while (i <= NF) {
 if (i % 2 == 1)
