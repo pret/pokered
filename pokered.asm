@@ -1237,7 +1237,108 @@ IF BLUE
 	db RAICHU
 ENDC
 
-INCBIN "baserom.gbc",$4598,$5AF2-$4598
+INCBIN "baserom.gbc",$4598,$472B-$4598
+
+ItemNames: ; 472B
+	db "MASTER BALL",$50
+	db "ULTRA BALL",$50
+	db "GREAT BALL",$50
+	db "POK",$BA," BALL",$50
+	db "TOWN MAP",$50
+	db "BICYCLE",$50
+	db "?????",$50
+	db "SAFARI BALL",$50
+	db "POK",$BA,"DEX",$50
+	db "MOON STONE",$50
+	db "ANTIDOTE",$50
+	db "BURN HEAL",$50
+	db "ICE HEAL",$50
+	db "AWAKENING",$50
+	db "PARLYZ HEAL",$50
+	db "FULL RESTORE",$50
+	db "MAX POTION",$50
+	db "HYPER POTION",$50
+	db "SUPER POTION",$50
+	db "POTION",$50
+	db "BOULDERBADGE",$50
+	db "CASCADEBADGE",$50
+	db "THUNDERBADGE",$50
+	db "RAINBOWBADGE",$50
+	db "SOULBADGE",$50
+	db "MARSHBADGE",$50
+	db "VOLCANOBADGE",$50
+	db "EARTHBADGE",$50
+	db "ESCAPE ROPE",$50
+	db "REPEL",$50
+	db "OLD AMBER",$50
+	db "FIRE STONE",$50
+	db "THUNDERSTONE",$50
+	db "WATER STONE",$50
+	db "HP UP",$50
+	db "PROTEIN",$50
+	db "IRON",$50
+	db "CARBOS",$50
+	db "CALCIUM",$50
+	db "RARE CANDY",$50
+	db "DOME FOSSIL",$50
+	db "HELIX FOSSIL",$50
+	db "SECRET KEY",$50
+	db "?????",$50
+	db "BIKE VOUCHER",$50
+	db "X ACCURACY",$50
+	db "LEAF STONE",$50
+	db "CARD KEY",$50
+	db "NUGGET",$50
+	db "PP UP",$50
+	db "POK",$BA," DOLL",$50
+	db "FULL HEAL",$50
+	db "REVIVE",$50
+	db "MAX REVIVE",$50
+	db "GUARD SPEC.",$50
+	db "SUPER REPEL",$50
+	db "MAX REPEL",$50
+	db "DIRE HIT",$50
+	db "COIN",$50
+	db "FRESH WATER",$50
+	db "SODA POP",$50
+	db "LEMONADE",$50
+	db "S.S.TICKET",$50
+	db "GOLD TEETH",$50
+	db "X ATTACK",$50
+	db "X DEFEND",$50
+	db "X SPEED",$50
+	db "X SPECIAL",$50
+	db "COIN CASE",$50
+	db "OAK",$BD," PARCEL",$50
+	db "ITEMFINDER",$50
+	db "SILPH SCOPE",$50
+	db "POK",$BA," FLUTE",$50
+	db "LIFT KEY",$50
+	db "EXP.ALL",$50
+	db "OLD ROD",$50
+	db "GOOD ROD",$50
+	db "SUPER ROD",$50
+	db "PP UP",$50
+	db "ETHER",$50
+	db "MAX ETHER",$50
+	db "ELIXER",$50
+	db "MAX ELIXER",$50
+	db "B2F",$50
+	db "B1F",$50
+	db "1F",$50
+	db "2F",$50
+	db "3F",$50
+	db "4F",$50
+	db "5F",$50
+	db "6F",$50
+	db "7F",$50
+	db "8F",$50
+	db "9F",$50
+	db "10F",$50
+	db "11F",$50
+	db "B4F",$50
+
+INCBIN "baserom.gbc",$4A92,$5AF2-$4A92
 
 MainMenu:
 ; Check save file
@@ -1597,8 +1698,33 @@ Function62CE: ; 62CE, XXX called by 4B2 948 989 5BF9 5D15
 	ld [$D365],a
 	ret
 
-INCBIN "baserom.gbc",$62FF,$8000 - $62FF
+INCBIN "baserom.gbc",$62FF,$778D - $62FF
 
+FieldMoveNames: ; 778D
+	db "CUT",$50
+	db "FLY",$50
+	db $50
+	db "SURF",$50
+	db "STRENGTH",$50
+	db "FLASH",$50
+	db "DIG",$50
+	db "TELEPORT",$50
+	db "SOFTBOILED",$50
+
+PokemonMenuEntries: ; 77C2
+	db "STATS",$4E
+	db "SWITCH",$4E
+	db "CANCEL",$50
+
+INCBIN "baserom.gbc",$77D6,$7AF5 - $77D6
+
+PlayersPCMenuEntries: ; 7AF5
+	db "WITHDRAW ITEM",$4E
+	db "DEPOSIT ITEM",$4E
+	db "TOSS ITEM",$4E
+	db "LOG OFF",$50
+
+INCBIN "baserom.gbc",$7B22,$7C49 - $7B22
 
 SECTION "bank2",DATA,BANK[$2]
 INCBIN "baserom.gbc",$8000,$4000
@@ -4200,7 +4326,201 @@ BluesHouseBlocks:
 INCBIN "baserom.gbc",$19C06,$4000-$1C06
 
 SECTION "bank7",DATA,BANK[$7]
-INCBIN "baserom.gbc",$1C000,$4000
+INCBIN "baserom.gbc",$1C000,$21E
+
+MonsterNames: ; 421E
+	db "RHYDON",$50,$50,$50,$50
+	db "KANGASKHAN"
+	db "NIDORAN",$EF,$50,$50
+	db "CLEFAIRY",$50,$50
+	db "SPEAROW",$50,$50,$50
+	db "VOLTORB",$50,$50,$50
+	db "NIDOKING",$50,$50
+	db "SLOWBRO",$50,$50,$50
+	db "IVYSAUR",$50,$50,$50
+	db "EXEGGUTOR",$50
+	db "LICKITUNG",$50
+	db "EXEGGCUTE",$50
+	db "GRIMER",$50,$50,$50,$50
+	db "GENGAR",$50,$50,$50,$50
+	db "NIDORAN",$F5,$50,$50
+	db "NIDOQUEEN",$50
+	db "CUBONE",$50,$50,$50,$50
+	db "RHYHORN",$50,$50,$50
+	db "LAPRAS",$50,$50,$50,$50
+	db "ARCANINE",$50,$50
+	db "MEW",$50,$50,$50,$50,$50,$50,$50
+	db "GYARADOS",$50,$50
+	db "SHELLDER",$50,$50
+	db "TENTACOOL",$50
+	db "GASTLY",$50,$50,$50,$50
+	db "SCYTHER",$50,$50,$50
+	db "STARYU",$50,$50,$50,$50
+	db "BLASTOISE",$50
+	db "PINSIR",$50,$50,$50,$50
+	db "TANGELA",$50,$50,$50
+	db "MISSINGNO."
+	db "MISSINGNO."
+	db "GROWLITHE",$50
+	db "ONIX",$50,$50,$50,$50,$50,$50
+	db "FEAROW",$50,$50,$50,$50
+	db "PIDGEY",$50,$50,$50,$50
+	db "SLOWPOKE",$50,$50
+	db "KADABRA",$50,$50,$50
+	db "GRAVELER",$50,$50
+	db "CHANSEY",$50,$50,$50
+	db "MACHOKE",$50,$50,$50
+	db "MR.MIME",$50,$50,$50
+	db "HITMONLEE",$50
+	db "HITMONCHAN"
+	db "ARBOK",$50,$50,$50,$50,$50
+	db "PARASECT",$50,$50
+	db "PSYDUCK",$50,$50,$50
+	db "DROWZEE",$50,$50,$50
+	db "GOLEM",$50,$50,$50,$50,$50
+	db "MISSINGNO."
+	db "MAGMAR",$50,$50,$50,$50
+	db "MISSINGNO."
+	db "ELECTABUZZ"
+	db "MAGNETON",$50,$50
+	db "KOFFING",$50,$50,$50
+	db "MISSINGNO."
+	db "MANKEY",$50,$50,$50,$50
+	db "SEEL",$50,$50,$50,$50,$50,$50
+	db "DIGLETT",$50,$50,$50
+	db "TAUROS",$50,$50,$50,$50
+	db "MISSINGNO."
+	db "MISSINGNO."
+	db "MISSINGNO."
+	db "FARFETCH'D"
+	db "VENONAT",$50,$50,$50
+	db "DRAGONITE",$50
+	db "MISSINGNO."
+	db "MISSINGNO."
+	db "MISSINGNO."
+	db "DODUO",$50,$50,$50,$50,$50
+	db "POLIWAG",$50,$50,$50
+	db "JYNX",$50,$50,$50,$50,$50,$50
+	db "MOLTRES",$50,$50,$50
+	db "ARTICUNO",$50,$50
+	db "ZAPDOS",$50,$50,$50,$50
+	db "DITTO",$50,$50,$50,$50,$50
+	db "MEOWTH",$50,$50,$50,$50
+	db "KRABBY",$50,$50,$50,$50
+	db "MISSINGNO."
+	db "MISSINGNO."
+	db "MISSINGNO."
+	db "VULPIX",$50,$50,$50,$50
+	db "NINETALES",$50
+	db "PIKACHU",$50,$50,$50
+	db "RAICHU",$50,$50,$50,$50
+	db "MISSINGNO."
+	db "MISSINGNO."
+	db "DRATINI",$50,$50,$50
+	db "DRAGONAIR",$50
+	db "KABUTO",$50,$50,$50,$50
+	db "KABUTOPS",$50,$50
+	db "HORSEA",$50,$50,$50,$50
+	db "SEADRA",$50,$50,$50,$50
+	db "MISSINGNO."
+	db "MISSINGNO."
+	db "SANDSHREW",$50
+	db "SANDSLASH",$50
+	db "OMANYTE",$50,$50,$50
+	db "OMASTAR",$50,$50,$50
+	db "JIGGLYPUFF"
+	db "WIGGLYTUFF"
+	db "EEVEE",$50,$50,$50,$50,$50
+	db "FLAREON",$50,$50,$50
+	db "JOLTEON",$50,$50,$50
+	db "VAPOREON",$50,$50
+	db "MACHOP",$50,$50,$50,$50
+	db "ZUBAT",$50,$50,$50,$50,$50
+	db "EKANS",$50,$50,$50,$50,$50
+	db "PARAS",$50,$50,$50,$50,$50
+	db "POLIWHIRL",$50
+	db "POLIWRATH",$50
+	db "WEEDLE",$50,$50,$50,$50
+	db "KAKUNA",$50,$50,$50,$50
+	db "BEEDRILL",$50,$50
+	db "MISSINGNO."
+	db "DODRIO",$50,$50,$50,$50
+	db "PRIMEAPE",$50,$50
+	db "DUGTRIO",$50,$50,$50
+	db "VENOMOTH",$50,$50
+	db "DEWGONG",$50,$50,$50
+	db "MISSINGNO."
+	db "MISSINGNO."
+	db "CATERPIE",$50,$50
+	db "METAPOD",$50,$50,$50
+	db "BUTTERFREE"
+	db "MACHAMP",$50,$50,$50
+	db "MISSINGNO."
+	db "GOLDUCK",$50,$50,$50
+	db "HYPNO",$50,$50,$50,$50,$50
+	db "GOLBAT",$50,$50,$50,$50
+	db "MEWTWO",$50,$50,$50,$50
+	db "SNORLAX",$50,$50,$50
+	db "MAGIKARP",$50,$50
+	db "MISSINGNO."
+	db "MISSINGNO."
+	db "MUK",$50,$50,$50,$50,$50,$50,$50
+	db "MISSINGNO."
+	db "KINGLER",$50,$50,$50
+	db "CLOYSTER",$50,$50
+	db "MISSINGNO."
+	db "ELECTRODE",$50
+	db "CLEFABLE",$50,$50
+	db "WEEZING",$50,$50,$50
+	db "PERSIAN",$50,$50,$50
+	db "MAROWAK",$50,$50,$50
+	db "MISSINGNO."
+	db "HAUNTER",$50,$50,$50
+	db "ABRA",$50,$50,$50,$50,$50,$50
+	db "ALAKAZAM",$50,$50
+	db "PIDGEOTTO",$50
+	db "PIDGEOT",$50,$50,$50
+	db "STARMIE",$50,$50,$50
+	db "BULBASAUR",$50
+	db "VENUSAUR",$50,$50
+	db "TENTACRUEL"
+	db "MISSINGNO."
+	db "GOLDEEN",$50,$50,$50
+	db "SEAKING",$50,$50,$50
+	db "MISSINGNO."
+	db "MISSINGNO."
+	db "MISSINGNO."
+	db "MISSINGNO."
+	db "PONYTA",$50,$50,$50,$50
+	db "RAPIDASH",$50,$50
+	db "RATTATA",$50,$50,$50
+	db "RATICATE",$50,$50
+	db "NIDORINO",$50,$50
+	db "NIDORINA",$50,$50
+	db "GEODUDE",$50,$50,$50
+	db "PORYGON",$50,$50,$50
+	db "AERODACTYL"
+	db "MISSINGNO."
+	db "MAGNEMITE",$50
+	db "MISSINGNO."
+	db "MISSINGNO."
+	db "CHARMANDER"
+	db "SQUIRTLE",$50,$50
+	db "CHARMELEON"
+	db "WARTORTLE",$50
+	db "CHARIZARD",$50
+	db "MISSINGNO."
+	db "MISSINGNO."
+	db "MISSINGNO."
+	db "MISSINGNO."
+	db "ODDISH",$50,$50,$50,$50
+	db "GLOOM",$50,$50,$50,$50,$50
+	db "VILEPLUME",$50
+	db "BELLSPROUT"
+	db "WEEPINBELL"
+	db "VICTREEBEL"
+
+INCBIN "baserom.gbc",$1C98A,$20000 - $1C98A
 
 SECTION "bank8",DATA,BANK[$8]
 INCBIN "baserom.gbc",$20000,$4000
@@ -4323,7 +4643,183 @@ TangelaPicFront:
 TangelaPicBack:
 	INCBIN "pic/monback/tangelab.pic"
 
-INCBIN "baserom.gbc",$27d6b,$27fb8-$27d6b
+INCBIN "baserom.gbc",$27d6b,$27DAE - $27d6b
+
+TypeNamePointers: ; 7DAE
+	dw Type00Name
+	dw Type01Name
+	dw Type02Name
+	dw Type03Name
+	dw Type04Name
+	dw Type05Name
+	dw Type06Name
+	dw Type07Name
+	dw Type08Name
+	dw Type00Name
+	dw Type00Name
+	dw Type00Name
+	dw Type00Name
+	dw Type00Name
+	dw Type00Name
+	dw Type00Name
+	dw Type00Name
+	dw Type00Name
+	dw Type00Name
+	dw Type00Name
+	dw Type14Name
+	dw Type15Name
+	dw Type16Name
+	dw Type17Name
+	dw Type18Name
+	dw Type19Name
+	dw Type1AName
+
+Type00Name:
+	db "NORMAL",$50
+Type01Name:
+	db "FIGHTING",$50
+Type02Name:
+	db "FLYING",$50
+Type03Name:
+	db "POISON",$50
+Type14Name:
+	db "FIRE",$50
+Type15Name:
+	db "WATER",$50
+Type16Name:
+	db "GRASS",$50
+Type17Name:
+	db "ELECTRIC",$50
+Type18Name:
+	db "PSYCHIC",$50
+Type19Name:
+	db "ICE",$50
+Type04Name:
+	db "GROUND",$50
+Type05Name:
+	db "ROCK",$50
+Type06Name:
+	db "BIRD",$50
+Type07Name:
+	db "BUG",$50
+Type08Name:
+	db "GHOST",$50
+Type1AName:
+	db "DRAGON",$50
+
+SaveTrainerName: ; 7E4A
+	ld hl,TrainerNamePointers
+	ld a,[W_TRAINERCLASS]
+	dec a
+	ld c,a
+	ld b,0
+	add hl,bc
+	add hl,bc
+	ld a,[hli]
+	ld h,[hl]
+	ld l,a
+	ld de,$CD6D
+.CopyCharacter\@
+	ld a,[hli]
+	ld [de],a
+	inc de
+	cp $50
+	jr nz,.CopyCharacter\@
+	ret
+
+TrainerNamePointers:
+	dw YoungsterName
+	dw BugCatcherName
+	dw LassName
+	dw $D04A
+	dw JrTrainerMName
+	dw JrTrainerFName
+	dw PokemaniacName
+	dw SuperNerdName
+	dw $D04A
+	dw $D04A
+	dw BurglarName
+	dw EngineerName
+	dw JugglerXName
+	dw $D04A
+	dw SwimmerName
+	dw $D04A
+	dw $D04A
+	dw BeautyName
+	dw $D04A
+	dw RockerName
+	dw JugglerName
+	dw $D04A
+	dw $D04A
+	dw BlackbeltName
+	dw $D04A
+	dw ProfOakName
+	dw ChiefName
+	dw ScientistName
+	dw $D04A
+	dw RocketName
+	dw CooltrainerMName
+	dw CooltrainerFName
+	dw $D04A
+	dw $D04A
+	dw $D04A
+	dw $D04A
+	dw $D04A
+	dw $D04A
+	dw $D04A
+	dw $D04A
+	dw $D04A
+	dw $D04A
+	dw $D04A
+	dw $D04A
+	dw $D04A
+	dw $D04A
+	dw $D04A
+
+YoungsterName:
+	db "YOUNGSTER",$50
+BugCatcherName:
+	db "BUG CATCHER",$50
+LassName:
+	db "LASS",$50
+JrTrainerMName:
+	db "JR.TRAINER",$EF,$50
+JrTrainerFName:
+	db "JR.TRAINER",$F5,$50
+PokemaniacName:
+	db "POK",$BA,"MANIAC",$50
+SuperNerdName:
+	db "SUPER NERD",$50
+BurglarName:
+	db "BURGLAR",$50
+EngineerName:
+	db "ENGINEER",$50
+JugglerXName:
+	db "JUGGLER",$50
+SwimmerName:
+	db "SWIMMER",$50
+BeautyName:
+	db "BEAUTY",$50
+RockerName:
+	db "ROCKER",$50
+JugglerName:
+	db "JUGGLER",$50
+BlackbeltName:
+	db "BLACKBELT",$50
+ProfOakName:
+	db "PROF.OAK",$50
+ChiefName:
+	db "CHIEF",$50
+ScientistName:
+	db "SCIENTIST",$50
+RocketName:
+	db "ROCKET",$50
+CooltrainerMName:
+	db "COOLTRAINER",$EF,$50
+CooltrainerFName:
+	db "COOLTRAINER",$F5,$50
+
+INCBIN "baserom.gbc",$27f86,$27fb8-$27f86
 
 SECTION "bankA",DATA,BANK[$A]
 GrowlithePicFront:
