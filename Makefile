@@ -4,11 +4,14 @@ pokered.gbc: pokered.o
 		pokered.gbc
 	cmp baserom.gbc pokered.gbc
 
-pokered.o: pokered.asm constants.asm
-	rgbasm -o pokered.o pokered.asm
+pokered.o: pokered1.asm constants.asm
+	rgbasm -o pokered.o pokered1.asm
+
+pokered1.asm: pokered.asm
+	awk -f textpre.awk < pokered.asm > pokered1.asm
 
 redrle: extras/redrle.c
 	${CC} -o $@ $>
 
 clean:
-	rm -f pokered.o pokered.gbc redrle
+	rm -f pokered1.asm pokered.o pokered.gbc redrle
