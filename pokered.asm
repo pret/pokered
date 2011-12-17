@@ -656,19 +656,19 @@ FinishDTE:
 	jp PlaceNextChar
 
 Char5CText:
-	db $93,$8C,$50 ; TM
+	db "TM",$50
 Char5DText:
-	db $93,$91,$80,$88,$8D,$84,$91,$50 ; TRAINER
+	db "TRAINER",$50
 Char5BText:
-	db $8F,$82,$50 ; PC
+	db "PC",$50
 Char5EText:
-	db $91,$8E,$82,$8A,$84,$93,$50 ; ROCKET
+	db "ROCKET",$50
 Char54Text:
-	db $8F,$8E,$8A,$BA,$50 ; POKé
+	db "POK",$BA,$50 ; POKé
 Char56Text:
 	db $75,$75,$50 ; ……
 Char5AText:
-	db $84,$AD,$A4,$AC,$B8,$7F,$50 ; “Enemy ”
+	db "Enemy ",$50
 Char4AText:
 	db $E1,$E2,$50 ; PKMN
 
@@ -1039,9 +1039,9 @@ GetMachineName:
 	ret
 
 TechnicalPrefix:
-	db $93,$8C ; "TM"
+	db "TM"
 HiddenPrefix:
-	db $87,$8C ; "HM"
+	db "HM"
 
 INCBIN "baserom.gbc",$3040,$35BC - $3040
 BankswitchHome: ; 35BC
@@ -9480,136 +9480,126 @@ InternalMapEntries: ; 5382
 
 MapNames: ; 5473
 PalletTownName:
-db $8f,$80,$8b,$8b,$84,$93,$7f,$93,$8e,$96,$8d,$50
+	db "PALLET TOWN",$50
 ViridianCityName:
-db $95,$88,$91,$88,$83,$88,$80,$8d,$7f,$82,$88,$93,$98,$50
+	db "VIRIDIAN CITY",$50
 PewterCityName:
-db $8f,$84,$96,$93,$84,$91,$7f,$82,$88,$93,$98,$50
+	db "PEWTER CITY",$50
 CeruleanCityName:
-db $82,$84,$91,$94,$8b,$84,$80,$8d,$7f,$82,$88,$93,$98,$50
+	db "CERULEAN CITY",$50
 LavenderTownName:
-db $8b,$80,$95,$84,$8d,$83,$84,$91,$7f,$93,$8e,$96,$8d,$50
+	db "LAVENDER TOWN",$50
 VermilionCityName:
-db $95,$84,$91,$8c,$88,$8b,$88,$8e,$8d,$7f,$82,$88,$93,$98,$50
+	db "VERMILION CITY",$50
 CeladonCityName:
-db $82,$84,$8b,$80,$83,$8e,$8d,$7f,$82,$88,$93,$98,$50
+	db "CELADON CITY",$50
 FuchsiaCityName:
-db $85,$94,$82,$87,$92,$88,$80,$7f,$82,$88,$93,$98,$50
+	db "FUCHSIA CITY",$50
 CinnabarIslandName:
-db $82,$88,$8d,$8d,$80,$81,$80,$91,$7f,$88,$92,$8b,$80,$8d,$83,$50
+	db "CINNABAR ISLAND",$50
 IndigoPlateauName:
-db $88,$8d,$83,$88,$86,$8e,$7f,$8f,$8b,$80,$93,$84,$80,$94,$50
+	db "INDIGO PLATEAU",$50
 SaffronCityName:
-db $92,$80,$85,$85,$91,$8e,$8d,$7f,$82,$88,$93,$98,$50
+	db "SAFFRON CITY",$50
 Route1Name:
-db $91,$8e,$94,$93,$84,$7f,$f7,$50
+	db "ROUTE 1",$50
 Route2Name:
-db $91,$8e,$94,$93,$84,$7f,$f8,$50
+	db "ROUTE 2",$50
 Route3Name:
-db $91,$8e,$94,$93,$84,$7f,$f9,$50
+	db "ROUTE 3",$50
 Route4Name:
-db $91,$8e,$94,$93,$84,$7f,$fa,$50
+	db "ROUTE 4",$50
 Route5Name:
-db $91,$8e,$94,$93,$84,$7f,$fb,$50
+	db "ROUTE 5",$50
 Route6Name:
-db $91,$8e,$94,$93,$84,$7f,$fc,$50
+	db "ROUTE 6",$50
 Route7Name:
-db $91,$8e,$94,$93,$84,$7f,$fd,$50
+	db "ROUTE 7",$50
 Route8Name:
-db $91,$8e,$94,$93,$84,$7f,$fe,$50
+	db "ROUTE 8",$50
 Route9Name:
-db $91,$8e,$94,$93,$84,$7f,$ff,$50
+	db "ROUTE 9",$50
 Route10Name:
-db $91,$8e,$94,$93,$84,$7f,$f7,$f6,$50
+	db "ROUTE 10",$50
 Route11Name:
-db $91,$8e,$94,$93,$84,$7f,$f7,$f7,$50
+	db "ROUTE 11",$50
 Route12Name:
-db $91,$8e,$94,$93,$84,$7f,$f7,$f8,$50
+	db "ROUTE 12",$50
 Route13Name:
-db $91,$8e,$94,$93,$84,$7f,$f7,$f9,$50
+	db "ROUTE 13",$50
 Route14Name:
-db $91,$8e,$94,$93,$84,$7f,$f7,$fa,$50
+	db "ROUTE 14",$50
 Route15Name:
-db $91,$8e,$94,$93,$84,$7f,$f7,$fb,$50
+	db "ROUTE 15",$50
 Route16Name:
-db $91,$8e,$94,$93,$84,$7f,$f7,$fc,$50
+	db "ROUTE 16",$50
 Route17Name:
-db $91,$8e,$94,$93,$84,$7f,$f7,$fd,$50
+	db "ROUTE 17",$50
 Route18Name:
-db $91,$8e,$94,$93,$84,$7f,$f7,$fe,$50
+	db "ROUTE 18",$50
 Route19Name:
-db $92,$84,$80,$7f,$91,$8e,$94,$93,$84,$7f,$f7,$ff,$50
+	db "SEA ROUTE 19",$50
 Route20Name:
-db $92,$84,$80,$7f,$91,$8e,$94,$93,$84,$7f,$f8,$f6,$50
+	db "SEA ROUTE 20",$50
 Route21Name:
-db $92,$84,$80,$7f,$91,$8e,$94,$93,$84,$7f,$f8,$f7,$50
+	db "SEA ROUTE 21",$50
 Route22Name:
-db $91,$8e,$94,$93,$84,$7f,$f8,$f8,$50
+	db "ROUTE 22",$50
 Route23Name:
-db $91,$8e,$94,$93,$84,$7f,$f8,$f9,$50
+	db "ROUTE 23",$50
 Route24Name:
-db $91,$8e,$94,$93,$84,$7f,$f8,$fa,$50
+	db "ROUTE 24",$50
 Route25Name:
-db $91,$8e,$94,$93,$84,$7f,$f8,$fb,$50
+	db "ROUTE 25",$50
 ViridianForestName:
-db $95,$88,$91,$88,$83,$88,$80,$8d,$7f,$85,$8e,$91,$84,$92,$93,$50
+	db "VIRIDIAN FOREST",$50
 MountMoonName:
-db $8c,$93,$e8,$8c,$8e,$8e,$8d,$50
+	db "MT.MOON",$50
 RockTunnelName:
-db $91,$8e,$82,$8a,$7f,$93,$94,$8d,$8d,$84,$8b,$50
+	db "ROCK TUNNEL",$50
 SeaCottageName:
-db $92,$84,$80,$7f,$82,$8e,$93,$93,$80,$86,$84,$50
+	db "SEA COTTAGE",$50
 SSAnneName:
-db $92,$e8,$92,$e8,$80,$8d,$8d,$84,$50
+	db "S.S.ANNE",$50
 PokemonLeagueName:
-db $54,$8c,$8e,$8d,$7f,$8b,$84,$80,$86,$94,$84,$50
+	db $54,"MON LEAGUE",$50
 UndergroundPathName:
-db $94,$8d,$83,$84,$91,$86,$91,$8e,$94,$8d,$83,$7f,$8f,$80,$93,$87,$50
+	db "UNDERGROUND PATH",$50
 PokemonTowerName:
-db $54,$8c,$8e,$8d,$7f,$93,$8e,$96,$84,$91,$50
+	db $54,"MON TOWER",$50
 SeafoamIslandsName:
-db $92,$84,$80,$85,$8e,$80,$8c,$7f,$88,$92,$8b,$80,$8d,$83,$92,$50
+	db "SEAFOAM ISLANDS",$50
 VictoryRoadName:
-db $95,$88,$82,$93,$8e,$91,$98,$7f,$91,$8e,$80,$83,$50
+	db "VICTORY ROAD",$50
 DiglettsCaveName:
-db $83,$88,$86,$8b,$84,$93,$93,$bd,$7f,$82,$80,$95,$84,$50
+	db "DIGLETT",$BD," CAVE",$50
 RocketHQName:
-db $91,$8e,$82,$8a,$84,$93,$7f,$87,$90,$50
+	db "ROCKET HQ",$50
 SilphCoName:
-db $92,$88,$8b,$8f,$87,$7f,$82,$8e,$e8,$50
+	db "SILPH CO.",$50
 PokemonMansionName:
-db $4a,$7f,$8c,$80,$8d,$92,$88,$8e,$8d,$50
+	db $4a," MANSION",$50
 SafariZoneName:
-db $92,$80,$85,$80,$91,$88,$7f,$99,$8e,$8d,$84,$50
+	db "SAFARI ZONE",$50
 CeruleanCaveName:
-db $82,$84,$91,$94,$8b,$84,$80,$8d,$7f,$82,$80,$95,$84,$50
+	db "CERULEAN CAVE",$50
 PowerPlantName:
-db $8f,$8e,$96,$84,$91,$7f,$8f,$8b,$80,$8d,$93,$50
+	db "POWER PLANT",$50
 
 INCBIN "baserom.gbc",$716BE,$71B7B-$716BE
 
 TradeMons: ; 5B7B
 ; givemonster, getmonster, textstring, nickname (11 bytes), 14 bytes total
-	; TERRY
-	db NIDORINO,NIDORINA,0,$93,$84,$91,$91,$98,$50,$50,$50,$50,$50,$50
-	; MARCEL
-	db ABRA,MR__MIME,0,$8C,$80,$91,$82,$84,$8B,$50,$50,$50,$50,$50
-	; CHIKUCHIKU
-	db BUTTERFREE,BEEDRILL,2,$82,$87,$88,$8A,$94,$82,$87,$88,$8A,$94,$50
-	; SAILOR
-	db PONYTA,SEEL,0,$92,$80,$88,$8B,$8E,$91,$50,$50,$50,$50,$50
-	; DUX
-	db SPEAROW,FARFETCH_D,2,$83,$94,$97,$50,$50,$50,$50,$50,$50,$50,$50
-	; MARC
-	db SLOWBRO,LICKITUNG,0,$8C,$80,$91,$82,$50,$50,$50,$50,$50,$50,$50
-	; LOLA
-	db POLIWHIRL,JYNX,1,$8B,$8E,$8B,$80,$50,$50,$50,$50,$50,$50,$50
-	; DORIS
-	db RAICHU,ELECTRODE,1,$83,$8E,$91,$88,$92,$50,$50,$50,$50,$50,$50
-	; CRINKLES
-	db VENONAT,TANGELA,2,$82,$91,$88,$8D,$8A,$8B,$84,$92,$50,$50,$50
-	; SPOT
-	db NIDORAN_M,NIDORAN_F,2,$92,$8F,$8E,$93,$50,$50,$50,$50,$50,$50,$50
+	db NIDORINO,  NIDORINA,  0,"TERRY",$50,$50,$50,$50,$50,$50
+	db ABRA,      MR__MIME,  0,"MARCEL",$50,$50,$50,$50,$50
+	db BUTTERFREE,BEEDRILL,  2,"CHIKUCHIKU",$50
+	db PONYTA,    SEEL,      0,"SAILOR",$50,$50,$50,$50,$50
+	db SPEAROW,   FARFETCH_D,2,"DUX",$50,$50,$50,$50,$50,$50,$50,$50
+	db SLOWBRO,   LICKITUNG, 0,"MARC",$50,$50,$50,$50,$50,$50,$50
+	db POLIWHIRL, JYNX,      1,"LOLA",$50,$50,$50,$50,$50,$50,$50
+	db RAICHU,    ELECTRODE, 1,"DORIS",$50,$50,$50,$50,$50,$50
+	db VENONAT,   TANGELA,   2,"CRINKLES",$50,$50,$50
+	db NIDORAN_M, NIDORAN_F, 2,"SPOT",$50,$50,$50,$50,$50,$50,$50
 
 INCBIN "baserom.gbc",$71C07,$725C8-$71C07
 
