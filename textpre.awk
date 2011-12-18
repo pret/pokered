@@ -1,6 +1,7 @@
 BEGIN {
 FS = "\""
 
+char["@"] = "$50"
 char[" "] = "$7F"
 char["A"] = "$80"
 char["B"] = "$81"
@@ -61,6 +62,7 @@ char["x"] = "$B7"
 char["y"] = "$B8"
 char["z"] = "$B9"
 char["'"] = "$E0"
+char["-"] = "$E3"
 char["?"] = "$E6"
 char["!"] = "$E7"
 char["."] = "$E8"

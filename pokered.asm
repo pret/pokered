@@ -11082,9 +11082,19 @@ SECTION "bank22",DATA,BANK[$22]
 INCBIN "baserom.gbc",$88000,$BE
 
 _AIBattleWithdrawText:
-	INCBIN "baserom.gbc",$880BE,$17
+	db 1
+	dw $D04A
+	db 0," with-",$4F,"drew @",1
+	dw $CFDA
+	db 0,"!",$58
 _AIBattleUseItemText:
-	INCBIN "baserom.gbc",$880D5,$1A
+	db 1
+	dw $D04A
+	db 0,$4F,"used @",1
+	dw $CD6D
+	db 0,$55,"on @",1
+	dw $CFDA
+	db 0,"!",$58
 
 INCBIN "baserom.gbc",$880EF,$2C0A
 
