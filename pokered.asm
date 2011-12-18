@@ -4329,193 +4329,193 @@ SECTION "bank7",DATA,BANK[$7]
 INCBIN "baserom.gbc",$1C000,$21E
 
 MonsterNames: ; 421E
-	db "RHYDON",$50,$50,$50,$50
+	db "RHYDON@@@@"
 	db "KANGASKHAN"
-	db "NIDORAN",$EF,$50,$50
-	db "CLEFAIRY",$50,$50
-	db "SPEAROW",$50,$50,$50
-	db "VOLTORB",$50,$50,$50
-	db "NIDOKING",$50,$50
-	db "SLOWBRO",$50,$50,$50
-	db "IVYSAUR",$50,$50,$50
-	db "EXEGGUTOR",$50
-	db "LICKITUNG",$50
-	db "EXEGGCUTE",$50
-	db "GRIMER",$50,$50,$50,$50
-	db "GENGAR",$50,$50,$50,$50
-	db "NIDORAN",$F5,$50,$50
-	db "NIDOQUEEN",$50
-	db "CUBONE",$50,$50,$50,$50
-	db "RHYHORN",$50,$50,$50
-	db "LAPRAS",$50,$50,$50,$50
-	db "ARCANINE",$50,$50
-	db "MEW",$50,$50,$50,$50,$50,$50,$50
-	db "GYARADOS",$50,$50
-	db "SHELLDER",$50,$50
-	db "TENTACOOL",$50
-	db "GASTLY",$50,$50,$50,$50
-	db "SCYTHER",$50,$50,$50
-	db "STARYU",$50,$50,$50,$50
-	db "BLASTOISE",$50
-	db "PINSIR",$50,$50,$50,$50
-	db "TANGELA",$50,$50,$50
+	db "NIDORAN",$EF,"@@"
+	db "CLEFAIRY@@"
+	db "SPEAROW@@@"
+	db "VOLTORB@@@"
+	db "NIDOKING@@"
+	db "SLOWBRO@@@"
+	db "IVYSAUR@@@"
+	db "EXEGGUTOR@"
+	db "LICKITUNG@"
+	db "EXEGGCUTE@"
+	db "GRIMER@@@@"
+	db "GENGAR@@@@"
+	db "NIDORAN",$F5,"@@"
+	db "NIDOQUEEN@"
+	db "CUBONE@@@@"
+	db "RHYHORN@@@"
+	db "LAPRAS@@@@"
+	db "ARCANINE@@"
+	db "MEW@@@@@@@"
+	db "GYARADOS@@"
+	db "SHELLDER@@"
+	db "TENTACOOL@"
+	db "GASTLY@@@@"
+	db "SCYTHER@@@"
+	db "STARYU@@@@"
+	db "BLASTOISE@"
+	db "PINSIR@@@@"
+	db "TANGELA@@@"
 	db "MISSINGNO."
 	db "MISSINGNO."
-	db "GROWLITHE",$50
-	db "ONIX",$50,$50,$50,$50,$50,$50
-	db "FEAROW",$50,$50,$50,$50
-	db "PIDGEY",$50,$50,$50,$50
-	db "SLOWPOKE",$50,$50
-	db "KADABRA",$50,$50,$50
-	db "GRAVELER",$50,$50
-	db "CHANSEY",$50,$50,$50
-	db "MACHOKE",$50,$50,$50
-	db "MR.MIME",$50,$50,$50
-	db "HITMONLEE",$50
+	db "GROWLITHE@"
+	db "ONIX@@@@@@"
+	db "FEAROW@@@@"
+	db "PIDGEY@@@@"
+	db "SLOWPOKE@@"
+	db "KADABRA@@@"
+	db "GRAVELER@@"
+	db "CHANSEY@@@"
+	db "MACHOKE@@@"
+	db "MR.MIME@@@"
+	db "HITMONLEE@"
 	db "HITMONCHAN"
-	db "ARBOK",$50,$50,$50,$50,$50
-	db "PARASECT",$50,$50
-	db "PSYDUCK",$50,$50,$50
-	db "DROWZEE",$50,$50,$50
-	db "GOLEM",$50,$50,$50,$50,$50
+	db "ARBOK@@@@@"
+	db "PARASECT@@"
+	db "PSYDUCK@@@"
+	db "DROWZEE@@@"
+	db "GOLEM@@@@@"
 	db "MISSINGNO."
-	db "MAGMAR",$50,$50,$50,$50
+	db "MAGMAR@@@@"
 	db "MISSINGNO."
 	db "ELECTABUZZ"
-	db "MAGNETON",$50,$50
-	db "KOFFING",$50,$50,$50
+	db "MAGNETON@@"
+	db "KOFFING@@@"
 	db "MISSINGNO."
-	db "MANKEY",$50,$50,$50,$50
-	db "SEEL",$50,$50,$50,$50,$50,$50
-	db "DIGLETT",$50,$50,$50
-	db "TAUROS",$50,$50,$50,$50
+	db "MANKEY@@@@"
+	db "SEEL@@@@@@"
+	db "DIGLETT@@@"
+	db "TAUROS@@@@"
 	db "MISSINGNO."
 	db "MISSINGNO."
 	db "MISSINGNO."
 	db "FARFETCH'D"
-	db "VENONAT",$50,$50,$50
-	db "DRAGONITE",$50
+	db "VENONAT@@@"
+	db "DRAGONITE@"
 	db "MISSINGNO."
 	db "MISSINGNO."
 	db "MISSINGNO."
-	db "DODUO",$50,$50,$50,$50,$50
-	db "POLIWAG",$50,$50,$50
-	db "JYNX",$50,$50,$50,$50,$50,$50
-	db "MOLTRES",$50,$50,$50
-	db "ARTICUNO",$50,$50
-	db "ZAPDOS",$50,$50,$50,$50
-	db "DITTO",$50,$50,$50,$50,$50
-	db "MEOWTH",$50,$50,$50,$50
-	db "KRABBY",$50,$50,$50,$50
+	db "DODUO@@@@@"
+	db "POLIWAG@@@"
+	db "JYNX@@@@@@"
+	db "MOLTRES@@@"
+	db "ARTICUNO@@"
+	db "ZAPDOS@@@@"
+	db "DITTO@@@@@"
+	db "MEOWTH@@@@"
+	db "KRABBY@@@@"
 	db "MISSINGNO."
 	db "MISSINGNO."
 	db "MISSINGNO."
-	db "VULPIX",$50,$50,$50,$50
-	db "NINETALES",$50
-	db "PIKACHU",$50,$50,$50
-	db "RAICHU",$50,$50,$50,$50
+	db "VULPIX@@@@"
+	db "NINETALES@"
+	db "PIKACHU@@@"
+	db "RAICHU@@@@"
 	db "MISSINGNO."
 	db "MISSINGNO."
-	db "DRATINI",$50,$50,$50
-	db "DRAGONAIR",$50
-	db "KABUTO",$50,$50,$50,$50
-	db "KABUTOPS",$50,$50
-	db "HORSEA",$50,$50,$50,$50
-	db "SEADRA",$50,$50,$50,$50
+	db "DRATINI@@@"
+	db "DRAGONAIR@"
+	db "KABUTO@@@@"
+	db "KABUTOPS@@"
+	db "HORSEA@@@@"
+	db "SEADRA@@@@"
 	db "MISSINGNO."
 	db "MISSINGNO."
-	db "SANDSHREW",$50
-	db "SANDSLASH",$50
-	db "OMANYTE",$50,$50,$50
-	db "OMASTAR",$50,$50,$50
+	db "SANDSHREW@"
+	db "SANDSLASH@"
+	db "OMANYTE@@@"
+	db "OMASTAR@@@"
 	db "JIGGLYPUFF"
 	db "WIGGLYTUFF"
-	db "EEVEE",$50,$50,$50,$50,$50
-	db "FLAREON",$50,$50,$50
-	db "JOLTEON",$50,$50,$50
-	db "VAPOREON",$50,$50
-	db "MACHOP",$50,$50,$50,$50
-	db "ZUBAT",$50,$50,$50,$50,$50
-	db "EKANS",$50,$50,$50,$50,$50
-	db "PARAS",$50,$50,$50,$50,$50
-	db "POLIWHIRL",$50
-	db "POLIWRATH",$50
-	db "WEEDLE",$50,$50,$50,$50
-	db "KAKUNA",$50,$50,$50,$50
-	db "BEEDRILL",$50,$50
+	db "EEVEE@@@@@"
+	db "FLAREON@@@"
+	db "JOLTEON@@@"
+	db "VAPOREON@@"
+	db "MACHOP@@@@"
+	db "ZUBAT@@@@@"
+	db "EKANS@@@@@"
+	db "PARAS@@@@@"
+	db "POLIWHIRL@"
+	db "POLIWRATH@"
+	db "WEEDLE@@@@"
+	db "KAKUNA@@@@"
+	db "BEEDRILL@@"
 	db "MISSINGNO."
-	db "DODRIO",$50,$50,$50,$50
-	db "PRIMEAPE",$50,$50
-	db "DUGTRIO",$50,$50,$50
-	db "VENOMOTH",$50,$50
-	db "DEWGONG",$50,$50,$50
+	db "DODRIO@@@@"
+	db "PRIMEAPE@@"
+	db "DUGTRIO@@@"
+	db "VENOMOTH@@"
+	db "DEWGONG@@@"
 	db "MISSINGNO."
 	db "MISSINGNO."
-	db "CATERPIE",$50,$50
-	db "METAPOD",$50,$50,$50
+	db "CATERPIE@@"
+	db "METAPOD@@@"
 	db "BUTTERFREE"
-	db "MACHAMP",$50,$50,$50
+	db "MACHAMP@@@"
 	db "MISSINGNO."
-	db "GOLDUCK",$50,$50,$50
-	db "HYPNO",$50,$50,$50,$50,$50
-	db "GOLBAT",$50,$50,$50,$50
-	db "MEWTWO",$50,$50,$50,$50
-	db "SNORLAX",$50,$50,$50
-	db "MAGIKARP",$50,$50
+	db "GOLDUCK@@@"
+	db "HYPNO@@@@@"
+	db "GOLBAT@@@@"
+	db "MEWTWO@@@@"
+	db "SNORLAX@@@"
+	db "MAGIKARP@@"
 	db "MISSINGNO."
 	db "MISSINGNO."
-	db "MUK",$50,$50,$50,$50,$50,$50,$50
+	db "MUK@@@@@@@"
 	db "MISSINGNO."
-	db "KINGLER",$50,$50,$50
-	db "CLOYSTER",$50,$50
+	db "KINGLER@@@"
+	db "CLOYSTER@@"
 	db "MISSINGNO."
-	db "ELECTRODE",$50
-	db "CLEFABLE",$50,$50
-	db "WEEZING",$50,$50,$50
-	db "PERSIAN",$50,$50,$50
-	db "MAROWAK",$50,$50,$50
+	db "ELECTRODE@"
+	db "CLEFABLE@@"
+	db "WEEZING@@@"
+	db "PERSIAN@@@"
+	db "MAROWAK@@@"
 	db "MISSINGNO."
-	db "HAUNTER",$50,$50,$50
-	db "ABRA",$50,$50,$50,$50,$50,$50
-	db "ALAKAZAM",$50,$50
-	db "PIDGEOTTO",$50
-	db "PIDGEOT",$50,$50,$50
-	db "STARMIE",$50,$50,$50
-	db "BULBASAUR",$50
-	db "VENUSAUR",$50,$50
+	db "HAUNTER@@@"
+	db "ABRA@@@@@@"
+	db "ALAKAZAM@@"
+	db "PIDGEOTTO@"
+	db "PIDGEOT@@@"
+	db "STARMIE@@@"
+	db "BULBASAUR@"
+	db "VENUSAUR@@"
 	db "TENTACRUEL"
 	db "MISSINGNO."
-	db "GOLDEEN",$50,$50,$50
-	db "SEAKING",$50,$50,$50
+	db "GOLDEEN@@@"
+	db "SEAKING@@@"
 	db "MISSINGNO."
 	db "MISSINGNO."
 	db "MISSINGNO."
 	db "MISSINGNO."
-	db "PONYTA",$50,$50,$50,$50
-	db "RAPIDASH",$50,$50
-	db "RATTATA",$50,$50,$50
-	db "RATICATE",$50,$50
-	db "NIDORINO",$50,$50
-	db "NIDORINA",$50,$50
-	db "GEODUDE",$50,$50,$50
-	db "PORYGON",$50,$50,$50
+	db "PONYTA@@@@"
+	db "RAPIDASH@@"
+	db "RATTATA@@@"
+	db "RATICATE@@"
+	db "NIDORINO@@"
+	db "NIDORINA@@"
+	db "GEODUDE@@@"
+	db "PORYGON@@@"
 	db "AERODACTYL"
 	db "MISSINGNO."
-	db "MAGNEMITE",$50
+	db "MAGNEMITE@"
 	db "MISSINGNO."
 	db "MISSINGNO."
 	db "CHARMANDER"
-	db "SQUIRTLE",$50,$50
+	db "SQUIRTLE@@"
 	db "CHARMELEON"
-	db "WARTORTLE",$50
-	db "CHARIZARD",$50
+	db "WARTORTLE@"
+	db "CHARIZARD@"
 	db "MISSINGNO."
 	db "MISSINGNO."
 	db "MISSINGNO."
 	db "MISSINGNO."
-	db "ODDISH",$50,$50,$50,$50
-	db "GLOOM",$50,$50,$50,$50,$50
-	db "VILEPLUME",$50
+	db "ODDISH@@@@"
+	db "GLOOM@@@@@"
+	db "VILEPLUME@"
 	db "BELLSPROUT"
 	db "WEEPINBELL"
 	db "VICTREEBEL"
@@ -9976,126 +9976,126 @@ InternalMapEntries: ; 5382
 
 MapNames: ; 5473
 PalletTownName:
-	db "PALLET TOWN",$50
+	db "PALLET TOWN@"
 ViridianCityName:
-	db "VIRIDIAN CITY",$50
+	db "VIRIDIAN CITY@"
 PewterCityName:
-	db "PEWTER CITY",$50
+	db "PEWTER CITY@"
 CeruleanCityName:
-	db "CERULEAN CITY",$50
+	db "CERULEAN CITY@"
 LavenderTownName:
-	db "LAVENDER TOWN",$50
+	db "LAVENDER TOWN@"
 VermilionCityName:
-	db "VERMILION CITY",$50
+	db "VERMILION CITY@"
 CeladonCityName:
-	db "CELADON CITY",$50
+	db "CELADON CITY@"
 FuchsiaCityName:
-	db "FUCHSIA CITY",$50
+	db "FUCHSIA CITY@"
 CinnabarIslandName:
-	db "CINNABAR ISLAND",$50
+	db "CINNABAR ISLAND@"
 IndigoPlateauName:
-	db "INDIGO PLATEAU",$50
+	db "INDIGO PLATEAU@"
 SaffronCityName:
-	db "SAFFRON CITY",$50
+	db "SAFFRON CITY@"
 Route1Name:
-	db "ROUTE 1",$50
+	db "ROUTE 1@"
 Route2Name:
-	db "ROUTE 2",$50
+	db "ROUTE 2@"
 Route3Name:
-	db "ROUTE 3",$50
+	db "ROUTE 3@"
 Route4Name:
-	db "ROUTE 4",$50
+	db "ROUTE 4@"
 Route5Name:
-	db "ROUTE 5",$50
+	db "ROUTE 5@"
 Route6Name:
-	db "ROUTE 6",$50
+	db "ROUTE 6@"
 Route7Name:
-	db "ROUTE 7",$50
+	db "ROUTE 7@"
 Route8Name:
-	db "ROUTE 8",$50
+	db "ROUTE 8@"
 Route9Name:
-	db "ROUTE 9",$50
+	db "ROUTE 9@"
 Route10Name:
-	db "ROUTE 10",$50
+	db "ROUTE 10@"
 Route11Name:
-	db "ROUTE 11",$50
+	db "ROUTE 11@"
 Route12Name:
-	db "ROUTE 12",$50
+	db "ROUTE 12@"
 Route13Name:
-	db "ROUTE 13",$50
+	db "ROUTE 13@"
 Route14Name:
-	db "ROUTE 14",$50
+	db "ROUTE 14@"
 Route15Name:
-	db "ROUTE 15",$50
+	db "ROUTE 15@"
 Route16Name:
-	db "ROUTE 16",$50
+	db "ROUTE 16@"
 Route17Name:
-	db "ROUTE 17",$50
+	db "ROUTE 17@"
 Route18Name:
-	db "ROUTE 18",$50
+	db "ROUTE 18@"
 Route19Name:
-	db "SEA ROUTE 19",$50
+	db "SEA ROUTE 19@"
 Route20Name:
-	db "SEA ROUTE 20",$50
+	db "SEA ROUTE 20@"
 Route21Name:
-	db "SEA ROUTE 21",$50
+	db "SEA ROUTE 21@"
 Route22Name:
-	db "ROUTE 22",$50
+	db "ROUTE 22@"
 Route23Name:
-	db "ROUTE 23",$50
+	db "ROUTE 23@"
 Route24Name:
-	db "ROUTE 24",$50
+	db "ROUTE 24@"
 Route25Name:
-	db "ROUTE 25",$50
+	db "ROUTE 25@"
 ViridianForestName:
-	db "VIRIDIAN FOREST",$50
+	db "VIRIDIAN FOREST@"
 MountMoonName:
-	db "MT.MOON",$50
+	db "MT.MOON@"
 RockTunnelName:
-	db "ROCK TUNNEL",$50
+	db "ROCK TUNNEL@"
 SeaCottageName:
-	db "SEA COTTAGE",$50
+	db "SEA COTTAGE@"
 SSAnneName:
-	db "S.S.ANNE",$50
+	db "S.S.ANNE@"
 PokemonLeagueName:
-	db $54,"MON LEAGUE",$50
+	db $54,"MON LEAGUE@"
 UndergroundPathName:
-	db "UNDERGROUND PATH",$50
+	db "UNDERGROUND PATH@"
 PokemonTowerName:
-	db $54,"MON TOWER",$50
+	db $54,"MON TOWER@"
 SeafoamIslandsName:
-	db "SEAFOAM ISLANDS",$50
+	db "SEAFOAM ISLANDS@"
 VictoryRoadName:
-	db "VICTORY ROAD",$50
+	db "VICTORY ROAD@"
 DiglettsCaveName:
-	db "DIGLETT",$BD," CAVE",$50
+	db "DIGLETT",$BD," CAVE@"
 RocketHQName:
-	db "ROCKET HQ",$50
+	db "ROCKET HQ@"
 SilphCoName:
-	db "SILPH CO.",$50
+	db "SILPH CO.@"
 PokemonMansionName:
-	db $4a," MANSION",$50
+	db $4a," MANSION@"
 SafariZoneName:
-	db "SAFARI ZONE",$50
+	db "SAFARI ZONE@"
 CeruleanCaveName:
-	db "CERULEAN CAVE",$50
+	db "CERULEAN CAVE@"
 PowerPlantName:
-	db "POWER PLANT",$50
+	db "POWER PLANT@"
 
 INCBIN "baserom.gbc",$716BE,$71B7B-$716BE
 
 TradeMons: ; 5B7B
 ; givemonster, getmonster, textstring, nickname (11 bytes), 14 bytes total
-	db NIDORINO,  NIDORINA,  0,"TERRY",$50,$50,$50,$50,$50,$50
-	db ABRA,      MR__MIME,  0,"MARCEL",$50,$50,$50,$50,$50
-	db BUTTERFREE,BEEDRILL,  2,"CHIKUCHIKU",$50
-	db PONYTA,    SEEL,      0,"SAILOR",$50,$50,$50,$50,$50
-	db SPEAROW,   FARFETCH_D,2,"DUX",$50,$50,$50,$50,$50,$50,$50,$50
-	db SLOWBRO,   LICKITUNG, 0,"MARC",$50,$50,$50,$50,$50,$50,$50
-	db POLIWHIRL, JYNX,      1,"LOLA",$50,$50,$50,$50,$50,$50,$50
-	db RAICHU,    ELECTRODE, 1,"DORIS",$50,$50,$50,$50,$50,$50
-	db VENONAT,   TANGELA,   2,"CRINKLES",$50,$50,$50
-	db NIDORAN_M, NIDORAN_F, 2,"SPOT",$50,$50,$50,$50,$50,$50,$50
+	db NIDORINO,  NIDORINA,  0,"TERRY@@@@@@"
+	db ABRA,      MR__MIME,  0,"MARCEL@@@@@"
+	db BUTTERFREE,BEEDRILL,  2,"CHIKUCHIKU@"
+	db PONYTA,    SEEL,      0,"SAILOR@@@@@"
+	db SPEAROW,   FARFETCH_D,2,"DUX@@@@@@@@"
+	db SLOWBRO,   LICKITUNG, 0,"MARC@@@@@@@"
+	db POLIWHIRL, JYNX,      1,"LOLA@@@@@@@"
+	db RAICHU,    ELECTRODE, 1,"DORIS@@@@@@"
+	db VENONAT,   TANGELA,   2,"CRINKLES@@@"
+	db NIDORAN_M, NIDORAN_F, 2,"SPOT@@@@@@@"
 
 INCBIN "baserom.gbc",$71C07,$725C8-$71C07
 
