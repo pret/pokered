@@ -656,19 +656,19 @@ FinishDTE:
 	jp PlaceNextChar
 
 Char5CText:
-	db "TM",$50
+	db "TM@"
 Char5DText:
-	db "TRAINER",$50
+	db "TRAINER@"
 Char5BText:
-	db "PC",$50
+	db "PC@"
 Char5EText:
-	db "ROCKET",$50
+	db "ROCKET@"
 Char54Text:
 	db "POK",$BA,$50 ; POKé
 Char56Text:
 	db $75,$75,$50 ; ……
 Char5AText:
-	db "Enemy ",$50
+	db "Enemy @"
 Char4AText:
 	db $E1,$E2,$50 ; PKMN
 
@@ -1240,103 +1240,103 @@ ENDC
 INCBIN "baserom.gbc",$4598,$472B-$4598
 
 ItemNames: ; 472B
-	db "MASTER BALL",$50
-	db "ULTRA BALL",$50
-	db "GREAT BALL",$50
-	db "POK",$BA," BALL",$50
-	db "TOWN MAP",$50
-	db "BICYCLE",$50
-	db "?????",$50
-	db "SAFARI BALL",$50
-	db "POK",$BA,"DEX",$50
-	db "MOON STONE",$50
-	db "ANTIDOTE",$50
-	db "BURN HEAL",$50
-	db "ICE HEAL",$50
-	db "AWAKENING",$50
-	db "PARLYZ HEAL",$50
-	db "FULL RESTORE",$50
-	db "MAX POTION",$50
-	db "HYPER POTION",$50
-	db "SUPER POTION",$50
-	db "POTION",$50
-	db "BOULDERBADGE",$50
-	db "CASCADEBADGE",$50
-	db "THUNDERBADGE",$50
-	db "RAINBOWBADGE",$50
-	db "SOULBADGE",$50
-	db "MARSHBADGE",$50
-	db "VOLCANOBADGE",$50
-	db "EARTHBADGE",$50
-	db "ESCAPE ROPE",$50
-	db "REPEL",$50
-	db "OLD AMBER",$50
-	db "FIRE STONE",$50
-	db "THUNDERSTONE",$50
-	db "WATER STONE",$50
-	db "HP UP",$50
-	db "PROTEIN",$50
-	db "IRON",$50
-	db "CARBOS",$50
-	db "CALCIUM",$50
-	db "RARE CANDY",$50
-	db "DOME FOSSIL",$50
-	db "HELIX FOSSIL",$50
-	db "SECRET KEY",$50
-	db "?????",$50
-	db "BIKE VOUCHER",$50
-	db "X ACCURACY",$50
-	db "LEAF STONE",$50
-	db "CARD KEY",$50
-	db "NUGGET",$50
-	db "PP UP",$50
-	db "POK",$BA," DOLL",$50
-	db "FULL HEAL",$50
-	db "REVIVE",$50
-	db "MAX REVIVE",$50
-	db "GUARD SPEC.",$50
-	db "SUPER REPEL",$50
-	db "MAX REPEL",$50
-	db "DIRE HIT",$50
-	db "COIN",$50
-	db "FRESH WATER",$50
-	db "SODA POP",$50
-	db "LEMONADE",$50
-	db "S.S.TICKET",$50
-	db "GOLD TEETH",$50
-	db "X ATTACK",$50
-	db "X DEFEND",$50
-	db "X SPEED",$50
-	db "X SPECIAL",$50
-	db "COIN CASE",$50
-	db "OAK",$BD," PARCEL",$50
-	db "ITEMFINDER",$50
-	db "SILPH SCOPE",$50
-	db "POK",$BA," FLUTE",$50
-	db "LIFT KEY",$50
-	db "EXP.ALL",$50
-	db "OLD ROD",$50
-	db "GOOD ROD",$50
-	db "SUPER ROD",$50
-	db "PP UP",$50
-	db "ETHER",$50
-	db "MAX ETHER",$50
-	db "ELIXER",$50
-	db "MAX ELIXER",$50
-	db "B2F",$50
-	db "B1F",$50
-	db "1F",$50
-	db "2F",$50
-	db "3F",$50
-	db "4F",$50
-	db "5F",$50
-	db "6F",$50
-	db "7F",$50
-	db "8F",$50
-	db "9F",$50
-	db "10F",$50
-	db "11F",$50
-	db "B4F",$50
+	db "MASTER BALL@"
+	db "ULTRA BALL@"
+	db "GREAT BALL@"
+	db "POK",$BA," BALL@"
+	db "TOWN MAP@"
+	db "BICYCLE@"
+	db "?????@"
+	db "SAFARI BALL@"
+	db "POK",$BA,"DEX@"
+	db "MOON STONE@"
+	db "ANTIDOTE@"
+	db "BURN HEAL@"
+	db "ICE HEAL@"
+	db "AWAKENING@"
+	db "PARLYZ HEAL@"
+	db "FULL RESTORE@"
+	db "MAX POTION@"
+	db "HYPER POTION@"
+	db "SUPER POTION@"
+	db "POTION@"
+	db "BOULDERBADGE@"
+	db "CASCADEBADGE@"
+	db "THUNDERBADGE@"
+	db "RAINBOWBADGE@"
+	db "SOULBADGE@"
+	db "MARSHBADGE@"
+	db "VOLCANOBADGE@"
+	db "EARTHBADGE@"
+	db "ESCAPE ROPE@"
+	db "REPEL@"
+	db "OLD AMBER@"
+	db "FIRE STONE@"
+	db "THUNDERSTONE@"
+	db "WATER STONE@"
+	db "HP UP@"
+	db "PROTEIN@"
+	db "IRON@"
+	db "CARBOS@"
+	db "CALCIUM@"
+	db "RARE CANDY@"
+	db "DOME FOSSIL@"
+	db "HELIX FOSSIL@"
+	db "SECRET KEY@"
+	db "?????@"
+	db "BIKE VOUCHER@"
+	db "X ACCURACY@"
+	db "LEAF STONE@"
+	db "CARD KEY@"
+	db "NUGGET@"
+	db "PP UP@"
+	db "POK",$BA," DOLL@"
+	db "FULL HEAL@"
+	db "REVIVE@"
+	db "MAX REVIVE@"
+	db "GUARD SPEC.@"
+	db "SUPER REPEL@"
+	db "MAX REPEL@"
+	db "DIRE HIT@"
+	db "COIN@"
+	db "FRESH WATER@"
+	db "SODA POP@"
+	db "LEMONADE@"
+	db "S.S.TICKET@"
+	db "GOLD TEETH@"
+	db "X ATTACK@"
+	db "X DEFEND@"
+	db "X SPEED@"
+	db "X SPECIAL@"
+	db "COIN CASE@"
+	db "OAK",$BD," PARCEL@"
+	db "ITEMFINDER@"
+	db "SILPH SCOPE@"
+	db "POK",$BA," FLUTE@"
+	db "LIFT KEY@"
+	db "EXP.ALL@"
+	db "OLD ROD@"
+	db "GOOD ROD@"
+	db "SUPER ROD@"
+	db "PP UP@"
+	db "ETHER@"
+	db "MAX ETHER@"
+	db "ELIXER@"
+	db "MAX ELIXER@"
+	db "B2F@"
+	db "B1F@"
+	db "1F@"
+	db "2F@"
+	db "3F@"
+	db "4F@"
+	db "5F@"
+	db "6F@"
+	db "7F@"
+	db "8F@"
+	db "9F@"
+	db "10F@"
+	db "11F@"
+	db "B4F@"
 
 INCBIN "baserom.gbc",$4A92,$5AF2-$4A92
 
@@ -1701,20 +1701,20 @@ Function62CE: ; 62CE, XXX called by 4B2 948 989 5BF9 5D15
 INCBIN "baserom.gbc",$62FF,$778D - $62FF
 
 FieldMoveNames: ; 778D
-	db "CUT",$50
-	db "FLY",$50
-	db $50
-	db "SURF",$50
-	db "STRENGTH",$50
-	db "FLASH",$50
-	db "DIG",$50
-	db "TELEPORT",$50
-	db "SOFTBOILED",$50
+	db "CUT@"
+	db "FLY@"
+	db "@"
+	db "SURF@"
+	db "STRENGTH@"
+	db "FLASH@"
+	db "DIG@"
+	db "TELEPORT@"
+	db "SOFTBOILED@"
 
 PokemonMenuEntries: ; 77C2
 	db "STATS",$4E
 	db "SWITCH",$4E
-	db "CANCEL",$50
+	db "CANCEL@"
 
 INCBIN "baserom.gbc",$77D6,$7AF5 - $77D6
 
@@ -1722,7 +1722,7 @@ PlayersPCMenuEntries: ; 7AF5
 	db "WITHDRAW ITEM",$4E
 	db "DEPOSIT ITEM",$4E
 	db "TOSS ITEM",$4E
-	db "LOG OFF",$50
+	db "LOG OFF@"
 
 INCBIN "baserom.gbc",$7B22,$7C49 - $7B22
 
@@ -4675,37 +4675,37 @@ TypeNamePointers: ; 7DAE
 	dw Type1AName
 
 Type00Name:
-	db "NORMAL",$50
+	db "NORMAL@"
 Type01Name:
-	db "FIGHTING",$50
+	db "FIGHTING@"
 Type02Name:
-	db "FLYING",$50
+	db "FLYING@"
 Type03Name:
-	db "POISON",$50
+	db "POISON@"
 Type14Name:
-	db "FIRE",$50
+	db "FIRE@"
 Type15Name:
-	db "WATER",$50
+	db "WATER@"
 Type16Name:
-	db "GRASS",$50
+	db "GRASS@"
 Type17Name:
-	db "ELECTRIC",$50
+	db "ELECTRIC@"
 Type18Name:
-	db "PSYCHIC",$50
+	db "PSYCHIC@"
 Type19Name:
-	db "ICE",$50
+	db "ICE@"
 Type04Name:
-	db "GROUND",$50
+	db "GROUND@"
 Type05Name:
-	db "ROCK",$50
+	db "ROCK@"
 Type06Name:
-	db "BIRD",$50
+	db "BIRD@"
 Type07Name:
-	db "BUG",$50
+	db "BUG@"
 Type08Name:
-	db "GHOST",$50
+	db "GHOST@"
 Type1AName:
-	db "DRAGON",$50
+	db "DRAGON@"
 
 SaveTrainerName: ; 7E4A
 	ld hl,TrainerNamePointers
@@ -4777,43 +4777,43 @@ TrainerNamePointers:
 	dw $D04A
 
 YoungsterName:
-	db "YOUNGSTER",$50
+	db "YOUNGSTER@"
 BugCatcherName:
-	db "BUG CATCHER",$50
+	db "BUG CATCHER@"
 LassName:
-	db "LASS",$50
+	db "LASS@"
 JrTrainerMName:
 	db "JR.TRAINER",$EF,$50
 JrTrainerFName:
 	db "JR.TRAINER",$F5,$50
 PokemaniacName:
-	db "POK",$BA,"MANIAC",$50
+	db "POK",$BA,"MANIAC@"
 SuperNerdName:
-	db "SUPER NERD",$50
+	db "SUPER NERD@"
 BurglarName:
-	db "BURGLAR",$50
+	db "BURGLAR@"
 EngineerName:
-	db "ENGINEER",$50
+	db "ENGINEER@"
 JugglerXName:
-	db "JUGGLER",$50
+	db "JUGGLER@"
 SwimmerName:
-	db "SWIMMER",$50
+	db "SWIMMER@"
 BeautyName:
-	db "BEAUTY",$50
+	db "BEAUTY@"
 RockerName:
-	db "ROCKER",$50
+	db "ROCKER@"
 JugglerName:
-	db "JUGGLER",$50
+	db "JUGGLER@"
 BlackbeltName:
-	db "BLACKBELT",$50
+	db "BLACKBELT@"
 ProfOakName:
-	db "PROF.OAK",$50
+	db "PROF.OAK@"
 ChiefName:
-	db "CHIEF",$50
+	db "CHIEF@"
 ScientistName:
-	db "SCIENTIST",$50
+	db "SCIENTIST@"
 RocketName:
-	db "ROCKET",$50
+	db "ROCKET@"
 CooltrainerMName:
 	db "COOLTRAINER",$EF,$50
 CooltrainerFName:
