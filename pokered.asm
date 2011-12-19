@@ -1507,7 +1507,7 @@ OakSpeech: ; 6115
 	ld bc,$1300
 	call IntroPredef3B   ; displays Oak pic?
 	call FadeInIntroPic
-	ld hl,HelloWelcomeText
+	ld hl,OakSpeechText1
 	call PrintText      ; prints text box
 	call GBFadeOut2
 	call ClearScreen
@@ -1518,7 +1518,7 @@ OakSpeech: ; 6115
 	ld hl,$C3F6     ; position on tilemap the pic is displayed
 	call $1384      ; displays pic?
 	call MovePicLeft
-	ld hl,WorldFilledWithText
+	ld hl,OakSpeechText2
 	call PrintText      ; Prints text box
 	call GBFadeOut2
 	call ClearScreen
@@ -1526,7 +1526,7 @@ OakSpeech: ; 6115
 	ld bc,$0400     ; affects the position of the player pic
 	call IntroPredef3B      ; displays player pic?
 	call MovePicLeft
-	ld hl,FirstWhatIsYourNameText
+	ld hl,IntroducePlayerText
 	call PrintText
 	call $695D ; brings up NewName/Red/etc menu
 	call GBFadeOut2
@@ -1535,7 +1535,7 @@ OakSpeech: ; 6115
 	ld bc,$1300
 	call IntroPredef3B ; displays rival pic
 	call FadeInIntroPic
-	ld hl,ThisIsMyGrandsonText
+	ld hl,IntroduceRivalText
 	call PrintText
 	call $69A4
 Function61BC:
@@ -1548,7 +1548,7 @@ Function61BC:
 	ld a,[$D72D]
 	and a
 	jr nz,.next\@
-	ld hl,YourOwnLegendText
+	ld hl,OakSpeechText3
 	call PrintText
 .next\@	ld a,[$FFB8]
 	push af
@@ -1598,16 +1598,23 @@ Function61BC:
 	call DelayFrames
 	call GBFadeOut2
 	jp ClearScreen
-HelloWelcomeText:
-	db $17,$25,$64,$22,$50 ; "Hello welcome to the world of pokemon ..."
-WorldFilledWithText:
-	db $17,$7F,$64,$22,$14,$17,$B3,$64,$22,$50 ; "This world is filled with creatures ..."
-FirstWhatIsYourNameText:
-	db $17,$19,$65,$22,$50 ; "First, what is your name?"
-ThisIsMyGrandsonText:
-	db $17,$34,$65,$22,$50 ; "This is my grandson ..."
-YourOwnLegendText:
-	db $17,$97,$65,$22,$50 ; "Ninten! Your very own legend ..."
+OakSpeechText1:
+	TX_FAR _OakSpeechText1
+	db "@"
+OakSpeechText2:
+	TX_FAR _OakSpeechText2A
+	db $14
+	TX_FAR _OakSpeechText2B
+	db "@"
+IntroducePlayerText:
+	TX_FAR _IntroducePlayerText
+	db "@"
+IntroduceRivalText:
+	TX_FAR _IntroduceRivalText
+	db "@"
+OakSpeechText3:
+	TX_FAR _OakSpeechText3
+	db "@"
 
 FadeInIntroPic:
 	ld hl,IntroFadePalettes
@@ -4181,7 +4188,7 @@ PalletTownText1:
 	jp $24D7
 
 OakAppearsText:
-	db $17,$45,$42,$29 ; “Hey! Wait! Don’t go out!…”
+	TX_FAR _OakAppearsText
 	db 8
 	ld c,10
 	call DelayFrames
@@ -4195,25 +4202,32 @@ OakAppearsText:
 	jp $24D7
 
 OakWalksUpText:
-	db $17,$64,$42,$29,$50 ; “It’s unsafe! Wild Pokémon…”
+	TX_FAR _OakWalksUpText
+	db "@"
 
 PalletTownText2: ; girl
-	db $17,$DC,$42,$29,$50 ; “I’m raising Pokémon too!…”
+	TX_FAR _PalletTownText2
+	db "@"
 
 PalletTownText3: ; fat man
-	db $17,$1D,$43,$29,$50 ; “Technology is incredible!…”
+	TX_FAR _PalletTownText3
+	db "@"
 
 PalletTownText4: ; sign by lab
-	db $17,$74,$43,$29,$50 ; “Oak Pokémon Research Lab”
+	TX_FAR _PalletTownText4
+	db "@"
 
 PalletTownText5: ; sign by fence
-	db $17,$8B,$43,$29,$50 ; “Pallet Town: Shades of your journey…”
+	TX_FAR _PalletTownText5
+	db "@"
 
 PalletTownText6: ; sign by Red’s house
-	db $17,$B6,$43,$29,$50 ; “Red’s House”
+	TX_FAR _PalletTownText6
+	db "@"
 
 PalletTownText7: ; sign by Blue’s house
-	db $17,$C1,$43,$29,$50 ; “Blue’s House”
+	TX_FAR _PalletTownText7
+	db "@"
 
 INCBIN "baserom.gbc",$18FF1,$1B2F-$FF1
 
@@ -4285,19 +4299,26 @@ BluesHouseText1:
 	jp $24D7
 
 DaisyInitialText:
-	db $17,$3C,$4C,$25,$50 ; “Hi! Blue is out…”
-DaisyOfferMapText: ; 5BAF
-	db $17,$5D,$4C,$25,$50 ; “Grandpa asked you to run an errand?…”
-GotMapText: ; 5BB4
-	db $17,$9C,$4C,$25,$11,$50 ; “Red got a Town Map!”
-DaisyBagFullText: ; 5BBA
-	db $17,$AD,$4C,$25,$50 ; “You have too much stuff with you.”
-DaisyUseMapText: ; 5BBF
-	db $17,$D0,$4C,$25,$50 ; “Use the Town Map to…”
-BluesHouseText2: ; 5BC4
-	db $17,$FD,$4C,$25,$50 ; “Pokémon are living things!…”
-BluesHouseText3: ; the map on the table, which Daisy gives the player
-	db $17,$3B,$4D,$25,$50 ; “It’s a big map!…”
+	TX_FAR _DaisyInitialText
+	db "@"
+DaisyOfferMapText:
+	TX_FAR _DaisyOfferMapText
+	db "@"
+GotMapText:
+	TX_FAR _GotMapText
+	db $11,"@"
+DaisyBagFullText:
+	TX_FAR _DaisyBagFullText
+	db "@"
+DaisyUseMapText:
+	TX_FAR _DaisyUseMapText
+	db "@"
+BluesHouseText2: ; Daisy, walking around
+	TX_FAR _BluesHouseText2
+	db "@"
+BluesHouseText3: ; map on table
+	TX_FAR _BluesHouseText3
+	db "@"
 
 BluesHouseObject:
 	db $0A ; border tile
@@ -6565,7 +6586,7 @@ Function674B: ; 674B
 
 AIBattleWithdrawText:
 	TX_FAR _AIBattleWithdrawText
-	TX_NULL
+	db "@"
 
 AIUseFullHeal:
 	call $669B
@@ -6691,7 +6712,7 @@ AIPrintItemUse_:
 
 AIBattleUseItemText:
 	TX_FAR _AIBattleUseItemText
-	TX_NULL
+	db "@"
 
 
 INCBIN "baserom.gbc",$3A849,$3B05C - $3A849
@@ -9382,7 +9403,8 @@ RedsHouse1FText1: ; Mom
 	jp $24D7
 
 MomWakeUpText:
-	db $17,$07,$4B,$25,$50 ; “All boys leave home some day…”
+	TX_FAR _MomWakeUpText
+	db "@"
 
 MomHealPokemon:
 	ld hl,MomHealText1
@@ -9406,9 +9428,11 @@ MomHealPokemon:
 	jp PrintText
 
 MomHealText1:
-	db $17,$6D,$4B,$25,$50 ; "Red! You should take a quick rest…"
+	TX_FAR _MomHealText1
+	db "@"
 MomHealText2:
-	db $17,$94,$4B,$25,$50 ; “Oh good! …”
+	TX_FAR _MomHealText2
+	db "@"
 
 RedsHouse1FText2: ; TV
 	db 8
@@ -9422,10 +9446,12 @@ RedsHouse1FText2: ; TV
 	jp $24D7
 
 StandByMeText:
-	db $17,$D7,$4B,$25,$50 ; “Four boys are walking…”
+	TX_FAR _StandByMeText
+	db "@"
 
 TVWrongSideText:
-	db $17,$29,$4C,$25,$50 ; “Oops, wrong side.”
+	TX_FAR _TVWrongSideText
+	db "@"
 
 RedsHouse1FObject:
 	db $0A ; border tile
@@ -9760,7 +9786,7 @@ RedsHouse2FScript2:
 	ret
 
 RedsHouse2FTexts:
-	db $50
+	db "@"
 
 RedsHouse2FObject:
 	db $0A ; border tile
@@ -11096,7 +11122,54 @@ _AIBattleUseItemText:
 	dw $CFDA
 	db 0,"!",$58
 
-INCBIN "baserom.gbc",$880EF,$2C0A
+INCBIN "baserom.gbc",$880EF,$8A425 - $880EF
+
+_OakSpeechText1:
+	db 0,"Hello there!",$4F
+	db "Welcome to the",$55
+	db "world of #MON!",$51
+	db "My name is OAK!",$4F
+	db "People call me",$55
+	db "the #MON PROF!",$58
+
+_OakSpeechText2A:
+	db 0,"This world is",$4F
+	db "inhabited by",$55
+	db "creatures called",$55
+	db "#MON!@@"
+
+_OakSpeechText2B:
+	db 0,$51,"For some people,",$4F
+	db "#MON are",$55
+	db "pets. Others use",$55
+	db "them for fights.",$51
+	db "Myself...",$51
+	db "I study #MON",$4F
+	db "as a profession.",$58
+
+_IntroducePlayerText:
+	db 0,"First, what is",$4F
+	db "your name?",$58
+
+_IntroduceRivalText:
+	db 0,"This is my grand-",$4F
+	db "son. He",$BD," been",$55
+	db "your rival since",$55
+	db "you were a baby.",$51
+	db "...Erm, what is",$4F
+	db "his name again?",$58
+
+_OakSpeechText3:
+	db 0,$52,"!",$51
+	db "Your very own",$4F
+	db "#MON legend is",$55
+	db "about to unfold!",$51
+	db "A world of dreams",$4F
+	db "and adventures",$55
+	db "with #MON",$55
+	db "awaits! Let",$BD," go!",$57
+
+INCBIN "baserom.gbc",$8A605,$8000 - $6605
 
 SECTION "bank23",DATA,BANK[$23]
 INCBIN "baserom.gbc",$8C000,$4000
@@ -11105,7 +11178,75 @@ SECTION "bank24",DATA,BANK[$24]
 INCBIN "baserom.gbc",$90000,$4000
 
 SECTION "bank25",DATA,BANK[$25]
-INCBIN "baserom.gbc",$94000,$4000
+INCBIN "baserom.gbc",$94000,$B07
+
+_MomWakeUpText:
+	db 0,"MOM: Right.",$4F
+	db "All boys leave",$55
+	db "home some day.",$55
+	db "It said so on TV.",$51
+	db "PROF.OAK, next",$4F
+	db "door, is looking",$55
+	db "for you.",$57
+
+_MomHealText1:
+	db 0,"MOM: ",$52,"!",$4F
+	db "You should take a",$55
+	db "quick rest.",$58
+
+_MomHealText2:
+	db 0,"MOM: Oh good!",$4F
+	db "You and your",$55
+	db "#MON are",$55
+	db "looking great!",$55
+	db "Take care now!",$57
+
+_StandByMeText:
+	db 0,"There",$BD," a movie",$4F
+	db "on TV. Four boys",$55
+	db "are walking on",$55
+	db "railroad tracks.",$51
+	db "I better go too.",$57
+
+_TVWrongSideText:
+	db 0,"Oops, wrong side.",$57
+
+_DaisyInitialText:
+	db 0,"Hi ",$52,"!",$4F
+	db $53," is out at",$55
+	db "Grandpa",$BD," lab.",$57
+
+_DaisyOfferMapText:
+	db 0,"Grandpa asked you",$4F
+	db "to run an errand?",$55
+	db "Here, this will",$55
+	db "help you!",$58
+
+_GotMapText:
+	db 0,$52," got a",$4F,"@",1
+	dw $CF4B
+	db 0,"!@@"
+
+_DaisyBagFullText:
+	db 0,"You have too much",$4F
+	db "stuff with you.",$57
+
+_DaisyUseMapText:
+	db 0,"Use the TOWN MAP",$4F
+	db "to find out where",$55
+	db "you are.",$57
+
+_BluesHouseText2:
+	db 0,"#MON are living",$4F
+	db "things! If they",$55
+	db "get tired, give",$55
+	db "them a rest!",$57
+
+_BluesHouseText3:
+	db 0,"It",$BD," a big map!",$4F
+	db "This is useful!",$57
+
+INCBIN "baserom.gbc",$94D5B,$4000 - $D5B
 
 SECTION "bank26",DATA,BANK[$26]
 INCBIN "baserom.gbc",$98000,$4000
@@ -11117,7 +11258,54 @@ SECTION "bank28",DATA,BANK[$28]
 INCBIN "baserom.gbc",$A0000,$4000
 
 SECTION "bank29",DATA,BANK[$29]
-INCBIN "baserom.gbc",$A4000,$4000
+INCBIN "baserom.gbc",$A4000,$245
+
+_OakAppearsText:
+	db 0,"OAK: Hey! Wait!",$4F
+	db "Don",$BE," go out!@@"
+
+_OakWalksUpText:
+	db 0,"OAK: It",$BD," unsafe!",$4F
+	db "Wild #MON live",$55
+	db "in tall grass!",$51
+	db "You need your own",$4F
+	db "#MON for your",$55
+	db "protection.",$55
+	db "I know!",$51
+	db "Here, come with",$4F
+	db "me!",$57
+
+_PalletTownText2:
+	db 0,"I",$E5," raising",$4F
+	db "#MON too!",$51
+	db "When they get",$4F
+	db "strong, they can",$55
+	db "protect me!",$57
+
+_PalletTownText3:
+	db 0,"Technology is",$4F
+	db "incredible!",$51
+	db "You can now store",$4F
+	db "and recall items",$55
+	db "and #MON as",$55
+	db "data via PC!",$57
+
+_PalletTownText4:
+	db 0,"OAK #MON",$4F
+	db "RESEARCH LAB",$57
+
+_PalletTownText5:
+	db 0,"PALLET TOWN",$4F
+	db "Shades of your",$55
+	db "journey await!",$57
+
+_PalletTownText6:
+	db 0,$52,$BD," house ",$57
+
+_PalletTownText7:
+	db 0,$53,$BD," house ",$57
+
+INCBIN "baserom.gbc",$A43CC,$4000 - $3CC
 
 SECTION "bank2A",DATA,BANK[$2A]
 INCBIN "baserom.gbc",$A8000,$4000
