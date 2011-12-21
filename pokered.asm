@@ -10666,7 +10666,59 @@ PokedexOrder: ; 5024
 	db DEX_BELLSPROUT
 	db DEX_WEEPINBELL
 	db DEX_VICTREEBEL
-INCBIN "baserom.gbc",$410E2,$4000 - $10E2
+INCBIN "baserom.gbc",$410E2,$2769 - $10E2
+
+
+; XXX what do these do
+	ld hl,$C3A5
+	ld de,OTString67E5
+	call PlaceString
+	ld a,[$CD3D]
+	ld [$D11E],a
+	ld a,$3A
+	call Predef
+	ld hl,$C3A9
+	ld de,$D11E
+	ld bc,$8103
+	call $3C5F
+	ld hl,$C3CD
+	ld de,$CF4B
+	call PlaceString
+	ld hl,$C3F8
+	ld de,$CD41
+	call PlaceString
+	ld hl,$C420
+	ld de,$CD4C
+	ld bc,$8205
+	jp $3C5F
+
+	ld hl,$C46D
+	ld de,OTString67E5
+	call PlaceString
+	ld a,[$CD3E]
+	ld [$D11E],a
+	ld a,$3A
+	call Predef
+	ld hl,$C471
+	ld de,$D11E
+	ld bc,$8103
+	call $3C5F
+	ld hl,$C495
+	ld de,$CD6D
+	call PlaceString
+	ld hl,$C4C0
+	ld de,$CD4E
+	call PlaceString
+	ld hl,$C4E8
+	ld de,$CD59
+	ld bc,$8205
+	jp $3C5F
+
+OTString67E5: ; 67E5
+	db $7A,$7A,$74,$F2,$4E
+	db $4E
+	db "OT/",$4E
+	db $73,$74,$F2,"@"
 
 SECTION "bank11",DATA,BANK[$11]
 INCBIN "baserom.gbc",$44000,$4000
