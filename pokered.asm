@@ -479,8 +479,7 @@ PlaceString: ; 1955
 PlaceNextChar: ; 1956
 	ld a,[de]
 
-	; $50 ends a string
-	cp $50
+	cp "@"
 	jr nz,.PlaceText\@
 	ld b,h
 	ld c,l
@@ -670,7 +669,7 @@ Char56Text:
 Char5AText:
 	db "Enemy @"
 Char4AText:
-	db $E1,$E2,$50 ; PKMN
+	db $E1,$E2,"@" ; PKMN
 
 Char55:
 	push de
@@ -713,7 +712,7 @@ Next1AA2:
 	ret
 
 Char58Text:
-	db $50
+	db "@"
 
 Char51:
 	push de
@@ -1028,7 +1027,7 @@ GetMachineName:
 	add b
 	ld [de],a
 	inc de
-	ld a,$50 ; text null
+	ld a,"@"
 	ld [de],a
 
 	pop af
@@ -4744,7 +4743,7 @@ SaveTrainerName: ; 7E4A
 	ld a,[hli]
 	ld [de],a
 	inc de
-	cp $50
+	cp "@"
 	jr nz,.CopyCharacter\@
 	ret
 
