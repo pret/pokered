@@ -11433,11 +11433,11 @@ SeaCottageName:
 SSAnneName:
 	db "S.S.ANNE@"
 PokemonLeagueName:
-	db $54,"MON LEAGUE@"
+	db "#MON LEAGUE@"
 UndergroundPathName:
 	db "UNDERGROUND PATH@"
 PokemonTowerName:
-	db $54,"MON TOWER@"
+	db "#MON TOWER@"
 SeafoamIslandsName:
 	db "SEAFOAM ISLANDS@"
 VictoryRoadName:
