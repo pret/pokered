@@ -1309,7 +1309,7 @@ ItemNames: ; 472B
 	db "X SPEED@"
 	db "X SPECIAL@"
 	db "COIN CASE@"
-	db "OAK",$BD," PARCEL@"
+	db "OAK's PARCEL@"
 	db "ITEMFINDER@"
 	db "SILPH SCOPE@"
 	db "POKé FLUTE@"
@@ -11357,7 +11357,7 @@ SeafoamIslandsName:
 VictoryRoadName:
 	db "VICTORY ROAD@"
 DiglettsCaveName:
-	db "DIGLETT",$BD," CAVE@"
+	db "DIGLETT's CAVE@"
 RocketHQName:
 	db "ROCKET HQ@"
 SilphCoName:
@@ -12688,7 +12688,7 @@ _IntroducePlayerText:
 
 _IntroduceRivalText:
 	db 0,"This is my grand-",$4F
-	db "son. He",$BD," been",$55
+	db "son. He's been",$55
 	db "your rival since",$55
 	db "you were a baby.",$51
 	db "...Erm, what is",$4F
@@ -12702,7 +12702,7 @@ _OakSpeechText3:
 	db "A world of dreams",$4F
 	db "and adventures",$55
 	db "with #MON",$55
-	db "awaits! Let",$BD," go!",$57
+	db "awaits! Let's go!",$57
 
 INCBIN "baserom.gbc",$8A605,$8000 - $6605
 
@@ -12737,7 +12737,7 @@ _MomHealText2:
 	db "Take care now!",$57
 
 _StandByMeText:
-	db 0,"There",$BD," a movie",$4F
+	db 0,"There's a movie",$4F
 	db "on TV. Four boys",$55
 	db "are walking on",$55
 	db "railroad tracks.",$51
@@ -12749,7 +12749,7 @@ _TVWrongSideText:
 _DaisyInitialText:
 	db 0,"Hi ",$52,"!",$4F
 	db $53," is out at",$55
-	db "Grandpa",$BD," lab.",$57
+	db "Grandpa's lab.",$57
 
 _DaisyOfferMapText:
 	db 0,"Grandpa asked you",$4F
@@ -12778,7 +12778,7 @@ _BluesHouseText2:
 	db "them a rest!",$57
 
 _BluesHouseText3:
-	db 0,"It",$BD," a big map!",$4F
+	db 0,"It's a big map!",$4F
 	db "This is useful!",$57
 
 INCBIN "baserom.gbc",$94D5B,$4000 - $D5B
@@ -12797,10 +12797,10 @@ INCBIN "baserom.gbc",$A4000,$245
 
 _OakAppearsText:
 	db 0,"OAK: Hey! Wait!",$4F
-	db "Don",$BE," go out!@@"
+	db "Don't go out!@@"
 
 _OakWalksUpText:
-	db 0,"OAK: It",$BD," unsafe!",$4F
+	db 0,"OAK: It's unsafe!",$4F
 	db "Wild #MON live",$55
 	db "in tall grass!",$51
 	db "You need your own",$4F
@@ -12835,10 +12835,10 @@ _PalletTownText5:
 	db "journey await!",$57
 
 _PalletTownText6:
-	db 0,$52,$BD," house ",$57
+	db 0,$52,"'s house ",$57
 
 _PalletTownText7:
-	db 0,$53,$BD," house ",$57
+	db 0,$53,"'s house ",$57
 
 INCBIN "baserom.gbc",$A43CC,$4000 - $3CC
 

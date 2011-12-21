@@ -9,7 +9,7 @@ _RhydonDexEntry:
 _KangaskhanDexEntry:
 	db 0,"The infant rarely",$4E
 	db "ventures out of",$4E
-	db "its mother",$BD,$49
+	db "its mother's",$49
 	db "protective pouch",$4E
 	db "until it is 3",$4E
 	db "years old",$5F,"@"
@@ -51,15 +51,15 @@ _NidokingDexEntry:
 	db "powerful tail in",$4E
 	db "battle to smash,",$49
 	db "constrict, then",$4E
-	db "break the prey",$BD,$4E
+	db "break the prey's",$4E
 	db "bones",$5F,"@"
 
 _SlowbroDexEntry:
 	db 0,"The SHELLDER that",$4E
 	db "is latched onto",$4E
-	db "SLOWPOKE",$BD," tail",$49
+	db "SLOWPOKE's tail",$49
 	db "is said to feed",$4E
-	db "on the host",$BD," left",$4E
+	db "on the host's left",$4E
 	db "over scraps",$5F,"@"
 
 _IvysaurDexEntry:
@@ -81,7 +81,7 @@ _ExeggutorDexEntry:
 _LickitungDexEntry:
 	db 0,"Its tongue can be",$4E
 	db "extended like a",$4E
-	db "chameleon",$BD,". It",$49
+	db "chameleon's. It",$49
 	db "leaves a tingling",$4E
 	db "sensation when it",$4E
 	db "licks enemies",$5F,"@"
@@ -131,7 +131,7 @@ _CuboneDexEntry:
 	db "removes its skull",$4E
 	db "helmet, no one",$49
 	db "has ever seen",$4E
-	db "this #MON",$BD,$4E
+	db "this #MON's",$4E
 	db "real face",$5F,"@"
 
 _RhyhornDexEntry:
@@ -512,7 +512,7 @@ _ZapdosDexEntry:
 
 _DittoDexEntry:
 	db 0,"Capable of copying",$4E
-	db "an enemy",$BD," genetic",$4E
+	db "an enemy's genetic",$4E
 	db "code to instantly",$49
 	db "transform itself",$4E
 	db "into a duplicate",$4E
@@ -692,7 +692,7 @@ _VaporeonDexEntry:
 	db "tail is ridged",$49
 	db "with a fin which",$4E
 	db "is often mistaken",$4E
-	db "for a mermaid",$BD,$5F,"@"
+	db "for a mermaid's",$5F,"@"
 
 _MachopDexEntry:
 	db 0,"Loves to build",$4E
@@ -1079,7 +1079,7 @@ _NidorinoDexEntry:
 	db "powerful venom",$5F,"@"
 
 _NidorinaDexEntry:
-	db 0,"The female",$BD," horn",$4E
+	db 0,"The female's horn",$4E
 	db "develops slowly.",$4E
 	db "Prefers physical",$49
 	db "attacks such as",$4E
@@ -1106,7 +1106,7 @@ _AerodactylDexEntry:
 	db 0,"A ferocious, pre-",$4E
 	db "historic #MON",$4E
 	db "that goes for the",$49
-	db "enemy",$BD," throat",$4E
+	db "enemy's throat",$4E
 	db "with its serrated",$4E
 	db "saw-like fangs",$5F,"@"
 
@@ -1169,7 +1169,7 @@ _OddishDexEntry:
 _GloomDexEntry:
 	db 0,"The fluid that",$4E
 	db "oozes from its",$4E
-	db "mouth isn",$BE," drool.",$49
+	db "mouth isn't drool.",$49
 	db "It is a nectar",$4E
 	db "that is used to",$4E
 	db "attract prey",$5F,"@"

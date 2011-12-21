@@ -206,6 +206,8 @@ char["x"] = "$B7"
 char["y"] = "$B8"
 char["z"] = "$B9"
 char["é"] = "$BA"
+char["'s"] = "$BD"
+char["'t"] = "$BE"
 char["'"] = "$E0"
 char["-"] = "$E3"
 char["?"] = "$E6"
@@ -254,6 +256,19 @@ else {
 			c = c substr(f,1,1)
 			f = substr(f,2,length(f) - 1)
 		}
+
+		if (c == "'") {
+			if (substr(f,1,1) == "m" ||
+			    substr(f,1,1) == "r" ||
+			    substr(f,1,1) == "t" ||
+			    substr(f,1,1) == "s" ||
+			    substr(f,1,1) == "v" ||
+			    substr(f,1,1) == "l") {
+				c = c substr(f,1,1)
+				f = substr(f,2,length(f) - 1)
+			}
+		}
+
 		print char[c]
 		if (length(f))
 			print ","
