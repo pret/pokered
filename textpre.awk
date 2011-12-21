@@ -62,6 +62,7 @@ char["w"] = "$B6"
 char["x"] = "$B7"
 char["y"] = "$B8"
 char["z"] = "$B9"
+char["é"] = "$BA"
 char["'"] = "$E0"
 char["-"] = "$E3"
 char["?"] = "$E6"
@@ -107,7 +108,7 @@ else {
 			c = c substr(f,1,2)
 			f = substr(f,3,length(f) - 2)
 		} else if (c > "") { # U+0080
-			c = c sustr(f,1,1)
+			c = c substr(f,1,1)
 			f = substr(f,2,length(f) - 1)
 		}
 		print char[c]

@@ -664,7 +664,7 @@ Char5BText:
 Char5EText:
 	db "ROCKET@"
 Char54Text:
-	db "POK",$BA,$50 ; POKé
+	db "POKé@"
 Char56Text:
 	db $75,$75,$50 ; ……
 Char5AText:
@@ -1243,12 +1243,12 @@ ItemNames: ; 472B
 	db "MASTER BALL@"
 	db "ULTRA BALL@"
 	db "GREAT BALL@"
-	db "POK",$BA," BALL@"
+	db "POKé BALL@"
 	db "TOWN MAP@"
 	db "BICYCLE@"
 	db "?????@"
 	db "SAFARI BALL@"
-	db "POK",$BA,"DEX@"
+	db "POKéDEX@"
 	db "MOON STONE@"
 	db "ANTIDOTE@"
 	db "BURN HEAL@"
@@ -1290,7 +1290,7 @@ ItemNames: ; 472B
 	db "CARD KEY@"
 	db "NUGGET@"
 	db "PP UP@"
-	db "POK",$BA," DOLL@"
+	db "POKé DOLL@"
 	db "FULL HEAL@"
 	db "REVIVE@"
 	db "MAX REVIVE@"
@@ -1312,7 +1312,7 @@ ItemNames: ; 472B
 	db "OAK",$BD," PARCEL@"
 	db "ITEMFINDER@"
 	db "SILPH SCOPE@"
-	db "POK",$BA," FLUTE@"
+	db "POKé FLUTE@"
 	db "LIFT KEY@"
 	db "EXP.ALL@"
 	db "OLD ROD@"
@@ -4808,7 +4808,7 @@ JrTrainerMName:
 JrTrainerFName:
 	db "JR.TRAINER♀@"
 PokemaniacName:
-	db "POK",$BA,"MANIAC@"
+	db "POKéMANIAC@"
 SuperNerdName:
 	db "SUPER NERD@"
 BurglarName:
