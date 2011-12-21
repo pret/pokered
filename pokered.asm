@@ -666,7 +666,7 @@ Char5EText:
 Char54Text:
 	db "POKé@"
 Char56Text:
-	db $75,$75,$50 ; ……
+	db "……@"
 Char5AText:
 	db "Enemy @"
 Char4AText:
