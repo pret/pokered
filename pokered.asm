@@ -10438,7 +10438,42 @@ MissingNoDexEntry:
 	db 100 ; 10.0 kg
 	db 0,"コメント さくせいちゅう@" ; コメント作成中 (Comment to be written)
 
-INCBIN "baserom.gbc",$40FF9,$1024 - $FF9
+PokedexToIndex:
+	; converts the Pokédex number at $D11E to an index
+	push bc
+	push hl
+	ld a,[$D11E]
+	ld b,a
+	ld c,0
+	ld hl,PokedexOrder
+
+.loop\@ ; go through the list until we find an entry with a matching dex number
+	inc c
+	ld a,[hli]
+	cp b
+	jr nz,.loop\@
+
+	ld a,c
+	ld [$D11E],a
+	pop hl
+	pop bc
+	ret
+
+IndexToPokedex:
+	; converts the indexédex number at $D11E to a Pokédex number
+	push bc
+	push hl
+	ld a,[$D11E]
+	dec a
+	ld hl,PokedexOrder
+	ld b,0
+	ld c,a
+	add hl,bc
+	ld a,[hl]
+	ld [$D11E],a
+	pop hl
+	pop bc
+	ret
 
 PokedexOrder: ; 5024
 	db DEX_RHYDON
