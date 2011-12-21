@@ -67,8 +67,10 @@ char["-"] = "$E3"
 char["?"] = "$E6"
 char["!"] = "$E7"
 char["."] = "$E8"
+char["♂"] = "$EF"
 char["/"] = "$F3"
 char[","] = "$F4"
+char["♀"] = "$F5"
 char["0"] = "$F6"
 char["1"] = "$F7"
 char["2"] = "$F8"
@@ -98,6 +100,16 @@ else {
 	while (f != "") {
 		c = substr(f,1,1)
 		f = substr(f,2,length(f) - 1)
+		if (c > "𐀀") { # U+10000
+			c = c substr(f,1,3)
+			f = substr(f,4,length(f) - 3)
+		} else if (c > "ࠀ") { # U+0800
+			c = c substr(f,1,2)
+			f = substr(f,3,length(f) - 2)
+		} else if (c > "") { # U+0080
+			c = c sustr(f,1,1)
+			f = substr(f,2,length(f) - 1)
+		}
 		print char[c]
 		if (length(f))
 			print ","

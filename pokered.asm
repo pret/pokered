@@ -4352,7 +4352,7 @@ INCBIN "baserom.gbc",$1C000,$21E
 MonsterNames: ; 421E
 	db "RHYDON@@@@"
 	db "KANGASKHAN"
-	db "NIDORAN",$EF,"@@"
+	db "NIDORAN♂@@"
 	db "CLEFAIRY@@"
 	db "SPEAROW@@@"
 	db "VOLTORB@@@"
@@ -4364,7 +4364,7 @@ MonsterNames: ; 421E
 	db "EXEGGCUTE@"
 	db "GRIMER@@@@"
 	db "GENGAR@@@@"
-	db "NIDORAN",$F5,"@@"
+	db "NIDORAN♀@@"
 	db "NIDOQUEEN@"
 	db "CUBONE@@@@"
 	db "RHYHORN@@@"
@@ -4804,9 +4804,9 @@ BugCatcherName:
 LassName:
 	db "LASS@"
 JrTrainerMName:
-	db "JR.TRAINER",$EF,$50
+	db "JR.TRAINER♂@"
 JrTrainerFName:
-	db "JR.TRAINER",$F5,$50
+	db "JR.TRAINER♀@"
 PokemaniacName:
 	db "POK",$BA,"MANIAC@"
 SuperNerdName:
@@ -4836,9 +4836,9 @@ ScientistName:
 RocketName:
 	db "ROCKET@"
 CooltrainerMName:
-	db "COOLTRAINER",$EF,$50
+	db "COOLTRAINER♂@"
 CooltrainerFName:
-	db "COOLTRAINER",$F5,$50
+	db "COOLTRAINER♀@"
 
 INCBIN "baserom.gbc",$27f86,$27fb8-$27f86
 
