@@ -146,6 +146,15 @@ char["ー"] = "$E3"
 char["@"] = "$50"
 char["#"] = "$54"
 char["…"] = "$75"
+
+# textbox borders
+char["┌"] = "$79"
+char["─"] = "$7A"
+char["┐"] = "$7B"
+char["│"] = "$7C"
+char["└"] = "$7D"
+char["┘"] = "$7E"
+
 char[" "] = "$7F"
 char["A"] = "$80"
 char["B"] = "$81"

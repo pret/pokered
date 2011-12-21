@@ -431,7 +431,7 @@ TextBoxBorder: ; 1922
 
 	; first row
 	push hl
-	ld a,$79 ; upper-left border ┌
+	ld a,"┌"
 	ld [hli],a
 	inc a    ; horizontal border ─
 	call NPlaceChar
@@ -445,11 +445,11 @@ TextBoxBorder: ; 1922
 
 .PlaceRow\@
 	push hl
-	ld a,$7C ; vertical border │
+	ld a,"│"
 	ld [hli],a
-	ld a,$7F ; blank space ‘ ’
+	ld a," "
 	call NPlaceChar
-	ld [hl],$7C ; vertical border │
+	ld [hl],"│"
 
 	pop hl
 	ld de,20
@@ -458,11 +458,11 @@ TextBoxBorder: ; 1922
 	jr nz,.PlaceRow\@
 
 	; bottom row
-	ld a,$7D ; lower-left border └
+	ld a,"└"
 	ld [hli],a
-	ld a,$7A    ; horizontal border ─
+	ld a,"─"
 	call NPlaceChar
-	ld [hl],$7E ; lower-right border ┘
+	ld [hl],"┘"
 	ret
 ;
 NPlaceChar:
@@ -10715,7 +10715,7 @@ INCBIN "baserom.gbc",$410E2,$2769 - $10E2
 	jp $3C5F
 
 OTString67E5: ; 67E5
-	db $7A,$7A,$74,$F2,$4E
+	db "──",$74,$F2,$4E
 	db $4E
 	db "OT/",$4E
 	db $73,$74,$F2,"@"
