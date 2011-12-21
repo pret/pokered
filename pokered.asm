@@ -11697,7 +11697,279 @@ INCBIN "baserom.gbc",$72788,$4000 - $2788
 
 
 SECTION "bank1D",DATA,BANK[$1D]
-INCBIN "baserom.gbc",$74000,$4000
+INCBIN "baserom.gbc",$74000,$CB
+
+Func40CB: ; 40CB
+	xor a
+	ld [$FFBA],a
+	call $3719
+	call $4183
+
+	; display the next monster from CreditsMons
+	ld hl,$CD3E
+	ld c,[hl] ; how many monsters have we displayed so far?
+	inc [hl]
+	ld b,0
+	ld hl,CreditsMons
+	add hl,bc ; go that far in the list of monsters and get the next one
+	ld a,[hl]
+	ld [$CF91],a
+	ld [$D0B5],a
+	ld hl,$C420
+	call $1537
+	call $1389
+	ld hl,$980C
+	call $4164
+	xor a
+	ld [$FFBA],a
+	call $3725
+	ld hl,$9800
+	call $4164
+	ld a,$A7
+	ld [$FF4B],a
+	ld hl,$9C00
+	call $4164
+	call $4183
+	ld a,$FC
+	ld [$FF47],a
+	ld bc,7
+.next\@
+	call $4140
+	dec c
+	jr nz,.next\@
+	ld c,$14
+.next2\@
+	call $4140
+	ld a,[$FF4B]
+	sub 8
+	ld [$FF4B],a
+	dec c
+	jr nz,.next2\@
+	xor a
+	ld [$FFB0],a
+	ld a,$C0
+	ld [$FF47],a
+	ret
+
+CreditsMons: ; 4131
+	db VENUSAUR
+	db ARBOK
+	db RHYHORN
+	db FEAROW
+	db ABRA
+	db GRAVELER
+	db HITMONLEE
+	db TANGELA
+	db STARMIE
+	db GYARADOS
+	db DITTO
+	db OMASTAR
+	db VILEPLUME
+	db NIDOKING
+	db PARASECT
+
+INCBIN "baserom.gbc",$74140,$2C3 - $140
+
+CreditsTextPointers: ; 42C3
+
+	dw CredRed
+	dw CredTajiri
+	dw CredTaOota
+	dw CredMorimoto
+	dw CredWatanabe
+	dw CredMasuda
+	dw CredNisino
+	dw CredSugimori
+	dw CredNishida
+	dw CredMiyamoto
+	dw CredKawaguchi
+	dw CredIshihara
+	dw CredYamauchi
+	dw CredZinnai
+	dw CredHishida
+	dw CredSakai
+	dw CredYamaguchi
+	dw CredYamamoto
+	dw CredTaniguchi
+	dw CredNonomura
+	dw CredFuziwara
+	dw CredMatsusima
+	dw CredTomisawa
+	dw CredKawamoto
+	dw CredKakei
+	dw CredTsuchiya
+	dw CredTaNakamura
+	dw CredYuda
+	dw CredMon
+	dw CredDirector
+	dw CredProgrammers
+	dw CredCharDesign
+	dw CredMusic
+	dw CredSoundEffects
+	dw CredGameDesign
+	dw CredMonsterDesign
+	dw CredGameScene
+	dw CredParam
+	dw CredMap
+	dw CredTest
+	dw CredSpecial
+	dw CredProducers
+	dw CredProducer
+	dw CredExecutive
+	dw CredTamada
+	dw CredSaOota
+	dw CredYoshikawa
+	dw CredToOota
+	dw CredUSStaff
+	dw CredUSCoord
+	dw CredTilden
+	dw CredKawakami
+	dw CredHiNakamura
+	dw CredGiese
+	dw CredOsborne
+	dw CredTrans
+	dw CredOgasawara
+	dw CredIwata
+	dw CredIzushi
+	dw CredHarada
+	dw CredMurakawa
+	dw CredFukui
+	dw CredClub
+	dw CredPAAD
+
+CredRed:
+	db "2RED VERSION STAFF@"
+CredTajiri:
+	db "4SATOSHI TAJIRI@"
+CredTaOota:
+	db "4TAKENORI OOTA@"
+CredMorimoto:
+	db "3SHIGEKI MORIMOTO@"
+CredWatanabe:
+	db "3TETSUYA WATANABE@"
+CredMasuda:
+	db "4JUNICHI MASUDA@"
+CredNisino:
+	db "5KOHJI NISINO@"
+CredSugimori:
+	db "5KEN SUGIMORI@"
+CredNishida:
+	db "4ATSUKO NISHIDA@"
+CredMiyamoto:
+	db "3SHIGERU MIYAMOTO@"
+CredKawaguchi:
+	db "2TAKASHI KAWAGUCHI@"
+CredIshihara:
+	db "2TSUNEKAZU ISHIHARA@"
+CredYamauchi:
+	db "3HIROSHI YAMAUCHI@"
+CredZinnai:
+	db "3HIROYUKI ZINNAI@"
+CredHishida:
+	db "3TATSUYA HISHIDA@"
+CredSakai:
+	db "4YASUHIRO SAKAI@"
+CredYamaguchi:
+	db "3WATARU YAMAGUCHI@"
+CredYamamoto:
+	db "2KAZUYUKI YAMAMOTO@"
+CredTaniguchi:
+	db "2RYOHSUKE TANIGUCHI@"
+CredNonomura:
+	db "2FUMIHIRO NONOMURA@"
+CredFuziwara:
+	db "3MOTOFUMI FUZIWARA@"
+CredMatsusima:
+	db "3KENJI MATSUSIMA@"
+CredTomisawa:
+	db "3AKIHITO TOMISAWA@"
+CredKawamoto:
+	db "3HIROSHI KAWAMOTO@"
+CredKakei:
+	db "4AKIYOSHI KAKEI@"
+CredTsuchiya:
+	db "3KAZUKI TSUCHIYA@"
+CredTaNakamura:
+	db "4TAKEO NAKAMURA@"
+CredYuda:
+	db "4MASAMITSU YUDA@"
+CredMon:
+	db "7#MON@"
+CredDirector:
+	db "7DIRECTOR@"
+CredProgrammers:
+	db "5PROGRAMMERS@"
+CredCharDesign:
+	db "3CHARACTER DESIGN@"
+CredMusic:
+	db "8MUSIC@"
+CredSoundEffects:
+	db "4SOUND EFFECTS@"
+CredGameDesign:
+	db "5GAME DESIGN@"
+CredMonsterDesign:
+	db "4MONSTER DESIGN@"
+CredGameScene:
+	db "4GAME SCENARIO@"
+CredParam:
+	db "2PARAMETRIC DESIGN@"
+CredMap:
+	db "6MAP DESIGN@"
+CredTest:
+	db "3PRODUCT TESTING@"
+CredSpecial:
+	db "4SPECIAL THANKS@"
+CredProducers:
+	db "6PRODUCERS@"
+CredProducer:
+	db "6PRODUCER@"
+CredExecutive:
+	db "2EXECUTIVE PRODUCER@"
+CredTamada:
+	db "4SOUSUKE TAMADA@"
+CredSaOota:
+	db "5SATOSHI OOTA@"
+CredYoshikawa:
+	db "4RENA YOSHIKAWA@"
+CredToOota:
+	db "4TOMOMICHI OOTA@"
+CredUSStaff:
+	db "3US VERSION STAFF@"
+CredUSCoord:
+	db "3US COORDINATION@"
+CredTilden:
+	db "5GAIL TILDEN@"
+CredKawakami:
+	db "4NAOKO KAWAKAMI@"
+CredHiNakamura:
+	db "4HIRO NAKAMURA@"
+CredGiese:
+	db "4WILLIAM GIESE@"
+CredOsborne:
+	db "5SARA OSBORNE@"
+CredTrans:
+	db "3TEXT TRANSLATION@"
+CredOgasawara:
+	db "4NOB OGASAWARA@"
+CredIwata:
+	db "5SATORU IWATA@"
+CredIzushi:
+	db "3TAKEHIRO IZUSHI@"
+CredHarada:
+	db "3TAKAHIRO HARADA@"
+CredMurakawa:
+	db "3TERUKI MURAKAWA@"
+CredFukui:
+	db "5KOHTA FUKUI@"
+CredClub:
+	db "1NCL SUPER MARIO CLUB@"
+CredPAAD:
+	db "5PAAD TESTING@"
+
+TheEndGfx: ; 473E
+	INCBIN "gfx/theend.2bpp"
+
+INCBIN "baserom.gbc",$747DE,$4000 - $7DE
 
 SECTION "bank1E",DATA,BANK[$1E]
 INCBIN "baserom.gbc",$78000,$F1
