@@ -10669,7 +10669,8 @@ INCBIN "baserom.gbc",$410E2,$2769 - $10E2
 
 
 ; XXX what do these do
-	ld hl,$C3A5
+	FuncCoord 5,0
+	ld hl,Coord
 	ld de,OTString67E5
 	call PlaceString
 	ld a,[$CD3D]
@@ -10680,10 +10681,12 @@ INCBIN "baserom.gbc",$410E2,$2769 - $10E2
 	ld de,$D11E
 	ld bc,$8103
 	call $3C5F
-	ld hl,$C3CD
+	FuncCoord 5,2
+	ld hl,Coord
 	ld de,$CF4B
 	call PlaceString
-	ld hl,$C3F8
+	FuncCoord 8,4
+	ld hl,Coord
 	ld de,$CD41
 	call PlaceString
 	ld hl,$C420
@@ -10691,7 +10694,8 @@ INCBIN "baserom.gbc",$410E2,$2769 - $10E2
 	ld bc,$8205
 	jp $3C5F
 
-	ld hl,$C46D
+	FuncCoord 5,10
+	ld hl,Coord
 	ld de,OTString67E5
 	call PlaceString
 	ld a,[$CD3E]
@@ -10702,10 +10706,12 @@ INCBIN "baserom.gbc",$410E2,$2769 - $10E2
 	ld de,$D11E
 	ld bc,$8103
 	call $3C5F
-	ld hl,$C495
+	FuncCoord 5,12
+	ld hl,Coord
 	ld de,$CD6D
 	call PlaceString
-	ld hl,$C4C0
+	FuncCoord 8,14
+	ld hl,Coord
 	ld de,$CD4E
 	call PlaceString
 	ld hl,$C4E8
