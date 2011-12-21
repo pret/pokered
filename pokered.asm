@@ -10718,7 +10718,7 @@ OTString67E5: ; 67E5
 	db "──",$74,$F2,$4E
 	db $4E
 	db "OT/",$4E
-	db $73,$74,$F2,"@"
+	db $73,"№",$F2,"@"
 
 SECTION "bank11",DATA,BANK[$11]
 INCBIN "baserom.gbc",$44000,$4000
