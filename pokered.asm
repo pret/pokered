@@ -1114,7 +1114,135 @@ PrintText: ; 3C49
 	ld bc,$C4B9
 	jp $1B40
 
-INCBIN "baserom.gbc",$3C5F,$3DD7 - $3C5F
+Func3C5F: ; 3C5F
+	push bc
+	xor a
+	ld [$FF95],a
+	ld [$FF96],a
+	ld [$FF97],a
+	ld a,b
+	and $F
+	cp 1
+	jr z,.next\@
+	cp 2
+	jr z,.next2\@
+	ld a,[de]
+	ld [$FF96],a
+	inc de
+	ld a,[de]
+	ld [$FF97],a
+	inc de
+	ld a,[de]
+	ld [$FF98],a
+	jr .next3\@
+
+.next2\@
+	ld a,[de]
+	ld [$FF97],a
+	inc de
+	ld a,[de]
+	ld [$FF98],a
+	jr .next3\@
+
+.next\@
+	ld a,[de]
+	ld [$FF98],a
+
+.next3\@
+	push de
+	ld d,b
+	ld a,c
+	ld b,a
+	xor a
+	ld c,a
+	ld a,b
+	cp 2
+	jr z,.next4\@
+	cp 3
+	jr z,.next5\@
+	cp 4
+	jr z,.next6\@
+	cp 5
+	jr z,.next7\@
+	cp 6
+	jr z,.next8\@
+	ld a,$F
+	ld [$FF99],a
+	ld a,$42
+	ld [$FF9A],a
+	ld a,$40
+	ld [$FF9B],a
+	call $3D25
+	call $3D89
+.next8\@
+	ld a,1
+	ld [$FF99],a
+	ld a,$86
+	ld [$FF9A],a
+	ld a,$A0
+	ld [$FF9B],a
+	call $3D25
+	call $3D89
+.next7\@
+	xor a
+	ld [$FF99],a
+	ld a,$27
+	ld [$FF9A],a
+	ld a,$10
+	ld [$FF9B],a
+	call $3D25
+	call $3D89
+.next6\@
+	xor a
+	ld [$FF99],a
+	ld a,3
+	ld [$FF9A],a
+	ld a,$E8
+	ld [$FF9B],a
+	call $3D25
+	call $3D89
+.next5\@
+	xor a
+	ld [$FF99],a
+	xor a
+	ld [$FF9A],a
+	ld a,$64
+	ld [$FF9B],a
+	call $3D25
+	call $3D89
+.next4\@
+	ld c,0
+	ld a,[$FF98]
+.next10\@
+	cp $A
+	jr c,.next9\@
+	sub $A
+	inc c
+	jr .next10\@
+.next9\@
+	ld b,a
+	ld a,[$FF95]
+	or c
+	ld [$FF95],a
+	jr nz,.next11\@
+	call $3D83
+	jr .next12\@
+.next11\@
+	ld a,$F6
+	add a,c
+	ld [hl],a
+.next12\@
+	call $3D89
+	ld a,$F6
+	add a,b
+	ld [hli],a
+	pop de
+	dec de
+	pop bc
+	ret
+
+INCBIN "baserom.gbc",$3D25,$3DD7 - $3D25
+;INCBIN "baserom.gbc",$3C5F,$3DD7 - $3C5F
 Delay3: ; 3DD7
 ; call Delay with a parameter of 3
 	ld c,3
