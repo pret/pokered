@@ -90,7 +90,7 @@ W_ISLINKBATTLE EQU $D12B
 
 W_CURMAP EQU $D35E
 
-W_YCOORD EQU $D361 ; player¿s position on the current map
+W_YCOORD EQU $D361 ; player’s position on the current map
 W_XCOORD EQU $D362
 
 W_RIVALSTARTER EQU $D715
