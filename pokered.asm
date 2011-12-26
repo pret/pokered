@@ -31,7 +31,55 @@ SECTION "joypad",HOME[$60]
 	reti
 
 SECTION "bank0",HOME[$61]
-INCBIN "baserom.gbc",$61,$9D-$61
+DisableLCD:
+;$0061
+	xor a
+	ld [$ff0f],a
+	ld a,[$ffff]
+	ld b,a
+	res 0,a
+	ld [$ffff],a
+.jr0\@
+	ld a,[$ff44]
+	cp a,$91
+	jr nz,.jr0\@
+	ld a,[$ff40]
+	and a,$7f	; res 7,a
+	ld [$ff40],a
+	ld a,b
+	ld [$ffff],a
+	ret
+
+EnableLCD:
+;$007b
+	ld a,[$ff40]
+	set 7,a
+	ld [$ff40],a
+	ret
+
+CleanLCD_OAM:
+;$0082
+	xor a
+	ld hl,$c300
+	ld b,$a0
+.jr0\@
+	ld [hli],a
+	dec b
+	jr nz,.jr0\@
+	ret
+
+ResetLCD_OAM:
+;$008d
+	ld a,$a0
+	ld hl,$c300
+	ld de,$0004
+	ld b,$28
+.jr0\@
+	ld [hl],a
+	add hl,de
+	dec b
+	jr nz,.jr0\@
+	ret
 
 FarCopyData: ; 009D
 ; copy bc bytes of data from a:hl to de
@@ -334,10 +382,10 @@ incbin "baserom.gbc",$39E,$1627 - $39E
 ; index = Mew, bank 1
 ; index = Kabutops fossil, bank $B
 ;	index < $1F, bank 9
-; $1F ≤ index < $4A, bank $A
-; $4A ≤ index < $74, bank $B
-; $74 ≤ index < $99, bank $C
-; $99 ≤ index,       bank $D
+; $1F ¿ index < $4A, bank $A
+; $4A ¿ index < $74, bank $B
+; $74 ¿ index < $99, bank $C
+; $99 ¿ index,       bank $D
 	ld a,[$CF91] ; XXX name for this ram location
 	ld b,a
 	cp $15
@@ -431,11 +479,11 @@ TextBoxBorder: ; 1922
 
 	; first row
 	push hl
-	ld a,"┌"
+	ld a,"¿"
 	ld [hli],a
-	inc a    ; horizontal border ─
+	inc a    ; horizontal border ¿
 	call NPlaceChar
-	inc a    ; upper-right border ┐
+	inc a    ; upper-right border ¿
 	ld [hl],a
 
 	; middle rows
@@ -445,11 +493,11 @@ TextBoxBorder: ; 1922
 
 .PlaceRow\@
 	push hl
-	ld a,"│"
+	ld a,"¿"
 	ld [hli],a
 	ld a," "
 	call NPlaceChar
-	ld [hl],"│"
+	ld [hl],"¿"
 
 	pop hl
 	ld de,20
@@ -458,11 +506,11 @@ TextBoxBorder: ; 1922
 	jr nz,.PlaceRow\@
 
 	; bottom row
-	ld a,"└"
+	ld a,"¿"
 	ld [hli],a
-	ld a,"─"
+	ld a,"¿"
 	call NPlaceChar
-	ld [hl],"┘"
+	ld [hl],"¿"
 	ret
 ;
 NPlaceChar:
@@ -563,18 +611,18 @@ Char00:
 	dec de
 	ret
 
-Char00Text: ; “%d ERROR.”
+Char00Text: ; ¿%d ERROR.¿
 	db $17
 	dw $6696
 	db $22
 	TX_NULL
 
-Char52: ; player’s name
+Char52: ; player¿s name
 	push de
 	ld de,$D158
 	jr FinishDTE
 
-Char53: ; rival’s name
+Char53: ; rival¿s name
 	push de
 	ld de,$D34A
 	jr FinishDTE
@@ -604,7 +652,7 @@ Char54: ; POKé
 	ld de,Char54Text
 	jr FinishDTE
 
-Char56: ; ……
+Char56: ; ¿¿
 	push de
 	ld de,Char56Text
 	jr FinishDTE
@@ -616,9 +664,9 @@ Char4A: ; PKMN
 
 Char59:
 ; depending on whose turn it is, print
-; player active monster’s name
+; player active monster¿s name
 ; or
-; enemy active monster’s name, prefixed with “Enemy ”
+; enemy active monster¿s name, prefixed with ¿Enemy ¿
 ; (XXX what is the purpose of this vs. Char5A)
 	ld a,[$FFF3]
 	xor 1
@@ -626,9 +674,9 @@ Char59:
 
 Char5A:
 ; depending on whose turn it is, print
-; player active monster’s name
+; player active monster¿s name
 ; or
-; enemy active monster’s name, prefixed with “Enemy ”
+; enemy active monster¿s name, prefixed with ¿Enemy ¿
 	ld a,[$FFF3]
 MonsterNameCharsCommon:
 	push de
@@ -638,7 +686,7 @@ MonsterNameCharsCommon:
 	jr FinishDTE
 
 .Enemy\@ ; 1A40
-	; print “Enemy ”
+	; print ¿Enemy ¿
 	ld de,Char5AText
 	call PlaceString
 
@@ -665,7 +713,7 @@ Char5EText:
 Char54Text:
 	db "POKé@"
 Char56Text:
-	db "……@"
+	db "¿¿@"
 Char5AText:
 	db "Enemy @"
 Char4AText:
@@ -1248,8 +1296,17 @@ Delay3: ; 3DD7
 	ld c,3
 	jp DelayFrames
 
-INCBIN "baserom.gbc",$3DDC,$3E5C - $3DDC
+INCBIN "baserom.gbc",$3DDC,$3DED - $3DDC
+GoPAL_SET_CF1C:	; 3ded
+	ld b,$ff
+GoPAL_SET: 	; 3def
+	ld a,[$cf1b]
+	and a
+	ret z
+	ld a,$45
+	jp Predef
 
+INCBIN "baserom.gbc",$3DF9,$3E5C - $3DF9
 GenRandom: ; 3E5C
 ; store a random 8-bit value in a
 	push hl
@@ -2410,7 +2467,7 @@ MapHSPointers: ; 48F5
 ;
 ; Program stops reading when either:
 ; a) Map_ID = $FF
-; b) Map_ID ≠ currentMapID
+; b) Map_ID ¿ currentMapID
 ;
 ; This Data is loaded into RAM at $D5CE-$D5F?.
 
@@ -3885,7 +3942,533 @@ CaveMons:
 
 	db 0
 
-INCBIN "baserom.gbc",$D5C7,$E259 - $D5C7
+GetItemUse:		;$D5C7
+	ld a,1
+	ld [$cd6a],a
+	ld a,[$cf91]	;contains item_ID
+	cp a,HM_01
+	jp nc,ItemUseTMHM
+	ld hl,ItemUsePtrTable
+	dec a
+	add a
+	ld c,a
+	ld b,0
+	add hl,bc
+	ld a,[hli]
+	ld h,[hl]
+	ld l,a
+	jp [hl]
+
+ItemUsePtrTable:	;$D5E1
+	dw ItemUseBall		;$5687 masterball
+	dw ItemUseBall		;$5687 ultraball
+	dw ItemUseBall		;$5687 greatball
+	dw ItemUseBall		;$5687 pokeball
+	dw ItemUseTownMap	;$5968 TownMap
+	dw $5977                ;ItemUseBicycle
+	dw $59B4                ;ItemUseSurfBoard (UNUSED, glitchy!)
+	dw ItemUseBall		;$5687 Safariball
+	dw $5A56
+	dw $5A5B
+	dw $5ABB
+	dw $5ABB
+	dw $5ABB
+	dw $5ABB
+	dw $5ABB
+	dw $5ABB
+	dw $5ABB
+	dw $5ABB
+	dw $5ABB
+	dw $5ABB
+	dw $5F52
+	dw $5F67
+	dw $6476
+	dw $6476
+	dw $6476
+	dw $6476
+	dw $6476
+	dw $6476
+	dw $5FAF
+	dw $6003
+	dw $6476
+	dw $5A5B
+	dw $5A5B
+	dw $5A5B
+	dw $5AB4
+	dw $5AB4
+	dw $5AB4
+	dw $5AB4
+	dw $5AB4
+	dw $5AB4
+	dw $6476
+	dw $6476
+	dw $6476
+	dw $6476
+	dw $6476
+	dw $6013
+	dw $5A5B
+	dw $6022
+	dw $6476
+	dw $6476
+	dw $60CD
+	dw $5ABB
+	dw $5ABB
+	dw $5ABB
+	dw $60DC
+	dw $60EB
+	dw $60F0
+	dw $60F5
+	dw $6476
+	dw $5ABB
+	dw $5ABB
+	dw $5ABB
+	dw $6476
+	dw $6476
+	dw $6104
+	dw $6104
+	dw $6104
+	dw $6104
+	dw $623A
+	dw $62DE
+	dw $62E1
+	dw $6476
+	dw $6140
+	dw $6476
+	dw $6476
+	dw $624C
+	dw GoodRodCode ;$6259
+	dw $6283
+	dw $6317
+	dw $631E
+	dw $631E
+	dw $631E
+	dw $631E
+
+
+;[$D057]==0 -> OutsideBattle
+;[$D057]==1 -> WildBattle
+;[$D057]==2 -> TrainerBattle
+
+;[$D05A]==0 -> NormalBattle
+;[$D05A]==1 -> OldManExampleBattle
+;[$D05A]==2 -> SafariBattle
+
+ItemUseBall:	;03:5687
+	ld a,[$d057]
+	and a
+	jp z,$6581
+	dec a
+	jp nz,$658b
+	ld a,[$d05a]
+	dec a
+	jr z,.next\@
+	ld a,[$d163]	;is Party full?
+	cp a,6
+	jr nz,.next\@
+	ld a,[$da80]	;is Box full?
+	cp a,20
+	jp z,$65b1
+.next\@	;$56a7
+;ok, you can use a ball
+	xor a
+	ld [$d11c],a
+	ld a,[$d05a]
+	cp a,2		;SafariBattle
+	jr nz,.next2\@
+	ld hl,$da47	;dec SafariBall's num
+	dec [hl]
+.next2\@	;$56b6
+	call GoPAL_SET_CF1C
+	ld a,$43
+	ld [$d11e],a
+	call $3725	;restore screenBuffer from Backup
+	ld hl,ItemUseText00
+	call PrintText
+	ld hl,$583a
+	ld b,$0f
+	call Bankswitch
+	ld b,$10
+	jp z,$5801
+	ld a,[$d05a]
+	dec a
+	jr nz,.next3\@
+	ld hl,W_GRASSRATE	;backups wildMon data
+	ld de,$d158
+	ld bc,11
+	call CopyData
+	jp .BallSuccess\@	;$578b
+.next3\@	;$56e9
+	ld a,[$d35e]
+	cp a,$93	;MonTower 6F
+	jr nz,.next4\@
+	ld a,[$cfd8]
+	cp a,MAROWAK	;$91;Marowak
+	ld b,$10
+	jp z,$5801
+.next4\@	;$56fa
+	call $3e5c	;GetRandom
+	ld b,a
+	ld hl,$cf91
+	ld a,[hl]
+	cp a,MASTER_BALL;1
+	jp z,.BallSuccess\@	;$578b
+	cp a,POKE_BALL	;4
+	jr z,.next5\@
+	ld a,200
+        cp b
+	jr c,.next4\@	;get only numbers < 200
+	ld a,[hl]
+	cp a,GREAT_BALL	;3
+	jr z,.next5\@
+	ld a,150	;get only numbers < 150
+	cp b
+	jr c,.next4\@
+.next5\@	;$571a
+	ld a,[$cfe9]	;status ailments
+	and a
+	jr z,.next6\@
+	and a,(FRZ + SLP)	;is frozen and/or asleep?
+	ld c,12
+	jr z,.noAilments\@
+	ld c,25
+.noAilments\@	;$5728
+	ld a,b
+	sub c
+	jp c,.BallSuccess\@	;$578b
+	ld b,a
+.next6\@	;$572e
+	push bc		;save RANDOM number
+	xor a
+	ld [$ff96],a
+	ld hl,$cff4	;enemy: Max HP
+	ld a,[hli]
+	ld [$ff97],a
+	ld a,[hl]
+	ld [$ff98],a
+	ld a,255
+	ld [$ff99],a
+	call $38ac	;Multiply: MaxHP * 255
+	ld a,[$cf91]
+	cp a,GREAT_BALL
+	ld a,12		;any other BallFactor
+	jr nz,.next7\@
+	ld a,8
+.next7\@	;$574d
+	ld [$ff99],a
+	ld b,4		;GreatBall's BallFactor
+	call $38b9	;Divide
+	ld hl,$cfe6	;currentHP
+	ld a,[hli]
+	ld b,a
+	ld a,[hl]
+	srl b		;explanation:
+	rr a		;we have a 16 bit value
+	srl b		;equal to [b << 8 | a].
+	rr a		;This number is divided
+	and a		;by 4. The result is
+	jr nz,.next8\@	;8 bit (reg. a). Always
+	inc a		;bigger than zero.
+.next8\@	;$5766
+	ld [$ff99],a
+	ld b,4
+	call $38b9	;Divide
+	ld a,[$ff97]
+	and a
+	jr z,.next9\@
+	ld a,255
+	ld [$ff98],a
+.next9\@	;$5776
+	pop bc
+	ld a,[$d007]	;enemy: Catch Rate
+	cp b
+	jr c,.next10\@
+        ld a,[$ff97]
+        and a
+        jr nz,.BallSuccess\@
+	call $3e5c	;get random number
+	ld b,a
+	ld a,[$ff98]
+	cp b
+	jr c,.next10\@
+.BallSuccess\@	;$578b
+	jr .BallSuccess2\@
+.next10\@	;$578d
+	ld a,[$ff98]
+	ld [$d11e],a
+	xor a
+	ld [$ff96],a
+	ld [$ff97],a
+	ld a,[$d007]	;enemy: Catch Rate
+	ld [$ff98],a
+	ld a,100
+	ld [$ff99],a
+	call $38ac	;Multiply: CatchRate * 100
+	ld a,[$cf91]
+	ld b,255
+	cp a,POKE_BALL
+	jr z,.next11\@
+	ld b,200
+	cp a,GREAT_BALL
+	jr z,.next11\@
+	ld b,150
+	cp a,ULTRA_BALL
+	jr z,.next11\@
+.next11\@	;$57b8
+	ld a,b
+	ld [$ff99],a
+	ld b,4
+	call $38b9	;Divide
+	ld a,[$ff97]
+	and a
+	ld b,$63
+	jr nz,.next12\@
+	ld a,[$d11e]
+	ld [$ff99],a
+	call $38ac
+	ld a,255
+	ld [$ff99],a
+	ld b,4
+	call $38b9
+	ld a,[$cfe9]	;status ailments
+	and a
+	jr z,.next13\@
+	and a,(FRZ + SLP)
+	ld b,5
+	jr z,.next14\@
+	ld b,10
+.next14\@	;$57e6
+	ld a,[$ff98]
+	add b
+	ld [$ff98],a
+.next13\@	;$57eb
+	ld a,[$ff98]
+	cp a,10
+	ld b,$20
+	jr c,.next12\@
+	cp a,30
+	ld b,$61
+	jr c,.next12\@
+	cp a,70
+	ld b,$62
+	jr c,.next12\@
+	ld b,$63
+.next12\@	;$5801
+	ld a,b
+	ld [$d11e],a
+.BallSuccess2\@	;$5805
+	ld c,20
+	call DelayFrames
+	ld a,$c1
+	ld [$d07c],a
+	xor a
+	ld [$fff3],a
+	ld [$cc5b],a
+	ld [$d05b],a
+	ld a,[$cf92]
+	push af
+	ld a,[$cf91]
+	push af
+	ld a,$08	;probably animations
+	call Predef
+	pop af
+	ld [$cf91],a
+	pop af
+	ld [$cf92],a
+	ld a,[$d11e]
+	cp a,$10
+	ld hl,ItemUseBallText00
+	jp z,.printText0\@
+	cp a,$20
+	ld hl,ItemUseBallText01
+	jp z,.printText0\@
+	cp a,$61
+	ld hl,ItemUseBallText02
+	jp z,.printText0\@
+	cp a,$62
+	ld hl,ItemUseBallText03
+	jp z,.printText0\@
+	cp a,$63
+	ld hl,ItemUseBallText04
+	jp z,.printText0\@
+	ld hl,$cfe6	;current HP
+	ld a,[hli]
+	push af
+	ld a,[hli]
+	push af		;backup currentHP...
+	inc hl
+	ld a,[hl]
+	push af		;...and status ailments
+	push hl
+	ld hl,$d069
+	bit 3,[hl]
+	jr z,.next15\@
+	ld a,$4c
+	ld [$cfd8],a
+	jr .next16\@
+.next15\@	;$5871
+	set 3,[hl]
+	ld hl,$cceb
+	ld a,[$cff1]
+	ld [hli],a
+	ld a,[$cff2]
+	ld [hl],a
+.next16\@	;$587e
+	ld a,[$cf91]
+	push af
+	ld a,[$cfd8]
+	ld [$cf91],a
+	ld a,[$cff3]
+	ld [$d127],a
+	ld hl,$6b01
+	ld b,$0f
+	call Bankswitch
+	pop af
+	ld [$cf91],a
+	pop hl
+	pop af
+	ld [hld],a
+	dec hl
+	pop af
+	ld [hld],a
+	pop af
+	ld [hl],a
+	ld a,[$cfe5]	;enemy
+	ld [$d11c],a
+	ld [$cf91],a
+	ld [$d11e],a
+	ld a,[$d05a]
+	dec a
+	jr z,.printText1\@
+	ld hl,ItemUseBallText05
+	call PrintText
+	ld a,$3a	;convert order: Internal->Dex
+	call Predef
+	ld a,[$d11e]
+	dec a
+	ld c,a
+	ld b,2
+	ld hl,$d2f7	;Dex_own_flags (pokemon)
+	ld a,$10
+	call Predef	;check Dex flag (own already or not)
+	ld a,c
+	push af
+	ld a,[$d11e]
+	dec a
+	ld c,a
+	ld b,1
+	ld a,$10	;set Dex_own_flag?
+	call Predef
+	pop af
+	and a
+	jr nz,.checkParty\@
+	ld hl,ItemUseBallText06
+	call PrintText
+	call CleanLCD_OAM
+	ld a,[$cfe5]	;caught mon_ID
+	ld [$d11e],a
+	ld a,$3d
+	call Predef
+.checkParty\@	;$58f4
+	ld a,[$d163]	;nbr of mon in party
+	cp a,6		;is party full?
+	jr z,.sendToBox\@
+	xor a
+	ld [$cc49],a
+	call CleanLCD_OAM
+	call $3927	;add mon to Party
+	jr .End\@
+.sendToBox\@	;$5907
+	call CleanLCD_OAM
+	call $67a4
+	ld hl,ItemUseBallText07
+	ld a,[$d7f1]
+	bit 0,a		;already met Bill?
+	jr nz,.sendToBox2\@
+	ld hl,ItemUseBallText08
+.sendToBox2\@	;$591a
+	call PrintText
+	jr .End\@
+.printText1\@	;$591f
+	ld hl,ItemUseBallText05
+.printText0\@	;$5922
+	call PrintText
+	call CleanLCD_OAM
+.End\@	;$5928
+	ld a,[$d05a]
+	and a
+	ret nz
+	ld hl,$d31d
+	inc a
+	ld [$cf96],a
+	jp $2bbb	;remove ITEM (XXX)
+ItemUseBallText00:	;$5937
+;"It dodged the thrown ball!"
+;"This pokemon can't be caught"
+; XXX Marowak ghost?
+        db $17
+	dw $6729
+        db $29
+	TX_NULL
+ItemUseBallText01:	;$593c
+;"You missed the pokemon!"
+        db $17
+	dw $675f
+        db $29
+	TX_NULL
+ItemUseBallText02:	;$5941
+;"Darn! The pokemon broke free!"
+        db $17
+	dw $6775
+        db $29
+	TX_NULL
+ItemUseBallText03:	;$5946
+;"Aww! It appeared to be caught!"
+        db $17
+	dw $6791
+        db $29
+	TX_NULL
+ItemUseBallText04:	;$594b
+;"Shoot! It was so close too!"
+        db $17
+	dw $67b2
+        db $29
+	TX_NULL
+ItemUseBallText05:	;$5950
+;"All right! {MonName} was caught!"
+;play sound
+        db $17
+	dw $67cf
+        db $29
+	db $12,$06
+	TX_NULL
+ItemUseBallText07:	;$5957
+;"X was transferred to Bill's PC"
+        db $17
+	dw $67ee
+        db $29
+	TX_NULL
+ItemUseBallText08:	;$595c
+;"X was transferred to someone's PC"
+        db $17
+	dw $6810
+        db $29 
+	TX_NULL
+
+ItemUseBallText06:	;$5961
+;"New DEX data will be added..."
+;play sound
+        db $17
+	dw $6835
+        db $29
+	db $13,$06
+	TX_NULL
+
+ItemUseTownMap:	;03:5968
+	ld a,[$d057]	;in-battle or outside
+	and a
+	jp nz,ItemUseNotTime	;OAK: "this isn't the time..."
+
+INCBIN "baserom.gbc",$D96F,$E259 - $D96F
 
 GoodRodCode: ; 6259
 	call $62B4
@@ -3947,7 +4530,23 @@ Next628E:
 	ld [hl],a
 	ret
 
-INCBIN "baserom.gbc",$E2B4,$E919 - $E2B4
+INCBIN "baserom.gbc",$E2B4,$E479 - $E2B4
+
+ItemUseTMHM:	;03:6479
+    	INCBIN "baserom.gbc",$E479,$E581 - $E479
+ItemUseNotTime:	;03:6581
+    	INCBIN "baserom.gbc",$E581,$E5E8 - $E581
+;ItemUseTexts:	;03:65e8
+ItemUseText00:	;03:65e8
+        db $17
+        dw $4000
+        db $2A
+        db $05
+        db $17
+        dw $4009
+        db $2A
+        TX_NULL
+INCBIN "baserom.gbc",$E5F2,$E919 - $E5F2
 
 ; super rod data
 ; map, pointer to fishing group
@@ -4108,22 +4707,22 @@ PalletTownObject: ; 182C3
 	db $0B ; border tile
 
 	db 3 ; warps
-	db 5,5,0,$25 ; Red’s house 1F
-	db 5,$D,0,$27 ; Blue’s house
-	db $B,$C,1,$28 ; Oak’s Lab
+	db 5,5,0,$25 ; Red¿s house 1F
+	db 5,$D,0,$27 ; Blue¿s house
+	db $B,$C,1,$28 ; Oak¿s Lab
 
 	db 4 ; signs
 	db $D,$D,4 ; sign by lab
 	db 9,7,5 ; Pallet Town sign
-	db 5,3,6 ; sign by Red’s house
-	db 5,$B,7 ; sign by Blue’s house
+	db 5,3,6 ; sign by Red¿s house
+	db 5,$B,7 ; sign by Blue¿s house
 
 	db 3 ; people
 	db 3,5+4,8+4,$FF,$FF,1 ; Oak
 	db $D,8+4,3+4,$FE,0,2 ; girl
 	db $2F,$E+4,$B+4,$FE,0,3 ; fat man
 
-	; warp‐to
+	; warp¿to
 
 	dw $C71B
 	db 5,5
@@ -4169,7 +4768,7 @@ PalletTownScript1:
 	call $23B1 ; stop music
 	ld a,2
 	ld c,a ; song bank
-	ld a,$DB ; “oak appears” music
+	ld a,$DB ; ¿oak appears¿ music
 	call $23A1 ; plays music
 	ld a,$FC
 	ld [$CD6B],a
@@ -4218,7 +4817,7 @@ PalletTownScript3:
 	ld hl,$FF95
 	dec [hl]
 	ld a,$20
-	call Predef ; load Oak’s movement into $CC97
+	call Predef ; load Oak¿s movement into $CC97
 	ld de,$CC97
 	ld a,1
 	ld [$FF8C],a
@@ -4348,11 +4947,11 @@ PalletTownText5: ; sign by fence
 	TX_FAR _PalletTownText5
 	db "@"
 
-PalletTownText6: ; sign by Red’s house
+PalletTownText6: ; sign by Red¿s house
 	TX_FAR _PalletTownText6
 	db "@"
 
-PalletTownText7: ; sign by Blue’s house
+PalletTownText7: ; sign by Blue¿s house
 	TX_FAR _PalletTownText7
 	db "@"
 
@@ -4479,7 +5078,7 @@ INCBIN "baserom.gbc",$1C000,$21E
 MonsterNames: ; 421E
 	db "RHYDON@@@@"
 	db "KANGASKHAN"
-	db "NIDORAN♂@@"
+	db "NIDORAN¿@@"
 	db "CLEFAIRY@@"
 	db "SPEAROW@@@"
 	db "VOLTORB@@@"
@@ -4491,7 +5090,7 @@ MonsterNames: ; 421E
 	db "EXEGGCUTE@"
 	db "GRIMER@@@@"
 	db "GENGAR@@@@"
-	db "NIDORAN♀@@"
+	db "NIDORAN¿@@"
 	db "NIDOQUEEN@"
 	db "CUBONE@@@@"
 	db "RHYHORN@@@"
@@ -4931,9 +5530,9 @@ BugCatcherName:
 LassName:
 	db "LASS@"
 JrTrainerMName:
-	db "JR.TRAINER♂@"
+	db "JR.TRAINER¿@"
 JrTrainerFName:
-	db "JR.TRAINER♀@"
+	db "JR.TRAINER¿@"
 PokemaniacName:
 	db "POKéMANIAC@"
 SuperNerdName:
@@ -4963,9 +5562,9 @@ ScientistName:
 RocketName:
 	db "ROCKET@"
 CooltrainerMName:
-	db "COOLTRAINER♂@"
+	db "COOLTRAINER¿@"
 CooltrainerFName:
-	db "COOLTRAINER♀@"
+	db "COOLTRAINER¿@"
 
 INCBIN "baserom.gbc",$27f86,$27fb8-$27f86
 
@@ -10563,7 +11162,7 @@ MissingNoDexEntry:
 	db "???@"
 	db 10 ; 1.0 m
 	db 100 ; 10.0 kg
-	db 0,"コメント さくせいちゅう@" ; コメント作成中 (Comment to be written)
+	db 0,"¿?¿?¿?¿? ¿?¿?¿?¿?¿?¿?¿?@" ; ¿?¿?¿?¿?¿?¿?¿? (Comment to be written)
 
 PokedexToIndex:
 	; converts the Pokédex number at $D11E to an index
@@ -10848,10 +11447,10 @@ INCBIN "baserom.gbc",$410E2,$2769 - $10E2
 	jp $3C5F
 
 OTString67E5: ; 67E5
-	db "──",$74,$F2,$4E
+	db "¿¿",$74,$F2,$4E
 	db $4E
 	db "OT/",$4E
-	db $73,"№",$F2,"@"
+	db $73,"¿",$F2,"@"
 
 SECTION "bank11",DATA,BANK[$11]
 INCBIN "baserom.gbc",$44000,$4000
@@ -12376,7 +12975,7 @@ Pointer4DCF: ; 4DCF
 
 INCBIN "baserom.gbc",$78DDB,$78E53-$78DDB
 RealPlayAnimation: ; 4E53
-	ld a,[$CF07] ; get animation # − 1
+	ld a,[$CF07] ; get animation # ¿ 1
 	cp a,$FF
 	jr z,.Next4E60
 	call $586F
@@ -13234,3 +13833,4 @@ SECTION "bank2C",DATA,BANK[$2C]
 	db "SLASH@"
 	db "SUBSTITUTE@"
 	db "STRUGGLE@"
+
