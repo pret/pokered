@@ -13477,51 +13477,7 @@ _AIBattleUseItemText:
 	db 0,"!",$58
 
 INCBIN "baserom.gbc",$880EF,$8A425 - $880EF
-
-_OakSpeechText1:
-	db 0,"Hello there!",$4F
-	db "Welcome to the",$55
-	db "world of #MON!",$51
-	db "My name is OAK!",$4F
-	db "People call me",$55
-	db "the #MON PROF!",$58
-
-_OakSpeechText2A:
-	db 0,"This world is",$4F
-	db "inhabited by",$55
-	db "creatures called",$55
-	db "#MON!@@"
-
-_OakSpeechText2B:
-	db 0,$51,"For some people,",$4F
-	db "#MON are",$55
-	db "pets. Others use",$55
-	db "them for fights.",$51
-	db "Myself...",$51
-	db "I study #MON",$4F
-	db "as a profession.",$58
-
-_IntroducePlayerText:
-	db 0,"First, what is",$4F
-	db "your name?",$58
-
-_IntroduceRivalText:
-	db 0,"This is my grand-",$4F
-	db "son. He's been",$55
-	db "your rival since",$55
-	db "you were a baby.",$51
-	db "...Erm, what is",$4F
-	db "his name again?",$58
-
-_OakSpeechText3:
-	db 0,$52,"!",$51
-	db "Your very own",$4F
-	db "#MON legend is",$55
-	db "about to unfold!",$51
-	db "A world of dreams",$4F
-	db "and adventures",$55
-	db "with #MON",$55
-	db "awaits! Let's go!",$57
+INCLUDE "text/oakspeech.tx"
 
 INCBIN "baserom.gbc",$8A605,$8000 - $6605
 
@@ -13534,71 +13490,8 @@ INCBIN "baserom.gbc",$90000,$4000
 SECTION "bank25",DATA,BANK[$25]
 INCBIN "baserom.gbc",$94000,$B07
 
-_MomWakeUpText:
-	db 0,"MOM: Right.",$4F
-	db "All boys leave",$55
-	db "home some day.",$55
-	db "It said so on TV.",$51
-	db "PROF.OAK, next",$4F
-	db "door, is looking",$55
-	db "for you.",$57
-
-_MomHealText1:
-	db 0,"MOM: ",$52,"!",$4F
-	db "You should take a",$55
-	db "quick rest.",$58
-
-_MomHealText2:
-	db 0,"MOM: Oh good!",$4F
-	db "You and your",$55
-	db "#MON are",$55
-	db "looking great!",$55
-	db "Take care now!",$57
-
-_StandByMeText:
-	db 0,"There's a movie",$4F
-	db "on TV. Four boys",$55
-	db "are walking on",$55
-	db "railroad tracks.",$51
-	db "I better go too.",$57
-
-_TVWrongSideText:
-	db 0,"Oops, wrong side.",$57
-
-_DaisyInitialText:
-	db 0,"Hi ",$52,"!",$4F
-	db $53," is out at",$55
-	db "Grandpa's lab.",$57
-
-_DaisyOfferMapText:
-	db 0,"Grandpa asked you",$4F
-	db "to run an errand?",$55
-	db "Here, this will",$55
-	db "help you!",$58
-
-_GotMapText:
-	db 0,$52," got a",$4F,"@",1
-	dw $CF4B
-	db 0,"!@@"
-
-_DaisyBagFullText:
-	db 0,"You have too much",$4F
-	db "stuff with you.",$57
-
-_DaisyUseMapText:
-	db 0,"Use the TOWN MAP",$4F
-	db "to find out where",$55
-	db "you are.",$57
-
-_BluesHouseText2:
-	db 0,"#MON are living",$4F
-	db "things! If they",$55
-	db "get tired, give",$55
-	db "them a rest!",$57
-
-_BluesHouseText3:
-	db 0,"It's a big map!",$4F
-	db "This is useful!",$57
+INCLUDE "text/mapRedsHouse1F.tx"
+INCLUDE "text/mapBluesHouse.tx"
 
 INCBIN "baserom.gbc",$94D5B,$4000 - $D5B
 
@@ -13614,50 +13507,7 @@ INCBIN "baserom.gbc",$A0000,$4000
 SECTION "bank29",DATA,BANK[$29]
 INCBIN "baserom.gbc",$A4000,$245
 
-_OakAppearsText:
-	db 0,"OAK: Hey! Wait!",$4F
-	db "Don't go out!@@"
-
-_OakWalksUpText:
-	db 0,"OAK: It's unsafe!",$4F
-	db "Wild #MON live",$55
-	db "in tall grass!",$51
-	db "You need your own",$4F
-	db "#MON for your",$55
-	db "protection.",$55
-	db "I know!",$51
-	db "Here, come with",$4F
-	db "me!",$57
-
-_PalletTownText2:
-	db 0,"I",$E5," raising",$4F
-	db "#MON too!",$51
-	db "When they get",$4F
-	db "strong, they can",$55
-	db "protect me!",$57
-
-_PalletTownText3:
-	db 0,"Technology is",$4F
-	db "incredible!",$51
-	db "You can now store",$4F
-	db "and recall items",$55
-	db "and #MON as",$55
-	db "data via PC!",$57
-
-_PalletTownText4:
-	db 0,"OAK #MON",$4F
-	db "RESEARCH LAB",$57
-
-_PalletTownText5:
-	db 0,"PALLET TOWN",$4F
-	db "Shades of your",$55
-	db "journey await!",$57
-
-_PalletTownText6:
-	db 0,$52,"'s house ",$57
-
-_PalletTownText7:
-	db 0,$53,"'s house ",$57
+INCLUDE "text/mapPalletTown.tx"
 
 INCBIN "baserom.gbc",$A43CC,$4000 - $3CC
 
@@ -13665,7 +13515,7 @@ SECTION "bank2A",DATA,BANK[$2A]
 INCBIN "baserom.gbc",$A8000,$4000
 
 SECTION "bank2B",DATA,BANK[$2B]
-INCLUDE "text/pokedex1.asm"
+INCLUDE "text/pokedex.tx"
 
 SECTION "bank2C",DATA,BANK[$2C]
 	db "POUND@"

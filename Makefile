@@ -1,20 +1,21 @@
+.SUFFIXES: .asm .tx
+
+TEXTFILES =	text/oakspeech.tx text/pokedex.tx text/mapRedsHouse1F.tx \
+		text/mapBluesHouse.tx text/mapPalletTown.tx
+
 pokered.gbc: pokered.o
-	rgblink -o pokered.gbc pokered.o
-	rgbfix -jsv -k 01 -l 0x33 -m 0x13 -p 0 -r 03 -t "POKEMON RED" \
-		pokered.gbc
-	cmp baserom.gbc pokered.gbc
+	rgblink -o $@ $>
+	rgbfix -jsv -k 01 -l 0x33 -m 0x13 -p 0 -r 03 -t "POKEMON RED" $@
+	cmp baserom.gbc $@
 
-pokered.o: pokered1.asm constants.asm text/pokedex1.asm
-	rgbasm -o pokered.o pokered1.asm
-
-pokered1.asm: pokered.asm
-	awk -f textpre.awk < pokered.asm > pokered1.asm
-
-text/pokedex1.asm: text/pokedex.asm
-	awk -f textpre.awk < text/pokedex.asm > text/pokedex1.asm
+pokered.o: pokered.tx constants.asm ${TEXTFILES}
+	rgbasm -o pokered.o pokered.tx
 
 redrle: extras/redrle.c
 	${CC} -o $@ $>
 
+.asm.tx:
+	awk -f textpre.awk < $> > $@
+
 clean:
-	rm -f text/pokedex1.asm pokered1.asm pokered.o pokered.gbc redrle
+	rm -f pokered.tx pokered.o pokered.gbc redrle ${TEXTFILES}
