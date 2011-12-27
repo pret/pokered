@@ -1086,7 +1086,40 @@ TechnicalPrefix:
 HiddenPrefix:
 	db "HM"
 
-INCBIN "baserom.gbc",$3040,$35BC - $3040
+INCBIN "baserom.gbc",$3040,$3541 - $3040
+
+Function3541: ; 3541
+; XXX what do these three functions do
+	push hl
+	call Function354E
+	ld [hl],$FF
+	call Function3558
+	ld [hl],$FF
+	pop hl
+	ret
+
+Function354E: ; 354E
+	ld h,$C2
+	ld a,[$FF8C] ; the sprite to move
+	swap a
+	add a,6
+	ld l,a
+	ret
+
+Function3558: ; 3558
+	push de
+	ld hl,$D4E4
+	ld a,[$FF8C] ; the sprite to move
+	dec a
+	add a
+	ld d,0
+	ld e,a
+	add hl,de
+	pop de
+	ret
+
+INCBIN "baserom.gbc",$3566,$35BC - $3566
+
 BankswitchHome: ; 35BC
 ; switches to bank # in a
 ; Only use this when in the home bank!
@@ -1127,10 +1160,11 @@ INCBIN "baserom.gbc",$35EC,$363A - $35EC
 
 MoveSprite: ; 363A
 ; move the sprite [$FF8C] with the movement pointed to by de
-	call $3541
+; actually only copies the movement data to $CC5B for later
+	call Function3541
 	push hl
 	push bc
-	call $354E
+	call Function354E
 	xor a
 	ld [hl],a
 	ld hl,$CC5B
