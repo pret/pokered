@@ -382,10 +382,10 @@ incbin "baserom.gbc",$39E,$1627 - $39E
 ; index = Mew, bank 1
 ; index = Kabutops fossil, bank $B
 ;	index < $1F, bank 9
-; $1F ¿ index < $4A, bank $A
-; $4A ¿ index < $74, bank $B
-; $74 ¿ index < $99, bank $C
-; $99 ¿ index,       bank $D
+; $1F ≤ index < $4A, bank $A
+; $4A ≤ index < $74, bank $B
+; $74 ≤ index < $99, bank $C
+; $99 ≤ index,       bank $D
 	ld a,[$CF91] ; XXX name for this ram location
 	ld b,a
 	cp $15
@@ -479,11 +479,11 @@ TextBoxBorder: ; 1922
 
 	; first row
 	push hl
-	ld a,"¿"
+	ld a,"┌"
 	ld [hli],a
-	inc a    ; horizontal border ¿
+	inc a    ; horizontal border ─
 	call NPlaceChar
-	inc a    ; upper-right border ¿
+	inc a    ; upper-right border ┐
 	ld [hl],a
 
 	; middle rows
@@ -493,11 +493,11 @@ TextBoxBorder: ; 1922
 
 .PlaceRow\@
 	push hl
-	ld a,"¿"
+	ld a,"│"
 	ld [hli],a
 	ld a," "
 	call NPlaceChar
-	ld [hl],"¿"
+	ld [hl],"│"
 
 	pop hl
 	ld de,20
@@ -506,11 +506,11 @@ TextBoxBorder: ; 1922
 	jr nz,.PlaceRow\@
 
 	; bottom row
-	ld a,"¿"
+	ld a,"└"
 	ld [hli],a
-	ld a,"¿"
+	ld a,"─"
 	call NPlaceChar
-	ld [hl],"¿"
+	ld [hl],"┘"
 	ret
 ;
 NPlaceChar:
@@ -611,18 +611,18 @@ Char00:
 	dec de
 	ret
 
-Char00Text: ; ¿%d ERROR.¿
+Char00Text: ; “%d ERROR.”
 	db $17
 	dw $6696
 	db $22
 	TX_NULL
 
-Char52: ; player¿s name
+Char52: ; player’s name
 	push de
 	ld de,$D158
 	jr FinishDTE
 
-Char53: ; rival¿s name
+Char53: ; rival’s name
 	push de
 	ld de,$D34A
 	jr FinishDTE
@@ -652,7 +652,7 @@ Char54: ; POKé
 	ld de,Char54Text
 	jr FinishDTE
 
-Char56: ; ¿¿
+Char56: ; ……
 	push de
 	ld de,Char56Text
 	jr FinishDTE
@@ -664,9 +664,9 @@ Char4A: ; PKMN
 
 Char59:
 ; depending on whose turn it is, print
-; player active monster¿s name
+; player active monster’s name
 ; or
-; enemy active monster¿s name, prefixed with ¿Enemy ¿
+; enemy active monster’s name, prefixed with “Enemy ”
 ; (XXX what is the purpose of this vs. Char5A)
 	ld a,[$FFF3]
 	xor 1
@@ -674,9 +674,9 @@ Char59:
 
 Char5A:
 ; depending on whose turn it is, print
-; player active monster¿s name
+; player active monster’s name
 ; or
-; enemy active monster¿s name, prefixed with ¿Enemy ¿
+; enemy active monster’s name, prefixed with “Enemy ”
 	ld a,[$FFF3]
 MonsterNameCharsCommon:
 	push de
@@ -686,7 +686,7 @@ MonsterNameCharsCommon:
 	jr FinishDTE
 
 .Enemy\@ ; 1A40
-	; print ¿Enemy ¿
+	; print “Enemy ”
 	ld de,Char5AText
 	call PlaceString
 
@@ -713,7 +713,7 @@ Char5EText:
 Char54Text:
 	db "POKé@"
 Char56Text:
-	db "¿¿@"
+	db "……@"
 Char5AText:
 	db "Enemy @"
 Char4AText:
@@ -2467,7 +2467,7 @@ MapHSPointers: ; 48F5
 ;
 ; Program stops reading when either:
 ; a) Map_ID = $FF
-; b) Map_ID ¿ currentMapID
+; b) Map_ID ≠ currentMapID
 ;
 ; This Data is loaded into RAM at $D5CE-$D5F?.
 
@@ -4707,22 +4707,22 @@ PalletTownObject: ; 182C3
 	db $0B ; border tile
 
 	db 3 ; warps
-	db 5,5,0,$25 ; Red¿s house 1F
-	db 5,$D,0,$27 ; Blue¿s house
-	db $B,$C,1,$28 ; Oak¿s Lab
+	db 5,5,0,$25 ; Red’s house 1F
+	db 5,$D,0,$27 ; Blue’s house
+	db $B,$C,1,$28 ; Oak’s Lab
 
 	db 4 ; signs
 	db $D,$D,4 ; sign by lab
 	db 9,7,5 ; Pallet Town sign
-	db 5,3,6 ; sign by Red¿s house
-	db 5,$B,7 ; sign by Blue¿s house
+	db 5,3,6 ; sign by Red’s house
+	db 5,$B,7 ; sign by Blue’s house
 
 	db 3 ; people
 	db 3,5+4,8+4,$FF,$FF,1 ; Oak
 	db $D,8+4,3+4,$FE,0,2 ; girl
 	db $2F,$E+4,$B+4,$FE,0,3 ; fat man
 
-	; warp¿to
+	; warp‐to
 
 	dw $C71B
 	db 5,5
@@ -4768,7 +4768,7 @@ PalletTownScript1:
 	call $23B1 ; stop music
 	ld a,2
 	ld c,a ; song bank
-	ld a,$DB ; ¿oak appears¿ music
+	ld a,$DB ; “oak appears” music
 	call $23A1 ; plays music
 	ld a,$FC
 	ld [$CD6B],a
@@ -4817,7 +4817,7 @@ PalletTownScript3:
 	ld hl,$FF95
 	dec [hl]
 	ld a,$20
-	call Predef ; load Oak¿s movement into $CC97
+	call Predef ; load Oak’s movement into $CC97
 	ld de,$CC97
 	ld a,1
 	ld [$FF8C],a
@@ -4947,11 +4947,11 @@ PalletTownText5: ; sign by fence
 	TX_FAR _PalletTownText5
 	db "@"
 
-PalletTownText6: ; sign by Red¿s house
+PalletTownText6: ; sign by Red’s house
 	TX_FAR _PalletTownText6
 	db "@"
 
-PalletTownText7: ; sign by Blue¿s house
+PalletTownText7: ; sign by Blue’s house
 	TX_FAR _PalletTownText7
 	db "@"
 
@@ -5078,7 +5078,7 @@ INCBIN "baserom.gbc",$1C000,$21E
 MonsterNames: ; 421E
 	db "RHYDON@@@@"
 	db "KANGASKHAN"
-	db "NIDORAN¿@@"
+	db "NIDORAN♂@@"
 	db "CLEFAIRY@@"
 	db "SPEAROW@@@"
 	db "VOLTORB@@@"
@@ -5090,7 +5090,7 @@ MonsterNames: ; 421E
 	db "EXEGGCUTE@"
 	db "GRIMER@@@@"
 	db "GENGAR@@@@"
-	db "NIDORAN¿@@"
+	db "NIDORAN♀@@"
 	db "NIDOQUEEN@"
 	db "CUBONE@@@@"
 	db "RHYHORN@@@"
@@ -5530,9 +5530,9 @@ BugCatcherName:
 LassName:
 	db "LASS@"
 JrTrainerMName:
-	db "JR.TRAINER¿@"
+	db "JR.TRAINER♂@"
 JrTrainerFName:
-	db "JR.TRAINER¿@"
+	db "JR.TRAINER♀@"
 PokemaniacName:
 	db "POKéMANIAC@"
 SuperNerdName:
@@ -5562,9 +5562,9 @@ ScientistName:
 RocketName:
 	db "ROCKET@"
 CooltrainerMName:
-	db "COOLTRAINER¿@"
+	db "COOLTRAINER♂@"
 CooltrainerFName:
-	db "COOLTRAINER¿@"
+	db "COOLTRAINER♀@"
 
 INCBIN "baserom.gbc",$27f86,$27fb8-$27f86
 
@@ -11162,7 +11162,7 @@ MissingNoDexEntry:
 	db "???@"
 	db 10 ; 1.0 m
 	db 100 ; 10.0 kg
-	db 0,"¿?¿?¿?¿? ¿?¿?¿?¿?¿?¿?¿?@" ; ¿?¿?¿?¿?¿?¿?¿? (Comment to be written)
+	db 0,"コメント さくせいちゅう@" ; コメント作成中 (Comment to be written)
 
 PokedexToIndex:
 	; converts the Pokédex number at $D11E to an index
@@ -11447,10 +11447,10 @@ INCBIN "baserom.gbc",$410E2,$2769 - $10E2
 	jp $3C5F
 
 OTString67E5: ; 67E5
-	db "¿¿",$74,$F2,$4E
+	db "──",$74,$F2,$4E
 	db $4E
 	db "OT/",$4E
-	db $73,"¿",$F2,"@"
+	db $73,"№",$F2,"@"
 
 SECTION "bank11",DATA,BANK[$11]
 INCBIN "baserom.gbc",$44000,$4000
@@ -12975,7 +12975,7 @@ Pointer4DCF: ; 4DCF
 
 INCBIN "baserom.gbc",$78DDB,$78E53-$78DDB
 RealPlayAnimation: ; 4E53
-	ld a,[$CF07] ; get animation # ¿ 1
+	ld a,[$CF07] ; get animation # − 1
 	cp a,$FF
 	jr z,.Next4E60
 	call $586F
@@ -13833,4 +13833,3 @@ SECTION "bank2C",DATA,BANK[$2C]
 	db "SLASH@"
 	db "SUBSTITUTE@"
 	db "STRUGGLE@"
-

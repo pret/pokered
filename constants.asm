@@ -917,4 +917,3 @@ TRAINER EQU $40
 ; status ailments (masks)
 FRZ		EQU %00100000
 SLP		EQU %00000111
-
