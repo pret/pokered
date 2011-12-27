@@ -615,7 +615,7 @@ Char00Text: ; “%d ERROR.”
 	db $17
 	dw $6696
 	db $22
-	TX_NULL
+	db "@"
 
 Char52: ; player’s name
 	push de
@@ -4408,31 +4408,31 @@ ItemUseBallText00:	;$5937
         db $17
 	dw $6729
         db $29
-	TX_NULL
+	db "@"
 ItemUseBallText01:	;$593c
 ;"You missed the pokemon!"
         db $17
 	dw $675f
         db $29
-	TX_NULL
+	db "@"
 ItemUseBallText02:	;$5941
 ;"Darn! The pokemon broke free!"
         db $17
 	dw $6775
         db $29
-	TX_NULL
+	db "@"
 ItemUseBallText03:	;$5946
 ;"Aww! It appeared to be caught!"
         db $17
 	dw $6791
         db $29
-	TX_NULL
+	db "@"
 ItemUseBallText04:	;$594b
 ;"Shoot! It was so close too!"
         db $17
 	dw $67b2
         db $29
-	TX_NULL
+	db "@"
 ItemUseBallText05:	;$5950
 ;"All right! {MonName} was caught!"
 ;play sound
@@ -4440,19 +4440,19 @@ ItemUseBallText05:	;$5950
 	dw $67cf
         db $29
 	db $12,$06
-	TX_NULL
+	db "@"
 ItemUseBallText07:	;$5957
 ;"X was transferred to Bill's PC"
         db $17
 	dw $67ee
         db $29
-	TX_NULL
+	db "@"
 ItemUseBallText08:	;$595c
 ;"X was transferred to someone's PC"
         db $17
 	dw $6810
         db $29 
-	TX_NULL
+	db "@"
 
 ItemUseBallText06:	;$5961
 ;"New DEX data will be added..."
@@ -4461,7 +4461,7 @@ ItemUseBallText06:	;$5961
 	dw $6835
         db $29
 	db $13,$06
-	TX_NULL
+	db "@"
 
 ItemUseTownMap:	;03:5968
 	ld a,[$d057]	;in-battle or outside
@@ -4545,7 +4545,7 @@ ItemUseText00:	;03:65e8
         db $17
         dw $4009
         db $2A
-        TX_NULL
+	db "@"
 INCBIN "baserom.gbc",$E5F2,$E919 - $E5F2
 
 ; super rod data

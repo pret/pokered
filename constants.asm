@@ -53,10 +53,6 @@ TX_FAR: MACRO
 	db BANK(\1)
 	ENDM
 
-TX_NULL: MACRO
-	db $50
-	ENDM
-
 ; wram locations
 W_AICOUNT EQU $CCDF ; number of times remaining that AI action can occur
 
