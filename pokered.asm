@@ -1123,7 +1123,43 @@ Bankswitch: ; 35D6
 	ld [$2000],a
 	ret
 
-INCBIN "baserom.gbc",$35EC,$3739 - $35EC
+INCBIN "baserom.gbc",$35EC,$363A - $35EC
+
+MoveSprite: ; 363A
+; move the sprite [$FF8C] with the movement pointed to by de
+	call $3541
+	push hl
+	push bc
+	call $354E
+	xor a
+	ld [hl],a
+	ld hl,$CC5B
+	ld c,0
+
+.loop\@
+	ld a,[de]
+	ldi [hl],a
+	inc de
+	inc c
+	cp a,$FF ; have we reached the end of the movement data?
+	jr nz,.loop\@
+
+	ld a,c
+	ld [$CF0F],a ; number of steps taken
+
+	pop bc
+	ld hl,$D730
+	set 0,[hl]
+	pop hl
+	xor a
+	ld [$CD3B],a
+	ld [$CCD3],a
+	dec a
+	ld [$CD6B],a
+	ld [$CD3A],a
+	ret
+
+INCBIN "baserom.gbc",$366B,$3739 - $366B
 
 DelayFrames: ; 3739
 ; wait n frames, where n is the value in c
@@ -4792,9 +4828,9 @@ PalletTownScript3:
 	ld a,$20
 	call Predef ; load Oak’s movement into $CC97
 	ld de,$CC97
-	ld a,1
+	ld a,1 ; oak
 	ld [$FF8C],a
-	call $363A
+	call MoveSprite
 	ld a,$FF
 	ld [$CD6B],a
 
