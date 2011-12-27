@@ -5838,7 +5838,7 @@ BeedrillPicFront:
 BeedrillPicBack:
 	INCBIN "pic/monback/beedrillb.pic"
 FossilKabutopsPic:
-	INCBIN "pic/other/fossilkabutops.pic"
+	INCBIN "pic/bmon/fossilkabutops.pic"
 
 INCBIN "baserom.gbc",$2fb7b,$2ff3c-$2fb7b
 
@@ -6048,7 +6048,7 @@ CharizardPicFront:
 CharizardPicBack:
 	INCBIN "pic/monback/charizardb.pic"
 FossilAerodactylPic:
-	INCBIN "pic/other/fossilaerodactyl.pic"
+	INCBIN "pic/bmon/fossilaerodactyl.pic"
 GhostPic:
 	INCBIN "pic/other/ghost.pic"
 OddishPicFront:
