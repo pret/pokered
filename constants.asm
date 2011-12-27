@@ -47,6 +47,16 @@ RGB: MACRO
 	ENDM
 
 ; text macros
+TX_NUM: MACRO
+; print a big-endian decimal number.
+; \1: address to read from
+; \2: number of bytes to read
+; \3: number of digits to display
+	db $09
+	dw \1
+	db \2 << 4 | \3
+	ENDM
+
 TX_FAR: MACRO
 	db $17
 	dw \1
@@ -83,6 +93,10 @@ W_TRAINERNO    EQU $D05D ; which instance of [youngster, lass, etc] is this?
 W_CURENEMYLVL EQU $D127
 
 W_ISLINKBATTLE EQU $D12B
+
+W_PLAYERNAME EQU $D158 ; 11 characters, including null
+
+W_RIVALNAME  EQU $D34A ; 11 characters, including null
 
 W_CURMAP EQU $D35E
 

@@ -612,19 +612,17 @@ Char00:
 	ret
 
 Char00Text: ; “%d ERROR.”
-	db $17
-	dw $6696
-	db $22
+	TX_FAR _Char00Text
 	db "@"
 
 Char52: ; player’s name
 	push de
-	ld de,$D158
+	ld de,W_PLAYERNAME
 	jr FinishDTE
 
 Char53: ; rival’s name
 	push de
-	ld de,$D34A
+	ld de,W_RIVALNAME
 	jr FinishDTE
 
 Char5D: ; TRAINER
@@ -733,10 +731,8 @@ Char55:
 
 Char55Text:
 ; equivalent to Char4B
-	db $17
-	dw $66A3
-	db $22
-	db $50
+	TX_FAR _Char55Text
+	db "@"
 
 Char5F:
 	ld [hl],$E8 ; .
@@ -4102,7 +4098,7 @@ ItemUseBall:	;03:5687
 	cp a,$93	;MonTower 6F
 	jr nz,.next4\@
 	ld a,[$cfd8]
-	cp a,MAROWAK	;$91;Marowak
+	cp a,MAROWAK
 	ld b,$10
 	jp z,$5801
 .next4\@	;$56fa
@@ -4401,65 +4397,46 @@ ItemUseBall:	;03:5687
 	inc a
 	ld [$cf96],a
 	jp $2bbb	;remove ITEM (XXX)
-ItemUseBallText00:	;$5937
+ItemUseBallText00:
 ;"It dodged the thrown ball!"
 ;"This pokemon can't be caught"
-; XXX Marowak ghost?
-        db $17
-	dw $6729
-        db $29
+	TX_FAR _ItemUseBallText00
 	db "@"
-ItemUseBallText01:	;$593c
+ItemUseBallText01:
 ;"You missed the pokemon!"
-        db $17
-	dw $675f
-        db $29
+	TX_FAR _ItemUseBallText01
 	db "@"
-ItemUseBallText02:	;$5941
+ItemUseBallText02:
 ;"Darn! The pokemon broke free!"
-        db $17
-	dw $6775
-        db $29
+	TX_FAR _ItemUseBallText02
 	db "@"
-ItemUseBallText03:	;$5946
+ItemUseBallText03:
 ;"Aww! It appeared to be caught!"
-        db $17
-	dw $6791
-        db $29
+	TX_FAR _ItemUseBallText03
 	db "@"
-ItemUseBallText04:	;$594b
+ItemUseBallText04:
 ;"Shoot! It was so close too!"
-        db $17
-	dw $67b2
-        db $29
+	TX_FAR _ItemUseBallText04
 	db "@"
-ItemUseBallText05:	;$5950
+ItemUseBallText05:
 ;"All right! {MonName} was caught!"
 ;play sound
-        db $17
-	dw $67cf
-        db $29
+	TX_FAR _ItemUseBallText05
 	db $12,$06
 	db "@"
-ItemUseBallText07:	;$5957
+ItemUseBallText07:
 ;"X was transferred to Bill's PC"
-        db $17
-	dw $67ee
-        db $29
+	TX_FAR _ItemUseBallText07
 	db "@"
-ItemUseBallText08:	;$595c
+ItemUseBallText08:
 ;"X was transferred to someone's PC"
-        db $17
-	dw $6810
-        db $29 
+	TX_FAR _ItemUseBallText08
 	db "@"
 
-ItemUseBallText06:	;$5961
+ItemUseBallText06:
 ;"New DEX data will be added..."
 ;play sound
-        db $17
-	dw $6835
-        db $29
+	TX_FAR _ItemUseBallText06
 	db $13,$06
 	db "@"
 
@@ -4538,13 +4515,9 @@ ItemUseNotTime:	;03:6581
     	INCBIN "baserom.gbc",$E581,$E5E8 - $E581
 ;ItemUseTexts:	;03:65e8
 ItemUseText00:	;03:65e8
-        db $17
-        dw $4000
-        db $2A
+	TX_FAR _ItemUseText001
         db $05
-        db $17
-        dw $4009
-        db $2A
+	TX_FAR _ItemUseText002
 	db "@"
 INCBIN "baserom.gbc",$E5F2,$E919 - $E5F2
 
@@ -9722,7 +9695,7 @@ EnemySendOut: ; 490E
 	ld a,[$D355]
 	bit 6,a
 	jr nz,.next4\@
-	ld hl,$4A79
+	ld hl,TrainerAboutToUseText
 	call PrintText
 	ld hl,$C42C
 	ld bc,$0801
@@ -9765,7 +9738,7 @@ EnemySendOut: ; 490E
 	ld b,1
 	call $3DEF
 	call $3DDC
-	ld hl,$4A7E
+	ld hl,TrainerSentOutText
 	call PrintText
 	ld a,[$CFD8]
 	ld [$CF91],a
@@ -9790,14 +9763,13 @@ EnemySendOut: ; 490E
 	call $3719
 	jp $51BA
 
-	db $17
-	dw $5784
-	db $22
-	db $50
-	db $17
-	dw $57B4
-	db $22
-	db $50
+TrainerAboutToUseText:
+	TX_FAR _TrainerAboutToUseText
+	db "@"
+
+TrainerSentOutText:
+	TX_FAR _TrainerSentOutText
+	db "@"
 
 INCBIN "baserom.gbc",$3CA83,$3E474 - $3CA83
 
@@ -13476,10 +13448,39 @@ _AIBattleUseItemText:
 	dw $CFDA
 	db 0,"!",$58
 
-INCBIN "baserom.gbc",$880EF,$8A425 - $880EF
+INCBIN "baserom.gbc",$880EF,$89784 - $880EF
+
+_TrainerAboutToUseText:
+	db 1
+	dw $D04A
+	db 0," is",$4F
+	db "about to use",$55,"@",1
+	dw $CFDA
+	db 0,"!",$51
+	db "Will ",$52,$4F
+	db "change #MON?",$57
+
+_TrainerSentOutText:
+	db 1
+	dw $D04A
+	db 0," sent",$4F
+	db "out @",1
+	dw $CFDA
+	db 0,"!",$57
+
+INCBIN "baserom.gbc",$897C9,$8A425 - $897C9
 INCLUDE "text/oakspeech.tx"
 
-INCBIN "baserom.gbc",$8A605,$8000 - $6605
+INCBIN "baserom.gbc",$8A605,$6696 - $6605
+
+_Char00Text:
+	TX_NUM $FF8C,1,2
+	db 0," ERROR.",$57
+
+_Char55Text:
+	db 0,$4B,"@@"
+
+INCBIN "baserom.gbc",$8A6A7,$8000 - $66A7
 
 SECTION "bank23",DATA,BANK[$23]
 INCBIN "baserom.gbc",$8C000,$4000
@@ -13509,10 +13510,69 @@ INCBIN "baserom.gbc",$A4000,$245
 
 INCLUDE "text/mapPalletTown.tx"
 
-INCBIN "baserom.gbc",$A43CC,$4000 - $3CC
+INCBIN "baserom.gbc",$A43CC,$6729 - $43CC
+
+_ItemUseBallText00:
+	db 0,"It dodged the",$4F
+	db "thrown BALL!",$51
+	db "This #MON",$4F
+	db "can't be caught!",$58
+
+_ItemUseBallText01:
+	db 0,"You missed the",$4F
+	db "#MON!",$58
+
+_ItemUseBallText02:
+	db 0,"Darn! The #MON",$4F
+	db "broke free!",$58
+
+_ItemUseBallText03:
+	db 0,"Aww! It appeared",$4F
+	db "to be caught! ",$58
+
+_ItemUseBallText04:
+	db 0,"Shoot! It was so",$4F
+	db "close too!",$58
+
+_ItemUseBallText05:
+	db 0,"All right!",$4F,"@",1
+	dw $CFDA
+	db 0," was",$55
+	db "caught!@@"
+
+_ItemUseBallText07:
+	db 1
+	dw $DE06
+	db 0," was",$4F
+	db "transferred to",$55
+	db "BILL's PC!",$58
+
+_ItemUseBallText08:
+	db 1
+	dw $DE06
+	db 0," was",$4F
+	db "transferred to",$55
+	db "someone's PC!",$58
+
+_ItemUseBallText06:
+	db 0,"New #DEX data",$4F
+	db "will be added for",$55,"@",1
+	dw $CFDA
+	db 0,"!@@"
+
+INCBIN "baserom.gbc",$A685E,$4000 - $285E
 
 SECTION "bank2A",DATA,BANK[$2A]
-INCBIN "baserom.gbc",$A8000,$4000
+
+_ItemUseText001:
+	db 0,$52," used@@"
+
+_ItemUseText002:
+	db 1
+	dw $CF4B
+	db 0,"!",$57
+
+INCBIN "baserom.gbc",$A800F,$4000-$F
 
 SECTION "bank2B",DATA,BANK[$2B]
 INCLUDE "text/pokedex.tx"
