@@ -90,6 +90,16 @@ W_CUROPPONENT EQU $D059 ; in a wild battle, this is the species of pokemon
 W_LONEATTACKNO EQU $D05C ; which entry in LoneAttacks to use
 W_TRAINERNO    EQU $D05D ; which instance of [youngster, lass, etc] is this?
 
+; List type
+; used in $D0B6
+MONSTER_NAME  EQU 1
+MOVE_NAME     EQU 2
+; ???_NAME    EQU 3
+ITEM_NAME     EQU 4
+PLAYEROT_NAME EQU 5
+ENEMYOT_NAME  EQU 6
+TRAINER_NAME  EQU 7
+
 W_CURENEMYLVL EQU $D127
 
 W_ISLINKBATTLE EQU $D12B

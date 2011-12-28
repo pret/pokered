@@ -1013,13 +1013,15 @@ GetItemName: ; 2FCF
 	ld a,[$D11E]
 	cp HM_01 ; is this a TM/HM?
 	jr nc,.Machine\@
+
 	ld [$D0B5],a
-	ld a,4
+	ld a,ITEM_NAME
 	ld [$D0B6],a
-	ld a,1
+	ld a,BANK(ItemNames)
 	ld [$D0B7],a
-	call $376B
+	call GetName
 	jr .Finish\@
+
 .Machine\@
 	call GetMachineName
 .Finish\@
@@ -1202,7 +1204,99 @@ DelayFrames: ; 3739
 	jr nz,DelayFrames
 	ret
 
-INCBIN "baserom.gbc",$3740,$3A87 - $3740
+INCBIN "baserom.gbc",$3740,$375D - $3740
+
+NamePointers: ; 375D
+	dw MonsterNames
+	dw MoveNames
+	dw UnusedNames
+	dw ItemNames
+	dw $D273 ; player's OT names list
+	dw $D9AC ; enemy's OT names list
+	dw TrainerNames
+
+GetName: ; 376B
+; arguments:
+; [$D0B5] = which name
+; [$D0B6] = which list
+; [$D0B7] = bank of list
+;
+; returns pointer to name in de
+	ld a,[$d0b5]
+	ld [$d11e],a
+	cp a,$C4        ;it's TM/HM
+	jp nc,GetMachineName
+	ld a,[$ffb8]
+	push af
+	push hl
+	push bc
+	push de
+	ld a,[$d0b6]    ;List3759_entrySelector
+	dec a
+	jr nz,.otherEntries\@
+	;1 = MON_NAMES
+	call $2f9e; GetMonName
+	ld hl,11
+	add hl,de
+	ld e,l
+	ld d,h
+	jr .gotPtr\@
+.otherEntries\@ ;$378d
+	;2-7 = OTHER ENTRIES
+	ld a,[$d0b7]
+	ld [$ffb8],a
+	ld [$2000],a
+	ld a,[$d0b6]    ;VariousNames' entryID
+	dec a
+	add a
+	ld d,0
+	ld e,a
+	jr nc,.skip\@
+	inc d
+.skip\@ ;$37a0
+	ld hl,NamePointers
+	add hl,de
+	ld a,[hli]
+	ld [$ff96],a
+	ld a,[hl]
+	ld [$ff95],a
+	ld a,[$ff95]
+	ld h,a
+	ld a,[$ff96]
+	ld l,a
+	ld a,[$d0b5]
+	ld b,a
+	ld c,0
+.nextName\@
+	ld d,h
+	ld e,l
+.nextChar\@
+	ld a,[hli]
+	cp a,$50
+	jr nz,.nextChar\@
+	inc c           ;entry counter
+	ld a,b          ;wanted entry
+	cp c
+	jr nz,.nextName\@
+	ld h,d
+	ld l,e
+	ld de,$cd6d
+	ld bc,$0014
+	call CopyData
+.gotPtr\@       ;$37cd
+	ld a,e
+	ld [$cf8d],a
+	ld a,d
+	ld [$cf8e],a
+	pop de
+	pop bc
+	pop hl
+	pop af
+	ld [$ffb8],a
+	ld [$2000],a
+	ret
+
+INCBIN "baserom.gbc",$37DF,$3A87 - $37DF
 
 AddNTimes: ; 3A87
 ; add bc to hl a times
@@ -5538,6 +5632,7 @@ SaveTrainerName: ; 7E4A
 	ret
 
 TrainerNamePointers:
+; what is the point of these?
 	dw YoungsterName
 	dw BugCatcherName
 	dw LassName
@@ -6330,7 +6425,58 @@ ReadAttack: ; 5884
 	ret
 
 ; trainer data: from 5C53 to 652E
-INCBIN "baserom.gbc",$3989B,$39C53 - $3989B
+INCBIN "baserom.gbc",$3989B,$399FF - $3989B
+
+TrainerNames: ; 59FF
+	db "YOUNGSTER@"
+	db "BUG CATCHER@"
+	db "LASS@"
+	db "SAILOR@"
+	db "JR.TRAINER♂@"
+	db "JR.TRAINER♀@"
+	db "POKéMANIAC@"
+	db "SUPER NERD@"
+	db "HIKER@"
+	db "BIKER@"
+	db "BURGLAR@"
+	db "ENGINEER@"
+	db "JUGGLER@"
+	db "FISHERMAN@"
+	db "SWIMMER@"
+	db "CUE BALL@"
+	db "GAMBLER@"
+	db "BEAUTY@"
+	db "PSYCHIC@"
+	db "ROCKER@"
+	db "JUGGLER@"
+	db "TAMER@"
+	db "BIRD KEEPER@"
+	db "BLACKBELT@"
+	db "RIVAL1@"
+	db "PROF.OAK@"
+	db "CHIEF@"
+	db "SCIENTIST@"
+	db "GIOVANNI@"
+	db "ROCKET@"
+	db "COOLTRAINER♂@"
+	db "COOLTRAINER♀@"
+	db "BRUNO@"
+	db "BROCK@"
+	db "MISTY@"
+	db "LT.SURGE@"
+	db "ERIKA@"
+	db "KOGA@"
+	db "BLAINE@"
+	db "SABRINA@"
+	db "GENTLEMAN@"
+	db "RIVAL2@"
+	db "RIVAL3@"
+	db "LORELEI@"
+	db "CHANNELER@"
+	db "AGATHA@"
+	db "LANCE@"
+
+INCBIN "baserom.gbc",$39B87,$39C53 - $39B87
 ReadTrainer: ; 5C53
 
 ; don't change any moves in a link battle
@@ -13668,6 +13814,8 @@ SECTION "bank2B",DATA,BANK[$2B]
 INCLUDE "text/pokedex.tx"
 
 SECTION "bank2C",DATA,BANK[$2C]
+
+MoveNames: ; 4000
 	db "POUND@"
 	db "KARATE CHOP@"
 	db "DOUBLESLAP@"
