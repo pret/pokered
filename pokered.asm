@@ -1588,7 +1588,27 @@ ItemNames: ; 472B
 	db "11F@"
 	db "B4F@"
 
-INCBIN "baserom.gbc",$4A92,$5AF2-$4A92
+UnusedNames: ; 4A92
+	db "かみなりバッヂ@"
+	db "かいがらバッヂ@"
+	db "おじぞうバッヂ@"
+	db "はやぶさバッヂ@"
+	db "ひんやりバッヂ@"
+	db "なかよしバッヂ@"
+	db "バラバッヂ@"
+	db "ひのたまバッヂ@"
+	db "ゴールドバッヂ@"
+	db "たまご@"
+	db "ひよこ@"
+	db "ブロンズ@"
+	db "シルバー@"
+	db "ゴールド@"
+	db "プチキャプテン@"
+	db "キャプテン@"
+	db "プチマスター@"
+	db "マスター@"
+
+INCBIN "baserom.gbc",$4B09,$5AF2-$4B09
 
 MainMenu:
 ; Check save file
