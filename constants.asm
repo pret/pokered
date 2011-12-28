@@ -81,11 +81,16 @@ W_OPPONENTSTATUS EQU $CFE9 ; active opponent's status condition
 
 W_TRAINERCLASS EQU $D031
 
-W_BATTLETYPE EQU $D057 ; in a wild battle, this is 1
-                       ; in a trainer battle, this is 2
+W_ISINBATTLE EQU $D057 ; no battle, this is 0
+                       ; wild battle, this is 1
+                       ; trainer battle, this is 2
 
 W_CUROPPONENT EQU $D059 ; in a wild battle, this is the species of pokemon
 			; in a trainer battle, this is the trainer class + $C8
+
+W_BATTLETYPE EQU $D05A ; in normal battle, this is 0
+                       ; in old man battle, this is 1
+                       ; in safari battle, this is 2
 
 W_LONEATTACKNO EQU $D05C ; which entry in LoneAttacks to use
 W_TRAINERNO    EQU $D05D ; which instance of [youngster, lass, etc] is this?
@@ -105,6 +110,8 @@ W_CURENEMYLVL EQU $D127
 W_ISLINKBATTLE EQU $D12B
 
 W_PLAYERNAME EQU $D158 ; 11 characters, including null
+
+W_NUMINPARTY EQU $D163
 
 W_RIVALNAME  EQU $D34A ; 11 characters, including null
 
@@ -137,6 +144,10 @@ W_ENEMYMON4MOVE3 EQU $D932
 W_ENEMYMON5MOVE3 EQU $D95E
 
 W_ENEMYMON6MOVE3 EQU $D98A
+
+W_NUMSAFARIBALLS EQU $DA47
+
+W_NUMINBOX EQU $DA80
 
 H_RAND1 EQU $FFD3
 H_RAND2 EQU $FFD4

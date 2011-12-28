@@ -735,7 +735,8 @@ Char55Text:
 	db "@"
 
 Char5F:
-	ld [hl],$E8 ; .
+; ends a Pokédex entry
+	ld [hl],"."
 	pop hl
 	ret
 
@@ -1823,7 +1824,7 @@ MainMenu:
 	ld a,[$D5A2]
 	and a
 	jp z,$5D5F
-	ld a,[$D35E] ; map ID
+	ld a,[W_CURMAP] ; map ID
 	cp a,$76 ; Hall of Fame
 	jp nz,$5D5F
 	xor a
@@ -4224,38 +4225,30 @@ ItemUsePtrTable:	;$D5E1
 	dw $631E
 	dw $631E
 
-
-;[$D057]==0 -> OutsideBattle
-;[$D057]==1 -> WildBattle
-;[$D057]==2 -> TrainerBattle
-
-;[$D05A]==0 -> NormalBattle
-;[$D05A]==1 -> OldManExampleBattle
-;[$D05A]==2 -> SafariBattle
-
 ItemUseBall:	;03:5687
-	ld a,[$d057]
+	ld a,[W_ISINBATTLE]
 	and a
-	jp z,$6581
+	jp z,ItemUseNotTime ; not in battle
 	dec a
-	jp nz,$658b
-	ld a,[$d05a]
+	jp nz,$658b ; in trainer battle
+	ld a,[W_BATTLETYPE]
 	dec a
-	jr z,.next\@
-	ld a,[$d163]	;is Party full?
+	jr z,.UseBall\@
+	ld a,[W_NUMINPARTY]	;is Party full?
 	cp a,6
-	jr nz,.next\@
-	ld a,[$da80]	;is Box full?
+	jr nz,.UseBall\@
+	ld a,[W_NUMINBOX]	;is Box full?
 	cp a,20
 	jp z,$65b1
-.next\@	;$56a7
+.UseBall\@	;$56a7
 ;ok, you can use a ball
 	xor a
 	ld [$d11c],a
-	ld a,[$d05a]
+	ld a,[W_BATTLETYPE]
 	cp a,2		;SafariBattle
 	jr nz,.next2\@
-	ld hl,$da47	;dec SafariBall's num
+	; remove a Safari Ball from inventory
+	ld hl,W_NUMSAFARIBALLS
 	dec [hl]
 .next2\@	;$56b6
 	call GoPAL_SET_CF1C
@@ -4269,16 +4262,16 @@ ItemUseBall:	;03:5687
 	call Bankswitch
 	ld b,$10
 	jp z,$5801
-	ld a,[$d05a]
+	ld a,[W_BATTLETYPE]
 	dec a
 	jr nz,.next3\@
 	ld hl,W_GRASSRATE	;backups wildMon data
-	ld de,$d158
+	ld de,W_PLAYERNAME
 	ld bc,11
 	call CopyData
 	jp .BallSuccess\@	;$578b
 .next3\@	;$56e9
-	ld a,[$d35e]
+	ld a,[W_CURMAP]
 	cp a,$93	;MonTower 6F
 	jr nz,.next4\@
 	ld a,[$cfd8]
@@ -4516,7 +4509,7 @@ ItemUseBall:	;03:5687
 	ld [$d11c],a
 	ld [$cf91],a
 	ld [$d11e],a
-	ld a,[$d05a]
+	ld a,[W_BATTLETYPE]
 	dec a
 	jr z,.printText1\@
 	ld hl,ItemUseBallText05
@@ -4549,7 +4542,7 @@ ItemUseBall:	;03:5687
 	ld a,$3d
 	call Predef
 .checkParty\@	;$58f4
-	ld a,[$d163]	;nbr of mon in party
+	ld a,[W_NUMINPARTY]
 	cp a,6		;is party full?
 	jr z,.sendToBox\@
 	xor a
@@ -4574,7 +4567,7 @@ ItemUseBall:	;03:5687
 	call PrintText
 	call CleanLCD_OAM
 .End\@	;$5928
-	ld a,[$d05a]
+	ld a,[W_BATTLETYPE]
 	and a
 	ret nz
 	ld hl,$d31d
@@ -4625,7 +4618,7 @@ ItemUseBallText06:
 	db "@"
 
 ItemUseTownMap:	;03:5968
-	ld a,[$d057]	;in-battle or outside
+	ld a,[W_ISINBATTLE]	;in-battle or outside
 	and a
 	jp nz,ItemUseNotTime	;OAK: "this isn't the time..."
 
@@ -4633,7 +4626,7 @@ INCBIN "baserom.gbc",$D96F,$E259 - $D96F
 
 GoodRodCode: ; 6259
 	call $62B4
-	jp c,$6581
+	jp c,ItemUseNotTime
 Next625F:
 	call GenRandom
 	srl a
@@ -4663,7 +4656,7 @@ GoodRodMons:
 
 Next6283:
 	call $62B4
-	jp c,$6581
+	jp c,ItemUseNotTime
 Next6289:
 	call $68EA
 	ld a,e
@@ -7148,7 +7141,7 @@ LanceData:
 TrainerAI: ; 652E
 ;XXX called at 34964, 3c342, 3c398
 	and a
-	ld a,[W_BATTLETYPE]
+	ld a,[W_ISINBATTLE]
 	dec a
 	ret z ; if not a trainer, we're done here
 	ld a,[W_ISLINKBATTLE]
@@ -9922,7 +9915,7 @@ EnemySendOut: ; 490E
 	ld a,[$D11D]
 	dec a
 	jr z,.next4\@
-	ld a,[$D163]
+	ld a,[W_NUMINPARTY]
 	dec a
 	jr z,.next4\@
 	ld a,[$D12B]
@@ -13473,7 +13466,7 @@ MoveSoundTable:
 INCBIN "baserom.gbc",$79AAE,$79E16 - $79AAE
 
 TossBallAnimation: ; 5E16
-	ld a,[W_BATTLETYPE]
+	ld a,[W_ISINBATTLE]
 	cp a,2
 	jr z,.BlockBall\@ ; if in trainer battle, play different animation
 	ld a,[$D11E]
