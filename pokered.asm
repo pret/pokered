@@ -12120,7 +12120,38 @@ Tset17_Block:
 	INCBIN "baserom.gbc",$67B50,$68000-$67B50
 
 SECTION "bank1A",DATA,BANK[$1A]
-INCBIN "baserom.gbc",$68000,$6807F-$68000
+
+DecrementPP:
+; after using a move, decrement pp in battle and (if not transformed?) in party
+	ld a,[de]
+	cp a,STRUGGLE
+	ret z
+	ld hl,$D062
+	ld a,[hli]
+	and a,7
+	ret nz
+	bit 6,[hl]
+	ret nz
+	ld hl,$D02D ; PP of first move (in battle)
+	call .DecrementPP\@
+
+	ld a,[$D064]
+	bit 3,a ; XXX transform status?
+	ret nz
+
+	ld hl,$D188 ; PP of first move (in party)
+	ld a,[$CC2F] ; which mon in party is active
+	ld bc,$2C
+	call AddNTimes
+.DecrementPP\@
+	ld a,[$CC2E] ; which move (0, 1, 2, 3) did we use?
+	ld c,a
+	ld b,0
+	add hl,bc
+	dec [hl] ; Decrement PP
+	ret
+
+INCBIN "baserom.gbc",$6802F,$6807F-$6802F
 Tset05_GFX:
 	INCBIN "baserom.gbc",$6807F,$6867F-$6807F
 Tset05_Block:
