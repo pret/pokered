@@ -95,6 +95,8 @@ W_BATTLETYPE EQU $D05A ; in normal battle, this is 0
 W_LONEATTACKNO EQU $D05C ; which entry in LoneAttacks to use
 W_TRAINERNO    EQU $D05D ; which instance of [youngster, lass, etc] is this?
 
+W_NUMHITS EQU $D074 ; number of hits in attacks like Doubleslap, etc.
+
 ; List type
 ; used in $D0B6
 MONSTER_NAME  EQU 1

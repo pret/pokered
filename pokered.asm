@@ -1450,8 +1450,32 @@ Func3C5F: ; 3C5F
 	pop bc
 	ret
 
-INCBIN "baserom.gbc",$3D25,$3DD7 - $3D25
-;INCBIN "baserom.gbc",$3C5F,$3DD7 - $3C5F
+INCBIN "baserom.gbc",$3D25,$3DAB - $3D25
+
+IsInArray: ; 3DAB
+; searches an array at hl for the value in a.
+; skips (de − 1) bytes between reads, so to check every byte, de should be 1.
+; if found, returns count in b and sets carry.
+	ld b,0
+	ld c,a
+.loop\@
+	ld a,[hl]
+	cp a,$FF
+	jr z,.NotInArray\@
+	cp c
+	jr z,.InArray\@
+	inc b
+	add hl,de
+	jr .loop\@
+.NotInArray\@
+	and a
+	ret
+.InArray\@
+	scf
+	ret
+
+INCBIN "baserom.gbc",$3DBE,$3DD7 - $3DBE
+
 Delay3: ; 3DD7
 ; call Delay with a parameter of 3
 	ld c,3
@@ -9820,7 +9844,27 @@ Mon071_EvosAttacks:
 INCBIN "baserom.gbc",$3B9EC, $3C000 - $3B9EC
 
 SECTION "bankF",DATA,BANK[$F]
-INCBIN "baserom.gbc",$3C000,$90E
+
+; These are move effects (second value from the Attacks table in bank $E).
+EffectsArray1: ; 4000
+	db $18,$19,$1C,$2E,$2F,$31,$38,$39,$40,$41,$42,$43,$4F,$52,$54,$55,$FF
+EffectsArray2: ; 4011
+; attacks that do damage but not through normal calculations
+; e.g., Super Fang, Psywave
+	db $28,$29,$FF
+EffectsArray3: ; 4014
+; non-damaging, stat‐affecting or status‐causing attacks?
+; e.g., Meditate, Bide, Hypnosis
+	db $01,$0A,$0B,$0C,$0D,$0E,$0F,$12,$13,$14,$15,$16,$17,$1A,$20,$32,$33,$34,$35,$36,$37,$3A,$3B,$3C,$3D,$3E,$3F,$FF
+EffectsArray4: ; 4030
+	db $03,$07,$08,$10,$1D,$1E,$2C,$30,$4D,$51,$FF
+EffectsArray5: ; 403B
+	db $03,$07,$08,$10,$11,$1D,$1E,$27,$28,$29,$2B,$2C,$2D,$30 ; fallthru
+EffectsArray5B: ; 4049
+; attacks that prevent the player from switching attacks?
+	db $1B,$2A,$FF
+
+INCBIN "baserom.gbc",$3C04C,$90E - $4C
 
 ; XXX this needs cleaning up. it's what runs when a juggler switches pokemon
 EnemySendOut: ; 490E
@@ -10000,7 +10044,164 @@ TrainerSentOutText:
 	TX_FAR _TrainerSentOutText
 	db "@"
 
-INCBIN "baserom.gbc",$3CA83,$3E474 - $3CA83
+INCBIN "baserom.gbc",$3CA83,$3D6A9 - $3CA83
+; in-battle stuff
+	ld hl,$D062
+	res 4,[hl]
+	res 6,[hl]
+	call $5AF5
+	ld hl,DecrementPP
+	ld de,$CCDC ; pointer to the move just used
+	ld b,BANK(DecrementPP)
+	call Bankswitch
+	ld a,[$CFD3] ; effect of the attack just used
+	ld hl,EffectsArray1
+	ld de,1
+	call IsInArray
+	jp c,$7132
+	ld a,[$CFD3]
+	ld hl,EffectsArray5B
+	ld de,1
+	call IsInArray
+	call c,$7132
+	ld a,[$CFD3]
+	ld hl,EffectsArray2
+	ld de,1
+	call IsInArray
+	jp c,$5702
+	call $6023
+	call $6093
+	jr z,.next11\@
+	call $5DCF
+	call $5F65
+	jp z,$574B
+	call $63A5
+	call $6687
+	call $656B
+.next11\@
+	ld a,[$D05F]
+	and a
+	jr z,.next\@
+	ld a,[$CFD3]
+	sub a,7
+	jr z,.next2\@
+	jr .next3\@ ; 574B
+.next\@
+	ld a,[$CFD3]
+	and a
+	ld a,4
+	jr z,.next2\@
+	ld a,5
+.next2\@
+	push af
+	ld a,[$D063]
+	bit 4,a
+	ld hl,$5747
+	ld b,$1E
+	call nz,Bankswitch
+	pop af
+	ld [$CC5B],a
+	ld a,[$CFD2]
+	call $6F07
+	call $6ED3
+	call $4D60
+	ld a,[$D063]
+	bit 4,a
+	ld hl,$5771
+	ld b,$1E
+	call nz,Bankswitch
+	jr .next4\@
+.next3\@
+	ld c,$1E
+	call $3739
+	ld a,[$CFD3]
+	cp a,$2B
+	jr z,.next5\@
+	cp a,$27
+	jr z,.next5\@
+	jr .next4\@
+.next5\@
+	xor a
+	ld [$CC5B],a
+	ld a,$A7
+	call $6F07
+.next4\@
+	ld a,[$CFD3]
+	cp a,9
+	jr nz,.next6\@ ; 577A
+	call $62FD
+	jp z,$580A
+	xor a
+	ld [$CCED],a
+	jp $569A
+.next6\@
+	cp a,$53
+	jr nz,.next7\@ ; 5784
+	call $6348
+	jp $569A
+.next7\@
+	ld a,[$CFD3]
+	ld hl,EffectsArray3
+	ld de,1
+	call IsInArray
+	jp c,$7132
+	ld a,[$D05F]
+	and a
+	jr z,.next8\@ ; 57A6
+	call $5BE2
+	ld a,[$CFD3]
+	cp a,7
+	jr z,.next9\@ ; 57B9
+	jp $580A
+.next8\@
+	call $60DF
+	call $5C5C
+	ld hl,$7B7B
+	ld b,$B
+	call $35D6
+	ld a,1
+	ld [$CCF4],a
+.next9\@
+	ld a,[$CFD3]
+	ld hl,EffectsArray4
+	ld de,1
+	call IsInArray
+	call c,$7132
+	ld hl,$CFE6
+	ld a,[hli]
+	ld b,[hl]
+	or b
+	ret z
+	call $62B6
+
+	ld hl,$D062
+	bit 2,[hl]
+	jr z,.next10\@ ; 57EF
+	ld a,[$D06A]
+	dec a
+	ld [$D06A],a
+	jp nz,$5714
+
+	res 2,[hl]
+	ld hl,MultiHitText
+	call PrintText
+	xor a
+	ld [W_NUMHITS],a ; reset
+.next10\@
+	ld a,[$CFD3]
+	and a
+	jp z,$580A
+	ld hl,EffectsArray5
+	ld de,1
+	call IsInArray
+	call nc,$7132
+	jp $580A
+
+MultiHitText:
+	TX_FAR _MultiHitText
+	db "@"
+
+INCBIN "baserom.gbc",$3D80A,$3E474 - $3D80A
 
 TypeEffects: ; 6474
 ; format: attacking type, defending type, damage multiplier
@@ -13728,7 +13929,14 @@ _TrainerSentOutText:
 	dw $CFDA
 	db 0,"!",$57
 
-INCBIN "baserom.gbc",$897C9,$8A425 - $897C9
+INCBIN "baserom.gbc",$897C9,$898AA - $897C9
+
+_MultiHitText:
+	db 0,"Hit the enemy",$4F,"@"
+	TX_NUM W_NUMHITS,1,1
+	db 0," times!",$58
+
+INCBIN "baserom.gbc",$898C7,$8A425 - $898C7
 INCLUDE "text/oakspeech.tx"
 
 INCBIN "baserom.gbc",$8A605,$6696 - $6605
