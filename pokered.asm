@@ -10128,7 +10128,7 @@ INCBIN "baserom.gbc",$3CA83,$3D6A9 - $3CA83
 	ld a,[$CFD3]
 	cp a,$2B
 	jr z,.next5\@
-	cp a,$27
+	cp a,$27 ; XXX SLP | FRZ ?
 	jr z,.next5\@
 	jr .next4\@
 .next5\@
@@ -10225,8 +10225,8 @@ Function5811: ; 5811
 	ld a,[$FFF3]
 	and a
 	jr nz,.next\@
-	ld a,[$D018]
-	and a,$27
+	ld a,[W_CURMONSTATUS]
+	and a,SLP | FRZ
 	ret nz
 	ld hl,ScaredText
 	call PrintText
@@ -10263,7 +10263,115 @@ Function583A: ; 583A
 	and a
 	ret
 
-INCBIN "baserom.gbc",$3D854,$3E474 - $3D854
+Function5854: ; 5854
+	ld hl,W_CURMONSTATUS
+	ld a,[hl]
+	and a,SLP
+	jr z,.FrozenCheck\@ ; to 5884
+
+	dec a
+	ld [W_CURMONSTATUS],a ; decrement sleep count
+	and a
+	jr z,.WakeUp\@ ; to 5874
+
+	xor a
+	ld [$CC5B],a
+	ld a,$BC ; XXX SLP_ANIM?
+	call $6F07
+	ld hl,FastAsleepText
+	call PrintText
+	jr .sleepDone\@
+.WakeUp\@
+	ld hl,WokeUpText
+	call PrintText
+.sleepDone\@
+	xor a
+	ld [$CCF1],a
+	ld hl,Function580A
+	jp $5A37
+
+.FrozenCheck\@
+	bit 5,[hl] ; frozen?
+	jr z,.HeldInPlaceCheck\@ ; to 5898
+	ld hl,FrozenText
+	call PrintText
+	xor a
+	ld [$CCF1],a
+	ld hl,Function580A
+	jp $5A37
+
+.HeldInPlaceCheck\@
+	ld a,[W_CURMONBATTSTATUS]
+	bit 5,a
+	jp z,$58AC
+	ld hl,CantMoveText
+	call PrintText
+	ld hl,Function580A
+	jp $5A37
+
+INCBIN "baserom.gbc",$3D8AC,$3DA3D - $3D8AC
+
+FastAsleepText:
+	TX_FAR _FastAsleepText
+	db "@"
+
+WokeUpText:
+	TX_FAR _WokeUpText
+	db "@"
+
+FrozenText:
+	TX_FAR _FrozenText
+	db "@"
+
+FullyParalyzedText:
+	TX_FAR _FullyParalyzedText
+	db "@"
+
+FlinchedText:
+	TX_FAR _FlinchedText
+	db "@"
+
+MustRechargeText:
+	TX_FAR _MustRechargeText
+	db "@"
+
+DisabledNoMoreText:
+	TX_FAR _DisabledNoMoreText
+	db "@"
+
+IsConfusedText:
+	TX_FAR _IsConfusedText
+	db "@"
+
+HurtItselfText:
+	TX_FAR _HurtItselfText
+	db "@"
+
+ConfusedNoMoreText:
+	TX_FAR _ConfusedNoMoreText
+	db "@"
+
+SavingEnergyText:
+	TX_FAR _SavingEnergyText
+	db "@"
+
+UnleashedEnergyText:
+	TX_FAR _UnleashedEnergyText
+	db "@"
+
+ThrashingAboutText:
+	TX_FAR _ThrashingAboutText
+	db "@"
+
+AttackContinuesText:
+	TX_FAR _AttackContinuesText
+	db "@"
+
+CantMoveText:
+	TX_FAR _CantMoveText
+	db "@"
+
+INCBIN "baserom.gbc",$3DA88,$3E474 - $3DA88
 
 TypeEffects: ; 6474
 ; format: attacking type, defending type, damage multiplier
@@ -14008,7 +14116,67 @@ _GetOutText:
 	db 0,"GHOST: Get out...",$4F
 	db "Get out...",$58
 
-INCBIN "baserom.gbc",$89901,$8A425 - $89901
+_FastAsleepText:
+	db 0,$5A,$4F
+	db "is fast asleep!",$58
+
+_WokeUpText:
+	db 0,$5A,$4F
+	db "woke up!",$58
+
+_FrozenText:
+	db 0,$5A,$4F
+	db "is frozen solid!",$58
+
+_FullyParalyzedText:
+	db 0,$5A,"'s",$4F
+	db "fully paralyzed!",$58
+
+_FlinchedText:
+	db 0,$5A,$4F
+	db "flinched!",$58
+
+_MustRechargeText:
+	db 0,$5A,$4F
+	db "must recharge!",$58
+
+_DisabledNoMoreText:
+	db 0,$5A,"'s",$4F
+	db "disabled no more!",$58
+
+_IsConfusedText:
+	db 0,$5A,$4F
+	db "is confused!",$58
+
+_HurtItselfText:
+	db 0,"It hurt itself in",$4F
+	db "its confusion!",$58
+
+_ConfusedNoMoreText:
+	db 0,$5A,"'s",$4F
+	db "confused no more!",$58
+
+_SavingEnergyText:
+	db 0,$5A,$4F
+	db "is saving energy!",$58
+
+_UnleashedEnergyText:
+	db 0,$5A,$4F
+	db "unleashed energy!",$58
+
+_ThrashingAboutText:
+	db 0,$5A,"'s",$4F
+	db "thrashing about!",$57
+
+_AttackContinuesText:
+	db 0,$5A,"'s",$4F
+	db "attack continues!",$57
+
+_CantMoveText:
+	db 0,$5A,$4F
+	db "can't move!",$58
+
+INCBIN "baserom.gbc",$89A29,$8A425 - $89A29
 INCLUDE "text/oakspeech.tx"
 
 INCBIN "baserom.gbc",$8A605,$6696 - $6605

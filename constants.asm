@@ -78,6 +78,18 @@ W_OPPONENTSTATUS EQU $CFE9 ; active opponent's status condition
 	; bit 6 par
 	; unused? (XXX confirm)
 
+W_CURMONSTATUS EQU $D018 ; the status of the player’s current monster
+	; bit 0 slp
+	; bit 1 slp
+	; bit 2 slp
+	; bit 3 psn
+	; bit 4 brn
+	; bit 5 frz
+	; bit 6 par
+	; unused? (XXX confirm)
+
+W_CURMONBATTSTATUS EQU $D067 ; various battle statuses
+	; bit 5 held in place (Bind, Clamp, etc.)
 
 W_TRAINERCLASS EQU $D031
 
