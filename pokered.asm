@@ -10130,7 +10130,7 @@ INCBIN "baserom.gbc",$3CA83,$3D6A9 - $3CA83
 	cp a,9
 	jr nz,.next6\@ ; 577A
 	call $62FD
-	jp z,$580A
+	jp z,Function580A
 	xor a
 	ld [$CCED],a
 	jp $569A
@@ -10152,7 +10152,7 @@ INCBIN "baserom.gbc",$3CA83,$3D6A9 - $3CA83
 	ld a,[$CFD3]
 	cp a,7
 	jr z,.next9\@ ; 57B9
-	jp $580A
+	jp Function580A
 .next8\@
 	call $60DF
 	call $5C5C
@@ -10190,18 +10190,52 @@ INCBIN "baserom.gbc",$3CA83,$3D6A9 - $3CA83
 .next10\@
 	ld a,[$CFD3]
 	and a
-	jp z,$580A
+	jp z,Function580A
 	ld hl,EffectsArray5
 	ld de,1
 	call IsInArray
 	call nc,$7132
-	jp $580A
+	jp Function580A
 
 MultiHitText:
 	TX_FAR _MultiHitText
 	db "@"
 
-INCBIN "baserom.gbc",$3D80A,$3E474 - $3D80A
+Function580A: ; 580A
+	xor a
+	ld [$CD6A],a
+	ld b,1
+	ret
+
+Function5811: ; 5811
+; print the ghost battle messages
+	call $583A
+	ret nz
+	ld a,[$FFF3]
+	and a
+	jr nz,.next\@
+	ld a,[$D018]
+	and a,$27
+	ret nz
+	ld hl,ScaredText
+	call PrintText
+	xor a
+	ret
+.next\@
+	ld hl,GetOutText
+	call PrintText
+	xor a
+	ret
+
+ScaredText:
+	TX_FAR _ScaredText
+	db "@"
+
+GetOutText:
+	TX_FAR _GetOutText
+	db "@"
+
+INCBIN "baserom.gbc",$3D83A,$3E474 - $3D83A
 
 TypeEffects: ; 6474
 ; format: attacking type, defending type, damage multiplier
@@ -13936,7 +13970,17 @@ _MultiHitText:
 	TX_NUM W_NUMHITS,1,1
 	db 0," times!",$58
 
-INCBIN "baserom.gbc",$898C7,$8A425 - $898C7
+_ScaredText:
+	db 1
+	dw $D009
+	db 0," is too",$4F
+	db "scared to move!",$58
+
+_GetOutText:
+	db 0,"GHOST: Get out...",$4F
+	db "Get out...",$58
+
+INCBIN "baserom.gbc",$89901,$8A425 - $89901
 INCLUDE "text/oakspeech.tx"
 
 INCBIN "baserom.gbc",$8A605,$6696 - $6605
