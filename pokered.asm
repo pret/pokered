@@ -662,11 +662,11 @@ Char4A: ; PKMN
 
 Char59:
 ; depending on whose turn it is, print
-; player active monster’s name
-; or
 ; enemy active monster’s name, prefixed with “Enemy ”
-; (XXX what is the purpose of this vs. Char5A)
-	ld a,[$FFF3]
+; or
+; player active monster’s name
+; (like Char5A but flipped)
+	ld a,[H_WHOSETURN]
 	xor 1
 	jr MonsterNameCharsCommon
 
@@ -675,7 +675,7 @@ Char5A:
 ; player active monster’s name
 ; or
 ; enemy active monster’s name, prefixed with “Enemy ”
-	ld a,[$FFF3]
+	ld a,[H_WHOSETURN]
 MonsterNameCharsCommon:
 	push de
 	and a
@@ -10222,17 +10222,17 @@ Function5811: ; 5811
 ; print the ghost battle messages
 	call $583A
 	ret nz
-	ld a,[$FFF3]
+	ld a,[H_WHOSETURN]
 	and a
-	jr nz,.next\@
-	ld a,[W_CURMONSTATUS]
+	jr nz,.Ghost\@
+	ld a,[W_CURMONSTATUS] ; player’s turn
 	and a,SLP | FRZ
 	ret nz
 	ld hl,ScaredText
 	call PrintText
 	xor a
 	ret
-.next\@
+.Ghost\@ ; ghost’s turn
 	ld hl,GetOutText
 	call PrintText
 	xor a
@@ -13539,9 +13539,11 @@ AttackAnimation: ; 4D5E
 
 ShareAttackAnimations: ; 4DA6
 ; some moves just reuse animations from status conditions
-	ld a,[$FFF3]
+	ld a,[H_WHOSETURN]
 	and a
 	ret z
+
+	; opponent’s turn
 
 	ld a,[$D07C]
 
@@ -13655,7 +13657,7 @@ Func586F: ; 586F
 	ld b,a
 	call IsCryMove
 	jr nc,.NotCryMove
-	ld a,[$FFF3]
+	ld a,[H_WHOSETURN]
 	and a
 	jr nz,.next\@
 	ld a,[$D014] ; get number of current monster

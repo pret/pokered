@@ -166,6 +166,8 @@ W_NUMINBOX EQU $DA80
 H_RAND1 EQU $FFD3
 H_RAND2 EQU $FFD4
 
+H_WHOSETURN EQU $FFF3 ; 0 on player’s turn, 1 on enemy’s turn
+
 ; hardware registers, from the pandocs http://nocash.emubase.de/pandocs.htm
 rDIV EQU $FF04
 rBGP EQU $FF47
