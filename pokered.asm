@@ -1089,7 +1089,18 @@ TechnicalPrefix:
 HiddenPrefix:
 	db "HM"
 
-INCBIN "baserom.gbc",$3040,$3541 - $3040
+INCBIN "baserom.gbc",$3040,$3493 - $3040
+
+Function3493: ; 3493
+; XXX what does this do
+; related to Pokémon Tower and ghosts
+	ld a,$1C
+	call Predef
+	ld a,b
+	and a
+	ret
+
+INCBIN "baserom.gbc",$349B,$3541 - $349B
 
 Function3541: ; 3541
 ; XXX what do these three functions do
@@ -10235,7 +10246,24 @@ GetOutText:
 	TX_FAR _GetOutText
 	db "@"
 
-INCBIN "baserom.gbc",$3D83A,$3E474 - $3D83A
+Function583A: ; 583A
+	ld a,[W_ISINBATTLE]
+	dec a
+	ret nz
+	ld a,[W_CURMAP]
+	cp a,$8E ; Lavender Town
+	jr c,.next\@
+	cp a,$95 ; Pokémon Tower
+	jr nc,.next\@
+	ld b,SILPH_SCOPE
+	call Function3493
+	ret z
+.next\@
+	ld a,1
+	and a
+	ret
+
+INCBIN "baserom.gbc",$3D854,$3E474 - $3D854
 
 TypeEffects: ; 6474
 ; format: attacking type, defending type, damage multiplier
@@ -12185,7 +12213,7 @@ PredefPointers: ; 7E79
         dbw $03,$4754
         dbw $0E,$6F5B
         dbw $01,$6E43
-        dbw $03,$78A5
+        dbw $03,$78A5; 1C, used in Pokémon Tower
         dbw $03,$3EB5
         dbw $03,$3E2E
         dbw $12,$40EB
