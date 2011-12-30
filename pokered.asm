@@ -10276,7 +10276,7 @@ Function5854: ; 5854
 
 	xor a
 	ld [$CC5B],a
-	ld a,$BC ; XXX SLP_ANIM?
+	ld a,SLP_ANIM - 1
 	call $6F07
 	ld hl,FastAsleepText
 	call PrintText
@@ -10312,14 +10312,185 @@ Function5854: ; 5854
 FlinchedCheck: ; 58AC
 	ld hl,$D062
 	bit 3,[hl]
-	jp z,$58C2
+	jp z,HyperBeamCheck
 	res 3,[hl]
 	ld hl,FlinchedText
 	call PrintText
 	ld hl,Function580A
 	jp $5A37
 
-INCBIN "baserom.gbc",$3D8C2,$3DA3D - $3D8C2
+HyperBeamCheck: ; 58C2
+	ld hl,$D063
+	bit 5,[hl]
+	jr z,.next\@ ; 58D7
+	res 5,[hl]
+	ld hl,MustRechargeText
+	call PrintText
+	ld hl,$580A
+	jp $5A37
+.next\@
+	ld hl,$D06D
+	ld a,[hl]
+	and a
+	jr z,.next2\@ ; 58EE
+	dec a
+	ld [hl],a
+	and a,$F
+	jr nz,.next2\@
+	ld [hl],a
+	ld [$CCEE],a
+	ld hl,DisabledNoMoreText
+	call PrintText
+.next2\@
+	ld a,[$D062]
+	add a
+	jr nc,.next3\@ ; 5929
+	ld hl,$D06B
+	dec [hl]
+	jr nz,.next4\@ ; 5907
+	ld hl,$D062
+	res 7,[hl]
+	ld hl,ConfusedNoMoreText
+	call PrintText
+	jr .next3\@
+.next4\@
+	ld hl,IsConfusedText
+	call PrintText
+	xor a
+	ld [$CC5B],a
+	ld a,CONF_ANIM - 1
+	call $6F07
+	call $6E9B
+	cp a,$80
+	jr c,.next3\@
+	ld hl,$D062
+	ld a,[hl]
+	and a,$80
+	ld [hl],a
+	call $5AAD
+	jr .next5\@ ; 5952
+.next3\@
+	ld a,[$CCEE]
+	and a
+	jr z,.ParalysisCheck\@ ; 593E
+	ld hl,$CCDC
+	cp [hl]
+	jr nz,.ParalysisCheck\@
+	call $5A88
+	ld hl,$580A
+	jp $5A37
+.ParalysisCheck\@
+	ld hl,W_CURMONSTATUS
+	bit 6,[hl]
+	jr z,.next7\@ ; 5975
+	call $6E9B ; random number?
+	cp a,$3F
+	jr nc,.next7\@
+	ld hl,FullyParalyzedText
+	call PrintText
+.next5\@
+	ld hl,$D062
+	ld a,[hl]
+	and a,$CC
+	ld [hl],a
+	ld a,[$CFD3]
+	cp a,$2B
+	jr z,.next8\@ ; 5966
+	cp a,$27
+	jr z,.next8\@
+	jr .next9\@ ; 596F
+.next8\@
+	xor a
+	ld [$CC5B],a
+	ld a,$A7
+	call $6F07
+.next9\@
+	ld hl,$580A
+	jp $5A37
+.next7\@
+	ld hl,$D062
+	bit 0,[hl]
+	jr z,.next10\@ ; 59D0
+	xor a
+	ld [$CFD2],a
+	ld hl,$D0D7
+	ld a,[hli]
+	ld b,a
+	ld c,[hl]
+	ld hl,$D075
+	ld a,[hl]
+	add c
+	ld [hld],a
+	ld a,[hl]
+	adc b
+	ld [hl],a
+	ld hl,$D06A
+	dec [hl]
+	jr z,.next11\@ ; 599B
+	ld hl,$580A
+	jp $5A37
+.next11\@
+	ld hl,$D062
+	res 0,[hl]
+	ld hl,UnleashedEnergyText
+	call PrintText
+	ld a,1
+	ld [$CFD4],a
+	ld hl,$D075
+	ld a,[hld]
+	add a
+	ld b,a
+	ld [$D0D8],a
+	ld a,[hl]
+	rl a
+	ld [$D0D7],a
+	or b
+	jr nz,.next12\@ ; 59C2
+	ld a,1
+	ld [$D05F],a
+.next12\@
+	xor a
+	ld [hli],a
+	ld [hl],a
+	ld a,$75
+	ld [$CFD2],a
+	ld hl,$5705
+	jp $5A37
+.next10\@
+	bit 1,[hl]
+	jr z,.next13\@ ; 59FF
+	ld a,$25
+	ld [$CFD2],a
+	ld hl,ThrashingAboutText
+	call PrintText
+	ld hl,$D06A
+	dec [hl]
+	ld hl,$56DC
+	jp nz,$5A37
+	push hl
+	ld hl,$D062
+	res 1,[hl]
+	set 7,[hl]
+	call $6E9B ; random number?
+	and a,3
+	inc a
+	inc a
+	ld [$D06B],a
+	pop hl
+	jp $5A37
+.next13\@
+	bit 5,[hl]
+	jp z,$5A1A
+	ld hl,AttackContinuesText
+	call PrintText
+	ld a,[$D06A]
+	dec a
+	ld [$D06A],a
+	ld hl,$5714
+	jp nz,$5A37
+	jp $5A37
+
+INCBIN "baserom.gbc",$3DA1A,$3DA3D - $3DA1A
 
 FastAsleepText:
 	TX_FAR _FastAsleepText
