@@ -10303,13 +10303,23 @@ Function5854: ; 5854
 .HeldInPlaceCheck\@
 	ld a,[W_CURMONBATTSTATUS]
 	bit 5,a
-	jp z,$58AC
+	jp z,FlinchedCheck
 	ld hl,CantMoveText
 	call PrintText
 	ld hl,Function580A
 	jp $5A37
 
-INCBIN "baserom.gbc",$3D8AC,$3DA3D - $3D8AC
+FlinchedCheck: ; 58AC
+	ld hl,$D062
+	bit 3,[hl]
+	jp z,$58C2
+	res 3,[hl]
+	ld hl,FlinchedText
+	call PrintText
+	ld hl,Function580A
+	jp $5A37
+
+INCBIN "baserom.gbc",$3D8C2,$3DA3D - $3D8C2
 
 FastAsleepText:
 	TX_FAR _FastAsleepText
