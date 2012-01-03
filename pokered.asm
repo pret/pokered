@@ -307,7 +307,7 @@ MapHeaderPointers: ; $01AE
 	dw $6473
 	dw $586a
 	dw $5969
-	dw $47dd
+	dw SeafoamIslands1_h
 	dw Route22Gate_h
 	dw $5791
 	dw $5554
@@ -2332,7 +2332,7 @@ MapHeaderBanks: ; 423D
 	db $15
 	db $12
 	db $12
-	db $11
+	db BANK(SeafoamIslands1_h)
 	db BANK(Route22Gate_h)
 	db $14
 	db $12
@@ -12846,7 +12846,17 @@ RockTunnel1_h: ; 0x444d0 to 0x444dc (12 bytes) (bank=11) (id=82)
 
     dw $45f6 ; objects
 
-INCBIN "baserom.gbc",$444DC,$48000-$444DC
+INCBIN "baserom.gbc",$444DC,$447DD-$444DC
+
+SeafoamIslands1_h: ; 0x447dd to 0x447e9 (12 bytes) (bank=11) (id=192)
+    db $11 ; tileset
+    db $09, $0f ; dimensions (y, x)
+    dw $489f, $484b, $47e9 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $484f ; objects
+
+INCBIN "baserom.gbc",$447E9,$48000-$447E9
 
 SECTION "bank12",DATA,BANK[$12]
 INCBIN "baserom.gbc",$48000,$15C
