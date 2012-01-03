@@ -315,8 +315,8 @@ MapHeaderPointers: ; $01AE
 	dw $5f62
 	dw VictoryRoad3_h
 	dw RocketHideout1_h
-	dw $4e1b
-	dw $5219
+	dw RocketHideout2_h
+	dw RocketHideout3_h
 	dw $5451
 	dw $5704
 	dw $5704
@@ -2340,8 +2340,8 @@ MapHeaderBanks: ; 423D
 	db $18
 	db BANK(VictoryRoad3_h)
 	db BANK(RocketHideout1_h)
-	db $11
-	db $11
+	db BANK(RocketHideout2_h)
+	db BANK(RocketHideout3_h)
 	db $11
 	db $11
 	db $01
@@ -12886,7 +12886,27 @@ RocketHideout1_h: ; 0x44bbe to 0x44bca (12 bytes) (bank=11) (id=199)
 
     dw $4ce7 ; objects
 
-INCBIN "baserom.gbc",$44BCA,$48000-$44BCA
+INCBIN "baserom.gbc",$44BCA,$44E1B-$44BCA
+
+RocketHideout2_h: ; 0x44e1b to 0x44e27 (12 bytes) (bank=11) (id=200)
+    db $16 ; tileset
+    db $0e, $0f ; dimensions (y, x)
+    dw $5147, $50c7, $4e27 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $50f7 ; objects
+
+INCBIN "baserom.gbc",$44E27,$45219-$44E27
+
+RocketHideout3_h: ; 0x45219 to 0x45225 (12 bytes) (bank=11) (id=201)
+    db $16 ; tileset
+    db $0e, $0f ; dimensions (y, x)
+    dw $537f, $52fa, $5225 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $534d ; objects
+
+INCBIN "baserom.gbc",$45225,$48000-$45255
 
 SECTION "bank12",DATA,BANK[$12]
 INCBIN "baserom.gbc",$48000,$15C
