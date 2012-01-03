@@ -13936,7 +13936,45 @@ IndigoPlateau_h: ; 0x5091e to 0x50935 (23 bytes) (id=9)
 
     dw $4936 ; objects
 
-INCBIN "baserom.gbc",$50935,$36cb
+INCBIN "baserom.gbc",$50935,$509a4 - $50935
+
+SaffronCity_h: ; 0x509a4 to 0x509dc (56 bytes) (id=10)
+    db $00 ; tileset
+    db $12, $14 ; dimensions (y, x)
+    dw $4a98, $4c03, $4c00 ; blocks, texts, scripts
+    db NORTH | SOUTH | WEST | EAST ; connections
+
+    ; connections data
+
+    db $10 ; some map
+    dw $4668, $c6f0 ; pointers (connected, current) (strip)
+    db $0a, $0a ; bigness, width
+    db $23, $f6 ; alignments (y, x)
+    dw $c809 ; window
+
+    db $11 ; some map
+    dw $4079, $c912 ; pointers (connected, current) (strip)
+    db $0a, $0a ; bigness, width
+    db $00, $f6 ; alignments (y, x)
+    dw $c6f9 ; window
+
+    db $12 ; some map
+    dw $4058, $c79e ; pointers (connected, current) (strip)
+    db $09, $0a ; bigness, width
+    db $f8, $13 ; alignments (y, x)
+    dw $c702 ; window
+
+    db $13 ; some map
+    dw $41c6, $c7b5 ; pointers (connected, current) (strip)
+    db $09, $1e ; bigness, width
+    db $f8, $00 ; alignments (y, x)
+    dw $c70d ; window
+
+    ; end connection data
+
+    dw $49dc ; objects
+
+INCBIN "baserom.gbc",$509dc,$3624
 
 SECTION "bank15",DATA,BANK[$15]
 INCBIN "baserom.gbc",$54000,$4000
