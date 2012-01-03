@@ -15134,7 +15134,17 @@ DiglettsCave_h: ; 0x61f62 to 0x61f6e (12 bytes) (id=197)
 
     dw $5f72 ; objects
 
-INCBIN "baserom.gbc",$61f6e,$2092
+INCBIN "baserom.gbc",$61f6e,$620ee - $61f6e
+
+SilphCo11_h: ; 0x620ee to 0x620fa (12 bytes) (id=235)
+    db $10 ; tileset
+    db $09, $09 ; dimensions (y, x)
+    dw $63c8, $62b7, $60fa ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $6380 ; objects
+
+INCBIN "baserom.gbc",$620fa,$1f06
 
 SECTION "bank19",DATA,BANK[$19]
 Tset00_GFX:
