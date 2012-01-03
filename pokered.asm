@@ -289,7 +289,7 @@ MapHeaderPointers: ; $01AE
 	dw $5e20
 	dw $5e72
 	dw $5e72
-	dw $5c4f
+	dw IndigoPlateauLobby_h 
 	dw $5eb7
 	dw $4c65
 	dw $4d51
@@ -5439,7 +5439,19 @@ VermilionHouse3_h: ; 0x19c06 to 0x19c12 (12 bytes) (bank=6) (id=196)
 
     dw $5c25 ; objects
 
-INCBIN "baserom.gbc",$19C12,$4000-$1C18
+INCBIN "baserom.gbc",$19C12,$19C4F-$19C12
+
+;INCBIN "baserom.gbc",$19C4F,$19C5B-$19C4F
+
+IndigoPlateauLobby_h: ; 0x19c4f to 0x19c5b (12 bytes) (bank=6) (id=174)
+    db $02 ; tileset
+    db $06, $08 ; dimensions (y, x)
+    dw $5ccf, $5c7f, $5c5b ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $5c95 ; objects
+
+INCBIN "baserom.gbc",$19C5B,$23A5
 
 SECTION "bank7",DATA,BANK[$7]
 INCBIN "baserom.gbc",$1C000,$21E
