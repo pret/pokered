@@ -311,7 +311,7 @@ MapHeaderPointers: ; $01AE
 	dw $6677
 	dw $5791
 	dw $5554
-	dw $5c06
+	dw VermilionHouse3_h
 	dw $5f62
 	dw $4974
 	dw $4bbe
@@ -5431,7 +5431,19 @@ BluesHouseObject:
 BluesHouseBlocks:
 	INCBIN "maps/blueshouse.blk"
 
-INCBIN "baserom.gbc",$19C06,$4000-$1C06
+VermilionHouse3_h: ; 0x19c06 to 0x19c12 (12 bytes) (bank=6) (id=196)
+    db $08 ; tileset
+    db $04, $04 ; dimensions (y, x)
+    dw $5c3f, $5c15, $5c12 ; blocks, texts, scripts
+    db $00 ; connections
+
+    ; connections data
+
+    ; end connection data
+
+    dw $5c25 ; objects
+
+INCBIN "baserom.gbc",$19C12,$4000-$1C18
 
 SECTION "bank7",DATA,BANK[$7]
 INCBIN "baserom.gbc",$1C000,$21E
