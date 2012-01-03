@@ -12786,7 +12786,7 @@ OTString67E5: ; 67E5
 
 SECTION "bank11",DATA,BANK[$11]
 
-LavendarTown_h: ; 0x44000 to 0x4402d (45 bytes) (bank=17) (id=4)
+LavendarTown_h: ; 0x44000 to 0x4402d (45 bytes) (bank=11) (id=4)
     db $00 ; tileset
     db $09, $0a ; dimensions (y, x)
     dw $4085, $410e, $410b ; blocks, texts, scripts
