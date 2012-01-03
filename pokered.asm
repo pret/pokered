@@ -14984,7 +14984,17 @@ PokemonTower6_h: ; 0x60ae3 to 0x60aef (12 bytes) (id=147)
 
     dw $4c5b ; objects
 
-INCBIN "baserom.gbc",$60aef,$3511
+INCBIN "baserom.gbc",$60aef,$60cf9 - $60aef
+
+PokemonTower7_h: ; 0x60cf9 to 0x60d05 (12 bytes) (id=148)
+    db $0f ; tileset
+    db $09, $0a ; dimensions (y, x)
+    dw $4f20, $4e3f, $4d05 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $4ef6 ; objects
+
+INCBIN "baserom.gbc",$60d05,$32fb
 
 SECTION "bank19",DATA,BANK[$19]
 Tset00_GFX:
