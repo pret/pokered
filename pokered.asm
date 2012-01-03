@@ -183,7 +183,7 @@ MapHeaderPointers: ; $01AE
 	dw $46a7
 	dw BikeShop_h
 	dw $4889
-	dw $52c3
+	dw MtMoonPokecenter_h
 	dw CeruleanHouseTrashed_h ; copy of map 62
 	dw Route5Gate_h
 	dw $569d
@@ -2208,7 +2208,7 @@ MapHeaderBanks: ; 423D
 	db $17
 	db BANK(BikeShop_h)
 	db $17
-	db $12
+	db BANK(MtMoonPokecenter_h)
 	db BANK(CeruleanHouseTrashed_h) ; copy of map 62
 	db BANK(Route5Gate_h)
 	db $17
@@ -13369,7 +13369,17 @@ CeladonHotel_h: ; 0x4925d to 0x49269 (12 bytes) (bank=12) (id=140)
 
     dw $5281 ; objects
 
-INCBIN "baserom.gbc",$49269,$4C000-$49269
+INCBIN "baserom.gbc",$49269,$492C3-$49269
+
+MtMoonPokecenter_h: ; 0x492c3 to 0x492cf (12 bytes) (bank=12) (id=68)
+    db $06 ; tileset
+    db $04, $07 ; dimensions (y, x)
+    dw $40ab, $52d5, $52cf ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $5376 ; objects
+
+INCBIN "baserom.gbc",$492CF,$4C000-$492CF
 
 SECTION "bank13",DATA,BANK[$13]
 
