@@ -14281,7 +14281,17 @@ VermilionHouse2_h: ; 0x56064 to 0x56070 (12 bytes) (id=163)
 
     dw $60cf ; objects
 
-INCBIN "baserom.gbc",$56070,$1f90
+INCBIN "baserom.gbc",$56070,$560e9 - $56070
+
+CeladonMart2_h: ; 0x560e9 to 0x560f5 (12 bytes) (id=123)
+    db $12 ; tileset
+    db $04, $0a ; dimensions (y, x)
+    dw $6148, $60f8, $60f5 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $6111 ; objects
+
+INCBIN "baserom.gbc",$560f5,$1f0b
 
 SECTION "bank16",DATA,BANK[$16]
 INCBIN "baserom.gbc",$58000,$4000
