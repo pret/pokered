@@ -4975,7 +4975,33 @@ ViridianCity_h: ; 0x18357 to 0x18384 (45 bytes) (bank=6) (id=1)
 
     dw $4384 ; objects
 
-INCBIN "baserom.gbc",$18384,$18E5B-$18357-45
+INCBIN "baserom.gbc",$18384,$18554-$18384
+
+PewterCity_h: ; 0x18554 to 0x18576 (34 bytes) (bank=6) (id=2)
+    db $00 ; tileset
+    db $12, $14 ; dimensions (y, x)
+    dw $45e6, $538b, $5237 ; blocks, texts, scripts
+    db SOUTH | EAST ; connections
+
+    ; connections data
+
+    db $0d ; some map
+    dw $407e, $c912 ; pointers (connected, current) (strip)
+    db $0a, $0a ; bigness, width
+    db $00, $f6 ; alignments (y, x)
+    dw $c6f9 ; window
+
+    db $0e ; some map
+    dw $4255, $c7b5 ; pointers (connected, current) (strip)
+    db $09, $23 ; bigness, width
+    db $f8, $00 ; alignments (y, x)
+    dw $c712 ; window
+
+    ; end connection data
+
+    dw $4577 ; objects
+
+INCBIN "baserom.gbc",$18576,$18E5B-$18576
 
 PalletTownScript:
 	ld a,[$D74B]
