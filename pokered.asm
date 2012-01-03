@@ -14321,7 +14321,17 @@ Route12House_h: ; 0x56473 to 0x5647f (12 bytes) (id=189)
 
     dw $64de ; objects
 
-INCBIN "baserom.gbc",$5647f,$1b81
+INCBIN "baserom.gbc",$5647f,$564f8 - $5647f
+
+SilphCo8_h: ; 0x564f8 to 0x56504 (12 bytes) (id=213)
+    db $16 ; tileset
+    db $09, $0d ; dimensions (y, x)
+    dw $666d, $657d, $6504 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $6613 ; objects
+
+INCBIN "baserom.gbc",$56504,$1afc
 
 SECTION "bank16",DATA,BANK[$16]
 INCBIN "baserom.gbc",$58000,$4000
