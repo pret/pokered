@@ -14311,7 +14311,17 @@ DayCareM_h: ; 0x56243 to 0x5624f (12 bytes) (id=72)
 
     dw $6459 ; objects
 
-INCBIN "baserom.gbc",$5624f,$1db1
+INCBIN "baserom.gbc",$5624f,$56473 - $5624f
+
+Route12House_h: ; 0x56473 to 0x5647f (12 bytes) (id=189)
+    db $08 ; tileset
+    db $04, $04 ; dimensions (y, x)
+    dw $522f, $6482, $647f ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $64de ; objects
+
+INCBIN "baserom.gbc",$5647f,$1b81
 
 SECTION "bank16",DATA,BANK[$16]
 INCBIN "baserom.gbc",$58000,$4000
