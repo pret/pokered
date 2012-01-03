@@ -5789,10 +5789,6 @@ PewterHouse2_h: ; 0x1d63c to 0x1d648 (12 bytes) (bank=7) (id=57)
     dw $41de, $564b, $5648 ; blocks, texts, scripts
     db $00 ; connections
 
-    ; connections data
-
-    ; end connection data
-
     dw $5659 ; objects
 
 INCBIN "baserom.gbc",$1D648,$1D679-$1D648
