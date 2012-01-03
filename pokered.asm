@@ -13477,7 +13477,17 @@ Route18GateHeader_h: ; 0x49969 to 0x49975 (12 bytes) (id=191)
 
     dw $59a4 ; objects
 
-INCBIN "baserom.gbc",$49975,$268b
+INCBIN "baserom.gbc",$49975,$499bc - $49975
+
+MtMoon1_h: ; 0x499bc to 0x499c8 (12 bytes) (id=59)
+    db $11 ; tileset
+    db $12, $14 ; dimensions (y, x)
+    dw $5b97, $59e1, $59c8 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $5b06 ; objects
+
+INCBIN "baserom.gbc",$499c8,$2638
 
 SECTION "bank13",DATA,BANK[$13]
 
