@@ -133,7 +133,7 @@ MapHeaderPointers: ; $01AE
 	dw $4390 ; ROUTE_4
 	dw $4581 ; ROUTE_5
 	dw $4000 ; ROUTE_6
-	dw $4000 ; ROUTE_7
+	dw Route7_h ; ROUTE_7
 	dw $412d ; ROUTE_8
 	dw $4686 ; ROUTE_9
 	dw $42d4 ; ROUTE_10
@@ -2158,7 +2158,7 @@ MapHeaderBanks: ; 423D
 	db $15 ; ROUTE_4
 	db $15 ; ROUTE_5
 	db $16 ; ROUTE_6
-	db $12 ; ROUTE_7
+	db BANK(Route7_h) ; ROUTE_7
 	db $16 ; ROUTE_8
 	db $15 ; ROUTE_9
 	db $16 ; ROUTE_10
@@ -13068,7 +13068,7 @@ SeafoamIslands4_h: ; 0x46581 to 0x4658d (12 bytes) (bank=11) (id=161)
 
 INCBIN "baserom.gbc",$4658D,$4678D-$4658D
 
-SeafoamIslands5_h: ; 0x4678d to 0x46799 (12 bytes) (bank=17) (id=162)
+SeafoamIslands5_h: ; 0x4678d to 0x46799 (12 bytes) (bank=11) (id=162)
     db $11 ; tileset
     db $09, $0f ; dimensions (y, x)
     dw $68fa, $687c, $6799 ; blocks, texts, scripts
@@ -13079,7 +13079,32 @@ SeafoamIslands5_h: ; 0x4678d to 0x46799 (12 bytes) (bank=17) (id=162)
 INCBIN "baserom.gbc",$46799,$48000-$46799
 
 SECTION "bank12",DATA,BANK[$12]
-INCBIN "baserom.gbc",$48000,$15C
+
+Route7_h: ; 0x48000 to 0x48022 (34 bytes) (bank=12) (id=18)
+    db $00 ; tileset
+    db $09, $0a ; dimensions (y, x)
+    dw $4051, $4155, $4152 ; blocks, texts, scripts
+    db WEST | EAST ; connections
+
+    ; connections data
+
+    db $06 ; some map
+    dw $410e, $c6e8 ; pointers (connected, current) (strip)
+    db $0f, $19 ; bigness, width
+    db $08, $31 ; alignments (y, x)
+    dw $c720 ; window
+
+    db $0a ; some map
+    dw $4aac, $c6f5 ; pointers (connected, current) (strip)
+    db $0f, $14 ; bigness, width
+    db $08, $00 ; alignments (y, x)
+    dw $c703 ; window
+
+    ; end connection data
+
+    dw $4022 ; objects
+
+INCBIN "baserom.gbc",$48022,$4815C-$48022
 
 RedsHouse1F_h: ; 415C
 	db $01 ; tileset
