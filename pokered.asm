@@ -15114,7 +15114,17 @@ UndergroundPathNS_h: ; 0x61f1a to 0x61f26 (12 bytes) (id=119)
 
     dw $5f2a ; objects
 
-INCBIN "baserom.gbc",$61f26,$20da
+INCBIN "baserom.gbc",$61f26,$61f3e - $61f26
+
+UndergroundPathWE_h: ; 0x61f3e to 0x61f4a (12 bytes) (id=121)
+    db $0b ; tileset
+    db $04, $19 ; dimensions (y, x)
+    dw $41f4, $5f4d, $5f4a ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $5f4e ; objects
+
+INCBIN "baserom.gbc",$61f4a,$20b6
 
 SECTION "bank19",DATA,BANK[$19]
 Tset00_GFX:
