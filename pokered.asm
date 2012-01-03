@@ -14731,7 +14731,17 @@ CeruleanMart_h: ; 0x5c889 to 0x5c895 (12 bytes) (id=67)
 
     dw $48a8 ; objects
 
-INCBIN "baserom.gbc",$5c895,$376b
+INCBIN "baserom.gbc",$5c895,$5c8ce - $5c895
+
+LavenderPokecenter_h: ; 0x5c8ce to 0x5c8da (12 bytes) (id=141)
+    db $06 ; tileset
+    db $04, $07 ; dimensions (y, x)
+    dw $4064, $48e0, $48da ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $48f4 ; objects
+
+INCBIN "baserom.gbc",$5c8da,$3726
 
 SECTION "bank18",DATA,BANK[$18]
 INCBIN "baserom.gbc",$60000,$4000
