@@ -13377,7 +13377,17 @@ MtMoonPokecenter_h: ; 0x492c3 to 0x492cf (12 bytes) (bank=12) (id=68)
 
     dw $5376 ; objects
 
-INCBIN "baserom.gbc",$492CF,$4C000-$492CF
+INCBIN "baserom.gbc",$492cf,$493ae - $492cf
+
+RockTunnelPokecenter_h: ; 0x493ae to 0x493ba (12 bytes) (id=81)
+    db $06 ; tileset
+    db $04, $07 ; dimensions (y, x)
+    dw $40ab, $53c0, $53ba ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $53d4 ; objects
+
+INCBIN "baserom.gbc",$493ba,$2c46
 
 SECTION "bank13",DATA,BANK[$13]
 
