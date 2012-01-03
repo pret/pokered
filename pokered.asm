@@ -14711,7 +14711,17 @@ CeruleanPokecenter_h: ; 0x5c639 to 0x5c645 (12 bytes) (id=64)
 
     dw $465f ; objects
 
-INCBIN "baserom.gbc",$5c645,$39bb
+INCBIN "baserom.gbc",$5c645,$5c6a7 - $5c645
+
+CeruleanGym_h: ; 0x5c6a7 to 0x5c6b3 (12 bytes) (id=65)
+    db $07 ; tileset
+    db $07, $05 ; dimensions (y, x)
+    dw $4866, $474a, $46b3 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $4834 ; objects
+
+INCBIN "baserom.gbc",$5c6b3,$394d
 
 SECTION "bank18",DATA,BANK[$18]
 INCBIN "baserom.gbc",$60000,$4000
