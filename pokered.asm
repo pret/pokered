@@ -14024,7 +14024,17 @@ Mansion3_h: ; 0x521e2 to 0x521ee (12 bytes) (id=215)
 
     dw $62e6 ; objects
 
-INCBIN "baserom.gbc",$521ee,$1e12
+INCBIN "baserom.gbc",$521ee,$523ad - $521ee
+
+Mansion4_h: ; 0x523ad to 0x523b9 (12 bytes) (id=216)
+    db $16 ; tileset
+    db $0e, $0f ; dimensions (y, x)
+    dw $64dd, $6436, $63b9 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $6498 ; objects
+
+INCBIN "baserom.gbc",$523b9,$1c47
 
 SECTION "bank15",DATA,BANK[$15]
 INCBIN "baserom.gbc",$54000,$4000
