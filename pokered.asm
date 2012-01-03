@@ -14556,7 +14556,17 @@ FanClub_h: ; 0x59b64 to 0x59b70 (12 bytes) (id=90)
 
     dw $5c97 ; objects
 
-INCBIN "baserom.gbc",$59b70,$2490
+INCBIN "baserom.gbc",$59b70,$59ce5 - $59b70
+
+SilphCo2_h: ; 0x59ce5 to 0x59cf1 (12 bytes) (id=207)
+    db $16 ; tileset
+    db $09, $0f ; dimensions (y, x)
+    dw $5ec8, $5d86, $5cf1 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $5e66 ; objects
+
+INCBIN "baserom.gbc",$59cf1,$230f
 
 SECTION "bank17",DATA,BANK[$17]
 
