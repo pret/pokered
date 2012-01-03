@@ -13621,7 +13621,17 @@ BattleCenterM_h: ; 0x4fd04 to 0x4fd10 (12 bytes) (id=239)
 
     dw $7d53 ; objects
 
-INCBIN "baserom.gbc",$4fd10,$139
+INCBIN "baserom.gbc",$4fd10,$4fd71 - $4fd10
+
+TradeCenterM_h: ; 0x4fd71 to 0x4fd7d (12 bytes) (id=240)
+    db $15 ; tileset
+    db $04, $05 ; dimensions (y, x)
+    dw $7d91, $7d80, $7d7d ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $7d87 ; objects
+
+INCBIN "baserom.gbc",$4fd7d,$cc
 
 GetPredefPointer: ; 7E49
 ; stores hl in $CC4F,$CC50
