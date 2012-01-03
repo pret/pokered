@@ -14291,7 +14291,17 @@ CeladonMart2_h: ; 0x560e9 to 0x560f5 (12 bytes) (id=123)
 
     dw $6111 ; objects
 
-INCBIN "baserom.gbc",$560f5,$1f0b
+INCBIN "baserom.gbc",$560f5,$56170 - $560f5
+
+FuchsiaHouse3_h: ; 0x56170 to 0x5617c (12 bytes) (id=164)
+    db $0d ; tileset
+    db $04, $04 ; dimensions (y, x)
+    dw $523f, $617f, $617c ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $6221 ; objects
+
+INCBIN "baserom.gbc",$5617c,$1e84
 
 SECTION "bank16",DATA,BANK[$16]
 INCBIN "baserom.gbc",$58000,$4000
