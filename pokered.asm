@@ -155,7 +155,7 @@ MapHeaderPointers: ; $01AE
 	dw RedsHouse1F_h
 	dw RedsHouse2F_h
 	dw BluesHouse_h
-	dw $4b02
+	dw OaksLab_h
 	dw $4251
 	dw $5462
 	dw $5540
@@ -2180,7 +2180,7 @@ MapHeaderBanks: ; 423D
 	db BANK(RedsHouse1F_h)
 	db BANK(RedsHouse2F_h)
 	db BANK(BluesHouse_h)
-	db $07
+	db BANK(OaksLab_h)
 	db $11
 	db $07
 	db $07
@@ -5731,7 +5731,17 @@ MonsterNames: ; 421E
 	db "WEEPINBELL"
 	db "VICTREEBEL"
 
-INCBIN "baserom.gbc",$1C98A,$20000 - $1C98A
+INCBIN "baserom.gbc",$1C98A,$1CB02-$1C98A
+
+OaksLab_h: ; 0x1cb02 to 0x1cb0e (12 bytes) (bank=7) (id=40)
+    db $05 ; tileset
+    db $06, $05 ; dimensions (y, x)
+    dw $41c0, $5082, $4b0e ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $540a ; objects
+
+INCBIN "baserom.gbc",$1CB0E,$20000 - $1CB0E
 
 SECTION "bank8",DATA,BANK[$8]
 INCBIN "baserom.gbc",$20000,$4000
