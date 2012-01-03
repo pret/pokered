@@ -280,7 +280,7 @@ MapHeaderPointers: ; $01AE
 	dw $678d
 	dw $6064
 	dw $6170
-	dw $42a3
+	dw Mansion1_h
 	dw $573e
 	dw $5b80
 	dw $5c15
@@ -2305,7 +2305,7 @@ MapHeaderBanks: ; 423D
 	db $11
 	db $15
 	db $15
-	db $11
+	db BANK(Mansion1_h)
 	db $1D
 	db $1D
 	db $1D
@@ -12826,7 +12826,17 @@ ViridianPokeCenter_h: ; 0x44251 to 0x4425d (12 bytes) (bank=11) (id=41)
 
     dw $4277 ; objects
 
-INCBIN "baserom.gbc",$4425D,$48000-$4425D
+INCBIN "baserom.gbc",$4425D,$442A3-$4425D
+
+Mansion1_h: ; 0x442a3 to 0x442af (12 bytes) (bank=17) (id=165)
+    db $16 ; tileset
+    db $0e, $0f ; dimensions (y, x)
+    dw $43fe, $432c, $42af ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $43a4 ; objects
+
+INCBIN "baserom.gbc",$442AF,$48000-$442AF
 
 SECTION "bank12",DATA,BANK[$12]
 INCBIN "baserom.gbc",$48000,$15C
