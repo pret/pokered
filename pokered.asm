@@ -14994,7 +14994,17 @@ PokemonTower7_h: ; 0x60cf9 to 0x60d05 (12 bytes) (id=148)
 
     dw $4ef6 ; objects
 
-INCBIN "baserom.gbc",$60d05,$32fb
+INCBIN "baserom.gbc",$60d05,$60f7a - $60d05
+
+CeladonMart1_h: ; 0x60f7a to 0x60f86 (12 bytes) (id=122)
+    db $12 ; tileset
+    db $04, $0a ; dimensions (y, x)
+    dw $4fde, $4f89, $4f86 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $4f9e ; objects
+
+INCBIN "baserom.gbc",$60f86,$307a
 
 SECTION "bank19",DATA,BANK[$19]
 Tset00_GFX:
