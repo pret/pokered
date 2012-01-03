@@ -2104,7 +2104,78 @@ Function62CE: ; 62CE, XXX called by 4B2 948 989 5BF9 5D15
 	ld [$D365],a
 	ret
 
-INCBIN "baserom.gbc",$62FF,$778D - $62FF
+incbin "baserom.gbc",$62FF,$6420-$62FF
+
+FirstMapSpec:
+	db $26 ; RedHouse1F
+; Original Format:
+;   [Event Displacement][Y-block][X-block][Y-sub_block][X-sub_block]
+; Macro Format:
+;   FLYWARP_DATA [Map Width][Y-pos][X-pos]
+	FLYWARP_DATA 4,6,3
+	db $04		;Tileset_id
+
+incbin "baserom.gbc",$6428,$6448-$6428
+FlyWarpDataPtr:
+	db $00,0
+        dw Map00FlyWarp
+	db $01,0
+        dw Map01FlyWarp
+	db $02,0
+        dw Map02FlyWarp
+	db $03,0
+        dw Map03FlyWarp
+	db $04,0
+        dw Map04FlyWarp
+	db $05,0
+        dw Map05FlyWarp
+	db $06,0
+        dw Map06FlyWarp
+	db $07,0
+        dw Map07FlyWarp
+	db $08,0
+        dw Map08FlyWarp
+	db $09,0
+        dw Map09FlyWarp
+	db $0A,0
+        dw Map0aFlyWarp
+	db $0F,0
+        dw Map0fFlyWarp
+	db $15,0
+        dw Map15FlyWarp	
+
+; Original Format:
+;   [Event Displacement][Y-block][X-block][Y-sub_block][X-sub_block]
+; Macro Format:
+;   FLYWARP_DATA [Map Width][Y-pos][X-pos]
+Map00FlyWarp:
+	FLYWARP_DATA 10,6,5
+Map01FlyWarp:
+	FLYWARP_DATA 20,26,23
+Map02FlyWarp:
+	FLYWARP_DATA 20,26,13
+Map03FlyWarp:
+	FLYWARP_DATA 20,18,19
+Map04FlyWarp:
+	FLYWARP_DATA 10,6,3
+Map05FlyWarp:
+	FLYWARP_DATA 20,4,11
+Map06FlyWarp:
+	FLYWARP_DATA 25,10,41
+Map07FlyWarp:
+	FLYWARP_DATA 20,28,19
+Map08FlyWarp:
+	FLYWARP_DATA 10,12,11
+Map09FlyWarp:
+	FLYWARP_DATA 10,6,9
+Map0aFlyWarp:
+	FLYWARP_DATA 20,30,9
+Map0fFlyWarp:
+	FLYWARP_DATA 45,6,11
+Map15FlyWarp:
+	FLYWARP_DATA 10,20,11
+
+incbin "baserom.gbc",$64CA,$778D - $64CA
 
 FieldMoveNames: ; 778D
 	db "CUT@"
