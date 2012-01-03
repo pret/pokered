@@ -13984,7 +13984,17 @@ VictoryRoad2_h: ; 0x51791 to 0x5179d (12 bytes) (id=194)
 
     dw $5915 ; objects
 
-INCBIN "baserom.gbc",$5179d,$2863
+INCBIN "baserom.gbc",$5179d,$51a36 - $5179d
+
+MtMoon2_h: ; 0x51a36 to 0x51a42 (12 bytes) (id=60)
+    db $11 ; tileset
+    db $0e, $0e ; dimensions (y, x)
+    dw $5a91, $5a46, $5a42 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $5a4d ; objects
+
+INCBIN "baserom.gbc",$51a42,$25be
 
 SECTION "bank15",DATA,BANK[$15]
 INCBIN "baserom.gbc",$54000,$4000
