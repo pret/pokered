@@ -156,7 +156,7 @@ MapHeaderPointers: ; $01AE
 	dw RedsHouse2F_h
 	dw BluesHouse_h
 	dw OaksLab_h
-	dw $4251
+	dw ViridianPokeCenter_h
 	dw ViridianMart_h
 	dw School_h
 	dw ViridianHouse_h
@@ -2181,7 +2181,7 @@ MapHeaderBanks: ; 423D
 	db BANK(RedsHouse2F_h)
 	db BANK(BluesHouse_h)
 	db BANK(OaksLab_h)
-	db $11
+	db BANK(ViridianPokeCenter_h)
 	db BANK(ViridianMart_h)
 	db BANK(School_h)
 	db BANK(ViridianHouse_h)
@@ -12816,7 +12816,17 @@ LavendarTown_h: ; 0x44000 to 0x4402d (45 bytes) (bank=11) (id=4)
 
     dw $402d ; objects
 
-INCBIN "baserom.gbc",$4402D,$48000-$4402D
+INCBIN "baserom.gbc",$4402D,$44251-$4402D
+
+ViridianPokeCenter_h: ; 0x44251 to 0x4425d (12 bytes) (bank=17) (id=41)
+    db $06 ; tileset
+    db $04, $07 ; dimensions (y, x)
+    dw $40df, $4263, $425d ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $4277 ; objects
+
+INCBIN "baserom.gbc",$4425D,$48000-$4425D
 
 SECTION "bank12",DATA,BANK[$12]
 INCBIN "baserom.gbc",$48000,$15C
