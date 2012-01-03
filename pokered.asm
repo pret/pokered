@@ -240,7 +240,7 @@ MapHeaderPointers: ; $01AE
 	dw $4f7a
 	dw $60e9
 	dw CeladonMart3_h
-	dw $434a
+	dw CeladonMart4_h
 	dw $43c9
 	dw $45f4
 	dw $4688
@@ -2265,7 +2265,7 @@ MapHeaderBanks: ; 423D
 	db $18
 	db $15
 	db BANK(CeladonMart3_h)
-	db $12
+	db BANK(CeladonMart4_h)
 	db $12
 	db $12
 	db $12
@@ -13219,7 +13219,17 @@ CeladonMart3_h: ; 0x48219 to 0x48225 (12 bytes) (bank=12) (id=124)
 
     dw $42c4 ; objects
 
-INCBIN "baserom.gbc",$48225,$4000 - $219 - 12
+INCBIN "baserom.gbc",$48225,$4834A-$48225
+
+CeladonMart4_h: ; 0x4834a to 0x48356 (12 bytes) (bank=12) (id=125)
+    db $12 ; tileset
+    db $04, $0a ; dimensions (y, x)
+    dw $43a1, $4359, $4356 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $4370 ; objects
+
+INCBIN "baserom.gbc",$48356,$4C000-$48356
 
 SECTION "bank13",DATA,BANK[$13]
 
