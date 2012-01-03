@@ -12816,7 +12816,7 @@ LavendarTown_h: ; 0x44000 to 0x4402d (45 bytes) (bank=11) (id=4)
 
     dw $402d ; objects
 
-INCBIN "baserom.gbc",$4402D,$4000-45
+INCBIN "baserom.gbc",$4402D,$48000-$4402D
 
 SECTION "bank12",DATA,BANK[$12]
 INCBIN "baserom.gbc",$48000,$15C
