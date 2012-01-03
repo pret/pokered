@@ -127,7 +127,7 @@ MapHeaderPointers: ; $01AE
 	dw $491e ; INDIGO_PLATEAU
 	dw $49a4 ; SAFFRON_CITY
 	dw $49a4 ; unused
-	dw $40c3 ; ROUTE_1
+	dw Route1_h ; ROUTE_1
 	dw $4000 ; ROUTE_2
 	dw $41e6 ; ROUTE_3
 	dw $4390 ; ROUTE_4
@@ -2152,7 +2152,7 @@ MapHeaderBanks: ; 423D
 	db $14 ; INDIGO_PLATEAU
 	db $14 ; SAFFRON_CITY
 	db $01 ; unused
-	db $07 ; ROUTE_1
+	db BANK(Route1_h) ; ROUTE_1
 	db $15 ; ROUTE_2
 	db $15 ; ROUTE_3
 	db $15 ; ROUTE_4
@@ -5509,7 +5509,35 @@ CinnabarIsland_h: ; 0x1c000 to 0x1c022 (34 bytes) (bank=7) (id=8)
 
     dw $4022 ; objects
 
-INCBIN "baserom.gbc",$1C022,$21E-34
+;INCBIN "baserom.gbc",$1C022,$21E-34
+
+INCBIN "baserom.gbc",$1C022,$1C0C3-$1C022
+
+Route1_h: ; 0x1c0c3 to 0x1c0e5 (34 bytes) (bank=7) (id=12)
+    db $00 ; tileset
+    db $12, $0a ; dimensions (y, x)
+    dw $40fc, $4ab2, $4aaf ; blocks, texts, scripts
+    db NORTH | SOUTH ; connections
+
+    ; connections data
+
+    db $01 ; some map
+    dw $451a, $c6e8 ; pointers (connected, current) (strip)
+    db $10, $14 ; bigness, width
+    db $23, $0a ; alignments (y, x)
+    dw $c8bd ; window
+
+    db $00 ; some map
+    dw $42fd, $c83b ; pointers (connected, current) (strip)
+    db $0a, $0a ; bigness, width
+    db $00, $00 ; alignments (y, x)
+    dw $c6f9 ; window
+
+    ; end connection data
+
+    dw $40e5 ; objects
+
+INCBIN "baserom.gbc",$1C0E5,$1C21E-$1C0E5
 
 MonsterNames: ; 421E
 	db "RHYDON@@@@"
