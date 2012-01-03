@@ -172,7 +172,7 @@ MapHeaderPointers: ; $01AE
 	dw $437b
 	dw PewterHouse1_h
 	dw $4ca1
-	dw $563c
+	dw PewterHouse2_h
 	dw $457b
 	dw $59bc
 	dw $5a36
@@ -2197,7 +2197,7 @@ MapHeaderBanks: ; 423D
 	db $17
 	db BANK(PewterHouse1_h)
 	db $1D
-	db $07
+	db BANK(PewterHouse2_h)
 	db $17
 	db $12
 	db $14
@@ -5781,7 +5781,21 @@ PewterHouse1_h: ; 0x1d5e7 to 0x1d5f3 (12 bytes) (bank=7) (id=55)
 
     dw $5616 ; objects
 
-INCBIN "baserom.gbc",$1D5F3,$20000-$1D5F3
+INCBIN "baserom.gbc",$1D5F3,$1D63C-$1D5F3
+
+PewterHouse2_h: ; 0x1d63c to 0x1d648 (12 bytes) (bank=7) (id=57)
+    db $08 ; tileset
+    db $04, $04 ; dimensions (y, x)
+    dw $41de, $564b, $5648 ; blocks, texts, scripts
+    db $00 ; connections
+
+    ; connections data
+
+    ; end connection data
+
+    dw $5659 ; objects
+
+INCBIN "baserom.gbc",$1D648,$20000-$1D648
 
 SECTION "bank8",DATA,BANK[$8]
 INCBIN "baserom.gbc",$20000,$4000
