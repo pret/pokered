@@ -308,7 +308,7 @@ MapHeaderPointers: ; $01AE
 	dw $586a
 	dw $5969
 	dw $47dd
-	dw $6677
+	dw Route22Gate_h
 	dw $5791
 	dw $5554
 	dw VermilionHouse3_h
@@ -2333,7 +2333,7 @@ MapHeaderBanks: ; 423D
 	db $12
 	db $12
 	db $11
-	db $07
+	db BANK(Route22Gate_h)
 	db $14
 	db $12
 	db $06
@@ -6019,7 +6019,17 @@ Route16House_h: ; 0x1e5ec to 0x1e5f8 (12 bytes) (bank=7) (id=188)
 
     dw $6657 ; objects
 
-INCBIN "baserom.gbc",$1E5F8,$20000-$1E5F8
+INCBIN "baserom.gbc",$1E5F8,$1E677-$1E5F8
+
+Route22Gate_h: ; 0x1e677 to 0x1e683 (12 bytes) (bank=7) (id=193)
+    db $0c ; tileset
+    db $04, $05 ; dimensions (y, x)
+    dw $674a, $66df, $6683 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $6720 ; objects
+
+INCBIN "baserom.gbc",$1E683,$20000-$1E683
 
 SECTION "bank8",DATA,BANK[$8]
 INCBIN "baserom.gbc",$20000,$4000
