@@ -5897,10 +5897,6 @@ FuchsiaMart_h: ; 0x1dd7c to 0x1dd88 (12 bytes) (bank=7) (id=152)
     dw $5dc1, $5d8b, $5d88 ; blocks, texts, scripts
     db $00 ; connections
 
-    ; connections data
-
-    ; end connection data
-
     dw $5d9b ; objects
 
 INCBIN "baserom.gbc",$1DD88,$1DDD1-$1DD88
