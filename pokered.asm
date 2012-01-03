@@ -14271,7 +14271,17 @@ Route21_h: ; 0x54fff to 0x55021 (34 bytes) (id=32)
 
     dw $5021 ; objects
 
-INCBIN "baserom.gbc",$55021,$2fdf
+INCBIN "baserom.gbc",$55021,$56064 - $55021
+
+VermilionHouse2_h: ; 0x56064 to 0x56070 (12 bytes) (id=163)
+    db $08 ; tileset
+    db $04, $04 ; dimensions (y, x)
+    dw $522f, $6073, $6070 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $60cf ; objects
+
+INCBIN "baserom.gbc",$56070,$1f90
 
 SECTION "bank16",DATA,BANK[$16]
 INCBIN "baserom.gbc",$58000,$4000
