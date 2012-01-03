@@ -14801,7 +14801,17 @@ FightingDojo_h: ; 0x5cd51 to 0x5cd5d (12 bytes) (id=177)
 
     dw $4f9b ; objects
 
-INCBIN "baserom.gbc",$5cd5d,$32a3
+INCBIN "baserom.gbc",$5cd5d,$5d001 - $5cd5d
+
+SaffronGym_h: ; 0x5d001 to 0x5d00d (12 bytes) (id=178)
+    db $16 ; tileset
+    db $09, $0a ; dimensions (y, x)
+    dw $53a3, $50ab, $500d ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $5259 ; objects
+
+INCBIN "baserom.gbc",$5d00d,$2ff3
 
 SECTION "bank18",DATA,BANK[$18]
 INCBIN "baserom.gbc",$60000,$4000
