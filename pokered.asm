@@ -5441,8 +5441,6 @@ VermilionHouse3_h: ; 0x19c06 to 0x19c12 (12 bytes) (bank=6) (id=196)
 
 INCBIN "baserom.gbc",$19C12,$19C4F-$19C12
 
-;INCBIN "baserom.gbc",$19C4F,$19C5B-$19C4F
-
 IndigoPlateauLobby_h: ; 0x19c4f to 0x19c5b (12 bytes) (bank=6) (id=174)
     db $02 ; tileset
     db $06, $08 ; dimensions (y, x)
