@@ -351,7 +351,7 @@ MapHeaderPointers: ; $01AE
 	dw $57af
 	dw $612d
 	dw $60ee
-	dw $57b4
+	dw SilphCoElevator_h
 	dw $5ce5
 	dw $5ce5
 	dw $7d04
@@ -2376,7 +2376,7 @@ MapHeaderBanks: ; 423D
 	db $17
 	db $16
 	db $18
-	db $11
+	db BANK(SilphCoElevator_h)
 	db $11
 	db $11
 	db $13
@@ -12926,7 +12926,17 @@ RocketHideoutElevator_h: ; 0x45704 to 0x45710 (12 bytes) (bank=11) (id=203)
 
     dw $5791 ; objects
 
-INCBIN "baserom.gbc",$45710,$48000-$45710
+INCBIN "baserom.gbc",$45710,$457B4-$45710
+
+SilphCoElevator_h: ; 0x457b4 to 0x457c0 (12 bytes) (bank=11) (id=236)
+    db $12 ; tileset
+    db $02, $02 ; dimensions (y, x)
+    dw $585b, $5833, $57c0 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $5844 ; objects
+
+INCBIN "baserom.gbc",$457C0,$48000-$457C0
 
 SECTION "bank12",DATA,BANK[$12]
 INCBIN "baserom.gbc",$48000,$15C
