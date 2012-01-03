@@ -14891,7 +14891,17 @@ UndergroundTunnelEntranceRoute6_h: ; 0x5d6e3 to 0x5d6ef (12 bytes) (id=74)
 
     dw $56fe ; objects
 
-INCBIN "baserom.gbc",$5d6ef,$2911
+INCBIN "baserom.gbc",$5d6ef,$5d720 - $5d6ef
+
+UndergroundPathEntranceRoute7_h: ; 0x5d720 to 0x5d72c (12 bytes) (id=77)
+    db $0c ; tileset
+    db $04, $04 ; dimensions (y, x)
+    dw $4080, $5734, $572c ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $573b ; objects
+
+INCBIN "baserom.gbc",$5d72c,$28d4
 
 SECTION "bank18",DATA,BANK[$18]
 INCBIN "baserom.gbc",$60000,$4000
