@@ -5001,7 +5001,45 @@ PewterCity_h: ; 0x18554 to 0x18576 (34 bytes) (bank=6) (id=2)
 
     dw $4577 ; objects
 
-INCBIN "baserom.gbc",$18576,$18E5B-$18576
+INCBIN "baserom.gbc",$18576,$1874e-$18576
+
+CeruleanCity_h: ; 0x1874e to 0x18786 (56 bytes) (bank=6) (id=3)
+    db $00 ; tileset
+    db $12, $14 ; dimensions (y, x)
+    dw $4830, $562d, $5480 ; blocks, texts, scripts
+    db NORTH | SOUTH | WEST | EAST ; connections
+
+    ; connections data
+
+    db $23 ; some map
+    dw $477d, $c6f0 ; pointers (connected, current) (strip)
+    db $0a, $0a ; bigness, width
+    db $23, $f6 ; alignments (y, x)
+    dw $c809 ; window
+
+    db $10 ; some map
+    dw $45d2, $c912 ; pointers (connected, current) (strip)
+    db $0a, $0a ; bigness, width
+    db $00, $f6 ; alignments (y, x)
+    dw $c6f9 ; window
+
+    db $0f ; some map
+    dw $4416, $c79e ; pointers (connected, current) (strip)
+    db $09, $2d ; bigness, width
+    db $f8, $59 ; alignments (y, x)
+    dw $c748 ; window
+
+    db $14 ; some map
+    dw $46fe, $c7b5 ; pointers (connected, current) (strip)
+    db $09, $1e ; bigness, width
+    db $f8, $00 ; alignments (y, x)
+    dw $c70d ; window
+
+    ; end connection data
+
+    dw $4786 ; objects
+
+INCBIN "baserom.gbc",$18786,$18E5B-$18786
 
 PalletTownScript:
 	ld a,[$D74B]
