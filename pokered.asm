@@ -5927,10 +5927,6 @@ DiglettsCaveRoute2_h: ; 0x1dea4 to 0x1deb0 (12 bytes) (bank=7) (id=46)
     dw $420e, $5eb8, $5eb0 ; blocks, texts, scripts
     db $00 ; connections
 
-    ; connections data
-
-    ; end connection data
-
     dw $5ebf ; objects
 
 INCBIN "baserom.gbc",$1DEB0,$20000-$1DEB0
