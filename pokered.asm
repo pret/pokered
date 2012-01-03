@@ -324,7 +324,7 @@ MapHeaderPointers: ; $01AE
 	dw $5704
 	dw $5ce5
 	dw $5f4f
-	dw $5cff
+	dw SilphCo4_h
 	dw $5f2b
 	dw $619d
 	dw $5b55
@@ -2349,7 +2349,7 @@ MapHeaderBanks: ; 423D
 	db $01
 	db $16
 	db $16
-	db $06
+	db BANK(SilphCo4_h)
 	db $06
 	db $06
 	db $14
@@ -5449,7 +5449,17 @@ IndigoPlateauLobby_h: ; 0x19c4f to 0x19c5b (12 bytes) (bank=6) (id=174)
 
     dw $5c95 ; objects
 
-INCBIN "baserom.gbc",$19C5B,$23A5
+INCBIN "baserom.gbc",$19C5B,$19CFF-$19C5B
+
+SilphCo4_h: ; 0x19cff to 0x19d0b (12 bytes) (bank=6) (id=209)
+    db $16 ; tileset
+    db $09, $0f ; dimensions (y, x)
+    dw $5ea4, $5da0, $5d0b ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $5e35 ; objects
+
+INCBIN "baserom.gbc",$19D0B,$1C000-$19D0B
 
 SECTION "bank7",DATA,BANK[$7]
 INCBIN "baserom.gbc",$1C000,$21E
