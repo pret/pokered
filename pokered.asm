@@ -14811,7 +14811,17 @@ SaffronGym_h: ; 0x5d001 to 0x5d00d (12 bytes) (id=178)
 
     dw $5259 ; objects
 
-INCBIN "baserom.gbc",$5d00d,$2ff3
+INCBIN "baserom.gbc",$5d00d,$5d3fd - $5d00d
+
+SaffronMart_h: ; 0x5d3fd to 0x5d409 (12 bytes) (id=180)
+    db $02 ; tileset
+    db $04, $04 ; dimensions (y, x)
+    dw $4000, $540c, $5409 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $541c ; objects
+
+INCBIN "baserom.gbc",$5d409,$2bf7
 
 SECTION "bank18",DATA,BANK[$18]
 INCBIN "baserom.gbc",$60000,$4000
