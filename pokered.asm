@@ -13397,7 +13397,17 @@ Route11Gate_h: ; 0x49400 to 0x4940c (12 bytes) (id=84)
 
     dw $5416 ; objects
 
-INCBIN "baserom.gbc",$4940c,$2bf4
+INCBIN "baserom.gbc",$4940c,$49448 - $4940c
+
+Route11GateUpstairs_h: ; 0x49448 to 0x49454 (12 bytes) (id=86)
+    db $0c ; tileset
+    db $04, $04 ; dimensions (y, x)
+    dw $40db, $5457, $5454 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $54da ; objects
+
+INCBIN "baserom.gbc",$49454,$2bac
 
 SECTION "bank13",DATA,BANK[$13]
 
