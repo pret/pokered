@@ -14831,7 +14831,17 @@ SilphCo1_h: ; 0x5d442 to 0x5d44e (12 bytes) (id=181)
 
     dw $5470 ; objects
 
-INCBIN "baserom.gbc",$5d44e,$2bb2
+INCBIN "baserom.gbc",$5d44e,$5d529 - $5d44e
+
+SaffronPokecenter_h: ; 0x5d529 to 0x5d535 (12 bytes) (id=182)
+    db $06 ; tileset
+    db $04, $07 ; dimensions (y, x)
+    dw $4064, $553b, $5535 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $554f ; objects
+
+INCBIN "baserom.gbc",$5d535,$2acb
 
 SECTION "bank18",DATA,BANK[$18]
 INCBIN "baserom.gbc",$60000,$4000
