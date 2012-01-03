@@ -15014,7 +15014,17 @@ ViridianForest_h: ; 0x61101 to 0x6110d (12 bytes) (id=51)
 
     dw $51da ; objects
 
-INCBIN "baserom.gbc",$6110d,$2ef3
+INCBIN "baserom.gbc",$6110d,$61259 - $6110d
+
+SSAnne1_h: ; 0x61259 to 0x61265 (12 bytes) (id=95)
+    db $0d ; tileset
+    db $09, $14 ; dimensions (y, x)
+    dw $52df, $5269, $5265 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $5277 ; objects
+
+INCBIN "baserom.gbc",$61265,$2d9b
 
 SECTION "bank19",DATA,BANK[$19]
 Tset00_GFX:
