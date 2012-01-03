@@ -115,7 +115,6 @@ def split_incbin_line_into_three(line, start_address, byte_count):
     third = (start_address + byte_count, end - (start_address + byte_count))
 
     output = ""
-    print "third end is: " + str(third[1])
 
     if first:
         output += "INCBIN \"baserom.gbc\",$" + hex(first[0])[2:] + ",$" + hex(first[1])[2:] + " - $" + hex(first[2])[2:] + "\n"
