@@ -14586,7 +14586,17 @@ SilphCo10_h: ; 0x5a12d to 0x5a139 (12 bytes) (id=234)
 
     dw $61fb ; objects
 
-INCBIN "baserom.gbc",$5a139,$1ec7
+INCBIN "baserom.gbc",$5a139,$5a2a2 - $5a139
+
+Lance_h: ; 0x5a2a2 to 0x5a2ae (12 bytes) (id=113)
+    db $05 ; tileset
+    db $0d, $0d ; dimensions (y, x)
+    dw $63e9, $6395, $62ae ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $63c5 ; objects
+
+INCBIN "baserom.gbc",$5a2ae,$1d52
 
 SECTION "bank17",DATA,BANK[$17]
 
