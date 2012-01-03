@@ -159,7 +159,7 @@ MapHeaderPointers: ; $01AE
 	dw $4251
 	dw ViridianMart_h
 	dw School_h
-	dw $557d
+	dw ViridianHouse_h
 	dw $4897
 	dw $5ea4
 	dw $557b
@@ -2184,7 +2184,7 @@ MapHeaderBanks: ; 423D
 	db $11
 	db BANK(ViridianMart_h)
 	db BANK(School_h)
-	db $07
+	db BANK(ViridianHouse_h)
 	db $1D
 	db $07
 	db $17
@@ -5761,7 +5761,17 @@ School_h: ; 0x1d540 to 0x1d54c (12 bytes) (bank=7) (id=43)
 
     dw $555d ; objects
 
-INCBIN "baserom.gbc",$1D54C,$20000-$1D54C
+INCBIN "baserom.gbc",$1D54C,$1D57D-$1D54C
+
+ViridianHouse_h: ; 0x1d57d to 0x1d589 (12 bytes) (bank=7) (id=44)
+    db $08 ; tileset
+    db $04, $04 ; dimensions (y, x)
+    dw $41de, $558d, $558a ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $55bb ; objects
+
+INCBIN "baserom.gbc",$1D589,$20000-$1D589
 
 SECTION "bank8",DATA,BANK[$8]
 INCBIN "baserom.gbc",$20000,$4000
