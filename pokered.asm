@@ -163,7 +163,7 @@ MapHeaderPointers: ; $01AE
 	dw $4897
 	dw DiglettsCaveRoute2_h
 	dw $557b
-	dw $5ee1
+	dw Route2House_h
 	dw $55c8
 	dw $5650
 	dw $5101
@@ -2188,7 +2188,7 @@ MapHeaderBanks: ; 423D
 	db $1D
 	db BANK(DiglettsCaveRoute2_h)
 	db $17
-	db $07
+	db BANK(Route2House_h)
 	db $17
 	db $17
 	db $18
@@ -5929,7 +5929,17 @@ DiglettsCaveRoute2_h: ; 0x1dea4 to 0x1deb0 (12 bytes) (bank=7) (id=46)
 
     dw $5ebf ; objects
 
-INCBIN "baserom.gbc",$1DEB0,$20000-$1DEB0
+INCBIN "baserom.gbc",$1DEB0,$1DEE1-$1DEB0
+
+Route2House_h: ; 0x1dee1 to 0x1deed (12 bytes) (bank=7) (id=48)
+    db $08 ; tileset
+    db $04, $04 ; dimensions (y, x)
+    dw $41de, $5ef0, $5eed ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $5f07 ; objects
+
+INCBIN "baserom.gbc",$1DEED,$20000-$1DEED
 
 SECTION "bank8",DATA,BANK[$8]
 INCBIN "baserom.gbc",$20000,$4000
