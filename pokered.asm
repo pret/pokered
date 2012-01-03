@@ -14334,7 +14334,31 @@ SilphCo8_h: ; 0x564f8 to 0x56504 (12 bytes) (id=213)
 INCBIN "baserom.gbc",$56504,$1afc
 
 SECTION "bank16",DATA,BANK[$16]
-INCBIN "baserom.gbc",$58000,$4000
+Route6_h: ; 0x58000 to 0x58022 (34 bytes) (id=17)
+    db $00 ; tileset
+    db $12, $0a ; dimensions (y, x)
+    dw $4079, $50c9, $50b0 ; blocks, texts, scripts
+    db NORTH | SOUTH ; connections
+
+    ; connections data
+
+    db $0a ; some map
+    dw $4bc6, $c6e8 ; pointers (connected, current) (strip)
+    db $10, $14 ; bigness, width
+    db $23, $0a ; alignments (y, x)
+    dw $c8bd ; window
+
+    db $05 ; some map
+    dw $4a41, $c838 ; pointers (connected, current) (strip)
+    db $10, $14 ; bigness, width
+    db $00, $0a ; alignments (y, x)
+    dw $c703 ; window
+
+    ; end connection data
+
+    dw $4022 ; objects
+
+INCBIN "baserom.gbc",$58022,$3fde
 
 SECTION "bank17",DATA,BANK[$17]
 
