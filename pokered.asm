@@ -177,14 +177,14 @@ MapHeaderPointers: ; $01AE
 	dw $59bc
 	dw $5a36
 	dw $5cff
-	dw $5679
+	dw CeruleanHouseTrashed_h
 	dw $56ea
 	dw $4639
 	dw $46a7
 	dw $5730
 	dw $4889
 	dw $52c3
-	dw $5679
+	dw CeruleanHouseTrashed_h ; copy of map 62
 	dw $5f27
 	dw $569d
 	dw $6243
@@ -2202,14 +2202,14 @@ MapHeaderBanks: ; 423D
 	db $12
 	db $14
 	db $12
-	db $07
+	db BANK(CeruleanHouseTrashed_h)
 	db $07
 	db $17
 	db $17
 	db $07
 	db $17
 	db $12
-	db $07
+	db BANK(CeruleanHouseTrashed_h) ; copy of map 62
 	db $07
 	db $17
 	db $15
@@ -5795,7 +5795,17 @@ PewterHouse2_h: ; 0x1d63c to 0x1d648 (12 bytes) (bank=7) (id=57)
 
     dw $5659 ; objects
 
-INCBIN "baserom.gbc",$1D648,$20000-$1D648
+INCBIN "baserom.gbc",$1D648,$1D679-$1D648
+
+CeruleanHouseTrashed_h: ; 0x1d679 to 0x1d685 (12 bytes) (bank=7) (id=62)
+    db $08 ; tileset
+    db $04, $04 ; dimensions (y, x)
+    dw $41fe, $5689, $5685 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $56bf ; objects
+
+INCBIN "baserom.gbc",$1D685,$20000-$1D685
 
 SECTION "bank8",DATA,BANK[$8]
 INCBIN "baserom.gbc",$20000,$4000
