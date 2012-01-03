@@ -298,7 +298,7 @@ MapHeaderPointers: ; $01AE
 	dw $53fd
 	dw $5442
 	dw $5529
-	dw $5e30
+	dw SaffronHouse2_h
 	dw $55f6
 	dw $563e
 	dw $56b2
@@ -2323,7 +2323,7 @@ MapHeaderBanks: ; 423D
 	db $17
 	db $17
 	db $17
-	db $07
+	db BANK(SaffronHouse2_h)
 	db $12
 	db $12
 	db $12
@@ -5913,7 +5913,17 @@ SaffronHouse1_h: ; 0x1ddd1 to 0x1dddd (12 bytes) (bank=7) (id=179)
 
     dw $5e04 ; objects
 
-INCBIN "baserom.gbc",$1DDDD,$20000-$1DDDD
+INCBIN "baserom.gbc",$1DDDD,$1DE30-$1DDDD
+
+SaffronHouse2_h: ; 0x1de30 to 0x1de3c (12 bytes) (bank=7) (id=183)
+    db $08 ; tileset
+    db $04, $04 ; dimensions (y, x)
+    dw $41de, $5e3f, $5e3c ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $5e8a ; objects
+
+INCBIN "baserom.gbc",$1DE3C,$20000-$1DE3C
 
 SECTION "bank8",DATA,BANK[$8]
 INCBIN "baserom.gbc",$20000,$4000
