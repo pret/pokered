@@ -120,7 +120,7 @@ MapHeaderPointers: ; $01AE
 	dw PewterCity_h ; PEWTER_CITY
 	dw CeruleanCity_h ; CERULEAN_CITY
 	dw $4000 ; LAVENDER_TOWN
-	dw $4998 ; VERMILION_CITY
+	dw VermilionCity_h ; VERMILION_CITY
 	dw CeladonCity_h ; CELADON_CITY
 	dw FuchsiaCity_h ; FUCHSIA_CITY
 	dw $4000 ; CINNABAR_ISLAND
@@ -2141,13 +2141,13 @@ INCBIN "baserom.gbc",$C000,$C23D - $C000
 ; see also MapHeaderPointers
 MapHeaderBanks: ; 423D
 	db BANK(PalletTown_h)
-	db $06 ; VIRIDIAN_CITY
-	db $06 ; PEWTER_CITY
-	db $06 ; CERULEAN_CITY
+	db BANK(ViridianCity_h) ; VIRIDIAN_CITY
+	db BANK(PewterCity_h) ; PEWTER_CITY
+	db BANK(CeruleanCity_h) ; CERULEAN_CITY
 	db $11 ; LAVENDER_TOWN
-	db $06 ; VERMILION_CITY
-	db $06 ; CELADON_CITY
-	db $06 ; FUCHSIA_CITY
+	db BANK(VermilionCity_h) ; VERMILION_CITY
+	db BANK(CeladonCity_h) ; CELADON_CITY
+	db BANK(FuchsiaCity_h) ; FUCHSIA_CITY
 	db $07 ; CINNABAR_ISLAND
 	db $14 ; INDIGO_PLATEAU
 	db $14 ; SAFFRON_CITY
@@ -5041,7 +5041,7 @@ CeruleanCity_h: ; 0x1874e to 0x18786 (56 bytes) (bank=6) (id=3)
 
 INCBIN "baserom.gbc",$18786,$18998-$18786
 
-LavenderTown_h: ; 0x18998 to 0x189ba (34 bytes) (bank=6) (id=5)
+VermilionCity_h: ; 0x18998 to 0x189ba (34 bytes) (bank=6) (id=5)
     db $00 ; tileset
     db $12, $14 ; dimensions (y, x)
     dw $4a3f, $586f, $57a1 ; blocks, texts, scripts
