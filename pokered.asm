@@ -198,7 +198,7 @@ MapHeaderPointers: ; $01AE
 	dw UndergroundPathEntranceRoute8_h
 	dw $53ae
 	dw $44d0
-	dw $62ba
+	dw PowerPlant_h
 	dw $5400
 	dw $65ae
 	dw $5448
@@ -2223,7 +2223,7 @@ MapHeaderBanks: ; 423D
 	db BANK(UndergroundPathEntranceRoute8_h)
 	db $12
 	db $11
-	db $07
+	db BANK(PowerPlant_h)
 	db $12
 	db $07
 	db $12
@@ -5989,7 +5989,17 @@ UndergroundPathEntranceRoute8_h: ; 0x1e27d to 0x1e289 (12 bytes) (bank=7) (id=80
 
     dw $6298 ; objects
 
-INCBIN "baserom.gbc",$1E289,$20000-$1E289
+INCBIN "baserom.gbc",$1E289,$1E2BA-$1E289
+
+PowerPlant_h: ; 0x1e2ba to 0x1e2c6 (12 bytes) (bank=7) (id=83)
+    db $16 ; tileset
+    db $12, $14 ; dimensions (y, x)
+    dw $6446, $62df, $62c6 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $63bf ; objects
+
+INCBIN "baserom.gbc",$1E2C6,$20000-$1E2C6
 
 SECTION "bank8",DATA,BANK[$8]
 INCBIN "baserom.gbc",$20000,$4000
