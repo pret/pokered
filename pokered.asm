@@ -14037,7 +14037,33 @@ Mansion4_h: ; 0x523ad to 0x523b9 (12 bytes) (id=216)
 INCBIN "baserom.gbc",$523b9,$1c47
 
 SECTION "bank15",DATA,BANK[$15]
-INCBIN "baserom.gbc",$54000,$4000
+INCBIN "baserom.gbc",$54000,$541e6 - $54000
+
+Route3_h: ; 0x541e6 to 0x54208 (34 bytes) (id=14)
+    db $00 ; tileset
+    db $09, $23 ; dimensions (y, x)
+    dw $4255, $5511, $54f8 ; blocks, texts, scripts
+    db NORTH | WEST ; connections
+
+    ; connections data
+
+    db $0f ; some map
+    dw $44fa, $c704 ; pointers (connected, current) (strip)
+    db $0d, $2d ; bigness, width
+    db $11, $ce ; alignments (y, x)
+    dw $c8b4 ; window
+
+    db $02 ; some map
+    dw $460b, $c6e8 ; pointers (connected, current) (strip)
+    db $0f, $14 ; bigness, width
+    db $08, $27 ; alignments (y, x)
+    dw $c716 ; window
+
+    ; end connection data
+
+    dw $4208 ; objects
+
+INCBIN "baserom.gbc",$54208,$3df8
 
 SECTION "bank16",DATA,BANK[$16]
 INCBIN "baserom.gbc",$58000,$4000
