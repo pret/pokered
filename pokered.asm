@@ -294,7 +294,7 @@ MapHeaderPointers: ; $01AE
 	dw $4c65
 	dw $4d51
 	dw $5001
-	dw $5dd1
+	dw SaffronHouse1_h
 	dw $53fd
 	dw $5442
 	dw $5529
@@ -2319,7 +2319,7 @@ MapHeaderBanks: ; 423D
 	db $17
 	db $17
 	db $17
-	db $07
+	db BANK(SaffronHouse1_h)
 	db $17
 	db $17
 	db $17
@@ -5903,7 +5903,17 @@ FuchsiaMart_h: ; 0x1dd7c to 0x1dd88 (12 bytes) (bank=7) (id=152)
 
     dw $5d9b ; objects
 
-INCBIN "baserom.gbc",$1DD88,$20000-$1DD88
+INCBIN "baserom.gbc",$1DD88,$1DDD1-$1DD88
+
+SaffronHouse1_h: ; 0x1ddd1 to 0x1dddd (12 bytes) (bank=7) (id=179)
+    db $08 ; tileset
+    db $04, $04 ; dimensions (y, x)
+    dw $41de, $5de0, $5ddd ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $5e04 ; objects
+
+INCBIN "baserom.gbc",$1DDDD,$20000-$1DDDD
 
 SECTION "bank8",DATA,BANK[$8]
 INCBIN "baserom.gbc",$20000,$4000
