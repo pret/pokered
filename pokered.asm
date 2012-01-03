@@ -239,7 +239,7 @@ MapHeaderPointers: ; $01AE
 	dw $5f3e
 	dw $4f7a
 	dw $60e9
-	dw $4219
+	dw CeladonMart3_h
 	dw $434a
 	dw $43c9
 	dw $45f4
@@ -2264,7 +2264,7 @@ MapHeaderBanks: ; 423D
 	db $18
 	db $18
 	db $15
-	db $12
+	db BANK(CeladonMart3_h)
 	db $12
 	db $12
 	db $12
@@ -13211,7 +13211,15 @@ RedsHouse1FObject:
 RedsHouse1FBlocks:
 	INCBIN "maps/redshouse1f.blk"
 
-INCBIN "baserom.gbc",$48219,$4000 - $219
+CeladonMart3_h: ; 0x48219 to 0x48225 (12 bytes) (bank=12) (id=124)
+    db $12 ; tileset
+    db $04, $0a ; dimensions (y, x)
+    dw $4322, $4228, $4225 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $42c4 ; objects
+
+INCBIN "baserom.gbc",$48225,$4000 - $219 - 12
 
 SECTION "bank13",DATA,BANK[$13]
 
