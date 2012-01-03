@@ -5065,7 +5065,39 @@ LavenderTown_h: ; 0x18998 to 0x189ba (34 bytes) (bank=6) (id=5)
 
     dw $49ba ; objects
 
-INCBIN "baserom.gbc",$189BA,$18E5B-$189BA
+INCBIN "baserom.gbc",$189BA,$18BA7-$189BA
+
+FuchsiaCity_h: ; 0x18ba7 to 0x18bd4 (45 bytes) (bank=6) (id=7)
+    db $00 ; tileset
+    db $12, $14 ; dimensions (y, x)
+    dw $4c86, $5a2e, $5a2b ; blocks, texts, scripts
+    db SOUTH | WEST | EAST ; connections
+
+    ; connections data
+
+    db $1e ; some map
+    dw $4ef1, $c912 ; pointers (connected, current) (strip)
+    db $0a, $0a ; bigness, width
+    db $00, $f6 ; alignments (y, x)
+    dw $c6f9 ; window
+
+    db $1d ; some map
+    dw $4cb2, $c79e ; pointers (connected, current) (strip)
+    db $09, $19 ; bigness, width
+    db $f8, $31 ; alignments (y, x)
+    dw $c720 ; window
+
+    db $1a ; some map
+    dw $49cc, $c7b5 ; pointers (connected, current) (strip)
+    db $09, $1e ; bigness, width
+    db $f8, $00 ; alignments (y, x)
+    dw $c70d ; window
+
+    ; end connection data
+
+    dw $4bd4 ; objects
+
+INCBIN "baserom.gbc",$18BD4,$18E5B-$18BD4
 
 PalletTownScript:
 	ld a,[$D74B]
