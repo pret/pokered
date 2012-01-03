@@ -14771,7 +14771,17 @@ VermilionMart_h: ; 0x5c9d5 to 0x5c9e1 (12 bytes) (id=91)
 
     dw $49f4 ; objects
 
-INCBIN "baserom.gbc",$5c9e1,$361f
+INCBIN "baserom.gbc",$5c9e1,$5ca1a - $5c9e1
+
+VermilionGym_h: ; 0x5ca1a to 0x5ca26 (12 bytes) (id=92)
+    db $07 ; tileset
+    db $09, $05 ; dimensions (y, x)
+    dw $4c38, $4ae8, $4a26 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $4bfe ; objects
+
+INCBIN "baserom.gbc",$5ca26,$35da
 
 SECTION "bank18",DATA,BANK[$18]
 INCBIN "baserom.gbc",$60000,$4000
