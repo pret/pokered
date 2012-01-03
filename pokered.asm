@@ -14924,7 +14924,17 @@ VictoryRoad1_h: ; 0x5d9fe to 0x5da0a (12 bytes) (id=108)
 INCBIN "baserom.gbc",$5da0a,$25f6
 
 SECTION "bank18",DATA,BANK[$18]
-INCBIN "baserom.gbc",$60000,$4000
+INCBIN "baserom.gbc",$60000,$60420 - $60000
+
+PokemonTower1_h: ; 0x60420 to 0x6042c (12 bytes) (id=142)
+    db $0f ; tileset
+    db $09, $0a ; dimensions (y, x)
+    dw $448c, $442f, $442c ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $4452 ; objects
+
+INCBIN "baserom.gbc",$6042c,$3bd4
 
 SECTION "bank19",DATA,BANK[$19]
 Tset00_GFX:
