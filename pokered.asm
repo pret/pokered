@@ -185,7 +185,7 @@ MapHeaderPointers: ; $01AE
 	dw $4889
 	dw $52c3
 	dw CeruleanHouseTrashed_h ; copy of map 62
-	dw $5f27
+	dw Route5Gate_h
 	dw $569d
 	dw $6243
 	dw $6031
@@ -2210,7 +2210,7 @@ MapHeaderBanks: ; 423D
 	db $17
 	db $12
 	db BANK(CeruleanHouseTrashed_h) ; copy of map 62
-	db $07
+	db BANK(Route5Gate_h)
 	db $17
 	db $15
 	db $07
@@ -5939,7 +5939,17 @@ Route2House_h: ; 0x1dee1 to 0x1deed (12 bytes) (bank=7) (id=48)
 
     dw $5f07 ; objects
 
-INCBIN "baserom.gbc",$1DEED,$20000-$1DEED
+INCBIN "baserom.gbc",$1DEED,$1DF27-$1DEED
+
+Route5Gate_h: ; 0x1df27 to 0x1df33 (12 bytes) (bank=7) (id=70)
+    db $0c ; tileset
+    db $03, $04 ; dimensions (y, x)
+    dw $6025, $5fa4, $5f33 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $5ffb ; objects
+
+INCBIN "baserom.gbc",$1DF33,$20000-$1DF33
 
 SECTION "bank8",DATA,BANK[$8]
 INCBIN "baserom.gbc",$20000,$4000
