@@ -208,7 +208,7 @@ MapHeaderPointers: ; $01AE
 	dw $5b64
 	dw $49d5
 	dw $4a1a
-	dw $5af0
+	dw VermilionHouse1_h
 	dw $5b46
 	dw $5259
 	dw $5393
@@ -2233,7 +2233,7 @@ MapHeaderBanks: ; 423D
 	db $16
 	db $17
 	db $17
-	db $07
+	db BANK(VermilionHouse1_h)
 	db $07
 	db $18
 	db $18
@@ -5859,7 +5859,17 @@ NameRater_h: ; 0x1da06 to 0x1da12 (12 bytes) (bank=7) (id=229)
 
     dw $5ad6 ; objects
 
-INCBIN "baserom.gbc",$1DA12,$20000-$1DA12
+INCBIN "baserom.gbc",$1DA12,$1DAF0-$1DA12
+
+VermilionHouse1_h: ; 0x1daf0 to 0x1dafc (12 bytes) (bank=7) (id=93)
+    db $08 ; tileset
+    db $04, $04 ; dimensions (y, x)
+    dw $41de, $5b00, $5afc ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $5b20 ; objects
+
+INCBIN "baserom.gbc",$1DAFC,$20000-$1DAFC
 
 SECTION "bank8",DATA,BANK[$8]
 INCBIN "baserom.gbc",$20000,$4000
