@@ -277,7 +277,7 @@ MapHeaderPointers: ; $01AE
 	dw SeafoamIslands2_h
 	dw SeafoamIslands3_h
 	dw SeafoamIslands4_h
-	dw $678d
+	dw SeafoamIslands5_h
 	dw $6064
 	dw $6170
 	dw Mansion1_h
@@ -2302,7 +2302,7 @@ MapHeaderBanks: ; 423D
 	db BANK(SeafoamIslands2_h)
 	db BANK(SeafoamIslands3_h)
 	db BANK(SeafoamIslands4_h)
-	db $11
+	db BANK(SeafoamIslands5_h)
 	db $15
 	db $15
 	db BANK(Mansion1_h)
@@ -13066,7 +13066,17 @@ SeafoamIslands4_h: ; 0x46581 to 0x4658d (12 bytes) (bank=11) (id=161)
 
     dw $66a6 ; objects
 
-INCBIN "baserom.gbc",$4658D,$48000-$4658D
+INCBIN "baserom.gbc",$4658D,$4678D-$4658D
+
+SeafoamIslands5_h: ; 0x4678d to 0x46799 (12 bytes) (bank=17) (id=162)
+    db $11 ; tileset
+    db $09, $0f ; dimensions (y, x)
+    dw $68fa, $687c, $6799 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $68bc ; objects
+
+INCBIN "baserom.gbc",$46799,$48000-$46799
 
 SECTION "bank12",DATA,BANK[$12]
 INCBIN "baserom.gbc",$48000,$15C
