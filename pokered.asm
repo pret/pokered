@@ -14115,7 +14115,33 @@ Route5_h: ; 0x54581 to 0x545a3 (34 bytes) (id=16)
 
     dw $45a3 ; objects
 
-INCBIN "baserom.gbc",$545a3,$3a5d
+INCBIN "baserom.gbc",$545a3,$54686 - $545a3
+
+Route9_h: ; 0x54686 to 0x546a8 (34 bytes) (id=20)
+    db $00 ; tileset
+    db $09, $1e ; dimensions (y, x)
+    dw $46fe, $56d5, $56bc ; blocks, texts, scripts
+    db WEST | EAST ; connections
+
+    ; connections data
+
+    db $03 ; some map
+    dw $4855, $c6e8 ; pointers (connected, current) (strip)
+    db $0f, $14 ; bigness, width
+    db $08, $27 ; alignments (y, x)
+    dw $c716 ; window
+
+    db $15 ; some map
+    dw $4356, $c775 ; pointers (connected, current) (strip)
+    db $0c, $0a ; bigness, width
+    db $00, $00 ; alignments (y, x)
+    dw $c6f9 ; window
+
+    ; end connection data
+
+    dw $46a8 ; objects
+
+INCBIN "baserom.gbc",$546a8,$3958
 
 SECTION "bank16",DATA,BANK[$16]
 INCBIN "baserom.gbc",$58000,$4000
