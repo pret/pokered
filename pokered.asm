@@ -13487,7 +13487,17 @@ MtMoon1_h: ; 0x499bc to 0x499c8 (12 bytes) (id=59)
 
     dw $5b06 ; objects
 
-INCBIN "baserom.gbc",$499c8,$2638
+INCBIN "baserom.gbc",$499c8,$49cff - $499c8
+
+MtMoon3_h: ; 0x49cff to 0x49d0b (12 bytes) (id=61)
+    db $11 ; tileset
+    db $12, $14 ; dimensions (y, x)
+    dw $6041, $5e34, $5d0b ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $5fdb ; objects
+
+INCBIN "baserom.gbc",$49d0b,$22f5
 
 SECTION "bank13",DATA,BANK[$13]
 
