@@ -5437,10 +5437,6 @@ VermilionHouse3_h: ; 0x19c06 to 0x19c12 (12 bytes) (bank=6) (id=196)
     dw $5c3f, $5c15, $5c12 ; blocks, texts, scripts
     db $00 ; connections
 
-    ; connections data
-
-    ; end connection data
-
     dw $5c25 ; objects
 
 INCBIN "baserom.gbc",$19C12,$4000-$1C18
