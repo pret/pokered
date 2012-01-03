@@ -140,7 +140,7 @@ def map_header_pretty_printer(map_header):
     asm_name = map_name_cleaner(name, id)
     if name == "FREEZE": return "" #skip freeze maps
 
-    tileset = int(map_header["tileset"], base)
+    tileset = map_header["tileset"][2:]
     y = int(map_header["y"], base)
     x = int(map_header["x"], base)
     map_pointer = map_header["map_pointer"]
