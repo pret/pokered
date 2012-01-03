@@ -15004,7 +15004,17 @@ CeladonMart1_h: ; 0x60f7a to 0x60f86 (12 bytes) (id=122)
 
     dw $4f9e ; objects
 
-INCBIN "baserom.gbc",$60f86,$307a
+INCBIN "baserom.gbc",$60f86,$61101 - $60f86
+
+ViridianForest_h: ; 0x61101 to 0x6110d (12 bytes) (id=51)
+    db $03 ; tileset
+    db $18, $11 ; dimensions (y, x)
+    dw $4000, $5126, $510d ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $51da ; objects
+
+INCBIN "baserom.gbc",$6110d,$2ef3
 
 SECTION "bank19",DATA,BANK[$19]
 Tset00_GFX:
