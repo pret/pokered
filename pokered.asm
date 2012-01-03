@@ -13916,7 +13916,27 @@ Route25_h: ; 0x5079b to 0x507b2 (23 bytes) (id=36)
 
     dw $47b2 ; objects
 
-INCBIN "baserom.gbc",$507b2,$384e
+INCBIN "baserom.gbc",$507b2,$5091e - $507b2
+
+IndigoPlateau_h: ; 0x5091e to 0x50935 (23 bytes) (id=9)
+    db $17 ; tileset
+    db $09, $0a ; dimensions (y, x)
+    dw $494a, $4936, $4935 ; blocks, texts, scripts
+    db SOUTH ; connections
+
+    ; connections data
+
+    db $22 ; some map
+    dw $43b2, $c7ab ; pointers (connected, current) (strip)
+    db $0a, $0a ; bigness, width
+    db $00, $00 ; alignments (y, x)
+    dw $c6f9 ; window
+
+    ; end connection data
+
+    dw $4936 ; objects
+
+INCBIN "baserom.gbc",$50935,$36cb
 
 SECTION "bank15",DATA,BANK[$15]
 INCBIN "baserom.gbc",$54000,$4000
