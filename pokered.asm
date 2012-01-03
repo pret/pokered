@@ -14911,7 +14911,17 @@ SilphCo9_h: ; 0x5d7af to 0x5d7bb (12 bytes) (id=233)
 
     dw $593f ; objects
 
-INCBIN "baserom.gbc",$5d7bb,$2845
+INCBIN "baserom.gbc",$5d7bb,$5d9fe - $5d7bb
+
+VictoryRoad1_h: ; 0x5d9fe to 0x5da0a (12 bytes) (id=108)
+    db $11 ; tileset
+    db $09, $0a ; dimensions (y, x)
+    dw $5b04, $5a5f, $5a0a ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $5ab8 ; objects
+
+INCBIN "baserom.gbc",$5da0a,$25f6
 
 SECTION "bank18",DATA,BANK[$18]
 INCBIN "baserom.gbc",$60000,$4000
