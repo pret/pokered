@@ -14741,7 +14741,17 @@ LavenderPokecenter_h: ; 0x5c8ce to 0x5c8da (12 bytes) (id=141)
 
     dw $48f4 ; objects
 
-INCBIN "baserom.gbc",$5c8da,$3726
+INCBIN "baserom.gbc",$5c8da,$5c920 - $5c8da
+
+LavenderMart_h: ; 0x5c920 to 0x5c92c (12 bytes) (id=150)
+    db $02 ; tileset
+    db $04, $04 ; dimensions (y, x)
+    dw $4000, $492f, $492c ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $495d ; objects
+
+INCBIN "baserom.gbc",$5c92c,$36d4
 
 SECTION "bank18",DATA,BANK[$18]
 INCBIN "baserom.gbc",$60000,$4000
