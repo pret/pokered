@@ -14721,7 +14721,17 @@ CeruleanGym_h: ; 0x5c6a7 to 0x5c6b3 (12 bytes) (id=65)
 
     dw $4834 ; objects
 
-INCBIN "baserom.gbc",$5c6b3,$394d
+INCBIN "baserom.gbc",$5c6b3,$5c889 - $5c6b3
+
+CeruleanMart_h: ; 0x5c889 to 0x5c895 (12 bytes) (id=67)
+    db $02 ; tileset
+    db $04, $04 ; dimensions (y, x)
+    dw $4000, $4898, $4895 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $48a8 ; objects
+
+INCBIN "baserom.gbc",$5c895,$376b
 
 SECTION "bank18",DATA,BANK[$18]
 INCBIN "baserom.gbc",$60000,$4000
