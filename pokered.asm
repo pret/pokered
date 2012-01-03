@@ -14596,7 +14596,17 @@ Lance_h: ; 0x5a2a2 to 0x5a2ae (12 bytes) (id=113)
 
     dw $63c5 ; objects
 
-INCBIN "baserom.gbc",$5a2ae,$1d52
+INCBIN "baserom.gbc",$5a2ae,$5a492 - $5a2ae
+
+HallofFameRoom_h: ; 0x5a492 to 0x5a49e (12 bytes) (id=118)
+    db $07 ; tileset
+    db $04, $05 ; dimensions (y, x)
+    dw $658b, $656a, $649e ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $6571 ; objects
+
+INCBIN "baserom.gbc",$5a49e,$1b62
 
 SECTION "bank17",DATA,BANK[$17]
 
