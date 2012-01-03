@@ -200,7 +200,7 @@ MapHeaderPointers: ; $01AE
 	dw $44d0
 	dw PowerPlant_h
 	dw $5400
-	dw $65ae
+	dw DiglettsCaveEntranceRoute11_h
 	dw $5448
 	dw $54f8
 	dw $675e
@@ -2225,7 +2225,7 @@ MapHeaderBanks: ; 423D
 	db $11
 	db BANK(PowerPlant_h)
 	db $12
-	db $07
+	db BANK(DiglettsCaveEntranceRoute11_h)
 	db $12
 	db $12
 	db $07
@@ -5999,7 +5999,17 @@ PowerPlant_h: ; 0x1e2ba to 0x1e2c6 (12 bytes) (bank=7) (id=83)
 
     dw $63bf ; objects
 
-INCBIN "baserom.gbc",$1E2C6,$20000-$1E2C6
+INCBIN "baserom.gbc",$1E2C6,$1E5AE-$1E2C6
+
+DiglettsCaveEntranceRoute11_h: ; 0x1e5ae to 0x1e5ba (12 bytes) (bank=7) (id=85)
+    db $11 ; tileset
+    db $04, $04 ; dimensions (y, x)
+    dw $420e, $65c3, $65ba ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $65ca ; objects
+
+INCBIN "baserom.gbc",$1E5BA,$20000-$1E5BA
 
 SECTION "bank8",DATA,BANK[$8]
 INCBIN "baserom.gbc",$20000,$4000
