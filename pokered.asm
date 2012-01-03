@@ -119,7 +119,7 @@ MapHeaderPointers: ; $01AE
 	dw ViridianCity_h ; VIRIDIAN_CITY
 	dw PewterCity_h ; PEWTER_CITY
 	dw CeruleanCity_h ; CERULEAN_CITY
-	dw $4000 ; LAVENDER_TOWN
+	dw LavendarTown_h ; LAVENDER_TOWN
 	dw VermilionCity_h ; VERMILION_CITY
 	dw CeladonCity_h ; CELADON_CITY
 	dw FuchsiaCity_h ; FUCHSIA_CITY
@@ -2144,7 +2144,7 @@ MapHeaderBanks: ; 423D
 	db BANK(ViridianCity_h) ; VIRIDIAN_CITY
 	db BANK(PewterCity_h) ; PEWTER_CITY
 	db BANK(CeruleanCity_h) ; CERULEAN_CITY
-	db $11 ; LAVENDER_TOWN
+	db BANK(LavendarTown_h) ; LAVENDER_TOWN
 	db BANK(VermilionCity_h) ; VERMILION_CITY
 	db BANK(CeladonCity_h) ; CELADON_CITY
 	db BANK(FuchsiaCity_h) ; FUCHSIA_CITY
@@ -12785,7 +12785,38 @@ OTString67E5: ; 67E5
 	db $73,"№",$F2,"@"
 
 SECTION "bank11",DATA,BANK[$11]
-INCBIN "baserom.gbc",$44000,$4000
+
+LavendarTown_h: ; 0x44000 to 0x4402d (45 bytes) (bank=17) (id=4)
+    db $00 ; tileset
+    db $09, $0a ; dimensions (y, x)
+    dw $4085, $410e, $410b ; blocks, texts, scripts
+    db NORTH | SOUTH | WEST ; connections
+
+    ; connections data
+
+    db $15 ; some map
+    dw $44a0, $c6eb ; pointers (connected, current) (strip)
+    db $0a, $0a ; bigness, width
+    db $47, $00 ; alignments (y, x)
+    dw $c929 ; window
+
+    db $17 ; some map
+    dw $4710, $c7ab ; pointers (connected, current) (strip)
+    db $0a, $0a ; bigness, width
+    db $00, $00 ; alignments (y, x)
+    dw $c6f9 ; window
+
+    db $13 ; some map
+    dw $41e1, $c718 ; pointers (connected, current) (strip)
+    db $09, $1e ; bigness, width
+    db $00, $3b ; alignments (y, x)
+    dw $c72a ; window
+
+    ; end connection data
+
+    dw $402d ; objects
+
+INCBIN "baserom.gbc",$4402D,$4000-45
 
 SECTION "bank12",DATA,BANK[$12]
 INCBIN "baserom.gbc",$48000,$15C
