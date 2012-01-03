@@ -117,12 +117,12 @@ INCBIN "baserom.gbc",$150,$1AE - $150
 MapHeaderPointers: ; $01AE
 	dw PalletTown_h ; PALLET_TOWN
 	dw ViridianCity_h ; VIRIDIAN_CITY
-	dw $4554 ; PEWTER_CITY
-	dw $474e ; CERULEAN_CITY
+	dw PewterCity_h ; PEWTER_CITY
+	dw CeruleanCity_h ; CERULEAN_CITY
 	dw $4000 ; LAVENDER_TOWN
 	dw $4998 ; VERMILION_CITY
 	dw CeladonCity_h ; CELADON_CITY
-	dw $4ba7 ; FUCHSIA_CITY
+	dw FuchsiaCity_h ; FUCHSIA_CITY
 	dw $4000 ; CINNABAR_ISLAND
 	dw $491e ; INDIGO_PLATEAU
 	dw $49a4 ; SAFFRON_CITY
