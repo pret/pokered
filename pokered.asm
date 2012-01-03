@@ -121,7 +121,7 @@ MapHeaderPointers: ; $01AE
 	dw $474e ; CERULEAN_CITY
 	dw $4000 ; LAVENDER_TOWN
 	dw $4998 ; VERMILION_CITY
-	dw $4000 ; CELADON_CITY
+	dw CeladonCity_h
 	dw $4ba7 ; FUCHSIA_CITY
 	dw $4000 ; CINNABAR_ISLAND
 	dw $491e ; INDIGO_PLATEAU
@@ -4866,7 +4866,32 @@ SECTION "bank5",DATA,BANK[$5]
 INCBIN "baserom.gbc",$14000,$4000
 
 SECTION "bank6",DATA,BANK[$6]
-INCBIN "baserom.gbc",$18000,$2A1
+
+CeladonCity_h: ; 0x18000
+    db $00 ; tileset
+    db $12,$19 ; dimensions
+    dw $40df, $5966, $5956 ; blocks, texts, scripts
+    db WEST | EAST ; connections
+
+    ; connection data
+
+    db $1B ; some map
+    dw $4B95, $C7C1 ; pointers (connected, current) (strip)
+    db $09, $14 ; bigness, width
+    db $F8, $27 ; alignments (y, x)
+    dw $C716 ; window
+
+    db $12 ; some map
+    dw $4051, $C7DD ; pointers (connected, current) (strip)
+    db $09, $0A ; bigness, width
+    db $F8, $00 ; alignments (y, x)
+    dw $C6F9 ; window
+
+    ; end connection data
+
+    dw $4022 ; objects
+
+INCBIN "baserom.gbc",$18022,$2A1-$22
 
 PalletTown_h:
 	db $00 ; tileset
