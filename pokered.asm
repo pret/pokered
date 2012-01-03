@@ -247,7 +247,7 @@ MapHeaderPointers: ; $01AE
 	dw $472e
 	dw $4784
 	dw $485f
-	dw $5d2e
+	dw CeladonMansion5_h
 	dw $48ac
 	dw $48fe
 	dw $4bb1
@@ -2272,7 +2272,7 @@ MapHeaderBanks: ; 423D
 	db $12
 	db $12
 	db $12
-	db $07
+	db BANK(CeladonMansion5_h)
 	db $12
 	db $12
 	db $12
@@ -5879,7 +5879,17 @@ VermilionDock_h: ; 0x1db46 to 0x1db52 (12 bytes) (bank=7) (id=94)
 
     dw $5cc6 ; objects
 
-INCBIN "baserom.gbc",$1DB52,$20000-$1DB52
+INCBIN "baserom.gbc",$1DB52,$1DD2E-$1DB52
+
+CeladonMansion5_h: ; 0x1dd2e to 0x1dd3a (12 bytes) (bank=7) (id=132)
+    db $08 ; tileset
+    db $04, $04 ; dimensions (y, x)
+    dw $41ee, $5d3d, $5d3a ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $5d5c ; objects
+
+INCBIN "baserom.gbc",$1DD3A,$20000-$1DD3A
 
 SECTION "bank8",DATA,BANK[$8]
 INCBIN "baserom.gbc",$20000,$4000
