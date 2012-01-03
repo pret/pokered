@@ -6,6 +6,20 @@ FuncCoord: MACRO
 Coord = $C3A0 + 20 * \2 + \1
 	ENDM
 
+;\1 = Map Width
+;\2 = Rows above (Y-blocks)
+;\3 = X movement (X-blocks)
+EVENT_DISP: MACRO
+	dw ($C6EF + (\1) + ((\1) + 6) * ((\2) >> 1) + ((\3) >> 1)) ; Ev.Disp
+	db \2,\3	;Y,X
+	ENDM
+
+FLYWARP_DATA: MACRO
+	EVENT_DISP \1,\2,\3
+	db ((\2) & $01)	;sub-block Y
+	db ((\3) & $01)	;sub-block X
+	ENDM
+        
 ; external map entry macro
 EMAP: MACRO ; emap x-coordinate,y-coordinate,textpointer
 ; the appearance of towns and routes in the town map, indexed by map id
