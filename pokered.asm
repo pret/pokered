@@ -14841,7 +14841,17 @@ SaffronPokecenter_h: ; 0x5d529 to 0x5d535 (12 bytes) (id=182)
 
     dw $554f ; objects
 
-INCBIN "baserom.gbc",$5d535,$2acb
+INCBIN "baserom.gbc",$5d535,$5d57b - $5d535
+
+ViridianForestexit_h: ; 0x5d57b to 0x5d587 (12 bytes) (id=47)
+    db $09 ; tileset
+    db $04, $05 ; dimensions (y, x)
+    dw $4090, $558a, $5587 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $5598 ; objects
+
+INCBIN "baserom.gbc",$5d587,$2a79
 
 SECTION "bank18",DATA,BANK[$18]
 INCBIN "baserom.gbc",$60000,$4000
