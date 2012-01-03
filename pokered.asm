@@ -14851,7 +14851,17 @@ ViridianForestexit_h: ; 0x5d57b to 0x5d587 (12 bytes) (id=47)
 
     dw $5598 ; objects
 
-INCBIN "baserom.gbc",$5d587,$2a79
+INCBIN "baserom.gbc",$5d587,$5d5c8 - $5d587
+
+Route2Gate_h: ; 0x5d5c8 to 0x5d5d4 (12 bytes) (id=49)
+    db $0c ; tileset
+    db $04, $05 ; dimensions (y, x)
+    dw $4090, $55d7, $55d4 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $5620 ; objects
+
+INCBIN "baserom.gbc",$5d5d4,$2a2c
 
 SECTION "bank18",DATA,BANK[$18]
 INCBIN "baserom.gbc",$60000,$4000
