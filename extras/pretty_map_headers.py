@@ -124,7 +124,7 @@ def connection_pretty_printer(connections):
         window_pointer = connection["window_pointer"][2:]
 
         output += spacing + "db $" + map_id + " ; some map\n"
-        output += spacing + "db $" + connected_map_tile_pointer + ", $" + current_map_tile_pointer + " ; pointers (connected, current) (strip)\n"
+        output += spacing + "dw $" + connected_map_tile_pointer + ", $" + current_map_tile_pointer + " ; pointers (connected, current) (strip)\n"
         output += spacing + "db $" + bigness + ", $" + width + " ; bigness, width\n"
         output += spacing + "db $" + y + ", $" + x + " ; alignments (y, x)\n"
         output += spacing + "dw $" + window_pointer + " ; window\n\n"
