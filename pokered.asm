@@ -14791,7 +14791,17 @@ CopycatsHouseF2_h: ; 0x5cc65 to 0x5cc71 (12 bytes) (id=176)
 
     dw $4d21 ; objects
 
-INCBIN "baserom.gbc",$5cc71,$338f
+INCBIN "baserom.gbc",$5cc71,$5cd51 - $5cc71
+
+FightingDojo_h: ; 0x5cd51 to 0x5cd5d (12 bytes) (id=177)
+    db $05 ; tileset
+    db $06, $05 ; dimensions (y, x)
+    dw $4fe3, $4e03, $4d5d ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $4f9b ; objects
+
+INCBIN "baserom.gbc",$5cd5d,$32a3
 
 SECTION "bank18",DATA,BANK[$18]
 INCBIN "baserom.gbc",$60000,$4000
