@@ -14901,7 +14901,17 @@ UndergroundPathEntranceRoute7_h: ; 0x5d720 to 0x5d72c (12 bytes) (id=77)
 
     dw $573b ; objects
 
-INCBIN "baserom.gbc",$5d72c,$28d4
+INCBIN "baserom.gbc",$5d72c,$5d7af - $5d72c
+
+SilphCo9_h: ; 0x5d7af to 0x5d7bb (12 bytes) (id=233)
+    db $16 ; tileset
+    db $09, $0d ; dimensions (y, x)
+    dw $5989, $588b, $57bb ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $593f ; objects
+
+INCBIN "baserom.gbc",$5d7bb,$2845
 
 SECTION "bank18",DATA,BANK[$18]
 INCBIN "baserom.gbc",$60000,$4000
