@@ -14468,7 +14468,33 @@ Route12_h: ; 0x5866d to 0x5869a (45 bytes) (id=23)
 
     dw $469a ; objects
 
-INCBIN "baserom.gbc",$5869a,$3966
+INCBIN "baserom.gbc",$5869a,$5892c - $5869a
+
+Route15_h: ; 0x5892c to 0x5894e (34 bytes) (id=26)
+    db $00 ; tileset
+    db $09, $1e ; dimensions (y, x)
+    dw $49cc, $57c7, $57ae ; blocks, texts, scripts
+    db WEST | EAST ; connections
+
+    ; connections data
+
+    db $07 ; some map
+    dw $4cab, $c6e8 ; pointers (connected, current) (strip)
+    db $0f, $14 ; bigness, width
+    db $08, $27 ; alignments (y, x)
+    dw $c716 ; window
+
+    db $19 ; some map
+    dw $4aa8, $c709 ; pointers (connected, current) (strip)
+    db $0c, $0a ; bigness, width
+    db $24, $00 ; alignments (y, x)
+    dw $c6f9 ; window
+
+    ; end connection data
+
+    dw $494e ; objects
+
+INCBIN "baserom.gbc",$5894e,$36b2
 
 SECTION "bank17",DATA,BANK[$17]
 
