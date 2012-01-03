@@ -16087,7 +16087,17 @@ ViridianGym_h: ; 0x74897 to 0x748a3 (12 bytes) (id=45)
 
     dw $4bde ; objects
 
-INCBIN "baserom.gbc",$748a3,$375d
+INCBIN "baserom.gbc",$748a3,$74ca1 - $748a3
+
+PewterMart_h: ; 0x74ca1 to 0x74cad (12 bytes) (id=56)
+    db $02 ; tileset
+    db $04, $04 ; dimensions (y, x)
+    dw $4010, $4cb6, $4cad ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $4cda ; objects
+
+INCBIN "baserom.gbc",$74cad,$3353
 
 SECTION "bank1E",DATA,BANK[$1E]
 INCBIN "baserom.gbc",$78000,$F1
