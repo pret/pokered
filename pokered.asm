@@ -267,7 +267,7 @@ MapHeaderPointers: ; $01AE
 	dw LavenderHouse1_h
 	dw $4920
 	dw LavenderHouse2_h
-	dw $5d7c
+	dw FuchsiaMart_h
 	dw $500c
 	dw $5057
 	dw $50a9
@@ -2292,7 +2292,7 @@ MapHeaderBanks: ; 423D
 	db BANK(LavenderHouse1_h)
 	db $17
 	db BANK(LavenderHouse2_h)
-	db $07
+	db BANK(FuchsiaMart_h)
 	db $1D
 	db $1D
 	db $1D
@@ -5889,7 +5889,21 @@ CeladonMansion5_h: ; 0x1dd2e to 0x1dd3a (12 bytes) (bank=7) (id=132)
 
     dw $5d5c ; objects
 
-INCBIN "baserom.gbc",$1DD3A,$20000-$1DD3A
+INCBIN "baserom.gbc",$1DD3A,$1DD7C-$1DD3A
+
+FuchsiaMart_h: ; 0x1dd7c to 0x1dd88 (12 bytes) (bank=7) (id=152)
+    db $02 ; tileset
+    db $04, $04 ; dimensions (y, x)
+    dw $5dc1, $5d8b, $5d88 ; blocks, texts, scripts
+    db $00 ; connections
+
+    ; connections data
+
+    ; end connection data
+
+    dw $5d9b ; objects
+
+INCBIN "baserom.gbc",$1DD88,$20000-$1DD88
 
 SECTION "bank8",DATA,BANK[$8]
 INCBIN "baserom.gbc",$20000,$4000
