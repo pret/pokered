@@ -14546,7 +14546,17 @@ Route18_h: ; 0x58c38 to 0x58c5a (34 bytes) (id=29)
 
     dw $4c5a ; objects
 
-INCBIN "baserom.gbc",$58c5a,$33a6
+INCBIN "baserom.gbc",$58c5a,$59b64 - $58c5a
+
+FanClub_h: ; 0x59b64 to 0x59b70 (12 bytes) (id=90)
+    db $10 ; tileset
+    db $04, $04 ; dimensions (y, x)
+    dw $5cd5, $5b84, $5b70 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $5c97 ; objects
+
+INCBIN "baserom.gbc",$59b70,$2490
 
 SECTION "bank17",DATA,BANK[$17]
 
