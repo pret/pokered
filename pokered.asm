@@ -181,7 +181,7 @@ MapHeaderPointers: ; $01AE
 	dw CeruleanHouse2_h
 	dw $4639
 	dw $46a7
-	dw $5730
+	dw BikeShop_h
 	dw $4889
 	dw $52c3
 	dw CeruleanHouseTrashed_h ; copy of map 62
@@ -2206,7 +2206,7 @@ MapHeaderBanks: ; 423D
 	db BANK(CeruleanHouse2_h)
 	db $17
 	db $17
-	db $07
+	db BANK(BikeShop_h)
 	db $17
 	db $12
 	db BANK(CeruleanHouseTrashed_h) ; copy of map 62
@@ -5815,7 +5815,21 @@ CeruleanHouse2_h: ; 0x1d6ea to 0x1d6f6 (12 bytes) (bank=7) (id=63)
 
     dw $5710 ; objects
 
-INCBIN "baserom.gbc",$1D6F6,$20000-$1D6F6
+INCBIN "baserom.gbc",$1D6F6,$1D730-$1D6F6
+
+BikeShop_h: ; 0x1d730 to 0x1d73c (12 bytes) (bank=7) (id=66)
+    db $15 ; tileset
+    db $04, $04 ; dimensions (y, x)
+    dw $588c, $573f, $573c ; blocks, texts, scripts
+    db $00 ; connections
+
+    ; connections data
+
+    ; end connection data
+
+    dw $5866 ; objects
+
+INCBIN "baserom.gbc",$1D73C,$20000-$1D73C
 
 SECTION "bank8",DATA,BANK[$8]
 INCBIN "baserom.gbc",$20000,$4000
