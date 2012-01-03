@@ -5843,10 +5843,6 @@ LavenderHouse2_h: ; 0x1d9a2 to 0x1d9ae (12 bytes) (bank=7) (id=151)
     dw $41de, $59b2, $59ae ; blocks, texts, scripts
     db $00 ; connections
 
-    ; connections data
-
-    ; end connection data
-
     dw $59e6 ; objects
 
 INCBIN "baserom.gbc",$1D9AE,$1DA06-$1D9AE
