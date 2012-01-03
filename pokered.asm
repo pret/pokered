@@ -14671,7 +14671,17 @@ MuseumF1_h: ; 0x5c0eb to 0x5c0f7 (12 bytes) (id=52)
 
     dw $42c1 ; objects
 
-INCBIN "baserom.gbc",$5c0f7,$3f09
+INCBIN "baserom.gbc",$5c0f7,$5c30b - $5c0f7
+
+MuseumF2_h: ; 0x5c30b to 0x5c317 (12 bytes) (id=53)
+    db $0a ; tileset
+    db $04, $07 ; dimensions (y, x)
+    dw $4048, $431a, $4317 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $434b ; objects
+
+INCBIN "baserom.gbc",$5c317,$3ce9
 
 SECTION "bank18",DATA,BANK[$18]
 INCBIN "baserom.gbc",$60000,$4000
