@@ -5039,7 +5039,33 @@ CeruleanCity_h: ; 0x1874e to 0x18786 (56 bytes) (bank=6) (id=3)
 
     dw $4786 ; objects
 
-INCBIN "baserom.gbc",$18786,$18E5B-$18786
+INCBIN "baserom.gbc",$18786,$18998-$18786
+
+LavenderTown_h: ; 0x18998 to 0x189ba (34 bytes) (bank=6) (id=5)
+    db $00 ; tileset
+    db $12, $14 ; dimensions (y, x)
+    dw $4a3f, $586f, $57a1 ; blocks, texts, scripts
+    db NORTH | EAST ; connections
+
+    ; connections data
+
+    db $11 ; some map
+    dw $410f, $c6f0 ; pointers (connected, current) (strip)
+    db $0a, $0a ; bigness, width
+    db $23, $f6 ; alignments (y, x)
+    dw $c809 ; window
+
+    db $16 ; some map
+    dw $455f, $c7b5 ; pointers (connected, current) (strip)
+    db $09, $1e ; bigness, width
+    db $f8, $00 ; alignments (y, x)
+    dw $c70d ; window
+
+    ; end connection data
+
+    dw $49ba ; objects
+
+INCBIN "baserom.gbc",$189BA,$18E5B-$189BA
 
 PalletTownScript:
 	ld a,[$D74B]
