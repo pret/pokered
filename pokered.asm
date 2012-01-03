@@ -212,7 +212,7 @@ MapHeaderPointers: ; $01AE
 	dw VermilionDock_h
 	dw $5259
 	dw $5393
-	dw $4926
+	dw SSAnne3_h
 	dw $5622
 	dw $56a2
 	dw $57a7
@@ -2237,7 +2237,7 @@ MapHeaderBanks: ; 423D
 	db BANK(VermilionDock_h)
 	db $18
 	db $18
-	db $11
+	db BANK(SSAnne3_h)
 	db $18
 	db $18
 	db $18
@@ -12856,7 +12856,17 @@ SeafoamIslands1_h: ; 0x447dd to 0x447e9 (12 bytes) (bank=11) (id=192)
 
     dw $484f ; objects
 
-INCBIN "baserom.gbc",$447E9,$48000-$447E9
+INCBIN "baserom.gbc",$447E9,$44926-$447E9
+
+SSAnne3_h: ; 0x44926 to 0x44932 (12 bytes) (bank=11) (id=97)
+    db $0d ; tileset
+    db $03, $0a ; dimensions (y, x)
+    dw $4956, $4935, $4932 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $493c ; objects
+
+INCBIN "baserom.gbc",$44932,$48000-$44932
 
 SECTION "bank12",DATA,BANK[$12]
 INCBIN "baserom.gbc",$48000,$15C
