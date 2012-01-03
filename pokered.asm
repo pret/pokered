@@ -191,7 +191,7 @@ MapHeaderPointers: ; $01AE
 	dw Route6Gate_h
 	dw $56e3
 	dw $56e3
-	dw $60f4
+	dw Route7Gate_h
 	dw $5720
 	dw $575d
 	dw $61bb
@@ -2216,7 +2216,7 @@ MapHeaderBanks: ; 423D
 	db BANK(Route6Gate_h)
 	db $17
 	db $17
-	db $07
+	db BANK(Route7Gate_h)
 	db $17
 	db $17
 	db $07
@@ -5959,7 +5959,17 @@ Route6Gate_h: ; 0x1e031 to 0x1e03d (12 bytes) (bank=7) (id=73)
 
     dw $60be ; objects
 
-INCBIN "baserom.gbc",$1E03D,$20000-$1E03D
+INCBIN "baserom.gbc",$1E03D,$1E0F4-$1E03D
+
+Route7Gate_h: ; 0x1e0f4 to 0x1e100 (12 bytes) (bank=7) (id=76)
+    db $0c ; tileset
+    db $04, $03 ; dimensions (y, x)
+    dw $61af, $617f, $6100 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $6185 ; objects
+
+INCBIN "baserom.gbc",$1E100,$20000-$1E100
 
 SECTION "bank8",DATA,BANK[$8]
 INCBIN "baserom.gbc",$20000,$4000
