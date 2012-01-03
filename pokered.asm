@@ -13507,7 +13507,17 @@ SafariZoneWest_h: ; 0x4a1a9 to 0x4a1b5 (12 bytes) (id=219)
 
     dw $61dc ; objects
 
-INCBIN "baserom.gbc",$4a1b5,$1e4b
+INCBIN "baserom.gbc",$4a1b5,$4a30b - $4a1b5
+
+SafariZoneSecretHouse_h: ; 0x4a30b to 0x4a317 (12 bytes) (id=222)
+    db $14 ; tileset
+    db $04, $04 ; dimensions (y, x)
+    dw $637f, $631a, $6317 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $6365 ; objects
+
+INCBIN "baserom.gbc",$4a317,$1ce9
 
 SECTION "bank13",DATA,BANK[$13]
 
