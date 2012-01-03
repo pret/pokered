@@ -14691,7 +14691,17 @@ PewterGym_h: ; 0x5c37b to 0x5c387 (12 bytes) (id=54)
 
     dw $452e ; objects
 
-INCBIN "baserom.gbc",$5c387,$3c79
+INCBIN "baserom.gbc",$5c387,$5c57b - $5c387
+
+PewterPokeCenter_h: ; 0x5c57b to 0x5c587 (12 bytes) (id=58)
+    db $06 ; tileset
+    db $04, $07 ; dimensions (y, x)
+    dw $4064, $458d, $4587 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $460d ; objects
+
+INCBIN "baserom.gbc",$5c587,$3a79
 
 SECTION "bank18",DATA,BANK[$18]
 INCBIN "baserom.gbc",$60000,$4000
