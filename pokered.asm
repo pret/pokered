@@ -16077,7 +16077,17 @@ CredPAAD:
 TheEndGfx: ; 473E
 	INCBIN "gfx/theend.2bpp"
 
-INCBIN "baserom.gbc",$747DE,$4000 - $7DE
+INCBIN "baserom.gbc",$747de,$74897 - $747de
+
+ViridianGym_h: ; 0x74897 to 0x748a3 (12 bytes) (id=45)
+    db $07 ; tileset
+    db $09, $0a ; dimensions (y, x)
+    dw $4c47, $49ec, $48a3 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $4bde ; objects
+
+INCBIN "baserom.gbc",$748a3,$375d
 
 SECTION "bank1E",DATA,BANK[$1E]
 INCBIN "baserom.gbc",$78000,$F1
