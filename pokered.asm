@@ -157,7 +157,7 @@ MapHeaderPointers: ; $01AE
 	dw BluesHouse_h
 	dw OaksLab_h
 	dw $4251
-	dw $5462
+	dw ViridianMart_h
 	dw $5540
 	dw $557d
 	dw $4897
@@ -2182,7 +2182,7 @@ MapHeaderBanks: ; 423D
 	db BANK(BluesHouse_h)
 	db BANK(OaksLab_h)
 	db $11
-	db $07
+	db BANK(ViridianMart_h)
 	db $07
 	db $07
 	db $1D
@@ -5741,7 +5741,17 @@ OaksLab_h: ; 0x1cb02 to 0x1cb0e (12 bytes) (bank=7) (id=40)
 
     dw $540a ; objects
 
-INCBIN "baserom.gbc",$1CB0E,$20000 - $1CB0E
+INCBIN "baserom.gbc",$1CB0E,$1D462-$1CB0E
+
+ViridianMart_h: ; 0x1d462 to 0x1d46e (12 bytes) (bank=7) (id=42)
+    db $02 ; tileset
+    db $04, $04 ; dimensions (y, x)
+    dw $5530, $54e0, $546e ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $550a ; objects
+
+INCBIN "baserom.gbc",$1D46E,$20000-$1D46E
 
 SECTION "bank8",DATA,BANK[$8]
 INCBIN "baserom.gbc",$20000,$4000
