@@ -14861,7 +14861,17 @@ Route2Gate_h: ; 0x5d5c8 to 0x5d5d4 (12 bytes) (id=49)
 
     dw $5620 ; objects
 
-INCBIN "baserom.gbc",$5d5d4,$2a2c
+INCBIN "baserom.gbc",$5d5d4,$5d650 - $5d5d4
+
+ViridianForestEntrance_h: ; 0x5d650 to 0x5d65c (12 bytes) (id=50)
+    db $09 ; tileset
+    db $04, $05 ; dimensions (y, x)
+    dw $4090, $565f, $565c ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $566d ; objects
+
+INCBIN "baserom.gbc",$5d65c,$29a4
 
 SECTION "bank18",DATA,BANK[$18]
 INCBIN "baserom.gbc",$60000,$4000
