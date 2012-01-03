@@ -14681,7 +14681,17 @@ MuseumF2_h: ; 0x5c30b to 0x5c317 (12 bytes) (id=53)
 
     dw $434b ; objects
 
-INCBIN "baserom.gbc",$5c317,$3ce9
+INCBIN "baserom.gbc",$5c317,$5c37b - $5c317
+
+PewterGym_h: ; 0x5c37b to 0x5c387 (12 bytes) (id=54)
+    db $07 ; tileset
+    db $07, $05 ; dimensions (y, x)
+    dw $4558, $4435, $4387 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $452e ; objects
+
+INCBIN "baserom.gbc",$5c387,$3c79
 
 SECTION "bank18",DATA,BANK[$18]
 INCBIN "baserom.gbc",$60000,$4000
