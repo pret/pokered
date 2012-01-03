@@ -5459,8 +5459,6 @@ SilphCo4_h: ; 0x19cff to 0x19d0b (12 bytes) (bank=6) (id=209)
 
     dw $5e35 ; objects
 
-;INCBIN "baserom.gbc",$19D0B,$1C000-$19D0B
-
 INCBIN "baserom.gbc",$19D0B,$19F2B-$19D0B
 
 SilphCo5_h: ; 0x19f2b to 0x19f37 (12 bytes) (bank=6) (id=210)
