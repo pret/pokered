@@ -123,7 +123,7 @@ MapHeaderPointers: ; $01AE
 	dw VermilionCity_h ; VERMILION_CITY
 	dw CeladonCity_h ; CELADON_CITY
 	dw FuchsiaCity_h ; FUCHSIA_CITY
-	dw $4000 ; CINNABAR_ISLAND
+	dw CinnabarIsland_h ; CINNABAR_ISLAND
 	dw $491e ; INDIGO_PLATEAU
 	dw $49a4 ; SAFFRON_CITY
 	dw $49a4 ; unused
@@ -2148,7 +2148,7 @@ MapHeaderBanks: ; 423D
 	db BANK(VermilionCity_h) ; VERMILION_CITY
 	db BANK(CeladonCity_h) ; CELADON_CITY
 	db BANK(FuchsiaCity_h) ; FUCHSIA_CITY
-	db $07 ; CINNABAR_ISLAND
+	db BANK(CinnabarIsland_h) ; CINNABAR_ISLAND
 	db $14 ; INDIGO_PLATEAU
 	db $14 ; SAFFRON_CITY
 	db $01 ; unused
@@ -5484,7 +5484,32 @@ SilphCo6_h: ; 0x1a19d to 0x1a1a9 (12 bytes) (bank=6) (id=211)
 INCBIN "baserom.gbc",$1A1A9,$1C000-$1A1A9
 
 SECTION "bank7",DATA,BANK[$7]
-INCBIN "baserom.gbc",$1C000,$21E
+
+CinnabarIsland_h: ; 0x1c000 to 0x1c022 (34 bytes) (bank=7) (id=8)
+    db $00 ; tileset
+    db $09, $0a ; dimensions (y, x)
+    dw $4069, $4a81, $4a19 ; blocks, texts, scripts
+    db NORTH | EAST ; connections
+
+    ; connections data
+
+    db $20 ; some map
+    dw $5211, $c6eb ; pointers (connected, current) (strip)
+    db $0a, $0a ; bigness, width
+    db $59, $00 ; alignments (y, x)
+    dw $c9b9 ; window
+
+    db $1f ; some map
+    dw $417d, $c725 ; pointers (connected, current) (strip)
+    db $09, $32 ; bigness, width
+    db $00, $00 ; alignments (y, x)
+    dw $c721 ; window
+
+    ; end connection data
+
+    dw $4022 ; objects
+
+INCBIN "baserom.gbc",$1C022,$21E-34
 
 MonsterNames: ; 421E
 	db "RHYDON@@@@"
