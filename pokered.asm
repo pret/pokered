@@ -14781,7 +14781,17 @@ VermilionGym_h: ; 0x5ca1a to 0x5ca26 (12 bytes) (id=92)
 
     dw $4bfe ; objects
 
-INCBIN "baserom.gbc",$5ca26,$35da
+INCBIN "baserom.gbc",$5ca26,$5cc65 - $5ca26
+
+CopycatsHouseF2_h: ; 0x5cc65 to 0x5cc71 (12 bytes) (id=176)
+    db $04 ; tileset
+    db $04, $04 ; dimensions (y, x)
+    dw $4010, $4c74, $4c71 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $4d21 ; objects
+
+INCBIN "baserom.gbc",$5cc71,$338f
 
 SECTION "bank18",DATA,BANK[$18]
 INCBIN "baserom.gbc",$60000,$4000
