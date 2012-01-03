@@ -8,7 +8,7 @@ import json
 base = 16
 
 #where to load the rom from
-rom_filename = "baserom.gbc"
+rom_filename = "../baserom.gbc"
 rom = None #load the rom later
 
 #map header pointers start at 0x1AE
