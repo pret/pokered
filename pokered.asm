@@ -197,7 +197,7 @@ MapHeaderPointers: ; $01AE
 	dw Route8Gate_h
 	dw UndergroundPathEntranceRoute8_h
 	dw $53ae
-	dw $44d0
+	dw RockTunnel1_h
 	dw PowerPlant_h
 	dw $5400
 	dw DiglettsCaveEntranceRoute11_h
@@ -2222,7 +2222,7 @@ MapHeaderBanks: ; 423D
 	db BANK(Route8Gate_h)
 	db BANK(UndergroundPathEntranceRoute8_h)
 	db $12
-	db $11
+	db BANK(RockTunnel1_h)
 	db BANK(PowerPlant_h)
 	db $12
 	db BANK(DiglettsCaveEntranceRoute11_h)
@@ -12828,7 +12828,7 @@ ViridianPokeCenter_h: ; 0x44251 to 0x4425d (12 bytes) (bank=11) (id=41)
 
 INCBIN "baserom.gbc",$4425D,$442A3-$4425D
 
-Mansion1_h: ; 0x442a3 to 0x442af (12 bytes) (bank=17) (id=165)
+Mansion1_h: ; 0x442a3 to 0x442af (12 bytes) (bank=11) (id=165)
     db $16 ; tileset
     db $0e, $0f ; dimensions (y, x)
     dw $43fe, $432c, $42af ; blocks, texts, scripts
@@ -12836,7 +12836,17 @@ Mansion1_h: ; 0x442a3 to 0x442af (12 bytes) (bank=17) (id=165)
 
     dw $43a4 ; objects
 
-INCBIN "baserom.gbc",$442AF,$48000-$442AF
+INCBIN "baserom.gbc",$442AF,$444D0-$442AF
+
+RockTunnel1_h: ; 0x444d0 to 0x444dc (12 bytes) (bank=11) (id=82)
+    db $11 ; tileset
+    db $12, $14 ; dimensions (y, x)
+    dw $4675, $44f5, $44dc ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $45f6 ; objects
+
+INCBIN "baserom.gbc",$444DC,$48000-$444DC
 
 SECTION "bank12",DATA,BANK[$12]
 INCBIN "baserom.gbc",$48000,$15C
