@@ -347,7 +347,7 @@ MapHeaderPointers: ; $01AE
 	dw NameRater_h
 	dw $4dfd
 	dw $56b2
-	dw $5fdf
+	dw RockTunnel2_h
 	dw $57af
 	dw $612d
 	dw $60ee
@@ -2372,7 +2372,7 @@ MapHeaderBanks: ; 423D
 	db BANK(NameRater_h)
 	db $1D
 	db $01
-	db $11
+	db BANK(RockTunnel2_h)
 	db $17
 	db $16
 	db $18
@@ -13026,7 +13026,17 @@ UnknownDungeon3_h: ; 0x45ee4 to 0x45ef0 (12 bytes) (bank=11) (id=227)
 
     dw $5f36 ; objects
 
-INCBIN "baserom.gbc",$45EF0,$48000-$45EF0
+INCBIN "baserom.gbc",$45EF0,$45FDF-$45EF0
+
+RockTunnel2_h: ; 0x45fdf to 0x45feb (12 bytes) (bank=11) (id=232)
+    db $11 ; tileset
+    db $12, $14 ; dimensions (y, x)
+    dw $61a1, $6004, $5feb ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $613d ; objects
+
+INCBIN "baserom.gbc",$45FEB,$48000-$45FEB
 
 SECTION "bank12",DATA,BANK[$12]
 INCBIN "baserom.gbc",$48000,$15C
