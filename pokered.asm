@@ -15024,7 +15024,17 @@ SSAnne1_h: ; 0x61259 to 0x61265 (12 bytes) (id=95)
 
     dw $5277 ; objects
 
-INCBIN "baserom.gbc",$61265,$2d9b
+INCBIN "baserom.gbc",$61265,$61393 - $61265
+
+SSAnne2_h: ; 0x61393 to 0x6139f (12 bytes) (id=96)
+    db $0d ; tileset
+    db $09, $14 ; dimensions (y, x)
+    dw $556e, $54db, $539f ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $5514 ; objects
+
+INCBIN "baserom.gbc",$6139f,$2c61
 
 SECTION "bank19",DATA,BANK[$19]
 Tset00_GFX:
