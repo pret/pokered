@@ -12818,7 +12818,7 @@ LavendarTown_h: ; 0x44000 to 0x4402d (45 bytes) (bank=11) (id=4)
 
 INCBIN "baserom.gbc",$4402D,$44251-$4402D
 
-ViridianPokeCenter_h: ; 0x44251 to 0x4425d (12 bytes) (bank=17) (id=41)
+ViridianPokeCenter_h: ; 0x44251 to 0x4425d (12 bytes) (bank=11) (id=41)
     db $06 ; tileset
     db $04, $07 ; dimensions (y, x)
     dw $40df, $4263, $425d ; blocks, texts, scripts
