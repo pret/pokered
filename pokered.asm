@@ -5823,10 +5823,6 @@ BikeShop_h: ; 0x1d730 to 0x1d73c (12 bytes) (bank=7) (id=66)
     dw $588c, $573f, $573c ; blocks, texts, scripts
     db $00 ; connections
 
-    ; connections data
-
-    ; end connection data
-
     dw $5866 ; objects
 
 INCBIN "baserom.gbc",$1D73C,$20000-$1D73C
