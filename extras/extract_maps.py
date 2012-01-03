@@ -29,7 +29,7 @@ maps = {
          0x05: "Vermilion City", #correct
          0x06: "Celadon City",
          0x07: "Fuchsia City",
-         0x08: "Cinnibar Island",
+         0x08: "Cinnabar Island",
          0x09: "Indigo Plateau",
          0x0A: "Saffron City",
          0x0B: "FREEZE",
