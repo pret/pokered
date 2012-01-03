@@ -14566,7 +14566,17 @@ SilphCo2_h: ; 0x59ce5 to 0x59cf1 (12 bytes) (id=207)
 
     dw $5e66 ; objects
 
-INCBIN "baserom.gbc",$59cf1,$230f
+INCBIN "baserom.gbc",$59cf1,$59f4f - $59cf1
+
+SilphCo3_h: ; 0x59f4f to 0x59f5b (12 bytes) (id=208)
+    db $16 ; tileset
+    db $09, $0f ; dimensions (y, x)
+    dw $60a6, $5fc4, $5f5b ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $6035 ; objects
+
+INCBIN "baserom.gbc",$59f5b,$20a5
 
 SECTION "bank17",DATA,BANK[$17]
 
