@@ -253,7 +253,7 @@ MapHeaderPointers: ; $01AE
 	dw CeladonGameCorner_h
 	dw CeladonHouse_h
 	dw CeladonPrizeRoom_h
-	dw $5145
+	dw CeladonDiner_h
 	dw $5202
 	dw $525d
 	dw $48ce
@@ -2278,7 +2278,7 @@ MapHeaderBanks: ; 423D
 	db BANK(CeladonGameCorner_h)
 	db BANK(CeladonHouse_h)
 	db BANK(CeladonPrizeRoom_h)
-	db $12
+	db BANK(CeladonDiner_h)
 	db $12
 	db $12
 	db $17
@@ -13339,7 +13339,17 @@ CeladonPrizeRoom_h: ; 0x490e4 to 0x490f0 (12 bytes) (bank=12) (id=137)
 
     dw $5108 ; objects
 
-INCBIN "baserom.gbc",$490F0,$4C000-$490F0
+INCBIN "baserom.gbc",$490F0,$49145-$490F0
+
+CeladonDiner_h: ; 0x49145 to 0x49151 (12 bytes) (bank=12) (id=138)
+    db $12 ; tileset
+    db $04, $05 ; dimensions (y, x)
+    dw $51ee, $5155, $5151 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $51bc ; objects
+
+INCBIN "baserom.gbc",$49151,$4C000-$49151
 
 SECTION "bank13",DATA,BANK[$13]
 
