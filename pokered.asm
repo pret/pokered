@@ -13437,7 +13437,17 @@ Route15Gate_h: ; 0x495f6 to 0x49602 (12 bytes) (id=184)
 
     dw $560c ; objects
 
-INCBIN "baserom.gbc",$49602,$29fe
+INCBIN "baserom.gbc",$49602,$496b2 - $49602
+
+Route16GateMap_h: ; 0x496b2 to 0x496be (12 bytes) (id=186)
+    db $0c ; tileset
+    db $07, $04 ; dimensions (y, x)
+    dw $57e3, $575a, $56be ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $578b ; objects
+
+INCBIN "baserom.gbc",$496be,$2942
 
 SECTION "bank13",DATA,BANK[$13]
 
