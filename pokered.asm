@@ -13974,7 +13974,17 @@ SaffronCity_h: ; 0x509a4 to 0x509dc (56 bytes) (id=10)
 
     dw $49dc ; objects
 
-INCBIN "baserom.gbc",$509dc,$3624
+INCBIN "baserom.gbc",$509dc,$51791 - $509dc
+
+VictoryRoad2_h: ; 0x51791 to 0x5179d (12 bytes) (id=194)
+    db $11 ; tileset
+    db $09, $0f ; dimensions (y, x)
+    dw $59af, $581b, $579d ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $5915 ; objects
+
+INCBIN "baserom.gbc",$5179d,$2863
 
 SECTION "bank15",DATA,BANK[$15]
 INCBIN "baserom.gbc",$54000,$4000
