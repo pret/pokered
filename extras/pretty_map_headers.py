@@ -164,9 +164,12 @@ def map_header_pretty_printer(map_header):
     output += spacing + "db $" + hex(y)[2:].zfill(2) + ", $" + hex(x)[2:].zfill(2) + " ; dimensions (y, x)\n"
     output += spacing + "dw $" + map_pointer + ", $" + texts_pointer + ", $" + script_pointer + " ; blocks, texts, scripts\n"
     output += spacing + "db " + connection_line(connection_byte) + " ; connections\n\n"
-    output += spacing + "; connections data\n\n"
-    output += connection_pretty_printer(connections)
-    output += spacing + "; end connection data\n\n"
+    
+    if len(connections) > 0:
+        output += spacing + "; connections data\n\n"
+        output += connection_pretty_printer(connections)
+        output += spacing + "; end connection data\n\n"
+
     output += spacing + "dw $" + object_data_pointer + " ; objects\n"
 
     return output
