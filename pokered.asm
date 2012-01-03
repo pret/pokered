@@ -115,13 +115,13 @@ Start:
 INCBIN "baserom.gbc",$150,$1AE - $150
 ; see also MapHeaderBanks
 MapHeaderPointers: ; $01AE
-	dw PalletTown_h
-	dw $4357 ; VIRIDIAN_CITY
+	dw PalletTown_h ; PALLET_TOWN
+	dw ViridianCity_h ; VIRIDIAN_CITY
 	dw $4554 ; PEWTER_CITY
 	dw $474e ; CERULEAN_CITY
 	dw $4000 ; LAVENDER_TOWN
 	dw $4998 ; VERMILION_CITY
-	dw CeladonCity_h
+	dw CeladonCity_h ; CELADON_CITY
 	dw $4ba7 ; FUCHSIA_CITY
 	dw $4000 ; CINNABAR_ISLAND
 	dw $491e ; INDIGO_PLATEAU
@@ -364,8 +364,7 @@ MapHeaderPointers: ; $01AE
 	dw $62CA
 	dw $6421
 
-incbin "baserom.gbc",$39E,$1627 - $39E
-
+INCBIN "baserom.gbc",$39E,$1627 - $39E
 
 ;XXX what does this do
 ;XXX what points to this
@@ -4946,7 +4945,37 @@ PalletTownObject: ; 182C3
 PalletTownBlocks:
 	INCBIN "maps/pallettown.blk"
 
-	INCBIN "baserom.gbc",$18357,$18E5B-$18357
+ViridianCity_h: ; 0x18357 to 0x18384 (45 bytes) (bank=6) (id=1)
+    db $00 ; tileset
+    db $12, $14 ; dimensions (y, x)
+    dw $43ec, $50e4, $4ff1 ; blocks, texts, scripts
+    db NORTH | SOUTH | WEST ; connections
+
+    ; connections data
+
+    db $0d ; some map
+    dw $41C8, $C6F0 ; pointers (connected, current) (strip)
+    db $0a, $0a ; bigness, width
+    db $47, $f6 ; alignments (y, x)
+    dw $c929 ; window
+
+    db $0c ; some map
+    dw $40fc, $c912 ; pointers (connected, current) (strip)
+    db $0a, $0a ; bigness, width
+    db $00, $f6 ; alignments (y, x)
+    dw $c6f9 ; window
+
+    db $21 ; some map
+    dw $404e, $c79e ; pointers (connected, current) (strip)
+    db $09, $14 ; bigness, width
+    db $f8, $27 ; alignments (y, x)
+    dw $c716 ; window
+
+    ; end connection data
+
+    dw $4384 ; objects
+
+INCBIN "baserom.gbc",$18384,$18E5B-$18357-45
 
 PalletTownScript:
 	ld a,[$D74B]
