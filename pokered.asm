@@ -325,7 +325,7 @@ MapHeaderPointers: ; $01AE
 	dw $5ce5
 	dw $5f4f
 	dw SilphCo4_h
-	dw $5f2b
+	dw SilphCo5_h
 	dw $619d
 	dw $5b55
 	dw $64f8
@@ -2350,7 +2350,7 @@ MapHeaderBanks: ; 423D
 	db $16
 	db $16
 	db BANK(SilphCo4_h)
-	db $06
+	db BANK(SilphCo5_h)
 	db $06
 	db $14
 	db $15
@@ -5459,7 +5459,19 @@ SilphCo4_h: ; 0x19cff to 0x19d0b (12 bytes) (bank=6) (id=209)
 
     dw $5e35 ; objects
 
-INCBIN "baserom.gbc",$19D0B,$1C000-$19D0B
+;INCBIN "baserom.gbc",$19D0B,$1C000-$19D0B
+
+INCBIN "baserom.gbc",$19D0B,$19F2B-$19D0B
+
+SilphCo5_h: ; 0x19f2b to 0x19f37 (12 bytes) (bank=6) (id=210)
+    db $16 ; tileset
+    db $09, $0f ; dimensions (y, x)
+    dw $6116, $5fbc, $5f37 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $608d ; objects
+
+INCBIN "baserom.gbc",$19F37,$1C000-$19F37
 
 SECTION "bank7",DATA,BANK[$7]
 INCBIN "baserom.gbc",$1C000,$21E
