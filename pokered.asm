@@ -332,15 +332,15 @@ MapHeaderPointers: ; $01AE
 	dw $5fcc
 	dw $61e2
 	dw $63ad
-	dw $585f
-	dw $599f
+	dw SafariZoneEast_h
+	dw SafariZoneNorth_h
 	dw $61a9
-	dw $5ba6
-	dw $5ce1
+	dw SafariZoneCenter_h
+	dw SafariZoneRestHouse1_h
 	dw $630b
-	dw $5d1e
-	dw $5d69
-	dw $5db4
+	dw SafariZoneRestHouse2_h
+	dw SafariZoneRestHouse3_h
+	dw SafariZoneRestHouse4_h
 	dw $5dff
 	dw $5ee4
 	dw $4d00
@@ -2357,15 +2357,15 @@ MapHeaderBanks: ; 423D
 	db $14
 	db $14
 	db $14
-	db $11
-	db $11
+	db BANK(SafariZoneEast_h)
+	db BANK(SafariZoneNorth_h)
 	db $12
-	db $11
-	db $11
+	db BANK(SafariZoneCenter_h)
+	db BANK(SafariZoneRestHouse1_h)
 	db $12
-	db $11
-	db $11
-	db $11
+	db BANK(SafariZoneRestHouse2_h)
+	db BANK(SafariZoneRestHouse3_h)
+	db BANK(SafariZoneRestHouse4_h)
 	db $11
 	db $11
 	db $1D
@@ -12936,7 +12936,77 @@ SilphCoElevator_h: ; 0x457b4 to 0x457c0 (12 bytes) (bank=11) (id=236)
 
     dw $5844 ; objects
 
-INCBIN "baserom.gbc",$457C0,$48000-$457C0
+INCBIN "baserom.gbc",$457C0,$4585F-$457C0
+
+SafariZoneEast_h: ; 0x4585f to 0x4586b (12 bytes) (bank=11) (id=217)
+    db $03 ; tileset
+    db $0d, $0f ; dimensions (y, x)
+    dw $58dc, $586e, $586b ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $588b ; objects
+
+INCBIN "baserom.gbc",$4586B,$4599F-$4586B
+
+SafariZoneNorth_h: ; 0x4599f to 0x459ab (12 bytes) (bank=11) (id=218)
+    db $03 ; tileset
+    db $12, $14 ; dimensions (y, x)
+    dw $5a3e, $59ae, $59ab ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $59d5 ; objects
+
+INCBIN "baserom.gbc",$459AB,$45BA6-$459AB
+
+SafariZoneCenter_h: ; 0x45ba6 to 0x45bb2 (12 bytes) (bank=11) (id=220)
+    db $03 ; tileset
+    db $0d, $0f ; dimensions (y, x)
+    dw $5c1e, $5bb5, $5bb2 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $5bc5 ; objects
+
+INCBIN "baserom.gbc",$45BB2,$45CE1-$45BB2
+
+SafariZoneRestHouse1_h: ; 0x45ce1 to 0x45ced (12 bytes) (bank=11) (id=221)
+    db $0c ; tileset
+    db $04, $04 ; dimensions (y, x)
+    dw $40fb, $5cf0, $5ced ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $5cfe ; objects
+
+INCBIN "baserom.gbc",$45CED,$45D1E-$45CED
+
+SafariZoneRestHouse2_h: ; 0x45d1e to 0x45d2a (12 bytes) (bank=11) (id=223)
+    db $0c ; tileset
+    db $04, $04 ; dimensions (y, x)
+    dw $40fb, $5d2e, $5d2a ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $5d43 ; objects
+
+INCBIN "baserom.gbc",$45D2A,$45D69-$45D2A
+
+SafariZoneRestHouse3_h: ; 0x45d69 to 0x45d75 (12 bytes) (bank=11) (id=224)
+    db $0c ; tileset
+    db $04, $04 ; dimensions (y, x)
+    dw $40fb, $5d79, $5d75 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $5d8e ; objects
+
+INCBIN "baserom.gbc",$45D75,$45DB4-$45D75
+
+SafariZoneRestHouse4_h: ; 0x45db4 to 0x45dc0 (12 bytes) (bank=11) (id=225)
+    db $0c ; tileset
+    db $04, $04 ; dimensions (y, x)
+    dw $40fb, $5dc4, $5dc0 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $5dd9 ; objects
+
+INCBIN "baserom.gbc",$45DC0,$48000-$45DC0
 
 SECTION "bank12",DATA,BANK[$12]
 INCBIN "baserom.gbc",$48000,$15C
