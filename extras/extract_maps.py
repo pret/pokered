@@ -456,21 +456,16 @@ def read_map_header(address, bank): #bank because i'm lazy
     # <&IIMarckus> easier to see if you convert to binary
     # <&IIMarckus> 0100 | 1000 = 1100
 
-    north, south, west, east = False, False, False, False
     num_connections = 0
     connection_value = bin(connection_byte)[2:]
     if connection_value[0] == "1": #NORTH
         num_connections += 1
-        north = True
     if len(connection_value) > 1 and connection_value[1] == "1": #SOUTH
         num_connections += 1
-        south = True
     if len(connection_value) > 2 and connection_value[2] == "1": #WEST
         num_connections += 1
-        west = True
     if len(connection_value) > 3 and connection_value[3] == "1": #EAST
         num_connections += 1
-        east = True
  
     #quick test for connection data
     #connection0_stuff = rom[(address + 10):(address + 10 + 11)]
