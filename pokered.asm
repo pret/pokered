@@ -14661,7 +14661,17 @@ RedsHouse2FObject:
 	dw $C6EF + 4 + (4 + 6) * 0 + 3
 	db 1,7
 
-INCBIN "baserom.gbc",$5C0DC,$4000-$DC
+INCBIN "baserom.gbc",$5c0dc,$5c0eb - $5c0dc
+
+MuseumF1_h: ; 0x5c0eb to 0x5c0f7 (12 bytes) (id=52)
+    db $0a ; tileset
+    db $04, $0a ; dimensions (y, x)
+    dw $4020, $412b, $40f7 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $42c1 ; objects
+
+INCBIN "baserom.gbc",$5c0f7,$3f09
 
 SECTION "bank18",DATA,BANK[$18]
 INCBIN "baserom.gbc",$60000,$4000
