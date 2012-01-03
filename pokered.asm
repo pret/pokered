@@ -14871,7 +14871,17 @@ ViridianForestEntrance_h: ; 0x5d650 to 0x5d65c (12 bytes) (id=50)
 
     dw $566d ; objects
 
-INCBIN "baserom.gbc",$5d65c,$29a4
+INCBIN "baserom.gbc",$5d65c,$5d69d - $5d65c
+
+UndergroundTunnelEntranceRoute5_h: ; 0x5d69d to 0x5d6a9 (12 bytes) (id=71)
+    db $0c ; tileset
+    db $04, $04 ; dimensions (y, x)
+    dw $4080, $56b0, $56a9 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $56c1 ; objects
+
+INCBIN "baserom.gbc",$5d6a9,$2957
 
 SECTION "bank18",DATA,BANK[$18]
 INCBIN "baserom.gbc",$60000,$4000
