@@ -341,7 +341,7 @@ MapHeaderPointers: ; $01AE
 	dw SafariZoneRestHouse2_h
 	dw SafariZoneRestHouse3_h
 	dw SafariZoneRestHouse4_h
-	dw $5dff
+	dw UnknownDungeon2_h
 	dw $5ee4
 	dw $4d00
 	dw NameRater_h
@@ -2366,7 +2366,7 @@ MapHeaderBanks: ; 423D
 	db BANK(SafariZoneRestHouse2_h)
 	db BANK(SafariZoneRestHouse3_h)
 	db BANK(SafariZoneRestHouse4_h)
-	db $11
+	db BANK(UnknownDungeon2_h)
 	db $11
 	db $1D
 	db BANK(NameRater_h)
@@ -13006,7 +13006,17 @@ SafariZoneRestHouse4_h: ; 0x45db4 to 0x45dc0 (12 bytes) (bank=11) (id=225)
 
     dw $5dd9 ; objects
 
-INCBIN "baserom.gbc",$45DC0,$48000-$45DC0
+INCBIN "baserom.gbc",$45DC0,$45DFF-$45DC0
+
+UnknownDungeon2_h: ; 0x45dff to 0x45e0b (12 bytes) (bank=17) (id=226)
+    db $11 ; tileset
+    db $09, $0f ; dimensions (y, x)
+    dw $5e5d, $5e0e, $5e0b ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $5e14 ; objects
+
+INCBIN "baserom.gbc",$45E0B,$48000-$45E0B
 
 SECTION "bank12",DATA,BANK[$12]
 INCBIN "baserom.gbc",$48000,$15C
