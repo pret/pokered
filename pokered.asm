@@ -313,7 +313,7 @@ MapHeaderPointers: ; $01AE
 	dw $5554
 	dw VermilionHouse3_h
 	dw $5f62
-	dw $4974
+	dw VictoryRoad3_h
 	dw $4bbe
 	dw $4e1b
 	dw $5219
@@ -2338,7 +2338,7 @@ MapHeaderBanks: ; 423D
 	db $12
 	db $06
 	db $18
-	db $11
+	db BANK(VictoryRoad3_h)
 	db $11
 	db $11
 	db $11
@@ -12866,7 +12866,17 @@ SSAnne3_h: ; 0x44926 to 0x44932 (12 bytes) (bank=11) (id=97)
 
     dw $493c ; objects
 
-INCBIN "baserom.gbc",$44932,$48000-$44932
+INCBIN "baserom.gbc",$44932,$44974-$44932
+
+VictoryRoad3_h: ; 0x44974 to 0x44980 (12 bytes) (bank=11) (id=198)
+    db $11 ; tileset
+    db $09, $0f ; dimensions (y, x)
+    dw $4b37, $4a24, $4980 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $4acd ; objects
+
+INCBIN "baserom.gbc",$44980,$48000-$44980
 
 SECTION "bank12",DATA,BANK[$12]
 INCBIN "baserom.gbc",$48000,$15C
