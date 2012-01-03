@@ -13387,7 +13387,17 @@ RockTunnelPokecenter_h: ; 0x493ae to 0x493ba (12 bytes) (id=81)
 
     dw $53d4 ; objects
 
-INCBIN "baserom.gbc",$493ba,$2c46
+INCBIN "baserom.gbc",$493ba,$49400 - $493ba
+
+Route11Gate_h: ; 0x49400 to 0x4940c (12 bytes) (id=84)
+    db $0c ; tileset
+    db $05, $04 ; dimensions (y, x)
+    dw $40c7, $540f, $540c ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $5416 ; objects
+
+INCBIN "baserom.gbc",$4940c,$2bf4
 
 SECTION "bank13",DATA,BANK[$13]
 

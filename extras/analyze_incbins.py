@@ -217,6 +217,6 @@ if __name__ == "__main__":
     #diff = generate_diff_insert(line_number, newlines)
     #print diff
 
-    insert_map_header_asm(81)
+    insert_map_header_asm(84)
     #dump_all_remaining_maps()
 
