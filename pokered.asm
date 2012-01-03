@@ -13794,7 +13794,31 @@ PredefPointers: ; 7E79
         dbw $16,$5035
 
 SECTION "bank14",DATA,BANK[$14]
-INCBIN "baserom.gbc",$50000,$4000
+Route22_h: ; 0x50000 to 0x50022 (34 bytes) (id=33)
+    db $00 ; tileset
+    db $09, $14 ; dimensions (y, x)
+    dw $403d, $5175, $4eb2 ; blocks, texts, scripts
+    db NORTH | EAST ; connections
+
+    ; connections data
+
+    db $22 ; some map
+    dw $4664, $c6eb ; pointers (connected, current) (strip)
+    db $0a, $0a ; bigness, width
+    db $8f, $00 ; alignments (y, x)
+    dw $cb69 ; window
+
+    db $01 ; some map
+    dw $4400, $c6ff ; pointers (connected, current) (strip)
+    db $0f, $14 ; bigness, width
+    db $08, $00 ; alignments (y, x)
+    dw $c703 ; window
+
+    ; end connection data
+
+    dw $4022 ; objects
+
+INCBIN "baserom.gbc",$50022,$3fde
 
 SECTION "bank15",DATA,BANK[$15]
 INCBIN "baserom.gbc",$54000,$4000
