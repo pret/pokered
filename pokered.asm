@@ -14301,7 +14301,17 @@ FuchsiaHouse3_h: ; 0x56170 to 0x5617c (12 bytes) (id=164)
 
     dw $6221 ; objects
 
-INCBIN "baserom.gbc",$5617c,$1e84
+INCBIN "baserom.gbc",$5617c,$56243 - $5617c
+
+DayCareM_h: ; 0x56243 to 0x5624f (12 bytes) (id=72)
+    db $08 ; tileset
+    db $04, $04 ; dimensions (y, x)
+    dw $522f, $6252, $624f ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $6459 ; objects
+
+INCBIN "baserom.gbc",$5624f,$1db1
 
 SECTION "bank16",DATA,BANK[$16]
 INCBIN "baserom.gbc",$58000,$4000
