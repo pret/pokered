@@ -16117,7 +16117,17 @@ CeruleanHouse3_h: ; 0x74dfd to 0x74e09 (12 bytes) (id=230)
 
     dw $4ebe ; objects
 
-INCBIN "baserom.gbc",$74e09,$31f7
+INCBIN "baserom.gbc",$74e09,$7500c - $74e09
+
+FuchsiaHouse1_h: ; 0x7500c to 0x75018 (12 bytes) (id=153)
+    db $08 ; tileset
+    db $04, $04 ; dimensions (y, x)
+    dw $4020, $501c, $5018 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $5031 ; objects
+
+INCBIN "baserom.gbc",$75018,$2fe8
 
 SECTION "bank1E",DATA,BANK[$1E]
 INCBIN "baserom.gbc",$78000,$F1
