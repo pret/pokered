@@ -8,10 +8,10 @@ from pretty_map_headers import map_name_cleaner
 from analyze_incbins import asm, offset_to_pointer, find_incbin_to_replace_for, split_incbin_line_into_three, generate_diff_insert, load_asm, isolate_incbins, process_incbins
 import analyze_incbins
 import os, sys
+import subprocess
 spacing = "    "
 
-all_maps = range(0,248)
-bad_maps = []
+used_map_pointers = []
 
 def extract_map_block_data(map_id, savefile=False):
     map = extract_maps.map_headers[map_id]
@@ -68,6 +68,7 @@ def insert_map_block_label(map_id):
     line_number = find_incbin_to_replace_for(address)
     if line_number == None:
         print "skipping map id=" + str(map_id) + " probably because it was already done."
+        used_map_pointers.append(map["map_pointer"])
         return
 
     newlines = split_incbin_line_into_three(line_number, address, size)
@@ -86,6 +87,9 @@ def insert_map_block_label(map_id):
         #note that this has to be done after adding in the new asm
     newlines = "\n".join(line for line in newlines)
 
+    #fix a lame error from somewhere
+    newlines = newlines.replace("$x", "$")
+
     diff = generate_diff_insert(line_number, newlines)
     print diff
     print "... Applying diff."
@@ -101,23 +105,31 @@ def insert_map_block_label(map_id):
     #remove the patch
     os.system("rm temp.patch")
 
+    #confirm it's working
+    subprocess.check_call("cd ../; make clean; LC_CTYPE=UTF-8 make", shell=True)
+
 def get_all_map_blockdata():
     for map in extract_maps.map_headers.keys():
         extract_map_block_data(map)
 
 def insert_all_labels():
     "this is very buggy, don't use it"
-    limit = 50 #0:50
-    for map in extract_maps.map_headers.keys()[0:limit]:
+    #limit = 200 #0:150
+    for map in extract_maps.map_headers.keys():
         mapmap = extract_maps.map_headers[map]
         if mapmap["name"] == "FREEZE": continue #skip this one
         if "Ash's" in mapmap["name"]: continue
         if "Gary's" in mapmap["name"]: continue
         if not ("cat" in mapmap["name"]) and "copy" in mapmap["name"].lower(): continue #skip this one
 
-        #Route 2 Gate breaks things, for some reason
-        if mapmap["name"] == "Route 2 Gate": continue
+        #bill's house breaks things?
         if mapmap["name"] == "Bill's House": continue
+        if mapmap["name"] == "Viridian Forest": continue
+        if mapmap["name"] == "Cerulean Mart": continue
+        if mapmap["name"] == "Virdian Forest Exit": continue
+        if "copy" in mapmap["name"].lower(): continue #skip this one too..
+
+        if mapmap["map_pointer"] in used_map_pointers: continue #skip for sure
     
         #reset asm
         analyze_incbins.asm = None
@@ -129,8 +141,9 @@ def insert_all_labels():
 
         #check if this label is already in there
         cleaned_name, label_text, filename, full_filepath = make_labels(mapmap["name"])
-        if label_text in analyze_incbins.asm:
+        if label_text in "\n".join(line for line in analyze_incbins.asm):
             print "skipping (found label text in asm already)"
+            used_map_pointers.append(mapmap["map_pointer"])
             continue #skip this one
 
         isolate_incbins()
@@ -138,6 +151,8 @@ def insert_all_labels():
         
         print "XYZ|" + mapmap["name"]
         insert_map_block_label(map)
+
+        used_map_pointers.append(mapmap["map_pointer"])
 
 if __name__ == "__main__":
     #load map headers
@@ -153,5 +168,5 @@ if __name__ == "__main__":
     #extract_map_block_data(2)
     #get_all_map_blockdata()
 
-    #insert_map_block_label(7)
+    #insert_map_block_label(49)
     insert_all_labels()
