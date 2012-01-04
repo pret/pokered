@@ -16147,7 +16147,17 @@ FuchsiaHouse2_h: ; 0x750a9 to 0x750b5 (12 bytes) (id=155)
 
     dw $5180 ; objects
 
-INCBIN "baserom.gbc",$750b5,$2f4b
+INCBIN "baserom.gbc",$750b5,$751c1 - $750b5
+
+SafariZoneEntrance_h: ; 0x751c1 to 0x751cd (12 bytes) (id=156)
+    db $0c ; tileset
+    db $03, $04 ; dimensions (y, x)
+    dw $5425, $52b9, $51cd ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $53f5 ; objects
+
+INCBIN "baserom.gbc",$751cd,$2e33
 
 SECTION "bank1E",DATA,BANK[$1E]
 INCBIN "baserom.gbc",$78000,$F1
