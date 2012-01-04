@@ -16107,7 +16107,17 @@ UnknownDungeon1_h: ; 0x74d00 to 0x74d0c (12 bytes) (id=228)
 
     dw $4d15 ; objects
 
-INCBIN "baserom.gbc",$74d0c,$32f4
+INCBIN "baserom.gbc",$74d0c,$74dfd - $74d0c
+
+CeruleanHouse3_h: ; 0x74dfd to 0x74e09 (12 bytes) (id=230)
+    db $0d ; tileset
+    db $04, $04 ; dimensions (y, x)
+    dw $404c, $4e13, $4e09 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $4ebe ; objects
+
+INCBIN "baserom.gbc",$74e09,$31f7
 
 SECTION "bank1E",DATA,BANK[$1E]
 INCBIN "baserom.gbc",$78000,$F1
