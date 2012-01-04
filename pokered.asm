@@ -5347,10 +5347,10 @@ PalletTownScript6:
 PalletTownScript7:
 	ret
 
-PalletTownTexts:
+PalletTownTexts: ; 0x18f88
 	dw PalletTownText1,PalletTownText2,PalletTownText3,PalletTownText4,PalletTownText5,PalletTownText6,PalletTownText7
 
-PalletTownText1:
+PalletTownText1: ; 4F96 0x18f96
 	db 8
 	ld a,[$CF0D]
 	and a
@@ -5409,7 +5409,7 @@ PalletTownText7: ; sign by Blue’s house
 
 INCBIN "baserom.gbc",$18FF1,$1B2F-$FF1
 
-BluesHouse_h:
+BluesHouse_h: ; 0x19b2f
 	db $08 ; tileset
 	db $04,$04 ; dimensions
 	dw BluesHouseBlocks,BluesHouseTexts,BluesHouseScript
@@ -5437,10 +5437,10 @@ BluesHouseScript1:
 BluesHouseScript2:
 	ret
 
-BluesHouseTexts:
+BluesHouseTexts: ; 0x19b57
 	dw BluesHouseText1,BluesHouseText2,BluesHouseText3
 
-BluesHouseText1:
+BluesHouseText1: ; 
 	db 8
 	ld a,[$D74A]
 	bit 0,a
