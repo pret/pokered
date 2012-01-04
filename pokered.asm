@@ -124,34 +124,34 @@ MapHeaderPointers: ; $01AE
 	dw CeladonCity_h ; CELADON_CITY
 	dw FuchsiaCity_h ; FUCHSIA_CITY
 	dw CinnabarIsland_h ; CINNABAR_ISLAND
-	dw $491e ; INDIGO_PLATEAU
-	dw $49a4 ; SAFFRON_CITY
+	dw IndigoPlateau_h ; INDIGO_PLATEAU
+	dw SaffronCity_h ; SAFFRON_CITY
 	dw $49a4 ; unused
 	dw Route1_h ; ROUTE_1
 	dw $4000 ; ROUTE_2
-	dw $41e6 ; ROUTE_3
-	dw $4390 ; ROUTE_4
-	dw $4581 ; ROUTE_5
-	dw $4000 ; ROUTE_6
+	dw Route3_h ; ROUTE_3
+	dw Route4_h ; ROUTE_4
+	dw Route5_h ; ROUTE_5
+	dw Route6_h ; ROUTE_6
 	dw Route7_h ; ROUTE_7
-	dw $412d ; ROUTE_8
-	dw $4686 ; ROUTE_9
-	dw $42d4 ; ROUTE_10
-	dw $44be ; ROUTE_11
-	dw $466d ; ROUTE_12
-	dw $480c ; ROUTE_13
-	dw $4999 ; ROUTE_14
-	dw $492c ; ROUTE_15
-	dw $4ada ; ROUTE_16
-	dw $4b20 ; ROUTE_17
-	dw $4c38 ; ROUTE_18
-	dw $4e78 ; ROUTE_19
-	dw $40f1 ; ROUTE_20
-	dw $4fff ; ROUTE_21
-	dw $4000 ; ROUTE_22
-	dw $433f ; ROUTE_23
-	dw $4682 ; ROUTE_24
-	dw $479b ; ROUTE_25
+	dw Route8_h ; ROUTE_8
+	dw Route9_h ; ROUTE_9
+	dw Route10_h ; ROUTE_10
+	dw Route11_h ; ROUTE_11
+	dw Route12_h ; ROUTE_12
+	dw Route13_h ; ROUTE_13
+	dw Route14_h ; ROUTE_14
+	dw Route15_h ; ROUTE_15
+	dw Route16_h ; ROUTE_16
+	dw Route17_h ; ROUTE_17
+	dw Route18_h ; ROUTE_18
+	dw Route19_h ; ROUTE_19
+	dw Route20_h ; ROUTE_20
+	dw Route21_h ; ROUTE_21
+	dw Route22_h ; ROUTE_22
+	dw Route23_h ; ROUTE_23
+	dw Route24_h ; ROUTE_24
+	dw Route25_h ; ROUTE_25
 	dw RedsHouse1F_h
 	dw RedsHouse2F_h
 	dw BluesHouse_h
@@ -160,85 +160,85 @@ MapHeaderPointers: ; $01AE
 	dw ViridianMart_h
 	dw School_h
 	dw ViridianHouse_h
-	dw $4897
+	dw ViridianGym_h
 	dw DiglettsCaveRoute2_h
-	dw $557b
+	dw ViridianForestexit_h
 	dw Route2House_h
-	dw $55c8
-	dw $5650
-	dw $5101
-	dw $40eb
-	dw $430b
-	dw $437b
+	dw Route2Gate_h
+	dw ViridianForestEntrance_h
+	dw ViridianForest_h
+	dw MuseumF1_h
+	dw MuseumF2_h
+	dw PewterGym_h
 	dw PewterHouse1_h
-	dw $4ca1
+	dw PewterMart_h
 	dw PewterHouse2_h
-	dw $457b
-	dw $59bc
-	dw $5a36
-	dw $5cff
+	dw PewterPokecenter_h
+	dw MtMoon1_h
+	dw MtMoon2_h
+	dw MtMoon3_h
 	dw CeruleanHouseTrashed_h
 	dw CeruleanHouse2_h
-	dw $4639
-	dw $46a7
+	dw CeruleanPokecenter_h
+	dw CeruleanGym_h
 	dw BikeShop_h
-	dw $4889
+	dw CeruleanMart_h
 	dw MtMoonPokecenter_h
 	dw CeruleanHouseTrashed_h ; copy of map 62
 	dw Route5Gate_h
-	dw $569d
-	dw $6243
+	dw UndergroundTunnelEntranceRoute5_h
+	dw DayCareM_h
 	dw Route6Gate_h
-	dw $56e3
-	dw $56e3
+	dw UndergroundTunnelEntranceRoute6_h
+	dw $56e3 ; id=75
 	dw Route7Gate_h
-	dw $5720
+	dw UndergroundPathEntranceRoute7_h
 	dw $575d
 	dw Route8Gate_h
 	dw UndergroundPathEntranceRoute8_h
-	dw $53ae
+	dw RockTunnelPokecenter_h
 	dw RockTunnel1_h
 	dw PowerPlant_h
-	dw $5400
+	dw Route11Gate_h
 	dw DiglettsCaveEntranceRoute11_h
-	dw $5448
-	dw $54f8
+	dw Route11GateUpstairs_h
+	dw Route12Gate_h
 	dw BillsHouse_h
-	dw $4983
-	dw $5b64
-	dw $49d5
-	dw $4a1a
+	dw VermilionPokecenter_h
+	dw FanClub_h
+	dw VermilionMart_h
+	dw VermilionGym_h
 	dw VermilionHouse1_h
 	dw VermilionDock_h
-	dw $5259
-	dw $5393
+	dw SSAnne1_h
+	dw SSAnne2_h
 	dw SSAnne3_h
-	dw $5622
-	dw $56a2
-	dw $57a7
-	dw $5889
-	dw $596a
-	dw $5b3f
-	dw $5d49
-	dw $62a2
-	dw $62a2
-	dw $62a2
-	dw $59fe
-	dw $62a2
-	dw $62a2
-	dw $62a2
-	dw $62a2
-	dw $62a2
-	dw $62a2
-	dw $62a2
-	dw $62a2
-	dw $62a2
+	dw SSAnne4_h
+	dw SSAnne5_h
+	dw SSAnne6_h
+	dw SSAnne7_h
+	dw SSAnne8_h
+	dw SSAnne9_h
+	dw SSAnne10_h ; id=104
+	dw Lance_h ; unused
+	dw Lance_h ; unused
+	dw Lance_h ; unused
+	dw VictoryRoad1_h ; id=108
+	dw Lance_h ; unused
+	dw Lance_h ; unused
+	dw Lance_h ; unused
+	dw Lance_h ; unused
+	dw Lance_h
+	dw Lance_h ; unused
+	dw Lance_h ; unused
+	dw Lance_h ; unused
+	dw Lance_h ; unused
 	dw $6492
-	dw $5f1a
+	dw UndergroundPathNS_h
 	dw $5f11
-	dw $5f3e
-	dw $4f7a
-	dw $60e9
+	dw UndergroundPathWE_h
+	dw CeladonMart1_h
+	dw CeladonMart2_h
 	dw CeladonMart3_h
 	dw CeladonMart4_h
 	dw CeladonMart5_h
@@ -256,63 +256,63 @@ MapHeaderPointers: ; $01AE
 	dw CeladonDiner_h
 	dw CeladonHouse2_h
 	dw CeladonHotel_h
-	dw $48ce
-	dw $4420
-	dw $44e6
-	dw $46c0
-	dw $47ea
-	dw $4926
-	dw $4ae3
-	dw $4cf9
+	dw LavenderPokecenter_h
+	dw PokemonTower1_h
+	dw PokemonTower2_h
+	dw PokemonTower3_h
+	dw PokemonTower4_h
+	dw PokemonTower5_h
+	dw PokemonTower6_h
+	dw PokemonTower7_h
 	dw LavenderHouse1_h
-	dw $4920
+	dw LavenderMart_h
 	dw LavenderHouse2_h
 	dw FuchsiaMart_h
-	dw $500c
-	dw $5057
-	dw $50a9
-	dw $51c1
-	dw $5431
-	dw $56d7
+	dw FuchsiaHouse1_h
+	dw FuchsiaPokecenter_h
+	dw FuchsiaHouse2_h
+	dw SafariZoneEntrance_h
+	dw FuchsiaGym_h
+	dw FuchsiaMeetingRoom_h
 	dw SeafoamIslands2_h
 	dw SeafoamIslands3_h
 	dw SeafoamIslands4_h
 	dw SeafoamIslands5_h
-	dw $6064
-	dw $6170
+	dw VermilionHouse2_h
+	dw FuchsiaHouse3_h
 	dw Mansion1_h
-	dw $573e
-	dw $5b80
-	dw $5c15
-	dw $5c7b
-	dw $5d25
-	dw $5e20
-	dw $5e72
+	dw CinnabarGym_h
+	dw Lab1_h
+	dw Lab2_h
+	dw Lab3_h
+	dw Lab4_h
+	dw CinnabarPokecenter_h
+	dw CinnabarMart_h
 	dw $5e72
 	dw IndigoPlateauLobby_h 
-	dw $5eb7
-	dw $4c65
-	dw $4d51
-	dw $5001
+	dw CopycatsHouseF1_h
+	dw CopycatsHouseF2_h
+	dw FightingDojo_h
+	dw SaffronGym_h
 	dw SaffronHouse1_h
-	dw $53fd
-	dw $5442
-	dw $5529
+	dw SaffronMart_h
+	dw SilphCo1_h
+	dw SaffronPokecenter_h
 	dw SaffronHouse2_h
-	dw $55f6
+	dw Route15Gate_h
 	dw $563e
-	dw $56b2
-	dw $57ff
+	dw Route16GateMap_h
+	dw Route16GateUpstairs_h
 	dw Route16House_h
-	dw $6473
-	dw $586a
-	dw $5969
+	dw Route12House_h
+	dw Route18Gate_h
+	dw Route18GateHeader_h
 	dw SeafoamIslands1_h
 	dw Route22Gate_h
-	dw $5791
-	dw $5554
+	dw VictoryRoad2_h
+	dw Route12GateUpstairs_h
 	dw VermilionHouse3_h
-	dw $5f62
+	dw DiglettsCave_h
 	dw VictoryRoad3_h
 	dw RocketHideout1_h
 	dw RocketHideout2_h
@@ -322,47 +322,47 @@ MapHeaderPointers: ; $01AE
 	dw $5704
 	dw $5704
 	dw $5704
-	dw $5ce5
-	dw $5f4f
+	dw SilphCo2_h
+	dw SilphCo3_h ; id=208
 	dw SilphCo4_h
 	dw SilphCo5_h
 	dw SilphCo6_h
-	dw $5b55
-	dw $64f8
-	dw $5fcc
-	dw $61e2
-	dw $63ad
+	dw SilphCo7_h
+	dw SilphCo8_h
+	dw Mansion2_h
+	dw Mansion3_h
+	dw Mansion4_h
 	dw SafariZoneEast_h
 	dw SafariZoneNorth_h
-	dw $61a9
+	dw SafariZoneWest_h
 	dw SafariZoneCenter_h
 	dw SafariZoneRestHouse1_h
-	dw $630b
+	dw SafariZoneSecretHouse_h
 	dw SafariZoneRestHouse2_h
 	dw SafariZoneRestHouse3_h
 	dw SafariZoneRestHouse4_h
 	dw UnknownDungeon2_h
 	dw UnknownDungeon3_h
-	dw $4d00
+	dw UnknownDungeon1_h
 	dw NameRater_h
-	dw $4dfd
+	dw CeruleanHouse3_h
 	dw $56b2
 	dw RockTunnel2_h
-	dw $57af
-	dw $612d
-	dw $60ee
+	dw SilphCo9_h
+	dw SilphCo10_h
+	dw SilphCo11_h
 	dw SilphCoElevator_h
 	dw $5ce5
 	dw $5ce5
-	dw $7d04
-	dw $7d71
+	dw BattleCenterM_h
+	dw TradeCenterM_h
 	dw $5CE5
 	dw $5CE5
 	dw $5CE5
 	dw $5CE5
-	dw $616F
-	dw $62CA
-	dw $6421
+	dw Loreli_h
+	dw Bruno_h
+	dw Agatha_h
 
 INCBIN "baserom.gbc",$39E,$1627 - $39E
 
