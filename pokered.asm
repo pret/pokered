@@ -16187,7 +16187,17 @@ CinnibarGym_h: ; 0x7573e to 0x7574a (12 bytes) (id=166)
 
     dw $5acc ; objects
 
-INCBIN "baserom.gbc",$7574a,$28b6
+INCBIN "baserom.gbc",$7574a,$75b80 - $7574a
+
+Lab1_h: ; 0x75b80 to 0x75b8c (12 bytes) (id=167)
+    db $14 ; tileset
+    db $04, $09 ; dimensions (y, x)
+    dw $5bf1, $5b90, $5b8c ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $5bb3 ; objects
+
+INCBIN "baserom.gbc",$75b8c,$2474
 
 SECTION "bank1E",DATA,BANK[$1E]
 INCBIN "baserom.gbc",$78000,$F1
