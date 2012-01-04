@@ -16157,7 +16157,17 @@ SafariZoneEntrance_h: ; 0x751c1 to 0x751cd (12 bytes) (id=156)
 
     dw $53f5 ; objects
 
-INCBIN "baserom.gbc",$751cd,$2e33
+INCBIN "baserom.gbc",$751cd,$75431 - $751cd
+
+FuchsiaGYM_h: ; 0x75431 to 0x7543d (12 bytes) (id=157)
+    db $07 ; tileset
+    db $09, $05 ; dimensions (y, x)
+    dw $56aa, $54d5, $543d ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $5658 ; objects
+
+INCBIN "baserom.gbc",$7543d,$2bc3
 
 SECTION "bank1E",DATA,BANK[$1E]
 INCBIN "baserom.gbc",$78000,$F1
