@@ -16207,7 +16207,17 @@ Lab2_h: ; 0x75c15 to 0x75c21 (12 bytes) (id=168)
 
     dw $5c45 ; objects
 
-INCBIN "baserom.gbc",$75c21,$23df
+INCBIN "baserom.gbc",$75c21,$75c7b - $75c21
+
+Lab3_h: ; 0x75c7b to 0x75c87 (12 bytes) (id=169)
+    db $14 ; tileset
+    db $04, $04 ; dimensions (y, x)
+    dw $5d15, $5c8a, $5c87 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $5cec ; objects
+
+INCBIN "baserom.gbc",$75c87,$2379
 
 SECTION "bank1E",DATA,BANK[$1E]
 INCBIN "baserom.gbc",$78000,$F1
