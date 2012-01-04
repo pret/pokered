@@ -16267,7 +16267,17 @@ Loreli_h: ; 0x7616f to 0x7617b (12 bytes) (id=245)
 
     dw $6280 ; objects
 
-INCBIN "baserom.gbc",$7617b,$1e85
+INCBIN "baserom.gbc",$7617b,$762ca - $7617b
+
+Bruno_h: ; 0x762ca to 0x762d6 (12 bytes) (id=246)
+    db $07 ; tileset
+    db $06, $05 ; dimensions (y, x)
+    dw $6403, $63a8, $62d6 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $63d7 ; objects
+
+INCBIN "baserom.gbc",$762d6,$1d2a
 
 SECTION "bank1E",DATA,BANK[$1E]
 INCBIN "baserom.gbc",$78000,$F1
