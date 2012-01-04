@@ -16177,7 +16177,17 @@ FuchsiaMeetingRoom_h: ; 0x756d7 to 0x756e3 (12 bytes) (id=158)
 
     dw $56fc ; objects
 
-INCBIN "baserom.gbc",$756e3,$291d
+INCBIN "baserom.gbc",$756e3,$7573e - $756e3
+
+CinnibarGym_h: ; 0x7573e to 0x7574a (12 bytes) (id=166)
+    db $16 ; tileset
+    db $09, $0a ; dimensions (y, x)
+    dw $5b26, $589f, $574a ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $5acc ; objects
+
+INCBIN "baserom.gbc",$7574a,$28b6
 
 SECTION "bank1E",DATA,BANK[$1E]
 INCBIN "baserom.gbc",$78000,$F1
