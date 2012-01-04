@@ -16247,7 +16247,17 @@ CinnibarMart_h: ; 0x75e72 to 0x75e7e (12 bytes) (id=172)
 
     dw $5e91 ; objects
 
-INCBIN "baserom.gbc",$75e7e,$2182
+INCBIN "baserom.gbc",$75e7e,$75eb7 - $75e7e
+
+CopycatsHouseF1_h: ; 0x75eb7 to 0x75ec3 (12 bytes) (id=175)
+    db $01 ; tileset
+    db $04, $04 ; dimensions (y, x)
+    dw $4000, $5ec6, $5ec3 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $5ee3 ; objects
+
+INCBIN "baserom.gbc",$75ec3,$213d
 
 SECTION "bank1E",DATA,BANK[$1E]
 INCBIN "baserom.gbc",$78000,$F1
