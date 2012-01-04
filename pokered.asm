@@ -16097,7 +16097,17 @@ PewterMart_h: ; 0x74ca1 to 0x74cad (12 bytes) (id=56)
 
     dw $4cda ; objects
 
-INCBIN "baserom.gbc",$74cad,$3353
+INCBIN "baserom.gbc",$74cad,$74d00 - $74cad
+
+UnknownDungeon1_h: ; 0x74d00 to 0x74d0c (12 bytes) (id=228)
+    db $11 ; tileset
+    db $09, $0f ; dimensions (y, x)
+    dw $4d76, $4d0f, $4d0c ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $4d15 ; objects
+
+INCBIN "baserom.gbc",$74d0c,$32f4
 
 SECTION "bank1E",DATA,BANK[$1E]
 INCBIN "baserom.gbc",$78000,$F1
