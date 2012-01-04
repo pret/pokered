@@ -2104,7 +2104,7 @@ Function62CE: ; 62CE, XXX called by 4B2 948 989 5BF9 5D15
 	ld [$D365],a
 	ret
 
-incbin "baserom.gbc",$62FF,$6420-$62FF
+INCBIN "baserom.gbc",$62FF,$6420-$62FF
 
 FirstMapSpec:
 	db $26 ; RedHouse1F
@@ -2115,7 +2115,7 @@ FirstMapSpec:
 	FLYWARP_DATA 4,6,3
 	db $04		;Tileset_id
 
-incbin "baserom.gbc",$6428,$6448-$6428
+INCBIN "baserom.gbc",$6428,$6448-$6428
 FlyWarpDataPtr:
 	db $00,0
         dw Map00FlyWarp
@@ -2175,7 +2175,7 @@ Map0fFlyWarp:
 Map15FlyWarp:
 	FLYWARP_DATA 10,20,11
 
-incbin "baserom.gbc",$64CA,$778D - $64CA
+INCBIN "baserom.gbc",$64CA,$778D - $64CA
 
 FieldMoveNames: ; 778D
 	db "CUT@"
@@ -4961,7 +4961,9 @@ CeladonCity_h: ; 0x18000
 
     dw $4022 ; objects
 
-INCBIN "baserom.gbc",$18022,$2A1-$22
+INCBIN "baserom.gbc",$18022,$180df - $18022
+CeladonCityBlocks: ; 450
+    INCBIN "maps/celadoncity.blk"
 
 PalletTown_h:
 	db $00 ; tileset
@@ -5046,7 +5048,9 @@ ViridianCity_h: ; 0x18357 to 0x18384 (45 bytes) (bank=6) (id=1)
 
     dw $4384 ; objects
 
-INCBIN "baserom.gbc",$18384,$18554-$18384
+INCBIN "baserom.gbc",$18384,$183ec - $18384
+ViridianCityBlocks: ; 360
+    INCBIN "maps/viridiancity.blk"
 
 PewterCity_h: ; 0x18554 to 0x18576 (34 bytes) (bank=6) (id=2)
     db $00 ; tileset
@@ -5072,7 +5076,9 @@ PewterCity_h: ; 0x18554 to 0x18576 (34 bytes) (bank=6) (id=2)
 
     dw $4577 ; objects
 
-INCBIN "baserom.gbc",$18576,$1874e-$18576
+INCBIN "baserom.gbc",$18576,$185e6 - $18576
+PewterCityBlocks: ; 360
+    INCBIN "maps/pewtercity.blk"
 
 CeruleanCity_h: ; 0x1874e to 0x18786 (56 bytes) (bank=6) (id=3)
     db $00 ; tileset
@@ -5110,7 +5116,9 @@ CeruleanCity_h: ; 0x1874e to 0x18786 (56 bytes) (bank=6) (id=3)
 
     dw $4786 ; objects
 
-INCBIN "baserom.gbc",$18786,$18998-$18786
+INCBIN "baserom.gbc",$18786,$18830 - $18786
+CeruleanCityBlocks: ; 360
+    INCBIN "maps/ceruleancity.blk"
 
 VermilionCity_h: ; 0x18998 to 0x189ba (34 bytes) (bank=6) (id=5)
     db $00 ; tileset
@@ -5136,7 +5144,9 @@ VermilionCity_h: ; 0x18998 to 0x189ba (34 bytes) (bank=6) (id=5)
 
     dw $49ba ; objects
 
-INCBIN "baserom.gbc",$189BA,$18BA7-$189BA
+INCBIN "baserom.gbc",$189ba,$18a3f - $189ba
+VermilionCityBlocks: ; 360
+    INCBIN "maps/vermilioncity.blk"
 
 FuchsiaCity_h: ; 0x18ba7 to 0x18bd4 (45 bytes) (bank=6) (id=7)
     db $00 ; tileset
@@ -5168,7 +5178,10 @@ FuchsiaCity_h: ; 0x18ba7 to 0x18bd4 (45 bytes) (bank=6) (id=7)
 
     dw $4bd4 ; objects
 
-INCBIN "baserom.gbc",$18BD4,$18E5B-$18BD4
+INCBIN "baserom.gbc",$18bd4,$18c86 - $18bd4
+FuchsiaCityBlocks: ; 360
+    INCBIN "maps/fuchsiacity.blk"
+INCBIN "baserom.gbc",$18dee,$6d
 
 PalletTownScript:
 	ld a,[$D74B]
@@ -5578,9 +5591,9 @@ CinnabarIsland_h: ; 0x1c000 to 0x1c022 (34 bytes) (bank=7) (id=8)
 
     dw $4022 ; objects
 
-;INCBIN "baserom.gbc",$1C022,$21E-34
-
-INCBIN "baserom.gbc",$1C022,$1C0C3-$1C022
+INCBIN "baserom.gbc",$1c022,$1c069 - $1c022
+CinnabarIslandBlocks: ; 90
+    INCBIN "maps/cinnabarisland.blk"
 
 Route1_h: ; 0x1c0c3 to 0x1c0e5 (34 bytes) (bank=7) (id=12)
     db $00 ; tileset
@@ -5606,7 +5619,20 @@ Route1_h: ; 0x1c0c3 to 0x1c0e5 (34 bytes) (bank=7) (id=12)
 
     dw $40e5 ; objects
 
-INCBIN "baserom.gbc",$1C0E5,$1C21E-$1C0E5
+INCBIN "baserom.gbc",$1c0e5,$1c0fc - $1c0e5
+Route1Blocks: ; 180
+    INCBIN "maps/route1.blk"
+INCBIN "baserom.gbc",$1c1b0,$1c1c0 - $1c1b0
+OaksLabBlocks: ; 30
+    INCBIN "maps/oakslab.blk"
+ViridianHouseBlocks: ; 16
+    INCBIN "maps/viridianhouse.blk"
+INCBIN "baserom.gbc",$1c1ee,$0
+SchoolBlocks: ; 16
+    INCBIN "maps/school.blk"
+INCBIN "baserom.gbc",$1c1fe,$1c20e - $1c1fe
+DiglettsCaveRoute2Blocks: ; 16
+    INCBIN "maps/diglettscaveroute2.blk"
 
 MonsterNames: ; 421E
 	db "RHYDON@@@@"
@@ -5820,7 +5846,9 @@ ViridianMart_h: ; 0x1d462 to 0x1d46e (12 bytes) (bank=7) (id=42)
 
     dw $550a ; objects
 
-INCBIN "baserom.gbc",$1D46E,$1D540-$1D46E
+INCBIN "baserom.gbc",$1d46e,$1d530 - $1d46e
+ViridianMartBlocks: ; 16
+    INCBIN "maps/viridianmart.blk"
 
 School_h: ; 0x1d540 to 0x1d54c (12 bytes) (bank=7) (id=43)
     db $08 ; tileset
@@ -12885,7 +12913,12 @@ LavendarTown_h: ; 0x44000 to 0x4402d (45 bytes) (bank=11) (id=4)
 
     dw $402d ; objects
 
-INCBIN "baserom.gbc",$4402D,$44251-$4402D
+INCBIN "baserom.gbc",$4402d,$44085 - $4402d
+LavendarTownBlocks: ; 90
+    INCBIN "maps/lavendartown.blk"
+ViridianPokeCenterBlocks: ; 28
+    INCBIN "maps/viridianpokecenter.blk"
+INCBIN "baserom.gbc",$440fb,$156
 
 ViridianPokecenter_h: ; 0x44251 to 0x4425d (12 bytes) (bank=11) (id=41)
     db $06 ; tileset
@@ -13173,7 +13206,10 @@ Route7_h: ; 0x48000 to 0x48022 (34 bytes) (bank=12) (id=18)
 
     dw $4022 ; objects
 
-INCBIN "baserom.gbc",$48022,$4815C-$48022
+INCBIN "baserom.gbc",$48022,$48051 - $48022
+Route7Blocks: ; 90
+    INCBIN "maps/route7.blk"
+INCBIN "baserom.gbc",$480ab,$b1
 
 RedsHouse1F_h: ; 415C
 	db $01 ; tileset
@@ -13889,7 +13925,9 @@ Route22_h: ; 0x50000 to 0x50022 (34 bytes) (id=33)
 
     dw $4022 ; objects
 
-INCBIN "baserom.gbc",$50022,$500f1 - $50022
+INCBIN "baserom.gbc",$50022,$5003d - $50022
+Route22Blocks: ; 180
+    INCBIN "maps/route22.blk"
 
 Route20_h: ; 0x500f1 to 0x50113 (34 bytes) (id=31)
     db $00 ; tileset
@@ -13915,7 +13953,9 @@ Route20_h: ; 0x500f1 to 0x50113 (34 bytes) (id=31)
 
     dw $4113 ; objects
 
-INCBIN "baserom.gbc",$50113,$5033f - $50113
+INCBIN "baserom.gbc",$50113,$5017d - $50113
+Route20Blocks: ; 450
+    INCBIN "maps/route20.blk"
 
 Route23_h: ; 0x5033f to 0x50361 (34 bytes) (id=34)
     db $17 ; tileset
@@ -13941,7 +13981,9 @@ Route23_h: ; 0x5033f to 0x50361 (34 bytes) (id=34)
 
     dw $4361 ; objects
 
-INCBIN "baserom.gbc",$50361,$50682 - $50361
+INCBIN "baserom.gbc",$50361,$503b2 - $50361
+Route23Blocks: ; 720
+    INCBIN "maps/route23.blk"
 
 Route24_h: ; 0x50682 to 0x506a4 (34 bytes) (id=35)
     db $00 ; tileset
@@ -13967,7 +14009,9 @@ Route24_h: ; 0x50682 to 0x506a4 (34 bytes) (id=35)
 
     dw $46a4 ; objects
 
-INCBIN "baserom.gbc",$506a4,$5079b - $506a4
+INCBIN "baserom.gbc",$506a4,$506e7 - $506a4
+Route24Blocks: ; 180
+    INCBIN "maps/route24.blk"
 
 Route25_h: ; 0x5079b to 0x507b2 (23 bytes) (id=36)
     db $00 ; tileset
@@ -13987,7 +14031,9 @@ Route25_h: ; 0x5079b to 0x507b2 (23 bytes) (id=36)
 
     dw $47b2 ; objects
 
-INCBIN "baserom.gbc",$507b2,$5091e - $507b2
+INCBIN "baserom.gbc",$507b2,$50810 - $507b2
+Route25Blocks: ; 270
+    INCBIN "maps/route25.blk"
 
 IndigoPlateau_h: ; 0x5091e to 0x50935 (23 bytes) (id=9)
     db $17 ; tileset
@@ -14007,7 +14053,9 @@ IndigoPlateau_h: ; 0x5091e to 0x50935 (23 bytes) (id=9)
 
     dw $4936 ; objects
 
-INCBIN "baserom.gbc",$50935,$509a4 - $50935
+INCBIN "baserom.gbc",$50935,$5094a - $50935
+IndigoPlateauBlocks: ; 90
+    INCBIN "maps/indigoplateau.blk"
 
 SaffronCity_h: ; 0x509a4 to 0x509dc (56 bytes) (id=10)
     db $00 ; tileset
@@ -14045,7 +14093,10 @@ SaffronCity_h: ; 0x509a4 to 0x509dc (56 bytes) (id=10)
 
     dw $49dc ; objects
 
-INCBIN "baserom.gbc",$509dc,$51791 - $509dc
+INCBIN "baserom.gbc",$509dc,$50a98 - $509dc
+SaffronCityBlocks: ; 360
+    INCBIN "maps/saffroncity.blk"
+INCBIN "baserom.gbc",$50c00,$b91
 
 VictoryRoad2_h: ; 0x51791 to 0x5179d (12 bytes) (id=194)
     db $11 ; tileset
@@ -14108,7 +14159,9 @@ Mansion4_h: ; 0x523ad to 0x523b9 (12 bytes) (id=216)
 INCBIN "baserom.gbc",$523b9,$1c47
 
 SECTION "bank15",DATA,BANK[$15]
-INCBIN "baserom.gbc",$54000,$541e6 - $54000
+INCBIN "baserom.gbc",$54000,$5407e - $54000
+Route2Blocks: ; 360
+    INCBIN "maps/route2.blk"
 
 Route3_h: ; 0x541e6 to 0x54208 (34 bytes) (id=14)
     db $00 ; tileset
@@ -14134,7 +14187,9 @@ Route3_h: ; 0x541e6 to 0x54208 (34 bytes) (id=14)
 
     dw $4208 ; objects
 
-INCBIN "baserom.gbc",$54208,$54390 - $54208
+INCBIN "baserom.gbc",$54208,$54255 - $54208
+Route3Blocks: ; 315
+    INCBIN "maps/route3.blk"
 
 Route4_h: ; 0x54390 to 0x543b2 (34 bytes) (id=15)
     db $00 ; tileset
@@ -14160,7 +14215,9 @@ Route4_h: ; 0x54390 to 0x543b2 (34 bytes) (id=15)
 
     dw $43b2 ; objects
 
-INCBIN "baserom.gbc",$543b2,$54581 - $543b2
+INCBIN "baserom.gbc",$543b2,$543ec - $543b2
+Route4Blocks: ; 405
+    INCBIN "maps/route4.blk"
 
 Route5_h: ; 0x54581 to 0x545a3 (34 bytes) (id=16)
     db $00 ; tileset
@@ -14186,7 +14243,9 @@ Route5_h: ; 0x54581 to 0x545a3 (34 bytes) (id=16)
 
     dw $45a3 ; objects
 
-INCBIN "baserom.gbc",$545a3,$54686 - $545a3
+INCBIN "baserom.gbc",$545a3,$545d2 - $545a3
+Route5Blocks: ; 180
+    INCBIN "maps/route5.blk"
 
 Route9_h: ; 0x54686 to 0x546a8 (34 bytes) (id=20)
     db $00 ; tileset
@@ -14212,7 +14271,9 @@ Route9_h: ; 0x54686 to 0x546a8 (34 bytes) (id=20)
 
     dw $46a8 ; objects
 
-INCBIN "baserom.gbc",$546a8,$5480c - $546a8
+INCBIN "baserom.gbc",$546a8,$546fe - $546a8
+Route9Blocks: ; 270
+    INCBIN "maps/route9.blk"
 
 Route13_h: ; 0x5480c to 0x5482e (34 bytes) (id=24)
     db $00 ; tileset
@@ -14238,7 +14299,9 @@ Route13_h: ; 0x5480c to 0x5482e (34 bytes) (id=24)
 
     dw $482e ; objects
 
-INCBIN "baserom.gbc",$5482e,$54999 - $5482e
+INCBIN "baserom.gbc",$5482e,$5488b - $5482e
+Route13Blocks: ; 270
+    INCBIN "maps/route13.blk"
 
 Route14_h: ; 0x54999 to 0x549bb (34 bytes) (id=25)
     db $00 ; tileset
@@ -14264,7 +14327,9 @@ Route14_h: ; 0x54999 to 0x549bb (34 bytes) (id=25)
 
     dw $49bb ; objects
 
-INCBIN "baserom.gbc",$549bb,$54b20 - $549bb
+INCBIN "baserom.gbc",$549bb,$54a12 - $549bb
+Route14Blocks: ; 270
+    INCBIN "maps/route14.blk"
 
 Route17_h: ; 0x54b20 to 0x54b42 (34 bytes) (id=28)
     db $00 ; tileset
@@ -14290,7 +14355,9 @@ Route17_h: ; 0x54b20 to 0x54b42 (34 bytes) (id=28)
 
     dw $4b42 ; objects
 
-INCBIN "baserom.gbc",$54b42,$54e78 - $54b42
+INCBIN "baserom.gbc",$54b42,$54ba8 - $54b42
+Route17Blocks: ; 720
+    INCBIN "maps/route17.blk"
 
 Route19_h: ; 0x54e78 to 0x54e9a (34 bytes) (id=30)
     db $00 ; tileset
@@ -14316,7 +14383,9 @@ Route19_h: ; 0x54e78 to 0x54e9a (34 bytes) (id=30)
 
     dw $4e9a ; objects
 
-INCBIN "baserom.gbc",$54e9a,$54fff - $54e9a
+INCBIN "baserom.gbc",$54e9a,$54ef1 - $54e9a
+Route19Blocks: ; 270
+    INCBIN "maps/route19.blk"
 
 Route21_h: ; 0x54fff to 0x55021 (34 bytes) (id=32)
     db $00 ; tileset
@@ -14342,7 +14411,10 @@ Route21_h: ; 0x54fff to 0x55021 (34 bytes) (id=32)
 
     dw $5021 ; objects
 
-INCBIN "baserom.gbc",$55021,$56064 - $55021
+INCBIN "baserom.gbc",$55021,$5506d - $55021
+Route21Blocks: ; 450
+    INCBIN "maps/route21.blk"
+INCBIN "baserom.gbc",$5522f,$e35
 
 VermilionHouse2_h: ; 0x56064 to 0x56070 (12 bytes) (id=163)
     db $08 ; tileset
@@ -14429,7 +14501,9 @@ Route6_h: ; 0x58000 to 0x58022 (34 bytes) (id=17)
 
     dw $4022 ; objects
 
-INCBIN "baserom.gbc",$58022,$5812d - $58022
+INCBIN "baserom.gbc",$58022,$58079 - $58022
+Route6Blocks: ; 180
+    INCBIN "maps/route6.blk"
 
 Route8_h: ; 0x5812d to 0x5814f (34 bytes) (id=19)
     db $00 ; tileset
@@ -14455,7 +14529,9 @@ Route8_h: ; 0x5812d to 0x5814f (34 bytes) (id=19)
 
     dw $414f ; objects
 
-INCBIN "baserom.gbc",$5814f,$582d4 - $5814f
+INCBIN "baserom.gbc",$5814f,$581c6 - $5814f
+Route8Blocks: ; 270
+    INCBIN "maps/route8.blk"
 
 Route10_h: ; 0x582d4 to 0x582f6 (34 bytes) (id=21)
     db $00 ; tileset
@@ -14481,7 +14557,9 @@ Route10_h: ; 0x582d4 to 0x582f6 (34 bytes) (id=21)
 
     dw $42f6 ; objects
 
-INCBIN "baserom.gbc",$582f6,$584be - $582f6
+INCBIN "baserom.gbc",$582f6,$58356 - $582f6
+Route10Blocks: ; 360
+    INCBIN "maps/route10.blk"
 
 Route11_h: ; 0x584be to 0x584e0 (34 bytes) (id=22)
     db $00 ; tileset
@@ -14507,7 +14585,9 @@ Route11_h: ; 0x584be to 0x584e0 (34 bytes) (id=22)
 
     dw $44e0 ; objects
 
-INCBIN "baserom.gbc",$584e0,$5866d - $584e0
+INCBIN "baserom.gbc",$584e0,$5855f - $584e0
+Route11Blocks: ; 270
+    INCBIN "maps/route11.blk"
 
 Route12_h: ; 0x5866d to 0x5869a (45 bytes) (id=23)
     db $00 ; tileset
@@ -14539,7 +14619,9 @@ Route12_h: ; 0x5866d to 0x5869a (45 bytes) (id=23)
 
     dw $469a ; objects
 
-INCBIN "baserom.gbc",$5869a,$5892c - $5869a
+INCBIN "baserom.gbc",$5869a,$58710 - $5869a
+Route12Blocks: ; 540
+    INCBIN "maps/route12.blk"
 
 Route15_h: ; 0x5892c to 0x5894e (34 bytes) (id=26)
     db $00 ; tileset
@@ -14565,7 +14647,9 @@ Route15_h: ; 0x5892c to 0x5894e (34 bytes) (id=26)
 
     dw $494e ; objects
 
-INCBIN "baserom.gbc",$5894e,$58ada - $5894e
+INCBIN "baserom.gbc",$5894e,$589cc - $5894e
+Route15Blocks: ; 270
+    INCBIN "maps/route15.blk"
 
 Route16_h: ; 0x58ada to 0x58afc (34 bytes) (id=27)
     db $00 ; tileset
@@ -14591,7 +14675,9 @@ Route16_h: ; 0x58ada to 0x58afc (34 bytes) (id=27)
 
     dw $4afc ; objects
 
-INCBIN "baserom.gbc",$58afc,$58c38 - $58afc
+INCBIN "baserom.gbc",$58afc,$58b84 - $58afc
+Route16Blocks: ; 180
+    INCBIN "maps/route16.blk"
 
 Route18_h: ; 0x58c38 to 0x58c5a (34 bytes) (id=29)
     db $00 ; tileset
@@ -14617,7 +14703,10 @@ Route18_h: ; 0x58c38 to 0x58c5a (34 bytes) (id=29)
 
     dw $4c5a ; objects
 
-INCBIN "baserom.gbc",$58c5a,$59b64 - $58c5a
+INCBIN "baserom.gbc",$58c5a,$58c9c - $58c5a
+Route18Blocks: ; 225
+    INCBIN "maps/route18.blk"
+INCBIN "baserom.gbc",$58d7d,$de7
 
 FanClub_h: ; 0x59b64 to 0x59b70 (12 bytes) (id=90)
     db $10 ; tileset
@@ -14686,7 +14775,9 @@ INCBIN "baserom.gbc",$5C000,$10
 RedsHouse2FBlocks:
 	INCBIN "maps/redshouse2f.blk"
 
-INCBIN "baserom.gbc",$5C020,$84
+INCBIN "baserom.gbc",$5c020,$5c090 - $5c020
+ViridianForestexitBlocks: ; 20
+    INCBIN "maps/viridianforestexit.blk"
 
 RedsHouse2F_h:
 	db $04 ; tileset
@@ -16158,7 +16249,9 @@ ViridianGym_h: ; 0x74897 to 0x748a3 (12 bytes) (id=45)
 
     dw $4bde ; objects
 
-INCBIN "baserom.gbc",$748a3,$74ca1 - $748a3
+INCBIN "baserom.gbc",$748a3,$74c47 - $748a3
+ViridianGymBlocks: ; 90
+    INCBIN "maps/viridiangym.blk"
 
 PewterMart_h: ; 0x74ca1 to 0x74cad (12 bytes) (id=56)
     db $02 ; tileset

@@ -1,7 +1,8 @@
-#!/usr/bin/python
+#!/usr/bin/python2.7
 #author: Bryan Bishop <kanzure@gmail.com>
 #date: 2012-01-03
 #purpose: map which addresses are left
+#note: using python2.7 because of subprocess
 import sys, os
 from copy import copy, deepcopy
 import subprocess
@@ -86,10 +87,10 @@ def find_incbin_to_replace_for(address):
         start = incbin["start"]
         end = incbin["end"]
         
-        print "start is: " + str(start)
-        print "end is: " + str(end)
-        print "address is: " + str(type(address))
-        print "checking.... " + hex(start) + " <= " + hex(address) + " <= " + hex(end)
+        #print "start is: " + str(start)
+        #print "end is: " + str(end)
+        #print "address is: " + str(type(address))
+        #print "checking.... " + hex(start) + " <= " + hex(address) + " <= " + hex(end)
         
         if start <= address <= end:
             return incbin_key
@@ -147,6 +148,8 @@ def generate_diff_insert(line_number, newline):
 
     try:
         diffcontent = subprocess.check_output("diff -u ../pokered.asm " + newfile_filename, shell=True)
+    except AttributeError, exc:
+        raise exc
     except Exception, exc:
         diffcontent = exc.output
 
