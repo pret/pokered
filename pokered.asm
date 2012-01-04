@@ -16257,7 +16257,17 @@ CopycatsHouseF1_h: ; 0x75eb7 to 0x75ec3 (12 bytes) (id=175)
 
     dw $5ee3 ; objects
 
-INCBIN "baserom.gbc",$75ec3,$213d
+INCBIN "baserom.gbc",$75ec3,$7616f - $75ec3
+
+Loreli_h: ; 0x7616f to 0x7617b (12 bytes) (id=245)
+    db $07 ; tileset
+    db $06, $05 ; dimensions (y, x)
+    dw $62ac, $6251, $617b ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $6280 ; objects
+
+INCBIN "baserom.gbc",$7617b,$1e85
 
 SECTION "bank1E",DATA,BANK[$1E]
 INCBIN "baserom.gbc",$78000,$F1
