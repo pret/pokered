@@ -16237,7 +16237,17 @@ CinnibarPokecenter_h: ; 0x75e20 to 0x75e2c (12 bytes) (id=171)
 
     dw $5e46 ; objects
 
-INCBIN "baserom.gbc",$75e2c,$21d4
+INCBIN "baserom.gbc",$75e2c,$75e72 - $75e2c
+
+CinnibarMart_h: ; 0x75e72 to 0x75e7e (12 bytes) (id=172)
+    db $02 ; tileset
+    db $04, $04 ; dimensions (y, x)
+    dw $4010, $5e81, $5e7e ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $5e91 ; objects
+
+INCBIN "baserom.gbc",$75e7e,$2182
 
 SECTION "bank1E",DATA,BANK[$1E]
 INCBIN "baserom.gbc",$78000,$F1
