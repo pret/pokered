@@ -156,7 +156,7 @@ MapHeaderPointers: ; $01AE
 	dw RedsHouse2F_h
 	dw BluesHouse_h
 	dw OaksLab_h
-	dw ViridianPokeCenter_h
+	dw ViridianPokecenter_h
 	dw ViridianMart_h
 	dw School_h
 	dw ViridianHouse_h
@@ -249,7 +249,7 @@ MapHeaderPointers: ; $01AE
 	dw CeladonMansion4_h
 	dw CeladonMansion5_h
 	dw CeladonPokecenter_h
-	dw CeladonGYM_h
+	dw CeladonGym_h
 	dw CeladonGameCorner_h
 	dw CeladonHouse_h
 	dw CeladonPrizeRoom_h
@@ -2252,7 +2252,7 @@ MapHeaderBanks: ; 423D
 	db BANK(RedsHouse2F_h)
 	db BANK(BluesHouse_h)
 	db BANK(OaksLab_h)
-	db BANK(ViridianPokeCenter_h)
+	db BANK(ViridianPokecenter_h)
 	db BANK(ViridianMart_h)
 	db BANK(School_h)
 	db BANK(ViridianHouse_h)
@@ -2345,7 +2345,7 @@ MapHeaderBanks: ; 423D
 	db BANK(CeladonMansion4_h)
 	db BANK(CeladonMansion5_h)
 	db BANK(CeladonPokecenter_h)
-	db BANK(CeladonGYM_h)
+	db BANK(CeladonGym_h)
 	db BANK(CeladonGameCorner_h)
 	db BANK(CeladonHouse_h)
 	db BANK(CeladonPrizeRoom_h)
@@ -12887,7 +12887,7 @@ LavendarTown_h: ; 0x44000 to 0x4402d (45 bytes) (bank=11) (id=4)
 
 INCBIN "baserom.gbc",$4402D,$44251-$4402D
 
-ViridianPokeCenter_h: ; 0x44251 to 0x4425d (12 bytes) (bank=11) (id=41)
+ViridianPokecenter_h: ; 0x44251 to 0x4425d (12 bytes) (bank=11) (id=41)
     db $06 ; tileset
     db $04, $07 ; dimensions (y, x)
     dw $40df, $4263, $425d ; blocks, texts, scripts
@@ -13370,7 +13370,7 @@ CeladonPokecenter_h: ; 0x488ac to 0x488b8 (12 bytes) (bank=12) (id=133)
 
 INCBIN "baserom.gbc",$488B8,$488FE-$488B8
 
-CeladonGYM_h: ; 0x488fe to 0x4890a (12 bytes) (bank=12) (id=134)
+CeladonGym_h: ; 0x488fe to 0x4890a (12 bytes) (bank=12) (id=134)
     db $07 ; tileset
     db $09, $05 ; dimensions (y, x)
     dw $4b84, $49a6, $490a ; blocks, texts, scripts
@@ -14764,7 +14764,7 @@ PewterGym_h: ; 0x5c37b to 0x5c387 (12 bytes) (id=54)
 
 INCBIN "baserom.gbc",$5c387,$5c57b - $5c387
 
-PewterPokeCenter_h: ; 0x5c57b to 0x5c587 (12 bytes) (id=58)
+PewterPokecenter_h: ; 0x5c57b to 0x5c587 (12 bytes) (id=58)
     db $06 ; tileset
     db $04, $07 ; dimensions (y, x)
     dw $4064, $458d, $4587 ; blocks, texts, scripts
@@ -14824,7 +14824,7 @@ LavenderMart_h: ; 0x5c920 to 0x5c92c (12 bytes) (id=150)
 
 INCBIN "baserom.gbc",$5c92c,$5c983 - $5c92c
 
-VermilionPokeCenter_h: ; 0x5c983 to 0x5c98f (12 bytes) (id=89)
+VermilionPokecenter_h: ; 0x5c983 to 0x5c98f (12 bytes) (id=89)
     db $06 ; tileset
     db $04, $07 ; dimensions (y, x)
     dw $4064, $4995, $498f ; blocks, texts, scripts
@@ -16230,7 +16230,7 @@ SafariZoneEntrance_h: ; 0x751c1 to 0x751cd (12 bytes) (id=156)
 
 INCBIN "baserom.gbc",$751cd,$75431 - $751cd
 
-FuchsiaGYM_h: ; 0x75431 to 0x7543d (12 bytes) (id=157)
+FuchsiaGym_h: ; 0x75431 to 0x7543d (12 bytes) (id=157)
     db $07 ; tileset
     db $09, $05 ; dimensions (y, x)
     dw $56aa, $54d5, $543d ; blocks, texts, scripts
@@ -16250,7 +16250,7 @@ FuchsiaMeetingRoom_h: ; 0x756d7 to 0x756e3 (12 bytes) (id=158)
 
 INCBIN "baserom.gbc",$756e3,$7573e - $756e3
 
-CinnibarGym_h: ; 0x7573e to 0x7574a (12 bytes) (id=166)
+CinnabarGym_h: ; 0x7573e to 0x7574a (12 bytes) (id=166)
     db $16 ; tileset
     db $09, $0a ; dimensions (y, x)
     dw $5b26, $589f, $574a ; blocks, texts, scripts
@@ -16300,7 +16300,7 @@ Lab4_h: ; 0x75d25 to 0x75d31 (12 bytes) (id=170)
 
 INCBIN "baserom.gbc",$75d31,$75e20 - $75d31
 
-CinnibarPokecenter_h: ; 0x75e20 to 0x75e2c (12 bytes) (id=171)
+CinnabarPokecenter_h: ; 0x75e20 to 0x75e2c (12 bytes) (id=171)
     db $06 ; tileset
     db $04, $07 ; dimensions (y, x)
     dw $4030, $5e32, $5e2c ; blocks, texts, scripts
@@ -16310,7 +16310,7 @@ CinnibarPokecenter_h: ; 0x75e20 to 0x75e2c (12 bytes) (id=171)
 
 INCBIN "baserom.gbc",$75e2c,$75e72 - $75e2c
 
-CinnibarMart_h: ; 0x75e72 to 0x75e7e (12 bytes) (id=172)
+CinnabarMart_h: ; 0x75e72 to 0x75e7e (12 bytes) (id=172)
     db $02 ; tileset
     db $04, $04 ; dimensions (y, x)
     dw $4010, $5e81, $5e7e ; blocks, texts, scripts
