@@ -13448,7 +13448,147 @@ MtMoonPokecenter_h: ; 0x492c3 to 0x492cf (12 bytes) (bank=12) (id=68)
 
     dw $5376 ; objects
 
-INCBIN "baserom.gbc",$492CF,$4C000-$492CF
+INCBIN "baserom.gbc",$492cf,$493ae - $492cf
+
+RockTunnelPokecenter_h: ; 0x493ae to 0x493ba (12 bytes) (id=81)
+    db $06 ; tileset
+    db $04, $07 ; dimensions (y, x)
+    dw $40ab, $53c0, $53ba ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $53d4 ; objects
+
+INCBIN "baserom.gbc",$493ba,$49400 - $493ba
+
+Route11Gate_h: ; 0x49400 to 0x4940c (12 bytes) (id=84)
+    db $0c ; tileset
+    db $05, $04 ; dimensions (y, x)
+    dw $40c7, $540f, $540c ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $5416 ; objects
+
+INCBIN "baserom.gbc",$4940c,$49448 - $4940c
+
+Route11GateUpstairs_h: ; 0x49448 to 0x49454 (12 bytes) (id=86)
+    db $0c ; tileset
+    db $04, $04 ; dimensions (y, x)
+    dw $40db, $5457, $5454 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $54da ; objects
+
+INCBIN "baserom.gbc",$49454,$494f8 - $49454
+
+Route12Gate_h: ; 0x494f8 to 0x49504 (12 bytes) (id=87)
+    db $0c ; tileset
+    db $04, $05 ; dimensions (y, x)
+    dw $5540, $5507, $5504 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $550e ; objects
+
+INCBIN "baserom.gbc",$49504,$49554 - $49504
+
+Route12GateUpstairs_h: ; 0x49554 to 0x49560 (12 bytes) (id=195)
+    db $0c ; tileset
+    db $04, $04 ; dimensions (y, x)
+    dw $40db, $5563, $5560 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $55de ; objects
+
+INCBIN "baserom.gbc",$49560,$495f6 - $49560
+
+Route15Gate_h: ; 0x495f6 to 0x49602 (12 bytes) (id=184)
+    db $0c ; tileset
+    db $05, $04 ; dimensions (y, x)
+    dw $40c7, $5605, $5602 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $560c ; objects
+
+INCBIN "baserom.gbc",$49602,$496b2 - $49602
+
+Route16GateMap_h: ; 0x496b2 to 0x496be (12 bytes) (id=186)
+    db $0c ; tileset
+    db $07, $04 ; dimensions (y, x)
+    dw $57e3, $575a, $56be ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $578b ; objects
+
+INCBIN "baserom.gbc",$496be,$497ff - $496be
+
+Route16GateUpstairs_h: ; 0x497ff to 0x4980b (12 bytes) (id=187)
+    db $0c ; tileset
+    db $04, $04 ; dimensions (y, x)
+    dw $40db, $580e, $580b ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $584c ; objects
+
+INCBIN "baserom.gbc",$4980b,$4986a - $4980b
+
+Route18Gate_h: ; 0x4986a to 0x49876 (12 bytes) (id=190)
+    db $0c ; tileset
+    db $05, $04 ; dimensions (y, x)
+    dw $40c7, $590d, $5876 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $5937 ; objects
+
+INCBIN "baserom.gbc",$49876,$49969 - $49876
+
+Route18GateHeader_h: ; 0x49969 to 0x49975 (12 bytes) (id=191)
+    db $0c ; tileset
+    db $04, $04 ; dimensions (y, x)
+    dw $40db, $5978, $5975 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $59a4 ; objects
+
+INCBIN "baserom.gbc",$49975,$499bc - $49975
+
+MtMoon1_h: ; 0x499bc to 0x499c8 (12 bytes) (id=59)
+    db $11 ; tileset
+    db $12, $14 ; dimensions (y, x)
+    dw $5b97, $59e1, $59c8 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $5b06 ; objects
+
+INCBIN "baserom.gbc",$499c8,$49cff - $499c8
+
+MtMoon3_h: ; 0x49cff to 0x49d0b (12 bytes) (id=61)
+    db $11 ; tileset
+    db $12, $14 ; dimensions (y, x)
+    dw $6041, $5e34, $5d0b ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $5fdb ; objects
+
+INCBIN "baserom.gbc",$49d0b,$4a1a9 - $49d0b
+
+SafariZoneWest_h: ; 0x4a1a9 to 0x4a1b5 (12 bytes) (id=219)
+    db $03 ; tileset
+    db $0d, $0f ; dimensions (y, x)
+    dw $6248, $61b8, $61b5 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $61dc ; objects
+
+INCBIN "baserom.gbc",$4a1b5,$4a30b - $4a1b5
+
+SafariZoneSecretHouse_h: ; 0x4a30b to 0x4a317 (12 bytes) (id=222)
+    db $14 ; tileset
+    db $04, $04 ; dimensions (y, x)
+    dw $637f, $631a, $6317 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $6365 ; objects
+
+INCBIN "baserom.gbc",$4a317,$1ce9
 
 SECTION "bank13",DATA,BANK[$13]
 
@@ -13544,7 +13684,25 @@ AgathaPic:
 LancePic:
 	INCBIN "pic/trainer/lance.pic"
 
-INCBIN "baserom.gbc",$4FD04,$7E49-$7D04
+BattleCenterM_h: ; 0x4fd04 to 0x4fd10 (12 bytes) (id=239)
+    db $15 ; tileset
+    db $04, $05 ; dimensions (y, x)
+    dw $7d5d, $7d4c, $7d10 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $7d53 ; objects
+
+INCBIN "baserom.gbc",$4fd10,$4fd71 - $4fd10
+
+TradeCenterM_h: ; 0x4fd71 to 0x4fd7d (12 bytes) (id=240)
+    db $15 ; tileset
+    db $04, $05 ; dimensions (y, x)
+    dw $7d91, $7d80, $7d7d ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $7d87 ; objects
+
+INCBIN "baserom.gbc",$4fd7d,$cc
 
 GetPredefPointer: ; 7E49
 ; stores hl in $CC4F,$CC50
@@ -13707,13 +13865,819 @@ PredefPointers: ; 7E79
         dbw $16,$5035
 
 SECTION "bank14",DATA,BANK[$14]
-INCBIN "baserom.gbc",$50000,$4000
+Route22_h: ; 0x50000 to 0x50022 (34 bytes) (id=33)
+    db $00 ; tileset
+    db $09, $14 ; dimensions (y, x)
+    dw $403d, $5175, $4eb2 ; blocks, texts, scripts
+    db NORTH | EAST ; connections
+
+    ; connections data
+
+    db $22 ; some map
+    dw $4664, $c6eb ; pointers (connected, current) (strip)
+    db $0a, $0a ; bigness, width
+    db $8f, $00 ; alignments (y, x)
+    dw $cb69 ; window
+
+    db $01 ; some map
+    dw $4400, $c6ff ; pointers (connected, current) (strip)
+    db $0f, $14 ; bigness, width
+    db $08, $00 ; alignments (y, x)
+    dw $c703 ; window
+
+    ; end connection data
+
+    dw $4022 ; objects
+
+INCBIN "baserom.gbc",$50022,$500f1 - $50022
+
+Route20_h: ; 0x500f1 to 0x50113 (34 bytes) (id=31)
+    db $00 ; tileset
+    db $09, $32 ; dimensions (y, x)
+    dw $417d, $4d22, $4ca9 ; blocks, texts, scripts
+    db WEST | EAST ; connections
+
+    ; connections data
+
+    db $08 ; some map
+    dw $4070, $c790 ; pointers (connected, current) (strip)
+    db $09, $0a ; bigness, width
+    db $00, $13 ; alignments (y, x)
+    dw $c702 ; window
+
+    db $1e ; some map
+    dw $4f87, $c71d ; pointers (connected, current) (strip)
+    db $0c, $0a ; bigness, width
+    db $24, $00 ; alignments (y, x)
+    dw $c6f9 ; window
+
+    ; end connection data
+
+    dw $4113 ; objects
+
+INCBIN "baserom.gbc",$50113,$5033f - $50113
+
+Route23_h: ; 0x5033f to 0x50361 (34 bytes) (id=34)
+    db $17 ; tileset
+    db $48, $0a ; dimensions (y, x)
+    dw $43b2, $52f7, $51da ; blocks, texts, scripts
+    db NORTH | SOUTH ; connections
+
+    ; connections data
+
+    db $09 ; some map
+    dw $4986, $c6eb ; pointers (connected, current) (strip)
+    db $0a, $0a ; bigness, width
+    db $11, $00 ; alignments (y, x)
+    dw $c779 ; window
+
+    db $21 ; some map
+    dw $403d, $cb9b ; pointers (connected, current) (strip)
+    db $0d, $14 ; bigness, width
+    db $00, $00 ; alignments (y, x)
+    dw $c703 ; window
+
+    ; end connection data
+
+    dw $4361 ; objects
+
+INCBIN "baserom.gbc",$50361,$50682 - $50361
+
+Route24_h: ; 0x50682 to 0x506a4 (34 bytes) (id=35)
+    db $00 ; tileset
+    db $12, $0a ; dimensions (y, x)
+    dw $46e7, $544b, $53ad ; blocks, texts, scripts
+    db SOUTH | EAST ; connections
+
+    ; connections data
+
+    db $03 ; some map
+    dw $4832, $c838 ; pointers (connected, current) (strip)
+    db $10, $14 ; bigness, width
+    db $00, $0a ; alignments (y, x)
+    dw $c703 ; window
+
+    db $24 ; some map
+    dw $4810, $c725 ; pointers (connected, current) (strip)
+    db $09, $1e ; bigness, width
+    db $00, $00 ; alignments (y, x)
+    dw $c70d ; window
+
+    ; end connection data
+
+    dw $46a4 ; objects
+
+INCBIN "baserom.gbc",$506a4,$5079b - $506a4
+
+Route25_h: ; 0x5079b to 0x507b2 (23 bytes) (id=36)
+    db $00 ; tileset
+    db $09, $1e ; dimensions (y, x)
+    dw $4810, $5628, $55cb ; blocks, texts, scripts
+    db WEST ; connections
+
+    ; connections data
+
+    db $23 ; some map
+    dw $46ee, $c754 ; pointers (connected, current) (strip)
+    db $0c, $0a ; bigness, width
+    db $00, $13 ; alignments (y, x)
+    dw $c702 ; window
+
+    ; end connection data
+
+    dw $47b2 ; objects
+
+INCBIN "baserom.gbc",$507b2,$5091e - $507b2
+
+IndigoPlateau_h: ; 0x5091e to 0x50935 (23 bytes) (id=9)
+    db $17 ; tileset
+    db $09, $0a ; dimensions (y, x)
+    dw $494a, $4936, $4935 ; blocks, texts, scripts
+    db SOUTH ; connections
+
+    ; connections data
+
+    db $22 ; some map
+    dw $43b2, $c7ab ; pointers (connected, current) (strip)
+    db $0a, $0a ; bigness, width
+    db $00, $00 ; alignments (y, x)
+    dw $c6f9 ; window
+
+    ; end connection data
+
+    dw $4936 ; objects
+
+INCBIN "baserom.gbc",$50935,$509a4 - $50935
+
+SaffronCity_h: ; 0x509a4 to 0x509dc (56 bytes) (id=10)
+    db $00 ; tileset
+    db $12, $14 ; dimensions (y, x)
+    dw $4a98, $4c03, $4c00 ; blocks, texts, scripts
+    db NORTH | SOUTH | WEST | EAST ; connections
+
+    ; connections data
+
+    db $10 ; some map
+    dw $4668, $c6f0 ; pointers (connected, current) (strip)
+    db $0a, $0a ; bigness, width
+    db $23, $f6 ; alignments (y, x)
+    dw $c809 ; window
+
+    db $11 ; some map
+    dw $4079, $c912 ; pointers (connected, current) (strip)
+    db $0a, $0a ; bigness, width
+    db $00, $f6 ; alignments (y, x)
+    dw $c6f9 ; window
+
+    db $12 ; some map
+    dw $4058, $c79e ; pointers (connected, current) (strip)
+    db $09, $0a ; bigness, width
+    db $f8, $13 ; alignments (y, x)
+    dw $c702 ; window
+
+    db $13 ; some map
+    dw $41c6, $c7b5 ; pointers (connected, current) (strip)
+    db $09, $1e ; bigness, width
+    db $f8, $00 ; alignments (y, x)
+    dw $c70d ; window
+
+    ; end connection data
+
+    dw $49dc ; objects
+
+INCBIN "baserom.gbc",$509dc,$51791 - $509dc
+
+VictoryRoad2_h: ; 0x51791 to 0x5179d (12 bytes) (id=194)
+    db $11 ; tileset
+    db $09, $0f ; dimensions (y, x)
+    dw $59af, $581b, $579d ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $5915 ; objects
+
+INCBIN "baserom.gbc",$5179d,$51a36 - $5179d
+
+MtMoon2_h: ; 0x51a36 to 0x51a42 (12 bytes) (id=60)
+    db $11 ; tileset
+    db $0e, $0e ; dimensions (y, x)
+    dw $5a91, $5a46, $5a42 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $5a4d ; objects
+
+INCBIN "baserom.gbc",$51a42,$51b55 - $51a42
+
+SilphCo7_h: ; 0x51b55 to 0x51b61 (12 bytes) (id=212)
+    db $16 ; tileset
+    db $09, $0d ; dimensions (y, x)
+    dw $5f57, $5d3f, $5b61 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $5ed7 ; objects
+
+INCBIN "baserom.gbc",$51b61,$51fcc - $51b61
+
+Mansion2_h: ; 0x51fcc to 0x51fd8 (12 bytes) (id=214)
+    db $16 ; tileset
+    db $0e, $0f ; dimensions (y, x)
+    dw $6110, $604d, $5fd8 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $60d1 ; objects
+
+INCBIN "baserom.gbc",$51fd8,$521e2 - $51fd8
+
+Mansion3_h: ; 0x521e2 to 0x521ee (12 bytes) (id=215)
+    db $16 ; tileset
+    db $09, $0f ; dimensions (y, x)
+    dw $6326, $628a, $61ee ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $62e6 ; objects
+
+INCBIN "baserom.gbc",$521ee,$523ad - $521ee
+
+Mansion4_h: ; 0x523ad to 0x523b9 (12 bytes) (id=216)
+    db $16 ; tileset
+    db $0e, $0f ; dimensions (y, x)
+    dw $64dd, $6436, $63b9 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $6498 ; objects
+
+INCBIN "baserom.gbc",$523b9,$1c47
 
 SECTION "bank15",DATA,BANK[$15]
-INCBIN "baserom.gbc",$54000,$4000
+INCBIN "baserom.gbc",$54000,$541e6 - $54000
+
+Route3_h: ; 0x541e6 to 0x54208 (34 bytes) (id=14)
+    db $00 ; tileset
+    db $09, $23 ; dimensions (y, x)
+    dw $4255, $5511, $54f8 ; blocks, texts, scripts
+    db NORTH | WEST ; connections
+
+    ; connections data
+
+    db $0f ; some map
+    dw $44fa, $c704 ; pointers (connected, current) (strip)
+    db $0d, $2d ; bigness, width
+    db $11, $ce ; alignments (y, x)
+    dw $c8b4 ; window
+
+    db $02 ; some map
+    dw $460b, $c6e8 ; pointers (connected, current) (strip)
+    db $0f, $14 ; bigness, width
+    db $08, $27 ; alignments (y, x)
+    dw $c716 ; window
+
+    ; end connection data
+
+    dw $4208 ; objects
+
+INCBIN "baserom.gbc",$54208,$54390 - $54208
+
+Route4_h: ; 0x54390 to 0x543b2 (34 bytes) (id=15)
+    db $00 ; tileset
+    db $09, $2d ; dimensions (y, x)
+    dw $43ec, $5671, $5658 ; blocks, texts, scripts
+    db SOUTH | EAST ; connections
+
+    ; connections data
+
+    db $0e ; some map
+    dw $426b, $c94c ; pointers (connected, current) (strip)
+    db $0d, $23 ; bigness, width
+    db $00, $32 ; alignments (y, x)
+    dw $c712 ; window
+
+    db $03 ; some map
+    dw $4844, $c718 ; pointers (connected, current) (strip)
+    db $0f, $14 ; bigness, width
+    db $08, $00 ; alignments (y, x)
+    dw $c703 ; window
+
+    ; end connection data
+
+    dw $43b2 ; objects
+
+INCBIN "baserom.gbc",$543b2,$54581 - $543b2
+
+Route5_h: ; 0x54581 to 0x545a3 (34 bytes) (id=16)
+    db $00 ; tileset
+    db $12, $0a ; dimensions (y, x)
+    dw $45d2, $56b5, $56b2 ; blocks, texts, scripts
+    db NORTH | SOUTH ; connections
+
+    ; connections data
+
+    db $03 ; some map
+    dw $495e, $c6e8 ; pointers (connected, current) (strip)
+    db $10, $14 ; bigness, width
+    db $23, $0a ; alignments (y, x)
+    dw $c8bd ; window
+
+    db $0a ; some map
+    dw $4a9a, $c838 ; pointers (connected, current) (strip)
+    db $10, $14 ; bigness, width
+    db $00, $0a ; alignments (y, x)
+    dw $c703 ; window
+
+    ; end connection data
+
+    dw $45a3 ; objects
+
+INCBIN "baserom.gbc",$545a3,$54686 - $545a3
+
+Route9_h: ; 0x54686 to 0x546a8 (34 bytes) (id=20)
+    db $00 ; tileset
+    db $09, $1e ; dimensions (y, x)
+    dw $46fe, $56d5, $56bc ; blocks, texts, scripts
+    db WEST | EAST ; connections
+
+    ; connections data
+
+    db $03 ; some map
+    dw $4855, $c6e8 ; pointers (connected, current) (strip)
+    db $0f, $14 ; bigness, width
+    db $08, $27 ; alignments (y, x)
+    dw $c716 ; window
+
+    db $15 ; some map
+    dw $4356, $c775 ; pointers (connected, current) (strip)
+    db $0c, $0a ; bigness, width
+    db $00, $00 ; alignments (y, x)
+    dw $c6f9 ; window
+
+    ; end connection data
+
+    dw $46a8 ; objects
+
+INCBIN "baserom.gbc",$546a8,$5480c - $546a8
+
+Route13_h: ; 0x5480c to 0x5482e (34 bytes) (id=24)
+    db $00 ; tileset
+    db $09, $1e ; dimensions (y, x)
+    dw $488b, $5837, $581e ; blocks, texts, scripts
+    db NORTH | WEST ; connections
+
+    ; connections data
+
+    db $17 ; some map
+    dw $490e, $c6ff ; pointers (connected, current) (strip)
+    db $0a, $0a ; bigness, width
+    db $6b, $d8 ; alignments (y, x)
+    dw $ca49 ; window
+
+    db $19 ; some map
+    dw $4a19, $c754 ; pointers (connected, current) (strip)
+    db $0c, $0a ; bigness, width
+    db $00, $13 ; alignments (y, x)
+    dw $c702 ; window
+
+    ; end connection data
+
+    dw $482e ; objects
+
+INCBIN "baserom.gbc",$5482e,$54999 - $5482e
+
+Route14_h: ; 0x54999 to 0x549bb (34 bytes) (id=25)
+    db $00 ; tileset
+    db $1b, $0a ; dimensions (y, x)
+    dw $4a12, $59ec, $59d3 ; blocks, texts, scripts
+    db WEST | EAST ; connections
+
+    ; connections data
+
+    db $1a ; some map
+    dw $49e7, $c838 ; pointers (connected, current) (strip)
+    db $09, $1e ; bigness, width
+    db $dc, $3b ; alignments (y, x)
+    dw $c72a ; window
+
+    db $18 ; some map
+    dw $488b, $c725 ; pointers (connected, current) (strip)
+    db $09, $1e ; bigness, width
+    db $00, $00 ; alignments (y, x)
+    dw $c70d ; window
+
+    ; end connection data
+
+    dw $49bb ; objects
+
+INCBIN "baserom.gbc",$549bb,$54b20 - $549bb
+
+Route17_h: ; 0x54b20 to 0x54b42 (34 bytes) (id=28)
+    db $00 ; tileset
+    db $48, $0a ; dimensions (y, x)
+    dw $4ba8, $5b93, $5b7a ; blocks, texts, scripts
+    db NORTH | SOUTH ; connections
+
+    ; connections data
+
+    db $1b ; some map
+    dw $4bfc, $c6eb ; pointers (connected, current) (strip)
+    db $0d, $14 ; bigness, width
+    db $11, $00 ; alignments (y, x)
+    dw $c7d3 ; window
+
+    db $1d ; some map
+    dw $4c9c, $cb9b ; pointers (connected, current) (strip)
+    db $0d, $19 ; bigness, width
+    db $00, $00 ; alignments (y, x)
+    dw $c708 ; window
+
+    ; end connection data
+
+    dw $4b42 ; objects
+
+INCBIN "baserom.gbc",$54b42,$54e78 - $54b42
+
+Route19_h: ; 0x54e78 to 0x54e9a (34 bytes) (id=30)
+    db $00 ; tileset
+    db $1b, $0a ; dimensions (y, x)
+    dw $4ef1, $5d5d, $5d44 ; blocks, texts, scripts
+    db NORTH | WEST ; connections
+
+    ; connections data
+
+    db $07 ; some map
+    dw $4db4, $c6e8 ; pointers (connected, current) (strip)
+    db $10, $14 ; bigness, width
+    db $23, $0a ; alignments (y, x)
+    dw $c8bd ; window
+
+    db $1f ; some map
+    dw $41ac, $c838 ; pointers (connected, current) (strip)
+    db $09, $32 ; bigness, width
+    db $dc, $63 ; alignments (y, x)
+    dw $c752 ; window
+
+    ; end connection data
+
+    dw $4e9a ; objects
+
+INCBIN "baserom.gbc",$54e9a,$54fff - $54e9a
+
+Route21_h: ; 0x54fff to 0x55021 (34 bytes) (id=32)
+    db $00 ; tileset
+    db $2d, $0a ; dimensions (y, x)
+    dw $506d, $5f04, $5eeb ; blocks, texts, scripts
+    db NORTH | SOUTH ; connections
+
+    ; connections data
+
+    db $00 ; some map
+    dw $4339, $c6eb ; pointers (connected, current) (strip)
+    db $0a, $0a ; bigness, width
+    db $11, $00 ; alignments (y, x)
+    dw $c779 ; window
+
+    db $08 ; some map
+    dw $4069, $c9eb ; pointers (connected, current) (strip)
+    db $0a, $0a ; bigness, width
+    db $00, $00 ; alignments (y, x)
+    dw $c6f9 ; window
+
+    ; end connection data
+
+    dw $5021 ; objects
+
+INCBIN "baserom.gbc",$55021,$56064 - $55021
+
+VermilionHouse2_h: ; 0x56064 to 0x56070 (12 bytes) (id=163)
+    db $08 ; tileset
+    db $04, $04 ; dimensions (y, x)
+    dw $522f, $6073, $6070 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $60cf ; objects
+
+INCBIN "baserom.gbc",$56070,$560e9 - $56070
+
+CeladonMart2_h: ; 0x560e9 to 0x560f5 (12 bytes) (id=123)
+    db $12 ; tileset
+    db $04, $0a ; dimensions (y, x)
+    dw $6148, $60f8, $60f5 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $6111 ; objects
+
+INCBIN "baserom.gbc",$560f5,$56170 - $560f5
+
+FuchsiaHouse3_h: ; 0x56170 to 0x5617c (12 bytes) (id=164)
+    db $0d ; tileset
+    db $04, $04 ; dimensions (y, x)
+    dw $523f, $617f, $617c ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $6221 ; objects
+
+INCBIN "baserom.gbc",$5617c,$56243 - $5617c
+
+DayCareM_h: ; 0x56243 to 0x5624f (12 bytes) (id=72)
+    db $08 ; tileset
+    db $04, $04 ; dimensions (y, x)
+    dw $522f, $6252, $624f ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $6459 ; objects
+
+INCBIN "baserom.gbc",$5624f,$56473 - $5624f
+
+Route12House_h: ; 0x56473 to 0x5647f (12 bytes) (id=189)
+    db $08 ; tileset
+    db $04, $04 ; dimensions (y, x)
+    dw $522f, $6482, $647f ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $64de ; objects
+
+INCBIN "baserom.gbc",$5647f,$564f8 - $5647f
+
+SilphCo8_h: ; 0x564f8 to 0x56504 (12 bytes) (id=213)
+    db $16 ; tileset
+    db $09, $0d ; dimensions (y, x)
+    dw $666d, $657d, $6504 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $6613 ; objects
+
+INCBIN "baserom.gbc",$56504,$1afc
 
 SECTION "bank16",DATA,BANK[$16]
-INCBIN "baserom.gbc",$58000,$4000
+Route6_h: ; 0x58000 to 0x58022 (34 bytes) (id=17)
+    db $00 ; tileset
+    db $12, $0a ; dimensions (y, x)
+    dw $4079, $50c9, $50b0 ; blocks, texts, scripts
+    db NORTH | SOUTH ; connections
+
+    ; connections data
+
+    db $0a ; some map
+    dw $4bc6, $c6e8 ; pointers (connected, current) (strip)
+    db $10, $14 ; bigness, width
+    db $23, $0a ; alignments (y, x)
+    dw $c8bd ; window
+
+    db $05 ; some map
+    dw $4a41, $c838 ; pointers (connected, current) (strip)
+    db $10, $14 ; bigness, width
+    db $00, $0a ; alignments (y, x)
+    dw $c703 ; window
+
+    ; end connection data
+
+    dw $4022 ; objects
+
+INCBIN "baserom.gbc",$58022,$5812d - $58022
+
+Route8_h: ; 0x5812d to 0x5814f (34 bytes) (id=19)
+    db $00 ; tileset
+    db $09, $1e ; dimensions (y, x)
+    dw $41c6, $51cf, $51b6 ; blocks, texts, scripts
+    db WEST | EAST ; connections
+
+    ; connections data
+
+    db $0a ; some map
+    dw $4abd, $c6e8 ; pointers (connected, current) (strip)
+    db $0f, $14 ; bigness, width
+    db $08, $27 ; alignments (y, x)
+    dw $c716 ; window
+
+    db $04 ; some map
+    dw $4085, $c775 ; pointers (connected, current) (strip)
+    db $09, $0a ; bigness, width
+    db $00, $00 ; alignments (y, x)
+    dw $c6f9 ; window
+
+    ; end connection data
+
+    dw $414f ; objects
+
+INCBIN "baserom.gbc",$5814f,$582d4 - $5814f
+
+Route10_h: ; 0x582d4 to 0x582f6 (34 bytes) (id=21)
+    db $00 ; tileset
+    db $24, $0a ; dimensions (y, x)
+    dw $4356, $534f, $5336 ; blocks, texts, scripts
+    db SOUTH | WEST ; connections
+
+    ; connections data
+
+    db $04 ; some map
+    dw $4085, $c95b ; pointers (connected, current) (strip)
+    db $0a, $0a ; bigness, width
+    db $00, $00 ; alignments (y, x)
+    dw $c6f9 ; window
+
+    db $14 ; some map
+    dw $4719, $c718 ; pointers (connected, current) (strip)
+    db $09, $1e ; bigness, width
+    db $00, $3b ; alignments (y, x)
+    dw $c72a ; window
+
+    ; end connection data
+
+    dw $42f6 ; objects
+
+INCBIN "baserom.gbc",$582f6,$584be - $582f6
+
+Route11_h: ; 0x584be to 0x584e0 (34 bytes) (id=22)
+    db $00 ; tileset
+    db $09, $1e ; dimensions (y, x)
+    dw $455f, $5465, $544c ; blocks, texts, scripts
+    db WEST | EAST ; connections
+
+    ; connections data
+
+    db $05 ; some map
+    dw $4a64, $c6e8 ; pointers (connected, current) (strip)
+    db $0f, $14 ; bigness, width
+    db $08, $27 ; alignments (y, x)
+    dw $c716 ; window
+
+    db $17 ; some map
+    dw $4800, $c709 ; pointers (connected, current) (strip)
+    db $0f, $0a ; bigness, width
+    db $36, $00 ; alignments (y, x)
+    dw $c6f9 ; window
+
+    ; end connection data
+
+    dw $44e0 ; objects
+
+INCBIN "baserom.gbc",$584e0,$5866d - $584e0
+
+Route12_h: ; 0x5866d to 0x5869a (45 bytes) (id=23)
+    db $00 ; tileset
+    db $36, $0a ; dimensions (y, x)
+    dw $4710, $5675, $55f3 ; blocks, texts, scripts
+    db NORTH | SOUTH | WEST ; connections
+
+    ; connections data
+
+    db $04 ; some map
+    dw $40c1, $c6eb ; pointers (connected, current) (strip)
+    db $0a, $0a ; bigness, width
+    db $11, $00 ; alignments (y, x)
+    dw $c779 ; window
+
+    db $18 ; some map
+    dw $489c, $ca78 ; pointers (connected, current) (strip)
+    db $0d, $1e ; bigness, width
+    db $00, $28 ; alignments (y, x)
+    dw $c70d ; window
+
+    db $16 ; some map
+    dw $457a, $c8c8 ; pointers (connected, current) (strip)
+    db $09, $1e ; bigness, width
+    db $ca, $3b ; alignments (y, x)
+    dw $c72a ; window
+
+    ; end connection data
+
+    dw $469a ; objects
+
+INCBIN "baserom.gbc",$5869a,$5892c - $5869a
+
+Route15_h: ; 0x5892c to 0x5894e (34 bytes) (id=26)
+    db $00 ; tileset
+    db $09, $1e ; dimensions (y, x)
+    dw $49cc, $57c7, $57ae ; blocks, texts, scripts
+    db WEST | EAST ; connections
+
+    ; connections data
+
+    db $07 ; some map
+    dw $4cab, $c6e8 ; pointers (connected, current) (strip)
+    db $0f, $14 ; bigness, width
+    db $08, $27 ; alignments (y, x)
+    dw $c716 ; window
+
+    db $19 ; some map
+    dw $4aa8, $c709 ; pointers (connected, current) (strip)
+    db $0c, $0a ; bigness, width
+    db $24, $00 ; alignments (y, x)
+    dw $c6f9 ; window
+
+    ; end connection data
+
+    dw $494e ; objects
+
+INCBIN "baserom.gbc",$5894e,$58ada - $5894e
+
+Route16_h: ; 0x58ada to 0x58afc (34 bytes) (id=27)
+    db $00 ; tileset
+    db $09, $14 ; dimensions (y, x)
+    dw $4b84, $59b9, $5933 ; blocks, texts, scripts
+    db SOUTH | EAST ; connections
+
+    ; connections data
+
+    db $1c ; some map
+    dw $4ba8, $c823 ; pointers (connected, current) (strip)
+    db $0a, $0a ; bigness, width
+    db $00, $00 ; alignments (y, x)
+    dw $c6f9 ; window
+
+    db $06 ; some map
+    dw $40f8, $c6ff ; pointers (connected, current) (strip)
+    db $0f, $19 ; bigness, width
+    db $08, $00 ; alignments (y, x)
+    dw $c708 ; window
+
+    ; end connection data
+
+    dw $4afc ; objects
+
+INCBIN "baserom.gbc",$58afc,$58c38 - $58afc
+
+Route18_h: ; 0x58c38 to 0x58c5a (34 bytes) (id=29)
+    db $00 ; tileset
+    db $09, $19 ; dimensions (y, x)
+    dw $4c9c, $5ae0, $5ac7 ; blocks, texts, scripts
+    db NORTH | EAST ; connections
+
+    ; connections data
+
+    db $1c ; some map
+    dw $4e5a, $c6eb ; pointers (connected, current) (strip)
+    db $0a, $0a ; bigness, width
+    db $8f, $00 ; alignments (y, x)
+    dw $cb69 ; window
+
+    db $07 ; some map
+    dw $4c9a, $c704 ; pointers (connected, current) (strip)
+    db $0f, $14 ; bigness, width
+    db $08, $00 ; alignments (y, x)
+    dw $c703 ; window
+
+    ; end connection data
+
+    dw $4c5a ; objects
+
+INCBIN "baserom.gbc",$58c5a,$59b64 - $58c5a
+
+FanClub_h: ; 0x59b64 to 0x59b70 (12 bytes) (id=90)
+    db $10 ; tileset
+    db $04, $04 ; dimensions (y, x)
+    dw $5cd5, $5b84, $5b70 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $5c97 ; objects
+
+INCBIN "baserom.gbc",$59b70,$59ce5 - $59b70
+
+SilphCo2_h: ; 0x59ce5 to 0x59cf1 (12 bytes) (id=207)
+    db $16 ; tileset
+    db $09, $0f ; dimensions (y, x)
+    dw $5ec8, $5d86, $5cf1 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $5e66 ; objects
+
+INCBIN "baserom.gbc",$59cf1,$59f4f - $59cf1
+
+SilphCo3_h: ; 0x59f4f to 0x59f5b (12 bytes) (id=208)
+    db $16 ; tileset
+    db $09, $0f ; dimensions (y, x)
+    dw $60a6, $5fc4, $5f5b ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $6035 ; objects
+
+INCBIN "baserom.gbc",$59f5b,$5a12d - $59f5b
+
+SilphCo10_h: ; 0x5a12d to 0x5a139 (12 bytes) (id=234)
+    db $16 ; tileset
+    db $09, $08 ; dimensions (y, x)
+    dw $625a, $6186, $6139 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $61fb ; objects
+
+INCBIN "baserom.gbc",$5a139,$5a2a2 - $5a139
+
+Lance_h: ; 0x5a2a2 to 0x5a2ae (12 bytes) (id=113)
+    db $05 ; tileset
+    db $0d, $0d ; dimensions (y, x)
+    dw $63e9, $6395, $62ae ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $63c5 ; objects
+
+INCBIN "baserom.gbc",$5a2ae,$5a492 - $5a2ae
+
+HallofFameRoom_h: ; 0x5a492 to 0x5a49e (12 bytes) (id=118)
+    db $07 ; tileset
+    db $04, $05 ; dimensions (y, x)
+    dw $658b, $656a, $649e ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $6571 ; objects
+
+INCBIN "baserom.gbc",$5a49e,$1b62
 
 SECTION "bank17",DATA,BANK[$17]
 
@@ -13768,10 +14732,490 @@ RedsHouse2FObject:
 	dw $C6EF + 4 + (4 + 6) * 0 + 3
 	db 1,7
 
-INCBIN "baserom.gbc",$5C0DC,$4000-$DC
+INCBIN "baserom.gbc",$5c0dc,$5c0eb - $5c0dc
+
+MuseumF1_h: ; 0x5c0eb to 0x5c0f7 (12 bytes) (id=52)
+    db $0a ; tileset
+    db $04, $0a ; dimensions (y, x)
+    dw $4020, $412b, $40f7 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $42c1 ; objects
+
+INCBIN "baserom.gbc",$5c0f7,$5c30b - $5c0f7
+
+MuseumF2_h: ; 0x5c30b to 0x5c317 (12 bytes) (id=53)
+    db $0a ; tileset
+    db $04, $07 ; dimensions (y, x)
+    dw $4048, $431a, $4317 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $434b ; objects
+
+INCBIN "baserom.gbc",$5c317,$5c37b - $5c317
+
+PewterGym_h: ; 0x5c37b to 0x5c387 (12 bytes) (id=54)
+    db $07 ; tileset
+    db $07, $05 ; dimensions (y, x)
+    dw $4558, $4435, $4387 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $452e ; objects
+
+INCBIN "baserom.gbc",$5c387,$5c57b - $5c387
+
+PewterPokeCenter_h: ; 0x5c57b to 0x5c587 (12 bytes) (id=58)
+    db $06 ; tileset
+    db $04, $07 ; dimensions (y, x)
+    dw $4064, $458d, $4587 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $460d ; objects
+
+INCBIN "baserom.gbc",$5c587,$5c639 - $5c587
+
+CeruleanPokecenter_h: ; 0x5c639 to 0x5c645 (12 bytes) (id=64)
+    db $06 ; tileset
+    db $04, $07 ; dimensions (y, x)
+    dw $468b, $464b, $4645 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $465f ; objects
+
+INCBIN "baserom.gbc",$5c645,$5c6a7 - $5c645
+
+CeruleanGym_h: ; 0x5c6a7 to 0x5c6b3 (12 bytes) (id=65)
+    db $07 ; tileset
+    db $07, $05 ; dimensions (y, x)
+    dw $4866, $474a, $46b3 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $4834 ; objects
+
+INCBIN "baserom.gbc",$5c6b3,$5c889 - $5c6b3
+
+CeruleanMart_h: ; 0x5c889 to 0x5c895 (12 bytes) (id=67)
+    db $02 ; tileset
+    db $04, $04 ; dimensions (y, x)
+    dw $4000, $4898, $4895 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $48a8 ; objects
+
+INCBIN "baserom.gbc",$5c895,$5c8ce - $5c895
+
+LavenderPokecenter_h: ; 0x5c8ce to 0x5c8da (12 bytes) (id=141)
+    db $06 ; tileset
+    db $04, $07 ; dimensions (y, x)
+    dw $4064, $48e0, $48da ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $48f4 ; objects
+
+INCBIN "baserom.gbc",$5c8da,$5c920 - $5c8da
+
+LavenderMart_h: ; 0x5c920 to 0x5c92c (12 bytes) (id=150)
+    db $02 ; tileset
+    db $04, $04 ; dimensions (y, x)
+    dw $4000, $492f, $492c ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $495d ; objects
+
+INCBIN "baserom.gbc",$5c92c,$5c983 - $5c92c
+
+VermilionPokeCenter_h: ; 0x5c983 to 0x5c98f (12 bytes) (id=89)
+    db $06 ; tileset
+    db $04, $07 ; dimensions (y, x)
+    dw $4064, $4995, $498f ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $49a9 ; objects
+
+INCBIN "baserom.gbc",$5c98f,$5c9d5 - $5c98f
+
+VermilionMart_h: ; 0x5c9d5 to 0x5c9e1 (12 bytes) (id=91)
+    db $02 ; tileset
+    db $04, $04 ; dimensions (y, x)
+    dw $4000, $49e4, $49e1 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $49f4 ; objects
+
+INCBIN "baserom.gbc",$5c9e1,$5ca1a - $5c9e1
+
+VermilionGym_h: ; 0x5ca1a to 0x5ca26 (12 bytes) (id=92)
+    db $07 ; tileset
+    db $09, $05 ; dimensions (y, x)
+    dw $4c38, $4ae8, $4a26 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $4bfe ; objects
+
+INCBIN "baserom.gbc",$5ca26,$5cc65 - $5ca26
+
+CopycatsHouseF2_h: ; 0x5cc65 to 0x5cc71 (12 bytes) (id=176)
+    db $04 ; tileset
+    db $04, $04 ; dimensions (y, x)
+    dw $4010, $4c74, $4c71 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $4d21 ; objects
+
+INCBIN "baserom.gbc",$5cc71,$5cd51 - $5cc71
+
+FightingDojo_h: ; 0x5cd51 to 0x5cd5d (12 bytes) (id=177)
+    db $05 ; tileset
+    db $06, $05 ; dimensions (y, x)
+    dw $4fe3, $4e03, $4d5d ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $4f9b ; objects
+
+INCBIN "baserom.gbc",$5cd5d,$5d001 - $5cd5d
+
+SaffronGym_h: ; 0x5d001 to 0x5d00d (12 bytes) (id=178)
+    db $16 ; tileset
+    db $09, $0a ; dimensions (y, x)
+    dw $53a3, $50ab, $500d ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $5259 ; objects
+
+INCBIN "baserom.gbc",$5d00d,$5d3fd - $5d00d
+
+SaffronMart_h: ; 0x5d3fd to 0x5d409 (12 bytes) (id=180)
+    db $02 ; tileset
+    db $04, $04 ; dimensions (y, x)
+    dw $4000, $540c, $5409 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $541c ; objects
+
+INCBIN "baserom.gbc",$5d409,$5d442 - $5d409
+
+SilphCo1_h: ; 0x5d442 to 0x5d44e (12 bytes) (id=181)
+    db $16 ; tileset
+    db $09, $0f ; dimensions (y, x)
+    dw $54a2, $5469, $544e ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $5470 ; objects
+
+INCBIN "baserom.gbc",$5d44e,$5d529 - $5d44e
+
+SaffronPokecenter_h: ; 0x5d529 to 0x5d535 (12 bytes) (id=182)
+    db $06 ; tileset
+    db $04, $07 ; dimensions (y, x)
+    dw $4064, $553b, $5535 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $554f ; objects
+
+INCBIN "baserom.gbc",$5d535,$5d57b - $5d535
+
+ViridianForestexit_h: ; 0x5d57b to 0x5d587 (12 bytes) (id=47)
+    db $09 ; tileset
+    db $04, $05 ; dimensions (y, x)
+    dw $4090, $558a, $5587 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $5598 ; objects
+
+INCBIN "baserom.gbc",$5d587,$5d5c8 - $5d587
+
+Route2Gate_h: ; 0x5d5c8 to 0x5d5d4 (12 bytes) (id=49)
+    db $0c ; tileset
+    db $04, $05 ; dimensions (y, x)
+    dw $4090, $55d7, $55d4 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $5620 ; objects
+
+INCBIN "baserom.gbc",$5d5d4,$5d650 - $5d5d4
+
+ViridianForestEntrance_h: ; 0x5d650 to 0x5d65c (12 bytes) (id=50)
+    db $09 ; tileset
+    db $04, $05 ; dimensions (y, x)
+    dw $4090, $565f, $565c ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $566d ; objects
+
+INCBIN "baserom.gbc",$5d65c,$5d69d - $5d65c
+
+UndergroundTunnelEntranceRoute5_h: ; 0x5d69d to 0x5d6a9 (12 bytes) (id=71)
+    db $0c ; tileset
+    db $04, $04 ; dimensions (y, x)
+    dw $4080, $56b0, $56a9 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $56c1 ; objects
+
+INCBIN "baserom.gbc",$5d6a9,$5d6e3 - $5d6a9
+
+UndergroundTunnelEntranceRoute6_h: ; 0x5d6e3 to 0x5d6ef (12 bytes) (id=74)
+    db $0c ; tileset
+    db $04, $04 ; dimensions (y, x)
+    dw $4080, $56f7, $56ef ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $56fe ; objects
+
+INCBIN "baserom.gbc",$5d6ef,$5d720 - $5d6ef
+
+UndergroundPathEntranceRoute7_h: ; 0x5d720 to 0x5d72c (12 bytes) (id=77)
+    db $0c ; tileset
+    db $04, $04 ; dimensions (y, x)
+    dw $4080, $5734, $572c ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $573b ; objects
+
+INCBIN "baserom.gbc",$5d72c,$5d7af - $5d72c
+
+SilphCo9_h: ; 0x5d7af to 0x5d7bb (12 bytes) (id=233)
+    db $16 ; tileset
+    db $09, $0d ; dimensions (y, x)
+    dw $5989, $588b, $57bb ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $593f ; objects
+
+INCBIN "baserom.gbc",$5d7bb,$5d9fe - $5d7bb
+
+VictoryRoad1_h: ; 0x5d9fe to 0x5da0a (12 bytes) (id=108)
+    db $11 ; tileset
+    db $09, $0a ; dimensions (y, x)
+    dw $5b04, $5a5f, $5a0a ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $5ab8 ; objects
+
+INCBIN "baserom.gbc",$5da0a,$25f6
 
 SECTION "bank18",DATA,BANK[$18]
-INCBIN "baserom.gbc",$60000,$4000
+INCBIN "baserom.gbc",$60000,$60420 - $60000
+
+PokemonTower1_h: ; 0x60420 to 0x6042c (12 bytes) (id=142)
+    db $0f ; tileset
+    db $09, $0a ; dimensions (y, x)
+    dw $448c, $442f, $442c ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $4452 ; objects
+
+INCBIN "baserom.gbc",$6042c,$604e6 - $6042c
+
+PokemonTower2_h: ; 0x604e6 to 0x604f2 (12 bytes) (id=143)
+    db $0f ; tileset
+    db $09, $0a ; dimensions (y, x)
+    dw $4666, $45db, $44f2 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $4646 ; objects
+
+INCBIN "baserom.gbc",$604f2,$606c0 - $604f2
+
+PokemonTower3_h: ; 0x606c0 to 0x606cc (12 bytes) (id=144)
+    db $0f ; tileset
+    db $09, $0a ; dimensions (y, x)
+    dw $4790, $46e5, $46cc ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $475d ; objects
+
+INCBIN "baserom.gbc",$606cc,$607ea - $606cc
+
+PokemonTower4_h: ; 0x607ea to 0x607f6 (12 bytes) (id=145)
+    db $0f ; tileset
+    db $09, $0a ; dimensions (y, x)
+    dw $48cc, $480f, $47f6 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $488b ; objects
+
+INCBIN "baserom.gbc",$607f6,$60926 - $607f6
+
+PokemonTower5_h: ; 0x60926 to 0x60932 (12 bytes) (id=146)
+    db $0f ; tileset
+    db $09, $0a ; dimensions (y, x)
+    dw $4a89, $499b, $4932 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $4a48 ; objects
+
+INCBIN "baserom.gbc",$60932,$60ae3 - $60932
+
+PokemonTower6_h: ; 0x60ae3 to 0x60aef (12 bytes) (id=147)
+    db $0f ; tileset
+    db $09, $0a ; dimensions (y, x)
+    dw $4c95, $4bb1, $4aef ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $4c5b ; objects
+
+INCBIN "baserom.gbc",$60aef,$60cf9 - $60aef
+
+PokemonTower7_h: ; 0x60cf9 to 0x60d05 (12 bytes) (id=148)
+    db $0f ; tileset
+    db $09, $0a ; dimensions (y, x)
+    dw $4f20, $4e3f, $4d05 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $4ef6 ; objects
+
+INCBIN "baserom.gbc",$60d05,$60f7a - $60d05
+
+CeladonMart1_h: ; 0x60f7a to 0x60f86 (12 bytes) (id=122)
+    db $12 ; tileset
+    db $04, $0a ; dimensions (y, x)
+    dw $4fde, $4f89, $4f86 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $4f9e ; objects
+
+INCBIN "baserom.gbc",$60f86,$61101 - $60f86
+
+ViridianForest_h: ; 0x61101 to 0x6110d (12 bytes) (id=51)
+    db $03 ; tileset
+    db $18, $11 ; dimensions (y, x)
+    dw $4000, $5126, $510d ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $51da ; objects
+
+INCBIN "baserom.gbc",$6110d,$61259 - $6110d
+
+SSAnne1_h: ; 0x61259 to 0x61265 (12 bytes) (id=95)
+    db $0d ; tileset
+    db $09, $14 ; dimensions (y, x)
+    dw $52df, $5269, $5265 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $5277 ; objects
+
+INCBIN "baserom.gbc",$61265,$61393 - $61265
+
+SSAnne2_h: ; 0x61393 to 0x6139f (12 bytes) (id=96)
+    db $0d ; tileset
+    db $09, $14 ; dimensions (y, x)
+    dw $556e, $54db, $539f ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $5514 ; objects
+
+INCBIN "baserom.gbc",$6139f,$61622 - $6139f
+
+SSAnne4_h: ; 0x61622 to 0x6162e (12 bytes) (id=98)
+    db $0d ; tileset
+    db $04, $0f ; dimensions (y, x)
+    dw $5666, $5631, $562e ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $5632 ; objects
+
+INCBIN "baserom.gbc",$6162e,$616a2 - $6162e
+
+SSAnne5_h: ; 0x616a2 to 0x616ae (12 bytes) (id=99)
+    db $0d ; tileset
+    db $07, $0a ; dimensions (y, x)
+    dw $5761, $56c7, $56ae ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $572b ; objects
+
+INCBIN "baserom.gbc",$616ae,$617a7 - $616ae
+
+SSAnne6_h: ; 0x617a7 to 0x617b3 (12 bytes) (id=100)
+    db $0d ; tileset
+    db $08, $07 ; dimensions (y, x)
+    dw $5851, $57b7, $57b3 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $581b ; objects
+
+INCBIN "baserom.gbc",$617b3,$61889 - $617b3
+
+SSAnne7_h: ; 0x61889 to 0x61895 (12 bytes) (id=101)
+    db $0d ; tileset
+    db $04, $03 ; dimensions (y, x)
+    dw $595e, $58a7, $5895 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $5946 ; objects
+
+INCBIN "baserom.gbc",$61895,$6196a - $61895
+
+SSAnne8_h: ; 0x6196a to 0x61976 (12 bytes) (id=102)
+    db $0d ; tileset
+    db $08, $0c ; dimensions (y, x)
+    dw $5adf, $598f, $5976 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $5a60 ; objects
+
+INCBIN "baserom.gbc",$61976,$61b3f - $61976
+
+SSAnne9_h: ; 0x61b3f to 0x61b4b (12 bytes) (id=103)
+    db $0d ; tileset
+    db $08, $0c ; dimensions (y, x)
+    dw $43c0, $5b6a, $5b4b ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $5c8d ; objects
+
+INCBIN "baserom.gbc",$61b4b,$61d49 - $61b4b
+
+SSAnne10_h: ; 0x61d49 to 0x61d55 (12 bytes) (id=104)
+    db $0d ; tileset
+    db $08, $0c ; dimensions (y, x)
+    dw $43c0, $5d6e, $5d55 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $5e75 ; objects
+
+INCBIN "baserom.gbc",$61d55,$61f1a - $61d55
+
+UndergroundPathNS_h: ; 0x61f1a to 0x61f26 (12 bytes) (id=119)
+    db $0b ; tileset
+    db $18, $04 ; dimensions (y, x)
+    dw $4198, $5f29, $5f26 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $5f2a ; objects
+
+INCBIN "baserom.gbc",$61f26,$61f3e - $61f26
+
+UndergroundPathWE_h: ; 0x61f3e to 0x61f4a (12 bytes) (id=121)
+    db $0b ; tileset
+    db $04, $19 ; dimensions (y, x)
+    dw $41f4, $5f4d, $5f4a ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $5f4e ; objects
+
+INCBIN "baserom.gbc",$61f4a,$61f62 - $61f4a
+
+DiglettsCave_h: ; 0x61f62 to 0x61f6e (12 bytes) (id=197)
+    db $11 ; tileset
+    db $12, $14 ; dimensions (y, x)
+    dw $5f86, $5f71, $5f6e ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $5f72 ; objects
+
+INCBIN "baserom.gbc",$61f6e,$620ee - $61f6e
+
+SilphCo11_h: ; 0x620ee to 0x620fa (12 bytes) (id=235)
+    db $10 ; tileset
+    db $09, $09 ; dimensions (y, x)
+    dw $63c8, $62b7, $60fa ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $6380 ; objects
+
+INCBIN "baserom.gbc",$620fa,$1f06
 
 SECTION "bank19",DATA,BANK[$19]
 Tset00_GFX:
@@ -14704,7 +16148,217 @@ CredPAAD:
 TheEndGfx: ; 473E
 	INCBIN "gfx/theend.2bpp"
 
-INCBIN "baserom.gbc",$747DE,$4000 - $7DE
+INCBIN "baserom.gbc",$747de,$74897 - $747de
+
+ViridianGym_h: ; 0x74897 to 0x748a3 (12 bytes) (id=45)
+    db $07 ; tileset
+    db $09, $0a ; dimensions (y, x)
+    dw $4c47, $49ec, $48a3 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $4bde ; objects
+
+INCBIN "baserom.gbc",$748a3,$74ca1 - $748a3
+
+PewterMart_h: ; 0x74ca1 to 0x74cad (12 bytes) (id=56)
+    db $02 ; tileset
+    db $04, $04 ; dimensions (y, x)
+    dw $4010, $4cb6, $4cad ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $4cda ; objects
+
+INCBIN "baserom.gbc",$74cad,$74d00 - $74cad
+
+UnknownDungeon1_h: ; 0x74d00 to 0x74d0c (12 bytes) (id=228)
+    db $11 ; tileset
+    db $09, $0f ; dimensions (y, x)
+    dw $4d76, $4d0f, $4d0c ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $4d15 ; objects
+
+INCBIN "baserom.gbc",$74d0c,$74dfd - $74d0c
+
+CeruleanHouse3_h: ; 0x74dfd to 0x74e09 (12 bytes) (id=230)
+    db $0d ; tileset
+    db $04, $04 ; dimensions (y, x)
+    dw $404c, $4e13, $4e09 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $4ebe ; objects
+
+INCBIN "baserom.gbc",$74e09,$7500c - $74e09
+
+FuchsiaHouse1_h: ; 0x7500c to 0x75018 (12 bytes) (id=153)
+    db $08 ; tileset
+    db $04, $04 ; dimensions (y, x)
+    dw $4020, $501c, $5018 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $5031 ; objects
+
+INCBIN "baserom.gbc",$75018,$75057 - $75018
+
+FuchsiaPokecenter_h: ; 0x75057 to 0x75063 (12 bytes) (id=154)
+    db $06 ; tileset
+    db $04, $07 ; dimensions (y, x)
+    dw $4030, $5069, $5063 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $507d ; objects
+
+INCBIN "baserom.gbc",$75063,$750a9 - $75063
+
+FuchsiaHouse2_h: ; 0x750a9 to 0x750b5 (12 bytes) (id=155)
+    db $14 ; tileset
+    db $04, $05 ; dimensions (y, x)
+    dw $51ad, $50b8, $50b5 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $5180 ; objects
+
+INCBIN "baserom.gbc",$750b5,$751c1 - $750b5
+
+SafariZoneEntrance_h: ; 0x751c1 to 0x751cd (12 bytes) (id=156)
+    db $0c ; tileset
+    db $03, $04 ; dimensions (y, x)
+    dw $5425, $52b9, $51cd ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $53f5 ; objects
+
+INCBIN "baserom.gbc",$751cd,$75431 - $751cd
+
+FuchsiaGYM_h: ; 0x75431 to 0x7543d (12 bytes) (id=157)
+    db $07 ; tileset
+    db $09, $05 ; dimensions (y, x)
+    dw $56aa, $54d5, $543d ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $5658 ; objects
+
+INCBIN "baserom.gbc",$7543d,$756d7 - $7543d
+
+FuchsiaMeetingRoom_h: ; 0x756d7 to 0x756e3 (12 bytes) (id=158)
+    db $14 ; tileset
+    db $04, $07 ; dimensions (y, x)
+    dw $5722, $56e7, $56e3 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $56fc ; objects
+
+INCBIN "baserom.gbc",$756e3,$7573e - $756e3
+
+CinnibarGym_h: ; 0x7573e to 0x7574a (12 bytes) (id=166)
+    db $16 ; tileset
+    db $09, $0a ; dimensions (y, x)
+    dw $5b26, $589f, $574a ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $5acc ; objects
+
+INCBIN "baserom.gbc",$7574a,$75b80 - $7574a
+
+Lab1_h: ; 0x75b80 to 0x75b8c (12 bytes) (id=167)
+    db $14 ; tileset
+    db $04, $09 ; dimensions (y, x)
+    dw $5bf1, $5b90, $5b8c ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $5bb3 ; objects
+
+INCBIN "baserom.gbc",$75b8c,$75c15 - $75b8c
+
+Lab2_h: ; 0x75c15 to 0x75c21 (12 bytes) (id=168)
+    db $14 ; tileset
+    db $04, $04 ; dimensions (y, x)
+    dw $5c6b, $5c24, $5c21 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $5c45 ; objects
+
+INCBIN "baserom.gbc",$75c21,$75c7b - $75c21
+
+Lab3_h: ; 0x75c7b to 0x75c87 (12 bytes) (id=169)
+    db $14 ; tileset
+    db $04, $04 ; dimensions (y, x)
+    dw $5d15, $5c8a, $5c87 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $5cec ; objects
+
+INCBIN "baserom.gbc",$75c87,$75d25 - $75c87
+
+Lab4_h: ; 0x75d25 to 0x75d31 (12 bytes) (id=170)
+    db $14 ; tileset
+    db $04, $04 ; dimensions (y, x)
+    dw $5e10, $5d34, $5d31 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $5df0 ; objects
+
+INCBIN "baserom.gbc",$75d31,$75e20 - $75d31
+
+CinnibarPokecenter_h: ; 0x75e20 to 0x75e2c (12 bytes) (id=171)
+    db $06 ; tileset
+    db $04, $07 ; dimensions (y, x)
+    dw $4030, $5e32, $5e2c ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $5e46 ; objects
+
+INCBIN "baserom.gbc",$75e2c,$75e72 - $75e2c
+
+CinnibarMart_h: ; 0x75e72 to 0x75e7e (12 bytes) (id=172)
+    db $02 ; tileset
+    db $04, $04 ; dimensions (y, x)
+    dw $4010, $5e81, $5e7e ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $5e91 ; objects
+
+INCBIN "baserom.gbc",$75e7e,$75eb7 - $75e7e
+
+CopycatsHouseF1_h: ; 0x75eb7 to 0x75ec3 (12 bytes) (id=175)
+    db $01 ; tileset
+    db $04, $04 ; dimensions (y, x)
+    dw $4000, $5ec6, $5ec3 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $5ee3 ; objects
+
+INCBIN "baserom.gbc",$75ec3,$7616f - $75ec3
+
+Loreli_h: ; 0x7616f to 0x7617b (12 bytes) (id=245)
+    db $07 ; tileset
+    db $06, $05 ; dimensions (y, x)
+    dw $62ac, $6251, $617b ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $6280 ; objects
+
+INCBIN "baserom.gbc",$7617b,$762ca - $7617b
+
+Bruno_h: ; 0x762ca to 0x762d6 (12 bytes) (id=246)
+    db $07 ; tileset
+    db $06, $05 ; dimensions (y, x)
+    dw $6403, $63a8, $62d6 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $63d7 ; objects
+
+INCBIN "baserom.gbc",$762d6,$76421 - $762d6
+
+Agatha_h: ; 0x76421 to 0x7642d (12 bytes) (id=247)
+    db $0f ; tileset
+    db $06, $05 ; dimensions (y, x)
+    dw $6560, $6505, $642d ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $6534 ; objects
+
+INCBIN "baserom.gbc",$7642d,$1bd3
 
 SECTION "bank1E",DATA,BANK[$1E]
 INCBIN "baserom.gbc",$78000,$F1
