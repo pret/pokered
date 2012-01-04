@@ -16127,7 +16127,17 @@ FuchsiaHouse1_h: ; 0x7500c to 0x75018 (12 bytes) (id=153)
 
     dw $5031 ; objects
 
-INCBIN "baserom.gbc",$75018,$2fe8
+INCBIN "baserom.gbc",$75018,$75057 - $75018
+
+FuchsiaPokecenter_h: ; 0x75057 to 0x75063 (12 bytes) (id=154)
+    db $06 ; tileset
+    db $04, $07 ; dimensions (y, x)
+    dw $4030, $5069, $5063 ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $507d ; objects
+
+INCBIN "baserom.gbc",$75063,$2f9d
 
 SECTION "bank1E",DATA,BANK[$1E]
 INCBIN "baserom.gbc",$78000,$F1
