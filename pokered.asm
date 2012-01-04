@@ -16227,7 +16227,17 @@ Lab4_h: ; 0x75d25 to 0x75d31 (12 bytes) (id=170)
 
     dw $5df0 ; objects
 
-INCBIN "baserom.gbc",$75d31,$22cf
+INCBIN "baserom.gbc",$75d31,$75e20 - $75d31
+
+CinnibarPokecenter_h: ; 0x75e20 to 0x75e2c (12 bytes) (id=171)
+    db $06 ; tileset
+    db $04, $07 ; dimensions (y, x)
+    dw $4030, $5e32, $5e2c ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $5e46 ; objects
+
+INCBIN "baserom.gbc",$75e2c,$21d4
 
 SECTION "bank1E",DATA,BANK[$1E]
 INCBIN "baserom.gbc",$78000,$F1
