@@ -123,11 +123,11 @@ def insert_all_labels():
         if not ("cat" in mapmap["name"]) and "copy" in mapmap["name"].lower(): continue #skip this one
 
         #bill's house breaks things?
-        if mapmap["name"] == "Bill's House": continue
+        #if mapmap["name"] == "Bill's House": continue
         if mapmap["name"] == "Viridian Forest": continue
-        if mapmap["name"] == "Cerulean Mart": continue
+        #if mapmap["name"] == "Cerulean Mart": continue
         if mapmap["name"] == "Virdian Forest Exit": continue
-        if "copy" in mapmap["name"].lower(): continue #skip this one too..
+        #if "copy" in mapmap["name"].lower(): continue #skip this one too..
 
         if mapmap["map_pointer"] in used_map_pointers: continue #skip for sure
     
