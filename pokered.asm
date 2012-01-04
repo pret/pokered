@@ -16277,7 +16277,17 @@ Bruno_h: ; 0x762ca to 0x762d6 (12 bytes) (id=246)
 
     dw $63d7 ; objects
 
-INCBIN "baserom.gbc",$762d6,$1d2a
+INCBIN "baserom.gbc",$762d6,$76421 - $762d6
+
+Agatha_h: ; 0x76421 to 0x7642d (12 bytes) (id=247)
+    db $0f ; tileset
+    db $06, $05 ; dimensions (y, x)
+    dw $6560, $6505, $642d ; blocks, texts, scripts
+    db $00 ; connections
+
+    dw $6534 ; objects
+
+INCBIN "baserom.gbc",$7642d,$1bd3
 
 SECTION "bank1E",DATA,BANK[$1E]
 INCBIN "baserom.gbc",$78000,$F1
