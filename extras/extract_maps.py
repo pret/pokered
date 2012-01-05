@@ -1,7 +1,7 @@
 #!/usr/bin/python
 #author: Bryan Bishop <kanzure@gmail.com>
 #date: 2012-01-02
-#purpose: compute full map pointers
+#url: http://hax.iimarck.us/files/rbheaders.txt
 import json
 
 #parse hex values as base 16 (see calculate_pointer)
@@ -421,7 +421,113 @@ def read_connection_bytes(connection_bytes, bank):
                       }
     return connection_data
 
-def read_map_header(address, bank): #bank because i'm lazy
+def read_warp_data(address, warp_count):
+    warps = {}
+    for warp_id in range(0, warp_count):
+        offset = address + (warp_id*4) #4 bytes per warp
+        warp = {}
+        
+        warp["y"] = ord(rom[offset])
+        warp["x"] = ord(rom[offset+1])
+        warp["warp_to_point"] = ord(rom[offset+2])
+        warp["warp_to_map_id"] = ord(rom[offset+3])
+
+        warps[warp_id] = warp
+    return warps
+
+def read_sign_data(address, sign_count):
+    signs = {}
+    for sign_id in range(0, sign_count):
+        offset = address + (sign_id * 3)
+        sign = {}
+        sign["y"] = ord(rom[offset])
+        sign["x"] = ord(rom[offset+1])
+        sign["text_id"] = ord(rom[offset+2])
+        signs[sign_id] = sign
+    return signs
+
+def read_warp_tos(address, warp_count):
+    warp_tos = {}
+    for warp_to_id in range(0, warp_count):
+        offset = address + (warp_to_id * 4)
+        warp_to = {}
+        warp_to["event_displacement"] = [ord(rom[offset]),ord(rom[offset+1])]
+        warp_to["y"] = ord(rom[offset+2])
+        warp_to["x"] = ord(rom[offset+3])
+        warp_tos[warp_to_id] = warp_to
+    return warp_tos
+
+def get_object_data(address):
+    if type(address) == str: address = int(address, base)
+    output = {}
+
+    maps_border_tile = ord(rom[address])
+    
+    number_of_warps = ord(rom[address+1])
+    if number_of_warps == 0: warps = {}
+    else:
+        warps = read_warp_data(address+2, number_of_warps)
+
+    offset = number_of_warps * 4
+    address = address + 2 + offset
+
+    number_of_signs = ord(rom[address])
+    if number_of_signs == 0: signs = {}
+    else:
+        signs = read_sign_data(address+1, number_of_signs)
+
+    offset = number_of_signs * 3
+    address = address + 1 + offset
+
+    number_of_things = ord(rom[address])
+    address = address + 1
+
+    things = {}
+    for thing_id in range(0, number_of_things):
+        thing = {}
+        picture_number = ord(rom[address])
+        y = ord(rom[address+1])
+        x = ord(rom[address+2])
+        movement1 = ord(rom[address+3])
+        movement2 = ord(rom[address+4])
+        text_string_number = ord(rom[address+5])
+
+        address += 5 + 1
+
+        if text_string_number & (1 << 6) != 0: #trainer
+            thing["type"] = "trainer"
+            thing["trainer_type"] = ord(rom[address])
+            thing["pokemon_set"] = ord(rom[address+1])
+            address += 2
+        elif text_string_number & (1 << 7) != 0: #item
+            thing["type"] = "item"
+            thing["item_number"] = ord(rom[address])
+            address += 1
+        else: #normal person
+            thing["type"] = "person"
+
+        thing["picture_number"] = picture_number
+        thing["y"] = y
+        thing["x"] = x
+        thing["movement1"] = movement1
+        thing["movement2"] = movement2
+        thing["text_string_number"] = text_string_number & 0xF
+        things[thing_id] = thing
+
+    warp_tos = read_warp_tos(address, number_of_warps)
+
+    output["maps_border_tile"] = maps_border_tile
+    output["number_of_warps"] = number_of_warps
+    output["warps"] = warps
+    output["number_of_signs"] = number_of_signs
+    output["signs"] = signs
+    output["number_of_things"] = number_of_things
+    output["things"] = things
+    output["warp_tos"] = warp_tos
+
+    return output
+
+def read_map_header(address, bank):
     address = int(address, base)
     bank = int(bank, base)
 
@@ -491,6 +597,17 @@ def read_map_header(address, bank): #bank because i'm lazy
     object_data_pointer_byte2 = ord(rom[offset+1])
     partial_object_data_pointer = (object_data_pointer_byte1 + (object_data_pointer_byte2 << 8))
     object_data_pointer = calculate_pointer(partial_object_data_pointer, bank)
+    object_data = get_object_data(object_data_pointer)
+
+    texts = set()
+    for thing_id in object_data["things"].keys():
+        thing = object_data["things"][thing_id]
+        texts.add(thing["text_string_number"])
+    for sign_id in object_data["signs"].keys():
+        sign = object_data["signs"][sign_id]
+        texts.add(sign["text_id"])
+    texts = list(texts)
+    number_of_referenced_texts = len(texts)
 
     map_header = {
                  "tileset": hex(tileset),
@@ -498,11 +615,14 @@ def read_map_header(address, bank): #bank because i'm lazy
                  "x": hex(x),
                  "map_pointer": hex(map_pointer),
                  "texts_pointer": hex(texts_pointer),
+                 "number_of_referenced_texts": number_of_referenced_texts,
+                 "referenced_texts": texts,
                  "script_pointer": hex(script_pointer),
                  "connection_byte": hex(connection_byte),
                  "num_connections": str(num_connections),
                  "connections": connections, #NORTH, SOUTH, WEST, EAST order matters
                  "object_data_pointer": hex(object_data_pointer),
+                 "object_data": object_data,
                  }
     return map_header
 
@@ -524,6 +644,7 @@ def read_all_map_headers():
     
     return map_headers
 
+
 if __name__ == "__main__":
     #read binary data from file
     load_rom()
@@ -536,5 +657,7 @@ if __name__ == "__main__":
     #print json.dumps(read_map_header(map_pointers[0]["address"], map_pointers[0]["bank"]))
 
     read_all_map_headers()
-    print json.dumps(map_headers)
+    #print json.dumps(map_headers)
+
+    print map_headers[37]
 

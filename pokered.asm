@@ -5437,10 +5437,10 @@ BluesHouseScript1:
 BluesHouseScript2:
 	ret
 
-BluesHouseTexts: ; 0x19b57
+BluesHouseTexts: ; 0x19B57
 	dw BluesHouseText1,BluesHouseText2,BluesHouseText3
 
-BluesHouseText1: ; 
+BluesHouseText1: ; 5B5D 0x19B5D 
 	db 8
 	ld a,[$D74A]
 	bit 0,a
