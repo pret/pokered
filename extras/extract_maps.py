@@ -20,6 +20,8 @@ start_map_header_pointer_banks = 0xC23D
 #number of maps in this list
 map_count = 0xF8 #including the 0th the total is is 248 or 0xF8
 
+bad_maps = [0x0b, 0x45, 0x4b, 0x4e, 0x69, 0x6a, 0x6b, 0x6d, 0x6e, 0x6f, 0x70, 0x72, 0x73, 0x74, 0x75, 0xad, 0xcc, 0xcd, 0xce, 0xe7, 0xed, 0xee, 0xf1, 0xf2, 0xf3, 0xf4]
+
 maps = {
          0x00: "Pallet Town",
          0x01: "Viridian City",
@@ -659,5 +661,9 @@ if __name__ == "__main__":
     read_all_map_headers()
     #print json.dumps(map_headers)
 
-    print map_headers[37]
+    #print map_headers[37]
+
+    for header in map_headers:
+        if header in bad_maps: continue
+        print "map " + str(header) + " has " + str(map_headers[header]["number_of_referenced_texts"]) + " referenced texts"
 
