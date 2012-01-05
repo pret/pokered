@@ -1,0 +1,22 @@
+syntax: glob
+
+#precompiled python
+*.pyc
+
+#compiled object file
+*.o
+
+#roms
+*.gbc
+
+#generated
+*.tx
+
+#swap files for vim
+.*.swp
+
+#for any of the poor souls with save game files in their working directory
+baserom.sgm
+baserom.sav
+pokered.sgm
+pokered.sav
