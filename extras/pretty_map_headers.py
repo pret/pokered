@@ -483,12 +483,15 @@ def object_data_pretty_printer(map_id):
         output += spacing + "; warp-to\n"
         output += "\n"
 
-        #TODO: use EVENT_DISP per sawakita
         for warp_to_id in object["warp_tos"]:
             warp_to = object["warp_tos"][warp_to_id]
-    
-            output += spacing + "dw $" + hex(int(warp_to["event_displacement"][1]))[2:] + hex(int(warp_to["event_displacement"][0]))[2:] + "\n"
-            output += spacing + "db $" + hex(int(warp_to["y"]))[2:] + ", $" + hex(int(warp_to["x"]))[2:] + "\n"
+            map_width = map["x"]
+            warp_to_y = hex(int(warp_to["y"]))[2:]
+            warp_to_x = hex(int(warp_to["x"]))[2:]
+
+            output += spacing + "EVENT_DISP $" + map_width[2:] + ", $" + warp_to_y + ", $" + warp_to_x + "\n"
+            #output += spacing + "dw $" + hex(int(warp_to["event_displacement"][1]))[2:] + hex(int(warp_to["event_displacement"][0]))[2:] + "\n"
+            #output += spacing + "db $" + hex(int(warp_to["y"]))[2:] + ", $" + hex(int(warp_to["x"]))[2:] + "\n"
 
             output += "\n"
     
