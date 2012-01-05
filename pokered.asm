@@ -4986,7 +4986,7 @@ PalletTown_h:
 
 	dw PalletTownObject
 
-PalletTownObject: ; 182C3
+PalletTownObject: ; 182C3 0x182c3
 	db $0B ; border tile
 
 	db 3 ; warps
@@ -5016,7 +5016,7 @@ PalletTownObject: ; 182C3
 	dw $C74F
 	db $B,$C
 
-PalletTownBlocks:
+PalletTownBlocks: ; 0x182fd
 	INCBIN "maps/pallettown.blk"
 
 ViridianCity_h: ; 0x18357 to 0x18384 (45 bytes) (bank=6) (id=1)

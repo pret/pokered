@@ -513,6 +513,7 @@ def get_object_data(address):
         thing["x"] = x
         thing["movement1"] = movement1
         thing["movement2"] = movement2
+        thing["original_text_string_number"] = text_string_number
         thing["text_string_number"] = text_string_number & 0xF
         things[thing_id] = thing
 
@@ -528,6 +529,25 @@ def get_object_data(address):
     output["warp_tos"] = warp_tos
 
     return output
+
+def compute_object_data_size(object):
+    size = 4
+    size += 6 * (object["number_of_things"])
+    
+    trainer_count = 0
+    item_count = 0
+    for thing in object["things"]:
+        thing = object["things"][thing]
+        if thing["type"] == "trainer": trainer_count += 1
+        elif thing["type"] == "item": item_count += 1
+    
+    size += 2 * trainer_count
+    size += item_count
+
+    size += 8 * object["number_of_warps"]
+    size += 3 * object["number_of_signs"]
+
+    return size
 
 def read_map_header(address, bank):
     address = int(address, base)
@@ -645,7 +665,6 @@ def read_all_map_headers():
         map_headers[map_id] = map_header
     
     return map_headers
-
 
 if __name__ == "__main__":
     #read binary data from file
