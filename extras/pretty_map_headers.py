@@ -444,7 +444,10 @@ def object_data_pretty_printer(map_id):
         warp_to_point = warp["warp_to_point"]
         warp_to_map_id = warp["warp_to_map_id"]
 
-        warp_to_map_constant = map_constants[warp_to_map_id]
+        try:
+            warp_to_map_constant = map_constants[warp_to_map_id]
+        except Exception, exc:
+            warp_to_map_constant = "$" + hex(warp_to_map_id)[2:]
 
         output += spacing + "db $" + hex(int(y))[2:] + ", $" + hex(int(x))[2:] + ", $" + hex(int(warp_to_point))[2:] + ", " + warp_to_map_constant + "\n"
     
@@ -495,10 +498,13 @@ def object_data_pretty_printer(map_id):
             warp_to_y = hex(int(warp_to["y"]))[2:]
             warp_to_x = hex(int(warp_to["x"]))[2:]
 
-            previous_location = map_constants[object["warps"][warp_to_id]["warp_to_map_id"]]
-            comment = previous_location
+            try:
+                previous_location = map_constants[object["warps"][warp_to_id]["warp_to_map_id"]]
+                comment = " ; " + previous_location
+            except Exception, exc:
+                comment = ""
 
-            output += spacing + "EVENT_DISP $" + map_width[2:] + ", $" + warp_to_y + ", $" + warp_to_x + " ; " + comment + "\n"
+            output += spacing + "EVENT_DISP $" + map_width[2:] + ", $" + warp_to_y + ", $" + warp_to_x + comment + "\n"
             #output += spacing + "dw $" + hex(int(warp_to["event_displacement"][1]))[2:] + hex(int(warp_to["event_displacement"][0]))[2:] + "\n"
             #output += spacing + "db $" + hex(int(warp_to["y"]))[2:] + ", $" + hex(int(warp_to["x"]))[2:] + "\n"
             #output += "\n"

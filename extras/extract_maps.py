@@ -532,7 +532,7 @@ def get_object_data(address):
 
 def compute_object_data_size(object):
     size = 4
-    size += 6 * (object["number_of_things"])
+    size += 6 * (int(object["number_of_things"]))
     
     trainer_count = 0
     item_count = 0
