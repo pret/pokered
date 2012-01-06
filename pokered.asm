@@ -4996,10 +4996,10 @@ CeladonCityObject: ; 0x18022 (size=189)
     db SPRITE_GIRL, $13 + 4, $e + 4, $fe, $1, $3 ; person
     db SPRITE_OLD_PERSON, $16 + 4, $19 + 4, $ff, $d0, $4 ; person
     db SPRITE_OLD_PERSON, $10 + 4, $16 + 4, $ff, $d0, $5 ; person
-    db SPRITE_FAT_MAN, $c + 4, $20 + 4, $ff, $d2, $6 ; person
-    db SPRITE_MACHOKE_SLOWBRO, $c + 4, $1e + 4, $ff, $d3, $7 ; person
-    db SPRITE_ROCKET_GRUNT, $1d + 4, $20 + 4, $fe, $2, $8 ; person
-    db SPRITE_ROCKET_GRUNT, $e + 4, $2a + 4, $fe, $2, $9 ; person
+    db SPRITE_FISHER2, $c + 4, $20 + 4, $ff, $d2, $6 ; person
+    db SPRITE_SLOWBRO, $c + 4, $1e + 4, $ff, $d3, $7 ; person
+    db SPRITE_ROCKET, $1d + 4, $20 + 4, $fe, $2, $8 ; person
+    db SPRITE_ROCKET, $e + 4, $2a + 4, $fe, $2, $9 ; person
 
     ; warp-to
     EVENT_DISP $19, $d, $8 ; CELADON_MART_1
@@ -5058,7 +5058,7 @@ PalletTownObject: ; 0x182c3 (size=58)
     db $3 ; people
     db SPRITE_OAK, $5 + 4, $8 + 4, $ff, $ff, $1 ; person
     db SPRITE_GIRL, $8 + 4, $3 + 4, $fe, $0, $2 ; person
-    db SPRITE_FAT_MAN, $e + 4, $b + 4, $fe, $0, $3 ; person
+    db SPRITE_FISHER2, $e + 4, $b + 4, $fe, $0, $3 ; person
 
     ; warp-to
     EVENT_DISP $a, $5, $5 ; REDS_HOUSE_1F
@@ -5117,13 +5117,13 @@ ViridianCityObject: ; 0x18384 (size=104)
     db $7, $1b, $d ; ViridianCityText13
 
     db $7 ; people
-    db SPRITE_BLONDE_BOY, $14 + 4, $d + 4, $fe, $0, $1 ; person
-    db SPRITE_MONK, $8 + 4, $1e + 4, $ff, $ff, $2 ; person
-    db SPRITE_BLONDE_BOY, $19 + 4, $1e + 4, $fe, $0, $3 ; person
+    db SPRITE_BUG_CATCHER, $14 + 4, $d + 4, $fe, $0, $1 ; person
+    db SPRITE_GAMBLER, $8 + 4, $1e + 4, $ff, $ff, $2 ; person
+    db SPRITE_BUG_CATCHER, $19 + 4, $1e + 4, $fe, $0, $3 ; person
     db SPRITE_GIRL, $9 + 4, $11 + 4, $ff, $d3, $4 ; person
     db SPRITE_LYING_OLD_MAN, $9 + 4, $12 + 4, $ff, $ff, $5 ; person
-    db SPRITE_FAT_MAN, $17 + 4, $6 + 4, $ff, $d0, $6 ; person
-    db SPRITE_MONK, $5 + 4, $11 + 4, $fe, $2, $7 ; person
+    db SPRITE_FISHER2, $17 + 4, $6 + 4, $ff, $d0, $6 ; person
+    db SPRITE_GAMBLER, $5 + 4, $11 + 4, $fe, $2, $7 ; person
 
     ; warp-to
     EVENT_DISP $14, $19, $17 ; VIRIDIAN_POKECENTER
@@ -5184,11 +5184,11 @@ PewterCityObject: ; 0x18577 (size=111)
     db $17, $19, $c ; PewterCityText12
 
     db $5 ; people
-    db SPRITE_BLONDE_PONYTAIL_GIRL, $f + 4, $8 + 4, $ff, $ff, $1 ; person
+    db SPRITE_LASS, $f + 4, $8 + 4, $ff, $ff, $1 ; person
     db SPRITE_BLACK_HAIR_BOY_1, $19 + 4, $11 + 4, $ff, $ff, $2 ; person
     db SPRITE_BLACK_HAIR_BOY_2, $11 + 4, $1b + 4, $ff, $ff, $3 ; person
     db SPRITE_BLACK_HAIR_BOY_2, $19 + 4, $1a + 4, $fe, $2, $4 ; person
-    db SPRITE_BLONDE_BOY, $10 + 4, $23 + 4, $ff, $d0, $5 ; person
+    db SPRITE_BUG_CATCHER, $10 + 4, $23 + 4, $ff, $d0, $5 ; person
 
     ; warp-to
     EVENT_DISP $14, $7, $e ; MUSEUM_1F
@@ -5263,17 +5263,17 @@ CeruleanCityObject: ; 0x18786 (size=170)
     db $15, $1b, $11 ; CeruleanCityText17
 
     db $b ; people
-    db SPRITE_RIVAL, $2 + 4, $14 + 4, $ff, $d0, $1 ; person
-    db SPRITE_ROCKET_GRUNT, $8 + 4, $1e + 4, $ff, $ff, $42, $e6, $5 ; trainer
+    db SPRITE_BLUE, $2 + 4, $14 + 4, $ff, $d0, $1 ; person
+    db SPRITE_ROCKET, $8 + 4, $1e + 4, $ff, $ff, $42, $e6, $5 ; trainer
     db SPRITE_BLACK_HAIR_BOY_1, $14 + 4, $1f + 4, $ff, $d0, $3 ; person
     db SPRITE_BLACK_HAIR_BOY_2, $12 + 4, $f + 4, $fe, $1, $4 ; person
     db SPRITE_BLACK_HAIR_BOY_2, $15 + 4, $9 + 4, $fe, $2, $5 ; person
-    db SPRITE_GUARD_COP, $c + 4, $1c + 4, $ff, $d0, $6 ; person
-    db SPRITE_BLONDE_PONYTAIL_GIRL, $1a + 4, $1d + 4, $ff, $d2, $7 ; person
-    db SPRITE_MACHOKE_SLOWBRO, $1a + 4, $1c + 4, $ff, $d0, $8 ; person
-    db SPRITE_BLONDE_PONYTAIL_GIRL, $1b + 4, $9 + 4, $fe, $2, $9 ; person
+    db SPRITE_GUARD, $c + 4, $1c + 4, $ff, $d0, $6 ; person
+    db SPRITE_LASS, $1a + 4, $1d + 4, $ff, $d2, $7 ; person
+    db SPRITE_SLOWBRO, $1a + 4, $1c + 4, $ff, $d0, $8 ; person
+    db SPRITE_LASS, $1b + 4, $9 + 4, $fe, $2, $9 ; person
     db SPRITE_BLACK_HAIR_BOY_2, $c + 4, $4 + 4, $ff, $d0, $a ; person
-    db SPRITE_GUARD_COP, $c + 4, $1b + 4, $ff, $d0, $b ; person
+    db SPRITE_GUARD, $c + 4, $1b + 4, $ff, $d0, $b ; person
 
     ; warp-to
     EVENT_DISP $14, $b, $1b ; TRASHED_HOUSE
@@ -5341,10 +5341,10 @@ VermilionCityObject: ; 0x189ba (size=133)
 
     db $6 ; people
     db SPRITE_FOULARD_WOMAN, $7 + 4, $13 + 4, $fe, $2, $1 ; person
-    db SPRITE_MONK, $6 + 4, $e + 4, $ff, $ff, $2 ; person
+    db SPRITE_GAMBLER, $6 + 4, $e + 4, $ff, $ff, $2 ; person
     db SPRITE_SAILOR, $1e + 4, $13 + 4, $ff, $d1, $3 ; person
-    db SPRITE_MONK, $7 + 4, $1e + 4, $ff, $ff, $4 ; person
-    db SPRITE_MACHOKE_SLOWBRO, $9 + 4, $1d + 4, $fe, $1, $5 ; person
+    db SPRITE_GAMBLER, $7 + 4, $1e + 4, $ff, $ff, $4 ; person
+    db SPRITE_SLOWBRO, $9 + 4, $1d + 4, $fe, $1, $5 ; person
     db SPRITE_SAILOR, $1b + 4, $19 + 4, $fe, $2, $6 ; person
 
     ; warp-to
@@ -5424,14 +5424,14 @@ FuchsiaCityObject: ; 0x18bd4 (size=178)
     db $7, $7, $18 ; FuchsiaCityText24
 
     db $a ; people
-    db SPRITE_BLONDE_BOY, $c + 4, $a + 4, $fe, $2, $1 ; person
-    db SPRITE_MONK, $11 + 4, $1c + 4, $fe, $2, $2 ; person
-    db SPRITE_FAT_MAN, $e + 4, $1e + 4, $ff, $d0, $3 ; person
-    db SPRITE_BLONDE_BOY, $8 + 4, $18 + 4, $ff, $d1, $4 ; person
-    db SPRITE_CLEFAIRYLIKE, $5 + 4, $1f + 4, $fe, $0, $5 ; person
+    db SPRITE_BUG_CATCHER, $c + 4, $a + 4, $fe, $2, $1 ; person
+    db SPRITE_GAMBLER, $11 + 4, $1c + 4, $fe, $2, $2 ; person
+    db SPRITE_FISHER2, $e + 4, $1e + 4, $ff, $d0, $3 ; person
+    db SPRITE_BUG_CATCHER, $8 + 4, $18 + 4, $ff, $d1, $4 ; person
+    db SPRITE_CLEFAIRY, $5 + 4, $1f + 4, $fe, $0, $5 ; person
     db SPRITE_BALL, $6 + 4, $19 + 4, $ff, $ff, $6 ; person
-    db SPRITE_MACHOKE_SLOWBRO, $6 + 4, $c + 4, $fe, $2, $7 ; person
-    db SPRITE_MACHOKE_SLOWBRO, $c + 4, $1e + 4, $fe, $2, $8 ; person
+    db SPRITE_SLOWBRO, $6 + 4, $c + 4, $fe, $2, $7 ; person
+    db SPRITE_SLOWBRO, $c + 4, $1e + 4, $fe, $2, $8 ; person
     db SPRITE_SEEL, $11 + 4, $8 + 4, $fe, $0, $9 ; person
     db SPRITE_OMANYTE, $5 + 4, $6 + 4, $ff, $ff, $a ; person
 
@@ -5836,7 +5836,7 @@ IndigoPlateauLobbyObject: ; 0x19c95 (size=58)
     db $5 ; people
     db SPRITE_NURSE, $5 + 4, $7 + 4, $ff, $d0, $1 ; person
     db SPRITE_GYM_HELPER, $9 + 4, $4 + 4, $ff, $d3, $2 ; person
-    db SPRITE_BLONDE_PONYTAIL_GIRL, $1 + 4, $5 + 4, $ff, $d0, $3 ; person
+    db SPRITE_LASS, $1 + 4, $5 + 4, $ff, $d0, $3 ; person
     db SPRITE_MART_GUY, $5 + 4, $0 + 4, $ff, $d3, $4 ; person
     db SPRITE_CABLE_CLUB_WOMAN, $6 + 4, $d + 4, $ff, $d0, $5 ; person
 
@@ -5874,9 +5874,9 @@ SilphCo4Object: ; 0x19e35 (size=111)
 
     db $7 ; people
     db SPRITE_LAPRAS_GIVER, $2 + 4, $6 + 4, $ff, $ff, $1 ; person
-    db SPRITE_ROCKET_GRUNT, $e + 4, $9 + 4, $ff, $d3, $42, $e6, $1a ; trainer
+    db SPRITE_ROCKET, $e + 4, $9 + 4, $ff, $d3, $42, $e6, $1a ; trainer
     db SPRITE_OAK_AIDE, $6 + 4, $e + 4, $ff, $d2, $43, $e4, $5 ; trainer
-    db SPRITE_ROCKET_GRUNT, $a + 4, $1a + 4, $ff, $d1, $44, $e6, $1b ; trainer
+    db SPRITE_ROCKET, $a + 4, $1a + 4, $ff, $d1, $44, $e6, $1b ; trainer
     db SPRITE_BALL, $9 + 4, $3 + 4, $ff, $ff, $85, $34 ; item
     db SPRITE_BALL, $7 + 4, $4 + 4, $ff, $ff, $86, $36 ; item
     db SPRITE_BALL, $8 + 4, $5 + 4, $ff, $ff, $87, $1d ; item
@@ -5919,10 +5919,10 @@ SilphCo5Object: ; 0x1a08d (size=137)
 
     db $b ; people
     db SPRITE_LAPRAS_GIVER, $9 + 4, $d + 4, $ff, $ff, $1 ; person
-    db SPRITE_ROCKET_GRUNT, $10 + 4, $8 + 4, $ff, $d3, $42, $e6, $1c ; trainer
+    db SPRITE_ROCKET, $10 + 4, $8 + 4, $ff, $d3, $42, $e6, $1c ; trainer
     db SPRITE_OAK_AIDE, $3 + 4, $8 + 4, $ff, $d3, $43, $e4, $6 ; trainer
-    db SPRITE_PUNK, $a + 4, $12 + 4, $ff, $d1, $44, $dd, $1 ; trainer
-    db SPRITE_ROCKET_GRUNT, $4 + 4, $1c + 4, $ff, $d1, $45, $e6, $1d ; trainer
+    db SPRITE_ROCKER, $a + 4, $12 + 4, $ff, $d1, $44, $dd, $1 ; trainer
+    db SPRITE_ROCKET, $4 + 4, $1c + 4, $ff, $d1, $45, $e6, $1d ; trainer
     db SPRITE_BALL, $d + 4, $2 + 4, $ff, $ff, $86, $d1 ; item
     db SPRITE_BALL, $6 + 4, $4 + 4, $ff, $ff, $87, $24 ; item
     db SPRITE_BALL, $10 + 4, $15 + 4, $ff, $ff, $88, $30 ; item
@@ -5970,9 +5970,9 @@ SilphCo6Object: ; 0x1a2fb (size=112)
     db SPRITE_ERIKA, $6 + 4, $15 + 4, $ff, $d0, $3 ; person
     db SPRITE_ERIKA, $a + 4, $b + 4, $ff, $d3, $4 ; person
     db SPRITE_LAPRAS_GIVER, $d + 4, $12 + 4, $ff, $d1, $5 ; person
-    db SPRITE_ROCKET_GRUNT, $3 + 4, $11 + 4, $ff, $d3, $46, $e6, $1e ; trainer
+    db SPRITE_ROCKET, $3 + 4, $11 + 4, $ff, $d3, $46, $e6, $1e ; trainer
     db SPRITE_OAK_AIDE, $8 + 4, $7 + 4, $ff, $d0, $47, $e4, $7 ; trainer
-    db SPRITE_ROCKET_GRUNT, $f + 4, $e + 4, $ff, $d2, $48, $e6, $1f ; trainer
+    db SPRITE_ROCKET, $f + 4, $e + 4, $ff, $d2, $48, $e6, $1f ; trainer
     db SPRITE_BALL, $c + 4, $3 + 4, $ff, $ff, $89, $23 ; item
     db SPRITE_BALL, $f + 4, $2 + 4, $ff, $ff, $8a, $2e ; item
 
@@ -6034,7 +6034,7 @@ CinnabarIslandObject: ; 0x1c022 (size=71)
 
     db $2 ; people
     db SPRITE_GIRL, $5 + 4, $c + 4, $fe, $2, $1 ; person
-    db SPRITE_MONK, $6 + 4, $e + 4, $ff, $ff, $2 ; person
+    db SPRITE_GAMBLER, $6 + 4, $e + 4, $ff, $ff, $2 ; person
 
     ; warp-to
     EVENT_DISP $a, $3, $6 ; MANSION_1
@@ -6081,8 +6081,8 @@ Route1Object: ; 0x1c0e5 (size=19)
     db $1b, $9, $3 ; Route1Text3
 
     db $2 ; people
-    db SPRITE_BLONDE_BOY, $18 + 4, $5 + 4, $fe, $1, $1 ; person
-    db SPRITE_BLONDE_BOY, $d + 4, $f + 4, $fe, $2, $2 ; person
+    db SPRITE_BUG_CATCHER, $18 + 4, $5 + 4, $fe, $1, $1 ; person
+    db SPRITE_BUG_CATCHER, $d + 4, $f + 4, $fe, $2, $2 ; person
 
 INCBIN "baserom.gbc",$1c0f8,$4
 
@@ -6326,7 +6326,7 @@ OaksLabObject: ; 0x1d40a (size=88)
     db $0 ; signs
 
     db $b ; people
-    db SPRITE_RIVAL, $3 + 4, $4 + 4, $ff, $ff, $41, $e1, $1 ; trainer
+    db SPRITE_BLUE, $3 + 4, $4 + 4, $ff, $ff, $41, $e1, $1 ; trainer
     db SPRITE_BALL, $3 + 4, $6 + 4, $ff, $ff, $2 ; person
     db SPRITE_BALL, $3 + 4, $7 + 4, $ff, $ff, $3 ; person
     db SPRITE_BALL, $3 + 4, $8 + 4, $ff, $ff, $4 ; person
@@ -6363,7 +6363,7 @@ ViridianMartObject: ; 0x1d50a (size=38)
 
     db $3 ; people
     db SPRITE_MART_GUY, $5 + 4, $0 + 4, $ff, $d3, $1 ; person
-    db SPRITE_BLONDE_BOY, $5 + 4, $5 + 4, $fe, $1, $2 ; person
+    db SPRITE_BUG_CATCHER, $5 + 4, $5 + 4, $fe, $1, $2 ; person
     db SPRITE_BLACK_HAIR_BOY_1, $3 + 4, $3 + 4, $ff, $ff, $3 ; person
 
     ; warp-to
@@ -6394,7 +6394,7 @@ SchoolObject: ; 0x1d55d (size=32)
 
     db $2 ; people
     db SPRITE_BRUNETTE_GIRL, $5 + 4, $3 + 4, $ff, $d1, $1 ; person
-    db SPRITE_BLONDE_PONYTAIL_GIRL, $1 + 4, $4 + 4, $ff, $d0, $2 ; person
+    db SPRITE_LASS, $1 + 4, $4 + 4, $ff, $d0, $2 ; person
 
     ; warp-to
     EVENT_DISP $4, $7, $2
@@ -6449,8 +6449,8 @@ PewterHouse1Object: ; 0x1d616 (size=38)
     db $0 ; signs
 
     db $3 ; people
-    db SPRITE_MACHOKE_SLOWBRO, $5 + 4, $4 + 4, $ff, $d2, $1 ; person
-    db SPRITE_YOUNG_GIRL, $5 + 4, $3 + 4, $ff, $d3, $2 ; person
+    db SPRITE_SLOWBRO, $5 + 4, $4 + 4, $ff, $d2, $1 ; person
+    db SPRITE_YOUNG_BOY, $5 + 4, $3 + 4, $ff, $d3, $2 ; person
     db SPRITE_FAT_BALD_GUY, $2 + 4, $1 + 4, $ff, $ff, $3 ; person
 
     ; warp-to
@@ -6477,8 +6477,8 @@ PewterHouse2Object: ; 0x1d659 (size=32)
     db $0 ; signs
 
     db $2 ; people
-    db SPRITE_MONK, $3 + 4, $2 + 4, $ff, $d3, $1 ; person
-    db SPRITE_BLONDE_BOY, $5 + 4, $4 + 4, $ff, $ff, $2 ; person
+    db SPRITE_GAMBLER, $3 + 4, $2 + 4, $ff, $d3, $1 ; person
+    db SPRITE_BUG_CATCHER, $5 + 4, $4 + 4, $ff, $ff, $2 ; person
 
     ; warp-to
     EVENT_DISP $4, $7, $2
@@ -6535,7 +6535,7 @@ CeruleanHouse2Object: ; 0x1d710 (size=32)
 
     db $2 ; people
     db SPRITE_OLD_MEDIUM_WOMAN, $4 + 4, $5 + 4, $ff, $d2, $1 ; person
-    db SPRITE_MONK, $2 + 4, $1 + 4, $ff, $ff, $2 ; person
+    db SPRITE_GAMBLER, $2 + 4, $1 + 4, $ff, $ff, $2 ; person
 
     ; warp-to
     EVENT_DISP $4, $7, $2
@@ -6561,9 +6561,9 @@ BikeShopObject: ; 0x1d866 (size=38)
     db $0 ; signs
 
     db $3 ; people
-    db SPRITE_SUNGLASSES_GUY, $2 + 4, $6 + 4, $ff, $ff, $1 ; person
+    db SPRITE_BIKE_SHOP_GUY, $2 + 4, $6 + 4, $ff, $ff, $1 ; person
     db SPRITE_MOM_GEISHA, $6 + 4, $5 + 4, $fe, $1, $2 ; person
-    db SPRITE_BLONDE_BOY, $3 + 4, $1 + 4, $ff, $d1, $3 ; person
+    db SPRITE_BUG_CATCHER, $3 + 4, $1 + 4, $ff, $d1, $3 ; person
 
     ; warp-to
     EVENT_DISP $4, $7, $2
@@ -6594,8 +6594,8 @@ LavenderHouse1Object: ; 0x1d96a (size=56)
     db $6 ; people
     db SPRITE_BLACK_HAIR_BOY_2, $5 + 4, $3 + 4, $ff, $ff, $1 ; person
     db SPRITE_LITTLE_GIRL, $3 + 4, $6 + 4, $ff, $d0, $2 ; person
-    db SPRITE_MACHOKE_SLOWBRO, $4 + 4, $6 + 4, $ff, $d1, $3 ; person
-    db SPRITE_MACHOKE_SLOWBRO, $3 + 4, $1 + 4, $ff, $ff, $4 ; person
+    db SPRITE_SLOWBRO, $4 + 4, $6 + 4, $ff, $d1, $3 ; person
+    db SPRITE_SLOWBRO, $3 + 4, $1 + 4, $ff, $ff, $4 ; person
     db SPRITE_MR_FUJI, $1 + 4, $3 + 4, $ff, $ff, $5 ; person
     db SPRITE_BOOK_MAP_DEX, $3 + 4, $3 + 4, $ff, $ff, $6 ; person
 
@@ -6623,7 +6623,7 @@ LavenderHouse2Object: ; 0x1d9e6 (size=32)
     db $0 ; signs
 
     db $2 ; people
-    db SPRITE_MACHOKE_SLOWBRO, $5 + 4, $3 + 4, $ff, $d1, $1 ; person
+    db SPRITE_SLOWBRO, $5 + 4, $3 + 4, $ff, $d1, $1 ; person
     db SPRITE_BRUNETTE_GIRL, $4 + 4, $2 + 4, $ff, $d3, $2 ; person
 
     ; warp-to
@@ -6676,7 +6676,7 @@ VermilionHouse1Object: ; 0x1db20 (size=38)
     db $0 ; signs
 
     db $3 ; people
-    db SPRITE_BLONDE_BOY, $3 + 4, $5 + 4, $ff, $d2, $1 ; person
+    db SPRITE_BUG_CATCHER, $3 + 4, $5 + 4, $ff, $d2, $1 ; person
     db SPRITE_BIRD, $5 + 4, $3 + 4, $fe, $2, $2 ; person
     db SPRITE_PAPER_SHEET, $3 + 4, $4 + 4, $ff, $ff, $3 ; person
 
@@ -6761,7 +6761,7 @@ FuchsiaMartObject: ; 0x1dd9b (size=38)
     db $3 ; people
     db SPRITE_MART_GUY, $5 + 4, $0 + 4, $ff, $d3, $1 ; person
     db SPRITE_FAT_BALD_GUY, $2 + 4, $4 + 4, $ff, $ff, $2 ; person
-    db SPRITE_BLONDE_PONYTAIL_GIRL, $5 + 4, $6 + 4, $fe, $1, $3 ; person
+    db SPRITE_LASS, $5 + 4, $6 + 4, $fe, $1, $3 ; person
 
     ; warp-to
     EVENT_DISP $4, $7, $3
@@ -6792,7 +6792,7 @@ SaffronHouse1Object: ; 0x1de04 (size=44)
     db $4 ; people
     db SPRITE_BRUNETTE_GIRL, $3 + 4, $2 + 4, $ff, $d3, $1 ; person
     db SPRITE_BIRD, $4 + 4, $0 + 4, $fe, $1, $2 ; person
-    db SPRITE_BLONDE_BOY, $1 + 4, $4 + 4, $ff, $d0, $3 ; person
+    db SPRITE_BUG_CATCHER, $1 + 4, $4 + 4, $ff, $d0, $3 ; person
     db SPRITE_PAPER_SHEET, $3 + 4, $3 + 4, $ff, $ff, $4 ; person
 
     ; warp-to
@@ -6902,7 +6902,7 @@ Route5GateObject: ; 0x1dffb (size=42)
     db $0 ; signs
 
     db $1 ; people
-    db SPRITE_GUARD_COP, $3 + 4, $1 + 4, $ff, $d3, $1 ; person
+    db SPRITE_GUARD, $3 + 4, $1 + 4, $ff, $d3, $1 ; person
 
     ; warp-to
     EVENT_DISP $4, $5, $3
@@ -6935,7 +6935,7 @@ Route6GateObject: ; 0x1e0be (size=42)
     db $0 ; signs
 
     db $1 ; people
-    db SPRITE_GUARD_COP, $2 + 4, $6 + 4, $ff, $d2, $1 ; person
+    db SPRITE_GUARD, $2 + 4, $6 + 4, $ff, $d2, $1 ; person
 
     ; warp-to
     EVENT_DISP $4, $5, $3
@@ -6968,7 +6968,7 @@ Route7GateObject: ; 0x1e185 (size=42)
     db $0 ; signs
 
     db $1 ; people
-    db SPRITE_GUARD_COP, $1 + 4, $3 + 4, $ff, $d0, $1 ; person
+    db SPRITE_GUARD, $1 + 4, $3 + 4, $ff, $d0, $1 ; person
 
     ; warp-to
     EVENT_DISP $3, $3, $0
@@ -7001,7 +7001,7 @@ Route8GateObject: ; 0x1e247 (size=42)
     db $0 ; signs
 
     db $1 ; people
-    db SPRITE_GUARD_COP, $1 + 4, $2 + 4, $ff, $d0, $1 ; person
+    db SPRITE_GUARD, $1 + 4, $2 + 4, $ff, $d0, $1 ; person
 
     ; warp-to
     EVENT_DISP $3, $3, $0
@@ -7105,7 +7105,7 @@ DiglettsCaveEntranceRoute11Object: ; 0x1e5ca (size=34)
     db $0 ; signs
 
     db $1 ; people
-    db SPRITE_MONK, $3 + 4, $2 + 4, $ff, $ff, $1 ; person
+    db SPRITE_GAMBLER, $3 + 4, $2 + 4, $ff, $ff, $1 ; person
 
     ; warp-to
     EVENT_DISP $4, $7, $2
@@ -7161,7 +7161,7 @@ Route22GateObject: ; 0x1e720 (size=42)
     db $0 ; signs
 
     db $1 ; people
-    db SPRITE_GUARD_COP, $2 + 4, $6 + 4, $ff, $d2, $1 ; person
+    db SPRITE_GUARD, $2 + 4, $6 + 4, $ff, $d2, $1 ; person
 
     ; warp-to
     EVENT_DISP $5, $7, $4
@@ -7192,7 +7192,7 @@ BillsHouseObject: ; 0x1e8df (size=38)
     db $0 ; signs
 
     db $3 ; people
-    db SPRITE_MACHOKE_SLOWBRO, $5 + 4, $6 + 4, $ff, $ff, $1 ; person
+    db SPRITE_SLOWBRO, $5 + 4, $6 + 4, $ff, $ff, $1 ; person
     db SPRITE_BLACK_HAIR_BOY_2, $4 + 4, $4 + 4, $ff, $ff, $2 ; person
     db SPRITE_BLACK_HAIR_BOY_2, $5 + 4, $6 + 4, $ff, $ff, $3 ; person
 
@@ -14130,9 +14130,9 @@ RockTunnel1Object: ; 0x445f6 (size=127)
     db SPRITE_HIKER, $10 + 4, $5 + 4, $ff, $d0, $42, $d1, $d ; trainer
     db SPRITE_HIKER, $f + 4, $11 + 4, $ff, $d2, $43, $d1, $e ; trainer
     db SPRITE_BLACK_HAIR_BOY_2, $8 + 4, $17 + 4, $ff, $d2, $44, $cf, $7 ; trainer
-    db SPRITE_BLONDE_PONYTAIL_GIRL, $15 + 4, $25 + 4, $ff, $d2, $45, $ce, $11 ; trainer
-    db SPRITE_BLONDE_PONYTAIL_GIRL, $18 + 4, $16 + 4, $ff, $d0, $46, $ce, $12 ; trainer
-    db SPRITE_BLONDE_PONYTAIL_GIRL, $18 + 4, $20 + 4, $ff, $d3, $47, $ce, $13 ; trainer
+    db SPRITE_LASS, $15 + 4, $25 + 4, $ff, $d2, $45, $ce, $11 ; trainer
+    db SPRITE_LASS, $18 + 4, $16 + 4, $ff, $d0, $46, $ce, $12 ; trainer
+    db SPRITE_LASS, $18 + 4, $20 + 4, $ff, $d3, $47, $ce, $13 ; trainer
 
     ; warp-to
     EVENT_DISP $14, $3, $f
@@ -14240,9 +14240,9 @@ VictoryRoad3Object: ; 0x44acd (size=106)
 
     db $a ; people
     db SPRITE_BLACK_HAIR_BOY_1, $5 + 4, $1c + 4, $ff, $d2, $41, $e7, $2 ; trainer
-    db SPRITE_BLONDE_PONYTAIL_GIRL, $d + 4, $7 + 4, $ff, $d3, $42, $e8, $2 ; trainer
+    db SPRITE_LASS, $d + 4, $7 + 4, $ff, $d3, $42, $e8, $2 ; trainer
     db SPRITE_BLACK_HAIR_BOY_1, $e + 4, $6 + 4, $ff, $d2, $43, $e7, $3 ; trainer
-    db SPRITE_BLONDE_PONYTAIL_GIRL, $3 + 4, $d + 4, $ff, $d3, $44, $e8, $3 ; trainer
+    db SPRITE_LASS, $3 + 4, $d + 4, $ff, $d3, $44, $e8, $3 ; trainer
     db SPRITE_BALL, $5 + 4, $1a + 4, $ff, $ff, $85, $36 ; item
     db SPRITE_BALL, $7 + 4, $7 + 4, $ff, $ff, $86, $f7 ; item
     db SPRITE_BOULDER, $3 + 4, $16 + 4, $ff, $10, $7 ; person
@@ -14282,11 +14282,11 @@ RocketHideout1Object: ; 0x44ce7 (size=98)
     db $0 ; signs
 
     db $7 ; people
-    db SPRITE_ROCKET_GRUNT, $8 + 4, $1a + 4, $ff, $d2, $41, $e6, $8 ; trainer
-    db SPRITE_ROCKET_GRUNT, $6 + 4, $c + 4, $ff, $d3, $42, $e6, $9 ; trainer
-    db SPRITE_ROCKET_GRUNT, $11 + 4, $12 + 4, $ff, $d0, $43, $e6, $a ; trainer
-    db SPRITE_ROCKET_GRUNT, $19 + 4, $f + 4, $ff, $d3, $44, $e6, $b ; trainer
-    db SPRITE_ROCKET_GRUNT, $12 + 4, $1c + 4, $ff, $d2, $45, $e6, $c ; trainer
+    db SPRITE_ROCKET, $8 + 4, $1a + 4, $ff, $d2, $41, $e6, $8 ; trainer
+    db SPRITE_ROCKET, $6 + 4, $c + 4, $ff, $d3, $42, $e6, $9 ; trainer
+    db SPRITE_ROCKET, $11 + 4, $12 + 4, $ff, $d0, $43, $e6, $a ; trainer
+    db SPRITE_ROCKET, $19 + 4, $f + 4, $ff, $d3, $44, $e6, $b ; trainer
+    db SPRITE_ROCKET, $12 + 4, $1c + 4, $ff, $d2, $45, $e6, $c ; trainer
     db SPRITE_BALL, $e + 4, $b + 4, $ff, $ff, $86, $1d ; item
     db SPRITE_BALL, $11 + 4, $9 + 4, $ff, $ff, $87, $12 ; item
 
@@ -14323,7 +14323,7 @@ RocketHideout2Object: ; 0x450f7 (size=80)
     db $0 ; signs
 
     db $5 ; people
-    db SPRITE_ROCKET_GRUNT, $c + 4, $14 + 4, $ff, $d0, $41, $e6, $d ; trainer
+    db SPRITE_ROCKET, $c + 4, $14 + 4, $ff, $d0, $41, $e6, $d ; trainer
     db SPRITE_BALL, $b + 4, $1 + 4, $ff, $ff, $82, $a ; item
     db SPRITE_BALL, $8 + 4, $10 + 4, $ff, $ff, $83, $31 ; item
     db SPRITE_BALL, $c + 4, $6 + 4, $ff, $ff, $84, $cf ; item
@@ -14359,8 +14359,8 @@ RocketHideout3Object: ; 0x4534d (size=50)
     db $0 ; signs
 
     db $4 ; people
-    db SPRITE_ROCKET_GRUNT, $16 + 4, $a + 4, $ff, $d3, $41, $e6, $e ; trainer
-    db SPRITE_ROCKET_GRUNT, $c + 4, $1a + 4, $ff, $d1, $42, $e6, $f ; trainer
+    db SPRITE_ROCKET, $16 + 4, $a + 4, $ff, $d3, $41, $e6, $e ; trainer
+    db SPRITE_ROCKET, $c + 4, $1a + 4, $ff, $d1, $42, $e6, $f ; trainer
     db SPRITE_BALL, $11 + 4, $1a + 4, $ff, $ff, $83, $d2 ; item
     db SPRITE_BALL, $e + 4, $14 + 4, $ff, $ff, $84, $28 ; item
 
@@ -14393,9 +14393,9 @@ RocketHideout4Object: ; 0x455f1 (size=95)
 
     db $9 ; people
     db SPRITE_GIOVANNI, $3 + 4, $19 + 4, $ff, $d0, $41, $e5, $1 ; trainer
-    db SPRITE_ROCKET_GRUNT, $c + 4, $17 + 4, $ff, $d0, $42, $e6, $10 ; trainer
-    db SPRITE_ROCKET_GRUNT, $c + 4, $1a + 4, $ff, $d0, $43, $e6, $11 ; trainer
-    db SPRITE_ROCKET_GRUNT, $2 + 4, $b + 4, $ff, $d0, $44, $e6, $12 ; trainer
+    db SPRITE_ROCKET, $c + 4, $17 + 4, $ff, $d0, $42, $e6, $10 ; trainer
+    db SPRITE_ROCKET, $c + 4, $1a + 4, $ff, $d0, $43, $e6, $11 ; trainer
+    db SPRITE_ROCKET, $2 + 4, $b + 4, $ff, $d0, $44, $e6, $12 ; trainer
     db SPRITE_BALL, $c + 4, $a + 4, $ff, $ff, $85, $23 ; item
     db SPRITE_BALL, $4 + 4, $9 + 4, $ff, $ff, $86, $ca ; item
     db SPRITE_BALL, $14 + 4, $c + 4, $ff, $ff, $87, $25 ; item
@@ -14679,7 +14679,7 @@ SafariZoneRestHouse3Object: ; 0x45d8e (size=38)
 
     db $3 ; people
     db SPRITE_OAK_AIDE, $3 + 4, $1 + 4, $fe, $1, $1 ; person
-    db SPRITE_PUNK, $2 + 4, $4 + 4, $ff, $ff, $2 ; person
+    db SPRITE_ROCKER, $2 + 4, $4 + 4, $ff, $ff, $2 ; person
     db SPRITE_LAPRAS_GIVER, $2 + 4, $5 + 4, $ff, $ff, $3 ; person
 
     ; warp-to
@@ -14772,7 +14772,7 @@ UnknownDungeon3Object: ; 0x45f36 (size=34)
     db $0 ; signs
 
     db $3 ; people
-    db SPRITE_MACHOKE_SLOWBRO, $d + 4, $1b + 4, $ff, $d0, $41, $83, $46 ; trainer
+    db SPRITE_SLOWBRO, $d + 4, $1b + 4, $ff, $d0, $41, $83, $46 ; trainer
     db SPRITE_BALL, $9 + 4, $10 + 4, $ff, $ff, $82, $2 ; item
     db SPRITE_BALL, $1 + 4, $12 + 4, $ff, $ff, $83, $36 ; item
 
@@ -14804,12 +14804,12 @@ RockTunnel2Object: ; 0x4613d (size=100)
     db $0 ; signs
 
     db $8 ; people
-    db SPRITE_BLONDE_PONYTAIL_GIRL, $d + 4, $b + 4, $ff, $d0, $41, $ce, $9 ; trainer
+    db SPRITE_LASS, $d + 4, $b + 4, $ff, $d0, $41, $ce, $9 ; trainer
     db SPRITE_HIKER, $a + 4, $6 + 4, $ff, $d0, $42, $d1, $9 ; trainer
     db SPRITE_BLACK_HAIR_BOY_2, $5 + 4, $3 + 4, $ff, $d0, $43, $cf, $3 ; trainer
     db SPRITE_BLACK_HAIR_BOY_2, $15 + 4, $14 + 4, $ff, $d3, $44, $cf, $4 ; trainer
     db SPRITE_HIKER, $a + 4, $1e + 4, $ff, $d0, $45, $d1, $a ; trainer
-    db SPRITE_BLONDE_PONYTAIL_GIRL, $1c + 4, $e + 4, $ff, $d3, $46, $ce, $a ; trainer
+    db SPRITE_LASS, $1c + 4, $e + 4, $ff, $d3, $46, $ce, $a ; trainer
     db SPRITE_HIKER, $5 + 4, $21 + 4, $ff, $d3, $47, $d1, $b ; trainer
     db SPRITE_BLACK_HAIR_BOY_2, $1e + 4, $1a + 4, $ff, $d0, $48, $cf, $5 ; trainer
 
@@ -15190,7 +15190,7 @@ CeladonMart3Object: ; 0x482c4 (size=94)
     db SPRITE_GAMEBOY_KID_COPY, $6 + 4, $b + 4, $ff, $d3, $2 ; person
     db SPRITE_GAMEBOY_KID_COPY, $2 + 4, $7 + 4, $ff, $d0, $3 ; person
     db SPRITE_GAMEBOY_KID_COPY, $2 + 4, $8 + 4, $ff, $d0, $4 ; person
-    db SPRITE_YOUNG_GIRL, $5 + 4, $2 + 4, $ff, $d1, $5 ; person
+    db SPRITE_YOUNG_BOY, $5 + 4, $2 + 4, $ff, $d1, $5 ; person
 
     ; warp-to
     EVENT_DISP $a, $1, $c ; CELADON_MART_4
@@ -15224,7 +15224,7 @@ CeladonMart4Object: ; 0x48370 (size=49)
     db $3 ; people
     db SPRITE_MART_GUY, $7 + 4, $5 + 4, $ff, $ff, $1 ; person
     db SPRITE_BLACK_HAIR_BOY_2, $5 + 4, $f + 4, $fe, $2, $2 ; person
-    db SPRITE_BLONDE_BOY, $2 + 4, $5 + 4, $fe, $2, $3 ; person
+    db SPRITE_BUG_CATCHER, $2 + 4, $5 + 4, $fe, $2, $3 ; person
 
     ; warp-to
     EVENT_DISP $a, $1, $c ; CELADON_MART_3
@@ -15319,10 +15319,10 @@ CeladonMansion1Object: ; 0x486cf (size=71)
     db $9, $4, $5 ; CeladonMansion1Text5
 
     db $4 ; people
-    db SPRITE_MACHOKE_SLOWBRO, $5 + 4, $0 + 4, $ff, $d3, $1 ; person
+    db SPRITE_SLOWBRO, $5 + 4, $0 + 4, $ff, $d3, $1 ; person
     db SPRITE_OLD_MEDIUM_WOMAN, $5 + 4, $1 + 4, $ff, $d0, $2 ; person
-    db SPRITE_CLEFAIRYLIKE, $8 + 4, $1 + 4, $fe, $2, $3 ; person
-    db SPRITE_MACHOKE_SLOWBRO, $4 + 4, $4 + 4, $fe, $1, $4 ; person
+    db SPRITE_CLEFAIRY, $8 + 4, $1 + 4, $fe, $2, $3 ; person
+    db SPRITE_SLOWBRO, $4 + 4, $4 + 4, $fe, $1, $4 ; person
 
     ; warp-to
     EVENT_DISP $4, $b, $4
@@ -15393,7 +15393,7 @@ CeladonMansion3Object: ; 0x487ff (size=72)
     db $9, $4, $8 ; CeladonMansion3Text8
 
     db $4 ; people
-    db SPRITE_SUNGLASSES_GUY, $4 + 4, $0 + 4, $ff, $d1, $1 ; person
+    db SPRITE_BIKE_SHOP_GUY, $4 + 4, $0 + 4, $ff, $d1, $1 ; person
     db SPRITE_MART_GUY, $4 + 4, $3 + 4, $ff, $d1, $2 ; person
     db SPRITE_BLACK_HAIR_BOY_2, $7 + 4, $0 + 4, $ff, $d1, $3 ; person
     db SPRITE_LAPRAS_GIVER, $3 + 4, $2 + 4, $ff, $ff, $4 ; person
@@ -15488,13 +15488,13 @@ CeladonGymObject: ; 0x48b30 (size=84)
 
     db $8 ; people
     db SPRITE_ERIKA, $3 + 4, $4 + 4, $ff, $d0, $41, $ed, $1 ; trainer
-    db SPRITE_BLONDE_PONYTAIL_GIRL, $b + 4, $2 + 4, $ff, $d3, $42, $cb, $11 ; trainer
+    db SPRITE_LASS, $b + 4, $2 + 4, $ff, $d3, $42, $cb, $11 ; trainer
     db SPRITE_FOULARD_WOMAN, $a + 4, $7 + 4, $ff, $d2, $43, $da, $1 ; trainer
-    db SPRITE_BLONDE_PONYTAIL_GIRL, $5 + 4, $9 + 4, $ff, $d0, $44, $ce, $b ; trainer
+    db SPRITE_LASS, $5 + 4, $9 + 4, $ff, $d0, $44, $ce, $b ; trainer
     db SPRITE_FOULARD_WOMAN, $5 + 4, $1 + 4, $ff, $d0, $45, $da, $2 ; trainer
-    db SPRITE_BLONDE_PONYTAIL_GIRL, $3 + 4, $6 + 4, $ff, $d0, $46, $cb, $12 ; trainer
+    db SPRITE_LASS, $3 + 4, $6 + 4, $ff, $d0, $46, $cb, $12 ; trainer
     db SPRITE_FOULARD_WOMAN, $3 + 4, $3 + 4, $ff, $d0, $47, $da, $3 ; trainer
-    db SPRITE_BLONDE_PONYTAIL_GIRL, $3 + 4, $5 + 4, $ff, $d0, $48, $e8, $1 ; trainer
+    db SPRITE_LASS, $3 + 4, $5 + 4, $ff, $d0, $48, $e8, $1 ; trainer
 
     ; warp-to
     EVENT_DISP $5, $11, $4
@@ -15532,10 +15532,10 @@ CeladonGameCornerObject: ; 0x48fa0 (size=99)
     db SPRITE_FISHER, $b + 4, $5 + 4, $ff, $d3, $5 ; person
     db SPRITE_MOM_GEISHA, $b + 4, $8 + 4, $ff, $d2, $6 ; person
     db SPRITE_GYM_HELPER, $e + 4, $8 + 4, $ff, $d2, $7 ; person
-    db SPRITE_MONK, $f + 4, $b + 4, $ff, $d3, $8 ; person
+    db SPRITE_GAMBLER, $f + 4, $b + 4, $ff, $d3, $8 ; person
     db SPRITE_MART_GUY, $b + 4, $e + 4, $ff, $d2, $9 ; person
     db SPRITE_GENTLEMAN, $d + 4, $11 + 4, $ff, $d3, $a ; person
-    db SPRITE_ROCKET_GRUNT, $5 + 4, $9 + 4, $ff, $d1, $4b, $e6, $7 ; trainer
+    db SPRITE_ROCKET, $5 + 4, $9 + 4, $ff, $d1, $4b, $e6, $7 ; trainer
 
     ; warp-to
     EVENT_DISP $a, $11, $f
@@ -15604,7 +15604,7 @@ CeladonPrizeRoomObject: ; 0x49108 (size=41)
 
     db $2 ; people
     db SPRITE_BALDING_GUY, $4 + 4, $1 + 4, $ff, $ff, $1 ; person
-    db SPRITE_MONK, $3 + 4, $7 + 4, $fe, $2, $2 ; person
+    db SPRITE_GAMBLER, $3 + 4, $7 + 4, $fe, $2, $2 ; person
 
     ; warp-to
     EVENT_DISP $5, $7, $4
@@ -15636,7 +15636,7 @@ CeladonDinerObject: ; 0x491bc (size=50)
     db SPRITE_COOK, $5 + 4, $8 + 4, $fe, $2, $1 ; person
     db SPRITE_MOM_GEISHA, $2 + 4, $7 + 4, $ff, $ff, $2 ; person
     db SPRITE_FAT_BALD_GUY, $4 + 4, $1 + 4, $ff, $d0, $3 ; person
-    db SPRITE_FAT_MAN, $3 + 4, $5 + 4, $ff, $d3, $4 ; person
+    db SPRITE_FISHER2, $3 + 4, $5 + 4, $ff, $d3, $4 ; person
     db SPRITE_GYM_HELPER, $1 + 4, $0 + 4, $ff, $d0, $5 ; person
 
     ; warp-to
@@ -15667,7 +15667,7 @@ CeladonHouse2Object: ; 0x49227 (size=38)
 
     db $3 ; people
     db SPRITE_OLD_PERSON, $2 + 4, $4 + 4, $ff, $d0, $1 ; person
-    db SPRITE_ROCKET_GRUNT, $4 + 4, $1 + 4, $fe, $0, $2 ; person
+    db SPRITE_ROCKET, $4 + 4, $1 + 4, $fe, $0, $2 ; person
     db SPRITE_SAILOR, $6 + 4, $5 + 4, $ff, $d2, $3 ; person
 
     ; warp-to
@@ -15729,7 +15729,7 @@ MtMoonPokecenterObject: ; 0x49376 (size=56)
 
     db $6 ; people
     db SPRITE_NURSE, $1 + 4, $3 + 4, $ff, $d0, $1 ; person
-    db SPRITE_BLONDE_BOY, $3 + 4, $4 + 4, $ff, $d1, $2 ; person
+    db SPRITE_BUG_CATCHER, $3 + 4, $4 + 4, $ff, $d1, $2 ; person
     db SPRITE_GENTLEMAN, $3 + 4, $7 + 4, $ff, $d1, $3 ; person
     db SPRITE_FAT_BALD_GUY, $6 + 4, $a + 4, $fe, $2, $4 ; person
     db SPRITE_CLIPBOARD, $2 + 4, $7 + 4, $ff, $ff, $5 ; person
@@ -15761,7 +15761,7 @@ RockTunnelPokecenterObject: ; 0x493d4 (size=44)
     db $4 ; people
     db SPRITE_NURSE, $1 + 4, $3 + 4, $ff, $d0, $1 ; person
     db SPRITE_GENTLEMAN, $3 + 4, $7 + 4, $fe, $2, $2 ; person
-    db SPRITE_FAT_MAN, $5 + 4, $2 + 4, $ff, $ff, $3 ; person
+    db SPRITE_FISHER2, $5 + 4, $2 + 4, $ff, $ff, $3 ; person
     db SPRITE_CABLE_CLUB_WOMAN, $2 + 4, $b + 4, $ff, $d0, $4 ; person
 
     ; warp-to
@@ -15791,7 +15791,7 @@ Route11GateObject: ; 0x49416 (size=50)
     db $0 ; signs
 
     db $1 ; people
-    db SPRITE_GUARD_COP, $1 + 4, $4 + 4, $ff, $ff, $1 ; person
+    db SPRITE_GUARD, $1 + 4, $4 + 4, $ff, $ff, $1 ; person
 
     ; warp-to
     EVENT_DISP $4, $4, $0
@@ -15821,7 +15821,7 @@ Route11GateUpstairsObject: ; 0x494da (size=30)
     db $2, $6, $4 ; Route11GateUpstairsText4
 
     db $2 ; people
-    db SPRITE_BLONDE_BOY, $2 + 4, $4 + 4, $fe, $2, $1 ; person
+    db SPRITE_BUG_CATCHER, $2 + 4, $4 + 4, $fe, $2, $1 ; person
     db SPRITE_OAK_AIDE, $6 + 4, $2 + 4, $ff, $ff, $2 ; person
 
     ; warp-to
@@ -15850,7 +15850,7 @@ Route12GateObject: ; 0x4950e (size=50)
     db $0 ; signs
 
     db $1 ; people
-    db SPRITE_GUARD_COP, $3 + 4, $1 + 4, $ff, $ff, $1 ; person
+    db SPRITE_GUARD, $3 + 4, $1 + 4, $ff, $ff, $1 ; person
 
     ; warp-to
     EVENT_DISP $5, $0, $4
@@ -15911,7 +15911,7 @@ Route15GateObject: ; 0x4960c (size=50)
     db $0 ; signs
 
     db $1 ; people
-    db SPRITE_GUARD_COP, $1 + 4, $4 + 4, $ff, $ff, $1 ; person
+    db SPRITE_GUARD, $1 + 4, $4 + 4, $ff, $ff, $1 ; person
 
     ; warp-to
     EVENT_DISP $4, $4, $0
@@ -15948,8 +15948,8 @@ Route16GateMapObject: ; 0x4978b (size=88)
     db $0 ; signs
 
     db $2 ; people
-    db SPRITE_GUARD_COP, $5 + 4, $4 + 4, $ff, $d0, $1 ; person
-    db SPRITE_MONK, $3 + 4, $4 + 4, $ff, $ff, $2 ; person
+    db SPRITE_GUARD, $5 + 4, $4 + 4, $ff, $d0, $1 ; person
+    db SPRITE_GAMBLER, $3 + 4, $4 + 4, $ff, $ff, $2 ; person
 
     ; warp-to
     EVENT_DISP $4, $8, $0
@@ -15986,7 +15986,7 @@ Route16GateUpstairsObject: ; 0x4984c (size=30)
     db $2, $6, $4 ; Route16GateUpstairsText4
 
     db $2 ; people
-    db SPRITE_YOUNG_GIRL, $2 + 4, $4 + 4, $ff, $ff, $1 ; person
+    db SPRITE_YOUNG_BOY, $2 + 4, $4 + 4, $ff, $ff, $1 ; person
     db SPRITE_LITTLE_GIRL, $5 + 4, $2 + 4, $fe, $2, $2 ; person
 
     ; warp-to
@@ -16015,7 +16015,7 @@ Route18GateObject: ; 0x49937 (size=50)
     db $0 ; signs
 
     db $1 ; people
-    db SPRITE_GUARD_COP, $1 + 4, $4 + 4, $ff, $d0, $1 ; person
+    db SPRITE_GUARD, $1 + 4, $4 + 4, $ff, $d0, $1 ; person
 
     ; warp-to
     EVENT_DISP $4, $4, $0
@@ -16045,7 +16045,7 @@ Route18GateHeaderObject: ; 0x499a4 (size=24)
     db $2, $6, $3 ; Route18GateHeaderText3
 
     db $1 ; people
-    db SPRITE_BLONDE_BOY, $2 + 4, $4 + 4, $fe, $2, $1 ; person
+    db SPRITE_BUG_CATCHER, $2 + 4, $4 + 4, $fe, $2, $1 ; person
 
     ; warp-to
     EVENT_DISP $4, $7, $7 ; ROUTE_18_GATE_1F
@@ -16075,12 +16075,12 @@ MtMoon1Object: ; 0x49b06 (size=145)
 
     db $d ; people
     db SPRITE_HIKER, $6 + 4, $5 + 4, $ff, $d0, $41, $d1, $1 ; trainer
-    db SPRITE_BLONDE_BOY, $10 + 4, $c + 4, $ff, $d3, $42, $c9, $3 ; trainer
-    db SPRITE_BLONDE_PONYTAIL_GIRL, $4 + 4, $1e + 4, $ff, $d0, $43, $cb, $5 ; trainer
+    db SPRITE_BUG_CATCHER, $10 + 4, $c + 4, $ff, $d3, $42, $c9, $3 ; trainer
+    db SPRITE_LASS, $4 + 4, $1e + 4, $ff, $d0, $43, $cb, $5 ; trainer
     db SPRITE_BLACK_HAIR_BOY_2, $1f + 4, $18 + 4, $ff, $d1, $44, $d0, $1 ; trainer
-    db SPRITE_BLONDE_PONYTAIL_GIRL, $17 + 4, $10 + 4, $ff, $d0, $45, $cb, $6 ; trainer
-    db SPRITE_BLONDE_BOY, $16 + 4, $7 + 4, $ff, $d0, $46, $ca, $7 ; trainer
-    db SPRITE_BLONDE_BOY, $1b + 4, $1e + 4, $ff, $d3, $47, $ca, $8 ; trainer
+    db SPRITE_LASS, $17 + 4, $10 + 4, $ff, $d0, $45, $cb, $6 ; trainer
+    db SPRITE_BUG_CATCHER, $16 + 4, $7 + 4, $ff, $d0, $46, $ca, $7 ; trainer
+    db SPRITE_BUG_CATCHER, $1b + 4, $1e + 4, $ff, $d3, $47, $ca, $8 ; trainer
     db SPRITE_BALL, $14 + 4, $2 + 4, $ff, $ff, $88, $14 ; item
     db SPRITE_BALL, $2 + 4, $2 + 4, $ff, $ff, $89, $a ; item
     db SPRITE_BALL, $1f + 4, $23 + 4, $ff, $ff, $8a, $28 ; item
@@ -16121,10 +16121,10 @@ MtMoon3Object: ; 0x49fdb (size=102)
 
     db $9 ; people
     db SPRITE_BLACK_HAIR_BOY_2, $8 + 4, $c + 4, $ff, $d3, $41, $d0, $2 ; trainer
-    db SPRITE_ROCKET_GRUNT, $10 + 4, $b + 4, $ff, $d0, $42, $e6, $1 ; trainer
-    db SPRITE_ROCKET_GRUNT, $16 + 4, $f + 4, $ff, $d0, $43, $e6, $2 ; trainer
-    db SPRITE_ROCKET_GRUNT, $b + 4, $1d + 4, $ff, $d1, $44, $e6, $3 ; trainer
-    db SPRITE_ROCKET_GRUNT, $11 + 4, $1d + 4, $ff, $d2, $45, $e6, $4 ; trainer
+    db SPRITE_ROCKET, $10 + 4, $b + 4, $ff, $d0, $42, $e6, $1 ; trainer
+    db SPRITE_ROCKET, $16 + 4, $f + 4, $ff, $d0, $43, $e6, $2 ; trainer
+    db SPRITE_ROCKET, $b + 4, $1d + 4, $ff, $d1, $44, $e6, $3 ; trainer
+    db SPRITE_ROCKET, $11 + 4, $1d + 4, $ff, $d2, $45, $e6, $4 ; trainer
     db SPRITE_OMANYTE, $6 + 4, $c + 4, $ff, $ff, $6 ; person
     db SPRITE_OMANYTE, $6 + 4, $d + 4, $ff, $ff, $7 ; person
     db SPRITE_BALL, $15 + 4, $19 + 4, $ff, $ff, $88, $23 ; item
@@ -16330,7 +16330,7 @@ BattleCenterMObject: ; 0x4fd53 (size=10)
     db $0 ; signs
 
     db $1 ; people
-    db SPRITE_HIRO, $2 + 4, $2 + 4, $ff, $0, $1 ; person
+    db SPRITE_RED, $2 + 4, $2 + 4, $ff, $0, $1 ; person
 
 
 BattleCenterMBlocks: ; 20
@@ -16353,7 +16353,7 @@ TradeCenterMObject: ; 0x4fd87 (size=10)
     db $0 ; signs
 
     db $1 ; people
-    db SPRITE_HIRO, $2 + 4, $2 + 4, $ff, $0, $1 ; person
+    db SPRITE_RED, $2 + 4, $2 + 4, $ff, $0, $1 ; person
 
 
 TradeCenterMBlocks: ; 20
@@ -16556,8 +16556,8 @@ Route22Object: ; 0x50022 (size=27)
     db $b, $7, $3 ; Route22Text3
 
     db $2 ; people
-    db SPRITE_RIVAL, $5 + 4, $19 + 4, $ff, $ff, $1 ; person
-    db SPRITE_RIVAL, $5 + 4, $19 + 4, $ff, $ff, $2 ; person
+    db SPRITE_BLUE, $5 + 4, $19 + 4, $ff, $ff, $1 ; person
+    db SPRITE_BLUE, $5 + 4, $19 + 4, $ff, $ff, $2 ; person
 
     ; warp-to
     EVENT_DISP $14, $5, $8 ; ROUTE_22_GATE
@@ -16660,13 +16660,13 @@ Route23Object: ; 0x50361 (size=81)
     db $21, $3, $8 ; Route23Text8
 
     db $7 ; people
-    db SPRITE_GUARD_COP, $23 + 4, $4 + 4, $ff, $d0, $1 ; person
-    db SPRITE_GUARD_COP, $38 + 4, $a + 4, $ff, $d0, $2 ; person
+    db SPRITE_GUARD, $23 + 4, $4 + 4, $ff, $d0, $1 ; person
+    db SPRITE_GUARD, $38 + 4, $a + 4, $ff, $d0, $2 ; person
     db SPRITE_SWIMMER, $55 + 4, $8 + 4, $ff, $d0, $3 ; person
     db SPRITE_SWIMMER, $60 + 4, $b + 4, $ff, $d0, $4 ; person
-    db SPRITE_GUARD_COP, $69 + 4, $c + 4, $ff, $d0, $5 ; person
-    db SPRITE_GUARD_COP, $77 + 4, $8 + 4, $ff, $d0, $6 ; person
-    db SPRITE_GUARD_COP, $88 + 4, $8 + 4, $ff, $d0, $7 ; person
+    db SPRITE_GUARD, $69 + 4, $c + 4, $ff, $d0, $5 ; person
+    db SPRITE_GUARD, $77 + 4, $8 + 4, $ff, $d0, $6 ; person
+    db SPRITE_GUARD, $88 + 4, $8 + 4, $ff, $d0, $7 ; person
 
     ; warp-to
     EVENT_DISP $a, $8b, $7 ; ROUTE_22_GATE
@@ -16714,10 +16714,10 @@ Route24Object: ; 0x506a4 (size=67)
     db SPRITE_BLACK_HAIR_BOY_1, $f + 4, $b + 4, $ff, $d2, $41, $e6, $6 ; trainer
     db SPRITE_BLACK_HAIR_BOY_1, $14 + 4, $5 + 4, $ff, $d1, $42, $cd, $2 ; trainer
     db SPRITE_BLACK_HAIR_BOY_1, $13 + 4, $b + 4, $ff, $d2, $43, $cd, $3 ; trainer
-    db SPRITE_BLONDE_PONYTAIL_GIRL, $16 + 4, $a + 4, $ff, $d3, $44, $cb, $7 ; trainer
-    db SPRITE_BLONDE_BOY, $19 + 4, $b + 4, $ff, $d2, $45, $c9, $4 ; trainer
-    db SPRITE_BLONDE_PONYTAIL_GIRL, $1c + 4, $a + 4, $ff, $d3, $46, $cb, $8 ; trainer
-    db SPRITE_BLONDE_BOY, $1f + 4, $b + 4, $ff, $d2, $47, $ca, $9 ; trainer
+    db SPRITE_LASS, $16 + 4, $a + 4, $ff, $d3, $44, $cb, $7 ; trainer
+    db SPRITE_BUG_CATCHER, $19 + 4, $b + 4, $ff, $d2, $45, $c9, $4 ; trainer
+    db SPRITE_LASS, $1c + 4, $a + 4, $ff, $d3, $46, $cb, $8 ; trainer
+    db SPRITE_BUG_CATCHER, $1f + 4, $b + 4, $ff, $d2, $47, $ca, $9 ; trainer
     db SPRITE_BALL, $5 + 4, $a + 4, $ff, $ff, $88, $f5 ; item
 
 INCBIN "baserom.gbc",$506e7,$0
@@ -16753,12 +16753,12 @@ Route25Object: ; 0x507b2 (size=94)
     db $3, $2b, $b ; Route25Text11
 
     db $a ; people
-    db SPRITE_BLONDE_BOY, $2 + 4, $e + 4, $ff, $d0, $41, $c9, $5 ; trainer
-    db SPRITE_BLONDE_BOY, $5 + 4, $12 + 4, $ff, $d1, $42, $c9, $6 ; trainer
+    db SPRITE_BUG_CATCHER, $2 + 4, $e + 4, $ff, $d0, $41, $c9, $5 ; trainer
+    db SPRITE_BUG_CATCHER, $5 + 4, $12 + 4, $ff, $d1, $42, $c9, $6 ; trainer
     db SPRITE_BLACK_HAIR_BOY_1, $4 + 4, $18 + 4, $ff, $d0, $43, $cd, $2 ; trainer
-    db SPRITE_BLONDE_PONYTAIL_GIRL, $8 + 4, $12 + 4, $ff, $d3, $44, $cb, $9 ; trainer
-    db SPRITE_BLONDE_BOY, $3 + 4, $20 + 4, $ff, $d2, $45, $c9, $7 ; trainer
-    db SPRITE_BLONDE_PONYTAIL_GIRL, $4 + 4, $25 + 4, $ff, $d0, $46, $cb, $a ; trainer
+    db SPRITE_LASS, $8 + 4, $12 + 4, $ff, $d3, $44, $cb, $9 ; trainer
+    db SPRITE_BUG_CATCHER, $3 + 4, $20 + 4, $ff, $d2, $45, $c9, $7 ; trainer
+    db SPRITE_LASS, $4 + 4, $25 + 4, $ff, $d0, $46, $cb, $a ; trainer
     db SPRITE_HIKER, $4 + 4, $8 + 4, $ff, $d3, $47, $d1, $2 ; trainer
     db SPRITE_HIKER, $9 + 4, $17 + 4, $ff, $d1, $48, $d1, $3 ; trainer
     db SPRITE_HIKER, $7 + 4, $d + 4, $ff, $d3, $49, $d1, $4 ; trainer
@@ -16872,21 +16872,21 @@ SaffronCityObject: ; 0x509dc (size=188)
     db $13, $1, $19 ; SaffronCityText25
 
     db $f ; people
-    db SPRITE_ROCKET_GRUNT, $6 + 4, $7 + 4, $ff, $ff, $1 ; person
-    db SPRITE_ROCKET_GRUNT, $8 + 4, $14 + 4, $fe, $2, $2 ; person
-    db SPRITE_ROCKET_GRUNT, $4 + 4, $22 + 4, $ff, $ff, $3 ; person
-    db SPRITE_ROCKET_GRUNT, $c + 4, $d + 4, $ff, $ff, $4 ; person
-    db SPRITE_ROCKET_GRUNT, $19 + 4, $b + 4, $fe, $2, $5 ; person
-    db SPRITE_ROCKET_GRUNT, $d + 4, $20 + 4, $fe, $2, $6 ; person
-    db SPRITE_ROCKET_GRUNT, $1e + 4, $12 + 4, $fe, $2, $7 ; person
+    db SPRITE_ROCKET, $6 + 4, $7 + 4, $ff, $ff, $1 ; person
+    db SPRITE_ROCKET, $8 + 4, $14 + 4, $fe, $2, $2 ; person
+    db SPRITE_ROCKET, $4 + 4, $22 + 4, $ff, $ff, $3 ; person
+    db SPRITE_ROCKET, $c + 4, $d + 4, $ff, $ff, $4 ; person
+    db SPRITE_ROCKET, $19 + 4, $b + 4, $fe, $2, $5 ; person
+    db SPRITE_ROCKET, $d + 4, $20 + 4, $fe, $2, $6 ; person
+    db SPRITE_ROCKET, $1e + 4, $12 + 4, $fe, $2, $7 ; person
     db SPRITE_OAK_AIDE, $e + 4, $8 + 4, $fe, $0, $8 ; person
     db SPRITE_LAPRAS_GIVER, $17 + 4, $17 + 4, $ff, $ff, $9 ; person
     db SPRITE_ERIKA, $1e + 4, $11 + 4, $fe, $2, $a ; person
     db SPRITE_GENTLEMAN, $c + 4, $1e + 4, $ff, $d0, $b ; person
     db SPRITE_BIRD, $c + 4, $1f + 4, $ff, $d0, $c ; person
-    db SPRITE_PUNK, $8 + 4, $12 + 4, $ff, $d1, $d ; person
-    db SPRITE_ROCKET_GRUNT, $16 + 4, $12 + 4, $ff, $d0, $e ; person
-    db SPRITE_ROCKET_GRUNT, $16 + 4, $13 + 4, $ff, $d0, $f ; person
+    db SPRITE_ROCKER, $8 + 4, $12 + 4, $ff, $d1, $d ; person
+    db SPRITE_ROCKET, $16 + 4, $12 + 4, $ff, $d0, $e ; person
+    db SPRITE_ROCKET, $16 + 4, $13 + 4, $ff, $d0, $f ; person
 
     ; warp-to
     EVENT_DISP $14, $5, $7 ; COPYCATS_HOUSE_1F
@@ -17023,11 +17023,11 @@ SilphCo7Object: ; 0x51ed7 (size=128)
     db SPRITE_LAPRAS_GIVER, $d + 4, $d + 4, $ff, $d1, $2 ; person
     db SPRITE_LAPRAS_GIVER, $a + 4, $7 + 4, $ff, $ff, $3 ; person
     db SPRITE_ERIKA, $8 + 4, $a + 4, $ff, $ff, $4 ; person
-    db SPRITE_ROCKET_GRUNT, $1 + 4, $d + 4, $ff, $d0, $45, $e6, $20 ; trainer
+    db SPRITE_ROCKET, $1 + 4, $d + 4, $ff, $d0, $45, $e6, $20 ; trainer
     db SPRITE_OAK_AIDE, $d + 4, $2 + 4, $ff, $d0, $46, $e4, $8 ; trainer
-    db SPRITE_ROCKET_GRUNT, $2 + 4, $14 + 4, $ff, $d2, $47, $e6, $21 ; trainer
-    db SPRITE_ROCKET_GRUNT, $e + 4, $13 + 4, $ff, $d3, $48, $e6, $22 ; trainer
-    db SPRITE_RIVAL, $7 + 4, $3 + 4, $ff, $d1, $9 ; person
+    db SPRITE_ROCKET, $2 + 4, $14 + 4, $ff, $d2, $47, $e6, $21 ; trainer
+    db SPRITE_ROCKET, $e + 4, $13 + 4, $ff, $d3, $48, $e6, $22 ; trainer
+    db SPRITE_BLUE, $7 + 4, $3 + 4, $ff, $d1, $9 ; person
     db SPRITE_BALL, $9 + 4, $1 + 4, $ff, $ff, $8a, $27 ; item
     db SPRITE_BALL, $b + 4, $18 + 4, $ff, $ff, $8b, $cb ; item
 
@@ -17211,14 +17211,14 @@ Route3Object: ; 0x54208 (size=77)
 
     db $9 ; people
     db SPRITE_BLACK_HAIR_BOY_2, $b + 4, $39 + 4, $ff, $ff, $1 ; person
-    db SPRITE_BLONDE_BOY, $6 + 4, $a + 4, $ff, $d3, $42, $ca, $4 ; trainer
-    db SPRITE_BLONDE_BOY, $4 + 4, $e + 4, $ff, $d0, $43, $c9, $1 ; trainer
-    db SPRITE_BLONDE_PONYTAIL_GIRL, $9 + 4, $10 + 4, $ff, $d2, $44, $cb, $1 ; trainer
-    db SPRITE_BLONDE_BOY, $5 + 4, $13 + 4, $ff, $d0, $45, $ca, $5 ; trainer
-    db SPRITE_BLONDE_PONYTAIL_GIRL, $4 + 4, $17 + 4, $ff, $d2, $46, $cb, $2 ; trainer
-    db SPRITE_BLONDE_BOY, $9 + 4, $16 + 4, $ff, $d2, $47, $c9, $2 ; trainer
-    db SPRITE_BLONDE_BOY, $6 + 4, $18 + 4, $ff, $d3, $48, $ca, $6 ; trainer
-    db SPRITE_BLONDE_PONYTAIL_GIRL, $a + 4, $21 + 4, $ff, $d1, $49, $cb, $3 ; trainer
+    db SPRITE_BUG_CATCHER, $6 + 4, $a + 4, $ff, $d3, $42, $ca, $4 ; trainer
+    db SPRITE_BUG_CATCHER, $4 + 4, $e + 4, $ff, $d0, $43, $c9, $1 ; trainer
+    db SPRITE_LASS, $9 + 4, $10 + 4, $ff, $d2, $44, $cb, $1 ; trainer
+    db SPRITE_BUG_CATCHER, $5 + 4, $13 + 4, $ff, $d0, $45, $ca, $5 ; trainer
+    db SPRITE_LASS, $4 + 4, $17 + 4, $ff, $d2, $46, $cb, $2 ; trainer
+    db SPRITE_BUG_CATCHER, $9 + 4, $16 + 4, $ff, $d2, $47, $c9, $2 ; trainer
+    db SPRITE_BUG_CATCHER, $6 + 4, $18 + 4, $ff, $d3, $48, $ca, $6 ; trainer
+    db SPRITE_LASS, $a + 4, $21 + 4, $ff, $d1, $49, $cb, $3 ; trainer
 
 INCBIN "baserom.gbc",$54255,$0
 
@@ -17263,8 +17263,8 @@ Route4Object: ; 0x543b2 (size=58)
     db $7, $1b, $6 ; Route4Text6
 
     db $3 ; people
-    db SPRITE_BLONDE_PONYTAIL_GIRL, $8 + 4, $9 + 4, $fe, $0, $1 ; person
-    db SPRITE_BLONDE_PONYTAIL_GIRL, $3 + 4, $3f + 4, $ff, $d3, $42, $cb, $4 ; trainer
+    db SPRITE_LASS, $8 + 4, $9 + 4, $fe, $0, $1 ; person
+    db SPRITE_LASS, $3 + 4, $3f + 4, $ff, $d3, $42, $cb, $4 ; trainer
     db SPRITE_BALL, $3 + 4, $39 + 4, $ff, $ff, $83, $cc ; item
 
     ; warp-to
@@ -17361,15 +17361,15 @@ Route9Object: ; 0x546a8 (size=86)
     db $7, $19, $b ; Route9Text11
 
     db $a ; people
-    db SPRITE_BLONDE_PONYTAIL_GIRL, $a + 4, $d + 4, $ff, $d2, $41, $ce, $5 ; trainer
+    db SPRITE_LASS, $a + 4, $d + 4, $ff, $d2, $41, $ce, $5 ; trainer
     db SPRITE_BLACK_HAIR_BOY_1, $7 + 4, $18 + 4, $ff, $d2, $42, $cd, $7 ; trainer
     db SPRITE_BLACK_HAIR_BOY_1, $7 + 4, $1f + 4, $ff, $d3, $43, $cd, $8 ; trainer
-    db SPRITE_BLONDE_PONYTAIL_GIRL, $8 + 4, $30 + 4, $ff, $d3, $44, $ce, $6 ; trainer
+    db SPRITE_LASS, $8 + 4, $30 + 4, $ff, $d3, $44, $ce, $6 ; trainer
     db SPRITE_HIKER, $f + 4, $10 + 4, $ff, $d2, $45, $d1, $b ; trainer
     db SPRITE_HIKER, $3 + 4, $2b + 4, $ff, $d2, $46, $d1, $6 ; trainer
-    db SPRITE_BLONDE_BOY, $2 + 4, $16 + 4, $ff, $d0, $47, $ca, $d ; trainer
+    db SPRITE_BUG_CATCHER, $2 + 4, $16 + 4, $ff, $d0, $47, $ca, $d ; trainer
     db SPRITE_HIKER, $f + 4, $2d + 4, $ff, $d3, $48, $d1, $5 ; trainer
-    db SPRITE_BLONDE_BOY, $8 + 4, $28 + 4, $ff, $d3, $49, $ca, $e ; trainer
+    db SPRITE_BUG_CATCHER, $8 + 4, $28 + 4, $ff, $d3, $49, $ca, $e ; trainer
     db SPRITE_BALL, $f + 4, $a + 4, $ff, $ff, $8a, $e6 ; item
 
 INCBIN "baserom.gbc",$546fe,$0
@@ -17413,10 +17413,10 @@ Route13Object: ; 0x5482e (size=93)
 
     db $a ; people
     db SPRITE_BLACK_HAIR_BOY_1, $a + 4, $31 + 4, $ff, $d3, $41, $df, $1 ; trainer
-    db SPRITE_BLONDE_PONYTAIL_GIRL, $a + 4, $30 + 4, $ff, $d0, $42, $ce, $c ; trainer
-    db SPRITE_BLONDE_PONYTAIL_GIRL, $9 + 4, $1b + 4, $ff, $d0, $43, $ce, $d ; trainer
-    db SPRITE_BLONDE_PONYTAIL_GIRL, $a + 4, $17 + 4, $ff, $d2, $44, $ce, $e ; trainer
-    db SPRITE_BLONDE_PONYTAIL_GIRL, $5 + 4, $32 + 4, $ff, $d0, $45, $ce, $f ; trainer
+    db SPRITE_LASS, $a + 4, $30 + 4, $ff, $d0, $42, $ce, $c ; trainer
+    db SPRITE_LASS, $9 + 4, $1b + 4, $ff, $d0, $43, $ce, $d ; trainer
+    db SPRITE_LASS, $a + 4, $17 + 4, $ff, $d2, $44, $ce, $e ; trainer
+    db SPRITE_LASS, $5 + 4, $32 + 4, $ff, $d0, $45, $ce, $f ; trainer
     db SPRITE_BLACK_HAIR_BOY_1, $4 + 4, $c + 4, $ff, $d3, $46, $df, $2 ; trainer
     db SPRITE_FOULARD_WOMAN, $6 + 4, $21 + 4, $ff, $d0, $47, $da, $4 ; trainer
     db SPRITE_FOULARD_WOMAN, $6 + 4, $20 + 4, $ff, $d0, $48, $da, $5 ; trainer
@@ -17612,15 +17612,15 @@ Route21Object: ; 0x55021 (size=76)
     db $0 ; signs
 
     db $9 ; people
-    db SPRITE_FAT_MAN, $18 + 4, $4 + 4, $ff, $d2, $41, $d6, $7 ; trainer
-    db SPRITE_FAT_MAN, $19 + 4, $6 + 4, $ff, $d0, $42, $d6, $9 ; trainer
+    db SPRITE_FISHER2, $18 + 4, $4 + 4, $ff, $d2, $41, $d6, $7 ; trainer
+    db SPRITE_FISHER2, $19 + 4, $6 + 4, $ff, $d0, $42, $d6, $9 ; trainer
     db SPRITE_SWIMMER, $1f + 4, $a + 4, $ff, $d1, $43, $d7, $c ; trainer
     db SPRITE_SWIMMER, $1e + 4, $c + 4, $ff, $d3, $44, $d8, $9 ; trainer
     db SPRITE_SWIMMER, $3f + 4, $10 + 4, $ff, $d0, $45, $d7, $d ; trainer
     db SPRITE_SWIMMER, $47 + 4, $5 + 4, $ff, $d3, $46, $d7, $e ; trainer
     db SPRITE_SWIMMER, $47 + 4, $f + 4, $ff, $d2, $47, $d7, $f ; trainer
-    db SPRITE_FAT_MAN, $38 + 4, $e + 4, $ff, $d2, $48, $d6, $8 ; trainer
-    db SPRITE_FAT_MAN, $39 + 4, $11 + 4, $ff, $d3, $49, $d6, $a ; trainer
+    db SPRITE_FISHER2, $38 + 4, $e + 4, $ff, $d2, $48, $d6, $8 ; trainer
+    db SPRITE_FISHER2, $39 + 4, $11 + 4, $ff, $d3, $49, $d6, $a ; trainer
 
 INCBIN "baserom.gbc",$5506d,$0
 
@@ -17801,9 +17801,9 @@ SilphCo8Object: ; 0x56613 (size=90)
 
     db $4 ; people
     db SPRITE_LAPRAS_GIVER, $2 + 4, $4 + 4, $ff, $ff, $1 ; person
-    db SPRITE_ROCKET_GRUNT, $2 + 4, $13 + 4, $ff, $d2, $42, $e6, $23 ; trainer
+    db SPRITE_ROCKET, $2 + 4, $13 + 4, $ff, $d2, $42, $e6, $23 ; trainer
     db SPRITE_OAK_AIDE, $2 + 4, $a + 4, $ff, $d0, $43, $e4, $9 ; trainer
-    db SPRITE_ROCKET_GRUNT, $f + 4, $c + 4, $ff, $d3, $44, $e6, $24 ; trainer
+    db SPRITE_ROCKET, $f + 4, $c + 4, $ff, $d3, $44, $e6, $24 ; trainer
 
     ; warp-to
     EVENT_DISP $d, $0, $10 ; SILPH_CO_9F
@@ -17859,11 +17859,11 @@ Route6Object: ; 0x58022 (size=87)
 
     db $6 ; people
     db SPRITE_BLACK_HAIR_BOY_1, $15 + 4, $a + 4, $ff, $d3, $41, $cd, $4 ; trainer
-    db SPRITE_BLONDE_PONYTAIL_GIRL, $15 + 4, $b + 4, $ff, $d2, $42, $ce, $2 ; trainer
-    db SPRITE_BLONDE_BOY, $f + 4, $0 + 4, $ff, $d3, $43, $ca, $a ; trainer
+    db SPRITE_LASS, $15 + 4, $b + 4, $ff, $d2, $42, $ce, $2 ; trainer
+    db SPRITE_BUG_CATCHER, $f + 4, $0 + 4, $ff, $d3, $43, $ca, $a ; trainer
     db SPRITE_BLACK_HAIR_BOY_1, $1f + 4, $b + 4, $ff, $d2, $44, $cd, $5 ; trainer
-    db SPRITE_BLONDE_PONYTAIL_GIRL, $1e + 4, $b + 4, $ff, $d2, $45, $ce, $3 ; trainer
-    db SPRITE_BLONDE_BOY, $1a + 4, $13 + 4, $ff, $d2, $46, $ca, $b ; trainer
+    db SPRITE_LASS, $1e + 4, $b + 4, $ff, $d2, $45, $ce, $3 ; trainer
+    db SPRITE_BUG_CATCHER, $1a + 4, $13 + 4, $ff, $d2, $46, $ca, $b ; trainer
 
     ; warp-to
     EVENT_DISP $a, $1, $9 ; ROUTE_6_GATE
@@ -17915,14 +17915,14 @@ Route8Object: ; 0x5814f (size=119)
 
     db $9 ; people
     db SPRITE_BLACK_HAIR_BOY_2, $5 + 4, $8 + 4, $ff, $d3, $41, $d0, $3 ; trainer
-    db SPRITE_MONK, $9 + 4, $d + 4, $ff, $d1, $42, $d9, $5 ; trainer
+    db SPRITE_GAMBLER, $9 + 4, $d + 4, $ff, $d1, $42, $d9, $5 ; trainer
     db SPRITE_BLACK_HAIR_BOY_2, $6 + 4, $2a + 4, $ff, $d1, $43, $d0, $4 ; trainer
-    db SPRITE_BLONDE_PONYTAIL_GIRL, $3 + 4, $1a + 4, $ff, $d2, $44, $cb, $d ; trainer
+    db SPRITE_LASS, $3 + 4, $1a + 4, $ff, $d2, $44, $cb, $d ; trainer
     db SPRITE_BLACK_HAIR_BOY_2, $4 + 4, $1a + 4, $ff, $d3, $45, $d0, $5 ; trainer
-    db SPRITE_BLONDE_PONYTAIL_GIRL, $5 + 4, $1a + 4, $ff, $d2, $46, $cb, $e ; trainer
-    db SPRITE_BLONDE_PONYTAIL_GIRL, $6 + 4, $1a + 4, $ff, $d3, $47, $cb, $f ; trainer
-    db SPRITE_MONK, $d + 4, $2e + 4, $ff, $d0, $48, $d9, $7 ; trainer
-    db SPRITE_BLONDE_PONYTAIL_GIRL, $c + 4, $33 + 4, $ff, $d2, $49, $cb, $10 ; trainer
+    db SPRITE_LASS, $5 + 4, $1a + 4, $ff, $d2, $46, $cb, $e ; trainer
+    db SPRITE_LASS, $6 + 4, $1a + 4, $ff, $d3, $47, $cb, $f ; trainer
+    db SPRITE_GAMBLER, $d + 4, $2e + 4, $ff, $d0, $48, $d9, $7 ; trainer
+    db SPRITE_LASS, $c + 4, $33 + 4, $ff, $d2, $49, $cb, $10 ; trainer
 
     ; warp-to
     EVENT_DISP $1e, $9, $1 ; ROUTE_8_GATE
@@ -17979,9 +17979,9 @@ Route10Object: ; 0x582f6 (size=96)
     db SPRITE_BLACK_HAIR_BOY_2, $2c + 4, $a + 4, $ff, $d2, $41, $cf, $1 ; trainer
     db SPRITE_HIKER, $39 + 4, $3 + 4, $ff, $d1, $42, $d1, $7 ; trainer
     db SPRITE_BLACK_HAIR_BOY_2, $40 + 4, $e + 4, $ff, $d2, $43, $cf, $2 ; trainer
-    db SPRITE_BLONDE_PONYTAIL_GIRL, $19 + 4, $7 + 4, $ff, $d2, $44, $ce, $7 ; trainer
+    db SPRITE_LASS, $19 + 4, $7 + 4, $ff, $d2, $44, $ce, $7 ; trainer
     db SPRITE_HIKER, $3d + 4, $3 + 4, $ff, $d0, $45, $d1, $8 ; trainer
-    db SPRITE_BLONDE_PONYTAIL_GIRL, $36 + 4, $7 + 4, $ff, $d0, $46, $ce, $8 ; trainer
+    db SPRITE_LASS, $36 + 4, $7 + 4, $ff, $d0, $46, $ce, $8 ; trainer
 
     ; warp-to
     EVENT_DISP $a, $13, $b ; ROCK_TUNNEL_POKECENTER
@@ -18032,16 +18032,16 @@ Route11Object: ; 0x584e0 (size=127)
     db $5, $1, $b ; Route11Text11
 
     db $a ; people
-    db SPRITE_MONK, $e + 4, $a + 4, $ff, $d0, $41, $d9, $1 ; trainer
-    db SPRITE_MONK, $9 + 4, $1a + 4, $ff, $d0, $42, $d9, $2 ; trainer
-    db SPRITE_BLONDE_BOY, $5 + 4, $d + 4, $ff, $d2, $43, $c9, $9 ; trainer
+    db SPRITE_GAMBLER, $e + 4, $a + 4, $ff, $d0, $41, $d9, $1 ; trainer
+    db SPRITE_GAMBLER, $9 + 4, $1a + 4, $ff, $d0, $42, $d9, $2 ; trainer
+    db SPRITE_BUG_CATCHER, $5 + 4, $d + 4, $ff, $d2, $43, $c9, $9 ; trainer
     db SPRITE_BLACK_HAIR_BOY_2, $b + 4, $24 + 4, $ff, $d0, $44, $d4, $2 ; trainer
-    db SPRITE_BLONDE_BOY, $4 + 4, $16 + 4, $ff, $d1, $45, $c9, $a ; trainer
-    db SPRITE_MONK, $7 + 4, $2d + 4, $ff, $d0, $46, $d9, $3 ; trainer
-    db SPRITE_MONK, $3 + 4, $21 + 4, $ff, $d1, $47, $d9, $4 ; trainer
-    db SPRITE_BLONDE_BOY, $5 + 4, $2b + 4, $ff, $d3, $48, $c9, $b ; trainer
+    db SPRITE_BUG_CATCHER, $4 + 4, $16 + 4, $ff, $d1, $45, $c9, $a ; trainer
+    db SPRITE_GAMBLER, $7 + 4, $2d + 4, $ff, $d0, $46, $d9, $3 ; trainer
+    db SPRITE_GAMBLER, $3 + 4, $21 + 4, $ff, $d1, $47, $d9, $4 ; trainer
+    db SPRITE_BUG_CATCHER, $5 + 4, $2b + 4, $ff, $d3, $48, $c9, $b ; trainer
     db SPRITE_BLACK_HAIR_BOY_2, $10 + 4, $2d + 4, $ff, $d2, $49, $d4, $3 ; trainer
-    db SPRITE_BLONDE_BOY, $c + 4, $16 + 4, $ff, $d1, $4a, $c9, $c ; trainer
+    db SPRITE_BUG_CATCHER, $c + 4, $16 + 4, $ff, $d1, $4a, $c9, $c ; trainer
 
     ; warp-to
     EVENT_DISP $1e, $8, $31 ; ROUTE_11_GATE_1F
@@ -18100,13 +18100,13 @@ Route12Object: ; 0x5869a (size=118)
 
     db $a ; people
     db SPRITE_SNORLAX, $3e + 4, $a + 4, $ff, $d0, $1 ; person
-    db SPRITE_FAT_MAN, $1f + 4, $e + 4, $ff, $d2, $42, $d6, $3 ; trainer
-    db SPRITE_FAT_MAN, $27 + 4, $5 + 4, $ff, $d1, $43, $d6, $4 ; trainer
+    db SPRITE_FISHER2, $1f + 4, $e + 4, $ff, $d2, $42, $d6, $3 ; trainer
+    db SPRITE_FISHER2, $27 + 4, $5 + 4, $ff, $d1, $43, $d6, $4 ; trainer
     db SPRITE_BLACK_HAIR_BOY_1, $5c + 4, $b + 4, $ff, $d2, $44, $cd, $9 ; trainer
     db SPRITE_BLACK_HAIR_BOY_2, $4c + 4, $e + 4, $ff, $d1, $45, $dc, $2 ; trainer
-    db SPRITE_FAT_MAN, $28 + 4, $c + 4, $ff, $d2, $46, $d6, $5 ; trainer
-    db SPRITE_FAT_MAN, $34 + 4, $9 + 4, $ff, $d3, $47, $d6, $6 ; trainer
-    db SPRITE_FAT_MAN, $57 + 4, $6 + 4, $ff, $d0, $48, $d6, $b ; trainer
+    db SPRITE_FISHER2, $28 + 4, $c + 4, $ff, $d2, $46, $d6, $5 ; trainer
+    db SPRITE_FISHER2, $34 + 4, $9 + 4, $ff, $d3, $47, $d6, $6 ; trainer
+    db SPRITE_FISHER2, $57 + 4, $6 + 4, $ff, $d0, $48, $d6, $b ; trainer
     db SPRITE_BALL, $23 + 4, $e + 4, $ff, $ff, $89, $d8 ; item
     db SPRITE_BALL, $59 + 4, $5 + 4, $ff, $ff, $8a, $25 ; item
 
@@ -18158,16 +18158,16 @@ Route15Object: ; 0x5894e (size=126)
     db $9, $27, $c ; Route15Text12
 
     db $b ; people
-    db SPRITE_BLONDE_PONYTAIL_GIRL, $b + 4, $29 + 4, $ff, $d0, $41, $ce, $14 ; trainer
-    db SPRITE_BLONDE_PONYTAIL_GIRL, $a + 4, $35 + 4, $ff, $d2, $42, $ce, $15 ; trainer
+    db SPRITE_LASS, $b + 4, $29 + 4, $ff, $d0, $41, $ce, $14 ; trainer
+    db SPRITE_LASS, $a + 4, $35 + 4, $ff, $d2, $42, $ce, $15 ; trainer
     db SPRITE_BLACK_HAIR_BOY_1, $d + 4, $1f + 4, $ff, $d1, $43, $df, $6 ; trainer
     db SPRITE_BLACK_HAIR_BOY_1, $d + 4, $23 + 4, $ff, $d1, $44, $df, $7 ; trainer
     db SPRITE_FOULARD_WOMAN, $b + 4, $35 + 4, $ff, $d0, $45, $da, $9 ; trainer
     db SPRITE_FOULARD_WOMAN, $a + 4, $29 + 4, $ff, $d3, $46, $da, $a ; trainer
     db SPRITE_BIKER, $a + 4, $30 + 4, $ff, $d0, $47, $d2, $3 ; trainer
     db SPRITE_BIKER, $a + 4, $2e + 4, $ff, $d0, $48, $d2, $4 ; trainer
-    db SPRITE_BLONDE_PONYTAIL_GIRL, $5 + 4, $25 + 4, $ff, $d3, $49, $ce, $16 ; trainer
-    db SPRITE_BLONDE_PONYTAIL_GIRL, $d + 4, $12 + 4, $ff, $d1, $4a, $ce, $17 ; trainer
+    db SPRITE_LASS, $5 + 4, $25 + 4, $ff, $d3, $49, $ce, $16 ; trainer
+    db SPRITE_LASS, $d + 4, $12 + 4, $ff, $d1, $4a, $ce, $17 ; trainer
     db SPRITE_BALL, $5 + 4, $12 + 4, $ff, $ff, $8b, $dc ; item
 
     ; warp-to
@@ -18324,9 +18324,9 @@ FanClubObject: ; 0x59c97 (size=62)
     db $0, $6, $8 ; FanClubText8
 
     db $6 ; people
-    db SPRITE_FAT_MAN, $3 + 4, $6 + 4, $ff, $d2, $1 ; person
+    db SPRITE_FISHER2, $3 + 4, $6 + 4, $ff, $d2, $1 ; person
     db SPRITE_GIRL, $3 + 4, $1 + 4, $ff, $d3, $2 ; person
-    db SPRITE_CLEFAIRYLIKE, $4 + 4, $6 + 4, $ff, $d2, $3 ; person
+    db SPRITE_CLEFAIRY, $4 + 4, $6 + 4, $ff, $d2, $3 ; person
     db SPRITE_SEEL, $4 + 4, $1 + 4, $ff, $d3, $4 ; person
     db SPRITE_GENTLEMAN, $1 + 4, $3 + 4, $ff, $d0, $5 ; person
     db SPRITE_CABLE_CLUB_WOMAN, $1 + 4, $5 + 4, $ff, $d0, $6 ; person
@@ -18366,8 +18366,8 @@ SilphCo2Object: ; 0x59e66 (size=98)
     db SPRITE_ERIKA, $1 + 4, $a + 4, $ff, $d1, $1 ; person
     db SPRITE_OAK_AIDE, $c + 4, $5 + 4, $ff, $d0, $42, $e4, $2 ; trainer
     db SPRITE_OAK_AIDE, $d + 4, $18 + 4, $ff, $d2, $43, $e4, $3 ; trainer
-    db SPRITE_ROCKET_GRUNT, $b + 4, $10 + 4, $ff, $d1, $44, $e6, $17 ; trainer
-    db SPRITE_ROCKET_GRUNT, $7 + 4, $18 + 4, $ff, $d1, $45, $e6, $18 ; trainer
+    db SPRITE_ROCKET, $b + 4, $10 + 4, $ff, $d1, $44, $e6, $17 ; trainer
+    db SPRITE_ROCKET, $7 + 4, $18 + 4, $ff, $d1, $45, $e6, $18 ; trainer
 
     ; warp-to
     EVENT_DISP $f, $0, $18 ; SILPH_CO_1F
@@ -18410,7 +18410,7 @@ SilphCo3Object: ; 0x5a035 (size=113)
 
     db $4 ; people
     db SPRITE_LAPRAS_GIVER, $8 + 4, $18 + 4, $ff, $ff, $1 ; person
-    db SPRITE_ROCKET_GRUNT, $7 + 4, $14 + 4, $ff, $d2, $42, $e6, $19 ; trainer
+    db SPRITE_ROCKET, $7 + 4, $14 + 4, $ff, $d2, $42, $e6, $19 ; trainer
     db SPRITE_OAK_AIDE, $9 + 4, $7 + 4, $ff, $d0, $43, $e4, $4 ; trainer
     db SPRITE_BALL, $5 + 4, $8 + 4, $ff, $ff, $84, $12 ; item
 
@@ -18453,7 +18453,7 @@ SilphCo10Object: ; 0x5a1fb (size=95)
     db $0 ; signs
 
     db $6 ; people
-    db SPRITE_ROCKET_GRUNT, $9 + 4, $1 + 4, $ff, $d3, $41, $e6, $27 ; trainer
+    db SPRITE_ROCKET, $9 + 4, $1 + 4, $ff, $d3, $41, $e6, $27 ; trainer
     db SPRITE_OAK_AIDE, $2 + 4, $a + 4, $ff, $d2, $42, $e4, $b ; trainer
     db SPRITE_ERIKA, $f + 4, $9 + 4, $fe, $0, $3 ; person
     db SPRITE_BALL, $c + 4, $2 + 4, $ff, $ff, $84, $e2 ; item
@@ -18628,7 +18628,7 @@ MuseumF1Object: ; 0x5c2c1 (size=74)
 
     db $5 ; people
     db SPRITE_OAK_AIDE, $4 + 4, $c + 4, $ff, $d2, $1 ; person
-    db SPRITE_MONK, $4 + 4, $1 + 4, $ff, $ff, $2 ; person
+    db SPRITE_GAMBLER, $4 + 4, $1 + 4, $ff, $ff, $2 ; person
     db SPRITE_OAK_AIDE, $2 + 4, $f + 4, $ff, $d0, $3 ; person
     db SPRITE_OAK_AIDE, $4 + 4, $11 + 4, $ff, $ff, $4 ; person
     db SPRITE_OLD_AMBER, $2 + 4, $10 + 4, $ff, $ff, $5 ; person
@@ -18661,7 +18661,7 @@ MuseumF2Object: ; 0x5c34b (size=48)
     db $5, $2, $7 ; MuseumF2Text7
 
     db $5 ; people
-    db SPRITE_BLONDE_BOY, $7 + 4, $1 + 4, $fe, $2, $1 ; person
+    db SPRITE_BUG_CATCHER, $7 + 4, $1 + 4, $fe, $2, $1 ; person
     db SPRITE_OLD_PERSON, $5 + 4, $0 + 4, $ff, $d0, $2 ; person
     db SPRITE_OAK_AIDE, $5 + 4, $7 + 4, $ff, $d0, $3 ; person
     db SPRITE_BRUNETTE_GIRL, $5 + 4, $b + 4, $ff, $ff, $4 ; person
@@ -18723,7 +18723,7 @@ PewterPokecenterObject: ; 0x5c60d (size=44)
     db $4 ; people
     db SPRITE_NURSE, $1 + 4, $3 + 4, $ff, $d0, $1 ; person
     db SPRITE_GENTLEMAN, $7 + 4, $b + 4, $ff, $d2, $2 ; person
-    db SPRITE_CLEFAIRYLIKE, $3 + 4, $1 + 4, $ff, $d0, $3 ; person
+    db SPRITE_CLEFAIRY, $3 + 4, $1 + 4, $ff, $d0, $3 ; person
     db SPRITE_CABLE_CLUB_WOMAN, $2 + 4, $b + 4, $ff, $d0, $4 ; person
 
     ; warp-to
@@ -18783,7 +18783,7 @@ CeruleanGymObject: ; 0x5c834 (size=50)
 
     db $4 ; people
     db SPRITE_BRUNETTE_GIRL, $2 + 4, $4 + 4, $ff, $d0, $41, $eb, $1 ; trainer
-    db SPRITE_BLONDE_PONYTAIL_GIRL, $3 + 4, $2 + 4, $ff, $d3, $42, $ce, $1 ; trainer
+    db SPRITE_LASS, $3 + 4, $2 + 4, $ff, $d3, $42, $ce, $1 ; trainer
     db SPRITE_SWIMMER, $7 + 4, $8 + 4, $ff, $d2, $43, $d7, $1 ; trainer
     db SPRITE_GYM_HELPER, $a + 4, $7 + 4, $ff, $d0, $4 ; person
 
@@ -18816,7 +18816,7 @@ CeruleanMartObject: ; 0x5c8a8 (size=38)
     db $3 ; people
     db SPRITE_MART_GUY, $5 + 4, $0 + 4, $ff, $d3, $1 ; person
     db SPRITE_BLACK_HAIR_BOY_1, $4 + 4, $3 + 4, $fe, $1, $2 ; person
-    db SPRITE_BLONDE_PONYTAIL_GIRL, $2 + 4, $6 + 4, $fe, $2, $3 ; person
+    db SPRITE_LASS, $2 + 4, $6 + 4, $fe, $2, $3 ; person
 
     ; warp-to
     EVENT_DISP $4, $7, $3
@@ -18930,7 +18930,7 @@ VermilionMartObject: ; 0x5c9f4 (size=38)
     db $3 ; people
     db SPRITE_MART_GUY, $5 + 4, $0 + 4, $ff, $d3, $1 ; person
     db SPRITE_BLACK_HAIR_BOY_1, $6 + 4, $5 + 4, $ff, $ff, $2 ; person
-    db SPRITE_BLONDE_PONYTAIL_GIRL, $3 + 4, $3 + 4, $fe, $2, $3 ; person
+    db SPRITE_LASS, $3 + 4, $3 + 4, $fe, $2, $3 ; person
 
     ; warp-to
     EVENT_DISP $4, $7, $3
@@ -18956,7 +18956,7 @@ VermilionGymObject: ; 0x5cbfe (size=58)
     db $0 ; signs
 
     db $5 ; people
-    db SPRITE_PUNK, $1 + 4, $5 + 4, $ff, $d0, $41, $ec, $1 ; trainer
+    db SPRITE_ROCKER, $1 + 4, $5 + 4, $ff, $d0, $41, $ec, $1 ; trainer
     db SPRITE_GENTLEMAN, $6 + 4, $9 + 4, $ff, $d2, $42, $f1, $3 ; trainer
     db SPRITE_BLACK_HAIR_BOY_2, $8 + 4, $3 + 4, $ff, $d2, $43, $dc, $1 ; trainer
     db SPRITE_SAILOR, $a + 4, $0 + 4, $ff, $d3, $44, $cc, $8 ; trainer
@@ -18992,9 +18992,9 @@ CopycatsHouseF2Object: ; 0x5cd21 (size=48)
     db $5 ; people
     db SPRITE_BRUNETTE_GIRL, $3 + 4, $4 + 4, $fe, $0, $1 ; person
     db SPRITE_BIRD, $6 + 4, $4 + 4, $fe, $2, $2 ; person
-    db SPRITE_MACHOKE_SLOWBRO, $1 + 4, $5 + 4, $ff, $d0, $3 ; person
+    db SPRITE_SLOWBRO, $1 + 4, $5 + 4, $ff, $d0, $3 ; person
     db SPRITE_BIRD, $0 + 4, $2 + 4, $ff, $d0, $4 ; person
-    db SPRITE_CLEFAIRYLIKE, $6 + 4, $1 + 4, $ff, $d3, $5 ; person
+    db SPRITE_CLEFAIRY, $6 + 4, $1 + 4, $ff, $d3, $5 ; person
 
     ; warp-to
     EVENT_DISP $4, $1, $7 ; COPYCATS_HOUSE_1F
@@ -19086,12 +19086,12 @@ SaffronGymObject: ; 0x5d259 (size=330)
     db $9 ; people
     db SPRITE_GIRL, $8 + 4, $9 + 4, $ff, $d0, $41, $f0, $1 ; trainer
     db SPRITE_MEDIUM, $1 + 4, $a + 4, $ff, $d0, $42, $f5, $16 ; trainer
-    db SPRITE_BLONDE_BOY, $1 + 4, $11 + 4, $ff, $d0, $43, $db, $1 ; trainer
+    db SPRITE_BUG_CATCHER, $1 + 4, $11 + 4, $ff, $d0, $43, $db, $1 ; trainer
     db SPRITE_MEDIUM, $7 + 4, $3 + 4, $ff, $d0, $44, $f5, $17 ; trainer
-    db SPRITE_BLONDE_BOY, $7 + 4, $11 + 4, $ff, $d0, $45, $db, $2 ; trainer
+    db SPRITE_BUG_CATCHER, $7 + 4, $11 + 4, $ff, $d0, $45, $db, $2 ; trainer
     db SPRITE_MEDIUM, $d + 4, $3 + 4, $ff, $d0, $46, $f5, $18 ; trainer
-    db SPRITE_BLONDE_BOY, $d + 4, $11 + 4, $ff, $d0, $47, $db, $3 ; trainer
-    db SPRITE_BLONDE_BOY, $1 + 4, $3 + 4, $ff, $d0, $48, $db, $4 ; trainer
+    db SPRITE_BUG_CATCHER, $d + 4, $11 + 4, $ff, $d0, $47, $db, $3 ; trainer
+    db SPRITE_BUG_CATCHER, $1 + 4, $3 + 4, $ff, $d0, $48, $db, $4 ; trainer
     db SPRITE_GYM_HELPER, $f + 4, $a + 4, $ff, $d0, $9 ; person
 
     ; warp-to
@@ -19153,7 +19153,7 @@ SaffronMartObject: ; 0x5d41c (size=38)
     db $3 ; people
     db SPRITE_MART_GUY, $5 + 4, $0 + 4, $ff, $d3, $1 ; person
     db SPRITE_BLACK_HAIR_BOY_2, $2 + 4, $4 + 4, $ff, $ff, $2 ; person
-    db SPRITE_BLONDE_PONYTAIL_GIRL, $5 + 4, $6 + 4, $fe, $0, $3 ; person
+    db SPRITE_LASS, $5 + 4, $6 + 4, $fe, $0, $3 ; person
 
     ; warp-to
     EVENT_DISP $4, $7, $3
@@ -19277,7 +19277,7 @@ Route2GateObject: ; 0x5d620 (size=48)
 
     db $2 ; people
     db SPRITE_OAK_AIDE, $4 + 4, $1 + 4, $ff, $d2, $1 ; person
-    db SPRITE_BLONDE_BOY, $4 + 4, $5 + 4, $fe, $2, $2 ; person
+    db SPRITE_BUG_CATCHER, $4 + 4, $5 + 4, $fe, $2, $2 ; person
 
     ; warp-to
     EVENT_DISP $5, $0, $4
@@ -19425,9 +19425,9 @@ SilphCo9Object: ; 0x5d93f (size=74)
 
     db $4 ; people
     db SPRITE_NURSE, $e + 4, $3 + 4, $ff, $d0, $1 ; person
-    db SPRITE_ROCKET_GRUNT, $4 + 4, $2 + 4, $ff, $d1, $42, $e6, $25 ; trainer
+    db SPRITE_ROCKET, $4 + 4, $2 + 4, $ff, $d1, $42, $e6, $25 ; trainer
     db SPRITE_OAK_AIDE, $d + 4, $15 + 4, $ff, $d0, $43, $e4, $a ; trainer
-    db SPRITE_ROCKET_GRUNT, $10 + 4, $d + 4, $ff, $d1, $44, $e6, $26 ; trainer
+    db SPRITE_ROCKET, $10 + 4, $d + 4, $ff, $d1, $44, $e6, $26 ; trainer
 
     ; warp-to
     EVENT_DISP $d, $0, $e ; SILPH_CO_10F
@@ -19460,7 +19460,7 @@ VictoryRoad1Object: ; 0x5dab8 (size=76)
     db $0 ; signs
 
     db $7 ; people
-    db SPRITE_BLONDE_PONYTAIL_GIRL, $5 + 4, $7 + 4, $ff, $d3, $41, $e8, $5 ; trainer
+    db SPRITE_LASS, $5 + 4, $7 + 4, $ff, $d3, $41, $e8, $5 ; trainer
     db SPRITE_BLACK_HAIR_BOY_1, $2 + 4, $3 + 4, $ff, $d0, $42, $e7, $5 ; trainer
     db SPRITE_BALL, $0 + 4, $b + 4, $ff, $ff, $83, $f3 ; item
     db SPRITE_BALL, $2 + 4, $9 + 4, $ff, $ff, $84, $28 ; item
@@ -19545,7 +19545,7 @@ PokemonTower2Object: ; 0x60646 (size=32)
     db $0 ; signs
 
     db $2 ; people
-    db SPRITE_RIVAL, $5 + 4, $e + 4, $ff, $ff, $1 ; person
+    db SPRITE_BLUE, $5 + 4, $e + 4, $ff, $ff, $1 ; person
     db SPRITE_MEDIUM, $7 + 4, $3 + 4, $ff, $d3, $2 ; person
 
     ; warp-to
@@ -19709,9 +19709,9 @@ PokemonTower7Object: ; 0x60ef6 (size=42)
     db $0 ; signs
 
     db $4 ; people
-    db SPRITE_ROCKET_GRUNT, $b + 4, $9 + 4, $ff, $d3, $41, $e6, $13 ; trainer
-    db SPRITE_ROCKET_GRUNT, $9 + 4, $c + 4, $ff, $d2, $42, $e6, $14 ; trainer
-    db SPRITE_ROCKET_GRUNT, $7 + 4, $9 + 4, $ff, $d3, $43, $e6, $15 ; trainer
+    db SPRITE_ROCKET, $b + 4, $9 + 4, $ff, $d3, $41, $e6, $13 ; trainer
+    db SPRITE_ROCKET, $9 + 4, $c + 4, $ff, $d2, $42, $e6, $14 ; trainer
+    db SPRITE_ROCKET, $7 + 4, $9 + 4, $ff, $d3, $43, $e6, $15 ; trainer
     db SPRITE_MR_FUJI, $3 + 4, $a + 4, $ff, $d0, $4 ; person
 
     ; warp-to
@@ -19791,14 +19791,14 @@ ViridianForestObject: ; 0x611da (size=127)
     db $1, $2, $e ; ViridianForestText14
 
     db $8 ; people
-    db SPRITE_BLONDE_BOY, $2b + 4, $10 + 4, $ff, $ff, $1 ; person
-    db SPRITE_BLONDE_BOY, $21 + 4, $1e + 4, $ff, $d2, $42, $ca, $1 ; trainer
-    db SPRITE_BLONDE_BOY, $13 + 4, $1e + 4, $ff, $d2, $43, $ca, $2 ; trainer
-    db SPRITE_BLONDE_BOY, $12 + 4, $2 + 4, $ff, $d2, $44, $ca, $3 ; trainer
+    db SPRITE_BUG_CATCHER, $2b + 4, $10 + 4, $ff, $ff, $1 ; person
+    db SPRITE_BUG_CATCHER, $21 + 4, $1e + 4, $ff, $d2, $42, $ca, $1 ; trainer
+    db SPRITE_BUG_CATCHER, $13 + 4, $1e + 4, $ff, $d2, $43, $ca, $2 ; trainer
+    db SPRITE_BUG_CATCHER, $12 + 4, $2 + 4, $ff, $d2, $44, $ca, $3 ; trainer
     db SPRITE_BALL, $b + 4, $19 + 4, $ff, $ff, $85, $b ; item
     db SPRITE_BALL, $1d + 4, $c + 4, $ff, $ff, $86, $14 ; item
     db SPRITE_BALL, $1f + 4, $1 + 4, $ff, $ff, $87, $4 ; item
-    db SPRITE_BLONDE_BOY, $28 + 4, $1b + 4, $ff, $ff, $8 ; person
+    db SPRITE_BUG_CATCHER, $28 + 4, $1b + 4, $ff, $ff, $8 ; person
 
     ; warp-to
     EVENT_DISP $11, $0, $1 ; VIRIDIAN_FOREST_EXIT
@@ -19884,7 +19884,7 @@ SSAnne2Object: ; 0x61514 (size=90)
 
     db $2 ; people
     db SPRITE_WAITER, $7 + 4, $3 + 4, $fe, $1, $1 ; person
-    db SPRITE_RIVAL, $4 + 4, $24 + 4, $ff, $d0, $42, $e1, $1 ; trainer
+    db SPRITE_BLUE, $4 + 4, $24 + 4, $ff, $d0, $42, $e1, $1 ; trainer
 
     ; warp-to
     EVENT_DISP $14, $b, $9 ; SS_ANNE_9
@@ -20057,12 +20057,12 @@ SSAnne8Object: ; 0x61a60 (size=127)
     db $b ; people
     db SPRITE_GENTLEMAN, $3 + 4, $2 + 4, $ff, $d2, $41, $f1, $1 ; trainer
     db SPRITE_GENTLEMAN, $4 + 4, $b + 4, $ff, $d1, $42, $f1, $2 ; trainer
-    db SPRITE_BLONDE_BOY, $e + 4, $b + 4, $ff, $d1, $43, $c9, $8 ; trainer
-    db SPRITE_BLONDE_PONYTAIL_GIRL, $b + 4, $d + 4, $ff, $d2, $44, $cb, $b ; trainer
+    db SPRITE_BUG_CATCHER, $e + 4, $b + 4, $ff, $d1, $43, $c9, $8 ; trainer
+    db SPRITE_LASS, $b + 4, $d + 4, $ff, $d2, $44, $cb, $b ; trainer
     db SPRITE_GIRL, $3 + 4, $16 + 4, $fe, $1, $5 ; person
     db SPRITE_FAT_BALD_GUY, $e + 4, $0 + 4, $ff, $ff, $6 ; person
     db SPRITE_LITTLE_GIRL, $b + 4, $2 + 4, $ff, $d0, $7 ; person
-    db SPRITE_CLEFAIRYLIKE, $b + 4, $3 + 4, $ff, $d0, $8 ; person
+    db SPRITE_CLEFAIRY, $b + 4, $3 + 4, $ff, $d0, $8 ; person
     db SPRITE_GIRL, $d + 4, $a + 4, $ff, $d3, $9 ; person
     db SPRITE_BALL, $f + 4, $c + 4, $ff, $ff, $8a, $d0 ; item
     db SPRITE_GENTLEMAN, $d + 4, $15 + 4, $fe, $2, $b ; person
@@ -20109,16 +20109,16 @@ SSAnne9Object: ; 0x61c8d (size=188)
 
     db $d ; people
     db SPRITE_GENTLEMAN, $2 + 4, $a + 4, $ff, $d3, $41, $f1, $3 ; trainer
-    db SPRITE_FAT_MAN, $4 + 4, $d + 4, $ff, $d2, $42, $d6, $1 ; trainer
+    db SPRITE_FISHER2, $4 + 4, $d + 4, $ff, $d2, $42, $d6, $1 ; trainer
     db SPRITE_GENTLEMAN, $e + 4, $0 + 4, $ff, $d3, $43, $f1, $5 ; trainer
-    db SPRITE_BLONDE_PONYTAIL_GIRL, $b + 4, $2 + 4, $ff, $d0, $44, $cb, $c ; trainer
+    db SPRITE_LASS, $b + 4, $2 + 4, $ff, $d0, $44, $cb, $c ; trainer
     db SPRITE_GENTLEMAN, $2 + 4, $1 + 4, $ff, $d0, $5 ; person
     db SPRITE_BALL, $1 + 4, $c + 4, $ff, $ff, $86, $51 ; item
     db SPRITE_GENTLEMAN, $2 + 4, $15 + 4, $ff, $d0, $7 ; person
     db SPRITE_OLD_PERSON, $1 + 4, $16 + 4, $ff, $d0, $8 ; person
     db SPRITE_BALL, $c + 4, $0 + 4, $ff, $ff, $89, $28 ; item
     db SPRITE_GENTLEMAN, $c + 4, $c + 4, $ff, $d0, $a ; person
-    db SPRITE_YOUNG_GIRL, $e + 4, $b + 4, $ff, $ff, $b ; person
+    db SPRITE_YOUNG_BOY, $e + 4, $b + 4, $ff, $ff, $b ; person
     db SPRITE_BRUNETTE_GIRL, $c + 4, $16 + 4, $ff, $d2, $c ; person
     db SPRITE_FOULARD_WOMAN, $c + 4, $14 + 4, $ff, $d3, $d ; person
 
@@ -20169,9 +20169,9 @@ SSAnne10Object: ; 0x61e75 (size=165)
     db SPRITE_SAILOR, $3 + 4, $c + 4, $ff, $d2, $43, $cc, $5 ; trainer
     db SPRITE_SAILOR, $2 + 4, $16 + 4, $ff, $d0, $44, $cc, $6 ; trainer
     db SPRITE_SAILOR, $2 + 4, $0 + 4, $ff, $d3, $45, $cc, $7 ; trainer
-    db SPRITE_FAT_MAN, $4 + 4, $0 + 4, $ff, $d3, $46, $d6, $2 ; trainer
+    db SPRITE_FISHER2, $4 + 4, $0 + 4, $ff, $d3, $46, $d6, $2 ; trainer
     db SPRITE_BLACK_HAIR_BOY_2, $d + 4, $a + 4, $ff, $d3, $7 ; person
-    db SPRITE_MACHOKE_SLOWBRO, $c + 4, $b + 4, $ff, $ff, $8 ; person
+    db SPRITE_SLOWBRO, $c + 4, $b + 4, $ff, $ff, $8 ; person
     db SPRITE_BALL, $2 + 4, $14 + 4, $ff, $ff, $89, $50 ; item
     db SPRITE_BALL, $2 + 4, $a + 4, $ff, $ff, $8a, $f4 ; item
     db SPRITE_BALL, $b + 4, $c + 4, $ff, $ff, $8b, $11 ; item
@@ -20291,8 +20291,8 @@ SilphCo11Object: ; 0x62380 (size=72)
     db SPRITE_MR_MASTERBALL, $5 + 4, $7 + 4, $ff, $d0, $1 ; person
     db SPRITE_FOULARD_WOMAN, $5 + 4, $a + 4, $ff, $d0, $2 ; person
     db SPRITE_GIOVANNI, $9 + 4, $6 + 4, $ff, $d0, $43, $e5, $2 ; trainer
-    db SPRITE_ROCKET_GRUNT, $10 + 4, $3 + 4, $ff, $d1, $44, $e6, $29 ; trainer
-    db SPRITE_ROCKET_GRUNT, $9 + 4, $f + 4, $ff, $d1, $45, $e6, $28 ; trainer
+    db SPRITE_ROCKET, $10 + 4, $3 + 4, $ff, $d1, $44, $e6, $29 ; trainer
+    db SPRITE_ROCKET, $9 + 4, $f + 4, $ff, $d1, $45, $e6, $28 ; trainer
 
     ; warp-to
     EVENT_DISP $9, $0, $9 ; SILPH_CO_10F
@@ -21276,11 +21276,11 @@ ViridianGymObject: ; 0x74bde (size=105)
     db SPRITE_GIOVANNI, $1 + 4, $2 + 4, $ff, $d0, $41, $e5, $3 ; trainer
     db SPRITE_BLACK_HAIR_BOY_1, $7 + 4, $c + 4, $ff, $d0, $42, $e7, $9 ; trainer
     db SPRITE_HIKER, $b + 4, $b + 4, $ff, $d1, $43, $e0, $6 ; trainer
-    db SPRITE_PUNK, $7 + 4, $a + 4, $ff, $d0, $44, $de, $3 ; trainer
+    db SPRITE_ROCKER, $7 + 4, $a + 4, $ff, $d0, $44, $de, $3 ; trainer
     db SPRITE_HIKER, $7 + 4, $3 + 4, $ff, $d2, $45, $e0, $7 ; trainer
     db SPRITE_BLACK_HAIR_BOY_1, $5 + 4, $d + 4, $ff, $d3, $46, $e7, $a ; trainer
     db SPRITE_HIKER, $1 + 4, $a + 4, $ff, $d0, $47, $e0, $8 ; trainer
-    db SPRITE_PUNK, $10 + 4, $2 + 4, $ff, $d3, $48, $de, $4 ; trainer
+    db SPRITE_ROCKER, $10 + 4, $2 + 4, $ff, $d3, $48, $de, $4 ; trainer
     db SPRITE_BLACK_HAIR_BOY_1, $5 + 4, $6 + 4, $ff, $d0, $49, $e7, $1 ; trainer
     db SPRITE_GYM_HELPER, $f + 4, $10 + 4, $ff, $d0, $a ; person
     db SPRITE_BALL, $9 + 4, $10 + 4, $ff, $ff, $8b, $35 ; item
@@ -21313,7 +21313,7 @@ PewterMartObject: ; 0x74cda (size=38)
 
     db $3 ; people
     db SPRITE_MART_GUY, $5 + 4, $0 + 4, $ff, $d3, $1 ; person
-    db SPRITE_BLONDE_BOY, $3 + 4, $3 + 4, $fe, $1, $2 ; person
+    db SPRITE_BUG_CATCHER, $3 + 4, $3 + 4, $fe, $1, $2 ; person
     db SPRITE_BLACK_HAIR_BOY_2, $5 + 4, $5 + 4, $ff, $ff, $3 ; person
 
     ; warp-to
@@ -21415,8 +21415,8 @@ FuchsiaHouse1Object: ; 0x75031 (size=38)
 
     db $3 ; people
     db SPRITE_MOM_GEISHA, $3 + 4, $2 + 4, $ff, $d3, $1 ; person
-    db SPRITE_MONK, $2 + 4, $7 + 4, $ff, $d1, $2 ; person
-    db SPRITE_BLONDE_BOY, $5 + 4, $5 + 4, $ff, $ff, $3 ; person
+    db SPRITE_GAMBLER, $2 + 4, $7 + 4, $ff, $d1, $2 ; person
+    db SPRITE_BUG_CATCHER, $5 + 4, $5 + 4, $ff, $ff, $3 ; person
 
     ; warp-to
     EVENT_DISP $4, $7, $2
@@ -21443,8 +21443,8 @@ FuchsiaPokecenterObject: ; 0x7507d (size=44)
 
     db $4 ; people
     db SPRITE_NURSE, $1 + 4, $3 + 4, $ff, $d0, $1 ; person
-    db SPRITE_PUNK, $3 + 4, $2 + 4, $ff, $ff, $2 ; person
-    db SPRITE_BLONDE_PONYTAIL_GIRL, $5 + 4, $6 + 4, $fe, $2, $3 ; person
+    db SPRITE_ROCKER, $3 + 4, $2 + 4, $ff, $ff, $2 ; person
+    db SPRITE_LASS, $5 + 4, $6 + 4, $fe, $2, $3 ; person
     db SPRITE_CABLE_CLUB_WOMAN, $2 + 4, $b + 4, $ff, $d0, $4 ; person
 
     ; warp-to
@@ -21473,7 +21473,7 @@ FuchsiaHouse2Object: ; 0x75180 (size=45)
     db $3, $5, $5 ; FuchsiaHouse2Text5
 
     db $3 ; people
-    db SPRITE_BALDING_FAT_GUY, $3 + 4, $2 + 4, $ff, $ff, $1 ; person
+    db SPRITE_WARDEN, $3 + 4, $2 + 4, $ff, $ff, $1 ; person
     db SPRITE_BALL, $3 + 4, $8 + 4, $ff, $ff, $82, $28 ; item
     db SPRITE_BOULDER, $4 + 4, $8 + 4, $ff, $10, $3 ; person
 
@@ -21538,13 +21538,13 @@ FuchsiaGymObject: ; 0x75658 (size=82)
     db $0 ; signs
 
     db $8 ; people
-    db SPRITE_DOJO_GUY, $a + 4, $4 + 4, $ff, $d0, $41, $ee, $1 ; trainer
-    db SPRITE_PUNK, $d + 4, $8 + 4, $ff, $d0, $42, $dd, $7 ; trainer
-    db SPRITE_PUNK, $8 + 4, $7 + 4, $ff, $d3, $43, $dd, $3 ; trainer
-    db SPRITE_PUNK, $c + 4, $1 + 4, $ff, $d0, $44, $dd, $8 ; trainer
-    db SPRITE_PUNK, $5 + 4, $3 + 4, $ff, $d1, $45, $de, $1 ; trainer
-    db SPRITE_PUNK, $2 + 4, $8 + 4, $ff, $d0, $46, $de, $2 ; trainer
-    db SPRITE_PUNK, $7 + 4, $2 + 4, $ff, $d2, $47, $dd, $4 ; trainer
+    db SPRITE_BLACKBELT, $a + 4, $4 + 4, $ff, $d0, $41, $ee, $1 ; trainer
+    db SPRITE_ROCKER, $d + 4, $8 + 4, $ff, $d0, $42, $dd, $7 ; trainer
+    db SPRITE_ROCKER, $8 + 4, $7 + 4, $ff, $d3, $43, $dd, $3 ; trainer
+    db SPRITE_ROCKER, $c + 4, $1 + 4, $ff, $d0, $44, $dd, $8 ; trainer
+    db SPRITE_ROCKER, $5 + 4, $3 + 4, $ff, $d1, $45, $de, $1 ; trainer
+    db SPRITE_ROCKER, $2 + 4, $8 + 4, $ff, $d0, $46, $de, $2 ; trainer
+    db SPRITE_ROCKER, $7 + 4, $2 + 4, $ff, $d2, $47, $dd, $4 ; trainer
     db SPRITE_GYM_HELPER, $f + 4, $7 + 4, $ff, $d0, $8 ; person
 
     ; warp-to
@@ -21776,7 +21776,7 @@ CinnibarPokecenterObject: ; 0x75e46 (size=44)
 
     db $4 ; people
     db SPRITE_NURSE, $1 + 4, $3 + 4, $ff, $d0, $1 ; person
-    db SPRITE_BLONDE_PONYTAIL_GIRL, $4 + 4, $9 + 4, $fe, $0, $2 ; person
+    db SPRITE_LASS, $4 + 4, $9 + 4, $fe, $0, $2 ; person
     db SPRITE_GENTLEMAN, $6 + 4, $2 + 4, $ff, $ff, $3 ; person
     db SPRITE_CABLE_CLUB_WOMAN, $2 + 4, $b + 4, $ff, $d0, $4 ; person
 
@@ -21835,7 +21835,7 @@ CopycatsHouseF1Object: ; 0x75ee3 (size=46)
     db $3 ; people
     db SPRITE_MOM_GEISHA, $2 + 4, $2 + 4, $ff, $d0, $1 ; person
     db SPRITE_FAT_BALD_GUY, $4 + 4, $5 + 4, $ff, $d2, $2 ; person
-    db SPRITE_CLEFAIRYLIKE, $4 + 4, $1 + 4, $fe, $1, $3 ; person
+    db SPRITE_CLEFAIRY, $4 + 4, $1 + 4, $fe, $1, $3 ; person
 
     ; warp-to
     EVENT_DISP $4, $7, $2
@@ -21855,7 +21855,7 @@ GaryObject: ; 0x7612f (size=48)
     db $0 ; signs
 
     db $2 ; people
-    db SPRITE_RIVAL, $2 + 4, $4 + 4, $ff, $d0, $1 ; person
+    db SPRITE_BLUE, $2 + 4, $4 + 4, $ff, $d0, $1 ; person
     db SPRITE_OAK, $7 + 4, $3 + 4, $ff, $d1, $2 ; person
 
     ; warp-to
