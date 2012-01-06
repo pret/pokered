@@ -5001,9 +5001,9 @@ PalletTownObject: ; 182C3 0x182c3
 	db 5,$B,7 ; sign by Blue’s house
 
 	db 3 ; people
-	db 3,5+4,8+4,$FF,$FF,1 ; Oak
-	db $D,8+4,3+4,$FE,0,2 ; girl
-	db $2F,$E+4,$B+4,$FE,0,3 ; fat man
+	db SPRITE_OAK,5+4,8+4,$FF,$FF,1 ; Oak
+	db SPRITE_GIRL,8+4,3+4,$FE,0,2 ; girl
+	db SPRITE_FAT_MAN,$E+4,$B+4,$FE,0,3 ; fat man
 
 	; warp‐to
 
