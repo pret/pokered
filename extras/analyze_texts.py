@@ -101,30 +101,47 @@ def parse_text_script(text_pointer, text_id, map_id):
 
             command = {"type": command_byte,
                        "start_address": offset,
-                       "end_address": offset + 3,
+                       "end_address": offset + 3, #last byte belonging to this command
                        "pointer": pointer, #parameter
                       }
 
             offset += 3 + 1
-            add_command_byte_to_totals(0x17)
         elif command_byte == 0x50 or command_byte == 0x57 or command_byte == 0x58: #end text
             command = {"type": command_byte,
                        "start_address": offset,
                        "end_address": offset,
                       }
-            add_command_byte_to_totals(command_byte)
 
             #this byte simply indicates to end the script
             end = True
-        else:
-            add_command_byte_to_totals(command_byte)
+        elif command_byte == 0x1:
+            #01 = text from RAM. [01][2-byte pointer]
+            size = 3 #total size, including the command byte
+            pointer_byte1 = ord(extract_maps.rom[offset+1])
+            pointer_byte2 = ord(extract_maps.rom[offset+2])
+            
+            command = {"type": command_byte,
+                       "start_address": offset+1,
+                       "end_address": offset+2, #last byte belonging to this command
+                       "pointer": [pointer_byte1, pointer_byte2], #RAM pointer
+                      }
+            
+            #view near these bytes
+            subsection = extract_maps.rom[offset:offset+size+1] #peak ahead
+            for x in subsection:
+                print hex(ord(x))
+            print "--"
 
+            offset += 2 + 1 #go to the next byte
+            print "next command is: " + hex(ord(extract_maps.rom[offset])) + " ... we are at command number: " + str(command_counter) + " near " + hex(offset) + " on map_id=" + str(map_id) + " for text_id=" + str(text_id)
+        else:
             if len(commands) > 0:
                 print "Unknown text command " + hex(command_byte) + " at " + hex(offset) + ", script began with " + hex(commands[0]["type"])
             #print "Unknown text command at " + hex(offset)
             
             #end at the first unknown command
             end = True
+        add_command_byte_to_totals(command_byte)
 
         commands[command_counter] = command
         command_counter += 1
@@ -157,11 +174,11 @@ def analyze_texts():
 
                 if commands[command_id]["type"] == 0x17:
                     TX_FAR = parse_text_script(commands[command_id]["pointer"], text_id, map_id)
-                    if len(TX_FAR.keys()) > 0:
-                        print "TX_FAR object: " + str(TX_FAR)
-                        print TX_FAR[TX_FAR.keys()[0]]
-                        print "processing a TX_FAR at " + hex(commands[command_id]["pointer"]) + "... first byte is: " + str(ord(extract_maps.rom[commands[command_id]["pointer"]])) + " .. offset: " + hex(commands[command_id]["pointer"])
-                        #sys.exit(0)
+                    if debug:
+                        if len(TX_FAR.keys()) > 0:
+                            #print "TX_FAR object: " + str(TX_FAR)
+                            print "processing a TX_FAR at " + hex(commands[command_id]["pointer"]) + "... first byte is: " + str(ord(extract_maps.rom[commands[command_id]["pointer"]])) + " .. offset: " + hex(commands[command_id]["pointer"])
+                            ##sys.exit(0)
 
                     commands[command_id]["TX_FAR"] = TX_FAR
                     #map2["texts"][text_id][command_id]["TX_FAR"] = parse_text_script(command["pointer"], text_id, map_id)
