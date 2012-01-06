@@ -5646,8 +5646,8 @@ OakWalksUpText:
 	TX_FAR _OakWalksUpText
 	db "@"
 
-PalletTownText2: ; girl
-	TX_FAR _PalletTownText2
+PalletTownText2: ; girl 0x18fd3
+	TX_FAR _PalletTownText2 ; dc 42 29 pointing to 0xa42dc
 	db "@"
 
 PalletTownText3: ; fat man

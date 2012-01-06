@@ -5,6 +5,7 @@
 import extract_maps
 from pretty_map_headers import map_name_cleaner
 from operator import itemgetter
+import sys
 debug = False #set to True to increase logging output
 
 #how many times is each command byte called?
@@ -30,6 +31,32 @@ def print_command_debug_info(command_byte, text_id, text_pointer, map_id):
     if debug:
         print "byte is " + str(command_byte) + " on text #" + str(text_id) + " at " + hex(text_pointer) + " on map " + str(map_id) + " (" + extract_maps.map_headers[map_id]["name"] + ")"
 
+def add_command_byte_to_totals(byte):
+    global totals
+    if not byte in totals.keys(): totals[byte] = 1
+    else: totals[byte] += 1
+
+def process_00_subcommands(start_address, end_address):
+    """split this text up into multiple lines
+    based on subcommands ending each line"""
+    lines = {}
+    subsection = extract_maps.rom[start_address:end_address]
+
+    line_count = 0
+    current_line = []
+    for pbyte in subsection:
+        byte = ord(pbyte)
+        current_line.append(hex(byte))
+        if  byte == 0x4f or byte == 0x51 or byte == 0x55:
+            lines[line_count] = current_line
+            current_line = []
+            line_count += 1
+
+    #don't forget the last line
+    lines[line_count] = current_line
+    line_count += 1
+    return lines
+
 def parse_text_script(text_pointer, text_id, map_id):
     global total_text_commands
     offset = text_pointer
@@ -41,27 +68,29 @@ def parse_text_script(text_pointer, text_id, map_id):
         command = {}
         command_byte = ord(extract_maps.rom[offset])
         
+        print_command_debug_info(command_byte, text_id, text_pointer, map_id)
         if  command_byte == 0:
-            print_command_debug_info(command_byte, text_id, text_pointer, map_id)
+            #read until $57, $50 or $58
+            jump57 = how_many_until(chr(0x57), offset)
+            jump50 = how_many_until(chr(0x50), offset)
+            jump58 = how_many_until(chr(0x58), offset)
+            
+            #whichever command comes first
+            jump = min([jump57, jump50, jump58])
 
-            #read until $57
-            jump = how_many_until(str(57), offset)
-            end_address = offset + jump
+            end_address = offset + jump - 1 #we want the address before $57
 
             command = {"type": command_byte,
                        "start_address": offset,
                        "end_address": end_address,
                        "size": jump,
+                       "lines": process_00_subcommands(offset+1, end_address),
                       }
 
-            offset += end_address + 1
+            offset += jump
             if not 0x0 in totals.keys(): totals[0x0] = 1
             else: totals[0x0] += 1
-            
-            end = True
         elif command_byte == 0x17:
-            print_command_debug_info(command_byte, text_id, text_pointer, map_id)
-            
             #TX_FAR [pointer][bank]
             pointer_byte1 = ord(extract_maps.rom[offset+1])
             pointer_byte2 = ord(extract_maps.rom[offset+2])
@@ -73,17 +102,28 @@ def parse_text_script(text_pointer, text_id, map_id):
             command = {"type": command_byte,
                        "start_address": offset,
                        "end_address": offset + 3,
-                       "pointer": pointer,
+                       "pointer": pointer, #parameter
                       }
 
-            offset += 3
-            if not 0x17 in totals.keys(): totals[0x17] = 1
-            else: totals[0x17] += 1
+            offset += 3 + 1
+            add_command_byte_to_totals(0x17)
+        elif command_byte == 0x50 or command_byte == 0x57 or command_byte == 0x58: #end text
+            command = {"type": command_byte,
+                       "start_address": offset,
+                       "end_address": offset,
+                      }
+            add_command_byte_to_totals(command_byte)
+
+            #this byte simply indicates to end the script
             end = True
         else:
-            if not command_byte in totals.keys(): totals[command_byte] = 1
-            else: totals[command_byte] += 1
+            add_command_byte_to_totals(command_byte)
+
+            if len(commands) > 0:
+                print "Unknown text command " + hex(command_byte) + " at " + hex(offset) + ", script began with " + hex(commands[0]["type"])
+            #print "Unknown text command at " + hex(offset)
             
+            #end at the first unknown command
             end = True
 
         commands[command_counter] = command
@@ -109,6 +149,22 @@ def analyze_texts():
             text_pointer = get_text_pointer(texts_pointer, text_id)
             text_pointer = extract_maps.calculate_pointer(text_pointer, int(map2["bank"], 16))
             commands = parse_text_script(text_pointer, text_id, map_id)
+
+            #process TX_FARs
+            for command_id in commands:
+                #skip commands starting with an unknown command byte
+                if len(commands[command_id]) == 0: continue
+
+                if commands[command_id]["type"] == 0x17:
+                    TX_FAR = parse_text_script(commands[command_id]["pointer"], text_id, map_id)
+                    if len(TX_FAR.keys()) > 0:
+                        print "TX_FAR object: " + str(TX_FAR)
+                        print TX_FAR[TX_FAR.keys()[0]]
+                        print "processing a TX_FAR at " + hex(commands[command_id]["pointer"]) + "... first byte is: " + str(ord(extract_maps.rom[commands[command_id]["pointer"]])) + " .. offset: " + hex(commands[command_id]["pointer"])
+                        #sys.exit(0)
+
+                    commands[command_id]["TX_FAR"] = TX_FAR
+                    #map2["texts"][text_id][command_id]["TX_FAR"] = parse_text_script(command["pointer"], text_id, map_id)
             map2["texts"][text_id] = commands
 
         texts[map_id] = map2["texts"]
@@ -119,7 +175,8 @@ if __name__ == "__main__":
     extract_maps.load_rom()
     extract_maps.load_map_pointers()
     extract_maps.read_all_map_headers()
-    print analyze_texts()
+    text_output = analyze_texts()
+    #print text_output
 
     print "\n\n---- stats ----\n\n"
     
