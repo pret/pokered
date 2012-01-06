@@ -5,6 +5,7 @@
 import extract_maps
 from pretty_map_headers import map_name_cleaner
 from operator import itemgetter
+debug = False #set to True to increase logging output
 
 #how many times is each command byte called?
 totals = {}
@@ -25,11 +26,15 @@ def how_many_until(byte, starting):
     index = extract_maps.rom.find(byte, starting)
     return index-starting
 
-def parse_text_script(text_pointer):
+def print_command_debug_info(command_byte, text_id, text_pointer, map_id):
+    if debug:
+        print "byte is " + str(command_byte) + " on text #" + str(text_id) + " at " + hex(text_pointer) + " on map " + str(map_id) + " (" + extract_maps.map_headers[map_id]["name"] + ")"
+
+def parse_text_script(text_pointer, text_id, map_id):
+    global total_text_commands
     offset = text_pointer
     commands = {}
     command_counter = 0
-    global total_text_commands
     
     end = False
     while not end:
@@ -37,6 +42,8 @@ def parse_text_script(text_pointer):
         command_byte = ord(extract_maps.rom[offset])
         
         if  command_byte == 0:
+            print_command_debug_info(command_byte, text_id, text_pointer, map_id)
+
             #read until $57
             jump = how_many_until(str(57), offset)
             end_address = offset + jump
@@ -50,8 +57,11 @@ def parse_text_script(text_pointer):
             offset += end_address + 1
             if not 0x0 in totals.keys(): totals[0x0] = 1
             else: totals[0x0] += 1
-            total_text_commands += 1
+            
+            end = True
         elif command_byte == 0x17:
+            print_command_debug_info(command_byte, text_id, text_pointer, map_id)
+            
             #TX_FAR [pointer][bank]
             pointer_byte1 = ord(extract_maps.rom[offset+1])
             pointer_byte2 = ord(extract_maps.rom[offset+2])
@@ -69,18 +79,16 @@ def parse_text_script(text_pointer):
             offset += 3
             if not 0x17 in totals.keys(): totals[0x17] = 1
             else: totals[0x17] += 1
-            total_text_commands += 1
+            end = True
         else:
             if not command_byte in totals.keys(): totals[command_byte] = 1
             else: totals[command_byte] += 1
-            total_text_commands += 1
             
             end = True
-            
-            break
 
         commands[command_counter] = command
         command_counter += 1
+    total_text_commands += len(commands)
     return commands
 
 def analyze_texts():
@@ -94,11 +102,13 @@ def analyze_texts():
         referenced_texts = map2["referenced_texts"]
         should_be_total += len(referenced_texts)
         texts_pointer = int(map2["texts_pointer"], 16)
-
+        
+        #print "Checking texts on... map_id=" + str(map_id) + " and len(referenced_texts)=" + str(len(referenced_texts))
         for text_id in referenced_texts:
             #print "Working on map id=" + str(map2["id"]) + " and text id=" + str(text_id)
             text_pointer = get_text_pointer(texts_pointer, text_id)
-            commands = parse_text_script(text_pointer)
+            text_pointer = extract_maps.calculate_pointer(text_pointer, int(map2["bank"], 16))
+            commands = parse_text_script(text_pointer, text_id, map_id)
             map2["texts"][text_id] = commands
 
         texts[map_id] = map2["texts"]
@@ -112,7 +122,12 @@ if __name__ == "__main__":
     print analyze_texts()
 
     print "\n\n---- stats ----\n\n"
+    
     popular_text_commands = sorted(totals.iteritems(), key=itemgetter(1), reverse=True)
-    print "popular text commands: " + str(popular_text_commands)
+    #convert the first values (command byte) to hex
+    for popular_item in popular_text_commands:
+        print hex(popular_item[0]) + " was used " + str(popular_item[1]) + " times."
+    #print "popular text commands: " + str(popular_text_commands)
+    
     print "total text commands: " + str(total_text_commands)
     print "total text scripts: " + str(should_be_total)
