@@ -73,7 +73,7 @@ constants = {
 0x41: ["book/map/dex", ""],
 0x42: ["clipboard", ""],
 0x43: ["snorlax", ""],
-0x44: ["old amber", ""],
+0x44: ["old amber copy", ""],
 0x45: ["old amber", ""],
 0x46: ["lying old man unused 1", ""],
 0x47: ["lying old man unused 2", ""],
@@ -83,6 +83,7 @@ constants = {
 icons = {}
 unique_icons = set()
 todo_sprites = {}
+sprites = {}
 
 def load_icons():
     for map_id in map_headers:
@@ -146,7 +147,6 @@ def sprite_name_cleaner(badname):
 def sprite_namer():
     "makes up better constant names for each sprite"
     insert_todo_sprites()
-    sprites = {}
 
     for sprite_id in constants:
         suggestions = constants[sprite_id]
@@ -160,6 +160,7 @@ def sprite_namer():
         result = sprite_name_cleaner(original)
         sprites[sprite_id] = result
 
+def sprite_printer():
     for key in sprites:
         line_length = len(sprites[key]) + len(" EQU $") + 2
         
@@ -172,8 +173,9 @@ def sprite_namer():
         
         print sprites[key] + extra + " EQU $" + value
 
+sprite_namer()
 if __name__ == "__main__":
     #load_icons()
     #print_appearances()
-    sprite_namer()
+    sprite_printer()
 
