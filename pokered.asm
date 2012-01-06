@@ -4986,35 +4986,29 @@ PalletTown_h:
 
 	dw PalletTownObject
 
-PalletTownObject: ; 182C3 0x182c3
-	db $0B ; border tile
+PalletTownObject: ; 0x182c3 (size=58)
+    db $b ; border tile
 
-	db 3 ; warps
-	db 5,5,0,$25 ; Red’s house 1F
-	db 5,$D,0,$27 ; Blue’s house
-	db $B,$C,1,$28 ; Oak’s Lab
+    db $3 ; warps
+    db $5, $5, $0, REDS_HOUSE_1F
+    db $5, $d, $0, BLUES_HOUSE
+    db $b, $c, $1, OAKS_LAB
 
-	db 4 ; signs
-	db $D,$D,4 ; sign by lab
-	db 9,7,5 ; Pallet Town sign
-	db 5,3,6 ; sign by Red’s house
-	db 5,$B,7 ; sign by Blue’s house
+    db $4 ; signs
+    db $d, $d, $4 ; PalletTownText4
+    db $9, $7, $5 ; PalletTownText5
+    db $5, $3, $6 ; PalletTownText6
+    db $5, $b, $7 ; PalletTownText7
 
-	db 3 ; people
-	db SPRITE_OAK,5+4,8+4,$FF,$FF,1 ; Oak
-	db SPRITE_GIRL,8+4,3+4,$FE,0,2 ; girl
-	db SPRITE_FAT_MAN,$E+4,$B+4,$FE,0,3 ; fat man
+    db $3 ; people
+    db SPRITE_OAK, $5 + 4, $8 + 4, $ff, $ff, $1 ; person
+    db SPRITE_GIRL, $8 + 4, $3 + 4, $fe, $0, $2 ; person
+    db SPRITE_FAT_MAN, $e + 4, $b + 4, $fe, $0, $3 ; person
 
-	; warp‐to
-
-	dw $C71B
-	db 5,5
-
-	dw $C71F
-	db 5,$D
-
-	dw $C74F
-	db $B,$C
+    ; warp-to
+    EVENT_DISP $a, $5, $5 ; from REDS_HOUSE_1F
+    EVENT_DISP $a, $5, $d ; from BLUES_HOUSE
+    EVENT_DISP $a, $b, $c ; from OAKS_LAB
 
 PalletTownBlocks: ; 0x182fd
 	INCBIN "maps/pallettown.blk"
