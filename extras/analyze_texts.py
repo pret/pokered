@@ -89,20 +89,20 @@ def analyze_texts():
     texts = {}
     for map_id in extract_maps.map_headers:
         if map_id in extract_maps.bad_maps: continue #skip
-        map = extract_maps.map_headers[map_id]
-        map["texts"] = {}
-        referenced_texts = map["referenced_texts"]
+        map2 = extract_maps.map_headers[map_id]
+        map2["texts"] = {}
+        referenced_texts = map2["referenced_texts"]
         should_be_total += len(referenced_texts)
-        texts_pointer = int(map["texts_pointer"], 16)
+        texts_pointer = int(map2["texts_pointer"], 16)
 
         for text_id in referenced_texts:
-            #print "Working on map id=" + str(map["id"]) + " and text id=" + str(text_id)
+            #print "Working on map id=" + str(map2["id"]) + " and text id=" + str(text_id)
             text_pointer = get_text_pointer(texts_pointer, text_id)
             commands = parse_text_script(text_pointer)
-            map["texts"][text_id] = commands
+            map2["texts"][text_id] = commands
 
-        texts[map_id] = map["texts"]
-        extract_maps.map_headers[map_id]["texts"] = map["texts"]
+        texts[map_id] = map2["texts"]
+        extract_maps.map_headers[map_id]["texts"] = map2["texts"]
     return texts
 
 if __name__ == "__main__":

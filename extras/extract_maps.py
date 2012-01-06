@@ -654,13 +654,13 @@ def read_all_map_headers():
     if len(map_pointers) == 0: load_map_pointers()
 
     for map_id in map_pointers.keys():
-        map = map_pointers[map_id]
-        map_header = read_map_header(map["address"], map["bank"])
+        map2 = map_pointers[map_id]
+        map_header = read_map_header(map2["address"], map2["bank"])
 
         map_header["id"] = map_id
-        map_header["name"] = map["name"]
-        map_header["address"] = map["address"]
-        map_header["bank"] = map["bank"]
+        map_header["name"] = map2["name"]
+        map_header["address"] = map2["address"]
+        map_header["bank"] = map2["bank"]
 
         map_headers[map_id] = map_header
     
