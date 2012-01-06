@@ -4,6 +4,7 @@
 #purpose: dump asm for each map header
 import json
 import extract_maps
+import sprite_helper
 import random
 import string
 
@@ -415,6 +416,12 @@ def make_object_label_name(name):
     name = map_name_cleaner(name, None)
     return name.replace("_h", "") + "Object"
 
+def make_text_label(map_name, id):
+    """using standard object labels
+    for instance, PalletTownText3"""
+    label = map_name_cleaner(map_name, None)[:-2] + "Text" + str(id)
+    return label
+
 def object_data_pretty_printer(map_id):
     map = extract_maps.map_headers[map_id]
     output = ""
@@ -437,7 +444,10 @@ def object_data_pretty_printer(map_id):
         warp_to_point = warp["warp_to_point"]
         warp_to_map_id = warp["warp_to_map_id"]
 
-        warp_to_map_constant = map_constants[warp_to_map_id]
+        try:
+            warp_to_map_constant = map_constants[warp_to_map_id]
+        except Exception, exc:
+            warp_to_map_constant = "$" + hex(warp_to_map_id)[2:]
 
         output += spacing + "db $" + hex(int(y))[2:] + ", $" + hex(int(x))[2:] + ", $" + hex(int(warp_to_point))[2:] + ", " + warp_to_map_constant + "\n"
     
@@ -451,7 +461,7 @@ def object_data_pretty_printer(map_id):
         x = sign["x"]
         text_id = sign["text_id"]
 
-        output += spacing + "db $" + hex(int(y))[2:] + ", $" + hex(int(x))[2:] + ", $" + hex(int(text_id))[2:] + "\n"
+        output += spacing + "db $" + hex(int(y))[2:] + ", $" + hex(int(x))[2:] + ", $" + hex(int(text_id))[2:] + " ; " + make_text_label(map["name"], text_id) + "\n"
     
     output += "\n"
     output += spacing + "db $" + hex(int(object["number_of_things"]))[2:] + " ; people\n"
@@ -475,13 +485,12 @@ def object_data_pretty_printer(map_id):
         movement2 = hex(int(thing["movement2"]))[2:]
         text_id = hex(int(thing["original_text_string_number"]))[2:]
 
-        output += spacing + "db $" + picture_number + ", $" + y + " + 4, $" + x + " + 4, $" + movement1 + ", $" + movement2 + ", $" + text_id + ending
+        output += spacing + "db " + sprite_helper.sprites[thing["picture_number"]] + ", $" + y + " + 4, $" + x + " + 4, $" + movement1 + ", $" + movement2 + ", $" + text_id + ending
     
     output += "\n"
 
     if object["number_of_warps"] > 0:
         output += spacing + "; warp-to\n"
-        output += "\n"
 
         for warp_to_id in object["warp_tos"]:
             warp_to = object["warp_tos"][warp_to_id]
@@ -489,11 +498,16 @@ def object_data_pretty_printer(map_id):
             warp_to_y = hex(int(warp_to["y"]))[2:]
             warp_to_x = hex(int(warp_to["x"]))[2:]
 
-            output += spacing + "EVENT_DISP $" + map_width[2:] + ", $" + warp_to_y + ", $" + warp_to_x + "\n"
+            try:
+                previous_location = map_constants[object["warps"][warp_to_id]["warp_to_map_id"]]
+                comment = " ; " + previous_location
+            except Exception, exc:
+                comment = ""
+
+            output += spacing + "EVENT_DISP $" + map_width[2:] + ", $" + warp_to_y + ", $" + warp_to_x + comment + "\n"
             #output += spacing + "dw $" + hex(int(warp_to["event_displacement"][1]))[2:] + hex(int(warp_to["event_displacement"][0]))[2:] + "\n"
             #output += spacing + "db $" + hex(int(warp_to["y"]))[2:] + ", $" + hex(int(warp_to["x"]))[2:] + "\n"
-
-            output += "\n"
+            #output += "\n"
     
         output += "\n"
 

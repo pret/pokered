@@ -4961,7 +4961,62 @@ CeladonCity_h: ; 0x18000
 
     dw $4022 ; objects
 
-INCBIN "baserom.gbc",$18022,$180df - $18022
+CeladonCityObject: ; 0x18022 (size=189)
+    db $f ; border tile
+
+    db $d ; warps
+    db $d, $8, $0, CELADON_MART_1
+    db $d, $a, $2, CELADON_MART_1
+    db $9, $18, $0, CELADON_MANSION_1
+    db $3, $18, $2, CELADON_MANSION_1
+    db $3, $19, $2, CELADON_MANSION_1
+    db $9, $29, $0, CELADON_POKECENTER
+    db $1b, $c, $0, CELADON_GYM
+    db $13, $1c, $0, GAME_CORNER
+    db $13, $27, $0, CELADON_HOUSE
+    db $13, $21, $0, CELADONPRIZE_ROOM
+    db $1b, $1f, $0, CELADON_DINER
+    db $1b, $23, $0, CELADON_HOUSE_2
+    db $1b, $2b, $0, CELADONHOTEL
+
+    db $9 ; signs
+    db $f, $1b, $a ; CeladonCityText10
+    db $f, $13, $b ; CeladonCityText11
+    db $9, $2a, $c ; CeladonCityText12
+    db $1d, $d, $d ; CeladonCityText13
+    db $9, $15, $e ; CeladonCityText14
+    db $d, $c, $f ; CeladonCityText15
+    db $15, $27, $10 ; CeladonCityText16
+    db $15, $21, $11 ; CeladonCityText17
+    db $15, $1b, $12 ; CeladonCityText18
+
+    db $9 ; people
+    db SPRITE_LITTLE_GIRL, $11 + 4, $8 + 4, $fe, $0, $1 ; person
+    db SPRITE_OLD_PERSON, $1c + 4, $b + 4, $ff, $d1, $2 ; person
+    db SPRITE_GIRL, $13 + 4, $e + 4, $fe, $1, $3 ; person
+    db SPRITE_OLD_PERSON, $16 + 4, $19 + 4, $ff, $d0, $4 ; person
+    db SPRITE_OLD_PERSON, $10 + 4, $16 + 4, $ff, $d0, $5 ; person
+    db SPRITE_FAT_MAN, $c + 4, $20 + 4, $ff, $d2, $6 ; person
+    db SPRITE_MACHOKE_SLOWBRO, $c + 4, $1e + 4, $ff, $d3, $7 ; person
+    db SPRITE_ROCKET_GRUNT, $1d + 4, $20 + 4, $fe, $2, $8 ; person
+    db SPRITE_ROCKET_GRUNT, $e + 4, $2a + 4, $fe, $2, $9 ; person
+
+    ; warp-to
+    EVENT_DISP $19, $d, $8 ; CELADON_MART_1
+    EVENT_DISP $19, $d, $a ; CELADON_MART_1
+    EVENT_DISP $19, $9, $18 ; CELADON_MANSION_1
+    EVENT_DISP $19, $3, $18 ; CELADON_MANSION_1
+    EVENT_DISP $19, $3, $19 ; CELADON_MANSION_1
+    EVENT_DISP $19, $9, $29 ; CELADON_POKECENTER
+    EVENT_DISP $19, $1b, $c ; CELADON_GYM
+    EVENT_DISP $19, $13, $1c ; GAME_CORNER
+    EVENT_DISP $19, $13, $27 ; CELADON_HOUSE
+    EVENT_DISP $19, $13, $21 ; CELADONPRIZE_ROOM
+    EVENT_DISP $19, $1b, $1f ; CELADON_DINER
+    EVENT_DISP $19, $1b, $23 ; CELADON_HOUSE_2
+    EVENT_DISP $19, $1b, $2b ; CELADONHOTEL
+
+INCBIN "baserom.gbc",$180df,$0
 
 CeladonCityBlocks: ; 450
     INCBIN "maps/celadoncity.blk"
@@ -4986,35 +5041,29 @@ PalletTown_h:
 
 	dw PalletTownObject
 
-PalletTownObject: ; 182C3 0x182c3
-	db $0B ; border tile
+PalletTownObject: ; 0x182c3 (size=58)
+    db $b ; border tile
 
-	db 3 ; warps
-	db 5,5,0,$25 ; Red’s house 1F
-	db 5,$D,0,$27 ; Blue’s house
-	db $B,$C,1,$28 ; Oak’s Lab
+    db $3 ; warps
+    db $5, $5, $0, REDS_HOUSE_1F
+    db $5, $d, $0, BLUES_HOUSE
+    db $b, $c, $1, OAKS_LAB
 
-	db 4 ; signs
-	db $D,$D,4 ; sign by lab
-	db 9,7,5 ; Pallet Town sign
-	db 5,3,6 ; sign by Red’s house
-	db 5,$B,7 ; sign by Blue’s house
+    db $4 ; signs
+    db $d, $d, $4 ; PalletTownText4
+    db $9, $7, $5 ; PalletTownText5
+    db $5, $3, $6 ; PalletTownText6
+    db $5, $b, $7 ; PalletTownText7
 
-	db 3 ; people
-	db 3,5+4,8+4,$FF,$FF,1 ; Oak
-	db $D,8+4,3+4,$FE,0,2 ; girl
-	db $2F,$E+4,$B+4,$FE,0,3 ; fat man
+    db $3 ; people
+    db SPRITE_OAK, $5 + 4, $8 + 4, $ff, $ff, $1 ; person
+    db SPRITE_GIRL, $8 + 4, $3 + 4, $fe, $0, $2 ; person
+    db SPRITE_FAT_MAN, $e + 4, $b + 4, $fe, $0, $3 ; person
 
-	; warp‐to
-
-	dw $C71B
-	db 5,5
-
-	dw $C71F
-	db 5,$D
-
-	dw $C74F
-	db $B,$C
+    ; warp-to
+    EVENT_DISP $a, $5, $5 ; REDS_HOUSE_1F
+    EVENT_DISP $a, $5, $d ; BLUES_HOUSE
+    EVENT_DISP $a, $b, $c ; OAKS_LAB
 
 PalletTownBlocks: ; 0x182fd
 	INCBIN "maps/pallettown.blk"
@@ -5049,7 +5098,41 @@ ViridianCity_h: ; 0x18357 to 0x18384 (45 bytes) (bank=6) (id=1)
 
     dw $4384 ; objects
 
-INCBIN "baserom.gbc",$18384,$183ec - $18384
+ViridianCityObject: ; 0x18384 (size=104)
+    db $f ; border tile
+
+    db $5 ; warps
+    db $19, $17, $0, VIRIDIAN_POKECENTER
+    db $13, $1d, $0, VIRIDIAN_MART
+    db $f, $15, $0, VIRIDIAN_SCHOOL
+    db $9, $15, $0, VIRIDIAN_HOUSE
+    db $7, $20, $0, VIRIDIAN_GYM
+
+    db $6 ; signs
+    db $11, $11, $8 ; ViridianCityText8
+    db $1, $13, $9 ; ViridianCityText9
+    db $1d, $15, $a ; ViridianCityText10
+    db $13, $1e, $b ; ViridianCityText11
+    db $19, $18, $c ; ViridianCityText12
+    db $7, $1b, $d ; ViridianCityText13
+
+    db $7 ; people
+    db SPRITE_BLONDE_BOY, $14 + 4, $d + 4, $fe, $0, $1 ; person
+    db SPRITE_MONK, $8 + 4, $1e + 4, $ff, $ff, $2 ; person
+    db SPRITE_BLONDE_BOY, $19 + 4, $1e + 4, $fe, $0, $3 ; person
+    db SPRITE_GIRL, $9 + 4, $11 + 4, $ff, $d3, $4 ; person
+    db SPRITE_LYING_OLD_MAN, $9 + 4, $12 + 4, $ff, $ff, $5 ; person
+    db SPRITE_FAT_MAN, $17 + 4, $6 + 4, $ff, $d0, $6 ; person
+    db SPRITE_MONK, $5 + 4, $11 + 4, $fe, $2, $7 ; person
+
+    ; warp-to
+    EVENT_DISP $14, $19, $17 ; VIRIDIAN_POKECENTER
+    EVENT_DISP $14, $13, $1d ; VIRIDIAN_MART
+    EVENT_DISP $14, $f, $15 ; VIRIDIAN_SCHOOL
+    EVENT_DISP $14, $9, $15 ; VIRIDIAN_HOUSE
+    EVENT_DISP $14, $7, $20 ; VIRIDIAN_GYM
+
+INCBIN "baserom.gbc",$183ec,$0
 
 ViridianCityBlocks: ; 360
     INCBIN "maps/viridiancity.blk"
@@ -5078,7 +5161,44 @@ PewterCity_h: ; 0x18554 to 0x18576 (34 bytes) (bank=6) (id=2)
 
     dw $4577 ; objects
 
-INCBIN "baserom.gbc",$18576,$185e6 - $18576
+INCBIN "baserom.gbc",$18576,$18577 - $18576
+PewterCityObject: ; 0x18577 (size=111)
+    db $a ; border tile
+
+    db $7 ; warps
+    db $7, $e, $0, MUSEUM_1F
+    db $5, $13, $2, MUSEUM_1F
+    db $11, $10, $0, PEWTER_GYM
+    db $d, $1d, $0, PEWTER_HOUSE_1
+    db $11, $17, $0, PEWTER_MART
+    db $1d, $7, $0, PEWTER_HOUSE_2
+    db $19, $d, $0, PEWTER_POKECENTER
+
+    db $7 ; signs
+    db $1d, $13, $6 ; PewterCityText6
+    db $13, $21, $7 ; PewterCityText7
+    db $11, $18, $8 ; PewterCityText8
+    db $19, $e, $9 ; PewterCityText9
+    db $9, $f, $a ; PewterCityText10
+    db $11, $b, $b ; PewterCityText11
+    db $17, $19, $c ; PewterCityText12
+
+    db $5 ; people
+    db SPRITE_BLONDE_PONYTAIL_GIRL, $f + 4, $8 + 4, $ff, $ff, $1 ; person
+    db SPRITE_BLACK_HAIR_BOY_1, $19 + 4, $11 + 4, $ff, $ff, $2 ; person
+    db SPRITE_BLACK_HAIR_BOY_2, $11 + 4, $1b + 4, $ff, $ff, $3 ; person
+    db SPRITE_BLACK_HAIR_BOY_2, $19 + 4, $1a + 4, $fe, $2, $4 ; person
+    db SPRITE_BLONDE_BOY, $10 + 4, $23 + 4, $ff, $d0, $5 ; person
+
+    ; warp-to
+    EVENT_DISP $14, $7, $e ; MUSEUM_1F
+    EVENT_DISP $14, $5, $13 ; MUSEUM_1F
+    EVENT_DISP $14, $11, $10 ; PEWTER_GYM
+    EVENT_DISP $14, $d, $1d ; PEWTER_HOUSE_1
+    EVENT_DISP $14, $11, $17 ; PEWTER_MART
+    EVENT_DISP $14, $1d, $7 ; PEWTER_HOUSE_2
+    EVENT_DISP $14, $19, $d ; PEWTER_POKECENTER
+
 
 PewterCityBlocks: ; 360
     INCBIN "maps/pewtercity.blk"
@@ -5119,7 +5239,55 @@ CeruleanCity_h: ; 0x1874e to 0x18786 (56 bytes) (bank=6) (id=3)
 
     dw $4786 ; objects
 
-INCBIN "baserom.gbc",$18786,$18830 - $18786
+CeruleanCityObject: ; 0x18786 (size=170)
+    db $f ; border tile
+
+    db $a ; warps
+    db $b, $1b, $0, TRASHED_HOUSE
+    db $f, $d, $0, CERULEAN_HOUSE
+    db $11, $13, $0, CERULEAN_POKECENTER
+    db $13, $1e, $0, CERULEAN_GYM
+    db $19, $d, $0, BIKE_SHOP
+    db $19, $19, $0, CERULEAN_MART
+    db $b, $4, $0, UNKNOWN_DUNGEON_1
+    db $9, $1b, $2, TRASHED_HOUSE
+    db $b, $9, $1, CERULEAN_HOUSE_3
+    db $9, $9, $0, CERULEAN_HOUSE_3
+
+    db $6 ; signs
+    db $13, $17, $c ; CeruleanCityText12
+    db $1d, $11, $d ; CeruleanCityText13
+    db $19, $1a, $e ; CeruleanCityText14
+    db $11, $14, $f ; CeruleanCityText15
+    db $19, $b, $10 ; CeruleanCityText16
+    db $15, $1b, $11 ; CeruleanCityText17
+
+    db $b ; people
+    db SPRITE_RIVAL, $2 + 4, $14 + 4, $ff, $d0, $1 ; person
+    db SPRITE_ROCKET_GRUNT, $8 + 4, $1e + 4, $ff, $ff, $42, $e6, $5 ; trainer
+    db SPRITE_BLACK_HAIR_BOY_1, $14 + 4, $1f + 4, $ff, $d0, $3 ; person
+    db SPRITE_BLACK_HAIR_BOY_2, $12 + 4, $f + 4, $fe, $1, $4 ; person
+    db SPRITE_BLACK_HAIR_BOY_2, $15 + 4, $9 + 4, $fe, $2, $5 ; person
+    db SPRITE_GUARD_COP, $c + 4, $1c + 4, $ff, $d0, $6 ; person
+    db SPRITE_BLONDE_PONYTAIL_GIRL, $1a + 4, $1d + 4, $ff, $d2, $7 ; person
+    db SPRITE_MACHOKE_SLOWBRO, $1a + 4, $1c + 4, $ff, $d0, $8 ; person
+    db SPRITE_BLONDE_PONYTAIL_GIRL, $1b + 4, $9 + 4, $fe, $2, $9 ; person
+    db SPRITE_BLACK_HAIR_BOY_2, $c + 4, $4 + 4, $ff, $d0, $a ; person
+    db SPRITE_GUARD_COP, $c + 4, $1b + 4, $ff, $d0, $b ; person
+
+    ; warp-to
+    EVENT_DISP $14, $b, $1b ; TRASHED_HOUSE
+    EVENT_DISP $14, $f, $d ; CERULEAN_HOUSE
+    EVENT_DISP $14, $11, $13 ; CERULEAN_POKECENTER
+    EVENT_DISP $14, $13, $1e ; CERULEAN_GYM
+    EVENT_DISP $14, $19, $d ; BIKE_SHOP
+    EVENT_DISP $14, $19, $19 ; CERULEAN_MART
+    EVENT_DISP $14, $b, $4 ; UNKNOWN_DUNGEON_1
+    EVENT_DISP $14, $9, $1b ; TRASHED_HOUSE
+    EVENT_DISP $14, $b, $9 ; CERULEAN_HOUSE_3
+    EVENT_DISP $14, $9, $9 ; CERULEAN_HOUSE_3
+
+INCBIN "baserom.gbc",$18830,$0
 
 CeruleanCityBlocks: ; 360
     INCBIN "maps/ceruleancity.blk"
@@ -5148,7 +5316,49 @@ VermilionCity_h: ; 0x18998 to 0x189ba (34 bytes) (bank=6) (id=5)
 
     dw $49ba ; objects
 
-INCBIN "baserom.gbc",$189ba,$18a3f - $189ba
+VermilionCityObject: ; 0x189ba (size=133)
+    db $43 ; border tile
+
+    db $9 ; warps
+    db $3, $b, $0, VERMILION_POKECENTER
+    db $d, $9, $0, POKEMON_FAN_CLUB
+    db $d, $17, $0, VERMILION_MART
+    db $13, $c, $0, VERMILION_GYM
+    db $13, $17, $0, VERMILION_HOUSE_1
+    db $1f, $12, $0, VERMILION_DOCK
+    db $1f, $13, $0, VERMILION_DOCK
+    db $d, $f, $0, VERMILION_HOUSE_3
+    db $3, $7, $0, VERMILION_HOUSE_2
+
+    db $7 ; signs
+    db $3, $1b, $7 ; VermilionCityText7
+    db $d, $25, $8 ; VermilionCityText8
+    db $d, $18, $9 ; VermilionCityText9
+    db $3, $c, $a ; VermilionCityText10
+    db $d, $7, $b ; VermilionCityText11
+    db $13, $7, $c ; VermilionCityText12
+    db $f, $1d, $d ; VermilionCityText13
+
+    db $6 ; people
+    db SPRITE_FOULARD_WOMAN, $7 + 4, $13 + 4, $fe, $2, $1 ; person
+    db SPRITE_MONK, $6 + 4, $e + 4, $ff, $ff, $2 ; person
+    db SPRITE_SAILOR, $1e + 4, $13 + 4, $ff, $d1, $3 ; person
+    db SPRITE_MONK, $7 + 4, $1e + 4, $ff, $ff, $4 ; person
+    db SPRITE_MACHOKE_SLOWBRO, $9 + 4, $1d + 4, $fe, $1, $5 ; person
+    db SPRITE_SAILOR, $1b + 4, $19 + 4, $fe, $2, $6 ; person
+
+    ; warp-to
+    EVENT_DISP $14, $3, $b ; VERMILION_POKECENTER
+    EVENT_DISP $14, $d, $9 ; POKEMON_FAN_CLUB
+    EVENT_DISP $14, $d, $17 ; VERMILION_MART
+    EVENT_DISP $14, $13, $c ; VERMILION_GYM
+    EVENT_DISP $14, $13, $17 ; VERMILION_HOUSE_1
+    EVENT_DISP $14, $1f, $12 ; VERMILION_DOCK
+    EVENT_DISP $14, $1f, $13 ; VERMILION_DOCK
+    EVENT_DISP $14, $d, $f ; VERMILION_HOUSE_3
+    EVENT_DISP $14, $3, $7 ; VERMILION_HOUSE_2
+
+INCBIN "baserom.gbc",$18a3f,$0
 
 VermilionCityBlocks: ; 360
     INCBIN "maps/vermilioncity.blk"
@@ -5183,7 +5393,60 @@ FuchsiaCity_h: ; 0x18ba7 to 0x18bd4 (45 bytes) (bank=6) (id=7)
 
     dw $4bd4 ; objects
 
-INCBIN "baserom.gbc",$18bd4,$18c86 - $18bd4
+FuchsiaCityObject: ; 0x18bd4 (size=178)
+    db $f ; border tile
+
+    db $9 ; warps
+    db $d, $5, $0, FUCHSIA_MART
+    db $1b, $b, $0, FUCHSIA_HOUSE_1
+    db $1b, $13, $0, FUCHSIA_POKECENTER
+    db $1b, $1b, $0, FUCHSIA_HOUSE_2
+    db $3, $12, $0, SAFARIZONEENTRANCE
+    db $1b, $5, $0, FUCHSIA_GYM
+    db $d, $16, $0, FUCHSIAMEETINGROOM
+    db $1b, $1f, $1, FUCHSIA_HOUSE_3
+    db $18, $1f, $0, FUCHSIA_HOUSE_3
+
+    db $e ; signs
+    db $17, $f, $b ; FuchsiaCityText11
+    db $f, $19, $c ; FuchsiaCityText12
+    db $5, $11, $d ; FuchsiaCityText13
+    db $d, $6, $e ; FuchsiaCityText14
+    db $1b, $14, $f ; FuchsiaCityText15
+    db $1d, $1b, $10 ; FuchsiaCityText16
+    db $f, $15, $11 ; FuchsiaCityText17
+    db $1d, $5, $12 ; FuchsiaCityText18
+    db $7, $21, $13 ; FuchsiaCityText19
+    db $7, $1b, $14 ; FuchsiaCityText20
+    db $7, $d, $15 ; FuchsiaCityText21
+    db $d, $1f, $16 ; FuchsiaCityText22
+    db $f, $d, $17 ; FuchsiaCityText23
+    db $7, $7, $18 ; FuchsiaCityText24
+
+    db $a ; people
+    db SPRITE_BLONDE_BOY, $c + 4, $a + 4, $fe, $2, $1 ; person
+    db SPRITE_MONK, $11 + 4, $1c + 4, $fe, $2, $2 ; person
+    db SPRITE_FAT_MAN, $e + 4, $1e + 4, $ff, $d0, $3 ; person
+    db SPRITE_BLONDE_BOY, $8 + 4, $18 + 4, $ff, $d1, $4 ; person
+    db SPRITE_CLEFAIRYLIKE, $5 + 4, $1f + 4, $fe, $0, $5 ; person
+    db SPRITE_BALL, $6 + 4, $19 + 4, $ff, $ff, $6 ; person
+    db SPRITE_MACHOKE_SLOWBRO, $6 + 4, $c + 4, $fe, $2, $7 ; person
+    db SPRITE_MACHOKE_SLOWBRO, $c + 4, $1e + 4, $fe, $2, $8 ; person
+    db SPRITE_SEEL, $11 + 4, $8 + 4, $fe, $0, $9 ; person
+    db SPRITE_OMANYTE, $5 + 4, $6 + 4, $ff, $ff, $a ; person
+
+    ; warp-to
+    EVENT_DISP $14, $d, $5 ; FUCHSIA_MART
+    EVENT_DISP $14, $1b, $b ; FUCHSIA_HOUSE_1
+    EVENT_DISP $14, $1b, $13 ; FUCHSIA_POKECENTER
+    EVENT_DISP $14, $1b, $1b ; FUCHSIA_HOUSE_2
+    EVENT_DISP $14, $3, $12 ; SAFARIZONEENTRANCE
+    EVENT_DISP $14, $1b, $5 ; FUCHSIA_GYM
+    EVENT_DISP $14, $d, $16 ; FUCHSIAMEETINGROOM
+    EVENT_DISP $14, $1b, $1f ; FUCHSIA_HOUSE_3
+    EVENT_DISP $14, $18, $1f ; FUCHSIA_HOUSE_3
+
+INCBIN "baserom.gbc",$18c86,$0
 
 FuchsiaCityBlocks: ; 360
     INCBIN "maps/fuchsiacity.blk"
@@ -5530,7 +5793,23 @@ VermilionHouse3_h: ; 0x19c06 to 0x19c12 (12 bytes) (bank=6) (id=196)
 
     dw $5c25 ; objects
 
-INCBIN "baserom.gbc",$19c12,$19c3f - $19c12
+INCBIN "baserom.gbc",$19c12,$19c25 - $19c12
+VermilionHouse3Object: ; 0x19c25 (size=26)
+    db $a ; border tile
+
+    db $2 ; warps
+    db $7, $2, $7, $ff
+    db $7, $3, $7, $ff
+
+    db $0 ; signs
+
+    db $1 ; people
+    db SPRITE_LITTLE_GIRL, $5 + 4, $3 + 4, $ff, $d1, $1 ; person
+
+    ; warp-to
+    EVENT_DISP $4, $7, $2
+    EVENT_DISP $4, $7, $3
+
 
 VermilionHouse3Blocks: ; 16
     INCBIN "maps/vermilionhouse3.blk"
@@ -5543,7 +5822,29 @@ IndigoPlateauLobby_h: ; 0x19c4f to 0x19c5b (12 bytes) (bank=6) (id=174)
 
     dw $5c95 ; objects
 
-INCBIN "baserom.gbc",$19c5b,$19ccf - $19c5b
+INCBIN "baserom.gbc",$19c5b,$19c95 - $19c5b
+IndigoPlateauLobbyObject: ; 0x19c95 (size=58)
+    db $0 ; border tile
+
+    db $3 ; warps
+    db $b, $7, $0, $ff
+    db $b, $8, $1, $ff
+    db $0, $8, $0, LORELEIS_ROOM
+
+    db $0 ; signs
+
+    db $5 ; people
+    db SPRITE_NURSE, $5 + 4, $7 + 4, $ff, $d0, $1 ; person
+    db SPRITE_GYM_HELPER, $9 + 4, $4 + 4, $ff, $d3, $2 ; person
+    db SPRITE_BLONDE_PONYTAIL_GIRL, $1 + 4, $5 + 4, $ff, $d0, $3 ; person
+    db SPRITE_MART_GUY, $5 + 4, $0 + 4, $ff, $d3, $4 ; person
+    db SPRITE_CABLE_CLUB_WOMAN, $6 + 4, $d + 4, $ff, $d0, $5 ; person
+
+    ; warp-to
+    EVENT_DISP $8, $b, $7
+    EVENT_DISP $8, $b, $8
+    EVENT_DISP $8, $0, $8 ; LORELEIS_ROOM
+
 
 IndigoPlateauLobbyBlocks: ; 48
     INCBIN "maps/indigoplateaulobby.blk"
@@ -5556,7 +5857,39 @@ SilphCo4_h: ; 0x19cff to 0x19d0b (12 bytes) (bank=6) (id=209)
 
     dw $5e35 ; objects
 
-INCBIN "baserom.gbc",$19d0b,$19ea4 - $19d0b
+INCBIN "baserom.gbc",$19d0b,$19e35 - $19d0b
+SilphCo4Object: ; 0x19e35 (size=111)
+    db $2e ; border tile
+
+    db $7 ; warps
+    db $0, $18, $1, SILPH_CO_3F
+    db $0, $1a, $1, SILPH_CO_5F
+    db $0, $14, $0, SILPH_CO_ELEVATOR
+    db $7, $b, $3, SILPH_CO_10F
+    db $3, $11, $3, SILPH_CO_6F
+    db $f, $3, $4, SILPH_CO_10F
+    db $b, $11, $5, SILPH_CO_10F
+
+    db $0 ; signs
+
+    db $7 ; people
+    db SPRITE_LAPRAS_GIVER, $2 + 4, $6 + 4, $ff, $ff, $1 ; person
+    db SPRITE_ROCKET_GRUNT, $e + 4, $9 + 4, $ff, $d3, $42, $e6, $1a ; trainer
+    db SPRITE_OAK_AIDE, $6 + 4, $e + 4, $ff, $d2, $43, $e4, $5 ; trainer
+    db SPRITE_ROCKET_GRUNT, $a + 4, $1a + 4, $ff, $d1, $44, $e6, $1b ; trainer
+    db SPRITE_BALL, $9 + 4, $3 + 4, $ff, $ff, $85, $34 ; item
+    db SPRITE_BALL, $7 + 4, $4 + 4, $ff, $ff, $86, $36 ; item
+    db SPRITE_BALL, $8 + 4, $5 + 4, $ff, $ff, $87, $1d ; item
+
+    ; warp-to
+    EVENT_DISP $f, $0, $18 ; SILPH_CO_3F
+    EVENT_DISP $f, $0, $1a ; SILPH_CO_5F
+    EVENT_DISP $f, $0, $14 ; SILPH_CO_ELEVATOR
+    EVENT_DISP $f, $7, $b ; SILPH_CO_10F
+    EVENT_DISP $f, $3, $11 ; SILPH_CO_6F
+    EVENT_DISP $f, $f, $3 ; SILPH_CO_10F
+    EVENT_DISP $f, $b, $11 ; SILPH_CO_10F
+
 
 SilphCo4Blocks: ; 135
     INCBIN "maps/silphco4.blk"
@@ -5569,7 +5902,43 @@ SilphCo5_h: ; 0x19f2b to 0x19f37 (12 bytes) (bank=6) (id=210)
 
     dw $608d ; objects
 
-INCBIN "baserom.gbc",$19f37,$1a116 - $19f37
+INCBIN "baserom.gbc",$19f37,$1a08d - $19f37
+SilphCo5Object: ; 0x1a08d (size=137)
+    db $2e ; border tile
+
+    db $7 ; warps
+    db $0, $18, $1, SILPH_CO_6F
+    db $0, $1a, $1, SILPH_CO_4F
+    db $0, $14, $0, SILPH_CO_ELEVATOR
+    db $3, $1b, $5, SILPH_CO_7F
+    db $f, $9, $4, SILPH_CO_9F
+    db $5, $b, $4, SILPH_CO_3F
+    db $f, $3, $5, SILPH_CO_3F
+
+    db $0 ; signs
+
+    db $b ; people
+    db SPRITE_LAPRAS_GIVER, $9 + 4, $d + 4, $ff, $ff, $1 ; person
+    db SPRITE_ROCKET_GRUNT, $10 + 4, $8 + 4, $ff, $d3, $42, $e6, $1c ; trainer
+    db SPRITE_OAK_AIDE, $3 + 4, $8 + 4, $ff, $d3, $43, $e4, $6 ; trainer
+    db SPRITE_PUNK, $a + 4, $12 + 4, $ff, $d1, $44, $dd, $1 ; trainer
+    db SPRITE_ROCKET_GRUNT, $4 + 4, $1c + 4, $ff, $d1, $45, $e6, $1d ; trainer
+    db SPRITE_BALL, $d + 4, $2 + 4, $ff, $ff, $86, $d1 ; item
+    db SPRITE_BALL, $6 + 4, $4 + 4, $ff, $ff, $87, $24 ; item
+    db SPRITE_BALL, $10 + 4, $15 + 4, $ff, $ff, $88, $30 ; item
+    db SPRITE_CLIPBOARD, $c + 4, $16 + 4, $ff, $ff, $9 ; person
+    db SPRITE_CLIPBOARD, $a + 4, $19 + 4, $ff, $ff, $a ; person
+    db SPRITE_CLIPBOARD, $6 + 4, $18 + 4, $ff, $ff, $b ; person
+
+    ; warp-to
+    EVENT_DISP $f, $0, $18 ; SILPH_CO_6F
+    EVENT_DISP $f, $0, $1a ; SILPH_CO_4F
+    EVENT_DISP $f, $0, $14 ; SILPH_CO_ELEVATOR
+    EVENT_DISP $f, $3, $1b ; SILPH_CO_7F
+    EVENT_DISP $f, $f, $9 ; SILPH_CO_9F
+    EVENT_DISP $f, $5, $b ; SILPH_CO_3F
+    EVENT_DISP $f, $f, $3 ; SILPH_CO_3F
+
 
 SilphCo5Blocks: ; 135
     INCBIN "maps/silphco5.blk"
@@ -5582,7 +5951,38 @@ SilphCo6_h: ; 0x1a19d to 0x1a1a9 (12 bytes) (bank=6) (id=211)
 
     dw $62fb ; objects
 
-INCBIN "baserom.gbc",$1a1a9,$1a36b - $1a1a9
+INCBIN "baserom.gbc",$1a1a9,$1a2fb - $1a1a9
+SilphCo6Object: ; 0x1a2fb (size=112)
+    db $2e ; border tile
+
+    db $5 ; warps
+    db $0, $10, $1, SILPH_CO_7F
+    db $0, $e, $0, SILPH_CO_5F
+    db $0, $12, $0, SILPH_CO_ELEVATOR
+    db $3, $3, $4, SILPH_CO_4F
+    db $3, $17, $6, SILPH_CO_2F
+
+    db $0 ; signs
+
+    db $a ; people
+    db SPRITE_LAPRAS_GIVER, $6 + 4, $a + 4, $ff, $ff, $1 ; person
+    db SPRITE_LAPRAS_GIVER, $6 + 4, $14 + 4, $ff, $ff, $2 ; person
+    db SPRITE_ERIKA, $6 + 4, $15 + 4, $ff, $d0, $3 ; person
+    db SPRITE_ERIKA, $a + 4, $b + 4, $ff, $d3, $4 ; person
+    db SPRITE_LAPRAS_GIVER, $d + 4, $12 + 4, $ff, $d1, $5 ; person
+    db SPRITE_ROCKET_GRUNT, $3 + 4, $11 + 4, $ff, $d3, $46, $e6, $1e ; trainer
+    db SPRITE_OAK_AIDE, $8 + 4, $7 + 4, $ff, $d0, $47, $e4, $7 ; trainer
+    db SPRITE_ROCKET_GRUNT, $f + 4, $e + 4, $ff, $d2, $48, $e6, $1f ; trainer
+    db SPRITE_BALL, $c + 4, $3 + 4, $ff, $ff, $89, $23 ; item
+    db SPRITE_BALL, $f + 4, $2 + 4, $ff, $ff, $8a, $2e ; item
+
+    ; warp-to
+    EVENT_DISP $d, $0, $10 ; SILPH_CO_7F
+    EVENT_DISP $d, $0, $e ; SILPH_CO_5F
+    EVENT_DISP $d, $0, $12 ; SILPH_CO_ELEVATOR
+    EVENT_DISP $d, $3, $3 ; SILPH_CO_4F
+    EVENT_DISP $d, $3, $17 ; SILPH_CO_2F
+
 
 SilphCo6Blocks: ; 117
     INCBIN "maps/silphco6.blk"
@@ -5615,7 +6015,35 @@ CinnabarIsland_h: ; 0x1c000 to 0x1c022 (34 bytes) (bank=7) (id=8)
 
     dw $4022 ; objects
 
-INCBIN "baserom.gbc",$1c022,$1c069 - $1c022
+CinnabarIslandObject: ; 0x1c022 (size=71)
+    db $43 ; border tile
+
+    db $5 ; warps
+    db $3, $6, $1, MANSION_1
+    db $3, $12, $0, CINNABAR_GYM
+    db $9, $6, $0, CINNABAR_LAB_1
+    db $b, $b, $0, CINNABAR_POKECENTER
+    db $b, $f, $0, CINNABAR_MART
+
+    db $5 ; signs
+    db $5, $9, $3 ; CinnabarIslandText3
+    db $b, $10, $4 ; CinnabarIslandText4
+    db $b, $c, $5 ; CinnabarIslandText5
+    db $b, $9, $6 ; CinnabarIslandText6
+    db $3, $d, $7 ; CinnabarIslandText7
+
+    db $2 ; people
+    db SPRITE_GIRL, $5 + 4, $c + 4, $fe, $2, $1 ; person
+    db SPRITE_MONK, $6 + 4, $e + 4, $ff, $ff, $2 ; person
+
+    ; warp-to
+    EVENT_DISP $a, $3, $6 ; MANSION_1
+    EVENT_DISP $a, $3, $12 ; CINNABAR_GYM
+    EVENT_DISP $a, $9, $6 ; CINNABAR_LAB_1
+    EVENT_DISP $a, $b, $b ; CINNABAR_POKECENTER
+    EVENT_DISP $a, $b, $f ; CINNABAR_MART
+
+INCBIN "baserom.gbc",$1c069,$0
 
 CinnabarIslandBlocks: ; 90
     INCBIN "maps/cinnabarisland.blk"
@@ -5644,7 +6072,19 @@ Route1_h: ; 0x1c0c3 to 0x1c0e5 (34 bytes) (bank=7) (id=12)
 
     dw $40e5 ; objects
 
-INCBIN "baserom.gbc",$1c0e5,$1c0fc - $1c0e5
+Route1Object: ; 0x1c0e5 (size=19)
+    db $b ; border tile
+
+    db $0 ; warps
+
+    db $1 ; signs
+    db $1b, $9, $3 ; Route1Text3
+
+    db $2 ; people
+    db SPRITE_BLONDE_BOY, $18 + 4, $5 + 4, $fe, $1, $1 ; person
+    db SPRITE_BLONDE_BOY, $d + 4, $f + 4, $fe, $2, $2 ; person
+
+INCBIN "baserom.gbc",$1c0f8,$4
 
 Route1Blocks: ; 180
     INCBIN "maps/route1.blk"
@@ -5875,7 +6315,33 @@ OaksLab_h: ; 0x1cb02 to 0x1cb0e (12 bytes) (bank=7) (id=40)
 
     dw $540a ; objects
 
-INCBIN "baserom.gbc",$1CB0E,$1D462-$1CB0E
+INCBIN "baserom.gbc",$1cb0e,$1d40a - $1cb0e
+OaksLabObject: ; 0x1d40a (size=88)
+    db $3 ; border tile
+
+    db $2 ; warps
+    db $b, $4, $2, $ff
+    db $b, $5, $2, $ff
+
+    db $0 ; signs
+
+    db $b ; people
+    db SPRITE_RIVAL, $3 + 4, $4 + 4, $ff, $ff, $41, $e1, $1 ; trainer
+    db SPRITE_BALL, $3 + 4, $6 + 4, $ff, $ff, $2 ; person
+    db SPRITE_BALL, $3 + 4, $7 + 4, $ff, $ff, $3 ; person
+    db SPRITE_BALL, $3 + 4, $8 + 4, $ff, $ff, $4 ; person
+    db SPRITE_OAK, $2 + 4, $5 + 4, $ff, $d0, $5 ; person
+    db SPRITE_BOOK_MAP_DEX, $1 + 4, $2 + 4, $ff, $ff, $6 ; person
+    db SPRITE_BOOK_MAP_DEX, $1 + 4, $3 + 4, $ff, $ff, $7 ; person
+    db SPRITE_OAK, $a + 4, $5 + 4, $ff, $d1, $8 ; person
+    db SPRITE_GIRL, $9 + 4, $1 + 4, $fe, $1, $9 ; person
+    db SPRITE_OAK_AIDE, $a + 4, $2 + 4, $ff, $ff, $a ; person
+    db SPRITE_OAK_AIDE, $a + 4, $8 + 4, $ff, $ff, $b ; person
+
+    ; warp-to
+    EVENT_DISP $5, $b, $4
+    EVENT_DISP $5, $b, $5
+
 
 ViridianMart_h: ; 0x1d462 to 0x1d46e (12 bytes) (bank=7) (id=42)
     db $02 ; tileset
@@ -5885,7 +6351,25 @@ ViridianMart_h: ; 0x1d462 to 0x1d46e (12 bytes) (bank=7) (id=42)
 
     dw $550a ; objects
 
-INCBIN "baserom.gbc",$1d46e,$1d530 - $1d46e
+INCBIN "baserom.gbc",$1d46e,$1d50a - $1d46e
+ViridianMartObject: ; 0x1d50a (size=38)
+    db $0 ; border tile
+
+    db $2 ; warps
+    db $7, $3, $1, $ff
+    db $7, $4, $1, $ff
+
+    db $0 ; signs
+
+    db $3 ; people
+    db SPRITE_MART_GUY, $5 + 4, $0 + 4, $ff, $d3, $1 ; person
+    db SPRITE_BLONDE_BOY, $5 + 4, $5 + 4, $fe, $1, $2 ; person
+    db SPRITE_BLACK_HAIR_BOY_1, $3 + 4, $3 + 4, $ff, $ff, $3 ; person
+
+    ; warp-to
+    EVENT_DISP $4, $7, $3
+    EVENT_DISP $4, $7, $4
+
 
 ViridianMartBlocks: ; 16
     INCBIN "maps/viridianmart.blk"
@@ -5898,7 +6382,24 @@ School_h: ; 0x1d540 to 0x1d54c (12 bytes) (bank=7) (id=43)
 
     dw $555d ; objects
 
-INCBIN "baserom.gbc",$1D54C,$1D57D-$1D54C
+INCBIN "baserom.gbc",$1d54c,$1d55d - $1d54c
+SchoolObject: ; 0x1d55d (size=32)
+    db $a ; border tile
+
+    db $2 ; warps
+    db $7, $2, $2, $ff
+    db $7, $3, $2, $ff
+
+    db $0 ; signs
+
+    db $2 ; people
+    db SPRITE_BRUNETTE_GIRL, $5 + 4, $3 + 4, $ff, $d1, $1 ; person
+    db SPRITE_BLONDE_PONYTAIL_GIRL, $1 + 4, $4 + 4, $ff, $d0, $2 ; person
+
+    ; warp-to
+    EVENT_DISP $4, $7, $2
+    EVENT_DISP $4, $7, $3
+
 
 ViridianHouse_h: ; 0x1d57d to 0x1d589 (12 bytes) (bank=7) (id=44)
     db $08 ; tileset
@@ -5908,7 +6409,26 @@ ViridianHouse_h: ; 0x1d57d to 0x1d589 (12 bytes) (bank=7) (id=44)
 
     dw $55bb ; objects
 
-INCBIN "baserom.gbc",$1D589,$1D5E7-$1D589
+INCBIN "baserom.gbc",$1d589,$1d5bb - $1d589
+ViridianHouseObject: ; 0x1d5bb (size=44)
+    db $a ; border tile
+
+    db $2 ; warps
+    db $7, $2, $3, $ff
+    db $7, $3, $3, $ff
+
+    db $0 ; signs
+
+    db $4 ; people
+    db SPRITE_BALDING_GUY, $3 + 4, $5 + 4, $ff, $ff, $1 ; person
+    db SPRITE_LITTLE_GIRL, $4 + 4, $1 + 4, $fe, $1, $2 ; person
+    db SPRITE_BIRD, $5 + 4, $5 + 4, $fe, $2, $3 ; person
+    db SPRITE_CLIPBOARD, $0 + 4, $4 + 4, $ff, $ff, $4 ; person
+
+    ; warp-to
+    EVENT_DISP $4, $7, $2
+    EVENT_DISP $4, $7, $3
+
 
 PewterHouse1_h: ; 0x1d5e7 to 0x1d5f3 (12 bytes) (bank=7) (id=55)
     db $08 ; tileset
@@ -5918,7 +6438,25 @@ PewterHouse1_h: ; 0x1d5e7 to 0x1d5f3 (12 bytes) (bank=7) (id=55)
 
     dw $5616 ; objects
 
-INCBIN "baserom.gbc",$1D5F3,$1D63C-$1D5F3
+INCBIN "baserom.gbc",$1d5f3,$1d616 - $1d5f3
+PewterHouse1Object: ; 0x1d616 (size=38)
+    db $a ; border tile
+
+    db $2 ; warps
+    db $7, $2, $3, $ff
+    db $7, $3, $3, $ff
+
+    db $0 ; signs
+
+    db $3 ; people
+    db SPRITE_MACHOKE_SLOWBRO, $5 + 4, $4 + 4, $ff, $d2, $1 ; person
+    db SPRITE_YOUNG_GIRL, $5 + 4, $3 + 4, $ff, $d3, $2 ; person
+    db SPRITE_FAT_BALD_GUY, $2 + 4, $1 + 4, $ff, $ff, $3 ; person
+
+    ; warp-to
+    EVENT_DISP $4, $7, $2
+    EVENT_DISP $4, $7, $3
+
 
 PewterHouse2_h: ; 0x1d63c to 0x1d648 (12 bytes) (bank=7) (id=57)
     db $08 ; tileset
@@ -5928,7 +6466,24 @@ PewterHouse2_h: ; 0x1d63c to 0x1d648 (12 bytes) (bank=7) (id=57)
 
     dw $5659 ; objects
 
-INCBIN "baserom.gbc",$1D648,$1D679-$1D648
+INCBIN "baserom.gbc",$1d648,$1d659 - $1d648
+PewterHouse2Object: ; 0x1d659 (size=32)
+    db $a ; border tile
+
+    db $2 ; warps
+    db $7, $2, $5, $ff
+    db $7, $3, $5, $ff
+
+    db $0 ; signs
+
+    db $2 ; people
+    db SPRITE_MONK, $3 + 4, $2 + 4, $ff, $d3, $1 ; person
+    db SPRITE_BLONDE_BOY, $5 + 4, $4 + 4, $ff, $ff, $2 ; person
+
+    ; warp-to
+    EVENT_DISP $4, $7, $2
+    EVENT_DISP $4, $7, $3
+
 
 CeruleanHouseTrashed_h: ; 0x1d679 to 0x1d685 (12 bytes) (bank=7) (id=62)
     db $08 ; tileset
@@ -5938,7 +6493,27 @@ CeruleanHouseTrashed_h: ; 0x1d679 to 0x1d685 (12 bytes) (bank=7) (id=62)
 
     dw $56bf ; objects
 
-INCBIN "baserom.gbc",$1D685,$1D6EA-$1D685
+INCBIN "baserom.gbc",$1d685,$1d6bf - $1d685
+CeruleanHouseTrashedObject: ; 0x1d6bf (size=43)
+    db $a ; border tile
+
+    db $3 ; warps
+    db $7, $2, $0, $ff
+    db $7, $3, $0, $ff
+    db $0, $3, $7, $ff
+
+    db $1 ; signs
+    db $0, $3, $3 ; CeruleanHouseTrashedText3
+
+    db $2 ; people
+    db SPRITE_FISHER, $1 + 4, $2 + 4, $ff, $d0, $1 ; person
+    db SPRITE_GIRL, $6 + 4, $5 + 4, $fe, $2, $2 ; person
+
+    ; warp-to
+    EVENT_DISP $4, $7, $2
+    EVENT_DISP $4, $7, $3
+    EVENT_DISP $4, $0, $3
+
 
 CeruleanHouse2_h: ; 0x1d6ea to 0x1d6f6 (12 bytes) (bank=7) (id=63)
     db $08 ; tileset
@@ -5948,7 +6523,24 @@ CeruleanHouse2_h: ; 0x1d6ea to 0x1d6f6 (12 bytes) (bank=7) (id=63)
 
     dw $5710 ; objects
 
-INCBIN "baserom.gbc",$1D6F6,$1D730-$1D6F6
+INCBIN "baserom.gbc",$1d6f6,$1d710 - $1d6f6
+CeruleanHouse2Object: ; 0x1d710 (size=32)
+    db $a ; border tile
+
+    db $2 ; warps
+    db $7, $2, $1, $ff
+    db $7, $3, $1, $ff
+
+    db $0 ; signs
+
+    db $2 ; people
+    db SPRITE_OLD_MEDIUM_WOMAN, $4 + 4, $5 + 4, $ff, $d2, $1 ; person
+    db SPRITE_MONK, $2 + 4, $1 + 4, $ff, $ff, $2 ; person
+
+    ; warp-to
+    EVENT_DISP $4, $7, $2
+    EVENT_DISP $4, $7, $3
+
 
 BikeShop_h: ; 0x1d730 to 0x1d73c (12 bytes) (bank=7) (id=66)
     db $15 ; tileset
@@ -5958,7 +6550,25 @@ BikeShop_h: ; 0x1d730 to 0x1d73c (12 bytes) (bank=7) (id=66)
 
     dw $5866 ; objects
 
-INCBIN "baserom.gbc",$1d73c,$1d88c - $1d73c
+INCBIN "baserom.gbc",$1d73c,$1d866 - $1d73c
+BikeShopObject: ; 0x1d866 (size=38)
+    db $e ; border tile
+
+    db $2 ; warps
+    db $7, $2, $4, $ff
+    db $7, $3, $4, $ff
+
+    db $0 ; signs
+
+    db $3 ; people
+    db SPRITE_SUNGLASSES_GUY, $2 + 4, $6 + 4, $ff, $ff, $1 ; person
+    db SPRITE_MOM_GEISHA, $6 + 4, $5 + 4, $fe, $1, $2 ; person
+    db SPRITE_BLONDE_BOY, $3 + 4, $1 + 4, $ff, $d1, $3 ; person
+
+    ; warp-to
+    EVENT_DISP $4, $7, $2
+    EVENT_DISP $4, $7, $3
+
 
 BikeShopBlocks: ; 16
     INCBIN "maps/bikeshop.blk"
@@ -5971,7 +6581,28 @@ LavenderHouse1_h: ; 0x1d89c to 0x1d8a8 (12 bytes) (bank=7) (id=149)
 
     dw $596a ; objects
 
-INCBIN "baserom.gbc",$1D8A8,$1D9A2-$1D8A8
+INCBIN "baserom.gbc",$1d8a8,$1d96a - $1d8a8
+LavenderHouse1Object: ; 0x1d96a (size=56)
+    db $a ; border tile
+
+    db $2 ; warps
+    db $7, $2, $2, $ff
+    db $7, $3, $2, $ff
+
+    db $0 ; signs
+
+    db $6 ; people
+    db SPRITE_BLACK_HAIR_BOY_2, $5 + 4, $3 + 4, $ff, $ff, $1 ; person
+    db SPRITE_LITTLE_GIRL, $3 + 4, $6 + 4, $ff, $d0, $2 ; person
+    db SPRITE_MACHOKE_SLOWBRO, $4 + 4, $6 + 4, $ff, $d1, $3 ; person
+    db SPRITE_MACHOKE_SLOWBRO, $3 + 4, $1 + 4, $ff, $ff, $4 ; person
+    db SPRITE_MR_FUJI, $1 + 4, $3 + 4, $ff, $ff, $5 ; person
+    db SPRITE_BOOK_MAP_DEX, $3 + 4, $3 + 4, $ff, $ff, $6 ; person
+
+    ; warp-to
+    EVENT_DISP $4, $7, $2
+    EVENT_DISP $4, $7, $3
+
 
 LavenderHouse2_h: ; 0x1d9a2 to 0x1d9ae (12 bytes) (bank=7) (id=151)
     db $08 ; tileset
@@ -5981,7 +6612,24 @@ LavenderHouse2_h: ; 0x1d9a2 to 0x1d9ae (12 bytes) (bank=7) (id=151)
 
     dw $59e6 ; objects
 
-INCBIN "baserom.gbc",$1D9AE,$1DA06-$1D9AE
+INCBIN "baserom.gbc",$1d9ae,$1d9e6 - $1d9ae
+LavenderHouse2Object: ; 0x1d9e6 (size=32)
+    db $a ; border tile
+
+    db $2 ; warps
+    db $7, $2, $4, $ff
+    db $7, $3, $4, $ff
+
+    db $0 ; signs
+
+    db $2 ; people
+    db SPRITE_MACHOKE_SLOWBRO, $5 + 4, $3 + 4, $ff, $d1, $1 ; person
+    db SPRITE_BRUNETTE_GIRL, $4 + 4, $2 + 4, $ff, $d3, $2 ; person
+
+    ; warp-to
+    EVENT_DISP $4, $7, $2
+    EVENT_DISP $4, $7, $3
+
 
 NameRater_h: ; 0x1da06 to 0x1da12 (12 bytes) (bank=7) (id=229)
     db $08 ; tileset
@@ -5991,7 +6639,23 @@ NameRater_h: ; 0x1da06 to 0x1da12 (12 bytes) (bank=7) (id=229)
 
     dw $5ad6 ; objects
 
-INCBIN "baserom.gbc",$1DA12,$1DAF0-$1DA12
+INCBIN "baserom.gbc",$1da12,$1dad6 - $1da12
+NameRaterObject: ; 0x1dad6 (size=26)
+    db $a ; border tile
+
+    db $2 ; warps
+    db $7, $2, $5, $ff
+    db $7, $3, $5, $ff
+
+    db $0 ; signs
+
+    db $1 ; people
+    db SPRITE_MR_MASTERBALL, $3 + 4, $5 + 4, $ff, $d2, $1 ; person
+
+    ; warp-to
+    EVENT_DISP $4, $7, $2
+    EVENT_DISP $4, $7, $3
+
 
 VermilionHouse1_h: ; 0x1daf0 to 0x1dafc (12 bytes) (bank=7) (id=93)
     db $08 ; tileset
@@ -6001,7 +6665,25 @@ VermilionHouse1_h: ; 0x1daf0 to 0x1dafc (12 bytes) (bank=7) (id=93)
 
     dw $5b20 ; objects
 
-INCBIN "baserom.gbc",$1DAFC,$1DB46-$1DAFC
+INCBIN "baserom.gbc",$1dafc,$1db20 - $1dafc
+VermilionHouse1Object: ; 0x1db20 (size=38)
+    db $a ; border tile
+
+    db $2 ; warps
+    db $7, $2, $4, $ff
+    db $7, $3, $4, $ff
+
+    db $0 ; signs
+
+    db $3 ; people
+    db SPRITE_BLONDE_BOY, $3 + 4, $5 + 4, $ff, $d2, $1 ; person
+    db SPRITE_BIRD, $5 + 4, $3 + 4, $fe, $2, $2 ; person
+    db SPRITE_PAPER_SHEET, $3 + 4, $4 + 4, $ff, $ff, $3 ; person
+
+    ; warp-to
+    EVENT_DISP $4, $7, $2
+    EVENT_DISP $4, $7, $3
+
 
 VermilionDock_h: ; 0x1db46 to 0x1db52 (12 bytes) (bank=7) (id=94)
     db $0e ; tileset
@@ -6011,7 +6693,22 @@ VermilionDock_h: ; 0x1db46 to 0x1db52 (12 bytes) (bank=7) (id=94)
 
     dw $5cc6 ; objects
 
-INCBIN "baserom.gbc",$1db52,$1dcda - $1db52
+INCBIN "baserom.gbc",$1db52,$1dcc6 - $1db52
+VermilionDockObject: ; 0x1dcc6 (size=20)
+    db $f ; border tile
+
+    db $2 ; warps
+    db $0, $e, $5, $ff
+    db $2, $e, $1, SS_ANNE_1
+
+    db $0 ; signs
+
+    db $0 ; people
+
+    ; warp-to
+    EVENT_DISP $e, $0, $e
+    EVENT_DISP $e, $2, $e ; SS_ANNE_1
+
 
 VermilionDockBlocks: ; 84
     INCBIN "maps/vermiliondock.blk"
@@ -6024,7 +6721,24 @@ CeladonMansion5_h: ; 0x1dd2e to 0x1dd3a (12 bytes) (bank=7) (id=132)
 
     dw $5d5c ; objects
 
-INCBIN "baserom.gbc",$1DD3A,$1DD7C-$1DD3A
+INCBIN "baserom.gbc",$1dd3a,$1dd5c - $1dd3a
+CeladonMansion5Object: ; 0x1dd5c (size=32)
+    db $a ; border tile
+
+    db $2 ; warps
+    db $7, $2, $2, CELADON_MANSION_4
+    db $7, $3, $2, CELADON_MANSION_4
+
+    db $0 ; signs
+
+    db $2 ; people
+    db SPRITE_HIKER, $2 + 4, $2 + 4, $ff, $d0, $1 ; person
+    db SPRITE_BALL, $3 + 4, $4 + 4, $ff, $ff, $2 ; person
+
+    ; warp-to
+    EVENT_DISP $4, $7, $2 ; CELADON_MANSION_4
+    EVENT_DISP $4, $7, $3 ; CELADON_MANSION_4
+
 
 FuchsiaMart_h: ; 0x1dd7c to 0x1dd88 (12 bytes) (bank=7) (id=152)
     db $02 ; tileset
@@ -6034,7 +6748,25 @@ FuchsiaMart_h: ; 0x1dd7c to 0x1dd88 (12 bytes) (bank=7) (id=152)
 
     dw $5d9b ; objects
 
-INCBIN "baserom.gbc",$1dd88,$1ddc1 - $1dd88
+INCBIN "baserom.gbc",$1dd88,$1dd9b - $1dd88
+FuchsiaMartObject: ; 0x1dd9b (size=38)
+    db $0 ; border tile
+
+    db $2 ; warps
+    db $7, $3, $0, $ff
+    db $7, $4, $0, $ff
+
+    db $0 ; signs
+
+    db $3 ; people
+    db SPRITE_MART_GUY, $5 + 4, $0 + 4, $ff, $d3, $1 ; person
+    db SPRITE_FAT_BALD_GUY, $2 + 4, $4 + 4, $ff, $ff, $2 ; person
+    db SPRITE_BLONDE_PONYTAIL_GIRL, $5 + 4, $6 + 4, $fe, $1, $3 ; person
+
+    ; warp-to
+    EVENT_DISP $4, $7, $3
+    EVENT_DISP $4, $7, $4
+
 
 FuchsiaMartBlocks: ; 16
     INCBIN "maps/fuchsiamart.blk"
@@ -6047,7 +6779,26 @@ SaffronHouse1_h: ; 0x1ddd1 to 0x1dddd (12 bytes) (bank=7) (id=179)
 
     dw $5e04 ; objects
 
-INCBIN "baserom.gbc",$1DDDD,$1DE30-$1DDDD
+INCBIN "baserom.gbc",$1dddd,$1de04 - $1dddd
+SaffronHouse1Object: ; 0x1de04 (size=44)
+    db $a ; border tile
+
+    db $2 ; warps
+    db $7, $2, $3, $ff
+    db $7, $3, $3, $ff
+
+    db $0 ; signs
+
+    db $4 ; people
+    db SPRITE_BRUNETTE_GIRL, $3 + 4, $2 + 4, $ff, $d3, $1 ; person
+    db SPRITE_BIRD, $4 + 4, $0 + 4, $fe, $1, $2 ; person
+    db SPRITE_BLONDE_BOY, $1 + 4, $4 + 4, $ff, $d0, $3 ; person
+    db SPRITE_PAPER_SHEET, $3 + 4, $3 + 4, $ff, $ff, $4 ; person
+
+    ; warp-to
+    EVENT_DISP $4, $7, $2
+    EVENT_DISP $4, $7, $3
+
 
 SaffronHouse2_h: ; 0x1de30 to 0x1de3c (12 bytes) (bank=7) (id=183)
     db $08 ; tileset
@@ -6057,7 +6808,23 @@ SaffronHouse2_h: ; 0x1de30 to 0x1de3c (12 bytes) (bank=7) (id=183)
 
     dw $5e8a ; objects
 
-INCBIN "baserom.gbc",$1DE3C,$1DEA4-$1DE3C
+INCBIN "baserom.gbc",$1de3c,$1de8a - $1de3c
+SaffronHouse2Object: ; 0x1de8a (size=26)
+    db $a ; border tile
+
+    db $2 ; warps
+    db $7, $2, $7, $ff
+    db $7, $3, $7, $ff
+
+    db $0 ; signs
+
+    db $1 ; people
+    db SPRITE_FISHER, $3 + 4, $5 + 4, $ff, $d2, $1 ; person
+
+    ; warp-to
+    EVENT_DISP $4, $7, $2
+    EVENT_DISP $4, $7, $3
+
 
 DiglettsCaveRoute2_h: ; 0x1dea4 to 0x1deb0 (12 bytes) (bank=7) (id=46)
     db $11 ; tileset
@@ -6067,7 +6834,25 @@ DiglettsCaveRoute2_h: ; 0x1dea4 to 0x1deb0 (12 bytes) (bank=7) (id=46)
 
     dw $5ebf ; objects
 
-INCBIN "baserom.gbc",$1DEB0,$1DEE1-$1DEB0
+INCBIN "baserom.gbc",$1deb0,$1debf - $1deb0
+DiglettsCaveRoute2Object: ; 0x1debf (size=34)
+    db $7d ; border tile
+
+    db $3 ; warps
+    db $7, $2, $0, $ff
+    db $7, $3, $0, $ff
+    db $4, $4, $0, DIGLETTS_CAVE
+
+    db $0 ; signs
+
+    db $1 ; people
+    db SPRITE_FISHER, $3 + 4, $3 + 4, $ff, $ff, $1 ; person
+
+    ; warp-to
+    EVENT_DISP $4, $7, $2
+    EVENT_DISP $4, $7, $3
+    EVENT_DISP $4, $4, $4 ; DIGLETTS_CAVE
+
 
 Route2House_h: ; 0x1dee1 to 0x1deed (12 bytes) (bank=7) (id=48)
     db $08 ; tileset
@@ -6077,7 +6862,24 @@ Route2House_h: ; 0x1dee1 to 0x1deed (12 bytes) (bank=7) (id=48)
 
     dw $5f07 ; objects
 
-INCBIN "baserom.gbc",$1DEED,$1DF27-$1DEED
+INCBIN "baserom.gbc",$1deed,$1df07 - $1deed
+Route2HouseObject: ; 0x1df07 (size=32)
+    db $a ; border tile
+
+    db $2 ; warps
+    db $7, $2, $2, $ff
+    db $7, $3, $2, $ff
+
+    db $0 ; signs
+
+    db $2 ; people
+    db SPRITE_OAK_AIDE, $4 + 4, $2 + 4, $ff, $d3, $1 ; person
+    db SPRITE_GAMEBOY_KID_COPY, $1 + 4, $4 + 4, $ff, $d0, $2 ; person
+
+    ; warp-to
+    EVENT_DISP $4, $7, $2
+    EVENT_DISP $4, $7, $3
+
 
 Route5Gate_h: ; 0x1df27 to 0x1df33 (12 bytes) (bank=7) (id=70)
     db $0c ; tileset
@@ -6087,7 +6889,27 @@ Route5Gate_h: ; 0x1df27 to 0x1df33 (12 bytes) (bank=7) (id=70)
 
     dw $5ffb ; objects
 
-INCBIN "baserom.gbc",$1df33,$1e025 - $1df33
+INCBIN "baserom.gbc",$1df33,$1dffb - $1df33
+Route5GateObject: ; 0x1dffb (size=42)
+    db $a ; border tile
+
+    db $4 ; warps
+    db $5, $3, $2, $ff
+    db $5, $4, $2, $ff
+    db $0, $3, $1, $ff
+    db $0, $4, $0, $ff
+
+    db $0 ; signs
+
+    db $1 ; people
+    db SPRITE_GUARD_COP, $3 + 4, $1 + 4, $ff, $d3, $1 ; person
+
+    ; warp-to
+    EVENT_DISP $4, $5, $3
+    EVENT_DISP $4, $5, $4
+    EVENT_DISP $4, $0, $3
+    EVENT_DISP $4, $0, $4
+
 
 Route5GateBlocks: ; 12
     INCBIN "maps/route5gate.blk"
@@ -6100,7 +6922,27 @@ Route6Gate_h: ; 0x1e031 to 0x1e03d (12 bytes) (bank=7) (id=73)
 
     dw $60be ; objects
 
-INCBIN "baserom.gbc",$1e03d,$1e0e8 - $1e03d
+INCBIN "baserom.gbc",$1e03d,$1e0be - $1e03d
+Route6GateObject: ; 0x1e0be (size=42)
+    db $a ; border tile
+
+    db $4 ; warps
+    db $5, $3, $2, $ff
+    db $5, $4, $2, $ff
+    db $0, $3, $1, $ff
+    db $0, $4, $1, $ff
+
+    db $0 ; signs
+
+    db $1 ; people
+    db SPRITE_GUARD_COP, $2 + 4, $6 + 4, $ff, $d2, $1 ; person
+
+    ; warp-to
+    EVENT_DISP $4, $5, $3
+    EVENT_DISP $4, $5, $4
+    EVENT_DISP $4, $0, $3
+    EVENT_DISP $4, $0, $4
+
 
 Route6GateBlocks: ; 12
     INCBIN "maps/route6gate.blk"
@@ -6113,7 +6955,27 @@ Route7Gate_h: ; 0x1e0f4 to 0x1e100 (12 bytes) (bank=7) (id=76)
 
     dw $6185 ; objects
 
-INCBIN "baserom.gbc",$1e100,$1e1af - $1e100
+INCBIN "baserom.gbc",$1e100,$1e185 - $1e100
+Route7GateObject: ; 0x1e185 (size=42)
+    db $a ; border tile
+
+    db $4 ; warps
+    db $3, $0, $3, $ff
+    db $4, $0, $3, $ff
+    db $3, $5, $0, $ff
+    db $4, $5, $1, $ff
+
+    db $0 ; signs
+
+    db $1 ; people
+    db SPRITE_GUARD_COP, $1 + 4, $3 + 4, $ff, $d0, $1 ; person
+
+    ; warp-to
+    EVENT_DISP $3, $3, $0
+    EVENT_DISP $3, $4, $0
+    EVENT_DISP $3, $3, $5
+    EVENT_DISP $3, $4, $5
+
 
 Route7GateBlocks: ; 12
     INCBIN "maps/route7gate.blk"
@@ -6126,7 +6988,27 @@ Route8Gate_h: ; 0x1e1bb to 0x1e1c7 (12 bytes) (bank=7) (id=79)
 
     dw $6247 ; objects
 
-INCBIN "baserom.gbc",$1e1c7,$1e271 - $1e1c7
+INCBIN "baserom.gbc",$1e1c7,$1e247 - $1e1c7
+Route8GateObject: ; 0x1e247 (size=42)
+    db $a ; border tile
+
+    db $4 ; warps
+    db $3, $0, $0, $ff
+    db $4, $0, $1, $ff
+    db $3, $5, $2, $ff
+    db $4, $5, $3, $ff
+
+    db $0 ; signs
+
+    db $1 ; people
+    db SPRITE_GUARD_COP, $1 + 4, $2 + 4, $ff, $d0, $1 ; person
+
+    ; warp-to
+    EVENT_DISP $3, $3, $0
+    EVENT_DISP $3, $4, $0
+    EVENT_DISP $3, $3, $5
+    EVENT_DISP $3, $4, $5
+
 
 Route8GateBlocks: ; 12
     INCBIN "maps/route8gate.blk"
@@ -6139,7 +7021,25 @@ UndergroundPathEntranceRoute8_h: ; 0x1e27d to 0x1e289 (12 bytes) (bank=7) (id=80
 
     dw $6298 ; objects
 
-INCBIN "baserom.gbc",$1E289,$1E2BA-$1E289
+INCBIN "baserom.gbc",$1e289,$1e298 - $1e289
+UndergroundPathEntranceRoute8Object: ; 0x1e298 (size=34)
+    db $a ; border tile
+
+    db $3 ; warps
+    db $7, $3, $4, $ff
+    db $7, $4, $4, $ff
+    db $4, $4, $1, UNDERGROUND_PATH_WE
+
+    db $0 ; signs
+
+    db $1 ; people
+    db SPRITE_GIRL, $4 + 4, $3 + 4, $ff, $ff, $1 ; person
+
+    ; warp-to
+    EVENT_DISP $4, $7, $3
+    EVENT_DISP $4, $7, $4
+    EVENT_DISP $4, $4, $4 ; UNDERGROUND_PATH_WE
+
 
 PowerPlant_h: ; 0x1e2ba to 0x1e2c6 (12 bytes) (bank=7) (id=83)
     db $16 ; tileset
@@ -6149,7 +7049,38 @@ PowerPlant_h: ; 0x1e2ba to 0x1e2c6 (12 bytes) (bank=7) (id=83)
 
     dw $63bf ; objects
 
-INCBIN "baserom.gbc",$1e2c6,$1e446 - $1e2c6
+INCBIN "baserom.gbc",$1e2c6,$1e3bf - $1e2c6
+PowerPlantObject: ; 0x1e3bf (size=135)
+    db $2e ; border tile
+
+    db $3 ; warps
+    db $23, $4, $3, $ff
+    db $23, $5, $3, $ff
+    db $b, $0, $3, $ff
+
+    db $0 ; signs
+
+    db $e ; people
+    db SPRITE_BALL, $14 + 4, $9 + 4, $ff, $ff, $41, $6, $28 ; trainer
+    db SPRITE_BALL, $12 + 4, $20 + 4, $ff, $ff, $42, $6, $28 ; trainer
+    db SPRITE_BALL, $19 + 4, $15 + 4, $ff, $ff, $43, $6, $28 ; trainer
+    db SPRITE_BALL, $12 + 4, $19 + 4, $ff, $ff, $44, $8d, $2b ; trainer
+    db SPRITE_BALL, $22 + 4, $17 + 4, $ff, $ff, $45, $6, $28 ; trainer
+    db SPRITE_BALL, $1c + 4, $1a + 4, $ff, $ff, $46, $6, $28 ; trainer
+    db SPRITE_BALL, $e + 4, $15 + 4, $ff, $ff, $47, $8d, $2b ; trainer
+    db SPRITE_BALL, $20 + 4, $25 + 4, $ff, $ff, $48, $6, $28 ; trainer
+    db SPRITE_BIRD, $9 + 4, $4 + 4, $ff, $d1, $49, $4b, $32 ; trainer
+    db SPRITE_BALL, $19 + 4, $7 + 4, $ff, $ff, $8a, $26 ; item
+    db SPRITE_BALL, $3 + 4, $1c + 4, $ff, $ff, $8b, $23 ; item
+    db SPRITE_BALL, $3 + 4, $22 + 4, $ff, $ff, $8c, $28 ; item
+    db SPRITE_BALL, $20 + 4, $1a + 4, $ff, $ff, $8d, $e1 ; item
+    db SPRITE_BALL, $20 + 4, $14 + 4, $ff, $ff, $8e, $e9 ; item
+
+    ; warp-to
+    EVENT_DISP $14, $23, $4
+    EVENT_DISP $14, $23, $5
+    EVENT_DISP $14, $b, $0
+
 
 PowerPlantBlocks: ; 360
     INCBIN "maps/powerplant.blk"
@@ -6162,7 +7093,25 @@ DiglettsCaveEntranceRoute11_h: ; 0x1e5ae to 0x1e5ba (12 bytes) (bank=7) (id=85)
 
     dw $65ca ; objects
 
-INCBIN "baserom.gbc",$1E5BA,$1E5EC-$1E5BA
+INCBIN "baserom.gbc",$1e5ba,$1e5ca - $1e5ba
+DiglettsCaveEntranceRoute11Object: ; 0x1e5ca (size=34)
+    db $7d ; border tile
+
+    db $3 ; warps
+    db $7, $2, $4, $ff
+    db $7, $3, $4, $ff
+    db $4, $4, $1, DIGLETTS_CAVE
+
+    db $0 ; signs
+
+    db $1 ; people
+    db SPRITE_MONK, $3 + 4, $2 + 4, $ff, $ff, $1 ; person
+
+    ; warp-to
+    EVENT_DISP $4, $7, $2
+    EVENT_DISP $4, $7, $3
+    EVENT_DISP $4, $4, $4 ; DIGLETTS_CAVE
+
 
 Route16House_h: ; 0x1e5ec to 0x1e5f8 (12 bytes) (bank=7) (id=188)
     db $08 ; tileset
@@ -6172,7 +7121,24 @@ Route16House_h: ; 0x1e5ec to 0x1e5f8 (12 bytes) (bank=7) (id=188)
 
     dw $6657 ; objects
 
-INCBIN "baserom.gbc",$1E5F8,$1E677-$1E5F8
+INCBIN "baserom.gbc",$1e5f8,$1e657 - $1e5f8
+Route16HouseObject: ; 0x1e657 (size=32)
+    db $a ; border tile
+
+    db $2 ; warps
+    db $7, $2, $8, $ff
+    db $7, $3, $8, $ff
+
+    db $0 ; signs
+
+    db $2 ; people
+    db SPRITE_BRUNETTE_GIRL, $3 + 4, $2 + 4, $ff, $d3, $1 ; person
+    db SPRITE_BIRD, $4 + 4, $6 + 4, $fe, $0, $2 ; person
+
+    ; warp-to
+    EVENT_DISP $4, $7, $2
+    EVENT_DISP $4, $7, $3
+
 
 Route22Gate_h: ; 0x1e677 to 0x1e683 (12 bytes) (bank=7) (id=193)
     db $0c ; tileset
@@ -6182,7 +7148,27 @@ Route22Gate_h: ; 0x1e677 to 0x1e683 (12 bytes) (bank=7) (id=193)
 
     dw $6720 ; objects
 
-INCBIN "baserom.gbc",$1e683,$1e74a - $1e683
+INCBIN "baserom.gbc",$1e683,$1e720 - $1e683
+Route22GateObject: ; 0x1e720 (size=42)
+    db $a ; border tile
+
+    db $4 ; warps
+    db $7, $4, $0, $ff
+    db $7, $5, $0, $ff
+    db $0, $4, $0, $ff
+    db $0, $5, $1, $ff
+
+    db $0 ; signs
+
+    db $1 ; people
+    db SPRITE_GUARD_COP, $2 + 4, $6 + 4, $ff, $d2, $1 ; person
+
+    ; warp-to
+    EVENT_DISP $5, $7, $4
+    EVENT_DISP $5, $7, $5
+    EVENT_DISP $5, $0, $4
+    EVENT_DISP $5, $0, $5
+
 
 Route22GateBlocks: ; 20
     INCBIN "maps/route22gate.blk"
@@ -6195,7 +7181,26 @@ BillsHouse_h: ; 0x1e75e to 0x1e76a (12 bytes) (bank=7) (id=88)
 
     dw $68df ; objects
 
-INCBIN "baserom.gbc",$1E76A,$20000-$1E76A
+INCBIN "baserom.gbc",$1e76a,$1e8df - $1e76a
+BillsHouseObject: ; 0x1e8df (size=38)
+    db $d ; border tile
+
+    db $2 ; warps
+    db $7, $2, $0, $ff
+    db $7, $3, $0, $ff
+
+    db $0 ; signs
+
+    db $3 ; people
+    db SPRITE_MACHOKE_SLOWBRO, $5 + 4, $6 + 4, $ff, $ff, $1 ; person
+    db SPRITE_BLACK_HAIR_BOY_2, $4 + 4, $4 + 4, $ff, $ff, $2 ; person
+    db SPRITE_BLACK_HAIR_BOY_2, $5 + 4, $6 + 4, $ff, $ff, $3 ; person
+
+    ; warp-to
+    EVENT_DISP $4, $7, $2
+    EVENT_DISP $4, $7, $3
+
+INCBIN "baserom.gbc",$1e905,$16fb
 
 SECTION "bank8",DATA,BANK[$8]
 INCBIN "baserom.gbc",$20000,$4000
@@ -12980,7 +13985,39 @@ LavendarTown_h: ; 0x44000 to 0x4402d (45 bytes) (bank=11) (id=4)
 
     dw $402d ; objects
 
-INCBIN "baserom.gbc",$4402d,$44085 - $4402d
+LavendarTownObject: ; 0x4402d (size=88)
+    db $2c ; border tile
+
+    db $6 ; warps
+    db $5, $3, $0, LAVENDER_POKECENTER
+    db $5, $e, $0, POKEMONTOWER_1
+    db $9, $7, $0, LAVENDER_HOUSE_1
+    db $d, $f, $0, LAVENDER_MART
+    db $d, $3, $0, LAVENDER_HOUSE_2
+    db $d, $7, $0, NAME_RATERS_HOUSE
+
+    db $6 ; signs
+    db $9, $b, $4 ; LavendarTownText4
+    db $3, $9, $5 ; LavendarTownText5
+    db $d, $10, $6 ; LavendarTownText6
+    db $5, $4, $7 ; LavendarTownText7
+    db $9, $5, $8 ; LavendarTownText8
+    db $7, $11, $9 ; LavendarTownText9
+
+    db $3 ; people
+    db SPRITE_LITTLE_GIRL, $9 + 4, $f + 4, $fe, $0, $1 ; person
+    db SPRITE_BLACK_HAIR_BOY_1, $a + 4, $9 + 4, $ff, $ff, $2 ; person
+    db SPRITE_BLACK_HAIR_BOY_2, $7 + 4, $8 + 4, $fe, $2, $3 ; person
+
+    ; warp-to
+    EVENT_DISP $a, $5, $3 ; LAVENDER_POKECENTER
+    EVENT_DISP $a, $5, $e ; POKEMONTOWER_1
+    EVENT_DISP $a, $9, $7 ; LAVENDER_HOUSE_1
+    EVENT_DISP $a, $d, $f ; LAVENDER_MART
+    EVENT_DISP $a, $d, $3 ; LAVENDER_HOUSE_2
+    EVENT_DISP $a, $d, $7 ; NAME_RATERS_HOUSE
+
+INCBIN "baserom.gbc",$44085,$0
 
 LavendarTownBlocks: ; 90
     INCBIN "maps/lavendartown.blk"
@@ -13001,7 +14038,26 @@ ViridianPokecenter_h: ; 0x44251 to 0x4425d (12 bytes) (bank=11) (id=41)
 
     dw $4277 ; objects
 
-INCBIN "baserom.gbc",$4425D,$442A3-$4425D
+INCBIN "baserom.gbc",$4425d,$44277 - $4425d
+ViridianPokeCenterObject: ; 0x44277 (size=44)
+    db $0 ; border tile
+
+    db $2 ; warps
+    db $7, $3, $0, $ff
+    db $7, $4, $0, $ff
+
+    db $0 ; signs
+
+    db $4 ; people
+    db SPRITE_NURSE, $1 + 4, $3 + 4, $ff, $d0, $1 ; person
+    db SPRITE_GENTLEMAN, $5 + 4, $a + 4, $fe, $1, $2 ; person
+    db SPRITE_BLACK_HAIR_BOY_1, $3 + 4, $4 + 4, $ff, $ff, $3 ; person
+    db SPRITE_CABLE_CLUB_WOMAN, $2 + 4, $b + 4, $ff, $d0, $4 ; person
+
+    ; warp-to
+    EVENT_DISP $7, $7, $3
+    EVENT_DISP $7, $7, $4
+
 
 Mansion1_h: ; 0x442a3 to 0x442af (12 bytes) (bank=11) (id=165)
     db $16 ; tileset
@@ -13011,7 +14067,38 @@ Mansion1_h: ; 0x442a3 to 0x442af (12 bytes) (bank=11) (id=165)
 
     dw $43a4 ; objects
 
-INCBIN "baserom.gbc",$442AF,$444D0-$442AF
+INCBIN "baserom.gbc",$442af,$443a4 - $442af
+Mansion1Object: ; 0x443a4 (size=90)
+    db $2e ; border tile
+
+    db $8 ; warps
+    db $1b, $4, $0, $ff
+    db $1b, $5, $0, $ff
+    db $1b, $6, $0, $ff
+    db $1b, $7, $0, $ff
+    db $a, $5, $0, MANSION_2
+    db $17, $15, $0, MANSION_4
+    db $1b, $1a, $0, $ff
+    db $1b, $1b, $0, $ff
+
+    db $0 ; signs
+
+    db $3 ; people
+    db SPRITE_OAK_AIDE, $11 + 4, $11 + 4, $ff, $d2, $41, $e4, $4 ; trainer
+    db SPRITE_BALL, $3 + 4, $e + 4, $ff, $ff, $82, $1d ; item
+    db SPRITE_BALL, $15 + 4, $12 + 4, $ff, $ff, $83, $26 ; item
+
+    ; warp-to
+    EVENT_DISP $f, $1b, $4
+    EVENT_DISP $f, $1b, $5
+    EVENT_DISP $f, $1b, $6
+    EVENT_DISP $f, $1b, $7
+    EVENT_DISP $f, $a, $5 ; MANSION_2
+    EVENT_DISP $f, $17, $15 ; MANSION_4
+    EVENT_DISP $f, $1b, $1a
+    EVENT_DISP $f, $1b, $1b
+
+INCBIN "baserom.gbc",$443fe,$d2
 
 RockTunnel1_h: ; 0x444d0 to 0x444dc (12 bytes) (bank=11) (id=82)
     db $11 ; tileset
@@ -13021,7 +14108,42 @@ RockTunnel1_h: ; 0x444d0 to 0x444dc (12 bytes) (bank=11) (id=82)
 
     dw $45f6 ; objects
 
-INCBIN "baserom.gbc",$444dc,$44675 - $444dc
+INCBIN "baserom.gbc",$444dc,$445f6 - $444dc
+RockTunnel1Object: ; 0x445f6 (size=127)
+    db $3 ; border tile
+
+    db $8 ; warps
+    db $3, $f, $1, $ff
+    db $0, $f, $1, $ff
+    db $21, $f, $2, $ff
+    db $23, $f, $2, $ff
+    db $3, $25, $0, ROCK_TUNNEL_2
+    db $3, $5, $1, ROCK_TUNNEL_2
+    db $b, $11, $2, ROCK_TUNNEL_2
+    db $11, $25, $3, ROCK_TUNNEL_2
+
+    db $1 ; signs
+    db $1d, $b, $8 ; RockTunnel1Text8
+
+    db $7 ; people
+    db SPRITE_HIKER, $5 + 4, $7 + 4, $ff, $d0, $41, $d1, $c ; trainer
+    db SPRITE_HIKER, $10 + 4, $5 + 4, $ff, $d0, $42, $d1, $d ; trainer
+    db SPRITE_HIKER, $f + 4, $11 + 4, $ff, $d2, $43, $d1, $e ; trainer
+    db SPRITE_BLACK_HAIR_BOY_2, $8 + 4, $17 + 4, $ff, $d2, $44, $cf, $7 ; trainer
+    db SPRITE_BLONDE_PONYTAIL_GIRL, $15 + 4, $25 + 4, $ff, $d2, $45, $ce, $11 ; trainer
+    db SPRITE_BLONDE_PONYTAIL_GIRL, $18 + 4, $16 + 4, $ff, $d0, $46, $ce, $12 ; trainer
+    db SPRITE_BLONDE_PONYTAIL_GIRL, $18 + 4, $20 + 4, $ff, $d3, $47, $ce, $13 ; trainer
+
+    ; warp-to
+    EVENT_DISP $14, $3, $f
+    EVENT_DISP $14, $0, $f
+    EVENT_DISP $14, $21, $f
+    EVENT_DISP $14, $23, $f
+    EVENT_DISP $14, $3, $25 ; ROCK_TUNNEL_2
+    EVENT_DISP $14, $3, $5 ; ROCK_TUNNEL_2
+    EVENT_DISP $14, $b, $11 ; ROCK_TUNNEL_2
+    EVENT_DISP $14, $11, $25 ; ROCK_TUNNEL_2
+
 
 RockTunnel1Blocks: ; 360
     INCBIN "maps/rocktunnel1.blk"
@@ -13034,7 +14156,35 @@ SeafoamIslands1_h: ; 0x447dd to 0x447e9 (12 bytes) (bank=11) (id=192)
 
     dw $484f ; objects
 
-INCBIN "baserom.gbc",$447e9,$4489f - $447e9
+INCBIN "baserom.gbc",$447e9,$4484f - $447e9
+SeafoamIslands1Object: ; 0x4484f (size=72)
+    db $7d ; border tile
+
+    db $7 ; warps
+    db $11, $4, $0, $ff
+    db $11, $5, $0, $ff
+    db $11, $1a, $1, $ff
+    db $11, $1b, $1, $ff
+    db $5, $7, $1, SEAFOAM_ISLANDS_2
+    db $3, $19, $6, SEAFOAM_ISLANDS_2
+    db $f, $17, $4, SEAFOAM_ISLANDS_2
+
+    db $0 ; signs
+
+    db $2 ; people
+    db SPRITE_BOULDER, $a + 4, $12 + 4, $ff, $10, $1 ; person
+    db SPRITE_BOULDER, $7 + 4, $1a + 4, $ff, $10, $2 ; person
+
+    ; warp-to
+    EVENT_DISP $f, $11, $4
+    EVENT_DISP $f, $11, $5
+    EVENT_DISP $f, $11, $1a
+    EVENT_DISP $f, $11, $1b
+    EVENT_DISP $f, $5, $7 ; SEAFOAM_ISLANDS_2
+    EVENT_DISP $f, $3, $19 ; SEAFOAM_ISLANDS_2
+    EVENT_DISP $f, $f, $17 ; SEAFOAM_ISLANDS_2
+
+INCBIN "baserom.gbc",$44897,$8
 
 SeafoamIslands1Blocks: ; 135
     INCBIN "maps/seafoamislands1.blk"
@@ -13047,7 +14197,23 @@ SSAnne3_h: ; 0x44926 to 0x44932 (12 bytes) (bank=11) (id=97)
 
     dw $493c ; objects
 
-INCBIN "baserom.gbc",$44932,$44956 - $44932
+INCBIN "baserom.gbc",$44932,$4493c - $44932
+SSAnne3Object: ; 0x4493c (size=26)
+    db $c ; border tile
+
+    db $2 ; warps
+    db $3, $0, $0, SS_ANNE_5
+    db $3, $13, $7, SS_ANNE_2
+
+    db $0 ; signs
+
+    db $1 ; people
+    db SPRITE_SAILOR, $3 + 4, $9 + 4, $fe, $2, $1 ; person
+
+    ; warp-to
+    EVENT_DISP $a, $3, $0 ; SS_ANNE_5
+    EVENT_DISP $a, $3, $13 ; SS_ANNE_2
+
 
 SSAnne3Blocks: ; 30
     INCBIN "maps/ssanne3.blk"
@@ -13060,7 +14226,36 @@ VictoryRoad3_h: ; 0x44974 to 0x44980 (12 bytes) (bank=11) (id=198)
 
     dw $4acd ; objects
 
-INCBIN "baserom.gbc",$44980,$44b37 - $44980
+INCBIN "baserom.gbc",$44980,$44acd - $44980
+VictoryRoad3Object: ; 0x44acd (size=106)
+    db $7d ; border tile
+
+    db $4 ; warps
+    db $7, $17, $3, VICTORY_ROAD_2
+    db $8, $1a, $5, VICTORY_ROAD_2
+    db $f, $1b, $4, VICTORY_ROAD_2
+    db $0, $2, $6, VICTORY_ROAD_2
+
+    db $0 ; signs
+
+    db $a ; people
+    db SPRITE_BLACK_HAIR_BOY_1, $5 + 4, $1c + 4, $ff, $d2, $41, $e7, $2 ; trainer
+    db SPRITE_BLONDE_PONYTAIL_GIRL, $d + 4, $7 + 4, $ff, $d3, $42, $e8, $2 ; trainer
+    db SPRITE_BLACK_HAIR_BOY_1, $e + 4, $6 + 4, $ff, $d2, $43, $e7, $3 ; trainer
+    db SPRITE_BLONDE_PONYTAIL_GIRL, $3 + 4, $d + 4, $ff, $d3, $44, $e8, $3 ; trainer
+    db SPRITE_BALL, $5 + 4, $1a + 4, $ff, $ff, $85, $36 ; item
+    db SPRITE_BALL, $7 + 4, $7 + 4, $ff, $ff, $86, $f7 ; item
+    db SPRITE_BOULDER, $3 + 4, $16 + 4, $ff, $10, $7 ; person
+    db SPRITE_BOULDER, $c + 4, $d + 4, $ff, $10, $8 ; person
+    db SPRITE_BOULDER, $a + 4, $18 + 4, $ff, $10, $9 ; person
+    db SPRITE_BOULDER, $f + 4, $16 + 4, $ff, $10, $a ; person
+
+    ; warp-to
+    EVENT_DISP $f, $7, $17 ; VICTORY_ROAD_2
+    EVENT_DISP $f, $8, $1a ; VICTORY_ROAD_2
+    EVENT_DISP $f, $f, $1b ; VICTORY_ROAD_2
+    EVENT_DISP $f, $0, $2 ; VICTORY_ROAD_2
+
 
 VictoryRoad3Blocks: ; 135
     INCBIN "maps/victoryroad3.blk"
@@ -13073,7 +14268,35 @@ RocketHideout1_h: ; 0x44bbe to 0x44bca (12 bytes) (bank=11) (id=199)
 
     dw $4ce7 ; objects
 
-INCBIN "baserom.gbc",$44bca,$44d49 - $44bca
+INCBIN "baserom.gbc",$44bca,$44ce7 - $44bca
+RocketHideout1Object: ; 0x44ce7 (size=98)
+    db $2e ; border tile
+
+    db $5 ; warps
+    db $2, $17, $0, ROCKET_HIDEOUT_2
+    db $2, $15, $2, GAME_CORNER
+    db $13, $18, $0, ROCKET_HIDEOUT_ELEVATOR
+    db $18, $15, $3, ROCKET_HIDEOUT_2
+    db $13, $19, $1, ROCKET_HIDEOUT_ELEVATOR
+
+    db $0 ; signs
+
+    db $7 ; people
+    db SPRITE_ROCKET_GRUNT, $8 + 4, $1a + 4, $ff, $d2, $41, $e6, $8 ; trainer
+    db SPRITE_ROCKET_GRUNT, $6 + 4, $c + 4, $ff, $d3, $42, $e6, $9 ; trainer
+    db SPRITE_ROCKET_GRUNT, $11 + 4, $12 + 4, $ff, $d0, $43, $e6, $a ; trainer
+    db SPRITE_ROCKET_GRUNT, $19 + 4, $f + 4, $ff, $d3, $44, $e6, $b ; trainer
+    db SPRITE_ROCKET_GRUNT, $12 + 4, $1c + 4, $ff, $d2, $45, $e6, $c ; trainer
+    db SPRITE_BALL, $e + 4, $b + 4, $ff, $ff, $86, $1d ; item
+    db SPRITE_BALL, $11 + 4, $9 + 4, $ff, $ff, $87, $12 ; item
+
+    ; warp-to
+    EVENT_DISP $f, $2, $17 ; ROCKET_HIDEOUT_2
+    EVENT_DISP $f, $2, $15 ; GAME_CORNER
+    EVENT_DISP $f, $13, $18 ; ROCKET_HIDEOUT_ELEVATOR
+    EVENT_DISP $f, $18, $15 ; ROCKET_HIDEOUT_2
+    EVENT_DISP $f, $13, $19 ; ROCKET_HIDEOUT_ELEVATOR
+
 
 RocketHideout1Blocks: ; 210
     INCBIN "maps/rockethideout1.blk"
@@ -13086,7 +14309,33 @@ RocketHideout2_h: ; 0x44e1b to 0x44e27 (12 bytes) (bank=11) (id=200)
 
     dw $50f7 ; objects
 
-INCBIN "baserom.gbc",$44e27,$45147 - $44e27
+INCBIN "baserom.gbc",$44e27,$450f7 - $44e27
+RocketHideout2Object: ; 0x450f7 (size=80)
+    db $2e ; border tile
+
+    db $5 ; warps
+    db $8, $1b, $0, ROCKET_HIDEOUT_1
+    db $8, $15, $0, ROCKET_HIDEOUT_3
+    db $13, $18, $0, ROCKET_HIDEOUT_ELEVATOR
+    db $16, $15, $3, ROCKET_HIDEOUT_1
+    db $13, $19, $1, ROCKET_HIDEOUT_ELEVATOR
+
+    db $0 ; signs
+
+    db $5 ; people
+    db SPRITE_ROCKET_GRUNT, $c + 4, $14 + 4, $ff, $d0, $41, $e6, $d ; trainer
+    db SPRITE_BALL, $b + 4, $1 + 4, $ff, $ff, $82, $a ; item
+    db SPRITE_BALL, $8 + 4, $10 + 4, $ff, $ff, $83, $31 ; item
+    db SPRITE_BALL, $c + 4, $6 + 4, $ff, $ff, $84, $cf ; item
+    db SPRITE_BALL, $15 + 4, $3 + 4, $ff, $ff, $85, $13 ; item
+
+    ; warp-to
+    EVENT_DISP $f, $8, $1b ; ROCKET_HIDEOUT_1
+    EVENT_DISP $f, $8, $15 ; ROCKET_HIDEOUT_3
+    EVENT_DISP $f, $13, $18 ; ROCKET_HIDEOUT_ELEVATOR
+    EVENT_DISP $f, $16, $15 ; ROCKET_HIDEOUT_1
+    EVENT_DISP $f, $13, $19 ; ROCKET_HIDEOUT_ELEVATOR
+
 
 RocketHideout2Blocks: ; 210
     INCBIN "maps/rockethideout2.blk"
@@ -13099,7 +14348,26 @@ RocketHideout3_h: ; 0x45219 to 0x45225 (12 bytes) (bank=11) (id=201)
 
     dw $534d ; objects
 
-INCBIN "baserom.gbc",$45225,$4537f - $45225
+INCBIN "baserom.gbc",$45225,$4534d - $45225
+RocketHideout3Object: ; 0x4534d (size=50)
+    db $2e ; border tile
+
+    db $2 ; warps
+    db $6, $19, $1, ROCKET_HIDEOUT_2
+    db $12, $13, $0, ROCKET_HIDEOUT_4
+
+    db $0 ; signs
+
+    db $4 ; people
+    db SPRITE_ROCKET_GRUNT, $16 + 4, $a + 4, $ff, $d3, $41, $e6, $e ; trainer
+    db SPRITE_ROCKET_GRUNT, $c + 4, $1a + 4, $ff, $d1, $42, $e6, $f ; trainer
+    db SPRITE_BALL, $11 + 4, $1a + 4, $ff, $ff, $83, $d2 ; item
+    db SPRITE_BALL, $e + 4, $14 + 4, $ff, $ff, $84, $28 ; item
+
+    ; warp-to
+    EVENT_DISP $f, $6, $19 ; ROCKET_HIDEOUT_2
+    EVENT_DISP $f, $12, $13 ; ROCKET_HIDEOUT_4
+
 
 RocketHideout3Blocks: ; 210
     INCBIN "maps/rockethideout3.blk"
@@ -13112,7 +14380,33 @@ RocketHideout4_h: ; 0x45451 to 0x4545d (12 bytes) (bank=11) (id=202)
 
     dw $55f1 ; objects
 
-INCBIN "baserom.gbc",$4545d,$45650 - $4545d
+INCBIN "baserom.gbc",$4545d,$455f1 - $4545d
+RocketHideout4Object: ; 0x455f1 (size=95)
+    db $2e ; border tile
+
+    db $3 ; warps
+    db $a, $13, $1, ROCKET_HIDEOUT_3
+    db $f, $18, $0, ROCKET_HIDEOUT_ELEVATOR
+    db $f, $19, $1, ROCKET_HIDEOUT_ELEVATOR
+
+    db $0 ; signs
+
+    db $9 ; people
+    db SPRITE_GIOVANNI, $3 + 4, $19 + 4, $ff, $d0, $41, $e5, $1 ; trainer
+    db SPRITE_ROCKET_GRUNT, $c + 4, $17 + 4, $ff, $d0, $42, $e6, $10 ; trainer
+    db SPRITE_ROCKET_GRUNT, $c + 4, $1a + 4, $ff, $d0, $43, $e6, $11 ; trainer
+    db SPRITE_ROCKET_GRUNT, $2 + 4, $b + 4, $ff, $d0, $44, $e6, $12 ; trainer
+    db SPRITE_BALL, $c + 4, $a + 4, $ff, $ff, $85, $23 ; item
+    db SPRITE_BALL, $4 + 4, $9 + 4, $ff, $ff, $86, $ca ; item
+    db SPRITE_BALL, $14 + 4, $c + 4, $ff, $ff, $87, $25 ; item
+    db SPRITE_BALL, $2 + 4, $19 + 4, $ff, $ff, $88, $48 ; item
+    db SPRITE_BALL, $2 + 4, $a + 4, $ff, $ff, $89, $4a ; item
+
+    ; warp-to
+    EVENT_DISP $f, $a, $13 ; ROCKET_HIDEOUT_3
+    EVENT_DISP $f, $f, $18 ; ROCKET_HIDEOUT_ELEVATOR
+    EVENT_DISP $f, $f, $19 ; ROCKET_HIDEOUT_ELEVATOR
+
 
 RocketHideout4Blocks: ; 180
     INCBIN "maps/rockethideout4.blk"
@@ -13125,7 +14419,23 @@ RocketHideoutElevator_h: ; 0x45704 to 0x45710 (12 bytes) (bank=11) (id=203)
 
     dw $5791 ; objects
 
-INCBIN "baserom.gbc",$45710,$457a8 - $45710
+INCBIN "baserom.gbc",$45710,$45791 - $45710
+RocketHideoutElevatorObject: ; 0x45791 (size=23)
+    db $f ; border tile
+
+    db $2 ; warps
+    db $1, $2, $2, ROCKET_HIDEOUT_1
+    db $1, $3, $4, ROCKET_HIDEOUT_1
+
+    db $1 ; signs
+    db $1, $1, $1 ; RocketHideoutElevatorText1
+
+    db $0 ; people
+
+    ; warp-to
+    EVENT_DISP $3, $1, $2 ; ROCKET_HIDEOUT_1
+    EVENT_DISP $3, $1, $3 ; ROCKET_HIDEOUT_1
+
 
 RocketHideoutElevatorBlocks: ; 12
     INCBIN "maps/rockethideoutelevator.blk"
@@ -13138,7 +14448,23 @@ SilphCoElevator_h: ; 0x457b4 to 0x457c0 (12 bytes) (bank=11) (id=236)
 
     dw $5844 ; objects
 
-INCBIN "baserom.gbc",$457c0,$4585b - $457c0
+INCBIN "baserom.gbc",$457c0,$45844 - $457c0
+SilphCoElevatorObject: ; 0x45844 (size=23)
+    db $f ; border tile
+
+    db $2 ; warps
+    db $3, $1, $0, $ed
+    db $3, $2, $0, $ed
+
+    db $1 ; signs
+    db $0, $3, $1 ; SilphCoElevatorText1
+
+    db $0 ; people
+
+    ; warp-to
+    EVENT_DISP $2, $3, $1
+    EVENT_DISP $2, $3, $2
+
 
 SilphCoElevatorBlocks: ; 4
     INCBIN "maps/silphcoelevator.blk"
@@ -13151,7 +14477,35 @@ SafariZoneEast_h: ; 0x4585f to 0x4586b (12 bytes) (bank=11) (id=217)
 
     dw $588b ; objects
 
-INCBIN "baserom.gbc",$4586b,$458dc - $4586b
+INCBIN "baserom.gbc",$4586b,$4588b - $4586b
+SafariZoneEastObject: ; 0x4588b (size=81)
+    db $0 ; border tile
+
+    db $5 ; warps
+    db $4, $0, $6, SAFARI_ZONE_NORTH
+    db $5, $0, $7, SAFARI_ZONE_NORTH
+    db $16, $0, $6, SAFARI_ZONE_CENTER
+    db $17, $0, $6, SAFARI_ZONE_CENTER
+    db $9, $19, $0, SAFARI_ZONE_REST_HOUSE_3
+
+    db $3 ; signs
+    db $a, $1a, $5 ; SafariZoneEastText5
+    db $4, $6, $6 ; SafariZoneEastText6
+    db $17, $5, $7 ; SafariZoneEastText7
+
+    db $4 ; people
+    db SPRITE_BALL, $a + 4, $15 + 4, $ff, $ff, $81, $10 ; item
+    db SPRITE_BALL, $7 + 4, $3 + 4, $ff, $ff, $82, $11 ; item
+    db SPRITE_BALL, $d + 4, $14 + 4, $ff, $ff, $83, $26 ; item
+    db SPRITE_BALL, $c + 4, $f + 4, $ff, $ff, $84, $ed ; item
+
+    ; warp-to
+    EVENT_DISP $f, $4, $0 ; SAFARI_ZONE_NORTH
+    EVENT_DISP $f, $5, $0 ; SAFARI_ZONE_NORTH
+    EVENT_DISP $f, $16, $0 ; SAFARI_ZONE_CENTER
+    EVENT_DISP $f, $17, $0 ; SAFARI_ZONE_CENTER
+    EVENT_DISP $f, $9, $19 ; SAFARI_ZONE_REST_HOUSE_3
+
 
 SafariZoneEastBlocks: ; 195
     INCBIN "maps/safarizoneeast.blk"
@@ -13164,7 +14518,43 @@ SafariZoneNorth_h: ; 0x4599f to 0x459ab (12 bytes) (bank=11) (id=218)
 
     dw $59d5 ; objects
 
-INCBIN "baserom.gbc",$459ab,$45a3e - $459ab
+INCBIN "baserom.gbc",$459ab,$459d5 - $459ab
+SafariZoneNorthObject: ; 0x459d5 (size=105)
+    db $0 ; border tile
+
+    db $9 ; warps
+    db $23, $2, $0, SAFARI_ZONE_WEST
+    db $23, $3, $1, SAFARI_ZONE_WEST
+    db $23, $8, $2, SAFARI_ZONE_WEST
+    db $23, $9, $3, SAFARI_ZONE_WEST
+    db $23, $14, $4, SAFARI_ZONE_CENTER
+    db $23, $15, $5, SAFARI_ZONE_CENTER
+    db $1e, $27, $0, SAFARI_ZONE_EAST
+    db $1f, $27, $1, SAFARI_ZONE_EAST
+    db $3, $23, $0, SAFARI_ZONE_REST_HOUSE_4
+
+    db $5 ; signs
+    db $4, $24, $3 ; SafariZoneNorthText3
+    db $19, $4, $4 ; SafariZoneNorthText4
+    db $1f, $d, $5 ; SafariZoneNorthText5
+    db $21, $13, $6 ; SafariZoneNorthText6
+    db $1c, $1a, $7 ; SafariZoneNorthText7
+
+    db $2 ; people
+    db SPRITE_BALL, $1 + 4, $19 + 4, $ff, $ff, $81, $24 ; item
+    db SPRITE_BALL, $7 + 4, $13 + 4, $ff, $ff, $82, $f0 ; item
+
+    ; warp-to
+    EVENT_DISP $14, $23, $2 ; SAFARI_ZONE_WEST
+    EVENT_DISP $14, $23, $3 ; SAFARI_ZONE_WEST
+    EVENT_DISP $14, $23, $8 ; SAFARI_ZONE_WEST
+    EVENT_DISP $14, $23, $9 ; SAFARI_ZONE_WEST
+    EVENT_DISP $14, $23, $14 ; SAFARI_ZONE_CENTER
+    EVENT_DISP $14, $23, $15 ; SAFARI_ZONE_CENTER
+    EVENT_DISP $14, $1e, $27 ; SAFARI_ZONE_EAST
+    EVENT_DISP $14, $1f, $27 ; SAFARI_ZONE_EAST
+    EVENT_DISP $14, $3, $23 ; SAFARI_ZONE_REST_HOUSE_4
+
 
 SafariZoneNorthBlocks: ; 360
     INCBIN "maps/safarizonenorth.blk"
@@ -13177,7 +14567,39 @@ SafariZoneCenter_h: ; 0x45ba6 to 0x45bb2 (12 bytes) (bank=11) (id=220)
 
     dw $5bc5 ; objects
 
-INCBIN "baserom.gbc",$45bb2,$45c1e - $45bb2
+INCBIN "baserom.gbc",$45bb2,$45bc5 - $45bb2
+SafariZoneCenterObject: ; 0x45bc5 (size=89)
+    db $0 ; border tile
+
+    db $9 ; warps
+    db $19, $e, $2, SAFARIZONEENTRANCE
+    db $19, $f, $3, SAFARIZONEENTRANCE
+    db $a, $0, $4, SAFARI_ZONE_WEST
+    db $b, $0, $5, SAFARI_ZONE_WEST
+    db $0, $e, $4, SAFARI_ZONE_NORTH
+    db $0, $f, $5, SAFARI_ZONE_NORTH
+    db $a, $1d, $2, SAFARI_ZONE_EAST
+    db $b, $1d, $3, SAFARI_ZONE_EAST
+    db $13, $11, $0, SAFARI_ZONE_REST_HOUSE_1
+
+    db $2 ; signs
+    db $14, $12, $2 ; SafariZoneCenterText2
+    db $16, $e, $3 ; SafariZoneCenterText3
+
+    db $1 ; people
+    db SPRITE_BALL, $a + 4, $e + 4, $ff, $ff, $81, $31 ; item
+
+    ; warp-to
+    EVENT_DISP $f, $19, $e ; SAFARIZONEENTRANCE
+    EVENT_DISP $f, $19, $f ; SAFARIZONEENTRANCE
+    EVENT_DISP $f, $a, $0 ; SAFARI_ZONE_WEST
+    EVENT_DISP $f, $b, $0 ; SAFARI_ZONE_WEST
+    EVENT_DISP $f, $0, $e ; SAFARI_ZONE_NORTH
+    EVENT_DISP $f, $0, $f ; SAFARI_ZONE_NORTH
+    EVENT_DISP $f, $a, $1d ; SAFARI_ZONE_EAST
+    EVENT_DISP $f, $b, $1d ; SAFARI_ZONE_EAST
+    EVENT_DISP $f, $13, $11 ; SAFARI_ZONE_REST_HOUSE_1
+
 
 SafariZoneCenterBlocks: ; 195
     INCBIN "maps/safarizonecenter.blk"
@@ -13190,7 +14612,24 @@ SafariZoneRestHouse1_h: ; 0x45ce1 to 0x45ced (12 bytes) (bank=11) (id=221)
 
     dw $5cfe ; objects
 
-INCBIN "baserom.gbc",$45CED,$45D1E-$45CED
+INCBIN "baserom.gbc",$45ced,$45cfe - $45ced
+SafariZoneRestHouse1Object: ; 0x45cfe (size=32)
+    db $a ; border tile
+
+    db $2 ; warps
+    db $7, $2, $8, SAFARI_ZONE_CENTER
+    db $7, $3, $8, SAFARI_ZONE_CENTER
+
+    db $0 ; signs
+
+    db $2 ; people
+    db SPRITE_GIRL, $2 + 4, $3 + 4, $ff, $d0, $1 ; person
+    db SPRITE_OAK_AIDE, $4 + 4, $1 + 4, $fe, $1, $2 ; person
+
+    ; warp-to
+    EVENT_DISP $4, $7, $2 ; SAFARI_ZONE_CENTER
+    EVENT_DISP $4, $7, $3 ; SAFARI_ZONE_CENTER
+
 
 SafariZoneRestHouse2_h: ; 0x45d1e to 0x45d2a (12 bytes) (bank=11) (id=223)
     db $0c ; tileset
@@ -13200,7 +14639,25 @@ SafariZoneRestHouse2_h: ; 0x45d1e to 0x45d2a (12 bytes) (bank=11) (id=223)
 
     dw $5d43 ; objects
 
-INCBIN "baserom.gbc",$45D2A,$45D69-$45D2A
+INCBIN "baserom.gbc",$45d2a,$45d43 - $45d2a
+SafariZoneRestHouse2Object: ; 0x45d43 (size=38)
+    db $a ; border tile
+
+    db $2 ; warps
+    db $7, $2, $7, SAFARI_ZONE_WEST
+    db $7, $3, $7, SAFARI_ZONE_WEST
+
+    db $0 ; signs
+
+    db $3 ; people
+    db SPRITE_OAK_AIDE, $4 + 4, $4 + 4, $fe, $0, $1 ; person
+    db SPRITE_BLACK_HAIR_BOY_1, $2 + 4, $0 + 4, $ff, $d3, $2 ; person
+    db SPRITE_ERIKA, $2 + 4, $6 + 4, $ff, $d0, $3 ; person
+
+    ; warp-to
+    EVENT_DISP $4, $7, $2 ; SAFARI_ZONE_WEST
+    EVENT_DISP $4, $7, $3 ; SAFARI_ZONE_WEST
+
 
 SafariZoneRestHouse3_h: ; 0x45d69 to 0x45d75 (12 bytes) (bank=11) (id=224)
     db $0c ; tileset
@@ -13210,7 +14667,25 @@ SafariZoneRestHouse3_h: ; 0x45d69 to 0x45d75 (12 bytes) (bank=11) (id=224)
 
     dw $5d8e ; objects
 
-INCBIN "baserom.gbc",$45D75,$45DB4-$45D75
+INCBIN "baserom.gbc",$45d75,$45d8e - $45d75
+SafariZoneRestHouse3Object: ; 0x45d8e (size=38)
+    db $a ; border tile
+
+    db $2 ; warps
+    db $7, $2, $4, SAFARI_ZONE_EAST
+    db $7, $3, $4, SAFARI_ZONE_EAST
+
+    db $0 ; signs
+
+    db $3 ; people
+    db SPRITE_OAK_AIDE, $3 + 4, $1 + 4, $fe, $1, $1 ; person
+    db SPRITE_PUNK, $2 + 4, $4 + 4, $ff, $ff, $2 ; person
+    db SPRITE_LAPRAS_GIVER, $2 + 4, $5 + 4, $ff, $ff, $3 ; person
+
+    ; warp-to
+    EVENT_DISP $4, $7, $2 ; SAFARI_ZONE_EAST
+    EVENT_DISP $4, $7, $3 ; SAFARI_ZONE_EAST
+
 
 SafariZoneRestHouse4_h: ; 0x45db4 to 0x45dc0 (12 bytes) (bank=11) (id=225)
     db $0c ; tileset
@@ -13220,7 +14695,25 @@ SafariZoneRestHouse4_h: ; 0x45db4 to 0x45dc0 (12 bytes) (bank=11) (id=225)
 
     dw $5dd9 ; objects
 
-INCBIN "baserom.gbc",$45DC0,$45DFF-$45DC0
+INCBIN "baserom.gbc",$45dc0,$45dd9 - $45dc0
+SafariZoneRestHouse4Object: ; 0x45dd9 (size=38)
+    db $a ; border tile
+
+    db $2 ; warps
+    db $7, $2, $8, SAFARI_ZONE_NORTH
+    db $7, $3, $8, SAFARI_ZONE_NORTH
+
+    db $0 ; signs
+
+    db $3 ; people
+    db SPRITE_OAK_AIDE, $3 + 4, $6 + 4, $fe, $2, $1 ; person
+    db SPRITE_WHITE_PLAYER, $4 + 4, $3 + 4, $ff, $ff, $2 ; person
+    db SPRITE_GENTLEMAN, $5 + 4, $1 + 4, $fe, $1, $3 ; person
+
+    ; warp-to
+    EVENT_DISP $4, $7, $2 ; SAFARI_ZONE_NORTH
+    EVENT_DISP $4, $7, $3 ; SAFARI_ZONE_NORTH
+
 
 UnknownDungeon2_h: ; 0x45dff to 0x45e0b (12 bytes) (bank=11) (id=226)
     db $11 ; tileset
@@ -13230,7 +14723,33 @@ UnknownDungeon2_h: ; 0x45dff to 0x45e0b (12 bytes) (bank=11) (id=226)
 
     dw $5e14 ; objects
 
-INCBIN "baserom.gbc",$45e0b,$45e5d - $45e0b
+INCBIN "baserom.gbc",$45e0b,$45e14 - $45e0b
+UnknownDungeon2Object: ; 0x45e14 (size=73)
+    db $7d ; border tile
+
+    db $6 ; warps
+    db $1, $1d, $2, UNKNOWN_DUNGEON_1
+    db $6, $16, $3, UNKNOWN_DUNGEON_1
+    db $7, $13, $4, UNKNOWN_DUNGEON_1
+    db $1, $9, $5, UNKNOWN_DUNGEON_1
+    db $3, $1, $6, UNKNOWN_DUNGEON_1
+    db $b, $3, $7, UNKNOWN_DUNGEON_1
+
+    db $0 ; signs
+
+    db $3 ; people
+    db SPRITE_BALL, $9 + 4, $1d + 4, $ff, $ff, $81, $4f ; item
+    db SPRITE_BALL, $f + 4, $4 + 4, $ff, $ff, $82, $2 ; item
+    db SPRITE_BALL, $6 + 4, $d + 4, $ff, $ff, $83, $10 ; item
+
+    ; warp-to
+    EVENT_DISP $f, $1, $1d ; UNKNOWN_DUNGEON_1
+    EVENT_DISP $f, $6, $16 ; UNKNOWN_DUNGEON_1
+    EVENT_DISP $f, $7, $13 ; UNKNOWN_DUNGEON_1
+    EVENT_DISP $f, $1, $9 ; UNKNOWN_DUNGEON_1
+    EVENT_DISP $f, $3, $1 ; UNKNOWN_DUNGEON_1
+    EVENT_DISP $f, $b, $3 ; UNKNOWN_DUNGEON_1
+
 
 UnknownDungeon2Blocks: ; 135
     INCBIN "maps/unknowndungeon2.blk"
@@ -13243,7 +14762,23 @@ UnknownDungeon3_h: ; 0x45ee4 to 0x45ef0 (12 bytes) (bank=11) (id=227)
 
     dw $5f36 ; objects
 
-INCBIN "baserom.gbc",$45ef0,$45f58 - $45ef0
+INCBIN "baserom.gbc",$45ef0,$45f36 - $45ef0
+UnknownDungeon3Object: ; 0x45f36 (size=34)
+    db $7d ; border tile
+
+    db $1 ; warps
+    db $6, $3, $8, UNKNOWN_DUNGEON_1
+
+    db $0 ; signs
+
+    db $3 ; people
+    db SPRITE_MACHOKE_SLOWBRO, $d + 4, $1b + 4, $ff, $d0, $41, $83, $46 ; trainer
+    db SPRITE_BALL, $9 + 4, $10 + 4, $ff, $ff, $82, $2 ; item
+    db SPRITE_BALL, $1 + 4, $12 + 4, $ff, $ff, $83, $36 ; item
+
+    ; warp-to
+    EVENT_DISP $f, $6, $3 ; UNKNOWN_DUNGEON_1
+
 
 UnknownDungeon3Blocks: ; 135
     INCBIN "maps/unknowndungeon3.blk"
@@ -13256,7 +14791,34 @@ RockTunnel2_h: ; 0x45fdf to 0x45feb (12 bytes) (bank=11) (id=232)
 
     dw $613d ; objects
 
-INCBIN "baserom.gbc",$45feb,$461a1 - $45feb
+INCBIN "baserom.gbc",$45feb,$4613d - $45feb
+RockTunnel2Object: ; 0x4613d (size=100)
+    db $3 ; border tile
+
+    db $4 ; warps
+    db $19, $21, $4, ROCK_TUNNEL_1
+    db $3, $1b, $5, ROCK_TUNNEL_1
+    db $b, $17, $6, ROCK_TUNNEL_1
+    db $3, $3, $7, ROCK_TUNNEL_1
+
+    db $0 ; signs
+
+    db $8 ; people
+    db SPRITE_BLONDE_PONYTAIL_GIRL, $d + 4, $b + 4, $ff, $d0, $41, $ce, $9 ; trainer
+    db SPRITE_HIKER, $a + 4, $6 + 4, $ff, $d0, $42, $d1, $9 ; trainer
+    db SPRITE_BLACK_HAIR_BOY_2, $5 + 4, $3 + 4, $ff, $d0, $43, $cf, $3 ; trainer
+    db SPRITE_BLACK_HAIR_BOY_2, $15 + 4, $14 + 4, $ff, $d3, $44, $cf, $4 ; trainer
+    db SPRITE_HIKER, $a + 4, $1e + 4, $ff, $d0, $45, $d1, $a ; trainer
+    db SPRITE_BLONDE_PONYTAIL_GIRL, $1c + 4, $e + 4, $ff, $d3, $46, $ce, $a ; trainer
+    db SPRITE_HIKER, $5 + 4, $21 + 4, $ff, $d3, $47, $d1, $b ; trainer
+    db SPRITE_BLACK_HAIR_BOY_2, $1e + 4, $1a + 4, $ff, $d0, $48, $cf, $5 ; trainer
+
+    ; warp-to
+    EVENT_DISP $14, $19, $21 ; ROCK_TUNNEL_1
+    EVENT_DISP $14, $3, $1b ; ROCK_TUNNEL_1
+    EVENT_DISP $14, $b, $17 ; ROCK_TUNNEL_1
+    EVENT_DISP $14, $3, $3 ; ROCK_TUNNEL_1
+
 
 RockTunnel2Blocks: ; 360
     INCBIN "maps/rocktunnel2.blk"
@@ -13269,7 +14831,34 @@ SeafoamIslands2_h: ; 0x46309 to 0x46315 (12 bytes) (bank=11) (id=159)
 
     dw $6376 ; objects
 
-INCBIN "baserom.gbc",$46315,$463be - $46315
+INCBIN "baserom.gbc",$46315,$46376 - $46315
+SeafoamIslands2Object: ; 0x46376 (size=72)
+    db $7d ; border tile
+
+    db $7 ; warps
+    db $2, $4, $0, SEAFOAM_ISLANDS_3
+    db $5, $7, $4, SEAFOAM_ISLANDS_1
+    db $7, $d, $2, SEAFOAM_ISLANDS_3
+    db $f, $13, $3, SEAFOAM_ISLANDS_3
+    db $f, $17, $6, SEAFOAM_ISLANDS_1
+    db $b, $19, $5, SEAFOAM_ISLANDS_3
+    db $3, $19, $5, SEAFOAM_ISLANDS_1
+
+    db $0 ; signs
+
+    db $2 ; people
+    db SPRITE_BOULDER, $6 + 4, $11 + 4, $ff, $10, $1 ; person
+    db SPRITE_BOULDER, $6 + 4, $16 + 4, $ff, $10, $2 ; person
+
+    ; warp-to
+    EVENT_DISP $f, $2, $4 ; SEAFOAM_ISLANDS_3
+    EVENT_DISP $f, $5, $7 ; SEAFOAM_ISLANDS_1
+    EVENT_DISP $f, $7, $d ; SEAFOAM_ISLANDS_3
+    EVENT_DISP $f, $f, $13 ; SEAFOAM_ISLANDS_3
+    EVENT_DISP $f, $f, $17 ; SEAFOAM_ISLANDS_1
+    EVENT_DISP $f, $b, $19 ; SEAFOAM_ISLANDS_3
+    EVENT_DISP $f, $3, $19 ; SEAFOAM_ISLANDS_1
+
 
 SeafoamIslands2Blocks: ; 135
     INCBIN "maps/seafoamislands2.blk"
@@ -13282,7 +14871,34 @@ SeafoamIslands3_h: ; 0x46445 to 0x46451 (12 bytes) (bank=11) (id=160)
 
     dw $64b2 ; objects
 
-INCBIN "baserom.gbc",$46451,$464fa - $46451
+INCBIN "baserom.gbc",$46451,$464b2 - $46451
+SeafoamIslands3Object: ; 0x464b2 (size=72)
+    db $7d ; border tile
+
+    db $7 ; warps
+    db $3, $5, $0, SEAFOAM_ISLANDS_2
+    db $d, $5, $0, SEAFOAM_ISLANDS_4
+    db $7, $d, $2, SEAFOAM_ISLANDS_2
+    db $f, $13, $3, SEAFOAM_ISLANDS_2
+    db $3, $19, $3, SEAFOAM_ISLANDS_4
+    db $b, $19, $5, SEAFOAM_ISLANDS_2
+    db $e, $19, $4, SEAFOAM_ISLANDS_4
+
+    db $0 ; signs
+
+    db $2 ; people
+    db SPRITE_BOULDER, $6 + 4, $12 + 4, $ff, $10, $1 ; person
+    db SPRITE_BOULDER, $6 + 4, $17 + 4, $ff, $10, $2 ; person
+
+    ; warp-to
+    EVENT_DISP $f, $3, $5 ; SEAFOAM_ISLANDS_2
+    EVENT_DISP $f, $d, $5 ; SEAFOAM_ISLANDS_4
+    EVENT_DISP $f, $7, $d ; SEAFOAM_ISLANDS_2
+    EVENT_DISP $f, $f, $13 ; SEAFOAM_ISLANDS_2
+    EVENT_DISP $f, $3, $19 ; SEAFOAM_ISLANDS_4
+    EVENT_DISP $f, $b, $19 ; SEAFOAM_ISLANDS_2
+    EVENT_DISP $f, $e, $19 ; SEAFOAM_ISLANDS_4
+
 
 SeafoamIslands3Blocks: ; 135
     INCBIN "maps/seafoamislands3.blk"
@@ -13295,7 +14911,38 @@ SeafoamIslands4_h: ; 0x46581 to 0x4658d (12 bytes) (bank=11) (id=161)
 
     dw $66a6 ; objects
 
-INCBIN "baserom.gbc",$4658d,$46706 - $4658d
+INCBIN "baserom.gbc",$4658d,$466a6 - $4658d
+SeafoamIslands4Object: ; 0x466a6 (size=96)
+    db $7d ; border tile
+
+    db $7 ; warps
+    db $c, $5, $1, SEAFOAM_ISLANDS_3
+    db $6, $8, $2, SEAFOAM_ISLANDS_5
+    db $4, $19, $3, SEAFOAM_ISLANDS_5
+    db $3, $19, $4, SEAFOAM_ISLANDS_3
+    db $e, $19, $6, SEAFOAM_ISLANDS_3
+    db $11, $14, $0, SEAFOAM_ISLANDS_5
+    db $11, $15, $1, SEAFOAM_ISLANDS_5
+
+    db $0 ; signs
+
+    db $6 ; people
+    db SPRITE_BOULDER, $e + 4, $5 + 4, $ff, $10, $1 ; person
+    db SPRITE_BOULDER, $f + 4, $3 + 4, $ff, $10, $2 ; person
+    db SPRITE_BOULDER, $e + 4, $8 + 4, $ff, $10, $3 ; person
+    db SPRITE_BOULDER, $e + 4, $9 + 4, $ff, $10, $4 ; person
+    db SPRITE_BOULDER, $6 + 4, $12 + 4, $ff, $ff, $5 ; person
+    db SPRITE_BOULDER, $6 + 4, $13 + 4, $ff, $ff, $6 ; person
+
+    ; warp-to
+    EVENT_DISP $f, $c, $5 ; SEAFOAM_ISLANDS_3
+    EVENT_DISP $f, $6, $8 ; SEAFOAM_ISLANDS_5
+    EVENT_DISP $f, $4, $19 ; SEAFOAM_ISLANDS_5
+    EVENT_DISP $f, $3, $19 ; SEAFOAM_ISLANDS_3
+    EVENT_DISP $f, $e, $19 ; SEAFOAM_ISLANDS_3
+    EVENT_DISP $f, $11, $14 ; SEAFOAM_ISLANDS_5
+    EVENT_DISP $f, $11, $15 ; SEAFOAM_ISLANDS_5
+
 
 SeafoamIslands4Blocks: ; 135
     INCBIN "maps/seafoamislands4.blk"
@@ -13308,7 +14955,31 @@ SeafoamIslands5_h: ; 0x4678d to 0x46799 (12 bytes) (bank=11) (id=162)
 
     dw $68bc ; objects
 
-INCBIN "baserom.gbc",$46799,$468fa - $46799
+INCBIN "baserom.gbc",$46799,$468bc - $46799
+SeafoamIslands5Object: ; 0x468bc (size=62)
+    db $7d ; border tile
+
+    db $4 ; warps
+    db $11, $14, $5, SEAFOAM_ISLANDS_4
+    db $11, $15, $6, SEAFOAM_ISLANDS_4
+    db $7, $b, $1, SEAFOAM_ISLANDS_4
+    db $4, $19, $2, SEAFOAM_ISLANDS_4
+
+    db $2 ; signs
+    db $f, $9, $4 ; SeafoamIslands5Text4
+    db $1, $17, $5 ; SeafoamIslands5Text5
+
+    db $3 ; people
+    db SPRITE_BOULDER, $f + 4, $4 + 4, $ff, $ff, $1 ; person
+    db SPRITE_BOULDER, $f + 4, $5 + 4, $ff, $ff, $2 ; person
+    db SPRITE_BIRD, $1 + 4, $6 + 4, $ff, $d0, $43, $4a, $32 ; trainer
+
+    ; warp-to
+    EVENT_DISP $f, $11, $14 ; SEAFOAM_ISLANDS_4
+    EVENT_DISP $f, $11, $15 ; SEAFOAM_ISLANDS_4
+    EVENT_DISP $f, $7, $b ; SEAFOAM_ISLANDS_4
+    EVENT_DISP $f, $4, $19 ; SEAFOAM_ISLANDS_4
+
 
 SeafoamIslands5Blocks: ; 135
     INCBIN "maps/seafoamislands5.blk"
@@ -13340,7 +15011,29 @@ Route7_h: ; 0x48000 to 0x48022 (34 bytes) (bank=12) (id=18)
 
     dw $4022 ; objects
 
-INCBIN "baserom.gbc",$48022,$48051 - $48022
+Route7Object: ; 0x48022 (size=47)
+    db $f ; border tile
+
+    db $5 ; warps
+    db $9, $12, $2, ROUTE_7_GATE
+    db $a, $12, $3, ROUTE_7_GATE
+    db $9, $b, $0, ROUTE_7_GATE
+    db $a, $b, $1, ROUTE_7_GATE
+    db $d, $5, $0, PATH_ENTRANCE_ROUTE_7
+
+    db $1 ; signs
+    db $d, $3, $1 ; Route7Text1
+
+    db $0 ; people
+
+    ; warp-to
+    EVENT_DISP $a, $9, $12 ; ROUTE_7_GATE
+    EVENT_DISP $a, $a, $12 ; ROUTE_7_GATE
+    EVENT_DISP $a, $9, $b ; ROUTE_7_GATE
+    EVENT_DISP $a, $a, $b ; ROUTE_7_GATE
+    EVENT_DISP $a, $d, $5 ; PATH_ENTRANCE_ROUTE_7
+
+INCBIN "baserom.gbc",$48051,$0
 
 Route7Blocks: ; 90
     INCBIN "maps/route7.blk"
@@ -13469,7 +15162,41 @@ CeladonMart3_h: ; 0x48219 to 0x48225 (12 bytes) (bank=12) (id=124)
 
     dw $42c4 ; objects
 
-INCBIN "baserom.gbc",$48225,$48322 - $48225
+INCBIN "baserom.gbc",$48225,$482c4 - $48225
+CeladonMart3Object: ; 0x482c4 (size=94)
+    db $f ; border tile
+
+    db $3 ; warps
+    db $1, $c, $0, CELADON_MART_4
+    db $1, $10, $1, CELADON_MART_2
+    db $1, $1, $0, CELADON_MART_6
+
+    db $c ; signs
+    db $4, $2, $6 ; CeladonMart3Text6
+    db $4, $3, $7 ; CeladonMart3Text7
+    db $4, $5, $8 ; CeladonMart3Text8
+    db $4, $6, $9 ; CeladonMart3Text9
+    db $6, $2, $a ; CeladonMart3Text10
+    db $6, $3, $b ; CeladonMart3Text11
+    db $6, $5, $c ; CeladonMart3Text12
+    db $6, $6, $d ; CeladonMart3Text13
+    db $1, $e, $e ; CeladonMart3Text14
+    db $1, $4, $f ; CeladonMart3Text15
+    db $1, $6, $10 ; CeladonMart3Text16
+    db $1, $a, $11 ; CeladonMart3Text17
+
+    db $5 ; people
+    db SPRITE_MART_GUY, $5 + 4, $10 + 4, $ff, $ff, $1 ; person
+    db SPRITE_GAMEBOY_KID_COPY, $6 + 4, $b + 4, $ff, $d3, $2 ; person
+    db SPRITE_GAMEBOY_KID_COPY, $2 + 4, $7 + 4, $ff, $d0, $3 ; person
+    db SPRITE_GAMEBOY_KID_COPY, $2 + 4, $8 + 4, $ff, $d0, $4 ; person
+    db SPRITE_YOUNG_GIRL, $5 + 4, $2 + 4, $ff, $d1, $5 ; person
+
+    ; warp-to
+    EVENT_DISP $a, $1, $c ; CELADON_MART_4
+    EVENT_DISP $a, $1, $10 ; CELADON_MART_2
+    EVENT_DISP $a, $1, $1 ; CELADON_MART_6
+
 
 CeladonMart3Blocks: ; 40
     INCBIN "maps/celadonmart3.blk"
@@ -13482,7 +15209,28 @@ CeladonMart4_h: ; 0x4834a to 0x48356 (12 bytes) (bank=12) (id=125)
 
     dw $4370 ; objects
 
-INCBIN "baserom.gbc",$48356,$483a1 - $48356
+INCBIN "baserom.gbc",$48356,$48370 - $48356
+CeladonMart4Object: ; 0x48370 (size=49)
+    db $f ; border tile
+
+    db $3 ; warps
+    db $1, $c, $0, CELADON_MART_3
+    db $1, $10, $1, CELADON_HOUSE
+    db $1, $1, $0, CELADON_MART_6
+
+    db $1 ; signs
+    db $1, $e, $4 ; CeladonMart4Text4
+
+    db $3 ; people
+    db SPRITE_MART_GUY, $7 + 4, $5 + 4, $ff, $ff, $1 ; person
+    db SPRITE_BLACK_HAIR_BOY_2, $5 + 4, $f + 4, $fe, $2, $2 ; person
+    db SPRITE_BLONDE_BOY, $2 + 4, $5 + 4, $fe, $2, $3 ; person
+
+    ; warp-to
+    EVENT_DISP $a, $1, $c ; CELADON_MART_3
+    EVENT_DISP $a, $1, $10 ; CELADON_HOUSE
+    EVENT_DISP $a, $1, $1 ; CELADON_MART_6
+
 
 CeladonMart4Blocks: ; 40
     INCBIN "maps/celadonmart4.blk"
@@ -13495,7 +15243,26 @@ CeladonMart5_h: ; 0x483c9 to 0x483d5 (12 bytes) (bank=12) (id=126)
 
     dw $45a8 ; objects
 
-INCBIN "baserom.gbc",$483d5,$485cc - $483d5
+INCBIN "baserom.gbc",$483d5,$485a8 - $483d5
+CeladonMart5Object: ; 0x485a8 (size=36)
+    db $42 ; border tile
+
+    db $1 ; warps
+    db $2, $f, $0, CELADON_HOUSE
+
+    db $4 ; signs
+    db $1, $a, $3 ; CeladonMart5Text3
+    db $1, $b, $4 ; CeladonMart5Text4
+    db $2, $c, $5 ; CeladonMart5Text5
+    db $2, $d, $6 ; CeladonMart5Text6
+
+    db $2 ; people
+    db SPRITE_BLACK_HAIR_BOY_2, $4 + 4, $a + 4, $ff, $d2, $1 ; person
+    db SPRITE_LITTLE_GIRL, $5 + 4, $5 + 4, $fe, $0, $2 ; person
+
+    ; warp-to
+    EVENT_DISP $a, $2, $f ; CELADON_HOUSE
+
 
 CeladonMart5Blocks: ; 40
     INCBIN "maps/celadonmart5.blk"
@@ -13508,7 +15275,23 @@ CeladonMart6_h: ; 0x485f4 to 0x48600 (12 bytes) (bank=12) (id=127)
 
     dw $466d ; objects
 
-INCBIN "baserom.gbc",$48600,$48684 - $48600
+INCBIN "baserom.gbc",$48600,$4866d - $48600
+CeladonMart6Object: ; 0x4866d (size=23)
+    db $f ; border tile
+
+    db $2 ; warps
+    db $3, $1, $5, CELADON_MART_1
+    db $3, $2, $5, CELADON_MART_1
+
+    db $1 ; signs
+    db $0, $3, $1 ; CeladonMart6Text1
+
+    db $0 ; people
+
+    ; warp-to
+    EVENT_DISP $2, $3, $1 ; CELADON_MART_1
+    EVENT_DISP $2, $3, $2 ; CELADON_MART_1
+
 
 CeladonMart6Blocks: ; 4
     INCBIN "maps/celadonmart6.blk"
@@ -13521,7 +15304,33 @@ CeladonMansion1_h: ; 0x48688 to 0x48694 (12 bytes) (bank=12) (id=128)
 
     dw $46cf ; objects
 
-INCBIN "baserom.gbc",$48694,$48716 - $48694
+INCBIN "baserom.gbc",$48694,$486cf - $48694
+CeladonMansion1Object: ; 0x486cf (size=71)
+    db $f ; border tile
+
+    db $5 ; warps
+    db $b, $4, $2, $ff
+    db $b, $5, $2, $ff
+    db $0, $4, $4, $ff
+    db $1, $7, $1, CELADON_MANSION_2
+    db $1, $2, $2, CELADON_MANSION_2
+
+    db $1 ; signs
+    db $9, $4, $5 ; CeladonMansion1Text5
+
+    db $4 ; people
+    db SPRITE_MACHOKE_SLOWBRO, $5 + 4, $0 + 4, $ff, $d3, $1 ; person
+    db SPRITE_OLD_MEDIUM_WOMAN, $5 + 4, $1 + 4, $ff, $d0, $2 ; person
+    db SPRITE_CLEFAIRYLIKE, $8 + 4, $1 + 4, $fe, $2, $3 ; person
+    db SPRITE_MACHOKE_SLOWBRO, $4 + 4, $4 + 4, $fe, $1, $4 ; person
+
+    ; warp-to
+    EVENT_DISP $4, $b, $4
+    EVENT_DISP $4, $b, $5
+    EVENT_DISP $4, $0, $4
+    EVENT_DISP $4, $1, $7 ; CELADON_MANSION_2
+    EVENT_DISP $4, $1, $2 ; CELADON_MANSION_2
+
 
 CeladonMansion1Blocks: ; 24
     INCBIN "maps/celadonmansion1.blk"
@@ -13534,7 +15343,27 @@ CeladonMansion2_h: ; 0x4872e to 0x4873a (12 bytes) (bank=12) (id=129)
 
     dw $4745 ; objects
 
-INCBIN "baserom.gbc",$4873a,$4876c - $4873a
+INCBIN "baserom.gbc",$4873a,$48745 - $4873a
+CeladonMansion2Object: ; 0x48745 (size=39)
+    db $f ; border tile
+
+    db $4 ; warps
+    db $1, $6, $0, CELADON_MANSION_3
+    db $1, $7, $3, CELADON_MANSION_1
+    db $1, $2, $4, CELADON_MANSION_1
+    db $1, $4, $3, CELADON_MANSION_3
+
+    db $1 ; signs
+    db $9, $4, $1 ; CeladonMansion2Text1
+
+    db $0 ; people
+
+    ; warp-to
+    EVENT_DISP $4, $1, $6 ; CELADON_MANSION_3
+    EVENT_DISP $4, $1, $7 ; CELADON_MANSION_1
+    EVENT_DISP $4, $1, $2 ; CELADON_MANSION_1
+    EVENT_DISP $4, $1, $4 ; CELADON_MANSION_3
+
 
 CeladonMansion2Blocks: ; 24
     INCBIN "maps/celadonmansion2.blk"
@@ -13547,7 +15376,34 @@ CeladonMansion3_h: ; 0x48784 to 0x48790 (12 bytes) (bank=12) (id=130)
 
     dw $47ff ; objects
 
-INCBIN "baserom.gbc",$48790,$48847 - $48790
+INCBIN "baserom.gbc",$48790,$487ff - $48790
+CeladonMansion3Object: ; 0x487ff (size=72)
+    db $f ; border tile
+
+    db $4 ; warps
+    db $1, $6, $0, CELADON_MANSION_2
+    db $1, $7, $0, CELADON_MANSION_4
+    db $1, $2, $1, CELADON_MANSION_4
+    db $1, $4, $3, CELADON_MANSION_2
+
+    db $4 ; signs
+    db $3, $1, $5 ; CeladonMansion3Text5
+    db $3, $4, $6 ; CeladonMansion3Text6
+    db $6, $1, $7 ; CeladonMansion3Text7
+    db $9, $4, $8 ; CeladonMansion3Text8
+
+    db $4 ; people
+    db SPRITE_SUNGLASSES_GUY, $4 + 4, $0 + 4, $ff, $d1, $1 ; person
+    db SPRITE_MART_GUY, $4 + 4, $3 + 4, $ff, $d1, $2 ; person
+    db SPRITE_BLACK_HAIR_BOY_2, $7 + 4, $0 + 4, $ff, $d1, $3 ; person
+    db SPRITE_LAPRAS_GIVER, $3 + 4, $2 + 4, $ff, $ff, $4 ; person
+
+    ; warp-to
+    EVENT_DISP $4, $1, $6 ; CELADON_MANSION_2
+    EVENT_DISP $4, $1, $7 ; CELADON_MANSION_4
+    EVENT_DISP $4, $1, $2 ; CELADON_MANSION_4
+    EVENT_DISP $4, $1, $4 ; CELADON_MANSION_2
+
 
 CeladonMansion3Blocks: ; 24
     INCBIN "maps/celadonmansion3.blk"
@@ -13560,7 +15416,25 @@ CeladonMansion4_h: ; 0x4885f to 0x4886b (12 bytes) (bank=12) (id=131)
 
     dw $4875 ; objects
 
-INCBIN "baserom.gbc",$4886b,$48894 - $4886b
+INCBIN "baserom.gbc",$4886b,$48875 - $4886b
+CeladonMansion4Object: ; 0x48875 (size=31)
+    db $9 ; border tile
+
+    db $3 ; warps
+    db $1, $6, $1, CELADON_MANSION_3
+    db $1, $2, $2, CELADON_MANSION_3
+    db $7, $2, $0, CELADON_MANSION_5
+
+    db $1 ; signs
+    db $7, $3, $1 ; CeladonMansion4Text1
+
+    db $0 ; people
+
+    ; warp-to
+    EVENT_DISP $4, $1, $6 ; CELADON_MANSION_3
+    EVENT_DISP $4, $1, $2 ; CELADON_MANSION_3
+    EVENT_DISP $4, $7, $2 ; CELADON_MANSION_5
+
 
 CeladonMansion4Blocks: ; 24
     INCBIN "maps/celadonmansion4.blk"
@@ -13573,7 +15447,26 @@ CeladonPokecenter_h: ; 0x488ac to 0x488b8 (12 bytes) (bank=12) (id=133)
 
     dw $48d2 ; objects
 
-INCBIN "baserom.gbc",$488B8,$488FE-$488B8
+INCBIN "baserom.gbc",$488b8,$488d2 - $488b8
+CeladonPokecenterObject: ; 0x488d2 (size=44)
+    db $0 ; border tile
+
+    db $2 ; warps
+    db $7, $3, $5, $ff
+    db $7, $4, $5, $ff
+
+    db $0 ; signs
+
+    db $4 ; people
+    db SPRITE_NURSE, $1 + 4, $3 + 4, $ff, $d0, $1 ; person
+    db SPRITE_GENTLEMAN, $3 + 4, $7 + 4, $fe, $2, $2 ; person
+    db SPRITE_FOULARD_WOMAN, $5 + 4, $a + 4, $fe, $0, $3 ; person
+    db SPRITE_CABLE_CLUB_WOMAN, $2 + 4, $b + 4, $ff, $d0, $4 ; person
+
+    ; warp-to
+    EVENT_DISP $7, $7, $3
+    EVENT_DISP $7, $7, $4
+
 
 CeladonGym_h: ; 0x488fe to 0x4890a (12 bytes) (bank=12) (id=134)
     db $07 ; tileset
@@ -13583,7 +15476,30 @@ CeladonGym_h: ; 0x488fe to 0x4890a (12 bytes) (bank=12) (id=134)
 
     dw $4b30 ; objects
 
-INCBIN "baserom.gbc",$4890a,$48b84 - $4890a
+INCBIN "baserom.gbc",$4890a,$48b30 - $4890a
+CeladonGymObject: ; 0x48b30 (size=84)
+    db $3 ; border tile
+
+    db $2 ; warps
+    db $11, $4, $6, $ff
+    db $11, $5, $6, $ff
+
+    db $0 ; signs
+
+    db $8 ; people
+    db SPRITE_ERIKA, $3 + 4, $4 + 4, $ff, $d0, $41, $ed, $1 ; trainer
+    db SPRITE_BLONDE_PONYTAIL_GIRL, $b + 4, $2 + 4, $ff, $d3, $42, $cb, $11 ; trainer
+    db SPRITE_FOULARD_WOMAN, $a + 4, $7 + 4, $ff, $d2, $43, $da, $1 ; trainer
+    db SPRITE_BLONDE_PONYTAIL_GIRL, $5 + 4, $9 + 4, $ff, $d0, $44, $ce, $b ; trainer
+    db SPRITE_FOULARD_WOMAN, $5 + 4, $1 + 4, $ff, $d0, $45, $da, $2 ; trainer
+    db SPRITE_BLONDE_PONYTAIL_GIRL, $3 + 4, $6 + 4, $ff, $d0, $46, $cb, $12 ; trainer
+    db SPRITE_FOULARD_WOMAN, $3 + 4, $3 + 4, $ff, $d0, $47, $da, $3 ; trainer
+    db SPRITE_BLONDE_PONYTAIL_GIRL, $3 + 4, $5 + 4, $ff, $d0, $48, $e8, $1 ; trainer
+
+    ; warp-to
+    EVENT_DISP $5, $11, $4
+    EVENT_DISP $5, $11, $5
+
 
 CeladonGymBlocks: ; 45
     INCBIN "maps/celadongym.blk"
@@ -13596,7 +15512,36 @@ CeladonGameCorner_h: ; 0x48bb1 to 0x48bbd (12 bytes) (bank=12) (id=135)
 
     dw $4fa0 ; objects
 
-INCBIN "baserom.gbc",$48bbd,$49003 - $48bbd
+INCBIN "baserom.gbc",$48bbd,$48fa0 - $48bbd
+CeladonGameCornerObject: ; 0x48fa0 (size=99)
+    db $f ; border tile
+
+    db $3 ; warps
+    db $11, $f, $7, $ff
+    db $11, $10, $7, $ff
+    db $4, $11, $1, ROCKET_HIDEOUT_1
+
+    db $1 ; signs
+    db $4, $9, $c ; CeladonGameCornerText12
+
+    db $b ; people
+    db SPRITE_FOULARD_WOMAN, $6 + 4, $2 + 4, $ff, $d0, $1 ; person
+    db SPRITE_MART_GUY, $6 + 4, $5 + 4, $ff, $d0, $2 ; person
+    db SPRITE_FAT_BALD_GUY, $a + 4, $2 + 4, $ff, $d2, $3 ; person
+    db SPRITE_FOULARD_WOMAN, $d + 4, $2 + 4, $ff, $d2, $4 ; person
+    db SPRITE_FISHER, $b + 4, $5 + 4, $ff, $d3, $5 ; person
+    db SPRITE_MOM_GEISHA, $b + 4, $8 + 4, $ff, $d2, $6 ; person
+    db SPRITE_GYM_HELPER, $e + 4, $8 + 4, $ff, $d2, $7 ; person
+    db SPRITE_MONK, $f + 4, $b + 4, $ff, $d3, $8 ; person
+    db SPRITE_MART_GUY, $b + 4, $e + 4, $ff, $d2, $9 ; person
+    db SPRITE_GENTLEMAN, $d + 4, $11 + 4, $ff, $d3, $a ; person
+    db SPRITE_ROCKET_GRUNT, $5 + 4, $9 + 4, $ff, $d1, $4b, $e6, $7 ; trainer
+
+    ; warp-to
+    EVENT_DISP $a, $11, $f
+    EVENT_DISP $a, $11, $10
+    EVENT_DISP $a, $4, $11 ; ROCKET_HIDEOUT_1
+
 
 CeladonGameCornerBlocks: ; 90
     INCBIN "maps/celadongamecorner.blk"
@@ -13609,7 +15554,29 @@ CeladonHouse_h: ; 0x4905d to 0x49069 (12 bytes) (bank=12) (id=136)
 
     dw $5085 ; objects
 
-INCBIN "baserom.gbc",$49069,$490bc - $49069
+INCBIN "baserom.gbc",$49069,$49085 - $49069
+CeladonHouseObject: ; 0x49085 (size=55)
+    db $f ; border tile
+
+    db $3 ; warps
+    db $1, $c, $0, CELADON_MART_5
+    db $1, $10, $1, CELADON_MART_4
+    db $1, $1, $0, CELADON_MART_6
+
+    db $1 ; signs
+    db $1, $e, $5 ; CeladonHouseText5
+
+    db $4 ; people
+    db SPRITE_GENTLEMAN, $5 + 4, $e + 4, $fe, $1, $1 ; person
+    db SPRITE_SAILOR, $6 + 4, $2 + 4, $ff, $ff, $2 ; person
+    db SPRITE_MART_GUY, $3 + 4, $5 + 4, $ff, $d0, $3 ; person
+    db SPRITE_MART_GUY, $3 + 4, $6 + 4, $ff, $d0, $4 ; person
+
+    ; warp-to
+    EVENT_DISP $a, $1, $c ; CELADON_MART_5
+    EVENT_DISP $a, $1, $10 ; CELADON_MART_4
+    EVENT_DISP $a, $1, $1 ; CELADON_MART_6
+
 
 CeladonHouseBlocks: ; 40
     INCBIN "maps/celadonhouse.blk"
@@ -13622,7 +15589,27 @@ CeladonPrizeRoom_h: ; 0x490e4 to 0x490f0 (12 bytes) (bank=12) (id=137)
 
     dw $5108 ; objects
 
-INCBIN "baserom.gbc",$490f0,$49131 - $490f0
+INCBIN "baserom.gbc",$490f0,$49108 - $490f0
+CeladonPrizeRoomObject: ; 0x49108 (size=41)
+    db $f ; border tile
+
+    db $2 ; warps
+    db $7, $4, $9, $ff
+    db $7, $5, $9, $ff
+
+    db $3 ; signs
+    db $2, $2, $3 ; CeladonPrizeRoomText3
+    db $2, $4, $4 ; CeladonPrizeRoomText4
+    db $2, $6, $5 ; CeladonPrizeRoomText5
+
+    db $2 ; people
+    db SPRITE_BALDING_GUY, $4 + 4, $1 + 4, $ff, $ff, $1 ; person
+    db SPRITE_MONK, $3 + 4, $7 + 4, $fe, $2, $2 ; person
+
+    ; warp-to
+    EVENT_DISP $5, $7, $4
+    EVENT_DISP $5, $7, $5
+
 
 CeladonPrizeRoomBlocks: ; 20
     INCBIN "maps/celadonprizeroom.blk"
@@ -13635,7 +15622,27 @@ CeladonDiner_h: ; 0x49145 to 0x49151 (12 bytes) (bank=12) (id=138)
 
     dw $51bc ; objects
 
-INCBIN "baserom.gbc",$49151,$491ee - $49151
+INCBIN "baserom.gbc",$49151,$491bc - $49151
+CeladonDinerObject: ; 0x491bc (size=50)
+    db $f ; border tile
+
+    db $2 ; warps
+    db $7, $3, $a, $ff
+    db $7, $4, $a, $ff
+
+    db $0 ; signs
+
+    db $5 ; people
+    db SPRITE_COOK, $5 + 4, $8 + 4, $fe, $2, $1 ; person
+    db SPRITE_MOM_GEISHA, $2 + 4, $7 + 4, $ff, $ff, $2 ; person
+    db SPRITE_FAT_BALD_GUY, $4 + 4, $1 + 4, $ff, $d0, $3 ; person
+    db SPRITE_FAT_MAN, $3 + 4, $5 + 4, $ff, $d3, $4 ; person
+    db SPRITE_GYM_HELPER, $1 + 4, $0 + 4, $ff, $d0, $5 ; person
+
+    ; warp-to
+    EVENT_DISP $5, $7, $3
+    EVENT_DISP $5, $7, $4
+
 
 CeladonDinerBlocks: ; 20
     INCBIN "maps/celadondiner.blk"
@@ -13648,7 +15655,25 @@ CeladonHouse2_h: ; 0x49202 to 0x4920e (12 bytes) (bank=12) (id=139)
 
     dw $5227 ; objects
 
-INCBIN "baserom.gbc",$4920e,$4924d - $4920e
+INCBIN "baserom.gbc",$4920e,$49227 - $4920e
+CeladonHouse2Object: ; 0x49227 (size=38)
+    db $f ; border tile
+
+    db $2 ; warps
+    db $7, $2, $b, $ff
+    db $7, $3, $b, $ff
+
+    db $0 ; signs
+
+    db $3 ; people
+    db SPRITE_OLD_PERSON, $2 + 4, $4 + 4, $ff, $d0, $1 ; person
+    db SPRITE_ROCKET_GRUNT, $4 + 4, $1 + 4, $fe, $0, $2 ; person
+    db SPRITE_SAILOR, $6 + 4, $5 + 4, $ff, $d2, $3 ; person
+
+    ; warp-to
+    EVENT_DISP $4, $7, $2
+    EVENT_DISP $4, $7, $3
+
 
 CeladonHouse2Blocks: ; 16
     INCBIN "maps/celadonhouse2.blk"
@@ -13661,7 +15686,25 @@ CeladonHotel_h: ; 0x4925d to 0x49269 (12 bytes) (bank=12) (id=140)
 
     dw $5281 ; objects
 
-INCBIN "baserom.gbc",$49269,$492a7 - $49269
+INCBIN "baserom.gbc",$49269,$49281 - $49269
+CeladonHotelObject: ; 0x49281 (size=38)
+    db $0 ; border tile
+
+    db $2 ; warps
+    db $7, $3, $c, $ff
+    db $7, $4, $c, $ff
+
+    db $0 ; signs
+
+    db $3 ; people
+    db SPRITE_OLD_MEDIUM_WOMAN, $1 + 4, $3 + 4, $ff, $d0, $1 ; person
+    db SPRITE_FOULARD_WOMAN, $4 + 4, $2 + 4, $ff, $ff, $2 ; person
+    db SPRITE_BLACK_HAIR_BOY_2, $4 + 4, $8 + 4, $fe, $2, $3 ; person
+
+    ; warp-to
+    EVENT_DISP $7, $7, $3
+    EVENT_DISP $7, $7, $4
+
 
 CeladonHotelBlocks: ; 28
     INCBIN "maps/celadonhotel.blk"
@@ -13674,7 +15717,28 @@ MtMoonPokecenter_h: ; 0x492c3 to 0x492cf (12 bytes) (bank=12) (id=68)
 
     dw $5376 ; objects
 
-INCBIN "baserom.gbc",$492cf,$493ae - $492cf
+INCBIN "baserom.gbc",$492cf,$49376 - $492cf
+MtMoonPokecenterObject: ; 0x49376 (size=56)
+    db $0 ; border tile
+
+    db $2 ; warps
+    db $7, $3, $0, $ff
+    db $7, $4, $0, $ff
+
+    db $0 ; signs
+
+    db $6 ; people
+    db SPRITE_NURSE, $1 + 4, $3 + 4, $ff, $d0, $1 ; person
+    db SPRITE_BLONDE_BOY, $3 + 4, $4 + 4, $ff, $d1, $2 ; person
+    db SPRITE_GENTLEMAN, $3 + 4, $7 + 4, $ff, $d1, $3 ; person
+    db SPRITE_FAT_BALD_GUY, $6 + 4, $a + 4, $fe, $2, $4 ; person
+    db SPRITE_CLIPBOARD, $2 + 4, $7 + 4, $ff, $ff, $5 ; person
+    db SPRITE_CABLE_CLUB_WOMAN, $2 + 4, $b + 4, $ff, $d0, $6 ; person
+
+    ; warp-to
+    EVENT_DISP $7, $7, $3
+    EVENT_DISP $7, $7, $4
+
 
 RockTunnelPokecenter_h: ; 0x493ae to 0x493ba (12 bytes) (id=81)
     db $06 ; tileset
@@ -13684,7 +15748,26 @@ RockTunnelPokecenter_h: ; 0x493ae to 0x493ba (12 bytes) (id=81)
 
     dw $53d4 ; objects
 
-INCBIN "baserom.gbc",$493ba,$49400 - $493ba
+INCBIN "baserom.gbc",$493ba,$493d4 - $493ba
+RockTunnelPokecenterObject: ; 0x493d4 (size=44)
+    db $0 ; border tile
+
+    db $2 ; warps
+    db $7, $3, $0, $ff
+    db $7, $4, $0, $ff
+
+    db $0 ; signs
+
+    db $4 ; people
+    db SPRITE_NURSE, $1 + 4, $3 + 4, $ff, $d0, $1 ; person
+    db SPRITE_GENTLEMAN, $3 + 4, $7 + 4, $fe, $2, $2 ; person
+    db SPRITE_FAT_MAN, $5 + 4, $2 + 4, $ff, $ff, $3 ; person
+    db SPRITE_CABLE_CLUB_WOMAN, $2 + 4, $b + 4, $ff, $d0, $4 ; person
+
+    ; warp-to
+    EVENT_DISP $7, $7, $3
+    EVENT_DISP $7, $7, $4
+
 
 Route11Gate_h: ; 0x49400 to 0x4940c (12 bytes) (id=84)
     db $0c ; tileset
@@ -13694,7 +15777,29 @@ Route11Gate_h: ; 0x49400 to 0x4940c (12 bytes) (id=84)
 
     dw $5416 ; objects
 
-INCBIN "baserom.gbc",$4940c,$49448 - $4940c
+INCBIN "baserom.gbc",$4940c,$49416 - $4940c
+Route11GateObject: ; 0x49416 (size=50)
+    db $a ; border tile
+
+    db $5 ; warps
+    db $4, $0, $0, $ff
+    db $5, $0, $1, $ff
+    db $4, $7, $2, $ff
+    db $5, $7, $3, $ff
+    db $8, $6, $0, ROUTE_11_GATE_2F
+
+    db $0 ; signs
+
+    db $1 ; people
+    db SPRITE_GUARD_COP, $1 + 4, $4 + 4, $ff, $ff, $1 ; person
+
+    ; warp-to
+    EVENT_DISP $4, $4, $0
+    EVENT_DISP $4, $5, $0
+    EVENT_DISP $4, $4, $7
+    EVENT_DISP $4, $5, $7
+    EVENT_DISP $4, $8, $6 ; ROUTE_11_GATE_2F
+
 
 Route11GateUpstairs_h: ; 0x49448 to 0x49454 (12 bytes) (id=86)
     db $0c ; tileset
@@ -13704,7 +15809,24 @@ Route11GateUpstairs_h: ; 0x49448 to 0x49454 (12 bytes) (id=86)
 
     dw $54da ; objects
 
-INCBIN "baserom.gbc",$49454,$494f8 - $49454
+INCBIN "baserom.gbc",$49454,$494da - $49454
+Route11GateUpstairsObject: ; 0x494da (size=30)
+    db $a ; border tile
+
+    db $1 ; warps
+    db $7, $7, $4, ROUTE_11_GATE_1F
+
+    db $2 ; signs
+    db $2, $1, $3 ; Route11GateUpstairsText3
+    db $2, $6, $4 ; Route11GateUpstairsText4
+
+    db $2 ; people
+    db SPRITE_BLONDE_BOY, $2 + 4, $4 + 4, $fe, $2, $1 ; person
+    db SPRITE_OAK_AIDE, $6 + 4, $2 + 4, $ff, $ff, $2 ; person
+
+    ; warp-to
+    EVENT_DISP $4, $7, $7 ; ROUTE_11_GATE_1F
+
 
 Route12Gate_h: ; 0x494f8 to 0x49504 (12 bytes) (id=87)
     db $0c ; tileset
@@ -13714,7 +15836,29 @@ Route12Gate_h: ; 0x494f8 to 0x49504 (12 bytes) (id=87)
 
     dw $550e ; objects
 
-INCBIN "baserom.gbc",$49504,$49540 - $49504
+INCBIN "baserom.gbc",$49504,$4950e - $49504
+Route12GateObject: ; 0x4950e (size=50)
+    db $a ; border tile
+
+    db $5 ; warps
+    db $0, $4, $0, $ff
+    db $0, $5, $1, $ff
+    db $7, $4, $2, $ff
+    db $7, $5, $2, $ff
+    db $6, $8, $0, ROUTE_12_GATE_2F
+
+    db $0 ; signs
+
+    db $1 ; people
+    db SPRITE_GUARD_COP, $3 + 4, $1 + 4, $ff, $ff, $1 ; person
+
+    ; warp-to
+    EVENT_DISP $5, $0, $4
+    EVENT_DISP $5, $0, $5
+    EVENT_DISP $5, $7, $4
+    EVENT_DISP $5, $7, $5
+    EVENT_DISP $5, $6, $8 ; ROUTE_12_GATE_2F
+
 
 Route12GateBlocks: ; 20
     INCBIN "maps/route12gate.blk"
@@ -13727,7 +15871,23 @@ Route12GateUpstairs_h: ; 0x49554 to 0x49560 (12 bytes) (id=195)
 
     dw $55de ; objects
 
-INCBIN "baserom.gbc",$49560,$495f6 - $49560
+INCBIN "baserom.gbc",$49560,$495de - $49560
+Route12GateUpstairsObject: ; 0x495de (size=24)
+    db $a ; border tile
+
+    db $1 ; warps
+    db $7, $7, $4, ROUTE_12_GATE
+
+    db $2 ; signs
+    db $2, $1, $2 ; Route12GateUpstairsText2
+    db $2, $6, $3 ; Route12GateUpstairsText3
+
+    db $1 ; people
+    db SPRITE_BRUNETTE_GIRL, $4 + 4, $3 + 4, $fe, $1, $1 ; person
+
+    ; warp-to
+    EVENT_DISP $4, $7, $7 ; ROUTE_12_GATE
+
 
 Route15Gate_h: ; 0x495f6 to 0x49602 (12 bytes) (id=184)
     db $0c ; tileset
@@ -13737,7 +15897,30 @@ Route15Gate_h: ; 0x495f6 to 0x49602 (12 bytes) (id=184)
 
     dw $560c ; objects
 
-INCBIN "baserom.gbc",$49602,$496b2 - $49602
+INCBIN "baserom.gbc",$49602,$4960c - $49602
+Route15GateObject: ; 0x4960c (size=50)
+    db $a ; border tile
+
+    db $5 ; warps
+    db $4, $0, $0, $ff
+    db $5, $0, $1, $ff
+    db $4, $7, $2, $ff
+    db $5, $7, $3, $ff
+    db $8, $6, $0, $b9
+
+    db $0 ; signs
+
+    db $1 ; people
+    db SPRITE_GUARD_COP, $1 + 4, $4 + 4, $ff, $ff, $1 ; person
+
+    ; warp-to
+    EVENT_DISP $4, $4, $0
+    EVENT_DISP $4, $5, $0
+    EVENT_DISP $4, $4, $7
+    EVENT_DISP $4, $5, $7
+    EVENT_DISP $4, $8, $6
+
+INCBIN "baserom.gbc",$4963e,$74
 
 Route16GateMap_h: ; 0x496b2 to 0x496be (12 bytes) (id=186)
     db $0c ; tileset
@@ -13747,7 +15930,38 @@ Route16GateMap_h: ; 0x496b2 to 0x496be (12 bytes) (id=186)
 
     dw $578b ; objects
 
-INCBIN "baserom.gbc",$496be,$497e3 - $496be
+INCBIN "baserom.gbc",$496be,$4978b - $496be
+Route16GateMapObject: ; 0x4978b (size=88)
+    db $a ; border tile
+
+    db $9 ; warps
+    db $8, $0, $0, $ff
+    db $9, $0, $1, $ff
+    db $8, $7, $2, $ff
+    db $9, $7, $2, $ff
+    db $2, $0, $4, $ff
+    db $3, $0, $5, $ff
+    db $2, $7, $6, $ff
+    db $3, $7, $7, $ff
+    db $c, $6, $0, ROUTE_16_GATE_2F
+
+    db $0 ; signs
+
+    db $2 ; people
+    db SPRITE_GUARD_COP, $5 + 4, $4 + 4, $ff, $d0, $1 ; person
+    db SPRITE_MONK, $3 + 4, $4 + 4, $ff, $ff, $2 ; person
+
+    ; warp-to
+    EVENT_DISP $4, $8, $0
+    EVENT_DISP $4, $9, $0
+    EVENT_DISP $4, $8, $7
+    EVENT_DISP $4, $9, $7
+    EVENT_DISP $4, $2, $0
+    EVENT_DISP $4, $3, $0
+    EVENT_DISP $4, $2, $7
+    EVENT_DISP $4, $3, $7
+    EVENT_DISP $4, $c, $6 ; ROUTE_16_GATE_2F
+
 
 Route16GateMapBlocks: ; 28
     INCBIN "maps/route16gatemap.blk"
@@ -13760,7 +15974,24 @@ Route16GateUpstairs_h: ; 0x497ff to 0x4980b (12 bytes) (id=187)
 
     dw $584c ; objects
 
-INCBIN "baserom.gbc",$4980b,$4986a - $4980b
+INCBIN "baserom.gbc",$4980b,$4984c - $4980b
+Route16GateUpstairsObject: ; 0x4984c (size=30)
+    db $a ; border tile
+
+    db $1 ; warps
+    db $7, $7, $8, ROUTE_16_GATE_1F
+
+    db $2 ; signs
+    db $2, $1, $3 ; Route16GateUpstairsText3
+    db $2, $6, $4 ; Route16GateUpstairsText4
+
+    db $2 ; people
+    db SPRITE_YOUNG_GIRL, $2 + 4, $4 + 4, $ff, $ff, $1 ; person
+    db SPRITE_LITTLE_GIRL, $5 + 4, $2 + 4, $fe, $2, $2 ; person
+
+    ; warp-to
+    EVENT_DISP $4, $7, $7 ; ROUTE_16_GATE_1F
+
 
 Route18Gate_h: ; 0x4986a to 0x49876 (12 bytes) (id=190)
     db $0c ; tileset
@@ -13770,7 +16001,29 @@ Route18Gate_h: ; 0x4986a to 0x49876 (12 bytes) (id=190)
 
     dw $5937 ; objects
 
-INCBIN "baserom.gbc",$49876,$49969 - $49876
+INCBIN "baserom.gbc",$49876,$49937 - $49876
+Route18GateObject: ; 0x49937 (size=50)
+    db $a ; border tile
+
+    db $5 ; warps
+    db $4, $0, $0, $ff
+    db $5, $0, $1, $ff
+    db $4, $7, $2, $ff
+    db $5, $7, $3, $ff
+    db $8, $6, $0, ROUTE_18_GATE_2F
+
+    db $0 ; signs
+
+    db $1 ; people
+    db SPRITE_GUARD_COP, $1 + 4, $4 + 4, $ff, $d0, $1 ; person
+
+    ; warp-to
+    EVENT_DISP $4, $4, $0
+    EVENT_DISP $4, $5, $0
+    EVENT_DISP $4, $4, $7
+    EVENT_DISP $4, $5, $7
+    EVENT_DISP $4, $8, $6 ; ROUTE_18_GATE_2F
+
 
 Route18GateHeader_h: ; 0x49969 to 0x49975 (12 bytes) (id=191)
     db $0c ; tileset
@@ -13780,7 +16033,23 @@ Route18GateHeader_h: ; 0x49969 to 0x49975 (12 bytes) (id=191)
 
     dw $59a4 ; objects
 
-INCBIN "baserom.gbc",$49975,$499bc - $49975
+INCBIN "baserom.gbc",$49975,$499a4 - $49975
+Route18GateHeaderObject: ; 0x499a4 (size=24)
+    db $a ; border tile
+
+    db $1 ; warps
+    db $7, $7, $4, ROUTE_18_GATE_1F
+
+    db $2 ; signs
+    db $2, $1, $2 ; Route18GateHeaderText2
+    db $2, $6, $3 ; Route18GateHeaderText3
+
+    db $1 ; people
+    db SPRITE_BLONDE_BOY, $2 + 4, $4 + 4, $fe, $2, $1 ; person
+
+    ; warp-to
+    EVENT_DISP $4, $7, $7 ; ROUTE_18_GATE_1F
+
 
 MtMoon1_h: ; 0x499bc to 0x499c8 (12 bytes) (id=59)
     db $11 ; tileset
@@ -13790,7 +16059,42 @@ MtMoon1_h: ; 0x499bc to 0x499c8 (12 bytes) (id=59)
 
     dw $5b06 ; objects
 
-INCBIN "baserom.gbc",$499c8,$49b97 - $499c8
+INCBIN "baserom.gbc",$499c8,$49b06 - $499c8
+MtMoon1Object: ; 0x49b06 (size=145)
+    db $3 ; border tile
+
+    db $5 ; warps
+    db $23, $e, $1, $ff
+    db $23, $f, $1, $ff
+    db $5, $5, $0, MT_MOON_2
+    db $b, $11, $2, MT_MOON_2
+    db $f, $19, $3, MT_MOON_2
+
+    db $1 ; signs
+    db $17, $f, $e ; MtMoon1Text14
+
+    db $d ; people
+    db SPRITE_HIKER, $6 + 4, $5 + 4, $ff, $d0, $41, $d1, $1 ; trainer
+    db SPRITE_BLONDE_BOY, $10 + 4, $c + 4, $ff, $d3, $42, $c9, $3 ; trainer
+    db SPRITE_BLONDE_PONYTAIL_GIRL, $4 + 4, $1e + 4, $ff, $d0, $43, $cb, $5 ; trainer
+    db SPRITE_BLACK_HAIR_BOY_2, $1f + 4, $18 + 4, $ff, $d1, $44, $d0, $1 ; trainer
+    db SPRITE_BLONDE_PONYTAIL_GIRL, $17 + 4, $10 + 4, $ff, $d0, $45, $cb, $6 ; trainer
+    db SPRITE_BLONDE_BOY, $16 + 4, $7 + 4, $ff, $d0, $46, $ca, $7 ; trainer
+    db SPRITE_BLONDE_BOY, $1b + 4, $1e + 4, $ff, $d3, $47, $ca, $8 ; trainer
+    db SPRITE_BALL, $14 + 4, $2 + 4, $ff, $ff, $88, $14 ; item
+    db SPRITE_BALL, $2 + 4, $2 + 4, $ff, $ff, $89, $a ; item
+    db SPRITE_BALL, $1f + 4, $23 + 4, $ff, $ff, $8a, $28 ; item
+    db SPRITE_BALL, $17 + 4, $24 + 4, $ff, $ff, $8b, $1d ; item
+    db SPRITE_BALL, $21 + 4, $14 + 4, $ff, $ff, $8c, $14 ; item
+    db SPRITE_BALL, $20 + 4, $5 + 4, $ff, $ff, $8d, $d4 ; item
+
+    ; warp-to
+    EVENT_DISP $14, $23, $e
+    EVENT_DISP $14, $23, $f
+    EVENT_DISP $14, $5, $5 ; MT_MOON_2
+    EVENT_DISP $14, $b, $11 ; MT_MOON_2
+    EVENT_DISP $14, $f, $19 ; MT_MOON_2
+
 
 MtMoon1Blocks: ; 360
     INCBIN "maps/mtmoon1.blk"
@@ -13803,7 +16107,35 @@ MtMoon3_h: ; 0x49cff to 0x49d0b (12 bytes) (id=61)
 
     dw $5fdb ; objects
 
-INCBIN "baserom.gbc",$49d0b,$4a041 - $49d0b
+INCBIN "baserom.gbc",$49d0b,$49fdb - $49d0b
+MtMoon3Object: ; 0x49fdb (size=102)
+    db $3 ; border tile
+
+    db $4 ; warps
+    db $9, $19, $1, MT_MOON_2
+    db $11, $15, $4, MT_MOON_2
+    db $1b, $f, $5, MT_MOON_2
+    db $7, $5, $6, MT_MOON_2
+
+    db $0 ; signs
+
+    db $9 ; people
+    db SPRITE_BLACK_HAIR_BOY_2, $8 + 4, $c + 4, $ff, $d3, $41, $d0, $2 ; trainer
+    db SPRITE_ROCKET_GRUNT, $10 + 4, $b + 4, $ff, $d0, $42, $e6, $1 ; trainer
+    db SPRITE_ROCKET_GRUNT, $16 + 4, $f + 4, $ff, $d0, $43, $e6, $2 ; trainer
+    db SPRITE_ROCKET_GRUNT, $b + 4, $1d + 4, $ff, $d1, $44, $e6, $3 ; trainer
+    db SPRITE_ROCKET_GRUNT, $11 + 4, $1d + 4, $ff, $d2, $45, $e6, $4 ; trainer
+    db SPRITE_OMANYTE, $6 + 4, $c + 4, $ff, $ff, $6 ; person
+    db SPRITE_OMANYTE, $6 + 4, $d + 4, $ff, $ff, $7 ; person
+    db SPRITE_BALL, $15 + 4, $19 + 4, $ff, $ff, $88, $23 ; item
+    db SPRITE_BALL, $5 + 4, $1d + 4, $ff, $ff, $89, $c9 ; item
+
+    ; warp-to
+    EVENT_DISP $14, $9, $19 ; MT_MOON_2
+    EVENT_DISP $14, $11, $15 ; MT_MOON_2
+    EVENT_DISP $14, $1b, $f ; MT_MOON_2
+    EVENT_DISP $14, $7, $5 ; MT_MOON_2
+
 
 MtMoon3Blocks: ; 360
     INCBIN "maps/mtmoon3.blk"
@@ -13816,7 +16148,42 @@ SafariZoneWest_h: ; 0x4a1a9 to 0x4a1b5 (12 bytes) (id=219)
 
     dw $61dc ; objects
 
-INCBIN "baserom.gbc",$4a1b5,$4a248 - $4a1b5
+INCBIN "baserom.gbc",$4a1b5,$4a1dc - $4a1b5
+SafariZoneWestObject: ; 0x4a1dc (size=108)
+    db $0 ; border tile
+
+    db $8 ; warps
+    db $0, $14, $0, SAFARI_ZONE_NORTH
+    db $0, $15, $1, SAFARI_ZONE_NORTH
+    db $0, $1a, $2, SAFARI_ZONE_NORTH
+    db $0, $1b, $3, SAFARI_ZONE_NORTH
+    db $16, $1d, $2, SAFARI_ZONE_CENTER
+    db $17, $1d, $3, SAFARI_ZONE_CENTER
+    db $3, $3, $0, SAFARI_ZONE_SECRET_HOUSE
+    db $b, $b, $0, SAFARI_ZONE_REST_HOUSE_2
+
+    db $4 ; signs
+    db $c, $c, $5 ; SafariZoneWestText5
+    db $3, $11, $6 ; SafariZoneWestText6
+    db $4, $1a, $7 ; SafariZoneWestText7
+    db $16, $18, $8 ; SafariZoneWestText8
+
+    db $4 ; people
+    db SPRITE_BALL, $14 + 4, $8 + 4, $ff, $ff, $81, $11 ; item
+    db SPRITE_BALL, $7 + 4, $9 + 4, $ff, $ff, $82, $e8 ; item
+    db SPRITE_BALL, $12 + 4, $12 + 4, $ff, $ff, $83, $36 ; item
+    db SPRITE_BALL, $7 + 4, $13 + 4, $ff, $ff, $84, $40 ; item
+
+    ; warp-to
+    EVENT_DISP $f, $0, $14 ; SAFARI_ZONE_NORTH
+    EVENT_DISP $f, $0, $15 ; SAFARI_ZONE_NORTH
+    EVENT_DISP $f, $0, $1a ; SAFARI_ZONE_NORTH
+    EVENT_DISP $f, $0, $1b ; SAFARI_ZONE_NORTH
+    EVENT_DISP $f, $16, $1d ; SAFARI_ZONE_CENTER
+    EVENT_DISP $f, $17, $1d ; SAFARI_ZONE_CENTER
+    EVENT_DISP $f, $3, $3 ; SAFARI_ZONE_SECRET_HOUSE
+    EVENT_DISP $f, $b, $b ; SAFARI_ZONE_REST_HOUSE_2
+
 
 SafariZoneWestBlocks: ; 195
     INCBIN "maps/safarizonewest.blk"
@@ -13829,7 +16196,23 @@ SafariZoneSecretHouse_h: ; 0x4a30b to 0x4a317 (12 bytes) (id=222)
 
     dw $6365 ; objects
 
-INCBIN "baserom.gbc",$4a317,$4a37f - $4a317
+INCBIN "baserom.gbc",$4a317,$4a365 - $4a317
+SafariZoneSecretHouseObject: ; 0x4a365 (size=26)
+    db $17 ; border tile
+
+    db $2 ; warps
+    db $7, $2, $6, SAFARI_ZONE_WEST
+    db $7, $3, $6, SAFARI_ZONE_WEST
+
+    db $0 ; signs
+
+    db $1 ; people
+    db SPRITE_FISHER, $3 + 4, $3 + 4, $ff, $d0, $1 ; person
+
+    ; warp-to
+    EVENT_DISP $4, $7, $2 ; SAFARI_ZONE_WEST
+    EVENT_DISP $4, $7, $3 ; SAFARI_ZONE_WEST
+
 
 SafariZoneSecretHouseBlocks: ; 16
     INCBIN "maps/safarizonesecrethouse.blk"
@@ -13938,7 +16321,17 @@ BattleCenterM_h: ; 0x4fd04 to 0x4fd10 (12 bytes) (id=239)
 
     dw $7d53 ; objects
 
-INCBIN "baserom.gbc",$4fd10,$4fd5d - $4fd10
+INCBIN "baserom.gbc",$4fd10,$4fd53 - $4fd10
+BattleCenterMObject: ; 0x4fd53 (size=10)
+    db $e ; border tile
+
+    db $0 ; warps
+
+    db $0 ; signs
+
+    db $1 ; people
+    db SPRITE_HIRO, $2 + 4, $2 + 4, $ff, $0, $1 ; person
+
 
 BattleCenterMBlocks: ; 20
     INCBIN "maps/battlecenterm.blk"
@@ -13951,7 +16344,17 @@ TradeCenterM_h: ; 0x4fd71 to 0x4fd7d (12 bytes) (id=240)
 
     dw $7d87 ; objects
 
-INCBIN "baserom.gbc",$4fd7d,$4fd91 - $4fd7d
+INCBIN "baserom.gbc",$4fd7d,$4fd87 - $4fd7d
+TradeCenterMObject: ; 0x4fd87 (size=10)
+    db $e ; border tile
+
+    db $0 ; warps
+
+    db $0 ; signs
+
+    db $1 ; people
+    db SPRITE_HIRO, $2 + 4, $2 + 4, $ff, $0, $1 ; person
+
 
 TradeCenterMBlocks: ; 20
     INCBIN "maps/tradecenterm.blk"
@@ -14143,7 +16546,23 @@ Route22_h: ; 0x50000 to 0x50022 (34 bytes) (id=33)
 
     dw $4022 ; objects
 
-INCBIN "baserom.gbc",$50022,$5003d - $50022
+Route22Object: ; 0x50022 (size=27)
+    db $2c ; border tile
+
+    db $1 ; warps
+    db $5, $8, $0, ROUTE_22_GATE
+
+    db $1 ; signs
+    db $b, $7, $3 ; Route22Text3
+
+    db $2 ; people
+    db SPRITE_RIVAL, $5 + 4, $19 + 4, $ff, $ff, $1 ; person
+    db SPRITE_RIVAL, $5 + 4, $19 + 4, $ff, $ff, $2 ; person
+
+    ; warp-to
+    EVENT_DISP $14, $5, $8 ; ROUTE_22_GATE
+
+INCBIN "baserom.gbc",$5003d,$0
 
 Route22Blocks: ; 180
     INCBIN "maps/route22.blk"
@@ -14172,7 +16591,34 @@ Route20_h: ; 0x500f1 to 0x50113 (34 bytes) (id=31)
 
     dw $4113 ; objects
 
-INCBIN "baserom.gbc",$50113,$5017d - $50113
+Route20Object: ; 0x50113 (size=106)
+    db $43 ; border tile
+
+    db $2 ; warps
+    db $5, $30, $0, SEAFOAM_ISLANDS_1
+    db $9, $3a, $2, SEAFOAM_ISLANDS_1
+
+    db $2 ; signs
+    db $7, $33, $b ; Route20Text11
+    db $b, $39, $c ; Route20Text12
+
+    db $a ; people
+    db SPRITE_SWIMMER, $8 + 4, $57 + 4, $ff, $d1, $41, $d7, $9 ; trainer
+    db SPRITE_SWIMMER, $b + 4, $44 + 4, $ff, $d1, $42, $da, $f ; trainer
+    db SPRITE_SWIMMER, $a + 4, $2d + 4, $ff, $d0, $43, $da, $6 ; trainer
+    db SPRITE_SWIMMER, $e + 4, $37 + 4, $ff, $d3, $44, $ce, $18 ; trainer
+    db SPRITE_SWIMMER, $d + 4, $26 + 4, $ff, $d0, $45, $d7, $a ; trainer
+    db SPRITE_SWIMMER, $d + 4, $57 + 4, $ff, $d1, $46, $d7, $b ; trainer
+    db SPRITE_BLACK_HAIR_BOY_1, $9 + 4, $22 + 4, $ff, $d1, $47, $df, $b ; trainer
+    db SPRITE_SWIMMER, $7 + 4, $19 + 4, $ff, $d1, $48, $da, $7 ; trainer
+    db SPRITE_SWIMMER, $c + 4, $18 + 4, $ff, $d0, $49, $ce, $10 ; trainer
+    db SPRITE_SWIMMER, $8 + 4, $f + 4, $ff, $d1, $4a, $da, $8 ; trainer
+
+    ; warp-to
+    EVENT_DISP $32, $5, $30 ; SEAFOAM_ISLANDS_1
+    EVENT_DISP $32, $9, $3a ; SEAFOAM_ISLANDS_1
+
+INCBIN "baserom.gbc",$5017d,$0
 
 Route20Blocks: ; 450
     INCBIN "maps/route20.blk"
@@ -14201,7 +16647,34 @@ Route23_h: ; 0x5033f to 0x50361 (34 bytes) (id=34)
 
     dw $4361 ; objects
 
-INCBIN "baserom.gbc",$50361,$503b2 - $50361
+Route23Object: ; 0x50361 (size=81)
+    db $f ; border tile
+
+    db $4 ; warps
+    db $8b, $7, $2, ROUTE_22_GATE
+    db $8b, $8, $3, ROUTE_22_GATE
+    db $1f, $4, $0, VICTORY_ROAD_1
+    db $1f, $e, $1, VICTORY_ROAD_2
+
+    db $1 ; signs
+    db $21, $3, $8 ; Route23Text8
+
+    db $7 ; people
+    db SPRITE_GUARD_COP, $23 + 4, $4 + 4, $ff, $d0, $1 ; person
+    db SPRITE_GUARD_COP, $38 + 4, $a + 4, $ff, $d0, $2 ; person
+    db SPRITE_SWIMMER, $55 + 4, $8 + 4, $ff, $d0, $3 ; person
+    db SPRITE_SWIMMER, $60 + 4, $b + 4, $ff, $d0, $4 ; person
+    db SPRITE_GUARD_COP, $69 + 4, $c + 4, $ff, $d0, $5 ; person
+    db SPRITE_GUARD_COP, $77 + 4, $8 + 4, $ff, $d0, $6 ; person
+    db SPRITE_GUARD_COP, $88 + 4, $8 + 4, $ff, $d0, $7 ; person
+
+    ; warp-to
+    EVENT_DISP $a, $8b, $7 ; ROUTE_22_GATE
+    EVENT_DISP $a, $8b, $8 ; ROUTE_22_GATE
+    EVENT_DISP $a, $1f, $4 ; VICTORY_ROAD_1
+    EVENT_DISP $a, $1f, $e ; VICTORY_ROAD_2
+
+INCBIN "baserom.gbc",$503b2,$0
 
 Route23Blocks: ; 720
     INCBIN "maps/route23.blk"
@@ -14230,7 +16703,24 @@ Route24_h: ; 0x50682 to 0x506a4 (34 bytes) (id=35)
 
     dw $46a4 ; objects
 
-INCBIN "baserom.gbc",$506a4,$506e7 - $506a4
+Route24Object: ; 0x506a4 (size=67)
+    db $2c ; border tile
+
+    db $0 ; warps
+
+    db $0 ; signs
+
+    db $8 ; people
+    db SPRITE_BLACK_HAIR_BOY_1, $f + 4, $b + 4, $ff, $d2, $41, $e6, $6 ; trainer
+    db SPRITE_BLACK_HAIR_BOY_1, $14 + 4, $5 + 4, $ff, $d1, $42, $cd, $2 ; trainer
+    db SPRITE_BLACK_HAIR_BOY_1, $13 + 4, $b + 4, $ff, $d2, $43, $cd, $3 ; trainer
+    db SPRITE_BLONDE_PONYTAIL_GIRL, $16 + 4, $a + 4, $ff, $d3, $44, $cb, $7 ; trainer
+    db SPRITE_BLONDE_BOY, $19 + 4, $b + 4, $ff, $d2, $45, $c9, $4 ; trainer
+    db SPRITE_BLONDE_PONYTAIL_GIRL, $1c + 4, $a + 4, $ff, $d3, $46, $cb, $8 ; trainer
+    db SPRITE_BLONDE_BOY, $1f + 4, $b + 4, $ff, $d2, $47, $ca, $9 ; trainer
+    db SPRITE_BALL, $5 + 4, $a + 4, $ff, $ff, $88, $f5 ; item
+
+INCBIN "baserom.gbc",$506e7,$0
 
 Route24Blocks: ; 180
     INCBIN "maps/route24.blk"
@@ -14253,7 +16743,31 @@ Route25_h: ; 0x5079b to 0x507b2 (23 bytes) (id=36)
 
     dw $47b2 ; objects
 
-INCBIN "baserom.gbc",$507b2,$50810 - $507b2
+Route25Object: ; 0x507b2 (size=94)
+    db $2c ; border tile
+
+    db $1 ; warps
+    db $3, $2d, $0, BILLS_HOUSE
+
+    db $1 ; signs
+    db $3, $2b, $b ; Route25Text11
+
+    db $a ; people
+    db SPRITE_BLONDE_BOY, $2 + 4, $e + 4, $ff, $d0, $41, $c9, $5 ; trainer
+    db SPRITE_BLONDE_BOY, $5 + 4, $12 + 4, $ff, $d1, $42, $c9, $6 ; trainer
+    db SPRITE_BLACK_HAIR_BOY_1, $4 + 4, $18 + 4, $ff, $d0, $43, $cd, $2 ; trainer
+    db SPRITE_BLONDE_PONYTAIL_GIRL, $8 + 4, $12 + 4, $ff, $d3, $44, $cb, $9 ; trainer
+    db SPRITE_BLONDE_BOY, $3 + 4, $20 + 4, $ff, $d2, $45, $c9, $7 ; trainer
+    db SPRITE_BLONDE_PONYTAIL_GIRL, $4 + 4, $25 + 4, $ff, $d0, $46, $cb, $a ; trainer
+    db SPRITE_HIKER, $4 + 4, $8 + 4, $ff, $d3, $47, $d1, $2 ; trainer
+    db SPRITE_HIKER, $9 + 4, $17 + 4, $ff, $d1, $48, $d1, $3 ; trainer
+    db SPRITE_HIKER, $7 + 4, $d + 4, $ff, $d3, $49, $d1, $4 ; trainer
+    db SPRITE_BALL, $2 + 4, $16 + 4, $ff, $ff, $8a, $db ; item
+
+    ; warp-to
+    EVENT_DISP $1e, $3, $2d ; BILLS_HOUSE
+
+INCBIN "baserom.gbc",$50810,$0
 
 Route25Blocks: ; 270
     INCBIN "maps/route25.blk"
@@ -14276,7 +16790,22 @@ IndigoPlateau_h: ; 0x5091e to 0x50935 (23 bytes) (id=9)
 
     dw $4936 ; objects
 
-INCBIN "baserom.gbc",$50935,$5094a - $50935
+INCBIN "baserom.gbc",$50935,$50936 - $50935
+IndigoPlateauObject: ; 0x50936 (size=20)
+    db $e ; border tile
+
+    db $2 ; warps
+    db $5, $9, $0, INDIGO_PLATEAU_LOBBY
+    db $5, $a, $0, INDIGO_PLATEAU_LOBBY
+
+    db $0 ; signs
+
+    db $0 ; people
+
+    ; warp-to
+    EVENT_DISP $a, $5, $9 ; INDIGO_PLATEAU_LOBBY
+    EVENT_DISP $a, $5, $a ; INDIGO_PLATEAU_LOBBY
+
 
 IndigoPlateauBlocks: ; 90
     INCBIN "maps/indigoplateau.blk"
@@ -14317,7 +16846,59 @@ SaffronCity_h: ; 0x509a4 to 0x509dc (56 bytes) (id=10)
 
     dw $49dc ; objects
 
-INCBIN "baserom.gbc",$509dc,$50a98 - $509dc
+SaffronCityObject: ; 0x509dc (size=188)
+    db $f ; border tile
+
+    db $8 ; warps
+    db $5, $7, $0, COPYCATS_HOUSE_1F
+    db $3, $1a, $0, FIGHTINGDOJO
+    db $3, $22, $0, SAFFRON_GYM
+    db $b, $d, $0, SAFFRON_HOUSE_1
+    db $b, $19, $0, SAFFRON_MART
+    db $15, $12, $0, SILPH_CO_1F
+    db $1d, $9, $0, SAFFRON_POKECENTER
+    db $1d, $1d, $0, SAFFRON_HOUSE_2
+
+    db $a ; signs
+    db $5, $11, $10 ; SaffronCityText16
+    db $5, $1b, $11 ; SaffronCityText17
+    db $5, $23, $12 ; SaffronCityText18
+    db $b, $1a, $13 ; SaffronCityText19
+    db $13, $27, $14 ; SaffronCityText20
+    db $15, $5, $15 ; SaffronCityText21
+    db $15, $f, $16 ; SaffronCityText22
+    db $1d, $a, $17 ; SaffronCityText23
+    db $1d, $1b, $18 ; SaffronCityText24
+    db $13, $1, $19 ; SaffronCityText25
+
+    db $f ; people
+    db SPRITE_ROCKET_GRUNT, $6 + 4, $7 + 4, $ff, $ff, $1 ; person
+    db SPRITE_ROCKET_GRUNT, $8 + 4, $14 + 4, $fe, $2, $2 ; person
+    db SPRITE_ROCKET_GRUNT, $4 + 4, $22 + 4, $ff, $ff, $3 ; person
+    db SPRITE_ROCKET_GRUNT, $c + 4, $d + 4, $ff, $ff, $4 ; person
+    db SPRITE_ROCKET_GRUNT, $19 + 4, $b + 4, $fe, $2, $5 ; person
+    db SPRITE_ROCKET_GRUNT, $d + 4, $20 + 4, $fe, $2, $6 ; person
+    db SPRITE_ROCKET_GRUNT, $1e + 4, $12 + 4, $fe, $2, $7 ; person
+    db SPRITE_OAK_AIDE, $e + 4, $8 + 4, $fe, $0, $8 ; person
+    db SPRITE_LAPRAS_GIVER, $17 + 4, $17 + 4, $ff, $ff, $9 ; person
+    db SPRITE_ERIKA, $1e + 4, $11 + 4, $fe, $2, $a ; person
+    db SPRITE_GENTLEMAN, $c + 4, $1e + 4, $ff, $d0, $b ; person
+    db SPRITE_BIRD, $c + 4, $1f + 4, $ff, $d0, $c ; person
+    db SPRITE_PUNK, $8 + 4, $12 + 4, $ff, $d1, $d ; person
+    db SPRITE_ROCKET_GRUNT, $16 + 4, $12 + 4, $ff, $d0, $e ; person
+    db SPRITE_ROCKET_GRUNT, $16 + 4, $13 + 4, $ff, $d0, $f ; person
+
+    ; warp-to
+    EVENT_DISP $14, $5, $7 ; COPYCATS_HOUSE_1F
+    EVENT_DISP $14, $3, $1a ; FIGHTINGDOJO
+    EVENT_DISP $14, $3, $22 ; SAFFRON_GYM
+    EVENT_DISP $14, $b, $d ; SAFFRON_HOUSE_1
+    EVENT_DISP $14, $b, $19 ; SAFFRON_MART
+    EVENT_DISP $14, $15, $12 ; SILPH_CO_1F
+    EVENT_DISP $14, $1d, $9 ; SAFFRON_POKECENTER
+    EVENT_DISP $14, $1d, $1d ; SAFFRON_HOUSE_2
+
+INCBIN "baserom.gbc",$50a98,$0
 
 SaffronCityBlocks: ; 360
     INCBIN "maps/saffroncity.blk"
@@ -14332,7 +16913,45 @@ VictoryRoad2_h: ; 0x51791 to 0x5179d (12 bytes) (id=194)
 
     dw $5915 ; objects
 
-INCBIN "baserom.gbc",$5179d,$519af - $5179d
+INCBIN "baserom.gbc",$5179d,$51915 - $5179d
+VictoryRoad2Object: ; 0x51915 (size=154)
+    db $7d ; border tile
+
+    db $7 ; warps
+    db $8, $0, $2, VICTORY_ROAD_1
+    db $7, $1d, $3, $ff
+    db $8, $1d, $3, $ff
+    db $7, $17, $0, VICTORY_ROAD_3
+    db $e, $19, $2, VICTORY_ROAD_3
+    db $7, $1b, $1, VICTORY_ROAD_3
+    db $1, $1, $3, VICTORY_ROAD_3
+
+    db $0 ; signs
+
+    db $d ; people
+    db SPRITE_HIKER, $9 + 4, $c + 4, $ff, $d2, $41, $e0, $9 ; trainer
+    db SPRITE_BLACK_HAIR_BOY_2, $d + 4, $15 + 4, $ff, $d2, $42, $dd, $2 ; trainer
+    db SPRITE_BLACK_HAIR_BOY_1, $8 + 4, $13 + 4, $ff, $d0, $43, $de, $5 ; trainer
+    db SPRITE_BLACK_HAIR_BOY_2, $2 + 4, $4 + 4, $ff, $d0, $44, $cf, $6 ; trainer
+    db SPRITE_BLACK_HAIR_BOY_2, $3 + 4, $1a + 4, $ff, $d2, $45, $dd, $5 ; trainer
+    db SPRITE_BIRD, $5 + 4, $b + 4, $ff, $d1, $46, $49, $32 ; trainer
+    db SPRITE_BALL, $5 + 4, $1b + 4, $ff, $ff, $87, $d9 ; item
+    db SPRITE_BALL, $9 + 4, $12 + 4, $ff, $ff, $88, $34 ; item
+    db SPRITE_BALL, $b + 4, $9 + 4, $ff, $ff, $89, $cd ; item
+    db SPRITE_BALL, $0 + 4, $b + 4, $ff, $ff, $8a, $37 ; item
+    db SPRITE_BOULDER, $e + 4, $4 + 4, $ff, $10, $b ; person
+    db SPRITE_BOULDER, $5 + 4, $5 + 4, $ff, $10, $c ; person
+    db SPRITE_BOULDER, $10 + 4, $17 + 4, $ff, $10, $d ; person
+
+    ; warp-to
+    EVENT_DISP $f, $8, $0 ; VICTORY_ROAD_1
+    EVENT_DISP $f, $7, $1d
+    EVENT_DISP $f, $8, $1d
+    EVENT_DISP $f, $7, $17 ; VICTORY_ROAD_3
+    EVENT_DISP $f, $e, $19 ; VICTORY_ROAD_3
+    EVENT_DISP $f, $7, $1b ; VICTORY_ROAD_3
+    EVENT_DISP $f, $1, $1 ; VICTORY_ROAD_3
+
 
 VictoryRoad2Blocks: ; 135
     INCBIN "maps/victoryroad2.blk"
@@ -14345,7 +16964,34 @@ MtMoon2_h: ; 0x51a36 to 0x51a42 (12 bytes) (id=60)
 
     dw $5a4d ; objects
 
-INCBIN "baserom.gbc",$51a42,$51a91 - $51a42
+INCBIN "baserom.gbc",$51a42,$51a4d - $51a42
+MtMoon2Object: ; 0x51a4d (size=68)
+    db $3 ; border tile
+
+    db $8 ; warps
+    db $5, $5, $2, MT_MOON_1
+    db $b, $11, $0, MT_MOON_3
+    db $9, $19, $3, MT_MOON_1
+    db $f, $19, $4, MT_MOON_1
+    db $11, $15, $1, MT_MOON_3
+    db $1b, $d, $2, MT_MOON_3
+    db $3, $17, $3, MT_MOON_3
+    db $3, $1b, $2, $ff
+
+    db $0 ; signs
+
+    db $0 ; people
+
+    ; warp-to
+    EVENT_DISP $e, $5, $5 ; MT_MOON_1
+    EVENT_DISP $e, $b, $11 ; MT_MOON_3
+    EVENT_DISP $e, $9, $19 ; MT_MOON_1
+    EVENT_DISP $e, $f, $19 ; MT_MOON_1
+    EVENT_DISP $e, $11, $15 ; MT_MOON_3
+    EVENT_DISP $e, $1b, $d ; MT_MOON_3
+    EVENT_DISP $e, $3, $17 ; MT_MOON_3
+    EVENT_DISP $e, $3, $1b
+
 
 MtMoon2Blocks: ; 196
     INCBIN "maps/mtmoon2.blk"
@@ -14358,7 +17004,41 @@ SilphCo7_h: ; 0x51b55 to 0x51b61 (12 bytes) (id=212)
 
     dw $5ed7 ; objects
 
-INCBIN "baserom.gbc",$51b61,$51f57 - $51b61
+INCBIN "baserom.gbc",$51b61,$51ed7 - $51b61
+SilphCo7Object: ; 0x51ed7 (size=128)
+    db $2e ; border tile
+
+    db $6 ; warps
+    db $0, $10, $1, SILPH_CO_8F
+    db $0, $16, $0, SILPH_CO_6F
+    db $0, $12, $0, SILPH_CO_ELEVATOR
+    db $7, $5, $3, SILPH_CO_11F
+    db $3, $5, $8, SILPH_CO_3F
+    db $f, $15, $3, SILPH_CO_5F
+
+    db $0 ; signs
+
+    db $b ; people
+    db SPRITE_LAPRAS_GIVER, $5 + 4, $1 + 4, $ff, $ff, $1 ; person
+    db SPRITE_LAPRAS_GIVER, $d + 4, $d + 4, $ff, $d1, $2 ; person
+    db SPRITE_LAPRAS_GIVER, $a + 4, $7 + 4, $ff, $ff, $3 ; person
+    db SPRITE_ERIKA, $8 + 4, $a + 4, $ff, $ff, $4 ; person
+    db SPRITE_ROCKET_GRUNT, $1 + 4, $d + 4, $ff, $d0, $45, $e6, $20 ; trainer
+    db SPRITE_OAK_AIDE, $d + 4, $2 + 4, $ff, $d0, $46, $e4, $8 ; trainer
+    db SPRITE_ROCKET_GRUNT, $2 + 4, $14 + 4, $ff, $d2, $47, $e6, $21 ; trainer
+    db SPRITE_ROCKET_GRUNT, $e + 4, $13 + 4, $ff, $d3, $48, $e6, $22 ; trainer
+    db SPRITE_RIVAL, $7 + 4, $3 + 4, $ff, $d1, $9 ; person
+    db SPRITE_BALL, $9 + 4, $1 + 4, $ff, $ff, $8a, $27 ; item
+    db SPRITE_BALL, $b + 4, $18 + 4, $ff, $ff, $8b, $cb ; item
+
+    ; warp-to
+    EVENT_DISP $d, $0, $10 ; SILPH_CO_8F
+    EVENT_DISP $d, $0, $16 ; SILPH_CO_6F
+    EVENT_DISP $d, $0, $12 ; SILPH_CO_ELEVATOR
+    EVENT_DISP $d, $7, $5 ; SILPH_CO_11F
+    EVENT_DISP $d, $3, $5 ; SILPH_CO_3F
+    EVENT_DISP $d, $f, $15 ; SILPH_CO_5F
+
 
 SilphCo7Blocks: ; 117
     INCBIN "maps/silphco7.blk"
@@ -14371,7 +17051,31 @@ Mansion2_h: ; 0x51fcc to 0x51fd8 (12 bytes) (id=214)
 
     dw $60d1 ; objects
 
-INCBIN "baserom.gbc",$51fd8,$521e2 - $51fd8
+INCBIN "baserom.gbc",$51fd8,$520d1 - $51fd8
+Mansion2Object: ; 0x520d1 (size=63)
+    db $1 ; border tile
+
+    db $4 ; warps
+    db $a, $5, $4, MANSION_1
+    db $a, $7, $0, MANSION_3
+    db $e, $19, $2, MANSION_3
+    db $1, $6, $1, MANSION_3
+
+    db $0 ; signs
+
+    db $4 ; people
+    db SPRITE_BLACK_HAIR_BOY_2, $11 + 4, $3 + 4, $fe, $2, $41, $d3, $7 ; trainer
+    db SPRITE_BALL, $7 + 4, $1c + 4, $ff, $ff, $82, $27 ; item
+    db SPRITE_BOOK_MAP_DEX, $2 + 4, $12 + 4, $ff, $ff, $3 ; person
+    db SPRITE_BOOK_MAP_DEX, $16 + 4, $3 + 4, $ff, $ff, $4 ; person
+
+    ; warp-to
+    EVENT_DISP $f, $a, $5 ; MANSION_1
+    EVENT_DISP $f, $a, $7 ; MANSION_3
+    EVENT_DISP $f, $e, $19 ; MANSION_3
+    EVENT_DISP $f, $1, $6 ; MANSION_3
+
+INCBIN "baserom.gbc",$52110,$d2
 
 Mansion3_h: ; 0x521e2 to 0x521ee (12 bytes) (id=215)
     db $16 ; tileset
@@ -14381,7 +17085,30 @@ Mansion3_h: ; 0x521e2 to 0x521ee (12 bytes) (id=215)
 
     dw $62e6 ; objects
 
-INCBIN "baserom.gbc",$521ee,$523ad - $521ee
+INCBIN "baserom.gbc",$521ee,$522e6 - $521ee
+Mansion3Object: ; 0x522e6 (size=64)
+    db $1 ; border tile
+
+    db $3 ; warps
+    db $a, $7, $1, MANSION_2
+    db $1, $6, $3, MANSION_2
+    db $e, $19, $2, MANSION_2
+
+    db $0 ; signs
+
+    db $5 ; people
+    db SPRITE_BLACK_HAIR_BOY_2, $b + 4, $5 + 4, $fe, $2, $41, $d3, $8 ; trainer
+    db SPRITE_OAK_AIDE, $b + 4, $14 + 4, $ff, $d2, $42, $e4, $c ; trainer
+    db SPRITE_BALL, $10 + 4, $1 + 4, $ff, $ff, $83, $11 ; item
+    db SPRITE_BALL, $5 + 4, $19 + 4, $ff, $ff, $84, $25 ; item
+    db SPRITE_BOOK_MAP_DEX, $c + 4, $6 + 4, $ff, $ff, $5 ; person
+
+    ; warp-to
+    EVENT_DISP $f, $a, $7 ; MANSION_2
+    EVENT_DISP $f, $1, $6 ; MANSION_2
+    EVENT_DISP $f, $e, $19 ; MANSION_2
+
+INCBIN "baserom.gbc",$52326,$87
 
 Mansion4_h: ; 0x523ad to 0x523b9 (12 bytes) (id=216)
     db $16 ; tileset
@@ -14391,11 +17118,61 @@ Mansion4_h: ; 0x523ad to 0x523b9 (12 bytes) (id=216)
 
     dw $6498 ; objects
 
-INCBIN "baserom.gbc",$523b9,$1c47
+INCBIN "baserom.gbc",$523b9,$52498 - $523b9
+Mansion4Object: ; 0x52498 (size=69)
+    db $1 ; border tile
+
+    db $1 ; warps
+    db $16, $17, $5, MANSION_1
+
+    db $0 ; signs
+
+    db $8 ; people
+    db SPRITE_BLACK_HAIR_BOY_2, $17 + 4, $10 + 4, $ff, $ff, $41, $d3, $9 ; trainer
+    db SPRITE_OAK_AIDE, $b + 4, $1b + 4, $ff, $d0, $42, $e4, $d ; trainer
+    db SPRITE_BALL, $2 + 4, $a + 4, $ff, $ff, $83, $28 ; item
+    db SPRITE_BALL, $16 + 4, $1 + 4, $ff, $ff, $84, $10 ; item
+    db SPRITE_BALL, $19 + 4, $13 + 4, $ff, $ff, $85, $d6 ; item
+    db SPRITE_BALL, $4 + 4, $5 + 4, $ff, $ff, $86, $de ; item
+    db SPRITE_BOOK_MAP_DEX, $14 + 4, $10 + 4, $ff, $ff, $7 ; person
+    db SPRITE_BALL, $d + 4, $5 + 4, $ff, $ff, $88, $2b ; item
+
+    ; warp-to
+    EVENT_DISP $f, $16, $17 ; MANSION_1
+
+INCBIN "baserom.gbc",$524dd,$1b23
 
 SECTION "bank15",DATA,BANK[$15]
 
-INCBIN "baserom.gbc",$54000,$5407e - $54000
+INCBIN "baserom.gbc",$54000,$54022 - $54000
+Route2Object: ; 0x54022 (size=72)
+    db $f ; border tile
+
+    db $6 ; warps
+    db $9, $c, $0, DIGLETTS_CAVE_EXIT
+    db $b, $3, $1, VIRIDIAN_FOREST_EXIT
+    db $13, $f, $0, ROUTE_2_HOUSE
+    db $23, $10, $1, ROUTE_2_GATE
+    db $27, $f, $2, ROUTE_2_GATE
+    db $2b, $3, $2, VIRIDIAN_FOREST_ENTRANCE
+
+    db $2 ; signs
+    db $41, $5, $3 ; Route2Text3
+    db $b, $b, $4 ; Route2Text4
+
+    db $2 ; people
+    db SPRITE_BALL, $36 + 4, $d + 4, $ff, $ff, $81, $a ; item
+    db SPRITE_BALL, $2d + 4, $d + 4, $ff, $ff, $82, $23 ; item
+
+    ; warp-to
+    EVENT_DISP $a, $9, $c ; DIGLETTS_CAVE_EXIT
+    EVENT_DISP $a, $b, $3 ; VIRIDIAN_FOREST_EXIT
+    EVENT_DISP $a, $13, $f ; ROUTE_2_HOUSE
+    EVENT_DISP $a, $23, $10 ; ROUTE_2_GATE
+    EVENT_DISP $a, $27, $f ; ROUTE_2_GATE
+    EVENT_DISP $a, $2b, $3 ; VIRIDIAN_FOREST_ENTRANCE
+
+INCBIN "baserom.gbc",$5406a,$14
 
 Route2Blocks: ; 360
     INCBIN "maps/route2.blk"
@@ -14424,7 +17201,26 @@ Route3_h: ; 0x541e6 to 0x54208 (34 bytes) (id=14)
 
     dw $4208 ; objects
 
-INCBIN "baserom.gbc",$54208,$54255 - $54208
+Route3Object: ; 0x54208 (size=77)
+    db $2c ; border tile
+
+    db $0 ; warps
+
+    db $1 ; signs
+    db $9, $3b, $a ; Route3Text10
+
+    db $9 ; people
+    db SPRITE_BLACK_HAIR_BOY_2, $b + 4, $39 + 4, $ff, $ff, $1 ; person
+    db SPRITE_BLONDE_BOY, $6 + 4, $a + 4, $ff, $d3, $42, $ca, $4 ; trainer
+    db SPRITE_BLONDE_BOY, $4 + 4, $e + 4, $ff, $d0, $43, $c9, $1 ; trainer
+    db SPRITE_BLONDE_PONYTAIL_GIRL, $9 + 4, $10 + 4, $ff, $d2, $44, $cb, $1 ; trainer
+    db SPRITE_BLONDE_BOY, $5 + 4, $13 + 4, $ff, $d0, $45, $ca, $5 ; trainer
+    db SPRITE_BLONDE_PONYTAIL_GIRL, $4 + 4, $17 + 4, $ff, $d2, $46, $cb, $2 ; trainer
+    db SPRITE_BLONDE_BOY, $9 + 4, $16 + 4, $ff, $d2, $47, $c9, $2 ; trainer
+    db SPRITE_BLONDE_BOY, $6 + 4, $18 + 4, $ff, $d3, $48, $ca, $6 ; trainer
+    db SPRITE_BLONDE_PONYTAIL_GIRL, $a + 4, $21 + 4, $ff, $d1, $49, $cb, $3 ; trainer
+
+INCBIN "baserom.gbc",$54255,$0
 
 Route3Blocks: ; 315
     INCBIN "maps/route3.blk"
@@ -14453,7 +17249,30 @@ Route4_h: ; 0x54390 to 0x543b2 (34 bytes) (id=15)
 
     dw $43b2 ; objects
 
-INCBIN "baserom.gbc",$543b2,$543ec - $543b2
+Route4Object: ; 0x543b2 (size=58)
+    db $2c ; border tile
+
+    db $3 ; warps
+    db $5, $b, $0, MT_MOON_POKECENTER
+    db $5, $12, $0, MT_MOON_1
+    db $5, $18, $7, MT_MOON_2
+
+    db $3 ; signs
+    db $5, $c, $4 ; Route4Text4
+    db $7, $11, $5 ; Route4Text5
+    db $7, $1b, $6 ; Route4Text6
+
+    db $3 ; people
+    db SPRITE_BLONDE_PONYTAIL_GIRL, $8 + 4, $9 + 4, $fe, $0, $1 ; person
+    db SPRITE_BLONDE_PONYTAIL_GIRL, $3 + 4, $3f + 4, $ff, $d3, $42, $cb, $4 ; trainer
+    db SPRITE_BALL, $3 + 4, $39 + 4, $ff, $ff, $83, $cc ; item
+
+    ; warp-to
+    EVENT_DISP $2d, $5, $b ; MT_MOON_POKECENTER
+    EVENT_DISP $2d, $5, $12 ; MT_MOON_1
+    EVENT_DISP $2d, $5, $18 ; MT_MOON_2
+
+INCBIN "baserom.gbc",$543ec,$0
 
 Route4Blocks: ; 405
     INCBIN "maps/route4.blk"
@@ -14482,7 +17301,29 @@ Route5_h: ; 0x54581 to 0x545a3 (34 bytes) (id=16)
 
     dw $45a3 ; objects
 
-INCBIN "baserom.gbc",$545a3,$545d2 - $545a3
+Route5Object: ; 0x545a3 (size=47)
+    db $a ; border tile
+
+    db $5 ; warps
+    db $1d, $a, $3, ROUTE_5_GATE
+    db $1d, $9, $2, ROUTE_5_GATE
+    db $21, $a, $0, ROUTE_5_GATE
+    db $1b, $11, $0, PATH_ENTRANCE_ROUTE_5
+    db $15, $a, $0, DAYCAREM
+
+    db $1 ; signs
+    db $1d, $11, $1 ; Route5Text1
+
+    db $0 ; people
+
+    ; warp-to
+    EVENT_DISP $a, $1d, $a ; ROUTE_5_GATE
+    EVENT_DISP $a, $1d, $9 ; ROUTE_5_GATE
+    EVENT_DISP $a, $21, $a ; ROUTE_5_GATE
+    EVENT_DISP $a, $1b, $11 ; PATH_ENTRANCE_ROUTE_5
+    EVENT_DISP $a, $15, $a ; DAYCAREM
+
+INCBIN "baserom.gbc",$545d2,$0
 
 Route5Blocks: ; 180
     INCBIN "maps/route5.blk"
@@ -14511,7 +17352,27 @@ Route9_h: ; 0x54686 to 0x546a8 (34 bytes) (id=20)
 
     dw $46a8 ; objects
 
-INCBIN "baserom.gbc",$546a8,$546fe - $546a8
+Route9Object: ; 0x546a8 (size=86)
+    db $2c ; border tile
+
+    db $0 ; warps
+
+    db $1 ; signs
+    db $7, $19, $b ; Route9Text11
+
+    db $a ; people
+    db SPRITE_BLONDE_PONYTAIL_GIRL, $a + 4, $d + 4, $ff, $d2, $41, $ce, $5 ; trainer
+    db SPRITE_BLACK_HAIR_BOY_1, $7 + 4, $18 + 4, $ff, $d2, $42, $cd, $7 ; trainer
+    db SPRITE_BLACK_HAIR_BOY_1, $7 + 4, $1f + 4, $ff, $d3, $43, $cd, $8 ; trainer
+    db SPRITE_BLONDE_PONYTAIL_GIRL, $8 + 4, $30 + 4, $ff, $d3, $44, $ce, $6 ; trainer
+    db SPRITE_HIKER, $f + 4, $10 + 4, $ff, $d2, $45, $d1, $b ; trainer
+    db SPRITE_HIKER, $3 + 4, $2b + 4, $ff, $d2, $46, $d1, $6 ; trainer
+    db SPRITE_BLONDE_BOY, $2 + 4, $16 + 4, $ff, $d0, $47, $ca, $d ; trainer
+    db SPRITE_HIKER, $f + 4, $2d + 4, $ff, $d3, $48, $d1, $5 ; trainer
+    db SPRITE_BLONDE_BOY, $8 + 4, $28 + 4, $ff, $d3, $49, $ca, $e ; trainer
+    db SPRITE_BALL, $f + 4, $a + 4, $ff, $ff, $8a, $e6 ; item
+
+INCBIN "baserom.gbc",$546fe,$0
 
 Route9Blocks: ; 270
     INCBIN "maps/route9.blk"
@@ -14540,7 +17401,29 @@ Route13_h: ; 0x5480c to 0x5482e (34 bytes) (id=24)
 
     dw $482e ; objects
 
-INCBIN "baserom.gbc",$5482e,$5488b - $5482e
+Route13Object: ; 0x5482e (size=93)
+    db $43 ; border tile
+
+    db $0 ; warps
+
+    db $3 ; signs
+    db $d, $f, $b ; Route13Text11
+    db $5, $21, $c ; Route13Text12
+    db $b, $1f, $d ; Route13Text13
+
+    db $a ; people
+    db SPRITE_BLACK_HAIR_BOY_1, $a + 4, $31 + 4, $ff, $d3, $41, $df, $1 ; trainer
+    db SPRITE_BLONDE_PONYTAIL_GIRL, $a + 4, $30 + 4, $ff, $d0, $42, $ce, $c ; trainer
+    db SPRITE_BLONDE_PONYTAIL_GIRL, $9 + 4, $1b + 4, $ff, $d0, $43, $ce, $d ; trainer
+    db SPRITE_BLONDE_PONYTAIL_GIRL, $a + 4, $17 + 4, $ff, $d2, $44, $ce, $e ; trainer
+    db SPRITE_BLONDE_PONYTAIL_GIRL, $5 + 4, $32 + 4, $ff, $d0, $45, $ce, $f ; trainer
+    db SPRITE_BLACK_HAIR_BOY_1, $4 + 4, $c + 4, $ff, $d3, $46, $df, $2 ; trainer
+    db SPRITE_FOULARD_WOMAN, $6 + 4, $21 + 4, $ff, $d0, $47, $da, $4 ; trainer
+    db SPRITE_FOULARD_WOMAN, $6 + 4, $20 + 4, $ff, $d0, $48, $da, $5 ; trainer
+    db SPRITE_BIKER, $7 + 4, $a + 4, $ff, $d1, $49, $d2, $1 ; trainer
+    db SPRITE_BLACK_HAIR_BOY_1, $d + 4, $7 + 4, $ff, $d1, $4a, $df, $3 ; trainer
+
+INCBIN "baserom.gbc",$5488b,$0
 
 Route13Blocks: ; 270
     INCBIN "maps/route13.blk"
@@ -14569,7 +17452,27 @@ Route14_h: ; 0x54999 to 0x549bb (34 bytes) (id=25)
 
     dw $49bb ; objects
 
-INCBIN "baserom.gbc",$549bb,$54a12 - $549bb
+Route14Object: ; 0x549bb (size=87)
+    db $43 ; border tile
+
+    db $0 ; warps
+
+    db $1 ; signs
+    db $d, $11, $b ; Route14Text11
+
+    db $a ; people
+    db SPRITE_BLACK_HAIR_BOY_1, $4 + 4, $4 + 4, $ff, $d0, $41, $df, $e ; trainer
+    db SPRITE_BLACK_HAIR_BOY_1, $6 + 4, $f + 4, $ff, $d0, $42, $df, $f ; trainer
+    db SPRITE_BLACK_HAIR_BOY_1, $b + 4, $c + 4, $ff, $d0, $43, $df, $10 ; trainer
+    db SPRITE_BLACK_HAIR_BOY_1, $f + 4, $e + 4, $ff, $d1, $44, $df, $11 ; trainer
+    db SPRITE_BLACK_HAIR_BOY_1, $1f + 4, $f + 4, $ff, $d2, $45, $df, $4 ; trainer
+    db SPRITE_BLACK_HAIR_BOY_1, $31 + 4, $6 + 4, $ff, $d1, $46, $df, $5 ; trainer
+    db SPRITE_BIKER, $27 + 4, $5 + 4, $ff, $d0, $47, $d2, $d ; trainer
+    db SPRITE_BIKER, $1e + 4, $4 + 4, $ff, $d3, $48, $d2, $e ; trainer
+    db SPRITE_BIKER, $1e + 4, $f + 4, $ff, $d2, $49, $d2, $f ; trainer
+    db SPRITE_BIKER, $1f + 4, $4 + 4, $ff, $d3, $4a, $d2, $2 ; trainer
+
+INCBIN "baserom.gbc",$54a12,$0
 
 Route14Blocks: ; 270
     INCBIN "maps/route14.blk"
@@ -14598,7 +17501,32 @@ Route17_h: ; 0x54b20 to 0x54b42 (34 bytes) (id=28)
 
     dw $4b42 ; objects
 
-INCBIN "baserom.gbc",$54b42,$54ba8 - $54b42
+Route17Object: ; 0x54b42 (size=102)
+    db $43 ; border tile
+
+    db $0 ; warps
+
+    db $6 ; signs
+    db $33, $9, $b ; Route17Text11
+    db $3f, $9, $c ; Route17Text12
+    db $4b, $9, $d ; Route17Text13
+    db $57, $9, $e ; Route17Text14
+    db $6f, $9, $f ; Route17Text15
+    db $8d, $9, $10 ; Route17Text16
+
+    db $a ; people
+    db SPRITE_BIKER, $13 + 4, $c + 4, $ff, $d2, $41, $d8, $4 ; trainer
+    db SPRITE_BIKER, $10 + 4, $b + 4, $ff, $d3, $42, $d8, $5 ; trainer
+    db SPRITE_BIKER, $12 + 4, $4 + 4, $ff, $d1, $43, $d2, $8 ; trainer
+    db SPRITE_BIKER, $20 + 4, $7 + 4, $ff, $d2, $44, $d2, $9 ; trainer
+    db SPRITE_BIKER, $22 + 4, $e + 4, $ff, $d3, $45, $d2, $a ; trainer
+    db SPRITE_BIKER, $3a + 4, $11 + 4, $ff, $d2, $46, $d8, $6 ; trainer
+    db SPRITE_BIKER, $44 + 4, $2 + 4, $ff, $d3, $47, $d8, $7 ; trainer
+    db SPRITE_BIKER, $62 + 4, $e + 4, $ff, $d3, $48, $d8, $8 ; trainer
+    db SPRITE_BIKER, $62 + 4, $5 + 4, $ff, $d2, $49, $d2, $b ; trainer
+    db SPRITE_BIKER, $76 + 4, $a + 4, $ff, $d0, $4a, $d2, $c ; trainer
+
+INCBIN "baserom.gbc",$54ba8,$0
 
 Route17Blocks: ; 720
     INCBIN "maps/route17.blk"
@@ -14627,7 +17555,27 @@ Route19_h: ; 0x54e78 to 0x54e9a (34 bytes) (id=30)
 
     dw $4e9a ; objects
 
-INCBIN "baserom.gbc",$54e9a,$54ef1 - $54e9a
+Route19Object: ; 0x54e9a (size=87)
+    db $43 ; border tile
+
+    db $0 ; warps
+
+    db $1 ; signs
+    db $9, $b, $b ; Route19Text11
+
+    db $a ; people
+    db SPRITE_BLACK_HAIR_BOY_1, $7 + 4, $8 + 4, $ff, $d2, $41, $d7, $2 ; trainer
+    db SPRITE_BLACK_HAIR_BOY_1, $7 + 4, $d + 4, $ff, $d2, $42, $d7, $3 ; trainer
+    db SPRITE_SWIMMER, $19 + 4, $d + 4, $ff, $d2, $43, $d7, $4 ; trainer
+    db SPRITE_SWIMMER, $1b + 4, $4 + 4, $ff, $d3, $44, $d7, $5 ; trainer
+    db SPRITE_SWIMMER, $1f + 4, $10 + 4, $ff, $d1, $45, $d7, $6 ; trainer
+    db SPRITE_SWIMMER, $b + 4, $9 + 4, $ff, $d0, $46, $d7, $7 ; trainer
+    db SPRITE_SWIMMER, $2b + 4, $8 + 4, $ff, $d2, $47, $da, $c ; trainer
+    db SPRITE_SWIMMER, $2b + 4, $b + 4, $ff, $d3, $48, $da, $d ; trainer
+    db SPRITE_SWIMMER, $2a + 4, $9 + 4, $ff, $d1, $49, $d7, $8 ; trainer
+    db SPRITE_SWIMMER, $2c + 4, $a + 4, $ff, $d0, $4a, $da, $e ; trainer
+
+INCBIN "baserom.gbc",$54ef1,$0
 
 Route19Blocks: ; 270
     INCBIN "maps/route19.blk"
@@ -14656,7 +17604,25 @@ Route21_h: ; 0x54fff to 0x55021 (34 bytes) (id=32)
 
     dw $5021 ; objects
 
-INCBIN "baserom.gbc",$55021,$5506d - $55021
+Route21Object: ; 0x55021 (size=76)
+    db $43 ; border tile
+
+    db $0 ; warps
+
+    db $0 ; signs
+
+    db $9 ; people
+    db SPRITE_FAT_MAN, $18 + 4, $4 + 4, $ff, $d2, $41, $d6, $7 ; trainer
+    db SPRITE_FAT_MAN, $19 + 4, $6 + 4, $ff, $d0, $42, $d6, $9 ; trainer
+    db SPRITE_SWIMMER, $1f + 4, $a + 4, $ff, $d1, $43, $d7, $c ; trainer
+    db SPRITE_SWIMMER, $1e + 4, $c + 4, $ff, $d3, $44, $d8, $9 ; trainer
+    db SPRITE_SWIMMER, $3f + 4, $10 + 4, $ff, $d0, $45, $d7, $d ; trainer
+    db SPRITE_SWIMMER, $47 + 4, $5 + 4, $ff, $d3, $46, $d7, $e ; trainer
+    db SPRITE_SWIMMER, $47 + 4, $f + 4, $ff, $d2, $47, $d7, $f ; trainer
+    db SPRITE_FAT_MAN, $38 + 4, $e + 4, $ff, $d2, $48, $d6, $8 ; trainer
+    db SPRITE_FAT_MAN, $39 + 4, $11 + 4, $ff, $d3, $49, $d6, $a ; trainer
+
+INCBIN "baserom.gbc",$5506d,$0
 
 Route21Blocks: ; 450
     INCBIN "maps/route21.blk"
@@ -14677,7 +17643,23 @@ VermilionHouse2_h: ; 0x56064 to 0x56070 (12 bytes) (id=163)
 
     dw $60cf ; objects
 
-INCBIN "baserom.gbc",$56070,$560e9 - $56070
+INCBIN "baserom.gbc",$56070,$560cf - $56070
+VermilionHouse2Object: ; 0x560cf (size=26)
+    db $a ; border tile
+
+    db $2 ; warps
+    db $7, $2, $8, $ff
+    db $7, $3, $8, $ff
+
+    db $0 ; signs
+
+    db $1 ; people
+    db SPRITE_FISHER, $4 + 4, $2 + 4, $ff, $d3, $1 ; person
+
+    ; warp-to
+    EVENT_DISP $4, $7, $2
+    EVENT_DISP $4, $7, $3
+
 
 CeladonMart2_h: ; 0x560e9 to 0x560f5 (12 bytes) (id=123)
     db $12 ; tileset
@@ -14687,7 +17669,29 @@ CeladonMart2_h: ; 0x560e9 to 0x560f5 (12 bytes) (id=123)
 
     dw $6111 ; objects
 
-INCBIN "baserom.gbc",$560f5,$56148 - $560f5
+INCBIN "baserom.gbc",$560f5,$56111 - $560f5
+CeladonMart2Object: ; 0x56111 (size=55)
+    db $f ; border tile
+
+    db $3 ; warps
+    db $1, $c, $4, CELADON_MART_1
+    db $1, $10, $1, CELADON_MART_3
+    db $1, $1, $0, CELADON_MART_6
+
+    db $1 ; signs
+    db $1, $e, $5 ; CeladonMart2Text5
+
+    db $4 ; people
+    db SPRITE_MART_GUY, $3 + 4, $5 + 4, $ff, $d0, $1 ; person
+    db SPRITE_MART_GUY, $3 + 4, $6 + 4, $ff, $d0, $2 ; person
+    db SPRITE_FAT_BALD_GUY, $5 + 4, $13 + 4, $ff, $ff, $3 ; person
+    db SPRITE_GIRL, $4 + 4, $e + 4, $fe, $1, $4 ; person
+
+    ; warp-to
+    EVENT_DISP $a, $1, $c ; CELADON_MART_1
+    EVENT_DISP $a, $1, $10 ; CELADON_MART_3
+    EVENT_DISP $a, $1, $1 ; CELADON_MART_6
+
 
 CeladonMart2Blocks: ; 40
     INCBIN "maps/celadonmart2.blk"
@@ -14700,7 +17704,25 @@ FuchsiaHouse3_h: ; 0x56170 to 0x5617c (12 bytes) (id=164)
 
     dw $6221 ; objects
 
-INCBIN "baserom.gbc",$5617c,$56243 - $5617c
+INCBIN "baserom.gbc",$5617c,$56221 - $5617c
+FuchsiaHouse3Object: ; 0x56221 (size=34)
+    db $c ; border tile
+
+    db $3 ; warps
+    db $0, $2, $8, $ff
+    db $7, $2, $7, $ff
+    db $7, $3, $7, $ff
+
+    db $0 ; signs
+
+    db $1 ; people
+    db SPRITE_FISHER, $3 + 4, $5 + 4, $ff, $d3, $1 ; person
+
+    ; warp-to
+    EVENT_DISP $4, $0, $2
+    EVENT_DISP $4, $7, $2
+    EVENT_DISP $4, $7, $3
+
 
 DayCareM_h: ; 0x56243 to 0x5624f (12 bytes) (id=72)
     db $08 ; tileset
@@ -14710,7 +17732,23 @@ DayCareM_h: ; 0x56243 to 0x5624f (12 bytes) (id=72)
 
     dw $6459 ; objects
 
-INCBIN "baserom.gbc",$5624f,$56473 - $5624f
+INCBIN "baserom.gbc",$5624f,$56459 - $5624f
+DayCareMObject: ; 0x56459 (size=26)
+    db $a ; border tile
+
+    db $2 ; warps
+    db $7, $2, $4, $ff
+    db $7, $3, $4, $ff
+
+    db $0 ; signs
+
+    db $1 ; people
+    db SPRITE_GENTLEMAN, $3 + 4, $2 + 4, $ff, $d3, $1 ; person
+
+    ; warp-to
+    EVENT_DISP $4, $7, $2
+    EVENT_DISP $4, $7, $3
+
 
 Route12House_h: ; 0x56473 to 0x5647f (12 bytes) (id=189)
     db $08 ; tileset
@@ -14720,7 +17758,23 @@ Route12House_h: ; 0x56473 to 0x5647f (12 bytes) (id=189)
 
     dw $64de ; objects
 
-INCBIN "baserom.gbc",$5647f,$564f8 - $5647f
+INCBIN "baserom.gbc",$5647f,$564de - $5647f
+Route12HouseObject: ; 0x564de (size=26)
+    db $a ; border tile
+
+    db $2 ; warps
+    db $7, $2, $3, $ff
+    db $7, $3, $3, $ff
+
+    db $0 ; signs
+
+    db $1 ; people
+    db SPRITE_FISHER, $4 + 4, $2 + 4, $ff, $d3, $1 ; person
+
+    ; warp-to
+    EVENT_DISP $4, $7, $2
+    EVENT_DISP $4, $7, $3
+
 
 SilphCo8_h: ; 0x564f8 to 0x56504 (12 bytes) (id=213)
     db $16 ; tileset
@@ -14730,7 +17784,36 @@ SilphCo8_h: ; 0x564f8 to 0x56504 (12 bytes) (id=213)
 
     dw $6613 ; objects
 
-INCBIN "baserom.gbc",$56504,$5666d - $56504
+INCBIN "baserom.gbc",$56504,$56613 - $56504
+SilphCo8Object: ; 0x56613 (size=90)
+    db $2e ; border tile
+
+    db $7 ; warps
+    db $0, $10, $1, SILPH_CO_9F
+    db $0, $e, $0, SILPH_CO_7F
+    db $0, $12, $0, SILPH_CO_ELEVATOR
+    db $b, $3, $6, SILPH_CO_8F
+    db $f, $3, $4, SILPH_CO_2F
+    db $5, $b, $5, SILPH_CO_2F
+    db $9, $b, $3, SILPH_CO_8F
+
+    db $0 ; signs
+
+    db $4 ; people
+    db SPRITE_LAPRAS_GIVER, $2 + 4, $4 + 4, $ff, $ff, $1 ; person
+    db SPRITE_ROCKET_GRUNT, $2 + 4, $13 + 4, $ff, $d2, $42, $e6, $23 ; trainer
+    db SPRITE_OAK_AIDE, $2 + 4, $a + 4, $ff, $d0, $43, $e4, $9 ; trainer
+    db SPRITE_ROCKET_GRUNT, $f + 4, $c + 4, $ff, $d3, $44, $e6, $24 ; trainer
+
+    ; warp-to
+    EVENT_DISP $d, $0, $10 ; SILPH_CO_9F
+    EVENT_DISP $d, $0, $e ; SILPH_CO_7F
+    EVENT_DISP $d, $0, $12 ; SILPH_CO_ELEVATOR
+    EVENT_DISP $d, $b, $3 ; SILPH_CO_8F
+    EVENT_DISP $d, $f, $3 ; SILPH_CO_2F
+    EVENT_DISP $d, $5, $b ; SILPH_CO_2F
+    EVENT_DISP $d, $9, $b ; SILPH_CO_8F
+
 
 SilphCo8Blocks: ; 117
     INCBIN "maps/silphco8.blk"
@@ -14762,7 +17845,33 @@ Route6_h: ; 0x58000 to 0x58022 (34 bytes) (id=17)
 
     dw $4022 ; objects
 
-INCBIN "baserom.gbc",$58022,$58079 - $58022
+Route6Object: ; 0x58022 (size=87)
+    db $f ; border tile
+
+    db $4 ; warps
+    db $1, $9, $2, ROUTE_6_GATE
+    db $1, $a, $2, ROUTE_6_GATE
+    db $7, $a, $0, ROUTE_6_GATE
+    db $d, $11, $0, PATH_ENTRANCE_ROUTE_6
+
+    db $1 ; signs
+    db $f, $13, $7 ; Route6Text7
+
+    db $6 ; people
+    db SPRITE_BLACK_HAIR_BOY_1, $15 + 4, $a + 4, $ff, $d3, $41, $cd, $4 ; trainer
+    db SPRITE_BLONDE_PONYTAIL_GIRL, $15 + 4, $b + 4, $ff, $d2, $42, $ce, $2 ; trainer
+    db SPRITE_BLONDE_BOY, $f + 4, $0 + 4, $ff, $d3, $43, $ca, $a ; trainer
+    db SPRITE_BLACK_HAIR_BOY_1, $1f + 4, $b + 4, $ff, $d2, $44, $cd, $5 ; trainer
+    db SPRITE_BLONDE_PONYTAIL_GIRL, $1e + 4, $b + 4, $ff, $d2, $45, $ce, $3 ; trainer
+    db SPRITE_BLONDE_BOY, $1a + 4, $13 + 4, $ff, $d2, $46, $ca, $b ; trainer
+
+    ; warp-to
+    EVENT_DISP $a, $1, $9 ; ROUTE_6_GATE
+    EVENT_DISP $a, $1, $a ; ROUTE_6_GATE
+    EVENT_DISP $a, $7, $a ; ROUTE_6_GATE
+    EVENT_DISP $a, $d, $11 ; PATH_ENTRANCE_ROUTE_6
+
+INCBIN "baserom.gbc",$58079,$0
 
 Route6Blocks: ; 180
     INCBIN "maps/route6.blk"
@@ -14791,7 +17900,38 @@ Route8_h: ; 0x5812d to 0x5814f (34 bytes) (id=19)
 
     dw $414f ; objects
 
-INCBIN "baserom.gbc",$5814f,$581c6 - $5814f
+Route8Object: ; 0x5814f (size=119)
+    db $2c ; border tile
+
+    db $5 ; warps
+    db $9, $1, $0, ROUTE_8_GATE
+    db $a, $1, $1, ROUTE_8_GATE
+    db $9, $8, $2, ROUTE_8_GATE
+    db $a, $8, $3, ROUTE_8_GATE
+    db $3, $d, $0, PATH_ENTRANCE_ROUTE_8
+
+    db $1 ; signs
+    db $3, $11, $a ; Route8Text10
+
+    db $9 ; people
+    db SPRITE_BLACK_HAIR_BOY_2, $5 + 4, $8 + 4, $ff, $d3, $41, $d0, $3 ; trainer
+    db SPRITE_MONK, $9 + 4, $d + 4, $ff, $d1, $42, $d9, $5 ; trainer
+    db SPRITE_BLACK_HAIR_BOY_2, $6 + 4, $2a + 4, $ff, $d1, $43, $d0, $4 ; trainer
+    db SPRITE_BLONDE_PONYTAIL_GIRL, $3 + 4, $1a + 4, $ff, $d2, $44, $cb, $d ; trainer
+    db SPRITE_BLACK_HAIR_BOY_2, $4 + 4, $1a + 4, $ff, $d3, $45, $d0, $5 ; trainer
+    db SPRITE_BLONDE_PONYTAIL_GIRL, $5 + 4, $1a + 4, $ff, $d2, $46, $cb, $e ; trainer
+    db SPRITE_BLONDE_PONYTAIL_GIRL, $6 + 4, $1a + 4, $ff, $d3, $47, $cb, $f ; trainer
+    db SPRITE_MONK, $d + 4, $2e + 4, $ff, $d0, $48, $d9, $7 ; trainer
+    db SPRITE_BLONDE_PONYTAIL_GIRL, $c + 4, $33 + 4, $ff, $d2, $49, $cb, $10 ; trainer
+
+    ; warp-to
+    EVENT_DISP $1e, $9, $1 ; ROUTE_8_GATE
+    EVENT_DISP $1e, $a, $1 ; ROUTE_8_GATE
+    EVENT_DISP $1e, $9, $8 ; ROUTE_8_GATE
+    EVENT_DISP $1e, $a, $8 ; ROUTE_8_GATE
+    EVENT_DISP $1e, $3, $d ; PATH_ENTRANCE_ROUTE_8
+
+INCBIN "baserom.gbc",$581c6,$0
 
 Route8Blocks: ; 270
     INCBIN "maps/route8.blk"
@@ -14820,7 +17960,36 @@ Route10_h: ; 0x582d4 to 0x582f6 (34 bytes) (id=21)
 
     dw $42f6 ; objects
 
-INCBIN "baserom.gbc",$582f6,$58356 - $582f6
+Route10Object: ; 0x582f6 (size=96)
+    db $2c ; border tile
+
+    db $4 ; warps
+    db $13, $b, $0, ROCK_TUNNEL_POKECENTER
+    db $11, $8, $0, ROCK_TUNNEL_1
+    db $35, $8, $2, ROCK_TUNNEL_1
+    db $27, $6, $0, POWER_PLANT
+
+    db $4 ; signs
+    db $13, $7, $7 ; Route10Text7
+    db $13, $c, $8 ; Route10Text8
+    db $37, $9, $9 ; Route10Text9
+    db $29, $5, $a ; Route10Text10
+
+    db $6 ; people
+    db SPRITE_BLACK_HAIR_BOY_2, $2c + 4, $a + 4, $ff, $d2, $41, $cf, $1 ; trainer
+    db SPRITE_HIKER, $39 + 4, $3 + 4, $ff, $d1, $42, $d1, $7 ; trainer
+    db SPRITE_BLACK_HAIR_BOY_2, $40 + 4, $e + 4, $ff, $d2, $43, $cf, $2 ; trainer
+    db SPRITE_BLONDE_PONYTAIL_GIRL, $19 + 4, $7 + 4, $ff, $d2, $44, $ce, $7 ; trainer
+    db SPRITE_HIKER, $3d + 4, $3 + 4, $ff, $d0, $45, $d1, $8 ; trainer
+    db SPRITE_BLONDE_PONYTAIL_GIRL, $36 + 4, $7 + 4, $ff, $d0, $46, $ce, $8 ; trainer
+
+    ; warp-to
+    EVENT_DISP $a, $13, $b ; ROCK_TUNNEL_POKECENTER
+    EVENT_DISP $a, $11, $8 ; ROCK_TUNNEL_1
+    EVENT_DISP $a, $35, $8 ; ROCK_TUNNEL_1
+    EVENT_DISP $a, $27, $6 ; POWER_PLANT
+
+INCBIN "baserom.gbc",$58356,$0
 
 Route10Blocks: ; 360
     INCBIN "maps/route10.blk"
@@ -14849,7 +18018,39 @@ Route11_h: ; 0x584be to 0x584e0 (34 bytes) (id=22)
 
     dw $44e0 ; objects
 
-INCBIN "baserom.gbc",$584e0,$5855f - $584e0
+Route11Object: ; 0x584e0 (size=127)
+    db $f ; border tile
+
+    db $5 ; warps
+    db $8, $31, $0, ROUTE_11_GATE_1F
+    db $9, $31, $1, ROUTE_11_GATE_1F
+    db $8, $3a, $2, ROUTE_11_GATE_1F
+    db $9, $3a, $3, ROUTE_11_GATE_1F
+    db $5, $4, $0, DIGLETTS_CAVE_ENTRANCE
+
+    db $1 ; signs
+    db $5, $1, $b ; Route11Text11
+
+    db $a ; people
+    db SPRITE_MONK, $e + 4, $a + 4, $ff, $d0, $41, $d9, $1 ; trainer
+    db SPRITE_MONK, $9 + 4, $1a + 4, $ff, $d0, $42, $d9, $2 ; trainer
+    db SPRITE_BLONDE_BOY, $5 + 4, $d + 4, $ff, $d2, $43, $c9, $9 ; trainer
+    db SPRITE_BLACK_HAIR_BOY_2, $b + 4, $24 + 4, $ff, $d0, $44, $d4, $2 ; trainer
+    db SPRITE_BLONDE_BOY, $4 + 4, $16 + 4, $ff, $d1, $45, $c9, $a ; trainer
+    db SPRITE_MONK, $7 + 4, $2d + 4, $ff, $d0, $46, $d9, $3 ; trainer
+    db SPRITE_MONK, $3 + 4, $21 + 4, $ff, $d1, $47, $d9, $4 ; trainer
+    db SPRITE_BLONDE_BOY, $5 + 4, $2b + 4, $ff, $d3, $48, $c9, $b ; trainer
+    db SPRITE_BLACK_HAIR_BOY_2, $10 + 4, $2d + 4, $ff, $d2, $49, $d4, $3 ; trainer
+    db SPRITE_BLONDE_BOY, $c + 4, $16 + 4, $ff, $d1, $4a, $c9, $c ; trainer
+
+    ; warp-to
+    EVENT_DISP $1e, $8, $31 ; ROUTE_11_GATE_1F
+    EVENT_DISP $1e, $9, $31 ; ROUTE_11_GATE_1F
+    EVENT_DISP $1e, $8, $3a ; ROUTE_11_GATE_1F
+    EVENT_DISP $1e, $9, $3a ; ROUTE_11_GATE_1F
+    EVENT_DISP $1e, $5, $4 ; DIGLETTS_CAVE_ENTRANCE
+
+INCBIN "baserom.gbc",$5855f,$0
 
 Route11Blocks: ; 270
     INCBIN "maps/route11.blk"
@@ -14884,7 +18085,38 @@ Route12_h: ; 0x5866d to 0x5869a (45 bytes) (id=23)
 
     dw $469a ; objects
 
-INCBIN "baserom.gbc",$5869a,$58710 - $5869a
+Route12Object: ; 0x5869a (size=118)
+    db $43 ; border tile
+
+    db $4 ; warps
+    db $f, $a, $0, ROUTE_12_GATE
+    db $f, $b, $1, ROUTE_12_GATE
+    db $15, $a, $2, ROUTE_12_GATE
+    db $4d, $b, $0, ROUTE_12_HOUSE
+
+    db $2 ; signs
+    db $d, $d, $b ; Route12Text11
+    db $3f, $b, $c ; Route12Text12
+
+    db $a ; people
+    db SPRITE_SNORLAX, $3e + 4, $a + 4, $ff, $d0, $1 ; person
+    db SPRITE_FAT_MAN, $1f + 4, $e + 4, $ff, $d2, $42, $d6, $3 ; trainer
+    db SPRITE_FAT_MAN, $27 + 4, $5 + 4, $ff, $d1, $43, $d6, $4 ; trainer
+    db SPRITE_BLACK_HAIR_BOY_1, $5c + 4, $b + 4, $ff, $d2, $44, $cd, $9 ; trainer
+    db SPRITE_BLACK_HAIR_BOY_2, $4c + 4, $e + 4, $ff, $d1, $45, $dc, $2 ; trainer
+    db SPRITE_FAT_MAN, $28 + 4, $c + 4, $ff, $d2, $46, $d6, $5 ; trainer
+    db SPRITE_FAT_MAN, $34 + 4, $9 + 4, $ff, $d3, $47, $d6, $6 ; trainer
+    db SPRITE_FAT_MAN, $57 + 4, $6 + 4, $ff, $d0, $48, $d6, $b ; trainer
+    db SPRITE_BALL, $23 + 4, $e + 4, $ff, $ff, $89, $d8 ; item
+    db SPRITE_BALL, $59 + 4, $5 + 4, $ff, $ff, $8a, $25 ; item
+
+    ; warp-to
+    EVENT_DISP $a, $f, $a ; ROUTE_12_GATE
+    EVENT_DISP $a, $f, $b ; ROUTE_12_GATE
+    EVENT_DISP $a, $15, $a ; ROUTE_12_GATE
+    EVENT_DISP $a, $4d, $b ; ROUTE_12_HOUSE
+
+INCBIN "baserom.gbc",$58710,$0
 
 Route12Blocks: ; 540
     INCBIN "maps/route12.blk"
@@ -14913,7 +18145,38 @@ Route15_h: ; 0x5892c to 0x5894e (34 bytes) (id=26)
 
     dw $494e ; objects
 
-INCBIN "baserom.gbc",$5894e,$589cc - $5894e
+Route15Object: ; 0x5894e (size=126)
+    db $43 ; border tile
+
+    db $4 ; warps
+    db $8, $7, $0, ROUTE_15_GATE
+    db $9, $7, $1, ROUTE_15_GATE
+    db $8, $e, $2, ROUTE_15_GATE
+    db $9, $e, $3, ROUTE_15_GATE
+
+    db $1 ; signs
+    db $9, $27, $c ; Route15Text12
+
+    db $b ; people
+    db SPRITE_BLONDE_PONYTAIL_GIRL, $b + 4, $29 + 4, $ff, $d0, $41, $ce, $14 ; trainer
+    db SPRITE_BLONDE_PONYTAIL_GIRL, $a + 4, $35 + 4, $ff, $d2, $42, $ce, $15 ; trainer
+    db SPRITE_BLACK_HAIR_BOY_1, $d + 4, $1f + 4, $ff, $d1, $43, $df, $6 ; trainer
+    db SPRITE_BLACK_HAIR_BOY_1, $d + 4, $23 + 4, $ff, $d1, $44, $df, $7 ; trainer
+    db SPRITE_FOULARD_WOMAN, $b + 4, $35 + 4, $ff, $d0, $45, $da, $9 ; trainer
+    db SPRITE_FOULARD_WOMAN, $a + 4, $29 + 4, $ff, $d3, $46, $da, $a ; trainer
+    db SPRITE_BIKER, $a + 4, $30 + 4, $ff, $d0, $47, $d2, $3 ; trainer
+    db SPRITE_BIKER, $a + 4, $2e + 4, $ff, $d0, $48, $d2, $4 ; trainer
+    db SPRITE_BLONDE_PONYTAIL_GIRL, $5 + 4, $25 + 4, $ff, $d3, $49, $ce, $16 ; trainer
+    db SPRITE_BLONDE_PONYTAIL_GIRL, $d + 4, $12 + 4, $ff, $d1, $4a, $ce, $17 ; trainer
+    db SPRITE_BALL, $5 + 4, $12 + 4, $ff, $ff, $8b, $dc ; item
+
+    ; warp-to
+    EVENT_DISP $1e, $8, $7 ; ROUTE_15_GATE
+    EVENT_DISP $1e, $9, $7 ; ROUTE_15_GATE
+    EVENT_DISP $1e, $8, $e ; ROUTE_15_GATE
+    EVENT_DISP $1e, $9, $e ; ROUTE_15_GATE
+
+INCBIN "baserom.gbc",$589cc,$0
 
 Route15Blocks: ; 270
     INCBIN "maps/route15.blk"
@@ -14942,7 +18205,45 @@ Route16_h: ; 0x58ada to 0x58afc (34 bytes) (id=27)
 
     dw $4afc ; objects
 
-INCBIN "baserom.gbc",$58afc,$58b84 - $58afc
+Route16Object: ; 0x58afc (size=136)
+    db $f ; border tile
+
+    db $9 ; warps
+    db $a, $11, $0, ROUTE_16_GATE_1F
+    db $b, $11, $1, ROUTE_16_GATE_1F
+    db $a, $18, $2, ROUTE_16_GATE_1F
+    db $b, $18, $3, ROUTE_16_GATE_1F
+    db $4, $11, $4, ROUTE_16_GATE_1F
+    db $5, $11, $5, ROUTE_16_GATE_1F
+    db $4, $18, $6, ROUTE_16_GATE_1F
+    db $5, $18, $7, ROUTE_16_GATE_1F
+    db $5, $7, $0, ROUTE_16_HOUSE
+
+    db $2 ; signs
+    db $b, $1b, $8 ; Route16Text8
+    db $11, $5, $9 ; Route16Text9
+
+    db $7 ; people
+    db SPRITE_BIKER, $c + 4, $11 + 4, $ff, $d2, $41, $d2, $5 ; trainer
+    db SPRITE_BIKER, $d + 4, $e + 4, $ff, $d3, $42, $d8, $1 ; trainer
+    db SPRITE_BIKER, $c + 4, $b + 4, $ff, $d1, $43, $d8, $2 ; trainer
+    db SPRITE_BIKER, $b + 4, $9 + 4, $ff, $d2, $44, $d2, $6 ; trainer
+    db SPRITE_BIKER, $a + 4, $6 + 4, $ff, $d3, $45, $d8, $3 ; trainer
+    db SPRITE_BIKER, $c + 4, $3 + 4, $ff, $d3, $46, $d2, $7 ; trainer
+    db SPRITE_SNORLAX, $a + 4, $1a + 4, $ff, $d0, $7 ; person
+
+    ; warp-to
+    EVENT_DISP $14, $a, $11 ; ROUTE_16_GATE_1F
+    EVENT_DISP $14, $b, $11 ; ROUTE_16_GATE_1F
+    EVENT_DISP $14, $a, $18 ; ROUTE_16_GATE_1F
+    EVENT_DISP $14, $b, $18 ; ROUTE_16_GATE_1F
+    EVENT_DISP $14, $4, $11 ; ROUTE_16_GATE_1F
+    EVENT_DISP $14, $5, $11 ; ROUTE_16_GATE_1F
+    EVENT_DISP $14, $4, $18 ; ROUTE_16_GATE_1F
+    EVENT_DISP $14, $5, $18 ; ROUTE_16_GATE_1F
+    EVENT_DISP $14, $5, $7 ; ROUTE_16_HOUSE
+
+INCBIN "baserom.gbc",$58b84,$0
 
 Route16Blocks: ; 180
     INCBIN "maps/route16.blk"
@@ -14971,7 +18272,31 @@ Route18_h: ; 0x58c38 to 0x58c5a (34 bytes) (id=29)
 
     dw $4c5a ; objects
 
-INCBIN "baserom.gbc",$58c5a,$58c9c - $58c5a
+Route18Object: ; 0x58c5a (size=66)
+    db $43 ; border tile
+
+    db $4 ; warps
+    db $8, $21, $0, ROUTE_18_GATE_1F
+    db $9, $21, $1, ROUTE_18_GATE_1F
+    db $8, $28, $2, ROUTE_18_GATE_1F
+    db $9, $28, $3, ROUTE_18_GATE_1F
+
+    db $2 ; signs
+    db $7, $2b, $4 ; Route18Text4
+    db $5, $21, $5 ; Route18Text5
+
+    db $3 ; people
+    db SPRITE_BLACK_HAIR_BOY_1, $b + 4, $24 + 4, $ff, $d3, $41, $df, $8 ; trainer
+    db SPRITE_BLACK_HAIR_BOY_1, $f + 4, $28 + 4, $ff, $d2, $42, $df, $9 ; trainer
+    db SPRITE_BLACK_HAIR_BOY_1, $d + 4, $2a + 4, $ff, $d2, $43, $df, $a ; trainer
+
+    ; warp-to
+    EVENT_DISP $19, $8, $21 ; ROUTE_18_GATE_1F
+    EVENT_DISP $19, $9, $21 ; ROUTE_18_GATE_1F
+    EVENT_DISP $19, $8, $28 ; ROUTE_18_GATE_1F
+    EVENT_DISP $19, $9, $28 ; ROUTE_18_GATE_1F
+
+INCBIN "baserom.gbc",$58c9c,$0
 
 Route18Blocks: ; 225
     INCBIN "maps/route18.blk"
@@ -14986,7 +18311,30 @@ FanClub_h: ; 0x59b64 to 0x59b70 (12 bytes) (id=90)
 
     dw $5c97 ; objects
 
-INCBIN "baserom.gbc",$59b70,$59cd5 - $59b70
+INCBIN "baserom.gbc",$59b70,$59c97 - $59b70
+FanClubObject: ; 0x59c97 (size=62)
+    db $d ; border tile
+
+    db $2 ; warps
+    db $7, $2, $1, $ff
+    db $7, $3, $1, $ff
+
+    db $2 ; signs
+    db $0, $1, $7 ; FanClubText7
+    db $0, $6, $8 ; FanClubText8
+
+    db $6 ; people
+    db SPRITE_FAT_MAN, $3 + 4, $6 + 4, $ff, $d2, $1 ; person
+    db SPRITE_GIRL, $3 + 4, $1 + 4, $ff, $d3, $2 ; person
+    db SPRITE_CLEFAIRYLIKE, $4 + 4, $6 + 4, $ff, $d2, $3 ; person
+    db SPRITE_SEEL, $4 + 4, $1 + 4, $ff, $d3, $4 ; person
+    db SPRITE_GENTLEMAN, $1 + 4, $3 + 4, $ff, $d0, $5 ; person
+    db SPRITE_CABLE_CLUB_WOMAN, $1 + 4, $5 + 4, $ff, $d0, $6 ; person
+
+    ; warp-to
+    EVENT_DISP $4, $7, $2
+    EVENT_DISP $4, $7, $3
+
 
 FanClubBlocks: ; 16
     INCBIN "maps/fanclub.blk"
@@ -14999,7 +18347,37 @@ SilphCo2_h: ; 0x59ce5 to 0x59cf1 (12 bytes) (id=207)
 
     dw $5e66 ; objects
 
-INCBIN "baserom.gbc",$59cf1,$59ec8 - $59cf1
+INCBIN "baserom.gbc",$59cf1,$59e66 - $59cf1
+SilphCo2Object: ; 0x59e66 (size=98)
+    db $2e ; border tile
+
+    db $7 ; warps
+    db $0, $18, $2, SILPH_CO_1F
+    db $0, $1a, $0, SILPH_CO_3F
+    db $0, $14, $0, SILPH_CO_ELEVATOR
+    db $3, $3, $6, SILPH_CO_3F
+    db $3, $d, $4, SILPH_CO_8F
+    db $f, $1b, $5, SILPH_CO_8F
+    db $f, $9, $4, SILPH_CO_6F
+
+    db $0 ; signs
+
+    db $5 ; people
+    db SPRITE_ERIKA, $1 + 4, $a + 4, $ff, $d1, $1 ; person
+    db SPRITE_OAK_AIDE, $c + 4, $5 + 4, $ff, $d0, $42, $e4, $2 ; trainer
+    db SPRITE_OAK_AIDE, $d + 4, $18 + 4, $ff, $d2, $43, $e4, $3 ; trainer
+    db SPRITE_ROCKET_GRUNT, $b + 4, $10 + 4, $ff, $d1, $44, $e6, $17 ; trainer
+    db SPRITE_ROCKET_GRUNT, $7 + 4, $18 + 4, $ff, $d1, $45, $e6, $18 ; trainer
+
+    ; warp-to
+    EVENT_DISP $f, $0, $18 ; SILPH_CO_1F
+    EVENT_DISP $f, $0, $1a ; SILPH_CO_3F
+    EVENT_DISP $f, $0, $14 ; SILPH_CO_ELEVATOR
+    EVENT_DISP $f, $3, $3 ; SILPH_CO_3F
+    EVENT_DISP $f, $3, $d ; SILPH_CO_8F
+    EVENT_DISP $f, $f, $1b ; SILPH_CO_8F
+    EVENT_DISP $f, $f, $9 ; SILPH_CO_6F
+
 
 SilphCo2Blocks: ; 135
     INCBIN "maps/silphco2.blk"
@@ -15012,7 +18390,42 @@ SilphCo3_h: ; 0x59f4f to 0x59f5b (12 bytes) (id=208)
 
     dw $6035 ; objects
 
-INCBIN "baserom.gbc",$59f5b,$5a0a6 - $59f5b
+INCBIN "baserom.gbc",$59f5b,$5a035 - $59f5b
+SilphCo3Object: ; 0x5a035 (size=113)
+    db $2e ; border tile
+
+    db $a ; warps
+    db $0, $1a, $1, SILPH_CO_2F
+    db $0, $18, $0, SILPH_CO_4F
+    db $0, $14, $0, SILPH_CO_ELEVATOR
+    db $b, $17, $9, SILPH_CO_3F
+    db $3, $3, $5, SILPH_CO_5F
+    db $f, $3, $6, SILPH_CO_5F
+    db $3, $1b, $3, SILPH_CO_2F
+    db $b, $3, $3, SILPH_CO_9F
+    db $b, $b, $4, SILPH_CO_7F
+    db $f, $1b, $3, SILPH_CO_3F
+
+    db $0 ; signs
+
+    db $4 ; people
+    db SPRITE_LAPRAS_GIVER, $8 + 4, $18 + 4, $ff, $ff, $1 ; person
+    db SPRITE_ROCKET_GRUNT, $7 + 4, $14 + 4, $ff, $d2, $42, $e6, $19 ; trainer
+    db SPRITE_OAK_AIDE, $9 + 4, $7 + 4, $ff, $d0, $43, $e4, $4 ; trainer
+    db SPRITE_BALL, $5 + 4, $8 + 4, $ff, $ff, $84, $12 ; item
+
+    ; warp-to
+    EVENT_DISP $f, $0, $1a ; SILPH_CO_2F
+    EVENT_DISP $f, $0, $18 ; SILPH_CO_4F
+    EVENT_DISP $f, $0, $14 ; SILPH_CO_ELEVATOR
+    EVENT_DISP $f, $b, $17 ; SILPH_CO_3F
+    EVENT_DISP $f, $3, $3 ; SILPH_CO_5F
+    EVENT_DISP $f, $f, $3 ; SILPH_CO_5F
+    EVENT_DISP $f, $3, $1b ; SILPH_CO_2F
+    EVENT_DISP $f, $b, $3 ; SILPH_CO_9F
+    EVENT_DISP $f, $b, $b ; SILPH_CO_7F
+    EVENT_DISP $f, $f, $1b ; SILPH_CO_3F
+
 
 SilphCo3Blocks: ; 135
     INCBIN "maps/silphco3.blk"
@@ -15025,7 +18438,36 @@ SilphCo10_h: ; 0x5a12d to 0x5a139 (12 bytes) (id=234)
 
     dw $61fb ; objects
 
-INCBIN "baserom.gbc",$5a139,$5a25a - $5a139
+INCBIN "baserom.gbc",$5a139,$5a1fb - $5a139
+SilphCo10Object: ; 0x5a1fb (size=95)
+    db $2e ; border tile
+
+    db $6 ; warps
+    db $0, $8, $0, SILPH_CO_9F
+    db $0, $a, $0, SILPH_CO_11F
+    db $0, $c, $0, SILPH_CO_ELEVATOR
+    db $b, $9, $3, SILPH_CO_4F
+    db $f, $d, $5, SILPH_CO_4F
+    db $7, $d, $6, SILPH_CO_4F
+
+    db $0 ; signs
+
+    db $6 ; people
+    db SPRITE_ROCKET_GRUNT, $9 + 4, $1 + 4, $ff, $d3, $41, $e6, $27 ; trainer
+    db SPRITE_OAK_AIDE, $2 + 4, $a + 4, $ff, $d2, $42, $e4, $b ; trainer
+    db SPRITE_ERIKA, $f + 4, $9 + 4, $fe, $0, $3 ; person
+    db SPRITE_BALL, $c + 4, $2 + 4, $ff, $ff, $84, $e2 ; item
+    db SPRITE_BALL, $e + 4, $4 + 4, $ff, $ff, $85, $28 ; item
+    db SPRITE_BALL, $b + 4, $5 + 4, $ff, $ff, $86, $26 ; item
+
+    ; warp-to
+    EVENT_DISP $8, $0, $8 ; SILPH_CO_9F
+    EVENT_DISP $8, $0, $a ; SILPH_CO_11F
+    EVENT_DISP $8, $0, $c ; SILPH_CO_ELEVATOR
+    EVENT_DISP $8, $b, $9 ; SILPH_CO_4F
+    EVENT_DISP $8, $f, $d ; SILPH_CO_4F
+    EVENT_DISP $8, $7, $d ; SILPH_CO_4F
+
 
 SilphCo10Blocks: ; 72
     INCBIN "maps/silphco10.blk"
@@ -15038,7 +18480,25 @@ Lance_h: ; 0x5a2a2 to 0x5a2ae (12 bytes) (id=113)
 
     dw $63c5 ; objects
 
-INCBIN "baserom.gbc",$5a2ae,$5a3e9 - $5a2ae
+INCBIN "baserom.gbc",$5a2ae,$5a3c5 - $5a2ae
+LanceObject: ; 0x5a3c5 (size=36)
+    db $3 ; border tile
+
+    db $3 ; warps
+    db $10, $18, $2, AGATHAS_ROOM
+    db $0, $5, $0, CHAMPIONS_ROOM
+    db $0, $6, $0, CHAMPIONS_ROOM
+
+    db $0 ; signs
+
+    db $1 ; people
+    db SPRITE_LANCE, $1 + 4, $6 + 4, $ff, $d0, $41, $f7, $1 ; trainer
+
+    ; warp-to
+    EVENT_DISP $d, $10, $18 ; AGATHAS_ROOM
+    EVENT_DISP $d, $0, $5 ; CHAMPIONS_ROOM
+    EVENT_DISP $d, $0, $6 ; CHAMPIONS_ROOM
+
 
 LanceBlocks: ; 169
     INCBIN "maps/lance.blk"
@@ -15051,7 +18511,23 @@ HallofFameRoom_h: ; 0x5a492 to 0x5a49e (12 bytes) (id=118)
 
     dw $6571 ; objects
 
-INCBIN "baserom.gbc",$5a49e,$5a58b - $5a49e
+INCBIN "baserom.gbc",$5a49e,$5a571 - $5a49e
+HallofFameRoomObject: ; 0x5a571 (size=26)
+    db $3 ; border tile
+
+    db $2 ; warps
+    db $7, $4, $2, CHAMPIONS_ROOM
+    db $7, $5, $3, CHAMPIONS_ROOM
+
+    db $0 ; signs
+
+    db $1 ; people
+    db SPRITE_OAK, $2 + 4, $5 + 4, $ff, $d0, $1 ; person
+
+    ; warp-to
+    EVENT_DISP $5, $7, $4 ; CHAMPIONS_ROOM
+    EVENT_DISP $5, $7, $5 ; CHAMPIONS_ROOM
+
 
 HallofFameRoomBlocks: ; 20
     INCBIN "maps/halloffameroom.blk"
@@ -15137,7 +18613,33 @@ MuseumF1_h: ; 0x5c0eb to 0x5c0f7 (12 bytes) (id=52)
 
     dw $42c1 ; objects
 
-INCBIN "baserom.gbc",$5c0f7,$5c30b - $5c0f7
+INCBIN "baserom.gbc",$5c0f7,$5c2c1 - $5c0f7
+MuseumF1Object: ; 0x5c2c1 (size=74)
+    db $a ; border tile
+
+    db $5 ; warps
+    db $7, $a, $0, $ff
+    db $7, $b, $0, $ff
+    db $7, $10, $1, $ff
+    db $7, $11, $1, $ff
+    db $7, $7, $0, MUSEUM_2F
+
+    db $0 ; signs
+
+    db $5 ; people
+    db SPRITE_OAK_AIDE, $4 + 4, $c + 4, $ff, $d2, $1 ; person
+    db SPRITE_MONK, $4 + 4, $1 + 4, $ff, $ff, $2 ; person
+    db SPRITE_OAK_AIDE, $2 + 4, $f + 4, $ff, $d0, $3 ; person
+    db SPRITE_OAK_AIDE, $4 + 4, $11 + 4, $ff, $ff, $4 ; person
+    db SPRITE_OLD_AMBER, $2 + 4, $10 + 4, $ff, $ff, $5 ; person
+
+    ; warp-to
+    EVENT_DISP $a, $7, $a
+    EVENT_DISP $a, $7, $b
+    EVENT_DISP $a, $7, $10
+    EVENT_DISP $a, $7, $11
+    EVENT_DISP $a, $7, $7 ; MUSEUM_2F
+
 
 MuseumF2_h: ; 0x5c30b to 0x5c317 (12 bytes) (id=53)
     db $0a ; tileset
@@ -15147,7 +18649,27 @@ MuseumF2_h: ; 0x5c30b to 0x5c317 (12 bytes) (id=53)
 
     dw $434b ; objects
 
-INCBIN "baserom.gbc",$5c317,$5c37b - $5c317
+INCBIN "baserom.gbc",$5c317,$5c34b - $5c317
+MuseumF2Object: ; 0x5c34b (size=48)
+    db $a ; border tile
+
+    db $1 ; warps
+    db $7, $7, $4, MUSEUM_1F
+
+    db $2 ; signs
+    db $2, $b, $6 ; MuseumF2Text6
+    db $5, $2, $7 ; MuseumF2Text7
+
+    db $5 ; people
+    db SPRITE_BLONDE_BOY, $7 + 4, $1 + 4, $fe, $2, $1 ; person
+    db SPRITE_OLD_PERSON, $5 + 4, $0 + 4, $ff, $d0, $2 ; person
+    db SPRITE_OAK_AIDE, $5 + 4, $7 + 4, $ff, $d0, $3 ; person
+    db SPRITE_BRUNETTE_GIRL, $5 + 4, $b + 4, $ff, $ff, $4 ; person
+    db SPRITE_HIKER, $5 + 4, $c + 4, $ff, $d0, $5 ; person
+
+    ; warp-to
+    EVENT_DISP $7, $7, $7 ; MUSEUM_1F
+
 
 PewterGym_h: ; 0x5c37b to 0x5c387 (12 bytes) (id=54)
     db $07 ; tileset
@@ -15157,7 +18679,25 @@ PewterGym_h: ; 0x5c37b to 0x5c387 (12 bytes) (id=54)
 
     dw $452e ; objects
 
-INCBIN "baserom.gbc",$5c387,$5c558 - $5c387
+INCBIN "baserom.gbc",$5c387,$5c52e - $5c387
+PewterGymObject: ; 0x5c52e (size=42)
+    db $3 ; border tile
+
+    db $2 ; warps
+    db $d, $4, $2, $ff
+    db $d, $5, $2, $ff
+
+    db $0 ; signs
+
+    db $3 ; people
+    db SPRITE_BLACK_HAIR_BOY_2, $1 + 4, $4 + 4, $ff, $d0, $41, $ea, $1 ; trainer
+    db SPRITE_BLACK_HAIR_BOY_1, $6 + 4, $3 + 4, $ff, $d3, $42, $cd, $1 ; trainer
+    db SPRITE_GYM_HELPER, $a + 4, $7 + 4, $ff, $d0, $3 ; person
+
+    ; warp-to
+    EVENT_DISP $5, $d, $4
+    EVENT_DISP $5, $d, $5
+
 
 PewterGymBlocks: ; 35
     INCBIN "maps/pewtergym.blk"
@@ -15170,7 +18710,26 @@ PewterPokecenter_h: ; 0x5c57b to 0x5c587 (12 bytes) (id=58)
 
     dw $460d ; objects
 
-INCBIN "baserom.gbc",$5c587,$5c639 - $5c587
+INCBIN "baserom.gbc",$5c587,$5c60d - $5c587
+PewterPokecenterObject: ; 0x5c60d (size=44)
+    db $0 ; border tile
+
+    db $2 ; warps
+    db $7, $3, $6, $ff
+    db $7, $4, $6, $ff
+
+    db $0 ; signs
+
+    db $4 ; people
+    db SPRITE_NURSE, $1 + 4, $3 + 4, $ff, $d0, $1 ; person
+    db SPRITE_GENTLEMAN, $7 + 4, $b + 4, $ff, $d2, $2 ; person
+    db SPRITE_CLEFAIRYLIKE, $3 + 4, $1 + 4, $ff, $d0, $3 ; person
+    db SPRITE_CABLE_CLUB_WOMAN, $2 + 4, $b + 4, $ff, $d0, $4 ; person
+
+    ; warp-to
+    EVENT_DISP $7, $7, $3
+    EVENT_DISP $7, $7, $4
+
 
 CeruleanPokecenter_h: ; 0x5c639 to 0x5c645 (12 bytes) (id=64)
     db $06 ; tileset
@@ -15180,7 +18739,26 @@ CeruleanPokecenter_h: ; 0x5c639 to 0x5c645 (12 bytes) (id=64)
 
     dw $465f ; objects
 
-INCBIN "baserom.gbc",$5c645,$5c68b - $5c645
+INCBIN "baserom.gbc",$5c645,$5c65f - $5c645
+CeruleanPokecenterObject: ; 0x5c65f (size=44)
+    db $0 ; border tile
+
+    db $2 ; warps
+    db $7, $3, $2, $ff
+    db $7, $4, $2, $ff
+
+    db $0 ; signs
+
+    db $4 ; people
+    db SPRITE_NURSE, $1 + 4, $3 + 4, $ff, $d0, $1 ; person
+    db SPRITE_BLACK_HAIR_BOY_2, $5 + 4, $a + 4, $fe, $0, $2 ; person
+    db SPRITE_GENTLEMAN, $3 + 4, $4 + 4, $ff, $d0, $3 ; person
+    db SPRITE_CABLE_CLUB_WOMAN, $2 + 4, $b + 4, $ff, $d0, $4 ; person
+
+    ; warp-to
+    EVENT_DISP $7, $7, $3
+    EVENT_DISP $7, $7, $4
+
 
 CeruleanPokecenterBlocks: ; 28
     INCBIN "maps/ceruleanpokecenter.blk"
@@ -15193,7 +18771,26 @@ CeruleanGym_h: ; 0x5c6a7 to 0x5c6b3 (12 bytes) (id=65)
 
     dw $4834 ; objects
 
-INCBIN "baserom.gbc",$5c6b3,$5c866 - $5c6b3
+INCBIN "baserom.gbc",$5c6b3,$5c834 - $5c6b3
+CeruleanGymObject: ; 0x5c834 (size=50)
+    db $3 ; border tile
+
+    db $2 ; warps
+    db $d, $4, $3, $ff
+    db $d, $5, $3, $ff
+
+    db $0 ; signs
+
+    db $4 ; people
+    db SPRITE_BRUNETTE_GIRL, $2 + 4, $4 + 4, $ff, $d0, $41, $eb, $1 ; trainer
+    db SPRITE_BLONDE_PONYTAIL_GIRL, $3 + 4, $2 + 4, $ff, $d3, $42, $ce, $1 ; trainer
+    db SPRITE_SWIMMER, $7 + 4, $8 + 4, $ff, $d2, $43, $d7, $1 ; trainer
+    db SPRITE_GYM_HELPER, $a + 4, $7 + 4, $ff, $d0, $4 ; person
+
+    ; warp-to
+    EVENT_DISP $5, $d, $4
+    EVENT_DISP $5, $d, $5
+
 
 CeruleanGymBlocks: ; 35
     INCBIN "maps/ceruleangym.blk"
@@ -15206,7 +18803,25 @@ CeruleanMart_h: ; 0x5c889 to 0x5c895 (12 bytes) (id=67)
 
     dw $48a8 ; objects
 
-INCBIN "baserom.gbc",$5c895,$5c8ce - $5c895
+INCBIN "baserom.gbc",$5c895,$5c8a8 - $5c895
+CeruleanMartObject: ; 0x5c8a8 (size=38)
+    db $0 ; border tile
+
+    db $2 ; warps
+    db $7, $3, $5, $ff
+    db $7, $4, $5, $ff
+
+    db $0 ; signs
+
+    db $3 ; people
+    db SPRITE_MART_GUY, $5 + 4, $0 + 4, $ff, $d3, $1 ; person
+    db SPRITE_BLACK_HAIR_BOY_1, $4 + 4, $3 + 4, $fe, $1, $2 ; person
+    db SPRITE_BLONDE_PONYTAIL_GIRL, $2 + 4, $6 + 4, $fe, $2, $3 ; person
+
+    ; warp-to
+    EVENT_DISP $4, $7, $3
+    EVENT_DISP $4, $7, $4
+
 
 LavenderPokecenter_h: ; 0x5c8ce to 0x5c8da (12 bytes) (id=141)
     db $06 ; tileset
@@ -15216,7 +18831,26 @@ LavenderPokecenter_h: ; 0x5c8ce to 0x5c8da (12 bytes) (id=141)
 
     dw $48f4 ; objects
 
-INCBIN "baserom.gbc",$5c8da,$5c920 - $5c8da
+INCBIN "baserom.gbc",$5c8da,$5c8f4 - $5c8da
+LavenderPokecenterObject: ; 0x5c8f4 (size=44)
+    db $0 ; border tile
+
+    db $2 ; warps
+    db $7, $3, $0, $ff
+    db $7, $4, $0, $ff
+
+    db $0 ; signs
+
+    db $4 ; people
+    db SPRITE_NURSE, $1 + 4, $3 + 4, $ff, $d0, $1 ; person
+    db SPRITE_GENTLEMAN, $3 + 4, $5 + 4, $ff, $ff, $2 ; person
+    db SPRITE_LITTLE_GIRL, $6 + 4, $2 + 4, $fe, $1, $3 ; person
+    db SPRITE_CABLE_CLUB_WOMAN, $2 + 4, $b + 4, $ff, $d0, $4 ; person
+
+    ; warp-to
+    EVENT_DISP $7, $7, $3
+    EVENT_DISP $7, $7, $4
+
 
 LavenderMart_h: ; 0x5c920 to 0x5c92c (12 bytes) (id=150)
     db $02 ; tileset
@@ -15226,7 +18860,25 @@ LavenderMart_h: ; 0x5c920 to 0x5c92c (12 bytes) (id=150)
 
     dw $495d ; objects
 
-INCBIN "baserom.gbc",$5c92c,$5c983 - $5c92c
+INCBIN "baserom.gbc",$5c92c,$5c95d - $5c92c
+LavenderMartObject: ; 0x5c95d (size=38)
+    db $0 ; border tile
+
+    db $2 ; warps
+    db $7, $3, $3, $ff
+    db $7, $4, $3, $ff
+
+    db $0 ; signs
+
+    db $3 ; people
+    db SPRITE_MART_GUY, $5 + 4, $0 + 4, $ff, $d3, $1 ; person
+    db SPRITE_BALDING_GUY, $4 + 4, $3 + 4, $ff, $ff, $2 ; person
+    db SPRITE_BLACK_HAIR_BOY_1, $2 + 4, $7 + 4, $ff, $ff, $3 ; person
+
+    ; warp-to
+    EVENT_DISP $4, $7, $3
+    EVENT_DISP $4, $7, $4
+
 
 VermilionPokecenter_h: ; 0x5c983 to 0x5c98f (12 bytes) (id=89)
     db $06 ; tileset
@@ -15236,7 +18888,26 @@ VermilionPokecenter_h: ; 0x5c983 to 0x5c98f (12 bytes) (id=89)
 
     dw $49a9 ; objects
 
-INCBIN "baserom.gbc",$5c98f,$5c9d5 - $5c98f
+INCBIN "baserom.gbc",$5c98f,$5c9a9 - $5c98f
+VermilionPokecenterObject: ; 0x5c9a9 (size=44)
+    db $0 ; border tile
+
+    db $2 ; warps
+    db $7, $3, $0, $ff
+    db $7, $4, $0, $ff
+
+    db $0 ; signs
+
+    db $4 ; people
+    db SPRITE_NURSE, $1 + 4, $3 + 4, $ff, $d0, $1 ; person
+    db SPRITE_FISHER, $5 + 4, $a + 4, $ff, $ff, $2 ; person
+    db SPRITE_SAILOR, $4 + 4, $5 + 4, $ff, $ff, $3 ; person
+    db SPRITE_CABLE_CLUB_WOMAN, $2 + 4, $b + 4, $ff, $d0, $4 ; person
+
+    ; warp-to
+    EVENT_DISP $7, $7, $3
+    EVENT_DISP $7, $7, $4
+
 
 VermilionMart_h: ; 0x5c9d5 to 0x5c9e1 (12 bytes) (id=91)
     db $02 ; tileset
@@ -15246,7 +18917,25 @@ VermilionMart_h: ; 0x5c9d5 to 0x5c9e1 (12 bytes) (id=91)
 
     dw $49f4 ; objects
 
-INCBIN "baserom.gbc",$5c9e1,$5ca1a - $5c9e1
+INCBIN "baserom.gbc",$5c9e1,$5c9f4 - $5c9e1
+VermilionMartObject: ; 0x5c9f4 (size=38)
+    db $0 ; border tile
+
+    db $2 ; warps
+    db $7, $3, $2, $ff
+    db $7, $4, $2, $ff
+
+    db $0 ; signs
+
+    db $3 ; people
+    db SPRITE_MART_GUY, $5 + 4, $0 + 4, $ff, $d3, $1 ; person
+    db SPRITE_BLACK_HAIR_BOY_1, $6 + 4, $5 + 4, $ff, $ff, $2 ; person
+    db SPRITE_BLONDE_PONYTAIL_GIRL, $3 + 4, $3 + 4, $fe, $2, $3 ; person
+
+    ; warp-to
+    EVENT_DISP $4, $7, $3
+    EVENT_DISP $4, $7, $4
+
 
 VermilionGym_h: ; 0x5ca1a to 0x5ca26 (12 bytes) (id=92)
     db $07 ; tileset
@@ -15256,7 +18945,27 @@ VermilionGym_h: ; 0x5ca1a to 0x5ca26 (12 bytes) (id=92)
 
     dw $4bfe ; objects
 
-INCBIN "baserom.gbc",$5ca26,$5cc38 - $5ca26
+INCBIN "baserom.gbc",$5ca26,$5cbfe - $5ca26
+VermilionGymObject: ; 0x5cbfe (size=58)
+    db $3 ; border tile
+
+    db $2 ; warps
+    db $11, $4, $3, $ff
+    db $11, $5, $3, $ff
+
+    db $0 ; signs
+
+    db $5 ; people
+    db SPRITE_PUNK, $1 + 4, $5 + 4, $ff, $d0, $41, $ec, $1 ; trainer
+    db SPRITE_GENTLEMAN, $6 + 4, $9 + 4, $ff, $d2, $42, $f1, $3 ; trainer
+    db SPRITE_BLACK_HAIR_BOY_2, $8 + 4, $3 + 4, $ff, $d2, $43, $dc, $1 ; trainer
+    db SPRITE_SAILOR, $a + 4, $0 + 4, $ff, $d3, $44, $cc, $8 ; trainer
+    db SPRITE_GYM_HELPER, $e + 4, $4 + 4, $ff, $d0, $5 ; person
+
+    ; warp-to
+    EVENT_DISP $5, $11, $4
+    EVENT_DISP $5, $11, $5
+
 
 VermilionGymBlocks: ; 45
     INCBIN "maps/vermiliongym.blk"
@@ -15269,7 +18978,27 @@ CopycatsHouseF2_h: ; 0x5cc65 to 0x5cc71 (12 bytes) (id=176)
 
     dw $4d21 ; objects
 
-INCBIN "baserom.gbc",$5cc71,$5cd51 - $5cc71
+INCBIN "baserom.gbc",$5cc71,$5cd21 - $5cc71
+CopycatsHouseF2Object: ; 0x5cd21 (size=48)
+    db $a ; border tile
+
+    db $1 ; warps
+    db $1, $7, $2, COPYCATS_HOUSE_1F
+
+    db $2 ; signs
+    db $5, $3, $6 ; CopycatsHouseF2Text6
+    db $1, $0, $7 ; CopycatsHouseF2Text7
+
+    db $5 ; people
+    db SPRITE_BRUNETTE_GIRL, $3 + 4, $4 + 4, $fe, $0, $1 ; person
+    db SPRITE_BIRD, $6 + 4, $4 + 4, $fe, $2, $2 ; person
+    db SPRITE_MACHOKE_SLOWBRO, $1 + 4, $5 + 4, $ff, $d0, $3 ; person
+    db SPRITE_BIRD, $0 + 4, $2 + 4, $ff, $d0, $4 ; person
+    db SPRITE_CLEFAIRYLIKE, $6 + 4, $1 + 4, $ff, $d3, $5 ; person
+
+    ; warp-to
+    EVENT_DISP $4, $1, $7 ; COPYCATS_HOUSE_1F
+
 
 FightingDojo_h: ; 0x5cd51 to 0x5cd5d (12 bytes) (id=177)
     db $05 ; tileset
@@ -15279,7 +19008,29 @@ FightingDojo_h: ; 0x5cd51 to 0x5cd5d (12 bytes) (id=177)
 
     dw $4f9b ; objects
 
-INCBIN "baserom.gbc",$5cd5d,$5cfe3 - $5cd5d
+INCBIN "baserom.gbc",$5cd5d,$5cf9b - $5cd5d
+FightingDojoObject: ; 0x5cf9b (size=72)
+    db $3 ; border tile
+
+    db $2 ; warps
+    db $b, $4, $1, $ff
+    db $b, $5, $1, $ff
+
+    db $0 ; signs
+
+    db $7 ; people
+    db SPRITE_HIKER, $3 + 4, $5 + 4, $ff, $d0, $41, $e0, $1 ; trainer
+    db SPRITE_HIKER, $4 + 4, $3 + 4, $ff, $d3, $42, $e0, $2 ; trainer
+    db SPRITE_HIKER, $6 + 4, $3 + 4, $ff, $d3, $43, $e0, $3 ; trainer
+    db SPRITE_HIKER, $5 + 4, $5 + 4, $ff, $d2, $44, $e0, $4 ; trainer
+    db SPRITE_HIKER, $7 + 4, $5 + 4, $ff, $d2, $45, $e0, $5 ; trainer
+    db SPRITE_BALL, $1 + 4, $4 + 4, $ff, $ff, $6 ; person
+    db SPRITE_BALL, $1 + 4, $5 + 4, $ff, $ff, $7 ; person
+
+    ; warp-to
+    EVENT_DISP $5, $b, $4
+    EVENT_DISP $5, $b, $5
+
 
 FightingDojoBlocks: ; 30
     INCBIN "maps/fightingdojo.blk"
@@ -15292,7 +19043,91 @@ SaffronGym_h: ; 0x5d001 to 0x5d00d (12 bytes) (id=178)
 
     dw $5259 ; objects
 
-INCBIN "baserom.gbc",$5d00d,$5d3a3 - $5d00d
+INCBIN "baserom.gbc",$5d00d,$5d259 - $5d00d
+SaffronGymObject: ; 0x5d259 (size=330)
+    db $2e ; border tile
+
+    db $20 ; warps
+    db $11, $8, $2, $ff
+    db $11, $9, $2, $ff
+    db $3, $1, $16, SAFFRON_GYM
+    db $3, $5, $f, SAFFRON_GYM
+    db $5, $1, $12, SAFFRON_GYM
+    db $5, $5, $8, SAFFRON_GYM
+    db $9, $1, $1b, SAFFRON_GYM
+    db $9, $5, $10, SAFFRON_GYM
+    db $b, $1, $5, SAFFRON_GYM
+    db $b, $5, $d, SAFFRON_GYM
+    db $f, $1, $17, SAFFRON_GYM
+    db $f, $5, $1e, SAFFRON_GYM
+    db $11, $1, $11, SAFFRON_GYM
+    db $11, $5, $9, SAFFRON_GYM
+    db $3, $9, $1a, SAFFRON_GYM
+    db $3, $b, $3, SAFFRON_GYM
+    db $5, $9, $7, SAFFRON_GYM
+    db $5, $b, $c, SAFFRON_GYM
+    db $b, $b, $4, SAFFRON_GYM
+    db $f, $b, $1f, SAFFRON_GYM
+    db $3, $f, $18, SAFFRON_GYM
+    db $3, $13, $1c, SAFFRON_GYM
+    db $5, $f, $2, SAFFRON_GYM
+    db $5, $13, $a, SAFFRON_GYM
+    db $9, $f, $14, SAFFRON_GYM
+    db $9, $13, $1d, SAFFRON_GYM
+    db $b, $f, $e, SAFFRON_GYM
+    db $b, $13, $6, SAFFRON_GYM
+    db $f, $f, $15, SAFFRON_GYM
+    db $f, $13, $19, SAFFRON_GYM
+    db $11, $f, $b, SAFFRON_GYM
+    db $11, $13, $13, SAFFRON_GYM
+
+    db $0 ; signs
+
+    db $9 ; people
+    db SPRITE_GIRL, $8 + 4, $9 + 4, $ff, $d0, $41, $f0, $1 ; trainer
+    db SPRITE_MEDIUM, $1 + 4, $a + 4, $ff, $d0, $42, $f5, $16 ; trainer
+    db SPRITE_BLONDE_BOY, $1 + 4, $11 + 4, $ff, $d0, $43, $db, $1 ; trainer
+    db SPRITE_MEDIUM, $7 + 4, $3 + 4, $ff, $d0, $44, $f5, $17 ; trainer
+    db SPRITE_BLONDE_BOY, $7 + 4, $11 + 4, $ff, $d0, $45, $db, $2 ; trainer
+    db SPRITE_MEDIUM, $d + 4, $3 + 4, $ff, $d0, $46, $f5, $18 ; trainer
+    db SPRITE_BLONDE_BOY, $d + 4, $11 + 4, $ff, $d0, $47, $db, $3 ; trainer
+    db SPRITE_BLONDE_BOY, $1 + 4, $3 + 4, $ff, $d0, $48, $db, $4 ; trainer
+    db SPRITE_GYM_HELPER, $f + 4, $a + 4, $ff, $d0, $9 ; person
+
+    ; warp-to
+    EVENT_DISP $a, $11, $8
+    EVENT_DISP $a, $11, $9
+    EVENT_DISP $a, $3, $1 ; SAFFRON_GYM
+    EVENT_DISP $a, $3, $5 ; SAFFRON_GYM
+    EVENT_DISP $a, $5, $1 ; SAFFRON_GYM
+    EVENT_DISP $a, $5, $5 ; SAFFRON_GYM
+    EVENT_DISP $a, $9, $1 ; SAFFRON_GYM
+    EVENT_DISP $a, $9, $5 ; SAFFRON_GYM
+    EVENT_DISP $a, $b, $1 ; SAFFRON_GYM
+    EVENT_DISP $a, $b, $5 ; SAFFRON_GYM
+    EVENT_DISP $a, $f, $1 ; SAFFRON_GYM
+    EVENT_DISP $a, $f, $5 ; SAFFRON_GYM
+    EVENT_DISP $a, $11, $1 ; SAFFRON_GYM
+    EVENT_DISP $a, $11, $5 ; SAFFRON_GYM
+    EVENT_DISP $a, $3, $9 ; SAFFRON_GYM
+    EVENT_DISP $a, $3, $b ; SAFFRON_GYM
+    EVENT_DISP $a, $5, $9 ; SAFFRON_GYM
+    EVENT_DISP $a, $5, $b ; SAFFRON_GYM
+    EVENT_DISP $a, $b, $b ; SAFFRON_GYM
+    EVENT_DISP $a, $f, $b ; SAFFRON_GYM
+    EVENT_DISP $a, $3, $f ; SAFFRON_GYM
+    EVENT_DISP $a, $3, $13 ; SAFFRON_GYM
+    EVENT_DISP $a, $5, $f ; SAFFRON_GYM
+    EVENT_DISP $a, $5, $13 ; SAFFRON_GYM
+    EVENT_DISP $a, $9, $f ; SAFFRON_GYM
+    EVENT_DISP $a, $9, $13 ; SAFFRON_GYM
+    EVENT_DISP $a, $b, $f ; SAFFRON_GYM
+    EVENT_DISP $a, $b, $13 ; SAFFRON_GYM
+    EVENT_DISP $a, $f, $f ; SAFFRON_GYM
+    EVENT_DISP $a, $f, $13 ; SAFFRON_GYM
+    EVENT_DISP $a, $11, $f ; SAFFRON_GYM
+    EVENT_DISP $a, $11, $13 ; SAFFRON_GYM
+
 
 SaffronGymBlocks: ; 90
     INCBIN "maps/saffrongym.blk"
@@ -15305,7 +19140,25 @@ SaffronMart_h: ; 0x5d3fd to 0x5d409 (12 bytes) (id=180)
 
     dw $541c ; objects
 
-INCBIN "baserom.gbc",$5d409,$5d442 - $5d409
+INCBIN "baserom.gbc",$5d409,$5d41c - $5d409
+SaffronMartObject: ; 0x5d41c (size=38)
+    db $0 ; border tile
+
+    db $2 ; warps
+    db $7, $3, $4, $ff
+    db $7, $4, $4, $ff
+
+    db $0 ; signs
+
+    db $3 ; people
+    db SPRITE_MART_GUY, $5 + 4, $0 + 4, $ff, $d3, $1 ; person
+    db SPRITE_BLACK_HAIR_BOY_2, $2 + 4, $4 + 4, $ff, $ff, $2 ; person
+    db SPRITE_BLONDE_PONYTAIL_GIRL, $5 + 4, $6 + 4, $fe, $0, $3 ; person
+
+    ; warp-to
+    EVENT_DISP $4, $7, $3
+    EVENT_DISP $4, $7, $4
+
 
 SilphCo1_h: ; 0x5d442 to 0x5d44e (12 bytes) (id=181)
     db $16 ; tileset
@@ -15315,7 +19168,29 @@ SilphCo1_h: ; 0x5d442 to 0x5d44e (12 bytes) (id=181)
 
     dw $5470 ; objects
 
-INCBIN "baserom.gbc",$5d44e,$5d4a2 - $5d44e
+INCBIN "baserom.gbc",$5d44e,$5d470 - $5d44e
+SilphCo1Object: ; 0x5d470 (size=50)
+    db $2e ; border tile
+
+    db $5 ; warps
+    db $11, $a, $5, $ff
+    db $11, $b, $5, $ff
+    db $0, $1a, $0, SILPH_CO_2F
+    db $0, $14, $0, SILPH_CO_ELEVATOR
+    db $a, $10, $6, SILPH_CO_3F
+
+    db $0 ; signs
+
+    db $1 ; people
+    db SPRITE_CABLE_CLUB_WOMAN, $2 + 4, $4 + 4, $ff, $d0, $1 ; person
+
+    ; warp-to
+    EVENT_DISP $f, $11, $a
+    EVENT_DISP $f, $11, $b
+    EVENT_DISP $f, $0, $1a ; SILPH_CO_2F
+    EVENT_DISP $f, $0, $14 ; SILPH_CO_ELEVATOR
+    EVENT_DISP $f, $a, $10 ; SILPH_CO_3F
+
 
 SilphCo1Blocks: ; 135
     INCBIN "maps/silphco1.blk"
@@ -15328,7 +19203,26 @@ SaffronPokecenter_h: ; 0x5d529 to 0x5d535 (12 bytes) (id=182)
 
     dw $554f ; objects
 
-INCBIN "baserom.gbc",$5d535,$5d57b - $5d535
+INCBIN "baserom.gbc",$5d535,$5d54f - $5d535
+SaffronPokecenterObject: ; 0x5d54f (size=44)
+    db $0 ; border tile
+
+    db $2 ; warps
+    db $7, $3, $6, $ff
+    db $7, $4, $6, $ff
+
+    db $0 ; signs
+
+    db $4 ; people
+    db SPRITE_NURSE, $1 + 4, $3 + 4, $ff, $d0, $1 ; person
+    db SPRITE_FOULARD_WOMAN, $5 + 4, $5 + 4, $ff, $ff, $2 ; person
+    db SPRITE_GENTLEMAN, $3 + 4, $8 + 4, $ff, $d0, $3 ; person
+    db SPRITE_CABLE_CLUB_WOMAN, $2 + 4, $b + 4, $ff, $d0, $4 ; person
+
+    ; warp-to
+    EVENT_DISP $7, $7, $3
+    EVENT_DISP $7, $7, $4
+
 
 ViridianForestexit_h: ; 0x5d57b to 0x5d587 (12 bytes) (id=47)
     db $09 ; tileset
@@ -15338,7 +19232,28 @@ ViridianForestexit_h: ; 0x5d57b to 0x5d587 (12 bytes) (id=47)
 
     dw $5598 ; objects
 
-INCBIN "baserom.gbc",$5d587,$5d5c8 - $5d587
+INCBIN "baserom.gbc",$5d587,$5d598 - $5d587
+ViridianForestexitObject: ; 0x5d598 (size=48)
+    db $a ; border tile
+
+    db $4 ; warps
+    db $0, $4, $1, $ff
+    db $0, $5, $1, $ff
+    db $7, $4, $0, VIRIDIAN_FOREST
+    db $7, $5, $0, VIRIDIAN_FOREST
+
+    db $0 ; signs
+
+    db $2 ; people
+    db SPRITE_BLACK_HAIR_BOY_2, $2 + 4, $3 + 4, $ff, $ff, $1 ; person
+    db SPRITE_OLD_PERSON, $5 + 4, $2 + 4, $ff, $ff, $2 ; person
+
+    ; warp-to
+    EVENT_DISP $5, $0, $4
+    EVENT_DISP $5, $0, $5
+    EVENT_DISP $5, $7, $4 ; VIRIDIAN_FOREST
+    EVENT_DISP $5, $7, $5 ; VIRIDIAN_FOREST
+
 
 Route2Gate_h: ; 0x5d5c8 to 0x5d5d4 (12 bytes) (id=49)
     db $0c ; tileset
@@ -15348,7 +19263,28 @@ Route2Gate_h: ; 0x5d5c8 to 0x5d5d4 (12 bytes) (id=49)
 
     dw $5620 ; objects
 
-INCBIN "baserom.gbc",$5d5d4,$5d650 - $5d5d4
+INCBIN "baserom.gbc",$5d5d4,$5d620 - $5d5d4
+Route2GateObject: ; 0x5d620 (size=48)
+    db $a ; border tile
+
+    db $4 ; warps
+    db $0, $4, $3, $ff
+    db $0, $5, $3, $ff
+    db $7, $4, $4, $ff
+    db $7, $5, $4, $ff
+
+    db $0 ; signs
+
+    db $2 ; people
+    db SPRITE_OAK_AIDE, $4 + 4, $1 + 4, $ff, $d2, $1 ; person
+    db SPRITE_BLONDE_BOY, $4 + 4, $5 + 4, $fe, $2, $2 ; person
+
+    ; warp-to
+    EVENT_DISP $5, $0, $4
+    EVENT_DISP $5, $0, $5
+    EVENT_DISP $5, $7, $4
+    EVENT_DISP $5, $7, $5
+
 
 ViridianForestEntrance_h: ; 0x5d650 to 0x5d65c (12 bytes) (id=50)
     db $09 ; tileset
@@ -15358,7 +19294,28 @@ ViridianForestEntrance_h: ; 0x5d650 to 0x5d65c (12 bytes) (id=50)
 
     dw $566d ; objects
 
-INCBIN "baserom.gbc",$5d65c,$5d69d - $5d65c
+INCBIN "baserom.gbc",$5d65c,$5d66d - $5d65c
+ViridianForestEntranceObject: ; 0x5d66d (size=48)
+    db $a ; border tile
+
+    db $4 ; warps
+    db $0, $4, $3, VIRIDIAN_FOREST
+    db $0, $5, $4, VIRIDIAN_FOREST
+    db $7, $4, $5, $ff
+    db $7, $5, $5, $ff
+
+    db $0 ; signs
+
+    db $2 ; people
+    db SPRITE_GIRL, $4 + 4, $8 + 4, $ff, $d2, $1 ; person
+    db SPRITE_LITTLE_GIRL, $4 + 4, $2 + 4, $fe, $1, $2 ; person
+
+    ; warp-to
+    EVENT_DISP $5, $0, $4 ; VIRIDIAN_FOREST
+    EVENT_DISP $5, $0, $5 ; VIRIDIAN_FOREST
+    EVENT_DISP $5, $7, $4
+    EVENT_DISP $5, $7, $5
+
 
 UndergroundTunnelEntranceRoute5_h: ; 0x5d69d to 0x5d6a9 (12 bytes) (id=71)
     db $0c ; tileset
@@ -15368,7 +19325,25 @@ UndergroundTunnelEntranceRoute5_h: ; 0x5d69d to 0x5d6a9 (12 bytes) (id=71)
 
     dw $56c1 ; objects
 
-INCBIN "baserom.gbc",$5d6a9,$5d6e3 - $5d6a9
+INCBIN "baserom.gbc",$5d6a9,$5d6c1 - $5d6a9
+UndergroundTunnelEntranceRoute5Object: ; 0x5d6c1 (size=34)
+    db $a ; border tile
+
+    db $3 ; warps
+    db $7, $3, $3, $ff
+    db $7, $4, $3, $ff
+    db $4, $4, $0, UNDERGROUND_PATH_NS
+
+    db $0 ; signs
+
+    db $1 ; people
+    db SPRITE_LITTLE_GIRL, $3 + 4, $2 + 4, $ff, $ff, $1 ; person
+
+    ; warp-to
+    EVENT_DISP $4, $7, $3
+    EVENT_DISP $4, $7, $4
+    EVENT_DISP $4, $4, $4 ; UNDERGROUND_PATH_NS
+
 
 UndergroundTunnelEntranceRoute6_h: ; 0x5d6e3 to 0x5d6ef (12 bytes) (id=74)
     db $0c ; tileset
@@ -15378,7 +19353,25 @@ UndergroundTunnelEntranceRoute6_h: ; 0x5d6e3 to 0x5d6ef (12 bytes) (id=74)
 
     dw $56fe ; objects
 
-INCBIN "baserom.gbc",$5d6ef,$5d720 - $5d6ef
+INCBIN "baserom.gbc",$5d6ef,$5d6fe - $5d6ef
+UndergroundTunnelEntranceRoute6Object: ; 0x5d6fe (size=34)
+    db $a ; border tile
+
+    db $3 ; warps
+    db $7, $3, $3, $ff
+    db $7, $4, $3, $ff
+    db $4, $4, $1, UNDERGROUND_PATH_NS
+
+    db $0 ; signs
+
+    db $1 ; people
+    db SPRITE_GIRL, $3 + 4, $2 + 4, $ff, $ff, $1 ; person
+
+    ; warp-to
+    EVENT_DISP $4, $7, $3
+    EVENT_DISP $4, $7, $4
+    EVENT_DISP $4, $4, $4 ; UNDERGROUND_PATH_NS
+
 
 UndergroundPathEntranceRoute7_h: ; 0x5d720 to 0x5d72c (12 bytes) (id=77)
     db $0c ; tileset
@@ -15388,7 +19381,26 @@ UndergroundPathEntranceRoute7_h: ; 0x5d720 to 0x5d72c (12 bytes) (id=77)
 
     dw $573b ; objects
 
-INCBIN "baserom.gbc",$5d72c,$5d7af - $5d72c
+INCBIN "baserom.gbc",$5d72c,$5d73b - $5d72c
+UndergroundPathEntranceRoute7Object: ; 0x5d73b (size=34)
+    db $a ; border tile
+
+    db $3 ; warps
+    db $7, $3, $4, $ff
+    db $7, $4, $4, $ff
+    db $4, $4, $0, UNDERGROUND_PATH_WE
+
+    db $0 ; signs
+
+    db $1 ; people
+    db SPRITE_FAT_BALD_GUY, $4 + 4, $2 + 4, $ff, $ff, $1 ; person
+
+    ; warp-to
+    EVENT_DISP $4, $7, $3
+    EVENT_DISP $4, $7, $4
+    EVENT_DISP $4, $4, $4 ; UNDERGROUND_PATH_WE
+
+INCBIN "baserom.gbc",$5d75d,$52
 
 SilphCo9_h: ; 0x5d7af to 0x5d7bb (12 bytes) (id=233)
     db $16 ; tileset
@@ -15398,7 +19410,32 @@ SilphCo9_h: ; 0x5d7af to 0x5d7bb (12 bytes) (id=233)
 
     dw $593f ; objects
 
-INCBIN "baserom.gbc",$5d7bb,$5d989 - $5d7bb
+INCBIN "baserom.gbc",$5d7bb,$5d93f - $5d7bb
+SilphCo9Object: ; 0x5d93f (size=74)
+    db $2e ; border tile
+
+    db $5 ; warps
+    db $0, $e, $0, SILPH_CO_10F
+    db $0, $10, $0, SILPH_CO_8F
+    db $0, $12, $0, SILPH_CO_ELEVATOR
+    db $3, $9, $7, SILPH_CO_3F
+    db $f, $11, $4, SILPH_CO_5F
+
+    db $0 ; signs
+
+    db $4 ; people
+    db SPRITE_NURSE, $e + 4, $3 + 4, $ff, $d0, $1 ; person
+    db SPRITE_ROCKET_GRUNT, $4 + 4, $2 + 4, $ff, $d1, $42, $e6, $25 ; trainer
+    db SPRITE_OAK_AIDE, $d + 4, $15 + 4, $ff, $d0, $43, $e4, $a ; trainer
+    db SPRITE_ROCKET_GRUNT, $10 + 4, $d + 4, $ff, $d1, $44, $e6, $26 ; trainer
+
+    ; warp-to
+    EVENT_DISP $d, $0, $e ; SILPH_CO_10F
+    EVENT_DISP $d, $0, $10 ; SILPH_CO_8F
+    EVENT_DISP $d, $0, $12 ; SILPH_CO_ELEVATOR
+    EVENT_DISP $d, $3, $9 ; SILPH_CO_3F
+    EVENT_DISP $d, $f, $11 ; SILPH_CO_5F
+
 
 SilphCo9Blocks: ; 117
     INCBIN "maps/silphco9.blk"
@@ -15411,7 +19448,31 @@ VictoryRoad1_h: ; 0x5d9fe to 0x5da0a (12 bytes) (id=108)
 
     dw $5ab8 ; objects
 
-INCBIN "baserom.gbc",$5da0a,$5db04 - $5da0a
+INCBIN "baserom.gbc",$5da0a,$5dab8 - $5da0a
+VictoryRoad1Object: ; 0x5dab8 (size=76)
+    db $7d ; border tile
+
+    db $3 ; warps
+    db $11, $8, $2, $ff
+    db $11, $9, $2, $ff
+    db $1, $1, $0, VICTORY_ROAD_2
+
+    db $0 ; signs
+
+    db $7 ; people
+    db SPRITE_BLONDE_PONYTAIL_GIRL, $5 + 4, $7 + 4, $ff, $d3, $41, $e8, $5 ; trainer
+    db SPRITE_BLACK_HAIR_BOY_1, $2 + 4, $3 + 4, $ff, $d0, $42, $e7, $5 ; trainer
+    db SPRITE_BALL, $0 + 4, $b + 4, $ff, $ff, $83, $f3 ; item
+    db SPRITE_BALL, $2 + 4, $9 + 4, $ff, $ff, $84, $28 ; item
+    db SPRITE_BOULDER, $f + 4, $5 + 4, $ff, $10, $5 ; person
+    db SPRITE_BOULDER, $2 + 4, $e + 4, $ff, $10, $6 ; person
+    db SPRITE_BOULDER, $a + 4, $2 + 4, $ff, $10, $7 ; person
+
+    ; warp-to
+    EVENT_DISP $a, $11, $8
+    EVENT_DISP $a, $11, $9
+    EVENT_DISP $a, $1, $1 ; VICTORY_ROAD_2
+
 
 VictoryRoad1Blocks: ; 90
     INCBIN "maps/victoryroad1.blk"
@@ -15438,7 +19499,29 @@ PokemonTower1_h: ; 0x60420 to 0x6042c (12 bytes) (id=142)
 
     dw $4452 ; objects
 
-INCBIN "baserom.gbc",$6042c,$6048c - $6042c
+INCBIN "baserom.gbc",$6042c,$60452 - $6042c
+PokemonTower1Object: ; 0x60452 (size=58)
+    db $1 ; border tile
+
+    db $3 ; warps
+    db $11, $a, $1, $ff
+    db $11, $b, $1, $ff
+    db $9, $12, $1, POKEMONTOWER_2
+
+    db $0 ; signs
+
+    db $5 ; people
+    db SPRITE_CABLE_CLUB_WOMAN, $d + 4, $f + 4, $ff, $d1, $1 ; person
+    db SPRITE_MOM_GEISHA, $8 + 4, $6 + 4, $ff, $ff, $2 ; person
+    db SPRITE_BALDING_GUY, $c + 4, $8 + 4, $ff, $ff, $3 ; person
+    db SPRITE_GIRL, $7 + 4, $d + 4, $ff, $ff, $4 ; person
+    db SPRITE_MEDIUM, $7 + 4, $11 + 4, $ff, $d2, $5 ; person
+
+    ; warp-to
+    EVENT_DISP $a, $11, $a
+    EVENT_DISP $a, $11, $b
+    EVENT_DISP $a, $9, $12 ; POKEMONTOWER_2
+
 
 PokemonTower1Blocks: ; 90
     INCBIN "maps/pokemontower1.blk"
@@ -15451,7 +19534,24 @@ PokemonTower2_h: ; 0x604e6 to 0x604f2 (12 bytes) (id=143)
 
     dw $4646 ; objects
 
-INCBIN "baserom.gbc",$604f2,$60666 - $604f2
+INCBIN "baserom.gbc",$604f2,$60646 - $604f2
+PokemonTower2Object: ; 0x60646 (size=32)
+    db $1 ; border tile
+
+    db $2 ; warps
+    db $9, $3, $0, POKEMONTOWER_3
+    db $9, $12, $2, POKEMONTOWER_1
+
+    db $0 ; signs
+
+    db $2 ; people
+    db SPRITE_RIVAL, $5 + 4, $e + 4, $ff, $ff, $1 ; person
+    db SPRITE_MEDIUM, $7 + 4, $3 + 4, $ff, $d3, $2 ; person
+
+    ; warp-to
+    EVENT_DISP $a, $9, $3 ; POKEMONTOWER_3
+    EVENT_DISP $a, $9, $12 ; POKEMONTOWER_1
+
 
 PokemonTower2Blocks: ; 90
     INCBIN "maps/pokemontower2.blk"
@@ -15464,7 +19564,26 @@ PokemonTower3_h: ; 0x606c0 to 0x606cc (12 bytes) (id=144)
 
     dw $475d ; objects
 
-INCBIN "baserom.gbc",$606cc,$60790 - $606cc
+INCBIN "baserom.gbc",$606cc,$6075d - $606cc
+PokemonTower3Object: ; 0x6075d (size=51)
+    db $1 ; border tile
+
+    db $2 ; warps
+    db $9, $3, $0, POKEMONTOWER_2
+    db $9, $12, $1, POKEMONTOWER_4
+
+    db $0 ; signs
+
+    db $4 ; people
+    db SPRITE_MEDIUM, $3 + 4, $c + 4, $ff, $d2, $41, $f5, $5 ; trainer
+    db SPRITE_MEDIUM, $8 + 4, $9 + 4, $ff, $d0, $42, $f5, $6 ; trainer
+    db SPRITE_MEDIUM, $d + 4, $a + 4, $ff, $d0, $43, $f5, $8 ; trainer
+    db SPRITE_BALL, $1 + 4, $c + 4, $ff, $ff, $84, $1d ; item
+
+    ; warp-to
+    EVENT_DISP $a, $9, $3 ; POKEMONTOWER_2
+    EVENT_DISP $a, $9, $12 ; POKEMONTOWER_4
+
 
 PokemonTower3Blocks: ; 90
     INCBIN "maps/pokemontower3.blk"
@@ -15477,7 +19596,28 @@ PokemonTower4_h: ; 0x607ea to 0x607f6 (12 bytes) (id=145)
 
     dw $488b ; objects
 
-INCBIN "baserom.gbc",$607f6,$608cc - $607f6
+INCBIN "baserom.gbc",$607f6,$6088b - $607f6
+PokemonTower4Object: ; 0x6088b (size=65)
+    db $1 ; border tile
+
+    db $2 ; warps
+    db $9, $3, $0, POKEMONTOWER_5
+    db $9, $12, $1, POKEMONTOWER_3
+
+    db $0 ; signs
+
+    db $6 ; people
+    db SPRITE_MEDIUM, $a + 4, $5 + 4, $ff, $d3, $41, $f5, $9 ; trainer
+    db SPRITE_MEDIUM, $7 + 4, $f + 4, $ff, $d0, $42, $f5, $a ; trainer
+    db SPRITE_MEDIUM, $c + 4, $e + 4, $ff, $d2, $43, $f5, $c ; trainer
+    db SPRITE_BALL, $a + 4, $c + 4, $ff, $ff, $84, $52 ; item
+    db SPRITE_BALL, $a + 4, $9 + 4, $ff, $ff, $85, $e ; item
+    db SPRITE_BALL, $10 + 4, $c + 4, $ff, $ff, $86, $23 ; item
+
+    ; warp-to
+    EVENT_DISP $a, $9, $3 ; POKEMONTOWER_5
+    EVENT_DISP $a, $9, $12 ; POKEMONTOWER_3
+
 
 PokemonTower4Blocks: ; 90
     INCBIN "maps/pokemontower4.blk"
@@ -15490,7 +19630,28 @@ PokemonTower5_h: ; 0x60926 to 0x60932 (12 bytes) (id=146)
 
     dw $4a48 ; objects
 
-INCBIN "baserom.gbc",$60932,$60a89 - $60932
+INCBIN "baserom.gbc",$60932,$60a48 - $60932
+PokemonTower5Object: ; 0x60a48 (size=65)
+    db $1 ; border tile
+
+    db $2 ; warps
+    db $9, $3, $0, POKEMONTOWER_4
+    db $9, $12, $0, POKEMONTOWER_6
+
+    db $0 ; signs
+
+    db $6 ; people
+    db SPRITE_MEDIUM, $8 + 4, $c + 4, $ff, $ff, $1 ; person
+    db SPRITE_MEDIUM, $7 + 4, $11 + 4, $ff, $d2, $42, $f5, $e ; trainer
+    db SPRITE_MEDIUM, $3 + 4, $e + 4, $ff, $d2, $43, $f5, $10 ; trainer
+    db SPRITE_MEDIUM, $a + 4, $6 + 4, $ff, $d3, $44, $f5, $11 ; trainer
+    db SPRITE_MEDIUM, $10 + 4, $9 + 4, $ff, $d3, $45, $f5, $12 ; trainer
+    db SPRITE_BALL, $e + 4, $6 + 4, $ff, $ff, $86, $31 ; item
+
+    ; warp-to
+    EVENT_DISP $a, $9, $3 ; POKEMONTOWER_4
+    EVENT_DISP $a, $9, $12 ; POKEMONTOWER_6
+
 
 PokemonTower5Blocks: ; 90
     INCBIN "maps/pokemontower5.blk"
@@ -15503,7 +19664,27 @@ PokemonTower6_h: ; 0x60ae3 to 0x60aef (12 bytes) (id=147)
 
     dw $4c5b ; objects
 
-INCBIN "baserom.gbc",$60aef,$60c95 - $60aef
+INCBIN "baserom.gbc",$60aef,$60c5b - $60aef
+PokemonTower6Object: ; 0x60c5b (size=58)
+    db $1 ; border tile
+
+    db $2 ; warps
+    db $9, $12, $1, POKEMONTOWER_5
+    db $10, $9, $0, POKEMONTOWER_7
+
+    db $0 ; signs
+
+    db $5 ; people
+    db SPRITE_MEDIUM, $a + 4, $c + 4, $ff, $d3, $41, $f5, $13 ; trainer
+    db SPRITE_MEDIUM, $5 + 4, $9 + 4, $ff, $d0, $42, $f5, $14 ; trainer
+    db SPRITE_MEDIUM, $5 + 4, $10 + 4, $ff, $d2, $43, $f5, $15 ; trainer
+    db SPRITE_BALL, $8 + 4, $6 + 4, $ff, $ff, $84, $28 ; item
+    db SPRITE_BALL, $e + 4, $e + 4, $ff, $ff, $85, $2e ; item
+
+    ; warp-to
+    EVENT_DISP $a, $9, $12 ; POKEMONTOWER_5
+    EVENT_DISP $a, $10, $9 ; POKEMONTOWER_7
+
 
 PokemonTower6Blocks: ; 90
     INCBIN "maps/pokemontower6.blk"
@@ -15518,7 +19699,24 @@ PokemonTower7_h: ; 0x60cf9 to 0x60d05 (12 bytes) (id=148)
 
     dw $4ef6 ; objects
 
-INCBIN "baserom.gbc",$60d05,$60f20 - $60d05
+INCBIN "baserom.gbc",$60d05,$60ef6 - $60d05
+PokemonTower7Object: ; 0x60ef6 (size=42)
+    db $1 ; border tile
+
+    db $1 ; warps
+    db $10, $9, $1, POKEMONTOWER_6
+
+    db $0 ; signs
+
+    db $4 ; people
+    db SPRITE_ROCKET_GRUNT, $b + 4, $9 + 4, $ff, $d3, $41, $e6, $13 ; trainer
+    db SPRITE_ROCKET_GRUNT, $9 + 4, $c + 4, $ff, $d2, $42, $e6, $14 ; trainer
+    db SPRITE_ROCKET_GRUNT, $7 + 4, $9 + 4, $ff, $d3, $43, $e6, $15 ; trainer
+    db SPRITE_MR_FUJI, $3 + 4, $a + 4, $ff, $d0, $4 ; person
+
+    ; warp-to
+    EVENT_DISP $a, $10, $9 ; POKEMONTOWER_6
+
 
 PokemonTower7Blocks: ; 90
     INCBIN "maps/pokemontower7.blk"
@@ -15531,7 +19729,33 @@ CeladonMart1_h: ; 0x60f7a to 0x60f86 (12 bytes) (id=122)
 
     dw $4f9e ; objects
 
-INCBIN "baserom.gbc",$60f86,$60fde - $60f86
+INCBIN "baserom.gbc",$60f86,$60f9e - $60f86
+CeladonMart1Object: ; 0x60f9e (size=64)
+    db $f ; border tile
+
+    db $6 ; warps
+    db $7, $2, $0, $ff
+    db $7, $3, $0, $ff
+    db $7, $10, $1, $ff
+    db $7, $11, $1, $ff
+    db $1, $c, $0, CELADON_MART_2
+    db $1, $1, $0, CELADON_MART_6
+
+    db $2 ; signs
+    db $4, $b, $2 ; CeladonMart1Text2
+    db $1, $e, $3 ; CeladonMart1Text3
+
+    db $1 ; people
+    db SPRITE_CABLE_CLUB_WOMAN, $3 + 4, $8 + 4, $ff, $d0, $1 ; person
+
+    ; warp-to
+    EVENT_DISP $a, $7, $2
+    EVENT_DISP $a, $7, $3
+    EVENT_DISP $a, $7, $10
+    EVENT_DISP $a, $7, $11
+    EVENT_DISP $a, $1, $c ; CELADON_MART_2
+    EVENT_DISP $a, $1, $1 ; CELADON_MART_6
+
 
 CeladonMart1Blocks: ; 40
     INCBIN "maps/celadonmart1.blk"
@@ -15546,7 +19770,44 @@ ViridianForest_h: ; 0x61101 to 0x6110d (12 bytes) (id=51)
 
     dw $51da ; objects
 
-INCBIN "baserom.gbc",$6110d,$61259 - $6110d
+INCBIN "baserom.gbc",$6110d,$611da - $6110d
+ViridianForestObject: ; 0x611da (size=127)
+    db $3 ; border tile
+
+    db $6 ; warps
+    db $0, $1, $2, VIRIDIAN_FOREST_EXIT
+    db $0, $2, $3, VIRIDIAN_FOREST_EXIT
+    db $2f, $f, $1, VIRIDIAN_FOREST_ENTRANCE
+    db $2f, $10, $1, VIRIDIAN_FOREST_ENTRANCE
+    db $2f, $11, $1, VIRIDIAN_FOREST_ENTRANCE
+    db $2f, $12, $1, VIRIDIAN_FOREST_ENTRANCE
+
+    db $6 ; signs
+    db $28, $18, $9 ; ViridianForestText9
+    db $20, $10, $a ; ViridianForestText10
+    db $11, $1a, $b ; ViridianForestText11
+    db $18, $4, $c ; ViridianForestText12
+    db $2d, $12, $d ; ViridianForestText13
+    db $1, $2, $e ; ViridianForestText14
+
+    db $8 ; people
+    db SPRITE_BLONDE_BOY, $2b + 4, $10 + 4, $ff, $ff, $1 ; person
+    db SPRITE_BLONDE_BOY, $21 + 4, $1e + 4, $ff, $d2, $42, $ca, $1 ; trainer
+    db SPRITE_BLONDE_BOY, $13 + 4, $1e + 4, $ff, $d2, $43, $ca, $2 ; trainer
+    db SPRITE_BLONDE_BOY, $12 + 4, $2 + 4, $ff, $d2, $44, $ca, $3 ; trainer
+    db SPRITE_BALL, $b + 4, $19 + 4, $ff, $ff, $85, $b ; item
+    db SPRITE_BALL, $1d + 4, $c + 4, $ff, $ff, $86, $14 ; item
+    db SPRITE_BALL, $1f + 4, $1 + 4, $ff, $ff, $87, $4 ; item
+    db SPRITE_BLONDE_BOY, $28 + 4, $1b + 4, $ff, $ff, $8 ; person
+
+    ; warp-to
+    EVENT_DISP $11, $0, $1 ; VIRIDIAN_FOREST_EXIT
+    EVENT_DISP $11, $0, $2 ; VIRIDIAN_FOREST_EXIT
+    EVENT_DISP $11, $2f, $f ; VIRIDIAN_FOREST_ENTRANCE
+    EVENT_DISP $11, $2f, $10 ; VIRIDIAN_FOREST_ENTRANCE
+    EVENT_DISP $11, $2f, $11 ; VIRIDIAN_FOREST_ENTRANCE
+    EVENT_DISP $11, $2f, $12 ; VIRIDIAN_FOREST_ENTRANCE
+
 
 SSAnne1_h: ; 0x61259 to 0x61265 (12 bytes) (id=95)
     db $0d ; tileset
@@ -15556,7 +19817,42 @@ SSAnne1_h: ; 0x61259 to 0x61265 (12 bytes) (id=95)
 
     dw $5277 ; objects
 
-INCBIN "baserom.gbc",$61265,$612df - $61265
+INCBIN "baserom.gbc",$61265,$61277 - $61265
+SSAnne1Object: ; 0x61277 (size=104)
+    db $c ; border tile
+
+    db $b ; warps
+    db $0, $1a, $1, VERMILION_DOCK
+    db $0, $1b, $1, VERMILION_DOCK
+    db $8, $1f, $0, SS_ANNE_8
+    db $8, $17, $1, SS_ANNE_8
+    db $8, $13, $2, SS_ANNE_8
+    db $8, $f, $3, SS_ANNE_8
+    db $8, $b, $4, SS_ANNE_8
+    db $8, $7, $5, SS_ANNE_8
+    db $6, $2, $6, SS_ANNE_2
+    db $f, $25, $5, SS_ANNE_4
+    db $10, $3, $0, SS_ANNE_6
+
+    db $0 ; signs
+
+    db $2 ; people
+    db SPRITE_WAITER, $6 + 4, $c + 4, $fe, $2, $1 ; person
+    db SPRITE_SAILOR, $5 + 4, $1b + 4, $ff, $ff, $2 ; person
+
+    ; warp-to
+    EVENT_DISP $14, $0, $1a ; VERMILION_DOCK
+    EVENT_DISP $14, $0, $1b ; VERMILION_DOCK
+    EVENT_DISP $14, $8, $1f ; SS_ANNE_8
+    EVENT_DISP $14, $8, $17 ; SS_ANNE_8
+    EVENT_DISP $14, $8, $13 ; SS_ANNE_8
+    EVENT_DISP $14, $8, $f ; SS_ANNE_8
+    EVENT_DISP $14, $8, $b ; SS_ANNE_8
+    EVENT_DISP $14, $8, $7 ; SS_ANNE_8
+    EVENT_DISP $14, $6, $2 ; SS_ANNE_2
+    EVENT_DISP $14, $f, $25 ; SS_ANNE_4
+    EVENT_DISP $14, $10, $3 ; SS_ANNE_6
+
 
 SSAnne1Blocks: ; 180
     INCBIN "maps/ssanne1.blk"
@@ -15569,7 +19865,38 @@ SSAnne2_h: ; 0x61393 to 0x6139f (12 bytes) (id=96)
 
     dw $5514 ; objects
 
-INCBIN "baserom.gbc",$6139f,$6156e - $6139f
+INCBIN "baserom.gbc",$6139f,$61514 - $6139f
+SSAnne2Object: ; 0x61514 (size=90)
+    db $c ; border tile
+
+    db $9 ; warps
+    db $b, $9, $0, SS_ANNE_9
+    db $b, $d, $2, SS_ANNE_9
+    db $b, $11, $4, SS_ANNE_9
+    db $b, $15, $6, SS_ANNE_9
+    db $b, $19, $8, SS_ANNE_9
+    db $b, $1d, $a, SS_ANNE_9
+    db $4, $2, $8, SS_ANNE_1
+    db $c, $2, $1, SS_ANNE_3
+    db $4, $24, $0, SS_ANNE_7
+
+    db $0 ; signs
+
+    db $2 ; people
+    db SPRITE_WAITER, $7 + 4, $3 + 4, $fe, $1, $1 ; person
+    db SPRITE_RIVAL, $4 + 4, $24 + 4, $ff, $d0, $42, $e1, $1 ; trainer
+
+    ; warp-to
+    EVENT_DISP $14, $b, $9 ; SS_ANNE_9
+    EVENT_DISP $14, $b, $d ; SS_ANNE_9
+    EVENT_DISP $14, $b, $11 ; SS_ANNE_9
+    EVENT_DISP $14, $b, $15 ; SS_ANNE_9
+    EVENT_DISP $14, $b, $19 ; SS_ANNE_9
+    EVENT_DISP $14, $b, $1d ; SS_ANNE_9
+    EVENT_DISP $14, $4, $2 ; SS_ANNE_1
+    EVENT_DISP $14, $c, $2 ; SS_ANNE_3
+    EVENT_DISP $14, $4, $24 ; SS_ANNE_7
+
 
 SSAnne2Blocks: ; 180
     INCBIN "maps/ssanne2.blk"
@@ -15582,7 +19909,30 @@ SSAnne4_h: ; 0x61622 to 0x6162e (12 bytes) (id=98)
 
     dw $5632 ; objects
 
-INCBIN "baserom.gbc",$6162e,$61666 - $6162e
+INCBIN "baserom.gbc",$6162e,$61632 - $6162e
+SSAnne4Object: ; 0x61632 (size=52)
+    db $c ; border tile
+
+    db $6 ; warps
+    db $3, $17, $8, SS_ANNE_10
+    db $3, $13, $6, SS_ANNE_10
+    db $3, $f, $4, SS_ANNE_10
+    db $3, $b, $2, SS_ANNE_10
+    db $3, $7, $0, SS_ANNE_10
+    db $5, $1b, $9, SS_ANNE_1
+
+    db $0 ; signs
+
+    db $0 ; people
+
+    ; warp-to
+    EVENT_DISP $f, $3, $17 ; SS_ANNE_10
+    EVENT_DISP $f, $3, $13 ; SS_ANNE_10
+    EVENT_DISP $f, $3, $f ; SS_ANNE_10
+    EVENT_DISP $f, $3, $b ; SS_ANNE_10
+    EVENT_DISP $f, $3, $7 ; SS_ANNE_10
+    EVENT_DISP $f, $5, $1b ; SS_ANNE_1
+
 
 SSAnne4Blocks: ; 60
     INCBIN "maps/ssanne4.blk"
@@ -15595,7 +19945,27 @@ SSAnne5_h: ; 0x616a2 to 0x616ae (12 bytes) (id=99)
 
     dw $572b ; objects
 
-INCBIN "baserom.gbc",$616ae,$61761 - $616ae
+INCBIN "baserom.gbc",$616ae,$6172b - $616ae
+SSAnne5Object: ; 0x6172b (size=54)
+    db $23 ; border tile
+
+    db $2 ; warps
+    db $6, $d, $0, SS_ANNE_3
+    db $7, $d, $0, SS_ANNE_3
+
+    db $0 ; signs
+
+    db $5 ; people
+    db SPRITE_BLACK_HAIR_BOY_2, $2 + 4, $5 + 4, $ff, $d1, $1 ; person
+    db SPRITE_SAILOR, $9 + 4, $4 + 4, $ff, $ff, $2 ; person
+    db SPRITE_BLACK_HAIR_BOY_1, $b + 4, $7 + 4, $ff, $ff, $3 ; person
+    db SPRITE_SAILOR, $4 + 4, $4 + 4, $ff, $d0, $44, $cc, $1 ; trainer
+    db SPRITE_SAILOR, $8 + 4, $a + 4, $ff, $d1, $45, $cc, $2 ; trainer
+
+    ; warp-to
+    EVENT_DISP $a, $6, $d ; SS_ANNE_3
+    EVENT_DISP $a, $7, $d ; SS_ANNE_3
+
 
 SSAnne5Blocks: ; 70
     INCBIN "maps/ssanne5.blk"
@@ -15608,7 +19978,27 @@ SSAnne6_h: ; 0x617a7 to 0x617b3 (12 bytes) (id=100)
 
     dw $581b ; objects
 
-INCBIN "baserom.gbc",$617b3,$61851 - $617b3
+INCBIN "baserom.gbc",$617b3,$6181b - $617b3
+SSAnne6Object: ; 0x6181b (size=54)
+    db $c ; border tile
+
+    db $1 ; warps
+    db $0, $6, $a, SS_ANNE_1
+
+    db $0 ; signs
+
+    db $7 ; people
+    db SPRITE_COOK, $8 + 4, $1 + 4, $fe, $1, $1 ; person
+    db SPRITE_COOK, $8 + 4, $5 + 4, $fe, $1, $2 ; person
+    db SPRITE_COOK, $7 + 4, $9 + 4, $fe, $1, $3 ; person
+    db SPRITE_COOK, $6 + 4, $d + 4, $ff, $ff, $4 ; person
+    db SPRITE_COOK, $8 + 4, $d + 4, $ff, $ff, $5 ; person
+    db SPRITE_COOK, $a + 4, $d + 4, $ff, $ff, $6 ; person
+    db SPRITE_COOK, $d + 4, $b + 4, $ff, $d1, $7 ; person
+
+    ; warp-to
+    EVENT_DISP $7, $0, $6 ; SS_ANNE_1
+
 
 SSAnne6Blocks: ; 56
     INCBIN "maps/ssanne6.blk"
@@ -15621,7 +20011,23 @@ SSAnne7_h: ; 0x61889 to 0x61895 (12 bytes) (id=101)
 
     dw $5946 ; objects
 
-INCBIN "baserom.gbc",$61895,$6195e - $61895
+INCBIN "baserom.gbc",$61895,$61946 - $61895
+SSAnne7Object: ; 0x61946 (size=24)
+    db $c ; border tile
+
+    db $1 ; warps
+    db $7, $0, $8, SS_ANNE_2
+
+    db $2 ; signs
+    db $1, $4, $2 ; SSAnne7Text2
+    db $2, $1, $3 ; SSAnne7Text3
+
+    db $1 ; people
+    db SPRITE_SS_CAPTAIN, $2 + 4, $4 + 4, $ff, $d1, $1 ; person
+
+    ; warp-to
+    EVENT_DISP $3, $7, $0 ; SS_ANNE_2
+
 
 SSAnne7Blocks: ; 12
     INCBIN "maps/ssanne7.blk"
@@ -15634,7 +20040,41 @@ SSAnne8_h: ; 0x6196a to 0x61976 (12 bytes) (id=102)
 
     dw $5a60 ; objects
 
-INCBIN "baserom.gbc",$61976,$61adf - $61976
+INCBIN "baserom.gbc",$61976,$61a60 - $61976
+SSAnne8Object: ; 0x61a60 (size=127)
+    db $c ; border tile
+
+    db $6 ; warps
+    db $0, $0, $2, SS_ANNE_1
+    db $0, $a, $3, SS_ANNE_1
+    db $0, $14, $4, SS_ANNE_1
+    db $a, $0, $5, SS_ANNE_1
+    db $a, $a, $6, SS_ANNE_1
+    db $a, $14, $7, SS_ANNE_1
+
+    db $0 ; signs
+
+    db $b ; people
+    db SPRITE_GENTLEMAN, $3 + 4, $2 + 4, $ff, $d2, $41, $f1, $1 ; trainer
+    db SPRITE_GENTLEMAN, $4 + 4, $b + 4, $ff, $d1, $42, $f1, $2 ; trainer
+    db SPRITE_BLONDE_BOY, $e + 4, $b + 4, $ff, $d1, $43, $c9, $8 ; trainer
+    db SPRITE_BLONDE_PONYTAIL_GIRL, $b + 4, $d + 4, $ff, $d2, $44, $cb, $b ; trainer
+    db SPRITE_GIRL, $3 + 4, $16 + 4, $fe, $1, $5 ; person
+    db SPRITE_FAT_BALD_GUY, $e + 4, $0 + 4, $ff, $ff, $6 ; person
+    db SPRITE_LITTLE_GIRL, $b + 4, $2 + 4, $ff, $d0, $7 ; person
+    db SPRITE_CLEFAIRYLIKE, $b + 4, $3 + 4, $ff, $d0, $8 ; person
+    db SPRITE_GIRL, $d + 4, $a + 4, $ff, $d3, $9 ; person
+    db SPRITE_BALL, $f + 4, $c + 4, $ff, $ff, $8a, $d0 ; item
+    db SPRITE_GENTLEMAN, $d + 4, $15 + 4, $fe, $2, $b ; person
+
+    ; warp-to
+    EVENT_DISP $c, $0, $0 ; SS_ANNE_1
+    EVENT_DISP $c, $0, $a ; SS_ANNE_1
+    EVENT_DISP $c, $0, $14 ; SS_ANNE_1
+    EVENT_DISP $c, $a, $0 ; SS_ANNE_1
+    EVENT_DISP $c, $a, $a ; SS_ANNE_1
+    EVENT_DISP $c, $a, $14 ; SS_ANNE_1
+
 
 SSAnne8Blocks: ; 96
     INCBIN "maps/ssanne8.blk"
@@ -15647,7 +20087,55 @@ SSAnne9_h: ; 0x61b3f to 0x61b4b (12 bytes) (id=103)
 
     dw $5c8d ; objects
 
-INCBIN "baserom.gbc",$61b4b,$61d49 - $61b4b
+INCBIN "baserom.gbc",$61b4b,$61c8d - $61b4b
+SSAnne9Object: ; 0x61c8d (size=188)
+    db $c ; border tile
+
+    db $c ; warps
+    db $5, $2, $0, SS_ANNE_2
+    db $5, $3, $0, SS_ANNE_2
+    db $5, $c, $1, SS_ANNE_2
+    db $5, $d, $1, SS_ANNE_2
+    db $5, $16, $2, SS_ANNE_2
+    db $5, $17, $2, SS_ANNE_2
+    db $f, $2, $3, SS_ANNE_2
+    db $f, $3, $3, SS_ANNE_2
+    db $f, $c, $4, SS_ANNE_2
+    db $f, $d, $4, SS_ANNE_2
+    db $f, $16, $5, SS_ANNE_2
+    db $f, $17, $5, SS_ANNE_2
+
+    db $0 ; signs
+
+    db $d ; people
+    db SPRITE_GENTLEMAN, $2 + 4, $a + 4, $ff, $d3, $41, $f1, $3 ; trainer
+    db SPRITE_FAT_MAN, $4 + 4, $d + 4, $ff, $d2, $42, $d6, $1 ; trainer
+    db SPRITE_GENTLEMAN, $e + 4, $0 + 4, $ff, $d3, $43, $f1, $5 ; trainer
+    db SPRITE_BLONDE_PONYTAIL_GIRL, $b + 4, $2 + 4, $ff, $d0, $44, $cb, $c ; trainer
+    db SPRITE_GENTLEMAN, $2 + 4, $1 + 4, $ff, $d0, $5 ; person
+    db SPRITE_BALL, $1 + 4, $c + 4, $ff, $ff, $86, $51 ; item
+    db SPRITE_GENTLEMAN, $2 + 4, $15 + 4, $ff, $d0, $7 ; person
+    db SPRITE_OLD_PERSON, $1 + 4, $16 + 4, $ff, $d0, $8 ; person
+    db SPRITE_BALL, $c + 4, $0 + 4, $ff, $ff, $89, $28 ; item
+    db SPRITE_GENTLEMAN, $c + 4, $c + 4, $ff, $d0, $a ; person
+    db SPRITE_YOUNG_GIRL, $e + 4, $b + 4, $ff, $ff, $b ; person
+    db SPRITE_BRUNETTE_GIRL, $c + 4, $16 + 4, $ff, $d2, $c ; person
+    db SPRITE_FOULARD_WOMAN, $c + 4, $14 + 4, $ff, $d3, $d ; person
+
+    ; warp-to
+    EVENT_DISP $c, $5, $2 ; SS_ANNE_2
+    EVENT_DISP $c, $5, $3 ; SS_ANNE_2
+    EVENT_DISP $c, $5, $c ; SS_ANNE_2
+    EVENT_DISP $c, $5, $d ; SS_ANNE_2
+    EVENT_DISP $c, $5, $16 ; SS_ANNE_2
+    EVENT_DISP $c, $5, $17 ; SS_ANNE_2
+    EVENT_DISP $c, $f, $2 ; SS_ANNE_2
+    EVENT_DISP $c, $f, $3 ; SS_ANNE_2
+    EVENT_DISP $c, $f, $c ; SS_ANNE_2
+    EVENT_DISP $c, $f, $d ; SS_ANNE_2
+    EVENT_DISP $c, $f, $16 ; SS_ANNE_2
+    EVENT_DISP $c, $f, $17 ; SS_ANNE_2
+
 
 SSAnne10_h: ; 0x61d49 to 0x61d55 (12 bytes) (id=104)
     db $0d ; tileset
@@ -15657,7 +20145,49 @@ SSAnne10_h: ; 0x61d49 to 0x61d55 (12 bytes) (id=104)
 
     dw $5e75 ; objects
 
-INCBIN "baserom.gbc",$61d55,$61f1a - $61d55
+INCBIN "baserom.gbc",$61d55,$61e75 - $61d55
+SSAnne10Object: ; 0x61e75 (size=165)
+    db $c ; border tile
+
+    db $a ; warps
+    db $5, $2, $4, SS_ANNE_4
+    db $5, $3, $4, SS_ANNE_4
+    db $5, $c, $3, SS_ANNE_4
+    db $5, $d, $3, SS_ANNE_4
+    db $5, $16, $2, SS_ANNE_4
+    db $5, $17, $2, SS_ANNE_4
+    db $f, $2, $1, SS_ANNE_4
+    db $f, $3, $1, SS_ANNE_4
+    db $f, $c, $0, SS_ANNE_4
+    db $f, $d, $0, SS_ANNE_4
+
+    db $0 ; signs
+
+    db $b ; people
+    db SPRITE_SAILOR, $d + 4, $0 + 4, $ff, $d0, $41, $cc, $3 ; trainer
+    db SPRITE_SAILOR, $b + 4, $2 + 4, $ff, $d0, $42, $cc, $4 ; trainer
+    db SPRITE_SAILOR, $3 + 4, $c + 4, $ff, $d2, $43, $cc, $5 ; trainer
+    db SPRITE_SAILOR, $2 + 4, $16 + 4, $ff, $d0, $44, $cc, $6 ; trainer
+    db SPRITE_SAILOR, $2 + 4, $0 + 4, $ff, $d3, $45, $cc, $7 ; trainer
+    db SPRITE_FAT_MAN, $4 + 4, $0 + 4, $ff, $d3, $46, $d6, $2 ; trainer
+    db SPRITE_BLACK_HAIR_BOY_2, $d + 4, $a + 4, $ff, $d3, $7 ; person
+    db SPRITE_MACHOKE_SLOWBRO, $c + 4, $b + 4, $ff, $ff, $8 ; person
+    db SPRITE_BALL, $2 + 4, $14 + 4, $ff, $ff, $89, $50 ; item
+    db SPRITE_BALL, $2 + 4, $a + 4, $ff, $ff, $8a, $f4 ; item
+    db SPRITE_BALL, $b + 4, $c + 4, $ff, $ff, $8b, $11 ; item
+
+    ; warp-to
+    EVENT_DISP $c, $5, $2 ; SS_ANNE_4
+    EVENT_DISP $c, $5, $3 ; SS_ANNE_4
+    EVENT_DISP $c, $5, $c ; SS_ANNE_4
+    EVENT_DISP $c, $5, $d ; SS_ANNE_4
+    EVENT_DISP $c, $5, $16 ; SS_ANNE_4
+    EVENT_DISP $c, $5, $17 ; SS_ANNE_4
+    EVENT_DISP $c, $f, $2 ; SS_ANNE_4
+    EVENT_DISP $c, $f, $3 ; SS_ANNE_4
+    EVENT_DISP $c, $f, $c ; SS_ANNE_4
+    EVENT_DISP $c, $f, $d ; SS_ANNE_4
+
 
 UndergroundPathNS_h: ; 0x61f1a to 0x61f26 (12 bytes) (id=119)
     db $0b ; tileset
@@ -15667,7 +20197,22 @@ UndergroundPathNS_h: ; 0x61f1a to 0x61f26 (12 bytes) (id=119)
 
     dw $5f2a ; objects
 
-INCBIN "baserom.gbc",$61f26,$61f3e - $61f26
+INCBIN "baserom.gbc",$61f26,$61f2a - $61f26
+UndergroundPathNSObject: ; 0x61f2a (size=20)
+    db $1 ; border tile
+
+    db $2 ; warps
+    db $4, $5, $2, PATH_ENTRANCE_ROUTE_5
+    db $29, $2, $2, PATH_ENTRANCE_ROUTE_6
+
+    db $0 ; signs
+
+    db $0 ; people
+
+    ; warp-to
+    EVENT_DISP $4, $4, $5 ; PATH_ENTRANCE_ROUTE_5
+    EVENT_DISP $4, $29, $2 ; PATH_ENTRANCE_ROUTE_6
+
 
 UndergroundPathWE_h: ; 0x61f3e to 0x61f4a (12 bytes) (id=121)
     db $0b ; tileset
@@ -15677,7 +20222,22 @@ UndergroundPathWE_h: ; 0x61f3e to 0x61f4a (12 bytes) (id=121)
 
     dw $5f4e ; objects
 
-INCBIN "baserom.gbc",$61f4a,$61f62 - $61f4a
+INCBIN "baserom.gbc",$61f4a,$61f4e - $61f4a
+UndergroundPathWEObject: ; 0x61f4e (size=20)
+    db $1 ; border tile
+
+    db $2 ; warps
+    db $5, $2, $2, PATH_ENTRANCE_ROUTE_7
+    db $2, $2f, $2, PATH_ENTRANCE_ROUTE_8
+
+    db $0 ; signs
+
+    db $0 ; people
+
+    ; warp-to
+    EVENT_DISP $19, $5, $2 ; PATH_ENTRANCE_ROUTE_7
+    EVENT_DISP $19, $2, $2f ; PATH_ENTRANCE_ROUTE_8
+
 
 DiglettsCave_h: ; 0x61f62 to 0x61f6e (12 bytes) (id=197)
     db $11 ; tileset
@@ -15687,7 +20247,22 @@ DiglettsCave_h: ; 0x61f62 to 0x61f6e (12 bytes) (id=197)
 
     dw $5f72 ; objects
 
-INCBIN "baserom.gbc",$61f6e,$61f86 - $61f6e
+INCBIN "baserom.gbc",$61f6e,$61f72 - $61f6e
+DiglettsCaveObject: ; 0x61f72 (size=20)
+    db $19 ; border tile
+
+    db $2 ; warps
+    db $5, $5, $2, DIGLETTS_CAVE_EXIT
+    db $1f, $25, $2, DIGLETTS_CAVE_ENTRANCE
+
+    db $0 ; signs
+
+    db $0 ; people
+
+    ; warp-to
+    EVENT_DISP $14, $5, $5 ; DIGLETTS_CAVE_EXIT
+    EVENT_DISP $14, $1f, $25 ; DIGLETTS_CAVE_ENTRANCE
+
 
 DiglettsCaveBlocks: ; 360
     INCBIN "maps/diglettscave.blk"
@@ -15700,7 +20275,31 @@ SilphCo11_h: ; 0x620ee to 0x620fa (12 bytes) (id=235)
 
     dw $6380 ; objects
 
-INCBIN "baserom.gbc",$620fa,$623c8 - $620fa
+INCBIN "baserom.gbc",$620fa,$62380 - $620fa
+SilphCo11Object: ; 0x62380 (size=72)
+    db $d ; border tile
+
+    db $4 ; warps
+    db $0, $9, $1, SILPH_CO_10F
+    db $0, $d, $0, SILPH_CO_ELEVATOR
+    db $5, $5, $9, $ff
+    db $2, $3, $3, SILPH_CO_7F
+
+    db $0 ; signs
+
+    db $5 ; people
+    db SPRITE_MR_MASTERBALL, $5 + 4, $7 + 4, $ff, $d0, $1 ; person
+    db SPRITE_FOULARD_WOMAN, $5 + 4, $a + 4, $ff, $d0, $2 ; person
+    db SPRITE_GIOVANNI, $9 + 4, $6 + 4, $ff, $d0, $43, $e5, $2 ; trainer
+    db SPRITE_ROCKET_GRUNT, $10 + 4, $3 + 4, $ff, $d1, $44, $e6, $29 ; trainer
+    db SPRITE_ROCKET_GRUNT, $9 + 4, $f + 4, $ff, $d1, $45, $e6, $28 ; trainer
+
+    ; warp-to
+    EVENT_DISP $9, $0, $9 ; SILPH_CO_10F
+    EVENT_DISP $9, $0, $d ; SILPH_CO_ELEVATOR
+    EVENT_DISP $9, $5, $5
+    EVENT_DISP $9, $2, $3 ; SILPH_CO_7F
+
 
 SilphCo11Blocks: ; 81
     INCBIN "maps/silphco11.blk"
@@ -16663,7 +21262,33 @@ ViridianGym_h: ; 0x74897 to 0x748a3 (12 bytes) (id=45)
 
     dw $4bde ; objects
 
-INCBIN "baserom.gbc",$748a3,$74c47 - $748a3
+INCBIN "baserom.gbc",$748a3,$74bde - $748a3
+ViridianGymObject: ; 0x74bde (size=105)
+    db $3 ; border tile
+
+    db $2 ; warps
+    db $11, $10, $4, $ff
+    db $11, $11, $4, $ff
+
+    db $0 ; signs
+
+    db $b ; people
+    db SPRITE_GIOVANNI, $1 + 4, $2 + 4, $ff, $d0, $41, $e5, $3 ; trainer
+    db SPRITE_BLACK_HAIR_BOY_1, $7 + 4, $c + 4, $ff, $d0, $42, $e7, $9 ; trainer
+    db SPRITE_HIKER, $b + 4, $b + 4, $ff, $d1, $43, $e0, $6 ; trainer
+    db SPRITE_PUNK, $7 + 4, $a + 4, $ff, $d0, $44, $de, $3 ; trainer
+    db SPRITE_HIKER, $7 + 4, $3 + 4, $ff, $d2, $45, $e0, $7 ; trainer
+    db SPRITE_BLACK_HAIR_BOY_1, $5 + 4, $d + 4, $ff, $d3, $46, $e7, $a ; trainer
+    db SPRITE_HIKER, $1 + 4, $a + 4, $ff, $d0, $47, $e0, $8 ; trainer
+    db SPRITE_PUNK, $10 + 4, $2 + 4, $ff, $d3, $48, $de, $4 ; trainer
+    db SPRITE_BLACK_HAIR_BOY_1, $5 + 4, $6 + 4, $ff, $d0, $49, $e7, $1 ; trainer
+    db SPRITE_GYM_HELPER, $f + 4, $10 + 4, $ff, $d0, $a ; person
+    db SPRITE_BALL, $9 + 4, $10 + 4, $ff, $ff, $8b, $35 ; item
+
+    ; warp-to
+    EVENT_DISP $a, $11, $10
+    EVENT_DISP $a, $11, $11
+
 
 ViridianGymBlocks: ; 90
     INCBIN "maps/viridiangym.blk"
@@ -16676,7 +21301,25 @@ PewterMart_h: ; 0x74ca1 to 0x74cad (12 bytes) (id=56)
 
     dw $4cda ; objects
 
-INCBIN "baserom.gbc",$74cad,$74d00 - $74cad
+INCBIN "baserom.gbc",$74cad,$74cda - $74cad
+PewterMartObject: ; 0x74cda (size=38)
+    db $0 ; border tile
+
+    db $2 ; warps
+    db $7, $3, $4, $ff
+    db $7, $4, $4, $ff
+
+    db $0 ; signs
+
+    db $3 ; people
+    db SPRITE_MART_GUY, $5 + 4, $0 + 4, $ff, $d3, $1 ; person
+    db SPRITE_BLONDE_BOY, $3 + 4, $3 + 4, $fe, $1, $2 ; person
+    db SPRITE_BLACK_HAIR_BOY_2, $5 + 4, $5 + 4, $ff, $ff, $3 ; person
+
+    ; warp-to
+    EVENT_DISP $4, $7, $3
+    EVENT_DISP $4, $7, $4
+
 
 UnknownDungeon1_h: ; 0x74d00 to 0x74d0c (12 bytes) (id=228)
     db $11 ; tileset
@@ -16686,7 +21329,39 @@ UnknownDungeon1_h: ; 0x74d00 to 0x74d0c (12 bytes) (id=228)
 
     dw $4d15 ; objects
 
-INCBIN "baserom.gbc",$74d0c,$74d76 - $74d0c
+INCBIN "baserom.gbc",$74d0c,$74d15 - $74d0c
+UnknownDungeon1Object: ; 0x74d15 (size=97)
+    db $7d ; border tile
+
+    db $9 ; warps
+    db $11, $18, $6, $ff
+    db $11, $19, $6, $ff
+    db $1, $1b, $0, UNKNOWN_DUNGEON_2
+    db $7, $17, $1, UNKNOWN_DUNGEON_2
+    db $9, $12, $2, UNKNOWN_DUNGEON_2
+    db $1, $7, $3, UNKNOWN_DUNGEON_2
+    db $3, $1, $4, UNKNOWN_DUNGEON_2
+    db $b, $3, $5, UNKNOWN_DUNGEON_2
+    db $6, $0, $0, UNKNOWN_DUNGEON_3
+
+    db $0 ; signs
+
+    db $3 ; people
+    db SPRITE_BALL, $d + 4, $7 + 4, $ff, $ff, $81, $10 ; item
+    db SPRITE_BALL, $3 + 4, $13 + 4, $ff, $ff, $82, $53 ; item
+    db SPRITE_BALL, $0 + 4, $5 + 4, $ff, $ff, $83, $31 ; item
+
+    ; warp-to
+    EVENT_DISP $f, $11, $18
+    EVENT_DISP $f, $11, $19
+    EVENT_DISP $f, $1, $1b ; UNKNOWN_DUNGEON_2
+    EVENT_DISP $f, $7, $17 ; UNKNOWN_DUNGEON_2
+    EVENT_DISP $f, $9, $12 ; UNKNOWN_DUNGEON_2
+    EVENT_DISP $f, $1, $7 ; UNKNOWN_DUNGEON_2
+    EVENT_DISP $f, $3, $1 ; UNKNOWN_DUNGEON_2
+    EVENT_DISP $f, $b, $3 ; UNKNOWN_DUNGEON_2
+    EVENT_DISP $f, $6, $0 ; UNKNOWN_DUNGEON_3
+
 
 UnknownDungeon1Blocks: ; 135
     INCBIN "maps/unknowndungeon1.blk"
@@ -16699,7 +21374,26 @@ CeruleanHouse3_h: ; 0x74dfd to 0x74e09 (12 bytes) (id=230)
 
     dw $4ebe ; objects
 
-INCBIN "baserom.gbc",$74e09,$7500c - $74e09
+INCBIN "baserom.gbc",$74e09,$74ebe - $74e09
+CeruleanHouse3Object: ; 0x74ebe (size=34)
+    db $c ; border tile
+
+    db $3 ; warps
+    db $0, $2, $9, $ff
+    db $7, $2, $8, $ff
+    db $7, $3, $8, $ff
+
+    db $0 ; signs
+
+    db $1 ; people
+    db SPRITE_FAT_BALD_GUY, $3 + 4, $5 + 4, $ff, $d3, $1 ; person
+
+    ; warp-to
+    EVENT_DISP $4, $0, $2
+    EVENT_DISP $4, $7, $2
+    EVENT_DISP $4, $7, $3
+
+INCBIN "baserom.gbc",$74ee0,$12c
 
 FuchsiaHouse1_h: ; 0x7500c to 0x75018 (12 bytes) (id=153)
     db $08 ; tileset
@@ -16709,7 +21403,25 @@ FuchsiaHouse1_h: ; 0x7500c to 0x75018 (12 bytes) (id=153)
 
     dw $5031 ; objects
 
-INCBIN "baserom.gbc",$75018,$75057 - $75018
+INCBIN "baserom.gbc",$75018,$75031 - $75018
+FuchsiaHouse1Object: ; 0x75031 (size=38)
+    db $a ; border tile
+
+    db $2 ; warps
+    db $7, $2, $1, $ff
+    db $7, $3, $1, $ff
+
+    db $0 ; signs
+
+    db $3 ; people
+    db SPRITE_MOM_GEISHA, $3 + 4, $2 + 4, $ff, $d3, $1 ; person
+    db SPRITE_MONK, $2 + 4, $7 + 4, $ff, $d1, $2 ; person
+    db SPRITE_BLONDE_BOY, $5 + 4, $5 + 4, $ff, $ff, $3 ; person
+
+    ; warp-to
+    EVENT_DISP $4, $7, $2
+    EVENT_DISP $4, $7, $3
+
 
 FuchsiaPokecenter_h: ; 0x75057 to 0x75063 (12 bytes) (id=154)
     db $06 ; tileset
@@ -16719,7 +21431,26 @@ FuchsiaPokecenter_h: ; 0x75057 to 0x75063 (12 bytes) (id=154)
 
     dw $507d ; objects
 
-INCBIN "baserom.gbc",$75063,$750a9 - $75063
+INCBIN "baserom.gbc",$75063,$7507d - $75063
+FuchsiaPokecenterObject: ; 0x7507d (size=44)
+    db $0 ; border tile
+
+    db $2 ; warps
+    db $7, $3, $2, $ff
+    db $7, $4, $2, $ff
+
+    db $0 ; signs
+
+    db $4 ; people
+    db SPRITE_NURSE, $1 + 4, $3 + 4, $ff, $d0, $1 ; person
+    db SPRITE_PUNK, $3 + 4, $2 + 4, $ff, $ff, $2 ; person
+    db SPRITE_BLONDE_PONYTAIL_GIRL, $5 + 4, $6 + 4, $fe, $2, $3 ; person
+    db SPRITE_CABLE_CLUB_WOMAN, $2 + 4, $b + 4, $ff, $d0, $4 ; person
+
+    ; warp-to
+    EVENT_DISP $7, $7, $3
+    EVENT_DISP $7, $7, $4
+
 
 FuchsiaHouse2_h: ; 0x750a9 to 0x750b5 (12 bytes) (id=155)
     db $14 ; tileset
@@ -16729,7 +21460,27 @@ FuchsiaHouse2_h: ; 0x750a9 to 0x750b5 (12 bytes) (id=155)
 
     dw $5180 ; objects
 
-INCBIN "baserom.gbc",$750b5,$751ad - $750b5
+INCBIN "baserom.gbc",$750b5,$75180 - $750b5
+FuchsiaHouse2Object: ; 0x75180 (size=45)
+    db $17 ; border tile
+
+    db $2 ; warps
+    db $7, $4, $3, $ff
+    db $7, $5, $3, $ff
+
+    db $2 ; signs
+    db $3, $4, $4 ; FuchsiaHouse2Text4
+    db $3, $5, $5 ; FuchsiaHouse2Text5
+
+    db $3 ; people
+    db SPRITE_BALDING_FAT_GUY, $3 + 4, $2 + 4, $ff, $ff, $1 ; person
+    db SPRITE_BALL, $3 + 4, $8 + 4, $ff, $ff, $82, $28 ; item
+    db SPRITE_BOULDER, $4 + 4, $8 + 4, $ff, $10, $3 ; person
+
+    ; warp-to
+    EVENT_DISP $5, $7, $4
+    EVENT_DISP $5, $7, $5
+
 
 FuchsiaHouse2Blocks: ; 20
     INCBIN "maps/fuchsiahouse2.blk"
@@ -16742,7 +21493,28 @@ SafariZoneEntrance_h: ; 0x751c1 to 0x751cd (12 bytes) (id=156)
 
     dw $53f5 ; objects
 
-INCBIN "baserom.gbc",$751cd,$75425 - $751cd
+INCBIN "baserom.gbc",$751cd,$753f5 - $751cd
+SafariZoneEntranceObject: ; 0x753f5 (size=48)
+    db $a ; border tile
+
+    db $4 ; warps
+    db $5, $3, $4, $ff
+    db $5, $4, $4, $ff
+    db $0, $3, $0, SAFARI_ZONE_CENTER
+    db $0, $4, $1, SAFARI_ZONE_CENTER
+
+    db $0 ; signs
+
+    db $2 ; people
+    db SPRITE_WHITE_PLAYER, $2 + 4, $6 + 4, $ff, $d2, $1 ; person
+    db SPRITE_WHITE_PLAYER, $4 + 4, $1 + 4, $ff, $d3, $2 ; person
+
+    ; warp-to
+    EVENT_DISP $4, $5, $3
+    EVENT_DISP $4, $5, $4
+    EVENT_DISP $4, $0, $3 ; SAFARI_ZONE_CENTER
+    EVENT_DISP $4, $0, $4 ; SAFARI_ZONE_CENTER
+
 
 SafariZoneEntranceBlocks: ; 12
     INCBIN "maps/safarizoneentrance.blk"
@@ -16755,7 +21527,30 @@ FuchsiaGym_h: ; 0x75431 to 0x7543d (12 bytes) (id=157)
 
     dw $5658 ; objects
 
-INCBIN "baserom.gbc",$7543d,$756aa - $7543d
+INCBIN "baserom.gbc",$7543d,$75658 - $7543d
+FuchsiaGymObject: ; 0x75658 (size=82)
+    db $3 ; border tile
+
+    db $2 ; warps
+    db $11, $4, $5, $ff
+    db $11, $5, $5, $ff
+
+    db $0 ; signs
+
+    db $8 ; people
+    db SPRITE_DOJO_GUY, $a + 4, $4 + 4, $ff, $d0, $41, $ee, $1 ; trainer
+    db SPRITE_PUNK, $d + 4, $8 + 4, $ff, $d0, $42, $dd, $7 ; trainer
+    db SPRITE_PUNK, $8 + 4, $7 + 4, $ff, $d3, $43, $dd, $3 ; trainer
+    db SPRITE_PUNK, $c + 4, $1 + 4, $ff, $d0, $44, $dd, $8 ; trainer
+    db SPRITE_PUNK, $5 + 4, $3 + 4, $ff, $d1, $45, $de, $1 ; trainer
+    db SPRITE_PUNK, $2 + 4, $8 + 4, $ff, $d0, $46, $de, $2 ; trainer
+    db SPRITE_PUNK, $7 + 4, $2 + 4, $ff, $d2, $47, $dd, $4 ; trainer
+    db SPRITE_GYM_HELPER, $f + 4, $7 + 4, $ff, $d0, $8 ; person
+
+    ; warp-to
+    EVENT_DISP $5, $11, $4
+    EVENT_DISP $5, $11, $5
+
 
 FuchsiaGymBlocks: ; 45
     INCBIN "maps/fuchsiagym.blk"
@@ -16768,7 +21563,25 @@ FuchsiaMeetingRoom_h: ; 0x756d7 to 0x756e3 (12 bytes) (id=158)
 
     dw $56fc ; objects
 
-INCBIN "baserom.gbc",$756e3,$75722 - $756e3
+INCBIN "baserom.gbc",$756e3,$756fc - $756e3
+FuchsiaMeetingRoomObject: ; 0x756fc (size=38)
+    db $17 ; border tile
+
+    db $2 ; warps
+    db $7, $4, $6, $ff
+    db $7, $5, $6, $ff
+
+    db $0 ; signs
+
+    db $3 ; people
+    db SPRITE_WHITE_PLAYER, $1 + 4, $4 + 4, $ff, $d0, $1 ; person
+    db SPRITE_WHITE_PLAYER, $2 + 4, $0 + 4, $ff, $d1, $2 ; person
+    db SPRITE_WHITE_PLAYER, $1 + 4, $a + 4, $ff, $d0, $3 ; person
+
+    ; warp-to
+    EVENT_DISP $7, $7, $4
+    EVENT_DISP $7, $7, $5
+
 
 FuchsiaMeetingRoomBlocks: ; 28
     INCBIN "maps/fuchsiameetingroom.blk"
@@ -16781,7 +21594,31 @@ CinnabarGym_h: ; 0x7573e to 0x7574a (12 bytes) (id=166)
 
     dw $5acc ; objects
 
-INCBIN "baserom.gbc",$7574a,$75b26 - $7574a
+INCBIN "baserom.gbc",$7574a,$75acc - $7574a
+CinnibarGymObject: ; 0x75acc (size=90)
+    db $2e ; border tile
+
+    db $2 ; warps
+    db $11, $10, $1, $ff
+    db $11, $11, $1, $ff
+
+    db $0 ; signs
+
+    db $9 ; people
+    db SPRITE_FAT_BALD_GUY, $3 + 4, $3 + 4, $ff, $d0, $41, $ef, $1 ; trainer
+    db SPRITE_BLACK_HAIR_BOY_2, $2 + 4, $11 + 4, $ff, $d0, $42, $d0, $9 ; trainer
+    db SPRITE_BLACK_HAIR_BOY_2, $8 + 4, $11 + 4, $ff, $d0, $43, $d3, $4 ; trainer
+    db SPRITE_BLACK_HAIR_BOY_2, $4 + 4, $b + 4, $ff, $d0, $44, $d0, $a ; trainer
+    db SPRITE_BLACK_HAIR_BOY_2, $8 + 4, $b + 4, $ff, $d0, $45, $d3, $5 ; trainer
+    db SPRITE_BLACK_HAIR_BOY_2, $e + 4, $b + 4, $ff, $d0, $46, $d0, $b ; trainer
+    db SPRITE_BLACK_HAIR_BOY_2, $e + 4, $3 + 4, $ff, $d0, $47, $d3, $6 ; trainer
+    db SPRITE_BLACK_HAIR_BOY_2, $8 + 4, $3 + 4, $ff, $d0, $48, $d0, $c ; trainer
+    db SPRITE_GYM_HELPER, $d + 4, $10 + 4, $ff, $d0, $9 ; person
+
+    ; warp-to
+    EVENT_DISP $a, $11, $10
+    EVENT_DISP $a, $11, $11
+
 
 CinnibarGymBlocks: ; 90
     INCBIN "maps/cinnibargym.blk"
@@ -16794,7 +21631,33 @@ Lab1_h: ; 0x75b80 to 0x75b8c (12 bytes) (id=167)
 
     dw $5bb3 ; objects
 
-INCBIN "baserom.gbc",$75b8c,$75bf1 - $75b8c
+INCBIN "baserom.gbc",$75b8c,$75bb3 - $75b8c
+Lab1Object: ; 0x75bb3 (size=62)
+    db $17 ; border tile
+
+    db $5 ; warps
+    db $7, $2, $2, $ff
+    db $7, $3, $2, $ff
+    db $4, $8, $0, CINNABAR_LAB_2
+    db $4, $c, $0, CINNABAR_LAB_3
+    db $4, $10, $0, CINNABAR_LAB_4
+
+    db $4 ; signs
+    db $2, $3, $2 ; Lab1Text2
+    db $4, $9, $3 ; Lab1Text3
+    db $4, $d, $4 ; Lab1Text4
+    db $4, $11, $5 ; Lab1Text5
+
+    db $1 ; people
+    db SPRITE_FISHER, $3 + 4, $1 + 4, $ff, $ff, $1 ; person
+
+    ; warp-to
+    EVENT_DISP $9, $7, $2
+    EVENT_DISP $9, $7, $3
+    EVENT_DISP $9, $4, $8 ; CINNABAR_LAB_2
+    EVENT_DISP $9, $4, $c ; CINNABAR_LAB_3
+    EVENT_DISP $9, $4, $10 ; CINNABAR_LAB_4
+
 
 Lab1Blocks: ; 36
     INCBIN "maps/lab1.blk"
@@ -16807,7 +21670,25 @@ Lab2_h: ; 0x75c15 to 0x75c21 (12 bytes) (id=168)
 
     dw $5c45 ; objects
 
-INCBIN "baserom.gbc",$75c21,$75c6b - $75c21
+INCBIN "baserom.gbc",$75c21,$75c45 - $75c21
+Lab2Object: ; 0x75c45 (size=38)
+    db $17 ; border tile
+
+    db $2 ; warps
+    db $7, $2, $2, CINNABAR_LAB_1
+    db $7, $3, $2, CINNABAR_LAB_1
+
+    db $0 ; signs
+
+    db $3 ; people
+    db SPRITE_BLACK_HAIR_BOY_2, $2 + 4, $3 + 4, $ff, $d0, $1 ; person
+    db SPRITE_OLD_PERSON, $4 + 4, $1 + 4, $ff, $ff, $2 ; person
+    db SPRITE_FOULARD_WOMAN, $5 + 4, $5 + 4, $ff, $d1, $3 ; person
+
+    ; warp-to
+    EVENT_DISP $4, $7, $2 ; CINNABAR_LAB_1
+    EVENT_DISP $4, $7, $3 ; CINNABAR_LAB_1
+
 
 Lab2Blocks: ; 16
     INCBIN "maps/lab2.blk"
@@ -16820,7 +21701,27 @@ Lab3_h: ; 0x75c7b to 0x75c87 (12 bytes) (id=169)
 
     dw $5cec ; objects
 
-INCBIN "baserom.gbc",$75c87,$75d15 - $75c87
+INCBIN "baserom.gbc",$75c87,$75cec - $75c87
+Lab3Object: ; 0x75cec (size=41)
+    db $17 ; border tile
+
+    db $2 ; warps
+    db $7, $2, $3, CINNABAR_LAB_1
+    db $7, $3, $3, CINNABAR_LAB_1
+
+    db $3 ; signs
+    db $4, $0, $3 ; Lab3Text3
+    db $4, $1, $4 ; Lab3Text4
+    db $1, $2, $5 ; Lab3Text5
+
+    db $2 ; people
+    db SPRITE_OAK_AIDE, $2 + 4, $7 + 4, $ff, $d0, $1 ; person
+    db SPRITE_OAK_AIDE, $3 + 4, $2 + 4, $fe, $2, $2 ; person
+
+    ; warp-to
+    EVENT_DISP $4, $7, $2 ; CINNABAR_LAB_1
+    EVENT_DISP $4, $7, $3 ; CINNABAR_LAB_1
+
 
 Lab3Blocks: ; 16
     INCBIN "maps/lab3.blk"
@@ -16833,7 +21734,24 @@ Lab4_h: ; 0x75d25 to 0x75d31 (12 bytes) (id=170)
 
     dw $5df0 ; objects
 
-INCBIN "baserom.gbc",$75d31,$75e10 - $75d31
+INCBIN "baserom.gbc",$75d31,$75df0 - $75d31
+Lab4Object: ; 0x75df0 (size=32)
+    db $17 ; border tile
+
+    db $2 ; warps
+    db $7, $2, $4, CINNABAR_LAB_1
+    db $7, $3, $4, CINNABAR_LAB_1
+
+    db $0 ; signs
+
+    db $2 ; people
+    db SPRITE_OAK_AIDE, $2 + 4, $5 + 4, $fe, $2, $1 ; person
+    db SPRITE_OAK_AIDE, $6 + 4, $7 + 4, $ff, $d1, $2 ; person
+
+    ; warp-to
+    EVENT_DISP $4, $7, $2 ; CINNABAR_LAB_1
+    EVENT_DISP $4, $7, $3 ; CINNABAR_LAB_1
+
 
 Lab4Blocks: ; 16
     INCBIN "maps/lab4.blk"
@@ -16846,7 +21764,26 @@ CinnabarPokecenter_h: ; 0x75e20 to 0x75e2c (12 bytes) (id=171)
 
     dw $5e46 ; objects
 
-INCBIN "baserom.gbc",$75e2c,$75e72 - $75e2c
+INCBIN "baserom.gbc",$75e2c,$75e46 - $75e2c
+CinnibarPokecenterObject: ; 0x75e46 (size=44)
+    db $0 ; border tile
+
+    db $2 ; warps
+    db $7, $3, $3, $ff
+    db $7, $4, $3, $ff
+
+    db $0 ; signs
+
+    db $4 ; people
+    db SPRITE_NURSE, $1 + 4, $3 + 4, $ff, $d0, $1 ; person
+    db SPRITE_BLONDE_PONYTAIL_GIRL, $4 + 4, $9 + 4, $fe, $0, $2 ; person
+    db SPRITE_GENTLEMAN, $6 + 4, $2 + 4, $ff, $ff, $3 ; person
+    db SPRITE_CABLE_CLUB_WOMAN, $2 + 4, $b + 4, $ff, $d0, $4 ; person
+
+    ; warp-to
+    EVENT_DISP $7, $7, $3
+    EVENT_DISP $7, $7, $4
+
 
 CinnabarMart_h: ; 0x75e72 to 0x75e7e (12 bytes) (id=172)
     db $02 ; tileset
@@ -16856,7 +21793,25 @@ CinnabarMart_h: ; 0x75e72 to 0x75e7e (12 bytes) (id=172)
 
     dw $5e91 ; objects
 
-INCBIN "baserom.gbc",$75e7e,$75eb7 - $75e7e
+INCBIN "baserom.gbc",$75e7e,$75e91 - $75e7e
+CinnibarMartObject: ; 0x75e91 (size=38)
+    db $0 ; border tile
+
+    db $2 ; warps
+    db $7, $3, $4, $ff
+    db $7, $4, $4, $ff
+
+    db $0 ; signs
+
+    db $3 ; people
+    db SPRITE_MART_GUY, $5 + 4, $0 + 4, $ff, $d3, $1 ; person
+    db SPRITE_ERIKA, $2 + 4, $6 + 4, $ff, $ff, $2 ; person
+    db SPRITE_OAK_AIDE, $4 + 4, $3 + 4, $ff, $ff, $3 ; person
+
+    ; warp-to
+    EVENT_DISP $4, $7, $3
+    EVENT_DISP $4, $7, $4
+
 
 CopycatsHouseF1_h: ; 0x75eb7 to 0x75ec3 (12 bytes) (id=175)
     db $01 ; tileset
@@ -16866,7 +21821,49 @@ CopycatsHouseF1_h: ; 0x75eb7 to 0x75ec3 (12 bytes) (id=175)
 
     dw $5ee3 ; objects
 
-INCBIN "baserom.gbc",$75ec3,$7615f - $75ec3
+INCBIN "baserom.gbc",$75ec3,$75ee3 - $75ec3
+CopycatsHouseF1Object: ; 0x75ee3 (size=46)
+    db $a ; border tile
+
+    db $3 ; warps
+    db $7, $2, $0, $ff
+    db $7, $3, $0, $ff
+    db $1, $7, $0, COPYCATS_HOUSE_2F
+
+    db $0 ; signs
+
+    db $3 ; people
+    db SPRITE_MOM_GEISHA, $2 + 4, $2 + 4, $ff, $d0, $1 ; person
+    db SPRITE_FAT_BALD_GUY, $4 + 4, $5 + 4, $ff, $d2, $2 ; person
+    db SPRITE_CLEFAIRYLIKE, $4 + 4, $1 + 4, $fe, $1, $3 ; person
+
+    ; warp-to
+    EVENT_DISP $4, $7, $2
+    EVENT_DISP $4, $7, $3
+    EVENT_DISP $4, $1, $7 ; COPYCATS_HOUSE_2F
+
+INCBIN "baserom.gbc",$75f11,$21e
+GaryObject: ; 0x7612f (size=48)
+    db $3 ; border tile
+
+    db $4 ; warps
+    db $7, $3, $1, LANCES_ROOM
+    db $7, $4, $2, LANCES_ROOM
+    db $0, $3, $0, HALL_OF_FAME
+    db $0, $4, $0, HALL_OF_FAME
+
+    db $0 ; signs
+
+    db $2 ; people
+    db SPRITE_RIVAL, $2 + 4, $4 + 4, $ff, $d0, $1 ; person
+    db SPRITE_OAK, $7 + 4, $3 + 4, $ff, $d1, $2 ; person
+
+    ; warp-to
+    EVENT_DISP $4, $7, $3 ; LANCES_ROOM
+    EVENT_DISP $4, $7, $4 ; LANCES_ROOM
+    EVENT_DISP $4, $0, $3 ; HALL_OF_FAME
+    EVENT_DISP $4, $0, $4 ; HALL_OF_FAME
+
 
 GaryBlocks: ; 16
     INCBIN "maps/gary.blk"
@@ -16879,7 +21876,27 @@ Loreli_h: ; 0x7616f to 0x7617b (12 bytes) (id=245)
 
     dw $6280 ; objects
 
-INCBIN "baserom.gbc",$7617b,$762ac - $7617b
+INCBIN "baserom.gbc",$7617b,$76280 - $7617b
+LoreliObject: ; 0x76280 (size=44)
+    db $3 ; border tile
+
+    db $4 ; warps
+    db $b, $4, $2, INDIGO_PLATEAU_LOBBY
+    db $b, $5, $2, INDIGO_PLATEAU_LOBBY
+    db $0, $4, $0, BRUNOS_ROOM
+    db $0, $5, $1, BRUNOS_ROOM
+
+    db $0 ; signs
+
+    db $1 ; people
+    db SPRITE_LORELEI, $2 + 4, $5 + 4, $ff, $d0, $41, $f4, $1 ; trainer
+
+    ; warp-to
+    EVENT_DISP $5, $b, $4 ; INDIGO_PLATEAU_LOBBY
+    EVENT_DISP $5, $b, $5 ; INDIGO_PLATEAU_LOBBY
+    EVENT_DISP $5, $0, $4 ; BRUNOS_ROOM
+    EVENT_DISP $5, $0, $5 ; BRUNOS_ROOM
+
 
 LoreliBlocks: ; 30
     INCBIN "maps/loreli.blk"
@@ -16892,7 +21909,27 @@ Bruno_h: ; 0x762ca to 0x762d6 (12 bytes) (id=246)
 
     dw $63d7 ; objects
 
-INCBIN "baserom.gbc",$762d6,$76403 - $762d6
+INCBIN "baserom.gbc",$762d6,$763d7 - $762d6
+BrunoObject: ; 0x763d7 (size=44)
+    db $3 ; border tile
+
+    db $4 ; warps
+    db $b, $4, $2, LORELEIS_ROOM
+    db $b, $5, $3, LORELEIS_ROOM
+    db $0, $4, $0, AGATHAS_ROOM
+    db $0, $5, $1, AGATHAS_ROOM
+
+    db $0 ; signs
+
+    db $1 ; people
+    db SPRITE_BRUNO, $2 + 4, $5 + 4, $ff, $d0, $41, $e9, $1 ; trainer
+
+    ; warp-to
+    EVENT_DISP $5, $b, $4 ; LORELEIS_ROOM
+    EVENT_DISP $5, $b, $5 ; LORELEIS_ROOM
+    EVENT_DISP $5, $0, $4 ; AGATHAS_ROOM
+    EVENT_DISP $5, $0, $5 ; AGATHAS_ROOM
+
 
 BrunoBlocks: ; 30
     INCBIN "maps/bruno.blk"
@@ -16905,7 +21942,27 @@ Agatha_h: ; 0x76421 to 0x7642d (12 bytes) (id=247)
 
     dw $6534 ; objects
 
-INCBIN "baserom.gbc",$7642d,$76560 - $7642d
+INCBIN "baserom.gbc",$7642d,$76534 - $7642d
+AgathaObject: ; 0x76534 (size=44)
+    db $0 ; border tile
+
+    db $4 ; warps
+    db $b, $4, $2, BRUNOS_ROOM
+    db $b, $5, $3, BRUNOS_ROOM
+    db $0, $4, $0, LANCES_ROOM
+    db $0, $5, $0, LANCES_ROOM
+
+    db $0 ; signs
+
+    db $1 ; people
+    db SPRITE_AGATHA, $2 + 4, $5 + 4, $ff, $d0, $41, $f6, $1 ; trainer
+
+    ; warp-to
+    EVENT_DISP $5, $b, $4 ; BRUNOS_ROOM
+    EVENT_DISP $5, $b, $5 ; BRUNOS_ROOM
+    EVENT_DISP $5, $0, $4 ; LANCES_ROOM
+    EVENT_DISP $5, $0, $5 ; LANCES_ROOM
+
 
 AgathaBlocks: ; 30
     INCBIN "maps/agatha.blk"
