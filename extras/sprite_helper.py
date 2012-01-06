@@ -10,7 +10,7 @@ constants = {
 0x02: ["Rival", ""],
 0x03: ["Oak", ""],
 0x04: ["blonde boy", ""],
-0x05: ["machoke/slowbro OW", "slowbro"],
+0x05: ["machoke/slowbro OW", "machoke slowbro"],
 0x06: ["blonde(horse-tail-hair) girl", "blonde ponytail girl"],
 0x07: ["black-hair boy 1", "black hair boy 1"],
 0x08: ["little kid (F)", "little girl"],
@@ -23,7 +23,7 @@ constants = {
 0x0F: ["foulard woman", "foulard woman"],
 0x10: ["rich(black-hat) man", "gentleman"],
 0x11: ["sister", ""],
-0x12: ["motorbiker", ""],
+0x12: ["motorbiker", "biker"],
 0x13: ["sailor", ""],
 0x14: ["cook", ""],
 0x15: ["sun-glasses guy (bike seller)", "sunglasses guy"],
@@ -33,7 +33,7 @@ constants = {
 0x19: ["medium", ""],
 0x1A: ["waiter", ""],
 0x1B: ["erika", ""],
-0x1C: ["mother (geisha)", "mother"],
+0x1C: ["mother (geisha)", "mom geisha"],
 0x1D: ["brunette girl", ""],
 0x1E: ["lance", ""],
 0x1F: ["oak's aide/scientist", "oak scientist aide"],
@@ -56,7 +56,11 @@ constants = {
 0x30: ["dojo guy", ""],
 0x31: ["guard (cop?)", "guard cop"],
 0x32: ["cop (guard)", "cop guard"],
+0x33: ["mom", ""],
 0x34: ["semi-bald man", "balding guy"],
+0x35: ["young girl", ""],
+0x36: ["gameboy kid", ""],
+0x37: ["gameboy kid copy", ""],
 0x38: ["clefairy-like", "clefairylike"],
 0x39: ["Agatha", ""],
 0x3A: ["Bruno", ""],
@@ -64,12 +68,21 @@ constants = {
 0x3C: ["seel", ""],
 0x3D: ["ball", ""],
 0x3E: ["omanyte", ""],
+0x3F: ["boulder", ""],
+0x40: ["paper sheet", ""],
 0x41: ["book/map/dex", ""],
+0x42: ["clipboard", ""],
+0x43: ["snorlax", ""],
+0x44: ["old amber", ""],
+0x45: ["old amber", ""],
+0x46: ["lying old man unused 1", ""],
+0x47: ["lying old man unused 2", ""],
 0x48: ["lying old man", ""],
 }
 
 icons = {}
 unique_icons = set()
+todo_sprites = {}
 
 def load_icons():
     for map_id in map_headers:
@@ -109,7 +122,58 @@ def print_appearances():
     
     print output
 
-if __name__ == "__main__":
+def insert_todo_sprites():
     load_icons()
-    print_appearances()
+    counter = 1
+    for icon in unique_icons:
+        if icon not in constants:
+            todo_sprites[icon] = counter
+            constants[icon] = None
+            counter += 1
+
+def sprite_name_cleaner(badname):
+    output = "SPRITE_" + badname
+    output = output.replace(" ", "_")
+    output = output.replace("/", "_")
+    output = output.replace(".", "")
+
+    output = output.upper()
+
+    while output[-1] == "_":
+        output = output[:-1]
+    return output
+
+def sprite_namer():
+    "makes up better constant names for each sprite"
+    insert_todo_sprites()
+    sprites = {}
+
+    for sprite_id in constants:
+        suggestions = constants[sprite_id]
+        if suggestions == None:
+            sprites[sprite_id] = "SPRITE_TODO_" + str(todo_sprites[sprite_id])
+            continue #next please
+
+        original = suggestions[0]
+        if suggestions[1] != "": original = suggestions[1]
+        
+        result = sprite_name_cleaner(original)
+        sprites[sprite_id] = result
+
+    for key in sprites:
+        line_length = len(sprites[key]) + len(" EQU $") + 2
+        
+        if line_length < 40:
+            extra = (40 - line_length) * " "
+        else: extra = ""
+
+        value = hex(key)[2:]
+        if len(value) == 1: value = "0" + value
+        
+        print sprites[key] + extra + " EQU $" + value
+
+if __name__ == "__main__":
+    #load_icons()
+    #print_appearances()
+    sprite_namer()
 
