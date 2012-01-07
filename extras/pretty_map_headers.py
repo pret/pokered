@@ -323,10 +323,15 @@ char_conversion = [
 ("y", 0xB8),
 ("z", 0xB9),
 ("é", 0xBA),
+("'d", 0xBB),
+("'l", 0xBC),
 ("'s", 0xBD),
 ("'t", 0xBE),
+("'v", 0xBF),
 ("'", 0xE0),
 ("-", 0xE3),
+("'r", 0xE4),
+("'m", 0xE5),
 ("?", 0xE6),
 ("!", 0xE7),
 (".", 0xE8),
@@ -652,6 +657,12 @@ def print_tx_far(tx_far):
     lines = text_far[0]["lines"]
     label = "_" + map_name_cleaner(map2["name"], None)[:-2] + "Text" + str(text_id)
 
+    #add the ending byte on the next line
+    #lines[len(lines.keys())+1] = [text_far[1]["type"]]
+
+    #add the ending byte to the last line- always seems $57
+    lines[len(lines.keys())-1].append(text_far[1]["type"])
+
     output  = ""
     output += label + ":\n"
     first = True
@@ -664,6 +675,7 @@ def print_tx_far(tx_far):
         
         quotes_open = False
         first_byte = True
+        was_byte = False
         byte_count = 0
         for byte in line:
             if byte in txt_bytes:
@@ -679,17 +691,26 @@ def print_tx_far(tx_far):
                 if quotes_open:
                     output += "\""
                     quotes_open = False
-                output += ", " + constant_abbreviation_bytes[byte]
+                if not first_byte:
+                    output += ", "
+                output += constant_abbreviation_bytes[byte]
             else:
                 if quotes_open:
                     output += "\""
                     quotes_open = False
-                output += ", $" + hex(byte)[2:]
+                
+                #if you want the ending byte on the last line
+                #if not (byte == 0x57 or byte == 0x50 or byte == 0x58):
+                output += ", "
+                
+                output += "$" + hex(byte)[2:]
+                was_byte = True
 
                 #add a comma unless it's the end of the line
-                if byte_count+1 != len(line):
-                    output += ", "
-
+                #if byte_count+1 != len(line):
+                #    output += ", "
+            
+            first_byte = False
             byte_count += 1
         #close final quotes
         if quotes_open:

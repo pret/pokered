@@ -40,7 +40,7 @@ def process_00_subcommands(start_address, end_address):
     """split this text up into multiple lines
     based on subcommands ending each line"""
     lines = {}
-    subsection = extract_maps.rom[start_address:end_address]
+    subsection = extract_maps.rom[start_address:end_address+1]
 
     line_count = 0
     current_line = []
@@ -308,7 +308,8 @@ def parse_text_script(text_pointer, text_id, map_id, txfar=False):
         else:
             #if len(commands) > 0:
             #   print "Unknown text command " + hex(command_byte) + " at " + hex(offset) + ", script began with " + hex(commands[0]["type"])
-            print "Unknown text command at " + hex(offset) + " - command: " + hex(ord(extract_maps.rom[offset])) + " on map_id=" + str(map_id) + " text_id=" + str(text_id)
+            if debug:
+                print "Unknown text command at " + hex(offset) + " - command: " + hex(ord(extract_maps.rom[offset])) + " on map_id=" + str(map_id) + " text_id=" + str(text_id)
             
             #end at the first unknown command
             end = True
