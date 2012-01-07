@@ -8201,7 +8201,148 @@ ReadAttack: ; 5884
 	ret
 
 ; trainer data: from 5C53 to 652E
-INCBIN "baserom.gbc",$3989B,$399FF - $3989B
+INCBIN "baserom.gbc",$3989B,$39914 - $3989B
+
+dw YoungsterPic
+db 0,$15,0
+
+dw BugCatcherPic
+db 0,$10,0
+
+dw LassPic
+db 0,$15,0
+
+dw SailorPic
+db 0,$30,0
+
+dw JrTrainerMPic
+db 0,$20,0
+
+dw JrTrainerFPic
+db 0,$20,0
+
+dw PokemaniacPic
+db 0,$50,0
+
+dw SuperNerdPic
+db 0,$25,0
+
+dw HikerPic
+db 0,$35,0
+
+dw BikerPic
+db 0,$20,0
+
+dw BurglarPic
+db 0,$90,0
+
+dw EngineerPic
+db 0,$50,0
+
+dw JugglerPic
+db 0,$35,0
+
+dw FisherPic
+db 0,$35,0
+
+dw SwimmerPic
+db 0,$05,0
+
+dw CueBallPic
+db 0,$25,0
+
+dw GamblerPic
+db 0,$70,0
+
+dw BeautyPic
+db 0,$70,0
+
+dw PsychicPic
+db 0,$10,0
+
+dw RockerPic
+db 0,$25,0
+
+dw JugglerPic
+db 0,$35,0
+
+dw TamerPic
+db 0,$40,0
+
+dw BirdKeeperPic
+db 0,$25,0
+
+dw BlackbeltPic
+db 0,$25,0
+
+dw Rival1Pic
+db 0,$35,0
+
+dw ProfOakPic
+db 0,$99,0
+
+dw ChiefPic
+db 0,$30,0
+
+dw ScientistPic
+db 0,$50,0
+
+dw GiovanniPic
+db 0,$99,0
+
+dw RocketPic
+db 0,$30,0
+
+dw CooltrainerMPic
+db 0,$35,0
+
+dw CooltrainerFPic
+db 0,$35,0
+
+dw BrunoPic
+db 0,$99,0
+
+dw BrockPic
+db 0,$99,0
+
+dw MistyPic
+db 0,$99,0
+
+dw LtSurgePic
+db 0,$99,0
+
+dw ErikaPic
+db 0,$99,0
+
+dw KogaPic
+db 0,$99,0
+
+dw BlainePic
+db 0,$99,0
+
+dw SabrinaPic
+db 0,$99,0
+
+dw GentlemanPic
+db 0,$70,0
+
+dw Rival2Pic
+db 0,$65,0
+
+dw Rival3Pic
+db 0,$99,0
+
+dw LoreleiPic
+db 0,$99,0
+
+dw ChannelerPic
+db 0,$30,0
+
+dw AgathaPic
+db 0,$99,0
+
+dw LancePic
+db 0,$99,0
 
 TrainerNames: ; 59FF
 	db "YOUNGSTER@"
