@@ -23878,8 +23878,13 @@ _SchoolText2: ; 0x95d40
     db "the blackboard", $55
     db "carefully!", $57
 
-_ViridianHouseText1:
-INCBIN "baserom.gbc",$95d71,$95dc7 - $95d71
+_ViridianHouseText1: ; 0x95d71
+    db $0, "Coming up with", $4f
+    db "nicknames is fun,", $55
+    db "but hard.", $51
+    db "Simple names are", $4f
+    db "the easiest to", $55
+    db "remember.", $57
 
 _ViridianHouseText2: ; 0x95dc7
     db $0, "My Daddy loves", $4f
@@ -23930,17 +23935,8 @@ _MuseumF2Text7: ; 0x9694b
 
 INCBIN "baserom.gbc",$9697a,$1686
 
-;_ViridianHouseText1: ; 0x95d71
-;    db $0, "Coming up with", $4f
-;    db "nicknames is fun,", $55
-;    db "but hard.", $51
-;    db "Simple names are", $4f
-;    db "the easiest to", $55
-;    db "remember.", $57
-;
-;inc-BIN "baserom.gbc",$95dc7,$2239
-
 SECTION "bank26",DATA,BANK[$26]
+
 INCBIN "baserom.gbc",$98000,$984ce - $98000
 
 _PewterHouse1Text1: ; 0x984ce
