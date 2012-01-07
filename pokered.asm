@@ -8203,6 +8203,7 @@ ReadAttack: ; 5884
 ; trainer data: from 5C53 to 652E
 INCBIN "baserom.gbc",$3989B,$39914 - $3989B
 
+; trainer pic pointers and base money.
 dw YoungsterPic
 db 0,$15,0
 
