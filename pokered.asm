@@ -15718,7 +15718,6 @@ CeladonHouseObject: ; 0x49085 (size=55)
     EVENT_DISP $a, $1, $10 ; CELADON_MART_4
     EVENT_DISP $a, $1, $1 ; CELADON_MART_6
 
-
 CeladonHouseBlocks: ; 40
     INCBIN "maps/celadonhouse.blk"
 
@@ -15731,6 +15730,7 @@ CeladonPrizeRoom_h: ; 0x490e4 to 0x490f0 (12 bytes) (bank=12) (id=137)
     dw $5108 ; objects
 
 INCBIN "baserom.gbc",$490f0,$49108 - $490f0
+
 CeladonPrizeRoomObject: ; 0x49108 (size=41)
     db $f ; border tile
 
@@ -15751,7 +15751,6 @@ CeladonPrizeRoomObject: ; 0x49108 (size=41)
     EVENT_DISP $5, $7, $4
     EVENT_DISP $5, $7, $5
 
-
 CeladonPrizeRoomBlocks: ; 20
     INCBIN "maps/celadonprizeroom.blk"
 
@@ -15764,6 +15763,7 @@ CeladonDiner_h: ; 0x49145 to 0x49151 (12 bytes) (bank=12) (id=138)
     dw $51bc ; objects
 
 INCBIN "baserom.gbc",$49151,$491bc - $49151
+
 CeladonDinerObject: ; 0x491bc (size=50)
     db $f ; border tile
 
@@ -15784,7 +15784,6 @@ CeladonDinerObject: ; 0x491bc (size=50)
     EVENT_DISP $5, $7, $3
     EVENT_DISP $5, $7, $4
 
-
 CeladonDinerBlocks: ; 20
     INCBIN "maps/celadondiner.blk"
 
@@ -15797,6 +15796,7 @@ CeladonHouse2_h: ; 0x49202 to 0x4920e (12 bytes) (bank=12) (id=139)
     dw $5227 ; objects
 
 INCBIN "baserom.gbc",$4920e,$49227 - $4920e
+
 CeladonHouse2Object: ; 0x49227 (size=38)
     db $f ; border tile
 
@@ -15815,7 +15815,6 @@ CeladonHouse2Object: ; 0x49227 (size=38)
     EVENT_DISP $4, $7, $2
     EVENT_DISP $4, $7, $3
 
-
 CeladonHouse2Blocks: ; 16
     INCBIN "maps/celadonhouse2.blk"
 
@@ -15828,6 +15827,7 @@ CeladonHotel_h: ; 0x4925d to 0x49269 (12 bytes) (bank=12) (id=140)
     dw $5281 ; objects
 
 INCBIN "baserom.gbc",$49269,$49281 - $49269
+
 CeladonHotelObject: ; 0x49281 (size=38)
     db $0 ; border tile
 
@@ -15846,7 +15846,6 @@ CeladonHotelObject: ; 0x49281 (size=38)
     EVENT_DISP $7, $7, $3
     EVENT_DISP $7, $7, $4
 
-
 CeladonHotelBlocks: ; 28
     INCBIN "maps/celadonhotel.blk"
 
@@ -15859,6 +15858,7 @@ MtMoonPokecenter_h: ; 0x492c3 to 0x492cf (12 bytes) (bank=12) (id=68)
     dw $5376 ; objects
 
 INCBIN "baserom.gbc",$492cf,$49376 - $492cf
+
 MtMoonPokecenterObject: ; 0x49376 (size=56)
     db $0 ; border tile
 
@@ -15880,7 +15880,6 @@ MtMoonPokecenterObject: ; 0x49376 (size=56)
     EVENT_DISP $7, $7, $3
     EVENT_DISP $7, $7, $4
 
-
 RockTunnelPokecenter_h: ; 0x493ae to 0x493ba (12 bytes) (id=81)
     db $06 ; tileset
     db $04, $07 ; dimensions (y, x)
@@ -15890,6 +15889,7 @@ RockTunnelPokecenter_h: ; 0x493ae to 0x493ba (12 bytes) (id=81)
     dw $53d4 ; objects
 
 INCBIN "baserom.gbc",$493ba,$493d4 - $493ba
+
 RockTunnelPokecenterObject: ; 0x493d4 (size=44)
     db $0 ; border tile
 
@@ -15909,7 +15909,6 @@ RockTunnelPokecenterObject: ; 0x493d4 (size=44)
     EVENT_DISP $7, $7, $3
     EVENT_DISP $7, $7, $4
 
-
 Route11Gate_h: ; 0x49400 to 0x4940c (12 bytes) (id=84)
     db $0c ; tileset
     db $05, $04 ; dimensions (y, x)
@@ -15919,6 +15918,7 @@ Route11Gate_h: ; 0x49400 to 0x4940c (12 bytes) (id=84)
     dw $5416 ; objects
 
 INCBIN "baserom.gbc",$4940c,$49416 - $4940c
+
 Route11GateObject: ; 0x49416 (size=50)
     db $a ; border tile
 
@@ -15941,7 +15941,6 @@ Route11GateObject: ; 0x49416 (size=50)
     EVENT_DISP $4, $5, $7
     EVENT_DISP $4, $8, $6 ; ROUTE_11_GATE_2F
 
-
 Route11GateUpstairs_h: ; 0x49448 to 0x49454 (12 bytes) (id=86)
     db $0c ; tileset
     db $04, $04 ; dimensions (y, x)
@@ -15951,6 +15950,7 @@ Route11GateUpstairs_h: ; 0x49448 to 0x49454 (12 bytes) (id=86)
     dw $54da ; objects
 
 INCBIN "baserom.gbc",$49454,$494da - $49454
+
 Route11GateUpstairsObject: ; 0x494da (size=30)
     db $a ; border tile
 
@@ -15968,7 +15968,6 @@ Route11GateUpstairsObject: ; 0x494da (size=30)
     ; warp-to
     EVENT_DISP $4, $7, $7 ; ROUTE_11_GATE_1F
 
-
 Route12Gate_h: ; 0x494f8 to 0x49504 (12 bytes) (id=87)
     db $0c ; tileset
     db $04, $05 ; dimensions (y, x)
@@ -15978,6 +15977,7 @@ Route12Gate_h: ; 0x494f8 to 0x49504 (12 bytes) (id=87)
     dw $550e ; objects
 
 INCBIN "baserom.gbc",$49504,$4950e - $49504
+
 Route12GateObject: ; 0x4950e (size=50)
     db $a ; border tile
 
@@ -16000,7 +16000,6 @@ Route12GateObject: ; 0x4950e (size=50)
     EVENT_DISP $5, $7, $5
     EVENT_DISP $5, $6, $8 ; ROUTE_12_GATE_2F
 
-
 Route12GateBlocks: ; 20
     INCBIN "maps/route12gate.blk"
 
@@ -16013,6 +16012,7 @@ Route12GateUpstairs_h: ; 0x49554 to 0x49560 (12 bytes) (id=195)
     dw $55de ; objects
 
 INCBIN "baserom.gbc",$49560,$495de - $49560
+
 Route12GateUpstairsObject: ; 0x495de (size=24)
     db $a ; border tile
 
@@ -16039,6 +16039,7 @@ Route15Gate_h: ; 0x495f6 to 0x49602 (12 bytes) (id=184)
     dw $560c ; objects
 
 INCBIN "baserom.gbc",$49602,$4960c - $49602
+
 Route15GateObject: ; 0x4960c (size=50)
     db $a ; border tile
 
@@ -16072,6 +16073,7 @@ Route16GateMap_h: ; 0x496b2 to 0x496be (12 bytes) (id=186)
     dw $578b ; objects
 
 INCBIN "baserom.gbc",$496be,$4978b - $496be
+
 Route16GateMapObject: ; 0x4978b (size=88)
     db $a ; border tile
 
@@ -16103,7 +16105,6 @@ Route16GateMapObject: ; 0x4978b (size=88)
     EVENT_DISP $4, $3, $7
     EVENT_DISP $4, $c, $6 ; ROUTE_16_GATE_2F
 
-
 Route16GateMapBlocks: ; 28
     INCBIN "maps/route16gatemap.blk"
 
@@ -16116,6 +16117,7 @@ Route16GateUpstairs_h: ; 0x497ff to 0x4980b (12 bytes) (id=187)
     dw $584c ; objects
 
 INCBIN "baserom.gbc",$4980b,$4984c - $4980b
+
 Route16GateUpstairsObject: ; 0x4984c (size=30)
     db $a ; border tile
 
@@ -16133,7 +16135,6 @@ Route16GateUpstairsObject: ; 0x4984c (size=30)
     ; warp-to
     EVENT_DISP $4, $7, $7 ; ROUTE_16_GATE_1F
 
-
 Route18Gate_h: ; 0x4986a to 0x49876 (12 bytes) (id=190)
     db $0c ; tileset
     db $05, $04 ; dimensions (y, x)
@@ -16143,6 +16144,7 @@ Route18Gate_h: ; 0x4986a to 0x49876 (12 bytes) (id=190)
     dw $5937 ; objects
 
 INCBIN "baserom.gbc",$49876,$49937 - $49876
+
 Route18GateObject: ; 0x49937 (size=50)
     db $a ; border tile
 
@@ -16165,7 +16167,6 @@ Route18GateObject: ; 0x49937 (size=50)
     EVENT_DISP $4, $5, $7
     EVENT_DISP $4, $8, $6 ; ROUTE_18_GATE_2F
 
-
 Route18GateHeader_h: ; 0x49969 to 0x49975 (12 bytes) (id=191)
     db $0c ; tileset
     db $04, $04 ; dimensions (y, x)
@@ -16175,6 +16176,7 @@ Route18GateHeader_h: ; 0x49969 to 0x49975 (12 bytes) (id=191)
     dw $59a4 ; objects
 
 INCBIN "baserom.gbc",$49975,$499a4 - $49975
+
 Route18GateHeaderObject: ; 0x499a4 (size=24)
     db $a ; border tile
 
@@ -16191,7 +16193,6 @@ Route18GateHeaderObject: ; 0x499a4 (size=24)
     ; warp-to
     EVENT_DISP $4, $7, $7 ; ROUTE_18_GATE_1F
 
-
 MtMoon1_h: ; 0x499bc to 0x499c8 (12 bytes) (id=59)
     db $11 ; tileset
     db $12, $14 ; dimensions (y, x)
@@ -16201,6 +16202,7 @@ MtMoon1_h: ; 0x499bc to 0x499c8 (12 bytes) (id=59)
     dw $5b06 ; objects
 
 INCBIN "baserom.gbc",$499c8,$49b06 - $499c8
+
 MtMoon1Object: ; 0x49b06 (size=145)
     db $3 ; border tile
 
@@ -16236,7 +16238,6 @@ MtMoon1Object: ; 0x49b06 (size=145)
     EVENT_DISP $14, $b, $11 ; MT_MOON_2
     EVENT_DISP $14, $f, $19 ; MT_MOON_2
 
-
 MtMoon1Blocks: ; 360
     INCBIN "maps/mtmoon1.blk"
 
@@ -16249,6 +16250,7 @@ MtMoon3_h: ; 0x49cff to 0x49d0b (12 bytes) (id=61)
     dw $5fdb ; objects
 
 INCBIN "baserom.gbc",$49d0b,$49fdb - $49d0b
+
 MtMoon3Object: ; 0x49fdb (size=102)
     db $3 ; border tile
 
@@ -16277,7 +16279,6 @@ MtMoon3Object: ; 0x49fdb (size=102)
     EVENT_DISP $14, $1b, $f ; MT_MOON_2
     EVENT_DISP $14, $7, $5 ; MT_MOON_2
 
-
 MtMoon3Blocks: ; 360
     INCBIN "maps/mtmoon3.blk"
 
@@ -16290,6 +16291,7 @@ SafariZoneWest_h: ; 0x4a1a9 to 0x4a1b5 (12 bytes) (id=219)
     dw $61dc ; objects
 
 INCBIN "baserom.gbc",$4a1b5,$4a1dc - $4a1b5
+
 SafariZoneWestObject: ; 0x4a1dc (size=108)
     db $0 ; border tile
 
@@ -22774,13 +22776,522 @@ SECTION "bank1F",DATA,BANK[$1F]
 INCBIN "baserom.gbc",$7C000,$4000
 
 SECTION "bank20",DATA,BANK[$20]
-INCBIN "baserom.gbc",$80000,$4000
+INCBIN "baserom.gbc",$80000,$800b1 - $80000
+
+_VictoryRoad3Text10: 
+_VictoryRoad3Text9: 
+_VictoryRoad3Text8: 
+_VictoryRoad3Text7: 
+_VictoryRoad2Text13: 
+_VictoryRoad2Text12: 
+_VictoryRoad2Text11: 
+_SeafoamIslands1Text2: 
+_SeafoamIslands1Text1: 
+_SeafoamIslands5Text2: 
+_SeafoamIslands5Text1: 
+_SeafoamIslands4Text6: 
+_SeafoamIslands4Text5: 
+_SeafoamIslands4Text4: 
+_SeafoamIslands4Text3: 
+_SeafoamIslands4Text2: 
+_SeafoamIslands4Text1: 
+_SeafoamIslands3Text2: 
+_SeafoamIslands3Text1: 
+_SeafoamIslands2Text2: 
+_SeafoamIslands2Text1: 
+_FuchsiaHouse2Text3:
+_VictoryRoad1Text7:
+_VictoryRoad1Text6:
+_VictoryRoad1Text5: ; 0x800b1
+    db $0, "This requires", $4f
+    db "STRENGTH to move!", $57
+
+_SaffronCityText19: 
+_CinnabarIslandText4: 
+_FuchsiaCityText14: 
+_VermilionCityText9: 
+_LavendarTownText6: 
+_CeruleanCityText14: 
+_PewterCityText8:
+_ViridianCityText11: ; 0x800d2
+    db $0, "All your item", $4f
+    db "needs fulfilled!", $55
+    db "#MON MART", $57
+
+_ViridianCityText12: ; 0x800fc
+    db $0, "Heal Your #MON!", $4f
+    db "#MON CENTER", $57
+
+INCBIN "baserom.gbc",$80119,$8031d - $80119
+
+_ViridianForestText1: ; 0x8031d
+    db $0, "I came here with", $4f
+    db "some friends!", $51
+    db "They're out for", $4f
+    db "#MON fights!", $57
+
+INCBIN "baserom.gbc",$80359,$804c7 - $80359
+
+_ViridianForestText8: ; 0x804c7
+    db $0, "I ran out of #", $4f
+    db "BALLs to catch", $55
+    db "#MON with!", $51
+    db "You should carry", $4f
+    db "extras!", $57
+
+_ViridianForestText9: ; 0x8050a
+    db $0, "TRAINER TIPS", $51
+    db "If you want to", $4f
+    db "avoid battles,", $55
+    db "stay away from", $55
+    db "grassy areas!", $57
+
+_ViridianForestText10: ; 0x80553
+    db $0, "For poison, use", $4f
+    db "ANTIDOTE! Get it", $55
+    db "at #MON MARTs!", $57
+
+_ViridianForestText11: ; 0x80584
+    db $0, "TRAINER TIPS", $51
+    db "Contact PROF.OAK", $4f
+    db "via PC to get", $55
+    db "your #DEX", $55
+    db "evaluated!", $57
+
+_ViridianForestText12: ; 0x805c6
+    db $0, "TRAINER TIPS", $51
+    db "No stealing of", $4f
+    db "#MON from", $55
+    db "other trainers!", $55
+    db "Catch only wild", $55
+    db "#MON!", $57
+
+_ViridianForestText13: ; 0x80613
+    db $0, "TRAINER TIPS", $51
+    db "Weaken #MON", $4f
+    db "before attempting", $55
+    db "capture!", $51
+    db "When healthy,", $4f
+    db "they may escape!", $57
+
+_ViridianForestText14: ; 0x80667
+    db $0, "LEAVING", $4f
+    db "VIRIDIAN FOREST", $55
+    db "PEWTER CITY AHEAD", $57
+
+INCBIN "baserom.gbc",$80692,$8093a - $80692
+
+_MtMoon1Text14: ; 0x8093a
+    db $0, "Beware! ZUBAT is", $4f
+    db "a blood sucker!", $57
+
+INCBIN "baserom.gbc",$8095c,$80c70 - $8095c
+
+_SSAnne1Text1: ; 0x80c70
+    db $0, "Bonjour!", $4f
+    db "I am le waiter on", $55
+    db "this ship!", $51
+    db "I will be happy", $4f
+    db "to serve you any-", $55
+    db "thing you please!", $51
+    db "Ah! Le strong", $4f
+    db "silent type!", $57
+
+_SSAnne1Text2: ; 0x80ce6
+    db $0, "The passengers", $4f
+    db "are restless!", $51
+    db "You might be", $4f
+    db "challenged by the", $55
+    db "more bored ones!", $57
+
+_SSAnne2Text1: ; 0x80d34
+    db $0, "This ship, she is", $4f
+    db "a luxury liner", $55
+    db "for trainers!", $51
+    db "At every port, we", $4f
+    db "hold parties with", $55
+    db "invited trainers!", $57
+
+INCBIN "baserom.gbc",$80d9a,$80f4b - $80d9a
+
+_SSAnne3Text1: ; 0x80f4b
+    db $0, "Our CAPTAIN is a", $4f
+    db "sword master!", $51
+    db "He even teaches", $4f
+    db "CUT to #MON!", $57
+
+_SSAnne5Text1: ; 0x80f88
+    db $0, "The party's over.", $4f
+    db "The ship will be", $55
+    db "departing soon.", $57
+
+_SSAnne5Text2: ; 0x80fbb
+    db $0, "Scrubbing decks", $4f
+    db "is hard work!", $57
+
+_SSAnne5Text3: ; 0x80fda
+    db $0, "Urf. I feel ill.", $51
+    db "I stepped out to", $4f
+    db "get some air.", $57
+
+INCBIN "baserom.gbc",$8100b,$810e5 - $8100b
+
+_SSAnne6Text1: ; 0x810e5
+    db $0, "You, mon petit!", $4f
+    db "We're busy here!", $55
+    db "Out of the way!", $57
+
+_SSAnne6Text2: ; 0x81116
+    db $0, "I saw an odd ball", $4f
+    db "in the trash.", $57
+
+_SSAnne6Text3: ; 0x81137
+    db $0, "I'm so busy I'm", $4f
+    db "getting dizzy!", $57
+
+_SSAnne6Text4: ; 0x81155
+    db $0, "Hum-de-hum-de-", $4f
+    db "ho...", $51
+    db "I peel spuds", $4f
+    db "every day!", $55
+    db "Hum-hum...", $57
+
+_SSAnne6Text5: ; 0x8118e
+    db $0, "Did you hear about", $4f
+    db "SNORLAX?", $51
+    db "All it does is", $4f
+    db "eat and sleep!", $57
+
+_SSAnne6Text6: ; 0x811c9
+    db $0, "Snivel...Sniff...", $51
+    db "I only get to", $4f
+    db "peel onions...", $55
+    db "Snivel...", $57
+
+INCBIN "baserom.gbc",$81203,$81480 - $81203
+
+_SSAnne7Text2: ; 0x81480
+    db $0, "Yuck! Shouldn't", $4f
+    db "have looked!", $57
+
+_SSAnne7Text3: ; 0x8149d
+    db $0, "How to Conquer", $4f
+    db "Seasickness...", $55
+    db "The CAPTAIN's", $55
+    db "reading this!", $57
+
+_SSAnne8Text8: ; 0x814d7
+    db $0, "WIGGLYTUFF: Puup", $4f
+    db "pupuu!@@"
+
+INCBIN "baserom.gbc",$814f1,$1d6
+
+_SSAnne8Text5: ; 0x816c7
+    db $0, "Waiter, I would", $4f
+    db "like a cherry pie", $55
+    db "please!", $57
+
+_SSAnne8Text6: ; 0x816f2
+    db $0, "A cruise is so", $4f
+    db "elegant yet cozy!", $57
+
+_SSAnne8Text7: ; 0x81714
+    db $0, "I always travel", $4f
+    db "with WIGGLYTUFF!", $57
+
+_SSAnne8Text9: ; 0x81736
+    db $0, "We are cruising", $4f
+    db "around the world.", $57
+
+_SSAnne8Text11: ; 0x81759
+    db $0, "Ssh! I'm a GLOBAL", $4f
+    db "POLICE agent!", $51
+    db "I'm on the trail", $4f
+    db "of TEAM ROCKET!", $57
+
+INCBIN "baserom.gbc",$81799,$81aaa - $81799
+
+_SSAnne10Text8: ; 0x81aaa
+    db $0, "MACHOKE: Gwoh!", $4f
+    db "Goggoh!@@"
+
+INCBIN "baserom.gbc",$81ac3,$289
+
+_SSAnne10Text7: ; 0x81d4c
+    db $0, "My buddy, MACHOKE,", $4f
+    db "is super strong!", $51
+    db "He has enough", $4f
+    db "STRENGTH to move", $55
+    db "big rocks!", $57
+
+INCBIN "baserom.gbc",$81d9b,$2265
 
 SECTION "bank21",DATA,BANK[$21]
-INCBIN "baserom.gbc",$84000,$4000
+
+INCBIN "baserom.gbc",$84000,$840a4 - $84000
+
+_SilphCo5Text9: ; 0x840a4
+    db $0, "It's a #MON", $4f
+    db "REPORT!", $51
+    db "#MON LAB", $4f
+    db "created PORYGON,", $55
+    db "the first virtual", $55
+    db "reality #MON.", $57
+
+_SilphCo5Text10: ; 0x840f2
+    db $0, "It's a #MON", $4f
+    db "REPORT!", $51
+    db "Over 160 #MON", $4f
+    db "techniques have", $55
+    db "been confirmed.", $57
+
+_SilphCo5Text11: ; 0x84134
+    db $0, "It's a #MON", $4f
+    db "REPORT!", $51
+    db "4 #MON evolve", $4f
+    db "only when traded", $55
+    db "by link-cable.", $57
+
+INCBIN "baserom.gbc",$84176,$8502f - $84176
+
+_SilphCo11Text2: ; 0x8502f
+    db $0, "SECRETARY: Thank", $4f
+    db "you for rescuing", $55
+    db "all of us!", $51
+    db "We admire your", $4f
+    db "courage.", $57
+
+_SilphCo11Text3: ; 0x85075
+    db $0, "Ah ", $52, "!", $4f
+    db "So we meet again!", $51
+    db "The PRESIDENT and", $4f
+    db "I are discussing", $55
+    db "a vital business", $55
+    db "proposition.", $51
+    db "Keep your nose", $4f
+    db "out of grown-up", $55
+    db "matters...", $51
+    db "Or, experience a", $4f
+    db "world of pain!", $57
+
+INCBIN "baserom.gbc",$85119,$21d
+
+_Mansion2Text3: ; 0x85336
+    db $0, "Diary: July 5", $4f
+    db "Guyana,", $55
+    db "South America", $51
+    db "A new #MON was", $4f
+    db "discovered deep", $55
+    db "in the jungle.", $57
+
+_Mansion2Text4: ; 0x85389
+    db $0, "Diary: July 10", $4f
+    db "We christened the", $55
+    db "newly discovered", $55
+    db "#MON, MEW.", $57
+
+INCBIN "baserom.gbc",$853c7,$854a3 - $853c7
+
+_Mansion3Text5: ; 0x854a3
+    db $0, "Diary: Feb. 6", $4f
+    db "MEW gave birth.", $51
+    db "We named the", $4f
+    db "newborn MEWTWO.", $57
+
+INCBIN "baserom.gbc",$854df,$85583 - $854df
+
+_Mansion4Text7: ; 0x85583
+    db $0, "Diary; Sept. 1", $4f
+    db "MEWTWO is far too", $55
+    db "powerful.", $51
+    db "We have failed to", $4f
+    db "curb its vicious", $55
+    db "tendencies...", $57
+
+_SafariZoneEastText5: ; 0x855e0
+    db $0, "REST HOUSE", $57
+
+_SafariZoneEastText6: ; 0x855ec
+    db $0, "TRAINER TIPS", $51
+    db "The remaining time", $4f
+    db "declines only", $55
+    db "while you walk!", $57
+
+_SafariZoneEastText7: ; 0x8562b
+    db $0, "CENTER AREA", $4f
+    db "NORTH: AREA 2", $57
+
+_SafariZoneNorthText3: ; 0x85646
+    db $0, "REST HOUSE", $57
+
+_SafariZoneNorthText4: ; 0x85652
+    db $0, "TRAINER TIPS", $51
+    db "The SECRET HOUSE", $4f
+    db "is still ahead!", $57
+
+_SafariZoneNorthText5: ; 0x85681
+    db $0, "AREA 2", $57
+
+_SafariZoneNorthText6: ; 0x85689
+    db $0, "TRAINER TIPS", $51
+    db "#MON hide in", $4f
+    db "tall grass!", $51
+    db "Zigzag through", $4f
+    db "grassy areas to", $55
+    db "flush them out.", $57
+
+_SafariZoneNorthText7: ; 0x856df
+    db $0, "TRAINER TIPS", $51
+    db "Win a free HM for", $4f
+    db "finding the", $55
+    db "SECRET HOUSE!", $57
+
+_SafariZoneWestText5: ; 0x85719
+    db $0, "REST HOUSE", $57
+
+_SafariZoneWestText6: ; 0x85725
+    db $0, "REQUEST NOTICE", $51
+    db "Please find the", $4f
+    db "SAFARI WARDEN's", $55
+    db "lost GOLD TEETH.", $55
+    db "They're around", $55
+    db "here somewhere.", $51
+    db "Reward offered!", $4f
+    db "Contact: WARDEN", $57
+
+_SafariZoneWestText7: ; 0x857a3
+    db $0, "TRAINER TIPS", $51
+    db "Zone Exploration", $4f
+    db "Campaign!", $51
+    db "The Search for", $4f
+    db "the SECRET HOUSE!", $57
+
+_SafariZoneWestText8: ; 0x857ed
+    db $0, "AREA 3", $4f
+    db "EAST: CENTER AREA", $57
+
+_SafariZoneCenterText2: ; 0x85807
+    db $0, "REST HOUSE", $57
+
+_SafariZoneCenterText3: ; 0x85813
+    db $0, "TRAINER TIPS", $51
+    db "Press the START", $4f
+    db "Button to check", $55
+    db "remaining time!", $57
+
+_SafariZoneRestHouse1Text1: ; 0x85851
+    db $0, "SARA: Where did", $4f
+    db "my boy friend,", $55
+    db "ERIK, go?", $57
+
+_SafariZoneRestHouse1Text2: ; 0x8587b
+    db $0, "I'm catching", $4f
+    db "#MON to take", $55
+    db "home as gifts!", $57
+
+INCBIN "baserom.gbc",$858a4,$85a2f - $858a4
+
+_SafariZoneRestHouse2Text1: ; 0x85a2f
+    db $0, "Tossing ROCKs at", $4f
+    db "#MON might", $55
+    db "make them run,", $55
+    db "but they'll be", $55
+    db "easier to catch.", $57
+
+_SafariZoneRestHouse2Text2: ; 0x85a7a
+    db $0, "Using BAIT will", $4f
+    db "make #MON", $55
+    db "easier to catch.", $57
+
+_SafariZoneRestHouse2Text3: ; 0x85aa6
+    db $0, "I hiked a lot, but", $4f
+    db "I didn't see any", $55
+    db "#MON I wanted.", $57
+
+_SafariZoneRestHouse3Text1: ; 0x85ad9
+    db $0, "How many did you", $4f
+    db "catch? I'm bushed", $55
+    db "from the work!", $57
+
+_SafariZoneRestHouse3Text2: ; 0x85b0b
+    db $0, "I caught a", $4f
+    db "CHANSEY!", $51
+    db "That makes this", $4f
+    db "all worthwhile!", $57
+
+_SafariZoneRestHouse3Text3: ; 0x85b40
+    db $0, "Whew! I'm tired", $4f
+    db "from all the fun!", $57
+
+_SafariZoneRestHouse4Text1: ; 0x85b62
+    db $0, "You can keep any", $4f
+    db "item you find on", $55
+    db "the ground here.", $51
+    db "But, you'll run", $4f
+    db "out of time if", $55
+    db "you try for all", $55
+    db "of them at once!", $57
+
+_SafariZoneRestHouse4Text2: ; 0x85bd5
+    db $0, "Go to the deepest", $4f
+    db "part of the", $55
+    db "SAFARI ZONE. You", $55
+    db "will win a prize!", $57
+
+_SafariZoneRestHouse4Text3: ; 0x85c17
+    db $0, "My EEVEE evolved", $4f
+    db "into FLAREON!", $51
+    db "But, a friend's", $4f
+    db "EEVEE turned into", $55
+    db "a VAPOREON!", $55
+    db "I wonder why?", $57
+
+INCBIN "baserom.gbc",$85c72,$343
+
+_HallofFameRoomText1: ; 0x85fb5
+    db $0, "OAK: Er-hem!", $4f
+    db "Congratulations", $55
+    db $52, "!", $51
+    db "This floor is the", $4f
+    db "#MON HALL OF", $55
+    db "FAME!", $51
+    db "#MON LEAGUE", $4f
+    db "champions are", $55
+    db "honored for their", $55
+    db "exploits here!", $51
+    db "Their #MON are", $4f
+    db "also recorded in", $55
+    db "the HALL OF FAME!", $51
+    db $52, "! You have", $4f
+    db "endeavored hard", $55
+    db "to become the new", $55
+    db "LEAGUE champion!", $51
+    db "Congratulations,", $4f
+    db $52, ", you and", $55
+    db "your #MON are", $55
+    db "HALL OF FAMERs!", $57
+
+INCBIN "baserom.gbc",$860e1,$863c1 - $860e1
+
+_GaryText2: ; 0x863c1
+    db $0, "OAK: ", $52, "!", $57
+
+INCBIN "baserom.gbc",$863ca,$1c36
 
 SECTION "bank22",DATA,BANK[$22]
-INCBIN "baserom.gbc",$88000,$BE
+
+INCBIN "baserom.gbc",$88000,$8807e - $88000
+
+_SeafoamIslands5Text4: ; 0x8807e
+    db $0, "Boulders might", $4f
+    db "change the flow", $55
+    db "of water!", $57
+
+_SeafoamIslands5Text5: ; 0x880a8
+    db $0, "DANGER", $4f
+    db "Fast current!", $57
+
+INCBIN "baserom.gbc",$880be,$0
 
 _AIBattleWithdrawText:
 	db 1
@@ -22906,37 +23417,2032 @@ _Char00Text:
 _Char55Text:
 	db 0,$4B,"@@"
 
-INCBIN "baserom.gbc",$8A6A7,$8000 - $66A7
+
+_DiglettsCaveRoute2Text1: ; 0x8a6a7
+    db $0, "I went to ROCK", $4f
+    db "TUNNEL, but it's", $55
+    db "dark and scary.", $51
+    db "If a #MON's", $4f
+    db "FLASH could light", $55
+    db "it up...", $57
+
+_ViridianForestexitText1: ; 0x8a6fd
+    db $0, "Many #MON live", $4f
+    db "only in forests ", $55
+    db "and caves.", $51
+    db "You need to look", $4f
+    db "everywhere to get", $55
+    db "different kinds!", $57
+
+_ViridianForestexitText2: ; 0x8a75d
+    db $0, "Have you noticed", $4f
+    db "the bushes on the", $55
+    db "roadside?", $51
+    db "They can be cut", $4f
+    db "down by a special", $55
+    db "#MON move.", $57
+
+_Route2HouseText1: ; 0x8a7b8
+    db $0, "A fainted #MON", $4f
+    db "can't fight. But, ", $55
+    db "it can still use ", $55
+    db "moves like CUT!", $57
+
+INCBIN "baserom.gbc",$8a7fc,$8a82c - $8a7fc
+
+_Route2GateText2: ; 0x8a82c
+    db $0, "Once a #MON", $4f
+    db "learns FLASH, you", $55
+    db "can get through", $55
+    db "ROCK TUNNEL.", $57
+
+_ViridianForestEntranceText1: ; 0x8a868
+    db $0, "Are you going to", $4f
+    db "VIRIDIAN FOREST?", $55
+    db "Be careful, it's", $55
+    db "a natural maze!", $57
+
+_ViridianForestEntranceText2: ; 0x8a8ab
+    db $0, "RATTATA may be", $4f
+    db "small, but its", $55
+    db "bite is wicked!", $55
+    db "Did you get one?", $57
+
+_MtMoonPokecenterText1: ; 0x8a8eb
+    db $0, "I've 6 # BALLs", $4f
+    db "set in my belt.", $51
+    db "At most, you can", $4f
+    db "carry 6 #MON.", $57
+
+_MtMoonPokecenterText3: ; 0x8a929
+    db $0, "TEAM ROCKET", $4f
+    db "attacks CERULEAN", $55
+    db "citizens...", $51
+    db "TEAM ROCKET is", $4f
+    db "always in the", $55
+    db "news!", $57
+
+INCBIN "baserom.gbc",$8a976,$8aa5a - $8a976
+
+_MtMoonPokecenterText5: ; 0x8aa5a
+    db $0, $57
+
+INCBIN "baserom.gbc",$8aa5c,$15a4
 
 SECTION "bank23",DATA,BANK[$23]
-INCBIN "baserom.gbc",$8C000,$4000
+
+INCBIN "baserom.gbc",$8c000,$8c0cb - $8c000
+
+_UndergroundTunnelEntranceRoute6Text1: ; 0x8c0cb
+    db $0, "People often lose", $4f
+    db "things in that", $55
+    db "UNDERGROUND PATH.", $57
+
+_UndergroundPathEntranceRoute7Text1: ; 0x8c0ff
+    db $0, "I heard a sleepy", $4f
+    db "#MON appeared", $55
+    db "near CELADON CITY.", $57
+
+INCBIN "baserom.gbc",$8c132,$8c28d - $8c132
+
+_UndergroundPathEntranceRoute8Text1: ; 0x8c28d
+    db $0, "The dept. store", $4f
+    db "in CELADON has a", $55
+    db "great selection!", $57
+
+_RockTunnelPokecenterText1: ; 0x8c2c0
+    db $0, "The element types", $4f
+    db "of #MON make", $55
+    db "them stronger", $55
+    db "than some types", $55
+    db "and weaker than", $55
+    db "others!", $57
+
+_RockTunnelPokecenterText3: ; 0x8c316
+    db $0, "I sold a useless", $4f
+    db "NUGGET for ", $f0, "5000!", $57
+
+INCBIN "baserom.gbc",$8c33a,$8c5b7 - $8c33a
+
+_RockTunnel1Text8: ; 0x8c5b7
+    db $0, "ROCK TUNNEL", $4f
+    db "CERULEAN CITY -", $55
+    db "LAVENDER TOWN", $57
+
+INCBIN "baserom.gbc",$8c5e2,$8c5f3 - $8c5e2
+
+_Route11GateText1: ; 0x8c5f3
+    db $0, "When you catch", $4f
+    db "lots of #MON,", $55
+    db "isn't it hard to", $55
+    db "think up names?", $51
+    db "In LAVENDER TOWN,", $4f
+    db "there's a man who", $55
+    db "rates #MON", $55
+    db "nicknames.", $51
+    db "He'll help you", $4f
+    db "rename them too!", $57
+
+INCBIN "baserom.gbc",$8c689,$8c7f9 - $8c689
+
+_DiglettsCaveEntranceRoute11Text1: ; 0x8c7f9
+    db $0, "What a surprise!", $4f
+    db "DIGLETTs dug this", $55
+    db "long tunnel!", $51
+    db "It goes right to", $4f
+    db "VIRIDIAN CITY!", $57
+
+_Route12GateText1: ; 0x8c84a
+    db $0, "There's a lookout", $4f
+    db "spot upstairs.", $57
+
+INCBIN "baserom.gbc",$8c86b,$8cb73 - $8c86b
+
+_Route15GateText1: ; 0x8cb73
+    db $0, "Are you working", $4f
+    db "on a #DEX?", $51
+    db "PROF.OAK's AIDE", $4f
+    db "came by here.", $57
+
+INCBIN "baserom.gbc",$8cbac,$8cd2a - $8cbac
+
+_Route16GateMapText2: ; 0x8cd2a
+    db $0, "How'd you get in?", $4f
+    db "Good effort!", $57
+
+INCBIN "baserom.gbc",$8cd49,$956
+
+_Route1Text2: ; 0x8d69f
+    db $0, "See those ledges", $4f
+    db "along the road?", $51
+    db "It's a bit scary,", $4f
+    db "but you can jump", $55
+    db "from them.", $51
+    db "You can get back", $4f
+    db "to PALLET TOWN", $55
+    db "quicker that way.", $57
+
+_Route1Text3: ; 0x8d720
+    db $0, "ROUTE 1", $4f
+    db "PALLET TOWN -", $55
+    db "VIRIDIAN CITY", $57
+
+_Route2Text3: ; 0x8d745
+    db $0, "ROUTE 2", $4f
+    db "VIRIDIAN CITY -", $55
+    db "PEWTER CITY", $57
+
+_Route2Text4: ; 0x8d76a
+    db $0, "DIGLETT's CAVE", $57
+
+_Route3Text1: ; 0x8d779
+    db $0, "Whew... I better", $4f
+    db "take a rest...", $55
+    db "Groan...", $51
+    db "That tunnel from", $4f
+    db "CERULEAN takes a", $55
+    db "lot out of you!", $57
+
+INCBIN "baserom.gbc",$8d7d5,$8db07 - $8d7d5
+
+_Route3Text10: ; 0x8db07
+    db $0, "ROUTE 3", $4f
+    db "MT.MOON AHEAD", $57
+
+_Route4Text1: ; 0x8db1e
+    db $0, "Ouch! I tripped", $4f
+    db "over a rocky", $55
+    db "#MON, GEODUDE!", $57
+
+INCBIN "baserom.gbc",$8db4b,$8dbcd - $8db4b
+
+_Route4Text5: ; 0x8dbcd
+    db $0, "MT.MOON", $4f
+    db "Tunnel Entrance", $57
+
+_Route4Text6: ; 0x8dbe6
+    db $0, "ROUTE 4", $4f
+    db "MT.MOON -", $55
+    db "CERULEAN CITY", $57
+
+_Route5Text1: ; 0x8dc07
+    db $0, "UNDERGROUND PATH", $4f
+    db "CERULEAN CITY -", $55
+    db "VERMILION CITY", $57
+
+INCBIN "baserom.gbc",$8dc38,$8de49 - $8dc38
+
+_Route6Text7: ; 0x8de49
+    db $0, "UNDERGROUND PATH", $4f
+    db "CERULEAN CITY -", $55
+    db "VERMILION CITY", $57
+
+_Route7Text1: ; 0x8de7a
+    db $0, "UNDERGROUND PATH", $4f
+    db "CELADON CITY -", $55
+    db "LAVENDER TOWN", $57
+
+INCBIN "baserom.gbc",$8dea9,$8e262 - $8dea9
+
+_Route8Text10: ; 0x8e262
+    db $0, "UNDERGROUND PATH", $4f
+    db "CELADON CITY -", $55
+    db "LAVENDER TOWN", $57
+
+INCBIN "baserom.gbc",$8e291,$8e61e - $8e291
+
+_Route9Text11: ; 0x8e61e
+    db $0, "ROUTE 9", $4f
+    db "CERULEAN CITY-", $55
+    db "ROCK TUNNEL", $57
+
+INCBIN "baserom.gbc",$8e642,$8e8d4 - $8e642
+
+_Route10Text9: ; 0x8e8d4
+_Route10Text7: ; 0x8e8d4
+    db $0, "ROCK TUNNEL", $57
+
+_Route10Text10: ; 0x8e8e1
+    db $0, "POWER PLANT", $57
+
+INCBIN "baserom.gbc",$8e8ee,$1712
 
 SECTION "bank24",DATA,BANK[$24]
-INCBIN "baserom.gbc",$90000,$4000
+INCBIN "baserom.gbc",$90000,$9008f - $90000
+
+_Route11Text11: ; 0x9008f
+    db $0, "DIGLETT's CAVE", $57
+
+_Route12Text1: ; 0x9009e
+    db $0, "A sleeping #MON", $4f
+    db "blocks the way!", $57
+
+INCBIN "baserom.gbc",$900bf,$903bc - $900bf
+
+_Route12Text11: ; 0x903bc
+    db $0, "ROUTE 12 ", $4f
+    db "North to LAVENDER", $57
+
+_Route12Text12: ; 0x903d9
+    db $0, "SPORT FISHING AREA", $57
+
+INCBIN "baserom.gbc",$903ed,$90781 - $903ed
+
+_Route13Text11: ; 0x90781
+    db $0, "TRAINER TIPS", $51
+    db "Look to the left", $4f
+    db "of that post!", $57
+
+_Route13Text12: ; 0x907ae
+    db $0, "TRAINER TIPS", $51
+    db "Use SELECT to", $4f
+    db "switch items in", $55
+    db "the ITEM window!", $57
+
+_Route13Text13: ; 0x907eb
+    db $0, "ROUTE 13", $4f
+    db "North to SILENCE", $55
+    db "BRIDGE", $57
+
+INCBIN "baserom.gbc",$9080d,$90c1f - $9080d
+
+_Route14Text11: ; 0x90c1f
+    db $0, "ROUTE 14", $4f
+    db "West to FUCHSIA", $55
+    db "CITY", $57
+
+INCBIN "baserom.gbc",$90c3e,$91062 - $90c3e
+
+_Route15Text12: ; 0x91062
+    db $0, "ROUTE 15", $4f
+    db "West to FUCHSIA", $55
+    db "CITY", $57
+
+INCBIN "baserom.gbc",$91081,$91287 - $91081
+
+_Route16Text7: ; 0x91287
+    db $0, "A sleeping #MON", $4f
+    db "blocks the way!", $57
+
+INCBIN "baserom.gbc",$912a8,$9130d - $912a8
+
+_Route16Text8: ; 0x9130d
+    db $0, "Enjoy the slope!", $4f
+    db "CYCLING ROAD", $57
+
+_Route16Text9: ; 0x9132c
+    db $0, "ROUTE 16", $4f
+    db "CELADON CITY -", $55
+    db "FUCHSIA CITY", $57
+
+INCBIN "baserom.gbc",$91352,$91649 - $91352
+
+_Route17Text11: ; 0x91649
+    db $0, "It's a notice!", $51
+    db "Watch out for", $4f
+    db "discarded items!", $57
+
+_Route17Text12: ; 0x91677
+    db $0, "TRAINER TIPS", $51
+    db "All #MON are", $4f
+    db "unique.", $51
+    db "Even #MON of", $4f
+    db "the same type and", $55
+    db "level grow at", $55
+    db "different rates.", $57
+
+_Route17Text13: ; 0x916d8
+    db $0, "TRAINER TIPS", $51
+    db "Press the A or B", $4f
+    db "Button to stay in", $55
+    db "place while on a", $55
+    db "slope.", $57
+
+_Route17Text14: ; 0x91721
+    db $0, "ROUTE 17", $4f
+    db "CELADON CITY -", $55
+    db "FUCHSIA CITY", $57
+
+_Route17Text15: ; 0x91747
+    db $0, "It's a notice!", $51
+    db "Don't throw the", $4f
+    db "game, throw #", $55
+    db "BALLs instead!", $57
+
+_Route17Text16: ; 0x91782
+    db $0, "CYCLING ROAD", $4f
+    db "Slope ends here!", $57
+
+INCBIN "baserom.gbc",$917a1,$9189d - $917a1
+
+_Route18Text4: ; 0x9189d
+    db $0, "ROUTE 18", $4f
+    db "CELADON CITY -", $55
+    db "FUCHSIA CITY", $57
+
+_Route18Text5: ; 0x918c3
+    db $0, "CYCLING ROAD", $4f
+    db "No pedestrians", $55
+    db "permitted!", $57
+
+INCBIN "baserom.gbc",$918eb,$91c3c - $918eb
+
+_Route19Text11: ; 0x91c3c
+    db $0, "SEA ROUTE 19", $4f
+    db "FUCHSIA CITY -", $55
+    db "SEAFOAM ISLANDS", $57
+
+INCBIN "baserom.gbc",$91c69,$91fa7 - $91c69
+
+_Route20Text12: ; 0x91fa7
+_Route20Text11: ; 0x91fa7
+    db $0, "SEAFOAM ISLANDS", $57
+
+INCBIN "baserom.gbc",$91fb8,$92606 - $91fb8
+
+_Route22Text3: ; 0x92606
+    db $0, "#MON LEAGUE", $4f
+    db "Front Gate", $57
+
+INCBIN "baserom.gbc",$9261e,$92700 - $9261e
+
+_Route23Text8: ; 0x92700
+    db $0, "VICTORY ROAD GATE", $4f
+    db "- #MON LEAGUE", $57
+
+INCBIN "baserom.gbc",$92721,$18df
 
 SECTION "bank25",DATA,BANK[$25]
-INCBIN "baserom.gbc",$94000,$B07
+INCBIN "baserom.gbc",$94000,$945d3 - $94000
+
+_Route25Text11: ; 0x945d3
+    db $0, "SEA COTTAGE", $4f
+    db "BILL lives here!", $57
+
+INCBIN "baserom.gbc",$945f1,$94b01 - $945f1
+
+_BattleCenterMText1: ; 0x94b01
+    db $0, "!", $57
+
+_TradeCenterMText1: ; 0x94b04
+    db $0, "!", $57
+
+INCBIN "baserom.gbc",$94b07,$0
 
 INCLUDE "text/mapRedsHouse1F.tx"
 INCLUDE "text/mapBluesHouse.tx"
 
-INCBIN "baserom.gbc",$94D5B,$4000 - $D5B
+INCBIN "baserom.gbc",$94d5b,$95268 - $94d5b
+
+_OaksLabText8: ; 0x95268
+    db $0, "?", $57
+
+INCBIN "baserom.gbc",$9526b,$95ba1 - $9526b
+
+_ViridianPokeCenterText2: ; 0x95ba1
+_ViridianPokeCenterText1: ; 0x95ba1
+    db $0, "You can use that", $4f
+    db "PC in the corner.", $51
+    db "The receptionist", $4f
+    db "told me. So kind!", $57
+
+_ViridianPokeCenterText3: ; 0x95be8
+    db $0, "There's a #MON", $4f
+    db "CENTER in every", $55
+    db "town ahead.", $51
+    db "They don't charge", $4f
+    db "any money either!", $57
+
+_ViridianMartText1: ; 0x95c36
+    db $0, "Okay! Say hi to", $4f
+    db "PROF.OAK for me!", $57
+
+INCBIN "baserom.gbc",$95c58,$95cd5 - $95c58
+
+_ViridianMartText2: ; 0x95cd5
+    db $0, "This shop sells", $4f
+    db "many ANTIDOTEs.", $57
+
+_ViridianMartText3: ; 0x95cf6
+    db $0, "No! POTIONs are", $4f
+    db "all sold out.", $57
+
+_SchoolText1: ; 0x95d15
+    db $0, "Whew! I'm trying", $4f
+    db "to memorize all", $55
+    db "my notes.", $57
+
+_SchoolText2: ; 0x95d40
+    db $0, "Okay!", $51
+    db "Be sure to read", $4f
+    db "the blackboard", $55
+    db "carefully!", $57
+
+_ViridianHouseText1:
+INCBIN "baserom.gbc",$95d71,$95dc7 - $95d71
+
+_ViridianHouseText2: ; 0x95dc7
+    db $0, "My Daddy loves", $4f
+    db "#MON too.", $57
+
+INCBIN "baserom.gbc",$95de1,$95df3 - $95de1
+
+_ViridianHouseText4: ; 0x95df3
+    db $0, "SPEAROW", $4f
+    db "Name: SPEARY", $57
+
+INCBIN "baserom.gbc",$95e09,$96841 - $95e09
+
+_MuseumF2Text1: ; 0x96841
+    db $0, "MOON STONE?", $51
+    db "What's so special", $4f
+    db "about it?", $57
+
+_MuseumF2Text2: ; 0x96869
+    db $0, "July 20, 1969!", $51
+    db "The 1st lunar", $4f
+    db "landing!", $51
+    db "I bought a color", $4f
+    db "TV to watch it!", $57
+
+_MuseumF2Text3: ; 0x968b1
+    db $0, "We have a space", $4f
+    db "exhibit now.", $57
+
+_MuseumF2Text4: ; 0x968cf
+    db $0, "I want a PIKACHU!", $4f
+    db "It's so cute!", $51
+    db "I asked my Daddy", $4f
+    db "to catch me one!", $57
+
+_MuseumF2Text5: ; 0x96911
+    db $0, "Yeah, a PIKACHU", $4f
+    db "soon, I promise!", $57
+
+_MuseumF2Text6: ; 0x96933
+    db $0, "SPACE SHUTTLE", $4f
+    db "COLUMBIA", $57
+
+_MuseumF2Text7: ; 0x9694b
+    db $0, "Meteorite that", $4f
+    db "fell on MT.MOON.", $55
+    db "(MOON STONE?)", $57
+
+INCBIN "baserom.gbc",$9697a,$1686
+
+;_ViridianHouseText1: ; 0x95d71
+;    db $0, "Coming up with", $4f
+;    db "nicknames is fun,", $55
+;    db "but hard.", $51
+;    db "Simple names are", $4f
+;    db "the easiest to", $55
+;    db "remember.", $57
+;
+;inc-BIN "baserom.gbc",$95dc7,$2239
 
 SECTION "bank26",DATA,BANK[$26]
-INCBIN "baserom.gbc",$98000,$4000
+INCBIN "baserom.gbc",$98000,$984ce - $98000
+
+_PewterHouse1Text1: ; 0x984ce
+    db $0, "NIDORAN: Bowbow!@@"
+
+
+_PewterHouse1Text2: ; 0x984e1
+    db $0, "NIDORAN sit!", $57
+
+_PewterHouse1Text3: ; 0x984ef
+    db $0, "Our #MON's an", $4f
+    db "outsider, so it's", $55
+    db "hard to handle.", $51
+    db "An outsider is a", $4f
+    db "#MON that you", $55
+    db "get in a trade.", $51
+    db "It grows fast, but", $4f
+    db "it may ignore an", $55
+    db "unskilled trainer", $55
+    db "in battle!", $51
+    db "If only we had", $4f
+    db "some BADGEs...", $57
+
+INCBIN "baserom.gbc",$985ac,$98656 - $985ac
+
+_PewterHouse2Text1: ; 0x98656
+    db $0, "#MON learn new", $4f
+    db "techniques as", $55
+    db "they grow!", $51
+    db "But, some moves", $4f
+    db "must be taught by", $55
+    db "the trainer!", $57
+
+_PewterHouse2Text2: ; 0x986ae
+    db $0, "#MON become", $4f
+    db "easier to catch", $55
+    db "when they are", $55
+    db "hurt or asleep!", $51
+    db "But, it's not a", $4f
+    db "sure thing!", $57
+
+_PewterPokecenterText1: ; 0x98704
+    db $0, "What!?", $51
+    db "TEAM ROCKET is", $4f
+    db "at MT.MOON? Huh?", $55
+    db "I'm on the phone!", $51
+    db "Scram!", $57
+
+INCBIN "baserom.gbc",$98744,$98834 - $98744
+
+_CeruleanHouseTrashedText2: ; 0x98834
+    db $0, "TEAM ROCKET must", $4f
+    db "be trying to DIG", $55
+    db "their way into no", $55
+    db "good!", $57
+
+_CeruleanHouseTrashedText3: ; 0x9886f
+    db $0, "TEAM ROCKET left", $4f
+    db "a way out!", $57
+
+_CeruleanHouse2Text1: ; 0x9888c
+    db $0, "My husband likes", $4f
+    db "trading #MON.", $51
+    db "If you are a", $4f
+    db "collector, would", $55
+    db "you please trade", $55
+    db "with him?", $57
+
+_CeruleanPokecenterText1: ; 0x988e5
+    db $0, "That BILL!", $51
+    db "I heard that", $4f
+    db "he'll do whatever", $55
+    db "it takes to get", $55
+    db "rare #MON!", $57
+
+_CeruleanPokecenterText3: ; 0x9892a
+    db $0, "Have you heard", $4f
+    db "about BILL?", $51
+    db "Everyone calls", $4f
+    db "him a #MANIAC!", $51
+    db "I think people", $4f
+    db "are just jealous", $55
+    db "of BILL, though.", $51
+    db "Who wouldn't want", $4f
+    db "to boast about", $55
+    db "their #MON?", $57
+
+INCBIN "baserom.gbc",$989c1,$99012 - $989c1
+
+_CeruleanMartText2: ; 0x99012
+    db $0, "Use REPEL to keep", $4f
+    db "bugs and weak", $55
+    db "#MON away.", $51
+    db "Put your strongest", $4f
+    db "#MON at the", $55
+    db "top of the list", $55
+    db "for best results!", $57
+
+_CeruleanMartText3: ; 0x9907f
+    db $0, "Have you seen any", $4f
+    db "RARE CANDY?", $51
+    db "It's supposed to", $4f
+    db "make #MON go", $55
+    db "up one level!", $57
+
+INCBIN "baserom.gbc",$990c9,$9940e - $990c9
+
+_LavenderPokecenterText4:
+_LavenderPokecenterText2:
+_LavenderPokecenterText1: ; 0x9940e
+    db $0, "TEAM ROCKET will", $4f
+    db "do anything for", $55
+    db "the sake of gold!", $57
+
+_LavenderPokecenterText3: ; 0x99442
+    db $0, "I saw CUBONE's", $4f
+    db "mother die trying", $55
+    db "to escape from", $55
+    db "TEAM ROCKET!", $57
+
+_PokemonTower1Text1: ; 0x9947f
+    db $0, "#MON TOWER was", $4f
+    db "erected in the", $55
+    db "memory of #MON", $55
+    db "that had died.", $57
+
+_PokemonTower1Text2: ; 0x994bc
+    db $0, "Did you come to", $4f
+    db "pay respects?", $55
+    db "Bless you!", $57
+
+_PokemonTower1Text3: ; 0x994e6
+    db $0, "I came to pray", $4f
+    db "for my CLEFAIRY.", $51
+    db "Sniff! I can't", $4f
+    db "stop crying...", $57
+
+_PokemonTower1Text4: ; 0x99524
+    db $0, "My GROWLITHE...", $4f
+    db "Why did you die?", $57
+
+_PokemonTower1Text5: ; 0x99546
+    db $0, "I am a CHANNELER!", $4f
+    db "There are spirits", $55
+    db "up to mischief!", $57
+
+INCBIN "baserom.gbc",$9957b,$9971a - $9957b
+
+_PokemonTower2Text2: ; 0x9971a
+    db $0, "Even we could not", $4f
+    db "identify the", $55
+    db "wayward GHOSTs!", $51
+    db "A SILPH SCOPE", $4f
+    db "might be able to", $55
+    db "unmask them.", $57
+
+INCBIN "baserom.gbc",$99776,$99958 - $99776
+
+_PokemonTower5Text1: ; 0x99958
+    db $0, "Come, child! I", $4f
+    db "sealed this space", $55
+    db "with white magic!", $51
+    db "You can rest here!", $57
+
+INCBIN "baserom.gbc",$9999f,$99f72 - $9999f
+
+_LavenderHouse1Text3: ; 0x99f72
+    db $0, "PSYDUCK: Gwappa!@@"
+
+
+_LavenderHouse1Text4: ; 0x99f85
+    db $0, "NIDORINO: Gaoo!@@"
+
+INCBIN "baserom.gbc",$99f97,$9a0aa - $99f97
+
+_LavenderHouse1Text6: ; 0x9a0aa
+    db $0, "#MON Monthly", $4f
+    db "Grand Prize", $55
+    db "Drawing!", $51
+    db "The application", $4f
+    db "form is...", $51
+    db "Gone! It's been", $4f
+    db "clipped out!", $57
+
+_LavenderMartText2: ; 0x9a104
+    db $0, "I'm searching for", $4f
+    db "items that raise", $55
+    db "the abilities of", $55
+    db "#MON during a", $55
+    db "single battle.", $51
+    db "X ATTACK, X", $4f
+    db "DEFEND, X SPEED", $55
+    db "and X SPECIAL are", $55
+    db "what I'm after.", $51
+    db "Do you know where", $4f
+    db "I can get them?", $57
+
+INCBIN "baserom.gbc",$9a1b4,$9a238 - $9a1b4
+
+_LavenderHouse2Text1: ; 0x9a238
+    db $0, "CUBONE: Kyarugoo!@@"
+
+INCBIN "baserom.gbc",$9a24c,$266
+
+_VermilionPokecenterText2: ; 0x9a4b2
+_VermilionPokecenterText1: ; 0x9a4b2
+    db $0, "Even if they are", $4f
+    db "the same level,", $55
+    db "#MON can have", $55
+    db "very different", $55
+    db "abilities.", $51
+    db "A #MON raised", $4f
+    db "by a trainer is", $55
+    db "stronger than one", $55
+    db "in the wild.", $57
+
+_VermilionPokecenterText3: ; 0x9a539
+    db $0, "My #MON was", $4f
+    db "poisoned! It", $55
+    db "fainted while we", $55
+    db "were walking!", $57
+
+INCBIN "baserom.gbc",$9a572,$9a948 - $9a572
+
+_FanClubText6: ; 0x9a948
+    db $0, "Our Chairman is", $4f
+    db "very vocal about", $55
+    db "#MON.", $57
+
+_FanClubText7: ; 0x9a970
+    db $0, "Let's all listen", $4f
+    db "politely to other", $55
+    db "trainers!", $57
+
+_FanClubText8: ; 0x9a99d
+    db $0, "If someone brags,", $4f
+    db "brag right back!", $57
+
+_VermilionMartText2: ; 0x9a9c1
+    db $0, "There are evil", $4f
+    db "people who will", $55
+    db "use #MON for", $55
+    db "criminal acts.", $51
+    db "TEAM ROCKET", $4f
+    db "traffics in rare", $55
+    db "#MON.", $51
+    db "They also abandon", $4f
+    db "#MON that they", $55
+    db "consider not to", $55
+    db "be popular or", $55
+    db "useful.", $57
+
+_VermilionMartText3: ; 0x9aa67
+    db $0, "I think #MON", $4f
+    db "can be good or", $55
+    db "evil. It depends", $55
+    db "on the trainer.", $57
+
+INCBIN "baserom.gbc",$9aaa5,$155b
 
 SECTION "bank27",DATA,BANK[$27]
-INCBIN "baserom.gbc",$9C000,$4000
+INCBIN "baserom.gbc",$9c000,$9c449 - $9c000
+
+_VermilionHouse1Text1: ; 0x9c449
+    db $0, "I'm getting my", $4f
+    db "PIDGEY to fly a", $55
+    db "letter to SAFFRON", $55
+    db "in the north!", $57
+
+_VermilionHouse1Text2: ; 0x9c488
+    db $0, "PIDGEY: Kurukkoo!@@"
+
+
+_VermilionHouse1Text3: ; 0x9c49c
+    db $0, "Dear PIPPI, I hope", $4f
+    db "to see you soon.", $51
+    db "I heard SAFFRON", $4f
+    db "has problems with", $55
+    db "TEAM ROCKET.", $51
+    db "VERMILION appears", $4f
+    db "to be safe.", $57
+
+INCBIN "baserom.gbc",$9c50e,$9c672 - $9c50e
+
+_CeladonMart1Text1: ; 0x9c672
+    db $0, "Hello! Welcome to", $4f
+    db "CELADON DEPT.", $55
+    db "STORE.", $51
+    db "The board on the", $4f
+    db "right describes", $55
+    db "the store layout.", $57
+
+_CeladonMart1Text2: ; 0x9c6cd
+    db $0, "1F: SERVICE", $4f
+    db "    COUNTER", $51
+    db "2F: TRAINER'S", $4f
+    db "    MARKET", $51
+    db "3F: TV GAME SHOP", $51
+    db "4F: WISEMAN GIFTS", $51
+    db "5F: DRUG STORE", $51
+    db "ROOFTOP SQUARE:", $4f
+    db "VENDING MACHINES", $57
+
+_CeladonMart1Text3: ; 0x9c752
+    db $0, "1F: SERVICE", $4f
+    db "    COUNTER", $57
+
+_CeladonMart2Text3: ; 0x9c76b
+    db $0, "SUPER REPEL keeps", $4f
+    db "weak #MON at", $55
+    db "bay...", $51
+    db "Hmm, it's a more", $4f
+    db "powerful REPEL!", $57
+
+_CeladonMart2Text4: ; 0x9c7b2
+    db $0, "For long outings,", $4f
+    db "you should buy", $55
+    db "REVIVE.", $57
+
+_CeladonMart2Text5: ; 0x9c7dc
+    db $0, "Top Grade Items", $4f
+    db "for Trainers!", $51
+    db "2F: TRAINER'S", $4f
+    db "    MARKET", $57
+
+INCBIN "baserom.gbc",$9c814,$9c8c7 - $9c814
+
+_CeladonMart3Text2: ; 0x9c8c7
+    db $0, "Captured #MON", $4f
+    db "are registered", $55
+    db "with an ID No.", $55
+    db "and OT, the name", $55
+    db "of the Original", $55
+    db "Trainer that", $55
+    db "caught it!", $57
+
+_CeladonMart3Text3: ; 0x9c92d
+    db $0, "All right!", $51
+    db "My buddy's going", $4f
+    db "to trade me his", $55
+    db "KANGASKHAN for my", $55
+    db "GRAVELER!", $57
+
+_CeladonMart3Text4: ; 0x9c975
+    db $0, "Come on GRAVELER!", $51
+    db "I love GRAVELER!", $4f
+    db "I collect them!", $51
+    db "Huh?", $51
+    db "GRAVELER turned", $4f
+    db "into a different", $55
+    db "#MON!", $57
+
+_CeladonMart3Text5: ; 0x9c9d5
+    db $0, "You can identify", $4f
+    db "#MON you got", $55
+    db "in trades by", $55
+    db "their ID Numbers!", $57
+
+_CeladonMart3Text6: ; 0x9ca13
+    db $0, "It's an SNES!", $57
+
+_CeladonMart3Text7: ; 0x9ca21
+    db $0, "An RPG! There's", $4f
+    db "no time for that!", $57
+
+_CeladonMart3Text9: ; 0x9ca43
+    db $0, "A sports game!", $4f
+    db "Dad'll like that!", $57
+
+_CeladonMart3Text11: ; 0x9ca64
+    db $0, "A puzzle game!", $4f
+    db "Looks addictive!", $57
+
+_CeladonMart3Text13: ; 0x9ca85
+    db $0, "A fighting game!", $4f
+    db "Looks tough!", $57
+
+_CeladonMart3Text14: ; 0x9caa4
+    db $0, "3F: TV GAME SHOP", $57
+
+_CeladonMart3Text15: ; 0x9cab6
+    db $0, "Red and Blue!", $4f
+    db "Both are #MON!", $57
+
+_CeladonMart4Text2: ; 0x9cad4
+    db $0, "I'm getting a", $4f
+    db "# DOLL for my", $55
+    db "girl friend!", $57
+
+_CeladonMart4Text3: ; 0x9cafd
+    db $0, "I heard something", $4f
+    db "useful.", $51
+    db "You can run from", $4f
+    db "wild #MON by", $55
+    db "distracting them", $55
+    db "with a # DOLL!", $57
+
+_CeladonMart4Text4: ; 0x9cb56
+    db $0, "Express yourself", $4f
+    db "with gifts!", $51
+    db "4F: WISEMAN GIFTS", $51
+    db "Evolution Special!", $4f
+    db "Element STONEs on", $55
+    db "sale now!", $57
+
+INCBIN "baserom.gbc",$9cbb5,$9cd97 - $9cbb5
+
+_CeladonMart5Text1: ; 0x9cd97
+    db $0, "My sister is a", $4f
+    db "trainer, believe", $55
+    db "it or not.", $51
+    db "But, she's so", $4f
+    db "immature, she", $55
+    db "drives me nuts!", $57
+
+INCBIN "baserom.gbc",$9cdee,$9ce50 - $9cdee
+
+_CeladonMart5Text6: ; 0x9ce50
+    db $0, "ROOFTOP SQUARE:", $4f
+    db "VENDING MACHINES", $57
+
+INCBIN "baserom.gbc",$9ce72,$9ceee - $9ce72
+
+_CeladonMansion1Text1: ; 0x9ceee
+    db $0, "MEOWTH: Meow!@@"
+
+
+_CeladonMansion1Text2: ; 0x9cefe
+    db $0, "My dear #MON", $4f
+    db "keep me company.", $51
+    db "MEOWTH even brings", $4f
+    db "money home!", $57
+
+_CeladonMansion1Text3: ; 0x9cf3c
+    db $0, "CLEFAIRY: Pi", $4f
+    db "pippippi!@@"
+
+
+_CeladonMansion1Text4: ; 0x9cf55
+    db $0, "NIDORAN: Kya", $4f
+    db "kyaoo!@@"
+
+
+_CeladonMansion1Text5: ; 0x9cf6b
+    db $0, "CELADON MANSION", $4f
+    db "Manager's Suite", $57
+
+_CeladonMansion2Text1: ; 0x9cf8b
+    db $0, "GAME FREAK", $4f
+    db "Meeting Room", $57
+
+_CeladonMansion3Text1: ; 0x9cfa4
+    db $0, "Me? I'm the", $4f
+    db "programmer!", $57
+
+_CeladonMansion3Text2: ; 0x9cfbc
+    db $0, "I'm the graphic", $4f
+    db "artist!", $55
+    db "I drew you!", $57
+
+_CeladonMansion3Text3: ; 0x9cfe0
+    db $0, "I wrote the story!", $4f
+    db "Isn't ERIKA cute?", $51
+    db "I like MISTY a", $4f
+    db "lot too!", $51
+    db "Oh, and SABRINA,", $4f
+    db "I like her!", $57
+
+INCBIN "baserom.gbc",$9d03a,$9d0ed - $9d03a
+
+_CeladonMansion3Text5: ; 0x9d0ed
+    db $0, "It's the game", $4f
+    db "program! Messing", $55
+    db "with it could bug", $55
+    db "out the game!", $57
+
+_CeladonMansion3Text6: ; 0x9d12c
+    db $0, "Someone's playing", $4f
+    db "a game instead of", $55
+    db "working!", $57
+
+_CeladonMansion3Text7: ; 0x9d159
+    db $0, "It's the script!", $4f
+    db "Better not look", $55
+    db "at the ending!", $57
+
+_CeladonMansion3Text8: ; 0x9d189
+    db $0, "GAME FREAK", $4f
+    db "Development Room", $57
+
+_CeladonMansion4Text1: ; 0x9d1a6
+    db $0, "I KNOW EVERYTHING!", $57
+
+_CeladonMansion5Text1: ; 0x9d1ba
+    db $0, "I know everything", $4f
+    db "about the world", $55
+    db "of #MON in", $55
+    db "your GAME BOY!", $51
+    db "Get together with", $4f
+    db "your friends and", $55
+    db "trade #MON!", $57
+
+_CeladonPokecenterText1: ; 0x9d226
+    db $0, "# FLUTE awakens", $4f
+    db "#MON with a", $55
+    db "sound that only", $55
+    db "they can hear!", $57
+
+_CeladonPokecenterText3: ; 0x9d262
+    db $0, "I rode uphill on", $4f
+    db "CYCLING ROAD from", $55
+    db "FUCHSIA!", $57
+
+INCBIN "baserom.gbc",$9d28f,$9d8d5 - $9d28f
+
+_CeladonGameCornerText1: ; 0x9d8d5
+    db $0, "Welcome!", $51
+    db "You can exchange", $4f
+    db "your coins for", $55
+    db "fabulous prizes", $55
+    db "next door.", $57
+
+INCBIN "baserom.gbc",$9d91a,$9da1c - $9d91a
+
+_CeladonGameCornerText3: ; 0x9da1c
+    db $0, "Keep this quiet.", $51
+    db "It's rumored that", $4f
+    db "this place is run", $55
+    db "by TEAM ROCKET.", $57
+
+_CeladonGameCornerText4: ; 0x9da61
+    db $0, "I think these", $4f
+    db "machines have", $55
+    db "different odds.", $57
+
+INCBIN "baserom.gbc",$9da8e,$9daf4 - $9da8e
+
+_CeladonGameCornerText6: ; 0x9daf4
+    db $0, "I'm having a", $4f
+    db "wonderful time!", $57
+
+INCBIN "baserom.gbc",$9db11,$9dc06 - $9db11
+
+_CeladonGameCornerText8: ; 0x9dc06
+    db $0, "Games are scary!", $4f
+    db "It's so easy to", $55
+    db "get hooked!", $57
+
+INCBIN "baserom.gbc",$9dc33,$9ddff - $9dc33
+
+_CeladonHouseText1: ; 0x9ddff
+    db $0, "#MON ability", $4f
+    db "enhancers can be", $55
+    db "bought only here.", $51
+    db "Use CALCIUM to", $4f
+    db "increase SPECIAL", $55
+    db "abilities.", $51
+    db "Use CARBOS to", $4f
+    db "increase SPEED.", $57
+
+_CeladonHouseText2: ; 0x9de79
+    db $0, "I'm here for", $4f
+    db "#MON ability", $55
+    db "enhancers.", $51
+    db "PROTEIN increases", $4f
+    db "ATTACK power.", $51
+    db "IRON increases", $4f
+    db "DEFENSE!", $57
+
+_CeladonHouseText5: ; 0x9ded6
+    db $0, "5F: DRUG STORE", $57
+
+_CeladonPrizeRoomText1: ; 0x9dee6
+    db $0, "I sure do fancy", $4f
+    db "that PORYGON!", $51
+    db "But, it's hard to", $4f
+    db "win at slots!", $57
+
+_CeladonPrizeRoomText2: ; 0x9df24
+    db $0, "I had a major", $4f
+    db "haul today!", $57
+
+_CeladonDinerText1: ; 0x9df3f
+    db $0, "Hi!", $51
+    db "We're taking a", $4f
+    db "break now.", $57
+
+_CeladonDinerText2: ; 0x9df5d
+    db $0, "My #MON are", $4f
+    db "weak, so I often", $55
+    db "have to go to the", $55
+    db "DRUG STORE.", $57
+
+_CeladonDinerText3: ; 0x9df99
+    db $0, "Psst! There's a", $4f
+    db "basement under", $55
+    db "the GAME CORNER.", $57
+
+_CeladonDinerText4: ; 0x9dfc9
+    db $0, "Munch...", $51
+    db "The man at that", $4f
+    db "table lost it all", $55
+    db "at the slots.", $57
+
+INCBIN "baserom.gbc",$9e003,$9e0d5 - $9e003
+
+_CeladonHouse2Text1: ; 0x9e0d5
+    db $0, "Hehehe! The slots", $4f
+    db "just reel in the", $55
+    db "dough, big time!", $57
+
+_CeladonHouse2Text2: ; 0x9e10a
+    db $0, "CHIEF!", $51
+    db "We just shipped", $4f
+    db "2000 #MON as", $55
+    db "slot prizes!", $57
+
+_CeladonHouse2Text3: ; 0x9e13c
+    db $0, "Don't touch the", $4f
+    db "poster at the", $55
+    db "GAME CORNER!", $51
+    db "There's no secret", $4f
+    db "switch behind it!", $57
+
+_CeladonHotelText1: ; 0x9e18a
+    db $0, "#MON? No, this", $4f
+    db "is a hotel for", $55
+    db "people.", $51
+    db "We're full up.", $57
+
+_CeladonHotelText2: ; 0x9e1bf
+    db $0, "I'm on vacation", $4f
+    db "with my brother", $55
+    db "and boy friend.", $51
+    db "CELADON is such a", $4f
+    db "pretty city!", $57
+
+_CeladonHotelText3: ; 0x9e20e
+    db $0, "Why did she bring", $4f
+    db "her brother?", $57
+
+_FuchsiaMartText2: ; 0x9e22e
+    db $0, "Do you have a", $4f
+    db "SAFARI ZONE flag?", $51
+    db "What about cards", $4f
+    db "or calendars?", $57
+
+_FuchsiaMartText3: ; 0x9e26e
+    db $0, "Did you try X", $4f
+    db "SPEED? It speeds", $55
+    db "up a #MON in", $55
+    db "battle!", $57
+
+_FuchsiaHouse1Text1: ; 0x9e2a3
+    db $0, "SAFARI ZONE's", $4f
+    db "WARDEN is old,", $55
+    db "but still active!", $51
+    db "All his teeth are", $4f
+    db "false, though.", $57
+
+_FuchsiaHouse1Text2: ; 0x9e2f3
+    db $0, "Hmm? You've met", $4f
+    db "BILL?", $51
+    db "He's my grandson!", $51
+    db "He always liked", $4f
+    db "collecting things", $55
+    db "even as a child!", $57
+
+_FuchsiaHouse1Text3: ; 0x9e34d
+    db $0, "BILL files his", $4f
+    db "own #MON data", $55
+    db "on his PC!", $51
+    db "Did he show you?", $57
+
+_FuchsiaPokecenterText1: ; 0x9e387
+    db $0, "You can't win", $4f
+    db "with just one", $55
+    db "strong #MON.", $51
+    db "It's tough, but", $4f
+    db "you have to raise", $55
+    db "them evenly.", $57
+
+_FuchsiaPokecenterText3: ; 0x9e3de
+    db $0, "There's a narrow", $4f
+    db "trail west of", $55
+    db "VIRIDIAN CITY.", $51
+    db "It goes to #MON", $4f
+    db "LEAGUE HQ.", $55
+    db "The HQ governs", $55
+    db "all trainers.", $57
+
+INCBIN "baserom.gbc",$9e444,$9e6c7 - $9e444
+
+_SafariZoneEntranceText1: ; 0x9e6c7
+    db $0, "Welcome to the", $4f
+    db "SAFARI ZONE!", $57
+
+INCBIN "baserom.gbc",$9e6e4,$191c
 
 SECTION "bank28",DATA,BANK[$28]
-INCBIN "baserom.gbc",$A0000,$4000
+INCBIN "baserom.gbc",$a0000,$a05a1 - $a0000
+
+_FuchsiaMeetingRoomText1: ; 0xa05a1
+    db $0, "We nicknamed the", $4f
+    db "WARDEN SLOWPOKE.", $51
+    db "He and SLOWPOKE", $4f
+    db "both look vacant!", $57
+
+_FuchsiaMeetingRoomText2: ; 0xa05e6
+    db $0, "SLOWPOKE is very", $4f
+    db "knowledgeable", $55
+    db "about #MON!", $51
+    db "He even has some", $4f
+    db "fossils of rare,", $55
+    db "extinct #MON!", $57
+
+_FuchsiaMeetingRoomText3: ; 0xa0642
+    db $0, "SLOWPOKE came in,", $4f
+    db "but I couldn't", $55
+    db "understand him.", $51
+    db "I think he's got", $4f
+    db "a speech problem!", $57
+
+INCBIN "baserom.gbc",$a0695,$a0df7 - $a0695
+
+_Lab1Text1: ; 0xa0df7
+    db $0, "We study #MON", $4f
+    db "extensively here.", $51
+    db "People often bring", $4f
+    db "us rare #MON", $55
+    db "for examination.", $57
+
+_Lab1Text2: ; 0xa0e49
+    db $0, "A photo of the", $4f
+    db "LAB's founder,", $55
+    db "DR.FUJI!", $57
+
+_Lab1Text3: ; 0xa0e70
+    db $0, "#MON LAB", $4f
+    db "Meeting Room", $57
+
+_Lab1Text4: ; 0xa0e87
+    db $0, "#MON LAB", $4f
+    db "R-and-D Room", $57
+
+_Lab1Text5: ; 0xa0e9e
+    db $0, "#MON LAB", $4f
+    db "Testing Room", $57
+
+_Lab2Text1: ; 0xa0eb5
+    db $0, "I found this very", $4f
+    db "strange fossil in", $55
+    db "MT.MOON!", $51
+    db "I think it's a", $4f
+    db "rare, prehistoric", $55
+    db "#MON!", $57
+
+INCBIN "baserom.gbc",$a0f09,$a0fe3 - $a0f09
+
+_Lab3Text2: ; 0xa0fe3
+    db $0, "EEVEE can evolve", $4f
+    db "into 1 of 3 kinds", $55
+    db "of #MON.", $57
+
+_Lab3Text3: ; 0xa1010
+    db $0, "There's an e-mail", $4f
+    db "message!", $51
+    db "...", $51
+    db "The 3 legendary", $4f
+    db "bird #MON are", $55
+    db "ARTICUNO, ZAPDOS", $55
+    db "and MOLTRES.", $51
+    db "Their whereabouts", $4f
+    db "are unknown.", $51
+    db "We plan to explore", $4f
+    db "the cavern close", $55
+    db "to CERULEAN.", $51
+    db "From: #MON", $4f
+    db "RESEARCH TEAM", $51
+    db "...", $57
+
+_Lab3Text5: ; 0xa10d8
+    db $0, "An amber pipe!", $57
+
+INCBIN "baserom.gbc",$a10e8,$a12de - $a10e8
+
+_CinnibarPokecenterText2: 
+_CinnibarPokecenterText1: ; 0xa12de
+    db $0, "You can cancel", $4f
+    db "evolution.", $51
+    db "When a #MON is", $4f
+    db "evolving, you can", $55
+    db "stop it and leave", $55
+    db "it the way it is.", $57
+
+_CinnibarPokecenterText3: ; 0xa133e
+    db $0, "Do you have any", $4f
+    db "friends?", $51
+    db "#MON you get", $4f
+    db "in trades grow", $55
+    db "very quickly.", $51
+    db "I think it's", $4f
+    db "worth a try!", $57
+
+_CinnibarMartText2: ; 0xa139b
+    db $0, "Don't they have X", $4f
+    db "ATTACK? It's good", $55
+    db "for battles!", $57
+
+_CinnibarMartText3: ; 0xa13cb
+    db $0, "It never hurts to", $4f
+    db "have extra items!", $57
+
+_IndigoPlateauLobbyText1: ; 0xa13f0
+    db $0, "Yo! Champ in", $4f
+    db "making!", $51
+    db "At #MON LEAGUE,", $4f
+    db "you have to face", $55
+    db "the ELITE FOUR in", $55
+    db "succession.", $51
+    db "If you lose, you", $4f
+    db "have to start all", $55
+    db "over again! This", $55
+    db "is it! Go for it!", $57
+
+_IndigoPlateauLobbyText3: ; 0xa148b
+    db $0, "From here on, you", $4f
+    db "face the ELITE", $55
+    db "FOUR one by one!", $51
+    db "If you win, a", $4f
+    db "door opens to the", $55
+    db "next trainer!", $55
+    db "Good luck!", $57
+
+_CopycatsHouseF1Text1: ; 0xa14f7
+    db $0, "My daughter is so", $4f
+    db "self-centered.", $55
+    db "She only has a", $55
+    db "few friends.", $57
+
+_CopycatsHouseF1Text2: ; 0xa1535
+    db $0, "My daughter likes", $4f
+    db "to mimic people.", $51
+    db "Her mimicry has", $4f
+    db "earned her the", $55
+    db "nickname COPYCAT", $55
+    db "around here!", $57
+
+_CopycatsHouseF1Text3: ; 0xa1596
+    db $0, "CHANSEY: Chaan!", $4f
+    db "Sii!@@"
+
+INCBIN "baserom.gbc",$a15ad,$a1749 - $a15ad
+
+_CopycatsHouseF2Text2: ; 0xa1749
+    db $0, "DODUO: Giiih!", $51
+    db "MIRROR MIRROR ON", $4f
+    db "THE WALL, WHO IS", $55
+    db "THE FAIREST ONE", $55
+    db "OF ALL?", $57
+
+_CopycatsHouseF2Text3: ; 0xa1792
+    db $0, "This is a rare", $4f
+    db "#MON! Huh?", $55
+    db "It's only a doll!", $57
+
+_CopycatsHouseF2Text6: ; 0xa17be
+    db $0, "A game with MARIO", $4f
+    db "wearing a bucket", $55
+    db "on his head!", $57
+
+INCBIN "baserom.gbc",$a17ef,$a2305 - $a17ef
+
+_SaffronHouse1Text1: ; 0xa2305
+    db $0, "Thank you for", $4f
+    db "writing. I hope", $55
+    db "to see you soon!", $51
+    db "Hey! Don't look", $4f
+    db "at my letter!", $57
+
+_SaffronHouse1Text2: ; 0xa2352
+    db $0, "PIDGEY: Kurukkoo!@@"
+
+
+_SaffronHouse1Text3: ; 0xa2366
+    db $0, "The COPYCAT is", $4f
+    db "cute! I'm getting", $55
+    db "her a # DOLL!", $57
+
+_SaffronHouse1Text4: ; 0xa2395
+    db $0, "I was given a PP", $4f
+    db "UP as a gift.", $51
+    db "It's used for", $4f
+    db "increasing the PP", $55
+    db "of techniques!", $57
+
+_SaffronMartText2: ; 0xa23e3
+    db $0, "MAX REPEL lasts", $4f
+    db "longer than SUPER", $55
+    db "REPEL for keeping", $55
+    db "weaker #MON", $55
+    db "away!", $57
+
+_SaffronMartText3: ; 0xa242a
+    db $0, "REVIVE is costly,", $4f
+    db "but it revives", $55
+    db "fainted #MON!", $57
+
+_SilphCo1Text1: ; 0xa245a
+    db $0, "Welcome!", $51
+    db "The PRESIDENT is", $4f
+    db "in the boardroom", $55
+    db "on 11F!", $57
+
+_SaffronPokecenterText1: ; 0xa248e
+    db $0, "#MON growth", $4f
+    db "rates differ from", $55
+    db "specie to specie.", $57
+
+_SaffronPokecenterText3: ; 0xa24bf
+    db $0, "SILPH CO. is very", $4f
+    db "famous. That's", $55
+    db "why it attracted", $55
+    db "TEAM ROCKET!", $57
+
+INCBIN "baserom.gbc",$a24fe,$1b02
 
 SECTION "bank29",DATA,BANK[$29]
+
 INCBIN "baserom.gbc",$A4000,$245
 
 INCLUDE "text/mapPalletTown.tx"
 
-INCBIN "baserom.gbc",$A43CC,$6729 - $43CC
+_ViridianCityText1:
+    db $0, "Those # BALLs", $4f
+    db "at your waist!", $55
+    db "You have #MON!", $51
+    db "It's great that", $4f
+    db "you can carry and", $55
+    db "use #MON any", $55
+    db "time, anywhere!", $57
+
+INCBIN "baserom.gbc",$a4437,$a4833 - $a4437
+
+_ViridianCityText8: ; 0xa4833
+    db $0, "VIRIDIAN CITY ", $4f
+    db "The Eternally", $55
+    db "Green Paradise", $57
+
+_ViridianCityText9: ; 0xa4860
+    db $0, "TRAINER TIPS", $51
+    db "Catch #MON", $4f
+    db "and expand your", $55
+    db "collection!", $51
+    db "The more you have,", $4f
+    db "the easier it is", $55
+    db "to fight!", $57
+
+_ViridianCityText10: ; 0xa48c3
+    db $0, "TRAINER TIPS", $51
+    db "The battle moves", $4f
+    db "of #MON are", $55
+    db "limited by their", $55
+    db "POWER POINTs, PP.", $51
+    db "To replenish PP,", $4f
+    db "rest your tired", $55
+    db "#MON at a", $55
+    db "#MON CENTER!", $57
+
+_ViridianCityText13: ; 0xa4949
+    db $0, "VIRIDIAN CITY", $4f
+    db "#MON GYM", $57
+
+INCBIN "baserom.gbc",$a4961,$a497f - $a4961
+
+_PewterCityText1: ; 0xa497f
+    db $0, "It's rumored that", $4f
+    db "CLEFAIRYs came", $55
+    db "from the moon!", $51
+    db "They appeared ", $4f
+    db "after MOON STONE", $55
+    db "fell on MT.MOON.", $57
+
+_PewterCityText2: ; 0xa49e0
+    db $0, "There aren't many", $4f
+    db "serious #MON", $55
+    db "trainers here!", $51
+    db "They're all like", $4f
+    db "BUG CATCHERs,", $55
+    db "but PEWTER GYM's", $55
+    db "BROCK is totally", $55
+    db "into it!", $57
+
+INCBIN "baserom.gbc",$a4a56,$a4bfe - $a4a56
+
+_PewterCityText6: ; 0xa4bfe
+    db $0, "TRAINER TIPS", $51
+    db "Any #MON that", $4f
+    db "takes part in", $55
+    db "battle, however", $55
+    db "short, earns EXP!", $57
+
+_PewterCityText7: ; 0xa4c4a
+    db $0, "NOTICE!", $51
+    db "Thieves have been", $4f
+    db "stealing #MON", $55
+    db "fossils at MT.", $55
+    db "MOON! Please call", $55
+    db "PEWTER POLICE", $55
+    db "with any info!", $57
+
+_PewterCityText10: ; 0xa4cb1
+    db $0, "PEWTER MUSEUM", $4f
+    db "OF SCIENCE", $57
+
+_PewterCityText11: ; 0xa4ccb
+    db $0, "PEWTER CITY", $4f
+    db "#MON GYM", $55
+    db "LEADER: BROCK", $51
+    db "The Rock Solid", $4f
+    db "#MON Trainer!", $57
+
+_PewterCityText12: ; 0xa4d0c
+    db $0, "PEWTER CITY", $4f
+    db "A Stone Gray", $55
+    db "City", $57
+
+INCBIN "baserom.gbc",$a4d2b,$a5030 - $a4d2b
+
+_CeruleanCityText3: ; 0xa5030
+    db $0, "You're a trainer", $4f
+    db "too? Collecting,", $55
+    db "fighting, it's a", $55
+    db "tough life.", $57
+
+_CeruleanCityText4: ; 0xa506e
+    db $0, "That bush in", $4f
+    db "front of the shop", $55
+    db "is in the way.", $51
+    db "There might be a", $4f
+    db "way around.", $57
+
+_CeruleanCityText5: ; 0xa50ba
+    db $0, "You're making an", $4f
+    db "encyclopedia on", $55
+    db "#MON? That", $55
+    db "sounds amusing.", $57
+
+_CeruleanCityText6: ; 0xa50f6
+    db $0, "The people here", $4f
+    db "were robbed.", $51
+    db "It's obvious that", $4f
+    db "TEAM ROCKET is", $55
+    db "behind this most", $55
+    db "heinous crime!", $51
+    db "Even our POLICE", $4f
+    db "force has trouble", $55
+    db "with the ROCKETs!", $57
+
+INCBIN "baserom.gbc",$a5188,$a52d6 - $a5188
+
+_CeruleanCityText9: ; 0xa52d6
+    db $0, "I want a bright", $4f
+    db "red BICYCLE!", $51
+    db "I'll keep it at", $4f
+    db "home, so it won't", $55
+    db "get dirty!", $57
+
+_CeruleanCityText10: ; 0xa531f
+    db $0, "This is CERULEAN", $4f
+    db "CAVE! Horribly", $55
+    db "strong #MON", $55
+    db "live in there!", $51
+    db "The #MON LEAGUE", $4f
+    db "champion is the", $55
+    db "only person who", $55
+    db "is allowed in!", $57
+
+_CeruleanCityText12: ; 0xa539a
+    db $0, "CERULEAN CITY", $4f
+    db "A Mysterious,", $55
+    db "Blue Aura", $55
+    db "Surrounds It", $57
+
+_CeruleanCityText13: ; 0xa53ce
+    db $0, "TRAINER TIPS", $51
+    db "Pressing B Button", $4f
+    db "during evolution", $55
+    db "cancels the whole", $55
+    db "process.", $57
+
+_CeruleanCityText16: ; 0xa541a
+    db $0, "Grass and caves", $4f
+    db "handled easily!", $55
+    db "BIKE SHOP", $57
+
+_CeruleanCityText17: ; 0xa5445
+    db $0, "CERULEAN CITY", $4f
+    db "#MON GYM", $55
+    db "LEADER: MISTY", $51
+    db "The Tomboyish", $4f
+    db "Mermaid!", $57
+
+INCBIN "baserom.gbc",$a5482,$a5506 - $a5482
+
+_LavendarTownText2: ; 0xa5506
+    db $0, "This town is known", $4f
+    db "as the grave site", $55
+    db "of #MON.", $51
+    db "Memorial services", $4f
+    db "are held in", $55
+    db "#MON TOWER.", $57
+
+_LavendarTownText3: ; 0xa555f
+    db $0, "GHOSTs appeared", $4f
+    db "in #MON TOWER.", $51
+    db "I think they're", $4f
+    db "the spirits of", $55
+    db "#MON that the", $55
+    db "ROCKETs killed.", $57
+
+_LavendarTownText4: ; 0xa55bb
+    db $0, "LAVENDER TOWN", $4f
+    db "The Noble Purple", $55
+    db "Town", $57
+
+_LavendarTownText5: ; 0xa55e0
+    db $0, "New SILPH SCOPE!", $51
+    db "Make the Invisible", $4f
+    db "Plain to See!", $51
+    db "SILPH CO.", $57
+
+_LavendarTownText8: ; 0xa561d
+    db $0, "LAVENDER VOLUNTEER", $4f
+    db "#MON HOUSE", $57
+
+_LavendarTownText9: ; 0xa563c
+    db $0, "May the Souls of", $4f
+    db "#MON Rest Easy", $55
+    db "#MON TOWER", $57
+
+_VermilionCityText1: ; 0xa5668
+    db $0, "We're careful", $4f
+    db "about pollution!", $51
+    db "We've heard GRIMER", $4f
+    db "multiplies in", $55
+    db "toxic sludge!", $57
+
+INCBIN "baserom.gbc",$a56b5,$a5805 - $a56b5
+
+_VermilionCityText4: ; 0xa5805
+    db $0, "I'm putting up a", $4f
+    db "building on this", $55
+    db "plot of land.", $51
+    db "My #MON is", $4f
+    db "tamping the land.", $57
+
+_VermilionCityText5: ; 0xa5852
+    db $0, "MACHOP: Guoh!", $4f
+    db "Gogogoh!@@"
+
+INCBIN "baserom.gbc",$a586b,$a5891 - $a586b
+
+_VermilionCityText6: ; 0xa5891
+    db $0, "S.S.ANNE is a", $4f
+    db "famous luxury", $55
+    db "cruise ship.", $51
+    db "We visit VERMILION", $4f
+    db "once a year.", $57
+
+_VermilionCityText7: ; 0xa58db
+    db $0, "VERMILION CITY", $4f
+    db "The Port of", $55
+    db "Exquisite Sunsets", $57
+
+_VermilionCityText8: ; 0xa5909
+    db $0, "NOTICE!", $51
+    db "ROUTE 12 may be", $4f
+    db "blocked off by a", $55
+    db "sleeping #MON.", $51
+    db "Detour through", $4f
+    db "ROCK TUNNEL to", $55
+    db "LAVENDER TOWN.", $51
+    db "VERMILION POLICE", $57
+
+_VermilionCityText11: ; 0xa5980
+    db $0, "#MON FAN CLUB", $4f
+    db "All #MON fans", $55
+    db "welcome!", $57
+
+_VermilionCityText12: ; 0xa59a6
+    db $0, "VERMILION CITY", $4f
+    db "#MON GYM", $55
+    db "LEADER: LT.SURGE", $51
+    db "The Lightning ", $4f
+    db "American!", $57
+
+_VermilionCityText13: ; 0xa59e9
+    db $0, "VERMILION HARBOR", $57
+
+_CeladonCityText1: ; 0xa59fb
+    db $0, "I got my KOFFING", $4f
+    db "in CINNABAR!", $51
+    db "It's nice, but it", $4f
+    db "breathes poison", $55
+    db "when it's angry!", $57
+
+_CeladonCityText2: ; 0xa5a4b
+    db $0, "Heheh! This GYM", $4f
+    db "is great! It's", $55
+    db "full of women!", $57
+
+_CeladonCityText3: ; 0xa5a79
+    db $0, "The GAME CORNER", $4f
+    db "is bad for our", $55
+    db "city's image!", $57
+
+_CeladonCityText4: ; 0xa5aa6
+    db $0, "Moan! I blew it", $4f
+    db "all at the slots!", $51
+    db "I knew I should", $4f
+    db "have cashed in my", $55
+    db "coins for prizes!", $57
+
+INCBIN "baserom.gbc",$a5afd,$a5bd9 - $a5afd
+
+_CeladonCityText6: ; 0xa5bd9
+    db $0, "This is my trusted", $4f
+    db "pal, POLIWRATH!", $51
+    db "It evolved from", $4f
+    db "POLIWHIRL when I", $55
+    db "used WATER STONE!", $57
+
+_CeladonCityText7: ; 0xa5c30
+    db $0, "POLIWRATH: Ribi", $4f
+    db "ribit!@@"
+
+
+_CeladonCityText8: ; 0xa5c49
+    db $0, "What are you", $4f
+    db "staring at?", $57
+
+_CeladonCityText9: ; 0xa5c63
+    db $0, "Keep out of TEAM", $4f
+    db "ROCKET's way!", $57
+
+_CeladonCityText10: ; 0xa5c82
+    db $0, "TRAINER TIPS", $51
+    db "X ACCURACY boosts", $4f
+    db "the accuracy of", $55
+    db "techniques!", $51
+    db "DIRE HIT jacks up", $4f
+    db "the likelihood of", $55
+    db "critical hits!", $51
+    db "Get your items at", $4f
+    db "CELADON DEPT.", $55
+    db "STORE!", $57
+
+_CeladonCityText11: ; 0xa5d18
+    db $0, "CELADON CITY", $4f
+    db "The City of", $55
+    db "Rainbow Dreams", $57
+
+_CeladonCityText13: ; 0xa5d41
+    db $0, "CELADON CITY", $4f
+    db "#MON GYM", $55
+    db "LEADER: ERIKA", $51
+    db "The Nature Loving", $4f
+    db "Princess!", $57
+
+_CeladonCityText14: ; 0xa5d82
+    db $0, "CELADON MANSION", $57
+
+_CeladonCityText15: ; 0xa5d93
+    db $0, "Find what you", $4f
+    db "need at CELADON", $55
+    db "DEPT. STORE!", $57
+
+_CeladonCityText16: ; 0xa5dbf
+    db $0, "TRAINER TIPS", $51
+    db "GUARD SPEC.", $4f
+    db "protects #MON", $55
+    db "against SPECIAL", $55
+    db "attacks such as", $55
+    db "fire and water!", $51
+    db "Get your items at", $4f
+    db "CELADON DEPT.", $55
+    db "STORE!", $57
+
+_CeladonCityText17: ; 0xa5e3e
+    db $0, "Coins exchanged", $4f
+    db "for prizes!", $55
+    db "PRIZE EXCHANGE", $57
+
+_CeladonCityText18: ; 0xa5e6a
+    db $0, "ROCKET GAME CORNER", $4f
+    db "The playground", $55
+    db "for grown-ups!", $57
+
+_FuchsiaCityText1: ; 0xa5e9c
+    db $0, "Did you try the", $4f
+    db "SAFARI GAME? Some", $55
+    db "#MON can only", $55
+    db "be caught there.", $57
+
+_FuchsiaCityText2: ; 0xa5ede
+    db $0, "SAFARI ZONE has a", $4f
+    db "zoo in front of", $55
+    db "the entrance.", $51
+    db "Out back is the", $4f
+    db "SAFARI GAME for", $55
+    db "catching #MON.", $57
+
+_FuchsiaCityText3: ; 0xa5f3e
+    db $0, "ERIK: Where's", $4f
+    db "SARA? I said I'd", $55 ; XXX fix textpre.awk
+    db "meet her here.", $57
+
+_FuchsiaCityText4: ; 0xa5f6b
+    db $0, "That item ball in", $4f
+    db "there is really a", $55
+    db "#MON.", $57
+
+_FuchsiaCityText5: ; 0xa5f96
+    db $0, "!", $57
+
+_FuchsiaCityText11: ; 0xa5f99
+    db $0, "FUCHSIA CITY", $4f
+    db "Behold! It's", $55
+    db "Passion Pink!", $57
+
+_FuchsiaCityText13: ; 0xa5fc1
+    db $0, "SAFARI GAME", $4f
+    db "#MON-U-CATCH!", $57
+
+_FuchsiaCityText16: ; 0xa5fdc
+    db $0, "SAFARI ZONE", $4f
+    db "WARDEN's HOME", $57
+
+_FuchsiaCityText17: ; 0xa5ff6
+    db $0, "#MON PARADISE", $4f
+    db "SAFARI ZONE", $57
+
+_FuchsiaCityText18: ; 0xa6011
+    db $0, "FUCHSIA CITY", $4f
+    db "#MON GYM", $55
+    db "LEADER: KOGA", $51
+    db "The Poisonous", $4f
+    db "Ninja Master", $57
+
+INCBIN "baserom.gbc",$a6050,$a61e6 - $a6050
+
+_CinnabarIslandText1: ; 0xa61e6
+    db $0, "CINNABAR GYM's", $4f
+    db "BLAINE is an odd", $55
+    db "man who has lived", $55
+    db "here for decades.", $57
+
+_CinnabarIslandText2: ; 0xa622a
+    db $0, "Scientists conduct", $4f
+    db "experiments in", $55
+    db "the burned out", $55
+    db "building.", $57
+
+_CinnabarIslandText3: ; 0xa6266
+    db $0, "CINNABAR ISLAND", $4f
+    db "The Fiery Town of", $55
+    db "Burning Desire", $57
+
+_CinnabarIslandText6: ; 0xa6298
+    db $0, "#MON LAB", $57
+
+_CinnabarIslandText7: ; 0xa62a2
+    db $0, "CINNABAR ISLAND", $4f
+    db "#MON GYM", $55
+    db "LEADER: BLAINE", $51
+    db "The Hot-Headed", $4f
+    db "Quiz Master!", $57
+
+_SaffronCityText1: ; 0xa62e7
+    db $0, "What do you want?", $4f
+    db "Get lost!", $57
+
+_SaffronCityText2: ; 0xa6304
+    db $0, "BOSS said he'll", $4f
+    db "take this town!", $57
+
+_SaffronCityText3: ; 0xa6324
+    db $0, "Get out of the", $4f
+    db "way!", $57
+
+_SaffronCityText4: ; 0xa6339
+    db $0, "SAFFRON belongs", $4f
+    db "to TEAM ROCKET!", $57
+
+_SaffronCityText5: ; 0xa635a
+    db $0, "Being evil makes", $4f
+    db "me feel so alive!", $57
+
+_SaffronCityText6: ; 0xa637e
+    db $0, "Ow! Watch where", $4f
+    db "you're walking!", $57
+
+_SaffronCityText7: ; 0xa639e
+    db $0, "With SILPH under", $4f
+    db "control, we can", $55
+    db "exploit #MON", $55
+    db "around the world!", $57
+
+_SaffronCityText8: ; 0xa63df
+    db $0, "You beat TEAM", $4f
+    db "ROCKET all alone?", $55
+    db "That's amazing!", $57
+
+_SaffronCityText9: ; 0xa640f
+    db $0, "Yeah! TEAM ROCKET", $4f
+    db "is gone!", $55
+    db "It's safe to go", $55
+    db "out again!", $57
+
+_SaffronCityText10: ; 0xa6445
+    db $0, "People should be", $4f
+    db "flocking back to", $55
+    db "SAFFRON now.", $57
+
+_SaffronCityText11: ; 0xa6475
+    db $0, "I flew here on my", $4f
+    db "PIDGEOT when I", $55
+    db "read about SILPH.", $51
+    db "It's already over?", $4f
+    db "I missed the", $55
+    db "media action.", $57
+
+_SaffronCityText12: ; 0xa64d6
+    db $0, "PIDGEOT: Bi bibii!@@"
+
+
+_SaffronCityText13: ; 0xa64eb
+    db $0, "I saw ROCKET", $4f
+    db "BOSS escaping", $55
+    db "SILPH's building.", $57
+
+_SaffronCityText14: ; 0xa6518
+    db $0, "I'm a security", $4f
+    db "guard.", $51
+    db "Suspicious kids I", $4f
+    db "don't allow in!", $57
+
+_SaffronCityText15: ; 0xa654f
+    db $0, "...", $4f
+    db "Snore...", $51
+    db "Hah! He's taking", $4f
+    db "a snooze!", $57
+
+_SaffronCityText16: ; 0xa6577
+    db $0, "SAFFRON CITY", $4f
+    db "Shining, Golden", $55
+    db "Land of Commerce", $57
+
+_SaffronCityText17: ; 0xa65a6
+    db $0, "FIGHTING DOJO", $57
+
+_SaffronCityText18: ; 0xa65b5
+    db $0, "SAFFRON CITY", $4f
+    db "#MON GYM", $55
+    db "LEADER: SABRINA", $51
+    db "The Master of", $4f
+    db "Psychic #MON!", $57
+
+_SaffronCityText20: ; 0xa65f8
+    db $0, "TRAINER TIPS", $51
+    db "FULL HEAL cures", $4f
+    db "all ailments like", $55
+    db "sleep and burns.", $51
+    db "It costs a bit", $4f
+    db "more, but it's", $55
+    db "more convenient.", $57
+
+_SaffronCityText21: ; 0xa6667
+    db $0, "TRAINER TIPS", $51
+    db "New GREAT BALL", $4f
+    db "offers improved", $55
+    db "capture rates.", $51
+    db "Try it on those", $4f
+    db "hard-to-catch", $55
+    db "#MON.", $57
+
+_SaffronCityText22: ; 0xa66c7
+    db $0, "SILPH CO.", $4f
+    db "OFFICE BUILDING", $57
+
+_SaffronCityText24: ; 0xa66e2
+    db $0, "MR.PSYCHIC's", $4f
+    db "HOUSE", $57
+
+_SaffronCityText25: ; 0xa66f5
+    db $0, "SILPH's latest", $4f
+    db "product!", $51
+    db "Release to be", $4f
+    db "determined...", $57
+
+INCBIN "baserom.gbc",$a6729,$0
 
 _ItemUseBallText00:
 	db 0,"It dodged the",$4F
