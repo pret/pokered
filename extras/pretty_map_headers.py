@@ -1,4 +1,5 @@
 #!/usr/bin/python
+# -*- coding: utf-8 -*-
 #author: Bryan Bishop <kanzure@gmail.com>
 #date: 2012-01-02
 #purpose: dump asm for each map header
@@ -7,9 +8,11 @@ import extract_maps
 import sprite_helper
 import random
 import string
+import analyze_texts #hopefully not a dependency loop
 
 base = 16
 spacing = "    "
+all_texts = None
 
 #map constants
 map_constants = [
@@ -244,6 +247,112 @@ for constant in map_constants:
     temp[value] = name
 map_constants = temp
 del temp
+
+#these appear outside of quotes
+constant_abbreviation_bytes = {
+    0x4A: "Char4A",
+    0x52: "Char52",
+    0x53: "Char53",
+    0x54: "Char54",
+    0x56: "Char56",
+    0x5B: "Char5B",
+    0x5C: "Char5C",
+    0x5D: "Char5D",
+    0x5E: "Char5E",
+}
+
+#these appear in quotes
+char_conversion = [
+(" ", 0x7F),
+("A", 0x80),
+("B", 0x81),
+("C", 0x82),
+("D", 0x83),
+("E", 0x84),
+("F", 0x85),
+("G", 0x86),
+("H", 0x87),
+("I", 0x88),
+("J", 0x89),
+("K", 0x8A),
+("L", 0x8B),
+("M", 0x8C),
+("N", 0x8D),
+("O", 0x8E),
+("P", 0x8F),
+("Q", 0x90),
+("R", 0x91),
+("S", 0x92),
+("T", 0x93),
+("U", 0x94),
+("V", 0x95),
+("W", 0x96),
+("X", 0x97),
+("Y", 0x98),
+("Z", 0x99),
+("(", 0x9A),
+(")", 0x9B),
+(":", 0x9C),
+(";", 0x9D),
+("[", 0x9E),
+("]", 0x9F),
+("a", 0xA0),
+("b", 0xA1),
+("c", 0xA2),
+("d", 0xA3),
+("e", 0xA4),
+("f", 0xA5),
+("g", 0xA6),
+("h", 0xA7),
+("i", 0xA8),
+("j", 0xA9),
+("k", 0xAA),
+("l", 0xAB),
+("m", 0xAC),
+("n", 0xAD),
+("o", 0xAE),
+("p", 0xAF),
+("q", 0xB0),
+("r", 0xB1),
+("s", 0xB2),
+("t", 0xB3),
+("u", 0xB4),
+("v", 0xB5),
+("w", 0xB6),
+("x", 0xB7),
+("y", 0xB8),
+("z", 0xB9),
+("é", 0xBA),
+("'s", 0xBD),
+("'t", 0xBE),
+("'", 0xE0),
+("-", 0xE3),
+("?", 0xE6),
+("!", 0xE7),
+(".", 0xE8),
+("♂", 0xEF),
+("/", 0xF3),
+(",", 0xF4),
+("♀", 0xF5),
+("0", 0xF6),
+("1", 0xF7),
+("2", 0xF8),
+("3", 0xF9),
+("4", 0xFA),
+("5", 0xFB),
+("6", 0xFC),
+("7", 0xFD),
+("8", 0xFE),
+("9", 0xFF)]
+#these appear in quotes
+txt_bytes = {
+    0x50: "@",
+    0x54: "#",
+    0x75: "…",
+}
+for item in char_conversion:
+    txt_bytes[item[1]] = item[0]
+del char_conversion
 
 #this was originally for renaming freeze maps for a unique name
 def random_hash():
@@ -517,6 +626,82 @@ def object_data_pretty_printer(map_id):
     output += "\n"
     return output
 
+def find_all_tx_fars():
+    global all_texts
+    tx_fars = [] #[map_id, text_id, text_pointer, tx_far_pointer, tx_far_start_address, TX_FAR]
+    for map_id in all_texts:
+        map2 = all_texts[map_id]
+        for text_id in map2.keys():
+            text = map2[text_id]
+            for command_id in text.keys():
+                command = text[command_id]
+                if "TX_FAR" in command.keys():
+                    TX_FAR = command["TX_FAR"]
+                    if TX_FAR[0]["type"] == 0x0:
+                        tx_fars.append([map_id, text_id, analyze_texts.get_text_pointer(int(extract_maps.map_headers[map_id]["texts_pointer"], 16), text_id), TX_FAR[0]["start_address"], TX_FAR])
+    return tx_fars
+
+def print_tx_far(tx_far):
+    "pretty output for a tx_far"
+    map_id = tx_far[0]
+    map2 = extract_maps.map_headers[map_id]
+    text_id = tx_far[1]
+    text_pointer = tx_far[2]
+    tx_far_start_address = tx_far[3]
+    text_far = tx_far[4]
+    lines = text_far[0]["lines"]
+    label = "_" + map_name_cleaner(map2["name"], None)[:-2] + "Text" + str(text_id)
+
+    output  = ""
+    output += label + ":\n"
+    first = True
+    for line_id in lines:
+        line = lines[line_id]
+        output += spacing + "db "
+        if first:
+            output += "$0, "
+            first = False
+        
+        quotes_open = False
+        first_byte = True
+        byte_count = 0
+        for byte in line:
+            if byte in txt_bytes:
+                if not quotes_open and not first_byte: #start text
+                    output += ", \""
+                    quotes_open = True
+                    first_byte = False
+                if not quotes_open and first_byte: #start text
+                    output += "\""
+                    quotes_open = True
+                output += txt_bytes[byte]
+            elif byte in constant_abbreviation_bytes:
+                if quotes_open:
+                    output += "\""
+                    quotes_open = False
+                output += ", " + constant_abbreviation_bytes[byte]
+            else:
+                if quotes_open:
+                    output += "\""
+                    quotes_open = False
+                output += ", $" + hex(byte)[2:]
+
+                #add a comma unless it's the end of the line
+                if byte_count+1 != len(line):
+                    output += ", "
+
+            byte_count += 1
+        #close final quotes
+        if quotes_open:
+            output += "\""
+            quotes_open = False
+
+        output += "\n"
+
+    #TODO: add $50 to the end of this
+    output += "\n"
+    return output
+
 def print_all_headers():
     maps = []
     for map in extract_maps.map_headers:
@@ -538,8 +723,15 @@ if __name__ == "__main__":
     #load map headers into memory
     extract_maps.read_all_map_headers()
 
+    #load texts
+    all_texts = analyze_texts.analyze_texts()
+
     #print them out
     #print_all_headers()
 
     #print out only the object data for pallet town (map 0)
-    print object_data_pretty_printer(0)
+    #print object_data_pretty_printer(0)
+
+    tx_fars = find_all_tx_fars()
+    for entry in tx_fars:
+        print print_tx_far(entry)

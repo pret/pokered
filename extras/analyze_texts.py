@@ -46,7 +46,7 @@ def process_00_subcommands(start_address, end_address):
     current_line = []
     for pbyte in subsection:
         byte = ord(pbyte)
-        current_line.append(hex(byte))
+        current_line.append(byte)
         if  byte == 0x4f or byte == 0x51 or byte == 0x55:
             lines[line_count] = current_line
             current_line = []
