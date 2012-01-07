@@ -287,6 +287,7 @@ else {
 			    substr(f,1,1) == "t" ||
 			    substr(f,1,1) == "s" ||
 			    substr(f,1,1) == "v" ||
+                substr(f,1,1) == "d" ||
 			    substr(f,1,1) == "l") {
 				c = c substr(f,1,1)
 				f = substr(f,2,length(f) - 1)

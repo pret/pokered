@@ -633,7 +633,7 @@ def object_data_pretty_printer(map_id):
 
 def find_all_tx_fars():
     global all_texts
-    tx_fars = [] #[map_id, text_id, text_pointer, tx_far_pointer, tx_far_start_address, TX_FAR]
+    tx_fars = [] #[map_id, text_id, text_pointer, tx_far_pointer, TX_FAR]
     for map_id in all_texts:
         map2 = all_texts[map_id]
         for text_id in map2.keys():
@@ -643,10 +643,14 @@ def find_all_tx_fars():
                 if "TX_FAR" in command.keys():
                     TX_FAR = command["TX_FAR"]
                     if TX_FAR[0]["type"] == 0x0:
-                        tx_fars.append([map_id, text_id, analyze_texts.get_text_pointer(int(extract_maps.map_headers[map_id]["texts_pointer"], 16), text_id), TX_FAR[0]["start_address"], TX_FAR])
+                        tx_fars.append([map_id, text_id, analyze_texts.get_text_pointer(int(extract_maps.map_headers[map_id]["texts_pointer"], 16), text_id), command["pointer"], TX_FAR])
     return tx_fars
 
-def print_tx_far(tx_far):
+def tx_far_label_maker(map_name, text_id):
+    label = "_" + map_name_cleaner(map_name, None)[:-2] + "Text" + str(text_id)
+    return label
+
+def tx_far_pretty_printer(tx_far):
     "pretty output for a tx_far"
     map_id = tx_far[0]
     map2 = extract_maps.map_headers[map_id]
@@ -655,7 +659,7 @@ def print_tx_far(tx_far):
     tx_far_start_address = tx_far[3]
     text_far = tx_far[4]
     lines = text_far[0]["lines"]
-    label = "_" + map_name_cleaner(map2["name"], None)[:-2] + "Text" + str(text_id)
+    label = tx_far_label_maker(map2["name"], text_id)
 
     #add the ending byte on the next line
     #lines[len(lines.keys())+1] = [text_far[1]["type"]]
@@ -663,8 +667,8 @@ def print_tx_far(tx_far):
     #add the ending byte to the last line- always seems $57
     lines[len(lines.keys())-1].append(text_far[1]["type"])
 
-    output  = ""
-    output += label + ":\n"
+    output  = "\n"
+    output += label + ": ; " + hex(tx_far_start_address) + "\n"
     first = True
     for line_id in lines:
         line = lines[line_id]
@@ -701,7 +705,8 @@ def print_tx_far(tx_far):
                 
                 #if you want the ending byte on the last line
                 #if not (byte == 0x57 or byte == 0x50 or byte == 0x58):
-                output += ", "
+                if not first_byte:
+                    output += ", "
                 
                 output += "$" + hex(byte)[2:]
                 was_byte = True
@@ -719,8 +724,7 @@ def print_tx_far(tx_far):
 
         output += "\n"
 
-    #TODO: add $50 to the end of this
-    output += "\n"
+    #output += "\n"
     return output
 
 def print_all_headers():
@@ -753,6 +757,8 @@ if __name__ == "__main__":
     #print out only the object data for pallet town (map 0)
     #print object_data_pretty_printer(0)
 
+    #prepare to pretty print tx_fars
+    #first you must load all_texts
     tx_fars = find_all_tx_fars()
     for entry in tx_fars:
-        print print_tx_far(entry)
+        print tx_far_pretty_printer(entry)

@@ -204,6 +204,32 @@ def dump_all_remaining_maps():
         print "Inserting map id=" + str(map_id)
         wrapper_insert_map_header_asm(map_id)
 
+def reset_incbins():
+    "reset asm before inserting another diff"
+    asm = None
+    incbin_lines = []
+    processed_incbins = {}
+    load_asm()
+    isolate_incbins()
+    process_incbins()
+
+def apply_diff(diff):
+    print "... Applying diff."
+
+    #write the diff to a file
+    fh = open("temp.patch", "w")
+    fh.write(diff)
+    fh.close()
+
+    #apply the patch
+    os.system("patch ../pokered.asm temp.patch")
+
+    #remove the patch
+    os.system("rm temp.patch")
+
+    #confirm it's working
+    subprocess.check_call("cd ../; make clean; LC_CTYPE=UTF-8 make", shell=True)
+
 if __name__ == "__main__":
     #load map headers
     load_rom()
