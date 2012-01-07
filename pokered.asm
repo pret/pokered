@@ -23942,7 +23942,6 @@ INCBIN "baserom.gbc",$98000,$984ce - $98000
 _PewterHouse1Text1: ; 0x984ce
     db $0, "NIDORAN: Bowbow!@@"
 
-
 _PewterHouse1Text2: ; 0x984e1
     db $0, "NIDORAN sit!", $57
 
@@ -24106,7 +24105,6 @@ INCBIN "baserom.gbc",$9999f,$99f72 - $9999f
 _LavenderHouse1Text3: ; 0x99f72
     db $0, "PSYDUCK: Gwappa!@@"
 
-
 _LavenderHouse1Text4: ; 0x99f85
     db $0, "NIDORINO: Gaoo!@@"
 
@@ -24208,7 +24206,6 @@ _VermilionHouse1Text1: ; 0x9c449
 
 _VermilionHouse1Text2: ; 0x9c488
     db $0, "PIDGEY: Kurukkoo!@@"
-
 
 _VermilionHouse1Text3: ; 0x9c49c
     db $0, "Dear PIPPI, I hope", $4f
@@ -24363,7 +24360,6 @@ INCBIN "baserom.gbc",$9ce72,$9ceee - $9ce72
 _CeladonMansion1Text1: ; 0x9ceee
     db $0, "MEOWTH: Meow!@@"
 
-
 _CeladonMansion1Text2: ; 0x9cefe
     db $0, "My dear #MON", $4f
     db "keep me company.", $51
@@ -24374,11 +24370,9 @@ _CeladonMansion1Text3: ; 0x9cf3c
     db $0, "CLEFAIRY: Pi", $4f
     db "pippippi!@@"
 
-
 _CeladonMansion1Text4: ; 0x9cf55
     db $0, "NIDORAN: Kya", $4f
     db "kyaoo!@@"
-
 
 _CeladonMansion1Text5: ; 0x9cf6b
     db $0, "CELADON MANSION", $4f
@@ -24820,7 +24814,6 @@ _SaffronHouse1Text1: ; 0xa2305
 _SaffronHouse1Text2: ; 0xa2352
     db $0, "PIDGEY: Kurukkoo!@@"
 
-
 _SaffronHouse1Text3: ; 0xa2366
     db $0, "The COPYCAT is", $4f
     db "cute! I'm getting", $55
@@ -25174,7 +25167,6 @@ _CeladonCityText7: ; 0xa5c30
     db $0, "POLIWRATH: Ribi", $4f
     db "ribit!@@"
 
-
 _CeladonCityText8: ; 0xa5c49
     db $0, "What are you", $4f
     db "staring at?", $57
@@ -25372,7 +25364,6 @@ _SaffronCityText11: ; 0xa6475
 
 _SaffronCityText12: ; 0xa64d6
     db $0, "PIDGEOT: Bi bibii!@@"
-
 
 _SaffronCityText13: ; 0xa64eb
     db $0, "I saw ROCKET", $4f
