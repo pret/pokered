@@ -21738,7 +21738,7 @@ CinnabarGym_h: ; 0x7573e to 0x7574a (12 bytes) (id=166)
     dw $5acc ; objects
 
 INCBIN "baserom.gbc",$7574a,$75acc - $7574a
-CinnibarGymObject: ; 0x75acc (size=90)
+CinnabarGymObject: ; 0x75acc (size=90)
     db $2e ; border tile
 
     db $2 ; warps
@@ -21763,7 +21763,7 @@ CinnibarGymObject: ; 0x75acc (size=90)
     EVENT_DISP $a, $11, $11
 
 
-CinnibarGymBlocks: ; 90
+CinnabarGymBlocks: ; 90
     INCBIN "maps/cinnibargym.blk"
 
 Lab1_h: ; 0x75b80 to 0x75b8c (12 bytes) (id=167)
@@ -21908,7 +21908,7 @@ CinnabarPokecenter_h: ; 0x75e20 to 0x75e2c (12 bytes) (id=171)
     dw $5e46 ; objects
 
 INCBIN "baserom.gbc",$75e2c,$75e46 - $75e2c
-CinnibarPokecenterObject: ; 0x75e46 (size=44)
+CinnabarPokecenterObject: ; 0x75e46 (size=44)
     db $0 ; border tile
 
     db $2 ; warps
@@ -21937,7 +21937,7 @@ CinnabarMart_h: ; 0x75e72 to 0x75e7e (12 bytes) (id=172)
     dw $5e91 ; objects
 
 INCBIN "baserom.gbc",$75e7e,$75e91 - $75e7e
-CinnibarMartObject: ; 0x75e91 (size=38)
+CinnabarMartObject: ; 0x75e91 (size=38)
     db $0 ; border tile
 
     db $2 ; warps
@@ -24727,8 +24727,8 @@ _Lab3Text5: ; 0xa10d8
 
 INCBIN "baserom.gbc",$a10e8,$a12de - $a10e8
 
-_CinnibarPokecenterText2: 
-_CinnibarPokecenterText1: ; 0xa12de
+_CinnabarPokecenterText2: 
+_CinnabarPokecenterText1: ; 0xa12de
     db $0, "You can cancel", $4f
     db "evolution.", $51
     db "When a #MON is", $4f
@@ -24736,7 +24736,7 @@ _CinnibarPokecenterText1: ; 0xa12de
     db "stop it and leave", $55
     db "it the way it is.", $57
 
-_CinnibarPokecenterText3: ; 0xa133e
+_CinnabarPokecenterText3: ; 0xa133e
     db $0, "Do you have any", $4f
     db "friends?", $51
     db "#MON you get", $4f
@@ -24745,12 +24745,12 @@ _CinnibarPokecenterText3: ; 0xa133e
     db "I think it's", $4f
     db "worth a try!", $57
 
-_CinnibarMartText2: ; 0xa139b
+_CinnabarMartText2: ; 0xa139b
     db $0, "Don't they have X", $4f
     db "ATTACK? It's good", $55
     db "for battles!", $57
 
-_CinnibarMartText3: ; 0xa13cb
+_CinnabarMartText3: ; 0xa13cb
     db $0, "It never hurts to", $4f
     db "have extra items!", $57
 
