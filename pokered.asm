@@ -21762,9 +21762,8 @@ CinnabarGymObject: ; 0x75acc (size=90)
     EVENT_DISP $a, $11, $10
     EVENT_DISP $a, $11, $11
 
-
 CinnabarGymBlocks: ; 90
-    INCBIN "maps/cinnibargym.blk"
+    INCBIN "maps/cinnabargym.blk"
 
 Lab1_h: ; 0x75b80 to 0x75b8c (12 bytes) (id=167)
     db $14 ; tileset
