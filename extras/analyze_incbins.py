@@ -34,6 +34,7 @@ def isolate_incbins():
     incbin_lines = []
     for line in asm:
         if line == "": continue
+        if line.count(" ") == len(line): continue
 
         #clean up whitespace at beginning of line
         while line[0] == " ":

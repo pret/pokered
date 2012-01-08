@@ -214,6 +214,8 @@ def insert_text_label_tx_far(map_id, text_id):
     label = base_label + "Text" + str(text_id)
     target_label = "_" + label
     start_address = map2["texts"][text_id][0]["start_address"]
+    if 0x4000 <= start_address <= 0x7fff:
+        start_address = extract_maps.calculate_pointer(start_address, int(map2["bank"],16))
     include_byte = False
     print map2["texts"][text_id]
     if "type" in map2["texts"][text_id][1].keys():
@@ -227,7 +229,7 @@ def insert_text_label_tx_far(map_id, text_id):
         return
 
     #also do a name check
-    if ("\n".join(analyze_incbins.asm)).count(label + ":") > 1:
+    if 1 < ("\n".join(analyze_incbins.asm)).count(label + ":"):
         print "skipping text label that calls TX_FAR for map_id=" + str(map_id) + " text_id" + hex(text_id) + " because the label is already used (" + label + ":)"
         return
     
@@ -256,7 +258,7 @@ def insert_text_label_tx_far(map_id, text_id):
 
 def insert_all_text_labels():
     for map_id in extract_maps.map_headers.keys():
-        if map_id < 40: continue #skip
+        if map_id <= 100: continue #skip
         if map_id not in extract_maps.bad_maps:
             for text_id in extract_maps.map_headers[map_id]["referenced_texts"]:
                 insert_text_label_tx_far(map_id, text_id)
