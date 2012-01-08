@@ -1003,7 +1003,25 @@ MartInventories: ; 2442
 	db $FE,7,ULTRA_BALL,GREAT_BALL,FULL_RESTORE,MAX_POTION,FULL_HEAL
 	db REVIVE,MAX_REPEL,$FF
 
-INCBIN "baserom.gbc",$24D6,$2FCF - $24D6
+INCBIN "baserom.gbc",$24d6,$24ea - $24d6
+
+SaffronCityText19: 
+CinnabarIslandText4: 
+FuchsiaCityText14: 
+VermilionCityText9: 
+LavendarTownText6: 
+CeruleanCityText14: 
+PewterCityText8:
+ViridianCityText11: ; 0x24ea
+    TX_FAR _ViridianCityText11
+    db $50
+
+PewterCityText9: ; PewterCityText9
+ViridianCityText12: ; 0x24ef
+    TX_FAR _ViridianCityText12
+    db $50
+
+INCBIN "baserom.gbc",$24f4,$adb
 
 GetItemName: ; 2FCF
 ; given an item ID at [$D11E], store the name of the item into a string
@@ -5670,7 +5688,302 @@ PalletTownText7: ; sign by Blue’s house
 	TX_FAR _PalletTownText7
 	db "@"
 
-INCBIN "baserom.gbc",$18FF1,$1B2F-$FF1
+INCBIN "baserom.gbc",$18ff1,$19102 - $18ff1
+
+ViridianCityText1: ; 0x19102
+    TX_FAR _ViridianCityText1
+    db $50
+
+INCBIN "baserom.gbc",$19107,$1921e - $19107
+
+ViridianCityText8: ; 0x1921e
+    TX_FAR _ViridianCityText8
+    db $50
+
+
+ViridianCityText9: ; 0x19223
+    TX_FAR _ViridianCityText9
+    db $50
+
+
+ViridianCityText10: ; 0x19228
+    TX_FAR _ViridianCityText10
+    db $50
+
+
+ViridianCityText13: ; 0x1922d
+    TX_FAR _ViridianCityText13
+    db $50
+
+INCBIN "baserom.gbc",$19232,$193a7 - $19232
+
+PewterCityText1: ; 0x193a7
+    TX_FAR _PewterCityText1
+    db $50
+
+
+PewterCityText2: ; 0x193ac
+    TX_FAR _PewterCityText2
+    db $50
+
+INCBIN "baserom.gbc",$193b1,$19467 - $193b1
+
+PewterCityText6: ; 0x19467
+    TX_FAR _PewterCityText6
+    db $50
+
+
+PewterCityText7: ; 0x1946c
+    TX_FAR _PewterCityText7
+    db $50
+
+
+PewterCityText10: ; 0x19471
+    TX_FAR _PewterCityText10
+    db $50
+
+
+PewterCityText11: ; 0x19476
+    TX_FAR _PewterCityText11
+    db $50
+
+
+PewterCityText12: ; 0x1947b
+    TX_FAR _PewterCityText12
+    db $50
+
+INCBIN "baserom.gbc",$19480,$196f8 - $19480
+
+CeruleanCityText3: ; 0x196f8
+    TX_FAR _CeruleanCityText3
+    db $50
+
+
+CeruleanCityText4: ; 0x196fd
+    TX_FAR _CeruleanCityText4
+    db $50
+
+
+CeruleanCityText5: ; 0x19702
+    TX_FAR _CeruleanCityText5
+    db $50
+
+
+CeruleanCityText6: ; 0x19707
+    TX_FAR _CeruleanCityText6
+    db $50
+
+INCBIN "baserom.gbc",$1970c,$19783 - $1970c
+
+CeruleanCityText9: ; 0x19783
+    TX_FAR _CeruleanCityText9
+    db $50
+
+
+CeruleanCityText10: ; 0x19788
+    TX_FAR _CeruleanCityText10
+    db $50
+
+
+CeruleanCityText12: ; 0x1978d
+    TX_FAR _CeruleanCityText12
+    db $50
+
+
+CeruleanCityText13: ; 0x19792
+    TX_FAR _CeruleanCityText13
+    db $50
+
+
+CeruleanCityText16: ; 0x19797
+    TX_FAR _CeruleanCityText16
+    db $50
+
+
+CeruleanCityText17: ; 0x1979c
+    TX_FAR _CeruleanCityText17
+    db $50
+
+INCBIN "baserom.gbc",$197a1,$19889 - $197a1
+
+VermilionCityText1: ; 0x19889
+    TX_FAR _VermilionCityText1
+    db $50
+
+INCBIN "baserom.gbc",$1988e,$1991d - $1988e
+
+VermilionCityText4: ; 0x1991d
+    TX_FAR _VermilionCityText4
+    db $50
+
+VermilionCityText5: ; 0x19922
+    TX_FAR _VermilionCityText5
+
+INCBIN "baserom.gbc",$19926,$19938 - $19926
+
+VermilionCityText6: ; 0x19938
+    TX_FAR _VermilionCityText6
+    db $50
+
+
+VermilionCityText7: ; 0x1993d
+    TX_FAR _VermilionCityText7
+    db $50
+
+
+VermilionCityText8: ; 0x19942
+    TX_FAR _VermilionCityText8
+    db $50
+
+
+VermilionCityText11: ; 0x19947
+    TX_FAR _VermilionCityText11
+    db $50
+
+
+VermilionCityText12: ; 0x1994c
+    TX_FAR _VermilionCityText12
+    db $50
+
+
+VermilionCityText13: ; 0x19951
+    TX_FAR _VermilionCityText13
+    db $50
+
+INCBIN "baserom.gbc",$19956,$1998a - $19956
+
+CeladonCityText1: ; 0x1998a
+    TX_FAR _CeladonCityText1
+    db $50
+
+
+CeladonCityText2: ; 0x1998f
+    TX_FAR _CeladonCityText2
+    db $50
+
+
+CeladonCityText3: ; 0x19994
+    TX_FAR _CeladonCityText3
+    db $50
+
+
+CeladonCityText4: ; 0x19999
+    TX_FAR _CeladonCityText4
+    db $50
+
+INCBIN "baserom.gbc",$1999e,$199e7 - $1999e
+
+CeladonCityText6: ; 0x199e7
+    TX_FAR _CeladonCityText6
+    db $50
+
+
+CeladonCityText7: ; 0x199ec
+    TX_FAR _CeladonCityText7
+
+INCBIN "baserom.gbc",$199f0,$199f9 - $199f0
+
+CeladonCityText8: ; 0x199f9
+    TX_FAR _CeladonCityText8
+    db $50
+
+
+CeladonCityText9: ; 0x199fe
+    TX_FAR _CeladonCityText9
+    db $50
+
+
+CeladonCityText10: ; 0x19a03
+    TX_FAR _CeladonCityText10
+    db $50
+
+
+CeladonCityText11: ; 0x19a08
+    TX_FAR _CeladonCityText11
+    db $50
+
+
+CeladonCityText13: ; 0x19a0d
+    TX_FAR _CeladonCityText13
+    db $50
+
+
+CeladonCityText14: ; 0x19a12
+    TX_FAR _CeladonCityText14
+    db $50
+
+
+CeladonCityText15: ; 0x19a17
+    TX_FAR _CeladonCityText15
+    db $50
+
+
+CeladonCityText16: ; 0x19a1c
+    TX_FAR _CeladonCityText16
+    db $50
+
+
+CeladonCityText17: ; 0x19a21
+    TX_FAR _CeladonCityText17
+    db $50
+
+
+CeladonCityText18: ; 0x19a26
+    TX_FAR _CeladonCityText18
+    db $50
+
+INCBIN "baserom.gbc",$19a2b,$19a5e - $19a2b
+
+FuchsiaCityText1: ; 0x19a5e
+    TX_FAR _FuchsiaCityText1
+    db $50
+
+
+FuchsiaCityText2: ; 0x19a63
+    TX_FAR _FuchsiaCityText2
+    db $50
+
+
+FuchsiaCityText3: ; 0x19a68
+    TX_FAR _FuchsiaCityText3
+    db $50
+
+
+FuchsiaCityText4: ; 0x19a6d
+    TX_FAR _FuchsiaCityText4
+    db $50
+
+
+FuchsiaCityText5: ; 0x19a72
+    TX_FAR _FuchsiaCityText5
+    db $50
+
+
+FuchsiaCityText11: ; 0x19a77
+    TX_FAR _FuchsiaCityText11
+    db $50
+
+
+FuchsiaCityText13: ; 0x19a7c
+    TX_FAR _FuchsiaCityText13
+    db $50
+
+
+FuchsiaCityText16: ; 0x19a81
+    TX_FAR _FuchsiaCityText16
+    db $50
+
+
+FuchsiaCityText17: ; 0x19a86
+    TX_FAR _FuchsiaCityText17
+    db $50
+
+
+FuchsiaCityText18: ; 0x19a8b
+    TX_FAR _FuchsiaCityText18
+    db $50
+
+INCBIN "baserom.gbc",$19a90,$9f
 
 BluesHouse_h: ; 0x19b2f
 	db $08 ; tileset
@@ -6305,7 +6618,44 @@ MonsterNames: ; 421E
 	db "WEEPINBELL"
 	db "VICTREEBEL"
 
-INCBIN "baserom.gbc",$1C98A,$1CB02-$1C98A
+INCBIN "baserom.gbc",$1c98a,$1ca96 - $1c98a
+
+CinnabarIslandText1: ; 0x1ca96
+    TX_FAR _CinnabarIslandText1
+    db $50
+
+
+CinnabarIslandText2: ; 0x1ca9b
+    TX_FAR _CinnabarIslandText2
+    db $50
+
+
+CinnabarIslandText3: ; 0x1caa0
+    TX_FAR _CinnabarIslandText3
+    db $50
+
+
+CinnabarIslandText6: ; 0x1caa5
+    TX_FAR _CinnabarIslandText6
+    db $50
+
+
+CinnabarIslandText7: ; 0x1caaa
+    TX_FAR _CinnabarIslandText7
+    db $50
+
+INCBIN "baserom.gbc",$1caaf,$1caf8 - $1caaf
+
+Route1Text2: ; 0x1caf8
+    TX_FAR _Route1Text2
+    db $50
+
+
+Route1Text3: ; 0x1cafd
+    TX_FAR _Route1Text3
+    db $50
+
+INCBIN "baserom.gbc",$1cb02,$0
 
 OaksLab_h: ; 0x1cb02 to 0x1cb0e (12 bytes) (bank=7) (id=40)
     db $05 ; tileset
@@ -6315,7 +6665,13 @@ OaksLab_h: ; 0x1cb02 to 0x1cb0e (12 bytes) (bank=7) (id=40)
 
     dw $540a ; objects
 
-INCBIN "baserom.gbc",$1cb0e,$1d40a - $1cb0e
+INCBIN "baserom.gbc",$1cb0e,$1d331 - $1cb0e
+
+OaksLabText8: ; 0x1d331
+    TX_FAR _OaksLabText8
+    db $50
+
+INCBIN "baserom.gbc",$1d336,$d4
 OaksLabObject: ; 0x1d40a (size=88)
     db $3 ; border tile
 
@@ -6351,7 +6707,24 @@ ViridianMart_h: ; 0x1d462 to 0x1d46e (12 bytes) (bank=7) (id=42)
 
     dw $550a ; objects
 
-INCBIN "baserom.gbc",$1d46e,$1d50a - $1d46e
+INCBIN "baserom.gbc",$1d46e,$1d4f0 - $1d46e
+
+ViridianMartText1: ; 0x1d4f0
+    TX_FAR _ViridianMartText1
+    db $50
+
+INCBIN "baserom.gbc",$1d4f5,$1d500 - $1d4f5
+
+ViridianMartText2: ; 0x1d500
+    TX_FAR _ViridianMartText2
+    db $50
+
+
+ViridianMartText3: ; 0x1d505
+    TX_FAR _ViridianMartText3
+    db $50
+
+INCBIN "baserom.gbc",$1d50a,$0
 ViridianMartObject: ; 0x1d50a (size=38)
     db $0 ; border tile
 
@@ -6382,7 +6755,18 @@ School_h: ; 0x1d540 to 0x1d54c (12 bytes) (bank=7) (id=43)
 
     dw $555d ; objects
 
-INCBIN "baserom.gbc",$1d54c,$1d55d - $1d54c
+INCBIN "baserom.gbc",$1d54c,$1d553 - $1d54c
+
+SchoolText1: ; 0x1d553
+    TX_FAR _SchoolText1
+    db $50
+
+
+SchoolText2: ; 0x1d558
+    TX_FAR _SchoolText2
+    db $50
+
+INCBIN "baserom.gbc",$1d55d,$0
 SchoolObject: ; 0x1d55d (size=32)
     db $a ; border tile
 
@@ -6409,7 +6793,23 @@ ViridianHouse_h: ; 0x1d57d to 0x1d589 (12 bytes) (bank=7) (id=44)
 
     dw $55bb ; objects
 
-INCBIN "baserom.gbc",$1d589,$1d5bb - $1d589
+INCBIN "baserom.gbc",$1d589,$1d595 - $1d589
+
+ViridianHouseText1: ; 0x1d595
+    TX_FAR _ViridianHouseText1
+    db $50
+
+
+ViridianHouseText2: ; 0x1d59a
+    TX_FAR _ViridianHouseText2
+    db $50
+
+INCBIN "baserom.gbc",$1d59f,$1d5b6 - $1d59f
+
+ViridianHouseText4: ; 0x1d5b6
+    TX_FAR _ViridianHouseText4
+    db $50
+
 ViridianHouseObject: ; 0x1d5bb (size=44)
     db $a ; border tile
 
@@ -6438,7 +6838,23 @@ PewterHouse1_h: ; 0x1d5e7 to 0x1d5f3 (12 bytes) (bank=7) (id=55)
 
     dw $5616 ; objects
 
-INCBIN "baserom.gbc",$1d5f3,$1d616 - $1d5f3
+INCBIN "baserom.gbc",$1d5f3,$1d5fc - $1d5f3
+
+PewterHouse1Text1: ; 0x1d5fc
+    TX_FAR _PewterHouse1Text1
+
+INCBIN "baserom.gbc",$1d600,$1d60c - $1d600
+
+PewterHouse1Text2: ; 0x1d60c
+    TX_FAR _PewterHouse1Text2
+    db $50
+
+
+PewterHouse1Text3: ; 0x1d611
+    TX_FAR _PewterHouse1Text3
+    db $50
+
+INCBIN "baserom.gbc",$1d616,$0
 PewterHouse1Object: ; 0x1d616 (size=38)
     db $a ; border tile
 
@@ -6466,7 +6882,18 @@ PewterHouse2_h: ; 0x1d63c to 0x1d648 (12 bytes) (bank=7) (id=57)
 
     dw $5659 ; objects
 
-INCBIN "baserom.gbc",$1d648,$1d659 - $1d648
+INCBIN "baserom.gbc",$1d648,$1d64f - $1d648
+
+PewterHouse2Text1: ; 0x1d64f
+    TX_FAR _PewterHouse2Text1
+    db $50
+
+
+PewterHouse2Text2: ; 0x1d654
+    TX_FAR _PewterHouse2Text2
+    db $50
+
+INCBIN "baserom.gbc",$1d659,$0
 PewterHouse2Object: ; 0x1d659 (size=32)
     db $a ; border tile
 
@@ -6493,7 +6920,18 @@ CeruleanHouseTrashed_h: ; 0x1d679 to 0x1d685 (12 bytes) (bank=7) (id=62)
 
     dw $56bf ; objects
 
-INCBIN "baserom.gbc",$1d685,$1d6bf - $1d685
+INCBIN "baserom.gbc",$1d685,$1d6b5 - $1d685
+
+CeruleanHouseTrashedText2: ; 0x1d6b5
+    TX_FAR _CeruleanHouseTrashedText2
+    db $50
+
+
+CeruleanHouseTrashedText3: ; 0x1d6ba
+    TX_FAR _CeruleanHouseTrashedText3
+    db $50
+
+INCBIN "baserom.gbc",$1d6bf,$0
 CeruleanHouseTrashedObject: ; 0x1d6bf (size=43)
     db $a ; border tile
 
@@ -6523,7 +6961,13 @@ CeruleanHouse2_h: ; 0x1d6ea to 0x1d6f6 (12 bytes) (bank=7) (id=63)
 
     dw $5710 ; objects
 
-INCBIN "baserom.gbc",$1d6f6,$1d710 - $1d6f6
+INCBIN "baserom.gbc",$1d6f6,$1d6fd - $1d6f6
+
+CeruleanHouse2Text1: ; 0x1d6fd
+    TX_FAR _CeruleanHouse2Text1
+    db $50
+
+INCBIN "baserom.gbc",$1d702,$e
 CeruleanHouse2Object: ; 0x1d710 (size=32)
     db $a ; border tile
 
@@ -6834,7 +7278,12 @@ DiglettsCaveRoute2_h: ; 0x1dea4 to 0x1deb0 (12 bytes) (bank=7) (id=46)
 
     dw $5ebf ; objects
 
-INCBIN "baserom.gbc",$1deb0,$1debf - $1deb0
+INCBIN "baserom.gbc",$1deb0,$1deba - $1deb0
+
+DiglettsCaveRoute2Text1: ; 0x1deba
+    TX_FAR _DiglettsCaveRoute2Text1
+    db $50
+
 DiglettsCaveRoute2Object: ; 0x1debf (size=34)
     db $7d ; border tile
 
@@ -6862,7 +7311,13 @@ Route2House_h: ; 0x1dee1 to 0x1deed (12 bytes) (bank=7) (id=48)
 
     dw $5f07 ; objects
 
-INCBIN "baserom.gbc",$1deed,$1df07 - $1deed
+INCBIN "baserom.gbc",$1deed,$1def4 - $1deed
+
+Route2HouseText1: ; 0x1def4
+    TX_FAR _Route2HouseText1
+    db $50
+
+INCBIN "baserom.gbc",$1def9,$e
 Route2HouseObject: ; 0x1df07 (size=32)
     db $a ; border tile
 
@@ -7021,7 +7476,14 @@ UndergroundPathEntranceRoute8_h: ; 0x1e27d to 0x1e289 (12 bytes) (bank=7) (id=80
 
     dw $6298 ; objects
 
-INCBIN "baserom.gbc",$1e289,$1e298 - $1e289
+INCBIN "baserom.gbc",$1e289,$1e293 - $1e289
+
+;XXX wtf? syntax error
+UndergroundPathEntranceRoute8Text1: ; 0x1e293
+    db $17, $8d, $42, $23
+    ;TX_FAR _UndergroundPathEntranceRoute8Text1
+    db $50
+
 UndergroundPathEntranceRoute8Object: ; 0x1e298 (size=34)
     db $a ; border tile
 
@@ -7093,7 +7555,14 @@ DiglettsCaveEntranceRoute11_h: ; 0x1e5ae to 0x1e5ba (12 bytes) (bank=7) (id=85)
 
     dw $65ca ; objects
 
-INCBIN "baserom.gbc",$1e5ba,$1e5ca - $1e5ba
+INCBIN "baserom.gbc",$1e5ba,$1e5c5 - $1e5ba
+
+; XXX wtf? syntax error
+DiglettsCaveEntranceRoute11Text1: ; 0x1e5c5
+    db $17, $f9, $47, $23
+    ;TX_FAR _DiglettsCaveEntranceRoute11Text1
+    db $50
+
 DiglettsCaveEntranceRoute11Object: ; 0x1e5ca (size=34)
     db $7d ; border tile
 
@@ -14170,7 +14639,38 @@ ViridianPokeCenterBlocks: ; 28
 SafariZoneRestHouse1Blocks: ; 16
     INCBIN "maps/safarizoneresthouse1.blk"
 
-INCBIN "baserom.gbc",$4410b,$146
+INCBIN "baserom.gbc",$4410b,$4414b - $4410b
+
+LavendarTownText2: ; 0x4414b
+    TX_FAR _LavendarTownText2
+    db $50
+
+
+LavendarTownText3: ; 0x44150
+    TX_FAR _LavendarTownText3
+    db $50
+
+
+LavendarTownText4: ; 0x44155
+    TX_FAR _LavendarTownText4
+    db $50
+
+
+LavendarTownText5: ; 0x4415a
+    TX_FAR _LavendarTownText5
+    db $50
+
+
+LavendarTownText8: ; 0x4415f
+    TX_FAR _LavendarTownText8
+    db $50
+
+
+LavendarTownText9: ; 0x44164
+    TX_FAR _LavendarTownText9
+    db $50
+
+INCBIN "baserom.gbc",$44169,$e8
 
 ViridianPokecenter_h: ; 0x44251 to 0x4425d (12 bytes) (bank=11) (id=41)
     db $06 ; tileset
@@ -14180,7 +14680,21 @@ ViridianPokecenter_h: ; 0x44251 to 0x4425d (12 bytes) (bank=11) (id=41)
 
     dw $4277 ; objects
 
-INCBIN "baserom.gbc",$4425d,$44277 - $4425d
+INCBIN "baserom.gbc",$4425d,$4426b - $4425d
+
+ViridianPokeCenterText1: ; 0x4426b
+    db $ff
+    TX_FAR _ViridianPokeCenterText1
+
+INCBIN "baserom.gbc",$44270,$44271 - $44270
+
+ViridianPokeCenterText3: ; 0x44271
+    TX_FAR _ViridianPokeCenterText3
+    db $50
+
+;XXX wtf?
+db $f6
+
 ViridianPokeCenterObject: ; 0x44277 (size=44)
     db $0 ; border tile
 
@@ -14250,7 +14764,12 @@ RockTunnel1_h: ; 0x444d0 to 0x444dc (12 bytes) (bank=11) (id=82)
 
     dw $45f6 ; objects
 
-INCBIN "baserom.gbc",$444dc,$445f6 - $444dc
+INCBIN "baserom.gbc",$444dc,$445f1 - $444dc
+
+RockTunnel1Text8: ; 0x445f1
+    TX_FAR _RockTunnel1Text8
+    db $50
+
 RockTunnel1Object: ; 0x445f6 (size=127)
     db $3 ; border tile
 
@@ -15858,7 +16377,26 @@ MtMoonPokecenter_h: ; 0x492c3 to 0x492cf (12 bytes) (bank=12) (id=68)
 
     dw $5376 ; objects
 
-INCBIN "baserom.gbc",$492cf,$49376 - $492cf
+INCBIN "baserom.gbc",$492cf,$492e1 - $492cf
+
+db $ff
+MtMoonPokecenterText1: ; 0x492e1
+    TX_FAR _MtMoonPokecenterText1
+    db $50
+
+
+MtMoonPokecenterText3: ; 0x492e7
+    TX_FAR _MtMoonPokecenterText3
+    db $50
+
+INCBIN "baserom.gbc",$492ec,$49370 - $492ec
+
+MtMoonPokecenterText5: ; 0x49370
+    TX_FAR _MtMoonPokecenterText5
+    db $50
+ 
+;XXX wtf?
+db $f6
 
 MtMoonPokecenterObject: ; 0x49376 (size=56)
     db $0 ; border tile
@@ -15889,7 +16427,21 @@ RockTunnelPokecenter_h: ; 0x493ae to 0x493ba (12 bytes) (id=81)
 
     dw $53d4 ; objects
 
-INCBIN "baserom.gbc",$493ba,$493d4 - $493ba
+INCBIN "baserom.gbc",$493ba,$493c8 - $493ba
+
+db $ff
+RockTunnelPokecenterText1: ; 0x493c8
+    TX_FAR _RockTunnelPokecenterText1
+
+INCBIN "baserom.gbc",$493cd,$493ce - $493cd
+
+RockTunnelPokecenterText3: ; 0x493ce
+    TX_FAR _RockTunnelPokecenterText3
+    db $50
+
+; RockTunnelPokecenterText4: ; 0x493d3
+
+INCBIN "baserom.gbc",$493ce+5,$493d4-($493ce+5)
 
 RockTunnelPokecenterObject: ; 0x493d4 (size=44)
     db $0 ; border tile
@@ -15918,7 +16470,12 @@ Route11Gate_h: ; 0x49400 to 0x4940c (12 bytes) (id=84)
 
     dw $5416 ; objects
 
-INCBIN "baserom.gbc",$4940c,$49416 - $4940c
+INCBIN "baserom.gbc",$4940c,$49411 - $4940c
+
+Route11GateText1: ; 0x49411
+    TX_FAR _Route11GateText1
+    db $50
+
 
 Route11GateObject: ; 0x49416 (size=50)
     db $a ; border tile
@@ -15977,7 +16534,11 @@ Route12Gate_h: ; 0x494f8 to 0x49504 (12 bytes) (id=87)
 
     dw $550e ; objects
 
-INCBIN "baserom.gbc",$49504,$4950e - $49504
+INCBIN "baserom.gbc",$49504,$49509 - $49504
+
+Route12GateText1: ; 0x49509
+    TX_FAR _Route12GateText1
+    db $50
 
 Route12GateObject: ; 0x4950e (size=50)
     db $a ; border tile
@@ -16202,7 +16763,12 @@ MtMoon1_h: ; 0x499bc to 0x499c8 (12 bytes) (id=59)
 
     dw $5b06 ; objects
 
-INCBIN "baserom.gbc",$499c8,$49b06 - $499c8
+INCBIN "baserom.gbc",$499c8,$49b01 - $499c8
+
+MtMoon1Text14: ; 0x49b01
+    TX_FAR _MtMoon1Text14
+    db $50
+
 
 MtMoon1Object: ; 0x49b06 (size=145)
     db $3 ; border tile
@@ -16476,7 +17042,6 @@ BattleCenterMObject: ; 0x4fd53 (size=10)
     db $1 ; people
     db SPRITE_RED, $2 + 4, $2 + 4, $ff, $0, $1 ; person
 
-
 BattleCenterMBlocks: ; 20
     INCBIN "maps/battlecenterm.blk"
 
@@ -16488,7 +17053,13 @@ TradeCenterM_h: ; 0x4fd71 to 0x4fd7d (12 bytes) (id=240)
 
     dw $7d87 ; objects
 
-INCBIN "baserom.gbc",$4fd7d,$4fd87 - $4fd7d
+INCBIN "baserom.gbc",$4fd7d,$4fd82 - $4fd7d
+
+TradeCenterMText1: ; 0x4fd82
+    TX_FAR _TradeCenterMText1
+    db $50
+
+
 TradeCenterMObject: ; 0x4fd87 (size=10)
     db $e ; border tile
 
@@ -16498,7 +17069,6 @@ TradeCenterMObject: ; 0x4fd87 (size=10)
 
     db $1 ; people
     db SPRITE_RED, $2 + 4, $2 + 4, $ff, $0, $1 ; person
-
 
 TradeCenterMBlocks: ; 20
     INCBIN "maps/tradecenterm.blk"
@@ -17047,7 +17617,147 @@ INCBIN "baserom.gbc",$50a98,$0
 SaffronCityBlocks: ; 360
     INCBIN "maps/saffroncity.blk"
 
-INCBIN "baserom.gbc",$50c00,$b91
+INCBIN "baserom.gbc",$50c00,$50c35 - $50c00
+
+SaffronCityText1: ; 0x50c35
+    TX_FAR _SaffronCityText1
+    db $50
+
+
+SaffronCityText2: ; 0x50c3a
+    TX_FAR _SaffronCityText2
+    db $50
+
+
+SaffronCityText3: ; 0x50c3f
+    TX_FAR _SaffronCityText3
+    db $50
+
+
+SaffronCityText4: ; 0x50c44
+    TX_FAR _SaffronCityText4
+    db $50
+
+
+SaffronCityText5: ; 0x50c49
+    TX_FAR _SaffronCityText5
+    db $50
+
+
+SaffronCityText6: ; 0x50c4e
+    TX_FAR _SaffronCityText6
+    db $50
+
+
+SaffronCityText7: ; 0x50c53
+    TX_FAR _SaffronCityText7
+    db $50
+
+
+SaffronCityText8: ; 0x50c58
+    TX_FAR _SaffronCityText8
+    db $50
+
+
+SaffronCityText9: ; 0x50c5d
+    TX_FAR _SaffronCityText9
+    db $50
+
+
+SaffronCityText10: ; 0x50c62
+    TX_FAR _SaffronCityText10
+    db $50
+
+
+SaffronCityText11: ; 0x50c67
+    TX_FAR _SaffronCityText11
+    db $50
+
+
+SaffronCityText12: ; 0x50c6c
+    TX_FAR _SaffronCityText12
+
+INCBIN "baserom.gbc",$50c70,$50c72 - $50c70
+
+SaffronCityText13: ; 0x50c72
+    TX_FAR _SaffronCityText13
+    db $50
+
+
+SaffronCityText14: ; 0x50c77
+    TX_FAR _SaffronCityText14
+    db $50
+
+
+SaffronCityText15: ; 0x50c7c
+    TX_FAR _SaffronCityText15
+    db $50
+
+
+SaffronCityText16: ; 0x50c81
+    TX_FAR _SaffronCityText16
+    db $50
+
+
+SaffronCityText17: ; 0x50c86
+    TX_FAR _SaffronCityText17
+    db $50
+
+
+SaffronCityText18: ; 0x50c8b
+    TX_FAR _SaffronCityText18
+    db $50
+
+
+SaffronCityText20: ; 0x50c90
+    TX_FAR _SaffronCityText20
+    db $50
+
+
+SaffronCityText21: ; 0x50c95
+    TX_FAR _SaffronCityText21
+    db $50
+
+
+SaffronCityText22: ; 0x50c9a
+    TX_FAR _SaffronCityText22
+    db $50
+
+
+SaffronCityText24: ; 0x50c9f
+    TX_FAR _SaffronCityText24
+    db $50
+
+
+SaffronCityText25: ; 0x50ca4
+    TX_FAR _SaffronCityText25
+    db $50
+
+INCBIN "baserom.gbc",$50ca9,$50ead - $50ca9
+
+Route20Text12:
+Route20Text11: ; 0x50ead
+    TX_FAR _Route20Text11
+    db $50
+
+INCBIN "baserom.gbc",$50eb2,$511d5 - $50eb2
+
+Route22Text3: ; 0x511d5
+    TX_FAR _Route22Text3
+    db $50
+
+INCBIN "baserom.gbc",$511da,$513a8 - $511da
+
+Route23Text8: ; 0x513a8
+    TX_FAR _Route23Text8
+    db $50
+
+INCBIN "baserom.gbc",$513ad,$5178c - $513ad
+
+Route25Text11: ; 0x5178c
+    TX_FAR _Route25Text11
+    db $50
+
 
 VictoryRoad2_h: ; 0x51791 to 0x5179d (12 bytes) (id=194)
     db $11 ; tileset
@@ -17777,7 +18487,118 @@ DayCareMBlocks: ; 16
 FuchsiaHouse3Blocks: ; 16
     INCBIN "maps/fuchsiahouse3.blk"
 
-INCBIN "baserom.gbc",$5524f,$e15
+INCBIN "baserom.gbc",$5524f,$554ee - $5524f
+
+Route2Text3: ; 0x554ee
+    TX_FAR _Route2Text3
+    db $50
+
+
+Route2Text4: ; 0x554f3
+    TX_FAR _Route2Text4
+    db $50
+
+INCBIN "baserom.gbc",$554f8,$55586 - $554f8
+
+Route3Text1: ; 0x55586
+    TX_FAR _Route3Text1
+    db $50
+
+INCBIN "baserom.gbc",$5558b,$55653 - $5558b
+
+Route3Text10: ; 0x55653
+    TX_FAR _Route3Text10
+    db $50
+
+INCBIN "baserom.gbc",$55658,$5568a - $55658
+
+Route4Text1: ; 0x5568a
+    TX_FAR _Route4Text1
+    db $50
+
+INCBIN "baserom.gbc",$5568f,$556a8 - $5568f
+
+Route4Text5: ; 0x556a8
+    TX_FAR _Route4Text5
+    db $50
+
+
+Route4Text6: ; 0x556ad
+    TX_FAR _Route4Text6
+    db $50
+
+INCBIN "baserom.gbc",$556b2,$556b7 - $556b2
+
+Route5Text1: ; 0x556b7
+    TX_FAR _Route5Text1
+    db $50
+
+INCBIN "baserom.gbc",$556bc,$55819 - $556bc
+
+Route9Text11: ; 0x55819
+    TX_FAR _Route9Text11
+    db $50
+
+INCBIN "baserom.gbc",$5581e,$559c4 - $5581e
+
+Route13Text11: ; 0x559c4
+    TX_FAR _Route13Text11
+    db $50
+
+
+Route13Text12: ; 0x559c9
+    TX_FAR _Route13Text12
+    db $50
+
+
+Route13Text13: ; 0x559ce
+    TX_FAR _Route13Text13
+    db $50
+
+INCBIN "baserom.gbc",$559d3,$55b75 - $559d3
+
+Route14Text11: ; 0x55b75
+    TX_FAR _Route14Text11
+    db $50
+
+INCBIN "baserom.gbc",$55b7a,$55d26 - $55b7a
+
+Route17Text11: ; 0x55d26
+    TX_FAR _Route17Text11
+    db $50
+
+
+Route17Text12: ; 0x55d2b
+    TX_FAR _Route17Text12
+    db $50
+
+
+Route17Text13: ; 0x55d30
+    TX_FAR _Route17Text13
+    db $50
+
+
+Route17Text14: ; 0x55d35
+    TX_FAR _Route17Text14
+    db $50
+
+
+Route17Text15: ; 0x55d3a
+    TX_FAR _Route17Text15
+    db $50
+
+
+Route17Text16: ; 0x55d3f
+    TX_FAR _Route17Text16
+    db $50
+
+INCBIN "baserom.gbc",$55d44,$55ee6 - $55d44
+
+Route19Text11: ; 0x55ee6
+    TX_FAR _Route19Text11
+    db $50
+
+INCBIN "baserom.gbc",$55eeb,$179
 
 VermilionHouse2_h: ; 0x56064 to 0x56070 (12 bytes) (id=163)
     db $08 ; tileset
@@ -18445,7 +19266,88 @@ INCBIN "baserom.gbc",$58c9c,$0
 Route18Blocks: ; 225
     INCBIN "maps/route18.blk"
 
-INCBIN "baserom.gbc",$58d7d,$de7
+INCBIN "baserom.gbc",$58d7d,$591b1 - $58d7d
+
+Route6Text7: ; 0x591b1
+    TX_FAR _Route6Text7
+    db $50
+
+INCBIN "baserom.gbc",$591b6,$59331 - $591b6
+
+Route8Text10: ; 0x59331
+    TX_FAR _Route8Text10
+    db $50
+
+INCBIN "baserom.gbc",$59336,$59442 - $59336
+
+Route10Text9: ; 0x59442
+Route10Text7: ; 0x59442
+    TX_FAR _Route10Text7 ; _Route10Text9
+    db $50
+
+
+Route10Text10: ; 0x59447
+    TX_FAR _Route10Text10
+    db $50
+
+INCBIN "baserom.gbc",$5944c,$595ee - $5944c
+
+Route11Text11: ; 0x595ee
+    TX_FAR _Route11Text11
+    db $50
+
+INCBIN "baserom.gbc",$595f3,$596e6 - $595f3
+
+Route12Text1: ; 0x596e6
+    TX_FAR _Route12Text1
+    db $50
+
+INCBIN "baserom.gbc",$596eb,$597a4 - $596eb
+
+Route12Text11: ; 0x597a4
+    TX_FAR _Route12Text11
+    db $50
+
+
+Route12Text12: ; 0x597a9
+    TX_FAR _Route12Text12
+    db $50
+
+INCBIN "baserom.gbc",$597ae,$5992e - $597ae
+
+Route15Text12: ; 0x5992e
+    TX_FAR _Route15Text12
+    db $50
+
+INCBIN "baserom.gbc",$59933,$59aae - $59933
+
+Route16Text7: ; 0x59aae
+    TX_FAR _Route16Text7
+    db $50
+
+INCBIN "baserom.gbc",$59ab3,$59abd - $59ab3
+
+Route16Text8: ; 0x59abd
+    TX_FAR _Route16Text8
+    db $50
+
+
+Route16Text9: ; 0x59ac2
+    TX_FAR _Route16Text9
+    db $50
+
+INCBIN "baserom.gbc",$59ac7,$59b5a - $59ac7
+
+Route18Text4: ; 0x59b5a
+    TX_FAR _Route18Text4
+    db $50
+
+
+Route18Text5: ; 0x59b5f
+    TX_FAR _Route18Text5
+    db $50
+
+INCBIN "baserom.gbc",$59b64,$0
 
 FanClub_h: ; 0x59b64 to 0x59b70 (12 bytes) (id=90)
     db $10 ; tileset
@@ -18793,7 +19695,43 @@ MuseumF2_h: ; 0x5c30b to 0x5c317 (12 bytes) (id=53)
 
     dw $434b ; objects
 
-INCBIN "baserom.gbc",$5c317,$5c34b - $5c317
+INCBIN "baserom.gbc",$5c317,$5c328 - $5c317
+
+MuseumF2Text1: ; 0x5c328
+    TX_FAR _MuseumF2Text1
+    db $50
+
+
+MuseumF2Text2: ; 0x5c32d
+    TX_FAR _MuseumF2Text2
+    db $50
+
+
+MuseumF2Text3: ; 0x5c332
+    TX_FAR _MuseumF2Text3
+    db $50
+
+
+MuseumF2Text4: ; 0x5c337
+    TX_FAR _MuseumF2Text4
+    db $50
+
+
+MuseumF2Text5: ; 0x5c33c
+    TX_FAR _MuseumF2Text5
+    db $50
+
+
+MuseumF2Text6: ; 0x5c341
+    TX_FAR _MuseumF2Text6
+    db $50
+
+
+MuseumF2Text7: ; 0x5c346
+    TX_FAR _MuseumF2Text7
+    db $50
+
+INCBIN "baserom.gbc",$5c34b,$0
 MuseumF2Object: ; 0x5c34b (size=48)
     db $a ; border tile
 
@@ -18854,7 +19792,21 @@ PewterPokecenter_h: ; 0x5c57b to 0x5c587 (12 bytes) (id=58)
 
     dw $460d ; objects
 
-INCBIN "baserom.gbc",$5c587,$5c60d - $5c587
+INCBIN "baserom.gbc",$5c587,$5c595 - $5c587
+
+;XXX wtf? maybe a part of the text script?
+db $ff
+PewterPokecenterText1: ; 0x5c595
+    TX_FAR _PewterPokecenterText1
+
+INCBIN "baserom.gbc",$5c59a,$5c603 - $5c59a
+
+PewterPokecenterText4: ; broken TX_FAR to _PewterPokecenterText4
+    db $17, $44, $47, $26
+    db $50
+
+;XXX wtf?
+db $30, $38, $34, $3c, $f6
 PewterPokecenterObject: ; 0x5c60d (size=44)
     db $0 ; border tile
 
@@ -18883,7 +19835,14 @@ CeruleanPokecenter_h: ; 0x5c639 to 0x5c645 (12 bytes) (id=64)
 
     dw $465f ; objects
 
-INCBIN "baserom.gbc",$5c645,$5c65f - $5c645
+INCBIN "baserom.gbc",$5c645,$5c655 - $5c645
+
+CeruleanPokecenterText1: ; 0x5c654
+    TX_FAR _CeruleanPokecenterText1
+    db $50
+
+INCBIN "baserom.gbc",$5c65a,$5
+
 CeruleanPokecenterObject: ; 0x5c65f (size=44)
     db $0 ; border tile
 
@@ -18947,7 +19906,18 @@ CeruleanMart_h: ; 0x5c889 to 0x5c895 (12 bytes) (id=67)
 
     dw $48a8 ; objects
 
-INCBIN "baserom.gbc",$5c895,$5c8a8 - $5c895
+INCBIN "baserom.gbc",$5c895,$5c89e - $5c895
+
+CeruleanMartText2: ; 0x5c89e
+    TX_FAR _CeruleanMartText2
+    db $50
+
+
+CeruleanMartText3: ; 0x5c8a3
+    TX_FAR _CeruleanMartText3
+    db $50
+
+INCBIN "baserom.gbc",$5c8a8,$0
 CeruleanMartObject: ; 0x5c8a8 (size=38)
     db $0 ; border tile
 
@@ -19032,7 +20002,12 @@ VermilionPokecenter_h: ; 0x5c983 to 0x5c98f (12 bytes) (id=89)
 
     dw $49a9 ; objects
 
-INCBIN "baserom.gbc",$5c98f,$5c9a9 - $5c98f
+INCBIN "baserom.gbc",$5c98f,$5c99e - $5c98f
+
+VermilionPokecenterText1: ; 0x5c99d
+    TX_FAR _VermilionPokecenterText1
+
+INCBIN "baserom.gbc",$5c9a2,$7
 VermilionPokecenterObject: ; 0x5c9a9 (size=44)
     db $0 ; border tile
 
@@ -19376,7 +20351,18 @@ ViridianForestexit_h: ; 0x5d57b to 0x5d587 (12 bytes) (id=47)
 
     dw $5598 ; objects
 
-INCBIN "baserom.gbc",$5d587,$5d598 - $5d587
+INCBIN "baserom.gbc",$5d587,$5d58e - $5d587
+
+ViridianForestexitText1: ; 0x5d58e
+    TX_FAR _ViridianForestexitText1
+    db $50
+
+
+ViridianForestexitText2: ; 0x5d593
+    TX_FAR _ViridianForestexitText2
+    db $50
+
+INCBIN "baserom.gbc",$5d598,$0
 ViridianForestexitObject: ; 0x5d598 (size=48)
     db $a ; border tile
 
@@ -19407,7 +20393,12 @@ Route2Gate_h: ; 0x5d5c8 to 0x5d5d4 (12 bytes) (id=49)
 
     dw $5620 ; objects
 
-INCBIN "baserom.gbc",$5d5d4,$5d620 - $5d5d4
+INCBIN "baserom.gbc",$5d5d4,$5d61b - $5d5d4
+
+Route2GateText2: ; 0x5d61b
+    TX_FAR _Route2GateText2
+    db $50
+
 Route2GateObject: ; 0x5d620 (size=48)
     db $a ; border tile
 
@@ -19438,7 +20429,18 @@ ViridianForestEntrance_h: ; 0x5d650 to 0x5d65c (12 bytes) (id=50)
 
     dw $566d ; objects
 
-INCBIN "baserom.gbc",$5d65c,$5d66d - $5d65c
+INCBIN "baserom.gbc",$5d65c,$5d663 - $5d65c
+
+ViridianForestEntranceText1: ; 0x5d663
+    TX_FAR _ViridianForestEntranceText1
+    db $50
+
+
+ViridianForestEntranceText2: ; 0x5d668
+    TX_FAR _ViridianForestEntranceText2
+    db $50
+
+INCBIN "baserom.gbc",$5d66d,$0
 ViridianForestEntranceObject: ; 0x5d66d (size=48)
     db $a ; border tile
 
@@ -19497,7 +20499,14 @@ UndergroundTunnelEntranceRoute6_h: ; 0x5d6e3 to 0x5d6ef (12 bytes) (id=74)
 
     dw $56fe ; objects
 
-INCBIN "baserom.gbc",$5d6ef,$5d6fe - $5d6ef
+INCBIN "baserom.gbc",$5d6ef,$5d6f9 - $5d6ef
+
+;XXX wtf? syntax error on TX_FAR?
+UndergroundTunnelEntranceRoute6Text1: ; 0x5d6f9
+    db $17, $cb, $40, $23
+    ;TX_FAR _UndergroundTunnelEntranceRoute6Text1 ; $cb, $40, $23
+    db $50
+
 UndergroundTunnelEntranceRoute6Object: ; 0x5d6fe (size=34)
     db $a ; border tile
 
@@ -19525,7 +20534,13 @@ UndergroundPathEntranceRoute7_h: ; 0x5d720 to 0x5d72c (12 bytes) (id=77)
 
     dw $573b ; objects
 
-INCBIN "baserom.gbc",$5d72c,$5d73b - $5d72c
+INCBIN "baserom.gbc",$5d72c,$5d736 - $5d72c
+
+UndergroundPathEntranceRoute7Text1: ; 0x5d736
+    db $17, $ff, $40, $23
+    ;TX_FAR _UndergroundPathEntranceRoute7Text1
+    db $50
+
 UndergroundPathEntranceRoute7Object: ; 0x5d73b (size=34)
     db $a ; border tile
 
@@ -19914,7 +20929,49 @@ ViridianForest_h: ; 0x61101 to 0x6110d (12 bytes) (id=51)
 
     dw $51da ; objects
 
-INCBIN "baserom.gbc",$6110d,$611da - $6110d
+INCBIN "baserom.gbc",$6110d,$61167 - $6110d
+
+ViridianForestText1: ; 0x61167
+    TX_FAR _ViridianForestText1
+    db $50
+
+INCBIN "baserom.gbc",$6116c,$611b7 - $6116c
+
+ViridianForestText8: ; 0x611b7
+    TX_FAR _ViridianForestText8
+    db $50
+
+
+ViridianForestText9: ; 0x611bc
+    TX_FAR _ViridianForestText9
+    db $50
+
+
+ViridianForestText10: ; 0x611c1
+    TX_FAR _ViridianForestText10
+    db $50
+
+
+ViridianForestText11: ; 0x611c6
+    TX_FAR _ViridianForestText11
+    db $50
+
+
+ViridianForestText12: ; 0x611cb
+    TX_FAR _ViridianForestText12
+    db $50
+
+
+ViridianForestText13: ; 0x611d0
+    TX_FAR _ViridianForestText13
+    db $50
+
+
+ViridianForestText14: ; 0x611d5
+    TX_FAR _ViridianForestText14
+    db $50
+
+INCBIN "baserom.gbc",$611da,$0
 ViridianForestObject: ; 0x611da (size=127)
     db $3 ; border tile
 
@@ -20155,7 +21212,18 @@ SSAnne7_h: ; 0x61889 to 0x61895 (12 bytes) (id=101)
 
     dw $5946 ; objects
 
-INCBIN "baserom.gbc",$61895,$61946 - $61895
+INCBIN "baserom.gbc",$61895,$6193c - $61895
+
+SSAnne7Text2: ; 0x6193c
+    TX_FAR _SSAnne7Text2
+    db $50
+
+
+SSAnne7Text3: ; 0x61941
+    TX_FAR _SSAnne7Text3
+    db $50
+
+INCBIN "baserom.gbc",$61946,$0
 SSAnne7Object: ; 0x61946 (size=24)
     db $c ; border tile
 
@@ -20184,7 +21252,38 @@ SSAnne8_h: ; 0x6196a to 0x61976 (12 bytes) (id=102)
 
     dw $5a60 ; objects
 
-INCBIN "baserom.gbc",$61976,$61a60 - $61976
+INCBIN "baserom.gbc",$61976,$619fe - $61976
+
+SSAnne8Text8: ; 0x619fe
+    TX_FAR _SSAnne8Text8
+
+INCBIN "baserom.gbc",$61a02,$45
+
+SSAnne8Text5: ; 0x61a47
+    TX_FAR _SSAnne8Text5
+    db $50
+
+
+SSAnne8Text6: ; 0x61a4c
+    TX_FAR _SSAnne8Text6
+    db $50
+
+
+SSAnne8Text7: ; 0x61a51
+    TX_FAR _SSAnne8Text7
+    db $50
+
+
+SSAnne8Text9: ; 0x61a56
+    TX_FAR _SSAnne8Text9
+    db $50
+
+
+SSAnne8Text11: ; 0x61a5b
+    TX_FAR _SSAnne8Text11
+    db $50
+
+INCBIN "baserom.gbc",$61a60,$0
 SSAnne8Object: ; 0x61a60 (size=127)
     db $c ; border tile
 
@@ -20289,7 +21388,17 @@ SSAnne10_h: ; 0x61d49 to 0x61d55 (12 bytes) (id=104)
 
     dw $5e75 ; objects
 
-INCBIN "baserom.gbc",$61d55,$61e75 - $61d55
+INCBIN "baserom.gbc",$61d55,$61e09 - $61d55
+
+SSAnne10Text8: ; 0x61e09
+    TX_FAR _SSAnne10Text8
+
+INCBIN "baserom.gbc",$61e0d,$63
+
+SSAnne10Text7: ; 0x61e70
+    TX_FAR _SSAnne10Text7
+    db $50
+
 SSAnne10Object: ; 0x61e75 (size=165)
     db $c ; border tile
 
