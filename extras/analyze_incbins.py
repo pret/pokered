@@ -223,13 +223,17 @@ def apply_diff(diff):
     fh.close()
 
     #apply the patch
+    os.system("cp ../pokered.asm ../pokered1.asm")
     os.system("patch ../pokered.asm temp.patch")
 
     #remove the patch
     os.system("rm temp.patch")
 
     #confirm it's working
-    subprocess.check_call("cd ../; make clean; LC_CTYPE=UTF-8 make", shell=True)
+    try:
+        subprocess.check_call("cd ../; make clean; LC_CTYPE=UTF-8 make", shell=True)
+    except Exception, exc:
+        os.system("mv ../pokered1.asm ../pokered.asm")
 
 if __name__ == "__main__":
     #load map headers

@@ -6757,7 +6757,10 @@ ViridianMart_h: ; 0x1d462 to 0x1d46e (12 bytes) (bank=7) (id=42)
 
     dw $550a ; objects
 
-INCBIN "baserom.gbc",$1d46e,$1d4f0 - $1d46e
+INCBIN "baserom.gbc",$1d46e,$1d4e0 - $1d46e
+ViridianMartTexts: ; 0x1d4e0
+    dw ViridianMartText1, ViridianMartText2, ViridianMartText3
+INCBIN "baserom.gbc",$1d4e6,$a
 
 ViridianMartText1: ; 0x1d4f0
     TX_FAR _ViridianMartText1
@@ -6805,7 +6808,9 @@ School_h: ; 0x1d540 to 0x1d54c (12 bytes) (bank=7) (id=43)
 
     dw $555d ; objects
 
-INCBIN "baserom.gbc",$1d54c,$1d553 - $1d54c
+INCBIN "baserom.gbc",$1d54c,$1d54f - $1d54c
+SchoolTexts: ; 0x1d54f
+    dw SchoolText1, SchoolText2
 
 SchoolText1: ; 0x1d553
     TX_FAR _SchoolText1
@@ -6888,7 +6893,9 @@ PewterHouse1_h: ; 0x1d5e7 to 0x1d5f3 (12 bytes) (bank=7) (id=55)
 
     dw $5616 ; objects
 
-INCBIN "baserom.gbc",$1d5f3,$1d5fc - $1d5f3
+INCBIN "baserom.gbc",$1d5f3,$1d5f6 - $1d5f3
+PewterHouse1Texts: ; 0x1d5f6
+    dw PewterHouse1Text1, PewterHouse1Text2, PewterHouse1Text3
 
 PewterHouse1Text1: ; 0x1d5fc
     TX_FAR _PewterHouse1Text1
@@ -6932,7 +6939,9 @@ PewterHouse2_h: ; 0x1d63c to 0x1d648 (12 bytes) (bank=7) (id=57)
 
     dw $5659 ; objects
 
-INCBIN "baserom.gbc",$1d648,$1d64f - $1d648
+INCBIN "baserom.gbc",$1d648,$1d64b - $1d648
+PewterHouse2Texts: ; 0x1d64b
+    dw PewterHouse2Text1, PewterHouse2Text2
 
 PewterHouse2Text1: ; 0x1d64f
     TX_FAR _PewterHouse2Text1
@@ -7310,7 +7319,9 @@ SaffronHouse1_h: ; 0x1ddd1 to 0x1dddd (12 bytes) (bank=7) (id=179)
 
     dw $5e04 ; objects
 
-INCBIN "baserom.gbc",$1dddd,$1dde8 - $1dddd
+INCBIN "baserom.gbc",$1dddd,$1dde0 - $1dddd
+SaffronHouse1Texts: ; 0x1dde0
+    dw SaffronHouse1Text1, SaffronHouse1Text2, SaffronHouse1Text3, SaffronHouse1Text4
 
 SaffronHouse1Text1: ; 0x1dde8
     TX_FAR _SaffronHouse1Text1
@@ -7386,7 +7397,9 @@ DiglettsCaveRoute2_h: ; 0x1dea4 to 0x1deb0 (12 bytes) (bank=7) (id=46)
 
     dw $5ebf ; objects
 
-INCBIN "baserom.gbc",$1deb0,$1deba - $1deb0
+INCBIN "baserom.gbc",$1deb0,$1deb8 - $1deb0
+DiglettsCaveRoute2Texts: ; 0x1deb8
+    dw DiglettsCaveRoute2Text1
 
 DiglettsCaveRoute2Text1: ; 0x1deba
     TX_FAR _DiglettsCaveRoute2Text1
@@ -7584,7 +7597,9 @@ UndergroundPathEntranceRoute8_h: ; 0x1e27d to 0x1e289 (12 bytes) (bank=7) (id=80
 
     dw $6298 ; objects
 
-INCBIN "baserom.gbc",$1e289,$1e293 - $1e289
+INCBIN "baserom.gbc",$1e289,$1e291 - $1e289
+UndergroundPathEntranceRoute8Texts: ; 0x1e291
+    dw UndergroundPathEntranceRoute8Text1
 
 ;XXX wtf? syntax error
 UndergroundPathEntranceRoute8Text1: ; 0x1e293
@@ -7663,7 +7678,9 @@ DiglettsCaveEntranceRoute11_h: ; 0x1e5ae to 0x1e5ba (12 bytes) (bank=7) (id=85)
 
     dw $65ca ; objects
 
-INCBIN "baserom.gbc",$1e5ba,$1e5c5 - $1e5ba
+INCBIN "baserom.gbc",$1e5ba,$1e5c3 - $1e5ba
+DiglettsCaveEntranceRoute11Texts: ; 0x1e5c3
+    dw DiglettsCaveEntranceRoute11Text1
 
 ; XXX wtf? syntax error
 DiglettsCaveEntranceRoute11Text1: ; 0x1e5c5
@@ -14925,7 +14942,9 @@ SeafoamIslands1_h: ; 0x447dd to 0x447e9 (12 bytes) (bank=11) (id=192)
 
     dw $484f ; objects
 
-INCBIN "baserom.gbc",$447e9,$4484f - $447e9
+INCBIN "baserom.gbc",$447e9,$4484b - $447e9
+SeafoamIslands1Texts: ; 0x4484b
+    dw SeafoamIslands1Text1, SeafoamIslands1Text2
 SeafoamIslands1Object: ; 0x4484f (size=72)
     db $7d ; border tile
 
@@ -15434,7 +15453,9 @@ SafariZoneRestHouse1_h: ; 0x45ce1 to 0x45ced (12 bytes) (bank=11) (id=221)
 
     dw $5cfe ; objects
 
-INCBIN "baserom.gbc",$45ced,$45cf4 - $45ced
+INCBIN "baserom.gbc",$45ced,$45cf0 - $45ced
+SafariZoneRestHouse1Texts: ; 0x45cf0
+    dw SafariZoneRestHouse1Text1, SafariZoneRestHouse1Text2
 
 SafariZoneRestHouse1Text1: ; 0x45cf4
     TX_FAR _SafariZoneRestHouse1Text1
@@ -15472,7 +15493,9 @@ SafariZoneRestHouse2_h: ; 0x45d1e to 0x45d2a (12 bytes) (bank=11) (id=223)
 
     dw $5d43 ; objects
 
-INCBIN "baserom.gbc",$45d2a,$45d34 - $45d2a
+INCBIN "baserom.gbc",$45d2a,$45d2e - $45d2a
+SafariZoneRestHouse2Texts: ; 0x45d2e
+    dw SafariZoneRestHouse2Text1, SafariZoneRestHouse2Text2, SafariZoneRestHouse2Text3
 
 SafariZoneRestHouse2Text1: ; 0x45d34
     TX_FAR _SafariZoneRestHouse2Text1
@@ -15516,7 +15539,9 @@ SafariZoneRestHouse3_h: ; 0x45d69 to 0x45d75 (12 bytes) (bank=11) (id=224)
 
     dw $5d8e ; objects
 
-INCBIN "baserom.gbc",$45d75,$45d7f - $45d75
+INCBIN "baserom.gbc",$45d75,$45d79 - $45d75
+SafariZoneRestHouse3Texts: ; 0x45d79
+    dw SafariZoneRestHouse3Text1, SafariZoneRestHouse3Text2, SafariZoneRestHouse3Text3
 
 SafariZoneRestHouse3Text1: ; 0x45d7f
     TX_FAR _SafariZoneRestHouse3Text1
@@ -15560,7 +15585,9 @@ SafariZoneRestHouse4_h: ; 0x45db4 to 0x45dc0 (12 bytes) (bank=11) (id=225)
 
     dw $5dd9 ; objects
 
-INCBIN "baserom.gbc",$45dc0,$45dca - $45dc0
+INCBIN "baserom.gbc",$45dc0,$45dc4 - $45dc0
+SafariZoneRestHouse4Texts: ; 0x45dc4
+    dw SafariZoneRestHouse4Text1, SafariZoneRestHouse4Text2, SafariZoneRestHouse4Text3
 
 SafariZoneRestHouse4Text1: ; 0x45dca
     TX_FAR _SafariZoneRestHouse4Text1
@@ -15712,7 +15739,9 @@ SeafoamIslands2_h: ; 0x46309 to 0x46315 (12 bytes) (bank=11) (id=159)
 
     dw $6376 ; objects
 
-INCBIN "baserom.gbc",$46315,$46376 - $46315
+INCBIN "baserom.gbc",$46315,$46372 - $46315
+SeafoamIslands2Texts: ; 0x46372
+    dw SeafoamIslands2Text1, SeafoamIslands2Text2
 SeafoamIslands2Object: ; 0x46376 (size=72)
     db $7d ; border tile
 
@@ -15752,7 +15781,9 @@ SeafoamIslands3_h: ; 0x46445 to 0x46451 (12 bytes) (bank=11) (id=160)
 
     dw $64b2 ; objects
 
-INCBIN "baserom.gbc",$46451,$464b2 - $46451
+INCBIN "baserom.gbc",$46451,$464ae - $46451
+SeafoamIslands3Texts: ; 0x464ae
+    dw SeafoamIslands3Text1, SeafoamIslands3Text2
 SeafoamIslands3Object: ; 0x464b2 (size=72)
     db $7d ; border tile
 
@@ -15792,7 +15823,9 @@ SeafoamIslands4_h: ; 0x46581 to 0x4658d (12 bytes) (bank=11) (id=161)
 
     dw $66a6 ; objects
 
-INCBIN "baserom.gbc",$4658d,$466a6 - $4658d
+INCBIN "baserom.gbc",$4658d,$4669a - $4658d
+SeafoamIslands4Texts: ; 0x4669a
+    dw SeafoamIslands4Text1, SeafoamIslands4Text2, SeafoamIslands4Text3, SeafoamIslands4Text4, SeafoamIslands4Text5, SeafoamIslands4Text6
 SeafoamIslands4Object: ; 0x466a6 (size=96)
     db $7d ; border tile
 
@@ -16279,7 +16312,10 @@ CeladonMansion1_h: ; 0x48688 to 0x48694 (12 bytes) (bank=12) (id=128)
 
     dw $46cf ; objects
 
-INCBIN "baserom.gbc",$48694,$486a7 - $48694
+INCBIN "baserom.gbc",$48694,$48697 - $48694
+CeladonMansion1Texts: ; 0x48697
+    dw CeladonMansion1Text1, CeladonMansion1Text2, CeladonMansion1Text3, CeladonMansion1Text4, CeladonMansion1Text5
+INCBIN "baserom.gbc",$486a1,$6
 
 CeladonMansion1Text1: ; 0x486a7
     TX_FAR _CeladonMansion1Text1
@@ -16343,7 +16379,9 @@ CeladonMansion2_h: ; 0x4872e to 0x4873a (12 bytes) (bank=12) (id=129)
 
     dw $4745 ; objects
 
-INCBIN "baserom.gbc",$4873a,$48740 - $4873a
+INCBIN "baserom.gbc",$4873a,$4873e - $4873a
+CeladonMansion2Texts: ; 0x4873e
+    dw CeladonMansion2Text1
 
 CeladonMansion2Text1: ; 0x48740
     TX_FAR _CeladonMansion2Text1
@@ -16458,7 +16496,9 @@ CeladonMansion4_h: ; 0x4885f to 0x4886b (12 bytes) (bank=12) (id=131)
 
     dw $4875 ; objects
 
-INCBIN "baserom.gbc",$4886b,$48870 - $4886b
+INCBIN "baserom.gbc",$4886b,$4886e - $4886b
+CeladonMansion4Texts: ; 0x4886e
+    dw CeladonMansion4Text1
 
 CeladonMansion4Text1: ; 0x48870
     TX_FAR _CeladonMansion4Text1
@@ -16785,7 +16825,9 @@ CeladonHouse2_h: ; 0x49202 to 0x4920e (12 bytes) (bank=12) (id=139)
 
     dw $5227 ; objects
 
-INCBIN "baserom.gbc",$4920e,$49218 - $4920e
+INCBIN "baserom.gbc",$4920e,$49212 - $4920e
+CeladonHouse2Texts: ; 0x49212
+    dw CeladonHouse2Text1, CeladonHouse2Text2, CeladonHouse2Text3
 
 CeladonHouse2Text1: ; 0x49218
     TX_FAR _CeladonHouse2Text1
@@ -16832,7 +16874,9 @@ CeladonHotel_h: ; 0x4925d to 0x49269 (12 bytes) (bank=12) (id=140)
 
     dw $5281 ; objects
 
-INCBIN "baserom.gbc",$49269,$49272 - $49269
+INCBIN "baserom.gbc",$49269,$4926c - $49269
+CeladonHotelTexts: ; 0x4926c
+    dw CeladonHotelText1, CeladonHotelText2, CeladonHotelText3
 
 CeladonHotelText1: ; 0x49272
     TX_FAR _CeladonHotelText1
@@ -16972,7 +17016,9 @@ Route11Gate_h: ; 0x49400 to 0x4940c (12 bytes) (id=84)
 
     dw $5416 ; objects
 
-INCBIN "baserom.gbc",$4940c,$49411 - $4940c
+INCBIN "baserom.gbc",$4940c,$4940f - $4940c
+Route11GateTexts: ; 0x4940f
+    dw Route11GateText1
 
 Route11GateText1: ; 0x49411
     TX_FAR _Route11GateText1
@@ -17036,7 +17082,9 @@ Route12Gate_h: ; 0x494f8 to 0x49504 (12 bytes) (id=87)
 
     dw $550e ; objects
 
-INCBIN "baserom.gbc",$49504,$49509 - $49504
+INCBIN "baserom.gbc",$49504,$49507 - $49504
+Route12GateTexts: ; 0x49507
+    dw Route12GateText1
 
 Route12GateText1: ; 0x49509
     TX_FAR _Route12GateText1
@@ -17102,7 +17150,9 @@ Route15Gate_h: ; 0x495f6 to 0x49602 (12 bytes) (id=184)
 
     dw $560c ; objects
 
-INCBIN "baserom.gbc",$49602,$49607 - $49602
+INCBIN "baserom.gbc",$49602,$49605 - $49602
+Route15GateTexts: ; 0x49605
+    dw Route15GateText1
 
 Route15GateText1: ; 0x49607
     TX_FAR _Route15GateText1
@@ -17564,7 +17614,9 @@ BattleCenterM_h: ; 0x4fd04 to 0x4fd10 (12 bytes) (id=239)
 
     dw $7d53 ; objects
 
-INCBIN "baserom.gbc",$4fd10,$4fd4e - $4fd10
+INCBIN "baserom.gbc",$4fd10,$4fd4c - $4fd10
+BattleCenterMTexts: ; 0x4fd4c
+    dw BattleCenterMText1
 
 BattleCenterMText1: ; 0x4fd4e
     TX_FAR _BattleCenterMText1
@@ -17591,7 +17643,9 @@ TradeCenterM_h: ; 0x4fd71 to 0x4fd7d (12 bytes) (id=240)
 
     dw $7d87 ; objects
 
-INCBIN "baserom.gbc",$4fd7d,$4fd82 - $4fd7d
+INCBIN "baserom.gbc",$4fd7d,$4fd80 - $4fd7d
+TradeCenterMTexts: ; 0x4fd80
+    dw TradeCenterMText1
 
 TradeCenterMText1: ; 0x4fd82
     TX_FAR _TradeCenterMText1
@@ -19081,7 +19135,9 @@ Route4Text6: ; 0x556ad
     TX_FAR _Route4Text6
     db $50
 
-INCBIN "baserom.gbc",$556b2,$556b7 - $556b2
+INCBIN "baserom.gbc",$556b2,$556b5 - $556b2
+Route5Texts: ; 0x556b5
+    dw Route5Text1
 
 Route5Text1: ; 0x556b7
     TX_FAR _Route5Text1
@@ -20127,7 +20183,9 @@ HallofFameRoom_h: ; 0x5a492 to 0x5a49e (12 bytes) (id=118)
 
     dw $6571 ; objects
 
-INCBIN "baserom.gbc",$5a49e,$5a56c - $5a49e
+INCBIN "baserom.gbc",$5a49e,$5a56a - $5a49e
+HallofFameRoomTexts: ; 0x5a56a
+    dw HallofFameRoomText1
 
 HallofFameRoomText1: ; 0x5a56c
     TX_FAR _HallofFameRoomText1
@@ -20270,7 +20328,9 @@ MuseumF2_h: ; 0x5c30b to 0x5c317 (12 bytes) (id=53)
 
     dw $434b ; objects
 
-INCBIN "baserom.gbc",$5c317,$5c328 - $5c317
+INCBIN "baserom.gbc",$5c317,$5c31a - $5c317
+MuseumF2Texts: ; 0x5c31a
+    dw MuseumF2Text1, MuseumF2Text2, MuseumF2Text3, MuseumF2Text4, MuseumF2Text5, MuseumF2Text6, MuseumF2Text7
 
 MuseumF2Text1: ; 0x5c328
     TX_FAR _MuseumF2Text1
@@ -20901,7 +20961,9 @@ SilphCo1_h: ; 0x5d442 to 0x5d44e (12 bytes) (id=181)
 
     dw $5470 ; objects
 
-INCBIN "baserom.gbc",$5d44e,$5d46b - $5d44e
+INCBIN "baserom.gbc",$5d44e,$5d469 - $5d44e
+SilphCo1Texts: ; 0x5d469
+    dw SilphCo1Text1
 
 SilphCo1Text1: ; 0x5d46b
     TX_FAR _SilphCo1Text1
@@ -20977,7 +21039,9 @@ ViridianForestexit_h: ; 0x5d57b to 0x5d587 (12 bytes) (id=47)
 
     dw $5598 ; objects
 
-INCBIN "baserom.gbc",$5d587,$5d58e - $5d587
+INCBIN "baserom.gbc",$5d587,$5d58a - $5d587
+ViridianForestexitTexts: ; 0x5d58a
+    dw ViridianForestexitText1, ViridianForestexitText2
 
 ViridianForestexitText1: ; 0x5d58e
     TX_FAR _ViridianForestexitText1
@@ -21055,7 +21119,9 @@ ViridianForestEntrance_h: ; 0x5d650 to 0x5d65c (12 bytes) (id=50)
 
     dw $566d ; objects
 
-INCBIN "baserom.gbc",$5d65c,$5d663 - $5d65c
+INCBIN "baserom.gbc",$5d65c,$5d65f - $5d65c
+ViridianForestEntranceTexts: ; 0x5d65f
+    dw ViridianForestEntranceText1, ViridianForestEntranceText2
 
 ViridianForestEntranceText1: ; 0x5d663
     TX_FAR _ViridianForestEntranceText1
@@ -21125,7 +21191,9 @@ UndergroundTunnelEntranceRoute6_h: ; 0x5d6e3 to 0x5d6ef (12 bytes) (id=74)
 
     dw $56fe ; objects
 
-INCBIN "baserom.gbc",$5d6ef,$5d6f9 - $5d6ef
+INCBIN "baserom.gbc",$5d6ef,$5d6f7 - $5d6ef
+UndergroundTunnelEntranceRoute6Texts: ; 0x5d6f7
+    dw UndergroundTunnelEntranceRoute6Text1
 
 ;XXX wtf? syntax error on TX_FAR?
 UndergroundTunnelEntranceRoute6Text1: ; 0x5d6f9
@@ -21160,7 +21228,9 @@ UndergroundPathEntranceRoute7_h: ; 0x5d720 to 0x5d72c (12 bytes) (id=77)
 
     dw $573b ; objects
 
-INCBIN "baserom.gbc",$5d72c,$5d736 - $5d72c
+INCBIN "baserom.gbc",$5d72c,$5d734 - $5d72c
+UndergroundPathEntranceRoute7Texts: ; 0x5d734
+    dw UndergroundPathEntranceRoute7Text1
 
 UndergroundPathEntranceRoute7Text1: ; 0x5d736
     db $17, $ff, $40, $23
@@ -21284,7 +21354,9 @@ PokemonTower1_h: ; 0x60420 to 0x6042c (12 bytes) (id=142)
 
     dw $4452 ; objects
 
-INCBIN "baserom.gbc",$6042c,$60439 - $6042c
+INCBIN "baserom.gbc",$6042c,$6042f - $6042c
+PokemonTower1Texts: ; 0x6042f
+    dw PokemonTower1Text1, PokemonTower1Text2, PokemonTower1Text3, PokemonTower1Text4, PokemonTower1Text5
 
 PokemonTower1Text1: ; 0x60439
     TX_FAR _PokemonTower1Text1
@@ -21551,7 +21623,9 @@ CeladonMart1_h: ; 0x60f7a to 0x60f86 (12 bytes) (id=122)
 
     dw $4f9e ; objects
 
-INCBIN "baserom.gbc",$60f86,$60f8f - $60f86
+INCBIN "baserom.gbc",$60f86,$60f89 - $60f86
+CeladonMart1Texts: ; 0x60f89
+    dw CeladonMart1Text1, CeladonMart1Text2, CeladonMart1Text3
 
 CeladonMart1Text1: ; 0x60f8f
     TX_FAR _CeladonMart1Text1
@@ -23346,7 +23420,9 @@ FuchsiaHouse1_h: ; 0x7500c to 0x75018 (12 bytes) (id=153)
 
     dw $5031 ; objects
 
-INCBIN "baserom.gbc",$75018,$75022 - $75018
+INCBIN "baserom.gbc",$75018,$7501c - $75018
+FuchsiaHouse1Texts: ; 0x7501c
+    dw FuchsiaHouse1Text1, FuchsiaHouse1Text2, FuchsiaHouse1Text3
 
 FuchsiaHouse1Text1: ; 0x75022
     TX_FAR _FuchsiaHouse1Text1
@@ -23536,7 +23612,9 @@ FuchsiaMeetingRoom_h: ; 0x756d7 to 0x756e3 (12 bytes) (id=158)
 
     dw $56fc ; objects
 
-INCBIN "baserom.gbc",$756e3,$756ed - $756e3
+INCBIN "baserom.gbc",$756e3,$756e7 - $756e3
+FuchsiaMeetingRoomTexts: ; 0x756e7
+    dw FuchsiaMeetingRoomText1, FuchsiaMeetingRoomText2, FuchsiaMeetingRoomText3
 
 FuchsiaMeetingRoomText1: ; 0x756ed
     TX_FAR _FuchsiaMeetingRoomText1
@@ -23619,7 +23697,9 @@ Lab1_h: ; 0x75b80 to 0x75b8c (12 bytes) (id=167)
 
     dw $5bb3 ; objects
 
-INCBIN "baserom.gbc",$75b8c,$75b9a - $75b8c
+INCBIN "baserom.gbc",$75b8c,$75b90 - $75b8c
+Lab1Texts: ; 0x75b90
+    dw Lab1Text1, Lab1Text2, Lab1Text3, Lab1Text4, Lab1Text5
 
 Lab1Text1: ; 0x75b9a
     TX_FAR _Lab1Text1
@@ -23874,7 +23954,9 @@ CopycatsHouseF1_h: ; 0x75eb7 to 0x75ec3 (12 bytes) (id=175)
 
     dw $5ee3 ; objects
 
-INCBIN "baserom.gbc",$75ec3,$75ecc - $75ec3
+INCBIN "baserom.gbc",$75ec3,$75ec6 - $75ec3
+CopycatsHouseF1Texts: ; 0x75ec6
+    dw CopycatsHouseF1Text1, CopycatsHouseF1Text2, CopycatsHouseF1Text3
 
 CopycatsHouseF1Text1: ; 0x75ecc
     TX_FAR _CopycatsHouseF1Text1

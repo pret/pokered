@@ -174,7 +174,7 @@ def insert_texts_label(map_id):
     diff = generate_diff_insert(line_number, newlines)
     print "working on map_id=" + str(map_id) + " texts_pointer=" + hex(texts_pointer)
     print diff
-    #apply_diff(diff)
+    apply_diff(diff)
 
 #untested as of 2012-01-07
 def insert_all_texts_labels():
@@ -305,7 +305,7 @@ if __name__ == "__main__":
     #            texts_label_pretty_printer(map_id)
     
     #insert_texts_label(240)
-    #insert_all_texts_label()
+    insert_all_texts_labels()
 
     #insert_text_label_tx_far(240, 1)
-    insert_all_text_labels()
+    #insert_all_text_labels()
