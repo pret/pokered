@@ -1003,7 +1003,32 @@ MartInventories: ; 2442
 	db $FE,7,ULTRA_BALL,GREAT_BALL,FULL_RESTORE,MAX_POTION,FULL_HEAL
 	db REVIVE,MAX_REPEL,$FF
 
-INCBIN "baserom.gbc",$24D6,$2FCF - $24D6
+INCBIN "baserom.gbc",$24D6,$2F9E - $24D6
+GetMonsterName: ; 2F9E
+	push hl
+	ld a,[$ffb8]
+	push af
+	ld a,BANK(MonsterNames) ; 07
+	ld [$ffb8],a
+	ld [$2000],a
+	ld a,[$d11e]
+	dec a
+	ld hl,MonsterNames ; 421E
+	ld c,10
+	ld b,0
+	call AddNTimes
+	ld de,$cd6d
+	push de
+	ld bc,10
+	call CopyData
+	ld hl,$cd77
+	ld [hl],$50
+	pop de
+	pop af
+	ld [$ffb8],a
+	ld [$2000],a
+	pop hl
+	ret
 
 GetItemName: ; 2FCF
 ; given an item ID at [$D11E], store the name of the item into a string
@@ -1247,7 +1272,7 @@ GetName: ; 376B
 	dec a
 	jr nz,.otherEntries\@
 	;1 = MON_NAMES
-	call $2f9e; GetMonName
+	call GetMonsterName
 	ld hl,11
 	add hl,de
 	ld e,l
