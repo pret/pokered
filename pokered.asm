@@ -1090,7 +1090,7 @@ HiddenPrefix:
 
 INCBIN "baserom.gbc",$3040,$3493 - $3040
 
-Function3493: ; 3493
+CheckBagItemExist: ; $3493: ; 3493
 ; XXX what does this do
 ; related to Pokémon Tower and ghosts
 	ld a,$1C
@@ -12146,7 +12146,7 @@ Function583A: ; 583A
 	cp a,$95 ; Pokémon Tower
 	jr nc,.next\@
 	ld b,SILPH_SCOPE
-	call Function3493
+	call CheckBagItemExist ; $3493
 	ret z
 .next\@
 	ld a,1
