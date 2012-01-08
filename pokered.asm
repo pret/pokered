@@ -1091,8 +1091,9 @@ HiddenPrefix:
 INCBIN "baserom.gbc",$3040,$3493 - $3040
 
 CheckBagItemExist: ; $3493: ; 3493
-; XXX what does this do
-; related to Pokémon Tower and ghosts
+; given an item_id in b
+; set zero flag if item isn't in player's bag
+; else reset zero flag
 	ld a,$1C
 	call Predef
 	ld a,b
