@@ -241,8 +241,8 @@ MapHeaderPointers: ; $01AE
 	dw CeladonMart2_h
 	dw CeladonMart3_h
 	dw CeladonMart4_h
-	dw CeladonMart5_h
-	dw CeladonMart6_h
+	dw CeladonMartRoof_h
+	dw CeladonMartElevator_h
 	dw CeladonMansion1_h
 	dw CeladonMansion2_h
 	dw CeladonMansion3_h
@@ -251,7 +251,7 @@ MapHeaderPointers: ; $01AE
 	dw CeladonPokecenter_h
 	dw CeladonGym_h
 	dw CeladonGameCorner_h
-	dw CeladonHouse_h
+	dw CeladonMart5_h
 	dw CeladonPrizeRoom_h
 	dw CeladonDiner_h
 	dw CeladonHouse2_h
@@ -2383,8 +2383,8 @@ MapHeaderBanks: ; 423D
 	db BANK(CeladonMart2_h)
 	db BANK(CeladonMart3_h)
 	db BANK(CeladonMart4_h)
-	db BANK(CeladonMart5_h)
-	db BANK(CeladonMart6_h)
+	db BANK(CeladonMartRoof_h)
+	db BANK(CeladonMartElevator_h)
 	db BANK(CeladonMansion1_h)
 	db BANK(CeladonMansion2_h)
 	db BANK(CeladonMansion3_h)
@@ -2393,7 +2393,7 @@ MapHeaderBanks: ; 423D
 	db BANK(CeladonPokecenter_h)
 	db BANK(CeladonGym_h)
 	db BANK(CeladonGameCorner_h)
-	db BANK(CeladonHouse_h)
+	db BANK(CeladonMart5_h)
 	db BANK(CeladonPrizeRoom_h)
 	db BANK(CeladonDiner_h)
 	db BANK(CeladonHouse2_h)
@@ -5019,7 +5019,7 @@ CeladonCityObject: ; 0x18022 (size=189)
     db $9, $29, $0, CELADON_POKECENTER
     db $1b, $c, $0, CELADON_GYM
     db $13, $1c, $0, GAME_CORNER
-    db $13, $27, $0, CELADON_HOUSE
+    db $13, $27, $0, CELADON_MART_5
     db $13, $21, $0, CELADONPRIZE_ROOM
     db $1b, $1f, $0, CELADON_DINER
     db $1b, $23, $0, CELADON_HOUSE_2
@@ -5056,7 +5056,7 @@ CeladonCityObject: ; 0x18022 (size=189)
     EVENT_DISP $19, $9, $29 ; CELADON_POKECENTER
     EVENT_DISP $19, $1b, $c ; CELADON_GYM
     EVENT_DISP $19, $13, $1c ; GAME_CORNER
-    EVENT_DISP $19, $13, $27 ; CELADON_HOUSE
+    EVENT_DISP $19, $13, $27 ; CELADON_MART_5
     EVENT_DISP $19, $13, $21 ; CELADONPRIZE_ROOM
     EVENT_DISP $19, $1b, $1f ; CELADON_DINER
     EVENT_DISP $19, $1b, $23 ; CELADON_HOUSE_2
@@ -16150,7 +16150,7 @@ CeladonMart3Object: ; 0x482c4 (size=94)
     db $3 ; warps
     db $1, $c, $0, CELADON_MART_4
     db $1, $10, $1, CELADON_MART_2
-    db $1, $1, $0, CELADON_MART_6
+    db $1, $1, $0, CELADON_MART_ELEVATOR
 
     db $c ; signs
     db $4, $2, $6 ; CeladonMart3Text6
@@ -16176,7 +16176,7 @@ CeladonMart3Object: ; 0x482c4 (size=94)
     ; warp-to
     EVENT_DISP $a, $1, $c ; CELADON_MART_4
     EVENT_DISP $a, $1, $10 ; CELADON_MART_2
-    EVENT_DISP $a, $1, $1 ; CELADON_MART_6
+    EVENT_DISP $a, $1, $1 ; CELADON_MART_ELEVATOR
 
 
 CeladonMart3Blocks: ; 40
@@ -16212,8 +16212,8 @@ CeladonMart4Object: ; 0x48370 (size=49)
 
     db $3 ; warps
     db $1, $c, $0, CELADON_MART_3
-    db $1, $10, $1, CELADON_HOUSE
-    db $1, $1, $0, CELADON_MART_6
+    db $1, $10, $1, CELADON_MART_5
+    db $1, $1, $0, CELADON_MART_ELEVATOR
 
     db $1 ; signs
     db $1, $e, $4 ; CeladonMart4Text4
@@ -16225,66 +16225,65 @@ CeladonMart4Object: ; 0x48370 (size=49)
 
     ; warp-to
     EVENT_DISP $a, $1, $c ; CELADON_MART_3
-    EVENT_DISP $a, $1, $10 ; CELADON_HOUSE
-    EVENT_DISP $a, $1, $1 ; CELADON_MART_6
+    EVENT_DISP $a, $1, $10 ; CELADON_MART_5
+    EVENT_DISP $a, $1, $1 ; CELADON_MART_ELEVATOR
 
 
 CeladonMart4Blocks: ; 40
     INCBIN "maps/celadonmart4.blk"
 
-CeladonMart5_h: ; 0x483c9 to 0x483d5 (12 bytes) (bank=12) (id=126)
+CeladonMartRoof_h: ; 0x483c9 to 0x483d5 (12 bytes) (bank=12) (id=126)
     db $12 ; tileset
     db $04, $0a ; dimensions (y, x)
-    dw CeladonMart5Blocks, $455b, $43d5 ; blocks, texts, scripts
+    dw CeladonMartRoofBlocks, $455b, $43d5 ; blocks, texts, scripts
     db $00 ; connections
 
     dw $45a8 ; objects
 
 INCBIN "baserom.gbc",$483d5,$48567 - $483d5
 
-CeladonMart5Text1: ; 0x48567
-    TX_FAR _CeladonMart5Text1
+CeladonMartRoofText1: ; 0x48567
+    TX_FAR _CeladonMartRoofText1
     db $50
 
 INCBIN "baserom.gbc",$4856c,$485a3 - $4856c
 
-CeladonMart5Text6: ; 0x485a3
-    TX_FAR _CeladonMart5Text6
+CeladonMartRoofText6: ; 0x485a3
+    TX_FAR _CeladonMartRoofText6
     db $50
 
-CeladonMart5Object: ; 0x485a8 (size=36)
+CeladonMartRoofObject: ; 0x485a8 (size=36)
     db $42 ; border tile
 
     db $1 ; warps
-    db $2, $f, $0, CELADON_HOUSE
+    db $2, $f, $0, CELADON_MART_5
 
     db $4 ; signs
-    db $1, $a, $3 ; CeladonMart5Text3
-    db $1, $b, $4 ; CeladonMart5Text4
-    db $2, $c, $5 ; CeladonMart5Text5
-    db $2, $d, $6 ; CeladonMart5Text6
+    db $1, $a, $3 ; CeladonMartRoofText3
+    db $1, $b, $4 ; CeladonMartRoofText4
+    db $2, $c, $5 ; CeladonMartRoofText5
+    db $2, $d, $6 ; CeladonMartRoofText6
 
     db $2 ; people
     db SPRITE_BLACK_HAIR_BOY_2, $4 + 4, $a + 4, $ff, $d2, $1 ; person
     db SPRITE_LITTLE_GIRL, $5 + 4, $5 + 4, $fe, $0, $2 ; person
 
     ; warp-to
-    EVENT_DISP $a, $2, $f ; CELADON_HOUSE
+    EVENT_DISP $a, $2, $f ; CELADON_MART_5
 
-
-CeladonMart5Blocks: ; 40
+CeladonMartRoofBlocks: ; 40
     INCBIN "maps/celadonmart5.blk"
 
-CeladonMart6_h: ; 0x485f4 to 0x48600 (12 bytes) (bank=12) (id=127)
+CeladonMartElevator_h: ; 0x485f4 to 0x48600 (12 bytes) (bank=12) (id=127)
     db $12 ; tileset
     db $02, $02 ; dimensions (y, x)
-    dw CeladonMart6Blocks, $465c, $4600 ; blocks, texts, scripts
+    dw CeladonMartElevatorBlocks, $465c, $4600 ; blocks, texts, scripts
     db $00 ; connections
 
     dw $466d ; objects
 
 INCBIN "baserom.gbc",$48600,$4866d - $48600
-CeladonMart6Object: ; 0x4866d (size=23)
+CeladonMartElevatorObject: ; 0x4866d (size=23)
     db $f ; border tile
 
     db $2 ; warps
@@ -16292,7 +16291,7 @@ CeladonMart6Object: ; 0x4866d (size=23)
     db $3, $2, $5, CELADON_MART_1
 
     db $1 ; signs
-    db $0, $3, $1 ; CeladonMart6Text1
+    db $0, $3, $1 ; CeladonMartElevatorText1
 
     db $0 ; people
 
@@ -16301,7 +16300,7 @@ CeladonMart6Object: ; 0x4866d (size=23)
     EVENT_DISP $2, $3, $2 ; CELADON_MART_1
 
 
-CeladonMart6Blocks: ; 4
+CeladonMartElevatorBlocks: ; 4
     INCBIN "maps/celadonmart6.blk"
 
 CeladonMansion1_h: ; 0x48688 to 0x48694 (12 bytes) (bank=12) (id=128)
@@ -16669,41 +16668,41 @@ CeladonGameCornerObject: ; 0x48fa0 (size=99)
 CeladonGameCornerBlocks: ; 90
     INCBIN "maps/celadongamecorner.blk"
 
-CeladonHouse_h: ; 0x4905d to 0x49069 (12 bytes) (bank=12) (id=136)
+CeladonMart5_h: ; 0x4905d to 0x49069 (12 bytes) (bank=12) (id=136)
     db $12 ; tileset
     db $04, $0a ; dimensions (y, x)
-    dw CeladonHouseBlocks, $506c, $5069 ; blocks, texts, scripts
+    dw CeladonMart5Blocks, $506c, $5069 ; blocks, texts, scripts
     db $00 ; connections
 
     dw $5085 ; objects
 
 INCBIN "baserom.gbc",$49069,$49076 - $49069
 
-CeladonHouseText1: ; 0x49076
-    TX_FAR _CeladonHouseText1
+CeladonMart5Text1: ; 0x49076
+    TX_FAR _CeladonMart5Text1
     db $50
 
 
-CeladonHouseText2: ; 0x4907b
-    TX_FAR _CeladonHouseText2
+CeladonMart5Text2: ; 0x4907b
+    TX_FAR _CeladonMart5Text2
     db $50
 
 
-CeladonHouseText5: ; 0x49080
-    TX_FAR _CeladonHouseText5
+CeladonMart5Text5: ; 0x49080
+    TX_FAR _CeladonMart5Text5
     db $50
 
 INCBIN "baserom.gbc",$49085,$0
-CeladonHouseObject: ; 0x49085 (size=55)
+CeladonMart5Object: ; 0x49085 (size=55)
     db $f ; border tile
 
     db $3 ; warps
-    db $1, $c, $0, CELADON_MART_5
+    db $1, $c, $0, CELADON_MART_ROOF
     db $1, $10, $1, CELADON_MART_4
-    db $1, $1, $0, CELADON_MART_6
+    db $1, $1, $0, CELADON_MART_ELEVATOR
 
     db $1 ; signs
-    db $1, $e, $5 ; CeladonHouseText5
+    db $1, $e, $5 ; CeladonMart5Text5
 
     db $4 ; people
     db SPRITE_GENTLEMAN, $5 + 4, $e + 4, $fe, $1, $1 ; person
@@ -16712,11 +16711,11 @@ CeladonHouseObject: ; 0x49085 (size=55)
     db SPRITE_MART_GUY, $3 + 4, $6 + 4, $ff, $d0, $4 ; person
 
     ; warp-to
-    EVENT_DISP $a, $1, $c ; CELADON_MART_5
+    EVENT_DISP $a, $1, $c ; CELADON_MART_ROOF
     EVENT_DISP $a, $1, $10 ; CELADON_MART_4
-    EVENT_DISP $a, $1, $1 ; CELADON_MART_6
+    EVENT_DISP $a, $1, $1 ; CELADON_MART_ELEVATOR
 
-CeladonHouseBlocks: ; 40
+CeladonMart5Blocks: ; 40
     INCBIN "maps/celadonhouse.blk"
 
 CeladonPrizeRoom_h: ; 0x490e4 to 0x490f0 (12 bytes) (bank=12) (id=137)
@@ -19261,13 +19260,14 @@ CeladonMart2Text5: ; 0x5610c
     db $50
 
 INCBIN "baserom.gbc",$56111,$0
+
 CeladonMart2Object: ; 0x56111 (size=55)
     db $f ; border tile
 
     db $3 ; warps
     db $1, $c, $4, CELADON_MART_1
     db $1, $10, $1, CELADON_MART_3
-    db $1, $1, $0, CELADON_MART_6
+    db $1, $1, $0, CELADON_MART_ELEVATOR
 
     db $1 ; signs
     db $1, $e, $5 ; CeladonMart2Text5
@@ -19281,8 +19281,7 @@ CeladonMart2Object: ; 0x56111 (size=55)
     ; warp-to
     EVENT_DISP $a, $1, $c ; CELADON_MART_1
     EVENT_DISP $a, $1, $10 ; CELADON_MART_3
-    EVENT_DISP $a, $1, $1 ; CELADON_MART_6
-
+    EVENT_DISP $a, $1, $1 ; CELADON_MART_ELEVATOR
 
 CeladonMart2Blocks: ; 40
     INCBIN "maps/celadonmart2.blk"
@@ -21651,7 +21650,7 @@ CeladonMart1Object: ; 0x60f9e (size=64)
     db $7, $10, $1, $ff
     db $7, $11, $1, $ff
     db $1, $c, $0, CELADON_MART_2
-    db $1, $1, $0, CELADON_MART_6
+    db $1, $1, $0, CELADON_MART_ELEVATOR
 
     db $2 ; signs
     db $4, $b, $2 ; CeladonMart1Text2
@@ -21666,7 +21665,7 @@ CeladonMart1Object: ; 0x60f9e (size=64)
     EVENT_DISP $a, $7, $10
     EVENT_DISP $a, $7, $11
     EVENT_DISP $a, $1, $c ; CELADON_MART_2
-    EVENT_DISP $a, $1, $1 ; CELADON_MART_6
+    EVENT_DISP $a, $1, $1 ; CELADON_MART_ELEVATOR
 
 
 CeladonMart1Blocks: ; 40
@@ -26354,7 +26353,7 @@ _CeladonMart4Text4: ; 0x9cb56
 
 INCBIN "baserom.gbc",$9cbb5,$9cd97 - $9cbb5
 
-_CeladonMart5Text1: ; 0x9cd97
+_CeladonMartRoofText1: ; 0x9cd97
     db $0, "My sister is a", $4f
     db "trainer, believe", $55
     db "it or not.", $51
@@ -26364,7 +26363,7 @@ _CeladonMart5Text1: ; 0x9cd97
 
 INCBIN "baserom.gbc",$9cdee,$9ce50 - $9cdee
 
-_CeladonMart5Text6: ; 0x9ce50
+_CeladonMartRoofText6: ; 0x9ce50
     db $0, "ROOFTOP SQUARE:", $4f
     db "VENDING MACHINES", $57
 
@@ -26494,7 +26493,7 @@ _CeladonGameCornerText8: ; 0x9dc06
 
 INCBIN "baserom.gbc",$9dc33,$9ddff - $9dc33
 
-_CeladonHouseText1: ; 0x9ddff
+_CeladonMart5Text1: ; 0x9ddff
     db $0, "#MON ability", $4f
     db "enhancers can be", $55
     db "bought only here.", $51
@@ -26504,7 +26503,7 @@ _CeladonHouseText1: ; 0x9ddff
     db "Use CARBOS to", $4f
     db "increase SPEED.", $57
 
-_CeladonHouseText2: ; 0x9de79
+_CeladonMart5Text2: ; 0x9de79
     db $0, "I'm here for", $4f
     db "#MON ability", $55
     db "enhancers.", $51
@@ -26513,7 +26512,7 @@ _CeladonHouseText2: ; 0x9de79
     db "IRON increases", $4f
     db "DEFENSE!", $57
 
-_CeladonHouseText5: ; 0x9ded6
+_CeladonMart5Text5: ; 0x9ded6
     db $0, "5F: DRUG STORE", $57
 
 _CeladonPrizeRoomText1: ; 0x9dee6
