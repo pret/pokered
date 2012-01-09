@@ -162,7 +162,7 @@ maps = {
          0x88: "Celadon Mart 5",
          0x89: "Celadon Prize Room",
          0x8A: "Celadon Diner",
-         0x8B: "Celadon House (2)",
+         0x8B: "Celadon House",
          0x8C: "Celadon Hotel",
          0x8D: "Lavender Pokecenter",
          0x8E: "Pokemon Tower (1)",

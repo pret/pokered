@@ -5022,8 +5022,8 @@ CeladonCityObject: ; 0x18022 (size=189)
     db $13, $27, $0, CELADON_MART_5
     db $13, $21, $0, CELADONPRIZE_ROOM
     db $1b, $1f, $0, CELADON_DINER
-    db $1b, $23, $0, CELADON_HOUSE_2
-    db $1b, $2b, $0, CELADONHOTEL
+    db $1b, $23, $0, CELADON_HOUSE
+    db $1b, $2b, $0, CELADON_HOTEL
 
     db $9 ; signs
     db $f, $1b, $a ; CeladonCityText10
@@ -5059,8 +5059,8 @@ CeladonCityObject: ; 0x18022 (size=189)
     EVENT_DISP $19, $13, $27 ; CELADON_MART_5
     EVENT_DISP $19, $13, $21 ; CELADONPRIZE_ROOM
     EVENT_DISP $19, $1b, $1f ; CELADON_DINER
-    EVENT_DISP $19, $1b, $23 ; CELADON_HOUSE_2
-    EVENT_DISP $19, $1b, $2b ; CELADONHOTEL
+    EVENT_DISP $19, $1b, $23 ; CELADON_HOUSE
+    EVENT_DISP $19, $1b, $2b ; CELADON_HOTEL
 
 INCBIN "baserom.gbc",$180df,$0
 
