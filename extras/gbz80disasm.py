@@ -586,7 +586,7 @@ def output_bank_opcodes(original_offset, max_byte_count=0x4000):
             opstr = copy(opt_table[temp_maybe][0])
               
             output += spacing + opstr #+ " ; " + hex(offset)
-            output += spacing + "\n"
+            output += "\n"
 
             current_byte_number += 2
             offset += 2
@@ -653,7 +653,7 @@ def output_bank_opcodes(original_offset, max_byte_count=0x4000):
                     
                     opstr = opstr[:opstr.find("?")] + insertion + opstr[opstr.find("?")+1:]
                     output += spacing + opstr #+ " ; " + hex(offset)
-                    output += spacing + "\n"
+                    output += "\n"
 
                     current_byte_number += 2
                     offset += 2
@@ -678,7 +678,7 @@ def output_bank_opcodes(original_offset, max_byte_count=0x4000):
                 
         if is_data and keep_reading:
             output += spacing + "db $" + hex(ord(rom[offset+1]))[2:] #+ " ; " + hex(offset)
-            output += spacing + "\n"
+            output += "\n"
         #else the while loop would have spit out the opcode
 
         #these two are done prior
