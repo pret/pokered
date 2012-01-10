@@ -214,7 +214,7 @@ def reset_incbins():
     isolate_incbins()
     process_incbins()
 
-def apply_diff(diff):
+def apply_diff(diff, try_fixing=True):
     print "... Applying diff."
 
     #write the diff to a file
@@ -233,7 +233,8 @@ def apply_diff(diff):
     try:
         subprocess.check_call("cd ../; make clean; LC_CTYPE=UTF-8 make", shell=True)
     except Exception, exc:
-        os.system("mv ../pokered1.asm ../pokered.asm")
+        if try_fixing:
+            os.system("mv ../pokered1.asm ../pokered.asm")
         return False
 
 if __name__ == "__main__":

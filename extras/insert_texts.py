@@ -357,6 +357,36 @@ def insert_all_08s():
         isolate_incbins()
         process_incbins()
 
+def insert_asm(start_address, label):
+    (text_asm, end_address) = text_asm_pretty_printer(label, start_address, include_08=False)
+    print "end address is: " + hex(end_address)
+
+    #find where to insert the assembly
+    line_number = find_incbin_to_replace_for(start_address)
+    if line_number == None:
+        print "skipping asm because the address is taken"
+        return
+
+    newlines = split_incbin_line_into_three(line_number, start_address, end_address - start_address )
+    
+    newlines = newlines.split("\n")
+    if len(newlines) == 2: index = 0 #replace the 1st line with new content
+    elif len(newlines) == 3: index = 1 #replace the 2nd line with new content
+    
+    newlines[index] = text_asm
+
+    if len(newlines) == 3 and newlines[2][-2:] == "$0":
+        #get rid of the last incbin line if it is only including 0 bytes
+        del newlines[2]
+        #note that this has to be done after adding in the new asm
+    newlines = "\n".join(line for line in newlines)
+
+    newlines = newlines.replace("$x", "$")
+
+    diff = generate_diff_insert(line_number, newlines)
+    print diff
+    result = apply_diff(diff, try_fixing=False)
+
 if __name__ == "__main__":
     #load map headers and object data
     extract_maps.load_rom()
@@ -392,7 +422,9 @@ if __name__ == "__main__":
     #insert_all_text_labels()
 
     #insert_08_asm(83, 1)
-    insert_all_08s()
+    #insert_all_08s()
+
+    insert_asm(0x3e48, "GivePokemon")
 
     print "-- FAILED ATTEMPTS --"
     print str(failed_attempts)

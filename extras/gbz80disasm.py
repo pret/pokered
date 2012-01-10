@@ -694,10 +694,11 @@ def output_bank_opcodes(original_offset, max_byte_count=0x4000):
 
     return (output.lower(), offset)
 
-def text_asm_pretty_printer(label, address_of_08):
+def text_asm_pretty_printer(label, address_of_08, include_08=True):
     """returns (output, end_address)"""
     output = label + ": ; " + hex(address_of_08) + "\n"
-    output += spacing + "db $08 ; asm\n"
+    if include_08:
+        output += spacing + "db $08 ; asm\n"
     results = output_bank_opcodes(address_of_08 + 1)
     output += results[0]
     end_address = results[1]
@@ -711,4 +712,4 @@ if __name__ == "__main__":
 
     #0x18f96 is PalletTownText1
     #0x19B5D is BluesHouseText1
-    print output_bank_opcodes(0x3748)[0]
+    print output_bank_opcodes(0x3e48)[0]
