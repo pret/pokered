@@ -424,7 +424,8 @@ if __name__ == "__main__":
     #insert_08_asm(83, 1)
     #insert_all_08s()
 
-    insert_asm(0x31cc, "LoadTrainerHeader")
+    insert_asm(0x2f9e, "GetMonName")
 
-    print "-- FAILED ATTEMPTS --"
-    print str(failed_attempts)
+    if len(failed_attempts) > 0:
+        print "-- FAILED ATTEMPTS --"
+        print str(failed_attempts)

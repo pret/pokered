@@ -169,6 +169,7 @@ temp_opt_table = [
   [ "LD A, L", 0x7d, 0 ], 
   [ "LD A, [$FF00+C]", 0xf2, 0 ], 
   [ "LD A, [$FF00+x]", 0xf0, 1 ], 
+  #[ "LDH A, [x]", 0xf0, 1 ], #rgbds has trouble with this one?
   [ "LD A, [BC]", 0xa, 0 ], 
   [ "LD A, [DE]", 0x1a, 0 ], 
   [ "LD A, [HL+]", 0x2a, 0 ], 
@@ -221,7 +222,6 @@ temp_opt_table = [
   [ "LD [$FF00+C], A", 0xe2, 0 ], 
   [ "LD [$FF00+x], A", 0xe0, 1 ], 
   [ "LD H, A", 0x67, 0 ], 
-  [ "LDH A, [x]", 0xf0, 1 ], 
   [ "LD H, B", 0x60, 0 ], 
   [ "LD H, C", 0x61, 0 ], 
   [ "LD H, D", 0x62, 0 ], 
@@ -618,8 +618,6 @@ def output_bank_opcodes(original_offset, max_byte_count=0x4000):
                     insertion = "$%.4x" % (number)
                     
                     opstr = opstr[:opstr.find("?")].lower() + insertion + opstr[opstr.find("?")+1:].lower()
-                    output += spacing + opstr #+ " ; " + hex(offset)
-                    output += "\n"
 
                     current_byte_number += 2
                     offset += 2
