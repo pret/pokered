@@ -7287,7 +7287,7 @@ OaksLabText5: ; 0x1d248
     call $3e6d    
     jp $52ed    
 .asm_b28b0 ; 0x1d279
-    ld b, $4
+	ld b,POKE_BALL
     call $3493    
     jr nz, .asm_17c30 ; 0x1d27e
     ld a, [$d7eb]    
@@ -7309,7 +7309,7 @@ OaksLabText5: ; 0x1d248
     call $3c49    
     jr .asm_0f042 ; 0x1d2a7
 .asm_76269 ; 0x1d2a9
-    ld b, $46
+	ld b,OAK_S_PARCEL
     call $3493    
     jr nz, .asm_a8fcf ; 0x1d2ae
     ld hl, $52fa    
@@ -7510,7 +7510,7 @@ ViridianHouseText3: ; 0x1d59f
     db $08 ; asm
     ld hl, $55b1    
     call $3c49    
-    ld a, $5
+	ld a,SPEAROW
     call $13d0    
     call $3748    
     jp $24d7    
@@ -7744,7 +7744,7 @@ BikeShopText1: ; 0x1d745
     call $3c49    
     jp $57f5    
 .asm_260d4 ; 0x1d756
-    ld b, $2d
+	ld b,BIKE_VOUCHER
     call $3493    
     jr z, .asm_41190 ; 0x1d75b
     ld hl, $581f    
@@ -8636,7 +8636,7 @@ Route16HouseText2: ; 0x1e640
     db $08 ; asm
     ld hl, $6652    
     call $3c49    
-    ld a, $23
+	ld a,FEAROW
     call $13d0    
     call $3748    
     jp $24d7    
@@ -16351,7 +16351,7 @@ RocketHideoutElevator_h: ; 0x45704 to 0x45710 (12 bytes) (bank=11) (id=203)
 INCBIN "baserom.gbc",$45710,$4576d - $45710
 RocketHideoutElevatorText1: ; 0x4576d
     db $08 ; asm
-    ld b, $4a
+	ld b,LIFT_KEY
     call $3493    
     jr z, .asm_8d8f0 ; 0x45773
     call $5741    
@@ -18006,7 +18006,7 @@ CeladonGameCornerText2: ; 0x48ca9
     ld a, [$cc26]    
     and a
     jr nz, .asm_c650b ; 0x48cba
-    ld b, $45
+	ld b,COIN_CASE
     call $3493    
     jr z, .asm_ed086 ; 0x48cc1
     call $4f95    
@@ -18074,7 +18074,7 @@ CeladonGameCornerText5: ; 0x48d4a
     jr nz, .asm_d0957 ; 0x48d50
     ld hl, $4d9c    
     call $3c49    
-    ld b, $45
+	ld b,COIN_CASE
     call $3493    
     jr z, .asm_5aef9 ; 0x48d5d
     call $4f95    
@@ -18137,7 +18137,7 @@ CeladonGameCornerText9: ; 0x48dd9
     jr nz, .asm_ed8bc ; 0x48ddf
     ld hl, $4e26    
     call $3c49    
-    ld b, $45
+	ld b,COIN_CASE
     call $3493    
     jr z, .asm_df794 ; 0x48dec
     call $4f95    
@@ -18176,7 +18176,7 @@ CeladonGameCornerText10: ; 0x48e3b
     jr nz, .asm_ff080 ; 0x48e41
     ld hl, $4e88    
     call $3c49    
-    ld b, $45
+	ld b,COIN_CASE
     call $3493    
     jr z, .asm_4fb0c ; 0x48e4e
     call $4f95    
@@ -23299,7 +23299,7 @@ FanClubText4: ; 0x59c05
     db $08 ; asm
     ld hl, $5c17    
     call $3c49    
-    ld a, $3a
+	ld a,SEEL
     call $13d0    
     call $3748    
     jp $24d7    
@@ -24490,7 +24490,7 @@ CopycatsHouseF2Text1: ; 0x5cc82
     ld [$cc3c], a    
     ld hl, $4cd4    
     call $3c49    
-    ld b, $33
+	ld b,POKE_DOLL
     call $3493    
     jr z, .asm_62ecd ; 0x5cc9a
     ld hl, $4cd9    
@@ -28163,7 +28163,7 @@ FuchsiaHouse2Text1: ; 0x750c2
     ld a, [$d78e]    
     bit 0, a    
     jr nz, .asm_58feb ; 0x750c8
-    ld b, $40
+	ld b,GOLD_TEETH
     call $3493    
     jr nz, .asm_3f30f ; 0x750cf
     ld a, [$d78e]    
