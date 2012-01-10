@@ -25340,7 +25340,7 @@ SilphCo9Text1: ; 0x5d8b8
     ld a, $7
     call $3e6d
     call $20d8
-    call $3dd7
+    call Delay3
     call $20f6
     ld hl, $58ea
     call PrintText
@@ -27848,7 +27848,7 @@ ViridianGymText1: ; 0x74a69
     ld a, $11
     call $3e6d
     call $2429
-    call $3dd7
+    call Delay3
     call $20d1
     jr .asm_6dff7 ; 0x74a9e
 .asm_6de66 ; 0x74aa0
