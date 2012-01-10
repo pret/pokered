@@ -1052,7 +1052,7 @@ ViridianCityText12: ; 0x24ef
 Route2Text2: ; 0x24f4
     db $08 ; asm
     ld a, $5c
-    call $3e6d
+    call Predef
     jp $24d7
 
 INCBIN "baserom.gbc",$24fd,$2f9e - $24fd
@@ -1218,7 +1218,7 @@ LoadTrainerHeader: ; 0x31cc
     xor a
     ld [$cd50], a
     ld a, $4c
-    call $3e6d
+    call Predef
     ld a, $f0
     ld [$cd6b], a
     xor a
@@ -1698,6 +1698,7 @@ GenRandom: ; 3E5C
 
 Predef: ; 3E6D
 ; runs a predefined ASM command, where the command ID is read from $D0B7
+; $3E6D grabs the ath pointer from PredefPointers and executes it
 
 	ld [$CC4E],a ; save the predef routine's ID for later
 
@@ -6220,7 +6221,7 @@ VermilionCityText3: ; 0x198b1
     call PrintText
     ld b, $3f
     ld a, $1c
-    call $3e6d
+    call Predef
     ld a, b
     and a
     jr nz, .asm_0419b ; 0x198df
@@ -6635,7 +6636,7 @@ VermilionHouse3Text1: ; 0x19c17
     ld a, $4
     ld [$cd3d], a
     ld a, $54
-    call $3e6d
+    call Predef
     jp $24d7
 
 VermilionHouse3Object: ; 0x19c25 (size=26)
@@ -7409,7 +7410,7 @@ OaksLabText5: ; 0x1d248
     ld a, $1
     ld [$cc3c], a
     ld a, $56
-    call $3e6d
+    call Predef
     jp $52ed
 .asm_b28b0 ; 0x1d279
 	ld b,POKE_BALL
@@ -7765,7 +7766,7 @@ CeruleanHouseTrashedText1: ; 0x1d68f
     db $08 ; asm
     ld b, $e4
     ld a, $1c
-    call $3e6d
+    call Predef
     and b
     jr z, .asm_f8734 ; 0x1d698
     ld hl, $56b0
@@ -7829,7 +7830,7 @@ CeruleanHouse2Text2: ; 0x1d702
     ld a, $6
     ld [$cd3d], a
     ld a, $54
-    call $3e6d
+    call Predef
     jp $24d7
 
 INCBIN "baserom.gbc",$1d710,$0
@@ -8231,7 +8232,7 @@ CeladonMansion5Text2: ; 0x1dd46
     ld a, $45
     ld [$cc4d], a
     ld a, $11
-    call $3e6d
+    call Predef
 .asm_24365 ; 0x1dd59
     jp $24d7
 
@@ -8454,7 +8455,7 @@ Route2HouseText2: ; 0x1def9
     ld a, $1
     ld [$cd3d], a
     ld a, $54
-    call $3e6d
+    call Predef
     jp $24d7
 
 INCBIN "baserom.gbc",$1df07,$0
@@ -8844,11 +8845,11 @@ BillsHouseText2: ; 0x1e874
     ld a, $7
     ld [$cc4d], a
     ld a, $15
-    call $3e6d
+    call Predef
     ld a, $9
     ld [$cc4d], a
     ld a, $11
-    call $3e6d
+    call Predef
 .asm_5491f ; 0x1e8a9
     ld hl, $68cb
     call PrintText
@@ -16482,7 +16483,7 @@ RocketHideoutElevatorText1: ; 0x4576d
     call $5741
     ld hl, $5759
     ld a, $61
-    call $3e6d
+    call Predef
     jr .asm_46c43 ; 0x45780
 .asm_8d8f0 ; 0x45782
     ld hl, $578b
@@ -16525,7 +16526,7 @@ SilphCoElevatorText1: ; 0x45835
     call $57f1
     ld hl, $5811
     ld a, $61
-    call $3e6d
+    call Predef
     jp $24d7
 
 SilphCoElevatorObject: ; 0x45844 (size=23)
@@ -17690,7 +17691,7 @@ CeladonMartElevatorText1: ; 0x4865e
     call $4631
     ld hl, $464a
     ld a, $61
-    call $3e6d
+    call Predef
     jp $24d7
 
 CeladonMartElevatorObject: ; 0x4866d (size=23)
@@ -18155,7 +18156,7 @@ CeladonGameCornerText2: ; 0x48ca9
     ld de, $d349
     ld c, $3
     ld a, $c
-    call $3e6d
+    call Predef
     xor a
     ldh [$9f], a
     ldh [$a0], a
@@ -18165,7 +18166,7 @@ CeladonGameCornerText2: ; 0x48ca9
     ld hl, $ffa1
     ld c, $2
     ld a, $b
-    call $3e6d
+    call Predef
     call $4f1e
     ld hl, $4d27
     jr .asm_e2afd ; 0x48d0d
@@ -18213,7 +18214,7 @@ CeladonGameCornerText5: ; 0x48d4a
     ld hl, $ffa1
     ld c, $2
     ld a, $b
-    call $3e6d
+    call Predef
     ld hl, $d77e
     set 2, [hl]
     ld a, $1
@@ -18276,7 +18277,7 @@ CeladonGameCornerText9: ; 0x48dd9
     ld hl, $ffa1
     ld c, $2
     ld a, $b
-    call $3e6d
+    call Predef
     ld hl, $d77e
     set 4, [hl]
     ld hl, $4e2b
@@ -18315,7 +18316,7 @@ CeladonGameCornerText10: ; 0x48e3b
     ld hl, $ffa1
     ld c, $2
     ld a, $b
-    call $3e6d
+    call Predef
     ld hl, $d77e
     set 3, [hl]
     ld hl, $4e8d
@@ -18372,7 +18373,7 @@ CeladonGameCornerText12: ; 0x48edd
     ld [$d09f], a
     ld bc, $0208
     ld a, $17
-    call $3e6d
+    call Predef
     jp $24d7
 
 INCBIN "baserom.gbc",$48f09,$97
@@ -18735,7 +18736,7 @@ MtMoonPokecenterText4: ; 0x492ec
     ld de, $d349
     ld c, $3
     ld a, $c
-    call $3e6d
+    call Predef
     ld a, $13
     ld [$d125], a
     call $30e8
@@ -18876,7 +18877,7 @@ Route11GateUpstairsText1: ; 0x4945f
     xor a
     ld [$cd3d], a
     ld a, $54
-    call $3e6d
+    call Predef
     jp $24d7
 
 INCBIN "baserom.gbc",$4946c,$494a8 - $4946c
@@ -19241,7 +19242,7 @@ Route18GateHeaderText1: ; 0x4997e
     ld a, $5
     ld [$cd3d], a
     ld a, $54
-    call $3e6d
+    call Predef
     jp $24d7
 
 INCBIN "baserom.gbc",$4998c,$18
@@ -19441,7 +19442,7 @@ MtMoon3Text6: ; 0x49ee9
     ld a, $6d
     ld [$cc4d], a
     ld a, $11
-    call $3e6d
+    call Predef
     ld hl, $d7f6
     set 6, [hl]
     ld a, $4
@@ -19468,7 +19469,7 @@ MtMoon3Text7: ; 0x49f29
     ld a, $6e
     ld [$cc4d], a
     ld a, $11
-    call $3e6d
+    call Predef
     ld hl, $d7f6
     set 7, [hl]
     ld a, $4
@@ -23900,7 +23901,7 @@ MuseumF1Text3: ; 0x5c256
     ld a, $34
     ld [$cc4d], a
     ld a, $11
-    call $3e6d
+    call Predef
     ld hl, $4293
     jr .asm_52e0f ; 0x5c27e
 .asm_91ebf ; 0x5c280
@@ -24786,7 +24787,7 @@ FightingDojoText6: ; 0x5cf06
     ld a, $4a
     ld [$cc4d], a
     ld a, $11
-    call $3e6d
+    call Predef
     ld hl, $d7b1
     set 6, [hl]
     set 0, [hl]
@@ -24822,7 +24823,7 @@ FightingDojoText7: ; 0x5cf4e
     ld a, $4b
     ld [$cc4d], a
     ld a, $11
-    call $3e6d
+    call Predef
 .asm_f1f47 ; 0x5cf8e
     jp $24d7
 
@@ -25228,7 +25229,7 @@ Route2GateText1: ; 0x5d5db
     ld bc, $000d
     call $00b5
     ld a, $62
-    call $3e6d
+    call Predef
     ldh a, [$db]
     cp $1
     jr nz, .asm_ad646 ; 0x5d606
@@ -25326,7 +25327,7 @@ UndergroundTunnelEntranceRoute5Text1: ; 0x5d6b2
     ld a, $9
     ld [$cd3d], a
     ld a, $54
-    call $3e6d
+    call Predef
     ld hl, $56af
     ret
 
@@ -25440,7 +25441,7 @@ SilphCo9Text1: ; 0x5d8b8
     ld hl, $58e5
     call PrintText
     ld a, $7
-    call $3e6d
+    call Predef
     call $20d8
     call Delay3
     call $20f6
@@ -25967,15 +25968,15 @@ PokemonTower7Text4: ; 0x60e8a
     ld a, $44
     ld [$cc4d], a
     ld a, $15
-    call $3e6d
+    call Predef
     ld a, $17
     ld [$cc4d], a
     ld a, $11
-    call $3e6d
+    call Predef
     ld a, $18
     ld [$cc4d], a
     ld a, $15
-    call $3e6d
+    call Predef
     ld a, $4
     ld [$d630], a
     ld [$da39], a
@@ -27948,7 +27949,7 @@ ViridianGymText1: ; 0x74a69
     ld a, $32
     ld [$cc4d], a
     ld a, $11
-    call $3e6d
+    call Predef
     call $2429
     call Delay3
     call $20d1
@@ -28870,7 +28871,7 @@ Lab2Text2: ; 0x75c2f
     ld [$cd3d], a
 .asm_eeed7 ; 0x75c3d
     ld a, $54
-    call $3e6d
+    call Predef
     jp $24d7
 
 INCBIN "baserom.gbc",$75c45,$0
@@ -28985,7 +28986,7 @@ Lab4Text2: ; 0x75dda
     ld a, $3
     ld [$cd3d], a
     ld a, $54
-    call $3e6d
+    call Predef
     jp $24d7
 
 INCBIN "baserom.gbc",$75de8,$8

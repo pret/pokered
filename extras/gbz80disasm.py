@@ -550,6 +550,7 @@ asm_commands = {
     "3dd7": "Delay3",
     "3e2e": "GiveItem",
     "2f9e": "GetMonName",
+    "3e6d": "Predef", #library of pre-defined asm routines
 }
 
 def random_asm_label():
