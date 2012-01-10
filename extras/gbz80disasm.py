@@ -255,7 +255,7 @@ temp_opt_table = [
   [ "LD L, [HL]", 0x6e, 0 ], 
   [ "LD L, L", 0x6d, 0 ], 
   [ "LD L, x", 0x2e, 1 ], 
-  [ "LD PC, HL", 0xe9, 0 ], 
+#  [ "LD PC, HL", 0xe9, 0 ], #prefer jp [hl]
   [ "LD SP, HL", 0xf9, 0 ], 
   [ "LD BC, ?", 0x1, 2 ], 
   [ "LD DE, ?", 0x11, 2 ], 
