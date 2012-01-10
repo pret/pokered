@@ -7306,7 +7306,7 @@ OaksLabText5: ; 0x1d248
     call $3c49    
     jr .asm_0f042 ; 0x1d2a7
 .asm_76269 ; 0x1d2a9
-	ld b,OAK_S_PARCEL
+	ld b,OAKS_PARCEL
     call $3493    
     jr nz, .asm_a8fcf ; 0x1d2ae
     ld hl, $52fa    
