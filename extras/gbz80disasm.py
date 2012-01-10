@@ -538,6 +538,17 @@ end_08_scripts_with = [
 ]
 relative_jumps = [0x38, 0x30, 0x20, 0x28, 0x18]
 
+#TODO: replace call and a pointer with call and a label
+call_commands = [0xdc, 0xd4, 0xc4, 0xcc, 0xcd]
+
+asm_commands = {
+    "3c49": "PrintText",
+    "35d6": "Bankswitch",
+    "3927": "AddPokemonToParty",
+    "3e48": "GivePokemon",
+    "3dd7": "Delay3",
+}
+
 def random_asm_label():
     return ".ASM_" + random_hash()
 
@@ -577,7 +588,7 @@ def output_bank_opcodes(original_offset, max_byte_count=0x4000):
             byte_labels[offset] = {}
             byte_labels[offset]["name"] = line_label
             byte_labels[offset]["usage"] = 0
-        output += line_label + " ; " + hex(offset) + "\n"
+        output += line_label.lower() + " ; " + hex(offset) + "\n"
 
         #find out if there's a two byte key like this
         temp_maybe = maybe_byte
@@ -585,7 +596,7 @@ def output_bank_opcodes(original_offset, max_byte_count=0x4000):
         if temp_maybe in opt_table.keys():
             opstr = copy(opt_table[temp_maybe][0])
               
-            output += spacing + opstr #+ " ; " + hex(offset)
+            output += spacing + opstr.lower() #+ " ; " + hex(offset)
             output += "\n"
 
             current_byte_number += 2
@@ -598,7 +609,7 @@ def output_bank_opcodes(original_offset, max_byte_count=0x4000):
             #type = -1 when it's the E op
             #if op_code_type != -1:
             if   op_code_type == 0 and ord(rom[offset]) == op_code_byte:
-                output += spacing + op_code[0] #+ " ; " + hex(offset)
+                output += spacing + op_code[0].lower() #+ " ; " + hex(offset)
                 output += "\n"
                 
                 offset += 1
@@ -624,10 +635,10 @@ def output_bank_opcodes(original_offset, max_byte_count=0x4000):
                             byte_labels[target_address]["name"] = line_label2
                             byte_labels[target_address]["usage"] = 1
                         
-                        insertion = line_label2
+                        insertion = line_label2.lower()
                         include_comment = True
 
-                    opstr = opstr[:opstr.find("x")] + insertion + opstr[opstr.find("x")+1:]
+                    opstr = opstr[:opstr.find("x")].lower() + insertion + opstr[opstr.find("x")+1:].lower()
                     output += spacing + opstr 
                     if include_comment: output += " ; " + hex(offset)
                     output += "\n"
@@ -649,9 +660,13 @@ def output_bank_opcodes(original_offset, max_byte_count=0x4000):
                     
                     number = byte1
                     number += byte2 << 8;
+
                     insertion = "$%.4x" % (number)
+                    if maybe_byte in call_commands:
+                        if insertion[1:] in asm_commands:
+                            insertion = asm_commands[insertion[1:]]
                     
-                    opstr = opstr[:opstr.find("?")] + insertion + opstr[opstr.find("?")+1:]
+                    opstr = opstr[:opstr.find("?")].lower() + insertion + opstr[opstr.find("?")+1:].lower()
                     output += spacing + opstr #+ " ; " + hex(offset)
                     output += "\n"
 
@@ -690,9 +705,9 @@ def output_bank_opcodes(original_offset, max_byte_count=0x4000):
         address = label_line
         label_line = byte_labels[label_line]
         if label_line["usage"] == 0:
-            output = output.replace(label_line["name"] + " ; " + hex(address) + "\n", "")
+            output = output.replace((label_line["name"] + " ; " + hex(address) + "\n").lower(), "")
 
-    return (output.lower(), offset)
+    return (output, offset)
 
 def text_asm_pretty_printer(label, address_of_08, include_08=True):
     """returns (output, end_address)"""
@@ -712,4 +727,4 @@ if __name__ == "__main__":
 
     #0x18f96 is PalletTownText1
     #0x19B5D is BluesHouseText1
-    print output_bank_opcodes(0x3927)[0]
+    print output_bank_opcodes(0x74a69)[0]
