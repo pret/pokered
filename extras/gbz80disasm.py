@@ -712,4 +712,4 @@ if __name__ == "__main__":
 
     #0x18f96 is PalletTownText1
     #0x19B5D is BluesHouseText1
-    print output_bank_opcodes(0x3e48)[0]
+    print output_bank_opcodes(0x3927)[0]

@@ -1359,7 +1359,21 @@ GetName: ; 376B
 	ld [$2000],a
 	ret
 
-INCBIN "baserom.gbc",$37DF,$3A87 - $37DF
+INCBIN "baserom.gbc",$37df,$3927 - $37df
+
+AddPokemonToParty: ; 0x3927
+    push hl
+    push de
+    push bc
+    ld b, $3
+    ld hl, $72e5
+    call $35d6
+    pop bc
+    pop de
+    pop hl
+    ret
+
+INCBIN "baserom.gbc",$3936,$3A87 - $3936
 
 AddNTimes: ; 3A87
 ; add bc to hl a times
@@ -4717,7 +4731,7 @@ ItemUseBall:	;03:5687
 	xor a
 	ld [$cc49],a
 	call CleanLCD_OAM
-	call $3927	;add mon to Party
+	call AddPokemonToParty	;add mon to Party
 	jr .End\@
 .sendToBox\@	;$5907
 	call CleanLCD_OAM
@@ -10024,7 +10038,7 @@ ReadTrainer: ; 5C53
 	ld a,1
 	ld [$CC49],a
 	push hl
-	call $3927
+	call AddPokemonToParty
 	pop hl
 	jr .LoopTrainerData\@
 .SpecialTrainer\@
@@ -10041,7 +10055,7 @@ ReadTrainer: ; 5C53
 	ld a,1
 	ld [$CC49],a
 	push hl
-	call $3927
+	call AddPokemonToParty
 	pop hl
 	jr .SpecialTrainer\@
 .AddLoneAttack\@
