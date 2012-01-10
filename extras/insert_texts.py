@@ -13,6 +13,7 @@ import os, sys
 import subprocess
 spacing = "    "
 tx_fars = None
+failed_attempts = {}
 
 def find_tx_far_entry(map_id, text_id):
     for tx_far_line in tx_fars:
@@ -294,7 +295,7 @@ def insert_08_asm(map_id, text_id):
         return
 
     #also do a name check
-    if 1 < ("\n".join(analyze_incbins.asm)).count(label + ":"):
+    if 1 <= ("\n".join(analyze_incbins.asm)).count("\n" + label + ":"):
         print "skipping text label for a $08 on map_id=" + str(map_id) + " text_id=" + str(text_id) + " because the label is already taken (" + label + ":)"
         return
     
@@ -317,7 +318,10 @@ def insert_08_asm(map_id, text_id):
     diff = generate_diff_insert(line_number, newlines)
     print "working on map_id=" + str(map_id) + " text_id=" + str(text_id)
     print diff
-    apply_diff(diff)
+    result = apply_diff(diff)
+
+    if result == False:
+        failed_attempts[len(failed_attempts.keys())] = {"map_id": map_id, "text_id": text_id}
 
 def find_all_08s():
     all_08s = []
@@ -333,6 +337,7 @@ def insert_all_08s():
     all_08s = find_all_08s()
     for the_08_line in all_08s:
         map_id = the_08_line[0]
+        if map_id <= 86: continue #speed things up
         text_id = the_08_line[1]
 
         print "processing map_id=" + str(map_id) + " text_id=" + str(text_id)
@@ -386,5 +391,8 @@ if __name__ == "__main__":
     #insert_text_label_tx_far(240, 1)
     #insert_all_text_labels()
 
-    #insert_08_asm(1, 2)
+    #insert_08_asm(83, 1)
     insert_all_08s()
+
+    print "-- FAILED ATTEMPTS --"
+    print str(failed_attempts)

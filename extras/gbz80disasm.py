@@ -538,8 +538,6 @@ end_08_scripts_with = [
 ]
 relative_jumps = [0x38, 0x30, 0x20, 0x28, 0x18]
 
-byte_labels = {}
-
 def random_asm_label():
     return ".ASM_" + random_hash()
 
@@ -558,6 +556,8 @@ def output_bank_opcodes(original_offset, max_byte_count=0x4000):
     
     #we don't actually have an end address, but we'll just say $4000
     end_address = original_offset + max_byte_count
+
+    byte_labels = {}
     
     output = ""
     keep_reading = True
@@ -576,7 +576,7 @@ def output_bank_opcodes(original_offset, max_byte_count=0x4000):
             line_label = random_asm_label()
             byte_labels[offset] = {}
             byte_labels[offset]["name"] = line_label
-            byte_labels[offset]["usage"] = 1
+            byte_labels[offset]["usage"] = 0
         output += line_label + " ; " + hex(offset) + "\n"
 
         #find out if there's a two byte key like this
@@ -616,7 +616,7 @@ def output_bank_opcodes(original_offset, max_byte_count=0x4000):
                         #generate a label for the byte we're jumping to
                         target_address = offset + 2 + ord(rom[offset + 1])
                         if target_address in byte_labels.keys():
-                            byte_labels[target_address]["usage"] += 1
+                            byte_labels[target_address]["usage"] = 1 + byte_labels[target_address]["usage"]
                             line_label2 = byte_labels[target_address]["name"]
                         else:
                             line_label2 = random_asm_label()
@@ -634,6 +634,7 @@ def output_bank_opcodes(original_offset, max_byte_count=0x4000):
 
                     current_byte_number += 1 
                     offset += 1
+                    insertion = ""
 
                 current_byte_number += 1
                 offset += 1
@@ -685,10 +686,11 @@ def output_bank_opcodes(original_offset, max_byte_count=0x4000):
         #current_byte_number += 1
 
     #clean up unused labels
+    print "byte_labels is: " + str(byte_labels)
     for label_line in byte_labels.keys():
         address = label_line
         label_line = byte_labels[label_line]
-        if label_line["usage"] == 1:
+        if label_line["usage"] == 0:
             output = output.replace(label_line["name"] + " ; " + hex(address) + "\n", "")
 
     return (output.lower(), offset)
@@ -710,4 +712,4 @@ if __name__ == "__main__":
 
     #0x18f96 is PalletTownText1
     #0x19B5D is BluesHouseText1
-    print output_bank_opcodes(0x19B5D + 1)
+    print output_bank_opcodes(0x1e374 + 1)

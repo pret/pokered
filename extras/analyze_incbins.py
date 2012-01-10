@@ -234,6 +234,7 @@ def apply_diff(diff):
         subprocess.check_call("cd ../; make clean; LC_CTYPE=UTF-8 make", shell=True)
     except Exception, exc:
         os.system("mv ../pokered1.asm ../pokered.asm")
+        return False
 
 if __name__ == "__main__":
     #load map headers
