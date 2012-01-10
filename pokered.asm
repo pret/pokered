@@ -1051,11 +1051,8 @@ ViridianCityText12: ; 0x24ef
 
 Route2Text2: ; 0x24f4
     db $08 ; asm
-.asm_5dbb0 ; 0x24f5
     ld a, $5c
-.asm_dc07c ; 0x24f7
     call $3e6d    
-.asm_2d74c ; 0x24fa
     jp $24d7    
 
 INCBIN "baserom.gbc",$24fd,$ad2
