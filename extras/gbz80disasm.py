@@ -686,7 +686,6 @@ def output_bank_opcodes(original_offset, max_byte_count=0x4000):
         #current_byte_number += 1
 
     #clean up unused labels
-    print "byte_labels is: " + str(byte_labels)
     for label_line in byte_labels.keys():
         address = label_line
         label_line = byte_labels[label_line]
@@ -712,4 +711,4 @@ if __name__ == "__main__":
 
     #0x18f96 is PalletTownText1
     #0x19B5D is BluesHouseText1
-    print output_bank_opcodes(0x1b40)[0]
+    print output_bank_opcodes(0x35ec)[0]
