@@ -261,7 +261,7 @@ temp_opt_table = [
   [ "LD DE, ?", 0x11, 2 ], 
   [ "LD HL, ?", 0x21, 2 ], 
   [ "LD SP, ?", 0x31, 2 ], 
-  [ "LD [?], SP", 0x8, 2 ], 
+#  [ "LD [?], SP", 0x8, 2 ], 
   [ "LD [?], A", 0xea, 2 ], 
   [ "NOP", 0x0, 0 ], 
   [ "OR A", 0xb7, 0 ], 
@@ -735,10 +735,12 @@ def output_bank_opcodes(original_offset, max_byte_count=0x4000):
                     keep_reading = False
                     is_data = False #cleanup
                     break
-                
-        if is_data and keep_reading:
-            output += spacing + "db $" + hex(ord(rom[offset+1]))[2:] #+ " ; " + hex(offset)
+        else:                
+#        if is_data and keep_reading:
+            output += spacing + "db $" + hex(ord(rom[offset]))[2:] #+ " ; " + hex(offset)
             output += "\n"
+            offset += 1
+            current_byte_number += 1
         #else the while loop would have spit out the opcode
 
         #these two are done prior

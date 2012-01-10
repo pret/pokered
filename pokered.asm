@@ -15902,29 +15902,42 @@ RockTunnel1_h: ; 0x444d0 to 0x444dc (12 bytes) (bank=11) (id=82)
     dw $45f6 ; objects
 
 INCBIN "baserom.gbc",$444dc,$4455a - $444dc
+
 RockTunnel1Text1: ; 0x4455a
-    db $08 ; asm
+    db $8
     ld hl, $4505
-    jr .asm_bcf23 ; 0x4455e
-    ld [$1121], sp
-    ld b, l
-    jr .asm_bcf23 ; 0x44564
-    ld [$1d21], sp
-    ld b, l
-    jr .asm_bcf23 ; 0x4456a
-    ld [$2921], sp
-    ld b, l
-    jr .asm_bcf23 ; 0x44570
-    ld [$3521], sp
-    ld b, l
-    jr .asm_bcf23 ; 0x44576
-    ld [$4121], sp
-    ld b, l
-    jr .asm_bcf23 ; 0x4457c
-    ld [$4d21], sp
-    ld b, l
-.asm_bcf23 ; 0x44582
-    call LoadTrainerHeader
+    jr asm_0c916 ; 0x4455e $22
+
+RockTunnel1Text2:
+    db $8
+    ld hl, $4511
+    jr asm_0c916 ; 0x44564 $1c
+
+RockTunnel1Text3:
+    db $8
+    ld hl, $451d
+    jr asm_0c916 ; 0x4456a $16
+
+RockTunnel1Text4:
+    db $8
+    ld hl, $4529
+    jr asm_0c916 ; 0x44570 $10
+
+RockTunnel1Text5:
+    db $8
+    ld hl, $4535
+    jr asm_0c916 ; 0x44576 $a
+
+RockTunnel1Text6:
+    db $8
+    ld hl, $4541
+    jr asm_0c916 ; 0x4457c $4
+
+RockTunnel1Text7:
+    db $8
+    ld hl, $454d
+asm_0c916: ; 0x44582
+    call $31cc
     jp $24d7
 
 INCBIN "baserom.gbc",$44588,$69
