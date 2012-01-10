@@ -5197,8 +5197,6 @@ CeladonCityObject: ; 0x18022 (size=189)
     EVENT_DISP $19, $1b, $23 ; CELADON_HOUSE
     EVENT_DISP $19, $1b, $2b ; CELADON_HOTEL
 
-INCBIN "baserom.gbc",$180df,$0
-
 CeladonCityBlocks: ; 450
     INCBIN "maps/celadoncity.blk"
 
@@ -5312,8 +5310,6 @@ ViridianCityObject: ; 0x18384 (size=104)
     EVENT_DISP $14, $f, $15 ; VIRIDIAN_SCHOOL
     EVENT_DISP $14, $9, $15 ; VIRIDIAN_HOUSE
     EVENT_DISP $14, $7, $20 ; VIRIDIAN_GYM
-
-INCBIN "baserom.gbc",$183ec,$0
 
 ViridianCityBlocks: ; 360
     INCBIN "maps/viridiancity.blk"
@@ -5468,8 +5464,6 @@ CeruleanCityObject: ; 0x18786 (size=170)
     EVENT_DISP $14, $b, $9 ; CERULEAN_HOUSE_3
     EVENT_DISP $14, $9, $9 ; CERULEAN_HOUSE_3
 
-INCBIN "baserom.gbc",$18830,$0
-
 CeruleanCityBlocks: ; 360
     INCBIN "maps/ceruleancity.blk"
 
@@ -5538,8 +5532,6 @@ VermilionCityObject: ; 0x189ba (size=133)
     EVENT_DISP $14, $1f, $13 ; VERMILION_DOCK
     EVENT_DISP $14, $d, $f ; VERMILION_HOUSE_3
     EVENT_DISP $14, $3, $7 ; VERMILION_HOUSE_2
-
-INCBIN "baserom.gbc",$18a3f,$0
 
 VermilionCityBlocks: ; 360
     INCBIN "maps/vermilioncity.blk"
@@ -5626,8 +5618,6 @@ FuchsiaCityObject: ; 0x18bd4 (size=178)
     EVENT_DISP $14, $d, $16 ; FUCHSIAMEETINGROOM
     EVENT_DISP $14, $1b, $1f ; FUCHSIA_HOUSE_3
     EVENT_DISP $14, $18, $1f ; FUCHSIA_HOUSE_3
-
-INCBIN "baserom.gbc",$18c86,$0
 
 FuchsiaCityBlocks: ; 360
     INCBIN "maps/fuchsiacity.blk"
@@ -6834,7 +6824,6 @@ SilphCo5Text11: ; 0x1a088
     TX_FAR _SilphCo5Text11
     db $50
 
-INCBIN "baserom.gbc",$1a08d,$0
 SilphCo5Object: ; 0x1a08d (size=137)
     db $2e ; border tile
 
@@ -7036,8 +7025,6 @@ CinnabarIslandObject: ; 0x1c022 (size=71)
     EVENT_DISP $a, $b, $b ; CINNABAR_POKECENTER
     EVENT_DISP $a, $b, $f ; CINNABAR_MART
 
-INCBIN "baserom.gbc",$1c069,$0
-
 CinnabarIslandBlocks: ; 90
     INCBIN "maps/cinnabarisland.blk"
 
@@ -7085,23 +7072,17 @@ Route1Blocks: ; 180
 UndergroundPathEntranceRoute8Blocks: ; 16
     INCBIN "maps/undergroundpathentranceroute8.blk"
 
-INCBIN "baserom.gbc",$1c1c0,$0
-
 OaksLabBlocks: ; 30
     INCBIN "maps/oakslab.blk"
 
 ViridianHouseBlocks: ; 16
     INCBIN "maps/viridianhouse.blk"
 
-INCBIN "baserom.gbc",$1c1ee,$0
-
 SchoolBlocks: ; 16
     INCBIN "maps/school.blk"
 
 CeruleanHouseTrashedBlocks: ; 16
     INCBIN "maps/ceruleanhousetrashed.blk"
-
-INCBIN "baserom.gbc",$1c20e,$0
 
 DiglettsCaveRoute2Blocks: ; 16
     INCBIN "maps/diglettscaveroute2.blk"
@@ -7358,8 +7339,6 @@ Route1Text3: ; 0x1cafd
     TX_FAR _Route1Text3
     db $50
 
-INCBIN "baserom.gbc",$1cb02,$0
-
 OaksLab_h: ; 0x1cb02 to 0x1cb0e (12 bytes) (bank=7) (id=40)
     db $05 ; tileset
     db $06, $05 ; dimensions (y, x)
@@ -7550,7 +7529,6 @@ ViridianMartText3: ; 0x1d505
     TX_FAR _ViridianMartText3
     db $50
 
-INCBIN "baserom.gbc",$1d50a,$0
 ViridianMartObject: ; 0x1d50a (size=38)
     db $0 ; border tile
 
@@ -7594,7 +7572,6 @@ SchoolText2: ; 0x1d558
     TX_FAR _SchoolText2
     db $50
 
-INCBIN "baserom.gbc",$1d55d,$0
 SchoolObject: ; 0x1d55d (size=32)
     db $a ; border tile
 
@@ -7693,7 +7670,6 @@ PewterHouse1Text3: ; 0x1d611
     TX_FAR _PewterHouse1Text3
     db $50
 
-INCBIN "baserom.gbc",$1d616,$0
 PewterHouse1Object: ; 0x1d616 (size=38)
     db $a ; border tile
 
@@ -7734,7 +7710,6 @@ PewterHouse2Text2: ; 0x1d654
     TX_FAR _PewterHouse2Text2
     db $50
 
-INCBIN "baserom.gbc",$1d659,$0
 PewterHouse2Object: ; 0x1d659 (size=32)
     db $a ; border tile
 
@@ -7789,7 +7764,6 @@ CeruleanHouseTrashedText3: ; 0x1d6ba
     TX_FAR _CeruleanHouseTrashedText3
     db $50
 
-INCBIN "baserom.gbc",$1d6bf,$0
 CeruleanHouseTrashedObject: ; 0x1d6bf (size=43)
     db $a ; border tile
 
@@ -7833,7 +7807,6 @@ CeruleanHouse2Text2: ; 0x1d702
     call Predef
     jp $24d7
 
-INCBIN "baserom.gbc",$1d710,$0
 CeruleanHouse2Object: ; 0x1d710 (size=32)
     db $a ; border tile
 
@@ -8236,7 +8209,6 @@ CeladonMansion5Text2: ; 0x1dd46
 .asm_24365 ; 0x1dd59
     jp $24d7
 
-INCBIN "baserom.gbc",$1dd5c,$0
 CeladonMansion5Object: ; 0x1dd5c (size=32)
     db $a ; border tile
 
@@ -8274,7 +8246,6 @@ FuchsiaMartText3: ; 0x1dd96
     TX_FAR _FuchsiaMartText3
     db $50
 
-INCBIN "baserom.gbc",$1dd9b,$0
 FuchsiaMartObject: ; 0x1dd9b (size=38)
     db $0 ; border tile
 
@@ -8328,7 +8299,6 @@ SaffronHouse1Text4: ; 0x1ddff
     TX_FAR _SaffronHouse1Text4
     db $50
 
-INCBIN "baserom.gbc",$1de04,$0
 SaffronHouse1Object: ; 0x1de04 (size=44)
     db $a ; border tile
 
@@ -8458,7 +8428,6 @@ Route2HouseText2: ; 0x1def9
     call Predef
     jp $24d7
 
-INCBIN "baserom.gbc",$1df07,$0
 Route2HouseObject: ; 0x1df07 (size=32)
     db $a ; border tile
 
@@ -15845,8 +15814,6 @@ LavenderTownObject: ; 0x4402d (size=88)
     EVENT_DISP $a, $d, $3 ; LAVENDER_HOUSE_2
     EVENT_DISP $a, $d, $7 ; NAME_RATERS_HOUSE
 
-INCBIN "baserom.gbc",$44085,$0
-
 LavenderTownBlocks: ; 90
     INCBIN "maps/lavendertown.blk"
 
@@ -16573,7 +16540,6 @@ SafariZoneEastText7: ; 0x45886
     TX_FAR _SafariZoneEastText7
     db $50
 
-INCBIN "baserom.gbc",$4588b,$0
 SafariZoneEastObject: ; 0x4588b (size=81)
     db $0 ; border tile
 
@@ -16640,7 +16606,6 @@ SafariZoneNorthText7: ; 0x459d0
     TX_FAR _SafariZoneNorthText7
     db $50
 
-INCBIN "baserom.gbc",$459d5,$0
 SafariZoneNorthObject: ; 0x459d5 (size=105)
     db $0 ; border tile
 
@@ -16700,7 +16665,6 @@ SafariZoneCenterText3: ; 0x45bc0
     TX_FAR _SafariZoneCenterText3
     db $50
 
-INCBIN "baserom.gbc",$45bc5,$0
 SafariZoneCenterObject: ; 0x45bc5 (size=89)
     db $0 ; border tile
 
@@ -16758,7 +16722,6 @@ SafariZoneRestHouse1Text2: ; 0x45cf9
     TX_FAR _SafariZoneRestHouse1Text2
     db $50
 
-INCBIN "baserom.gbc",$45cfe,$0
 SafariZoneRestHouse1Object: ; 0x45cfe (size=32)
     db $a ; border tile
 
@@ -16803,7 +16766,6 @@ SafariZoneRestHouse2Text3: ; 0x45d3e
     TX_FAR _SafariZoneRestHouse2Text3
     db $50
 
-INCBIN "baserom.gbc",$45d43,$0
 SafariZoneRestHouse2Object: ; 0x45d43 (size=38)
     db $a ; border tile
 
@@ -16849,7 +16811,6 @@ SafariZoneRestHouse3Text3: ; 0x45d89
     TX_FAR _SafariZoneRestHouse3Text3
     db $50
 
-INCBIN "baserom.gbc",$45d8e,$0
 SafariZoneRestHouse3Object: ; 0x45d8e (size=38)
     db $a ; border tile
 
@@ -16895,7 +16856,6 @@ SafariZoneRestHouse4Text3: ; 0x45dd4
     TX_FAR _SafariZoneRestHouse4Text3
     db $50
 
-INCBIN "baserom.gbc",$45dd9,$0
 SafariZoneRestHouse4Object: ; 0x45dd9 (size=38)
     db $a ; border tile
 
@@ -17232,12 +17192,10 @@ SeafoamIslands5Text4: ; 0x468b2
     TX_FAR _SeafoamIslands5Text4
     db $50
 
-
 SeafoamIslands5Text5: ; 0x468b7
     TX_FAR _SeafoamIslands5Text5
     db $50
 
-INCBIN "baserom.gbc",$468bc,$0
 SeafoamIslands5Object: ; 0x468bc (size=62)
     db $7d ; border tile
 
@@ -17314,8 +17272,6 @@ Route7Object: ; 0x48022 (size=47)
     EVENT_DISP $a, $9, $b ; ROUTE_7_GATE
     EVENT_DISP $a, $a, $b ; ROUTE_7_GATE
     EVENT_DISP $a, $d, $5 ; PATH_ENTRANCE_ROUTE_7
-
-INCBIN "baserom.gbc",$48051,$0
 
 Route7Blocks: ; 90
     INCBIN "maps/route7.blk"
@@ -17524,7 +17480,6 @@ CeladonMart3Text15: ; 0x482bf
     TX_FAR _CeladonMart3Text15
     db $50
 
-INCBIN "baserom.gbc",$482c4,$0
 CeladonMart3Object: ; 0x482c4 (size=94)
     db $f ; border tile
 
@@ -17587,7 +17542,6 @@ CeladonMart4Text4: ; 0x4836b
     TX_FAR _CeladonMart4Text4
     db $50
 
-INCBIN "baserom.gbc",$48370,$0
 CeladonMart4Object: ; 0x48370 (size=49)
     db $f ; border tile
 
@@ -17882,7 +17836,6 @@ CeladonMansion3Text8: ; 0x487fa
     TX_FAR _CeladonMansion3Text8
     db $50
 
-INCBIN "baserom.gbc",$487ff,$0
 CeladonMansion3Object: ; 0x487ff (size=72)
     db $f ; border tile
 
@@ -18434,7 +18387,6 @@ CeladonMart5Text5: ; 0x49080
     TX_FAR _CeladonMart5Text5
     db $50
 
-INCBIN "baserom.gbc",$49085,$0
 CeladonMart5Object: ; 0x49085 (size=55)
     db $f ; border tile
 
@@ -18609,8 +18561,6 @@ CeladonHouse2Text3: ; 0x49222
     TX_FAR _CeladonHouse2Text3
     db $50
 
-INCBIN "baserom.gbc",$49227,$0
-
 CeladonHouse2Object: ; 0x49227 (size=38)
     db $f ; border tile
 
@@ -18657,8 +18607,6 @@ CeladonHotelText2: ; 0x49277
 CeladonHotelText3: ; 0x4927c
     TX_FAR _CeladonHotelText3
     db $50
-
-INCBIN "baserom.gbc",$49281,$0
 
 CeladonHotelObject: ; 0x49281 (size=38)
     db $0 ; border tile
@@ -19540,8 +19488,6 @@ SafariZoneWestText8: ; 0x4a1d7
     TX_FAR _SafariZoneWestText8
     db $50
 
-INCBIN "baserom.gbc",$4a1dc,$0
-
 SafariZoneWestObject: ; 0x4a1dc (size=108)
     db $0 ; border tile
 
@@ -19994,8 +19940,6 @@ Route22Object: ; 0x50022 (size=27)
     ; warp-to
     EVENT_DISP $14, $5, $8 ; ROUTE_22_GATE
 
-INCBIN "baserom.gbc",$5003d,$0
-
 Route22Blocks: ; 180
     INCBIN "maps/route22.blk"
 
@@ -20049,8 +19993,6 @@ Route20Object: ; 0x50113 (size=106)
     ; warp-to
     EVENT_DISP $32, $5, $30 ; SEAFOAM_ISLANDS_1
     EVENT_DISP $32, $9, $3a ; SEAFOAM_ISLANDS_1
-
-INCBIN "baserom.gbc",$5017d,$0
 
 Route20Blocks: ; 450
     INCBIN "maps/route20.blk"
@@ -20106,8 +20048,6 @@ Route23Object: ; 0x50361 (size=81)
     EVENT_DISP $a, $1f, $4 ; VICTORY_ROAD_1
     EVENT_DISP $a, $1f, $e ; VICTORY_ROAD_2
 
-INCBIN "baserom.gbc",$503b2,$0
-
 Route23Blocks: ; 720
     INCBIN "maps/route23.blk"
 
@@ -20151,8 +20091,6 @@ Route24Object: ; 0x506a4 (size=67)
     db SPRITE_LASS, $1c + 4, $a + 4, $ff, $d3, $46, $cb, $8 ; trainer
     db SPRITE_BUG_CATCHER, $1f + 4, $b + 4, $ff, $d2, $47, $ca, $9 ; trainer
     db SPRITE_BALL, $5 + 4, $a + 4, $ff, $ff, $88, $f5 ; item
-
-INCBIN "baserom.gbc",$506e7,$0
 
 Route24Blocks: ; 180
     INCBIN "maps/route24.blk"
@@ -20198,8 +20136,6 @@ Route25Object: ; 0x507b2 (size=94)
 
     ; warp-to
     EVENT_DISP $1e, $3, $2d ; BILLS_HOUSE
-
-INCBIN "baserom.gbc",$50810,$0
 
 Route25Blocks: ; 270
     INCBIN "maps/route25.blk"
@@ -20329,8 +20265,6 @@ SaffronCityObject: ; 0x509dc (size=188)
     EVENT_DISP $14, $15, $12 ; SILPH_CO_1F
     EVENT_DISP $14, $1d, $9 ; SAFFRON_POKECENTER
     EVENT_DISP $14, $1d, $1d ; SAFFRON_HOUSE_2
-
-INCBIN "baserom.gbc",$50a98,$0
 
 SaffronCityBlocks: ; 360
     INCBIN "maps/saffroncity.blk"
@@ -21195,8 +21129,6 @@ Route3Object: ; 0x54208 (size=77)
     db SPRITE_BUG_CATCHER, $6 + 4, $18 + 4, $ff, $d3, $48, $ca, $6 ; trainer
     db SPRITE_LASS, $a + 4, $21 + 4, $ff, $d1, $49, $cb, $3 ; trainer
 
-INCBIN "baserom.gbc",$54255,$0
-
 Route3Blocks: ; 315
     INCBIN "maps/route3.blk"
 
@@ -21247,8 +21179,6 @@ Route4Object: ; 0x543b2 (size=58)
     EVENT_DISP $2d, $5, $12 ; MT_MOON_1
     EVENT_DISP $2d, $5, $18 ; MT_MOON_2
 
-INCBIN "baserom.gbc",$543ec,$0
-
 Route4Blocks: ; 405
     INCBIN "maps/route4.blk"
 
@@ -21298,8 +21228,6 @@ Route5Object: ; 0x545a3 (size=47)
     EVENT_DISP $a, $1b, $11 ; PATH_ENTRANCE_ROUTE_5
     EVENT_DISP $a, $15, $a ; DAYCAREM
 
-INCBIN "baserom.gbc",$545d2,$0
-
 Route5Blocks: ; 180
     INCBIN "maps/route5.blk"
 
@@ -21346,8 +21274,6 @@ Route9Object: ; 0x546a8 (size=86)
     db SPRITE_HIKER, $f + 4, $2d + 4, $ff, $d3, $48, $d1, $5 ; trainer
     db SPRITE_BUG_CATCHER, $8 + 4, $28 + 4, $ff, $d3, $49, $ca, $e ; trainer
     db SPRITE_BALL, $f + 4, $a + 4, $ff, $ff, $8a, $e6 ; item
-
-INCBIN "baserom.gbc",$546fe,$0
 
 Route9Blocks: ; 270
     INCBIN "maps/route9.blk"
@@ -21398,8 +21324,6 @@ Route13Object: ; 0x5482e (size=93)
     db SPRITE_BIKER, $7 + 4, $a + 4, $ff, $d1, $49, $d2, $1 ; trainer
     db SPRITE_BLACK_HAIR_BOY_1, $d + 4, $7 + 4, $ff, $d1, $4a, $df, $3 ; trainer
 
-INCBIN "baserom.gbc",$5488b,$0
-
 Route13Blocks: ; 270
     INCBIN "maps/route13.blk"
 
@@ -21446,8 +21370,6 @@ Route14Object: ; 0x549bb (size=87)
     db SPRITE_BIKER, $1e + 4, $4 + 4, $ff, $d3, $48, $d2, $e ; trainer
     db SPRITE_BIKER, $1e + 4, $f + 4, $ff, $d2, $49, $d2, $f ; trainer
     db SPRITE_BIKER, $1f + 4, $4 + 4, $ff, $d3, $4a, $d2, $2 ; trainer
-
-INCBIN "baserom.gbc",$54a12,$0
 
 Route14Blocks: ; 270
     INCBIN "maps/route14.blk"
@@ -21501,8 +21423,6 @@ Route17Object: ; 0x54b42 (size=102)
     db SPRITE_BIKER, $62 + 4, $5 + 4, $ff, $d2, $49, $d2, $b ; trainer
     db SPRITE_BIKER, $76 + 4, $a + 4, $ff, $d0, $4a, $d2, $c ; trainer
 
-INCBIN "baserom.gbc",$54ba8,$0
-
 Route17Blocks: ; 720
     INCBIN "maps/route17.blk"
 
@@ -21550,8 +21470,6 @@ Route19Object: ; 0x54e9a (size=87)
     db SPRITE_SWIMMER, $2a + 4, $9 + 4, $ff, $d1, $49, $d7, $8 ; trainer
     db SPRITE_SWIMMER, $2c + 4, $a + 4, $ff, $d0, $4a, $da, $e ; trainer
 
-INCBIN "baserom.gbc",$54ef1,$0
-
 Route19Blocks: ; 270
     INCBIN "maps/route19.blk"
 
@@ -21596,8 +21514,6 @@ Route21Object: ; 0x55021 (size=76)
     db SPRITE_SWIMMER, $47 + 4, $f + 4, $ff, $d2, $47, $d7, $f ; trainer
     db SPRITE_FISHER2, $38 + 4, $e + 4, $ff, $d2, $48, $d6, $8 ; trainer
     db SPRITE_FISHER2, $39 + 4, $11 + 4, $ff, $d3, $49, $d6, $a ; trainer
-
-INCBIN "baserom.gbc",$5506d,$0
 
 Route21Blocks: ; 450
     INCBIN "maps/route21.blk"
@@ -22223,8 +22139,6 @@ CeladonMart2Text5: ; 0x5610c
     TX_FAR _CeladonMart2Text5
     db $50
 
-INCBIN "baserom.gbc",$56111,$0
-
 CeladonMart2Object: ; 0x56111 (size=55)
     db $f ; border tile
 
@@ -22518,8 +22432,6 @@ Route6Object: ; 0x58022 (size=87)
     EVENT_DISP $a, $7, $a ; ROUTE_6_GATE
     EVENT_DISP $a, $d, $11 ; PATH_ENTRANCE_ROUTE_6
 
-INCBIN "baserom.gbc",$58079,$0
-
 Route6Blocks: ; 180
     INCBIN "maps/route6.blk"
 
@@ -22578,8 +22490,6 @@ Route8Object: ; 0x5814f (size=119)
     EVENT_DISP $1e, $a, $8 ; ROUTE_8_GATE
     EVENT_DISP $1e, $3, $d ; PATH_ENTRANCE_ROUTE_8
 
-INCBIN "baserom.gbc",$581c6,$0
-
 Route8Blocks: ; 270
     INCBIN "maps/route8.blk"
 
@@ -22635,8 +22545,6 @@ Route10Object: ; 0x582f6 (size=96)
     EVENT_DISP $a, $11, $8 ; ROCK_TUNNEL_1
     EVENT_DISP $a, $35, $8 ; ROCK_TUNNEL_1
     EVENT_DISP $a, $27, $6 ; POWER_PLANT
-
-INCBIN "baserom.gbc",$58356,$0
 
 Route10Blocks: ; 360
     INCBIN "maps/route10.blk"
@@ -22696,8 +22604,6 @@ Route11Object: ; 0x584e0 (size=127)
     EVENT_DISP $1e, $8, $3a ; ROUTE_11_GATE_1F
     EVENT_DISP $1e, $9, $3a ; ROUTE_11_GATE_1F
     EVENT_DISP $1e, $5, $4 ; DIGLETTS_CAVE_ENTRANCE
-
-INCBIN "baserom.gbc",$5855f,$0
 
 Route11Blocks: ; 270
     INCBIN "maps/route11.blk"
@@ -22763,8 +22669,6 @@ Route12Object: ; 0x5869a (size=118)
     EVENT_DISP $a, $15, $a ; ROUTE_12_GATE
     EVENT_DISP $a, $4d, $b ; ROUTE_12_HOUSE
 
-INCBIN "baserom.gbc",$58710,$0
-
 Route12Blocks: ; 540
     INCBIN "maps/route12.blk"
 
@@ -22822,8 +22726,6 @@ Route15Object: ; 0x5894e (size=126)
     EVENT_DISP $1e, $9, $7 ; ROUTE_15_GATE
     EVENT_DISP $1e, $8, $e ; ROUTE_15_GATE
     EVENT_DISP $1e, $9, $e ; ROUTE_15_GATE
-
-INCBIN "baserom.gbc",$589cc,$0
 
 Route15Blocks: ; 270
     INCBIN "maps/route15.blk"
@@ -22890,8 +22792,6 @@ Route16Object: ; 0x58afc (size=136)
     EVENT_DISP $14, $5, $18 ; ROUTE_16_GATE_1F
     EVENT_DISP $14, $5, $7 ; ROUTE_16_HOUSE
 
-INCBIN "baserom.gbc",$58b84,$0
-
 Route16Blocks: ; 180
     INCBIN "maps/route16.blk"
 
@@ -22942,8 +22842,6 @@ Route18Object: ; 0x58c5a (size=66)
     EVENT_DISP $19, $9, $21 ; ROUTE_18_GATE_1F
     EVENT_DISP $19, $8, $28 ; ROUTE_18_GATE_1F
     EVENT_DISP $19, $9, $28 ; ROUTE_18_GATE_1F
-
-INCBIN "baserom.gbc",$58c9c,$0
 
 Route18Blocks: ; 225
     INCBIN "maps/route18.blk"
@@ -23371,8 +23269,6 @@ Route18Text4: ; 0x59b5a
 Route18Text5: ; 0x59b5f
     TX_FAR _Route18Text5
     db $50
-
-INCBIN "baserom.gbc",$59b64,$0
 
 FanClub_h: ; 0x59b64 to 0x59b70 (12 bytes) (id=90)
     db $10 ; tileset
@@ -23819,8 +23715,6 @@ PewterPokecenterBlocks: ; 28
 UndergroundTunnelEntranceRoute5Blocks: ; 16
     INCBIN "maps/undergroundtunnelentranceroute5.blk"
 
-INCBIN "baserom.gbc",$5c090,$0
-
 ViridianForestexitBlocks: ; 20
     INCBIN "maps/viridianforestexit.blk"
 
@@ -24001,7 +23895,6 @@ MuseumF2Text7: ; 0x5c346
     TX_FAR _MuseumF2Text7
     db $50
 
-INCBIN "baserom.gbc",$5c34b,$0
 MuseumF2Object: ; 0x5c34b (size=48)
     db $a ; border tile
 
@@ -24326,7 +24219,6 @@ CeruleanMartText3: ; 0x5c8a3
     TX_FAR _CeruleanMartText3
     db $50
 
-INCBIN "baserom.gbc",$5c8a8,$0
 CeruleanMartObject: ; 0x5c8a8 (size=38)
     db $0 ; border tile
 
@@ -25062,7 +24954,6 @@ SaffronMartText3: ; 0x5d417
     TX_FAR _SaffronMartText3
     db $50
 
-INCBIN "baserom.gbc",$5d41c,$0
 SaffronMartObject: ; 0x5d41c (size=38)
     db $0 ; border tile
 
@@ -25181,7 +25072,6 @@ ViridianForestexitText2: ; 0x5d593
     TX_FAR _ViridianForestexitText2
     db $50
 
-INCBIN "baserom.gbc",$5d598,$0
 ViridianForestexitObject: ; 0x5d598 (size=48)
     db $a ; border tile
 
@@ -25290,7 +25180,6 @@ ViridianForestEntranceText2: ; 0x5d668
     TX_FAR _ViridianForestEntranceText2
     db $50
 
-INCBIN "baserom.gbc",$5d66d,$0
 ViridianForestEntranceObject: ; 0x5d66d (size=48)
     db $a ; border tile
 
@@ -25603,7 +25492,6 @@ PokemonTower1Text5: ; 0x6044d
     TX_FAR _PokemonTower1Text5
     db $50
 
-INCBIN "baserom.gbc",$60452,$0
 PokemonTower1Object: ; 0x60452 (size=58)
     db $1 ; border tile
 
@@ -26030,7 +25918,6 @@ CeladonMart1Text3: ; 0x60f99
     TX_FAR _CeladonMart1Text3
     db $50
 
-INCBIN "baserom.gbc",$60f9e,$0
 CeladonMart1Object: ; 0x60f9e (size=64)
     db $f ; border tile
 
@@ -26131,7 +26018,6 @@ ViridianForestText14: ; 0x611d5
     TX_FAR _ViridianForestText14
     db $50
 
-INCBIN "baserom.gbc",$611da,$0
 ViridianForestObject: ; 0x611da (size=127)
     db $3 ; border tile
 
@@ -26448,7 +26334,6 @@ SSAnne7Text3: ; 0x61941
     TX_FAR _SSAnne7Text3
     db $50
 
-INCBIN "baserom.gbc",$61946,$0
 SSAnne7Object: ; 0x61946 (size=24)
     db $c ; border tile
 
@@ -26502,8 +26387,6 @@ SSAnne8Text4: ; 0x619f4
     call LoadTrainerHeader
     jp $24d7
 
-INCBIN "baserom.gbc",$619fe,$0
-
 SSAnne8Text8: ; 0x619fe
     TX_FAR _SSAnne8Text8
 
@@ -26533,7 +26416,6 @@ SSAnne8Text11: ; 0x61a5b
     TX_FAR _SSAnne8Text11
     db $50
 
-INCBIN "baserom.gbc",$61a60,$0
 SSAnne8Object: ; 0x61a60 (size=127)
     db $c ; border tile
 
@@ -26751,8 +26633,6 @@ SSAnne10Text6: ; 0x61dff
     ld hl, $5dc0
     call LoadTrainerHeader
     jp $24d7
-
-INCBIN "baserom.gbc",$61e09,$0
 
 SSAnne10Text8: ; 0x61e09
     TX_FAR _SSAnne10Text8
@@ -28218,7 +28098,6 @@ FuchsiaHouse1Text3: ; 0x7502c
     TX_FAR _FuchsiaHouse1Text3
     db $50
 
-INCBIN "baserom.gbc",$75031,$0
 FuchsiaHouse1Object: ; 0x75031 (size=38)
     db $a ; border tile
 
@@ -28582,7 +28461,6 @@ FuchsiaMeetingRoomText3: ; 0x756f7
     TX_FAR _FuchsiaMeetingRoomText3
     db $50
 
-INCBIN "baserom.gbc",$756fc,$0
 FuchsiaMeetingRoomObject: ; 0x756fc (size=38)
     db $17 ; border tile
 
@@ -28817,7 +28695,6 @@ Lab1Text5: ; 0x75bae
     TX_FAR _Lab1Text5
     db $50
 
-INCBIN "baserom.gbc",$75bb3,$0
 Lab1Object: ; 0x75bb3 (size=62)
     db $17 ; border tile
 
@@ -28874,7 +28751,6 @@ Lab2Text2: ; 0x75c2f
     call Predef
     jp $24d7
 
-INCBIN "baserom.gbc",$75c45,$0
 Lab2Object: ; 0x75c45 (size=38)
     db $17 ; border tile
 
@@ -28947,7 +28823,6 @@ Lab3Text5: ; 0x75ce7
     TX_FAR _Lab3Text5
     db $50
 
-INCBIN "baserom.gbc",$75cec,$0
 Lab3Object: ; 0x75cec (size=41)
     db $17 ; border tile
 
@@ -29065,7 +28940,6 @@ CinnabarMartText3: ; 0x75e8c
     TX_FAR _CinnabarMartText3
     db $50
 
-INCBIN "baserom.gbc",$75e91,$0
 CinnabarMartObject: ; 0x75e91 (size=38)
     db $0 ; border tile
 
@@ -30476,8 +30350,6 @@ _SeafoamIslands5Text5: ; 0x880a8
     db $0, "DANGER", $4f
     db "Fast current!", $57
 
-INCBIN "baserom.gbc",$880be,$0
-
 _AIBattleWithdrawText:
 	db 1
 	dw $D04A
@@ -31011,8 +30883,6 @@ _BattleCenterMText1: ; 0x94b01
 
 _TradeCenterMText1: ; 0x94b04
     db $0, "!", $57
-
-INCBIN "baserom.gbc",$94b07,$0
 
 INCLUDE "text/mapRedsHouse1F.tx"
 INCLUDE "text/mapBluesHouse.tx"
@@ -32613,8 +32483,6 @@ _SaffronCityText25: ; 0xa66f5
     db "product!", $51
     db "Release to be", $4f
     db "determined...", $57
-
-INCBIN "baserom.gbc",$a6729,$0
 
 _ItemUseBallText00:
 	db 0,"It dodged the",$4F
