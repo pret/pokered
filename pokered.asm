@@ -8075,7 +8075,26 @@ VermilionHouse1_h: ; 0x1daf0 to 0x1dafc (12 bytes) (bank=7) (id=93)
 
     dw $5b20 ; objects
 
-INCBIN "baserom.gbc",$1dafc,$1db20 - $1dafc
+INCBIN "baserom.gbc",$1dafc,$1db06 - $1dafc
+
+VermilionHouse1Text1: ; 0x1db06
+    TX_FAR _VermilionHouse1Text1
+    db $50
+
+VermilionHouse1Text2: ; 0x1db0b
+    TX_FAR _VermilionHouse1Text2
+    db $08 ; asm
+    ld a, $24
+    call $13d0
+    call $3748
+    jp $24d7
+
+VermilionHouse1Text3: ; 0x1db1b
+    TX_FAR _VermilionHouse1Text3
+    db $50
+
+INCBIN "baserom.gbc", $1db1b + 5, $1db20 - ($1db1b + 5)
+
 VermilionHouse1Object: ; 0x1db20 (size=38)
     db $a ; border tile
 
