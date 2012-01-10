@@ -4,6 +4,7 @@
 import extract_maps
 from copy import copy, deepcopy
 from pretty_map_headers import random_hash, map_name_cleaner
+import sys
 spacing = "    "
 
 temp_opt_table = [
@@ -640,7 +641,10 @@ def output_bank_opcodes(original_offset, max_byte_count=0x4000):
 
                     opstr = opstr[:opstr.find("x")].lower() + insertion + opstr[opstr.find("x")+1:].lower()
                     output += spacing + opstr 
-                    if include_comment: output += " ; " + hex(offset)
+                    if include_comment:
+                        output += " ; " + hex(offset)
+                        if current_byte in relative_jumps:
+                            output += " $" + hex(ord(rom[offset + 1]))[2:]
                     output += "\n"
 
                     current_byte_number += 1 
@@ -679,17 +683,19 @@ def output_bank_opcodes(original_offset, max_byte_count=0x4000):
                 #duck out if this is jp $24d7
                 if current_byte == 0xc3:
                     if number == 0x24d7: #jp
-                        keep_reading = False
-                        is_data = False
-                        break
+                        if not has_outstanding_labels(byte_labels):
+                            keep_reading = False
+                            is_data = False
+                            break
             else:
                 is_data = True
 
             #stop reading at a jump, relative jump or return
             if current_byte in end_08_scripts_with:
-                keep_reading = False
-                is_data = False #cleanup
-                break
+                if not has_outstanding_labels(byte_labels):
+                    keep_reading = False
+                    is_data = False #cleanup
+                    break
                 
         if is_data and keep_reading:
             output += spacing + "db $" + hex(ord(rom[offset+1]))[2:] #+ " ; " + hex(offset)
@@ -709,6 +715,15 @@ def output_bank_opcodes(original_offset, max_byte_count=0x4000):
 
     return (output, offset)
 
+def has_outstanding_labels(byte_labels):
+    """
+    if a label is used once, it means it has to be called or specified later
+    """
+    for label_line in byte_labels.keys():
+        real_line = byte_labels[label_line]
+        if real_line["usage"] == 1: return True
+    return False
+
 def text_asm_pretty_printer(label, address_of_08, include_08=True):
     """returns (output, end_address)"""
     output = label + ": ; " + hex(address_of_08) + "\n"
@@ -727,4 +742,4 @@ if __name__ == "__main__":
 
     #0x18f96 is PalletTownText1
     #0x19B5D is BluesHouseText1
-    print output_bank_opcodes(0x74a69)[0]
+    print output_bank_opcodes(int(sys.argv[1], 16))[0]
