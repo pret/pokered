@@ -1140,7 +1140,69 @@ TechnicalPrefix:
 HiddenPrefix:
 	db "HM"
 
-INCBIN "baserom.gbc",$3040,$3493 - $3040
+INCBIN "baserom.gbc",$3040,$31cc - $3040
+LoadTrainerHeader: ; 0x31cc
+    call $3157
+    xor a
+    call $3193
+    ld a, $2
+    call $3193
+    ld a, [$cc55]
+    ld c, a
+    ld b, $2
+    call $31c7
+    ld a, c
+    and a
+    jr z, .asm_c2964 ; 0x31e3 $8
+    ld a, $6
+    call $3193
+    jp $3c49
+.asm_c2964 ; 0x31ed
+    ld a, $4
+    call $3193
+    call PrintText
+    ld a, $a
+    call $3193
+    push de
+    ld a, $8
+    call $3193
+    pop de
+    call $3354
+    ld hl, $d733
+    set 4, [hl]
+    ld hl, $cd60
+    bit 0, [hl]
+    ret nz
+    call $336a
+    ld hl, $da39
+    inc [hl]
+    jp $325d
+    call $3306
+    ld a, [$cf13]
+    cp $ff
+    jr nz, .asm_76c22 ; 0x3221 $8
+    xor a
+    ld [$cf13], a
+    ld [$cc55], a
+    ret
+.asm_76c22 ; 0x322b
+    ld hl, $d733
+    set 3, [hl]
+    ld [$cd4f], a
+    xor a
+    ld [$cd50], a
+    ld a, $4c
+    call $3e6d
+    ld a, $f0
+    ld [$cd6b], a
+    xor a
+    ldh [$b4], a
+    call $32cf
+    ld hl, $da39
+    inc [hl]
+    ret
+
+INCBIN "baserom.gbc",$324c,$247
 
 Function3493: ; 3493
 ; XXX what does this do
@@ -1567,7 +1629,21 @@ GoPAL_SET: 	; 3def
 	ld a,$45
 	jp Predef
 
-INCBIN "baserom.gbc",$3df9,$3e48 - $3df9
+INCBIN "baserom.gbc",$3df9,$3e2e - $3df9
+
+GiveItem: ; 0x3e2e
+    ld a, b
+    ld [$d11e], a
+    ld [$cf91], a
+    ld a, c
+    ld [$cf96], a
+    ld hl, $d31d
+    call $2bcf
+    ret nc
+    call $2fcf
+    call $3826
+    scf
+    ret
 
 GivePokemon: ; 0x3e48
     ld a, b
@@ -6617,21 +6693,21 @@ INCBIN "baserom.gbc",$19de0,$19dea - $19de0
 SilphCo4Text2: ; 0x19dea
     db $08 ; asm
     ld hl, $5dae
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$19df4,$19e03 - $19df4
 SilphCo4Text3: ; 0x19e03
     db $08 ; asm
     ld hl, $5dba
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$19e0d,$19e1c - $19e0d
 SilphCo4Text4: ; 0x19e1c
     db $08 ; asm
     ld hl, $5dc6
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$19e26,$f
@@ -6691,28 +6767,28 @@ INCBIN "baserom.gbc",$1a010,$1a01a - $1a010
 SilphCo5Text2: ; 0x1a01a
     db $08 ; asm
     ld hl, $5fd2
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$1a024,$1a033 - $1a024
 SilphCo5Text3: ; 0x1a033
     db $08 ; asm
     ld hl, $5fde
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$1a03d,$1a04c - $1a03d
 SilphCo5Text4: ; 0x1a04c
     db $08 ; asm
     ld hl, $5fea
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$1a056,$1a065 - $1a056
 SilphCo5Text5: ; 0x1a065
     db $08 ; asm
     ld hl, $5ff6
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$1a06f,$f
@@ -6824,21 +6900,21 @@ INCBIN "baserom.gbc",$1a2a6,$1a2b0 - $1a2a6
 SilphCo6Text6: ; 0x1a2b0
     db $08 ; asm
     ld hl, $620a
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$1a2ba,$1a2c9 - $1a2ba
 SilphCo6Text7: ; 0x1a2c9
     db $08 ; asm
     ld hl, $6216
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$1a2d3,$1a2e2 - $1a2d3
 SilphCo6Text8: ; 0x1a2e2
     db $08 ; asm
     ld hl, $6222
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$1a2ec,$f
@@ -15856,7 +15932,7 @@ INCBIN "baserom.gbc",$442af,$44341 - $442af
 Mansion1Text1: ; 0x44341
     db $08 ; asm
     ld hl, $4334
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$4434b,$59
@@ -15923,7 +15999,7 @@ RockTunnel1Text1: ; 0x4455a
     ld [$4d21], sp
     ld b, l
 .asm_bcf23 ; 0x44582
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$44588,$69
@@ -16055,25 +16131,25 @@ INCBIN "baserom.gbc",$44980,$44a69 - $44980
 VictoryRoad3Text1: ; 0x44a69
     db $08 ; asm
     ld hl, $4a38
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 VictoryRoad3Text2: ; 0x44a73
     db $08 ; asm
     ld hl, $4a44
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 VictoryRoad3Text3: ; 0x44a7d
     db $08 ; asm
     ld hl, $4a50
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 VictoryRoad3Text4: ; 0x44a87
     db $08 ; asm
     ld hl, $4a5c
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$44a91,$3c
@@ -16122,31 +16198,31 @@ INCBIN "baserom.gbc",$44bca,$44c5f - $44bca
 RocketHideout1Text1: ; 0x44c5f
     db $08 ; asm
     ld hl, $4c22
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 RocketHideout1Text2: ; 0x44c69
     db $08 ; asm
     ld hl, $4c2e
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 RocketHideout1Text3: ; 0x44c73
     db $08 ; asm
     ld hl, $4c3a
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 RocketHideout1Text4: ; 0x44c7d
     db $08 ; asm
     ld hl, $4c46
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 RocketHideout1Text5: ; 0x44c87
     db $08 ; asm
     ld hl, $4c52
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$44c91,$56
@@ -16194,7 +16270,7 @@ INCBIN "baserom.gbc",$44e27,$450de - $44e27
 RocketHideout2Text1: ; 0x450de
     db $08 ; asm
     ld hl, $50d1
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$450e8,$f
@@ -16240,14 +16316,14 @@ INCBIN "baserom.gbc",$45225,$4531b - $45225
 RocketHideout3Text1: ; 0x4531b
     db $08 ; asm
     ld hl, $5302
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$45325,$45334 - $45325
 RocketHideout3Text2: ; 0x45334
     db $08 ; asm
     ld hl, $530e
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$4533e,$f
@@ -16315,21 +16391,21 @@ INCBIN "baserom.gbc",$4557a,$45589 - $4557a
 RocketHideout4Text2: ; 0x45589
     db $08 ; asm
     ld hl, $5515
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$45593,$455a2 - $45593
 RocketHideout4Text3: ; 0x455a2
     db $08 ; asm
     ld hl, $5521
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$455ac,$455bb - $455ac
 RocketHideout4Text4: ; 0x455bb
     db $08 ; asm
     ld hl, $552d
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$455c5,$2c
@@ -16863,7 +16939,7 @@ INCBIN "baserom.gbc",$45ef0,$45f1c - $45ef0
 UnknownDungeon3Text1: ; 0x45f1c
     db $08 ; asm
     ld hl, $5f0f
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$45f26,$10
@@ -16899,49 +16975,49 @@ INCBIN "baserom.gbc",$45feb,$46075 - $45feb
 RockTunnel2Text1: ; 0x46075
     db $08 ; asm
     ld hl, $6014
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 RockTunnel2Text2: ; 0x4607f
     db $08 ; asm
     ld hl, $6020
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 RockTunnel2Text3: ; 0x46089
     db $08 ; asm
     ld hl, $602c
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 RockTunnel2Text4: ; 0x46093
     db $08 ; asm
     ld hl, $6038
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 RockTunnel2Text5: ; 0x4609d
     db $08 ; asm
     ld hl, $6044
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 RockTunnel2Text6: ; 0x460a7
     db $08 ; asm
     ld hl, $6050
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 RockTunnel2Text7: ; 0x460b1
     db $08 ; asm
     ld hl, $605c
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 RockTunnel2Text8: ; 0x460bb
     db $08 ; asm
     ld hl, $6068
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$460c5,$78
@@ -17118,7 +17194,7 @@ INCBIN "baserom.gbc",$46799,$46893 - $46799
 SeafoamIslands5Text3: ; 0x46893
     db $08 ; asm
     ld hl, $6886
-    call $31cc
+    call LoadTrainerHeader
     ld a, $4
     ld [$d668], a
     jp $24d7
@@ -17933,49 +18009,49 @@ INCBIN "baserom.gbc",$48a5e,$48a81 - $48a5e
 CeladonGymText2: ; 0x48a81
     db $08 ; asm
     ld hl, $49bc
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$48a8b,$48a9a - $48a8b
 CeladonGymText3: ; 0x48a9a
     db $08 ; asm
     ld hl, $49c8
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$48aa4,$48ab3 - $48aa4
 CeladonGymText4: ; 0x48ab3
     db $08 ; asm
     ld hl, $49d4
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$48abd,$48acc - $48abd
 CeladonGymText5: ; 0x48acc
     db $08 ; asm
     ld hl, $49e0
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$48ad6,$48ae5 - $48ad6
 CeladonGymText6: ; 0x48ae5
     db $08 ; asm
     ld hl, $49ec
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$48aef,$48afe - $48aef
 CeladonGymText7: ; 0x48afe
     db $08 ; asm
     ld hl, $49f8
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$48b08,$48b17 - $48b08
 CeladonGymText8: ; 0x48b17
     db $08 ; asm
     ld hl, $4a04
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$48b21,$f
@@ -19172,43 +19248,43 @@ INCBIN "baserom.gbc",$499c8,$49a52 - $499c8
 MtMoon1Text1: ; 0x49a52
     db $08 ; asm
     ld hl, $59fd
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 MtMoon1Text2: ; 0x49a5c
     db $08 ; asm
     ld hl, $5a09
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 MtMoon1Text3: ; 0x49a66
     db $08 ; asm
     ld hl, $5a15
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 MtMoon1Text4: ; 0x49a70
     db $08 ; asm
     ld hl, $5a21
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 MtMoon1Text5: ; 0x49a7a
     db $08 ; asm
     ld hl, $5a2d
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 MtMoon1Text6: ; 0x49a84
     db $08 ; asm
     ld hl, $5a39
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 MtMoon1Text7: ; 0x49a8e
     db $08 ; asm
     ld hl, $5a45
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$49a98,$69
@@ -19301,25 +19377,25 @@ MtMoon3Text1: ; 0x49e79
 MtMoon3Text2: ; 0x49ec1
     db $08 ; asm
     ld hl, $5e48
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 MtMoon3Text3: ; 0x49ecb
     db $08 ; asm
     ld hl, $5e54
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 MtMoon3Text4: ; 0x49ed5
     db $08 ; asm
     ld hl, $5e60
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 MtMoon3Text5: ; 0x49edf
     db $08 ; asm
     ld hl, $5e6c
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 MtMoon3Text6: ; 0x49ee9
@@ -20352,61 +20428,61 @@ INCBIN "baserom.gbc",$50ca9,$50db3 - $50ca9
 Route20Text1: ; 0x50db3
     db $08 ; asm
     ld hl, $4d3a
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 Route20Text2: ; 0x50dbd
     db $08 ; asm
     ld hl, $4d46
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 Route20Text3: ; 0x50dc7
     db $08 ; asm
     ld hl, $4d52
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 Route20Text4: ; 0x50dd1
     db $08 ; asm
     ld hl, $4d5e
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 Route20Text5: ; 0x50ddb
     db $08 ; asm
     ld hl, $4d6a
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 Route20Text6: ; 0x50de5
     db $08 ; asm
     ld hl, $4d76
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 Route20Text7: ; 0x50def
     db $08 ; asm
     ld hl, $4d82
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 Route20Text8: ; 0x50df9
     db $08 ; asm
     ld hl, $4d8e
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 Route20Text9: ; 0x50e03
     db $08 ; asm
     ld hl, $4d9a
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 Route20Text10: ; 0x50e0d
     db $08 ; asm
     ld hl, $4da6
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$50e17,$96
@@ -20498,92 +20574,92 @@ INCBIN "baserom.gbc",$513ad,$51535 - $513ad
 Route24Text2: ; 0x51535
     db $08 ; asm
     ld hl, $545b
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 Route24Text3: ; 0x5153f
     db $08 ; asm
     ld hl, $5467
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 Route24Text4: ; 0x51549
     db $08 ; asm
     ld hl, $5473
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 Route24Text5: ; 0x51553
     db $08 ; asm
     ld hl, $547f
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 Route24Text6: ; 0x5155d
     db $08 ; asm
     ld hl, $548b
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 Route24Text7: ; 0x51567
     db $08 ; asm
     ld hl, $5497
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$51571,$516ab - $51571
 Route25Text1: ; 0x516ab
     db $08 ; asm
     ld hl, $563e
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 Route25Text2: ; 0x516b5
     db $08 ; asm
     ld hl, $564a
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 Route25Text3: ; 0x516bf
     db $08 ; asm
     ld hl, $5656
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 Route25Text4: ; 0x516c9
     db $08 ; asm
     ld hl, $5662
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 Route25Text5: ; 0x516d3
     db $08 ; asm
     ld hl, $566e
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 Route25Text6: ; 0x516dd
     db $08 ; asm
     ld hl, $567a
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 Route25Text7: ; 0x516e7
     db $08 ; asm
     ld hl, $5686
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 Route25Text8: ; 0x516f1
     db $08 ; asm
     ld hl, $5692
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 Route25Text9: ; 0x516fb
     db $08 ; asm
     ld hl, $569e
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$51705,$87
@@ -20605,37 +20681,37 @@ INCBIN "baserom.gbc",$5179d,$5187e - $5179d
 VictoryRoad2Text1: ; 0x5187e
     db $08 ; asm
     ld hl, $5835
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 VictoryRoad2Text2: ; 0x51888
     db $08 ; asm
     ld hl, $5841
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 VictoryRoad2Text3: ; 0x51892
     db $08 ; asm
     ld hl, $584d
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 VictoryRoad2Text4: ; 0x5189c
     db $08 ; asm
     ld hl, $5859
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 VictoryRoad2Text5: ; 0x518a6
     db $08 ; asm
     ld hl, $5865
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 VictoryRoad2Text6: ; 0x518b0
     db $08 ; asm
     ld hl, $5871
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$518ba,$5b
@@ -20796,28 +20872,28 @@ INCBIN "baserom.gbc",$51e46,$51e50 - $51e46
 SilphCo7Text5: ; 0x51e50
     db $08 ; asm
     ld hl, $5d5d
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$51e5a,$51e69 - $51e5a
 SilphCo7Text6: ; 0x51e69
     db $08 ; asm
     ld hl, $5d69
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$51e73,$51e82 - $51e73
 SilphCo7Text7: ; 0x51e82
     db $08 ; asm
     ld hl, $5d75
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$51e8c,$51e9b - $51e8c
 SilphCo7Text8: ; 0x51e9b
     db $08 ; asm
     ld hl, $5d81
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$51ea5,$51eb4 - $51ea5
@@ -20878,7 +20954,7 @@ INCBIN "baserom.gbc",$51fd8,$52064 - $51fd8
 Mansion2Text1: ; 0x52064
     db $08 ; asm
     ld hl, $6057
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$5206e,$f
@@ -20930,13 +21006,13 @@ INCBIN "baserom.gbc",$521ee,$522af - $521ee
 Mansion3Text1: ; 0x522af
     db $08 ; asm
     ld hl, $6296
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 Mansion3Text2: ; 0x522b9
     db $08 ; asm
     ld hl, $62a2
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$522c3,$23
@@ -20976,13 +21052,13 @@ INCBIN "baserom.gbc",$523b9,$52461 - $523b9
 Mansion4Text1: ; 0x52461
     db $08 ; asm
     ld hl, $6448
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 Mansion4Text2: ; 0x5246b
     db $08 ; asm
     ld hl, $6454
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$52475,$1e
@@ -21525,56 +21601,56 @@ Route3Text1: ; 0x55586
 Route3Text2: ; 0x5558b
     db $08 ; asm
     ld hl, $5525
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$55595,$555a4 - $55595
 Route3Text3: ; 0x555a4
     db $08 ; asm
     ld hl, $5531
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$555ae,$555bd - $555ae
 Route3Text4: ; 0x555bd
     db $08 ; asm
     ld hl, $553d
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$555c7,$555d6 - $555c7
 Route3Text5: ; 0x555d6
     db $08 ; asm
     ld hl, $5549
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$555e0,$555ef - $555e0
 Route3Text6: ; 0x555ef
     db $08 ; asm
     ld hl, $5555
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$555f9,$55608 - $555f9
 Route3Text7: ; 0x55608
     db $08 ; asm
     ld hl, $5561
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$55612,$55621 - $55612
 Route3Text8: ; 0x55621
     db $08 ; asm
     ld hl, $556d
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$5562b,$5563a - $5562b
 Route3Text9: ; 0x5563a
     db $08 ; asm
     ld hl, $5579
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$55644,$f
@@ -21592,7 +21668,7 @@ Route4Text1: ; 0x5568a
 Route4Text2: ; 0x5568f
     db $08 ; asm
     ld hl, $567d
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$55699,$f
@@ -21643,7 +21719,7 @@ Route9Text1: ; 0x55758
     ld [$4b21], sp
     ld d, a
 .asm_4fe87 ; 0x5578c
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$55792,$87
@@ -21656,70 +21732,70 @@ INCBIN "baserom.gbc",$5581e,$558ca - $5581e
 Route13Text1: ; 0x558ca
     db $08 ; asm
     ld hl, $5851
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$558d4,$558e3 - $558d4
 Route13Text2: ; 0x558e3
     db $08 ; asm
     ld hl, $585d
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$558ed,$558fc - $558ed
 Route13Text3: ; 0x558fc
     db $08 ; asm
     ld hl, $5869
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$55906,$55915 - $55906
 Route13Text4: ; 0x55915
     db $08 ; asm
     ld hl, $5875
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$5591f,$5592e - $5591f
 Route13Text5: ; 0x5592e
     db $08 ; asm
     ld hl, $5881
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$55938,$55947 - $55938
 Route13Text6: ; 0x55947
     db $08 ; asm
     ld hl, $588d
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$55951,$55960 - $55951
 Route13Text7: ; 0x55960
     db $08 ; asm
     ld hl, $5899
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$5596a,$55979 - $5596a
 Route13Text8: ; 0x55979
     db $08 ; asm
     ld hl, $58a5
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$55983,$55992 - $55983
 Route13Text9: ; 0x55992
     db $08 ; asm
     ld hl, $58b1
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$5599c,$559ab - $5599c
 Route13Text10: ; 0x559ab
     db $08 ; asm
     ld hl, $58bd
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$559b5,$f
@@ -21742,70 +21818,70 @@ INCBIN "baserom.gbc",$559d3,$55a7b - $559d3
 Route14Text1: ; 0x55a7b
     db $08 ; asm
     ld hl, $5a02
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$55a85,$55a94 - $55a85
 Route14Text2: ; 0x55a94
     db $08 ; asm
     ld hl, $5a0e
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$55a9e,$55aad - $55a9e
 Route14Text3: ; 0x55aad
     db $08 ; asm
     ld hl, $5a1a
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$55ab7,$55ac6 - $55ab7
 Route14Text4: ; 0x55ac6
     db $08 ; asm
     ld hl, $5a26
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$55ad0,$55adf - $55ad0
 Route14Text5: ; 0x55adf
     db $08 ; asm
     ld hl, $5a32
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$55ae9,$55af8 - $55ae9
 Route14Text6: ; 0x55af8
     db $08 ; asm
     ld hl, $5a3e
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$55b02,$55b11 - $55b02
 Route14Text7: ; 0x55b11
     db $08 ; asm
     ld hl, $5a4a
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$55b1b,$55b2a - $55b1b
 Route14Text8: ; 0x55b2a
     db $08 ; asm
     ld hl, $5a56
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$55b34,$55b43 - $55b34
 Route14Text9: ; 0x55b43
     db $08 ; asm
     ld hl, $5a62
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$55b4d,$55b5c - $55b4d
 Route14Text10: ; 0x55b5c
     db $08 ; asm
     ld hl, $5a6e
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$55b66,$f
@@ -21818,70 +21894,70 @@ INCBIN "baserom.gbc",$55b7a,$55c2c - $55b7a
 Route17Text1: ; 0x55c2c
     db $08 ; asm
     ld hl, $5bb3
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$55c36,$55c45 - $55c36
 Route17Text2: ; 0x55c45
     db $08 ; asm
     ld hl, $5bbf
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$55c4f,$55c5e - $55c4f
 Route17Text3: ; 0x55c5e
     db $08 ; asm
     ld hl, $5bcb
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$55c68,$55c77 - $55c68
 Route17Text4: ; 0x55c77
     db $08 ; asm
     ld hl, $5bd7
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$55c81,$55c90 - $55c81
 Route17Text5: ; 0x55c90
     db $08 ; asm
     ld hl, $5be3
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$55c9a,$55ca9 - $55c9a
 Route17Text6: ; 0x55ca9
     db $08 ; asm
     ld hl, $5bef
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$55cb3,$55cc2 - $55cb3
 Route17Text7: ; 0x55cc2
     db $08 ; asm
     ld hl, $5bfb
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$55ccc,$55cdb - $55ccc
 Route17Text8: ; 0x55cdb
     db $08 ; asm
     ld hl, $5c07
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$55ce5,$55cf4 - $55ce5
 Route17Text9: ; 0x55cf4
     db $08 ; asm
     ld hl, $5c13
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$55cfe,$55d0d - $55cfe
 Route17Text10: ; 0x55d0d
     db $08 ; asm
     ld hl, $5c1f
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$55d17,$f
@@ -21919,61 +21995,61 @@ INCBIN "baserom.gbc",$55d44,$55dec - $55d44
 Route19Text1: ; 0x55dec
     db $08 ; asm
     ld hl, $5d73
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 Route19Text2: ; 0x55df6
     db $08 ; asm
     ld hl, $5d7f
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 Route19Text3: ; 0x55e00
     db $08 ; asm
     ld hl, $5d8b
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 Route19Text4: ; 0x55e0a
     db $08 ; asm
     ld hl, $5d97
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 Route19Text5: ; 0x55e14
     db $08 ; asm
     ld hl, $5da3
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 Route19Text6: ; 0x55e1e
     db $08 ; asm
     ld hl, $5daf
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 Route19Text7: ; 0x55e28
     db $08 ; asm
     ld hl, $5dbb
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 Route19Text8: ; 0x55e32
     db $08 ; asm
     ld hl, $5dc7
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 Route19Text9: ; 0x55e3c
     db $08 ; asm
     ld hl, $5dd3
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 Route19Text10: ; 0x55e46
     db $08 ; asm
     ld hl, $5ddf
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$55e50,$96
@@ -21986,55 +22062,55 @@ INCBIN "baserom.gbc",$55eeb,$55f83 - $55eeb
 Route21Text1: ; 0x55f83
     db $08 ; asm
     ld hl, $5f16
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 Route21Text2: ; 0x55f8d
     db $08 ; asm
     ld hl, $5f22
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 Route21Text3: ; 0x55f97
     db $08 ; asm
     ld hl, $5f2e
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 Route21Text4: ; 0x55fa1
     db $08 ; asm
     ld hl, $5f3a
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 Route21Text5: ; 0x55fab
     db $08 ; asm
     ld hl, $5f46
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 Route21Text6: ; 0x55fb5
     db $08 ; asm
     ld hl, $5f52
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 Route21Text7: ; 0x55fbf
     db $08 ; asm
     ld hl, $5f5e
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 Route21Text8: ; 0x55fc9
     db $08 ; asm
     ld hl, $5f6a
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 Route21Text9: ; 0x55fd3
     db $08 ; asm
     ld hl, $5f76
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$55fdd,$87
@@ -22313,19 +22389,19 @@ INCBIN "baserom.gbc",$565be,$565c8 - $565be
 SilphCo8Text2: ; 0x565c8
     db $08 ; asm
     ld hl, $6585
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 SilphCo8Text3: ; 0x565d2
     db $08 ; asm
     ld hl, $6591
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 SilphCo8Text4: ; 0x565dc
     db $08 ; asm
     ld hl, $659d
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$565e6,$2d
@@ -22849,35 +22925,35 @@ INCBIN "baserom.gbc",$58d7d,$59139 - $58d7d
 Route6Text2: ; 0x59139
     db $08 ; asm
     ld hl, $50e3
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$59143,$5914d - $59143
 Route6Text3: ; 0x5914d
     db $08 ; asm
     ld hl, $50ef
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$59157,$59166 - $59157
 Route6Text4: ; 0x59166
     db $08 ; asm
     ld hl, $50fb
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$59170,$5917f - $59170
 Route6Text5: ; 0x5917f
     db $08 ; asm
     ld hl, $5107
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$59189,$59198 - $59189
 Route6Text6: ; 0x59198
     db $08 ; asm
     ld hl, $5113
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$591a2,$f
@@ -22890,56 +22966,56 @@ INCBIN "baserom.gbc",$591b6,$59269 - $591b6
 Route8Text2: ; 0x59269
     db $08 ; asm
     ld hl, $51ef
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$59273,$59282 - $59273
 Route8Text3: ; 0x59282
     db $08 ; asm
     ld hl, $51fb
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$5928c,$5929b - $5928c
 Route8Text4: ; 0x5929b
     db $08 ; asm
     ld hl, $5207
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$592a5,$592b4 - $592a5
 Route8Text5: ; 0x592b4
     db $08 ; asm
     ld hl, $5213
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$592be,$592cd - $592be
 Route8Text6: ; 0x592cd
     db $08 ; asm
     ld hl, $521f
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$592d7,$592e6 - $592d7
 Route8Text7: ; 0x592e6
     db $08 ; asm
     ld hl, $522b
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$592f0,$592ff - $592f0
 Route8Text8: ; 0x592ff
     db $08 ; asm
     ld hl, $5237
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$59309,$59318 - $59309
 Route8Text9: ; 0x59318
     db $08 ; asm
     ld hl, $5243
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$59322,$f
@@ -22952,42 +23028,42 @@ INCBIN "baserom.gbc",$59336,$593ac - $59336
 Route10Text1: ; 0x593ac
     db $08 ; asm
     ld hl, $5363
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$593b6,$593c5 - $593b6
 Route10Text2: ; 0x593c5
     db $08 ; asm
     ld hl, $536f
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$593cf,$593de - $593cf
 Route10Text3: ; 0x593de
     db $08 ; asm
     ld hl, $537b
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$593e8,$593f7 - $593e8
 Route10Text4: ; 0x593f7
     db $08 ; asm
     ld hl, $5387
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$59401,$59410 - $59401
 Route10Text5: ; 0x59410
     db $08 ; asm
     ld hl, $5393
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$5941a,$59429 - $5941a
 Route10Text6: ; 0x59429
     db $08 ; asm
     ld hl, $539f
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$59433,$f
@@ -23006,63 +23082,63 @@ INCBIN "baserom.gbc",$5944c,$5950d - $5944c
 Route11Text2: ; 0x5950d
     db $08 ; asm
     ld hl, $5487
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$59517,$59526 - $59517
 Route11Text3: ; 0x59526
     db $08 ; asm
     ld hl, $5493
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$59530,$5953f - $59530
 Route11Text4: ; 0x5953f
     db $08 ; asm
     ld hl, $549f
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$59549,$59558 - $59549
 Route11Text5: ; 0x59558
     db $08 ; asm
     ld hl, $54ab
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$59562,$59571 - $59562
 Route11Text6: ; 0x59571
     db $08 ; asm
     ld hl, $54b7
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$5957b,$5958a - $5957b
 Route11Text7: ; 0x5958a
     db $08 ; asm
     ld hl, $54c3
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$59594,$595a3 - $59594
 Route11Text8: ; 0x595a3
     db $08 ; asm
     ld hl, $54cf
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$595ad,$595bc - $595ad
 Route11Text9: ; 0x595bc
     db $08 ; asm
     ld hl, $54db
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$595c6,$595d5 - $595c6
 Route11Text10: ; 0x595d5
     db $08 ; asm
     ld hl, $54e7
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$595df,$f
@@ -23081,49 +23157,49 @@ INCBIN "baserom.gbc",$596eb,$596f5 - $596eb
 Route12Text2: ; 0x596f5
     db $08 ; asm
     ld hl, $5691
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$596ff,$5970e - $596ff
 Route12Text3: ; 0x5970e
     db $08 ; asm
     ld hl, $569d
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$59718,$59727 - $59718
 Route12Text4: ; 0x59727
     db $08 ; asm
     ld hl, $56a9
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$59731,$59740 - $59731
 Route12Text5: ; 0x59740
     db $08 ; asm
     ld hl, $56b5
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$5974a,$59759 - $5974a
 Route12Text6: ; 0x59759
     db $08 ; asm
     ld hl, $56c1
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$59763,$59772 - $59763
 Route12Text7: ; 0x59772
     db $08 ; asm
     ld hl, $56cd
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$5977c,$5978b - $5977c
 Route12Text8: ; 0x5978b
     db $08 ; asm
     ld hl, $56d9
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$59795,$f
@@ -23169,7 +23245,7 @@ Route15Text1: ; 0x59858
     ld [$4b21], sp
     ld e, b
 .asm_31ef8 ; 0x59892
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$59898,$96
@@ -23182,42 +23258,42 @@ INCBIN "baserom.gbc",$59933,$59a18 - $59933
 Route16Text1: ; 0x59a18
     db $08 ; asm
     ld hl, $59cf
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$59a22,$59a31 - $59a22
 Route16Text2: ; 0x59a31
     db $08 ; asm
     ld hl, $59db
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$59a3b,$59a4a - $59a3b
 Route16Text3: ; 0x59a4a
     db $08 ; asm
     ld hl, $59e7
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$59a54,$59a63 - $59a54
 Route16Text4: ; 0x59a63
     db $08 ; asm
     ld hl, $59f3
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$59a6d,$59a7c - $59a6d
 Route16Text5: ; 0x59a7c
     db $08 ; asm
     ld hl, $59ff
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$59a86,$59a95 - $59a86
 Route16Text6: ; 0x59a95
     db $08 ; asm
     ld hl, $5a0b
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$59a9f,$f
@@ -23241,21 +23317,21 @@ INCBIN "baserom.gbc",$59ac7,$59b0f - $59ac7
 Route18Text1: ; 0x59b0f
     db $08 ; asm
     ld hl, $5aea
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$59b19,$59b28 - $59b19
 Route18Text2: ; 0x59b28
     db $08 ; asm
     ld hl, $5af6
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$59b32,$59b41 - $59b32
 Route18Text3: ; 0x59b41
     db $08 ; asm
     ld hl, $5b02
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$59b4b,$f
@@ -23424,25 +23500,25 @@ INCBIN "baserom.gbc",$59ded,$59e02 - $59ded
 SilphCo2Text2: ; 0x59e02
     db $08 ; asm
     ld hl, $5d90
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 SilphCo2Text3: ; 0x59e0c
     db $08 ; asm
     ld hl, $5d9c
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 SilphCo2Text4: ; 0x59e16
     db $08 ; asm
     ld hl, $5da8
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 SilphCo2Text5: ; 0x59e20
     db $08 ; asm
     ld hl, $5db4
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$59e2a,$3c
@@ -23504,14 +23580,14 @@ INCBIN "baserom.gbc",$59ff9,$5a003 - $59ff9
 SilphCo3Text2: ; 0x5a003
     db $08 ; asm
     ld hl, $5fcc
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$5a00d,$5a01c - $5a00d
 SilphCo3Text3: ; 0x5a01c
     db $08 ; asm
     ld hl, $5fd8
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$5a026,$f
@@ -23566,13 +23642,13 @@ INCBIN "baserom.gbc",$5a139,$5a1ab - $5a139
 SilphCo10Text1: ; 0x5a1ab
     db $08 ; asm
     ld hl, $6192
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 SilphCo10Text2: ; 0x5a1b5
     db $08 ; asm
     ld hl, $619e
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 SilphCo10Text3: ; 0x5a1bf
@@ -23632,7 +23708,7 @@ INCBIN "baserom.gbc",$5a2ae,$5a3a4 - $5a2ae
 LanceText1: ; 0x5a3a4
     db $08 ; asm
     ld hl, $6397
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$5a3ae,$17
@@ -23970,7 +24046,7 @@ INCBIN "baserom.gbc",$5c49e,$5c4c6 - $5c49e
 PewterGymText2: ; 0x5c4c6
     db $08 ; asm
     ld hl, $4441
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$5c4d0,$5c4df - $5c4d0
@@ -24155,14 +24231,14 @@ INCBIN "baserom.gbc",$5c7be,$5c7df - $5c7be
 CeruleanGymText2: ; 0x5c7df
     db $08 ; asm
     ld hl, $4758
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$5c7e9,$5c7f8 - $5c7e9
 CeruleanGymText3: ; 0x5c7f8
     db $08 ; asm
     ld hl, $4764
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$5c802,$5c811 - $5c802
@@ -24438,21 +24514,21 @@ INCBIN "baserom.gbc",$5cb6d,$5cb90 - $5cb6d
 VermilionGymText2: ; 0x5cb90
     db $08 ; asm
     ld hl, $4af8
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$5cb9a,$5cba9 - $5cb9a
 VermilionGymText3: ; 0x5cba9
     db $08 ; asm
     ld hl, $4b04
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$5cbb3,$5cbc2 - $5cbb3
 VermilionGymText4: ; 0x5cbc2
     db $08 ; asm
     ld hl, $4b10
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$5cbcc,$5cbdb - $5cbcc
@@ -24634,28 +24710,28 @@ INCBIN "baserom.gbc",$5ce8e,$5cea2 - $5ce8e
 FightingDojoText2: ; 0x5cea2
     db $08 ; asm
     ld hl, $4e13
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$5ceac,$5cebb - $5ceac
 FightingDojoText3: ; 0x5cebb
     db $08 ; asm
     ld hl, $4e1f
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$5cec5,$5ced4 - $5cec5
 FightingDojoText4: ; 0x5ced4
     db $08 ; asm
     ld hl, $4e2b
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$5cede,$5ceed - $5cede
 FightingDojoText5: ; 0x5ceed
     db $08 ; asm
     ld hl, $4e37
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$5cef7,$5cf06 - $5cef7
@@ -24798,43 +24874,43 @@ INCBIN "baserom.gbc",$5d162,$5d187 - $5d162
 SaffronGymText2: ; 0x5d187
     db $08 ; asm
     ld hl, $50c3
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 SaffronGymText3: ; 0x5d191
     db $08 ; asm
     ld hl, $50cf
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 SaffronGymText4: ; 0x5d19b
     db $08 ; asm
     ld hl, $50db
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 SaffronGymText5: ; 0x5d1a5
     db $08 ; asm
     ld hl, $50e7
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 SaffronGymText6: ; 0x5d1af
     db $08 ; asm
     ld hl, $50f3
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 SaffronGymText7: ; 0x5d1b9
     db $08 ; asm
     ld hl, $50ff
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 SaffronGymText8: ; 0x5d1c3
     db $08 ; asm
     ld hl, $510b
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 SaffronGymText9: ; 0x5d1cd
@@ -25355,19 +25431,19 @@ INCBIN "baserom.gbc",$5d8e5,$5d8f4 - $5d8e5
 SilphCo9Text2: ; 0x5d8f4
     db $08 ; asm
     ld hl, $5893
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 SilphCo9Text3: ; 0x5d8fe
     db $08 ; asm
     ld hl, $589f
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 SilphCo9Text4: ; 0x5d908
     db $08 ; asm
     ld hl, $58ab
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$5d912,$2d
@@ -25412,13 +25488,13 @@ INCBIN "baserom.gbc",$5da0a,$5da86 - $5da0a
 VictoryRoad1Text1: ; 0x5da86
     db $08 ; asm
     ld hl, $5a6d
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 VictoryRoad1Text2: ; 0x5da90
     db $08 ; asm
     ld hl, $5a79
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$5da9a,$1e
@@ -25614,19 +25690,19 @@ INCBIN "baserom.gbc",$606cc,$60712 - $606cc
 PokemonTower3Text1: ; 0x60712
     db $08 ; asm
     ld hl, $46ed
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 PokemonTower3Text2: ; 0x6071c
     db $08 ; asm
     ld hl, $46f9
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 PokemonTower3Text3: ; 0x60726
     db $08 ; asm
     ld hl, $4705
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$60730,$2d
@@ -25665,19 +25741,19 @@ INCBIN "baserom.gbc",$607f6,$60840 - $607f6
 PokemonTower4Text1: ; 0x60840
     db $08 ; asm
     ld hl, $481b
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 PokemonTower4Text2: ; 0x6084a
     db $08 ; asm
     ld hl, $4827
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 PokemonTower4Text3: ; 0x60854
     db $08 ; asm
     ld hl, $4833
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$6085e,$2d
@@ -25723,28 +25799,28 @@ PokemonTower5Text1: ; 0x609da
 PokemonTower5Text2: ; 0x609df
     db $08 ; asm
     ld hl, $49a9
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$609e9,$609f8 - $609e9
 PokemonTower5Text3: ; 0x609f8
     db $08 ; asm
     ld hl, $49b5
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$60a02,$60a11 - $60a02
 PokemonTower5Text4: ; 0x60a11
     db $08 ; asm
     ld hl, $49c1
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$60a1b,$60a2a - $60a1b
 PokemonTower5Text5: ; 0x60a2a
     db $08 ; asm
     ld hl, $49cd
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$60a34,$14
@@ -25785,19 +25861,19 @@ INCBIN "baserom.gbc",$60aef,$60be4 - $60aef
 PokemonTower6Text1: ; 0x60be4
     db $08 ; asm
     ld hl, $4bbf
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 PokemonTower6Text2: ; 0x60bee
     db $08 ; asm
     ld hl, $4bcb
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 PokemonTower6Text3: ; 0x60bf8
     db $08 ; asm
     ld hl, $4bd7
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$60c02,$59
@@ -25839,19 +25915,19 @@ INCBIN "baserom.gbc",$60d05,$60e6c - $60d05
 PokemonTower7Text1: ; 0x60e6c
     db $08 ; asm
     ld hl, $4e47
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 PokemonTower7Text2: ; 0x60e76
     db $08 ; asm
     ld hl, $4e53
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 PokemonTower7Text3: ; 0x60e80
     db $08 ; asm
     ld hl, $4e5f
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 PokemonTower7Text4: ; 0x60e8a
@@ -25977,19 +26053,19 @@ ViridianForestText1: ; 0x61167
 ViridianForestText2: ; 0x6116c
     db $08 ; asm
     ld hl, $5142
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 ViridianForestText3: ; 0x61176
     db $08 ; asm
     ld hl, $514e
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 ViridianForestText4: ; 0x61180
     db $08 ; asm
     ld hl, $515a
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$6118a,$2d
@@ -26207,14 +26283,14 @@ INCBIN "baserom.gbc",$616ae,$616f9 - $616ae
 SSAnne5Text4: ; 0x616f9
     db $08 ; asm
     ld hl, $56d1
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$61703,$61712 - $61703
 SSAnne5Text5: ; 0x61712
     db $08 ; asm
     ld hl, $56dd
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$6171c,$f
@@ -26378,25 +26454,25 @@ INCBIN "baserom.gbc",$61976,$619d6 - $61976
 SSAnne8Text1: ; 0x619d6
     db $08 ; asm
     ld hl, $59a5
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 SSAnne8Text2: ; 0x619e0
     db $08 ; asm
     ld hl, $59b1
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 SSAnne8Text3: ; 0x619ea
     db $08 ; asm
     ld hl, $59bd
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 SSAnne8Text4: ; 0x619f4
     db $08 ; asm
     ld hl, $59c9
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$619fe,$0
@@ -26481,25 +26557,25 @@ INCBIN "baserom.gbc",$61b4b,$61bb5 - $61b4b
 SSAnne9Text1: ; 0x61bb5
     db $08 ; asm
     ld hl, $5b84
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 SSAnne9Text2: ; 0x61bbf
     db $08 ; asm
     ld hl, $5b90
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 SSAnne9Text3: ; 0x61bc9
     db $08 ; asm
     ld hl, $5b9c
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 SSAnne9Text4: ; 0x61bd3
     db $08 ; asm
     ld hl, $5ba8
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 SSAnne9Text5: ; 0x61bdd
@@ -26616,37 +26692,37 @@ INCBIN "baserom.gbc",$61d55,$61dcd - $61d55
 SSAnne10Text1: ; 0x61dcd
     db $08 ; asm
     ld hl, $5d84
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 SSAnne10Text2: ; 0x61dd7
     db $08 ; asm
     ld hl, $5d90
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 SSAnne10Text3: ; 0x61de1
     db $08 ; asm
     ld hl, $5d9c
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 SSAnne10Text4: ; 0x61deb
     db $08 ; asm
     ld hl, $5da8
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 SSAnne10Text5: ; 0x61df5
     db $08 ; asm
     ld hl, $5db4
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 SSAnne10Text6: ; 0x61dff
     db $08 ; asm
     ld hl, $5dc0
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$61e09,$0
@@ -26829,14 +26905,14 @@ INCBIN "baserom.gbc",$62330,$6233a - $62330
 SilphCo11Text4: ; 0x6233a
     db $08 ; asm
     ld hl, $62c3
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$62344,$62353 - $62344
 SilphCo11Text5: ; 0x62353
     db $08 ; asm
     ld hl, $62cf
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$6235d,$23
@@ -27875,56 +27951,56 @@ INCBIN "baserom.gbc",$74ace,$74af3 - $74ace
 ViridianGymText2: ; 0x74af3
     db $08 ; asm
     ld hl, $4a08
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$74afd,$74b0c - $74afd
 ViridianGymText3: ; 0x74b0c
     db $08 ; asm
     ld hl, $4a14
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$74b16,$74b25 - $74b16
 ViridianGymText4: ; 0x74b25
     db $08 ; asm
     ld hl, $4a20
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$74b2f,$74b3e - $74b2f
 ViridianGymText5: ; 0x74b3e
     db $08 ; asm
     ld hl, $4a2c
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$74b48,$74b57 - $74b48
 ViridianGymText6: ; 0x74b57
     db $08 ; asm
     ld hl, $4a38
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$74b61,$74b70 - $74b61
 ViridianGymText7: ; 0x74b70
     db $08 ; asm
     ld hl, $4a44
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$74b7a,$74b89 - $74b7a
 ViridianGymText8: ; 0x74b89
     db $08 ; asm
     ld hl, $4a50
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$74b93,$74ba2 - $74b93
 ViridianGymText9: ; 0x74ba2
     db $08 ; asm
     ld hl, $4a5c
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$74bac,$74bbb - $74bac
@@ -28375,42 +28451,42 @@ INCBIN "baserom.gbc",$75581,$755a4 - $75581
 FuchsiaGymText2: ; 0x755a4
     db $08 ; asm
     ld hl, $54eb
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$755ae,$755bd - $755ae
 FuchsiaGymText3: ; 0x755bd
     db $08 ; asm
     ld hl, $54f7
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$755c7,$755d6 - $755c7
 FuchsiaGymText4: ; 0x755d6
     db $08 ; asm
     ld hl, $5503
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$755e0,$755ef - $755e0
 FuchsiaGymText5: ; 0x755ef
     db $08 ; asm
     ld hl, $550f
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$755f9,$75608 - $755f9
 FuchsiaGymText6: ; 0x75608
     db $08 ; asm
     ld hl, $551b
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$75612,$75621 - $75612
 FuchsiaGymText7: ; 0x75621
     db $08 ; asm
     ld hl, $5527
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$7562b,$7563a - $7562b
@@ -29084,7 +29160,7 @@ INCBIN "baserom.gbc",$7617b,$76262 - $7617b
 LoreliText1: ; 0x76262
     db $08 ; asm
     ld hl, $6255
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$7626c,$14
@@ -29124,7 +29200,7 @@ INCBIN "baserom.gbc",$762d6,$763b9 - $762d6
 BrunoText1: ; 0x763b9
     db $08 ; asm
     ld hl, $63ac
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$763c3,$14
@@ -29164,7 +29240,7 @@ INCBIN "baserom.gbc",$7642d,$76516 - $7642d
 AgathaText1: ; 0x76516
     db $08 ; asm
     ld hl, $6509
-    call $31cc
+    call LoadTrainerHeader
     jp $24d7
 
 INCBIN "baserom.gbc",$76520,$14
