@@ -119,7 +119,7 @@ MapHeaderPointers: ; $01AE
 	dw ViridianCity_h ; VIRIDIAN_CITY
 	dw PewterCity_h ; PEWTER_CITY
 	dw CeruleanCity_h ; CERULEAN_CITY
-	dw LavendarTown_h ; LAVENDER_TOWN
+	dw LavenderTown_h ; LAVENDER_TOWN
 	dw VermilionCity_h ; VERMILION_CITY
 	dw CeladonCity_h ; CELADON_CITY
 	dw FuchsiaCity_h ; FUCHSIA_CITY
@@ -1037,7 +1037,7 @@ SaffronCityText19:
 CinnabarIslandText4:
 FuchsiaCityText14:
 VermilionCityText9:
-LavendarTownText6:
+LavenderTownText6:
 CeruleanCityText14:
 PewterCityText8:
 ViridianCityText11: ; 0x24ea
@@ -2369,7 +2369,7 @@ MapHeaderBanks: ; 423D
 	db BANK(ViridianCity_h) ; VIRIDIAN_CITY
 	db BANK(PewterCity_h) ; PEWTER_CITY
 	db BANK(CeruleanCity_h) ; CERULEAN_CITY
-	db BANK(LavendarTown_h) ; LAVENDER_TOWN
+	db BANK(LavenderTown_h) ; LAVENDER_TOWN
 	db BANK(VermilionCity_h) ; VERMILION_CITY
 	db BANK(CeladonCity_h) ; CELADON_CITY
 	db BANK(FuchsiaCity_h) ; FUCHSIA_CITY
@@ -15756,10 +15756,10 @@ OTString67E5: ; 67E5
 
 SECTION "bank11",DATA,BANK[$11]
 
-LavendarTown_h: ; 0x44000 to 0x4402d (45 bytes) (bank=11) (id=4)
+LavenderTown_h: ; 0x44000 to 0x4402d (45 bytes) (bank=11) (id=4)
     db $00 ; tileset
     db $09, $0a ; dimensions (y, x)
-    dw LavendarTownBlocks, $410e, $410b ; blocks, texts, scripts
+    dw LavenderTownBlocks, $410e, $410b ; blocks, texts, scripts
     db NORTH | SOUTH | WEST ; connections
 
     ; connections data
@@ -15786,7 +15786,7 @@ LavendarTown_h: ; 0x44000 to 0x4402d (45 bytes) (bank=11) (id=4)
 
     dw $402d ; objects
 
-LavendarTownObject: ; 0x4402d (size=88)
+LavenderTownObject: ; 0x4402d (size=88)
     db $2c ; border tile
 
     db $6 ; warps
@@ -15798,12 +15798,12 @@ LavendarTownObject: ; 0x4402d (size=88)
     db $d, $7, $0, NAME_RATERS_HOUSE
 
     db $6 ; signs
-    db $9, $b, $4 ; LavendarTownText4
-    db $3, $9, $5 ; LavendarTownText5
-    db $d, $10, $6 ; LavendarTownText6
-    db $5, $4, $7 ; LavendarTownText7
-    db $9, $5, $8 ; LavendarTownText8
-    db $7, $11, $9 ; LavendarTownText9
+    db $9, $b, $4 ; LavenderTownText4
+    db $3, $9, $5 ; LavenderTownText5
+    db $d, $10, $6 ; LavenderTownText6
+    db $5, $4, $7 ; LavenderTownText7
+    db $9, $5, $8 ; LavenderTownText8
+    db $7, $11, $9 ; LavenderTownText9
 
     db $3 ; people
     db SPRITE_LITTLE_GIRL, $9 + 4, $f + 4, $fe, $0, $1 ; person
@@ -15820,8 +15820,8 @@ LavendarTownObject: ; 0x4402d (size=88)
 
 INCBIN "baserom.gbc",$44085,$0
 
-LavendarTownBlocks: ; 90
-    INCBIN "maps/lavendartown.blk"
+LavenderTownBlocks: ; 90
+    INCBIN "maps/lavendertown.blk"
 
 ViridianPokeCenterBlocks: ; 28
     INCBIN "maps/viridianpokecenter.blk"
@@ -15830,7 +15830,7 @@ SafariZoneRestHouse1Blocks: ; 16
     INCBIN "maps/safarizoneresthouse1.blk"
 
 INCBIN "baserom.gbc",$4410b,$44120 - $4410b
-LavendarTownText1: ; 0x44120
+LavenderTownText1: ; 0x44120
     db $08 ; asm
     ld hl, $413c
     call PrintText
@@ -15846,33 +15846,33 @@ LavendarTownText1: ; 0x44120
 
 INCBIN "baserom.gbc",$4413c,$f
 
-LavendarTownText2: ; 0x4414b
-    TX_FAR _LavendarTownText2
+LavenderTownText2: ; 0x4414b
+    TX_FAR _LavenderTownText2
     db $50
 
 
-LavendarTownText3: ; 0x44150
-    TX_FAR _LavendarTownText3
+LavenderTownText3: ; 0x44150
+    TX_FAR _LavenderTownText3
     db $50
 
 
-LavendarTownText4: ; 0x44155
-    TX_FAR _LavendarTownText4
+LavenderTownText4: ; 0x44155
+    TX_FAR _LavenderTownText4
     db $50
 
 
-LavendarTownText5: ; 0x4415a
-    TX_FAR _LavendarTownText5
+LavenderTownText5: ; 0x4415a
+    TX_FAR _LavenderTownText5
     db $50
 
 
-LavendarTownText8: ; 0x4415f
-    TX_FAR _LavendarTownText8
+LavenderTownText8: ; 0x4415f
+    TX_FAR _LavenderTownText8
     db $50
 
 
-LavendarTownText9: ; 0x44164
-    TX_FAR _LavendarTownText9
+LavenderTownText9: ; 0x44164
+    TX_FAR _LavenderTownText9
     db $50
 
 INCBIN "baserom.gbc",$44169,$e8
@@ -29968,7 +29968,7 @@ _SaffronCityText19:
 _CinnabarIslandText4:
 _FuchsiaCityText14:
 _VermilionCityText9:
-_LavendarTownText6:
+_LavenderTownText6:
 _CeruleanCityText14:
 _PewterCityText8:
 _ViridianCityText11: ; 0x800d2
@@ -32193,7 +32193,7 @@ _CeruleanCityText17: ; 0xa5445
 
 INCBIN "baserom.gbc",$a5482,$a5506 - $a5482
 
-_LavendarTownText2: ; 0xa5506
+_LavenderTownText2: ; 0xa5506
     db $0, "This town is known", $4f
     db "as the grave site", $55
     db "of #MON.", $51
@@ -32201,7 +32201,7 @@ _LavendarTownText2: ; 0xa5506
     db "are held in", $55
     db "#MON TOWER.", $57
 
-_LavendarTownText3: ; 0xa555f
+_LavenderTownText3: ; 0xa555f
     db $0, "GHOSTs appeared", $4f
     db "in #MON TOWER.", $51
     db "I think they're", $4f
@@ -32209,22 +32209,22 @@ _LavendarTownText3: ; 0xa555f
     db "#MON that the", $55
     db "ROCKETs killed.", $57
 
-_LavendarTownText4: ; 0xa55bb
+_LavenderTownText4: ; 0xa55bb
     db $0, "LAVENDER TOWN", $4f
     db "The Noble Purple", $55
     db "Town", $57
 
-_LavendarTownText5: ; 0xa55e0
+_LavenderTownText5: ; 0xa55e0
     db $0, "New SILPH SCOPE!", $51
     db "Make the Invisible", $4f
     db "Plain to See!", $51
     db "SILPH CO.", $57
 
-_LavendarTownText8: ; 0xa561d
+_LavenderTownText8: ; 0xa561d
     db $0, "LAVENDER VOLUNTEER", $4f
     db "#MON HOUSE", $57
 
-_LavendarTownText9: ; 0xa563c
+_LavenderTownText9: ; 0xa563c
     db $0, "May the Souls of", $4f
     db "#MON Rest Easy", $55
     db "#MON TOWER", $57
