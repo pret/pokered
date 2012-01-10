@@ -6223,8 +6223,15 @@ VermilionCityText4: ; 0x1991d
 
 VermilionCityText5: ; 0x19922
     TX_FAR _VermilionCityText5
+    db $08 ; asm
+    ld a, $6a
+    call $13d0
+    call $3748
+    ld hl, $5933
+    ret
 
-INCBIN "baserom.gbc",$19926,$19938 - $19926
+;db $17, $6b, $58, $29, $50
+INCBIN "baserom.gbc",$19933,$5
 
 VermilionCityText6: ; 0x19938
     TX_FAR _VermilionCityText6
