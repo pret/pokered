@@ -6308,8 +6308,10 @@ CeladonCityText6: ; 0x199e7
 
 CeladonCityText7: ; 0x199ec
     TX_FAR _CeladonCityText7
-
-INCBIN "baserom.gbc",$199f0,$199f9 - $199f0
+    db $08 ; asm
+    ld a, $6f
+    call $13d0
+    jp $24d7
 
 CeladonCityText8: ; 0x199f9
     TX_FAR _CeladonCityText8
