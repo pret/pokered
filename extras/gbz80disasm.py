@@ -549,6 +549,7 @@ asm_commands = {
     "3e48": "GivePokemon",
     "3dd7": "Delay3",
     "3e2e": "GiveItem",
+    "2f9e": "GetMonName",
 }
 
 def random_asm_label():

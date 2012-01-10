@@ -1055,7 +1055,33 @@ Route2Text2: ; 0x24f4
     call $3e6d
     jp $24d7
 
-INCBIN "baserom.gbc",$24fd,$ad2
+INCBIN "baserom.gbc",$24fd,$2f9e - $24fd
+
+GetMonName: ; 0x2f9e
+    push hl
+    ld a, [$ff00+$b8]
+    push af
+    ld a, $7
+    ldh [$b8], a
+    ld [$2000], a
+    ld a, [$d11e]
+    dec a
+    ld hl, $421e
+    ld c, $a
+    ld b, $0
+    call $3a87
+    ld de, $cd6d
+    push de
+    ld bc, $000a
+    call $00b5
+    ld hl, $cd77
+    ld [hl], $50
+    pop de
+    pop af
+    ldh [$b8], a
+    ld [$2000], a
+    pop hl
+    ret
 
 GetItemName: ; 2FCF
 ; given an item ID at [$D11E], store the name of the item into a string
@@ -1360,7 +1386,7 @@ GetName: ; 376B
 	dec a
 	jr nz,.otherEntries\@
 	;1 = MON_NAMES
-	call $2f9e; GetMonName
+	call GetMonName
 	ld hl,11
 	add hl,de
 	ld e,l
