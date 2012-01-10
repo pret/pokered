@@ -27,7 +27,7 @@ maps = {
          0x01: "Viridian City",
          0x02: "Pewter City",
          0x03: "Cerulean City",
-         0x04: "Lavendar Town", #??
+         0x04: "Lavender Town", #??
          0x05: "Vermilion City", #correct
          0x06: "Celadon City",
          0x07: "Fuchsia City",
