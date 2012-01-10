@@ -1073,7 +1073,7 @@ GetMonName: ; 0x2f9e
     ld de, $cd6d
     push de
     ld bc, $000a
-    call $00b5
+    call CopyData
     ld hl, $cd77
     ld [hl], $50
     pop de
@@ -25117,7 +25117,7 @@ Route2GateText1: ; 0x5d5db
     ld hl, $cd6d
     ld de, $cc5b
     ld bc, $000d
-    call $00b5
+    call CopyData
     ld a, $62
     call Predef
     ldh a, [$db]
