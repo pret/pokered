@@ -26113,8 +26113,12 @@ SSAnne8Text4: ; 0x619f4
 
 SSAnne8Text8: ; 0x619fe
     TX_FAR _SSAnne8Text8
+    db $08 ; asm
+    ld a, $65
+    call $13d0
+    jp $24d7
 
-INCBIN "baserom.gbc",$61a02,$45
+INCBIN "baserom.gbc",$61a0b,60
 
 SSAnne8Text5: ; 0x61a47
     TX_FAR _SSAnne8Text5
