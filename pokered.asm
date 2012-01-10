@@ -28451,13 +28451,16 @@ Lab2Text1: ; 0x75c2a
     db $50
 
 Lab2Text2: ; 0x75c2f
-    db $08 ; asm
+    db $8
     ld a, $7
     ld [$cd3d], a
-    jr .asm_eeed7 ; 0x75c35
-    ld [$083e], sp
+    jr asm_78552 ; 0x75c35 $6
+
+Lab2Text3:
+    db $8
+    ld a, $8
     ld [$cd3d], a
-.asm_eeed7 ; 0x75c3d
+asm_78552: ; 0x75c3d
     ld a, $54
     call Predef
     jp $24d7
