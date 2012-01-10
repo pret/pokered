@@ -203,6 +203,11 @@ def parse_text_script(text_pointer, text_id, map_id, txfar=False):
             #07 = shift texts 1 row above (2nd line becomes 1st line); address for next text = 2nd line. [07]
             command = {"type": command_byte, "start_address": offset, "end_address": offset}
             offset += 1
+        elif command_byte == 0x8:
+            #08 = asm until whenever
+            command = {"type": command_byte, "start_address": offset, "end_address": offset}
+            offset += 1
+            end = True
         elif command_byte == 0x9:
             #09 = write hex-to-dec number from RAM to textbox [09][2-byte RAM address][byte bbbbcccc]
             #  bbbb = how many bytes to read (read number is big-endian)
@@ -303,8 +308,6 @@ def parse_text_script(text_pointer, text_id, map_id, txfar=False):
             #FF = change music to a specific song that i don't know the name of
             command = {"type": command_byte, "start_address": offset, "end_address": offset}
             offset += 1
-        elif command_byte == 0x8: #not ready to process asm
-            end = True
         else:
             #if len(commands) > 0:
             #   print "Unknown text command " + hex(command_byte) + " at " + hex(offset) + ", script began with " + hex(commands[0]["type"])

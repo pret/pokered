@@ -8,6 +8,7 @@ from pretty_map_headers import map_name_cleaner, make_text_label, map_constants,
 import pretty_map_headers
 from analyze_incbins import asm, offset_to_pointer, find_incbin_to_replace_for, split_incbin_line_into_three, generate_diff_insert, load_asm, isolate_incbins, process_incbins, reset_incbins, apply_diff
 import analyze_incbins
+from gbz80disasm import text_asm_pretty_printer
 import os, sys
 import subprocess
 spacing = "    "
@@ -276,6 +277,81 @@ def insert_all_text_labels():
                 isolate_incbins()
                 process_incbins()
 
+def insert_08_asm(map_id, text_id):
+    map2 = extract_maps.map_headers[map_id]
+    base_label = map_name_cleaner(map2["name"], None)[:-2]
+    label = base_label + "Text" + str(text_id)
+
+    start_address = all_texts[map_id][text_id][0]["start_address"]
+
+    (text_asm, end_address) = text_asm_pretty_printer(label, start_address)
+    print "end address is: " + hex(end_address)
+
+    #find where to insert the assembly
+    line_number = find_incbin_to_replace_for(start_address)
+    if line_number == None:
+        print "skipping text label for a $08 on map_id=" + str(map_id) + " text_id=" + str(text_id) + " because the address is taken"
+        return
+
+    #also do a name check
+    if 1 < ("\n".join(analyze_incbins.asm)).count(label + ":"):
+        print "skipping text label for a $08 on map_id=" + str(map_id) + " text_id=" + str(text_id) + " because the label is already taken (" + label + ":)"
+        return
+    
+    newlines = split_incbin_line_into_three(line_number, start_address, end_address - start_address )
+    
+    newlines = newlines.split("\n")
+    if len(newlines) == 2: index = 0 #replace the 1st line with new content
+    elif len(newlines) == 3: index = 1 #replace the 2nd line with new content
+    
+    newlines[index] = text_asm
+
+    if len(newlines) == 3 and newlines[2][-2:] == "$0":
+        #get rid of the last incbin line if it is only including 0 bytes
+        del newlines[2]
+        #note that this has to be done after adding in the new asm
+    newlines = "\n".join(line for line in newlines)
+
+    newlines = newlines.replace("$x", "$")
+
+    diff = generate_diff_insert(line_number, newlines)
+    print "working on map_id=" + str(map_id) + " text_id=" + str(text_id)
+    print diff
+    apply_diff(diff)
+
+def find_all_08s():
+    all_08s = []
+    for map_id in all_texts:
+        for text_id in all_texts[map_id].keys():
+            if 0 in all_texts[map_id][text_id].keys():
+                if "type" in all_texts[map_id][text_id][0].keys():
+                    if all_texts[map_id][text_id][0]["type"] == 0x8:
+                        all_08s.append([map_id, text_id])
+    return all_08s
+
+def insert_all_08s():
+    all_08s = find_all_08s()
+    for the_08_line in all_08s:
+        map_id = the_08_line[0]
+        text_id = the_08_line[1]
+
+        print "processing map_id=" + str(map_id) + " text_id=" + str(text_id)
+        insert_08_asm(map_id, text_id)
+        
+        #reset everything
+        analyze_incbins.reset_incbins()
+        asm = None
+        incbin_lines = []
+        processed_incbins = {}
+        analyze_incbins.asm = None
+        analyze_incbins.incbin_lines = []
+        analyze_incbins.processed_incbins = {}
+
+        #reload
+        load_asm()
+        isolate_incbins()
+        process_incbins()
+
 if __name__ == "__main__":
     #load map headers and object data
     extract_maps.load_rom()
@@ -305,7 +381,10 @@ if __name__ == "__main__":
     #            texts_label_pretty_printer(map_id)
     
     #insert_texts_label(240)
-    insert_all_texts_labels()
+    #insert_all_texts_labels()
 
     #insert_text_label_tx_far(240, 1)
     #insert_all_text_labels()
+
+    #insert_08_asm(1, 2)
+    insert_all_08s()
