@@ -8100,7 +8100,7 @@ CeladonMansion5Text1: ; 0x1dd41
 
 CeladonMansion5Text2: ; 0x1dd46
     db $08 ; asm
-    ld bc, $6619    
+	ld bc,(EEVEE << 8) | 25
     call $3e48    
     jr nc, .asm_24365 ; 0x1dd4d
     ld a, $45
@@ -18598,7 +18598,7 @@ MtMoonPokecenterText4: ; 0x492ec
     ld hl, $5366    
     jr .asm_ae354 ; 0x4931c
 .asm_faa09 ; 0x4931e
-    ld bc, $8505    
+	ld bc,(MAGIKARP << 8) | 5
     call $3e48    
     jr nc, .asm_38361 ; 0x49324
     xor a
@@ -20721,7 +20721,7 @@ SilphCo7Text1: ; 0x51d8e
 .asm_d7e17 ; 0x51da5
     ld hl, $5dd3    
     call $3c49    
-    ld bc, $130f    
+	ld bc,(LAPRAS << 8) | 15
     call $3e48    
     jr nc, .asm_b3069 ; 0x51db1
     ld a, [$ccd3]    
@@ -24655,7 +24655,7 @@ FightingDojoText6: ; 0x5cf06
     jr nz, .asm_3a2c8 ; 0x5cf28
     ld a, [$cf91]    
     ld b, a
-    ld c, $1e
+	ld c,30
     call $3e48    
     jr nc, .asm_3a2c8 ; 0x5cf33
     ld a, $4a
@@ -24688,7 +24688,7 @@ FightingDojoText7: ; 0x5cf4e
     jr nz, .asm_f1f47 ; 0x5cf70
     ld a, [$cf91]    
     ld b, a
-    ld c, $1e
+	ld c,30
     call $3e48    
     jr nc, .asm_f1f47 ; 0x5cf7b
     ld hl, $d7b1    
