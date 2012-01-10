@@ -169,11 +169,11 @@ temp_opt_table = [
   [ "LD A, L", 0x7d, 0 ], 
   [ "LD A, [$FF00+C]", 0xf2, 0 ], 
   [ "LD A, [$FF00+x]", 0xf0, 1 ], 
-  #[ "LDH A, [x]", 0xf0, 1 ], #rgbds has trouble with this one?
+#  [ "LDH A, [x]", 0xf0, 1 ], #rgbds has trouble with this one?
   [ "LD A, [BC]", 0xa, 0 ], 
   [ "LD A, [DE]", 0x1a, 0 ], 
-  [ "LD A, [HL+]", 0x2a, 0 ], 
-  [ "LD A, [HL-]", 0x3a, 0 ], 
+#  [ "LD A, [HL+]", 0x2a, 0 ], 
+#  [ "LD A, [HL-]", 0x3a, 0 ], 
   [ "LD A, [HL]", 0x7e, 0 ], 
   [ "LD A, [HLD]", 0x3a, 0 ], 
   [ "LD A, [HLI]", 0x2a, 0 ], 
@@ -199,7 +199,7 @@ temp_opt_table = [
   [ "LD C, L", 0x4d, 0 ], 
   [ "LD C, x", 0xe, 1 ], 
   [ "LD D, A", 0x57, 0 ], 
-  [ "LDD A, [HL]", 0x3a, 0 ], 
+#  [ "LDD A, [HL]", 0x3a, 0 ], 
   [ "LD D, B", 0x50, 0 ], 
   [ "LD D, C", 0x51, 0 ], 
   [ "LD D, D", 0x52, 0 ], 
@@ -207,7 +207,7 @@ temp_opt_table = [
   [ "LD [DE], A", 0x12, 0 ], 
   [ "LD D, H", 0x54, 0 ], 
   [ "LD D, [HL]", 0x56, 0 ], 
-  [ "LDD [HL], A", 0x32, 0 ], 
+#  [ "LDD [HL], A", 0x32, 0 ], 
   [ "LD D, L", 0x55, 0 ], 
   [ "LD D, x", 0x16, 1 ], 
   [ "LD E, A", 0x5f, 0 ], 
@@ -221,6 +221,7 @@ temp_opt_table = [
   [ "LD E, x", 0x1e, 1 ], 
   [ "LD [$FF00+C], A", 0xe2, 0 ], 
   [ "LD [$FF00+x], A", 0xe0, 1 ], 
+#  [ "LDH [x], A", 0xe0, 1 ], 
   [ "LD H, A", 0x67, 0 ], 
   [ "LD H, B", 0x60, 0 ], 
   [ "LD H, C", 0x61, 0 ], 
@@ -229,8 +230,8 @@ temp_opt_table = [
   [ "LD H, H", 0x64, 0 ], 
   [ "LD H, [HL]", 0x66, 0 ], 
   [ "LD H, L", 0x65, 0 ], 
-  [ "LD [HL+], A", 0x22, 0 ], 
-  [ "LD [HL-], A", 0x32, 0 ], 
+#  [ "LD [HL+], A", 0x22, 0 ], 
+#  [ "LD [HL-], A", 0x32, 0 ], 
   [ "LD [HL], A", 0x77, 0 ], 
   [ "LD [HL], B", 0x70, 0 ], 
   [ "LD [HL], C", 0x71, 0 ], 
@@ -243,9 +244,8 @@ temp_opt_table = [
   [ "LD HL, SP+x", 0xf8, 1 ], 
   [ "LD [HL], x", 0x36, 1 ], 
   [ "LD H, x", 0x26, 1 ], 
-  [ "LDH [x], A", 0xe0, 1 ], 
-  [ "LDI A, [HL]", 0x2a, 0 ], 
-  [ "LDI [HL], A", 0x22, 0 ], 
+#  [ "LDI A, [HL]", 0x2a, 0 ], 
+#  [ "LDI [HL], A", 0x22, 0 ], 
   [ "LD L, A", 0x6f, 0 ], 
   [ "LD L, B", 0x68, 0 ], 
   [ "LD L, C", 0x69, 0 ], 
@@ -522,6 +522,14 @@ temp_opt_table = [
   [ "XOR x", 0xee, 1 ], 
   [ "E", 0x100, -1 ], 
 ]
+
+#find conflicts
+conflict_table = {}
+for line in temp_opt_table:
+    if line[1] in conflict_table.keys():
+        print "CONFLICT: " + line[0] + " ($" + hex(line[1])[2:] + ") .... " + conflict_table[line[1]]
+    else:
+        conflict_table[line[1]] = line[0]
 
 #construct real opt_table
 opt_table = {}
