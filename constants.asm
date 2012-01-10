@@ -2,6 +2,8 @@ RED EQU 1
 BLUE EQU 0
 GREEN EQU 0
 
+;\1 = X
+;\2 = Y
 FuncCoord: MACRO
 Coord = $C3A0 + 20 * \2 + \1
 	ENDM
@@ -153,6 +155,9 @@ W_CURMAP EQU $D35E
 
 W_YCOORD EQU $D361 ; player’s position on the current map
 W_XCOORD EQU $D362
+
+W_PLAYERCOINS1 EQU $D5A4
+W_PLAYERCOINS2 EQU $D5A5
 
 W_RIVALSTARTER EQU $D715
 

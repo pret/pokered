@@ -1113,9 +1113,19 @@ TechnicalPrefix:
 HiddenPrefix:
 	db "HM"
 
-INCBIN "baserom.gbc",$3040,$3493 - $3040
+INCBIN "baserom.gbc",$3040,$3474 - $3040
 
-CheckBagItemExist: ; $3493: ; 3493
+FuncTX_F7: ; 3474
+; XXX find a better name for this function
+; special_F7
+        ld b,BANK(CeladonPrizeMenu)
+        ld hl,CeladonPrizeMenu
+        call Bankswitch
+        jp $29DF        ; continue to main text-engine function
+
+INCBIN "baserom.gbc",$347F,$3493 - $347F
+
+IsItemInBag: ; 3493
 ; given an item_id in b
 ; set zero flag if item isn't in player's bag
 ; else reset zero flag
@@ -12172,7 +12182,7 @@ Function583A: ; 583A
 	cp a,$95 ; Pokémon Tower
 	jr nc,.next\@
 	ld b,SILPH_SCOPE
-	call CheckBagItemExist ; $3493
+	call IsItemInBag ; $3493
 	ret z
 .next\@
 	ld a,1
@@ -17310,7 +17320,11 @@ Mansion4Object: ; 0x52498 (size=69)
     ; warp-to
     EVENT_DISP $f, $16, $17 ; MANSION_1
 
-INCBIN "baserom.gbc",$524dd,$1b23
+INCBIN "baserom.gbc",$524DD,$5271B - $524DD
+
+CeladonPrizeMenu: ; 14:671B
+INCBIN "baserom.gbc",$5271B,$54000 - $5271B
+;INCBIN "baserom.gbc",$52996,$54000 - $52996
 
 SECTION "bank15",DATA,BANK[$15]
 
