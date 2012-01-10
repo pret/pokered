@@ -424,7 +424,7 @@ if __name__ == "__main__":
     #insert_08_asm(83, 1)
     #insert_all_08s()
 
-    insert_asm(0x3927, "AddPokemonToParty")
+    insert_asm(0x31cc, "LoadTrainerHeader")
 
     print "-- FAILED ATTEMPTS --"
     print str(failed_attempts)

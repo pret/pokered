@@ -548,6 +548,7 @@ asm_commands = {
     "3927": "AddPokemonToParty",
     "3e48": "GivePokemon",
     "3dd7": "Delay3",
+    "3e2e": "GiveItem",
 }
 
 def random_asm_label():
@@ -729,7 +730,9 @@ def text_asm_pretty_printer(label, address_of_08, include_08=True):
     output = label + ": ; " + hex(address_of_08) + "\n"
     if include_08:
         output += spacing + "db $08 ; asm\n"
-    results = output_bank_opcodes(address_of_08 + 1)
+        results = output_bank_opcodes(address_of_08 + 1)
+    else:
+        results = output_bank_opcodes(address_of_08)
     output += results[0]
     end_address = results[1]
 
