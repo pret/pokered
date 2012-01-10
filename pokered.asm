@@ -1553,7 +1553,19 @@ GoPAL_SET: 	; 3def
 	ld a,$45
 	jp Predef
 
-INCBIN "baserom.gbc",$3DF9,$3E5C - $3DF9
+INCBIN "baserom.gbc",$3df9,$3e48 - $3df9
+
+GivePokemon: ; 0x3e48
+    ld a, b
+    ld [$cf91], a    
+    ld a, c
+    ld [$d127], a    
+    xor a
+    ld [$cc49], a    
+    ld b, $13
+    ld hl, $7da5    
+    jp $35d6    
+
 GenRandom: ; 3E5C
 ; store a random 8-bit value in a
 	push hl
@@ -8098,7 +8110,7 @@ CeladonMansion5Text1: ; 0x1dd41
 CeladonMansion5Text2: ; 0x1dd46
     db $08 ; asm
 	ld bc,(EEVEE << 8) | 25
-    call $3e48    
+    call GivePokemon
     jr nc, .asm_24365 ; 0x1dd4d
     ld a, $45
     ld [$cc4d], a    
@@ -18596,7 +18608,7 @@ MtMoonPokecenterText4: ; 0x492ec
     jr .asm_ae354 ; 0x4931c
 .asm_faa09 ; 0x4931e
 	ld bc,(MAGIKARP << 8) | 5
-    call $3e48    
+    call GivePokemon
     jr nc, .asm_38361 ; 0x49324
     xor a
     ld [$cd3d], a    
@@ -20719,7 +20731,7 @@ SilphCo7Text1: ; 0x51d8e
     ld hl, $5dd3    
     call PrintText    
 	ld bc,(LAPRAS << 8) | 15
-    call $3e48    
+    call GivePokemon
     jr nc, .asm_b3069 ; 0x51db1
     ld a, [$ccd3]    
     and a
@@ -24653,7 +24665,7 @@ FightingDojoText6: ; 0x5cf06
     ld a, [$cf91]    
     ld b, a
 	ld c,30
-    call $3e48    
+    call GivePokemon
     jr nc, .asm_3a2c8 ; 0x5cf33
     ld a, $4a
     ld [$cc4d], a    
@@ -24686,7 +24698,7 @@ FightingDojoText7: ; 0x5cf4e
     ld a, [$cf91]    
     ld b, a
 	ld c,30
-    call $3e48    
+    call GivePokemon
     jr nc, .asm_f1f47 ; 0x5cf7b
     ld hl, $d7b1    
     set 7, [hl]    
