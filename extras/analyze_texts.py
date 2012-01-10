@@ -3,6 +3,7 @@
 #date: 2012-01-06
 #analyze texts, how many commands are unknown?
 import extract_maps
+import analyze_incbins #for asm
 try:
     from pretty_map_headers import map_name_cleaner
 except Exception, exc: pass
@@ -367,12 +368,29 @@ def analyze_texts():
         extract_maps.map_headers[map_id]["texts"] = map2["texts"]
     return texts
 
+def find_missing_08s(all_texts):
+    """determines which $08s have yet to be inserted
+    based on their start addresses"""
+    missing_08s = 0
+    for map_id in all_texts.keys():
+        for text_id in all_texts[map_id].keys():
+            for line_id in all_texts[map_id][text_id].keys():
+                if not line_id == 0:
+                    current_line = all_texts[map_id][text_id][line_id]
+                    if "type" in current_line.keys():
+                        if current_line["type"] == 0x8:
+                            missing_08s += 1
+                            print "missing $08 on map_id=" + str(map_id) + " text_id=" + str(text_id) + " line_id=" + str(line_id) + " at " + hex(current_line["start_address"])
+    return missing_08s
+
 if __name__ == "__main__":
     extract_maps.load_rom()
     extract_maps.load_map_pointers()
     extract_maps.read_all_map_headers()
     text_output = analyze_texts()
     #print text_output
+
+    missing_08s = find_missing_08s(text_output)
 
     print "\n\n---- stats ----\n\n"
     
@@ -384,3 +402,4 @@ if __name__ == "__main__":
     
     print "total text commands: " + str(total_text_commands)
     print "total text scripts: " + str(should_be_total)
+    print "missing 08s: " + str(missing_08s)
