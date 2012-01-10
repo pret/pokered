@@ -7606,8 +7606,11 @@ PewterHouse1Texts: ; 0x1d5f6
 
 PewterHouse1Text1: ; 0x1d5fc
     TX_FAR _PewterHouse1Text1
-
-INCBIN "baserom.gbc",$1d600,$1d60c - $1d600
+    db $08 ; asm
+    ld a, $3
+    call $13d0
+    call $3748
+    jp $24d7
 
 PewterHouse1Text2: ; 0x1d60c
     TX_FAR _PewterHouse1Text2
