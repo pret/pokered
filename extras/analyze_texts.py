@@ -3,7 +3,9 @@
 #date: 2012-01-06
 #analyze texts, how many commands are unknown?
 import extract_maps
-from pretty_map_headers import map_name_cleaner
+try:
+    from pretty_map_headers import map_name_cleaner
+except Exception, exc: pass
 from operator import itemgetter
 import sys
 debug = False #set to True to increase logging output

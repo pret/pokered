@@ -3,7 +3,7 @@
 #date: 2012-01-09
 import extract_maps
 from copy import copy, deepcopy
-from pretty_map_headers import random_hash
+from pretty_map_headers import random_hash, map_name_cleaner
 spacing = "    "
 
 temp_opt_table = [
@@ -712,4 +712,4 @@ if __name__ == "__main__":
 
     #0x18f96 is PalletTownText1
     #0x19B5D is BluesHouseText1
-    print output_bank_opcodes(0x1e374 + 1)
+    print output_bank_opcodes(0x1b40)[0]
