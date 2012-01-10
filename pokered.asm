@@ -1365,9 +1365,9 @@ AddPokemonToParty: ; 0x3927
     push hl
     push de
     push bc
-    ld b, $3
-    ld hl, $72e5
-    call $35d6
+    ld b, $3 ; BANK(MyFunction)
+    ld hl, $72e5 ; MyFunction
+    call Bankswitch
     pop bc
     pop de
     pop hl
@@ -1578,7 +1578,7 @@ GivePokemon: ; 0x3e48
     ld [$cc49], a
     ld b, $13
     ld hl, $7da5
-    jp $35d6
+    jp Bankswitch
 
 GenRandom: ; 3E5C
 ; store a random 8-bit value in a
@@ -7777,9 +7777,9 @@ BikeShopText1: ; 0x1d745
     jr nc, .asm_d0d90 ; 0x1d769
     ld a, $2d
     ldh [$db], a
-    ld b, $5
-    ld hl, $7f37
-    call $35d6
+    ld b, $5 ; BANK(MyFunction)
+    ld hl, $7f37 ; MyFunction
+    call Bankswitch
     ld hl, $d75f
     set 0, [hl]
     ld hl, $5824
@@ -13640,9 +13640,9 @@ INCBIN "baserom.gbc",$3CA83,$3D6A9 - $3CA83
 .next8\@
 	call $60DF
 	call $5C5C
-	ld hl,$7B7B
-	ld b,$B
-	call $35D6
+	ld hl,$7B7B ; MyFunction
+	ld b,$B ; BANK(MyFunction)
+	call Bankswitch
 	ld a,1
 	ld [$CCF4],a
 .next9\@
@@ -24525,9 +24525,9 @@ CopycatsHouseF2Text1: ; 0x5cc82
     call PrintText
     ld a, $33
     ldh [$db], a
-    ld b, $5
-    ld hl, $7f37
-    call $35d6
+    ld b, $5 ; BANK(MyFunction)
+    ld hl, $7f37 ; MyFunction
+    call Bankswitch
     ld hl, $d7af
     set 0, [hl]
     jr .asm_62ecd ; 0x5ccc1
@@ -28208,9 +28208,9 @@ FuchsiaHouse2Text1: ; 0x750c2
     call PrintText
     ld a, $40
     ldh [$db], a
-    ld b, $5
-    ld hl, $7f37
-    call $35d6
+    ld b, $5 ; BANK(MyFunction)
+    ld hl, $7f37 ; MyFunction
+    call Bankswitch
     ld hl, $d78e
     set 1, [hl]
 .asm_60cba ; 0x75109
