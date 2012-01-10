@@ -169,6 +169,7 @@ temp_opt_table = [
   [ "LD A, L", 0x7d, 0 ], 
   [ "LD A, [$FF00+C]", 0xf2, 0 ], 
   [ "LD A, [$FF00+x]", 0xf0, 1 ], 
+  #[ "LDH A, [x]", 0xf0, 1 ], #rgbds has trouble with this one?
   [ "LD A, [BC]", 0xa, 0 ], 
   [ "LD A, [DE]", 0x1a, 0 ], 
   [ "LD A, [HL+]", 0x2a, 0 ], 
@@ -221,7 +222,6 @@ temp_opt_table = [
   [ "LD [$FF00+C], A", 0xe2, 0 ], 
   [ "LD [$FF00+x], A", 0xe0, 1 ], 
   [ "LD H, A", 0x67, 0 ], 
-  [ "LDH A, [x]", 0xf0, 1 ], 
   [ "LD H, B", 0x60, 0 ], 
   [ "LD H, C", 0x61, 0 ], 
   [ "LD H, D", 0x62, 0 ], 
@@ -549,6 +549,7 @@ asm_commands = {
     "3e48": "GivePokemon",
     "3dd7": "Delay3",
     "3e2e": "GiveItem",
+    "2f9e": "GetMonName",
 }
 
 def random_asm_label():
@@ -597,12 +598,36 @@ def output_bank_opcodes(original_offset, max_byte_count=0x4000):
         temp_maybe += ( ord(rom[offset+1]) << 8)
         if temp_maybe in opt_table.keys():
             opstr = copy(opt_table[temp_maybe][0])
-              
-            output += spacing + opstr.lower() #+ " ; " + hex(offset)
+            
+            if "x" in opstr:
+                for x in range(0, opstr.count("x")):
+                    insertion = ord(rom[offset + 1])
+                    insertion = "$" + hex(insertion)[2:]
+            
+                    opstr = opstr[:opstr.find("x")].lower() + insertion + opstr[opstr.find("x")+1:].lower()
+
+                    current_byte += 1
+                    offset += 1
+            if "?" in opstr:
+                for y in range(0, opstr.count("?")):
+                    byte1 = ord(rom[offset + 1])
+                    byte2 = ord(rom[offset + 2])
+                    
+                    number = byte1
+                    number += byte2 << 8;
+
+                    insertion = "$%.4x" % (number)
+                    
+                    opstr = opstr[:opstr.find("?")].lower() + insertion + opstr[opstr.find("?")+1:].lower()
+
+                    current_byte_number += 2
+                    offset += 2
+
+            output += spacing + opstr #+ " ; " + hex(offset)
             output += "\n"
 
-            current_byte_number += 2
-            offset += 2
+            current_byte_number += 1
+            offset += 1 
         elif maybe_byte in opt_table.keys():
             op_code = opt_table[maybe_byte]
             op_code_type = op_code[1]
@@ -611,6 +636,8 @@ def output_bank_opcodes(original_offset, max_byte_count=0x4000):
             #type = -1 when it's the E op
             #if op_code_type != -1:
             if   op_code_type == 0 and ord(rom[offset]) == op_code_byte:
+                op_str = op_code[0].lower()
+
                 output += spacing + op_code[0].lower() #+ " ; " + hex(offset)
                 output += "\n"
                 
