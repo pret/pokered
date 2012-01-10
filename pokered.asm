@@ -5796,7 +5796,7 @@ ViridianCityText6: ; 0x19196
     jr nz, .asm_4e5a0 ; 0x1919c
     ld hl, $51ca    
     call $3c49    
-    ld bc, $f201    
+    ld bc,(TM_42 << 8) | 1
     call $3e2e    
     jr nc, .asm_b655e ; 0x191aa
     ld hl, $51cf    
@@ -6182,7 +6182,7 @@ CeladonCityText5: ; 0x1999e
     jr nz, .asm_7053f ; 0x199a4
     ld hl, $59d2    
     call $3c49    
-    ld bc, $f101    
+    ld bc,(TM_41 << 8) | 1
     call $3e2e    
     jr c, .asm_890ec ; 0x199b2
     ld hl, $59e2    
@@ -7207,7 +7207,7 @@ Route1Text1: ; 0x1cab8
     jr nz, .asm_02840 ; 0x1cac0
     ld hl, $4ae3    
     call $3c49    
-    ld bc, $1401    
+    ld bc, (POTION << 8) | 1
     call $3e2e    
     jr nc, .asm_a630e ; 0x1cace
     ld hl, $4ae8    
@@ -7331,7 +7331,7 @@ OaksLabText5: ; 0x1d248
     bit 4, [hl]    
     set 4, [hl]    
     jr nz, .asm_17c30 ; 0x1d2d7
-    ld bc, $0405    
+    ld bc, (POKE_BALL << 8) | 5
     call $3e2e    
     ld hl, $530e    
     call $3c49    
@@ -7749,7 +7749,7 @@ BikeShopText1: ; 0x1d745
     jr z, .asm_41190 ; 0x1d75b
     ld hl, $581f    
     call $3c49    
-    ld bc, $0601    
+    ld bc,(BICYCLE << 8) | 1
     call $3e2e    
     jr nc, .asm_d0d90 ; 0x1d769
     ld a, $2d
@@ -7909,7 +7909,7 @@ LavenderHouse1Text5: ; 0x1d918
     jr nz, .asm_15ac2 ; 0x1d91e
     ld hl, $594c    
     call $3c49    
-    ld bc, $4901    
+    ld bc, (POKE_FLUTE << 8) | 1
     call $3e2e    
     jr nc, .asm_5ce36 ; 0x1d92c
     ld hl, $5951    
@@ -8239,7 +8239,7 @@ SaffronHouse2Text1: ; 0x1de41
     jr nz, .asm_9e72b ; 0x1de47
     ld hl, $5e75    
     call $3c49    
-    ld bc, $e501    
+    ld bc,(TM_29 << 8) | 1
     call $3e2e    
     jr nc, .asm_4b1da ; 0x1de55
     ld hl, $5e7a    
@@ -8618,7 +8618,7 @@ Route16HouseText1: ; 0x1e5ff
     jr nz, .asm_13616 ; 0x1e608
     ld hl, $662b    
     call $3c49    
-    ld bc, $c501    
+    ld bc,(HM_02 << 8) | 1
     call $3e2e    
     jr nc, .asm_d3ee3 ; 0x1e616
     ld hl, $d7e0    
@@ -8709,7 +8709,7 @@ BillsHouseText2: ; 0x1e874
     jr nz, .asm_5491f ; 0x1e87a
     ld hl, $68ba    
     call $3c49    
-    ld bc, $3f01    
+    ld bc,(S_S__TICKET << 8) | 1
     call $3e2e    
     jr nc, .asm_18a67 ; 0x1e888
     ld hl, $68bf    
@@ -17326,7 +17326,7 @@ CeladonMart3Text1: ; 0x4824a
     jr nz, .asm_a5463 ; 0x48250
     ld hl, $4278    
     call $3c49    
-    ld bc, $da01    
+    ld bc,(TM_18 << 8) | 1
     call $3e2e    
     jr nc, .asm_95f37 ; 0x4825e
     ld hl, $d778    
@@ -18414,7 +18414,7 @@ CeladonDinerText5: ; 0x49173
     jr nz, .asm_eb14d ; 0x49179
     ld hl, $51a7    
     call $3c49    
-    ld bc, $4501    
+    ld bc,(COIN_CASE << 8) | 1
     call $3e2e    
     jr nc, .asm_78e93 ; 0x49187
     ld hl, $d783    
@@ -18845,7 +18845,7 @@ Route12GateUpstairsText1: ; 0x49569
     jr c, .asm_0ad3c ; 0x4956e
     ld hl, $559c    
     call $3c49    
-    ld bc, $ef01    
+    ld bc,(TM_39 << 8) | 1
     call $3e2e    
     jr nc, .asm_4c2be ; 0x4957c
     ld hl, $55a1    
@@ -19309,7 +19309,7 @@ MtMoon3Text6: ; 0x49ee9
     ld a, [$cc26]    
     and a
     jr nz, .asm_1fa5e ; 0x49efc
-    ld bc, $2901    
+    ld bc,(DOME_FOSSIL << 8) | 1
     call $3e2e    
     jp nc, $5f76    
     call $5f69    
@@ -19336,7 +19336,7 @@ MtMoon3Text7: ; 0x49f29
     ld a, [$cc26]    
     and a
     jr nz, .asm_8e988 ; 0x49f3c
-    ld bc, $2a01    
+    ld bc,(HELIX_FOSSIL << 8) | 1
     call $3e2e    
     jp nc, $5f76    
     call $5f69    
@@ -19471,7 +19471,7 @@ SafariZoneSecretHouseText1: ; 0x4a31c
     jr nz, .asm_20a9b ; 0x4a322
     ld hl, $6350    
     call $3c49    
-    ld bc, $c601    
+    ld bc,(HM_03 << 8) | 1
     call $3e2e    
     jr nc, .asm_a21d2 ; 0x4a330
     ld hl, $6355    
@@ -22036,7 +22036,7 @@ VermilionHouse2Text1: ; 0x56075
     ld a, [$cc26]    
     and a
     jr nz, .asm_eb1b7 ; 0x5608a
-    ld bc, $4c01    
+    ld bc,(OLD_ROD << 8) | 1
     call $3e2e    
     jr nc, .asm_fd67b ; 0x56092
     ld hl, $d728    
@@ -22144,7 +22144,7 @@ FuchsiaHouse3Text1: ; 0x56181
     ld a, [$cc26]    
     and a
     jr nz, .asm_3ace4 ; 0x56196
-    ld bc, $4d01    
+    ld bc,(GOOD_ROD << 8) | 1
     call $3e2e    
     jr nc, .asm_628ee ; 0x5619e
     ld hl, $d728    
@@ -22229,7 +22229,7 @@ Route12HouseText1: ; 0x56484
     ld a, [$cc26]    
     and a
     jr nz, .asm_a2d76 ; 0x56499
-    ld bc, $4e01    
+    ld bc,(SUPER_ROD << 8) | 1
     call $3e2e    
     jr nc, .asm_e3b89 ; 0x564a1
     ld hl, $d728    
@@ -23317,7 +23317,7 @@ FanClubText5: ; 0x59c1c
     jr nz, .asm_2c8d7 ; 0x59c2f
     ld hl, $5c6a    
     call $3c49    
-    ld bc, $2d01    
+    ld bc,(BIKE_VOUCHER << 8) | 1
     call $3e2e    
     jr nc, .asm_867d4 ; 0x59c3d
     ld hl, $5c6f    
@@ -23383,7 +23383,7 @@ SilphCo2Text1: ; 0x59dc1
     jr nz, .asm_b8a0d ; 0x59dc7
     ld hl, $5ded    
     call $3c49    
-    ld bc, $ec01    
+    ld bc,(TM_36 << 8) | 1
     call $3e2e    
     ld hl, $5dfd    
     jr nc, .asm_2c1e0 ; 0x59dd8
@@ -23767,7 +23767,7 @@ MuseumF1Text3: ; 0x5c256
     jr nz, .asm_16599 ; 0x5c25c
     ld hl, $428e    
     call $3c49    
-    ld bc, $1f01    
+    ld bc,(OLD_AMBER << 8) | 1
     call $3e2e    
     jr nc, .asm_91ebf ; 0x5c26a
     ld hl, $d754    
@@ -24495,7 +24495,7 @@ CopycatsHouseF2Text1: ; 0x5cc82
     jr z, .asm_62ecd ; 0x5cc9a
     ld hl, $4cd9    
     call $3c49    
-    ld bc, $e701    
+    ld bc,(TM_31 << 8) | 1
     call $3e2e    
     jr nc, .asm_16690 ; 0x5cca8
     ld hl, $4cde    
@@ -26291,7 +26291,7 @@ SSAnne7Text1: ; 0x618ad
     call $3c49    
     ld hl, $5927    
     call $3c49    
-    ld bc, $c401    
+    ld bc,(HM_01 << 8) | 1
     call $3e2e    
     jr nc, .asm_ccdcd ; 0x618c7
     ld hl, $592c    
@@ -26774,7 +26774,7 @@ SilphCo11Text1: ; 0x622dc
     jp nz, $6308    
     ld hl, $6311    
     call $3c49    
-    ld bc, $0101    
+    ld bc,(MASTER_BALL << 8) | 1
     call $3e2e    
     jr nc, .asm_36088 ; 0x622f1
     ld hl, $6316    
@@ -28193,7 +28193,7 @@ FuchsiaHouse2Text1: ; 0x750c2
 .asm_60cba ; 0x75109
     ld hl, $514e    
     call $3c49    
-    ld bc, $c701    
+    ld bc,(HM_04 << 8) | 1
     call $3e2e    
     jr nc, .asm_53b90 ; 0x75115
     ld hl, $5153    
@@ -28787,7 +28787,7 @@ Lab3Text1: ; 0x75c94
     jr nz, .asm_e551a ; 0x75c9a
     ld hl, $5cc8    
     call $3c49    
-    ld bc, $eb01    
+    ld bc,(TM_35 << 8) | 1
     call $3e2e    
     jr nc, .asm_6c187 ; 0x75ca8
     ld hl, $5ccd    
@@ -32303,7 +32303,7 @@ _FuchsiaCityText2: ; 0xa5ede
 
 _FuchsiaCityText3: ; 0xa5f3e
     db $0, "ERIK: Where's", $4f
-    db "SARA? I said I'd", $55 ; XXX fix textpre.awk
+    db "SARA? I said I'd", $55
     db "meet her here.", $57
 
 _FuchsiaCityText4: ; 0xa5f6b
