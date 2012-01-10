@@ -552,6 +552,7 @@ asm_commands = {
     "2f9e": "GetMonName",
     "3e6d": "Predef", #library of pre-defined asm routines
     "00b5": "CopyData",
+    "2ff3": "GetMachineName",
 }
 
 def random_asm_label():
