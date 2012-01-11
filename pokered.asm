@@ -7743,8 +7743,11 @@ OaksLabText5: ; 0x1d248
     call PrintText
 .asm_0f042 ; 0x1d2ed
     jp $24d7
+; 0x1d2f0
 
-INCBIN "baserom.gbc",$1d2f0,$1d322 - $1d2f0
+INCBIN "baserom.gbc",$1d2f0,$32
+
+OaksLabText7: ; 0x1d322
 OaksLabText6: ; 0x1d322
     db $08 ; asm
     ld hl, $532c
