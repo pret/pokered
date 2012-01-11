@@ -23445,7 +23445,44 @@ _CantMoveText:
 	db 0,$5A,$4F
 	db "can't move!",$58
 
-INCBIN "baserom.gbc",$89A29,$8A425 - $89A29
+INCBIN "baserom.gbc",$89A29,$8A28E - $89A29
+
+_RequireCoinCaseText: ; 22:628E
+        db 0,"A COIN CASE is",$4F
+        db "required!@@"
+
+_ExchangeCoinsForPrizesText: ; 22:62A9
+        db 0,"We exchange your",$4F
+        db "coins for prizes.",$58
+
+_WhichPrizeText: ; 22:62CD
+        db 0,"Which prize do",$4F
+        db "you want?",$57
+
+_HereYouGoText: ; 22:62E6
+        db 0,"Here you go!@@"
+
+_SoYouWantPrizeText: ; 22:62F6
+        db 0,"So, you want",$4F
+        db "@"
+        db 1
+        dw $CD6D
+        db 0,"?",$57
+
+_SorryNeedMoreCoins: ; 22:630B
+        db 0,"Sorry, you need",$4F
+        db "more coins.@@"
+
+_OopsYouDontHaveEnoughRoomText: ; 22:6329
+        db 0,"Oops! You don't",$4F
+        db "have enough room.@@"
+
+_OhFineThenText: ; 22:634C
+        db 0,"Oh, fine then.@@"
+;635d
+
+INCBIN "baserom.gbc",$8A35D,$8A425 - $8A35D
+
 INCLUDE "text/oakspeech.tx"
 
 INCBIN "baserom.gbc",$8A605,$6696 - $6605
