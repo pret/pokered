@@ -638,8 +638,8 @@ def output_bank_opcodes(original_offset, max_byte_count=0x4000):
             output += spacing + opstr #+ " ; " + hex(offset)
             output += "\n"
 
-            current_byte_number += 1
-            offset += 1 
+            current_byte_number += 2
+            offset += 2
         elif maybe_byte in opt_table.keys():
             op_code = opt_table[maybe_byte]
             op_code_type = op_code[1]
