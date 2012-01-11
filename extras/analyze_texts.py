@@ -461,6 +461,37 @@ def text_pretty_printer_at(start_address, label="SomeLabel"):
     print output
     return output
 
+def is_label_in_asm(label):
+    for line in analyze_incbins.asm:
+        if label in line:
+            if line[0:len(label)] == label:
+                return True
+    return False
+
+def find_undone_texts():
+    if analyze_incbins.asm == None:
+        analyze_incbins.load_asm()
+
+    for map_id in extract_maps.map_headers:
+        #skip bad maps
+        if map_id in extract_maps.bad_maps: continue
+
+        map2 = extract_maps.map_headers[map_id]
+        name = map_name_cleaner(map2["name"], None)[:-2] + "Text"
+
+        for text_id in map2["referenced_texts"]:
+            label = name + str(text_id)
+
+            if len(extract_maps.map_headers[map_id]["texts"][text_id].keys()) == 0: continue
+            if len(extract_maps.map_headers[map_id]["texts"][text_id][0].keys()) == 0: continue
+
+            try:
+                address = extract_maps.map_headers[map_id]["texts"][text_id][0]["start_address"]
+            except:
+                address = extract_maps.map_headers[map_id]["texts"][text_id][1]["start_address"]
+            
+            if not is_label_in_asm(label):
+                print label + " map_id=" + str(map_id) + " text_id=" + str(text_id) + " at " + hex(address)
 
 if __name__ == "__main__":
     extract_maps.load_rom()
@@ -482,5 +513,7 @@ if __name__ == "__main__":
     print "total text commands: " + str(total_text_commands)
     print "total text scripts: " + str(should_be_total)
     print "missing 08s: " + str(missing_08s)
+    print "\n\n"
 
-    text_pretty_printer_at(0x800b1)    
+    #text_pretty_printer_at(0x800b1)
+    find_undone_texts()
