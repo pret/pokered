@@ -546,6 +546,7 @@ end_08_scripts_with = [
 ###0xda, 0xe9, 0xd2, 0xc2, 0xca, 0xc3, 0x38, 0x30, 0x20, 0x28, 0x18, 0xd8, 0xd0, 0xc0, 0xc8, 0xc9
 ]
 relative_jumps = [0x38, 0x30, 0x20, 0x28, 0x18]
+relative_unconditional_jumps = [0xc3, 0x18]
 
 #TODO: replace call and a pointer with call and a label
 call_commands = [0xdc, 0xd4, 0xc4, 0xcc, 0xcd]
@@ -720,12 +721,12 @@ def output_bank_opcodes(original_offset, max_byte_count=0x4000):
                 offset += 1
 
                 #duck out if this is jp $24d7
-                if current_byte == 0xc3:
-                    if number == 0x24d7: #jp
-                        if not has_outstanding_labels(byte_labels):
-                            keep_reading = False
-                            is_data = False
-                            break
+                if current_byte == 0xc3 or current_byte in relative_unconditional_jumps:
+                    #if number == 0x24d7: #jp
+                    if not has_outstanding_labels(byte_labels):
+                        keep_reading = False
+                        is_data = False
+                        break
             else:
                 is_data = True
 
