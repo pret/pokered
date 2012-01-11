@@ -23235,7 +23235,14 @@ Route18Object: ; 0x58c5a (size=66)
 Route18Blocks: ; 225
     INCBIN "maps/route18.blk"
 
-INCBIN "baserom.gbc",$58d7d,$59139 - $58d7d
+INCBIN "baserom.gbc",$58d7d,$59120 - $58d7d
+Route6Text1: ; 0x59120
+    db $8
+    ld hl, $50d7
+    call $31cc
+    jp $24d7
+; 0x5912a
+INCBIN "baserom.gbc",$5912a,$f
 Route6Text2: ; 0x59139
     db $08 ; asm
     ld hl, $50e3
