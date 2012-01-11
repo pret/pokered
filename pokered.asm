@@ -21198,7 +21198,22 @@ SilphCo7Text1: ; 0x51d8e
 .asm_b3069 ; 0x51dd0
     jp $24d7
 
-INCBIN "baserom.gbc",$51dd3,$51e0a - $51dd3
+INCBIN "baserom.gbc",$51dd3,$51de7 - $51dd3
+SilphCo7Text2: ; 0x51de7
+    db $8
+    ld a, [$d838]
+    bit 7, a
+    jr nz, .asm_892ce ; 0x51ded $8
+    ld hl, $5e00
+    call PrintText
+    jr .asm_e4d89 ; 0x51df5 $6
+.asm_892ce ; 0x51df7
+    ld hl, $5e05
+    call PrintText
+.asm_e4d89 ; 0x51dfd
+    jp $24d7
+; 0x51e00
+INCBIN "baserom.gbc",$51e00,$a
 SilphCo7Text3: ; 0x51e0a
     db $08 ; asm
     ld a, [$d838]
