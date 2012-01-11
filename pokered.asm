@@ -6130,7 +6130,27 @@ PewterCityText3: ; 0x193b1
 .asm_ac429 ; 0x193ee
     jp $24d7
 
-INCBIN "baserom.gbc",$193f1,$19436 - $193f1
+INCBIN "baserom.gbc",$193f1,$19405 - $193f1
+
+PewterCityText4: ; 0x19405
+    db $8
+    ld hl, $5427
+    call PrintText
+    call $35ec
+    ld a, [$cc26]
+    cp $0
+    jr nz, .asm_e4603
+    ld hl, $542c
+    call PrintText
+    jr .asm_e4604 ; 0x1941c $6
+.asm_e4603
+    ld hl, $5431
+    call PrintText
+.asm_e4604 ; 0x19424
+    jp $24d7
+; 0x19427
+
+INCBIN "baserom.gbc",$19427,$f
 PewterCityText5: ; 0x19436
     db $08 ; asm
     ld hl, $545d
