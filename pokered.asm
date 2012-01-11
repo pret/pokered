@@ -7767,6 +7767,8 @@ OaksLabText9: ; 0x1d336
     jp $24d7
 
 INCBIN "baserom.gbc",$1d340,$1d3fb - $1d340
+
+OaksLabText11:
 OaksLabText10: ; 0x1d3fb
     db $08 ; asm
     ld hl, $5405
@@ -7774,6 +7776,7 @@ OaksLabText10: ; 0x1d3fb
     jp $24d7
 
 INCBIN "baserom.gbc",$1d405,$5
+
 OaksLabObject: ; 0x1d40a (size=88)
     db $3 ; border tile
 
