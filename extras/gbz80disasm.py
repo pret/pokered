@@ -755,6 +755,9 @@ def output_bank_opcodes(original_offset, max_byte_count=0x4000):
         if label_line["usage"] == 0:
             output = output.replace((label_line["name"] + " ; " + hex(address) + "\n").lower(), "")
 
+    #add the offset of the final location
+    output += "; " + hex(offset)
+
     return (output, offset)
 
 def has_outstanding_labels(byte_labels):
