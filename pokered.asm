@@ -8927,6 +8927,7 @@ UndergroundPathEntranceRoute8_h: ; 0x1e27d to 0x1e289 (12 bytes) (bank=7) (id=80
     dw $6298 ; objects
 
 INCBIN "baserom.gbc",$1e289,$1e291 - $1e289
+
 UndergroundPathEntranceRoute8Texts: ; 0x1e291
     dw UndergroundPathEntranceRoute8Text1
 
@@ -8962,7 +8963,72 @@ PowerPlant_h: ; 0x1e2ba to 0x1e2c6 (12 bytes) (bank=7) (id=83)
 
     dw $63bf ; objects
 
-INCBIN "baserom.gbc",$1e2c6,$1e3bf - $1e2c6
+INCBIN "baserom.gbc",$1e2c6,$1e368 - $1e2c6
+
+asm_234cc:
+    call $31cc
+    ld a, [$da39]
+    ld [$d663], a
+    jp $24d7
+; 0x1e374
+
+PowerPlantText1: ; maybe
+    db $8 ; asm
+    ld hl, $62fb
+    jr asm_234cc ; 0x1e378 $ee
+
+PowerPlantText2:
+    db $8 ; asm
+    ld hl, $6307
+    jr asm_234cc ; 0x1e37e $e8
+
+PowerPlantText3:
+    db $8 ; asm
+    ld hl, $6313
+    jr asm_234cc ; 0x1e384 $e2
+
+PowerPlantText4:
+    db $8 ; asm
+    ld hl, $631f
+    jr asm_234cc ; 0x1e38a $dc
+
+PowerPlantText5:
+    db $8 ; asm
+    ld hl, $632b
+    jr asm_234cc ; 0x1e390 $d6
+
+PowerPlantText6:
+    db $8 ; asm
+    ld hl, $6337
+    jr asm_234cc ; 0x1e396 $d0
+
+PowerPlantText7:
+    db $8 ; asm
+    ld hl, $6343
+    jr asm_234cc ; 0x1e39c $ca
+
+PowerPlantText8:
+    db $8 ; asm
+    ld hl, $634f
+    jr asm_234cc ; 0x1e3a2 $c4
+
+PowerPlantText9:
+    db $8 ; asm
+    ld hl, $635b
+    jr asm_234cc ; 0x1e3a8 $be
+    rla
+    ld [$ff00+c], a
+    ld b, l
+    inc hl
+    ld d, b
+    rla
+    ld [$2345], a
+    db $8
+    ld a, $4b
+    call $13d0
+    call $3748
+    jp $24d7
+; 0x1e3bf
 
 PowerPlantObject: ; 0x1e3bf (size=135)
     db $2e ; border tile
