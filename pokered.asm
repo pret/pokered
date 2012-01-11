@@ -8963,6 +8963,7 @@ PowerPlant_h: ; 0x1e2ba to 0x1e2c6 (12 bytes) (bank=7) (id=83)
     dw $63bf ; objects
 
 INCBIN "baserom.gbc",$1e2c6,$1e3bf - $1e2c6
+
 PowerPlantObject: ; 0x1e3bf (size=135)
     db $2e ; border tile
 
