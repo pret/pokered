@@ -6480,7 +6480,13 @@ FuchsiaCityText4: ; 0x19a6d
     TX_FAR _FuchsiaCityText4
     db $50
 
+
 FuchsiaCityText5: ; 0x19a72
+FuchsiaCityText6:
+FuchsiaCityText7:
+FuchsiaCityText8:
+FuchsiaCityText9:
+FuchsiaCityText10: ; 0x19a72
     TX_FAR _FuchsiaCityText5
     db $50
 
