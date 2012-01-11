@@ -609,7 +609,7 @@ def output_bank_opcodes(original_offset, max_byte_count=0x4000):
         temp_maybe = maybe_byte
         temp_maybe += ( ord(rom[offset+1]) << 8)
         if temp_maybe in opt_table.keys():
-            opstr = copy(opt_table[temp_maybe][0])
+            opstr = opt_table[temp_maybe][0].lower()
             
             if "x" in opstr:
                 for x in range(0, opstr.count("x")):
