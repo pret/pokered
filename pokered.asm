@@ -8764,6 +8764,10 @@ Route5Gate_h: ; 0x1df27 to 0x1df33 (12 bytes) (bank=7) (id=70)
     dw $5ffb ; objects
 
 INCBIN "baserom.gbc",$1df33,$1dfaa - $1df33
+
+Route8GateText1:
+Route7GateText1:
+Route6GateText1:
 Route5GateText1: ; 0x1dfaa
     db $8
     ld a, [$d728]
@@ -8792,7 +8796,9 @@ Route5GateText1: ; 0x1dfaa
     call PrintText
     jp $24d7
 ; 0x1dfe7
+
 INCBIN "baserom.gbc",$1dfe7,$14
+
 Route5GateObject: ; 0x1dffb (size=42)
     db $a ; border tile
 
