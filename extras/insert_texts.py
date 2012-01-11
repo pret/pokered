@@ -426,7 +426,7 @@ if __name__ == "__main__":
     #insert_08_asm(83, 1)
     #insert_all_08s()
 
-    insert_asm(0x1e37a, "PowerPlantText2")
+    insert_asm(0x1e83d, "BillsHouseText1")
 
     if len(failed_attempts) > 0:
         print "-- FAILED ATTEMPTS --"

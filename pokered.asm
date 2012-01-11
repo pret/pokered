@@ -9221,6 +9221,8 @@ asm_6b196: ; 0x1e85a
     jr asm_4d03c ; 0x1e860 $eb
 asm_fd4e2 ; 0x1e862
     jp $24d7
+
+; dunno what this is
     rla
     ld h, a
     ld d, d
@@ -9270,6 +9272,7 @@ BillsHouseText2: ; 0x1e874
     jp $24d7
 
 INCBIN "baserom.gbc",$1e8ba,$1e8d0 - $1e8ba
+
 BillsHouseText3: ; 0x1e8d0
     db $08 ; asm
     ld hl, $68da
@@ -9277,6 +9280,7 @@ BillsHouseText3: ; 0x1e8d0
     jp $24d7
 
 INCBIN "baserom.gbc",$1e8da,$5
+
 BillsHouseObject: ; 0x1e8df (size=38)
     db $d ; border tile
 
@@ -9298,6 +9302,7 @@ BillsHouseObject: ; 0x1e8df (size=38)
 INCBIN "baserom.gbc",$1e905,$16fb
 
 SECTION "bank8",DATA,BANK[$8]
+
 INCBIN "baserom.gbc",$20000,$4000
 
 SECTION "bank9",DATA,BANK[$9]
