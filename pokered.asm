@@ -8014,8 +8014,12 @@ INCBIN "baserom.gbc",$1d9ae,$1d9b6 - $1d9ae
 
 LavenderHouse2Text1: ; 0x1d9b6
     TX_FAR _LavenderHouse2Text1
+    db $8
+    ld a, $11
+    call $13d0
+    jp $24d7
+; 0x1d9c3
 
-INCBIN "baserom.gbc",$1d9ba,$1d9c3 - $1d9ba
 LavenderHouse2Text2: ; 0x1d9c3
     db $08 ; asm
     ld a, [$d7e0]
@@ -28858,8 +28862,11 @@ CopycatsHouseF1Text2: ; 0x75ed1
 
 CopycatsHouseF1Text3: ; 0x75ed6
     TX_FAR _CopycatsHouseF1Text3
+    db $8
+    ld a, $28
+    call $13d0
+    jp $24d7
 
-INCBIN "baserom.gbc",$75eda,$9
 CopycatsHouseF1Object: ; 0x75ee3 (size=46)
     db $a ; border tile
 
