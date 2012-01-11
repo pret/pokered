@@ -17585,13 +17585,17 @@ CeladonMansion1Text2: ; 0x486b1
 
 CeladonMansion1Text3: ; 0x486b6
     TX_FAR _CeladonMansion1Text3
-
-INCBIN "baserom.gbc",$486ba,$486c0 - $486ba
+    db $8
+    ld a, $4
+    jp $46a1
+; 0x486c0
 
 CeladonMansion1Text4: ; 0x486c0
     TX_FAR _CeladonMansion1Text4
-
-INCBIN "baserom.gbc",$486c4,$486ca - $486c4
+    db $8
+    ld a, $f
+    jp $46a1
+; 0x486ca
 
 CeladonMansion1Text5: ; 0x486ca
     TX_FAR _CeladonMansion1Text5
