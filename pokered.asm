@@ -6206,7 +6206,48 @@ CeruleanCityText1: ; 0x1964f
 .asm_815c6 ; 0x19665
     jp $24d7
 
-INCBIN "baserom.gbc",$19668,$90
+INCBIN "baserom.gbc",$19668,$1967c - $19668
+CeruleanCityText2: ; 0x1967c
+    db $8
+    ld a, [$d75b]
+    bit 7, a
+    jr nz, .asm_4ca20 ; 0x19682 $29
+    ld hl, $56d9
+    call PrintText
+    ld hl, $d72d
+    set 6, [hl]
+    set 7, [hl]
+    ld hl, $56ee
+    ld de, $56ee
+    call $3354
+    ld a, [$ff00+$8c]
+    ld [$cf13], a
+    call $336a
+    call $32d7
+    ld a, $4
+    ld [$d60f], a
+    jp $24d7
+.asm_4ca20 ; 0x196ad
+    ld hl, $56f3
+    call PrintText
+    ld bc, $e401
+    call GiveItem
+    jr c, .asm_8bbbd ; 0x196b9 $8
+    ld hl, $56e9
+    call PrintText
+    jr .asm_e4e6f ; 0x196c1 $13
+.asm_8bbbd ; 0x196c3
+    ld a, $1
+    ld [$cc3c], a
+    ld hl, $56de
+    call PrintText
+    ld b, $1d
+    ld hl, $4872
+    call Bankswitch
+.asm_e4e6f ; 0x196d6
+    jp $24d7
+; 0x196d9
+INCBIN "baserom.gbc",$196d9,$1f
 
 CeruleanCityText3: ; 0x196f8
     TX_FAR _CeruleanCityText3
