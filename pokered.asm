@@ -23550,39 +23550,59 @@ Route12Text12: ; 0x597a9
     db $50
 
 INCBIN "baserom.gbc",$597ae,$59858 - $597ae
+
 Route15Text1: ; 0x59858
-    db $08 ; asm
+    db $8 ; asm
     ld hl, $57df
-    jr .asm_31ef8 ; 0x5985c
-    ld [$eb21], sp
-    ld d, a
-    jr .asm_31ef8 ; 0x59862
-    ld [$f721], sp
-    ld d, a
-    jr .asm_31ef8 ; 0x59868
-    ld [$0321], sp
-    ld e, b
-    jr .asm_31ef8 ; 0x5986e
-    ld [$0f21], sp
-    ld e, b
-    jr .asm_31ef8 ; 0x59874
-    ld [$1b21], sp
-    ld e, b
-    jr .asm_31ef8 ; 0x5987a
-    ld [$2721], sp
-    ld e, b
-    jr .asm_31ef8 ; 0x59880
-    ld [$3321], sp
-    ld e, b
-    jr .asm_31ef8 ; 0x59886
-    ld [$3f21], sp
-    ld e, b
-    jr .asm_31ef8 ; 0x5988c
-    ld [$4b21], sp
-    ld e, b
-.asm_31ef8 ; 0x59892
-    call LoadTrainerHeader
+    jr asm_33cb7 ; 0x5985c $34
+
+Route15Text2:
+    db $8 ; asm
+    ld hl, $57eb
+    jr asm_33cb7 ; 0x59862 $2e
+
+Route15Text3:
+    db $8 ; asm
+    ld hl, $57f7
+    jr asm_33cb7 ; 0x59868 $28
+
+Route15Text4:
+    db $8 ; asm
+    ld hl, $5803
+    jr asm_33cb7 ; 0x5986e $22
+
+Route15Text5:
+    db $8 ; asm
+    ld hl, $580f
+    jr asm_33cb7 ; 0x59874 $1c
+
+Route15Text6:
+    db $8 ; asm
+    ld hl, $581b
+    jr asm_33cb7 ; 0x5987a $16
+
+Route15Text7:
+    db $8 ; asm
+    ld hl, $5827
+    jr asm_33cb7 ; 0x59880 $10
+
+Route15Text8:
+    db $8 ; asm
+    ld hl, $5833
+    jr asm_33cb7 ; 0x59886 $a
+
+Route15Text9:
+    db $8 ; asm
+    ld hl, $583f
+    jr asm_33cb7 ; 0x5988c $4
+
+Route15Text10:
+    db $8 ; asm
+    ld hl, $584b
+asm_33cb7: ; 0x59892
+    call $31cc
     jp $24d7
+; 0x59898
 
 INCBIN "baserom.gbc",$59898,$96
 
