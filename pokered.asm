@@ -8250,8 +8250,11 @@ SaffronHouse1Text1: ; 0x1dde8
 
 SaffronHouse1Text2: ; 0x1dded
     TX_FAR _SaffronHouse1Text2
-
-INCBIN "baserom.gbc",$1ddf1,$1ddfa - $1ddf1
+    db $8
+    ld a, $24
+    call $13d0
+    jp $24d7
+; 0x1ddfa
 
 SaffronHouse1Text3: ; 0x1ddfa
     TX_FAR _SaffronHouse1Text3
