@@ -26371,8 +26371,12 @@ SSAnne10Text6: ; 0x61dff
 
 SSAnne10Text8: ; 0x61e09
     TX_FAR _SSAnne10Text8
+    db $8 ; 0x61e0d
+    ld a, $29
+    call $13d0
+    jp $24d7
 
-INCBIN "baserom.gbc",$61e0d,$63
+INCBIN "baserom.gbc",$61e16,$61e70 - $61e16
 
 SSAnne10Text7: ; 0x61e70
     TX_FAR _SSAnne10Text7
