@@ -1043,7 +1043,16 @@ ViridianCityText11: ; 0x24ea
     TX_FAR _ViridianCityText11
     db $50
 
-PewterCityText9: ; PewterCityText9
+PewterCityText9:
+CeruleanCityText15:
+LavenderTownText7:
+VermilionCityText10:
+CeladonCityText12:
+FuchsiaCityText15:
+CinnabarIslandText5:
+SaffronCityText23:
+Route4Text4:
+Route10Text8:
 ViridianCityText12: ; 0x24ef
     TX_FAR _ViridianCityText12
     db $50
