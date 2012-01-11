@@ -1147,6 +1147,7 @@ UnknownDungeon1Text2:
 UnknownDungeon1Text3:
 SilphCo10Text4:
 SilphCo10Text5:
+SilphCo10Text6:
 Route2Text2: ; 0x24f4
     db $08 ; asm
     ld a, $5c

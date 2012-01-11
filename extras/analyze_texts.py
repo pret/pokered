@@ -469,6 +469,7 @@ def is_label_in_asm(label):
     return False
 
 def find_undone_texts():
+    usable_table = {}
     if analyze_incbins.asm == None:
         analyze_incbins.load_asm()
 
@@ -492,6 +493,15 @@ def find_undone_texts():
             
             if not is_label_in_asm(label):
                 print label + " map_id=" + str(map_id) + " text_id=" + str(text_id) + " at " + hex(address) + " byte is: " + hex(ord(extract_maps.rom[address]))
+                if not address in usable_table.keys():
+                    usable_table[address] = 1
+                else:
+                    usable_table[address] += 1
+
+    print "\n\n which ones are priority?"
+    sorted_results =  sorted(usable_table.iteritems(), key=itemgetter(1), reverse=True)
+    for result in sorted_results:
+        print str(result[1]) + " times: " + hex(result[0])
 
 if __name__ == "__main__":
     extract_maps.load_rom()
