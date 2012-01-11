@@ -24162,7 +24162,20 @@ asm_5cd59 ; 0x59bd6
 asm_59625 ; 0x59be1
     jp $24d7
 
-INCBIN "baserom.gbc",$59be4,$59c05 - $59be4
+INCBIN "baserom.gbc",$59be4,$59bee - $59be4
+
+FanClubText3: ; 0x59bee
+    db $8
+    ld hl, $5c00
+    call PrintText
+    ld a, $54
+    call $13d0
+    call $3748
+    jp $24d7
+; 0x59c00
+
+INCBIN "baserom.gbc",$59c00,$5
+
 FanClubText4: ; 0x59c05
     db $08 ; asm
     ld hl, $5c17
@@ -24173,6 +24186,7 @@ FanClubText4: ; 0x59c05
     jp $24d7
 
 INCBIN "baserom.gbc",$59c17,$59c1c - $59c17
+
 FanClubText5: ; 0x59c1c
     db $08 ; asm
     call $5b73
