@@ -7,7 +7,11 @@ import sys, os
 from copy import copy, deepcopy
 import subprocess
 from extract_maps import rom, assert_rom, load_rom, calculate_pointer, load_map_pointers, read_all_map_headers, map_headers
-from pretty_map_headers import map_header_pretty_printer, map_name_cleaner
+
+try:
+    from pretty_map_headers import map_header_pretty_printer, map_name_cleaner
+except Exception:
+    pass
 
 #store each line of source code here
 asm = None

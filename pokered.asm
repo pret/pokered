@@ -22038,35 +22038,52 @@ Route5Text1: ; 0x556b7
 
 INCBIN "baserom.gbc",$556bc,$55758 - $556bc
 Route9Text1: ; 0x55758
-    db $08 ; asm
+    db $8 ; asm
     ld hl, $56eb
-    jr .asm_4fe87 ; 0x5575c
-    ld [$f721], sp
-    ld d, [hl]
-    jr .asm_4fe87 ; 0x55762
-    ld [$0321], sp
-    ld d, a
-    jr .asm_4fe87 ; 0x55768
-    ld [$0f21], sp
-    ld d, a
-    jr .asm_4fe87 ; 0x5576e
-    ld [$1b21], sp
-    ld d, a
-    jr .asm_4fe87 ; 0x55774
-    ld [$2721], sp
-    ld d, a
-    jr .asm_4fe87 ; 0x5577a
-    ld [$3321], sp
-    ld d, a
-    jr .asm_4fe87 ; 0x55780
-    ld [$3f21], sp
-    ld d, a
-    jr .asm_4fe87 ; 0x55786
-    ld [$4b21], sp
-    ld d, a
-.asm_4fe87 ; 0x5578c
-    call LoadTrainerHeader
+    jr asm_8be3d ; 0x5575c $2e
+
+Route9Text2:
+    db $8 ; asm
+    ld hl, $56f7
+    jr asm_8be3d ; 0x55762 $28
+
+Route9Text3:
+    db $8 ; asm
+    ld hl, $5703
+    jr asm_8be3d ; 0x55768 $22
+
+Route9Text4:
+    db $8 ; asm
+    ld hl, $570f
+    jr asm_8be3d ; 0x5576e $1c
+
+Route9Text5:
+    db $8 ; asm
+    ld hl, $571b
+    jr asm_8be3d ; 0x55774 $16
+
+Route9Text6:
+    db $8 ; asm
+    ld hl, $5727
+    jr asm_8be3d ; 0x5577a $10
+
+Route9Text7:
+    db $8 ; asm
+    ld hl, $5733
+    jr asm_8be3d ; 0x55780 $a
+
+Route9Text8:
+    db $8 ; asm
+    ld hl, $573f
+    jr asm_8be3d ; 0x55786 $4
+
+Route9Text9:
+    db $8 ; asm
+    ld hl, $574b
+asm_8be3d: ; 0x5578c
+    call $31cc
     jp $24d7
+; 0x55792
 
 INCBIN "baserom.gbc",$55792,$87
 
