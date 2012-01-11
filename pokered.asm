@@ -20565,7 +20565,14 @@ Route23Text6: ; 0x51334
     call $5346
     jp $24d7
 
-INCBIN "baserom.gbc",$5133d,$6b
+Route23Text7: ; 0x5133d
+    db $8
+    ld a, $0
+    call $5346
+    jp $24d7
+; 0x51346
+
+INCBIN "baserom.gbc",$51346,$62
 
 Route23Text8: ; 0x513a8
     TX_FAR _Route23Text8
