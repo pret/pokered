@@ -640,7 +640,6 @@ def output_bank_opcodes(original_offset, max_byte_count=0x4000):
 
             current_byte_number += 2
             offset += 2
-            print "next byte is: " + hex(ord(extract_maps.rom[offset]))
         elif maybe_byte in opt_table.keys():
             op_code = opt_table[maybe_byte]
             op_code_type = op_code[1]
