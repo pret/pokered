@@ -27016,7 +27016,20 @@ SSAnne2_h: ; 0x61393 to 0x6139f (12 bytes) (id=96)
 
     dw $5514 ; objects
 
-INCBIN "baserom.gbc",$6139f,$61514 - $6139f
+INCBIN "baserom.gbc",$6139f,$614e6 - $6139f
+SSAnne2Text2: ; 0x614e6
+    db $8
+    ld hl, $5500
+    call PrintText
+    ld hl, $d72d
+    set 6, [hl]
+    set 7, [hl]
+    ld hl, $5505
+    ld de, $550a
+    call $3354
+    jp $24d7
+; 0x61500
+INCBIN "baserom.gbc",$61500,$14
 SSAnne2Object: ; 0x61514 (size=90)
     db $c ; border tile
 
