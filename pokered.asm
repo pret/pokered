@@ -17323,8 +17323,374 @@ Mansion4Object: ; 0x52498 (size=69)
 INCBIN "baserom.gbc",$524DD,$5271B - $524DD
 
 CeladonPrizeMenu: ; 14:671B
-INCBIN "baserom.gbc",$5271B,$54000 - $5271B
-;INCBIN "baserom.gbc",$52996,$54000 - $52996
+        ld b,COIN_CASE
+        call IsItemInBag
+        jr nz,.havingCoinCase\@
+        ld hl,RequireCoinCaseTextPtr
+        jp PrintText
+.havingCoinCase\@
+        ld hl,$D730
+        set 6,[hl]
+        ld hl,ExchangeCoinsForPrizesTextPtr
+        call PrintText
+; the following are the menu settings
+        xor a
+        ld [$CC26],a
+        ld [$CC2A],a
+        ld a,$03
+        ld [$CC29],a
+        ld a,$03
+        ld [$CC28],a
+        ld a,$04
+        ld [$CC24],a
+        ld a,$01
+        ld [$CC25],a
+        call PrintPrizePrice ; 687A
+        FuncCoord 0,2
+        ld hl,Coord
+        ld b,$08
+        ld c,$10
+        call TextBoxBorder
+        call GetPrizeMenuId ;678E
+        call $2429
+        ld hl,WhichPrizeTextPtr
+        call PrintText
+        call $3ABE ; menu choice handler
+        bit 1,a ; keypress = B (Cancel)
+        jr nz,.NoChoice\@
+        ld a,[$CC26]
+        cp a,$03 ; "NO,THANKS" choice
+        jr z,.NoChoice\@
+        call HandlePrizeChoice ; 14:68C6
+.NoChoice\@
+        ld hl,$D730
+        res 6,[hl]
+        ret
+
+RequireCoinCaseTextPtr: ; 14:677E
+        TX_FAR _RequireCoinCaseText ; 22:628E
+        db $0D
+        db "@"
+
+ExchangeCoinsForPrizesTextPtr: ; 14:6784
+        TX_FAR _ExchangeCoinsForPrizesText ; 22:62A9
+        db "@"
+
+WhichPrizeTextPtr: ; 14:6789
+        TX_FAR _WhichPrizeText ; 22:62CD
+        db "@"
+
+GetPrizeMenuId: ; 14:678E
+; determine which one among the three
+; prize-texts has been selected
+; using the text ID (stored in [$FF8C])
+; load the three prizes at $D13D-$D13F
+; load the three prices ar $D141-$D146
+; display the three prizes' names
+; (distinguishing between Pokemon names
+; and Items (specifically TMs) names)
+        ld a,[$FF8C]
+        sub a,$03       ; prize-texts' id are 3, 4 and 5
+        ld [$D12F],a    ; prize-texts' id (relative, i.e. 0, 1 or 2)
+        add a
+        add a
+        ld d,$00
+        ld e,a
+        ld hl,PrizeDifferentMenuPtrs
+        add hl,de
+        ld a,[hli]
+        ld d,[hl]
+        ld e,a
+        inc hl
+        push hl
+        ld hl,W_PRIZE1
+        call $3829      ; XXX what does this do
+        pop hl
+        ld a,[hli]
+        ld h,[hl]
+        ld l,a
+        ld de,$D141
+        ld bc,$0006
+        call CopyData
+        ld a,[$D12F]
+        cp a,$02        ;is TM_menu?
+        jr nz,.putMonName\@
+        ld a,[W_PRIZE1]
+        ld [$D11E],a
+        call GetItemName
+        FuncCoord 2,4
+        ld hl,Coord
+        call PlaceString
+        ld a,[W_PRIZE2]
+        ld [$D11E],a
+        call GetItemName
+        FuncCoord 2,6
+        ld hl,Coord
+        call PlaceString
+        ld a,[W_PRIZE3]
+        ld [$D11E],a
+        call GetItemName
+        FuncCoord 2,8
+        ld hl,Coord
+        call PlaceString
+        jr .putNoThanksText\@
+.putMonName\@ ; 14:67EC
+        ld a,[W_PRIZE1]
+        ld [$D11E],a
+        call GetMonsterName
+        FuncCoord 2,4
+        ld hl,Coord
+        call PlaceString
+        ld a,[W_PRIZE2]
+        ld [$D11E],a
+        call GetMonsterName
+        FuncCoord 2,6
+        ld hl,Coord
+        call PlaceString
+        ld a,[W_PRIZE3]
+        ld [$D11E],a
+        call GetMonsterName
+        FuncCoord 2,8
+        ld hl,Coord
+        call PlaceString
+.putNoThanksText\@ ; 14:6819
+        FuncCoord 2,10
+        ld hl,Coord
+        ld de,NoThanksText
+        call PlaceString
+; put prices on the right side of the textbox
+        ld de,$D141
+        FuncCoord 13,5
+        ld hl,Coord
+; reg. c:
+; [low nybble] number of bytes
+; [bit 765 = %100] space-padding (not zero-padding)
+        ld c,(1 << 7 | 2)
+; Function $15CD displays BCD value (same routine
+; used by text-command $02)
+        call $15CD ; Print_BCD
+        ld de,$D143
+        FuncCoord 13,7
+        ld hl,Coord
+        ld c,(%1 << 7 | 2)
+        call $15CD
+        ld de,$D145
+        FuncCoord 13,9
+        ld hl,Coord
+        ld c,(1 << 7 | 2)
+        jp $15CD
+
+PrizeDifferentMenuPtrs: ; 14:6843
+        dw PrizeMenuMon1Entries
+        dw PrizeMenuMon1Cost
+
+        dw PrizeMenuMon2Entries
+        dw PrizeMenuMon2Cost
+        
+        dw PrizeMenuTMsEntries
+        dw PrizeMenuTMsCost
+
+NoThanksText: ; 14:684F
+        db "NO THANKS@"
+
+PrizeMenuMon1Entries: ; 14:6859
+        db ABRA
+        db CLEFAIRY
+        db NIDORINA
+        db "@"
+PrizeMenuMon1Cost: ; 14:685D
+        db $01,$80
+        db $05,$00
+        db $12,$00
+        db "@"
+
+PrizeMenuMon2Entries: ; 14:6864
+        db DRATINI
+        db SCYTHER
+        db PORYGON
+        db "@"
+PrizeMenuMon2Cost: ; 14:6868
+        db $28,$00 ; 2800 Coins
+        db $55,$00 ; 5500 Coins
+        db $99,$99 ; 9999 Coins
+        db "@"
+
+PrizeMenuTMsEntries: ; 14:686F
+        db TM_23
+        db TM_15
+        db TM_50
+        db "@"
+PrizeMenuTMsCost: ; 14:6873
+        db $33,$00 ; 3300 Coins
+        db $55,$00 ; 5500 Coins
+        db $77,$00 ; 7700 Coins
+        db "@"
+
+PrintPrizePrice: ; 14:687A
+        FuncCoord 11,0
+        ld hl,Coord
+        ld b,$01
+        ld c,$07
+        call TextBoxBorder
+        call $2429      ; XXX save OAM?
+        FuncCoord 12,0
+        ld hl,Coord
+        ld de,.CoinText\@
+        call PlaceString
+        FuncCoord 13,1
+        ld hl,Coord
+        ld de,.SixSpacesText\@
+        call PlaceString
+        FuncCoord 13,1
+        ld hl,Coord
+        ld de,W_PLAYERCOINS1
+        ld c,%10000010
+        call $15CD
+        ret
+
+.CoinText\@ ; 14:68A5
+        db "COIN@"
+
+.SixSpacesText\@ ; 14:68AA
+        db "      @"
+
+LoadCoinsToSubtract: ; 14:68B1
+        ld a,[$D139] ; backup of selected menu_entry
+        add a
+        ld d,$00
+        ld e,a
+        ld hl,$D141 ; first prize's price
+        add hl,de ; get selected prize's price
+        xor a
+        ld [$FF9F],a
+        ld a,[hli]
+        ld [$FFA0],a
+        ld a,[hl]
+        ld [$FFA1],a
+        ret
+
+HandlePrizeChoice: ; 14:68C6
+        ld a,[$CC26] ; selected menu_entry
+        ld [$D139],a
+        ld d,$00
+        ld e,a
+        ld hl,W_PRIZE1
+        add hl,de
+        ld a,[hl]
+        ld [$D11E],a
+        ld a,[$D12F]
+        cp a,$02 ; is prize a TM?
+        jr nz,.GetMonName\@
+        call GetItemName
+        jr .GivePrize\@
+.GetMonName\@ ; 14:68E3
+        call GetMonsterName
+.GivePrize\@ ; 14:68E6
+        ld hl,SoYouWantPrizeTextPtr
+        call PrintText
+        call $35EC ; yes/no textbox
+        ld a,[$CC26] ; yes/no answer (Y=0, N=1)
+        and a
+        jr nz,.PrintOhFineThen\@
+        call LoadCoinsToSubtract
+        call $35B1 ; subtract COINs from COIN_CASE
+        jr c,.NotEnoughCoins\@
+        ld a,[$D12F]
+        cp a,$02
+        jr nz,.GiveMon\@
+        ld a,[$D11E]
+        ld b,a
+        ld a,$01
+        ld c,a
+        call $3E2E ; GiveItem
+        jr nc,.BagIsFull\@
+        jr .SubtractCoins\@
+.GiveMon\@ ; 14:6912
+        ld a,[$D11E]
+        ld [$CF91],a
+        push af
+        call GetPrizeMonLevel ; 14:6977
+        ld c,a
+        pop af
+        ld b,a
+        call $3E48 ; GivePokemon
+        push af
+        ld a,[$CCD3] ; XXX is there room?
+        and a
+        call z,$3865
+        pop af
+        ret nc
+.SubtractCoins\@ ; 14:692C
+        call LoadCoinsToSubtract
+        ld hl,$FFA1
+        ld de,W_PLAYERCOINS2
+        ld c,$02 ; how many bytes
+        ld a,$0C
+        call Predef ; subtract coins (BCD daa operations)
+        jp PrintPrizePrice
+.BagIsFull\@ ; 14:693F
+        ld hl,PrizeRoomBagIsFullTextPtr
+        jp PrintText
+.NotEnoughCoins\@ ; 14:6945
+        ld hl,SorryNeedMoreCoinsTextPtr
+        jp PrintText
+.PrintOhFineThen\@ ; 14:694B
+        ld hl,OhFineThenTextPtr
+        jp PrintText
+
+UnknownData52951: ; 14:6951
+; XXX what's this?
+        db $00,$01,$00,$01,$00,$01,$00,$00,$01
+
+HereYouGoTextPtr:
+        TX_FAR _HereYouGoText ; 22:62E7
+        db $0D
+        db "@"
+
+SoYouWantPrizeTextPtr: ; 14:6960
+        TX_FAR _SoYouWantPrizeText ; 22:62F6
+        db "@"
+
+SorryNeedMoreCoinsTextPtr: ; 14:6965
+        TX_FAR _SorryNeedMoreCoins ; 22:630B
+        db $0D
+        db "@"
+
+PrizeRoomBagIsFullTextPtr: ; 14:696B
+        TX_FAR _OopsYouDontHaveEnoughRoomText ; 22:6329
+        db $0D
+        db "@"
+
+OhFineThenTextPtr: ; 14:6971
+        TX_FAR _OhFineThenText; 22:634C
+        db $0D ; wait keypress (A/B) without blink
+        db "@"
+
+GetPrizeMonLevel: ; 14:6977
+        ld a,[$CF91]
+        ld b,a
+        ld hl,PrizeMonLevelDictionary
+.loop\@ ; 14:697E
+        ld a,[hli]
+        cp b
+        jr z,.matchFound\@
+        inc hl
+        jr .loop\@
+.matchFound\@ ; 14:6985
+        ld a,[hl]
+        ld [$D127],a
+        ret
+
+PrizeMonLevelDictionary: ; 14:698A
+        db ABRA,9
+        db CLEFAIRY,8
+        db NIDORINA,17
+
+        db DRATINI,18
+        db SCYTHER,25
+        db PORYGON,26
+
+INCBIN "baserom.gbc",$52996,$54000 - $52996
 
 SECTION "bank15",DATA,BANK[$15]
 
@@ -23459,7 +23825,7 @@ _WhichPrizeText: ; 22:62CD
         db 0,"Which prize do",$4F
         db "you want?",$57
 
-_HereYouGoText: ; 22:62E6
+_HereYouGoText: ; 22:62E7
         db 0,"Here you go!@@"
 
 _SoYouWantPrizeText: ; 22:62F6
