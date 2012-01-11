@@ -22884,7 +22884,64 @@ DayCareM_h: ; 0x56243 to 0x5624f (12 bytes) (id=72)
 
     dw $6459 ; objects
 
-INCBIN "baserom.gbc",$5624f,$56459 - $5624f
+INCBIN "baserom.gbc",$5624f,$56254 - $5624f
+DayCareMText1: ; 0x56254
+    db $8
+    call $36f4
+    ld a, [$da48]
+    and a
+    jp nz, $62e1
+    ld hl, $640f
+    call PrintText
+    call $35ec
+    ld a, [$cc26]
+    and a
+    ld hl, $643b
+    jp nz, $6409
+    ld a, [$d163]
+    dec a
+    ld hl, $6445
+    jp z, $6409
+    ld hl, $6414
+    call PrintText
+    xor a
+    ld [$cfcb], a
+    ld [$d07d], a
+    ld [$cc35], a
+    call $13fc
+    push af
+    call $3dd4
+    call $3dbe
+    call $20ba
+    pop af
+    ld hl, $6437
+    jp c, $6409
+    ld hl, $571b
+    ld b, $8
+    call Bankswitch
+    ld hl, $644a
+    jp c, $6409
+    xor a
+    ld [$cc2b], a
+    ld a, [$cf92]
+    ld hl, $d2b5
+    call $15ba
+    ld hl, $6419
+    call PrintText
+    ld a, $1
+    ld [$da48], a
+    ld a, $3
+    ld [$cf95], a
+    call $3a68
+    xor a
+    ld [$cf95], a
+    call $391f
+    ld a, [$cf91]
+    call $13d0
+    ld hl, $641e
+    jp $6409
+; 0x562e1
+INCBIN "baserom.gbc",$562e1,$178
 DayCareMObject: ; 0x56459 (size=26)
     db $a ; border tile
 
