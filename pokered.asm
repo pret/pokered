@@ -7512,7 +7512,160 @@ OaksLabText1: ; 0x1d0ce
 .asm_ff2ed ; 0x1d0f0
     jp $24d7
 
-INCBIN "baserom.gbc",$1d0f3,$1d248 - $1d0f3
+INCBIN "baserom.gbc",$1d0f3,$1d102 - $1d0f3
+
+OaksLabText2: ; 0x1d102
+    db $8
+    ld a, $b1
+    ld [$cd3d], a
+    ld a, $3
+    ld [$cd3e], a
+    ld a, $b0
+    ld b, $2
+    jr asm_5e6bb ; 0x1d111 $20
+
+OaksLabText3: ; 0x1d113
+    db $8
+    ld a, $99
+    ld [$cd3d], a
+    ld a, $4
+    ld [$cd3e], a
+    ld a, $b1
+    ld b, $3
+    jr asm_5e6bb ; 0x1d122 $f
+
+OaksLabText4: ; 0x1d124
+    db $8
+    ld a, $b0
+    ld [$cd3d], a
+    ld a, $2
+    ld [$cd3e], a
+    ld a, $99
+    ld b, $4
+
+asm_5e6bb: ; 0x1d133
+    ld [$cf91], a
+    ld [$d11e], a
+    ld a, b
+    ld [$cf13], a
+    ld a, [$d74b]
+    bit 2, a
+    jp nz, $522d
+    bit 1, a
+    jr nz, asm_9eaa4 ; 0x1d147 $e
+    ld hl, $5152
+    call PrintText
+    jp $24d7
+; 0x1d152
+
+;XXX which text is this?
+db $17, $df, $4d, $25, $50
+
+asm_9eaa4: ; 0x1d157
+    ld a, $5
+    ld [$ff00+$8c], a
+    ld a, $9
+    ld [$ff00+$8b], a
+    call $34fc
+    ld [hl], $0
+    ; manually fixed some disassembler issues around here
+    ld a, $1
+    ld [$FF8c], a
+    ld a, $9
+    ld [$ff00+$8b], a
+    call $34fc
+    ld [hl], $c
+    ld hl, $d730
+    set 6, [hl]
+    ld a, $46
+    call Predef
+    ld hl, $d730
+    res 6, [hl]
+    call $3071
+    ld c, $a
+    call $3739
+    ld a, [$cf13]
+    cp $2
+    jr z, asm_f6e3a ; 0x1d18d $6
+    cp $3
+    jr z, asm_2391d ; 0x1d191 $c
+    jr asm_ddec1 ; 0x1d193 $14
+asm_f6e3a: ; 0x1d195
+    ld hl, $519a
+    jr asm_b5ddf ; 0x1d198 $19
+    rla
+    ld b, $4e
+    dec h
+    ld d, b
+asm_2391d: ; 0x1d19f
+    ld hl, $51a4
+    jr asm_b5ddf ; 0x1d1a2 $f
+    rla
+    cpl
+    ld c, [hl]
+    dec h
+    ld d, b
+asm_ddec1: ; 0x1d1a9
+    ld hl, $51ae
+    jr asm_b5ddf ; 0x1d1ac $5
+    rla
+    ld d, a
+    ld c, [hl]
+    dec h
+    ld d, b
+asm_b5ddf: ; 0x1d1b3
+    call PrintText
+    ld a, $1
+    ld [$cc3c], a
+    call $35ec
+    ld a, [$cc26]
+    and a
+    jr nz, asm_6ccd7 ; 0x1d1c2 $5b
+    ld a, [$cf91]
+    ld [$d717], a
+    ld [$d11e], a
+    call GetMonName
+    ld a, [$cf13]
+    cp $2
+    jr nz, asm_5b538 ; 0x1d1d5 $4
+    ld a, $2b
+    jr asm_03e85 ; 0x1d1d9 $a
+asm_5b538: ; 0x1d1db
+    cp $3
+    jr nz, asm_f8b3f ; 0x1d1dd $4
+    ld a, $2c
+    jr asm_03e85 ; 0x1d1e1 $2
+asm_f8b3f: ; 0x1d1e3
+    ld a, $2d
+asm_03e85: ; 0x1d1e5
+    ld [$cc4d], a
+    ld a, $11
+    call Predef
+    ld a, $1
+    ld [$cc3c], a
+    ld hl, $5222
+    call PrintText
+    ld hl, $5227
+    call PrintText
+    xor a
+    ld [$cc49], a
+    ld a, $5
+    ld [$d127], a
+    ld a, [$cf91]
+    ld [$d11e], a
+    call AddPokemonToParty
+    ld hl, $d72e
+    set 3, [hl]
+    ld a, $fc
+    ld [$cd6b], a
+    ld a, $8
+    ld [$d5f0], a
+asm_6ccd7: ; 0x1d21f
+    jp $24d7
+; 0x1d222
+
+INCBIN "baserom.gbc",$1d222,$26
+
 OaksLabText5: ; 0x1d248
     db $08 ; asm
     ld a, [$d747]
