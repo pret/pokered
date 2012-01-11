@@ -8763,7 +8763,36 @@ Route5Gate_h: ; 0x1df27 to 0x1df33 (12 bytes) (bank=7) (id=70)
 
     dw $5ffb ; objects
 
-INCBIN "baserom.gbc",$1df33,$1dffb - $1df33
+INCBIN "baserom.gbc",$1df33,$1dfaa - $1df33
+Route5GateText1: ; 0x1dfaa
+    db $8
+    ld a, [$d728]
+    bit 6, a
+    jr nz, .asm_88856 ; 0x1dfb0 $2c
+    ld b, $16
+    ld hl, $659f
+    call Bankswitch
+    ld a, [$ff00+$db]
+    and a
+    jr nz, .asm_768a2 ; 0x1dfbd $11
+    ld hl, $5fe7
+    call PrintText
+    call $5f43
+    ld a, $1
+    ld [$d662], a
+    jp $24d7
+.asm_768a2 ; 0x1dfd0
+    ld hl, $5fec
+    call PrintText
+    ld hl, $d728
+    set 6, [hl]
+    jp $24d7
+.asm_88856 ; 0x1dfde
+    ld hl, $5ff6
+    call PrintText
+    jp $24d7
+; 0x1dfe7
+INCBIN "baserom.gbc",$1dfe7,$14
 Route5GateObject: ; 0x1dffb (size=42)
     db $a ; border tile
 
