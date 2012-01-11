@@ -17575,8 +17575,9 @@ INCBIN "baserom.gbc",$486a1,$6
 
 CeladonMansion1Text1: ; 0x486a7
     TX_FAR _CeladonMansion1Text1
-
-INCBIN "baserom.gbc",$486ab,$486b1 - $486ab
+    db $08 ; asm
+    ld a, $4d
+    jp $46a1
 
 CeladonMansion1Text2: ; 0x486b1
     TX_FAR _CeladonMansion1Text2
