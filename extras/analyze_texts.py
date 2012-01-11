@@ -491,7 +491,7 @@ def find_undone_texts():
                 address = extract_maps.map_headers[map_id]["texts"][text_id][1]["start_address"]
             
             if not is_label_in_asm(label):
-                print label + " map_id=" + str(map_id) + " text_id=" + str(text_id) + " at " + hex(address)
+                print label + " map_id=" + str(map_id) + " text_id=" + str(text_id) + " at " + hex(address) + " byte is: " + hex(ord(extract_maps.rom[address]))
 
 if __name__ == "__main__":
     extract_maps.load_rom()
