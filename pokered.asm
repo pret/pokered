@@ -19738,7 +19738,7 @@ PredefPointers: ; 7E79
         dbw $1C,$76BD
         dbw $1C,$75E8
         dbw $1C,$77E2
-        dbw $1C,$5AD9
+        dbw BANK(Predef54),Predef54 ; 54 initiate trade
         dbw $1D,$405C
         dbw $11,$4169
         dbw $1E,$45BA
@@ -26915,7 +26915,92 @@ CeruleanCaveName:
 PowerPlantName:
 	db "POWER PLANT@"
 
-INCBIN "baserom.gbc",$716BE,$71B7B-$716BE
+INCBIN "baserom.gbc",$716BE,$71AD9-$716BE
+
+Predef54: ; 0x71ad9
+; trigger the trade offer/action specified by W_WHICHTRADE
+	call $36f4
+	ld hl,TradeMons
+	ld a,[W_WHICHTRADE]
+	ld b,a
+	swap a
+	sub b
+	sub b
+	ld c,a
+	ld b,$0
+	add hl,bc
+	ld a,[hli]
+	ld [$cd0f],a
+	ld a,[hli]
+	ld [$cd34],a
+	ld a,[hli]
+	push af
+	ld de,$cd29
+	ld bc,$000b
+	call CopyData
+	pop af
+	ld l,a
+	ld h,$0
+	ld de,$5d64
+	add hl,hl
+	add hl,de
+	ld a,[hli]
+	ld [$cd10],a
+	ld a,[hl]
+	ld [$cd11],a
+	ld a,[$cd0f]
+	ld de,$cd13
+	call Function71b6a
+	ld a,[$cd34]
+	ld de,$cd1e
+	call Function71b6a
+	ld hl,$d737
+	ld a,[W_WHICHTRADE]
+	ld c,a
+	ld b,$2
+	ld a,$10
+	call Predef
+	ld a,c
+	and a
+	ld a,$4
+	ld [$cd12],a
+	jr nz,.asm_99bca ; 0x71b36 $20
+	xor a
+	ld [$cd12],a
+	call .asm_99bca
+	ld a,$1
+	ld [$cd12],a
+	call $35ec
+	ld a,[$cc26]
+	and a
+	jr nz,.asm_99bca ; 0x71b4b $b
+	call Function71c07
+	jr c,.asm_99bca ; 0x71b50 $6
+	ld hl,$5d8d
+	call PrintText
+.asm_99bca ; 0x71b58
+	ld hl,$cd12
+	ld a,[hld]
+	ld e,a
+	ld d,$0
+	ld a,[hld]
+	ld l,[hl]
+	ld h,a
+	add hl,de
+	add hl,de
+	ld a,[hli]
+	ld h,[hl]
+	ld l,a
+	jp PrintText
+
+Function71b6a: ; 0x71b6a
+	push de
+	ld [$d11e],a
+	call GetMonName
+	ld hl,$cd6d
+	pop de
+	ld bc,$b
+	jp CopyData
 
 TradeMons: ; 5B7B
 ; givemonster, getmonster, textstring, nickname (11 bytes), 14 bytes total
@@ -26930,7 +27015,78 @@ TradeMons: ; 5B7B
 	db VENONAT,   TANGELA,   2,"CRINKLES@@@"
 	db NIDORAN_M, NIDORAN_F, 2,"SPOT@@@@@@@"
 
-INCBIN "baserom.gbc",$71C07,$725C8-$71C07
+Function71c07: ; 0x71c07
+	xor a
+	ld [$d07d],a
+	dec a
+	ld [$cfcb],a
+	call $13fc
+	push af
+	call $5ca2
+	pop af
+	ld a,$1
+	jp c,.asm_c4bc2
+	ld a,[$cd0f]
+	ld b,a
+	ld a,[$cf91]
+	cp b
+	ld a,$2
+	jr nz,.asm_c4bc2 ; 0x71c26 $75
+	ld a,[$cf92]
+	ld hl,$d18c
+	ld bc,$002c
+	call AddNTimes
+	ld a,[hl]
+	ld [$d127],a
+	ld hl,$d737
+	ld a,[W_WHICHTRADE]
+	ld c,a
+	ld b,$1
+	ld a,$10
+	call Predef
+	ld hl,$5d88
+	call PrintText
+	ld a,[$cf92]
+	push af
+	ld a,[$d127]
+	push af
+	call $36c0
+	call $5cc1
+	ld a,$38
+	call Predef
+	pop af
+	ld [$d127],a
+	pop af
+	ld [$cf92],a
+	ld a,[$cd34]
+	ld [$cf91],a
+	xor a
+	ld [$cc49],a
+	ld [$cf95],a
+	call $391f
+	ld a,$80
+	ld [$cc49],a
+	call AddPokemonToParty
+	call $5d19
+	ld hl,$7d7d
+	ld b,$5
+	call Bankswitch
+	call ClearScreen
+	call $5ca2
+	ld b,$3
+	ld hl,$6edc
+	call Bankswitch
+	and a
+	ld a,$3
+	jr .asm_ee803 ; 0x71c9b $1
+.asm_c4bc2 ; 0x71c9d
+	scf
+.asm_ee803 ; 0x71c9e
+	ld [$cd12],a
+	ret
+
+
+INCBIN "baserom.gbc",$71CA2,$725C8-$71CA2
 
 MonsterPalettes: ; 65C8
 	db PAL_MEWMON    ; MISSINGNO
