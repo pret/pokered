@@ -9198,7 +9198,45 @@ BillsHouse_h: ; 0x1e75e to 0x1e76a (12 bytes) (bank=7) (id=88)
 
     dw $68df ; objects
 
-INCBIN "baserom.gbc",$1e76a,$1e874 - $1e76a
+INCBIN "baserom.gbc",$1e76a,$1e83d - $1e76a
+
+;0x1e83d
+BillsHouseText1:
+    db $8
+    ld hl, $6865
+    call PrintText
+    call $35ec
+    ld a, [$cc26]
+    and a
+    jr nz, asm_6b196 ; 0x1e84b $d
+asm_4d03c:
+    ld hl, $686a
+    call PrintText
+    ld a, $1
+    ld [$d661], a
+    jr asm_fd4e2 ; 0x1e858 $8
+asm_6b196: ; 0x1e85a
+    ld hl, $686f
+    call PrintText
+    jr asm_4d03c ; 0x1e860 $eb
+asm_fd4e2 ; 0x1e862
+    jp $24d7
+    rla
+    ld h, a
+    ld d, d
+    inc hl
+    ld d, b
+    rla
+    ld b, l
+    ld d, e
+    inc hl
+    ld d, b
+    rla
+    sub c
+    ld d, e
+    inc hl
+    ld d, b
+
 BillsHouseText2: ; 0x1e874
     db $08 ; asm
     ld a, [$d7f2]
