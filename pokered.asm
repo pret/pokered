@@ -22699,29 +22699,29 @@ VermilionHouse2Text1: ; 0x56075
     db $08 ; asm
     ld a, [$d728]
     bit 3, a
-    jr nz, .asm_03ef5 ; 0x5607b
+    jr nz, asm_03ef5 ; 0x5607b
     ld hl, $60b1
     call PrintText
     call $35ec
     ld a, [$cc26]
     and a
-    jr nz, .asm_eb1b7 ; 0x5608a
+    jr nz, asm_eb1b7 ; 0x5608a
     ld bc,(OLD_ROD << 8) | 1
     call $3e2e
-    jr nc, .asm_fd67b ; 0x56092
+    jr nc, asm_fd67b ; 0x56092
     ld hl, $d728
     set 3, [hl]
     ld hl, $60b6
-    jr .asm_5dd95 ; 0x5609c
-.asm_fd67b ; 0x5609e
+    jr asm_5dd95 ; 0x5609c
+asm_fd67b ; 0x5609e
     ld hl, $60ca
-    jr .asm_5dd95 ; 0x560a1
-.asm_eb1b7 ; 0x560a3
+    jr asm_5dd95 ; 0x560a1
+asm_eb1b7 ; 0x560a3
     ld hl, $60c0
-    jr .asm_5dd95 ; 0x560a6
-.asm_03ef5 ; 0x560a8
+    jr asm_5dd95 ; 0x560a6
+asm_03ef5 ; 0x560a8
     ld hl, $60c5
-.asm_5dd95 ; 0x560ab
+asm_5dd95 ; 0x560ab
     call PrintText
     jp $24d7
 
@@ -22802,29 +22802,29 @@ FuchsiaHouse3Text1: ; 0x56181
     db $08 ; asm
     ld a, [$d728]
     bit 4, a
-    jr nz, .asm_6084e ; 0x56187
+    jr nz, asm_6084e ; 0x56187
     ld hl, $61bd
     call PrintText
     call $35ec
     ld a, [$cc26]
     and a
-    jr nz, .asm_3ace4 ; 0x56196
+    jr nz, asm_3ace4 ; 0x56196
     ld bc,(GOOD_ROD << 8) | 1
     call $3e2e
-    jr nc, .asm_628ee ; 0x5619e
+    jr nc, asm_628ee ; 0x5619e
     ld hl, $d728
     set 4, [hl]
     ld hl, $61c2
-    jr .asm_1b09c ; 0x561a8
-.asm_628ee ; 0x561aa
+    jr asm_1b09c ; 0x561a8
+asm_628ee ; 0x561aa
     ld hl, $621c
-    jr .asm_1b09c ; 0x561ad
-.asm_3ace4 ; 0x561af
+    jr asm_1b09c ; 0x561ad
+asm_3ace4 ; 0x561af
     ld hl, $6212
-    jr .asm_1b09c ; 0x561b2
-.asm_6084e ; 0x561b4
+    jr asm_1b09c ; 0x561b2
+asm_6084e ; 0x561b4
     ld hl, $6217
-.asm_1b09c ; 0x561b7
+asm_1b09c ; 0x561b7
     call PrintText
     jp $24d7
 
@@ -22885,29 +22885,29 @@ Route12HouseText1: ; 0x56484
     db $08 ; asm
     ld a, [$d728]
     bit 5, a
-    jr nz, .asm_b4cad ; 0x5648a
+    jr nz, asm_b4cad ; 0x5648a
     ld hl, $64c0
     call PrintText
     call $35ec
     ld a, [$cc26]
     and a
-    jr nz, .asm_a2d76 ; 0x56499
+    jr nz, asm_a2d76 ; 0x56499
     ld bc,(SUPER_ROD << 8) | 1
     call $3e2e
-    jr nc, .asm_e3b89 ; 0x564a1
+    jr nc, asm_e3b89 ; 0x564a1
     ld hl, $d728
     set 5, [hl]
     ld hl, $64c5
-    jr .asm_df984 ; 0x564ab
-.asm_e3b89 ; 0x564ad
+    jr asm_df984 ; 0x564ab
+asm_e3b89 ; 0x564ad
     ld hl, $64d9
-    jr .asm_df984 ; 0x564b0
-.asm_a2d76 ; 0x564b2
+    jr asm_df984 ; 0x564b0
+asm_a2d76 ; 0x564b2
     ld hl, $64cf
-    jr .asm_df984 ; 0x564b5
-.asm_b4cad ; 0x564b7
+    jr asm_df984 ; 0x564b5
+asm_b4cad ; 0x564b7
     ld hl, $64d4
-.asm_df984 ; 0x564ba
+asm_df984 ; 0x564ba
     call PrintText
     jp $24d7
 
@@ -22942,9 +22942,9 @@ SilphCo8Text1: ; 0x565aa
     ld a, [$d838]
     bit 7, a
     ld hl, $65c3
-    jr nz, .asm_a468f ; 0x565b3
+    jr nz, asm_a468f ; 0x565b3
     ld hl, $65be
-.asm_a468f ; 0x565b8
+asm_a468f ; 0x565b8
     call PrintText
     jp $24d7
 
@@ -23927,18 +23927,18 @@ FanClubText1: ; 0x59b94
     db $08 ; asm
     ld a, [$d771]
     bit 7, a
-    jr nz, .asm_67b22 ; 0x59b9a
+    jr nz, asm_67b22 ; 0x59b9a
     ld hl, $5bb7
     call PrintText
     ld hl, $d771
     set 6, [hl]
-    jr .asm_64f01 ; 0x59ba7
-.asm_67b22 ; 0x59ba9
+    jr asm_64f01 ; 0x59ba7
+asm_67b22 ; 0x59ba9
     ld hl, $5bbc
     call PrintText
     ld hl, $d771
     res 7, [hl]
-.asm_64f01 ; 0x59bb4
+asm_64f01 ; 0x59bb4
     jp $24d7
 
 INCBIN "baserom.gbc",$59bb7,$59bc1 - $59bb7
@@ -23946,18 +23946,18 @@ FanClubText2: ; 0x59bc1
     db $08 ; asm
     ld a, [$d771]
     bit 6, a
-    jr nz, .asm_5cd59 ; 0x59bc7
+    jr nz, asm_5cd59 ; 0x59bc7
     ld hl, $5be4
     call PrintText
     ld hl, $d771
     set 7, [hl]
-    jr .asm_59625 ; 0x59bd4
-.asm_5cd59 ; 0x59bd6
+    jr asm_59625 ; 0x59bd4
+asm_5cd59 ; 0x59bd6
     ld hl, $5be9
     call PrintText
     ld hl, $d771
     res 6, [hl]
-.asm_59625 ; 0x59be1
+asm_59625 ; 0x59be1
     jp $24d7
 
 INCBIN "baserom.gbc",$59be4,$59c05 - $59be4
@@ -23974,35 +23974,35 @@ INCBIN "baserom.gbc",$59c17,$59c1c - $59c17
 FanClubText5: ; 0x59c1c
     db $08 ; asm
     call $5b73
-    jr nz, .asm_38bb3 ; 0x59c20
+    jr nz, asm_38bb3 ; 0x59c20
     ld hl, $5c65
     call PrintText
     call $35ec
     ld a, [$cc26]
     and a
-    jr nz, .asm_2c8d7 ; 0x59c2f
+    jr nz, asm_2c8d7 ; 0x59c2f
     ld hl, $5c6a
     call PrintText
     ld bc,(BIKE_VOUCHER << 8) | 1
     call $3e2e
-    jr nc, .asm_867d4 ; 0x59c3d
+    jr nc, asm_867d4 ; 0x59c3d
     ld hl, $5c6f
     call PrintText
     ld hl, $d771
     set 1, [hl]
-    jr .asm_d3c26 ; 0x59c4a
-.asm_867d4 ; 0x59c4c
+    jr asm_d3c26 ; 0x59c4a
+asm_867d4 ; 0x59c4c
     ld hl, $5c83
     call PrintText
-    jr .asm_d3c26 ; 0x59c52
-.asm_2c8d7 ; 0x59c54
+    jr asm_d3c26 ; 0x59c52
+asm_2c8d7 ; 0x59c54
     ld hl, $5c79
     call PrintText
-    jr .asm_d3c26 ; 0x59c5a
-.asm_38bb3 ; 0x59c5c
+    jr asm_d3c26 ; 0x59c5a
+asm_38bb3 ; 0x59c5c
     ld hl, $5c7e
     call PrintText
-.asm_d3c26 ; 0x59c62
+asm_d3c26 ; 0x59c62
     jp $24d7
 
 INCBIN "baserom.gbc",$59c65,$32
@@ -24045,20 +24045,20 @@ SilphCo2Text1: ; 0x59dc1
     db $08 ; asm
     ld a, [$d826]
     bit 7, a
-    jr nz, .asm_b8a0d ; 0x59dc7
+    jr nz, asm_b8a0d ; 0x59dc7
     ld hl, $5ded
     call PrintText
     ld bc,(TM_36 << 8) | 1
     call $3e2e
     ld hl, $5dfd
-    jr nc, .asm_2c1e0 ; 0x59dd8
+    jr nc, asm_2c1e0 ; 0x59dd8
     ld hl, $d826
     set 7, [hl]
     ld hl, $5df2
-    jr .asm_2c1e0 ; 0x59de2
-.asm_b8a0d ; 0x59de4
+    jr asm_2c1e0 ; 0x59de2
+asm_b8a0d ; 0x59de4
     ld hl, $5df8
-.asm_2c1e0 ; 0x59de7
+asm_2c1e0 ; 0x59de7
     call PrintText
     jp $24d7
 
@@ -24135,9 +24135,9 @@ SilphCo3Text1: ; 0x59fe5
     ld a, [$d838]
     bit 7, a
     ld hl, $5ffe
-    jr nz, .asm_8c56f ; 0x59fee
+    jr nz, asm_8c56f ; 0x59fee
     ld hl, $5ff9
-.asm_8c56f ; 0x59ff3
+asm_8c56f ; 0x59ff3
     call PrintText
     jp $24d7
 
@@ -24220,9 +24220,9 @@ SilphCo10Text3: ; 0x5a1bf
     ld a, [$d838]
     bit 7, a
     ld hl, $61d8
-    jr nz, .asm_cf85f ; 0x5a1c8
+    jr nz, asm_cf85f ; 0x5a1c8
     ld hl, $61d3
-.asm_cf85f ; 0x5a1cd
+asm_cf85f ; 0x5a1cd
     call PrintText
     jp $24d7
 
@@ -24410,7 +24410,115 @@ MuseumF1_h: ; 0x5c0eb to 0x5c0f7 (12 bytes) (id=52)
 
     dw $42c1 ; objects
 
-INCBIN "baserom.gbc",$5c0f7,$5c247 - $5c0f7
+INCBIN "baserom.gbc",$5c0f7,$5c135 - $5c0f7
+
+MuseumF1Text1: ; 0x5c135
+    db $8
+    ld a, [$d361]
+    cp $4
+    jr nz, asm_8774b ; 0x5c13b $a
+    ld a, [$d362]
+    cp $d
+    jp z, $41f9
+    jr asm_b8709 ; 0x5c145 $1c
+asm_8774b: ; 0x5c147
+    cp $3
+    jr nz, asm_d49e7 ; 0x5c149 $8
+    ld a, [$d362]
+    cp $c
+    jp z, $41f9
+asm_d49e7: ; 0x5c153
+    ld a, [$d754]
+    bit 0, a
+    jr nz, asm_31a16 ; 0x5c158 $10
+    ld hl, $423d
+    call PrintText
+    jp $4217
+asm_b8709: ; 0x5c163
+    ld a, [$d754]
+    bit 0, a
+    jr z, asm_3ded4 ; 0x5c168 $9
+asm_31a16: ; 0x5c16a
+    ld hl, $4242
+    call PrintText
+    jp $4217
+asm_3ded4: ; 0x5c173
+    ld a, $13
+    ld [$d125], a
+    call $30e8
+    xor a
+    ld [$ff00+$b4], a
+    ld hl, $421f
+    call PrintText
+    call $35ec
+    ld a, [$cc26]
+    and a
+    jr nz, asm_de133 ; 0x5c18b $4d
+    xor a
+    ld [$ff00+$9f], a
+    ld [$ff00+$a0], a
+    ld a, $50
+    ld [$ff00+$a1], a
+    call $35a6
+    jr nc, asm_0f3e3 ; 0x5c199 $9
+    ld hl, $4229
+    call PrintText
+    jp $41da
+asm_0f3e3: ; 0x5c1a4
+    ld hl, $4224
+    call PrintText
+    ld hl, $d754
+    set 0, [hl]
+    xor a
+    ld [$cd3d], a
+    ld [$cd3e], a
+    ld a, $50
+    ld [$cd3f], a
+    ld hl, $cd3f
+    ld de, $d349
+    ld c, $3
+    ld a, $c
+    call Predef
+    ld a, $13
+    ld [$d125], a
+    call $30e8
+    ld a, $b2
+    call $3740
+    call $3748
+    jr asm_0b094 ; 0x5c1d8 $18
+asm_de133: ; 0x5c1da
+    ld hl, $421a
+    call PrintText
+    ld a, $1
+    ld [$cd38], a
+    ld a, $80
+    ld [$ccd3], a
+    call $3486
+    call $2429
+    jr asm_d1145 ; 0x5c1f0 $25
+asm_0b094: ; 0x5c1f2
+    ld a, $1
+    ld [$d619], a
+    jr asm_d1145 ; 0x5c1f7 $1e
+;XXX what calls this?
+    ld hl, $422e
+    call PrintText
+    call $35ec
+    ld a, [$cc26]
+    cp $0
+    jr nz, asm_d1144
+    ld hl, $4233
+    call PrintText
+    jr asm_d1145 ; 0x5c20f $6
+asm_d1144:
+    ld hl, $4238
+    call PrintText
+asm_d1145: ; 0x5c217
+    jp $24d7
+; 0x5c21a
+
+INCBIN "baserom.gbc",$5c21a,$2d
+
 MuseumF1Text2: ; 0x5c247
     db $08 ; asm
     ld hl, $4251
@@ -24418,6 +24526,7 @@ MuseumF1Text2: ; 0x5c247
     jp $24d7
 
 INCBIN "baserom.gbc",$5c251,$5c256 - $5c251
+
 MuseumF1Text3: ; 0x5c256
     db $08 ; asm
     ld a, [$d754]
