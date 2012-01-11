@@ -5,7 +5,7 @@
 import extract_maps
 import analyze_incbins #for asm
 try:
-    from pretty_map_headers import map_name_cleaner
+    from pretty_map_headers import map_name_cleaner, txt_bytes, spacing, constant_abbreviation_bytes
 except Exception, exc: pass
 from operator import itemgetter
 import sys
@@ -383,6 +383,85 @@ def find_missing_08s(all_texts):
                             print "missing $08 on map_id=" + str(map_id) + " text_id=" + str(text_id) + " line_id=" + str(line_id) + " at " + hex(current_line["start_address"])
     return missing_08s
 
+def text_pretty_printer_at(start_address, label="SomeLabel"):
+    commands = parse_text_script(start_address, None, None)
+    
+    wanted_command = None
+    for command_id in commands:
+        command = commands[command_id]
+        if command["type"] == 0:
+            wanted_command = command_id
+    
+    if wanted_command == None:
+        raise "error: address did not start with a $0 text"
+
+    lines = commands[wanted_command]["lines"]
+
+    #add the ending byte to the last line- always seems $57
+    lines[len(lines.keys())-1].append(commands[1]["type"])
+
+    output  = "\n"
+    output += label + ": ; " + hex(start_address) + "\n"
+    first = True
+    for line_id in lines:
+        line = lines[line_id]
+        output += spacing + "db "
+        if first:
+            output += "$0, "
+            first = False
+     
+        quotes_open = False
+        first_byte = True
+        was_byte = False
+        byte_count = 0
+        for byte in line:
+            if byte in txt_bytes:
+                if not quotes_open and not first_byte: #start text
+                    output += ", \""
+                    quotes_open = True
+                    first_byte = False
+                if not quotes_open and first_byte: #start text
+                    output += "\""
+                    quotes_open = True
+                output += txt_bytes[byte]
+            elif byte in constant_abbreviation_bytes:
+                if quotes_open:
+                    output += "\""
+                    quotes_open = False
+                if not first_byte:
+                    output += ", "
+                output += constant_abbreviation_bytes[byte]
+            else:
+                if quotes_open:
+                    output += "\""
+                    quotes_open = False
+
+                #if you want the ending byte on the last line
+                #if not (byte == 0x57 or byte == 0x50 or byte == 0x58):
+                if not first_byte:
+                    output += ", "
+
+                output += "$" + hex(byte)[2:]
+                was_byte = True
+
+                #add a comma unless it's the end of the line
+                #if byte_count+1 != len(line):
+                #    output += ", "
+
+            first_byte = False
+            byte_count += 1
+        #close final quotes
+        if quotes_open:
+            output += "\""
+            quotes_open = False
+
+        output += "\n"
+
+    #output += "\n"
+    print output
+    return output
+
+
 if __name__ == "__main__":
     extract_maps.load_rom()
     extract_maps.load_map_pointers()
@@ -403,3 +482,5 @@ if __name__ == "__main__":
     print "total text commands: " + str(total_text_commands)
     print "total text scripts: " + str(should_be_total)
     print "missing 08s: " + str(missing_08s)
+
+    text_pretty_printer_at(0x800b1)    

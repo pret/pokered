@@ -278,12 +278,13 @@ def insert_all_text_labels():
                 isolate_incbins()
                 process_incbins()
 
-def insert_08_asm(map_id, text_id):
+#TODO: if line_id !=0 then don't include the label?
+def insert_08_asm(map_id, text_id, line_id=0):
     map2 = extract_maps.map_headers[map_id]
     base_label = map_name_cleaner(map2["name"], None)[:-2]
     label = base_label + "Text" + str(text_id)
 
-    start_address = all_texts[map_id][text_id][0]["start_address"]
+    start_address = all_texts[map_id][text_id][line_id]["start_address"]
 
     (text_asm, end_address) = text_asm_pretty_printer(label, start_address)
     print "end address is: " + hex(end_address)
@@ -328,9 +329,9 @@ def find_all_08s():
     for map_id in all_texts:
         for text_id in all_texts[map_id].keys():
             if 0 in all_texts[map_id][text_id].keys():
-                if "type" in all_texts[map_id][text_id][0].keys():
-                    if all_texts[map_id][text_id][0]["type"] == 0x8:
-                        all_08s.append([map_id, text_id])
+                for line_id in all_texts[map_id][text_id].keys():
+                    if all_texts[map_id][text_id][line_id]["type"] == 0x8:
+                        all_08s.append([map_id, text_id, line_id])
     return all_08s
 
 def insert_all_08s():
@@ -339,9 +340,10 @@ def insert_all_08s():
         map_id = the_08_line[0]
         if map_id <= 86: continue #speed things up
         text_id = the_08_line[1]
+        line_id = the_08_line[2]
 
         print "processing map_id=" + str(map_id) + " text_id=" + str(text_id)
-        insert_08_asm(map_id, text_id)
+        insert_08_asm(map_id, text_id, line_id)
         
         #reset everything
         analyze_incbins.reset_incbins()
@@ -424,7 +426,7 @@ if __name__ == "__main__":
     #insert_08_asm(83, 1)
     #insert_all_08s()
 
-    insert_asm(0x2f9e, "GetMonName")
+    insert_asm(0x19926, "VermilionCityText5_2")
 
     if len(failed_attempts) > 0:
         print "-- FAILED ATTEMPTS --"

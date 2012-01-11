@@ -8,7 +8,7 @@ import extract_maps
 import sprite_helper
 import random
 import string
-import analyze_texts #hopefully not a dependency loop
+#import analyze_texts #hopefully not a dependency loop
 
 base = 16
 spacing = "    "
