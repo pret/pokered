@@ -6591,7 +6591,7 @@ INCBIN "baserom.gbc",$19c12,$19c17 - $19c12
 VermilionHouse3Text1: ; 0x19c17
     db $08 ; asm
     ld a, $4
-    ld [$cd3d], a
+    ld [W_WHICHTRADE], a
     ld a, $54
     call Predef
     jp $24d7
@@ -7747,7 +7747,7 @@ CeruleanHouse2Text1: ; 0x1d6fd
 CeruleanHouse2Text2: ; 0x1d702
     db $08 ; asm
     ld a, $6
-    ld [$cd3d], a
+    ld [W_WHICHTRADE], a
     ld a, $54
     call Predef
     jp $24d7
@@ -8372,7 +8372,7 @@ Route2HouseText1: ; 0x1def4
 Route2HouseText2: ; 0x1def9
     db $08 ; asm
     ld a, $1
-    ld [$cd3d], a
+    ld [W_WHICHTRADE], a
     ld a, $54
     call Predef
     jp $24d7
@@ -18543,7 +18543,7 @@ MtMoonPokecenterText4: ; 0x492ec
     call GivePokemon
     jr nc, .asm_38361 ; 0x49324
     xor a
-    ld [$cd3d], a
+    ld [W_WHICHTRADE], a
     ld [$cd3f], a
     ld a, $5
     ld [$cd3e], a
@@ -18689,7 +18689,7 @@ INCBIN "baserom.gbc",$49454,$4945f - $49454
 Route11GateUpstairsText1: ; 0x4945f
     db $08 ; asm
     xor a
-    ld [$cd3d], a
+    ld [W_WHICHTRADE], a
     ld a, $54
     call Predef
     jp $24d7
@@ -19050,7 +19050,7 @@ INCBIN "baserom.gbc",$49975,$4997e - $49975
 Route18GateHeaderText1: ; 0x4997e
     db $08 ; asm
     ld a, $5
-    ld [$cd3d], a
+    ld [W_WHICHTRADE], a
     ld a, $54
     call Predef
     jp $24d7
@@ -24983,7 +24983,7 @@ INCBIN "baserom.gbc",$5d6a9,$5d6b2 - $5d6a9
 UndergroundTunnelEntranceRoute5Text1: ; 0x5d6b2
     db $08 ; asm
     ld a, $9
-    ld [$cd3d], a
+    ld [W_WHICHTRADE], a
     ld a, $54
     call Predef
     ld hl, $56af
@@ -28453,13 +28453,13 @@ Lab2Text1: ; 0x75c2a
 Lab2Text2: ; 0x75c2f
     db $8
     ld a, $7
-    ld [$cd3d], a
+    ld [W_WHICHTRADE], a
     jr asm_78552 ; 0x75c35 $6
 
 Lab2Text3:
     db $8
     ld a, $8
-    ld [$cd3d], a
+    ld [W_WHICHTRADE], a
 asm_78552: ; 0x75c3d
     ld a, $54
     call Predef
@@ -28569,7 +28569,7 @@ INCBIN "baserom.gbc",$75d31,$75dda - $75d31
 Lab4Text2: ; 0x75dda
     db $08 ; asm
     ld a, $3
-    ld [$cd3d], a
+    ld [W_WHICHTRADE], a
     ld a, $54
     call Predef
     jp $24d7
