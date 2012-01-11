@@ -7937,13 +7937,19 @@ INCBIN "baserom.gbc",$1d8f4,$a
 
 LavenderHouse1Text3: ; 0x1d8fe
     TX_FAR _LavenderHouse1Text3
-
-INCBIN "baserom.gbc",$1d902,$1d90b - $1d902
+    db $8
+    ld a, $2f
+    call $13d0
+    jp $24d7
 
 LavenderHouse1Text4: ; 0x1d90b
     TX_FAR _LavenderHouse1Text4
+    db $8
+    ld a, $a7
+    call $13d0
+    jp $24d7
+; 0x1d918
 
-INCBIN "baserom.gbc",$1d90f,$1d918 - $1d90f
 LavenderHouse1Text5: ; 0x1d918
     db $08 ; asm
     ld a, [$d76c]
