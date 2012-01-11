@@ -608,7 +608,7 @@ def output_bank_opcodes(original_offset, max_byte_count=0x4000):
         #find out if there's a two byte key like this
         temp_maybe = maybe_byte
         temp_maybe += ( ord(rom[offset+1]) << 8)
-        if temp_maybe in opt_table.keys():
+        if temp_maybe in opt_table.keys() and ord(rom[offset+1])!=0:
             opstr = opt_table[temp_maybe][0].lower()
             
             if "x" in opstr:
@@ -640,6 +640,7 @@ def output_bank_opcodes(original_offset, max_byte_count=0x4000):
 
             current_byte_number += 2
             offset += 2
+            print "next byte is: " + hex(ord(extract_maps.rom[offset]))
         elif maybe_byte in opt_table.keys():
             op_code = opt_table[maybe_byte]
             op_code_type = op_code[1]
