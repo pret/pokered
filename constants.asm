@@ -599,7 +599,7 @@ X_ACCURACY    EQU $2E
 LEAF_STONE    EQU $2F
 CARD_KEY      EQU $30
 NUGGET        EQU $31
-PP_UP         EQU $32
+;PP_UP         EQU $32
 POKE_DOLL     EQU $33
 FULL_HEAL     EQU $34
 REVIVE        EQU $35
@@ -629,7 +629,7 @@ OLD_ROD       EQU $4C
 GOOD_ROD      EQU $4D
 SUPER_ROD     EQU $4E
 ; XXX todo: compare this to $32
-;PP_UP         EQU $4F
+PP_UP         EQU $4F
 ETHER         EQU $50
 MAX_ETHER     EQU $51
 ELIXER        EQU $52
