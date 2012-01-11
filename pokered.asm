@@ -1057,6 +1057,8 @@ ViridianCityText12: ; 0x24ef
     TX_FAR _ViridianCityText12
     db $50
 
+Mansion1Text2:
+Mansion1Text3:
 Route2Text1:
 Route4Text3:
 Route9Text10:
@@ -29273,6 +29275,8 @@ FuchsiaHouse2Text1: ; 0x750c2
     jp $24d7
 
 INCBIN "baserom.gbc",$75135,$75163 - $75135
+
+FuchsiaHouse2Text5:
 FuchsiaHouse2Text4: ; 0x75163
     db $08 ; asm
     ldh a, [$8c]
@@ -29285,6 +29289,7 @@ FuchsiaHouse2Text4: ; 0x75163
     jp $24d7
 
 INCBIN "baserom.gbc",$75176,$a
+
 FuchsiaHouse2Object: ; 0x75180 (size=45)
     db $17 ; border tile
 
