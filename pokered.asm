@@ -20578,7 +20578,56 @@ Route23Text8: ; 0x513a8
     TX_FAR _Route23Text8
     db $50
 
-INCBIN "baserom.gbc",$513ad,$51535 - $513ad
+INCBIN "baserom.gbc",$513ad,$514a4 - $513ad
+
+Route24Text1: ; 0x514a4
+    db $8
+    ld hl, $d7f0
+    res 1, [hl]
+    ld a, [$d7ef]
+    bit 0, a
+    jr nz, .asm_a03f5 ; 0x514af $48
+    ld hl, $5510
+    call PrintText
+    ld bc, $3101
+    call GiveItem
+    jr nc, .asm_3a23d ; 0x514bd $43
+    ld hl, $d7ef
+    set 0, [hl]
+    ld hl, $551a
+    call PrintText
+    ld hl, $5526
+    call PrintText
+    ld hl, $d72d
+    set 6, [hl]
+    set 7, [hl]
+    ld hl, $552b
+    ld de, $552b
+    call $3354
+    ld a, [$ff00+$8c]
+    ld [$cf13], a
+    call $336a
+    call $32d7
+    xor a
+    ld [$ff00+$b4], a
+    ld a, $3
+    ld [$d602], a
+    ld [$da39], a
+    jp $24d7
+.asm_a03f5 ; 0x514f9
+    ld hl, $5530
+    call PrintText
+    jp $24d7
+.asm_3a23d ; 0x51502
+    ld hl, $5521
+    call PrintText
+    ld hl, $d7f0
+    set 1, [hl]
+    jp $24d7
+; 0x51510
+
+INCBIN "baserom.gbc",$51510,$25
+
 Route24Text2: ; 0x51535
     db $08 ; asm
     ld hl, $545b
