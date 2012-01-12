@@ -9143,11 +9143,13 @@ Route5GateText1: ; 0x1dfaa
     jp $24d7
 ; 0x1dfe7
 
+Route8GateText2:
 Route7GateText2:
 Route6GateText2:
 Route5GateText2: ; 0x1dfe7
 INCBIN "baserom.gbc",$1dfe7,$5
 
+Route8GateText3:
 Route7GateText3:
 Route6GateText3:
 Route5GateText3: ; 0x1dfec
@@ -9261,9 +9263,7 @@ Route8Gate_h: ; 0x1e1bb to 0x1e1c7 (12 bytes) (bank=7) (id=79)
 INCBIN "baserom.gbc",$1e1c7,$1e241 - $1e1c7
 
 Route8GateTexts: ; 0x1e241
-    dw Route8GateText1
-
-INCBIN "baserom.gbc",$1e243,$4
+    dw Route8GateText1, Route8GateText2, Route8GateText3
 
 Route8GateObject: ; 0x1e247 (size=42)
     db $a ; border tile
@@ -9608,12 +9608,12 @@ BillsHouse_h: ; 0x1e75e to 0x1e76a (12 bytes) (bank=7) (id=88)
 INCBIN "baserom.gbc",$1e76a,$1e834 - $1e76a
 
 BillsHouseTexts: ; 0x1e834
-    dw BillsHouseText1, BillsHouseText2, BillsHouseText3
+    dw BillsHouseText1, BillsHouseText2, BillsHouseText3, BillsHouseText4
 
-INCBIN "baserom.gbc",$1e83a,$3
+BillsHouseText4:
+    db $fd
 
-;0x1e83d
-BillsHouseText1:
+BillsHouseText1: ; 0x1e83d
     db $8
     ld hl, $6865
     call PrintText
