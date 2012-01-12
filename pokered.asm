@@ -1002,7 +1002,13 @@ MartInventories: ; 2442
 	db $FE,7,ULTRA_BALL,GREAT_BALL,FULL_RESTORE,MAX_POTION,FULL_HEAL
 	db REVIVE,MAX_REPEL,$FF
 
-INCBIN "baserom.gbc",$24d6,$24e5 - $24d6
+TextScriptEndingChar:
+        db "@"
+TextScriptEnd:
+        ld hl,TextScriptEndingChar
+        ret
+
+INCBIN "baserom.gbc",$24DB,$24E5 - $24DB
 
 VictoryRoad3Text10:
 VictoryRoad3Text9:
