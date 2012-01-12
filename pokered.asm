@@ -19576,7 +19576,13 @@ Route18GateHeaderText1: ; 0x4997e
     call Predef
     jp $24d7
 
-INCBIN "baserom.gbc",$4998c,$18
+INCBIN "baserom.gbc",$4998c,$49998 - $4998c
+Route18GateHeaderText3: ; 0x49998
+    db $8
+    ld hl, $599f
+    jp $55c9
+; 0x4999f
+INCBIN "baserom.gbc",$4999f,$5
 
 Route18GateHeaderObject: ; 0x499a4 (size=24)
     db $a ; border tile
