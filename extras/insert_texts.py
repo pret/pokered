@@ -106,7 +106,7 @@ def all_texts_are_tx_fars(map_id):
 def texts_label_pretty_printer(map_id):
     "output a texts label for map if all texts are TX_FARs and in the asm already"
     #extract_maps.map_headers[map_id]["texts"][text_id][0]["TX_FAR"]
-    if not all_texts_are_tx_fars(map_id): return None
+    #if not all_texts_are_tx_fars(map_id): return None
     map2 = extract_maps.map_headers[map_id]
 
     #pointer to the list of texts
@@ -139,7 +139,7 @@ def texts_label_pretty_printer(map_id):
     return output
 
 def insert_texts_label(map_id):
-    if not all_texts_are_tx_fars(map_id): return None
+    #if not all_texts_are_tx_fars(map_id): return None
     map2 = extract_maps.map_headers[map_id]
     
     base_label = map_name_cleaner(map2["name"], None)[:-2]
@@ -478,7 +478,8 @@ if __name__ == "__main__":
         process_incbins()
 
     #insert_text(0x44276, "ViridianPokeCenterText4")
-    insert_text(0x2461, "VermilionMartText1")
+    #insert_texts_label(4)
+    insert_all_texts_labels()
 
     if len(failed_attempts) > 0:
         print "-- FAILED ATTEMPTS --"
