@@ -6006,9 +6006,7 @@ PalletTownText7: ; sign by Blue’s house
 INCBIN "baserom.gbc",$18ff1,$190e4 - $18ff1
 
 ViridianCityTexts: ; 0x190e4
-    dw ViridianCityText1, ViridianCityText2, ViridianCityText3, ViridianCityText4, ViridianCityText5, ViridianCityText6, ViridianCityText7, ViridianCityText8, ViridianCityText9, ViridianCityText10, ViridianCityText11, ViridianCityText12, ViridianCityText13
-
-INCBIN "baserom.gbc",$190fe,$4
+    dw ViridianCityText1, ViridianCityText2, ViridianCityText3, ViridianCityText4, ViridianCityText5, ViridianCityText6, ViridianCityText7, ViridianCityText8, ViridianCityText9, ViridianCityText10, ViridianCityText11, ViridianCityText12, ViridianCityText13, ViridianCityText14, ViridianCityText15
 
 ViridianCityText1: ; 0x19102
     TX_FAR _ViridianCityText1
@@ -6124,7 +6122,10 @@ ViridianCityText7: ; 0x191df
 .asm_2413a ; 0x19207
     jp $24d7
 
-INCBIN "baserom.gbc",$1920a,$14
+INCBIN "baserom.gbc",$1920a,$19219 - $1920a
+
+ViridianCityText15: ; 0x19219
+INCBIN "baserom.gbc",$19219,$1921e - $19219
 
 ViridianCityText8: ; 0x1921e
     TX_FAR _ViridianCityText8
@@ -6142,7 +6143,10 @@ ViridianCityText13: ; 0x1922d
     TX_FAR _ViridianCityText13
     db $50
 
-INCBIN "baserom.gbc",$19232,$1938b - $19232
+ViridianCityText14:
+INCBIN "baserom.gbc",$19232,$19237 - $19232
+
+INCBIN "baserom.gbc",$19237,$1938b - $19237
 
 PewterCityTexts: ; 0x1938b
     dw PewterCityText1, PewterCityText2, PewterCityText3, PewterCityText4, PewterCityText5, PewterCityText6, PewterCityText7, PewterCityText8, PewterCityText9, PewterCityText10, PewterCityText11, PewterCityText12
@@ -20131,6 +20135,7 @@ Route18GateHeaderText2: ; 0x4998c
     ld hl, $5993
     jp $55c9
 ; 0x49993
+
 INCBIN "baserom.gbc",$49993,$5
 
 Route18GateHeaderText3: ; 0x49998
