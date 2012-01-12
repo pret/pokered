@@ -25968,7 +25968,10 @@ CeruleanPokecenter_h: ; 0x5c639 to 0x5c645 (12 bytes) (id=64)
 
     dw $465f ; objects
 
-INCBIN "baserom.gbc",$5c645,$5c655 - $5c645
+INCBIN "baserom.gbc",$5c645,$5c653 - $5c645
+
+CeruleanPokecenterText4:
+    db $f6, $ff
 
 CeruleanPokecenterText2:
 CeruleanPokecenterText1: ; 0x5c655
