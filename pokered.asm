@@ -7726,14 +7726,14 @@ asm_9eaa4: ; 0x1d157
 asm_f6e3a: ; 0x1d195
     ld hl, $519a
     jr asm_b5ddf ; 0x1d198 $19
-    rla
+    rla ; probably a TX_FAR
     ld b, $4e
     dec h
     ld d, b
 asm_2391d: ; 0x1d19f
     ld hl, $51a4
     jr asm_b5ddf ; 0x1d1a2 $f
-    rla
+    rla ; probably a TX_FAR
     cpl
     ld c, [hl]
     dec h
@@ -7741,7 +7741,7 @@ asm_2391d: ; 0x1d19f
 asm_ddec1: ; 0x1d1a9
     ld hl, $51ae
     jr asm_b5ddf ; 0x1d1ac $5
-    rla
+    rla ; probably a TX_FAR
     ld d, a
     ld c, [hl]
     dec h
@@ -8839,6 +8839,7 @@ SaffronHouse2Text1: ; 0x1de41
     jp $24d7
 
 INCBIN "baserom.gbc",$1de75,$15
+
 SaffronHouse2Object: ; 0x1de8a (size=26)
     db $a ; border tile
 
@@ -9221,7 +9222,7 @@ PowerPlantText9:
     db $8 ; asm
     ld hl, $635b
     jr asm_234cc ; 0x1e3a8 $be
-    rla
+    rla ; probably a TX_FAR
     ld [$ff00+c], a
     ld b, l
     inc hl
@@ -9460,7 +9461,7 @@ asm_6b196: ; 0x1e85a
 asm_fd4e2 ; 0x1e862
     jp $24d7
 
-; dunno what this is
+; dunno what this is (rla indicates $17 or TX_FAR)
     rla
     ld h, a
     ld d, d
