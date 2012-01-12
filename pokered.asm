@@ -1057,8 +1057,6 @@ ViridianCityText12: ; 0x24ef
     TX_FAR _ViridianCityText12
     db $50
 
-Mansion1Text2:
-Mansion1Text3:
 Route2Text1:
 Route4Text3:
 Route9Text10:
@@ -1130,6 +1128,9 @@ SilphCo6Text9:
 SilphCo6Text10:
 SilphCo7Text10:
 SilphCo7Text11:
+Mansion1Text2:
+Mansion1Text3:
+Mansion2Text2:
 Mansion3Text3:
 Mansion3Text4:
 Mansion4Text3:
