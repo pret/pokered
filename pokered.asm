@@ -253,7 +253,7 @@ MapHeaderPointers: ; $01AE
 	dw CeladonMart5_h
 	dw CeladonPrizeRoom_h
 	dw CeladonDiner_h
-	dw CeladonHouse2_h
+	dw CeladonHouse_h
 	dw CeladonHotel_h
 	dw LavenderPokecenter_h
 	dw PokemonTower1_h
@@ -2655,7 +2655,7 @@ MapHeaderBanks: ; 423D
 	db BANK(CeladonMart5_h)
 	db BANK(CeladonPrizeRoom_h)
 	db BANK(CeladonDiner_h)
-	db BANK(CeladonHouse2_h)
+	db BANK(CeladonHouse_h)
 	db BANK(CeladonHotel_h)
 	db BANK(LavenderPokecenter_h)
 	db BANK(PokemonTower1_h)
@@ -17895,6 +17895,9 @@ CeladonMart3Text5: ; 0x4829c
     TX_FAR _CeladonMart3Text5
     db $50
 
+CeladonMart3Text12
+CeladonMart3Text10:
+CeladonMart3Text8:
 CeladonMart3Text6: ; 0x482a1
     TX_FAR _CeladonMart3Text6
     db $50
@@ -17919,6 +17922,8 @@ CeladonMart3Text14: ; 0x482ba
     TX_FAR _CeladonMart3Text14
     db $50
 
+CeladonMart3Text17:
+CeladonMart3Text16:
 CeladonMart3Text15: ; 0x482bf
     TX_FAR _CeladonMart3Text15
     db $50
@@ -18963,31 +18968,31 @@ CeladonDinerObject: ; 0x491bc (size=50)
 CeladonDinerBlocks: ; 20
     INCBIN "maps/celadondiner.blk"
 
-CeladonHouse2_h: ; 0x49202 to 0x4920e (12 bytes) (bank=12) (id=139)
+CeladonHouse_h: ; 0x49202 to 0x4920e (12 bytes) (bank=12) (id=139)
     db $13 ; tileset
     db $04, $04 ; dimensions (y, x)
-    dw CeladonHouse2Blocks, $5212, $520e ; blocks, texts, scripts
+    dw CeladonHouseBlocks, $5212, $520e ; blocks, texts, scripts
     db $00 ; connections
 
     dw $5227 ; objects
 
 INCBIN "baserom.gbc",$4920e,$49212 - $4920e
-CeladonHouse2Texts: ; 0x49212
-    dw CeladonHouse2Text1, CeladonHouse2Text2, CeladonHouse2Text3
+CeladonHouseTexts: ; 0x49212
+    dw CeladonHouseText1, CeladonHouseText2, CeladonHouseText3
 
-CeladonHouse2Text1: ; 0x49218
-    TX_FAR _CeladonHouse2Text1
+CeladonHouseText1: ; 0x49218
+    TX_FAR _CeladonHouseText1
     db $50
 
-CeladonHouse2Text2: ; 0x4921d
-    TX_FAR _CeladonHouse2Text2
+CeladonHouseText2: ; 0x4921d
+    TX_FAR _CeladonHouseText2
     db $50
 
-CeladonHouse2Text3: ; 0x49222
-    TX_FAR _CeladonHouse2Text3
+CeladonHouseText3: ; 0x49222
+    TX_FAR _CeladonHouseText3
     db $50
 
-CeladonHouse2Object: ; 0x49227 (size=38)
+CeladonHouseObject: ; 0x49227 (size=38)
     db $f ; border tile
 
     db $2 ; warps
@@ -19005,7 +19010,7 @@ CeladonHouse2Object: ; 0x49227 (size=38)
     EVENT_DISP $4, $7, $2
     EVENT_DISP $4, $7, $3
 
-CeladonHouse2Blocks: ; 16
+CeladonHouseBlocks: ; 16
     INCBIN "maps/celadonhouse2.blk"
 
 CeladonHotel_h: ; 0x4925d to 0x49269 (12 bytes) (bank=12) (id=140)
@@ -25413,7 +25418,18 @@ VermilionMart_h: ; 0x5c9d5 to 0x5c9e1 (12 bytes) (id=91)
 
     dw $49f4 ; objects
 
-INCBIN "baserom.gbc",$5c9e1,$5c9f4 - $5c9e1
+INCBIN "baserom.gbc",$5c9e1,$5c9ea - $5c9e1
+
+VermilionMartText2: ; 0x5c9ea
+    TX_FAR _VermilionMartText2
+    db $50
+
+
+VermilionMartText3: ; 0x5c9ef
+    TX_FAR _VermilionMartText3
+    db $50
+
+INCBIN "baserom.gbc",$5c9f4,$0
 
 VermilionMartObject: ; 0x5c9f4 (size=38)
     db $0 ; border tile
@@ -32876,18 +32892,18 @@ _CeladonDinerText4: ; 0x9dfc9
 
 INCBIN "baserom.gbc",$9e003,$9e0d5 - $9e003
 
-_CeladonHouse2Text1: ; 0x9e0d5
+_CeladonHouseText1: ; 0x9e0d5
     db $0, "Hehehe! The slots", $4f
     db "just reel in the", $55
     db "dough, big time!", $57
 
-_CeladonHouse2Text2: ; 0x9e10a
+_CeladonHouseText2: ; 0x9e10a
     db $0, "CHIEF!", $51
     db "We just shipped", $4f
     db "2000 #MON as", $55
     db "slot prizes!", $57
 
-_CeladonHouse2Text3: ; 0x9e13c
+_CeladonHouseText3: ; 0x9e13c
     db $0, "Don't touch the", $4f
     db "poster at the", $55
     db "GAME CORNER!", $51
