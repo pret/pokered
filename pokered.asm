@@ -6264,6 +6264,7 @@ CeruleanCityText5: ; 0x19702
     TX_FAR _CeruleanCityText5
     db $50
 
+CeruleanCityText11:
 CeruleanCityText6: ; 0x19707
     TX_FAR _CeruleanCityText6
     db $50
