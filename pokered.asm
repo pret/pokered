@@ -25873,7 +25873,55 @@ PewterPokecenterText1: ; 0x5c596
     TX_FAR _PewterPokecenterText1
     db $50
 
-INCBIN "baserom.gbc",$5c59b,$5c603 - $5c59b
+PewterPokecenterText3: ; 0x5c59b
+    db $8
+    ld a, $1
+    ld [$cc3c], a
+    ld hl, $4603
+    call PrintText
+    ld a, $ff
+    call $23b1
+    ld c, $20
+    call $3739
+    ld hl, $4608
+    ld de, $cd3f
+    ld bc, $0004
+    call CopyData
+    ld a, [$c132]
+    ld hl, $cd3f
+.asm_5c5c3
+    cp [hl]
+    inc hl
+    jr nz, .asm_5c5c3 ; 0x5c5c5 $fc
+    dec hl
+    push hl
+    ld c, $1f
+    ld a, $d0
+    call $23a1
+    pop hl
+.asm_5c5d1
+    ld a, [hl]
+    ld [$c132], a
+    push hl
+    ld hl, $cd3f
+    ld de, $cd3e
+    ld bc, $0004
+    call CopyData
+    ld a, [$cd3e]
+    ld [$cd42], a
+    pop hl
+    ld c, $18
+    call $3739
+    ld a, [$c026]
+    ld b, a
+    ld a, [$c027]
+    or b
+    jr nz, .asm_5c5d1 ; 0x5c5f6 $d9
+    ld c, $30
+    call $3739
+    call $2307
+    jp $24d7
+; 0x5c603
 
 PewterPokecenterText4: ; broken TX_FAR to _PewterPokecenterText4
     db $17, $44, $47, $26
