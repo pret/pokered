@@ -7642,7 +7642,7 @@ INCBIN "baserom.gbc",$1cb0e,$1d082 - $1cb0e
 OaksLabTexts: ; 0x1d082
     dw OaksLabText1, OaksLabText2, OaksLabText3, OaksLabText4, OaksLabText5, OaksLabText6, OaksLabText7, OaksLabText8, OaksLabText9, OaksLabText10, OaksLabText11, OaksLabText12, OaksLabText13, OaksLabText14, OaksLabText15, OaksLabText16, OaksLabText17, OaksLabText18, OaksLabText19, OaksLabText20, OaksLabText21, OaksLabText22, OaksLabText23, OaksLabText24, OaksLabText25, OaksLabText26, OaksLabText27
 
-INCBIN "baserom.gbc",$1d098+32,22
+INCBIN "baserom.gbc",$1d0b8,22
 
 OaksLabText1: ; 0x1d0ce
     db $08 ; asm
