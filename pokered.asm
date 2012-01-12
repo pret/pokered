@@ -18931,9 +18931,9 @@ CeladonGym_h: ; 0x488fe to 0x4890a (12 bytes) (bank=12) (id=134)
 INCBIN "baserom.gbc",$4890a,$489a6 - $4890a
 
 CeladonGymTexts: ; 0x489a6
-    dw CeladonGymText1, CeladonGymText2, CeladonGymText3, CeladonGymText4, CeladonGymText5, CeladonGymText6, CeladonGymText7, CeladonGymText8
+    dw CeladonGymText1, CeladonGymText2, CeladonGymText3, CeladonGymText4, CeladonGymText5, CeladonGymText6, CeladonGymText7, CeladonGymText8, CeladonGymText9, CeladonGymText10, CeladonGymText11
 
-INCBIN "baserom.gbc",$489b6,$5b
+INCBIN "baserom.gbc",$489bc,$55
 
 CeladonGymText1: ; 0x48a11
     db $08 ; asm
@@ -18970,7 +18970,19 @@ CeladonGymText1: ; 0x48a11
 .asm_96252 ; 0x48a5b
     jp $24d7
 
-INCBIN "baserom.gbc",$48a5e,$48a81 - $48a5e
+INCBIN "baserom.gbc",$48a5e,$48a6d - $48a5e
+
+CeladonGymText9: ; 0x48a6d
+INCBIN "baserom.gbc",$48a6d,$5
+
+CeladonGymText10: ; 0x48a72
+INCBIN "baserom.gbc",$48a72,$4
+db $0b
+
+INCBIN "baserom.gbc",$48a77,$48a7c - $48a77
+
+CeladonGymText11: ; 0x48a7c
+INCBIN "baserom.gbc",$48a7c,$5
 
 CeladonGymText2: ; 0x48a81
     db $08 ; asm
