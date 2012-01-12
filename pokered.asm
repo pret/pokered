@@ -19077,9 +19077,7 @@ CeladonGameCorner_h: ; 0x48bb1 to 0x48bbd (12 bytes) (bank=12) (id=135)
 INCBIN "baserom.gbc",$48bbd,$48c8a - $48bbd
 
 CeladonGameCornerTexts: ; 0x48c8a
-    dw CeladonGameCornerText1, CeladonGameCornerText2, CeladonGameCornerText3, CeladonGameCornerText4, CeladonGameCornerText5, CeladonGameCornerText6, CeladonGameCornerText7, CeladonGameCornerText8, CeladonGameCornerText9, CeladonGameCornerText10, CeladonGameCornerText11, CeladonGameCornerText12
-
-INCBIN "baserom.gbc",$48ca2,$2
+    dw CeladonGameCornerText1, CeladonGameCornerText2, CeladonGameCornerText3, CeladonGameCornerText4, CeladonGameCornerText5, CeladonGameCornerText6, CeladonGameCornerText7, CeladonGameCornerText8, CeladonGameCornerText9, CeladonGameCornerText10, CeladonGameCornerText11, CeladonGameCornerText12, CeladonGameCornerText13
 
 CeladonGameCornerText1: ; 0x48ca4
     TX_FAR _CeladonGameCornerText1
@@ -19319,7 +19317,10 @@ CeladonGameCornerText11: ; 0x48e9d
     ld [$d65f], a
     jp $24d7
 
-INCBIN "baserom.gbc",$48ece,$48edd - $48ece
+INCBIN "baserom.gbc",$48ece,$48ed8 - $48ece
+
+CeladonGameCornerText13: ; 0x48ed8
+INCBIN "baserom.gbc",$48ed8,5
 
 CeladonGameCornerText12: ; 0x48edd
     db $08 ; asm
