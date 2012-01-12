@@ -6859,7 +6859,8 @@ IndigoPlateauLobbyText3: ; 0x19c8f
     TX_FAR _IndigoPlateauLobbyText3
     db $50
 
-INCBIN "baserom.gbc",$19c94,$1
+IndigoPlateauLobbyText5:
+    db $f6
 
 IndigoPlateauLobbyObject: ; 0x19c95 (size=58)
     db $0 ; border tile
@@ -18385,7 +18386,10 @@ CeladonPokecenter_h: ; 0x488ac to 0x488b8 (12 bytes) (bank=12) (id=133)
 
     dw $48d2 ; objects
 
-INCBIN "baserom.gbc",$488b8,$488c8 - $488b8
+INCBIN "baserom.gbc",$488b8,$488c6 - $488b8
+
+CeladonPokecenterText4:
+    db $f6, $ff
 
 CeladonPokecenterText2: ; _CeladonPokecenterText2
 CeladonPokecenterText1: ; 0x488c8
@@ -18396,7 +18400,6 @@ INCBIN "baserom.gbc",$488cc,$488cd - $488cc
 CeladonPokecenterText3: ; 0x488cd
     TX_FAR _CeladonPokecenterText3
     db $50
-
 
 CeladonPokecenterObject: ; 0x488d2 (size=44)
     db $0 ; border tile
@@ -18462,6 +18465,7 @@ CeladonGymText1: ; 0x48a11
     jp $24d7
 
 INCBIN "baserom.gbc",$48a5e,$48a81 - $48a5e
+
 CeladonGymText2: ; 0x48a81
     db $08 ; asm
     ld hl, $49bc
@@ -18469,6 +18473,7 @@ CeladonGymText2: ; 0x48a81
     jp $24d7
 
 INCBIN "baserom.gbc",$48a8b,$48a9a - $48a8b
+
 CeladonGymText3: ; 0x48a9a
     db $08 ; asm
     ld hl, $49c8
@@ -18476,6 +18481,7 @@ CeladonGymText3: ; 0x48a9a
     jp $24d7
 
 INCBIN "baserom.gbc",$48aa4,$48ab3 - $48aa4
+
 CeladonGymText4: ; 0x48ab3
     db $08 ; asm
     ld hl, $49d4
@@ -18483,6 +18489,7 @@ CeladonGymText4: ; 0x48ab3
     jp $24d7
 
 INCBIN "baserom.gbc",$48abd,$48acc - $48abd
+
 CeladonGymText5: ; 0x48acc
     db $08 ; asm
     ld hl, $49e0
@@ -18490,6 +18497,7 @@ CeladonGymText5: ; 0x48acc
     jp $24d7
 
 INCBIN "baserom.gbc",$48ad6,$48ae5 - $48ad6
+
 CeladonGymText6: ; 0x48ae5
     db $08 ; asm
     ld hl, $49ec
@@ -18497,6 +18505,7 @@ CeladonGymText6: ; 0x48ae5
     jp $24d7
 
 INCBIN "baserom.gbc",$48aef,$48afe - $48aef
+
 CeladonGymText7: ; 0x48afe
     db $08 ; asm
     ld hl, $49f8
@@ -18504,6 +18513,7 @@ CeladonGymText7: ; 0x48afe
     jp $24d7
 
 INCBIN "baserom.gbc",$48b08,$48b17 - $48b08
+
 CeladonGymText8: ; 0x48b17
     db $08 ; asm
     ld hl, $4a04
@@ -18511,6 +18521,7 @@ CeladonGymText8: ; 0x48b17
     jp $24d7
 
 INCBIN "baserom.gbc",$48b21,$f
+
 CeladonGymObject: ; 0x48b30 (size=84)
     db $3 ; border tile
 
@@ -18761,6 +18772,7 @@ CeladonGameCornerText10: ; 0x48e3b
     jp $24d7
 
 INCBIN "baserom.gbc",$48e88,$48e9d - $48e88
+
 CeladonGameCornerText11: ; 0x48e9d
     db $08 ; asm
     ld hl, $4ece
@@ -18784,6 +18796,7 @@ CeladonGameCornerText11: ; 0x48e9d
     jp $24d7
 
 INCBIN "baserom.gbc",$48ece,$48edd - $48ece
+
 CeladonGameCornerText12: ; 0x48edd
     db $08 ; asm
     ld a, $1
@@ -18804,6 +18817,7 @@ CeladonGameCornerText12: ; 0x48edd
     jp $24d7
 
 INCBIN "baserom.gbc",$48f09,$97
+
 CeladonGameCornerObject: ; 0x48fa0 (size=99)
     db $f ; border tile
 
@@ -19011,6 +19025,7 @@ CeladonHouse_h: ; 0x49202 to 0x4920e (12 bytes) (bank=12) (id=139)
     dw $5227 ; objects
 
 INCBIN "baserom.gbc",$4920e,$49212 - $4920e
+
 CeladonHouseTexts: ; 0x49212
     dw CeladonHouseText1, CeladonHouseText2, CeladonHouseText3
 
@@ -19056,6 +19071,7 @@ CeladonHotel_h: ; 0x4925d to 0x49269 (12 bytes) (bank=12) (id=140)
     dw $5281 ; objects
 
 INCBIN "baserom.gbc",$49269,$4926c - $49269
+
 CeladonHotelTexts: ; 0x4926c
     dw CeladonHotelText1, CeladonHotelText2, CeladonHotelText3
 
@@ -25126,7 +25142,11 @@ PewterPokecenterText4: ; broken TX_FAR to _PewterPokecenterText4
     db $50
 
 ;XXX wtf?
-db $30, $38, $34, $3c, $f6
+db $30, $38, $34, $3c
+
+PewterPokecenterText5: ; XXX confirm text_id number
+    db $f6
+
 PewterPokecenterObject: ; 0x5c60d (size=44)
     db $0 ; border tile
 
@@ -25196,6 +25216,7 @@ CeruleanGym_h: ; 0x5c6a7 to 0x5c6b3 (12 bytes) (id=65)
     dw $4834 ; objects
 
 INCBIN "baserom.gbc",$5c6b3,$5c771 - $5c6b3
+
 CeruleanGymText1: ; 0x5c771
     db $08 ; asm
     ld a, [$d75e]
@@ -25328,7 +25349,10 @@ LavenderPokecenter_h: ; 0x5c8ce to 0x5c8da (12 bytes) (id=141)
 
     dw $48f4 ; objects
 
-INCBIN "baserom.gbc",$5c8da,$5c8ea - $5c8da
+INCBIN "baserom.gbc",$5c8da,$5c8e8 - $5c8da
+
+LavenderPokecenterText4:
+    db $f6, $ff
 
 LavenderPokecenterText2:
 LavenderPokecenterText1: ; 0x5c8ea
@@ -26132,7 +26156,8 @@ SaffronPokecenterText3: ; 0x5d549
     TX_FAR _SaffronPokecenterText3
     db $50
 
-INCBIN "baserom.gbc",$5d54e,$1
+SaffronPokecenterText4:
+    db $f6
 
 SaffronPokecenterObject: ; 0x5d54f (size=44)
     db $0 ; border tile
@@ -29423,7 +29448,8 @@ FuchsiaPokecenterText3: ; 0x75077
     TX_FAR _FuchsiaPokecenterText3
     db $50
 
-INCBIN "baserom.gbc",$7507c,$1
+FuchsiaPokecenterText4: ; 0x7507c
+    db $f6
 
 FuchsiaPokecenterObject: ; 0x7507d (size=44)
     db $0 ; border tile
@@ -30211,7 +30237,8 @@ CinnabarPokecenterText3: ; 0x75e40
     TX_FAR _CinnabarPokecenterText3
     db $50
 
-INCBIN "baserom.gbc",$75e45,$1
+CinnabarPokecenterText4:
+    db $f6
 
 CinnabarPokecenterObject: ; 0x75e46 (size=44)
     db $0 ; border tile
