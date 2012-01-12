@@ -30391,7 +30391,53 @@ CeruleanHouse3_h: ; 0x74dfd to 0x74e09 (12 bytes) (id=230)
 
     dw $4ebe ; objects
 
-INCBIN "baserom.gbc",$74e09,$74ebe - $74e09
+INCBIN "baserom.gbc",$74e09,$74e15 - $74e09
+
+CeruleanHouse3Text1: ; 0x74e15
+    db $8
+    ld hl, $4e77
+    call PrintText
+    xor a
+    ld [$cc26], a
+    ld [$cc36], a
+.asm_74e23
+    ld hl, $4e7c
+    call PrintText
+    ld hl, $4e6d
+    call $2a5a
+    ld hl, $cf7b
+    ld a, l
+    ld [$cf8b], a
+    ld a, h
+    ld [$cf8c], a
+    xor a
+    ld [$cf93], a
+    ld [$cc35], a
+    ld a, $4
+    ld [$cf94], a
+    call $2be6
+    jr c, .asm_74e60 ; 0x74e49 $15
+    ld hl, $4e86
+    ld a, [$cf91]
+    sub $15
+    add a
+    ld d, $0
+    ld e, a
+    add hl, de
+    ld a, [hli]
+    ld h, [hl]
+    ld l, a
+    call PrintText
+    jr .asm_74e23 ; 0x74e5e $c3
+.asm_74e60
+    xor a
+    ld [$cc36], a
+    ld hl, $4e81
+    call PrintText
+    jp $24d7
+; 0x74e6d
+
+INCBIN "baserom.gbc",$74e6d,$51
 
 CeruleanHouse3Object: ; 0x74ebe (size=34)
     db $c ; border tile
