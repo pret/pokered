@@ -1300,7 +1300,7 @@ LoadTrainerHeader: ; 0x31cc
     jr z, .asm_c2964 ; 0x31e3 $8
     ld a, $6
     call $3193
-    jp $3c49
+    jp PrintText
 .asm_c2964 ; 0x31ed
     ld a, $4
     call $3193
@@ -1614,7 +1614,8 @@ PrintText: ; 3C49
 	call $2429
 	call Delay3
 	pop hl
-	ld bc,$C4B9
+        FuncCoord 1,14
+	ld bc,Coord ;$C4B9
 	jp $1B40
 
 Func3C5F: ; 3C5F
