@@ -739,7 +739,7 @@ def output_bank_opcodes(original_offset, max_byte_count=0x4000):
 
             #stop reading at a jump, relative jump or return
             if current_byte in end_08_scripts_with or (current_byte == 0x18 and target_address < offset):
-                if not has_outstanding_labels(byte_labels):
+                if not has_outstanding_labels(byte_labels) or (current_byte == 0x18 and target_address < offset):
                     keep_reading = False
                     is_data = False #cleanup
                     break
