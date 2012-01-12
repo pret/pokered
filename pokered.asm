@@ -6149,9 +6149,7 @@ INCBIN "baserom.gbc",$19232,$19237 - $19232
 INCBIN "baserom.gbc",$19237,$1938b - $19237
 
 PewterCityTexts: ; 0x1938b
-    dw PewterCityText1, PewterCityText2, PewterCityText3, PewterCityText4, PewterCityText5, PewterCityText6, PewterCityText7, PewterCityText8, PewterCityText9, PewterCityText10, PewterCityText11, PewterCityText12
-
-INCBIN "baserom.gbc",$193a3,$4
+    dw PewterCityText1, PewterCityText2, PewterCityText3, PewterCityText4, PewterCityText5, PewterCityText6, PewterCityText7, PewterCityText8, PewterCityText9, PewterCityText10, PewterCityText11, PewterCityText12, PewterCityText13, PewterCityText14
 
 PewterCityText1: ; 0x193a7
     TX_FAR _PewterCityText1
@@ -6191,7 +6189,10 @@ PewterCityText3: ; 0x193b1
 .asm_ac429 ; 0x193ee
     jp $24d7
 
-INCBIN "baserom.gbc",$193f1,$19405 - $193f1
+INCBIN "baserom.gbc",$193f1,$19400 - $193f1
+
+PewterCityText13:
+INCBIN "baserom.gbc",$19400,$5
 
 PewterCityText4: ; 0x19405
     db $8
@@ -6231,7 +6232,10 @@ PewterCityText5: ; 0x19436
     ld [$d5f7], a
     jp $24d7
 
-INCBIN "baserom.gbc",$1945d,$a
+INCBIN "baserom.gbc",$1945d,$19462 - $1945d
+
+PewterCityText14: ; 0x19462
+INCBIN "baserom.gbc",$19462,$5
 
 PewterCityText6: ; 0x19467
     TX_FAR _PewterCityText6
