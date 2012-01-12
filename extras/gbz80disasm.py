@@ -4,6 +4,7 @@
 import extract_maps
 from copy import copy, deepcopy
 from pretty_map_headers import random_hash, map_name_cleaner
+from ctypes import c_int8
 import sys
 spacing = "    "
 
@@ -545,7 +546,7 @@ end_08_scripts_with = [
 0xc9, #ret
 ###0xda, 0xe9, 0xd2, 0xc2, 0xca, 0xc3, 0x38, 0x30, 0x20, 0x28, 0x18, 0xd8, 0xd0, 0xc0, 0xc8, 0xc9
 ]
-relative_jumps = [0x38, 0x30, 0x20, 0x28, 0x18]
+relative_jumps = [0x38, 0x30, 0x20, 0x28, 0x18, 0xc3]
 relative_unconditional_jumps = [0xc3, 0x18]
 
 #TODO: replace call and a pointer with call and a label
@@ -566,6 +567,10 @@ asm_commands = {
 
 def random_asm_label():
     return ".ASM_" + random_hash()
+
+def asm_label(address):
+    # why using a random value when you can use the eff. address?
+    return ".ASM_" + hex(address)[2:]
 
 def output_bank_opcodes(original_offset, max_byte_count=0x4000):
     #fs = current_address
@@ -599,11 +604,12 @@ def output_bank_opcodes(original_offset, max_byte_count=0x4000):
             line_label = byte_labels[offset]["name"]
             byte_labels[offset]["usage"] += 1
         else:
-            line_label = random_asm_label()
+            line_label = asm_label(offset)
             byte_labels[offset] = {}
             byte_labels[offset]["name"] = line_label
             byte_labels[offset]["usage"] = 0
-        output += line_label.lower() + " ; " + hex(offset) + "\n"
+        byte_labels[offset]["definition"] = True
+        output += line_label.lower() + "\n" #" ; " + hex(offset) + "\n"
 
         #find out if there's a two byte key like this
         temp_maybe = maybe_byte
@@ -666,15 +672,16 @@ def output_bank_opcodes(original_offset, max_byte_count=0x4000):
 
                     if current_byte == 0x18 or current_byte==0x20 or current_byte in relative_jumps: #jr or jr nz
                         #generate a label for the byte we're jumping to
-                        target_address = offset + 2 + ord(rom[offset + 1])
+                        target_address = offset + 2 + c_int8(ord(rom[offset + 1])).value
                         if target_address in byte_labels.keys():
                             byte_labels[target_address]["usage"] = 1 + byte_labels[target_address]["usage"]
                             line_label2 = byte_labels[target_address]["name"]
                         else:
-                            line_label2 = random_asm_label()
+                            line_label2 = asm_label(target_address)
                             byte_labels[target_address] = {}
                             byte_labels[target_address]["name"] = line_label2
                             byte_labels[target_address]["usage"] = 1
+                            byte_labels[target_address]["definition"] = False
                         
                         insertion = line_label2.lower()
                         include_comment = True
@@ -731,7 +738,7 @@ def output_bank_opcodes(original_offset, max_byte_count=0x4000):
                 is_data = True
 
             #stop reading at a jump, relative jump or return
-            if current_byte in end_08_scripts_with:
+            if current_byte in end_08_scripts_with or (current_byte == 0x18 and target_address < offset):
                 if not has_outstanding_labels(byte_labels):
                     keep_reading = False
                     is_data = False #cleanup
@@ -753,7 +760,7 @@ def output_bank_opcodes(original_offset, max_byte_count=0x4000):
         address = label_line
         label_line = byte_labels[label_line]
         if label_line["usage"] == 0:
-            output = output.replace((label_line["name"] + " ; " + hex(address) + "\n").lower(), "")
+            output = output.replace((label_line["name"] + "\n").lower(), "")
 
     #add the offset of the final location
     output += "; " + hex(offset)
@@ -766,7 +773,7 @@ def has_outstanding_labels(byte_labels):
     """
     for label_line in byte_labels.keys():
         real_line = byte_labels[label_line]
-        if real_line["usage"] == 1: return True
+        if real_line["definition"] == False: return True
     return False
 
 def text_asm_pretty_printer(label, address_of_08, include_08=True):

@@ -5796,6 +5796,7 @@ PalletTownScript:
 	ld hl,PalletTownScriptPointers
 	ld a,[$D5F1]
 	jp $3D97
+; 0x18e73
 
 PalletTownScriptPointers:
 	dw PalletTownScript1,PalletTownScript2,PalletTownScript3,PalletTownScript4,PalletTownScript5,PalletTownScript6,PalletTownScript7
