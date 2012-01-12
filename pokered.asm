@@ -19494,7 +19494,13 @@ Route16GateUpstairsText2: ; 0x49825
     call PrintText
     jp $24d7
 
-INCBIN "baserom.gbc",$4982f,$1d
+INCBIN "baserom.gbc",$4982f,$49840 - $4982f
+Route16GateUpstairsText4: ; 0x49840
+    db $8
+    ld hl, $5847
+    jp $55c9
+; 0x49847
+INCBIN "baserom.gbc",$49847,$5
 
 Route16GateUpstairsObject: ; 0x4984c (size=30)
     db $a ; border tile
