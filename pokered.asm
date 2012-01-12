@@ -16340,13 +16340,14 @@ ViridianPokecenter_h: ; 0x44251 to 0x4425d (12 bytes) (bank=11) (id=41)
 
     dw $4277 ; objects
 
-INCBIN "baserom.gbc",$4425d,$4426b - $4425d
+INCBIN "baserom.gbc",$4425d,$4426c - $4425d
 
-ViridianPokeCenterText1: ; 0x4426b
-    db $ff
+ViridianPokeCenterText2:
+ViridianPokeCenterText1: ; 0x4426c
     TX_FAR _ViridianPokeCenterText1
+    db $50
 
-INCBIN "baserom.gbc",$44270,$44271 - $44270
+INCBIN "baserom.gbc",$44271,$44271 - $44271
 
 ViridianPokeCenterText3: ; 0x44271
     TX_FAR _ViridianPokeCenterText3
@@ -25036,14 +25037,14 @@ PewterPokecenter_h: ; 0x5c57b to 0x5c587 (12 bytes) (id=58)
 
     dw $460d ; objects
 
-INCBIN "baserom.gbc",$5c587,$5c595 - $5c587
+INCBIN "baserom.gbc",$5c587,$5c596 - $5c587
 
-;XXX wtf? maybe a part of the text script?
-db $ff
-PewterPokecenterText1: ; 0x5c595
+PewterPokecenterText2:
+PewterPokecenterText1: ; 0x5c596
     TX_FAR _PewterPokecenterText1
+    db $50
 
-INCBIN "baserom.gbc",$5c59a,$5c603 - $5c59a
+INCBIN "baserom.gbc",$5c59b,$5c603 - $5c59b
 
 PewterPokecenterText4: ; broken TX_FAR to _PewterPokecenterText4
     db $17, $44, $47, $26
@@ -25080,11 +25081,14 @@ CeruleanPokecenter_h: ; 0x5c639 to 0x5c645 (12 bytes) (id=64)
 
 INCBIN "baserom.gbc",$5c645,$5c655 - $5c645
 
-CeruleanPokecenterText1: ; 0x5c654
+CeruleanPokecenterText2:
+CeruleanPokecenterText1: ; 0x5c655
     TX_FAR _CeruleanPokecenterText1
     db $50
 
-INCBIN "baserom.gbc",$5c65a,$5
+CeruleanPokecenterText3:
+    TX_FAR _CeruleanPokecenterText3
+    db $50
 
 CeruleanPokecenterObject: ; 0x5c65f (size=44)
     db $0 ; border tile
