@@ -6818,10 +6818,12 @@ IndigoPlateauLobby_h: ; 0x19c4f to 0x19c5b (12 bytes) (bank=6) (id=174)
 
 INCBIN "baserom.gbc",$19c5b,$19c8a - $19c5b
 
+IndigoPlateauLobbyText2:
 IndigoPlateauLobbyText1: ; 0x19c8a
     TX_FAR _IndigoPlateauLobbyText1
+    db $50
 
-INCBIN "baserom.gbc",$19c8e,$19c8f - $19c8e
+INCBIN "baserom.gbc",$19c8f,$19c8f - $19c8f
 
 IndigoPlateauLobbyText3: ; 0x19c8f
     TX_FAR _IndigoPlateauLobbyText3
@@ -25294,7 +25296,8 @@ LavenderPokecenter_h: ; 0x5c8ce to 0x5c8da (12 bytes) (id=141)
 
 INCBIN "baserom.gbc",$5c8da,$5c8ea - $5c8da
 
-LavenderPokecenterText1: ; 0x5c8e9
+LavenderPokecenterText2:
+LavenderPokecenterText1: ; 0x5c8ea
     TX_FAR _LavenderPokecenterText1
 
 INCBIN "baserom.gbc",$5c8ee,$5c8ef - $5c8ee
@@ -25607,6 +25610,8 @@ CopycatsHouseF2Text2: ; 0x5ccf4
     TX_FAR _CopycatsHouseF2Text2
     db $50
 
+CopycatsHouseF2Text5:
+CopycatsHouseF2Text4:
 CopycatsHouseF2Text3: ; 0x5ccf9
     TX_FAR _CopycatsHouseF2Text3
     db $50
@@ -30082,6 +30087,7 @@ Lab3Text2: ; 0x75cdd
     TX_FAR _Lab3Text2
     db $50
 
+Lab3Text4:
 Lab3Text3: ; 0x75ce2
     TX_FAR _Lab3Text3
     db $50
@@ -30161,10 +30167,10 @@ CinnabarPokecenter_h: ; 0x75e20 to 0x75e2c (12 bytes) (id=171)
 
 INCBIN "baserom.gbc",$75e2c,$75e3b - $75e2c
 
-CinnabarPokecenterText1: ; 0x75e3a
+CinnabarPokecenterText2:
+CinnabarPokecenterText1: ; 0x75e3b
     TX_FAR _CinnabarPokecenterText1
-
-INCBIN "baserom.gbc",$75e3f,$75e40 - $75e3f
+    db $50
 
 CinnabarPokecenterText3: ; 0x75e40
     TX_FAR _CinnabarPokecenterText3
