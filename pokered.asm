@@ -20208,9 +20208,7 @@ Route18Gate_h: ; 0x4986a to 0x49876 (12 bytes) (id=190)
 INCBIN "baserom.gbc",$49876,$4990d - $49876
 
 Route18GateTexts: ; 0x4990d
-    dw Route18GateText1
-
-INCBIN "baserom.gbc",$4990f,$2
+    dw Route18GateText1, Route18GateText2
 
 Route18GateText1: ; 0x49911
     db $08 ; asm
@@ -20225,7 +20223,10 @@ Route18GateText1: ; 0x49911
 .asm_a8410 ; 0x49925
     jp $24d7
 
-INCBIN "baserom.gbc",$49928,$f
+INCBIN "baserom.gbc",$49928,$49932 - $49928
+
+Route18GateText2: ; 0x49932
+INCBIN "baserom.gbc",$49932,5
 
 Route18GateObject: ; 0x49937 (size=50)
     db $a ; border tile
