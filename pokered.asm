@@ -19318,34 +19318,22 @@ Route12GateUpstairsText1: ; 0x49569
     jp $24d7
 
 INCBIN "baserom.gbc",$4959c,$495b1 - $4959c
+
 Route12GateUpstairsText2: ; 0x495b1
     db $08 ; asm
     ld hl, $55b8
     jp $55c9
-    rla
-    ld e, d
-    ld c, c
-    inc hl
-    ld d, b
-    ld [$c421], sp
-    ld d, l
+
+;TX_FAR at 0x495b8
+db $17, $5a, $49, $23, $50
+
+Route12GateUpstairsText3: ; 0x495bd
+    db $8
+    ld hl, $55c4
     jp $55c9
-    rla
-    add [hl]
-    ld c, c
-    inc hl
-    ld d, b
-    ld a, [$c109]
-    cp $4
-    jr z, .asm_2fb7f ; 0x495ce
-    ld a, $1
-    jr .asm_b02ad ; 0x495d2
-.asm_2fb7f ; 0x495d4
-    call PrintText
-    xor a
-.asm_b02ad ; 0x495d8
-    ld [$cc3c], a
-    jp $24d7
+; 0x495c4
+
+INCBIN "baserom.gbc",$495c4,$495de-$495c4
 
 Route12GateUpstairsObject: ; 0x495de (size=24)
     db $a ; border tile
