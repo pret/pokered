@@ -6558,7 +6558,6 @@ FuchsiaCityText4: ; 0x19a6d
     TX_FAR _FuchsiaCityText4
     db $50
 
-
 FuchsiaCityText5: ; 0x19a72
 FuchsiaCityText6:
 FuchsiaCityText7:
@@ -6568,6 +6567,7 @@ FuchsiaCityText10: ; 0x19a72
     TX_FAR _FuchsiaCityText5
     db $50
 
+FuchsiaCityText12:
 FuchsiaCityText11: ; 0x19a77
     TX_FAR _FuchsiaCityText11
     db $50
@@ -17721,7 +17721,12 @@ Route11GateBlocks: ; 20
 Route11GateUpstairsBlocks: ; 16
     INCBIN "maps/route11gateupstairs.blk"
 
-INCBIN "baserom.gbc",$480eb,$71
+INCBIN "baserom.gbc",$480eb,$48157 - $480eb
+
+Route7Text1: ; 0x48157
+    TX_FAR _Route7Text1
+    db $50
+
 
 RedsHouse1F_h: ; 415C
 	db $01 ; tileset
