@@ -6821,7 +6821,13 @@ INCBIN "baserom.gbc",$19c5b,$19c8a - $19c5b
 IndigoPlateauLobbyText1: ; 0x19c8a
     TX_FAR _IndigoPlateauLobbyText1
 
-INCBIN "baserom.gbc",$19c8a+4,$19c95 - ($19c8a+4)
+INCBIN "baserom.gbc",$19c8e,$19c8f - $19c8e
+
+IndigoPlateauLobbyText3: ; 0x19c8f
+    TX_FAR _IndigoPlateauLobbyText3
+    db $50
+
+INCBIN "baserom.gbc",$19c94,$1
 
 IndigoPlateauLobbyObject: ; 0x19c95 (size=58)
     db $0 ; border tile
@@ -16565,7 +16571,12 @@ SSAnne3_h: ; 0x44926 to 0x44932 (12 bytes) (bank=11) (id=97)
 
     dw $493c ; objects
 
-INCBIN "baserom.gbc",$44932,$4493c - $44932
+INCBIN "baserom.gbc",$44932,$44937 - $44932
+
+SSAnne3Text1: ; 0x44937
+    TX_FAR _SSAnne3Text1
+    db $50
+
 SSAnne3Object: ; 0x4493c (size=26)
     db $c ; border tile
 
@@ -18341,7 +18352,12 @@ CeladonPokecenterText2: ; _CeladonPokecenterText2
 CeladonPokecenterText1: ; 0x488c8
     TX_FAR _CeladonPokecenterText1
 
-INCBIN "baserom.gbc",$488c8 + 4,$488d2 - ($488c8+4)
+INCBIN "baserom.gbc",$488cc,$488cd - $488cc
+
+CeladonPokecenterText3: ; 0x488cd
+    TX_FAR _CeladonPokecenterText3
+    db $50
+
 
 CeladonPokecenterObject: ; 0x488d2 (size=44)
     db $0 ; border tile
@@ -19045,10 +19061,10 @@ MtMoonPokecenter_h: ; 0x492c3 to 0x492cf (12 bytes) (bank=12) (id=68)
 
     dw $5376 ; objects
 
-INCBIN "baserom.gbc",$492cf,$492e1 - $492cf
+INCBIN "baserom.gbc",$492cf,$492e2 - $492cf
 
-db $ff
-MtMoonPokecenterText1: ; 0x492e1
+MtMoonPokecenterText2:
+MtMoonPokecenterText1: ; 0x492e2
     TX_FAR _MtMoonPokecenterText1
     db $50
 
@@ -19144,10 +19160,10 @@ RockTunnelPokecenter_h: ; 0x493ae to 0x493ba (12 bytes) (id=81)
 
     dw $53d4 ; objects
 
-INCBIN "baserom.gbc",$493ba,$493c8 - $493ba
+INCBIN "baserom.gbc",$493ba,$493c9 - $493ba
 
-db $ff
-RockTunnelPokecenterText1: ; 0x493c8
+RockTunnelPokecenterText2:
+RockTunnelPokecenterText1: ; 0x493c9
     TX_FAR _RockTunnelPokecenterText1
 
 INCBIN "baserom.gbc",$493cd,$493ce - $493cd
@@ -21426,7 +21442,12 @@ Mansion3Text2: ; 0x522b9
     call LoadTrainerHeader
     jp $24d7
 
-INCBIN "baserom.gbc",$522c3,$23
+INCBIN "baserom.gbc",$522c3,$522e1 - $522c3
+
+Mansion3Text5: ; 0x522e1
+    TX_FAR _Mansion3Text5
+    db $50
+
 Mansion3Object: ; 0x522e6 (size=64)
     db $1 ; border tile
 
@@ -24276,7 +24297,20 @@ asm_38bb3 ; 0x59c5c
 asm_d3c26 ; 0x59c62
     jp $24d7
 
-INCBIN "baserom.gbc",$59c65,$32
+INCBIN "baserom.gbc",$59c65,$59c88 - $59c65
+
+FanClubText6:
+    TX_FAR _FanClubText6
+    db $50
+
+FanClubText7:
+    TX_FAR _FanClubText7
+    db $50
+
+FanClubText8: ; 0x59c92
+    TX_FAR _FanClubText8
+    db $50
+
 FanClubObject: ; 0x59c97 (size=62)
     db $d ; border tile
 
@@ -25258,7 +25292,12 @@ INCBIN "baserom.gbc",$5c8da,$5c8ea - $5c8da
 LavenderPokecenterText1: ; 0x5c8e9
     TX_FAR _LavenderPokecenterText1
 
-INCBIN "baserom.gbc",$5c8ea+4,$5c8f4 - ($5c8ea+4)
+INCBIN "baserom.gbc",$5c8ee,$5c8ef - $5c8ee
+
+LavenderPokecenterText3: ; 0x5c8ef
+    TX_FAR _LavenderPokecenterText3
+    db $50
+
 
 LavenderPokecenterObject: ; 0x5c8f4 (size=44)
     db $0 ; border tile
@@ -25336,10 +25375,17 @@ VermilionPokecenter_h: ; 0x5c983 to 0x5c98f (12 bytes) (id=89)
 
 INCBIN "baserom.gbc",$5c98f,$5c99e - $5c98f
 
-VermilionPokecenterText1: ; 0x5c99d
+VermilionPokecenterText2:
+VermilionPokecenterText1: ; 0x5c99e
     TX_FAR _VermilionPokecenterText1
+    db $50
 
-INCBIN "baserom.gbc",$5c9a2,$7
+VermilionPokecenterText3: ; 0x5c9a3
+    TX_FAR _VermilionPokecenterText3
+    db $50
+
+INCBIN "baserom.gbc",$5c9a8,$1
+
 VermilionPokecenterObject: ; 0x5c9a9 (size=44)
     db $0 ; border tile
 
@@ -25368,6 +25414,7 @@ VermilionMart_h: ; 0x5c9d5 to 0x5c9e1 (12 bytes) (id=91)
     dw $49f4 ; objects
 
 INCBIN "baserom.gbc",$5c9e1,$5c9f4 - $5c9e1
+
 VermilionMartObject: ; 0x5c9f4 (size=38)
     db $0 ; border tile
 
@@ -26023,7 +26070,13 @@ SaffronPokecenterText2: ; maybe
 SaffronPokecenterText1: ; 0x5d543
     TX_FAR _SaffronPokecenterText1
 
-INCBIN "baserom.gbc",$5d544+4,$5d54f - ($5d544+4)
+INCBIN "baserom.gbc",$5d548,$5d549 - $5d548
+
+SaffronPokecenterText3: ; 0x5d549
+    TX_FAR _SaffronPokecenterText3
+    db $50
+
+INCBIN "baserom.gbc",$5d54e,$1
 
 SaffronPokecenterObject: ; 0x5d54f (size=44)
     db $0 ; border tile
@@ -27027,7 +27080,18 @@ SSAnne1_h: ; 0x61259 to 0x61265 (12 bytes) (id=95)
 
     dw $5277 ; objects
 
-INCBIN "baserom.gbc",$61265,$61277 - $61265
+INCBIN "baserom.gbc",$61265,$6126d - $61265
+
+SSAnne1Text1: ; 0x6126d
+    TX_FAR _SSAnne1Text1
+    db $50
+
+
+SSAnne1Text2: ; 0x61272
+    TX_FAR _SSAnne1Text2
+    db $50
+
+INCBIN "baserom.gbc",$61277,$0
 SSAnne1Object: ; 0x61277 (size=104)
     db $c ; border tile
 
@@ -27074,7 +27138,12 @@ SSAnne2_h: ; 0x61393 to 0x6139f (12 bytes) (id=96)
 
     dw $5514 ; objects
 
-INCBIN "baserom.gbc",$6139f,$614e6 - $6139f
+INCBIN "baserom.gbc",$6139f,$614e1 - $6139f
+
+SSAnne2Text1: ; 0x614e1
+    TX_FAR _SSAnne2Text1
+    db $50
+
 SSAnne2Text2: ; 0x614e6
     db $8
     ld hl, $5500
@@ -27165,7 +27234,23 @@ SSAnne5_h: ; 0x616a2 to 0x616ae (12 bytes) (id=99)
 
     dw $572b ; objects
 
-INCBIN "baserom.gbc",$616ae,$616f9 - $616ae
+INCBIN "baserom.gbc",$616ae,$616ea - $616ae
+
+SSAnne5Text1: ; 0x616ea
+    TX_FAR _SSAnne5Text1
+    db $50
+
+
+SSAnne5Text2: ; 0x616ef
+    TX_FAR _SSAnne5Text2
+    db $50
+
+
+SSAnne5Text3: ; 0x616f4
+    TX_FAR _SSAnne5Text3
+    db $50
+
+INCBIN "baserom.gbc",$616f9,$0
 SSAnne5Text4: ; 0x616f9
     db $08 ; asm
     ld hl, $56d1
@@ -27211,7 +27296,38 @@ SSAnne6_h: ; 0x617a7 to 0x617b3 (12 bytes) (id=100)
 
     dw $581b ; objects
 
-INCBIN "baserom.gbc",$617b3,$617e3 - $617b3
+INCBIN "baserom.gbc",$617b3,$617c5 - $617b3
+
+SSAnne6Text1: ; 0x617c5
+    TX_FAR _SSAnne6Text1
+    db $50
+
+
+SSAnne6Text2: ; 0x617ca
+    TX_FAR _SSAnne6Text2
+    db $50
+
+
+SSAnne6Text3: ; 0x617cf
+    TX_FAR _SSAnne6Text3
+    db $50
+
+
+SSAnne6Text4: ; 0x617d4
+    TX_FAR _SSAnne6Text4
+    db $50
+
+
+SSAnne6Text5: ; 0x617d9
+    TX_FAR _SSAnne6Text5
+    db $50
+
+
+SSAnne6Text6: ; 0x617de
+    TX_FAR _SSAnne6Text6
+    db $50
+
+INCBIN "baserom.gbc",$617e3,$0
 SSAnne6Text7: ; 0x617e3
     db $08 ; asm
     ld hl, $5807
@@ -29242,12 +29358,16 @@ FuchsiaPokecenter_h: ; 0x75057 to 0x75063 (12 bytes) (id=154)
 
 INCBIN "baserom.gbc",$75063,$75072 - $75063
 
+FuchsiaPokecenterText2:
 FuchsiaPokecenterText1: ; 0x75071 or 0x75072
-    ;TX_FAR _FuchsiaPokecenterText1
-    db $17, $87, $63, $27, $50
+    TX_FAR _FuchsiaPokecenterText1
+    db $50
 
-INCBIN "baserom.gbc",$75077,$6
-;db $17, $de, $63, $27, $50, $f6
+FuchsiaPokecenterText3: ; 0x75077
+    TX_FAR _FuchsiaPokecenterText3
+    db $50
+
+INCBIN "baserom.gbc",$7507c,$1
 
 FuchsiaPokecenterObject: ; 0x7507d (size=44)
     db $0 ; border tile
@@ -30028,7 +30148,13 @@ INCBIN "baserom.gbc",$75e2c,$75e3b - $75e2c
 CinnabarPokecenterText1: ; 0x75e3a
     TX_FAR _CinnabarPokecenterText1
 
-INCBIN "baserom.gbc",$75e3b+4,$75e46-($75e3b+4)
+INCBIN "baserom.gbc",$75e3f,$75e40 - $75e3f
+
+CinnabarPokecenterText3: ; 0x75e40
+    TX_FAR _CinnabarPokecenterText3
+    db $50
+
+INCBIN "baserom.gbc",$75e45,$1
 
 CinnabarPokecenterObject: ; 0x75e46 (size=44)
     db $0 ; border tile
