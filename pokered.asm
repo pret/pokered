@@ -959,46 +959,76 @@ INCBIN "baserom.gbc",$2125,$2442 - $2125
 ; XXX where is the pointer to this data?
 MartInventories: ; 2442
 	; first byte $FE, next byte # of items, last byte $FF
+
 ; Viridian
+ViridianMartText4: ; XXX confirm
 	db $FE,4,POKE_BALL,ANTIDOTE,PARLYZ_HEAL,BURN_HEAL,$FF
+
 ; Pewter
+PewterMartText1:
 	db $FE,7,POKE_BALL,POTION,ESCAPE_ROPE,ANTIDOTE,BURN_HEAL,AWAKENING
 	db PARLYZ_HEAL,$FF
+
 ; Cerulean
+CeruleanMartText1:
 	db $FE,7,POKE_BALL,POTION,REPEL,ANTIDOTE,BURN_HEAL,AWAKENING
 	db PARLYZ_HEAL,$FF
+
 ; Bike shop
 	db $FE,1,BICYCLE,$FF
+
 ; Vermilion
+VermilionMartText1:
 	db $FE,6,POKE_BALL,SUPER_POTION,ICE_HEAL,AWAKENING,PARLYZ_HEAL
 	db REPEL,$FF
+
 ; Lavender
+LavenderMartText1:
 	db $FE,9,GREAT_BALL,SUPER_POTION,REVIVE,ESCAPE_ROPE,SUPER_REPEL
 	db ANTIDOTE,BURN_HEAL,ICE_HEAL,PARLYZ_HEAL,$FF
+
 ; Celadon Dept. Store 2F (1)
+CeladonMart2Text1:
 	db $FE,9,GREAT_BALL,SUPER_POTION,REVIVE,SUPER_REPEL,ANTIDOTE
 	db BURN_HEAL,ICE_HEAL,AWAKENING,PARLYZ_HEAL,$FF
+
 ; Celadon Dept. Store 2F (2)
+CeladonMart2Text2:
 	db $FE,9,TM_32,TM_33,TM_02,TM_07,TM_37,TM_01,TM_05,TM_09,TM_17,$FF
+
 ; Celadon Dept. Store 4F
+CeladonMart4Text1:
 	db $FE,5,POKE_DOLL,FIRE_STONE,THUNDER_STONE,WATER_STONE,LEAF_STONE,$FF
+
 ; Celadon Dept. Store 5F (1)
+CeladonMart5Text3:
 	db $FE,7,X_ACCURACY,GUARD_SPEC_,DIRE_HIT,X_ATTACK,X_DEFEND,X_SPEED
 	db X_SPECIAL,$FF
+
 ; Celadon Dept. Store 5F (2)
+CeladonMart5Text4:
 	db $FE,5,HP_UP,PROTEIN,IRON,CARBOS,CALCIUM,$FF
+
 ; Fuchsia
+FuchsiaMartText1:
 	db $FE,6,ULTRA_BALL,GREAT_BALL,SUPER_POTION,REVIVE,FULL_HEAL
 	db SUPER_REPEL,$FF
+
 ; unused?
 	db $FE,5,GREAT_BALL,HYPER_POTION,SUPER_POTION,FULL_HEAL,REVIVE,$FF
+
 ; Cinnabar
+CinnabarMartText1:
 	db $FE,7,ULTRA_BALL,GREAT_BALL,HYPER_POTION,MAX_REPEL,ESCAPE_ROPE
 	db FULL_HEAL,REVIVE,$FF
+
 ; Saffron
+SaffronMartText1:
 	db $FE,6,GREAT_BALL,HYPER_POTION,MAX_REPEL,ESCAPE_ROPE,FULL_HEAL
 	db REVIVE,$FF
+
 ; Indigo
+IndigoPlateauLobbyText4:
 	db $FE,7,ULTRA_BALL,GREAT_BALL,FULL_RESTORE,MAX_POTION,FULL_HEAL
 	db REVIVE,MAX_REPEL,$FF
 
@@ -7824,8 +7854,10 @@ ViridianMart_h: ; 0x1d462 to 0x1d46e (12 bytes) (bank=7) (id=42)
     dw $550a ; objects
 
 INCBIN "baserom.gbc",$1d46e,$1d4e0 - $1d46e
+
 ViridianMartTexts: ; 0x1d4e0
-    dw ViridianMartText1, ViridianMartText2, ViridianMartText3
+    dw ViridianMartText1, ViridianMartText2, ViridianMartText3 ;, ViridianMartText4
+
 INCBIN "baserom.gbc",$1d4e6,$a
 
 ViridianMartText1: ; 0x1d4f0
@@ -16361,8 +16393,8 @@ ViridianPokeCenterText3: ; 0x44271
     TX_FAR _ViridianPokeCenterText3
     db $50
 
-;XXX wtf?
-db $f6
+ViridianPokeCenterText4:
+    db $f6
 
 ViridianPokeCenterObject: ; 0x44277 (size=44)
     db $0 ; border tile
@@ -19135,8 +19167,8 @@ MtMoonPokecenterText5: ; 0x49370
     TX_FAR _MtMoonPokecenterText5
     db $50
 
-;XXX wtf?
-db $f6
+MtMoonPokecenterText6:
+    db $f6
 
 MtMoonPokecenterObject: ; 0x49376 (size=56)
     db $0 ; border tile
@@ -19179,9 +19211,8 @@ RockTunnelPokecenterText3: ; 0x493ce
     TX_FAR _RockTunnelPokecenterText3
     db $50
 
-; RockTunnelPokecenterText4: ; 0x493d3
-
-INCBIN "baserom.gbc",$493ce+5,$493d4-($493ce+5)
+RockTunnelPokecenterText4: ; 0x493d3
+    db $f6
 
 RockTunnelPokecenterObject: ; 0x493d4 (size=44)
     db $0 ; border tile
@@ -19211,6 +19242,7 @@ Route11Gate_h: ; 0x49400 to 0x4940c (12 bytes) (id=84)
     dw $5416 ; objects
 
 INCBIN "baserom.gbc",$4940c,$4940f - $4940c
+
 Route11GateTexts: ; 0x4940f
     dw Route11GateText1
 
@@ -19249,6 +19281,7 @@ Route11GateUpstairs_h: ; 0x49448 to 0x49454 (12 bytes) (id=86)
     dw $54da ; objects
 
 INCBIN "baserom.gbc",$49454,$4945f - $49454
+
 Route11GateUpstairsText1: ; 0x4945f
     db $08 ; asm
     xor a
@@ -19258,6 +19291,7 @@ Route11GateUpstairsText1: ; 0x4945f
     jp $24d7
 
 INCBIN "baserom.gbc",$4946c,$494a8 - $4946c
+
 Route11GateUpstairsText3: ; 0x494a8
     db $08 ; asm
     ld a, [$c109]
@@ -19272,7 +19306,7 @@ Route11GateUpstairsText3: ; 0x494a8
     call PrintText
     jp $24d7
 
-INCBIN "baserom.gbc",$494c4,$16
+INCBIN "baserom.gbc",$494c4,$494da - $494c4
 
 Route11GateUpstairsObject: ; 0x494da (size=30)
     db $a ; border tile
@@ -25392,7 +25426,8 @@ VermilionPokecenterText3: ; 0x5c9a3
     TX_FAR _VermilionPokecenterText3
     db $50
 
-INCBIN "baserom.gbc",$5c9a8,$1
+VermilionPokecenterText4: ; 0x5c9a8
+    db $f6
 
 VermilionPokecenterObject: ; 0x5c9a9 (size=44)
     db $0 ; border tile
