@@ -1034,7 +1034,7 @@ IndigoPlateauLobbyText4:
 
 TextScriptEndingChar:
         db "@"
-TextScriptEnd:
+TextScriptEnd: ; 24D7
         ld hl,TextScriptEndingChar
         ret
 
@@ -28250,7 +28250,6 @@ SSAnne1Text1: ; 0x6126d
     TX_FAR _SSAnne1Text1
     db $50
 
-
 SSAnne1Text2: ; 0x61272
     TX_FAR _SSAnne1Text2
     db $50
@@ -28418,11 +28417,9 @@ SSAnne5Text1: ; 0x616ea
     TX_FAR _SSAnne5Text1
     db $50
 
-
 SSAnne5Text2: ; 0x616ef
     TX_FAR _SSAnne5Text2
     db $50
-
 
 SSAnne5Text3: ; 0x616f4
     TX_FAR _SSAnne5Text3
@@ -28486,26 +28483,21 @@ SSAnne6Text1: ; 0x617c5
     TX_FAR _SSAnne6Text1
     db $50
 
-
 SSAnne6Text2: ; 0x617ca
     TX_FAR _SSAnne6Text2
     db $50
-
 
 SSAnne6Text3: ; 0x617cf
     TX_FAR _SSAnne6Text3
     db $50
 
-
 SSAnne6Text4: ; 0x617d4
     TX_FAR _SSAnne6Text4
     db $50
 
-
 SSAnne6Text5: ; 0x617d9
     TX_FAR _SSAnne6Text5
     db $50
-
 
 SSAnne6Text6: ; 0x617de
     TX_FAR _SSAnne6Text6
