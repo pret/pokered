@@ -20077,9 +20077,7 @@ Route16GateMap_h: ; 0x496b2 to 0x496be (12 bytes) (id=186)
 INCBIN "baserom.gbc",$496be,$4975a - $496be
 
 Route16GateMapTexts: ; 0x4975a
-    dw Route16GateMapText1, Route16GateMapText2
-
-INCBIN "baserom.gbc",$4975e,$2
+    dw Route16GateMapText1, Route16GateMapText2, Route16GateMapText3
 
 Route16GateMapText1: ; 0x49760
     db $08 ; asm
@@ -20094,7 +20092,10 @@ Route16GateMapText1: ; 0x49760
 .asm_56c9d ; 0x49774
     jp $24d7
 
-INCBIN "baserom.gbc",$49777,$f
+INCBIN "baserom.gbc",$49777,$49781 - $49777
+
+Route16GateMapText3: ; 0x49781
+INCBIN "baserom.gbc",$49781,5
 
 Route16GateMapText2: ; 0x49786
     TX_FAR _Route16GateMapText2
