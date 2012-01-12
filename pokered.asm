@@ -8582,7 +8582,50 @@ NameRater_h: ; 0x1da06 to 0x1da12 (12 bytes) (bank=7) (id=229)
 
     dw $5ad6 ; objects
 
-INCBIN "baserom.gbc",$1da12,$1dad6 - $1da12
+INCBIN "baserom.gbc",$1da12,$1da56 - $1da12
+
+NameRaterText1: ; 0x1da56
+    db $8
+    call $36f4
+    ld hl, $5ab3
+    call $5a15
+    jr nz, .asm_1daae ; 0x1da60 $4c
+    ld hl, $5ab8
+    call PrintText
+    xor a
+    ld [$d07d], a
+    ld [$cfcb], a
+    ld [$cc35], a
+    call $13fc
+    push af
+    call $3dd4
+    call $3dbe
+    call $20ba
+    pop af
+    jr c, .asm_1daae ; 0x1da80 $2c
+    call $15b4
+    call $5a20
+    ld hl, $5ad1
+    jr c, .asm_1daa8 ; 0x1da8b $1b
+    ld hl, $5abd
+    call $5a15
+    jr nz, .asm_1daae ; 0x1da93 $19
+    ld hl, $5ac2
+    call PrintText
+    ld b, $1
+    ld hl, $655c
+    call Bankswitch
+    jr c, .asm_1daae ; 0x1daa3 $9
+    ld hl, $5ac7
+.asm_1daa8
+    call PrintText
+    jp $24d7
+.asm_1daae
+    ld hl, $5acc
+    jr .asm_1daa8 ; 0x1dab1 $f5
+; 0x1dab3
+
+INCBIN "baserom.gbc",$1dab3,$23
 
 NameRaterObject: ; 0x1dad6 (size=26)
     db $a ; border tile
@@ -9538,6 +9581,7 @@ BillsHouseText3: ; 0x1e8d0
     ld hl, $68da
     call PrintText
     jp $24d7
+; 0x1e8da
 
 INCBIN "baserom.gbc",$1e8da,$5
 
