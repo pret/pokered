@@ -29592,7 +29592,32 @@ CinnabarGym_h: ; 0x7573e to 0x7574a (12 bytes) (id=166)
 
     dw $5acc ; objects
 
-INCBIN "baserom.gbc",$7574a,$75939 - $7574a
+INCBIN "baserom.gbc",$7574a,$758df - $7574a
+CinnabarGymText1: ; 0x758df
+    db $8
+    ld a, [$d79a]
+    bit 1, a
+    jr z, .asm_d9332 ; 0x758e5 $16
+    bit 0, a
+    jr nz, .asm_3012f ; 0x758e9 $9
+    call z, $5857
+    call $30b6
+    jp $24d7
+.asm_3012f ; 0x758f4
+    ld hl, $5920
+    call PrintText
+    jp $24d7
+.asm_d9332 ; 0x758fd
+    ld hl, $5914
+    call PrintText
+    ld hl, $5919
+    ld de, $5919
+    call $3354
+    ld a, $7
+    ld [$d05c], a
+    jp $58b7
+; 0x75914
+INCBIN "baserom.gbc",$75914,$25
 CinnabarGymText2: ; 0x75939
     db $08 ; asm
     call $57a0
