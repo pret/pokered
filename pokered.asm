@@ -1034,7 +1034,7 @@ IndigoPlateauLobbyText4:
 
 TextScriptEndingChar:
         db "@"
-TextScriptEnd: ; 24D7
+TextScriptEnd: ; 24D7 24d7
         ld hl,TextScriptEndingChar
         ret
 
@@ -1196,7 +1196,7 @@ UnknownDungeon1Text3:
 SilphCo10Text4:
 SilphCo10Text5:
 SilphCo10Text6:
-Route2Text2: ; 0x24f4
+Route2Text2: ; 24f4 0x424f4
     db $08 ; asm
     ld a, $5c
     call Predef
@@ -18140,7 +18140,15 @@ SeafoamIslands5Text3: ; 0x46893
     ld [$d668], a
     jp $24d7
 
-INCBIN "baserom.gbc",$468a2,$10
+; 0x468a2 TX_FAR
+db $17, $75, $40, $22
+; 0x468a6
+    db $8
+    ld a, $4a
+    call $13d0
+    call $3748
+    jp TextScriptEnd
+; 0x468b2
 
 SeafoamIslands5Text4: ; 0x468b2
     TX_FAR _SeafoamIslands5Text4
