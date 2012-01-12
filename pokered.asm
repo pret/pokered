@@ -1164,6 +1164,7 @@ SilphCo6Text9:
 SilphCo6Text10:
 SilphCo7Text10:
 SilphCo7Text11:
+SilphCo7Text12:
 Mansion1Text2:
 Mansion1Text3:
 Mansion2Text2:
@@ -21008,6 +21009,7 @@ PredefPointers: ; 7E79
         dbw $16,$5035
 
 SECTION "bank14",DATA,BANK[$14]
+
 Route22_h: ; 0x50000 to 0x50022 (34 bytes) (id=33)
     db $00 ; tileset
     db $09, $14 ; dimensions (y, x)
@@ -21945,9 +21947,9 @@ SilphCo7_h: ; 0x51b55 to 0x51b61 (12 bytes) (id=212)
 INCBIN "baserom.gbc",$51b61,$51d3f - $51b61
 
 SilphCo7Texts: ; 0x51d3f
-    dw SilphCo7Text1, SilphCo7Text2, SilphCo7Text3, SilphCo7Text4, SilphCo7Text5, SilphCo7Text6, SilphCo7Text7, SilphCo7Text8, SilphCo7Text9, SilphCo7Text10, SilphCo7Text11
+    dw SilphCo7Text1, SilphCo7Text2, SilphCo7Text3, SilphCo7Text4, SilphCo7Text5, SilphCo7Text6, SilphCo7Text7, SilphCo7Text8, SilphCo7Text9, SilphCo7Text10, SilphCo7Text11, SilphCo7Text12, SilphCo7Text13, SilphCo7Text14, SilphCo7Text15
 
-INCBIN "baserom.gbc",$51d55,$39
+INCBIN "baserom.gbc",$51d55 + 8,$39 - 8
 
 SilphCo7Text1: ; 0x51d8e
     db $08 ; asm
@@ -22069,7 +22071,18 @@ SilphCo7Text9: ; 0x51eb4
     call PrintText
     jp $24d7
 
-INCBIN "baserom.gbc",$51ebe,$19
+INCBIN "baserom.gbc",$51ebe,$51ec3 - $51ebe
+
+SilphCo7Text13: ; 0x51ec3
+INCBIN "baserom.gbc",$51ec3,5
+
+SilphCo7Text14: ; 0x51ec8
+INCBIN "baserom.gbc",$51ec8,5
+
+INCBIN "baserom.gbc",$51ecd,$51ed2 - $51ecd
+
+SilphCo7Text15: ; 0x51ed2
+INCBIN "baserom.gbc",$51ed2,5
 
 SilphCo7Object: ; 0x51ed7 (size=128)
     db $2e ; border tile
@@ -23238,7 +23251,11 @@ INCBIN "baserom.gbc",$556bc,$556d5 - $556bc
 Route9Texts: ; 0x556d5
     dw Route9Text1, Route9Text2, Route9Text3, Route9Text4, Route9Text5, Route9Text6, Route9Text7, Route9Text8, Route9Text9, Route9Text10, Route9Text11
 
-INCBIN "baserom.gbc",$556eb,$6d
+Route12Text13: ; 0x556eb
+INCBIN "baserom.gbc",$556eb,$556f0 - $556eb
+
+Route12Text14: ; 0x556f0
+INCBIN "baserom.gbc",$556f0,$55758 - $556f0
 
 Route9Text1: ; 0x55758
     db $8 ; asm
@@ -24871,9 +24888,9 @@ Route11Text11: ; 0x595ee
 INCBIN "baserom.gbc",$595f3,$59675 - $595f3
 
 Route12Texts: ; 0x59675
-    dw Route12Text1, Route12Text2, Route12Text3, Route12Text4, Route12Text5, Route12Text6, Route12Text7, Route12Text8, Route12Text9, Route12Text10, Route12Text11, Route12Text12
+    dw Route12Text1, Route12Text2, Route12Text3, Route12Text4, Route12Text5, Route12Text6, Route12Text7, Route12Text8, Route12Text9, Route12Text10, Route12Text11, Route12Text12, Route12Text13, Route12Text14
 
-INCBIN "baserom.gbc",$5968d,$59
+INCBIN "baserom.gbc",$59691,$55
 
 Route12Text1: ; 0x596e6
     TX_FAR _Route12Text1
@@ -25014,9 +25031,9 @@ Route15Text12: ; 0x5992e
 INCBIN "baserom.gbc",$59933,$599b9 - $59933
 
 Route16Texts: ; 0x599b9
-    dw Route16Text1, Route16Text2, Route16Text3, Route16Text4, Route16Text5, Route16Text6, Route16Text7, Route16Text8, Route16Text9
+    dw Route16Text1, Route16Text2, Route16Text3, Route16Text4, Route16Text5, Route16Text6, Route16Text7, Route16Text8, Route16Text9, Route16Text10, Route16Text11
 
-INCBIN "baserom.gbc",$599cb,$4d
+INCBIN "baserom.gbc",$599cb + 4,$4d - 4
 
 Route16Text1: ; 0x59a18
     db $08 ; asm
@@ -25070,7 +25087,11 @@ Route16Text7: ; 0x59aae
     TX_FAR _Route16Text7
     db $50
 
-INCBIN "baserom.gbc",$59ab3,$59abd - $59ab3
+Route16Text10: ; 0x59ab3
+INCBIN "baserom.gbc",$59ab3,5
+
+Route16Text11: ; 0x59ab8
+INCBIN "baserom.gbc",$59ab8,5
 
 Route16Text8: ; 0x59abd
     TX_FAR _Route16Text8
