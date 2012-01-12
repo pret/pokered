@@ -7640,9 +7640,9 @@ OaksLab_h: ; 0x1cb02 to 0x1cb0e (12 bytes) (bank=7) (id=40)
 INCBIN "baserom.gbc",$1cb0e,$1d082 - $1cb0e
 
 OaksLabTexts: ; 0x1d082
-    dw OaksLabText1, OaksLabText2, OaksLabText3, OaksLabText4, OaksLabText5, OaksLabText6, OaksLabText7, OaksLabText8, OaksLabText9, OaksLabText10, OaksLabText11
+    dw OaksLabText1, OaksLabText2, OaksLabText3, OaksLabText4, OaksLabText5, OaksLabText6, OaksLabText7, OaksLabText8, OaksLabText9, OaksLabText10, OaksLabText11, OaksLabText12, OaksLabText13, OaksLabText14, OaksLabText15, OaksLabText16, OaksLabText17, OaksLabText18, OaksLabText19, OaksLabText20, OaksLabText21, OaksLabText22, OaksLabText23, OaksLabText24, OaksLabText25, OaksLabText26, OaksLabText27
 
-INCBIN "baserom.gbc",$1d098,$36
+INCBIN "baserom.gbc",$1d098+32,22
 
 OaksLabText1: ; 0x1d0ce
     db $08 ; asm
@@ -7918,7 +7918,103 @@ OaksLabText9: ; 0x1d336
     call PrintText
     jp $24d7
 
-INCBIN "baserom.gbc",$1d340,$1d3fb - $1d340
+INCBIN "baserom.gbc",$1d340,$1d345 - $1d340
+
+OaksLabText17: ; 0x1d345
+    db $8
+    ld hl, $534f
+    call PrintText
+    jp $24d7
+; 0x1d34f
+
+INCBIN "baserom.gbc",$1d34f,$1d354 - $1d34f
+
+OaksLabText18: ; 0x1d354
+    db $8
+    ld hl, $535e
+    call PrintText
+    jp $24d7
+; 0x1d35e
+
+INCBIN "baserom.gbc",$1d35e,$1d363 - $1d35e
+
+OaksLabText19: ; 0x1d363
+    db $8
+    ld hl, $536d
+    call PrintText
+    jp $24d7
+; 0x1d36d
+
+INCBIN "baserom.gbc",$1d36d,$1d372 - $1d36d
+
+OaksLabText20: ; 0x1d372
+    db $8
+    ld hl, $537c
+    call PrintText
+    jp $24d7
+; 0x1d37c
+
+INCBIN "baserom.gbc",$1d37c,$1d381 - $1d37c
+
+OaksLabText12: ; 0x1d381
+INCBIN "baserom.gbc",$1d381,$5
+
+INCBIN "baserom.gbc",$1d386,$1d390 - $1d386
+
+OaksLabText13: ; 0x1d390
+INCBIN "baserom.gbc",$1d390,$5
+
+INCBIN "baserom.gbc",$1d395,$1d39f - $1d395
+
+OaksLabText14: ; 0x1d39f
+    db $8
+    ld hl, $53a9
+    call PrintText
+    jp $24d7
+; 0x1d3a9
+
+INCBIN "baserom.gbc",$1d3a9,$1d3af - $1d3a9
+
+OaksLabText15: ; 0x1d3af to 0x1d3b9
+    db $8
+    ld hl, $53b9
+    call PrintText
+    jp $24d7
+; 0x1d3b9
+
+INCBIN "baserom.gbc",$1d3b9,$1d3c8 - $1d3b9
+
+OaksLabText16: ; 0x1d3c8
+    db $8
+    ld hl, $53d2
+    call PrintText
+    jp $24d7
+; 0x1d3d2
+
+INCBIN "baserom.gbc",$1d3d2,$1d3d7 - $1d3d2
+
+OaksLabText21: ; 0x1d3d7
+INCBIN "baserom.gbc",$1d3d7,$5
+
+OaksLabText22: ; 0x1d3dc
+INCBIN "baserom.gbc",$1d3dc,$5
+
+OaksLabText23: ; 0x1d3e1
+INCBIN "baserom.gbc",$1d3e1,$5
+
+OaksLabText24: ; 0x1d3e6
+INCBIN "baserom.gbc",$1d3e6,$5
+
+OaksLabText25: ; 0x1d3eb
+INCBIN "baserom.gbc",$1d3eb,$4
+    db $11
+    db $50
+
+OaksLabText26: ; 0x1d3f1
+INCBIN "baserom.gbc",$1d3f1,$1d3f6 - $1d3f1
+
+OaksLabText27: ; 0x1d3f6
+INCBIN "baserom.gbc",$1d3f6,5
 
 OaksLabText11:
 OaksLabText10: ; 0x1d3fb
