@@ -18649,7 +18649,10 @@ INCBIN "baserom.gbc",$48694,$48697 - $48694
 CeladonMansion1Texts: ; 0x48697
     dw CeladonMansion1Text1, CeladonMansion1Text2, CeladonMansion1Text3, CeladonMansion1Text4, CeladonMansion1Text5
 
-INCBIN "baserom.gbc",$486a1,$6
+;0x486a1
+    call $13d0
+    jp TextScriptEnd
+; 0x486a7
 
 CeladonMansion1Text1: ; 0x486a7
     TX_FAR _CeladonMansion1Text1
