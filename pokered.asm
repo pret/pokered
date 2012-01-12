@@ -9169,7 +9169,26 @@ Route22Gate_h: ; 0x1e677 to 0x1e683 (12 bytes) (bank=7) (id=193)
 
     dw $6720 ; objects
 
-INCBIN "baserom.gbc",$1e683,$1e720 - $1e683
+INCBIN "baserom.gbc",$1e683,$1e6e1 - $1e683
+Route22GateText1: ; 0x1e6e1
+    db $8
+    ld a, [$d356]
+    bit 0, a
+    jr nz, .asm_8a809 ; 0x1e6e7 $d
+    ld hl, $6704
+    call PrintText
+    call $66ba
+    ld a, $1
+    jr .asm_20f7e ; 0x1e6f4 $8
+.asm_8a809 ; 0x1e6f6
+    ld hl, $671a
+    call PrintText
+    ld a, $2
+.asm_20f7e ; 0x1e6fe
+    ld [$d60e], a
+    jp $24d7
+; 0x1e704
+INCBIN "baserom.gbc",$1e704,$1c
 Route22GateObject: ; 0x1e720 (size=42)
     db $a ; border tile
 
