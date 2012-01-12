@@ -9143,10 +9143,12 @@ Route5GateText1: ; 0x1dfaa
     jp $24d7
 ; 0x1dfe7
 
+Route7GateText2:
 Route6GateText2:
 Route5GateText2: ; 0x1dfe7
 INCBIN "baserom.gbc",$1dfe7,$5
 
+Route7GateText3:
 Route6GateText3:
 Route5GateText3: ; 0x1dfec
 INCBIN "baserom.gbc",$1dfec,$5
@@ -9223,9 +9225,7 @@ Route7Gate_h: ; 0x1e0f4 to 0x1e100 (12 bytes) (bank=7) (id=76)
 INCBIN "baserom.gbc",$1e100,$1e17f - $1e100
 
 Route7GateTexts: ; 0x1e17f
-    dw Route7GateText1
-
-INCBIN "baserom.gbc",$1e181,$4
+    dw Route7GateText1, Route7GateText2, Route7GateText3
 
 Route7GateObject: ; 0x1e185 (size=42)
     db $a ; border tile
