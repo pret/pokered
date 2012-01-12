@@ -19494,7 +19494,13 @@ Route16GateUpstairsText2: ; 0x49825
     call PrintText
     jp $24d7
 
-INCBIN "baserom.gbc",$4982f,$49840 - $4982f
+INCBIN "baserom.gbc",$4982f,$49834 - $4982f
+Route16GateUpstairsText3: ; 0x49834
+    db $8
+    ld hl, $583b
+    jp $55c9
+; 0x4983b
+INCBIN "baserom.gbc",$4983b,$5
 Route16GateUpstairsText4: ; 0x49840
     db $8
     ld hl, $5847
