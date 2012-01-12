@@ -6020,6 +6020,7 @@ ViridianCityText2: ; 0x19107
     jp $24d7
 
 INCBIN "baserom.gbc",$19122,$1912c - $19122
+
 ViridianCityText3: ; 0x1912c
     db $08 ; asm
     ld hl, $514d
@@ -6038,6 +6039,7 @@ ViridianCityText3: ; 0x1912c
     jp $24d7
 
 INCBIN "baserom.gbc",$1914d,$1915c - $1914d
+
 ViridianCityText4: ; 0x1915c
     db $08 ; asm
     ld a, [$d74b]
@@ -6053,6 +6055,7 @@ ViridianCityText4: ; 0x1915c
     jp $24d7
 
 INCBIN "baserom.gbc",$19175,$1917f - $19175
+
 ViridianCityText5: ; 0x1917f
     db $08 ; asm
     ld hl, $5191
@@ -6063,6 +6066,7 @@ ViridianCityText5: ; 0x1917f
     jp $24d7
 
 INCBIN "baserom.gbc",$19191,$19196 - $19191
+
 ViridianCityText6: ; 0x19196
     db $08 ; asm
     ld a, [$d74c]
@@ -6089,6 +6093,7 @@ ViridianCityText6: ; 0x19196
     jp $24d7
 
 INCBIN "baserom.gbc",$191ca,$191df - $191ca
+
 ViridianCityText7: ; 0x191df
     db $08 ; asm
     ld hl, $520a
@@ -6254,6 +6259,7 @@ CeruleanCityText1: ; 0x1964f
     jp $24d7
 
 INCBIN "baserom.gbc",$19668,$1967c - $19668
+
 CeruleanCityText2: ; 0x1967c
     db $8
     ld a, [$d75b]
@@ -6294,6 +6300,7 @@ CeruleanCityText2: ; 0x1967c
 .asm_e4e6f ; 0x196d6
     jp $24d7
 ; 0x196d9
+
 INCBIN "baserom.gbc",$196d9,$1f
 
 CeruleanCityText3: ; 0x196f8
@@ -6334,6 +6341,7 @@ CeruleanCityText7: ; 0x1970c
     jp $24d7
 
 INCBIN "baserom.gbc",$19730,$1973f - $19730
+
 CeruleanCityText8: ; 0x1973f
     db $08 ; asm
     ldh a, [$d3]
@@ -6410,6 +6418,7 @@ VermilionCityText2: ; 0x1988e
     jp $24d7
 
 INCBIN "baserom.gbc",$198a7,$198b1 - $198a7
+
 VermilionCityText3: ; 0x198b1
     db $08 ; asm
     ld a, [$d803]
@@ -6650,6 +6659,7 @@ FuchsiaCityText19: ; 0x19a90
     jp $24d7
 
 INCBIN "baserom.gbc",$19a9f,$19aa4 - $19a9f
+
 FuchsiaCityText20: ; 0x19aa4
     db $08 ; asm
     ld hl, $5ab3
@@ -6659,6 +6669,7 @@ FuchsiaCityText20: ; 0x19aa4
     jp $24d7
 
 INCBIN "baserom.gbc",$19ab3,$19ab8 - $19ab3
+
 FuchsiaCityText21: ; 0x19ab8
     db $08 ; asm
     ld hl, $5ac7
@@ -6668,6 +6679,7 @@ FuchsiaCityText21: ; 0x19ab8
     jp $24d7
 
 INCBIN "baserom.gbc",$19ac7,$19acc - $19ac7
+
 FuchsiaCityText22: ; 0x19acc
     db $08 ; asm
     ld hl, $5adb
@@ -6677,6 +6689,7 @@ FuchsiaCityText22: ; 0x19acc
     jp $24d7
 
 INCBIN "baserom.gbc",$19adb,$19ae0 - $19adb
+
 FuchsiaCityText23: ; 0x19ae0
     db $08 ; asm
     ld hl, $5aef
@@ -6686,6 +6699,7 @@ FuchsiaCityText23: ; 0x19ae0
     jp $24d7
 
 INCBIN "baserom.gbc",$19aef,$19af4 - $19aef
+
 FuchsiaCityText24: ; 0x19af4
     db $08 ; asm
     ld a, [$d7f6]
@@ -6937,6 +6951,7 @@ SilphCo4Text1: ; 0x19dd3
     jp $24d7
 
 INCBIN "baserom.gbc",$19de0,$19dea - $19de0
+
 SilphCo4Text2: ; 0x19dea
     db $08 ; asm
     ld hl, $5dae
@@ -6944,6 +6959,7 @@ SilphCo4Text2: ; 0x19dea
     jp $24d7
 
 INCBIN "baserom.gbc",$19df4,$19e03 - $19df4
+
 SilphCo4Text3: ; 0x19e03
     db $08 ; asm
     ld hl, $5dba
@@ -6951,6 +6967,7 @@ SilphCo4Text3: ; 0x19e03
     jp $24d7
 
 INCBIN "baserom.gbc",$19e0d,$19e1c - $19e0d
+
 SilphCo4Text4: ; 0x19e1c
     db $08 ; asm
     ld hl, $5dc6
@@ -6958,6 +6975,7 @@ SilphCo4Text4: ; 0x19e1c
     jp $24d7
 
 INCBIN "baserom.gbc",$19e26,$f
+
 SilphCo4Object: ; 0x19e35 (size=111)
     db $2e ; border tile
 
@@ -7016,6 +7034,7 @@ SilphCo5Text1: ; 0x1a003
     jp $24d7
 
 INCBIN "baserom.gbc",$1a010,$1a01a - $1a010
+
 SilphCo5Text2: ; 0x1a01a
     db $08 ; asm
     ld hl, $5fd2
@@ -7023,6 +7042,7 @@ SilphCo5Text2: ; 0x1a01a
     jp $24d7
 
 INCBIN "baserom.gbc",$1a024,$1a033 - $1a024
+
 SilphCo5Text3: ; 0x1a033
     db $08 ; asm
     ld hl, $5fde
@@ -7030,6 +7050,7 @@ SilphCo5Text3: ; 0x1a033
     jp $24d7
 
 INCBIN "baserom.gbc",$1a03d,$1a04c - $1a03d
+
 SilphCo5Text4: ; 0x1a04c
     db $08 ; asm
     ld hl, $5fea
@@ -7037,6 +7058,7 @@ SilphCo5Text4: ; 0x1a04c
     jp $24d7
 
 INCBIN "baserom.gbc",$1a056,$1a065 - $1a056
+
 SilphCo5Text5: ; 0x1a065
     db $08 ; asm
     ld hl, $5ff6
