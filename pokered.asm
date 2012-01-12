@@ -17274,9 +17274,9 @@ RocketHideout4_h: ; 0x45451 to 0x4545d (12 bytes) (bank=11) (id=202)
 INCBIN "baserom.gbc",$4545d,$45501 - $4545d
 
 RocketHideout4Texts: ; 0x45501
-    dw RocketHideout4Text1, RocketHideout4Text2, RocketHideout4Text3, RocketHideout4Text4, RocketHideout4Text5, RocketHideout4Text6, RocketHideout4Text7, RocketHideout4Text8, RocketHideout4Text9
+    dw RocketHideout4Text1, RocketHideout4Text2, RocketHideout4Text3, RocketHideout4Text4, RocketHideout4Text5, RocketHideout4Text6, RocketHideout4Text7, RocketHideout4Text8, RocketHideout4Text9, RocketHideout4Text10
 
-INCBIN "baserom.gbc",$45513,$27
+INCBIN "baserom.gbc",$45515,$25
 
 RocketHideout4Text1: ; 0x4553a
     db $08 ; asm
@@ -17306,7 +17306,10 @@ RocketHideout4Text1: ; 0x4553a
 .asm_209f0 ; 0x45577
     jp $24d7
 
-INCBIN "baserom.gbc",$4557a,$45589 - $4557a
+INCBIN "baserom.gbc",$4557a,$45584 - $4557a
+
+RocketHideout4Text10: ; 0x45584
+INCBIN "baserom.gbc",$45584,5
 
 RocketHideout4Text2: ; 0x45589
     db $08 ; asm
