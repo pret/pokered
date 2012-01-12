@@ -19692,9 +19692,40 @@ Route11GateUpstairsText1: ; 0x4945f
     ld [W_WHICHTRADE], a
     ld a, $54
     call Predef
+asm_49469:
     jp $24d7
 
-INCBIN "baserom.gbc",$4946c,$494a8 - $4946c
+Route11GateUpstairsText2: ; 0x4946c
+    db $8
+    ld a, [$d7d6]
+    add a
+    jr c, .asm_4949b ; 0x49471 $28
+    ld a, $1e
+    ld [$ff00+$db], a
+    ld a, $47
+    ld [$ff00+$dc], a
+    ld [$d11e], a
+    call $2fcf
+    ld h, d
+    ld l, e
+    ld de, $cc5b
+    ld bc, $000d
+    call CopyData
+    ld a, $62
+    call Predef
+    ld a, [$ff00+$db]
+    dec a
+    jr nz, .asm_494a1 ; 0x49494 $b
+    ld hl, $d7d6
+    set 7, [hl]
+.asm_4949b
+    ld hl, $54a3
+    call PrintText
+.asm_494a1
+    jr asm_49469 ; 0x494a1 $c6
+; 0x494a3
+
+INCBIN "baserom.gbc",$494a3,$5
 
 Route11GateUpstairsText3: ; 0x494a8
     db $08 ; asm
