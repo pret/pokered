@@ -3,7 +3,7 @@
 #date: 2012-01-07
 #insert TX_FAR targets into pokered.asm
 import extract_maps
-from analyze_texts import analyze_texts
+from analyze_texts import analyze_texts, text_pretty_printer_at
 from pretty_map_headers import map_name_cleaner, make_text_label, map_constants, find_all_tx_fars, tx_far_pretty_printer, tx_far_label_maker
 import pretty_map_headers
 from analyze_incbins import asm, offset_to_pointer, find_incbin_to_replace_for, split_incbin_line_into_three, generate_diff_insert, load_asm, isolate_incbins, process_incbins, reset_incbins, apply_diff
@@ -389,6 +389,39 @@ def insert_asm(start_address, label):
     print diff
     result = apply_diff(diff, try_fixing=False)
 
+def insert_text(address, label):
+    "inserts a text script (but not $8s)"
+    start_address = address
+
+    line_number = find_incbin_to_replace_for(start_address)
+    if line_number == None:
+        print "skipping text at " + hex(start_address) + " with address " + label
+        return
+
+    text_asm, byte_count = text_pretty_printer_at(start_address, label)
+    end_address = start_address + byte_count
+    newlines = split_incbin_line_into_three(line_number, start_address, byte_count)
+
+    newlines = newlines.split("\n")
+    if len(newlines) == 2: index = 0 #replace the 1st line with new content
+    elif len(newlines) == 3: index = 1 #replace the 2nd line with new content
+    
+    newlines[index] = text_asm
+
+    if len(newlines) == 3 and newlines[2][-2:] == "$0":
+        #get rid of the last incbin line if it is only including 0 bytes
+        del newlines[2]
+        #note that this has to be done after adding in the new asm
+    newlines = "\n".join(line for line in newlines)
+    newlines = newlines.replace("$x", "$") #where does this keep coming from??
+
+    #Char52 doesn't work yet
+    newlines = newlines.replace("Char52", "$52")
+
+    diff = generate_diff_insert(line_number, newlines)
+    print diff
+    #apply_diff(diff)
+
 if __name__ == "__main__":
     #load map headers and object data
     extract_maps.load_rom()
@@ -428,7 +461,7 @@ if __name__ == "__main__":
 
     #insert_asm(0x758df, "CinnabarGymText1")
 
-    #insert_text_label_tx_far(95, 1)
+    #insert_text_label_tx_far(91, 1)
     missed_17s = [] #[[95, 1], [95, 2], [96, 1], [97, 1], [99, 1], [99, 2], [99, 3], [100, 1], [100, 2], [100, 3], [100, 4], [100, 5], [100, 6], [124, 8], [124, 10], [124, 12], [124, 16], [124, 17], [133, 3], [139, 1], [139, 2], [139, 3], [141, 2], [141, 3], [154, 2], [154, 3], [169, 4], [171, 2], [171, 3], [174, 2], [174, 3], [176, 4], [176, 5], [182, 3], [215, 5], [91, 2], [91, 3], [124, 8], [124, 10], [124, 12], [124, 16], [124, 17], [139, 1], [139, 2], [139, 3], [141, 2], [169, 4], [171, 2], [174, 2], [176, 4], [176, 5]]
     for missed_17 in missed_17s:
         insert_text_label_tx_far(missed_17[0], missed_17[1])
@@ -443,6 +476,9 @@ if __name__ == "__main__":
         load_asm()
         isolate_incbins()
         process_incbins()
+
+    #insert_text(0x44276, "ViridianPokeCenterText4")
+    insert_text(0x2461, "VermilionMartText1")
 
     if len(failed_attempts) > 0:
         print "-- FAILED ATTEMPTS --"
