@@ -7567,9 +7567,10 @@ MonsterNames: ; 421E
 INCBIN "baserom.gbc",$1c98a,$1ca81 - $1c98a
 
 CinnabarIslandTexts: ; 0x1ca81
-    dw CinnabarIslandText1, CinnabarIslandText2, CinnabarIslandText3, CinnabarIslandText4, CinnabarIslandText5, CinnabarIslandText6, CinnabarIslandText7
+    dw CinnabarIslandText1, CinnabarIslandText2, CinnabarIslandText3, CinnabarIslandText4, CinnabarIslandText5, CinnabarIslandText6, CinnabarIslandText7, CinnabarIslandText8
 
-INCBIN "baserom.gbc",$1ca8f,$7
+CinnabarIslandText8:
+INCBIN "baserom.gbc",$1ca91,$5
 
 CinnabarIslandText1: ; 0x1ca96
     TX_FAR _CinnabarIslandText1
