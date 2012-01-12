@@ -227,12 +227,12 @@ def insert_text_label_tx_far(map_id, text_id):
     
     line_number = find_incbin_to_replace_for(start_address)
     if line_number == None:
-        print "skipping text label that calls TX_FAR for map_id=" + str(map_id) + " text_id=" + hex(text_id) + " because the address is taken"
+        print "skipping text label that calls TX_FAR for map_id=" + str(map_id) + " text_id=" + str(text_id) + " because the address is taken " + hex(start_address)
         return
 
     #also do a name check
-    if 1 < ("\n".join(analyze_incbins.asm)).count(label + ":"):
-        print "skipping text label that calls TX_FAR for map_id=" + str(map_id) + " text_id" + hex(text_id) + " because the label is already used (" + label + ":)"
+    if 1 < ("\n".join(analyze_incbins.asm)).count("\n" + label + ":"):
+        print "skipping text label that calls TX_FAR for map_id=" + str(map_id) + " text_id" + str(text_id) + " because the label is already used (" + label + ":)"
         return
     
     extra = 0
@@ -426,7 +426,23 @@ if __name__ == "__main__":
     #insert_08_asm(83, 1)
     #insert_all_08s()
 
-    insert_asm(0x1e83d, "BillsHouseText1")
+    #insert_asm(0x758df, "CinnabarGymText1")
+
+    #insert_text_label_tx_far(95, 1)
+    missed_17s = [] #[[95, 1], [95, 2], [96, 1], [97, 1], [99, 1], [99, 2], [99, 3], [100, 1], [100, 2], [100, 3], [100, 4], [100, 5], [100, 6], [124, 8], [124, 10], [124, 12], [124, 16], [124, 17], [133, 3], [139, 1], [139, 2], [139, 3], [141, 2], [141, 3], [154, 2], [154, 3], [169, 4], [171, 2], [171, 3], [174, 2], [174, 3], [176, 4], [176, 5], [182, 3], [215, 5], [91, 2], [91, 3], [124, 8], [124, 10], [124, 12], [124, 16], [124, 17], [139, 1], [139, 2], [139, 3], [141, 2], [169, 4], [171, 2], [174, 2], [176, 4], [176, 5]]
+    for missed_17 in missed_17s:
+        insert_text_label_tx_far(missed_17[0], missed_17[1])
+        
+        asm = None
+        incbin_lines = []
+        processed_incbins = {}
+        analyze_incbins.asm = None
+        analyze_incbins.incbin_lines = []
+        analyze_incbins.processed_incbins = {}
+
+        load_asm()
+        isolate_incbins()
+        process_incbins()
 
     if len(failed_attempts) > 0:
         print "-- FAILED ATTEMPTS --"
