@@ -31205,7 +31205,53 @@ Lab4_h: ; 0x75d25 to 0x75d31 (12 bytes) (id=170)
 
     dw $5df0 ; objects
 
-INCBIN "baserom.gbc",$75d31,$75dda - $75d31
+INCBIN "baserom.gbc",$75d31,$75d6c - $75d31
+
+Lab4Text1: ; 0x75d6c
+    db $8
+    ld a, [$d7a3]
+    bit 0, a
+    jr nz, .asm_75d96 ; 0x75d72 $22
+    ld hl, $5dc6
+    call PrintText
+    call $5d38
+    ld a, [$cd37]
+    and a
+    jr z, .asm_75d8d ; 0x75d81 $a
+    ld b, $18
+    ld hl, $5006
+    call Bankswitch
+    jr .asm_75d93 ; 0x75d8b $6
+.asm_75d8d
+    ld hl, $5dcb
+    call PrintText
+.asm_75d93
+    jp $24d7
+.asm_75d96
+    bit 1, a
+    jr z, .asm_75da2 ; 0x75d98 $8
+    ld hl, $5dd0
+    call PrintText
+    jr .asm_75d93 ; 0x75da0 $f1
+.asm_75da2
+    call $5de8
+    ld hl, $5dd5
+    call PrintText
+    ld hl, $d7a3
+    set 2, [hl]
+    ld a, [$d710]
+    ld b, a
+    ld c, $1e
+    call GivePokemon
+    jr nc, .asm_75d93 ; 0x75db9 $d8
+    ld hl, $d7a3
+    res 0, [hl]
+    res 1, [hl]
+    res 2, [hl]
+    jr .asm_75d93 ; 0x75dc4 $cd
+; 0x75dc6
+
+INCBIN "baserom.gbc",$75dc6,$14
 
 Lab4Text2: ; 0x75dda
     db $08 ; asm
