@@ -6168,7 +6168,14 @@ ViridianCityText13: ; 0x1922d
 ViridianCityText14:
 INCBIN "baserom.gbc",$19232,$19237 - $19232
 
-INCBIN "baserom.gbc",$19237,$19251 - $19237
+PewterCityScript: ; 0x19237
+    call $3c3c
+    ld hl, $5243
+    ld a, [$d5f7]
+    jp $3d97
+; 0x19243
+
+INCBIN "baserom.gbc",$19243,$19251 - $19243
 
 PewterCityScript0: ; 0x19251
     xor a
