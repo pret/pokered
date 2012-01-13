@@ -25963,9 +25963,9 @@ PewterGym_h: ; 0x5c37b to 0x5c387 (12 bytes) (id=54)
 INCBIN "baserom.gbc",$5c387,$5c435 - $5c387
 
 PewterGymTexts: ; 0x5c435
-    dw PewterGymText1, PewterGymText2, PewterGymText3
+    dw PewterGymText1, PewterGymText2, PewterGymText3, PewterGymText4, PewterGymText5, PewterGymText6
 
-INCBIN "baserom.gbc",$5c43b,$13
+INCBIN "baserom.gbc",$5c43b + 6,$13 - 6
 
 PewterGymText1: ; 0x5c44e
     db $08 ; asm
@@ -26004,7 +26004,20 @@ PewterGymText1: ; 0x5c44e
 .asm_e0ffb ; 0x5c49b
     jp $24d7
 
-INCBIN "baserom.gbc",$5c49e,$5c4c6 - $5c49e
+INCBIN "baserom.gbc",$5c49e,$5c4a8 - $5c49e
+
+PewterGymText4: ; 0x5c4a8
+INCBIN "baserom.gbc",$5c4a8,5
+
+PewterGymText5: ; 0x5c4ad
+INCBIN "baserom.gbc",$5c4ad,6
+
+INCBIN "baserom.gbc",$5c4b3,$5c4b7 - $5c4b3
+
+PewterGymText6: ; 0x5c4b7
+INCBIN "baserom.gbc",$5c4b7,5
+
+INCBIN "baserom.gbc",$5c4bc,$5c4c6 - $5c4bc
 
 PewterGymText2: ; 0x5c4c6
     db $08 ; asm
@@ -26213,9 +26226,9 @@ CeruleanGym_h: ; 0x5c6a7 to 0x5c6b3 (12 bytes) (id=65)
 INCBIN "baserom.gbc",$5c6b3,$5c74a - $5c6b3
 
 CeruleanGymTexts: ; 0x5c74a
-    dw CeruleanGymText1, CeruleanGymText2, CeruleanGymText3, CeruleanGymText4
+    dw CeruleanGymText1, CeruleanGymText2, CeruleanGymText3, CeruleanGymText4, CeruleanGymText5, CeruleanGymText6, CeruleanGymText7
 
-INCBIN "baserom.gbc",$5c752,$1f
+INCBIN "baserom.gbc",$5c752 + 6,$1f - 6
 
 CeruleanGymText1: ; 0x5c771
     db $08 ; asm
@@ -26253,7 +26266,20 @@ CeruleanGymText1: ; 0x5c771
 .asm_95b04 ; 0x5c7bb
     jp $24d7
 
-INCBIN "baserom.gbc",$5c7be,$5c7df - $5c7be
+INCBIN "baserom.gbc",$5c7be,$5c7c8 - $5c7be
+
+CeruleanGymText5: ; 0x5c7c8
+INCBIN "baserom.gbc",$5c7c8,5
+
+CeruleanGymText6: ; 0x5c7cd
+INCBIN "baserom.gbc",$5c7cd,4
+db $0b
+db $50
+
+CeruleanGymText7: ; 0x5c7d3
+INCBIN "baserom.gbc",$5c7d3,5
+
+INCBIN "baserom.gbc",$5c7d8,$5c7df - $5c7d8
 
 CeruleanGymText2: ; 0x5c7df
     db $08 ; asm
@@ -26536,9 +26562,9 @@ VermilionGym_h: ; 0x5ca1a to 0x5ca26 (12 bytes) (id=92)
 INCBIN "baserom.gbc",$5ca26,$5cae8 - $5ca26
 
 VermilionGymTexts: ; 0x5cae8
-    dw VermilionGymText1, VermilionGymText2, VermilionGymText3, VermilionGymText4, VermilionGymText5
+    dw VermilionGymText1, VermilionGymText2, VermilionGymText3, VermilionGymText4, VermilionGymText5, VermilionGymText6, VermilionGymText7, VermilionGymText8
 
-INCBIN "baserom.gbc",$5caf2,$2b
+INCBIN "baserom.gbc",$5caf8,37
 
 VermilionGymText1: ; 0x5cb1d
     db $08 ; asm
@@ -26577,7 +26603,20 @@ VermilionGymText1: ; 0x5cb1d
 .asm_23621 ; 0x5cb6a
     jp $24d7
 
-INCBIN "baserom.gbc",$5cb6d,$5cb90 - $5cb6d
+INCBIN "baserom.gbc",$5cb6d,$5cb77 - $5cb6d
+
+VermilionGymText6: ; 0x5cb77
+INCBIN "baserom.gbc",$5cb77,5
+
+VermilionGymText7: ; 0x5cb7c
+INCBIN "baserom.gbc",$5cb7c,5
+
+INCBIN "baserom.gbc",$5cb81,5
+
+VermilionGymText8: ; 0x5cb86
+INCBIN "baserom.gbc",$5cb86,5
+
+INCBIN "baserom.gbc",$5cb8b,5
 
 VermilionGymText2: ; 0x5cb90
     db $08 ; asm
@@ -26752,9 +26791,9 @@ FightingDojo_h: ; 0x5cd51 to 0x5cd5d (12 bytes) (id=177)
 INCBIN "baserom.gbc",$5cd5d,$5ce03 - $5cd5d
 
 FightingDojoTexts: ; 0x5ce03
-    dw FightingDojoText1, FightingDojoText2, FightingDojoText3, FightingDojoText4, FightingDojoText5, FightingDojoText6, FightingDojoText7
+    dw FightingDojoText1, FightingDojoText2, FightingDojoText3, FightingDojoText4, FightingDojoText5, FightingDojoText6, FightingDojoText7, FightingDojoText8
 
-INCBIN "baserom.gbc",$5ce11,$33
+INCBIN "baserom.gbc",$5ce13,$31
 
 FightingDojoText1: ; 0x5ce44
     db $08 ; asm
@@ -26787,7 +26826,12 @@ FightingDojoText1: ; 0x5ce44
 .asm_9dba4 ; 0x5ce8b
     jp $24d7
 
-INCBIN "baserom.gbc",$5ce8e,$5cea2 - $5ce8e
+INCBIN "baserom.gbc",$5ce8e,$5ce98 - $5ce8e
+
+FightingDojoText8: ; 0x5ce98
+INCBIN "baserom.gbc",$5ce98,5
+
+INCBIN "baserom.gbc",$5ce9d,5
 
 FightingDojoText2: ; 0x5cea2
     db $08 ; asm
@@ -26925,9 +26969,9 @@ SaffronGym_h: ; 0x5d001 to 0x5d00d (12 bytes) (id=178)
 INCBIN "baserom.gbc",$5d00d,$5d0ab - $5d00d
 
 SaffronGymTexts: ; 0x5d0ab
-    dw SaffronGymText1, SaffronGymText2, SaffronGymText3, SaffronGymText4, SaffronGymText5, SaffronGymText6, SaffronGymText7, SaffronGymText8, SaffronGymText9
+    dw SaffronGymText1, SaffronGymText2, SaffronGymText3, SaffronGymText4, SaffronGymText5, SaffronGymText6, SaffronGymText7, SaffronGymText8, SaffronGymText9, SaffronGymText10, SaffronGymText11, SaffronGymText12
 
-INCBIN "baserom.gbc",$5d0bd,$5b
+INCBIN "baserom.gbc",$5d0bd + 6,$5b - 6
 
 SaffronGymText1: ; 0x5d118
     db $08 ; asm
@@ -26963,7 +27007,18 @@ SaffronGymText1: ; 0x5d118
 .asm_34c2c ; 0x5d15f
     jp $24d7
 
-INCBIN "baserom.gbc",$5d162,$5d187 - $5d162
+INCBIN "baserom.gbc",$5d162,$5d173 - $5d162
+
+SaffronGymText10: ; 0x5d173
+INCBIN "baserom.gbc",$5d173,5
+
+SaffronGymText11: ; 0x5d178
+INCBIN "baserom.gbc",$5d178,5
+
+INCBIN "baserom.gbc",$5d17d,$5d182 - $5d17d
+
+SaffronGymText12: ; 0x5d182
+INCBIN "baserom.gbc",$5d182,5
 
 SaffronGymText2: ; 0x5d187
     db $08 ; asm
