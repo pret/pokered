@@ -27974,9 +27974,9 @@ PokemonTower5_h: ; 0x60926 to 0x60932 (12 bytes) (id=146)
 INCBIN "baserom.gbc",$60932,$6099b - $60932
 
 PokemonTower5Texts: ; 0x6099b
-    dw PokemonTower5Text1, PokemonTower5Text2, PokemonTower5Text3, PokemonTower5Text4, PokemonTower5Text5, PokemonTower5Text6
+    dw PokemonTower5Text1, PokemonTower5Text2, PokemonTower5Text3, PokemonTower5Text4, PokemonTower5Text5, PokemonTower5Text6, PokemonTower5Text7
 
-INCBIN "baserom.gbc",$609a7,$33
+INCBIN "baserom.gbc",$609a9,$31
 
 PokemonTower5Text1: ; 0x609da
     TX_FAR _PokemonTower5Text1
@@ -28012,7 +28012,10 @@ PokemonTower5Text5: ; 0x60a2a
     call LoadTrainerHeader
     jp $24d7
 
-INCBIN "baserom.gbc",$60a34,$14
+INCBIN "baserom.gbc",$60a34,$f
+
+PokemonTower5Text7: ; 0x60a43
+INCBIN "baserom.gbc",$60a43,5
 
 PokemonTower5Object: ; 0x60a48 (size=65)
     db $1 ; border tile
@@ -28049,9 +28052,9 @@ PokemonTower6_h: ; 0x60ae3 to 0x60aef (12 bytes) (id=147)
 INCBIN "baserom.gbc",$60aef,$60bb1 - $60aef
 
 PokemonTower6Texts: ; 0x60bb1
-    dw PokemonTower6Text1, PokemonTower6Text2, PokemonTower6Text3, PokemonTower6Text4, PokemonTower6Text5
+    dw PokemonTower6Text1, PokemonTower6Text2, PokemonTower6Text3, PokemonTower6Text4, PokemonTower6Text5, PokemonTower6Text6, PokemonTower6Text7
 
-INCBIN "baserom.gbc",$60bbb,$29
+INCBIN "baserom.gbc",$60bbb + 4,$29 - 4
 
 PokemonTower6Text1: ; 0x60be4
     db $08 ; asm
@@ -28071,7 +28074,11 @@ PokemonTower6Text3: ; 0x60bf8
     call LoadTrainerHeader
     jp $24d7
 
-INCBIN "baserom.gbc",$60c02,$59
+PokemonTower6Text7: ; 0x60c02
+INCBIN "baserom.gbc",$60c02,$60c56 - $60c02
+
+PokemonTower6Text6: ; 0x60c56
+INCBIN "baserom.gbc",$60c56,$60c5b - $60c56
 
 PokemonTower6Object: ; 0x60c5b (size=58)
     db $1 ; border tile
@@ -28410,9 +28417,7 @@ SSAnne2_h: ; 0x61393 to 0x6139f (12 bytes) (id=96)
 INCBIN "baserom.gbc",$6139f,$614db - $6139f
 
 SSAnne2Texts: ; 0x614db
-    dw SSAnne2Text1, SSAnne2Text2
-
-INCBIN "baserom.gbc",$614df,$2
+    dw SSAnne2Text1, SSAnne2Text2, SSAnne2Text3
 
 SSAnne2Text1: ; 0x614e1
     TX_FAR _SSAnne2Text1
@@ -28431,7 +28436,10 @@ SSAnne2Text2: ; 0x614e6
     jp $24d7
 ; 0x61500
 
-INCBIN "baserom.gbc",$61500,$14
+INCBIN "baserom.gbc",$61500,$f
+
+SSAnne2Text3: ; 0x6150f
+INCBIN "baserom.gbc",$6150f,5
 
 SSAnne2Object: ; 0x61514 (size=90)
     db $c ; border tile
@@ -29173,9 +29181,9 @@ SilphCo11_h: ; 0x620ee to 0x620fa (12 bytes) (id=235)
 INCBIN "baserom.gbc",$620fa,$622b7 - $620fa
 
 SilphCo11Texts: ; 0x622b7
-    dw SilphCo11Text1, SilphCo11Text2, SilphCo11Text3, SilphCo11Text4, SilphCo11Text5
+    dw SilphCo11Text1, SilphCo11Text2, SilphCo11Text3, SilphCo11Text4, SilphCo11Text5, SilphCo11Text6
 
-INCBIN "baserom.gbc",$622c1,$1b
+INCBIN "baserom.gbc",$622c3,$19
 
 SilphCo11Text1: ; 0x622dc
     db $08 ; asm
@@ -29211,7 +29219,10 @@ SilphCo11Text3: ; 0x6232b
     TX_FAR _SilphCo11Text3
     db $50
 
-INCBIN "baserom.gbc",$62330,$6233a - $62330
+INCBIN "baserom.gbc",$62330,5
+
+SilphCo11Text6: ; 0x62335
+INCBIN "baserom.gbc",$62335,5
 
 SilphCo11Text4: ; 0x6233a
     db $08 ; asm
@@ -30374,9 +30385,9 @@ ViridianGym_h: ; 0x74897 to 0x748a3 (12 bytes) (id=45)
 INCBIN "baserom.gbc",$748a3,$749ec - $748a3
 
 ViridianGymTexts: ; 0x749ec
-    dw ViridianGymText1, ViridianGymText2, ViridianGymText3, ViridianGymText4, ViridianGymText5, ViridianGymText6, ViridianGymText7, ViridianGymText8, ViridianGymText9, ViridianGymText10, ViridianGymText11
+    dw ViridianGymText1, ViridianGymText2, ViridianGymText3, ViridianGymText4, ViridianGymText5, ViridianGymText6, ViridianGymText7, ViridianGymText8, ViridianGymText9, ViridianGymText10, ViridianGymText11, ViridianGymText12, ViridianGymText13, ViridianGymText14
 
-INCBIN "baserom.gbc",$74a02,$67
+INCBIN "baserom.gbc",$74a02 + 6,$67 - 6
 
 ViridianGymText1: ; 0x74a69
     db $08 ; asm
@@ -30422,7 +30433,18 @@ ViridianGymText1: ; 0x74a69
 .asm_6dff7 ; 0x74acb
     jp $24d7
 
-INCBIN "baserom.gbc",$74ace,$74af3 - $74ace
+INCBIN "baserom.gbc",$74ace,$74adf - $74ace
+
+ViridianGymText12: ; 0x74adf
+INCBIN "baserom.gbc",$74adf,5
+
+ViridianGymText13: ; 0x74ae4
+INCBIN "baserom.gbc",$74ae4, 5
+
+INCBIN "baserom.gbc",$74ae9,$74aee - $74ae9
+
+ViridianGymText14: ; 0x74aee
+INCBIN "baserom.gbc",$74aee,5
 
 ViridianGymText2: ; 0x74af3
     db $08 ; asm
@@ -30904,15 +30926,23 @@ SafariZoneEntrance_h: ; 0x751c1 to 0x751cd (12 bytes) (id=156)
 INCBIN "baserom.gbc",$751cd,$752b9 - $751cd
 
 SafariZoneEntranceTexts: ; 0x752b9
-    dw SafariZoneEntranceText1, SafariZoneEntranceText2
+    dw SafariZoneEntranceText1, SafariZoneEntranceText2, SafariZoneEntranceText3, SafariZoneEntranceText4, SafariZoneEntranceText5, SafariZoneEntranceText6
 
-INCBIN "baserom.gbc",$752bd,$8
-
+SafariZoneEntranceText3:
 SafariZoneEntranceText1: ; 0x752c5
     TX_FAR _SafariZoneEntranceText1
     db $50
 
-INCBIN "baserom.gbc",$752ca,$753ca - $752ca
+SafariZoneEntranceText4:
+INCBIN "baserom.gbc",$752ca,$7536f - $752ca
+
+SafariZoneEntranceText5: ; 0x7536f
+INCBIN "baserom.gbc",$7536f,6
+
+INCBIN "baserom.gbc",$75375,$753c5 - $75375
+
+SafariZoneEntranceText6: ; 0x753c5
+INCBIN "baserom.gbc",$753c5,5
 
 SafariZoneEntranceText2: ; 0x753ca
     db $08 ; asm
@@ -30965,9 +30995,9 @@ FuchsiaGym_h: ; 0x75431 to 0x7543d (12 bytes) (id=157)
 INCBIN "baserom.gbc",$7543d,$754d5 - $7543d
 
 FuchsiaGymTexts: ; 0x754d5
-    dw FuchsiaGymText1, FuchsiaGymText2, FuchsiaGymText3, FuchsiaGymText4, FuchsiaGymText5, FuchsiaGymText6, FuchsiaGymText7, FuchsiaGymText8
+    dw FuchsiaGymText1, FuchsiaGymText2, FuchsiaGymText3, FuchsiaGymText4, FuchsiaGymText5, FuchsiaGymText6, FuchsiaGymText7, FuchsiaGymText8, FuchsiaGymText9, FuchsiaGymText10, FuchsiaGymText11
 
-INCBIN "baserom.gbc",$754e5,$4f
+INCBIN "baserom.gbc",$754eb,$49
 
 FuchsiaGymText1: ; 0x75534
     db $08 ; asm
@@ -31005,7 +31035,16 @@ FuchsiaGymText1: ; 0x75534
 .asm_e84c6 ; 0x7557e
     jp $24d7
 
-INCBIN "baserom.gbc",$75581,$755a4 - $75581
+INCBIN "baserom.gbc",$75581,$75590 - $75581
+
+FuchsiaGymText9: ; 0x75590
+INCBIN "baserom.gbc",$75590,5
+
+FuchsiaGymText10: ; 0x75595
+INCBIN "baserom.gbc",$75595,$7559f - $75595
+
+FuchsiaGymText11: ; 0x7559f
+INCBIN "baserom.gbc",$7559f,5
 
 FuchsiaGymText2: ; 0x755a4
     db $08 ; asm
@@ -31152,6 +31191,9 @@ INCBIN "baserom.gbc",$7574a,$7589f - $7574a
 
 CinnabarGymTexts: ; 0x7589f
     dw CinnabarGymText1, CinnabarGymText2, CinnabarGymText3, CinnabarGymText4, CinnabarGymText5, CinnabarGymText6, CinnabarGymText7, CinnabarGymText8, CinnabarGymText9
+;CinnabarGymText 10: ; 0x75925
+;CinnabarGymText 11: ; 0x7592a
+;CinnabarGymText 12: ; 0x75934
 
 INCBIN "baserom.gbc",$758b1,$2e
 
@@ -31764,9 +31806,7 @@ CopycatsHouseF1Object: ; 0x75ee3 (size=46)
 INCBIN "baserom.gbc",$75f11,$760d6 - $75f11
 
 GaryTexts: ; 0x760d6
-    dw GaryText1, GaryText2
-
-INCBIN "baserom.gbc",$760da,$6
+    dw GaryText1, GaryText2, GaryText3, GaryText4, GaryText5
 
 GaryText1: ; 0x760e0
     db $08 ; asm
@@ -31785,7 +31825,14 @@ GaryText2: ; 0x76108
     TX_FAR _GaryText2
     db $50
 
-INCBIN "baserom.gbc",$7610d,$22
+GaryText3: ; 0x7610d
+INCBIN "baserom.gbc",$7610d,$76125 - $7610d
+
+GaryText4: ; 0x76125
+INCBIN "baserom.gbc",$76125,$7612a - $76125
+
+GaryText5: ; 0x7612a
+INCBIN "baserom.gbc",$7612a,$7612f - $7612a
 
 GaryObject: ; 0x7612f (size=48)
     db $3 ; border tile
@@ -31822,9 +31869,9 @@ Loreli_h: ; 0x7616f to 0x7617b (12 bytes) (id=245)
 INCBIN "baserom.gbc",$7617b,$76251 - $7617b
 
 LoreliTexts: ; 0x76251
-    dw LoreliText1
+    dw LoreliText1, LoreliText2
 
-INCBIN "baserom.gbc",$76253,$f
+INCBIN "baserom.gbc",$76255,$d
 
 LoreliText1: ; 0x76262
     db $08 ; asm
@@ -31832,7 +31879,10 @@ LoreliText1: ; 0x76262
     call LoadTrainerHeader
     jp $24d7
 
-INCBIN "baserom.gbc",$7626c,$14
+INCBIN "baserom.gbc",$7626c,$7627b - $7626c
+
+LoreliText2: ; 0x7627b
+INCBIN "baserom.gbc",$7627b,$76280 - $7627b
 
 LoreliObject: ; 0x76280 (size=44)
     db $3 ; border tile
@@ -31868,9 +31918,9 @@ Bruno_h: ; 0x762ca to 0x762d6 (12 bytes) (id=246)
 INCBIN "baserom.gbc",$762d6,$763a8 - $762d6
 
 BrunoTexts: ; 0x763a8
-    dw BrunoText1
+    dw BrunoText1, BrunoText2
 
-INCBIN "baserom.gbc",$763aa,$f
+INCBIN "baserom.gbc",$763ac,$d
 
 BrunoText1: ; 0x763b9
     db $08 ; asm
@@ -31878,7 +31928,10 @@ BrunoText1: ; 0x763b9
     call LoadTrainerHeader
     jp $24d7
 
-INCBIN "baserom.gbc",$763c3,$14
+INCBIN "baserom.gbc",$763c3,$763d2 - $763c3
+
+BrunoText2: ; 0x763d2
+INCBIN "baserom.gbc",$763d2,5
 
 BrunoObject: ; 0x763d7 (size=44)
     db $3 ; border tile
@@ -31914,9 +31967,9 @@ Agatha_h: ; 0x76421 to 0x7642d (12 bytes) (id=247)
 INCBIN "baserom.gbc",$7642d,$76505 - $7642d
 
 AgathaTexts: ; 0x76505
-    dw AgathaText1
+    dw AgathaText1, AgathaText2
 
-INCBIN "baserom.gbc",$76507,$f
+INCBIN "baserom.gbc",$76509,$d
 
 AgathaText1: ; 0x76516
     db $08 ; asm
@@ -31924,7 +31977,10 @@ AgathaText1: ; 0x76516
     call LoadTrainerHeader
     jp $24d7
 
-INCBIN "baserom.gbc",$76520,$14
+INCBIN "baserom.gbc",$76520,$f
+
+AgathaText2: ; 0x7652f
+INCBIN "baserom.gbc",$7652f,5
 
 AgathaObject: ; 0x76534 (size=44)
     db $0 ; border tile
