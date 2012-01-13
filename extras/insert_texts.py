@@ -359,20 +359,21 @@ def insert_all_08s():
         isolate_incbins()
         process_incbins()
 
-def insert_asm(start_address, label):
-    (text_asm, end_address) = text_asm_pretty_printer(label, start_address, include_08=False)
-    print "end address is: " + hex(end_address)
+def insert_asm(start_address, label, text_asm=None, end_address=None):
+    if text_asm == None and end_address == None:
+        (text_asm, end_address) = text_asm_pretty_printer(label, start_address, include_08=False)
+        print "end address is: " + hex(end_address)
 
     #find where to insert the assembly
     line_number = find_incbin_to_replace_for(start_address)
     if line_number == None:
         print "skipping asm because the address is taken"
-        return
+        return False
 
     #name check
     if (label + ":") in "\n".join(analyze_incbins.asm):
         print "skipping asm because the label is taken"
-        return
+        return False
 
     newlines = split_incbin_line_into_three(line_number, start_address, end_address - start_address )
     
@@ -393,6 +394,7 @@ def insert_asm(start_address, label):
     diff = generate_diff_insert(line_number, newlines)
     print diff
     result = apply_diff(diff, try_fixing=True)
+    return True
 
 def insert_text(address, label):
     "inserts a text script (but not $8s)"
@@ -498,21 +500,22 @@ def scan_for_map_scripts_pointer():
                 #print "latest script pointer: " + hex(latest_script_pointer)
 
                 #go ahead and insert the asm for this script
-                insert_asm(latest_script_pointer, map_name_cleaner(map2["name"], None)[:-2] + "Script" + str(len(script_pointers) - 1))
+                result = insert_asm(latest_script_pointer, map_name_cleaner(map2["name"], None)[:-2] + "Script" + str(len(script_pointers) - 1))
                 
-                #reset everything
-                #analyze_incbins.reset_incbins()
-                asm = None
-                incbin_lines = []
-                processed_incbins = {}
-                analyze_incbins.asm = None
-                analyze_incbins.incbin_lines = []
-                analyze_incbins.processed_incbins = {}
-        
-                #reload
-                load_asm()
-                isolate_incbins()
-                process_incbins()
+                if result:
+                    #reset everything
+                    #analyze_incbins.reset_incbins()
+                    asm = None
+                    incbin_lines = []
+                    processed_incbins = {}
+                    analyze_incbins.asm = None
+                    analyze_incbins.incbin_lines = []
+                    analyze_incbins.processed_incbins = {}
+            
+                    #reload
+                    load_asm()
+                    isolate_incbins()
+                    process_incbins()
 
             print "map_id=" + str(map_id) + " scripts are: " + str(script_pointers)
         
@@ -526,21 +529,58 @@ def scan_for_map_scripts_pointer():
         print "\n\n"
 
         #insert asm for the main script
-        insert_asm(script_pointer, map_name_cleaner(map2["name"], None)[:-2] + "Script")
+        result = insert_asm(script_pointer, map_name_cleaner(map2["name"], None)[:-2] + "Script")
         
-        #reset everything
-        #analyze_incbins.reset_incbins()
-        asm = None
-        incbin_lines = []
-        processed_incbins = {}
-        analyze_incbins.asm = None
-        analyze_incbins.incbin_lines = []
-        analyze_incbins.processed_incbins = {}
+        if result:
+            #reset everything
+            #analyze_incbins.reset_incbins()
+            asm = None
+            incbin_lines = []
+            processed_incbins = {}
+            analyze_incbins.asm = None
+            analyze_incbins.incbin_lines = []
+            analyze_incbins.processed_incbins = {}
+    
+            #reload
+            load_asm()
+            isolate_incbins()
+            process_incbins()
 
-        #reload
-        load_asm()
-        isolate_incbins()
-        process_incbins()
+        #insert script pointer list asm if there's anything of value
+        if hl_pointer != None and hl_pointer != "None" and used_3d97==True:
+            start_address = int(hl_pointer, 16) #where to insert this list
+            total_size = len(a_numbers) * 2
+            
+            script_label = map_name_cleaner(map2["name"], None)[:-2] + "Script"
+            scripts_label = script_label  + "s"
+            scripts_asm = scripts_label + ": ; " + hex(start_address) + "\n"
+            script_asm += spacing + "dw"
+
+            first = True
+            for id in a_numbers:
+                if first:
+                    script_asm += " "
+                    first = False
+                else:
+                    script_asm += ", "
+                script_asm += script_label + str(id)
+            script_asm += "\n" #extra newline?
+
+            result = insert_asm(start_address, scripts_label, text_asm=script_asm, end_address=start_address + total_size)
+            if result:
+                #reset everything
+                #analyze_incbins.reset_incbins()
+                asm = None
+                incbin_lines = []
+                processed_incbins = {}
+                analyze_incbins.asm = None
+                analyze_incbins.incbin_lines = []
+                analyze_incbins.processed_incbins = {}
+        
+                #reload
+                load_asm()
+                isolate_incbins()
+                process_incbins()
 
 if __name__ == "__main__":
     #load map headers and object data
