@@ -425,6 +425,7 @@ def insert_text(address, label):
 def scan_for_map_scripts_pointer():
     for map_id in extract_maps.map_headers.keys():
         map2 = extract_maps.map_headers[map_id]
+        if map_id in extract_maps.bad_maps: continue #skip
         script_pointer = int(map2["script_pointer"], 16)
 
         asm_output, offset, last_hl_address, last_a_address = output_bank_opcodes(script_pointer)
@@ -435,7 +436,10 @@ def scan_for_map_scripts_pointer():
             byte1 = ord(extract_maps.rom[hl_pointer])
             byte2 = ord(extract_maps.rom[hl_pointer+1])
             address = byte1 + (byte2 << 8)
-            first_script_pointer = extract_maps.calculate_pointer(address, int(map2["bank"], 16))
+            if address > 0x3fff:
+                first_script_pointer = extract_maps.calculate_pointer(address, int(map2["bank"], 16))
+            else:
+                first_script_pointer = address
 
             first_script_text = " first_script=" + hex(first_script_pointer)
 
@@ -455,7 +459,10 @@ def scan_for_map_scripts_pointer():
                 byte1 = ord(extract_maps.rom[hl_pointer + (2*last_a_id)])
                 byte2 = ord(extract_maps.rom[hl_pointer + (2*last_a_id) + 1])
                 address2 = byte1 + (byte2 << 8)
-                latest_script_pointer = extract_maps.calculate_pointer(address2, int(map2["bank"], 16))
+                if address2 > 0x3fff:
+                    latest_script_pointer = extract_maps.calculate_pointer(address2, int(map2["bank"], 16))
+                else:
+                    latest_script_pointer = address2
                 script_pointers.append(hex(latest_script_pointer))
                 #print "latest script pointer (part 1): " + hex(address2)
                 #print "latest script pointer: " + hex(latest_script_pointer)
@@ -464,7 +471,7 @@ def scan_for_map_scripts_pointer():
         if last_hl_address == None: last_hl_address = "None"
         else: last_hl_address = hex(last_hl_address)
 
-        print "map_id=" + str(map_id) + " script_pointer=" + hex(script_pointer) + " script_pointers=" + last_hl_address + first_script_text
+        print "map_id=" + str(map_id) + " " + map2["name"] + " script_pointer=" + hex(script_pointer) + " script_pointers=" + last_hl_address + first_script_text
         print "\n"
 
 if __name__ == "__main__":
