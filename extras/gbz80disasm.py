@@ -584,6 +584,7 @@ def output_bank_opcodes(original_offset, max_byte_count=0x4000):
 
     last_hl_address = None #for when we're scanning the main map script
     last_a_address = None
+    used_3d97 = False
 
     rom = extract_maps.rom
     offset = original_offset
@@ -734,10 +735,14 @@ def output_bank_opcodes(original_offset, max_byte_count=0x4000):
                 offset += 1
 
                 if current_byte == 0x21:
-                    last_hl_address = byte1 + (byte2 << 8) 
+                    last_hl_address = byte1 + (byte2 << 8)
+                if current_byte == 0xcd:
+                    if number == 0x3d97: used_3d97 = True
 
                 #duck out if this is jp $24d7
                 if current_byte == 0xc3 or current_byte in relative_unconditional_jumps:
+                    if current_byte == 0xc3:
+                        if number == 0x3d97: used_3d97 = True
                     #if number == 0x24d7: #jp
                     if not has_outstanding_labels(byte_labels):
                         keep_reading = False
@@ -774,7 +779,7 @@ def output_bank_opcodes(original_offset, max_byte_count=0x4000):
     #add the offset of the final location
     output += "; " + hex(offset)
 
-    return (output, offset, last_hl_address, last_a_address)
+    return (output, offset, last_hl_address, last_a_address, used_3d97)
 
 def has_outstanding_labels(byte_labels):
     """

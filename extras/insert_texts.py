@@ -369,6 +369,11 @@ def insert_asm(start_address, label):
         print "skipping asm because the address is taken"
         return
 
+    #name check
+    if (label + ":") in "\n".join(analyze_incbins.asm):
+        print "skipping asm because the label is taken"
+        return
+
     newlines = split_incbin_line_into_three(line_number, start_address, end_address - start_address )
     
     newlines = newlines.split("\n")
@@ -387,7 +392,7 @@ def insert_asm(start_address, label):
 
     diff = generate_diff_insert(line_number, newlines)
     print diff
-    result = apply_diff(diff, try_fixing=False)
+    result = apply_diff(diff, try_fixing=True)
 
 def insert_text(address, label):
     "inserts a text script (but not $8s)"
@@ -422,34 +427,58 @@ def insert_text(address, label):
     print diff
     #apply_diff(diff)
 
+#move this into another file?
 def scan_for_map_scripts_pointer():
-    for map_id in extract_maps.map_headers.keys():
+    for map_id in extract_maps.map_headers.keys(): #skip id=0 (Pallet Town) because the naming conventions are wonky
         map2 = extract_maps.map_headers[map_id]
-        if map_id in extract_maps.bad_maps: continue #skip
+        if map_id in extract_maps.bad_maps or map_id in [0, 39, 37, 38]: continue #skip
         script_pointer = int(map2["script_pointer"], 16)
 
-        asm_output, offset, last_hl_address, last_a_address = output_bank_opcodes(script_pointer)
+        main_asm_output, offset, last_hl_address, last_a_address, used_3d97 = output_bank_opcodes(script_pointer)
+        hl_pointer = "None"
         
         first_script_text = ""
-        if last_hl_address != None and last_hl_address != "None":
-            hl_pointer = extract_maps.calculate_pointer(last_hl_address, int(map2["bank"], 16))
+        if last_hl_address != None and last_hl_address != "None" and used_3d97==True:
+            if last_hl_address > 0x3fff:
+                hl_pointer = extract_maps.calculate_pointer(last_hl_address, int(map2["bank"], 16))
+            else:
+                hl_pointer = last_hl_address
             byte1 = ord(extract_maps.rom[hl_pointer])
             byte2 = ord(extract_maps.rom[hl_pointer+1])
             address = byte1 + (byte2 << 8)
+
             if address > 0x3fff:
                 first_script_pointer = extract_maps.calculate_pointer(address, int(map2["bank"], 16))
             else:
                 first_script_pointer = address
 
+            #for later output
             first_script_text = " first_script=" + hex(first_script_pointer)
 
+            #go ahead and insert this script pointer
+            insert_asm(first_script_pointer, map_name_cleaner(map2["name"], None)[:-2] + "Script0")
+            
+            #reset everything
+            #analyze_incbins.reset_incbins()
+            asm = None
+            incbin_lines = []
+            processed_incbins = {}
+            analyze_incbins.asm = None
+            analyze_incbins.incbin_lines = []
+            analyze_incbins.processed_incbins = {}
+    
+            #reload
+            load_asm()
+            isolate_incbins()
+            process_incbins()
+
             a_numbers = [0]
-            script_pointers = [hex(first_script_pointer)]
             last_a_id = 0
+            script_pointers = [hex(first_script_pointer)]
             latest_script_pointer = first_script_pointer
             while last_a_id == (max(a_numbers)) or last_a_id==0:
                 asm_output, offset, last_hl_address2, last_a_id, byte1, byte2, address = None, None, None, None, None, None, None
-                asm_output, offset, last_hl_address2, last_a_id = output_bank_opcodes(latest_script_pointer)
+                asm_output, offset, last_hl_address2, last_a_id, used_3d97 = output_bank_opcodes(latest_script_pointer)
                 
                 if last_a_id == (max(a_numbers) + 1):
                     a_numbers.append(last_a_id)
@@ -463,16 +492,55 @@ def scan_for_map_scripts_pointer():
                     latest_script_pointer = extract_maps.calculate_pointer(address2, int(map2["bank"], 16))
                 else:
                     latest_script_pointer = address2
+
                 script_pointers.append(hex(latest_script_pointer))
                 #print "latest script pointer (part 1): " + hex(address2)
                 #print "latest script pointer: " + hex(latest_script_pointer)
+
+                #go ahead and insert the asm for this script
+                insert_asm(latest_script_pointer, map_name_cleaner(map2["name"], None)[:-2] + "Script" + str(len(script_pointers) - 1))
+                
+                #reset everything
+                #analyze_incbins.reset_incbins()
+                asm = None
+                incbin_lines = []
+                processed_incbins = {}
+                analyze_incbins.asm = None
+                analyze_incbins.incbin_lines = []
+                analyze_incbins.processed_incbins = {}
+        
+                #reload
+                load_asm()
+                isolate_incbins()
+                process_incbins()
+
             print "map_id=" + str(map_id) + " scripts are: " + str(script_pointers)
         
         if last_hl_address == None: last_hl_address = "None"
         else: last_hl_address = hex(last_hl_address)
 
-        print "map_id=" + str(map_id) + " " + map2["name"] + " script_pointer=" + hex(script_pointer) + " script_pointers=" + last_hl_address + first_script_text
-        print "\n"
+        if hl_pointer != None and hl_pointer != "None": hl_pointer = hex(hl_pointer)
+
+        print "map_id=" + str(map_id) + " " + map2["name"] + " script_pointer=" + hex(script_pointer) + " script_pointers=" + hl_pointer + first_script_text
+        print main_asm_output
+        print "\n\n"
+
+        #insert asm for the main script
+        insert_asm(script_pointer, map_name_cleaner(map2["name"], None)[:-2] + "Script")
+        
+        #reset everything
+        #analyze_incbins.reset_incbins()
+        asm = None
+        incbin_lines = []
+        processed_incbins = {}
+        analyze_incbins.asm = None
+        analyze_incbins.incbin_lines = []
+        analyze_incbins.processed_incbins = {}
+
+        #reload
+        load_asm()
+        isolate_incbins()
+        process_incbins()
 
 if __name__ == "__main__":
     #load map headers and object data
