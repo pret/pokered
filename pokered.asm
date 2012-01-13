@@ -7935,8 +7935,6 @@ CinnabarIslandScript: ; 0x1ca19
 CinnabarIslandScripts: ; 0x1ca34
     dw CinnabarIslandScript0, CinnabarIslandScript1
 
-INCBIN "baserom.gbc",$1ca38,$0
-
 CinnabarIslandScript0: ; 0x1ca38
     ld b, $2b
     call $3493
@@ -28013,8 +28011,6 @@ MuseumF1Script: ; 0x5c0f7
 
 MuseumF1Scripts: ; 0x5c109
     dw MuseumF1Script0, MuseumF1Script1
-
-INCBIN "baserom.gbc",$5c10d,$0
 
 MuseumF1Script0: ; 0x5c10d
     ld a, [$d361]
