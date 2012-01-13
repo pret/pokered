@@ -582,6 +582,9 @@ def output_bank_opcodes(original_offset, max_byte_count=0x4000):
     #ad = end_address
     #a, oa = current_byte_number
 
+    last_hl_address = None #for when we're scanning the main map script
+    last_a_address = None
+
     rom = extract_maps.rom
     offset = original_offset
     current_byte_number = 0 #start from the beginning
@@ -686,6 +689,8 @@ def output_bank_opcodes(original_offset, max_byte_count=0x4000):
 
                         insertion = line_label2.lower()
                         include_comment = True
+                    elif current_byte == 0x3e:
+                        last_a_address = ord(rom[offset + 1])
 
                     opstr = opstr[:opstr.find("x")].lower() + insertion + opstr[opstr.find("x")+1:].lower()
                     output += spacing + opstr
@@ -728,6 +733,9 @@ def output_bank_opcodes(original_offset, max_byte_count=0x4000):
                 current_byte_number += 1
                 offset += 1
 
+                if current_byte == 0x21:
+                    last_hl_address = byte1 + (byte2 << 8) 
+
                 #duck out if this is jp $24d7
                 if current_byte == 0xc3 or current_byte in relative_unconditional_jumps:
                     #if number == 0x24d7: #jp
@@ -766,7 +774,7 @@ def output_bank_opcodes(original_offset, max_byte_count=0x4000):
     #add the offset of the final location
     output += "; " + hex(offset)
 
-    return (output, offset)
+    return (output, offset, last_hl_address, last_a_address)
 
 def has_outstanding_labels(byte_labels):
     """

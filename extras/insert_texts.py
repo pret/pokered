@@ -8,7 +8,7 @@ from pretty_map_headers import map_name_cleaner, make_text_label, map_constants,
 import pretty_map_headers
 from analyze_incbins import asm, offset_to_pointer, find_incbin_to_replace_for, split_incbin_line_into_three, generate_diff_insert, load_asm, isolate_incbins, process_incbins, reset_incbins, apply_diff
 import analyze_incbins
-from gbz80disasm import text_asm_pretty_printer
+from gbz80disasm import text_asm_pretty_printer, output_bank_opcodes
 import os, sys
 import subprocess
 spacing = "    "
@@ -422,6 +422,51 @@ def insert_text(address, label):
     print diff
     #apply_diff(diff)
 
+def scan_for_map_scripts_pointer():
+    for map_id in extract_maps.map_headers.keys():
+        map2 = extract_maps.map_headers[map_id]
+        script_pointer = int(map2["script_pointer"], 16)
+
+        asm_output, offset, last_hl_address, last_a_address = output_bank_opcodes(script_pointer)
+        
+        first_script_text = ""
+        if last_hl_address != None and last_hl_address != "None":
+            hl_pointer = extract_maps.calculate_pointer(last_hl_address, int(map2["bank"], 16))
+            byte1 = ord(extract_maps.rom[hl_pointer])
+            byte2 = ord(extract_maps.rom[hl_pointer+1])
+            address = byte1 + (byte2 << 8)
+            first_script_pointer = extract_maps.calculate_pointer(address, int(map2["bank"], 16))
+
+            first_script_text = " first_script=" + hex(first_script_pointer)
+
+            a_numbers = [0]
+            script_pointers = [hex(first_script_pointer)]
+            last_a_id = 0
+            latest_script_pointer = first_script_pointer
+            while last_a_id == (max(a_numbers)) or last_a_id==0:
+                asm_output, offset, last_hl_address2, last_a_id, byte1, byte2, address = None, None, None, None, None, None, None
+                asm_output, offset, last_hl_address2, last_a_id = output_bank_opcodes(latest_script_pointer)
+                
+                if last_a_id == (max(a_numbers) + 1):
+                    a_numbers.append(last_a_id)
+                else:
+                    break
+                
+                byte1 = ord(extract_maps.rom[hl_pointer + (2*last_a_id)])
+                byte2 = ord(extract_maps.rom[hl_pointer + (2*last_a_id) + 1])
+                address2 = byte1 + (byte2 << 8)
+                latest_script_pointer = extract_maps.calculate_pointer(address2, int(map2["bank"], 16))
+                script_pointers.append(hex(latest_script_pointer))
+                #print "latest script pointer (part 1): " + hex(address2)
+                #print "latest script pointer: " + hex(latest_script_pointer)
+            print "map_id=" + str(map_id) + " scripts are: " + str(script_pointers)
+        
+        if last_hl_address == None: last_hl_address = "None"
+        else: last_hl_address = hex(last_hl_address)
+
+        print "map_id=" + str(map_id) + " script_pointer=" + hex(script_pointer) + " script_pointers=" + last_hl_address + first_script_text
+        print "\n"
+
 if __name__ == "__main__":
     #load map headers and object data
     extract_maps.load_rom()
@@ -435,6 +480,8 @@ if __name__ == "__main__":
 
     #load incbins
     reset_incbins()
+
+    scan_for_map_scripts_pointer()
 
     #insert _ViridianCityText10
     #insert_tx_far(1, 10)
@@ -459,28 +506,10 @@ if __name__ == "__main__":
     #insert_08_asm(83, 1)
     #insert_all_08s()
 
-    insert_asm(0x1da56, "NameRaterText1")
-
+    #insert_asm(0x1da56, "NameRaterText1")
     #insert_text_label_tx_far(91, 1)
-    missed_17s = [] #[[95, 1], [95, 2], [96, 1], [97, 1], [99, 1], [99, 2], [99, 3], [100, 1], [100, 2], [100, 3], [100, 4], [100, 5], [100, 6], [124, 8], [124, 10], [124, 12], [124, 16], [124, 17], [133, 3], [139, 1], [139, 2], [139, 3], [141, 2], [141, 3], [154, 2], [154, 3], [169, 4], [171, 2], [171, 3], [174, 2], [174, 3], [176, 4], [176, 5], [182, 3], [215, 5], [91, 2], [91, 3], [124, 8], [124, 10], [124, 12], [124, 16], [124, 17], [139, 1], [139, 2], [139, 3], [141, 2], [169, 4], [171, 2], [174, 2], [176, 4], [176, 5]]
-    for missed_17 in missed_17s:
-        insert_text_label_tx_far(missed_17[0], missed_17[1])
-        
-        asm = None
-        incbin_lines = []
-        processed_incbins = {}
-        analyze_incbins.asm = None
-        analyze_incbins.incbin_lines = []
-        analyze_incbins.processed_incbins = {}
-
-        load_asm()
-        isolate_incbins()
-        process_incbins()
 
     #insert_text(0x44276, "ViridianPokeCenterText4")
     #insert_texts_label(4)
     #insert_all_texts_labels()
 
-    if len(failed_attempts) > 0:
-        print "-- FAILED ATTEMPTS --"
-        print str(failed_attempts)
