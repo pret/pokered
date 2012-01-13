@@ -6790,7 +6790,6 @@ CeladonCityScript: ; 0x19956
     ret
 ; 0x19966
 
-
 CeladonCityTexts: ; 0x19966
     dw CeladonCityText1, CeladonCityText2, CeladonCityText3, CeladonCityText4, CeladonCityText5, CeladonCityText6, CeladonCityText7, CeladonCityText8, CeladonCityText9, CeladonCityText10, CeladonCityText11, CeladonCityText12, CeladonCityText13, CeladonCityText14, CeladonCityText15, CeladonCityText16, CeladonCityText17, CeladonCityText18
 
@@ -7141,7 +7140,6 @@ VermilionHouse3_h: ; 0x19c06 to 0x19c12 (12 bytes) (bank=6) (id=196)
 VermilionHouse3Script: ; 0x19c12
     jp $3c3c
 ; 0x19c15
-
 
 VermilionHouse3Texts: ; 0x19c15
     dw VermilionHouse3Text1
@@ -19526,7 +19524,6 @@ Route7Text1: ; 0x48157
     TX_FAR _Route7Text1
     db $50
 
-
 RedsHouse1F_h: ; 415C
 	db $01 ; tileset
 	db $04,$04 ; dimensions
@@ -28559,7 +28556,6 @@ LavenderPokecenterText3: ; 0x5c8ef
     TX_FAR _LavenderPokecenterText3
     db $50
 
-
 LavenderPokecenterObject: ; 0x5c8f4 (size=44)
     db $0 ; border tile
 
@@ -28696,11 +28692,9 @@ VermilionMartText2: ; 0x5c9ea
     TX_FAR _VermilionMartText2
     db $50
 
-
 VermilionMartText3: ; 0x5c9ef
     TX_FAR _VermilionMartText3
     db $50
-
 
 VermilionMartObject: ; 0x5c9f4 (size=38)
     db $0 ; border tile
@@ -30793,7 +30787,6 @@ SSAnne1Text2: ; 0x61272
     TX_FAR _SSAnne1Text2
     db $50
 
-
 SSAnne1Object: ; 0x61277 (size=104)
     db $c ; border tile
 
@@ -31105,7 +31098,6 @@ SSAnne5Text3: ; 0x616f4
     TX_FAR _SSAnne5Text3
     db $50
 
-
 SSAnne5Text4: ; 0x616f9
     db $08 ; asm
     ld hl, $56d1
@@ -31184,7 +31176,6 @@ SSAnne6Text5: ; 0x617d9
 SSAnne6Text6: ; 0x617de
     TX_FAR _SSAnne6Text6
     db $50
-
 
 SSAnne6Text7: ; 0x617e3
     db $08 ; asm
