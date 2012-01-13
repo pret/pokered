@@ -480,7 +480,7 @@ def scan_for_map_scripts_pointer():
             latest_script_pointer = first_script_pointer
             while last_a_id == (max(a_numbers)) or last_a_id==0:
                 asm_output, offset, last_hl_address2, last_a_id, byte1, byte2, address = None, None, None, None, None, None, None
-                asm_output, offset, last_hl_address2, last_a_id, used_3d97 = output_bank_opcodes(latest_script_pointer)
+                asm_output, offset, last_hl_address2, last_a_id, used_3d97_2 = output_bank_opcodes(latest_script_pointer)
                 
                 if last_a_id == (max(a_numbers) + 1):
                     a_numbers.append(last_a_id)
@@ -553,7 +553,7 @@ def scan_for_map_scripts_pointer():
             
             script_label = map_name_cleaner(map2["name"], None)[:-2] + "Script"
             scripts_label = script_label  + "s"
-            scripts_asm = scripts_label + ": ; " + hex(start_address) + "\n"
+            script_asm = scripts_label + ": ; " + hex(start_address) + "\n"
             script_asm += spacing + "dw"
 
             first = True
@@ -581,6 +581,10 @@ def scan_for_map_scripts_pointer():
                 load_asm()
                 isolate_incbins()
                 process_incbins()
+            else:
+                print "trouble inserting map script pointer list"
+                print script_asm
+                sys.exit(0)
 
 if __name__ == "__main__":
     #load map headers and object data

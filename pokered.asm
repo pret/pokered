@@ -6018,7 +6018,10 @@ ViridianCityScript: ; 0x18ff1
     jp $3d97
 ; 0x18ffd
 
-INCBIN "baserom.gbc",$18ffd,$8
+ViridianCityScripts: ; 0x18ffd
+    dw ViridianCityScript0
+
+INCBIN "baserom.gbc",$18fff,$6
 
 ViridianCityScript0: ; 0x19005
     call $500b
@@ -6175,7 +6178,10 @@ PewterCityScript: ; 0x19237
     jp $3d97
 ; 0x19243
 
-INCBIN "baserom.gbc",$19243,$19251 - $19243
+PewterCityScripts: ; 0x19243
+    dw PewterCityScript0
+
+INCBIN "baserom.gbc",$19245,$c
 
 PewterCityScript0: ; 0x19251
     xor a
@@ -6304,7 +6310,12 @@ CeruleanCityScript: ; 0x19480
     jp $3d97
 ; 0x1948c
 
-INCBIN "baserom.gbc",$1948c,$3c
+INCBIN "baserom.gbc",$1948c,$1949d - $1948c
+
+CeruleanCityScripts: ; 0x1949d
+    dw CeruleanCityScript0, CeruleanCityScript1, CeruleanCityScript2, CeruleanCityScript3
+
+INCBIN "baserom.gbc",$194a5,$23
 
 CeruleanCityScript0: ; 0x194c8
     ld a, [$d75b]
@@ -6637,7 +6648,12 @@ VermilionCityScript: ; 0x197a1
     jp $3d97
 ; 0x197c0
 
-INCBIN "baserom.gbc",$197c0,$26
+INCBIN "baserom.gbc",$197c0,$197dc - $197c0
+
+VermilionCityScripts: ; 0x197dc
+    dw VermilionCityScript0, VermilionCityScript1
+
+INCBIN "baserom.gbc",$197e0,$6
 
 VermilionCityScript0: ; 0x197e6
     ld a, [$c109]
@@ -7916,7 +7932,10 @@ CinnabarIslandScript: ; 0x1ca19
     jp $3d97
 ; 0x1ca34
 
-INCBIN "baserom.gbc",$1ca34,$4
+CinnabarIslandScripts: ; 0x1ca34
+    dw CinnabarIslandScript0, CinnabarIslandScript1
+
+INCBIN "baserom.gbc",$1ca38,$0
 
 CinnabarIslandScript0: ; 0x1ca38
     ld b, $2b
@@ -8044,7 +8063,10 @@ OaksLabScript: ; 0x1cb0e
     jp $3d97
 ; 0x1cb28
 
-INCBIN "baserom.gbc",$1cb28,$26
+OaksLabScripts: ; 0x1cb28
+    dw OaksLabScript0, OaksLabScript1, OaksLabScript2, OaksLabScript3, OaksLabScript4, OaksLabScript5, OaksLabScript6, OaksLabScript7
+
+INCBIN "baserom.gbc",$1cb38,$16
 
 OaksLabScript0: ; 0x1cb4e
     ld a, [$d74b]
@@ -9809,7 +9831,10 @@ Route5GateScript: ; 0x1df33
     jp $3d97
 ; 0x1df3f
 
-INCBIN "baserom.gbc",$1df3f,$11
+Route5GateScripts: ; 0x1df3f
+    dw Route5GateScript0
+
+INCBIN "baserom.gbc",$1df41,$f
 
 Route5GateScript0: ; 0x1df50
     ld a, [$d728]
@@ -9934,7 +9959,10 @@ Route6GateScript: ; 0x1e03d
     ret
 ; 0x1e04a
 
-INCBIN "baserom.gbc",$1e04a,$4
+Route6GateScripts: ; 0x1e04a
+    dw Route6GateScript0
+
+INCBIN "baserom.gbc",$1e04c,$2
 
 Route6GateScript0: ; 0x1e04e
     ld a, [$d728]
@@ -10012,7 +10040,10 @@ Route7GateScript: ; 0x1e100
     ret
 ; 0x1e10d
 
-INCBIN "baserom.gbc",$1e10d,$1b
+Route7GateScripts: ; 0x1e10d
+    dw Route7GateScript0
+
+INCBIN "baserom.gbc",$1e10f,$19
 
 Route7GateScript0: ; 0x1e128
     ld a, [$d728]
@@ -10090,7 +10121,10 @@ Route8GateScript: ; 0x1e1c7
     jp $3d97
 ; 0x1e1d3
 
-INCBIN "baserom.gbc",$1e1d3,$1b
+Route8GateScripts: ; 0x1e1d3
+    dw Route8GateScript0
+
+INCBIN "baserom.gbc",$1e1d5,$19
 
 Route8GateScript0: ; 0x1e1ee
     ld a, [$d728]
@@ -10447,7 +10481,10 @@ Route22GateScript: ; 0x1e683
     ret
 ; 0x1e69e
 
-INCBIN "baserom.gbc",$1e69e,$6
+Route22GateScripts: ; 0x1e69e
+    dw Route22GateScript0, Route22GateScript1
+
+INCBIN "baserom.gbc",$1e6a2,$2
 
 Route22GateScript0: ; 0x1e6a4
     ld hl, $66b5
@@ -10536,7 +10573,10 @@ BillsHouseScript: ; 0x1e76a
     jp $3d97
 ; 0x1e776
 
-INCBIN "baserom.gbc",$1e776,$c
+BillsHouseScripts: ; 0x1e776
+    dw BillsHouseScript0
+
+INCBIN "baserom.gbc",$1e778,$a
 
 BillsHouseScript0: ; 0x1e782
     ret
@@ -19327,7 +19367,12 @@ SeafoamIslands4Script: ; 0x4658d
     jp $3d97
 ; 0x465f6
 
-INCBIN "baserom.gbc",$465f6,$d
+INCBIN "baserom.gbc",$465f6,$465fb - $465f6
+
+SeafoamIslands4Scripts: ; 0x465fb
+    dw SeafoamIslands4Script0, SeafoamIslands4Script1
+
+INCBIN "baserom.gbc",$465ff,$4
 
 SeafoamIslands4Script0: ; 0x46603
     ld a, [$d880]
@@ -19418,7 +19463,12 @@ SeafoamIslands5Script: ; 0x46799
     jp $3d97
 ; 0x467a5
 
-INCBIN "baserom.gbc",$467a5,$22
+INCBIN "baserom.gbc",$467a5,$467ad - $467a5
+
+SeafoamIslands5Scripts: ; 0x467ad
+    dw SeafoamIslands5Script0, SeafoamIslands5Script1
+
+INCBIN "baserom.gbc",$467b1,$16
 
 SeafoamIslands5Script0: ; 0x467c7
     ld a, [$d880]
@@ -20478,7 +20528,12 @@ CeladonGameCornerScript: ; 0x48bbd
     jp $3d97
 ; 0x48bcf
 
-INCBIN "baserom.gbc",$48bcf,$49
+INCBIN "baserom.gbc",$48bcf,$48c12 - $48bcf
+
+CeladonGameCornerScripts: ; 0x48c12
+    dw CeladonGameCornerScript0
+
+INCBIN "baserom.gbc",$48c14,$4
 
 CeladonGameCornerScript0: ; 0x48c18
     ret
@@ -21529,7 +21584,10 @@ Route16GateMapScript: ; 0x496be
     jp $3d97
 ; 0x496cf
 
-INCBIN "baserom.gbc",$496cf,$8
+Route16GateMapScripts: ; 0x496cf
+    dw Route16GateMapScript0
+
+INCBIN "baserom.gbc",$496d1,$6
 
 Route16GateMapScript0: ; 0x496d7
     call $5755
@@ -21705,7 +21763,10 @@ Route18GateScript: ; 0x49876
     jp $3d97
 ; 0x49887
 
-INCBIN "baserom.gbc",$49887,$8
+Route18GateScripts: ; 0x49887
+    dw Route18GateScript0
+
+INCBIN "baserom.gbc",$49889,$6
 
 Route18GateScript0: ; 0x4988f
     call $5755
@@ -23180,7 +23241,10 @@ Route22Script: ; 0x50eb2
     jp $3d97
 ; 0x50ebe
 
-INCBIN "baserom.gbc",$50ebe,$42
+Route22Scripts: ; 0x50ebe
+    dw Route22Script0, Route22Script1, Route22Script2, Route22Script3
+
+INCBIN "baserom.gbc",$50ec6,$3a
 
 Route22Script0: ; 0x50f00
     ld a, [$d7eb]
@@ -23383,7 +23447,12 @@ Route23Script: ; 0x511da
     jp $3d97
 ; 0x511e9
 
-INCBIN "baserom.gbc",$511e9,$30
+INCBIN "baserom.gbc",$511e9,$51213 - $511e9
+
+Route23Scripts: ; 0x51213
+    dw Route23Script0
+
+INCBIN "baserom.gbc",$51215,$4
 
 Route23Script0: ; 0x51219
     ld hl, $5255
@@ -27729,7 +27798,12 @@ HallofFameRoomScript: ; 0x5a49e
     jp $3d97
 ; 0x5a4aa
 
-INCBIN "baserom.gbc",$5a4aa,$11
+INCBIN "baserom.gbc",$5a4aa,$5a4b2 - $5a4aa
+
+HallofFameRoomScripts: ; 0x5a4b2
+    dw HallofFameRoomScript0, HallofFameRoomScript1, HallofFameRoomScript2
+
+INCBIN "baserom.gbc",$5a4b8,$3
 
 HallofFameRoomScript2: ; 0x5a4bb
     call Delay3
@@ -27937,7 +28011,10 @@ MuseumF1Script: ; 0x5c0f7
     jp $3d97
 ; 0x5c109
 
-INCBIN "baserom.gbc",$5c109,$4
+MuseumF1Scripts: ; 0x5c109
+    dw MuseumF1Script0, MuseumF1Script1
+
+INCBIN "baserom.gbc",$5c10d,$0
 
 MuseumF1Script0: ; 0x5c10d
     ld a, [$d361]
@@ -30207,7 +30284,10 @@ PokemonTower2Script: ; 0x604f2
     jp $3d97
 ; 0x604fe
 
-INCBIN "baserom.gbc",$604fe,$11
+INCBIN "baserom.gbc",$604fe,$60509 - $604fe
+
+PokemonTower2Scripts: ; 0x60509
+    dw PokemonTower2Script0, PokemonTower2Script1, PokemonTower2Script2
 
 PokemonTower2Script0: ; 0x6050f
     ld a, [$d764]
@@ -31007,7 +31087,10 @@ SSAnne2Script: ; 0x6139f
     jp $3d97
 ; 0x613ab
 
-INCBIN "baserom.gbc",$613ab,$12
+INCBIN "baserom.gbc",$613ab,$613b3 - $613ab
+
+SSAnne2Scripts: ; 0x613b3
+    dw SSAnne2Script0, SSAnne2Script1, SSAnne2Script2, SSAnne2Script3, SSAnne2Script4
 
 SSAnne2Script4: ; 0x613bd
     ret
@@ -33765,7 +33848,10 @@ SafariZoneEntranceScript: ; 0x751cd
     jp $3d97
 ; 0x751d9
 
-INCBIN "baserom.gbc",$751d9,$e
+SafariZoneEntranceScripts: ; 0x751d9
+    dw SafariZoneEntranceScript0, SafariZoneEntranceScript1
+
+INCBIN "baserom.gbc",$751dd,$a
 
 SafariZoneEntranceScript0: ; 0x751e7
     ld hl, $5221
@@ -34100,7 +34186,12 @@ CinnabarGymScript: ; 0x7574a
     jp $3d97
 ; 0x75759
 
-INCBIN "baserom.gbc",$75759,$55
+INCBIN "baserom.gbc",$75759,$757a6 - $75759
+
+CinnabarGymScripts: ; 0x757a6
+    dw CinnabarGymScript0, CinnabarGymScript1
+
+INCBIN "baserom.gbc",$757aa,$4
 
 CinnabarGymScript0: ; 0x757ae
     ld a, [$da38]
@@ -34785,7 +34876,12 @@ GaryScript: ; 0x75f1d
     jp $3d97
 ; 0x75f29
 
-INCBIN "baserom.gbc",$75f29,$1e
+INCBIN "baserom.gbc",$75f29,$75f31 - $75f29
+
+GaryScripts: ; 0x75f31
+    dw GaryScript0
+
+INCBIN "baserom.gbc",$75f33,$14
 
 GaryScript0: ; 0x75f47
     ret
