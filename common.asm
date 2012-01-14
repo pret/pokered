@@ -37884,7 +37884,9 @@ AgathaObject: ; 0x76534 (size=44)
 AgathaBlocks: ; 30
     INCBIN "maps/agatha.blk"
 
-INCBIN "baserom.gbc",$7657e,$1a82
+INCBIN "baserom.gbc",$7657e,$1a82 - 10
+
+;10 $0s go here, does anything use this?
 
 SECTION "bank1E",DATA,BANK[$1E]
 
