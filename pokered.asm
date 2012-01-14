@@ -34900,7 +34900,7 @@ DecrementPP:
 	dec [hl] ; Decrement PP
 	ret
 
-INCBIN "baserom.gbc",$6802F,$6807F-$6802F
+INCBIN "gfx/redgreenversion.1bpp"
 
 Tset05_GFX:
     INCBIN "gfx/tilesets/05.2bpp"
