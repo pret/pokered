@@ -34838,32 +34838,33 @@ SilphCo11Blocks: ; 81
 INCBIN "baserom.gbc",$62419,$1be7
 
 SECTION "bank19",DATA,BANK[$19]
+
 Tset00_GFX:
-	INCBIN "baserom.gbc",$64000,$645E0-$64000
+    INCBIN "gfx/tilesets/00.2bpp"
 Tset00_Block:
 	INCBIN "baserom.gbc",$645E0,$64DE0-$645E0
 Tset01_GFX:
-	INCBIN "baserom.gbc",$64DE0,$65270-$64DE0
+    INCBIN "gfx/tilesets/01.2bpp"
 Tset01_Block:
 	INCBIN "baserom.gbc",$65270,$653A0-$65270
 Tset08_GFX:
-	INCBIN "baserom.gbc",$653A0,$65980-$653A0
+    INCBIN "gfx/tilesets/08.2bpp"
 Tset08_Block:
 	INCBIN "baserom.gbc",$65980,$65BB0-$65980
 Tset13_GFX:
-	INCBIN "baserom.gbc",$65BB0,$66190-$65BB0
+    INCBIN "gfx/tilesets/13.2bpp"
 Tset13_Block:
 	INCBIN "baserom.gbc",$66190,$66610-$66190
 Tset0E_GFX:
-	INCBIN "baserom.gbc",$66610,$66BF0-$66610
+    INCBIN "gfx/tilesets/0e.2bpp"
 Tset0E_Block:
 	INCBIN "baserom.gbc",$66BF0,$66D60-$66BF0
 Tset10_GFX:
-	INCBIN "baserom.gbc",$66D60,$67350-$66D60
+    INCBIN "gfx/tilesets/10.2bpp"
 Tset10_Block:
 	INCBIN "baserom.gbc",$67350,$676F0-$67350
 Tset17_GFX:
-	INCBIN "baserom.gbc",$676F0,$67B50-$676F0
+    INCBIN "gfx/tilesets/17.2bpp"
 Tset17_Block:
 	INCBIN "baserom.gbc",$67B50,$68000-$67B50
 
@@ -34902,53 +34903,54 @@ DecrementPP:
 INCBIN "baserom.gbc",$6802F,$6807F-$6802F
 
 Tset05_GFX:
-	INCBIN "baserom.gbc",$6807F,$6867F-$6807F
+    INCBIN "gfx/tilesets/05.2bpp"
 Tset05_Block:
 	INCBIN "baserom.gbc",$6867F,$68DBF-$6867F
 Tset02_GFX:
-	INCBIN "baserom.gbc",$68DBF,$693BF-$68DBF
+    INCBIN "gfx/tilesets/02.2bpp"
 Tset02_Block:
 	INCBIN "baserom.gbc",$693BF,$6960F-$693BF
 Tset09_GFX:
-	INCBIN "baserom.gbc",$6960F,$69BFF-$6960F
+    INCBIN "gfx/tilesets/09.2bpp"
 Tset09_Block:
 	INCBIN "baserom.gbc",$69BFF,$6A3FF-$69BFF
 Tset03_GFX:
-	INCBIN "baserom.gbc",$6A3FF,$6A9FF-$6A3FF
+    INCBIN "gfx/tilesets/03.2bpp"
 Tset03_Block:
 	INCBIN "baserom.gbc",$6A9FF,$6B1FF-$6A9FF
 Tset16_GFX:
-	INCBIN "baserom.gbc",$6B1FF,$6B7FF-$6B1FF
+    INCBIN "gfx/tilesets/16.2bpp"
 Tset16_Block:
 	INCBIN "baserom.gbc",$6B7FF,$6C000-$6B7FF
 
 SECTION "bank1B",DATA,BANK[$1B]
+
 Tset0F_GFX:
-	INCBIN "baserom.gbc",$6C000,$6C5C0-$6C000
+    INCBIN "gfx/tilesets/0f.2bpp"
 Tset0F_Block:
 	INCBIN "baserom.gbc",$6C5C0,$6CCA0-$6C5C0
 Tset11_GFX:
-	INCBIN "baserom.gbc",$6CCA0,$6D0C0-$6CCA0
+    INCBIN "gfx/tilesets/11.2bpp"
 Tset11_Block:
 	INCBIN "baserom.gbc",$6D0C0,$6D8C0-$6D0C0
 Tset12_GFX:
-	INCBIN "baserom.gbc",$6D8C0,$6DEA0-$6D8C0
+    INCBIN "gfx/tilesets/12.2bpp"
 Tset12_Block:
 	INCBIN "baserom.gbc",$6DEA0,$6E390-$6DEA0
 Tset0D_GFX:
-	INCBIN "baserom.gbc",$6E390,$6E930-$6E390
+    INCBIN "gfx/tilesets/0d.2bpp"
 Tset0D_Block:
 	INCBIN "baserom.gbc",$6E930,$6ED10-$6E930
 Tset14_GFX:
-	INCBIN "baserom.gbc",$6ED10,$6F2D0-$6ED10
+    INCBIN "gfx/tilesets/14.2bpp"
 Tset14_Block:
 	INCBIN "baserom.gbc",$6F2D0,$6F670-$6F2D0
 Tset15_GFX:
-	INCBIN "baserom.gbc",$6F670,$6FB20-$6F670
+    INCBIN "gfx/tilesets/15.2bpp"
 Tset15_Block:
 	INCBIN "baserom.gbc",$6FB20,$6FD60-$6FB20
 Tset0B_GFX:
-	INCBIN "baserom.gbc",$6FD60,$6FEF0-$6FD60
+    INCBIN "gfx/tilesets/0b.2bpp"
 Tset0B_Block:
 	INCBIN "baserom.gbc",$6FEF0,$70000-$6FEF0
 
