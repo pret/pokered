@@ -60,9 +60,9 @@ maps = {
          0x22: "Route 23",
          0x23: "Route 24",
          0x24: "Route 25",
-         0x25: "Ash's House F1",
-         0x26: "Ash's House F2",
-         0x27: "Gary's House",
+         0x25: "Red's House 1F",
+         0x26: "Red's House 2F",
+         0x27: "Blue's House",
          0x28: "Oak's Lab",
          0x29: "Viridian Poke Center",
          0x2A: "Viridian Mart",
@@ -267,7 +267,7 @@ maps = {
          0xF2: "FREEZE",
          0xF3: "FREEZE",
          0xF4: "FREEZE",
-         0xF5: "Loreli",
+         0xF5: "Lorelei",
          0xF6: "Bruno",
          0xF7: "Agatha"
        }

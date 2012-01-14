@@ -3,12 +3,12 @@
 #date: 2012-01-07
 #insert TX_FAR targets into pokered.asm
 import extract_maps
-from analyze_texts import analyze_texts
+from analyze_texts import analyze_texts, text_pretty_printer_at
 from pretty_map_headers import map_name_cleaner, make_text_label, map_constants, find_all_tx_fars, tx_far_pretty_printer, tx_far_label_maker
 import pretty_map_headers
 from analyze_incbins import asm, offset_to_pointer, find_incbin_to_replace_for, split_incbin_line_into_three, generate_diff_insert, load_asm, isolate_incbins, process_incbins, reset_incbins, apply_diff
 import analyze_incbins
-from gbz80disasm import text_asm_pretty_printer
+from gbz80disasm import text_asm_pretty_printer, output_bank_opcodes
 import os, sys
 import subprocess
 spacing = "    "
@@ -106,7 +106,7 @@ def all_texts_are_tx_fars(map_id):
 def texts_label_pretty_printer(map_id):
     "output a texts label for map if all texts are TX_FARs and in the asm already"
     #extract_maps.map_headers[map_id]["texts"][text_id][0]["TX_FAR"]
-    if not all_texts_are_tx_fars(map_id): return None
+    #if not all_texts_are_tx_fars(map_id): return None
     map2 = extract_maps.map_headers[map_id]
 
     #pointer to the list of texts
@@ -139,7 +139,7 @@ def texts_label_pretty_printer(map_id):
     return output
 
 def insert_texts_label(map_id):
-    if not all_texts_are_tx_fars(map_id): return None
+    #if not all_texts_are_tx_fars(map_id): return None
     map2 = extract_maps.map_headers[map_id]
     
     base_label = map_name_cleaner(map2["name"], None)[:-2]
@@ -359,15 +359,21 @@ def insert_all_08s():
         isolate_incbins()
         process_incbins()
 
-def insert_asm(start_address, label):
-    (text_asm, end_address) = text_asm_pretty_printer(label, start_address, include_08=False)
-    print "end address is: " + hex(end_address)
+def insert_asm(start_address, label, text_asm=None, end_address=None):
+    if text_asm == None and end_address == None:
+        (text_asm, end_address) = text_asm_pretty_printer(label, start_address, include_08=False)
+        print "end address is: " + hex(end_address)
 
     #find where to insert the assembly
     line_number = find_incbin_to_replace_for(start_address)
     if line_number == None:
         print "skipping asm because the address is taken"
-        return
+        return False
+
+    #name check
+    if (label + ":") in "\n".join(analyze_incbins.asm):
+        print "skipping asm because the label is taken"
+        return False
 
     newlines = split_incbin_line_into_three(line_number, start_address, end_address - start_address )
     
@@ -387,7 +393,198 @@ def insert_asm(start_address, label):
 
     diff = generate_diff_insert(line_number, newlines)
     print diff
-    result = apply_diff(diff, try_fixing=False)
+    result = apply_diff(diff, try_fixing=True)
+    return True
+
+def insert_text(address, label):
+    "inserts a text script (but not $8s)"
+    start_address = address
+
+    line_number = find_incbin_to_replace_for(start_address)
+    if line_number == None:
+        print "skipping text at " + hex(start_address) + " with address " + label
+        return
+
+    text_asm, byte_count = text_pretty_printer_at(start_address, label)
+    end_address = start_address + byte_count
+    newlines = split_incbin_line_into_three(line_number, start_address, byte_count)
+
+    newlines = newlines.split("\n")
+    if len(newlines) == 2: index = 0 #replace the 1st line with new content
+    elif len(newlines) == 3: index = 1 #replace the 2nd line with new content
+    
+    newlines[index] = text_asm
+
+    if len(newlines) == 3 and newlines[2][-2:] == "$0":
+        #get rid of the last incbin line if it is only including 0 bytes
+        del newlines[2]
+        #note that this has to be done after adding in the new asm
+    newlines = "\n".join(line for line in newlines)
+    newlines = newlines.replace("$x", "$") #where does this keep coming from??
+
+    #Char52 doesn't work yet
+    newlines = newlines.replace("Char52", "$52")
+
+    diff = generate_diff_insert(line_number, newlines)
+    print diff
+    #apply_diff(diff)
+
+#move this into another file?
+def scan_for_map_scripts_pointer():
+    for map_id in extract_maps.map_headers.keys(): #skip id=0 (Pallet Town) because the naming conventions are wonky
+        map2 = extract_maps.map_headers[map_id]
+        if map_id in extract_maps.bad_maps or map_id in [0, 39, 37, 38]: continue #skip
+        script_pointer = int(map2["script_pointer"], 16)
+
+        main_asm_output, offset, last_hl_address, last_a_address, used_3d97 = output_bank_opcodes(script_pointer)
+        hl_pointer = "None"
+        
+        first_script_text = ""
+        if last_hl_address != None and last_hl_address != "None" and used_3d97==True:
+            if last_hl_address > 0x3fff:
+                hl_pointer = extract_maps.calculate_pointer(last_hl_address, int(map2["bank"], 16))
+            else:
+                hl_pointer = last_hl_address
+            byte1 = ord(extract_maps.rom[hl_pointer])
+            byte2 = ord(extract_maps.rom[hl_pointer+1])
+            address = byte1 + (byte2 << 8)
+
+            if address > 0x3fff:
+                first_script_pointer = extract_maps.calculate_pointer(address, int(map2["bank"], 16))
+            else:
+                first_script_pointer = address
+
+            #for later output
+            first_script_text = " first_script=" + hex(first_script_pointer)
+
+            #go ahead and insert this script pointer
+            insert_asm(first_script_pointer, map_name_cleaner(map2["name"], None)[:-2] + "Script0")
+            
+            #reset everything
+            #analyze_incbins.reset_incbins()
+            asm = None
+            incbin_lines = []
+            processed_incbins = {}
+            analyze_incbins.asm = None
+            analyze_incbins.incbin_lines = []
+            analyze_incbins.processed_incbins = {}
+    
+            #reload
+            load_asm()
+            isolate_incbins()
+            process_incbins()
+
+            a_numbers = [0]
+            last_a_id = 0
+            script_pointers = [hex(first_script_pointer)]
+            latest_script_pointer = first_script_pointer
+            while last_a_id == (max(a_numbers)) or last_a_id==0:
+                asm_output, offset, last_hl_address2, last_a_id, byte1, byte2, address = None, None, None, None, None, None, None
+                asm_output, offset, last_hl_address2, last_a_id, used_3d97_2 = output_bank_opcodes(latest_script_pointer)
+                
+                if last_a_id == (max(a_numbers) + 1):
+                    a_numbers.append(last_a_id)
+                else:
+                    break
+                
+                byte1 = ord(extract_maps.rom[hl_pointer + (2*last_a_id)])
+                byte2 = ord(extract_maps.rom[hl_pointer + (2*last_a_id) + 1])
+                address2 = byte1 + (byte2 << 8)
+                if address2 > 0x3fff:
+                    latest_script_pointer = extract_maps.calculate_pointer(address2, int(map2["bank"], 16))
+                else:
+                    latest_script_pointer = address2
+
+                script_pointers.append(hex(latest_script_pointer))
+                #print "latest script pointer (part 1): " + hex(address2)
+                #print "latest script pointer: " + hex(latest_script_pointer)
+
+                #go ahead and insert the asm for this script
+                result = insert_asm(latest_script_pointer, map_name_cleaner(map2["name"], None)[:-2] + "Script" + str(len(script_pointers) - 1))
+                
+                if result:
+                    #reset everything
+                    #analyze_incbins.reset_incbins()
+                    asm = None
+                    incbin_lines = []
+                    processed_incbins = {}
+                    analyze_incbins.asm = None
+                    analyze_incbins.incbin_lines = []
+                    analyze_incbins.processed_incbins = {}
+            
+                    #reload
+                    load_asm()
+                    isolate_incbins()
+                    process_incbins()
+
+            print "map_id=" + str(map_id) + " scripts are: " + str(script_pointers)
+        
+        if last_hl_address == None: last_hl_address = "None"
+        else: last_hl_address = hex(last_hl_address)
+
+        if hl_pointer != None and hl_pointer != "None": hl_pointer = hex(hl_pointer)
+
+        print "map_id=" + str(map_id) + " " + map2["name"] + " script_pointer=" + hex(script_pointer) + " script_pointers=" + hl_pointer + first_script_text
+        print main_asm_output
+        print "\n\n"
+
+        #insert asm for the main script
+        result = insert_asm(script_pointer, map_name_cleaner(map2["name"], None)[:-2] + "Script")
+        
+        if result:
+            #reset everything
+            #analyze_incbins.reset_incbins()
+            asm = None
+            incbin_lines = []
+            processed_incbins = {}
+            analyze_incbins.asm = None
+            analyze_incbins.incbin_lines = []
+            analyze_incbins.processed_incbins = {}
+    
+            #reload
+            load_asm()
+            isolate_incbins()
+            process_incbins()
+
+        #insert script pointer list asm if there's anything of value
+        if hl_pointer != None and hl_pointer != "None" and used_3d97==True:
+            start_address = int(hl_pointer, 16) #where to insert this list
+            total_size = len(a_numbers) * 2
+            
+            script_label = map_name_cleaner(map2["name"], None)[:-2] + "Script"
+            scripts_label = script_label  + "s"
+            script_asm = scripts_label + ": ; " + hex(start_address) + "\n"
+            script_asm += spacing + "dw"
+
+            first = True
+            for id in a_numbers:
+                if first:
+                    script_asm += " "
+                    first = False
+                else:
+                    script_asm += ", "
+                script_asm += script_label + str(id)
+            script_asm += "\n" #extra newline?
+
+            result = insert_asm(start_address, scripts_label, text_asm=script_asm, end_address=start_address + total_size)
+            if result:
+                #reset everything
+                #analyze_incbins.reset_incbins()
+                asm = None
+                incbin_lines = []
+                processed_incbins = {}
+                analyze_incbins.asm = None
+                analyze_incbins.incbin_lines = []
+                analyze_incbins.processed_incbins = {}
+        
+                #reload
+                load_asm()
+                isolate_incbins()
+                process_incbins()
+            else:
+                print "trouble inserting map script pointer list"
+                print script_asm
+                sys.exit(0)
 
 if __name__ == "__main__":
     #load map headers and object data
@@ -402,6 +599,8 @@ if __name__ == "__main__":
 
     #load incbins
     reset_incbins()
+
+    scan_for_map_scripts_pointer()
 
     #insert _ViridianCityText10
     #insert_tx_far(1, 10)
@@ -426,24 +625,10 @@ if __name__ == "__main__":
     #insert_08_asm(83, 1)
     #insert_all_08s()
 
-    #insert_asm(0x758df, "CinnabarGymText1")
+    #insert_asm(0x1da56, "NameRaterText1")
+    #insert_text_label_tx_far(91, 1)
 
-    #insert_text_label_tx_far(95, 1)
-    missed_17s = [] #[[95, 1], [95, 2], [96, 1], [97, 1], [99, 1], [99, 2], [99, 3], [100, 1], [100, 2], [100, 3], [100, 4], [100, 5], [100, 6], [124, 8], [124, 10], [124, 12], [124, 16], [124, 17], [133, 3], [139, 1], [139, 2], [139, 3], [141, 2], [141, 3], [154, 2], [154, 3], [169, 4], [171, 2], [171, 3], [174, 2], [174, 3], [176, 4], [176, 5], [182, 3], [215, 5], [91, 2], [91, 3], [124, 8], [124, 10], [124, 12], [124, 16], [124, 17], [139, 1], [139, 2], [139, 3], [141, 2], [169, 4], [171, 2], [174, 2], [176, 4], [176, 5]]
-    for missed_17 in missed_17s:
-        insert_text_label_tx_far(missed_17[0], missed_17[1])
-        
-        asm = None
-        incbin_lines = []
-        processed_incbins = {}
-        analyze_incbins.asm = None
-        analyze_incbins.incbin_lines = []
-        analyze_incbins.processed_incbins = {}
+    #insert_text(0x44276, "ViridianPokeCenterText4")
+    #insert_texts_label(4)
+    #insert_all_texts_labels()
 
-        load_asm()
-        isolate_incbins()
-        process_incbins()
-
-    if len(failed_attempts) > 0:
-        print "-- FAILED ATTEMPTS --"
-        print str(failed_attempts)

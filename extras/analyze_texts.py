@@ -385,81 +385,91 @@ def find_missing_08s(all_texts):
 
 def text_pretty_printer_at(start_address, label="SomeLabel"):
     commands = parse_text_script(start_address, None, None)
+    needs_to_begin_with_0 = False
     
     wanted_command = None
-    for command_id in commands:
-        command = commands[command_id]
-        if command["type"] == 0:
-            wanted_command = command_id
+    if needs_to_begin_with_0:
+        wanted_command = None
+        for command_id in commands:
+            command = commands[command_id]
+            if command["type"] == 0:
+                wanted_command = command_id
     
-    if wanted_command == None:
-        raise "error: address did not start with a $0 text"
+        if wanted_command == None:
+            raise "error: address did not start with a $0 text"
+    
+    #start with zero please
+    byte_count = 0
 
-    lines = commands[wanted_command]["lines"]
+    first_line = True
+    for this_command in commands.keys():
+        lines = commands[this_command]["lines"]
+    
+        #add the ending byte to the last line- always seems $57
+        lines[len(lines.keys())-1].append(commands[1]["type"])
+    
+        if first_line:
+            output  = "\n"
+            output += label + ": ; " + hex(start_address) + "\n"
+            first_line = False
 
-    #add the ending byte to the last line- always seems $57
-    lines[len(lines.keys())-1].append(commands[1]["type"])
-
-    output  = "\n"
-    output += label + ": ; " + hex(start_address) + "\n"
-    first = True
-    for line_id in lines:
-        line = lines[line_id]
-        output += spacing + "db "
-        if first:
-            output += "$0, "
-            first = False
-     
-        quotes_open = False
-        first_byte = True
-        was_byte = False
-        byte_count = 0
-        for byte in line:
-            if byte in txt_bytes:
-                if not quotes_open and not first_byte: #start text
-                    output += ", \""
-                    quotes_open = True
-                    first_byte = False
-                if not quotes_open and first_byte: #start text
-                    output += "\""
-                    quotes_open = True
-                output += txt_bytes[byte]
-            elif byte in constant_abbreviation_bytes:
-                if quotes_open:
-                    output += "\""
-                    quotes_open = False
-                if not first_byte:
-                    output += ", "
-                output += constant_abbreviation_bytes[byte]
-            else:
-                if quotes_open:
-                    output += "\""
-                    quotes_open = False
-
-                #if you want the ending byte on the last line
-                #if not (byte == 0x57 or byte == 0x50 or byte == 0x58):
-                if not first_byte:
-                    output += ", "
-
-                output += "$" + hex(byte)[2:]
-                was_byte = True
-
-                #add a comma unless it's the end of the line
-                #if byte_count+1 != len(line):
-                #    output += ", "
-
-            first_byte = False
-            byte_count += 1
-        #close final quotes
-        if quotes_open:
-            output += "\""
+        first = True #first byte
+        for line_id in lines:
+            line = lines[line_id]
+            output += spacing + "db "
+            if first and needs_to_begin_with_0:
+                output += "$0, "
+                first = False
+         
             quotes_open = False
-
-        output += "\n"
+            first_byte = True
+            was_byte = False
+            for byte in line:
+                if byte in txt_bytes:
+                    if not quotes_open and not first_byte: #start text
+                        output += ", \""
+                        quotes_open = True
+                        first_byte = False
+                    if not quotes_open and first_byte: #start text
+                        output += "\""
+                        quotes_open = True
+                    output += txt_bytes[byte]
+                elif byte in constant_abbreviation_bytes:
+                    if quotes_open:
+                        output += "\""
+                        quotes_open = False
+                    if not first_byte:
+                        output += ", "
+                    output += constant_abbreviation_bytes[byte]
+                else:
+                    if quotes_open:
+                        output += "\""
+                        quotes_open = False
+    
+                    #if you want the ending byte on the last line
+                    #if not (byte == 0x57 or byte == 0x50 or byte == 0x58):
+                    if not first_byte:
+                        output += ", "
+    
+                    output += "$" + hex(byte)[2:]
+                    was_byte = True
+    
+                    #add a comma unless it's the end of the line
+                    #if byte_count+1 != len(line):
+                    #    output += ", "
+    
+                first_byte = False
+                byte_count += 1
+            #close final quotes
+            if quotes_open:
+                output += "\""
+                quotes_open = False
+    
+            output += "\n"
 
     #output += "\n"
     print output
-    return output
+    return (output, byte_count)
 
 def is_label_in_asm(label):
     for line in analyze_incbins.asm:

@@ -359,7 +359,7 @@ MapHeaderPointers: ; $01AE
 	dw $5CE5
 	dw $5CE5
 	dw $5CE5
-	dw Loreli_h
+	dw Lorelei_h
 	dw Bruno_h
 	dw Agatha_h
 
@@ -959,52 +959,82 @@ INCBIN "baserom.gbc",$2125,$2442 - $2125
 ; XXX where is the pointer to this data?
 MartInventories: ; 2442
 	; first byte $FE, next byte # of items, last byte $FF
+
 ; Viridian
+ViridianMartText4: ; XXX confirm
 	db $FE,4,POKE_BALL,ANTIDOTE,PARLYZ_HEAL,BURN_HEAL,$FF
+
 ; Pewter
+PewterMartText1:
 	db $FE,7,POKE_BALL,POTION,ESCAPE_ROPE,ANTIDOTE,BURN_HEAL,AWAKENING
 	db PARLYZ_HEAL,$FF
+
 ; Cerulean
+CeruleanMartText1:
 	db $FE,7,POKE_BALL,POTION,REPEL,ANTIDOTE,BURN_HEAL,AWAKENING
 	db PARLYZ_HEAL,$FF
+
 ; Bike shop
 	db $FE,1,BICYCLE,$FF
+
 ; Vermilion
+VermilionMartText1:
 	db $FE,6,POKE_BALL,SUPER_POTION,ICE_HEAL,AWAKENING,PARLYZ_HEAL
 	db REPEL,$FF
+
 ; Lavender
+LavenderMartText1:
 	db $FE,9,GREAT_BALL,SUPER_POTION,REVIVE,ESCAPE_ROPE,SUPER_REPEL
 	db ANTIDOTE,BURN_HEAL,ICE_HEAL,PARLYZ_HEAL,$FF
+
 ; Celadon Dept. Store 2F (1)
+CeladonMart2Text1:
 	db $FE,9,GREAT_BALL,SUPER_POTION,REVIVE,SUPER_REPEL,ANTIDOTE
 	db BURN_HEAL,ICE_HEAL,AWAKENING,PARLYZ_HEAL,$FF
+
 ; Celadon Dept. Store 2F (2)
+CeladonMart2Text2:
 	db $FE,9,TM_32,TM_33,TM_02,TM_07,TM_37,TM_01,TM_05,TM_09,TM_17,$FF
+
 ; Celadon Dept. Store 4F
+CeladonMart4Text1:
 	db $FE,5,POKE_DOLL,FIRE_STONE,THUNDER_STONE,WATER_STONE,LEAF_STONE,$FF
+
 ; Celadon Dept. Store 5F (1)
+CeladonMart5Text3:
 	db $FE,7,X_ACCURACY,GUARD_SPEC_,DIRE_HIT,X_ATTACK,X_DEFEND,X_SPEED
 	db X_SPECIAL,$FF
+
 ; Celadon Dept. Store 5F (2)
+CeladonMart5Text4:
 	db $FE,5,HP_UP,PROTEIN,IRON,CARBOS,CALCIUM,$FF
+
 ; Fuchsia
+FuchsiaMartText1:
 	db $FE,6,ULTRA_BALL,GREAT_BALL,SUPER_POTION,REVIVE,FULL_HEAL
 	db SUPER_REPEL,$FF
+
 ; unused?
 	db $FE,5,GREAT_BALL,HYPER_POTION,SUPER_POTION,FULL_HEAL,REVIVE,$FF
+
 ; Cinnabar
+CinnabarMartText1:
 	db $FE,7,ULTRA_BALL,GREAT_BALL,HYPER_POTION,MAX_REPEL,ESCAPE_ROPE
 	db FULL_HEAL,REVIVE,$FF
+
 ; Saffron
+SaffronMartText1:
 	db $FE,6,GREAT_BALL,HYPER_POTION,MAX_REPEL,ESCAPE_ROPE,FULL_HEAL
 	db REVIVE,$FF
+
 ; Indigo
+IndigoPlateauLobbyText4:
 	db $FE,7,ULTRA_BALL,GREAT_BALL,FULL_RESTORE,MAX_POTION,FULL_HEAL
 	db REVIVE,MAX_REPEL,$FF
 
 TextScriptEndingChar:
         db "@"
-TextScriptEnd:
+TextScriptEnd: ; 24D7 24d7
         ld hl,TextScriptEndingChar
         ret
 
@@ -1134,6 +1164,7 @@ SilphCo6Text9:
 SilphCo6Text10:
 SilphCo7Text10:
 SilphCo7Text11:
+SilphCo7Text12:
 Mansion1Text2:
 Mansion1Text3:
 Mansion2Text2:
@@ -1166,7 +1197,7 @@ UnknownDungeon1Text3:
 SilphCo10Text4:
 SilphCo10Text5:
 SilphCo10Text6:
-Route2Text2: ; 0x24f4
+Route2Text2: ; 24f4 0x424f4
     db $08 ; asm
     ld a, $5c
     call Predef
@@ -1777,6 +1808,7 @@ Delay3: ; 3DD7
 	jp DelayFrames
 
 INCBIN "baserom.gbc",$3DDC,$3DED - $3DDC
+
 GoPAL_SET_CF1C:	; 3ded
 	ld b,$ff
 GoPAL_SET: 	; 3def
@@ -1873,7 +1905,7 @@ INCBIN "baserom.gbc",$425B,$4588-$425B
 
 TitleMons: ; 4588
 ; mons on the title screen are randomly chosen from here
-IF RED
+IF _RED
 	db CHARMANDER
 	db SQUIRTLE
 	db BULBASAUR
@@ -1891,7 +1923,7 @@ IF RED
 	db PONYTA
 	db MAGIKARP
 ENDC
-IF GREEN
+IF _GREEN
 	db BULBASAUR
 	db CHARMANDER
 	db SQUIRTLE
@@ -1909,7 +1941,7 @@ IF GREEN
 	db PONYTA
 	db MAGIKARP
 ENDC
-IF BLUE
+IF _BLUE
 	db SQUIRTLE
 	db CHARMANDER
 	db BULBASAUR
@@ -2428,6 +2460,7 @@ FirstMapSpec:
 	db $04		;Tileset_id
 
 INCBIN "baserom.gbc",$6428,$6448-$6428
+
 FlyWarpDataPtr:
 	db $00,0
         dw Map00FlyWarp
@@ -2516,9 +2549,11 @@ PlayersPCMenuEntries: ; 7AF5
 INCBIN "baserom.gbc",$7B22,$7C49 - $7B22
 
 SECTION "bank2",DATA,BANK[$2]
+
 INCBIN "baserom.gbc",$8000,$4000
 
 SECTION "bank3",DATA,BANK[$3]
+
 INCBIN "baserom.gbc",$C000,$C23D - $C000
 
 ; see also MapHeaderPointers
@@ -2768,13 +2803,14 @@ MapHeaderBanks: ; 423D
 	db $11
 	db $11
 	db $11
-	db BANK(Loreli_h)
+	db BANK(Lorelei_h)
 	db BANK(Bruno_h)
 	db BANK(Agatha_h)
 
 INCBIN "baserom.gbc",$C335,$C766-$C335
 	ld hl,TilesetsHeadPtr
 INCBIN "baserom.gbc",$C769,$C7BE-$C769
+
 TilesetsHeadPtr:
 	TSETHEAD Tset00_Block,Tset00_GFX,Tset00_Coll,$FF,$FF,$FF,$52,2
 	TSETHEAD Tset01_Block,Tset01_GFX,Tset01_Coll,$FF,$FF,$FF,$FF,0
@@ -3678,9 +3714,11 @@ WildDataPointers: ; 4EEB
 		; followed by 20 bytes:
 		; level, species (ten times)
 
-NoMons: ; no wild pokemon
-	db 0
-	db 0
+IF _RED
+NoMons:
+	db $00
+
+	db $00
 
 Route1Mons:
 	db $19
@@ -3695,7 +3733,7 @@ Route1Mons:
 	db 4,PIDGEY
 	db 5,PIDGEY
 
-	db 0
+	db $00
 
 Route2Mons:
 	db $19
@@ -3710,7 +3748,7 @@ Route2Mons:
 	db 4,WEEDLE
 	db 5,WEEDLE
 
-	db 0
+	db $00
 
 Route22Mons:
 	db $19
@@ -3725,7 +3763,7 @@ Route22Mons:
 	db 3,NIDORAN_F
 	db 4,NIDORAN_F
 
-	db 0
+	db $00
 
 ForestMons:
 	db $08
@@ -3740,7 +3778,7 @@ ForestMons:
 	db 3,PIKACHU
 	db 5,PIKACHU
 
-	db 0
+	db $00
 
 Route3Mons:
 	db $14
@@ -3755,7 +3793,7 @@ Route3Mons:
 	db 5,JIGGLYPUFF
 	db 7,JIGGLYPUFF
 
-	db 0
+	db $00
 
 MoonMons1:
 	db $0A
@@ -3770,7 +3808,7 @@ MoonMons1:
 	db 11,ZUBAT
 	db 8,CLEFAIRY
 
-	db 0
+	db $00
 
 MoonMonsB1:
 	db $0A
@@ -3785,7 +3823,7 @@ MoonMonsB1:
 	db 9,CLEFAIRY
 	db 9,GEODUDE
 
-	db 0
+	db $00
 
 MoonMonsB2:
 	db $0A
@@ -3800,7 +3838,7 @@ MoonMonsB2:
 	db 12,ZUBAT
 	db 12,CLEFAIRY
 
-	db 0
+	db $00
 
 Route4Mons:
 	db $14
@@ -3815,7 +3853,7 @@ Route4Mons:
 	db 8,EKANS
 	db 12,EKANS
 
-	db 0
+	db $00
 
 Route24Mons:
 	db $19
@@ -3830,10 +3868,10 @@ Route24Mons:
 	db 8,ABRA
 	db 12,ABRA
 
-	db 0
+	db $00
 
 Route25Mons:
-	db 15
+	db $0F
 	db 8,WEEDLE
 	db 9,KAKUNA
 	db 13,PIDGEY
@@ -3845,10 +3883,10 @@ Route25Mons:
 	db 7,METAPOD
 	db 8,CATERPIE
 
-	db 0
+	db $00
 
 Route9Mons:
-	db 15
+	db $0F
 	db 16,RATTATA
 	db 16,SPEAROW
 	db 14,RATTATA
@@ -3860,10 +3898,10 @@ Route9Mons:
 	db 13,EKANS
 	db 17,EKANS
 
-	db 0
+	db $00
 
 Route5Mons:
-	db 15
+	db $0F
 	db 13,ODDISH
 	db 13,PIDGEY
 	db 15,PIDGEY
@@ -3875,10 +3913,10 @@ Route5Mons:
 	db 14,MANKEY
 	db 16,MANKEY
 
-	db 0
+	db $00
 
 Route6Mons:
-	db 15
+	db $0F
 	db 13,ODDISH
 	db 13,PIDGEY
 	db 15,PIDGEY
@@ -3890,10 +3928,10 @@ Route6Mons:
 	db 14,MANKEY
 	db 16,MANKEY
 
-	db 0
+	db $00
 
 Route11Mons:
-	db 15
+	db $0F
 	db 14,EKANS
 	db 15,SPEAROW
 	db 12,EKANS
@@ -3905,10 +3943,10 @@ Route11Mons:
 	db 11,DROWZEE
 	db 15,DROWZEE
 
-	db 0
+	db $00
 
 TunnelMonsB1:
-	db 15
+	db $0F
 	db 16,ZUBAT
 	db 17,ZUBAT
 	db 17,GEODUDE
@@ -3920,10 +3958,10 @@ TunnelMonsB1:
 	db 13,ONIX
 	db 15,ONIX
 
-	db 0
+	db $00
 
 TunnelMonsB2:
-	db 15
+	db $0F
 	db 16,ZUBAT
 	db 17,ZUBAT
 	db 17,GEODUDE
@@ -3935,10 +3973,10 @@ TunnelMonsB2:
 	db 13,ONIX
 	db 18,GEODUDE
 
-	db 0
+	db $00
 
 Route10Mons:
-	db 15
+	db $0F
 	db 16,VOLTORB
 	db 16,SPEAROW
 	db 14,VOLTORB
@@ -3950,10 +3988,10 @@ Route10Mons:
 	db 13,EKANS
 	db 17,EKANS
 
-	db 0
+	db $00
 
 Route12Mons:
-	db 15
+	db $0F
 	db 24,ODDISH
 	db 25,PIDGEY
 	db 23,PIDGEY
@@ -3965,10 +4003,10 @@ Route12Mons:
 	db 28,GLOOM
 	db 30,GLOOM
 
-	db 0
+	db $00
 
 Route8Mons:
-	db 15
+	db $0F
 	db 18,PIDGEY
 	db 18,MANKEY
 	db 17,EKANS
@@ -3980,10 +4018,10 @@ Route8Mons:
 	db 15,GROWLITHE
 	db 18,GROWLITHE
 
-	db 0
+	db $00
 
 Route7Mons:
-	db 15
+	db $0F
 	db 19,PIDGEY
 	db 19,ODDISH
 	db 17,MANKEY
@@ -3995,15 +4033,17 @@ Route7Mons:
 	db 19,MANKEY
 	db 20,MANKEY
 
-	db 0
+	db $00
 
 TowerMons1:
-	db 0
-	db 0
+	db $00
+
+	db $00
 
 TowerMons2:
-	db 0
-	db 0
+	db $00
+
+	db $00
 
 TowerMons3:
 	db $0A
@@ -4018,7 +4058,7 @@ TowerMons3:
 	db 22,CUBONE
 	db 25,HAUNTER
 
-	db 0
+	db $00
 
 TowerMons4:
 	db $0A
@@ -4033,7 +4073,7 @@ TowerMons4:
 	db 22,CUBONE
 	db 24,GASTLY
 
-	db 0
+	db $00
 
 TowerMons5:
 	db $0A
@@ -4048,10 +4088,10 @@ TowerMons5:
 	db 22,CUBONE
 	db 24,GASTLY
 
-	db 0
+	db $00
 
 TowerMons6:
-	db 15
+	db $0F
 	db 21,GASTLY
 	db 22,GASTLY
 	db 23,GASTLY
@@ -4063,10 +4103,10 @@ TowerMons6:
 	db 24,CUBONE
 	db 28,HAUNTER
 
-	db 0
+	db $00
 
 TowerMons7:
-	db 15
+	db $0F
 	db 21,GASTLY
 	db 22,GASTLY
 	db 23,GASTLY
@@ -4078,7 +4118,7 @@ TowerMons7:
 	db 28,HAUNTER
 	db 30,HAUNTER
 
-	db 0
+	db $00
 
 Route13Mons:
 	db $14
@@ -4093,10 +4133,10 @@ Route13Mons:
 	db 28,GLOOM
 	db 30,GLOOM
 
-	db 0
+	db $00
 
 Route14Mons:
-	db 15
+	db $0F
 	db 24,ODDISH
 	db 26,PIDGEY
 	db 23,DITTO
@@ -4108,10 +4148,10 @@ Route14Mons:
 	db 28,PIDGEOTTO
 	db 30,PIDGEOTTO
 
-	db 0
+	db $00
 
 Route15Mons:
-	db 15
+	db $0F
 	db 24,ODDISH
 	db 26,DITTO
 	db 23,PIDGEY
@@ -4123,7 +4163,7 @@ Route15Mons:
 	db 28,PIDGEOTTO
 	db 30,PIDGEOTTO
 
-	db 0
+	db $00
 
 Route16Mons:
 	db $19
@@ -4138,7 +4178,7 @@ Route16Mons:
 	db 23,RATICATE
 	db 25,RATICATE
 
-	db 0
+	db $00
 
 Route17Mons:
 	db $19
@@ -4153,7 +4193,7 @@ Route17Mons:
 	db 25,FEAROW
 	db 27,FEAROW
 
-	db 0
+	db $00
 
 Route18Mons:
 	db $19
@@ -4168,7 +4208,7 @@ Route18Mons:
 	db 27,FEAROW
 	db 29,FEAROW
 
-	db 0
+	db $00
 
 ZoneMonsCenter:
 	db $1E
@@ -4183,7 +4223,7 @@ ZoneMonsCenter:
 	db 23,SCYTHER
 	db 23,CHANSEY
 
-	db 0
+	db $00
 
 ZoneMons1:
 	db $1E
@@ -4198,7 +4238,7 @@ ZoneMons1:
 	db 25,KANGASKHAN
 	db 28,SCYTHER
 
-	db 0
+	db $00
 
 ZoneMons2:
 	db $1E
@@ -4213,7 +4253,7 @@ ZoneMons2:
 	db 26,CHANSEY
 	db 28,TAUROS
 
-	db 0
+	db $00
 
 ZoneMons3:
 	db $1E
@@ -4228,25 +4268,25 @@ ZoneMons3:
 	db 26,TAUROS
 	db 28,KANGASKHAN
 
-	db 0
+	db $00
 
 WaterMons:
-	db 0
+	db $00
 
-	db 5
-	db 5,   TENTACOOL
-	db 10,  TENTACOOL
-	db 15,  TENTACOOL
-	db 5,   TENTACOOL
-	db 10,  TENTACOOL
-	db 15,  TENTACOOL
-	db 20,  TENTACOOL
-	db 30,  TENTACOOL
-	db 35,  TENTACOOL
-	db 40,  TENTACOOL
+	db $05
+	db 5,TENTACOOL
+	db 10,TENTACOOL
+	db 15,TENTACOOL
+	db 5,TENTACOOL
+	db 10,TENTACOOL
+	db 15,TENTACOOL
+	db 20,TENTACOOL
+	db 30,TENTACOOL
+	db 35,TENTACOOL
+	db 40,TENTACOOL
 
 IslandMons1:
-	db 15
+	db $0F
 	db 30,SEEL
 	db 30,SLOWPOKE
 	db 30,SHELLDER
@@ -4258,7 +4298,7 @@ IslandMons1:
 	db 28,SHELLDER
 	db 38,GOLDUCK
 
-	db 0
+	db $00
 
 IslandMonsB1:
 	db $0A
@@ -4273,7 +4313,7 @@ IslandMonsB1:
 	db 38,DEWGONG
 	db 37,SEADRA
 
-	db 0
+	db $00
 
 IslandMonsB2:
 	db $0A
@@ -4288,7 +4328,7 @@ IslandMonsB2:
 	db 30,GOLBAT
 	db 37,SLOWBRO
 
-	db 0
+	db $00
 
 IslandMonsB3:
 	db $0A
@@ -4303,7 +4343,7 @@ IslandMonsB3:
 	db 39,SEADRA
 	db 37,DEWGONG
 
-	db 0
+	db $00
 
 IslandMonsB4:
 	db $0A
@@ -4318,7 +4358,7 @@ IslandMonsB4:
 	db 39,SLOWBRO
 	db 32,GOLBAT
 
-	db 0
+	db $00
 
 MansionMons1:
 	db $0A
@@ -4333,7 +4373,7 @@ MansionMons1:
 	db 37,WEEZING
 	db 39,MUK
 
-	db 0
+	db $00
 
 MansionMons2:
 	db $0A
@@ -4348,7 +4388,7 @@ MansionMons2:
 	db 39,WEEZING
 	db 37,MUK
 
-	db 0
+	db $00
 
 MansionMons3:
 	db $0A
@@ -4363,7 +4403,7 @@ MansionMons3:
 	db 36,PONYTA
 	db 42,MUK
 
-	db 0
+	db $00
 
 MansionMonsB1:
 	db $0A
@@ -4378,7 +4418,7 @@ MansionMonsB1:
 	db 42,WEEZING
 	db 42,MUK
 
-	db 0
+	db $00
 
 Route21Mons:
 	db $19
@@ -4393,7 +4433,7 @@ Route21Mons:
 	db 30,TANGELA
 	db 32,TANGELA
 
-	db 5
+	db $05
 	db 5,TENTACOOL
 	db 10,TENTACOOL
 	db 15,TENTACOOL
@@ -4418,10 +4458,10 @@ DungeonMons1:
 	db 53,RAICHU
 	db 53,DITTO
 
-	db 0
+	db $00
 
 DungeonMons2:
-	db 15
+	db $0F
 	db 51,DODRIO
 	db 51,VENOMOTH
 	db 51,KADABRA
@@ -4433,7 +4473,7 @@ DungeonMons2:
 	db 55,DITTO
 	db 60,DITTO
 
-	db 0
+	db $00
 
 DungeonMonsB1:
 	db $19
@@ -4448,7 +4488,7 @@ DungeonMonsB1:
 	db 63,DITTO
 	db 67,DITTO
 
-	db 0
+	db $00
 
 PowerPlantMons:
 	db $0A
@@ -4463,7 +4503,7 @@ PowerPlantMons:
 	db 33,ELECTABUZZ
 	db 36,ELECTABUZZ
 
-	db 0
+	db $00
 
 Route23Mons:
 	db $0A
@@ -4478,7 +4518,7 @@ Route23Mons:
 	db 41,FEAROW
 	db 43,FEAROW
 
-	db 0
+	db $00
 
 PlateauMons2:
 	db $0A
@@ -4493,10 +4533,10 @@ PlateauMons2:
 	db 40,MAROWAK
 	db 43,GRAVELER
 
-	db 0
+	db $00
 
 PlateauMons3:
-	db 15
+	db $0F
 	db 24,MACHOP
 	db 26,GEODUDE
 	db 22,ZUBAT
@@ -4508,10 +4548,10 @@ PlateauMons3:
 	db 42,MACHOKE
 	db 45,MACHOKE
 
-	db 0
+	db $00
 
 PlateauMons1:
-	db 15
+	db $0F
 	db 24,MACHOP
 	db 26,GEODUDE
 	db 22,ZUBAT
@@ -4523,7 +4563,7 @@ PlateauMons1:
 	db 42,MACHOKE
 	db 43,MAROWAK
 
-	db 0
+	db $00
 
 CaveMons:
 	db $14
@@ -4538,7 +4578,2690 @@ CaveMons:
 	db 29,DUGTRIO
 	db 31,DUGTRIO
 
-	db 0
+	db $00
+
+ENDC
+IF _GREEN || !_JAPAN && _BLUE
+NoMons:
+	db $00
+
+	db $00
+
+Route1Mons:
+	db $19
+	db 3,PIDGEY
+	db 3,RATTATA
+	db 3,RATTATA
+	db 2,RATTATA
+	db 2,PIDGEY
+	db 3,PIDGEY
+	db 3,PIDGEY
+	db 4,RATTATA
+	db 4,PIDGEY
+	db 5,PIDGEY
+
+	db $00
+
+Route2Mons:
+	db $19
+	db 3,RATTATA
+	db 3,PIDGEY
+	db 4,PIDGEY
+	db 4,RATTATA
+	db 5,PIDGEY
+	db 3,CATERPIE
+	db 2,RATTATA
+	db 5,RATTATA
+	db 4,CATERPIE
+	db 5,CATERPIE
+
+	db $00
+
+Route22Mons:
+	db $19
+	db 3,RATTATA
+	db 3,NIDORAN_F
+	db 4,RATTATA
+	db 4,NIDORAN_F
+	db 2,RATTATA
+	db 2,NIDORAN_F
+	db 3,SPEAROW
+	db 5,SPEAROW
+	db 3,NIDORAN_M
+	db 4,NIDORAN_M
+
+	db $00
+
+ForestMons:
+	db $08
+	db 4,CATERPIE
+	db 5,METAPOD
+	db 3,CATERPIE
+	db 5,CATERPIE
+	db 4,METAPOD
+	db 6,METAPOD
+	db 4,KAKUNA
+	db 3,WEEDLE
+	db 3,PIKACHU
+	db 5,PIKACHU
+
+	db $00
+
+Route3Mons:
+	db $14
+	db 6,PIDGEY
+	db 5,SPEAROW
+	db 7,PIDGEY
+	db 6,SPEAROW
+	db 7,SPEAROW
+	db 8,PIDGEY
+	db 8,SPEAROW
+	db 3,JIGGLYPUFF
+	db 5,JIGGLYPUFF
+	db 7,JIGGLYPUFF
+
+	db $00
+
+MoonMons1:
+	db $0A
+	db 8,ZUBAT
+	db 7,ZUBAT
+	db 9,ZUBAT
+	db 8,GEODUDE
+	db 6,ZUBAT
+	db 10,ZUBAT
+	db 10,GEODUDE
+	db 8,PARAS
+	db 11,ZUBAT
+	db 8,CLEFAIRY
+
+	db $00
+
+MoonMonsB1:
+	db $0A
+	db 8,ZUBAT
+	db 7,ZUBAT
+	db 7,GEODUDE
+	db 8,GEODUDE
+	db 9,ZUBAT
+	db 10,PARAS
+	db 10,ZUBAT
+	db 11,ZUBAT
+	db 9,CLEFAIRY
+	db 9,GEODUDE
+
+	db $00
+
+MoonMonsB2:
+	db $0A
+	db 9,ZUBAT
+	db 9,GEODUDE
+	db 10,ZUBAT
+	db 10,GEODUDE
+	db 11,ZUBAT
+	db 10,PARAS
+	db 12,PARAS
+	db 10,CLEFAIRY
+	db 12,ZUBAT
+	db 12,CLEFAIRY
+
+	db $00
+
+Route4Mons:
+	db $14
+	db 10,RATTATA
+	db 10,SPEAROW
+	db 8,RATTATA
+	db 6,SANDSHREW
+	db 8,SPEAROW
+	db 10,SANDSHREW
+	db 12,RATTATA
+	db 12,SPEAROW
+	db 8,SANDSHREW
+	db 12,SANDSHREW
+
+	db $00
+
+Route24Mons:
+	db $19
+	db 7,CATERPIE
+	db 8,METAPOD
+	db 12,PIDGEY
+	db 12,BELLSPROUT
+	db 13,BELLSPROUT
+	db 10,ABRA
+	db 14,BELLSPROUT
+	db 13,PIDGEY
+	db 8,ABRA
+	db 12,ABRA
+
+	db $00
+
+Route25Mons:
+	db $0F
+	db 8,CATERPIE
+	db 9,METAPOD
+	db 13,PIDGEY
+	db 12,BELLSPROUT
+	db 13,BELLSPROUT
+	db 12,ABRA
+	db 14,BELLSPROUT
+	db 10,ABRA
+	db 7,KAKUNA
+	db 8,WEEDLE
+
+	db $00
+
+Route9Mons:
+	db $0F
+	db 16,RATTATA
+	db 16,SPEAROW
+	db 14,RATTATA
+	db 11,SANDSHREW
+	db 13,SPEAROW
+	db 15,SANDSHREW
+	db 17,RATTATA
+	db 17,SPEAROW
+	db 13,SANDSHREW
+	db 17,SANDSHREW
+
+	db $00
+
+Route5Mons:
+	db $0F
+	db 13,BELLSPROUT
+	db 13,PIDGEY
+	db 15,PIDGEY
+	db 10,MEOWTH
+	db 12,MEOWTH
+	db 15,BELLSPROUT
+	db 16,BELLSPROUT
+	db 16,PIDGEY
+	db 14,MEOWTH
+	db 16,MEOWTH
+
+	db $00
+
+Route6Mons:
+	db $0F
+	db 13,BELLSPROUT
+	db 13,PIDGEY
+	db 15,PIDGEY
+	db 10,MEOWTH
+	db 12,MEOWTH
+	db 15,BELLSPROUT
+	db 16,BELLSPROUT
+	db 16,PIDGEY
+	db 14,MEOWTH
+	db 16,MEOWTH
+
+	db $00
+
+Route11Mons:
+	db $0F
+	db 14,SANDSHREW
+	db 15,SPEAROW
+	db 12,SANDSHREW
+	db 9,DROWZEE
+	db 13,SPEAROW
+	db 13,DROWZEE
+	db 15,SANDSHREW
+	db 17,SPEAROW
+	db 11,DROWZEE
+	db 15,DROWZEE
+
+	db $00
+
+TunnelMonsB1:
+	db $0F
+	db 16,ZUBAT
+	db 17,ZUBAT
+	db 17,GEODUDE
+	db 15,MACHOP
+	db 16,GEODUDE
+	db 18,ZUBAT
+	db 15,ZUBAT
+	db 17,MACHOP
+	db 13,ONIX
+	db 15,ONIX
+
+	db $00
+
+TunnelMonsB2:
+	db $0F
+	db 16,ZUBAT
+	db 17,ZUBAT
+	db 17,GEODUDE
+	db 15,MACHOP
+	db 16,GEODUDE
+	db 18,ZUBAT
+	db 17,MACHOP
+	db 17,ONIX
+	db 13,ONIX
+	db 18,GEODUDE
+
+	db $00
+
+Route10Mons:
+	db $0F
+	db 16,VOLTORB
+	db 16,SPEAROW
+	db 14,VOLTORB
+	db 11,SANDSHREW
+	db 13,SPEAROW
+	db 15,SANDSHREW
+	db 17,VOLTORB
+	db 17,SPEAROW
+	db 13,SANDSHREW
+	db 17,SANDSHREW
+
+	db $00
+
+Route12Mons:
+	db $0F
+	db 24,BELLSPROUT
+	db 25,PIDGEY
+	db 23,PIDGEY
+	db 24,VENONAT
+	db 22,BELLSPROUT
+	db 26,VENONAT
+	db 26,BELLSPROUT
+	db 27,PIDGEY
+	db 28,WEEPINBELL
+	db 30,WEEPINBELL
+
+	db $00
+
+Route8Mons:
+	db $0F
+	db 18,PIDGEY
+	db 18,MEOWTH
+	db 17,SANDSHREW
+	db 16,VULPIX
+	db 20,PIDGEY
+	db 20,MEOWTH
+	db 19,SANDSHREW
+	db 17,VULPIX
+	db 15,VULPIX
+	db 18,VULPIX
+
+	db $00
+
+Route7Mons:
+	db $0F
+	db 19,PIDGEY
+	db 19,BELLSPROUT
+	db 17,MEOWTH
+	db 22,BELLSPROUT
+	db 22,PIDGEY
+	db 18,MEOWTH
+	db 18,VULPIX
+	db 20,VULPIX
+	db 19,MEOWTH
+	db 20,MEOWTH
+
+	db $00
+
+TowerMons1:
+	db $00
+
+	db $00
+
+TowerMons2:
+	db $00
+
+	db $00
+
+TowerMons3:
+	db $0A
+	db 20,GASTLY
+	db 21,GASTLY
+	db 22,GASTLY
+	db 23,GASTLY
+	db 19,GASTLY
+	db 18,GASTLY
+	db 24,GASTLY
+	db 20,CUBONE
+	db 22,CUBONE
+	db 25,HAUNTER
+
+	db $00
+
+TowerMons4:
+	db $0A
+	db 20,GASTLY
+	db 21,GASTLY
+	db 22,GASTLY
+	db 23,GASTLY
+	db 19,GASTLY
+	db 18,GASTLY
+	db 25,HAUNTER
+	db 20,CUBONE
+	db 22,CUBONE
+	db 24,GASTLY
+
+	db $00
+
+TowerMons5:
+	db $0A
+	db 20,GASTLY
+	db 21,GASTLY
+	db 22,GASTLY
+	db 23,GASTLY
+	db 19,GASTLY
+	db 18,GASTLY
+	db 25,HAUNTER
+	db 20,CUBONE
+	db 22,CUBONE
+	db 24,GASTLY
+
+	db $00
+
+TowerMons6:
+	db $0F
+	db 21,GASTLY
+	db 22,GASTLY
+	db 23,GASTLY
+	db 24,GASTLY
+	db 20,GASTLY
+	db 19,GASTLY
+	db 26,HAUNTER
+	db 22,CUBONE
+	db 24,CUBONE
+	db 28,HAUNTER
+
+	db $00
+
+TowerMons7:
+	db $0F
+	db 21,GASTLY
+	db 22,GASTLY
+	db 23,GASTLY
+	db 24,GASTLY
+	db 20,GASTLY
+	db 28,HAUNTER
+	db 22,CUBONE
+	db 24,CUBONE
+	db 28,HAUNTER
+	db 30,HAUNTER
+
+	db $00
+
+Route13Mons:
+	db $14
+	db 24,BELLSPROUT
+	db 25,PIDGEY
+	db 27,PIDGEY
+	db 24,VENONAT
+	db 22,BELLSPROUT
+	db 26,VENONAT
+	db 26,BELLSPROUT
+	db 25,DITTO
+	db 28,WEEPINBELL
+	db 30,WEEPINBELL
+
+	db $00
+
+Route14Mons:
+	db $0F
+	db 24,BELLSPROUT
+	db 26,PIDGEY
+	db 23,DITTO
+	db 24,VENONAT
+	db 22,BELLSPROUT
+	db 26,VENONAT
+	db 26,BELLSPROUT
+	db 30,WEEPINBELL
+	db 28,PIDGEOTTO
+	db 30,PIDGEOTTO
+
+	db $00
+
+Route15Mons:
+	db $0F
+	db 24,BELLSPROUT
+	db 26,DITTO
+	db 23,PIDGEY
+	db 26,VENONAT
+	db 22,BELLSPROUT
+	db 28,VENONAT
+	db 26,BELLSPROUT
+	db 30,WEEPINBELL
+	db 28,PIDGEOTTO
+	db 30,PIDGEOTTO
+
+	db $00
+
+Route16Mons:
+	db $19
+	db 20,SPEAROW
+	db 22,SPEAROW
+	db 18,RATTATA
+	db 20,DODUO
+	db 20,RATTATA
+	db 18,DODUO
+	db 22,DODUO
+	db 22,RATTATA
+	db 23,RATICATE
+	db 25,RATICATE
+
+	db $00
+
+Route17Mons:
+	db $19
+	db 20,SPEAROW
+	db 22,SPEAROW
+	db 25,RATICATE
+	db 24,DODUO
+	db 27,RATICATE
+	db 26,DODUO
+	db 28,DODUO
+	db 29,RATICATE
+	db 25,FEAROW
+	db 27,FEAROW
+
+	db $00
+
+Route18Mons:
+	db $19
+	db 20,SPEAROW
+	db 22,SPEAROW
+	db 25,RATICATE
+	db 24,DODUO
+	db 25,FEAROW
+	db 26,DODUO
+	db 28,DODUO
+	db 29,RATICATE
+	db 27,FEAROW
+	db 29,FEAROW
+
+	db $00
+
+ZoneMonsCenter:
+	db $1E
+	db 22,NIDORAN_F
+	db 25,RHYHORN
+	db 22,VENONAT
+	db 24,EXEGGCUTE
+	db 31,NIDORINA
+	db 25,EXEGGCUTE
+	db 31,NIDORINO
+	db 30,PARASECT
+	db 23,PINSIR
+	db 23,CHANSEY
+
+	db $00
+
+ZoneMons1:
+	db $1E
+	db 24,NIDORAN_F
+	db 26,DODUO
+	db 22,PARAS
+	db 25,EXEGGCUTE
+	db 33,NIDORINA
+	db 23,EXEGGCUTE
+	db 24,NIDORAN_M
+	db 25,PARASECT
+	db 25,KANGASKHAN
+	db 28,PINSIR
+
+	db $00
+
+ZoneMons2:
+	db $1E
+	db 22,NIDORAN_F
+	db 26,RHYHORN
+	db 23,PARAS
+	db 25,EXEGGCUTE
+	db 30,NIDORINA
+	db 27,EXEGGCUTE
+	db 30,NIDORINO
+	db 32,VENOMOTH
+	db 26,CHANSEY
+	db 28,TAUROS
+
+	db $00
+
+ZoneMons3:
+	db $1E
+	db 25,NIDORAN_F
+	db 26,DODUO
+	db 23,VENONAT
+	db 24,EXEGGCUTE
+	db 33,NIDORINA
+	db 26,EXEGGCUTE
+	db 25,NIDORAN_M
+	db 31,VENOMOTH
+	db 26,TAUROS
+	db 28,KANGASKHAN
+
+	db $00
+
+WaterMons:
+	db $00
+
+	db $05
+	db 5,TENTACOOL
+	db 10,TENTACOOL
+	db 15,TENTACOOL
+	db 5,TENTACOOL
+	db 10,TENTACOOL
+	db 15,TENTACOOL
+	db 20,TENTACOOL
+	db 30,TENTACOOL
+	db 35,TENTACOOL
+	db 40,TENTACOOL
+
+IslandMons1:
+	db $0F
+	db 30,SEEL
+	db 30,PSYDUCK
+	db 30,STARYU
+	db 30,KRABBY
+	db 28,KRABBY
+	db 21,ZUBAT
+	db 29,GOLBAT
+	db 28,SLOWPOKE
+	db 28,STARYU
+	db 38,SLOWBRO
+
+	db $00
+
+IslandMonsB1:
+	db $0A
+	db 30,SHELLDER
+	db 30,KRABBY
+	db 32,STARYU
+	db 32,KRABBY
+	db 28,PSYDUCK
+	db 30,SEEL
+	db 30,PSYDUCK
+	db 28,SEEL
+	db 38,DEWGONG
+	db 37,KINGLER
+
+	db $00
+
+IslandMonsB2:
+	db $0A
+	db 30,SEEL
+	db 30,PSYDUCK
+	db 32,SEEL
+	db 32,PSYDUCK
+	db 28,KRABBY
+	db 30,SHELLDER
+	db 30,KRABBY
+	db 28,STARYU
+	db 30,GOLBAT
+	db 37,GOLDUCK
+
+	db $00
+
+IslandMonsB3:
+	db $0A
+	db 31,PSYDUCK
+	db 31,SEEL
+	db 33,PSYDUCK
+	db 33,SEEL
+	db 29,KRABBY
+	db 31,STARYU
+	db 31,KRABBY
+	db 29,STARYU
+	db 39,KINGLER
+	db 37,DEWGONG
+
+	db $00
+
+IslandMonsB4:
+	db $0A
+	db 31,KRABBY
+	db 31,STARYU
+	db 33,KRABBY
+	db 33,STARYU
+	db 29,PSYDUCK
+	db 31,SEEL
+	db 31,PSYDUCK
+	db 29,SEEL
+	db 39,GOLDUCK
+	db 32,GOLBAT
+
+	db $00
+
+MansionMons1:
+	db $0A
+	db 32,GRIMER
+	db 30,GRIMER
+	db 34,PONYTA
+	db 30,PONYTA
+	db 34,VULPIX
+	db 32,PONYTA
+	db 30,KOFFING
+	db 28,PONYTA
+	db 37,MUK
+	db 39,WEEZING
+
+	db $00
+
+MansionMons2:
+	db $0A
+	db 32,VULPIX
+	db 34,GRIMER
+	db 34,GRIMER
+	db 30,PONYTA
+	db 30,GRIMER
+	db 32,PONYTA
+	db 30,KOFFING
+	db 28,PONYTA
+	db 39,MUK
+	db 37,WEEZING
+
+	db $00
+
+MansionMons3:
+	db $0A
+	db 31,GRIMER
+	db 33,VULPIX
+	db 35,GRIMER
+	db 32,PONYTA
+	db 34,MAGMAR
+	db 40,MUK
+	db 34,KOFFING
+	db 38,MUK
+	db 36,PONYTA
+	db 42,WEEZING
+
+	db $00
+
+MansionMonsB1:
+	db $0A
+	db 33,GRIMER
+	db 31,GRIMER
+	db 35,VULPIX
+	db 32,PONYTA
+	db 31,GRIMER
+	db 40,MUK
+	db 34,PONYTA
+	db 35,KOFFING
+	db 38,MAGMAR
+	db 42,WEEZING
+
+	db $00
+
+Route21Mons:
+	db $19
+	db 21,RATTATA
+	db 23,PIDGEY
+	db 30,RATICATE
+	db 23,RATTATA
+	db 21,PIDGEY
+	db 30,PIDGEOTTO
+	db 32,PIDGEOTTO
+	db 28,TANGELA
+	db 30,TANGELA
+	db 32,TANGELA
+
+	db $05
+	db 5,TENTACOOL
+	db 10,TENTACOOL
+	db 15,TENTACOOL
+	db 5,TENTACOOL
+	db 10,TENTACOOL
+	db 15,TENTACOOL
+	db 20,TENTACOOL
+	db 30,TENTACOOL
+	db 35,TENTACOOL
+	db 40,TENTACOOL
+
+DungeonMons1:
+	db $0A
+	db 46,GOLBAT
+	db 46,HYPNO
+	db 46,MAGNETON
+	db 49,DODRIO
+	db 49,VENOMOTH
+	db 52,SANDSLASH
+	db 49,KADABRA
+	db 52,PARASECT
+	db 53,RAICHU
+	db 53,DITTO
+
+	db $00
+
+DungeonMons2:
+	db $0F
+	db 51,DODRIO
+	db 51,VENOMOTH
+	db 51,KADABRA
+	db 52,RHYDON
+	db 52,MAROWAK
+	db 52,ELECTRODE
+	db 56,CHANSEY
+	db 54,WIGGLYTUFF
+	db 55,DITTO
+	db 60,DITTO
+
+	db $00
+
+DungeonMonsB1:
+	db $19
+	db 55,RHYDON
+	db 55,MAROWAK
+	db 55,ELECTRODE
+	db 64,CHANSEY
+	db 64,PARASECT
+	db 64,RAICHU
+	db 57,SANDSLASH
+	db 65,DITTO
+	db 63,DITTO
+	db 67,DITTO
+
+	db $00
+
+PowerPlantMons:
+	db $0A
+	db 21,VOLTORB
+	db 21,MAGNEMITE
+	db 20,PIKACHU
+	db 24,PIKACHU
+	db 23,MAGNEMITE
+	db 23,VOLTORB
+	db 32,MAGNETON
+	db 35,MAGNETON
+	db 33,RAICHU
+	db 36,RAICHU
+
+	db $00
+
+Route23Mons:
+	db $0A
+	db 26,SANDSHREW
+	db 33,DITTO
+	db 26,SPEAROW
+	db 38,FEAROW
+	db 38,DITTO
+	db 38,FEAROW
+	db 41,SANDSLASH
+	db 43,DITTO
+	db 41,FEAROW
+	db 43,FEAROW
+
+	db $00
+
+PlateauMons2:
+	db $0A
+	db 22,MACHOP
+	db 24,GEODUDE
+	db 26,ZUBAT
+	db 36,ONIX
+	db 39,ONIX
+	db 42,ONIX
+	db 41,MACHOKE
+	db 40,GOLBAT
+	db 40,MAROWAK
+	db 43,GRAVELER
+
+	db $00
+
+PlateauMons3:
+	db $0F
+	db 24,MACHOP
+	db 26,GEODUDE
+	db 22,ZUBAT
+	db 42,ONIX
+	db 40,VENOMOTH
+	db 45,ONIX
+	db 43,GRAVELER
+	db 41,GOLBAT
+	db 42,MACHOKE
+	db 45,MACHOKE
+
+	db $00
+
+PlateauMons1:
+	db $0F
+	db 24,MACHOP
+	db 26,GEODUDE
+	db 22,ZUBAT
+	db 36,ONIX
+	db 39,ONIX
+	db 42,ONIX
+	db 41,GRAVELER
+	db 41,GOLBAT
+	db 42,MACHOKE
+	db 43,MAROWAK
+
+	db $00
+
+CaveMons:
+	db $14
+	db 18,DIGLETT
+	db 19,DIGLETT
+	db 17,DIGLETT
+	db 20,DIGLETT
+	db 16,DIGLETT
+	db 15,DIGLETT
+	db 21,DIGLETT
+	db 22,DIGLETT
+	db 29,DUGTRIO
+	db 31,DUGTRIO
+
+	db $00
+
+ENDC
+IF _JAPAN && _BLUE
+NoMons:
+	db $00
+
+	db $00
+
+Route1Mons:
+	db $19
+	db 3,PIDGEY
+	db 3,RATTATA
+	db 3,RATTATA
+	db 2,RATTATA
+	db 2,PIDGEY
+	db 3,PIDGEY
+	db 3,PIDGEY
+	db 4,RATTATA
+	db 4,PIDGEY
+	db 5,PIDGEY
+
+	db $00
+
+Route2Mons:
+	db $19
+	db 3,RATTATA
+	db 3,PIDGEY
+	db 4,PIDGEY
+	db 4,RATTATA
+	db 5,PIDGEY
+	db 3,CATERPIE
+	db 2,RATTATA
+	db 5,RATTATA
+	db 4,CATERPIE
+	db 5,CATERPIE
+
+	db $00
+
+Route22Mons:
+	db $19
+	db 3,RATTATA
+	db 3,NIDORAN_M
+	db 4,RATTATA
+	db 4,NIDORAN_M
+	db 2,RATTATA
+	db 2,NIDORAN_M
+	db 3,SPEAROW
+	db 5,SPEAROW
+	db 3,NIDORAN_F
+	db 4,NIDORAN_F
+
+	db $00
+
+ForestMons:
+	db $08
+	db 4,CATERPIE
+	db 5,METAPOD
+	db 3,CATERPIE
+	db 5,CATERPIE
+	db 4,METAPOD
+	db 6,METAPOD
+	db 4,KAKUNA
+	db 3,WEEDLE
+	db 3,PIKACHU
+	db 5,PIKACHU
+
+	db $00
+
+Route3Mons:
+	db $14
+	db 6,PIDGEY
+	db 5,SPEAROW
+	db 7,PIDGEY
+	db 6,SPEAROW
+	db 7,SPEAROW
+	db 8,PIDGEY
+	db 8,SPEAROW
+	db 3,JIGGLYPUFF
+	db 5,JIGGLYPUFF
+	db 7,JIGGLYPUFF
+
+	db $00
+
+MoonMons1:
+	db $0A
+	db 8,ZUBAT
+	db 7,ZUBAT
+	db 9,ZUBAT
+	db 8,GEODUDE
+	db 6,ZUBAT
+	db 10,ZUBAT
+	db 10,GEODUDE
+	db 8,PARAS
+	db 11,ZUBAT
+	db 8,CLEFAIRY
+
+	db $00
+
+MoonMonsB1:
+	db $0A
+	db 8,ZUBAT
+	db 7,ZUBAT
+	db 7,GEODUDE
+	db 8,GEODUDE
+	db 9,ZUBAT
+	db 10,PARAS
+	db 10,ZUBAT
+	db 11,ZUBAT
+	db 9,CLEFAIRY
+	db 9,GEODUDE
+
+	db $00
+
+MoonMonsB2:
+	db $0A
+	db 9,ZUBAT
+	db 9,GEODUDE
+	db 10,ZUBAT
+	db 10,GEODUDE
+	db 11,ZUBAT
+	db 10,PARAS
+	db 12,PARAS
+	db 10,CLEFAIRY
+	db 12,ZUBAT
+	db 12,CLEFAIRY
+
+	db $00
+
+Route4Mons:
+	db $14
+	db 10,RATTATA
+	db 10,SPEAROW
+	db 8,RATTATA
+	db 6,SANDSHREW
+	db 8,SPEAROW
+	db 10,SANDSHREW
+	db 12,RATTATA
+	db 12,SPEAROW
+	db 8,SANDSHREW
+	db 12,SANDSHREW
+
+	db $00
+
+Route24Mons:
+	db $19
+	db 7,CATERPIE
+	db 8,METAPOD
+	db 12,PIDGEY
+	db 12,ODDISH
+	db 13,ODDISH
+	db 10,ABRA
+	db 14,ODDISH
+	db 13,PIDGEY
+	db 8,ABRA
+	db 12,ABRA
+
+	db $00
+
+Route25Mons:
+	db $0F
+	db 8,CATERPIE
+	db 9,METAPOD
+	db 13,PIDGEY
+	db 12,ODDISH
+	db 13,ODDISH
+	db 12,ABRA
+	db 14,ODDISH
+	db 10,ABRA
+	db 7,KAKUNA
+	db 8,WEEDLE
+
+	db $00
+
+Route9Mons:
+	db $0F
+	db 16,RATTATA
+	db 16,SPEAROW
+	db 14,RATTATA
+	db 11,SANDSHREW
+	db 13,SPEAROW
+	db 15,SANDSHREW
+	db 17,RATTATA
+	db 17,SPEAROW
+	db 13,SANDSHREW
+	db 17,SANDSHREW
+
+	db $00
+
+Route5Mons:
+	db $0F
+	db 13,ODDISH
+	db 13,PIDGEY
+	db 15,PIDGEY
+	db 10,MEOWTH
+	db 12,MEOWTH
+	db 15,ODDISH
+	db 16,ODDISH
+	db 16,PIDGEY
+	db 14,MEOWTH
+	db 16,MEOWTH
+
+	db $00
+
+Route6Mons:
+	db $0F
+	db 13,ODDISH
+	db 13,PIDGEY
+	db 15,PIDGEY
+	db 10,MEOWTH
+	db 12,MEOWTH
+	db 15,ODDISH
+	db 16,ODDISH
+	db 16,PIDGEY
+	db 14,MEOWTH
+	db 16,MEOWTH
+
+	db $00
+
+Route11Mons:
+	db $0F
+	db 14,SANDSHREW
+	db 15,SPEAROW
+	db 12,SANDSHREW
+	db 9,DROWZEE
+	db 13,SPEAROW
+	db 13,DROWZEE
+	db 15,SANDSHREW
+	db 17,SPEAROW
+	db 11,DROWZEE
+	db 15,DROWZEE
+
+	db $00
+
+TunnelMonsB1:
+	db $0F
+	db 16,ZUBAT
+	db 17,ZUBAT
+	db 17,GEODUDE
+	db 15,MACHOP
+	db 16,GEODUDE
+	db 18,DITTO
+	db 15,ZUBAT
+	db 17,MACHOP
+	db 13,ONIX
+	db 15,ONIX
+
+	db $00
+
+TunnelMonsB2:
+	db $0F
+	db 16,ZUBAT
+	db 17,ZUBAT
+	db 17,GEODUDE
+	db 15,MACHOP
+	db 16,GEODUDE
+	db 18,DITTO
+	db 17,MACHOP
+	db 17,ONIX
+	db 13,ONIX
+	db 18,GEODUDE
+
+	db $00
+
+Route10Mons:
+	db $0F
+	db 16,VOLTORB
+	db 16,SPEAROW
+	db 14,VOLTORB
+	db 11,SANDSHREW
+	db 13,SPEAROW
+	db 15,SANDSHREW
+	db 17,VOLTORB
+	db 17,SPEAROW
+	db 13,SANDSHREW
+	db 17,SANDSHREW
+
+	db $00
+
+Route12Mons:
+	db $0F
+	db 24,ODDISH
+	db 25,PIDGEY
+	db 23,PIDGEY
+	db 24,VENONAT
+	db 22,ODDISH
+	db 26,VENONAT
+	db 26,ODDISH
+	db 27,PIDGEY
+	db 28,GLOOM
+	db 30,GLOOM
+
+	db $00
+
+Route8Mons:
+	db $0F
+	db 18,PIDGEY
+	db 18,MEOWTH
+	db 17,SANDSHREW
+	db 16,GROWLITHE
+	db 20,PIDGEY
+	db 20,MEOWTH
+	db 19,SANDSHREW
+	db 17,GROWLITHE
+	db 15,GROWLITHE
+	db 18,GROWLITHE
+
+	db $00
+
+Route7Mons:
+	db $0F
+	db 19,PIDGEY
+	db 19,ODDISH
+	db 17,MEOWTH
+	db 22,ODDISH
+	db 22,PIDGEY
+	db 18,MEOWTH
+	db 18,GROWLITHE
+	db 20,GROWLITHE
+	db 19,MEOWTH
+	db 20,MEOWTH
+
+	db $00
+
+TowerMons1:
+	db $00
+
+	db $00
+
+TowerMons2:
+	db $00
+
+	db $00
+
+TowerMons3:
+	db $0A
+	db 20,GASTLY
+	db 21,GASTLY
+	db 22,GASTLY
+	db 23,GASTLY
+	db 19,GASTLY
+	db 18,GASTLY
+	db 24,GASTLY
+	db 20,CUBONE
+	db 22,CUBONE
+	db 25,HAUNTER
+
+	db $00
+
+TowerMons4:
+	db $0A
+	db 20,GASTLY
+	db 21,GASTLY
+	db 22,GASTLY
+	db 23,GASTLY
+	db 19,GASTLY
+	db 18,GASTLY
+	db 25,HAUNTER
+	db 20,CUBONE
+	db 22,CUBONE
+	db 24,GASTLY
+
+	db $00
+
+TowerMons5:
+	db $0A
+	db 20,GASTLY
+	db 21,GASTLY
+	db 22,GASTLY
+	db 23,GASTLY
+	db 19,GASTLY
+	db 18,GASTLY
+	db 25,HAUNTER
+	db 20,CUBONE
+	db 22,CUBONE
+	db 24,GASTLY
+
+	db $00
+
+TowerMons6:
+	db $0F
+	db 21,GASTLY
+	db 22,GASTLY
+	db 23,GASTLY
+	db 24,GASTLY
+	db 20,GASTLY
+	db 19,GASTLY
+	db 26,HAUNTER
+	db 22,CUBONE
+	db 24,CUBONE
+	db 28,HAUNTER
+
+	db $00
+
+TowerMons7:
+	db $0F
+	db 21,GASTLY
+	db 22,GASTLY
+	db 23,GASTLY
+	db 24,GASTLY
+	db 20,GASTLY
+	db 28,HAUNTER
+	db 22,CUBONE
+	db 24,CUBONE
+	db 28,HAUNTER
+	db 30,HAUNTER
+
+	db $00
+
+Route13Mons:
+	db $14
+	db 24,ODDISH
+	db 25,PIDGEY
+	db 27,PIDGEY
+	db 24,VENONAT
+	db 22,ODDISH
+	db 26,VENONAT
+	db 26,ODDISH
+	db 25,DITTO
+	db 28,GLOOM
+	db 30,GLOOM
+
+	db $00
+
+Route14Mons:
+	db $0F
+	db 24,ODDISH
+	db 26,PIDGEY
+	db 23,DITTO
+	db 24,VENONAT
+	db 22,ODDISH
+	db 26,VENONAT
+	db 26,ODDISH
+	db 30,GLOOM
+	db 28,PIDGEOTTO
+	db 30,PIDGEOTTO
+
+	db $00
+
+Route15Mons:
+	db $0F
+	db 24,ODDISH
+	db 26,DITTO
+	db 23,PIDGEY
+	db 26,VENONAT
+	db 22,ODDISH
+	db 28,VENONAT
+	db 26,ODDISH
+	db 30,GLOOM
+	db 28,PIDGEOTTO
+	db 30,PIDGEOTTO
+
+	db $00
+
+Route16Mons:
+	db $19
+	db 20,SPEAROW
+	db 22,SPEAROW
+	db 18,RATTATA
+	db 20,DODUO
+	db 20,RATTATA
+	db 18,DODUO
+	db 22,DODUO
+	db 22,RATTATA
+	db 23,RATICATE
+	db 25,RATICATE
+
+	db $00
+
+Route17Mons:
+	db $19
+	db 20,SPEAROW
+	db 22,SPEAROW
+	db 25,RATICATE
+	db 24,DODUO
+	db 27,RATICATE
+	db 26,DODUO
+	db 28,DODUO
+	db 29,RATICATE
+	db 25,FEAROW
+	db 27,FEAROW
+
+	db $00
+
+Route18Mons:
+	db $19
+	db 20,SPEAROW
+	db 22,SPEAROW
+	db 25,RATICATE
+	db 24,DODUO
+	db 25,FEAROW
+	db 26,DODUO
+	db 28,DODUO
+	db 29,RATICATE
+	db 27,FEAROW
+	db 29,FEAROW
+
+	db $00
+
+ZoneMonsCenter:
+	db $1E
+	db 22,NIDORAN_M
+	db 25,RHYHORN
+	db 22,VENONAT
+	db 24,EXEGGCUTE
+	db 31,NIDORINO
+	db 25,EXEGGCUTE
+	db 31,NIDORINA
+	db 30,PARASECT
+	db 23,SCYTHER
+	db 23,CHANSEY
+
+	db $00
+
+ZoneMons1:
+	db $1E
+	db 24,NIDORAN_M
+	db 26,DODUO
+	db 22,PARAS
+	db 25,EXEGGCUTE
+	db 33,NIDORINO
+	db 23,EXEGGCUTE
+	db 24,NIDORAN_F
+	db 25,PARASECT
+	db 25,LICKITUNG
+	db 28,SCYTHER
+
+	db $00
+
+ZoneMons2:
+	db $1E
+	db 22,NIDORAN_M
+	db 26,RHYHORN
+	db 23,PARAS
+	db 25,EXEGGCUTE
+	db 30,NIDORINO
+	db 27,EXEGGCUTE
+	db 30,NIDORINA
+	db 32,VENOMOTH
+	db 26,CHANSEY
+	db 28,PINSIR
+
+	db $00
+
+ZoneMons3:
+	db $1E
+	db 25,NIDORAN_M
+	db 26,DODUO
+	db 23,VENONAT
+	db 24,EXEGGCUTE
+	db 33,NIDORINO
+	db 26,EXEGGCUTE
+	db 25,NIDORAN_F
+	db 31,VENOMOTH
+	db 26,PINSIR
+	db 28,LICKITUNG
+
+	db $00
+
+WaterMons:
+	db $00
+
+	db $05
+	db 5,TENTACOOL
+	db 10,TENTACOOL
+	db 15,TENTACOOL
+	db 5,TENTACOOL
+	db 10,TENTACOOL
+	db 15,TENTACOOL
+	db 20,TENTACOOL
+	db 30,TENTACOOL
+	db 35,TENTACOOL
+	db 40,TENTACOOL
+
+WaterMons:
+	db $00
+
+	db $05
+	db 5,TENTACOOL
+	db 10,TENTACOOL
+	db 15,TENTACOOL
+	db 5,TENTACOOL
+	db 10,TENTACOOL
+	db 15,TENTACOOL
+	db 20,TENTACOOL
+	db 30,TENTACOOL
+	db 35,TENTACOOL
+	db 40,TENTACOOL
+
+IslandMons1:
+	db $0F
+	db 30,SEEL
+	db 30,HORSEA
+	db 30,STARYU
+	db 30,KRABBY
+	db 28,KRABBY
+	db 21,ZUBAT
+	db 29,GOLBAT
+	db 28,SLOWPOKE
+	db 28,STARYU
+	db 38,SLOWBRO
+
+	db $00
+
+IslandMonsB1:
+	db $0A
+	db 30,SHELLDER
+	db 30,KRABBY
+	db 32,STARYU
+	db 32,KRABBY
+	db 28,HORSEA
+	db 30,SEEL
+	db 30,HORSEA
+	db 28,SEEL
+	db 38,DEWGONG
+	db 37,KINGLER
+
+	db $00
+
+IslandMonsB2:
+	db $0A
+	db 30,SEEL
+	db 30,HORSEA
+	db 32,SEEL
+	db 32,HORSEA
+	db 28,KRABBY
+	db 30,SHELLDER
+	db 30,KRABBY
+	db 28,STARYU
+	db 30,GOLBAT
+	db 37,JYNX
+
+	db $00
+
+IslandMonsB3:
+	db $0A
+	db 31,HORSEA
+	db 31,SEEL
+	db 33,HORSEA
+	db 33,SEEL
+	db 29,KRABBY
+	db 31,STARYU
+	db 31,KRABBY
+	db 29,STARYU
+	db 39,KINGLER
+	db 37,DEWGONG
+
+	db $00
+
+IslandMonsB4:
+	db $0A
+	db 31,KRABBY
+	db 31,STARYU
+	db 33,KRABBY
+	db 33,STARYU
+	db 29,HORSEA
+	db 31,SEEL
+	db 31,HORSEA
+	db 29,SEEL
+	db 39,JYNX
+	db 32,GOLBAT
+
+	db $00
+
+MansionMons1:
+	db $0A
+	db 32,GRIMER
+	db 30,GRIMER
+	db 34,PONYTA
+	db 30,PONYTA
+	db 34,GROWLITHE
+	db 32,PONYTA
+	db 30,KOFFING
+	db 28,PONYTA
+	db 37,MUK
+	db 39,WEEZING
+
+	db $00
+
+MansionMons2:
+	db $0A
+	db 32,GROWLITHE
+	db 34,GRIMER
+	db 34,GRIMER
+	db 30,PONYTA
+	db 30,GRIMER
+	db 32,PONYTA
+	db 30,KOFFING
+	db 28,PONYTA
+	db 39,MUK
+	db 37,WEEZING
+
+	db $00
+
+MansionMons3:
+	db $0A
+	db 31,GRIMER
+	db 33,GROWLITHE
+	db 35,GRIMER
+	db 32,PONYTA
+	db 34,PONYTA
+	db 40,MUK
+	db 34,KOFFING
+	db 38,MUK
+	db 36,PONYTA
+	db 42,WEEZING
+
+	db $00
+
+MansionMonsB1:
+	db $0A
+	db 33,GRIMER
+	db 31,GRIMER
+	db 35,GROWLITHE
+	db 32,PONYTA
+	db 31,GRIMER
+	db 40,MUK
+	db 34,PONYTA
+	db 35,KOFFING
+	db 38,MUK
+	db 42,WEEZING
+
+	db $00
+
+Route21Mons:
+	db $19
+	db 21,RATTATA
+	db 23,PIDGEY
+	db 30,RATICATE
+	db 23,RATTATA
+	db 21,PIDGEY
+	db 30,PIDGEOTTO
+	db 32,PIDGEOTTO
+	db 28,TANGELA
+	db 30,TANGELA
+	db 32,TANGELA
+
+	db $05
+	db 5,TENTACOOL
+	db 10,TENTACOOL
+	db 15,TENTACOOL
+	db 5,TENTACOOL
+	db 10,TENTACOOL
+	db 15,TENTACOOL
+	db 20,TENTACOOL
+	db 30,TENTACOOL
+	db 35,TENTACOOL
+	db 40,TENTACOOL
+
+DungeonMons1:
+	db $0A
+	db 46,GOLBAT
+	db 46,HYPNO
+	db 46,MAGNETON
+	db 49,RAPIDASH
+	db 49,VENOMOTH
+	db 52,SANDSLASH
+	db 49,KADABRA
+	db 52,PARASECT
+	db 53,RAICHU
+	db 53,DITTO
+
+	db $00
+
+DungeonMons2:
+	db $0F
+	db 51,DODRIO
+	db 51,VENOMOTH
+	db 51,KADABRA
+	db 52,RHYDON
+	db 52,RATICATE
+	db 52,ELECTRODE
+	db 56,CHANSEY
+	db 54,WIGGLYTUFF
+	db 55,DITTO
+	db 60,DITTO
+
+	db $00
+
+DungeonMonsB1:
+	db $19
+	db 55,RHYDON
+	db 55,MAROWAK
+	db 55,ELECTRODE
+	db 64,CLEFAIRY
+	db 64,PARASECT
+	db 64,RAICHU
+	db 57,SANDSLASH
+	db 65,DITTO
+	db 63,DITTO
+	db 67,DITTO
+
+	db $00
+
+PowerPlantMons:
+	db $0A
+	db 21,VOLTORB
+	db 21,MAGNEMITE
+	db 20,PIKACHU
+	db 24,PIKACHU
+	db 23,MAGNEMITE
+	db 23,VOLTORB
+	db 32,MAGNETON
+	db 35,MAGNETON
+	db 33,RAICHU
+	db 36,RAICHU
+
+	db $00
+
+Route23Mons:
+	db $0A
+	db 26,SANDSHREW
+	db 33,DITTO
+	db 26,SPEAROW
+	db 38,FEAROW
+	db 38,DITTO
+	db 38,FEAROW
+	db 41,SANDSLASH
+	db 43,DITTO
+	db 41,FEAROW
+	db 43,FEAROW
+
+	db $00
+
+PlateauMons2:
+	db $0A
+	db 22,MACHOP
+	db 24,GEODUDE
+	db 26,ZUBAT
+	db 36,ONIX
+	db 39,ONIX
+	db 42,ONIX
+	db 41,MACHOKE
+	db 40,GOLBAT
+	db 40,MAROWAK
+	db 43,GRAVELER
+
+	db $00
+
+PlateauMons3:
+	db $0F
+	db 24,MACHOP
+	db 26,GEODUDE
+	db 22,ZUBAT
+	db 42,ONIX
+	db 40,VENOMOTH
+	db 45,ONIX
+	db 43,GRAVELER
+	db 41,GOLBAT
+	db 42,MACHOKE
+	db 45,MACHOKE
+
+	db $00
+
+PlateauMons1:
+	db $0F
+	db 24,MACHOP
+	db 26,GEODUDE
+	db 22,ZUBAT
+	db 36,ONIX
+	db 39,ONIX
+	db 42,ONIX
+	db 41,GRAVELER
+	db 41,GOLBAT
+	db 42,MACHOKE
+	db 43,MAROWAK
+
+	db $00
+
+CaveMons:
+	db $14
+	db 18,DIGLETT
+	db 19,DIGLETT
+	db 17,DIGLETT
+	db 20,DIGLETT
+	db 16,DIGLETT
+	db 15,DIGLETT
+	db 21,DIGLETT
+	db 22,DIGLETT
+	db 29,DUGTRIO
+	db 31,DUGTRIO
+
+	db $00
+
+ENDC
+IF _YELLOW
+NoMons:
+	db $00
+
+	db $00
+
+Route1Mons:
+	db $19
+	db 3,PIDGEY
+	db 4,PIDGEY
+	db 2,RATTATA
+	db 3,RATTATA
+	db 2,PIDGEY
+	db 3,PIDGEY
+	db 5,PIDGEY
+	db 4,RATTATA
+	db 6,PIDGEY
+	db 7,PIDGEY
+
+	db $00
+
+Route2Mons:
+	db $19
+	db 3,RATTATA
+	db 3,PIDGEY
+	db 4,RATTATA
+	db 4,NIDORAN_M
+	db 4,NIDORAN_F
+	db 5,PIDGEY
+	db 6,NIDORAN_M
+	db 6,NIDORAN_F
+	db 7,PIDGEY
+	db 7,PIDGEY
+
+	db $00
+
+Route22Mons:
+	db $19
+	db 2,NIDORAN_M
+	db 2,NIDORAN_F
+	db 3,MANKEY
+	db 3,RATTATA
+	db 4,NIDORAN_M
+	db 4,NIDORAN_F
+	db 5,MANKEY
+	db 2,SPEAROW
+	db 4,SPEAROW
+	db 6,SPEAROW
+
+	db $00
+
+ForestMons:
+	db $19
+	db 3,CATERPIE
+	db 4,METAPOD
+	db 4,CATERPIE
+	db 5,CATERPIE
+	db 4,PIDGEY
+	db 6,PIDGEY
+	db 6,CATERPIE
+	db 6,METAPOD
+	db 8,PIDGEY
+	db 9,PIDGEOTTO
+
+	db $00
+
+Route3Mons:
+	db $14
+	db 8,SPEAROW
+	db 9,SPEAROW
+	db 9,MANKEY
+	db 10,SPEAROW
+	db 8,SANDSHREW
+	db 10,RATTATA
+	db 10,SANDSHREW
+	db 12,RATTATA
+	db 11,SPEAROW
+	db 12,SPEAROW
+
+	db $00
+
+MoonMons1:
+	db $0A
+	db 8,ZUBAT
+	db 9,ZUBAT
+	db 10,GEODUDE
+	db 6,ZUBAT
+	db 7,ZUBAT
+	db 10,ZUBAT
+	db 10,GEODUDE
+	db 11,ZUBAT
+	db 12,SANDSHREW
+	db 11,CLEFAIRY
+
+	db $00
+
+MoonMonsB1:
+	db $0A
+	db 8,ZUBAT
+	db 9,ZUBAT
+	db 10,ZUBAT
+	db 10,GEODUDE
+	db 11,GEODUDE
+	db 11,ZUBAT
+	db 9,PARAS
+	db 11,PARAS
+	db 10,CLEFAIRY
+	db 12,CLEFAIRY
+
+	db $00
+
+MoonMonsB2:
+	db $0A
+	db 10,ZUBAT
+	db 11,GEODUDE
+	db 13,PARAS
+	db 11,ZUBAT
+	db 11,ZUBAT
+	db 12,ZUBAT
+	db 13,ZUBAT
+	db 9,CLEFAIRY
+	db 11,CLEFAIRY
+	db 13,CLEFAIRY
+
+	db $00
+
+Route4Mons:
+	db $14
+	db 8,SPEAROW
+	db 9,SPEAROW
+	db 9,MANKEY
+	db 10,SPEAROW
+	db 8,SANDSHREW
+	db 10,RATTATA
+	db 10,SANDSHREW
+	db 12,RATTATA
+	db 11,SPEAROW
+	db 12,SPEAROW
+
+	db $00
+
+Route24Mons:
+	db $19
+	db 12,ODDISH
+	db 12,BELLSPROUT
+	db 13,PIDGEY
+	db 14,ODDISH
+	db 14,BELLSPROUT
+	db 15,PIDGEY
+	db 13,VENONAT
+	db 16,VENONAT
+	db 17,PIDGEY
+	db 17,PIDGEOTTO
+
+	db $00
+
+Route25Mons:
+	db $0F
+	db 12,ODDISH
+	db 12,BELLSPROUT
+	db 13,PIDGEY
+	db 14,ODDISH
+	db 14,BELLSPROUT
+	db 15,PIDGEY
+	db 13,VENONAT
+	db 16,VENONAT
+	db 17,PIDGEY
+	db 17,PIDGEOTTO
+
+	db $00
+
+Route9Mons:
+	db $0F
+	db 16,NIDORAN_M
+	db 16,NIDORAN_F
+	db 18,RATTATA
+	db 18,NIDORAN_M
+	db 18,NIDORAN_F
+	db 17,SPEAROW
+	db 18,NIDORINO
+	db 18,NIDORINA
+	db 20,RATICATE
+	db 19,FEAROW
+
+	db $00
+
+Route5Mons:
+	db $0F
+	db 15,PIDGEY
+	db 14,RATTATA
+	db 7,ABRA
+	db 16,PIDGEY
+	db 16,RATTATA
+	db 17,PIDGEY
+	db 17,PIDGEOTTO
+	db 3,JIGGLYPUFF
+	db 5,JIGGLYPUFF
+	db 7,JIGGLYPUFF
+
+	db $00
+
+Route6Mons:
+	db $0F
+	db 15,PIDGEY
+	db 14,RATTATA
+	db 7,ABRA
+	db 16,PIDGEY
+	db 16,RATTATA
+	db 17,PIDGEY
+	db 17,PIDGEOTTO
+	db 3,JIGGLYPUFF
+	db 5,JIGGLYPUFF
+	db 7,JIGGLYPUFF
+
+	db $03
+	db 15,PSYDUCK
+	db 15,PSYDUCK
+	db 15,PSYDUCK
+	db 15,PSYDUCK
+	db 15,PSYDUCK
+	db 15,PSYDUCK
+	db 15,PSYDUCK
+	db 15,PSYDUCK
+	db 15,GOLDUCK
+	db 20,GOLDUCK
+
+Route11Mons:
+	db $0F
+	db 16,PIDGEY
+	db 15,RATTATA
+	db 18,PIDGEY
+	db 15,DROWZEE
+	db 17,RATTATA
+	db 17,DROWZEE
+	db 18,PIDGEOTTO
+	db 20,PIDGEOTTO
+	db 19,DROWZEE
+	db 17,RATICATE
+
+	db $00
+
+TunnelMonsB1:
+	db $0F
+	db 15,ZUBAT
+	db 16,GEODUDE
+	db 17,ZUBAT
+	db 19,ZUBAT
+	db 18,GEODUDE
+	db 20,GEODUDE
+	db 21,ZUBAT
+	db 17,MACHOP
+	db 19,MACHOP
+	db 21,MACHOP
+
+	db $00
+
+TunnelMonsB2:
+	db $0F
+	db 20,ZUBAT
+	db 17,GEODUDE
+	db 18,MACHOP
+	db 21,ZUBAT
+	db 22,ZUBAT
+	db 21,GEODUDE
+	db 20,MACHOP
+	db 14,ONIX
+	db 18,ONIX
+	db 22,ONIX
+
+	db $00
+
+Route10Mons:
+	db $0F
+	db 16,MAGNEMITE
+	db 18,RATTATA
+	db 18,MAGNEMITE
+	db 20,MAGNEMITE
+	db 17,NIDORAN_M
+	db 17,NIDORAN_F
+	db 22,MAGNEMITE
+	db 20,RATICATE
+	db 16,MACHOP
+	db 18,MACHOP
+
+	db $00
+
+Route12Mons:
+	db $0F
+	db 25,ODDISH
+	db 25,BELLSPROUT
+	db 28,PIDGEY
+	db 28,PIDGEOTTO
+	db 27,ODDISH
+	db 27,BELLSPROUT
+	db 29,GLOOM
+	db 29,WEEPINBELL
+	db 26,FARFETCH_D
+	db 31,FARFETCH_D
+
+	db $03
+	db 15,SLOWPOKE
+	db 15,SLOWPOKE
+	db 15,SLOWPOKE
+	db 15,SLOWPOKE
+	db 15,SLOWPOKE
+	db 15,SLOWPOKE
+	db 15,SLOWPOKE
+	db 15,SLOWPOKE
+	db 15,SLOWBRO
+	db 20,SLOWBRO
+
+Route8Mons:
+	db $0F
+	db 20,PIDGEY
+	db 22,PIDGEY
+	db 20,RATTATA
+	db 15,ABRA
+	db 19,ABRA
+	db 24,PIDGEOTTO
+	db 19,JIGGLYPUFF
+	db 24,JIGGLYPUFF
+	db 20,KADABRA
+	db 27,KADABRA
+
+	db $00
+
+Route7Mons:
+	db $0F
+	db 20,PIDGEY
+	db 22,PIDGEY
+	db 20,RATTATA
+	db 15,ABRA
+	db 19,ABRA
+	db 24,PIDGEOTTO
+	db 26,ABRA
+	db 19,JIGGLYPUFF
+	db 24,JIGGLYPUFF
+	db 24,JIGGLYPUFF
+
+	db $00
+
+TowerMons1:
+	db $00
+
+	db $00
+
+TowerMons2:
+	db $00
+
+	db $00
+
+TowerMons3:
+	db $0A
+	db 20,GASTLY
+	db 21,GASTLY
+	db 22,GASTLY
+	db 23,GASTLY
+	db 24,GASTLY
+	db 19,GASTLY
+	db 18,GASTLY
+	db 25,GASTLY
+	db 20,HAUNTER
+	db 25,HAUNTER
+
+	db $00
+
+TowerMons4:
+	db $0A
+	db 20,GASTLY
+	db 21,GASTLY
+	db 22,GASTLY
+	db 23,GASTLY
+	db 24,GASTLY
+	db 19,GASTLY
+	db 18,GASTLY
+	db 25,GASTLY
+	db 20,HAUNTER
+	db 25,HAUNTER
+
+	db $00
+
+TowerMons5:
+	db $0F
+	db 22,GASTLY
+	db 23,GASTLY
+	db 24,GASTLY
+	db 25,GASTLY
+	db 26,GASTLY
+	db 21,GASTLY
+	db 20,CUBONE
+	db 27,GASTLY
+	db 22,HAUNTER
+	db 27,HAUNTER
+
+	db $00
+
+TowerMons6:
+	db $0F
+	db 22,GASTLY
+	db 23,GASTLY
+	db 24,GASTLY
+	db 25,GASTLY
+	db 26,GASTLY
+	db 21,GASTLY
+	db 22,CUBONE
+	db 27,GASTLY
+	db 22,HAUNTER
+	db 27,HAUNTER
+
+	db $00
+
+TowerMons7:
+	db $14
+	db 24,GASTLY
+	db 25,GASTLY
+	db 26,GASTLY
+	db 27,GASTLY
+	db 28,GASTLY
+	db 23,GASTLY
+	db 24,CUBONE
+	db 29,GASTLY
+	db 24,HAUNTER
+	db 29,HAUNTER
+
+	db $00
+
+Route13Mons:
+	db $0F
+	db 25,ODDISH
+	db 25,BELLSPROUT
+	db 28,PIDGEOTTO
+	db 28,PIDGEY
+	db 27,ODDISH
+	db 27,BELLSPROUT
+	db 29,GLOOM
+	db 29,WEEPINBELL
+	db 26,FARFETCH_D
+	db 31,FARFETCH_D
+
+	db $03
+	db 15,SLOWPOKE
+	db 15,SLOWPOKE
+	db 15,SLOWPOKE
+	db 15,SLOWPOKE
+	db 15,SLOWPOKE
+	db 15,SLOWPOKE
+	db 15,SLOWPOKE
+	db 15,SLOWPOKE
+	db 15,SLOWBRO
+	db 20,SLOWBRO
+
+Route14Mons:
+	db $0F
+	db 26,ODDISH
+	db 26,BELLSPROUT
+	db 24,VENONAT
+	db 30,PIDGEOTTO
+	db 28,ODDISH
+	db 28,BELLSPROUT
+	db 30,GLOOM
+	db 30,WEEPINBELL
+	db 27,VENONAT
+	db 30,VENOMOTH
+
+	db $00
+
+Route15Mons:
+	db $0F
+	db 26,ODDISH
+	db 26,BELLSPROUT
+	db 24,VENONAT
+	db 32,PIDGEOTTO
+	db 28,ODDISH
+	db 28,BELLSPROUT
+	db 30,GLOOM
+	db 30,WEEPINBELL
+	db 27,VENONAT
+	db 30,VENOMOTH
+
+	db $00
+
+Route16Mons:
+	db $19
+	db 22,SPEAROW
+	db 22,DODUO
+	db 23,RATTATA
+	db 24,DODUO
+	db 24,RATTATA
+	db 26,DODUO
+	db 23,SPEAROW
+	db 24,FEAROW
+	db 25,RATICATE
+	db 26,RATICATE
+
+	db $00
+
+Route17Mons:
+	db $19
+	db 26,DODUO
+	db 27,FEAROW
+	db 27,DODUO
+	db 28,DODUO
+	db 28,PONYTA
+	db 30,PONYTA
+	db 29,FEAROW
+	db 28,DODUO
+	db 32,PONYTA
+	db 29,DODRIO
+
+	db $00
+
+Route18Mons:
+	db $19
+	db 22,SPEAROW
+	db 22,DODUO
+	db 23,RATTATA
+	db 24,DODUO
+	db 24,RATTATA
+	db 26,DODUO
+	db 23,SPEAROW
+	db 24,FEAROW
+	db 25,RATICATE
+	db 26,RATICATE
+
+	db $00
+
+ZoneMonsCenter:
+	db $1E
+	db 14,NIDORAN_M
+	db 36,NIDORAN_F
+	db 24,EXEGGCUTE
+	db 20,RHYHORN
+	db 23,NIDORINO
+	db 27,PARASECT
+	db 27,PARAS
+	db 32,PARASECT
+	db 22,TANGELA
+	db 7,CHANSEY
+
+	db $00
+
+ZoneMons1:
+	db $1E
+	db 21,NIDORAN_M
+	db 29,NIDORAN_F
+	db 22,EXEGGCUTE
+	db 21,TAUROS
+	db 32,NIDORINA
+	db 19,CUBONE
+	db 26,EXEGGCUTE
+	db 24,MAROWAK
+	db 21,CHANSEY
+	db 15,SCYTHER
+
+	db $00
+
+ZoneMons2:
+	db $1E
+	db 36,NIDORAN_M
+	db 14,NIDORAN_F
+	db 20,EXEGGCUTE
+	db 25,RHYHORN
+	db 23,NIDORINA
+	db 28,KANGASKHAN
+	db 16,CUBONE
+	db 33,KANGASKHAN
+	db 25,SCYTHER
+	db 15,PINSIR
+
+	db $00
+
+ZoneMons3:
+	db $1E
+	db 29,NIDORAN_M
+	db 21,NIDORAN_F
+	db 22,EXEGGCUTE
+	db 21,TAUROS
+	db 32,NIDORINO
+	db 19,CUBONE
+	db 26,EXEGGCUTE
+	db 24,MAROWAK
+	db 25,PINSIR
+	db 27,TANGELA
+
+	db $00
+
+WaterMons:
+	db $00
+
+	db $05
+	db 5,TENTACOOL
+	db 10,TENTACOOL
+	db 15,TENTACOOL
+	db 5,TENTACOOL
+	db 10,TENTACOOL
+	db 15,TENTACOOL
+	db 20,TENTACOOL
+	db 30,TENTACOOL
+	db 35,TENTACOOL
+	db 40,TENTACOOL
+
+WaterMons:
+	db $00
+
+	db $05
+	db 5,TENTACOOL
+	db 10,TENTACOOL
+	db 15,TENTACOOL
+	db 5,TENTACOOL
+	db 10,TENTACOOL
+	db 15,TENTACOOL
+	db 20,TENTACOOL
+	db 30,TENTACOOL
+	db 35,TENTACOOL
+	db 40,TENTACOOL
+
+IslandMons1:
+	db $0F
+	db 18,ZUBAT
+	db 25,KRABBY
+	db 27,KRABBY
+	db 27,ZUBAT
+	db 36,ZUBAT
+	db 28,SLOWPOKE
+	db 30,SLOWPOKE
+	db 9,ZUBAT
+	db 27,GOLBAT
+	db 36,GOLBAT
+
+	db $00
+
+IslandMonsB1:
+	db $0A
+	db 27,ZUBAT
+	db 26,KRABBY
+	db 36,ZUBAT
+	db 28,KRABBY
+	db 27,GOLBAT
+	db 29,SLOWPOKE
+	db 18,ZUBAT
+	db 28,KINGLER
+	db 22,SEEL
+	db 26,SEEL
+
+	db $00
+
+IslandMonsB2:
+	db $0A
+	db 27,ZUBAT
+	db 27,KRABBY
+	db 36,ZUBAT
+	db 27,GOLBAT
+	db 28,KINGLER
+	db 24,SEEL
+	db 29,KRABBY
+	db 36,GOLBAT
+	db 31,SLOWPOKE
+	db 31,SLOWBRO
+
+	db $00
+
+IslandMonsB3:
+	db $0A
+	db 27,GOLBAT
+	db 36,ZUBAT
+	db 29,KRABBY
+	db 27,ZUBAT
+	db 30,KINGLER
+	db 26,SEEL
+	db 31,KRABBY
+	db 30,SEEL
+	db 28,DEWGONG
+	db 32,DEWGONG
+
+	db $05
+	db 25,TENTACOOL
+	db 30,TENTACOOL
+	db 20,TENTACOOL
+	db 30,STARYU
+	db 35,TENTACOOL
+	db 30,STARYU
+	db 40,TENTACOOL
+	db 30,STARYU
+	db 30,STARYU
+	db 30,STARYU
+
+IslandMonsB4:
+	db $0A
+	db 36,GOLBAT
+	db 36,ZUBAT
+	db 30,KRABBY
+	db 32,KINGLER
+	db 28,SEEL
+	db 32,SEEL
+	db 27,GOLBAT
+	db 45,ZUBAT
+	db 30,DEWGONG
+	db 34,DEWGONG
+
+	db $05
+	db 25,TENTACOOL
+	db 30,TENTACOOL
+	db 20,TENTACOOL
+	db 30,STARYU
+	db 35,TENTACOOL
+	db 30,STARYU
+	db 40,TENTACOOL
+	db 30,STARYU
+	db 30,STARYU
+	db 30,STARYU
+
+MansionMons1:
+	db $0A
+	db 34,RATTATA
+	db 34,RATICATE
+	db 23,GRIMER
+	db 26,GROWLITHE
+	db 37,RATTATA
+	db 37,RATICATE
+	db 30,GROWLITHE
+	db 26,GRIMER
+	db 34,GROWLITHE
+	db 38,GROWLITHE
+
+	db $00
+
+MansionMons2:
+	db $0A
+	db 37,RATTATA
+	db 37,RATICATE
+	db 26,GRIMER
+	db 29,GRIMER
+	db 40,RATTATA
+	db 40,RATICATE
+	db 32,GRIMER
+	db 35,GRIMER
+	db 35,MUK
+	db 38,MUK
+
+	db $00
+
+MansionMons3:
+	db $0A
+	db 40,RATTATA
+	db 40,RATICATE
+	db 32,GRIMER
+	db 35,GRIMER
+	db 43,RATTATA
+	db 43,RATICATE
+	db 38,GRIMER
+	db 38,GRIMER
+	db 38,MUK
+	db 41,MUK
+
+	db $00
+
+MansionMonsB1:
+	db $0A
+	db 35,GRIMER
+	db 38,GRIMER
+	db 37,RATICATE
+	db 40,RATICATE
+	db 41,MUK
+	db 43,RATICATE
+	db 24,DITTO
+	db 46,RATICATE
+	db 18,DITTO
+	db 12,DITTO
+
+	db $00
+
+Route21Mons:
+	db $19
+	db 15,PIDGEY
+	db 13,RATTATA
+	db 13,PIDGEY
+	db 11,PIDGEY
+	db 17,PIDGEY
+	db 15,RATTATA
+	db 15,RATICATE
+	db 17,PIDGEOTTO
+	db 19,PIDGEOTTO
+	db 15,PIDGEOTTO
+
+	db $05
+	db 5,TENTACOOL
+	db 10,TENTACOOL
+	db 15,TENTACOOL
+	db 5,TENTACOOL
+	db 10,TENTACOOL
+	db 15,TENTACOOL
+	db 20,TENTACOOL
+	db 30,TENTACOOL
+	db 35,TENTACOOL
+	db 40,TENTACOOL
+
+DungeonMons1:
+	db $0A
+	db 50,GOLBAT
+	db 55,GOLBAT
+	db 45,GRAVELER
+	db 55,GLOOM
+	db 55,WEEPINBELL
+	db 52,SANDSLASH
+	db 54,VENOMOTH
+	db 54,PARASECT
+	db 55,DITTO
+	db 60,DITTO
+
+	db $00
+
+DungeonMons2:
+	db $0F
+	db 52,GOLBAT
+	db 57,GOLBAT
+	db 50,GRAVELER
+	db 56,SANDSLASH
+	db 50,RHYHORN
+	db 60,DITTO
+	db 58,GLOOM
+	db 58,WEEPINBELL
+	db 60,RHYDON
+	db 58,RHYDON
+
+	db $00
+
+DungeonMonsB1:
+	db $19
+	db 54,GOLBAT
+	db 59,GOLBAT
+	db 55,GRAVELER
+	db 52,RHYHORN
+	db 62,RHYDON
+	db 60,DITTO
+	db 56,CHANSEY
+	db 65,DITTO
+	db 55,LICKITUNG
+	db 50,LICKITUNG
+
+	db $00
+
+PowerPlantMons:
+	db $0A
+	db 30,MAGNEMITE
+	db 35,MAGNEMITE
+	db 33,MAGNETON
+	db 33,VOLTORB
+	db 37,VOLTORB
+	db 33,GRIMER
+	db 37,GRIMER
+	db 38,MAGNETON
+	db 33,MUK
+	db 37,MUK
+
+	db $00
+
+Route23Mons:
+	db $0A
+	db 41,NIDORINO
+	db 41,NIDORINA
+	db 36,MANKEY
+	db 44,NIDORINO
+	db 44,NIDORINA
+	db 40,FEAROW
+	db 41,MANKEY
+	db 45,FEAROW
+	db 41,PRIMEAPE
+	db 46,PRIMEAPE
+
+	db $00
+
+PlateauMons2:
+	db $0A
+	db 31,GEODUDE
+	db 36,GEODUDE
+	db 41,GEODUDE
+	db 44,ZUBAT
+	db 39,GOLBAT
+	db 44,GRAVELER
+	db 45,ONIX
+	db 47,ONIX
+	db 39,MACHOKE
+	db 42,MACHOKE
+
+	db $00
+
+PlateauMons3:
+	db $0F
+	db 36,GEODUDE
+	db 44,GOLBAT
+	db 41,GEODUDE
+	db 49,ONIX
+	db 46,GEODUDE
+	db 41,GRAVELER
+	db 42,MACHOKE
+	db 45,MACHOKE
+	db 47,GRAVELER
+	db 47,GRAVELER
+
+	db $00
+
+PlateauMons1:
+	db $0F
+	db 26,GEODUDE
+	db 31,GEODUDE
+	db 36,GEODUDE
+	db 39,ZUBAT
+	db 44,ZUBAT
+	db 41,GEODUDE
+	db 43,ONIX
+	db 45,ONIX
+	db 41,GRAVELER
+	db 47,GRAVELER
+
+	db $00
+
+CaveMons:
+	db $14
+	db 18,DIGLETT
+	db 19,DIGLETT
+	db 17,DIGLETT
+	db 20,DIGLETT
+	db 16,DIGLETT
+	db 15,DIGLETT
+	db 21,DIGLETT
+	db 22,DIGLETT
+	db 29,DUGTRIO
+	db 31,DUGTRIO
+
+	db $00
+
+ENDC
 
 GetItemUse:		;$D5C7
 	ld a,1
@@ -5219,6 +7942,7 @@ FishingGroup10:
 INCBIN "baserom.gbc",$E9C5,$10000 - $E9C5
 
 SECTION "bank4",DATA,BANK[$4]
+
 INCBIN "baserom.gbc",$10000,$2EDE
 
 RedPicFront:
@@ -5245,6 +7969,7 @@ GenRandom_: ; 7A8F
 	ret
 
 SECTION "bank5",DATA,BANK[$5]
+
 INCBIN "baserom.gbc",$14000,$4000
 
 SECTION "bank6",DATA,BANK[$6]
@@ -5252,7 +7977,7 @@ SECTION "bank6",DATA,BANK[$6]
 CeladonCity_h: ; 0x18000
     db $00 ; tileset
     db $12,$19 ; dimensions
-    dw CeladonCityBlocks, $5966, $5956 ; blocks, texts, scripts
+    dw CeladonCityBlocks, CeladonCityTexts, CeladonCityScript ; blocks, texts, scripts
     db WEST | EAST ; connections
 
     ; connection data
@@ -5271,7 +7996,7 @@ CeladonCity_h: ; 0x18000
 
     ; end connection data
 
-    dw $4022 ; objects
+    dw CeladonCityObject ; objects
 
 CeladonCityObject: ; 0x18022 (size=189)
     db $f ; border tile
@@ -5334,7 +8059,7 @@ CeladonCityBlocks: ; 450
 PalletTown_h:
 	db $00 ; tileset
 	db $09,$0A ; dimensions
-	dw PalletTownBlocks,PalletTownTexts,PalletTownScript
+	dw PalletTownBlocks, PalletTownTexts, PalletTownScript
 	db NORTH | SOUTH ; connections
 
 	db $0C ; Route 1
@@ -5381,7 +8106,7 @@ PalletTownBlocks: ; 0x182fd
 ViridianCity_h: ; 0x18357 to 0x18384 (45 bytes) (bank=6) (id=1)
     db $00 ; tileset
     db $12, $14 ; dimensions (y, x)
-    dw ViridianCityBlocks, $50e4, $4ff1 ; blocks, texts, scripts
+    dw ViridianCityBlocks, ViridianCityTexts, ViridianCityScript ; blocks, texts, scripts
     db NORTH | SOUTH | WEST ; connections
 
     ; connections data
@@ -5406,7 +8131,7 @@ ViridianCity_h: ; 0x18357 to 0x18384 (45 bytes) (bank=6) (id=1)
 
     ; end connection data
 
-    dw $4384 ; objects
+    dw ViridianCityObject ; objects
 
 ViridianCityObject: ; 0x18384 (size=104)
     db $f ; border tile
@@ -5448,7 +8173,7 @@ ViridianCityBlocks: ; 360
 PewterCity_h: ; 0x18554 to 0x18576 (34 bytes) (bank=6) (id=2)
     db $00 ; tileset
     db $12, $14 ; dimensions (y, x)
-    dw PewterCityBlocks, $538b, $5237 ; blocks, texts, scripts
+    dw PewterCityBlocks, PewterCityTexts, PewterCityScript ; blocks, texts, scripts
     db SOUTH | EAST ; connections
 
     ; connections data
@@ -5467,9 +8192,10 @@ PewterCity_h: ; 0x18554 to 0x18576 (34 bytes) (bank=6) (id=2)
 
     ; end connection data
 
-    dw $4577 ; objects
+    dw PewterCityObject ; objects
 
 INCBIN "baserom.gbc",$18576,$18577 - $18576
+
 PewterCityObject: ; 0x18577 (size=111)
     db $a ; border tile
 
@@ -5513,7 +8239,7 @@ PewterCityBlocks: ; 360
 CeruleanCity_h: ; 0x1874e to 0x18786 (56 bytes) (bank=6) (id=3)
     db $00 ; tileset
     db $12, $14 ; dimensions (y, x)
-    dw CeruleanCityBlocks, $562d, $5480 ; blocks, texts, scripts
+    dw CeruleanCityBlocks, CeruleanCityTexts, CeruleanCityScript ; blocks, texts, scripts
     db NORTH | SOUTH | WEST | EAST ; connections
 
     ; connections data
@@ -5544,7 +8270,7 @@ CeruleanCity_h: ; 0x1874e to 0x18786 (56 bytes) (bank=6) (id=3)
 
     ; end connection data
 
-    dw $4786 ; objects
+    dw CeruleanCityObject ; objects
 
 CeruleanCityObject: ; 0x18786 (size=170)
     db $f ; border tile
@@ -5600,7 +8326,7 @@ CeruleanCityBlocks: ; 360
 VermilionCity_h: ; 0x18998 to 0x189ba (34 bytes) (bank=6) (id=5)
     db $00 ; tileset
     db $12, $14 ; dimensions (y, x)
-    dw VermilionCityBlocks, $586f, $57a1 ; blocks, texts, scripts
+    dw VermilionCityBlocks, VermilionCityTexts, VermilionCityScript ; blocks, texts, scripts
     db NORTH | EAST ; connections
 
     ; connections data
@@ -5619,7 +8345,7 @@ VermilionCity_h: ; 0x18998 to 0x189ba (34 bytes) (bank=6) (id=5)
 
     ; end connection data
 
-    dw $49ba ; objects
+    dw VermilionCityObject ; objects
 
 VermilionCityObject: ; 0x189ba (size=133)
     db $43 ; border tile
@@ -5669,7 +8395,7 @@ VermilionCityBlocks: ; 360
 FuchsiaCity_h: ; 0x18ba7 to 0x18bd4 (45 bytes) (bank=6) (id=7)
     db $00 ; tileset
     db $12, $14 ; dimensions (y, x)
-    dw FuchsiaCityBlocks, $5a2e, $5a2b ; blocks, texts, scripts
+    dw FuchsiaCityBlocks, FuchsiaCityTexts, FuchsiaCityScript ; blocks, texts, scripts
     db SOUTH | WEST | EAST ; connections
 
     ; connections data
@@ -5694,7 +8420,7 @@ FuchsiaCity_h: ; 0x18ba7 to 0x18bd4 (45 bytes) (bank=6) (id=7)
 
     ; end connection data
 
-    dw $4bd4 ; objects
+    dw FuchsiaCityObject ; objects
 
 FuchsiaCityObject: ; 0x18bd4 (size=178)
     db $f ; border tile
@@ -5765,6 +8491,7 @@ PalletTownScript:
 	ld hl,PalletTownScriptPointers
 	ld a,[$D5F1]
 	jp $3D97
+; 0x18e73
 
 PalletTownScriptPointers:
 	dw PalletTownScript1,PalletTownScript2,PalletTownScript3,PalletTownScript4,PalletTownScript5,PalletTownScript6,PalletTownScript7
@@ -5971,7 +8698,27 @@ PalletTownText7: ; sign by Blue’s house
 	TX_FAR _PalletTownText7
 	db "@"
 
-INCBIN "baserom.gbc",$18ff1,$19102 - $18ff1
+ViridianCityScript: ; 0x18ff1
+    call $3c3c
+    ld hl, $4ffd
+    ld a, [$d5f4]
+    jp $3d97
+; 0x18ffd
+
+ViridianCityScripts: ; 0x18ffd
+    dw ViridianCityScript0
+
+INCBIN "baserom.gbc",$18fff,$6
+
+ViridianCityScript0: ; 0x19005
+    call $500b
+    jp $503d
+; 0x1900b
+
+INCBIN "baserom.gbc",$1900b,$d9
+
+ViridianCityTexts: ; 0x190e4
+    dw ViridianCityText1, ViridianCityText2, ViridianCityText3, ViridianCityText4, ViridianCityText5, ViridianCityText6, ViridianCityText7, ViridianCityText8, ViridianCityText9, ViridianCityText10, ViridianCityText11, ViridianCityText12, ViridianCityText13, ViridianCityText14, ViridianCityText15
 
 ViridianCityText1: ; 0x19102
     TX_FAR _ViridianCityText1
@@ -5992,6 +8739,7 @@ ViridianCityText2: ; 0x19107
     jp $24d7
 
 INCBIN "baserom.gbc",$19122,$1912c - $19122
+
 ViridianCityText3: ; 0x1912c
     db $08 ; asm
     ld hl, $514d
@@ -6010,6 +8758,7 @@ ViridianCityText3: ; 0x1912c
     jp $24d7
 
 INCBIN "baserom.gbc",$1914d,$1915c - $1914d
+
 ViridianCityText4: ; 0x1915c
     db $08 ; asm
     ld a, [$d74b]
@@ -6025,6 +8774,7 @@ ViridianCityText4: ; 0x1915c
     jp $24d7
 
 INCBIN "baserom.gbc",$19175,$1917f - $19175
+
 ViridianCityText5: ; 0x1917f
     db $08 ; asm
     ld hl, $5191
@@ -6035,6 +8785,7 @@ ViridianCityText5: ; 0x1917f
     jp $24d7
 
 INCBIN "baserom.gbc",$19191,$19196 - $19191
+
 ViridianCityText6: ; 0x19196
     db $08 ; asm
     ld a, [$d74c]
@@ -6061,6 +8812,7 @@ ViridianCityText6: ; 0x19196
     jp $24d7
 
 INCBIN "baserom.gbc",$191ca,$191df - $191ca
+
 ViridianCityText7: ; 0x191df
     db $08 ; asm
     ld hl, $520a
@@ -6082,7 +8834,10 @@ ViridianCityText7: ; 0x191df
 .asm_2413a ; 0x19207
     jp $24d7
 
-INCBIN "baserom.gbc",$1920a,$14
+INCBIN "baserom.gbc",$1920a,$19219 - $1920a
+
+ViridianCityText15: ; 0x19219
+INCBIN "baserom.gbc",$19219,$1921e - $19219
 
 ViridianCityText8: ; 0x1921e
     TX_FAR _ViridianCityText8
@@ -6100,7 +8855,34 @@ ViridianCityText13: ; 0x1922d
     TX_FAR _ViridianCityText13
     db $50
 
-INCBIN "baserom.gbc",$19232,$193a7 - $19232
+ViridianCityText14:
+INCBIN "baserom.gbc",$19232,$19237 - $19232
+
+PewterCityScript: ; 0x19237
+    call $3c3c
+    ld hl, $5243
+    ld a, [$d5f7]
+    jp $3d97
+; 0x19243
+
+PewterCityScripts: ; 0x19243
+    dw PewterCityScript0
+
+INCBIN "baserom.gbc",$19245,$c
+
+PewterCityScript0: ; 0x19251
+    xor a
+    ld [$d619], a
+    ld hl, $d754
+    res 0, [hl]
+    call $525e
+    ret
+; 0x1925e
+
+INCBIN "baserom.gbc",$1925e,$12d
+
+PewterCityTexts: ; 0x1938b
+    dw PewterCityText1, PewterCityText2, PewterCityText3, PewterCityText4, PewterCityText5, PewterCityText6, PewterCityText7, PewterCityText8, PewterCityText9, PewterCityText10, PewterCityText11, PewterCityText12, PewterCityText13, PewterCityText14
 
 PewterCityText1: ; 0x193a7
     TX_FAR _PewterCityText1
@@ -6140,7 +8922,10 @@ PewterCityText3: ; 0x193b1
 .asm_ac429 ; 0x193ee
     jp $24d7
 
-INCBIN "baserom.gbc",$193f1,$19405 - $193f1
+INCBIN "baserom.gbc",$193f1,$19400 - $193f1
+
+PewterCityText13:
+INCBIN "baserom.gbc",$19400,$5
 
 PewterCityText4: ; 0x19405
     db $8
@@ -6161,6 +8946,7 @@ PewterCityText4: ; 0x19405
 ; 0x19427
 
 INCBIN "baserom.gbc",$19427,$f
+
 PewterCityText5: ; 0x19436
     db $08 ; asm
     ld hl, $545d
@@ -6179,7 +8965,10 @@ PewterCityText5: ; 0x19436
     ld [$d5f7], a
     jp $24d7
 
-INCBIN "baserom.gbc",$1945d,$a
+INCBIN "baserom.gbc",$1945d,$19462 - $1945d
+
+PewterCityText14: ; 0x19462
+INCBIN "baserom.gbc",$19462,$5
 
 PewterCityText6: ; 0x19467
     TX_FAR _PewterCityText6
@@ -6201,7 +8990,185 @@ PewterCityText12: ; 0x1947b
     TX_FAR _PewterCityText12
     db $50
 
-INCBIN "baserom.gbc",$19480,$1964f - $19480
+CeruleanCityScript: ; 0x19480
+    call $3c3c
+    ld hl, $549d
+    ld a, [$d60f]
+    jp $3d97
+; 0x1948c
+
+INCBIN "baserom.gbc",$1948c,$1949d - $1948c
+
+CeruleanCityScripts: ; 0x1949d
+    dw CeruleanCityScript0, CeruleanCityScript1, CeruleanCityScript2, CeruleanCityScript3
+
+INCBIN "baserom.gbc",$194a5,$23
+
+CeruleanCityScript0: ; 0x194c8
+    ld a, [$d75b]
+    bit 7, a
+    jr nz, .asm_194f7 ; 0x194cd $28
+    ld hl, $554f
+    call $34bf
+    jr nc, .asm_194f7 ; 0x194d5 $20
+    ld a, [$cd3d]
+    cp $1
+    ld a, $8
+    ld b, $0
+    jr nz, .asm_194e6 ; 0x194e0 $4
+    ld a, $4
+    ld b, $4
+.asm_194e6
+    ld [$d528], a
+    ld a, b
+    ld [$c129], a
+    call Delay3
+    ld a, $2
+    ld [$ff00+$8c], a
+    jp $2920
+.asm_194f7
+    ld a, [$d75a]
+    bit 0, a
+    ret nz
+    ld hl, $5554
+    call $34bf
+    ret nc
+    ld a, [$d700]
+    and a
+    jr z, .asm_19512 ; 0x19508 $8
+    ld a, $ff
+    ld [$c0ee], a
+    call $23b1
+.asm_19512
+    ld c, $2
+    ld a, $de
+    call $23a1
+    xor a
+    ld [$ff00+$b4], a
+    ld a, $f0
+    ld [$cd6b], a
+    ld a, [$d362]
+    cp $14
+    jr z, .asm_19535 ; 0x19526 $d
+    ld a, $1
+    ld [$ff00+$8c], a
+    ld a, $5
+    ld [$ff00+$8b], a
+    call $3500
+    ld [hl], $19
+.asm_19535
+    ld a, $5
+    ld [$cc4d], a
+    ld a, $15
+    call Predef
+    ld de, $5559
+    ld a, $1
+    ld [$ff00+$8c], a
+    call $363a
+    ld a, $1
+    ld [$d60f], a
+    ret
+; 0x1954f
+
+INCBIN "baserom.gbc",$1954f,$19567 - $1954f
+
+CeruleanCityScript1: ; 0x19567
+    ld a, [$d730]
+    bit 0, a
+    ret nz
+    xor a
+    ld [$cd6b], a
+    ld a, $1
+    ld [$ff00+$8c], a
+    call $2920
+    ld hl, $d72d
+    set 6, [hl]
+    set 7, [hl]
+    ld hl, $566d
+    ld de, $5672
+    call $3354
+    ld a, $e1
+    ld [$d059], a
+    ld a, [$d715]
+    cp $b1
+    jr nz, .asm_19598 ; 0x19592 $4
+    ld a, $7
+    jr .asm_195a2 ; 0x19596 $a
+.asm_19598
+    cp $99
+    jr nz, .asm_195a0 ; 0x1959a $4
+    ld a, $8
+    jr .asm_195a2 ; 0x1959e $2
+.asm_195a0
+    ld a, $9
+.asm_195a2
+    ld [$d05d], a
+    xor a
+    ld [$ff00+$b4], a
+    call $555d
+    ld a, $2
+    ld [$d60f], a
+    ret
+; 0x195b1
+
+CeruleanCityScript2: ; 0x195b1
+    ld a, [$d057]
+    cp $ff
+    jp z, $548c
+    call $555d
+    ld a, $f0
+    ld [$cd6b], a
+    ld hl, $d75a
+    set 0, [hl]
+    ld a, $1
+    ld [$ff00+$8c], a
+    call $2920
+    ld a, $ff
+    ld [$c0ee], a
+    call $23b1
+    ld b, $2
+    ld hl, $5b47
+    call Bankswitch
+    ld a, $1
+    ld [$ff00+$8c], a
+    call $3541
+    ld a, [$d362]
+    cp $14
+    jr nz, .asm_195f0 ; 0x195e9 $5
+    ld de, $5608
+    jr .asm_195f3 ; 0x195ee $3
+.asm_195f0
+    ld de, $5600
+.asm_195f3
+    ld a, $1
+    ld [$ff00+$8c], a
+    call $363a
+    ld a, $3
+    ld [$d60f], a
+    ret
+; 0x19600
+
+INCBIN "baserom.gbc",$19600,$19610 - $19600
+
+CeruleanCityScript3: ; 0x19610
+    ld a, [$d730]
+    bit 0, a
+    ret nz
+    ld a, $5
+    ld [$cc4d], a
+    ld a, $11
+    call Predef
+    xor a
+    ld [$cd6b], a
+    call $2307
+    ld a, $0
+    ld [$d60f], a
+    ret
+; 0x1962d
+
+CeruleanCityTexts: ; 0x1962d
+    dw CeruleanCityText1, CeruleanCityText2, CeruleanCityText3, CeruleanCityText4, CeruleanCityText5, CeruleanCityText6, CeruleanCityText7, CeruleanCityText8, CeruleanCityText9, CeruleanCityText10, CeruleanCityText11, CeruleanCityText12, CeruleanCityText13, CeruleanCityText14, CeruleanCityText15, CeruleanCityText16, CeruleanCityText17
+
 CeruleanCityText1: ; 0x1964f
     db $08 ; asm
     ld a, [$d75a]
@@ -6217,6 +9184,7 @@ CeruleanCityText1: ; 0x1964f
     jp $24d7
 
 INCBIN "baserom.gbc",$19668,$1967c - $19668
+
 CeruleanCityText2: ; 0x1967c
     db $8
     ld a, [$d75b]
@@ -6257,6 +9225,7 @@ CeruleanCityText2: ; 0x1967c
 .asm_e4e6f ; 0x196d6
     jp $24d7
 ; 0x196d9
+
 INCBIN "baserom.gbc",$196d9,$1f
 
 CeruleanCityText3: ; 0x196f8
@@ -6297,6 +9266,7 @@ CeruleanCityText7: ; 0x1970c
     jp $24d7
 
 INCBIN "baserom.gbc",$19730,$1973f - $19730
+
 CeruleanCityText8: ; 0x1973f
     db $08 ; asm
     ldh a, [$d3]
@@ -6349,7 +9319,77 @@ CeruleanCityText17: ; 0x1979c
     TX_FAR _CeruleanCityText17
     db $50
 
-INCBIN "baserom.gbc",$197a1,$19889 - $197a1
+VermilionCityScript: ; 0x197a1
+    call $3c3c
+    ld hl, $d126
+    bit 6, [hl]
+    res 6, [hl]
+    push hl
+    call nz, $57cb
+    pop hl
+    bit 5, [hl]
+    res 5, [hl]
+    call nz, $57c0
+    ld hl, $57dc
+    ld a, [$d62a]
+    jp $3d97
+; 0x197c0
+
+INCBIN "baserom.gbc",$197c0,$197dc - $197c0
+
+VermilionCityScripts: ; 0x197dc
+    dw VermilionCityScript0, VermilionCityScript1
+
+INCBIN "baserom.gbc",$197e0,$6
+
+VermilionCityScript0: ; 0x197e6
+    ld a, [$c109]
+    and a
+    ret nz
+    ld hl, $5823
+    call $34bf
+    ret nc
+    xor a
+    ld [$ff00+$b4], a
+    ld [$cf0d], a
+    ld a, $3
+    ld [$ff00+$8c], a
+    call $2920
+    ld a, [$d803]
+    bit 2, a
+    jr nz, .asm_19810 ; 0x19804 $a
+    ld b, $3f
+    ld a, $1c
+    call Predef
+    ld a, b
+    and a
+    ret nz
+.asm_19810
+    ld a, $40
+    ld [$ccd3], a
+    ld a, $1
+    ld [$cd38], a
+    call $3486
+    ld a, $1
+    ld [$d62a], a
+    ret
+; 0x19823
+
+INCBIN "baserom.gbc",$19823,$1985f - $19823
+
+VermilionCityScript1: ; 0x1985f
+    ld a, [$cd38]
+    and a
+    ret nz
+    ld c, $a
+    call $3739
+    ld a, $0
+    ld [$d62a], a
+    ret
+; 0x1986f
+
+VermilionCityTexts: ; 0x1986f
+    dw VermilionCityText1, VermilionCityText2, VermilionCityText3, VermilionCityText4, VermilionCityText5, VermilionCityText6, VermilionCityText7, VermilionCityText8, VermilionCityText9, VermilionCityText10, VermilionCityText11, VermilionCityText12, VermilionCityText13
 
 VermilionCityText1: ; 0x19889
     TX_FAR _VermilionCityText1
@@ -6370,6 +9410,7 @@ VermilionCityText2: ; 0x1988e
     jp $24d7
 
 INCBIN "baserom.gbc",$198a7,$198b1 - $198a7
+
 VermilionCityText3: ; 0x198b1
     db $08 ; asm
     ld a, [$d803]
@@ -6451,7 +9492,18 @@ VermilionCityText13: ; 0x19951
     TX_FAR _VermilionCityText13
     db $50
 
-INCBIN "baserom.gbc",$19956,$1998a - $19956
+CeladonCityScript: ; 0x19956
+    call $3c3c
+    ld hl, $d77e
+    res 0, [hl]
+    res 7, [hl]
+    ld hl, $d816
+    res 7, [hl]
+    ret
+; 0x19966
+
+CeladonCityTexts: ; 0x19966
+    dw CeladonCityText1, CeladonCityText2, CeladonCityText3, CeladonCityText4, CeladonCityText5, CeladonCityText6, CeladonCityText7, CeladonCityText8, CeladonCityText9, CeladonCityText10, CeladonCityText11, CeladonCityText12, CeladonCityText13, CeladonCityText14, CeladonCityText15, CeladonCityText16, CeladonCityText17, CeladonCityText18
 
 CeladonCityText1: ; 0x1998a
     TX_FAR _CeladonCityText1
@@ -6547,7 +9599,12 @@ CeladonCityText18: ; 0x19a26
     TX_FAR _CeladonCityText18
     db $50
 
-INCBIN "baserom.gbc",$19a2b,$19a5e - $19a2b
+FuchsiaCityScript: ; 0x19a2b
+    jp $3c3c
+; 0x19a2e
+
+FuchsiaCityTexts: ; 0x19a2e
+    dw FuchsiaCityText1, FuchsiaCityText2, FuchsiaCityText3, FuchsiaCityText4, FuchsiaCityText5, FuchsiaCityText6, FuchsiaCityText7, FuchsiaCityText8, FuchsiaCityText9, FuchsiaCityText10, FuchsiaCityText11, FuchsiaCityText12, FuchsiaCityText13, FuchsiaCityText14, FuchsiaCityText15, FuchsiaCityText16, FuchsiaCityText17, FuchsiaCityText18, FuchsiaCityText19, FuchsiaCityText20, FuchsiaCityText21, FuchsiaCityText22, FuchsiaCityText23, FuchsiaCityText24
 
 FuchsiaCityText1: ; 0x19a5e
     TX_FAR _FuchsiaCityText1
@@ -6604,6 +9661,7 @@ FuchsiaCityText19: ; 0x19a90
     jp $24d7
 
 INCBIN "baserom.gbc",$19a9f,$19aa4 - $19a9f
+
 FuchsiaCityText20: ; 0x19aa4
     db $08 ; asm
     ld hl, $5ab3
@@ -6613,6 +9671,7 @@ FuchsiaCityText20: ; 0x19aa4
     jp $24d7
 
 INCBIN "baserom.gbc",$19ab3,$19ab8 - $19ab3
+
 FuchsiaCityText21: ; 0x19ab8
     db $08 ; asm
     ld hl, $5ac7
@@ -6622,6 +9681,7 @@ FuchsiaCityText21: ; 0x19ab8
     jp $24d7
 
 INCBIN "baserom.gbc",$19ac7,$19acc - $19ac7
+
 FuchsiaCityText22: ; 0x19acc
     db $08 ; asm
     ld hl, $5adb
@@ -6631,6 +9691,7 @@ FuchsiaCityText22: ; 0x19acc
     jp $24d7
 
 INCBIN "baserom.gbc",$19adb,$19ae0 - $19adb
+
 FuchsiaCityText23: ; 0x19ae0
     db $08 ; asm
     ld hl, $5aef
@@ -6640,6 +9701,7 @@ FuchsiaCityText23: ; 0x19ae0
     jp $24d7
 
 INCBIN "baserom.gbc",$19aef,$19af4 - $19aef
+
 FuchsiaCityText24: ; 0x19af4
     db $08 ; asm
     ld a, [$d7f6]
@@ -6669,7 +9731,7 @@ INCBIN "baserom.gbc",$19b20,$f
 BluesHouse_h: ; 0x19b2f
 	db $08 ; tileset
 	db $04,$04 ; dimensions
-	dw BluesHouseBlocks,BluesHouseTexts,BluesHouseScript
+	dw BluesHouseBlocks, BluesHouseTexts, BluesHouseScript
 	db 0
 	dw BluesHouseObject
 
@@ -6782,12 +9844,18 @@ BluesHouseBlocks:
 VermilionHouse3_h: ; 0x19c06 to 0x19c12 (12 bytes) (bank=6) (id=196)
     db $08 ; tileset
     db $04, $04 ; dimensions (y, x)
-    dw VermilionHouse3Blocks, $5c15, $5c12 ; blocks, texts, scripts
+    dw VermilionHouse3Blocks, VermilionHouse3Texts, VermilionHouse3Script ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $5c25 ; objects
+    dw VermilionHouse3Object ; objects
 
-INCBIN "baserom.gbc",$19c12,$19c17 - $19c12
+VermilionHouse3Script: ; 0x19c12
+    jp $3c3c
+; 0x19c15
+
+VermilionHouse3Texts: ; 0x19c15
+    dw VermilionHouse3Text1
+
 VermilionHouse3Text1: ; 0x19c17
     db $08 ; asm
     ld a, $4
@@ -6818,12 +9886,35 @@ VermilionHouse3Blocks: ; 16
 IndigoPlateauLobby_h: ; 0x19c4f to 0x19c5b (12 bytes) (bank=6) (id=174)
     db $02 ; tileset
     db $06, $08 ; dimensions (y, x)
-    dw IndigoPlateauLobbyBlocks, $5c7f, $5c5b ; blocks, texts, scripts
+    dw IndigoPlateauLobbyBlocks, IndigoPlateauLobbyTexts, IndigoPlateauLobbyScript ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $5c95 ; objects
+    dw IndigoPlateauLobbyObject ; objects
 
-INCBIN "baserom.gbc",$19c5b,$19c8a - $19c5b
+IndigoPlateauLobbyScript: ; 0x19c5b
+    call $22fa
+    call $3c3c
+    ld hl, $d126
+    bit 6, [hl]
+    res 6, [hl]
+    ret z
+    ld hl, $d869
+    res 7, [hl]
+    ld hl, $d734
+    bit 1, [hl]
+    res 1, [hl]
+    ret z
+    ld hl, $d863
+    xor a
+    ld [hli], a
+    ld [hli], a
+    ld [hli], a
+    ld [hl], a
+    ret
+; 0x19c7f
+
+IndigoPlateauLobbyTexts:
+INCBIN "baserom.gbc",$19c7f,$b
 
 IndigoPlateauLobbyText2:
 IndigoPlateauLobbyText1: ; 0x19c8a
@@ -6836,7 +9927,8 @@ IndigoPlateauLobbyText3: ; 0x19c8f
     TX_FAR _IndigoPlateauLobbyText3
     db $50
 
-INCBIN "baserom.gbc",$19c94,$1
+IndigoPlateauLobbyText5:
+    db $f6
 
 IndigoPlateauLobbyObject: ; 0x19c95 (size=58)
     db $0 ; border tile
@@ -6866,12 +9958,29 @@ IndigoPlateauLobbyBlocks: ; 48
 SilphCo4_h: ; 0x19cff to 0x19d0b (12 bytes) (bank=6) (id=209)
     db $16 ; tileset
     db $09, $0f ; dimensions (y, x)
-    dw SilphCo4Blocks, $5da0, $5d0b ; blocks, texts, scripts
+    dw SilphCo4Blocks, SilphCo4Texts, SilphCo4Script ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $5e35 ; objects
+    dw SilphCo4Object ; objects
 
-INCBIN "baserom.gbc",$19d0b,$19dd3 - $19d0b
+SilphCo4Script: ; 0x19d0b
+    call $5d21
+    call $3c3c
+    ld hl, $5dae
+    ld de, $5d9a
+    ld a, [$d645]
+    call $3160
+    ld [$d645], a
+    ret
+; 0x19d21
+
+INCBIN "baserom.gbc",$19d21,$7f
+
+SilphCo4Texts: ; 0x19da0
+    dw SilphCo4Text1, SilphCo4Text2, SilphCo4Text3, SilphCo4Text4, SilphCo4Text5, SilphCo4Text6, SilphCo4Text7
+
+INCBIN "baserom.gbc",$19dae,$25
+
 SilphCo4Text1: ; 0x19dd3
     db $08 ; asm
     ld hl, $5de0
@@ -6880,6 +9989,7 @@ SilphCo4Text1: ; 0x19dd3
     jp $24d7
 
 INCBIN "baserom.gbc",$19de0,$19dea - $19de0
+
 SilphCo4Text2: ; 0x19dea
     db $08 ; asm
     ld hl, $5dae
@@ -6887,6 +9997,7 @@ SilphCo4Text2: ; 0x19dea
     jp $24d7
 
 INCBIN "baserom.gbc",$19df4,$19e03 - $19df4
+
 SilphCo4Text3: ; 0x19e03
     db $08 ; asm
     ld hl, $5dba
@@ -6894,6 +10005,7 @@ SilphCo4Text3: ; 0x19e03
     jp $24d7
 
 INCBIN "baserom.gbc",$19e0d,$19e1c - $19e0d
+
 SilphCo4Text4: ; 0x19e1c
     db $08 ; asm
     ld hl, $5dc6
@@ -6901,6 +10013,7 @@ SilphCo4Text4: ; 0x19e1c
     jp $24d7
 
 INCBIN "baserom.gbc",$19e26,$f
+
 SilphCo4Object: ; 0x19e35 (size=111)
     db $2e ; border tile
 
@@ -6939,12 +10052,29 @@ SilphCo4Blocks: ; 135
 SilphCo5_h: ; 0x19f2b to 0x19f37 (12 bytes) (bank=6) (id=210)
     db $16 ; tileset
     db $09, $0f ; dimensions (y, x)
-    dw SilphCo5Blocks, $5fbc, $5f37 ; blocks, texts, scripts
+    dw SilphCo5Blocks, SilphCo5Texts, SilphCo5Script ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $608d ; objects
+    dw SilphCo5Object ; objects
 
-INCBIN "baserom.gbc",$19f37,$1a003 - $19f37
+SilphCo5Script: ; 0x19f37
+    call $5f4d
+    call $3c3c
+    ld hl, $5fd2
+    ld de, $5fb6
+    ld a, [$d646]
+    call $3160
+    ld [$d646], a
+    ret
+; 0x19f4d
+
+INCBIN "baserom.gbc",$19f4d,$6f
+
+SilphCo5Texts: ; 0x19fbc
+    dw SilphCo5Text1, SilphCo5Text2, SilphCo5Text3, SilphCo5Text4, SilphCo5Text5, SilphCo5Text6, SilphCo5Text7, SilphCo5Text8, SilphCo5Text9, SilphCo5Text10, SilphCo5Text11
+
+INCBIN "baserom.gbc",$19fd2,$31
+
 SilphCo5Text1: ; 0x1a003
     db $08 ; asm
     ld hl, $6010
@@ -6953,6 +10083,7 @@ SilphCo5Text1: ; 0x1a003
     jp $24d7
 
 INCBIN "baserom.gbc",$1a010,$1a01a - $1a010
+
 SilphCo5Text2: ; 0x1a01a
     db $08 ; asm
     ld hl, $5fd2
@@ -6960,6 +10091,7 @@ SilphCo5Text2: ; 0x1a01a
     jp $24d7
 
 INCBIN "baserom.gbc",$1a024,$1a033 - $1a024
+
 SilphCo5Text3: ; 0x1a033
     db $08 ; asm
     ld hl, $5fde
@@ -6967,6 +10099,7 @@ SilphCo5Text3: ; 0x1a033
     jp $24d7
 
 INCBIN "baserom.gbc",$1a03d,$1a04c - $1a03d
+
 SilphCo5Text4: ; 0x1a04c
     db $08 ; asm
     ld hl, $5fea
@@ -6974,6 +10107,7 @@ SilphCo5Text4: ; 0x1a04c
     jp $24d7
 
 INCBIN "baserom.gbc",$1a056,$1a065 - $1a056
+
 SilphCo5Text5: ; 0x1a065
     db $08 ; asm
     ld hl, $5ff6
@@ -7036,12 +10170,29 @@ SilphCo5Blocks: ; 135
 SilphCo6_h: ; 0x1a19d to 0x1a1a9 (12 bytes) (bank=6) (id=211)
     db $16 ; tileset
     db $09, $0d ; dimensions (y, x)
-    dw SilphCo6Blocks, $61f6, $61a9 ; blocks, texts, scripts
+    dw SilphCo6Blocks, SilphCo6Texts, SilphCo6Script ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $62fb ; objects
+    dw SilphCo6Object ; objects
 
-INCBIN "baserom.gbc",$1a1a9,$1a23d - $1a1a9
+SilphCo6Script: ; 0x1a1a9
+    call $61bf
+    call $3c3c
+    ld hl, $620a
+    ld de, $61f0
+    ld a, [$d647]
+    call $3160
+    ld [$d647], a
+    ret
+; 0x1a1bf
+
+INCBIN "baserom.gbc",$1a1bf,$37
+
+SilphCo6Texts: ; 0x1a1f6
+    dw SilphCo6Text1, SilphCo6Text2, SilphCo6Text3, SilphCo6Text4, SilphCo6Text5, SilphCo6Text6, SilphCo6Text7, SilphCo6Text8, SilphCo6Text9, SilphCo6Text10
+
+INCBIN "baserom.gbc",$1a20a,$33
+
 SilphCo6Text1: ; 0x1a23d
     db $08 ; asm
     ld hl, $624a
@@ -7050,6 +10201,7 @@ SilphCo6Text1: ; 0x1a23d
     jp $24d7
 
 INCBIN "baserom.gbc",$1a24a,$1a254 - $1a24a
+
 SilphCo6Text2: ; 0x1a254
     db $08 ; asm
     ld hl, $6261
@@ -7058,6 +10210,7 @@ SilphCo6Text2: ; 0x1a254
     jp $24d7
 
 INCBIN "baserom.gbc",$1a261,$1a26b - $1a261
+
 SilphCo6Text3: ; 0x1a26b
     db $08 ; asm
     ld hl, $6278
@@ -7066,6 +10219,7 @@ SilphCo6Text3: ; 0x1a26b
     jp $24d7
 
 INCBIN "baserom.gbc",$1a278,$1a282 - $1a278
+
 SilphCo6Text4: ; 0x1a282
     db $08 ; asm
     ld hl, $628f
@@ -7074,6 +10228,7 @@ SilphCo6Text4: ; 0x1a282
     jp $24d7
 
 INCBIN "baserom.gbc",$1a28f,$1a299 - $1a28f
+
 SilphCo6Text5: ; 0x1a299
     db $08 ; asm
     ld hl, $62a6
@@ -7082,6 +10237,7 @@ SilphCo6Text5: ; 0x1a299
     jp $24d7
 
 INCBIN "baserom.gbc",$1a2a6,$1a2b0 - $1a2a6
+
 SilphCo6Text6: ; 0x1a2b0
     db $08 ; asm
     ld hl, $620a
@@ -7089,6 +10245,7 @@ SilphCo6Text6: ; 0x1a2b0
     jp $24d7
 
 INCBIN "baserom.gbc",$1a2ba,$1a2c9 - $1a2ba
+
 SilphCo6Text7: ; 0x1a2c9
     db $08 ; asm
     ld hl, $6216
@@ -7096,6 +10253,7 @@ SilphCo6Text7: ; 0x1a2c9
     jp $24d7
 
 INCBIN "baserom.gbc",$1a2d3,$1a2e2 - $1a2d3
+
 SilphCo6Text8: ; 0x1a2e2
     db $08 ; asm
     ld hl, $6222
@@ -7103,6 +10261,7 @@ SilphCo6Text8: ; 0x1a2e2
     jp $24d7
 
 INCBIN "baserom.gbc",$1a2ec,$f
+
 SilphCo6Object: ; 0x1a2fb (size=112)
     db $2e ; border tile
 
@@ -7144,7 +10303,7 @@ SECTION "bank7",DATA,BANK[$7]
 CinnabarIsland_h: ; 0x1c000 to 0x1c022 (34 bytes) (bank=7) (id=8)
     db $00 ; tileset
     db $09, $0a ; dimensions (y, x)
-    dw CinnabarIslandBlocks, $4a81, $4a19 ; blocks, texts, scripts
+    dw CinnabarIslandBlocks, CinnabarIslandTexts, CinnabarIslandScript ; blocks, texts, scripts
     db NORTH | EAST ; connections
 
     ; connections data
@@ -7163,7 +10322,7 @@ CinnabarIsland_h: ; 0x1c000 to 0x1c022 (34 bytes) (bank=7) (id=8)
 
     ; end connection data
 
-    dw $4022 ; objects
+    dw CinnabarIslandObject ; objects
 
 CinnabarIslandObject: ; 0x1c022 (size=71)
     db $43 ; border tile
@@ -7199,7 +10358,7 @@ CinnabarIslandBlocks: ; 90
 Route1_h: ; 0x1c0c3 to 0x1c0e5 (34 bytes) (bank=7) (id=12)
     db $00 ; tileset
     db $12, $0a ; dimensions (y, x)
-    dw Route1Blocks, $4ab2, $4aaf ; blocks, texts, scripts
+    dw Route1Blocks, Route1Texts, Route1Script ; blocks, texts, scripts
     db NORTH | SOUTH ; connections
 
     ; connections data
@@ -7218,7 +10377,7 @@ Route1_h: ; 0x1c0c3 to 0x1c0e5 (34 bytes) (bank=7) (id=12)
 
     ; end connection data
 
-    dw $40e5 ; objects
+    dw Route1Object ; objects
 
 Route1Object: ; 0x1c0e5 (size=19)
     db $b ; border tile
@@ -7243,15 +10402,28 @@ UndergroundPathEntranceRoute8Blocks: ; 16
 OaksLabBlocks: ; 30
     INCBIN "maps/oakslab.blk"
 
-ViridianHouseBlocks: ; 16
+Route16HouseBlocks:
+Route2HouseBlocks:
+SaffronHouse1Blocks:
+SaffronHouse2Blocks:
+VermilionHouse1Blocks:
+NameRaterBlocks:
+LavenderHouse1Blocks:
+LavenderHouse2Blocks:
+CeruleanHouse2Blocks:
+PewterHouse1Blocks:
+PewterHouse2Blocks:
+ViridianHouseBlocks: ; 16 0x1c1de 41DE
     INCBIN "maps/viridianhouse.blk"
 
-SchoolBlocks: ; 16
+CeladonMansion5Blocks:
+SchoolBlocks: ; 16 0x1c1ee 41EE
     INCBIN "maps/school.blk"
 
 CeruleanHouseTrashedBlocks: ; 16
     INCBIN "maps/ceruleanhousetrashed.blk"
 
+DiglettsCaveEntranceRoute11Blocks:
 DiglettsCaveRoute2Blocks: ; 16
     INCBIN "maps/diglettscaveroute2.blk"
 
@@ -7447,7 +10619,69 @@ MonsterNames: ; 421E
 	db "WEEPINBELL"
 	db "VICTREEBEL"
 
-INCBIN "baserom.gbc",$1c98a,$1ca96 - $1c98a
+INCBIN "baserom.gbc",$1c98a,$1ca19 - $1c98a
+
+CinnabarIslandScript: ; 0x1ca19
+    call $3c3c
+    ld hl, $d126
+    set 5, [hl]
+    ld hl, $d796
+    res 0, [hl]
+    ld hl, $d7a3
+    res 1, [hl]
+    ld hl, $4a34
+    ld a, [$d639]
+    jp $3d97
+; 0x1ca34
+
+CinnabarIslandScripts: ; 0x1ca34
+    dw CinnabarIslandScript0, CinnabarIslandScript1
+
+CinnabarIslandScript0: ; 0x1ca38
+    ld b, $2b
+    call $3493
+    ret nz
+    ld a, [$d361]
+    cp $4
+    ret nz
+    ld a, [$d362]
+    cp $12
+    ret nz
+    ld a, $8
+    ld [$d528], a
+    ld a, $8
+    ld [$ff00+$8c], a
+    call $2920
+    xor a
+    ld [$ff00+$b4], a
+    ld a, $1
+    ld [$cd38], a
+    ld a, $80
+    ld [$ccd3], a
+    call $3486
+    xor a
+    ld [$c109], a
+    ld [$cd6b], a
+    ld a, $1
+    ld [$d639], a
+    ret
+; 0x1ca73
+
+CinnabarIslandScript1: ; 0x1ca73
+    ld a, [$cd38]
+    and a
+    ret nz
+    call Delay3
+    ld a, $0
+    ld [$d639], a
+    ret
+; 0x1ca81
+
+CinnabarIslandTexts: ; 0x1ca81
+    dw CinnabarIslandText1, CinnabarIslandText2, CinnabarIslandText3, CinnabarIslandText4, CinnabarIslandText5, CinnabarIslandText6, CinnabarIslandText7, CinnabarIslandText8
+
+CinnabarIslandText8:
+INCBIN "baserom.gbc",$1ca91,$5
 
 CinnabarIslandText1: ; 0x1ca96
     TX_FAR _CinnabarIslandText1
@@ -7469,7 +10703,13 @@ CinnabarIslandText7: ; 0x1caaa
     TX_FAR _CinnabarIslandText7
     db $50
 
-INCBIN "baserom.gbc",$1caaf,$1cab8 - $1caaf
+Route1Script: ; 0x1caaf
+    jp $3c3c
+; 0x1cab2
+
+Route1Texts: ; 0x1cab2
+    dw Route1Text1, Route1Text2, Route1Text3
+
 Route1Text1: ; 0x1cab8
     db $08 ; asm
     ld hl, $d7bf
@@ -7505,12 +10745,197 @@ Route1Text3: ; 0x1cafd
 OaksLab_h: ; 0x1cb02 to 0x1cb0e (12 bytes) (bank=7) (id=40)
     db $05 ; tileset
     db $06, $05 ; dimensions (y, x)
-    dw OaksLabBlocks, $5082, $4b0e ; blocks, texts, scripts
+    dw OaksLabBlocks, OaksLabTexts, OaksLabScript ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $540a ; objects
+    dw OaksLabObject ; objects
 
-INCBIN "baserom.gbc",$1cb0e,$1d0ce - $1cb0e
+OaksLabScript: ; 0x1cb0e
+    ld a, [$d74b]
+    bit 6, a
+    call nz, $5076
+    ld a, $1
+    ld [$cf0c], a
+    xor a
+    ld [$cc3c], a
+    ld hl, $4b28
+    ld a, [$d5f0]
+    jp $3d97
+; 0x1cb28
+
+OaksLabScripts: ; 0x1cb28
+    dw OaksLabScript0, OaksLabScript1, OaksLabScript2, OaksLabScript3, OaksLabScript4, OaksLabScript5, OaksLabScript6, OaksLabScript7
+
+INCBIN "baserom.gbc",$1cb38,$16
+
+OaksLabScript0: ; 0x1cb4e
+    ld a, [$d74b]
+    bit 7, a
+    ret z
+    ld a, [$cf10]
+    and a
+    ret nz
+    ld a, $31
+    ld [$cc4d], a
+    ld a, $15
+    call Predef
+    ld hl, $d72e
+    res 4, [hl]
+    ld a, $1
+    ld [$d5f0], a
+    ret
+; 0x1cb6e
+
+OaksLabScript1: ; 0x1cb6e
+    ld a, $8
+    ld [$ff00+$8c], a
+    ld de, $4b7e
+    call $363a
+    ld a, $2
+    ld [$d5f0], a
+    ret
+; 0x1cb7e
+
+INCBIN "baserom.gbc",$1cb7e,$1cb82 - $1cb7e
+
+OaksLabScript2: ; 0x1cb82
+    ld a, [$d730]
+    bit 0, a
+    ret nz
+    ld a, $31
+    ld [$cc4d], a
+    ld a, $11
+    call Predef
+    ld a, $2e
+    ld [$cc4d], a
+    ld a, $15
+    call Predef
+    ld a, $3
+    ld [$d5f0], a
+    ret
+; 0x1cba2
+
+OaksLabScript3: ; 0x1cba2
+    call Delay3
+    ld hl, $ccd3
+    ld de, $4bcf
+    call $350c
+    dec a
+    ld [$cd38], a
+    call $3486
+    ld a, $1
+    ld [$ff00+$8c], a
+    xor a
+    ld [$ff00+$8d], a
+    call $34a6
+    ld a, $5
+    ld [$ff00+$8c], a
+    xor a
+    ld [$ff00+$8d], a
+    call $34a6
+    ld a, $4
+    ld [$d5f0], a
+    ret
+; 0x1cbcf
+
+INCBIN "baserom.gbc",$1cbcf,$1cbd2 - $1cbcf
+
+OaksLabScript4: ; 0x1cbd2
+    ld a, [$cd38]
+    and a
+    ret nz
+    ld hl, $d747
+    set 0, [hl]
+    ld hl, $d74b
+    set 0, [hl]
+    ld a, $1
+    ld [$ff00+$8c], a
+    ld a, $4
+    ld [$ff00+$8d], a
+    call $34a6
+    call $2429
+    ld hl, $d733
+    res 1, [hl]
+    call $2307
+    ld a, $5
+    ld [$d5f0], a
+    ret
+; 0x1cbfd
+
+OaksLabScript5: ; 0x1cbfd
+    ld a, $fc
+    ld [$cd6b], a
+    ld a, $11
+    ld [$ff00+$8c], a
+    call $2920
+    call Delay3
+    ld a, $12
+    ld [$ff00+$8c], a
+    call $2920
+    call Delay3
+    ld a, $13
+    ld [$ff00+$8c], a
+    call $2920
+    call Delay3
+    ld a, $14
+    ld [$ff00+$8c], a
+    call $2920
+    ld hl, $d74b
+    set 1, [hl]
+    xor a
+    ld [$cd6b], a
+    ld a, $6
+    ld [$d5f0], a
+    ret
+; 0x1cc36
+
+OaksLabScript6: ; 0x1cc36
+    ld a, [$d361]
+    cp $6
+    ret nz
+    ld a, $5
+    ld [$ff00+$8c], a
+    xor a
+    ld [$ff00+$8d], a
+    call $34a6
+    ld a, $1
+    ld [$ff00+$8c], a
+    xor a
+    ld [$ff00+$8d], a
+    call $34a6
+    call $2429
+    ld a, $c
+    ld [$ff00+$8c], a
+    call $2920
+    ld a, $1
+    ld [$cd38], a
+    ld a, $40
+    ld [$ccd3], a
+    call $3486
+    ld a, $8
+    ld [$d528], a
+    ld a, $7
+    ld [$d5f0], a
+    ret
+; 0x1cc72
+
+OaksLabScript7: ; 0x1cc72
+    ld a, [$cd38]
+    and a
+    ret nz
+    call Delay3
+    ld a, $6
+    ld [$d5f0], a
+    ret
+; 0x1cc80
+
+INCBIN "baserom.gbc",$1cc80,$402
+
+OaksLabTexts: ; 0x1d082
+    dw OaksLabText1, OaksLabText2, OaksLabText3, OaksLabText4, OaksLabText5, OaksLabText6, OaksLabText7, OaksLabText8, OaksLabText9, OaksLabText10, OaksLabText11, OaksLabText12, OaksLabText13, OaksLabText14, OaksLabText15, OaksLabText16, OaksLabText17, OaksLabText18, OaksLabText19, OaksLabText20, OaksLabText21, OaksLabText22, OaksLabText23, OaksLabText24, OaksLabText25, OaksLabText26, OaksLabText27
+
+INCBIN "baserom.gbc",$1d0b8,22
+
 OaksLabText1: ; 0x1d0ce
     db $08 ; asm
     ld a, [$d74b]
@@ -7612,14 +11037,14 @@ asm_9eaa4: ; 0x1d157
 asm_f6e3a: ; 0x1d195
     ld hl, $519a
     jr asm_b5ddf ; 0x1d198 $19
-    rla
+    rla ; probably a TX_FAR
     ld b, $4e
     dec h
     ld d, b
 asm_2391d: ; 0x1d19f
     ld hl, $51a4
     jr asm_b5ddf ; 0x1d1a2 $f
-    rla
+    rla ; probably a TX_FAR
     cpl
     ld c, [hl]
     dec h
@@ -7627,7 +11052,7 @@ asm_2391d: ; 0x1d19f
 asm_ddec1: ; 0x1d1a9
     ld hl, $51ae
     jr asm_b5ddf ; 0x1d1ac $5
-    rla
+    rla ; probably a TX_FAR
     ld d, a
     ld c, [hl]
     dec h
@@ -7785,7 +11210,103 @@ OaksLabText9: ; 0x1d336
     call PrintText
     jp $24d7
 
-INCBIN "baserom.gbc",$1d340,$1d3fb - $1d340
+INCBIN "baserom.gbc",$1d340,$1d345 - $1d340
+
+OaksLabText17: ; 0x1d345
+    db $8
+    ld hl, $534f
+    call PrintText
+    jp $24d7
+; 0x1d34f
+
+INCBIN "baserom.gbc",$1d34f,$1d354 - $1d34f
+
+OaksLabText18: ; 0x1d354
+    db $8
+    ld hl, $535e
+    call PrintText
+    jp $24d7
+; 0x1d35e
+
+INCBIN "baserom.gbc",$1d35e,$1d363 - $1d35e
+
+OaksLabText19: ; 0x1d363
+    db $8
+    ld hl, $536d
+    call PrintText
+    jp $24d7
+; 0x1d36d
+
+INCBIN "baserom.gbc",$1d36d,$1d372 - $1d36d
+
+OaksLabText20: ; 0x1d372
+    db $8
+    ld hl, $537c
+    call PrintText
+    jp $24d7
+; 0x1d37c
+
+INCBIN "baserom.gbc",$1d37c,$1d381 - $1d37c
+
+OaksLabText12: ; 0x1d381
+INCBIN "baserom.gbc",$1d381,$5
+
+INCBIN "baserom.gbc",$1d386,$1d390 - $1d386
+
+OaksLabText13: ; 0x1d390
+INCBIN "baserom.gbc",$1d390,$5
+
+INCBIN "baserom.gbc",$1d395,$1d39f - $1d395
+
+OaksLabText14: ; 0x1d39f
+    db $8
+    ld hl, $53a9
+    call PrintText
+    jp $24d7
+; 0x1d3a9
+
+INCBIN "baserom.gbc",$1d3a9,$1d3af - $1d3a9
+
+OaksLabText15: ; 0x1d3af to 0x1d3b9
+    db $8
+    ld hl, $53b9
+    call PrintText
+    jp $24d7
+; 0x1d3b9
+
+INCBIN "baserom.gbc",$1d3b9,$1d3c8 - $1d3b9
+
+OaksLabText16: ; 0x1d3c8
+    db $8
+    ld hl, $53d2
+    call PrintText
+    jp $24d7
+; 0x1d3d2
+
+INCBIN "baserom.gbc",$1d3d2,$1d3d7 - $1d3d2
+
+OaksLabText21: ; 0x1d3d7
+INCBIN "baserom.gbc",$1d3d7,$5
+
+OaksLabText22: ; 0x1d3dc
+INCBIN "baserom.gbc",$1d3dc,$5
+
+OaksLabText23: ; 0x1d3e1
+INCBIN "baserom.gbc",$1d3e1,$5
+
+OaksLabText24: ; 0x1d3e6
+INCBIN "baserom.gbc",$1d3e6,$5
+
+OaksLabText25: ; 0x1d3eb
+INCBIN "baserom.gbc",$1d3eb,$4
+    db $11
+    db $50
+
+OaksLabText26: ; 0x1d3f1
+INCBIN "baserom.gbc",$1d3f1,$1d3f6 - $1d3f1
+
+OaksLabText27: ; 0x1d3f6
+INCBIN "baserom.gbc",$1d3f6,5
 
 OaksLabText11:
 OaksLabText10: ; 0x1d3fb
@@ -7825,14 +11346,59 @@ OaksLabObject: ; 0x1d40a (size=88)
 ViridianMart_h: ; 0x1d462 to 0x1d46e (12 bytes) (bank=7) (id=42)
     db $02 ; tileset
     db $04, $04 ; dimensions (y, x)
-    dw ViridianMartBlocks, $54e0, $546e ; blocks, texts, scripts
+    dw ViridianMartBlocks, ViridianMartTexts, ViridianMartScript ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $550a ; objects
+    dw ViridianMartObject ; objects
 
-INCBIN "baserom.gbc",$1d46e,$1d4e0 - $1d46e
+ViridianMartScript: ; 0x1d46e
+    call $547d
+    call $3c3c
+    ld hl, $5495
+    ld a, [$d60d]
+    jp $3d97
+; 0x1d47d
+
+INCBIN "baserom.gbc",$1d47d,$1e
+
+ViridianMartScript0: ; 0x1d49b
+    call $2429
+    ld a, $4
+    ld [$ff00+$8c], a
+    call $2920
+    ld hl, $ccd3
+    ld de, $54bb
+    call $350c
+    dec a
+    ld [$cd38], a
+    call $3486
+    ld a, $1
+    ld [$d60d], a
+    ret
+; 0x1d4bb
+
+INCBIN "baserom.gbc",$1d4bb,$1d4c0 - $1d4bb
+
+ViridianMartScript1: ; 0x1d4c0
+    ld a, [$cd38]
+    and a
+    ret nz
+    call Delay3
+    ld a, $5
+    ld [$ff00+$8c], a
+    call $2920
+    ld bc, $4601
+    call GiveItem
+    ld hl, $d74e
+    set 1, [hl]
+    ld a, $2
+    ld [$d60d], a
+    ret
+; 0x1d4e0
+
 ViridianMartTexts: ; 0x1d4e0
-    dw ViridianMartText1, ViridianMartText2, ViridianMartText3
+    dw ViridianMartText1, ViridianMartText2, ViridianMartText3 ;, ViridianMartText4
+
 INCBIN "baserom.gbc",$1d4e6,$a
 
 ViridianMartText1: ; 0x1d4f0
@@ -7873,12 +11439,15 @@ ViridianMartBlocks: ; 16
 School_h: ; 0x1d540 to 0x1d54c (12 bytes) (bank=7) (id=43)
     db $08 ; tileset
     db $04, $04 ; dimensions (y, x)
-    dw SchoolBlocks, $554f, $554c ; blocks, texts, scripts
+    dw SchoolBlocks, SchoolTexts, SchoolScript ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $555d ; objects
+    dw SchoolObject ; objects
 
-INCBIN "baserom.gbc",$1d54c,$1d54f - $1d54c
+SchoolScript: ; 0x1d54c
+    jp $3c3c
+; 0x1d54f
+
 SchoolTexts: ; 0x1d54f
     dw SchoolText1, SchoolText2
 
@@ -7910,12 +11479,19 @@ SchoolObject: ; 0x1d55d (size=32)
 ViridianHouse_h: ; 0x1d57d to 0x1d589 (12 bytes) (bank=7) (id=44)
     db $08 ; tileset
     db $04, $04 ; dimensions (y, x)
-    dw ViridianHouseBlocks, $558d, $558a ; blocks, texts, scripts
+    dw ViridianHouseBlocks, ViridianHouseTexts, ViridianHouseScript ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $55bb ; objects
+    dw ViridianHouseObject ; objects
 
-INCBIN "baserom.gbc",$1d589,$1d595 - $1d589
+INCBIN "baserom.gbc",$1d589,$1d58a - $1d589
+
+ViridianHouseScript: ; 0x1d58a
+    jp $3c3c
+; 0x1d58d
+
+ViridianHouseTexts: ; 0x1d58d
+    dw ViridianHouseText1, ViridianHouseText2, ViridianHouseText3, ViridianHouseText4
 
 ViridianHouseText1: ; 0x1d595
     TX_FAR _ViridianHouseText1
@@ -7962,12 +11538,15 @@ ViridianHouseObject: ; 0x1d5bb (size=44)
 PewterHouse1_h: ; 0x1d5e7 to 0x1d5f3 (12 bytes) (bank=7) (id=55)
     db $08 ; tileset
     db $04, $04 ; dimensions (y, x)
-    dw $41de, $55f6, $55f3 ; blocks, texts, scripts
+    dw PewterHouse1Blocks, PewterHouse1Texts, PewterHouse1Script ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $5616 ; objects
+    dw PewterHouse1Object ; objects
 
-INCBIN "baserom.gbc",$1d5f3,$1d5f6 - $1d5f3
+PewterHouse1Script: ; 0x1d5f3
+    jp $3c3c
+; 0x1d5f6
+
 PewterHouse1Texts: ; 0x1d5f6
     dw PewterHouse1Text1, PewterHouse1Text2, PewterHouse1Text3
 
@@ -8008,12 +11587,15 @@ PewterHouse1Object: ; 0x1d616 (size=38)
 PewterHouse2_h: ; 0x1d63c to 0x1d648 (12 bytes) (bank=7) (id=57)
     db $08 ; tileset
     db $04, $04 ; dimensions (y, x)
-    dw $41de, $564b, $5648 ; blocks, texts, scripts
+    dw PewterHouse2Blocks, PewterHouse2Texts, PewterHouse2Script ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $5659 ; objects
+    dw PewterHouse2Object ; objects
 
-INCBIN "baserom.gbc",$1d648,$1d64b - $1d648
+PewterHouse2Script: ; 0x1d648
+    jp $3c3c
+; 0x1d64b
+
 PewterHouse2Texts: ; 0x1d64b
     dw PewterHouse2Text1, PewterHouse2Text2
 
@@ -8045,12 +11627,19 @@ PewterHouse2Object: ; 0x1d659 (size=32)
 CeruleanHouseTrashed_h: ; 0x1d679 to 0x1d685 (12 bytes) (bank=7) (id=62)
     db $08 ; tileset
     db $04, $04 ; dimensions (y, x)
-    dw CeruleanHouseTrashedBlocks, $5689, $5685 ; blocks, texts, scripts
+    dw CeruleanHouseTrashedBlocks, CeruleanHouseTrashedTexts, CeruleanHouseTrashedScript ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $56bf ; objects
+    dw CeruleanHouseTrashedObject ; objects
 
-INCBIN "baserom.gbc",$1d685,$1d68f - $1d685
+CeruleanHouseTrashedScript: ; 0x1d685
+    call $3c3c
+    ret
+; 0x1d689
+
+CeruleanHouseTrashedTexts: ; 0x1d689
+    dw CeruleanHouseTrashedText1, CeruleanHouseTrashedText2, CeruleanHouseTrashedText3
+
 CeruleanHouseTrashedText1: ; 0x1d68f
     db $08 ; asm
     ld b, $e4
@@ -8100,12 +11689,17 @@ CeruleanHouseTrashedObject: ; 0x1d6bf (size=43)
 CeruleanHouse2_h: ; 0x1d6ea to 0x1d6f6 (12 bytes) (bank=7) (id=63)
     db $08 ; tileset
     db $04, $04 ; dimensions (y, x)
-    dw $41de, $56f9, $56f6 ; blocks, texts, scripts
+    dw CeruleanHouse2Blocks, CeruleanHouse2Texts, CeruleanHouse2Script ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $5710 ; objects
+    dw CeruleanHouse2Object ; objects
 
-INCBIN "baserom.gbc",$1d6f6,$1d6fd - $1d6f6
+CeruleanHouse2Script: ; 0x1d6f6
+    jp $3c3c
+; 0x1d6f9
+
+CeruleanHouse2Texts: ; 0x1d6f9
+    dw CeruleanHouse2Text1, CeruleanHouse2Text2
 
 CeruleanHouse2Text1: ; 0x1d6fd
     TX_FAR _CeruleanHouse2Text1
@@ -8139,12 +11733,18 @@ CeruleanHouse2Object: ; 0x1d710 (size=32)
 BikeShop_h: ; 0x1d730 to 0x1d73c (12 bytes) (bank=7) (id=66)
     db $15 ; tileset
     db $04, $04 ; dimensions (y, x)
-    dw BikeShopBlocks, $573f, $573c ; blocks, texts, scripts
+    dw BikeShopBlocks, BikeShopTexts, BikeShopScript ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $5866 ; objects
+    dw BikeShopObject ; objects
 
-INCBIN "baserom.gbc",$1d73c,$1d745 - $1d73c
+BikeShopScript: ; 0x1d73c
+    jp $3c3c
+; 0x1d73f
+
+BikeShopTexts: ; 0x1d73f
+    dw BikeShopText1, BikeShopText2, BikeShopText3
+
 BikeShopText1: ; 0x1d745
     db $08 ; asm
     ld a, [$d75f]
@@ -8222,6 +11822,7 @@ BikeShopText1: ; 0x1d745
     jp $24d7
 
 INCBIN "baserom.gbc",$1d7f8,$1d839 - $1d7f8
+
 BikeShopText2: ; 0x1d839
     db $08 ; asm
     ld hl, $5843
@@ -8229,6 +11830,7 @@ BikeShopText2: ; 0x1d839
     jp $24d7
 
 INCBIN "baserom.gbc",$1d843,$1d848 - $1d843
+
 BikeShopText3: ; 0x1d848
     db $08 ; asm
     ld a, [$d75f]
@@ -8241,6 +11843,7 @@ BikeShopText3: ; 0x1d848
     jp $24d7
 
 INCBIN "baserom.gbc",$1d85c,$a
+
 BikeShopObject: ; 0x1d866 (size=38)
     db $e ; border tile
 
@@ -8265,12 +11868,19 @@ BikeShopBlocks: ; 16
 LavenderHouse1_h: ; 0x1d89c to 0x1d8a8 (12 bytes) (bank=7) (id=149)
     db $08 ; tileset
     db $04, $04 ; dimensions (y, x)
-    dw $41de, $58ac, $58a8 ; blocks, texts, scripts
+    dw LavenderHouse1Blocks, LavenderHouse1Texts, LavenderHouse1Script ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $596a ; objects
+    dw LavenderHouse1Object ; objects
 
-INCBIN "baserom.gbc",$1d8a8,$1d8b8 - $1d8a8
+LavenderHouse1Script: ; 0x1d8a8
+    call $3c3c
+    ret
+; 0x1d8ac
+
+LavenderHouse1Texts: ; 0x1d8ac
+    dw LavenderHouse1Text1, LavenderHouse1Text2, LavenderHouse1Text3, LavenderHouse1Text4, LavenderHouse1Text5, LavenderHouse1Text6
+
 LavenderHouse1Text1: ; 0x1d8b8
     db $08 ; asm
     ld a, [$d7e0]
@@ -8286,6 +11896,7 @@ LavenderHouse1Text1: ; 0x1d8b8
     jp $24d7
 
 INCBIN "baserom.gbc",$1d8d1,$1d8db - $1d8d1
+
 LavenderHouse1Text2: ; 0x1d8db
     db $08 ; asm
     ld a, [$d7e0]
@@ -8372,12 +11983,18 @@ LavenderHouse1Object: ; 0x1d96a (size=56)
 LavenderHouse2_h: ; 0x1d9a2 to 0x1d9ae (12 bytes) (bank=7) (id=151)
     db $08 ; tileset
     db $04, $04 ; dimensions (y, x)
-    dw $41de, $59b2, $59ae ; blocks, texts, scripts
+    dw LavenderHouse2Blocks, LavenderHouse2Texts, LavenderHouse2Script ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $59e6 ; objects
+    dw LavenderHouse2Object ; objects
 
-INCBIN "baserom.gbc",$1d9ae,$1d9b6 - $1d9ae
+LavenderHouse2Script: ; 0x1d9ae
+    call $3c3c
+    ret
+; 0x1d9b2
+
+LavenderHouse2Texts: ; 0x1d9b2
+    dw LavenderHouse2Text1, LavenderHouse2Text2
 
 LavenderHouse2Text1: ; 0x1d9b6
     TX_FAR _LavenderHouse2Text1
@@ -8402,6 +12019,7 @@ LavenderHouse2Text2: ; 0x1d9c3
     jp $24d7
 
 INCBIN "baserom.gbc",$1d9dc,$a
+
 LavenderHouse2Object: ; 0x1d9e6 (size=32)
     db $a ; border tile
 
@@ -8422,12 +12040,60 @@ LavenderHouse2Object: ; 0x1d9e6 (size=32)
 NameRater_h: ; 0x1da06 to 0x1da12 (12 bytes) (bank=7) (id=229)
     db $08 ; tileset
     db $04, $04 ; dimensions (y, x)
-    dw $41de, $5a54, $5a12 ; blocks, texts, scripts
+    dw NameRaterBlocks, $5a54, NameRaterScript ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $5ad6 ; objects
+    dw NameRaterObject ; objects
 
-INCBIN "baserom.gbc",$1da12,$1dad6 - $1da12
+NameRaterScript: ; 0x1da12
+    jp $3c3c
+; 0x1da15
+
+INCBIN "baserom.gbc",$1da15,$41
+
+NameRaterText1: ; 0x1da56
+    db $8
+    call $36f4
+    ld hl, $5ab3
+    call $5a15
+    jr nz, .asm_1daae ; 0x1da60 $4c
+    ld hl, $5ab8
+    call PrintText
+    xor a
+    ld [$d07d], a
+    ld [$cfcb], a
+    ld [$cc35], a
+    call $13fc
+    push af
+    call $3dd4
+    call $3dbe
+    call $20ba
+    pop af
+    jr c, .asm_1daae ; 0x1da80 $2c
+    call $15b4
+    call $5a20
+    ld hl, $5ad1
+    jr c, .asm_1daa8 ; 0x1da8b $1b
+    ld hl, $5abd
+    call $5a15
+    jr nz, .asm_1daae ; 0x1da93 $19
+    ld hl, $5ac2
+    call PrintText
+    ld b, $1
+    ld hl, $655c
+    call Bankswitch
+    jr c, .asm_1daae ; 0x1daa3 $9
+    ld hl, $5ac7
+.asm_1daa8
+    call PrintText
+    jp $24d7
+.asm_1daae
+    ld hl, $5acc
+    jr .asm_1daa8 ; 0x1dab1 $f5
+; 0x1dab3
+
+INCBIN "baserom.gbc",$1dab3,$23
+
 NameRaterObject: ; 0x1dad6 (size=26)
     db $a ; border tile
 
@@ -8447,12 +12113,18 @@ NameRaterObject: ; 0x1dad6 (size=26)
 VermilionHouse1_h: ; 0x1daf0 to 0x1dafc (12 bytes) (bank=7) (id=93)
     db $08 ; tileset
     db $04, $04 ; dimensions (y, x)
-    dw $41de, $5b00, $5afc ; blocks, texts, scripts
+    dw VermilionHouse1Blocks, VermilionHouse1Texts, VermilionHouse1Script ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $5b20 ; objects
+    dw VermilionHouse1Object ; objects
 
-INCBIN "baserom.gbc",$1dafc,$1db06 - $1dafc
+VermilionHouse1Script: ; 0x1dafc
+    call $3c3c
+    ret
+; 0x1db00
+
+VermilionHouse1Texts: ; 0x1db00
+    dw VermilionHouse1Text1, VermilionHouse1Text2, VermilionHouse1Text3
 
 VermilionHouse1Text1: ; 0x1db06
     TX_FAR _VermilionHouse1Text1
@@ -8493,12 +12165,53 @@ VermilionHouse1Object: ; 0x1db20 (size=38)
 VermilionDock_h: ; 0x1db46 to 0x1db52 (12 bytes) (bank=7) (id=94)
     db $0e ; tileset
     db $06, $0e ; dimensions (y, x)
-    dw VermilionDockBlocks, $5cbf, $5b52 ; blocks, texts, scripts
+    dw VermilionDockBlocks, $5cbf, VermilionDockScript ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $5cc6 ; objects
+    dw VermilionDockObject ; objects
 
-INCBIN "baserom.gbc",$1db52,$1dcc6 - $1db52
+VermilionDockScript: ; 0x1db52
+    call $3c3c
+    ld hl, $d803
+    bit 4, [hl]
+    jr nz, .asm_1db8d ; 0x1db5a $31
+    bit 0, [hl]
+    ret z
+    ld a, [$d42f]
+    cp $1
+    ret nz
+    bit 2, [hl]
+    jp z, $5b9b
+    set 4, [hl]
+    call Delay3
+    ld hl, $d730
+    set 7, [hl]
+    ld hl, $ccd3
+    ld a, $40
+    ld [hli], a
+    ld [hli], a
+    ld [hl], a
+    ld a, $3
+    ld [$cd38], a
+    xor a
+    ld [$c206], a
+    ld [$cd3b], a
+    dec a
+    ld [$cd6b], a
+    ret
+.asm_1db8d
+    bit 5, [hl]
+    ret nz
+    ld a, [$cd38]
+    and a
+    ret nz
+    ld [$cd6b], a
+    set 5, [hl]
+    ret
+; 0x1db9b
+
+INCBIN "baserom.gbc",$1db9b,$12b
+
 VermilionDockObject: ; 0x1dcc6 (size=20)
     db $f ; border tile
 
@@ -8520,12 +12233,17 @@ VermilionDockBlocks: ; 84
 CeladonMansion5_h: ; 0x1dd2e to 0x1dd3a (12 bytes) (bank=7) (id=132)
     db $08 ; tileset
     db $04, $04 ; dimensions (y, x)
-    dw $41ee, $5d3d, $5d3a ; blocks, texts, scripts
+    dw CeladonMansion5Blocks, CeladonMansion5Texts, CeladonMansion5Script ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $5d5c ; objects
+    dw CeladonMansion5Object ; objects
 
-INCBIN "baserom.gbc",$1dd3a,$1dd41 - $1dd3a
+CeladonMansion5Script: ; 0x1dd3a
+    jp $3c3c
+; 0x1dd3d
+
+CeladonMansion5Texts: ; 0x1dd3d
+    dw CeladonMansion5Text1, CeladonMansion5Text2
 
 CeladonMansion5Text1: ; 0x1dd41
     TX_FAR _CeladonMansion5Text1
@@ -8563,12 +12281,17 @@ CeladonMansion5Object: ; 0x1dd5c (size=32)
 FuchsiaMart_h: ; 0x1dd7c to 0x1dd88 (12 bytes) (bank=7) (id=152)
     db $02 ; tileset
     db $04, $04 ; dimensions (y, x)
-    dw FuchsiaMartBlocks, $5d8b, $5d88 ; blocks, texts, scripts
+    dw FuchsiaMartBlocks, FuchsiaMartTexts, FuchsiaMartScript ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $5d9b ; objects
+    dw FuchsiaMartObject ; objects
 
-INCBIN "baserom.gbc",$1dd88,$1dd91 - $1dd88
+FuchsiaMartScript: ; 0x1dd88
+    jp $3c3c
+; 0x1dd8b
+
+FuchsiaMartTexts: ; 0x1dd8b
+    dw FuchsiaMartText1, FuchsiaMartText2, FuchsiaMartText3
 
 FuchsiaMartText2: ; 0x1dd91
     TX_FAR _FuchsiaMartText2
@@ -8602,12 +12325,15 @@ FuchsiaMartBlocks: ; 16
 SaffronHouse1_h: ; 0x1ddd1 to 0x1dddd (12 bytes) (bank=7) (id=179)
     db $08 ; tileset
     db $04, $04 ; dimensions (y, x)
-    dw $41de, $5de0, $5ddd ; blocks, texts, scripts
+    dw SaffronHouse1Blocks, SaffronHouse1Texts, SaffronHouse1Script ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $5e04 ; objects
+    dw SaffronHouse1Object ; objects
 
-INCBIN "baserom.gbc",$1dddd,$1dde0 - $1dddd
+SaffronHouse1Script: ; 0x1dddd
+    jp $3c3c
+; 0x1dde0
+
 SaffronHouse1Texts: ; 0x1dde0
     dw SaffronHouse1Text1, SaffronHouse1Text2, SaffronHouse1Text3, SaffronHouse1Text4
 
@@ -8653,12 +12379,18 @@ SaffronHouse1Object: ; 0x1de04 (size=44)
 SaffronHouse2_h: ; 0x1de30 to 0x1de3c (12 bytes) (bank=7) (id=183)
     db $08 ; tileset
     db $04, $04 ; dimensions (y, x)
-    dw $41de, $5e3f, $5e3c ; blocks, texts, scripts
+    dw SaffronHouse2Blocks, SaffronHouse2Texts, SaffronHouse2Script ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $5e8a ; objects
+    dw SaffronHouse2Object ; objects
 
-INCBIN "baserom.gbc",$1de3c,$1de41 - $1de3c
+SaffronHouse2Script: ; 0x1de3c
+    jp $3c3c
+; 0x1de3f
+
+SaffronHouse2Texts: ; 0x1de3f
+    dw SaffronHouse2Text1
+
 SaffronHouse2Text1: ; 0x1de41
     db $08 ; asm
     ld a, [$d7bd]
@@ -8685,6 +12417,7 @@ SaffronHouse2Text1: ; 0x1de41
     jp $24d7
 
 INCBIN "baserom.gbc",$1de75,$15
+
 SaffronHouse2Object: ; 0x1de8a (size=26)
     db $a ; border tile
 
@@ -8704,12 +12437,17 @@ SaffronHouse2Object: ; 0x1de8a (size=26)
 DiglettsCaveRoute2_h: ; 0x1dea4 to 0x1deb0 (12 bytes) (bank=7) (id=46)
     db $11 ; tileset
     db $04, $04 ; dimensions (y, x)
-    dw DiglettsCaveRoute2Blocks, $5eb8, $5eb0 ; blocks, texts, scripts
+    dw DiglettsCaveRoute2Blocks, DiglettsCaveRoute2Texts, DiglettsCaveRoute2Script ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $5ebf ; objects
+    dw DiglettsCaveRoute2Object ; objects
 
-INCBIN "baserom.gbc",$1deb0,$1deb8 - $1deb0
+DiglettsCaveRoute2Script: ; 0x1deb0
+    ld a, $d
+    ld [$d365], a
+    jp $3c3c
+; 0x1deb8
+
 DiglettsCaveRoute2Texts: ; 0x1deb8
     dw DiglettsCaveRoute2Text1
 
@@ -8738,12 +12476,17 @@ DiglettsCaveRoute2Object: ; 0x1debf (size=34)
 Route2House_h: ; 0x1dee1 to 0x1deed (12 bytes) (bank=7) (id=48)
     db $08 ; tileset
     db $04, $04 ; dimensions (y, x)
-    dw $41de, $5ef0, $5eed ; blocks, texts, scripts
+    dw Route2HouseBlocks, Route2HouseTexts, Route2HouseScript ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $5f07 ; objects
+    dw Route2HouseObject ; objects
 
-INCBIN "baserom.gbc",$1deed,$1def4 - $1deed
+Route2HouseScript: ; 0x1deed
+    jp $3c3c
+; 0x1def0
+
+Route2HouseTexts: ; 0x1def0
+    dw Route2HouseText1, Route2HouseText2
 
 Route2HouseText1: ; 0x1def4
     TX_FAR _Route2HouseText1
@@ -8777,12 +12520,60 @@ Route2HouseObject: ; 0x1df07 (size=32)
 Route5Gate_h: ; 0x1df27 to 0x1df33 (12 bytes) (bank=7) (id=70)
     db $0c ; tileset
     db $03, $04 ; dimensions (y, x)
-    dw Route5GateBlocks, $5fa4, $5f33 ; blocks, texts, scripts
+    dw Route5GateBlocks, Route5GateTexts, Route5GateScript ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $5ffb ; objects
+    dw Route5GateObject ; objects
 
-INCBIN "baserom.gbc",$1df33,$1dfaa - $1df33
+Route5GateScript: ; 0x1df33
+    call $3c3c
+    ld a, [$d662]
+    ld hl, $5f3f
+    jp $3d97
+; 0x1df3f
+
+Route5GateScripts: ; 0x1df3f
+    dw Route5GateScript0
+
+INCBIN "baserom.gbc",$1df41,$f
+
+Route5GateScript0: ; 0x1df50
+    ld a, [$d728]
+    bit 6, a
+    ret nz
+    ld hl, $5f8f
+    call $34bf
+    ret nc
+    ld a, $2
+    ld [$d528], a
+    xor a
+    ld [$ff00+$b4], a
+    ld b, $16
+    ld hl, $659f
+    call Bankswitch
+    ld a, [$ff00+$db]
+    and a
+    jr nz, .asm_1df82 ; 0x1df70 $10
+    ld a, $2
+    ld [$ff00+$8c], a
+    call $2920
+    call $5f43
+    ld a, $1
+    ld [$d662], a
+    ret
+.asm_1df82
+    ld a, $3
+    ld [$ff00+$8c], a
+    call $2920
+    ld hl, $d728
+    set 6, [hl]
+    ret
+; 0x1df8f
+
+INCBIN "baserom.gbc",$1df8f,$15
+
+Route5GateTexts: ; 0x1dfa4
+    dw Route5GateText1, Route5GateText2, Route5GateText3
 
 Route8GateText1:
 Route7GateText1:
@@ -8816,7 +12607,19 @@ Route5GateText1: ; 0x1dfaa
     jp $24d7
 ; 0x1dfe7
 
-INCBIN "baserom.gbc",$1dfe7,$14
+Route8GateText2:
+Route7GateText2:
+Route6GateText2:
+Route5GateText2: ; 0x1dfe7
+INCBIN "baserom.gbc",$1dfe7,$5
+
+Route8GateText3:
+Route7GateText3:
+Route6GateText3:
+Route5GateText3: ; 0x1dfec
+INCBIN "baserom.gbc",$1dfec,$5
+
+INCBIN "baserom.gbc",$1dff1,$1dffb - $1dff1
 
 Route5GateObject: ; 0x1dffb (size=42)
     db $a ; border tile
@@ -8844,12 +12647,61 @@ Route5GateBlocks: ; 12
 Route6Gate_h: ; 0x1e031 to 0x1e03d (12 bytes) (bank=7) (id=73)
     db $0c ; tileset
     db $03, $04 ; dimensions (y, x)
-    dw Route6GateBlocks, $60b8, $603d ; blocks, texts, scripts
+    dw Route6GateBlocks, Route6GateTexts, Route6GateScript ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $60be ; objects
+    dw Route6GateObject ; objects
 
-INCBIN "baserom.gbc",$1e03d,$1e0be - $1e03d
+Route6GateScript: ; 0x1e03d
+    call $3c3c
+    ld hl, $604a
+    ld a, [$d636]
+    call $3d97
+    ret
+; 0x1e04a
+
+Route6GateScripts: ; 0x1e04a
+    dw Route6GateScript0
+
+INCBIN "baserom.gbc",$1e04c,$2
+
+Route6GateScript0: ; 0x1e04e
+    ld a, [$d728]
+    bit 6, a
+    ret nz
+    ld hl, $608c
+    call $34bf
+    ret nc
+    ld a, $1
+    ld [$d528], a
+    xor a
+    ld [$ff00+$b4], a
+    ld b, $16
+    ld hl, $659f
+    call Bankswitch
+    ld a, [$ff00+$db]
+    and a
+    jr nz, .asm_1e080 ; 0x1e06e $10
+    ld a, $2
+    ld [$ff00+$8c], a
+    call $2920
+    call $60a1
+    ld a, $1
+    ld [$d636], a
+    ret
+.asm_1e080
+    ld hl, $d728
+    set 6, [hl]
+    ld a, $3
+    ld [$ff00+$8c], a
+    jp $2920
+; 0x1e08c
+
+INCBIN "baserom.gbc",$1e08c,$2c
+
+Route6GateTexts: ; 0x1e0b8
+    dw Route6GateText1, Route6GateText2, Route6GateText3
+
 Route6GateObject: ; 0x1e0be (size=42)
     db $a ; border tile
 
@@ -8876,12 +12728,62 @@ Route6GateBlocks: ; 12
 Route7Gate_h: ; 0x1e0f4 to 0x1e100 (12 bytes) (bank=7) (id=76)
     db $0c ; tileset
     db $04, $03 ; dimensions (y, x)
-    dw Route7GateBlocks, $617f, $6100 ; blocks, texts, scripts
+    dw Route7GateBlocks, Route7GateTexts, Route7GateScript ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $6185 ; objects
+    dw Route7GateObject ; objects
 
-INCBIN "baserom.gbc",$1e100,$1e185 - $1e100
+Route7GateScript: ; 0x1e100
+    call $3c3c
+    ld a, [$d663]
+    ld hl, $610d
+    call $3d97
+    ret
+; 0x1e10d
+
+Route7GateScripts: ; 0x1e10d
+    dw Route7GateScript0
+
+INCBIN "baserom.gbc",$1e10f,$19
+
+Route7GateScript0: ; 0x1e128
+    ld a, [$d728]
+    bit 6, a
+    ret nz
+    ld hl, $6167
+    call $34bf
+    ret nc
+    ld a, $8
+    ld [$d528], a
+    xor a
+    ld [$ff00+$b4], a
+    ld b, $16
+    ld hl, $659f
+    call Bankswitch
+    ld a, [$ff00+$db]
+    and a
+    jr nz, .asm_1e15a ; 0x1e148 $10
+    ld a, $2
+    ld [$ff00+$8c], a
+    call $2920
+    call $6111
+    ld a, $1
+    ld [$d663], a
+    ret
+.asm_1e15a
+    ld a, $3
+    ld [$ff00+$8c], a
+    call $2920
+    ld hl, $d728
+    set 6, [hl]
+    ret
+; 0x1e167
+
+INCBIN "baserom.gbc",$1e167,$18
+
+Route7GateTexts: ; 0x1e17f
+    dw Route7GateText1, Route7GateText2, Route7GateText3
+
 Route7GateObject: ; 0x1e185 (size=42)
     db $a ; border tile
 
@@ -8908,12 +12810,59 @@ Route7GateBlocks: ; 12
 Route8Gate_h: ; 0x1e1bb to 0x1e1c7 (12 bytes) (bank=7) (id=79)
     db $0c ; tileset
     db $04, $03 ; dimensions (y, x)
-    dw Route8GateBlocks, $6241, $61c7 ; blocks, texts, scripts
+    dw Route8GateBlocks, Route8GateTexts, Route8GateScript ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $6247 ; objects
+    dw Route8GateObject ; objects
 
-INCBIN "baserom.gbc",$1e1c7,$1e247 - $1e1c7
+Route8GateScript: ; 0x1e1c7
+    call $3c3c
+    ld hl, $61d3
+    ld a, [$d637]
+    jp $3d97
+; 0x1e1d3
+
+Route8GateScripts: ; 0x1e1d3
+    dw Route8GateScript0
+
+INCBIN "baserom.gbc",$1e1d5,$19
+
+Route8GateScript0: ; 0x1e1ee
+    ld a, [$d728]
+    bit 6, a
+    ret nz
+    ld hl, $622c
+    call $34bf
+    ret nc
+    ld a, $2
+    ld [$d528], a
+    xor a
+    ld [$ff00+$b4], a
+    ld b, $16
+    ld hl, $659f
+    call Bankswitch
+    ld a, [$ff00+$db]
+    and a
+    jr nz, .asm_1e220 ; 0x1e20e $10
+    ld a, $2
+    ld [$ff00+$8c], a
+    call $2920
+    call $61d7
+    ld a, $1
+    ld [$d637], a
+    ret
+.asm_1e220
+    ld hl, $d728
+    set 6, [hl]
+    ld a, $3
+    ld [$ff00+$8c], a
+    jp $2920
+; 0x1e22c
+INCBIN "baserom.gbc",$1e22c,$15
+
+Route8GateTexts: ; 0x1e241
+    dw Route8GateText1, Route8GateText2, Route8GateText3
+
 Route8GateObject: ; 0x1e247 (size=42)
     db $a ; border tile
 
@@ -8940,12 +12889,16 @@ Route8GateBlocks: ; 12
 UndergroundPathEntranceRoute8_h: ; 0x1e27d to 0x1e289 (12 bytes) (bank=7) (id=80)
     db $0c ; tileset
     db $04, $04 ; dimensions (y, x)
-    dw UndergroundPathEntranceRoute8Blocks, $6291, $6289 ; blocks, texts, scripts
+    dw UndergroundPathEntranceRoute8Blocks, UndergroundPathEntranceRoute8Texts, UndergroundPathEntranceRoute8Script ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $6298 ; objects
+    dw UndergroundPathEntranceRoute8Object ; objects
 
-INCBIN "baserom.gbc",$1e289,$1e291 - $1e289
+UndergroundPathEntranceRoute8Script: ; 0x1e289
+    ld a, $13
+    ld [$d365], a
+    jp $3c3c
+; 0x1e291
 
 UndergroundPathEntranceRoute8Texts: ; 0x1e291
     dw UndergroundPathEntranceRoute8Text1
@@ -8977,12 +12930,27 @@ UndergroundPathEntranceRoute8Object: ; 0x1e298 (size=34)
 PowerPlant_h: ; 0x1e2ba to 0x1e2c6 (12 bytes) (bank=7) (id=83)
     db $16 ; tileset
     db $12, $14 ; dimensions (y, x)
-    dw PowerPlantBlocks, $62df, $62c6 ; blocks, texts, scripts
+    dw PowerPlantBlocks, PowerPlantTexts, PowerPlantScript ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $63bf ; objects
+    dw PowerPlantObject ; objects
 
-INCBIN "baserom.gbc",$1e2c6,$1e368 - $1e2c6
+PowerPlantScript: ; 0x1e2c6
+    call $3c3c
+    ld hl, $62fb
+    ld de, $62d9
+    ld a, [$d663]
+    call $3160
+    ld [$d663], a
+    ret
+; 0x1e2d9
+
+INCBIN "baserom.gbc",$1e2d9,$6
+
+PowerPlantTexts: ; 0x1e2df
+    dw PowerPlantText1, PowerPlantText2, PowerPlantText3, PowerPlantText4, PowerPlantText5, PowerPlantText6, PowerPlantText7, PowerPlantText8, PowerPlantText9, PowerPlantText10, PowerPlantText11, PowerPlantText12, PowerPlantText13, PowerPlantText14
+
+INCBIN "baserom.gbc",$1e2fb,$6d
 
 asm_234cc:
     call $31cc
@@ -9035,7 +13003,7 @@ PowerPlantText9:
     db $8 ; asm
     ld hl, $635b
     jr asm_234cc ; 0x1e3a8 $be
-    rla
+    rla ; probably a TX_FAR
     ld [$ff00+c], a
     ld b, l
     inc hl
@@ -9086,12 +13054,18 @@ PowerPlantBlocks: ; 360
 DiglettsCaveEntranceRoute11_h: ; 0x1e5ae to 0x1e5ba (12 bytes) (bank=7) (id=85)
     db $11 ; tileset
     db $04, $04 ; dimensions (y, x)
-    dw $420e, $65c3, $65ba ; blocks, texts, scripts
+    dw DiglettsCaveEntranceRoute11Blocks, DiglettsCaveEntranceRoute11Texts, DiglettsCaveEntranceRoute11Script ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $65ca ; objects
+    dw DiglettsCaveEntranceRoute11Object ; objects
 
-INCBIN "baserom.gbc",$1e5ba,$1e5c3 - $1e5ba
+DiglettsCaveEntranceRoute11Script: ; 0x1e5ba
+    call $3c3c
+    ld a, $16
+    ld [$d365], a
+    ret
+; 0x1e5c3
+
 DiglettsCaveEntranceRoute11Texts: ; 0x1e5c3
     dw DiglettsCaveEntranceRoute11Text1
 
@@ -9122,12 +13096,18 @@ DiglettsCaveEntranceRoute11Object: ; 0x1e5ca (size=34)
 Route16House_h: ; 0x1e5ec to 0x1e5f8 (12 bytes) (bank=7) (id=188)
     db $08 ; tileset
     db $04, $04 ; dimensions (y, x)
-    dw $41de, $65fb, $65f8 ; blocks, texts, scripts
+    dw Route16HouseBlocks, Route16HouseTexts, Route16HouseScript ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $6657 ; objects
+    dw Route16HouseObject ; objects
 
-INCBIN "baserom.gbc",$1e5f8,$1e5ff - $1e5f8
+Route16HouseScript: ; 0x1e5f8
+    jp $3c3c
+; 0x1e5fb
+
+Route16HouseTexts: ; 0x1e5fb
+    dw Route16HouseText1, Route16HouseText2
+
 Route16HouseText1: ; 0x1e5ff
     db $08 ; asm
     ld a, [$d7e0]
@@ -9150,6 +13130,7 @@ Route16HouseText1: ; 0x1e5ff
     jp $24d7
 
 INCBIN "baserom.gbc",$1e62b,$1e640 - $1e62b
+
 Route16HouseText2: ; 0x1e640
     db $08 ; asm
     ld hl, $6652
@@ -9160,6 +13141,7 @@ Route16HouseText2: ; 0x1e640
     jp $24d7
 
 INCBIN "baserom.gbc",$1e652,$5
+
 Route16HouseObject: ; 0x1e657 (size=32)
     db $a ; border tile
 
@@ -9180,12 +13162,59 @@ Route16HouseObject: ; 0x1e657 (size=32)
 Route22Gate_h: ; 0x1e677 to 0x1e683 (12 bytes) (bank=7) (id=193)
     db $0c ; tileset
     db $04, $05 ; dimensions (y, x)
-    dw Route22GateBlocks, $66df, $6683 ; blocks, texts, scripts
+    dw Route22GateBlocks, Route22GateTexts, Route22GateScript ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $6720 ; objects
+    dw Route22GateObject ; objects
 
-INCBIN "baserom.gbc",$1e683,$1e6e1 - $1e683
+Route22GateScript: ; 0x1e683
+    call $3c3c
+    ld hl, $669e
+    ld a, [$d60e]
+    call $3d97
+    ld a, [$d361]
+    cp $4
+    ld a, $22
+    jr c, .asm_1e69a ; 0x1e696 $2
+    ld a, $21
+.asm_1e69a
+    ld [$d365], a
+    ret
+; 0x1e69e
+
+Route22GateScripts: ; 0x1e69e
+    dw Route22GateScript0, Route22GateScript1
+
+INCBIN "baserom.gbc",$1e6a2,$2
+
+Route22GateScript0: ; 0x1e6a4
+    ld hl, $66b5
+    call $34bf
+    ret nc
+    xor a
+    ld [$ff00+$b4], a
+    ld a, $1
+    ld [$ff00+$8c], a
+    jp $2920
+; 0x1e6b5
+
+INCBIN "baserom.gbc",$1e6b5,$1e6cd - $1e6b5
+
+Route22GateScript1: ; 0x1e6cd
+    ld a, [$cd38]
+    and a
+    ret nz
+    xor a
+    ld [$cd6b], a
+    call Delay3
+    ld a, $0
+    ld [$d60e], a
+    ret
+; 0x1e6df
+
+Route22GateTexts: ; 0x1e6df
+    dw Route22GateText1
+
 Route22GateText1: ; 0x1e6e1
     db $8
     ld a, [$d356]
@@ -9204,7 +13233,9 @@ Route22GateText1: ; 0x1e6e1
     ld [$d60e], a
     jp $24d7
 ; 0x1e704
+
 INCBIN "baserom.gbc",$1e704,$1c
+
 Route22GateObject: ; 0x1e720 (size=42)
     db $a ; border tile
 
@@ -9231,15 +13262,36 @@ Route22GateBlocks: ; 20
 BillsHouse_h: ; 0x1e75e to 0x1e76a (12 bytes) (bank=7) (id=88)
     db $10 ; tileset
     db $04, $04 ; dimensions (y, x)
-    dw $6905, $6834, $676a ; blocks, texts, scripts
+    dw BillsHouseBlocks, BillsHouseTexts, BillsHouseScript ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $68df ; objects
+    dw BillsHouseObject ; objects
 
-INCBIN "baserom.gbc",$1e76a,$1e83d - $1e76a
+BillsHouseScript: ; 0x1e76a
+    call $3c3c
+    ld a, [$d661]
+    ld hl, $6776
+    jp $3d97
+; 0x1e776
 
-;0x1e83d
-BillsHouseText1:
+BillsHouseScripts: ; 0x1e776
+    dw BillsHouseScript0
+
+INCBIN "baserom.gbc",$1e778,$a
+
+BillsHouseScript0: ; 0x1e782
+    ret
+; 0x1e783
+
+INCBIN "baserom.gbc",$1e783,$b1
+
+BillsHouseTexts: ; 0x1e834
+    dw BillsHouseText1, BillsHouseText2, BillsHouseText3, BillsHouseText4
+
+BillsHouseText4:
+    db $fd
+
+BillsHouseText1: ; 0x1e83d
     db $8
     ld hl, $6865
     call PrintText
@@ -9260,7 +13312,7 @@ asm_6b196: ; 0x1e85a
 asm_fd4e2 ; 0x1e862
     jp $24d7
 
-; dunno what this is
+; dunno what this is (rla indicates $17 or TX_FAR)
     rla
     ld h, a
     ld d, d
@@ -9316,6 +13368,7 @@ BillsHouseText3: ; 0x1e8d0
     ld hl, $68da
     call PrintText
     jp $24d7
+; 0x1e8da
 
 INCBIN "baserom.gbc",$1e8da,$5
 
@@ -9337,13 +13390,17 @@ BillsHouseObject: ; 0x1e8df (size=38)
     EVENT_DISP $4, $7, $2
     EVENT_DISP $4, $7, $3
 
-INCBIN "baserom.gbc",$1e905,$16fb
+BillsHouseBlocks:
+    INCBIN "maps/billshouse.blk"
+
+INCBIN "baserom.gbc",$1e905 + 16,$16fb - 16
 
 SECTION "bank8",DATA,BANK[$8]
 
 INCBIN "baserom.gbc",$20000,$4000
 
 SECTION "bank9",DATA,BANK[$9]
+
 RhydonPicFront:
 	INCBIN "pic/bmon/rhydon.pic"
 RhydonPicBack:
@@ -10533,6 +14590,7 @@ TrainerNames: ; 59FF
 	db "LANCE@"
 
 INCBIN "baserom.gbc",$39B87,$39C53 - $39B87
+
 ReadTrainer: ; 5C53
 
 ; don't change any moves in a link battle
@@ -14083,6 +18141,7 @@ TrainerSentOutText:
 	db "@"
 
 INCBIN "baserom.gbc",$3CA83,$3D6A9 - $3CA83
+
 ; in-battle stuff
 	ld hl,$D062
 	res 4,[hl]
@@ -14682,6 +18741,7 @@ PlayAttackAnimation: ; 6F07
 INCBIN "baserom.gbc",$3EF12,$40000 - $3EF12
 
 SECTION "bank10",DATA,BANK[$10]
+
 INCBIN "baserom.gbc",$40000,$47E
 
 PokedexEntryPointers: ; 447E
@@ -16236,7 +20296,7 @@ SECTION "bank11",DATA,BANK[$11]
 LavenderTown_h: ; 0x44000 to 0x4402d (45 bytes) (bank=11) (id=4)
     db $00 ; tileset
     db $09, $0a ; dimensions (y, x)
-    dw LavenderTownBlocks, $410e, $410b ; blocks, texts, scripts
+    dw LavenderTownBlocks, LavenderTownTexts, LavenderTownScript ; blocks, texts, scripts
     db NORTH | SOUTH | WEST ; connections
 
     ; connections data
@@ -16261,7 +20321,7 @@ LavenderTown_h: ; 0x44000 to 0x4402d (45 bytes) (bank=11) (id=4)
 
     ; end connection data
 
-    dw $402d ; objects
+    dw LavenderTownObject ; objects
 
 LavenderTownObject: ; 0x4402d (size=88)
     db $2c ; border tile
@@ -16298,13 +20358,19 @@ LavenderTownObject: ; 0x4402d (size=88)
 LavenderTownBlocks: ; 90
     INCBIN "maps/lavendertown.blk"
 
-ViridianPokeCenterBlocks: ; 28
+ViridianPokecenterBlocks: ; 28
     INCBIN "maps/viridianpokecenter.blk"
 
 SafariZoneRestHouse1Blocks: ; 16
     INCBIN "maps/safarizoneresthouse1.blk"
 
-INCBIN "baserom.gbc",$4410b,$44120 - $4410b
+LavenderTownScript: ; 0x4410b
+    jp $3c3c
+; 0x4410e
+
+LavenderTownTexts: ; 0x4410e
+    dw LavenderTownText1, LavenderTownText2, LavenderTownText3, LavenderTownText4, LavenderTownText5, LavenderTownText6, LavenderTownText7, LavenderTownText8, LavenderTownText9
+
 LavenderTownText1: ; 0x44120
     db $08 ; asm
     ld hl, $413c
@@ -16350,15 +20416,23 @@ INCBIN "baserom.gbc",$44169,$e8
 ViridianPokecenter_h: ; 0x44251 to 0x4425d (12 bytes) (bank=11) (id=41)
     db $06 ; tileset
     db $04, $07 ; dimensions (y, x)
-    dw $40df, $4263, $425d ; blocks, texts, scripts
+    dw ViridianPokecenterBlocks, ViridianPokecenterTexts, ViridianPokeCenterScript ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $4277 ; objects
+    dw ViridianPokecenterObject ; objects
 
-INCBIN "baserom.gbc",$4425d,$4426c - $4425d
+ViridianPokeCenterScript: ; 0x4425d
+    call $22fa
+    jp $3c3c
+; 0x44263
 
-ViridianPokeCenterText2:
-ViridianPokeCenterText1: ; 0x4426c
+ViridianPokecenterTexts: ; 0x44263
+    dw ViridianPokeCenterText1, ViridianPokeCenterText2, ViridianPokeCenterText3, ViridianPokeCenterText4
+
+ViridianPokeCenterText1: ; 0x4426b
+    db $ff
+
+ViridianPokeCenterText2: ; 0x4426c
     TX_FAR _ViridianPokeCenterText1
     db $50
 
@@ -16368,10 +20442,10 @@ ViridianPokeCenterText3: ; 0x44271
     TX_FAR _ViridianPokeCenterText3
     db $50
 
-;XXX wtf?
-db $f6
+ViridianPokeCenterText4:
+    db $f6
 
-ViridianPokeCenterObject: ; 0x44277 (size=44)
+ViridianPokecenterObject: ; 0x44277 (size=44)
     db $0 ; border tile
 
     db $2 ; warps
@@ -16393,12 +20467,54 @@ ViridianPokeCenterObject: ; 0x44277 (size=44)
 Mansion1_h: ; 0x442a3 to 0x442af (12 bytes) (bank=11) (id=165)
     db $16 ; tileset
     db $0e, $0f ; dimensions (y, x)
-    dw $43fe, $432c, $42af ; blocks, texts, scripts
+    dw Mansion1Blocks, Mansion1Texts, Mansion1Script ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $43a4 ; objects
+    dw Mansion1Object ; objects
 
-INCBIN "baserom.gbc",$442af,$44341 - $442af
+Mansion1Script:
+    call Mansion1Subscript1
+    call $3c3c
+    ld hl, $4334
+    ld de, $4326
+    ld a, [$d63a]
+    call $3160
+    ld [$d63a], a
+    ret
+; 0x442c5
+
+Mansion1Subscript1: ; 0x442c5
+    ld hl, $d126
+    bit 5, [hl]
+    res 5, [hl]
+    ret z
+    ld a, [$d796]
+    bit 0, a
+    jr nz, .asm_442ec ; 0x442d2 $18
+    ld bc, $060c
+    call $430b
+    ld bc, $0308
+    call $4304
+    ld bc, $080a
+    call $4304
+    ld bc, $0d0d
+    jp $4304
+.asm_442ec
+    ld bc, $060c
+    call $4304
+    ld bc, $0308
+    call $430b
+    ld bc, $080a
+    call $430b
+    ld bc, $0d0d
+    jp $430b
+; 0x44304
+
+INCBIN "baserom.gbc",$44304,$4432c - $44304
+
+Mansion1Texts: ; 4432c
+INCBIN "baserom.gbc",$4432c,$44341 - $4432c
+
 Mansion1Text1: ; 0x44341
     db $08 ; asm
     ld hl, $4334
@@ -16406,6 +20522,7 @@ Mansion1Text1: ; 0x44341
     jp $24d7
 
 INCBIN "baserom.gbc",$4434b,$59
+
 Mansion1Object: ; 0x443a4 (size=90)
     db $2e ; border tile
 
@@ -16436,17 +20553,33 @@ Mansion1Object: ; 0x443a4 (size=90)
     EVENT_DISP $f, $1b, $1a
     EVENT_DISP $f, $1b, $1b
 
-INCBIN "baserom.gbc",$443fe,$d2
+Mansion1Blocks: ; 203
+    INCBIN "maps/mansion1.blk"
 
 RockTunnel1_h: ; 0x444d0 to 0x444dc (12 bytes) (bank=11) (id=82)
     db $11 ; tileset
     db $12, $14 ; dimensions (y, x)
-    dw RockTunnel1Blocks, $44f5, $44dc ; blocks, texts, scripts
+    dw RockTunnel1Blocks, RockTunnel1Texts, RockTunnel1Script ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $45f6 ; objects
+    dw RockTunnel1Object ; objects
 
-INCBIN "baserom.gbc",$444dc,$4455a - $444dc
+RockTunnel1Script: ; 0x444dc
+    call $3c3c
+    ld hl, $4505
+    ld de, $44ef
+    ld a, [$d621]
+    call $3160
+    ld [$d621], a
+    ret
+; 0x444ef
+
+INCBIN "baserom.gbc",$444ef,$6
+
+RockTunnel1Texts: ; 0x444f5
+    dw RockTunnel1Text1, RockTunnel1Text2, RockTunnel1Text3, RockTunnel1Text4, RockTunnel1Text5, RockTunnel1Text6, RockTunnel1Text7, RockTunnel1Text8
+
+INCBIN "baserom.gbc",$44505,$55
 
 RockTunnel1Text1: ; 0x4455a
     db $8
@@ -16532,14 +20665,59 @@ RockTunnel1Blocks: ; 360
 SeafoamIslands1_h: ; 0x447dd to 0x447e9 (12 bytes) (bank=11) (id=192)
     db $11 ; tileset
     db $09, $0f ; dimensions (y, x)
-    dw SeafoamIslands1Blocks, $484b, $47e9 ; blocks, texts, scripts
+    dw SeafoamIslands1Blocks, SeafoamIslands1Texts, SeafoamIslands1Script ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $484f ; objects
+    dw SeafoamIslands1Object ; objects
 
-INCBIN "baserom.gbc",$447e9,$4484b - $447e9
+SeafoamIslands1Script: ; 0x447e9
+    call $3c3c
+    ld hl, $d7e7
+    set 0, [hl]
+    ld hl, $cd60
+    bit 7, [hl]
+    res 7, [hl]
+    jr z, .asm_4483b ; 0x447f8 $41
+    ld hl, $4846
+    call $34e4
+    ret nc
+    ld hl, $d7e8
+    ld a, [$cd3d]
+    cp $1
+    jr nz, .asm_44819 ; 0x44809 $e
+    set 6, [hl]
+    ld a, $d7
+    ld [$d079], a
+    ld a, $d9
+    ld [$d07a], a
+    jr .asm_44825 ; 0x44817 $c
+.asm_44819
+    set 7, [hl]
+    ld a, $d8
+    ld [$d079], a
+    ld a, $da
+    ld [$d07a], a
+.asm_44825
+    ld a, [$d079]
+    ld [$cc4d], a
+    ld a, $11
+    call Predef
+    ld a, [$d07a]
+    ld [$cc4d], a
+    ld a, $15
+    jp $3e6d
+.asm_4483b
+    ld a, $9f
+    ld [$d71d], a
+    ld hl, $4846
+    jp $6981
+; 0x44846
+
+INCBIN "baserom.gbc",$44846,$5
+
 SeafoamIslands1Texts: ; 0x4484b
     dw SeafoamIslands1Text1, SeafoamIslands1Text2
+
 SeafoamIslands1Object: ; 0x4484f (size=72)
     db $7d ; border tile
 
@@ -16575,12 +20753,17 @@ SeafoamIslands1Blocks: ; 135
 SSAnne3_h: ; 0x44926 to 0x44932 (12 bytes) (bank=11) (id=97)
     db $0d ; tileset
     db $03, $0a ; dimensions (y, x)
-    dw SSAnne3Blocks, $4935, $4932 ; blocks, texts, scripts
+    dw SSAnne3Blocks, SSAnne3Texts, SSAnne3Script ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $493c ; objects
+    dw SSAnne3Object ; objects
 
-INCBIN "baserom.gbc",$44932,$44937 - $44932
+SSAnne3Script: ; 0x44932
+    jp $3c3c
+; 0x44935
+
+SSAnne3Texts: ; 0x44935
+    dw SSAnne3Text1
 
 SSAnne3Text1: ; 0x44937
     TX_FAR _SSAnne3Text1
@@ -16608,12 +20791,29 @@ SSAnne3Blocks: ; 30
 VictoryRoad3_h: ; 0x44974 to 0x44980 (12 bytes) (bank=11) (id=198)
     db $11 ; tileset
     db $09, $0f ; dimensions (y, x)
-    dw VictoryRoad3Blocks, $4a24, $4980 ; blocks, texts, scripts
+    dw VictoryRoad3Blocks, VictoryRoad3Texts, VictoryRoad3Script ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $4acd ; objects
+    dw VictoryRoad3Object ; objects
 
-INCBIN "baserom.gbc",$44980,$44a69 - $44980
+VictoryRoad3Script: ; 0x44980
+    call $4996
+    call $3c3c
+    ld hl, $4a38
+    ld de, $49b1
+    ld a, [$d640]
+    call $3160
+    ld [$d640], a
+    ret
+; 0x44996
+
+INCBIN "baserom.gbc",$44996,$8e
+
+VictoryRoad3Texts: ; 0x44a24
+    dw VictoryRoad3Text1, VictoryRoad3Text2, VictoryRoad3Text3, VictoryRoad3Text4, VictoryRoad3Text5, VictoryRoad3Text6, VictoryRoad3Text7, VictoryRoad3Text8, VictoryRoad3Text9, VictoryRoad3Text10
+
+INCBIN "baserom.gbc",$44a38,$31
+
 VictoryRoad3Text1: ; 0x44a69
     db $08 ; asm
     ld hl, $4a38
@@ -16639,6 +20839,7 @@ VictoryRoad3Text4: ; 0x44a87
     jp $24d7
 
 INCBIN "baserom.gbc",$44a91,$3c
+
 VictoryRoad3Object: ; 0x44acd (size=106)
     db $7d ; border tile
 
@@ -16674,12 +20875,29 @@ VictoryRoad3Blocks: ; 135
 RocketHideout1_h: ; 0x44bbe to 0x44bca (12 bytes) (bank=11) (id=199)
     db $16 ; tileset
     db $0e, $0f ; dimensions (y, x)
-    dw RocketHideout1Blocks, $4c14, $4bca ; blocks, texts, scripts
+    dw RocketHideout1Blocks, RocketHideout1Texts, RocketHideout1Script ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $4ce7 ; objects
+    dw RocketHideout1Object ; objects
 
-INCBIN "baserom.gbc",$44bca,$44c5f - $44bca
+RocketHideout1Script: ; 0x44bca
+    call $4be0
+    call $3c3c
+    ld hl, $4c22
+    ld de, $4c0e
+    ld a, [$d631]
+    call $3160
+    ld [$d631], a
+    ret
+; 0x44be0
+
+INCBIN "baserom.gbc",$44be0,$34
+
+RocketHideout1Texts: ; 0x44c14
+    dw RocketHideout1Text1, RocketHideout1Text2, RocketHideout1Text3, RocketHideout1Text4, RocketHideout1Text5, RocketHideout1Text6, RocketHideout1Text7
+
+INCBIN "baserom.gbc",$44c22,$3d
+
 RocketHideout1Text1: ; 0x44c5f
     db $08 ; asm
     ld hl, $4c22
@@ -16711,6 +20929,7 @@ RocketHideout1Text5: ; 0x44c87
     jp $24d7
 
 INCBIN "baserom.gbc",$44c91,$56
+
 RocketHideout1Object: ; 0x44ce7 (size=98)
     db $2e ; border tile
 
@@ -16745,12 +20964,28 @@ RocketHideout1Blocks: ; 210
 RocketHideout2_h: ; 0x44e1b to 0x44e27 (12 bytes) (bank=11) (id=200)
     db $16 ; tileset
     db $0e, $0f ; dimensions (y, x)
-    dw RocketHideout2Blocks, $50c7, $4e27 ; blocks, texts, scripts
+    dw RocketHideout2Blocks, RocketHideout2Texts, RocketHideout2Script ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $50f7 ; objects
+    dw RocketHideout2Object ; objects
 
-INCBIN "baserom.gbc",$44e27,$450de - $44e27
+RocketHideout2Script: ; 0x44e27
+    call $3c3c
+    ld hl, $50d1
+    ld de, $4e3a
+    ld a, [$d632]
+    call $3160
+    ld [$d632], a
+    ret
+; 0x44e3a
+
+INCBIN "baserom.gbc",$44e3a,$28d
+
+RocketHideout2Texts: ; 0x450c7
+    dw RocketHideout2Text1, RocketHideout2Text2, RocketHideout2Text3, RocketHideout2Text4, RocketHideout2Text5
+
+INCBIN "baserom.gbc",$450d1,$d
+
 RocketHideout2Text1: ; 0x450de
     db $08 ; asm
     ld hl, $50d1
@@ -16758,6 +20993,7 @@ RocketHideout2Text1: ; 0x450de
     jp $24d7
 
 INCBIN "baserom.gbc",$450e8,$f
+
 RocketHideout2Object: ; 0x450f7 (size=80)
     db $2e ; border tile
 
@@ -16790,12 +21026,28 @@ RocketHideout2Blocks: ; 210
 RocketHideout3_h: ; 0x45219 to 0x45225 (12 bytes) (bank=11) (id=201)
     db $16 ; tileset
     db $0e, $0f ; dimensions (y, x)
-    dw RocketHideout3Blocks, $52fa, $5225 ; blocks, texts, scripts
+    dw RocketHideout3Blocks, RocketHideout3Texts, RocketHideout3Script ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $534d ; objects
+    dw RocketHideout3Object ; objects
 
-INCBIN "baserom.gbc",$45225,$4531b - $45225
+RocketHideout3Script: ; 0x45225
+    call $3c3c
+    ld hl, $5302
+    ld de, $5238
+    ld a, [$d633]
+    call $3160
+    ld [$d633], a
+    ret
+; 0x45238
+
+INCBIN "baserom.gbc",$45238,$c2
+
+RocketHideout3Texts: ; 0x452fa
+    dw RocketHideout3Text1, RocketHideout3Text2, RocketHideout3Text3, RocketHideout3Text4
+
+INCBIN "baserom.gbc",$45302,$19
+
 RocketHideout3Text1: ; 0x4531b
     db $08 ; asm
     ld hl, $5302
@@ -16803,6 +21055,7 @@ RocketHideout3Text1: ; 0x4531b
     jp $24d7
 
 INCBIN "baserom.gbc",$45325,$45334 - $45325
+
 RocketHideout3Text2: ; 0x45334
     db $08 ; asm
     ld hl, $530e
@@ -16810,6 +21063,7 @@ RocketHideout3Text2: ; 0x45334
     jp $24d7
 
 INCBIN "baserom.gbc",$4533e,$f
+
 RocketHideout3Object: ; 0x4534d (size=50)
     db $2e ; border tile
 
@@ -16835,12 +21089,29 @@ RocketHideout3Blocks: ; 210
 RocketHideout4_h: ; 0x45451 to 0x4545d (12 bytes) (bank=11) (id=202)
     db $16 ; tileset
     db $0c, $0f ; dimensions (y, x)
-    dw RocketHideout4Blocks, $5501, $545d ; blocks, texts, scripts
+    dw RocketHideout4Blocks, RocketHideout4Texts, RocketHideout4Script ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $55f1 ; objects
+    dw RocketHideout4Object ; objects
 
-INCBIN "baserom.gbc",$4545d,$4553a - $4545d
+RocketHideout4Script: ; 0x4545d
+    call $5473
+    call $3c3c
+    ld hl, $5515
+    ld de, $54ae
+    ld a, [$d634]
+    call $3160
+    ld [$d634], a
+    ret
+; 0x45473
+
+INCBIN "baserom.gbc",$45473,$8e
+
+RocketHideout4Texts: ; 0x45501
+    dw RocketHideout4Text1, RocketHideout4Text2, RocketHideout4Text3, RocketHideout4Text4, RocketHideout4Text5, RocketHideout4Text6, RocketHideout4Text7, RocketHideout4Text8, RocketHideout4Text9, RocketHideout4Text10
+
+INCBIN "baserom.gbc",$45515,$25
+
 RocketHideout4Text1: ; 0x4553a
     db $08 ; asm
     ld a, [$d81b]
@@ -16869,7 +21140,11 @@ RocketHideout4Text1: ; 0x4553a
 .asm_209f0 ; 0x45577
     jp $24d7
 
-INCBIN "baserom.gbc",$4557a,$45589 - $4557a
+INCBIN "baserom.gbc",$4557a,$45584 - $4557a
+
+RocketHideout4Text10: ; 0x45584
+INCBIN "baserom.gbc",$45584,5
+
 RocketHideout4Text2: ; 0x45589
     db $08 ; asm
     ld hl, $5515
@@ -16877,6 +21152,7 @@ RocketHideout4Text2: ; 0x45589
     jp $24d7
 
 INCBIN "baserom.gbc",$45593,$455a2 - $45593
+
 RocketHideout4Text3: ; 0x455a2
     db $08 ; asm
     ld hl, $5521
@@ -16884,6 +21160,7 @@ RocketHideout4Text3: ; 0x455a2
     jp $24d7
 
 INCBIN "baserom.gbc",$455ac,$455bb - $455ac
+
 RocketHideout4Text4: ; 0x455bb
     db $08 ; asm
     ld hl, $552d
@@ -16891,6 +21168,7 @@ RocketHideout4Text4: ; 0x455bb
     jp $24d7
 
 INCBIN "baserom.gbc",$455c5,$2c
+
 RocketHideout4Object: ; 0x455f1 (size=95)
     db $2e ; border tile
 
@@ -16923,12 +21201,33 @@ RocketHideout4Blocks: ; 180
 RocketHideoutElevator_h: ; 0x45704 to 0x45710 (12 bytes) (bank=11) (id=203)
     db $12 ; tileset
     db $04, $03 ; dimensions (y, x)
-    dw RocketHideoutElevatorBlocks, $576b, $5710 ; blocks, texts, scripts
+    dw RocketHideoutElevatorBlocks, RocketHideoutElevatorTexts, RocketHideoutElevatorScript ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $5791 ; objects
+    dw RocketHideoutElevatorObject ; objects
 
-INCBIN "baserom.gbc",$45710,$4576d - $45710
+RocketHideoutElevatorScript: ; 0x45710
+    ld hl, $d126
+    bit 5, [hl]
+    res 5, [hl]
+    push hl
+    call nz, $572c
+    pop hl
+    bit 7, [hl]
+    res 7, [hl]
+    call nz, $575f
+    xor a
+    ld [$cf0c], a
+    inc a
+    ld [$cc3c], a
+    ret
+; 0x4572c
+
+INCBIN "baserom.gbc",$4572c,$3f
+
+RocketHideoutElevatorTexts: ; 0x4576b
+    dw RocketHideoutElevatorText1
+
 RocketHideoutElevatorText1: ; 0x4576d
     db $08 ; asm
     ld b,LIFT_KEY
@@ -16946,6 +21245,7 @@ RocketHideoutElevatorText1: ; 0x4576d
     jp $24d7
 
 INCBIN "baserom.gbc",$4578b,$6
+
 RocketHideoutElevatorObject: ; 0x45791 (size=23)
     db $f ; border tile
 
@@ -16968,12 +21268,33 @@ RocketHideoutElevatorBlocks: ; 12
 SilphCoElevator_h: ; 0x457b4 to 0x457c0 (12 bytes) (bank=11) (id=236)
     db $12 ; tileset
     db $02, $02 ; dimensions (y, x)
-    dw SilphCoElevatorBlocks, $5833, $57c0 ; blocks, texts, scripts
+    dw SilphCoElevatorBlocks, SilphCoElevatorTexts, SilphCoElevatorScript ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $5844 ; objects
+    dw SilphCoElevatorObject ; objects
 
-INCBIN "baserom.gbc",$457c0,$45835 - $457c0
+SilphCoElevatorScript: ; 0x457c0
+    ld hl, $d126
+    bit 5, [hl]
+    res 5, [hl]
+    push hl
+    call nz, $57dc
+    pop hl
+    bit 7, [hl]
+    res 7, [hl]
+    call nz, $5827
+    xor a
+    ld [$cf0c], a
+    inc a
+    ld [$cc3c], a
+    ret
+; 0x457dc
+
+INCBIN "baserom.gbc",$457dc,$57
+
+SilphCoElevatorTexts: ; 0x45833
+    dw SilphCoElevatorText1
+
 SilphCoElevatorText1: ; 0x45835
     db $08 ; asm
     call $57f1
@@ -17004,12 +21325,17 @@ SilphCoElevatorBlocks: ; 4
 SafariZoneEast_h: ; 0x4585f to 0x4586b (12 bytes) (bank=11) (id=217)
     db $03 ; tileset
     db $0d, $0f ; dimensions (y, x)
-    dw SafariZoneEastBlocks, $586e, $586b ; blocks, texts, scripts
+    dw SafariZoneEastBlocks, SafariZoneEastTexts, SafariZoneEastScript ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $588b ; objects
+    dw SafariZoneEastObject ; objects
 
-INCBIN "baserom.gbc",$4586b,$4587c - $4586b
+SafariZoneEastScript: ; 0x4586b
+    jp $3c3c
+; 0x4586e
+
+SafariZoneEastTexts: ; 0x4586e
+    dw SafariZoneEastText1, SafariZoneEastText2, SafariZoneEastText3, SafariZoneEastText4, SafariZoneEastText5, SafariZoneEastText6, SafariZoneEastText7
 
 SafariZoneEastText5: ; 0x4587c
     TX_FAR _SafariZoneEastText5
@@ -17057,12 +21383,17 @@ SafariZoneEastBlocks: ; 195
 SafariZoneNorth_h: ; 0x4599f to 0x459ab (12 bytes) (bank=11) (id=218)
     db $03 ; tileset
     db $12, $14 ; dimensions (y, x)
-    dw SafariZoneNorthBlocks, $59ae, $59ab ; blocks, texts, scripts
+    dw SafariZoneNorthBlocks, SafariZoneNorthTexts, SafariZoneNorthScript ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $59d5 ; objects
+    dw SafariZoneNorthObject ; objects
 
-INCBIN "baserom.gbc",$459ab,$459bc - $459ab
+SafariZoneNorthScript: ; 0x459ab
+    jp $3c3c
+; 0x459ae
+
+SafariZoneNorthTexts: ; 0x459ae
+    dw SafariZoneNorthText1, SafariZoneNorthText2, SafariZoneNorthText3, SafariZoneNorthText4, SafariZoneNorthText5, SafariZoneNorthText6, SafariZoneNorthText7
 
 SafariZoneNorthText3: ; 0x459bc
     TX_FAR _SafariZoneNorthText3
@@ -17126,12 +21457,17 @@ SafariZoneNorthBlocks: ; 360
 SafariZoneCenter_h: ; 0x45ba6 to 0x45bb2 (12 bytes) (bank=11) (id=220)
     db $03 ; tileset
     db $0d, $0f ; dimensions (y, x)
-    dw SafariZoneCenterBlocks, $5bb5, $5bb2 ; blocks, texts, scripts
+    dw SafariZoneCenterBlocks, SafariZoneCenterTexts, SafariZoneCenterScript ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $5bc5 ; objects
+    dw SafariZoneCenterObject ; objects
 
-INCBIN "baserom.gbc",$45bb2,$45bbb - $45bb2
+SafariZoneCenterScript: ; 0x45bb2
+    jp $3c3c
+; 0x45bb5
+
+SafariZoneCenterTexts: ; 0x45bb5
+    dw SafariZoneCenterText1, SafariZoneCenterText2, SafariZoneCenterText3
 
 SafariZoneCenterText2: ; 0x45bbb
     TX_FAR _SafariZoneCenterText2
@@ -17179,12 +21515,15 @@ SafariZoneCenterBlocks: ; 195
 SafariZoneRestHouse1_h: ; 0x45ce1 to 0x45ced (12 bytes) (bank=11) (id=221)
     db $0c ; tileset
     db $04, $04 ; dimensions (y, x)
-    dw SafariZoneRestHouse1Blocks, $5cf0, $5ced ; blocks, texts, scripts
+    dw SafariZoneRestHouse1Blocks, SafariZoneRestHouse1Texts, SafariZoneRestHouse1Script ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $5cfe ; objects
+    dw SafariZoneRestHouse1Object ; objects
 
-INCBIN "baserom.gbc",$45ced,$45cf0 - $45ced
+SafariZoneRestHouse1Script: ; 0x45ced
+    jp $3c3c
+; 0x45cf0
+
 SafariZoneRestHouse1Texts: ; 0x45cf0
     dw SafariZoneRestHouse1Text1, SafariZoneRestHouse1Text2
 
@@ -17216,12 +21555,16 @@ SafariZoneRestHouse1Object: ; 0x45cfe (size=32)
 SafariZoneRestHouse2_h: ; 0x45d1e to 0x45d2a (12 bytes) (bank=11) (id=223)
     db $0c ; tileset
     db $04, $04 ; dimensions (y, x)
-    dw $40fb, $5d2e, $5d2a ; blocks, texts, scripts
+    dw $40fb, SafariZoneRestHouse2Texts, SafariZoneRestHouse2Script ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $5d43 ; objects
+    dw SafariZoneRestHouse2Object ; objects
 
-INCBIN "baserom.gbc",$45d2a,$45d2e - $45d2a
+SafariZoneRestHouse2Script: ; 0x45d2a
+    call $3c3c
+    ret
+; 0x45d2e
+
 SafariZoneRestHouse2Texts: ; 0x45d2e
     dw SafariZoneRestHouse2Text1, SafariZoneRestHouse2Text2, SafariZoneRestHouse2Text3
 
@@ -17258,12 +21601,16 @@ SafariZoneRestHouse2Object: ; 0x45d43 (size=38)
 SafariZoneRestHouse3_h: ; 0x45d69 to 0x45d75 (12 bytes) (bank=11) (id=224)
     db $0c ; tileset
     db $04, $04 ; dimensions (y, x)
-    dw $40fb, $5d79, $5d75 ; blocks, texts, scripts
+    dw $40fb, SafariZoneRestHouse3Texts, SafariZoneRestHouse3Script ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $5d8e ; objects
+    dw SafariZoneRestHouse3Object ; objects
 
-INCBIN "baserom.gbc",$45d75,$45d79 - $45d75
+SafariZoneRestHouse3Script: ; 0x45d75
+    call $3c3c
+    ret
+; 0x45d79
+
 SafariZoneRestHouse3Texts: ; 0x45d79
     dw SafariZoneRestHouse3Text1, SafariZoneRestHouse3Text2, SafariZoneRestHouse3Text3
 
@@ -17300,12 +21647,16 @@ SafariZoneRestHouse3Object: ; 0x45d8e (size=38)
 SafariZoneRestHouse4_h: ; 0x45db4 to 0x45dc0 (12 bytes) (bank=11) (id=225)
     db $0c ; tileset
     db $04, $04 ; dimensions (y, x)
-    dw $40fb, $5dc4, $5dc0 ; blocks, texts, scripts
+    dw $40fb, SafariZoneRestHouse4Texts, SafariZoneRestHouse4Script ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $5dd9 ; objects
+    dw SafariZoneRestHouse4Object ; objects
 
-INCBIN "baserom.gbc",$45dc0,$45dc4 - $45dc0
+SafariZoneRestHouse4Script: ; 0x45dc0
+    call $3c3c
+    ret
+; 0x45dc4
+
 SafariZoneRestHouse4Texts: ; 0x45dc4
     dw SafariZoneRestHouse4Text1, SafariZoneRestHouse4Text2, SafariZoneRestHouse4Text3
 
@@ -17342,12 +21693,18 @@ SafariZoneRestHouse4Object: ; 0x45dd9 (size=38)
 UnknownDungeon2_h: ; 0x45dff to 0x45e0b (12 bytes) (bank=11) (id=226)
     db $11 ; tileset
     db $09, $0f ; dimensions (y, x)
-    dw UnknownDungeon2Blocks, $5e0e, $5e0b ; blocks, texts, scripts
+    dw UnknownDungeon2Blocks, UnknownDungeon2Texts, UnknownDungeon2Script ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $5e14 ; objects
+    dw UnknownDungeon2Object ; objects
 
-INCBIN "baserom.gbc",$45e0b,$45e14 - $45e0b
+UnknownDungeon2Script: ; 0x45e0b
+    jp $3c3c
+; 0x45e0e
+
+UnknownDungeon2Texts: ; 0x45e0e
+    dw UnknownDungeon2Text1, UnknownDungeon2Text2, UnknownDungeon2Text3
+
 UnknownDungeon2Object: ; 0x45e14 (size=73)
     db $7d ; border tile
 
@@ -17380,12 +21737,28 @@ UnknownDungeon2Blocks: ; 135
 UnknownDungeon3_h: ; 0x45ee4 to 0x45ef0 (12 bytes) (bank=11) (id=227)
     db $11 ; tileset
     db $09, $0f ; dimensions (y, x)
-    dw UnknownDungeon3Blocks, $5f09, $5ef0 ; blocks, texts, scripts
+    dw UnknownDungeon3Blocks, UnknownDungeon3Texts, UnknownDungeon3Script ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $5f36 ; objects
+    dw UnknownDungeon3Object ; objects
 
-INCBIN "baserom.gbc",$45ef0,$45f1c - $45ef0
+UnknownDungeon3Script: ; 0x45ef0
+    call $3c3c
+    ld hl, $5f0f
+    ld de, $5f03
+    ld a, [$d650]
+    call $3160
+    ld [$d650], a
+    ret
+; 0x45f03
+
+INCBIN "baserom.gbc",$45f03,$6
+
+UnknownDungeon3Texts: ; 0x45f09
+    dw UnknownDungeon3Text1, UnknownDungeon3Text2, UnknownDungeon3Text3
+
+INCBIN "baserom.gbc",$45f0f,$d
+
 UnknownDungeon3Text1: ; 0x45f1c
     db $08 ; asm
     ld hl, $5f0f
@@ -17393,6 +21766,7 @@ UnknownDungeon3Text1: ; 0x45f1c
     jp $24d7
 
 INCBIN "baserom.gbc",$45f26,$10
+
 UnknownDungeon3Object: ; 0x45f36 (size=34)
     db $7d ; border tile
 
@@ -17415,12 +21789,28 @@ UnknownDungeon3Blocks: ; 135
 RockTunnel2_h: ; 0x45fdf to 0x45feb (12 bytes) (bank=11) (id=232)
     db $11 ; tileset
     db $12, $14 ; dimensions (y, x)
-    dw RockTunnel2Blocks, $6004, $5feb ; blocks, texts, scripts
+    dw RockTunnel2Blocks, RockTunnel2Texts, RockTunnel2Script ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $613d ; objects
+    dw RockTunnel2Object ; objects
 
-INCBIN "baserom.gbc",$45feb,$46075 - $45feb
+RockTunnel2Script: ; 0x45feb
+    call $3c3c
+    ld hl, $6014
+    ld de, $5ffe
+    ld a, [$d620]
+    call $3160
+    ld [$d620], a
+    ret
+; 0x45ffe
+
+INCBIN "baserom.gbc",$45ffe,$6
+
+RockTunnel2Texts: ; 0x46004
+    dw RockTunnel2Text1, RockTunnel2Text2, RockTunnel2Text3, RockTunnel2Text4, RockTunnel2Text5, RockTunnel2Text6, RockTunnel2Text7, RockTunnel2Text8
+
+INCBIN "baserom.gbc",$46014,$61
+
 RockTunnel2Text1: ; 0x46075
     db $08 ; asm
     ld hl, $6014
@@ -17470,6 +21860,7 @@ RockTunnel2Text8: ; 0x460bb
     jp $24d7
 
 INCBIN "baserom.gbc",$460c5,$78
+
 RockTunnel2Object: ; 0x4613d (size=100)
     db $3 ; border tile
 
@@ -17503,14 +21894,57 @@ RockTunnel2Blocks: ; 360
 SeafoamIslands2_h: ; 0x46309 to 0x46315 (12 bytes) (bank=11) (id=159)
     db $11 ; tileset
     db $09, $0f ; dimensions (y, x)
-    dw SeafoamIslands2Blocks, $6372, $6315 ; blocks, texts, scripts
+    dw SeafoamIslands2Blocks, SeafoamIslands2Texts, SeafoamIslands2Script ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $6376 ; objects
+    dw SeafoamIslands2Object ; objects
 
-INCBIN "baserom.gbc",$46315,$46372 - $46315
+SeafoamIslands2Script: ; 0x46315
+    call $3c3c
+    ld hl, $cd60
+    bit 7, [hl]
+    res 7, [hl]
+    jr z, .asm_46362 ; 0x4631f $41
+    ld hl, $636d
+    call $34e4
+    ret nc
+    ld hl, $d87f
+    ld a, [$cd3d]
+    cp $1
+    jr nz, .asm_46340 ; 0x46330 $e
+    set 0, [hl]
+    ld a, $d9
+    ld [$d079], a
+    ld a, $db
+    ld [$d07a], a
+    jr .asm_4634c ; 0x4633e $c
+.asm_46340
+    set 1, [hl]
+    ld a, $da
+    ld [$d079], a
+    ld a, $dc
+    ld [$d07a], a
+.asm_4634c
+    ld a, [$d079]
+    ld [$cc4d], a
+    ld a, $11
+    call Predef
+    ld a, [$d07a]
+    ld [$cc4d], a
+    ld a, $15
+    jp $3e6d
+.asm_46362
+    ld a, $a0
+    ld [$d71d], a
+    ld hl, $636d
+    jp $6981
+; 0x4636d
+
+INCBIN "baserom.gbc",$4636d,$5
+
 SeafoamIslands2Texts: ; 0x46372
     dw SeafoamIslands2Text1, SeafoamIslands2Text2
+
 SeafoamIslands2Object: ; 0x46376 (size=72)
     db $7d ; border tile
 
@@ -17544,14 +21978,57 @@ SeafoamIslands2Blocks: ; 135
 SeafoamIslands3_h: ; 0x46445 to 0x46451 (12 bytes) (bank=11) (id=160)
     db $11 ; tileset
     db $09, $0f ; dimensions (y, x)
-    dw SeafoamIslands3Blocks, $64ae, $6451 ; blocks, texts, scripts
+    dw SeafoamIslands3Blocks, SeafoamIslands3Texts, SeafoamIslands3Script ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $64b2 ; objects
+    dw SeafoamIslands3Object ; objects
 
-INCBIN "baserom.gbc",$46451,$464ae - $46451
+SeafoamIslands3Script: ; 0x46451
+    call $3c3c
+    ld hl, $cd60
+    bit 7, [hl]
+    res 7, [hl]
+    jr z, .asm_4649e ; 0x4645b $41
+    ld hl, $64a9
+    call $34e4
+    ret nc
+    ld hl, $d880
+    ld a, [$cd3d]
+    cp $1
+    jr nz, .asm_4647c ; 0x4646c $e
+    set 0, [hl]
+    ld a, $db
+    ld [$d079], a
+    ld a, $df
+    ld [$d07a], a
+    jr .asm_46488 ; 0x4647a $c
+.asm_4647c
+    set 1, [hl]
+    ld a, $dc
+    ld [$d079], a
+    ld a, $e0
+    ld [$d07a], a
+.asm_46488
+    ld a, [$d079]
+    ld [$cc4d], a
+    ld a, $11
+    call Predef
+    ld a, [$d07a]
+    ld [$cc4d], a
+    ld a, $15
+    jp $3e6d
+.asm_4649e
+    ld a, $a1
+    ld [$d71d], a
+    ld hl, $64a9
+    jp $6981
+; 0x464a9
+
+INCBIN "baserom.gbc",$464a9,$5
+
 SeafoamIslands3Texts: ; 0x464ae
     dw SeafoamIslands3Text1, SeafoamIslands3Text2
+
 SeafoamIslands3Object: ; 0x464b2 (size=72)
     db $7d ; border tile
 
@@ -17585,14 +22062,107 @@ SeafoamIslands3Blocks: ; 135
 SeafoamIslands4_h: ; 0x46581 to 0x4658d (12 bytes) (bank=11) (id=161)
     db $11 ; tileset
     db $09, $0f ; dimensions (y, x)
-    dw SeafoamIslands4Blocks, $669a, $658d ; blocks, texts, scripts
+    dw SeafoamIslands4Blocks, SeafoamIslands4Texts, SeafoamIslands4Script ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $66a6 ; objects
+    dw SeafoamIslands4Object ; objects
 
-INCBIN "baserom.gbc",$4658d,$4669a - $4658d
+SeafoamIslands4Script: ; 0x4658d
+    call $3c3c
+    ld hl, $cd60
+    bit 7, [hl]
+    res 7, [hl]
+    jr z, .asm_465dc ; 0x46597 $43
+    ld hl, $65f6
+    call $34e4
+    ret nc
+    ld hl, $d881
+    ld a, [$cd3d]
+    cp $1
+    jr nz, .asm_465b8 ; 0x465a8 $e
+    set 0, [hl]
+    ld a, $dd
+    ld [$d079], a
+    ld a, $e1
+    ld [$d07a], a
+    jr .asm_465c4 ; 0x465b6 $c
+.asm_465b8
+    set 1, [hl]
+    ld a, $de
+    ld [$d079], a
+    ld a, $e2
+    ld [$d07a], a
+.asm_465c4
+    ld a, [$d079]
+    ld [$cc4d], a
+    ld a, $11
+    call Predef
+    ld a, [$d07a]
+    ld [$cc4d], a
+    ld a, $15
+    call Predef
+    jr .asm_465ed ; 0x465da $11
+.asm_465dc
+    ld a, $a2
+    ld [$d71d], a
+    ld hl, $65f6
+    call $6981
+    ld a, [$d732]
+    bit 4, a
+    ret nz
+.asm_465ed
+    ld hl, $65fb
+    ld a, [$d666]
+    jp $3d97
+; 0x465f6
+
+INCBIN "baserom.gbc",$465f6,$465fb - $465f6
+
+SeafoamIslands4Scripts: ; 0x465fb
+    dw SeafoamIslands4Script0, SeafoamIslands4Script1
+
+INCBIN "baserom.gbc",$465ff,$4
+
+SeafoamIslands4Script0: ; 0x46603
+    ld a, [$d880]
+    and $3
+    cp $3
+    ret z
+    ld a, [$d361]
+    cp $8
+    ret nz
+    ld a, [$d362]
+    cp $f
+    ret nz
+    ld hl, $ccd3
+    ld de, $6632
+    call $350c
+    dec a
+    ld [$cd38], a
+    call $3486
+    ld hl, $d733
+    set 2, [hl]
+    ld a, $1
+    ld [$d666], a
+    ret
+; 0x46632
+
+INCBIN "baserom.gbc",$46632,$46639 - $46632
+
+SeafoamIslands4Script1: ; 0x46639
+    ld a, [$cd38]
+    and a
+    ret nz
+    ld a, $0
+    ld [$d666], a
+    ret
+; 0x46644
+
+INCBIN "baserom.gbc",$46644,$56
+
 SeafoamIslands4Texts: ; 0x4669a
     dw SeafoamIslands4Text1, SeafoamIslands4Text2, SeafoamIslands4Text3, SeafoamIslands4Text4, SeafoamIslands4Text5, SeafoamIslands4Text6
+
 SeafoamIslands4Object: ; 0x466a6 (size=96)
     db $7d ; border tile
 
@@ -17630,12 +22200,74 @@ SeafoamIslands4Blocks: ; 135
 SeafoamIslands5_h: ; 0x4678d to 0x46799 (12 bytes) (bank=11) (id=162)
     db $11 ; tileset
     db $09, $0f ; dimensions (y, x)
-    dw SeafoamIslands5Blocks, $687c, $6799 ; blocks, texts, scripts
+    dw SeafoamIslands5Blocks, SeafoamIslands5Texts, SeafoamIslands5Script ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $68bc ; objects
+    dw SeafoamIslands5Object ; objects
 
-INCBIN "baserom.gbc",$46799,$46893 - $46799
+SeafoamIslands5Script: ; 0x46799
+    call $3c3c
+    ld a, [$d668]
+    ld hl, $67ad
+    jp $3d97
+; 0x467a5
+
+INCBIN "baserom.gbc",$467a5,$467ad - $467a5
+
+SeafoamIslands5Scripts: ; 0x467ad
+    dw SeafoamIslands5Script0, SeafoamIslands5Script1
+
+INCBIN "baserom.gbc",$467b1,$16
+
+SeafoamIslands5Script0: ; 0x467c7
+    ld a, [$d880]
+    and $3
+    cp $3
+    ret z
+    ld hl, $67fe
+    call $34bf
+    ret nc
+    ld a, [$cd3d]
+    cp $3
+    jr nc, .asm_467e6 ; 0x467db $9
+    ld a, $40
+    ld [$ccd4], a
+    ld a, $2
+    jr .asm_467e8 ; 0x467e4 $2
+.asm_467e6
+    ld a, $1
+.asm_467e8
+    ld [$cd38], a
+    ld a, $40
+    ld [$ccd3], a
+    call $3486
+    ld hl, $d733
+    res 2, [hl]
+    ld a, $1
+    ld [$d668], a
+    ret
+; 0x467fe
+
+INCBIN "baserom.gbc",$467fe,$46807 - $467fe
+
+SeafoamIslands5Script1: ; 0x46807
+    ld a, [$cd38]
+    and a
+    ret nz
+    xor a
+    ld [$cd6b], a
+    ld a, $0
+    ld [$d668], a
+    ret
+; 0x46816
+
+INCBIN "baserom.gbc",$46816,$66
+
+SeafoamIslands5Texts: ; 0x4687c
+    dw SeafoamIslands5Text1, SeafoamIslands5Text2, SeafoamIslands5Text3, SeafoamIslands5Text4, SeafoamIslands5Text5
+
+INCBIN "baserom.gbc",$46886,$d
+
 SeafoamIslands5Text3: ; 0x46893
     db $08 ; asm
     ld hl, $6886
@@ -17644,7 +22276,15 @@ SeafoamIslands5Text3: ; 0x46893
     ld [$d668], a
     jp $24d7
 
-INCBIN "baserom.gbc",$468a2,$10
+; 0x468a2 TX_FAR
+db $17, $75, $40, $22
+; 0x468a6
+    db $8
+    ld a, $4a
+    call $13d0
+    call $3748
+    jp TextScriptEnd
+; 0x468b2
 
 SeafoamIslands5Text4: ; 0x468b2
     TX_FAR _SeafoamIslands5Text4
@@ -17680,6 +22320,7 @@ SeafoamIslands5Object: ; 0x468bc (size=62)
 
 SeafoamIslands5Blocks: ; 135
     INCBIN "maps/seafoamislands5.blk"
+
 INCBIN "baserom.gbc",$46981,$167f
 
 SECTION "bank12",DATA,BANK[$12]
@@ -17687,7 +22328,7 @@ SECTION "bank12",DATA,BANK[$12]
 Route7_h: ; 0x48000 to 0x48022 (34 bytes) (bank=12) (id=18)
     db $00 ; tileset
     db $09, $0a ; dimensions (y, x)
-    dw Route7Blocks, $4155, $4152 ; blocks, texts, scripts
+    dw Route7Blocks, $4155, Route7Script ; blocks, texts, scripts
     db WEST | EAST ; connections
 
     ; connections data
@@ -17706,7 +22347,7 @@ Route7_h: ; 0x48000 to 0x48022 (34 bytes) (bank=12) (id=18)
 
     ; end connection data
 
-    dw $4022 ; objects
+    dw Route7Object ; objects
 
 Route7Object: ; 0x48022 (size=47)
     db $f ; border tile
@@ -17742,17 +22383,22 @@ Route11GateBlocks: ; 20
 Route11GateUpstairsBlocks: ; 16
     INCBIN "maps/route11gateupstairs.blk"
 
-INCBIN "baserom.gbc",$480eb,$48157 - $480eb
+INCBIN "baserom.gbc",$480eb,$48152 - $480eb
+
+Route7Script: ; 0x48152
+    jp $3c3c
+; 0x48155
+
+INCBIN "baserom.gbc",$48155,$2
 
 Route7Text1: ; 0x48157
     TX_FAR _Route7Text1
     db $50
 
-
 RedsHouse1F_h: ; 415C
 	db $01 ; tileset
 	db $04,$04 ; dimensions
-	dw RedsHouse1FBlocks,RedsHouse1FTexts,RedsHouse1FScript
+	dw RedsHouse1FBlocks, RedsHouse1FTexts, RedsHouse1FScript
 	db 0 ; no connections
 	dw RedsHouse1FObject
 
@@ -17857,12 +22503,18 @@ RedsHouse1FBlocks:
 CeladonMart3_h: ; 0x48219 to 0x48225 (12 bytes) (bank=12) (id=124)
     db $12 ; tileset
     db $04, $0a ; dimensions (y, x)
-    dw CeladonMart3Blocks, $4228, $4225 ; blocks, texts, scripts
+    dw CeladonMart3Blocks, CeladonMart3Texts, CeladonMart3Script ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $42c4 ; objects
+    dw CeladonMart3Object ; objects
 
-INCBIN "baserom.gbc",$48225,$4824a - $48225
+CeladonMart3Script: ; 0x48225
+    jp $3c3c
+; 0x48228
+
+CeladonMart3Texts: ; 0x48228
+    dw CeladonMart3Text1, CeladonMart3Text2, CeladonMart3Text3, CeladonMart3Text4, CeladonMart3Text5, CeladonMart3Text6, CeladonMart3Text7, CeladonMart3Text8, CeladonMart3Text9, CeladonMart3Text10, CeladonMart3Text11, CeladonMart3Text12, CeladonMart3Text13, CeladonMart3Text14, CeladonMart3Text15, CeladonMart3Text16, CeladonMart3Text17
+
 CeladonMart3Text1: ; 0x4824a
     db $08 ; asm
     ld a, [$d778]
@@ -17977,12 +22629,17 @@ CeladonMart3Blocks: ; 40
 CeladonMart4_h: ; 0x4834a to 0x48356 (12 bytes) (bank=12) (id=125)
     db $12 ; tileset
     db $04, $0a ; dimensions (y, x)
-    dw CeladonMart4Blocks, $4359, $4356 ; blocks, texts, scripts
+    dw CeladonMart4Blocks, CeladonMart4Texts, CeladonMart4Script ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $4370 ; objects
+    dw CeladonMart4Object ; objects
 
-INCBIN "baserom.gbc",$48356,$48361 - $48356
+CeladonMart4Script: ; 0x48356
+    jp $3c3c
+; 0x48359
+
+CeladonMart4Texts: ; 0x48359
+    dw CeladonMart4Text1, CeladonMart4Text2, CeladonMart4Text3, CeladonMart4Text4
 
 CeladonMart4Text2: ; 0x48361
     TX_FAR _CeladonMart4Text2
@@ -18023,12 +22680,16 @@ CeladonMart4Blocks: ; 40
 CeladonMartRoof_h: ; 0x483c9 to 0x483d5 (12 bytes) (bank=12) (id=126)
     db $12 ; tileset
     db $04, $0a ; dimensions (y, x)
-    dw CeladonMartRoofBlocks, $455b, $43d5 ; blocks, texts, scripts
+    dw CeladonMartRoofBlocks, $455b, CeladonMartRoofScript ; blocks, texts, scripts
     db $00 ; connections
+    
+    dw CeladonMartRoofObject ; objects
 
-    dw $45a8 ; objects
+CeladonMartRoofScript: ; 0x483d5
+    jp $3c3c
+; 0x483d8
 
-INCBIN "baserom.gbc",$483d5,$48567 - $483d5
+INCBIN "baserom.gbc",$483d8,$18f
 
 CeladonMartRoofText1: ; 0x48567
     TX_FAR _CeladonMartRoofText1
@@ -18087,12 +22748,33 @@ CeladonMartRoofBlocks: ; 40
 CeladonMartElevator_h: ; 0x485f4 to 0x48600 (12 bytes) (bank=12) (id=127)
     db $12 ; tileset
     db $02, $02 ; dimensions (y, x)
-    dw CeladonMartElevatorBlocks, $465c, $4600 ; blocks, texts, scripts
+    dw CeladonMartElevatorBlocks, CeladonMartElevatorTexts, CeladonMartElevatorScript ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $466d ; objects
+    dw CeladonMartElevatorObject ; objects
 
-INCBIN "baserom.gbc",$48600,$4865e - $48600
+CeladonMartElevatorScript: ; 0x48600
+    ld hl, $d126
+    bit 5, [hl]
+    res 5, [hl]
+    push hl
+    call nz, $461c
+    pop hl
+    bit 7, [hl]
+    res 7, [hl]
+    call nz, $4654
+    xor a
+    ld [$cf0c], a
+    inc a
+    ld [$cc3c], a
+    ret
+; 0x4861c
+
+INCBIN "baserom.gbc",$4861c,$40
+
+CeladonMartElevatorTexts: ; 0x4865c
+    dw CeladonMartElevatorText1
+
 CeladonMartElevatorText1: ; 0x4865e
     db $08 ; asm
     call $4631
@@ -18123,15 +22805,22 @@ CeladonMartElevatorBlocks: ; 4
 CeladonMansion1_h: ; 0x48688 to 0x48694 (12 bytes) (bank=12) (id=128)
     db $13 ; tileset
     db $06, $04 ; dimensions (y, x)
-    dw CeladonMansion1Blocks, $4697, $4694 ; blocks, texts, scripts
+    dw CeladonMansion1Blocks, CeladonMansion1Texts, CeladonMansion1Script ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $46cf ; objects
+    dw CeladonMansion1Object ; objects
 
-INCBIN "baserom.gbc",$48694,$48697 - $48694
+CeladonMansion1Script: ; 0x48694
+    jp $3c3c
+; 0x48697
+
 CeladonMansion1Texts: ; 0x48697
     dw CeladonMansion1Text1, CeladonMansion1Text2, CeladonMansion1Text3, CeladonMansion1Text4, CeladonMansion1Text5
-INCBIN "baserom.gbc",$486a1,$6
+
+;0x486a1
+    call $13d0
+    jp TextScriptEnd
+; 0x486a7
 
 CeladonMansion1Text1: ; 0x486a7
     TX_FAR _CeladonMansion1Text1
@@ -18193,12 +22882,16 @@ CeladonMansion1Blocks: ; 24
 CeladonMansion2_h: ; 0x4872e to 0x4873a (12 bytes) (bank=12) (id=129)
     db $13 ; tileset
     db $06, $04 ; dimensions (y, x)
-    dw CeladonMansion2Blocks, $473e, $473a ; blocks, texts, scripts
+    dw CeladonMansion2Blocks, CeladonMansion2Texts, CeladonMansion2Script ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $4745 ; objects
+    dw CeladonMansion2Object ; objects
 
-INCBIN "baserom.gbc",$4873a,$4873e - $4873a
+CeladonMansion2Script: ; 0x4873a
+    call $3c3c
+    ret
+; 0x4873e
+
 CeladonMansion2Texts: ; 0x4873e
     dw CeladonMansion2Text1
 
@@ -18232,12 +22925,17 @@ CeladonMansion2Blocks: ; 24
 CeladonMansion3_h: ; 0x48784 to 0x48790 (12 bytes) (bank=12) (id=130)
     db $13 ; tileset
     db $06, $04 ; dimensions (y, x)
-    dw CeladonMansion3Blocks, $4793, $4790 ; blocks, texts, scripts
+    dw CeladonMansion3Blocks, CeladonMansion3Texts, CeladonMansion3Script ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $47ff ; objects
+    dw CeladonMansion3Object ; objects
 
-INCBIN "baserom.gbc",$48790,$487a3 - $48790
+CeladonMansion3Script: ; 0x48790
+    jp $3c3c
+; 0x48793
+
+CeladonMansion3Texts: ; 0x48793
+    dw CeladonMansion3Text1, CeladonMansion3Text2, CeladonMansion3Text3, CeladonMansion3Text4, CeladonMansion3Text5, CeladonMansion3Text6, CeladonMansion3Text7, CeladonMansion3Text8
 
 CeladonMansion3Text1: ; 0x487a3
     TX_FAR _CeladonMansion3Text1
@@ -18318,12 +23016,15 @@ CeladonMansion3Blocks: ; 24
 CeladonMansion4_h: ; 0x4885f to 0x4886b (12 bytes) (bank=12) (id=131)
     db $13 ; tileset
     db $06, $04 ; dimensions (y, x)
-    dw CeladonMansion4Blocks, $486e, $486b ; blocks, texts, scripts
+    dw CeladonMansion4Blocks, CeladonMansion4Texts, CeladonMansion4Script ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $4875 ; objects
+    dw CeladonMansion4Object ; objects
 
-INCBIN "baserom.gbc",$4886b,$4886e - $4886b
+CeladonMansion4Script: ; 0x4886b
+    jp $3c3c
+; 0x4886e
+
 CeladonMansion4Texts: ; 0x4886e
     dw CeladonMansion4Text1
 
@@ -18355,12 +23056,20 @@ CeladonMansion4Blocks: ; 24
 CeladonPokecenter_h: ; 0x488ac to 0x488b8 (12 bytes) (bank=12) (id=133)
     db $06 ; tileset
     db $04, $07 ; dimensions (y, x)
-    dw $40ab, $48be, $48b8 ; blocks, texts, scripts
+    dw $40ab, $48be, CeladonPokecenterScript ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $48d2 ; objects
+    dw CeladonPokecenterObject ; objects
 
-INCBIN "baserom.gbc",$488b8,$488c8 - $488b8
+CeladonPokecenterScript: ; 0x488b8
+    call $22fa
+    jp $3c3c
+; 0x488be
+
+INCBIN "baserom.gbc",$488be,$8
+
+CeladonPokecenterText4:
+    db $f6, $ff
 
 CeladonPokecenterText2: ; _CeladonPokecenterText2
 CeladonPokecenterText1: ; 0x488c8
@@ -18371,7 +23080,6 @@ INCBIN "baserom.gbc",$488cc,$488cd - $488cc
 CeladonPokecenterText3: ; 0x488cd
     TX_FAR _CeladonPokecenterText3
     db $50
-
 
 CeladonPokecenterObject: ; 0x488d2 (size=44)
     db $0 ; border tile
@@ -18395,12 +23103,32 @@ CeladonPokecenterObject: ; 0x488d2 (size=44)
 CeladonGym_h: ; 0x488fe to 0x4890a (12 bytes) (bank=12) (id=134)
     db $07 ; tileset
     db $09, $05 ; dimensions (y, x)
-    dw CeladonGymBlocks, $49a6, $490a ; blocks, texts, scripts
+    dw CeladonGymBlocks, CeladonGymTexts, CeladonGymScript ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $4b30 ; objects
+    dw CeladonGymObject ; objects
 
-INCBIN "baserom.gbc",$4890a,$48a11 - $4890a
+CeladonGymScript: ; 0x4890a
+    ld hl, $d126
+    bit 6, [hl]
+    res 6, [hl]
+    call nz, $4927
+    call $3c3c
+    ld hl, $49bc
+    ld de, $494e
+    ld a, [$d5ff]
+    call $3160
+    ld [$d5ff], a
+    ret
+; 0x48927
+
+INCBIN "baserom.gbc",$48927,$7f
+
+CeladonGymTexts: ; 0x489a6
+    dw CeladonGymText1, CeladonGymText2, CeladonGymText3, CeladonGymText4, CeladonGymText5, CeladonGymText6, CeladonGymText7, CeladonGymText8, CeladonGymText9, CeladonGymText10, CeladonGymText11
+
+INCBIN "baserom.gbc",$489bc,$55
+
 CeladonGymText1: ; 0x48a11
     db $08 ; asm
     ld a, [$d77c]
@@ -18436,7 +23164,20 @@ CeladonGymText1: ; 0x48a11
 .asm_96252 ; 0x48a5b
     jp $24d7
 
-INCBIN "baserom.gbc",$48a5e,$48a81 - $48a5e
+INCBIN "baserom.gbc",$48a5e,$48a6d - $48a5e
+
+CeladonGymText9: ; 0x48a6d
+INCBIN "baserom.gbc",$48a6d,$5
+
+CeladonGymText10: ; 0x48a72
+INCBIN "baserom.gbc",$48a72,$4
+db $0b
+
+INCBIN "baserom.gbc",$48a77,$48a7c - $48a77
+
+CeladonGymText11: ; 0x48a7c
+INCBIN "baserom.gbc",$48a7c,$5
+
 CeladonGymText2: ; 0x48a81
     db $08 ; asm
     ld hl, $49bc
@@ -18444,6 +23185,7 @@ CeladonGymText2: ; 0x48a81
     jp $24d7
 
 INCBIN "baserom.gbc",$48a8b,$48a9a - $48a8b
+
 CeladonGymText3: ; 0x48a9a
     db $08 ; asm
     ld hl, $49c8
@@ -18451,6 +23193,7 @@ CeladonGymText3: ; 0x48a9a
     jp $24d7
 
 INCBIN "baserom.gbc",$48aa4,$48ab3 - $48aa4
+
 CeladonGymText4: ; 0x48ab3
     db $08 ; asm
     ld hl, $49d4
@@ -18458,6 +23201,7 @@ CeladonGymText4: ; 0x48ab3
     jp $24d7
 
 INCBIN "baserom.gbc",$48abd,$48acc - $48abd
+
 CeladonGymText5: ; 0x48acc
     db $08 ; asm
     ld hl, $49e0
@@ -18465,6 +23209,7 @@ CeladonGymText5: ; 0x48acc
     jp $24d7
 
 INCBIN "baserom.gbc",$48ad6,$48ae5 - $48ad6
+
 CeladonGymText6: ; 0x48ae5
     db $08 ; asm
     ld hl, $49ec
@@ -18472,6 +23217,7 @@ CeladonGymText6: ; 0x48ae5
     jp $24d7
 
 INCBIN "baserom.gbc",$48aef,$48afe - $48aef
+
 CeladonGymText7: ; 0x48afe
     db $08 ; asm
     ld hl, $49f8
@@ -18479,6 +23225,7 @@ CeladonGymText7: ; 0x48afe
     jp $24d7
 
 INCBIN "baserom.gbc",$48b08,$48b17 - $48b08
+
 CeladonGymText8: ; 0x48b17
     db $08 ; asm
     ld hl, $4a04
@@ -18486,6 +23233,7 @@ CeladonGymText8: ; 0x48b17
     jp $24d7
 
 INCBIN "baserom.gbc",$48b21,$f
+
 CeladonGymObject: ; 0x48b30 (size=84)
     db $3 ; border tile
 
@@ -18515,12 +23263,35 @@ CeladonGymBlocks: ; 45
 CeladonGameCorner_h: ; 0x48bb1 to 0x48bbd (12 bytes) (bank=12) (id=135)
     db $12 ; tileset
     db $09, $0a ; dimensions (y, x)
-    dw CeladonGameCornerBlocks, $4c8a, $4bbd ; blocks, texts, scripts
+    dw CeladonGameCornerBlocks, CeladonGameCornerTexts, CeladonGameCornerScript ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $4fa0 ; objects
+    dw CeladonGameCornerObject ; objects
 
-INCBIN "baserom.gbc",$48bbd,$48ca4 - $48bbd
+CeladonGameCornerScript: ; 0x48bbd
+    call $4bcf
+    call $4bec
+    call $3c3c
+    ld hl, $4c12
+    ld a, [$d65f]
+    jp $3d97
+; 0x48bcf
+
+INCBIN "baserom.gbc",$48bcf,$48c12 - $48bcf
+
+CeladonGameCornerScripts: ; 0x48c12
+    dw CeladonGameCornerScript0
+
+INCBIN "baserom.gbc",$48c14,$4
+
+CeladonGameCornerScript0: ; 0x48c18
+    ret
+; 0x48c19
+
+INCBIN "baserom.gbc",$48c19,$71
+
+CeladonGameCornerTexts: ; 0x48c8a
+    dw CeladonGameCornerText1, CeladonGameCornerText2, CeladonGameCornerText3, CeladonGameCornerText4, CeladonGameCornerText5, CeladonGameCornerText6, CeladonGameCornerText7, CeladonGameCornerText8, CeladonGameCornerText9, CeladonGameCornerText10, CeladonGameCornerText11, CeladonGameCornerText12, CeladonGameCornerText13
 
 CeladonGameCornerText1: ; 0x48ca4
     TX_FAR _CeladonGameCornerText1
@@ -18697,6 +23468,7 @@ CeladonGameCornerText9: ; 0x48dd9
     jp $24d7
 
 INCBIN "baserom.gbc",$48e26,$48e3b - $48e26
+
 CeladonGameCornerText10: ; 0x48e3b
     db $08 ; asm
     ld a, [$d77e]
@@ -18736,6 +23508,7 @@ CeladonGameCornerText10: ; 0x48e3b
     jp $24d7
 
 INCBIN "baserom.gbc",$48e88,$48e9d - $48e88
+
 CeladonGameCornerText11: ; 0x48e9d
     db $08 ; asm
     ld hl, $4ece
@@ -18758,7 +23531,11 @@ CeladonGameCornerText11: ; 0x48e9d
     ld [$d65f], a
     jp $24d7
 
-INCBIN "baserom.gbc",$48ece,$48edd - $48ece
+INCBIN "baserom.gbc",$48ece,$48ed8 - $48ece
+
+CeladonGameCornerText13: ; 0x48ed8
+INCBIN "baserom.gbc",$48ed8,5
+
 CeladonGameCornerText12: ; 0x48edd
     db $08 ; asm
     ld a, $1
@@ -18779,6 +23556,7 @@ CeladonGameCornerText12: ; 0x48edd
     jp $24d7
 
 INCBIN "baserom.gbc",$48f09,$97
+
 CeladonGameCornerObject: ; 0x48fa0 (size=99)
     db $f ; border tile
 
@@ -18814,12 +23592,17 @@ CeladonGameCornerBlocks: ; 90
 CeladonMart5_h: ; 0x4905d to 0x49069 (12 bytes) (bank=12) (id=136)
     db $12 ; tileset
     db $04, $0a ; dimensions (y, x)
-    dw CeladonMart5Blocks, $506c, $5069 ; blocks, texts, scripts
+    dw CeladonMart5Blocks, CeladonMart5Texts, CeladonMart5Script ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $5085 ; objects
+    dw CeladonMart5Object ; objects
 
-INCBIN "baserom.gbc",$49069,$49076 - $49069
+CeladonMart5Script: ; 0x49069
+    jp $3c3c
+; 0x4906c
+
+CeladonMart5Texts: ; 0x4906c
+    dw CeladonMart5Text1, CeladonMart5Text2, CeladonMart5Text3, CeladonMart5Text4, CeladonMart5Text5
 
 CeladonMart5Text1: ; 0x49076
     TX_FAR _CeladonMart5Text1
@@ -18864,9 +23647,13 @@ CeladonPrizeRoom_h: ; 0x490e4 to 0x490f0 (12 bytes) (bank=12) (id=137)
     dw CeladonPrizeRoomBlocks, $50f3, $50f0 ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $5108 ; objects
+    dw CeladonPrizeRoomObject ; objects
 
-INCBIN "baserom.gbc",$490f0,$490fd - $490f0
+CeladonPrizeRoomScript: ; 0x490f0
+    jp $3c3c
+; 0x490f3
+
+INCBIN "baserom.gbc",$490f3,$a
 
 CeladonPrizeRoomText1: ; 0x490fd
     TX_FAR _CeladonPrizeRoomText1
@@ -18904,12 +23691,18 @@ CeladonPrizeRoomBlocks: ; 20
 CeladonDiner_h: ; 0x49145 to 0x49151 (12 bytes) (bank=12) (id=138)
     db $12 ; tileset
     db $04, $05 ; dimensions (y, x)
-    dw CeladonDinerBlocks, $5155, $5151 ; blocks, texts, scripts
+    dw CeladonDinerBlocks, CeladonDinerTexts, CeladonDinerScript ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $51bc ; objects
+    dw CeladonDinerObject ; objects
 
-INCBIN "baserom.gbc",$49151,$4915f - $49151
+CeladonDinerScript: ; 0x49151
+    call $3c3c
+    ret
+; 0x49155
+
+CeladonDinerTexts: ; 0x49155
+    dw CeladonDinerText1, CeladonDinerText2, CeladonDinerText3, CeladonDinerText4, CeladonDinerText5
 
 CeladonDinerText1: ; 0x4915f
     TX_FAR _CeladonDinerText1
@@ -18980,12 +23773,16 @@ CeladonDinerBlocks: ; 20
 CeladonHouse_h: ; 0x49202 to 0x4920e (12 bytes) (bank=12) (id=139)
     db $13 ; tileset
     db $04, $04 ; dimensions (y, x)
-    dw CeladonHouseBlocks, $5212, $520e ; blocks, texts, scripts
+    dw CeladonHouseBlocks, CeladonHouseTexts, CeladonHouseScript ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $5227 ; objects
+    dw CeladonHouseObject ; objects
 
-INCBIN "baserom.gbc",$4920e,$49212 - $4920e
+CeladonHouseScript: ; 0x4920e
+    call $3c3c
+    ret
+; 0x49212
+
 CeladonHouseTexts: ; 0x49212
     dw CeladonHouseText1, CeladonHouseText2, CeladonHouseText3
 
@@ -19025,12 +23822,15 @@ CeladonHouseBlocks: ; 16
 CeladonHotel_h: ; 0x4925d to 0x49269 (12 bytes) (bank=12) (id=140)
     db $06 ; tileset
     db $04, $07 ; dimensions (y, x)
-    dw CeladonHotelBlocks, $526c, $5269 ; blocks, texts, scripts
+    dw CeladonHotelBlocks, CeladonHotelTexts, CeladonHotelScript ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $5281 ; objects
+    dw CeladonHotelObject ; objects
 
-INCBIN "baserom.gbc",$49269,$4926c - $49269
+CeladonHotelScript: ; 0x49269
+    jp $3c3c
+; 0x4926c
+
 CeladonHotelTexts: ; 0x4926c
     dw CeladonHotelText1, CeladonHotelText2, CeladonHotelText3
 
@@ -19070,12 +23870,17 @@ CeladonHotelBlocks: ; 28
 MtMoonPokecenter_h: ; 0x492c3 to 0x492cf (12 bytes) (bank=12) (id=68)
     db $06 ; tileset
     db $04, $07 ; dimensions (y, x)
-    dw MtMoonPokecenterBlocks, $52d5, $52cf ; blocks, texts, scripts
+    dw MtMoonPokecenterBlocks, $52d5, MtMoonPokecenterScript ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $5376 ; objects
+    dw MtMoonPokecenterObject ; objects
 
-INCBIN "baserom.gbc",$492cf,$492e2 - $492cf
+MtMoonPokecenterScript: ; 0x492cf
+    call $22fa
+    jp $3c3c
+; 0x492d5
+
+INCBIN "baserom.gbc",$492d5,$d
 
 MtMoonPokecenterText2:
 MtMoonPokecenterText1: ; 0x492e2
@@ -19142,8 +23947,8 @@ MtMoonPokecenterText5: ; 0x49370
     TX_FAR _MtMoonPokecenterText5
     db $50
 
-;XXX wtf?
-db $f6
+MtMoonPokecenterText6:
+    db $f6
 
 MtMoonPokecenterObject: ; 0x49376 (size=56)
     db $0 ; border tile
@@ -19169,12 +23974,17 @@ MtMoonPokecenterObject: ; 0x49376 (size=56)
 RockTunnelPokecenter_h: ; 0x493ae to 0x493ba (12 bytes) (id=81)
     db $06 ; tileset
     db $04, $07 ; dimensions (y, x)
-    dw $40ab, $53c0, $53ba ; blocks, texts, scripts
+    dw $40ab, $53c0, RockTunnelPokecenterScript ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $53d4 ; objects
+    dw RockTunnelPokecenterObject ; objects
 
-INCBIN "baserom.gbc",$493ba,$493c9 - $493ba
+RockTunnelPokecenterScript: ; 0x493ba
+    call $22fa
+    jp $3c3c
+; 0x493c0
+
+INCBIN "baserom.gbc",$493c0,$9
 
 RockTunnelPokecenterText2:
 RockTunnelPokecenterText1: ; 0x493c9
@@ -19186,9 +23996,8 @@ RockTunnelPokecenterText3: ; 0x493ce
     TX_FAR _RockTunnelPokecenterText3
     db $50
 
-; RockTunnelPokecenterText4: ; 0x493d3
-
-INCBIN "baserom.gbc",$493ce+5,$493d4-($493ce+5)
+RockTunnelPokecenterText4: ; 0x493d3
+    db $f6
 
 RockTunnelPokecenterObject: ; 0x493d4 (size=44)
     db $0 ; border tile
@@ -19212,12 +24021,15 @@ RockTunnelPokecenterObject: ; 0x493d4 (size=44)
 Route11Gate_h: ; 0x49400 to 0x4940c (12 bytes) (id=84)
     db $0c ; tileset
     db $05, $04 ; dimensions (y, x)
-    dw Route11GateBlocks, $540f, $540c ; blocks, texts, scripts
+    dw Route11GateBlocks, Route11GateTexts, Route11GateScript ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $5416 ; objects
+    dw Route11GateObject ; objects
 
-INCBIN "baserom.gbc",$4940c,$4940f - $4940c
+Route11GateScript: ; 0x4940c
+    jp $3c3c
+; 0x4940f
+
 Route11GateTexts: ; 0x4940f
     dw Route11GateText1
 
@@ -19250,21 +24062,58 @@ Route11GateObject: ; 0x49416 (size=50)
 Route11GateUpstairs_h: ; 0x49448 to 0x49454 (12 bytes) (id=86)
     db $0c ; tileset
     db $04, $04 ; dimensions (y, x)
-    dw Route11GateUpstairsBlocks, $5457, $5454 ; blocks, texts, scripts
+    dw Route11GateUpstairsBlocks, $5457, Route11GateUpstairsScript ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $54da ; objects
+    dw Route11GateUpstairsObject ; objects
 
-INCBIN "baserom.gbc",$49454,$4945f - $49454
+Route11GateUpstairsScript: ; 0x49454
+    jp $3c3f
+; 0x49457
+
+INCBIN "baserom.gbc",$49457,$8
+
 Route11GateUpstairsText1: ; 0x4945f
     db $08 ; asm
     xor a
     ld [W_WHICHTRADE], a
     ld a, $54
     call Predef
+asm_49469:
     jp $24d7
 
-INCBIN "baserom.gbc",$4946c,$494a8 - $4946c
+Route11GateUpstairsText2: ; 0x4946c
+    db $8
+    ld a, [$d7d6]
+    add a
+    jr c, .asm_4949b ; 0x49471 $28
+    ld a, $1e
+    ld [$ff00+$db], a
+    ld a, $47
+    ld [$ff00+$dc], a
+    ld [$d11e], a
+    call $2fcf
+    ld h, d
+    ld l, e
+    ld de, $cc5b
+    ld bc, $000d
+    call CopyData
+    ld a, $62
+    call Predef
+    ld a, [$ff00+$db]
+    dec a
+    jr nz, .asm_494a1 ; 0x49494 $b
+    ld hl, $d7d6
+    set 7, [hl]
+.asm_4949b
+    ld hl, $54a3
+    call PrintText
+.asm_494a1
+    jr asm_49469 ; 0x494a1 $c6
+; 0x494a3
+
+INCBIN "baserom.gbc",$494a3,$5
+
 Route11GateUpstairsText3: ; 0x494a8
     db $08 ; asm
     ld a, [$c109]
@@ -19279,7 +24128,15 @@ Route11GateUpstairsText3: ; 0x494a8
     call PrintText
     jp $24d7
 
-INCBIN "baserom.gbc",$494c4,$16
+INCBIN "baserom.gbc",$494c4,$494ce - $494c4
+
+Route11GateUpstairsText4: ; 0x494ce
+    db $8
+    ld hl, $54d5
+    jp $55c9
+; 0x494d5
+
+INCBIN "baserom.gbc",$494d5,$5
 
 Route11GateUpstairsObject: ; 0x494da (size=30)
     db $a ; border tile
@@ -19301,12 +24158,15 @@ Route11GateUpstairsObject: ; 0x494da (size=30)
 Route12Gate_h: ; 0x494f8 to 0x49504 (12 bytes) (id=87)
     db $0c ; tileset
     db $04, $05 ; dimensions (y, x)
-    dw Route12GateBlocks, $5507, $5504 ; blocks, texts, scripts
+    dw Route12GateBlocks, Route12GateTexts, Route12GateScript ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $550e ; objects
+    dw Route12GateObject ; objects
 
-INCBIN "baserom.gbc",$49504,$49507 - $49504
+Route12GateScript: ; 0x49504
+    jp $3c3c
+; 0x49507
+
 Route12GateTexts: ; 0x49507
     dw Route12GateText1
 
@@ -19342,12 +24202,18 @@ Route12GateBlocks: ; 20
 Route12GateUpstairs_h: ; 0x49554 to 0x49560 (12 bytes) (id=195)
     db $0c ; tileset
     db $04, $04 ; dimensions (y, x)
-    dw $40db, $5563, $5560 ; blocks, texts, scripts
+    dw $40db, Route12GateUpstairsTexts, Route12GateUpstairsScript ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $55de ; objects
+    dw Route12GateUpstairsObject ; objects
 
-INCBIN "baserom.gbc",$49560,$49569 - $49560
+Route12GateUpstairsScript: ; 0x49560
+    jp $3c3f
+; 0x49563
+
+Route12GateUpstairsTexts: ; 0x49563
+    dw Route12GateUpstairsText1, Route12GateUpstairsText2, Route12GateUpstairsText3
+
 Route12GateUpstairsText1: ; 0x49569
     db $08 ; asm
     ld a, [$d7d7]
@@ -19410,12 +24276,15 @@ Route12GateUpstairsObject: ; 0x495de (size=24)
 Route15Gate_h: ; 0x495f6 to 0x49602 (12 bytes) (id=184)
     db $0c ; tileset
     db $05, $04 ; dimensions (y, x)
-    dw $40c7, $5605, $5602 ; blocks, texts, scripts
+    dw $40c7, Route15GateTexts, Route15GateScript ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $560c ; objects
+    dw Route15GateObject ; objects
 
-INCBIN "baserom.gbc",$49602,$49605 - $49602
+Route15GateScript: ; 0x49602
+    jp $3c3c
+; 0x49605
+
 Route15GateTexts: ; 0x49605
     dw Route15GateText1
 
@@ -19450,12 +24319,62 @@ INCBIN "baserom.gbc",$4963e,$74
 Route16GateMap_h: ; 0x496b2 to 0x496be (12 bytes) (id=186)
     db $0c ; tileset
     db $07, $04 ; dimensions (y, x)
-    dw Route16GateMapBlocks, $575a, $56be ; blocks, texts, scripts
+    dw Route16GateMapBlocks, Route16GateMapTexts, Route16GateMapScript ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $578b ; objects
+    dw Route16GateMapObject ; objects
 
-INCBIN "baserom.gbc",$496be,$49760 - $496be
+Route16GateMapScript: ; 0x496be
+    ld hl, $d732
+    res 5, [hl]
+    call $3c3c
+    ld a, [$d660]
+    ld hl, $56cf
+    jp $3d97
+; 0x496cf
+
+Route16GateMapScripts: ; 0x496cf
+    dw Route16GateMapScript0
+
+INCBIN "baserom.gbc",$496d1,$6
+
+Route16GateMapScript0: ; 0x496d7
+    call $5755
+    ret nz
+    ld hl, $5714
+    call $34bf
+    ret nc
+    ld a, $3
+    ld [$ff00+$8c], a
+    call $2920
+    xor a
+    ld [$ff00+$b4], a
+    ld a, [$cd3d]
+    cp $1
+    jr z, .asm_4970e ; 0x496f1 $1b
+    ld a, [$cd3d]
+    dec a
+    ld [$cd38], a
+    ld b, $0
+    ld c, a
+    ld a, $40
+    ld hl, $ccd3
+    call $36e0
+    call $3486
+    ld a, $1
+    ld [$d660], a
+    ret
+.asm_4970e
+    ld a, $2
+    ld [$d660], a
+    ret
+; 0x49714
+
+INCBIN "baserom.gbc",$49714,$46
+
+Route16GateMapTexts: ; 0x4975a
+    dw Route16GateMapText1, Route16GateMapText2, Route16GateMapText3
+
 Route16GateMapText1: ; 0x49760
     db $08 ; asm
     call $5755
@@ -19469,7 +24388,10 @@ Route16GateMapText1: ; 0x49760
 .asm_56c9d ; 0x49774
     jp $24d7
 
-INCBIN "baserom.gbc",$49777,$f
+INCBIN "baserom.gbc",$49777,$49781 - $49777
+
+Route16GateMapText3: ; 0x49781
+INCBIN "baserom.gbc",$49781,5
 
 Route16GateMapText2: ; 0x49786
     TX_FAR _Route16GateMapText2
@@ -19512,12 +24434,18 @@ Route16GateMapBlocks: ; 28
 Route16GateUpstairs_h: ; 0x497ff to 0x4980b (12 bytes) (id=187)
     db $0c ; tileset
     db $04, $04 ; dimensions (y, x)
-    dw $40db, $580e, $580b ; blocks, texts, scripts
+    dw $40db, Route16GateUpstairsTexts, Route16GateUpstairsScript ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $584c ; objects
+    dw Route16GateUpstairsObject ; objects
 
-INCBIN "baserom.gbc",$4980b,$49816 - $4980b
+Route16GateUpstairsScript: ; 0x4980b
+    jp $3c3f
+; 0x4980e
+
+Route16GateUpstairsTexts: ; 0x4980e
+    dw Route16GateUpstairsText1, Route16GateUpstairsText2, Route16GateUpstairsText3, Route16GateUpstairsText4
+
 Route16GateUpstairsText1: ; 0x49816
     db $08 ; asm
     ld hl, $5820
@@ -19525,6 +24453,7 @@ Route16GateUpstairsText1: ; 0x49816
     jp $24d7
 
 INCBIN "baserom.gbc",$49820,$49825 - $49820
+
 Route16GateUpstairsText2: ; 0x49825
     db $08 ; asm
     ld hl, $582f
@@ -19532,17 +24461,21 @@ Route16GateUpstairsText2: ; 0x49825
     jp $24d7
 
 INCBIN "baserom.gbc",$4982f,$49834 - $4982f
+
 Route16GateUpstairsText3: ; 0x49834
     db $8
     ld hl, $583b
     jp $55c9
 ; 0x4983b
+
 INCBIN "baserom.gbc",$4983b,$5
+
 Route16GateUpstairsText4: ; 0x49840
     db $8
     ld hl, $5847
     jp $55c9
 ; 0x49847
+
 INCBIN "baserom.gbc",$49847,$5
 
 Route16GateUpstairsObject: ; 0x4984c (size=30)
@@ -19565,12 +24498,62 @@ Route16GateUpstairsObject: ; 0x4984c (size=30)
 Route18Gate_h: ; 0x4986a to 0x49876 (12 bytes) (id=190)
     db $0c ; tileset
     db $05, $04 ; dimensions (y, x)
-    dw $40c7, $590d, $5876 ; blocks, texts, scripts
+    dw $40c7, Route18GateTexts, Route18GateScript ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $5937 ; objects
+    dw Route18GateObject ; objects
 
-INCBIN "baserom.gbc",$49876,$49911 - $49876
+Route18GateScript: ; 0x49876
+    ld hl, $d732
+    res 5, [hl]
+    call $3c3c
+    ld a, [$d669]
+    ld hl, $5887
+    jp $3d97
+; 0x49887
+
+Route18GateScripts: ; 0x49887
+    dw Route18GateScript0
+
+INCBIN "baserom.gbc",$49889,$6
+
+Route18GateScript0: ; 0x4988f
+    call $5755
+    ret nz
+    ld hl, $58cc
+    call $34bf
+    ret nc
+    ld a, $2
+    ld [$ff00+$8c], a
+    call $2920
+    xor a
+    ld [$ff00+$b4], a
+    ld a, [$cd3d]
+    cp $1
+    jr z, .asm_498c6 ; 0x498a9 $1b
+    ld a, [$cd3d]
+    dec a
+    ld [$cd38], a
+    ld b, $0
+    ld c, a
+    ld a, $40
+    ld hl, $ccd3
+    call $36e0
+    call $3486
+    ld a, $1
+    ld [$d669], a
+    ret
+.asm_498c6
+    ld a, $2
+    ld [$d669], a
+    ret
+; 0x498cc
+
+INCBIN "baserom.gbc",$498cc,$41
+
+Route18GateTexts: ; 0x4990d
+    dw Route18GateText1, Route18GateText2
+
 Route18GateText1: ; 0x49911
     db $08 ; asm
     call $5755
@@ -19584,7 +24567,10 @@ Route18GateText1: ; 0x49911
 .asm_a8410 ; 0x49925
     jp $24d7
 
-INCBIN "baserom.gbc",$49928,$f
+INCBIN "baserom.gbc",$49928,$49932 - $49928
+
+Route18GateText2: ; 0x49932
+INCBIN "baserom.gbc",$49932,5
 
 Route18GateObject: ; 0x49937 (size=50)
     db $a ; border tile
@@ -19611,12 +24597,18 @@ Route18GateObject: ; 0x49937 (size=50)
 Route18GateHeader_h: ; 0x49969 to 0x49975 (12 bytes) (id=191)
     db $0c ; tileset
     db $04, $04 ; dimensions (y, x)
-    dw $40db, $5978, $5975 ; blocks, texts, scripts
+    dw $40db, Route18GateHeaderTexts, Route18GateHeaderScript ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $59a4 ; objects
+    dw Route18GateHeaderObject ; objects
 
-INCBIN "baserom.gbc",$49975,$4997e - $49975
+Route18GateHeaderScript: ; 0x49975
+    jp $3c3f
+; 0x49978
+
+Route18GateHeaderTexts: ; 0x49978
+    dw Route18GateHeaderText1, Route18GateHeaderText2, Route18GateHeaderText3
+
 Route18GateHeaderText1: ; 0x4997e
     db $08 ; asm
     ld a, $5
@@ -19630,12 +24622,15 @@ Route18GateHeaderText2: ; 0x4998c
     ld hl, $5993
     jp $55c9
 ; 0x49993
+
 INCBIN "baserom.gbc",$49993,$5
+
 Route18GateHeaderText3: ; 0x49998
     db $8
     ld hl, $599f
     jp $55c9
 ; 0x4999f
+
 INCBIN "baserom.gbc",$4999f,$5
 
 Route18GateHeaderObject: ; 0x499a4 (size=24)
@@ -19657,12 +24652,28 @@ Route18GateHeaderObject: ; 0x499a4 (size=24)
 MtMoon1_h: ; 0x499bc to 0x499c8 (12 bytes) (id=59)
     db $11 ; tileset
     db $12, $14 ; dimensions (y, x)
-    dw MtMoon1Blocks, $59e1, $59c8 ; blocks, texts, scripts
+    dw MtMoon1Blocks, MtMoon1Texts, MtMoon1Script ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $5b06 ; objects
+    dw MtMoon1Object ; objects
 
-INCBIN "baserom.gbc",$499c8,$49a52 - $499c8
+MtMoon1Script: ; 0x499c8
+    call $3c3c
+    ld hl, $59fd
+    ld de, $59db
+    ld a, [$d606]
+    call $3160
+    ld [$d606], a
+    ret
+; 0x499db
+
+INCBIN "baserom.gbc",$499db,$6
+
+MtMoon1Texts: ; 0x499e1
+    dw MtMoon1Text1, MtMoon1Text2, MtMoon1Text3, MtMoon1Text4, MtMoon1Text5, MtMoon1Text6, MtMoon1Text7, MtMoon1Text8, MtMoon1Text9, MtMoon1Text10, MtMoon1Text11, MtMoon1Text12, MtMoon1Text13, MtMoon1Text14
+
+INCBIN "baserom.gbc",$499fd,$55
+
 MtMoon1Text1: ; 0x49a52
     db $08 ; asm
     ld hl, $59fd
@@ -19752,12 +24763,40 @@ MtMoon1Blocks: ; 360
 MtMoon3_h: ; 0x49cff to 0x49d0b (12 bytes) (id=61)
     db $11 ; tileset
     db $12, $14 ; dimensions (y, x)
-    dw MtMoon3Blocks, $5e34, $5d0b ; blocks, texts, scripts
+    dw MtMoon3Blocks, MtMoon3Texts, MtMoon3Script ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $5fdb ; objects
+    dw MtMoon3Object ; objects
 
-INCBIN "baserom.gbc",$49d0b,$49e79 - $49d0b
+MtMoon3Script: ; 0x49d0b
+    call $3c3c
+    ld hl, $5e48
+    ld de, $5d63
+    ld a, [$d607]
+    call $3160
+    ld [$d607], a
+    ld a, [$d7f6]
+    bit 1, a
+    ret z
+    ld hl, $5d37
+    call $34bf
+    jr nc, .asm_49d31 ; 0x49d29 $6
+    ld hl, $d72e
+    set 4, [hl]
+    ret
+.asm_49d31
+    ld hl, $d72e
+    res 4, [hl]
+    ret
+; 0x49d37
+
+INCBIN "baserom.gbc",$49d37,$fd
+
+MtMoon3Texts: ; 0x49e34
+    dw MtMoon3Text1, MtMoon3Text2, MtMoon3Text3, MtMoon3Text4, MtMoon3Text5, MtMoon3Text6, MtMoon3Text7, MtMoon3Text8, MtMoon3Text9
+
+INCBIN "baserom.gbc",$49e46,$33
+
 MtMoon3Text1: ; 0x49e79
     db $08 ; asm
     ld a, [$d7f6]
@@ -19842,6 +24881,7 @@ MtMoon3Text6: ; 0x49ee9
     jp $24d7
 
 INCBIN "baserom.gbc",$49f24,$49f29 - $49f24
+
 MtMoon3Text7: ; 0x49f29
     db $08 ; asm
     ld a, $1
@@ -19904,12 +24944,17 @@ MtMoon3Blocks: ; 360
 SafariZoneWest_h: ; 0x4a1a9 to 0x4a1b5 (12 bytes) (id=219)
     db $03 ; tileset
     db $0d, $0f ; dimensions (y, x)
-    dw SafariZoneWestBlocks, $61b8, $61b5 ; blocks, texts, scripts
+    dw SafariZoneWestBlocks, SafariZoneWestTexts, SafariZoneWestScript ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $61dc ; objects
+    dw SafariZoneWestObject ; objects
 
-INCBIN "baserom.gbc",$4a1b5,$4a1c8 - $4a1b5
+SafariZoneWestScript: ; 0x4a1b5
+    jp $3c3c
+; 0x4a1b8
+
+SafariZoneWestTexts: ; 0x4a1b8
+    dw SafariZoneWestText1, SafariZoneWestText2, SafariZoneWestText3, SafariZoneWestText4, SafariZoneWestText5, SafariZoneWestText6, SafariZoneWestText7, SafariZoneWestText8
 
 SafariZoneWestText5: ; 0x4a1c8
     TX_FAR _SafariZoneWestText5
@@ -19968,12 +25013,18 @@ SafariZoneWestBlocks: ; 195
 SafariZoneSecretHouse_h: ; 0x4a30b to 0x4a317 (12 bytes) (id=222)
     db $14 ; tileset
     db $04, $04 ; dimensions (y, x)
-    dw SafariZoneSecretHouseBlocks, $631a, $6317 ; blocks, texts, scripts
+    dw SafariZoneSecretHouseBlocks, SafariZoneSecretHouseTexts, SafariZoneSecretHouseScript ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $6365 ; objects
+    dw SafariZoneSecretHouseObject ; objects
 
-INCBIN "baserom.gbc",$4a317,$4a31c - $4a317
+SafariZoneSecretHouseScript: ; 0x4a317
+    jp $3c3c
+; 0x4a31a
+
+SafariZoneSecretHouseTexts: ; 0x4a31a
+    dw SafariZoneSecretHouseText1
+
 SafariZoneSecretHouseText1: ; 0x4a31c
     db $08 ; asm
     ld a, [$d857]
@@ -20000,6 +25051,7 @@ SafariZoneSecretHouseText1: ; 0x4a31c
     jp $24d7
 
 INCBIN "baserom.gbc",$4a350,$15
+
 SafariZoneSecretHouseObject: ; 0x4a365 (size=26)
     db $17 ; border tile
 
@@ -20118,12 +25170,44 @@ LancePic:
 BattleCenterM_h: ; 0x4fd04 to 0x4fd10 (12 bytes) (id=239)
     db $15 ; tileset
     db $04, $05 ; dimensions (y, x)
-    dw BattleCenterMBlocks, $7d4c, $7d10 ; blocks, texts, scripts
+    dw BattleCenterMBlocks, BattleCenterMTexts, BattleCenterMScript ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $7d53 ; objects
+    dw BattleCenterMObject ; objects
 
-INCBIN "baserom.gbc",$4fd10,$4fd4c - $4fd10
+BattleCenterMScript: ; 0x4fd10
+    call $3c3c
+    ld a, [$ff00+$aa]
+    cp $2
+    ld a, $8
+    jr z, .asm_4fd1d ; 0x4fd19 $2
+    ld a, $c
+.asm_4fd1d
+    ld [$ff00+$8d], a
+    ld a, $1
+    ld [$ff00+$8c], a
+    call $34ae
+    ld hl, $d72d
+    bit 0, [hl]
+    set 0, [hl]
+    ret nz
+    ld hl, $c214
+    ld a, $8
+    ld [hli], a
+    ld a, $a
+    ld [hl], a
+    ld a, $8
+    ld [$c119], a
+    ld a, [$ff00+$aa]
+    cp $2
+    ret z
+    ld a, $7
+    ld [$c215], a
+    ld a, $c
+    ld [$c119], a
+    ret
+; 0x4fd4c
+
 BattleCenterMTexts: ; 0x4fd4c
     dw BattleCenterMText1
 
@@ -20147,12 +25231,15 @@ BattleCenterMBlocks: ; 20
 TradeCenterM_h: ; 0x4fd71 to 0x4fd7d (12 bytes) (id=240)
     db $15 ; tileset
     db $04, $05 ; dimensions (y, x)
-    dw TradeCenterMBlocks, $7d80, $7d7d ; blocks, texts, scripts
+    dw TradeCenterMBlocks, TradeCenterMTexts, TradeCenterMScript ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $7d87 ; objects
+    dw TradeCenterMObject ; objects
 
-INCBIN "baserom.gbc",$4fd7d,$4fd80 - $4fd7d
+TradeCenterMScript: ; 0x4fd7d
+    jp $7d10
+; 0x4fd80
+
 TradeCenterMTexts: ; 0x4fd80
     dw TradeCenterMText1
 
@@ -20336,10 +25423,11 @@ PredefPointers: ; 7E79
         dbw $16,$5035
 
 SECTION "bank14",DATA,BANK[$14]
+
 Route22_h: ; 0x50000 to 0x50022 (34 bytes) (id=33)
     db $00 ; tileset
     db $09, $14 ; dimensions (y, x)
-    dw Route22Blocks, $5175, $4eb2 ; blocks, texts, scripts
+    dw Route22Blocks, Route22Texts, Route22Script ; blocks, texts, scripts
     db NORTH | EAST ; connections
 
     ; connections data
@@ -20358,7 +25446,7 @@ Route22_h: ; 0x50000 to 0x50022 (34 bytes) (id=33)
 
     ; end connection data
 
-    dw $4022 ; objects
+    dw Route22Object ; objects
 
 Route22Object: ; 0x50022 (size=27)
     db $2c ; border tile
@@ -20382,7 +25470,7 @@ Route22Blocks: ; 180
 Route20_h: ; 0x500f1 to 0x50113 (34 bytes) (id=31)
     db $00 ; tileset
     db $09, $32 ; dimensions (y, x)
-    dw Route20Blocks, $4d22, $4ca9 ; blocks, texts, scripts
+    dw Route20Blocks, Route20Texts, Route20Script ; blocks, texts, scripts
     db WEST | EAST ; connections
 
     ; connections data
@@ -20401,7 +25489,7 @@ Route20_h: ; 0x500f1 to 0x50113 (34 bytes) (id=31)
 
     ; end connection data
 
-    dw $4113 ; objects
+    dw Route20Object ; objects
 
 Route20Object: ; 0x50113 (size=106)
     db $43 ; border tile
@@ -20436,7 +25524,7 @@ Route20Blocks: ; 450
 Route23_h: ; 0x5033f to 0x50361 (34 bytes) (id=34)
     db $17 ; tileset
     db $48, $0a ; dimensions (y, x)
-    dw Route23Blocks, $52f7, $51da ; blocks, texts, scripts
+    dw Route23Blocks, Route23Texts, Route23Script ; blocks, texts, scripts
     db NORTH | SOUTH ; connections
 
     ; connections data
@@ -20455,7 +25543,7 @@ Route23_h: ; 0x5033f to 0x50361 (34 bytes) (id=34)
 
     ; end connection data
 
-    dw $4361 ; objects
+    dw Route23Object ; objects
 
 Route23Object: ; 0x50361 (size=81)
     db $f ; border tile
@@ -20490,7 +25578,7 @@ Route23Blocks: ; 720
 Route24_h: ; 0x50682 to 0x506a4 (34 bytes) (id=35)
     db $00 ; tileset
     db $12, $0a ; dimensions (y, x)
-    dw Route24Blocks, $544b, $53ad ; blocks, texts, scripts
+    dw Route24Blocks, Route24Texts, Route24Script ; blocks, texts, scripts
     db SOUTH | EAST ; connections
 
     ; connections data
@@ -20509,7 +25597,7 @@ Route24_h: ; 0x50682 to 0x506a4 (34 bytes) (id=35)
 
     ; end connection data
 
-    dw $46a4 ; objects
+    dw Route24Object ; objects
 
 Route24Object: ; 0x506a4 (size=67)
     db $2c ; border tile
@@ -20534,7 +25622,7 @@ Route24Blocks: ; 180
 Route25_h: ; 0x5079b to 0x507b2 (23 bytes) (id=36)
     db $00 ; tileset
     db $09, $1e ; dimensions (y, x)
-    dw Route25Blocks, $5628, $55cb ; blocks, texts, scripts
+    dw Route25Blocks, Route25Texts, Route25Script ; blocks, texts, scripts
     db WEST ; connections
 
     ; connections data
@@ -20547,7 +25635,7 @@ Route25_h: ; 0x5079b to 0x507b2 (23 bytes) (id=36)
 
     ; end connection data
 
-    dw $47b2 ; objects
+    dw Route25Object ; objects
 
 Route25Object: ; 0x507b2 (size=94)
     db $2c ; border tile
@@ -20579,7 +25667,7 @@ Route25Blocks: ; 270
 IndigoPlateau_h: ; 0x5091e to 0x50935 (23 bytes) (id=9)
     db $17 ; tileset
     db $09, $0a ; dimensions (y, x)
-    dw IndigoPlateauBlocks, $4936, $4935 ; blocks, texts, scripts
+    dw IndigoPlateauBlocks, $4936, IndigoPlateauScript ; blocks, texts, scripts
     db SOUTH ; connections
 
     ; connections data
@@ -20592,9 +25680,12 @@ IndigoPlateau_h: ; 0x5091e to 0x50935 (23 bytes) (id=9)
 
     ; end connection data
 
-    dw $4936 ; objects
+    dw IndigoPlateauObject ; objects
 
-INCBIN "baserom.gbc",$50935,$50936 - $50935
+IndigoPlateauScript: ; 0x50935
+    ret
+; 0x50936
+
 IndigoPlateauObject: ; 0x50936 (size=20)
     db $e ; border tile
 
@@ -20616,7 +25707,7 @@ IndigoPlateauBlocks: ; 90
 SaffronCity_h: ; 0x509a4 to 0x509dc (56 bytes) (id=10)
     db $00 ; tileset
     db $12, $14 ; dimensions (y, x)
-    dw SaffronCityBlocks, $4c03, $4c00 ; blocks, texts, scripts
+    dw SaffronCityBlocks, SaffronCityTexts, SaffronCityScript ; blocks, texts, scripts
     db NORTH | SOUTH | WEST | EAST ; connections
 
     ; connections data
@@ -20647,7 +25738,7 @@ SaffronCity_h: ; 0x509a4 to 0x509dc (56 bytes) (id=10)
 
     ; end connection data
 
-    dw $49dc ; objects
+    dw SaffronCityObject ; objects
 
 SaffronCityObject: ; 0x509dc (size=188)
     db $f ; border tile
@@ -20704,7 +25795,12 @@ SaffronCityObject: ; 0x509dc (size=188)
 SaffronCityBlocks: ; 360
     INCBIN "maps/saffroncity.blk"
 
-INCBIN "baserom.gbc",$50c00,$50c35 - $50c00
+SaffronCityScript: ; 0x50c00
+    jp $3c3c
+; 0x50c03
+
+SaffronCityTexts: ; 0x50c03
+    dw SaffronCityText1, SaffronCityText2, SaffronCityText3, SaffronCityText4, SaffronCityText5, SaffronCityText6, SaffronCityText7, SaffronCityText8, SaffronCityText9, SaffronCityText10, SaffronCityText11, SaffronCityText12, SaffronCityText13, SaffronCityText14, SaffronCityText15, SaffronCityText16, SaffronCityText17, SaffronCityText18, SaffronCityText19, SaffronCityText20, SaffronCityText21, SaffronCityText22, SaffronCityText23, SaffronCityText24, SaffronCityText25
 
 SaffronCityText1: ; 0x50c35
     TX_FAR _SaffronCityText1
@@ -20799,7 +25895,27 @@ SaffronCityText25: ; 0x50ca4
     TX_FAR _SaffronCityText25
     db $50
 
-INCBIN "baserom.gbc",$50ca9,$50db3 - $50ca9
+Route20Script: ; 0x50ca9
+    ld hl, $d7e7
+    bit 0, [hl]
+    res 0, [hl]
+    call nz, $4cc6
+    call $3c3c
+    ld hl, $4d3a
+    ld de, $4d1c
+    ld a, [$d628]
+    call $3160
+    ld [$d628], a
+    ret
+; 0x50cc6
+
+INCBIN "baserom.gbc",$50cc6,$5c
+
+Route20Texts: ; 0x50d22
+    dw Route20Text1, Route20Text2, Route20Text3, Route20Text4, Route20Text5, Route20Text6, Route20Text7, Route20Text8, Route20Text9, Route20Text10, Route20Text11, Route20Text12
+
+INCBIN "baserom.gbc",$50d3a,$79
+
 Route20Text1: ; 0x50db3
     db $08 ; asm
     ld hl, $4d3a
@@ -20867,7 +25983,177 @@ Route20Text11: ; 0x50ead
     TX_FAR _Route20Text11
     db $50
 
-INCBIN "baserom.gbc",$50eb2,$5117b - $50eb2
+Route22Script: ; 0x50eb2
+    call $3c3c
+    ld hl, $4ebe
+    ld a, [$d60a]
+    jp $3d97
+; 0x50ebe
+
+Route22Scripts: ; 0x50ebe
+    dw Route22Script0, Route22Script1, Route22Script2, Route22Script3
+
+INCBIN "baserom.gbc",$50ec6,$3a
+
+Route22Script0: ; 0x50f00
+    ld a, [$d7eb]
+    bit 7, a
+    ret z
+    ld hl, $4f2d
+    call $34bf
+    ret nc
+    ld a, [$cd3d]
+    ld [$cf0d], a
+    xor a
+    ld [$ff00+$b4], a
+    ld a, $f0
+    ld [$cd6b], a
+    ld a, $2
+    ld [$d528], a
+    ld a, [$d7eb]
+    bit 0, a
+    jr nz, .asm_50f32 ; 0x50f25 $b
+    bit 1, a
+    jp nz, $504e
+    ret
+    inc b
+    dec e
+    dec b
+    dec e
+    rst $38
+.asm_50f32
+    ld a, $1
+    ld [$cd4f], a
+    xor a
+    ld [$cd50], a
+    ld a, $4c
+    call Predef
+    ld a, [$d700]
+    and a
+    jr z, .asm_50f4e ; 0x50f44 $8
+    ld a, $ff
+    ld [$c0ee], a
+    call $23b1
+.asm_50f4e
+    ld c, $2
+    ld a, $de
+    call $23a1
+    ld a, $1
+    ld [$ff00+$8c], a
+    call $4ee6
+    ld a, $1
+    ld [$d60a], a
+    ret
+; 0x50f62
+
+Route22Script1: ; 0x50f62
+    ld a, [$d730]
+    bit 0, a
+    ret nz
+    ld a, [$cf0d]
+    cp $1
+    jr nz, .asm_50f78 ; 0x50f6d $9
+    ld a, $4
+    ld [$d528], a
+    ld a, $4
+    jr .asm_50f7a ; 0x50f76 $2
+.asm_50f78
+    ld a, $c
+.asm_50f7a
+    ld [$ff00+$8d], a
+    ld a, $1
+    ld [$ff00+$8c], a
+    call $34a6
+    xor a
+    ld [$cd6b], a
+    ld a, $1
+    ld [$ff00+$8c], a
+    call $2920
+    ld hl, $d72d
+    set 6, [hl]
+    set 7, [hl]
+    ld hl, $51b7
+    ld de, $51bc
+    call $3354
+    ld a, $e1
+    ld [$d059], a
+    ld hl, $4faf
+    call $4ed6
+    ld a, $2
+    ld [$d60a], a
+    ret
+; 0x50faf
+
+INCBIN "baserom.gbc",$50faf,$50fb5 - $50faf
+
+Route22Script2: ; 0x50fb5
+    ld a, [$d057]
+    cp $ff
+    jp z, $4ece
+    ld a, [$c109]
+    and a
+    jr nz, .asm_50fc7 ; 0x50fc1 $4
+    ld a, $4
+    jr .asm_50fc9 ; 0x50fc5 $2
+.asm_50fc7
+    ld a, $c
+.asm_50fc9
+    ld [$ff00+$8d], a
+    ld a, $1
+    ld [$ff00+$8c], a
+    call $34a6
+    ld a, $f0
+    ld [$cd6b], a
+    ld hl, $d7eb
+    set 5, [hl]
+    ld a, $1
+    ld [$ff00+$8c], a
+    call $2920
+    ld a, $ff
+    ld [$c0ee], a
+    call $23b1
+    ld b, $2
+    ld hl, $5b47
+    call Bankswitch
+    ld a, [$cf0d]
+    cp $1
+    jr nz, .asm_50fff ; 0x50ff8 $5
+    call $5008
+    jr .asm_51002 ; 0x50ffd $3
+.asm_50fff
+    call $500d
+.asm_51002
+    ld a, $3
+    ld [$d60a], a
+    ret
+; 0x51008
+
+INCBIN "baserom.gbc",$51008,$5102a - $51008
+
+Route22Script3: ; 0x5102a
+    ld a, [$d730]
+    bit 0, a
+    ret nz
+    xor a
+    ld [$cd6b], a
+    ld a, $22
+    ld [$cc4d], a
+    ld a, $11
+    call Predef
+    call $2307
+    ld hl, $d7eb
+    res 0, [hl]
+    res 7, [hl]
+    ld a, $0
+    ld [$d60a], a
+    ret
+; 0x5104e
+
+INCBIN "baserom.gbc",$5104e,$127
+
+Route22Texts: ; 0x51175
+    dw Route22Text1, Route22Text2, Route22Text3
+
 Route22Text1: ; 0x5117b
     db $08 ; asm
     ld a, [$d7eb]
@@ -20902,7 +26188,64 @@ Route22Text3: ; 0x511d5
     TX_FAR _Route22Text3
     db $50
 
-INCBIN "baserom.gbc",$511da,$51307 - $511da
+Route23Script: ; 0x511da
+    call $51e9
+    call $3c3c
+    ld hl, $5213
+    ld a, [$d667]
+    jp $3d97
+; 0x511e9
+
+INCBIN "baserom.gbc",$511e9,$51213 - $511e9
+
+Route23Scripts: ; 0x51213
+    dw Route23Script0
+
+INCBIN "baserom.gbc",$51215,$4
+
+Route23Script0: ; 0x51219
+    ld hl, $5255
+    ld a, [$d361]
+    ld b, a
+    ld e, $0
+    ld c, $7
+.asm_51224
+    ld a, [hli]
+    cp $ff
+    ret z
+    inc e
+    dec c
+    cp b
+    jr nz, .asm_51224 ; 0x5122b $f7
+    cp $23
+    jr nz, .asm_51237 ; 0x5122f $6
+    ld a, [$d362]
+    cp $e
+    ret nc
+.asm_51237
+    ld a, e
+    ld [$ff00+$8c], a
+    ld a, c
+    ld [$cd3d], a
+    ld b, $2
+    ld hl, $d7ed
+    ld a, $10
+    call Predef
+    ld a, c
+    and a
+    ret nz
+    call $525d
+    call $2920
+    xor a
+    ld [$ff00+$b4], a
+    ret
+; 0x51255
+
+INCBIN "baserom.gbc",$51255,$a2
+
+Route23Texts: ; 0x512f7
+    dw Route23Text1, Route23Text2, Route23Text3, Route23Text4, Route23Text5, Route23Text6, Route23Text7, Route23Text8
+
 Route23Text1: ; 0x51307
     db $08 ; asm
     ld a, $6
@@ -20952,7 +26295,22 @@ Route23Text8: ; 0x513a8
     TX_FAR _Route23Text8
     db $50
 
-INCBIN "baserom.gbc",$513ad,$514a4 - $513ad
+Route24Script: ; 0x513ad
+    call $3c3c
+    ld hl, $545b
+    ld de, $53cb
+    ld a, [$d602]
+    call $3160
+    ld [$d602], a
+    ret
+; 0x513c0
+
+INCBIN "baserom.gbc",$513c0,$8b
+
+Route24Texts: ; 0x5144b
+    dw Route24Text1, Route24Text2, Route24Text3, Route24Text4, Route24Text5, Route24Text6, Route24Text7, Route24Text8
+
+INCBIN "baserom.gbc",$5145b,$49
 
 Route24Text1: ; 0x514a4
     db $8
@@ -21038,7 +26396,26 @@ Route24Text7: ; 0x51567
     call LoadTrainerHeader
     jp $24d7
 
-INCBIN "baserom.gbc",$51571,$516ab - $51571
+INCBIN "baserom.gbc",$51571,$515cb - $51571
+
+Route25Script: ; 0x515cb
+    call $55e1
+    call $3c3c
+    ld hl, $563e
+    ld de, $5622
+    ld a, [$d603]
+    call $3160
+    ld [$d603], a
+    ret
+; 0x515e1
+
+INCBIN "baserom.gbc",$515e1,$47
+
+Route25Texts: ; 0x51628
+    dw Route25Text1, Route25Text2, Route25Text3, Route25Text4, Route25Text5, Route25Text6, Route25Text7, Route25Text8, Route25Text9, Route25Text10, Route25Text11
+
+INCBIN "baserom.gbc",$5163e,$6d
+
 Route25Text1: ; 0x516ab
     db $08 ; asm
     ld hl, $563e
@@ -21102,12 +26479,36 @@ Route25Text11: ; 0x5178c
 VictoryRoad2_h: ; 0x51791 to 0x5179d (12 bytes) (id=194)
     db $11 ; tileset
     db $09, $0f ; dimensions (y, x)
-    dw VictoryRoad2Blocks, $581b, $579d ; blocks, texts, scripts
+    dw VictoryRoad2Blocks, VictoryRoad2Texts, VictoryRoad2Script ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $5915 ; objects
+    dw VictoryRoad2Object ; objects
 
-INCBIN "baserom.gbc",$5179d,$5187e - $5179d
+VictoryRoad2Script: ; 0x5179d
+    ld hl, $d126
+    bit 6, [hl]
+    res 6, [hl]
+    call nz, $57c4
+    ld hl, $d126
+    bit 5, [hl]
+    res 5, [hl]
+    call nz, $57c9
+    call $3c3c
+    ld hl, $5835
+    ld de, $57eb
+    ld a, [$d63f]
+    call $3160
+    ld [$d63f], a
+    ret
+; 0x517c4
+
+INCBIN "baserom.gbc",$517c4,$57
+
+VictoryRoad2Texts: ; 0x5181b
+    dw VictoryRoad2Text1, VictoryRoad2Text2, VictoryRoad2Text3, VictoryRoad2Text4, VictoryRoad2Text5, VictoryRoad2Text6, VictoryRoad2Text7, VictoryRoad2Text8, VictoryRoad2Text9, VictoryRoad2Text10, VictoryRoad2Text11, VictoryRoad2Text12, VictoryRoad2Text13
+
+INCBIN "baserom.gbc",$51835,$49
+
 VictoryRoad2Text1: ; 0x5187e
     db $08 ; asm
     ld hl, $5835
@@ -21145,6 +26546,7 @@ VictoryRoad2Text6: ; 0x518b0
     jp $24d7
 
 INCBIN "baserom.gbc",$518ba,$5b
+
 VictoryRoad2Object: ; 0x51915 (size=154)
     db $7d ; border tile
 
@@ -21189,12 +26591,18 @@ VictoryRoad2Blocks: ; 135
 MtMoon2_h: ; 0x51a36 to 0x51a42 (12 bytes) (id=60)
     db $11 ; tileset
     db $0e, $0e ; dimensions (y, x)
-    dw MtMoon2Blocks, $5a46, $5a42 ; blocks, texts, scripts
+    dw MtMoon2Blocks, $5a46, MtMoon2Script ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $5a4d ; objects
+    dw MtMoon2Object ; objects
 
-INCBIN "baserom.gbc",$51a42,$51a4d - $51a42
+MtMoon2Script: ; 0x51a42
+    call $3c3c
+    ret
+; 0x51a46
+
+INCBIN "baserom.gbc",$51a46,$7
+
 MtMoon2Object: ; 0x51a4d (size=68)
     db $3 ; border tile
 
@@ -21228,12 +26636,29 @@ MtMoon2Blocks: ; 196
 SilphCo7_h: ; 0x51b55 to 0x51b61 (12 bytes) (id=212)
     db $16 ; tileset
     db $09, $0d ; dimensions (y, x)
-    dw SilphCo7Blocks, $5d3f, $5b61 ; blocks, texts, scripts
+    dw SilphCo7Blocks, SilphCo7Texts, SilphCo7Script ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $5ed7 ; objects
+    dw SilphCo7Object ; objects
 
-INCBIN "baserom.gbc",$51b61,$51d8e - $51b61
+SilphCo7Script: ; 0x51b61
+    call $5b77
+    call $3c3c
+    ld hl, $5d5d
+    ld de, $5c17
+    ld a, [$d648]
+    call $3160
+    ld [$d648], a
+    ret
+; 0x51b77
+
+INCBIN "baserom.gbc",$51b77,$1c8
+
+SilphCo7Texts: ; 0x51d3f
+    dw SilphCo7Text1, SilphCo7Text2, SilphCo7Text3, SilphCo7Text4, SilphCo7Text5, SilphCo7Text6, SilphCo7Text7, SilphCo7Text8, SilphCo7Text9, SilphCo7Text10, SilphCo7Text11, SilphCo7Text12, SilphCo7Text13, SilphCo7Text14, SilphCo7Text15
+
+INCBIN "baserom.gbc",$51d55 + 8,$39 - 8
+
 SilphCo7Text1: ; 0x51d8e
     db $08 ; asm
     ld a, [$d72e]
@@ -21267,6 +26692,7 @@ SilphCo7Text1: ; 0x51d8e
     jp $24d7
 
 INCBIN "baserom.gbc",$51dd3,$51de7 - $51dd3
+
 SilphCo7Text2: ; 0x51de7
     db $8
     ld a, [$d838]
@@ -21282,6 +26708,7 @@ SilphCo7Text2: ; 0x51de7
     jp $24d7
 ; 0x51e00
 INCBIN "baserom.gbc",$51e00,$a
+
 SilphCo7Text3: ; 0x51e0a
     db $08 ; asm
     ld a, [$d838]
@@ -21297,6 +26724,7 @@ SilphCo7Text3: ; 0x51e0a
     jp $24d7
 
 INCBIN "baserom.gbc",$51e23,$51e2d - $51e23
+
 SilphCo7Text4: ; 0x51e2d
     db $08 ; asm
     ld a, [$d838]
@@ -21312,6 +26740,7 @@ SilphCo7Text4: ; 0x51e2d
     jp $24d7
 
 INCBIN "baserom.gbc",$51e46,$51e50 - $51e46
+
 SilphCo7Text5: ; 0x51e50
     db $08 ; asm
     ld hl, $5d5d
@@ -21319,6 +26748,7 @@ SilphCo7Text5: ; 0x51e50
     jp $24d7
 
 INCBIN "baserom.gbc",$51e5a,$51e69 - $51e5a
+
 SilphCo7Text6: ; 0x51e69
     db $08 ; asm
     ld hl, $5d69
@@ -21326,6 +26756,7 @@ SilphCo7Text6: ; 0x51e69
     jp $24d7
 
 INCBIN "baserom.gbc",$51e73,$51e82 - $51e73
+
 SilphCo7Text7: ; 0x51e82
     db $08 ; asm
     ld hl, $5d75
@@ -21333,6 +26764,7 @@ SilphCo7Text7: ; 0x51e82
     jp $24d7
 
 INCBIN "baserom.gbc",$51e8c,$51e9b - $51e8c
+
 SilphCo7Text8: ; 0x51e9b
     db $08 ; asm
     ld hl, $5d81
@@ -21340,13 +26772,26 @@ SilphCo7Text8: ; 0x51e9b
     jp $24d7
 
 INCBIN "baserom.gbc",$51ea5,$51eb4 - $51ea5
+
 SilphCo7Text9: ; 0x51eb4
     db $08 ; asm
     ld hl, $5ebe
     call PrintText
     jp $24d7
 
-INCBIN "baserom.gbc",$51ebe,$19
+INCBIN "baserom.gbc",$51ebe,$51ec3 - $51ebe
+
+SilphCo7Text13: ; 0x51ec3
+INCBIN "baserom.gbc",$51ec3,5
+
+SilphCo7Text14: ; 0x51ec8
+INCBIN "baserom.gbc",$51ec8,5
+
+INCBIN "baserom.gbc",$51ecd,$51ed2 - $51ecd
+
+SilphCo7Text15: ; 0x51ed2
+INCBIN "baserom.gbc",$51ed2,5
+
 SilphCo7Object: ; 0x51ed7 (size=128)
     db $2e ; border tile
 
@@ -21390,9 +26835,10 @@ Mansion2_h: ; 0x51fcc to 0x51fd8 (12 bytes) (id=214)
     dw $6110, $604d, $5fd8 ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $60d1 ; objects
+    dw Mansion2Object ; objects
 
 INCBIN "baserom.gbc",$51fd8,$52064 - $51fd8
+
 Mansion2Text1: ; 0x52064
     db $08 ; asm
     ld hl, $6057
@@ -21410,6 +26856,7 @@ Mansion2Text4: ; 0x52082
     db $50
 
 INCBIN "baserom.gbc",$52087,$4a
+
 Mansion2Object: ; 0x520d1 (size=63)
     db $1 ; border tile
 
@@ -21441,9 +26888,10 @@ Mansion3_h: ; 0x521e2 to 0x521ee (12 bytes) (id=215)
     dw $6326, $628a, $61ee ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $62e6 ; objects
+    dw Mansion3Object ; objects
 
 INCBIN "baserom.gbc",$521ee,$522af - $521ee
+
 Mansion3Text1: ; 0x522af
     db $08 ; asm
     ld hl, $6296
@@ -21492,9 +26940,10 @@ Mansion4_h: ; 0x523ad to 0x523b9 (12 bytes) (id=216)
     dw $64dd, $6436, $63b9 ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $6498 ; objects
+    dw Mansion4Object ; objects
 
 INCBIN "baserom.gbc",$523b9,$52461 - $523b9
+
 Mansion4Text1: ; 0x52461
     db $08 ; asm
     ld hl, $6448
@@ -21909,6 +27358,7 @@ INCBIN "baserom.gbc",$52996,$54000 - $52996
 SECTION "bank15",DATA,BANK[$15]
 
 INCBIN "baserom.gbc",$54000,$54022 - $54000
+
 Route2Object: ; 0x54022 (size=72)
     db $f ; border tile
 
@@ -21944,7 +27394,7 @@ Route2Blocks: ; 360
 Route3_h: ; 0x541e6 to 0x54208 (34 bytes) (id=14)
     db $00 ; tileset
     db $09, $23 ; dimensions (y, x)
-    dw Route3Blocks, $5511, $54f8 ; blocks, texts, scripts
+    dw Route3Blocks, Route3Texts, Route3Script ; blocks, texts, scripts
     db NORTH | WEST ; connections
 
     ; connections data
@@ -21963,7 +27413,7 @@ Route3_h: ; 0x541e6 to 0x54208 (34 bytes) (id=14)
 
     ; end connection data
 
-    dw $4208 ; objects
+    dw Route3Object ; objects
 
 Route3Object: ; 0x54208 (size=77)
     db $2c ; border tile
@@ -21990,7 +27440,7 @@ Route3Blocks: ; 315
 Route4_h: ; 0x54390 to 0x543b2 (34 bytes) (id=15)
     db $00 ; tileset
     db $09, $2d ; dimensions (y, x)
-    dw Route4Blocks, $5671, $5658 ; blocks, texts, scripts
+    dw Route4Blocks, Route4Texts, Route4Script; blocks, texts, scripts
     db SOUTH | EAST ; connections
 
     ; connections data
@@ -22009,7 +27459,7 @@ Route4_h: ; 0x54390 to 0x543b2 (34 bytes) (id=15)
 
     ; end connection data
 
-    dw $43b2 ; objects
+    dw Route4Object ; objects
 
 Route4Object: ; 0x543b2 (size=58)
     db $2c ; border tile
@@ -22040,7 +27490,7 @@ Route4Blocks: ; 405
 Route5_h: ; 0x54581 to 0x545a3 (34 bytes) (id=16)
     db $00 ; tileset
     db $12, $0a ; dimensions (y, x)
-    dw Route5Blocks, $56b5, $56b2 ; blocks, texts, scripts
+    dw Route5Blocks, Route5Texts, Route5Script ; blocks, texts, scripts
     db NORTH | SOUTH ; connections
 
     ; connections data
@@ -22059,7 +27509,7 @@ Route5_h: ; 0x54581 to 0x545a3 (34 bytes) (id=16)
 
     ; end connection data
 
-    dw $45a3 ; objects
+    dw Route5Object ; objects
 
 Route5Object: ; 0x545a3 (size=47)
     db $a ; border tile
@@ -22089,7 +27539,7 @@ Route5Blocks: ; 180
 Route9_h: ; 0x54686 to 0x546a8 (34 bytes) (id=20)
     db $00 ; tileset
     db $09, $1e ; dimensions (y, x)
-    dw Route9Blocks, $56d5, $56bc ; blocks, texts, scripts
+    dw Route9Blocks, Route9Texts, Route9Script ; blocks, texts, scripts
     db WEST | EAST ; connections
 
     ; connections data
@@ -22108,7 +27558,7 @@ Route9_h: ; 0x54686 to 0x546a8 (34 bytes) (id=20)
 
     ; end connection data
 
-    dw $46a8 ; objects
+    dw Route9Object ; objects
 
 Route9Object: ; 0x546a8 (size=86)
     db $2c ; border tile
@@ -22136,7 +27586,7 @@ Route9Blocks: ; 270
 Route13_h: ; 0x5480c to 0x5482e (34 bytes) (id=24)
     db $00 ; tileset
     db $09, $1e ; dimensions (y, x)
-    dw Route13Blocks, $5837, $581e ; blocks, texts, scripts
+    dw Route13Blocks, Route13Texts, Route13Script ; blocks, texts, scripts
     db NORTH | WEST ; connections
 
     ; connections data
@@ -22155,7 +27605,7 @@ Route13_h: ; 0x5480c to 0x5482e (34 bytes) (id=24)
 
     ; end connection data
 
-    dw $482e ; objects
+    dw Route13Object ; objects
 
 Route13Object: ; 0x5482e (size=93)
     db $43 ; border tile
@@ -22185,7 +27635,7 @@ Route13Blocks: ; 270
 Route14_h: ; 0x54999 to 0x549bb (34 bytes) (id=25)
     db $00 ; tileset
     db $1b, $0a ; dimensions (y, x)
-    dw Route14Blocks, $59ec, $59d3 ; blocks, texts, scripts
+    dw Route14Blocks, Route14Texts, Route14Script ; blocks, texts, scripts
     db WEST | EAST ; connections
 
     ; connections data
@@ -22204,7 +27654,7 @@ Route14_h: ; 0x54999 to 0x549bb (34 bytes) (id=25)
 
     ; end connection data
 
-    dw $49bb ; objects
+    dw Route14Object ; objects
 
 Route14Object: ; 0x549bb (size=87)
     db $43 ; border tile
@@ -22232,7 +27682,7 @@ Route14Blocks: ; 270
 Route17_h: ; 0x54b20 to 0x54b42 (34 bytes) (id=28)
     db $00 ; tileset
     db $48, $0a ; dimensions (y, x)
-    dw Route17Blocks, $5b93, $5b7a ; blocks, texts, scripts
+    dw Route17Blocks, Route17Texts, Route17Script ; blocks, texts, scripts
     db NORTH | SOUTH ; connections
 
     ; connections data
@@ -22251,7 +27701,7 @@ Route17_h: ; 0x54b20 to 0x54b42 (34 bytes) (id=28)
 
     ; end connection data
 
-    dw $4b42 ; objects
+    dw Route17Object ; objects
 
 Route17Object: ; 0x54b42 (size=102)
     db $43 ; border tile
@@ -22284,7 +27734,7 @@ Route17Blocks: ; 720
 Route19_h: ; 0x54e78 to 0x54e9a (34 bytes) (id=30)
     db $00 ; tileset
     db $1b, $0a ; dimensions (y, x)
-    dw Route19Blocks, $5d5d, $5d44 ; blocks, texts, scripts
+    dw Route19Blocks, Route19Texts, Route19Script ; blocks, texts, scripts
     db NORTH | WEST ; connections
 
     ; connections data
@@ -22303,7 +27753,7 @@ Route19_h: ; 0x54e78 to 0x54e9a (34 bytes) (id=30)
 
     ; end connection data
 
-    dw $4e9a ; objects
+    dw Route19Object ; objects
 
 Route19Object: ; 0x54e9a (size=87)
     db $43 ; border tile
@@ -22331,7 +27781,7 @@ Route19Blocks: ; 270
 Route21_h: ; 0x54fff to 0x55021 (34 bytes) (id=32)
     db $00 ; tileset
     db $2d, $0a ; dimensions (y, x)
-    dw Route21Blocks, $5f04, $5eeb ; blocks, texts, scripts
+    dw Route21Blocks, Route21Texts, Route21Script ; blocks, texts, scripts
     db NORTH | SOUTH ; connections
 
     ; connections data
@@ -22350,7 +27800,7 @@ Route21_h: ; 0x54fff to 0x55021 (34 bytes) (id=32)
 
     ; end connection data
 
-    dw $5021 ; objects
+    dw Route21Object ; objects
 
 Route21Object: ; 0x55021 (size=76)
     db $43 ; border tile
@@ -22379,7 +27829,13 @@ DayCareMBlocks: ; 16
 FuchsiaHouse3Blocks: ; 16
     INCBIN "maps/fuchsiahouse3.blk"
 
-INCBIN "baserom.gbc",$5524f,$554ee - $5524f
+INCBIN "baserom.gbc",$5524f,$554e3 - $5524f
+
+Route2Script: ; 0x554e3
+    jp $3c3c
+; 0x554e6
+
+INCBIN "baserom.gbc",$554e6,$8
 
 Route2Text3: ; 0x554ee
     TX_FAR _Route2Text3
@@ -22389,7 +27845,22 @@ Route2Text4: ; 0x554f3
     TX_FAR _Route2Text4
     db $50
 
-INCBIN "baserom.gbc",$554f8,$55586 - $554f8
+Route3Script: ; 0x554f8
+    call $3c3c
+    ld hl, $5525
+    ld de, $550b
+    ld a, [$d5f8]
+    call $3160
+    ld [$d5f8], a
+    ret
+; 0x5550b
+
+INCBIN "baserom.gbc",$5550b,$6
+
+Route3Texts: ; 0x55511
+    dw Route3Text1, Route3Text2, Route3Text3, Route3Text4, Route3Text5, Route3Text6, Route3Text7, Route3Text8, Route3Text9, Route3Text10
+
+INCBIN "baserom.gbc",$55525,$61
 
 Route3Text1: ; 0x55586
     TX_FAR _Route3Text1
@@ -22402,6 +27873,7 @@ Route3Text2: ; 0x5558b
     jp $24d7
 
 INCBIN "baserom.gbc",$55595,$555a4 - $55595
+
 Route3Text3: ; 0x555a4
     db $08 ; asm
     ld hl, $5531
@@ -22409,6 +27881,7 @@ Route3Text3: ; 0x555a4
     jp $24d7
 
 INCBIN "baserom.gbc",$555ae,$555bd - $555ae
+
 Route3Text4: ; 0x555bd
     db $08 ; asm
     ld hl, $553d
@@ -22416,6 +27889,7 @@ Route3Text4: ; 0x555bd
     jp $24d7
 
 INCBIN "baserom.gbc",$555c7,$555d6 - $555c7
+
 Route3Text5: ; 0x555d6
     db $08 ; asm
     ld hl, $5549
@@ -22423,6 +27897,7 @@ Route3Text5: ; 0x555d6
     jp $24d7
 
 INCBIN "baserom.gbc",$555e0,$555ef - $555e0
+
 Route3Text6: ; 0x555ef
     db $08 ; asm
     ld hl, $5555
@@ -22430,6 +27905,7 @@ Route3Text6: ; 0x555ef
     jp $24d7
 
 INCBIN "baserom.gbc",$555f9,$55608 - $555f9
+
 Route3Text7: ; 0x55608
     db $08 ; asm
     ld hl, $5561
@@ -22437,6 +27913,7 @@ Route3Text7: ; 0x55608
     jp $24d7
 
 INCBIN "baserom.gbc",$55612,$55621 - $55612
+
 Route3Text8: ; 0x55621
     db $08 ; asm
     ld hl, $556d
@@ -22444,6 +27921,7 @@ Route3Text8: ; 0x55621
     jp $24d7
 
 INCBIN "baserom.gbc",$5562b,$5563a - $5562b
+
 Route3Text9: ; 0x5563a
     db $08 ; asm
     ld hl, $5579
@@ -22456,7 +27934,22 @@ Route3Text10: ; 0x55653
     TX_FAR _Route3Text10
     db $50
 
-INCBIN "baserom.gbc",$55658,$5568a - $55658
+Route4Script: ; 0x55658
+    call $3c3c
+    ld hl, $567d
+    ld de, $566b
+    ld a, [$d5f9]
+    call $3160
+    ld [$d5f9], a
+    ret
+; 0x5566b
+
+INCBIN "baserom.gbc",$5566b,$6
+
+Route4Texts: ; 0x55671
+    dw Route4Text1, Route4Text2, Route4Text3, Route4Text4, Route4Text5, Route4Text6
+
+INCBIN "baserom.gbc",$5567d,$d
 
 Route4Text1: ; 0x5568a
     TX_FAR _Route4Text1
@@ -22478,7 +27971,10 @@ Route4Text6: ; 0x556ad
     TX_FAR _Route4Text6
     db $50
 
-INCBIN "baserom.gbc",$556b2,$556b5 - $556b2
+Route5Script: ; 0x556b2
+    jp $3c3c
+; 0x556b5
+
 Route5Texts: ; 0x556b5
     dw Route5Text1
 
@@ -22486,7 +27982,27 @@ Route5Text1: ; 0x556b7
     TX_FAR _Route5Text1
     db $50
 
-INCBIN "baserom.gbc",$556bc,$55758 - $556bc
+Route9Script: ; 0x556bc
+    call $3c3c
+    ld hl, $56eb
+    ld de, $56cf
+    ld a, [$d604]
+    call $3160
+    ld [$d604], a
+    ret
+; 0x556cf
+
+INCBIN "baserom.gbc",$556cf,$6
+
+Route9Texts: ; 0x556d5
+    dw Route9Text1, Route9Text2, Route9Text3, Route9Text4, Route9Text5, Route9Text6, Route9Text7, Route9Text8, Route9Text9, Route9Text10, Route9Text11
+
+Route12Text13: ; 0x556eb
+INCBIN "baserom.gbc",$556eb,$556f0 - $556eb
+
+Route12Text14: ; 0x556f0
+INCBIN "baserom.gbc",$556f0,$55758 - $556f0
+
 Route9Text1: ; 0x55758
     db $8 ; asm
     ld hl, $56eb
@@ -22541,7 +28057,23 @@ Route9Text11: ; 0x55819
     TX_FAR _Route9Text11
     db $50
 
-INCBIN "baserom.gbc",$5581e,$558ca - $5581e
+Route13Script: ; 0x5581e
+    call $3c3c
+    ld hl, $5851
+    ld de, $5831
+    ld a, [$d61a]
+    call $3160
+    ld [$d61a], a
+    ret
+; 0x55831
+
+INCBIN "baserom.gbc",$55831,$6
+
+Route13Texts: ; 0x55837
+    dw Route13Text1, Route13Text2, Route13Text3, Route13Text4, Route13Text5, Route13Text6, Route13Text7, Route13Text8, Route13Text9, Route13Text10, Route13Text11, Route13Text12, Route13Text13
+
+INCBIN "baserom.gbc",$55851,$79
+
 Route13Text1: ; 0x558ca
     db $08 ; asm
     ld hl, $5851
@@ -22549,6 +28081,7 @@ Route13Text1: ; 0x558ca
     jp $24d7
 
 INCBIN "baserom.gbc",$558d4,$558e3 - $558d4
+
 Route13Text2: ; 0x558e3
     db $08 ; asm
     ld hl, $585d
@@ -22556,6 +28089,7 @@ Route13Text2: ; 0x558e3
     jp $24d7
 
 INCBIN "baserom.gbc",$558ed,$558fc - $558ed
+
 Route13Text3: ; 0x558fc
     db $08 ; asm
     ld hl, $5869
@@ -22563,6 +28097,7 @@ Route13Text3: ; 0x558fc
     jp $24d7
 
 INCBIN "baserom.gbc",$55906,$55915 - $55906
+
 Route13Text4: ; 0x55915
     db $08 ; asm
     ld hl, $5875
@@ -22570,6 +28105,7 @@ Route13Text4: ; 0x55915
     jp $24d7
 
 INCBIN "baserom.gbc",$5591f,$5592e - $5591f
+
 Route13Text5: ; 0x5592e
     db $08 ; asm
     ld hl, $5881
@@ -22577,6 +28113,7 @@ Route13Text5: ; 0x5592e
     jp $24d7
 
 INCBIN "baserom.gbc",$55938,$55947 - $55938
+
 Route13Text6: ; 0x55947
     db $08 ; asm
     ld hl, $588d
@@ -22584,6 +28121,7 @@ Route13Text6: ; 0x55947
     jp $24d7
 
 INCBIN "baserom.gbc",$55951,$55960 - $55951
+
 Route13Text7: ; 0x55960
     db $08 ; asm
     ld hl, $5899
@@ -22591,6 +28129,7 @@ Route13Text7: ; 0x55960
     jp $24d7
 
 INCBIN "baserom.gbc",$5596a,$55979 - $5596a
+
 Route13Text8: ; 0x55979
     db $08 ; asm
     ld hl, $58a5
@@ -22598,6 +28137,7 @@ Route13Text8: ; 0x55979
     jp $24d7
 
 INCBIN "baserom.gbc",$55983,$55992 - $55983
+
 Route13Text9: ; 0x55992
     db $08 ; asm
     ld hl, $58b1
@@ -22605,6 +28145,7 @@ Route13Text9: ; 0x55992
     jp $24d7
 
 INCBIN "baserom.gbc",$5599c,$559ab - $5599c
+
 Route13Text10: ; 0x559ab
     db $08 ; asm
     ld hl, $58bd
@@ -22625,7 +28166,23 @@ Route13Text13: ; 0x559ce
     TX_FAR _Route13Text13
     db $50
 
-INCBIN "baserom.gbc",$559d3,$55a7b - $559d3
+Route14Script: ; 0x559d3
+    call $3c3c
+    ld hl, $5a02
+    ld de, $59e6
+    ld a, [$d61b]
+    call $3160
+    ld [$d61b], a
+    ret
+; 0x559e6
+
+INCBIN "baserom.gbc",$559e6,$6
+
+Route14Texts: ; 0x559ec
+    dw Route14Text1, Route14Text2, Route14Text3, Route14Text4, Route14Text5, Route14Text6, Route14Text7, Route14Text8, Route14Text9, Route14Text10, Route14Text11
+
+INCBIN "baserom.gbc",$55a02,$79
+
 Route14Text1: ; 0x55a7b
     db $08 ; asm
     ld hl, $5a02
@@ -22633,6 +28190,7 @@ Route14Text1: ; 0x55a7b
     jp $24d7
 
 INCBIN "baserom.gbc",$55a85,$55a94 - $55a85
+
 Route14Text2: ; 0x55a94
     db $08 ; asm
     ld hl, $5a0e
@@ -22640,6 +28198,7 @@ Route14Text2: ; 0x55a94
     jp $24d7
 
 INCBIN "baserom.gbc",$55a9e,$55aad - $55a9e
+
 Route14Text3: ; 0x55aad
     db $08 ; asm
     ld hl, $5a1a
@@ -22647,6 +28206,7 @@ Route14Text3: ; 0x55aad
     jp $24d7
 
 INCBIN "baserom.gbc",$55ab7,$55ac6 - $55ab7
+
 Route14Text4: ; 0x55ac6
     db $08 ; asm
     ld hl, $5a26
@@ -22654,6 +28214,7 @@ Route14Text4: ; 0x55ac6
     jp $24d7
 
 INCBIN "baserom.gbc",$55ad0,$55adf - $55ad0
+
 Route14Text5: ; 0x55adf
     db $08 ; asm
     ld hl, $5a32
@@ -22661,6 +28222,7 @@ Route14Text5: ; 0x55adf
     jp $24d7
 
 INCBIN "baserom.gbc",$55ae9,$55af8 - $55ae9
+
 Route14Text6: ; 0x55af8
     db $08 ; asm
     ld hl, $5a3e
@@ -22668,6 +28230,7 @@ Route14Text6: ; 0x55af8
     jp $24d7
 
 INCBIN "baserom.gbc",$55b02,$55b11 - $55b02
+
 Route14Text7: ; 0x55b11
     db $08 ; asm
     ld hl, $5a4a
@@ -22675,6 +28238,7 @@ Route14Text7: ; 0x55b11
     jp $24d7
 
 INCBIN "baserom.gbc",$55b1b,$55b2a - $55b1b
+
 Route14Text8: ; 0x55b2a
     db $08 ; asm
     ld hl, $5a56
@@ -22682,6 +28246,7 @@ Route14Text8: ; 0x55b2a
     jp $24d7
 
 INCBIN "baserom.gbc",$55b34,$55b43 - $55b34
+
 Route14Text9: ; 0x55b43
     db $08 ; asm
     ld hl, $5a62
@@ -22689,6 +28254,7 @@ Route14Text9: ; 0x55b43
     jp $24d7
 
 INCBIN "baserom.gbc",$55b4d,$55b5c - $55b4d
+
 Route14Text10: ; 0x55b5c
     db $08 ; asm
     ld hl, $5a6e
@@ -22701,7 +28267,23 @@ Route14Text11: ; 0x55b75
     TX_FAR _Route14Text11
     db $50
 
-INCBIN "baserom.gbc",$55b7a,$55c2c - $55b7a
+Route17Script: ; 0x55b7a
+    call $3c3c
+    ld hl, $5bb3
+    ld de, $5b8d
+    ld a, [$d61c]
+    call $3160
+    ld [$d61c], a
+    ret
+; 0x55b8d
+
+INCBIN "baserom.gbc",$55b8d,$6
+
+Route17Texts: ; 0x55b93
+    dw Route17Text1, Route17Text2, Route17Text3, Route17Text4, Route17Text5, Route17Text6, Route17Text7, Route17Text8, Route17Text9, Route17Text10, Route17Text11, Route17Text12, Route17Text13, Route17Text14, Route17Text15, Route17Text16
+
+INCBIN "baserom.gbc",$55bb3,$79
+
 Route17Text1: ; 0x55c2c
     db $08 ; asm
     ld hl, $5bb3
@@ -22709,6 +28291,7 @@ Route17Text1: ; 0x55c2c
     jp $24d7
 
 INCBIN "baserom.gbc",$55c36,$55c45 - $55c36
+
 Route17Text2: ; 0x55c45
     db $08 ; asm
     ld hl, $5bbf
@@ -22716,6 +28299,7 @@ Route17Text2: ; 0x55c45
     jp $24d7
 
 INCBIN "baserom.gbc",$55c4f,$55c5e - $55c4f
+
 Route17Text3: ; 0x55c5e
     db $08 ; asm
     ld hl, $5bcb
@@ -22723,6 +28307,7 @@ Route17Text3: ; 0x55c5e
     jp $24d7
 
 INCBIN "baserom.gbc",$55c68,$55c77 - $55c68
+
 Route17Text4: ; 0x55c77
     db $08 ; asm
     ld hl, $5bd7
@@ -22730,6 +28315,7 @@ Route17Text4: ; 0x55c77
     jp $24d7
 
 INCBIN "baserom.gbc",$55c81,$55c90 - $55c81
+
 Route17Text5: ; 0x55c90
     db $08 ; asm
     ld hl, $5be3
@@ -22737,6 +28323,7 @@ Route17Text5: ; 0x55c90
     jp $24d7
 
 INCBIN "baserom.gbc",$55c9a,$55ca9 - $55c9a
+
 Route17Text6: ; 0x55ca9
     db $08 ; asm
     ld hl, $5bef
@@ -22744,6 +28331,7 @@ Route17Text6: ; 0x55ca9
     jp $24d7
 
 INCBIN "baserom.gbc",$55cb3,$55cc2 - $55cb3
+
 Route17Text7: ; 0x55cc2
     db $08 ; asm
     ld hl, $5bfb
@@ -22751,6 +28339,7 @@ Route17Text7: ; 0x55cc2
     jp $24d7
 
 INCBIN "baserom.gbc",$55ccc,$55cdb - $55ccc
+
 Route17Text8: ; 0x55cdb
     db $08 ; asm
     ld hl, $5c07
@@ -22758,6 +28347,7 @@ Route17Text8: ; 0x55cdb
     jp $24d7
 
 INCBIN "baserom.gbc",$55ce5,$55cf4 - $55ce5
+
 Route17Text9: ; 0x55cf4
     db $08 ; asm
     ld hl, $5c13
@@ -22765,6 +28355,7 @@ Route17Text9: ; 0x55cf4
     jp $24d7
 
 INCBIN "baserom.gbc",$55cfe,$55d0d - $55cfe
+
 Route17Text10: ; 0x55d0d
     db $08 ; asm
     ld hl, $5c1f
@@ -22797,7 +28388,23 @@ Route17Text16: ; 0x55d3f
     TX_FAR _Route17Text16
     db $50
 
-INCBIN "baserom.gbc",$55d44,$55dec - $55d44
+Route19Script: ; 0x55d44
+    call $3c3c
+    ld hl, $5d73
+    ld de, $5d57
+    ld a, [$d61d]
+    call $3160
+    ld [$d61d], a
+    ret
+; 0x55d57
+
+INCBIN "baserom.gbc",$55d57,$6
+
+Route19Texts: ; 0x55d5d
+    dw Route19Text1, Route19Text2, Route19Text3, Route19Text4, Route19Text5, Route19Text6, Route19Text7, Route19Text8, Route19Text9, Route19Text10, Route19Text11
+
+INCBIN "baserom.gbc",$55d73,$79
+
 Route19Text1: ; 0x55dec
     db $08 ; asm
     ld hl, $5d73
@@ -22864,7 +28471,23 @@ Route19Text11: ; 0x55ee6
     TX_FAR _Route19Text11
     db $50
 
-INCBIN "baserom.gbc",$55eeb,$55f83 - $55eeb
+Route21Script: ; 0x55eeb
+    call $3c3c
+    ld hl, $5f16
+    ld de, $5efe
+    ld a, [$d61e]
+    call $3160
+    ld [$d61e], a
+    ret
+; 0x55efe
+
+INCBIN "baserom.gbc",$55efe,$6
+
+Route21Texts: ; 0x55f04
+    dw Route21Text1, Route21Text2, Route21Text3, Route21Text4, Route21Text5, Route21Text6, Route21Text7, Route21Text8, Route21Text9
+
+INCBIN "baserom.gbc",$55f16,$6d
+
 Route21Text1: ; 0x55f83
     db $08 ; asm
     ld hl, $5f16
@@ -22924,12 +28547,18 @@ INCBIN "baserom.gbc",$55fdd,$87
 VermilionHouse2_h: ; 0x56064 to 0x56070 (12 bytes) (id=163)
     db $08 ; tileset
     db $04, $04 ; dimensions (y, x)
-    dw $522f, $6073, $6070 ; blocks, texts, scripts
+    dw $522f, VermilionHouse2Texts, VermilionHouse2Script ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $60cf ; objects
+    dw VermilionHouse2Object ; objects
 
-INCBIN "baserom.gbc",$56070,$56075 - $56070
+VermilionHouse2Script: ; 0x56070
+    jp $3c3c
+; 0x56073
+
+VermilionHouse2Texts: ; 0x56073
+    dw VermilionHouse2Text1
+
 VermilionHouse2Text1: ; 0x56075
     db $08 ; asm
     ld a, [$d728]
@@ -22961,6 +28590,7 @@ asm_5dd95 ; 0x560ab
     jp $24d7
 
 INCBIN "baserom.gbc",$560b1,$1e
+
 VermilionHouse2Object: ; 0x560cf (size=26)
     db $a ; border tile
 
@@ -22980,12 +28610,17 @@ VermilionHouse2Object: ; 0x560cf (size=26)
 CeladonMart2_h: ; 0x560e9 to 0x560f5 (12 bytes) (id=123)
     db $12 ; tileset
     db $04, $0a ; dimensions (y, x)
-    dw CeladonMart2Blocks, $60f8, $60f5 ; blocks, texts, scripts
+    dw CeladonMart2Blocks, CeladonMart2Texts, CeladonMart2Script ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $6111 ; objects
+    dw CeladonMart2Object ; objects
 
-INCBIN "baserom.gbc",$560f5,$56102 - $560f5
+CeladonMart2Script: ; 0x560f5
+    jp $3c3c
+; 0x560f8
+
+CeladonMart2Texts: ; 0x560f8
+    dw CeladonMart2Text1, CeladonMart2Text2, CeladonMart2Text3, CeladonMart2Text4, CeladonMart2Text5
 
 CeladonMart2Text3: ; 0x56102
     TX_FAR _CeladonMart2Text3
@@ -23027,12 +28662,18 @@ CeladonMart2Blocks: ; 40
 FuchsiaHouse3_h: ; 0x56170 to 0x5617c (12 bytes) (id=164)
     db $0d ; tileset
     db $04, $04 ; dimensions (y, x)
-    dw FuchsiaHouse3Blocks, $617f, $617c ; blocks, texts, scripts
+    dw FuchsiaHouse3Blocks, FuchsiaHouse3Texts, FuchsiaHouse3Script ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $6221 ; objects
+    dw FuchsiaHouse3Object ; objects
 
-INCBIN "baserom.gbc",$5617c,$56181 - $5617c
+FuchsiaHouse3Script: ; 0x5617c
+    jp $3c3c
+; 0x5617f
+
+FuchsiaHouse3Texts: ; 0x5617f
+    dw FuchsiaHouse3Text1
+
 FuchsiaHouse3Text1: ; 0x56181
     db $08 ; asm
     ld a, [$d728]
@@ -23064,6 +28705,7 @@ asm_1b09c ; 0x561b7
     jp $24d7
 
 INCBIN "baserom.gbc",$561bd,$64
+
 FuchsiaHouse3Object: ; 0x56221 (size=34)
     db $c ; border tile
 
@@ -23085,12 +28727,18 @@ FuchsiaHouse3Object: ; 0x56221 (size=34)
 DayCareM_h: ; 0x56243 to 0x5624f (12 bytes) (id=72)
     db $08 ; tileset
     db $04, $04 ; dimensions (y, x)
-    dw DayCareMBlocks, $6252, $624f ; blocks, texts, scripts
+    dw DayCareMBlocks, DayCareMTexts, DayCareMScript ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $6459 ; objects
+    dw DayCareMObject ; objects
 
-INCBIN "baserom.gbc",$5624f,$56254 - $5624f
+DayCareMScript: ; 0x5624f
+    jp $3c3c
+; 0x56252
+
+DayCareMTexts: ; 0x56252
+    dw DayCareMText1
+
 DayCareMText1: ; 0x56254
     db $8
     call $36f4
@@ -23148,6 +28796,7 @@ DayCareMText1: ; 0x56254
     jp $6409
 ; 0x562e1
 INCBIN "baserom.gbc",$562e1,$178
+
 DayCareMObject: ; 0x56459 (size=26)
     db $a ; border tile
 
@@ -23167,12 +28816,18 @@ DayCareMObject: ; 0x56459 (size=26)
 Route12House_h: ; 0x56473 to 0x5647f (12 bytes) (id=189)
     db $08 ; tileset
     db $04, $04 ; dimensions (y, x)
-    dw $522f, $6482, $647f ; blocks, texts, scripts
+    dw $522f, Route12HouseTexts, Route12HouseScript ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $64de ; objects
+    dw Route12HouseObject ; objects
 
-INCBIN "baserom.gbc",$5647f,$56484 - $5647f
+Route12HouseScript: ; 0x5647f
+    jp $3c3c
+; 0x56482
+
+Route12HouseTexts: ; 0x56482
+    dw Route12HouseText1
+
 Route12HouseText1: ; 0x56484
     db $08 ; asm
     ld a, [$d728]
@@ -23204,6 +28859,7 @@ asm_df984 ; 0x564ba
     jp $24d7
 
 INCBIN "baserom.gbc",$564c0,$1e
+
 Route12HouseObject: ; 0x564de (size=26)
     db $a ; border tile
 
@@ -23223,12 +28879,29 @@ Route12HouseObject: ; 0x564de (size=26)
 SilphCo8_h: ; 0x564f8 to 0x56504 (12 bytes) (id=213)
     db $16 ; tileset
     db $09, $0d ; dimensions (y, x)
-    dw SilphCo8Blocks, $657d, $6504 ; blocks, texts, scripts
+    dw SilphCo8Blocks, SilphCo8Texts, SilphCo8Script ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $6613 ; objects
+    dw SilphCo8Object ; objects
 
-INCBIN "baserom.gbc",$56504,$565aa - $56504
+SilphCo8Script: ; 0x56504
+    call $651a
+    call $3c3c
+    ld hl, $6585
+    ld de, $6577
+    ld a, [$d649]
+    call $3160
+    ld [$d649], a
+    ret
+; 0x5651a
+
+INCBIN "baserom.gbc",$5651a,$63
+
+SilphCo8Texts: ; 0x5657d
+    dw SilphCo8Text1, SilphCo8Text2, SilphCo8Text3, SilphCo8Text4
+
+INCBIN "baserom.gbc",$56585,$25
+
 SilphCo8Text1: ; 0x565aa
     db $08 ; asm
     ld a, [$d838]
@@ -23241,6 +28914,7 @@ asm_a468f ; 0x565b8
     jp $24d7
 
 INCBIN "baserom.gbc",$565be,$565c8 - $565be
+
 SilphCo8Text2: ; 0x565c8
     db $08 ; asm
     ld hl, $6585
@@ -23260,6 +28934,7 @@ SilphCo8Text4: ; 0x565dc
     jp $24d7
 
 INCBIN "baserom.gbc",$565e6,$2d
+
 SilphCo8Object: ; 0x56613 (size=90)
     db $2e ; border tile
 
@@ -23295,10 +28970,11 @@ SilphCo8Blocks: ; 117
 INCBIN "baserom.gbc",$566e2,$191e
 
 SECTION "bank16",DATA,BANK[$16]
+
 Route6_h: ; 0x58000 to 0x58022 (34 bytes) (id=17)
     db $00 ; tileset
     db $12, $0a ; dimensions (y, x)
-    dw Route6Blocks, $50c9, $50b0 ; blocks, texts, scripts
+    dw Route6Blocks, $50c9, Route6Script ; blocks, texts, scripts
     db NORTH | SOUTH ; connections
 
     ; connections data
@@ -23317,7 +28993,7 @@ Route6_h: ; 0x58000 to 0x58022 (34 bytes) (id=17)
 
     ; end connection data
 
-    dw $4022 ; objects
+    dw Route6Object ; objects
 
 Route6Object: ; 0x58022 (size=87)
     db $f ; border tile
@@ -23351,7 +29027,7 @@ Route6Blocks: ; 180
 Route8_h: ; 0x5812d to 0x5814f (34 bytes) (id=19)
     db $00 ; tileset
     db $09, $1e ; dimensions (y, x)
-    dw Route8Blocks, $51cf, $51b6 ; blocks, texts, scripts
+    dw Route8Blocks, $51cf, Route8Script ; blocks, texts, scripts
     db WEST | EAST ; connections
 
     ; connections data
@@ -23370,7 +29046,7 @@ Route8_h: ; 0x5812d to 0x5814f (34 bytes) (id=19)
 
     ; end connection data
 
-    dw $414f ; objects
+    dw Route8Object ; objects
 
 Route8Object: ; 0x5814f (size=119)
     db $2c ; border tile
@@ -23409,7 +29085,7 @@ Route8Blocks: ; 270
 Route10_h: ; 0x582d4 to 0x582f6 (34 bytes) (id=21)
     db $00 ; tileset
     db $24, $0a ; dimensions (y, x)
-    dw Route10Blocks, $534f, $5336 ; blocks, texts, scripts
+    dw Route10Blocks, Route10Texts, Route10Script ; blocks, texts, scripts
     db SOUTH | WEST ; connections
 
     ; connections data
@@ -23428,7 +29104,7 @@ Route10_h: ; 0x582d4 to 0x582f6 (34 bytes) (id=21)
 
     ; end connection data
 
-    dw $42f6 ; objects
+    dw Route10Object ; objects
 
 Route10Object: ; 0x582f6 (size=96)
     db $2c ; border tile
@@ -23465,7 +29141,7 @@ Route10Blocks: ; 360
 Route11_h: ; 0x584be to 0x584e0 (34 bytes) (id=22)
     db $00 ; tileset
     db $09, $1e ; dimensions (y, x)
-    dw Route11Blocks, $5465, $544c ; blocks, texts, scripts
+    dw Route11Blocks, $5465, Route11Script ; blocks, texts, scripts
     db WEST | EAST ; connections
 
     ; connections data
@@ -23484,7 +29160,7 @@ Route11_h: ; 0x584be to 0x584e0 (34 bytes) (id=22)
 
     ; end connection data
 
-    dw $44e0 ; objects
+    dw Route11Object ; objects
 
 Route11Object: ; 0x584e0 (size=127)
     db $f ; border tile
@@ -23524,7 +29200,7 @@ Route11Blocks: ; 270
 Route12_h: ; 0x5866d to 0x5869a (45 bytes) (id=23)
     db $00 ; tileset
     db $36, $0a ; dimensions (y, x)
-    dw Route12Blocks, $5675, $55f3 ; blocks, texts, scripts
+    dw Route12Blocks, Route12Texts, Route12Script ; blocks, texts, scripts
     db NORTH | SOUTH | WEST ; connections
 
     ; connections data
@@ -23549,7 +29225,7 @@ Route12_h: ; 0x5866d to 0x5869a (45 bytes) (id=23)
 
     ; end connection data
 
-    dw $469a ; objects
+    dw Route12Object ; objects
 
 Route12Object: ; 0x5869a (size=118)
     db $43 ; border tile
@@ -23588,7 +29264,7 @@ Route12Blocks: ; 540
 Route15_h: ; 0x5892c to 0x5894e (34 bytes) (id=26)
     db $00 ; tileset
     db $09, $1e ; dimensions (y, x)
-    dw Route15Blocks, $57c7, $57ae ; blocks, texts, scripts
+    dw Route15Blocks, Route15Texts, Route15Script ; blocks, texts, scripts
     db WEST | EAST ; connections
 
     ; connections data
@@ -23607,7 +29283,7 @@ Route15_h: ; 0x5892c to 0x5894e (34 bytes) (id=26)
 
     ; end connection data
 
-    dw $494e ; objects
+    dw Route15Object ; objects
 
 Route15Object: ; 0x5894e (size=126)
     db $43 ; border tile
@@ -23646,7 +29322,7 @@ Route15Blocks: ; 270
 Route16_h: ; 0x58ada to 0x58afc (34 bytes) (id=27)
     db $00 ; tileset
     db $09, $14 ; dimensions (y, x)
-    dw Route16Blocks, $59b9, $5933 ; blocks, texts, scripts
+    dw Route16Blocks, Route16Texts, Route16Script ; blocks, texts, scripts
     db SOUTH | EAST ; connections
 
     ; connections data
@@ -23665,7 +29341,7 @@ Route16_h: ; 0x58ada to 0x58afc (34 bytes) (id=27)
 
     ; end connection data
 
-    dw $4afc ; objects
+    dw Route16Object ; objects
 
 Route16Object: ; 0x58afc (size=136)
     db $f ; border tile
@@ -23711,7 +29387,7 @@ Route16Blocks: ; 180
 Route18_h: ; 0x58c38 to 0x58c5a (34 bytes) (id=29)
     db $00 ; tileset
     db $09, $19 ; dimensions (y, x)
-    dw Route18Blocks, $5ae0, $5ac7 ; blocks, texts, scripts
+    dw Route18Blocks, Route18Texts, Route18Script ; blocks, texts, scripts
     db NORTH | EAST ; connections
 
     ; connections data
@@ -23730,7 +29406,7 @@ Route18_h: ; 0x58c38 to 0x58c5a (34 bytes) (id=29)
 
     ; end connection data
 
-    dw $4c5a ; objects
+    dw Route18Object ; objects
 
 Route18Object: ; 0x58c5a (size=66)
     db $43 ; border tile
@@ -23759,14 +29435,29 @@ Route18Object: ; 0x58c5a (size=66)
 Route18Blocks: ; 225
     INCBIN "maps/route18.blk"
 
-INCBIN "baserom.gbc",$58d7d,$59120 - $58d7d
+INCBIN "baserom.gbc",$58d7d,$590b0 - $58d7d
+
+Route6Script: ; 0x590b0
+    call $3c3c
+    ld hl, $50d7
+    ld de, $50c3
+    ld a, [$d600]
+    call $3160
+    ld [$d600], a
+    ret
+; 0x590c3
+
+INCBIN "baserom.gbc",$590c3,$5d
+
 Route6Text1: ; 0x59120
     db $8
     ld hl, $50d7
     call $31cc
     jp $24d7
 ; 0x5912a
+
 INCBIN "baserom.gbc",$5912a,$f
+
 Route6Text2: ; 0x59139
     db $08 ; asm
     ld hl, $50e3
@@ -23774,6 +29465,7 @@ Route6Text2: ; 0x59139
     jp $24d7
 
 INCBIN "baserom.gbc",$59143,$5914d - $59143
+
 Route6Text3: ; 0x5914d
     db $08 ; asm
     ld hl, $50ef
@@ -23781,6 +29473,7 @@ Route6Text3: ; 0x5914d
     jp $24d7
 
 INCBIN "baserom.gbc",$59157,$59166 - $59157
+
 Route6Text4: ; 0x59166
     db $08 ; asm
     ld hl, $50fb
@@ -23788,6 +29481,7 @@ Route6Text4: ; 0x59166
     jp $24d7
 
 INCBIN "baserom.gbc",$59170,$5917f - $59170
+
 Route6Text5: ; 0x5917f
     db $08 ; asm
     ld hl, $5107
@@ -23795,6 +29489,7 @@ Route6Text5: ; 0x5917f
     jp $24d7
 
 INCBIN "baserom.gbc",$59189,$59198 - $59189
+
 Route6Text6: ; 0x59198
     db $08 ; asm
     ld hl, $5113
@@ -23807,7 +29502,18 @@ Route6Text7: ; 0x591b1
     TX_FAR _Route6Text7
     db $50
 
-INCBIN "baserom.gbc",$591b6,$59269 - $591b6
+Route8Script: ; 0x591b6
+    call $3c3c
+    ld hl, $51e3
+    ld de, $51c9
+    ld a, [$d601]
+    call $3160
+    ld [$d601], a
+    ret
+; 0x591c9
+
+INCBIN "baserom.gbc",$591c9,$a0
+
 Route8Text2: ; 0x59269
     db $08 ; asm
     ld hl, $51ef
@@ -23815,6 +29521,7 @@ Route8Text2: ; 0x59269
     jp $24d7
 
 INCBIN "baserom.gbc",$59273,$59282 - $59273
+
 Route8Text3: ; 0x59282
     db $08 ; asm
     ld hl, $51fb
@@ -23822,6 +29529,7 @@ Route8Text3: ; 0x59282
     jp $24d7
 
 INCBIN "baserom.gbc",$5928c,$5929b - $5928c
+
 Route8Text4: ; 0x5929b
     db $08 ; asm
     ld hl, $5207
@@ -23829,6 +29537,7 @@ Route8Text4: ; 0x5929b
     jp $24d7
 
 INCBIN "baserom.gbc",$592a5,$592b4 - $592a5
+
 Route8Text5: ; 0x592b4
     db $08 ; asm
     ld hl, $5213
@@ -23836,6 +29545,7 @@ Route8Text5: ; 0x592b4
     jp $24d7
 
 INCBIN "baserom.gbc",$592be,$592cd - $592be
+
 Route8Text6: ; 0x592cd
     db $08 ; asm
     ld hl, $521f
@@ -23843,6 +29553,7 @@ Route8Text6: ; 0x592cd
     jp $24d7
 
 INCBIN "baserom.gbc",$592d7,$592e6 - $592d7
+
 Route8Text7: ; 0x592e6
     db $08 ; asm
     ld hl, $522b
@@ -23850,6 +29561,7 @@ Route8Text7: ; 0x592e6
     jp $24d7
 
 INCBIN "baserom.gbc",$592f0,$592ff - $592f0
+
 Route8Text8: ; 0x592ff
     db $08 ; asm
     ld hl, $5237
@@ -23857,6 +29569,7 @@ Route8Text8: ; 0x592ff
     jp $24d7
 
 INCBIN "baserom.gbc",$59309,$59318 - $59309
+
 Route8Text9: ; 0x59318
     db $08 ; asm
     ld hl, $5243
@@ -23869,7 +29582,23 @@ Route8Text10: ; 0x59331
     TX_FAR _Route8Text10
     db $50
 
-INCBIN "baserom.gbc",$59336,$593ac - $59336
+Route10Script: ; 0x59336
+    call $3c3c
+    ld hl, $5363
+    ld de, $5349
+    ld a, [$d605]
+    call $3160
+    ld [$d605], a
+    ret
+; 0x59349
+
+INCBIN "baserom.gbc",$59349,$6
+
+Route10Texts: ; 0x5934f
+    dw Route10Text1, Route10Text2, Route10Text3, Route10Text4, Route10Text5, Route10Text6, Route10Text7, Route10Text8, Route10Text9, Route10Text10
+
+INCBIN "baserom.gbc",$59363,$49
+
 Route10Text1: ; 0x593ac
     db $08 ; asm
     ld hl, $5363
@@ -23877,6 +29606,7 @@ Route10Text1: ; 0x593ac
     jp $24d7
 
 INCBIN "baserom.gbc",$593b6,$593c5 - $593b6
+
 Route10Text2: ; 0x593c5
     db $08 ; asm
     ld hl, $536f
@@ -23884,6 +29614,7 @@ Route10Text2: ; 0x593c5
     jp $24d7
 
 INCBIN "baserom.gbc",$593cf,$593de - $593cf
+
 Route10Text3: ; 0x593de
     db $08 ; asm
     ld hl, $537b
@@ -23891,6 +29622,7 @@ Route10Text3: ; 0x593de
     jp $24d7
 
 INCBIN "baserom.gbc",$593e8,$593f7 - $593e8
+
 Route10Text4: ; 0x593f7
     db $08 ; asm
     ld hl, $5387
@@ -23898,6 +29630,7 @@ Route10Text4: ; 0x593f7
     jp $24d7
 
 INCBIN "baserom.gbc",$59401,$59410 - $59401
+
 Route10Text5: ; 0x59410
     db $08 ; asm
     ld hl, $5393
@@ -23905,6 +29638,7 @@ Route10Text5: ; 0x59410
     jp $24d7
 
 INCBIN "baserom.gbc",$5941a,$59429 - $5941a
+
 Route10Text6: ; 0x59429
     db $08 ; asm
     ld hl, $539f
@@ -23922,7 +29656,18 @@ Route10Text10: ; 0x59447
     TX_FAR _Route10Text10
     db $50
 
-INCBIN "baserom.gbc",$5944c,$5950d - $5944c
+Route11Script: ; 0x5944c
+    call $3c3c
+    ld hl, $547b
+    ld de, $545f
+    ld a, [$d623]
+    call $3160
+    ld [$d623], a
+    ret
+; 0x5945f
+
+INCBIN "baserom.gbc",$5945f,$ae
+
 Route11Text2: ; 0x5950d
     db $08 ; asm
     ld hl, $5487
@@ -23930,6 +29675,7 @@ Route11Text2: ; 0x5950d
     jp $24d7
 
 INCBIN "baserom.gbc",$59517,$59526 - $59517
+
 Route11Text3: ; 0x59526
     db $08 ; asm
     ld hl, $5493
@@ -23937,6 +29683,7 @@ Route11Text3: ; 0x59526
     jp $24d7
 
 INCBIN "baserom.gbc",$59530,$5953f - $59530
+
 Route11Text4: ; 0x5953f
     db $08 ; asm
     ld hl, $549f
@@ -23944,6 +29691,7 @@ Route11Text4: ; 0x5953f
     jp $24d7
 
 INCBIN "baserom.gbc",$59549,$59558 - $59549
+
 Route11Text5: ; 0x59558
     db $08 ; asm
     ld hl, $54ab
@@ -23951,6 +29699,7 @@ Route11Text5: ; 0x59558
     jp $24d7
 
 INCBIN "baserom.gbc",$59562,$59571 - $59562
+
 Route11Text6: ; 0x59571
     db $08 ; asm
     ld hl, $54b7
@@ -23958,6 +29707,7 @@ Route11Text6: ; 0x59571
     jp $24d7
 
 INCBIN "baserom.gbc",$5957b,$5958a - $5957b
+
 Route11Text7: ; 0x5958a
     db $08 ; asm
     ld hl, $54c3
@@ -23965,6 +29715,7 @@ Route11Text7: ; 0x5958a
     jp $24d7
 
 INCBIN "baserom.gbc",$59594,$595a3 - $59594
+
 Route11Text8: ; 0x595a3
     db $08 ; asm
     ld hl, $54cf
@@ -23972,6 +29723,7 @@ Route11Text8: ; 0x595a3
     jp $24d7
 
 INCBIN "baserom.gbc",$595ad,$595bc - $595ad
+
 Route11Text9: ; 0x595bc
     db $08 ; asm
     ld hl, $54db
@@ -23979,6 +29731,7 @@ Route11Text9: ; 0x595bc
     jp $24d7
 
 INCBIN "baserom.gbc",$595c6,$595d5 - $595c6
+
 Route11Text10: ; 0x595d5
     db $08 ; asm
     ld hl, $54e7
@@ -23991,13 +29744,29 @@ Route11Text11: ; 0x595ee
     TX_FAR _Route11Text11
     db $50
 
-INCBIN "baserom.gbc",$595f3,$596e6 - $595f3
+Route12Script: ; 0x595f3
+    call $3c3c
+    ld hl, $5691
+    ld de, $5611
+    ld a, [$d624]
+    call $3160
+    ld [$d624], a
+    ret
+; 0x59606
+
+INCBIN "baserom.gbc",$59606,$6f
+
+Route12Texts: ; 0x59675
+    dw Route12Text1, Route12Text2, Route12Text3, Route12Text4, Route12Text5, Route12Text6, Route12Text7, Route12Text8, Route12Text9, Route12Text10, Route12Text11, Route12Text12, Route12Text13, Route12Text14
+
+INCBIN "baserom.gbc",$59691,$55
 
 Route12Text1: ; 0x596e6
     TX_FAR _Route12Text1
     db $50
 
 INCBIN "baserom.gbc",$596eb,$596f5 - $596eb
+
 Route12Text2: ; 0x596f5
     db $08 ; asm
     ld hl, $5691
@@ -24005,6 +29774,7 @@ Route12Text2: ; 0x596f5
     jp $24d7
 
 INCBIN "baserom.gbc",$596ff,$5970e - $596ff
+
 Route12Text3: ; 0x5970e
     db $08 ; asm
     ld hl, $569d
@@ -24012,6 +29782,7 @@ Route12Text3: ; 0x5970e
     jp $24d7
 
 INCBIN "baserom.gbc",$59718,$59727 - $59718
+
 Route12Text4: ; 0x59727
     db $08 ; asm
     ld hl, $56a9
@@ -24019,6 +29790,7 @@ Route12Text4: ; 0x59727
     jp $24d7
 
 INCBIN "baserom.gbc",$59731,$59740 - $59731
+
 Route12Text5: ; 0x59740
     db $08 ; asm
     ld hl, $56b5
@@ -24026,6 +29798,7 @@ Route12Text5: ; 0x59740
     jp $24d7
 
 INCBIN "baserom.gbc",$5974a,$59759 - $5974a
+
 Route12Text6: ; 0x59759
     db $08 ; asm
     ld hl, $56c1
@@ -24033,6 +29806,7 @@ Route12Text6: ; 0x59759
     jp $24d7
 
 INCBIN "baserom.gbc",$59763,$59772 - $59763
+
 Route12Text7: ; 0x59772
     db $08 ; asm
     ld hl, $56cd
@@ -24040,6 +29814,7 @@ Route12Text7: ; 0x59772
     jp $24d7
 
 INCBIN "baserom.gbc",$5977c,$5978b - $5977c
+
 Route12Text8: ; 0x5978b
     db $08 ; asm
     ld hl, $56d9
@@ -24056,7 +29831,22 @@ Route12Text12: ; 0x597a9
     TX_FAR _Route12Text12
     db $50
 
-INCBIN "baserom.gbc",$597ae,$59858 - $597ae
+Route15Script: ; 0x597ae
+    call $3c3c
+    ld hl, $57df
+    ld de, $57c1
+    ld a, [$d625]
+    call $3160
+    ld [$d625], a
+    ret
+; 0x597c1
+
+INCBIN "baserom.gbc",$597c1,$6
+
+Route15Texts: ; 0x597c7
+    dw Route15Text1, Route15Text2, Route15Text3, Route15Text4, Route15Text5, Route15Text6, Route15Text7, Route15Text8, Route15Text9, Route15Text10, Route15Text11, Route15Text12
+
+INCBIN "baserom.gbc",$597df,$79
 
 Route15Text1: ; 0x59858
     db $8 ; asm
@@ -24117,7 +29907,23 @@ Route15Text12: ; 0x5992e
     TX_FAR _Route15Text12
     db $50
 
-INCBIN "baserom.gbc",$59933,$59a18 - $59933
+Route16Script: ; 0x59933
+    call $3c3c
+    ld hl, $59cf
+    ld de, $5951
+    ld a, [$d626]
+    call $3160
+    ld [$d626], a
+    ret
+; 0x59946
+
+INCBIN "baserom.gbc",$59946,$73
+
+Route16Texts: ; 0x599b9
+    dw Route16Text1, Route16Text2, Route16Text3, Route16Text4, Route16Text5, Route16Text6, Route16Text7, Route16Text8, Route16Text9, Route16Text10, Route16Text11
+
+INCBIN "baserom.gbc",$599cb + 4,$4d - 4
+
 Route16Text1: ; 0x59a18
     db $08 ; asm
     ld hl, $59cf
@@ -24125,6 +29931,7 @@ Route16Text1: ; 0x59a18
     jp $24d7
 
 INCBIN "baserom.gbc",$59a22,$59a31 - $59a22
+
 Route16Text2: ; 0x59a31
     db $08 ; asm
     ld hl, $59db
@@ -24132,6 +29939,7 @@ Route16Text2: ; 0x59a31
     jp $24d7
 
 INCBIN "baserom.gbc",$59a3b,$59a4a - $59a3b
+
 Route16Text3: ; 0x59a4a
     db $08 ; asm
     ld hl, $59e7
@@ -24139,6 +29947,7 @@ Route16Text3: ; 0x59a4a
     jp $24d7
 
 INCBIN "baserom.gbc",$59a54,$59a63 - $59a54
+
 Route16Text4: ; 0x59a63
     db $08 ; asm
     ld hl, $59f3
@@ -24146,6 +29955,7 @@ Route16Text4: ; 0x59a63
     jp $24d7
 
 INCBIN "baserom.gbc",$59a6d,$59a7c - $59a6d
+
 Route16Text5: ; 0x59a7c
     db $08 ; asm
     ld hl, $59ff
@@ -24153,6 +29963,7 @@ Route16Text5: ; 0x59a7c
     jp $24d7
 
 INCBIN "baserom.gbc",$59a86,$59a95 - $59a86
+
 Route16Text6: ; 0x59a95
     db $08 ; asm
     ld hl, $5a0b
@@ -24165,7 +29976,11 @@ Route16Text7: ; 0x59aae
     TX_FAR _Route16Text7
     db $50
 
-INCBIN "baserom.gbc",$59ab3,$59abd - $59ab3
+Route16Text10: ; 0x59ab3
+INCBIN "baserom.gbc",$59ab3,5
+
+Route16Text11: ; 0x59ab8
+INCBIN "baserom.gbc",$59ab8,5
 
 Route16Text8: ; 0x59abd
     TX_FAR _Route16Text8
@@ -24175,7 +29990,23 @@ Route16Text9: ; 0x59ac2
     TX_FAR _Route16Text9
     db $50
 
-INCBIN "baserom.gbc",$59ac7,$59b0f - $59ac7
+Route18Script: ; 0x59ac7
+    call $3c3c
+    ld hl, $5aea
+    ld de, $5ada
+    ld a, [$d627]
+    call $3160
+    ld [$d627], a
+    ret
+; 0x59ada
+
+INCBIN "baserom.gbc",$59ada,$6
+
+Route18Texts: ; 0x59ae0
+    dw Route18Text1, Route18Text2, Route18Text3, Route18Text4, Route18Text5
+
+INCBIN "baserom.gbc",$59aea,$25
+
 Route18Text1: ; 0x59b0f
     db $08 ; asm
     ld hl, $5aea
@@ -24183,6 +30014,7 @@ Route18Text1: ; 0x59b0f
     jp $24d7
 
 INCBIN "baserom.gbc",$59b19,$59b28 - $59b19
+
 Route18Text2: ; 0x59b28
     db $08 ; asm
     ld hl, $5af6
@@ -24190,6 +30022,7 @@ Route18Text2: ; 0x59b28
     jp $24d7
 
 INCBIN "baserom.gbc",$59b32,$59b41 - $59b32
+
 Route18Text3: ; 0x59b41
     db $08 ; asm
     ld hl, $5b02
@@ -24209,12 +30042,20 @@ Route18Text5: ; 0x59b5f
 FanClub_h: ; 0x59b64 to 0x59b70 (12 bytes) (id=90)
     db $10 ; tileset
     db $04, $04 ; dimensions (y, x)
-    dw FanClubBlocks, $5b84, $5b70 ; blocks, texts, scripts
+    dw FanClubBlocks, FanClubTexts, FanClubScript ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $5c97 ; objects
+    dw FanClubObject ; objects
 
-INCBIN "baserom.gbc",$59b70,$59b94 - $59b70
+FanClubScript: ; 0x59b70
+    jp $3c3c
+; 0x59b73
+
+INCBIN "baserom.gbc",$59b73,$11
+
+FanClubTexts: ; 0x59b84
+    dw FanClubText1, FanClubText2, FanClubText3, FanClubText4, FanClubText5, FanClubText6, FanClubText7, FanClubText8
+
 FanClubText1: ; 0x59b94
     db $08 ; asm
     ld a, [$d771]
@@ -24234,6 +30075,7 @@ asm_64f01 ; 0x59bb4
     jp $24d7
 
 INCBIN "baserom.gbc",$59bb7,$59bc1 - $59bb7
+
 FanClubText2: ; 0x59bc1
     db $08 ; asm
     ld a, [$d771]
@@ -24354,12 +30196,29 @@ FanClubBlocks: ; 16
 SilphCo2_h: ; 0x59ce5 to 0x59cf1 (12 bytes) (id=207)
     db $16 ; tileset
     db $09, $0f ; dimensions (y, x)
-    dw SilphCo2Blocks, $5d86, $5cf1 ; blocks, texts, scripts
+    dw SilphCo2Blocks, SilphCo2Texts, SilphCo2Script ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $5e66 ; objects
+    dw SilphCo2Object ; objects
 
-INCBIN "baserom.gbc",$59cf1,$59dc1 - $59cf1
+SilphCo2Script: ; 0x59cf1
+    call $5d07
+    call $3c3c
+    ld hl, $5d90
+    ld de, $5d80
+    ld a, [$d643]
+    call $3160
+    ld [$d643], a
+    ret
+; 0x59d07
+
+INCBIN "baserom.gbc",$59d07,$7f
+
+SilphCo2Texts: ; 0x59d86
+    dw SilphCo2Text1, SilphCo2Text2, SilphCo2Text3, SilphCo2Text4, SilphCo2Text5
+
+INCBIN "baserom.gbc",$59d90,$31
+
 SilphCo2Text1: ; 0x59dc1
     db $08 ; asm
     ld a, [$d826]
@@ -24382,6 +30241,7 @@ asm_2c1e0 ; 0x59de7
     jp $24d7
 
 INCBIN "baserom.gbc",$59ded,$59e02 - $59ded
+
 SilphCo2Text2: ; 0x59e02
     db $08 ; asm
     ld hl, $5d90
@@ -24407,6 +30267,7 @@ SilphCo2Text5: ; 0x59e20
     jp $24d7
 
 INCBIN "baserom.gbc",$59e2a,$3c
+
 SilphCo2Object: ; 0x59e66 (size=98)
     db $2e ; border tile
 
@@ -24443,12 +30304,29 @@ SilphCo2Blocks: ; 135
 SilphCo3_h: ; 0x59f4f to 0x59f5b (12 bytes) (id=208)
     db $16 ; tileset
     db $09, $0f ; dimensions (y, x)
-    dw SilphCo3Blocks, $5fc4, $5f5b ; blocks, texts, scripts
+    dw SilphCo3Blocks, SilphCo3Texts, SilphCo3Script ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $6035 ; objects
+    dw SilphCo3Object ; objects
 
-INCBIN "baserom.gbc",$59f5b,$59fe5 - $59f5b
+SilphCo3Script: ; 0x59f5b
+    call $5f71
+    call $3c3c
+    ld hl, $5fcc
+    ld de, $5fbe
+    ld a, [$d644]
+    call $3160
+    ld [$d644], a
+    ret
+; 0x59f71
+
+INCBIN "baserom.gbc",$59f71,$53
+
+SilphCo3Texts: ; 0x59fc4
+    dw SilphCo3Text1, SilphCo3Text2, SilphCo3Text3, SilphCo3Text4
+
+INCBIN "baserom.gbc",$59fcc,$19
+
 SilphCo3Text1: ; 0x59fe5
     db $08 ; asm
     ld a, [$d838]
@@ -24461,6 +30339,7 @@ asm_8c56f ; 0x59ff3
     jp $24d7
 
 INCBIN "baserom.gbc",$59ff9,$5a003 - $59ff9
+
 SilphCo3Text2: ; 0x5a003
     db $08 ; asm
     ld hl, $5fcc
@@ -24468,6 +30347,7 @@ SilphCo3Text2: ; 0x5a003
     jp $24d7
 
 INCBIN "baserom.gbc",$5a00d,$5a01c - $5a00d
+
 SilphCo3Text3: ; 0x5a01c
     db $08 ; asm
     ld hl, $5fd8
@@ -24475,6 +30355,7 @@ SilphCo3Text3: ; 0x5a01c
     jp $24d7
 
 INCBIN "baserom.gbc",$5a026,$f
+
 SilphCo3Object: ; 0x5a035 (size=113)
     db $2e ; border tile
 
@@ -24516,12 +30397,29 @@ SilphCo3Blocks: ; 135
 SilphCo10_h: ; 0x5a12d to 0x5a139 (12 bytes) (id=234)
     db $16 ; tileset
     db $09, $08 ; dimensions (y, x)
-    dw SilphCo10Blocks, $6186, $6139 ; blocks, texts, scripts
+    dw SilphCo10Blocks, SilphCo10Texts, SilphCo10Script ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $61fb ; objects
+    dw SilphCo10Object ; objects
 
-INCBIN "baserom.gbc",$5a139,$5a1ab - $5a139
+SilphCo10Script: ; 0x5a139
+    call $614f
+    call $3c3c
+    ld hl, $6192
+    ld de, $6180
+    ld a, [$d658]
+    call $3160
+    ld [$d658], a
+    ret
+; 0x5a14f
+
+INCBIN "baserom.gbc",$5a14f,$37
+
+SilphCo10Texts: ; 0x5a186
+    dw SilphCo10Text1, SilphCo10Text2, SilphCo10Text3, SilphCo10Text4, SilphCo10Text5, SilphCo10Text6
+
+INCBIN "baserom.gbc",$5a192,$19
+
 SilphCo10Text1: ; 0x5a1ab
     db $08 ; asm
     ld hl, $6192
@@ -24546,6 +30444,7 @@ asm_cf85f ; 0x5a1cd
     jp $24d7
 
 INCBIN "baserom.gbc",$5a1d3,$28
+
 SilphCo10Object: ; 0x5a1fb (size=95)
     db $2e ; border tile
 
@@ -24581,12 +30480,29 @@ SilphCo10Blocks: ; 72
 Lance_h: ; 0x5a2a2 to 0x5a2ae (12 bytes) (id=113)
     db $05 ; tileset
     db $0d, $0d ; dimensions (y, x)
-    dw LanceBlocks, $6395, $62ae ; blocks, texts, scripts
+    dw LanceBlocks, LanceTexts, LanceScript ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $63c5 ; objects
+    dw LanceObject ; objects
 
-INCBIN "baserom.gbc",$5a2ae,$5a3a4 - $5a2ae
+LanceScript: ; 0x5a2ae
+    call $62c4
+    call $3c3c
+    ld hl, $6397
+    ld de, $62fa
+    ld a, [$d653]
+    call $3160
+    ld [$d653], a
+    ret
+; 0x5a2c4
+
+INCBIN "baserom.gbc",$5a2c4,$d1
+
+LanceTexts: ; 0x5a395
+    dw LanceText1
+
+INCBIN "baserom.gbc",$5a397,$d
+
 LanceText1: ; 0x5a3a4
     db $08 ; asm
     ld hl, $6397
@@ -24594,6 +30510,7 @@ LanceText1: ; 0x5a3a4
     jp $24d7
 
 INCBIN "baserom.gbc",$5a3ae,$17
+
 LanceObject: ; 0x5a3c5 (size=36)
     db $3 ; border tile
 
@@ -24618,12 +30535,116 @@ LanceBlocks: ; 169
 HallofFameRoom_h: ; 0x5a492 to 0x5a49e (12 bytes) (id=118)
     db $07 ; tileset
     db $04, $05 ; dimensions (y, x)
-    dw HallofFameRoomBlocks, $656a, $649e ; blocks, texts, scripts
+    dw HallofFameRoomBlocks, HallofFameRoomTexts, HallofFameRoomScript ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $6571 ; objects
+    dw HallofFameRoomObject ; objects
 
-INCBIN "baserom.gbc",$5a49e,$5a56a - $5a49e
+HallofFameRoomScript: ; 0x5a49e
+    call $3c3c
+    ld hl, $64b2
+    ld a, [$d64b]
+    jp $3d97
+; 0x5a4aa
+
+INCBIN "baserom.gbc",$5a4aa,$5a4b2 - $5a4aa
+
+HallofFameRoomScripts: ; 0x5a4b2
+    dw HallofFameRoomScript0, HallofFameRoomScript1, HallofFameRoomScript2
+
+INCBIN "baserom.gbc",$5a4b8,$3
+
+HallofFameRoomScript2: ; 0x5a4bb
+    call Delay3
+    ld a, [$d358]
+    push af
+    xor a
+    ld [$cd6b], a
+    ld a, $55
+    call Predef
+    pop af
+    ld [$d358], a
+    ld hl, $d733
+    res 1, [hl]
+    inc hl
+    set 0, [hl]
+    xor a
+    ld hl, $d64d
+    ld [hli], a
+    ld [hli], a
+    ld [hl], a
+    ld [$d653], a
+    ld [$d64b], a
+    ld hl, $d863
+    ld [hli], a
+    ld [hli], a
+    ld [hli], a
+    ld [hli], a
+    ld [hl], a
+    xor a
+    ld [$d64b], a
+    ld a, $0
+    ld [$d719], a
+    ld b, $1c
+    ld hl, $7848
+    call Bankswitch
+    ld b, $5
+.asm_5a4ff
+    ld c, $78
+    call $3739
+    dec b
+    jr nz, .asm_5a4ff ; 0x5a505 $f8
+    call $3865
+    jp $1f54
+; 0x5a50d
+
+HallofFameRoomScript0: ; 0x5a50d
+    ld a, $ff
+    ld [$cd6b], a
+    ld hl, $ccd3
+    ld de, $6528
+    call $350c
+    dec a
+    ld [$cd38], a
+    call $3486
+    ld a, $1
+    ld [$d64b], a
+    ret
+; 0x5a528
+
+INCBIN "baserom.gbc",$5a528,$5a52b - $5a528
+
+HallofFameRoomScript1: ; 0x5a52b
+    ld a, [$cd38]
+    and a
+    ret nz
+    ld a, $1
+    ld [$d528], a
+    ld a, $1
+    ld [$ff00+$8c], a
+    call $3541
+    ld a, $8
+    ld [$ff00+$8d], a
+    call $34a6
+    call Delay3
+    xor a
+    ld [$cd6b], a
+    inc a
+    ld [$d528], a
+    ld a, $1
+    ld [$ff00+$8c], a
+    call $2920
+    ld a, $ff
+    ld [$cd6b], a
+    ld a, $8
+    ld [$cc4d], a
+    ld a, $11
+    call Predef
+    ld a, $2
+    ld [$d64b], a
+    ret
+; 0x5a56a
+
 HallofFameRoomTexts: ; 0x5a56a
     dw HallofFameRoomText1
 
@@ -24678,7 +30699,7 @@ ViridianForestexitBlocks: ; 20
 RedsHouse2F_h:
 	db $04 ; tileset
 	db $04,$04 ; dimensions
-	dw RedsHouse2FBlocks,RedsHouse2FTexts,RedsHouse2FScript
+	dw RedsHouse2FBlocks, RedsHouse2FTexts, RedsHouse2FScript
 	db 0 ; no connections
 	dw RedsHouse2FObject
 
@@ -24724,12 +30745,48 @@ INCBIN "baserom.gbc",$5c0dc,$5c0eb - $5c0dc
 MuseumF1_h: ; 0x5c0eb to 0x5c0f7 (12 bytes) (id=52)
     db $0a ; tileset
     db $04, $0a ; dimensions (y, x)
-    dw MuseumF1Blocks, $412b, $40f7 ; blocks, texts, scripts
+    dw MuseumF1Blocks, MuseumF1Texts, MuseumF1Script ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $42c1 ; objects
+    dw MuseumF1Object ; objects
 
-INCBIN "baserom.gbc",$5c0f7,$5c135 - $5c0f7
+MuseumF1Script: ; 0x5c0f7
+    ld a, $1
+    ld [$cf0c], a
+    xor a
+    ld [$cc3c], a
+    ld hl, $4109
+    ld a, [$d619]
+    jp $3d97
+; 0x5c109
+
+MuseumF1Scripts: ; 0x5c109
+    dw MuseumF1Script0, MuseumF1Script1
+
+MuseumF1Script0: ; 0x5c10d
+    ld a, [$d361]
+    cp $4
+    ret nz
+    ld a, [$d362]
+    cp $9
+    jr z, .asm_5c120 ; 0x5c118 $6
+    ld a, [$d362]
+    cp $a
+    ret nz
+.asm_5c120
+    xor a
+    ld [$ff00+$b4], a
+    ld a, $1
+    ld [$ff00+$8c], a
+    jp $2920
+; 0x5c12a
+
+MuseumF1Script1: ; 0x5c12a
+    ret
+; 0x5c12b
+
+MuseumF1Texts: ; 0x5c12b
+    dw MuseumF1Text1, MuseumF1Text2, MuseumF1Text3, MuseumF1Text4, MuseumF1Text5
 
 MuseumF1Text1: ; 0x5c135
     db $8
@@ -24874,6 +30931,7 @@ MuseumF1Text3: ; 0x5c256
     jp $24d7
 
 INCBIN "baserom.gbc",$5c28e,$5c2a3 - $5c28e
+
 MuseumF1Text4: ; 0x5c2a3
     db $08 ; asm
     ld hl, $42ad
@@ -24881,6 +30939,7 @@ MuseumF1Text4: ; 0x5c2a3
     jp $24d7
 
 INCBIN "baserom.gbc",$5c2ad,$5c2b2 - $5c2ad
+
 MuseumF1Text5: ; 0x5c2b2
     db $08 ; asm
     ld hl, $42bc
@@ -24888,6 +30947,7 @@ MuseumF1Text5: ; 0x5c2b2
     jp $24d7
 
 INCBIN "baserom.gbc",$5c2bc,$5
+
 MuseumF1Object: ; 0x5c2c1 (size=74)
     db $a ; border tile
 
@@ -24917,12 +30977,15 @@ MuseumF1Object: ; 0x5c2c1 (size=74)
 MuseumF2_h: ; 0x5c30b to 0x5c317 (12 bytes) (id=53)
     db $0a ; tileset
     db $04, $07 ; dimensions (y, x)
-    dw MuseumF2Blocks, $431a, $4317 ; blocks, texts, scripts
+    dw MuseumF2Blocks, MuseumF2Texts, MuseumF2Script ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $434b ; objects
+    dw MuseumF2Object ; objects
 
-INCBIN "baserom.gbc",$5c317,$5c31a - $5c317
+MuseumF2Script: ; 0x5c317
+    jp $3c3c
+; 0x5c31a
+
 MuseumF2Texts: ; 0x5c31a
     dw MuseumF2Text1, MuseumF2Text2, MuseumF2Text3, MuseumF2Text4, MuseumF2Text5, MuseumF2Text6, MuseumF2Text7
 
@@ -24977,12 +31040,32 @@ MuseumF2Object: ; 0x5c34b (size=48)
 PewterGym_h: ; 0x5c37b to 0x5c387 (12 bytes) (id=54)
     db $07 ; tileset
     db $07, $05 ; dimensions (y, x)
-    dw PewterGymBlocks, $4435, $4387 ; blocks, texts, scripts
+    dw PewterGymBlocks, PewterGymTexts, PewterGymScript ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $452e ; objects
+    dw PewterGymObject ; objects
 
-INCBIN "baserom.gbc",$5c387,$5c44e - $5c387
+PewterGymScript: ; 0x5c387
+    ld hl, $d126
+    bit 6, [hl]
+    res 6, [hl]
+    call nz, $43a4
+    call $3c3c
+    ld hl, $4441
+    ld de, $43ca
+    ld a, [$d5fc]
+    call $3160
+    ld [$d5fc], a
+    ret
+; 0x5c3a4
+
+INCBIN "baserom.gbc",$5c3a4,$91
+
+PewterGymTexts: ; 0x5c435
+    dw PewterGymText1, PewterGymText2, PewterGymText3, PewterGymText4, PewterGymText5, PewterGymText6
+
+INCBIN "baserom.gbc",$5c43b + 6,$13 - 6
+
 PewterGymText1: ; 0x5c44e
     db $08 ; asm
     ld a, [$d755]
@@ -25020,7 +31103,21 @@ PewterGymText1: ; 0x5c44e
 .asm_e0ffb ; 0x5c49b
     jp $24d7
 
-INCBIN "baserom.gbc",$5c49e,$5c4c6 - $5c49e
+INCBIN "baserom.gbc",$5c49e,$5c4a8 - $5c49e
+
+PewterGymText4: ; 0x5c4a8
+INCBIN "baserom.gbc",$5c4a8,5
+
+PewterGymText5: ; 0x5c4ad
+INCBIN "baserom.gbc",$5c4ad,6
+
+INCBIN "baserom.gbc",$5c4b3,$5c4b7 - $5c4b3
+
+PewterGymText6: ; 0x5c4b7
+INCBIN "baserom.gbc",$5c4b7,5
+
+INCBIN "baserom.gbc",$5c4bc,$5c4c6 - $5c4bc
+
 PewterGymText2: ; 0x5c4c6
     db $08 ; asm
     ld hl, $4441
@@ -25028,6 +31125,7 @@ PewterGymText2: ; 0x5c4c6
     jp $24d7
 
 INCBIN "baserom.gbc",$5c4d0,$5c4df - $5c4d0
+
 PewterGymText3: ; 0x5c4df
     db $08 ; asm
     ld a, [$d72a]
@@ -25056,6 +31154,7 @@ PewterGymText3: ; 0x5c4df
     jp $24d7
 
 INCBIN "baserom.gbc",$5c515,$19
+
 PewterGymObject: ; 0x5c52e (size=42)
     db $3 ; border tile
 
@@ -25080,26 +31179,83 @@ PewterGymBlocks: ; 35
 PewterPokecenter_h: ; 0x5c57b to 0x5c587 (12 bytes) (id=58)
     db $06 ; tileset
     db $04, $07 ; dimensions (y, x)
-    dw PewterPokecenterBlocks, $458d, $4587 ; blocks, texts, scripts
+    dw PewterPokecenterBlocks, $458d, PewterPokecenterScript ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $460d ; objects
+    dw PewterPokecenterObject ; objects
 
-INCBIN "baserom.gbc",$5c587,$5c596 - $5c587
+PewterPokecenterScript: ; 0x5c587
+    call $22fa
+    jp $3c3c
+; 0x5c58d
+
+INCBIN "baserom.gbc",$5c58d,$9
 
 PewterPokecenterText2:
 PewterPokecenterText1: ; 0x5c596
     TX_FAR _PewterPokecenterText1
     db $50
 
-INCBIN "baserom.gbc",$5c59b,$5c603 - $5c59b
+PewterPokecenterText3: ; 0x5c59b
+    db $8
+    ld a, $1
+    ld [$cc3c], a
+    ld hl, $4603
+    call PrintText
+    ld a, $ff
+    call $23b1
+    ld c, $20
+    call $3739
+    ld hl, $4608
+    ld de, $cd3f
+    ld bc, $0004
+    call CopyData
+    ld a, [$c132]
+    ld hl, $cd3f
+.asm_5c5c3
+    cp [hl]
+    inc hl
+    jr nz, .asm_5c5c3 ; 0x5c5c5 $fc
+    dec hl
+    push hl
+    ld c, $1f
+    ld a, $d0
+    call $23a1
+    pop hl
+.asm_5c5d1
+    ld a, [hl]
+    ld [$c132], a
+    push hl
+    ld hl, $cd3f
+    ld de, $cd3e
+    ld bc, $0004
+    call CopyData
+    ld a, [$cd3e]
+    ld [$cd42], a
+    pop hl
+    ld c, $18
+    call $3739
+    ld a, [$c026]
+    ld b, a
+    ld a, [$c027]
+    or b
+    jr nz, .asm_5c5d1 ; 0x5c5f6 $d9
+    ld c, $30
+    call $3739
+    call $2307
+    jp $24d7
+; 0x5c603
 
 PewterPokecenterText4: ; broken TX_FAR to _PewterPokecenterText4
     db $17, $44, $47, $26
     db $50
 
 ;XXX wtf?
-db $30, $38, $34, $3c, $f6
+db $30, $38, $34, $3c
+
+PewterPokecenterText5: ; XXX confirm text_id number
+    db $f6
+
 PewterPokecenterObject: ; 0x5c60d (size=44)
     db $0 ; border tile
 
@@ -25122,12 +31278,20 @@ PewterPokecenterObject: ; 0x5c60d (size=44)
 CeruleanPokecenter_h: ; 0x5c639 to 0x5c645 (12 bytes) (id=64)
     db $06 ; tileset
     db $04, $07 ; dimensions (y, x)
-    dw CeruleanPokecenterBlocks, $464b, $4645 ; blocks, texts, scripts
+    dw CeruleanPokecenterBlocks, $464b, CeruleanPokecenterScript ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $465f ; objects
+    dw CeruleanPokecenterObject ; objects
 
-INCBIN "baserom.gbc",$5c645,$5c655 - $5c645
+CeruleanPokecenterScript: ; 0x5c645
+    call $22fa
+    jp $3c3c
+; 0x5c64b
+
+INCBIN "baserom.gbc",$5c64b,$8
+
+CeruleanPokecenterText4:
+    db $f6, $ff
 
 CeruleanPokecenterText2:
 CeruleanPokecenterText1: ; 0x5c655
@@ -25163,12 +31327,32 @@ CeruleanPokecenterBlocks: ; 28
 CeruleanGym_h: ; 0x5c6a7 to 0x5c6b3 (12 bytes) (id=65)
     db $07 ; tileset
     db $07, $05 ; dimensions (y, x)
-    dw CeruleanGymBlocks, $474a, $46b3 ; blocks, texts, scripts
+    dw CeruleanGymBlocks, CeruleanGymTexts, CeruleanGymScript ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $4834 ; objects
+    dw CeruleanGymObject ; objects
 
-INCBIN "baserom.gbc",$5c6b3,$5c771 - $5c6b3
+CeruleanGymScript: ; 0x5c6b3
+    ld hl, $d126
+    bit 6, [hl]
+    res 6, [hl]
+    call nz, $46d0
+    call $3c3c
+    ld hl, $4758
+    ld de, $46f8
+    ld a, [$d5fd]
+    call $3160
+    ld [$d5fd], a
+    ret
+; 0x5c6d0
+
+INCBIN "baserom.gbc",$5c6d0,$7a
+
+CeruleanGymTexts: ; 0x5c74a
+    dw CeruleanGymText1, CeruleanGymText2, CeruleanGymText3, CeruleanGymText4, CeruleanGymText5, CeruleanGymText6, CeruleanGymText7
+
+INCBIN "baserom.gbc",$5c752 + 6,$1f - 6
+
 CeruleanGymText1: ; 0x5c771
     db $08 ; asm
     ld a, [$d75e]
@@ -25205,7 +31389,21 @@ CeruleanGymText1: ; 0x5c771
 .asm_95b04 ; 0x5c7bb
     jp $24d7
 
-INCBIN "baserom.gbc",$5c7be,$5c7df - $5c7be
+INCBIN "baserom.gbc",$5c7be,$5c7c8 - $5c7be
+
+CeruleanGymText5: ; 0x5c7c8
+INCBIN "baserom.gbc",$5c7c8,5
+
+CeruleanGymText6: ; 0x5c7cd
+INCBIN "baserom.gbc",$5c7cd,4
+db $0b
+db $50
+
+CeruleanGymText7: ; 0x5c7d3
+INCBIN "baserom.gbc",$5c7d3,5
+
+INCBIN "baserom.gbc",$5c7d8,$5c7df - $5c7d8
+
 CeruleanGymText2: ; 0x5c7df
     db $08 ; asm
     ld hl, $4758
@@ -25213,6 +31411,7 @@ CeruleanGymText2: ; 0x5c7df
     jp $24d7
 
 INCBIN "baserom.gbc",$5c7e9,$5c7f8 - $5c7e9
+
 CeruleanGymText3: ; 0x5c7f8
     db $08 ; asm
     ld hl, $4764
@@ -25220,6 +31419,7 @@ CeruleanGymText3: ; 0x5c7f8
     jp $24d7
 
 INCBIN "baserom.gbc",$5c802,$5c811 - $5c802
+
 CeruleanGymText4: ; 0x5c811
     db $08 ; asm
     ld a, [$d75e]
@@ -25235,6 +31435,7 @@ CeruleanGymText4: ; 0x5c811
     jp $24d7
 
 INCBIN "baserom.gbc",$5c82a,$a
+
 CeruleanGymObject: ; 0x5c834 (size=50)
     db $3 ; border tile
 
@@ -25260,12 +31461,17 @@ CeruleanGymBlocks: ; 35
 CeruleanMart_h: ; 0x5c889 to 0x5c895 (12 bytes) (id=67)
     db $02 ; tileset
     db $04, $04 ; dimensions (y, x)
-    dw $4000, $4898, $4895 ; blocks, texts, scripts
+    dw $4000, CeruleanMartTexts, CeruleanMartScript ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $48a8 ; objects
+    dw CeruleanMartObject ; objects
 
-INCBIN "baserom.gbc",$5c895,$5c89e - $5c895
+CeruleanMartScript: ; 0x5c895
+    jp $3c3c
+; 0x5c898
+
+CeruleanMartTexts: ; 0x5c898
+    dw CeruleanMartText1, CeruleanMartText2, CeruleanMartText3
 
 CeruleanMartText2: ; 0x5c89e
     TX_FAR _CeruleanMartText2
@@ -25296,12 +31502,20 @@ CeruleanMartObject: ; 0x5c8a8 (size=38)
 LavenderPokecenter_h: ; 0x5c8ce to 0x5c8da (12 bytes) (id=141)
     db $06 ; tileset
     db $04, $07 ; dimensions (y, x)
-    dw $4064, $48e0, $48da ; blocks, texts, scripts
+    dw $4064, $48e0, LavenderPokecenterScript ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $48f4 ; objects
+    dw LavenderPokecenterObject ; objects
 
-INCBIN "baserom.gbc",$5c8da,$5c8ea - $5c8da
+LavenderPokecenterScript: ; 0x5c8da
+    call $22fa
+    jp $3c3c
+; 0x5c8e0
+
+INCBIN "baserom.gbc",$5c8e0,$8
+
+LavenderPokecenterText4:
+    db $f6, $ff
 
 LavenderPokecenterText2:
 LavenderPokecenterText1: ; 0x5c8ea
@@ -25312,7 +31526,6 @@ INCBIN "baserom.gbc",$5c8ee,$5c8ef - $5c8ee
 LavenderPokecenterText3: ; 0x5c8ef
     TX_FAR _LavenderPokecenterText3
     db $50
-
 
 LavenderPokecenterObject: ; 0x5c8f4 (size=44)
     db $0 ; border tile
@@ -25336,12 +31549,17 @@ LavenderPokecenterObject: ; 0x5c8f4 (size=44)
 LavenderMart_h: ; 0x5c920 to 0x5c92c (12 bytes) (id=150)
     db $02 ; tileset
     db $04, $04 ; dimensions (y, x)
-    dw $4000, $492f, $492c ; blocks, texts, scripts
+    dw $4000, $492f, LavenderMartScript ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $495d ; objects
+    dw LavenderMartObject ; objects
 
-INCBIN "baserom.gbc",$5c92c,$5c935 - $5c92c
+LavenderMartScript: ; 0x5c92c
+    jp $3c3c
+; 0x5c92f
+
+LavenderMartTexts: ; 0x5c92f
+    dw LavenderMartText1, LavenderMartText2, LavenderMartText3
 
 LavenderMartText2: ; 0x5c935
     TX_FAR _LavenderMartText2
@@ -25362,6 +31580,7 @@ LavenderMartText3: ; 0x5c93a
     jp $24d7
 
 INCBIN "baserom.gbc",$5c953,$a
+
 LavenderMartObject: ; 0x5c95d (size=38)
     db $0 ; border tile
 
@@ -25383,12 +31602,17 @@ LavenderMartObject: ; 0x5c95d (size=38)
 VermilionPokecenter_h: ; 0x5c983 to 0x5c98f (12 bytes) (id=89)
     db $06 ; tileset
     db $04, $07 ; dimensions (y, x)
-    dw $4064, $4995, $498f ; blocks, texts, scripts
+    dw $4064, $4995, VermilionPokecenterScript ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $49a9 ; objects
+    dw VermilionPokecenterObject ; objects
 
-INCBIN "baserom.gbc",$5c98f,$5c99e - $5c98f
+VermilionPokecenterScript: ; 0x5c98f
+    call $22fa
+    jp $3c3c
+; 0x5c995
+
+INCBIN "baserom.gbc",$5c995,$9
 
 VermilionPokecenterText2:
 VermilionPokecenterText1: ; 0x5c99e
@@ -25399,7 +31623,8 @@ VermilionPokecenterText3: ; 0x5c9a3
     TX_FAR _VermilionPokecenterText3
     db $50
 
-INCBIN "baserom.gbc",$5c9a8,$1
+VermilionPokecenterText4: ; 0x5c9a8
+    db $f6
 
 VermilionPokecenterObject: ; 0x5c9a9 (size=44)
     db $0 ; border tile
@@ -25423,23 +31648,25 @@ VermilionPokecenterObject: ; 0x5c9a9 (size=44)
 VermilionMart_h: ; 0x5c9d5 to 0x5c9e1 (12 bytes) (id=91)
     db $02 ; tileset
     db $04, $04 ; dimensions (y, x)
-    dw VermilionMartBlocks, $49e4, $49e1 ; blocks, texts, scripts
+    dw VermilionMartBlocks, VermilionMartTexts, VermilionMartScript ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $49f4 ; objects
+    dw VermilionMartObject ; objects
 
-INCBIN "baserom.gbc",$5c9e1,$5c9ea - $5c9e1
+VermilionMartScript: ; 0x5c9e1
+    jp $3c3c
+; 0x5c9e4
+
+VermilionMartTexts: ; 0x5c9e4
+    dw VermilionMartText1, VermilionMartText2, VermilionMartText3
 
 VermilionMartText2: ; 0x5c9ea
     TX_FAR _VermilionMartText2
     db $50
 
-
 VermilionMartText3: ; 0x5c9ef
     TX_FAR _VermilionMartText3
     db $50
-
-INCBIN "baserom.gbc",$5c9f4,$0
 
 VermilionMartObject: ; 0x5c9f4 (size=38)
     db $0 ; border tile
@@ -25462,12 +31689,37 @@ VermilionMartObject: ; 0x5c9f4 (size=38)
 VermilionGym_h: ; 0x5ca1a to 0x5ca26 (12 bytes) (id=92)
     db $07 ; tileset
     db $09, $05 ; dimensions (y, x)
-    dw VermilionGymBlocks, $4ae8, $4a26 ; blocks, texts, scripts
+    dw VermilionGymBlocks, VermilionGymTexts, VermilionGymScript ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $4bfe ; objects
+    dw VermilionGymObject ; objects
 
-INCBIN "baserom.gbc",$5ca26,$5cb1d - $5ca26
+VermilionGymScript: ; 0x5ca26
+    ld hl, $d126
+    bit 5, [hl]
+    res 5, [hl]
+    push hl
+    call nz, $4a4c
+    pop hl
+    bit 6, [hl]
+    res 6, [hl]
+    call nz, $4a6d
+    call $3c3c
+    ld hl, $4af8
+    ld de, $4a95
+    ld a, [$d5fe]
+    call $3160
+    ld [$d5fe], a
+    ret
+; 0x5ca4c
+
+INCBIN "baserom.gbc",$5ca4c,$9c
+
+VermilionGymTexts: ; 0x5cae8
+    dw VermilionGymText1, VermilionGymText2, VermilionGymText3, VermilionGymText4, VermilionGymText5, VermilionGymText6, VermilionGymText7, VermilionGymText8
+
+INCBIN "baserom.gbc",$5caf8,37
+
 VermilionGymText1: ; 0x5cb1d
     db $08 ; asm
     ld a, [$d773]
@@ -25505,7 +31757,21 @@ VermilionGymText1: ; 0x5cb1d
 .asm_23621 ; 0x5cb6a
     jp $24d7
 
-INCBIN "baserom.gbc",$5cb6d,$5cb90 - $5cb6d
+INCBIN "baserom.gbc",$5cb6d,$5cb77 - $5cb6d
+
+VermilionGymText6: ; 0x5cb77
+INCBIN "baserom.gbc",$5cb77,5
+
+VermilionGymText7: ; 0x5cb7c
+INCBIN "baserom.gbc",$5cb7c,5
+
+INCBIN "baserom.gbc",$5cb81,5
+
+VermilionGymText8: ; 0x5cb86
+INCBIN "baserom.gbc",$5cb86,5
+
+INCBIN "baserom.gbc",$5cb8b,5
+
 VermilionGymText2: ; 0x5cb90
     db $08 ; asm
     ld hl, $4af8
@@ -25513,6 +31779,7 @@ VermilionGymText2: ; 0x5cb90
     jp $24d7
 
 INCBIN "baserom.gbc",$5cb9a,$5cba9 - $5cb9a
+
 VermilionGymText3: ; 0x5cba9
     db $08 ; asm
     ld hl, $4b04
@@ -25520,6 +31787,7 @@ VermilionGymText3: ; 0x5cba9
     jp $24d7
 
 INCBIN "baserom.gbc",$5cbb3,$5cbc2 - $5cbb3
+
 VermilionGymText4: ; 0x5cbc2
     db $08 ; asm
     ld hl, $4b10
@@ -25527,6 +31795,7 @@ VermilionGymText4: ; 0x5cbc2
     jp $24d7
 
 INCBIN "baserom.gbc",$5cbcc,$5cbdb - $5cbcc
+
 VermilionGymText5: ; 0x5cbdb
     db $08 ; asm
     ld a, [$d72a]
@@ -25542,6 +31811,7 @@ VermilionGymText5: ; 0x5cbdb
     jp $24d7
 
 INCBIN "baserom.gbc",$5cbf4,$a
+
 VermilionGymObject: ; 0x5cbfe (size=58)
     db $3 ; border tile
 
@@ -25568,12 +31838,18 @@ VermilionGymBlocks: ; 45
 CopycatsHouseF2_h: ; 0x5cc65 to 0x5cc71 (12 bytes) (id=176)
     db $04 ; tileset
     db $04, $04 ; dimensions (y, x)
-    dw $4010, $4c74, $4c71 ; blocks, texts, scripts
+    dw $4010, CopycatsHouseF2Texts, CopycatsHouseF2Script ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $4d21 ; objects
+    dw CopycatsHouseF2Object ; objects
 
-INCBIN "baserom.gbc",$5cc71,$5cc82 - $5cc71
+CopycatsHouseF2Script: ; 0x5cc71
+    jp $3c3c
+; 0x5cc74
+
+CopycatsHouseF2Texts: ; 0x5cc74
+    dw CopycatsHouseF2Text1, CopycatsHouseF2Text2, CopycatsHouseF2Text3, CopycatsHouseF2Text4, CopycatsHouseF2Text5, CopycatsHouseF2Text6, CopycatsHouseF2Text7
+
 CopycatsHouseF2Text1: ; 0x5cc82
     db $08 ; asm
     ld a, [$d7af]
@@ -25639,6 +31915,7 @@ CopycatsHouseF2Text7: ; 0x5cd03
     jp $24d7
 
 INCBIN "baserom.gbc",$5cd17,$a
+
 CopycatsHouseF2Object: ; 0x5cd21 (size=48)
     db $a ; border tile
 
@@ -25662,12 +31939,28 @@ CopycatsHouseF2Object: ; 0x5cd21 (size=48)
 FightingDojo_h: ; 0x5cd51 to 0x5cd5d (12 bytes) (id=177)
     db $05 ; tileset
     db $06, $05 ; dimensions (y, x)
-    dw FightingDojoBlocks, $4e03, $4d5d ; blocks, texts, scripts
+    dw FightingDojoBlocks, FightingDojoTexts, FightingDojoScript ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $4f9b ; objects
+    dw FightingDojoObject ; objects
 
-INCBIN "baserom.gbc",$5cd5d,$5ce44 - $5cd5d
+FightingDojoScript: ; 0x5cd5d
+    call $3c3c
+    ld hl, $4e13
+    ld de, $4d7b
+    ld a, [$d642]
+    call $3160
+    ld [$d642], a
+    ret
+; 0x5cd70
+
+INCBIN "baserom.gbc",$5cd70,$93
+
+FightingDojoTexts: ; 0x5ce03
+    dw FightingDojoText1, FightingDojoText2, FightingDojoText3, FightingDojoText4, FightingDojoText5, FightingDojoText6, FightingDojoText7, FightingDojoText8
+
+INCBIN "baserom.gbc",$5ce13,$31
+
 FightingDojoText1: ; 0x5ce44
     db $08 ; asm
     ld a, [$d7b1]
@@ -25699,7 +31992,13 @@ FightingDojoText1: ; 0x5ce44
 .asm_9dba4 ; 0x5ce8b
     jp $24d7
 
-INCBIN "baserom.gbc",$5ce8e,$5cea2 - $5ce8e
+INCBIN "baserom.gbc",$5ce8e,$5ce98 - $5ce8e
+
+FightingDojoText8: ; 0x5ce98
+INCBIN "baserom.gbc",$5ce98,5
+
+INCBIN "baserom.gbc",$5ce9d,5
+
 FightingDojoText2: ; 0x5cea2
     db $08 ; asm
     ld hl, $4e13
@@ -25707,6 +32006,7 @@ FightingDojoText2: ; 0x5cea2
     jp $24d7
 
 INCBIN "baserom.gbc",$5ceac,$5cebb - $5ceac
+
 FightingDojoText3: ; 0x5cebb
     db $08 ; asm
     ld hl, $4e1f
@@ -25714,6 +32014,7 @@ FightingDojoText3: ; 0x5cebb
     jp $24d7
 
 INCBIN "baserom.gbc",$5cec5,$5ced4 - $5cec5
+
 FightingDojoText4: ; 0x5ced4
     db $08 ; asm
     ld hl, $4e2b
@@ -25721,6 +32022,7 @@ FightingDojoText4: ; 0x5ced4
     jp $24d7
 
 INCBIN "baserom.gbc",$5cede,$5ceed - $5cede
+
 FightingDojoText5: ; 0x5ceed
     db $08 ; asm
     ld hl, $4e37
@@ -25728,6 +32030,7 @@ FightingDojoText5: ; 0x5ceed
     jp $24d7
 
 INCBIN "baserom.gbc",$5cef7,$5cf06 - $5cef7
+
 FightingDojoText6: ; 0x5cf06
     db $08 ; asm
     ld a, [$d7b1]
@@ -25761,6 +32064,7 @@ FightingDojoText6: ; 0x5cf06
     jp $24d7
 
 INCBIN "baserom.gbc",$5cf49,$5cf4e - $5cf49
+
 FightingDojoText7: ; 0x5cf4e
     db $08 ; asm
     ld a, [$d7b1]
@@ -25794,6 +32098,7 @@ FightingDojoText7: ; 0x5cf4e
     jp $24d7
 
 INCBIN "baserom.gbc",$5cf91,$a
+
 FightingDojoObject: ; 0x5cf9b (size=72)
     db $3 ; border tile
 
@@ -25822,12 +32127,32 @@ FightingDojoBlocks: ; 30
 SaffronGym_h: ; 0x5d001 to 0x5d00d (12 bytes) (id=178)
     db $16 ; tileset
     db $09, $0a ; dimensions (y, x)
-    dw SaffronGymBlocks, $50ab, $500d ; blocks, texts, scripts
+    dw SaffronGymBlocks, SaffronGymTexts, SaffronGymScript ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $5259 ; objects
+    dw SaffronGymObject ; objects
 
-INCBIN "baserom.gbc",$5d00d,$5d118 - $5d00d
+SaffronGymScript: ; 0x5d00d
+    ld hl, $d126
+    bit 6, [hl]
+    res 6, [hl]
+    call nz, $502a
+    call $3c3c
+    ld hl, $50c3
+    ld de, $5053
+    ld a, [$d65c]
+    call $3160
+    ld [$d65c], a
+    ret
+; 0x5d02a
+
+INCBIN "baserom.gbc",$5d02a,$81
+
+SaffronGymTexts: ; 0x5d0ab
+    dw SaffronGymText1, SaffronGymText2, SaffronGymText3, SaffronGymText4, SaffronGymText5, SaffronGymText6, SaffronGymText7, SaffronGymText8, SaffronGymText9, SaffronGymText10, SaffronGymText11, SaffronGymText12
+
+INCBIN "baserom.gbc",$5d0bd + 6,$5b - 6
+
 SaffronGymText1: ; 0x5d118
     db $08 ; asm
     ld a, [$d7b3]
@@ -25862,7 +32187,19 @@ SaffronGymText1: ; 0x5d118
 .asm_34c2c ; 0x5d15f
     jp $24d7
 
-INCBIN "baserom.gbc",$5d162,$5d187 - $5d162
+INCBIN "baserom.gbc",$5d162,$5d173 - $5d162
+
+SaffronGymText10: ; 0x5d173
+INCBIN "baserom.gbc",$5d173,5
+
+SaffronGymText11: ; 0x5d178
+INCBIN "baserom.gbc",$5d178,5
+
+INCBIN "baserom.gbc",$5d17d,$5d182 - $5d17d
+
+SaffronGymText12: ; 0x5d182
+INCBIN "baserom.gbc",$5d182,5
+
 SaffronGymText2: ; 0x5d187
     db $08 ; asm
     ld hl, $50c3
@@ -25920,6 +32257,7 @@ SaffronGymText9: ; 0x5d1cd
     jp $24d7
 
 INCBIN "baserom.gbc",$5d1e6,$73
+
 SaffronGymObject: ; 0x5d259 (size=330)
     db $2e ; border tile
 
@@ -26010,12 +32348,17 @@ SaffronGymBlocks: ; 90
 SaffronMart_h: ; 0x5d3fd to 0x5d409 (12 bytes) (id=180)
     db $02 ; tileset
     db $04, $04 ; dimensions (y, x)
-    dw $4000, $540c, $5409 ; blocks, texts, scripts
+    dw $4000, SaffronMartTexts, SaffronMartScript ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $541c ; objects
+    dw SaffronMartObject ; objects
 
-INCBIN "baserom.gbc",$5d409,$5d412 - $5d409
+SaffronMartScript: ; 0x5d409
+    jp $3c3c
+; 0x5d40c
+
+SaffronMartTexts: ; 0x5d40c
+    dw SaffronMartText1, SaffronMartText2, SaffronMartText3
 
 SaffronMartText2: ; 0x5d412
     TX_FAR _SaffronMartText2
@@ -26046,12 +32389,26 @@ SaffronMartObject: ; 0x5d41c (size=38)
 SilphCo1_h: ; 0x5d442 to 0x5d44e (12 bytes) (id=181)
     db $16 ; tileset
     db $09, $0f ; dimensions (y, x)
-    dw SilphCo1Blocks, $5469, $544e ; blocks, texts, scripts
+    dw SilphCo1Blocks, SilphCo1Texts, SilphCo1Script ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $5470 ; objects
+    dw SilphCo1Object ; objects
 
-INCBIN "baserom.gbc",$5d44e,$5d469 - $5d44e
+SilphCo1Script: ; 0x5d44e
+    call $3c3c
+    ld a, [$d838]
+    bit 7, a
+    ret z
+    ld hl, $d7b9
+    bit 7, [hl]
+    set 7, [hl]
+    ret nz
+    ld a, $4c
+    ld [$cc4d], a
+    ld a, $15
+    jp $3e6d
+; 0x5d469
+
 SilphCo1Texts: ; 0x5d469
     dw SilphCo1Text1
 
@@ -26087,12 +32444,17 @@ SilphCo1Blocks: ; 135
 SaffronPokecenter_h: ; 0x5d529 to 0x5d535 (12 bytes) (id=182)
     db $06 ; tileset
     db $04, $07 ; dimensions (y, x)
-    dw $4064, $553b, $5535 ; blocks, texts, scripts
+    dw $4064, $553b, SaffronPokecenterScript ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $554f ; objects
+    dw SaffronPokecenterObject ; objects
 
-INCBIN "baserom.gbc",$5d535,$5d544 - $5d535
+SaffronPokecenterScript: ; 0x5d535
+    call $22fa
+    jp $3c3c
+; 0x5d53b
+
+INCBIN "baserom.gbc",$5d53b,$9
 
 SaffronPokecenterText2: ; maybe
 SaffronPokecenterText1: ; 0x5d543
@@ -26104,7 +32466,8 @@ SaffronPokecenterText3: ; 0x5d549
     TX_FAR _SaffronPokecenterText3
     db $50
 
-INCBIN "baserom.gbc",$5d54e,$1
+SaffronPokecenterText4:
+    db $f6
 
 SaffronPokecenterObject: ; 0x5d54f (size=44)
     db $0 ; border tile
@@ -26128,12 +32491,15 @@ SaffronPokecenterObject: ; 0x5d54f (size=44)
 ViridianForestexit_h: ; 0x5d57b to 0x5d587 (12 bytes) (id=47)
     db $09 ; tileset
     db $04, $05 ; dimensions (y, x)
-    dw ViridianForestexitBlocks, $558a, $5587 ; blocks, texts, scripts
+    dw ViridianForestexitBlocks, ViridianForestexitTexts, ViridianForestexitScript ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $5598 ; objects
+    dw ViridianForestexitObject ; objects
 
-INCBIN "baserom.gbc",$5d587,$5d58a - $5d587
+ViridianForestexitScript: ; 0x5d587
+    jp $3c3c
+; 0x5d58a
+
 ViridianForestexitTexts: ; 0x5d58a
     dw ViridianForestexitText1, ViridianForestexitText2
 
@@ -26169,12 +32535,18 @@ ViridianForestexitObject: ; 0x5d598 (size=48)
 Route2Gate_h: ; 0x5d5c8 to 0x5d5d4 (12 bytes) (id=49)
     db $0c ; tileset
     db $04, $05 ; dimensions (y, x)
-    dw $4090, $55d7, $55d4 ; blocks, texts, scripts
+    dw $4090, Route2GateTexts, Route2GateScript ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $5620 ; objects
+    dw Route2GateObject ; objects
 
-INCBIN "baserom.gbc",$5d5d4,$5d5db - $5d5d4
+Route2GateScript: ; 0x5d5d4
+    jp $3c3c
+; 0x5d5d7
+
+Route2GateTexts: ; 0x5d5d7
+    dw Route2GateText1, Route2GateText2
+
 Route2GateText1: ; 0x5d5db
     db $08 ; asm
     ld a, [$d7c2]
@@ -26233,12 +32605,15 @@ Route2GateObject: ; 0x5d620 (size=48)
 ViridianForestEntrance_h: ; 0x5d650 to 0x5d65c (12 bytes) (id=50)
     db $09 ; tileset
     db $04, $05 ; dimensions (y, x)
-    dw $4090, $565f, $565c ; blocks, texts, scripts
+    dw $4090, ViridianForestEntranceTexts, ViridianForestEntranceScript ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $566d ; objects
+    dw ViridianForestEntranceObject ; objects
 
-INCBIN "baserom.gbc",$5d65c,$5d65f - $5d65c
+ViridianForestEntranceScript: ; 0x5d65c
+    jp $3c3c
+; 0x5d65f
+
 ViridianForestEntranceTexts: ; 0x5d65f
     dw ViridianForestEntranceText1, ViridianForestEntranceText2
 
@@ -26274,12 +32649,22 @@ ViridianForestEntranceObject: ; 0x5d66d (size=48)
 UndergroundTunnelEntranceRoute5_h: ; 0x5d69d to 0x5d6a9 (12 bytes) (id=71)
     db $0c ; tileset
     db $04, $04 ; dimensions (y, x)
-    dw UndergroundTunnelEntranceRoute5Blocks, $56b0, $56a9 ; blocks, texts, scripts
+    dw UndergroundTunnelEntranceRoute5Blocks, UndergroundTunnelEntranceRoute5Texts, UndergroundTunnelEntranceRoute5Script ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $56c1 ; objects
+    dw UndergroundTunnelEntranceRoute5Object ; objects
 
-INCBIN "baserom.gbc",$5d6a9,$5d6b2 - $5d6a9
+UndergroundTunnelEntranceRoute5Script: ; 0x5d6a9
+    ld a, $10
+    ld [$d365], a
+    ret
+; 0x5d6af
+
+INCBIN "baserom.gbc",$5d6af,$1
+
+UndergroundTunnelEntranceRoute5Texts: ; 0x5d6b0
+    dw UndergroundTunnelEntranceRoute5Text1
+
 UndergroundTunnelEntranceRoute5Text1: ; 0x5d6b2
     db $08 ; asm
     ld a, $9
@@ -26310,12 +32695,17 @@ UndergroundTunnelEntranceRoute5Object: ; 0x5d6c1 (size=34)
 UndergroundTunnelEntranceRoute6_h: ; 0x5d6e3 to 0x5d6ef (12 bytes) (id=74)
     db $0c ; tileset
     db $04, $04 ; dimensions (y, x)
-    dw $4080, $56f7, $56ef ; blocks, texts, scripts
+    dw $4080, UndergroundTunnelEntranceRoute6Texts, UndergroundTunnelEntranceRoute6Script ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $56fe ; objects
+    dw UndergroundTunnelEntranceRoute6Object ; objects
 
-INCBIN "baserom.gbc",$5d6ef,$5d6f7 - $5d6ef
+UndergroundTunnelEntranceRoute6Script: ; 0x5d6ef
+    ld a, $11
+    ld [$d365], a
+    jp $3c3c
+; 0x5d6f7
+
 UndergroundTunnelEntranceRoute6Texts: ; 0x5d6f7
     dw UndergroundTunnelEntranceRoute6Text1
 
@@ -26346,12 +32736,17 @@ UndergroundTunnelEntranceRoute6Object: ; 0x5d6fe (size=34)
 UndergroundPathEntranceRoute7_h: ; 0x5d720 to 0x5d72c (12 bytes) (id=77)
     db $0c ; tileset
     db $04, $04 ; dimensions (y, x)
-    dw $4080, $5734, $572c ; blocks, texts, scripts
+    dw $4080, UndergroundPathEntranceRoute7Texts, UndergroundPathEntranceRoute7Script ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $573b ; objects
+    dw UndergroundPathEntranceRoute7Object ; objects
 
-INCBIN "baserom.gbc",$5d72c,$5d734 - $5d72c
+UndergroundPathEntranceRoute7Script: ; 0x5d72c
+    ld a, $12
+    ld [$d365], a
+    jp $3c3c
+; 0x5d734
+
 UndergroundPathEntranceRoute7Texts: ; 0x5d734
     dw UndergroundPathEntranceRoute7Text1
 
@@ -26383,12 +32778,29 @@ INCBIN "baserom.gbc",$5d75d,$52
 SilphCo9_h: ; 0x5d7af to 0x5d7bb (12 bytes) (id=233)
     db $16 ; tileset
     db $09, $0d ; dimensions (y, x)
-    dw SilphCo9Blocks, $588b, $57bb ; blocks, texts, scripts
+    dw SilphCo9Blocks, SilphCo9Texts, SilphCo9Script ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $593f ; objects
+    dw SilphCo9Object ; objects
 
-INCBIN "baserom.gbc",$5d7bb,$5d8b8 - $5d7bb
+SilphCo9Script: ; 0x5d7bb
+    call $57d1
+    call $3c3c
+    ld hl, $5893
+    ld de, $5885
+    ld a, [$d64a]
+    call $3160
+    ld [$d64a], a
+    ret
+; 0x5d7d1
+
+INCBIN "baserom.gbc",$5d7d1,$ba
+
+SilphCo9Texts: ; 0x5d88b
+    dw SilphCo9Text1, SilphCo9Text2, SilphCo9Text3, SilphCo9Text4
+
+INCBIN "baserom.gbc",$5d893,$25
+
 SilphCo9Text1: ; 0x5d8b8
     db $08 ; asm
     ld a, [$d838]
@@ -26411,6 +32823,7 @@ SilphCo9Text1: ; 0x5d8b8
     jp $24d7
 
 INCBIN "baserom.gbc",$5d8e5,$5d8f4 - $5d8e5
+
 SilphCo9Text2: ; 0x5d8f4
     db $08 ; asm
     ld hl, $5893
@@ -26430,6 +32843,7 @@ SilphCo9Text4: ; 0x5d908
     jp $24d7
 
 INCBIN "baserom.gbc",$5d912,$2d
+
 SilphCo9Object: ; 0x5d93f (size=74)
     db $2e ; border tile
 
@@ -26461,12 +32875,32 @@ SilphCo9Blocks: ; 117
 VictoryRoad1_h: ; 0x5d9fe to 0x5da0a (12 bytes) (id=108)
     db $11 ; tileset
     db $09, $0a ; dimensions (y, x)
-    dw VictoryRoad1Blocks, $5a5f, $5a0a ; blocks, texts, scripts
+    dw VictoryRoad1Blocks, VictoryRoad1Texts, VictoryRoad1Script ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $5ab8 ; objects
+    dw VictoryRoad1Object ; objects
 
-INCBIN "baserom.gbc",$5da0a,$5da86 - $5da0a
+VictoryRoad1Script: ; 0x5da0a
+    ld hl, $d126
+    bit 5, [hl]
+    res 5, [hl]
+    call nz, $5a27
+    call $3c3c
+    ld hl, $5a6d
+    ld de, $5a3a
+    ld a, [$d651]
+    call $3160
+    ld [$d651], a
+    ret
+; 0x5da27
+
+INCBIN "baserom.gbc",$5da27,$38
+
+VictoryRoad1Texts: ; 0x5da5f
+    dw VictoryRoad1Text1, VictoryRoad1Text2, VictoryRoad1Text3, VictoryRoad1Text4, VictoryRoad1Text5, VictoryRoad1Text6, VictoryRoad1Text7
+
+INCBIN "baserom.gbc",$5da6d,$19
+
 VictoryRoad1Text1: ; 0x5da86
     db $08 ; asm
     ld hl, $5a6d
@@ -26480,6 +32914,7 @@ VictoryRoad1Text2: ; 0x5da90
     jp $24d7
 
 INCBIN "baserom.gbc",$5da9a,$1e
+
 VictoryRoad1Object: ; 0x5dab8 (size=76)
     db $7d ; border tile
 
@@ -26524,12 +32959,15 @@ SSAnne9Blocks: ; 96
 PokemonTower1_h: ; 0x60420 to 0x6042c (12 bytes) (id=142)
     db $0f ; tileset
     db $09, $0a ; dimensions (y, x)
-    dw PokemonTower1Blocks, $442f, $442c ; blocks, texts, scripts
+    dw PokemonTower1Blocks, PokemonTower1Texts, PokemonTower1Script ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $4452 ; objects
+    dw PokemonTower1Object ; objects
 
-INCBIN "baserom.gbc",$6042c,$6042f - $6042c
+PokemonTower1Script: ; 0x6042c
+    jp $3c3c
+; 0x6042f
+
 PokemonTower1Texts: ; 0x6042f
     dw PokemonTower1Text1, PokemonTower1Text2, PokemonTower1Text3, PokemonTower1Text4, PokemonTower1Text5
 
@@ -26581,12 +33019,119 @@ PokemonTower1Blocks: ; 90
 PokemonTower2_h: ; 0x604e6 to 0x604f2 (12 bytes) (id=143)
     db $0f ; tileset
     db $09, $0a ; dimensions (y, x)
-    dw PokemonTower2Blocks, $45db, $44f2 ; blocks, texts, scripts
+    dw PokemonTower2Blocks, PokemonTower2Texts, PokemonTower2Script ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $4646 ; objects
+    dw PokemonTower2Object ; objects
 
-INCBIN "baserom.gbc",$604f2,$605df - $604f2
+PokemonTower2Script: ; 0x604f2
+    call $3c3c
+    ld hl, $4509
+    ld a, [$d62b]
+    jp $3d97
+; 0x604fe
+
+INCBIN "baserom.gbc",$604fe,$60509 - $604fe
+
+PokemonTower2Scripts: ; 0x60509
+    dw PokemonTower2Script0, PokemonTower2Script1, PokemonTower2Script2
+
+PokemonTower2Script0: ; 0x6050f
+    ld a, [$d764]
+    bit 7, a
+    ret nz
+    ld hl, $455e
+    call $34bf
+    ret nc
+    ld a, $ff
+    ld [$c0ee], a
+    call $23b1
+    ld c, $2
+    ld a, $de
+    call $23a1
+    ld hl, $d764
+    res 6, [hl]
+    ld a, [$cd3d]
+    cp $1
+    ld a, $8
+    ld b, $0
+    jr nz, .asm_60544 ; 0x60539 $9
+    ld hl, $d764
+    set 6, [hl]
+    ld a, $2
+    ld b, $c
+.asm_60544
+    ld [$d528], a
+    ld a, $1
+    ld [$ff00+$8c], a
+    ld a, b
+    ld [$ff00+$8d], a
+    call $34a6
+    ld a, $1
+    ld [$ff00+$8c], a
+    call $2920
+    xor a
+    ld [$ff00+$b4], a
+    ld [$ff00+$b3], a
+    ret
+; 0x6055e
+
+INCBIN "baserom.gbc",$6055e,$60563 - $6055e
+
+PokemonTower2Script1: ; 0x60563
+    ld a, [$d057]
+    cp $ff
+    jp z, $44fe
+    ld a, $f0
+    ld [$cd6b], a
+    ld hl, $d764
+    set 7, [hl]
+    ld a, $1
+    ld [$ff00+$8c], a
+    call $2920
+    ld de, $45b2
+    ld a, [$d764]
+    bit 6, a
+    jr nz, .asm_60589 ; 0x60584 $3
+    ld de, $45a9
+.asm_60589
+    ld a, $1
+    ld [$ff00+$8c], a
+    call $363a
+    ld a, $ff
+    ld [$c0ee], a
+    call $23b1
+    ld b, $2
+    ld hl, $5b47
+    call Bankswitch
+    ld a, $2
+    ld [$d62b], a
+    ld [$da39], a
+    ret
+; 0x605a9
+
+INCBIN "baserom.gbc",$605a9,$605bb - $605a9
+
+PokemonTower2Script2: ; 0x605bb
+    ld a, [$d730]
+    bit 0, a
+    ret nz
+    ld a, $38
+    ld [$cc4d], a
+    ld a, $11
+    call Predef
+    xor a
+    ld [$cd6b], a
+    call $2307
+    ld a, $0
+    ld [$d62b], a
+    ld [$da39], a
+    ret
+; 0x605db
+
+PokemonTower2Texts: ; 0x605db
+    dw PokemonTower2Text1, PokemonTower2Text2
+
 PokemonTower2Text1: ; 0x605df
     db $08 ; asm
     ld a, [$d764]
@@ -26655,12 +33200,28 @@ PokemonTower2Blocks: ; 90
 PokemonTower3_h: ; 0x606c0 to 0x606cc (12 bytes) (id=144)
     db $0f ; tileset
     db $09, $0a ; dimensions (y, x)
-    dw PokemonTower3Blocks, $46e5, $46cc ; blocks, texts, scripts
+    dw PokemonTower3Blocks, PokemonTower3Texts, PokemonTower3Script ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $475d ; objects
+    dw PokemonTower3Object ; objects
 
-INCBIN "baserom.gbc",$606cc,$60712 - $606cc
+PokemonTower3Script: ; 0x606cc
+    call $3c3c
+    ld hl, $46ed
+    ld de, $46df
+    ld a, [$d62c]
+    call $3160
+    ld [$d62c], a
+    ret
+; 0x606df
+
+INCBIN "baserom.gbc",$606df,$6
+
+PokemonTower3Texts: ; 0x606e5
+    dw PokemonTower3Text1, PokemonTower3Text2, PokemonTower3Text3, PokemonTower3Text4
+
+INCBIN "baserom.gbc",$606ed,$25
+
 PokemonTower3Text1: ; 0x60712
     db $08 ; asm
     ld hl, $46ed
@@ -26680,6 +33241,7 @@ PokemonTower3Text3: ; 0x60726
     jp $24d7
 
 INCBIN "baserom.gbc",$60730,$2d
+
 PokemonTower3Object: ; 0x6075d (size=51)
     db $1 ; border tile
 
@@ -26705,12 +33267,28 @@ PokemonTower3Blocks: ; 90
 PokemonTower4_h: ; 0x607ea to 0x607f6 (12 bytes) (id=145)
     db $0f ; tileset
     db $09, $0a ; dimensions (y, x)
-    dw PokemonTower4Blocks, $480f, $47f6 ; blocks, texts, scripts
+    dw PokemonTower4Blocks, PokemonTower4Texts, PokemonTower4Script ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $488b ; objects
+    dw PokemonTower4Object ; objects
 
-INCBIN "baserom.gbc",$607f6,$60840 - $607f6
+PokemonTower4Script: ; 0x607f6
+    call $3c3c
+    ld hl, $481b
+    ld de, $4809
+    ld a, [$d62d]
+    call $3160
+    ld [$d62d], a
+    ret
+; 0x60809
+
+INCBIN "baserom.gbc",$60809,$6
+
+PokemonTower4Texts: ; 0x6080f
+    dw PokemonTower4Text1, PokemonTower4Text2, PokemonTower4Text3, PokemonTower4Text4, PokemonTower4Text5, PokemonTower4Text6
+
+INCBIN "baserom.gbc",$6081b,$25
+
 PokemonTower4Text1: ; 0x60840
     db $08 ; asm
     ld hl, $481b
@@ -26730,6 +33308,7 @@ PokemonTower4Text3: ; 0x60854
     jp $24d7
 
 INCBIN "baserom.gbc",$6085e,$2d
+
 PokemonTower4Object: ; 0x6088b (size=65)
     db $1 ; border tile
 
@@ -26757,12 +33336,27 @@ PokemonTower4Blocks: ; 90
 PokemonTower5_h: ; 0x60926 to 0x60932 (12 bytes) (id=146)
     db $0f ; tileset
     db $09, $0a ; dimensions (y, x)
-    dw PokemonTower5Blocks, $499b, $4932 ; blocks, texts, scripts
+    dw PokemonTower5Blocks, PokemonTower5Texts, PokemonTower5Script ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $4a48 ; objects
+    dw PokemonTower5Object ; objects
 
-INCBIN "baserom.gbc",$60932,$609da - $60932
+PokemonTower5Script: ; 0x60932
+    call $3c3c
+    ld hl, $49a9
+    ld de, $4945
+    ld a, [$d62e]
+    call $3160
+    ld [$d62e], a
+    ret
+; 0x60945
+
+INCBIN "baserom.gbc",$60945,$56
+
+PokemonTower5Texts: ; 0x6099b
+    dw PokemonTower5Text1, PokemonTower5Text2, PokemonTower5Text3, PokemonTower5Text4, PokemonTower5Text5, PokemonTower5Text6, PokemonTower5Text7
+
+INCBIN "baserom.gbc",$609a9,$31
 
 PokemonTower5Text1: ; 0x609da
     TX_FAR _PokemonTower5Text1
@@ -26775,6 +33369,7 @@ PokemonTower5Text2: ; 0x609df
     jp $24d7
 
 INCBIN "baserom.gbc",$609e9,$609f8 - $609e9
+
 PokemonTower5Text3: ; 0x609f8
     db $08 ; asm
     ld hl, $49b5
@@ -26782,6 +33377,7 @@ PokemonTower5Text3: ; 0x609f8
     jp $24d7
 
 INCBIN "baserom.gbc",$60a02,$60a11 - $60a02
+
 PokemonTower5Text4: ; 0x60a11
     db $08 ; asm
     ld hl, $49c1
@@ -26789,13 +33385,18 @@ PokemonTower5Text4: ; 0x60a11
     jp $24d7
 
 INCBIN "baserom.gbc",$60a1b,$60a2a - $60a1b
+
 PokemonTower5Text5: ; 0x60a2a
     db $08 ; asm
     ld hl, $49cd
     call LoadTrainerHeader
     jp $24d7
 
-INCBIN "baserom.gbc",$60a34,$14
+INCBIN "baserom.gbc",$60a34,$f
+
+PokemonTower5Text7: ; 0x60a43
+INCBIN "baserom.gbc",$60a43,5
+
 PokemonTower5Object: ; 0x60a48 (size=65)
     db $1 ; border tile
 
@@ -26823,12 +33424,28 @@ PokemonTower5Blocks: ; 90
 PokemonTower6_h: ; 0x60ae3 to 0x60aef (12 bytes) (id=147)
     db $0f ; tileset
     db $09, $0a ; dimensions (y, x)
-    dw PokemonTower6Blocks, $4bb1, $4aef ; blocks, texts, scripts
+    dw PokemonTower6Blocks, PokemonTower6Texts, PokemonTower6Script ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $4c5b ; objects
+    dw PokemonTower6Object ; objects
 
-INCBIN "baserom.gbc",$60aef,$60be4 - $60aef
+PokemonTower6Script: ; 0x60aef
+    call $3c3c
+    ld hl, $4bbf
+    ld de, $4b0d
+    ld a, [$d62f]
+    call $3160
+    ld [$d62f], a
+    ret
+; 0x60b02
+
+INCBIN "baserom.gbc",$60b02,$af
+
+PokemonTower6Texts: ; 0x60bb1
+    dw PokemonTower6Text1, PokemonTower6Text2, PokemonTower6Text3, PokemonTower6Text4, PokemonTower6Text5, PokemonTower6Text6, PokemonTower6Text7
+
+INCBIN "baserom.gbc",$60bbb + 4,$29 - 4
+
 PokemonTower6Text1: ; 0x60be4
     db $08 ; asm
     ld hl, $4bbf
@@ -26847,7 +33464,12 @@ PokemonTower6Text3: ; 0x60bf8
     call LoadTrainerHeader
     jp $24d7
 
-INCBIN "baserom.gbc",$60c02,$59
+PokemonTower6Text7: ; 0x60c02
+INCBIN "baserom.gbc",$60c02,$60c56 - $60c02
+
+PokemonTower6Text6: ; 0x60c56
+INCBIN "baserom.gbc",$60c56,$60c5b - $60c56
+
 PokemonTower6Object: ; 0x60c5b (size=58)
     db $1 ; border tile
 
@@ -26876,12 +33498,28 @@ INCBIN "baserom.gbc",$60cef,$a
 PokemonTower7_h: ; 0x60cf9 to 0x60d05 (12 bytes) (id=148)
     db $0f ; tileset
     db $09, $0a ; dimensions (y, x)
-    dw PokemonTower7Blocks, $4e3f, $4d05 ; blocks, texts, scripts
+    dw PokemonTower7Blocks, PokemonTower7Texts, PokemonTower7Script ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $4ef6 ; objects
+    dw PokemonTower7Object ; objects
 
-INCBIN "baserom.gbc",$60d05,$60e6c - $60d05
+PokemonTower7Script: ; 0x60d05
+    call $3c3c
+    ld hl, $4e47
+    ld de, $4d23
+    ld a, [$d630]
+    call $3160
+    ld [$d630], a
+    ret
+; 0x60d18
+
+INCBIN "baserom.gbc",$60d18,$127
+
+PokemonTower7Texts: ; 0x60e3f
+    dw PokemonTower7Text1, PokemonTower7Text2, PokemonTower7Text3, PokemonTower7Text4
+
+INCBIN "baserom.gbc",$60e47,$25
+
 PokemonTower7Text1: ; 0x60e6c
     db $08 ; asm
     ld hl, $4e47
@@ -26926,6 +33564,7 @@ PokemonTower7Text4: ; 0x60e8a
     jp $24d7
 
 INCBIN "baserom.gbc",$60ec4,$32
+
 PokemonTower7Object: ; 0x60ef6 (size=42)
     db $1 ; border tile
 
@@ -26949,12 +33588,15 @@ PokemonTower7Blocks: ; 90
 CeladonMart1_h: ; 0x60f7a to 0x60f86 (12 bytes) (id=122)
     db $12 ; tileset
     db $04, $0a ; dimensions (y, x)
-    dw CeladonMart1Blocks, $4f89, $4f86 ; blocks, texts, scripts
+    dw CeladonMart1Blocks, CeladonMart1Texts, CeladonMart1Script ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $4f9e ; objects
+    dw CeladonMart1Object ; objects
 
-INCBIN "baserom.gbc",$60f86,$60f89 - $60f86
+CeladonMart1Script: ; 0x60f86
+    jp $3c3c
+; 0x60f89
+
 CeladonMart1Texts: ; 0x60f89
     dw CeladonMart1Text1, CeladonMart1Text2, CeladonMart1Text3
 
@@ -27004,12 +33646,27 @@ INCBIN "baserom.gbc",$61006,$fb
 ViridianForest_h: ; 0x61101 to 0x6110d (12 bytes) (id=51)
     db $03 ; tileset
     db $18, $11 ; dimensions (y, x)
-    dw $4000, $5126, $510d ; blocks, texts, scripts
+    dw $4000, ViridianForestTexts, ViridianForestScript ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $51da ; objects
+    dw ViridianForestObject ; objects
 
-INCBIN "baserom.gbc",$6110d,$61167 - $6110d
+ViridianForestScript: ; 0x6110d
+    call $3c3c
+    ld hl, $5142
+    ld de, $5120
+    ld a, [$d618]
+    call $3160
+    ld [$d618], a
+    ret
+; 0x61120
+
+INCBIN "baserom.gbc",$61120,$6
+
+ViridianForestTexts: ; 0x61126
+    dw ViridianForestText1, ViridianForestText2, ViridianForestText3, ViridianForestText4, ViridianForestText5, ViridianForestText6, ViridianForestText7, ViridianForestText8, ViridianForestText9, ViridianForestText10, ViridianForestText11, ViridianForestText12, ViridianForestText13, ViridianForestText14
+
+INCBIN "baserom.gbc",$61142,$25
 
 ViridianForestText1: ; 0x61167
     TX_FAR _ViridianForestText1
@@ -27103,23 +33760,27 @@ ViridianForestObject: ; 0x611da (size=127)
 SSAnne1_h: ; 0x61259 to 0x61265 (12 bytes) (id=95)
     db $0d ; tileset
     db $09, $14 ; dimensions (y, x)
-    dw SSAnne1Blocks, $5269, $5265 ; blocks, texts, scripts
+    dw SSAnne1Blocks, SSAnne1Texts, SSAnne1Script ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $5277 ; objects
+    dw SSAnne1Object ; objects
 
-INCBIN "baserom.gbc",$61265,$6126d - $61265
+SSAnne1Script: ; 0x61265
+    call $3c3c
+    ret
+; 0x61269
+
+SSAnne1Texts: ; 0x61269
+    dw SSAnne1Text1, SSAnne1Text2
 
 SSAnne1Text1: ; 0x6126d
     TX_FAR _SSAnne1Text1
     db $50
 
-
 SSAnne1Text2: ; 0x61272
     TX_FAR _SSAnne1Text2
     db $50
 
-INCBIN "baserom.gbc",$61277,$0
 SSAnne1Object: ; 0x61277 (size=104)
     db $c ; border tile
 
@@ -27161,12 +33822,155 @@ SSAnne1Blocks: ; 180
 SSAnne2_h: ; 0x61393 to 0x6139f (12 bytes) (id=96)
     db $0d ; tileset
     db $09, $14 ; dimensions (y, x)
-    dw SSAnne2Blocks, $54db, $539f ; blocks, texts, scripts
+    dw SSAnne2Blocks, SSAnne2Texts, SSAnne2Script ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $5514 ; objects
+    dw SSAnne2Object ; objects
 
-INCBIN "baserom.gbc",$6139f,$614e1 - $6139f
+SSAnne2Script: ; 0x6139f
+    call $3c3c
+    ld hl, $53b3
+    ld a, [$d665]
+    jp $3d97
+; 0x613ab
+
+INCBIN "baserom.gbc",$613ab,$613b3 - $613ab
+
+SSAnne2Scripts: ; 0x613b3
+    dw SSAnne2Script0, SSAnne2Script1, SSAnne2Script2, SSAnne2Script3, SSAnne2Script4
+
+SSAnne2Script4: ; 0x613bd
+    ret
+; 0x613be
+
+SSAnne2Script0: ; 0x613be
+    ld hl, $5411
+    call $34bf
+    ret nc
+    ld a, $ff
+    ld [$c0ee], a
+    call $23b1
+    ld c, $2
+    ld a, $de
+    call $23a1
+    ld a, [$cd3d]
+    ld [$ff00+$db], a
+    ld a, $71
+    ld [$cc4d], a
+    ld a, $15
+    call Predef
+    call Delay3
+    ld a, $2
+    ld [$ff00+$8c], a
+    call $3541
+    xor a
+    ld [$ff00+$b4], a
+    ld a, $f0
+    ld [$cd6b], a
+    ld a, [$ff00+$db]
+    cp $2
+    jr nz, .asm_61400 ; 0x613f9 $5
+    ld de, $540c
+    jr .asm_61403 ; 0x613fe $3
+.asm_61400
+    ld de, $540d
+.asm_61403
+    call $363a
+    ld a, $1
+    ld [$d665], a
+    ret
+; 0x6140c
+
+INCBIN "baserom.gbc",$6140c,$61430 - $6140c
+
+SSAnne2Script1: ; 0x61430
+    ld a, [$d730]
+    bit 0, a
+    ret nz
+    call $5416
+    xor a
+    ld [$cd6b], a
+    ld a, $2
+    ld [$ff00+$8c], a
+    call $2920
+    call Delay3
+    ld a, $f2
+    ld [$d059], a
+    ld a, [$d715]
+    cp $b1
+    jr nz, .asm_61457 ; 0x61451 $4
+    ld a, $1
+    jr .asm_61461 ; 0x61455 $a
+.asm_61457
+    cp $99
+    jr nz, .asm_6145f ; 0x61459 $4
+    ld a, $2
+    jr .asm_61461 ; 0x6145d $2
+.asm_6145f
+    ld a, $3
+.asm_61461
+    ld [$d05d], a
+    call $5416
+    ld a, $2
+    ld [$d665], a
+    ret
+; 0x6146d
+
+SSAnne2Script2: ; 0x6146d
+    ld a, [$d057]
+    cp $ff
+    jp z, $53ab
+    call $5416
+    ld a, $f0
+    ld [$cd6b], a
+    ld a, $3
+    ld [$ff00+$8c], a
+    call $2920
+    ld a, $2
+    ld [$ff00+$8c], a
+    call $3541
+    ld a, [$d362]
+    cp $25
+    jr nz, .asm_61497 ; 0x61490 $5
+    ld de, $54b9
+    jr .asm_6149a ; 0x61495 $3
+.asm_61497
+    ld de, $54b7
+.asm_6149a
+    ld a, $2
+    ld [$ff00+$8c], a
+    call $363a
+    ld a, $ff
+    ld [$c0ee], a
+    call $23b1
+    ld b, $2
+    ld hl, $5b47
+    call Bankswitch
+    ld a, $3
+    ld [$d665], a
+    ret
+; 0x614b7
+
+INCBIN "baserom.gbc",$614b7,$614be - $614b7
+
+SSAnne2Script3: ; 0x614be
+    ld a, [$d730]
+    bit 0, a
+    ret nz
+    xor a
+    ld [$cd6b], a
+    ld a, $71
+    ld [$cc4d], a
+    ld a, $11
+    call Predef
+    call $2307
+    ld a, $4
+    ld [$d665], a
+    ret
+; 0x614db
+
+SSAnne2Texts: ; 0x614db
+    dw SSAnne2Text1, SSAnne2Text2, SSAnne2Text3
 
 SSAnne2Text1: ; 0x614e1
     TX_FAR _SSAnne2Text1
@@ -27184,7 +33988,12 @@ SSAnne2Text2: ; 0x614e6
     call $3354
     jp $24d7
 ; 0x61500
-INCBIN "baserom.gbc",$61500,$14
+
+INCBIN "baserom.gbc",$61500,$f
+
+SSAnne2Text3: ; 0x6150f
+INCBIN "baserom.gbc",$6150f,5
+
 SSAnne2Object: ; 0x61514 (size=90)
     db $c ; border tile
 
@@ -27222,12 +34031,18 @@ SSAnne2Blocks: ; 180
 SSAnne4_h: ; 0x61622 to 0x6162e (12 bytes) (id=98)
     db $0d ; tileset
     db $04, $0f ; dimensions (y, x)
-    dw SSAnne4Blocks, $5631, $562e ; blocks, texts, scripts
+    dw SSAnne4Blocks, SSAnne4Texts, SSAnne4Script ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $5632 ; objects
+    dw SSAnne4Object ; objects
 
-INCBIN "baserom.gbc",$6162e,$61632 - $6162e
+SSAnne4Script: ; 0x6162e
+    jp $3c3c
+; 0x61631
+
+SSAnne4Texts:
+INCBIN "baserom.gbc",$61631,$1
+
 SSAnne4Object: ; 0x61632 (size=52)
     db $c ; border tile
 
@@ -27257,28 +34072,40 @@ SSAnne4Blocks: ; 60
 SSAnne5_h: ; 0x616a2 to 0x616ae (12 bytes) (id=99)
     db $0d ; tileset
     db $07, $0a ; dimensions (y, x)
-    dw SSAnne5Blocks, $56c7, $56ae ; blocks, texts, scripts
+    dw SSAnne5Blocks, SSAnne5Texts, SSAnne5Script ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $572b ; objects
+    dw SSAnne5Object ; objects
 
-INCBIN "baserom.gbc",$616ae,$616ea - $616ae
+SSAnne5Script: ; 0x616ae
+    call $3c3c
+    ld hl, $56d1
+    ld de, $56c1
+    ld a, [$d617]
+    call $3160
+    ld [$d617], a
+    ret
+; 0x616c1
+
+INCBIN "baserom.gbc",$616c1,$6
+
+SSAnne5Texts: ; 0x616c7
+    dw SSAnne5Text1, SSAnne5Text2, SSAnne5Text3, SSAnne5Text4, SSAnne5Text5
+
+INCBIN "baserom.gbc",$616d1,$19
 
 SSAnne5Text1: ; 0x616ea
     TX_FAR _SSAnne5Text1
     db $50
 
-
 SSAnne5Text2: ; 0x616ef
     TX_FAR _SSAnne5Text2
     db $50
-
 
 SSAnne5Text3: ; 0x616f4
     TX_FAR _SSAnne5Text3
     db $50
 
-INCBIN "baserom.gbc",$616f9,$0
 SSAnne5Text4: ; 0x616f9
     db $08 ; asm
     ld hl, $56d1
@@ -27286,6 +34113,7 @@ SSAnne5Text4: ; 0x616f9
     jp $24d7
 
 INCBIN "baserom.gbc",$61703,$61712 - $61703
+
 SSAnne5Text5: ; 0x61712
     db $08 ; asm
     ld hl, $56dd
@@ -27293,6 +34121,7 @@ SSAnne5Text5: ; 0x61712
     jp $24d7
 
 INCBIN "baserom.gbc",$6171c,$f
+
 SSAnne5Object: ; 0x6172b (size=54)
     db $23 ; border tile
 
@@ -27319,43 +34148,43 @@ SSAnne5Blocks: ; 70
 SSAnne6_h: ; 0x617a7 to 0x617b3 (12 bytes) (id=100)
     db $0d ; tileset
     db $08, $07 ; dimensions (y, x)
-    dw SSAnne6Blocks, $57b7, $57b3 ; blocks, texts, scripts
+    dw SSAnne6Blocks, SSAnne6Texts, SSAnne6Script ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $581b ; objects
+    dw SSAnne6Object ; objects
 
-INCBIN "baserom.gbc",$617b3,$617c5 - $617b3
+SSAnne6Script: ; 0x617b3
+    call $3c3c
+    ret
+; 0x617b7
+
+SSAnne6Texts: ; 0x617b7
+    dw SSAnne6Text1, SSAnne6Text2, SSAnne6Text3, SSAnne6Text4, SSAnne6Text5, SSAnne6Text6, SSAnne6Text7
 
 SSAnne6Text1: ; 0x617c5
     TX_FAR _SSAnne6Text1
     db $50
 
-
 SSAnne6Text2: ; 0x617ca
     TX_FAR _SSAnne6Text2
     db $50
-
 
 SSAnne6Text3: ; 0x617cf
     TX_FAR _SSAnne6Text3
     db $50
 
-
 SSAnne6Text4: ; 0x617d4
     TX_FAR _SSAnne6Text4
     db $50
-
 
 SSAnne6Text5: ; 0x617d9
     TX_FAR _SSAnne6Text5
     db $50
 
-
 SSAnne6Text6: ; 0x617de
     TX_FAR _SSAnne6Text6
     db $50
 
-INCBIN "baserom.gbc",$617e3,$0
 SSAnne6Text7: ; 0x617e3
     db $08 ; asm
     ld hl, $5807
@@ -27377,6 +34206,7 @@ SSAnne6Text7: ; 0x617e3
     jp $24d7
 
 INCBIN "baserom.gbc",$61807,$14
+
 SSAnne6Object: ; 0x6181b (size=54)
     db $c ; border tile
 
@@ -27403,12 +34233,21 @@ SSAnne6Blocks: ; 56
 SSAnne7_h: ; 0x61889 to 0x61895 (12 bytes) (id=101)
     db $0d ; tileset
     db $04, $03 ; dimensions (y, x)
-    dw SSAnne7Blocks, $58a7, $5895 ; blocks, texts, scripts
+    dw SSAnne7Blocks, SSAnne7Texts, SSAnne7Script ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $5946 ; objects
+    dw SSAnne7Object ; objects
 
-INCBIN "baserom.gbc",$61895,$618ad - $61895
+SSAnne7Script: ; 0x61895
+    call $589b
+    jp $3c3c
+; 0x6189b
+
+INCBIN "baserom.gbc",$6189b,$c
+
+SSAnne7Texts: ; 0x618a7
+    dw SSAnne7Text1, SSAnne7Text2, SSAnne7Text3
+
 SSAnne7Text1: ; 0x618ad
     db $08 ; asm
     ld a, [$d803]
@@ -27470,12 +34309,28 @@ SSAnne7Blocks: ; 12
 SSAnne8_h: ; 0x6196a to 0x61976 (12 bytes) (id=102)
     db $0d ; tileset
     db $08, $0c ; dimensions (y, x)
-    dw SSAnne8Blocks, $598f, $5976 ; blocks, texts, scripts
+    dw SSAnne8Blocks, SSAnne8Texts, SSAnne8Script ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $5a60 ; objects
+    dw SSAnne8Object ; objects
 
-INCBIN "baserom.gbc",$61976,$619d6 - $61976
+SSAnne8Script: ; 0x61976
+    call $3c3c
+    ld hl, $59a5
+    ld de, $5989
+    ld a, [$d608]
+    call $3160
+    ld [$d608], a
+    ret
+; 0x61989
+
+INCBIN "baserom.gbc",$61989,$6
+
+SSAnne8Texts: ; 0x6198f
+    dw SSAnne8Text1, SSAnne8Text2, SSAnne8Text3, SSAnne8Text4, SSAnne8Text5, SSAnne8Text6, SSAnne8Text7, SSAnne8Text8, SSAnne8Text9, SSAnne8Text10, SSAnne8Text11
+
+INCBIN "baserom.gbc",$619a5,$31
+
 SSAnne8Text1: ; 0x619d6
     db $08 ; asm
     ld hl, $59a5
@@ -27569,12 +34424,31 @@ SSAnne8Blocks: ; 96
 SSAnne9_h: ; 0x61b3f to 0x61b4b (12 bytes) (id=103)
     db $0d ; tileset
     db $08, $0c ; dimensions (y, x)
-    dw SSAnne9Blocks, $5b6a, $5b4b ; blocks, texts, scripts
+    dw SSAnne9Blocks, SSAnne9Texts, SSAnne9Script ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $5c8d ; objects
+    dw SSAnne9Object ; objects
 
-INCBIN "baserom.gbc",$61b4b,$61bb5 - $61b4b
+SSAnne9Script: ; 0x61b4b
+    ld a, $1
+    ld [$cf0c], a
+    xor a
+    ld [$cc3c], a
+    ld hl, $5b84
+    ld de, $5b64
+    ld a, [$d609]
+    call $3160
+    ld [$d609], a
+    ret
+; 0x61b64
+
+INCBIN "baserom.gbc",$61b64,$6
+
+SSAnne9Texts: ; 0x61b6a
+    dw SSAnne9Text1, SSAnne9Text2, SSAnne9Text3, SSAnne9Text4, SSAnne9Text5, SSAnne9Text6, SSAnne9Text7, SSAnne9Text8, SSAnne9Text9, SSAnne9Text10, SSAnne9Text11, SSAnne9Text12, SSAnne9Text13
+
+INCBIN "baserom.gbc",$61b84,$31
+
 SSAnne9Text1: ; 0x61bb5
     db $08 ; asm
     ld hl, $5b84
@@ -27610,6 +34484,7 @@ SSAnne9Text5: ; 0x61bdd
     jp $24d7
 
 INCBIN "baserom.gbc",$61bf2,$61bf7 - $61bf2
+
 SSAnne9Text7: ; 0x61bf7
     db $08 ; asm
     ld hl, $5c01
@@ -27617,6 +34492,7 @@ SSAnne9Text7: ; 0x61bf7
     jp $24d7
 
 INCBIN "baserom.gbc",$61c01,$61c06 - $61c01
+
 SSAnne9Text8: ; 0x61c06
     db $08 ; asm
     ld hl, $5c10
@@ -27624,6 +34500,7 @@ SSAnne9Text8: ; 0x61c06
     jp $24d7
 
 INCBIN "baserom.gbc",$61c10,$61c15 - $61c10
+
 SSAnne9Text10: ; 0x61c15
     db $08 ; asm
     ld hl, $5c1f
@@ -27631,6 +34508,7 @@ SSAnne9Text10: ; 0x61c15
     jp $24d7
 
 INCBIN "baserom.gbc",$61c1f,$61c24 - $61c1f
+
 SSAnne9Text11: ; 0x61c24
     db $08 ; asm
     ld hl, $5c2e
@@ -27638,6 +34516,7 @@ SSAnne9Text11: ; 0x61c24
     jp $24d7
 
 INCBIN "baserom.gbc",$61c2e,$61c33 - $61c2e
+
 SSAnne9Text12: ; 0x61c33
     db $08 ; asm
     ld hl, $5c3d
@@ -27645,6 +34524,7 @@ SSAnne9Text12: ; 0x61c33
     jp $24d7
 
 INCBIN "baserom.gbc",$61c3d,$61c42 - $61c3d
+
 SSAnne9Text13: ; 0x61c42
     db $08 ; asm
     ld hl, $5c4c
@@ -27652,6 +34532,7 @@ SSAnne9Text13: ; 0x61c42
     jp $24d7
 
 INCBIN "baserom.gbc",$61c4c,$41
+
 SSAnne9Object: ; 0x61c8d (size=188)
     db $c ; border tile
 
@@ -27703,12 +34584,28 @@ SSAnne9Object: ; 0x61c8d (size=188)
 SSAnne10_h: ; 0x61d49 to 0x61d55 (12 bytes) (id=104)
     db $0d ; tileset
     db $08, $0c ; dimensions (y, x)
-    dw $43c0, $5d6e, $5d55 ; blocks, texts, scripts
+    dw $43c0, SSAnne10Texts, SSAnne10Script ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $5e75 ; objects
+    dw SSAnne10Object ; objects
 
-INCBIN "baserom.gbc",$61d55,$61dcd - $61d55
+SSAnne10Script: ; 0x61d55
+    call $3c3c
+    ld hl, $5d84
+    ld de, $5d68
+    ld a, [$d629]
+    call $3160
+    ld [$d629], a
+    ret
+; 0x61d68
+
+INCBIN "baserom.gbc",$61d68,$6
+
+SSAnne10Texts: ; 0x61d6e
+    dw SSAnne10Text1, SSAnne10Text2, SSAnne10Text3, SSAnne10Text4, SSAnne10Text5, SSAnne10Text6, SSAnne10Text7, SSAnne10Text8, SSAnne10Text9, SSAnne10Text10, SSAnne10Text11
+
+INCBIN "baserom.gbc",$61d84,$49
+
 SSAnne10Text1: ; 0x61dcd
     db $08 ; asm
     ld hl, $5d84
@@ -27803,12 +34700,18 @@ SSAnne10Object: ; 0x61e75 (size=165)
 UndergroundPathNS_h: ; 0x61f1a to 0x61f26 (12 bytes) (id=119)
     db $0b ; tileset
     db $18, $04 ; dimensions (y, x)
-    dw UndergroundPathNSBlocks, $5f29, $5f26 ; blocks, texts, scripts
+    dw UndergroundPathNSBlocks, UndergroundPathNSTexts, UndergroundPathNSScript ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $5f2a ; objects
+    dw UndergroundPathNSObject ; objects
 
-INCBIN "baserom.gbc",$61f26,$61f2a - $61f26
+UndergroundPathNSScript: ; 0x61f26
+    jp $3c3c
+; 0x61f29
+
+UndergroundPathNSTexts:
+INCBIN "baserom.gbc",$61f29,$1
+
 UndergroundPathNSObject: ; 0x61f2a (size=20)
     db $1 ; border tile
 
@@ -27827,12 +34730,17 @@ UndergroundPathNSObject: ; 0x61f2a (size=20)
 UndergroundPathWE_h: ; 0x61f3e to 0x61f4a (12 bytes) (id=121)
     db $0b ; tileset
     db $04, $19 ; dimensions (y, x)
-    dw $41f4, $5f4d, $5f4a ; blocks, texts, scripts
+    dw $41f4, $5f4d, UndergroundPathWEScript ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $5f4e ; objects
+    dw UndergroundPathWEObject ; objects
 
-INCBIN "baserom.gbc",$61f4a,$61f4e - $61f4a
+UndergroundPathWEScript: ; 0x61f4a
+    jp $3c3c
+; 0x61f4d
+
+INCBIN "baserom.gbc",$61f4d,$1
+
 UndergroundPathWEObject: ; 0x61f4e (size=20)
     db $1 ; border tile
 
@@ -27851,12 +34759,17 @@ UndergroundPathWEObject: ; 0x61f4e (size=20)
 DiglettsCave_h: ; 0x61f62 to 0x61f6e (12 bytes) (id=197)
     db $11 ; tileset
     db $12, $14 ; dimensions (y, x)
-    dw DiglettsCaveBlocks, $5f71, $5f6e ; blocks, texts, scripts
+    dw DiglettsCaveBlocks, $5f71, DiglettsCaveScript ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $5f72 ; objects
+    dw DiglettsCaveObject ; objects
 
-INCBIN "baserom.gbc",$61f6e,$61f72 - $61f6e
+DiglettsCaveScript: ; 0x61f6e
+    jp $3c3c
+; 0x61f71
+
+INCBIN "baserom.gbc",$61f71,$1
+
 DiglettsCaveObject: ; 0x61f72 (size=20)
     db $19 ; border tile
 
@@ -27878,12 +34791,29 @@ DiglettsCaveBlocks: ; 360
 SilphCo11_h: ; 0x620ee to 0x620fa (12 bytes) (id=235)
     db $10 ; tileset
     db $09, $09 ; dimensions (y, x)
-    dw SilphCo11Blocks, $62b7, $60fa ; blocks, texts, scripts
+    dw SilphCo11Blocks, SilphCo11Texts, SilphCo11Script ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $6380 ; objects
+    dw SilphCo11Object ; objects
 
-INCBIN "baserom.gbc",$620fa,$622dc - $620fa
+SilphCo11Script: ; 0x620fa
+    call $6110
+    call $3c3c
+    ld hl, $62c3
+    ld de, $61cf
+    ld a, [$d659]
+    call $3160
+    ld [$d659], a
+    ret
+; 0x62110
+
+INCBIN "baserom.gbc",$62110,$1a7
+
+SilphCo11Texts: ; 0x622b7
+    dw SilphCo11Text1, SilphCo11Text2, SilphCo11Text3, SilphCo11Text4, SilphCo11Text5, SilphCo11Text6
+
+INCBIN "baserom.gbc",$622c3,$19
+
 SilphCo11Text1: ; 0x622dc
     db $08 ; asm
     ld a, [$d838]
@@ -27918,7 +34848,11 @@ SilphCo11Text3: ; 0x6232b
     TX_FAR _SilphCo11Text3
     db $50
 
-INCBIN "baserom.gbc",$62330,$6233a - $62330
+INCBIN "baserom.gbc",$62330,5
+
+SilphCo11Text6: ; 0x62335
+INCBIN "baserom.gbc",$62335,5
+
 SilphCo11Text4: ; 0x6233a
     db $08 ; asm
     ld hl, $62c3
@@ -27926,6 +34860,7 @@ SilphCo11Text4: ; 0x6233a
     jp $24d7
 
 INCBIN "baserom.gbc",$62344,$62353 - $62344
+
 SilphCo11Text5: ; 0x62353
     db $08 ; asm
     ld hl, $62cf
@@ -27933,6 +34868,7 @@ SilphCo11Text5: ; 0x62353
     jp $24d7
 
 INCBIN "baserom.gbc",$6235d,$23
+
 SilphCo11Object: ; 0x62380 (size=72)
     db $d ; border tile
 
@@ -27963,32 +34899,33 @@ SilphCo11Blocks: ; 81
 INCBIN "baserom.gbc",$62419,$1be7
 
 SECTION "bank19",DATA,BANK[$19]
+
 Tset00_GFX:
-	INCBIN "baserom.gbc",$64000,$645E0-$64000
+    INCBIN "gfx/tilesets/00.2bpp"
 Tset00_Block:
 	INCBIN "baserom.gbc",$645E0,$64DE0-$645E0
 Tset01_GFX:
-	INCBIN "baserom.gbc",$64DE0,$65270-$64DE0
+    INCBIN "gfx/tilesets/01.2bpp"
 Tset01_Block:
 	INCBIN "baserom.gbc",$65270,$653A0-$65270
 Tset08_GFX:
-	INCBIN "baserom.gbc",$653A0,$65980-$653A0
+    INCBIN "gfx/tilesets/08.2bpp"
 Tset08_Block:
 	INCBIN "baserom.gbc",$65980,$65BB0-$65980
 Tset13_GFX:
-	INCBIN "baserom.gbc",$65BB0,$66190-$65BB0
+    INCBIN "gfx/tilesets/13.2bpp"
 Tset13_Block:
 	INCBIN "baserom.gbc",$66190,$66610-$66190
 Tset0E_GFX:
-	INCBIN "baserom.gbc",$66610,$66BF0-$66610
+    INCBIN "gfx/tilesets/0e.2bpp"
 Tset0E_Block:
 	INCBIN "baserom.gbc",$66BF0,$66D60-$66BF0
 Tset10_GFX:
-	INCBIN "baserom.gbc",$66D60,$67350-$66D60
+    INCBIN "gfx/tilesets/10.2bpp"
 Tset10_Block:
 	INCBIN "baserom.gbc",$67350,$676F0-$67350
 Tset17_GFX:
-	INCBIN "baserom.gbc",$676F0,$67B50-$676F0
+    INCBIN "gfx/tilesets/17.2bpp"
 Tset17_Block:
 	INCBIN "baserom.gbc",$67B50,$68000-$67B50
 
@@ -28024,59 +34961,62 @@ DecrementPP:
 	dec [hl] ; Decrement PP
 	ret
 
-INCBIN "baserom.gbc",$6802F,$6807F-$6802F
+INCBIN "gfx/redgreenversion.1bpp"
+
 Tset05_GFX:
-	INCBIN "baserom.gbc",$6807F,$6867F-$6807F
+    INCBIN "gfx/tilesets/05.2bpp"
 Tset05_Block:
 	INCBIN "baserom.gbc",$6867F,$68DBF-$6867F
 Tset02_GFX:
-	INCBIN "baserom.gbc",$68DBF,$693BF-$68DBF
+    INCBIN "gfx/tilesets/02.2bpp"
 Tset02_Block:
 	INCBIN "baserom.gbc",$693BF,$6960F-$693BF
 Tset09_GFX:
-	INCBIN "baserom.gbc",$6960F,$69BFF-$6960F
+    INCBIN "gfx/tilesets/09.2bpp"
 Tset09_Block:
 	INCBIN "baserom.gbc",$69BFF,$6A3FF-$69BFF
 Tset03_GFX:
-	INCBIN "baserom.gbc",$6A3FF,$6A9FF-$6A3FF
+    INCBIN "gfx/tilesets/03.2bpp"
 Tset03_Block:
 	INCBIN "baserom.gbc",$6A9FF,$6B1FF-$6A9FF
 Tset16_GFX:
-	INCBIN "baserom.gbc",$6B1FF,$6B7FF-$6B1FF
+    INCBIN "gfx/tilesets/16.2bpp"
 Tset16_Block:
 	INCBIN "baserom.gbc",$6B7FF,$6C000-$6B7FF
 
 SECTION "bank1B",DATA,BANK[$1B]
+
 Tset0F_GFX:
-	INCBIN "baserom.gbc",$6C000,$6C5C0-$6C000
+    INCBIN "gfx/tilesets/0f.2bpp"
 Tset0F_Block:
 	INCBIN "baserom.gbc",$6C5C0,$6CCA0-$6C5C0
 Tset11_GFX:
-	INCBIN "baserom.gbc",$6CCA0,$6D0C0-$6CCA0
+    INCBIN "gfx/tilesets/11.2bpp"
 Tset11_Block:
 	INCBIN "baserom.gbc",$6D0C0,$6D8C0-$6D0C0
 Tset12_GFX:
-	INCBIN "baserom.gbc",$6D8C0,$6DEA0-$6D8C0
+    INCBIN "gfx/tilesets/12.2bpp"
 Tset12_Block:
 	INCBIN "baserom.gbc",$6DEA0,$6E390-$6DEA0
 Tset0D_GFX:
-	INCBIN "baserom.gbc",$6E390,$6E930-$6E390
+    INCBIN "gfx/tilesets/0d.2bpp"
 Tset0D_Block:
 	INCBIN "baserom.gbc",$6E930,$6ED10-$6E930
 Tset14_GFX:
-	INCBIN "baserom.gbc",$6ED10,$6F2D0-$6ED10
+    INCBIN "gfx/tilesets/14.2bpp"
 Tset14_Block:
 	INCBIN "baserom.gbc",$6F2D0,$6F670-$6F2D0
 Tset15_GFX:
-	INCBIN "baserom.gbc",$6F670,$6FB20-$6F670
+    INCBIN "gfx/tilesets/15.2bpp"
 Tset15_Block:
 	INCBIN "baserom.gbc",$6FB20,$6FD60-$6FB20
 Tset0B_GFX:
-	INCBIN "baserom.gbc",$6FD60,$6FEF0-$6FD60
+    INCBIN "gfx/tilesets/0b.2bpp"
 Tset0B_Block:
 	INCBIN "baserom.gbc",$6FEF0,$70000-$6FEF0
 
 SECTION "bank1C",DATA,BANK[$1C]
+
 INCBIN "baserom.gbc",$70000,$1100
 
 CompressedMap: ; 5100
@@ -28464,7 +35404,6 @@ Function71c07: ; 0x71c07
 .asm_ee803 ; 0x71c9e
 	ld [$cd12],a
 	ret
-
 
 INCBIN "baserom.gbc",$71CA2,$725C8-$71CA2
 
@@ -29069,12 +36008,31 @@ INCBIN "baserom.gbc",$747de,$74897 - $747de
 ViridianGym_h: ; 0x74897 to 0x748a3 (12 bytes) (id=45)
     db $07 ; tileset
     db $09, $0a ; dimensions (y, x)
-    dw ViridianGymBlocks, $49ec, $48a3 ; blocks, texts, scripts
+    dw ViridianGymBlocks, ViridianGymTexts, ViridianGymScript ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $4bde ; objects
+    dw ViridianGymObject ; objects
 
-INCBIN "baserom.gbc",$748a3,$74a69 - $748a3
+ViridianGymScript: ; 0x748a3
+    ld hl, $48bf
+    ld de, $48cd
+    call $317f
+    call $3c3c
+    ld hl, $4a08
+    ld de, $48e1
+    ld a, [$d5fb]
+    call $3160
+    ld [$d5fb], a
+    ret
+; 0x748bf
+
+INCBIN "baserom.gbc",$748bf,$12d
+
+ViridianGymTexts: ; 0x749ec
+    dw ViridianGymText1, ViridianGymText2, ViridianGymText3, ViridianGymText4, ViridianGymText5, ViridianGymText6, ViridianGymText7, ViridianGymText8, ViridianGymText9, ViridianGymText10, ViridianGymText11, ViridianGymText12, ViridianGymText13, ViridianGymText14
+
+INCBIN "baserom.gbc",$74a02 + 6,$67 - 6
+
 ViridianGymText1: ; 0x74a69
     db $08 ; asm
     ld a, [$d751]
@@ -29119,7 +36077,19 @@ ViridianGymText1: ; 0x74a69
 .asm_6dff7 ; 0x74acb
     jp $24d7
 
-INCBIN "baserom.gbc",$74ace,$74af3 - $74ace
+INCBIN "baserom.gbc",$74ace,$74adf - $74ace
+
+ViridianGymText12: ; 0x74adf
+INCBIN "baserom.gbc",$74adf,5
+
+ViridianGymText13: ; 0x74ae4
+INCBIN "baserom.gbc",$74ae4, 5
+
+INCBIN "baserom.gbc",$74ae9,$74aee - $74ae9
+
+ViridianGymText14: ; 0x74aee
+INCBIN "baserom.gbc",$74aee,5
+
 ViridianGymText2: ; 0x74af3
     db $08 ; asm
     ld hl, $4a08
@@ -29127,6 +36097,7 @@ ViridianGymText2: ; 0x74af3
     jp $24d7
 
 INCBIN "baserom.gbc",$74afd,$74b0c - $74afd
+
 ViridianGymText3: ; 0x74b0c
     db $08 ; asm
     ld hl, $4a14
@@ -29134,6 +36105,7 @@ ViridianGymText3: ; 0x74b0c
     jp $24d7
 
 INCBIN "baserom.gbc",$74b16,$74b25 - $74b16
+
 ViridianGymText4: ; 0x74b25
     db $08 ; asm
     ld hl, $4a20
@@ -29141,6 +36113,7 @@ ViridianGymText4: ; 0x74b25
     jp $24d7
 
 INCBIN "baserom.gbc",$74b2f,$74b3e - $74b2f
+
 ViridianGymText5: ; 0x74b3e
     db $08 ; asm
     ld hl, $4a2c
@@ -29148,6 +36121,7 @@ ViridianGymText5: ; 0x74b3e
     jp $24d7
 
 INCBIN "baserom.gbc",$74b48,$74b57 - $74b48
+
 ViridianGymText6: ; 0x74b57
     db $08 ; asm
     ld hl, $4a38
@@ -29155,6 +36129,7 @@ ViridianGymText6: ; 0x74b57
     jp $24d7
 
 INCBIN "baserom.gbc",$74b61,$74b70 - $74b61
+
 ViridianGymText7: ; 0x74b70
     db $08 ; asm
     ld hl, $4a44
@@ -29162,6 +36137,7 @@ ViridianGymText7: ; 0x74b70
     jp $24d7
 
 INCBIN "baserom.gbc",$74b7a,$74b89 - $74b7a
+
 ViridianGymText8: ; 0x74b89
     db $08 ; asm
     ld hl, $4a50
@@ -29169,6 +36145,7 @@ ViridianGymText8: ; 0x74b89
     jp $24d7
 
 INCBIN "baserom.gbc",$74b93,$74ba2 - $74b93
+
 ViridianGymText9: ; 0x74ba2
     db $08 ; asm
     ld hl, $4a5c
@@ -29176,6 +36153,7 @@ ViridianGymText9: ; 0x74ba2
     jp $24d7
 
 INCBIN "baserom.gbc",$74bac,$74bbb - $74bac
+
 ViridianGymText10: ; 0x74bbb
     db $08 ; asm
     ld a, [$d751]
@@ -29191,6 +36169,7 @@ ViridianGymText10: ; 0x74bbb
     jp $24d7
 
 INCBIN "baserom.gbc",$74bd4,$a
+
 ViridianGymObject: ; 0x74bde (size=105)
     db $3 ; border tile
 
@@ -29223,12 +36202,21 @@ ViridianGymBlocks: ; 90
 PewterMart_h: ; 0x74ca1 to 0x74cad (12 bytes) (id=56)
     db $02 ; tileset
     db $04, $04 ; dimensions (y, x)
-    dw PewterMartBlocks, $4cb6, $4cad ; blocks, texts, scripts
+    dw PewterMartBlocks, PewterMartTexts, PewterMartScript ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $4cda ; objects
+    dw PewterMartObject ; objects
 
-INCBIN "baserom.gbc",$74cad,$74cbc - $74cad
+PewterMartScript: ; 0x74cad
+    call $3c3c
+    ld a, $1
+    ld [$cf0c], a
+    ret
+; 0x74cb6
+
+PewterMartTexts: ; 0x74cb6
+    dw PewterMartText1, PewterMartText2, PewterMartText3
+
 PewterMartText2: ; 0x74cbc
     db $08 ; asm
     ld hl, $4cc6
@@ -29236,6 +36224,7 @@ PewterMartText2: ; 0x74cbc
     jp $24d7
 
 INCBIN "baserom.gbc",$74cc6,$74ccb - $74cc6
+
 PewterMartText3: ; 0x74ccb
     db $08 ; asm
     ld hl, $4cd5
@@ -29243,6 +36232,7 @@ PewterMartText3: ; 0x74ccb
     jp $24d7
 
 INCBIN "baserom.gbc",$74cd5,$5
+
 PewterMartObject: ; 0x74cda (size=38)
     db $0 ; border tile
 
@@ -29264,12 +36254,18 @@ PewterMartObject: ; 0x74cda (size=38)
 UnknownDungeon1_h: ; 0x74d00 to 0x74d0c (12 bytes) (id=228)
     db $11 ; tileset
     db $09, $0f ; dimensions (y, x)
-    dw UnknownDungeon1Blocks, $4d0f, $4d0c ; blocks, texts, scripts
+    dw UnknownDungeon1Blocks, UnknownDungeon1Texts, UnknownDungeon1Script ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $4d15 ; objects
+    dw UnknownDungeon1Object ; objects
 
-INCBIN "baserom.gbc",$74d0c,$74d15 - $74d0c
+UnknownDungeon1Script: ; 0x74d0c
+    jp $3c3c
+; 0x74d0f
+
+UnknownDungeon1Texts: ; 0x74d0f
+    dw UnknownDungeon1Text1, UnknownDungeon1Text2, UnknownDungeon1Text3
+
 UnknownDungeon1Object: ; 0x74d15 (size=97)
     db $7d ; border tile
 
@@ -29308,12 +36304,67 @@ UnknownDungeon1Blocks: ; 135
 CeruleanHouse3_h: ; 0x74dfd to 0x74e09 (12 bytes) (id=230)
     db $0d ; tileset
     db $04, $04 ; dimensions (y, x)
-    dw CeruleanHouse3Blocks, $4e13, $4e09 ; blocks, texts, scripts
+    dw CeruleanHouse3Blocks, $4e13, CeruleanHouse3Script ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $4ebe ; objects
+    dw CeruleanHouse3Object ; objects
 
-INCBIN "baserom.gbc",$74e09,$74ebe - $74e09
+CeruleanHouse3Script: ; 0x74e09
+    ld a, $1
+    ld [$cf0c], a
+    dec a
+    ld [$cc3c], a
+    ret
+; 0x74e13
+
+INCBIN "baserom.gbc",$74e13,$2
+
+CeruleanHouse3Text1: ; 0x74e15
+    db $8
+    ld hl, $4e77
+    call PrintText
+    xor a
+    ld [$cc26], a
+    ld [$cc36], a
+.asm_74e23
+    ld hl, $4e7c
+    call PrintText
+    ld hl, $4e6d
+    call $2a5a
+    ld hl, $cf7b
+    ld a, l
+    ld [$cf8b], a
+    ld a, h
+    ld [$cf8c], a
+    xor a
+    ld [$cf93], a
+    ld [$cc35], a
+    ld a, $4
+    ld [$cf94], a
+    call $2be6
+    jr c, .asm_74e60 ; 0x74e49 $15
+    ld hl, $4e86
+    ld a, [$cf91]
+    sub $15
+    add a
+    ld d, $0
+    ld e, a
+    add hl, de
+    ld a, [hli]
+    ld h, [hl]
+    ld l, a
+    call PrintText
+    jr .asm_74e23 ; 0x74e5e $c3
+.asm_74e60
+    xor a
+    ld [$cc36], a
+    ld hl, $4e81
+    call PrintText
+    jp $24d7
+; 0x74e6d
+
+INCBIN "baserom.gbc",$74e6d,$51
+
 CeruleanHouse3Object: ; 0x74ebe (size=34)
     db $c ; border tile
 
@@ -29337,12 +36388,16 @@ INCBIN "baserom.gbc",$74ee0,$12c
 FuchsiaHouse1_h: ; 0x7500c to 0x75018 (12 bytes) (id=153)
     db $08 ; tileset
     db $04, $04 ; dimensions (y, x)
-    dw FuchsiaHouse1Blocks, $501c, $5018 ; blocks, texts, scripts
+    dw FuchsiaHouse1Blocks, FuchsiaHouse1Texts, FuchsiaHouse1Script ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $5031 ; objects
+    dw FuchsiaHouse1Object ; objects
 
-INCBIN "baserom.gbc",$75018,$7501c - $75018
+FuchsiaHouse1Script: ; 0x75018
+    call $3c3c
+    ret
+; 0x7501c
+
 FuchsiaHouse1Texts: ; 0x7501c
     dw FuchsiaHouse1Text1, FuchsiaHouse1Text2, FuchsiaHouse1Text3
 
@@ -29379,12 +36434,17 @@ FuchsiaHouse1Object: ; 0x75031 (size=38)
 FuchsiaPokecenter_h: ; 0x75057 to 0x75063 (12 bytes) (id=154)
     db $06 ; tileset
     db $04, $07 ; dimensions (y, x)
-    dw FuchsiaPokecenterBlocks, $5069, $5063 ; blocks, texts, scripts
+    dw FuchsiaPokecenterBlocks, $5069, FuchsiaPokecenterScript ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $507d ; objects
+    dw FuchsiaPokecenterObject ; objects
 
-INCBIN "baserom.gbc",$75063,$75072 - $75063
+FuchsiaPokecenterScript: ; 0x75063
+    call $22fa
+    jp $3c3c
+; 0x75069
+
+INCBIN "baserom.gbc",$75069,$9
 
 FuchsiaPokecenterText2:
 FuchsiaPokecenterText1: ; 0x75071 or 0x75072
@@ -29395,7 +36455,8 @@ FuchsiaPokecenterText3: ; 0x75077
     TX_FAR _FuchsiaPokecenterText3
     db $50
 
-INCBIN "baserom.gbc",$7507c,$1
+FuchsiaPokecenterText4: ; 0x7507c
+    db $f6
 
 FuchsiaPokecenterObject: ; 0x7507d (size=44)
     db $0 ; border tile
@@ -29419,12 +36480,18 @@ FuchsiaPokecenterObject: ; 0x7507d (size=44)
 FuchsiaHouse2_h: ; 0x750a9 to 0x750b5 (12 bytes) (id=155)
     db $14 ; tileset
     db $04, $05 ; dimensions (y, x)
-    dw FuchsiaHouse2Blocks, $50b8, $50b5 ; blocks, texts, scripts
+    dw FuchsiaHouse2Blocks, FuchsiaHouse2Texts, FuchsiaHouse2Script ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $5180 ; objects
+    dw FuchsiaHouse2Object ; objects
 
-INCBIN "baserom.gbc",$750b5,$750c2 - $750b5
+FuchsiaHouse2Script: ; 0x750b5
+    jp $3c3c
+; 0x750b8
+
+FuchsiaHouse2Texts: ; 0x750b8
+    dw FuchsiaHouse2Text1, FuchsiaHouse2Text2, FuchsiaHouse2Text3, FuchsiaHouse2Text4, FuchsiaHouse2Text5
+
 FuchsiaHouse2Text1: ; 0x750c2
     db $08 ; asm
     ld a, [$d78e]
@@ -29520,18 +36587,91 @@ FuchsiaHouse2Blocks: ; 20
 SafariZoneEntrance_h: ; 0x751c1 to 0x751cd (12 bytes) (id=156)
     db $0c ; tileset
     db $03, $04 ; dimensions (y, x)
-    dw SafariZoneEntranceBlocks, $52b9, $51cd ; blocks, texts, scripts
+    dw SafariZoneEntranceBlocks, SafariZoneEntranceTexts, SafariZoneEntranceScript ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $53f5 ; objects
+    dw SafariZoneEntranceObject ; objects
 
-INCBIN "baserom.gbc",$751cd,$752c5 - $751cd
+SafariZoneEntranceScript: ; 0x751cd
+    call $3c3c
+    ld hl, $51d9
+    ld a, [$d61f]
+    jp $3d97
+; 0x751d9
 
+SafariZoneEntranceScripts: ; 0x751d9
+    dw SafariZoneEntranceScript0, SafariZoneEntranceScript1
+
+INCBIN "baserom.gbc",$751dd,$a
+
+SafariZoneEntranceScript0: ; 0x751e7
+    ld hl, $5221
+    call $34bf
+    ret nc
+    ld a, $3
+    ld [$ff00+$8c], a
+    call $2920
+    ld a, $ff
+    ld [$cd6b], a
+    xor a
+    ld [$ff00+$b4], a
+    ld a, $c
+    ld [$c109], a
+    ld a, [$cd3d]
+    cp $1
+    jr z, .asm_7520f ; 0x75207 $6
+    ld a, $2
+    ld [$d61f], a
+    ret
+.asm_7520f
+    ld a, $10
+    ld c, $1
+    call $52a3
+    ld a, $f0
+    ld [$cd6b], a
+    ld a, $1
+    ld [$d61f], a
+    ret
+; 0x75221
+
+INCBIN "baserom.gbc",$75221,$75226 - $75221
+
+SafariZoneEntranceScript1: ; 0x75226
+    call $52b4
+    ret nz
+    xor a
+    ld [$ff00+$b4], a
+    ld [$cd6b], a
+    call $2429
+    ld a, $4
+    ld [$ff00+$8c], a
+    call $2920
+    ld a, $ff
+    ld [$cd6b], a
+    ret
+; 0x75240
+
+INCBIN "baserom.gbc",$75240,$79
+
+SafariZoneEntranceTexts: ; 0x752b9
+    dw SafariZoneEntranceText1, SafariZoneEntranceText2, SafariZoneEntranceText3, SafariZoneEntranceText4, SafariZoneEntranceText5, SafariZoneEntranceText6
+
+SafariZoneEntranceText3:
 SafariZoneEntranceText1: ; 0x752c5
     TX_FAR _SafariZoneEntranceText1
     db $50
 
-INCBIN "baserom.gbc",$752ca,$753ca - $752ca
+SafariZoneEntranceText4:
+INCBIN "baserom.gbc",$752ca,$7536f - $752ca
+
+SafariZoneEntranceText5: ; 0x7536f
+INCBIN "baserom.gbc",$7536f,6
+
+INCBIN "baserom.gbc",$75375,$753c5 - $75375
+
+SafariZoneEntranceText6: ; 0x753c5
+INCBIN "baserom.gbc",$753c5,5
+
 SafariZoneEntranceText2: ; 0x753ca
     db $08 ; asm
     ld hl, $53e6
@@ -29547,6 +36687,7 @@ SafariZoneEntranceText2: ; 0x753ca
     jp $24d7
 
 INCBIN "baserom.gbc",$753e6,$f
+
 SafariZoneEntranceObject: ; 0x753f5 (size=48)
     db $a ; border tile
 
@@ -29574,12 +36715,29 @@ SafariZoneEntranceBlocks: ; 12
 FuchsiaGym_h: ; 0x75431 to 0x7543d (12 bytes) (id=157)
     db $07 ; tileset
     db $09, $05 ; dimensions (y, x)
-    dw FuchsiaGymBlocks, $54d5, $543d ; blocks, texts, scripts
+    dw FuchsiaGymBlocks, FuchsiaGymTexts, FuchsiaGymScript ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $5658 ; objects
+    dw FuchsiaGymObject ; objects
 
-INCBIN "baserom.gbc",$7543d,$75534 - $7543d
+FuchsiaGymScript: ; 0x7543d
+    call $5453
+    call $3c3c
+    ld hl, $54eb
+    ld de, $5482
+    ld a, [$d65b]
+    call $3160
+    ld [$d65b], a
+    ret
+; 0x75453
+
+INCBIN "baserom.gbc",$75453,$82
+
+FuchsiaGymTexts: ; 0x754d5
+    dw FuchsiaGymText1, FuchsiaGymText2, FuchsiaGymText3, FuchsiaGymText4, FuchsiaGymText5, FuchsiaGymText6, FuchsiaGymText7, FuchsiaGymText8, FuchsiaGymText9, FuchsiaGymText10, FuchsiaGymText11
+
+INCBIN "baserom.gbc",$754eb,$49
+
 FuchsiaGymText1: ; 0x75534
     db $08 ; asm
     ld a, [$d792]
@@ -29616,7 +36774,17 @@ FuchsiaGymText1: ; 0x75534
 .asm_e84c6 ; 0x7557e
     jp $24d7
 
-INCBIN "baserom.gbc",$75581,$755a4 - $75581
+INCBIN "baserom.gbc",$75581,$75590 - $75581
+
+FuchsiaGymText9: ; 0x75590
+INCBIN "baserom.gbc",$75590,5
+
+FuchsiaGymText10: ; 0x75595
+INCBIN "baserom.gbc",$75595,$7559f - $75595
+
+FuchsiaGymText11: ; 0x7559f
+INCBIN "baserom.gbc",$7559f,5
+
 FuchsiaGymText2: ; 0x755a4
     db $08 ; asm
     ld hl, $54eb
@@ -29624,6 +36792,7 @@ FuchsiaGymText2: ; 0x755a4
     jp $24d7
 
 INCBIN "baserom.gbc",$755ae,$755bd - $755ae
+
 FuchsiaGymText3: ; 0x755bd
     db $08 ; asm
     ld hl, $54f7
@@ -29631,6 +36800,7 @@ FuchsiaGymText3: ; 0x755bd
     jp $24d7
 
 INCBIN "baserom.gbc",$755c7,$755d6 - $755c7
+
 FuchsiaGymText4: ; 0x755d6
     db $08 ; asm
     ld hl, $5503
@@ -29638,6 +36808,7 @@ FuchsiaGymText4: ; 0x755d6
     jp $24d7
 
 INCBIN "baserom.gbc",$755e0,$755ef - $755e0
+
 FuchsiaGymText5: ; 0x755ef
     db $08 ; asm
     ld hl, $550f
@@ -29645,6 +36816,7 @@ FuchsiaGymText5: ; 0x755ef
     jp $24d7
 
 INCBIN "baserom.gbc",$755f9,$75608 - $755f9
+
 FuchsiaGymText6: ; 0x75608
     db $08 ; asm
     ld hl, $551b
@@ -29652,6 +36824,7 @@ FuchsiaGymText6: ; 0x75608
     jp $24d7
 
 INCBIN "baserom.gbc",$75612,$75621 - $75612
+
 FuchsiaGymText7: ; 0x75621
     db $08 ; asm
     ld hl, $5527
@@ -29659,6 +36832,7 @@ FuchsiaGymText7: ; 0x75621
     jp $24d7
 
 INCBIN "baserom.gbc",$7562b,$7563a - $7562b
+
 FuchsiaGymText8: ; 0x7563a
     db $08 ; asm
     ld a, [$d792]
@@ -29671,6 +36845,7 @@ FuchsiaGymText8: ; 0x7563a
     jp $24d7
 
 INCBIN "baserom.gbc",$7564e,$a
+
 FuchsiaGymObject: ; 0x75658 (size=82)
     db $3 ; border tile
 
@@ -29700,12 +36875,16 @@ FuchsiaGymBlocks: ; 45
 FuchsiaMeetingRoom_h: ; 0x756d7 to 0x756e3 (12 bytes) (id=158)
     db $14 ; tileset
     db $04, $07 ; dimensions (y, x)
-    dw FuchsiaMeetingRoomBlocks, $56e7, $56e3 ; blocks, texts, scripts
+    dw FuchsiaMeetingRoomBlocks, FuchsiaMeetingRoomTexts, FuchsiaMeetingRoomScript ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $56fc ; objects
+    dw FuchsiaMeetingRoomObject ; objects
 
-INCBIN "baserom.gbc",$756e3,$756e7 - $756e3
+FuchsiaMeetingRoomScript: ; 0x756e3
+    call $3c3c
+    ret
+; 0x756e7
+
 FuchsiaMeetingRoomTexts: ; 0x756e7
     dw FuchsiaMeetingRoomText1, FuchsiaMeetingRoomText2, FuchsiaMeetingRoomText3
 
@@ -29745,12 +36924,73 @@ FuchsiaMeetingRoomBlocks: ; 28
 CinnabarGym_h: ; 0x7573e to 0x7574a (12 bytes) (id=166)
     db $16 ; tileset
     db $09, $0a ; dimensions (y, x)
-    dw $5b26, $589f, $574a ; blocks, texts, scripts
+    dw $5b26, CinnabarGymTexts, CinnabarGymScript ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $5acc ; objects
+    dw CinnabarGymObject ; objects
 
-INCBIN "baserom.gbc",$7574a,$758df - $7574a
+CinnabarGymScript: ; 0x7574a
+    call $5759
+    call $3c3c
+    ld hl, $57a6
+    ld a, [$d65e]
+    jp $3d97
+; 0x75759
+
+INCBIN "baserom.gbc",$75759,$757a6 - $75759
+
+CinnabarGymScripts: ; 0x757a6
+    dw CinnabarGymScript0, CinnabarGymScript1
+
+INCBIN "baserom.gbc",$757aa,$4
+
+CinnabarGymScript0: ; 0x757ae
+    ld a, [$da38]
+    and a
+    ret z
+    ld [$ff00+$8c], a
+    cp $4
+    jr nz, .asm_757c3 ; 0x757b7 $a
+    ld a, $4
+    ld [$d528], a
+    ld de, $57d7
+    jr .asm_757cb ; 0x757c1 $8
+.asm_757c3
+    ld de, $57da
+    ld a, $1
+    ld [$d528], a
+.asm_757cb
+    call $363a
+    ld a, $1
+    ld [$d65e], a
+    ld [$da39], a
+    ret
+; 0x757d7
+
+INCBIN "baserom.gbc",$757d7,$757dc - $757d7
+
+CinnabarGymScript1: ; 0x757dc
+    ld a, [$d730]
+    bit 0, a
+    ret nz
+    xor a
+    ld [$cd6b], a
+    ld a, [$da38]
+    ld [$cc55], a
+    ld [$ff00+$8c], a
+    jp $2920
+; 0x757f1
+
+INCBIN "baserom.gbc",$757f1,$ae
+
+CinnabarGymTexts: ; 0x7589f
+    dw CinnabarGymText1, CinnabarGymText2, CinnabarGymText3, CinnabarGymText4, CinnabarGymText5, CinnabarGymText6, CinnabarGymText7, CinnabarGymText8, CinnabarGymText9
+;CinnabarGymText 10: ; 0x75925
+;CinnabarGymText 11: ; 0x7592a
+;CinnabarGymText 12: ; 0x75934
+
+INCBIN "baserom.gbc",$758b1,$2e
+
 CinnabarGymText1: ; 0x758df
     db $8
     ld a, [$d79a]
@@ -29775,7 +37015,9 @@ CinnabarGymText1: ; 0x758df
     ld [$d05c], a
     jp $58b7
 ; 0x75914
+
 INCBIN "baserom.gbc",$75914,$25
+
 CinnabarGymText2: ; 0x75939
     db $08 ; asm
     call $57a0
@@ -29794,6 +37036,7 @@ CinnabarGymText2: ; 0x75939
     jp $24d7
 
 INCBIN "baserom.gbc",$7595f,$7596e - $7595f
+
 CinnabarGymText3: ; 0x7596e
     db $08 ; asm
     call $57a0
@@ -29812,6 +37055,7 @@ CinnabarGymText3: ; 0x7596e
     jp $24d7
 
 INCBIN "baserom.gbc",$75994,$759a3 - $75994
+
 CinnabarGymText4: ; 0x759a3
     db $08 ; asm
     call $57a0
@@ -29830,6 +37074,7 @@ CinnabarGymText4: ; 0x759a3
     jp $24d7
 
 INCBIN "baserom.gbc",$759c9,$759d8 - $759c9
+
 CinnabarGymText5: ; 0x759d8
     db $08 ; asm
     call $57a0
@@ -29848,6 +37093,7 @@ CinnabarGymText5: ; 0x759d8
     jp $24d7
 
 INCBIN "baserom.gbc",$759fe,$75a0d - $759fe
+
 CinnabarGymText6: ; 0x75a0d
     db $08 ; asm
     call $57a0
@@ -29866,6 +37112,7 @@ CinnabarGymText6: ; 0x75a0d
     jp $24d7
 
 INCBIN "baserom.gbc",$75a33,$75a42 - $75a33
+
 CinnabarGymText7: ; 0x75a42
     db $08 ; asm
     call $57a0
@@ -29884,6 +37131,7 @@ CinnabarGymText7: ; 0x75a42
     jp $24d7
 
 INCBIN "baserom.gbc",$75a68,$75a77 - $75a68
+
 CinnabarGymText8: ; 0x75a77
     db $08 ; asm
     call $57a0
@@ -29902,6 +37150,7 @@ CinnabarGymText8: ; 0x75a77
     jp $24d7
 
 INCBIN "baserom.gbc",$75a9d,$75aac - $75a9d
+
 CinnabarGymText9: ; 0x75aac
     db $08 ; asm
     ld a, [$d79a]
@@ -29916,6 +37165,7 @@ CinnabarGymText9: ; 0x75aac
     jp $24d7
 
 INCBIN "baserom.gbc",$75ac2,$a
+
 CinnabarGymObject: ; 0x75acc (size=90)
     db $2e ; border tile
 
@@ -29946,12 +37196,16 @@ CinnabarGymBlocks: ; 90
 Lab1_h: ; 0x75b80 to 0x75b8c (12 bytes) (id=167)
     db $14 ; tileset
     db $04, $09 ; dimensions (y, x)
-    dw Lab1Blocks, $5b90, $5b8c ; blocks, texts, scripts
+    dw Lab1Blocks, Lab1Texts, Lab1Script ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $5bb3 ; objects
+    dw Lab1Object ; objects
 
-INCBIN "baserom.gbc",$75b8c,$75b90 - $75b8c
+Lab1Script: ; 0x75b8c
+    call $3c3c
+    ret
+; 0x75b90
+
 Lab1Texts: ; 0x75b90
     dw Lab1Text1, Lab1Text2, Lab1Text3, Lab1Text4, Lab1Text5
 
@@ -30007,12 +37261,17 @@ Lab1Blocks: ; 36
 Lab2_h: ; 0x75c15 to 0x75c21 (12 bytes) (id=168)
     db $14 ; tileset
     db $04, $04 ; dimensions (y, x)
-    dw Lab2Blocks, $5c24, $5c21 ; blocks, texts, scripts
+    dw Lab2Blocks, Lab2Texts, Lab2Script ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $5c45 ; objects
+    dw Lab2Object ; objects
 
-INCBIN "baserom.gbc",$75c21,$75c2a - $75c21
+Lab2Script: ; 0x75c21
+    jp $3c3c
+; 0x75c24
+
+Lab2Texts: ; 0x75c24
+    dw Lab2Text1, Lab2Text2, Lab2Text3
 
 Lab2Text1: ; 0x75c2a
     TX_FAR _Lab2Text1
@@ -30057,12 +37316,18 @@ Lab2Blocks: ; 16
 Lab3_h: ; 0x75c7b to 0x75c87 (12 bytes) (id=169)
     db $14 ; tileset
     db $04, $04 ; dimensions (y, x)
-    dw Lab3Blocks, $5c8a, $5c87 ; blocks, texts, scripts
+    dw Lab3Blocks, Lab3Texts, Lab3Script ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $5cec ; objects
+    dw Lab3Object ; objects
 
-INCBIN "baserom.gbc",$75c87,$75c94 - $75c87
+Lab3Script: ; 0x75c87
+    jp $3c3c
+; 0x75c8a
+
+Lab3Texts: ; 0x75c8a
+    dw Lab3Text1, Lab3Text2, Lab3Text3, Lab3Text4, Lab3Text5
+
 Lab3Text1: ; 0x75c94
     db $08 ; asm
     ld a, [$d7a1]
@@ -30132,9 +37397,60 @@ Lab4_h: ; 0x75d25 to 0x75d31 (12 bytes) (id=170)
     dw Lab4Blocks, $5d34, $5d31 ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $5df0 ; objects
+    dw Lab4Object ; objects
 
-INCBIN "baserom.gbc",$75d31,$75dda - $75d31
+Lab4Script: ; 0x75d31
+    jp $3c3c
+; 0x75d34
+
+INCBIN "baserom.gbc",$75d34,$38
+
+Lab4Text1: ; 0x75d6c
+    db $8
+    ld a, [$d7a3]
+    bit 0, a
+    jr nz, .asm_75d96 ; 0x75d72 $22
+    ld hl, $5dc6
+    call PrintText
+    call $5d38
+    ld a, [$cd37]
+    and a
+    jr z, .asm_75d8d ; 0x75d81 $a
+    ld b, $18
+    ld hl, $5006
+    call Bankswitch
+    jr .asm_75d93 ; 0x75d8b $6
+.asm_75d8d
+    ld hl, $5dcb
+    call PrintText
+.asm_75d93
+    jp $24d7
+.asm_75d96
+    bit 1, a
+    jr z, .asm_75da2 ; 0x75d98 $8
+    ld hl, $5dd0
+    call PrintText
+    jr .asm_75d93 ; 0x75da0 $f1
+.asm_75da2
+    call $5de8
+    ld hl, $5dd5
+    call PrintText
+    ld hl, $d7a3
+    set 2, [hl]
+    ld a, [$d710]
+    ld b, a
+    ld c, $1e
+    call GivePokemon
+    jr nc, .asm_75d93 ; 0x75db9 $d8
+    ld hl, $d7a3
+    res 0, [hl]
+    res 1, [hl]
+    res 2, [hl]
+    jr .asm_75d93 ; 0x75dc4 $cd
+; 0x75dc6
+
+INCBIN "baserom.gbc",$75dc6,$14
+
 Lab4Text2: ; 0x75dda
     db $08 ; asm
     ld a, $3
@@ -30144,6 +37460,7 @@ Lab4Text2: ; 0x75dda
     jp $24d7
 
 INCBIN "baserom.gbc",$75de8,$8
+
 Lab4Object: ; 0x75df0 (size=32)
     db $17 ; border tile
 
@@ -30167,12 +37484,18 @@ Lab4Blocks: ; 16
 CinnabarPokecenter_h: ; 0x75e20 to 0x75e2c (12 bytes) (id=171)
     db $06 ; tileset
     db $04, $07 ; dimensions (y, x)
-    dw $4030, $5e32, $5e2c ; blocks, texts, scripts
+    dw $4030, CinnabarPokecenterTexts, CinnabarPokecenterScript ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $5e46 ; objects
+    dw CinnabarPokecenterObject ; objects
 
-INCBIN "baserom.gbc",$75e2c,$75e3b - $75e2c
+CinnabarPokecenterScript: ; 0x75e2c
+    call $22fa
+    jp $3c3c
+; 0x75e32
+
+CinnabarPokecenterTexts:
+INCBIN "baserom.gbc",$75e32,$9
 
 CinnabarPokecenterText2:
 CinnabarPokecenterText1: ; 0x75e3b
@@ -30183,7 +37506,8 @@ CinnabarPokecenterText3: ; 0x75e40
     TX_FAR _CinnabarPokecenterText3
     db $50
 
-INCBIN "baserom.gbc",$75e45,$1
+CinnabarPokecenterText4:
+    db $f6
 
 CinnabarPokecenterObject: ; 0x75e46 (size=44)
     db $0 ; border tile
@@ -30207,12 +37531,17 @@ CinnabarPokecenterObject: ; 0x75e46 (size=44)
 CinnabarMart_h: ; 0x75e72 to 0x75e7e (12 bytes) (id=172)
     db $02 ; tileset
     db $04, $04 ; dimensions (y, x)
-    dw $4010, $5e81, $5e7e ; blocks, texts, scripts
+    dw $4010, CinnabarMartTexts, CinnabarMartScript ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $5e91 ; objects
+    dw CinnabarMartObject ; objects
 
-INCBIN "baserom.gbc",$75e7e,$75e87 - $75e7e
+CinnabarMartScript: ; 0x75e7e
+    jp $3c3c
+; 0x75e81
+
+CinnabarMartTexts: ; 0x75e81
+    dw CinnabarMartText1, CinnabarMartText2, CinnabarMartText3
 
 CinnabarMartText2: ; 0x75e87
     TX_FAR _CinnabarMartText2
@@ -30243,12 +37572,15 @@ CinnabarMartObject: ; 0x75e91 (size=38)
 CopycatsHouseF1_h: ; 0x75eb7 to 0x75ec3 (12 bytes) (id=175)
     db $01 ; tileset
     db $04, $04 ; dimensions (y, x)
-    dw $4000, $5ec6, $5ec3 ; blocks, texts, scripts
+    dw $4000, CopycatsHouseF1Texts, CopycatsHouseF1Script ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $5ee3 ; objects
+    dw CopycatsHouseF1Object ; objects
 
-INCBIN "baserom.gbc",$75ec3,$75ec6 - $75ec3
+CopycatsHouseF1Script: ; 0x75ec3
+    jp $3c3c
+; 0x75ec6
+
 CopycatsHouseF1Texts: ; 0x75ec6
     dw CopycatsHouseF1Text1, CopycatsHouseF1Text2, CopycatsHouseF1Text3
 
@@ -30287,7 +37619,31 @@ CopycatsHouseF1Object: ; 0x75ee3 (size=46)
     EVENT_DISP $4, $7, $3
     EVENT_DISP $4, $1, $7 ; COPYCATS_HOUSE_2F
 
-INCBIN "baserom.gbc",$75f11,$760e0 - $75f11
+INCBIN "baserom.gbc",$75f11,$75f1d - $75f11
+
+GaryScript: ; 0x75f1d
+    call $3c3c
+    ld hl, $5f31
+    ld a, [$d64c]
+    jp $3d97
+; 0x75f29
+
+INCBIN "baserom.gbc",$75f29,$75f31 - $75f29
+
+GaryScripts: ; 0x75f31
+    dw GaryScript0
+
+INCBIN "baserom.gbc",$75f33,$14
+
+GaryScript0: ; 0x75f47
+    ret
+; 0x75f48
+
+INCBIN "baserom.gbc",$75f48,$18e
+
+GaryTexts: ; 0x760d6
+    dw GaryText1, GaryText2, GaryText3, GaryText4, GaryText5
+
 GaryText1: ; 0x760e0
     db $08 ; asm
     ld a, [$d867]
@@ -30305,7 +37661,15 @@ GaryText2: ; 0x76108
     TX_FAR _GaryText2
     db $50
 
-INCBIN "baserom.gbc",$7610d,$22
+GaryText3: ; 0x7610d
+INCBIN "baserom.gbc",$7610d,$76125 - $7610d
+
+GaryText4: ; 0x76125
+INCBIN "baserom.gbc",$76125,$7612a - $76125
+
+GaryText5: ; 0x7612a
+INCBIN "baserom.gbc",$7612a,$7612f - $7612a
+
 GaryObject: ; 0x7612f (size=48)
     db $3 ; border tile
 
@@ -30330,23 +37694,44 @@ GaryObject: ; 0x7612f (size=48)
 GaryBlocks: ; 16
     INCBIN "maps/gary.blk"
 
-Loreli_h: ; 0x7616f to 0x7617b (12 bytes) (id=245)
+Lorelei_h: ; 0x7616f to 0x7617b (12 bytes) (id=245)
     db $07 ; tileset
     db $06, $05 ; dimensions (y, x)
-    dw LoreliBlocks, $6251, $617b ; blocks, texts, scripts
+    dw LoreleiBlocks, LoreleiTexts, LoreleiScript ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $6280 ; objects
+    dw LoreleiObject ; objects
 
-INCBIN "baserom.gbc",$7617b,$76262 - $7617b
-LoreliText1: ; 0x76262
+LoreleiScript: ; 0x7617b
+    call $6191
+    call $3c3c
+    ld hl, $6255
+    ld de, $61bb
+    ld a, [$d64d]
+    call $3160
+    ld [$d64d], a
+    ret
+; 0x76191
+
+INCBIN "baserom.gbc",$76191,$c0
+
+LoreleiTexts: ; 0x76251
+    dw LoreleiText1, LoreleiText2
+
+INCBIN "baserom.gbc",$76255,$d
+
+LoreleiText1: ; 0x76262
     db $08 ; asm
     ld hl, $6255
     call LoadTrainerHeader
     jp $24d7
 
-INCBIN "baserom.gbc",$7626c,$14
-LoreliObject: ; 0x76280 (size=44)
+INCBIN "baserom.gbc",$7626c,$7627b - $7626c
+
+LoreleiText2: ; 0x7627b
+INCBIN "baserom.gbc",$7627b,$76280 - $7627b
+
+LoreleiObject: ; 0x76280 (size=44)
     db $3 ; border tile
 
     db $4 ; warps
@@ -30366,25 +37751,46 @@ LoreliObject: ; 0x76280 (size=44)
     EVENT_DISP $5, $0, $4 ; BRUNOS_ROOM
     EVENT_DISP $5, $0, $5 ; BRUNOS_ROOM
 
-LoreliBlocks: ; 30
+LoreleiBlocks: ; 30
     INCBIN "maps/loreli.blk"
 
 Bruno_h: ; 0x762ca to 0x762d6 (12 bytes) (id=246)
     db $07 ; tileset
     db $06, $05 ; dimensions (y, x)
-    dw BrunoBlocks, $63a8, $62d6 ; blocks, texts, scripts
+    dw BrunoBlocks, BrunoTexts, BrunoScript ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $63d7 ; objects
+    dw BrunoObject ; objects
 
-INCBIN "baserom.gbc",$762d6,$763b9 - $762d6
+BrunoScript: ; 0x762d6
+    call $62ec
+    call $3c3c
+    ld hl, $63ac
+    ld de, $6312
+    ld a, [$d64e]
+    call $3160
+    ld [$d64e], a
+    ret
+; 0x762ec
+
+INCBIN "baserom.gbc",$762ec,$bc
+
+BrunoTexts: ; 0x763a8
+    dw BrunoText1, BrunoText2
+
+INCBIN "baserom.gbc",$763ac,$d
+
 BrunoText1: ; 0x763b9
     db $08 ; asm
     ld hl, $63ac
     call LoadTrainerHeader
     jp $24d7
 
-INCBIN "baserom.gbc",$763c3,$14
+INCBIN "baserom.gbc",$763c3,$763d2 - $763c3
+
+BrunoText2: ; 0x763d2
+INCBIN "baserom.gbc",$763d2,5
+
 BrunoObject: ; 0x763d7 (size=44)
     db $3 ; border tile
 
@@ -30411,19 +37817,40 @@ BrunoBlocks: ; 30
 Agatha_h: ; 0x76421 to 0x7642d (12 bytes) (id=247)
     db $0f ; tileset
     db $06, $05 ; dimensions (y, x)
-    dw AgathaBlocks, $6505, $642d ; blocks, texts, scripts
+    dw AgathaBlocks, AgathaTexts, AgathaScript ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $6534 ; objects
+    dw AgathaObject ; objects
 
-INCBIN "baserom.gbc",$7642d,$76516 - $7642d
+AgathaScript: ; 0x7642d
+    call $6443
+    call $3c3c
+    ld hl, $6509
+    ld de, $6469
+    ld a, [$d64f]
+    call $3160
+    ld [$d64f], a
+    ret
+; 0x76443
+
+INCBIN "baserom.gbc",$76443,$c2
+
+AgathaTexts: ; 0x76505
+    dw AgathaText1, AgathaText2
+
+INCBIN "baserom.gbc",$76509,$d
+
 AgathaText1: ; 0x76516
     db $08 ; asm
     ld hl, $6509
     call LoadTrainerHeader
     jp $24d7
 
-INCBIN "baserom.gbc",$76520,$14
+INCBIN "baserom.gbc",$76520,$f
+
+AgathaText2: ; 0x7652f
+INCBIN "baserom.gbc",$7652f,5
+
 AgathaObject: ; 0x76534 (size=44)
     db $0 ; border tile
 
@@ -30446,9 +37873,11 @@ AgathaObject: ; 0x76534 (size=44)
 
 AgathaBlocks: ; 30
     INCBIN "maps/agatha.blk"
+
 INCBIN "baserom.gbc",$7657e,$1a82
 
 SECTION "bank1E",DATA,BANK[$1E]
+
 INCBIN "baserom.gbc",$78000,$F1
 
 PlayAnimation: ; 40F1
@@ -30634,6 +38063,7 @@ Pointer4DCF: ; 4DCF
 	dw $4DDB,$4DE3,$4DEB,$4DF0,$4DF6,$4DFE
 
 INCBIN "baserom.gbc",$78DDB,$78E53-$78DDB
+
 RealPlayAnimation: ; 4E53
 	ld a,[$CF07] ; get animation # − 1
 	cp a,$FF
@@ -31109,9 +38539,11 @@ PointerTable6F74: ; 6F74
 INCBIN "baserom.gbc",$7B068,$7C000 - $7B068
 
 SECTION "bank1F",DATA,BANK[$1F]
+
 INCBIN "baserom.gbc",$7C000,$4000
 
 SECTION "bank20",DATA,BANK[$20]
+
 INCBIN "baserom.gbc",$80000,$800b1 - $80000
 
 _VictoryRoad3Text10:
@@ -32038,6 +39470,7 @@ _Route10Text10: ; 0x8e8e1
 INCBIN "baserom.gbc",$8e8ee,$1712
 
 SECTION "bank24",DATA,BANK[$24]
+
 INCBIN "baserom.gbc",$90000,$9008f - $90000
 
 _Route11Text11: ; 0x9008f
@@ -32183,6 +39616,7 @@ _Route23Text8: ; 0x92700
 INCBIN "baserom.gbc",$92721,$18df
 
 SECTION "bank25",DATA,BANK[$25]
+
 INCBIN "baserom.gbc",$94000,$945d3 - $94000
 
 _Route25Text11: ; 0x945d3
@@ -32999,6 +40433,7 @@ _SafariZoneEntranceText1: ; 0x9e6c7
 INCBIN "baserom.gbc",$9e6e4,$191c
 
 SECTION "bank28",DATA,BANK[$28]
+
 INCBIN "baserom.gbc",$a0000,$a05a1 - $a0000
 
 _FuchsiaMeetingRoomText1: ; 0xa05a1
