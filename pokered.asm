@@ -10402,7 +10402,8 @@ UndergroundPathEntranceRoute8Blocks: ; 16
 OaksLabBlocks: ; 30
     INCBIN "maps/oakslab.blk"
 
-ViridianHouseBlocks: ; 16
+PewterHouse1Blocks:
+ViridianHouseBlocks: ; 16 0x1c1de
     INCBIN "maps/viridianhouse.blk"
 
 SchoolBlocks: ; 16
@@ -11525,7 +11526,7 @@ ViridianHouseObject: ; 0x1d5bb (size=44)
 PewterHouse1_h: ; 0x1d5e7 to 0x1d5f3 (12 bytes) (bank=7) (id=55)
     db $08 ; tileset
     db $04, $04 ; dimensions (y, x)
-    dw $41de, PewterHouse1Texts, PewterHouse1Script ; blocks, texts, scripts
+    dw PewterHouse1Blocks, PewterHouse1Texts, PewterHouse1Script ; blocks, texts, scripts
     db $00 ; connections
 
     dw PewterHouse1Object ; objects
