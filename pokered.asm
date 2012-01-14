@@ -20467,12 +20467,53 @@ ViridianPokecenterObject: ; 0x44277 (size=44)
 Mansion1_h: ; 0x442a3 to 0x442af (12 bytes) (bank=11) (id=165)
     db $16 ; tileset
     db $0e, $0f ; dimensions (y, x)
-    dw $43fe, $432c, $42af ; blocks, texts, scripts
+    dw Mansion1Blocks, Mansion1Texts, Mansion1Script ; blocks, texts, scripts
     db $00 ; connections
 
     dw Mansion1Object ; objects
 
-INCBIN "baserom.gbc",$442af,$44341 - $442af
+Mansion1Script:
+    call Mansion1Subscript1
+    call $3c3c
+    ld hl, $4334
+    ld de, $4326
+    ld a, [$d63a]
+    call $3160
+    ld [$d63a], a
+    ret
+; 0x442c5
+
+Mansion1Subscript1: ; 0x442c5
+    ld hl, $d126
+    bit 5, [hl]
+    res 5, [hl]
+    ret z
+    ld a, [$d796]
+    bit 0, a
+    jr nz, .asm_442ec ; 0x442d2 $18
+    ld bc, $060c
+    call $430b
+    ld bc, $0308
+    call $4304
+    ld bc, $080a
+    call $4304
+    ld bc, $0d0d
+    jp $4304
+.asm_442ec
+    ld bc, $060c
+    call $4304
+    ld bc, $0308
+    call $430b
+    ld bc, $080a
+    call $430b
+    ld bc, $0d0d
+    jp $430b
+; 0x44304
+
+INCBIN "baserom.gbc",$44304,$4432c - $44304
+
+Mansion1Texts: ; 4432c
+INCBIN "baserom.gbc",$4432c,$44341 - $4432c
 
 Mansion1Text1: ; 0x44341
     db $08 ; asm
@@ -20512,7 +20553,8 @@ Mansion1Object: ; 0x443a4 (size=90)
     EVENT_DISP $f, $1b, $1a
     EVENT_DISP $f, $1b, $1b
 
-INCBIN "baserom.gbc",$443fe,$d2
+Mansion1Blocks: ; 203
+    INCBIN "maps/mansion1.blk"
 
 RockTunnel1_h: ; 0x444d0 to 0x444dc (12 bytes) (bank=11) (id=82)
     db $11 ; tileset
