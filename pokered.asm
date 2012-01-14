@@ -10402,8 +10402,18 @@ UndergroundPathEntranceRoute8Blocks: ; 16
 OaksLabBlocks: ; 30
     INCBIN "maps/oakslab.blk"
 
+Route16HouseBlocks:
+Route2HouseBlocks:
+SaffronHouse1Blocks:
+SaffronHouse2Blocks:
+VermilionHouse1Blocks:
+NameRaterBlocks:
+LavenderHouse1Blocks:
+LavenderHouse2Blocks:
+CeruleanHouse2Blocks:
 PewterHouse1Blocks:
-ViridianHouseBlocks: ; 16 0x1c1de
+PewterHouse2Blocks:
+ViridianHouseBlocks: ; 16 0x1c1de 41DE
     INCBIN "maps/viridianhouse.blk"
 
 SchoolBlocks: ; 16
@@ -11575,7 +11585,7 @@ PewterHouse1Object: ; 0x1d616 (size=38)
 PewterHouse2_h: ; 0x1d63c to 0x1d648 (12 bytes) (bank=7) (id=57)
     db $08 ; tileset
     db $04, $04 ; dimensions (y, x)
-    dw $41de, PewterHouse2Texts, PewterHouse2Script ; blocks, texts, scripts
+    dw PewterHouse2Blocks, PewterHouse2Texts, PewterHouse2Script ; blocks, texts, scripts
     db $00 ; connections
 
     dw PewterHouse2Object ; objects
@@ -11677,7 +11687,7 @@ CeruleanHouseTrashedObject: ; 0x1d6bf (size=43)
 CeruleanHouse2_h: ; 0x1d6ea to 0x1d6f6 (12 bytes) (bank=7) (id=63)
     db $08 ; tileset
     db $04, $04 ; dimensions (y, x)
-    dw $41de, CeruleanHouse2Texts, CeruleanHouse2Script ; blocks, texts, scripts
+    dw CeruleanHouse2Blocks, CeruleanHouse2Texts, CeruleanHouse2Script ; blocks, texts, scripts
     db $00 ; connections
 
     dw CeruleanHouse2Object ; objects
@@ -11856,7 +11866,7 @@ BikeShopBlocks: ; 16
 LavenderHouse1_h: ; 0x1d89c to 0x1d8a8 (12 bytes) (bank=7) (id=149)
     db $08 ; tileset
     db $04, $04 ; dimensions (y, x)
-    dw $41de, LavenderHouse1Texts, LavenderHouse1Script ; blocks, texts, scripts
+    dw LavenderHouse1Blocks, LavenderHouse1Texts, LavenderHouse1Script ; blocks, texts, scripts
     db $00 ; connections
 
     dw LavenderHouse1Object ; objects
@@ -11971,7 +11981,7 @@ LavenderHouse1Object: ; 0x1d96a (size=56)
 LavenderHouse2_h: ; 0x1d9a2 to 0x1d9ae (12 bytes) (bank=7) (id=151)
     db $08 ; tileset
     db $04, $04 ; dimensions (y, x)
-    dw $41de, LavenderHouse2Texts, LavenderHouse2Script ; blocks, texts, scripts
+    dw LavenderHouse2Blocks, LavenderHouse2Texts, LavenderHouse2Script ; blocks, texts, scripts
     db $00 ; connections
 
     dw LavenderHouse2Object ; objects
@@ -12028,7 +12038,7 @@ LavenderHouse2Object: ; 0x1d9e6 (size=32)
 NameRater_h: ; 0x1da06 to 0x1da12 (12 bytes) (bank=7) (id=229)
     db $08 ; tileset
     db $04, $04 ; dimensions (y, x)
-    dw $41de, $5a54, NameRaterScript ; blocks, texts, scripts
+    dw NameRaterBlocks, $5a54, NameRaterScript ; blocks, texts, scripts
     db $00 ; connections
 
     dw NameRaterObject ; objects
@@ -12101,7 +12111,7 @@ NameRaterObject: ; 0x1dad6 (size=26)
 VermilionHouse1_h: ; 0x1daf0 to 0x1dafc (12 bytes) (bank=7) (id=93)
     db $08 ; tileset
     db $04, $04 ; dimensions (y, x)
-    dw $41de, VermilionHouse1Texts, VermilionHouse1Script ; blocks, texts, scripts
+    dw VermilionHouse1Blocks, VermilionHouse1Texts, VermilionHouse1Script ; blocks, texts, scripts
     db $00 ; connections
 
     dw VermilionHouse1Object ; objects
@@ -12313,7 +12323,7 @@ FuchsiaMartBlocks: ; 16
 SaffronHouse1_h: ; 0x1ddd1 to 0x1dddd (12 bytes) (bank=7) (id=179)
     db $08 ; tileset
     db $04, $04 ; dimensions (y, x)
-    dw $41de, SaffronHouse1Texts, SaffronHouse1Script ; blocks, texts, scripts
+    dw SaffronHouse1Blocks, SaffronHouse1Texts, SaffronHouse1Script ; blocks, texts, scripts
     db $00 ; connections
 
     dw SaffronHouse1Object ; objects
@@ -12367,7 +12377,7 @@ SaffronHouse1Object: ; 0x1de04 (size=44)
 SaffronHouse2_h: ; 0x1de30 to 0x1de3c (12 bytes) (bank=7) (id=183)
     db $08 ; tileset
     db $04, $04 ; dimensions (y, x)
-    dw $41de, SaffronHouse2Texts, SaffronHouse2Script ; blocks, texts, scripts
+    dw SaffronHouse2Blocks, SaffronHouse2Texts, SaffronHouse2Script ; blocks, texts, scripts
     db $00 ; connections
 
     dw SaffronHouse2Object ; objects
@@ -12464,7 +12474,7 @@ DiglettsCaveRoute2Object: ; 0x1debf (size=34)
 Route2House_h: ; 0x1dee1 to 0x1deed (12 bytes) (bank=7) (id=48)
     db $08 ; tileset
     db $04, $04 ; dimensions (y, x)
-    dw $41de, Route2HouseTexts, Route2HouseScript ; blocks, texts, scripts
+    dw Route2HouseBlocks, Route2HouseTexts, Route2HouseScript ; blocks, texts, scripts
     db $00 ; connections
 
     dw Route2HouseObject ; objects
@@ -13084,7 +13094,7 @@ DiglettsCaveEntranceRoute11Object: ; 0x1e5ca (size=34)
 Route16House_h: ; 0x1e5ec to 0x1e5f8 (12 bytes) (bank=7) (id=188)
     db $08 ; tileset
     db $04, $04 ; dimensions (y, x)
-    dw $41de, Route16HouseTexts, Route16HouseScript ; blocks, texts, scripts
+    dw Route16HouseBlocks, Route16HouseTexts, Route16HouseScript ; blocks, texts, scripts
     db $00 ; connections
 
     dw Route16HouseObject ; objects
