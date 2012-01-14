@@ -10416,12 +10416,14 @@ PewterHouse2Blocks:
 ViridianHouseBlocks: ; 16 0x1c1de 41DE
     INCBIN "maps/viridianhouse.blk"
 
-SchoolBlocks: ; 16
+CeladonMansion5Blocks:
+SchoolBlocks: ; 16 0x1c1ee 41EE
     INCBIN "maps/school.blk"
 
 CeruleanHouseTrashedBlocks: ; 16
     INCBIN "maps/ceruleanhousetrashed.blk"
 
+DiglettsCaveEntranceRoute11Blocks:
 DiglettsCaveRoute2Blocks: ; 16
     INCBIN "maps/diglettscaveroute2.blk"
 
@@ -12231,7 +12233,7 @@ VermilionDockBlocks: ; 84
 CeladonMansion5_h: ; 0x1dd2e to 0x1dd3a (12 bytes) (bank=7) (id=132)
     db $08 ; tileset
     db $04, $04 ; dimensions (y, x)
-    dw $41ee, CeladonMansion5Texts, CeladonMansion5Script ; blocks, texts, scripts
+    dw CeladonMansion5Blocks, CeladonMansion5Texts, CeladonMansion5Script ; blocks, texts, scripts
     db $00 ; connections
 
     dw CeladonMansion5Object ; objects
@@ -13052,7 +13054,7 @@ PowerPlantBlocks: ; 360
 DiglettsCaveEntranceRoute11_h: ; 0x1e5ae to 0x1e5ba (12 bytes) (bank=7) (id=85)
     db $11 ; tileset
     db $04, $04 ; dimensions (y, x)
-    dw $420e, DiglettsCaveEntranceRoute11Texts, DiglettsCaveEntranceRoute11Script ; blocks, texts, scripts
+    dw DiglettsCaveEntranceRoute11Blocks, DiglettsCaveEntranceRoute11Texts, DiglettsCaveEntranceRoute11Script ; blocks, texts, scripts
     db $00 ; connections
 
     dw DiglettsCaveEntranceRoute11Object ; objects
@@ -13260,7 +13262,7 @@ Route22GateBlocks: ; 20
 BillsHouse_h: ; 0x1e75e to 0x1e76a (12 bytes) (bank=7) (id=88)
     db $10 ; tileset
     db $04, $04 ; dimensions (y, x)
-    dw $6905, BillsHouseTexts, BillsHouseScript ; blocks, texts, scripts
+    dw BillsHouseBlocks, BillsHouseTexts, BillsHouseScript ; blocks, texts, scripts
     db $00 ; connections
 
     dw BillsHouseObject ; objects
@@ -13388,7 +13390,10 @@ BillsHouseObject: ; 0x1e8df (size=38)
     EVENT_DISP $4, $7, $2
     EVENT_DISP $4, $7, $3
 
-INCBIN "baserom.gbc",$1e905,$16fb
+BillsHouseBlocks:
+    INCBIN "maps/billshouse.blk"
+
+INCBIN "baserom.gbc",$1e905 + 16,$16fb - 16
 
 SECTION "bank8",DATA,BANK[$8]
 
