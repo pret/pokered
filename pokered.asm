@@ -20358,7 +20358,7 @@ LavenderTownObject: ; 0x4402d (size=88)
 LavenderTownBlocks: ; 90
     INCBIN "maps/lavendertown.blk"
 
-ViridianPokeCenterBlocks: ; 28
+ViridianPokecenterBlocks: ; 28
     INCBIN "maps/viridianpokecenter.blk"
 
 SafariZoneRestHouse1Blocks: ; 16
@@ -20416,20 +20416,23 @@ INCBIN "baserom.gbc",$44169,$e8
 ViridianPokecenter_h: ; 0x44251 to 0x4425d (12 bytes) (bank=11) (id=41)
     db $06 ; tileset
     db $04, $07 ; dimensions (y, x)
-    dw $40df, $4263, ViridianPokeCenterScript ; blocks, texts, scripts
+    dw ViridianPokecenterBlocks, ViridianPokecenterTexts, ViridianPokeCenterScript ; blocks, texts, scripts
     db $00 ; connections
 
-    dw $4277 ; objects
+    dw ViridianPokecenterObject ; objects
 
 ViridianPokeCenterScript: ; 0x4425d
     call $22fa
     jp $3c3c
 ; 0x44263
 
-INCBIN "baserom.gbc",$44263,$9
+ViridianPokecenterTexts: ; 0x44263
+    dw ViridianPokeCenterText1, ViridianPokeCenterText2, ViridianPokeCenterText3, ViridianPokeCenterText4
 
-ViridianPokeCenterText2:
-ViridianPokeCenterText1: ; 0x4426c
+ViridianPokeCenterText1: ; 0x4426b
+    db $ff
+
+ViridianPokeCenterText2: ; 0x4426c
     TX_FAR _ViridianPokeCenterText1
     db $50
 
@@ -20442,7 +20445,7 @@ ViridianPokeCenterText3: ; 0x44271
 ViridianPokeCenterText4:
     db $f6
 
-ViridianPokeCenterObject: ; 0x44277 (size=44)
+ViridianPokecenterObject: ; 0x44277 (size=44)
     db $0 ; border tile
 
     db $2 ; warps
