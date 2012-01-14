@@ -14205,7 +14205,16 @@ VictreebelPicFront:
 VictreebelPicBack:
 	INCBIN "pic/monback/victreebelb.pic"
 
-INCBIN "baserom.gbc",$37244,$3e88-$3244
+INCBIN "baserom.gbc",$37244,$37AF1-$37244
+
+IF _RED
+	INCBIN "gfx/red/slotmachine1.2bpp"
+ENDC
+IF _BLUE
+	INCBIN "gfx/blue/slotmachine1.2bpp"
+ENDC
+
+INCBIN "baserom.gbc",$37CA1,$37e88-$37CA1
 
 SECTION "bankE",DATA,BANK[$E]
 
@@ -20232,7 +20241,15 @@ PokedexOrder: ; 5024
 	db DEX_BELLSPROUT
 	db DEX_WEEPINBELL
 	db DEX_VICTREEBEL
-INCBIN "baserom.gbc",$410E2,$2769 - $10E2
+
+INCBIN "baserom.gbc",$410E2,$20D9 - $10E2
+
+IF _RED
+	INCBIN "gfx/red/introfight.2bpp"
+ENDC
+IF _BLUE
+	INCBIN "gfx/blue/introfight.2bpp"
+ENDC
 
 ; XXX what do these do
 	FuncCoord 5,0
@@ -35718,7 +35735,23 @@ SuperPalettes: ; 6660
 	RGB 3,2,2
 BorderPalettes: ; 6788
 
-INCBIN "baserom.gbc",$72788,$4000 - $2788
+IF _RED
+	INCBIN "gfx/red/sgbborder.map"
+ENDC
+IF _BLUE
+	INCBIN "gfx/blue/sgbborder.map"
+ENDC
+
+INCBIN "baserom.gbc",$72E88,$2FE8 - $2E88
+
+IF _RED
+	INCBIN "gfx/red/sgbborder.2bpp"
+ENDC
+IF _BLUE
+	INCBIN "gfx/blue/sgbborder.2bpp"
+ENDC
+
+INCBIN "baserom.gbc",$735E8,$4000 - $35E8
 
 SECTION "bank1D",DATA,BANK[$1D]
 
@@ -37986,7 +38019,14 @@ PlayAnimation: ; 40F1
 .AnimationOver\@ ; 417B
 	ret
 
-INCBIN "baserom.gbc",$7817C,$78D5E - $7817C
+INCBIN "baserom.gbc",$7817C,$78BDE - $7817C
+
+IF _RED
+	INCBIN "gfx/red/slotmachine2.2bpp"
+ENDC
+IF _BLUE
+	INCBIN "gfx/blue/slotmachine2.2bpp"
+ENDC
 
 AttackAnimation: ; 4D5E
 	push hl
