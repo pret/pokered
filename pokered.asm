@@ -359,7 +359,7 @@ MapHeaderPointers: ; $01AE
 	dw $5CE5
 	dw $5CE5
 	dw $5CE5
-	dw Loreli_h
+	dw Lorelei_h
 	dw Bruno_h
 	dw Agatha_h
 
@@ -2803,7 +2803,7 @@ MapHeaderBanks: ; 423D
 	db $11
 	db $11
 	db $11
-	db BANK(Loreli_h)
+	db BANK(Lorelei_h)
 	db BANK(Bruno_h)
 	db BANK(Agatha_h)
 
@@ -34942,15 +34942,15 @@ GaryObject: ; 0x7612f (size=48)
 GaryBlocks: ; 16
     INCBIN "maps/gary.blk"
 
-Loreli_h: ; 0x7616f to 0x7617b (12 bytes) (id=245)
+Lorelei_h: ; 0x7616f to 0x7617b (12 bytes) (id=245)
     db $07 ; tileset
     db $06, $05 ; dimensions (y, x)
-    dw LoreliBlocks, $6251, $617b ; blocks, texts, scripts
+    dw LoreleiBlocks, $6251, $617b ; blocks, texts, scripts
     db $00 ; connections
 
     dw $6280 ; objects
 
-LoreliScript: ; 0x7617b
+LoreleiScript: ; 0x7617b
     call $6191
     call $3c3c
     ld hl, $6255
@@ -34963,12 +34963,12 @@ LoreliScript: ; 0x7617b
 
 INCBIN "baserom.gbc",$76191,$c0
 
-LoreliTexts: ; 0x76251
-    dw LoreliText1, LoreliText2
+LoreleiTexts: ; 0x76251
+    dw LoreleiText1, LoreleiText2
 
 INCBIN "baserom.gbc",$76255,$d
 
-LoreliText1: ; 0x76262
+LoreleiText1: ; 0x76262
     db $08 ; asm
     ld hl, $6255
     call LoadTrainerHeader
@@ -34976,10 +34976,10 @@ LoreliText1: ; 0x76262
 
 INCBIN "baserom.gbc",$7626c,$7627b - $7626c
 
-LoreliText2: ; 0x7627b
+LoreleiText2: ; 0x7627b
 INCBIN "baserom.gbc",$7627b,$76280 - $7627b
 
-LoreliObject: ; 0x76280 (size=44)
+LoreleiObject: ; 0x76280 (size=44)
     db $3 ; border tile
 
     db $4 ; warps
@@ -34999,7 +34999,7 @@ LoreliObject: ; 0x76280 (size=44)
     EVENT_DISP $5, $0, $4 ; BRUNOS_ROOM
     EVENT_DISP $5, $0, $5 ; BRUNOS_ROOM
 
-LoreliBlocks: ; 30
+LoreleiBlocks: ; 30
     INCBIN "maps/loreli.blk"
 
 Bruno_h: ; 0x762ca to 0x762d6 (12 bytes) (id=246)

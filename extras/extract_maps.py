@@ -267,7 +267,7 @@ maps = {
          0xF2: "FREEZE",
          0xF3: "FREEZE",
          0xF4: "FREEZE",
-         0xF5: "Loreli",
+         0xF5: "Lorelei",
          0xF6: "Bruno",
          0xF7: "Agatha"
        }
