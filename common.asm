@@ -29125,7 +29125,7 @@ Route6Blocks: ; 180
 Route8_h: ; 0x5812d to 0x5814f (34 bytes) (id=19)
     db $00 ; tileset
     db $09, $1e ; dimensions (y, x)
-    dw Route8Blocks, $51cf, Route8Script ; blocks, texts, scripts
+    dw Route8Blocks, Route8Texts, Route8Script ; blocks, texts, scripts
     db WEST | EAST ; connections
 
     ; connections data
@@ -29239,7 +29239,7 @@ Route10Blocks: ; 360
 Route11_h: ; 0x584be to 0x584e0 (34 bytes) (id=22)
     db $00 ; tileset
     db $09, $1e ; dimensions (y, x)
-    dw Route11Blocks, $5465, Route11Script ; blocks, texts, scripts
+    dw Route11Blocks, Route11Texts, Route11Script ; blocks, texts, scripts
     db WEST | EAST ; connections
 
     ; connections data
@@ -29613,7 +29613,10 @@ Route8Script: ; 0x591b6
     ret
 ; 0x591c9
 
-INCBIN "baserom.gbc",$591c9,$a0
+INCBIN "baserom.gbc",$591c9,$591cf - $591c9
+
+Route8Texts: ; 0x591cf
+INCBIN "baserom.gbc",$591cf,$59269 - $591cf
 
 Route8Text2: ; 0x59269
     db $08 ; asm
@@ -29767,7 +29770,10 @@ Route11Script: ; 0x5944c
     ret
 ; 0x5945f
 
-INCBIN "baserom.gbc",$5945f,$ae
+INCBIN "baserom.gbc",$5945f,$59465 - $5945f
+
+Route11Texts: ; 0x59465
+INCBIN "baserom.gbc",$59465,$5950d - $59465
 
 Route11Text2: ; 0x5950d
     db $08 ; asm
