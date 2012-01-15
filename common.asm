@@ -34894,7 +34894,7 @@ UndergroundPathWEObject: ; 0x61f4e (size=20)
 DiglettsCave_h: ; 0x61f62 to 0x61f6e (12 bytes) (id=197)
     db $11 ; tileset
     db $12, $14 ; dimensions (y, x)
-    dw DiglettsCaveBlocks, $5f71, DiglettsCaveScript ; blocks, texts, scripts
+    dw DiglettsCaveBlocks, DiglettsCaveTexts, DiglettsCaveScript ; blocks, texts, scripts
     db $00 ; connections
 
     dw DiglettsCaveObject ; objects
@@ -34903,7 +34903,8 @@ DiglettsCaveScript: ; 0x61f6e
     jp $3c3c
 ; 0x61f71
 
-INCBIN "baserom.gbc",$61f71,$1
+DiglettsCaveTexts:
+    db $50
 
 DiglettsCaveObject: ; 0x61f72 (size=20)
     db $19 ; border tile
