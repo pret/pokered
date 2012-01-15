@@ -560,8 +560,6 @@ def get_direction(connection_byte, connection_id):
     #prune results
     while "" in results:
         results.remove("")
-    print results
-    print "connection_id is: " + str(connection_id) + " and byte is: " + hex(connection_byte)
     return results[connection_id]
 
 def read_map_header(address, bank):

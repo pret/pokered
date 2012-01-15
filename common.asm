@@ -8138,7 +8138,7 @@ PalletTown_h:
 	db NORTH | SOUTH ; connections
 
 	db ROUTE_1
-	dw $4192,$C6EB ; pointers
+	dw Route1Blocks + 150,$C6EB ; pointers
 	db $0A,$0A ; bigness, width
 	db $23,$00 ; alignments
 	dw $C809 ; window
