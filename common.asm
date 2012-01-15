@@ -29072,7 +29072,7 @@ SECTION "bank16",DATA,BANK[$16]
 Route6_h: ; 0x58000 to 0x58022 (34 bytes) (id=17)
     db $00 ; tileset
     db $12, $0a ; dimensions (y, x)
-    dw Route6Blocks, $50c9, Route6Script ; blocks, texts, scripts
+    dw Route6Blocks, Route6Texts, Route6Script ; blocks, texts, scripts
     db NORTH | SOUTH ; connections
 
     ; connections data
@@ -29545,7 +29545,10 @@ Route6Script: ; 0x590b0
     ret
 ; 0x590c3
 
-INCBIN "baserom.gbc",$590c3,$5d
+INCBIN "baserom.gbc",$590c3,$590c9 - $590c3
+
+Route6Texts:
+INCBIN "baserom.gbc",$590c9,$59120 - $590c9
 
 Route6Text1: ; 0x59120
     db $8
