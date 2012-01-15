@@ -11008,13 +11008,13 @@ asm_5e6bb: ; 0x1d133
     jp nz, $522d
     bit 1, a
     jr nz, asm_9eaa4 ; 0x1d147 $e
-    ld hl, $5152
+    ld hl, OaksLabText39
     call PrintText
     jp $24d7
 ; 0x1d152
 
-;XXX which text is this?
-db $17, $df, $4d, $25, $50
+OaksLabText39:
+    db $17, $df, $4d, $25, $50
 
 asm_9eaa4: ; 0x1d157
     ld a, $5
@@ -39838,7 +39838,15 @@ _TradeCenterMText1: ; 0x94b04
 INCLUDE "text/mapRedsHouse1F.tx"
 INCLUDE "text/mapBluesHouse.tx"
 
-INCBIN "baserom.gbc",$94d5b,$95268 - $94d5b
+INCBIN "baserom.gbc",$94d5b,$94ddf - $94d5b
+
+_OaksLabText39: ; 0x94ddf
+    db $0
+    db "Those are #", $4f
+    db "BALLs. They", $55
+    db "contain #MON!", $57
+
+INCBIN "baserom.gbc",$94ddf+39,$95268 - ($94ddf+39)
 
 _OaksLabText8: ; 0x95268
     db $0, "?", $57
