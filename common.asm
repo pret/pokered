@@ -22400,6 +22400,7 @@ Route15GateBlocks:
 Route11GateBlocks: ; 20
     INCBIN "maps/route11gate.blk"
 
+Route16GateUpstairsBlocks:
 Route12GateUpstairsBlocks:
 Route11GateUpstairsBlocks: ; 16
     INCBIN "maps/route11gateupstairs.blk"
@@ -24475,7 +24476,7 @@ Route16GateMapBlocks: ; 28
 Route16GateUpstairs_h: ; 0x497ff to 0x4980b (12 bytes) (id=187)
     db $0c ; tileset
     db $04, $04 ; dimensions (y, x)
-    dw $40db, Route16GateUpstairsTexts, Route16GateUpstairsScript ; blocks, texts, scripts
+    dw Route16GateUpstairsBlocks, Route16GateUpstairsTexts, Route16GateUpstairsScript ; blocks, texts, scripts
     db $00 ; connections
 
     dw Route16GateUpstairsObject ; objects
