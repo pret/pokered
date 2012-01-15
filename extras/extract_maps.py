@@ -549,6 +549,21 @@ def compute_object_data_size(object):
 
     return size
 
+def get_direction(connection_byte, connection_id):
+    """given a connection byte and a connection id, which direction is this connection?
+    the 0th connection of $5 is SOUTH and the 1st connection is EAST"""
+    connection_options = [0b1000, 0b0100, 0b0010, 0b0001]
+    results = ["NORTH", "SOUTH", "WEST", "EAST"]
+    for option in connection_options:
+        if (option & connection_byte) == 0:
+            results[connection_options.index(option)] = ""
+    #prune results
+    while "" in results:
+        results.remove("")
+    print results
+    print "connection_id is: " + str(connection_id) + " and byte is: " + hex(connection_byte)
+    return results[connection_id]
+
 def read_map_header(address, bank):
     address = int(address, base)
     bank = int(bank, base)
@@ -608,6 +623,7 @@ def read_map_header(address, bank):
             base_connection_address = address + 10 + (11 * connection)
             connection_bytes = rom[base_connection_address : base_connection_address + 11]
             connection_data = read_connection_bytes(connection_bytes, bank)
+            connection_data["direction"] = get_direction(connection_byte, connection)
 
             connections[connection] = connection_data
 
@@ -654,6 +670,7 @@ def read_all_map_headers():
     if len(map_pointers) == 0: load_map_pointers()
 
     for map_id in map_pointers.keys():
+        if map_id in bad_maps: continue
         map2 = map_pointers[map_id]
         map_header = read_map_header(map2["address"], map2["bank"])
 
