@@ -25711,7 +25711,7 @@ Route25Blocks: ; 270
 IndigoPlateau_h: ; 0x5091e to 0x50935 (23 bytes) (id=9)
     db $17 ; tileset
     db $09, $0a ; dimensions (y, x)
-    dw IndigoPlateauBlocks, $4936, IndigoPlateauScript ; blocks, texts, scripts
+    dw IndigoPlateauBlocks, IndigoPlateauTexts, IndigoPlateauScript ; blocks, texts, scripts
     db SOUTH ; connections
 
     ; connections data
@@ -25730,6 +25730,7 @@ IndigoPlateauScript: ; 0x50935
     ret
 ; 0x50936
 
+IndigoPlateauTexts:
 IndigoPlateauObject: ; 0x50936 (size=20)
     db $e ; border tile
 
