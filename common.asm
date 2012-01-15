@@ -22399,6 +22399,7 @@ MtMoonPokecenterBlocks: ; 28
 Route11GateBlocks: ; 20
     INCBIN "maps/route11gate.blk"
 
+Route12GateUpstairsBlocks:
 Route11GateUpstairsBlocks: ; 16
     INCBIN "maps/route11gateupstairs.blk"
 
@@ -24231,7 +24232,7 @@ Route12GateBlocks: ; 20
 Route12GateUpstairs_h: ; 0x49554 to 0x49560 (12 bytes) (id=195)
     db $0c ; tileset
     db $04, $04 ; dimensions (y, x)
-    dw $40db, Route12GateUpstairsTexts, Route12GateUpstairsScript ; blocks, texts, scripts
+    dw Route12GateUpstairsBlocks, Route12GateUpstairsTexts, Route12GateUpstairsScript ; blocks, texts, scripts
     db $00 ; connections
 
     dw Route12GateUpstairsObject ; objects
