@@ -403,6 +403,7 @@ def text_pretty_printer_at(start_address, label="SomeLabel"):
 
     first_line = True
     for this_command in commands.keys():
+        if not "lines" in commands[this_command].keys(): continue
         lines = commands[this_command]["lines"]
     
         #add the ending byte to the last line- always seems $57

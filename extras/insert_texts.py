@@ -600,7 +600,8 @@ if __name__ == "__main__":
     #load incbins
     reset_incbins()
 
-    scan_for_map_scripts_pointer()
+    #scan_for_map_scripts_pointer()
+    insert_text(0xa586b, "_VermilionCityText14")
 
     #insert _ViridianCityText10
     #insert_tx_far(1, 10)

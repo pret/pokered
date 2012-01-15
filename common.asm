@@ -9465,8 +9465,9 @@ VermilionCityText5: ; 0x19922
     ld hl, $5933
     ret
 
-;db $17, $6b, $58, $29, $50
-INCBIN "baserom.gbc",$19933,$5
+VermilionCityText14: ; 0x19933
+    TX_FAR _VermilionCityText14
+    db $50
 
 VermilionCityText6: ; 0x19938
     TX_FAR _VermilionCityText6
@@ -41080,7 +41081,11 @@ _VermilionCityText5: ; 0xa5852
     db $0, "MACHOP: Guoh!", $4f
     db "Gogogoh!@@"
 
-INCBIN "baserom.gbc",$a586b,$a5891 - $a586b
+_VermilionCityText14: ; 0xa586b
+    db $0, $51
+    db "A MACHOP is", $4f
+    db "stomping the land", $55
+    db "flat.", $57
 
 _VermilionCityText6: ; 0xa5891
     db $0, "S.S.ANNE is a", $4f
