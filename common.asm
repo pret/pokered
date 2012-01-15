@@ -26949,7 +26949,7 @@ Mansion2Blocks:
 Mansion3_h: ; 0x521e2 to 0x521ee (12 bytes) (id=215)
     db $16 ; tileset
     db $09, $0f ; dimensions (y, x)
-    dw $6326, $628a, Mansion3Script ; blocks, texts, scripts
+    dw Mansion3Blocks, Mansion3Texts, Mansion3Script ; blocks, texts, scripts
     db $00 ; connections
 
     dw Mansion3Object ; objects
@@ -26965,7 +26965,10 @@ Mansion3Script:
     ret
 ; 0x52204
 
-INCBIN "baserom.gbc",$52204,$522af - $52204
+INCBIN "baserom.gbc",$52204,$5228a - $52204
+
+Mansion3Texts: ; 0x5228a
+INCBIN "baserom.gbc",$5228a,$522af - $5228a
 
 Mansion3Text1: ; 0x522af
     db $08 ; asm
@@ -27007,7 +27010,8 @@ Mansion3Object: ; 0x522e6 (size=64)
     EVENT_DISP $f, $1, $6 ; MANSION_2
     EVENT_DISP $f, $e, $19 ; MANSION_2
 
-INCBIN "baserom.gbc",$52326,$87
+Mansion3Blocks:
+    INCBIN "maps/mansion3.blk"
 
 Mansion4_h: ; 0x523ad to 0x523b9 (12 bytes) (id=216)
     db $16 ; tileset
