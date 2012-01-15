@@ -7290,80 +7290,80 @@ ItemUsePtrTable:	;$D5E1
 	dw $59B4            ;ItemUseSurfBoard (UNUSED, glitchy!)
 	dw ItemUseBall		;$5687 Safariball
 	dw ItemUsePokedex   ;$DA56 pokedex
-	dw $5A5B
-	dw $5ABB
-	dw $5ABB
-	dw $5ABB
-	dw $5ABB
-	dw $5ABB
-	dw $5ABB
-	dw $5ABB
-	dw $5ABB
-	dw $5ABB
-	dw $5ABB
-	dw $5F52
-	dw $5F67
+	dw $5A5B            ; MOON_STONE
+	dw $5ABB            ; ANTIDOTE
+	dw $5ABB            ; BURN_HEAL
+	dw $5ABB            ; ICE_HEAL
+	dw $5ABB            ; AWAKENING
+	dw $5ABB            ; PARLYZ_HEAL
+	dw $5ABB            ; FULL_RESTORE
+	dw $5ABB            ; MAX_POTION
+	dw $5ABB            ; HYPER_POTION
+	dw $5ABB            ; SUPER_POTION
+	dw $5ABB            ; POTION
+	dw $5F52            ; BOULDERBADGE
+	dw $5F67            ; CASCADEBADGE
+	dw $6476            ; THUNDERBADGE
+	dw $6476            ; RAINBOWBADGE
+	dw $6476            ; SOULBADGE
+	dw $6476            ; MARSHBADGE
+	dw $6476            ; VOLCANOBADGE
+	dw $6476            ; EARTHBADGE
+	dw $5FAF            ; ESCAPE_ROPE
+	dw $6003            ; REPEL
+	dw $6476            ; OLD_AMBER
+	dw $5A5B            ; FIRE_STONE
+	dw $5A5B            ; THUNDER_STONE
+	dw $5A5B            ; WATER_STONE
+	dw $5AB4            ; HP_UP
+	dw $5AB4            ; PROTEIN
+	dw $5AB4            ; IRON
+	dw $5AB4            ; CARBOS
+	dw $5AB4            ; CALCIUM
+	dw $5AB4            ; RARE_CANDY
+	dw $6476            ; DOME_FOSSIL
+	dw $6476            ; HELIX_FOSSIL
+	dw $6476            ; SECRET_KEY
 	dw $6476
-	dw $6476
-	dw $6476
-	dw $6476
-	dw $6476
-	dw $6476
-	dw $5FAF
-	dw $6003
-	dw $6476
-	dw $5A5B
-	dw $5A5B
-	dw $5A5B
-	dw $5AB4
-	dw $5AB4
-	dw $5AB4
-	dw $5AB4
-	dw $5AB4
-	dw $5AB4
-	dw $6476
-	dw $6476
-	dw $6476
-	dw $6476
-	dw $6476
-	dw $6013
-	dw $5A5B
-	dw $6022
-	dw $6476
-	dw $6476
-	dw $60CD
-	dw $5ABB
-	dw $5ABB
-	dw $5ABB
-	dw $60DC
-	dw $60EB
-	dw $60F0
-	dw $60F5
-	dw $6476
-	dw $5ABB
-	dw $5ABB
-	dw $5ABB
-	dw $6476
-	dw $6476
-	dw $6104
-	dw $6104
-	dw $6104
-	dw $6104
-	dw $623A
-	dw $62DE
-	dw $62E1
-	dw $6476
-	dw $6140
-	dw $6476
-	dw $6476
-	dw $624C
+	dw $6476            ; BIKE_VOUCHER
+	dw $6013            ; X_ACCURACY
+	dw $5A5B            ; LEAF_STONE
+	dw $6022            ; CARD_KEY
+	dw $6476            ; NUGGET
+	dw $6476            ; ??? PP_UP
+	dw $60CD            ; POKE_DOLL
+	dw $5ABB            ; FULL_HEAL
+	dw $5ABB            ; REVIVE
+	dw $5ABB            ; MAX_REVIVE
+	dw $60DC            ; GUARD_SPEC_
+	dw $60EB            ; SUPER_REPL
+	dw $60F0            ; MAX_REPEL
+	dw $60F5            ; DIRE_HIT
+	dw $6476            ; COIN
+	dw $5ABB            ; FRESH_WATER
+	dw $5ABB            ; SODA_POP
+	dw $5ABB            ; LEMONADE
+	dw $6476            ; S_S__TICKET
+	dw $6476            ; GOLD_TEETH
+	dw $6104            ; X_ATTACK
+	dw $6104            ; X_DEFEND
+	dw $6104            ; X_SPEED
+	dw $6104            ; X_SPECIAL
+	dw $623A            ; COIN_CASE
+	dw $62DE            ; OAKS_PARCEL
+	dw $62E1            ; ITEMFINDER
+	dw $6476            ; SILPH_SCOPE
+	dw $6140            ; POKE_FLUTE
+	dw $6476            ; LIFT_KEY
+	dw $6476            ; EXP__ALL
+	dw $624C            ; OLD_ROD
 	dw GoodRodCode ;$6259
-	dw $6283
-	dw $6317
-	dw $631E
-	dw $631E
-	dw $631E
-	dw $631E
+	dw $6283            ; SUPER_ROD
+	dw $6317            ; PP_UP (see other?)
+	dw $631E            ; ETHER
+	dw $631E            ; MAX_ETHER
+	dw $631E            ; ELIXER
+	dw $631E            ; MAX_ELIXER
 
 ItemUseBall:	;03:5687
 	ld a,[W_ISINBATTLE]
