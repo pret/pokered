@@ -27016,12 +27016,26 @@ Mansion3Blocks:
 Mansion4_h: ; 0x523ad to 0x523b9 (12 bytes) (id=216)
     db $16 ; tileset
     db $0e, $0f ; dimensions (y, x)
-    dw $64dd, $6436, $63b9 ; blocks, texts, scripts
+    dw Mansion4Blocks, Mansion4Texts, Mansion4Script ; blocks, texts, scripts
     db $00 ; connections
 
     dw Mansion4Object ; objects
 
-INCBIN "baserom.gbc",$523b9,$52461 - $523b9
+Mansion4Script: ; 0x523b9
+    call $63cf
+    call $3c3c
+    ld hl, $6448
+    ld de, $6430
+    ld a, [$d63e]
+    call $3160
+    ld [$d63e], a
+    ret
+; 0x523cf
+
+INCBIN "baserom.gbc",$523cf,$52436 - $523cf
+
+Mansion4Texts: ; 0x52436
+INCBIN "baserom.gbc",$52436,$52461 - $52436
 
 Mansion4Text1: ; 0x52461
     db $08 ; asm
@@ -27062,9 +27076,12 @@ Mansion4Object: ; 0x52498 (size=69)
     ; warp-to
     EVENT_DISP $f, $16, $17 ; MANSION_1
 
-INCBIN "baserom.gbc",$524DD,$5271B - $524DD
+Mansion4Blocks:
+    INCBIN "maps/mansion4.blk"
 
-CeladonPrizeMenu: ; 14:671B
+INCBIN "baserom.gbc",$525af,$5271b - $525af
+
+CeladonPrizeMenu: ; 14:671B 0x5271b
         ld b,COIN_CASE
         call IsItemInBag
         jr nz,.havingCoinCase\@
