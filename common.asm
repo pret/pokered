@@ -7286,10 +7286,10 @@ ItemUsePtrTable:	;$D5E1
 	dw ItemUseBall		;$5687 greatball
 	dw ItemUseBall		;$5687 pokeball
 	dw ItemUseTownMap	;$5968 TownMap
-	dw ItemUseBicycle   ;ItemUseBicycle
-	dw $59B4                ;ItemUseSurfBoard (UNUSED, glitchy!)
+	dw $5977            ;ItemUseBicycle
+	dw $59B4            ;ItemUseSurfBoard (UNUSED, glitchy!)
 	dw ItemUseBall		;$5687 Safariball
-	dw $5A56
+	dw ItemUsePokedex   ;$DA56 pokedex
 	dw $5A5B
 	dw $5ABB
 	dw $5ABB
@@ -7762,9 +7762,16 @@ ItemUseTownMap:	;03:5968
 	and a
 	jp nz,ItemUseNotTime	;OAK: "this isn't the time..."
 
-INCBIN "baserom.gbc",$D96F,$E259 - $D96F
+INCBIN "baserom.gbc",$d96f,$da56 - $d96f
 
-GoodRodCode: ; 6259
+ItemUsePokedex: ; 0xda56 5A56
+    ld a, $29
+    jp $3e6d
+; 0xda5b
+
+INCBIN "baserom.gbc",$da5b,$e259 - $da5b
+
+GoodRodCode: ; 6259 0xe259
 	call $62B4
 	jp c,ItemUseNotTime
 Next625F:
