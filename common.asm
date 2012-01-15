@@ -31388,7 +31388,7 @@ PewterPokecenterObject: ; 0x5c60d (size=44)
 CeruleanPokecenter_h: ; 0x5c639 to 0x5c645 (12 bytes) (id=64)
     db $06 ; tileset
     db $04, $07 ; dimensions (y, x)
-    dw CeruleanPokecenterBlocks, $464b, CeruleanPokecenterScript ; blocks, texts, scripts
+    dw CeruleanPokecenterBlocks, CeruleanPokecenterTexts, CeruleanPokecenterScript ; blocks, texts, scripts
     db $00 ; connections
 
     dw CeruleanPokecenterObject ; objects
@@ -31398,13 +31398,16 @@ CeruleanPokecenterScript: ; 0x5c645
     jp $3c3c
 ; 0x5c64b
 
-INCBIN "baserom.gbc",$5c64b,$8
+CeruleanPokecenterTexts:
+    dw CeruleanPokecenterText1, CeruleanPokecenterText2, CeruleanPokecenterText3, CeruleanPokecenterText4
 
 CeruleanPokecenterText4:
-    db $f6, $ff
+    db $f6
 
-CeruleanPokecenterText2:
-CeruleanPokecenterText1: ; 0x5c655
+CeruleanPokecenterText1: ; 0x5c654
+    db $ff
+
+CeruleanPokecenterText2: ; 0x5c655
     TX_FAR _CeruleanPokecenterText1
     db $50
 
