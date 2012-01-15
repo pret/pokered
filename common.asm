@@ -27729,7 +27729,7 @@ Route5_h: ; 0x54581 to 0x545a3 (34 bytes) (id=16)
     dw $c8bd ; window
 
 	db SAFFRON_CITY
-    dw $4a9a, $c838 ; pointers (connected, current) (strip)
+    dw SaffronCityBlocks + 2, $c838 ; pointers (connected, current) (strip)
     db $10, $14 ; bigness, width
     db $00, $0a ; alignments (y, x)
     dw $c703 ; window
@@ -27921,7 +27921,7 @@ Route17_h: ; 0x54b20 to 0x54b42 (34 bytes) (id=28)
     dw $c7d3 ; window
 
 	db ROUTE_18
-    dw $4c9c, $cb9b ; pointers (connected, current) (strip)
+    dw Route18Blocks, $cb9b ; pointers (connected, current) (strip)
     db $0d, $19 ; bigness, width
     db $00, $00 ; alignments (y, x)
     dw $c708 ; window
@@ -28020,7 +28020,7 @@ Route21_h: ; 0x54fff to 0x55021 (34 bytes) (id=32)
     dw $c779 ; window
 
 	db CINNABAR_ISLAND
-    dw $4069, $c9eb ; pointers (connected, current) (strip)
+    dw CinnabarIslandBlocks, $c9eb ; pointers (connected, current) (strip)
     db $0a, $0a ; bigness, width
     db $00, $00 ; alignments (y, x)
     dw $c6f9 ; window
@@ -29215,7 +29215,7 @@ Route6_h: ; 0x58000 to 0x58022 (34 bytes) (id=17)
     dw $c8bd ; window
 
 	db VERMILION_CITY
-    dw $4a41, $c838 ; pointers (connected, current) (strip)
+    dw VermilionCityBlocks + 2, $c838 ; pointers (connected, current) (strip)
     db $10, $14 ; bigness, width
     db $00, $0a ; alignments (y, x)
     dw $c703 ; window
@@ -29320,7 +29320,7 @@ Route10_h: ; 0x582d4 to 0x582f6 (34 bytes) (id=21)
     ; connections data
 
 	db LAVENDER_TOWN
-    dw $4085, $c95b ; pointers (connected, current) (strip)
+    dw LavenderTownBlocks, $c95b ; pointers (connected, current) (strip)
     db $0a, $0a ; bigness, width
     db $00, $00 ; alignments (y, x)
     dw $c6f9 ; window
@@ -29441,7 +29441,7 @@ Route12_h: ; 0x5866d to 0x5869a (45 bytes) (id=23)
     dw $c779 ; window
 
 	db ROUTE_13
-    dw $489c, $ca78 ; pointers (connected, current) (strip)
+    dw Route13Blocks + 17, $ca78 ; pointers (connected, current) (strip)
     db $0d, $1e ; bigness, width
     db $00, $28 ; alignments (y, x)
     dw $c70d ; window
@@ -29557,7 +29557,7 @@ Route16_h: ; 0x58ada to 0x58afc (34 bytes) (id=27)
     ; connections data
 
 	db ROUTE_17
-    dw $4ba8, $c823 ; pointers (connected, current) (strip)
+    dw Route17Blocks, $c823 ; pointers (connected, current) (strip)
     db $0a, $0a ; bigness, width
     db $00, $00 ; alignments (y, x)
     dw $c6f9 ; window
