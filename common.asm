@@ -22701,7 +22701,7 @@ CeladonMart4Blocks: ; 40
 CeladonMartRoof_h: ; 0x483c9 to 0x483d5 (12 bytes) (bank=12) (id=126)
     db $12 ; tileset
     db $04, $0a ; dimensions (y, x)
-    dw CeladonMartRoofBlocks, $455b, CeladonMartRoofScript ; blocks, texts, scripts
+    dw CeladonMartRoofBlocks, CeladonMartRoofTexts, CeladonMartRoofScript ; blocks, texts, scripts
     db $00 ; connections
     
     dw CeladonMartRoofObject ; objects
@@ -22710,7 +22710,10 @@ CeladonMartRoofScript: ; 0x483d5
     jp $3c3c
 ; 0x483d8
 
-INCBIN "baserom.gbc",$483d8,$18f
+INCBIN "baserom.gbc",$483d8,$4855b - $483d8
+
+CeladonMartRoofTexts: ; 0x4855b
+    dw CeladonMartRoofText1, CeladonMartRoofText2, CeladonMartRoofText5, CeladonMartRoofText5, CeladonMartRoofText5, CeladonMartRoofText6
 
 CeladonMartRoofText1: ; 0x48567
     TX_FAR _CeladonMartRoofText1
@@ -22738,7 +22741,14 @@ CeladonMartRoofText2: ; 0x4856c
 .asm_05aa4 ; 0x48595
     jp $24d7
 
-INCBIN "baserom.gbc",$48598,$b
+CeladonMartRoofText3:
+INCBIN "baserom.gbc",$48598,5
+
+CeladonMartRoofText4:
+INCBIN "baserom.gbc",$4859d,5
+
+CeladonMartRoofText5: ; 0x485a2
+    db $f5
 
 CeladonMartRoofText6: ; 0x485a3
     TX_FAR _CeladonMartRoofText6
