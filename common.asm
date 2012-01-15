@@ -30808,6 +30808,7 @@ UndergroundTunnelEntranceRoute5Blocks: ; 16
     INCBIN "maps/undergroundtunnelentranceroute5.blk"
 
 Route2GateBlocks:
+ViridianForestEntranceBlocks:
 ViridianForestexitBlocks: ; 20
     INCBIN "maps/viridianforestexit.blk"
 
@@ -32734,7 +32735,7 @@ Route2GateObject: ; 0x5d620 (size=48)
 ViridianForestEntrance_h: ; 0x5d650 to 0x5d65c (12 bytes) (id=50)
     db $09 ; tileset
     db $04, $05 ; dimensions (y, x)
-    dw $4090, ViridianForestEntranceTexts, ViridianForestEntranceScript ; blocks, texts, scripts
+    dw ViridianForestEntranceBlocks, ViridianForestEntranceTexts, ViridianForestEntranceScript ; blocks, texts, scripts
     db $00 ; connections
 
     dw ViridianForestEntranceObject ; objects
