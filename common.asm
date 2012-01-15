@@ -23075,7 +23075,7 @@ CeladonMansion4Blocks: ; 24
 CeladonPokecenter_h: ; 0x488ac to 0x488b8 (12 bytes) (bank=12) (id=133)
     db $06 ; tileset
     db $04, $07 ; dimensions (y, x)
-    dw CeladonPokecenterBlocks, $48be, CeladonPokecenterScript ; blocks, texts, scripts
+    dw CeladonPokecenterBlocks, CeladonPokecenterTexts, CeladonPokecenterScript ; blocks, texts, scripts
     db $00 ; connections
 
     dw CeladonPokecenterObject ; objects
@@ -23085,16 +23085,18 @@ CeladonPokecenterScript: ; 0x488b8
     jp $3c3c
 ; 0x488be
 
-INCBIN "baserom.gbc",$488be,$8
+CeladonPokecenterTexts:
+    dw CeladonPokecenterText1, CeladonPokecenterText2, CeladonPokecenterText3, CeladonPokecenterText4
 
 CeladonPokecenterText4:
-    db $f6, $ff
+    db $f6
 
-CeladonPokecenterText2: ; _CeladonPokecenterText2
-CeladonPokecenterText1: ; 0x488c8
-    TX_FAR _CeladonPokecenterText1
+CeladonPokecenterText1:
+    db $ff
 
-INCBIN "baserom.gbc",$488cc,$488cd - $488cc
+CeladonPokecenterText2: ; 0x488c8
+    TX_FAR _CeladonPokecenterText2
+    db $50
 
 CeladonPokecenterText3: ; 0x488cd
     TX_FAR _CeladonPokecenterText3
@@ -40307,7 +40309,7 @@ _CeladonMansion5Text1: ; 0x9d1ba
     db "your friends and", $55
     db "trade #MON!", $57
 
-_CeladonPokecenterText1: ; 0x9d226
+_CeladonPokecenterText2: ; 0x9d226
     db $0, "# FLUTE awakens", $4f
     db "#MON with a", $55
     db "sound that only", $55
