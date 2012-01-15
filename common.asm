@@ -8133,7 +8133,7 @@ CeladonCityBlocks: ; 450
 
 PalletTown_h:
 	db $00 ; tileset
-	db $09,$0A ; dimensions
+	db PalletTownHeight, PalletTownWidth ; dimensions
 	dw PalletTownBlocks, PalletTownTexts, PalletTownScript
 	db NORTH | SOUTH ; connections
 
