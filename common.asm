@@ -35884,6 +35884,7 @@ PewterMartBlocks: ; 16
 FuchsiaHouse1Blocks: ; 16
     INCBIN "maps/fuchsiahouse1.blk"
 
+CinnabarPokecenterBlocks:
 FuchsiaPokecenterBlocks: ; 28
     INCBIN "maps/fuchsiapokecenter.blk"
 
@@ -37655,7 +37656,7 @@ Lab4Blocks: ; 16
 CinnabarPokecenter_h: ; 0x75e20 to 0x75e2c (12 bytes) (id=171)
     db $06 ; tileset
     db $04, $07 ; dimensions (y, x)
-    dw $4030, CinnabarPokecenterTexts, CinnabarPokecenterScript ; blocks, texts, scripts
+    dw CinnabarPokecenterBlocks, CinnabarPokecenterTexts, CinnabarPokecenterScript ; blocks, texts, scripts
     db $00 ; connections
 
     dw CinnabarPokecenterObject ; objects
