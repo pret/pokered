@@ -26949,12 +26949,23 @@ Mansion2Blocks:
 Mansion3_h: ; 0x521e2 to 0x521ee (12 bytes) (id=215)
     db $16 ; tileset
     db $09, $0f ; dimensions (y, x)
-    dw $6326, $628a, $61ee ; blocks, texts, scripts
+    dw $6326, $628a, Mansion3Script ; blocks, texts, scripts
     db $00 ; connections
 
     dw Mansion3Object ; objects
 
-INCBIN "baserom.gbc",$521ee,$522af - $521ee
+Mansion3Script:
+    call $6204
+    call $3c3c
+    ld hl, $6296
+    ld de, $6235
+    ld a, [$d63d]
+    call $3160
+    ld [$d63d], a
+    ret
+; 0x52204
+
+INCBIN "baserom.gbc",$52204,$522af - $52204
 
 Mansion3Text1: ; 0x522af
     db $08 ; asm
