@@ -10805,7 +10805,7 @@ OaksLabScript1: ; 0x1cb6e
     ret
 ; 0x1cb7e
 
-INCBIN "baserom.gbc",$1cb7e,$1cb82 - $1cb7e
+db $40, $40, $40, $ff
 
 OaksLabScript2: ; 0x1cb82
     ld a, [$d730]
@@ -10847,7 +10847,7 @@ OaksLabScript3: ; 0x1cba2
     ret
 ; 0x1cbcf
 
-INCBIN "baserom.gbc",$1cbcf,$1cbd2 - $1cbcf
+db $40, $8, $ff
 
 OaksLabScript4: ; 0x1cbd2
     ld a, [$cd38]
@@ -10941,10 +10941,9 @@ OaksLabScript7: ; 0x1cc72
 INCBIN "baserom.gbc",$1cc80,$402
 
 OaksLabTexts: ; 0x1d082
-    dw OaksLabText1, OaksLabText2, OaksLabText3, OaksLabText4, OaksLabText5, OaksLabText6, OaksLabText7, OaksLabText8, OaksLabText9, OaksLabText10, OaksLabText11, OaksLabText12, OaksLabText13, OaksLabText14, OaksLabText15, OaksLabText16, OaksLabText17, OaksLabText18, OaksLabText19, OaksLabText20, OaksLabText21, OaksLabText22, OaksLabText23, OaksLabText24, OaksLabText25, OaksLabText26, OaksLabText27
+    dw OaksLabText1, OaksLabText2, OaksLabText3, OaksLabText4, OaksLabText5, OaksLabText6, OaksLabText7, OaksLabText8, OaksLabText9, OaksLabText10, OaksLabText11, OaksLabText12, OaksLabText13, OaksLabText14, OaksLabText15, OaksLabText16, OaksLabText17, OaksLabText18, OaksLabText19, OaksLabText20, OaksLabText21, OaksLabText22, OaksLabText23, OaksLabText24, OaksLabText25, OaksLabText26, OaksLabText27, OaksLabText28, OaksLabText29, OaksLabText30, OaksLabText31, OaksLabText32, OaksLabText33, OaksLabText34, OaksLabText35, OaksLabText36, OaksLabText37, OaksLabText38
 
-INCBIN "baserom.gbc",$1d0b8,22
-
+OaksLabText28:
 OaksLabText1: ; 0x1d0ce
     db $08 ; asm
     ld a, [$d74b]
@@ -10967,6 +10966,7 @@ OaksLabText1: ; 0x1d0ce
 
 INCBIN "baserom.gbc",$1d0f3,$1d102 - $1d0f3
 
+OaksLabText29:
 OaksLabText2: ; 0x1d102
     db $8
     ld a, $b1
@@ -10977,6 +10977,7 @@ OaksLabText2: ; 0x1d102
     ld b, $2
     jr asm_5e6bb ; 0x1d111 $20
 
+OaksLabText30:
 OaksLabText3: ; 0x1d113
     db $8
     ld a, $99
@@ -10987,6 +10988,7 @@ OaksLabText3: ; 0x1d113
     ld b, $3
     jr asm_5e6bb ; 0x1d122 $f
 
+OaksLabText31:
 OaksLabText4: ; 0x1d124
     db $8
     ld a, $b0
@@ -11119,6 +11121,7 @@ asm_6ccd7: ; 0x1d21f
 
 INCBIN "baserom.gbc",$1d222,$26
 
+OaksLabText32:
 OaksLabText5: ; 0x1d248
     db $08 ; asm
     ld a, [$d747]
@@ -11200,6 +11203,8 @@ OaksLabText5: ; 0x1d248
 
 INCBIN "baserom.gbc",$1d2f0,$32
 
+OaksLabText34:
+OaksLabText33:
 OaksLabText7: ; 0x1d322
 OaksLabText6: ; 0x1d322
     db $08 ; asm
@@ -11209,10 +11214,12 @@ OaksLabText6: ; 0x1d322
 
 INCBIN "baserom.gbc",$1d32c,$5
 
+OaksLabText35:
 OaksLabText8: ; 0x1d331
     TX_FAR _OaksLabText8
     db $50
 
+OaksLabText36:
 OaksLabText9: ; 0x1d336
     db $08 ; asm
     ld hl, $5340
@@ -11317,6 +11324,8 @@ INCBIN "baserom.gbc",$1d3f1,$1d3f6 - $1d3f1
 OaksLabText27: ; 0x1d3f6
 INCBIN "baserom.gbc",$1d3f6,5
 
+OaksLabText38:
+OaksLabText37:
 OaksLabText11:
 OaksLabText10: ; 0x1d3fb
     db $08 ; asm
