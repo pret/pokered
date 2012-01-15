@@ -23661,7 +23661,7 @@ CeladonMart5Blocks: ; 40
 CeladonPrizeRoom_h: ; 0x490e4 to 0x490f0 (12 bytes) (bank=12) (id=137)
     db $12 ; tileset
     db $04, $05 ; dimensions (y, x)
-    dw CeladonPrizeRoomBlocks, $50f3, $50f0 ; blocks, texts, scripts
+    dw CeladonPrizeRoomBlocks, CeladonPrizeRoomTexts, CeladonPrizeRoomScript ; blocks, texts, scripts
     db $00 ; connections
 
     dw CeladonPrizeRoomObject ; objects
@@ -23670,7 +23670,8 @@ CeladonPrizeRoomScript: ; 0x490f0
     jp $3c3c
 ; 0x490f3
 
-INCBIN "baserom.gbc",$490f3,$a
+CeladonPrizeRoomTexts:
+    dw CeladonPrizeRoomText1, CeladonPrizeRoomText2, CeladonPrizeRoomText3, CeladonPrizeRoomText3, CeladonPrizeRoomText3
 
 CeladonPrizeRoomText1: ; 0x490fd
     TX_FAR _CeladonPrizeRoomText1
@@ -23680,7 +23681,8 @@ CeladonPrizeRoomText2: ; 0x49102
     TX_FAR _CeladonPrizeRoomText2
     db $50
 
-INCBIN "baserom.gbc",$49107,$1
+CeladonPrizeRoomText3: ; 0x49107
+    db $f7
 
 CeladonPrizeRoomObject: ; 0x49108 (size=41)
     db $f ; border tile
