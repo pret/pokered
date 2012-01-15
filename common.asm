@@ -8187,7 +8187,7 @@ ViridianCity_h: ; 0x18357 to 0x18384 (45 bytes) (bank=6) (id=1)
     ; connections data
 
 	db ROUTE_2
-    dw $41C8, $C6F0 ; pointers (connected, current) (strip)
+    dw Route2Blocks + (Route2Height - 3) * Route2Width, $C6F0 ; pointers (connected, current) (strip)
     db $0a, $0a ; bigness, width
     db $47, $f6 ; alignments (y, x)
     dw $c929 ; window
@@ -8199,7 +8199,7 @@ ViridianCity_h: ; 0x18357 to 0x18384 (45 bytes) (bank=6) (id=1)
     dw $c6f9 ; window
 
 	db ROUTE_22
-    dw $404e, $c79e ; pointers (connected, current) (strip)
+    dw Route22Blocks - 3 + (Route22Width), $c79e ; pointers (connected, current) (strip)
     db $09, $14 ; bigness, width
     db $f8, $27 ; alignments (y, x)
     dw $c716 ; window
@@ -8254,13 +8254,13 @@ PewterCity_h: ; 0x18554 to 0x18576 (34 bytes) (bank=6) (id=2)
     ; connections data
 
 	db ROUTE_2
-    dw $407e, $c912 ; pointers (connected, current) (strip)
+    dw Route2Blocks, $c912 ; pointers (connected, current) (strip)
     db $0a, $0a ; bigness, width
     db $00, $f6 ; alignments (y, x)
     dw $c6f9 ; window
 
 	db ROUTE_3
-    dw $4255, $c7b5 ; pointers (connected, current) (strip)
+    dw Route3Blocks + (Route3Width * 0), $c7b5 ; pointers (connected, current) (strip)
     db $09, $23 ; bigness, width
     db $f8, $00 ; alignments (y, x)
     dw $c712 ; window
@@ -8320,7 +8320,7 @@ CeruleanCity_h: ; 0x1874e to 0x18786 (56 bytes) (bank=6) (id=3)
     ; connections data
 
 	db ROUTE_24
-    dw $477d, $c6f0 ; pointers (connected, current) (strip)
+    dw Route24Blocks + (Route24Height - 3) * Route24Width, $c6f0 ; pointers (connected, current) (strip)
     db $0a, $0a ; bigness, width
     db $23, $f6 ; alignments (y, x)
     dw $c809 ; window
@@ -8332,13 +8332,13 @@ CeruleanCity_h: ; 0x1874e to 0x18786 (56 bytes) (bank=6) (id=3)
     dw $c6f9 ; window
 
 	db ROUTE_4
-    dw $4416, $c79e ; pointers (connected, current) (strip)
+    dw Route4Blocks - 3 + (Route4Width), $c79e ; pointers (connected, current) (strip)
     db $09, $2d ; bigness, width
     db $f8, $59 ; alignments (y, x)
     dw $c748 ; window
 
 	db ROUTE_9
-    dw $46fe, $c7b5 ; pointers (connected, current) (strip)
+    dw Route9Blocks + (Route9Width * 0), $c7b5 ; pointers (connected, current) (strip)
     db $09, $1e ; bigness, width
     db $f8, $00 ; alignments (y, x)
     dw $c70d ; window
@@ -8407,13 +8407,13 @@ VermilionCity_h: ; 0x18998 to 0x189ba (34 bytes) (bank=6) (id=5)
     ; connections data
 
 	db ROUTE_6
-    dw $410f, $c6f0 ; pointers (connected, current) (strip)
+    dw Route6Blocks + (Route6Height - 3) * Route6Width, $c6f0 ; pointers (connected, current) (strip)
     db $0a, $0a ; bigness, width
     db $23, $f6 ; alignments (y, x)
     dw $c809 ; window
 
 	db ROUTE_11
-    dw $455f, $c7b5 ; pointers (connected, current) (strip)
+    dw Route11Blocks + (Route11Width * 0), $c7b5 ; pointers (connected, current) (strip)
     db $09, $1e ; bigness, width
     db $f8, $00 ; alignments (y, x)
     dw $c70d ; window
@@ -8482,13 +8482,13 @@ FuchsiaCity_h: ; 0x18ba7 to 0x18bd4 (45 bytes) (bank=6) (id=7)
     dw $c6f9 ; window
 
 	db ROUTE_18
-    dw $4cb2, $c79e ; pointers (connected, current) (strip)
+    dw Route18Blocks - 3 + (Route18Width), $c79e ; pointers (connected, current) (strip)
     db $09, $19 ; bigness, width
     db $f8, $31 ; alignments (y, x)
     dw $c720 ; window
 
 	db ROUTE_15
-    dw $49cc, $c7b5 ; pointers (connected, current) (strip)
+    dw Route15Blocks + (Route15Width * 0), $c7b5 ; pointers (connected, current) (strip)
     db $09, $1e ; bigness, width
     db $f8, $00 ; alignments (y, x)
     dw $c70d ; window
@@ -10393,13 +10393,13 @@ CinnabarIsland_h: ; 0x1c000 to 0x1c022 (34 bytes) (bank=7) (id=8)
     ; connections data
 
 	db ROUTE_21
-    dw $5211, $c6eb ; pointers (connected, current) (strip)
+    dw Route21Blocks + (Route21Height - 3) * Route21Width, $c6eb ; pointers (connected, current) (strip)
     db $0a, $0a ; bigness, width
     db $59, $00 ; alignments (y, x)
     dw $c9b9 ; window
 
 	db ROUTE_20
-    dw $417d, $c725 ; pointers (connected, current) (strip)
+    dw Route20Blocks + (Route20Width * 0), $c725 ; pointers (connected, current) (strip)
     db $09, $32 ; bigness, width
     db $00, $00 ; alignments (y, x)
     dw $c721 ; window
@@ -10448,7 +10448,7 @@ Route1_h: ; 0x1c0c3 to 0x1c0e5 (34 bytes) (bank=7) (id=12)
     ; connections data
 
 	db VIRIDIAN_CITY
-    dw $451a, $c6e8 ; pointers (connected, current) (strip)
+    dw ViridianCityBlocks + (ViridianCityHeight - 3) * ViridianCityWidth + 2, $c6e8 ; pointers (connected, current) (strip)
     db $10, $14 ; bigness, width
     db $23, $0a ; alignments (y, x)
     dw $c8bd ; window
@@ -20415,7 +20415,7 @@ LavenderTown_h: ; 0x44000 to 0x4402d (45 bytes) (bank=11) (id=4)
     ; connections data
 
 	db ROUTE_10
-    dw $44a0, $c6eb ; pointers (connected, current) (strip)
+    dw Route10Blocks + (Route10Height - 3) * Route10Width, $c6eb ; pointers (connected, current) (strip)
     db $0a, $0a ; bigness, width
     db $47, $00 ; alignments (y, x)
     dw $c929 ; window
@@ -20427,7 +20427,7 @@ LavenderTown_h: ; 0x44000 to 0x4402d (45 bytes) (bank=11) (id=4)
     dw $c6f9 ; window
 
 	db ROUTE_8
-    dw $41e1, $c718 ; pointers (connected, current) (strip)
+    dw Route8Blocks - 3 + (Route8Width), $c718 ; pointers (connected, current) (strip)
     db $09, $1e ; bigness, width
     db $00, $3b ; alignments (y, x)
     dw $c72a ; window
@@ -22447,13 +22447,13 @@ Route7_h: ; 0x48000 to 0x48022 (34 bytes) (bank=12) (id=18)
     ; connections data
 
 	db CELADON_CITY
-    dw $410e, $c6e8 ; pointers (connected, current) (strip)
+    dw CeladonCityBlocks - 3 + (CeladonCityWidth * 2), $c6e8 ; pointers (connected, current) (strip)
     db $0f, $19 ; bigness, width
     db $08, $31 ; alignments (y, x)
     dw $c720 ; window
 
 	db SAFFRON_CITY
-    dw $4aac, $c6f5 ; pointers (connected, current) (strip)
+    dw SaffronCityBlocks + (SaffronCityWidth), $c6f5 ; pointers (connected, current) (strip)
     db $0f, $14 ; bigness, width
     db $08, $00 ; alignments (y, x)
     dw $c703 ; window
@@ -25573,13 +25573,13 @@ Route22_h: ; 0x50000 to 0x50022 (34 bytes) (id=33)
     ; connections data
 
 	db ROUTE_23
-    dw $4664, $c6eb ; pointers (connected, current) (strip)
+    dw Route23Blocks + (Route23Height - 3) * Route23Width, $c6eb ; pointers (connected, current) (strip)
     db $0a, $0a ; bigness, width
     db $8f, $00 ; alignments (y, x)
     dw $cb69 ; window
 
 	db VIRIDIAN_CITY
-    dw $4400, $c6ff ; pointers (connected, current) (strip)
+    dw ViridianCityBlocks + (ViridianCityWidth), $c6ff ; pointers (connected, current) (strip)
     db $0f, $14 ; bigness, width
     db $08, $00 ; alignments (y, x)
     dw $c703 ; window
@@ -25616,13 +25616,13 @@ Route20_h: ; 0x500f1 to 0x50113 (34 bytes) (id=31)
     ; connections data
 
 	db CINNABAR_ISLAND
-    dw $4070, $c790 ; pointers (connected, current) (strip)
+    dw CinnabarIslandBlocks - 3 + (CinnabarIslandWidth), $c790 ; pointers (connected, current) (strip)
     db $09, $0a ; bigness, width
     db $00, $13 ; alignments (y, x)
     dw $c702 ; window
 
 	db ROUTE_19
-    dw $4f87, $c71d ; pointers (connected, current) (strip)
+    dw Route19Blocks + (Route19Width * 15), $c71d ; pointers (connected, current) (strip)
     db $0c, $0a ; bigness, width
     db $24, $00 ; alignments (y, x)
     dw $c6f9 ; window
@@ -25670,7 +25670,7 @@ Route23_h: ; 0x5033f to 0x50361 (34 bytes) (id=34)
     ; connections data
 
 	db INDIGO_PLATEAU
-    dw $4986, $c6eb ; pointers (connected, current) (strip)
+    dw IndigoPlateauBlocks + (IndigoPlateauHeight - 3) * IndigoPlateauWidth, $c6eb ; pointers (connected, current) (strip)
     db $0a, $0a ; bigness, width
     db $11, $00 ; alignments (y, x)
     dw $c779 ; window
@@ -25730,7 +25730,7 @@ Route24_h: ; 0x50682 to 0x506a4 (34 bytes) (id=35)
     dw $c703 ; window
 
 	db ROUTE_25
-    dw $4810, $c725 ; pointers (connected, current) (strip)
+    dw Route25Blocks + (Route25Width * 0), $c725 ; pointers (connected, current) (strip)
     db $09, $1e ; bigness, width
     db $00, $00 ; alignments (y, x)
     dw $c70d ; window
@@ -25768,7 +25768,7 @@ Route25_h: ; 0x5079b to 0x507b2 (23 bytes) (id=36)
     ; connections data
 
 	db ROUTE_24
-    dw $46ee, $c754 ; pointers (connected, current) (strip)
+    dw Route24Blocks - 3 + (Route24Width), $c754 ; pointers (connected, current) (strip)
     db $0c, $0a ; bigness, width
     db $00, $13 ; alignments (y, x)
     dw $c702 ; window
@@ -25854,7 +25854,7 @@ SaffronCity_h: ; 0x509a4 to 0x509dc (56 bytes) (id=10)
     ; connections data
 
 	db ROUTE_5
-    dw $4668, $c6f0 ; pointers (connected, current) (strip)
+    dw Route5Blocks + (Route5Height - 3) * Route5Width, $c6f0 ; pointers (connected, current) (strip)
     db $0a, $0a ; bigness, width
     db $23, $f6 ; alignments (y, x)
     dw $c809 ; window
@@ -25866,13 +25866,13 @@ SaffronCity_h: ; 0x509a4 to 0x509dc (56 bytes) (id=10)
     dw $c6f9 ; window
 
 	db ROUTE_7
-    dw $4058, $c79e ; pointers (connected, current) (strip)
+    dw Route7Blocks - 3 + (Route7Width), $c79e ; pointers (connected, current) (strip)
     db $09, $0a ; bigness, width
     db $f8, $13 ; alignments (y, x)
     dw $c702 ; window
 
 	db ROUTE_8
-    dw $41c6, $c7b5 ; pointers (connected, current) (strip)
+    dw Route8Blocks + (Route8Width * 0), $c7b5 ; pointers (connected, current) (strip)
     db $09, $1e ; bigness, width
     db $f8, $00 ; alignments (y, x)
     dw $c70d ; window
@@ -27627,13 +27627,13 @@ Route3_h: ; 0x541e6 to 0x54208 (34 bytes) (id=14)
     ; connections data
 
 	db ROUTE_4
-    dw $44fa, $c704 ; pointers (connected, current) (strip)
+    dw Route4Blocks + (Route4Height - 3) * Route4Width, $c704 ; pointers (connected, current) (strip)
     db $0d, $2d ; bigness, width
     db $11, $ce ; alignments (y, x)
     dw $c8b4 ; window
 
 	db PEWTER_CITY
-    dw $460b, $c6e8 ; pointers (connected, current) (strip)
+    dw PewterCityBlocks - 3 + (PewterCityWidth * 2), $c6e8 ; pointers (connected, current) (strip)
     db $0f, $14 ; bigness, width
     db $08, $27 ; alignments (y, x)
     dw $c716 ; window
@@ -27679,7 +27679,7 @@ Route4_h: ; 0x54390 to 0x543b2 (34 bytes) (id=15)
     dw $c712 ; window
 
 	db CERULEAN_CITY
-    dw $4844, $c718 ; pointers (connected, current) (strip)
+    dw CeruleanCityBlocks + (CeruleanCityWidth), $c718 ; pointers (connected, current) (strip)
     db $0f, $14 ; bigness, width
     db $08, $00 ; alignments (y, x)
     dw $c703 ; window
@@ -27723,7 +27723,7 @@ Route5_h: ; 0x54581 to 0x545a3 (34 bytes) (id=16)
     ; connections data
 
 	db CERULEAN_CITY
-    dw $495e, $c6e8 ; pointers (connected, current) (strip)
+    dw CeruleanCityBlocks + (CeruleanCityHeight - 3) * CeruleanCityWidth + 2, $c6e8 ; pointers (connected, current) (strip)
     db $10, $14 ; bigness, width
     db $23, $0a ; alignments (y, x)
     dw $c8bd ; window
@@ -27772,13 +27772,13 @@ Route9_h: ; 0x54686 to 0x546a8 (34 bytes) (id=20)
     ; connections data
 
 	db CERULEAN_CITY
-    dw $4855, $c6e8 ; pointers (connected, current) (strip)
+    dw CeruleanCityBlocks - 3 + (CeruleanCityWidth * 2), $c6e8 ; pointers (connected, current) (strip)
     db $0f, $14 ; bigness, width
     db $08, $27 ; alignments (y, x)
     dw $c716 ; window
 
 	db ROUTE_10
-    dw $4356, $c775 ; pointers (connected, current) (strip)
+    dw Route10Blocks + (Route10Width * 0), $c775 ; pointers (connected, current) (strip)
     db $0c, $0a ; bigness, width
     db $00, $00 ; alignments (y, x)
     dw $c6f9 ; window
@@ -27819,13 +27819,13 @@ Route13_h: ; 0x5480c to 0x5482e (34 bytes) (id=24)
     ; connections data
 
 	db ROUTE_12
-    dw $490e, $c6ff ; pointers (connected, current) (strip)
+    dw Route12Blocks + (Route12Height - 3) * Route12Width, $c6ff ; pointers (connected, current) (strip)
     db $0a, $0a ; bigness, width
     db $6b, $d8 ; alignments (y, x)
     dw $ca49 ; window
 
 	db ROUTE_14
-    dw $4a19, $c754 ; pointers (connected, current) (strip)
+    dw Route14Blocks - 3 + (Route14Width), $c754 ; pointers (connected, current) (strip)
     db $0c, $0a ; bigness, width
     db $00, $13 ; alignments (y, x)
     dw $c702 ; window
@@ -27868,13 +27868,13 @@ Route14_h: ; 0x54999 to 0x549bb (34 bytes) (id=25)
     ; connections data
 
 	db ROUTE_15
-    dw $49e7, $c838 ; pointers (connected, current) (strip)
+    dw Route15Blocks - 3 + (Route15Width), $c838 ; pointers (connected, current) (strip)
     db $09, $1e ; bigness, width
     db $dc, $3b ; alignments (y, x)
     dw $c72a ; window
 
 	db ROUTE_13
-    dw $488b, $c725 ; pointers (connected, current) (strip)
+    dw Route13Blocks + (Route13Width * 0), $c725 ; pointers (connected, current) (strip)
     db $09, $1e ; bigness, width
     db $00, $00 ; alignments (y, x)
     dw $c70d ; window
@@ -27915,7 +27915,7 @@ Route17_h: ; 0x54b20 to 0x54b42 (34 bytes) (id=28)
     ; connections data
 
 	db ROUTE_16
-    dw $4bfc, $c6eb ; pointers (connected, current) (strip)
+    dw Route16Blocks + (Route16Height - 3) * Route16Width, $c6eb ; pointers (connected, current) (strip)
     db $0d, $14 ; bigness, width
     db $11, $00 ; alignments (y, x)
     dw $c7d3 ; window
@@ -27967,13 +27967,13 @@ Route19_h: ; 0x54e78 to 0x54e9a (34 bytes) (id=30)
     ; connections data
 
 	db FUCHSIA_CITY
-    dw $4db4, $c6e8 ; pointers (connected, current) (strip)
+    dw FuchsiaCityBlocks + (FuchsiaCityHeight - 3) * FuchsiaCityWidth + 2, $c6e8 ; pointers (connected, current) (strip)
     db $10, $14 ; bigness, width
     db $23, $0a ; alignments (y, x)
     dw $c8bd ; window
 
 	db ROUTE_20
-    dw $41ac, $c838 ; pointers (connected, current) (strip)
+    dw Route20Blocks - 3 + (Route20Width), $c838 ; pointers (connected, current) (strip)
     db $09, $32 ; bigness, width
     db $dc, $63 ; alignments (y, x)
     dw $c752 ; window
@@ -28014,7 +28014,7 @@ Route21_h: ; 0x54fff to 0x55021 (34 bytes) (id=32)
     ; connections data
 
 	db PALLET_TOWN
-    dw $4339, $c6eb ; pointers (connected, current) (strip)
+    dw PalletTownBlocks + (PalletTownHeight - 3) * PalletTownWidth, $c6eb ; pointers (connected, current) (strip)
     db $0a, $0a ; bigness, width
     db $11, $00 ; alignments (y, x)
     dw $c779 ; window
@@ -29209,7 +29209,7 @@ Route6_h: ; 0x58000 to 0x58022 (34 bytes) (id=17)
     ; connections data
 
 	db SAFFRON_CITY
-    dw $4bc6, $c6e8 ; pointers (connected, current) (strip)
+    dw SaffronCityBlocks + (SaffronCityHeight - 3) * SaffronCityWidth + 2, $c6e8 ; pointers (connected, current) (strip)
     db $10, $14 ; bigness, width
     db $23, $0a ; alignments (y, x)
     dw $c8bd ; window
@@ -29262,13 +29262,13 @@ Route8_h: ; 0x5812d to 0x5814f (34 bytes) (id=19)
     ; connections data
 
 	db SAFFRON_CITY
-    dw $4abd, $c6e8 ; pointers (connected, current) (strip)
+    dw SaffronCityBlocks - 3 + (SaffronCityWidth * 2), $c6e8 ; pointers (connected, current) (strip)
     db $0f, $14 ; bigness, width
     db $08, $27 ; alignments (y, x)
     dw $c716 ; window
 
 	db LAVENDER_TOWN
-    dw $4085, $c775 ; pointers (connected, current) (strip)
+    dw LavenderTownBlocks + (LavenderTownWidth * 0), $c775 ; pointers (connected, current) (strip)
     db $09, $0a ; bigness, width
     db $00, $00 ; alignments (y, x)
     dw $c6f9 ; window
@@ -29326,7 +29326,7 @@ Route10_h: ; 0x582d4 to 0x582f6 (34 bytes) (id=21)
     dw $c6f9 ; window
 
 	db ROUTE_9
-    dw $4719, $c718 ; pointers (connected, current) (strip)
+    dw Route9Blocks - 3 + (Route9Width), $c718 ; pointers (connected, current) (strip)
     db $09, $1e ; bigness, width
     db $00, $3b ; alignments (y, x)
     dw $c72a ; window
@@ -29376,13 +29376,13 @@ Route11_h: ; 0x584be to 0x584e0 (34 bytes) (id=22)
     ; connections data
 
 	db VERMILION_CITY
-    dw $4a64, $c6e8 ; pointers (connected, current) (strip)
+    dw VermilionCityBlocks - 3 + (VermilionCityWidth * 2), $c6e8 ; pointers (connected, current) (strip)
     db $0f, $14 ; bigness, width
     db $08, $27 ; alignments (y, x)
     dw $c716 ; window
 
 	db ROUTE_12
-    dw $4800, $c709 ; pointers (connected, current) (strip)
+    dw Route12Blocks + (Route12Width * 24), $c709 ; pointers (connected, current) (strip)
     db $0f, $0a ; bigness, width
     db $36, $00 ; alignments (y, x)
     dw $c6f9 ; window
@@ -29435,7 +29435,7 @@ Route12_h: ; 0x5866d to 0x5869a (45 bytes) (id=23)
     ; connections data
 
 	db LAVENDER_TOWN
-    dw $40c1, $c6eb ; pointers (connected, current) (strip)
+    dw LavenderTownBlocks + (LavenderTownHeight - 3) * LavenderTownWidth, $c6eb ; pointers (connected, current) (strip)
     db $0a, $0a ; bigness, width
     db $11, $00 ; alignments (y, x)
     dw $c779 ; window
@@ -29447,7 +29447,7 @@ Route12_h: ; 0x5866d to 0x5869a (45 bytes) (id=23)
     dw $c70d ; window
 
 	db ROUTE_11
-    dw $457a, $c8c8 ; pointers (connected, current) (strip)
+    dw Route11Blocks - 3 + (Route11Width), $c8c8 ; pointers (connected, current) (strip)
     db $09, $1e ; bigness, width
     db $ca, $3b ; alignments (y, x)
     dw $c72a ; window
@@ -29499,13 +29499,13 @@ Route15_h: ; 0x5892c to 0x5894e (34 bytes) (id=26)
     ; connections data
 
 	db FUCHSIA_CITY
-    dw $4cab, $c6e8 ; pointers (connected, current) (strip)
+    dw FuchsiaCityBlocks - 3 + (FuchsiaCityWidth * 2), $c6e8 ; pointers (connected, current) (strip)
     db $0f, $14 ; bigness, width
     db $08, $27 ; alignments (y, x)
     dw $c716 ; window
 
 	db ROUTE_14
-    dw $4aa8, $c709 ; pointers (connected, current) (strip)
+    dw Route14Blocks + (Route14Width * 15), $c709 ; pointers (connected, current) (strip)
     db $0c, $0a ; bigness, width
     db $24, $00 ; alignments (y, x)
     dw $c6f9 ; window
@@ -29563,7 +29563,7 @@ Route16_h: ; 0x58ada to 0x58afc (34 bytes) (id=27)
     dw $c6f9 ; window
 
 	db CELADON_CITY
-    dw $40f8, $c6ff ; pointers (connected, current) (strip)
+    dw CeladonCityBlocks + (CeladonCityWidth), $c6ff ; pointers (connected, current) (strip)
     db $0f, $19 ; bigness, width
     db $08, $00 ; alignments (y, x)
     dw $c708 ; window
@@ -29622,13 +29622,13 @@ Route18_h: ; 0x58c38 to 0x58c5a (34 bytes) (id=29)
     ; connections data
 
 	db ROUTE_17
-    dw $4e5a, $c6eb ; pointers (connected, current) (strip)
+    dw Route17Blocks + (Route17Height - 3) * Route17Width, $c6eb ; pointers (connected, current) (strip)
     db $0a, $0a ; bigness, width
     db $8f, $00 ; alignments (y, x)
     dw $cb69 ; window
 
 	db FUCHSIA_CITY
-    dw $4c9a, $c704 ; pointers (connected, current) (strip)
+    dw FuchsiaCityBlocks + (FuchsiaCityWidth), $c704 ; pointers (connected, current) (strip)
     db $0f, $14 ; bigness, width
     db $08, $00 ; alignments (y, x)
     dw $c703 ; window
