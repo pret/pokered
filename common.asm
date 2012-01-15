@@ -1901,7 +1901,27 @@ MewPicFront:
 MewPicBack:
 	INCBIN "pic/monback/mewb.pic"
 
-INCBIN "baserom.gbc",$425B,$4588-$425B
+INCBIN "baserom.gbc",$425B,$4335-$425B
+
+IF _RED
+	ld de,$9600 ; where to put redgreenversion.2bpp in the VRAM
+	ld bc,$50 ; how big that file is
+ENDC
+IF _BLUE
+	ld de,$9610 ; where to put blueversion.2bpp in the VRAM
+	ld bc,$40 ; how big that file is
+ENDC
+
+INCBIN "baserom.gbc",$433B,$4398-$433B
+
+IF _RED
+	ld a,CHARMANDER ; which Pokemon to show first on the title screen
+ENDC
+IF _BLUE
+	ld a,SQUIRTLE ; which Pokemon to show first on the title screen
+ENDC
+
+INCBIN "baserom.gbc",$439A,$4588-$439A
 
 TitleMons: ; 4588
 ; mons on the title screen are randomly chosen from here
@@ -1960,7 +1980,17 @@ IF _BLUE
 	db RAICHU
 ENDC
 
-INCBIN "baserom.gbc",$4598,$472B-$4598
+INCBIN "baserom.gbc",$4598,$45A1-$4598
+
+; xxx Version tilemap on the title screen
+IF _RED
+	db $60,$61,$7F,$65,$66,$67,$68,$69,$50
+ENDC
+IF _BLUE
+	db $61,$62,$63,$64,$65,$66,$67,$68,$50
+ENDC
+
+INCBIN "baserom.gbc",$45AA,$472B-$45AA
 
 ItemNames: ; 472B
 	db "MASTER BALL@"
@@ -2520,7 +2550,45 @@ Map0fFlyWarp:
 Map15FlyWarp:
 	FLYWARP_DATA 10,20,11
 
-INCBIN "baserom.gbc",$64CA,$778D - $64CA
+INCBIN "baserom.gbc",$64CA,$69A7 - $64CA
+
+ld de,DefaultNamesRival
+
+INCBIN "baserom.gbc",$69AA,$69B3 - $69AA
+
+ld hl,DefaultNamesRivalList
+
+INCBIN "baserom.gbc",$69B6,$6AA8 - $69B6
+
+IF _RED
+DefaultNamesPlayer:
+	db "NEW NAME",$4E,"RED",$4E,"ASH",$4E,"JACK@"
+DefaultNamesRival:
+	db "NEW NAME",$4E,"BLUE",$4E,"GARY",$4E,"JOHN@"
+ENDC
+IF _BLUE
+DefaultNamesPlayer:
+	db "NEW NAME",$4E,"BLUE",$4E,"GARY",$4E,"JOHN@"
+DefaultNamesRival:
+	db "NEW NAME",$4E,"RED",$4E,"ASH",$4E,"JACK@"
+ENDC
+
+INCBIN "baserom.gbc",$6AD6,$6AF2 - $6AD6
+
+IF _RED
+DefaultNamesPlayerList:
+	db "NEW NAME@RED@ASH@JACK@"
+DefaultNamesRivalList:
+	db "NEW NAME@BLUE@GARY@JOHN@@"
+ENDC
+IF _BLUE
+DefaultNamesPlayerList:
+	db "NEW NAME@BLUE@GARY@JOHN@"
+DefaultNamesRivalList:
+	db "NEW NAME@RED@ASH@JACK@@"
+ENDC
+
+INCBIN "baserom.gbc",$6B21,$778D - $6B21
 
 FieldMoveNames: ; 778D
 	db "CUT@"
@@ -27283,23 +27351,47 @@ NoThanksText: ; 14:684F
 PrizeMenuMon1Entries: ; 14:6859
         db ABRA
         db CLEFAIRY
-        db NIDORINA
+		IF _RED
+			db NIDORINA
+		ENDC
+		IF _BLUE
+			db NIDORINO
+		ENDC
         db "@"
 PrizeMenuMon1Cost: ; 14:685D
-        db $01,$80
-        db $05,$00
+		IF _RED
+			db $01,$80
+			db $05,$00
+		ENDC
+		IF _BLUE
+			db $01,$20
+			db $07,$50
+		ENDC
         db $12,$00
         db "@"
 
 PrizeMenuMon2Entries: ; 14:6864
-        db DRATINI
-        db SCYTHER
+		IF _RED
+			db DRATINI
+			db SCYTHER
+		ENDC
+		IF _BLUE
+			db PINSIR
+			db DRATINI
+		ENDC
         db PORYGON
         db "@"
 PrizeMenuMon2Cost: ; 14:6868
-        db $28,$00 ; 2800 Coins
-        db $55,$00 ; 5500 Coins
-        db $99,$99 ; 9999 Coins
+		IF _RED
+			db $28,$00
+			db $55,$00
+			db $99,$99
+		ENDC
+		IF _BLUE
+			db $25,$00
+			db $46,$00
+			db $65,$00
+		ENDC
         db "@"
 
 PrizeMenuTMsEntries: ; 14:686F
@@ -27469,13 +27561,24 @@ GetPrizeMonLevel: ; 14:6977
         ret
 
 PrizeMonLevelDictionary: ; 14:698A
-        db ABRA,9
-        db CLEFAIRY,8
-        db NIDORINA,17
+	IF _RED
+		db ABRA,9
+		db CLEFAIRY,8
+		db NIDORINA,17
 
-        db DRATINI,18
-        db SCYTHER,25
-        db PORYGON,26
+		db DRATINI,18
+		db SCYTHER,25
+		db PORYGON,26
+	ENDC
+	IF _BLUE
+		db ABRA,6
+		db CLEFAIRY,12
+		db NIDORINO,17
+
+		db PINSIR,20
+		db DRATINI,24
+		db PORYGON,18
+	ENDC
 
 INCBIN "baserom.gbc",$52996,$54000 - $52996
 
