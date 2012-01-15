@@ -30782,6 +30782,7 @@ INCBIN "baserom.gbc",$5a59f,$1a61
 
 SECTION "bank17",DATA,BANK[$17]
 
+LavenderMartBlocks:
 CeruleanMartBlocks:
 VermilionMartBlocks: ; 16
     INCBIN "maps/vermilionmart.blk"
@@ -31666,7 +31667,7 @@ LavenderPokecenterObject: ; 0x5c8f4 (size=44)
 LavenderMart_h: ; 0x5c920 to 0x5c92c (12 bytes) (id=150)
     db $02 ; tileset
     db $04, $04 ; dimensions (y, x)
-    dw $4000, $492f, LavenderMartScript ; blocks, texts, scripts
+    dw LavenderMartBlocks, LavenderMartTexts, LavenderMartScript ; blocks, texts, scripts
     db $00 ; connections
 
     dw LavenderMartObject ; objects
