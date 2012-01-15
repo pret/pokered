@@ -23889,7 +23889,7 @@ CeladonHotelBlocks: ; 28
 MtMoonPokecenter_h: ; 0x492c3 to 0x492cf (12 bytes) (bank=12) (id=68)
     db $06 ; tileset
     db $04, $07 ; dimensions (y, x)
-    dw MtMoonPokecenterBlocks, $52d5, MtMoonPokecenterScript ; blocks, texts, scripts
+    dw MtMoonPokecenterBlocks, MtMoonPokecenterTexts, MtMoonPokecenterScript ; blocks, texts, scripts
     db $00 ; connections
 
     dw MtMoonPokecenterObject ; objects
@@ -23899,10 +23899,13 @@ MtMoonPokecenterScript: ; 0x492cf
     jp $3c3c
 ; 0x492d5
 
-INCBIN "baserom.gbc",$492d5,$d
+MtMoonPokecenterTexts:
+    dw MtMoonPokecenterText1, MtMoonPokecenterText2, MtMoonPokecenterText3, MtMoonPokecenterText4, MtMoonPokecenterText5, MtMoonPokecenterText6
 
-MtMoonPokecenterText2:
-MtMoonPokecenterText1: ; 0x492e2
+MtMoonPokecenterText1: ; 0x492e0
+    db $ff
+
+MtMoonPokecenterText2: ; 0x492e2
     TX_FAR _MtMoonPokecenterText1
     db $50
 
