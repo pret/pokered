@@ -12165,7 +12165,7 @@ VermilionHouse1Object: ; 0x1db20 (size=38)
 VermilionDock_h: ; 0x1db46 to 0x1db52 (12 bytes) (bank=7) (id=94)
     db $0e ; tileset
     db $06, $0e ; dimensions (y, x)
-    dw VermilionDockBlocks, $5cbf, VermilionDockScript ; blocks, texts, scripts
+    dw VermilionDockBlocks, VermilionDockTexts, VermilionDockScript ; blocks, texts, scripts
     db $00 ; connections
 
     dw VermilionDockObject ; objects
@@ -12210,7 +12210,10 @@ VermilionDockScript: ; 0x1db52
     ret
 ; 0x1db9b
 
-INCBIN "baserom.gbc",$1db9b,$12b
+INCBIN "baserom.gbc",$1db9b,$1dcbf - $1db9b
+
+VermilionDockTexts: ; 0x1dcbf
+INCBIN "baserom.gbc",$1dcbf,$1dcc6 - $1dcbf
 
 VermilionDockObject: ; 0x1dcc6 (size=20)
     db $f ; border tile
