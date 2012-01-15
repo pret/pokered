@@ -1422,7 +1422,7 @@ Function354E: ; 354E
 
 Function3558: ; 3558
 	push de
-	ld hl,$D4E4
+	ld hl,W_MAPTEXTPTRLIST
 	ld a,[$FF8C] ; the sprite to move
 	dec a
 	add a
