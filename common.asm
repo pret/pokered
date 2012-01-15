@@ -22396,6 +22396,7 @@ RockTunnelPokecenterBlocks:
 MtMoonPokecenterBlocks: ; 28
     INCBIN "maps/mtmoonpokecenter.blk"
 
+Route15GateBlocks:
 Route11GateBlocks: ; 20
     INCBIN "maps/route11gate.blk"
 
@@ -24306,7 +24307,7 @@ Route12GateUpstairsObject: ; 0x495de (size=24)
 Route15Gate_h: ; 0x495f6 to 0x49602 (12 bytes) (id=184)
     db $0c ; tileset
     db $05, $04 ; dimensions (y, x)
-    dw $40c7, Route15GateTexts, Route15GateScript ; blocks, texts, scripts
+    dw Route15GateBlocks, Route15GateTexts, Route15GateScript ; blocks, texts, scripts
     db $00 ; connections
 
     dw Route15GateObject ; objects
