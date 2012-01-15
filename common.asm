@@ -36971,7 +36971,7 @@ FuchsiaMeetingRoomBlocks: ; 28
 CinnabarGym_h: ; 0x7573e to 0x7574a (12 bytes) (id=166)
     db $16 ; tileset
     db $09, $0a ; dimensions (y, x)
-    dw $5b26, CinnabarGymTexts, CinnabarGymScript ; blocks, texts, scripts
+    dw CinnabarGymBlocks, CinnabarGymTexts, CinnabarGymScript ; blocks, texts, scripts
     db $00 ; connections
 
     dw CinnabarGymObject ; objects
@@ -37441,7 +37441,7 @@ Lab3Blocks: ; 16
 Lab4_h: ; 0x75d25 to 0x75d31 (12 bytes) (id=170)
     db $14 ; tileset
     db $04, $04 ; dimensions (y, x)
-    dw Lab4Blocks, $5d34, $5d31 ; blocks, texts, scripts
+    dw Lab4Blocks, Lab4Texts, Lab4Script ; blocks, texts, scripts
     db $00 ; connections
 
     dw Lab4Object ; objects
@@ -37450,7 +37450,10 @@ Lab4Script: ; 0x75d31
     jp $3c3c
 ; 0x75d34
 
-INCBIN "baserom.gbc",$75d34,$38
+Lab4Texts:
+    dw Lab4Text1, Lab4Text2
+
+INCBIN "baserom.gbc",$75d34 + 4,$38 -4
 
 Lab4Text1: ; 0x75d6c
     db $8
