@@ -8137,13 +8137,13 @@ PalletTown_h:
 	dw PalletTownBlocks, PalletTownTexts, PalletTownScript
 	db NORTH | SOUTH ; connections
 
-	db $0C ; Route 1
+	db ROUTE_1
 	dw $4192,$C6EB ; pointers
 	db $0A,$0A ; bigness, width
 	db $23,$00 ; alignments
 	dw $C809 ; window
 
-	db $20 ; Route 21
+	db ROUTE_21
 	dw $506D,$C7AB ; pointers
 	db $0A,$0A ; bigness, width
 	db $00,$00 ; alignments
