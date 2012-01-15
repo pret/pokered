@@ -30782,11 +30782,13 @@ INCBIN "baserom.gbc",$5a59f,$1a61
 
 SECTION "bank17",DATA,BANK[$17]
 
+SaffronMartBlocks:
 LavenderMartBlocks:
 CeruleanMartBlocks:
 VermilionMartBlocks: ; 16
     INCBIN "maps/vermilionmart.blk"
 
+CopycatsHouseF2Blocks:
 RedsHouse2FBlocks:
 	INCBIN "maps/redshouse2f.blk"
 
@@ -31960,7 +31962,7 @@ VermilionGymBlocks: ; 45
 CopycatsHouseF2_h: ; 0x5cc65 to 0x5cc71 (12 bytes) (id=176)
     db $04 ; tileset
     db $04, $04 ; dimensions (y, x)
-    dw $4010, CopycatsHouseF2Texts, CopycatsHouseF2Script ; blocks, texts, scripts
+    dw CopycatsHouseF2Blocks, CopycatsHouseF2Texts, CopycatsHouseF2Script ; blocks, texts, scripts
     db $00 ; connections
 
     dw CopycatsHouseF2Object ; objects
@@ -32470,7 +32472,7 @@ SaffronGymBlocks: ; 90
 SaffronMart_h: ; 0x5d3fd to 0x5d409 (12 bytes) (id=180)
     db $02 ; tileset
     db $04, $04 ; dimensions (y, x)
-    dw $4000, SaffronMartTexts, SaffronMartScript ; blocks, texts, scripts
+    dw SaffronMartBlocks, SaffronMartTexts, SaffronMartScript ; blocks, texts, scripts
     db $00 ; connections
 
     dw SaffronMartObject ; objects
@@ -33068,7 +33070,8 @@ INCBIN "baserom.gbc",$5db5e,$24a2
 
 SECTION "bank18",DATA,BANK[$18]
 
-INCBIN "baserom.gbc",$60000,$60198 - $60000
+ViridianForestBlocks:
+    INCBIN "maps/viridianforest.blk"
 
 UndergroundPathNSBlocks: ; 96
     INCBIN "maps/undergroundpathns.blk"
@@ -33768,7 +33771,7 @@ INCBIN "baserom.gbc",$61006,$fb
 ViridianForest_h: ; 0x61101 to 0x6110d (12 bytes) (id=51)
     db $03 ; tileset
     db $18, $11 ; dimensions (y, x)
-    dw $4000, ViridianForestTexts, ViridianForestScript ; blocks, texts, scripts
+    dw ViridianForestBlocks, ViridianForestTexts, ViridianForestScript ; blocks, texts, scripts
     db $00 ; connections
 
     dw ViridianForestObject ; objects
