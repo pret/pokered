@@ -30798,6 +30798,7 @@ MuseumF1Blocks: ; 40
 MuseumF2Blocks: ; 28
     INCBIN "maps/museumf2.blk"
 
+SaffronPokecenterBlocks:
 VermilionPokecenterBlocks:
 LavenderPokecenterBlocks:
 PewterPokecenterBlocks: ; 28
@@ -32568,7 +32569,7 @@ SilphCo1Blocks: ; 135
 SaffronPokecenter_h: ; 0x5d529 to 0x5d535 (12 bytes) (id=182)
     db $06 ; tileset
     db $04, $07 ; dimensions (y, x)
-    dw $4064, $553b, SaffronPokecenterScript ; blocks, texts, scripts
+    dw SaffronPokecenterBlocks, SaffronPokecenterTexts, SaffronPokecenterScript ; blocks, texts, scripts
     db $00 ; connections
 
     dw SaffronPokecenterObject ; objects
@@ -32578,10 +32579,13 @@ SaffronPokecenterScript: ; 0x5d535
     jp $3c3c
 ; 0x5d53b
 
-INCBIN "baserom.gbc",$5d53b,$9
+SaffronPokecenterTexts:
+    dw SaffronPokecenterText1, SaffronPokecenterText2, SaffronPokecenterText3, SaffronPokecenterText4
 
-SaffronPokecenterText2: ; maybe
-SaffronPokecenterText1: ; 0x5d543
+SaffronPokecenterText1: ; 0x5d542
+    db $ff
+
+SaffronPokecenterText2: ; 0x5d543
     TX_FAR _SaffronPokecenterText1
 
 INCBIN "baserom.gbc",$5d548,$5d549 - $5d548
