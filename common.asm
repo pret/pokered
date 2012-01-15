@@ -36478,7 +36478,7 @@ FuchsiaHouse1Object: ; 0x75031 (size=38)
 FuchsiaPokecenter_h: ; 0x75057 to 0x75063 (12 bytes) (id=154)
     db $06 ; tileset
     db $04, $07 ; dimensions (y, x)
-    dw FuchsiaPokecenterBlocks, $5069, FuchsiaPokecenterScript ; blocks, texts, scripts
+    dw FuchsiaPokecenterBlocks, FuchsiaPokecenterTexts, FuchsiaPokecenterScript ; blocks, texts, scripts
     db $00 ; connections
 
     dw FuchsiaPokecenterObject ; objects
@@ -36488,10 +36488,13 @@ FuchsiaPokecenterScript: ; 0x75063
     jp $3c3c
 ; 0x75069
 
-INCBIN "baserom.gbc",$75069,$9
+FuchsiaPokecenterTexts:
+    dw FuchsiaPokecenterText1, FuchsiaPokecenterText2, FuchsiaPokecenterText3, FuchsiaPokecenterText4
 
-FuchsiaPokecenterText2:
-FuchsiaPokecenterText1: ; 0x75071 or 0x75072
+FuchsiaPokecenterText1: ; 0x75071
+    db $ff
+
+FuchsiaPokecenterText2: ; 0x75072
     TX_FAR _FuchsiaPokecenterText1
     db $50
 
