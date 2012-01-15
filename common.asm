@@ -31286,7 +31286,7 @@ PewterGymBlocks: ; 35
 PewterPokecenter_h: ; 0x5c57b to 0x5c587 (12 bytes) (id=58)
     db $06 ; tileset
     db $04, $07 ; dimensions (y, x)
-    dw PewterPokecenterBlocks, $458d, PewterPokecenterScript ; blocks, texts, scripts
+    dw PewterPokecenterBlocks, PewterPokecenterTexts, PewterPokecenterScript ; blocks, texts, scripts
     db $00 ; connections
 
     dw PewterPokecenterObject ; objects
@@ -31296,10 +31296,13 @@ PewterPokecenterScript: ; 0x5c587
     jp $3c3c
 ; 0x5c58d
 
-INCBIN "baserom.gbc",$5c58d,$9
+PewterPokecenterTexts: ; 0x5c58d
+    dw PewterPokecenterText1, PewterPokecenterText2, PewterPokecenterText3, PewterPokecenterText4
 
-PewterPokecenterText2:
-PewterPokecenterText1: ; 0x5c596
+PewterPokecenterText1: ; 0x5c595
+    db $ff
+
+PewterPokecenterText2: ; 0x5c596
     TX_FAR _PewterPokecenterText1
     db $50
 
@@ -31353,14 +31356,14 @@ PewterPokecenterText3: ; 0x5c59b
     jp $24d7
 ; 0x5c603
 
-PewterPokecenterText4: ; broken TX_FAR to _PewterPokecenterText4
+PewterPokecenterText5: ; broken TX_FAR to _PewterPokecenterText4
     db $17, $44, $47, $26
     db $50
 
 ;XXX wtf?
 db $30, $38, $34, $3c
 
-PewterPokecenterText5: ; XXX confirm text_id number
+PewterPokecenterText4: ; XXX confirm text_id number
     db $f6
 
 PewterPokecenterObject: ; 0x5c60d (size=44)
