@@ -36347,7 +36347,7 @@ UnknownDungeon1Blocks: ; 135
 CeruleanHouse3_h: ; 0x74dfd to 0x74e09 (12 bytes) (id=230)
     db $0d ; tileset
     db $04, $04 ; dimensions (y, x)
-    dw CeruleanHouse3Blocks, $4e13, CeruleanHouse3Script ; blocks, texts, scripts
+    dw CeruleanHouse3Blocks, CeruleanHouse3Texts, CeruleanHouse3Script ; blocks, texts, scripts
     db $00 ; connections
 
     dw CeruleanHouse3Object ; objects
@@ -36360,7 +36360,8 @@ CeruleanHouse3Script: ; 0x74e09
     ret
 ; 0x74e13
 
-INCBIN "baserom.gbc",$74e13,$2
+CeruleanHouse3Texts:
+    dw CeruleanHouse3Text1
 
 CeruleanHouse3Text1: ; 0x74e15
     db $8
