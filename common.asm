@@ -30804,6 +30804,7 @@ LavenderPokecenterBlocks:
 PewterPokecenterBlocks: ; 28
     INCBIN "maps/pewterpokecenter.blk"
 
+UndergroundTunnelEntranceRoute6Blocks:
 UndergroundTunnelEntranceRoute5Blocks: ; 16
     INCBIN "maps/undergroundtunnelentranceroute5.blk"
 
@@ -32825,7 +32826,7 @@ UndergroundTunnelEntranceRoute5Object: ; 0x5d6c1 (size=34)
 UndergroundTunnelEntranceRoute6_h: ; 0x5d6e3 to 0x5d6ef (12 bytes) (id=74)
     db $0c ; tileset
     db $04, $04 ; dimensions (y, x)
-    dw $4080, UndergroundTunnelEntranceRoute6Texts, UndergroundTunnelEntranceRoute6Script ; blocks, texts, scripts
+    dw UndergroundTunnelEntranceRoute6Blocks, UndergroundTunnelEntranceRoute6Texts, UndergroundTunnelEntranceRoute6Script ; blocks, texts, scripts
     db $00 ; connections
 
     dw UndergroundTunnelEntranceRoute6Object ; objects
