@@ -22401,9 +22401,10 @@ Route15GateBlocks:
 Route11GateBlocks: ; 20
     INCBIN "maps/route11gate.blk"
 
+Route18GateHeaderBlocks:
 Route16GateUpstairsBlocks:
 Route12GateUpstairsBlocks:
-Route11GateUpstairsBlocks: ; 16
+Route11GateUpstairsBlocks: ; 16 40db
     INCBIN "maps/route11gateupstairs.blk"
 
 INCBIN "baserom.gbc",$480eb,$48152 - $480eb
@@ -24640,7 +24641,7 @@ Route18GateObject: ; 0x49937 (size=50)
 Route18GateHeader_h: ; 0x49969 to 0x49975 (12 bytes) (id=191)
     db $0c ; tileset
     db $04, $04 ; dimensions (y, x)
-    dw $40db, Route18GateHeaderTexts, Route18GateHeaderScript ; blocks, texts, scripts
+    dw Route18GateHeaderBlocks, Route18GateHeaderTexts, Route18GateHeaderScript ; blocks, texts, scripts
     db $00 ; connections
 
     dw Route18GateHeaderObject ; objects
