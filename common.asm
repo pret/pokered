@@ -33086,6 +33086,7 @@ UndergroundPathNSBlocks: ; 96
 
 INCBIN "baserom.gbc",$601f8,$1c8
 
+SSAnne10Blocks:
 SSAnne9Blocks: ; 96
     INCBIN "maps/ssanne9.blk"
 
@@ -34717,7 +34718,7 @@ SSAnne9Object: ; 0x61c8d (size=188)
 SSAnne10_h: ; 0x61d49 to 0x61d55 (12 bytes) (id=104)
     db $0d ; tileset
     db $08, $0c ; dimensions (y, x)
-    dw $43c0, SSAnne10Texts, SSAnne10Script ; blocks, texts, scripts
+    dw SSAnne10Blocks, SSAnne10Texts, SSAnne10Script ; blocks, texts, scripts
     db $00 ; connections
 
     dw SSAnne10Object ; objects
