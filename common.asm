@@ -8247,7 +8247,7 @@ ViridianCityBlocks: ; 360
 
 PewterCity_h: ; 0x18554 to 0x18576 (34 bytes) (bank=6) (id=2)
     db $00 ; tileset
-    db $12, $14 ; dimensions (y, x)
+    db PewterCityHeight, PewterCityWidth ; dimensions (y, x)
     dw PewterCityBlocks, PewterCityTexts, PewterCityScript ; blocks, texts, scripts
     db SOUTH | EAST ; connections
 
@@ -8313,7 +8313,7 @@ PewterCityBlocks: ; 360
 
 CeruleanCity_h: ; 0x1874e to 0x18786 (56 bytes) (bank=6) (id=3)
     db $00 ; tileset
-    db $12, $14 ; dimensions (y, x)
+    db CeruleanCityHeight, CeruleanCityWidth ; dimensions (y, x)
     dw CeruleanCityBlocks, CeruleanCityTexts, CeruleanCityScript ; blocks, texts, scripts
     db NORTH | SOUTH | WEST | EAST ; connections
 
@@ -8400,7 +8400,7 @@ CeruleanCityBlocks: ; 360
 
 VermilionCity_h: ; 0x18998 to 0x189ba (34 bytes) (bank=6) (id=5)
     db $00 ; tileset
-    db $12, $14 ; dimensions (y, x)
+    db VermilionCityHeight, VermilionCityWidth ; dimensions (y, x)
     dw VermilionCityBlocks, VermilionCityTexts, VermilionCityScript ; blocks, texts, scripts
     db NORTH | EAST ; connections
 
@@ -8469,7 +8469,7 @@ VermilionCityBlocks: ; 360
 
 FuchsiaCity_h: ; 0x18ba7 to 0x18bd4 (45 bytes) (bank=6) (id=7)
     db $00 ; tileset
-    db $12, $14 ; dimensions (y, x)
+    db FuchsiaCityHeight, FuchsiaCityWidth ; dimensions (y, x)
     dw FuchsiaCityBlocks, FuchsiaCityTexts, FuchsiaCityScript ; blocks, texts, scripts
     db SOUTH | WEST | EAST ; connections
 
@@ -9806,7 +9806,7 @@ INCBIN "baserom.gbc",$19b20,$f
 
 BluesHouse_h: ; 0x19b2f
 	db $08 ; tileset
-	db $04,$04 ; dimensions
+	db BluesHouseHeight, BluesHouseWidth ; dimensions
 	dw BluesHouseBlocks, BluesHouseTexts, BluesHouseScript
 	db 0
 	dw BluesHouseObject
@@ -9925,7 +9925,7 @@ BluesHouseBlocks:
 
 VermilionHouse3_h: ; 0x19c06 to 0x19c12 (12 bytes) (bank=6) (id=196)
     db $08 ; tileset
-    db $04, $04 ; dimensions (y, x)
+    db VermilionHouse3Height, VermilionHouse3Width ; dimensions (y, x)
     dw VermilionHouse3Blocks, VermilionHouse3Texts, VermilionHouse3Script ; blocks, texts, scripts
     db $00 ; connections
 
