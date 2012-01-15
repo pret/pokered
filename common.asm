@@ -1901,7 +1901,27 @@ MewPicFront:
 MewPicBack:
 	INCBIN "pic/monback/mewb.pic"
 
-INCBIN "baserom.gbc",$425B,$4588-$425B
+INCBIN "baserom.gbc",$425B,$4335-$425B
+
+IF _RED
+	ld de,$9600 ; where to put redgreenversion.2bpp in the VRAM
+	ld bc,$50 ; how big that file is
+ENDC
+IF _BLUE
+	ld de,$9610 ; where to put blueversion.2bpp in the VRAM
+	ld bc,$40 ; how big that file is
+ENDC
+
+INCBIN "baserom.gbc",$433B,$4398-$433B
+
+IF _RED
+	ld a,CHARMANDER ; which Pokemon to show first on the title screen
+ENDC
+IF _BLUE
+	ld a,SQUIRTLE ; which Pokemon to show first on the title screen
+ENDC
+
+INCBIN "baserom.gbc",$439A,$4588-$439A
 
 TitleMons: ; 4588
 ; mons on the title screen are randomly chosen from here
@@ -1960,7 +1980,17 @@ IF _BLUE
 	db RAICHU
 ENDC
 
-INCBIN "baserom.gbc",$4598,$472B-$4598
+INCBIN "baserom.gbc",$4598,$45A1-$4598
+
+; xxx Version tilemap on the title screen
+IF _RED
+	db $60,$61,$7F,$65,$66,$67,$68,$69,$50
+ENDC
+IF _BLUE
+	db $61,$62,$63,$64,$65,$66,$67,$68,$50
+ENDC
+
+INCBIN "baserom.gbc",$45AA,$472B-$45AA
 
 ItemNames: ; 472B
 	db "MASTER BALL@"
@@ -2520,7 +2550,45 @@ Map0fFlyWarp:
 Map15FlyWarp:
 	FLYWARP_DATA 10,20,11
 
-INCBIN "baserom.gbc",$64CA,$778D - $64CA
+INCBIN "baserom.gbc",$64CA,$69A7 - $64CA
+
+ld de,DefaultNamesRival
+
+INCBIN "baserom.gbc",$69AA,$69B3 - $69AA
+
+ld hl,DefaultNamesRivalList
+
+INCBIN "baserom.gbc",$69B6,$6AA8 - $69B6
+
+IF _RED
+DefaultNamesPlayer:
+	db "NEW NAME",$4E,"RED",$4E,"ASH",$4E,"JACK@"
+DefaultNamesRival:
+	db "NEW NAME",$4E,"BLUE",$4E,"GARY",$4E,"JOHN@"
+ENDC
+IF _BLUE
+DefaultNamesPlayer:
+	db "NEW NAME",$4E,"BLUE",$4E,"GARY",$4E,"JOHN@"
+DefaultNamesRival:
+	db "NEW NAME",$4E,"RED",$4E,"ASH",$4E,"JACK@"
+ENDC
+
+INCBIN "baserom.gbc",$6AD6,$6AF2 - $6AD6
+
+IF _RED
+DefaultNamesPlayerList:
+	db "NEW NAME@RED@ASH@JACK@"
+DefaultNamesRivalList:
+	db "NEW NAME@BLUE@GARY@JOHN@@"
+ENDC
+IF _BLUE
+DefaultNamesPlayerList:
+	db "NEW NAME@BLUE@GARY@JOHN@"
+DefaultNamesRivalList:
+	db "NEW NAME@RED@ASH@JACK@@"
+ENDC
+
+INCBIN "baserom.gbc",$6B21,$778D - $6B21
 
 FieldMoveNames: ; 778D
 	db "CUT@"
