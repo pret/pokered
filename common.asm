@@ -1408,7 +1408,7 @@ Function3541: ; 3541
 	call Function354E
 	ld [hl],$FF
 	call Function3558
-	ld [hl],$FF
+	ld [hl],$FF ; prevent person from walking?
 	pop hl
 	ret
 
@@ -1422,7 +1422,7 @@ Function354E: ; 354E
 
 Function3558: ; 3558
 	push de
-	ld hl,W_MAPTEXTPTRLIST
+	ld hl,W_PEOPLEMOVEPERMISSIONS
 	ld a,[$FF8C] ; the sprite to move
 	dec a
 	add a
