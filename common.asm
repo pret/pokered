@@ -22391,6 +22391,8 @@ Route7Object: ; 0x48022 (size=47)
 Route7Blocks: ; 90
     INCBIN "maps/route7.blk"
 
+CeladonPokecenterBlocks:
+RockTunnelPokecenterBlocks:
 MtMoonPokecenterBlocks: ; 28
     INCBIN "maps/mtmoonpokecenter.blk"
 
@@ -23073,7 +23075,7 @@ CeladonMansion4Blocks: ; 24
 CeladonPokecenter_h: ; 0x488ac to 0x488b8 (12 bytes) (bank=12) (id=133)
     db $06 ; tileset
     db $04, $07 ; dimensions (y, x)
-    dw $40ab, $48be, CeladonPokecenterScript ; blocks, texts, scripts
+    dw CeladonPokecenterBlocks, $48be, CeladonPokecenterScript ; blocks, texts, scripts
     db $00 ; connections
 
     dw CeladonPokecenterObject ; objects
@@ -23996,7 +23998,7 @@ MtMoonPokecenterObject: ; 0x49376 (size=56)
 RockTunnelPokecenter_h: ; 0x493ae to 0x493ba (12 bytes) (id=81)
     db $06 ; tileset
     db $04, $07 ; dimensions (y, x)
-    dw $40ab, $53c0, RockTunnelPokecenterScript ; blocks, texts, scripts
+    dw RockTunnelPokecenterBlocks, RockTunnelPokecenterTexts, RockTunnelPokecenterScript ; blocks, texts, scripts
     db $00 ; connections
 
     dw RockTunnelPokecenterObject ; objects
@@ -24006,13 +24008,15 @@ RockTunnelPokecenterScript: ; 0x493ba
     jp $3c3c
 ; 0x493c0
 
-INCBIN "baserom.gbc",$493c0,$9
+RockTunnelPokecenterTexts:
+    dw RockTunnelPokecenterText1, RockTunnelPokecenterText2, RockTunnelPokecenterText3, RockTunnelPokecenterText4
 
-RockTunnelPokecenterText2:
-RockTunnelPokecenterText1: ; 0x493c9
+RockTunnelPokecenterText1: ; 0x493c8
+    db $ff
+
+RockTunnelPokecenterText2: ; 0x493c9
     TX_FAR _RockTunnelPokecenterText1
-
-INCBIN "baserom.gbc",$493cd,$493ce - $493cd
+    db $50
 
 RockTunnelPokecenterText3: ; 0x493ce
     TX_FAR _RockTunnelPokecenterText3
