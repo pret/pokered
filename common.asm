@@ -34864,7 +34864,7 @@ UndergroundPathNSObject: ; 0x61f2a (size=20)
 UndergroundPathWE_h: ; 0x61f3e to 0x61f4a (12 bytes) (id=121)
     db $0b ; tileset
     db $04, $19 ; dimensions (y, x)
-    dw $41f4, $5f4d, UndergroundPathWEScript ; blocks, texts, scripts
+    dw $41f4, UndergroundPathWETexts, UndergroundPathWEScript ; blocks, texts, scripts
     db $00 ; connections
 
     dw UndergroundPathWEObject ; objects
@@ -34873,7 +34873,8 @@ UndergroundPathWEScript: ; 0x61f4a
     jp $3c3c
 ; 0x61f4d
 
-INCBIN "baserom.gbc",$61f4d,$1
+UndergroundPathWETexts:
+    db $50
 
 UndergroundPathWEObject: ; 0x61f4e (size=20)
     db $1 ; border tile
