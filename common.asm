@@ -7286,7 +7286,7 @@ ItemUsePtrTable:	;$D5E1
 	dw ItemUseBall		;$5687 greatball
 	dw ItemUseBall		;$5687 pokeball
 	dw ItemUseTownMap	;$5968 TownMap
-	dw $5977                ;ItemUseBicycle
+	dw ItemUseBicycle   ;ItemUseBicycle
 	dw $59B4                ;ItemUseSurfBoard (UNUSED, glitchy!)
 	dw ItemUseBall		;$5687 Safariball
 	dw $5A56
