@@ -27919,8 +27919,9 @@ Route21Object: ; 0x55021 (size=76)
 Route21Blocks: ; 450
     INCBIN "maps/route21.blk"
 
+VermilionHouse2Blocks:
 Route12HouseBlocks:
-DayCareMBlocks: ; 16
+DayCareMBlocks: ; 16 0x5522f 522F
     INCBIN "maps/daycarem.blk"
 
 FuchsiaHouse3Blocks: ; 16
@@ -28644,7 +28645,7 @@ INCBIN "baserom.gbc",$55fdd,$87
 VermilionHouse2_h: ; 0x56064 to 0x56070 (12 bytes) (id=163)
     db $08 ; tileset
     db $04, $04 ; dimensions (y, x)
-    dw $522f, VermilionHouse2Texts, VermilionHouse2Script ; blocks, texts, scripts
+    dw VermilionHouse2Blocks, VermilionHouse2Texts, VermilionHouse2Script ; blocks, texts, scripts
     db $00 ; connections
 
     dw VermilionHouse2Object ; objects
