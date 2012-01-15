@@ -30782,6 +30782,7 @@ INCBIN "baserom.gbc",$5a59f,$1a61
 
 SECTION "bank17",DATA,BANK[$17]
 
+CeruleanMartBlocks:
 VermilionMartBlocks: ; 16
     INCBIN "maps/vermilionmart.blk"
 
@@ -31574,7 +31575,7 @@ CeruleanGymBlocks: ; 35
 CeruleanMart_h: ; 0x5c889 to 0x5c895 (12 bytes) (id=67)
     db $02 ; tileset
     db $04, $04 ; dimensions (y, x)
-    dw $4000, CeruleanMartTexts, CeruleanMartScript ; blocks, texts, scripts
+    dw CeruleanMartBlocks, CeruleanMartTexts, CeruleanMartScript ; blocks, texts, scripts
     db $00 ; connections
 
     dw CeruleanMartObject ; objects
