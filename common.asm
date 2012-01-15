@@ -27344,23 +27344,47 @@ NoThanksText: ; 14:684F
 PrizeMenuMon1Entries: ; 14:6859
         db ABRA
         db CLEFAIRY
-        db NIDORINA
+		IF _RED
+			db NIDORINA
+		ENDC
+		IF _BLUE
+			db NIDORINO
+		ENDC
         db "@"
 PrizeMenuMon1Cost: ; 14:685D
-        db $01,$80
-        db $05,$00
+		IF _RED
+			db $01,$80
+			db $05,$00
+		ENDC
+		IF _BLUE
+			db $01,$20
+			db $07,$50
+		ENDC
         db $12,$00
         db "@"
 
 PrizeMenuMon2Entries: ; 14:6864
-        db DRATINI
-        db SCYTHER
+		IF _RED
+			db DRATINI
+			db SCYTHER
+		ENDC
+		IF _BLUE
+			db PINSIR
+			db DRATINI
+		ENDC
         db PORYGON
         db "@"
 PrizeMenuMon2Cost: ; 14:6868
-        db $28,$00 ; 2800 Coins
-        db $55,$00 ; 5500 Coins
-        db $99,$99 ; 9999 Coins
+		IF _RED
+			db $28,$00
+			db $55,$00
+			db $99,$99
+		ENDC
+		IF _BLUE
+			db $25,$00
+			db $46,$00
+			db $65,$00
+		ENDC
         db "@"
 
 PrizeMenuTMsEntries: ; 14:686F
@@ -27530,13 +27554,24 @@ GetPrizeMonLevel: ; 14:6977
         ret
 
 PrizeMonLevelDictionary: ; 14:698A
-        db ABRA,9
-        db CLEFAIRY,8
-        db NIDORINA,17
+	IF _RED
+		db ABRA,9
+		db CLEFAIRY,8
+		db NIDORINA,17
 
-        db DRATINI,18
-        db SCYTHER,25
-        db PORYGON,26
+		db DRATINI,18
+		db SCYTHER,25
+		db PORYGON,26
+	ENDC
+	IF _BLUE
+		db ABRA,6
+		db CLEFAIRY,12
+		db NIDORINO,17
+
+		db PINSIR,20
+		db DRATINI,24
+		db PORYGON,18
+	ENDC
 
 INCBIN "baserom.gbc",$52996,$54000 - $52996
 
