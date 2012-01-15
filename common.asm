@@ -27919,6 +27919,7 @@ Route21Object: ; 0x55021 (size=76)
 Route21Blocks: ; 450
     INCBIN "maps/route21.blk"
 
+Route12HouseBlocks:
 DayCareMBlocks: ; 16
     INCBIN "maps/daycarem.blk"
 
@@ -28912,7 +28913,7 @@ DayCareMObject: ; 0x56459 (size=26)
 Route12House_h: ; 0x56473 to 0x5647f (12 bytes) (id=189)
     db $08 ; tileset
     db $04, $04 ; dimensions (y, x)
-    dw $522f, Route12HouseTexts, Route12HouseScript ; blocks, texts, scripts
+    dw Route12HouseBlocks, Route12HouseTexts, Route12HouseScript ; blocks, texts, scripts
     db $00 ; connections
 
     dw Route12HouseObject ; objects
