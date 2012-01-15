@@ -9799,21 +9799,27 @@ BluesHouseText1: ; 5B5D 0x19B5D
 DaisyInitialText:
 	TX_FAR _DaisyInitialText
 	db "@"
+
 DaisyOfferMapText:
 	TX_FAR _DaisyOfferMapText
 	db "@"
+
 GotMapText:
 	TX_FAR _GotMapText
 	db $11,"@"
+
 DaisyBagFullText:
 	TX_FAR _DaisyBagFullText
 	db "@"
+
 DaisyUseMapText:
 	TX_FAR _DaisyUseMapText
 	db "@"
+
 BluesHouseText2: ; Daisy, walking around
 	TX_FAR _BluesHouseText2
 	db "@"
+
 BluesHouseText3: ; map on table
 	TX_FAR _BluesHouseText3
 	db "@"
@@ -9915,10 +9921,12 @@ IndigoPlateauLobbyScript: ; 0x19c5b
 ; 0x19c7f
 
 IndigoPlateauLobbyTexts:
-INCBIN "baserom.gbc",$19c7f,$b
+    dw IndigoPlateauLobbyText1, IndigoPlateauLobbyText2, IndigoPlateauLobbyText3, IndigoPlateauLobbyText4, IndigoPlateauLobbyText5
 
-IndigoPlateauLobbyText2:
 IndigoPlateauLobbyText1: ; 0x19c8a
+    db $ff
+
+IndigoPlateauLobbyText2: ; 0x19c8b
     TX_FAR _IndigoPlateauLobbyText1
     db $50
 
