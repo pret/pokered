@@ -564,6 +564,7 @@ asm_commands = {
     "00b5": "CopyData",
     "2ff3": "GetMachineName",
     "24d7": "TextScriptEnd",
+    "3e5c": "GenRandom", #bank 4
 }
 
 def random_asm_label():
