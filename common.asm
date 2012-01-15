@@ -24090,7 +24090,7 @@ Route11GateObject: ; 0x49416 (size=50)
 Route11GateUpstairs_h: ; 0x49448 to 0x49454 (12 bytes) (id=86)
     db $0c ; tileset
     db $04, $04 ; dimensions (y, x)
-    dw Route11GateUpstairsBlocks, $5457, Route11GateUpstairsScript ; blocks, texts, scripts
+    dw Route11GateUpstairsBlocks, Route11GateUpstairsTexts, Route11GateUpstairsScript ; blocks, texts, scripts
     db $00 ; connections
 
     dw Route11GateUpstairsObject ; objects
@@ -24099,7 +24099,8 @@ Route11GateUpstairsScript: ; 0x49454
     jp $3c3f
 ; 0x49457
 
-INCBIN "baserom.gbc",$49457,$8
+Route11GateUpstairsTexts:
+    dw Route11GateUpstairsText1, Route11GateUpstairsText2, Route11GateUpstairsText3, Route11GateUpstairsText4
 
 Route11GateUpstairsText1: ; 0x4945f
     db $08 ; asm
