@@ -26881,12 +26881,26 @@ SilphCo7Blocks: ; 117
 Mansion2_h: ; 0x51fcc to 0x51fd8 (12 bytes) (id=214)
     db $16 ; tileset
     db $0e, $0f ; dimensions (y, x)
-    dw $6110, $604d, $5fd8 ; blocks, texts, scripts
+    dw Mansion2Blocks, Mansion2Texts, Mansion2Script ; blocks, texts, scripts
     db $00 ; connections
 
     dw Mansion2Object ; objects
 
-INCBIN "baserom.gbc",$51fd8,$52064 - $51fd8
+Mansion2Script:
+    call $5fee
+    call $3c3c
+    ld hl, $6057
+    ld de, $6047
+    ld a, [$d63c]
+    call $3160
+    ld [$d63c], a
+    ret
+; 0x51fee
+
+INCBIN "baserom.gbc",$51fee,$5204d - $51fee
+
+Mansion2Texts: ; 0x5204d
+INCBIN "baserom.gbc",$5204d,23
 
 Mansion2Text1: ; 0x52064
     db $08 ; asm
@@ -26929,7 +26943,8 @@ Mansion2Object: ; 0x520d1 (size=63)
     EVENT_DISP $f, $e, $19 ; MANSION_3
     EVENT_DISP $f, $1, $6 ; MANSION_3
 
-INCBIN "baserom.gbc",$52110,$d2
+Mansion2Blocks:
+    INCBIN "maps/mansion2.blk"
 
 Mansion3_h: ; 0x521e2 to 0x521ee (12 bytes) (id=215)
     db $16 ; tileset
