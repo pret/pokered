@@ -30795,6 +30795,7 @@ MuseumF1Blocks: ; 40
 MuseumF2Blocks: ; 28
     INCBIN "maps/museumf2.blk"
 
+LavenderPokecenterBlocks:
 PewterPokecenterBlocks: ; 28
     INCBIN "maps/pewterpokecenter.blk"
 
@@ -31616,7 +31617,7 @@ CeruleanMartObject: ; 0x5c8a8 (size=38)
 LavenderPokecenter_h: ; 0x5c8ce to 0x5c8da (12 bytes) (id=141)
     db $06 ; tileset
     db $04, $07 ; dimensions (y, x)
-    dw $4064, $48e0, LavenderPokecenterScript ; blocks, texts, scripts
+    dw LavenderPokecenterBlocks, LavenderPokecenterTexts, LavenderPokecenterScript ; blocks, texts, scripts
     db $00 ; connections
 
     dw LavenderPokecenterObject ; objects
@@ -31626,16 +31627,18 @@ LavenderPokecenterScript: ; 0x5c8da
     jp $3c3c
 ; 0x5c8e0
 
-INCBIN "baserom.gbc",$5c8e0,$8
+LavenderPokecenterTexts:
+    dw LavenderPokecenterText1, LavenderPokecenterText2, LavenderPokecenterText3, LavenderPokecenterText4
 
 LavenderPokecenterText4:
-    db $f6, $ff
+    db $f6
 
-LavenderPokecenterText2:
 LavenderPokecenterText1: ; 0x5c8ea
-    TX_FAR _LavenderPokecenterText1
+    db $ff
 
-INCBIN "baserom.gbc",$5c8ee,$5c8ef - $5c8ee
+LavenderPokecenterText2: ; 0x5c8eb
+    TX_FAR _LavenderPokecenterText1
+    db $50
 
 LavenderPokecenterText3: ; 0x5c8ef
     TX_FAR _LavenderPokecenterText3
