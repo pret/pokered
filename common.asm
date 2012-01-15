@@ -30796,6 +30796,7 @@ MuseumF1Blocks: ; 40
 MuseumF2Blocks: ; 28
     INCBIN "maps/museumf2.blk"
 
+VermilionPokecenterBlocks:
 LavenderPokecenterBlocks:
 PewterPokecenterBlocks: ; 28
     INCBIN "maps/pewterpokecenter.blk"
@@ -31720,7 +31721,7 @@ LavenderMartObject: ; 0x5c95d (size=38)
 VermilionPokecenter_h: ; 0x5c983 to 0x5c98f (12 bytes) (id=89)
     db $06 ; tileset
     db $04, $07 ; dimensions (y, x)
-    dw $4064, $4995, VermilionPokecenterScript ; blocks, texts, scripts
+    dw VermilionPokecenterBlocks, VermilionPokecenterTexts, VermilionPokecenterScript ; blocks, texts, scripts
     db $00 ; connections
 
     dw VermilionPokecenterObject ; objects
@@ -31730,10 +31731,13 @@ VermilionPokecenterScript: ; 0x5c98f
     jp $3c3c
 ; 0x5c995
 
-INCBIN "baserom.gbc",$5c995,$9
+VermilionPokecenterTexts:
+    dw VermilionPokecenterText1, VermilionPokecenterText2, VermilionPokecenterText3, VermilionPokecenterText4
 
-VermilionPokecenterText2:
-VermilionPokecenterText1: ; 0x5c99e
+VermilionPokecenterText1: ; 0x5c99d
+    db $ff
+
+VermilionPokecenterText2: ; 0x5c99e
     TX_FAR _VermilionPokecenterText1
     db $50
 
