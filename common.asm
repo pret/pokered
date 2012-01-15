@@ -35755,8 +35755,10 @@ INCBIN "baserom.gbc",$735E8,$4000 - $35E8
 
 SECTION "bank1D",DATA,BANK[$1D]
 
-INCBIN "baserom.gbc",$74000,$74010 - $74000
+CopycatsHouseF1Blocks:
+    INCBIN "maps/copycatshousef1.blk"
 
+CinnabarMartBlocks:
 PewterMartBlocks: ; 16
     INCBIN "maps/pewtermart.blk"
 
@@ -37545,10 +37547,12 @@ CinnabarPokecenterScript: ; 0x75e2c
 ; 0x75e32
 
 CinnabarPokecenterTexts:
-INCBIN "baserom.gbc",$75e32,$9
+    dw CinnabarPokecenterText1, CinnabarPokecenterText2, CinnabarPokecenterText3, CinnabarPokecenterText4
 
-CinnabarPokecenterText2:
-CinnabarPokecenterText1: ; 0x75e3b
+CinnabarPokecenterText1:
+    db $ff
+
+CinnabarPokecenterText2: ; 0x75e3b
     TX_FAR _CinnabarPokecenterText1
     db $50
 
@@ -37581,7 +37585,7 @@ CinnabarPokecenterObject: ; 0x75e46 (size=44)
 CinnabarMart_h: ; 0x75e72 to 0x75e7e (12 bytes) (id=172)
     db $02 ; tileset
     db $04, $04 ; dimensions (y, x)
-    dw $4010, CinnabarMartTexts, CinnabarMartScript ; blocks, texts, scripts
+    dw CinnabarMartBlocks, CinnabarMartTexts, CinnabarMartScript ; blocks, texts, scripts
     db $00 ; connections
 
     dw CinnabarMartObject ; objects
@@ -37622,7 +37626,7 @@ CinnabarMartObject: ; 0x75e91 (size=38)
 CopycatsHouseF1_h: ; 0x75eb7 to 0x75ec3 (12 bytes) (id=175)
     db $01 ; tileset
     db $04, $04 ; dimensions (y, x)
-    dw $4000, CopycatsHouseF1Texts, CopycatsHouseF1Script ; blocks, texts, scripts
+    dw CopycatsHouseF1Blocks, CopycatsHouseF1Texts, CopycatsHouseF1Script ; blocks, texts, scripts
     db $00 ; connections
 
     dw CopycatsHouseF1Object ; objects
