@@ -8051,7 +8051,7 @@ SECTION "bank6",DATA,BANK[$6]
 
 CeladonCity_h: ; 0x18000
     db $00 ; tileset
-    db $12,$19 ; dimensions
+    db CeladonCityHeight, CeladonCityWidth ; dimensions (y, x)
     dw CeladonCityBlocks, CeladonCityTexts, CeladonCityScript ; blocks, texts, scripts
     db WEST | EAST ; connections
 
@@ -8180,7 +8180,7 @@ PalletTownBlocks: ; 0x182fd
 
 ViridianCity_h: ; 0x18357 to 0x18384 (45 bytes) (bank=6) (id=1)
     db $00 ; tileset
-    db $12, $14 ; dimensions (y, x)
+    db ViridianCityHeight, ViridianCityWidth ; dimensions (y, x)
     dw ViridianCityBlocks, ViridianCityTexts, ViridianCityScript ; blocks, texts, scripts
     db NORTH | SOUTH | WEST ; connections
 
@@ -9967,7 +9967,7 @@ VermilionHouse3Blocks: ; 16
 
 IndigoPlateauLobby_h: ; 0x19c4f to 0x19c5b (12 bytes) (bank=6) (id=174)
     db $02 ; tileset
-    db $06, $08 ; dimensions (y, x)
+    db IndigoPlateauLobbyHeight, IndigoPlateauLobbyWidth ; dimensions (y, x)
     dw IndigoPlateauLobbyBlocks, IndigoPlateauLobbyTexts, IndigoPlateauLobbyScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -10041,7 +10041,7 @@ IndigoPlateauLobbyBlocks: ; 48
 
 SilphCo4_h: ; 0x19cff to 0x19d0b (12 bytes) (bank=6) (id=209)
     db $16 ; tileset
-    db $09, $0f ; dimensions (y, x)
+    db SilphCo4Height, SilphCo4Width ; dimensions (y, x)
     dw SilphCo4Blocks, SilphCo4Texts, SilphCo4Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -10135,7 +10135,7 @@ SilphCo4Blocks: ; 135
 
 SilphCo5_h: ; 0x19f2b to 0x19f37 (12 bytes) (bank=6) (id=210)
     db $16 ; tileset
-    db $09, $0f ; dimensions (y, x)
+    db SilphCo5Height, SilphCo5Width ; dimensions (y, x)
     dw SilphCo5Blocks, SilphCo5Texts, SilphCo5Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -10253,7 +10253,7 @@ SilphCo5Blocks: ; 135
 
 SilphCo6_h: ; 0x1a19d to 0x1a1a9 (12 bytes) (bank=6) (id=211)
     db $16 ; tileset
-    db $09, $0d ; dimensions (y, x)
+    db SilphCo6Height, SilphCo6Width ; dimensions (y, x)
     dw SilphCo6Blocks, SilphCo6Texts, SilphCo6Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -10386,7 +10386,7 @@ SECTION "bank7",DATA,BANK[$7]
 
 CinnabarIsland_h: ; 0x1c000 to 0x1c022 (34 bytes) (bank=7) (id=8)
     db $00 ; tileset
-    db $09, $0a ; dimensions (y, x)
+    db CinnabarIslandHeight, CinnabarIslandWidth ; dimensions (y, x)
     dw CinnabarIslandBlocks, CinnabarIslandTexts, CinnabarIslandScript ; blocks, texts, scripts
     db NORTH | EAST ; connections
 
@@ -10441,7 +10441,7 @@ CinnabarIslandBlocks: ; 90
 
 Route1_h: ; 0x1c0c3 to 0x1c0e5 (34 bytes) (bank=7) (id=12)
     db $00 ; tileset
-    db $12, $0a ; dimensions (y, x)
+    db Route1Height, Route1Width ; dimensions (y, x)
     dw Route1Blocks, Route1Texts, Route1Script ; blocks, texts, scripts
     db NORTH | SOUTH ; connections
 
@@ -10828,7 +10828,7 @@ Route1Text3: ; 0x1cafd
 
 OaksLab_h: ; 0x1cb02 to 0x1cb0e (12 bytes) (bank=7) (id=40)
     db $05 ; tileset
-    db $06, $05 ; dimensions (y, x)
+    db OaksLabHeight, OaksLabWidth ; dimensions (y, x)
     dw OaksLabBlocks, OaksLabTexts, OaksLabScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -11438,7 +11438,7 @@ OaksLabObject: ; 0x1d40a (size=88)
 
 ViridianMart_h: ; 0x1d462 to 0x1d46e (12 bytes) (bank=7) (id=42)
     db $02 ; tileset
-    db $04, $04 ; dimensions (y, x)
+    db ViridianMartHeight, ViridianMartWidth ; dimensions (y, x)
     dw ViridianMartBlocks, ViridianMartTexts, ViridianMartScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -11531,7 +11531,7 @@ ViridianMartBlocks: ; 16
 
 School_h: ; 0x1d540 to 0x1d54c (12 bytes) (bank=7) (id=43)
     db $08 ; tileset
-    db $04, $04 ; dimensions (y, x)
+    db SchoolHeight, SchoolWidth ; dimensions (y, x)
     dw SchoolBlocks, SchoolTexts, SchoolScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -11571,7 +11571,7 @@ SchoolObject: ; 0x1d55d (size=32)
 
 ViridianHouse_h: ; 0x1d57d to 0x1d589 (12 bytes) (bank=7) (id=44)
     db $08 ; tileset
-    db $04, $04 ; dimensions (y, x)
+    db ViridianHouseHeight, ViridianHouseWidth ; dimensions (y, x)
     dw ViridianHouseBlocks, ViridianHouseTexts, ViridianHouseScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -11630,7 +11630,7 @@ ViridianHouseObject: ; 0x1d5bb (size=44)
 
 PewterHouse1_h: ; 0x1d5e7 to 0x1d5f3 (12 bytes) (bank=7) (id=55)
     db $08 ; tileset
-    db $04, $04 ; dimensions (y, x)
+    db PewterHouse1Height, PewterHouse1Width ; dimensions (y, x)
     dw PewterHouse1Blocks, PewterHouse1Texts, PewterHouse1Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -11679,7 +11679,7 @@ PewterHouse1Object: ; 0x1d616 (size=38)
 
 PewterHouse2_h: ; 0x1d63c to 0x1d648 (12 bytes) (bank=7) (id=57)
     db $08 ; tileset
-    db $04, $04 ; dimensions (y, x)
+    db PewterHouse2Height, PewterHouse2Width ; dimensions (y, x)
     dw PewterHouse2Blocks, PewterHouse2Texts, PewterHouse2Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -11719,7 +11719,7 @@ PewterHouse2Object: ; 0x1d659 (size=32)
 
 CeruleanHouseTrashed_h: ; 0x1d679 to 0x1d685 (12 bytes) (bank=7) (id=62)
     db $08 ; tileset
-    db $04, $04 ; dimensions (y, x)
+    db CeruleanHouseTrashedHeight, CeruleanHouseTrashedWidth ; dimensions (y, x)
     dw CeruleanHouseTrashedBlocks, CeruleanHouseTrashedTexts, CeruleanHouseTrashedScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -11781,7 +11781,7 @@ CeruleanHouseTrashedObject: ; 0x1d6bf (size=43)
 
 CeruleanHouse2_h: ; 0x1d6ea to 0x1d6f6 (12 bytes) (bank=7) (id=63)
     db $08 ; tileset
-    db $04, $04 ; dimensions (y, x)
+    db CeruleanHouse2Height, CeruleanHouse2Width ; dimensions (y, x)
     dw CeruleanHouse2Blocks, CeruleanHouse2Texts, CeruleanHouse2Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -11825,7 +11825,7 @@ CeruleanHouse2Object: ; 0x1d710 (size=32)
 
 BikeShop_h: ; 0x1d730 to 0x1d73c (12 bytes) (bank=7) (id=66)
     db $15 ; tileset
-    db $04, $04 ; dimensions (y, x)
+    db BikeShopHeight, BikeShopWidth ; dimensions (y, x)
     dw BikeShopBlocks, BikeShopTexts, BikeShopScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -11960,7 +11960,7 @@ BikeShopBlocks: ; 16
 
 LavenderHouse1_h: ; 0x1d89c to 0x1d8a8 (12 bytes) (bank=7) (id=149)
     db $08 ; tileset
-    db $04, $04 ; dimensions (y, x)
+    db LavenderHouse1Height, LavenderHouse1Width ; dimensions (y, x)
     dw LavenderHouse1Blocks, LavenderHouse1Texts, LavenderHouse1Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -12075,7 +12075,7 @@ LavenderHouse1Object: ; 0x1d96a (size=56)
 
 LavenderHouse2_h: ; 0x1d9a2 to 0x1d9ae (12 bytes) (bank=7) (id=151)
     db $08 ; tileset
-    db $04, $04 ; dimensions (y, x)
+    db LavenderHouse2Height, LavenderHouse2Width ; dimensions (y, x)
     dw LavenderHouse2Blocks, LavenderHouse2Texts, LavenderHouse2Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -12132,7 +12132,7 @@ LavenderHouse2Object: ; 0x1d9e6 (size=32)
 
 NameRater_h: ; 0x1da06 to 0x1da12 (12 bytes) (bank=7) (id=229)
     db $08 ; tileset
-    db $04, $04 ; dimensions (y, x)
+    db NameRaterHeight, NameRaterWidth ; dimensions (y, x)
     dw NameRaterBlocks, $5a54, NameRaterScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -12205,7 +12205,7 @@ NameRaterObject: ; 0x1dad6 (size=26)
 
 VermilionHouse1_h: ; 0x1daf0 to 0x1dafc (12 bytes) (bank=7) (id=93)
     db $08 ; tileset
-    db $04, $04 ; dimensions (y, x)
+    db VermilionHouse1Height, VermilionHouse1Width ; dimensions (y, x)
     dw VermilionHouse1Blocks, VermilionHouse1Texts, VermilionHouse1Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -12257,7 +12257,7 @@ VermilionHouse1Object: ; 0x1db20 (size=38)
 
 VermilionDock_h: ; 0x1db46 to 0x1db52 (12 bytes) (bank=7) (id=94)
     db $0e ; tileset
-    db $06, $0e ; dimensions (y, x)
+    db VermilionDockHeight, VermilionDockWidth ; dimensions (y, x)
     dw VermilionDockBlocks, VermilionDockTexts, VermilionDockScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -12328,7 +12328,7 @@ VermilionDockBlocks: ; 84
 
 CeladonMansion5_h: ; 0x1dd2e to 0x1dd3a (12 bytes) (bank=7) (id=132)
     db $08 ; tileset
-    db $04, $04 ; dimensions (y, x)
+    db CeladonMansion5Height, CeladonMansion5Width ; dimensions (y, x)
     dw CeladonMansion5Blocks, CeladonMansion5Texts, CeladonMansion5Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -12376,7 +12376,7 @@ CeladonMansion5Object: ; 0x1dd5c (size=32)
 
 FuchsiaMart_h: ; 0x1dd7c to 0x1dd88 (12 bytes) (bank=7) (id=152)
     db $02 ; tileset
-    db $04, $04 ; dimensions (y, x)
+    db FuchsiaMartHeight, FuchsiaMartWidth ; dimensions (y, x)
     dw FuchsiaMartBlocks, FuchsiaMartTexts, FuchsiaMartScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -12420,7 +12420,7 @@ FuchsiaMartBlocks: ; 16
 
 SaffronHouse1_h: ; 0x1ddd1 to 0x1dddd (12 bytes) (bank=7) (id=179)
     db $08 ; tileset
-    db $04, $04 ; dimensions (y, x)
+    db SaffronHouse1Height, SaffronHouse1Width ; dimensions (y, x)
     dw SaffronHouse1Blocks, SaffronHouse1Texts, SaffronHouse1Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -12474,7 +12474,7 @@ SaffronHouse1Object: ; 0x1de04 (size=44)
 
 SaffronHouse2_h: ; 0x1de30 to 0x1de3c (12 bytes) (bank=7) (id=183)
     db $08 ; tileset
-    db $04, $04 ; dimensions (y, x)
+    db SaffronHouse2Height, SaffronHouse2Width ; dimensions (y, x)
     dw SaffronHouse2Blocks, SaffronHouse2Texts, SaffronHouse2Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -12532,7 +12532,7 @@ SaffronHouse2Object: ; 0x1de8a (size=26)
 
 DiglettsCaveRoute2_h: ; 0x1dea4 to 0x1deb0 (12 bytes) (bank=7) (id=46)
     db $11 ; tileset
-    db $04, $04 ; dimensions (y, x)
+    db DiglettsCaveRoute2Height, DiglettsCaveRoute2Width ; dimensions (y, x)
     dw DiglettsCaveRoute2Blocks, DiglettsCaveRoute2Texts, DiglettsCaveRoute2Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -12571,7 +12571,7 @@ DiglettsCaveRoute2Object: ; 0x1debf (size=34)
 
 Route2House_h: ; 0x1dee1 to 0x1deed (12 bytes) (bank=7) (id=48)
     db $08 ; tileset
-    db $04, $04 ; dimensions (y, x)
+    db Route2HouseHeight, Route2HouseWidth ; dimensions (y, x)
     dw Route2HouseBlocks, Route2HouseTexts, Route2HouseScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -12615,7 +12615,7 @@ Route2HouseObject: ; 0x1df07 (size=32)
 
 Route5Gate_h: ; 0x1df27 to 0x1df33 (12 bytes) (bank=7) (id=70)
     db $0c ; tileset
-    db $03, $04 ; dimensions (y, x)
+    db Route5GateHeight, Route5GateWidth ; dimensions (y, x)
     dw Route5GateBlocks, Route5GateTexts, Route5GateScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -12742,7 +12742,7 @@ Route5GateBlocks: ; 12
 
 Route6Gate_h: ; 0x1e031 to 0x1e03d (12 bytes) (bank=7) (id=73)
     db $0c ; tileset
-    db $03, $04 ; dimensions (y, x)
+    db Route6GateHeight, Route6GateWidth ; dimensions (y, x)
     dw Route6GateBlocks, Route6GateTexts, Route6GateScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -12823,7 +12823,7 @@ Route6GateBlocks: ; 12
 
 Route7Gate_h: ; 0x1e0f4 to 0x1e100 (12 bytes) (bank=7) (id=76)
     db $0c ; tileset
-    db $04, $03 ; dimensions (y, x)
+    db Route7GateHeight, Route7GateWidth ; dimensions (y, x)
     dw Route7GateBlocks, Route7GateTexts, Route7GateScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -12905,7 +12905,7 @@ Route7GateBlocks: ; 12
 
 Route8Gate_h: ; 0x1e1bb to 0x1e1c7 (12 bytes) (bank=7) (id=79)
     db $0c ; tileset
-    db $04, $03 ; dimensions (y, x)
+    db Route8GateHeight, Route8GateWidth ; dimensions (y, x)
     dw Route8GateBlocks, Route8GateTexts, Route8GateScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -12984,7 +12984,7 @@ Route8GateBlocks: ; 12
 
 UndergroundPathEntranceRoute8_h: ; 0x1e27d to 0x1e289 (12 bytes) (bank=7) (id=80)
     db $0c ; tileset
-    db $04, $04 ; dimensions (y, x)
+    db UndergroundPathEntranceRoute8Height, UndergroundPathEntranceRoute8Width ; dimensions (y, x)
     dw UndergroundPathEntranceRoute8Blocks, UndergroundPathEntranceRoute8Texts, UndergroundPathEntranceRoute8Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -13025,7 +13025,7 @@ UndergroundPathEntranceRoute8Object: ; 0x1e298 (size=34)
 
 PowerPlant_h: ; 0x1e2ba to 0x1e2c6 (12 bytes) (bank=7) (id=83)
     db $16 ; tileset
-    db $12, $14 ; dimensions (y, x)
+    db PowerPlantHeight, PowerPlantWidth ; dimensions (y, x)
     dw PowerPlantBlocks, PowerPlantTexts, PowerPlantScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -13149,7 +13149,7 @@ PowerPlantBlocks: ; 360
 
 DiglettsCaveEntranceRoute11_h: ; 0x1e5ae to 0x1e5ba (12 bytes) (bank=7) (id=85)
     db $11 ; tileset
-    db $04, $04 ; dimensions (y, x)
+    db DiglettsCaveEntranceRoute11Height, DiglettsCaveEntranceRoute11Width ; dimensions (y, x)
     dw DiglettsCaveEntranceRoute11Blocks, DiglettsCaveEntranceRoute11Texts, DiglettsCaveEntranceRoute11Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -13191,7 +13191,7 @@ DiglettsCaveEntranceRoute11Object: ; 0x1e5ca (size=34)
 
 Route16House_h: ; 0x1e5ec to 0x1e5f8 (12 bytes) (bank=7) (id=188)
     db $08 ; tileset
-    db $04, $04 ; dimensions (y, x)
+    db Route16HouseHeight, Route16HouseWidth ; dimensions (y, x)
     dw Route16HouseBlocks, Route16HouseTexts, Route16HouseScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -13257,7 +13257,7 @@ Route16HouseObject: ; 0x1e657 (size=32)
 
 Route22Gate_h: ; 0x1e677 to 0x1e683 (12 bytes) (bank=7) (id=193)
     db $0c ; tileset
-    db $04, $05 ; dimensions (y, x)
+    db Route22GateHeight, Route22GateWidth ; dimensions (y, x)
     dw Route22GateBlocks, Route22GateTexts, Route22GateScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -13357,7 +13357,7 @@ Route22GateBlocks: ; 20
 
 BillsHouse_h: ; 0x1e75e to 0x1e76a (12 bytes) (bank=7) (id=88)
     db $10 ; tileset
-    db $04, $04 ; dimensions (y, x)
+    db BillsHouseHeight, BillsHouseWidth ; dimensions (y, x)
     dw BillsHouseBlocks, BillsHouseTexts, BillsHouseScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -20408,7 +20408,7 @@ SECTION "bank11",DATA,BANK[$11]
 
 LavenderTown_h: ; 0x44000 to 0x4402d (45 bytes) (bank=11) (id=4)
     db $00 ; tileset
-    db $09, $0a ; dimensions (y, x)
+    db LavenderTownHeight, LavenderTownWidth ; dimensions (y, x)
     dw LavenderTownBlocks, LavenderTownTexts, LavenderTownScript ; blocks, texts, scripts
     db NORTH | SOUTH | WEST ; connections
 
@@ -20579,7 +20579,7 @@ ViridianPokecenterObject: ; 0x44277 (size=44)
 
 Mansion1_h: ; 0x442a3 to 0x442af (12 bytes) (bank=11) (id=165)
     db $16 ; tileset
-    db $0e, $0f ; dimensions (y, x)
+    db Mansion1Height, Mansion1Width ; dimensions (y, x)
     dw Mansion1Blocks, Mansion1Texts, Mansion1Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -20671,7 +20671,7 @@ Mansion1Blocks: ; 203
 
 RockTunnel1_h: ; 0x444d0 to 0x444dc (12 bytes) (bank=11) (id=82)
     db $11 ; tileset
-    db $12, $14 ; dimensions (y, x)
+    db RockTunnel1Height, RockTunnel1Width ; dimensions (y, x)
     dw RockTunnel1Blocks, RockTunnel1Texts, RockTunnel1Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -20777,7 +20777,7 @@ RockTunnel1Blocks: ; 360
 
 SeafoamIslands1_h: ; 0x447dd to 0x447e9 (12 bytes) (bank=11) (id=192)
     db $11 ; tileset
-    db $09, $0f ; dimensions (y, x)
+    db SeafoamIslands1Height, SeafoamIslands1Width ; dimensions (y, x)
     dw SeafoamIslands1Blocks, SeafoamIslands1Texts, SeafoamIslands1Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -20865,7 +20865,7 @@ SeafoamIslands1Blocks: ; 135
 
 SSAnne3_h: ; 0x44926 to 0x44932 (12 bytes) (bank=11) (id=97)
     db $0d ; tileset
-    db $03, $0a ; dimensions (y, x)
+    db SSAnne3Height, SSAnne3Width ; dimensions (y, x)
     dw SSAnne3Blocks, SSAnne3Texts, SSAnne3Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -20903,7 +20903,7 @@ SSAnne3Blocks: ; 30
 
 VictoryRoad3_h: ; 0x44974 to 0x44980 (12 bytes) (bank=11) (id=198)
     db $11 ; tileset
-    db $09, $0f ; dimensions (y, x)
+    db VictoryRoad3Height, VictoryRoad3Width ; dimensions (y, x)
     dw VictoryRoad3Blocks, VictoryRoad3Texts, VictoryRoad3Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -20987,7 +20987,7 @@ VictoryRoad3Blocks: ; 135
 
 RocketHideout1_h: ; 0x44bbe to 0x44bca (12 bytes) (bank=11) (id=199)
     db $16 ; tileset
-    db $0e, $0f ; dimensions (y, x)
+    db RocketHideout1Height, RocketHideout1Width ; dimensions (y, x)
     dw RocketHideout1Blocks, RocketHideout1Texts, RocketHideout1Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -21076,7 +21076,7 @@ RocketHideout1Blocks: ; 210
 
 RocketHideout2_h: ; 0x44e1b to 0x44e27 (12 bytes) (bank=11) (id=200)
     db $16 ; tileset
-    db $0e, $0f ; dimensions (y, x)
+    db RocketHideout2Height, RocketHideout2Width ; dimensions (y, x)
     dw RocketHideout2Blocks, RocketHideout2Texts, RocketHideout2Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -21138,7 +21138,7 @@ RocketHideout2Blocks: ; 210
 
 RocketHideout3_h: ; 0x45219 to 0x45225 (12 bytes) (bank=11) (id=201)
     db $16 ; tileset
-    db $0e, $0f ; dimensions (y, x)
+    db RocketHideout3Height, RocketHideout3Width ; dimensions (y, x)
     dw RocketHideout3Blocks, RocketHideout3Texts, RocketHideout3Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -21201,7 +21201,7 @@ RocketHideout3Blocks: ; 210
 
 RocketHideout4_h: ; 0x45451 to 0x4545d (12 bytes) (bank=11) (id=202)
     db $16 ; tileset
-    db $0c, $0f ; dimensions (y, x)
+    db RocketHideout4Height, RocketHideout4Width ; dimensions (y, x)
     dw RocketHideout4Blocks, RocketHideout4Texts, RocketHideout4Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -21313,7 +21313,7 @@ RocketHideout4Blocks: ; 180
 
 RocketHideoutElevator_h: ; 0x45704 to 0x45710 (12 bytes) (bank=11) (id=203)
     db $12 ; tileset
-    db $04, $03 ; dimensions (y, x)
+    db RocketHideoutElevatorHeight, RocketHideoutElevatorWidth ; dimensions (y, x)
     dw RocketHideoutElevatorBlocks, RocketHideoutElevatorTexts, RocketHideoutElevatorScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -21380,7 +21380,7 @@ RocketHideoutElevatorBlocks: ; 12
 
 SilphCoElevator_h: ; 0x457b4 to 0x457c0 (12 bytes) (bank=11) (id=236)
     db $12 ; tileset
-    db $02, $02 ; dimensions (y, x)
+    db SilphCoElevatorHeight, SilphCoElevatorWidth ; dimensions (y, x)
     dw SilphCoElevatorBlocks, SilphCoElevatorTexts, SilphCoElevatorScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -21437,7 +21437,7 @@ SilphCoElevatorBlocks: ; 4
 
 SafariZoneEast_h: ; 0x4585f to 0x4586b (12 bytes) (bank=11) (id=217)
     db $03 ; tileset
-    db $0d, $0f ; dimensions (y, x)
+    db SafariZoneEastHeight, SafariZoneEastWidth ; dimensions (y, x)
     dw SafariZoneEastBlocks, SafariZoneEastTexts, SafariZoneEastScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -21495,7 +21495,7 @@ SafariZoneEastBlocks: ; 195
 
 SafariZoneNorth_h: ; 0x4599f to 0x459ab (12 bytes) (bank=11) (id=218)
     db $03 ; tileset
-    db $12, $14 ; dimensions (y, x)
+    db SafariZoneNorthHeight, SafariZoneNorthWidth ; dimensions (y, x)
     dw SafariZoneNorthBlocks, SafariZoneNorthTexts, SafariZoneNorthScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -21569,7 +21569,7 @@ SafariZoneNorthBlocks: ; 360
 
 SafariZoneCenter_h: ; 0x45ba6 to 0x45bb2 (12 bytes) (bank=11) (id=220)
     db $03 ; tileset
-    db $0d, $0f ; dimensions (y, x)
+    db SafariZoneCenterHeight, SafariZoneCenterWidth ; dimensions (y, x)
     dw SafariZoneCenterBlocks, SafariZoneCenterTexts, SafariZoneCenterScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -21627,7 +21627,7 @@ SafariZoneCenterBlocks: ; 195
 
 SafariZoneRestHouse1_h: ; 0x45ce1 to 0x45ced (12 bytes) (bank=11) (id=221)
     db $0c ; tileset
-    db $04, $04 ; dimensions (y, x)
+    db SafariZoneRestHouse1Height, SafariZoneRestHouse1Width ; dimensions (y, x)
     dw SafariZoneRestHouse1Blocks, SafariZoneRestHouse1Texts, SafariZoneRestHouse1Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -21667,7 +21667,7 @@ SafariZoneRestHouse1Object: ; 0x45cfe (size=32)
 
 SafariZoneRestHouse2_h: ; 0x45d1e to 0x45d2a (12 bytes) (bank=11) (id=223)
     db $0c ; tileset
-    db $04, $04 ; dimensions (y, x)
+    db SafariZoneRestHouse2Height, SafariZoneRestHouse2Width ; dimensions (y, x)
     dw $40fb, SafariZoneRestHouse2Texts, SafariZoneRestHouse2Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -21713,7 +21713,7 @@ SafariZoneRestHouse2Object: ; 0x45d43 (size=38)
 
 SafariZoneRestHouse3_h: ; 0x45d69 to 0x45d75 (12 bytes) (bank=11) (id=224)
     db $0c ; tileset
-    db $04, $04 ; dimensions (y, x)
+    db SafariZoneRestHouse3Height, SafariZoneRestHouse3Width ; dimensions (y, x)
     dw $40fb, SafariZoneRestHouse3Texts, SafariZoneRestHouse3Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -21759,7 +21759,7 @@ SafariZoneRestHouse3Object: ; 0x45d8e (size=38)
 
 SafariZoneRestHouse4_h: ; 0x45db4 to 0x45dc0 (12 bytes) (bank=11) (id=225)
     db $0c ; tileset
-    db $04, $04 ; dimensions (y, x)
+    db SafariZoneRestHouse4Height, SafariZoneRestHouse4Width ; dimensions (y, x)
     dw $40fb, SafariZoneRestHouse4Texts, SafariZoneRestHouse4Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -21805,7 +21805,7 @@ SafariZoneRestHouse4Object: ; 0x45dd9 (size=38)
 
 UnknownDungeon2_h: ; 0x45dff to 0x45e0b (12 bytes) (bank=11) (id=226)
     db $11 ; tileset
-    db $09, $0f ; dimensions (y, x)
+    db UnknownDungeon2Height, UnknownDungeon2Width ; dimensions (y, x)
     dw UnknownDungeon2Blocks, UnknownDungeon2Texts, UnknownDungeon2Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -21849,7 +21849,7 @@ UnknownDungeon2Blocks: ; 135
 
 UnknownDungeon3_h: ; 0x45ee4 to 0x45ef0 (12 bytes) (bank=11) (id=227)
     db $11 ; tileset
-    db $09, $0f ; dimensions (y, x)
+    db UnknownDungeon3Height, UnknownDungeon3Width ; dimensions (y, x)
     dw UnknownDungeon3Blocks, UnknownDungeon3Texts, UnknownDungeon3Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -21901,7 +21901,7 @@ UnknownDungeon3Blocks: ; 135
 
 RockTunnel2_h: ; 0x45fdf to 0x45feb (12 bytes) (bank=11) (id=232)
     db $11 ; tileset
-    db $12, $14 ; dimensions (y, x)
+    db RockTunnel2Height, RockTunnel2Width ; dimensions (y, x)
     dw RockTunnel2Blocks, RockTunnel2Texts, RockTunnel2Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -22006,7 +22006,7 @@ RockTunnel2Blocks: ; 360
 
 SeafoamIslands2_h: ; 0x46309 to 0x46315 (12 bytes) (bank=11) (id=159)
     db $11 ; tileset
-    db $09, $0f ; dimensions (y, x)
+    db SeafoamIslands2Height, SeafoamIslands2Width ; dimensions (y, x)
     dw SeafoamIslands2Blocks, SeafoamIslands2Texts, SeafoamIslands2Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -22090,7 +22090,7 @@ SeafoamIslands2Blocks: ; 135
 
 SeafoamIslands3_h: ; 0x46445 to 0x46451 (12 bytes) (bank=11) (id=160)
     db $11 ; tileset
-    db $09, $0f ; dimensions (y, x)
+    db SeafoamIslands3Height, SeafoamIslands3Width ; dimensions (y, x)
     dw SeafoamIslands3Blocks, SeafoamIslands3Texts, SeafoamIslands3Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -22174,7 +22174,7 @@ SeafoamIslands3Blocks: ; 135
 
 SeafoamIslands4_h: ; 0x46581 to 0x4658d (12 bytes) (bank=11) (id=161)
     db $11 ; tileset
-    db $09, $0f ; dimensions (y, x)
+    db SeafoamIslands4Height, SeafoamIslands4Width ; dimensions (y, x)
     dw SeafoamIslands4Blocks, SeafoamIslands4Texts, SeafoamIslands4Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -22312,7 +22312,7 @@ SeafoamIslands4Blocks: ; 135
 
 SeafoamIslands5_h: ; 0x4678d to 0x46799 (12 bytes) (bank=11) (id=162)
     db $11 ; tileset
-    db $09, $0f ; dimensions (y, x)
+    db SeafoamIslands5Height, SeafoamIslands5Width ; dimensions (y, x)
     dw SeafoamIslands5Blocks, SeafoamIslands5Texts, SeafoamIslands5Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -22440,7 +22440,7 @@ SECTION "bank12",DATA,BANK[$12]
 
 Route7_h: ; 0x48000 to 0x48022 (34 bytes) (bank=12) (id=18)
     db $00 ; tileset
-    db $09, $0a ; dimensions (y, x)
+    db Route7Height, Route7Width ; dimensions (y, x)
     dw Route7Blocks, $4155, Route7Script ; blocks, texts, scripts
     db WEST | EAST ; connections
 
@@ -22622,7 +22622,7 @@ RedsHouse1FBlocks:
 
 CeladonMart3_h: ; 0x48219 to 0x48225 (12 bytes) (bank=12) (id=124)
     db $12 ; tileset
-    db $04, $0a ; dimensions (y, x)
+    db CeladonMart3Height, CeladonMart3Width ; dimensions (y, x)
     dw CeladonMart3Blocks, CeladonMart3Texts, CeladonMart3Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -22748,7 +22748,7 @@ CeladonMart3Blocks: ; 40
 
 CeladonMart4_h: ; 0x4834a to 0x48356 (12 bytes) (bank=12) (id=125)
     db $12 ; tileset
-    db $04, $0a ; dimensions (y, x)
+    db CeladonMart4Height, CeladonMart4Width ; dimensions (y, x)
     dw CeladonMart4Blocks, CeladonMart4Texts, CeladonMart4Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -22799,7 +22799,7 @@ CeladonMart4Blocks: ; 40
 
 CeladonMartRoof_h: ; 0x483c9 to 0x483d5 (12 bytes) (bank=12) (id=126)
     db $12 ; tileset
-    db $04, $0a ; dimensions (y, x)
+    db CeladonMartRoofHeight, CeladonMartRoofWidth ; dimensions (y, x)
     dw CeladonMartRoofBlocks, CeladonMartRoofTexts, CeladonMartRoofScript ; blocks, texts, scripts
     db $00 ; connections
     
@@ -22877,7 +22877,7 @@ CeladonMartRoofBlocks: ; 40
 
 CeladonMartElevator_h: ; 0x485f4 to 0x48600 (12 bytes) (bank=12) (id=127)
     db $12 ; tileset
-    db $02, $02 ; dimensions (y, x)
+    db CeladonMartElevatorHeight, CeladonMartElevatorWidth ; dimensions (y, x)
     dw CeladonMartElevatorBlocks, CeladonMartElevatorTexts, CeladonMartElevatorScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -22934,7 +22934,7 @@ CeladonMartElevatorBlocks: ; 4
 
 CeladonMansion1_h: ; 0x48688 to 0x48694 (12 bytes) (bank=12) (id=128)
     db $13 ; tileset
-    db $06, $04 ; dimensions (y, x)
+    db CeladonMansion1Height, CeladonMansion1Width ; dimensions (y, x)
     dw CeladonMansion1Blocks, CeladonMansion1Texts, CeladonMansion1Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -23011,7 +23011,7 @@ CeladonMansion1Blocks: ; 24
 
 CeladonMansion2_h: ; 0x4872e to 0x4873a (12 bytes) (bank=12) (id=129)
     db $13 ; tileset
-    db $06, $04 ; dimensions (y, x)
+    db CeladonMansion2Height, CeladonMansion2Width ; dimensions (y, x)
     dw CeladonMansion2Blocks, CeladonMansion2Texts, CeladonMansion2Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -23054,7 +23054,7 @@ CeladonMansion2Blocks: ; 24
 
 CeladonMansion3_h: ; 0x48784 to 0x48790 (12 bytes) (bank=12) (id=130)
     db $13 ; tileset
-    db $06, $04 ; dimensions (y, x)
+    db CeladonMansion3Height, CeladonMansion3Width ; dimensions (y, x)
     dw CeladonMansion3Blocks, CeladonMansion3Texts, CeladonMansion3Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -23145,7 +23145,7 @@ CeladonMansion3Blocks: ; 24
 
 CeladonMansion4_h: ; 0x4885f to 0x4886b (12 bytes) (bank=12) (id=131)
     db $13 ; tileset
-    db $06, $04 ; dimensions (y, x)
+    db CeladonMansion4Height, CeladonMansion4Width ; dimensions (y, x)
     dw CeladonMansion4Blocks, CeladonMansion4Texts, CeladonMansion4Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -23185,7 +23185,7 @@ CeladonMansion4Blocks: ; 24
 
 CeladonPokecenter_h: ; 0x488ac to 0x488b8 (12 bytes) (bank=12) (id=133)
     db $06 ; tileset
-    db $04, $07 ; dimensions (y, x)
+    db CeladonPokecenterHeight, CeladonPokecenterWidth ; dimensions (y, x)
     dw CeladonPokecenterBlocks, CeladonPokecenterTexts, CeladonPokecenterScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -23234,7 +23234,7 @@ CeladonPokecenterObject: ; 0x488d2 (size=44)
 
 CeladonGym_h: ; 0x488fe to 0x4890a (12 bytes) (bank=12) (id=134)
     db $07 ; tileset
-    db $09, $05 ; dimensions (y, x)
+    db CeladonGymHeight, CeladonGymWidth ; dimensions (y, x)
     dw CeladonGymBlocks, CeladonGymTexts, CeladonGymScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -23394,7 +23394,7 @@ CeladonGymBlocks: ; 45
 
 CeladonGameCorner_h: ; 0x48bb1 to 0x48bbd (12 bytes) (bank=12) (id=135)
     db $12 ; tileset
-    db $09, $0a ; dimensions (y, x)
+    db CeladonGameCornerHeight, CeladonGameCornerWidth ; dimensions (y, x)
     dw CeladonGameCornerBlocks, CeladonGameCornerTexts, CeladonGameCornerScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -23723,7 +23723,7 @@ CeladonGameCornerBlocks: ; 90
 
 CeladonMart5_h: ; 0x4905d to 0x49069 (12 bytes) (bank=12) (id=136)
     db $12 ; tileset
-    db $04, $0a ; dimensions (y, x)
+    db CeladonMart5Height, CeladonMart5Width ; dimensions (y, x)
     dw CeladonMart5Blocks, CeladonMart5Texts, CeladonMart5Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -23775,7 +23775,7 @@ CeladonMart5Blocks: ; 40
 
 CeladonPrizeRoom_h: ; 0x490e4 to 0x490f0 (12 bytes) (bank=12) (id=137)
     db $12 ; tileset
-    db $04, $05 ; dimensions (y, x)
+    db CeladonPrizeRoomHeight, CeladonPrizeRoomWidth ; dimensions (y, x)
     dw CeladonPrizeRoomBlocks, CeladonPrizeRoomTexts, CeladonPrizeRoomScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -23824,7 +23824,7 @@ CeladonPrizeRoomBlocks: ; 20
 
 CeladonDiner_h: ; 0x49145 to 0x49151 (12 bytes) (bank=12) (id=138)
     db $12 ; tileset
-    db $04, $05 ; dimensions (y, x)
+    db CeladonDinerHeight, CeladonDinerWidth ; dimensions (y, x)
     dw CeladonDinerBlocks, CeladonDinerTexts, CeladonDinerScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -23906,7 +23906,7 @@ CeladonDinerBlocks: ; 20
 
 CeladonHouse_h: ; 0x49202 to 0x4920e (12 bytes) (bank=12) (id=139)
     db $13 ; tileset
-    db $04, $04 ; dimensions (y, x)
+    db CeladonHouseHeight, CeladonHouseWidth ; dimensions (y, x)
     dw CeladonHouseBlocks, CeladonHouseTexts, CeladonHouseScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -23955,7 +23955,7 @@ CeladonHouseBlocks: ; 16
 
 CeladonHotel_h: ; 0x4925d to 0x49269 (12 bytes) (bank=12) (id=140)
     db $06 ; tileset
-    db $04, $07 ; dimensions (y, x)
+    db CeladonHotelHeight, CeladonHotelWidth ; dimensions (y, x)
     dw CeladonHotelBlocks, CeladonHotelTexts, CeladonHotelScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -24003,7 +24003,7 @@ CeladonHotelBlocks: ; 28
 
 MtMoonPokecenter_h: ; 0x492c3 to 0x492cf (12 bytes) (bank=12) (id=68)
     db $06 ; tileset
-    db $04, $07 ; dimensions (y, x)
+    db MtMoonPokecenterHeight, MtMoonPokecenterWidth ; dimensions (y, x)
     dw MtMoonPokecenterBlocks, MtMoonPokecenterTexts, MtMoonPokecenterScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -24110,7 +24110,7 @@ MtMoonPokecenterObject: ; 0x49376 (size=56)
 
 RockTunnelPokecenter_h: ; 0x493ae to 0x493ba (12 bytes) (id=81)
     db $06 ; tileset
-    db $04, $07 ; dimensions (y, x)
+    db RockTunnelPokecenterHeight, RockTunnelPokecenterWidth ; dimensions (y, x)
     dw RockTunnelPokecenterBlocks, RockTunnelPokecenterTexts, RockTunnelPokecenterScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -24159,7 +24159,7 @@ RockTunnelPokecenterObject: ; 0x493d4 (size=44)
 
 Route11Gate_h: ; 0x49400 to 0x4940c (12 bytes) (id=84)
     db $0c ; tileset
-    db $05, $04 ; dimensions (y, x)
+    db Route11GateHeight, Route11GateWidth ; dimensions (y, x)
     dw Route11GateBlocks, Route11GateTexts, Route11GateScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -24200,7 +24200,7 @@ Route11GateObject: ; 0x49416 (size=50)
 
 Route11GateUpstairs_h: ; 0x49448 to 0x49454 (12 bytes) (id=86)
     db $0c ; tileset
-    db $04, $04 ; dimensions (y, x)
+    db Route11GateUpstairsHeight, Route11GateUpstairsWidth ; dimensions (y, x)
     dw Route11GateUpstairsBlocks, Route11GateUpstairsTexts, Route11GateUpstairsScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -24297,7 +24297,7 @@ Route11GateUpstairsObject: ; 0x494da (size=30)
 
 Route12Gate_h: ; 0x494f8 to 0x49504 (12 bytes) (id=87)
     db $0c ; tileset
-    db $04, $05 ; dimensions (y, x)
+    db Route12GateHeight, Route12GateWidth ; dimensions (y, x)
     dw Route12GateBlocks, Route12GateTexts, Route12GateScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -24341,7 +24341,7 @@ Route12GateBlocks: ; 20
 
 Route12GateUpstairs_h: ; 0x49554 to 0x49560 (12 bytes) (id=195)
     db $0c ; tileset
-    db $04, $04 ; dimensions (y, x)
+    db Route12GateUpstairsHeight, Route12GateUpstairsWidth ; dimensions (y, x)
     dw Route12GateUpstairsBlocks, Route12GateUpstairsTexts, Route12GateUpstairsScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -24415,7 +24415,7 @@ Route12GateUpstairsObject: ; 0x495de (size=24)
 
 Route15Gate_h: ; 0x495f6 to 0x49602 (12 bytes) (id=184)
     db $0c ; tileset
-    db $05, $04 ; dimensions (y, x)
+    db Route15GateHeight, Route15GateWidth ; dimensions (y, x)
     dw Route15GateBlocks, Route15GateTexts, Route15GateScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -24458,7 +24458,7 @@ INCBIN "baserom.gbc",$4963e,$74
 
 Route16GateMap_h: ; 0x496b2 to 0x496be (12 bytes) (id=186)
     db $0c ; tileset
-    db $07, $04 ; dimensions (y, x)
+    db Route16GateMapHeight, Route16GateMapWidth ; dimensions (y, x)
     dw Route16GateMapBlocks, Route16GateMapTexts, Route16GateMapScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -24573,7 +24573,7 @@ Route16GateMapBlocks: ; 28
 
 Route16GateUpstairs_h: ; 0x497ff to 0x4980b (12 bytes) (id=187)
     db $0c ; tileset
-    db $04, $04 ; dimensions (y, x)
+    db Route16GateUpstairsHeight, Route16GateUpstairsWidth ; dimensions (y, x)
     dw Route16GateUpstairsBlocks, Route16GateUpstairsTexts, Route16GateUpstairsScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -24637,7 +24637,7 @@ Route16GateUpstairsObject: ; 0x4984c (size=30)
 
 Route18Gate_h: ; 0x4986a to 0x49876 (12 bytes) (id=190)
     db $0c ; tileset
-    db $05, $04 ; dimensions (y, x)
+    db Route18GateHeight, Route18GateWidth ; dimensions (y, x)
     dw Route18GateBlocks, Route18GateTexts, Route18GateScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -24736,7 +24736,7 @@ Route18GateObject: ; 0x49937 (size=50)
 
 Route18GateHeader_h: ; 0x49969 to 0x49975 (12 bytes) (id=191)
     db $0c ; tileset
-    db $04, $04 ; dimensions (y, x)
+    db Route18GateHeaderHeight, Route18GateHeaderWidth ; dimensions (y, x)
     dw Route18GateHeaderBlocks, Route18GateHeaderTexts, Route18GateHeaderScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -24791,7 +24791,7 @@ Route18GateHeaderObject: ; 0x499a4 (size=24)
 
 MtMoon1_h: ; 0x499bc to 0x499c8 (12 bytes) (id=59)
     db $11 ; tileset
-    db $12, $14 ; dimensions (y, x)
+    db MtMoon1Height, MtMoon1Width ; dimensions (y, x)
     dw MtMoon1Blocks, MtMoon1Texts, MtMoon1Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -24902,7 +24902,7 @@ MtMoon1Blocks: ; 360
 
 MtMoon3_h: ; 0x49cff to 0x49d0b (12 bytes) (id=61)
     db $11 ; tileset
-    db $12, $14 ; dimensions (y, x)
+    db MtMoon3Height, MtMoon3Width ; dimensions (y, x)
     dw MtMoon3Blocks, MtMoon3Texts, MtMoon3Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -25083,7 +25083,7 @@ MtMoon3Blocks: ; 360
 
 SafariZoneWest_h: ; 0x4a1a9 to 0x4a1b5 (12 bytes) (id=219)
     db $03 ; tileset
-    db $0d, $0f ; dimensions (y, x)
+    db SafariZoneWestHeight, SafariZoneWestWidth ; dimensions (y, x)
     dw SafariZoneWestBlocks, SafariZoneWestTexts, SafariZoneWestScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -25152,7 +25152,7 @@ SafariZoneWestBlocks: ; 195
 
 SafariZoneSecretHouse_h: ; 0x4a30b to 0x4a317 (12 bytes) (id=222)
     db $14 ; tileset
-    db $04, $04 ; dimensions (y, x)
+    db SafariZoneSecretHouseHeight, SafariZoneSecretHouseWidth ; dimensions (y, x)
     dw SafariZoneSecretHouseBlocks, SafariZoneSecretHouseTexts, SafariZoneSecretHouseScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -25309,7 +25309,7 @@ LancePic:
 
 BattleCenterM_h: ; 0x4fd04 to 0x4fd10 (12 bytes) (id=239)
     db $15 ; tileset
-    db $04, $05 ; dimensions (y, x)
+    db BattleCenterMHeight, BattleCenterMWidth ; dimensions (y, x)
     dw BattleCenterMBlocks, BattleCenterMTexts, BattleCenterMScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -25370,7 +25370,7 @@ BattleCenterMBlocks: ; 20
 
 TradeCenterM_h: ; 0x4fd71 to 0x4fd7d (12 bytes) (id=240)
     db $15 ; tileset
-    db $04, $05 ; dimensions (y, x)
+    db TradeCenterMHeight, TradeCenterMWidth ; dimensions (y, x)
     dw TradeCenterMBlocks, TradeCenterMTexts, TradeCenterMScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -25566,7 +25566,7 @@ SECTION "bank14",DATA,BANK[$14]
 
 Route22_h: ; 0x50000 to 0x50022 (34 bytes) (id=33)
     db $00 ; tileset
-    db $09, $14 ; dimensions (y, x)
+    db Route22Height, Route22Width ; dimensions (y, x)
     dw Route22Blocks, Route22Texts, Route22Script ; blocks, texts, scripts
     db NORTH | EAST ; connections
 
@@ -25609,7 +25609,7 @@ Route22Blocks: ; 180
 
 Route20_h: ; 0x500f1 to 0x50113 (34 bytes) (id=31)
     db $00 ; tileset
-    db $09, $32 ; dimensions (y, x)
+    db Route20Height, Route20Width ; dimensions (y, x)
     dw Route20Blocks, Route20Texts, Route20Script ; blocks, texts, scripts
     db WEST | EAST ; connections
 
@@ -25663,7 +25663,7 @@ Route20Blocks: ; 450
 
 Route23_h: ; 0x5033f to 0x50361 (34 bytes) (id=34)
     db $17 ; tileset
-    db $48, $0a ; dimensions (y, x)
+    db Route23Height, Route23Width ; dimensions (y, x)
     dw Route23Blocks, Route23Texts, Route23Script ; blocks, texts, scripts
     db NORTH | SOUTH ; connections
 
@@ -25717,7 +25717,7 @@ Route23Blocks: ; 720
 
 Route24_h: ; 0x50682 to 0x506a4 (34 bytes) (id=35)
     db $00 ; tileset
-    db $12, $0a ; dimensions (y, x)
+    db Route24Height, Route24Width ; dimensions (y, x)
     dw Route24Blocks, Route24Texts, Route24Script ; blocks, texts, scripts
     db SOUTH | EAST ; connections
 
@@ -25761,7 +25761,7 @@ Route24Blocks: ; 180
 
 Route25_h: ; 0x5079b to 0x507b2 (23 bytes) (id=36)
     db $00 ; tileset
-    db $09, $1e ; dimensions (y, x)
+    db Route25Height, Route25Width ; dimensions (y, x)
     dw Route25Blocks, Route25Texts, Route25Script ; blocks, texts, scripts
     db WEST ; connections
 
@@ -25806,7 +25806,7 @@ Route25Blocks: ; 270
 
 IndigoPlateau_h: ; 0x5091e to 0x50935 (23 bytes) (id=9)
     db $17 ; tileset
-    db $09, $0a ; dimensions (y, x)
+    db IndigoPlateauHeight, IndigoPlateauWidth ; dimensions (y, x)
     dw IndigoPlateauBlocks, IndigoPlateauTexts, IndigoPlateauScript ; blocks, texts, scripts
     db SOUTH ; connections
 
@@ -25847,7 +25847,7 @@ IndigoPlateauBlocks: ; 90
 
 SaffronCity_h: ; 0x509a4 to 0x509dc (56 bytes) (id=10)
     db $00 ; tileset
-    db $12, $14 ; dimensions (y, x)
+    db SaffronCityHeight, SaffronCityWidth ; dimensions (y, x)
     dw SaffronCityBlocks, SaffronCityTexts, SaffronCityScript ; blocks, texts, scripts
     db NORTH | SOUTH | WEST | EAST ; connections
 
@@ -26619,7 +26619,7 @@ Route25Text11: ; 0x5178c
 
 VictoryRoad2_h: ; 0x51791 to 0x5179d (12 bytes) (id=194)
     db $11 ; tileset
-    db $09, $0f ; dimensions (y, x)
+    db VictoryRoad2Height, VictoryRoad2Width ; dimensions (y, x)
     dw VictoryRoad2Blocks, VictoryRoad2Texts, VictoryRoad2Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -26731,7 +26731,7 @@ VictoryRoad2Blocks: ; 135
 
 MtMoon2_h: ; 0x51a36 to 0x51a42 (12 bytes) (id=60)
     db $11 ; tileset
-    db $0e, $0e ; dimensions (y, x)
+    db MtMoon2Height, MtMoon2Width ; dimensions (y, x)
     dw MtMoon2Blocks, MtMoon2Texts, MtMoon2Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -26780,7 +26780,7 @@ MtMoon2Blocks: ; 196
 
 SilphCo7_h: ; 0x51b55 to 0x51b61 (12 bytes) (id=212)
     db $16 ; tileset
-    db $09, $0d ; dimensions (y, x)
+    db SilphCo7Height, SilphCo7Width ; dimensions (y, x)
     dw SilphCo7Blocks, SilphCo7Texts, SilphCo7Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -26976,7 +26976,7 @@ SilphCo7Blocks: ; 117
 
 Mansion2_h: ; 0x51fcc to 0x51fd8 (12 bytes) (id=214)
     db $16 ; tileset
-    db $0e, $0f ; dimensions (y, x)
+    db Mansion2Height, Mansion2Width ; dimensions (y, x)
     dw Mansion2Blocks, Mansion2Texts, Mansion2Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -27044,7 +27044,7 @@ Mansion2Blocks:
 
 Mansion3_h: ; 0x521e2 to 0x521ee (12 bytes) (id=215)
     db $16 ; tileset
-    db $09, $0f ; dimensions (y, x)
+    db Mansion3Height, Mansion3Width ; dimensions (y, x)
     dw Mansion3Blocks, Mansion3Texts, Mansion3Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -27111,7 +27111,7 @@ Mansion3Blocks:
 
 Mansion4_h: ; 0x523ad to 0x523b9 (12 bytes) (id=216)
     db $16 ; tileset
-    db $0e, $0f ; dimensions (y, x)
+    db Mansion4Height, Mansion4Width ; dimensions (y, x)
     dw Mansion4Blocks, Mansion4Texts, Mansion4Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -27620,7 +27620,7 @@ Route2Blocks: ; 360
 
 Route3_h: ; 0x541e6 to 0x54208 (34 bytes) (id=14)
     db $00 ; tileset
-    db $09, $23 ; dimensions (y, x)
+    db Route3Height, Route3Width ; dimensions (y, x)
     dw Route3Blocks, Route3Texts, Route3Script ; blocks, texts, scripts
     db NORTH | WEST ; connections
 
@@ -27666,7 +27666,7 @@ Route3Blocks: ; 315
 
 Route4_h: ; 0x54390 to 0x543b2 (34 bytes) (id=15)
     db $00 ; tileset
-    db $09, $2d ; dimensions (y, x)
+    db Route4Height, Route4Width ; dimensions (y, x)
     dw Route4Blocks, Route4Texts, Route4Script; blocks, texts, scripts
     db SOUTH | EAST ; connections
 
@@ -27716,7 +27716,7 @@ Route4Blocks: ; 405
 
 Route5_h: ; 0x54581 to 0x545a3 (34 bytes) (id=16)
     db $00 ; tileset
-    db $12, $0a ; dimensions (y, x)
+    db Route5Height, Route5Width ; dimensions (y, x)
     dw Route5Blocks, Route5Texts, Route5Script ; blocks, texts, scripts
     db NORTH | SOUTH ; connections
 
@@ -27765,7 +27765,7 @@ Route5Blocks: ; 180
 
 Route9_h: ; 0x54686 to 0x546a8 (34 bytes) (id=20)
     db $00 ; tileset
-    db $09, $1e ; dimensions (y, x)
+    db Route9Height, Route9Width ; dimensions (y, x)
     dw Route9Blocks, Route9Texts, Route9Script ; blocks, texts, scripts
     db WEST | EAST ; connections
 
@@ -27812,7 +27812,7 @@ Route9Blocks: ; 270
 
 Route13_h: ; 0x5480c to 0x5482e (34 bytes) (id=24)
     db $00 ; tileset
-    db $09, $1e ; dimensions (y, x)
+    db Route13Height, Route13Width ; dimensions (y, x)
     dw Route13Blocks, Route13Texts, Route13Script ; blocks, texts, scripts
     db NORTH | WEST ; connections
 
@@ -27861,7 +27861,7 @@ Route13Blocks: ; 270
 
 Route14_h: ; 0x54999 to 0x549bb (34 bytes) (id=25)
     db $00 ; tileset
-    db $1b, $0a ; dimensions (y, x)
+    db Route14Height, Route14Width ; dimensions (y, x)
     dw Route14Blocks, Route14Texts, Route14Script ; blocks, texts, scripts
     db WEST | EAST ; connections
 
@@ -27908,7 +27908,7 @@ Route14Blocks: ; 270
 
 Route17_h: ; 0x54b20 to 0x54b42 (34 bytes) (id=28)
     db $00 ; tileset
-    db $48, $0a ; dimensions (y, x)
+    db Route17Height, Route17Width ; dimensions (y, x)
     dw Route17Blocks, Route17Texts, Route17Script ; blocks, texts, scripts
     db NORTH | SOUTH ; connections
 
@@ -27960,7 +27960,7 @@ Route17Blocks: ; 720
 
 Route19_h: ; 0x54e78 to 0x54e9a (34 bytes) (id=30)
     db $00 ; tileset
-    db $1b, $0a ; dimensions (y, x)
+    db Route19Height, Route19Width ; dimensions (y, x)
     dw Route19Blocks, Route19Texts, Route19Script ; blocks, texts, scripts
     db NORTH | WEST ; connections
 
@@ -28007,7 +28007,7 @@ Route19Blocks: ; 270
 
 Route21_h: ; 0x54fff to 0x55021 (34 bytes) (id=32)
     db $00 ; tileset
-    db $2d, $0a ; dimensions (y, x)
+    db Route21Height, Route21Width ; dimensions (y, x)
     dw Route21Blocks, Route21Texts, Route21Script ; blocks, texts, scripts
     db NORTH | SOUTH ; connections
 
@@ -28775,7 +28775,7 @@ INCBIN "baserom.gbc",$55fdd,$87
 
 VermilionHouse2_h: ; 0x56064 to 0x56070 (12 bytes) (id=163)
     db $08 ; tileset
-    db $04, $04 ; dimensions (y, x)
+    db VermilionHouse2Height, VermilionHouse2Width ; dimensions (y, x)
     dw VermilionHouse2Blocks, VermilionHouse2Texts, VermilionHouse2Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -28838,7 +28838,7 @@ VermilionHouse2Object: ; 0x560cf (size=26)
 
 CeladonMart2_h: ; 0x560e9 to 0x560f5 (12 bytes) (id=123)
     db $12 ; tileset
-    db $04, $0a ; dimensions (y, x)
+    db CeladonMart2Height, CeladonMart2Width ; dimensions (y, x)
     dw CeladonMart2Blocks, CeladonMart2Texts, CeladonMart2Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -28890,7 +28890,7 @@ CeladonMart2Blocks: ; 40
 
 FuchsiaHouse3_h: ; 0x56170 to 0x5617c (12 bytes) (id=164)
     db $0d ; tileset
-    db $04, $04 ; dimensions (y, x)
+    db FuchsiaHouse3Height, FuchsiaHouse3Width ; dimensions (y, x)
     dw FuchsiaHouse3Blocks, FuchsiaHouse3Texts, FuchsiaHouse3Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -28955,7 +28955,7 @@ FuchsiaHouse3Object: ; 0x56221 (size=34)
 
 DayCareM_h: ; 0x56243 to 0x5624f (12 bytes) (id=72)
     db $08 ; tileset
-    db $04, $04 ; dimensions (y, x)
+    db DayCareMHeight, DayCareMWidth ; dimensions (y, x)
     dw DayCareMBlocks, DayCareMTexts, DayCareMScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -29044,7 +29044,7 @@ DayCareMObject: ; 0x56459 (size=26)
 
 Route12House_h: ; 0x56473 to 0x5647f (12 bytes) (id=189)
     db $08 ; tileset
-    db $04, $04 ; dimensions (y, x)
+    db Route12HouseHeight, Route12HouseWidth ; dimensions (y, x)
     dw Route12HouseBlocks, Route12HouseTexts, Route12HouseScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -29107,7 +29107,7 @@ Route12HouseObject: ; 0x564de (size=26)
 
 SilphCo8_h: ; 0x564f8 to 0x56504 (12 bytes) (id=213)
     db $16 ; tileset
-    db $09, $0d ; dimensions (y, x)
+    db SilphCo8Height, SilphCo8Width ; dimensions (y, x)
     dw SilphCo8Blocks, SilphCo8Texts, SilphCo8Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -29202,7 +29202,7 @@ SECTION "bank16",DATA,BANK[$16]
 
 Route6_h: ; 0x58000 to 0x58022 (34 bytes) (id=17)
     db $00 ; tileset
-    db $12, $0a ; dimensions (y, x)
+    db Route6Height, Route6Width ; dimensions (y, x)
     dw Route6Blocks, Route6Texts, Route6Script ; blocks, texts, scripts
     db NORTH | SOUTH ; connections
 
@@ -29255,7 +29255,7 @@ Route6Blocks: ; 180
 
 Route8_h: ; 0x5812d to 0x5814f (34 bytes) (id=19)
     db $00 ; tileset
-    db $09, $1e ; dimensions (y, x)
+    db Route8Height, Route8Width ; dimensions (y, x)
     dw Route8Blocks, Route8Texts, Route8Script ; blocks, texts, scripts
     db WEST | EAST ; connections
 
@@ -29313,7 +29313,7 @@ Route8Blocks: ; 270
 
 Route10_h: ; 0x582d4 to 0x582f6 (34 bytes) (id=21)
     db $00 ; tileset
-    db $24, $0a ; dimensions (y, x)
+    db Route10Height, Route10Width ; dimensions (y, x)
     dw Route10Blocks, Route10Texts, Route10Script ; blocks, texts, scripts
     db SOUTH | WEST ; connections
 
@@ -29369,7 +29369,7 @@ Route10Blocks: ; 360
 
 Route11_h: ; 0x584be to 0x584e0 (34 bytes) (id=22)
     db $00 ; tileset
-    db $09, $1e ; dimensions (y, x)
+    db Route11Height, Route11Width ; dimensions (y, x)
     dw Route11Blocks, Route11Texts, Route11Script ; blocks, texts, scripts
     db WEST | EAST ; connections
 
@@ -29428,7 +29428,7 @@ Route11Blocks: ; 270
 
 Route12_h: ; 0x5866d to 0x5869a (45 bytes) (id=23)
     db $00 ; tileset
-    db $36, $0a ; dimensions (y, x)
+    db Route12Height, Route12Width ; dimensions (y, x)
     dw Route12Blocks, Route12Texts, Route12Script ; blocks, texts, scripts
     db NORTH | SOUTH | WEST ; connections
 
@@ -29492,7 +29492,7 @@ Route12Blocks: ; 540
 
 Route15_h: ; 0x5892c to 0x5894e (34 bytes) (id=26)
     db $00 ; tileset
-    db $09, $1e ; dimensions (y, x)
+    db Route15Height, Route15Width ; dimensions (y, x)
     dw Route15Blocks, Route15Texts, Route15Script ; blocks, texts, scripts
     db WEST | EAST ; connections
 
@@ -29550,7 +29550,7 @@ Route15Blocks: ; 270
 
 Route16_h: ; 0x58ada to 0x58afc (34 bytes) (id=27)
     db $00 ; tileset
-    db $09, $14 ; dimensions (y, x)
+    db Route16Height, Route16Width ; dimensions (y, x)
     dw Route16Blocks, Route16Texts, Route16Script ; blocks, texts, scripts
     db SOUTH | EAST ; connections
 
@@ -29615,7 +29615,7 @@ Route16Blocks: ; 180
 
 Route18_h: ; 0x58c38 to 0x58c5a (34 bytes) (id=29)
     db $00 ; tileset
-    db $09, $19 ; dimensions (y, x)
+    db Route18Height, Route18Width ; dimensions (y, x)
     dw Route18Blocks, Route18Texts, Route18Script ; blocks, texts, scripts
     db NORTH | EAST ; connections
 
@@ -30279,7 +30279,7 @@ Route18Text5: ; 0x59b5f
 
 FanClub_h: ; 0x59b64 to 0x59b70 (12 bytes) (id=90)
     db $10 ; tileset
-    db $04, $04 ; dimensions (y, x)
+    db FanClubHeight, FanClubWidth ; dimensions (y, x)
     dw FanClubBlocks, FanClubTexts, FanClubScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -30433,7 +30433,7 @@ FanClubBlocks: ; 16
 
 SilphCo2_h: ; 0x59ce5 to 0x59cf1 (12 bytes) (id=207)
     db $16 ; tileset
-    db $09, $0f ; dimensions (y, x)
+    db SilphCo2Height, SilphCo2Width ; dimensions (y, x)
     dw SilphCo2Blocks, SilphCo2Texts, SilphCo2Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -30541,7 +30541,7 @@ SilphCo2Blocks: ; 135
 
 SilphCo3_h: ; 0x59f4f to 0x59f5b (12 bytes) (id=208)
     db $16 ; tileset
-    db $09, $0f ; dimensions (y, x)
+    db SilphCo3Height, SilphCo3Width ; dimensions (y, x)
     dw SilphCo3Blocks, SilphCo3Texts, SilphCo3Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -30634,7 +30634,7 @@ SilphCo3Blocks: ; 135
 
 SilphCo10_h: ; 0x5a12d to 0x5a139 (12 bytes) (id=234)
     db $16 ; tileset
-    db $09, $08 ; dimensions (y, x)
+    db SilphCo10Height, SilphCo10Width ; dimensions (y, x)
     dw SilphCo10Blocks, SilphCo10Texts, SilphCo10Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -30717,7 +30717,7 @@ SilphCo10Blocks: ; 72
 
 Lance_h: ; 0x5a2a2 to 0x5a2ae (12 bytes) (id=113)
     db $05 ; tileset
-    db $0d, $0d ; dimensions (y, x)
+    db LanceHeight, LanceWidth ; dimensions (y, x)
     dw LanceBlocks, LanceTexts, LanceScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -30772,7 +30772,7 @@ LanceBlocks: ; 169
 
 HallofFameRoom_h: ; 0x5a492 to 0x5a49e (12 bytes) (id=118)
     db $07 ; tileset
-    db $04, $05 ; dimensions (y, x)
+    db HallofFameRoomHeight, HallofFameRoomWidth ; dimensions (y, x)
     dw HallofFameRoomBlocks, HallofFameRoomTexts, HallofFameRoomScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -30993,7 +30993,7 @@ INCBIN "baserom.gbc",$5c0dc,$5c0eb - $5c0dc
 
 MuseumF1_h: ; 0x5c0eb to 0x5c0f7 (12 bytes) (id=52)
     db $0a ; tileset
-    db $04, $0a ; dimensions (y, x)
+    db MuseumF1Height, MuseumF1Width ; dimensions (y, x)
     dw MuseumF1Blocks, MuseumF1Texts, MuseumF1Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -31225,7 +31225,7 @@ MuseumF1Object: ; 0x5c2c1 (size=74)
 
 MuseumF2_h: ; 0x5c30b to 0x5c317 (12 bytes) (id=53)
     db $0a ; tileset
-    db $04, $07 ; dimensions (y, x)
+    db MuseumF2Height, MuseumF2Width ; dimensions (y, x)
     dw MuseumF2Blocks, MuseumF2Texts, MuseumF2Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -31288,7 +31288,7 @@ MuseumF2Object: ; 0x5c34b (size=48)
 
 PewterGym_h: ; 0x5c37b to 0x5c387 (12 bytes) (id=54)
     db $07 ; tileset
-    db $07, $05 ; dimensions (y, x)
+    db PewterGymHeight, PewterGymWidth ; dimensions (y, x)
     dw PewterGymBlocks, PewterGymTexts, PewterGymScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -31427,7 +31427,7 @@ PewterGymBlocks: ; 35
 
 PewterPokecenter_h: ; 0x5c57b to 0x5c587 (12 bytes) (id=58)
     db $06 ; tileset
-    db $04, $07 ; dimensions (y, x)
+    db PewterPokecenterHeight, PewterPokecenterWidth ; dimensions (y, x)
     dw PewterPokecenterBlocks, PewterPokecenterTexts, PewterPokecenterScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -31529,7 +31529,7 @@ PewterPokecenterObject: ; 0x5c60d (size=44)
 
 CeruleanPokecenter_h: ; 0x5c639 to 0x5c645 (12 bytes) (id=64)
     db $06 ; tileset
-    db $04, $07 ; dimensions (y, x)
+    db CeruleanPokecenterHeight, CeruleanPokecenterWidth ; dimensions (y, x)
     dw CeruleanPokecenterBlocks, CeruleanPokecenterTexts, CeruleanPokecenterScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -31581,7 +31581,7 @@ CeruleanPokecenterBlocks: ; 28
 
 CeruleanGym_h: ; 0x5c6a7 to 0x5c6b3 (12 bytes) (id=65)
     db $07 ; tileset
-    db $07, $05 ; dimensions (y, x)
+    db CeruleanGymHeight, CeruleanGymWidth ; dimensions (y, x)
     dw CeruleanGymBlocks, CeruleanGymTexts, CeruleanGymScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -31715,7 +31715,7 @@ CeruleanGymBlocks: ; 35
 
 CeruleanMart_h: ; 0x5c889 to 0x5c895 (12 bytes) (id=67)
     db $02 ; tileset
-    db $04, $04 ; dimensions (y, x)
+    db CeruleanMartHeight, CeruleanMartWidth ; dimensions (y, x)
     dw CeruleanMartBlocks, CeruleanMartTexts, CeruleanMartScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -31756,7 +31756,7 @@ CeruleanMartObject: ; 0x5c8a8 (size=38)
 
 LavenderPokecenter_h: ; 0x5c8ce to 0x5c8da (12 bytes) (id=141)
     db $06 ; tileset
-    db $04, $07 ; dimensions (y, x)
+    db LavenderPokecenterHeight, LavenderPokecenterWidth ; dimensions (y, x)
     dw LavenderPokecenterBlocks, LavenderPokecenterTexts, LavenderPokecenterScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -31805,7 +31805,7 @@ LavenderPokecenterObject: ; 0x5c8f4 (size=44)
 
 LavenderMart_h: ; 0x5c920 to 0x5c92c (12 bytes) (id=150)
     db $02 ; tileset
-    db $04, $04 ; dimensions (y, x)
+    db LavenderMartHeight, LavenderMartWidth ; dimensions (y, x)
     dw LavenderMartBlocks, LavenderMartTexts, LavenderMartScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -31858,7 +31858,7 @@ LavenderMartObject: ; 0x5c95d (size=38)
 
 VermilionPokecenter_h: ; 0x5c983 to 0x5c98f (12 bytes) (id=89)
     db $06 ; tileset
-    db $04, $07 ; dimensions (y, x)
+    db VermilionPokecenterHeight, VermilionPokecenterWidth ; dimensions (y, x)
     dw VermilionPokecenterBlocks, VermilionPokecenterTexts, VermilionPokecenterScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -31907,7 +31907,7 @@ VermilionPokecenterObject: ; 0x5c9a9 (size=44)
 
 VermilionMart_h: ; 0x5c9d5 to 0x5c9e1 (12 bytes) (id=91)
     db $02 ; tileset
-    db $04, $04 ; dimensions (y, x)
+    db VermilionMartHeight, VermilionMartWidth ; dimensions (y, x)
     dw VermilionMartBlocks, VermilionMartTexts, VermilionMartScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -31948,7 +31948,7 @@ VermilionMartObject: ; 0x5c9f4 (size=38)
 
 VermilionGym_h: ; 0x5ca1a to 0x5ca26 (12 bytes) (id=92)
     db $07 ; tileset
-    db $09, $05 ; dimensions (y, x)
+    db VermilionGymHeight, VermilionGymWidth ; dimensions (y, x)
     dw VermilionGymBlocks, VermilionGymTexts, VermilionGymScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -32097,7 +32097,7 @@ VermilionGymBlocks: ; 45
 
 CopycatsHouseF2_h: ; 0x5cc65 to 0x5cc71 (12 bytes) (id=176)
     db $04 ; tileset
-    db $04, $04 ; dimensions (y, x)
+    db CopycatsHouseF2Height, CopycatsHouseF2Width ; dimensions (y, x)
     dw CopycatsHouseF2Blocks, CopycatsHouseF2Texts, CopycatsHouseF2Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -32198,7 +32198,7 @@ CopycatsHouseF2Object: ; 0x5cd21 (size=48)
 
 FightingDojo_h: ; 0x5cd51 to 0x5cd5d (12 bytes) (id=177)
     db $05 ; tileset
-    db $06, $05 ; dimensions (y, x)
+    db FightingDojoHeight, FightingDojoWidth ; dimensions (y, x)
     dw FightingDojoBlocks, FightingDojoTexts, FightingDojoScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -32386,7 +32386,7 @@ FightingDojoBlocks: ; 30
 
 SaffronGym_h: ; 0x5d001 to 0x5d00d (12 bytes) (id=178)
     db $16 ; tileset
-    db $09, $0a ; dimensions (y, x)
+    db SaffronGymHeight, SaffronGymWidth ; dimensions (y, x)
     dw SaffronGymBlocks, SaffronGymTexts, SaffronGymScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -32607,7 +32607,7 @@ SaffronGymBlocks: ; 90
 
 SaffronMart_h: ; 0x5d3fd to 0x5d409 (12 bytes) (id=180)
     db $02 ; tileset
-    db $04, $04 ; dimensions (y, x)
+    db SaffronMartHeight, SaffronMartWidth ; dimensions (y, x)
     dw SaffronMartBlocks, SaffronMartTexts, SaffronMartScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -32648,7 +32648,7 @@ SaffronMartObject: ; 0x5d41c (size=38)
 
 SilphCo1_h: ; 0x5d442 to 0x5d44e (12 bytes) (id=181)
     db $16 ; tileset
-    db $09, $0f ; dimensions (y, x)
+    db SilphCo1Height, SilphCo1Width ; dimensions (y, x)
     dw SilphCo1Blocks, SilphCo1Texts, SilphCo1Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -32703,7 +32703,7 @@ SilphCo1Blocks: ; 135
 
 SaffronPokecenter_h: ; 0x5d529 to 0x5d535 (12 bytes) (id=182)
     db $06 ; tileset
-    db $04, $07 ; dimensions (y, x)
+    db SaffronPokecenterHeight, SaffronPokecenterWidth ; dimensions (y, x)
     dw SaffronPokecenterBlocks, SaffronPokecenterTexts, SaffronPokecenterScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -32753,7 +32753,7 @@ SaffronPokecenterObject: ; 0x5d54f (size=44)
 
 ViridianForestexit_h: ; 0x5d57b to 0x5d587 (12 bytes) (id=47)
     db $09 ; tileset
-    db $04, $05 ; dimensions (y, x)
+    db ViridianForestexitHeight, ViridianForestexitWidth ; dimensions (y, x)
     dw ViridianForestexitBlocks, ViridianForestexitTexts, ViridianForestexitScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -32797,7 +32797,7 @@ ViridianForestexitObject: ; 0x5d598 (size=48)
 
 Route2Gate_h: ; 0x5d5c8 to 0x5d5d4 (12 bytes) (id=49)
     db $0c ; tileset
-    db $04, $05 ; dimensions (y, x)
+    db Route2GateHeight, Route2GateWidth ; dimensions (y, x)
     dw Route2GateBlocks, Route2GateTexts, Route2GateScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -32867,7 +32867,7 @@ Route2GateObject: ; 0x5d620 (size=48)
 
 ViridianForestEntrance_h: ; 0x5d650 to 0x5d65c (12 bytes) (id=50)
     db $09 ; tileset
-    db $04, $05 ; dimensions (y, x)
+    db ViridianForestEntranceHeight, ViridianForestEntranceWidth ; dimensions (y, x)
     dw ViridianForestEntranceBlocks, ViridianForestEntranceTexts, ViridianForestEntranceScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -32911,7 +32911,7 @@ ViridianForestEntranceObject: ; 0x5d66d (size=48)
 
 UndergroundTunnelEntranceRoute5_h: ; 0x5d69d to 0x5d6a9 (12 bytes) (id=71)
     db $0c ; tileset
-    db $04, $04 ; dimensions (y, x)
+    db UndergroundTunnelEntranceRoute5Height, UndergroundTunnelEntranceRoute5Width ; dimensions (y, x)
     dw UndergroundTunnelEntranceRoute5Blocks, UndergroundTunnelEntranceRoute5Texts, UndergroundTunnelEntranceRoute5Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -32957,7 +32957,7 @@ UndergroundTunnelEntranceRoute5Object: ; 0x5d6c1 (size=34)
 
 UndergroundTunnelEntranceRoute6_h: ; 0x5d6e3 to 0x5d6ef (12 bytes) (id=74)
     db $0c ; tileset
-    db $04, $04 ; dimensions (y, x)
+    db UndergroundTunnelEntranceRoute6Height, UndergroundTunnelEntranceRoute6Width ; dimensions (y, x)
     dw UndergroundTunnelEntranceRoute6Blocks, UndergroundTunnelEntranceRoute6Texts, UndergroundTunnelEntranceRoute6Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -32998,7 +32998,7 @@ UndergroundTunnelEntranceRoute6Object: ; 0x5d6fe (size=34)
 
 UndergroundPathEntranceRoute7_h: ; 0x5d720 to 0x5d72c (12 bytes) (id=77)
     db $0c ; tileset
-    db $04, $04 ; dimensions (y, x)
+    db UndergroundPathEntranceRoute7Height, UndergroundPathEntranceRoute7Width ; dimensions (y, x)
     dw UndergroundTunnelEntranceRoute7Blocks, UndergroundPathEntranceRoute7Texts, UndergroundPathEntranceRoute7Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -33040,7 +33040,7 @@ INCBIN "baserom.gbc",$5d75d,$52
 
 SilphCo9_h: ; 0x5d7af to 0x5d7bb (12 bytes) (id=233)
     db $16 ; tileset
-    db $09, $0d ; dimensions (y, x)
+    db SilphCo9Height, SilphCo9Width ; dimensions (y, x)
     dw SilphCo9Blocks, SilphCo9Texts, SilphCo9Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -33137,7 +33137,7 @@ SilphCo9Blocks: ; 117
 
 VictoryRoad1_h: ; 0x5d9fe to 0x5da0a (12 bytes) (id=108)
     db $11 ; tileset
-    db $09, $0a ; dimensions (y, x)
+    db VictoryRoad1Height, VictoryRoad1Width ; dimensions (y, x)
     dw VictoryRoad1Blocks, VictoryRoad1Texts, VictoryRoad1Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -33223,7 +33223,7 @@ SSAnne9Blocks: ; 96
 
 PokemonTower1_h: ; 0x60420 to 0x6042c (12 bytes) (id=142)
     db $0f ; tileset
-    db $09, $0a ; dimensions (y, x)
+    db PokemonTower1Height, PokemonTower1Width ; dimensions (y, x)
     dw PokemonTower1Blocks, PokemonTower1Texts, PokemonTower1Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -33283,7 +33283,7 @@ PokemonTower1Blocks: ; 90
 
 PokemonTower2_h: ; 0x604e6 to 0x604f2 (12 bytes) (id=143)
     db $0f ; tileset
-    db $09, $0a ; dimensions (y, x)
+    db PokemonTower2Height, PokemonTower2Width ; dimensions (y, x)
     dw PokemonTower2Blocks, PokemonTower2Texts, PokemonTower2Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -33464,7 +33464,7 @@ PokemonTower2Blocks: ; 90
 
 PokemonTower3_h: ; 0x606c0 to 0x606cc (12 bytes) (id=144)
     db $0f ; tileset
-    db $09, $0a ; dimensions (y, x)
+    db PokemonTower3Height, PokemonTower3Width ; dimensions (y, x)
     dw PokemonTower3Blocks, PokemonTower3Texts, PokemonTower3Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -33531,7 +33531,7 @@ PokemonTower3Blocks: ; 90
 
 PokemonTower4_h: ; 0x607ea to 0x607f6 (12 bytes) (id=145)
     db $0f ; tileset
-    db $09, $0a ; dimensions (y, x)
+    db PokemonTower4Height, PokemonTower4Width ; dimensions (y, x)
     dw PokemonTower4Blocks, PokemonTower4Texts, PokemonTower4Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -33600,7 +33600,7 @@ PokemonTower4Blocks: ; 90
 
 PokemonTower5_h: ; 0x60926 to 0x60932 (12 bytes) (id=146)
     db $0f ; tileset
-    db $09, $0a ; dimensions (y, x)
+    db PokemonTower5Height, PokemonTower5Width ; dimensions (y, x)
     dw PokemonTower5Blocks, PokemonTower5Texts, PokemonTower5Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -33688,7 +33688,7 @@ PokemonTower5Blocks: ; 90
 
 PokemonTower6_h: ; 0x60ae3 to 0x60aef (12 bytes) (id=147)
     db $0f ; tileset
-    db $09, $0a ; dimensions (y, x)
+    db PokemonTower6Height, PokemonTower6Width ; dimensions (y, x)
     dw PokemonTower6Blocks, PokemonTower6Texts, PokemonTower6Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -33762,7 +33762,7 @@ INCBIN "baserom.gbc",$60cef,$a
 
 PokemonTower7_h: ; 0x60cf9 to 0x60d05 (12 bytes) (id=148)
     db $0f ; tileset
-    db $09, $0a ; dimensions (y, x)
+    db PokemonTower7Height, PokemonTower7Width ; dimensions (y, x)
     dw PokemonTower7Blocks, PokemonTower7Texts, PokemonTower7Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -33852,7 +33852,7 @@ PokemonTower7Blocks: ; 90
 
 CeladonMart1_h: ; 0x60f7a to 0x60f86 (12 bytes) (id=122)
     db $12 ; tileset
-    db $04, $0a ; dimensions (y, x)
+    db CeladonMart1Height, CeladonMart1Width ; dimensions (y, x)
     dw CeladonMart1Blocks, CeladonMart1Texts, CeladonMart1Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -33910,7 +33910,7 @@ INCBIN "baserom.gbc",$61006,$fb
 
 ViridianForest_h: ; 0x61101 to 0x6110d (12 bytes) (id=51)
     db $03 ; tileset
-    db $18, $11 ; dimensions (y, x)
+    db ViridianForestHeight, ViridianForestWidth ; dimensions (y, x)
     dw ViridianForestBlocks, ViridianForestTexts, ViridianForestScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -34024,7 +34024,7 @@ ViridianForestObject: ; 0x611da (size=127)
 
 SSAnne1_h: ; 0x61259 to 0x61265 (12 bytes) (id=95)
     db $0d ; tileset
-    db $09, $14 ; dimensions (y, x)
+    db SSAnne1Height, SSAnne1Width ; dimensions (y, x)
     dw SSAnne1Blocks, SSAnne1Texts, SSAnne1Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -34086,7 +34086,7 @@ SSAnne1Blocks: ; 180
 
 SSAnne2_h: ; 0x61393 to 0x6139f (12 bytes) (id=96)
     db $0d ; tileset
-    db $09, $14 ; dimensions (y, x)
+    db SSAnne2Height, SSAnne2Width ; dimensions (y, x)
     dw SSAnne2Blocks, SSAnne2Texts, SSAnne2Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -34295,7 +34295,7 @@ SSAnne2Blocks: ; 180
 
 SSAnne4_h: ; 0x61622 to 0x6162e (12 bytes) (id=98)
     db $0d ; tileset
-    db $04, $0f ; dimensions (y, x)
+    db SSAnne4Height, SSAnne4Width ; dimensions (y, x)
     dw SSAnne4Blocks, SSAnne4Texts, SSAnne4Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -34336,7 +34336,7 @@ SSAnne4Blocks: ; 60
 
 SSAnne5_h: ; 0x616a2 to 0x616ae (12 bytes) (id=99)
     db $0d ; tileset
-    db $07, $0a ; dimensions (y, x)
+    db SSAnne5Height, SSAnne5Width ; dimensions (y, x)
     dw SSAnne5Blocks, SSAnne5Texts, SSAnne5Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -34412,7 +34412,7 @@ SSAnne5Blocks: ; 70
 
 SSAnne6_h: ; 0x617a7 to 0x617b3 (12 bytes) (id=100)
     db $0d ; tileset
-    db $08, $07 ; dimensions (y, x)
+    db SSAnne6Height, SSAnne6Width ; dimensions (y, x)
     dw SSAnne6Blocks, SSAnne6Texts, SSAnne6Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -34497,7 +34497,7 @@ SSAnne6Blocks: ; 56
 
 SSAnne7_h: ; 0x61889 to 0x61895 (12 bytes) (id=101)
     db $0d ; tileset
-    db $04, $03 ; dimensions (y, x)
+    db SSAnne7Height, SSAnne7Width ; dimensions (y, x)
     dw SSAnne7Blocks, SSAnne7Texts, SSAnne7Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -34573,7 +34573,7 @@ SSAnne7Blocks: ; 12
 
 SSAnne8_h: ; 0x6196a to 0x61976 (12 bytes) (id=102)
     db $0d ; tileset
-    db $08, $0c ; dimensions (y, x)
+    db SSAnne8Height, SSAnne8Width ; dimensions (y, x)
     dw SSAnne8Blocks, SSAnne8Texts, SSAnne8Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -34688,7 +34688,7 @@ SSAnne8Blocks: ; 96
 
 SSAnne9_h: ; 0x61b3f to 0x61b4b (12 bytes) (id=103)
     db $0d ; tileset
-    db $08, $0c ; dimensions (y, x)
+    db SSAnne9Height, SSAnne9Width ; dimensions (y, x)
     dw SSAnne9Blocks, SSAnne9Texts, SSAnne9Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -34848,7 +34848,7 @@ SSAnne9Object: ; 0x61c8d (size=188)
 
 SSAnne10_h: ; 0x61d49 to 0x61d55 (12 bytes) (id=104)
     db $0d ; tileset
-    db $08, $0c ; dimensions (y, x)
+    db SSAnne10Height, SSAnne10Width ; dimensions (y, x)
     dw SSAnne10Blocks, SSAnne10Texts, SSAnne10Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -34964,7 +34964,7 @@ SSAnne10Object: ; 0x61e75 (size=165)
 
 UndergroundPathNS_h: ; 0x61f1a to 0x61f26 (12 bytes) (id=119)
     db $0b ; tileset
-    db $18, $04 ; dimensions (y, x)
+    db UndergroundPathNSHeight, UndergroundPathNSWidth ; dimensions (y, x)
     dw UndergroundPathNSBlocks, UndergroundPathNSTexts, UndergroundPathNSScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -34994,7 +34994,7 @@ UndergroundPathNSObject: ; 0x61f2a (size=20)
 
 UndergroundPathWE_h: ; 0x61f3e to 0x61f4a (12 bytes) (id=121)
     db $0b ; tileset
-    db $04, $19 ; dimensions (y, x)
+    db UndergroundPathWEHeight, UndergroundPathWEWidth ; dimensions (y, x)
     dw $41f4, UndergroundPathWETexts, UndergroundPathWEScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -35024,7 +35024,7 @@ UndergroundPathWEObject: ; 0x61f4e (size=20)
 
 DiglettsCave_h: ; 0x61f62 to 0x61f6e (12 bytes) (id=197)
     db $11 ; tileset
-    db $12, $14 ; dimensions (y, x)
+    db DiglettsCaveHeight, DiglettsCaveWidth ; dimensions (y, x)
     dw DiglettsCaveBlocks, DiglettsCaveTexts, DiglettsCaveScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -35057,7 +35057,7 @@ DiglettsCaveBlocks: ; 360
 
 SilphCo11_h: ; 0x620ee to 0x620fa (12 bytes) (id=235)
     db $10 ; tileset
-    db $09, $09 ; dimensions (y, x)
+    db SilphCo11Height, SilphCo11Width ; dimensions (y, x)
     dw SilphCo11Blocks, SilphCo11Texts, SilphCo11Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -36371,7 +36371,7 @@ INCBIN "baserom.gbc",$747de,$74897 - $747de
 
 ViridianGym_h: ; 0x74897 to 0x748a3 (12 bytes) (id=45)
     db $07 ; tileset
-    db $09, $0a ; dimensions (y, x)
+    db ViridianGymHeight, ViridianGymWidth ; dimensions (y, x)
     dw ViridianGymBlocks, ViridianGymTexts, ViridianGymScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -36565,7 +36565,7 @@ ViridianGymBlocks: ; 90
 
 PewterMart_h: ; 0x74ca1 to 0x74cad (12 bytes) (id=56)
     db $02 ; tileset
-    db $04, $04 ; dimensions (y, x)
+    db PewterMartHeight, PewterMartWidth ; dimensions (y, x)
     dw PewterMartBlocks, PewterMartTexts, PewterMartScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -36617,7 +36617,7 @@ PewterMartObject: ; 0x74cda (size=38)
 
 UnknownDungeon1_h: ; 0x74d00 to 0x74d0c (12 bytes) (id=228)
     db $11 ; tileset
-    db $09, $0f ; dimensions (y, x)
+    db UnknownDungeon1Height, UnknownDungeon1Width ; dimensions (y, x)
     dw UnknownDungeon1Blocks, UnknownDungeon1Texts, UnknownDungeon1Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -36667,7 +36667,7 @@ UnknownDungeon1Blocks: ; 135
 
 CeruleanHouse3_h: ; 0x74dfd to 0x74e09 (12 bytes) (id=230)
     db $0d ; tileset
-    db $04, $04 ; dimensions (y, x)
+    db CeruleanHouse3Height, CeruleanHouse3Width ; dimensions (y, x)
     dw CeruleanHouse3Blocks, CeruleanHouse3Texts, CeruleanHouse3Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -36752,7 +36752,7 @@ INCBIN "baserom.gbc",$74ee0,$12c
 
 FuchsiaHouse1_h: ; 0x7500c to 0x75018 (12 bytes) (id=153)
     db $08 ; tileset
-    db $04, $04 ; dimensions (y, x)
+    db FuchsiaHouse1Height, FuchsiaHouse1Width ; dimensions (y, x)
     dw FuchsiaHouse1Blocks, FuchsiaHouse1Texts, FuchsiaHouse1Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -36798,7 +36798,7 @@ FuchsiaHouse1Object: ; 0x75031 (size=38)
 
 FuchsiaPokecenter_h: ; 0x75057 to 0x75063 (12 bytes) (id=154)
     db $06 ; tileset
-    db $04, $07 ; dimensions (y, x)
+    db FuchsiaPokecenterHeight, FuchsiaPokecenterWidth ; dimensions (y, x)
     dw FuchsiaPokecenterBlocks, FuchsiaPokecenterTexts, FuchsiaPokecenterScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -36847,7 +36847,7 @@ FuchsiaPokecenterObject: ; 0x7507d (size=44)
 
 FuchsiaHouse2_h: ; 0x750a9 to 0x750b5 (12 bytes) (id=155)
     db $14 ; tileset
-    db $04, $05 ; dimensions (y, x)
+    db FuchsiaHouse2Height, FuchsiaHouse2Width ; dimensions (y, x)
     dw FuchsiaHouse2Blocks, FuchsiaHouse2Texts, FuchsiaHouse2Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -36954,7 +36954,7 @@ FuchsiaHouse2Blocks: ; 20
 
 SafariZoneEntrance_h: ; 0x751c1 to 0x751cd (12 bytes) (id=156)
     db $0c ; tileset
-    db $03, $04 ; dimensions (y, x)
+    db SafariZoneEntranceHeight, SafariZoneEntranceWidth ; dimensions (y, x)
     dw SafariZoneEntranceBlocks, SafariZoneEntranceTexts, SafariZoneEntranceScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -37082,7 +37082,7 @@ SafariZoneEntranceBlocks: ; 12
 
 FuchsiaGym_h: ; 0x75431 to 0x7543d (12 bytes) (id=157)
     db $07 ; tileset
-    db $09, $05 ; dimensions (y, x)
+    db FuchsiaGymHeight, FuchsiaGymWidth ; dimensions (y, x)
     dw FuchsiaGymBlocks, FuchsiaGymTexts, FuchsiaGymScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -37242,7 +37242,7 @@ FuchsiaGymBlocks: ; 45
 
 FuchsiaMeetingRoom_h: ; 0x756d7 to 0x756e3 (12 bytes) (id=158)
     db $14 ; tileset
-    db $04, $07 ; dimensions (y, x)
+    db FuchsiaMeetingRoomHeight, FuchsiaMeetingRoomWidth ; dimensions (y, x)
     dw FuchsiaMeetingRoomBlocks, FuchsiaMeetingRoomTexts, FuchsiaMeetingRoomScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -37291,7 +37291,7 @@ FuchsiaMeetingRoomBlocks: ; 28
 
 CinnabarGym_h: ; 0x7573e to 0x7574a (12 bytes) (id=166)
     db $16 ; tileset
-    db $09, $0a ; dimensions (y, x)
+    db CinnabarGymHeight, CinnabarGymWidth ; dimensions (y, x)
     dw CinnabarGymBlocks, CinnabarGymTexts, CinnabarGymScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -37563,7 +37563,7 @@ CinnabarGymBlocks: ; 90
 
 Lab1_h: ; 0x75b80 to 0x75b8c (12 bytes) (id=167)
     db $14 ; tileset
-    db $04, $09 ; dimensions (y, x)
+    db Lab1Height, Lab1Width ; dimensions (y, x)
     dw Lab1Blocks, Lab1Texts, Lab1Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -37628,7 +37628,7 @@ Lab1Blocks: ; 36
 
 Lab2_h: ; 0x75c15 to 0x75c21 (12 bytes) (id=168)
     db $14 ; tileset
-    db $04, $04 ; dimensions (y, x)
+    db Lab2Height, Lab2Width ; dimensions (y, x)
     dw Lab2Blocks, Lab2Texts, Lab2Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -37683,7 +37683,7 @@ Lab2Blocks: ; 16
 
 Lab3_h: ; 0x75c7b to 0x75c87 (12 bytes) (id=169)
     db $14 ; tileset
-    db $04, $04 ; dimensions (y, x)
+    db Lab3Height, Lab3Width ; dimensions (y, x)
     dw Lab3Blocks, Lab3Texts, Lab3Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -37761,7 +37761,7 @@ Lab3Blocks: ; 16
 
 Lab4_h: ; 0x75d25 to 0x75d31 (12 bytes) (id=170)
     db $14 ; tileset
-    db $04, $04 ; dimensions (y, x)
+    db Lab4Height, Lab4Width ; dimensions (y, x)
     dw Lab4Blocks, Lab4Texts, Lab4Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -37854,7 +37854,7 @@ Lab4Blocks: ; 16
 
 CinnabarPokecenter_h: ; 0x75e20 to 0x75e2c (12 bytes) (id=171)
     db $06 ; tileset
-    db $04, $07 ; dimensions (y, x)
+    db CinnabarPokecenterHeight, CinnabarPokecenterWidth ; dimensions (y, x)
     dw CinnabarPokecenterBlocks, CinnabarPokecenterTexts, CinnabarPokecenterScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -37903,7 +37903,7 @@ CinnabarPokecenterObject: ; 0x75e46 (size=44)
 
 CinnabarMart_h: ; 0x75e72 to 0x75e7e (12 bytes) (id=172)
     db $02 ; tileset
-    db $04, $04 ; dimensions (y, x)
+    db CinnabarMartHeight, CinnabarMartWidth ; dimensions (y, x)
     dw CinnabarMartBlocks, CinnabarMartTexts, CinnabarMartScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -37944,7 +37944,7 @@ CinnabarMartObject: ; 0x75e91 (size=38)
 
 CopycatsHouseF1_h: ; 0x75eb7 to 0x75ec3 (12 bytes) (id=175)
     db $01 ; tileset
-    db $04, $04 ; dimensions (y, x)
+    db CopycatsHouseF1Height, CopycatsHouseF1Width ; dimensions (y, x)
     dw CopycatsHouseF1Blocks, CopycatsHouseF1Texts, CopycatsHouseF1Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -38069,7 +38069,7 @@ GaryBlocks: ; 16
 
 Lorelei_h: ; 0x7616f to 0x7617b (12 bytes) (id=245)
     db $07 ; tileset
-    db $06, $05 ; dimensions (y, x)
+    db LoreleiHeight, LoreleiWidth ; dimensions (y, x)
     dw LoreleiBlocks, LoreleiTexts, LoreleiScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -38129,7 +38129,7 @@ LoreleiBlocks: ; 30
 
 Bruno_h: ; 0x762ca to 0x762d6 (12 bytes) (id=246)
     db $07 ; tileset
-    db $06, $05 ; dimensions (y, x)
+    db BrunoHeight, BrunoWidth ; dimensions (y, x)
     dw BrunoBlocks, BrunoTexts, BrunoScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -38189,7 +38189,7 @@ BrunoBlocks: ; 30
 
 Agatha_h: ; 0x76421 to 0x7642d (12 bytes) (id=247)
     db $0f ; tileset
-    db $06, $05 ; dimensions (y, x)
+    db AgathaHeight, AgathaWidth ; dimensions (y, x)
     dw AgathaBlocks, AgathaTexts, AgathaScript ; blocks, texts, scripts
     db $00 ; connections
 
