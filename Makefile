@@ -1,3 +1,6 @@
+#gawk sort order
+LC_CTYPE=C
+
 .SUFFIXES: .asm .tx .o .gbc
 
 TEXTFILES =	text/oakspeech.tx text/pokedex.tx text/mapRedsHouse1F.tx \
