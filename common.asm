@@ -30807,6 +30807,7 @@ PewterPokecenterBlocks: ; 28
 UndergroundTunnelEntranceRoute5Blocks: ; 16
     INCBIN "maps/undergroundtunnelentranceroute5.blk"
 
+Route2GateBlocks:
 ViridianForestexitBlocks: ; 20
     INCBIN "maps/viridianforestexit.blk"
 
@@ -32663,7 +32664,7 @@ ViridianForestexitObject: ; 0x5d598 (size=48)
 Route2Gate_h: ; 0x5d5c8 to 0x5d5d4 (12 bytes) (id=49)
     db $0c ; tileset
     db $04, $05 ; dimensions (y, x)
-    dw $4090, Route2GateTexts, Route2GateScript ; blocks, texts, scripts
+    dw Route2GateBlocks, Route2GateTexts, Route2GateScript ; blocks, texts, scripts
     db $00 ; connections
 
     dw Route2GateObject ; objects
