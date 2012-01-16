@@ -56,7 +56,7 @@ def print_connections(map_id, in_connection_id=None, do_output=False):
                 shift = result
                 calculated = map2_blocks_pointer + shift
                 output += "shift: " + str(shift) + "\n"
-                formula += "Blocks + " + str(shift)
+                formula += " + " + str(shift)
         elif direction == "WEST":
             calculated = map2_blocks_pointer - 3 + (map2_width)
             result = connected_pointer - calculated
