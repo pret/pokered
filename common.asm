@@ -39271,7 +39271,7 @@ _SSAnne10Text7: ; 0x81d4c
     db "STRENGTH to move", $55
     db "big rocks!", $57
 
-INCBIN "baserom.gbc",$81d9b,$2265
+INCBIN "baserom.gbc",$81d9b,$82aaf-$81d9b
 
 SECTION "bank21",DATA,BANK[$21]
 
@@ -39523,7 +39523,7 @@ INCBIN "baserom.gbc",$860e1,$863c1 - $860e1
 _GaryText2: ; 0x863c1
     db $0, "OAK: ", $52, "!", $57
 
-INCBIN "baserom.gbc",$863ca,$1c36
+INCBIN "baserom.gbc",$863ca,$86ca1-$863ca
 
 SECTION "bank22",DATA,BANK[$22]
 
@@ -39768,7 +39768,7 @@ INCBIN "baserom.gbc",$8a976,$8aa5a - $8a976
 _MtMoonPokecenterText5: ; 0x8aa5a
     db $0, $57
 
-INCBIN "baserom.gbc",$8aa5c,$15a4
+INCBIN "baserom.gbc",$8aa5c,$8acf9-$8aa5c
 
 SECTION "bank23",DATA,BANK[$23]
 
@@ -39946,7 +39946,7 @@ _Route10Text7: ; 0x8e8d4
 _Route10Text10: ; 0x8e8e1
     db $0, "POWER PLANT", $57
 
-INCBIN "baserom.gbc",$8e8ee,$1712
+INCBIN "baserom.gbc",$8e8ee,$8ec09-$8e8ee
 
 SECTION "bank24",DATA,BANK[$24]
 
@@ -40092,7 +40092,7 @@ _Route23Text8: ; 0x92700
     db $0, "VICTORY ROAD GATE", $4f
     db "- #MON LEAGUE", $57
 
-INCBIN "baserom.gbc",$92721,$18df
+INCBIN "baserom.gbc",$92721,$92903-$92721
 
 SECTION "bank25",DATA,BANK[$25]
 
@@ -40222,7 +40222,7 @@ _MuseumF2Text7: ; 0x9694b
     db "fell on MT.MOON.", $55
     db "(MOON STONE?)", $57
 
-INCBIN "baserom.gbc",$9697a,$1686
+INCBIN "baserom.gbc",$9697a,$96a38-$9697a
 
 SECTION "bank26",DATA,BANK[$26]
 
@@ -40482,7 +40482,7 @@ _VermilionMartText3: ; 0x9aa67
     db "evil. It depends", $55
     db "on the trainer.", $57
 
-INCBIN "baserom.gbc",$9aaa5,$155b
+INCBIN "baserom.gbc",$9aaa5,$9ab7b-$9aaa5
 
 SECTION "bank27",DATA,BANK[$27]
 INCBIN "baserom.gbc",$9c000,$9c449 - $9c000
@@ -40917,7 +40917,7 @@ _SafariZoneEntranceText1: ; 0x9e6c7
     db $0, "Welcome to the", $4f
     db "SAFARI ZONE!", $57
 
-INCBIN "baserom.gbc",$9e6e4,$191c
+INCBIN "baserom.gbc",$9e6e4,$9eaa4-$9e6e4
 
 SECTION "bank28",DATA,BANK[$28]
 
@@ -41145,7 +41145,7 @@ _SaffronPokecenterText3: ; 0xa24bf
     db "why it attracted", $55
     db "TEAM ROCKET!", $57
 
-INCBIN "baserom.gbc",$a24fe,$1b02
+INCBIN "baserom.gbc",$a24fe,$a2a37-$a24fe
 
 SECTION "bank29",DATA,BANK[$29]
 
@@ -41771,7 +41771,7 @@ _ItemUseBallText06:
 	dw $CFDA
 	db 0,"!@@"
 
-INCBIN "baserom.gbc",$A685E,$4000 - $285E
+INCBIN "baserom.gbc",$A685E,$a6b94 - $a685e
 
 SECTION "bank2A",DATA,BANK[$2A]
 
@@ -41783,7 +41783,7 @@ _ItemUseText002:
 	dw $CF4B
 	db 0,"!",$57
 
-INCBIN "baserom.gbc",$A800F,$4000-$F
+INCBIN "baserom.gbc",$A800F,$a8330-$a800F
 
 SECTION "bank2B",DATA,BANK[$2B]
 INCLUDE "text/pokedex.tx"
