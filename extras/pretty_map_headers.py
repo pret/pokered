@@ -250,15 +250,6 @@ del temp
 
 #these appear outside of quotes
 constant_abbreviation_bytes = {
-    0x4A: "Char4A",
-    0x52: "Char52",
-    0x53: "Char53",
-    0x54: "Char54",
-    0x56: "Char56",
-    0x5B: "Char5B",
-    0x5C: "Char5C",
-    0x5D: "Char5D",
-    0x5E: "Char5E",
 }
 
 #these appear in quotes
