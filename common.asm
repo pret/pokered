@@ -8132,16 +8132,19 @@ CeladonCityBlocks: ; 450
     INCBIN "maps/celadoncity.blk"
 
 PalletTown_h:
-	db $00 ; tileset
+	db TileSet_Outside ; tileset
 	db PalletTownHeight, PalletTownWidth ; dimensions
 	dw PalletTownBlocks, PalletTownTexts, PalletTownScript
 	db NORTH | SOUTH ; connections
 
 	db ROUTE_1
-	dw Route1Blocks + 150,$C6EB ; pointers
-	db $0A,$0A ; bigness, width
-	db $23,$00 ; alignments
-	dw $C809 ; window
+	dw Route1Blocks + ((Route1Width * 15) + 0) ;y, x Strip Starting Point
+	dw $C6EB + 0 ;Strip X-Offset to current map
+	db Route1Width ;"Bigness" (Unsure) ;Something to do with MapData
+	db Route1Width ;"Map Width" (Unsure) ;Something to do with TileSet
+	db (Route1Height * 2) - 1 ;Player's new Y-Coordinates
+	db (0 * -2) ;Player's new X-Coordinates
+	dw $C6E9 + Route1Height * (Route1Width + 6) ;New UL Block Pos (Window)
 
 	db ROUTE_21
 	dw Route21Blocks,$C7AB ; pointers
