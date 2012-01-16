@@ -127,7 +127,7 @@ MapHeaderPointers: ; $01AE
 	dw SaffronCity_h ; SAFFRON_CITY
 	dw SaffronCity_h ; unused
 	dw Route1_h ; ROUTE_1
-	dw Route2_h ;dw $4000 ; ROUTE_2
+	dw Route2_h ; ROUTE_2
 	dw Route3_h ; ROUTE_3
 	dw Route4_h ; ROUTE_4
 	dw Route5_h ; ROUTE_5
@@ -2639,7 +2639,7 @@ MapHeaderBanks: ; 423D
 	db BANK(SaffronCity_h) ; SAFFRON_CITY
 	db $01 ; unused
 	db BANK(Route1_h) ; ROUTE_1
-	db BANK(Route2_h) ;db $15 ; ROUTE_2
+	db BANK(Route2_h) ; ROUTE_2
 	db BANK(Route3_h) ; ROUTE_3
 	db BANK(Route4_h) ; ROUTE_4
 	db BANK(Route5_h) ; ROUTE_5
@@ -27583,8 +27583,6 @@ PrizeMonLevelDictionary: ; 14:698A
 INCBIN "baserom.gbc",$52996,$54000 - $52996
 
 SECTION "bank15",DATA,BANK[$15]
-
-;INCBIN "baserom.gbc",$54000,$54022 - $54000
 
 Route2_h:
 	db TileSet_Outside; Tileset
