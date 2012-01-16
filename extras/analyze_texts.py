@@ -469,6 +469,7 @@ def text_pretty_printer_at(start_address, label="SomeLabel"):
             output += "\n"
 
     #output += "\n"
+    output += "; " + hex(start_address + byte_count)
     print output
     return (output, byte_count)
 
