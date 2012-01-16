@@ -127,7 +127,7 @@ MapHeaderPointers: ; $01AE
 	dw SaffronCity_h ; SAFFRON_CITY
 	dw SaffronCity_h ; unused
 	dw Route1_h ; ROUTE_1
-	dw $4000 ; ROUTE_2
+	dw Route2_h ;dw $4000 ; ROUTE_2
 	dw Route3_h ; ROUTE_3
 	dw Route4_h ; ROUTE_4
 	dw Route5_h ; ROUTE_5
@@ -2639,7 +2639,7 @@ MapHeaderBanks: ; 423D
 	db BANK(SaffronCity_h) ; SAFFRON_CITY
 	db $01 ; unused
 	db BANK(Route1_h) ; ROUTE_1
-	db $15 ; ROUTE_2
+	db BANK(Route2_h) ;db $15 ; ROUTE_2
 	db BANK(Route3_h) ; ROUTE_3
 	db BANK(Route4_h) ; ROUTE_4
 	db BANK(Route5_h) ; ROUTE_5
@@ -27584,7 +27584,36 @@ INCBIN "baserom.gbc",$52996,$54000 - $52996
 
 SECTION "bank15",DATA,BANK[$15]
 
-INCBIN "baserom.gbc",$54000,$54022 - $54000
+;INCBIN "baserom.gbc",$54000,$54022 - $54000
+
+Route2_h:
+	db TileSet_Outside; Tileset
+	db Route2Height,Route2Width ;Height,Width blocks (1 block = 4x4 tiles)
+	dw $407E ;Map-Pointer
+	dw $54E6 ;Maps text pointer
+	dw $54E3 ;Maps script pointer
+	db NORTH | SOUTH ;Connection Byte
+	
+	;Connection data
+	db PEWTER_CITY ;Index of connected map
+		dw $4714 ;Pointer to "Connection Strip"s Upperleft Block (Connected Map)
+		dw $C6E8 ;Pointer to "Connection Strip"s Upperleft Block (Current Map)
+		db 16 ;Bigness
+		db 20 ;Map Width
+		db 35 ;Y Alignment
+		db 10 ;X alignment
+		dw $C8BD ;Window
+		
+	db VIRIDIAN_CITY ;Index of connected map
+		dw $43EE ;Pointer to "Connection Strip"s Upperleft Block (Connected Map)
+		dw $C958 ;Pointer to "Connection Strip"s Upperleft Block (Current Map)
+		db 16 ;Bigness
+		db 20 ;Map Width
+		db 0 ;Y Alignment
+		db 10 ;X alignment
+		dw $C703 ;Window
+	
+	dw $4022 ;Object Data Pointer
 
 Route2Object: ; 0x54022 (size=72)
     db $f ; border tile
