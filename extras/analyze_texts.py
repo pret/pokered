@@ -421,7 +421,7 @@ def text_pretty_printer_at(start_address, label="SomeLabel"):
                 p2 = command["pointer"][1]
 
                 #remember to account for big endian -> little endian
-                output += "\n" + spacing + "TX_RAM $" + hex(p2)[2:] + hex(p1)[2:]
+                output += "\n" + spacing + "TX_RAM $%.2x%.2x" %(p2, p1) 
                 byte_count += 3
                 had_db_last = False
             elif command["type"] == 0x17: #TX_FAR
