@@ -1,9 +1,9 @@
 #!/usr/bin/python2.7
 #author: Bryan Bishop <kanzure@gmail.com>
-#date: 2012-01-07
+#date: 2012-01-07, 2012-01-17
 #insert TX_FAR targets into pokered.asm
 import extract_maps
-from analyze_texts import analyze_texts, text_pretty_printer_at
+from analyze_texts import analyze_texts, text_pretty_printer_at, scan_rom_for_tx_fars
 from pretty_map_headers import map_name_cleaner, make_text_label, map_constants, find_all_tx_fars, tx_far_pretty_printer, tx_far_label_maker
 import pretty_map_headers
 from analyze_incbins import asm, offset_to_pointer, find_incbin_to_replace_for, split_incbin_line_into_three, generate_diff_insert, load_asm, isolate_incbins, process_incbins, reset_incbins, apply_diff
@@ -396,7 +396,7 @@ def insert_asm(start_address, label, text_asm=None, end_address=None):
     result = apply_diff(diff, try_fixing=True)
     return True
 
-def insert_text(address, label):
+def insert_text(address, label, apply=False):
     "inserts a text script (but not $8s)"
     start_address = address
 
@@ -427,7 +427,10 @@ def insert_text(address, label):
 
     diff = generate_diff_insert(line_number, newlines)
     print diff
-    #apply_diff(diff)
+    if apply:
+        return apply_diff(diff)
+    else: #simulate a successful insertion
+        return True
 
 #move this into another file?
 def scan_for_map_scripts_pointer():
@@ -586,6 +589,23 @@ def scan_for_map_scripts_pointer():
                 print script_asm
                 sys.exit(0)
 
+def scan_rom_for_tx_fars_and_insert():
+    """calls analyze_texts.scan_rom_for_tx_fars()
+    looks through INCBIN'd addresses from common.asm,
+    finds TX_FARs that aren't included yet.
+    """
+    address_bundles = scan_rom_for_tx_fars(printer=True)
+    for address_bundle in address_bundles:
+        tx_far_address = address_bundle[1]
+        tx_far_target_address = address_bundle[0]
+
+        tx_far_label = "UnnamedText_%.2x" % (tx_far_address)
+        tx_far_target_label = "_" + tx_far_label
+
+        result = insert_text(tx_far_target_address, tx_far_target_label, apply=True)
+        if result:
+            result2 = insert_text(tx_far_address, tx_far_label, apply=True)
+
 if __name__ == "__main__":
     #load map headers and object data
     extract_maps.load_rom()
@@ -593,15 +613,16 @@ if __name__ == "__main__":
     extract_maps.read_all_map_headers()
 
     #load texts (these two have different formats)
-    all_texts = pretty_map_headers.analyze_texts.analyze_texts()
-    pretty_map_headers.all_texts = all_texts
-    tx_fars = pretty_map_headers.find_all_tx_fars()
+    #all_texts = pretty_map_headers.analyze_texts.analyze_texts()
+    #pretty_map_headers.all_texts = all_texts
+    #tx_fars = pretty_map_headers.find_all_tx_fars()
 
     #load incbins
     reset_incbins()
 
     #scan_for_map_scripts_pointer()
-    insert_text(0xa586b, "_VermilionCityText14")
+    scan_rom_for_tx_fars_and_insert()
+    #insert_text(0xa586b, "_VermilionCityText14")
 
     #insert _ViridianCityText10
     #insert_tx_far(1, 10)

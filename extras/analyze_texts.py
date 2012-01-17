@@ -627,6 +627,7 @@ def scan_rom_for_tx_fars(printer=True):
                     if address2 > 0x3fff:
                         address2 = extract_maps.calculate_pointer(address2, ord(rom[address+3]))
                     #print "possible TX_FAR at " + hex(address) + " to " + hex(address2)
+
                     possible_tx_fars.append(address)
                     possible_tx_far_targets.append([address2, address])
 

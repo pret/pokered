@@ -236,6 +236,7 @@ def apply_diff(diff, try_fixing=True):
     #confirm it's working
     try:
         subprocess.check_call("cd ../; make clean; LC_CTYPE=UTF-8 make", shell=True)
+        return True
     except Exception, exc:
         if try_fixing:
             os.system("mv ../common1.asm ../common.asm")
