@@ -15,6 +15,19 @@ spacing = "    "
 tx_fars = None
 failed_attempts = {}
 
+def local_reset_incbins():
+    asm = None
+    incbin_lines = []
+    processed_incbins = {}
+    analyze_incbins.asm = None
+    analyze_incbins.incbin_lines = []
+    analyze_incbins.processed_incbins = {}
+    
+    #reload
+    load_asm()
+    isolate_incbins()
+    process_incbins()
+
 def find_tx_far_entry(map_id, text_id):
     for tx_far_line in tx_fars:
         if tx_far_line[0] == map_id and tx_far_line[1] == text_id:
@@ -396,7 +409,7 @@ def insert_asm(start_address, label, text_asm=None, end_address=None):
     result = apply_diff(diff, try_fixing=True)
     return True
 
-def insert_text(address, label, apply=False):
+def insert_text(address, label, apply=False, try_fixing=True):
     "inserts a text script (but not $8s)"
     start_address = address
 
@@ -428,7 +441,7 @@ def insert_text(address, label, apply=False):
     diff = generate_diff_insert(line_number, newlines)
     print diff
     if apply:
-        return apply_diff(diff)
+        return apply_diff(diff, try_fixing=try_fixing)
     else: #simulate a successful insertion
         return True
 
@@ -594,6 +607,7 @@ def scan_rom_for_tx_fars_and_insert():
     looks through INCBIN'd addresses from common.asm,
     finds TX_FARs that aren't included yet.
     """
+    x = 0
     address_bundles = scan_rom_for_tx_fars(printer=True)
     for address_bundle in address_bundles:
         tx_far_address = address_bundle[1]
@@ -603,8 +617,12 @@ def scan_rom_for_tx_fars_and_insert():
         tx_far_target_label = "_" + tx_far_label
 
         result = insert_text(tx_far_target_address, tx_far_target_label, apply=True)
+        local_reset_incbins()
         if result:
             result2 = insert_text(tx_far_address, tx_far_label, apply=True)
+        if not result or not result2:
+            sys.exit(0)
+        local_reset_incbins()
 
 if __name__ == "__main__":
     #load map headers and object data

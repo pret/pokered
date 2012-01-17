@@ -496,6 +496,7 @@ def text_pretty_printer_at(start_address, label="SomeLabel"):
             if first and needs_to_begin_with_0:
                 output += "$0, "
                 first = False
+                byte_count += 1
          
             quotes_open = False
             first_byte = True
@@ -550,7 +551,7 @@ def text_pretty_printer_at(start_address, label="SomeLabel"):
     include_newline = "\n"
     if output[-1] == "\n":
         include_newline = ""
-    output += include_newline + "; " + hex(start_address + byte_count + 1)
+    output += include_newline + "; " + hex(start_address) + " + " + str(byte_count) + " bytes"
     print output
     return (output, byte_count)
 
