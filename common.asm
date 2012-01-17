@@ -8051,7 +8051,7 @@ SECTION "bank6",DATA,BANK[$6]
 
 CeladonCity_h: ; 0x18000
     db $00 ; tileset
-    db CeladonCityHeight, CeladonCityWidth ; dimensions (y, x)
+    db CELADON_CITY_HEIGHT, CELADON_CITY_WIDTH ; dimensions (y, x)
     dw CeladonCityBlocks, CeladonCityTexts, CeladonCityScript ; blocks, texts, scripts
     db WEST | EAST ; connections
 
@@ -8133,7 +8133,7 @@ CeladonCityBlocks: ; 450
 
 PalletTown_h:
 	db $00 ; tileset
-	db PalletTownHeight, PalletTownWidth ; dimensions
+	db PALLET_TOWN_HEIGHT, PALLET_TOWN_WIDTH ; dimensions
 	dw PalletTownBlocks, PalletTownTexts, PalletTownScript
 	db NORTH | SOUTH ; connections
 
@@ -8180,32 +8180,32 @@ PalletTownBlocks: ; 0x182fd
 
 ViridianCity_h: ; 0x18357 to 0x18384 (45 bytes) (bank=6) (id=1)
     db $00 ; tileset
-    db ViridianCityHeight, ViridianCityWidth ; dimensions (y, x)
+    db VIRIDIAN_CITY_HEIGHT, VIRIDIAN_CITY_WIDTH ; dimensions (y, x)
     dw ViridianCityBlocks, ViridianCityTexts, ViridianCityScript ; blocks, texts, scripts
     db NORTH | SOUTH | WEST ; connections
 
     ; connections data
 
 	db ROUTE_2
-    dw Route2Blocks + (Route2Height - 3) * Route2Width ; connection strip location
+    dw Route2Blocks + (ROUTE_2_HEIGHT - 3) * ROUTE_2_WIDTH ; connection strip location
     dw $C6EB + 5 ; current map position
-    db Route2Width, Route2Width ; bigness, width
-    db (Route2Height * 2) - 1, (5 * -2) ; alignments (y, x)
-    dw $C6E9 + Route2Height * (Route2Width + 6) ; window
+    db ROUTE_2_WIDTH, ROUTE_2_WIDTH ; bigness, width
+    db (ROUTE_2_HEIGHT * 2) - 1, (5 * -2) ; alignments (y, x)
+    dw $C6E9 + ROUTE_2_HEIGHT * (ROUTE_2_WIDTH + 6) ; window
 
 	db ROUTE_1
     dw Route1Blocks ; connection strip location
-    dw $C6EB + (ViridianCityHeight + 3) * (ViridianCityWidth + 6) + 5 ; current map position
-    db Route1Width, Route1Width ; bigness, width
+    dw $C6EB + (VIRIDIAN_CITY_HEIGHT + 3) * (VIRIDIAN_CITY_WIDTH + 6) + 5 ; current map position
+    db ROUTE_1_WIDTH, ROUTE_1_WIDTH ; bigness, width
     db 0, (5 * -2) ; alignments (y, x)
-    dw $C6EF + Route1Width ; window
+    dw $C6EF + ROUTE_1_WIDTH ; window
 
 	db ROUTE_22
-    dw Route22Blocks - 3 + (Route22Width) ; connection strip location
-    dw $C6E8 + (ViridianCityWidth + 6) * (4 + 3) ; current map position
-    db Route22Height, Route22Width ; bigness, width
-    db (4 * -2), (Route22Width * 2) - 1 ; alignments (y, x)
-    dw $C6EE + 2 * Route22Width ; window
+    dw Route22Blocks - 3 + (ROUTE_22_WIDTH) ; connection strip location
+    dw $C6E8 + (VIRIDIAN_CITY_WIDTH + 6) * (4 + 3) ; current map position
+    db ROUTE_22_HEIGHT, ROUTE_22_WIDTH ; bigness, width
+    db (4 * -2), (ROUTE_22_WIDTH * 2) - 1 ; alignments (y, x)
+    dw $C6EE + 2 * ROUTE_22_WIDTH ; window
 
     ; end connections data
 
@@ -8250,7 +8250,7 @@ ViridianCityBlocks: ; 360
 
 PewterCity_h: ; 0x18554 to 0x18576 (34 bytes) (bank=6) (id=2)
     db $00 ; tileset
-    db PewterCityHeight, PewterCityWidth ; dimensions (y, x)
+    db PEWTER_CITY_HEIGHT, PEWTER_CITY_WIDTH ; dimensions (y, x)
     dw PewterCityBlocks, PewterCityTexts, PewterCityScript ; blocks, texts, scripts
     db SOUTH | EAST ; connections
 
@@ -8258,17 +8258,17 @@ PewterCity_h: ; 0x18554 to 0x18576 (34 bytes) (bank=6) (id=2)
 
 	db ROUTE_2
     dw Route2Blocks ; connection strip location
-    dw $C6EB + (PewterCityHeight + 3) * (PewterCityWidth + 6) + 5 ; current map position
-    db Route2Width, Route2Width ; bigness, width
+    dw $C6EB + (PEWTER_CITY_HEIGHT + 3) * (PEWTER_CITY_WIDTH + 6) + 5 ; current map position
+    db ROUTE_2_WIDTH, ROUTE_2_WIDTH ; bigness, width
     db 0, (5 * -2) ; alignments (y, x)
-    dw $C6EF + Route2Width ; window
+    dw $C6EF + ROUTE_2_WIDTH ; window
 
 	db ROUTE_3
-    dw Route3Blocks + (Route3Width * 0) ; connection strip location
-    dw $C6E5 + (PewterCityWidth + 6) * (4 + 4) ; current map position
-    db Route3Height, Route3Width ; bigness, width
+    dw Route3Blocks + (ROUTE_3_WIDTH * 0) ; connection strip location
+    dw $C6E5 + (PEWTER_CITY_WIDTH + 6) * (4 + 4) ; current map position
+    db ROUTE_3_HEIGHT, ROUTE_3_WIDTH ; bigness, width
     db (4 * -2), 0 ; alignments (y, x)
-    dw $C6EF + Route3Width ; window
+    dw $C6EF + ROUTE_3_WIDTH ; window
 
     ; end connections data
 
@@ -8318,39 +8318,39 @@ PewterCityBlocks: ; 360
 
 CeruleanCity_h: ; 0x1874e to 0x18786 (56 bytes) (bank=6) (id=3)
     db $00 ; tileset
-    db CeruleanCityHeight, CeruleanCityWidth ; dimensions (y, x)
+    db CERULEAN_CITY_HEIGHT, CERULEAN_CITY_WIDTH ; dimensions (y, x)
     dw CeruleanCityBlocks, CeruleanCityTexts, CeruleanCityScript ; blocks, texts, scripts
     db NORTH | SOUTH | WEST | EAST ; connections
 
     ; connections data
 
 	db ROUTE_24
-    dw Route24Blocks + (Route24Height - 3) * Route24Width ; connection strip location
+    dw Route24Blocks + (ROUTE_24_HEIGHT - 3) * ROUTE_24_WIDTH ; connection strip location
     dw $C6EB + 5 ; current map position
-    db Route24Width, Route24Width ; bigness, width
-    db (Route24Height * 2) - 1, (5 * -2) ; alignments (y, x)
-    dw $C6E9 + Route24Height * (Route24Width + 6) ; window
+    db ROUTE_24_WIDTH, ROUTE_24_WIDTH ; bigness, width
+    db (ROUTE_24_HEIGHT * 2) - 1, (5 * -2) ; alignments (y, x)
+    dw $C6E9 + ROUTE_24_HEIGHT * (ROUTE_24_WIDTH + 6) ; window
 
 	db ROUTE_5
     dw Route5Blocks ; connection strip location
-    dw $C6EB + (CeruleanCityHeight + 3) * (CeruleanCityWidth + 6) + 5 ; current map position
-    db Route5Width, Route5Width ; bigness, width
+    dw $C6EB + (CERULEAN_CITY_HEIGHT + 3) * (CERULEAN_CITY_WIDTH + 6) + 5 ; current map position
+    db ROUTE_5_WIDTH, ROUTE_5_WIDTH ; bigness, width
     db 0, (5 * -2) ; alignments (y, x)
-    dw $C6EF + Route5Width ; window
+    dw $C6EF + ROUTE_5_WIDTH ; window
 
 	db ROUTE_4
-    dw Route4Blocks - 3 + (Route4Width) ; connection strip location
-    dw $C6E8 + (CeruleanCityWidth + 6) * (4 + 3) ; current map position
-    db Route4Height, Route4Width ; bigness, width
-    db (4 * -2), (Route4Width * 2) - 1 ; alignments (y, x)
-    dw $C6EE + 2 * Route4Width ; window
+    dw Route4Blocks - 3 + (ROUTE_4_WIDTH) ; connection strip location
+    dw $C6E8 + (CERULEAN_CITY_WIDTH + 6) * (4 + 3) ; current map position
+    db ROUTE_4_HEIGHT, ROUTE_4_WIDTH ; bigness, width
+    db (4 * -2), (ROUTE_4_WIDTH * 2) - 1 ; alignments (y, x)
+    dw $C6EE + 2 * ROUTE_4_WIDTH ; window
 
 	db ROUTE_9
-    dw Route9Blocks + (Route9Width * 0) ; connection strip location
-    dw $C6E5 + (CeruleanCityWidth + 6) * (4 + 4) ; current map position
-    db Route9Height, Route9Width ; bigness, width
+    dw Route9Blocks + (ROUTE_9_WIDTH * 0) ; connection strip location
+    dw $C6E5 + (CERULEAN_CITY_WIDTH + 6) * (4 + 4) ; current map position
+    db ROUTE_9_HEIGHT, ROUTE_9_WIDTH ; bigness, width
     db (4 * -2), 0 ; alignments (y, x)
-    dw $C6EF + Route9Width ; window
+    dw $C6EF + ROUTE_9_WIDTH ; window
 
     ; end connections data
 
@@ -8409,25 +8409,25 @@ CeruleanCityBlocks: ; 360
 
 VermilionCity_h: ; 0x18998 to 0x189ba (34 bytes) (bank=6) (id=5)
     db $00 ; tileset
-    db VermilionCityHeight, VermilionCityWidth ; dimensions (y, x)
+    db VERMILION_CITY_HEIGHT, VERMILION_CITY_WIDTH ; dimensions (y, x)
     dw VermilionCityBlocks, VermilionCityTexts, VermilionCityScript ; blocks, texts, scripts
     db NORTH | EAST ; connections
 
     ; connections data
 
 	db ROUTE_6
-    dw Route6Blocks + (Route6Height - 3) * Route6Width ; connection strip location
+    dw Route6Blocks + (ROUTE_6_HEIGHT - 3) * ROUTE_6_WIDTH ; connection strip location
     dw $C6EB + 5 ; current map position
-    db Route6Width, Route6Width ; bigness, width
-    db (Route6Height * 2) - 1, (5 * -2) ; alignments (y, x)
-    dw $C6E9 + Route6Height * (Route6Width + 6) ; window
+    db ROUTE_6_WIDTH, ROUTE_6_WIDTH ; bigness, width
+    db (ROUTE_6_HEIGHT * 2) - 1, (5 * -2) ; alignments (y, x)
+    dw $C6E9 + ROUTE_6_HEIGHT * (ROUTE_6_WIDTH + 6) ; window
 
 	db ROUTE_11
-    dw Route11Blocks + (Route11Width * 0) ; connection strip location
-    dw $C6E5 + (VermilionCityWidth + 6) * (4 + 4) ; current map position
-    db Route11Height, Route11Width ; bigness, width
+    dw Route11Blocks + (ROUTE_11_WIDTH * 0) ; connection strip location
+    dw $C6E5 + (VERMILION_CITY_WIDTH + 6) * (4 + 4) ; current map position
+    db ROUTE_11_HEIGHT, ROUTE_11_WIDTH ; bigness, width
     db (4 * -2), 0 ; alignments (y, x)
-    dw $C6EF + Route11Width ; window
+    dw $C6EF + ROUTE_11_WIDTH ; window
 
     ; end connections data
 
@@ -8480,7 +8480,7 @@ VermilionCityBlocks: ; 360
 
 FuchsiaCity_h: ; 0x18ba7 to 0x18bd4 (45 bytes) (bank=6) (id=7)
     db $00 ; tileset
-    db FuchsiaCityHeight, FuchsiaCityWidth ; dimensions (y, x)
+    db FUCHSIA_CITY_HEIGHT, FUCHSIA_CITY_WIDTH ; dimensions (y, x)
     dw FuchsiaCityBlocks, FuchsiaCityTexts, FuchsiaCityScript ; blocks, texts, scripts
     db SOUTH | WEST | EAST ; connections
 
@@ -8488,24 +8488,24 @@ FuchsiaCity_h: ; 0x18ba7 to 0x18bd4 (45 bytes) (bank=6) (id=7)
 
 	db ROUTE_19
     dw Route19Blocks ; connection strip location
-    dw $C6EB + (FuchsiaCityHeight + 3) * (FuchsiaCityWidth + 6) + 5 ; current map position
-    db Route19Width, Route19Width ; bigness, width
+    dw $C6EB + (FUCHSIA_CITY_HEIGHT + 3) * (FUCHSIA_CITY_WIDTH + 6) + 5 ; current map position
+    db ROUTE_19_WIDTH, ROUTE_19_WIDTH ; bigness, width
     db 0, (5 * -2) ; alignments (y, x)
-    dw $C6EF + Route19Width ; window
+    dw $C6EF + ROUTE_19_WIDTH ; window
 
 	db ROUTE_18
-    dw Route18Blocks - 3 + (Route18Width) ; connection strip location
-    dw $C6E8 + (FuchsiaCityWidth + 6) * (4 + 3) ; current map position
-    db Route18Height, Route18Width ; bigness, width
-    db (4 * -2), (Route18Width * 2) - 1 ; alignments (y, x)
-    dw $C6EE + 2 * Route18Width ; window
+    dw Route18Blocks - 3 + (ROUTE_18_WIDTH) ; connection strip location
+    dw $C6E8 + (FUCHSIA_CITY_WIDTH + 6) * (4 + 3) ; current map position
+    db ROUTE_18_HEIGHT, ROUTE_18_WIDTH ; bigness, width
+    db (4 * -2), (ROUTE_18_WIDTH * 2) - 1 ; alignments (y, x)
+    dw $C6EE + 2 * ROUTE_18_WIDTH ; window
 
 	db ROUTE_15
-    dw Route15Blocks + (Route15Width * 0) ; connection strip location
-    dw $C6E5 + (FuchsiaCityWidth + 6) * (4 + 4) ; current map position
-    db Route15Height, Route15Width ; bigness, width
+    dw Route15Blocks + (ROUTE_15_WIDTH * 0) ; connection strip location
+    dw $C6E5 + (FUCHSIA_CITY_WIDTH + 6) * (4 + 4) ; current map position
+    db ROUTE_15_HEIGHT, ROUTE_15_WIDTH ; bigness, width
     db (4 * -2), 0 ; alignments (y, x)
-    dw $C6EF + Route15Width ; window
+    dw $C6EF + ROUTE_15_WIDTH ; window
 
     ; end connections data
 
@@ -9820,7 +9820,7 @@ INCBIN "baserom.gbc",$19b20,$f
 
 BluesHouse_h: ; 0x19b2f
 	db $08 ; tileset
-	db BluesHouseHeight, BluesHouseWidth ; dimensions
+	db BLUES_HOUSE_HEIGHT, BLUES_HOUSE_WIDTH ; dimensions
 	dw BluesHouseBlocks, BluesHouseTexts, BluesHouseScript
 	db 0
 	dw BluesHouseObject
@@ -9939,7 +9939,7 @@ BluesHouseBlocks:
 
 VermilionHouse3_h: ; 0x19c06 to 0x19c12 (12 bytes) (bank=6) (id=196)
     db $08 ; tileset
-    db VermilionHouse3Height, VermilionHouse3Width ; dimensions (y, x)
+    db VERMILION_HOUSE_3_HEIGHT, VERMILION_HOUSE_3_WIDTH ; dimensions (y, x)
     dw VermilionHouse3Blocks, VermilionHouse3Texts, VermilionHouse3Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -9981,7 +9981,7 @@ VermilionHouse3Blocks: ; 16
 
 IndigoPlateauLobby_h: ; 0x19c4f to 0x19c5b (12 bytes) (bank=6) (id=174)
     db $02 ; tileset
-    db IndigoPlateauLobbyHeight, IndigoPlateauLobbyWidth ; dimensions (y, x)
+    db INDIGO_PLATEAU_LOBBY_HEIGHT, INDIGO_PLATEAU_LOBBY_WIDTH ; dimensions (y, x)
     dw IndigoPlateauLobbyBlocks, IndigoPlateauLobbyTexts, IndigoPlateauLobbyScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -10055,7 +10055,7 @@ IndigoPlateauLobbyBlocks: ; 48
 
 SilphCo4_h: ; 0x19cff to 0x19d0b (12 bytes) (bank=6) (id=209)
     db $16 ; tileset
-    db SilphCo4Height, SilphCo4Width ; dimensions (y, x)
+    db SILPH_CO_4F_HEIGHT, SILPH_CO_4F_WIDTH ; dimensions (y, x)
     dw SilphCo4Blocks, SilphCo4Texts, SilphCo4Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -10149,7 +10149,7 @@ SilphCo4Blocks: ; 135
 
 SilphCo5_h: ; 0x19f2b to 0x19f37 (12 bytes) (bank=6) (id=210)
     db $16 ; tileset
-    db SilphCo5Height, SilphCo5Width ; dimensions (y, x)
+    db SILPH_CO_5F_HEIGHT, SILPH_CO_5F_WIDTH ; dimensions (y, x)
     dw SilphCo5Blocks, SilphCo5Texts, SilphCo5Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -10267,7 +10267,7 @@ SilphCo5Blocks: ; 135
 
 SilphCo6_h: ; 0x1a19d to 0x1a1a9 (12 bytes) (bank=6) (id=211)
     db $16 ; tileset
-    db SilphCo6Height, SilphCo6Width ; dimensions (y, x)
+    db SILPH_CO_6F_HEIGHT, SILPH_CO_6F_WIDTH ; dimensions (y, x)
     dw SilphCo6Blocks, SilphCo6Texts, SilphCo6Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -10400,25 +10400,25 @@ SECTION "bank7",DATA,BANK[$7]
 
 CinnabarIsland_h: ; 0x1c000 to 0x1c022 (34 bytes) (bank=7) (id=8)
     db $00 ; tileset
-    db CinnabarIslandHeight, CinnabarIslandWidth ; dimensions (y, x)
+    db CINNABAR_ISLAND_HEIGHT, CINNABAR_ISLAND_WIDTH ; dimensions (y, x)
     dw CinnabarIslandBlocks, CinnabarIslandTexts, CinnabarIslandScript ; blocks, texts, scripts
     db NORTH | EAST ; connections
 
     ; connections data
 
 	db ROUTE_21
-    dw Route21Blocks + (Route21Height - 3) * Route21Width ; connection strip location
+    dw Route21Blocks + (ROUTE_21_HEIGHT - 3) * ROUTE_21_WIDTH ; connection strip location
     dw $C6EB + 0 ; current map position
-    db Route21Width, Route21Width ; bigness, width
-    db (Route21Height * 2) - 1, (0 * -2) ; alignments (y, x)
-    dw $C6E9 + Route21Height * (Route21Width + 6) ; window
+    db ROUTE_21_WIDTH, ROUTE_21_WIDTH ; bigness, width
+    db (ROUTE_21_HEIGHT * 2) - 1, (0 * -2) ; alignments (y, x)
+    dw $C6E9 + ROUTE_21_HEIGHT * (ROUTE_21_WIDTH + 6) ; window
 
 	db ROUTE_20
-    dw Route20Blocks + (Route20Width * 0) ; connection strip location
-    dw $C6E5 + (CinnabarIslandWidth + 6) * (0 + 4) ; current map position
-    db Route20Height, Route20Width ; bigness, width
+    dw Route20Blocks + (ROUTE_20_WIDTH * 0) ; connection strip location
+    dw $C6E5 + (CINNABAR_ISLAND_WIDTH + 6) * (0 + 4) ; current map position
+    db ROUTE_20_HEIGHT, ROUTE_20_WIDTH ; bigness, width
     db (0 * -2), 0 ; alignments (y, x)
-    dw $C6EF + Route20Width ; window
+    dw $C6EF + ROUTE_20_WIDTH ; window
 
     ; end connections data
 
@@ -10457,14 +10457,14 @@ CinnabarIslandBlocks: ; 90
 
 Route1_h: ; 0x1c0c3 to 0x1c0e5 (34 bytes) (bank=7) (id=12)
     db $00 ; tileset
-    db Route1Height, Route1Width ; dimensions (y, x)
+    db ROUTE_1_HEIGHT, ROUTE_1_WIDTH ; dimensions (y, x)
     dw Route1Blocks, Route1Texts, Route1Script ; blocks, texts, scripts
     db NORTH | SOUTH ; connections
 
     ; connections data
 
 	db VIRIDIAN_CITY
-    dw ViridianCityBlocks + (ViridianCityHeight - 3) * ViridianCityWidth + 2, $c6e8 ; pointers (connected, current) (strip)
+    dw ViridianCityBlocks + (VIRIDIAN_CITY_HEIGHT - 3) * VIRIDIAN_CITY_WIDTH + 2, $c6e8 ; pointers (connected, current) (strip)
     db $10, $14 ; bigness, width
     db $23, $0a ; alignments (y, x)
     dw $c8bd ; window
@@ -10844,7 +10844,7 @@ Route1Text3: ; 0x1cafd
 
 OaksLab_h: ; 0x1cb02 to 0x1cb0e (12 bytes) (bank=7) (id=40)
     db $05 ; tileset
-    db OaksLabHeight, OaksLabWidth ; dimensions (y, x)
+    db OAKS_LAB_HEIGHT, OAKS_LAB_WIDTH ; dimensions (y, x)
     dw OaksLabBlocks, OaksLabTexts, OaksLabScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -11454,7 +11454,7 @@ OaksLabObject: ; 0x1d40a (size=88)
 
 ViridianMart_h: ; 0x1d462 to 0x1d46e (12 bytes) (bank=7) (id=42)
     db $02 ; tileset
-    db ViridianMartHeight, ViridianMartWidth ; dimensions (y, x)
+    db VIRIDIAN_MART_HEIGHT, VIRIDIAN_MART_WIDTH ; dimensions (y, x)
     dw ViridianMartBlocks, ViridianMartTexts, ViridianMartScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -11547,7 +11547,7 @@ ViridianMartBlocks: ; 16
 
 School_h: ; 0x1d540 to 0x1d54c (12 bytes) (bank=7) (id=43)
     db $08 ; tileset
-    db SchoolHeight, SchoolWidth ; dimensions (y, x)
+    db VIRIDIAN_SCHOOL_HEIGHT, VIRIDIAN_SCHOOL_WIDTH ; dimensions (y, x)
     dw SchoolBlocks, SchoolTexts, SchoolScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -11587,7 +11587,7 @@ SchoolObject: ; 0x1d55d (size=32)
 
 ViridianHouse_h: ; 0x1d57d to 0x1d589 (12 bytes) (bank=7) (id=44)
     db $08 ; tileset
-    db ViridianHouseHeight, ViridianHouseWidth ; dimensions (y, x)
+    db VIRIDIAN_HOUSE_HEIGHT, VIRIDIAN_HOUSE_WIDTH ; dimensions (y, x)
     dw ViridianHouseBlocks, ViridianHouseTexts, ViridianHouseScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -11646,7 +11646,7 @@ ViridianHouseObject: ; 0x1d5bb (size=44)
 
 PewterHouse1_h: ; 0x1d5e7 to 0x1d5f3 (12 bytes) (bank=7) (id=55)
     db $08 ; tileset
-    db PewterHouse1Height, PewterHouse1Width ; dimensions (y, x)
+    db PEWTER_HOUSE_1_HEIGHT, PEWTER_HOUSE_1_WIDTH ; dimensions (y, x)
     dw PewterHouse1Blocks, PewterHouse1Texts, PewterHouse1Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -11695,7 +11695,7 @@ PewterHouse1Object: ; 0x1d616 (size=38)
 
 PewterHouse2_h: ; 0x1d63c to 0x1d648 (12 bytes) (bank=7) (id=57)
     db $08 ; tileset
-    db PewterHouse2Height, PewterHouse2Width ; dimensions (y, x)
+    db PEWTER_HOUSE_2_HEIGHT, PEWTER_HOUSE_2_WIDTH ; dimensions (y, x)
     dw PewterHouse2Blocks, PewterHouse2Texts, PewterHouse2Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -11735,7 +11735,7 @@ PewterHouse2Object: ; 0x1d659 (size=32)
 
 CeruleanHouseTrashed_h: ; 0x1d679 to 0x1d685 (12 bytes) (bank=7) (id=62)
     db $08 ; tileset
-    db CeruleanHouseTrashedHeight, CeruleanHouseTrashedWidth ; dimensions (y, x)
+    db TRASHED_HOUSE_HEIGHT, TRASHED_HOUSE_WIDTH ; dimensions (y, x)
     dw CeruleanHouseTrashedBlocks, CeruleanHouseTrashedTexts, CeruleanHouseTrashedScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -11797,7 +11797,7 @@ CeruleanHouseTrashedObject: ; 0x1d6bf (size=43)
 
 CeruleanHouse2_h: ; 0x1d6ea to 0x1d6f6 (12 bytes) (bank=7) (id=63)
     db $08 ; tileset
-    db CeruleanHouse2Height, CeruleanHouse2Width ; dimensions (y, x)
+    db CERULEAN_HOUSE_HEIGHT, CERULEAN_HOUSE_WIDTH ; dimensions (y, x)
     dw CeruleanHouse2Blocks, CeruleanHouse2Texts, CeruleanHouse2Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -11841,7 +11841,7 @@ CeruleanHouse2Object: ; 0x1d710 (size=32)
 
 BikeShop_h: ; 0x1d730 to 0x1d73c (12 bytes) (bank=7) (id=66)
     db $15 ; tileset
-    db BikeShopHeight, BikeShopWidth ; dimensions (y, x)
+    db BIKE_SHOP_HEIGHT, BIKE_SHOP_WIDTH ; dimensions (y, x)
     dw BikeShopBlocks, BikeShopTexts, BikeShopScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -11976,7 +11976,7 @@ BikeShopBlocks: ; 16
 
 LavenderHouse1_h: ; 0x1d89c to 0x1d8a8 (12 bytes) (bank=7) (id=149)
     db $08 ; tileset
-    db LavenderHouse1Height, LavenderHouse1Width ; dimensions (y, x)
+    db LAVENDER_HOUSE_1_HEIGHT, LAVENDER_HOUSE_1_WIDTH ; dimensions (y, x)
     dw LavenderHouse1Blocks, LavenderHouse1Texts, LavenderHouse1Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -12091,7 +12091,7 @@ LavenderHouse1Object: ; 0x1d96a (size=56)
 
 LavenderHouse2_h: ; 0x1d9a2 to 0x1d9ae (12 bytes) (bank=7) (id=151)
     db $08 ; tileset
-    db LavenderHouse2Height, LavenderHouse2Width ; dimensions (y, x)
+    db LAVENDER_HOUSE_2_HEIGHT, LAVENDER_HOUSE_2_WIDTH ; dimensions (y, x)
     dw LavenderHouse2Blocks, LavenderHouse2Texts, LavenderHouse2Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -12148,7 +12148,7 @@ LavenderHouse2Object: ; 0x1d9e6 (size=32)
 
 NameRater_h: ; 0x1da06 to 0x1da12 (12 bytes) (bank=7) (id=229)
     db $08 ; tileset
-    db NameRaterHeight, NameRaterWidth ; dimensions (y, x)
+    db NAME_RATERS_HOUSE_HEIGHT, NAME_RATERS_HOUSE_WIDTH ; dimensions (y, x)
     dw NameRaterBlocks, $5a54, NameRaterScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -12221,7 +12221,7 @@ NameRaterObject: ; 0x1dad6 (size=26)
 
 VermilionHouse1_h: ; 0x1daf0 to 0x1dafc (12 bytes) (bank=7) (id=93)
     db $08 ; tileset
-    db VermilionHouse1Height, VermilionHouse1Width ; dimensions (y, x)
+    db VERMILION_HOUSE_1_HEIGHT, VERMILION_HOUSE_1_WIDTH ; dimensions (y, x)
     dw VermilionHouse1Blocks, VermilionHouse1Texts, VermilionHouse1Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -12273,7 +12273,7 @@ VermilionHouse1Object: ; 0x1db20 (size=38)
 
 VermilionDock_h: ; 0x1db46 to 0x1db52 (12 bytes) (bank=7) (id=94)
     db $0e ; tileset
-    db VermilionDockHeight, VermilionDockWidth ; dimensions (y, x)
+    db VERMILION_DOCK_HEIGHT, VERMILION_DOCK_WIDTH ; dimensions (y, x)
     dw VermilionDockBlocks, VermilionDockTexts, VermilionDockScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -12344,7 +12344,7 @@ VermilionDockBlocks: ; 84
 
 CeladonMansion5_h: ; 0x1dd2e to 0x1dd3a (12 bytes) (bank=7) (id=132)
     db $08 ; tileset
-    db CeladonMansion5Height, CeladonMansion5Width ; dimensions (y, x)
+    db CELADON_MANSION_5_HEIGHT, CELADON_MANSION_5_WIDTH ; dimensions (y, x)
     dw CeladonMansion5Blocks, CeladonMansion5Texts, CeladonMansion5Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -12392,7 +12392,7 @@ CeladonMansion5Object: ; 0x1dd5c (size=32)
 
 FuchsiaMart_h: ; 0x1dd7c to 0x1dd88 (12 bytes) (bank=7) (id=152)
     db $02 ; tileset
-    db FuchsiaMartHeight, FuchsiaMartWidth ; dimensions (y, x)
+    db FUCHSIA_MART_HEIGHT, FUCHSIA_MART_WIDTH ; dimensions (y, x)
     dw FuchsiaMartBlocks, FuchsiaMartTexts, FuchsiaMartScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -12436,7 +12436,7 @@ FuchsiaMartBlocks: ; 16
 
 SaffronHouse1_h: ; 0x1ddd1 to 0x1dddd (12 bytes) (bank=7) (id=179)
     db $08 ; tileset
-    db SaffronHouse1Height, SaffronHouse1Width ; dimensions (y, x)
+    db SAFFRON_HOUSE_1_HEIGHT, SAFFRON_HOUSE_1_WIDTH ; dimensions (y, x)
     dw SaffronHouse1Blocks, SaffronHouse1Texts, SaffronHouse1Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -12490,7 +12490,7 @@ SaffronHouse1Object: ; 0x1de04 (size=44)
 
 SaffronHouse2_h: ; 0x1de30 to 0x1de3c (12 bytes) (bank=7) (id=183)
     db $08 ; tileset
-    db SaffronHouse2Height, SaffronHouse2Width ; dimensions (y, x)
+    db SAFFRON_HOUSE_2_HEIGHT, SAFFRON_HOUSE_2_WIDTH ; dimensions (y, x)
     dw SaffronHouse2Blocks, SaffronHouse2Texts, SaffronHouse2Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -12548,7 +12548,7 @@ SaffronHouse2Object: ; 0x1de8a (size=26)
 
 DiglettsCaveRoute2_h: ; 0x1dea4 to 0x1deb0 (12 bytes) (bank=7) (id=46)
     db $11 ; tileset
-    db DiglettsCaveRoute2Height, DiglettsCaveRoute2Width ; dimensions (y, x)
+    db DIGLETTS_CAVE_EXIT_HEIGHT, DIGLETTS_CAVE_EXIT_WIDTH ; dimensions (y, x)
     dw DiglettsCaveRoute2Blocks, DiglettsCaveRoute2Texts, DiglettsCaveRoute2Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -12587,7 +12587,7 @@ DiglettsCaveRoute2Object: ; 0x1debf (size=34)
 
 Route2House_h: ; 0x1dee1 to 0x1deed (12 bytes) (bank=7) (id=48)
     db $08 ; tileset
-    db Route2HouseHeight, Route2HouseWidth ; dimensions (y, x)
+    db ROUTE_2_HOUSE_HEIGHT, ROUTE_2_HOUSE_WIDTH ; dimensions (y, x)
     dw Route2HouseBlocks, Route2HouseTexts, Route2HouseScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -12631,7 +12631,7 @@ Route2HouseObject: ; 0x1df07 (size=32)
 
 Route5Gate_h: ; 0x1df27 to 0x1df33 (12 bytes) (bank=7) (id=70)
     db $0c ; tileset
-    db Route5GateHeight, Route5GateWidth ; dimensions (y, x)
+    db ROUTE_5_GATE_HEIGHT, ROUTE_5_GATE_WIDTH ; dimensions (y, x)
     dw Route5GateBlocks, Route5GateTexts, Route5GateScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -12758,7 +12758,7 @@ Route5GateBlocks: ; 12
 
 Route6Gate_h: ; 0x1e031 to 0x1e03d (12 bytes) (bank=7) (id=73)
     db $0c ; tileset
-    db Route6GateHeight, Route6GateWidth ; dimensions (y, x)
+    db ROUTE_6_GATE_HEIGHT, ROUTE_6_GATE_WIDTH ; dimensions (y, x)
     dw Route6GateBlocks, Route6GateTexts, Route6GateScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -12839,7 +12839,7 @@ Route6GateBlocks: ; 12
 
 Route7Gate_h: ; 0x1e0f4 to 0x1e100 (12 bytes) (bank=7) (id=76)
     db $0c ; tileset
-    db Route7GateHeight, Route7GateWidth ; dimensions (y, x)
+    db ROUTE_7_GATE_HEIGHT, ROUTE_7_GATE_WIDTH ; dimensions (y, x)
     dw Route7GateBlocks, Route7GateTexts, Route7GateScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -12921,7 +12921,7 @@ Route7GateBlocks: ; 12
 
 Route8Gate_h: ; 0x1e1bb to 0x1e1c7 (12 bytes) (bank=7) (id=79)
     db $0c ; tileset
-    db Route8GateHeight, Route8GateWidth ; dimensions (y, x)
+    db ROUTE_8_GATE_HEIGHT, ROUTE_8_GATE_WIDTH ; dimensions (y, x)
     dw Route8GateBlocks, Route8GateTexts, Route8GateScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -13000,7 +13000,7 @@ Route8GateBlocks: ; 12
 
 UndergroundPathEntranceRoute8_h: ; 0x1e27d to 0x1e289 (12 bytes) (bank=7) (id=80)
     db $0c ; tileset
-    db UndergroundPathEntranceRoute8Height, UndergroundPathEntranceRoute8Width ; dimensions (y, x)
+    db PATH_ENTRANCE_ROUTE_8_HEIGHT, PATH_ENTRANCE_ROUTE_8_WIDTH ; dimensions (y, x)
     dw UndergroundPathEntranceRoute8Blocks, UndergroundPathEntranceRoute8Texts, UndergroundPathEntranceRoute8Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -13041,7 +13041,7 @@ UndergroundPathEntranceRoute8Object: ; 0x1e298 (size=34)
 
 PowerPlant_h: ; 0x1e2ba to 0x1e2c6 (12 bytes) (bank=7) (id=83)
     db $16 ; tileset
-    db PowerPlantHeight, PowerPlantWidth ; dimensions (y, x)
+    db POWER_PLANT_HEIGHT, POWER_PLANT_WIDTH ; dimensions (y, x)
     dw PowerPlantBlocks, PowerPlantTexts, PowerPlantScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -13165,7 +13165,7 @@ PowerPlantBlocks: ; 360
 
 DiglettsCaveEntranceRoute11_h: ; 0x1e5ae to 0x1e5ba (12 bytes) (bank=7) (id=85)
     db $11 ; tileset
-    db DiglettsCaveEntranceRoute11Height, DiglettsCaveEntranceRoute11Width ; dimensions (y, x)
+    db DIGLETTS_CAVE_ENTRANCE_HEIGHT, DIGLETTS_CAVE_ENTRANCE_WIDTH ; dimensions (y, x)
     dw DiglettsCaveEntranceRoute11Blocks, DiglettsCaveEntranceRoute11Texts, DiglettsCaveEntranceRoute11Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -13207,7 +13207,7 @@ DiglettsCaveEntranceRoute11Object: ; 0x1e5ca (size=34)
 
 Route16House_h: ; 0x1e5ec to 0x1e5f8 (12 bytes) (bank=7) (id=188)
     db $08 ; tileset
-    db Route16HouseHeight, Route16HouseWidth ; dimensions (y, x)
+    db ROUTE_16_HOUSE_HEIGHT, ROUTE_16_HOUSE_WIDTH ; dimensions (y, x)
     dw Route16HouseBlocks, Route16HouseTexts, Route16HouseScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -13273,7 +13273,7 @@ Route16HouseObject: ; 0x1e657 (size=32)
 
 Route22Gate_h: ; 0x1e677 to 0x1e683 (12 bytes) (bank=7) (id=193)
     db $0c ; tileset
-    db Route22GateHeight, Route22GateWidth ; dimensions (y, x)
+    db ROUTE_22_GATE_HEIGHT, ROUTE_22_GATE_WIDTH ; dimensions (y, x)
     dw Route22GateBlocks, Route22GateTexts, Route22GateScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -13373,7 +13373,7 @@ Route22GateBlocks: ; 20
 
 BillsHouse_h: ; 0x1e75e to 0x1e76a (12 bytes) (bank=7) (id=88)
     db $10 ; tileset
-    db BillsHouseHeight, BillsHouseWidth ; dimensions (y, x)
+    db BILLS_HOUSE_HEIGHT, BILLS_HOUSE_WIDTH ; dimensions (y, x)
     dw BillsHouseBlocks, BillsHouseTexts, BillsHouseScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -20424,32 +20424,32 @@ SECTION "bank11",DATA,BANK[$11]
 
 LavenderTown_h: ; 0x44000 to 0x4402d (45 bytes) (bank=11) (id=4)
     db $00 ; tileset
-    db LavenderTownHeight, LavenderTownWidth ; dimensions (y, x)
+    db LAVENDER_TOWN_HEIGHT, LAVENDER_TOWN_WIDTH ; dimensions (y, x)
     dw LavenderTownBlocks, LavenderTownTexts, LavenderTownScript ; blocks, texts, scripts
     db NORTH | SOUTH | WEST ; connections
 
     ; connections data
 
 	db ROUTE_10
-    dw Route10Blocks + (Route10Height - 3) * Route10Width ; connection strip location
+    dw Route10Blocks + (ROUTE_10_HEIGHT - 3) * ROUTE_10_WIDTH ; connection strip location
     dw $C6EB + 0 ; current map position
-    db Route10Width, Route10Width ; bigness, width
-    db (Route10Height * 2) - 1, (0 * -2) ; alignments (y, x)
-    dw $C6E9 + Route10Height * (Route10Width + 6) ; window
+    db ROUTE_10_WIDTH, ROUTE_10_WIDTH ; bigness, width
+    db (ROUTE_10_HEIGHT * 2) - 1, (0 * -2) ; alignments (y, x)
+    dw $C6E9 + ROUTE_10_HEIGHT * (ROUTE_10_WIDTH + 6) ; window
 
 	db ROUTE_12
     dw Route12Blocks ; connection strip location
-    dw $C6EB + (LavenderTownHeight + 3) * (LavenderTownWidth + 6) + 0 ; current map position
-    db Route12Width, Route12Width ; bigness, width
+    dw $C6EB + (LAVENDER_TOWN_HEIGHT + 3) * (LAVENDER_TOWN_WIDTH + 6) + 0 ; current map position
+    db ROUTE_12_WIDTH, ROUTE_12_WIDTH ; bigness, width
     db 0, (0 * -2) ; alignments (y, x)
-    dw $C6EF + Route12Width ; window
+    dw $C6EF + ROUTE_12_WIDTH ; window
 
 	db ROUTE_8
-    dw Route8Blocks - 3 + (Route8Width) ; connection strip location
-    dw $C6E8 + (LavenderTownWidth + 6) * (0 + 3) ; current map position
-    db Route8Height, Route8Width ; bigness, width
-    db (0 * -2), (Route8Width * 2) - 1 ; alignments (y, x)
-    dw $C6EE + 2 * Route8Width ; window
+    dw Route8Blocks - 3 + (ROUTE_8_WIDTH) ; connection strip location
+    dw $C6E8 + (LAVENDER_TOWN_WIDTH + 6) * (0 + 3) ; current map position
+    db ROUTE_8_HEIGHT, ROUTE_8_WIDTH ; bigness, width
+    db (0 * -2), (ROUTE_8_WIDTH * 2) - 1 ; alignments (y, x)
+    dw $C6EE + 2 * ROUTE_8_WIDTH ; window
 
     ; end connections data
 
@@ -20598,7 +20598,7 @@ ViridianPokecenterObject: ; 0x44277 (size=44)
 
 Mansion1_h: ; 0x442a3 to 0x442af (12 bytes) (bank=11) (id=165)
     db $16 ; tileset
-    db Mansion1Height, Mansion1Width ; dimensions (y, x)
+    db MANSION_1_HEIGHT, MANSION_1_WIDTH ; dimensions (y, x)
     dw Mansion1Blocks, Mansion1Texts, Mansion1Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -20690,7 +20690,7 @@ Mansion1Blocks: ; 203
 
 RockTunnel1_h: ; 0x444d0 to 0x444dc (12 bytes) (bank=11) (id=82)
     db $11 ; tileset
-    db RockTunnel1Height, RockTunnel1Width ; dimensions (y, x)
+    db ROCK_TUNNEL_1_HEIGHT, ROCK_TUNNEL_1_WIDTH ; dimensions (y, x)
     dw RockTunnel1Blocks, RockTunnel1Texts, RockTunnel1Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -20796,7 +20796,7 @@ RockTunnel1Blocks: ; 360
 
 SeafoamIslands1_h: ; 0x447dd to 0x447e9 (12 bytes) (bank=11) (id=192)
     db $11 ; tileset
-    db SeafoamIslands1Height, SeafoamIslands1Width ; dimensions (y, x)
+    db SEAFOAM_ISLANDS_1_HEIGHT, SEAFOAM_ISLANDS_1_WIDTH ; dimensions (y, x)
     dw SeafoamIslands1Blocks, SeafoamIslands1Texts, SeafoamIslands1Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -20884,7 +20884,7 @@ SeafoamIslands1Blocks: ; 135
 
 SSAnne3_h: ; 0x44926 to 0x44932 (12 bytes) (bank=11) (id=97)
     db $0d ; tileset
-    db SSAnne3Height, SSAnne3Width ; dimensions (y, x)
+    db SS_ANNE_3_HEIGHT, SS_ANNE_3_WIDTH ; dimensions (y, x)
     dw SSAnne3Blocks, SSAnne3Texts, SSAnne3Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -20922,7 +20922,7 @@ SSAnne3Blocks: ; 30
 
 VictoryRoad3_h: ; 0x44974 to 0x44980 (12 bytes) (bank=11) (id=198)
     db $11 ; tileset
-    db VictoryRoad3Height, VictoryRoad3Width ; dimensions (y, x)
+    db VICTORY_ROAD_3_HEIGHT, VICTORY_ROAD_3_WIDTH ; dimensions (y, x)
     dw VictoryRoad3Blocks, VictoryRoad3Texts, VictoryRoad3Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -21006,7 +21006,7 @@ VictoryRoad3Blocks: ; 135
 
 RocketHideout1_h: ; 0x44bbe to 0x44bca (12 bytes) (bank=11) (id=199)
     db $16 ; tileset
-    db RocketHideout1Height, RocketHideout1Width ; dimensions (y, x)
+    db ROCKET_HIDEOUT_1_HEIGHT, ROCKET_HIDEOUT_1_WIDTH ; dimensions (y, x)
     dw RocketHideout1Blocks, RocketHideout1Texts, RocketHideout1Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -21095,7 +21095,7 @@ RocketHideout1Blocks: ; 210
 
 RocketHideout2_h: ; 0x44e1b to 0x44e27 (12 bytes) (bank=11) (id=200)
     db $16 ; tileset
-    db RocketHideout2Height, RocketHideout2Width ; dimensions (y, x)
+    db ROCKET_HIDEOUT_2_HEIGHT, ROCKET_HIDEOUT_2_WIDTH ; dimensions (y, x)
     dw RocketHideout2Blocks, RocketHideout2Texts, RocketHideout2Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -21157,7 +21157,7 @@ RocketHideout2Blocks: ; 210
 
 RocketHideout3_h: ; 0x45219 to 0x45225 (12 bytes) (bank=11) (id=201)
     db $16 ; tileset
-    db RocketHideout3Height, RocketHideout3Width ; dimensions (y, x)
+    db ROCKET_HIDEOUT_3_HEIGHT, ROCKET_HIDEOUT_3_WIDTH ; dimensions (y, x)
     dw RocketHideout3Blocks, RocketHideout3Texts, RocketHideout3Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -21220,7 +21220,7 @@ RocketHideout3Blocks: ; 210
 
 RocketHideout4_h: ; 0x45451 to 0x4545d (12 bytes) (bank=11) (id=202)
     db $16 ; tileset
-    db RocketHideout4Height, RocketHideout4Width ; dimensions (y, x)
+    db ROCKET_HIDEOUT_4_HEIGHT, ROCKET_HIDEOUT_4_WIDTH ; dimensions (y, x)
     dw RocketHideout4Blocks, RocketHideout4Texts, RocketHideout4Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -21332,7 +21332,7 @@ RocketHideout4Blocks: ; 180
 
 RocketHideoutElevator_h: ; 0x45704 to 0x45710 (12 bytes) (bank=11) (id=203)
     db $12 ; tileset
-    db RocketHideoutElevatorHeight, RocketHideoutElevatorWidth ; dimensions (y, x)
+    db ROCKET_HIDEOUT_ELEVATOR_HEIGHT, ROCKET_HIDEOUT_ELEVATOR_WIDTH ; dimensions (y, x)
     dw RocketHideoutElevatorBlocks, RocketHideoutElevatorTexts, RocketHideoutElevatorScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -21399,7 +21399,7 @@ RocketHideoutElevatorBlocks: ; 12
 
 SilphCoElevator_h: ; 0x457b4 to 0x457c0 (12 bytes) (bank=11) (id=236)
     db $12 ; tileset
-    db SilphCoElevatorHeight, SilphCoElevatorWidth ; dimensions (y, x)
+    db SILPH_CO_ELEVATOR_HEIGHT, SILPH_CO_ELEVATOR_WIDTH ; dimensions (y, x)
     dw SilphCoElevatorBlocks, SilphCoElevatorTexts, SilphCoElevatorScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -21456,7 +21456,7 @@ SilphCoElevatorBlocks: ; 4
 
 SafariZoneEast_h: ; 0x4585f to 0x4586b (12 bytes) (bank=11) (id=217)
     db $03 ; tileset
-    db SafariZoneEastHeight, SafariZoneEastWidth ; dimensions (y, x)
+    db SAFARI_ZONE_EAST_HEIGHT, SAFARI_ZONE_EAST_WIDTH ; dimensions (y, x)
     dw SafariZoneEastBlocks, SafariZoneEastTexts, SafariZoneEastScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -21514,7 +21514,7 @@ SafariZoneEastBlocks: ; 195
 
 SafariZoneNorth_h: ; 0x4599f to 0x459ab (12 bytes) (bank=11) (id=218)
     db $03 ; tileset
-    db SafariZoneNorthHeight, SafariZoneNorthWidth ; dimensions (y, x)
+    db SAFARI_ZONE_NORTH_HEIGHT, SAFARI_ZONE_NORTH_WIDTH ; dimensions (y, x)
     dw SafariZoneNorthBlocks, SafariZoneNorthTexts, SafariZoneNorthScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -21588,7 +21588,7 @@ SafariZoneNorthBlocks: ; 360
 
 SafariZoneCenter_h: ; 0x45ba6 to 0x45bb2 (12 bytes) (bank=11) (id=220)
     db $03 ; tileset
-    db SafariZoneCenterHeight, SafariZoneCenterWidth ; dimensions (y, x)
+    db SAFARI_ZONE_CENTER_HEIGHT, SAFARI_ZONE_CENTER_WIDTH ; dimensions (y, x)
     dw SafariZoneCenterBlocks, SafariZoneCenterTexts, SafariZoneCenterScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -21646,7 +21646,7 @@ SafariZoneCenterBlocks: ; 195
 
 SafariZoneRestHouse1_h: ; 0x45ce1 to 0x45ced (12 bytes) (bank=11) (id=221)
     db $0c ; tileset
-    db SafariZoneRestHouse1Height, SafariZoneRestHouse1Width ; dimensions (y, x)
+    db SAFARI_ZONE_REST_HOUSE_1_HEIGHT, SAFARI_ZONE_REST_HOUSE_1_WIDTH ; dimensions (y, x)
     dw SafariZoneRestHouse1Blocks, SafariZoneRestHouse1Texts, SafariZoneRestHouse1Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -21686,7 +21686,7 @@ SafariZoneRestHouse1Object: ; 0x45cfe (size=32)
 
 SafariZoneRestHouse2_h: ; 0x45d1e to 0x45d2a (12 bytes) (bank=11) (id=223)
     db $0c ; tileset
-    db SafariZoneRestHouse2Height, SafariZoneRestHouse2Width ; dimensions (y, x)
+    db SAFARI_ZONE_REST_HOUSE_2_HEIGHT, SAFARI_ZONE_REST_HOUSE_2_WIDTH ; dimensions (y, x)
     dw $40fb, SafariZoneRestHouse2Texts, SafariZoneRestHouse2Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -21732,7 +21732,7 @@ SafariZoneRestHouse2Object: ; 0x45d43 (size=38)
 
 SafariZoneRestHouse3_h: ; 0x45d69 to 0x45d75 (12 bytes) (bank=11) (id=224)
     db $0c ; tileset
-    db SafariZoneRestHouse3Height, SafariZoneRestHouse3Width ; dimensions (y, x)
+    db SAFARI_ZONE_REST_HOUSE_3_HEIGHT, SAFARI_ZONE_REST_HOUSE_3_WIDTH ; dimensions (y, x)
     dw $40fb, SafariZoneRestHouse3Texts, SafariZoneRestHouse3Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -21778,7 +21778,7 @@ SafariZoneRestHouse3Object: ; 0x45d8e (size=38)
 
 SafariZoneRestHouse4_h: ; 0x45db4 to 0x45dc0 (12 bytes) (bank=11) (id=225)
     db $0c ; tileset
-    db SafariZoneRestHouse4Height, SafariZoneRestHouse4Width ; dimensions (y, x)
+    db SAFARI_ZONE_REST_HOUSE_4_HEIGHT, SAFARI_ZONE_REST_HOUSE_4_WIDTH ; dimensions (y, x)
     dw $40fb, SafariZoneRestHouse4Texts, SafariZoneRestHouse4Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -21824,7 +21824,7 @@ SafariZoneRestHouse4Object: ; 0x45dd9 (size=38)
 
 UnknownDungeon2_h: ; 0x45dff to 0x45e0b (12 bytes) (bank=11) (id=226)
     db $11 ; tileset
-    db UnknownDungeon2Height, UnknownDungeon2Width ; dimensions (y, x)
+    db UNKNOWN_DUNGEON_2_HEIGHT, UNKNOWN_DUNGEON_2_WIDTH ; dimensions (y, x)
     dw UnknownDungeon2Blocks, UnknownDungeon2Texts, UnknownDungeon2Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -21868,7 +21868,7 @@ UnknownDungeon2Blocks: ; 135
 
 UnknownDungeon3_h: ; 0x45ee4 to 0x45ef0 (12 bytes) (bank=11) (id=227)
     db $11 ; tileset
-    db UnknownDungeon3Height, UnknownDungeon3Width ; dimensions (y, x)
+    db UNKNOWN_DUNGEON_3_HEIGHT, UNKNOWN_DUNGEON_3_WIDTH ; dimensions (y, x)
     dw UnknownDungeon3Blocks, UnknownDungeon3Texts, UnknownDungeon3Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -21920,7 +21920,7 @@ UnknownDungeon3Blocks: ; 135
 
 RockTunnel2_h: ; 0x45fdf to 0x45feb (12 bytes) (bank=11) (id=232)
     db $11 ; tileset
-    db RockTunnel2Height, RockTunnel2Width ; dimensions (y, x)
+    db ROCK_TUNNEL_2_HEIGHT, ROCK_TUNNEL_2_WIDTH ; dimensions (y, x)
     dw RockTunnel2Blocks, RockTunnel2Texts, RockTunnel2Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -22025,7 +22025,7 @@ RockTunnel2Blocks: ; 360
 
 SeafoamIslands2_h: ; 0x46309 to 0x46315 (12 bytes) (bank=11) (id=159)
     db $11 ; tileset
-    db SeafoamIslands2Height, SeafoamIslands2Width ; dimensions (y, x)
+    db SEAFOAM_ISLANDS_2_HEIGHT, SEAFOAM_ISLANDS_2_WIDTH ; dimensions (y, x)
     dw SeafoamIslands2Blocks, SeafoamIslands2Texts, SeafoamIslands2Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -22109,7 +22109,7 @@ SeafoamIslands2Blocks: ; 135
 
 SeafoamIslands3_h: ; 0x46445 to 0x46451 (12 bytes) (bank=11) (id=160)
     db $11 ; tileset
-    db SeafoamIslands3Height, SeafoamIslands3Width ; dimensions (y, x)
+    db SEAFOAM_ISLANDS_3_HEIGHT, SEAFOAM_ISLANDS_3_WIDTH ; dimensions (y, x)
     dw SeafoamIslands3Blocks, SeafoamIslands3Texts, SeafoamIslands3Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -22193,7 +22193,7 @@ SeafoamIslands3Blocks: ; 135
 
 SeafoamIslands4_h: ; 0x46581 to 0x4658d (12 bytes) (bank=11) (id=161)
     db $11 ; tileset
-    db SeafoamIslands4Height, SeafoamIslands4Width ; dimensions (y, x)
+    db SEAFOAM_ISLANDS_4_HEIGHT, SEAFOAM_ISLANDS_4_WIDTH ; dimensions (y, x)
     dw SeafoamIslands4Blocks, SeafoamIslands4Texts, SeafoamIslands4Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -22331,7 +22331,7 @@ SeafoamIslands4Blocks: ; 135
 
 SeafoamIslands5_h: ; 0x4678d to 0x46799 (12 bytes) (bank=11) (id=162)
     db $11 ; tileset
-    db SeafoamIslands5Height, SeafoamIslands5Width ; dimensions (y, x)
+    db SEAFOAM_ISLANDS_5_HEIGHT, SEAFOAM_ISLANDS_5_WIDTH ; dimensions (y, x)
     dw SeafoamIslands5Blocks, SeafoamIslands5Texts, SeafoamIslands5Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -22459,25 +22459,25 @@ SECTION "bank12",DATA,BANK[$12]
 
 Route7_h: ; 0x48000 to 0x48022 (34 bytes) (bank=12) (id=18)
     db $00 ; tileset
-    db Route7Height, Route7Width ; dimensions (y, x)
+    db ROUTE_7_HEIGHT, ROUTE_7_WIDTH ; dimensions (y, x)
     dw Route7Blocks, $4155, Route7Script ; blocks, texts, scripts
     db WEST | EAST ; connections
 
     ; connections data
 
 	db CELADON_CITY
-    dw CeladonCityBlocks - 3 + (CeladonCityWidth * 2) ; connection strip location
-    dw $C6E8 + (Route7Width + 6) * (-3 + 3) ; current map position
-    db $f, CeladonCityWidth ; bigness, width
-    db (-4 * -2), (CeladonCityWidth * 2) - 1 ; alignments (y, x)
-    dw $C6EE + 2 * CeladonCityWidth ; window
+    dw CeladonCityBlocks - 3 + (CELADON_CITY_WIDTH * 2) ; connection strip location
+    dw $C6E8 + (ROUTE_7_WIDTH + 6) * (-3 + 3) ; current map position
+    db $f, CELADON_CITY_WIDTH ; bigness, width
+    db (-4 * -2), (CELADON_CITY_WIDTH * 2) - 1 ; alignments (y, x)
+    dw $C6EE + 2 * CELADON_CITY_WIDTH ; window
 
 	db SAFFRON_CITY
-    dw SaffronCityBlocks + (SaffronCityWidth) ; connection strip location
-    dw $C6E5 + (Route7Width + 6) * (-3 + 4) ; current map position
-    db $f, SaffronCityWidth ; bigness, width
+    dw SaffronCityBlocks + (SAFFRON_CITY_WIDTH) ; connection strip location
+    dw $C6E5 + (ROUTE_7_WIDTH + 6) * (-3 + 4) ; current map position
+    db $f, SAFFRON_CITY_WIDTH ; bigness, width
     db (-4 * -2), 0 ; alignments (y, x)
-    dw $C6EF + SaffronCityWidth ; window
+    dw $C6EF + SAFFRON_CITY_WIDTH ; window
 
     ; end connections data
 
@@ -22643,7 +22643,7 @@ RedsHouse1FBlocks:
 
 CeladonMart3_h: ; 0x48219 to 0x48225 (12 bytes) (bank=12) (id=124)
     db $12 ; tileset
-    db CeladonMart3Height, CeladonMart3Width ; dimensions (y, x)
+    db CELADON_MART_3_HEIGHT, CELADON_MART_3_WIDTH ; dimensions (y, x)
     dw CeladonMart3Blocks, CeladonMart3Texts, CeladonMart3Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -22769,7 +22769,7 @@ CeladonMart3Blocks: ; 40
 
 CeladonMart4_h: ; 0x4834a to 0x48356 (12 bytes) (bank=12) (id=125)
     db $12 ; tileset
-    db CeladonMart4Height, CeladonMart4Width ; dimensions (y, x)
+    db CELADON_MART_4_HEIGHT, CELADON_MART_4_WIDTH ; dimensions (y, x)
     dw CeladonMart4Blocks, CeladonMart4Texts, CeladonMart4Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -22820,7 +22820,7 @@ CeladonMart4Blocks: ; 40
 
 CeladonMartRoof_h: ; 0x483c9 to 0x483d5 (12 bytes) (bank=12) (id=126)
     db $12 ; tileset
-    db CeladonMartRoofHeight, CeladonMartRoofWidth ; dimensions (y, x)
+    db CELADON_MART_5_HEIGHT, CELADON_MART_5_WIDTH ; dimensions (y, x)
     dw CeladonMartRoofBlocks, CeladonMartRoofTexts, CeladonMartRoofScript ; blocks, texts, scripts
     db $00 ; connections
     
@@ -22898,7 +22898,7 @@ CeladonMartRoofBlocks: ; 40
 
 CeladonMartElevator_h: ; 0x485f4 to 0x48600 (12 bytes) (bank=12) (id=127)
     db $12 ; tileset
-    db CeladonMartElevatorHeight, CeladonMartElevatorWidth ; dimensions (y, x)
+    db CELADON_MART_6_HEIGHT, CELADON_MART_6_WIDTH ; dimensions (y, x)
     dw CeladonMartElevatorBlocks, CeladonMartElevatorTexts, CeladonMartElevatorScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -22955,7 +22955,7 @@ CeladonMartElevatorBlocks: ; 4
 
 CeladonMansion1_h: ; 0x48688 to 0x48694 (12 bytes) (bank=12) (id=128)
     db $13 ; tileset
-    db CeladonMansion1Height, CeladonMansion1Width ; dimensions (y, x)
+    db CELADON_MANSION_1_HEIGHT, CELADON_MANSION_1_WIDTH ; dimensions (y, x)
     dw CeladonMansion1Blocks, CeladonMansion1Texts, CeladonMansion1Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -23032,7 +23032,7 @@ CeladonMansion1Blocks: ; 24
 
 CeladonMansion2_h: ; 0x4872e to 0x4873a (12 bytes) (bank=12) (id=129)
     db $13 ; tileset
-    db CeladonMansion2Height, CeladonMansion2Width ; dimensions (y, x)
+    db CELADON_MANSION_2_HEIGHT, CELADON_MANSION_2_WIDTH ; dimensions (y, x)
     dw CeladonMansion2Blocks, CeladonMansion2Texts, CeladonMansion2Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -23075,7 +23075,7 @@ CeladonMansion2Blocks: ; 24
 
 CeladonMansion3_h: ; 0x48784 to 0x48790 (12 bytes) (bank=12) (id=130)
     db $13 ; tileset
-    db CeladonMansion3Height, CeladonMansion3Width ; dimensions (y, x)
+    db CELADON_MANSION_3_HEIGHT, CELADON_MANSION_3_WIDTH ; dimensions (y, x)
     dw CeladonMansion3Blocks, CeladonMansion3Texts, CeladonMansion3Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -23166,7 +23166,7 @@ CeladonMansion3Blocks: ; 24
 
 CeladonMansion4_h: ; 0x4885f to 0x4886b (12 bytes) (bank=12) (id=131)
     db $13 ; tileset
-    db CeladonMansion4Height, CeladonMansion4Width ; dimensions (y, x)
+    db CELADON_MANSION_4_HEIGHT, CELADON_MANSION_4_WIDTH ; dimensions (y, x)
     dw CeladonMansion4Blocks, CeladonMansion4Texts, CeladonMansion4Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -23206,7 +23206,7 @@ CeladonMansion4Blocks: ; 24
 
 CeladonPokecenter_h: ; 0x488ac to 0x488b8 (12 bytes) (bank=12) (id=133)
     db $06 ; tileset
-    db CeladonPokecenterHeight, CeladonPokecenterWidth ; dimensions (y, x)
+    db CELADON_POKECENTER_HEIGHT, CELADON_POKECENTER_WIDTH ; dimensions (y, x)
     dw CeladonPokecenterBlocks, CeladonPokecenterTexts, CeladonPokecenterScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -23255,7 +23255,7 @@ CeladonPokecenterObject: ; 0x488d2 (size=44)
 
 CeladonGym_h: ; 0x488fe to 0x4890a (12 bytes) (bank=12) (id=134)
     db $07 ; tileset
-    db CeladonGymHeight, CeladonGymWidth ; dimensions (y, x)
+    db CELADON_GYM_HEIGHT, CELADON_GYM_WIDTH ; dimensions (y, x)
     dw CeladonGymBlocks, CeladonGymTexts, CeladonGymScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -23415,7 +23415,7 @@ CeladonGymBlocks: ; 45
 
 CeladonGameCorner_h: ; 0x48bb1 to 0x48bbd (12 bytes) (bank=12) (id=135)
     db $12 ; tileset
-    db CeladonGameCornerHeight, CeladonGameCornerWidth ; dimensions (y, x)
+    db GAME_CORNER_HEIGHT, GAME_CORNER_WIDTH ; dimensions (y, x)
     dw CeladonGameCornerBlocks, CeladonGameCornerTexts, CeladonGameCornerScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -23744,7 +23744,7 @@ CeladonGameCornerBlocks: ; 90
 
 CeladonMart5_h: ; 0x4905d to 0x49069 (12 bytes) (bank=12) (id=136)
     db $12 ; tileset
-    db CeladonMart5Height, CeladonMart5Width ; dimensions (y, x)
+    db CELADON_HOUSE_HEIGHT, CELADON_HOUSE_WIDTH ; dimensions (y, x)
     dw CeladonMart5Blocks, CeladonMart5Texts, CeladonMart5Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -23796,7 +23796,7 @@ CeladonMart5Blocks: ; 40
 
 CeladonPrizeRoom_h: ; 0x490e4 to 0x490f0 (12 bytes) (bank=12) (id=137)
     db $12 ; tileset
-    db CeladonPrizeRoomHeight, CeladonPrizeRoomWidth ; dimensions (y, x)
+    db CELADONPRIZE_ROOM_HEIGHT, CELADONPRIZE_ROOM_WIDTH ; dimensions (y, x)
     dw CeladonPrizeRoomBlocks, CeladonPrizeRoomTexts, CeladonPrizeRoomScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -23845,7 +23845,7 @@ CeladonPrizeRoomBlocks: ; 20
 
 CeladonDiner_h: ; 0x49145 to 0x49151 (12 bytes) (bank=12) (id=138)
     db $12 ; tileset
-    db CeladonDinerHeight, CeladonDinerWidth ; dimensions (y, x)
+    db CELADON_DINER_HEIGHT, CELADON_DINER_WIDTH ; dimensions (y, x)
     dw CeladonDinerBlocks, CeladonDinerTexts, CeladonDinerScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -23927,7 +23927,7 @@ CeladonDinerBlocks: ; 20
 
 CeladonHouse_h: ; 0x49202 to 0x4920e (12 bytes) (bank=12) (id=139)
     db $13 ; tileset
-    db CeladonHouseHeight, CeladonHouseWidth ; dimensions (y, x)
+    db CELADON_HOUSE_2_HEIGHT, CELADON_HOUSE_2_WIDTH ; dimensions (y, x)
     dw CeladonHouseBlocks, CeladonHouseTexts, CeladonHouseScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -23976,7 +23976,7 @@ CeladonHouseBlocks: ; 16
 
 CeladonHotel_h: ; 0x4925d to 0x49269 (12 bytes) (bank=12) (id=140)
     db $06 ; tileset
-    db CeladonHotelHeight, CeladonHotelWidth ; dimensions (y, x)
+    db CELADONHOTEL_HEIGHT, CELADONHOTEL_WIDTH ; dimensions (y, x)
     dw CeladonHotelBlocks, CeladonHotelTexts, CeladonHotelScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -24024,7 +24024,7 @@ CeladonHotelBlocks: ; 28
 
 MtMoonPokecenter_h: ; 0x492c3 to 0x492cf (12 bytes) (bank=12) (id=68)
     db $06 ; tileset
-    db MtMoonPokecenterHeight, MtMoonPokecenterWidth ; dimensions (y, x)
+    db MT_MOON_POKECENTER_HEIGHT, MT_MOON_POKECENTER_WIDTH ; dimensions (y, x)
     dw MtMoonPokecenterBlocks, MtMoonPokecenterTexts, MtMoonPokecenterScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -24131,7 +24131,7 @@ MtMoonPokecenterObject: ; 0x49376 (size=56)
 
 RockTunnelPokecenter_h: ; 0x493ae to 0x493ba (12 bytes) (id=81)
     db $06 ; tileset
-    db RockTunnelPokecenterHeight, RockTunnelPokecenterWidth ; dimensions (y, x)
+    db ROCK_TUNNEL_POKECENTER_HEIGHT, ROCK_TUNNEL_POKECENTER_WIDTH ; dimensions (y, x)
     dw RockTunnelPokecenterBlocks, RockTunnelPokecenterTexts, RockTunnelPokecenterScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -24180,7 +24180,7 @@ RockTunnelPokecenterObject: ; 0x493d4 (size=44)
 
 Route11Gate_h: ; 0x49400 to 0x4940c (12 bytes) (id=84)
     db $0c ; tileset
-    db Route11GateHeight, Route11GateWidth ; dimensions (y, x)
+    db ROUTE_11_GATE_1F_HEIGHT, ROUTE_11_GATE_1F_WIDTH ; dimensions (y, x)
     dw Route11GateBlocks, Route11GateTexts, Route11GateScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -24221,7 +24221,7 @@ Route11GateObject: ; 0x49416 (size=50)
 
 Route11GateUpstairs_h: ; 0x49448 to 0x49454 (12 bytes) (id=86)
     db $0c ; tileset
-    db Route11GateUpstairsHeight, Route11GateUpstairsWidth ; dimensions (y, x)
+    db ROUTE_11_GATE_2F_HEIGHT, ROUTE_11_GATE_2F_WIDTH ; dimensions (y, x)
     dw Route11GateUpstairsBlocks, Route11GateUpstairsTexts, Route11GateUpstairsScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -24318,7 +24318,7 @@ Route11GateUpstairsObject: ; 0x494da (size=30)
 
 Route12Gate_h: ; 0x494f8 to 0x49504 (12 bytes) (id=87)
     db $0c ; tileset
-    db Route12GateHeight, Route12GateWidth ; dimensions (y, x)
+    db ROUTE_12_GATE_HEIGHT, ROUTE_12_GATE_WIDTH ; dimensions (y, x)
     dw Route12GateBlocks, Route12GateTexts, Route12GateScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -24362,7 +24362,7 @@ Route12GateBlocks: ; 20
 
 Route12GateUpstairs_h: ; 0x49554 to 0x49560 (12 bytes) (id=195)
     db $0c ; tileset
-    db Route12GateUpstairsHeight, Route12GateUpstairsWidth ; dimensions (y, x)
+    db ROUTE_12_GATE_2F_HEIGHT, ROUTE_12_GATE_2F_WIDTH ; dimensions (y, x)
     dw Route12GateUpstairsBlocks, Route12GateUpstairsTexts, Route12GateUpstairsScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -24436,7 +24436,7 @@ Route12GateUpstairsObject: ; 0x495de (size=24)
 
 Route15Gate_h: ; 0x495f6 to 0x49602 (12 bytes) (id=184)
     db $0c ; tileset
-    db Route15GateHeight, Route15GateWidth ; dimensions (y, x)
+    db ROUTE_15_GATE_HEIGHT, ROUTE_15_GATE_WIDTH ; dimensions (y, x)
     dw Route15GateBlocks, Route15GateTexts, Route15GateScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -24479,7 +24479,7 @@ INCBIN "baserom.gbc",$4963e,$74
 
 Route16GateMap_h: ; 0x496b2 to 0x496be (12 bytes) (id=186)
     db $0c ; tileset
-    db Route16GateMapHeight, Route16GateMapWidth ; dimensions (y, x)
+    db ROUTE_16_GATE_1F_HEIGHT, ROUTE_16_GATE_1F_WIDTH ; dimensions (y, x)
     dw Route16GateMapBlocks, Route16GateMapTexts, Route16GateMapScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -24594,7 +24594,7 @@ Route16GateMapBlocks: ; 28
 
 Route16GateUpstairs_h: ; 0x497ff to 0x4980b (12 bytes) (id=187)
     db $0c ; tileset
-    db Route16GateUpstairsHeight, Route16GateUpstairsWidth ; dimensions (y, x)
+    db ROUTE_16_GATE_2F_HEIGHT, ROUTE_16_GATE_2F_WIDTH ; dimensions (y, x)
     dw Route16GateUpstairsBlocks, Route16GateUpstairsTexts, Route16GateUpstairsScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -24658,7 +24658,7 @@ Route16GateUpstairsObject: ; 0x4984c (size=30)
 
 Route18Gate_h: ; 0x4986a to 0x49876 (12 bytes) (id=190)
     db $0c ; tileset
-    db Route18GateHeight, Route18GateWidth ; dimensions (y, x)
+    db ROUTE_18_GATE_1F_HEIGHT, ROUTE_18_GATE_1F_WIDTH ; dimensions (y, x)
     dw Route18GateBlocks, Route18GateTexts, Route18GateScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -24757,7 +24757,7 @@ Route18GateObject: ; 0x49937 (size=50)
 
 Route18GateHeader_h: ; 0x49969 to 0x49975 (12 bytes) (id=191)
     db $0c ; tileset
-    db Route18GateHeaderHeight, Route18GateHeaderWidth ; dimensions (y, x)
+    db ROUTE_18_GATE_2F_HEIGHT, ROUTE_18_GATE_2F_WIDTH ; dimensions (y, x)
     dw Route18GateHeaderBlocks, Route18GateHeaderTexts, Route18GateHeaderScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -24812,7 +24812,7 @@ Route18GateHeaderObject: ; 0x499a4 (size=24)
 
 MtMoon1_h: ; 0x499bc to 0x499c8 (12 bytes) (id=59)
     db $11 ; tileset
-    db MtMoon1Height, MtMoon1Width ; dimensions (y, x)
+    db MT_MOON_1_HEIGHT, MT_MOON_1_WIDTH ; dimensions (y, x)
     dw MtMoon1Blocks, MtMoon1Texts, MtMoon1Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -24923,7 +24923,7 @@ MtMoon1Blocks: ; 360
 
 MtMoon3_h: ; 0x49cff to 0x49d0b (12 bytes) (id=61)
     db $11 ; tileset
-    db MtMoon3Height, MtMoon3Width ; dimensions (y, x)
+    db MT_MOON_3_HEIGHT, MT_MOON_3_WIDTH ; dimensions (y, x)
     dw MtMoon3Blocks, MtMoon3Texts, MtMoon3Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -25104,7 +25104,7 @@ MtMoon3Blocks: ; 360
 
 SafariZoneWest_h: ; 0x4a1a9 to 0x4a1b5 (12 bytes) (id=219)
     db $03 ; tileset
-    db SafariZoneWestHeight, SafariZoneWestWidth ; dimensions (y, x)
+    db SAFARI_ZONE_WEST_HEIGHT, SAFARI_ZONE_WEST_WIDTH ; dimensions (y, x)
     dw SafariZoneWestBlocks, SafariZoneWestTexts, SafariZoneWestScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -25173,7 +25173,7 @@ SafariZoneWestBlocks: ; 195
 
 SafariZoneSecretHouse_h: ; 0x4a30b to 0x4a317 (12 bytes) (id=222)
     db $14 ; tileset
-    db SafariZoneSecretHouseHeight, SafariZoneSecretHouseWidth ; dimensions (y, x)
+    db SAFARI_ZONE_SECRET_HOUSE_HEIGHT, SAFARI_ZONE_SECRET_HOUSE_WIDTH ; dimensions (y, x)
     dw SafariZoneSecretHouseBlocks, SafariZoneSecretHouseTexts, SafariZoneSecretHouseScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -25330,7 +25330,7 @@ LancePic:
 
 BattleCenterM_h: ; 0x4fd04 to 0x4fd10 (12 bytes) (id=239)
     db $15 ; tileset
-    db BattleCenterMHeight, BattleCenterMWidth ; dimensions (y, x)
+    db BATTLE_CENTER_HEIGHT, BATTLE_CENTER_WIDTH ; dimensions (y, x)
     dw BattleCenterMBlocks, BattleCenterMTexts, BattleCenterMScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -25391,7 +25391,7 @@ BattleCenterMBlocks: ; 20
 
 TradeCenterM_h: ; 0x4fd71 to 0x4fd7d (12 bytes) (id=240)
     db $15 ; tileset
-    db TradeCenterMHeight, TradeCenterMWidth ; dimensions (y, x)
+    db TRADE_CENTER_HEIGHT, TRADE_CENTER_WIDTH ; dimensions (y, x)
     dw TradeCenterMBlocks, TradeCenterMTexts, TradeCenterMScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -25587,25 +25587,25 @@ SECTION "bank14",DATA,BANK[$14]
 
 Route22_h: ; 0x50000 to 0x50022 (34 bytes) (id=33)
     db $00 ; tileset
-    db Route22Height, Route22Width ; dimensions (y, x)
+    db ROUTE_22_HEIGHT, ROUTE_22_WIDTH ; dimensions (y, x)
     dw Route22Blocks, Route22Texts, Route22Script ; blocks, texts, scripts
     db NORTH | EAST ; connections
 
     ; connections data
 
 	db ROUTE_23
-    dw Route23Blocks + (Route23Height - 3) * Route23Width ; connection strip location
+    dw Route23Blocks + (ROUTE_23_HEIGHT - 3) * ROUTE_23_WIDTH ; connection strip location
     dw $C6EB + 0 ; current map position
-    db Route23Width, Route23Width ; bigness, width
-    db (Route23Height * 2) - 1, (0 * -2) ; alignments (y, x)
-    dw $C6E9 + Route23Height * (Route23Width + 6) ; window
+    db ROUTE_23_WIDTH, ROUTE_23_WIDTH ; bigness, width
+    db (ROUTE_23_HEIGHT * 2) - 1, (0 * -2) ; alignments (y, x)
+    dw $C6E9 + ROUTE_23_HEIGHT * (ROUTE_23_WIDTH + 6) ; window
 
 	db VIRIDIAN_CITY
-    dw ViridianCityBlocks + (ViridianCityWidth) ; connection strip location
-    dw $C6E5 + (Route22Width + 6) * (-3 + 4) ; current map position
-    db $f, ViridianCityWidth ; bigness, width
+    dw ViridianCityBlocks + (VIRIDIAN_CITY_WIDTH) ; connection strip location
+    dw $C6E5 + (ROUTE_22_WIDTH + 6) * (-3 + 4) ; current map position
+    db $f, VIRIDIAN_CITY_WIDTH ; bigness, width
     db (-4 * -2), 0 ; alignments (y, x)
-    dw $C6EF + ViridianCityWidth ; window
+    dw $C6EF + VIRIDIAN_CITY_WIDTH ; window
 
     ; end connections data
 
@@ -25632,25 +25632,25 @@ Route22Blocks: ; 180
 
 Route20_h: ; 0x500f1 to 0x50113 (34 bytes) (id=31)
     db $00 ; tileset
-    db Route20Height, Route20Width ; dimensions (y, x)
+    db ROUTE_20_HEIGHT, ROUTE_20_WIDTH ; dimensions (y, x)
     dw Route20Blocks, Route20Texts, Route20Script ; blocks, texts, scripts
     db WEST | EAST ; connections
 
     ; connections data
 
 	db CINNABAR_ISLAND
-    dw CinnabarIslandBlocks - 3 + (CinnabarIslandWidth) ; connection strip location
-    dw $C6E8 + (Route20Width + 6) * (0 + 3) ; current map position
-    db CinnabarIslandHeight, CinnabarIslandWidth ; bigness, width
-    db (0 * -2), (CinnabarIslandWidth * 2) - 1 ; alignments (y, x)
-    dw $C6EE + 2 * CinnabarIslandWidth ; window
+    dw CinnabarIslandBlocks - 3 + (CINNABAR_ISLAND_WIDTH) ; connection strip location
+    dw $C6E8 + (ROUTE_20_WIDTH + 6) * (0 + 3) ; current map position
+    db CINNABAR_ISLAND_HEIGHT, CINNABAR_ISLAND_WIDTH ; bigness, width
+    db (0 * -2), (CINNABAR_ISLAND_WIDTH * 2) - 1 ; alignments (y, x)
+    dw $C6EE + 2 * CINNABAR_ISLAND_WIDTH ; window
 
 	db ROUTE_19
-    dw Route19Blocks + (Route19Width * 15) ; connection strip location
-    dw $C6E5 + (Route20Width + 6) * (-3 + 4) ; current map position
-    db $c, Route19Width ; bigness, width
+    dw Route19Blocks + (ROUTE_19_WIDTH * 15) ; connection strip location
+    dw $C6E5 + (ROUTE_20_WIDTH + 6) * (-3 + 4) ; current map position
+    db $c, ROUTE_19_WIDTH ; bigness, width
     db (-18 * -2), 0 ; alignments (y, x)
-    dw $C6EF + Route19Width ; window
+    dw $C6EF + ROUTE_19_WIDTH ; window
 
     ; end connections data
 
@@ -25688,25 +25688,25 @@ Route20Blocks: ; 450
 
 Route23_h: ; 0x5033f to 0x50361 (34 bytes) (id=34)
     db $17 ; tileset
-    db Route23Height, Route23Width ; dimensions (y, x)
+    db ROUTE_23_HEIGHT, ROUTE_23_WIDTH ; dimensions (y, x)
     dw Route23Blocks, Route23Texts, Route23Script ; blocks, texts, scripts
     db NORTH | SOUTH ; connections
 
     ; connections data
 
 	db INDIGO_PLATEAU
-    dw IndigoPlateauBlocks + (IndigoPlateauHeight - 3) * IndigoPlateauWidth ; connection strip location
+    dw IndigoPlateauBlocks + (INDIGO_PLATEAU_HEIGHT - 3) * INDIGO_PLATEAU_WIDTH ; connection strip location
     dw $C6EB + 0 ; current map position
-    db IndigoPlateauWidth, IndigoPlateauWidth ; bigness, width
-    db (IndigoPlateauHeight * 2) - 1, (0 * -2) ; alignments (y, x)
-    dw $C6E9 + IndigoPlateauHeight * (IndigoPlateauWidth + 6) ; window
+    db INDIGO_PLATEAU_WIDTH, INDIGO_PLATEAU_WIDTH ; bigness, width
+    db (INDIGO_PLATEAU_HEIGHT * 2) - 1, (0 * -2) ; alignments (y, x)
+    dw $C6E9 + INDIGO_PLATEAU_HEIGHT * (INDIGO_PLATEAU_WIDTH + 6) ; window
 
 	db ROUTE_22
     dw Route22Blocks ; connection strip location
-    dw $C6EB + (Route23Height + 3) * (Route23Width + 6) + 0 ; current map position
-    db $d, Route22Width ; bigness, width
+    dw $C6EB + (ROUTE_23_HEIGHT + 3) * (ROUTE_23_WIDTH + 6) + 0 ; current map position
+    db $d, ROUTE_22_WIDTH ; bigness, width
     db 0, (0 * -2) ; alignments (y, x)
-    dw $C6EF + Route22Width ; window
+    dw $C6EF + ROUTE_22_WIDTH ; window
 
     ; end connections data
 
@@ -25744,7 +25744,7 @@ Route23Blocks: ; 720
 
 Route24_h: ; 0x50682 to 0x506a4 (34 bytes) (id=35)
     db $00 ; tileset
-    db Route24Height, Route24Width ; dimensions (y, x)
+    db ROUTE_24_HEIGHT, ROUTE_24_WIDTH ; dimensions (y, x)
     dw Route24Blocks, Route24Texts, Route24Script ; blocks, texts, scripts
     db SOUTH | EAST ; connections
 
@@ -25752,17 +25752,17 @@ Route24_h: ; 0x50682 to 0x506a4 (34 bytes) (id=35)
 
 	db CERULEAN_CITY
     dw CeruleanCityBlocks + 2 ; connection strip location
-    dw $C6EB + (Route24Height + 3) * (Route24Width + 6) + -3 ; current map position
-    db $10, CeruleanCityWidth ; bigness, width
+    dw $C6EB + (ROUTE_24_HEIGHT + 3) * (ROUTE_24_WIDTH + 6) + -3 ; current map position
+    db $10, CERULEAN_CITY_WIDTH ; bigness, width
     db 0, (-5 * -2) ; alignments (y, x)
-    dw $C6EF + CeruleanCityWidth ; window
+    dw $C6EF + CERULEAN_CITY_WIDTH ; window
 
 	db ROUTE_25
-    dw Route25Blocks + (Route25Width * 0) ; connection strip location
-    dw $C6E5 + (Route24Width + 6) * (0 + 4) ; current map position
-    db Route25Height, Route25Width ; bigness, width
+    dw Route25Blocks + (ROUTE_25_WIDTH * 0) ; connection strip location
+    dw $C6E5 + (ROUTE_24_WIDTH + 6) * (0 + 4) ; current map position
+    db ROUTE_25_HEIGHT, ROUTE_25_WIDTH ; bigness, width
     db (0 * -2), 0 ; alignments (y, x)
-    dw $C6EF + Route25Width ; window
+    dw $C6EF + ROUTE_25_WIDTH ; window
 
     ; end connections data
 
@@ -25790,18 +25790,18 @@ Route24Blocks: ; 180
 
 Route25_h: ; 0x5079b to 0x507b2 (23 bytes) (id=36)
     db $00 ; tileset
-    db Route25Height, Route25Width ; dimensions (y, x)
+    db ROUTE_25_HEIGHT, ROUTE_25_WIDTH ; dimensions (y, x)
     dw Route25Blocks, Route25Texts, Route25Script ; blocks, texts, scripts
     db WEST ; connections
 
     ; connections data
 
 	db ROUTE_24
-    dw Route24Blocks - 3 + (Route24Width) ; connection strip location
-    dw $C6E8 + (Route25Width + 6) * (0 + 3) ; current map position
-    db $c, Route24Width ; bigness, width
-    db (0 * -2), (Route24Width * 2) - 1 ; alignments (y, x)
-    dw $C6EE + 2 * Route24Width ; window
+    dw Route24Blocks - 3 + (ROUTE_24_WIDTH) ; connection strip location
+    dw $C6E8 + (ROUTE_25_WIDTH + 6) * (0 + 3) ; current map position
+    db $c, ROUTE_24_WIDTH ; bigness, width
+    db (0 * -2), (ROUTE_24_WIDTH * 2) - 1 ; alignments (y, x)
+    dw $C6EE + 2 * ROUTE_24_WIDTH ; window
 
     ; end connections data
 
@@ -25836,7 +25836,7 @@ Route25Blocks: ; 270
 
 IndigoPlateau_h: ; 0x5091e to 0x50935 (23 bytes) (id=9)
     db $17 ; tileset
-    db IndigoPlateauHeight, IndigoPlateauWidth ; dimensions (y, x)
+    db INDIGO_PLATEAU_HEIGHT, INDIGO_PLATEAU_WIDTH ; dimensions (y, x)
     dw IndigoPlateauBlocks, IndigoPlateauTexts, IndigoPlateauScript ; blocks, texts, scripts
     db SOUTH ; connections
 
@@ -25844,10 +25844,10 @@ IndigoPlateau_h: ; 0x5091e to 0x50935 (23 bytes) (id=9)
 
 	db ROUTE_23
     dw Route23Blocks ; connection strip location
-    dw $C6EB + (IndigoPlateauHeight + 3) * (IndigoPlateauWidth + 6) + 0 ; current map position
-    db Route23Width, Route23Width ; bigness, width
+    dw $C6EB + (INDIGO_PLATEAU_HEIGHT + 3) * (INDIGO_PLATEAU_WIDTH + 6) + 0 ; current map position
+    db ROUTE_23_WIDTH, ROUTE_23_WIDTH ; bigness, width
     db 0, (0 * -2) ; alignments (y, x)
-    dw $C6EF + Route23Width ; window
+    dw $C6EF + ROUTE_23_WIDTH ; window
 
     ; end connections data
 
@@ -25878,39 +25878,39 @@ IndigoPlateauBlocks: ; 90
 
 SaffronCity_h: ; 0x509a4 to 0x509dc (56 bytes) (id=10)
     db $00 ; tileset
-    db SaffronCityHeight, SaffronCityWidth ; dimensions (y, x)
+    db SAFFRON_CITY_HEIGHT, SAFFRON_CITY_WIDTH ; dimensions (y, x)
     dw SaffronCityBlocks, SaffronCityTexts, SaffronCityScript ; blocks, texts, scripts
     db NORTH | SOUTH | WEST | EAST ; connections
 
     ; connections data
 
 	db ROUTE_5
-    dw Route5Blocks + (Route5Height - 3) * Route5Width ; connection strip location
+    dw Route5Blocks + (ROUTE_5_HEIGHT - 3) * ROUTE_5_WIDTH ; connection strip location
     dw $C6EB + 5 ; current map position
-    db Route5Width, Route5Width ; bigness, width
-    db (Route5Height * 2) - 1, (5 * -2) ; alignments (y, x)
-    dw $C6E9 + Route5Height * (Route5Width + 6) ; window
+    db ROUTE_5_WIDTH, ROUTE_5_WIDTH ; bigness, width
+    db (ROUTE_5_HEIGHT * 2) - 1, (5 * -2) ; alignments (y, x)
+    dw $C6E9 + ROUTE_5_HEIGHT * (ROUTE_5_WIDTH + 6) ; window
 
 	db ROUTE_6
     dw Route6Blocks ; connection strip location
-    dw $C6EB + (SaffronCityHeight + 3) * (SaffronCityWidth + 6) + 5 ; current map position
-    db Route6Width, Route6Width ; bigness, width
+    dw $C6EB + (SAFFRON_CITY_HEIGHT + 3) * (SAFFRON_CITY_WIDTH + 6) + 5 ; current map position
+    db ROUTE_6_WIDTH, ROUTE_6_WIDTH ; bigness, width
     db 0, (5 * -2) ; alignments (y, x)
-    dw $C6EF + Route6Width ; window
+    dw $C6EF + ROUTE_6_WIDTH ; window
 
 	db ROUTE_7
-    dw Route7Blocks - 3 + (Route7Width) ; connection strip location
-    dw $C6E8 + (SaffronCityWidth + 6) * (4 + 3) ; current map position
-    db Route7Height, Route7Width ; bigness, width
-    db (4 * -2), (Route7Width * 2) - 1 ; alignments (y, x)
-    dw $C6EE + 2 * Route7Width ; window
+    dw Route7Blocks - 3 + (ROUTE_7_WIDTH) ; connection strip location
+    dw $C6E8 + (SAFFRON_CITY_WIDTH + 6) * (4 + 3) ; current map position
+    db ROUTE_7_HEIGHT, ROUTE_7_WIDTH ; bigness, width
+    db (4 * -2), (ROUTE_7_WIDTH * 2) - 1 ; alignments (y, x)
+    dw $C6EE + 2 * ROUTE_7_WIDTH ; window
 
 	db ROUTE_8
-    dw Route8Blocks + (Route8Width * 0) ; connection strip location
-    dw $C6E5 + (SaffronCityWidth + 6) * (4 + 4) ; current map position
-    db Route8Height, Route8Width ; bigness, width
+    dw Route8Blocks + (ROUTE_8_WIDTH * 0) ; connection strip location
+    dw $C6E5 + (SAFFRON_CITY_WIDTH + 6) * (4 + 4) ; current map position
+    db ROUTE_8_HEIGHT, ROUTE_8_WIDTH ; bigness, width
     db (4 * -2), 0 ; alignments (y, x)
-    dw $C6EF + Route8Width ; window
+    dw $C6EF + ROUTE_8_WIDTH ; window
 
     ; end connections data
 
@@ -26654,7 +26654,7 @@ Route25Text11: ; 0x5178c
 
 VictoryRoad2_h: ; 0x51791 to 0x5179d (12 bytes) (id=194)
     db $11 ; tileset
-    db VictoryRoad2Height, VictoryRoad2Width ; dimensions (y, x)
+    db VICTORY_ROAD_2_HEIGHT, VICTORY_ROAD_2_WIDTH ; dimensions (y, x)
     dw VictoryRoad2Blocks, VictoryRoad2Texts, VictoryRoad2Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -26766,7 +26766,7 @@ VictoryRoad2Blocks: ; 135
 
 MtMoon2_h: ; 0x51a36 to 0x51a42 (12 bytes) (id=60)
     db $11 ; tileset
-    db MtMoon2Height, MtMoon2Width ; dimensions (y, x)
+    db MT_MOON_2_HEIGHT, MT_MOON_2_WIDTH ; dimensions (y, x)
     dw MtMoon2Blocks, MtMoon2Texts, MtMoon2Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -26815,7 +26815,7 @@ MtMoon2Blocks: ; 196
 
 SilphCo7_h: ; 0x51b55 to 0x51b61 (12 bytes) (id=212)
     db $16 ; tileset
-    db SilphCo7Height, SilphCo7Width ; dimensions (y, x)
+    db SILPH_CO_7F_HEIGHT, SILPH_CO_7F_WIDTH ; dimensions (y, x)
     dw SilphCo7Blocks, SilphCo7Texts, SilphCo7Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -27011,7 +27011,7 @@ SilphCo7Blocks: ; 117
 
 Mansion2_h: ; 0x51fcc to 0x51fd8 (12 bytes) (id=214)
     db $16 ; tileset
-    db Mansion2Height, Mansion2Width ; dimensions (y, x)
+    db MANSION_2_HEIGHT, MANSION_2_WIDTH ; dimensions (y, x)
     dw Mansion2Blocks, Mansion2Texts, Mansion2Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -27079,7 +27079,7 @@ Mansion2Blocks:
 
 Mansion3_h: ; 0x521e2 to 0x521ee (12 bytes) (id=215)
     db $16 ; tileset
-    db Mansion3Height, Mansion3Width ; dimensions (y, x)
+    db MANSION_3_HEIGHT, MANSION_3_WIDTH ; dimensions (y, x)
     dw Mansion3Blocks, Mansion3Texts, Mansion3Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -27146,7 +27146,7 @@ Mansion3Blocks:
 
 Mansion4_h: ; 0x523ad to 0x523b9 (12 bytes) (id=216)
     db $16 ; tileset
-    db Mansion4Height, Mansion4Width ; dimensions (y, x)
+    db MANSION_4_HEIGHT, MANSION_4_WIDTH ; dimensions (y, x)
     dw Mansion4Blocks, Mansion4Texts, Mansion4Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -27621,7 +27621,7 @@ SECTION "bank15",DATA,BANK[$15]
 
 Route2_h:
 	db 00; Tileset
-	db Route2Height,Route2Width ;Height,Width blocks (1 block = 4x4 tiles)
+	db ROUTE_2_HEIGHT,ROUTE_2_WIDTH ;Height,Width blocks (1 block = 4x4 tiles)
 	dw $407E ;Map-Pointer
 	dw $54E6 ;Maps text pointer
 	dw $54E3 ;Maps script pointer
@@ -27682,25 +27682,25 @@ Route2Blocks: ; 360
 
 Route3_h: ; 0x541e6 to 0x54208 (34 bytes) (id=14)
     db $00 ; tileset
-    db Route3Height, Route3Width ; dimensions (y, x)
+    db ROUTE_3_HEIGHT, ROUTE_3_WIDTH ; dimensions (y, x)
     dw Route3Blocks, Route3Texts, Route3Script ; blocks, texts, scripts
     db NORTH | WEST ; connections
 
     ; connections data
 
 	db ROUTE_4
-    dw Route4Blocks + (Route4Height - 3) * Route4Width ; connection strip location
+    dw Route4Blocks + (ROUTE_4_HEIGHT - 3) * ROUTE_4_WIDTH ; connection strip location
     dw $C6EB + 25 ; current map position
-    db $d, Route4Width ; bigness, width
-    db (Route4Height * 2) - 1, (25 * -2) ; alignments (y, x)
-    dw $C6E9 + Route4Height * (Route4Width + 6) ; window
+    db $d, ROUTE_4_WIDTH ; bigness, width
+    db (ROUTE_4_HEIGHT * 2) - 1, (25 * -2) ; alignments (y, x)
+    dw $C6E9 + ROUTE_4_HEIGHT * (ROUTE_4_WIDTH + 6) ; window
 
 	db PEWTER_CITY
-    dw PewterCityBlocks - 3 + (PewterCityWidth * 2) ; connection strip location
-    dw $C6E8 + (Route3Width + 6) * (-3 + 3) ; current map position
-    db $f, PewterCityWidth ; bigness, width
-    db (-4 * -2), (PewterCityWidth * 2) - 1 ; alignments (y, x)
-    dw $C6EE + 2 * PewterCityWidth ; window
+    dw PewterCityBlocks - 3 + (PEWTER_CITY_WIDTH * 2) ; connection strip location
+    dw $C6E8 + (ROUTE_3_WIDTH + 6) * (-3 + 3) ; current map position
+    db $f, PEWTER_CITY_WIDTH ; bigness, width
+    db (-4 * -2), (PEWTER_CITY_WIDTH * 2) - 1 ; alignments (y, x)
+    dw $C6EE + 2 * PEWTER_CITY_WIDTH ; window
 
     ; end connections data
 
@@ -27730,7 +27730,7 @@ Route3Blocks: ; 315
 
 Route4_h: ; 0x54390 to 0x543b2 (34 bytes) (id=15)
     db $00 ; tileset
-    db Route4Height, Route4Width ; dimensions (y, x)
+    db ROUTE_4_HEIGHT, ROUTE_4_WIDTH ; dimensions (y, x)
     dw Route4Blocks, Route4Texts, Route4Script; blocks, texts, scripts
     db SOUTH | EAST ; connections
 
@@ -27738,17 +27738,17 @@ Route4_h: ; 0x54390 to 0x543b2 (34 bytes) (id=15)
 
 	db ROUTE_3
     dw Route3Blocks + 22 ; connection strip location
-    dw $C6EB + (Route4Height + 3) * (Route4Width + 6) + -3 ; current map position
-    db $d, Route3Width ; bigness, width
+    dw $C6EB + (ROUTE_4_HEIGHT + 3) * (ROUTE_4_WIDTH + 6) + -3 ; current map position
+    db $d, ROUTE_3_WIDTH ; bigness, width
     db 0, (-25 * -2) ; alignments (y, x)
-    dw $C6EF + Route3Width ; window
+    dw $C6EF + ROUTE_3_WIDTH ; window
 
 	db CERULEAN_CITY
-    dw CeruleanCityBlocks + (CeruleanCityWidth) ; connection strip location
-    dw $C6E5 + (Route4Width + 6) * (-3 + 4) ; current map position
-    db $f, CeruleanCityWidth ; bigness, width
+    dw CeruleanCityBlocks + (CERULEAN_CITY_WIDTH) ; connection strip location
+    dw $C6E5 + (ROUTE_4_WIDTH + 6) * (-3 + 4) ; current map position
+    db $f, CERULEAN_CITY_WIDTH ; bigness, width
     db (-4 * -2), 0 ; alignments (y, x)
-    dw $C6EF + CeruleanCityWidth ; window
+    dw $C6EF + CERULEAN_CITY_WIDTH ; window
 
     ; end connections data
 
@@ -27782,25 +27782,25 @@ Route4Blocks: ; 405
 
 Route5_h: ; 0x54581 to 0x545a3 (34 bytes) (id=16)
     db $00 ; tileset
-    db Route5Height, Route5Width ; dimensions (y, x)
+    db ROUTE_5_HEIGHT, ROUTE_5_WIDTH ; dimensions (y, x)
     dw Route5Blocks, Route5Texts, Route5Script ; blocks, texts, scripts
     db NORTH | SOUTH ; connections
 
     ; connections data
 
 	db CERULEAN_CITY
-    dw CeruleanCityBlocks + (CeruleanCityHeight - 3) * CeruleanCityWidth + 2 ; connection strip location
+    dw CeruleanCityBlocks + (CERULEAN_CITY_HEIGHT - 3) * CERULEAN_CITY_WIDTH + 2 ; connection strip location
     dw $C6EB + -3 ; current map position
-    db $10, CeruleanCityWidth ; bigness, width
-    db (CeruleanCityHeight * 2) - 1, (-5 * -2) ; alignments (y, x)
-    dw $C6E9 + CeruleanCityHeight * (CeruleanCityWidth + 6) ; window
+    db $10, CERULEAN_CITY_WIDTH ; bigness, width
+    db (CERULEAN_CITY_HEIGHT * 2) - 1, (-5 * -2) ; alignments (y, x)
+    dw $C6E9 + CERULEAN_CITY_HEIGHT * (CERULEAN_CITY_WIDTH + 6) ; window
 
 	db SAFFRON_CITY
     dw SaffronCityBlocks + 2 ; connection strip location
-    dw $C6EB + (Route5Height + 3) * (Route5Width + 6) + -3 ; current map position
-    db $10, SaffronCityWidth ; bigness, width
+    dw $C6EB + (ROUTE_5_HEIGHT + 3) * (ROUTE_5_WIDTH + 6) + -3 ; current map position
+    db $10, SAFFRON_CITY_WIDTH ; bigness, width
     db 0, (-5 * -2) ; alignments (y, x)
-    dw $C6EF + SaffronCityWidth ; window
+    dw $C6EF + SAFFRON_CITY_WIDTH ; window
 
     ; end connections data
 
@@ -27833,25 +27833,25 @@ Route5Blocks: ; 180
 
 Route9_h: ; 0x54686 to 0x546a8 (34 bytes) (id=20)
     db $00 ; tileset
-    db Route9Height, Route9Width ; dimensions (y, x)
+    db ROUTE_9_HEIGHT, ROUTE_9_WIDTH ; dimensions (y, x)
     dw Route9Blocks, Route9Texts, Route9Script ; blocks, texts, scripts
     db WEST | EAST ; connections
 
     ; connections data
 
 	db CERULEAN_CITY
-    dw CeruleanCityBlocks - 3 + (CeruleanCityWidth * 2) ; connection strip location
-    dw $C6E8 + (Route9Width + 6) * (-3 + 3) ; current map position
-    db $f, CeruleanCityWidth ; bigness, width
-    db (-4 * -2), (CeruleanCityWidth * 2) - 1 ; alignments (y, x)
-    dw $C6EE + 2 * CeruleanCityWidth ; window
+    dw CeruleanCityBlocks - 3 + (CERULEAN_CITY_WIDTH * 2) ; connection strip location
+    dw $C6E8 + (ROUTE_9_WIDTH + 6) * (-3 + 3) ; current map position
+    db $f, CERULEAN_CITY_WIDTH ; bigness, width
+    db (-4 * -2), (CERULEAN_CITY_WIDTH * 2) - 1 ; alignments (y, x)
+    dw $C6EE + 2 * CERULEAN_CITY_WIDTH ; window
 
 	db ROUTE_10
-    dw Route10Blocks + (Route10Width * 0) ; connection strip location
-    dw $C6E5 + (Route9Width + 6) * (0 + 4) ; current map position
-    db $c, Route10Width ; bigness, width
+    dw Route10Blocks + (ROUTE_10_WIDTH * 0) ; connection strip location
+    dw $C6E5 + (ROUTE_9_WIDTH + 6) * (0 + 4) ; current map position
+    db $c, ROUTE_10_WIDTH ; bigness, width
     db (0 * -2), 0 ; alignments (y, x)
-    dw $C6EF + Route10Width ; window
+    dw $C6EF + ROUTE_10_WIDTH ; window
 
     ; end connections data
 
@@ -27882,25 +27882,25 @@ Route9Blocks: ; 270
 
 Route13_h: ; 0x5480c to 0x5482e (34 bytes) (id=24)
     db $00 ; tileset
-    db Route13Height, Route13Width ; dimensions (y, x)
+    db ROUTE_13_HEIGHT, ROUTE_13_WIDTH ; dimensions (y, x)
     dw Route13Blocks, Route13Texts, Route13Script ; blocks, texts, scripts
     db NORTH | WEST ; connections
 
     ; connections data
 
 	db ROUTE_12
-    dw Route12Blocks + (Route12Height - 3) * Route12Width ; connection strip location
+    dw Route12Blocks + (ROUTE_12_HEIGHT - 3) * ROUTE_12_WIDTH ; connection strip location
     dw $C6EB + 20 ; current map position
-    db Route12Width, Route12Width ; bigness, width
-    db (Route12Height * 2) - 1, (20 * -2) ; alignments (y, x)
-    dw $C6E9 + Route12Height * (Route12Width + 6) ; window
+    db ROUTE_12_WIDTH, ROUTE_12_WIDTH ; bigness, width
+    db (ROUTE_12_HEIGHT * 2) - 1, (20 * -2) ; alignments (y, x)
+    dw $C6E9 + ROUTE_12_HEIGHT * (ROUTE_12_WIDTH + 6) ; window
 
 	db ROUTE_14
-    dw Route14Blocks - 3 + (Route14Width) ; connection strip location
-    dw $C6E8 + (Route13Width + 6) * (0 + 3) ; current map position
-    db $c, Route14Width ; bigness, width
-    db (0 * -2), (Route14Width * 2) - 1 ; alignments (y, x)
-    dw $C6EE + 2 * Route14Width ; window
+    dw Route14Blocks - 3 + (ROUTE_14_WIDTH) ; connection strip location
+    dw $C6E8 + (ROUTE_13_WIDTH + 6) * (0 + 3) ; current map position
+    db $c, ROUTE_14_WIDTH ; bigness, width
+    db (0 * -2), (ROUTE_14_WIDTH * 2) - 1 ; alignments (y, x)
+    dw $C6EE + 2 * ROUTE_14_WIDTH ; window
 
     ; end connections data
 
@@ -27933,25 +27933,25 @@ Route13Blocks: ; 270
 
 Route14_h: ; 0x54999 to 0x549bb (34 bytes) (id=25)
     db $00 ; tileset
-    db Route14Height, Route14Width ; dimensions (y, x)
+    db ROUTE_14_HEIGHT, ROUTE_14_WIDTH ; dimensions (y, x)
     dw Route14Blocks, Route14Texts, Route14Script ; blocks, texts, scripts
     db WEST | EAST ; connections
 
     ; connections data
 
 	db ROUTE_15
-    dw Route15Blocks - 3 + (Route15Width) ; connection strip location
-    dw $C6E8 + (Route14Width + 6) * (18 + 3) ; current map position
-    db Route15Height, Route15Width ; bigness, width
-    db (18 * -2), (Route15Width * 2) - 1 ; alignments (y, x)
-    dw $C6EE + 2 * Route15Width ; window
+    dw Route15Blocks - 3 + (ROUTE_15_WIDTH) ; connection strip location
+    dw $C6E8 + (ROUTE_14_WIDTH + 6) * (18 + 3) ; current map position
+    db ROUTE_15_HEIGHT, ROUTE_15_WIDTH ; bigness, width
+    db (18 * -2), (ROUTE_15_WIDTH * 2) - 1 ; alignments (y, x)
+    dw $C6EE + 2 * ROUTE_15_WIDTH ; window
 
 	db ROUTE_13
-    dw Route13Blocks + (Route13Width * 0) ; connection strip location
-    dw $C6E5 + (Route14Width + 6) * (0 + 4) ; current map position
-    db Route13Height, Route13Width ; bigness, width
+    dw Route13Blocks + (ROUTE_13_WIDTH * 0) ; connection strip location
+    dw $C6E5 + (ROUTE_14_WIDTH + 6) * (0 + 4) ; current map position
+    db ROUTE_13_HEIGHT, ROUTE_13_WIDTH ; bigness, width
     db (0 * -2), 0 ; alignments (y, x)
-    dw $C6EF + Route13Width ; window
+    dw $C6EF + ROUTE_13_WIDTH ; window
 
     ; end connections data
 
@@ -27982,25 +27982,25 @@ Route14Blocks: ; 270
 
 Route17_h: ; 0x54b20 to 0x54b42 (34 bytes) (id=28)
     db $00 ; tileset
-    db Route17Height, Route17Width ; dimensions (y, x)
+    db ROUTE_17_HEIGHT, ROUTE_17_WIDTH ; dimensions (y, x)
     dw Route17Blocks, Route17Texts, Route17Script ; blocks, texts, scripts
     db NORTH | SOUTH ; connections
 
     ; connections data
 
 	db ROUTE_16
-    dw Route16Blocks + (Route16Height - 3) * Route16Width ; connection strip location
+    dw Route16Blocks + (ROUTE_16_HEIGHT - 3) * ROUTE_16_WIDTH ; connection strip location
     dw $C6EB + 0 ; current map position
-    db $d, Route16Width ; bigness, width
-    db (Route16Height * 2) - 1, (0 * -2) ; alignments (y, x)
-    dw $C6E9 + Route16Height * (Route16Width + 6) ; window
+    db $d, ROUTE_16_WIDTH ; bigness, width
+    db (ROUTE_16_HEIGHT * 2) - 1, (0 * -2) ; alignments (y, x)
+    dw $C6E9 + ROUTE_16_HEIGHT * (ROUTE_16_WIDTH + 6) ; window
 
 	db ROUTE_18
     dw Route18Blocks ; connection strip location
-    dw $C6EB + (Route17Height + 3) * (Route17Width + 6) + 0 ; current map position
-    db $d, Route18Width ; bigness, width
+    dw $C6EB + (ROUTE_17_HEIGHT + 3) * (ROUTE_17_WIDTH + 6) + 0 ; current map position
+    db $d, ROUTE_18_WIDTH ; bigness, width
     db 0, (0 * -2) ; alignments (y, x)
-    dw $C6EF + Route18Width ; window
+    dw $C6EF + ROUTE_18_WIDTH ; window
 
     ; end connections data
 
@@ -28036,25 +28036,25 @@ Route17Blocks: ; 720
 
 Route19_h: ; 0x54e78 to 0x54e9a (34 bytes) (id=30)
     db $00 ; tileset
-    db Route19Height, Route19Width ; dimensions (y, x)
+    db ROUTE_19_HEIGHT, ROUTE_19_WIDTH ; dimensions (y, x)
     dw Route19Blocks, Route19Texts, Route19Script ; blocks, texts, scripts
     db NORTH | WEST ; connections
 
     ; connections data
 
 	db FUCHSIA_CITY
-    dw FuchsiaCityBlocks + (FuchsiaCityHeight - 3) * FuchsiaCityWidth + 2 ; connection strip location
+    dw FuchsiaCityBlocks + (FUCHSIA_CITY_HEIGHT - 3) * FUCHSIA_CITY_WIDTH + 2 ; connection strip location
     dw $C6EB + -3 ; current map position
-    db $10, FuchsiaCityWidth ; bigness, width
-    db (FuchsiaCityHeight * 2) - 1, (-5 * -2) ; alignments (y, x)
-    dw $C6E9 + FuchsiaCityHeight * (FuchsiaCityWidth + 6) ; window
+    db $10, FUCHSIA_CITY_WIDTH ; bigness, width
+    db (FUCHSIA_CITY_HEIGHT * 2) - 1, (-5 * -2) ; alignments (y, x)
+    dw $C6E9 + FUCHSIA_CITY_HEIGHT * (FUCHSIA_CITY_WIDTH + 6) ; window
 
 	db ROUTE_20
-    dw Route20Blocks - 3 + (Route20Width) ; connection strip location
-    dw $C6E8 + (Route19Width + 6) * (18 + 3) ; current map position
-    db Route20Height, Route20Width ; bigness, width
-    db (18 * -2), (Route20Width * 2) - 1 ; alignments (y, x)
-    dw $C6EE + 2 * Route20Width ; window
+    dw Route20Blocks - 3 + (ROUTE_20_WIDTH) ; connection strip location
+    dw $C6E8 + (ROUTE_19_WIDTH + 6) * (18 + 3) ; current map position
+    db ROUTE_20_HEIGHT, ROUTE_20_WIDTH ; bigness, width
+    db (18 * -2), (ROUTE_20_WIDTH * 2) - 1 ; alignments (y, x)
+    dw $C6EE + 2 * ROUTE_20_WIDTH ; window
 
     ; end connections data
 
@@ -28085,25 +28085,25 @@ Route19Blocks: ; 270
 
 Route21_h: ; 0x54fff to 0x55021 (34 bytes) (id=32)
     db $00 ; tileset
-    db Route21Height, Route21Width ; dimensions (y, x)
+    db ROUTE_21_HEIGHT, ROUTE_21_WIDTH ; dimensions (y, x)
     dw Route21Blocks, Route21Texts, Route21Script ; blocks, texts, scripts
     db NORTH | SOUTH ; connections
 
     ; connections data
 
 	db PALLET_TOWN
-    dw PalletTownBlocks + (PalletTownHeight - 3) * PalletTownWidth ; connection strip location
+    dw PalletTownBlocks + (PALLET_TOWN_HEIGHT - 3) * PALLET_TOWN_WIDTH ; connection strip location
     dw $C6EB + 0 ; current map position
-    db PalletTownWidth, PalletTownWidth ; bigness, width
-    db (PalletTownHeight * 2) - 1, (0 * -2) ; alignments (y, x)
-    dw $C6E9 + PalletTownHeight * (PalletTownWidth + 6) ; window
+    db PALLET_TOWN_WIDTH, PALLET_TOWN_WIDTH ; bigness, width
+    db (PALLET_TOWN_HEIGHT * 2) - 1, (0 * -2) ; alignments (y, x)
+    dw $C6E9 + PALLET_TOWN_HEIGHT * (PALLET_TOWN_WIDTH + 6) ; window
 
 	db CINNABAR_ISLAND
     dw CinnabarIslandBlocks ; connection strip location
-    dw $C6EB + (Route21Height + 3) * (Route21Width + 6) + 0 ; current map position
-    db CinnabarIslandWidth, CinnabarIslandWidth ; bigness, width
+    dw $C6EB + (ROUTE_21_HEIGHT + 3) * (ROUTE_21_WIDTH + 6) + 0 ; current map position
+    db CINNABAR_ISLAND_WIDTH, CINNABAR_ISLAND_WIDTH ; bigness, width
     db 0, (0 * -2) ; alignments (y, x)
-    dw $C6EF + CinnabarIslandWidth ; window
+    dw $C6EF + CINNABAR_ISLAND_WIDTH ; window
 
     ; end connections data
 
@@ -28855,7 +28855,7 @@ INCBIN "baserom.gbc",$55fdd,$87
 
 VermilionHouse2_h: ; 0x56064 to 0x56070 (12 bytes) (id=163)
     db $08 ; tileset
-    db VermilionHouse2Height, VermilionHouse2Width ; dimensions (y, x)
+    db VERMILION_HOUSE_2_HEIGHT, VERMILION_HOUSE_2_WIDTH ; dimensions (y, x)
     dw VermilionHouse2Blocks, VermilionHouse2Texts, VermilionHouse2Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -28918,7 +28918,7 @@ VermilionHouse2Object: ; 0x560cf (size=26)
 
 CeladonMart2_h: ; 0x560e9 to 0x560f5 (12 bytes) (id=123)
     db $12 ; tileset
-    db CeladonMart2Height, CeladonMart2Width ; dimensions (y, x)
+    db CELADON_MART_2_HEIGHT, CELADON_MART_2_WIDTH ; dimensions (y, x)
     dw CeladonMart2Blocks, CeladonMart2Texts, CeladonMart2Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -28970,7 +28970,7 @@ CeladonMart2Blocks: ; 40
 
 FuchsiaHouse3_h: ; 0x56170 to 0x5617c (12 bytes) (id=164)
     db $0d ; tileset
-    db FuchsiaHouse3Height, FuchsiaHouse3Width ; dimensions (y, x)
+    db FUCHSIA_HOUSE_3_HEIGHT, FUCHSIA_HOUSE_3_WIDTH ; dimensions (y, x)
     dw FuchsiaHouse3Blocks, FuchsiaHouse3Texts, FuchsiaHouse3Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -29035,7 +29035,7 @@ FuchsiaHouse3Object: ; 0x56221 (size=34)
 
 DayCareM_h: ; 0x56243 to 0x5624f (12 bytes) (id=72)
     db $08 ; tileset
-    db DayCareMHeight, DayCareMWidth ; dimensions (y, x)
+    db DAYCAREM_HEIGHT, DAYCAREM_WIDTH ; dimensions (y, x)
     dw DayCareMBlocks, DayCareMTexts, DayCareMScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -29124,7 +29124,7 @@ DayCareMObject: ; 0x56459 (size=26)
 
 Route12House_h: ; 0x56473 to 0x5647f (12 bytes) (id=189)
     db $08 ; tileset
-    db Route12HouseHeight, Route12HouseWidth ; dimensions (y, x)
+    db ROUTE_12_HOUSE_HEIGHT, ROUTE_12_HOUSE_WIDTH ; dimensions (y, x)
     dw Route12HouseBlocks, Route12HouseTexts, Route12HouseScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -29187,7 +29187,7 @@ Route12HouseObject: ; 0x564de (size=26)
 
 SilphCo8_h: ; 0x564f8 to 0x56504 (12 bytes) (id=213)
     db $16 ; tileset
-    db SilphCo8Height, SilphCo8Width ; dimensions (y, x)
+    db SILPH_CO_8F_HEIGHT, SILPH_CO_8F_WIDTH ; dimensions (y, x)
     dw SilphCo8Blocks, SilphCo8Texts, SilphCo8Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -29282,25 +29282,25 @@ SECTION "bank16",DATA,BANK[$16]
 
 Route6_h: ; 0x58000 to 0x58022 (34 bytes) (id=17)
     db $00 ; tileset
-    db Route6Height, Route6Width ; dimensions (y, x)
+    db ROUTE_6_HEIGHT, ROUTE_6_WIDTH ; dimensions (y, x)
     dw Route6Blocks, Route6Texts, Route6Script ; blocks, texts, scripts
     db NORTH | SOUTH ; connections
 
     ; connections data
 
 	db SAFFRON_CITY
-    dw SaffronCityBlocks + (SaffronCityHeight - 3) * SaffronCityWidth + 2 ; connection strip location
+    dw SaffronCityBlocks + (SAFFRON_CITY_HEIGHT - 3) * SAFFRON_CITY_WIDTH + 2 ; connection strip location
     dw $C6EB + -3 ; current map position
-    db $10, SaffronCityWidth ; bigness, width
-    db (SaffronCityHeight * 2) - 1, (-5 * -2) ; alignments (y, x)
-    dw $C6E9 + SaffronCityHeight * (SaffronCityWidth + 6) ; window
+    db $10, SAFFRON_CITY_WIDTH ; bigness, width
+    db (SAFFRON_CITY_HEIGHT * 2) - 1, (-5 * -2) ; alignments (y, x)
+    dw $C6E9 + SAFFRON_CITY_HEIGHT * (SAFFRON_CITY_WIDTH + 6) ; window
 
 	db VERMILION_CITY
     dw VermilionCityBlocks + 2 ; connection strip location
-    dw $C6EB + (Route6Height + 3) * (Route6Width + 6) + -3 ; current map position
-    db $10, VermilionCityWidth ; bigness, width
+    dw $C6EB + (ROUTE_6_HEIGHT + 3) * (ROUTE_6_WIDTH + 6) + -3 ; current map position
+    db $10, VERMILION_CITY_WIDTH ; bigness, width
     db 0, (-5 * -2) ; alignments (y, x)
-    dw $C6EF + VermilionCityWidth ; window
+    dw $C6EF + VERMILION_CITY_WIDTH ; window
 
     ; end connections data
 
@@ -29337,25 +29337,25 @@ Route6Blocks: ; 180
 
 Route8_h: ; 0x5812d to 0x5814f (34 bytes) (id=19)
     db $00 ; tileset
-    db Route8Height, Route8Width ; dimensions (y, x)
+    db ROUTE_8_HEIGHT, ROUTE_8_WIDTH ; dimensions (y, x)
     dw Route8Blocks, Route8Texts, Route8Script ; blocks, texts, scripts
     db WEST | EAST ; connections
 
     ; connections data
 
 	db SAFFRON_CITY
-    dw SaffronCityBlocks - 3 + (SaffronCityWidth * 2) ; connection strip location
-    dw $C6E8 + (Route8Width + 6) * (-3 + 3) ; current map position
-    db $f, SaffronCityWidth ; bigness, width
-    db (-4 * -2), (SaffronCityWidth * 2) - 1 ; alignments (y, x)
-    dw $C6EE + 2 * SaffronCityWidth ; window
+    dw SaffronCityBlocks - 3 + (SAFFRON_CITY_WIDTH * 2) ; connection strip location
+    dw $C6E8 + (ROUTE_8_WIDTH + 6) * (-3 + 3) ; current map position
+    db $f, SAFFRON_CITY_WIDTH ; bigness, width
+    db (-4 * -2), (SAFFRON_CITY_WIDTH * 2) - 1 ; alignments (y, x)
+    dw $C6EE + 2 * SAFFRON_CITY_WIDTH ; window
 
 	db LAVENDER_TOWN
-    dw LavenderTownBlocks + (LavenderTownWidth * 0) ; connection strip location
-    dw $C6E5 + (Route8Width + 6) * (0 + 4) ; current map position
-    db LavenderTownHeight, LavenderTownWidth ; bigness, width
+    dw LavenderTownBlocks + (LAVENDER_TOWN_WIDTH * 0) ; connection strip location
+    dw $C6E5 + (ROUTE_8_WIDTH + 6) * (0 + 4) ; current map position
+    db LAVENDER_TOWN_HEIGHT, LAVENDER_TOWN_WIDTH ; bigness, width
     db (0 * -2), 0 ; alignments (y, x)
-    dw $C6EF + LavenderTownWidth ; window
+    dw $C6EF + LAVENDER_TOWN_WIDTH ; window
 
     ; end connections data
 
@@ -29397,7 +29397,7 @@ Route8Blocks: ; 270
 
 Route10_h: ; 0x582d4 to 0x582f6 (34 bytes) (id=21)
     db $00 ; tileset
-    db Route10Height, Route10Width ; dimensions (y, x)
+    db ROUTE_10_HEIGHT, ROUTE_10_WIDTH ; dimensions (y, x)
     dw Route10Blocks, Route10Texts, Route10Script ; blocks, texts, scripts
     db SOUTH | WEST ; connections
 
@@ -29405,17 +29405,17 @@ Route10_h: ; 0x582d4 to 0x582f6 (34 bytes) (id=21)
 
 	db LAVENDER_TOWN
     dw LavenderTownBlocks ; connection strip location
-    dw $C6EB + (Route10Height + 3) * (Route10Width + 6) + 0 ; current map position
-    db LavenderTownWidth, LavenderTownWidth ; bigness, width
+    dw $C6EB + (ROUTE_10_HEIGHT + 3) * (ROUTE_10_WIDTH + 6) + 0 ; current map position
+    db LAVENDER_TOWN_WIDTH, LAVENDER_TOWN_WIDTH ; bigness, width
     db 0, (0 * -2) ; alignments (y, x)
-    dw $C6EF + LavenderTownWidth ; window
+    dw $C6EF + LAVENDER_TOWN_WIDTH ; window
 
 	db ROUTE_9
-    dw Route9Blocks - 3 + (Route9Width) ; connection strip location
-    dw $C6E8 + (Route10Width + 6) * (0 + 3) ; current map position
-    db Route9Height, Route9Width ; bigness, width
-    db (0 * -2), (Route9Width * 2) - 1 ; alignments (y, x)
-    dw $C6EE + 2 * Route9Width ; window
+    dw Route9Blocks - 3 + (ROUTE_9_WIDTH) ; connection strip location
+    dw $C6E8 + (ROUTE_10_WIDTH + 6) * (0 + 3) ; current map position
+    db ROUTE_9_HEIGHT, ROUTE_9_WIDTH ; bigness, width
+    db (0 * -2), (ROUTE_9_WIDTH * 2) - 1 ; alignments (y, x)
+    dw $C6EE + 2 * ROUTE_9_WIDTH ; window
 
     ; end connections data
 
@@ -29455,25 +29455,25 @@ Route10Blocks: ; 360
 
 Route11_h: ; 0x584be to 0x584e0 (34 bytes) (id=22)
     db $00 ; tileset
-    db Route11Height, Route11Width ; dimensions (y, x)
+    db ROUTE_11_HEIGHT, ROUTE_11_WIDTH ; dimensions (y, x)
     dw Route11Blocks, Route11Texts, Route11Script ; blocks, texts, scripts
     db WEST | EAST ; connections
 
     ; connections data
 
 	db VERMILION_CITY
-    dw VermilionCityBlocks - 3 + (VermilionCityWidth * 2) ; connection strip location
-    dw $C6E8 + (Route11Width + 6) * (-3 + 3) ; current map position
-    db $f, VermilionCityWidth ; bigness, width
-    db (-4 * -2), (VermilionCityWidth * 2) - 1 ; alignments (y, x)
-    dw $C6EE + 2 * VermilionCityWidth ; window
+    dw VermilionCityBlocks - 3 + (VERMILION_CITY_WIDTH * 2) ; connection strip location
+    dw $C6E8 + (ROUTE_11_WIDTH + 6) * (-3 + 3) ; current map position
+    db $f, VERMILION_CITY_WIDTH ; bigness, width
+    db (-4 * -2), (VERMILION_CITY_WIDTH * 2) - 1 ; alignments (y, x)
+    dw $C6EE + 2 * VERMILION_CITY_WIDTH ; window
 
 	db ROUTE_12
-    dw Route12Blocks + (Route12Width * 24) ; connection strip location
-    dw $C6E5 + (Route11Width + 6) * (-3 + 4) ; current map position
-    db $f, Route12Width ; bigness, width
+    dw Route12Blocks + (ROUTE_12_WIDTH * 24) ; connection strip location
+    dw $C6E5 + (ROUTE_11_WIDTH + 6) * (-3 + 4) ; current map position
+    db $f, ROUTE_12_WIDTH ; bigness, width
     db (-27 * -2), 0 ; alignments (y, x)
-    dw $C6EF + Route12Width ; window
+    dw $C6EF + ROUTE_12_WIDTH ; window
 
     ; end connections data
 
@@ -29516,32 +29516,32 @@ Route11Blocks: ; 270
 
 Route12_h: ; 0x5866d to 0x5869a (45 bytes) (id=23)
     db $00 ; tileset
-    db Route12Height, Route12Width ; dimensions (y, x)
+    db ROUTE_12_HEIGHT, ROUTE_12_WIDTH ; dimensions (y, x)
     dw Route12Blocks, Route12Texts, Route12Script ; blocks, texts, scripts
     db NORTH | SOUTH | WEST ; connections
 
     ; connections data
 
 	db LAVENDER_TOWN
-    dw LavenderTownBlocks + (LavenderTownHeight - 3) * LavenderTownWidth ; connection strip location
+    dw LavenderTownBlocks + (LAVENDER_TOWN_HEIGHT - 3) * LAVENDER_TOWN_WIDTH ; connection strip location
     dw $C6EB + 0 ; current map position
-    db LavenderTownWidth, LavenderTownWidth ; bigness, width
-    db (LavenderTownHeight * 2) - 1, (0 * -2) ; alignments (y, x)
-    dw $C6E9 + LavenderTownHeight * (LavenderTownWidth + 6) ; window
+    db LAVENDER_TOWN_WIDTH, LAVENDER_TOWN_WIDTH ; bigness, width
+    db (LAVENDER_TOWN_HEIGHT * 2) - 1, (0 * -2) ; alignments (y, x)
+    dw $C6E9 + LAVENDER_TOWN_HEIGHT * (LAVENDER_TOWN_WIDTH + 6) ; window
 
 	db ROUTE_13
     dw Route13Blocks + 17 ; connection strip location
-    dw $C6EB + (Route12Height + 3) * (Route12Width + 6) + -3 ; current map position
-    db $d, Route13Width ; bigness, width
+    dw $C6EB + (ROUTE_12_HEIGHT + 3) * (ROUTE_12_WIDTH + 6) + -3 ; current map position
+    db $d, ROUTE_13_WIDTH ; bigness, width
     db 0, (-20 * -2) ; alignments (y, x)
-    dw $C6EF + Route13Width ; window
+    dw $C6EF + ROUTE_13_WIDTH ; window
 
 	db ROUTE_11
-    dw Route11Blocks - 3 + (Route11Width) ; connection strip location
-    dw $C6E8 + (Route12Width + 6) * (27 + 3) ; current map position
-    db Route11Height, Route11Width ; bigness, width
-    db (27 * -2), (Route11Width * 2) - 1 ; alignments (y, x)
-    dw $C6EE + 2 * Route11Width ; window
+    dw Route11Blocks - 3 + (ROUTE_11_WIDTH) ; connection strip location
+    dw $C6E8 + (ROUTE_12_WIDTH + 6) * (27 + 3) ; current map position
+    db ROUTE_11_HEIGHT, ROUTE_11_WIDTH ; bigness, width
+    db (27 * -2), (ROUTE_11_WIDTH * 2) - 1 ; alignments (y, x)
+    dw $C6EE + 2 * ROUTE_11_WIDTH ; window
 
     ; end connections data
 
@@ -29583,25 +29583,25 @@ Route12Blocks: ; 540
 
 Route15_h: ; 0x5892c to 0x5894e (34 bytes) (id=26)
     db $00 ; tileset
-    db Route15Height, Route15Width ; dimensions (y, x)
+    db ROUTE_15_HEIGHT, ROUTE_15_WIDTH ; dimensions (y, x)
     dw Route15Blocks, Route15Texts, Route15Script ; blocks, texts, scripts
     db WEST | EAST ; connections
 
     ; connections data
 
 	db FUCHSIA_CITY
-    dw FuchsiaCityBlocks - 3 + (FuchsiaCityWidth * 2) ; connection strip location
-    dw $C6E8 + (Route15Width + 6) * (-3 + 3) ; current map position
-    db $f, FuchsiaCityWidth ; bigness, width
-    db (-4 * -2), (FuchsiaCityWidth * 2) - 1 ; alignments (y, x)
-    dw $C6EE + 2 * FuchsiaCityWidth ; window
+    dw FuchsiaCityBlocks - 3 + (FUCHSIA_CITY_WIDTH * 2) ; connection strip location
+    dw $C6E8 + (ROUTE_15_WIDTH + 6) * (-3 + 3) ; current map position
+    db $f, FUCHSIA_CITY_WIDTH ; bigness, width
+    db (-4 * -2), (FUCHSIA_CITY_WIDTH * 2) - 1 ; alignments (y, x)
+    dw $C6EE + 2 * FUCHSIA_CITY_WIDTH ; window
 
 	db ROUTE_14
-    dw Route14Blocks + (Route14Width * 15) ; connection strip location
-    dw $C6E5 + (Route15Width + 6) * (-3 + 4) ; current map position
-    db $c, Route14Width ; bigness, width
+    dw Route14Blocks + (ROUTE_14_WIDTH * 15) ; connection strip location
+    dw $C6E5 + (ROUTE_15_WIDTH + 6) * (-3 + 4) ; current map position
+    db $c, ROUTE_14_WIDTH ; bigness, width
     db (-18 * -2), 0 ; alignments (y, x)
-    dw $C6EF + Route14Width ; window
+    dw $C6EF + ROUTE_14_WIDTH ; window
 
     ; end connections data
 
@@ -29643,7 +29643,7 @@ Route15Blocks: ; 270
 
 Route16_h: ; 0x58ada to 0x58afc (34 bytes) (id=27)
     db $00 ; tileset
-    db Route16Height, Route16Width ; dimensions (y, x)
+    db ROUTE_16_HEIGHT, ROUTE_16_WIDTH ; dimensions (y, x)
     dw Route16Blocks, Route16Texts, Route16Script ; blocks, texts, scripts
     db SOUTH | EAST ; connections
 
@@ -29651,17 +29651,17 @@ Route16_h: ; 0x58ada to 0x58afc (34 bytes) (id=27)
 
 	db ROUTE_17
     dw Route17Blocks ; connection strip location
-    dw $C6EB + (Route16Height + 3) * (Route16Width + 6) + 0 ; current map position
-    db Route17Width, Route17Width ; bigness, width
+    dw $C6EB + (ROUTE_16_HEIGHT + 3) * (ROUTE_16_WIDTH + 6) + 0 ; current map position
+    db ROUTE_17_WIDTH, ROUTE_17_WIDTH ; bigness, width
     db 0, (0 * -2) ; alignments (y, x)
-    dw $C6EF + Route17Width ; window
+    dw $C6EF + ROUTE_17_WIDTH ; window
 
 	db CELADON_CITY
-    dw CeladonCityBlocks + (CeladonCityWidth) ; connection strip location
-    dw $C6E5 + (Route16Width + 6) * (-3 + 4) ; current map position
-    db $f, CeladonCityWidth ; bigness, width
+    dw CeladonCityBlocks + (CELADON_CITY_WIDTH) ; connection strip location
+    dw $C6E5 + (ROUTE_16_WIDTH + 6) * (-3 + 4) ; current map position
+    db $f, CELADON_CITY_WIDTH ; bigness, width
     db (-4 * -2), 0 ; alignments (y, x)
-    dw $C6EF + CeladonCityWidth ; window
+    dw $C6EF + CELADON_CITY_WIDTH ; window
 
     ; end connections data
 
@@ -29710,25 +29710,25 @@ Route16Blocks: ; 180
 
 Route18_h: ; 0x58c38 to 0x58c5a (34 bytes) (id=29)
     db $00 ; tileset
-    db Route18Height, Route18Width ; dimensions (y, x)
+    db ROUTE_18_HEIGHT, ROUTE_18_WIDTH ; dimensions (y, x)
     dw Route18Blocks, Route18Texts, Route18Script ; blocks, texts, scripts
     db NORTH | EAST ; connections
 
     ; connections data
 
 	db ROUTE_17
-    dw Route17Blocks + (Route17Height - 3) * Route17Width ; connection strip location
+    dw Route17Blocks + (ROUTE_17_HEIGHT - 3) * ROUTE_17_WIDTH ; connection strip location
     dw $C6EB + 0 ; current map position
-    db Route17Width, Route17Width ; bigness, width
-    db (Route17Height * 2) - 1, (0 * -2) ; alignments (y, x)
-    dw $C6E9 + Route17Height * (Route17Width + 6) ; window
+    db ROUTE_17_WIDTH, ROUTE_17_WIDTH ; bigness, width
+    db (ROUTE_17_HEIGHT * 2) - 1, (0 * -2) ; alignments (y, x)
+    dw $C6E9 + ROUTE_17_HEIGHT * (ROUTE_17_WIDTH + 6) ; window
 
 	db FUCHSIA_CITY
-    dw FuchsiaCityBlocks + (FuchsiaCityWidth) ; connection strip location
-    dw $C6E5 + (Route18Width + 6) * (-3 + 4) ; current map position
-    db $f, FuchsiaCityWidth ; bigness, width
+    dw FuchsiaCityBlocks + (FUCHSIA_CITY_WIDTH) ; connection strip location
+    dw $C6E5 + (ROUTE_18_WIDTH + 6) * (-3 + 4) ; current map position
+    db $f, FUCHSIA_CITY_WIDTH ; bigness, width
     db (-4 * -2), 0 ; alignments (y, x)
-    dw $C6EF + FuchsiaCityWidth ; window
+    dw $C6EF + FUCHSIA_CITY_WIDTH ; window
 
     ; end connections data
 
@@ -30376,7 +30376,7 @@ Route18Text5: ; 0x59b5f
 
 FanClub_h: ; 0x59b64 to 0x59b70 (12 bytes) (id=90)
     db $10 ; tileset
-    db FanClubHeight, FanClubWidth ; dimensions (y, x)
+    db POKEMON_FAN_CLUB_HEIGHT, POKEMON_FAN_CLUB_WIDTH ; dimensions (y, x)
     dw FanClubBlocks, FanClubTexts, FanClubScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -30530,7 +30530,7 @@ FanClubBlocks: ; 16
 
 SilphCo2_h: ; 0x59ce5 to 0x59cf1 (12 bytes) (id=207)
     db $16 ; tileset
-    db SilphCo2Height, SilphCo2Width ; dimensions (y, x)
+    db SILPH_CO_2F_HEIGHT, SILPH_CO_2F_WIDTH ; dimensions (y, x)
     dw SilphCo2Blocks, SilphCo2Texts, SilphCo2Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -30638,7 +30638,7 @@ SilphCo2Blocks: ; 135
 
 SilphCo3_h: ; 0x59f4f to 0x59f5b (12 bytes) (id=208)
     db $16 ; tileset
-    db SilphCo3Height, SilphCo3Width ; dimensions (y, x)
+    db SILPH_CO_3F_HEIGHT, SILPH_CO_3F_WIDTH ; dimensions (y, x)
     dw SilphCo3Blocks, SilphCo3Texts, SilphCo3Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -30731,7 +30731,7 @@ SilphCo3Blocks: ; 135
 
 SilphCo10_h: ; 0x5a12d to 0x5a139 (12 bytes) (id=234)
     db $16 ; tileset
-    db SilphCo10Height, SilphCo10Width ; dimensions (y, x)
+    db SILPH_CO_10F_HEIGHT, SILPH_CO_10F_WIDTH ; dimensions (y, x)
     dw SilphCo10Blocks, SilphCo10Texts, SilphCo10Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -30814,7 +30814,7 @@ SilphCo10Blocks: ; 72
 
 Lance_h: ; 0x5a2a2 to 0x5a2ae (12 bytes) (id=113)
     db $05 ; tileset
-    db LanceHeight, LanceWidth ; dimensions (y, x)
+    db LANCES_ROOM_HEIGHT, LANCES_ROOM_WIDTH ; dimensions (y, x)
     dw LanceBlocks, LanceTexts, LanceScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -30869,7 +30869,7 @@ LanceBlocks: ; 169
 
 HallofFameRoom_h: ; 0x5a492 to 0x5a49e (12 bytes) (id=118)
     db $07 ; tileset
-    db HallofFameRoomHeight, HallofFameRoomWidth ; dimensions (y, x)
+    db HALL_OF_FAME_HEIGHT, HALL_OF_FAME_WIDTH ; dimensions (y, x)
     dw HallofFameRoomBlocks, HallofFameRoomTexts, HallofFameRoomScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -31090,7 +31090,7 @@ INCBIN "baserom.gbc",$5c0dc,$5c0eb - $5c0dc
 
 MuseumF1_h: ; 0x5c0eb to 0x5c0f7 (12 bytes) (id=52)
     db $0a ; tileset
-    db MuseumF1Height, MuseumF1Width ; dimensions (y, x)
+    db MUSEUM_1F_HEIGHT, MUSEUM_1F_WIDTH ; dimensions (y, x)
     dw MuseumF1Blocks, MuseumF1Texts, MuseumF1Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -31322,7 +31322,7 @@ MuseumF1Object: ; 0x5c2c1 (size=74)
 
 MuseumF2_h: ; 0x5c30b to 0x5c317 (12 bytes) (id=53)
     db $0a ; tileset
-    db MuseumF2Height, MuseumF2Width ; dimensions (y, x)
+    db MUSEUM_2F_HEIGHT, MUSEUM_2F_WIDTH ; dimensions (y, x)
     dw MuseumF2Blocks, MuseumF2Texts, MuseumF2Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -31385,7 +31385,7 @@ MuseumF2Object: ; 0x5c34b (size=48)
 
 PewterGym_h: ; 0x5c37b to 0x5c387 (12 bytes) (id=54)
     db $07 ; tileset
-    db PewterGymHeight, PewterGymWidth ; dimensions (y, x)
+    db PEWTER_GYM_HEIGHT, PEWTER_GYM_WIDTH ; dimensions (y, x)
     dw PewterGymBlocks, PewterGymTexts, PewterGymScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -31524,7 +31524,7 @@ PewterGymBlocks: ; 35
 
 PewterPokecenter_h: ; 0x5c57b to 0x5c587 (12 bytes) (id=58)
     db $06 ; tileset
-    db PewterPokecenterHeight, PewterPokecenterWidth ; dimensions (y, x)
+    db PEWTER_POKECENTER_HEIGHT, PEWTER_POKECENTER_WIDTH ; dimensions (y, x)
     dw PewterPokecenterBlocks, PewterPokecenterTexts, PewterPokecenterScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -31626,7 +31626,7 @@ PewterPokecenterObject: ; 0x5c60d (size=44)
 
 CeruleanPokecenter_h: ; 0x5c639 to 0x5c645 (12 bytes) (id=64)
     db $06 ; tileset
-    db CeruleanPokecenterHeight, CeruleanPokecenterWidth ; dimensions (y, x)
+    db CERULEAN_POKECENTER_HEIGHT, CERULEAN_POKECENTER_WIDTH ; dimensions (y, x)
     dw CeruleanPokecenterBlocks, CeruleanPokecenterTexts, CeruleanPokecenterScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -31678,7 +31678,7 @@ CeruleanPokecenterBlocks: ; 28
 
 CeruleanGym_h: ; 0x5c6a7 to 0x5c6b3 (12 bytes) (id=65)
     db $07 ; tileset
-    db CeruleanGymHeight, CeruleanGymWidth ; dimensions (y, x)
+    db CERULEAN_GYM_HEIGHT, CERULEAN_GYM_WIDTH ; dimensions (y, x)
     dw CeruleanGymBlocks, CeruleanGymTexts, CeruleanGymScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -31812,7 +31812,7 @@ CeruleanGymBlocks: ; 35
 
 CeruleanMart_h: ; 0x5c889 to 0x5c895 (12 bytes) (id=67)
     db $02 ; tileset
-    db CeruleanMartHeight, CeruleanMartWidth ; dimensions (y, x)
+    db CERULEAN_MART_HEIGHT, CERULEAN_MART_WIDTH ; dimensions (y, x)
     dw CeruleanMartBlocks, CeruleanMartTexts, CeruleanMartScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -31853,7 +31853,7 @@ CeruleanMartObject: ; 0x5c8a8 (size=38)
 
 LavenderPokecenter_h: ; 0x5c8ce to 0x5c8da (12 bytes) (id=141)
     db $06 ; tileset
-    db LavenderPokecenterHeight, LavenderPokecenterWidth ; dimensions (y, x)
+    db LAVENDER_POKECENTER_HEIGHT, LAVENDER_POKECENTER_WIDTH ; dimensions (y, x)
     dw LavenderPokecenterBlocks, LavenderPokecenterTexts, LavenderPokecenterScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -31902,7 +31902,7 @@ LavenderPokecenterObject: ; 0x5c8f4 (size=44)
 
 LavenderMart_h: ; 0x5c920 to 0x5c92c (12 bytes) (id=150)
     db $02 ; tileset
-    db LavenderMartHeight, LavenderMartWidth ; dimensions (y, x)
+    db LAVENDER_MART_HEIGHT, LAVENDER_MART_WIDTH ; dimensions (y, x)
     dw LavenderMartBlocks, LavenderMartTexts, LavenderMartScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -31955,7 +31955,7 @@ LavenderMartObject: ; 0x5c95d (size=38)
 
 VermilionPokecenter_h: ; 0x5c983 to 0x5c98f (12 bytes) (id=89)
     db $06 ; tileset
-    db VermilionPokecenterHeight, VermilionPokecenterWidth ; dimensions (y, x)
+    db VERMILION_POKECENTER_HEIGHT, VERMILION_POKECENTER_WIDTH ; dimensions (y, x)
     dw VermilionPokecenterBlocks, VermilionPokecenterTexts, VermilionPokecenterScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -32004,7 +32004,7 @@ VermilionPokecenterObject: ; 0x5c9a9 (size=44)
 
 VermilionMart_h: ; 0x5c9d5 to 0x5c9e1 (12 bytes) (id=91)
     db $02 ; tileset
-    db VermilionMartHeight, VermilionMartWidth ; dimensions (y, x)
+    db VERMILION_MART_HEIGHT, VERMILION_MART_WIDTH ; dimensions (y, x)
     dw VermilionMartBlocks, VermilionMartTexts, VermilionMartScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -32045,7 +32045,7 @@ VermilionMartObject: ; 0x5c9f4 (size=38)
 
 VermilionGym_h: ; 0x5ca1a to 0x5ca26 (12 bytes) (id=92)
     db $07 ; tileset
-    db VermilionGymHeight, VermilionGymWidth ; dimensions (y, x)
+    db VERMILION_GYM_HEIGHT, VERMILION_GYM_WIDTH ; dimensions (y, x)
     dw VermilionGymBlocks, VermilionGymTexts, VermilionGymScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -32194,7 +32194,7 @@ VermilionGymBlocks: ; 45
 
 CopycatsHouseF2_h: ; 0x5cc65 to 0x5cc71 (12 bytes) (id=176)
     db $04 ; tileset
-    db CopycatsHouseF2Height, CopycatsHouseF2Width ; dimensions (y, x)
+    db COPYCATS_HOUSE_2F_HEIGHT, COPYCATS_HOUSE_2F_WIDTH ; dimensions (y, x)
     dw CopycatsHouseF2Blocks, CopycatsHouseF2Texts, CopycatsHouseF2Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -32295,7 +32295,7 @@ CopycatsHouseF2Object: ; 0x5cd21 (size=48)
 
 FightingDojo_h: ; 0x5cd51 to 0x5cd5d (12 bytes) (id=177)
     db $05 ; tileset
-    db FightingDojoHeight, FightingDojoWidth ; dimensions (y, x)
+    db FIGHTINGDOJO_HEIGHT, FIGHTINGDOJO_WIDTH ; dimensions (y, x)
     dw FightingDojoBlocks, FightingDojoTexts, FightingDojoScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -32483,7 +32483,7 @@ FightingDojoBlocks: ; 30
 
 SaffronGym_h: ; 0x5d001 to 0x5d00d (12 bytes) (id=178)
     db $16 ; tileset
-    db SaffronGymHeight, SaffronGymWidth ; dimensions (y, x)
+    db SAFFRON_GYM_HEIGHT, SAFFRON_GYM_WIDTH ; dimensions (y, x)
     dw SaffronGymBlocks, SaffronGymTexts, SaffronGymScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -32704,7 +32704,7 @@ SaffronGymBlocks: ; 90
 
 SaffronMart_h: ; 0x5d3fd to 0x5d409 (12 bytes) (id=180)
     db $02 ; tileset
-    db SaffronMartHeight, SaffronMartWidth ; dimensions (y, x)
+    db SAFFRON_MART_HEIGHT, SAFFRON_MART_WIDTH ; dimensions (y, x)
     dw SaffronMartBlocks, SaffronMartTexts, SaffronMartScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -32745,7 +32745,7 @@ SaffronMartObject: ; 0x5d41c (size=38)
 
 SilphCo1_h: ; 0x5d442 to 0x5d44e (12 bytes) (id=181)
     db $16 ; tileset
-    db SilphCo1Height, SilphCo1Width ; dimensions (y, x)
+    db SILPH_CO_1F_HEIGHT, SILPH_CO_1F_WIDTH ; dimensions (y, x)
     dw SilphCo1Blocks, SilphCo1Texts, SilphCo1Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -32800,7 +32800,7 @@ SilphCo1Blocks: ; 135
 
 SaffronPokecenter_h: ; 0x5d529 to 0x5d535 (12 bytes) (id=182)
     db $06 ; tileset
-    db SaffronPokecenterHeight, SaffronPokecenterWidth ; dimensions (y, x)
+    db SAFFRON_POKECENTER_HEIGHT, SAFFRON_POKECENTER_WIDTH ; dimensions (y, x)
     dw SaffronPokecenterBlocks, SaffronPokecenterTexts, SaffronPokecenterScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -32850,7 +32850,7 @@ SaffronPokecenterObject: ; 0x5d54f (size=44)
 
 ViridianForestexit_h: ; 0x5d57b to 0x5d587 (12 bytes) (id=47)
     db $09 ; tileset
-    db ViridianForestexitHeight, ViridianForestexitWidth ; dimensions (y, x)
+    db VIRIDIAN_FOREST_EXIT_HEIGHT, VIRIDIAN_FOREST_EXIT_WIDTH ; dimensions (y, x)
     dw ViridianForestexitBlocks, ViridianForestexitTexts, ViridianForestexitScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -32894,7 +32894,7 @@ ViridianForestexitObject: ; 0x5d598 (size=48)
 
 Route2Gate_h: ; 0x5d5c8 to 0x5d5d4 (12 bytes) (id=49)
     db $0c ; tileset
-    db Route2GateHeight, Route2GateWidth ; dimensions (y, x)
+    db ROUTE_2_GATE_HEIGHT, ROUTE_2_GATE_WIDTH ; dimensions (y, x)
     dw Route2GateBlocks, Route2GateTexts, Route2GateScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -32964,7 +32964,7 @@ Route2GateObject: ; 0x5d620 (size=48)
 
 ViridianForestEntrance_h: ; 0x5d650 to 0x5d65c (12 bytes) (id=50)
     db $09 ; tileset
-    db ViridianForestEntranceHeight, ViridianForestEntranceWidth ; dimensions (y, x)
+    db VIRIDIAN_FOREST_ENTRANCE_HEIGHT, VIRIDIAN_FOREST_ENTRANCE_WIDTH ; dimensions (y, x)
     dw ViridianForestEntranceBlocks, ViridianForestEntranceTexts, ViridianForestEntranceScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -33008,7 +33008,7 @@ ViridianForestEntranceObject: ; 0x5d66d (size=48)
 
 UndergroundTunnelEntranceRoute5_h: ; 0x5d69d to 0x5d6a9 (12 bytes) (id=71)
     db $0c ; tileset
-    db UndergroundTunnelEntranceRoute5Height, UndergroundTunnelEntranceRoute5Width ; dimensions (y, x)
+    db PATH_ENTRANCE_ROUTE_5_HEIGHT, PATH_ENTRANCE_ROUTE_5_WIDTH ; dimensions (y, x)
     dw UndergroundTunnelEntranceRoute5Blocks, UndergroundTunnelEntranceRoute5Texts, UndergroundTunnelEntranceRoute5Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -33054,7 +33054,7 @@ UndergroundTunnelEntranceRoute5Object: ; 0x5d6c1 (size=34)
 
 UndergroundTunnelEntranceRoute6_h: ; 0x5d6e3 to 0x5d6ef (12 bytes) (id=74)
     db $0c ; tileset
-    db UndergroundTunnelEntranceRoute6Height, UndergroundTunnelEntranceRoute6Width ; dimensions (y, x)
+    db PATH_ENTRANCE_ROUTE_6_HEIGHT, PATH_ENTRANCE_ROUTE_6_WIDTH ; dimensions (y, x)
     dw UndergroundTunnelEntranceRoute6Blocks, UndergroundTunnelEntranceRoute6Texts, UndergroundTunnelEntranceRoute6Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -33095,7 +33095,7 @@ UndergroundTunnelEntranceRoute6Object: ; 0x5d6fe (size=34)
 
 UndergroundPathEntranceRoute7_h: ; 0x5d720 to 0x5d72c (12 bytes) (id=77)
     db $0c ; tileset
-    db UndergroundPathEntranceRoute7Height, UndergroundPathEntranceRoute7Width ; dimensions (y, x)
+    db PATH_ENTRANCE_ROUTE_7_HEIGHT, PATH_ENTRANCE_ROUTE_7_WIDTH ; dimensions (y, x)
     dw UndergroundTunnelEntranceRoute7Blocks, UndergroundPathEntranceRoute7Texts, UndergroundPathEntranceRoute7Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -33137,7 +33137,7 @@ INCBIN "baserom.gbc",$5d75d,$52
 
 SilphCo9_h: ; 0x5d7af to 0x5d7bb (12 bytes) (id=233)
     db $16 ; tileset
-    db SilphCo9Height, SilphCo9Width ; dimensions (y, x)
+    db SILPH_CO_9F_HEIGHT, SILPH_CO_9F_WIDTH ; dimensions (y, x)
     dw SilphCo9Blocks, SilphCo9Texts, SilphCo9Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -33234,7 +33234,7 @@ SilphCo9Blocks: ; 117
 
 VictoryRoad1_h: ; 0x5d9fe to 0x5da0a (12 bytes) (id=108)
     db $11 ; tileset
-    db VictoryRoad1Height, VictoryRoad1Width ; dimensions (y, x)
+    db VICTORY_ROAD_1_HEIGHT, VICTORY_ROAD_1_WIDTH ; dimensions (y, x)
     dw VictoryRoad1Blocks, VictoryRoad1Texts, VictoryRoad1Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -33320,7 +33320,7 @@ SSAnne9Blocks: ; 96
 
 PokemonTower1_h: ; 0x60420 to 0x6042c (12 bytes) (id=142)
     db $0f ; tileset
-    db PokemonTower1Height, PokemonTower1Width ; dimensions (y, x)
+    db POKEMONTOWER_1_HEIGHT, POKEMONTOWER_1_WIDTH ; dimensions (y, x)
     dw PokemonTower1Blocks, PokemonTower1Texts, PokemonTower1Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -33380,7 +33380,7 @@ PokemonTower1Blocks: ; 90
 
 PokemonTower2_h: ; 0x604e6 to 0x604f2 (12 bytes) (id=143)
     db $0f ; tileset
-    db PokemonTower2Height, PokemonTower2Width ; dimensions (y, x)
+    db POKEMONTOWER_2_HEIGHT, POKEMONTOWER_2_WIDTH ; dimensions (y, x)
     dw PokemonTower2Blocks, PokemonTower2Texts, PokemonTower2Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -33561,7 +33561,7 @@ PokemonTower2Blocks: ; 90
 
 PokemonTower3_h: ; 0x606c0 to 0x606cc (12 bytes) (id=144)
     db $0f ; tileset
-    db PokemonTower3Height, PokemonTower3Width ; dimensions (y, x)
+    db POKEMONTOWER_3_HEIGHT, POKEMONTOWER_3_WIDTH ; dimensions (y, x)
     dw PokemonTower3Blocks, PokemonTower3Texts, PokemonTower3Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -33628,7 +33628,7 @@ PokemonTower3Blocks: ; 90
 
 PokemonTower4_h: ; 0x607ea to 0x607f6 (12 bytes) (id=145)
     db $0f ; tileset
-    db PokemonTower4Height, PokemonTower4Width ; dimensions (y, x)
+    db POKEMONTOWER_4_HEIGHT, POKEMONTOWER_4_WIDTH ; dimensions (y, x)
     dw PokemonTower4Blocks, PokemonTower4Texts, PokemonTower4Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -33697,7 +33697,7 @@ PokemonTower4Blocks: ; 90
 
 PokemonTower5_h: ; 0x60926 to 0x60932 (12 bytes) (id=146)
     db $0f ; tileset
-    db PokemonTower5Height, PokemonTower5Width ; dimensions (y, x)
+    db POKEMONTOWER_5_HEIGHT, POKEMONTOWER_5_WIDTH ; dimensions (y, x)
     dw PokemonTower5Blocks, PokemonTower5Texts, PokemonTower5Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -33785,7 +33785,7 @@ PokemonTower5Blocks: ; 90
 
 PokemonTower6_h: ; 0x60ae3 to 0x60aef (12 bytes) (id=147)
     db $0f ; tileset
-    db PokemonTower6Height, PokemonTower6Width ; dimensions (y, x)
+    db POKEMONTOWER_6_HEIGHT, POKEMONTOWER_6_WIDTH ; dimensions (y, x)
     dw PokemonTower6Blocks, PokemonTower6Texts, PokemonTower6Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -33859,7 +33859,7 @@ INCBIN "baserom.gbc",$60cef,$a
 
 PokemonTower7_h: ; 0x60cf9 to 0x60d05 (12 bytes) (id=148)
     db $0f ; tileset
-    db PokemonTower7Height, PokemonTower7Width ; dimensions (y, x)
+    db POKEMONTOWER_7_HEIGHT, POKEMONTOWER_7_WIDTH ; dimensions (y, x)
     dw PokemonTower7Blocks, PokemonTower7Texts, PokemonTower7Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -33949,7 +33949,7 @@ PokemonTower7Blocks: ; 90
 
 CeladonMart1_h: ; 0x60f7a to 0x60f86 (12 bytes) (id=122)
     db $12 ; tileset
-    db CeladonMart1Height, CeladonMart1Width ; dimensions (y, x)
+    db CELADON_MART_1_HEIGHT, CELADON_MART_1_WIDTH ; dimensions (y, x)
     dw CeladonMart1Blocks, CeladonMart1Texts, CeladonMart1Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -34007,7 +34007,7 @@ INCBIN "baserom.gbc",$61006,$fb
 
 ViridianForest_h: ; 0x61101 to 0x6110d (12 bytes) (id=51)
     db $03 ; tileset
-    db ViridianForestHeight, ViridianForestWidth ; dimensions (y, x)
+    db VIRIDIAN_FOREST_HEIGHT, VIRIDIAN_FOREST_WIDTH ; dimensions (y, x)
     dw ViridianForestBlocks, ViridianForestTexts, ViridianForestScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -34121,7 +34121,7 @@ ViridianForestObject: ; 0x611da (size=127)
 
 SSAnne1_h: ; 0x61259 to 0x61265 (12 bytes) (id=95)
     db $0d ; tileset
-    db SSAnne1Height, SSAnne1Width ; dimensions (y, x)
+    db SS_ANNE_1_HEIGHT, SS_ANNE_1_WIDTH ; dimensions (y, x)
     dw SSAnne1Blocks, SSAnne1Texts, SSAnne1Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -34183,7 +34183,7 @@ SSAnne1Blocks: ; 180
 
 SSAnne2_h: ; 0x61393 to 0x6139f (12 bytes) (id=96)
     db $0d ; tileset
-    db SSAnne2Height, SSAnne2Width ; dimensions (y, x)
+    db SS_ANNE_2_HEIGHT, SS_ANNE_2_WIDTH ; dimensions (y, x)
     dw SSAnne2Blocks, SSAnne2Texts, SSAnne2Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -34392,7 +34392,7 @@ SSAnne2Blocks: ; 180
 
 SSAnne4_h: ; 0x61622 to 0x6162e (12 bytes) (id=98)
     db $0d ; tileset
-    db SSAnne4Height, SSAnne4Width ; dimensions (y, x)
+    db SS_ANNE_4_HEIGHT, SS_ANNE_4_WIDTH ; dimensions (y, x)
     dw SSAnne4Blocks, SSAnne4Texts, SSAnne4Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -34433,7 +34433,7 @@ SSAnne4Blocks: ; 60
 
 SSAnne5_h: ; 0x616a2 to 0x616ae (12 bytes) (id=99)
     db $0d ; tileset
-    db SSAnne5Height, SSAnne5Width ; dimensions (y, x)
+    db SS_ANNE_5_HEIGHT, SS_ANNE_5_WIDTH ; dimensions (y, x)
     dw SSAnne5Blocks, SSAnne5Texts, SSAnne5Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -34509,7 +34509,7 @@ SSAnne5Blocks: ; 70
 
 SSAnne6_h: ; 0x617a7 to 0x617b3 (12 bytes) (id=100)
     db $0d ; tileset
-    db SSAnne6Height, SSAnne6Width ; dimensions (y, x)
+    db SS_ANNE_6_HEIGHT, SS_ANNE_6_WIDTH ; dimensions (y, x)
     dw SSAnne6Blocks, SSAnne6Texts, SSAnne6Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -34594,7 +34594,7 @@ SSAnne6Blocks: ; 56
 
 SSAnne7_h: ; 0x61889 to 0x61895 (12 bytes) (id=101)
     db $0d ; tileset
-    db SSAnne7Height, SSAnne7Width ; dimensions (y, x)
+    db SS_ANNE_7_HEIGHT, SS_ANNE_7_WIDTH ; dimensions (y, x)
     dw SSAnne7Blocks, SSAnne7Texts, SSAnne7Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -34670,7 +34670,7 @@ SSAnne7Blocks: ; 12
 
 SSAnne8_h: ; 0x6196a to 0x61976 (12 bytes) (id=102)
     db $0d ; tileset
-    db SSAnne8Height, SSAnne8Width ; dimensions (y, x)
+    db SS_ANNE_8_HEIGHT, SS_ANNE_8_WIDTH ; dimensions (y, x)
     dw SSAnne8Blocks, SSAnne8Texts, SSAnne8Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -34785,7 +34785,7 @@ SSAnne8Blocks: ; 96
 
 SSAnne9_h: ; 0x61b3f to 0x61b4b (12 bytes) (id=103)
     db $0d ; tileset
-    db SSAnne9Height, SSAnne9Width ; dimensions (y, x)
+    db SS_ANNE_9_HEIGHT, SS_ANNE_9_WIDTH ; dimensions (y, x)
     dw SSAnne9Blocks, SSAnne9Texts, SSAnne9Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -34945,7 +34945,7 @@ SSAnne9Object: ; 0x61c8d (size=188)
 
 SSAnne10_h: ; 0x61d49 to 0x61d55 (12 bytes) (id=104)
     db $0d ; tileset
-    db SSAnne10Height, SSAnne10Width ; dimensions (y, x)
+    db SS_ANNE_10_HEIGHT, SS_ANNE_10_WIDTH ; dimensions (y, x)
     dw SSAnne10Blocks, SSAnne10Texts, SSAnne10Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -35061,7 +35061,7 @@ SSAnne10Object: ; 0x61e75 (size=165)
 
 UndergroundPathNS_h: ; 0x61f1a to 0x61f26 (12 bytes) (id=119)
     db $0b ; tileset
-    db UndergroundPathNSHeight, UndergroundPathNSWidth ; dimensions (y, x)
+    db UNDERGROUND_PATH_NS_HEIGHT, UNDERGROUND_PATH_NS_WIDTH ; dimensions (y, x)
     dw UndergroundPathNSBlocks, UndergroundPathNSTexts, UndergroundPathNSScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -35091,7 +35091,7 @@ UndergroundPathNSObject: ; 0x61f2a (size=20)
 
 UndergroundPathWE_h: ; 0x61f3e to 0x61f4a (12 bytes) (id=121)
     db $0b ; tileset
-    db UndergroundPathWEHeight, UndergroundPathWEWidth ; dimensions (y, x)
+    db UNDERGROUND_PATH_WE_HEIGHT, UNDERGROUND_PATH_WE_WIDTH ; dimensions (y, x)
     dw $41f4, UndergroundPathWETexts, UndergroundPathWEScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -35121,7 +35121,7 @@ UndergroundPathWEObject: ; 0x61f4e (size=20)
 
 DiglettsCave_h: ; 0x61f62 to 0x61f6e (12 bytes) (id=197)
     db $11 ; tileset
-    db DiglettsCaveHeight, DiglettsCaveWidth ; dimensions (y, x)
+    db DIGLETTS_CAVE_HEIGHT, DIGLETTS_CAVE_WIDTH ; dimensions (y, x)
     dw DiglettsCaveBlocks, DiglettsCaveTexts, DiglettsCaveScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -35154,7 +35154,7 @@ DiglettsCaveBlocks: ; 360
 
 SilphCo11_h: ; 0x620ee to 0x620fa (12 bytes) (id=235)
     db $10 ; tileset
-    db SilphCo11Height, SilphCo11Width ; dimensions (y, x)
+    db SILPH_CO_11F_HEIGHT, SILPH_CO_11F_WIDTH ; dimensions (y, x)
     dw SilphCo11Blocks, SilphCo11Texts, SilphCo11Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -36468,7 +36468,7 @@ INCBIN "baserom.gbc",$747de,$74897 - $747de
 
 ViridianGym_h: ; 0x74897 to 0x748a3 (12 bytes) (id=45)
     db $07 ; tileset
-    db ViridianGymHeight, ViridianGymWidth ; dimensions (y, x)
+    db VIRIDIAN_GYM_HEIGHT, VIRIDIAN_GYM_WIDTH ; dimensions (y, x)
     dw ViridianGymBlocks, ViridianGymTexts, ViridianGymScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -36662,7 +36662,7 @@ ViridianGymBlocks: ; 90
 
 PewterMart_h: ; 0x74ca1 to 0x74cad (12 bytes) (id=56)
     db $02 ; tileset
-    db PewterMartHeight, PewterMartWidth ; dimensions (y, x)
+    db PEWTER_MART_HEIGHT, PEWTER_MART_WIDTH ; dimensions (y, x)
     dw PewterMartBlocks, PewterMartTexts, PewterMartScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -36714,7 +36714,7 @@ PewterMartObject: ; 0x74cda (size=38)
 
 UnknownDungeon1_h: ; 0x74d00 to 0x74d0c (12 bytes) (id=228)
     db $11 ; tileset
-    db UnknownDungeon1Height, UnknownDungeon1Width ; dimensions (y, x)
+    db UNKNOWN_DUNGEON_1_HEIGHT, UNKNOWN_DUNGEON_1_WIDTH ; dimensions (y, x)
     dw UnknownDungeon1Blocks, UnknownDungeon1Texts, UnknownDungeon1Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -36764,7 +36764,7 @@ UnknownDungeon1Blocks: ; 135
 
 CeruleanHouse3_h: ; 0x74dfd to 0x74e09 (12 bytes) (id=230)
     db $0d ; tileset
-    db CeruleanHouse3Height, CeruleanHouse3Width ; dimensions (y, x)
+    db CERULEAN_HOUSE_3_HEIGHT, CERULEAN_HOUSE_3_WIDTH ; dimensions (y, x)
     dw CeruleanHouse3Blocks, CeruleanHouse3Texts, CeruleanHouse3Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -36849,7 +36849,7 @@ INCBIN "baserom.gbc",$74ee0,$12c
 
 FuchsiaHouse1_h: ; 0x7500c to 0x75018 (12 bytes) (id=153)
     db $08 ; tileset
-    db FuchsiaHouse1Height, FuchsiaHouse1Width ; dimensions (y, x)
+    db FUCHSIA_HOUSE_1_HEIGHT, FUCHSIA_HOUSE_1_WIDTH ; dimensions (y, x)
     dw FuchsiaHouse1Blocks, FuchsiaHouse1Texts, FuchsiaHouse1Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -36895,7 +36895,7 @@ FuchsiaHouse1Object: ; 0x75031 (size=38)
 
 FuchsiaPokecenter_h: ; 0x75057 to 0x75063 (12 bytes) (id=154)
     db $06 ; tileset
-    db FuchsiaPokecenterHeight, FuchsiaPokecenterWidth ; dimensions (y, x)
+    db FUCHSIA_POKECENTER_HEIGHT, FUCHSIA_POKECENTER_WIDTH ; dimensions (y, x)
     dw FuchsiaPokecenterBlocks, FuchsiaPokecenterTexts, FuchsiaPokecenterScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -36944,7 +36944,7 @@ FuchsiaPokecenterObject: ; 0x7507d (size=44)
 
 FuchsiaHouse2_h: ; 0x750a9 to 0x750b5 (12 bytes) (id=155)
     db $14 ; tileset
-    db FuchsiaHouse2Height, FuchsiaHouse2Width ; dimensions (y, x)
+    db FUCHSIA_HOUSE_2_HEIGHT, FUCHSIA_HOUSE_2_WIDTH ; dimensions (y, x)
     dw FuchsiaHouse2Blocks, FuchsiaHouse2Texts, FuchsiaHouse2Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -37051,7 +37051,7 @@ FuchsiaHouse2Blocks: ; 20
 
 SafariZoneEntrance_h: ; 0x751c1 to 0x751cd (12 bytes) (id=156)
     db $0c ; tileset
-    db SafariZoneEntranceHeight, SafariZoneEntranceWidth ; dimensions (y, x)
+    db SAFARIZONEENTRANCE_HEIGHT, SAFARIZONEENTRANCE_WIDTH ; dimensions (y, x)
     dw SafariZoneEntranceBlocks, SafariZoneEntranceTexts, SafariZoneEntranceScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -37179,7 +37179,7 @@ SafariZoneEntranceBlocks: ; 12
 
 FuchsiaGym_h: ; 0x75431 to 0x7543d (12 bytes) (id=157)
     db $07 ; tileset
-    db FuchsiaGymHeight, FuchsiaGymWidth ; dimensions (y, x)
+    db FUCHSIA_GYM_HEIGHT, FUCHSIA_GYM_WIDTH ; dimensions (y, x)
     dw FuchsiaGymBlocks, FuchsiaGymTexts, FuchsiaGymScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -37339,7 +37339,7 @@ FuchsiaGymBlocks: ; 45
 
 FuchsiaMeetingRoom_h: ; 0x756d7 to 0x756e3 (12 bytes) (id=158)
     db $14 ; tileset
-    db FuchsiaMeetingRoomHeight, FuchsiaMeetingRoomWidth ; dimensions (y, x)
+    db FUCHSIAMEETINGROOM_HEIGHT, FUCHSIAMEETINGROOM_WIDTH ; dimensions (y, x)
     dw FuchsiaMeetingRoomBlocks, FuchsiaMeetingRoomTexts, FuchsiaMeetingRoomScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -37388,7 +37388,7 @@ FuchsiaMeetingRoomBlocks: ; 28
 
 CinnabarGym_h: ; 0x7573e to 0x7574a (12 bytes) (id=166)
     db $16 ; tileset
-    db CinnabarGymHeight, CinnabarGymWidth ; dimensions (y, x)
+    db CINNABAR_GYM_HEIGHT, CINNABAR_GYM_WIDTH ; dimensions (y, x)
     dw CinnabarGymBlocks, CinnabarGymTexts, CinnabarGymScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -37660,7 +37660,7 @@ CinnabarGymBlocks: ; 90
 
 Lab1_h: ; 0x75b80 to 0x75b8c (12 bytes) (id=167)
     db $14 ; tileset
-    db Lab1Height, Lab1Width ; dimensions (y, x)
+    db CINNABAR_LAB_1_HEIGHT, CINNABAR_LAB_1_WIDTH ; dimensions (y, x)
     dw Lab1Blocks, Lab1Texts, Lab1Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -37725,7 +37725,7 @@ Lab1Blocks: ; 36
 
 Lab2_h: ; 0x75c15 to 0x75c21 (12 bytes) (id=168)
     db $14 ; tileset
-    db Lab2Height, Lab2Width ; dimensions (y, x)
+    db CINNABAR_LAB_2_HEIGHT, CINNABAR_LAB_2_WIDTH ; dimensions (y, x)
     dw Lab2Blocks, Lab2Texts, Lab2Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -37780,7 +37780,7 @@ Lab2Blocks: ; 16
 
 Lab3_h: ; 0x75c7b to 0x75c87 (12 bytes) (id=169)
     db $14 ; tileset
-    db Lab3Height, Lab3Width ; dimensions (y, x)
+    db CINNABAR_LAB_3_HEIGHT, CINNABAR_LAB_3_WIDTH ; dimensions (y, x)
     dw Lab3Blocks, Lab3Texts, Lab3Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -37858,7 +37858,7 @@ Lab3Blocks: ; 16
 
 Lab4_h: ; 0x75d25 to 0x75d31 (12 bytes) (id=170)
     db $14 ; tileset
-    db Lab4Height, Lab4Width ; dimensions (y, x)
+    db CINNABAR_LAB_4_HEIGHT, CINNABAR_LAB_4_WIDTH ; dimensions (y, x)
     dw Lab4Blocks, Lab4Texts, Lab4Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -37951,7 +37951,7 @@ Lab4Blocks: ; 16
 
 CinnabarPokecenter_h: ; 0x75e20 to 0x75e2c (12 bytes) (id=171)
     db $06 ; tileset
-    db CinnabarPokecenterHeight, CinnabarPokecenterWidth ; dimensions (y, x)
+    db CINNABAR_POKECENTER_HEIGHT, CINNABAR_POKECENTER_WIDTH ; dimensions (y, x)
     dw CinnabarPokecenterBlocks, CinnabarPokecenterTexts, CinnabarPokecenterScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -38000,7 +38000,7 @@ CinnabarPokecenterObject: ; 0x75e46 (size=44)
 
 CinnabarMart_h: ; 0x75e72 to 0x75e7e (12 bytes) (id=172)
     db $02 ; tileset
-    db CinnabarMartHeight, CinnabarMartWidth ; dimensions (y, x)
+    db CINNABAR_MART_HEIGHT, CINNABAR_MART_WIDTH ; dimensions (y, x)
     dw CinnabarMartBlocks, CinnabarMartTexts, CinnabarMartScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -38041,7 +38041,7 @@ CinnabarMartObject: ; 0x75e91 (size=38)
 
 CopycatsHouseF1_h: ; 0x75eb7 to 0x75ec3 (12 bytes) (id=175)
     db $01 ; tileset
-    db CopycatsHouseF1Height, CopycatsHouseF1Width ; dimensions (y, x)
+    db COPYCATS_HOUSE_1F_HEIGHT, COPYCATS_HOUSE_1F_WIDTH ; dimensions (y, x)
     dw CopycatsHouseF1Blocks, CopycatsHouseF1Texts, CopycatsHouseF1Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -38166,7 +38166,7 @@ GaryBlocks: ; 16
 
 Lorelei_h: ; 0x7616f to 0x7617b (12 bytes) (id=245)
     db $07 ; tileset
-    db LoreleiHeight, LoreleiWidth ; dimensions (y, x)
+    db LORELEIS_ROOM_HEIGHT, LORELEIS_ROOM_WIDTH ; dimensions (y, x)
     dw LoreleiBlocks, LoreleiTexts, LoreleiScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -38226,7 +38226,7 @@ LoreleiBlocks: ; 30
 
 Bruno_h: ; 0x762ca to 0x762d6 (12 bytes) (id=246)
     db $07 ; tileset
-    db BrunoHeight, BrunoWidth ; dimensions (y, x)
+    db BRUNOS_ROOM_HEIGHT, BRUNOS_ROOM_WIDTH ; dimensions (y, x)
     dw BrunoBlocks, BrunoTexts, BrunoScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -38286,7 +38286,7 @@ BrunoBlocks: ; 30
 
 Agatha_h: ; 0x76421 to 0x7642d (12 bytes) (id=247)
     db $0f ; tileset
-    db AgathaHeight, AgathaWidth ; dimensions (y, x)
+    db AGATHAS_ROOM_HEIGHT, AGATHAS_ROOM_WIDTH ; dimensions (y, x)
     dw AgathaBlocks, AgathaTexts, AgathaScript ; blocks, texts, scripts
     db $00 ; connections
 

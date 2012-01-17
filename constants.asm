@@ -1285,885 +1285,885 @@ SPRITE_LYING_OLD_MAN             EQU $48
 ; Map sizes (y, x)
 
 ; PalletTown_h map_id=0
-PalletTownHeight EQU $09
-PalletTownWidth  EQU $0a
+PALLET_TOWN_HEIGHT EQU $09
+PALLET_TOWN_WIDTH  EQU $0a
 
 ; ViridianCity_h map_id=1
-ViridianCityHeight EQU $12
-ViridianCityWidth  EQU $14
+VIRIDIAN_CITY_HEIGHT EQU $12
+VIRIDIAN_CITY_WIDTH  EQU $14
 
 ; PewterCity_h map_id=2
-PewterCityHeight EQU $12
-PewterCityWidth  EQU $14
+PEWTER_CITY_HEIGHT EQU $12
+PEWTER_CITY_WIDTH  EQU $14
 
 ; CeruleanCity_h map_id=3
-CeruleanCityHeight EQU $12
-CeruleanCityWidth  EQU $14
+CERULEAN_CITY_HEIGHT EQU $12
+CERULEAN_CITY_WIDTH  EQU $14
 
 ; LavenderTown_h map_id=4
-LavenderTownHeight EQU $09
-LavenderTownWidth  EQU $0a
+LAVENDER_TOWN_HEIGHT EQU $09
+LAVENDER_TOWN_WIDTH  EQU $0a
 
 ; VermilionCity_h map_id=5
-VermilionCityHeight EQU $12
-VermilionCityWidth  EQU $14
+VERMILION_CITY_HEIGHT EQU $12
+VERMILION_CITY_WIDTH  EQU $14
 
 ; CeladonCity_h map_id=6
-CeladonCityHeight EQU $12
-CeladonCityWidth  EQU $19
+CELADON_CITY_HEIGHT EQU $12
+CELADON_CITY_WIDTH  EQU $19
 
 ; FuchsiaCity_h map_id=7
-FuchsiaCityHeight EQU $12
-FuchsiaCityWidth  EQU $14
+FUCHSIA_CITY_HEIGHT EQU $12
+FUCHSIA_CITY_WIDTH  EQU $14
 
 ; CinnabarIsland_h map_id=8
-CinnabarIslandHeight EQU $09
-CinnabarIslandWidth  EQU $0a
+CINNABAR_ISLAND_HEIGHT EQU $09
+CINNABAR_ISLAND_WIDTH  EQU $0a
 
 ; IndigoPlateau_h map_id=9
-IndigoPlateauHeight EQU $09
-IndigoPlateauWidth  EQU $0a
+INDIGO_PLATEAU_HEIGHT EQU $09
+INDIGO_PLATEAU_WIDTH  EQU $0a
 
 ; SaffronCity_h map_id=10
-SaffronCityHeight EQU $12
-SaffronCityWidth  EQU $14
+SAFFRON_CITY_HEIGHT EQU $12
+SAFFRON_CITY_WIDTH  EQU $14
 
 ; Route1_h map_id=12
-Route1Height EQU $12
-Route1Width  EQU $0a
+ROUTE_1_HEIGHT EQU $12
+ROUTE_1_WIDTH  EQU $0a
 
 ; Route2_h map_id=13
-Route2Height EQU $24
-Route2Width  EQU $0a
+ROUTE_2_HEIGHT EQU $24
+ROUTE_2_WIDTH  EQU $0a
 
 ; Route3_h map_id=14
-Route3Height EQU $09
-Route3Width  EQU $23
+ROUTE_3_HEIGHT EQU $09
+ROUTE_3_WIDTH  EQU $23
 
 ; Route4_h map_id=15
-Route4Height EQU $09
-Route4Width  EQU $2d
+ROUTE_4_HEIGHT EQU $09
+ROUTE_4_WIDTH  EQU $2d
 
 ; Route5_h map_id=16
-Route5Height EQU $12
-Route5Width  EQU $0a
+ROUTE_5_HEIGHT EQU $12
+ROUTE_5_WIDTH  EQU $0a
 
 ; Route6_h map_id=17
-Route6Height EQU $12
-Route6Width  EQU $0a
+ROUTE_6_HEIGHT EQU $12
+ROUTE_6_WIDTH  EQU $0a
 
 ; Route7_h map_id=18
-Route7Height EQU $09
-Route7Width  EQU $0a
+ROUTE_7_HEIGHT EQU $09
+ROUTE_7_WIDTH  EQU $0a
 
 ; Route8_h map_id=19
-Route8Height EQU $09
-Route8Width  EQU $1e
+ROUTE_8_HEIGHT EQU $09
+ROUTE_8_WIDTH  EQU $1e
 
 ; Route9_h map_id=20
-Route9Height EQU $09
-Route9Width  EQU $1e
+ROUTE_9_HEIGHT EQU $09
+ROUTE_9_WIDTH  EQU $1e
 
 ; Route10_h map_id=21
-Route10Height EQU $24
-Route10Width  EQU $0a
+ROUTE_10_HEIGHT EQU $24
+ROUTE_10_WIDTH  EQU $0a
 
 ; Route11_h map_id=22
-Route11Height EQU $09
-Route11Width  EQU $1e
+ROUTE_11_HEIGHT EQU $09
+ROUTE_11_WIDTH  EQU $1e
 
 ; Route12_h map_id=23
-Route12Height EQU $36
-Route12Width  EQU $0a
+ROUTE_12_HEIGHT EQU $36
+ROUTE_12_WIDTH  EQU $0a
 
 ; Route13_h map_id=24
-Route13Height EQU $09
-Route13Width  EQU $1e
+ROUTE_13_HEIGHT EQU $09
+ROUTE_13_WIDTH  EQU $1e
 
 ; Route14_h map_id=25
-Route14Height EQU $1b
-Route14Width  EQU $0a
+ROUTE_14_HEIGHT EQU $1b
+ROUTE_14_WIDTH  EQU $0a
 
 ; Route15_h map_id=26
-Route15Height EQU $09
-Route15Width  EQU $1e
+ROUTE_15_HEIGHT EQU $09
+ROUTE_15_WIDTH  EQU $1e
 
 ; Route16_h map_id=27
-Route16Height EQU $09
-Route16Width  EQU $14
+ROUTE_16_HEIGHT EQU $09
+ROUTE_16_WIDTH  EQU $14
 
 ; Route17_h map_id=28
-Route17Height EQU $48
-Route17Width  EQU $0a
+ROUTE_17_HEIGHT EQU $48
+ROUTE_17_WIDTH  EQU $0a
 
 ; Route18_h map_id=29
-Route18Height EQU $09
-Route18Width  EQU $19
+ROUTE_18_HEIGHT EQU $09
+ROUTE_18_WIDTH  EQU $19
 
 ; Route19_h map_id=30
-Route19Height EQU $1b
-Route19Width  EQU $0a
+ROUTE_19_HEIGHT EQU $1b
+ROUTE_19_WIDTH  EQU $0a
 
 ; Route20_h map_id=31
-Route20Height EQU $09
-Route20Width  EQU $32
+ROUTE_20_HEIGHT EQU $09
+ROUTE_20_WIDTH  EQU $32
 
 ; Route21_h map_id=32
-Route21Height EQU $2d
-Route21Width  EQU $0a
+ROUTE_21_HEIGHT EQU $2d
+ROUTE_21_WIDTH  EQU $0a
 
 ; Route22_h map_id=33
-Route22Height EQU $09
-Route22Width  EQU $14
+ROUTE_22_HEIGHT EQU $09
+ROUTE_22_WIDTH  EQU $14
 
 ; Route23_h map_id=34
-Route23Height EQU $48
-Route23Width  EQU $0a
+ROUTE_23_HEIGHT EQU $48
+ROUTE_23_WIDTH  EQU $0a
 
 ; Route24_h map_id=35
-Route24Height EQU $12
-Route24Width  EQU $0a
+ROUTE_24_HEIGHT EQU $12
+ROUTE_24_WIDTH  EQU $0a
 
 ; Route25_h map_id=36
-Route25Height EQU $09
-Route25Width  EQU $1e
+ROUTE_25_HEIGHT EQU $09
+ROUTE_25_WIDTH  EQU $1e
 
 ; RedsHouse1F_h map_id=37
-RedsHouse1FHeight EQU $04
-RedsHouse1FWidth  EQU $04
+REDS_HOUSE_1F_HEIGHT EQU $04
+REDS_HOUSE_1F_WIDTH  EQU $04
 
 ; RedsHouse2F_h map_id=38
-RedsHouse2FHeight EQU $04
-RedsHouse2FWidth  EQU $04
+REDS_HOUSE_2F_HEIGHT EQU $04
+REDS_HOUSE_2F_WIDTH  EQU $04
 
 ; BluesHouse_h map_id=39
-BluesHouseHeight EQU $04
-BluesHouseWidth  EQU $04
+BLUES_HOUSE_HEIGHT EQU $04
+BLUES_HOUSE_WIDTH  EQU $04
 
 ; OaksLab_h map_id=40
-OaksLabHeight EQU $06
-OaksLabWidth  EQU $05
+OAKS_LAB_HEIGHT EQU $06
+OAKS_LAB_WIDTH  EQU $05
 
 ; ViridianPokeCenter_h map_id=41
-ViridianPokeCenterHeight EQU $04
-ViridianPokeCenterWidth  EQU $07
+VIRIDIAN_POKECENTER_HEIGHT EQU $04
+VIRIDIAN_POKECENTER_WIDTH  EQU $07
 
 ; ViridianMart_h map_id=42
-ViridianMartHeight EQU $04
-ViridianMartWidth  EQU $04
+VIRIDIAN_MART_HEIGHT EQU $04
+VIRIDIAN_MART_WIDTH  EQU $04
 
 ; School_h map_id=43
-SchoolHeight EQU $04
-SchoolWidth  EQU $04
+VIRIDIAN_SCHOOL_HEIGHT EQU $04
+VIRIDIAN_SCHOOL_WIDTH  EQU $04
 
 ; ViridianHouse_h map_id=44
-ViridianHouseHeight EQU $04
-ViridianHouseWidth  EQU $04
+VIRIDIAN_HOUSE_HEIGHT EQU $04
+VIRIDIAN_HOUSE_WIDTH  EQU $04
 
 ; ViridianGym_h map_id=45
-ViridianGymHeight EQU $09
-ViridianGymWidth  EQU $0a
+VIRIDIAN_GYM_HEIGHT EQU $09
+VIRIDIAN_GYM_WIDTH  EQU $0a
 
 ; DiglettsCaveRoute2_h map_id=46
-DiglettsCaveRoute2Height EQU $04
-DiglettsCaveRoute2Width  EQU $04
+DIGLETTS_CAVE_EXIT_HEIGHT EQU $04
+DIGLETTS_CAVE_EXIT_WIDTH  EQU $04
 
 ; ViridianForestexit_h map_id=47
-ViridianForestexitHeight EQU $04
-ViridianForestexitWidth  EQU $05
+VIRIDIAN_FOREST_EXIT_HEIGHT EQU $04
+VIRIDIAN_FOREST_EXIT_WIDTH  EQU $05
 
 ; Route2House_h map_id=48
-Route2HouseHeight EQU $04
-Route2HouseWidth  EQU $04
+ROUTE_2_HOUSE_HEIGHT EQU $04
+ROUTE_2_HOUSE_WIDTH  EQU $04
 
 ; Route2Gate_h map_id=49
-Route2GateHeight EQU $04
-Route2GateWidth  EQU $05
+ROUTE_2_GATE_HEIGHT EQU $04
+ROUTE_2_GATE_WIDTH  EQU $05
 
 ; ViridianForestEntrance_h map_id=50
-ViridianForestEntranceHeight EQU $04
-ViridianForestEntranceWidth  EQU $05
+VIRIDIAN_FOREST_ENTRANCE_HEIGHT EQU $04
+VIRIDIAN_FOREST_ENTRANCE_WIDTH  EQU $05
 
 ; ViridianForest_h map_id=51
-ViridianForestHeight EQU $18
-ViridianForestWidth  EQU $11
+VIRIDIAN_FOREST_HEIGHT EQU $18
+VIRIDIAN_FOREST_WIDTH  EQU $11
 
 ; MuseumF1_h map_id=52
-MuseumF1Height EQU $04
-MuseumF1Width  EQU $0a
+MUSEUM_1F_HEIGHT EQU $04
+MUSEUM_1F_WIDTH  EQU $0a
 
 ; MuseumF2_h map_id=53
-MuseumF2Height EQU $04
-MuseumF2Width  EQU $07
+MUSEUM_2F_HEIGHT EQU $04
+MUSEUM_2F_WIDTH  EQU $07
 
 ; PewterGym_h map_id=54
-PewterGymHeight EQU $07
-PewterGymWidth  EQU $05
+PEWTER_GYM_HEIGHT EQU $07
+PEWTER_GYM_WIDTH  EQU $05
 
 ; PewterHouse1_h map_id=55
-PewterHouse1Height EQU $04
-PewterHouse1Width  EQU $04
+PEWTER_HOUSE_1_HEIGHT EQU $04
+PEWTER_HOUSE_1_WIDTH  EQU $04
 
 ; PewterMart_h map_id=56
-PewterMartHeight EQU $04
-PewterMartWidth  EQU $04
+PEWTER_MART_HEIGHT EQU $04
+PEWTER_MART_WIDTH  EQU $04
 
 ; PewterHouse2_h map_id=57
-PewterHouse2Height EQU $04
-PewterHouse2Width  EQU $04
+PEWTER_HOUSE_2_HEIGHT EQU $04
+PEWTER_HOUSE_2_WIDTH  EQU $04
 
 ; PewterPokecenter_h map_id=58
-PewterPokecenterHeight EQU $04
-PewterPokecenterWidth  EQU $07
+PEWTER_POKECENTER_HEIGHT EQU $04
+PEWTER_POKECENTER_WIDTH  EQU $07
 
 ; MtMoon1_h map_id=59
-MtMoon1Height EQU $12
-MtMoon1Width  EQU $14
+MT_MOON_1_HEIGHT EQU $12
+MT_MOON_1_WIDTH  EQU $14
 
 ; MtMoon2_h map_id=60
-MtMoon2Height EQU $0e
-MtMoon2Width  EQU $0e
+MT_MOON_2_HEIGHT EQU $0e
+MT_MOON_2_WIDTH  EQU $0e
 
 ; MtMoon3_h map_id=61
-MtMoon3Height EQU $12
-MtMoon3Width  EQU $14
+MT_MOON_3_HEIGHT EQU $12
+MT_MOON_3_WIDTH  EQU $14
 
 ; CeruleanHouseTrashed_h map_id=62
-CeruleanHouseTrashedHeight EQU $04
-CeruleanHouseTrashedWidth  EQU $04
+TRASHED_HOUSE_HEIGHT EQU $04
+TRASHED_HOUSE_WIDTH  EQU $04
 
 ; CeruleanHouse2_h map_id=63
-CeruleanHouse2Height EQU $04
-CeruleanHouse2Width  EQU $04
+CERULEAN_HOUSE_HEIGHT EQU $04
+CERULEAN_HOUSE_WIDTH  EQU $04
 
 ; CeruleanPokecenter_h map_id=64
-CeruleanPokecenterHeight EQU $04
-CeruleanPokecenterWidth  EQU $07
+CERULEAN_POKECENTER_HEIGHT EQU $04
+CERULEAN_POKECENTER_WIDTH  EQU $07
 
 ; CeruleanGym_h map_id=65
-CeruleanGymHeight EQU $07
-CeruleanGymWidth  EQU $05
+CERULEAN_GYM_HEIGHT EQU $07
+CERULEAN_GYM_WIDTH  EQU $05
 
 ; BikeShop_h map_id=66
-BikeShopHeight EQU $04
-BikeShopWidth  EQU $04
+BIKE_SHOP_HEIGHT EQU $04
+BIKE_SHOP_WIDTH  EQU $04
 
 ; CeruleanMart_h map_id=67
-CeruleanMartHeight EQU $04
-CeruleanMartWidth  EQU $04
+CERULEAN_MART_HEIGHT EQU $04
+CERULEAN_MART_WIDTH  EQU $04
 
 ; MtMoonPokecenter_h map_id=68
-MtMoonPokecenterHeight EQU $04
-MtMoonPokecenterWidth  EQU $07
+MT_MOON_POKECENTER_HEIGHT EQU $04
+MT_MOON_POKECENTER_WIDTH  EQU $07
 
 ; Route5Gate_h map_id=70
-Route5GateHeight EQU $03
-Route5GateWidth  EQU $04
+ROUTE_5_GATE_HEIGHT EQU $03
+ROUTE_5_GATE_WIDTH  EQU $04
 
 ; UndergroundTunnelEntranceRoute5_h map_id=71
-UndergroundTunnelEntranceRoute5Height EQU $04
-UndergroundTunnelEntranceRoute5Width  EQU $04
+PATH_ENTRANCE_ROUTE_5_HEIGHT EQU $04
+PATH_ENTRANCE_ROUTE_5_WIDTH  EQU $04
 
 ; DayCareM_h map_id=72
-DayCareMHeight EQU $04
-DayCareMWidth  EQU $04
+DAYCAREM_HEIGHT EQU $04
+DAYCAREM_WIDTH  EQU $04
 
 ; Route6Gate_h map_id=73
-Route6GateHeight EQU $03
-Route6GateWidth  EQU $04
+ROUTE_6_GATE_HEIGHT EQU $03
+ROUTE_6_GATE_WIDTH  EQU $04
 
 ; UndergroundTunnelEntranceRoute6_h map_id=74
-UndergroundTunnelEntranceRoute6Height EQU $04
-UndergroundTunnelEntranceRoute6Width  EQU $04
+PATH_ENTRANCE_ROUTE_6_HEIGHT EQU $04
+PATH_ENTRANCE_ROUTE_6_WIDTH  EQU $04
 
 ; Route7Gate_h map_id=76
-Route7GateHeight EQU $04
-Route7GateWidth  EQU $03
+ROUTE_7_GATE_HEIGHT EQU $04
+ROUTE_7_GATE_WIDTH  EQU $03
 
 ; UndergroundPathEntranceRoute7_h map_id=77
-UndergroundPathEntranceRoute7Height EQU $04
-UndergroundPathEntranceRoute7Width  EQU $04
+PATH_ENTRANCE_ROUTE_7_HEIGHT EQU $04
+PATH_ENTRANCE_ROUTE_7_WIDTH  EQU $04
 
 ; Route8Gate_h map_id=79
-Route8GateHeight EQU $04
-Route8GateWidth  EQU $03
+ROUTE_8_GATE_HEIGHT EQU $04
+ROUTE_8_GATE_WIDTH  EQU $03
 
 ; UndergroundPathEntranceRoute8_h map_id=80
-UndergroundPathEntranceRoute8Height EQU $04
-UndergroundPathEntranceRoute8Width  EQU $04
+PATH_ENTRANCE_ROUTE_8_HEIGHT EQU $04
+PATH_ENTRANCE_ROUTE_8_WIDTH  EQU $04
 
 ; RockTunnelPokecenter_h map_id=81
-RockTunnelPokecenterHeight EQU $04
-RockTunnelPokecenterWidth  EQU $07
+ROCK_TUNNEL_POKECENTER_HEIGHT EQU $04
+ROCK_TUNNEL_POKECENTER_WIDTH  EQU $07
 
 ; RockTunnel1_h map_id=82
-RockTunnel1Height EQU $12
-RockTunnel1Width  EQU $14
+ROCK_TUNNEL_1_HEIGHT EQU $12
+ROCK_TUNNEL_1_WIDTH  EQU $14
 
 ; PowerPlant_h map_id=83
-PowerPlantHeight EQU $12
-PowerPlantWidth  EQU $14
+POWER_PLANT_HEIGHT EQU $12
+POWER_PLANT_WIDTH  EQU $14
 
 ; Route11Gate_h map_id=84
-Route11GateHeight EQU $05
-Route11GateWidth  EQU $04
+ROUTE_11_GATE_1F_HEIGHT EQU $05
+ROUTE_11_GATE_1F_WIDTH  EQU $04
 
 ; DiglettsCaveEntranceRoute11_h map_id=85
-DiglettsCaveEntranceRoute11Height EQU $04
-DiglettsCaveEntranceRoute11Width  EQU $04
+DIGLETTS_CAVE_ENTRANCE_HEIGHT EQU $04
+DIGLETTS_CAVE_ENTRANCE_WIDTH  EQU $04
 
 ; Route11GateUpstairs_h map_id=86
-Route11GateUpstairsHeight EQU $04
-Route11GateUpstairsWidth  EQU $04
+ROUTE_11_GATE_2F_HEIGHT EQU $04
+ROUTE_11_GATE_2F_WIDTH  EQU $04
 
 ; Route12Gate_h map_id=87
-Route12GateHeight EQU $04
-Route12GateWidth  EQU $05
+ROUTE_12_GATE_HEIGHT EQU $04
+ROUTE_12_GATE_WIDTH  EQU $05
 
 ; BillsHouse_h map_id=88
-BillsHouseHeight EQU $04
-BillsHouseWidth  EQU $04
+BILLS_HOUSE_HEIGHT EQU $04
+BILLS_HOUSE_WIDTH  EQU $04
 
 ; VermilionPokecenter_h map_id=89
-VermilionPokecenterHeight EQU $04
-VermilionPokecenterWidth  EQU $07
+VERMILION_POKECENTER_HEIGHT EQU $04
+VERMILION_POKECENTER_WIDTH  EQU $07
 
 ; FanClub_h map_id=90
-FanClubHeight EQU $04
-FanClubWidth  EQU $04
+POKEMON_FAN_CLUB_HEIGHT EQU $04
+POKEMON_FAN_CLUB_WIDTH  EQU $04
 
 ; VermilionMart_h map_id=91
-VermilionMartHeight EQU $04
-VermilionMartWidth  EQU $04
+VERMILION_MART_HEIGHT EQU $04
+VERMILION_MART_WIDTH  EQU $04
 
 ; VermilionGym_h map_id=92
-VermilionGymHeight EQU $09
-VermilionGymWidth  EQU $05
+VERMILION_GYM_HEIGHT EQU $09
+VERMILION_GYM_WIDTH  EQU $05
 
 ; VermilionHouse1_h map_id=93
-VermilionHouse1Height EQU $04
-VermilionHouse1Width  EQU $04
+VERMILION_HOUSE_1_HEIGHT EQU $04
+VERMILION_HOUSE_1_WIDTH  EQU $04
 
 ; VermilionDock_h map_id=94
-VermilionDockHeight EQU $06
-VermilionDockWidth  EQU $0e
+VERMILION_DOCK_HEIGHT EQU $06
+VERMILION_DOCK_WIDTH  EQU $0e
 
 ; SSAnne1_h map_id=95
-SSAnne1Height EQU $09
-SSAnne1Width  EQU $14
+SS_ANNE_1_HEIGHT EQU $09
+SS_ANNE_1_WIDTH  EQU $14
 
 ; SSAnne2_h map_id=96
-SSAnne2Height EQU $09
-SSAnne2Width  EQU $14
+SS_ANNE_2_HEIGHT EQU $09
+SS_ANNE_2_WIDTH  EQU $14
 
 ; SSAnne3_h map_id=97
-SSAnne3Height EQU $03
-SSAnne3Width  EQU $0a
+SS_ANNE_3_HEIGHT EQU $03
+SS_ANNE_3_WIDTH  EQU $0a
 
 ; SSAnne4_h map_id=98
-SSAnne4Height EQU $04
-SSAnne4Width  EQU $0f
+SS_ANNE_4_HEIGHT EQU $04
+SS_ANNE_4_WIDTH  EQU $0f
 
 ; SSAnne5_h map_id=99
-SSAnne5Height EQU $07
-SSAnne5Width  EQU $0a
+SS_ANNE_5_HEIGHT EQU $07
+SS_ANNE_5_WIDTH  EQU $0a
 
 ; SSAnne6_h map_id=100
-SSAnne6Height EQU $08
-SSAnne6Width  EQU $07
+SS_ANNE_6_HEIGHT EQU $08
+SS_ANNE_6_WIDTH  EQU $07
 
 ; SSAnne7_h map_id=101
-SSAnne7Height EQU $04
-SSAnne7Width  EQU $03
+SS_ANNE_7_HEIGHT EQU $04
+SS_ANNE_7_WIDTH  EQU $03
 
 ; SSAnne8_h map_id=102
-SSAnne8Height EQU $08
-SSAnne8Width  EQU $0c
+SS_ANNE_8_HEIGHT EQU $08
+SS_ANNE_8_WIDTH  EQU $0c
 
 ; SSAnne9_h map_id=103
-SSAnne9Height EQU $08
-SSAnne9Width  EQU $0c
+SS_ANNE_9_HEIGHT EQU $08
+SS_ANNE_9_WIDTH  EQU $0c
 
 ; SSAnne10_h map_id=104
-SSAnne10Height EQU $08
-SSAnne10Width  EQU $0c
+SS_ANNE_10_HEIGHT EQU $08
+SS_ANNE_10_WIDTH  EQU $0c
 
 ; VictoryRoad1_h map_id=108
-VictoryRoad1Height EQU $09
-VictoryRoad1Width  EQU $0a
+VICTORY_ROAD_1_HEIGHT EQU $09
+VICTORY_ROAD_1_WIDTH  EQU $0a
 
 ; Lance_h map_id=113
-LanceHeight EQU $0d
-LanceWidth  EQU $0d
+LANCES_ROOM_HEIGHT EQU $0d
+LANCES_ROOM_WIDTH  EQU $0d
 
 ; HallofFameRoom_h map_id=118
-HallofFameRoomHeight EQU $04
-HallofFameRoomWidth  EQU $05
+HALL_OF_FAME_HEIGHT EQU $04
+HALL_OF_FAME_WIDTH  EQU $05
 
 ; UndergroundPathNS_h map_id=119
-UndergroundPathNSHeight EQU $18
-UndergroundPathNSWidth  EQU $04
+UNDERGROUND_PATH_NS_HEIGHT EQU $18
+UNDERGROUND_PATH_NS_WIDTH  EQU $04
 
 ; Gary_h map_id=120
-GaryHeight EQU $04
-GaryWidth  EQU $04
+CHAMPIONS_ROOM_HEIGHT EQU $04
+CHAMPIONS_ROOM_WIDTH  EQU $04
 
 ; UndergroundPathWE_h map_id=121
-UndergroundPathWEHeight EQU $04
-UndergroundPathWEWidth  EQU $19
+UNDERGROUND_PATH_WE_HEIGHT EQU $04
+UNDERGROUND_PATH_WE_WIDTH  EQU $19
 
 ; CeladonMart1_h map_id=122
-CeladonMart1Height EQU $04
-CeladonMart1Width  EQU $0a
+CELADON_MART_1_HEIGHT EQU $04
+CELADON_MART_1_WIDTH  EQU $0a
 
 ; CeladonMart2_h map_id=123
-CeladonMart2Height EQU $04
-CeladonMart2Width  EQU $0a
+CELADON_MART_2_HEIGHT EQU $04
+CELADON_MART_2_WIDTH  EQU $0a
 
 ; CeladonMart3_h map_id=124
-CeladonMart3Height EQU $04
-CeladonMart3Width  EQU $0a
+CELADON_MART_3_HEIGHT EQU $04
+CELADON_MART_3_WIDTH  EQU $0a
 
 ; CeladonMart4_h map_id=125
-CeladonMart4Height EQU $04
-CeladonMart4Width  EQU $0a
+CELADON_MART_4_HEIGHT EQU $04
+CELADON_MART_4_WIDTH  EQU $0a
 
 ; CeladonMartRoof_h map_id=126
-CeladonMartRoofHeight EQU $04
-CeladonMartRoofWidth  EQU $0a
+CELADON_MART_5_HEIGHT EQU $04
+CELADON_MART_5_WIDTH  EQU $0a
 
 ; CeladonMartElevator_h map_id=127
-CeladonMartElevatorHeight EQU $02
-CeladonMartElevatorWidth  EQU $02
+CELADON_MART_6_HEIGHT EQU $02
+CELADON_MART_6_WIDTH  EQU $02
 
 ; CeladonMansion1_h map_id=128
-CeladonMansion1Height EQU $06
-CeladonMansion1Width  EQU $04
+CELADON_MANSION_1_HEIGHT EQU $06
+CELADON_MANSION_1_WIDTH  EQU $04
 
 ; CeladonMansion2_h map_id=129
-CeladonMansion2Height EQU $06
-CeladonMansion2Width  EQU $04
+CELADON_MANSION_2_HEIGHT EQU $06
+CELADON_MANSION_2_WIDTH  EQU $04
 
 ; CeladonMansion3_h map_id=130
-CeladonMansion3Height EQU $06
-CeladonMansion3Width  EQU $04
+CELADON_MANSION_3_HEIGHT EQU $06
+CELADON_MANSION_3_WIDTH  EQU $04
 
 ; CeladonMansion4_h map_id=131
-CeladonMansion4Height EQU $06
-CeladonMansion4Width  EQU $04
+CELADON_MANSION_4_HEIGHT EQU $06
+CELADON_MANSION_4_WIDTH  EQU $04
 
 ; CeladonMansion5_h map_id=132
-CeladonMansion5Height EQU $04
-CeladonMansion5Width  EQU $04
+CELADON_MANSION_5_HEIGHT EQU $04
+CELADON_MANSION_5_WIDTH  EQU $04
 
 ; CeladonPokecenter_h map_id=133
-CeladonPokecenterHeight EQU $04
-CeladonPokecenterWidth  EQU $07
+CELADON_POKECENTER_HEIGHT EQU $04
+CELADON_POKECENTER_WIDTH  EQU $07
 
 ; CeladonGym_h map_id=134
-CeladonGymHeight EQU $09
-CeladonGymWidth  EQU $05
+CELADON_GYM_HEIGHT EQU $09
+CELADON_GYM_WIDTH  EQU $05
 
 ; CeladonGameCorner_h map_id=135
-CeladonGameCornerHeight EQU $09
-CeladonGameCornerWidth  EQU $0a
+GAME_CORNER_HEIGHT EQU $09
+GAME_CORNER_WIDTH  EQU $0a
 
 ; CeladonMart5_h map_id=136
-CeladonMart5Height EQU $04
-CeladonMart5Width  EQU $0a
+CELADON_HOUSE_HEIGHT EQU $04
+CELADON_HOUSE_WIDTH  EQU $0a
 
 ; CeladonPrizeRoom_h map_id=137
-CeladonPrizeRoomHeight EQU $04
-CeladonPrizeRoomWidth  EQU $05
+CELADONPRIZE_ROOM_HEIGHT EQU $04
+CELADONPRIZE_ROOM_WIDTH  EQU $05
 
 ; CeladonDiner_h map_id=138
-CeladonDinerHeight EQU $04
-CeladonDinerWidth  EQU $05
+CELADON_DINER_HEIGHT EQU $04
+CELADON_DINER_WIDTH  EQU $05
 
 ; CeladonHouse_h map_id=139
-CeladonHouseHeight EQU $04
-CeladonHouseWidth  EQU $04
+CELADON_HOUSE_2_HEIGHT EQU $04
+CELADON_HOUSE_2_WIDTH  EQU $04
 
 ; CeladonHotel_h map_id=140
-CeladonHotelHeight EQU $04
-CeladonHotelWidth  EQU $07
+CELADONHOTEL_HEIGHT EQU $04
+CELADONHOTEL_WIDTH  EQU $07
 
 ; LavenderPokecenter_h map_id=141
-LavenderPokecenterHeight EQU $04
-LavenderPokecenterWidth  EQU $07
+LAVENDER_POKECENTER_HEIGHT EQU $04
+LAVENDER_POKECENTER_WIDTH  EQU $07
 
 ; PokemonTower1_h map_id=142
-PokemonTower1Height EQU $09
-PokemonTower1Width  EQU $0a
+POKEMONTOWER_1_HEIGHT EQU $09
+POKEMONTOWER_1_WIDTH  EQU $0a
 
 ; PokemonTower2_h map_id=143
-PokemonTower2Height EQU $09
-PokemonTower2Width  EQU $0a
+POKEMONTOWER_2_HEIGHT EQU $09
+POKEMONTOWER_2_WIDTH  EQU $0a
 
 ; PokemonTower3_h map_id=144
-PokemonTower3Height EQU $09
-PokemonTower3Width  EQU $0a
+POKEMONTOWER_3_HEIGHT EQU $09
+POKEMONTOWER_3_WIDTH  EQU $0a
 
 ; PokemonTower4_h map_id=145
-PokemonTower4Height EQU $09
-PokemonTower4Width  EQU $0a
+POKEMONTOWER_4_HEIGHT EQU $09
+POKEMONTOWER_4_WIDTH  EQU $0a
 
 ; PokemonTower5_h map_id=146
-PokemonTower5Height EQU $09
-PokemonTower5Width  EQU $0a
+POKEMONTOWER_5_HEIGHT EQU $09
+POKEMONTOWER_5_WIDTH  EQU $0a
 
 ; PokemonTower6_h map_id=147
-PokemonTower6Height EQU $09
-PokemonTower6Width  EQU $0a
+POKEMONTOWER_6_HEIGHT EQU $09
+POKEMONTOWER_6_WIDTH  EQU $0a
 
 ; PokemonTower7_h map_id=148
-PokemonTower7Height EQU $09
-PokemonTower7Width  EQU $0a
+POKEMONTOWER_7_HEIGHT EQU $09
+POKEMONTOWER_7_WIDTH  EQU $0a
 
 ; LavenderHouse1_h map_id=149
-LavenderHouse1Height EQU $04
-LavenderHouse1Width  EQU $04
+LAVENDER_HOUSE_1_HEIGHT EQU $04
+LAVENDER_HOUSE_1_WIDTH  EQU $04
 
 ; LavenderMart_h map_id=150
-LavenderMartHeight EQU $04
-LavenderMartWidth  EQU $04
+LAVENDER_MART_HEIGHT EQU $04
+LAVENDER_MART_WIDTH  EQU $04
 
 ; LavenderHouse2_h map_id=151
-LavenderHouse2Height EQU $04
-LavenderHouse2Width  EQU $04
+LAVENDER_HOUSE_2_HEIGHT EQU $04
+LAVENDER_HOUSE_2_WIDTH  EQU $04
 
 ; FuchsiaMart_h map_id=152
-FuchsiaMartHeight EQU $04
-FuchsiaMartWidth  EQU $04
+FUCHSIA_MART_HEIGHT EQU $04
+FUCHSIA_MART_WIDTH  EQU $04
 
 ; FuchsiaHouse1_h map_id=153
-FuchsiaHouse1Height EQU $04
-FuchsiaHouse1Width  EQU $04
+FUCHSIA_HOUSE_1_HEIGHT EQU $04
+FUCHSIA_HOUSE_1_WIDTH  EQU $04
 
 ; FuchsiaPokecenter_h map_id=154
-FuchsiaPokecenterHeight EQU $04
-FuchsiaPokecenterWidth  EQU $07
+FUCHSIA_POKECENTER_HEIGHT EQU $04
+FUCHSIA_POKECENTER_WIDTH  EQU $07
 
 ; FuchsiaHouse2_h map_id=155
-FuchsiaHouse2Height EQU $04
-FuchsiaHouse2Width  EQU $05
+FUCHSIA_HOUSE_2_HEIGHT EQU $04
+FUCHSIA_HOUSE_2_WIDTH  EQU $05
 
 ; SafariZoneEntrance_h map_id=156
-SafariZoneEntranceHeight EQU $03
-SafariZoneEntranceWidth  EQU $04
+SAFARIZONEENTRANCE_HEIGHT EQU $03
+SAFARIZONEENTRANCE_WIDTH  EQU $04
 
 ; FuchsiaGym_h map_id=157
-FuchsiaGymHeight EQU $09
-FuchsiaGymWidth  EQU $05
+FUCHSIA_GYM_HEIGHT EQU $09
+FUCHSIA_GYM_WIDTH  EQU $05
 
 ; FuchsiaMeetingRoom_h map_id=158
-FuchsiaMeetingRoomHeight EQU $04
-FuchsiaMeetingRoomWidth  EQU $07
+FUCHSIAMEETINGROOM_HEIGHT EQU $04
+FUCHSIAMEETINGROOM_WIDTH  EQU $07
 
 ; SeafoamIslands2_h map_id=159
-SeafoamIslands2Height EQU $09
-SeafoamIslands2Width  EQU $0f
+SEAFOAM_ISLANDS_2_HEIGHT EQU $09
+SEAFOAM_ISLANDS_2_WIDTH  EQU $0f
 
 ; SeafoamIslands3_h map_id=160
-SeafoamIslands3Height EQU $09
-SeafoamIslands3Width  EQU $0f
+SEAFOAM_ISLANDS_3_HEIGHT EQU $09
+SEAFOAM_ISLANDS_3_WIDTH  EQU $0f
 
 ; SeafoamIslands4_h map_id=161
-SeafoamIslands4Height EQU $09
-SeafoamIslands4Width  EQU $0f
+SEAFOAM_ISLANDS_4_HEIGHT EQU $09
+SEAFOAM_ISLANDS_4_WIDTH  EQU $0f
 
 ; SeafoamIslands5_h map_id=162
-SeafoamIslands5Height EQU $09
-SeafoamIslands5Width  EQU $0f
+SEAFOAM_ISLANDS_5_HEIGHT EQU $09
+SEAFOAM_ISLANDS_5_WIDTH  EQU $0f
 
 ; VermilionHouse2_h map_id=163
-VermilionHouse2Height EQU $04
-VermilionHouse2Width  EQU $04
+VERMILION_HOUSE_2_HEIGHT EQU $04
+VERMILION_HOUSE_2_WIDTH  EQU $04
 
 ; FuchsiaHouse3_h map_id=164
-FuchsiaHouse3Height EQU $04
-FuchsiaHouse3Width  EQU $04
+FUCHSIA_HOUSE_3_HEIGHT EQU $04
+FUCHSIA_HOUSE_3_WIDTH  EQU $04
 
 ; Mansion1_h map_id=165
-Mansion1Height EQU $0e
-Mansion1Width  EQU $0f
+MANSION_1_HEIGHT EQU $0e
+MANSION_1_WIDTH  EQU $0f
 
 ; CinnabarGym_h map_id=166
-CinnabarGymHeight EQU $09
-CinnabarGymWidth  EQU $0a
+CINNABAR_GYM_HEIGHT EQU $09
+CINNABAR_GYM_WIDTH  EQU $0a
 
 ; Lab1_h map_id=167
-Lab1Height EQU $04
-Lab1Width  EQU $09
+CINNABAR_LAB_1_HEIGHT EQU $04
+CINNABAR_LAB_1_WIDTH  EQU $09
 
 ; Lab2_h map_id=168
-Lab2Height EQU $04
-Lab2Width  EQU $04
+CINNABAR_LAB_2_HEIGHT EQU $04
+CINNABAR_LAB_2_WIDTH  EQU $04
 
 ; Lab3_h map_id=169
-Lab3Height EQU $04
-Lab3Width  EQU $04
+CINNABAR_LAB_3_HEIGHT EQU $04
+CINNABAR_LAB_3_WIDTH  EQU $04
 
 ; Lab4_h map_id=170
-Lab4Height EQU $04
-Lab4Width  EQU $04
+CINNABAR_LAB_4_HEIGHT EQU $04
+CINNABAR_LAB_4_WIDTH  EQU $04
 
 ; CinnabarPokecenter_h map_id=171
-CinnabarPokecenterHeight EQU $04
-CinnabarPokecenterWidth  EQU $07
+CINNABAR_POKECENTER_HEIGHT EQU $04
+CINNABAR_POKECENTER_WIDTH  EQU $07
 
 ; CinnabarMart_h map_id=172
-CinnabarMartHeight EQU $04
-CinnabarMartWidth  EQU $04
+CINNABAR_MART_HEIGHT EQU $04
+CINNABAR_MART_WIDTH  EQU $04
 
 ; IndigoPlateauLobby_h map_id=174
-IndigoPlateauLobbyHeight EQU $06
-IndigoPlateauLobbyWidth  EQU $08
+INDIGO_PLATEAU_LOBBY_HEIGHT EQU $06
+INDIGO_PLATEAU_LOBBY_WIDTH  EQU $08
 
 ; CopycatsHouseF1_h map_id=175
-CopycatsHouseF1Height EQU $04
-CopycatsHouseF1Width  EQU $04
+COPYCATS_HOUSE_1F_HEIGHT EQU $04
+COPYCATS_HOUSE_1F_WIDTH  EQU $04
 
 ; CopycatsHouseF2_h map_id=176
-CopycatsHouseF2Height EQU $04
-CopycatsHouseF2Width  EQU $04
+COPYCATS_HOUSE_2F_HEIGHT EQU $04
+COPYCATS_HOUSE_2F_WIDTH  EQU $04
 
 ; FightingDojo_h map_id=177
-FightingDojoHeight EQU $06
-FightingDojoWidth  EQU $05
+FIGHTINGDOJO_HEIGHT EQU $06
+FIGHTINGDOJO_WIDTH  EQU $05
 
 ; SaffronGym_h map_id=178
-SaffronGymHeight EQU $09
-SaffronGymWidth  EQU $0a
+SAFFRON_GYM_HEIGHT EQU $09
+SAFFRON_GYM_WIDTH  EQU $0a
 
 ; SaffronHouse1_h map_id=179
-SaffronHouse1Height EQU $04
-SaffronHouse1Width  EQU $04
+SAFFRON_HOUSE_1_HEIGHT EQU $04
+SAFFRON_HOUSE_1_WIDTH  EQU $04
 
 ; SaffronMart_h map_id=180
-SaffronMartHeight EQU $04
-SaffronMartWidth  EQU $04
+SAFFRON_MART_HEIGHT EQU $04
+SAFFRON_MART_WIDTH  EQU $04
 
 ; SilphCo1_h map_id=181
-SilphCo1Height EQU $09
-SilphCo1Width  EQU $0f
+SILPH_CO_1F_HEIGHT EQU $09
+SILPH_CO_1F_WIDTH  EQU $0f
 
 ; SaffronPokecenter_h map_id=182
-SaffronPokecenterHeight EQU $04
-SaffronPokecenterWidth  EQU $07
+SAFFRON_POKECENTER_HEIGHT EQU $04
+SAFFRON_POKECENTER_WIDTH  EQU $07
 
 ; SaffronHouse2_h map_id=183
-SaffronHouse2Height EQU $04
-SaffronHouse2Width  EQU $04
+SAFFRON_HOUSE_2_HEIGHT EQU $04
+SAFFRON_HOUSE_2_WIDTH  EQU $04
 
 ; Route15Gate_h map_id=184
-Route15GateHeight EQU $05
-Route15GateWidth  EQU $04
+ROUTE_15_GATE_HEIGHT EQU $05
+ROUTE_15_GATE_WIDTH  EQU $04
 
 ; Route16GateMap_h map_id=186
-Route16GateMapHeight EQU $07
-Route16GateMapWidth  EQU $04
+ROUTE_16_GATE_1F_HEIGHT EQU $07
+ROUTE_16_GATE_1F_WIDTH  EQU $04
 
 ; Route16GateUpstairs_h map_id=187
-Route16GateUpstairsHeight EQU $04
-Route16GateUpstairsWidth  EQU $04
+ROUTE_16_GATE_2F_HEIGHT EQU $04
+ROUTE_16_GATE_2F_WIDTH  EQU $04
 
 ; Route16House_h map_id=188
-Route16HouseHeight EQU $04
-Route16HouseWidth  EQU $04
+ROUTE_16_HOUSE_HEIGHT EQU $04
+ROUTE_16_HOUSE_WIDTH  EQU $04
 
 ; Route12House_h map_id=189
-Route12HouseHeight EQU $04
-Route12HouseWidth  EQU $04
+ROUTE_12_HOUSE_HEIGHT EQU $04
+ROUTE_12_HOUSE_WIDTH  EQU $04
 
 ; Route18Gate_h map_id=190
-Route18GateHeight EQU $05
-Route18GateWidth  EQU $04
+ROUTE_18_GATE_1F_HEIGHT EQU $05
+ROUTE_18_GATE_1F_WIDTH  EQU $04
 
 ; Route18GateHeader_h map_id=191
-Route18GateHeaderHeight EQU $04
-Route18GateHeaderWidth  EQU $04
+ROUTE_18_GATE_2F_HEIGHT EQU $04
+ROUTE_18_GATE_2F_WIDTH  EQU $04
 
 ; SeafoamIslands1_h map_id=192
-SeafoamIslands1Height EQU $09
-SeafoamIslands1Width  EQU $0f
+SEAFOAM_ISLANDS_1_HEIGHT EQU $09
+SEAFOAM_ISLANDS_1_WIDTH  EQU $0f
 
 ; Route22Gate_h map_id=193
-Route22GateHeight EQU $04
-Route22GateWidth  EQU $05
+ROUTE_22_GATE_HEIGHT EQU $04
+ROUTE_22_GATE_WIDTH  EQU $05
 
 ; VictoryRoad2_h map_id=194
-VictoryRoad2Height EQU $09
-VictoryRoad2Width  EQU $0f
+VICTORY_ROAD_2_HEIGHT EQU $09
+VICTORY_ROAD_2_WIDTH  EQU $0f
 
 ; Route12GateUpstairs_h map_id=195
-Route12GateUpstairsHeight EQU $04
-Route12GateUpstairsWidth  EQU $04
+ROUTE_12_GATE_2F_HEIGHT EQU $04
+ROUTE_12_GATE_2F_WIDTH  EQU $04
 
 ; VermilionHouse3_h map_id=196
-VermilionHouse3Height EQU $04
-VermilionHouse3Width  EQU $04
+VERMILION_HOUSE_3_HEIGHT EQU $04
+VERMILION_HOUSE_3_WIDTH  EQU $04
 
 ; DiglettsCave_h map_id=197
-DiglettsCaveHeight EQU $12
-DiglettsCaveWidth  EQU $14
+DIGLETTS_CAVE_HEIGHT EQU $12
+DIGLETTS_CAVE_WIDTH  EQU $14
 
 ; VictoryRoad3_h map_id=198
-VictoryRoad3Height EQU $09
-VictoryRoad3Width  EQU $0f
+VICTORY_ROAD_3_HEIGHT EQU $09
+VICTORY_ROAD_3_WIDTH  EQU $0f
 
 ; RocketHideout1_h map_id=199
-RocketHideout1Height EQU $0e
-RocketHideout1Width  EQU $0f
+ROCKET_HIDEOUT_1_HEIGHT EQU $0e
+ROCKET_HIDEOUT_1_WIDTH  EQU $0f
 
 ; RocketHideout2_h map_id=200
-RocketHideout2Height EQU $0e
-RocketHideout2Width  EQU $0f
+ROCKET_HIDEOUT_2_HEIGHT EQU $0e
+ROCKET_HIDEOUT_2_WIDTH  EQU $0f
 
 ; RocketHideout3_h map_id=201
-RocketHideout3Height EQU $0e
-RocketHideout3Width  EQU $0f
+ROCKET_HIDEOUT_3_HEIGHT EQU $0e
+ROCKET_HIDEOUT_3_WIDTH  EQU $0f
 
 ; RocketHideout4_h map_id=202
-RocketHideout4Height EQU $0c
-RocketHideout4Width  EQU $0f
+ROCKET_HIDEOUT_4_HEIGHT EQU $0c
+ROCKET_HIDEOUT_4_WIDTH  EQU $0f
 
 ; RocketHideoutElevator_h map_id=203
-RocketHideoutElevatorHeight EQU $04
-RocketHideoutElevatorWidth  EQU $03
+ROCKET_HIDEOUT_ELEVATOR_HEIGHT EQU $04
+ROCKET_HIDEOUT_ELEVATOR_WIDTH  EQU $03
 
 ; SilphCo2_h map_id=207
-SilphCo2Height EQU $09
-SilphCo2Width  EQU $0f
+SILPH_CO_2F_HEIGHT EQU $09
+SILPH_CO_2F_WIDTH  EQU $0f
 
 ; SilphCo3_h map_id=208
-SilphCo3Height EQU $09
-SilphCo3Width  EQU $0f
+SILPH_CO_3F_HEIGHT EQU $09
+SILPH_CO_3F_WIDTH  EQU $0f
 
 ; SilphCo4_h map_id=209
-SilphCo4Height EQU $09
-SilphCo4Width  EQU $0f
+SILPH_CO_4F_HEIGHT EQU $09
+SILPH_CO_4F_WIDTH  EQU $0f
 
 ; SilphCo5_h map_id=210
-SilphCo5Height EQU $09
-SilphCo5Width  EQU $0f
+SILPH_CO_5F_HEIGHT EQU $09
+SILPH_CO_5F_WIDTH  EQU $0f
 
 ; SilphCo6_h map_id=211
-SilphCo6Height EQU $09
-SilphCo6Width  EQU $0d
+SILPH_CO_6F_HEIGHT EQU $09
+SILPH_CO_6F_WIDTH  EQU $0d
 
 ; SilphCo7_h map_id=212
-SilphCo7Height EQU $09
-SilphCo7Width  EQU $0d
+SILPH_CO_7F_HEIGHT EQU $09
+SILPH_CO_7F_WIDTH  EQU $0d
 
 ; SilphCo8_h map_id=213
-SilphCo8Height EQU $09
-SilphCo8Width  EQU $0d
+SILPH_CO_8F_HEIGHT EQU $09
+SILPH_CO_8F_WIDTH  EQU $0d
 
 ; Mansion2_h map_id=214
-Mansion2Height EQU $0e
-Mansion2Width  EQU $0f
+MANSION_2_HEIGHT EQU $0e
+MANSION_2_WIDTH  EQU $0f
 
 ; Mansion3_h map_id=215
-Mansion3Height EQU $09
-Mansion3Width  EQU $0f
+MANSION_3_HEIGHT EQU $09
+MANSION_3_WIDTH  EQU $0f
 
 ; Mansion4_h map_id=216
-Mansion4Height EQU $0e
-Mansion4Width  EQU $0f
+MANSION_4_HEIGHT EQU $0e
+MANSION_4_WIDTH  EQU $0f
 
 ; SafariZoneEast_h map_id=217
-SafariZoneEastHeight EQU $0d
-SafariZoneEastWidth  EQU $0f
+SAFARI_ZONE_EAST_HEIGHT EQU $0d
+SAFARI_ZONE_EAST_WIDTH  EQU $0f
 
 ; SafariZoneNorth_h map_id=218
-SafariZoneNorthHeight EQU $12
-SafariZoneNorthWidth  EQU $14
+SAFARI_ZONE_NORTH_HEIGHT EQU $12
+SAFARI_ZONE_NORTH_WIDTH  EQU $14
 
 ; SafariZoneWest_h map_id=219
-SafariZoneWestHeight EQU $0d
-SafariZoneWestWidth  EQU $0f
+SAFARI_ZONE_WEST_HEIGHT EQU $0d
+SAFARI_ZONE_WEST_WIDTH  EQU $0f
 
 ; SafariZoneCenter_h map_id=220
-SafariZoneCenterHeight EQU $0d
-SafariZoneCenterWidth  EQU $0f
+SAFARI_ZONE_CENTER_HEIGHT EQU $0d
+SAFARI_ZONE_CENTER_WIDTH  EQU $0f
 
 ; SafariZoneRestHouse1_h map_id=221
-SafariZoneRestHouse1Height EQU $04
-SafariZoneRestHouse1Width  EQU $04
+SAFARI_ZONE_REST_HOUSE_1_HEIGHT EQU $04
+SAFARI_ZONE_REST_HOUSE_1_WIDTH  EQU $04
 
 ; SafariZoneSecretHouse_h map_id=222
-SafariZoneSecretHouseHeight EQU $04
-SafariZoneSecretHouseWidth  EQU $04
+SAFARI_ZONE_SECRET_HOUSE_HEIGHT EQU $04
+SAFARI_ZONE_SECRET_HOUSE_WIDTH  EQU $04
 
 ; SafariZoneRestHouse2_h map_id=223
-SafariZoneRestHouse2Height EQU $04
-SafariZoneRestHouse2Width  EQU $04
+SAFARI_ZONE_REST_HOUSE_2_HEIGHT EQU $04
+SAFARI_ZONE_REST_HOUSE_2_WIDTH  EQU $04
 
 ; SafariZoneRestHouse3_h map_id=224
-SafariZoneRestHouse3Height EQU $04
-SafariZoneRestHouse3Width  EQU $04
+SAFARI_ZONE_REST_HOUSE_3_HEIGHT EQU $04
+SAFARI_ZONE_REST_HOUSE_3_WIDTH  EQU $04
 
 ; SafariZoneRestHouse4_h map_id=225
-SafariZoneRestHouse4Height EQU $04
-SafariZoneRestHouse4Width  EQU $04
+SAFARI_ZONE_REST_HOUSE_4_HEIGHT EQU $04
+SAFARI_ZONE_REST_HOUSE_4_WIDTH  EQU $04
 
 ; UnknownDungeon2_h map_id=226
-UnknownDungeon2Height EQU $09
-UnknownDungeon2Width  EQU $0f
+UNKNOWN_DUNGEON_2_HEIGHT EQU $09
+UNKNOWN_DUNGEON_2_WIDTH  EQU $0f
 
 ; UnknownDungeon3_h map_id=227
-UnknownDungeon3Height EQU $09
-UnknownDungeon3Width  EQU $0f
+UNKNOWN_DUNGEON_3_HEIGHT EQU $09
+UNKNOWN_DUNGEON_3_WIDTH  EQU $0f
 
 ; UnknownDungeon1_h map_id=228
-UnknownDungeon1Height EQU $09
-UnknownDungeon1Width  EQU $0f
+UNKNOWN_DUNGEON_1_HEIGHT EQU $09
+UNKNOWN_DUNGEON_1_WIDTH  EQU $0f
 
 ; NameRater_h map_id=229
-NameRaterHeight EQU $04
-NameRaterWidth  EQU $04
+NAME_RATERS_HOUSE_HEIGHT EQU $04
+NAME_RATERS_HOUSE_WIDTH  EQU $04
 
 ; CeruleanHouse3_h map_id=230
-CeruleanHouse3Height EQU $04
-CeruleanHouse3Width  EQU $04
+CERULEAN_HOUSE_3_HEIGHT EQU $04
+CERULEAN_HOUSE_3_WIDTH  EQU $04
 
 ; RockTunnel2_h map_id=232
-RockTunnel2Height EQU $12
-RockTunnel2Width  EQU $14
+ROCK_TUNNEL_2_HEIGHT EQU $12
+ROCK_TUNNEL_2_WIDTH  EQU $14
 
 ; SilphCo9_h map_id=233
-SilphCo9Height EQU $09
-SilphCo9Width  EQU $0d
+SILPH_CO_9F_HEIGHT EQU $09
+SILPH_CO_9F_WIDTH  EQU $0d
 
 ; SilphCo10_h map_id=234
-SilphCo10Height EQU $09
-SilphCo10Width  EQU $08
+SILPH_CO_10F_HEIGHT EQU $09
+SILPH_CO_10F_WIDTH  EQU $08
 
 ; SilphCo11_h map_id=235
-SilphCo11Height EQU $09
-SilphCo11Width  EQU $09
+SILPH_CO_11F_HEIGHT EQU $09
+SILPH_CO_11F_WIDTH  EQU $09
 
 ; SilphCoElevator_h map_id=236
-SilphCoElevatorHeight EQU $02
-SilphCoElevatorWidth  EQU $02
+SILPH_CO_ELEVATOR_HEIGHT EQU $02
+SILPH_CO_ELEVATOR_WIDTH  EQU $02
 
 ; BattleCenterM_h map_id=239
-BattleCenterMHeight EQU $04
-BattleCenterMWidth  EQU $05
+BATTLE_CENTER_HEIGHT EQU $04
+BATTLE_CENTER_WIDTH  EQU $05
 
 ; TradeCenterM_h map_id=240
-TradeCenterMHeight EQU $04
-TradeCenterMWidth  EQU $05
+TRADE_CENTER_HEIGHT EQU $04
+TRADE_CENTER_WIDTH  EQU $05
 
 ; Lorelei_h map_id=245
-LoreleiHeight EQU $06
-LoreleiWidth  EQU $05
+LORELEIS_ROOM_HEIGHT EQU $06
+LORELEIS_ROOM_WIDTH  EQU $05
 
 ; Bruno_h map_id=246
-BrunoHeight EQU $06
-BrunoWidth  EQU $05
+BRUNOS_ROOM_HEIGHT EQU $06
+BRUNOS_ROOM_WIDTH  EQU $05
 
 ; Agatha_h map_id=247
-AgathaHeight EQU $06
-AgathaWidth  EQU $05
+AGATHAS_ROOM_HEIGHT EQU $06
+AGATHAS_ROOM_WIDTH  EQU $05
