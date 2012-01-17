@@ -2167,29 +2167,3 @@ BrunoWidth  EQU $05
 ; Agatha_h map_id=247
 AgathaHeight EQU $06
 AgathaWidth  EQU $05
-
-;Tilesets
-TileSet_Outside equ $0
-TileSet_YourHouse1 equ $1
-TileSet_PkmnCtr1 equ $2
-TileSet_VirForest equ $3
-TileSet_YourHouse2 equ $4
-TileSet_Gym1 equ $5
-TileSet_PkmnCtr2 equ $6
-TileSet_Gym2 equ $7
-TileSet_House equ $8
-TileSet_Museum1 equ $9
-TileSet_Museum2 equ $A
-TileSet_UndPath equ $B
-TileSet_Museum3 equ $C
-TileSet_SSAnne equ $D
-TileSet_VermPort equ $E
-TileSet_PokeCem equ $F
-TileSet_Silph equ $10
-TileSet_Cave equ $11
-TileSet_CeldMart equ $12
-TileSet_GmFrkHQ equ $13
-TileSet_Lab equ $14
-TileSet_BikeShp equ $15
-TileSet_Mansion equ $16
-TileSet_IndigoPlt equ $17

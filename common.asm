@@ -27620,7 +27620,7 @@ INCBIN "baserom.gbc",$52996,$54000 - $52996
 SECTION "bank15",DATA,BANK[$15]
 
 Route2_h:
-	db TileSet_Outside; Tileset
+	db 00; Tileset
 	db Route2Height,Route2Width ;Height,Width blocks (1 block = 4x4 tiles)
 	dw $407E ;Map-Pointer
 	dw $54E6 ;Maps text pointer
