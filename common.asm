@@ -39805,7 +39805,7 @@ _RockTunnelPokecenterText1: ; 0x8c2c0
 
 _RockTunnelPokecenterText3: ; 0x8c316
     db $0, "I sold a useless", $4f
-    db "NUGGET for ", $f0, "5000!", $57
+    db "NUGGET for ¥5000!", $57
 
 INCBIN "baserom.gbc",$8c33a,$8c5b7 - $8c33a
 
