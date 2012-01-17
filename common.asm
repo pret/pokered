@@ -27624,32 +27624,30 @@ SECTION "bank15",DATA,BANK[$15]
 
 Route2_h:
 	db TileSet_Outside; Tileset
-	db Route2Height,Route2Width ;Height,Width blocks (1 block = 4x4 tiles)
-	dw $407E ;Map-Pointer
-	dw $54E6 ;Maps text pointer
-	dw $54E3 ;Maps script pointer
+	db Route2Height,Route2Width ;Height, Width
+	dw Route2Blocks, Route2Texts, Route2Script ;Blocks, Texts, Scripts
 	db NORTH | SOUTH ;Connection Byte
 	
 	;Connection data
-	db PEWTER_CITY ;Index of connected map
-		dw $4714 ;Pointer to "Connection Strip"s Upperleft Block (Connected Map)
-		dw $C6E8 ;Pointer to "Connection Strip"s Upperleft Block (Current Map)
-		db 16 ;Bigness
-		db 20 ;Map Width
-		db 35 ;Y Alignment
-		db 10 ;X alignment
-		dw $C8BD ;Window
+	db PEWTER_CITY ;Map
+		dw $4714 ;y, x Strip Starting Point
+		dw $C6E8 ;Strip X-Offset to current map
+		db 16 ;"Bigness" (Unsure) ;Something to do with MapData
+		db 20 ;"Map Width" (Unsure) ;Something to do with TileSet
+		db 35 ;Player's new Y-Coordinates
+		db 10 ;Player's new X-Coordinates
+		dw $C8BD ;New UL Block Pos (Window)
 		
-	db VIRIDIAN_CITY ;Index of connected map
-		dw $43EE ;Pointer to "Connection Strip"s Upperleft Block (Connected Map)
-		dw $C958 ;Pointer to "Connection Strip"s Upperleft Block (Current Map)
-		db 16 ;Bigness
-		db 20 ;Map Width
-		db 0 ;Y Alignment
-		db 10 ;X alignment
-		dw $C703 ;Window
+	db VIRIDIAN_CITY ;Map
+		dw $43EE ;y, x Strip Starting Point
+		dw $C958 ;Strip X-Offset to current map
+		db 16 ;"Bigness" (Unsure) ;Something to do with MapData
+		db 20 ;"Map Width" (Unsure) ;Something to do with TileSet
+		db 0 ;Player's new Y-Coordinates
+		db 10 ;Player's new X-Coordinates
+		dw $C703 ;New UL Block Pos (Window)
 	
-	dw $4022 ;Object Data Pointer
+	dw Route2Object ;Object Data Pointer
 
 Route2Object: ; 0x54022 (size=72)
     db $f ; border tile
@@ -28147,7 +28145,8 @@ Route2Script: ; 0x554e3
     jp $3c3c
 ; 0x554e6
 
-INCBIN "baserom.gbc",$554e6,$8
+Route2Texts:
+dw Route2Text1, Route2Text2, Route2Text3, Route2Text4
 
 Route2Text3: ; 0x554ee
     TX_FAR _Route2Text3
