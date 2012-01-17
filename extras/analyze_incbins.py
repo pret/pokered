@@ -79,7 +79,9 @@ def process_incbins():
                             "end": end,
                            }
         
-        processed_incbins[line_number] = processed_incbin
+        #don't add this incbin if the interval is 0
+        if interval != 0:
+            processed_incbins[line_number] = processed_incbin
 
 def find_incbin_to_replace_for(address):
     """returns a line number for which incbin to edit
