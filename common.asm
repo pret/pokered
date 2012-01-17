@@ -36472,7 +36472,7 @@ INCBIN "baserom.gbc",$747de,$74897 - $747de
 
 ViridianGym_h: ; 0x74897 to 0x748a3 (12 bytes) (id=45)
     db $07 ; tileset
-    db VIRIDIAN_GYM_HEIGHT, VIRIDIAN_GYM_WIDTH ; dimensions (y, x)
+    db $09, $0a ; dimensions (y, x)
     dw ViridianGymBlocks, ViridianGymTexts, ViridianGymScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -36491,7 +36491,11 @@ ViridianGymScript: ; 0x748a3
     ret
 ; 0x748bf
 
-INCBIN "baserom.gbc",$748bf,$12d
+
+	db "VIRIDIAN CITY@"
+	db "GIOVANNI@"
+
+INCBIN "baserom.gbc",$748D6,$116
 
 ViridianGymTexts: ; 0x749ec
     dw ViridianGymText1, ViridianGymText2, ViridianGymText3, ViridianGymText4, ViridianGymText5, ViridianGymText6, ViridianGymText7, ViridianGymText8, ViridianGymText9, ViridianGymText10, ViridianGymText11, ViridianGymText12, ViridianGymText13, ViridianGymText14
@@ -36666,7 +36670,7 @@ ViridianGymBlocks: ; 90
 
 PewterMart_h: ; 0x74ca1 to 0x74cad (12 bytes) (id=56)
     db $02 ; tileset
-    db PEWTER_MART_HEIGHT, PEWTER_MART_WIDTH ; dimensions (y, x)
+    db $04, $04 ; dimensions (y, x)
     dw PewterMartBlocks, PewterMartTexts, PewterMartScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -36718,7 +36722,7 @@ PewterMartObject: ; 0x74cda (size=38)
 
 UnknownDungeon1_h: ; 0x74d00 to 0x74d0c (12 bytes) (id=228)
     db $11 ; tileset
-    db UNKNOWN_DUNGEON_1_HEIGHT, UNKNOWN_DUNGEON_1_WIDTH ; dimensions (y, x)
+    db $09, $0f ; dimensions (y, x)
     dw UnknownDungeon1Blocks, UnknownDungeon1Texts, UnknownDungeon1Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -36768,7 +36772,7 @@ UnknownDungeon1Blocks: ; 135
 
 CeruleanHouse3_h: ; 0x74dfd to 0x74e09 (12 bytes) (id=230)
     db $0d ; tileset
-    db CERULEAN_HOUSE_3_HEIGHT, CERULEAN_HOUSE_3_WIDTH ; dimensions (y, x)
+    db $04, $04 ; dimensions (y, x)
     dw CeruleanHouse3Blocks, CeruleanHouse3Texts, CeruleanHouse3Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -36849,11 +36853,21 @@ CeruleanHouse3Object: ; 0x74ebe (size=34)
     EVENT_DISP $4, $7, $2
     EVENT_DISP $4, $7, $3
 
-INCBIN "baserom.gbc",$74ee0,$12c
+INCBIN "baserom.gbc",$74ee0,$BE
+
+	db "FRESH WATER",$4E
+	db "SODA POP",$4E
+	db "LEMONADE",$4E
+	db "CANCEL@"
+	db $F0,"200",$4E
+	db $F0,"300",$4E
+	db $F0,"350",$4E,"@"
+
+INCBIN "baserom.gbc",$74fd3,$39
 
 FuchsiaHouse1_h: ; 0x7500c to 0x75018 (12 bytes) (id=153)
     db $08 ; tileset
-    db FUCHSIA_HOUSE_1_HEIGHT, FUCHSIA_HOUSE_1_WIDTH ; dimensions (y, x)
+    db $04, $04 ; dimensions (y, x)
     dw FuchsiaHouse1Blocks, FuchsiaHouse1Texts, FuchsiaHouse1Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -36899,7 +36913,7 @@ FuchsiaHouse1Object: ; 0x75031 (size=38)
 
 FuchsiaPokecenter_h: ; 0x75057 to 0x75063 (12 bytes) (id=154)
     db $06 ; tileset
-    db FUCHSIA_POKECENTER_HEIGHT, FUCHSIA_POKECENTER_WIDTH ; dimensions (y, x)
+    db $04, $07 ; dimensions (y, x)
     dw FuchsiaPokecenterBlocks, FuchsiaPokecenterTexts, FuchsiaPokecenterScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -36948,7 +36962,7 @@ FuchsiaPokecenterObject: ; 0x7507d (size=44)
 
 FuchsiaHouse2_h: ; 0x750a9 to 0x750b5 (12 bytes) (id=155)
     db $14 ; tileset
-    db FUCHSIA_HOUSE_2_HEIGHT, FUCHSIA_HOUSE_2_WIDTH ; dimensions (y, x)
+    db $04, $05 ; dimensions (y, x)
     dw FuchsiaHouse2Blocks, FuchsiaHouse2Texts, FuchsiaHouse2Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -37055,7 +37069,7 @@ FuchsiaHouse2Blocks: ; 20
 
 SafariZoneEntrance_h: ; 0x751c1 to 0x751cd (12 bytes) (id=156)
     db $0c ; tileset
-    db SAFARIZONEENTRANCE_HEIGHT, SAFARIZONEENTRANCE_WIDTH ; dimensions (y, x)
+    db $03, $04 ; dimensions (y, x)
     dw SafariZoneEntranceBlocks, SafariZoneEntranceTexts, SafariZoneEntranceScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -37183,7 +37197,7 @@ SafariZoneEntranceBlocks: ; 12
 
 FuchsiaGym_h: ; 0x75431 to 0x7543d (12 bytes) (id=157)
     db $07 ; tileset
-    db FUCHSIA_GYM_HEIGHT, FUCHSIA_GYM_WIDTH ; dimensions (y, x)
+    db $09, $05 ; dimensions (y, x)
     dw FuchsiaGymBlocks, FuchsiaGymTexts, FuchsiaGymScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -37200,7 +37214,12 @@ FuchsiaGymScript: ; 0x7543d
     ret
 ; 0x75453
 
-INCBIN "baserom.gbc",$75453,$82
+INCBIN "baserom.gbc",$75453,$12
+
+	db "FUCHSIA CITY@"
+	db "KOGA@"
+
+INCBIN "baserom.gbc",$75477,$5E
 
 FuchsiaGymTexts: ; 0x754d5
     dw FuchsiaGymText1, FuchsiaGymText2, FuchsiaGymText3, FuchsiaGymText4, FuchsiaGymText5, FuchsiaGymText6, FuchsiaGymText7, FuchsiaGymText8, FuchsiaGymText9, FuchsiaGymText10, FuchsiaGymText11
@@ -37343,7 +37362,7 @@ FuchsiaGymBlocks: ; 45
 
 FuchsiaMeetingRoom_h: ; 0x756d7 to 0x756e3 (12 bytes) (id=158)
     db $14 ; tileset
-    db FUCHSIAMEETINGROOM_HEIGHT, FUCHSIAMEETINGROOM_WIDTH ; dimensions (y, x)
+    db $04, $07 ; dimensions (y, x)
     dw FuchsiaMeetingRoomBlocks, FuchsiaMeetingRoomTexts, FuchsiaMeetingRoomScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -37392,7 +37411,7 @@ FuchsiaMeetingRoomBlocks: ; 28
 
 CinnabarGym_h: ; 0x7573e to 0x7574a (12 bytes) (id=166)
     db $16 ; tileset
-    db CINNABAR_GYM_HEIGHT, CINNABAR_GYM_WIDTH ; dimensions (y, x)
+    db $09, $0a ; dimensions (y, x)
     dw CinnabarGymBlocks, CinnabarGymTexts, CinnabarGymScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -37406,7 +37425,12 @@ CinnabarGymScript: ; 0x7574a
     jp $3d97
 ; 0x75759
 
-INCBIN "baserom.gbc",$75759,$757a6 - $75759
+INCBIN "baserom.gbc",$75759,$7577B - $75759
+
+	db "CINNABAR ISLAND@"
+	db "BLAINE@"
+
+INCBIN "baserom.gbc",$75792,$757a6 - $75792
 
 CinnabarGymScripts: ; 0x757a6
     dw CinnabarGymScript0, CinnabarGymScript1
@@ -37664,7 +37688,7 @@ CinnabarGymBlocks: ; 90
 
 Lab1_h: ; 0x75b80 to 0x75b8c (12 bytes) (id=167)
     db $14 ; tileset
-    db CINNABAR_LAB_1_HEIGHT, CINNABAR_LAB_1_WIDTH ; dimensions (y, x)
+    db $04, $09 ; dimensions (y, x)
     dw Lab1Blocks, Lab1Texts, Lab1Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -37729,7 +37753,7 @@ Lab1Blocks: ; 36
 
 Lab2_h: ; 0x75c15 to 0x75c21 (12 bytes) (id=168)
     db $14 ; tileset
-    db CINNABAR_LAB_2_HEIGHT, CINNABAR_LAB_2_WIDTH ; dimensions (y, x)
+    db $04, $04 ; dimensions (y, x)
     dw Lab2Blocks, Lab2Texts, Lab2Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -37784,7 +37808,7 @@ Lab2Blocks: ; 16
 
 Lab3_h: ; 0x75c7b to 0x75c87 (12 bytes) (id=169)
     db $14 ; tileset
-    db CINNABAR_LAB_3_HEIGHT, CINNABAR_LAB_3_WIDTH ; dimensions (y, x)
+    db $04, $04 ; dimensions (y, x)
     dw Lab3Blocks, Lab3Texts, Lab3Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -37862,7 +37886,7 @@ Lab3Blocks: ; 16
 
 Lab4_h: ; 0x75d25 to 0x75d31 (12 bytes) (id=170)
     db $14 ; tileset
-    db CINNABAR_LAB_4_HEIGHT, CINNABAR_LAB_4_WIDTH ; dimensions (y, x)
+    db $04, $04 ; dimensions (y, x)
     dw Lab4Blocks, Lab4Texts, Lab4Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -37955,7 +37979,7 @@ Lab4Blocks: ; 16
 
 CinnabarPokecenter_h: ; 0x75e20 to 0x75e2c (12 bytes) (id=171)
     db $06 ; tileset
-    db CINNABAR_POKECENTER_HEIGHT, CINNABAR_POKECENTER_WIDTH ; dimensions (y, x)
+    db $04, $07 ; dimensions (y, x)
     dw CinnabarPokecenterBlocks, CinnabarPokecenterTexts, CinnabarPokecenterScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -38004,7 +38028,7 @@ CinnabarPokecenterObject: ; 0x75e46 (size=44)
 
 CinnabarMart_h: ; 0x75e72 to 0x75e7e (12 bytes) (id=172)
     db $02 ; tileset
-    db CINNABAR_MART_HEIGHT, CINNABAR_MART_WIDTH ; dimensions (y, x)
+    db $04, $04 ; dimensions (y, x)
     dw CinnabarMartBlocks, CinnabarMartTexts, CinnabarMartScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -38045,7 +38069,7 @@ CinnabarMartObject: ; 0x75e91 (size=38)
 
 CopycatsHouseF1_h: ; 0x75eb7 to 0x75ec3 (12 bytes) (id=175)
     db $01 ; tileset
-    db COPYCATS_HOUSE_1F_HEIGHT, COPYCATS_HOUSE_1F_WIDTH ; dimensions (y, x)
+    db $04, $04 ; dimensions (y, x)
     dw CopycatsHouseF1Blocks, CopycatsHouseF1Texts, CopycatsHouseF1Script ; blocks, texts, scripts
     db $00 ; connections
 
@@ -38170,7 +38194,7 @@ GaryBlocks: ; 16
 
 Lorelei_h: ; 0x7616f to 0x7617b (12 bytes) (id=245)
     db $07 ; tileset
-    db LORELEIS_ROOM_HEIGHT, LORELEIS_ROOM_WIDTH ; dimensions (y, x)
+    db $06, $05 ; dimensions (y, x)
     dw LoreleiBlocks, LoreleiTexts, LoreleiScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -38230,7 +38254,7 @@ LoreleiBlocks: ; 30
 
 Bruno_h: ; 0x762ca to 0x762d6 (12 bytes) (id=246)
     db $07 ; tileset
-    db BRUNOS_ROOM_HEIGHT, BRUNOS_ROOM_WIDTH ; dimensions (y, x)
+    db $06, $05 ; dimensions (y, x)
     dw BrunoBlocks, BrunoTexts, BrunoScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -38290,7 +38314,7 @@ BrunoBlocks: ; 30
 
 Agatha_h: ; 0x76421 to 0x7642d (12 bytes) (id=247)
     db $0f ; tileset
-    db AGATHAS_ROOM_HEIGHT, AGATHAS_ROOM_WIDTH ; dimensions (y, x)
+    db $06, $05 ; dimensions (y, x)
     dw AgathaBlocks, AgathaTexts, AgathaScript ; blocks, texts, scripts
     db $00 ; connections
 
@@ -38348,9 +38372,11 @@ AgathaObject: ; 0x76534 (size=44)
 AgathaBlocks: ; 30
     INCBIN "maps/agatha.blk"
 
-INCBIN "baserom.gbc",$7657e,$1a82 - 10
+INCBIN "baserom.gbc",$7657e,$76670 - $7657e
 
-;10 $0s go here, does anything use this?
+	db "HALL OF FAME No   @"
+
+INCBIN "baserom.gbc",$76683,$76880 - $76683
 
 SECTION "bank1E",DATA,BANK[$1E]
 
