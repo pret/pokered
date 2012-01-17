@@ -385,7 +385,7 @@ def find_missing_08s(all_texts):
 
 def text_pretty_printer_at(start_address, label="SomeLabel"):
     commands = parse_text_script(start_address, None, None)
-    needs_to_begin_with_0 = False
+    needs_to_begin_with_0 = True #how should this be determined?
     
     wanted_command = None
     if needs_to_begin_with_0:
@@ -403,11 +403,28 @@ def text_pretty_printer_at(start_address, label="SomeLabel"):
 
     first_line = True
     for this_command in commands.keys():
-        if not "lines" in commands[this_command].keys(): continue
+        if not "lines" in commands[this_command].keys():
+            command = commands[this_command]
+            if command["type"] == 0x1:
+                if first_line:
+                    output = "\n"
+                    output += label + ": ; " + hex(start_address) + "\n"
+                    first_line = False
+                p1 = command["pointer"][0]
+                p2 = command["pointer"][1]
+
+                #remember to account for big endian -> little endian
+                output += spacing + "TX_RAM $" + hex(p2)[2:] + hex(p1)[2:] + "\n"
+
+                byte_count += 3
+            
+            #everything else is for $0s, really
+            continue
         lines = commands[this_command]["lines"]
     
         #add the ending byte to the last line- always seems $57
-        lines[len(lines.keys())-1].append(commands[1]["type"])
+        #this should already be in there, but it's not because of a bug in the text parser
+        lines[len(lines.keys())-1].append(commands[len(commands.keys())-1]["type"])
     
         if first_line:
             output  = "\n"

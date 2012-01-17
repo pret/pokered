@@ -79,6 +79,14 @@ TX_FAR: MACRO
 	db BANK(\1)
 	ENDM
 
+; text engine command $1
+TX_RAM: MACRO
+; prints text to screen
+; \1: RAM address to read from
+    db $1
+    dw \1
+    ENDM
+
 ; wram locations
 W_AICOUNT EQU $CCDF ; number of times remaining that AI action can occur
 
