@@ -2111,7 +2111,19 @@ UnusedNames: ; 4A92
 	db "プチマスター@"
 	db "マスター@"
 
-INCBIN "baserom.gbc",$4B09,$5AF2-$4B09
+INCBIN "baserom.gbc",$4b09,$4e2c - $4b09
+
+UnnamedText_4e2c: ; 0x4e2c
+    TX_FAR _UnnamedText_4e2c
+    db $50
+; 0x4e2c + 5 bytes
+INCBIN "baserom.gbc",$4e31,$5a24 - $4e31
+
+UnnamedText_5a24: ; 0x5a24
+    TX_FAR _UnnamedText_5a24
+    db $50
+; 0x5a24 + 5 bytes
+INCBIN "baserom.gbc",$5a29,$c9
 
 MainMenu:
 ; Check save file
@@ -2248,7 +2260,23 @@ Func_5bff:
 	ld [$D355],a
 	ret
 
-INCBIN "baserom.gbc",$5C0A,$6115 - $5C0A
+INCBIN "baserom.gbc",$5c0a,$5d43 - $5c0a
+
+UnnamedText_5d43: ; 0x5d43
+    TX_FAR _UnnamedText_5d43
+    db $50
+; 0x5d43 + 5 bytes
+
+UnnamedText_5d48: ; 0x5d48
+    TX_FAR _UnnamedText_5d48
+    db $50
+; 0x5d48 + 5 bytes
+
+UnnamedText_5d4d: ; 0x5d4d
+    TX_FAR _UnnamedText_5d4d
+    db $50
+; 0x5d4d + 5 bytes
+INCBIN "baserom.gbc",$5d52,$3c3
 
 OakSpeech: ; 6115
 	ld a,$FF
@@ -2550,7 +2578,19 @@ Map0fFlyWarp:
 Map15FlyWarp:
 	FLYWARP_DATA 10,20,11
 
-INCBIN "baserom.gbc",$64CA,$69A7 - $64CA
+INCBIN "baserom.gbc",$64ca,$6557 - $64ca
+
+UnnamedText_6557: ; 0x6557
+    TX_FAR _UnnamedText_6557
+    db $50
+; 0x6557 + 5 bytes
+INCBIN "baserom.gbc",$655c,$699f - $655c
+
+UnnamedText_699f: ; 0x699f
+    TX_FAR _UnnamedText_699f
+    db $50
+; 0x699f + 5 bytes
+INCBIN "baserom.gbc",$69a4,$3
 
 ld de,DefaultNamesRival
 
@@ -2558,7 +2598,13 @@ INCBIN "baserom.gbc",$69AA,$69B3 - $69AA
 
 ld hl,DefaultNamesRivalList
 
-INCBIN "baserom.gbc",$69B6,$6AA8 - $69B6
+INCBIN "baserom.gbc",$69b6,$69e7 - $69b6
+
+UnnamedText_69e7: ; 0x69e7
+    TX_FAR _UnnamedText_69e7
+    db $50
+; 0x69e7 + 5 bytes
+INCBIN "baserom.gbc",$69ec,$bc
 
 IF _RED
 DefaultNamesPlayer:
@@ -2588,7 +2634,129 @@ DefaultNamesRivalList:
 	db "NEW NAME@RED@ASH@JACK@@"
 ENDC
 
-INCBIN "baserom.gbc",$6B21,$778D - $6B21
+INCBIN "baserom.gbc",$6b21,$6e0c - $6b21
+
+UnnamedText_6e0c: ; 0x6e0c
+    TX_FAR _UnnamedText_6e0c
+    db $50
+; 0x6e0c + 5 bytes
+
+UnnamedText_6e11: ; 0x6e11
+    TX_FAR _UnnamedText_6e11
+    db $50
+; 0x6e11 + 5 bytes
+
+UnnamedText_6e16: ; 0x6e16
+    TX_FAR _UnnamedText_6e16
+    db $50
+; 0x6e16 + 5 bytes
+
+UnnamedText_6e1b: ; 0x6e1b
+    TX_FAR _UnnamedText_6e1b
+    db $50
+; 0x6e1b + 5 bytes
+
+UnnamedText_6e20: ; 0x6e20
+    TX_FAR _UnnamedText_6e20
+    db $50
+; 0x6e20 + 5 bytes
+
+UnnamedText_6e25: ; 0x6e25
+    TX_FAR _UnnamedText_6e25
+    db $50
+; 0x6e25 + 5 bytes
+
+UnnamedText_6e2a: ; 0x6e2a
+    TX_FAR _UnnamedText_6e2a
+    db $50
+; 0x6e2a + 5 bytes
+
+UnnamedText_6e2f: ; 0x6e2f
+    TX_FAR _UnnamedText_6e2f
+    db $50
+; 0x6e2f + 5 bytes
+
+UnnamedText_6e34: ; 0x6e34
+    TX_FAR _UnnamedText_6e34
+    db $50
+; 0x6e34 + 5 bytes
+
+UnnamedText_6e39: ; 0x6e39
+    TX_FAR _UnnamedText_6e39
+    db $50
+; 0x6e39 + 5 bytes
+
+UnnamedText_6e3e: ; 0x6e3e
+    TX_FAR _UnnamedText_6e3e
+    db $50
+; 0x6e3e + 5 bytes
+INCBIN "baserom.gbc",$6e43,$6fb4 - $6e43
+
+UnnamedText_6fb4: ; 0x6fb4
+    TX_FAR _UnnamedText_6fb4
+    db $50
+; 0x6fb4 + 5 bytes
+
+UnnamedText_6fb9: ; 0x6fb9
+    TX_FAR _UnnamedText_6fb9
+    db $50
+; 0x6fb9 + 5 bytes
+
+UnnamedText_6fbe: ; 0x6fbe
+    TX_FAR _UnnamedText_6fbe
+    db $50
+; 0x6fbe + 5 bytes
+
+UnnamedText_6fc3: ; 0x6fc3
+    TX_FAR _UnnamedText_6fc3
+    db $50
+; 0x6fc3 + 5 bytes
+INCBIN "baserom.gbc",$6fc8,$6fdc - $6fc8
+
+UnnamedText_6fdc: ; 0x6fdc
+    TX_FAR _UnnamedText_6fdc
+    db $50
+; 0x6fdc + 5 bytes
+
+UnnamedText_6fe1: ; 0x6fe1
+    TX_FAR _UnnamedText_6fe1
+    db $50
+; 0x6fe1 + 5 bytes
+INCBIN "baserom.gbc",$6fe6,$705d - $6fe6
+
+UnnamedText_705d: ; 0x705d
+    TX_FAR _UnnamedText_705d
+    db $50
+; 0x705d + 5 bytes
+INCBIN "baserom.gbc",$7062,$7063 - $7062
+
+UnnamedText_7063: ; 0x7063
+    TX_FAR _UnnamedText_7063
+    db $50
+; 0x7063 + 5 bytes
+
+UnnamedText_7068: ; 0x7068
+    TX_FAR _UnnamedText_7068
+    db $50
+; 0x7068 + 5 bytes
+
+UnnamedText_706d: ; 0x706d
+    TX_FAR _UnnamedText_706d
+    db $50
+; 0x706d + 5 bytes
+INCBIN "baserom.gbc",$7072,$7073 - $7072
+
+UnnamedText_7073: ; 0x7073
+    TX_FAR _UnnamedText_7073
+    db $50
+; 0x7073 + 5 bytes
+INCBIN "baserom.gbc",$7078,$72b3 - $7078
+
+UnnamedText_72b3: ; 0x72b3
+    TX_FAR _UnnamedText_72b3
+    db $50
+; 0x72b3 + 5 bytes
+INCBIN "baserom.gbc",$72b8,$4d5
 
 FieldMoveNames: ; 778D
 	db "CUT@"
@@ -8027,7 +8195,76 @@ ShrinkPic1:
 ShrinkPic2:
 	INCBIN "pic/trainer/shrink2.pic"
 
-INCBIN "baserom.gbc",$13074,$13A8F-$13074
+INCBIN "baserom.gbc",$13074,$13228 - $13074
+
+UnnamedText_13228: ; 0x13228
+    TX_FAR _UnnamedText_13228
+    db $50
+; 0x13228 + 5 bytes
+INCBIN "baserom.gbc",$1322d,$1327b - $1322d
+
+UnnamedText_1327b: ; 0x1327b
+    TX_FAR _UnnamedText_1327b
+    db $50
+; 0x1327b + 5 bytes
+
+UnnamedText_13280: ; 0x13280
+    TX_FAR _UnnamedText_13280
+    db $50
+; 0x13280 + 5 bytes
+
+UnnamedText_13285: ; 0x13285
+    TX_FAR _UnnamedText_13285
+    db $50
+; 0x13285 + 5 bytes
+INCBIN "baserom.gbc",$1328a,$132d4 - $1328a
+
+UnnamedText_132d4: ; 0x132d4
+    TX_FAR _UnnamedText_132d4
+    db $50
+; 0x132d4 + 5 bytes
+INCBIN "baserom.gbc",$132d9,$132e8 - $132d9
+
+UnnamedText_132e8: ; 0x132e8
+    TX_FAR _UnnamedText_132e8
+    db $50
+; 0x132e8 + 5 bytes
+INCBIN "baserom.gbc",$132ed,$1342a - $132ed
+
+UnnamedText_1342a: ; 0x1342a
+    TX_FAR _UnnamedText_1342a
+    db $50
+; 0x1342a + 5 bytes
+
+UnnamedText_1342f: ; 0x1342f
+    TX_FAR _UnnamedText_1342f
+    db $50
+; 0x1342f + 5 bytes
+INCBIN "baserom.gbc",$13434,$1386b - $13434
+
+UnnamedText_1386b: ; 0x1386b
+    TX_FAR _UnnamedText_1386b
+    db $50
+; 0x1386b + 5 bytes
+INCBIN "baserom.gbc",$13870,$1399e - $13870
+
+UnnamedText_1399e: ; 0x1399e
+    TX_FAR _UnnamedText_1399e
+    db $50
+; 0x1399e + 5 bytes
+INCBIN "baserom.gbc",$139a3,$139cd - $139a3
+
+UnnamedText_139cd: ; 0x139cd
+    TX_FAR _UnnamedText_139cd
+    db $50
+; 0x139cd + 5 bytes
+INCBIN "baserom.gbc",$139d2,$13a53 - $139d2
+
+UnnamedText_13a53: ; 0x13a53
+    TX_FAR _UnnamedText_13a53
+    db $50
+; 0x13a53 + 5 bytes
+INCBIN "baserom.gbc",$13a58,$37
 
 GenRandom_: ; 7A8F
 ; generate a random 16-bit integer and store it at $FFD3,$FFD4
@@ -8045,7 +8282,44 @@ GenRandom_: ; 7A8F
 
 SECTION "bank5",DATA,BANK[$5]
 
-INCBIN "baserom.gbc",$14000,$4000
+INCBIN "baserom.gbc",$14000,$17e1d - $14000
+
+UnnamedText_17e1d: ; 0x17e1d
+    TX_FAR _UnnamedText_17e1d
+    db $50
+; 0x17e1d + 5 bytes
+
+UnnamedText_17e22: ; 0x17e22
+    TX_FAR _UnnamedText_17e22
+    db $50
+; 0x17e22 + 5 bytes
+
+UnnamedText_17e27: ; 0x17e27
+    TX_FAR _UnnamedText_17e27
+    db $50
+; 0x17e27 + 5 bytes
+INCBIN "baserom.gbc",$17e2c,$17f23 - $17e2c
+
+UnnamedText_17f23: ; 0x17f23
+    TX_FAR _UnnamedText_17f23
+    db $50
+; 0x17f23 + 5 bytes
+
+UnnamedText_17f28: ; 0x17f28
+    TX_FAR _UnnamedText_17f28
+    db $50
+; 0x17f28 + 5 bytes
+
+UnnamedText_17f2d: ; 0x17f2d
+    TX_FAR _UnnamedText_17f2d
+    db $50
+; 0x17f2d + 5 bytes
+
+UnnamedText_17f32: ; 0x17f32
+    TX_FAR _UnnamedText_17f32
+    db $50
+; 0x17f32 + 5 bytes
+INCBIN "baserom.gbc",$17f37,$c9
 
 SECTION "bank6",DATA,BANK[$6]
 
@@ -8865,7 +9139,17 @@ ViridianCityText4: ; 0x1915c
 .asm_700a6 ; 0x19172
     jp $24d7
 
-INCBIN "baserom.gbc",$19175,$1917f - $19175
+
+UnnamedText_19175: ; 0x19175
+    TX_FAR _UnnamedText_19175
+    db $50
+; 0x19175 + 5 bytes
+
+UnnamedText_1917a: ; 0x1917a
+    TX_FAR _UnnamedText_1917a
+    db $50
+; 0x1917a + 5 bytes
+INCBIN "baserom.gbc",$1917f,$0
 
 ViridianCityText5: ; 0x1917f
     db $08 ; asm
@@ -9057,7 +9341,12 @@ PewterCityText5: ; 0x19436
     ld [$d5f7], a
     jp $24d7
 
-INCBIN "baserom.gbc",$1945d,$19462 - $1945d
+
+UnnamedText_1945d: ; 0x1945d
+    TX_FAR _UnnamedText_1945d
+    db $50
+; 0x1945d + 5 bytes
+INCBIN "baserom.gbc",$19462,$0
 
 PewterCityText14: ; 0x19462
 INCBIN "baserom.gbc",$19462,$5
@@ -10089,7 +10378,17 @@ SilphCo4Text1: ; 0x19dd3
     call $622f
     jp $24d7
 
-INCBIN "baserom.gbc",$19de0,$19dea - $19de0
+
+UnnamedText_19de0: ; 0x19de0
+    TX_FAR _UnnamedText_19de0
+    db $50
+; 0x19de0 + 5 bytes
+
+UnnamedText_19de5: ; 0x19de5
+    TX_FAR _UnnamedText_19de5
+    db $50
+; 0x19de5 + 5 bytes
+INCBIN "baserom.gbc",$19dea,$0
 
 SilphCo4Text2: ; 0x19dea
     db $08 ; asm
@@ -10097,7 +10396,22 @@ SilphCo4Text2: ; 0x19dea
     call LoadTrainerHeader
     jp $24d7
 
-INCBIN "baserom.gbc",$19df4,$19e03 - $19df4
+
+UnnamedText_19df4: ; 0x19df4
+    TX_FAR _UnnamedText_19df4
+    db $50
+; 0x19df4 + 5 bytes
+
+UnnamedText_19df9: ; 0x19df9
+    TX_FAR _UnnamedText_19df9
+    db $50
+; 0x19df9 + 5 bytes
+
+UnnamedText_19dfe: ; 0x19dfe
+    TX_FAR _UnnamedText_19dfe
+    db $50
+; 0x19dfe + 5 bytes
+INCBIN "baserom.gbc",$19e03,$0
 
 SilphCo4Text3: ; 0x19e03
     db $08 ; asm
@@ -10105,7 +10419,22 @@ SilphCo4Text3: ; 0x19e03
     call LoadTrainerHeader
     jp $24d7
 
-INCBIN "baserom.gbc",$19e0d,$19e1c - $19e0d
+
+UnnamedText_19e0d: ; 0x19e0d
+    TX_FAR _UnnamedText_19e0d
+    db $50
+; 0x19e0d + 5 bytes
+
+UnnamedText_19e12: ; 0x19e12
+    TX_FAR _UnnamedText_19e12
+    db $50
+; 0x19e12 + 5 bytes
+
+UnnamedText_19e17: ; 0x19e17
+    TX_FAR _UnnamedText_19e17
+    db $50
+; 0x19e17 + 5 bytes
+INCBIN "baserom.gbc",$19e1c,$0
 
 SilphCo4Text4: ; 0x19e1c
     db $08 ; asm
@@ -10191,7 +10520,22 @@ SilphCo5Text2: ; 0x1a01a
     call LoadTrainerHeader
     jp $24d7
 
-INCBIN "baserom.gbc",$1a024,$1a033 - $1a024
+
+UnnamedText_1a024: ; 0x1a024
+    TX_FAR _UnnamedText_1a024
+    db $50
+; 0x1a024 + 5 bytes
+
+UnnamedText_1a029: ; 0x1a029
+    TX_FAR _UnnamedText_1a029
+    db $50
+; 0x1a029 + 5 bytes
+
+UnnamedText_1a02e: ; 0x1a02e
+    TX_FAR _UnnamedText_1a02e
+    db $50
+; 0x1a02e + 5 bytes
+INCBIN "baserom.gbc",$1a033,$0
 
 SilphCo5Text3: ; 0x1a033
     db $08 ; asm
@@ -10199,7 +10543,22 @@ SilphCo5Text3: ; 0x1a033
     call LoadTrainerHeader
     jp $24d7
 
-INCBIN "baserom.gbc",$1a03d,$1a04c - $1a03d
+
+UnnamedText_1a03d: ; 0x1a03d
+    TX_FAR _UnnamedText_1a03d
+    db $50
+; 0x1a03d + 5 bytes
+
+UnnamedText_1a042: ; 0x1a042
+    TX_FAR _UnnamedText_1a042
+    db $50
+; 0x1a042 + 5 bytes
+
+UnnamedText_1a047: ; 0x1a047
+    TX_FAR _UnnamedText_1a047
+    db $50
+; 0x1a047 + 5 bytes
+INCBIN "baserom.gbc",$1a04c,$0
 
 SilphCo5Text4: ; 0x1a04c
     db $08 ; asm
@@ -10207,7 +10566,22 @@ SilphCo5Text4: ; 0x1a04c
     call LoadTrainerHeader
     jp $24d7
 
-INCBIN "baserom.gbc",$1a056,$1a065 - $1a056
+
+UnnamedText_1a056: ; 0x1a056
+    TX_FAR _UnnamedText_1a056
+    db $50
+; 0x1a056 + 5 bytes
+
+UnnamedText_1a05b: ; 0x1a05b
+    TX_FAR _UnnamedText_1a05b
+    db $50
+; 0x1a05b + 5 bytes
+
+UnnamedText_1a060: ; 0x1a060
+    TX_FAR _UnnamedText_1a060
+    db $50
+; 0x1a060 + 5 bytes
+INCBIN "baserom.gbc",$1a065,$0
 
 SilphCo5Text5: ; 0x1a065
     db $08 ; asm
@@ -10215,7 +10589,22 @@ SilphCo5Text5: ; 0x1a065
     call LoadTrainerHeader
     jp $24d7
 
-INCBIN "baserom.gbc",$1a06f,$f
+
+UnnamedText_1a06f: ; 0x1a06f
+    TX_FAR _UnnamedText_1a06f
+    db $50
+; 0x1a06f + 5 bytes
+
+UnnamedText_1a074: ; 0x1a074
+    TX_FAR _UnnamedText_1a074
+    db $50
+; 0x1a074 + 5 bytes
+
+UnnamedText_1a079: ; 0x1a079
+    TX_FAR _UnnamedText_1a079
+    db $50
+; 0x1a079 + 5 bytes
+INCBIN "baserom.gbc",$1a07e,$0
 
 SilphCo5Text9: ; 0x1a07e
     TX_FAR _SilphCo5Text9
@@ -10301,7 +10690,16 @@ SilphCo6Text1: ; 0x1a23d
     call $622f
     jp $24d7
 
-INCBIN "baserom.gbc",$1a24a,$1a254 - $1a24a
+
+UnnamedText_1a24a: ; 0x1a24a
+    TX_FAR _UnnamedText_1a24a
+    db $50
+; 0x1a24a + 5 bytes
+
+UnnamedText_1a24f: ; 0x1a24f
+    TX_FAR _UnnamedText_1a24f
+    db $50
+; 0x1a24f + 5 bytes
 
 SilphCo6Text2: ; 0x1a254
     db $08 ; asm
@@ -10310,7 +10708,15 @@ SilphCo6Text2: ; 0x1a254
     call $622f
     jp $24d7
 
-INCBIN "baserom.gbc",$1a261,$1a26b - $1a261
+UnnamedText_1a261: ; 0x1a261
+    TX_FAR _UnnamedText_1a261
+    db $50
+; 0x1a261 + 5 bytes
+
+UnnamedText_1a266: ; 0x1a266
+    TX_FAR _UnnamedText_1a266
+    db $50
+; 0x1a266 + 5 bytes
 
 SilphCo6Text3: ; 0x1a26b
     db $08 ; asm
@@ -10319,7 +10725,17 @@ SilphCo6Text3: ; 0x1a26b
     call $622f
     jp $24d7
 
-INCBIN "baserom.gbc",$1a278,$1a282 - $1a278
+
+UnnamedText_1a278: ; 0x1a278
+    TX_FAR _UnnamedText_1a278
+    db $50
+; 0x1a278 + 5 bytes
+
+UnnamedText_1a27d: ; 0x1a27d
+    TX_FAR _UnnamedText_1a27d
+    db $50
+; 0x1a27d + 5 bytes
+INCBIN "baserom.gbc",$1a282,$0
 
 SilphCo6Text4: ; 0x1a282
     db $08 ; asm
@@ -10328,7 +10744,17 @@ SilphCo6Text4: ; 0x1a282
     call $622f
     jp $24d7
 
-INCBIN "baserom.gbc",$1a28f,$1a299 - $1a28f
+
+UnnamedText_1a28f: ; 0x1a28f
+    TX_FAR _UnnamedText_1a28f
+    db $50
+; 0x1a28f + 5 bytes
+
+UnnamedText_1a294: ; 0x1a294
+    TX_FAR _UnnamedText_1a294
+    db $50
+; 0x1a294 + 5 bytes
+INCBIN "baserom.gbc",$1a299,$0
 
 SilphCo6Text5: ; 0x1a299
     db $08 ; asm
@@ -10337,7 +10763,17 @@ SilphCo6Text5: ; 0x1a299
     call $622f
     jp $24d7
 
-INCBIN "baserom.gbc",$1a2a6,$1a2b0 - $1a2a6
+
+UnnamedText_1a2a6: ; 0x1a2a6
+    TX_FAR _UnnamedText_1a2a6
+    db $50
+; 0x1a2a6 + 5 bytes
+
+UnnamedText_1a2ab: ; 0x1a2ab
+    TX_FAR _UnnamedText_1a2ab
+    db $50
+; 0x1a2ab + 5 bytes
+INCBIN "baserom.gbc",$1a2b0,$0
 
 SilphCo6Text6: ; 0x1a2b0
     db $08 ; asm
@@ -10345,7 +10781,22 @@ SilphCo6Text6: ; 0x1a2b0
     call LoadTrainerHeader
     jp $24d7
 
-INCBIN "baserom.gbc",$1a2ba,$1a2c9 - $1a2ba
+
+UnnamedText_1a2ba: ; 0x1a2ba
+    TX_FAR _UnnamedText_1a2ba
+    db $50
+; 0x1a2ba + 5 bytes
+
+UnnamedText_1a2bf: ; 0x1a2bf
+    TX_FAR _UnnamedText_1a2bf
+    db $50
+; 0x1a2bf + 5 bytes
+
+UnnamedText_1a2c4: ; 0x1a2c4
+    TX_FAR _UnnamedText_1a2c4
+    db $50
+; 0x1a2c4 + 5 bytes
+INCBIN "baserom.gbc",$1a2c9,$0
 
 SilphCo6Text7: ; 0x1a2c9
     db $08 ; asm
@@ -10353,7 +10804,22 @@ SilphCo6Text7: ; 0x1a2c9
     call LoadTrainerHeader
     jp $24d7
 
-INCBIN "baserom.gbc",$1a2d3,$1a2e2 - $1a2d3
+
+UnnamedText_1a2d3: ; 0x1a2d3
+    TX_FAR _UnnamedText_1a2d3
+    db $50
+; 0x1a2d3 + 5 bytes
+
+UnnamedText_1a2d8: ; 0x1a2d8
+    TX_FAR _UnnamedText_1a2d8
+    db $50
+; 0x1a2d8 + 5 bytes
+
+UnnamedText_1a2dd: ; 0x1a2dd
+    TX_FAR _UnnamedText_1a2dd
+    db $50
+; 0x1a2dd + 5 bytes
+INCBIN "baserom.gbc",$1a2e2,$0
 
 SilphCo6Text8: ; 0x1a2e2
     db $08 ; asm
@@ -10361,7 +10827,22 @@ SilphCo6Text8: ; 0x1a2e2
     call LoadTrainerHeader
     jp $24d7
 
-INCBIN "baserom.gbc",$1a2ec,$f
+
+UnnamedText_1a2ec: ; 0x1a2ec
+    TX_FAR _UnnamedText_1a2ec
+    db $50
+; 0x1a2ec + 5 bytes
+
+UnnamedText_1a2f1: ; 0x1a2f1
+    TX_FAR _UnnamedText_1a2f1
+    db $50
+; 0x1a2f1 + 5 bytes
+
+UnnamedText_1a2f6: ; 0x1a2f6
+    TX_FAR _UnnamedText_1a2f6
+    db $50
+; 0x1a2f6 + 5 bytes
+INCBIN "baserom.gbc",$1a2fb,$0
 
 SilphCo6Object: ; 0x1a2fb (size=112)
     db $2e ; border tile
@@ -10784,7 +11265,12 @@ CinnabarIslandTexts: ; 0x1ca81
     dw CinnabarIslandText1, CinnabarIslandText2, CinnabarIslandText3, CinnabarIslandText4, CinnabarIslandText5, CinnabarIslandText6, CinnabarIslandText7, CinnabarIslandText8
 
 CinnabarIslandText8:
-INCBIN "baserom.gbc",$1ca91,$5
+
+UnnamedText_1ca91: ; 0x1ca91
+    TX_FAR _UnnamedText_1ca91
+    db $50
+; 0x1ca91 + 5 bytes
+INCBIN "baserom.gbc",$1ca96,$0
 
 CinnabarIslandText1: ; 0x1ca96
     TX_FAR _CinnabarIslandText1
@@ -11413,10 +11899,16 @@ INCBIN "baserom.gbc",$1d3eb,$4
     db $50
 
 OaksLabText26: ; 0x1d3f1
-INCBIN "baserom.gbc",$1d3f1,$1d3f6 - $1d3f1
+
+UnnamedText_1d3f1: ; 0x1d3f1
+    TX_FAR _UnnamedText_1d3f1
+    db $50
+; 0x1d3f1 + 5 bytes
+INCBIN "baserom.gbc",$1d3f6,$0
 
 OaksLabText27: ; 0x1d3f6
-INCBIN "baserom.gbc",$1d3f6,5
+    TX_FAR _OaksLabText27
+    db $50
 
 OaksLabText38:
 OaksLabText37:
@@ -11933,7 +12425,44 @@ BikeShopText1: ; 0x1d745
 .asm_99ef2 ; 0x1d7f5
     jp $24d7
 
-INCBIN "baserom.gbc",$1d7f8,$1d839 - $1d7f8
+INCBIN "baserom.gbc",$1d7f8,$1d810 - $1d7f8
+
+UnnamedText_1d810: ; 0x1d810
+    TX_FAR _UnnamedText_1d810
+    db $50
+; 0x1d810 + 5 bytes
+
+UnnamedText_1d815: ; 0x1d815
+    TX_FAR _UnnamedText_1d815
+    db $50
+; 0x1d815 + 5 bytes
+
+UnnamedText_1d81a: ; 0x1d81a
+    TX_FAR _UnnamedText_1d81a
+    db $50
+; 0x1d81a + 5 bytes
+
+UnnamedText_1d81f: ; 0x1d81f
+    TX_FAR _UnnamedText_1d81f
+    db $50
+; 0x1d81f + 5 bytes
+INCBIN "baserom.gbc",$1d824,$1d82a - $1d824
+
+UnnamedText_1d82a: ; 0x1d82a
+    TX_FAR _UnnamedText_1d82a
+    db $50
+; 0x1d82a + 5 bytes
+
+UnnamedText_1d82f: ; 0x1d82f
+    TX_FAR _UnnamedText_1d82f
+    db $50
+; 0x1d82f + 5 bytes
+
+UnnamedText_1d834: ; 0x1d834
+    TX_FAR _UnnamedText_1d834
+    db $50
+; 0x1d834 + 5 bytes
+INCBIN "baserom.gbc",$1d839,$0
 
 BikeShopText2: ; 0x1d839
     db $08 ; asm
@@ -11941,7 +12470,12 @@ BikeShopText2: ; 0x1d839
     call PrintText
     jp $24d7
 
-INCBIN "baserom.gbc",$1d843,$1d848 - $1d843
+
+UnnamedText_1d843: ; 0x1d843
+    TX_FAR _UnnamedText_1d843
+    db $50
+; 0x1d843 + 5 bytes
+INCBIN "baserom.gbc",$1d848,$0
 
 BikeShopText3: ; 0x1d848
     db $08 ; asm
@@ -11954,7 +12488,17 @@ BikeShopText3: ; 0x1d848
     call PrintText
     jp $24d7
 
-INCBIN "baserom.gbc",$1d85c,$a
+
+UnnamedText_1d85c: ; 0x1d85c
+    TX_FAR _UnnamedText_1d85c
+    db $50
+; 0x1d85c + 5 bytes
+
+UnnamedText_1d861: ; 0x1d861
+    TX_FAR _UnnamedText_1d861
+    db $50
+; 0x1d861 + 5 bytes
+INCBIN "baserom.gbc",$1d866,$0
 
 BikeShopObject: ; 0x1d866 (size=38)
     db $e ; border tile
@@ -12130,7 +12674,17 @@ LavenderHouse2Text2: ; 0x1d9c3
 .asm_64be1 ; 0x1d9d9
     jp $24d7
 
-INCBIN "baserom.gbc",$1d9dc,$a
+
+UnnamedText_1d9dc: ; 0x1d9dc
+    TX_FAR _UnnamedText_1d9dc
+    db $50
+; 0x1d9dc + 5 bytes
+
+UnnamedText_1d9e1: ; 0x1d9e1
+    TX_FAR _UnnamedText_1d9e1
+    db $50
+; 0x1d9e1 + 5 bytes
+INCBIN "baserom.gbc",$1d9e6,$0
 
 LavenderHouse2Object: ; 0x1d9e6 (size=32)
     db $a ; border tile
@@ -12204,7 +12758,42 @@ NameRaterText1: ; 0x1da56
     jr .asm_1daa8 ; 0x1dab1 $f5
 ; 0x1dab3
 
-INCBIN "baserom.gbc",$1dab3,$23
+
+UnnamedText_1dab3: ; 0x1dab3
+    TX_FAR _UnnamedText_1dab3
+    db $50
+; 0x1dab3 + 5 bytes
+
+UnnamedText_1dab8: ; 0x1dab8
+    TX_FAR _UnnamedText_1dab8
+    db $50
+; 0x1dab8 + 5 bytes
+
+UnnamedText_1dabd: ; 0x1dabd
+    TX_FAR _UnnamedText_1dabd
+    db $50
+; 0x1dabd + 5 bytes
+
+UnnamedText_1dac2: ; 0x1dac2
+    TX_FAR _UnnamedText_1dac2
+    db $50
+; 0x1dac2 + 5 bytes
+
+UnnamedText_1dac7: ; 0x1dac7
+    TX_FAR _UnnamedText_1dac7
+    db $50
+; 0x1dac7 + 5 bytes
+
+UnnamedText_1dacc: ; 0x1dacc
+    TX_FAR _UnnamedText_1dacc
+    db $50
+; 0x1dacc + 5 bytes
+
+UnnamedText_1dad1: ; 0x1dad1
+    TX_FAR _UnnamedText_1dad1
+    db $50
+; 0x1dad1 + 5 bytes
+INCBIN "baserom.gbc",$1dad6,$0
 
 NameRaterObject: ; 0x1dad6 (size=26)
     db $a ; border tile
@@ -12325,7 +12914,12 @@ VermilionDockScript: ; 0x1db52
 INCBIN "baserom.gbc",$1db9b,$1dcbf - $1db9b
 
 VermilionDockTexts: ; 0x1dcbf
-INCBIN "baserom.gbc",$1dcbf,$1dcc6 - $1dcbf
+INCBIN "baserom.gbc",$1dcbf,$1dcc1 - $1dcbf
+
+UnnamedText_1dcc1: ; 0x1dcc1
+    TX_FAR _UnnamedText_1dcc1
+    db $50
+; 0x1dcc1 + 5 bytes
 
 VermilionDockObject: ; 0x1dcc6 (size=20)
     db $f ; border tile
@@ -12531,7 +13125,23 @@ SaffronHouse2Text1: ; 0x1de41
 .asm_fe4e1 ; 0x1de72
     jp $24d7
 
-INCBIN "baserom.gbc",$1de75,$15
+
+UnnamedText_1de75: ; 0x1de75
+    TX_FAR _UnnamedText_1de75
+    db $50
+; 0x1de75 + 5 bytes
+INCBIN "baserom.gbc",$1de7a,$1de80 - $1de7a
+
+UnnamedText_1de80: ; 0x1de80
+    TX_FAR _UnnamedText_1de80
+    db $50
+; 0x1de80 + 5 bytes
+
+UnnamedText_1de85: ; 0x1de85
+    TX_FAR _UnnamedText_1de85
+    db $50
+; 0x1de85 + 5 bytes
+INCBIN "baserom.gbc",$1de8a,$0
 
 SaffronHouse2Object: ; 0x1de8a (size=26)
     db $a ; border tile
@@ -13244,7 +13854,23 @@ Route16HouseText1: ; 0x1e5ff
     call PrintText
     jp $24d7
 
-INCBIN "baserom.gbc",$1e62b,$1e640 - $1e62b
+
+UnnamedText_1e62b: ; 0x1e62b
+    TX_FAR _UnnamedText_1e62b
+    db $50
+; 0x1e62b + 5 bytes
+INCBIN "baserom.gbc",$1e630,$1e636 - $1e630
+
+UnnamedText_1e636: ; 0x1e636
+    TX_FAR _UnnamedText_1e636
+    db $50
+; 0x1e636 + 5 bytes
+
+UnnamedText_1e63b: ; 0x1e63b
+    TX_FAR _UnnamedText_1e63b
+    db $50
+; 0x1e63b + 5 bytes
+INCBIN "baserom.gbc",$1e640,$0
 
 Route16HouseText2: ; 0x1e640
     db $08 ; asm
@@ -13942,7 +14568,18 @@ MoltresPicFront:
 MoltresPicBack:
 	INCBIN "pic/monback/moltresb.pic"
 
-INCBIN "baserom.gbc",$2bea9,$3efc-$3ea9
+INCBIN "baserom.gbc",$2bea9,$2bef2 - $2bea9
+
+UnnamedText_2bef2: ; 0x2bef2
+    TX_FAR _UnnamedText_2bef2
+    db $50
+; 0x2bef2 + 5 bytes
+
+UnnamedText_2bef7: ; 0x2bef7
+    TX_FAR _UnnamedText_2bef7
+    db $50
+; 0x2bef7 + 5 bytes
+INCBIN "baserom.gbc",$2befc,$0
 
 SECTION "bankB",DATA,BANK[$B]
 ArticunoPicFront:
@@ -14084,7 +14721,41 @@ BeedrillPicBack:
 FossilKabutopsPic:
 	INCBIN "pic/bmon/fossilkabutops.pic"
 
-INCBIN "baserom.gbc",$2fb7b,$2ff3c-$2fb7b
+INCBIN "baserom.gbc",$2fb7b,$2fb8e - $2fb7b
+
+UnnamedText_2fb8e: ; 0x2fb8e
+    TX_FAR _UnnamedText_2fb8e
+    db $50
+; 0x2fb8e + 5 bytes
+
+UnnamedText_2fb93: ; 0x2fb93
+    TX_FAR _UnnamedText_2fb93
+    db $50
+; 0x2fb93 + 5 bytes
+INCBIN "baserom.gbc",$2fb98,$2fe3b - $2fb98
+
+UnnamedText_2fe3b: ; 0x2fe3b
+    TX_FAR _UnnamedText_2fe3b
+    db $50
+; 0x2fe3b + 5 bytes
+INCBIN "baserom.gbc",$2fe40,$2ff04 - $2fe40
+
+UnnamedText_2ff04: ; 0x2ff04
+    TX_FAR _UnnamedText_2ff04
+    db $50
+; 0x2ff04 + 5 bytes
+INCBIN "baserom.gbc",$2ff09,$2ff32 - $2ff09
+
+UnnamedText_2ff32: ; 0x2ff32
+    TX_FAR _UnnamedText_2ff32
+    db $50
+; 0x2ff32 + 5 bytes
+
+UnnamedText_2ff37: ; 0x2ff37
+    TX_FAR _UnnamedText_2ff37
+    db $50
+; 0x2ff37 + 5 bytes
+INCBIN "baserom.gbc",$2ff3c,$0
 
 SECTION "bankC",DATA,BANK[$C]
 DodrioPicFront:
@@ -14208,7 +14879,13 @@ RedPicBack:
 OldManPic:
 	INCBIN "pic/trainer/oldman.pic"
 
-INCBIN "baserom.gbc",$33f2b,$3f90-$3f2b
+INCBIN "baserom.gbc",$33f2b,$33f52 - $33f2b
+
+UnnamedText_33f52: ; 0x33f52
+    TX_FAR _UnnamedText_33f52
+    db $50
+; 0x33f52 + 5 bytes
+INCBIN "baserom.gbc",$33f57,$39
 
 SECTION "bankD",DATA,BANK[$D]
 BulbasaurPicFront:
@@ -14320,7 +14997,51 @@ VictreebelPicFront:
 VictreebelPicBack:
 	INCBIN "pic/monback/victreebelb.pic"
 
-INCBIN "baserom.gbc",$37244,$37AF1-$37244
+INCBIN "baserom.gbc",$37244,$37390 - $37244
+
+UnnamedText_37390: ; 0x37390
+    TX_FAR _UnnamedText_37390
+    db $50
+; 0x37390 + 5 bytes
+INCBIN "baserom.gbc",$37395,$37467 - $37395
+
+UnnamedText_37467: ; 0x37467
+    TX_FAR _UnnamedText_37467
+    db $50
+; 0x37467 + 5 bytes
+
+UnnamedText_3746c: ; 0x3746c
+    TX_FAR _UnnamedText_3746c
+    db $50
+; 0x3746c + 5 bytes
+
+UnnamedText_37471: ; 0x37471
+    TX_FAR _UnnamedText_37471
+    db $50
+; 0x37471 + 5 bytes
+
+UnnamedText_37476: ; 0x37476
+    TX_FAR _UnnamedText_37476
+    db $50
+; 0x37476 + 5 bytes
+
+UnnamedText_3747b: ; 0x3747b
+    TX_FAR _UnnamedText_3747b
+    db $50
+; 0x3747b + 5 bytes
+INCBIN "baserom.gbc",$37480,$37673 - $37480
+
+UnnamedText_37673: ; 0x37673
+    TX_FAR _UnnamedText_37673
+    db $50
+; 0x37673 + 5 bytes
+INCBIN "baserom.gbc",$37678,$3769d - $37678
+
+UnnamedText_3769d: ; 0x3769d
+    TX_FAR _UnnamedText_3769d
+    db $50
+; 0x3769d + 5 bytes
+INCBIN "baserom.gbc",$376a2,$44f
 
 IF _RED
 	INCBIN "gfx/red/slotmachine1.2bpp"
@@ -14329,7 +15050,23 @@ IF _BLUE
 	INCBIN "gfx/blue/slotmachine1.2bpp"
 ENDC
 
-INCBIN "baserom.gbc",$37CA1,$37e88-$37CA1
+INCBIN "baserom.gbc",$37ca1,$37e79 - $37ca1
+
+UnnamedText_37e79: ; 0x37e79
+    TX_FAR _UnnamedText_37e79
+    db $50
+; 0x37e79 + 5 bytes
+
+UnnamedText_37e7e: ; 0x37e7e
+    TX_FAR _UnnamedText_37e7e
+    db $50
+; 0x37e7e + 5 bytes
+
+UnnamedText_37e83: ; 0x37e83
+    TX_FAR _UnnamedText_37e83
+    db $50
+; 0x37e83 + 5 bytes
+INCBIN "baserom.gbc",$37e88,$0
 
 SECTION "bankE",DATA,BANK[$E]
 
@@ -15887,7 +16624,28 @@ AIBattleUseItemText:
 	TX_FAR _AIBattleUseItemText
 	db "@"
 
-INCBIN "baserom.gbc",$3A849,$3B05C - $3A849
+INCBIN "baserom.gbc",$3a849,$3af3e - $3a849
+
+UnnamedText_3af3e: ; 0x3af3e
+    TX_FAR _UnnamedText_3af3e
+    db $50
+; 0x3af3e + 5 bytes
+
+UnnamedText_3af43: ; 0x3af43
+    TX_FAR _UnnamedText_3af43
+    db $50
+; 0x3af43 + 5 bytes
+
+UnnamedText_3af48: ; 0x3af48
+    TX_FAR _UnnamedText_3af48
+    db $50
+; 0x3af48 + 5 bytes
+
+UnnamedText_3af4d: ; 0x3af4d
+    TX_FAR _UnnamedText_3af4d
+    db $50
+; 0x3af4d + 5 bytes
+INCBIN "baserom.gbc",$3af52,$10a
 
 EvosAttacksPointerTable: ; 705C
 	dw Mon112_EvosAttacks
@@ -18061,7 +18819,40 @@ Mon071_EvosAttacks:
 	db 18,SLEEP_POWDER
 	db 0
 
-INCBIN "baserom.gbc",$3B9EC, $3C000 - $3B9EC
+INCBIN "baserom.gbc",$3b9ec,$3baa2 - $3b9ec
+
+UnnamedText_3baa2: ; 0x3baa2
+    TX_FAR _UnnamedText_3baa2
+    db $50
+; 0x3baa2 + 5 bytes
+
+UnnamedText_3baa7: ; 0x3baa7
+    TX_FAR _UnnamedText_3baa7
+    db $50
+; 0x3baa7 + 5 bytes
+
+UnnamedText_3baac: ; 0x3baac
+    TX_FAR _UnnamedText_3baac
+    db $50
+; 0x3baac + 5 bytes
+INCBIN "baserom.gbc",$3bab1,$3bb92 - $3bab1
+
+UnnamedText_3bb92: ; 0x3bb92
+    TX_FAR _UnnamedText_3bb92
+    db $50
+; 0x3bb92 + 5 bytes
+INCBIN "baserom.gbc",$3bb97,$3bbd7 - $3bb97
+
+UnnamedText_3bbd7: ; 0x3bbd7
+    TX_FAR _UnnamedText_3bbd7
+    db $50
+; 0x3bbd7 + 5 bytes
+
+UnnamedText_3bbdc: ; 0x3bbdc
+    TX_FAR _UnnamedText_3bbdc
+    db $50
+; 0x3bbdc + 5 bytes
+INCBIN "baserom.gbc",$3bbe1,$41f
 
 SECTION "bankF",DATA,BANK[$F]
 
@@ -18084,7 +18875,85 @@ EffectsArray5B: ; 4049
 ; attacks that prevent the player from switching attacks?
 	db $1B,$2A,$FF
 
-INCBIN "baserom.gbc",$3C04C,$90E - $4C
+INCBIN "baserom.gbc",$3c04c,$3c1a8 - $3c04c
+
+UnnamedText_3c1a8: ; 0x3c1a8
+    TX_FAR _UnnamedText_3c1a8
+    db $50
+; 0x3c1a8 + 5 bytes
+INCBIN "baserom.gbc",$3c1ad,$3c229 - $3c1ad
+
+UnnamedText_3c229: ; 0x3c229
+    TX_FAR _UnnamedText_3c229
+    db $50
+; 0x3c229 + 5 bytes
+
+UnnamedText_3c22e: ; 0x3c22e
+    TX_FAR _UnnamedText_3c22e
+    db $50
+; 0x3c22e + 5 bytes
+INCBIN "baserom.gbc",$3c233,$3c42e - $3c233
+
+UnnamedText_3c42e: ; 0x3c42e
+    TX_FAR _UnnamedText_3c42e
+    db $50
+; 0x3c42e + 5 bytes
+
+UnnamedText_3c433: ; 0x3c433
+    TX_FAR _UnnamedText_3c433
+    db $50
+; 0x3c433 + 5 bytes
+
+UnnamedText_3c438: ; 0x3c438
+    TX_FAR _UnnamedText_3c438
+    db $50
+; 0x3c438 + 5 bytes
+INCBIN "baserom.gbc",$3c43d,$3c63e - $3c43d
+
+UnnamedText_3c63e: ; 0x3c63e
+    TX_FAR _UnnamedText_3c63e
+    db $50
+; 0x3c63e + 5 bytes
+INCBIN "baserom.gbc",$3c643,$3c6e4 - $3c643
+
+UnnamedText_3c6e4: ; 0x3c6e4
+    TX_FAR _UnnamedText_3c6e4
+    db $50
+; 0x3c6e4 + 5 bytes
+
+UnnamedText_3c6e9: ; 0x3c6e9
+    TX_FAR _UnnamedText_3c6e9
+    db $50
+; 0x3c6e9 + 5 bytes
+INCBIN "baserom.gbc",$3c6ee,$3c796 - $3c6ee
+
+UnnamedText_3c796: ; 0x3c796
+    TX_FAR _UnnamedText_3c796
+    db $50
+; 0x3c796 + 5 bytes
+INCBIN "baserom.gbc",$3c79b,$3c7d3 - $3c79b
+
+UnnamedText_3c7d3: ; 0x3c7d3
+    TX_FAR _UnnamedText_3c7d3
+    db $50
+; 0x3c7d3 + 5 bytes
+INCBIN "baserom.gbc",$3c7d8,$3c884 - $3c7d8
+
+UnnamedText_3c884: ; 0x3c884
+    TX_FAR _UnnamedText_3c884
+    db $50
+; 0x3c884 + 5 bytes
+
+UnnamedText_3c889: ; 0x3c889
+    TX_FAR _UnnamedText_3c889
+    db $50
+; 0x3c889 + 5 bytes
+
+UnnamedText_3c88e: ; 0x3c88e
+    TX_FAR _UnnamedText_3c88e
+    db $50
+; 0x3c88e + 5 bytes
+INCBIN "baserom.gbc",$3c893,$7b
 
 ; XXX this needs cleaning up. it's what runs when a juggler switches pokemon
 EnemySendOut: ; 490E
@@ -18264,7 +19133,58 @@ TrainerSentOutText:
 	TX_FAR _TrainerSentOutText
 	db "@"
 
-INCBIN "baserom.gbc",$3CA83,$3D6A9 - $3CA83
+INCBIN "baserom.gbc",$3ca83,$3cab4 - $3ca83
+
+UnnamedText_3cab4: ; 0x3cab4
+    TX_FAR _UnnamedText_3cab4
+    db $50
+; 0x3cab4 + 5 bytes
+INCBIN "baserom.gbc",$3cab9,$3cb97 - $3cab9
+
+UnnamedText_3cb97: ; 0x3cb97
+    TX_FAR _UnnamedText_3cb97
+    db $50
+; 0x3cb97 + 5 bytes
+
+UnnamedText_3cb9c: ; 0x3cb9c
+    TX_FAR _UnnamedText_3cb9c
+    db $50
+; 0x3cb9c + 5 bytes
+
+UnnamedText_3cba1: ; 0x3cba1
+    TX_FAR _UnnamedText_3cba1
+    db $50
+; 0x3cba1 + 5 bytes
+INCBIN "baserom.gbc",$3cba6,$3d0c5 - $3cba6
+
+UnnamedText_3d0c5: ; 0x3d0c5
+    TX_FAR _UnnamedText_3d0c5
+    db $50
+; 0x3d0c5 + 5 bytes
+INCBIN "baserom.gbc",$3d0ca,$3d1f5 - $3d0ca
+
+UnnamedText_3d1f5: ; 0x3d1f5
+    TX_FAR _UnnamedText_3d1f5
+    db $50
+; 0x3d1f5 + 5 bytes
+INCBIN "baserom.gbc",$3d1fa,$3d3ae - $3d1fa
+
+UnnamedText_3d3ae: ; 0x3d3ae
+    TX_FAR _UnnamedText_3d3ae
+    db $50
+; 0x3d3ae + 5 bytes
+
+UnnamedText_3d3b3: ; 0x3d3b3
+    TX_FAR _UnnamedText_3d3b3
+    db $50
+; 0x3d3b3 + 5 bytes
+INCBIN "baserom.gbc",$3d3b8,$3d430 - $3d3b8
+
+UnnamedText_3d430: ; 0x3d430
+    TX_FAR _UnnamedText_3d430
+    db $50
+; 0x3d430 + 5 bytes
+INCBIN "baserom.gbc",$3d435,$274
 
 ; in-battle stuff
 	ld hl,$D062
@@ -20357,7 +21277,52 @@ PokedexOrder: ; 5024
 	db DEX_WEEPINBELL
 	db DEX_VICTREEBEL
 
-INCBIN "baserom.gbc",$410E2,$20D9 - $10E2
+INCBIN "baserom.gbc",$410e2,$4160c - $410e2
+
+UnnamedText_4160c: ; 0x4160c
+    TX_FAR _UnnamedText_4160c
+    db $50
+; 0x4160c + 5 bytes
+INCBIN "baserom.gbc",$41611,$41623 - $41611
+
+UnnamedText_41623: ; 0x41623
+    TX_FAR _UnnamedText_41623
+    db $50
+; 0x41623 + 5 bytes
+
+UnnamedText_41628: ; 0x41628
+    TX_FAR _UnnamedText_41628
+    db $50
+; 0x41628 + 5 bytes
+INCBIN "baserom.gbc",$4162d,$41642 - $4162d
+
+UnnamedText_41642: ; 0x41642
+    TX_FAR _UnnamedText_41642
+    db $50
+; 0x41642 + 5 bytes
+
+UnnamedText_41647: ; 0x41647
+    TX_FAR _UnnamedText_41647
+    db $50
+; 0x41647 + 5 bytes
+INCBIN "baserom.gbc",$4164c,$41655 - $4164c
+
+UnnamedText_41655: ; 0x41655
+    TX_FAR _UnnamedText_41655
+    db $50
+; 0x41655 + 5 bytes
+INCBIN "baserom.gbc",$4165a,$4166c - $4165a
+
+UnnamedText_4166c: ; 0x4166c
+    TX_FAR _UnnamedText_4166c
+    db $50
+; 0x4166c + 5 bytes
+
+UnnamedText_41671: ; 0x41671
+    TX_FAR _UnnamedText_41671
+    db $50
+; 0x41671 + 5 bytes
+INCBIN "baserom.gbc",$41676,$a63
 
 IF _RED
 	INCBIN "gfx/red/introfight.2bpp"
@@ -20520,7 +21485,22 @@ LavenderTownText1: ; 0x44120
     call PrintText
     jp $24d7
 
-INCBIN "baserom.gbc",$4413c,$f
+
+UnnamedText_4413c: ; 0x4413c
+    TX_FAR _UnnamedText_4413c
+    db $50
+; 0x4413c + 5 bytes
+
+UnnamedText_44141: ; 0x44141
+    TX_FAR _UnnamedText_44141
+    db $50
+; 0x44141 + 5 bytes
+
+UnnamedText_44146: ; 0x44146
+    TX_FAR _UnnamedText_44146
+    db $50
+; 0x44146 + 5 bytes
+INCBIN "baserom.gbc",$4414b,$0
 
 LavenderTownText2: ; 0x4414b
     TX_FAR _LavenderTownText2
@@ -20546,7 +21526,94 @@ LavenderTownText9: ; 0x44164
     TX_FAR _LavenderTownText9
     db $50
 
-INCBIN "baserom.gbc",$44169,$e8
+INCBIN "baserom.gbc",$44169,$441cc - $44169
+
+UnnamedText_441cc: ; 0x441cc
+    TX_FAR _UnnamedText_441cc
+    db $50
+; 0x441cc + 5 bytes
+INCBIN "baserom.gbc",$441d1,$44201 - $441d1
+
+UnnamedText_44201: ; 0x44201
+    TX_FAR _UnnamedText_44201
+    db $50
+; 0x44201 + 5 bytes
+
+UnnamedText_44206: ; 0x44206
+    TX_FAR _UnnamedText_44206
+    db $50
+; 0x44206 + 5 bytes
+
+UnnamedText_4420b: ; 0x4420b
+    TX_FAR _UnnamedText_4420b
+    db $50
+; 0x4420b + 5 bytes
+
+UnnamedText_44210: ; 0x44210
+    TX_FAR _UnnamedText_44210
+    db $50
+; 0x44210 + 5 bytes
+
+UnnamedText_44215: ; 0x44215
+    TX_FAR _UnnamedText_44215
+    db $50
+; 0x44215 + 5 bytes
+
+UnnamedText_4421a: ; 0x4421a
+    TX_FAR _UnnamedText_4421a
+    db $50
+; 0x4421a + 5 bytes
+
+UnnamedText_4421f: ; 0x4421f
+    TX_FAR _UnnamedText_4421f
+    db $50
+; 0x4421f + 5 bytes
+
+UnnamedText_44224: ; 0x44224
+    TX_FAR _UnnamedText_44224
+    db $50
+; 0x44224 + 5 bytes
+
+UnnamedText_44229: ; 0x44229
+    TX_FAR _UnnamedText_44229
+    db $50
+; 0x44229 + 5 bytes
+
+UnnamedText_4422e: ; 0x4422e
+    TX_FAR _UnnamedText_4422e
+    db $50
+; 0x4422e + 5 bytes
+
+UnnamedText_44233: ; 0x44233
+    TX_FAR _UnnamedText_44233
+    db $50
+; 0x44233 + 5 bytes
+
+UnnamedText_44238: ; 0x44238
+    TX_FAR _UnnamedText_44238
+    db $50
+; 0x44238 + 5 bytes
+
+UnnamedText_4423d: ; 0x4423d
+    TX_FAR _UnnamedText_4423d
+    db $50
+; 0x4423d + 5 bytes
+
+UnnamedText_44242: ; 0x44242
+    TX_FAR _UnnamedText_44242
+    db $50
+; 0x44242 + 5 bytes
+
+UnnamedText_44247: ; 0x44247
+    TX_FAR _UnnamedText_44247
+    db $50
+; 0x44247 + 5 bytes
+
+UnnamedText_4424c: ; 0x4424c
+    TX_FAR _UnnamedText_4424c
+    db $50
+; 0x4424c + 5 bytes
+INCBIN "baserom.gbc",$44251,$0
 
 ViridianPokecenter_h: ; 0x44251 to 0x4425d (12 bytes) (bank=11) (id=41)
     db $06 ; tileset
@@ -20656,7 +21723,38 @@ Mansion1Text1: ; 0x44341
     call LoadTrainerHeader
     jp $24d7
 
-INCBIN "baserom.gbc",$4434b,$59
+
+UnnamedText_4434b: ; 0x4434b
+    TX_FAR _UnnamedText_4434b
+    db $50
+; 0x4434b + 5 bytes
+
+UnnamedText_44350: ; 0x44350
+    TX_FAR _UnnamedText_44350
+    db $50
+; 0x44350 + 5 bytes
+
+UnnamedText_44355: ; 0x44355
+    TX_FAR _UnnamedText_44355
+    db $50
+; 0x44355 + 5 bytes
+INCBIN "baserom.gbc",$4435a,$44395 - $4435a
+
+UnnamedText_44395: ; 0x44395
+    TX_FAR _UnnamedText_44395
+    db $50
+; 0x44395 + 5 bytes
+
+UnnamedText_4439a: ; 0x4439a
+    TX_FAR _UnnamedText_4439a
+    db $50
+; 0x4439a + 5 bytes
+
+UnnamedText_4439f: ; 0x4439f
+    TX_FAR _UnnamedText_4439f
+    db $50
+; 0x4439f + 5 bytes
+INCBIN "baserom.gbc",$443a4,$0
 
 Mansion1Object: ; 0x443a4 (size=90)
     db $2e ; border tile
@@ -21275,7 +22373,17 @@ RocketHideout4Text1: ; 0x4553a
 .asm_209f0 ; 0x45577
     jp $24d7
 
-INCBIN "baserom.gbc",$4557a,$45584 - $4557a
+
+UnnamedText_4557a: ; 0x4557a
+    TX_FAR _UnnamedText_4557a
+    db $50
+; 0x4557a + 5 bytes
+
+UnnamedText_4557f: ; 0x4557f
+    TX_FAR _UnnamedText_4557f
+    db $50
+; 0x4557f + 5 bytes
+INCBIN "baserom.gbc",$45584,$0
 
 RocketHideout4Text10: ; 0x45584
 INCBIN "baserom.gbc",$45584,5
@@ -21994,7 +23102,127 @@ RockTunnel2Text8: ; 0x460bb
     call LoadTrainerHeader
     jp $24d7
 
-INCBIN "baserom.gbc",$460c5,$78
+
+UnnamedText_460c5: ; 0x460c5
+    TX_FAR _UnnamedText_460c5
+    db $50
+; 0x460c5 + 5 bytes
+
+UnnamedText_460ca: ; 0x460ca
+    TX_FAR _UnnamedText_460ca
+    db $50
+; 0x460ca + 5 bytes
+
+UnnamedText_460cf: ; 0x460cf
+    TX_FAR _UnnamedText_460cf
+    db $50
+; 0x460cf + 5 bytes
+
+UnnamedText_460d4: ; 0x460d4
+    TX_FAR _UnnamedText_460d4
+    db $50
+; 0x460d4 + 5 bytes
+
+UnnamedText_460d9: ; 0x460d9
+    TX_FAR _UnnamedText_460d9
+    db $50
+; 0x460d9 + 5 bytes
+
+UnnamedText_460de: ; 0x460de
+    TX_FAR _UnnamedText_460de
+    db $50
+; 0x460de + 5 bytes
+
+UnnamedText_460e3: ; 0x460e3
+    TX_FAR _UnnamedText_460e3
+    db $50
+; 0x460e3 + 5 bytes
+
+UnnamedText_460e8: ; 0x460e8
+    TX_FAR _UnnamedText_460e8
+    db $50
+; 0x460e8 + 5 bytes
+
+UnnamedText_460ed: ; 0x460ed
+    TX_FAR _UnnamedText_460ed
+    db $50
+; 0x460ed + 5 bytes
+
+UnnamedText_460f2: ; 0x460f2
+    TX_FAR _UnnamedText_460f2
+    db $50
+; 0x460f2 + 5 bytes
+
+UnnamedText_460f7: ; 0x460f7
+    TX_FAR _UnnamedText_460f7
+    db $50
+; 0x460f7 + 5 bytes
+
+UnnamedText_460fc: ; 0x460fc
+    TX_FAR _UnnamedText_460fc
+    db $50
+; 0x460fc + 5 bytes
+
+UnnamedText_46101: ; 0x46101
+    TX_FAR _UnnamedText_46101
+    db $50
+; 0x46101 + 5 bytes
+
+UnnamedText_46106: ; 0x46106
+    TX_FAR _UnnamedText_46106
+    db $50
+; 0x46106 + 5 bytes
+
+UnnamedText_4610b: ; 0x4610b
+    TX_FAR _UnnamedText_4610b
+    db $50
+; 0x4610b + 5 bytes
+
+UnnamedText_46110: ; 0x46110
+    TX_FAR _UnnamedText_46110
+    db $50
+; 0x46110 + 5 bytes
+
+UnnamedText_46115: ; 0x46115
+    TX_FAR _UnnamedText_46115
+    db $50
+; 0x46115 + 5 bytes
+
+UnnamedText_4611a: ; 0x4611a
+    TX_FAR _UnnamedText_4611a
+    db $50
+; 0x4611a + 5 bytes
+
+UnnamedText_4611f: ; 0x4611f
+    TX_FAR _UnnamedText_4611f
+    db $50
+; 0x4611f + 5 bytes
+
+UnnamedText_46124: ; 0x46124
+    TX_FAR _UnnamedText_46124
+    db $50
+; 0x46124 + 5 bytes
+
+UnnamedText_46129: ; 0x46129
+    TX_FAR _UnnamedText_46129
+    db $50
+; 0x46129 + 5 bytes
+
+UnnamedText_4612e: ; 0x4612e
+    TX_FAR _UnnamedText_4612e
+    db $50
+; 0x4612e + 5 bytes
+
+UnnamedText_46133: ; 0x46133
+    TX_FAR _UnnamedText_46133
+    db $50
+; 0x46133 + 5 bytes
+
+UnnamedText_46138: ; 0x46138
+    TX_FAR _UnnamedText_46138
+    db $50
+; 0x46138 + 5 bytes
+INCBIN "baserom.gbc",$4613d,$0
 
 RockTunnel2Object: ; 0x4613d (size=100)
     db $3 ; border tile
@@ -23119,7 +24347,12 @@ CeladonMansion3Text4: ; 0x487b2
     call PrintText
     jp $24d7
 
-INCBIN "baserom.gbc",$487d0,$1b
+
+UnnamedText_487d0: ; 0x487d0
+    TX_FAR _UnnamedText_487d0
+    db $50
+; 0x487d0 + 5 bytes
+INCBIN "baserom.gbc",$487d5,$16
 
 CeladonMansion3Text5: ; 0x487eb
     TX_FAR _CeladonMansion3Text5
@@ -23329,7 +24562,12 @@ CeladonGymText10: ; 0x48a72
 INCBIN "baserom.gbc",$48a72,$4
 db $0b
 
-INCBIN "baserom.gbc",$48a77,$48a7c - $48a77
+
+UnnamedText_48a77: ; 0x48a77
+    TX_FAR _UnnamedText_48a77
+    db $50
+; 0x48a77 + 5 bytes
+INCBIN "baserom.gbc",$48a7c,$0
 
 CeladonGymText11: ; 0x48a7c
 INCBIN "baserom.gbc",$48a7c,$5
@@ -23623,7 +24861,23 @@ CeladonGameCornerText9: ; 0x48dd9
     call PrintText
     jp $24d7
 
-INCBIN "baserom.gbc",$48e26,$48e3b - $48e26
+
+UnnamedText_48e26: ; 0x48e26
+    TX_FAR _UnnamedText_48e26
+    db $50
+; 0x48e26 + 5 bytes
+INCBIN "baserom.gbc",$48e2b,$48e31 - $48e2b
+
+UnnamedText_48e31: ; 0x48e31
+    TX_FAR _UnnamedText_48e31
+    db $50
+; 0x48e31 + 5 bytes
+
+UnnamedText_48e36: ; 0x48e36
+    TX_FAR _UnnamedText_48e36
+    db $50
+; 0x48e36 + 5 bytes
+INCBIN "baserom.gbc",$48e3b,$0
 
 CeladonGameCornerText10: ; 0x48e3b
     db $08 ; asm
@@ -23903,7 +25157,23 @@ CeladonDinerText5: ; 0x49173
 .asm_68b61 ; 0x491a4
     jp $24d7
 
-INCBIN "baserom.gbc",$491a7,$15
+
+UnnamedText_491a7: ; 0x491a7
+    TX_FAR _UnnamedText_491a7
+    db $50
+; 0x491a7 + 5 bytes
+INCBIN "baserom.gbc",$491ac,$491b2 - $491ac
+
+UnnamedText_491b2: ; 0x491b2
+    TX_FAR _UnnamedText_491b2
+    db $50
+; 0x491b2 + 5 bytes
+
+UnnamedText_491b7: ; 0x491b7
+    TX_FAR _UnnamedText_491b7
+    db $50
+; 0x491b7 + 5 bytes
+INCBIN "baserom.gbc",$491bc,$0
 
 CeladonDinerObject: ; 0x491bc (size=50)
     db $f ; border tile
@@ -24102,7 +25372,27 @@ MtMoonPokecenterText4: ; 0x492ec
 .asm_38361 ; 0x49359
     jp $24d7
 
-INCBIN "baserom.gbc",$4935c,$14
+
+UnnamedText_4935c: ; 0x4935c
+    TX_FAR _UnnamedText_4935c
+    db $50
+; 0x4935c + 5 bytes
+
+UnnamedText_49361: ; 0x49361
+    TX_FAR _UnnamedText_49361
+    db $50
+; 0x49361 + 5 bytes
+
+UnnamedText_49366: ; 0x49366
+    TX_FAR _UnnamedText_49366
+    db $50
+; 0x49366 + 5 bytes
+
+UnnamedText_4936b: ; 0x4936b
+    TX_FAR _UnnamedText_4936b
+    db $50
+; 0x4936b + 5 bytes
+INCBIN "baserom.gbc",$49370,$0
 
 MtMoonPokecenterText5: ; 0x49370
     TX_FAR _MtMoonPokecenterText5
@@ -24276,7 +25566,12 @@ Route11GateUpstairsText2: ; 0x4946c
     jr asm_49469 ; 0x494a1 $c6
 ; 0x494a3
 
-INCBIN "baserom.gbc",$494a3,$5
+
+UnnamedText_494a3: ; 0x494a3
+    TX_FAR _UnnamedText_494a3
+    db $50
+; 0x494a3 + 5 bytes
+INCBIN "baserom.gbc",$494a8,$0
 
 Route11GateUpstairsText3: ; 0x494a8
     db $08 ; asm
@@ -24292,7 +25587,17 @@ Route11GateUpstairsText3: ; 0x494a8
     call PrintText
     jp $24d7
 
-INCBIN "baserom.gbc",$494c4,$494ce - $494c4
+
+UnnamedText_494c4: ; 0x494c4
+    TX_FAR _UnnamedText_494c4
+    db $50
+; 0x494c4 + 5 bytes
+
+UnnamedText_494c9: ; 0x494c9
+    TX_FAR _UnnamedText_494c9
+    db $50
+; 0x494c9 + 5 bytes
+INCBIN "baserom.gbc",$494ce,$0
 
 Route11GateUpstairsText4: ; 0x494ce
     db $8
@@ -24300,7 +25605,12 @@ Route11GateUpstairsText4: ; 0x494ce
     jp $55c9
 ; 0x494d5
 
-INCBIN "baserom.gbc",$494d5,$5
+
+UnnamedText_494d5: ; 0x494d5
+    TX_FAR _UnnamedText_494d5
+    db $50
+; 0x494d5 + 5 bytes
+INCBIN "baserom.gbc",$494da,$0
 
 Route11GateUpstairsObject: ; 0x494da (size=30)
     db $a ; border tile
@@ -24403,7 +25713,23 @@ Route12GateUpstairsText1: ; 0x49569
 .asm_4ba56 ; 0x49599
     jp $24d7
 
-INCBIN "baserom.gbc",$4959c,$495b1 - $4959c
+
+UnnamedText_4959c: ; 0x4959c
+    TX_FAR _UnnamedText_4959c
+    db $50
+; 0x4959c + 5 bytes
+INCBIN "baserom.gbc",$495a1,$495a7 - $495a1
+
+UnnamedText_495a7: ; 0x495a7
+    TX_FAR _UnnamedText_495a7
+    db $50
+; 0x495a7 + 5 bytes
+
+UnnamedText_495ac: ; 0x495ac
+    TX_FAR _UnnamedText_495ac
+    db $50
+; 0x495ac + 5 bytes
+INCBIN "baserom.gbc",$495b1,$0
 
 Route12GateUpstairsText2: ; 0x495b1
     db $08 ; asm
@@ -24419,7 +25745,12 @@ Route12GateUpstairsText3: ; 0x495bd
     jp $55c9
 ; 0x495c4
 
-INCBIN "baserom.gbc",$495c4,$495de-$495c4
+
+UnnamedText_495c4: ; 0x495c4
+    TX_FAR _UnnamedText_495c4
+    db $50
+; 0x495c4 + 5 bytes
+INCBIN "baserom.gbc",$495c9,$15
 
 Route12GateUpstairsObject: ; 0x495de (size=24)
     db $a ; border tile
@@ -24478,7 +25809,19 @@ Route15GateObject: ; 0x4960c (size=50)
     EVENT_DISP $4, $5, $7
     EVENT_DISP $4, $8, $6
 
-INCBIN "baserom.gbc",$4963e,$74
+INCBIN "baserom.gbc",$4963e,$4968c - $4963e
+
+UnnamedText_4968c: ; 0x4968c
+    TX_FAR _UnnamedText_4968c
+    db $50
+; 0x4968c + 5 bytes
+INCBIN "baserom.gbc",$49691,$49698 - $49691
+
+UnnamedText_49698: ; 0x49698
+    TX_FAR _UnnamedText_49698
+    db $50
+; 0x49698 + 5 bytes
+INCBIN "baserom.gbc",$4969d,$15
 
 Route16GateMap_h: ; 0x496b2 to 0x496be (12 bytes) (id=186)
     db $0c ; tileset
@@ -24552,7 +25895,17 @@ Route16GateMapText1: ; 0x49760
 .asm_56c9d ; 0x49774
     jp $24d7
 
-INCBIN "baserom.gbc",$49777,$49781 - $49777
+
+UnnamedText_49777: ; 0x49777
+    TX_FAR _UnnamedText_49777
+    db $50
+; 0x49777 + 5 bytes
+
+UnnamedText_4977c: ; 0x4977c
+    TX_FAR _UnnamedText_4977c
+    db $50
+; 0x4977c + 5 bytes
+INCBIN "baserom.gbc",$49781,$0
 
 Route16GateMapText3: ; 0x49781
 INCBIN "baserom.gbc",$49781,5
@@ -24616,7 +25969,12 @@ Route16GateUpstairsText1: ; 0x49816
     call PrintText
     jp $24d7
 
-INCBIN "baserom.gbc",$49820,$49825 - $49820
+
+UnnamedText_49820: ; 0x49820
+    TX_FAR _UnnamedText_49820
+    db $50
+; 0x49820 + 5 bytes
+INCBIN "baserom.gbc",$49825,$0
 
 Route16GateUpstairsText2: ; 0x49825
     db $08 ; asm
@@ -24624,7 +25982,12 @@ Route16GateUpstairsText2: ; 0x49825
     call PrintText
     jp $24d7
 
-INCBIN "baserom.gbc",$4982f,$49834 - $4982f
+
+UnnamedText_4982f: ; 0x4982f
+    TX_FAR _UnnamedText_4982f
+    db $50
+; 0x4982f + 5 bytes
+INCBIN "baserom.gbc",$49834,$0
 
 Route16GateUpstairsText3: ; 0x49834
     db $8
@@ -24632,7 +25995,12 @@ Route16GateUpstairsText3: ; 0x49834
     jp $55c9
 ; 0x4983b
 
-INCBIN "baserom.gbc",$4983b,$5
+
+UnnamedText_4983b: ; 0x4983b
+    TX_FAR _UnnamedText_4983b
+    db $50
+; 0x4983b + 5 bytes
+INCBIN "baserom.gbc",$49840,$0
 
 Route16GateUpstairsText4: ; 0x49840
     db $8
@@ -24640,7 +26008,12 @@ Route16GateUpstairsText4: ; 0x49840
     jp $55c9
 ; 0x49847
 
-INCBIN "baserom.gbc",$49847,$5
+
+UnnamedText_49847: ; 0x49847
+    TX_FAR _UnnamedText_49847
+    db $50
+; 0x49847 + 5 bytes
+INCBIN "baserom.gbc",$4984c,$0
 
 Route16GateUpstairsObject: ; 0x4984c (size=30)
     db $a ; border tile
@@ -26155,7 +27528,157 @@ Route20Text10: ; 0x50e0d
     call LoadTrainerHeader
     jp $24d7
 
-INCBIN "baserom.gbc",$50e17,$96
+
+UnnamedText_50e17: ; 0x50e17
+    TX_FAR _UnnamedText_50e17
+    db $50
+; 0x50e17 + 5 bytes
+
+UnnamedText_50e1c: ; 0x50e1c
+    TX_FAR _UnnamedText_50e1c
+    db $50
+; 0x50e1c + 5 bytes
+
+UnnamedText_50e21: ; 0x50e21
+    TX_FAR _UnnamedText_50e21
+    db $50
+; 0x50e21 + 5 bytes
+
+UnnamedText_50e26: ; 0x50e26
+    TX_FAR _UnnamedText_50e26
+    db $50
+; 0x50e26 + 5 bytes
+
+UnnamedText_50e2b: ; 0x50e2b
+    TX_FAR _UnnamedText_50e2b
+    db $50
+; 0x50e2b + 5 bytes
+
+UnnamedText_50e30: ; 0x50e30
+    TX_FAR _UnnamedText_50e30
+    db $50
+; 0x50e30 + 5 bytes
+
+UnnamedText_50e35: ; 0x50e35
+    TX_FAR _UnnamedText_50e35
+    db $50
+; 0x50e35 + 5 bytes
+
+UnnamedText_50e3a: ; 0x50e3a
+    TX_FAR _UnnamedText_50e3a
+    db $50
+; 0x50e3a + 5 bytes
+
+UnnamedText_50e3f: ; 0x50e3f
+    TX_FAR _UnnamedText_50e3f
+    db $50
+; 0x50e3f + 5 bytes
+
+UnnamedText_50e44: ; 0x50e44
+    TX_FAR _UnnamedText_50e44
+    db $50
+; 0x50e44 + 5 bytes
+
+UnnamedText_50e49: ; 0x50e49
+    TX_FAR _UnnamedText_50e49
+    db $50
+; 0x50e49 + 5 bytes
+
+UnnamedText_50e4e: ; 0x50e4e
+    TX_FAR _UnnamedText_50e4e
+    db $50
+; 0x50e4e + 5 bytes
+
+UnnamedText_50e53: ; 0x50e53
+    TX_FAR _UnnamedText_50e53
+    db $50
+; 0x50e53 + 5 bytes
+
+UnnamedText_50e58: ; 0x50e58
+    TX_FAR _UnnamedText_50e58
+    db $50
+; 0x50e58 + 5 bytes
+
+UnnamedText_50e5d: ; 0x50e5d
+    TX_FAR _UnnamedText_50e5d
+    db $50
+; 0x50e5d + 5 bytes
+
+UnnamedText_50e62: ; 0x50e62
+    TX_FAR _UnnamedText_50e62
+    db $50
+; 0x50e62 + 5 bytes
+
+UnnamedText_50e67: ; 0x50e67
+    TX_FAR _UnnamedText_50e67
+    db $50
+; 0x50e67 + 5 bytes
+
+UnnamedText_50e6c: ; 0x50e6c
+    TX_FAR _UnnamedText_50e6c
+    db $50
+; 0x50e6c + 5 bytes
+
+UnnamedText_50e71: ; 0x50e71
+    TX_FAR _UnnamedText_50e71
+    db $50
+; 0x50e71 + 5 bytes
+
+UnnamedText_50e76: ; 0x50e76
+    TX_FAR _UnnamedText_50e76
+    db $50
+; 0x50e76 + 5 bytes
+
+UnnamedText_50e7b: ; 0x50e7b
+    TX_FAR _UnnamedText_50e7b
+    db $50
+; 0x50e7b + 5 bytes
+
+UnnamedText_50e80: ; 0x50e80
+    TX_FAR _UnnamedText_50e80
+    db $50
+; 0x50e80 + 5 bytes
+
+UnnamedText_50e85: ; 0x50e85
+    TX_FAR _UnnamedText_50e85
+    db $50
+; 0x50e85 + 5 bytes
+
+UnnamedText_50e8a: ; 0x50e8a
+    TX_FAR _UnnamedText_50e8a
+    db $50
+; 0x50e8a + 5 bytes
+
+UnnamedText_50e8f: ; 0x50e8f
+    TX_FAR _UnnamedText_50e8f
+    db $50
+; 0x50e8f + 5 bytes
+
+UnnamedText_50e94: ; 0x50e94
+    TX_FAR _UnnamedText_50e94
+    db $50
+; 0x50e94 + 5 bytes
+
+UnnamedText_50e99: ; 0x50e99
+    TX_FAR _UnnamedText_50e99
+    db $50
+; 0x50e99 + 5 bytes
+
+UnnamedText_50e9e: ; 0x50e9e
+    TX_FAR _UnnamedText_50e9e
+    db $50
+; 0x50e9e + 5 bytes
+
+UnnamedText_50ea3: ; 0x50ea3
+    TX_FAR _UnnamedText_50ea3
+    db $50
+; 0x50ea3 + 5 bytes
+
+UnnamedText_50ea8: ; 0x50ea8
+    TX_FAR _UnnamedText_50ea8
+    db $50
+; 0x50ea8 + 5 bytes
+INCBIN "baserom.gbc",$50ead,$0
 
 Route20Text12:
 Route20Text11: ; 0x50ead
@@ -26468,7 +27991,12 @@ Route23Text7: ; 0x5133d
     jp $24d7
 ; 0x51346
 
-INCBIN "baserom.gbc",$51346,$62
+INCBIN "baserom.gbc",$51346,$513a3 - $51346
+
+UnnamedText_513a3: ; 0x513a3
+    TX_FAR _UnnamedText_513a3
+    db $50
+; 0x513a3 + 5 bytes
 
 Route23Text8: ; 0x513a8
     TX_FAR _Route23Text8
@@ -26575,7 +28103,97 @@ Route24Text7: ; 0x51567
     call LoadTrainerHeader
     jp $24d7
 
-INCBIN "baserom.gbc",$51571,$515cb - $51571
+
+UnnamedText_51571: ; 0x51571
+    TX_FAR _UnnamedText_51571
+    db $50
+; 0x51571 + 5 bytes
+
+UnnamedText_51576: ; 0x51576
+    TX_FAR _UnnamedText_51576
+    db $50
+; 0x51576 + 5 bytes
+
+UnnamedText_5157b: ; 0x5157b
+    TX_FAR _UnnamedText_5157b
+    db $50
+; 0x5157b + 5 bytes
+
+UnnamedText_51580: ; 0x51580
+    TX_FAR _UnnamedText_51580
+    db $50
+; 0x51580 + 5 bytes
+
+UnnamedText_51585: ; 0x51585
+    TX_FAR _UnnamedText_51585
+    db $50
+; 0x51585 + 5 bytes
+
+UnnamedText_5158a: ; 0x5158a
+    TX_FAR _UnnamedText_5158a
+    db $50
+; 0x5158a + 5 bytes
+
+UnnamedText_5158f: ; 0x5158f
+    TX_FAR _UnnamedText_5158f
+    db $50
+; 0x5158f + 5 bytes
+
+UnnamedText_51594: ; 0x51594
+    TX_FAR _UnnamedText_51594
+    db $50
+; 0x51594 + 5 bytes
+
+UnnamedText_51599: ; 0x51599
+    TX_FAR _UnnamedText_51599
+    db $50
+; 0x51599 + 5 bytes
+
+UnnamedText_5159e: ; 0x5159e
+    TX_FAR _UnnamedText_5159e
+    db $50
+; 0x5159e + 5 bytes
+
+UnnamedText_515a3: ; 0x515a3
+    TX_FAR _UnnamedText_515a3
+    db $50
+; 0x515a3 + 5 bytes
+
+UnnamedText_515a8: ; 0x515a8
+    TX_FAR _UnnamedText_515a8
+    db $50
+; 0x515a8 + 5 bytes
+
+UnnamedText_515ad: ; 0x515ad
+    TX_FAR _UnnamedText_515ad
+    db $50
+; 0x515ad + 5 bytes
+
+UnnamedText_515b2: ; 0x515b2
+    TX_FAR _UnnamedText_515b2
+    db $50
+; 0x515b2 + 5 bytes
+
+UnnamedText_515b7: ; 0x515b7
+    TX_FAR _UnnamedText_515b7
+    db $50
+; 0x515b7 + 5 bytes
+
+UnnamedText_515bc: ; 0x515bc
+    TX_FAR _UnnamedText_515bc
+    db $50
+; 0x515bc + 5 bytes
+
+UnnamedText_515c1: ; 0x515c1
+    TX_FAR _UnnamedText_515c1
+    db $50
+; 0x515c1 + 5 bytes
+
+UnnamedText_515c6: ; 0x515c6
+    TX_FAR _UnnamedText_515c6
+    db $50
+; 0x515c6 + 5 bytes
+INCBIN "baserom.gbc",$515cb,$0
 
 Route25Script: ; 0x515cb
     call $55e1
@@ -26649,7 +28267,142 @@ Route25Text9: ; 0x516fb
     call LoadTrainerHeader
     jp $24d7
 
-INCBIN "baserom.gbc",$51705,$87
+
+UnnamedText_51705: ; 0x51705
+    TX_FAR _UnnamedText_51705
+    db $50
+; 0x51705 + 5 bytes
+
+UnnamedText_5170a: ; 0x5170a
+    TX_FAR _UnnamedText_5170a
+    db $50
+; 0x5170a + 5 bytes
+
+UnnamedText_5170f: ; 0x5170f
+    TX_FAR _UnnamedText_5170f
+    db $50
+; 0x5170f + 5 bytes
+
+UnnamedText_51714: ; 0x51714
+    TX_FAR _UnnamedText_51714
+    db $50
+; 0x51714 + 5 bytes
+
+UnnamedText_51719: ; 0x51719
+    TX_FAR _UnnamedText_51719
+    db $50
+; 0x51719 + 5 bytes
+
+UnnamedText_5171e: ; 0x5171e
+    TX_FAR _UnnamedText_5171e
+    db $50
+; 0x5171e + 5 bytes
+
+UnnamedText_51723: ; 0x51723
+    TX_FAR _UnnamedText_51723
+    db $50
+; 0x51723 + 5 bytes
+
+UnnamedText_51728: ; 0x51728
+    TX_FAR _UnnamedText_51728
+    db $50
+; 0x51728 + 5 bytes
+
+UnnamedText_5172d: ; 0x5172d
+    TX_FAR _UnnamedText_5172d
+    db $50
+; 0x5172d + 5 bytes
+
+UnnamedText_51732: ; 0x51732
+    TX_FAR _UnnamedText_51732
+    db $50
+; 0x51732 + 5 bytes
+
+UnnamedText_51737: ; 0x51737
+    TX_FAR _UnnamedText_51737
+    db $50
+; 0x51737 + 5 bytes
+
+UnnamedText_5173c: ; 0x5173c
+    TX_FAR _UnnamedText_5173c
+    db $50
+; 0x5173c + 5 bytes
+
+UnnamedText_51741: ; 0x51741
+    TX_FAR _UnnamedText_51741
+    db $50
+; 0x51741 + 5 bytes
+
+UnnamedText_51746: ; 0x51746
+    TX_FAR _UnnamedText_51746
+    db $50
+; 0x51746 + 5 bytes
+
+UnnamedText_5174b: ; 0x5174b
+    TX_FAR _UnnamedText_5174b
+    db $50
+; 0x5174b + 5 bytes
+
+UnnamedText_51750: ; 0x51750
+    TX_FAR _UnnamedText_51750
+    db $50
+; 0x51750 + 5 bytes
+
+UnnamedText_51755: ; 0x51755
+    TX_FAR _UnnamedText_51755
+    db $50
+; 0x51755 + 5 bytes
+
+UnnamedText_5175a: ; 0x5175a
+    TX_FAR _UnnamedText_5175a
+    db $50
+; 0x5175a + 5 bytes
+
+UnnamedText_5175f: ; 0x5175f
+    TX_FAR _UnnamedText_5175f
+    db $50
+; 0x5175f + 5 bytes
+
+UnnamedText_51764: ; 0x51764
+    TX_FAR _UnnamedText_51764
+    db $50
+; 0x51764 + 5 bytes
+
+UnnamedText_51769: ; 0x51769
+    TX_FAR _UnnamedText_51769
+    db $50
+; 0x51769 + 5 bytes
+
+UnnamedText_5176e: ; 0x5176e
+    TX_FAR _UnnamedText_5176e
+    db $50
+; 0x5176e + 5 bytes
+
+UnnamedText_51773: ; 0x51773
+    TX_FAR _UnnamedText_51773
+    db $50
+; 0x51773 + 5 bytes
+
+UnnamedText_51778: ; 0x51778
+    TX_FAR _UnnamedText_51778
+    db $50
+; 0x51778 + 5 bytes
+
+UnnamedText_5177d: ; 0x5177d
+    TX_FAR _UnnamedText_5177d
+    db $50
+; 0x5177d + 5 bytes
+
+UnnamedText_51782: ; 0x51782
+    TX_FAR _UnnamedText_51782
+    db $50
+; 0x51782 + 5 bytes
+
+UnnamedText_51787: ; 0x51787
+    TX_FAR _UnnamedText_51787
+    db $50
+; 0x51787 + 5 bytes
+INCBIN "baserom.gbc",$5178c,$0
 
 Route25Text11: ; 0x5178c
     TX_FAR _Route25Text11
@@ -26724,7 +28477,83 @@ VictoryRoad2Text6: ; 0x518b0
     call LoadTrainerHeader
     jp $24d7
 
-INCBIN "baserom.gbc",$518ba,$5b
+INCBIN "baserom.gbc",$518ba,$518ca - $518ba
+
+UnnamedText_518ca: ; 0x518ca
+    TX_FAR _UnnamedText_518ca
+    db $50
+; 0x518ca + 5 bytes
+
+UnnamedText_518cf: ; 0x518cf
+    TX_FAR _UnnamedText_518cf
+    db $50
+; 0x518cf + 5 bytes
+
+UnnamedText_518d4: ; 0x518d4
+    TX_FAR _UnnamedText_518d4
+    db $50
+; 0x518d4 + 5 bytes
+
+UnnamedText_518d9: ; 0x518d9
+    TX_FAR _UnnamedText_518d9
+    db $50
+; 0x518d9 + 5 bytes
+
+UnnamedText_518de: ; 0x518de
+    TX_FAR _UnnamedText_518de
+    db $50
+; 0x518de + 5 bytes
+
+UnnamedText_518e3: ; 0x518e3
+    TX_FAR _UnnamedText_518e3
+    db $50
+; 0x518e3 + 5 bytes
+
+UnnamedText_518e8: ; 0x518e8
+    TX_FAR _UnnamedText_518e8
+    db $50
+; 0x518e8 + 5 bytes
+
+UnnamedText_518ed: ; 0x518ed
+    TX_FAR _UnnamedText_518ed
+    db $50
+; 0x518ed + 5 bytes
+
+UnnamedText_518f2: ; 0x518f2
+    TX_FAR _UnnamedText_518f2
+    db $50
+; 0x518f2 + 5 bytes
+
+UnnamedText_518f7: ; 0x518f7
+    TX_FAR _UnnamedText_518f7
+    db $50
+; 0x518f7 + 5 bytes
+
+UnnamedText_518fc: ; 0x518fc
+    TX_FAR _UnnamedText_518fc
+    db $50
+; 0x518fc + 5 bytes
+
+UnnamedText_51901: ; 0x51901
+    TX_FAR _UnnamedText_51901
+    db $50
+; 0x51901 + 5 bytes
+
+UnnamedText_51906: ; 0x51906
+    TX_FAR _UnnamedText_51906
+    db $50
+; 0x51906 + 5 bytes
+
+UnnamedText_5190b: ; 0x5190b
+    TX_FAR _UnnamedText_5190b
+    db $50
+; 0x5190b + 5 bytes
+
+UnnamedText_51910: ; 0x51910
+    TX_FAR _UnnamedText_51910
+    db $50
+; 0x51910 + 5 bytes
+INCBIN "baserom.gbc",$51915,$0
 
 VictoryRoad2Object: ; 0x51915 (size=154)
     db $7d ; border tile
@@ -26874,7 +28703,27 @@ SilphCo7Text1: ; 0x51d8e
 .asm_b3069 ; 0x51dd0
     jp $24d7
 
-INCBIN "baserom.gbc",$51dd3,$51de7 - $51dd3
+
+UnnamedText_51dd3: ; 0x51dd3
+    TX_FAR _UnnamedText_51dd3
+    db $50
+; 0x51dd3 + 5 bytes
+
+UnnamedText_51dd8: ; 0x51dd8
+    TX_FAR _UnnamedText_51dd8
+    db $50
+; 0x51dd8 + 5 bytes
+
+UnnamedText_51ddd: ; 0x51ddd
+    TX_FAR _UnnamedText_51ddd
+    db $50
+; 0x51ddd + 5 bytes
+
+UnnamedText_51de2: ; 0x51de2
+    TX_FAR _UnnamedText_51de2
+    db $50
+; 0x51de2 + 5 bytes
+INCBIN "baserom.gbc",$51de7,$0
 
 SilphCo7Text2: ; 0x51de7
     db $8
@@ -27116,7 +28965,37 @@ Mansion3Text2: ; 0x522b9
     call LoadTrainerHeader
     jp $24d7
 
-INCBIN "baserom.gbc",$522c3,$522e1 - $522c3
+
+UnnamedText_522c3: ; 0x522c3
+    TX_FAR _UnnamedText_522c3
+    db $50
+; 0x522c3 + 5 bytes
+
+UnnamedText_522c8: ; 0x522c8
+    TX_FAR _UnnamedText_522c8
+    db $50
+; 0x522c8 + 5 bytes
+
+UnnamedText_522cd: ; 0x522cd
+    TX_FAR _UnnamedText_522cd
+    db $50
+; 0x522cd + 5 bytes
+
+UnnamedText_522d2: ; 0x522d2
+    TX_FAR _UnnamedText_522d2
+    db $50
+; 0x522d2 + 5 bytes
+
+UnnamedText_522d7: ; 0x522d7
+    TX_FAR _UnnamedText_522d7
+    db $50
+; 0x522d7 + 5 bytes
+
+UnnamedText_522dc: ; 0x522dc
+    TX_FAR _UnnamedText_522dc
+    db $50
+; 0x522dc + 5 bytes
+INCBIN "baserom.gbc",$522e1,$0
 
 Mansion3Text5: ; 0x522e1
     TX_FAR _Mansion3Text5
@@ -27618,7 +29497,58 @@ PrizeMonLevelDictionary: ; 14:698A
 		db PORYGON,18
 	ENDC
 
-INCBIN "baserom.gbc",$52996,$54000 - $52996
+INCBIN "baserom.gbc",$52996,$529e9 - $52996
+
+UnnamedText_529e9: ; 0x529e9
+    TX_FAR _UnnamedText_529e9
+    db $50
+; 0x529e9 + 5 bytes
+INCBIN "baserom.gbc",$529ee,$529f4 - $529ee
+
+UnnamedText_529f4: ; 0x529f4
+    TX_FAR _UnnamedText_529f4
+    db $50
+; 0x529f4 + 5 bytes
+
+UnnamedText_529f9: ; 0x529f9
+    TX_FAR _UnnamedText_529f9
+    db $50
+; 0x529f9 + 5 bytes
+
+UnnamedText_529fe: ; 0x529fe
+    TX_FAR _UnnamedText_529fe
+    db $50
+; 0x529fe + 5 bytes
+
+UnnamedText_52a03: ; 0x52a03
+    TX_FAR _UnnamedText_52a03
+    db $50
+; 0x52a03 + 5 bytes
+INCBIN "baserom.gbc",$52a08,$52a10 - $52a08
+
+UnnamedText_52a10: ; 0x52a10
+    TX_FAR _UnnamedText_52a10
+    db $50
+; 0x52a10 + 5 bytes
+INCBIN "baserom.gbc",$52a15,$52a1d - $52a15
+
+UnnamedText_52a1d: ; 0x52a1d
+    TX_FAR _UnnamedText_52a1d
+    db $50
+; 0x52a1d + 5 bytes
+INCBIN "baserom.gbc",$52a22,$52a2a - $52a22
+
+UnnamedText_52a2a: ; 0x52a2a
+    TX_FAR _UnnamedText_52a2a
+    db $50
+; 0x52a2a + 5 bytes
+INCBIN "baserom.gbc",$52a2f,$52a3d - $52a2f
+
+UnnamedText_52a3d: ; 0x52a3d
+    TX_FAR _UnnamedText_52a3d
+    db $50
+; 0x52a3d + 5 bytes
+INCBIN "baserom.gbc",$52a42,$15be
 
 SECTION "bank15",DATA,BANK[$15]
 
@@ -28225,7 +30155,22 @@ Route3Text7: ; 0x55608
     call LoadTrainerHeader
     jp $24d7
 
-INCBIN "baserom.gbc",$55612,$55621 - $55612
+
+UnnamedText_55612: ; 0x55612
+    TX_FAR _UnnamedText_55612
+    db $50
+; 0x55612 + 5 bytes
+
+UnnamedText_55617: ; 0x55617
+    TX_FAR _UnnamedText_55617
+    db $50
+; 0x55617 + 5 bytes
+
+UnnamedText_5561c: ; 0x5561c
+    TX_FAR _UnnamedText_5561c
+    db $50
+; 0x5561c + 5 bytes
+INCBIN "baserom.gbc",$55621,$0
 
 Route3Text8: ; 0x55621
     db $08 ; asm
@@ -28233,7 +30178,22 @@ Route3Text8: ; 0x55621
     call LoadTrainerHeader
     jp $24d7
 
-INCBIN "baserom.gbc",$5562b,$5563a - $5562b
+
+UnnamedText_5562b: ; 0x5562b
+    TX_FAR _UnnamedText_5562b
+    db $50
+; 0x5562b + 5 bytes
+
+UnnamedText_55630: ; 0x55630
+    TX_FAR _UnnamedText_55630
+    db $50
+; 0x55630 + 5 bytes
+
+UnnamedText_55635: ; 0x55635
+    TX_FAR _UnnamedText_55635
+    db $50
+; 0x55635 + 5 bytes
+INCBIN "baserom.gbc",$5563a,$0
 
 Route3Text9: ; 0x5563a
     db $08 ; asm
@@ -28241,7 +30201,22 @@ Route3Text9: ; 0x5563a
     call LoadTrainerHeader
     jp $24d7
 
-INCBIN "baserom.gbc",$55644,$f
+
+UnnamedText_55644: ; 0x55644
+    TX_FAR _UnnamedText_55644
+    db $50
+; 0x55644 + 5 bytes
+
+UnnamedText_55649: ; 0x55649
+    TX_FAR _UnnamedText_55649
+    db $50
+; 0x55649 + 5 bytes
+
+UnnamedText_5564e: ; 0x5564e
+    TX_FAR _UnnamedText_5564e
+    db $50
+; 0x5564e + 5 bytes
+INCBIN "baserom.gbc",$55653,$0
 
 Route3Text10: ; 0x55653
     TX_FAR _Route3Text10
@@ -28274,7 +30249,22 @@ Route4Text2: ; 0x5568f
     call LoadTrainerHeader
     jp $24d7
 
-INCBIN "baserom.gbc",$55699,$f
+
+UnnamedText_55699: ; 0x55699
+    TX_FAR _UnnamedText_55699
+    db $50
+; 0x55699 + 5 bytes
+
+UnnamedText_5569e: ; 0x5569e
+    TX_FAR _UnnamedText_5569e
+    db $50
+; 0x5569e + 5 bytes
+
+UnnamedText_556a3: ; 0x556a3
+    TX_FAR _UnnamedText_556a3
+    db $50
+; 0x556a3 + 5 bytes
+INCBIN "baserom.gbc",$556a8,$0
 
 Route4Text5: ; 0x556a8
     TX_FAR _Route4Text5
@@ -28364,7 +30354,142 @@ asm_8be3d: ; 0x5578c
     jp $24d7
 ; 0x55792
 
-INCBIN "baserom.gbc",$55792,$87
+
+UnnamedText_55792: ; 0x55792
+    TX_FAR _UnnamedText_55792
+    db $50
+; 0x55792 + 5 bytes
+
+UnnamedText_55797: ; 0x55797
+    TX_FAR _UnnamedText_55797
+    db $50
+; 0x55797 + 5 bytes
+
+UnnamedText_5579c: ; 0x5579c
+    TX_FAR _UnnamedText_5579c
+    db $50
+; 0x5579c + 5 bytes
+
+UnnamedText_557a1: ; 0x557a1
+    TX_FAR _UnnamedText_557a1
+    db $50
+; 0x557a1 + 5 bytes
+
+UnnamedText_557a6: ; 0x557a6
+    TX_FAR _UnnamedText_557a6
+    db $50
+; 0x557a6 + 5 bytes
+
+UnnamedText_557ab: ; 0x557ab
+    TX_FAR _UnnamedText_557ab
+    db $50
+; 0x557ab + 5 bytes
+
+UnnamedText_557b0: ; 0x557b0
+    TX_FAR _UnnamedText_557b0
+    db $50
+; 0x557b0 + 5 bytes
+
+UnnamedText_557b5: ; 0x557b5
+    TX_FAR _UnnamedText_557b5
+    db $50
+; 0x557b5 + 5 bytes
+
+UnnamedText_557ba: ; 0x557ba
+    TX_FAR _UnnamedText_557ba
+    db $50
+; 0x557ba + 5 bytes
+
+UnnamedText_557bf: ; 0x557bf
+    TX_FAR _UnnamedText_557bf
+    db $50
+; 0x557bf + 5 bytes
+
+UnnamedText_557c4: ; 0x557c4
+    TX_FAR _UnnamedText_557c4
+    db $50
+; 0x557c4 + 5 bytes
+
+UnnamedText_557c9: ; 0x557c9
+    TX_FAR _UnnamedText_557c9
+    db $50
+; 0x557c9 + 5 bytes
+
+UnnamedText_557ce: ; 0x557ce
+    TX_FAR _UnnamedText_557ce
+    db $50
+; 0x557ce + 5 bytes
+
+UnnamedText_557d3: ; 0x557d3
+    TX_FAR _UnnamedText_557d3
+    db $50
+; 0x557d3 + 5 bytes
+
+UnnamedText_557d8: ; 0x557d8
+    TX_FAR _UnnamedText_557d8
+    db $50
+; 0x557d8 + 5 bytes
+
+UnnamedText_557dd: ; 0x557dd
+    TX_FAR _UnnamedText_557dd
+    db $50
+; 0x557dd + 5 bytes
+
+UnnamedText_557e2: ; 0x557e2
+    TX_FAR _UnnamedText_557e2
+    db $50
+; 0x557e2 + 5 bytes
+
+UnnamedText_557e7: ; 0x557e7
+    TX_FAR _UnnamedText_557e7
+    db $50
+; 0x557e7 + 5 bytes
+
+UnnamedText_557ec: ; 0x557ec
+    TX_FAR _UnnamedText_557ec
+    db $50
+; 0x557ec + 5 bytes
+
+UnnamedText_557f1: ; 0x557f1
+    TX_FAR _UnnamedText_557f1
+    db $50
+; 0x557f1 + 5 bytes
+
+UnnamedText_557f6: ; 0x557f6
+    TX_FAR _UnnamedText_557f6
+    db $50
+; 0x557f6 + 5 bytes
+
+UnnamedText_557fb: ; 0x557fb
+    TX_FAR _UnnamedText_557fb
+    db $50
+; 0x557fb + 5 bytes
+
+UnnamedText_55800: ; 0x55800
+    TX_FAR _UnnamedText_55800
+    db $50
+; 0x55800 + 5 bytes
+
+UnnamedText_55805: ; 0x55805
+    TX_FAR _UnnamedText_55805
+    db $50
+; 0x55805 + 5 bytes
+
+UnnamedText_5580a: ; 0x5580a
+    TX_FAR _UnnamedText_5580a
+    db $50
+; 0x5580a + 5 bytes
+
+UnnamedText_5580f: ; 0x5580f
+    TX_FAR _UnnamedText_5580f
+    db $50
+; 0x5580f + 5 bytes
+
+UnnamedText_55814: ; 0x55814
+    TX_FAR _UnnamedText_55814
+    db $50
+; 0x55814 + 5 bytes
+INCBIN "baserom.gbc",$55819,$0
 
 Route9Text11: ; 0x55819
     TX_FAR _Route9Text11
@@ -28393,7 +30518,22 @@ Route13Text1: ; 0x558ca
     call LoadTrainerHeader
     jp $24d7
 
-INCBIN "baserom.gbc",$558d4,$558e3 - $558d4
+
+UnnamedText_558d4: ; 0x558d4
+    TX_FAR _UnnamedText_558d4
+    db $50
+; 0x558d4 + 5 bytes
+
+UnnamedText_558d9: ; 0x558d9
+    TX_FAR _UnnamedText_558d9
+    db $50
+; 0x558d9 + 5 bytes
+
+UnnamedText_558de: ; 0x558de
+    TX_FAR _UnnamedText_558de
+    db $50
+; 0x558de + 5 bytes
+INCBIN "baserom.gbc",$558e3,$0
 
 Route13Text2: ; 0x558e3
     db $08 ; asm
@@ -28401,7 +30541,22 @@ Route13Text2: ; 0x558e3
     call LoadTrainerHeader
     jp $24d7
 
-INCBIN "baserom.gbc",$558ed,$558fc - $558ed
+
+UnnamedText_558ed: ; 0x558ed
+    TX_FAR _UnnamedText_558ed
+    db $50
+; 0x558ed + 5 bytes
+
+UnnamedText_558f2: ; 0x558f2
+    TX_FAR _UnnamedText_558f2
+    db $50
+; 0x558f2 + 5 bytes
+
+UnnamedText_558f7: ; 0x558f7
+    TX_FAR _UnnamedText_558f7
+    db $50
+; 0x558f7 + 5 bytes
+INCBIN "baserom.gbc",$558fc,$0
 
 Route13Text3: ; 0x558fc
     db $08 ; asm
@@ -28409,7 +30564,22 @@ Route13Text3: ; 0x558fc
     call LoadTrainerHeader
     jp $24d7
 
-INCBIN "baserom.gbc",$55906,$55915 - $55906
+
+UnnamedText_55906: ; 0x55906
+    TX_FAR _UnnamedText_55906
+    db $50
+; 0x55906 + 5 bytes
+
+UnnamedText_5590b: ; 0x5590b
+    TX_FAR _UnnamedText_5590b
+    db $50
+; 0x5590b + 5 bytes
+
+UnnamedText_55910: ; 0x55910
+    TX_FAR _UnnamedText_55910
+    db $50
+; 0x55910 + 5 bytes
+INCBIN "baserom.gbc",$55915,$0
 
 Route13Text4: ; 0x55915
     db $08 ; asm
@@ -28417,7 +30587,22 @@ Route13Text4: ; 0x55915
     call LoadTrainerHeader
     jp $24d7
 
-INCBIN "baserom.gbc",$5591f,$5592e - $5591f
+
+UnnamedText_5591f: ; 0x5591f
+    TX_FAR _UnnamedText_5591f
+    db $50
+; 0x5591f + 5 bytes
+
+UnnamedText_55924: ; 0x55924
+    TX_FAR _UnnamedText_55924
+    db $50
+; 0x55924 + 5 bytes
+
+UnnamedText_55929: ; 0x55929
+    TX_FAR _UnnamedText_55929
+    db $50
+; 0x55929 + 5 bytes
+INCBIN "baserom.gbc",$5592e,$0
 
 Route13Text5: ; 0x5592e
     db $08 ; asm
@@ -28433,7 +30618,22 @@ Route13Text6: ; 0x55947
     call LoadTrainerHeader
     jp $24d7
 
-INCBIN "baserom.gbc",$55951,$55960 - $55951
+
+UnnamedText_55951: ; 0x55951
+    TX_FAR _UnnamedText_55951
+    db $50
+; 0x55951 + 5 bytes
+
+UnnamedText_55956: ; 0x55956
+    TX_FAR _UnnamedText_55956
+    db $50
+; 0x55956 + 5 bytes
+
+UnnamedText_5595b: ; 0x5595b
+    TX_FAR _UnnamedText_5595b
+    db $50
+; 0x5595b + 5 bytes
+INCBIN "baserom.gbc",$55960,$0
 
 Route13Text7: ; 0x55960
     db $08 ; asm
@@ -28441,7 +30641,22 @@ Route13Text7: ; 0x55960
     call LoadTrainerHeader
     jp $24d7
 
-INCBIN "baserom.gbc",$5596a,$55979 - $5596a
+
+UnnamedText_5596a: ; 0x5596a
+    TX_FAR _UnnamedText_5596a
+    db $50
+; 0x5596a + 5 bytes
+
+UnnamedText_5596f: ; 0x5596f
+    TX_FAR _UnnamedText_5596f
+    db $50
+; 0x5596f + 5 bytes
+
+UnnamedText_55974: ; 0x55974
+    TX_FAR _UnnamedText_55974
+    db $50
+; 0x55974 + 5 bytes
+INCBIN "baserom.gbc",$55979,$0
 
 Route13Text8: ; 0x55979
     db $08 ; asm
@@ -28449,7 +30664,22 @@ Route13Text8: ; 0x55979
     call LoadTrainerHeader
     jp $24d7
 
-INCBIN "baserom.gbc",$55983,$55992 - $55983
+
+UnnamedText_55983: ; 0x55983
+    TX_FAR _UnnamedText_55983
+    db $50
+; 0x55983 + 5 bytes
+
+UnnamedText_55988: ; 0x55988
+    TX_FAR _UnnamedText_55988
+    db $50
+; 0x55988 + 5 bytes
+
+UnnamedText_5598d: ; 0x5598d
+    TX_FAR _UnnamedText_5598d
+    db $50
+; 0x5598d + 5 bytes
+INCBIN "baserom.gbc",$55992,$0
 
 Route13Text9: ; 0x55992
     db $08 ; asm
@@ -28457,7 +30687,22 @@ Route13Text9: ; 0x55992
     call LoadTrainerHeader
     jp $24d7
 
-INCBIN "baserom.gbc",$5599c,$559ab - $5599c
+
+UnnamedText_5599c: ; 0x5599c
+    TX_FAR _UnnamedText_5599c
+    db $50
+; 0x5599c + 5 bytes
+
+UnnamedText_559a1: ; 0x559a1
+    TX_FAR _UnnamedText_559a1
+    db $50
+; 0x559a1 + 5 bytes
+
+UnnamedText_559a6: ; 0x559a6
+    TX_FAR _UnnamedText_559a6
+    db $50
+; 0x559a6 + 5 bytes
+INCBIN "baserom.gbc",$559ab,$0
 
 Route13Text10: ; 0x559ab
     db $08 ; asm
@@ -28465,7 +30710,22 @@ Route13Text10: ; 0x559ab
     call LoadTrainerHeader
     jp $24d7
 
-INCBIN "baserom.gbc",$559b5,$f
+
+UnnamedText_559b5: ; 0x559b5
+    TX_FAR _UnnamedText_559b5
+    db $50
+; 0x559b5 + 5 bytes
+
+UnnamedText_559ba: ; 0x559ba
+    TX_FAR _UnnamedText_559ba
+    db $50
+; 0x559ba + 5 bytes
+
+UnnamedText_559bf: ; 0x559bf
+    TX_FAR _UnnamedText_559bf
+    db $50
+; 0x559bf + 5 bytes
+INCBIN "baserom.gbc",$559c4,$0
 
 Route13Text11: ; 0x559c4
     TX_FAR _Route13Text11
@@ -28603,7 +30863,22 @@ Route17Text1: ; 0x55c2c
     call LoadTrainerHeader
     jp $24d7
 
-INCBIN "baserom.gbc",$55c36,$55c45 - $55c36
+
+UnnamedText_55c36: ; 0x55c36
+    TX_FAR _UnnamedText_55c36
+    db $50
+; 0x55c36 + 5 bytes
+
+UnnamedText_55c3b: ; 0x55c3b
+    TX_FAR _UnnamedText_55c3b
+    db $50
+; 0x55c3b + 5 bytes
+
+UnnamedText_55c40: ; 0x55c40
+    TX_FAR _UnnamedText_55c40
+    db $50
+; 0x55c40 + 5 bytes
+INCBIN "baserom.gbc",$55c45,$0
 
 Route17Text2: ; 0x55c45
     db $08 ; asm
@@ -28619,7 +30894,22 @@ Route17Text3: ; 0x55c5e
     call LoadTrainerHeader
     jp $24d7
 
-INCBIN "baserom.gbc",$55c68,$55c77 - $55c68
+
+UnnamedText_55c68: ; 0x55c68
+    TX_FAR _UnnamedText_55c68
+    db $50
+; 0x55c68 + 5 bytes
+
+UnnamedText_55c6d: ; 0x55c6d
+    TX_FAR _UnnamedText_55c6d
+    db $50
+; 0x55c6d + 5 bytes
+
+UnnamedText_55c72: ; 0x55c72
+    TX_FAR _UnnamedText_55c72
+    db $50
+; 0x55c72 + 5 bytes
+INCBIN "baserom.gbc",$55c77,$0
 
 Route17Text4: ; 0x55c77
     db $08 ; asm
@@ -28675,7 +30965,22 @@ Route17Text10: ; 0x55d0d
     call LoadTrainerHeader
     jp $24d7
 
-INCBIN "baserom.gbc",$55d17,$f
+
+UnnamedText_55d17: ; 0x55d17
+    TX_FAR _UnnamedText_55d17
+    db $50
+; 0x55d17 + 5 bytes
+
+UnnamedText_55d1c: ; 0x55d1c
+    TX_FAR _UnnamedText_55d1c
+    db $50
+; 0x55d1c + 5 bytes
+
+UnnamedText_55d21: ; 0x55d21
+    TX_FAR _UnnamedText_55d21
+    db $50
+; 0x55d21 + 5 bytes
+INCBIN "baserom.gbc",$55d26,$0
 
 Route17Text11: ; 0x55d26
     TX_FAR _Route17Text11
@@ -28778,7 +31083,157 @@ Route19Text10: ; 0x55e46
     call LoadTrainerHeader
     jp $24d7
 
-INCBIN "baserom.gbc",$55e50,$96
+
+UnnamedText_55e50: ; 0x55e50
+    TX_FAR _UnnamedText_55e50
+    db $50
+; 0x55e50 + 5 bytes
+
+UnnamedText_55e55: ; 0x55e55
+    TX_FAR _UnnamedText_55e55
+    db $50
+; 0x55e55 + 5 bytes
+
+UnnamedText_55e5a: ; 0x55e5a
+    TX_FAR _UnnamedText_55e5a
+    db $50
+; 0x55e5a + 5 bytes
+
+UnnamedText_55e5f: ; 0x55e5f
+    TX_FAR _UnnamedText_55e5f
+    db $50
+; 0x55e5f + 5 bytes
+
+UnnamedText_55e64: ; 0x55e64
+    TX_FAR _UnnamedText_55e64
+    db $50
+; 0x55e64 + 5 bytes
+
+UnnamedText_55e69: ; 0x55e69
+    TX_FAR _UnnamedText_55e69
+    db $50
+; 0x55e69 + 5 bytes
+
+UnnamedText_55e6e: ; 0x55e6e
+    TX_FAR _UnnamedText_55e6e
+    db $50
+; 0x55e6e + 5 bytes
+
+UnnamedText_55e73: ; 0x55e73
+    TX_FAR _UnnamedText_55e73
+    db $50
+; 0x55e73 + 5 bytes
+
+UnnamedText_55e78: ; 0x55e78
+    TX_FAR _UnnamedText_55e78
+    db $50
+; 0x55e78 + 5 bytes
+
+UnnamedText_55e7d: ; 0x55e7d
+    TX_FAR _UnnamedText_55e7d
+    db $50
+; 0x55e7d + 5 bytes
+
+UnnamedText_55e82: ; 0x55e82
+    TX_FAR _UnnamedText_55e82
+    db $50
+; 0x55e82 + 5 bytes
+
+UnnamedText_55e87: ; 0x55e87
+    TX_FAR _UnnamedText_55e87
+    db $50
+; 0x55e87 + 5 bytes
+
+UnnamedText_55e8c: ; 0x55e8c
+    TX_FAR _UnnamedText_55e8c
+    db $50
+; 0x55e8c + 5 bytes
+
+UnnamedText_55e91: ; 0x55e91
+    TX_FAR _UnnamedText_55e91
+    db $50
+; 0x55e91 + 5 bytes
+
+UnnamedText_55e96: ; 0x55e96
+    TX_FAR _UnnamedText_55e96
+    db $50
+; 0x55e96 + 5 bytes
+
+UnnamedText_55e9b: ; 0x55e9b
+    TX_FAR _UnnamedText_55e9b
+    db $50
+; 0x55e9b + 5 bytes
+
+UnnamedText_55ea0: ; 0x55ea0
+    TX_FAR _UnnamedText_55ea0
+    db $50
+; 0x55ea0 + 5 bytes
+
+UnnamedText_55ea5: ; 0x55ea5
+    TX_FAR _UnnamedText_55ea5
+    db $50
+; 0x55ea5 + 5 bytes
+
+UnnamedText_55eaa: ; 0x55eaa
+    TX_FAR _UnnamedText_55eaa
+    db $50
+; 0x55eaa + 5 bytes
+
+UnnamedText_55eaf: ; 0x55eaf
+    TX_FAR _UnnamedText_55eaf
+    db $50
+; 0x55eaf + 5 bytes
+
+UnnamedText_55eb4: ; 0x55eb4
+    TX_FAR _UnnamedText_55eb4
+    db $50
+; 0x55eb4 + 5 bytes
+
+UnnamedText_55eb9: ; 0x55eb9
+    TX_FAR _UnnamedText_55eb9
+    db $50
+; 0x55eb9 + 5 bytes
+
+UnnamedText_55ebe: ; 0x55ebe
+    TX_FAR _UnnamedText_55ebe
+    db $50
+; 0x55ebe + 5 bytes
+
+UnnamedText_55ec3: ; 0x55ec3
+    TX_FAR _UnnamedText_55ec3
+    db $50
+; 0x55ec3 + 5 bytes
+
+UnnamedText_55ec8: ; 0x55ec8
+    TX_FAR _UnnamedText_55ec8
+    db $50
+; 0x55ec8 + 5 bytes
+
+UnnamedText_55ecd: ; 0x55ecd
+    TX_FAR _UnnamedText_55ecd
+    db $50
+; 0x55ecd + 5 bytes
+
+UnnamedText_55ed2: ; 0x55ed2
+    TX_FAR _UnnamedText_55ed2
+    db $50
+; 0x55ed2 + 5 bytes
+
+UnnamedText_55ed7: ; 0x55ed7
+    TX_FAR _UnnamedText_55ed7
+    db $50
+; 0x55ed7 + 5 bytes
+
+UnnamedText_55edc: ; 0x55edc
+    TX_FAR _UnnamedText_55edc
+    db $50
+; 0x55edc + 5 bytes
+
+UnnamedText_55ee1: ; 0x55ee1
+    TX_FAR _UnnamedText_55ee1
+    db $50
+; 0x55ee1 + 5 bytes
+INCBIN "baserom.gbc",$55ee6,$0
 
 Route19Text11: ; 0x55ee6
     TX_FAR _Route19Text11
@@ -28902,7 +31357,33 @@ asm_5dd95 ; 0x560ab
     call PrintText
     jp $24d7
 
-INCBIN "baserom.gbc",$560b1,$1e
+
+UnnamedText_560b1: ; 0x560b1
+    TX_FAR _UnnamedText_560b1
+    db $50
+; 0x560b1 + 5 bytes
+INCBIN "baserom.gbc",$560b6,$560bb - $560b6
+
+UnnamedText_560bb: ; 0x560bb
+    TX_FAR _UnnamedText_560bb
+    db $50
+; 0x560bb + 5 bytes
+
+UnnamedText_560c0: ; 0x560c0
+    TX_FAR _UnnamedText_560c0
+    db $50
+; 0x560c0 + 5 bytes
+
+UnnamedText_560c5: ; 0x560c5
+    TX_FAR _UnnamedText_560c5
+    db $50
+; 0x560c5 + 5 bytes
+
+UnnamedText_560ca: ; 0x560ca
+    TX_FAR _UnnamedText_560ca
+    db $50
+; 0x560ca + 5 bytes
+INCBIN "baserom.gbc",$560cf,$0
 
 VermilionHouse2Object: ; 0x560cf (size=26)
     db $a ; border tile
@@ -29017,7 +31498,28 @@ asm_1b09c ; 0x561b7
     call PrintText
     jp $24d7
 
-INCBIN "baserom.gbc",$561bd,$64
+
+UnnamedText_561bd: ; 0x561bd
+    TX_FAR _UnnamedText_561bd
+    db $50
+; 0x561bd + 5 bytes
+INCBIN "baserom.gbc",$561c2,$56212 - $561c2
+
+UnnamedText_56212: ; 0x56212
+    TX_FAR _UnnamedText_56212
+    db $50
+; 0x56212 + 5 bytes
+
+UnnamedText_56217: ; 0x56217
+    TX_FAR _UnnamedText_56217
+    db $50
+; 0x56217 + 5 bytes
+
+UnnamedText_5621c: ; 0x5621c
+    TX_FAR _UnnamedText_5621c
+    db $50
+; 0x5621c + 5 bytes
+INCBIN "baserom.gbc",$56221,$0
 
 FuchsiaHouse3Object: ; 0x56221 (size=34)
     db $c ; border tile
@@ -29108,7 +31610,79 @@ DayCareMText1: ; 0x56254
     ld hl, $641e
     jp $6409
 ; 0x562e1
-INCBIN "baserom.gbc",$562e1,$178
+INCBIN "baserom.gbc",$562e1,$5640f - $562e1
+
+UnnamedText_5640f: ; 0x5640f
+    TX_FAR _UnnamedText_5640f
+    db $50
+; 0x5640f + 5 bytes
+
+UnnamedText_56414: ; 0x56414
+    TX_FAR _UnnamedText_56414
+    db $50
+; 0x56414 + 5 bytes
+
+UnnamedText_56419: ; 0x56419
+    TX_FAR _UnnamedText_56419
+    db $50
+; 0x56419 + 5 bytes
+
+UnnamedText_5641e: ; 0x5641e
+    TX_FAR _UnnamedText_5641e
+    db $50
+; 0x5641e + 5 bytes
+
+UnnamedText_56423: ; 0x56423
+    TX_FAR _UnnamedText_56423
+    db $50
+; 0x56423 + 5 bytes
+
+UnnamedText_56428: ; 0x56428
+    TX_FAR _UnnamedText_56428
+    db $50
+; 0x56428 + 5 bytes
+
+UnnamedText_5642d: ; 0x5642d
+    TX_FAR _UnnamedText_5642d
+    db $50
+; 0x5642d + 5 bytes
+
+UnnamedText_56432: ; 0x56432
+    TX_FAR _UnnamedText_56432
+    db $50
+; 0x56432 + 5 bytes
+INCBIN "baserom.gbc",$56437,$5643b - $56437
+
+UnnamedText_5643b: ; 0x5643b
+    TX_FAR _UnnamedText_5643b
+    db $50
+; 0x5643b + 5 bytes
+
+UnnamedText_56440: ; 0x56440
+    TX_FAR _UnnamedText_56440
+    db $50
+; 0x56440 + 5 bytes
+
+UnnamedText_56445: ; 0x56445
+    TX_FAR _UnnamedText_56445
+    db $50
+; 0x56445 + 5 bytes
+
+UnnamedText_5644a: ; 0x5644a
+    TX_FAR _UnnamedText_5644a
+    db $50
+; 0x5644a + 5 bytes
+
+UnnamedText_5644f: ; 0x5644f
+    TX_FAR _UnnamedText_5644f
+    db $50
+; 0x5644f + 5 bytes
+
+UnnamedText_56454: ; 0x56454
+    TX_FAR _UnnamedText_56454
+    db $50
+; 0x56454 + 5 bytes
+INCBIN "baserom.gbc",$56459,$0
 
 DayCareMObject: ; 0x56459 (size=26)
     db $a ; border tile
@@ -29171,7 +31745,33 @@ asm_df984 ; 0x564ba
     call PrintText
     jp $24d7
 
-INCBIN "baserom.gbc",$564c0,$1e
+
+UnnamedText_564c0: ; 0x564c0
+    TX_FAR _UnnamedText_564c0
+    db $50
+; 0x564c0 + 5 bytes
+INCBIN "baserom.gbc",$564c5,$564ca - $564c5
+
+UnnamedText_564ca: ; 0x564ca
+    TX_FAR _UnnamedText_564ca
+    db $50
+; 0x564ca + 5 bytes
+
+UnnamedText_564cf: ; 0x564cf
+    TX_FAR _UnnamedText_564cf
+    db $50
+; 0x564cf + 5 bytes
+
+UnnamedText_564d4: ; 0x564d4
+    TX_FAR _UnnamedText_564d4
+    db $50
+; 0x564d4 + 5 bytes
+
+UnnamedText_564d9: ; 0x564d9
+    TX_FAR _UnnamedText_564d9
+    db $50
+; 0x564d9 + 5 bytes
+INCBIN "baserom.gbc",$564de,$0
 
 Route12HouseObject: ; 0x564de (size=26)
     db $a ; border tile
@@ -29226,7 +31826,17 @@ asm_a468f ; 0x565b8
     call PrintText
     jp $24d7
 
-INCBIN "baserom.gbc",$565be,$565c8 - $565be
+
+UnnamedText_565be: ; 0x565be
+    TX_FAR _UnnamedText_565be
+    db $50
+; 0x565be + 5 bytes
+
+UnnamedText_565c3: ; 0x565c3
+    TX_FAR _UnnamedText_565c3
+    db $50
+; 0x565c3 + 5 bytes
+INCBIN "baserom.gbc",$565c8,$0
 
 SilphCo8Text2: ; 0x565c8
     db $08 ; asm
@@ -29246,7 +31856,52 @@ SilphCo8Text4: ; 0x565dc
     call LoadTrainerHeader
     jp $24d7
 
-INCBIN "baserom.gbc",$565e6,$2d
+
+UnnamedText_565e6: ; 0x565e6
+    TX_FAR _UnnamedText_565e6
+    db $50
+; 0x565e6 + 5 bytes
+
+UnnamedText_565eb: ; 0x565eb
+    TX_FAR _UnnamedText_565eb
+    db $50
+; 0x565eb + 5 bytes
+
+UnnamedText_565f0: ; 0x565f0
+    TX_FAR _UnnamedText_565f0
+    db $50
+; 0x565f0 + 5 bytes
+
+UnnamedText_565f5: ; 0x565f5
+    TX_FAR _UnnamedText_565f5
+    db $50
+; 0x565f5 + 5 bytes
+
+UnnamedText_565fa: ; 0x565fa
+    TX_FAR _UnnamedText_565fa
+    db $50
+; 0x565fa + 5 bytes
+
+UnnamedText_565ff: ; 0x565ff
+    TX_FAR _UnnamedText_565ff
+    db $50
+; 0x565ff + 5 bytes
+
+UnnamedText_56604: ; 0x56604
+    TX_FAR _UnnamedText_56604
+    db $50
+; 0x56604 + 5 bytes
+
+UnnamedText_56609: ; 0x56609
+    TX_FAR _UnnamedText_56609
+    db $50
+; 0x56609 + 5 bytes
+
+UnnamedText_5660e: ; 0x5660e
+    TX_FAR _UnnamedText_5660e
+    db $50
+; 0x5660e + 5 bytes
+INCBIN "baserom.gbc",$56613,$0
 
 SilphCo8Object: ; 0x56613 (size=90)
     db $2e ; border tile
@@ -29789,7 +32444,22 @@ Route6Text1: ; 0x59120
     jp $24d7
 ; 0x5912a
 
-INCBIN "baserom.gbc",$5912a,$f
+
+UnnamedText_5912a: ; 0x5912a
+    TX_FAR _UnnamedText_5912a
+    db $50
+; 0x5912a + 5 bytes
+
+UnnamedText_5912f: ; 0x5912f
+    TX_FAR _UnnamedText_5912f
+    db $50
+; 0x5912f + 5 bytes
+
+UnnamedText_59134: ; 0x59134
+    TX_FAR _UnnamedText_59134
+    db $50
+; 0x59134 + 5 bytes
+INCBIN "baserom.gbc",$59139,$0
 
 Route6Text2: ; 0x59139
     db $08 ; asm
@@ -29848,7 +32518,23 @@ Route8Script: ; 0x591b6
 INCBIN "baserom.gbc",$591c9,$591cf - $591c9
 
 Route8Texts: ; 0x591cf
-INCBIN "baserom.gbc",$591cf,$59269 - $591cf
+INCBIN "baserom.gbc",$591cf,$5925a - $591cf
+
+UnnamedText_5925a: ; 0x5925a
+    TX_FAR _UnnamedText_5925a
+    db $50
+; 0x5925a + 5 bytes
+
+UnnamedText_5925f: ; 0x5925f
+    TX_FAR _UnnamedText_5925f
+    db $50
+; 0x5925f + 5 bytes
+
+UnnamedText_59264: ; 0x59264
+    TX_FAR _UnnamedText_59264
+    db $50
+; 0x59264 + 5 bytes
+INCBIN "baserom.gbc",$59269,$0
 
 Route8Text2: ; 0x59269
     db $08 ; asm
@@ -29888,7 +32574,22 @@ Route8Text6: ; 0x592cd
     call LoadTrainerHeader
     jp $24d7
 
-INCBIN "baserom.gbc",$592d7,$592e6 - $592d7
+
+UnnamedText_592d7: ; 0x592d7
+    TX_FAR _UnnamedText_592d7
+    db $50
+; 0x592d7 + 5 bytes
+
+UnnamedText_592dc: ; 0x592dc
+    TX_FAR _UnnamedText_592dc
+    db $50
+; 0x592dc + 5 bytes
+
+UnnamedText_592e1: ; 0x592e1
+    TX_FAR _UnnamedText_592e1
+    db $50
+; 0x592e1 + 5 bytes
+INCBIN "baserom.gbc",$592e6,$0
 
 Route8Text7: ; 0x592e6
     db $08 ; asm
@@ -29904,7 +32605,22 @@ Route8Text8: ; 0x592ff
     call LoadTrainerHeader
     jp $24d7
 
-INCBIN "baserom.gbc",$59309,$59318 - $59309
+
+UnnamedText_59309: ; 0x59309
+    TX_FAR _UnnamedText_59309
+    db $50
+; 0x59309 + 5 bytes
+
+UnnamedText_5930e: ; 0x5930e
+    TX_FAR _UnnamedText_5930e
+    db $50
+; 0x5930e + 5 bytes
+
+UnnamedText_59313: ; 0x59313
+    TX_FAR _UnnamedText_59313
+    db $50
+; 0x59313 + 5 bytes
+INCBIN "baserom.gbc",$59318,$0
 
 Route8Text9: ; 0x59318
     db $08 ; asm
@@ -29941,7 +32657,22 @@ Route10Text1: ; 0x593ac
     call LoadTrainerHeader
     jp $24d7
 
-INCBIN "baserom.gbc",$593b6,$593c5 - $593b6
+
+UnnamedText_593b6: ; 0x593b6
+    TX_FAR _UnnamedText_593b6
+    db $50
+; 0x593b6 + 5 bytes
+
+UnnamedText_593bb: ; 0x593bb
+    TX_FAR _UnnamedText_593bb
+    db $50
+; 0x593bb + 5 bytes
+
+UnnamedText_593c0: ; 0x593c0
+    TX_FAR _UnnamedText_593c0
+    db $50
+; 0x593c0 + 5 bytes
+INCBIN "baserom.gbc",$593c5,$0
 
 Route10Text2: ; 0x593c5
     db $08 ; asm
@@ -29949,7 +32680,22 @@ Route10Text2: ; 0x593c5
     call LoadTrainerHeader
     jp $24d7
 
-INCBIN "baserom.gbc",$593cf,$593de - $593cf
+
+UnnamedText_593cf: ; 0x593cf
+    TX_FAR _UnnamedText_593cf
+    db $50
+; 0x593cf + 5 bytes
+
+UnnamedText_593d4: ; 0x593d4
+    TX_FAR _UnnamedText_593d4
+    db $50
+; 0x593d4 + 5 bytes
+
+UnnamedText_593d9: ; 0x593d9
+    TX_FAR _UnnamedText_593d9
+    db $50
+; 0x593d9 + 5 bytes
+INCBIN "baserom.gbc",$593de,$0
 
 Route10Text3: ; 0x593de
     db $08 ; asm
@@ -29965,7 +32711,22 @@ Route10Text4: ; 0x593f7
     call LoadTrainerHeader
     jp $24d7
 
-INCBIN "baserom.gbc",$59401,$59410 - $59401
+
+UnnamedText_59401: ; 0x59401
+    TX_FAR _UnnamedText_59401
+    db $50
+; 0x59401 + 5 bytes
+
+UnnamedText_59406: ; 0x59406
+    TX_FAR _UnnamedText_59406
+    db $50
+; 0x59406 + 5 bytes
+
+UnnamedText_5940b: ; 0x5940b
+    TX_FAR _UnnamedText_5940b
+    db $50
+; 0x5940b + 5 bytes
+INCBIN "baserom.gbc",$59410,$0
 
 Route10Text5: ; 0x59410
     db $08 ; asm
@@ -30021,7 +32782,22 @@ Route11Text3: ; 0x59526
     call LoadTrainerHeader
     jp $24d7
 
-INCBIN "baserom.gbc",$59530,$5953f - $59530
+
+UnnamedText_59530: ; 0x59530
+    TX_FAR _UnnamedText_59530
+    db $50
+; 0x59530 + 5 bytes
+
+UnnamedText_59535: ; 0x59535
+    TX_FAR _UnnamedText_59535
+    db $50
+; 0x59535 + 5 bytes
+
+UnnamedText_5953a: ; 0x5953a
+    TX_FAR _UnnamedText_5953a
+    db $50
+; 0x5953a + 5 bytes
+INCBIN "baserom.gbc",$5953f,$0
 
 Route11Text4: ; 0x5953f
     db $08 ; asm
@@ -30061,7 +32837,22 @@ Route11Text8: ; 0x595a3
     call LoadTrainerHeader
     jp $24d7
 
-INCBIN "baserom.gbc",$595ad,$595bc - $595ad
+
+UnnamedText_595ad: ; 0x595ad
+    TX_FAR _UnnamedText_595ad
+    db $50
+; 0x595ad + 5 bytes
+
+UnnamedText_595b2: ; 0x595b2
+    TX_FAR _UnnamedText_595b2
+    db $50
+; 0x595b2 + 5 bytes
+
+UnnamedText_595b7: ; 0x595b7
+    TX_FAR _UnnamedText_595b7
+    db $50
+; 0x595b7 + 5 bytes
+INCBIN "baserom.gbc",$595bc,$0
 
 Route11Text9: ; 0x595bc
     db $08 ; asm
@@ -30104,7 +32895,17 @@ Route12Text1: ; 0x596e6
     TX_FAR _Route12Text1
     db $50
 
-INCBIN "baserom.gbc",$596eb,$596f5 - $596eb
+
+UnnamedText_596eb: ; 0x596eb
+    TX_FAR _UnnamedText_596eb
+    db $50
+; 0x596eb + 5 bytes
+
+UnnamedText_596f0: ; 0x596f0
+    TX_FAR _UnnamedText_596f0
+    db $50
+; 0x596f0 + 5 bytes
+INCBIN "baserom.gbc",$596f5,$0
 
 Route12Text2: ; 0x596f5
     db $08 ; asm
@@ -30112,7 +32913,22 @@ Route12Text2: ; 0x596f5
     call LoadTrainerHeader
     jp $24d7
 
-INCBIN "baserom.gbc",$596ff,$5970e - $596ff
+
+UnnamedText_596ff: ; 0x596ff
+    TX_FAR _UnnamedText_596ff
+    db $50
+; 0x596ff + 5 bytes
+
+UnnamedText_59704: ; 0x59704
+    TX_FAR _UnnamedText_59704
+    db $50
+; 0x59704 + 5 bytes
+
+UnnamedText_59709: ; 0x59709
+    TX_FAR _UnnamedText_59709
+    db $50
+; 0x59709 + 5 bytes
+INCBIN "baserom.gbc",$5970e,$0
 
 Route12Text3: ; 0x5970e
     db $08 ; asm
@@ -30269,7 +33085,22 @@ Route16Text1: ; 0x59a18
     call LoadTrainerHeader
     jp $24d7
 
-INCBIN "baserom.gbc",$59a22,$59a31 - $59a22
+
+UnnamedText_59a22: ; 0x59a22
+    TX_FAR _UnnamedText_59a22
+    db $50
+; 0x59a22 + 5 bytes
+
+UnnamedText_59a27: ; 0x59a27
+    TX_FAR _UnnamedText_59a27
+    db $50
+; 0x59a27 + 5 bytes
+
+UnnamedText_59a2c: ; 0x59a2c
+    TX_FAR _UnnamedText_59a2c
+    db $50
+; 0x59a2c + 5 bytes
+INCBIN "baserom.gbc",$59a31,$0
 
 Route16Text2: ; 0x59a31
     db $08 ; asm
@@ -30277,7 +33108,22 @@ Route16Text2: ; 0x59a31
     call LoadTrainerHeader
     jp $24d7
 
-INCBIN "baserom.gbc",$59a3b,$59a4a - $59a3b
+
+UnnamedText_59a3b: ; 0x59a3b
+    TX_FAR _UnnamedText_59a3b
+    db $50
+; 0x59a3b + 5 bytes
+
+UnnamedText_59a40: ; 0x59a40
+    TX_FAR _UnnamedText_59a40
+    db $50
+; 0x59a40 + 5 bytes
+
+UnnamedText_59a45: ; 0x59a45
+    TX_FAR _UnnamedText_59a45
+    db $50
+; 0x59a45 + 5 bytes
+INCBIN "baserom.gbc",$59a4a,$0
 
 Route16Text3: ; 0x59a4a
     db $08 ; asm
@@ -30285,7 +33131,22 @@ Route16Text3: ; 0x59a4a
     call LoadTrainerHeader
     jp $24d7
 
-INCBIN "baserom.gbc",$59a54,$59a63 - $59a54
+
+UnnamedText_59a54: ; 0x59a54
+    TX_FAR _UnnamedText_59a54
+    db $50
+; 0x59a54 + 5 bytes
+
+UnnamedText_59a59: ; 0x59a59
+    TX_FAR _UnnamedText_59a59
+    db $50
+; 0x59a59 + 5 bytes
+
+UnnamedText_59a5e: ; 0x59a5e
+    TX_FAR _UnnamedText_59a5e
+    db $50
+; 0x59a5e + 5 bytes
+INCBIN "baserom.gbc",$59a63,$0
 
 Route16Text4: ; 0x59a63
     db $08 ; asm
@@ -30293,7 +33154,22 @@ Route16Text4: ; 0x59a63
     call LoadTrainerHeader
     jp $24d7
 
-INCBIN "baserom.gbc",$59a6d,$59a7c - $59a6d
+
+UnnamedText_59a6d: ; 0x59a6d
+    TX_FAR _UnnamedText_59a6d
+    db $50
+; 0x59a6d + 5 bytes
+
+UnnamedText_59a72: ; 0x59a72
+    TX_FAR _UnnamedText_59a72
+    db $50
+; 0x59a72 + 5 bytes
+
+UnnamedText_59a77: ; 0x59a77
+    TX_FAR _UnnamedText_59a77
+    db $50
+; 0x59a77 + 5 bytes
+INCBIN "baserom.gbc",$59a7c,$0
 
 Route16Text5: ; 0x59a7c
     db $08 ; asm
@@ -30301,7 +33177,22 @@ Route16Text5: ; 0x59a7c
     call LoadTrainerHeader
     jp $24d7
 
-INCBIN "baserom.gbc",$59a86,$59a95 - $59a86
+
+UnnamedText_59a86: ; 0x59a86
+    TX_FAR _UnnamedText_59a86
+    db $50
+; 0x59a86 + 5 bytes
+
+UnnamedText_59a8b: ; 0x59a8b
+    TX_FAR _UnnamedText_59a8b
+    db $50
+; 0x59a8b + 5 bytes
+
+UnnamedText_59a90: ; 0x59a90
+    TX_FAR _UnnamedText_59a90
+    db $50
+; 0x59a90 + 5 bytes
+INCBIN "baserom.gbc",$59a95,$0
 
 Route16Text6: ; 0x59a95
     db $08 ; asm
@@ -30316,7 +33207,12 @@ Route16Text7: ; 0x59aae
     db $50
 
 Route16Text10: ; 0x59ab3
-INCBIN "baserom.gbc",$59ab3,5
+
+UnnamedText_59ab3: ; 0x59ab3
+    TX_FAR _UnnamedText_59ab3
+    db $50
+; 0x59ab3 + 5 bytes
+INCBIN "baserom.gbc",$59ab8,$0
 
 Route16Text11: ; 0x59ab8
 INCBIN "baserom.gbc",$59ab8,5
@@ -30352,7 +33248,22 @@ Route18Text1: ; 0x59b0f
     call LoadTrainerHeader
     jp $24d7
 
-INCBIN "baserom.gbc",$59b19,$59b28 - $59b19
+
+UnnamedText_59b19: ; 0x59b19
+    TX_FAR _UnnamedText_59b19
+    db $50
+; 0x59b19 + 5 bytes
+
+UnnamedText_59b1e: ; 0x59b1e
+    TX_FAR _UnnamedText_59b1e
+    db $50
+; 0x59b1e + 5 bytes
+
+UnnamedText_59b23: ; 0x59b23
+    TX_FAR _UnnamedText_59b23
+    db $50
+; 0x59b23 + 5 bytes
+INCBIN "baserom.gbc",$59b28,$0
 
 Route18Text2: ; 0x59b28
     db $08 ; asm
@@ -30368,7 +33279,22 @@ Route18Text3: ; 0x59b41
     call LoadTrainerHeader
     jp $24d7
 
-INCBIN "baserom.gbc",$59b4b,$f
+
+UnnamedText_59b4b: ; 0x59b4b
+    TX_FAR _UnnamedText_59b4b
+    db $50
+; 0x59b4b + 5 bytes
+
+UnnamedText_59b50: ; 0x59b50
+    TX_FAR _UnnamedText_59b50
+    db $50
+; 0x59b50 + 5 bytes
+
+UnnamedText_59b55: ; 0x59b55
+    TX_FAR _UnnamedText_59b55
+    db $50
+; 0x59b55 + 5 bytes
+INCBIN "baserom.gbc",$59b5a,$0
 
 Route18Text4: ; 0x59b5a
     TX_FAR _Route18Text4
@@ -30413,7 +33339,17 @@ asm_67b22 ; 0x59ba9
 asm_64f01 ; 0x59bb4
     jp $24d7
 
-INCBIN "baserom.gbc",$59bb7,$59bc1 - $59bb7
+
+UnnamedText_59bb7: ; 0x59bb7
+    TX_FAR _UnnamedText_59bb7
+    db $50
+; 0x59bb7 + 5 bytes
+
+UnnamedText_59bbc: ; 0x59bbc
+    TX_FAR _UnnamedText_59bbc
+    db $50
+; 0x59bbc + 5 bytes
+INCBIN "baserom.gbc",$59bc1,$0
 
 FanClubText2: ; 0x59bc1
     db $08 ; asm
@@ -30445,7 +33381,12 @@ FanClubText3: ; 0x59bee
     jp $24d7
 ; 0x59c00
 
-INCBIN "baserom.gbc",$59c00,$5
+
+UnnamedText_59c00: ; 0x59c00
+    TX_FAR _UnnamedText_59c00
+    db $50
+; 0x59c00 + 5 bytes
+INCBIN "baserom.gbc",$59c05,$0
 
 FanClubText4: ; 0x59c05
     db $08 ; asm
@@ -30456,7 +33397,12 @@ FanClubText4: ; 0x59c05
     call $3748
     jp $24d7
 
-INCBIN "baserom.gbc",$59c17,$59c1c - $59c17
+
+UnnamedText_59c17: ; 0x59c17
+    TX_FAR _UnnamedText_59c17
+    db $50
+; 0x59c17 + 5 bytes
+INCBIN "baserom.gbc",$59c1c,$0
 
 FanClubText5: ; 0x59c1c
     db $08 ; asm
@@ -30492,7 +33438,38 @@ asm_38bb3 ; 0x59c5c
 asm_d3c26 ; 0x59c62
     jp $24d7
 
-INCBIN "baserom.gbc",$59c65,$59c88 - $59c65
+
+UnnamedText_59c65: ; 0x59c65
+    TX_FAR _UnnamedText_59c65
+    db $50
+; 0x59c65 + 5 bytes
+
+UnnamedText_59c6a: ; 0x59c6a
+    TX_FAR _UnnamedText_59c6a
+    db $50
+; 0x59c6a + 5 bytes
+INCBIN "baserom.gbc",$59c6f,$59c74 - $59c6f
+
+UnnamedText_59c74: ; 0x59c74
+    TX_FAR _UnnamedText_59c74
+    db $50
+; 0x59c74 + 5 bytes
+
+UnnamedText_59c79: ; 0x59c79
+    TX_FAR _UnnamedText_59c79
+    db $50
+; 0x59c79 + 5 bytes
+
+UnnamedText_59c7e: ; 0x59c7e
+    TX_FAR _UnnamedText_59c7e
+    db $50
+; 0x59c7e + 5 bytes
+
+UnnamedText_59c83: ; 0x59c83
+    TX_FAR _UnnamedText_59c83
+    db $50
+; 0x59c83 + 5 bytes
+INCBIN "baserom.gbc",$59c88,$0
 
 FanClubText6:
     TX_FAR _FanClubText6
@@ -30579,7 +33556,23 @@ asm_2c1e0 ; 0x59de7
     call PrintText
     jp $24d7
 
-INCBIN "baserom.gbc",$59ded,$59e02 - $59ded
+
+UnnamedText_59ded: ; 0x59ded
+    TX_FAR _UnnamedText_59ded
+    db $50
+; 0x59ded + 5 bytes
+INCBIN "baserom.gbc",$59df2,$59df8 - $59df2
+
+UnnamedText_59df8: ; 0x59df8
+    TX_FAR _UnnamedText_59df8
+    db $50
+; 0x59df8 + 5 bytes
+
+UnnamedText_59dfd: ; 0x59dfd
+    TX_FAR _UnnamedText_59dfd
+    db $50
+; 0x59dfd + 5 bytes
+INCBIN "baserom.gbc",$59e02,$0
 
 SilphCo2Text2: ; 0x59e02
     db $08 ; asm
@@ -30605,7 +33598,67 @@ SilphCo2Text5: ; 0x59e20
     call LoadTrainerHeader
     jp $24d7
 
-INCBIN "baserom.gbc",$59e2a,$3c
+
+UnnamedText_59e2a: ; 0x59e2a
+    TX_FAR _UnnamedText_59e2a
+    db $50
+; 0x59e2a + 5 bytes
+
+UnnamedText_59e2f: ; 0x59e2f
+    TX_FAR _UnnamedText_59e2f
+    db $50
+; 0x59e2f + 5 bytes
+
+UnnamedText_59e34: ; 0x59e34
+    TX_FAR _UnnamedText_59e34
+    db $50
+; 0x59e34 + 5 bytes
+
+UnnamedText_59e39: ; 0x59e39
+    TX_FAR _UnnamedText_59e39
+    db $50
+; 0x59e39 + 5 bytes
+
+UnnamedText_59e3e: ; 0x59e3e
+    TX_FAR _UnnamedText_59e3e
+    db $50
+; 0x59e3e + 5 bytes
+
+UnnamedText_59e43: ; 0x59e43
+    TX_FAR _UnnamedText_59e43
+    db $50
+; 0x59e43 + 5 bytes
+
+UnnamedText_59e48: ; 0x59e48
+    TX_FAR _UnnamedText_59e48
+    db $50
+; 0x59e48 + 5 bytes
+
+UnnamedText_59e4d: ; 0x59e4d
+    TX_FAR _UnnamedText_59e4d
+    db $50
+; 0x59e4d + 5 bytes
+
+UnnamedText_59e52: ; 0x59e52
+    TX_FAR _UnnamedText_59e52
+    db $50
+; 0x59e52 + 5 bytes
+
+UnnamedText_59e57: ; 0x59e57
+    TX_FAR _UnnamedText_59e57
+    db $50
+; 0x59e57 + 5 bytes
+
+UnnamedText_59e5c: ; 0x59e5c
+    TX_FAR _UnnamedText_59e5c
+    db $50
+; 0x59e5c + 5 bytes
+
+UnnamedText_59e61: ; 0x59e61
+    TX_FAR _UnnamedText_59e61
+    db $50
+; 0x59e61 + 5 bytes
+INCBIN "baserom.gbc",$59e66,$0
 
 SilphCo2Object: ; 0x59e66 (size=98)
     db $2e ; border tile
@@ -30677,7 +33730,17 @@ asm_8c56f ; 0x59ff3
     call PrintText
     jp $24d7
 
-INCBIN "baserom.gbc",$59ff9,$5a003 - $59ff9
+
+UnnamedText_59ff9: ; 0x59ff9
+    TX_FAR _UnnamedText_59ff9
+    db $50
+; 0x59ff9 + 5 bytes
+
+UnnamedText_59ffe: ; 0x59ffe
+    TX_FAR _UnnamedText_59ffe
+    db $50
+; 0x59ffe + 5 bytes
+INCBIN "baserom.gbc",$5a003,$0
 
 SilphCo3Text2: ; 0x5a003
     db $08 ; asm
@@ -30685,7 +33748,22 @@ SilphCo3Text2: ; 0x5a003
     call LoadTrainerHeader
     jp $24d7
 
-INCBIN "baserom.gbc",$5a00d,$5a01c - $5a00d
+
+UnnamedText_5a00d: ; 0x5a00d
+    TX_FAR _UnnamedText_5a00d
+    db $50
+; 0x5a00d + 5 bytes
+
+UnnamedText_5a012: ; 0x5a012
+    TX_FAR _UnnamedText_5a012
+    db $50
+; 0x5a012 + 5 bytes
+
+UnnamedText_5a017: ; 0x5a017
+    TX_FAR _UnnamedText_5a017
+    db $50
+; 0x5a017 + 5 bytes
+INCBIN "baserom.gbc",$5a01c,$0
 
 SilphCo3Text3: ; 0x5a01c
     db $08 ; asm
@@ -30693,7 +33771,22 @@ SilphCo3Text3: ; 0x5a01c
     call LoadTrainerHeader
     jp $24d7
 
-INCBIN "baserom.gbc",$5a026,$f
+
+UnnamedText_5a026: ; 0x5a026
+    TX_FAR _UnnamedText_5a026
+    db $50
+; 0x5a026 + 5 bytes
+
+UnnamedText_5a02b: ; 0x5a02b
+    TX_FAR _UnnamedText_5a02b
+    db $50
+; 0x5a02b + 5 bytes
+
+UnnamedText_5a030: ; 0x5a030
+    TX_FAR _UnnamedText_5a030
+    db $50
+; 0x5a030 + 5 bytes
+INCBIN "baserom.gbc",$5a035,$0
 
 SilphCo3Object: ; 0x5a035 (size=113)
     db $2e ; border tile
@@ -30782,7 +33875,47 @@ asm_cf85f ; 0x5a1cd
     call PrintText
     jp $24d7
 
-INCBIN "baserom.gbc",$5a1d3,$28
+
+UnnamedText_5a1d3: ; 0x5a1d3
+    TX_FAR _UnnamedText_5a1d3
+    db $50
+; 0x5a1d3 + 5 bytes
+
+UnnamedText_5a1d8: ; 0x5a1d8
+    TX_FAR _UnnamedText_5a1d8
+    db $50
+; 0x5a1d8 + 5 bytes
+
+UnnamedText_5a1dd: ; 0x5a1dd
+    TX_FAR _UnnamedText_5a1dd
+    db $50
+; 0x5a1dd + 5 bytes
+
+UnnamedText_5a1e2: ; 0x5a1e2
+    TX_FAR _UnnamedText_5a1e2
+    db $50
+; 0x5a1e2 + 5 bytes
+
+UnnamedText_5a1e7: ; 0x5a1e7
+    TX_FAR _UnnamedText_5a1e7
+    db $50
+; 0x5a1e7 + 5 bytes
+
+UnnamedText_5a1ec: ; 0x5a1ec
+    TX_FAR _UnnamedText_5a1ec
+    db $50
+; 0x5a1ec + 5 bytes
+
+UnnamedText_5a1f1: ; 0x5a1f1
+    TX_FAR _UnnamedText_5a1f1
+    db $50
+; 0x5a1f1 + 5 bytes
+
+UnnamedText_5a1f6: ; 0x5a1f6
+    TX_FAR _UnnamedText_5a1f6
+    db $50
+; 0x5a1f6 + 5 bytes
+INCBIN "baserom.gbc",$5a1fb,$0
 
 SilphCo10Object: ; 0x5a1fb (size=95)
     db $2e ; border tile
@@ -30848,7 +33981,17 @@ LanceText1: ; 0x5a3a4
     call LoadTrainerHeader
     jp $24d7
 
-INCBIN "baserom.gbc",$5a3ae,$17
+
+UnnamedText_5a3ae: ; 0x5a3ae
+    TX_FAR _UnnamedText_5a3ae
+    db $50
+; 0x5a3ae + 5 bytes
+
+UnnamedText_5a3b3: ; 0x5a3b3
+    TX_FAR _UnnamedText_5a3b3
+    db $50
+; 0x5a3b3 + 5 bytes
+INCBIN "baserom.gbc",$5a3b8,$d
 
 LanceObject: ; 0x5a3c5 (size=36)
     db $3 ; border tile
@@ -31243,7 +34386,52 @@ asm_d1145: ; 0x5c217
     jp $24d7
 ; 0x5c21a
 
-INCBIN "baserom.gbc",$5c21a,$2d
+
+UnnamedText_5c21a: ; 0x5c21a
+    TX_FAR _UnnamedText_5c21a
+    db $50
+; 0x5c21a + 5 bytes
+
+UnnamedText_5c21f: ; 0x5c21f
+    TX_FAR _UnnamedText_5c21f
+    db $50
+; 0x5c21f + 5 bytes
+
+UnnamedText_5c224: ; 0x5c224
+    TX_FAR _UnnamedText_5c224
+    db $50
+; 0x5c224 + 5 bytes
+
+UnnamedText_5c229: ; 0x5c229
+    TX_FAR _UnnamedText_5c229
+    db $50
+; 0x5c229 + 5 bytes
+
+UnnamedText_5c22e: ; 0x5c22e
+    TX_FAR _UnnamedText_5c22e
+    db $50
+; 0x5c22e + 5 bytes
+
+UnnamedText_5c233: ; 0x5c233
+    TX_FAR _UnnamedText_5c233
+    db $50
+; 0x5c233 + 5 bytes
+
+UnnamedText_5c238: ; 0x5c238
+    TX_FAR _UnnamedText_5c238
+    db $50
+; 0x5c238 + 5 bytes
+
+UnnamedText_5c23d: ; 0x5c23d
+    TX_FAR _UnnamedText_5c23d
+    db $50
+; 0x5c23d + 5 bytes
+
+UnnamedText_5c242: ; 0x5c242
+    TX_FAR _UnnamedText_5c242
+    db $50
+; 0x5c242 + 5 bytes
+INCBIN "baserom.gbc",$5c247,$0
 
 MuseumF1Text2: ; 0x5c247
     db $08 ; asm
@@ -31251,7 +34439,12 @@ MuseumF1Text2: ; 0x5c247
     call PrintText
     jp $24d7
 
-INCBIN "baserom.gbc",$5c251,$5c256 - $5c251
+
+UnnamedText_5c251: ; 0x5c251
+    TX_FAR _UnnamedText_5c251
+    db $50
+; 0x5c251 + 5 bytes
+INCBIN "baserom.gbc",$5c256,$0
 
 MuseumF1Text3: ; 0x5c256
     db $08 ; asm
@@ -31280,7 +34473,23 @@ MuseumF1Text3: ; 0x5c256
     call PrintText
     jp $24d7
 
-INCBIN "baserom.gbc",$5c28e,$5c2a3 - $5c28e
+
+UnnamedText_5c28e: ; 0x5c28e
+    TX_FAR _UnnamedText_5c28e
+    db $50
+; 0x5c28e + 5 bytes
+INCBIN "baserom.gbc",$5c293,$5c299 - $5c293
+
+UnnamedText_5c299: ; 0x5c299
+    TX_FAR _UnnamedText_5c299
+    db $50
+; 0x5c299 + 5 bytes
+
+UnnamedText_5c29e: ; 0x5c29e
+    TX_FAR _UnnamedText_5c29e
+    db $50
+; 0x5c29e + 5 bytes
+INCBIN "baserom.gbc",$5c2a3,$0
 
 MuseumF1Text4: ; 0x5c2a3
     db $08 ; asm
@@ -31288,7 +34497,12 @@ MuseumF1Text4: ; 0x5c2a3
     call PrintText
     jp $24d7
 
-INCBIN "baserom.gbc",$5c2ad,$5c2b2 - $5c2ad
+
+UnnamedText_5c2ad: ; 0x5c2ad
+    TX_FAR _UnnamedText_5c2ad
+    db $50
+; 0x5c2ad + 5 bytes
+INCBIN "baserom.gbc",$5c2b2,$0
 
 MuseumF1Text5: ; 0x5c2b2
     db $08 ; asm
@@ -31296,7 +34510,12 @@ MuseumF1Text5: ; 0x5c2b2
     call PrintText
     jp $24d7
 
-INCBIN "baserom.gbc",$5c2bc,$5
+
+UnnamedText_5c2bc: ; 0x5c2bc
+    TX_FAR _UnnamedText_5c2bc
+    db $50
+; 0x5c2bc + 5 bytes
+INCBIN "baserom.gbc",$5c2c1,$0
 
 MuseumF1Object: ; 0x5c2c1 (size=74)
     db $a ; border tile
@@ -31453,10 +34672,25 @@ PewterGymText1: ; 0x5c44e
 .asm_e0ffb ; 0x5c49b
     jp $24d7
 
-INCBIN "baserom.gbc",$5c49e,$5c4a8 - $5c49e
+
+UnnamedText_5c49e: ; 0x5c49e
+    TX_FAR _UnnamedText_5c49e
+    db $50
+; 0x5c49e + 5 bytes
+
+UnnamedText_5c4a3: ; 0x5c4a3
+    TX_FAR _UnnamedText_5c4a3
+    db $50
+; 0x5c4a3 + 5 bytes
+INCBIN "baserom.gbc",$5c4a8,$0
 
 PewterGymText4: ; 0x5c4a8
-INCBIN "baserom.gbc",$5c4a8,5
+
+UnnamedText_5c4a8: ; 0x5c4a8
+    TX_FAR _UnnamedText_5c4a8
+    db $50
+; 0x5c4a8 + 5 bytes
+INCBIN "baserom.gbc",$5c4ad,$0
 
 PewterGymText5: ; 0x5c4ad
 INCBIN "baserom.gbc",$5c4ad,6
@@ -31745,7 +34979,17 @@ CeruleanGymText1: ; 0x5c771
 .asm_95b04 ; 0x5c7bb
     jp $24d7
 
-INCBIN "baserom.gbc",$5c7be,$5c7c8 - $5c7be
+
+UnnamedText_5c7be: ; 0x5c7be
+    TX_FAR _UnnamedText_5c7be
+    db $50
+; 0x5c7be + 5 bytes
+
+UnnamedText_5c7c3: ; 0x5c7c3
+    TX_FAR _UnnamedText_5c7c3
+    db $50
+; 0x5c7c3 + 5 bytes
+INCBIN "baserom.gbc",$5c7c8,$0
 
 CeruleanGymText5: ; 0x5c7c8
 INCBIN "baserom.gbc",$5c7c8,5
@@ -32353,12 +35597,32 @@ FightingDojoText1: ; 0x5ce44
 .asm_9dba4 ; 0x5ce8b
     jp $24d7
 
-INCBIN "baserom.gbc",$5ce8e,$5ce98 - $5ce8e
+
+UnnamedText_5ce8e: ; 0x5ce8e
+    TX_FAR _UnnamedText_5ce8e
+    db $50
+; 0x5ce8e + 5 bytes
+
+UnnamedText_5ce93: ; 0x5ce93
+    TX_FAR _UnnamedText_5ce93
+    db $50
+; 0x5ce93 + 5 bytes
+INCBIN "baserom.gbc",$5ce98,$0
 
 FightingDojoText8: ; 0x5ce98
-INCBIN "baserom.gbc",$5ce98,5
 
-INCBIN "baserom.gbc",$5ce9d,5
+UnnamedText_5ce98: ; 0x5ce98
+    TX_FAR _UnnamedText_5ce98
+    db $50
+; 0x5ce98 + 5 bytes
+INCBIN "baserom.gbc",$5ce9d,$0
+
+
+UnnamedText_5ce9d: ; 0x5ce9d
+    TX_FAR _UnnamedText_5ce9d
+    db $50
+; 0x5ce9d + 5 bytes
+INCBIN "baserom.gbc",$5cea2,$0
 
 FightingDojoText2: ; 0x5cea2
     db $08 ; asm
@@ -32366,7 +35630,22 @@ FightingDojoText2: ; 0x5cea2
     call LoadTrainerHeader
     jp $24d7
 
-INCBIN "baserom.gbc",$5ceac,$5cebb - $5ceac
+
+UnnamedText_5ceac: ; 0x5ceac
+    TX_FAR _UnnamedText_5ceac
+    db $50
+; 0x5ceac + 5 bytes
+
+UnnamedText_5ceb1: ; 0x5ceb1
+    TX_FAR _UnnamedText_5ceb1
+    db $50
+; 0x5ceb1 + 5 bytes
+
+UnnamedText_5ceb6: ; 0x5ceb6
+    TX_FAR _UnnamedText_5ceb6
+    db $50
+; 0x5ceb6 + 5 bytes
+INCBIN "baserom.gbc",$5cebb,$0
 
 FightingDojoText3: ; 0x5cebb
     db $08 ; asm
@@ -32374,7 +35653,22 @@ FightingDojoText3: ; 0x5cebb
     call LoadTrainerHeader
     jp $24d7
 
-INCBIN "baserom.gbc",$5cec5,$5ced4 - $5cec5
+
+UnnamedText_5cec5: ; 0x5cec5
+    TX_FAR _UnnamedText_5cec5
+    db $50
+; 0x5cec5 + 5 bytes
+
+UnnamedText_5ceca: ; 0x5ceca
+    TX_FAR _UnnamedText_5ceca
+    db $50
+; 0x5ceca + 5 bytes
+
+UnnamedText_5cecf: ; 0x5cecf
+    TX_FAR _UnnamedText_5cecf
+    db $50
+; 0x5cecf + 5 bytes
+INCBIN "baserom.gbc",$5ced4,$0
 
 FightingDojoText4: ; 0x5ced4
     db $08 ; asm
@@ -32382,7 +35676,22 @@ FightingDojoText4: ; 0x5ced4
     call LoadTrainerHeader
     jp $24d7
 
-INCBIN "baserom.gbc",$5cede,$5ceed - $5cede
+
+UnnamedText_5cede: ; 0x5cede
+    TX_FAR _UnnamedText_5cede
+    db $50
+; 0x5cede + 5 bytes
+
+UnnamedText_5cee3: ; 0x5cee3
+    TX_FAR _UnnamedText_5cee3
+    db $50
+; 0x5cee3 + 5 bytes
+
+UnnamedText_5cee8: ; 0x5cee8
+    TX_FAR _UnnamedText_5cee8
+    db $50
+; 0x5cee8 + 5 bytes
+INCBIN "baserom.gbc",$5ceed,$0
 
 FightingDojoText5: ; 0x5ceed
     db $08 ; asm
@@ -32390,7 +35699,22 @@ FightingDojoText5: ; 0x5ceed
     call LoadTrainerHeader
     jp $24d7
 
-INCBIN "baserom.gbc",$5cef7,$5cf06 - $5cef7
+
+UnnamedText_5cef7: ; 0x5cef7
+    TX_FAR _UnnamedText_5cef7
+    db $50
+; 0x5cef7 + 5 bytes
+
+UnnamedText_5cefc: ; 0x5cefc
+    TX_FAR _UnnamedText_5cefc
+    db $50
+; 0x5cefc + 5 bytes
+
+UnnamedText_5cf01: ; 0x5cf01
+    TX_FAR _UnnamedText_5cf01
+    db $50
+; 0x5cf01 + 5 bytes
+INCBIN "baserom.gbc",$5cf06,$0
 
 FightingDojoText6: ; 0x5cf06
     db $08 ; asm
@@ -32424,7 +35748,12 @@ FightingDojoText6: ; 0x5cf06
 .asm_3a2c8 ; 0x5cf46
     jp $24d7
 
-INCBIN "baserom.gbc",$5cf49,$5cf4e - $5cf49
+
+UnnamedText_5cf49: ; 0x5cf49
+    TX_FAR _UnnamedText_5cf49
+    db $50
+; 0x5cf49 + 5 bytes
+INCBIN "baserom.gbc",$5cf4e,$0
 
 FightingDojoText7: ; 0x5cf4e
     db $08 ; asm
@@ -32458,7 +35787,17 @@ FightingDojoText7: ; 0x5cf4e
 .asm_f1f47 ; 0x5cf8e
     jp $24d7
 
-INCBIN "baserom.gbc",$5cf91,$a
+
+UnnamedText_5cf91: ; 0x5cf91
+    TX_FAR _UnnamedText_5cf91
+    db $50
+; 0x5cf91 + 5 bytes
+
+UnnamedText_5cf96: ; 0x5cf96
+    TX_FAR _UnnamedText_5cf96
+    db $50
+; 0x5cf96 + 5 bytes
+INCBIN "baserom.gbc",$5cf9b,$0
 
 FightingDojoObject: ; 0x5cf9b (size=72)
     db $3 ; border tile
@@ -32548,10 +35887,25 @@ SaffronGymText1: ; 0x5d118
 .asm_34c2c ; 0x5d15f
     jp $24d7
 
-INCBIN "baserom.gbc",$5d162,$5d173 - $5d162
+
+UnnamedText_5d162: ; 0x5d162
+    TX_FAR _UnnamedText_5d162
+    db $50
+; 0x5d162 + 5 bytes
+INCBIN "baserom.gbc",$5d167,$5d16e - $5d167
+
+UnnamedText_5d16e: ; 0x5d16e
+    TX_FAR _UnnamedText_5d16e
+    db $50
+; 0x5d16e + 5 bytes
 
 SaffronGymText10: ; 0x5d173
-INCBIN "baserom.gbc",$5d173,5
+
+UnnamedText_5d173: ; 0x5d173
+    TX_FAR _UnnamedText_5d173
+    db $50
+; 0x5d173 + 5 bytes
+INCBIN "baserom.gbc",$5d178,$0
 
 SaffronGymText11: ; 0x5d178
 INCBIN "baserom.gbc",$5d178,5
@@ -32617,7 +35971,122 @@ SaffronGymText9: ; 0x5d1cd
 .asm_e9907 ; 0x5d1e3
     jp $24d7
 
-INCBIN "baserom.gbc",$5d1e6,$73
+
+UnnamedText_5d1e6: ; 0x5d1e6
+    TX_FAR _UnnamedText_5d1e6
+    db $50
+; 0x5d1e6 + 5 bytes
+
+UnnamedText_5d1eb: ; 0x5d1eb
+    TX_FAR _UnnamedText_5d1eb
+    db $50
+; 0x5d1eb + 5 bytes
+
+UnnamedText_5d1f0: ; 0x5d1f0
+    TX_FAR _UnnamedText_5d1f0
+    db $50
+; 0x5d1f0 + 5 bytes
+
+UnnamedText_5d1f5: ; 0x5d1f5
+    TX_FAR _UnnamedText_5d1f5
+    db $50
+; 0x5d1f5 + 5 bytes
+
+UnnamedText_5d1fa: ; 0x5d1fa
+    TX_FAR _UnnamedText_5d1fa
+    db $50
+; 0x5d1fa + 5 bytes
+
+UnnamedText_5d1ff: ; 0x5d1ff
+    TX_FAR _UnnamedText_5d1ff
+    db $50
+; 0x5d1ff + 5 bytes
+
+UnnamedText_5d204: ; 0x5d204
+    TX_FAR _UnnamedText_5d204
+    db $50
+; 0x5d204 + 5 bytes
+
+UnnamedText_5d209: ; 0x5d209
+    TX_FAR _UnnamedText_5d209
+    db $50
+; 0x5d209 + 5 bytes
+
+UnnamedText_5d20e: ; 0x5d20e
+    TX_FAR _UnnamedText_5d20e
+    db $50
+; 0x5d20e + 5 bytes
+
+UnnamedText_5d213: ; 0x5d213
+    TX_FAR _UnnamedText_5d213
+    db $50
+; 0x5d213 + 5 bytes
+
+UnnamedText_5d218: ; 0x5d218
+    TX_FAR _UnnamedText_5d218
+    db $50
+; 0x5d218 + 5 bytes
+
+UnnamedText_5d21d: ; 0x5d21d
+    TX_FAR _UnnamedText_5d21d
+    db $50
+; 0x5d21d + 5 bytes
+
+UnnamedText_5d222: ; 0x5d222
+    TX_FAR _UnnamedText_5d222
+    db $50
+; 0x5d222 + 5 bytes
+
+UnnamedText_5d227: ; 0x5d227
+    TX_FAR _UnnamedText_5d227
+    db $50
+; 0x5d227 + 5 bytes
+
+UnnamedText_5d22c: ; 0x5d22c
+    TX_FAR _UnnamedText_5d22c
+    db $50
+; 0x5d22c + 5 bytes
+
+UnnamedText_5d231: ; 0x5d231
+    TX_FAR _UnnamedText_5d231
+    db $50
+; 0x5d231 + 5 bytes
+
+UnnamedText_5d236: ; 0x5d236
+    TX_FAR _UnnamedText_5d236
+    db $50
+; 0x5d236 + 5 bytes
+
+UnnamedText_5d23b: ; 0x5d23b
+    TX_FAR _UnnamedText_5d23b
+    db $50
+; 0x5d23b + 5 bytes
+
+UnnamedText_5d240: ; 0x5d240
+    TX_FAR _UnnamedText_5d240
+    db $50
+; 0x5d240 + 5 bytes
+
+UnnamedText_5d245: ; 0x5d245
+    TX_FAR _UnnamedText_5d245
+    db $50
+; 0x5d245 + 5 bytes
+
+UnnamedText_5d24a: ; 0x5d24a
+    TX_FAR _UnnamedText_5d24a
+    db $50
+; 0x5d24a + 5 bytes
+
+UnnamedText_5d24f: ; 0x5d24f
+    TX_FAR _UnnamedText_5d24f
+    db $50
+; 0x5d24f + 5 bytes
+
+UnnamedText_5d254: ; 0x5d254
+    TX_FAR _UnnamedText_5d254
+    db $50
+; 0x5d254 + 5 bytes
+INCBIN "baserom.gbc",$5d259,$0
 
 SaffronGymObject: ; 0x5d259 (size=330)
     db $2e ; border tile
@@ -33137,7 +36606,28 @@ UndergroundPathEntranceRoute7Object: ; 0x5d73b (size=34)
     EVENT_DISP $4, $7, $4
     EVENT_DISP $4, $4, $4 ; UNDERGROUND_PATH_WE
 
-INCBIN "baserom.gbc",$5d75d,$52
+INCBIN "baserom.gbc",$5d75d,$5d773 - $5d75d
+
+UnnamedText_5d773: ; 0x5d773
+    TX_FAR _UnnamedText_5d773
+    db $50
+; 0x5d773 + 5 bytes
+
+UnnamedText_5d778: ; 0x5d778
+    TX_FAR _UnnamedText_5d778
+    db $50
+; 0x5d778 + 5 bytes
+
+UnnamedText_5d77d: ; 0x5d77d
+    TX_FAR _UnnamedText_5d77d
+    db $50
+; 0x5d77d + 5 bytes
+
+UnnamedText_5d782: ; 0x5d782
+    TX_FAR _UnnamedText_5d782
+    db $50
+; 0x5d782 + 5 bytes
+INCBIN "baserom.gbc",$5d787,$28
 
 SilphCo9_h: ; 0x5d7af to 0x5d7bb (12 bytes) (id=233)
     db $16 ; tileset
@@ -33186,7 +36676,22 @@ SilphCo9Text1: ; 0x5d8b8
 .asm_b6e28 ; 0x5d8e2
     jp $24d7
 
-INCBIN "baserom.gbc",$5d8e5,$5d8f4 - $5d8e5
+
+UnnamedText_5d8e5: ; 0x5d8e5
+    TX_FAR _UnnamedText_5d8e5
+    db $50
+; 0x5d8e5 + 5 bytes
+
+UnnamedText_5d8ea: ; 0x5d8ea
+    TX_FAR _UnnamedText_5d8ea
+    db $50
+; 0x5d8ea + 5 bytes
+
+UnnamedText_5d8ef: ; 0x5d8ef
+    TX_FAR _UnnamedText_5d8ef
+    db $50
+; 0x5d8ef + 5 bytes
+INCBIN "baserom.gbc",$5d8f4,$0
 
 SilphCo9Text2: ; 0x5d8f4
     db $08 ; asm
@@ -33206,7 +36711,52 @@ SilphCo9Text4: ; 0x5d908
     call LoadTrainerHeader
     jp $24d7
 
-INCBIN "baserom.gbc",$5d912,$2d
+
+UnnamedText_5d912: ; 0x5d912
+    TX_FAR _UnnamedText_5d912
+    db $50
+; 0x5d912 + 5 bytes
+
+UnnamedText_5d917: ; 0x5d917
+    TX_FAR _UnnamedText_5d917
+    db $50
+; 0x5d917 + 5 bytes
+
+UnnamedText_5d91c: ; 0x5d91c
+    TX_FAR _UnnamedText_5d91c
+    db $50
+; 0x5d91c + 5 bytes
+
+UnnamedText_5d921: ; 0x5d921
+    TX_FAR _UnnamedText_5d921
+    db $50
+; 0x5d921 + 5 bytes
+
+UnnamedText_5d926: ; 0x5d926
+    TX_FAR _UnnamedText_5d926
+    db $50
+; 0x5d926 + 5 bytes
+
+UnnamedText_5d92b: ; 0x5d92b
+    TX_FAR _UnnamedText_5d92b
+    db $50
+; 0x5d92b + 5 bytes
+
+UnnamedText_5d930: ; 0x5d930
+    TX_FAR _UnnamedText_5d930
+    db $50
+; 0x5d930 + 5 bytes
+
+UnnamedText_5d935: ; 0x5d935
+    TX_FAR _UnnamedText_5d935
+    db $50
+; 0x5d935 + 5 bytes
+
+UnnamedText_5d93a: ; 0x5d93a
+    TX_FAR _UnnamedText_5d93a
+    db $50
+; 0x5d93a + 5 bytes
+INCBIN "baserom.gbc",$5d93f,$0
 
 SilphCo9Object: ; 0x5d93f (size=74)
     db $2e ; border tile
@@ -33277,7 +36827,37 @@ VictoryRoad1Text2: ; 0x5da90
     call LoadTrainerHeader
     jp $24d7
 
-INCBIN "baserom.gbc",$5da9a,$1e
+
+UnnamedText_5da9a: ; 0x5da9a
+    TX_FAR _UnnamedText_5da9a
+    db $50
+; 0x5da9a + 5 bytes
+
+UnnamedText_5da9f: ; 0x5da9f
+    TX_FAR _UnnamedText_5da9f
+    db $50
+; 0x5da9f + 5 bytes
+
+UnnamedText_5daa4: ; 0x5daa4
+    TX_FAR _UnnamedText_5daa4
+    db $50
+; 0x5daa4 + 5 bytes
+
+UnnamedText_5daa9: ; 0x5daa9
+    TX_FAR _UnnamedText_5daa9
+    db $50
+; 0x5daa9 + 5 bytes
+
+UnnamedText_5daae: ; 0x5daae
+    TX_FAR _UnnamedText_5daae
+    db $50
+; 0x5daae + 5 bytes
+
+UnnamedText_5dab3: ; 0x5dab3
+    TX_FAR _UnnamedText_5dab3
+    db $50
+; 0x5dab3 + 5 bytes
+INCBIN "baserom.gbc",$5dab8,$0
 
 VictoryRoad1Object: ; 0x5dab8 (size=76)
     db $7d ; border tile
@@ -33606,7 +37186,52 @@ PokemonTower3Text3: ; 0x60726
     call LoadTrainerHeader
     jp $24d7
 
-INCBIN "baserom.gbc",$60730,$2d
+
+UnnamedText_60730: ; 0x60730
+    TX_FAR _UnnamedText_60730
+    db $50
+; 0x60730 + 5 bytes
+
+UnnamedText_60735: ; 0x60735
+    TX_FAR _UnnamedText_60735
+    db $50
+; 0x60735 + 5 bytes
+
+UnnamedText_6073a: ; 0x6073a
+    TX_FAR _UnnamedText_6073a
+    db $50
+; 0x6073a + 5 bytes
+
+UnnamedText_6073f: ; 0x6073f
+    TX_FAR _UnnamedText_6073f
+    db $50
+; 0x6073f + 5 bytes
+
+UnnamedText_60744: ; 0x60744
+    TX_FAR _UnnamedText_60744
+    db $50
+; 0x60744 + 5 bytes
+
+UnnamedText_60749: ; 0x60749
+    TX_FAR _UnnamedText_60749
+    db $50
+; 0x60749 + 5 bytes
+
+UnnamedText_6074e: ; 0x6074e
+    TX_FAR _UnnamedText_6074e
+    db $50
+; 0x6074e + 5 bytes
+
+UnnamedText_60753: ; 0x60753
+    TX_FAR _UnnamedText_60753
+    db $50
+; 0x60753 + 5 bytes
+
+UnnamedText_60758: ; 0x60758
+    TX_FAR _UnnamedText_60758
+    db $50
+; 0x60758 + 5 bytes
+INCBIN "baserom.gbc",$6075d,$0
 
 PokemonTower3Object: ; 0x6075d (size=51)
     db $1 ; border tile
@@ -33750,7 +37375,22 @@ PokemonTower5Text4: ; 0x60a11
     call LoadTrainerHeader
     jp $24d7
 
-INCBIN "baserom.gbc",$60a1b,$60a2a - $60a1b
+
+UnnamedText_60a1b: ; 0x60a1b
+    TX_FAR _UnnamedText_60a1b
+    db $50
+; 0x60a1b + 5 bytes
+
+UnnamedText_60a20: ; 0x60a20
+    TX_FAR _UnnamedText_60a20
+    db $50
+; 0x60a20 + 5 bytes
+
+UnnamedText_60a25: ; 0x60a25
+    TX_FAR _UnnamedText_60a25
+    db $50
+; 0x60a25 + 5 bytes
+INCBIN "baserom.gbc",$60a2a,$0
 
 PokemonTower5Text5: ; 0x60a2a
     db $08 ; asm
@@ -34007,7 +37647,28 @@ CeladonMart1Object: ; 0x60f9e (size=64)
 CeladonMart1Blocks: ; 40
     INCBIN "maps/celadonmart1.blk"
 
-INCBIN "baserom.gbc",$61006,$fb
+INCBIN "baserom.gbc",$61006,$610ae - $61006
+
+UnnamedText_610ae: ; 0x610ae
+    TX_FAR _UnnamedText_610ae
+    db $50
+; 0x610ae + 5 bytes
+
+UnnamedText_610b3: ; 0x610b3
+    TX_FAR _UnnamedText_610b3
+    db $50
+; 0x610b3 + 5 bytes
+
+UnnamedText_610b8: ; 0x610b8
+    TX_FAR _UnnamedText_610b8
+    db $50
+; 0x610b8 + 5 bytes
+
+UnnamedText_610bd: ; 0x610bd
+    TX_FAR _UnnamedText_610bd
+    db $50
+; 0x610bd + 5 bytes
+INCBIN "baserom.gbc",$610c2,$3f
 
 ViridianForest_h: ; 0x61101 to 0x6110d (12 bytes) (id=51)
     db $03 ; tileset
@@ -34355,10 +38016,29 @@ SSAnne2Text2: ; 0x614e6
     jp $24d7
 ; 0x61500
 
-INCBIN "baserom.gbc",$61500,$f
+
+UnnamedText_61500: ; 0x61500
+    TX_FAR _UnnamedText_61500
+    db $50
+; 0x61500 + 5 bytes
+
+UnnamedText_61505: ; 0x61505
+    TX_FAR _UnnamedText_61505
+    db $50
+; 0x61505 + 5 bytes
+
+UnnamedText_6150a: ; 0x6150a
+    TX_FAR _UnnamedText_6150a
+    db $50
+; 0x6150a + 5 bytes
 
 SSAnne2Text3: ; 0x6150f
-INCBIN "baserom.gbc",$6150f,5
+
+UnnamedText_6150f: ; 0x6150f
+    TX_FAR _UnnamedText_6150f
+    db $50
+; 0x6150f + 5 bytes
+INCBIN "baserom.gbc",$61514,$0
 
 SSAnne2Object: ; 0x61514 (size=90)
     db $c ; border tile
@@ -34478,7 +38158,22 @@ SSAnne5Text4: ; 0x616f9
     call LoadTrainerHeader
     jp $24d7
 
-INCBIN "baserom.gbc",$61703,$61712 - $61703
+
+UnnamedText_61703: ; 0x61703
+    TX_FAR _UnnamedText_61703
+    db $50
+; 0x61703 + 5 bytes
+
+UnnamedText_61708: ; 0x61708
+    TX_FAR _UnnamedText_61708
+    db $50
+; 0x61708 + 5 bytes
+
+UnnamedText_6170d: ; 0x6170d
+    TX_FAR _UnnamedText_6170d
+    db $50
+; 0x6170d + 5 bytes
+INCBIN "baserom.gbc",$61712,$0
 
 SSAnne5Text5: ; 0x61712
     db $08 ; asm
@@ -34486,7 +38181,22 @@ SSAnne5Text5: ; 0x61712
     call LoadTrainerHeader
     jp $24d7
 
-INCBIN "baserom.gbc",$6171c,$f
+
+UnnamedText_6171c: ; 0x6171c
+    TX_FAR _UnnamedText_6171c
+    db $50
+; 0x6171c + 5 bytes
+
+UnnamedText_61721: ; 0x61721
+    TX_FAR _UnnamedText_61721
+    db $50
+; 0x61721 + 5 bytes
+
+UnnamedText_61726: ; 0x61726
+    TX_FAR _UnnamedText_61726
+    db $50
+; 0x61726 + 5 bytes
+INCBIN "baserom.gbc",$6172b,$0
 
 SSAnne5Object: ; 0x6172b (size=54)
     db $23 ; border tile
@@ -34571,7 +38281,27 @@ SSAnne6Text7: ; 0x617e3
     call PrintText
     jp $24d7
 
-INCBIN "baserom.gbc",$61807,$14
+
+UnnamedText_61807: ; 0x61807
+    TX_FAR _UnnamedText_61807
+    db $50
+; 0x61807 + 5 bytes
+
+UnnamedText_6180c: ; 0x6180c
+    TX_FAR _UnnamedText_6180c
+    db $50
+; 0x6180c + 5 bytes
+
+UnnamedText_61811: ; 0x61811
+    TX_FAR _UnnamedText_61811
+    db $50
+; 0x61811 + 5 bytes
+
+UnnamedText_61816: ; 0x61816
+    TX_FAR _UnnamedText_61816
+    db $50
+; 0x61816 + 5 bytes
+INCBIN "baserom.gbc",$6181b,$0
 
 SSAnne6Object: ; 0x6181b (size=54)
     db $c ; border tile
@@ -34643,7 +38373,24 @@ SSAnne7Text1: ; 0x618ad
 .asm_0faf5 ; 0x618e9
     jp $24d7
 
-INCBIN "baserom.gbc",$618ec,$50
+INCBIN "baserom.gbc",$618ec,$61927 - $618ec
+
+UnnamedText_61927: ; 0x61927
+    TX_FAR _UnnamedText_61927
+    db $50
+; 0x61927 + 5 bytes
+INCBIN "baserom.gbc",$6192c,$61932 - $6192c
+
+UnnamedText_61932: ; 0x61932
+    TX_FAR _UnnamedText_61932
+    db $50
+; 0x61932 + 5 bytes
+
+UnnamedText_61937: ; 0x61937
+    TX_FAR _UnnamedText_61937
+    db $50
+; 0x61937 + 5 bytes
+INCBIN "baserom.gbc",$6193c,$0
 
 SSAnne7Text2: ; 0x6193c
     TX_FAR _SSAnne7Text2
@@ -34728,7 +38475,67 @@ SSAnne8Text8: ; 0x619fe
     call $13d0
     jp $24d7
 
-INCBIN "baserom.gbc",$61a0b,60
+
+UnnamedText_61a0b: ; 0x61a0b
+    TX_FAR _UnnamedText_61a0b
+    db $50
+; 0x61a0b + 5 bytes
+
+UnnamedText_61a10: ; 0x61a10
+    TX_FAR _UnnamedText_61a10
+    db $50
+; 0x61a10 + 5 bytes
+
+UnnamedText_61a15: ; 0x61a15
+    TX_FAR _UnnamedText_61a15
+    db $50
+; 0x61a15 + 5 bytes
+
+UnnamedText_61a1a: ; 0x61a1a
+    TX_FAR _UnnamedText_61a1a
+    db $50
+; 0x61a1a + 5 bytes
+
+UnnamedText_61a1f: ; 0x61a1f
+    TX_FAR _UnnamedText_61a1f
+    db $50
+; 0x61a1f + 5 bytes
+
+UnnamedText_61a24: ; 0x61a24
+    TX_FAR _UnnamedText_61a24
+    db $50
+; 0x61a24 + 5 bytes
+
+UnnamedText_61a29: ; 0x61a29
+    TX_FAR _UnnamedText_61a29
+    db $50
+; 0x61a29 + 5 bytes
+
+UnnamedText_61a2e: ; 0x61a2e
+    TX_FAR _UnnamedText_61a2e
+    db $50
+; 0x61a2e + 5 bytes
+
+UnnamedText_61a33: ; 0x61a33
+    TX_FAR _UnnamedText_61a33
+    db $50
+; 0x61a33 + 5 bytes
+
+UnnamedText_61a38: ; 0x61a38
+    TX_FAR _UnnamedText_61a38
+    db $50
+; 0x61a38 + 5 bytes
+
+UnnamedText_61a3d: ; 0x61a3d
+    TX_FAR _UnnamedText_61a3d
+    db $50
+; 0x61a3d + 5 bytes
+
+UnnamedText_61a42: ; 0x61a42
+    TX_FAR _UnnamedText_61a42
+    db $50
+; 0x61a42 + 5 bytes
+INCBIN "baserom.gbc",$61a47,$0
 
 SSAnne8Text5: ; 0x61a47
     TX_FAR _SSAnne8Text5
@@ -34849,7 +38656,12 @@ SSAnne9Text5: ; 0x61bdd
     call $349b
     jp $24d7
 
-INCBIN "baserom.gbc",$61bf2,$61bf7 - $61bf2
+
+UnnamedText_61bf2: ; 0x61bf2
+    TX_FAR _UnnamedText_61bf2
+    db $50
+; 0x61bf2 + 5 bytes
+INCBIN "baserom.gbc",$61bf7,$0
 
 SSAnne9Text7: ; 0x61bf7
     db $08 ; asm
@@ -34857,7 +38669,12 @@ SSAnne9Text7: ; 0x61bf7
     call PrintText
     jp $24d7
 
-INCBIN "baserom.gbc",$61c01,$61c06 - $61c01
+
+UnnamedText_61c01: ; 0x61c01
+    TX_FAR _UnnamedText_61c01
+    db $50
+; 0x61c01 + 5 bytes
+INCBIN "baserom.gbc",$61c06,$0
 
 SSAnne9Text8: ; 0x61c06
     db $08 ; asm
@@ -34865,7 +38682,12 @@ SSAnne9Text8: ; 0x61c06
     call PrintText
     jp $24d7
 
-INCBIN "baserom.gbc",$61c10,$61c15 - $61c10
+
+UnnamedText_61c10: ; 0x61c10
+    TX_FAR _UnnamedText_61c10
+    db $50
+; 0x61c10 + 5 bytes
+INCBIN "baserom.gbc",$61c15,$0
 
 SSAnne9Text10: ; 0x61c15
     db $08 ; asm
@@ -34873,7 +38695,12 @@ SSAnne9Text10: ; 0x61c15
     call PrintText
     jp $24d7
 
-INCBIN "baserom.gbc",$61c1f,$61c24 - $61c1f
+
+UnnamedText_61c1f: ; 0x61c1f
+    TX_FAR _UnnamedText_61c1f
+    db $50
+; 0x61c1f + 5 bytes
+INCBIN "baserom.gbc",$61c24,$0
 
 SSAnne9Text11: ; 0x61c24
     db $08 ; asm
@@ -34881,7 +38708,12 @@ SSAnne9Text11: ; 0x61c24
     call PrintText
     jp $24d7
 
-INCBIN "baserom.gbc",$61c2e,$61c33 - $61c2e
+
+UnnamedText_61c2e: ; 0x61c2e
+    TX_FAR _UnnamedText_61c2e
+    db $50
+; 0x61c2e + 5 bytes
+INCBIN "baserom.gbc",$61c33,$0
 
 SSAnne9Text12: ; 0x61c33
     db $08 ; asm
@@ -34889,7 +38721,12 @@ SSAnne9Text12: ; 0x61c33
     call PrintText
     jp $24d7
 
-INCBIN "baserom.gbc",$61c3d,$61c42 - $61c3d
+
+UnnamedText_61c3d: ; 0x61c3d
+    TX_FAR _UnnamedText_61c3d
+    db $50
+; 0x61c3d + 5 bytes
+INCBIN "baserom.gbc",$61c42,$0
 
 SSAnne9Text13: ; 0x61c42
     db $08 ; asm
@@ -34897,7 +38734,72 @@ SSAnne9Text13: ; 0x61c42
     call PrintText
     jp $24d7
 
-INCBIN "baserom.gbc",$61c4c,$41
+
+UnnamedText_61c4c: ; 0x61c4c
+    TX_FAR _UnnamedText_61c4c
+    db $50
+; 0x61c4c + 5 bytes
+
+UnnamedText_61c51: ; 0x61c51
+    TX_FAR _UnnamedText_61c51
+    db $50
+; 0x61c51 + 5 bytes
+
+UnnamedText_61c56: ; 0x61c56
+    TX_FAR _UnnamedText_61c56
+    db $50
+; 0x61c56 + 5 bytes
+
+UnnamedText_61c5b: ; 0x61c5b
+    TX_FAR _UnnamedText_61c5b
+    db $50
+; 0x61c5b + 5 bytes
+
+UnnamedText_61c60: ; 0x61c60
+    TX_FAR _UnnamedText_61c60
+    db $50
+; 0x61c60 + 5 bytes
+
+UnnamedText_61c65: ; 0x61c65
+    TX_FAR _UnnamedText_61c65
+    db $50
+; 0x61c65 + 5 bytes
+
+UnnamedText_61c6a: ; 0x61c6a
+    TX_FAR _UnnamedText_61c6a
+    db $50
+; 0x61c6a + 5 bytes
+
+UnnamedText_61c6f: ; 0x61c6f
+    TX_FAR _UnnamedText_61c6f
+    db $50
+; 0x61c6f + 5 bytes
+
+UnnamedText_61c74: ; 0x61c74
+    TX_FAR _UnnamedText_61c74
+    db $50
+; 0x61c74 + 5 bytes
+
+UnnamedText_61c79: ; 0x61c79
+    TX_FAR _UnnamedText_61c79
+    db $50
+; 0x61c79 + 5 bytes
+
+UnnamedText_61c7e: ; 0x61c7e
+    TX_FAR _UnnamedText_61c7e
+    db $50
+; 0x61c7e + 5 bytes
+
+UnnamedText_61c83: ; 0x61c83
+    TX_FAR _UnnamedText_61c83
+    db $50
+; 0x61c83 + 5 bytes
+
+UnnamedText_61c88: ; 0x61c88
+    TX_FAR _UnnamedText_61c88
+    db $50
+; 0x61c88 + 5 bytes
+INCBIN "baserom.gbc",$61c8d,$0
 
 SSAnne9Object: ; 0x61c8d (size=188)
     db $c ; border tile
@@ -35015,7 +38917,97 @@ SSAnne10Text8: ; 0x61e09
     call $13d0
     jp $24d7
 
-INCBIN "baserom.gbc",$61e16,$61e70 - $61e16
+
+UnnamedText_61e16: ; 0x61e16
+    TX_FAR _UnnamedText_61e16
+    db $50
+; 0x61e16 + 5 bytes
+
+UnnamedText_61e1b: ; 0x61e1b
+    TX_FAR _UnnamedText_61e1b
+    db $50
+; 0x61e1b + 5 bytes
+
+UnnamedText_61e20: ; 0x61e20
+    TX_FAR _UnnamedText_61e20
+    db $50
+; 0x61e20 + 5 bytes
+
+UnnamedText_61e25: ; 0x61e25
+    TX_FAR _UnnamedText_61e25
+    db $50
+; 0x61e25 + 5 bytes
+
+UnnamedText_61e2a: ; 0x61e2a
+    TX_FAR _UnnamedText_61e2a
+    db $50
+; 0x61e2a + 5 bytes
+
+UnnamedText_61e2f: ; 0x61e2f
+    TX_FAR _UnnamedText_61e2f
+    db $50
+; 0x61e2f + 5 bytes
+
+UnnamedText_61e34: ; 0x61e34
+    TX_FAR _UnnamedText_61e34
+    db $50
+; 0x61e34 + 5 bytes
+
+UnnamedText_61e39: ; 0x61e39
+    TX_FAR _UnnamedText_61e39
+    db $50
+; 0x61e39 + 5 bytes
+
+UnnamedText_61e3e: ; 0x61e3e
+    TX_FAR _UnnamedText_61e3e
+    db $50
+; 0x61e3e + 5 bytes
+
+UnnamedText_61e43: ; 0x61e43
+    TX_FAR _UnnamedText_61e43
+    db $50
+; 0x61e43 + 5 bytes
+
+UnnamedText_61e48: ; 0x61e48
+    TX_FAR _UnnamedText_61e48
+    db $50
+; 0x61e48 + 5 bytes
+
+UnnamedText_61e4d: ; 0x61e4d
+    TX_FAR _UnnamedText_61e4d
+    db $50
+; 0x61e4d + 5 bytes
+
+UnnamedText_61e52: ; 0x61e52
+    TX_FAR _UnnamedText_61e52
+    db $50
+; 0x61e52 + 5 bytes
+
+UnnamedText_61e57: ; 0x61e57
+    TX_FAR _UnnamedText_61e57
+    db $50
+; 0x61e57 + 5 bytes
+
+UnnamedText_61e5c: ; 0x61e5c
+    TX_FAR _UnnamedText_61e5c
+    db $50
+; 0x61e5c + 5 bytes
+
+UnnamedText_61e61: ; 0x61e61
+    TX_FAR _UnnamedText_61e61
+    db $50
+; 0x61e61 + 5 bytes
+
+UnnamedText_61e66: ; 0x61e66
+    TX_FAR _UnnamedText_61e66
+    db $50
+; 0x61e66 + 5 bytes
+
+UnnamedText_61e6b: ; 0x61e6b
+    TX_FAR _UnnamedText_61e6b
+    db $50
+; 0x61e6b + 5 bytes
+INCBIN "baserom.gbc",$61e70,$0
 
 SSAnne10Text7: ; 0x61e70
     TX_FAR _SSAnne10Text7
@@ -35206,7 +39198,23 @@ SilphCo11Text1: ; 0x622dc
 .asm_fd405 ; 0x6230e
     jp $24d7
 
-INCBIN "baserom.gbc",$62311,$15
+
+UnnamedText_62311: ; 0x62311
+    TX_FAR _UnnamedText_62311
+    db $50
+; 0x62311 + 5 bytes
+INCBIN "baserom.gbc",$62316,$6231c - $62316
+
+UnnamedText_6231c: ; 0x6231c
+    TX_FAR _UnnamedText_6231c
+    db $50
+; 0x6231c + 5 bytes
+
+UnnamedText_62321: ; 0x62321
+    TX_FAR _UnnamedText_62321
+    db $50
+; 0x62321 + 5 bytes
+INCBIN "baserom.gbc",$62326,$0
 
 SilphCo11Text2: ; 0x62326
     TX_FAR _SilphCo11Text2
@@ -35216,10 +39224,20 @@ SilphCo11Text3: ; 0x6232b
     TX_FAR _SilphCo11Text3
     db $50
 
-INCBIN "baserom.gbc",$62330,5
+
+UnnamedText_62330: ; 0x62330
+    TX_FAR _UnnamedText_62330
+    db $50
+; 0x62330 + 5 bytes
+INCBIN "baserom.gbc",$62335,$0
 
 SilphCo11Text6: ; 0x62335
-INCBIN "baserom.gbc",$62335,5
+
+UnnamedText_62335: ; 0x62335
+    TX_FAR _UnnamedText_62335
+    db $50
+; 0x62335 + 5 bytes
+INCBIN "baserom.gbc",$6233a,$0
 
 SilphCo11Text4: ; 0x6233a
     db $08 ; asm
@@ -35227,7 +39245,22 @@ SilphCo11Text4: ; 0x6233a
     call LoadTrainerHeader
     jp $24d7
 
-INCBIN "baserom.gbc",$62344,$62353 - $62344
+
+UnnamedText_62344: ; 0x62344
+    TX_FAR _UnnamedText_62344
+    db $50
+; 0x62344 + 5 bytes
+
+UnnamedText_62349: ; 0x62349
+    TX_FAR _UnnamedText_62349
+    db $50
+; 0x62349 + 5 bytes
+
+UnnamedText_6234e: ; 0x6234e
+    TX_FAR _UnnamedText_6234e
+    db $50
+; 0x6234e + 5 bytes
+INCBIN "baserom.gbc",$62353,$0
 
 SilphCo11Text5: ; 0x62353
     db $08 ; asm
@@ -35235,7 +39268,27 @@ SilphCo11Text5: ; 0x62353
     call LoadTrainerHeader
     jp $24d7
 
-INCBIN "baserom.gbc",$6235d,$23
+
+UnnamedText_6235d: ; 0x6235d
+    TX_FAR _UnnamedText_6235d
+    db $50
+; 0x6235d + 5 bytes
+
+UnnamedText_62362: ; 0x62362
+    TX_FAR _UnnamedText_62362
+    db $50
+; 0x62362 + 5 bytes
+
+UnnamedText_62367: ; 0x62367
+    TX_FAR _UnnamedText_62367
+    db $50
+; 0x62367 + 5 bytes
+INCBIN "baserom.gbc",$6236c,$6237b - $6236c
+
+UnnamedText_6237b: ; 0x6237b
+    TX_FAR _UnnamedText_6237b
+    db $50
+; 0x6237b + 5 bytes
 
 SilphCo11Object: ; 0x62380 (size=72)
     db $d ; border tile
@@ -35264,7 +39317,106 @@ SilphCo11Object: ; 0x62380 (size=72)
 SilphCo11Blocks: ; 81
     INCBIN "maps/silphco11.blk"
 
-INCBIN "baserom.gbc",$62419,$1be7
+INCBIN "baserom.gbc",$62419,$62453 - $62419
+
+UnnamedText_62453: ; 0x62453
+    TX_FAR _UnnamedText_62453
+    db $50
+; 0x62453 + 5 bytes
+
+UnnamedText_62458: ; 0x62458
+    TX_FAR _UnnamedText_62458
+    db $50
+; 0x62458 + 5 bytes
+INCBIN "baserom.gbc",$6245d,$624a3 - $6245d
+
+UnnamedText_624a3: ; 0x624a3
+    TX_FAR _UnnamedText_624a3
+    db $50
+; 0x624a3 + 5 bytes
+
+UnnamedText_624a8: ; 0x624a8
+    TX_FAR _UnnamedText_624a8
+    db $50
+; 0x624a8 + 5 bytes
+
+UnnamedText_624ad: ; 0x624ad
+    TX_FAR _UnnamedText_624ad
+    db $50
+; 0x624ad + 5 bytes
+
+UnnamedText_624b2: ; 0x624b2
+    TX_FAR _UnnamedText_624b2
+    db $50
+; 0x624b2 + 5 bytes
+
+UnnamedText_624b7: ; 0x624b7
+    TX_FAR _UnnamedText_624b7
+    db $50
+; 0x624b7 + 5 bytes
+
+UnnamedText_624bc: ; 0x624bc
+    TX_FAR _UnnamedText_624bc
+    db $50
+; 0x624bc + 5 bytes
+
+UnnamedText_624c1: ; 0x624c1
+    TX_FAR _UnnamedText_624c1
+    db $50
+; 0x624c1 + 5 bytes
+
+UnnamedText_624c6: ; 0x624c6
+    TX_FAR _UnnamedText_624c6
+    db $50
+; 0x624c6 + 5 bytes
+
+UnnamedText_624cb: ; 0x624cb
+    TX_FAR _UnnamedText_624cb
+    db $50
+; 0x624cb + 5 bytes
+
+UnnamedText_624d0: ; 0x624d0
+    TX_FAR _UnnamedText_624d0
+    db $50
+; 0x624d0 + 5 bytes
+
+UnnamedText_624d5: ; 0x624d5
+    TX_FAR _UnnamedText_624d5
+    db $50
+; 0x624d5 + 5 bytes
+
+UnnamedText_624da: ; 0x624da
+    TX_FAR _UnnamedText_624da
+    db $50
+; 0x624da + 5 bytes
+
+UnnamedText_624df: ; 0x624df
+    TX_FAR _UnnamedText_624df
+    db $50
+; 0x624df + 5 bytes
+INCBIN "baserom.gbc",$624e4,$624f8 - $624e4
+
+UnnamedText_624f8: ; 0x624f8
+    TX_FAR _UnnamedText_624f8
+    db $50
+; 0x624f8 + 5 bytes
+
+UnnamedText_624fd: ; 0x624fd
+    TX_FAR _UnnamedText_624fd
+    db $50
+; 0x624fd + 5 bytes
+
+UnnamedText_62502: ; 0x62502
+    TX_FAR _UnnamedText_62502
+    db $50
+; 0x62502 + 5 bytes
+INCBIN "baserom.gbc",$62507,$62511 - $62507
+
+UnnamedText_62511: ; 0x62511
+    TX_FAR _UnnamedText_62511
+    db $50
+; 0x62511 + 5 bytes
+INCBIN "baserom.gbc",$62516,$1aea
 
 SECTION "bank19",DATA,BANK[$19]
 
@@ -35778,7 +39930,89 @@ Function71c07: ; 0x71c07
 	ld [$cd12],a
 	ret
 
-INCBIN "baserom.gbc",$71CA2,$725C8-$71CA2
+INCBIN "baserom.gbc",$71ca2,$71d88 - $71ca2
+
+UnnamedText_71d88: ; 0x71d88
+    TX_FAR _UnnamedText_71d88
+    db $50
+; 0x71d88 + 5 bytes
+INCBIN "baserom.gbc",$71d8d,$71d94 - $71d8d
+
+UnnamedText_71d94: ; 0x71d94
+    TX_FAR _UnnamedText_71d94
+    db $50
+; 0x71d94 + 5 bytes
+
+UnnamedText_71d99: ; 0x71d99
+    TX_FAR _UnnamedText_71d99
+    db $50
+; 0x71d99 + 5 bytes
+
+UnnamedText_71d9e: ; 0x71d9e
+    TX_FAR _UnnamedText_71d9e
+    db $50
+; 0x71d9e + 5 bytes
+
+UnnamedText_71da3: ; 0x71da3
+    TX_FAR _UnnamedText_71da3
+    db $50
+; 0x71da3 + 5 bytes
+
+UnnamedText_71da8: ; 0x71da8
+    TX_FAR _UnnamedText_71da8
+    db $50
+; 0x71da8 + 5 bytes
+
+UnnamedText_71dad: ; 0x71dad
+    TX_FAR _UnnamedText_71dad
+    db $50
+; 0x71dad + 5 bytes
+
+UnnamedText_71db2: ; 0x71db2
+    TX_FAR _UnnamedText_71db2
+    db $50
+; 0x71db2 + 5 bytes
+
+UnnamedText_71db7: ; 0x71db7
+    TX_FAR _UnnamedText_71db7
+    db $50
+; 0x71db7 + 5 bytes
+
+UnnamedText_71dbc: ; 0x71dbc
+    TX_FAR _UnnamedText_71dbc
+    db $50
+; 0x71dbc + 5 bytes
+
+UnnamedText_71dc1: ; 0x71dc1
+    TX_FAR _UnnamedText_71dc1
+    db $50
+; 0x71dc1 + 5 bytes
+
+UnnamedText_71dc6: ; 0x71dc6
+    TX_FAR _UnnamedText_71dc6
+    db $50
+; 0x71dc6 + 5 bytes
+
+UnnamedText_71dcb: ; 0x71dcb
+    TX_FAR _UnnamedText_71dcb
+    db $50
+; 0x71dcb + 5 bytes
+
+UnnamedText_71dd0: ; 0x71dd0
+    TX_FAR _UnnamedText_71dd0
+    db $50
+; 0x71dd0 + 5 bytes
+
+UnnamedText_71dd5: ; 0x71dd5
+    TX_FAR _UnnamedText_71dd5
+    db $50
+; 0x71dd5 + 5 bytes
+
+UnnamedText_71dda: ; 0x71dda
+    TX_FAR _UnnamedText_71dda
+    db $50
+; 0x71dda + 5 bytes
+INCBIN "baserom.gbc",$71ddf,$7e9
 
 MonsterPalettes: ; 65C8
 	db PAL_MEWMON    ; MISSINGNO
@@ -36170,7 +40404,41 @@ IF _BLUE
 	INCBIN "gfx/blue/sgbborder.2bpp"
 ENDC
 
-INCBIN "baserom.gbc",$735E8,$4000 - $35E8
+INCBIN "baserom.gbc",$735e8,$7361e - $735e8
+
+UnnamedText_7361e: ; 0x7361e
+    TX_FAR _UnnamedText_7361e
+    db $50
+; 0x7361e + 5 bytes
+INCBIN "baserom.gbc",$73623,$7377d - $73623
+
+UnnamedText_7377d: ; 0x7377d
+    TX_FAR _UnnamedText_7377d
+    db $50
+; 0x7377d + 5 bytes
+
+UnnamedText_73782: ; 0x73782
+    TX_FAR _UnnamedText_73782
+    db $50
+; 0x73782 + 5 bytes
+
+UnnamedText_73787: ; 0x73787
+    TX_FAR _UnnamedText_73787
+    db $50
+; 0x73787 + 5 bytes
+INCBIN "baserom.gbc",$7378c,$73909 - $7378c
+
+UnnamedText_73909: ; 0x73909
+    TX_FAR _UnnamedText_73909
+    db $50
+; 0x73909 + 5 bytes
+INCBIN "baserom.gbc",$7390e,$739d4 - $7390e
+
+UnnamedText_739d4: ; 0x739d4
+    TX_FAR _UnnamedText_739d4
+    db $50
+; 0x739d4 + 5 bytes
+INCBIN "baserom.gbc",$739d9,$627
 
 SECTION "bank1D",DATA,BANK[$1D]
 
@@ -36542,7 +40810,12 @@ ViridianGymText1: ; 0x74a69
 .asm_6dff7 ; 0x74acb
     jp $24d7
 
-INCBIN "baserom.gbc",$74ace,$74adf - $74ace
+
+UnnamedText_74ace: ; 0x74ace
+    TX_FAR _UnnamedText_74ace
+    db $50
+; 0x74ace + 5 bytes
+INCBIN "baserom.gbc",$74ad3,$c
 
 ViridianGymText12: ; 0x74adf
 INCBIN "baserom.gbc",$74adf,5
@@ -36609,7 +40882,22 @@ ViridianGymText8: ; 0x74b89
     call LoadTrainerHeader
     jp $24d7
 
-INCBIN "baserom.gbc",$74b93,$74ba2 - $74b93
+
+UnnamedText_74b93: ; 0x74b93
+    TX_FAR _UnnamedText_74b93
+    db $50
+; 0x74b93 + 5 bytes
+
+UnnamedText_74b98: ; 0x74b98
+    TX_FAR _UnnamedText_74b98
+    db $50
+; 0x74b98 + 5 bytes
+
+UnnamedText_74b9d: ; 0x74b9d
+    TX_FAR _UnnamedText_74b9d
+    db $50
+; 0x74b9d + 5 bytes
+INCBIN "baserom.gbc",$74ba2,$0
 
 ViridianGymText9: ; 0x74ba2
     db $08 ; asm
@@ -36633,7 +40921,17 @@ ViridianGymText10: ; 0x74bbb
 .asm_6064d ; 0x74bd1
     jp $24d7
 
-INCBIN "baserom.gbc",$74bd4,$a
+
+UnnamedText_74bd4: ; 0x74bd4
+    TX_FAR _UnnamedText_74bd4
+    db $50
+; 0x74bd4 + 5 bytes
+
+UnnamedText_74bd9: ; 0x74bd9
+    TX_FAR _UnnamedText_74bd9
+    db $50
+; 0x74bd9 + 5 bytes
+INCBIN "baserom.gbc",$74bde,$0
 
 ViridianGymObject: ; 0x74bde (size=105)
     db $3 ; border tile
@@ -36688,7 +40986,12 @@ PewterMartText2: ; 0x74cbc
     call PrintText
     jp $24d7
 
-INCBIN "baserom.gbc",$74cc6,$74ccb - $74cc6
+
+UnnamedText_74cc6: ; 0x74cc6
+    TX_FAR _UnnamedText_74cc6
+    db $50
+; 0x74cc6 + 5 bytes
+INCBIN "baserom.gbc",$74ccb,$0
 
 PewterMartText3: ; 0x74ccb
     db $08 ; asm
@@ -36696,7 +40999,12 @@ PewterMartText3: ; 0x74ccb
     call PrintText
     jp $24d7
 
-INCBIN "baserom.gbc",$74cd5,$5
+
+UnnamedText_74cd5: ; 0x74cd5
+    TX_FAR _UnnamedText_74cd5
+    db $50
+; 0x74cd5 + 5 bytes
+INCBIN "baserom.gbc",$74cda,$0
 
 PewterMartObject: ; 0x74cda (size=38)
     db $0 ; border tile
@@ -36829,7 +41137,64 @@ CeruleanHouse3Text1: ; 0x74e15
     jp $24d7
 ; 0x74e6d
 
-INCBIN "baserom.gbc",$74e6d,$51
+INCBIN "baserom.gbc",$74e6d,$74e77 - $74e6d
+
+UnnamedText_74e77: ; 0x74e77
+    TX_FAR _UnnamedText_74e77
+    db $50
+; 0x74e77 + 5 bytes
+
+UnnamedText_74e7c: ; 0x74e7c
+    TX_FAR _UnnamedText_74e7c
+    db $50
+; 0x74e7c + 5 bytes
+
+UnnamedText_74e81: ; 0x74e81
+    TX_FAR _UnnamedText_74e81
+    db $50
+; 0x74e81 + 5 bytes
+INCBIN "baserom.gbc",$74e86,$74e96 - $74e86
+
+UnnamedText_74e96: ; 0x74e96
+    TX_FAR _UnnamedText_74e96
+    db $50
+; 0x74e96 + 5 bytes
+
+UnnamedText_74e9b: ; 0x74e9b
+    TX_FAR _UnnamedText_74e9b
+    db $50
+; 0x74e9b + 5 bytes
+
+UnnamedText_74ea0: ; 0x74ea0
+    TX_FAR _UnnamedText_74ea0
+    db $50
+; 0x74ea0 + 5 bytes
+
+UnnamedText_74ea5: ; 0x74ea5
+    TX_FAR _UnnamedText_74ea5
+    db $50
+; 0x74ea5 + 5 bytes
+
+UnnamedText_74eaa: ; 0x74eaa
+    TX_FAR _UnnamedText_74eaa
+    db $50
+; 0x74eaa + 5 bytes
+
+UnnamedText_74eaf: ; 0x74eaf
+    TX_FAR _UnnamedText_74eaf
+    db $50
+; 0x74eaf + 5 bytes
+
+UnnamedText_74eb4: ; 0x74eb4
+    TX_FAR _UnnamedText_74eb4
+    db $50
+; 0x74eb4 + 5 bytes
+
+UnnamedText_74eb9: ; 0x74eb9
+    TX_FAR _UnnamedText_74eb9
+    db $50
+; 0x74eb9 + 5 bytes
+INCBIN "baserom.gbc",$74ebe,$0
 
 CeruleanHouse3Object: ; 0x74ebe (size=34)
     db $c ; border tile
@@ -36849,7 +41214,34 @@ CeruleanHouse3Object: ; 0x74ebe (size=34)
     EVENT_DISP $4, $7, $2
     EVENT_DISP $4, $7, $3
 
-INCBIN "baserom.gbc",$74ee0,$12c
+INCBIN "baserom.gbc",$74ee0,$74f99 - $74ee0
+
+UnnamedText_74f99: ; 0x74f99
+    TX_FAR _UnnamedText_74f99
+    db $50
+; 0x74f99 + 5 bytes
+INCBIN "baserom.gbc",$74f9e,$74fd3 - $74f9e
+
+UnnamedText_74fd3: ; 0x74fd3
+    TX_FAR _UnnamedText_74fd3
+    db $50
+; 0x74fd3 + 5 bytes
+
+UnnamedText_74fd8: ; 0x74fd8
+    TX_FAR _UnnamedText_74fd8
+    db $50
+; 0x74fd8 + 5 bytes
+
+UnnamedText_74fdd: ; 0x74fdd
+    TX_FAR _UnnamedText_74fdd
+    db $50
+; 0x74fdd + 5 bytes
+
+UnnamedText_74fe2: ; 0x74fe2
+    TX_FAR _UnnamedText_74fe2
+    db $50
+; 0x74fe2 + 5 bytes
+INCBIN "baserom.gbc",$74fe7,$25
 
 FuchsiaHouse1_h: ; 0x7500c to 0x75018 (12 bytes) (id=153)
     db $08 ; tileset
@@ -37014,7 +41406,44 @@ FuchsiaHouse2Text1: ; 0x750c2
 .asm_52039 ; 0x75132
     jp $24d7
 
-INCBIN "baserom.gbc",$75135,$75163 - $75135
+
+UnnamedText_75135: ; 0x75135
+    TX_FAR _UnnamedText_75135
+    db $50
+; 0x75135 + 5 bytes
+
+UnnamedText_7513a: ; 0x7513a
+    TX_FAR _UnnamedText_7513a
+    db $50
+; 0x7513a + 5 bytes
+
+UnnamedText_7513f: ; 0x7513f
+    TX_FAR _UnnamedText_7513f
+    db $50
+; 0x7513f + 5 bytes
+INCBIN "baserom.gbc",$75144,$75149 - $75144
+
+UnnamedText_75149: ; 0x75149
+    TX_FAR _UnnamedText_75149
+    db $50
+; 0x75149 + 5 bytes
+
+UnnamedText_7514e: ; 0x7514e
+    TX_FAR _UnnamedText_7514e
+    db $50
+; 0x7514e + 5 bytes
+INCBIN "baserom.gbc",$75153,$75159 - $75153
+
+UnnamedText_75159: ; 0x75159
+    TX_FAR _UnnamedText_75159
+    db $50
+; 0x75159 + 5 bytes
+
+UnnamedText_7515e: ; 0x7515e
+    TX_FAR _UnnamedText_7515e
+    db $50
+; 0x7515e + 5 bytes
+INCBIN "baserom.gbc",$75163,$0
 
 FuchsiaHouse2Text5:
 FuchsiaHouse2Text4: ; 0x75163
@@ -37028,7 +41457,17 @@ FuchsiaHouse2Text4: ; 0x75163
     call PrintText
     jp $24d7
 
-INCBIN "baserom.gbc",$75176,$a
+
+UnnamedText_75176: ; 0x75176
+    TX_FAR _UnnamedText_75176
+    db $50
+; 0x75176 + 5 bytes
+
+UnnamedText_7517b: ; 0x7517b
+    TX_FAR _UnnamedText_7517b
+    db $50
+; 0x7517b + 5 bytes
+INCBIN "baserom.gbc",$75180,$0
 
 FuchsiaHouse2Object: ; 0x75180 (size=45)
     db $17 ; border tile
@@ -37136,10 +41575,26 @@ INCBIN "baserom.gbc",$752ca,$7536f - $752ca
 SafariZoneEntranceText5: ; 0x7536f
 INCBIN "baserom.gbc",$7536f,6
 
-INCBIN "baserom.gbc",$75375,$753c5 - $75375
+INCBIN "baserom.gbc",$75375,$753bb - $75375
+
+UnnamedText_753bb: ; 0x753bb
+    TX_FAR _UnnamedText_753bb
+    db $50
+; 0x753bb + 5 bytes
+
+UnnamedText_753c0: ; 0x753c0
+    TX_FAR _UnnamedText_753c0
+    db $50
+; 0x753c0 + 5 bytes
+INCBIN "baserom.gbc",$753c5,$0
 
 SafariZoneEntranceText6: ; 0x753c5
-INCBIN "baserom.gbc",$753c5,5
+
+UnnamedText_753c5: ; 0x753c5
+    TX_FAR _UnnamedText_753c5
+    db $50
+; 0x753c5 + 5 bytes
+INCBIN "baserom.gbc",$753ca,$0
 
 SafariZoneEntranceText2: ; 0x753ca
     db $08 ; asm
@@ -37155,7 +41610,22 @@ SafariZoneEntranceText2: ; 0x753ca
     call PrintText
     jp $24d7
 
-INCBIN "baserom.gbc",$753e6,$f
+
+UnnamedText_753e6: ; 0x753e6
+    TX_FAR _UnnamedText_753e6
+    db $50
+; 0x753e6 + 5 bytes
+
+UnnamedText_753eb: ; 0x753eb
+    TX_FAR _UnnamedText_753eb
+    db $50
+; 0x753eb + 5 bytes
+
+UnnamedText_753f0: ; 0x753f0
+    TX_FAR _UnnamedText_753f0
+    db $50
+; 0x753f0 + 5 bytes
+INCBIN "baserom.gbc",$753f5,$0
 
 SafariZoneEntranceObject: ; 0x753f5 (size=48)
     db $a ; border tile
@@ -37276,7 +41746,22 @@ FuchsiaGymText4: ; 0x755d6
     call LoadTrainerHeader
     jp $24d7
 
-INCBIN "baserom.gbc",$755e0,$755ef - $755e0
+
+UnnamedText_755e0: ; 0x755e0
+    TX_FAR _UnnamedText_755e0
+    db $50
+; 0x755e0 + 5 bytes
+
+UnnamedText_755e5: ; 0x755e5
+    TX_FAR _UnnamedText_755e5
+    db $50
+; 0x755e5 + 5 bytes
+
+UnnamedText_755ea: ; 0x755ea
+    TX_FAR _UnnamedText_755ea
+    db $50
+; 0x755ea + 5 bytes
+INCBIN "baserom.gbc",$755ef,$0
 
 FuchsiaGymText5: ; 0x755ef
     db $08 ; asm
@@ -37292,7 +41777,22 @@ FuchsiaGymText6: ; 0x75608
     call LoadTrainerHeader
     jp $24d7
 
-INCBIN "baserom.gbc",$75612,$75621 - $75612
+
+UnnamedText_75612: ; 0x75612
+    TX_FAR _UnnamedText_75612
+    db $50
+; 0x75612 + 5 bytes
+
+UnnamedText_75617: ; 0x75617
+    TX_FAR _UnnamedText_75617
+    db $50
+; 0x75617 + 5 bytes
+
+UnnamedText_7561c: ; 0x7561c
+    TX_FAR _UnnamedText_7561c
+    db $50
+; 0x7561c + 5 bytes
+INCBIN "baserom.gbc",$75621,$0
 
 FuchsiaGymText7: ; 0x75621
     db $08 ; asm
@@ -37313,7 +41813,17 @@ FuchsiaGymText8: ; 0x7563a
     call PrintText
     jp $24d7
 
-INCBIN "baserom.gbc",$7564e,$a
+
+UnnamedText_7564e: ; 0x7564e
+    TX_FAR _UnnamedText_7564e
+    db $50
+; 0x7564e + 5 bytes
+
+UnnamedText_75653: ; 0x75653
+    TX_FAR _UnnamedText_75653
+    db $50
+; 0x75653 + 5 bytes
+INCBIN "baserom.gbc",$75658,$0
 
 FuchsiaGymObject: ; 0x75658 (size=82)
     db $3 ; border tile
@@ -37485,7 +41995,34 @@ CinnabarGymText1: ; 0x758df
     jp $58b7
 ; 0x75914
 
-INCBIN "baserom.gbc",$75914,$25
+
+UnnamedText_75914: ; 0x75914
+    TX_FAR _UnnamedText_75914
+    db $50
+; 0x75914 + 5 bytes
+INCBIN "baserom.gbc",$75919,$75920 - $75919
+
+UnnamedText_75920: ; 0x75920
+    TX_FAR _UnnamedText_75920
+    db $50
+; 0x75920 + 5 bytes
+
+UnnamedText_75925: ; 0x75925
+    TX_FAR _UnnamedText_75925
+    db $50
+; 0x75925 + 5 bytes
+INCBIN "baserom.gbc",$7592a,$7592f - $7592a
+
+UnnamedText_7592f: ; 0x7592f
+    TX_FAR _UnnamedText_7592f
+    db $50
+; 0x7592f + 5 bytes
+
+UnnamedText_75934: ; 0x75934
+    TX_FAR _UnnamedText_75934
+    db $50
+; 0x75934 + 5 bytes
+INCBIN "baserom.gbc",$75939,$0
 
 CinnabarGymText2: ; 0x75939
     db $08 ; asm
@@ -37504,7 +42041,22 @@ CinnabarGymText2: ; 0x75939
     call PrintText
     jp $24d7
 
-INCBIN "baserom.gbc",$7595f,$7596e - $7595f
+
+UnnamedText_7595f: ; 0x7595f
+    TX_FAR _UnnamedText_7595f
+    db $50
+; 0x7595f + 5 bytes
+
+UnnamedText_75964: ; 0x75964
+    TX_FAR _UnnamedText_75964
+    db $50
+; 0x75964 + 5 bytes
+
+UnnamedText_75969: ; 0x75969
+    TX_FAR _UnnamedText_75969
+    db $50
+; 0x75969 + 5 bytes
+INCBIN "baserom.gbc",$7596e,$0
 
 CinnabarGymText3: ; 0x7596e
     db $08 ; asm
@@ -37523,7 +42075,22 @@ CinnabarGymText3: ; 0x7596e
     call PrintText
     jp $24d7
 
-INCBIN "baserom.gbc",$75994,$759a3 - $75994
+
+UnnamedText_75994: ; 0x75994
+    TX_FAR _UnnamedText_75994
+    db $50
+; 0x75994 + 5 bytes
+
+UnnamedText_75999: ; 0x75999
+    TX_FAR _UnnamedText_75999
+    db $50
+; 0x75999 + 5 bytes
+
+UnnamedText_7599e: ; 0x7599e
+    TX_FAR _UnnamedText_7599e
+    db $50
+; 0x7599e + 5 bytes
+INCBIN "baserom.gbc",$759a3,$0
 
 CinnabarGymText4: ; 0x759a3
     db $08 ; asm
@@ -37542,7 +42109,22 @@ CinnabarGymText4: ; 0x759a3
     call PrintText
     jp $24d7
 
-INCBIN "baserom.gbc",$759c9,$759d8 - $759c9
+
+UnnamedText_759c9: ; 0x759c9
+    TX_FAR _UnnamedText_759c9
+    db $50
+; 0x759c9 + 5 bytes
+
+UnnamedText_759ce: ; 0x759ce
+    TX_FAR _UnnamedText_759ce
+    db $50
+; 0x759ce + 5 bytes
+
+UnnamedText_759d3: ; 0x759d3
+    TX_FAR _UnnamedText_759d3
+    db $50
+; 0x759d3 + 5 bytes
+INCBIN "baserom.gbc",$759d8,$0
 
 CinnabarGymText5: ; 0x759d8
     db $08 ; asm
@@ -37561,7 +42143,22 @@ CinnabarGymText5: ; 0x759d8
     call PrintText
     jp $24d7
 
-INCBIN "baserom.gbc",$759fe,$75a0d - $759fe
+
+UnnamedText_759fe: ; 0x759fe
+    TX_FAR _UnnamedText_759fe
+    db $50
+; 0x759fe + 5 bytes
+
+UnnamedText_75a03: ; 0x75a03
+    TX_FAR _UnnamedText_75a03
+    db $50
+; 0x75a03 + 5 bytes
+
+UnnamedText_75a08: ; 0x75a08
+    TX_FAR _UnnamedText_75a08
+    db $50
+; 0x75a08 + 5 bytes
+INCBIN "baserom.gbc",$75a0d,$0
 
 CinnabarGymText6: ; 0x75a0d
     db $08 ; asm
@@ -37580,7 +42177,22 @@ CinnabarGymText6: ; 0x75a0d
     call PrintText
     jp $24d7
 
-INCBIN "baserom.gbc",$75a33,$75a42 - $75a33
+
+UnnamedText_75a33: ; 0x75a33
+    TX_FAR _UnnamedText_75a33
+    db $50
+; 0x75a33 + 5 bytes
+
+UnnamedText_75a38: ; 0x75a38
+    TX_FAR _UnnamedText_75a38
+    db $50
+; 0x75a38 + 5 bytes
+
+UnnamedText_75a3d: ; 0x75a3d
+    TX_FAR _UnnamedText_75a3d
+    db $50
+; 0x75a3d + 5 bytes
+INCBIN "baserom.gbc",$75a42,$0
 
 CinnabarGymText7: ; 0x75a42
     db $08 ; asm
@@ -37618,7 +42230,22 @@ CinnabarGymText8: ; 0x75a77
     call PrintText
     jp $24d7
 
-INCBIN "baserom.gbc",$75a9d,$75aac - $75a9d
+
+UnnamedText_75a9d: ; 0x75a9d
+    TX_FAR _UnnamedText_75a9d
+    db $50
+; 0x75a9d + 5 bytes
+
+UnnamedText_75aa2: ; 0x75aa2
+    TX_FAR _UnnamedText_75aa2
+    db $50
+; 0x75aa2 + 5 bytes
+
+UnnamedText_75aa7: ; 0x75aa7
+    TX_FAR _UnnamedText_75aa7
+    db $50
+; 0x75aa7 + 5 bytes
+INCBIN "baserom.gbc",$75aac,$0
 
 CinnabarGymText9: ; 0x75aac
     db $08 ; asm
@@ -37633,7 +42260,17 @@ CinnabarGymText9: ; 0x75aac
     call PrintText
     jp $24d7
 
-INCBIN "baserom.gbc",$75ac2,$a
+
+UnnamedText_75ac2: ; 0x75ac2
+    TX_FAR _UnnamedText_75ac2
+    db $50
+; 0x75ac2 + 5 bytes
+
+UnnamedText_75ac7: ; 0x75ac7
+    TX_FAR _UnnamedText_75ac7
+    db $50
+; 0x75ac7 + 5 bytes
+INCBIN "baserom.gbc",$75acc,$0
 
 CinnabarGymObject: ; 0x75acc (size=90)
     db $2e ; border tile
@@ -37822,7 +42459,23 @@ Lab3Text1: ; 0x75c94
 .asm_eb896 ; 0x75cc5
     jp $24d7
 
-INCBIN "baserom.gbc",$75cc8,$15
+
+UnnamedText_75cc8: ; 0x75cc8
+    TX_FAR _UnnamedText_75cc8
+    db $50
+; 0x75cc8 + 5 bytes
+INCBIN "baserom.gbc",$75ccd,$75cd3 - $75ccd
+
+UnnamedText_75cd3: ; 0x75cd3
+    TX_FAR _UnnamedText_75cd3
+    db $50
+; 0x75cd3 + 5 bytes
+
+UnnamedText_75cd8: ; 0x75cd8
+    TX_FAR _UnnamedText_75cd8
+    db $50
+; 0x75cd8 + 5 bytes
+INCBIN "baserom.gbc",$75cdd,$0
 
 Lab3Text2: ; 0x75cdd
     TX_FAR _Lab3Text2
@@ -37921,7 +42574,27 @@ Lab4Text1: ; 0x75d6c
     jr .asm_75d93 ; 0x75dc4 $cd
 ; 0x75dc6
 
-INCBIN "baserom.gbc",$75dc6,$14
+
+UnnamedText_75dc6: ; 0x75dc6
+    TX_FAR _UnnamedText_75dc6
+    db $50
+; 0x75dc6 + 5 bytes
+
+UnnamedText_75dcb: ; 0x75dcb
+    TX_FAR _UnnamedText_75dcb
+    db $50
+; 0x75dcb + 5 bytes
+
+UnnamedText_75dd0: ; 0x75dd0
+    TX_FAR _UnnamedText_75dd0
+    db $50
+; 0x75dd0 + 5 bytes
+
+UnnamedText_75dd5: ; 0x75dd5
+    TX_FAR _UnnamedText_75dd5
+    db $50
+; 0x75dd5 + 5 bytes
+INCBIN "baserom.gbc",$75dda,$0
 
 Lab4Text2: ; 0x75dda
     db $08 ; asm
@@ -38129,7 +42802,27 @@ GaryText1: ; 0x760e0
     call PrintText
     jp $24d7
 
-INCBIN "baserom.gbc",$760f4,$14
+
+UnnamedText_760f4: ; 0x760f4
+    TX_FAR _UnnamedText_760f4
+    db $50
+; 0x760f4 + 5 bytes
+
+UnnamedText_760f9: ; 0x760f9
+    TX_FAR _UnnamedText_760f9
+    db $50
+; 0x760f9 + 5 bytes
+
+UnnamedText_760fe: ; 0x760fe
+    TX_FAR _UnnamedText_760fe
+    db $50
+; 0x760fe + 5 bytes
+
+UnnamedText_76103: ; 0x76103
+    TX_FAR _UnnamedText_76103
+    db $50
+; 0x76103 + 5 bytes
+INCBIN "baserom.gbc",$76108,$0
 
 GaryText2: ; 0x76108
     TX_FAR _GaryText2
@@ -38139,10 +42832,20 @@ GaryText3: ; 0x7610d
 INCBIN "baserom.gbc",$7610d,$76125 - $7610d
 
 GaryText4: ; 0x76125
-INCBIN "baserom.gbc",$76125,$7612a - $76125
+
+UnnamedText_76125: ; 0x76125
+    TX_FAR _UnnamedText_76125
+    db $50
+; 0x76125 + 5 bytes
+INCBIN "baserom.gbc",$7612a,$0
 
 GaryText5: ; 0x7612a
-INCBIN "baserom.gbc",$7612a,$7612f - $7612a
+
+UnnamedText_7612a: ; 0x7612a
+    TX_FAR _UnnamedText_7612a
+    db $50
+; 0x7612a + 5 bytes
+INCBIN "baserom.gbc",$7612f,$0
 
 GaryObject: ; 0x7612f (size=48)
     db $3 ; border tile
@@ -38200,7 +42903,22 @@ LoreleiText1: ; 0x76262
     call LoadTrainerHeader
     jp $24d7
 
-INCBIN "baserom.gbc",$7626c,$7627b - $7626c
+
+UnnamedText_7626c: ; 0x7626c
+    TX_FAR _UnnamedText_7626c
+    db $50
+; 0x7626c + 5 bytes
+
+UnnamedText_76271: ; 0x76271
+    TX_FAR _UnnamedText_76271
+    db $50
+; 0x76271 + 5 bytes
+
+UnnamedText_76276: ; 0x76276
+    TX_FAR _UnnamedText_76276
+    db $50
+; 0x76276 + 5 bytes
+INCBIN "baserom.gbc",$7627b,$0
 
 LoreleiText2: ; 0x7627b
 INCBIN "baserom.gbc",$7627b,$76280 - $7627b
@@ -38260,10 +42978,30 @@ BrunoText1: ; 0x763b9
     call LoadTrainerHeader
     jp $24d7
 
-INCBIN "baserom.gbc",$763c3,$763d2 - $763c3
+
+UnnamedText_763c3: ; 0x763c3
+    TX_FAR _UnnamedText_763c3
+    db $50
+; 0x763c3 + 5 bytes
+
+UnnamedText_763c8: ; 0x763c8
+    TX_FAR _UnnamedText_763c8
+    db $50
+; 0x763c8 + 5 bytes
+
+UnnamedText_763cd: ; 0x763cd
+    TX_FAR _UnnamedText_763cd
+    db $50
+; 0x763cd + 5 bytes
+INCBIN "baserom.gbc",$763d2,$0
 
 BrunoText2: ; 0x763d2
-INCBIN "baserom.gbc",$763d2,5
+
+UnnamedText_763d2: ; 0x763d2
+    TX_FAR _UnnamedText_763d2
+    db $50
+; 0x763d2 + 5 bytes
+INCBIN "baserom.gbc",$763d7,$0
 
 BrunoObject: ; 0x763d7 (size=44)
     db $3 ; border tile
@@ -38320,7 +43058,22 @@ AgathaText1: ; 0x76516
     call LoadTrainerHeader
     jp $24d7
 
-INCBIN "baserom.gbc",$76520,$f
+
+UnnamedText_76520: ; 0x76520
+    TX_FAR _UnnamedText_76520
+    db $50
+; 0x76520 + 5 bytes
+
+UnnamedText_76525: ; 0x76525
+    TX_FAR _UnnamedText_76525
+    db $50
+; 0x76525 + 5 bytes
+
+UnnamedText_7652a: ; 0x7652a
+    TX_FAR _UnnamedText_7652a
+    db $50
+; 0x7652a + 5 bytes
+INCBIN "baserom.gbc",$7652f,$0
 
 AgathaText2: ; 0x7652f
 INCBIN "baserom.gbc",$7652f,5
@@ -38348,7 +43101,25 @@ AgathaObject: ; 0x76534 (size=44)
 AgathaBlocks: ; 30
     INCBIN "maps/agatha.blk"
 
-INCBIN "baserom.gbc",$7657e,$1a82 - 10
+INCBIN "baserom.gbc",$7657e,$76683 - $7657e
+
+UnnamedText_76683: ; 0x76683
+    TX_FAR _UnnamedText_76683
+    db $50
+; 0x76683 + 5 bytes
+INCBIN "baserom.gbc",$76688,$76794 - $76688
+
+UnnamedText_76794: ; 0x76794
+    TX_FAR _UnnamedText_76794
+    db $50
+; 0x76794 + 5 bytes
+INCBIN "baserom.gbc",$76799,$76852 - $76799
+
+UnnamedText_76852: ; 0x76852
+    TX_FAR _UnnamedText_76852
+    db $50
+; 0x76852 + 5 bytes
+INCBIN "baserom.gbc",$76857,$179f
 
 ;10 $0s go here, does anything use this?
 
@@ -39073,7 +43844,13 @@ _ViridianCityText12: ; 0x800fc
     db $0, "Heal Your #MON!", $4f
     db "#MON CENTER", $57
 
-INCBIN "baserom.gbc",$80119,$8031d - $80119
+INCBIN "baserom.gbc",$80119,$8012a - $80119
+
+_UnnamedText_4e2c: ; 0x8012a
+    db $0, "No more room for", $4f
+    db "items!", $57
+; 0x8012a + 25 bytes
+INCBIN "baserom.gbc",$80143,$1da
 
 _ViridianForestText1: ; 0x8031d
     db $0, "I came here with", $4f
@@ -39163,7 +43940,50 @@ _SSAnne2Text1: ; 0x80d34
     db "hold parties with", $55
     db "invited trainers!", $57
 
-INCBIN "baserom.gbc",$80d9a,$80f4b - $80d9a
+
+_UnnamedText_61500: ; 0x80d9a
+    db $0, $53, ": Bonjour!", $4f
+    db $52, "!", $51
+    db "Imagine seeing", $4f
+    db "you here!", $51
+    db $52, ", were you", $4f
+    db "really invited?", $51
+    db "So how's your", $4f
+    db "#DEX coming?", $51
+    db "I already caught", $4f
+    db "40 kinds, pal!", $51
+    db "Different kinds", $4f
+    db "are everywhere!", $51
+    db "Crawl around in", $4f
+    db "grassy areas!", $57
+; 0x80d9a + 189 bytes
+
+_UnnamedText_61505: ; 0x80e57
+    db $0, "Humph!", $51
+    db "At least you're", $4f
+    db "raising your", $55
+    db "#MON!", $58
+; 0x80e57 + 42 bytes
+
+_UnnamedText_6150a: ; 0x80e81
+    db $0, $52, "! What are", $4f
+    db "you, seasick?", $51
+    db "You should shape", $4f
+    db "up, pal!", $58
+; 0x80e81 + 53 bytes
+
+_UnnamedText_6150f: ; 0x80eb6
+    db $0, $53, ": I heard", $4f
+    db "there was a CUT", $55
+    db "master on board.", $51
+    db "But, he was just a", $4f
+    db "seasick, old man!", $51
+    db "But, CUT itself is", $4f
+    db "really useful!", $51
+    db "You should go see", $4f
+    db "him! Smell ya!", $57
+; 0x80eb6 + 149 bytes
+INCBIN "baserom.gbc",$80f4b,$0
 
 _SSAnne3Text1: ; 0x80f4b
     db $0, "Our CAPTAIN is a", $4f
@@ -39185,7 +44005,41 @@ _SSAnne5Text3: ; 0x80fda
     db "I stepped out to", $4f
     db "get some air.", $57
 
-INCBIN "baserom.gbc",$8100b,$810e5 - $8100b
+
+_UnnamedText_61703: ; 0x8100b
+    db $0, "Hey matey!", $51
+    db "Let's do a little", $4f
+    db "jig!", $57
+; 0x8100b + 34 bytes
+
+_UnnamedText_61708: ; 0x8102d
+    db $0, "You're", $4f
+    db "impressive!", $58
+; 0x8102d + 19 bytes
+
+_UnnamedText_6170d: ; 0x81040
+    db $0, "How many kinds of", $4f
+    db "#MON do you", $55
+    db "think there are?", $57
+; 0x81040 + 48 bytes
+
+_UnnamedText_6171c: ; 0x81070
+    db $0, "Ahoy there!", $4f
+    db "Are you seasick?", $57
+; 0x81070 + 30 bytes
+
+_UnnamedText_61721: ; 0x8108e
+    db $0, "I was", $4f
+    db "just careless!", $58
+; 0x8108e + 22 bytes
+
+_UnnamedText_61726: ; 0x810a4
+    db $0, "My Pa said there", $4f
+    db "are 100 kinds of", $55
+    db "#MON. I think", $55
+    db "there are more.", $57
+; 0x810a4 + 65 bytes
+INCBIN "baserom.gbc",$810e5,$0
 
 _SSAnne6Text1: ; 0x810e5
     db $0, "You, mon petit!", $4f
@@ -39219,7 +44073,62 @@ _SSAnne6Text6: ; 0x811c9
     db "peel onions...", $55
     db "Snivel...", $57
 
-INCBIN "baserom.gbc",$81203,$81480 - $81203
+
+_UnnamedText_61807: ; 0x81203
+    db $0, "Er-hem! Indeed I", $4f
+    db "am le CHEF!", $51
+    db "Le main course is", $58
+; 0x81203 + 48 bytes
+
+_UnnamedText_6180c: ; 0x81233
+    db $0, "Salmon du Salad!", $51
+    db "Les guests may", $4f
+    db "gripe it's fish", $55
+    db "again, however!", $57
+; 0x81233 + 64 bytes
+
+_UnnamedText_61811: ; 0x81273
+    db $0, "Eels au Barbecue!", $51
+    db "Les guests will", $4f
+    db "mutiny, I fear.", $57
+; 0x81273 + 51 bytes
+
+_UnnamedText_61816: ; 0x812a6
+    db $0, "Prime Beef Steak!", $51
+    db "But, have I enough", $4f
+    db "fillets du beef?", $57
+; 0x812a6 + 55 bytes
+INCBIN "baserom.gbc",$812dd,$81347 - $812dd
+
+_UnnamedText_61927: ; 0x81347
+    db $0, "CAPTAIN: Whew!", $4f
+    db "Thank you! I", $55
+    db "feel much better!", $51
+    db "You want to see", $4f
+    db "my CUT technique?", $51
+    db "I could show you", $4f
+    db "if I wasn't ill...", $51
+    db "I know! You can", $4f
+    db "have this!", $51
+    db "Teach it to your", $4f
+    db "#MON and you", $55
+    db "can see it CUT", $55
+    db "any time!", $58
+; 0x81347 + 198 bytes
+INCBIN "baserom.gbc",$8140d,$8141c - $8140d
+
+_UnnamedText_61932: ; 0x8141c
+    db $0, "CAPTAIN: Whew!", $51
+    db "Now that I'm not", $4f
+    db "sick any more, I", $55
+    db "guess it's time.", $57
+; 0x8141c + 65 bytes
+
+_UnnamedText_61937: ; 0x8145d
+    db $0, "Oh no! You have", $4f
+    db "no room for this!", $57
+; 0x8145d + 35 bytes
+INCBIN "baserom.gbc",$81480,$0
 
 _SSAnne7Text2: ; 0x81480
     db $0, "Yuck! Shouldn't", $4f
@@ -39235,7 +44144,76 @@ _SSAnne8Text8: ; 0x814d7
     db $0, "WIGGLYTUFF: Puup", $4f
     db "pupuu!@@"
 
-INCBIN "baserom.gbc",$814f1,$1d6
+
+_UnnamedText_61a0b: ; 0x814f1
+    db $0, "I travel alone", $4f
+    db "on my journeys!", $51
+    db "My #MON are my", $4f
+    db "only friends!", $57
+; 0x814f1 + 61 bytes
+
+_UnnamedText_61a10: ; 0x8152e
+    db $0, "My, my", $4f
+    db "friends...", $58
+; 0x8152e + 19 bytes
+
+_UnnamedText_61a15: ; 0x81541
+    db $0, "You should be", $4f
+    db "nice to friends!", $57
+; 0x81541 + 32 bytes
+
+_UnnamedText_61a1a: ; 0x81561
+    db $0, "You pup! How dare", $4f
+    db "you barge in!", $57
+; 0x81561 + 33 bytes
+
+_UnnamedText_61a1f: ; 0x81582
+    db $0, "Humph!", $4f
+    db "You rude child!", $58
+; 0x81582 + 24 bytes
+
+_UnnamedText_61a24: ; 0x8159a
+    db $0, "I wish to be left", $4f
+    db "alone! Get out!", $57
+; 0x8159a + 35 bytes
+
+_UnnamedText_61a29: ; 0x815bd
+    db $0, "I love #MON!", $4f
+    db "Do you?", $57
+; 0x815bd + 22 bytes
+
+_UnnamedText_61a2e: ; 0x815d3
+    db $0, "Wow! ", $4f
+    db "You're great!", $58
+; 0x815d3 + 20 bytes
+
+_UnnamedText_61a33: ; 0x815e7
+    db $0, "Let me be your", $4f
+    db "friend, OK?", $51
+    db "Then we can trade", $4f
+    db "#MON!", $57
+; 0x815e7 + 52 bytes
+
+_UnnamedText_61a38: ; 0x8161b
+    db $0, "I collected these", $4f
+    db "#MON from all", $55
+    db "around the world!", $57
+; 0x8161b + 51 bytes
+
+_UnnamedText_61a3d: ; 0x8164e
+    db $0, "Oh no!", $4f
+    db "I went around the", $55
+    db "world for these!", $58
+; 0x8164e + 43 bytes
+
+_UnnamedText_61a42: ; 0x81679
+    db $0, "You hurt my poor", $4f
+    db "worldly #MON!", $51
+    db "I demand that you", $4f
+    db "heal them at a", $55
+    db "#MON CENTER!", $57
+; 0x81679 + 78 bytes
+INCBIN "baserom.gbc",$816c7,$0
 
 _SSAnne8Text5: ; 0x816c7
     db $0, "Waiter, I would", $4f
@@ -39260,13 +44238,226 @@ _SSAnne8Text11: ; 0x81759
     db "I'm on the trail", $4f
     db "of TEAM ROCKET!", $57
 
-INCBIN "baserom.gbc",$81799,$81aaa - $81799
+
+_UnnamedText_61bf2: ; 0x81799
+    db $0, "In all my travels", $4f
+    db "I've never seen", $55
+    db "any #MON sleep", $55
+    db "like this one!", $51
+    db "It was something", $4f
+    db "like this!", $58
+; 0x81799 + 92 bytes
+
+_UnnamedText_61c01: ; 0x817f5
+    db $0, "Ah yes, I have", $4f
+    db "seen some #MON", $55
+    db "ferry people", $55
+    db "across the water!", $57
+; 0x817f5 + 62 bytes
+
+_UnnamedText_61c10: ; 0x81833
+    db $0, "#MON can CUT", $4f
+    db "down small bushes.", $57
+; 0x81833 + 33 bytes
+
+_UnnamedText_61c1f: ; 0x81854
+    db $0, "Have you gone to", $4f
+    db "the SAFARI ZONE", $55
+    db "in FUCHSIA CITY?", $51
+    db "It had many rare", $4f
+    db "kinds of #MON!!", $57
+; 0x81854 + 84 bytes
+INCBIN "baserom.gbc",$818a8,$0
+
+_UnnamedText_61c2e: ; 0x818a8
+    db $0, "Me and my Daddy", $4f
+    db "think the SAFARI", $55
+    db "ZONE is awesome!", $57
+; 0x818a8 + 51 bytes
+
+_UnnamedText_61c3d: ; 0x818db
+    db $0, "The CAPTAIN looked", $4f
+    db "really sick and", $55
+    db "pale!", $57
+; 0x818db + 42 bytes
+
+_UnnamedText_61c4c: ; 0x81905
+    db $0, "I hear many people", $4f
+    db "get seasick!", $57
+; 0x81905 + 33 bytes
+
+_UnnamedText_61c51: ; 0x81926
+    db $0, "Competing against", $4f
+    db "the young keeps", $55
+    db "me youthful.", $57
+; 0x81926 + 48 bytes
+
+_UnnamedText_61c56: ; 0x81956
+    db $0, "Good", $4f
+    db "fight! Ah, I feel", $55
+    db "young again!", $58
+; 0x81956 + 37 bytes
+
+_UnnamedText_61c5b: ; 0x8197b
+    db $0, "15 years ago, I", $4f
+    db "would have won!", $57
+; 0x8197b + 33 bytes
+
+_UnnamedText_61c60: ; 0x8199c
+    db $0, "Check out what I", $4f
+    db "fished up!", $57
+; 0x8199c + 29 bytes
+
+_UnnamedText_61c65: ; 0x819b9
+    db $0, "I'm", $4f
+    db "all out!", $58
+; 0x819b9 + 13 bytes
+
+_UnnamedText_61c6a: ; 0x819c6
+    db $0, "Party?", $51
+    db "The cruise ship's", $4f
+    db "party should be", $55
+    db "over by now.", $57
+; 0x819c6 + 54 bytes
+
+_UnnamedText_61c6f: ; 0x819fc
+    db $0, "Which do you like,", $4f
+    db "a strong or a", $55
+    db "rare #MON?", $57
+; 0x819fc + 45 bytes
+
+_UnnamedText_61c74: ; 0x81a29
+    db $0, "I must", $4f
+    db "salute you!", $58
+; 0x81a29 + 20 bytes
+
+_UnnamedText_61c79: ; 0x81a3d
+    db $0, "I prefer strong", $4f
+    db "and rare #MON.", $57
+; 0x81a3d + 32 bytes
+
+_UnnamedText_61c7e: ; 0x81a5d
+    db $0, "I never saw you", $4f
+    db "at the party.", $57
+; 0x81a5d + 31 bytes
+
+_UnnamedText_61c83: ; 0x81a7c
+    db $0, "Take", $4f
+    db "it easy!", $58
+; 0x81a7c + 15 bytes
+
+_UnnamedText_61c88: ; 0x81a8b
+    db $0, "Oh, I adore your", $4f
+    db "strong #MON!", $57
+; 0x81a8b + 31 bytes
+INCBIN "baserom.gbc",$81aaa,$0
 
 _SSAnne10Text8: ; 0x81aaa
     db $0, "MACHOKE: Gwoh!", $4f
     db "Goggoh!@@"
 
-INCBIN "baserom.gbc",$81ac3,$289
+
+_UnnamedText_61e16: ; 0x81ac3
+    db $0, "You know what they", $4f
+    db "say about sailors", $55
+    db "and fighting!", $57
+; 0x81ac3 + 52 bytes
+
+_UnnamedText_61e1b: ; 0x81af7
+    db $0, "Right!", $4f
+    db "Good fight, mate!", $58
+; 0x81af7 + 26 bytes
+
+_UnnamedText_61e20: ; 0x81b11
+    db $0, "Haha! Want to be", $4f
+    db "a sailor, mate?", $57
+; 0x81b11 + 34 bytes
+
+_UnnamedText_61e25: ; 0x81b33
+    db $0, "My sailor's pride", $4f
+    db "is at stake!", $57
+; 0x81b33 + 31 bytes
+
+_UnnamedText_61e2a: ; 0x81b52
+    db $0, "Your", $4f
+    db "spirit sank me!", $58
+; 0x81b52 + 22 bytes
+
+_UnnamedText_61e2f: ; 0x81b68
+    db $0, "Did you see the", $4f
+    db "FISHING GURU in", $55
+    db "VERMILION CITY?", $57
+; 0x81b68 + 49 bytes
+
+_UnnamedText_61e34: ; 0x81b99
+    db $0, "Us sailors have", $4f
+    db "#MON too!", $57
+; 0x81b99 + 27 bytes
+
+_UnnamedText_61e39: ; 0x81bb4
+    db $0, "OK, ", $4f
+    db "you're not bad.", $58
+; 0x81bb4 + 21 bytes
+
+_UnnamedText_61e3e: ; 0x81bc9
+    db $0, "We caught all our", $4f
+    db "#MON while", $55
+    db "out at sea!", $57
+; 0x81bc9 + 42 bytes
+
+_UnnamedText_61e43: ; 0x81bf3
+    db $0, "I like feisty", $4f
+    db "kids like you!@"
+; 0x81bf3 + 30 bytes
+INCBIN "baserom.gbc",$81c11,$81c12 - $81c11
+
+_UnnamedText_61e48: ; 0x81c12
+    db $0, "Argh!", $4f
+    db "Lost it!", $58
+; 0x81c12 + 16 bytes
+
+_UnnamedText_61e4d: ; 0x81c22
+    db $0, "Sea #MON live", $4f
+    db "in deep water.", $55
+    db "You'll need a ROD!", $57
+; 0x81c22 + 48 bytes
+
+_UnnamedText_61e52: ; 0x81c52
+    db $0, "Matey, you're", $4f
+    db "walking the plank", $55
+    db "if you lose!", $57
+; 0x81c52 + 45 bytes
+
+_UnnamedText_61e57: ; 0x81c7f
+    db $0, "Argh!", $4f
+    db "Beaten by a kid!", $58
+; 0x81c7f + 24 bytes
+
+_UnnamedText_61e5c: ; 0x81c97
+    db $0, "Jellyfish some-", $4f
+    db "times drift into", $55
+    db "the ship.", $57
+; 0x81c97 + 44 bytes
+
+_UnnamedText_61e61: ; 0x81cc3
+    db $0, "Hello stranger!", $4f
+    db "Stop and chat!", $51
+    db "All my #MON", $4f
+    db "are from the sea!", $57
+; 0x81cc3 + 62 bytes
+
+_UnnamedText_61e66: ; 0x81d01
+    db $0, "Darn!", $4f
+    db "I let that one", $55
+    db "get away!", $58
+; 0x81d01 + 32 bytes
+
+_UnnamedText_61e6b: ; 0x81d21
+    db $0, "I was going to", $4f
+    db "make you my", $55
+    db "assistant too!", $57
+; 0x81d21 + 43 bytes
+INCBIN "baserom.gbc",$81d4c,$0
 
 _SSAnne10Text7: ; 0x81d4c
     db $0, "My buddy, MACHOKE,", $4f
@@ -39275,11 +44466,273 @@ _SSAnne10Text7: ; 0x81d4c
     db "STRENGTH to move", $55
     db "big rocks!", $57
 
-INCBIN "baserom.gbc",$81d9b,$82aaf-$81d9b
+INCBIN "baserom.gbc",$81d9b,$8223e - $81d9b
+
+_UnnamedText_4557a: ; 0x8223e
+    db $0, "So! I must say, I", $4f
+    db "am impressed you", $55
+    db "got here!", $57
+; 0x8223e + 46 bytes
+
+_UnnamedText_4557f: ; 0x8226c
+    db $0, "WHAT!", $4f
+    db "This cannot be!", $58
+; 0x8226c + 23 bytes
+INCBIN "baserom.gbc",$82283,$82454 - $82283
+
+_UnnamedText_59ded: ; 0x82454
+    db $0, "Eeek!", $4f
+    db "No! Stop! Help!", $51
+    db "Oh, you're not", $4f
+    db "with TEAM ROCKET.", $55
+    db "I thought...", $55
+    db "I'm sorry. Here,", $55
+    db "please take this!", $58
+; 0x82454 + 102 bytes
+INCBIN "baserom.gbc",$824ba,$824c9 - $824ba
+
+_UnnamedText_59df8: ; 0x824c9
+    db $0, "TM36 is", $4f
+    db "SELFDESTRUCT!", $51
+    db "It's powerful, but", $4f
+    db "the #MON that", $55
+    db "uses it faints!", $55
+    db "Be careful.", $57
+; 0x824c9 + 83 bytes
+
+_UnnamedText_59dfd: ; 0x8251c
+    db $0, "You don't have any", $4f
+    db "room for this.", $57
+; 0x8251c + 34 bytes
+
+_UnnamedText_59e2a: ; 0x8253e
+    db $0, "Help! I'm a SILPH", $4f
+    db "employee.", $57
+; 0x8253e + 28 bytes
+
+_UnnamedText_59e2f: ; 0x8255a
+    db $0, "How", $4f
+    db "did you know I", $55
+    db "was a ROCKET?", $58
+; 0x8255a + 34 bytes
+
+_UnnamedText_59e34: ; 0x8257c
+    db $0, "I work for both", $4f
+    db "SILPH and TEAM", $55
+    db "ROCKET!", $57
+; 0x8257c + 40 bytes
+
+_UnnamedText_59e39: ; 0x825a4
+    db $0, "It's off limits", $4f
+    db "here! Go home!", $57
+; 0x825a4 + 31 bytes
+
+_UnnamedText_59e3e: ; 0x825c3
+    db $0, "You're", $4f
+    db "good.", $58
+; 0x825c3 + 13 bytes
+
+_UnnamedText_59e43: ; 0x825d0
+    db $0, "Can you solve the", $4f
+    db "maze in here?", $57
+; 0x825d0 + 33 bytes
+
+_UnnamedText_59e48: ; 0x825f1
+    db $0, "No kids are", $4f
+    db "allowed in here!", $57
+; 0x825f1 + 30 bytes
+
+_UnnamedText_59e4d: ; 0x8260f
+    db $0, "Tough!", $58
+; 0x8260f + 8 bytes
+
+_UnnamedText_59e52: ; 0x82617
+    db $0, "Diamond shaped", $4f
+    db "tiles are", $55
+    db "teleport blocks!", $51
+    db "They're hi-tech", $4f
+    db "transporters!", $57
+; 0x82617 + 72 bytes
+
+_UnnamedText_59e57: ; 0x8265f
+    db $0, "Hey kid! What are", $4f
+    db "you doing here?", $57
+; 0x8265f + 35 bytes
+
+_UnnamedText_59e5c: ; 0x82682
+    db $0, "I goofed!", $58
+; 0x82682 + 11 bytes
+
+_UnnamedText_59e61: ; 0x8268d
+    db $0, "SILPH CO. will", $4f
+    db "be merged with", $55
+    db "TEAM ROCKET!", $57
+; 0x8268d + 44 bytes
+INCBIN "baserom.gbc",$826b9,$0
+
+_UnnamedText_59ff9: ; 0x826b9
+    db $0, "I work for SILPH.", $4f
+    db "What should I do?", $57
+; 0x826b9 + 37 bytes
+
+_UnnamedText_59ffe: ; 0x826de
+    db $0, $52, "! You and", $4f
+    db "your #MON", $55
+    db "saved us!", $57
+; 0x826de + 32 bytes
+INCBIN "baserom.gbc",$826fe,$0
+
+_UnnamedText_5a00d: ; 0x826fe
+    db $0, "Quit messing with", $4f
+    db "us, kid!", $57
+; 0x826fe + 28 bytes
+
+_UnnamedText_5a012: ; 0x8271a
+    db $0, "I give", $4f
+    db "up!", $58
+; 0x8271a + 12 bytes
+
+_UnnamedText_5a017: ; 0x82726
+    db $0, "A hint? You can", $4f
+    db "open doors with a", $55
+    db "CARD KEY!", $57
+; 0x82726 + 45 bytes
+
+_UnnamedText_5a026: ; 0x82753
+    db $0, "I support TEAM", $4f
+    db "ROCKET more than", $55
+    db "I support SILPH!", $57
+; 0x82753 + 50 bytes
+
+_UnnamedText_5a02b: ; 0x82785
+    db $0, "You", $4f
+    db "really got me!", $58
+; 0x82785 + 20 bytes
+
+_UnnamedText_5a030: ; 0x82799
+    db $0, "Humph...", $51
+    db "TEAM ROCKET said", $4f
+    db "that if I helped", $55
+    db "them, they'd let", $55
+    db "me study #MON!", $57
+; 0x82799 + 75 bytes
+INCBIN "baserom.gbc",$827e4,$0
+
+_UnnamedText_19de0: ; 0x827e4
+    db $0, "Sssh! Can't you", $4f
+    db "see I'm hiding?", $57
+; 0x827e4 + 31 bytes
+
+_UnnamedText_19de5: ; 0x82803
+    db $0, "Huh? TEAM ROCKET", $4f
+    db "is gone?", $57
+; 0x82803 + 27 bytes
+
+_UnnamedText_19df4: ; 0x8281e
+    db $0, "TEAM ROCKET has", $4f
+    db "taken command of", $55
+    db "SILPH CO.!", $57
+; 0x8281e + 45 bytes
+
+_UnnamedText_19df9: ; 0x8284b
+    db $0, "Arrgh!", $58
+; 0x8284b + 8 bytes
+
+_UnnamedText_19dfe: ; 0x82853
+    db $0, "Fwahahaha!", $4f
+    db "My BOSS has been", $55
+    db "after this place!", $57
+; 0x82853 + 47 bytes
+
+_UnnamedText_19e0d: ; 0x82882
+    db $0, "My #MON are my", $4f
+    db "loyal soldiers!", $57
+; 0x82882 + 32 bytes
+
+_UnnamedText_19e12: ; 0x828a2
+    db $0, "Darn!", $4f
+    db "You weak #MON!", $58
+; 0x828a2 + 22 bytes
+
+_UnnamedText_19e17: ; 0x828b8
+    db $0, "The doors are", $4f
+    db "electronically", $55
+    db "locked! A CARD", $55
+    db "KEY opens them!", $57
+; 0x828b8 + 61 bytes
+INCBIN "baserom.gbc",$828f5,$b5
+
+_UnnamedText_1a024: ; 0x829aa
+    db $0, "I heard a kid was", $4f
+    db "wandering around.", $57
+; 0x829aa + 37 bytes
+
+_UnnamedText_1a029: ; 0x829cf
+    db $0, "Boom!", $58
+; 0x829cf + 7 bytes
+
+_UnnamedText_1a02e: ; 0x829d6
+    db $0, "It's not smart", $4f
+    db "to pick a fight", $55
+    db "with TEAM ROCKET!", $57
+; 0x829d6 + 49 bytes
+INCBIN "baserom.gbc",$82a07,$0
+
+_UnnamedText_1a03d: ; 0x82a07
+    db $0, "We study #", $4f
+    db "BALL technology", $55
+    db "on this floor!", $57
+; 0x82a07 + 43 bytes
+
+_UnnamedText_1a042: ; 0x82a32
+    db $0, "Dang!", $4f
+    db "Blast it!", $58
+; 0x82a32 + 17 bytes
+
+_UnnamedText_1a047: ; 0x82a43
+    db $0, "We worked on the", $4f
+    db "ultimate #", $55
+    db "BALL which would", $55
+    db "catch anything!", $57
+; 0x82a43 + 62 bytes
+
+_UnnamedText_1a056: ; 0x82a81
+    db $0, "Whaaat? There", $4f
+    db "shouldn't be any", $55
+    db "children here?", $57
+; 0x82a81 + 46 bytes
+INCBIN "baserom.gbc",$82aaf,$0
 
 SECTION "bank21",DATA,BANK[$21]
 
-INCBIN "baserom.gbc",$84000,$840a4 - $84000
+
+_UnnamedText_1a05b: ; 0x84000
+    db $0, "Oh", $4f
+    db "goodness!", $58
+; 0x84000 + 14 bytes
+
+_UnnamedText_1a060: ; 0x8400e
+    db $0, "You're only on 5F.", $4f
+    db "It's a long way", $55
+    db "to my BOSS!", $57
+; 0x8400e + 46 bytes
+
+_UnnamedText_1a06f: ; 0x8403c
+    db $0, "Show TEAM ROCKET", $4f
+    db "a little respect!", $57
+; 0x8403c + 36 bytes
+
+_UnnamedText_1a074: ; 0x84060
+    db $0, "Cough...", $4f
+    db "Cough...", $58
+; 0x84060 + 19 bytes
+
+_UnnamedText_1a079: ; 0x84073
+    db $0, "Which reminds me.", $51
+    db "KOFFING evolves", $4f
+    db "into WEEZING!", $57
+; 0x84073 + 49 bytes
+INCBIN "baserom.gbc",$840a4,$0
 
 _SilphCo5Text9: ; 0x840a4
     db $0, "It's a #MON", $4f
@@ -39303,7 +44756,355 @@ _SilphCo5Text11: ; 0x84134
     db "only when traded", $55
     db "by link-cable.", $57
 
-INCBIN "baserom.gbc",$84176,$8502f - $84176
+
+_UnnamedText_1a24a: ; 0x84176
+    db $0, "The ROCKETs came", $4f
+    db "and took over the", $55
+    db "building!", $57
+; 0x84176 + 46 bytes
+
+_UnnamedText_1a24f: ; 0x841a4
+    db $0, "Well, better get", $4f
+    db "back to work!", $57
+; 0x841a4 + 32 bytes
+
+_UnnamedText_1a261: ; 0x841c4
+    db $0, "Oh dear, oh dear.", $4f
+    db "Help me please!", $57
+; 0x841c4 + 35 bytes
+
+_UnnamedText_1a266: ; 0x841e7
+    db $0, "We got engaged!", $4f
+    db "Heheh!", $57
+; 0x841e7 + 24 bytes
+
+_UnnamedText_1a278: ; 0x841ff
+    db $0, "Look at him! He's", $4f
+    db "such a coward!", $57
+; 0x841ff + 33 bytes
+
+_UnnamedText_1a27d: ; 0x84220
+    db $0, "I feel so sorry", $4f
+    db "for him, I have", $55
+    db "to marry him!", $57
+; 0x84220 + 47 bytes
+
+_UnnamedText_1a28f: ; 0x8424f
+    db $0, "TEAM ROCKET is", $4f
+    db "trying to conquer", $55
+    db "the world with", $55
+    db "#MON!", $57
+; 0x8424f + 55 bytes
+
+_UnnamedText_1a294: ; 0x84286
+    db $0, "TEAM ROCKET ran", $4f
+    db "because of you!", $57
+; 0x84286 + 33 bytes
+
+_UnnamedText_1a2a6: ; 0x842a7
+    db $0, "They must have", $4f
+    db "targeted SILPH", $55
+    db "for our #MON", $55
+    db "products.", $57
+; 0x842a7 + 54 bytes
+
+_UnnamedText_1a2ab: ; 0x842dd
+    db $0, "Come work for", $4f
+    db "SILPH when you", $55
+    db "get older!", $57
+; 0x842dd + 41 bytes
+
+_UnnamedText_1a2ba: ; 0x84306
+    db $0, "I am one of the 4", $4f
+    db "ROCKET BROTHERS!", $57
+; 0x84306 + 36 bytes
+
+_UnnamedText_1a2bf: ; 0x8432a
+    db $0, "Flame", $4f
+    db "out!", $58
+; 0x8432a + 12 bytes
+
+_UnnamedText_1a2c4: ; 0x84336
+    db $0, "No matter!", $4f
+    db "My brothers will", $55
+    db "avenge me!", $57
+; 0x84336 + 40 bytes
+
+_UnnamedText_1a2d3: ; 0x8435e
+    db $0, "That rotten", $4f
+    db "PRESIDENT!", $51
+    db "He shouldn't have", $4f
+    db "sent me to the", $55
+    db "TIKSI BRANCH!", $57
+; 0x8435e + 70 bytes
+
+_UnnamedText_1a2d8: ; 0x843a4
+    db $0, "Shoot!", $58
+; 0x843a4 + 8 bytes
+
+_UnnamedText_1a2dd: ; 0x843ac
+    db $0, "TIKSI BRANCH?", $4f
+    db "It's in Russian", $55
+    db "no man's land!", $57
+; 0x843ac + 44 bytes
+
+_UnnamedText_1a2ec: ; 0x843d8
+    db $0, "You dare betray", $4f
+    db "TEAM ROCKET?", $57
+; 0x843d8 + 30 bytes
+
+_UnnamedText_1a2f1: ; 0x843f6
+    db $0, "You", $4f
+    db "traitor!", $58
+; 0x843f6 + 14 bytes
+
+_UnnamedText_1a2f6: ; 0x84404
+    db $0, "If you stand for", $4f
+    db "justice, you", $55
+    db "betray evil!", $57
+; 0x84404 + 44 bytes
+
+_UnnamedText_51dd3: ; 0x84430
+    db $0, "Oh! Hi! You're", $4f
+    db "not a ROCKET! You", $55
+    db "came to save us?", $55
+    db "Why, thank you!", $51
+    db "I want you to", $4f
+    db "have this #MON", $55
+    db "for saving us.", $58
+; 0x84430 + 110 bytes
+
+_UnnamedText_51dd8: ; 0x8449e
+    db $0, "It's LAPRAS. It's", $4f
+    db "very intelligent.", $51
+    db "We kept it in our", $4f
+    db "lab, but it will", $55
+    db "be much better", $55
+    db "off with you!", $51
+    db "I think you will", $4f
+    db "be a good trainer", $55
+    db "for LAPRAS!", $51
+    db "It's a good", $4f
+    db "swimmer. It'll", $55
+    db "give you a lift!", $57
+; 0x8449e + 188 bytes
+
+_UnnamedText_51ddd: ; 0x8455a
+    db $0, "TEAM ROCKET's", $4f
+    db "BOSS went to the", $55
+    db "boardroom! Is our", $55
+    db "PRESIDENT OK?", $57
+; 0x8455a + 63 bytes
+
+_UnnamedText_51de2: ; 0x84599
+    db $0, "Saved at last!", $4f
+    db "Thank you!", $57
+; 0x84599 + 27 bytes
+INCBIN "baserom.gbc",$845b4,$510
+
+_UnnamedText_565be: ; 0x84ac4
+    db $0, "I wonder if SILPH", $4f
+    db "is finished...", $57
+; 0x84ac4 + 34 bytes
+
+_UnnamedText_565c3: ; 0x84ae6
+    db $0, "Thanks for saving", $4f
+    db "us!", $57
+; 0x84ae6 + 23 bytes
+INCBIN "baserom.gbc",$84afd,$0
+
+_UnnamedText_565e6: ; 0x84afd
+    db $0, "That's as far as", $4f
+    db "you'll go!", $57
+; 0x84afd + 27 bytes
+
+_UnnamedText_565eb: ; 0x84b18
+    db $0, "Not", $4f
+    db "enough grit!", $58
+; 0x84b18 + 18 bytes
+
+_UnnamedText_565f0: ; 0x84b2a
+    db $0, "If you don't turn", $4f
+    db "back, I'll call", $55
+    db "for backup!", $57
+; 0x84b2a + 45 bytes
+
+_UnnamedText_565f5: ; 0x84b57
+    db $0, "You're causing us", $4f
+    db "problems!", $57
+; 0x84b57 + 28 bytes
+
+_UnnamedText_565fa: ; 0x84b73
+    db $0, "Huh?", $4f
+    db "I lost?", $58
+; 0x84b73 + 14 bytes
+
+_UnnamedText_565ff: ; 0x84b81
+    db $0, "So, what do you", $4f
+    db "think of SILPH", $55
+    db "BUILDING's maze?", $57
+; 0x84b81 + 48 bytes
+
+_UnnamedText_56604: ; 0x84bb1
+    db $0, "I am one of the 4", $4f
+    db "ROCKET BROTHERS!", $57
+; 0x84bb1 + 36 bytes
+
+_UnnamedText_56609: ; 0x84bd5
+    db $0, "Whoo!", $4f
+    db "Oh brothers!", $58
+; 0x84bd5 + 20 bytes
+
+_UnnamedText_5660e: ; 0x84be9
+    db $0, "I'll leave you up", $4f
+    db "to my brothers!", $57
+; 0x84be9 + 34 bytes
+
+_UnnamedText_5d8e5: ; 0x84c0b
+    db $0, "You look tired!", $4f
+    db "You should take a", $55
+    db "quick nap!", $58
+; 0x84c0b + 46 bytes
+
+_UnnamedText_5d8ea: ; 0x84c39
+    db $0, "Don't give up!", $57
+; 0x84c39 + 15 bytes
+
+_UnnamedText_5d8ef: ; 0x84c48
+    db $0, "Thank you so", $4f
+    db "much!", $57
+; 0x84c48 + 20 bytes
+
+_UnnamedText_5d912: ; 0x84c5c
+    db $0, "Your #MON seem", $4f
+    db "to adore you, kid!", $57
+; 0x84c5c + 35 bytes
+
+_UnnamedText_5d917: ; 0x84c7f
+    db $0, "Ghaaah!", $58
+; 0x84c7f + 9 bytes
+
+_UnnamedText_5d91c: ; 0x84c88
+    db $0, "If I had started", $4f
+    db "as a trainer at", $55
+    db "your age...", $57
+; 0x84c88 + 46 bytes
+
+_UnnamedText_5d921: ; 0x84cb6
+    db $0, "Your #MON have", $4f
+    db "weak points! I", $55
+    db "can nail them!", $57
+; 0x84cb6 + 46 bytes
+
+_UnnamedText_5d926: ; 0x84ce4
+    db $0, "You", $4f
+    db "hammered me!", $58
+; 0x84ce4 + 18 bytes
+
+_UnnamedText_5d92b: ; 0x84cf6
+    db $0, "Exploiting weak", $4f
+    db "spots does work!", $55
+    db "Think about", $55
+    db "element types!", $57
+; 0x84cf6 + 61 bytes
+
+_UnnamedText_5d930: ; 0x84d33
+    db $0, "I am one of the 4", $4f
+    db "ROCKET BROTHERS!", $57
+; 0x84d33 + 36 bytes
+
+_UnnamedText_5d935: ; 0x84d57
+    db $0, "Warg!", $4f
+    db "Brothers, I lost!", $58
+; 0x84d57 + 25 bytes
+
+_UnnamedText_5d93a: ; 0x84d70
+    db $0, "My brothers will", $4f
+    db "avenge me!", $57
+; 0x84d70 + 29 bytes
+
+_UnnamedText_5a1d3: ; 0x84d8d
+    db $0, "Waaaaa!", $55
+    db "I'm scared!", $57
+; 0x84d8d + 20 bytes
+
+_UnnamedText_5a1d8: ; 0x84da1
+    db $0, "Please keep quiet", $4f
+    db "about my crying!", $57
+; 0x84da1 + 36 bytes
+
+_UnnamedText_5a1dd: ; 0x84dc5
+    db $0, "Welcome to the", $4f
+    db "10F! So good of", $55
+    db "you to join me!", $57
+; 0x84dc5 + 48 bytes
+
+_UnnamedText_5a1e2: ; 0x84df5
+    db $0, "I'm", $4f
+    db "stunned!", $58
+; 0x84df5 + 13 bytes
+
+_UnnamedText_5a1e7: ; 0x84e02
+    db $0, "Nice try, but the", $4f
+    db "boardroom is up", $55
+    db "one more floor!", $57
+; 0x84e02 + 51 bytes
+
+_UnnamedText_5a1ec: ; 0x84e35
+    db $0, "Enough of your", $4f
+    db "silly games!", $57
+; 0x84e35 + 29 bytes
+
+_UnnamedText_5a1f1: ; 0x84e52
+    db $0, "No", $4f
+    db "continues left!", $58
+; 0x84e52 + 20 bytes
+
+_UnnamedText_5a1f6: ; 0x84e66
+    db $0, "Are you satisfied", $4f
+    db "with beating me?", $55
+    db "Then go on home!", $57
+; 0x84e66 + 53 bytes
+INCBIN "baserom.gbc",$84e9b,$0
+
+_UnnamedText_62311: ; 0x84e9b
+    db $0, "PRESIDENT: Thank", $4f
+    db "you for saving", $55
+    db "SILPH!", $51
+    db "I will never", $4f
+    db "forget you saved", $55
+    db "us in our moment", $55
+    db "of peril!", $51
+    db "I have to thank", $4f
+    db "you in some way!", $51
+    db "Because I am rich,", $4f
+    db "I can give you", $55
+    db "anything!", $51
+    db "Here, maybe this", $4f
+    db "will do!", $58
+; 0x84e9b + 200 bytes
+INCBIN "baserom.gbc",$84f63,$84f74 - $84f63
+
+_UnnamedText_6231c: ; 0x84f74
+    db $0, "PRESIDENT: You", $4f
+    db "can't buy that", $55
+    db "anywhere!", $51
+    db "It's our secret", $4f
+    db "prototype MASTER", $55
+    db "BALL!", $51
+    db "It will catch any", $4f
+    db "#MON without", $55
+    db "fail!", $51
+    db "You should be", $4f
+    db "quiet about using", $55
+    db "it, though.", $57
+; 0x84f74 + 159 bytes
+
+_UnnamedText_62321: ; 0x85013
+    db $0, "You have no", $4f
+    db "room for this.", $57
+; 0x85013 + 28 bytes
+INCBIN "baserom.gbc",$8502f,$0
 
 _SilphCo11Text2: ; 0x8502f
     db $0, "SECRETARY: Thank", $4f
@@ -39325,7 +45126,64 @@ _SilphCo11Text3: ; 0x85075
     db "Or, experience a", $4f
     db "world of pain!", $57
 
-INCBIN "baserom.gbc",$85119,$21d
+
+_UnnamedText_62330: ; 0x85119
+    db $0, "Arrgh!!", $4f
+    db "I lost again!?", $58
+; 0x85119 + 24 bytes
+
+_UnnamedText_62335: ; 0x85131
+    db $0, "Blast it all!", $4f
+    db "You ruined our", $55
+    db "plans for SILPH!", $51
+    db "But, TEAM ROCKET", $4f
+    db "will never fall!", $51
+    db $52, "! Never", $4f
+    db "forget that all", $55
+    db "#MON exist", $55
+    db "for TEAM ROCKET!", $51
+    db "I must go, but I", $4f
+    db "shall return!", $57
+; 0x85131 + 165 bytes
+
+_UnnamedText_62344: ; 0x851d6
+    db $0, "Stop right there!", $4f
+    db "Don't you move!", $57
+; 0x851d6 + 34 bytes
+
+_UnnamedText_62349: ; 0x851f8
+    db $0, "Don't...", $4f
+    db "Please!", $58
+; 0x851f8 + 17 bytes
+
+_UnnamedText_6234e: ; 0x85209
+    db $0, "So, you want to", $4f
+    db "see my BOSS?", $57
+; 0x85209 + 30 bytes
+INCBIN "baserom.gbc",$85227,$0
+
+_UnnamedText_6235d: ; 0x85227
+    db $0, "Halt! Do you have", $4f
+    db "an appointment", $55
+    db "with my BOSS?", $57
+; 0x85227 + 48 bytes
+
+_UnnamedText_62362: ; 0x85257
+    db $0, "Gaah!", $4f
+    db "Demolished!", $58
+; 0x85257 + 19 bytes
+
+_UnnamedText_62367: ; 0x8526a
+    db $0, "Watch your step,", $4f
+    db "my BOSS likes his", $55
+    db "#MON tough!", $57
+; 0x8526a + 48 bytes
+
+_UnnamedText_6237b: ; 0x8529a
+    db $0, "The monitor has", $4f
+    db "#MON on it!", $57
+; 0x8529a + 29 bytes
+INCBIN "baserom.gbc",$852b7,$7f
 
 _Mansion2Text3: ; 0x85336
     db $0, "Diary: July 5", $4f
@@ -39341,7 +45199,38 @@ _Mansion2Text4: ; 0x85389
     db "newly discovered", $55
     db "#MON, MEW.", $57
 
-INCBIN "baserom.gbc",$853c7,$854a3 - $853c7
+INCBIN "baserom.gbc",$853c7,$85401 - $853c7
+
+_UnnamedText_522c3: ; 0x85401
+    db $0, "This place is", $4f
+    db "like, huge!", $57
+; 0x85401 + 27 bytes
+
+_UnnamedText_522c8: ; 0x8541c
+    db $0, "Ayah!", $58
+; 0x8541c + 7 bytes
+
+_UnnamedText_522cd: ; 0x85423
+    db $0, "I wonder where", $4f
+    db "my partner went.", $57
+; 0x85423 + 33 bytes
+
+_UnnamedText_522d2: ; 0x85444
+    db $0, "My mentor once", $4f
+    db "lived here.", $57
+; 0x85444 + 28 bytes
+
+_UnnamedText_522d7: ; 0x85460
+    db $0, "Whew!", $4f
+    db "Overwhelming!", $58
+; 0x85460 + 21 bytes
+
+_UnnamedText_522dc: ; 0x85475
+    db $0, "So, you're stuck?", $4f
+    db "Try jumping off", $55
+    db "over there!", $57
+; 0x85475 + 46 bytes
+INCBIN "baserom.gbc",$854a3,$0
 
 _Mansion3Text5: ; 0x854a3
     db $0, "Diary: Feb. 6", $4f
@@ -39497,7 +45386,70 @@ _SafariZoneRestHouse4Text3: ; 0x85c17
     db "a VAPOREON!", $55
     db "I wonder why?", $57
 
-INCBIN "baserom.gbc",$85c72,$343
+INCBIN "baserom.gbc",$85c72,$85c79 - $85c72
+
+_UnnamedText_5da9a: ; 0x85c79
+    db $0, "I wonder if you", $4f
+    db "are good enough", $55
+    db "for me!", $57
+; 0x85c79 + 41 bytes
+
+_UnnamedText_5da9f: ; 0x85ca2
+    db $0, "I", $4f
+    db "lost out!", $58
+; 0x85ca2 + 13 bytes
+
+_UnnamedText_5daa4: ; 0x85caf
+    db $0, "I never wanted to", $4f
+    db "lose to anybody!", $57
+; 0x85caf + 36 bytes
+
+_UnnamedText_5daa9: ; 0x85cd3
+    db $0, "I can see you're", $4f
+    db "good! Let me see", $55
+    db "exactly how good!", $57
+; 0x85cd3 + 52 bytes
+
+_UnnamedText_5daae: ; 0x85d07
+    db $0, "I", $4f
+    db "had a chance...", $58
+; 0x85d07 + 19 bytes
+
+_UnnamedText_5dab3: ; 0x85d1a
+    db $0, "I concede, you're", $4f
+    db "better than me!", $57
+; 0x85d1a + 34 bytes
+
+_UnnamedText_5a3ae: ; 0x85d3c
+    db $0, "Ah! I heard about", $4f
+    db "you ", $52, "!", $51
+    db "I lead the ELITE", $4f
+    db "FOUR! You can", $55
+    db "call me LANCE the", $55
+    db "dragon trainer!", $51
+    db "You know that", $4f
+    db "dragons are", $55
+    db "mythical #MON!", $51
+    db "They're hard to", $4f
+    db "catch and raise,", $55
+    db "but their powers", $55
+    db "are superior!", $51
+    db "They're virtually", $4f
+    db "indestructible!", $51
+    db "Well, are you", $4f
+    db "ready to lose?", $51
+    db "Your LEAGUE", $4f
+    db "challenge ends", $55
+    db "with me, ", $52, "!", $57
+; 0x85d3c + 296 bytes
+
+_UnnamedText_5a3b3: ; 0x85e64
+    db $0, "That's it!", $51
+    db "I hate to admit", $4f
+    db "it, but you are a", $55
+    db "#MON master!", $58
+; 0x85e64 + 58 bytes
+INCBIN "baserom.gbc",$85e9e,$117
 
 _HallofFameRoomText1: ; 0x85fb5
     db $0, "OAK: Er-hem!", $4f
@@ -39522,16 +45474,358 @@ _HallofFameRoomText1: ; 0x85fb5
     db "your #MON are", $55
     db "HALL OF FAMERs!", $57
 
-INCBIN "baserom.gbc",$860e1,$863c1 - $860e1
+
+_UnnamedText_760f4: ; 0x860e1
+    db $0, $53, ": Hey!", $51
+    db "I was looking", $4f
+    db "forward to seeing", $55
+    db "you, ", $52, "!", $51
+    db "My rival should", $4f
+    db "be strong to keep", $55
+    db "me sharp!", $51
+    db "While working on", $4f
+    db "#DEX, I looked", $55
+    db "all over for", $55
+    db "powerful #MON!", $51
+    db "Not only that, I", $4f
+    db "assembled teams", $55
+    db "that would beat", $55
+    db "any #MON type!", $51
+    db "And now!", $51
+    db "I'm the #MON", $4f
+    db "LEAGUE champion!", $51
+    db $52, "! Do you", $4f
+    db "know what that", $55
+    db "means?", $51
+    db "I'll tell you!", $51
+    db "I am the most", $4f
+    db "powerful trainer", $55
+    db "in the world!", $57
+; 0x860e1 + 346 bytes
+
+_UnnamedText_760f9: ; 0x8623b
+    db $0, "NO!", $4f
+    db "That can't be!", $55
+    db "You beat my best!", $51
+    db "After all that", $4f
+    db "work to become", $55
+    db "LEAGUE champ?", $51
+    db "My reign is over", $4f
+    db "already?", $55
+    db "It's not fair!", $58
+; 0x8623b + 121 bytes
+
+_UnnamedText_760fe: ; 0x862b4
+    db $0, "Hahaha!", $4f
+    db "I won, I won!", $51
+    db "I'm too good for", $4f
+    db "you, ", $52, "!", $51
+    db "You did well to", $4f
+    db "even reach me,", $55
+    db $53, ", the", $55
+    db "#MON genius!", $51
+    db "Nice try, loser!", $4f
+    db "Hahaha!", $58
+; 0x862b4 + 123 bytes
+
+_UnnamedText_76103: ; 0x8632f
+    db $0, "Why?", $4f
+    db "Why did I lose?", $51
+    db "I never made any", $4f
+    db "mistakes raising", $55
+    db "my #MON...", $51
+    db "Darn it! You're", $4f
+    db "the new #MON", $55
+    db "LEAGUE champion!", $51
+    db "Although I don't", $4f
+    db "like to admit it.", $57
+; 0x8632f + 146 bytes
+INCBIN "baserom.gbc",$863c1,$0
 
 _GaryText2: ; 0x863c1
     db $0, "OAK: ", $52, "!", $57
 
-INCBIN "baserom.gbc",$863ca,$86ca1-$863ca
+INCBIN "baserom.gbc",$863ca,$86463 - $863ca
+
+_UnnamedText_76125: ; 0x86463
+    db $0, "OAK: ", $53, "! I'm", $4f
+    db "disappointed!", $51
+    db "I came when I", $4f
+    db "heard you beat", $55
+    db "the ELITE FOUR!", $51
+    db "But, when I got", $4f
+    db "here, you had", $55
+    db "already lost!", $51
+    db $53, "! Do you", $4f
+    db "understand why", $55
+    db "you lost?", $51
+    db "You have forgotten", $4f
+    db "to treat your", $55
+    db "#MON with", $55
+    db "trust and love!", $51
+    db "Without them, you", $4f
+    db "will never become", $55
+    db "a champ again!", $57
+; 0x86463 + 260 bytes
+
+_UnnamedText_7612a: ; 0x86567
+    db $0, "OAK: ", $52, "!", $51
+    db "You understand", $4f
+    db "that your victory", $55
+    db "was not just your", $55
+    db "own doing!", $51
+    db "The bond you share", $4f
+    db "with your #MON", $55
+    db "is marvelous!", $51
+    db $52, "!", $4f
+    db "Come with me!", $57
+; 0x86567 + 136 bytes
+
+_UnnamedText_7626c: ; 0x865ef
+    db $0, "Welcome to", $4f
+    db "#MON LEAGUE!", $51
+    db "I am LORELEI of", $4f
+    db "the ELITE FOUR!", $51
+    db "No one can best", $4f
+    db "me when it comes", $55
+    db "to icy #MON!", $51
+    db "Freezing moves", $4f
+    db "are powerful!", $51
+    db "Your #MON will", $4f
+    db "be at my mercy", $55
+    db "when they are", $55
+    db "frozen solid!", $51
+    db "Hahaha!", $4f
+    db "Are you ready?", $57
+; 0x865ef + 213 bytes
+
+_UnnamedText_76271: ; 0x866c4
+    db $0, "How", $4f
+    db "dare you!", $58
+; 0x866c4 + 15 bytes
+
+_UnnamedText_76276: ; 0x866d3
+    db $0, "You're better", $4f
+    db "than I thought!", $55
+    db "Go on ahead!", $51
+    db "You only got a", $4f
+    db "taste of #MON", $55
+    db "LEAGUE power!", $57
+; 0x866d3 + 86 bytes
+
+_UnnamedText_7627b: ; 0x86729
+    db $0, "Someone's voice:", $4f
+    db "Don't run away!", $57
+; 0x86729 + 32 bytes
+
+_UnnamedText_763c3: ; 0x86749
+    db $0, "I am BRUNO of", $4f
+    db "the ELITE FOUR!", $51
+    db "Through rigorous", $4f
+    db "training, people", $55
+    db "and #MON can", $55
+    db "become stronger!", $51
+    db "I've weight", $4f
+    db "trained with", $55
+    db "my #MON!", $51
+    db $52, "!", $51
+    db "We will grind you", $4f
+    db "down with our", $55
+    db "superior power!", $51
+    db "Hoo hah!", $57
+; 0x86749 + 188 bytes
+
+_UnnamedText_763c8: ; 0x86805
+    db $0, "Why?", $4f
+    db "How could I lose?", $58
+; 0x86805 + 24 bytes
+
+_UnnamedText_763cd: ; 0x8681d
+    db $0, "My job is done!", $4f
+    db "Go face your next", $55
+    db "challenge!", $57
+; 0x8681d + 46 bytes
+
+_UnnamedText_763d2: ; 0x8684b
+    db $0, "Someone's voice:", $4f
+    db "Don't run away!", $57
+; 0x8684b + 32 bytes
+INCBIN "baserom.gbc",$8686b,$0
+
+_UnnamedText_76520: ; 0x8686b
+    db $0, "I am AGATHA of", $4f
+    db "the ELITE FOUR!", $51
+    db "OAK's taken a lot", $4f
+    db "of interest in", $55
+    db "you, child!", $51
+    db "That old duff was", $4f
+    db "once tough and", $55
+    db "handsome! That", $55
+    db "was decades ago!", $51
+    db "Now he just wants", $4f
+    db "to fiddle with", $55
+    db "his #DEX! He's", $55
+    db "wrong! #MON", $55
+    db "are for fighting!", $51
+    db $52, "! I'll show", $4f
+    db "you how a real", $55
+    db "trainer fights!", $57
+; 0x8686b + 261 bytes
+
+_UnnamedText_76525: ; 0x86970
+    db $0, "Oh ho!", $4f
+    db "You're something", $55
+    db "special, child!", $58
+; 0x86970 + 40 bytes
+
+_UnnamedText_7652a: ; 0x86998
+    db $0, "You win! I see", $4f
+    db "what the old duff", $55
+    db "sees in you now!", $51
+    db "I have nothing", $4f
+    db "else to say! Run", $55
+    db "along now, child!", $57
+; 0x86998 + 101 bytes
+
+_UnnamedText_7652f: ; 0x869fd
+    db $0, "Someone's voice:", $4f
+    db "Don't run away!", $57
+; 0x869fd + 32 bytes
+
+_UnnamedText_460c5: ; 0x86a1d
+    db $0, "Hikers leave twigs", $4f
+    db "as trail markers.", $57
+; 0x86a1d + 38 bytes
+
+_UnnamedText_460ca: ; 0x86a43
+    db $0, "Ohhh!", $4f
+    db "I did my best!", $58
+; 0x86a43 + 22 bytes
+
+_UnnamedText_460cf: ; 0x86a59
+    db $0, "I want to go ", $4f
+    db "home!", $57
+; 0x86a59 + 21 bytes
+
+_UnnamedText_460d4: ; 0x86a6e
+    db $0, "Hahaha! Can you", $4f
+    db "beat my power?", $57
+; 0x86a6e + 32 bytes
+
+_UnnamedText_460d9: ; 0x86a8e
+    db $0, "Oops!", $4f
+    db "Out-muscled!", $58
+; 0x86a8e + 20 bytes
+
+_UnnamedText_460de: ; 0x86aa2
+    db $0, "I go for power", $4f
+    db "because I hate", $55
+    db "thinking!", $57
+; 0x86aa2 + 41 bytes
+
+_UnnamedText_460e3: ; 0x86acb
+    db $0, "You have a", $4f
+    db "#DEX?", $55
+    db "I want one too!", $57
+; 0x86acb + 34 bytes
+
+_UnnamedText_460e8: ; 0x86aed
+    db $0, "Shoot!", $4f
+    db "I'm so jealous!", $58
+; 0x86aed + 23 bytes
+
+_UnnamedText_460ed: ; 0x86b04
+    db $0, "When you finish", $4f
+    db "your #DEX, can", $55
+    db "I have it?", $57
+; 0x86b04 + 43 bytes
+
+_UnnamedText_460f2: ; 0x86b2f
+    db $0, "Do you know about", $4f
+    db "costume players?", $57
+; 0x86b2f + 36 bytes
+
+_UnnamedText_460f7: ; 0x86b53
+    db $0, "Well,", $4f
+    db "that's that.", $58
+; 0x86b53 + 19 bytes
+
+_UnnamedText_460fc: ; 0x86b66
+    db $0, "Costume players", $4f
+    db "dress up as", $55
+    db "#MON for fun.", $57
+; 0x86b66 + 43 bytes
+
+_UnnamedText_46101: ; 0x86b91
+    db $0, "My #MON", $4f
+    db "techniques will", $55
+    db "leave you crying!", $57
+; 0x86b91 + 43 bytes
+
+_UnnamedText_46106: ; 0x86bbc
+    db $0, "I give!", $4f
+    db "You're a better", $55
+    db "technician!", $58
+; 0x86bbc + 36 bytes
+
+_UnnamedText_4610b: ; 0x86be0
+    db $0, "In mountains,", $4f
+    db "you'll often find", $55
+    db "rock-type #MON.", $57
+; 0x86be0 + 48 bytes
+
+_UnnamedText_46110: ; 0x86c10
+    db $0, "I don't often", $4f
+    db "come here, but I", $55
+    db "will fight you.", $57
+; 0x86c10 + 47 bytes
+
+_UnnamedText_46115: ; 0x86c3f
+    db $0, "Oh!", $4f
+    db "I lost!", $58
+; 0x86c3f + 13 bytes
+
+_UnnamedText_4611a: ; 0x86c4c
+    db $0, "I like tiny", $4f
+    db "#MON, big ones", $55
+    db "are too scary!", $57
+; 0x86c4c + 43 bytes
+
+_UnnamedText_4611f: ; 0x86c77
+    db $0, "Hit me with your", $4f
+    db "best shot!", $57
+; 0x86c77 + 29 bytes
+
+_UnnamedText_46124: ; 0x86c94
+    db $0, "Fired", $4f
+    db "away!", $58
+; 0x86c94 + 13 bytes
+INCBIN "baserom.gbc",$86ca1,$0
 
 SECTION "bank22",DATA,BANK[$22]
 
-INCBIN "baserom.gbc",$88000,$8807e - $88000
+
+_UnnamedText_46129: ; 0x88000
+    db $0, "I'll raise my", $4f
+    db "#MON to beat", $55
+    db "yours, kid!", $57
+; 0x88000 + 39 bytes
+
+_UnnamedText_4612e: ; 0x88027
+    db $0, "I draw #MON", $4f
+    db "when I'm home.", $57
+; 0x88027 + 27 bytes
+
+_UnnamedText_46133: ; 0x88042
+    db $0, "Whew!", $4f
+    db "I'm exhausted!", $58
+; 0x88042 + 21 bytes
+
+_UnnamedText_46138: ; 0x88057
+    db $0, "I'm an artist,", $4f
+    db "not a fighter.", $57
+; 0x88057 + 30 bytes
+INCBIN "baserom.gbc",$88075,$9
 
 _SeafoamIslands5Text4: ; 0x8807e
     db $0, "Boulders might", $4f
@@ -39557,7 +45851,426 @@ _AIBattleUseItemText:
 	dw $CFDA
 	db 0,"!",$58
 
-INCBIN "baserom.gbc",$880EF,$89784 - $880EF
+
+_UnnamedText_4160c: ; 0x880ef
+    TX_RAM $cf4b
+    db $0, " went", $4f
+    db "to @"
+; 0x880ef + 14 bytes
+INCBIN "baserom.gbc",$880fd,$88103 - $880fd
+
+_UnnamedText_41623: ; 0x88103
+    db $0, "For ", $52, "'s", $4f
+    db "@"
+; 0x88103 + 9 bytes
+INCBIN "baserom.gbc",$8810c,$88112 - $8810c
+
+_UnnamedText_41628: ; 0x88112
+    TX_RAM $d887
+    db $0, " sends", $4f
+    db "@"
+; 0x88112 + 12 bytes
+INCBIN "baserom.gbc",$8811e,$88124 - $8811e
+
+_UnnamedText_41642: ; 0x88124
+    TX_RAM $d887
+    db $0, " waves", $4f
+    db "farewell as", $57
+; 0x88124 + 23 bytes
+
+_UnnamedText_41647: ; 0x8813b
+    TX_RAM $cd6d
+    db $0, " is", $4f
+    db "transferred.", $57
+; 0x8813b + 21 bytes
+
+_UnnamedText_41655: ; 0x88150
+    db $0, "Take good care of", $4f
+    db "@"
+; 0x88150 + 20 bytes
+INCBIN "baserom.gbc",$88164,$8816a - $88164
+
+_UnnamedText_4166c: ; 0x8816a
+    TX_RAM $d887
+    db $0, " will", $4f
+    db "trade @"
+; 0x8816a + 17 bytes
+INCBIN "baserom.gbc",$8817b,$88180 - $8817b
+
+_UnnamedText_41671: ; 0x88180
+    db $0, "for ", $52, "'s", $4f
+    db "@"
+; 0x88180 + 9 bytes
+INCBIN "baserom.gbc",$88189,$8818f - $88189
+
+_UnnamedText_37390: ; 0x8818f
+    db $0, "A slot machine!", $4f
+    db "Want to play?", $57
+; 0x8818f + 31 bytes
+
+_UnnamedText_37467: ; 0x881ae
+    db $0, "Darn!", $4f
+    db "Ran out of coins!", $57
+; 0x881ae + 25 bytes
+
+_UnnamedText_3746c: ; 0x881c7
+    db $0, "Bet how many", $4f
+    db "coins?", $57
+; 0x881c7 + 21 bytes
+
+_UnnamedText_37471: ; 0x881dc
+    db $0, "Start!", $57
+; 0x881dc + 8 bytes
+
+_UnnamedText_37476: ; 0x881e4
+    db $0, "Not enough", $4f
+    db "coins!", $58
+; 0x881e4 + 19 bytes
+
+_UnnamedText_3747b: ; 0x881f7
+    db $0, "One more ", $4f
+    db "go?", $57
+; 0x881f7 + 15 bytes
+
+_UnnamedText_37673: ; 0x88206
+    db $0, " lined up!", $4f
+    db "Scored @"
+; 0x88206 + 20 bytes
+INCBIN "baserom.gbc",$8821a,$88226 - $8821a
+
+_UnnamedText_3769d: ; 0x88226
+    db $0, "Not this time!", $58
+; 0x88226 + 16 bytes
+INCBIN "baserom.gbc",$88236,$3f
+
+_UnnamedText_62453: ; 0x88275
+    TX_RAM $cf5f
+    db $0, $4f
+    db "#MON GYM", $55
+    db "LEADER: @"
+; 0x88275 + 23 bytes
+INCBIN "baserom.gbc",$8828c,$882a5 - $8828c
+
+_UnnamedText_62458: ; 0x882a5
+    TX_RAM $cf5f
+    db $0, $4f
+    db "#MON GYM", $55
+    db "LEADER: @"
+; 0x882a5 + 23 bytes
+INCBIN "baserom.gbc",$882bc,$882d7 - $882bc
+
+_UnnamedText_624a3: ; 0x882d7
+    db $0, "#MON CENTERs", $4f
+    db "heal your tired,", $55
+    db "hurt or fainted", $55
+    db "#MON!", $57
+; 0x882d7 + 53 bytes
+
+_UnnamedText_624a8: ; 0x8830c
+    db $0, "Yawn!", $51
+    db "When JIGGLYPUFF", $4f
+    db "sings, #MON", $55
+    db "get drowsy...", $51
+    db "...Me too...", $4f
+    db "Snore...", $57
+; 0x8830c + 71 bytes
+
+_UnnamedText_624ad: ; 0x88353
+    db $0, "BILL has lots of", $4f
+    db "#MON!", $51
+    db "He collects rare", $4f
+    db "ones too!", $57
+; 0x88353 + 51 bytes
+
+_UnnamedText_624b2: ; 0x88386
+    db $0, "CUBONEs wear", $4f
+    db "skulls, right?", $51
+    db "People will pay a", $4f
+    db "lot for one!", $57
+; 0x88386 + 60 bytes
+
+_UnnamedText_624b7: ; 0x883c2
+    db $0, "If you have too", $4f
+    db "many #MON, you", $55
+    db "should store them", $55
+    db "via PC!", $57
+; 0x883c2 + 58 bytes
+
+_UnnamedText_624bc: ; 0x883fc
+    db $0, "I heard that", $4f
+    db "GHOSTs haunt", $55
+    db "LAVENDER TOWN!", $57
+; 0x883fc + 42 bytes
+
+_UnnamedText_624c1: ; 0x88426
+    db $0, "I wish I could", $4f
+    db "catch #MON.", $57
+; 0x88426 + 28 bytes
+
+_UnnamedText_624c6: ; 0x88442
+    db $0, "I'm tired from", $4f
+    db "all the fun...", $57
+; 0x88442 + 30 bytes
+
+_UnnamedText_624cb: ; 0x88460
+    db $0, "SILPH's manager", $4f
+    db "is hiding in the", $55
+    db "SAFARI ZONE.", $57
+; 0x88460 + 46 bytes
+
+_UnnamedText_624d0: ; 0x8848e
+    db $0, "It is true that a", $4f
+    db "higher level", $55
+    db "#MON will be", $55
+    db "more powerful...", $51
+    db "But, all #MON", $4f
+    db "will have weak", $55
+    db "points against", $55
+    db "specific types.", $51
+    db "So, there is no", $4f
+    db "universally", $55
+    db "strong #MON.", $57
+; 0x8848e + 163 bytes
+
+_UnnamedText_624d5: ; 0x88531
+    db $0, "If I had a BIKE,", $4f
+    db "I would go to", $55
+    db "CYCLING ROAD!", $57
+; 0x88531 + 46 bytes
+
+_UnnamedText_624da: ; 0x8855f
+    db $0, "If you're studying ", $4f
+    db "#MON, visit", $55
+    db "the SAFARI ZONE.", $51
+    db "It has all sorts", $4f
+    db "of rare #MON.", $57
+; 0x8855f + 80 bytes
+
+_UnnamedText_624df: ; 0x885af
+    db $0, "#MON can still", $4f
+    db "learn techniques", $55
+    db "after canceling", $55
+    db "evolution.", $51
+    db "Evolution can wait", $4f
+    db "until new moves", $55
+    db "have been learned.", $57
+; 0x885af + 114 bytes
+
+_UnnamedText_624f8: ; 0x88621
+    db $0, "It would be great", $4f
+    db "if the ELITE FOUR", $55
+    db "came and stomped", $55
+    db "TEAM ROCKET!", $57
+; 0x88621 + 67 bytes
+
+_UnnamedText_624fd: ; 0x88664
+    db $0, "TEAM ROCKET took", $4f
+    db "off! We can go", $55
+    db "out safely again!", $55
+    db "That's great!", $57
+; 0x88664 + 64 bytes
+
+_UnnamedText_62502: ; 0x886a4
+    db $0, "My sis brought me", $4f
+    db "on this vacation!", $57
+; 0x886a4 + 37 bytes
+
+_UnnamedText_62511: ; 0x886c9
+    db $0, "Crammed full of", $4f
+    db "#MON books!", $57
+; 0x886c9 + 29 bytes
+INCBIN "baserom.gbc",$886e6,$88b5b - $886e6
+
+_UnnamedText_2ff32: ; 0x88b5b
+    db $0, "A COIN CASE is", $4f
+    db "required!", $57
+; 0x88b5b + 26 bytes
+
+_UnnamedText_2ff37: ; 0x88b75
+    db $0, "You don't have", $4f
+    db "any coins!", $57
+; 0x88b75 + 26 bytes
+INCBIN "baserom.gbc",$88b8f,$0
+
+_UnnamedText_37e79: ; 0x88b8f
+    db $0, "OUT OF ORDER", $4f
+    db "This is broken.", $57
+; 0x88b8f + 30 bytes
+
+_UnnamedText_37e7e: ; 0x88bad
+    db $0, "OUT TO LUNCH", $4f
+    db "This is reserved.", $57
+; 0x88bad + 32 bytes
+
+_UnnamedText_37e83: ; 0x88bcd
+    db $0, "Someone's keys!", $4f
+    db "They'll be back.", $57
+; 0x88bcd + 32 bytes
+INCBIN "baserom.gbc",$88bed,$88c6f - $88bed
+
+_UnnamedText_529e9: ; 0x88c6f
+    db $0, "Turn the page?", $57
+; 0x88c6f + 16 bytes
+INCBIN "baserom.gbc",$88c7f,$88ca3 - $88c7f
+
+_UnnamedText_529f4: ; 0x88ca3
+    db $0, "Looked at the", $4f
+    db "notebook!", $51
+    db "First page...", $51
+    db "# BALLs are", $4f
+    db "used to catch", $55
+    db "#MON.", $51
+    db "Up to 6 #MON", $4f
+    db "can be carried.", $51
+    db "People who raise", $4f
+    db "and make #MON", $55
+    db "fight are called", $55
+    db "#MON trainers.", $58
+; 0x88ca3 + 163 bytes
+
+_UnnamedText_529f9: ; 0x88d46
+    db $0, "Second page...", $51
+    db "A healthy #MON", $4f
+    db "may be hard to", $55
+    db "catch, so weaken", $55
+    db "it first!", $51
+    db "Poison, burns and", $4f
+    db "other damage are", $55
+    db "effective!", $58
+; 0x88d46 + 119 bytes
+
+_UnnamedText_529fe: ; 0x88dbd
+    db $0, "Third page...", $51
+    db "#MON trainers", $4f
+    db "seek others to", $55
+    db "engage in #MON", $55
+    db "fights.", $51
+    db "Battles are", $4f
+    db "constantly fought", $55
+    db "at #MON GYMs.", $58
+; 0x88dbd + 111 bytes
+
+_UnnamedText_52a03: ; 0x88e2c
+    db $0, "Fourth page...", $51
+    db "The goal for", $4f
+    db "#MON trainers", $55
+    db "is to beat the ", $55
+    db "top 8 #MON", $55
+    db "GYM LEADERs.", $51
+    db "Do so to earn the", $4f
+    db "right to face...", $51
+    db "The ELITE FOUR of", $4f
+    db "#MON LEAGUE!", $58
+; 0x88e2c + 149 bytes
+
+_UnnamedText_52a10: ; 0x88ec1
+    db $0, "Enemies on every", $4f
+    db "side!", $57
+; 0x88ec1 + 24 bytes
+
+_UnnamedText_52a1d: ; 0x88ed9
+    db $0, "What goes around", $4f
+    db "comes around!", $57
+; 0x88ed9 + 32 bytes
+
+_UnnamedText_52a2a: ; 0x88ef9
+    db $0, "FIGHTING DOJO", $57
+; 0x88ef9 + 15 bytes
+
+_UnnamedText_52a3d: ; 0x88f08
+    db $0, "INDIGO PLATEAU", $4f
+    db "#MON LEAGUE HQ", $57
+; 0x88f08 + 31 bytes
+INCBIN "baserom.gbc",$88f27,$5ba
+
+_UnnamedText_76794: ; 0x894e1
+    db $0, "But, ", $52, " has", $4f
+    db "no more room for", $55
+    db "other items!", $57
+; 0x894e1 + 42 bytes
+INCBIN "baserom.gbc",$8950b,$8953b - $8950b
+
+_UnnamedText_76852: ; 0x8953b
+    db $0, $51
+    db "Oops! Dropped", $4f
+    db "some coins!", $57
+; 0x8953b + 28 bytes
+INCBIN "baserom.gbc",$89557,$89639 - $89557
+
+_UnnamedText_3c1a8: ; 0x89639
+    db $0, "PA: Ding-dong!", $51
+    db "You are out of", $4f
+    db "SAFARI BALLs!", $58
+; 0x89639 + 45 bytes
+
+_UnnamedText_3c229: ; 0x89666
+    db $0, "Wild @"
+; 0x89666 + 7 bytes
+INCBIN "baserom.gbc",$8966d,$89677 - $8966d
+
+_UnnamedText_3c22e: ; 0x89677
+    db $0, "Enemy @"
+; 0x89677 + 8 bytes
+INCBIN "baserom.gbc",$8967f,$89689 - $8967f
+
+_UnnamedText_3c42e: ; 0x89689
+    db $0, $5a, "'s", $4f
+    db "hurt by poison!", $58
+; 0x89689 + 20 bytes
+
+_UnnamedText_3c433: ; 0x8969d
+    db $0, $5a, "'s", $4f
+    db "hurt by the burn!", $58
+; 0x8969d + 22 bytes
+
+_UnnamedText_3c438: ; 0x896b3
+    db $0, "LEECH SEED saps", $4f
+    db $5a, "!", $58
+; 0x896b3 + 20 bytes
+
+_UnnamedText_3c63e: ; 0x896c7
+    db $0, "Enemy @"
+; 0x896c7 + 8 bytes
+INCBIN "baserom.gbc",$896cf,$896dd - $896cf
+
+_UnnamedText_3c6e4: ; 0x896dd
+    db $0, $52, " got ", $f0, "@"
+; 0x896dd + 9 bytes
+INCBIN "baserom.gbc",$896e6,$896f9 - $896e6
+
+_UnnamedText_3c6e9: ; 0x896f9
+    db $0, $52, " defeated", $4f
+    db "@"
+; 0x896f9 + 13 bytes
+INCBIN "baserom.gbc",$89706,$8970c - $89706
+
+_UnnamedText_3c796: ; 0x8970c
+    TX_RAM $d009
+    db $0, $4f
+    db "fainted!", $58
+; 0x8970c + 14 bytes
+
+_UnnamedText_3c7d3: ; 0x8971a
+    db $0, "Use next #MON?", $57
+; 0x8971a + 16 bytes
+
+_UnnamedText_3c884: ; 0x8972a
+    db $0, $53, ": Yeah! Am", $4f
+    db "I great or what?", $58
+; 0x8972a + 30 bytes
+
+_UnnamedText_3c889: ; 0x89748
+    db $0, $52, " is out of", $4f
+    db "useable #MON!", $51
+    db $52, " blacked", $4f
+    db "out!", $58
+; 0x89748 + 42 bytes
+
+_UnnamedText_3c88e: ; 0x89772
+    db $0, $52, " lost to", $4f
+    db "@"
+; 0x89772 + 12 bytes
+INCBIN "baserom.gbc",$8977e,$6
 
 _TrainerAboutToUseText:
 	db 1
@@ -39577,7 +46290,53 @@ _TrainerSentOutText:
 	dw $CFDA
 	db 0,"!",$57
 
-INCBIN "baserom.gbc",$897C9,$898AA - $897C9
+
+_UnnamedText_3cab4: ; 0x897c9
+    db $0, "There's no will", $4f
+    db "to fight!", $58
+; 0x897c9 + 26 bytes
+
+_UnnamedText_3cb97: ; 0x897e3
+    db $0, "Can't escape!", $58
+; 0x897e3 + 14 bytes
+
+_UnnamedText_3cb9c: ; 0x897f1
+    db $0, "No! There's no", $4f
+    db "running from a", $55
+    db "trainer battle!", $58
+; 0x897f1 + 46 bytes
+
+_UnnamedText_3cba1: ; 0x8981f
+    db $0, "Got away safely!", $58
+; 0x8981f + 18 bytes
+
+_UnnamedText_3d0c5: ; 0x89831
+    db $0, "Items can't be", $4f
+    db "used here.", $58
+; 0x89831 + 26 bytes
+
+_UnnamedText_3d1f5: ; 0x8984b
+    TX_RAM $d009
+    db $0, " is", $4f
+    db "already out!", $58
+; 0x8984b + 21 bytes
+
+_UnnamedText_3d3ae: ; 0x89860
+    db $0, "No PP left for", $4f
+    db "this move!", $58
+; 0x89860 + 27 bytes
+
+_UnnamedText_3d3b3: ; 0x8987b
+    db $0, "The move is", $4f
+    db "disabled!", $58
+; 0x8987b + 23 bytes
+
+_UnnamedText_3d430: ; 0x89892
+    TX_RAM $d009
+    db $0, " has no", $4f
+    db "moves left!", $57
+; 0x89892 + 24 bytes
+INCBIN "baserom.gbc",$898aa,$0
 
 _MultiHitText:
 	db 0,"Hit the enemy",$4F,"@"
@@ -39654,7 +46413,58 @@ _CantMoveText:
 	db 0,$5A,$4F
 	db "can't move!",$58
 
-INCBIN "baserom.gbc",$89A29,$8A28E - $89A29
+INCBIN "baserom.gbc",$89a29,$89d22 - $89a29
+
+_UnnamedText_2fb8e: ; 0x89d22
+    db $0, "It's super", $4f
+    db "effective!", $58
+; 0x89d22 + 22 bytes
+
+_UnnamedText_2fb93: ; 0x89d38
+    db $0, "It's not very", $4f
+    db "effective...", $58
+; 0x89d38 + 27 bytes
+INCBIN "baserom.gbc",$89d53,$89d80 - $89d53
+
+_UnnamedText_1386b: ; 0x89d80
+    db $0, $52, " picked up", $4f
+    db $f0, "@"
+; 0x89d80 + 15 bytes
+INCBIN "baserom.gbc",$89d8f,$89efe - $89d8f
+
+_UnnamedText_17f23: ; 0x89efe
+    db $0, $52, " turned on", $4f
+    db "the PC.", $58
+; 0x89efe + 21 bytes
+
+_UnnamedText_17f28: ; 0x89f13
+    db $0, "Accessed BILL's", $4f
+    db "PC.", $51
+    db "Accessed #MON", $4f
+    db "Storage System.", $58
+; 0x89f13 + 50 bytes
+
+_UnnamedText_17f2d: ; 0x89f45
+    db $0, "Accessed someone's", $4f
+    db "PC.", $51
+    db "Accessed #MON", $4f
+    db "Storage System.", $58
+; 0x89f45 + 53 bytes
+
+_UnnamedText_17f32: ; 0x89f7a
+    db $0, "Accessed my PC.", $51
+    db "Accessed Item", $4f
+    db "Storage System.", $58
+; 0x89f7a + 47 bytes
+INCBIN "baserom.gbc",$89fa9,$14b
+
+_UnnamedText_76683: ; 0x8a0f4
+    db $0, "Accessed #MON", $4f
+    db "LEAGUE's site.", $51
+    db "Accessed the HALL", $4f
+    db "OF FAME List.", $58
+; 0x8a0f4 + 61 bytes
+INCBIN "baserom.gbc",$8a131,$15d
 
 _RequireCoinCaseText: ; 22:628E
         db 0,"A COIN CASE is",$4F
@@ -39690,11 +46500,52 @@ _OhFineThenText: ; 22:634C
         db 0,"Oh, fine then.@@"
 ;635d
 
-INCBIN "baserom.gbc",$8A35D,$8A425 - $8A35D
+INCBIN "baserom.gbc",$8a35d,$8a3d0 - $8a35d
+
+_UnnamedText_5d43: ; 0x8a3d0
+    db $0, "Where would you", $4f
+    db "like to go?", $57
+; 0x8a3d0 + 29 bytes
+
+_UnnamedText_5d48: ; 0x8a3ed
+    db $0, "OK, please wait", $4f
+    db "just a moment.", $57
+; 0x8a3ed + 32 bytes
+
+_UnnamedText_5d4d: ; 0x8a40d
+    db $0, "The link was", $4f
+    db "canceled.", $57
+; 0x8a40d + 24 bytes
+INCBIN "baserom.gbc",$8a425,$0
 
 INCLUDE "text/oakspeech.tx"
 
-INCBIN "baserom.gbc",$8A605,$6696 - $6605
+
+_UnnamedText_6557: ; 0x8a605
+    db $0, "Do you want to", $4f
+    db "give a nickname", $55
+    db "to @"
+; 0x8a605 + 36 bytes
+INCBIN "baserom.gbc",$8a629,$8a62f - $8a629
+
+_UnnamedText_699f: ; 0x8a62f
+    db $0, "Right! So your", $4f
+    db "name is ", $52, "!", $58
+; 0x8a62f + 27 bytes
+
+_UnnamedText_69e7: ; 0x8a64a
+    db $0, "That's right! I", $4f
+    db "remember now! His", $55
+    db "name is ", $53, "!", $58
+; 0x8a64a + 45 bytes
+INCBIN "baserom.gbc",$8a677,$0
+
+_UnnamedText_5a24: ; 0x8a677
+    TX_RAM $cd3f
+    db $0, " and", $4f
+    db "@"
+; 0x8a677 + 10 bytes
+INCBIN "baserom.gbc",$8a681,$15
 
 _Char00Text:
 	TX_NUM $FF8C,1,2
@@ -39767,16 +46618,118 @@ _MtMoonPokecenterText3: ; 0x8a929
     db "always in the", $55
     db "news!", $57
 
-INCBIN "baserom.gbc",$8a976,$8aa5a - $8a976
+
+_UnnamedText_4935c: ; 0x8a976
+    db $0, "MAN: Hello, there!", $4f
+    db "Have I got a deal", $55
+    db "just for you!", $51
+    db "I'll let you have", $4f
+    db "a swell MAGIKARP", $55
+    db "for just ", $f0, "500!", $55
+    db "What do you say?", $57
+; 0x8a976 + 118 bytes
+
+_UnnamedText_49361: ; 0x8a9ec
+    db $0, "No? I'm only", $4f
+    db "doing this as a", $55
+    db "favor to you!", $57
+; 0x8a9ec + 43 bytes
+
+_UnnamedText_49366: ; 0x8aa17
+    db $0, "You'll need more", $4f
+    db "money than that!", $57
+; 0x8aa17 + 34 bytes
+
+_UnnamedText_4936b: ; 0x8aa39
+    db $0, "MAN: Well, I don't", $4f
+    db "give refunds!", $57
+; 0x8aa39 + 33 bytes
+INCBIN "baserom.gbc",$8aa5a,$0
 
 _MtMoonPokecenterText5: ; 0x8aa5a
     db $0, $57
 
-INCBIN "baserom.gbc",$8aa5c,$8acf9-$8aa5c
+INCBIN "baserom.gbc",$8aa5c,$8ab95 - $8aa5c
+
+_UnnamedText_5640f: ; 0x8ab95
+    db $0, "I run a DAYCARE.", $4f
+    db "Would you like me", $55
+    db "to raise one of", $55
+    db "your #MON?", $57
+; 0x8ab95 + 63 bytes
+
+_UnnamedText_56414: ; 0x8abd4
+    db $0, "Which #MON", $4f
+    db "should I raise?", $58
+; 0x8abd4 + 28 bytes
+
+_UnnamedText_56419: ; 0x8abf0
+    db $0, "Fine, I'll look", $4f
+    db "after @"
+; 0x8abf0 + 23 bytes
+INCBIN "baserom.gbc",$8ac07,$8ac19 - $8ac07
+
+_UnnamedText_5641e: ; 0x8ac19
+    db $0, "Come see me in", $4f
+    db "a while.", $57
+; 0x8ac19 + 25 bytes
+
+_UnnamedText_56423: ; 0x8ac32
+    db $0, "Your @"
+; 0x8ac32 + 7 bytes
+INCBIN "baserom.gbc",$8ac39,$8ac7d - $8ac39
+
+_UnnamedText_56428: ; 0x8ac7d
+    db $0, "You owe me ", $f0, "@"
+; 0x8ac7d + 14 bytes
+INCBIN "baserom.gbc",$8ac8b,$8acae - $8ac8b
+
+_UnnamedText_5642d: ; 0x8acae
+    db $0, $52, " got", $4f
+    db "@"
+; 0x8acae + 8 bytes
+INCBIN "baserom.gbc",$8acb6,$8acc1 - $8acb6
+
+_UnnamedText_56432: ; 0x8acc1
+    db $0, "Back already?", $4f
+    db "Your @"
+; 0x8acc1 + 21 bytes
+INCBIN "baserom.gbc",$8acd6,$23
 
 SECTION "bank23",DATA,BANK[$23]
 
-INCBIN "baserom.gbc",$8c000,$8c0cb - $8c000
+INCBIN "baserom.gbc",$8c000,$8c013 - $8c000
+
+_UnnamedText_5643b: ; 0x8c013
+    db $0, "come again.", $57
+; 0x8c013 + 13 bytes
+
+_UnnamedText_56440: ; 0x8c020
+    db $0, "You have no room", $4f
+    db "for this #MON!", $57
+; 0x8c020 + 33 bytes
+
+_UnnamedText_56445: ; 0x8c041
+    db $0, "You only have one", $4f
+    db "#MON with you.", $57
+; 0x8c041 + 34 bytes
+
+_UnnamedText_5644a: ; 0x8c063
+    db $0, "I can't accept a", $4f
+    db "#MON that", $55
+    db "knows an HM move.", $57
+; 0x8c063 + 45 bytes
+
+_UnnamedText_5644f: ; 0x8c090
+    db $0, "Thank you! Here's", $4f
+    db "your #MON!", $58
+; 0x8c090 + 29 bytes
+
+_UnnamedText_56454: ; 0x8c0ad
+    db $0, "Hey, you don't", $4f
+    db "have enough ", $f0, "!", $57
+; 0x8c0ad + 30 bytes
+INCBIN "baserom.gbc",$8c0cb,$0
 
 _UndergroundTunnelEntranceRoute6Text1: ; 0x8c0cb
     db $0, "People often lose", $4f
@@ -39788,7 +46741,40 @@ _UndergroundPathEntranceRoute7Text1: ; 0x8c0ff
     db "#MON appeared", $55
     db "near CELADON CITY.", $57
 
-INCBIN "baserom.gbc",$8c132,$8c28d - $8c132
+
+_UnnamedText_5d773: ; 0x8c132
+    db $0, "I want to shop at", $4f
+    db "the dept. store", $55
+    db "in CELADON but...", $51
+    db "There are so many", $4f
+    db "rough looking", $55
+    db "people there.", $57
+; 0x8c132 + 99 bytes
+
+_UnnamedText_5d778: ; 0x8c195
+    db $0, "TEAM ROCKET had a", $4f
+    db "secret hideout in", $55
+    db "CELADON CITY?", $57
+; 0x8c195 + 51 bytes
+
+_UnnamedText_5d77d: ; 0x8c1c8
+    db $0, "You're here to", $4f
+    db "shop in CELADON?", $51
+    db "Just step outside", $4f
+    db "and head west!", $57
+; 0x8c1c8 + 65 bytes
+
+_UnnamedText_5d782: ; 0x8c209
+    db $0, "The UNDERGROUND", $4f
+    db "PATH goes beneath", $55
+    db "SAFFRON and leads", $55
+    db "to LAVENDER.", $51
+    db "If you're heading", $4f
+    db "to CERULEAN, go", $55
+    db "to the building", $55
+    db "across the road.", $57
+; 0x8c209 + 132 bytes
+INCBIN "baserom.gbc",$8c28d,$0
 
 _UndergroundPathEntranceRoute8Text1: ; 0x8c28d
     db $0, "The dept. store", $4f
@@ -39828,7 +46814,43 @@ _Route11GateText1: ; 0x8c5f3
     db "He'll help you", $4f
     db "rename them too!", $57
 
-INCBIN "baserom.gbc",$8c689,$8c7f9 - $8c689
+
+_UnnamedText_494a3: ; 0x8c689
+    db $0, "There are items on", $4f
+    db "the ground that", $55
+    db "can't be seen.", $51
+    db "ITEMFINDER will", $4f
+    db "detect an item", $55
+    db "close to you.", $51
+    db "It can't pinpoint", $4f
+    db "it, so you have", $55
+    db "to look yourself!", $57
+; 0x8c689 + 146 bytes
+
+_UnnamedText_494c4: ; 0x8c71b
+    db $0, "Looked into the", $4f
+    db "binoculars.", $51
+    db "A big #MON is", $4f
+    db "asleep on a road!", $57
+; 0x8c71b + 61 bytes
+
+_UnnamedText_494c9: ; 0x8c758
+    db $0, "Looked into the", $4f
+    db "binoculars.", $51
+    db "It's a beautiful", $4f
+    db "view!", $57
+; 0x8c758 + 51 bytes
+
+_UnnamedText_494d5: ; 0x8c78b
+    db $0, "Looked into the", $4f
+    db "binoculars.", $51
+    db "The only way to", $4f
+    db "get from CERULEAN", $55
+    db "CITY to LAVENDER", $55
+    db "is by way of the", $55
+    db "ROCK TUNNEL.", $57
+; 0x8c78b + 110 bytes
+INCBIN "baserom.gbc",$8c7f9,$0
 
 _DiglettsCaveEntranceRoute11Text1: ; 0x8c7f9
     db $0, "What a surprise!", $4f
@@ -39841,7 +46863,82 @@ _Route12GateText1: ; 0x8c84a
     db $0, "There's a lookout", $4f
     db "spot upstairs.", $57
 
-INCBIN "baserom.gbc",$8c86b,$8cb73 - $8c86b
+
+_UnnamedText_4959c: ; 0x8c86b
+    db $0, "My #MON's", $4f
+    db "ashes are stored", $55
+    db "in #MON TOWER.", $51
+    db "You can have this", $4f
+    db "TM. I don't need", $55
+    db "it any more...", $58
+; 0x8c86b + 91 bytes
+INCBIN "baserom.gbc",$8c8c6,$8c8d9 - $8c8c6
+
+_UnnamedText_495a7: ; 0x8c8d9
+    db $0, "TM39 is a move", $4f
+    db "called SWIFT.", $51
+    db "It's very accurate,", $4f
+    db "so use it during", $55
+    db "battles you can't", $55
+    db "afford to lose.", $57
+; 0x8c8d9 + 99 bytes
+
+_UnnamedText_495ac: ; 0x8c93c
+    db $0, "You don't have", $4f
+    db "room for this.", $57
+; 0x8c93c + 30 bytes
+INCBIN "baserom.gbc",$8c95a,$8c986 - $8c95a
+
+_UnnamedText_495c4: ; 0x8c986
+    db $0, "Looked into the", $4f
+    db "binoculars.", $51
+    db "It's #MON TOWER!", $57
+; 0x8c986 + 45 bytes
+
+_UnnamedText_564c0: ; 0x8c9b3
+    db $0, "I'm the FISHING", $4f
+    db "GURU's brother!", $51
+    db "I simply Looove", $4f
+    db "fishing!", $51
+    db "Do you like to", $4f
+    db "fish?", $57
+; 0x8c9b3 + 77 bytes
+INCBIN "baserom.gbc",$8ca00,$8ca4f - $8ca00
+
+_UnnamedText_564ca: ; 0x8ca4f
+    db $0, $51
+    db "Fishing is a way", $4f
+    db "of life!", $51
+    db "From the seas to", $4f
+    db "rivers, go out", $55
+    db "and land the big", $55
+    db "one!", $57
+; 0x8ca4f + 82 bytes
+
+_UnnamedText_564cf: ; 0x8caa1
+    db $0, "Oh... That's so", $4f
+    db "disappointing...", $57
+; 0x8caa1 + 33 bytes
+
+_UnnamedText_564d4: ; 0x8cac2
+    db $0, "Hello there,", $4f
+    db $52, "!", $51
+    db "Use the SUPER ROD", $4f
+    db "in any water!", $55
+    db "You can catch", $55
+    db "different kinds", $55
+    db "of #MON.", $51
+    db "Try fishing", $4f
+    db "wherever you can!", $57
+; 0x8cac2 + 118 bytes
+
+_UnnamedText_564d9: ; 0x8cb38
+    db $0, "Oh no!", $51
+    db "I had a gift for", $4f
+    db "you, but you have", $55
+    db "no room for it!", $57
+; 0x8cb38 + 59 bytes
+INCBIN "baserom.gbc",$8cb73,$0
 
 _Route15GateText1: ; 0x8cb73
     db $0, "Are you working", $4f
@@ -39849,13 +46946,186 @@ _Route15GateText1: ; 0x8cb73
     db "PROF.OAK's AIDE", $4f
     db "came by here.", $57
 
-INCBIN "baserom.gbc",$8cbac,$8cd2a - $8cbac
+
+_UnnamedText_4968c: ; 0x8cbac
+    db $0, "EXP.ALL gives", $4f
+    db "EXP points to all", $55
+    db "the #MON with", $55
+    db "you, even if they", $55
+    db "don't fight.", $51
+    db "It does, however,", $4f
+    db "reduce the amount", $55
+    db "of EXP for each", $55
+    db "#MON.", $51
+    db "If you don't need", $4f
+    db "it, you should ", $55
+    db "store it via PC.", $57
+; 0x8cbac + 185 bytes
+
+_UnnamedText_49698: ; 0x8cc65
+    db $0, "Looked into the", $4f
+    db "binoculars.", $51
+    db "It looks like a", $4f
+    db "small island!", $57
+; 0x8cc65 + 59 bytes
+
+_UnnamedText_49777: ; 0x8cca0
+    db $0, "No pedestrians", $4f
+    db "are allowed on", $55
+    db "CYCLING ROAD!", $57
+; 0x8cca0 + 45 bytes
+
+_UnnamedText_4977c: ; 0x8cccd
+    db $0, "CYCLING ROAD is a", $4f
+    db "downhill course", $55
+    db "by the sea. It's", $55
+    db "a great ride.", $57
+; 0x8cccd + 65 bytes
+
+_UnnamedText_49781: ; 0x8cd0e
+    db $0, "Excuse me! Wait", $4f
+    db "up please!", $57
+; 0x8cd0e + 28 bytes
+INCBIN "baserom.gbc",$8cd2a,$0
 
 _Route16GateMapText2: ; 0x8cd2a
     db $0, "How'd you get in?", $4f
     db "Good effort!", $57
 
-INCBIN "baserom.gbc",$8cd49,$956
+
+_UnnamedText_49820: ; 0x8cd49
+    db $0, "I'm going for a", $4f
+    db "ride with my girl", $55
+    db "friend!", $57
+; 0x8cd49 + 42 bytes
+INCBIN "baserom.gbc",$8cd73,$0
+
+_UnnamedText_4982f: ; 0x8cd73
+    db $0, "We're going", $4f
+    db "riding together!", $57
+; 0x8cd73 + 29 bytes
+
+_UnnamedText_4983b: ; 0x8cd90
+    db $0, "Looked into the", $4f
+    db "binoculars.", $51
+    db "It's CELADON DEPT.", $4f
+    db "STORE!", $57
+; 0x8cd90 + 54 bytes
+
+_UnnamedText_49847: ; 0x8cdc6
+    db $0, "Looked into the", $4f
+    db "binoculars.", $51
+    db "There's a long", $4f
+    db "path over water!", $57
+; 0x8cdc6 + 60 bytes
+
+_UnnamedText_1e62b: ; 0x8ce02
+    db $0, "Oh, you found my", $4f
+    db "secret retreat!", $51
+    db "Please don't tell", $4f
+    db "anyone I'm here.", $55
+    db "I'll make it up", $55
+    db "to you with this!", $58
+; 0x8ce02 + 100 bytes
+INCBIN "baserom.gbc",$8ce66,$8ce79 - $8ce66
+
+_UnnamedText_1e636: ; 0x8ce79
+    db $0, "HM02 is FLY.", $4f
+    db "It will take you", $55
+    db "back to any town.", $51
+    db "Put it to good", $4f
+    db "use!", $57
+; 0x8ce79 + 69 bytes
+
+_UnnamedText_1e63b: ; 0x8cebe
+    db $0, "You don't have any", $4f
+    db "room for this.", $57
+; 0x8cebe + 34 bytes
+INCBIN "baserom.gbc",$8cee0,$197
+
+_UnnamedText_518ca: ; 0x8d077
+    db $0, "VICTORY ROAD is", $4f
+    db "the final test", $55
+    db "for trainers!", $57
+; 0x8d077 + 46 bytes
+
+_UnnamedText_518cf: ; 0x8d0a5
+    db $0, "Aiyah!", $58
+; 0x8d0a5 + 8 bytes
+
+_UnnamedText_518d4: ; 0x8d0ad
+    db $0, "If you get stuck,", $4f
+    db "try moving some", $55
+    db "boulders around!", $57
+; 0x8d0ad + 52 bytes
+
+_UnnamedText_518d9: ; 0x8d0e1
+    db $0, "Ah, so you wish", $4f
+    db "to challenge the", $55
+    db "ELITE FOUR?", $57
+; 0x8d0e1 + 46 bytes
+
+_UnnamedText_518de: ; 0x8d10f
+    db $0, "You", $4f
+    db "got me!", $58
+; 0x8d10f + 13 bytes
+
+_UnnamedText_518e3: ; 0x8d11c
+    db $0, $53, " also came", $4f
+    db "through here!", $57
+; 0x8d11c + 27 bytes
+
+_UnnamedText_518e8: ; 0x8d137
+    db $0, "Come on!", $4f
+    db "I'll whip you!", $57
+; 0x8d137 + 24 bytes
+
+_UnnamedText_518ed: ; 0x8d14f
+    db $0, "I got", $4f
+    db "whipped!", $58
+; 0x8d14f + 16 bytes
+
+_UnnamedText_518f2: ; 0x8d15f
+    db $0, "You earned the", $4f
+    db "right to be on", $55
+    db "VICTORY ROAD!", $57
+; 0x8d15f + 45 bytes
+
+_UnnamedText_518f7: ; 0x8d18c
+    db $0, "If you can get", $4f
+    db "through here, you", $55
+    db "can go meet the", $55
+    db "ELITE FOUR!", $57
+; 0x8d18c + 62 bytes
+
+_UnnamedText_518fc: ; 0x8d1ca
+    db $0, "No!", $4f
+    db "Unbelievable!", $58
+; 0x8d1ca + 19 bytes
+
+_UnnamedText_51901: ; 0x8d1dd
+    db $0, "I can beat you", $4f
+    db "when it comes to", $55
+    db "knowledge about", $55
+    db "#MON!", $57
+; 0x8d1dd + 55 bytes
+
+_UnnamedText_51906: ; 0x8d214
+    db $0, "Is VICTORY ROAD", $4f
+    db "too tough?", $57
+; 0x8d214 + 28 bytes
+
+_UnnamedText_5190b: ; 0x8d230
+    db $0, "Well", $4f
+    db "done!", $58
+; 0x8d230 + 12 bytes
+
+_UnnamedText_51910: ; 0x8d23c
+    db $0, "Many trainers give", $4f
+    db "up the challenge", $55
+    db "here.", $57
+; 0x8d23c + 43 bytes
+INCBIN "baserom.gbc",$8d267,$438
 
 _Route1Text2: ; 0x8d69f
     db $0, "See those ledges", $4f
@@ -39888,7 +47158,55 @@ _Route3Text1: ; 0x8d779
     db "CERULEAN takes a", $55
     db "lot out of you!", $57
 
-INCBIN "baserom.gbc",$8d7d5,$8db07 - $8d7d5
+INCBIN "baserom.gbc",$8d7d5,$8da08 - $8d7d5
+
+_UnnamedText_55612: ; 0x8da08
+    db $0, "Hey! You're not", $4f
+    db "wearing shorts!", $57
+; 0x8da08 + 32 bytes
+
+_UnnamedText_55617: ; 0x8da28
+    db $0, "Lost!", $4f
+    db "Lost! Lost!", $58
+; 0x8da28 + 19 bytes
+
+_UnnamedText_5561c: ; 0x8da3b
+    db $0, "I always wear", $4f
+    db "shorts, even in", $55
+    db "winter!", $57
+; 0x8da3b + 39 bytes
+
+_UnnamedText_5562b: ; 0x8da62
+    db $0, "You can fight my", $4f
+    db "new #MON!", $57
+; 0x8da62 + 28 bytes
+
+_UnnamedText_55630: ; 0x8da7e
+    db $0, "Done", $4f
+    db "like dinner!", $58
+; 0x8da7e + 19 bytes
+
+_UnnamedText_55635: ; 0x8da91
+    db $0, "Trained #MON", $4f
+    db "are stronger than", $55
+    db "the wild ones!", $57
+; 0x8da91 + 47 bytes
+INCBIN "baserom.gbc",$8dac0,$0
+
+_UnnamedText_55644: ; 0x8dac0
+    db $0, "Eek! Did you", $4f
+    db "touch me?", $57
+; 0x8dac0 + 24 bytes
+
+_UnnamedText_55649: ; 0x8dad8
+    db $0, "That's it?", $58
+; 0x8dad8 + 11 bytes
+
+_UnnamedText_5564e: ; 0x8dae3
+    db $0, "ROUTE 4 is at the", $4f
+    db "foot of MT.MOON.", $57
+; 0x8dae3 + 36 bytes
+INCBIN "baserom.gbc",$8db07,$0
 
 _Route3Text10: ; 0x8db07
     db $0, "ROUTE 3", $4f
@@ -39899,7 +47217,25 @@ _Route4Text1: ; 0x8db1e
     db "over a rocky", $55
     db "#MON, GEODUDE!", $57
 
-INCBIN "baserom.gbc",$8db4b,$8dbcd - $8db4b
+
+_UnnamedText_55699: ; 0x8db4b
+    db $0, "I came to get my", $4f
+    db "mushroom #MON!", $57
+; 0x8db4b + 33 bytes
+
+_UnnamedText_5569e: ; 0x8db6c
+    db $0, "Oh! My cute", $4f
+    db "mushroom #MON!", $58
+; 0x8db6c + 28 bytes
+
+_UnnamedText_556a3: ; 0x8db88
+    db $0, "There might not", $4f
+    db "be any more", $55
+    db "mushrooms here.", $51
+    db "I think I got", $4f
+    db "them all.", $57
+; 0x8db88 + 69 bytes
+INCBIN "baserom.gbc",$8dbcd,$0
 
 _Route4Text5: ; 0x8dbcd
     db $0, "MT.MOON", $4f
@@ -39915,7 +47251,23 @@ _Route5Text1: ; 0x8dc07
     db "CERULEAN CITY -", $55
     db "VERMILION CITY", $57
 
-INCBIN "baserom.gbc",$8dc38,$8de49 - $8dc38
+
+_UnnamedText_5912a: ; 0x8dc38
+    db $0, "Who's there?", $4f
+    db "Quit listening in", $55
+    db "on us!", $57
+; 0x8dc38 + 38 bytes
+
+_UnnamedText_5912f: ; 0x8dc5e
+    db $0, "I", $4f
+    db "just can't win!", $58
+; 0x8dc5e + 18 bytes
+
+_UnnamedText_59134: ; 0x8dc70
+    db $0, "Whisper...", $4f
+    db "whisper...", $57
+; 0x8dc70 + 23 bytes
+INCBIN "baserom.gbc",$8dc87,$1c2
 
 _Route6Text7: ; 0x8de49
     db $0, "UNDERGROUND PATH", $4f
@@ -39927,21 +47279,275 @@ _Route7Text1: ; 0x8de7a
     db "CELADON CITY -", $55
     db "LAVENDER TOWN", $57
 
-INCBIN "baserom.gbc",$8dea9,$8e262 - $8dea9
+
+_UnnamedText_5925a: ; 0x8dea9
+    db $0, "You look good at", $4f
+    db "#MON, but", $55
+    db "how's your chem?", $57
+; 0x8dea9 + 44 bytes
+
+_UnnamedText_5925f: ; 0x8ded5
+    db $0, "Ow!", $4f
+    db "Meltdown!", $58
+; 0x8ded5 + 15 bytes
+
+_UnnamedText_59264: ; 0x8dee4
+    db $0, "I am better at", $4f
+    db "school than this!", $57
+; 0x8dee4 + 34 bytes
+INCBIN "baserom.gbc",$8df06,$8e092 - $8df06
+
+_UnnamedText_592d7: ; 0x8e092
+    db $0, "MEOWTH is so cute,", $4f
+    db "meow, meow, meow!", $57
+; 0x8e092 + 38 bytes
+
+_UnnamedText_592dc: ; 0x8e0b8
+    db $0, "Meow!", $58
+; 0x8e0b8 + 7 bytes
+
+_UnnamedText_592e1: ; 0x8e0bf
+    db $0, "I think PIDGEY", $4f
+    db "and RATTATA", $55
+    db "are cute too!", $57
+; 0x8e0bf + 42 bytes
+INCBIN "baserom.gbc",$8e0e9,$8e162 - $8e0e9
+
+_UnnamedText_59309: ; 0x8e162
+    db $0, "I'm a rambling,", $4f
+    db "gambling dude!", $57
+; 0x8e162 + 31 bytes
+
+_UnnamedText_5930e: ; 0x8e181
+    db $0, "Missed", $4f
+    db "the big score!", $58
+; 0x8e181 + 23 bytes
+
+_UnnamedText_59313: ; 0x8e198
+    db $0, "Gambling and", $4f
+    db "#MON are like", $55
+    db "eating peanuts!", $55
+    db "Just can't stop!", $57
+; 0x8e198 + 60 bytes
+INCBIN "baserom.gbc",$8e1d4,$8e
 
 _Route8Text10: ; 0x8e262
     db $0, "UNDERGROUND PATH", $4f
     db "CELADON CITY -", $55
     db "LAVENDER TOWN", $57
 
-INCBIN "baserom.gbc",$8e291,$8e61e - $8e291
+
+_UnnamedText_55792: ; 0x8e291
+    db $0, "You have #MON", $4f
+    db "with you!", $55
+    db "You're mine!", $57
+; 0x8e291 + 37 bytes
+
+_UnnamedText_55797: ; 0x8e2b6
+    db $0, "You", $4f
+    db "deceived me!", $58
+; 0x8e2b6 + 18 bytes
+
+_UnnamedText_5579c: ; 0x8e2c8
+    db $0, "You need light to", $4f
+    db "get through that", $55
+    db "dark tunnel ahead.", $57
+; 0x8e2c8 + 55 bytes
+
+_UnnamedText_557a1: ; 0x8e2ff
+    db $0, "Who's that walking", $4f
+    db "with those good", $55
+    db "looking #MON?", $57
+; 0x8e2ff + 49 bytes
+
+_UnnamedText_557a6: ; 0x8e330
+    db $0, "Out", $4f
+    db "like a light!", $58
+; 0x8e330 + 19 bytes
+
+_UnnamedText_557ab: ; 0x8e343
+    db $0, "Keep walking!", $57
+; 0x8e343 + 15 bytes
+
+_UnnamedText_557b0: ; 0x8e352
+    db $0, "I'm taking ROCK", $4f
+    db "TUNNEL to go to", $55
+    db "LAVENDER...", $57
+; 0x8e352 + 44 bytes
+
+_UnnamedText_557b5: ; 0x8e37e
+    db $0, "Can't", $4f
+    db "measure up!", $58
+; 0x8e37e + 18 bytes
+
+_UnnamedText_557ba: ; 0x8e390
+    db $0, "Are you off to", $4f
+    db "ROCK TUNNEL too?", $57
+; 0x8e390 + 33 bytes
+
+_UnnamedText_557bf: ; 0x8e3b1
+    db $0, "Don't you dare", $4f
+    db "condescend me!", $57
+; 0x8e3b1 + 30 bytes
+
+_UnnamedText_557c4: ; 0x8e3cf
+    db $0, "No!", $4f
+    db "You're too much!", $58
+; 0x8e3cf + 21 bytes
+
+_UnnamedText_557c9: ; 0x8e3e4
+    db $0, "You're obviously", $4f
+    db "talented! Good", $55
+    db "luck to you!", $57
+; 0x8e3e4 + 45 bytes
+
+_UnnamedText_557ce: ; 0x8e411
+    db $0, "Bwahaha!", $4f
+    db "Great! I was", $55
+    db "bored, eh!", $57
+; 0x8e411 + 34 bytes
+
+_UnnamedText_557d3: ; 0x8e433
+    db $0, "Keep it", $4f
+    db "coming, eh!", $51
+    db "Oh wait. I'm out", $4f
+    db "of #MON!", $58
+; 0x8e433 + 46 bytes
+
+_UnnamedText_557d8: ; 0x8e461
+    db $0, "You sure had guts", $4f
+    db "standing up to me", $55
+    db "there, eh?", $57
+; 0x8e461 + 48 bytes
+
+_UnnamedText_557dd: ; 0x8e491
+    db $0, "Hahaha!", $4f
+    db "Aren't you a", $55
+    db "little toughie!", $57
+; 0x8e491 + 37 bytes
+
+_UnnamedText_557e2: ; 0x8e4b6
+    db $0, "What's", $4f
+    db "that?", $58
+; 0x8e4b6 + 13 bytes
+
+_UnnamedText_557e7: ; 0x8e4c3
+    db $0, "Hahaha! Kids", $4f
+    db "should be tough!", $57
+; 0x8e4c3 + 31 bytes
+
+_UnnamedText_557ec: ; 0x8e4e2
+    db $0, "I got up early", $4f
+    db "every day to", $55
+    db "raise my #MON", $55
+    db "from cocoons!", $57
+; 0x8e4e2 + 57 bytes
+
+_UnnamedText_557f1: ; 0x8e51b
+    db $0, "WHAT?", $51
+    db "What a total", $4f
+    db "waste of time!", $58
+; 0x8e51b + 35 bytes
+
+_UnnamedText_557f6: ; 0x8e53e
+    db $0, "I have to collect", $4f
+    db "more than bugs to", $55
+    db "get stronger...", $57
+; 0x8e53e + 53 bytes
+
+_UnnamedText_557fb: ; 0x8e573
+    db $0, "Hahahaha!", $4f
+    db "Come on, dude!", $57
+; 0x8e573 + 26 bytes
+
+_UnnamedText_55800: ; 0x8e58d
+    db $0, "Hahahaha!", $4f
+    db "You beat me fair!", $58
+; 0x8e58d + 29 bytes
+
+_UnnamedText_55805: ; 0x8e5aa
+    db $0, "Hahahaha!", $4f
+    db "Us hearty guys", $55
+    db "always laugh!", $57
+; 0x8e5aa + 40 bytes
+
+_UnnamedText_5580a: ; 0x8e5d2
+    db $0, "Go, my super bug", $4f
+    db "#MON!", $57
+; 0x8e5d2 + 24 bytes
+
+_UnnamedText_5580f: ; 0x8e5ea
+    db $0, "My", $4f
+    db "bugs...", $58
+; 0x8e5ea + 12 bytes
+
+_UnnamedText_55814: ; 0x8e5f6
+    db $0, "If you don't like", $4f
+    db "bug #MON, you", $55
+    db "bug me!", $57
+; 0x8e5f6 + 40 bytes
+INCBIN "baserom.gbc",$8e61e,$0
 
 _Route9Text11: ; 0x8e61e
     db $0, "ROUTE 9", $4f
     db "CERULEAN CITY-", $55
     db "ROCK TUNNEL", $57
 
-INCBIN "baserom.gbc",$8e642,$8e8d4 - $8e642
+
+_UnnamedText_593b6: ; 0x8e642
+    db $0, "Wow, are you a", $4f
+    db "#MANIAC too?", $55
+    db "Want to see my", $55
+    db "collection?", $57
+; 0x8e642 + 56 bytes
+
+_UnnamedText_593bb: ; 0x8e67a
+    db $0, "Humph.", $4f
+    db "I'm not angry!", $58
+; 0x8e67a + 22 bytes
+
+_UnnamedText_593c0: ; 0x8e690
+    db $0, "I have more rare", $4f
+    db "#MON at home!", $57
+; 0x8e690 + 32 bytes
+INCBIN "baserom.gbc",$8e6b0,$0
+
+_UnnamedText_593cf: ; 0x8e6b0
+    db $0, "Ha-hahah-ah-ha!", $57
+; 0x8e6b0 + 17 bytes
+
+_UnnamedText_593d4: ; 0x8e6c1
+    db $0, "Ha-haha!", $4f
+    db "Not laughing!", $55
+    db "Ha-hay fever!", $55
+    db "Haha-ha-choo!", $58
+; 0x8e6c1 + 52 bytes
+
+_UnnamedText_593d9: ; 0x8e6f5
+    db $0, "Haha-ha-choo!", $4f
+    db "Ha-choo!", $55
+    db "Snort! Snivel!", $57
+; 0x8e6f5 + 39 bytes
+INCBIN "baserom.gbc",$8e71c,$8e76c - $8e71c
+
+_UnnamedText_59401: ; 0x8e76c
+    db $0, "I've been to a", $4f
+    db "#MON GYM a few", $55
+    db "times. But, I", $55
+    db "lost each time.", $57
+; 0x8e76c + 60 bytes
+
+_UnnamedText_59406: ; 0x8e7a8
+    db $0, "Ohh!", $4f
+    db "Blew it again!", $58
+; 0x8e7a8 + 21 bytes
+
+_UnnamedText_5940b: ; 0x8e7bd
+    db $0, "I noticed some", $4f
+    db "#MANIACs", $55
+    db "prowling around.", $57
+; 0x8e7bd + 42 bytes
+INCBIN "baserom.gbc",$8e7e7,$ed
 
 _Route10Text9: ; 0x8e8d4
 _Route10Text7: ; 0x8e8d4
@@ -39950,7 +47556,44 @@ _Route10Text7: ; 0x8e8d4
 _Route10Text10: ; 0x8e8e1
     db $0, "POWER PLANT", $57
 
-INCBIN "baserom.gbc",$8e8ee,$8ec09-$8e8ee
+INCBIN "baserom.gbc",$8e8ee,$8e9a2 - $8e8ee
+
+_UnnamedText_59530: ; 0x8e9a2
+    db $0, "Let's go, but", $4f
+    db "don't cheat!", $57
+; 0x8e9a2 + 26 bytes
+
+_UnnamedText_59535: ; 0x8e9bc
+    db $0, "Huh?", $4f
+    db "That's not right!", $58
+; 0x8e9bc + 23 bytes
+
+_UnnamedText_5953a: ; 0x8e9d3
+    db $0, "I did my best! I", $4f
+    db "have no regrets!", $57
+; 0x8e9d3 + 35 bytes
+INCBIN "baserom.gbc",$8e9f6,$161
+
+_UnnamedText_595ad: ; 0x8eb57
+    db $0, "I'm the best in", $4f
+    db "my class!", $57
+; 0x8eb57 + 26 bytes
+
+_UnnamedText_595b2: ; 0x8eb71
+    db $0, "Darn!", $4f
+    db "I need to make my", $55
+    db "#MON stronger!", $58
+; 0x8eb71 + 40 bytes
+
+_UnnamedText_595b7: ; 0x8eb99
+    db $0, "There's a fat", $4f
+    db "#MON that", $55
+    db "comes down from", $55
+    db "the mountains.", $51
+    db "It's strong if", $4f
+    db "you can get it.", $57
+; 0x8eb99 + 85 bytes
+INCBIN "baserom.gbc",$8ebee,$1b
 
 SECTION "bank24",DATA,BANK[$24]
 
@@ -39963,7 +47606,36 @@ _Route12Text1: ; 0x9009e
     db $0, "A sleeping #MON", $4f
     db "blocks the way!", $57
 
-INCBIN "baserom.gbc",$900bf,$903bc - $900bf
+
+_UnnamedText_596eb: ; 0x900bf
+    db $0, "SNORLAX woke up!", $51
+    db "It attacked in a", $4f
+    db "grumpy rage!", $57
+; 0x900bf + 48 bytes
+
+_UnnamedText_596f0: ; 0x900ef
+    db $0, "SNORLAX calmed", $4f
+    db "down! With a big", $55
+    db "yawn, it returned", $55
+    db "to the mountains!", $57
+; 0x900ef + 69 bytes
+INCBIN "baserom.gbc",$90134,$0
+
+_UnnamedText_596ff: ; 0x90134
+    db $0, "Yeah! I got a", $4f
+    db "bite, here!", $57
+; 0x90134 + 27 bytes
+
+_UnnamedText_59704: ; 0x9014f
+    db $0, "Tch!", $4f
+    db "Just a small fry!", $58
+; 0x9014f + 24 bytes
+
+_UnnamedText_59709: ; 0x90167
+    db $0, "Hang on! My line's", $4f
+    db "snagged!", $57
+; 0x90167 + 28 bytes
+INCBIN "baserom.gbc",$90183,$239
 
 _Route12Text11: ; 0x903bc
     db $0, "ROUTE 12 ", $4f
@@ -39972,7 +47644,151 @@ _Route12Text11: ; 0x903bc
 _Route12Text12: ; 0x903d9
     db $0, "SPORT FISHING AREA", $57
 
-INCBIN "baserom.gbc",$903ed,$90781 - $903ed
+
+_UnnamedText_558d4: ; 0x903ed
+    db $0, "My bird #MON", $4f
+    db "want to scrap!", $57
+; 0x903ed + 29 bytes
+
+_UnnamedText_558d9: ; 0x9040a
+    db $0, "My", $4f
+    db "bird combo lost?", $58
+; 0x9040a + 21 bytes
+
+_UnnamedText_558de: ; 0x9041f
+    db $0, "My #MON look", $4f
+    db "happy even though", $55
+    db "they lost.", $57
+; 0x9041f + 43 bytes
+
+_UnnamedText_558ed: ; 0x9044a
+    db $0, "I'm told I'm good", $4f
+    db "for a kid!", $57
+; 0x9044a + 28 bytes
+
+_UnnamedText_558f2: ; 0x90466
+    db $0, "Ohh!", $4f
+    db "I lost!", $58
+; 0x90466 + 14 bytes
+
+_UnnamedText_558f7: ; 0x90474
+    db $0, "I want to become", $4f
+    db "a good trainer.", $55
+    db "I'll train hard.", $57
+; 0x90474 + 50 bytes
+
+_UnnamedText_55906: ; 0x904a6
+    db $0, "Wow! Your BADGEs", $4f
+    db "are too cool!", $57
+; 0x904a6 + 32 bytes
+
+_UnnamedText_5590b: ; 0x904c6
+    db $0, "Not", $4f
+    db "enough!", $58
+; 0x904c6 + 13 bytes
+
+_UnnamedText_55910: ; 0x904d3
+    db $0, "You got those", $4f
+    db "BADGEs from GYM", $55
+    db "LEADERs. I know!", $57
+; 0x904d3 + 48 bytes
+
+_UnnamedText_5591f: ; 0x90503
+    db $0, "My cute #MON", $4f
+    db "wish to make your", $55
+    db "acquaintance.", $57
+; 0x90503 + 46 bytes
+
+_UnnamedText_55924: ; 0x90531
+    db $0, "Wow!", $4f
+    db "You totally won!", $58
+; 0x90531 + 23 bytes
+
+_UnnamedText_55929: ; 0x90548
+    db $0, "You have to make", $4f
+    db "#MON fight to", $55
+    db "toughen them up!", $57
+; 0x90548 + 49 bytes
+INCBIN "baserom.gbc",$90579,$905d0 - $90579
+
+_UnnamedText_55951: ; 0x905d0
+    db $0, "The wind's blowing", $4f
+    db "my way!", $57
+; 0x905d0 + 27 bytes
+
+_UnnamedText_55956: ; 0x905eb
+    db $0, "The", $4f
+    db "wind turned!", $58
+; 0x905eb + 18 bytes
+
+_UnnamedText_5595b: ; 0x905fd
+    db $0, "I'm beat. I guess", $4f
+    db "I'll FLY home.", $57
+; 0x905fd + 32 bytes
+
+_UnnamedText_5596a: ; 0x9061d
+    db $0, "Sure, I'll play", $4f
+    db "with you!", $57
+; 0x9061d + 26 bytes
+
+_UnnamedText_5596f: ; 0x90637
+    db $0, "Oh!", $4f
+    db "You little brute!", $58
+; 0x90637 + 23 bytes
+
+_UnnamedText_55974: ; 0x9064e
+    db $0, "I wonder which is", $4f
+    db "stronger, male or", $55
+    db "female #MON?", $57
+; 0x9064e + 50 bytes
+
+_UnnamedText_55983: ; 0x90680
+    db $0, "Do you want to", $4f
+    db "#MON with me?", $57
+; 0x90680 + 30 bytes
+
+_UnnamedText_55988: ; 0x9069e
+    db $0, "It's over", $4f
+    db "already?", $58
+; 0x9069e + 19 bytes
+
+_UnnamedText_5598d: ; 0x906b1
+    db $0, "I don't know", $4f
+    db "anything about", $55
+    db "#MON. I just", $55
+    db "like cool ones!", $57
+; 0x906b1 + 57 bytes
+
+_UnnamedText_5599c: ; 0x906ea
+    db $0, "What're you", $4f
+    db "lookin' at?", $57
+; 0x906ea + 24 bytes
+
+_UnnamedText_559a1: ; 0x90702
+    db $0, "Dang!", $4f
+    db "Stripped gears!", $58
+; 0x90702 + 23 bytes
+
+_UnnamedText_559a6: ; 0x90719
+    db $0, "Get lost!", $57
+; 0x90719 + 11 bytes
+
+_UnnamedText_559b5: ; 0x90724
+    db $0, "I always go with", $4f
+    db "bird #MON!", $57
+; 0x90724 + 29 bytes
+
+_UnnamedText_559ba: ; 0x90741
+    db $0, "Out", $4f
+    db "of power!", $58
+; 0x90741 + 15 bytes
+
+_UnnamedText_559bf: ; 0x90750
+    db $0, "I wish I could", $4f
+    db "fly like PIDGEY", $55
+    db "and PIDGEOTTO...", $57
+; 0x90750 + 49 bytes
+INCBIN "baserom.gbc",$90781,$0
 
 _Route13Text11: ; 0x90781
     db $0, "TRAINER TIPS", $51
@@ -40004,13 +47820,97 @@ _Route15Text12: ; 0x91062
     db "West to FUCHSIA", $55
     db "CITY", $57
 
-INCBIN "baserom.gbc",$91081,$91287 - $91081
+
+_UnnamedText_59a22: ; 0x91081
+    db $0, "What do you want?", $57
+; 0x91081 + 19 bytes
+
+_UnnamedText_59a27: ; 0x91094
+    db $0, "Don't you", $4f
+    db "dare laugh!", $58
+; 0x91094 + 22 bytes
+
+_UnnamedText_59a2c: ; 0x910aa
+    db $0, "We like just", $4f
+    db "hanging here,", $55
+    db "what's it to you?", $57
+; 0x910aa + 45 bytes
+INCBIN "baserom.gbc",$910d7,$0
+
+_UnnamedText_59a3b: ; 0x910d7
+    db $0, "Nice BIKE!", $4f
+    db "Hand it over!", $57
+; 0x910d7 + 26 bytes
+
+_UnnamedText_59a40: ; 0x910f1
+    db $0, "Knock", $4f
+    db "out!", $58
+; 0x910f1 + 12 bytes
+
+_UnnamedText_59a45: ; 0x910fd
+    db $0, "Forget it, who", $4f
+    db "needs your BIKE!", $57
+; 0x910fd + 33 bytes
+
+_UnnamedText_59a54: ; 0x9111e
+    db $0, "Come out and play,", $4f
+    db "little mouse!", $57
+; 0x9111e + 34 bytes
+
+_UnnamedText_59a59: ; 0x91140
+    db $0, "You", $4f
+    db "little rat!", $58
+; 0x91140 + 17 bytes
+
+_UnnamedText_59a5e: ; 0x91151
+    db $0, "I hate losing!", $4f
+    db "Get away from me!", $57
+; 0x91151 + 34 bytes
+
+_UnnamedText_59a6d: ; 0x91173
+    db $0, "Hey, you just", $4f
+    db "bumped me!", $57
+; 0x91173 + 26 bytes
+
+_UnnamedText_59a72: ; 0x9118d
+    db $0, "Kaboom!", $58
+; 0x9118d + 9 bytes
+
+_UnnamedText_59a77: ; 0x91196
+    db $0, "You can also get", $4f
+    db "to FUCHSIA from", $55
+    db "VERMILION using a", $55
+    db "coastal road.", $57
+; 0x91196 + 66 bytes
+
+_UnnamedText_59a86: ; 0x911d8
+    db $0, "I'm feeling", $4f
+    db "hungry and mean!", $57
+; 0x911d8 + 29 bytes
+
+_UnnamedText_59a8b: ; 0x911f5
+    db $0, "Bad,", $4f
+    db "bad, bad!", $58
+; 0x911f5 + 16 bytes
+
+_UnnamedText_59a90: ; 0x91205
+    db $0, "I like my #MON", $4f
+    db "ferocious! They", $55
+    db "tear up enemies!", $57
+; 0x91205 + 49 bytes
+INCBIN "baserom.gbc",$91236,$51
 
 _Route16Text7: ; 0x91287
     db $0, "A sleeping #MON", $4f
     db "blocks the way!", $57
 
-INCBIN "baserom.gbc",$912a8,$9130d - $912a8
+
+_UnnamedText_59ab3: ; 0x912a8
+    db $0, "SNORLAX woke up!", $51
+    db "It attacked in a", $4f
+    db "grumpy rage!", $57
+; 0x912a8 + 48 bytes
+INCBIN "baserom.gbc",$912d8,$35
 
 _Route16Text8: ; 0x9130d
     db $0, "Enjoy the slope!", $4f
@@ -40021,7 +47921,55 @@ _Route16Text9: ; 0x9132c
     db "CELADON CITY -", $55
     db "FUCHSIA CITY", $57
 
-INCBIN "baserom.gbc",$91352,$91649 - $91352
+
+_UnnamedText_55c36: ; 0x91352
+    db $0, "There's no money", $4f
+    db "in fighting kids!", $57
+; 0x91352 + 35 bytes
+
+_UnnamedText_55c3b: ; 0x91375
+    db $0, "Burned", $4f
+    db "out!", $58
+; 0x91375 + 13 bytes
+
+_UnnamedText_55c40: ; 0x91382
+    db $0, "Good stuff is", $4f
+    db "lying around on", $55
+    db "CYCLING ROAD!", $57
+; 0x91382 + 45 bytes
+INCBIN "baserom.gbc",$913af,$46
+
+_UnnamedText_55c68: ; 0x913f5
+    db $0, "You heading to", $4f
+    db "FUCHSIA?", $57
+; 0x913f5 + 25 bytes
+
+_UnnamedText_55c6d: ; 0x9140e
+    db $0, "Crash and", $4f
+    db "burn!", $58
+; 0x9140e + 17 bytes
+
+_UnnamedText_55c72: ; 0x9141f
+    db $0, "I love racing", $4f
+    db "downhill!", $57
+; 0x9141f + 25 bytes
+INCBIN "baserom.gbc",$91438,$1c8
+
+_UnnamedText_55d17: ; 0x91600
+    db $0, "Get lost kid!", $4f
+    db "I'm bushed!", $57
+; 0x91600 + 26 bytes
+
+_UnnamedText_55d1c: ; 0x9161a
+    db $0, "Are you", $4f
+    db "satisfied?", $58
+; 0x9161a + 20 bytes
+
+_UnnamedText_55d21: ; 0x9162e
+    db $0, "I need to catch", $4f
+    db "a few Zs!", $57
+; 0x9162e + 27 bytes
+INCBIN "baserom.gbc",$91649,$0
 
 _Route17Text11: ; 0x91649
     db $0, "It's a notice!", $51
@@ -40059,7 +48007,38 @@ _Route17Text16: ; 0x91782
     db $0, "CYCLING ROAD", $4f
     db "Slope ends here!", $57
 
-INCBIN "baserom.gbc",$917a1,$9189d - $917a1
+
+_UnnamedText_59b19: ; 0x917a1
+    db $0, "I always check", $4f
+    db "every grassy area", $55
+    db "for new #MON.", $57
+; 0x917a1 + 48 bytes
+
+_UnnamedText_59b1e: ; 0x917d1
+    db $0, "Tch!", $58
+; 0x917d1 + 6 bytes
+
+_UnnamedText_59b23: ; 0x917d7
+    db $0, "I wish I had a", $4f
+    db "BIKE!", $57
+; 0x917d7 + 22 bytes
+INCBIN "baserom.gbc",$917ed,$9184f - $917ed
+
+_UnnamedText_59b4b: ; 0x9184f
+    db $0, "This is my turf!", $4f
+    db "Get out of here!", $57
+; 0x9184f + 35 bytes
+
+_UnnamedText_59b50: ; 0x91872
+    db $0, "Darn!", $58
+; 0x91872 + 7 bytes
+
+_UnnamedText_59b55: ; 0x91879
+    db $0, "This is my fave", $4f
+    db "#MON hunting", $55
+    db "area!", $57
+; 0x91879 + 36 bytes
+INCBIN "baserom.gbc",$9189d,$0
 
 _Route18Text4: ; 0x9189d
     db $0, "ROUTE 18", $4f
@@ -40071,14 +48050,317 @@ _Route18Text5: ; 0x918c3
     db "No pedestrians", $55
     db "permitted!", $57
 
-INCBIN "baserom.gbc",$918eb,$91c3c - $918eb
+_UnnamedText_55e50: ; 0x918eb
+    db $0, "Have to warm up", $4f
+    db "before my swim!", $57
+; 0x918eb + 33 bytes
+
+_UnnamedText_55e55: ; 0x9190c
+    db $0, "All", $4f
+    db "warmed up!", $58
+; 0x9190c + 16 bytes
+
+_UnnamedText_55e5a: ; 0x9191c
+    db $0, "Thanks, kid! I'm", $4f
+    db "ready for a swim!", $57
+; 0x9191c + 35 bytes
+
+_UnnamedText_55e5f: ; 0x9193f
+    db $0, "Wait! You'll have", $4f
+    db "a heart attack!", $57
+; 0x9193f + 34 bytes
+
+_UnnamedText_55e64: ; 0x91961
+    db $0, "Ooh!", $4f
+    db "That's chilly!", $58
+; 0x91961 + 20 bytes
+
+_UnnamedText_55e69: ; 0x91975
+    db $0, "Watch out for", $4f
+    db "TENTACOOL!", $57
+; 0x91975 + 26 bytes
+
+_UnnamedText_55e6e: ; 0x9198f
+    db $0, "I love swimming!", $4f
+    db "What about you?", $57
+; 0x9198f + 34 bytes
+
+_UnnamedText_55e73: ; 0x919b1
+    db $0, "Belly", $4f
+    db "flop!", $58
+; 0x919b1 + 13 bytes
+
+_UnnamedText_55e78: ; 0x919be
+    db $0, "I can beat #MON", $4f
+    db "at swimming!", $57
+; 0x919be + 30 bytes
+
+_UnnamedText_55e7d: ; 0x919dc
+    db $0, "What's beyond the", $4f
+    db "horizon?", $57
+; 0x919dc + 27 bytes
+
+_UnnamedText_55e82: ; 0x919f7
+    db $0, "Glub!", $58
+; 0x919f7 + 7 bytes
+
+_UnnamedText_55e87: ; 0x919fe
+    db $0, "I see a couple of", $4f
+    db "islands!", $57
+; 0x919fe + 28 bytes
+
+_UnnamedText_55e8c: ; 0x91a1a
+    db $0, "I tried diving", $4f
+    db "for #MON, but", $55
+    db "it was a no go!", $57
+; 0x91a1a + 46 bytes
+
+_UnnamedText_55e91: ; 0x91a48
+    db $0, "Help!", $58
+; 0x91a48 + 7 bytes
+
+_UnnamedText_55e96: ; 0x91a4f
+    db $0, "You have to fish", $4f
+    db "for sea #MON!", $57
+; 0x91a4f + 32 bytes
+
+_UnnamedText_55e9b: ; 0x91a6f
+    db $0, "I look at the", $4f
+    db "sea to forget!", $57
+; 0x91a6f + 30 bytes
+
+_UnnamedText_55ea0: ; 0x91a8d
+    db $0, "Ooh!", $4f
+    db "Traumatic!", $58
+; 0x91a8d + 17 bytes
+
+_UnnamedText_55ea5: ; 0x91a9e
+    db $0, "I'm looking at the", $4f
+    db "sea to forget!", $57
+; 0x91a9e + 34 bytes
+
+_UnnamedText_55eaa: ; 0x91ac0
+    db $0, "Oh, I just love", $4f
+    db "your ride! Can I", $55
+    db "have it if I win?", $57
+; 0x91ac0 + 52 bytes
+
+_UnnamedText_55eaf: ; 0x91af4
+    db $0, "Oh!", $4f
+    db "I lost!", $58
+; 0x91af4 + 13 bytes
+
+_UnnamedText_55eb4: ; 0x91b01
+    db $0, "It's still a long", $4f
+    db "way to go to", $55
+    db "SEAFOAM ISLANDS.", $57
+; 0x91b01 + 48 bytes
+
+_UnnamedText_55eb9: ; 0x91b31
+    db $0, "Swimming's great!", $4f
+    db "Sunburns aren't!", $57
+; 0x91b31 + 34 bytes
+
+_UnnamedText_55ebe: ; 0x91b53
+    db $0, "Shocker!", $58
+; 0x91b53 + 10 bytes
+
+_UnnamedText_55ec3: ; 0x91b5d
+    db $0, "My boy friend", $4f
+    db "wanted to swim to", $55
+    db "SEAFOAM ISLANDS.", $57
+; 0x91b5d + 50 bytes
+
+_UnnamedText_55ec8: ; 0x91b8f
+    db $0, "These waters are", $4f
+    db "treacherous!", $57
+; 0x91b8f + 31 bytes
+
+_UnnamedText_55ecd: ; 0x91bae
+    db $0, "Ooh!", $4f
+    db "Dangerous!", $58
+; 0x91bae + 17 bytes
+
+_UnnamedText_55ed2: ; 0x91bbf
+    db $0, "I got a cramp!", $4f
+    db "Glub, glub...", $57
+; 0x91bbf + 30 bytes
+
+_UnnamedText_55ed7: ; 0x91bdd
+    db $0, "I swam here, but", $4f
+    db "I'm tired.", $57
+; 0x91bdd + 28 bytes
+
+_UnnamedText_55edc: ; 0x91bf9
+    db $0, "I'm", $4f
+    db "exhausted...", $58
+; 0x91bf9 + 17 bytes
+
+_UnnamedText_55ee1: ; 0x91c0a
+    db $0, "LAPRAS is so big,", $4f
+    db "it must keep you", $55
+    db "dry on water.", $57
+; 0x91c0a + 50 bytes
+INCBIN "baserom.gbc",$91c3c,$0
 
 _Route19Text11: ; 0x91c3c
     db $0, "SEA ROUTE 19", $4f
     db "FUCHSIA CITY -", $55
     db "SEAFOAM ISLANDS", $57
 
-INCBIN "baserom.gbc",$91c69,$91fa7 - $91c69
+
+_UnnamedText_50e17: ; 0x91c69
+    db $0, "The water is", $4f
+    db "shallow here.", $57
+; 0x91c69 + 28 bytes
+
+_UnnamedText_50e1c: ; 0x91c85
+    db $0, "Splash!", $58
+; 0x91c85 + 9 bytes
+
+_UnnamedText_50e21: ; 0x91c8e
+    db $0, "I wish I could", $4f
+    db "ride my #MON.", $57
+; 0x91c8e + 30 bytes
+
+_UnnamedText_50e26: ; 0x91cac
+    db $0, "SEAFOAM is a", $4f
+    db "quiet getaway!", $57
+; 0x91cac + 29 bytes
+
+_UnnamedText_50e2b: ; 0x91cc9
+    db $0, "Quit it!", $58
+; 0x91cc9 + 10 bytes
+
+_UnnamedText_50e30: ; 0x91cd3
+    db $0, "There's a huge", $4f
+    db "cavern underneath", $55
+    db "this island.", $57
+; 0x91cd3 + 46 bytes
+
+_UnnamedText_50e35: ; 0x91d01
+    db $0, "I love floating", $4f
+    db "with the fishes!", $57
+; 0x91d01 + 34 bytes
+
+_UnnamedText_50e3a: ; 0x91d23
+    db $0, "Yowch!", $58
+; 0x91d23 + 8 bytes
+
+_UnnamedText_50e3f: ; 0x91d2b
+    db $0, "Want to float", $4f
+    db "with me?", $57
+; 0x91d2b + 24 bytes
+
+_UnnamedText_50e44: ; 0x91d43
+    db $0, "Are you on", $4f
+    db "vacation too?", $57
+; 0x91d43 + 26 bytes
+
+_UnnamedText_50e49: ; 0x91d5d
+    db $0, "No", $4f
+    db "mercy at all!", $58
+; 0x91d5d + 18 bytes
+
+_UnnamedText_50e4e: ; 0x91d6f
+    db $0, "SEAFOAM used to", $4f
+    db "be one island!", $57
+; 0x91d6f + 32 bytes
+
+_UnnamedText_50e53: ; 0x91d8f
+    db $0, "Check out my buff", $4f
+    db "physique!", $57
+; 0x91d8f + 29 bytes
+
+_UnnamedText_50e58: ; 0x91dac
+    db $0, "Wimpy!", $58
+; 0x91dac + 8 bytes
+
+_UnnamedText_50e5d: ; 0x91db4
+    db $0, "I should've been", $4f
+    db "buffing up my", $55
+    db "#MON, not me!", $57
+; 0x91db4 + 45 bytes
+
+_UnnamedText_50e62: ; 0x91de1
+    db $0, "Why are you", $4f
+    db "riding a #MON?", $55
+    db "Can't you swim?", $57
+; 0x91de1 + 43 bytes
+
+_UnnamedText_50e67: ; 0x91e0c
+    db $0, "Ouch!", $4f
+    db "Torpedoed!", $58
+; 0x91e0c + 18 bytes
+
+_UnnamedText_50e6c: ; 0x91e1e
+    db $0, "Riding a #MON", $4f
+    db "sure looks fun!", $57
+; 0x91e1e + 31 bytes
+
+_UnnamedText_50e71: ; 0x91e3d
+    db $0, "I rode my bird", $4f
+    db "#MON here!", $57
+; 0x91e3d + 27 bytes
+
+_UnnamedText_50e76: ; 0x91e58
+    db $0, "Oh", $4f
+    db "no!", $58
+; 0x91e58 + 8 bytes
+
+_UnnamedText_50e7b: ; 0x91e60
+    db $0, "My birds can't", $4f
+    db "FLY me back!", $57
+; 0x91e60 + 28 bytes
+
+_UnnamedText_50e80: ; 0x91e7c
+    db $0, "My boy friend gave", $4f
+    db "me big pearls!", $57
+; 0x91e7c + 35 bytes
+
+_UnnamedText_50e85: ; 0x91e9f
+    db $0, "Don't", $4f
+    db "touch my pearls!", $58
+; 0x91e9f + 23 bytes
+
+_UnnamedText_50e8a: ; 0x91eb6
+    db $0, "Will my pearls", $4f
+    db "grow bigger", $55
+    db "inside CLOYSTER?", $57
+; 0x91eb6 + 45 bytes
+
+_UnnamedText_50e8f: ; 0x91ee3
+    db $0, "I swam here from", $4f
+    db "CINNABAR ISLAND!", $57
+; 0x91ee3 + 35 bytes
+
+_UnnamedText_50e94: ; 0x91f06
+    db $0, "I'm", $4f
+    db "so disappointed!", $58
+; 0x91f06 + 21 bytes
+
+_UnnamedText_50e99: ; 0x91f1b
+    db $0, "#MON have", $4f
+    db "taken over an", $55
+    db "abandoned mansion", $55
+    db "on CINNABAR!", $57
+; 0x91f1b + 56 bytes
+
+_UnnamedText_50e9e: ; 0x91f53
+    db $0, "CINNABAR, in the", $4f
+    db "west, has a LAB", $55
+    db "for #MON.", $57
+; 0x91f53 + 44 bytes
+
+_UnnamedText_50ea3: ; 0x91f7f
+    db $0, "Wait!", $58
+; 0x91f7f + 7 bytes
+
+_UnnamedText_50ea8: ; 0x91f86
+    db $0, "CINNABAR is a ", $4f
+    db "volcanic island!", $57
+; 0x91f86 + 33 bytes
+INCBIN "baserom.gbc",$91fa7,$0
 
 _Route20Text12: ; 0x91fa7
 _Route20Text11: ; 0x91fa7
@@ -40090,23 +48372,421 @@ _Route22Text3: ; 0x92606
     db $0, "#MON LEAGUE", $4f
     db "Front Gate", $57
 
-INCBIN "baserom.gbc",$9261e,$92700 - $9261e
+INCBIN "baserom.gbc",$9261e,$926dd - $9261e
+
+_UnnamedText_513a3: ; 0x926dd
+    db $0, $51
+    db "OK then! Please,", $4f
+    db "go right ahead!", $57
+; 0x926dd + 35 bytes
 
 _Route23Text8: ; 0x92700
     db $0, "VICTORY ROAD GATE", $4f
     db "- #MON LEAGUE", $57
 
-INCBIN "baserom.gbc",$92721,$92903-$92721
+INCBIN "baserom.gbc",$92721,$928e2 - $92721
+
+_UnnamedText_51571: ; 0x928e2
+    db $0, "I saw your feat", $4f
+    db "from the grass!", $57
+; 0x928e2 + 33 bytes
 
 SECTION "bank25",DATA,BANK[$25]
 
-INCBIN "baserom.gbc",$94000,$945d3 - $94000
+
+_UnnamedText_51576: ; 0x94000
+    db $0, "I", $4f
+    db "thought not!", $58
+; 0x94000 + 16 bytes
+
+_UnnamedText_5157b: ; 0x94010
+    db $0, "I hid because the", $4f
+    db "people on the", $55
+    db "bridge scared me!", $57
+; 0x94010 + 51 bytes
+
+_UnnamedText_51580: ; 0x94043
+    db $0, "OK! I'm No. 5!", $4f
+    db "I'll stomp you!", $57
+; 0x94043 + 30 bytes
+
+_UnnamedText_51585: ; 0x94061
+    db $0, "Whoa!", $4f
+    db "Too much!", $58
+; 0x94061 + 17 bytes
+
+_UnnamedText_5158a: ; 0x94072
+    db $0, "I did my best, I", $4f
+    db "have no regrets!", $57
+; 0x94072 + 35 bytes
+
+_UnnamedText_5158f: ; 0x94095
+    db $0, "I'm No. 4!", $4f
+    db "Getting tired?", $57
+; 0x94095 + 26 bytes
+
+_UnnamedText_51594: ; 0x940af
+    db $0, "I lost", $4f
+    db "too!", $58
+; 0x940af + 13 bytes
+
+_UnnamedText_51599: ; 0x940bc
+    db $0, "I did my best, so", $4f
+    db "I've no regrets!", $57
+; 0x940bc + 35 bytes
+
+_UnnamedText_5159e: ; 0x940df
+    db $0, "Here's No. 3!", $4f
+    db "I won't be easy!", $57
+; 0x940df + 30 bytes
+
+_UnnamedText_515a3: ; 0x940fd
+    db $0, "Ow!", $4f
+    db "Stomped flat!", $58
+; 0x940fd + 19 bytes
+
+_UnnamedText_515a8: ; 0x94110
+    db $0, "I did my best, I", $4f
+    db "have no regrets!", $57
+; 0x94110 + 35 bytes
+
+_UnnamedText_515ad: ; 0x94133
+    db $0, "I'm second!", $4f
+    db "Now it's serious!", $57
+; 0x94133 + 29 bytes
+
+_UnnamedText_515b2: ; 0x94150
+    db $0, "How could I", $4f
+    db "lose?", $58
+; 0x94150 + 19 bytes
+
+_UnnamedText_515b7: ; 0x94163
+    db $0, "I did my best, I", $4f
+    db "have no regrets!", $57
+; 0x94163 + 35 bytes
+
+_UnnamedText_515bc: ; 0x94186
+    db $0, "This is NUGGET", $4f
+    db "BRIDGE! Beat us 5", $55
+    db "trainers and win", $55
+    db "a fabulous prize!", $51
+    db "Think you got", $4f
+    db "what it takes?", $57
+; 0x94186 + 98 bytes
+
+_UnnamedText_515c1: ; 0x941e8
+    db $0, "Whoo!", $4f
+    db "Good stuff!", $58
+; 0x941e8 + 19 bytes
+
+_UnnamedText_515c6: ; 0x941fb
+    db $0, "I did my best, I", $4f
+    db "have no regrets!", $57
+; 0x941fb + 35 bytes
+INCBIN "baserom.gbc",$9421e,$0
+
+_UnnamedText_51705: ; 0x9421e
+    db $0, "Local trainers", $4f
+    db "come here to", $55
+    db "practice!", $57
+; 0x9421e + 39 bytes
+
+_UnnamedText_5170a: ; 0x94245
+    db $0, "You're", $4f
+    db "decent.", $58
+; 0x94245 + 15 bytes
+
+_UnnamedText_5170f: ; 0x94254
+    db $0, "All #MON have", $4f
+    db "weaknesses. It's", $55
+    db "best to raise", $55
+    db "different kinds.", $57
+; 0x94254 + 62 bytes
+
+_UnnamedText_51714: ; 0x94292
+    db $0, "Dad took me to a", $4f
+    db "great party on", $55
+    db "S.S.ANNE at", $55
+    db "VERMILION CITY!", $57
+; 0x94292 + 61 bytes
+
+_UnnamedText_51719: ; 0x942cf
+    db $0, "I'm", $4f
+    db "not mad!", $58
+; 0x942cf + 13 bytes
+
+_UnnamedText_5171e: ; 0x942dc
+    db $0, "On S.S.ANNE, I", $4f
+    db "saw trainers from", $55
+    db "around the world.", $57
+; 0x942dc + 52 bytes
+
+_UnnamedText_51723: ; 0x94310
+    db $0, "I'm a cool guy.", $4f
+    db "I've got a girl", $55
+    db "friend!", $57
+; 0x94310 + 39 bytes
+
+_UnnamedText_51728: ; 0x94337
+    db $0, "Aww,", $4f
+    db "darn...", $58
+; 0x94337 + 14 bytes
+
+_UnnamedText_5172d: ; 0x94345
+    db $0, "Oh well. My girl", $4f
+    db "will cheer me up.", $57
+; 0x94345 + 36 bytes
+
+_UnnamedText_51732: ; 0x94369
+    db $0, "Hi! My boy", $4f
+    db "friend is cool!", $57
+; 0x94369 + 28 bytes
+
+_UnnamedText_51737: ; 0x94385
+    db $0, "I was in", $4f
+    db "bad condition!", $58
+; 0x94385 + 25 bytes
+
+_UnnamedText_5173c: ; 0x9439e
+    db $0, "I wish my guy was", $4f
+    db "as good as you!", $57
+; 0x9439e + 35 bytes
+
+_UnnamedText_51741: ; 0x943c1
+    db $0, "I knew I had to", $4f
+    db "fight you!", $57
+; 0x943c1 + 28 bytes
+
+_UnnamedText_51746: ; 0x943dd
+    db $0, "I knew", $4f
+    db "I'd lose too!", $58
+; 0x943dd + 21 bytes
+
+_UnnamedText_5174b: ; 0x943f2
+    db $0, "If your #MON", $4f
+    db "gets confused or", $55
+    db "falls asleep,", $55
+    db "switch it!", $57
+; 0x943f2 + 56 bytes
+
+_UnnamedText_51750: ; 0x9442a
+    db $0, "My friend has a", $4f
+    db "cute #MON.", $55
+    db "I'm so jealous!", $57
+; 0x9442a + 43 bytes
+
+_UnnamedText_51755: ; 0x94455
+    db $0, "I'm", $4f
+    db "not so jealous!", $58
+; 0x94455 + 20 bytes
+
+_UnnamedText_5175a: ; 0x94469
+    db $0, "You came from MT.", $4f
+    db "MOON? May I have", $55
+    db "a CLEFAIRY?", $57
+; 0x94469 + 48 bytes
+
+_UnnamedText_5175f: ; 0x94499
+    db $0, "I just got down", $4f
+    db "from MT.MOON,", $55
+    db "but I'm ready!", $57
+; 0x94499 + 45 bytes
+
+_UnnamedText_51764: ; 0x944c6
+    db $0, "You", $4f
+    db "worked hard!", $58
+; 0x944c6 + 18 bytes
+
+_UnnamedText_51769: ; 0x944d8
+    db $0, "Drat!", $4f
+    db "A ZUBAT bit me", $55
+    db "back in there.", $57
+; 0x944d8 + 37 bytes
+
+_UnnamedText_5176e: ; 0x944fd
+    db $0, "I'm off to see a", $4f
+    db "#MON collector", $55
+    db "at the cape!", $57
+; 0x944fd + 45 bytes
+
+_UnnamedText_51773: ; 0x9452a
+    db $0, "You", $4f
+    db "got me.", $58
+; 0x9452a + 13 bytes
+
+_UnnamedText_51778: ; 0x94537
+    db $0, "The collector has", $4f
+    db "many rare kinds", $55
+    db "of #MON.", $57
+; 0x94537 + 44 bytes
+
+_UnnamedText_5177d: ; 0x94563
+    db $0, "You're going to", $4f
+    db "see BILL? First,", $55
+    db "let's fight!", $57
+; 0x94563 + 45 bytes
+
+_UnnamedText_51782: ; 0x94590
+    db $0, "You're", $4f
+    db "something.", $58
+; 0x94590 + 18 bytes
+
+_UnnamedText_51787: ; 0x945a2
+    db $0, "The trail below", $4f
+    db "is a shortcut to", $55
+    db "CERULEAN CITY.", $57
+; 0x945a2 + 49 bytes
+INCBIN "baserom.gbc",$945d3,$0
 
 _Route25Text11: ; 0x945d3
     db $0, "SEA COTTAGE", $4f
     db "BILL lives here!", $57
 
-INCBIN "baserom.gbc",$945f1,$94b01 - $945f1
+
+_UnnamedText_7361e: ; 0x945f1
+    db $0, "The file data is", $4f
+    db "destroyed!", $58
+; 0x945f1 + 29 bytes
+
+_UnnamedText_7377d: ; 0x9460e
+    db $0, "Would you like to", $4f
+    db "SAVE the game?", $57
+; 0x9460e + 34 bytes
+
+_UnnamedText_73782: ; 0x94630
+    db $0, $52, " saved", $4f
+    db "the game!", $57
+; 0x94630 + 19 bytes
+
+_UnnamedText_73787: ; 0x94643
+    db $0, "The older file", $4f
+    db "will be erased to", $55
+    db "save. Okay?", $57
+; 0x94643 + 46 bytes
+
+_UnnamedText_73909: ; 0x94671
+    db $0, "When you change a", $4f
+    db "#MON BOX, data", $55
+    db "will be saved.", $51
+    db "Is that okay?", $57
+; 0x94671 + 63 bytes
+
+_UnnamedText_739d4: ; 0x946b0
+    db $0, "Choose a", $4f
+    db $4a, " BOX.@"
+; 0x946b0 + 17 bytes
+INCBIN "baserom.gbc",$946c1,$946c2 - $946c1
+
+_UnnamedText_3af3e: ; 0x946c2
+    TX_RAM $cf4b
+    db $0, " evolved", $57
+; 0x946c2 + 13 bytes
+
+_UnnamedText_3af43: ; 0x946cf
+    db $0, $4f
+    db "into @"
+; 0x946cf + 8 bytes
+INCBIN "baserom.gbc",$946d7,$946dd - $946d7
+
+_UnnamedText_3af48: ; 0x946dd
+    db $0, "Huh? @"
+; 0x946dd + 7 bytes
+INCBIN "baserom.gbc",$946e4,$946fb - $946e4
+
+_UnnamedText_3af4d: ; 0x946fb
+    db $0, "What? @"
+; 0x946fb + 8 bytes
+INCBIN "baserom.gbc",$94703,$22c
+
+_UnnamedText_17e1d: ; 0x9492f
+    db $0, "It created a", $4f
+    db "SUBSTITUTE!", $58
+; 0x9492f + 26 bytes
+
+_UnnamedText_17e22: ; 0x94949
+    db $0, $5a, $4f
+    db "has a SUBSTITUTE!", $58
+; 0x94949 + 21 bytes
+
+_UnnamedText_17e27: ; 0x9495e
+    db $0, "Too weak to make", $4f
+    db "a SUBSTITUTE!", $58
+; 0x9495e + 32 bytes
+INCBIN "baserom.gbc",$9497e,$0
+
+_UnnamedText_2ff04: ; 0x9497e
+    db $0, "Coins scattered", $4f
+    db "everywhere!", $58
+; 0x9497e + 29 bytes
+INCBIN "baserom.gbc",$9499b,$949af - $9499b
+
+_UnnamedText_2bef2: ; 0x949af
+    db $0, $59, $4f
+    db "was seeded!", $58
+; 0x949af + 15 bytes
+
+_UnnamedText_2bef7: ; 0x949be
+    db $0, $59, $4f
+    db "evaded attack!", $58
+; 0x949be + 18 bytes
+INCBIN "baserom.gbc",$949d0,$0
+
+_UnnamedText_1399e: ; 0x949d0
+    db $0, $5a, "'s", $4f
+    db "hit with recoil!", $58
+; 0x949d0 + 21 bytes
+
+_UnnamedText_139cd: ; 0x949e5
+    db $0, "Converted type to", $4f
+    db $59, "'s!", $58
+; 0x949e5 + 23 bytes
+
+_UnnamedText_13a53: ; 0x949fc
+    db $0, "All STATUS changes", $4f
+    db "are eliminated!", $58
+; 0x949fc + 36 bytes
+INCBIN "baserom.gbc",$94a20,$0
+
+_UnnamedText_3baa2: ; 0x94a20
+    db $0, $5a, $4f
+    db "started sleeping!", $57
+; 0x94a20 + 21 bytes
+
+_UnnamedText_3baa7: ; 0x94a35
+    db $0, $5a, $4f
+    db "fell asleep and", $55
+    db "became healthy!", $57
+; 0x94a35 + 35 bytes
+
+_UnnamedText_3baac: ; 0x94a58
+    db $0, $5a, $4f
+    db "regained health!", $58
+; 0x94a58 + 20 bytes
+
+_UnnamedText_3bb92: ; 0x94a6c
+    db $0, $5a, $4f
+    db "transformed into", $55
+    db "@"
+; 0x94a6c + 21 bytes
+INCBIN "baserom.gbc",$94a81,$94a87 - $94a81
+
+_UnnamedText_3bbd7: ; 0x94a87
+    db $0, $5a, "'s", $4f
+    db "protected against", $55
+    db "special attacks!", $58
+; 0x94a87 + 39 bytes
+
+_UnnamedText_3bbdc: ; 0x94aae
+    db $0, $5a, $4f
+    db "gained armor!", $58
+; 0x94aae + 17 bytes
+INCBIN "baserom.gbc",$94abf,$0
+
+_UnnamedText_33f52: ; 0x94abf
+    db $0, $5a, "'s", $4f
+    db "shrouded in mist!", $58
+; 0x94abf + 22 bytes
+INCBIN "baserom.gbc",$94ad5,$2c
 
 _BattleCenterMText1: ; 0x94b01
     db $0, "!", $57
@@ -40130,7 +48810,152 @@ INCBIN "baserom.gbc",$94ddf+39,$95268 - ($94ddf+39)
 _OaksLabText8: ; 0x95268
     db $0, "?", $57
 
-INCBIN "baserom.gbc",$9526b,$95ba1 - $9526b
+INCBIN "baserom.gbc",$9526b,$95664 - $9526b
+
+_UnnamedText_1d3f1: ; 0x95664
+    db $0, "To make a complete", $4f
+    db "guide on all the", $55
+    db "#MON in the", $55
+    db "world...", $51
+    db "That was my dream!", $51
+    db "But, I'm too old!", $4f
+    db "I can't do it!", $51
+    db "So, I want you two", $4f
+    db "to fulfill my", $55
+    db "dream for me!", $51
+    db "Get moving, you", $4f
+    db "two!", $51
+    db "This is a great", $4f
+    db "undertaking in", $55
+    db "#MON history!", $57
+; 0x95664 + 221 bytes
+
+_OaksLabText27: ; 0x95741
+    db $0, $53, ": Alright", $4f
+    db "Gramps! Leave it", $55
+    db "all to me!", $51
+    db $52, ", I hate to", $4f
+    db "say it, but I", $55
+    db "don't need you!", $51
+    db "I know! I'll", $4f
+    db "borrow a TOWN MAP", $55
+    db "from my sis!", $51
+    db "I'll tell her not", $4f
+    db "to lend you one,", $55
+    db $52, "! Hahaha!", $57
+; 0x95741 + 170 bytes
+INCBIN "baserom.gbc",$957eb,$21
+
+_UnnamedText_441cc: ; 0x9580c
+    db $0, "#DEX comp-", $4f
+    db "letion is:", $51
+    db "@"
+; 0x9580c + 24 bytes
+INCBIN "baserom.gbc",$95824,$95858 - $95824
+
+_UnnamedText_44201: ; 0x95858
+    db $0, "You still have", $4f
+    db "lots to do.", $55
+    db "Look for #MON", $55
+    db "in grassy areas!", $57
+; 0x95858 + 59 bytes
+
+_UnnamedText_44206: ; 0x95893
+    db $0, "You're on the", $4f
+    db "right track! ", $55
+    db "Get a FLASH HM", $55
+    db "from my AIDE!", $57
+; 0x95893 + 57 bytes
+
+_UnnamedText_4420b: ; 0x958cc
+    db $0, "You still need", $4f
+    db "more #MON!", $55
+    db "Try to catch", $55
+    db "other species!", $57
+; 0x958cc + 55 bytes
+
+_UnnamedText_44210: ; 0x95903
+    db $0, "Good, you're", $4f
+    db "trying hard!", $55
+    db "Get an ITEMFINDER", $55
+    db "from my AIDE!", $57
+; 0x95903 + 58 bytes
+
+_UnnamedText_44215: ; 0x9593d
+    db $0, "Looking good!", $4f
+    db "Go find my AIDE", $55
+    db "when you get 50!", $57
+; 0x9593d + 48 bytes
+
+_UnnamedText_4421a: ; 0x9596d
+    db $0, "You finally got at", $4f
+    db "least 50 species!", $55
+    db "Be sure to get", $55
+    db "EXP.ALL from my", $55
+    db "AIDE!", $57
+; 0x9596d + 75 bytes
+
+_UnnamedText_4421f: ; 0x959b8
+    db $0, "Ho! This is geting", $4f
+    db "even better!", $57
+; 0x959b8 + 33 bytes
+
+_UnnamedText_44224: ; 0x959d9
+    db $0, "Very good!", $4f
+    db "Go fish for some", $55
+    db "marine #MON!", $57
+; 0x959d9 + 42 bytes
+
+_UnnamedText_44229: ; 0x95a03
+    db $0, "Wonderful!", $4f
+    db "Do you like to", $55
+    db "collect things?", $57
+; 0x95a03 + 43 bytes
+
+_UnnamedText_4422e: ; 0x95a2e
+    db $0, "I'm impressed!", $4f
+    db "It must have been", $55
+    db "difficult to do!", $57
+; 0x95a2e + 50 bytes
+
+_UnnamedText_44233: ; 0x95a60
+    db $0, "You finally got at", $4f
+    db "least 100 species!", $55
+    db "I can't believe", $55
+    db "how good you are!", $57
+; 0x95a60 + 72 bytes
+
+_UnnamedText_44238: ; 0x95aa8
+    db $0, "You even have the", $4f
+    db "evolved forms of", $55
+    db "#MON! Super!", $57
+; 0x95aa8 + 49 bytes
+
+_UnnamedText_4423d: ; 0x95ad9
+    db $0, "Excellent! Trade", $4f
+    db "with friends to", $55
+    db "get some more!", $57
+; 0x95ad9 + 49 bytes
+
+_UnnamedText_44242: ; 0x95b0a
+    db $0, "Outstanding!", $4f
+    db "You've become a", $55
+    db "real pro at this!", $57
+; 0x95b0a + 47 bytes
+
+_UnnamedText_44247: ; 0x95b39
+    db $0, "I have nothing", $4f
+    db "left to say!", $55
+    db "You're the", $55
+    db "authority now!", $57
+; 0x95b39 + 54 bytes
+
+_UnnamedText_4424c: ; 0x95b6f
+    db $0, "Your #DEX is", $4f
+    db "entirely complete!", $55
+    db "Congratulations!", $57
+; 0x95b6f + 50 bytes
+INCBIN "baserom.gbc",$95ba1,$0
 
 _ViridianPokeCenterText2: ; 0x95ba1
 _ViridianPokeCenterText1: ; 0x95ba1
@@ -40189,7 +49014,179 @@ _ViridianHouseText4: ; 0x95df3
     db $0, "SPEAROW", $4f
     db "Name: SPEARY", $57
 
-INCBIN "baserom.gbc",$95e09,$96841 - $95e09
+
+_UnnamedText_74ace: ; 0x95e09
+    db $0, "Fwahahaha! This is", $4f
+    db "my hideout!", $51
+    db "I planned to", $4f
+    db "resurrect TEAM", $55
+    db "ROCKET here!", $51
+    db "But, you have", $4f
+    db "caught me again!", $55
+    db "So be it! This", $55
+    db "time, I'm not", $55
+    db "holding back!", $51
+    db "Once more, you", $4f
+    db "shall face", $55
+    db "GIOVANNI, the", $55
+    db "greatest trainer!", $57
+; 0x95e09 + 204 bytes
+INCBIN "baserom.gbc",$95ed5,$95fcc - $95ed5
+
+_UnnamedText_74adf: ; 0x95fcc
+    db $0, "The EARTHBADGE", $4f
+    db "makes #MON of", $55
+    db "any level obey!", $51
+    db "It is evidence of", $4f
+    db "your mastery as a", $55
+    db "#MON trainer!", $51
+    db "With it, you can", $4f
+    db "enter the #MON", $55
+    db "LEAGUE!", $51
+    db "It is my gift for", $4f
+    db "your #MON", $55
+    db "LEAGUE challenge!", $57
+; 0x95fcc + 182 bytes
+INCBIN "baserom.gbc",$96082,$96360 - $96082
+
+_UnnamedText_74b93: ; 0x96360
+    db $0, "Your #MON will", $4f
+    db "cower at the", $55
+    db "crack of my whip!", $57
+; 0x96360 + 47 bytes
+
+_UnnamedText_74b98: ; 0x9638f
+    db $0, "Yowch!", $4f
+    db "Whiplash!", $58
+; 0x9638f + 18 bytes
+
+_UnnamedText_74b9d: ; 0x963a1
+    db $0, "Wait! I was just", $4f
+    db "careless!", $57
+; 0x963a1 + 28 bytes
+INCBIN "baserom.gbc",$963bd,$96451 - $963bd
+
+_UnnamedText_74bd4: ; 0x96451
+    db $0, "Yo! Champ in", $4f
+    db "making!", $51
+    db "Even I don't know", $4f
+    db "VIRIDIAN LEADER's", $55
+    db "identity!", $51
+    db "This will be the", $4f
+    db "toughest of all", $55
+    db "the GYM LEADERs!", $51
+    db "I heard that the", $4f
+    db "trainers here", $55
+    db "like ground-type", $55
+    db "#MON!", $57
+; 0x96451 + 170 bytes
+
+_UnnamedText_74bd9: ; 0x964fb
+    db $0, "Blow me away!", $4f
+    db "GIOVANNI was the", $55
+    db "GYM LEADER here?", $57
+; 0x964fb + 49 bytes
+
+_UnnamedText_5c21a: ; 0x9652c
+    db $0, "Come again!", $57
+; 0x9652c + 13 bytes
+
+_UnnamedText_5c21f: ; 0x96539
+    db $0, "It's ", $f0, "50 for a", $4f
+    db "child's ticket.", $51
+    db "Would you like to", $4f
+    db "come in?", $57
+; 0x96539 + 57 bytes
+
+_UnnamedText_5c224: ; 0x96572
+    db $0, "Right, ", $f0, "50!", $4f
+    db "Thank you!", $57
+; 0x96572 + 24 bytes
+
+_UnnamedText_5c229: ; 0x9658a
+    db $0, "You don't have", $4f
+    db "enough money.", $58
+; 0x9658a + 29 bytes
+
+_UnnamedText_5c22e: ; 0x965a7
+    db $0, "You can't sneak", $4f
+    db "in the back way!", $51
+    db "Oh, whatever!", $4f
+    db "Do you know what", $55
+    db "AMBER is?", $57
+; 0x965a7 + 74 bytes
+
+_UnnamedText_5c233: ; 0x965f1
+    db $0, "There's a lab", $4f
+    db "somewhere trying", $55
+    db "to resurrect", $55
+    db "ancient #MON", $55
+    db "from AMBER.", $57
+; 0x965f1 + 69 bytes
+
+_UnnamedText_5c238: ; 0x96636
+    db $0, "AMBER is fossil-", $4f
+    db "ized tree sap.", $57
+; 0x96636 + 33 bytes
+
+_UnnamedText_5c23d: ; 0x96657
+    db $0, "Please go to the", $4f
+    db "other side!", $57
+; 0x96657 + 30 bytes
+
+_UnnamedText_5c242: ; 0x96675
+    db $0, "Take plenty of", $4f
+    db "time to look!", $57
+; 0x96675 + 30 bytes
+
+_UnnamedText_5c251: ; 0x96693
+    db $0, "That is one", $4f
+    db "magnificent", $55
+    db "fossil!", $57
+; 0x96693 + 33 bytes
+
+_UnnamedText_5c28e: ; 0x966b4
+    db $0, "Ssh! I think that", $4f
+    db "this chunk of", $55
+    db "AMBER contains", $55
+    db "#MON DNA!", $51
+    db "It would be great", $4f
+    db "if #MON could", $55
+    db "be resurrected", $55
+    db "from it!", $51
+    db "But, my colleagues", $4f
+    db "just ignore me!", $51
+    db "So I have a favor", $4f
+    db "to ask!", $51
+    db "Take this to a", $4f
+    db "#MON LAB and", $55
+    db "get it examined!", $58
+; 0x966b4 + 220 bytes
+INCBIN "baserom.gbc",$96790,$967a8 - $96790
+
+_UnnamedText_5c299: ; 0x967a8
+    db $0, "Ssh! Get the OLD", $4f
+    db "AMBER checked!", $57
+; 0x967a8 + 33 bytes
+
+_UnnamedText_5c29e: ; 0x967c9
+    db $0, "You don't have", $4f
+    db "space for this!", $57
+; 0x967c9 + 31 bytes
+INCBIN "baserom.gbc",$967e8,$0
+
+_UnnamedText_5c2ad: ; 0x967e8
+    db $0, "We are proud of 2", $4f
+    db "fossils of very", $55
+    db "rare, prehistoric", $55
+    db "#MON!", $57
+; 0x967e8 + 59 bytes
+
+_UnnamedText_5c2bc: ; 0x96823
+    db $0, "The AMBER is", $4f
+    db "clear and gold!", $57
+; 0x96823 + 30 bytes
+INCBIN "baserom.gbc",$96841,$0
 
 _MuseumF2Text1: ; 0x96841
     db $0, "MOON STONE?", $51
@@ -40226,11 +49223,65 @@ _MuseumF2Text7: ; 0x9694b
     db "fell on MT.MOON.", $55
     db "(MOON STONE?)", $57
 
-INCBIN "baserom.gbc",$9697a,$96a38-$9697a
+
+_UnnamedText_5c49e: ; 0x9697a
+    db $0, "I'm BROCK!", $4f
+    db "I'm PEWTER's GYM", $55
+    db "LEADER!", $51
+    db "I believe in rock", $4f
+    db "hard defense and", $55
+    db "determination!", $51
+    db "That's why my", $4f
+    db "#MON are all", $55
+    db "the rock-type!", $51
+    db "Do you still want", $4f
+    db "to challenge me?", $55
+    db "Fine then! Show", $55
+    db "me your best!", $57
+; 0x9697a + 190 bytes
+INCBIN "baserom.gbc",$96a38,$0
 
 SECTION "bank26",DATA,BANK[$26]
 
-INCBIN "baserom.gbc",$98000,$984ce - $98000
+
+_UnnamedText_5c4a3: ; 0x98000
+    db $0, "There are all", $4f
+    db "kinds of trainers", $55
+    db "in the world!", $51
+    db "You appear to be", $4f
+    db "very gifted as a", $55
+    db "#MON trainer!", $51
+    db "Go to the GYM in", $4f
+    db "CERULEAN and test", $55
+    db "your abilities!", $57
+; 0x98000 + 146 bytes
+
+_UnnamedText_5c4a8: ; 0x98092
+    db $0, "Wait! Take this", $4f
+    db "with you!", $57
+; 0x98092 + 27 bytes
+INCBIN "baserom.gbc",$980ad,$13
+
+_UnnamedText_5c4b2: ; 0x980c0
+    db $0, $51
+    db "A TM contains a", $4f
+    db "technique that", $55
+    db "can be taught to", $55
+    db "#MON!", $51
+    db "A TM is good only", $4f
+    db "once! So when you", $55
+    db "use one to teach", $55
+    db "a new technique,", $55
+    db "pick the #MON", $55
+    db "carefully!", $51
+    db "TM34 contains", $4f
+    db "BIDE!", $51
+    db "Your #MON will", $4f
+    db "absorb damage in", $55
+    db "battle then pay", $55
+    db "it back double!", $57
+; 0x980c0 + 235 bytes
+INCBIN "baserom.gbc",$981ab,$323
 
 _PewterHouse1Text1: ; 0x984ce
     db $0, "NIDORAN: Bowbow!@@"
@@ -40252,7 +49303,24 @@ _PewterHouse1Text3: ; 0x984ef
     db "If only we had", $4f
     db "some BADGEs...", $57
 
-INCBIN "baserom.gbc",$985ac,$98656 - $985ac
+
+_UnnamedText_74cc6: ; 0x985ac
+    db $0, "A shady, old man", $4f
+    db "got me to buy", $55
+    db "this really weird", $55
+    db "fish #MON!", $51
+    db "It's totally weak", $4f
+    db "and it cost ", $f0, "500!", $57
+; 0x985ac + 96 bytes
+
+_UnnamedText_74cd5: ; 0x9860c
+    db $0, "Good things can", $4f
+    db "happen if you", $55
+    db "raise #MON", $55
+    db "diligently, even", $55
+    db "the weak ones!", $57
+; 0x9860c + 74 bytes
+INCBIN "baserom.gbc",$98656,$0
 
 _PewterHouse2Text1: ; 0x98656
     db $0, "#MON learn new", $4f
@@ -40316,7 +49384,93 @@ _CeruleanPokecenterText3: ; 0x9892a
     db "to boast about", $55
     db "their #MON?", $57
 
-INCBIN "baserom.gbc",$989c1,$99012 - $989c1
+
+_UnnamedText_5c7be: ; 0x989c1
+    db $0, "Hi, you're a new", $4f
+    db "face!", $51
+    db "Trainers who want", $4f
+    db "to turn pro have", $55
+    db "to have a policy", $55
+    db "about #MON!", $51
+    db "What is your", $4f
+    db "approach when you", $55
+    db "catch #MON?", $51
+    db "My policy is an", $4f
+    db "all-out offensive", $55
+    db "with water-type", $55
+    db "#MON!", $57
+; 0x989c1 + 186 bytes
+
+_UnnamedText_5c7c3: ; 0x98a7b
+    db $0, "TM11 teaches", $4f
+    db "BUBBLEBEAM!", $51
+    db "Use it on an", $4f
+    db "aquatic #MON!", $57
+; 0x98a7b + 53 bytes
+INCBIN "baserom.gbc",$98ab0,$98e03 - $98ab0
+
+_UnnamedText_1d810: ; 0x98e03
+    db $0, "Hi! Welcome to", $4f
+    db "our BIKE SHOP.", $51
+    db "Have we got just", $4f
+    db "the BIKE for you!", $58
+; 0x98e03 + 66 bytes
+
+_UnnamedText_1d815: ; 0x98e45
+    db $0, "It's a cool BIKE!", $4f
+    db "Do you want it?", $57
+; 0x98e45 + 34 bytes
+
+_UnnamedText_1d81a: ; 0x98e67
+    db $0, "Sorry! You can't", $4f
+    db "afford it!", $58
+; 0x98e67 + 28 bytes
+
+_UnnamedText_1d81f: ; 0x98e83
+    db $0, "Oh, that's...", $51
+    db "A BIKE VOUCHER!", $51
+    db "OK! Here you go!", $58
+; 0x98e83 + 47 bytes
+INCBIN "baserom.gbc",$98eb2,$98ee0 - $98eb2
+
+_UnnamedText_1d82a: ; 0x98ee0
+    db $0, "Come back again", $4f
+    db "some time!", $57
+; 0x98ee0 + 28 bytes
+
+_UnnamedText_1d82f: ; 0x98efc
+    db $0, "How do you like", $4f
+    db "your new BICYCLE?", $51
+    db "You can take it", $4f
+    db "on CYCLING ROAD", $55
+    db "and in caves!", $57
+; 0x98efc + 81 bytes
+
+_UnnamedText_1d834: ; 0x98f4d
+    db $0, "You better make", $4f
+    db "room for this!", $57
+; 0x98f4d + 32 bytes
+
+_UnnamedText_1d843: ; 0x98f6d
+    db $0, "A plain city BIKE", $4f
+    db "is good enough", $55
+    db "for me!", $51
+    db "You can't put a", $4f
+    db "shopping basket", $55
+    db "on an MTB!", $57
+; 0x98f6d + 84 bytes
+
+_UnnamedText_1d85c: ; 0x98fc1
+    db $0, "These BIKEs are", $4f
+    db "cool, but they're", $55
+    db "way expensive!", $57
+; 0x98fc1 + 49 bytes
+
+_UnnamedText_1d861: ; 0x98ff2
+    db $0, "Wow. Your BIKE is", $4f
+    db "really cool!", $57
+; 0x98ff2 + 32 bytes
+INCBIN "baserom.gbc",$99012,$0
 
 _CeruleanMartText2: ; 0x99012
     db $0, "Use REPEL to keep", $4f
@@ -40334,7 +49488,94 @@ _CeruleanMartText3: ; 0x9907f
     db "make #MON go", $55
     db "up one level!", $57
 
-INCBIN "baserom.gbc",$990c9,$9940e - $990c9
+
+_UnnamedText_74e77: ; 0x990c9
+    db $0, "#MON BADGEs", $4f
+    db "are owned only by", $55
+    db "skilled trainers.", $51
+    db "I see you have", $4f
+    db "at least one.", $51
+    db "Those BADGEs have", $4f
+    db "amazing secrets!", $58
+; 0x990c9 + 113 bytes
+
+_UnnamedText_74e7c: ; 0x9913a
+    db $0, "Now then...", $51
+    db "Which of the 8", $4f
+    db "BADGEs should I", $55
+    db "describe?", $57
+; 0x9913a + 54 bytes
+
+_UnnamedText_74e81: ; 0x99170
+    db $0, "Come visit me any", $4f
+    db "time you wish.", $57
+; 0x99170 + 34 bytes
+
+_UnnamedText_74e96: ; 0x99192
+    db $0, "The ATTACK of all", $4f
+    db "#MON increases", $55
+    db "a little bit.", $51
+    db "It also lets you", $4f
+    db "use FLASH any", $55
+    db "time you desire.", $58
+; 0x99192 + 96 bytes
+
+_UnnamedText_74e9b: ; 0x991f2
+    db $0, "#MON up to L30", $4f
+    db "will obey you.", $51
+    db "Any higher, they", $4f
+    db "become unruly!", $51
+    db "It also lets you", $4f
+    db "use CUT outside", $55
+    db "of battle.", $58
+; 0x991f2 + 107 bytes
+
+_UnnamedText_74ea0: ; 0x9925d
+    db $0, "The SPEED of all", $4f
+    db "#MON increases", $55
+    db "a little bit.", $51
+    db "It also lets you", $4f
+    db "use FLY outside", $55
+    db "of battle.", $58
+; 0x9925d + 91 bytes
+
+_UnnamedText_74ea5: ; 0x992b8
+    db $0, "#MON up to L50", $4f
+    db "will obey you.", $51
+    db "Any higher, they", $4f
+    db "become unruly!", $51
+    db "It also lets you", $4f
+    db "use STRENGTH out-", $55
+    db "side of battle.", $58
+; 0x992b8 + 114 bytes
+
+_UnnamedText_74eaa: ; 0x9932a
+    db $0, "The DEFENSE of all", $4f
+    db "#MON increases", $55
+    db "a little bit.", $51
+    db "It also lets you", $4f
+    db "use SURF outside", $55
+    db "of battle.", $58
+; 0x9932a + 94 bytes
+
+_UnnamedText_74eaf: ; 0x99388
+    db $0, "#MON up to L70", $4f
+    db "will obey you.", $51
+    db "Any higher, they", $4f
+    db "become unruly!", $58
+; 0x99388 + 63 bytes
+
+_UnnamedText_74eb4: ; 0x993c7
+    db $0, "Your #MON's", $4f
+    db "SPECIAL abilities", $55
+    db "increase a bit.", $58
+; 0x993c7 + 46 bytes
+
+_UnnamedText_74eb9: ; 0x993f5
+    db $0, "All #MON will", $4f
+    db "obey you!", $58
+; 0x993f5 + 25 bytes
+INCBIN "baserom.gbc",$9940e,$0
 
 _LavenderPokecenterText4:
 _LavenderPokecenterText2:
@@ -40385,7 +49626,53 @@ _PokemonTower2Text2: ; 0x9971a
     db "might be able to", $55
     db "unmask them.", $57
 
-INCBIN "baserom.gbc",$99776,$99958 - $99776
+
+_UnnamedText_60730: ; 0x99776
+    db $0, "Urrg...Awaa...", $4f
+    db "Huhu...graa..", $57
+; 0x99776 + 30 bytes
+
+_UnnamedText_60735: ; 0x99794
+    db $0, "Hwa!", $4f
+    db "I'm saved!", $58
+; 0x99794 + 16 bytes
+
+_UnnamedText_6073a: ; 0x997a4
+    db $0, "The GHOSTs can be", $4f
+    db "identified by the", $55
+    db "SILPH SCOPE.", $57
+; 0x997a4 + 50 bytes
+
+_UnnamedText_6073f: ; 0x997d6
+    db $0, "Kekeke....", $4f
+    db "Kwaaah!", $57
+; 0x997d6 + 20 bytes
+
+_UnnamedText_60744: ; 0x997ea
+    db $0, "Hmm?", $4f
+    db "What am I doing?", $58
+; 0x997ea + 23 bytes
+
+_UnnamedText_60749: ; 0x99801
+    db $0, "Sorry! I was", $4f
+    db "possessed!", $57
+; 0x99801 + 25 bytes
+
+_UnnamedText_6074e: ; 0x9981a
+    db $0, "Be gone!", $4f
+    db "Evil spirit!", $57
+; 0x9981a + 23 bytes
+
+_UnnamedText_60753: ; 0x99831
+    db $0, "Whew!", $4f
+    db "The spirit left!", $58
+; 0x99831 + 24 bytes
+
+_UnnamedText_60758: ; 0x99849
+    db $0, "My friends were", $4f
+    db "possessed too!", $57
+; 0x99849 + 32 bytes
+INCBIN "baserom.gbc",$99869,$ef
 
 _PokemonTower5Text1: ; 0x99958
     db $0, "Come, child! I", $4f
@@ -40393,7 +49680,21 @@ _PokemonTower5Text1: ; 0x99958
     db "with white magic!", $51
     db "You can rest here!", $57
 
-INCBIN "baserom.gbc",$9999f,$99f72 - $9999f
+INCBIN "baserom.gbc",$9999f,$99a1e - $9999f
+
+_UnnamedText_60a1b: ; 0x99a1e
+    db $0, "Zombies!", $57
+; 0x99a1e + 10 bytes
+
+_UnnamedText_60a20: ; 0x99a28
+    db $0, "Ha?", $58
+; 0x99a28 + 5 bytes
+
+_UnnamedText_60a25: ; 0x99a2d
+    db $0, "I regained my", $4f
+    db "senses!", $57
+; 0x99a2d + 23 bytes
+INCBIN "baserom.gbc",$99a44,$52e
 
 _LavenderHouse1Text3: ; 0x99f72
     db $0, "PSYDUCK: Gwappa!@@"
@@ -40430,7 +49731,78 @@ INCBIN "baserom.gbc",$9a1b4,$9a238 - $9a1b4
 _LavenderHouse2Text1: ; 0x9a238
     db $0, "CUBONE: Kyarugoo!@@"
 
-INCBIN "baserom.gbc",$9a24c,$266
+
+_UnnamedText_1d9dc: ; 0x9a24c
+    db $0, "I hate those", $4f
+    db "horrible ROCKETs!", $51
+    db "That poor CUBONE's", $4f
+    db "mother...", $51
+    db "It was killed", $4f
+    db "trying to escape", $55
+    db "from TEAM ROCKET!", $57
+; 0x9a24c + 109 bytes
+
+_UnnamedText_1d9e1: ; 0x9a2b9
+    db $0, "The GHOST of", $4f
+    db "#MON TOWER is", $55
+    db "gone!", $51
+    db "Someone must have", $4f
+    db "soothed its", $55
+    db "restless soul!", $57
+; 0x9a2b9 + 79 bytes
+INCBIN "baserom.gbc",$9a308,$0
+
+_UnnamedText_1dab3: ; 0x9a308
+    db $0, "Hello, hello!", $4f
+    db "I am the official", $55
+    db "NAME RATER!", $51
+    db "Want me to rate", $4f
+    db "the nicknames of", $55
+    db "your #MON?", $57
+; 0x9a308 + 89 bytes
+
+_UnnamedText_1dab8: ; 0x9a361
+    db $0, "Which #MON", $4f
+    db "should I look at?", $58
+; 0x9a361 + 30 bytes
+
+_UnnamedText_1dabd: ; 0x9a37f
+    TX_RAM $cd6d
+    db $0, ", is it?", $4f
+    db "That is a decent", $55
+    db "nickname!", $51
+    db "But, would you", $4f
+    db "like me to give", $55
+    db "it a nicer name?", $51
+    db "How about it?", $57
+; 0x9a37f + 102 bytes
+
+_UnnamedText_1dac2: ; 0x9a3e5
+    db $0, "Fine! What should", $4f
+    db "we name it?", $58
+; 0x9a3e5 + 31 bytes
+
+_UnnamedText_1dac7: ; 0x9a404
+    db $0, "OK! This #MON", $4f
+    db "has been renamed", $55
+    db "@"
+; 0x9a404 + 33 bytes
+INCBIN "baserom.gbc",$9a425,$9a44c - $9a425
+
+_UnnamedText_1dacc: ; 0x9a44c
+    db $0, "Fine! Come any", $4f
+    db "time you like!", $57
+; 0x9a44c + 31 bytes
+
+_UnnamedText_1dad1: ; 0x9a46b
+    TX_RAM $cd6d
+    db $0, ", is it?", $4f
+    db "That is a truly", $55
+    db "impeccable name!", $51
+    db "Take good care of", $4f
+    db "@"
+; 0x9a46b + 65 bytes
+INCBIN "baserom.gbc",$9a4ac,$6
 
 _VermilionPokecenterText2: ; 0x9a4b2
 _VermilionPokecenterText1: ; 0x9a4b2
@@ -40450,7 +49822,102 @@ _VermilionPokecenterText3: ; 0x9a539
     db "fainted while we", $55
     db "were walking!", $57
 
-INCBIN "baserom.gbc",$9a572,$9a948 - $9a572
+
+_UnnamedText_59bb7: ; 0x9a572
+    db $0, "Won't you admire", $4f
+    db "my PIKACHU's", $55
+    db "adorable tail?", $57
+; 0x9a572 + 44 bytes
+
+_UnnamedText_59bbc: ; 0x9a59e
+    db $0, "Humph! My PIKACHU", $4f
+    db "is twice as cute", $55
+    db "as that one!", $57
+; 0x9a59e + 49 bytes
+INCBIN "baserom.gbc",$9a5cf,$9a629 - $9a5cf
+
+_UnnamedText_59c00: ; 0x9a629
+    db $0, "PIKACHU: Chu!", $4f
+    db "Pikachu!", $57
+; 0x9a629 + 24 bytes
+
+_UnnamedText_59c17: ; 0x9a641
+    db $0, "SEEL: Kyuoo!", $57
+; 0x9a641 + 14 bytes
+
+_UnnamedText_59c65: ; 0x9a64f
+    db $0, "I chair the", $4f
+    db "#MON Fan Club!", $51
+    db "I have collected", $4f
+    db "over 100 #MON!", $51
+    db "I'm very fussy", $4f
+    db "when it comes to", $55
+    db "#MON!", $51
+    db "So...", $51
+    db "Did you come", $4f
+    db "visit to hear", $55
+    db "about my #MON?", $57
+; 0x9a64f + 145 bytes
+
+_UnnamedText_59c6a: ; 0x9a6e0
+    db $0, "Good!", $4f
+    db "Then listen up!", $51
+    db "My favorite", $4f
+    db "RAPIDASH...", $51
+    db "It...cute...", $4f
+    db "lovely...smart...", $55
+    db "plus...amazing...", $55
+    db "you think so?...", $55
+    db "oh yes...it...", $55
+    db "stunning...", $55
+    db "kindly...", $55
+    db "love it!", $51
+    db "Hug it...when...", $55
+    db "sleeping...warm", $55
+    db "and cuddly...", $55
+    db "spectacular...", $55
+    db "ravishing...", $55
+    db "...Oops! Look at", $55
+    db "the time! I kept", $55
+    db "you too long!", $51
+    db "Thanks for hearing", $4f
+    db "me out! I want", $55
+    db "you to have this!", $58
+; 0x9a6e0 + 334 bytes
+INCBIN "baserom.gbc",$9a82e,$9a844 - $9a82e
+
+_UnnamedText_59c74: ; 0x9a844
+    db $0, $51
+    db "Exchange that for", $4f
+    db "a BICYCLE!", $51
+    db "Don't worry, my", $4f
+    db "FEAROW will FLY", $55
+    db "me anywhere!", $51
+    db "So, I don't need a", $4f
+    db "BICYCLE!", $51
+    db "I hope you like", $4f
+    db "cycling!", $57
+; 0x9a844 + 127 bytes
+
+_UnnamedText_59c79: ; 0x9a8c3
+    db $0, "Oh. Come back", $4f
+    db "when you want to", $55
+    db "hear my story!", $57
+; 0x9a8c3 + 47 bytes
+
+_UnnamedText_59c7e: ; 0x9a8f2
+    db $0, "Hello, ", $52, "!", $51
+    db "Did you come see", $4f
+    db "me about my", $55
+    db "#MON again?", $51
+    db "No? Too bad!", $57
+; 0x9a8f2 + 65 bytes
+
+_UnnamedText_59c83: ; 0x9a933
+    db $0, "Make room for", $4f
+    db "this!", $57
+; 0x9a933 + 21 bytes
+INCBIN "baserom.gbc",$9a948,$0
 
 _FanClubText6: ; 0x9a948
     db $0, "Our Chairman is", $4f
@@ -40489,7 +49956,16 @@ _VermilionMartText3: ; 0x9aa67
 INCBIN "baserom.gbc",$9aaa5,$9ab7b-$9aaa5
 
 SECTION "bank27",DATA,BANK[$27]
-INCBIN "baserom.gbc",$9c000,$9c449 - $9c000
+INCBIN "baserom.gbc",$9c000,$9c0f5 - $9c000
+
+_UnnamedText_5cb81: ; 0x9c0f5
+    db $0, $51
+    db "TM24 contains", $4f
+    db "THUNDERBOLT!", $51
+    db "Teach it to an", $4f
+    db "electric #MON!", $57
+; 0x9c0f5 + 59 bytes
+INCBIN "baserom.gbc",$9c130,$319
 
 _VermilionHouse1Text1: ; 0x9c449
     db $0, "I'm getting my", $4f
@@ -40509,7 +49985,49 @@ _VermilionHouse1Text3: ; 0x9c49c
     db "VERMILION appears", $4f
     db "to be safe.", $57
 
-INCBIN "baserom.gbc",$9c50e,$9c672 - $9c50e
+
+_UnnamedText_1dcc1: ; 0x9c50e
+    db $0, $57
+; 0x9c50e + 2 bytes
+
+_UnnamedText_560b1: ; 0x9c510
+    db $0, "I'm the FISHING", $4f
+    db "GURU!", $51
+    db "I simply Looove", $4f
+    db "fishing!", $51
+    db "Do you like to", $4f
+    db "fish?", $57
+; 0x9c510 + 68 bytes
+INCBIN "baserom.gbc",$9c554,$9c5a4 - $9c554
+
+_UnnamedText_560bb: ; 0x9c5a4
+    db $0, $51
+    db "Fishing is a way", $4f
+    db "of life!", $51
+    db "From the seas to", $4f
+    db "rivers, go out", $55
+    db "and land the big", $55
+    db "one, young one!", $57
+; 0x9c5a4 + 93 bytes
+
+_UnnamedText_560c0: ; 0x9c601
+    db $0, "Oh... That's so", $4f
+    db "disappointing...", $57
+; 0x9c601 + 33 bytes
+
+_UnnamedText_560c5: ; 0x9c622
+    db $0, "Hello there,", $4f
+    db $52, "!", $51
+    db "How are the fish", $4f
+    db "biting?", $57
+; 0x9c622 + 42 bytes
+
+_UnnamedText_560ca: ; 0x9c64c
+    db $0, "Oh no!", $51
+    db "You have no room", $4f
+    db "for my gift!", $57
+; 0x9c64c + 38 bytes
+INCBIN "baserom.gbc",$9c672,$0
 
 _CeladonMart1Text1: ; 0x9c672
     db $0, "Hello! Welcome to", $4f
@@ -40648,7 +50166,32 @@ _CeladonMartRoofText6: ; 0x9ce50
     db $0, "ROOFTOP SQUARE:", $4f
     db "VENDING MACHINES", $57
 
-INCBIN "baserom.gbc",$9ce72,$9ceee - $9ce72
+
+_UnnamedText_74f99: ; 0x9ce72
+    db $0, "A vending machine!", $4f
+    db "Here's the menu!", $58
+; 0x9ce72 + 36 bytes
+
+_UnnamedText_74fd3: ; 0x9ce96
+    db $0, "Oops, not enough", $4f
+    db "money!", $57
+; 0x9ce96 + 25 bytes
+
+_UnnamedText_74fd8: ; 0x9ceaf
+    TX_RAM $cf4b
+    db $0, $4f
+    db "popped out!", $57
+; 0x9ceaf + 17 bytes
+
+_UnnamedText_74fdd: ; 0x9cec0
+    db $0, "There's no more", $4f
+    db "room for stuff!", $57
+; 0x9cec0 + 32 bytes
+
+_UnnamedText_74fe2: ; 0x9cee0
+    db $0, "Not thirsty!", $57
+; 0x9cee0 + 14 bytes
+INCBIN "baserom.gbc",$9ceee,$0
 
 _CeladonMansion1Text1: ; 0x9ceee
     db $0, "MEOWTH: Meow!@@"
@@ -40692,7 +50235,18 @@ _CeladonMansion3Text3: ; 0x9cfe0
     db "Oh, and SABRINA,", $4f
     db "I like her!", $57
 
-INCBIN "baserom.gbc",$9d03a,$9d0ed - $9d03a
+
+_UnnamedText_487d0: ; 0x9d03a
+    db $0, "Is that right?", $51
+    db "I'm the game", $4f
+    db "designer!", $51
+    db "Filling up your", $4f
+    db "#DEX is tough,", $55
+    db "but don't quit!", $51
+    db "When you finish,", $4f
+    db "come tell me!", $57
+; 0x9d03a + 115 bytes
+INCBIN "baserom.gbc",$9d0ad,$40
 
 _CeladonMansion3Text5: ; 0x9d0ed
     db $0, "It's the game", $4f
@@ -40737,7 +50291,18 @@ _CeladonPokecenterText3: ; 0x9d262
     db "CYCLING ROAD from", $55
     db "FUCHSIA!", $57
 
-INCBIN "baserom.gbc",$9d28f,$9d8d5 - $9d28f
+INCBIN "baserom.gbc",$9d28f,$9d520 - $9d28f
+
+_UnnamedText_48a77: ; 0x9d520
+    db $0, $51
+    db "TM21 contains", $4f
+    db "MEGA DRAIN.", $51
+    db "Half the damage", $4f
+    db "it inflicts is", $55
+    db "drained to heal", $55
+    db "your #MON!", $57
+; 0x9d520 + 86 bytes
+INCBIN "baserom.gbc",$9d576,$35f
 
 _CeladonGameCornerText1: ; 0x9d8d5
     db $0, "Welcome!", $51
@@ -40772,7 +50337,24 @@ _CeladonGameCornerText8: ; 0x9dc06
     db "It's so easy to", $55
     db "get hooked!", $57
 
-INCBIN "baserom.gbc",$9dc33,$9ddff - $9dc33
+
+_UnnamedText_48e26: ; 0x9dc33
+    db $0, "What's up? Want", $4f
+    db "some coins?", $58
+; 0x9dc33 + 28 bytes
+INCBIN "baserom.gbc",$9dc4f,$9dc66 - $9dc4f
+
+_UnnamedText_48e31: ; 0x9dc66
+    db $0, "You have lots of", $4f
+    db "coins!", $57
+; 0x9dc66 + 25 bytes
+
+_UnnamedText_48e36: ; 0x9dc7f
+    db $0, "Darn! I need more", $4f
+    db "coins for the", $55
+    db "#MON I want!", $57
+; 0x9dc7f + 46 bytes
+INCBIN "baserom.gbc",$9dcad,$152
 
 _CeladonMart5Text1: ; 0x9ddff
     db $0, "#MON ability", $4f
@@ -40828,7 +50410,31 @@ _CeladonDinerText4: ; 0x9dfc9
     db "table lost it all", $55
     db "at the slots.", $57
 
-INCBIN "baserom.gbc",$9e003,$9e0d5 - $9e003
+
+_UnnamedText_491a7: ; 0x9e003
+    db $0, "Go ahead! Laugh!", $51
+    db "I'm flat out", $4f
+    db "busted!", $51
+    db "No more slots for", $4f
+    db "me! I'm going", $55
+    db "straight!", $51
+    db "Here! I won't be", $4f
+    db "needing this any-", $55
+    db "more!", $58
+; 0x9e003 + 119 bytes
+INCBIN "baserom.gbc",$9e07a,$9e090 - $9e07a
+
+_UnnamedText_491b2: ; 0x9e090
+    db $0, "Make room for", $4f
+    db "this!", $57
+; 0x9e090 + 21 bytes
+
+_UnnamedText_491b7: ; 0x9e0a5
+    db $0, "I always thought", $4f
+    db "I was going to", $55
+    db "win it back...", $57
+; 0x9e0a5 + 48 bytes
+INCBIN "baserom.gbc",$9e0d5,$0
 
 _CeladonHouseText1: ; 0x9e0d5
     db $0, "Hehehe! The slots", $4f
@@ -40915,17 +50521,192 @@ _FuchsiaPokecenterText3: ; 0x9e3de
     db "The HQ governs", $55
     db "all trainers.", $57
 
-INCBIN "baserom.gbc",$9e444,$9e6c7 - $9e444
+
+_UnnamedText_75135: ; 0x9e444
+    db $0, "WARDEN: Hif fuff", $4f
+    db "hefifoo!", $51
+    db "Ha lof ha feef ee", $4f
+    db "hafahi ho. Heff", $55
+    db "hee fwee!", $57
+; 0x9e444 + 71 bytes
+
+_UnnamedText_7513a: ; 0x9e48b
+    db $0, "Ah howhee ho hoo!", $4f
+    db "Eef ee hafahi ho!", $57
+; 0x9e48b + 37 bytes
+
+_UnnamedText_7513f: ; 0x9e4b0
+    db $0, "Ha? He ohay heh", $4f
+    db "ha hoo ee haheh!", $57
+; 0x9e4b0 + 34 bytes
+INCBIN "baserom.gbc",$9e4d2,$9e4f9 - $9e4d2
+
+_UnnamedText_75149: ; 0x9e4f9
+    db $0, $51
+    db "The WARDEN popped", $4f
+    db "in his teeth!", $58
+; 0x9e4f9 + 34 bytes
+
+_UnnamedText_7514e: ; 0x9e51b
+    db $0, "WARDEN: Thanks,", $4f
+    db "kid! No one could", $55
+    db "understand a word", $55
+    db "that I said.", $51
+    db "I couldn't work", $4f
+    db "that way.", $55
+    db "Let me give you", $55
+    db "something for", $55
+    db "your trouble.", $58
+; 0x9e51b + 135 bytes
+INCBIN "baserom.gbc",$9e5a2,$9e5b6 - $9e5a2
+
+_UnnamedText_75159: ; 0x9e5b6
+    db $0, "WARDEN: HM04", $4f
+    db "teaches STRENGTH!", $51
+    db "It lets #MON", $4f
+    db "move boulders", $55
+    db "when you're out-", $55
+    db "side of battle.", $51
+    db "Oh yes, did you", $4f
+    db "find SECRET HOUSE", $55
+    db "in SAFARI ZONE?", $51
+    db "If you do, you", $4f
+    db "win an HM!", $51
+    db "I hear it's the", $4f
+    db "rare SURF HM.", $57
+; 0x9e5b6 + 196 bytes
+
+_UnnamedText_7515e: ; 0x9e67a
+    db $0, "Your pack is", $4f
+    db "stuffed full!", $57
+; 0x9e67a + 28 bytes
+
+_UnnamedText_75176: ; 0x9e696
+    db $0, "#MON photos", $4f
+    db "and fossils.", $57
+; 0x9e696 + 26 bytes
+
+_UnnamedText_7517b: ; 0x9e6b0
+    db $0, "Old #MON", $4f
+    db "merchandise.", $57
+; 0x9e6b0 + 23 bytes
+INCBIN "baserom.gbc",$9e6c7,$0
 
 _SafariZoneEntranceText1: ; 0x9e6c7
     db $0, "Welcome to the", $4f
     db "SAFARI ZONE!", $57
 
-INCBIN "baserom.gbc",$9e6e4,$9eaa4-$9e6e4
+INCBIN "baserom.gbc",$9e6e4,$9e825 - $9e6e4
+
+_UnnamedText_753bb: ; 0x9e825
+    db $0, "Please return any", $4f
+    db "SAFARI BALLs you", $55
+    db "have left.", $57
+; 0x9e825 + 47 bytes
+
+_UnnamedText_753c0: ; 0x9e854
+    db $0, "Good Luck!", $57
+; 0x9e854 + 12 bytes
+
+_UnnamedText_753c5: ; 0x9e860
+    db $0, "Did you get a", $4f
+    db "good haul?", $55
+    db "Come again!", $57
+; 0x9e860 + 38 bytes
+INCBIN "baserom.gbc",$9e886,$0
+
+_UnnamedText_753e6: ; 0x9e886
+    db $0, "Hi! Is it your", $4f
+    db "first time here?", $57
+; 0x9e886 + 33 bytes
+
+_UnnamedText_753eb: ; 0x9e8a7
+    db $0, "SAFARI ZONE has 4", $4f
+    db "zones in it.", $51
+    db "Each zone has", $4f
+    db "different kinds", $55
+    db "of #MON. Use", $55
+    db "SAFARI BALLs to", $55
+    db "catch them!", $51
+    db "When you run out", $4f
+    db "of time or SAFARI", $55
+    db "BALLs, it's game", $55
+    db "over for you!", $51
+    db "Before you go,", $4f
+    db "open an unused", $55
+    db "#MON BOX so", $55
+    db "there's room for", $55
+    db "new #MON!", $57
+; 0x9e8a7 + 236 bytes
+
+_UnnamedText_753f0: ; 0x9e993
+    db $0, "Sorry, you're a", $4f
+    db "regular here!", $57
+; 0x9e993 + 30 bytes
+INCBIN "baserom.gbc",$9e9b1,$f3
 
 SECTION "bank28",DATA,BANK[$28]
 
-INCBIN "baserom.gbc",$a0000,$a05a1 - $a0000
+INCBIN "baserom.gbc",$a0000,$a027e - $a0000
+
+_UnnamedText_755e0: ; 0xa027e
+    db $0, "Let's see you", $4f
+    db "beat my special", $55
+    db "techniques!", $57
+; 0xa027e + 42 bytes
+
+_UnnamedText_755e5: ; 0xa02a8
+    db $0, "You", $4f
+    db "had me fooled!", $58
+; 0xa02a8 + 20 bytes
+
+_UnnamedText_755ea: ; 0xa02bc
+    db $0, "I like poison and", $4f
+    db "sleep techniques,", $55
+    db "as they linger", $55
+    db "after battle!", $57
+; 0xa02bc + 66 bytes
+INCBIN "baserom.gbc",$a02fe,$a03a1 - $a02fe
+
+_UnnamedText_75612: ; 0xa03a1
+    db $0, "I also study the", $4f
+    db "way of the ninja", $55
+    db "with master KOGA!", $51
+    db "Ninja have a long", $4f
+    db "history of using", $55
+    db "animals!", $57
+; 0xa03a1 + 97 bytes
+
+_UnnamedText_75617: ; 0xa0402
+    db $0, "Awoo!", $58
+; 0xa0402 + 7 bytes
+
+_UnnamedText_7561c: ; 0xa0409
+    db $0, "I still have much", $4f
+    db "to learn!", $57
+; 0xa0409 + 29 bytes
+INCBIN "baserom.gbc",$a0426,$ac
+
+_UnnamedText_7564e: ; 0xa04d2
+    db $0, "Yo! Champ in", $4f
+    db "making!", $51
+    db "FUCHSIA GYM is", $4f
+    db "riddled with", $55
+    db "invisible walls!", $51
+    db "KOGA might appear", $4f
+    db "close, but he's", $55
+    db "blocked off!", $51
+    db "You have to find", $4f
+    db "gaps in the walls", $55
+    db "to reach him!", $57
+; 0xa04d2 + 162 bytes
+
+_UnnamedText_75653: ; 0xa0574
+    db $0, "It's amazing how", $4f
+    db "ninja can terrify", $55
+    db "even now!", $57
+; 0xa0574 + 45 bytes
+INCBIN "baserom.gbc",$a05a1,$0
 
 _FuchsiaMeetingRoomText1: ; 0xa05a1
     db $0, "We nicknamed the", $4f
@@ -40948,7 +50729,238 @@ _FuchsiaMeetingRoomText3: ; 0xa0642
     db "I think he's got", $4f
     db "a speech problem!", $57
 
-INCBIN "baserom.gbc",$a0695,$a0df7 - $a0695
+
+_UnnamedText_561bd: ; 0xa0695
+    db $0, "I'm the FISHING", $4f
+    db "GURU's older", $55
+    db "brother!", $51
+    db "I simply Looove", $4f
+    db "fishing!", $51
+    db "Do you like to", $4f
+    db "fish?", $57
+; 0xa0695 + 83 bytes
+INCBIN "baserom.gbc",$a06e8,$a0737 - $a06e8
+
+_UnnamedText_56212: ; 0xa0737
+    db $0, "Oh... That's so", $4f
+    db "disappointing...", $57
+; 0xa0737 + 33 bytes
+
+_UnnamedText_56217: ; 0xa0758
+    db $0, "Hello there,", $4f
+    db $52, "!", $51
+    db "How are the fish", $4f
+    db "biting?", $57
+; 0xa0758 + 42 bytes
+
+_UnnamedText_5621c: ; 0xa0782
+    db $0, "Oh no!", $51
+    db "You have no room", $4f
+    db "for my gift!", $57
+; 0xa0782 + 38 bytes
+
+_UnnamedText_4434b: ; 0xa07a8
+    db $0, "Who are you? There", $4f
+    db "shouldn't be", $55
+    db "anyone here.", $57
+; 0xa07a8 + 45 bytes
+
+_UnnamedText_44350: ; 0xa07d5
+    db $0, "Ouch!", $58
+; 0xa07d5 + 7 bytes
+
+_UnnamedText_44355: ; 0xa07dc
+    db $0, "A key? I don't", $4f
+    db "know what you're", $55
+    db "talking about.", $57
+; 0xa07dc + 46 bytes
+
+_UnnamedText_44395: ; 0xa080a
+    db $0, "A secret switch!", $51
+    db "Press it?", $57
+; 0xa080a + 28 bytes
+
+_UnnamedText_4439a: ; 0xa0826
+    db $0, "Who wouldn't?", $58
+; 0xa0826 + 14 bytes
+
+_UnnamedText_4439f: ; 0xa0834
+    db $0, "Not quite yet!", $57
+; 0xa0834 + 16 bytes
+INCBIN "baserom.gbc",$a0844,$0
+
+_UnnamedText_75914: ; 0xa0844
+    db $0, "Hah!", $51
+    db "I am BLAINE! I", $4f
+    db "am the LEADER of", $55
+    db "CINNABAR GYM!", $51
+    db "My fiery #MON", $4f
+    db "will incinerate", $55
+    db "all challengers!", $51
+    db "Hah! You better", $4f
+    db "have BURN HEAL!", $57
+; 0xa0844 + 131 bytes
+INCBIN "baserom.gbc",$a08c7,$a08fd - $a08c7
+
+_UnnamedText_75920: ; 0xa08fd
+    db $0, "FIRE BLAST is the", $4f
+    db "ultimate fire", $55
+    db "technique!", $51
+    db "Don't waste it on", $4f
+    db "water #MON!", $57
+; 0xa08fd + 73 bytes
+
+_UnnamedText_75925: ; 0xa0946
+    db $0, "Hah!", $51
+    db "The VOLCANOBADGE", $4f
+    db "heightens the", $55
+    db "SPECIAL abilities", $55
+    db "of your #MON!", $51
+    db "Here, you can", $4f
+    db "have this too!", $57
+; 0xa0946 + 98 bytes
+INCBIN "baserom.gbc",$a09a8,$a09bc - $a09a8
+
+_UnnamedText_7592f: ; 0xa09bc
+    db $0, $51
+    db "TM38 contains", $4f
+    db "FIRE BLAST!", $51
+    db "Teach it to fire-", $4f
+    db "type #MON!", $51
+    db "CHARMELEON or", $4f
+    db "PONYTA would be", $55
+    db "good bets!", $57
+; 0xa09bc + 98 bytes
+
+_UnnamedText_75934: ; 0xa0a1e
+    db $0, "Make room for my", $4f
+    db "gift!", $57
+; 0xa0a1e + 24 bytes
+
+_UnnamedText_7595f: ; 0xa0a36
+    db $0, "Do you know how", $4f
+    db "hot #MON fire", $55
+    db "breath can get?", $57
+; 0xa0a36 + 47 bytes
+
+_UnnamedText_75964: ; 0xa0a65
+    db $0, "Yow!", $4f
+    db "Hot, hot, hot!", $58
+; 0xa0a65 + 21 bytes
+
+_UnnamedText_75969: ; 0xa0a7a
+    db $0, "Fire, or to be", $4f
+    db "more precise,", $55
+    db "combustion...", $51
+    db "Blah, blah, blah,", $4f
+    db "blah...", $57
+; 0xa0a7a + 70 bytes
+
+_UnnamedText_75994: ; 0xa0ac0
+    db $0, "I was a thief, but", $4f
+    db "I became straight", $55
+    db "as a trainer!", $57
+; 0xa0ac0 + 52 bytes
+
+_UnnamedText_75999: ; 0xa0af4
+    db $0, "I", $4f
+    db "surrender!", $58
+; 0xa0af4 + 14 bytes
+
+_UnnamedText_7599e: ; 0xa0b02
+    db $0, "I can't help", $4f
+    db "stealing other", $55
+    db "people's #MON!", $57
+; 0xa0b02 + 42 bytes
+INCBIN "baserom.gbc",$a0b2c,$0
+
+_UnnamedText_759c9: ; 0xa0b2c
+    db $0, "You can't win!", $4f
+    db "I have studied", $55
+    db "#MON totally!", $57
+; 0xa0b2c + 44 bytes
+
+_UnnamedText_759ce: ; 0xa0b58
+    db $0, "Waah!", $4f
+    db "My studies!", $58
+; 0xa0b58 + 19 bytes
+
+_UnnamedText_759d3: ; 0xa0b6b
+    db $0, "My theories are", $4f
+    db "too complicated", $55
+    db "for you!", $57
+; 0xa0b6b + 42 bytes
+INCBIN "baserom.gbc",$a0b95,$0
+
+_UnnamedText_759fe: ; 0xa0b95
+    db $0, "I just like using", $4f
+    db "fire #MON!", $57
+; 0xa0b95 + 30 bytes
+
+_UnnamedText_75a03: ; 0xa0bb3
+    db $0, "Too hot", $4f
+    db "to handle!", $58
+; 0xa0bb3 + 20 bytes
+
+_UnnamedText_75a08: ; 0xa0bc7
+    db $0, "I wish there was", $4f
+    db "a thief #MON!", $55
+    db "I'd use that!", $57
+; 0xa0bc7 + 45 bytes
+
+_UnnamedText_75a33: ; 0xa0bf4
+    db $0, "I know why BLAINE", $4f
+    db "became a trainer!", $57
+; 0xa0bf4 + 37 bytes
+
+_UnnamedText_75a38: ; 0xa0c19
+    db $0, "Ow!", $58
+; 0xa0c19 + 5 bytes
+
+_UnnamedText_75a3d: ; 0xa0c1e
+    db $0, "BLAINE was lost", $4f
+    db "in the mountains", $55
+    db "when a fiery bird", $55
+    db "#MON appeared.", $51
+    db "Its light enabled", $4f
+    db "BLAINE to find", $55
+    db "his way down!", $57
+; 0xa0c1e + 114 bytes
+INCBIN "baserom.gbc",$a0c90,$a0d00 - $a0c90
+
+_UnnamedText_75a9d: ; 0xa0d00
+    db $0, "Fire is weak", $4f
+    db "against H2O!", $57
+; 0xa0d00 + 27 bytes
+
+_UnnamedText_75aa2: ; 0xa0d1b
+    db $0, "Oh!", $4f
+    db "Snuffed out!", $58
+; 0xa0d1b + 18 bytes
+
+_UnnamedText_75aa7: ; 0xa0d2d
+    db $0, "Water beats fire!", $4f
+    db "But, fire melts", $55
+    db "ice #MON!", $57
+; 0xa0d2d + 45 bytes
+
+_UnnamedText_75ac2: ; 0xa0d5a
+    db $0, "Yo! Champ in", $4f
+    db "making!", $51
+    db "The hot-headed", $4f
+    db "BLAINE is a fire", $55
+    db "#MON pro!", $51
+    db "Douse his spirits", $4f
+    db "with water!", $51
+    db "You better take", $4f
+    db "some BURN HEALs!", $57
+; 0xa0d5a + 127 bytes
+
+_UnnamedText_75ac7: ; 0xa0dd9
+    db $0, $52, "! You beat", $4f
+    db "that fire brand!", $57
+; 0xa0dd9 + 30 bytes
+INCBIN "baserom.gbc",$a0df7,$0
 
 _Lab1Text1: ; 0xa0df7
     db $0, "We study #MON", $4f
@@ -40982,7 +50994,30 @@ _Lab2Text1: ; 0xa0eb5
     db "rare, prehistoric", $55
     db "#MON!", $57
 
-INCBIN "baserom.gbc",$a0f09,$a0fe3 - $a0f09
+
+_UnnamedText_75cc8: ; 0xa0f09
+    db $0, "Tch-tch-tch!", $4f
+    db "I made a cool TM!", $51
+    db "It can cause all", $4f
+    db "kinds of fun!", $58
+; 0xa0f09 + 63 bytes
+INCBIN "baserom.gbc",$a0f48,$a0f5d - $a0f48
+
+_UnnamedText_75cd3: ; 0xa0f5d
+    db $0, "Tch-tch-tch!", $4f
+    db "That's the sound", $55
+    db "of a METRONOME!", $51
+    db "It tweaks your", $4f
+    db "#MON's brain", $55
+    db "into using moves", $55
+    db "it doesn't know!", $57
+; 0xa0f5d + 106 bytes
+
+_UnnamedText_75cd8: ; 0xa0fc7
+    db $0, "Your pack is", $4f
+    db "crammed full!", $57
+; 0xa0fc7 + 28 bytes
+INCBIN "baserom.gbc",$a0fe3,$0
 
 _Lab3Text2: ; 0xa0fe3
     db $0, "EEVEE can evolve", $4f
@@ -41009,7 +51044,62 @@ _Lab3Text3: ; 0xa1010
 _Lab3Text5: ; 0xa10d8
     db $0, "An amber pipe!", $57
 
-INCBIN "baserom.gbc",$a10e8,$a12de - $a10e8
+
+_UnnamedText_75dc6: ; 0xa10e8
+    db $0, "Hiya!", $51
+    db "I am important", $4f
+    db "doctor!", $51
+    db "I study here rare", $4f
+    db "#MON fossils!", $51
+    db "You! Have you a", $4f
+    db "fossil for me?", $58
+; 0xa10e8 + 93 bytes
+
+_UnnamedText_75dcb: ; 0xa1145
+    db $0, "No! Is too bad!", $57
+; 0xa1145 + 17 bytes
+
+_UnnamedText_75dd0: ; 0xa1156
+    db $0, "I take a little", $4f
+    db "time!", $51
+    db "You go for walk a", $4f
+    db "little while!", $57
+; 0xa1156 + 55 bytes
+
+_UnnamedText_75dd5: ; 0xa118d
+    db $0, "Where were you?", $51
+    db "Your fossil is", $4f
+    db "back to life!", $51
+    db "It was @"
+; 0xa118d + 54 bytes
+INCBIN "baserom.gbc",$a11c3,$13
+
+_UnnamedText_610ae: ; 0xa11d6
+    db $0, "Oh! That is", $4f
+    db "@"
+; 0xa11d6 + 14 bytes
+INCBIN "baserom.gbc",$a11e4,$a1259 - $a11e4
+
+_UnnamedText_610b3: ; 0xa1259
+    db $0, "So! You hurry and", $4f
+    db "give me that!", $51
+    db $52, " handed", $4f
+    db "over @"
+; 0xa1259 + 48 bytes
+INCBIN "baserom.gbc",$a1289,$a128f - $a1289
+
+_UnnamedText_610b8: ; 0xa128f
+    db $0, "I take a little", $4f
+    db "time!", $51
+    db "You go for walk a", $4f
+    db "little while!", $57
+; 0xa128f + 55 bytes
+
+_UnnamedText_610bd: ; 0xa12c6
+    db $0, "Aiyah! You come", $4f
+    db "again!", $57
+; 0xa12c6 + 24 bytes
+INCBIN "baserom.gbc",$a12de,$0
 
 _CinnabarPokecenterText2:
 _CinnabarPokecenterText1: ; 0xa12de
@@ -41096,7 +51186,334 @@ _CopycatsHouseF2Text6: ; 0xa17be
     db "wearing a bucket", $55
     db "on his head!", $57
 
-INCBIN "baserom.gbc",$a17ef,$a2305 - $a17ef
+INCBIN "baserom.gbc",$a17ef,$a1852 - $a17ef
+
+_UnnamedText_5ce8e: ; 0xa1852
+    db $0, "Grunt!", $51
+    db "I am the KARATE", $4f
+    db "MASTER! I am the", $55
+    db "LEADER here!", $51
+    db "You wish to", $4f
+    db "challenge us?", $55
+    db "Expect no mercy!", $51
+    db "Fwaaa!", $57
+; 0xa1852 + 104 bytes
+
+_UnnamedText_5ce93: ; 0xa18ba
+    db $0, "Hwa!", $4f
+    db "Arrgh! Beaten!", $58
+; 0xa18ba + 21 bytes
+
+_UnnamedText_5ce98: ; 0xa18cf
+    db $0, "Indeed, I have", $4f
+    db "lost!", $51
+    db "But, I beseech", $4f
+    db "you, do not take", $55
+    db "our emblem as", $55
+    db "your trophy!", $51
+    db "In return, I will", $4f
+    db "give you a prized", $55
+    db "fighting #MON!", $51
+    db "Choose whichever", $4f
+    db "one you like!", $57
+; 0xa18cf + 163 bytes
+
+_UnnamedText_5ce9d: ; 0xa1972
+    db $0, "Ho!", $51
+    db "Stay and train at", $4f
+    db "Karate with us!", $57
+; 0xa1972 + 39 bytes
+
+_UnnamedText_5ceac: ; 0xa1999
+    db $0, "Hoargh! Take your", $4f
+    db "shoes off!", $57
+; 0xa1999 + 30 bytes
+
+_UnnamedText_5ceb1: ; 0xa19b7
+    db $0, "I give", $4f
+    db "up!", $58
+; 0xa19b7 + 12 bytes
+
+_UnnamedText_5ceb6: ; 0xa19c3
+    db $0, "You wait 'til you", $4f
+    db "see our Master!", $51
+    db "I'm a small fry", $4f
+    db "compared to him!", $57
+; 0xa19c3 + 66 bytes
+
+_UnnamedText_5cec5: ; 0xa1a05
+    db $0, "I hear you're", $4f
+    db "good! Show me!", $57
+; 0xa1a05 + 29 bytes
+
+_UnnamedText_5ceca: ; 0xa1a22
+    db $0, "Judge!", $4f
+    db "1 point!", $58
+; 0xa1a22 + 17 bytes
+
+_UnnamedText_5cecf: ; 0xa1a33
+    db $0, "Our Master is a", $4f
+    db "pro fighter!", $57
+; 0xa1a33 + 30 bytes
+
+_UnnamedText_5cede: ; 0xa1a51
+    db $0, "Nothing tough", $4f
+    db "frightens me!", $51
+    db "I break boulders", $4f
+    db "for training!", $57
+; 0xa1a51 + 60 bytes
+
+_UnnamedText_5cee3: ; 0xa1a8d
+    db $0, "Yow!", $4f
+    db "Stubbed fingers!", $58
+; 0xa1a8d + 23 bytes
+
+_UnnamedText_5cee8: ; 0xa1aa4
+    db $0, "The only thing", $4f
+    db "that frightens us", $55
+    db "is psychic power!", $57
+; 0xa1aa4 + 52 bytes
+
+_UnnamedText_5cef7: ; 0xa1ad8
+    db $0, "Hoohah!", $51
+    db "You're trespassing", $4f
+    db "in our FIGHTING", $55
+    db "DOJO!", $57
+; 0xa1ad8 + 49 bytes
+
+_UnnamedText_5cefc: ; 0xa1b09
+    db $0, "Oof!", $4f
+    db "I give up!", $58
+; 0xa1b09 + 17 bytes
+
+_UnnamedText_5cf01: ; 0xa1b1a
+    db $0, "The prime fighters", $4f
+    db "across the land", $55
+    db "train here.", $57
+; 0xa1b1a + 48 bytes
+INCBIN "baserom.gbc",$a1b4a,$0
+
+_UnnamedText_5cf49: ; 0xa1b4a
+    db $0, "You want the", $4f
+    db "hard kicking", $55
+    db "HITMONLEE?", $57
+; 0xa1b4a + 38 bytes
+
+_UnnamedText_5cf91: ; 0xa1b70
+    db $0, "You want the", $4f
+    db "piston punching", $55
+    db "HITMONCHAN?", $57
+; 0xa1b70 + 42 bytes
+
+_UnnamedText_5cf96: ; 0xa1b9a
+    db $0, "Better not get", $4f
+    db "greedy...", $57
+; 0xa1b9a + 26 bytes
+INCBIN "baserom.gbc",$a1bb4,$0
+
+_UnnamedText_5d162: ; 0xa1bb4
+    db $0, "I had a vision of", $4f
+    db "your arrival!", $51
+    db "I have had psychic", $4f
+    db "powers since I", $55
+    db "was a child.", $51
+    db "I first learned", $4f
+    db "to bend spoons", $55
+    db "with my mind.", $51
+    db "I dislike fight-", $4f
+    db "ing, but if you", $55
+    db "wish, I will show", $55
+    db "you my powers!", $57
+; 0xa1bb4 + 191 bytes
+INCBIN "baserom.gbc",$a1c73,$a1cdc - $a1c73
+
+_UnnamedText_5d16e: ; 0xa1cdc
+    db $0, "Everyone has", $4f
+    db "psychic power!", $55
+    db "People just don't", $55
+    db "realize it!", $57
+; 0xa1cdc + 58 bytes
+
+_UnnamedText_5d173: ; 0xa1d16
+    db $0, "The MARSHBADGE", $4f
+    db "makes #MON up", $55
+    db "to L70 obey you!", $51
+    db "Stronger #MON", $4f
+    db "will become wild,", $55
+    db "ignoring your", $55
+    db "orders in battle!", $51
+    db "Just don't raise", $4f
+    db "your #MON too", $55
+    db "much!", $51
+    db "Wait, please take", $4f
+    db "this TM with you!", $57
+; 0xa1d16 + 183 bytes
+INCBIN "baserom.gbc",$a1dcd,$a1de0 - $a1dcd
+
+_UnnamedText_5d17d: ; 0xa1de0
+    db $0, $51
+    db "TM46 is PSYWAVE!", $4f
+    db "It uses powerful", $55
+    db "psychic waves to", $55
+    db "inflict damage!", $57
+; 0xa1de0 + 69 bytes
+INCBIN "baserom.gbc",$a1e25,$a1e48 - $a1e25
+
+_UnnamedText_5d1e6: ; 0xa1e48
+    db $0, "Yo! Champ in", $4f
+    db "making!", $51
+    db "SABRINA's #MON", $4f
+    db "use psychic power", $55
+    db "instead of force!", $51
+    db "Fighting #MON", $4f
+    db "are weak against", $55
+    db "psychic #MON!", $51
+    db "They get creamed", $4f
+    db "before they can", $55
+    db "even aim a punch!", $57
+; 0xa1e48 + 168 bytes
+
+_UnnamedText_5d1eb: ; 0xa1ef0
+    db $0, "Psychic power,", $4f
+    db "huh?", $51
+    db "If I had that,", $4f
+    db "I'd make a bundle", $55
+    db "at the slots!", $57
+; 0xa1ef0 + 67 bytes
+
+_UnnamedText_5d1f0: ; 0xa1f33
+    db $0, "SABRINA is younger", $4f
+    db "than I, but I", $55
+    db "respect her!", $57
+; 0xa1f33 + 47 bytes
+
+_UnnamedText_5d1f5: ; 0xa1f62
+    db $0, "Not", $4f
+    db "good enough!", $58
+; 0xa1f62 + 18 bytes
+
+_UnnamedText_5d1fa: ; 0xa1f74
+    db $0, "In a battle of", $4f
+    db "equals, the one", $55
+    db "with the stronger", $55
+    db "will wins!", $51
+    db "If you wish", $4f
+    db "to beat SABRINA,", $55
+    db "focus on winning!", $57
+; 0xa1f74 + 108 bytes
+
+_UnnamedText_5d1ff: ; 0xa1fe0
+    db $0, "Does our unseen", $4f
+    db "power scare you?", $57
+; 0xa1fe0 + 34 bytes
+
+_UnnamedText_5d204: ; 0xa2002
+    db $0, "I never", $4f
+    db "foresaw this!", $58
+; 0xa2002 + 23 bytes
+
+_UnnamedText_5d209: ; 0xa2019
+    db $0, "Psychic #MON", $4f
+    db "fear only ghosts", $55
+    db "and bugs!", $57
+; 0xa2019 + 41 bytes
+
+_UnnamedText_5d20e: ; 0xa2042
+    db $0, "#MON take on", $4f
+    db "the appearance of", $55
+    db "their trainers.", $51
+    db "Your #MON must", $4f
+    db "be tough, then!", $57
+; 0xa2042 + 79 bytes
+
+_UnnamedText_5d213: ; 0xa2091
+    db $0, "I knew", $4f
+    db "it!", $58
+; 0xa2091 + 12 bytes
+
+_UnnamedText_5d218: ; 0xa209d
+    db $0, "I must teach", $4f
+    db "better techniques", $55
+    db "to my #MON!", $57
+; 0xa209d + 44 bytes
+
+_UnnamedText_5d21d: ; 0xa20c9
+    db $0, "You know that", $4f
+    db "power alone isn't", $55
+    db "enough!", $57
+; 0xa20c9 + 40 bytes
+
+_UnnamedText_5d222: ; 0xa20f1
+    db $0, "I don't", $4f
+    db "believe this!", $58
+; 0xa20f1 + 22 bytes
+
+_UnnamedText_5d227: ; 0xa2107
+    db $0, "SABRINA just wiped", $4f
+    db "out the KARATE", $55
+    db "MASTER next door!", $57
+; 0xa2107 + 53 bytes
+
+_UnnamedText_5d22c: ; 0xa213c
+    db $0, "You and I, our", $4f
+    db "#MON shall", $55
+    db "fight!", $57
+; 0xa213c + 34 bytes
+
+_UnnamedText_5d231: ; 0xa215e
+    db $0, "I lost", $4f
+    db "after all!", $58
+; 0xa215e + 19 bytes
+
+_UnnamedText_5d236: ; 0xa2171
+    db $0, "I knew that this", $4f
+    db "was going to take", $55
+    db "place.", $57
+; 0xa2171 + 43 bytes
+
+_UnnamedText_5d23b: ; 0xa219c
+    db $0, "SABRINA is young,", $4f
+    db "but she's also", $55
+    db "our LEADER!", $51
+    db "You won't reach", $4f
+    db "her easily!", $57
+; 0xa219c + 72 bytes
+
+_UnnamedText_5d240: ; 0xa21e4
+    db $0, "I lost", $4f
+    db "my concentration!", $58
+; 0xa21e4 + 26 bytes
+
+_UnnamedText_5d245: ; 0xa21fe
+    db $0, "There used to be", $4f
+    db "2 #MON GYMs in", $55
+    db "SAFFRON.", $51
+    db "The FIGHTING DOJO", $4f
+    db "next door lost", $55
+    db "its GYM status", $55
+    db "when we went and", $55
+    db "creamed them!", $57
+; 0xa21fe + 121 bytes
+
+_UnnamedText_5d24a: ; 0xa2277
+    db $0, "SAFFRON #MON", $4f
+    db "GYM is famous for", $55
+    db "its psychics!", $51
+    db "You want to see", $4f
+    db "SABRINA!", $55
+    db "I can tell!", $57
+; 0xa2277 + 83 bytes
+
+_UnnamedText_5d24f: ; 0xa22ca
+    db $0, "Arrrgh!", $58
+; 0xa22ca + 9 bytes
+
+_UnnamedText_5d254: ; 0xa22d3
+    db $0, "That's right! I", $4f
+    db "used telepathy to", $55
+    db "read your mind!", $57
+; 0xa22d3 + 50 bytes
+INCBIN "baserom.gbc",$a2305,$0
 
 _SaffronHouse1Text1: ; 0xa2305
     db $0, "Thank you for", $4f
@@ -41149,11 +51566,210 @@ _SaffronPokecenterText3: ; 0xa24bf
     db "why it attracted", $55
     db "TEAM ROCKET!", $57
 
-INCBIN "baserom.gbc",$a24fe,$a2a37-$a24fe
+
+_UnnamedText_1de75: ; 0xa24fe
+    db $0, "...Wait! Don't", $4f
+    db "say a word!", $51
+    db "You wanted this!", $58
+; 0xa24fe + 44 bytes
+INCBIN "baserom.gbc",$a252a,$a253e - $a252a
+
+_UnnamedText_1de80: ; 0xa253e
+    db $0, "TM29 is PSYCHIC!", $51
+    db "It can lower the", $4f
+    db "target's SPECIAL", $55
+    db "abilities.", $57
+; 0xa253e + 62 bytes
+
+_UnnamedText_1de85: ; 0xa257c
+    db $0, "Where do you plan", $4f
+    db "to put this?", $57
+; 0xa257c + 32 bytes
+INCBIN "baserom.gbc",$a259c,$a2608 - $a259c
+
+_UnnamedText_6e0c: ; 0xa2608
+    db $0, "Take your time.", $57
+; 0xa2608 + 17 bytes
+
+_UnnamedText_6e11: ; 0xa2619
+    TX_RAM $cf4b
+    db $0, "?", $4f
+    db "That will be", $55
+    db $f0, "@"
+; 0xa2619 + 21 bytes
+INCBIN "baserom.gbc",$a262e,$a2639 - $a262e
+
+_UnnamedText_6e16: ; 0xa2639
+    db $0, "Here you are!", $4f
+    db "Thank you!", $58
+; 0xa2639 + 26 bytes
+
+_UnnamedText_6e1b: ; 0xa2653
+    db $0, "You don't have", $4f
+    db "enough money.", $58
+; 0xa2653 + 29 bytes
+
+_UnnamedText_6e20: ; 0xa2670
+    db $0, "You can't carry", $4f
+    db "any more items.", $58
+; 0xa2670 + 32 bytes
+
+_UnnamedText_6e25: ; 0xa2690
+    db $0, "What would you", $4f
+    db "like to sell?", $57
+; 0xa2690 + 30 bytes
+
+_UnnamedText_6e2a: ; 0xa26ae
+    db $0, "I can pay you", $4f
+    db $f0, "@"
+; 0xa26ae + 17 bytes
+INCBIN "baserom.gbc",$a26bf,$a26cf - $a26bf
+
+_UnnamedText_6e2f: ; 0xa26cf
+    db $0, "You don't have", $4f
+    db "anything to sell.", $58
+; 0xa26cf + 33 bytes
+
+_UnnamedText_6e34: ; 0xa26f0
+    db $0, "I can't put a", $4f
+    db "price on that.", $58
+; 0xa26f0 + 29 bytes
+
+_UnnamedText_6e39: ; 0xa270d
+    db $0, "Thank you!", $57
+; 0xa270d + 12 bytes
+
+_UnnamedText_6e3e: ; 0xa2719
+    db $0, "Is there anything", $4f
+    db "else I can do?", $57
+; 0xa2719 + 34 bytes
+INCBIN "baserom.gbc",$a273b,$a2750 - $a273b
+
+_UnnamedText_6fb4: ; 0xa2750
+    db $0, "Which move should", $4e, "be forgotten?", $57
+; 0xa2750 + 33 bytes
+
+_UnnamedText_6fb9: ; 0xa2771
+    db $0, "Abandon learning", $4f
+    db "@"
+; 0xa2771 + 19 bytes
+INCBIN "baserom.gbc",$a2784,$a278a - $a2784
+
+_UnnamedText_6fbe: ; 0xa278a
+    TX_RAM $d036
+    db $0, $4f
+    db "did not learn", $55
+    db "@"
+; 0xa278a + 20 bytes
+INCBIN "baserom.gbc",$a279e,$a27a4 - $a279e
+
+_UnnamedText_6fc3: ; 0xa27a4
+    TX_RAM $d036
+    db $0, " is", $4f
+    db "trying to learn", $55
+    db "@"
+; 0xa27a4 + 25 bytes
+INCBIN "baserom.gbc",$a27bd,$a2830 - $a27bd
+
+_UnnamedText_6fdc: ; 0xa2830
+    db $0, $51
+    db "@"
+; 0xa2830 + 3 bytes
+INCBIN "baserom.gbc",$a2833,$a284d - $a2833
+
+_UnnamedText_6fe1: ; 0xa284d
+    db $0, "HM techniques", $4f
+    db "can't be deleted!", $58
+; 0xa284d + 32 bytes
+
+_UnnamedText_705d: ; 0xa286d
+    db $0, "Welcome to our", $4f
+    db "#MON CENTER!", $51
+    db "We heal your", $4f
+    db "#MON back to", $55
+    db "perfect health!", $58
+; 0xa286d + 71 bytes
+
+_UnnamedText_7063: ; 0xa28b4
+    db $0, "Shall we heal your", $4f
+    db "#MON?", $57
+; 0xa28b4 + 26 bytes
+
+_UnnamedText_7068: ; 0xa28ce
+    db $0, "OK. We'll need", $4f
+    db "your #MON.", $57
+; 0xa28ce + 26 bytes
+
+_UnnamedText_706d: ; 0xa28e8
+    db $0, "Thank you!", $4f
+    db "Your #MON are", $55
+    db "fighting fit!", $58
+; 0xa28e8 + 40 bytes
+
+_UnnamedText_7073: ; 0xa2910
+    db $0, "We hope to see", $4f
+    db "you again!", $57
+; 0xa2910 + 27 bytes
+
+_UnnamedText_72b3: ; 0xa292b
+    db $0, "This area is", $4f
+    db "reserved for 2", $55
+    db "friends who are", $55
+    db "linked by cable.", $57
+; 0xa292b + 62 bytes
+
+_UnnamedText_72b8: ; 0xa2969
+    db $0, "Welcome to the", $4f
+    db "Cable Club!", $57
+; 0xa2969 + 28 bytes
+INCBIN "baserom.gbc",$a2985,$b2
 
 SECTION "bank29",DATA,BANK[$29]
 
-INCBIN "baserom.gbc",$A4000,$245
+INCBIN "baserom.gbc",$a4000,$a40a9 - $a4000
+
+_UnnamedText_13228: ; 0xa40a9
+    db $0, "A blinding FLASH", $4f
+    db "lights the area!", $58
+; 0xa40a9 + 35 bytes
+
+_UnnamedText_1327b: ; 0xa40cc
+    db $0, "Warp to the last", $4f
+    db "#MON CENTER.", $57
+; 0xa40cc + 31 bytes
+
+_UnnamedText_13280: ; 0xa40eb
+    TX_RAM $cd6d
+    db $0, " can't", $4f
+    db "use TELEPORT now.", $58
+; 0xa40eb + 28 bytes
+
+_UnnamedText_13285: ; 0xa4107
+    TX_RAM $cd6d
+    db $0, " can't", $4f
+    db "FLY here.", $58
+; 0xa4107 + 20 bytes
+
+_UnnamedText_132d4: ; 0xa411b
+    db $0, "Not healthy", $4f
+    db "enough.", $58
+; 0xa411b + 21 bytes
+
+_UnnamedText_132e8: ; 0xa4130
+    db $0, "No! A new BADGE", $4f
+    db "is required.", $58
+; 0xa4130 + 30 bytes
+
+_UnnamedText_1342a: ; 0xa414e
+    db $0, "You can't use items", $4f
+    db "here.", $58
+; 0xa414e + 26 bytes
+
+_UnnamedText_1342f: ; 0xa4168
+    db $0, "You can't get off", $4f
+    db "here.", $58
+; 0xa4168 + 24 bytes
+INCBIN "baserom.gbc",$a4180,$c5
 
 INCLUDE "text/mapPalletTown.tx"
 
@@ -41166,7 +51782,23 @@ _ViridianCityText1:
     db "use #MON any", $55
     db "time, anywhere!", $57
 
-INCBIN "baserom.gbc",$a4437,$a4833 - $a4437
+INCBIN "baserom.gbc",$a4437,$a4525 - $a4437
+
+_UnnamedText_19175: ; 0xa4525
+    db $0, "Oh Grandpa! Don't", $4f
+    db "be so mean!", $55
+    db "He hasn't had his", $55
+    db "coffee yet.", $57
+; 0xa4525 + 59 bytes
+
+_UnnamedText_1917a: ; 0xa4560
+    db $0, "When I go shop in", $4f
+    db "PEWTER CITY, I", $55
+    db "have to take the", $55
+    db "winding trail in", $55
+    db "VIRIDIAN FOREST.", $57
+; 0xa4560 + 85 bytes
+INCBIN "baserom.gbc",$a45b5,$27e
 
 _ViridianCityText8: ; 0xa4833
     db $0, "VIRIDIAN CITY ", $4f
@@ -41217,7 +51849,16 @@ _PewterCityText2: ; 0xa49e0
     db "BROCK is totally", $55
     db "into it!", $57
 
-INCBIN "baserom.gbc",$a4a56,$a4bfe - $a4a56
+INCBIN "baserom.gbc",$a4a56,$a4b87 - $a4a56
+
+_UnnamedText_1945d: ; 0xa4b87
+    db $0, "You're a trainer", $4f
+    db "right? BROCK's", $55
+    db "looking for new", $55
+    db "challengers!", $55
+    db "Follow me!", $57
+; 0xa4b87 + 71 bytes
+INCBIN "baserom.gbc",$a4bce,$30
 
 _PewterCityText6: ; 0xa4bfe
     db $0, "TRAINER TIPS", $51
@@ -41327,7 +51968,25 @@ _CeruleanCityText17: ; 0xa5445
     db "The Tomboyish", $4f
     db "Mermaid!", $57
 
-INCBIN "baserom.gbc",$a5482,$a5506 - $a5482
+
+_UnnamedText_4413c: ; 0xa5482
+    db $0, "Do you believe in", $4f
+    db "GHOSTs?", $57
+; 0xa5482 + 27 bytes
+
+_UnnamedText_44141: ; 0xa549d
+    db $0, "Really? So there", $4f
+    db "are believers...", $57
+; 0xa549d + 35 bytes
+
+_UnnamedText_44146: ; 0xa54c0
+    db $0, "Hahaha, I guess", $4f
+    db "not.", $51
+    db "That white hand", $4f
+    db "on your shoulder,", $55
+    db "it's not real.", $57
+; 0xa54c0 + 70 bytes
+INCBIN "baserom.gbc",$a5506,$0
 
 _LavenderTownText2: ; 0xa5506
     db $0, "This town is known", $4f
@@ -41577,7 +52236,12 @@ _FuchsiaCityText18: ; 0xa6011
     db "The Poisonous", $4f
     db "Ninja Master", $57
 
-INCBIN "baserom.gbc",$a6050,$a61e6 - $a6050
+INCBIN "baserom.gbc",$a6050,$a61cf - $a6050
+
+_UnnamedText_1ca91: ; 0xa61cf
+    db $0, "The door is", $4f
+    db "locked...", $57
+; 0xa61cf + 23 bytes
 
 _CinnabarIslandText1: ; 0xa61e6
     db $0, "CINNABAR GYM's", $4f
@@ -41787,7 +52451,100 @@ _ItemUseText002: ; 0xa8009
     db $0, "!", $57
 ; 0xa800e
 
-INCBIN "baserom.gbc",$A800F,$a8330-$a800F
+INCBIN "baserom.gbc",$a800f,$a8088 - $a800f
+
+_UnnamedText_2fe3b: ; 0xa8088
+    TX_RAM $cd6d
+    db $0, " knows", $4f
+    db "@"
+; 0xa8088 + 12 bytes
+INCBIN "baserom.gbc",$a8094,$a809a - $a8094
+
+_UnnamedText_71d88: ; 0xa809a
+    db $0, "Okay, connect the", $4f
+    db "cable like so!", $58
+; 0xa809a + 34 bytes
+INCBIN "baserom.gbc",$a80bc,$a80d8 - $a80bc
+
+_UnnamedText_71d94: ; 0xa80d8
+    db $0, "I'm looking for", $4f
+    db "@"
+; 0xa80d8 + 17 bytes
+INCBIN "baserom.gbc",$a80e9,$a810b - $a80e9
+
+_UnnamedText_71d99: ; 0xa810b
+    db $0, "Awww!", $4f
+    db "Oh well...", $57
+; 0xa810b + 18 bytes
+
+_UnnamedText_71d9e: ; 0xa811d
+    db $0, "What? That's not", $4f
+    db "@"
+; 0xa811d + 18 bytes
+INCBIN "baserom.gbc",$a812f,$a8155 - $a812f
+
+_UnnamedText_71da3: ; 0xa8155
+    db $0, "Hey thanks!", $57
+; 0xa8155 + 13 bytes
+
+_UnnamedText_71da8: ; 0xa8162
+    db $0, "Isn't my old", $4f
+    db "@"
+; 0xa8162 + 14 bytes
+INCBIN "baserom.gbc",$a8170,$a817c - $a8170
+
+_UnnamedText_71dad: ; 0xa817c
+    db $0, "Hello there! Do", $4f
+    db "you want to trade", $51
+    db "your @"
+; 0xa817c + 41 bytes
+INCBIN "baserom.gbc",$a81a5,$a81b5 - $a81a5
+
+_UnnamedText_71db2: ; 0xa81b5
+    db $0, "Well, if you", $4f
+    db "don't want to...", $57
+; 0xa81b5 + 30 bytes
+
+_UnnamedText_71db7: ; 0xa81d3
+    db $0, "Hmmm? This isn't", $4f
+    db "@"
+; 0xa81d3 + 18 bytes
+INCBIN "baserom.gbc",$a81e5,$a8209 - $a81e5
+
+_UnnamedText_71dbc: ; 0xa8209
+    db $0, "Thanks!", $57
+; 0xa8209 + 9 bytes
+
+_UnnamedText_71dc1: ; 0xa8212
+    db $0, "The @"
+; 0xa8212 + 6 bytes
+INCBIN "baserom.gbc",$a8218,$a8240 - $a8218
+
+_UnnamedText_71dc6: ; 0xa8240
+    db $0, "Hi! Do you have", $4f
+    db "@"
+; 0xa8240 + 18 bytes
+INCBIN "baserom.gbc",$a8252,$a8274 - $a8252
+
+_UnnamedText_71dcb: ; 0xa8274
+    db $0, "That's too bad.", $57
+; 0xa8274 + 16 bytes
+
+_UnnamedText_71dd0: ; 0xa8284
+    db $0, "...This is no", $4f
+    db "@"
+; 0xa8284 + 16 bytes
+INCBIN "baserom.gbc",$a8294,$a82bc - $a8294
+
+_UnnamedText_71dd5: ; 0xa82bc
+    db $0, "Thanks pal!", $57
+; 0xa82bc + 13 bytes
+
+_UnnamedText_71dda: ; 0xa82c9
+    db $0, "How is my old", $4f
+    db "@"
+; 0xa82c9 + 16 bytes
+INCBIN "baserom.gbc",$a82d9,$57
 
 SECTION "bank2B",DATA,BANK[$2B]
 INCLUDE "text/pokedex.tx"
