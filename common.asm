@@ -41782,10 +41782,10 @@ SECTION "bank2A",DATA,BANK[$2A]
 _ItemUseText001:
 	db 0,$52," used@@"
 
-_ItemUseText002:
-	db 1
-	dw $CF4B
-	db 0,"!",$57
+_ItemUseText002: ; 0xa8009
+    TX_RAM $cf4b
+    db $0, "!", $57
+; 0xa800e
 
 INCBIN "baserom.gbc",$A800F,$a8330-$a800F
 
