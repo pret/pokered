@@ -418,6 +418,12 @@ def insert_text(address, label, apply=False, try_fixing=True):
         print "skipping text at " + hex(start_address) + " with address " + label
         return "skip"
 
+    #another reason to skip is if the interval is 0
+    processed_incbin = analyze_incbins.processed_incbins[line_number]
+    if processed_incbin["interval"] == 0:
+        print "skipping text at " + hex(start_address) + " with address " + label + " because the interval is 0"
+        return "skip"
+
     text_asm, byte_count = text_pretty_printer_at(start_address, label)
     end_address = start_address + byte_count
     newlines = split_incbin_line_into_three(line_number, start_address, byte_count)
@@ -612,7 +618,7 @@ def scan_rom_for_tx_fars_and_insert():
     for address_bundle in address_bundles:
         tx_far_address = address_bundle[1]
         tx_far_target_address = address_bundle[0]
-        if tx_far_address < 0x6150f: continue
+        #if tx_far_address < 0x7627b: continue #because it stopped a few times for errors
 
         tx_far_label = "UnnamedText_%.2x" % (tx_far_address)
         tx_far_target_label = "_" + tx_far_label

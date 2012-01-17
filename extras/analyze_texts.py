@@ -616,6 +616,7 @@ def scan_rom_for_tx_fars(printer=True):
         incbin = analyze_incbins.processed_incbins[incbin_line_number]
         start_address = incbin["start"]
         end_address = incbin["end"]
+        if incbin["interval"] == 0: continue #skip this one
 
         subrom = rom[start_address:end_address]
         for address in range(start_address, end_address):
