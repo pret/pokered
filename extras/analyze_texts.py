@@ -387,16 +387,16 @@ def text_pretty_printer_at(start_address, label="SomeLabel"):
     commands = parse_text_script(start_address, None, None)
     needs_to_begin_with_0 = True #how should this be determined?
     
-    wanted_command = None
-    if needs_to_begin_with_0:
-        wanted_command = None
-        for command_id in commands:
-            command = commands[command_id]
-            if command["type"] == 0:
-                wanted_command = command_id
-    
-        if wanted_command == None:
-            raise "error: address did not start with a $0 text"
+    #wanted_command = None
+    #if needs_to_begin_with_0:
+    #    wanted_command = None
+    #    for command_id in commands:
+    #        command = commands[command_id]
+    #        if command["type"] == 0:
+    #            wanted_command = command_id
+    #
+    #    if wanted_command == None:
+    #        raise "error: address did not start with a $0 text"
     
     #start with zero please
     byte_count = 0
@@ -405,6 +405,10 @@ def text_pretty_printer_at(start_address, label="SomeLabel"):
     for this_command in commands.keys():
         if not "lines" in commands[this_command].keys():
             command = commands[this_command]
+            if not "type" in command.keys():
+                output = "ERROR in command: " + str(command)
+                continue #dunno what to do here?
+
             if command["type"] == 0x1:
                 if first_line:
                     output = "\n"
@@ -486,7 +490,7 @@ def text_pretty_printer_at(start_address, label="SomeLabel"):
             output += "\n"
 
     #output += "\n"
-    output += "; " + hex(start_address + byte_count)
+    output += "; " + hex(start_address + byte_count + 1)
     print output
     return (output, byte_count)
 
@@ -532,27 +536,76 @@ def find_undone_texts():
     for result in sorted_results:
         print str(result[1]) + " times: " + hex(result[0])
 
+def scan_rom_for_tx_fars():
+    """find TX_FARs
+    search only addresses that are INCBINed
+    keep only TX_FARs that are valid"""
+    rom = extract_maps.rom
+
+    analyze_incbins.load_asm()
+    analyze_incbins.isolate_incbins()
+    analyze_incbins.process_incbins()
+
+    possible_tx_fars = []
+    possible_tx_far_targets = []
+    
+    for incbin_line_number in analyze_incbins.processed_incbins.keys():
+        incbin = analyze_incbins.processed_incbins[incbin_line_number]
+        start_address = incbin["start"]
+        end_address = incbin["end"]
+
+        subrom = rom[start_address:end_address]
+        for address in range(start_address, end_address):
+            current_byte = ord(rom[address])
+            if current_byte == 0x17:
+                if ord(rom[address+4]) == 0x50:
+                    byte1 = ord(rom[address+1])
+                    byte2 = ord(rom[address+2])
+                    address2 = byte1 + (byte2 << 8)
+                    if address2 > 0x3fff:
+                        address2 = extract_maps.calculate_pointer(address2, ord(rom[address+3]))
+                    #print "possible TX_FAR at " + hex(address) + " to " + hex(address2)
+                    possible_tx_fars.append(address)
+                    possible_tx_far_targets.append([address2, address])
+
+    pre_handled = []
+    for address_bundle in possible_tx_far_targets:
+        if address_bundle[0] in [0xa82f8, 0xa8315]:
+            continue #bad
+        if address_bundle[0] in pre_handled:
+            continue #already did this
+
+        print "-------"
+        print "TX_FAR is at: " + hex(address_bundle[1])
+        text_pretty_printer_at(address_bundle[0], "blah")
+        print "-------"
+        pre_handled.append(address_bundle[0])
+
 if __name__ == "__main__":
     extract_maps.load_rom()
     extract_maps.load_map_pointers()
     extract_maps.read_all_map_headers()
-    text_output = analyze_texts()
+    #text_output = analyze_texts()
     #print text_output
 
-    missing_08s = find_missing_08s(text_output)
+    #these aren't really "missing", just a certain type that was
+    #known to be missed on a first pass.
+    #missing_08s = find_missing_08s(text_output)
 
-    print "\n\n---- stats ----\n\n"
+    #print "\n\n---- stats ----\n\n"
     
-    popular_text_commands = sorted(totals.iteritems(), key=itemgetter(1), reverse=True)
+    #popular_text_commands = sorted(totals.iteritems(), key=itemgetter(1), reverse=True)
     #convert the first values (command byte) to hex
-    for popular_item in popular_text_commands:
-        print hex(popular_item[0]) + " was used " + str(popular_item[1]) + " times."
+    #for popular_item in popular_text_commands:
+    #    print hex(popular_item[0]) + " was used " + str(popular_item[1]) + " times."
     #print "popular text commands: " + str(popular_text_commands)
     
-    print "total text commands: " + str(total_text_commands)
-    print "total text scripts: " + str(should_be_total)
-    print "missing 08s: " + str(missing_08s)
-    print "\n\n"
+    #print "total text commands: " + str(total_text_commands)
+    #print "total text scripts: " + str(should_be_total)
+    #print "missing 08s: " + str(missing_08s)
+    #print "\n\n"
 
     #text_pretty_printer_at(0x800b1)
-    find_undone_texts()
+    #find_undone_texts()
+
+    scan_rom_for_tx_fars()
