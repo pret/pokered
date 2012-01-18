@@ -8,7 +8,10 @@ def main():
     usage = "usage: %prog address label"
     parser = OptionParser(usage)
     (options, args) = parser.parse_args()
-    if len(args) != 2:
+    if len(args) == 1:
+        print "usage: python pretty_text.py address label"
+        args.append("UnnamedText_" + (args[0].replace("0x", "")))
+    elif len(args) != 2:
         parser.error("we need both an address and a label")
     address = int(args[0], 16)
     label = args[1]
