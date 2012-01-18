@@ -233,7 +233,7 @@ MapHeaderPointers: ; $01AE
 	dw Lance_h ; unused
 	dw Lance_h ; unused
 	dw Lance_h ; unused
-	dw HallofFameRoom_h ;118
+	dw HallofFameRoom_h ;id=118
 	dw UndergroundPathNS_h
 	dw Gary_h
 	dw UndergroundPathWE_h
