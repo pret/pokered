@@ -5,7 +5,7 @@
 import extract_maps #rom, assert_rom, load_rom, calculate_pointer, load_map_pointers, read_all_map_headers, map_headers
 from pretty_map_headers import map_name_cleaner
 #import analyze_incbins #asm, offset_to_pointer, find_incbin_to_replace_for, split_incbin_line_into_three, generate_diff_insert, load_asm, isolate_incbins, process_incbins
-spacing = "    "
+spacing = "	"
 
 def test_first_text_pointer_bytes(range=20): #30 for viridian city, 34 for cerulean city, 36 for celadon, 48 for fuchsia city, 50 for safron
     """

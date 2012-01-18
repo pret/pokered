@@ -2597,7 +2597,7 @@ FlyWarpDataPtr:
 	db $0F,0
         dw Map0fFlyWarp
 	db $15,0
-        dw Map15FlyWarp	
+        dw Map15FlyWarp
 
 ; Original Format:
 ;   [Event Displacement][Y-block][X-block][Y-sub_block][X-sub_block]
@@ -25806,7 +25806,7 @@ CeladonMartRoof_h: ; 0x483c9 to 0x483d5 (12 bytes) (bank=12) (id=126)
     db CELADON_MART_5_HEIGHT, CELADON_MART_5_WIDTH ; dimensions (y, x)
     dw CeladonMartRoofBlocks, CeladonMartRoofTexts, CeladonMartRoofScript ; blocks, texts, scripts
     db $00 ; connections
-    
+
     dw CeladonMartRoofObject ; objects
 
 CeladonMartRoofScript: ; 0x483d5
@@ -31648,7 +31648,7 @@ PrizeDifferentMenuPtrs: ; 14:6843
 
         dw PrizeMenuMon2Entries
         dw PrizeMenuMon2Cost
-        
+ 
         dw PrizeMenuTMsEntries
         dw PrizeMenuTMsCost
 
@@ -31955,7 +31955,7 @@ Route2_h:
 	dw Route2Texts ;Maps text pointer
 	dw Route2Script ;Maps script pointer
 	db NORTH | SOUTH ;Connection Byte
-	
+
 	;Connection data
 	db PEWTER_CITY ;Map
 		dw $4714 ;y, x Strip Starting Point
@@ -31965,7 +31965,7 @@ Route2_h:
 		db 35 ;Player's new Y-Coordinates
 		db 10 ;Player's new X-Coordinates
 		dw $C8BD ;New UL Block Pos (Window)
-		
+
 	db VIRIDIAN_CITY ;Map
 		dw $43EE ;y, x Strip Starting Point
 		dw $C958 ;Strip X-Offset to current map
@@ -31974,7 +31974,7 @@ Route2_h:
 		db 0 ;Player's new Y-Coordinates
 		db 10 ;Player's new X-Coordinates
 		dw $C703 ;New UL Block Pos (Window)
-	
+
 	dw Route2Object ;Object Data Pointer
 
 Route2Object: ; 0x54022 (size=72)

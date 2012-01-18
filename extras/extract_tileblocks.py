@@ -8,7 +8,7 @@
 import sys
 import extract_maps
 extract_maps.load_rom()
-spacing = "    "
+spacing = "	"
 
 tileblocks = {
 "Tset00_Block": [0x645E0, 0x64DE0, ""],

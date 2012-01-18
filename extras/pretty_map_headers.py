@@ -11,7 +11,7 @@ import string
 import analyze_texts #hopefully not a dependency loop
 
 base = 16
-spacing = "    "
+spacing = "	"
 all_texts = None
 
 #map constants

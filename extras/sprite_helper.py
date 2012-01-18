@@ -1,5 +1,5 @@
 from extract_maps import *
-spacing = "    "
+spacing = "	"
 load_rom()
 load_map_pointers()
 read_all_map_headers()
