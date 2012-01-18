@@ -44666,7 +44666,14 @@ UnnamedText_74ace: ; 0x74ace
     db $50
 ; 0x74ace + 5 bytes
 
-INCBIN "baserom.gbc",$74ad3,$c
+UnnamedText_74ad3: ; 0x74ad3
+    TX_FAR _UnnamedText_74ad3
+    db $0b, $50
+; 0x74ad3 + 5 bytes
+
+UnnamedText_74ad8:
+	TX_FAR _UnnamedText_74ad8
+	db $0d, $50
 
 ViridianGymText12: ; 0x74adf
     TX_FAR _ViridianGymText12
@@ -44674,10 +44681,12 @@ ViridianGymText12: ; 0x74adf
 ; 0x74adf + 5 bytes
 
 ViridianGymText13: ; 0x74ae4
+	TX_FAR _UnnamedText_74ae4
+	db $0b
 
-INCBIN "baserom.gbc",$74ae4, 5
-
-INCBIN "baserom.gbc",$74ae9,$74aee - $74ae9
+UnnamedText_74ae9:
+	TX_FAR _UnnamedText_74ae9
+	db $50
 
 ViridianGymText14: ; 0x74aee
     TX_FAR _UnnamedText_74aee
@@ -56536,7 +56545,28 @@ _UnnamedText_74ace: ; 0x95e09
     db "greatest trainer!", $57
 ; 0x95e09 + 204 bytes
 
-INCBIN "baserom.gbc",$95ed5,$95fcc - $95ed5
+_UnnamedText_74ad3: ; 0x95ed5
+    db $0, "Ha!", $4f
+    db "That was a truly", $55
+    db "intense fight!", $55
+    db "You have won!", $55
+    db "As proof, here is", $55
+    db "the EARTHBADGE!@@"
+; 0x95ed5 + 85 bytes
+
+_UnnamedText_74ad8: ; 0x95f2b
+    db $0, "Having lost, I", $4f
+    db "cannot face my", $55
+    db "underlings!", $55
+    db "TEAM ROCKET is", $55
+    db "finished forever!", $51
+    db "I will dedicate my", $4f
+    db "life to the study", $55
+    db "of #MON!", $51
+    db "Let us meet again", $4f
+    db "some day!", $55
+    db "Farewell!@@"
+; 0x95f2b + 160 bytes
 
 _ViridianGymText12:
     db $0, "The EARTHBADGE", $4f
@@ -56553,7 +56583,10 @@ _ViridianGymText12:
     db "LEAGUE challenge!", $57
 ; 0x95fcc + 182 bytes
 
-INCBIN "baserom.gbc",$96082,$96095 - $96082
+_UnnamedText_74ae4: ; 0x96082
+    db $0, $52, " received", $4f
+    db "TM27!@@"
+; 0x96082 + 19 bytes
 
 _UnnamedText_74ae9: ; 0x96095
     db $0, $51
