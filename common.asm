@@ -55836,13 +55836,20 @@ _UnnamedText_3af43: ; 0x946cf
     db "into @"
 ; 0x946cf + 8 bytes
 
-INCBIN "baserom.gbc",$946d7,$946dd - $946d7
+UnknownText_946d7: ; 0x946d7
+    TX_RAM $cd6d
+    db $0, "!", $57
+; 0x946d7 + 6 bytes
 
 _UnnamedText_3af48: ; 0x946dd
     db $0, "Huh? @"
 ; 0x946dd + 7 bytes
 
-INCBIN "baserom.gbc",$946e4,$946fb - $946e4
+UnknownText_946e4: ; 0x946e4
+    TX_RAM $cf4b
+    db $0, $4f
+    db "stopped evolving!", $58
+; 0x946e4 + 23 bytes
 
 _UnnamedText_3af4d: ; 0x946fb
     db $0, "What? @"
