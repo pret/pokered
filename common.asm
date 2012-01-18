@@ -55848,7 +55848,11 @@ _UnnamedText_3af4d: ; 0x946fb
     db $0, "What? @"
 ; 0x946fb + 8 bytes
 
-INCBIN "baserom.gbc",$94703,$94715 - $94703
+UnknownText_94703: ; 0x94703
+    TX_RAM $cf4b
+    db $0, $4f
+    db "is evolving!", $57
+; 0x94703 + 18 bytes
 
 _UnnamedText_3f245: ; 0x94715
     db $0, $59, $4f
