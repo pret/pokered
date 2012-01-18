@@ -44598,8 +44598,8 @@ ViridianGym_h: ; 0x74897 to 0x748a3 (12 bytes) (id=45)
     dw ViridianGymObject ; objects
 
 ViridianGymScript: ; 0x748a3
-    ld hl, $48bf
-    ld de, $48cd
+    ld hl, Gym8CityName
+    ld de, Gym8LeaderName
     call $317f
     call $3c3c
     ld hl, $4a08
@@ -44610,7 +44610,12 @@ ViridianGymScript: ; 0x748a3
     ret
 ; 0x748bf
 
-INCBIN "baserom.gbc",$748bf,$12d
+Gym8CityName:
+	db "VIRIDIAN CITY@"
+Gym8LeaderName:
+	db "GIOVANNI@"
+
+INCBIN "baserom.gbc",$748D6,$116
 
 ViridianGymTexts: ; 0x749ec
     dw ViridianGymText1, ViridianGymText2, ViridianGymText3, ViridianGymText4, ViridianGymText5, ViridianGymText6, ViridianGymText7, ViridianGymText8, ViridianGymText9, ViridianGymText10, ViridianGymText11, ViridianGymText12, ViridianGymText13, ViridianGymText14
@@ -45619,7 +45624,14 @@ FuchsiaGymScript: ; 0x7543d
     ret
 ; 0x75453
 
-INCBIN "baserom.gbc",$75453,$82
+INCBIN "baserom.gbc",$75453,$12
+
+Gym5CityName:
+	db "FUCHSIA CITY@"
+Gym5LeaderName:
+	db "KOGA@"
+
+INCBIN "baserom.gbc",$75477,$5E
 
 FuchsiaGymTexts: ; 0x754d5
     dw FuchsiaGymText1, FuchsiaGymText2, FuchsiaGymText3, FuchsiaGymText4, FuchsiaGymText5, FuchsiaGymText6, FuchsiaGymText7, FuchsiaGymText8, FuchsiaGymText9, FuchsiaGymText10, FuchsiaGymText11
@@ -47108,7 +47120,10 @@ AgathaObject: ; 0x76534 (size=44)
 AgathaBlocks: ; 30
     INCBIN "maps/agatha.blk"
 
-INCBIN "baserom.gbc",$7657e,$76683 - $7657e
+INCBIN "baserom.gbc",$7657e,$76670 - $7657e
+
+HallOfFameNoText:
+	db "HALL OF FAME No   @"
 
 UnnamedText_76683: ; 0x76683
     TX_FAR _UnnamedText_76683
