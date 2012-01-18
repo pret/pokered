@@ -551,7 +551,7 @@ def text_pretty_printer_at(start_address, label="SomeLabel"):
     include_newline = "\n"
     if output[-1] == "\n":
         include_newline = ""
-    output += include_newline + "; " + hex(start_address) + " + " + str(byte_count) + " bytes"
+    output += include_newline + "; " + hex(start_address) + " + " + str(byte_count) + " bytes = " + hex(start_address + byte_count)
     print output
     return (output, byte_count)
 
