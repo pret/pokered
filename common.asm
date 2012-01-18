@@ -2965,7 +2965,7 @@ INCBIN "baserom.gbc",$C000,$C23D - $C000
 
 ; see also MapHeaderPointers
 MapHeaderBanks: ; 423D
-	db BANK(PalletTown_h)
+	db BANK(PalletTown_h) ;PALLET_TOWN
 	db BANK(ViridianCity_h) ; VIRIDIAN_CITY
 	db BANK(PewterCity_h) ; PEWTER_CITY
 	db BANK(CeruleanCity_h) ; CERULEAN_CITY
@@ -2976,7 +2976,7 @@ MapHeaderBanks: ; 423D
 	db BANK(CinnabarIsland_h) ; CINNABAR_ISLAND
 	db BANK(IndigoPlateau_h) ; INDIGO_PLATEAU
 	db BANK(SaffronCity_h) ; SAFFRON_CITY
-	db $01 ; unused
+	db $1 ; unused
 	db BANK(Route1_h) ; ROUTE_1
 	db BANK(Route2_h) ; ROUTE_2
 	db BANK(Route3_h) ; ROUTE_3
@@ -3040,10 +3040,10 @@ MapHeaderBanks: ; 423D
 	db BANK(DayCareM_h)
 	db BANK(Route6Gate_h)
 	db BANK(UndergroundTunnelEntranceRoute6_h)
-	db $17
+	db $17 ;FREEZE
 	db BANK(Route7Gate_h)
 	db BANK(UndergroundPathEntranceRoute7_h)
-	db $17
+	db $17 ;FREEZE
 	db BANK(Route8Gate_h)
 	db BANK(UndergroundPathEntranceRoute8_h)
 	db BANK(RockTunnelPokecenter_h)
@@ -3070,22 +3070,22 @@ MapHeaderBanks: ; 423D
 	db BANK(SSAnne8_h)
 	db BANK(SSAnne9_h)
 	db BANK(SSAnne10_h)
-	db $1D
-	db $1D
-	db $1D
+	db $1D ;unused
+	db $1D ;unused
+	db $1D ;unused
 	db BANK(VictoryRoad1_h)
-	db $1D
-	db $1D
-	db $1D
-	db $1D
+	db $1D ;unused
+	db $1D ;unused
+	db $1D ;unused
+	db $1D ;unused
 	db BANK(Lance_h)
-	db $1D
-	db $1D
-	db $1D
-	db $1D
-	db $16
+	db $1D ;unused
+	db $1D ;unused
+	db $1D ;unused
+	db $1D ;unused
+	db BANK(HallofFameRoom_h)
 	db BANK(UndergroundPathNS_h)
-	db $1D
+	db BANK(Gary_h)
 	db BANK(UndergroundPathWE_h)
 	db BANK(CeladonMart1_h)
 	db BANK(CeladonMart2_h)
