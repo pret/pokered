@@ -8,7 +8,7 @@ from analyze_incbins import asm, offset_to_pointer, find_incbin_to_replace_for, 
 import analyze_incbins
 import os, sys
 import subprocess
-spacing = "    "
+spacing = "	"
 
 def insert_object(map_id):
     map = extract_maps.map_headers[map_id]

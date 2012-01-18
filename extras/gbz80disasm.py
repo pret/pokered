@@ -6,7 +6,7 @@ from copy import copy, deepcopy
 from pretty_map_headers import random_hash, map_name_cleaner
 from ctypes import c_int8
 import sys
-spacing = "    "
+spacing = "	"
 
 temp_opt_table = [
   [ "ADC A", 0x8f, 0 ],

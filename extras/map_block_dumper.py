@@ -9,7 +9,7 @@ from analyze_incbins import asm, offset_to_pointer, find_incbin_to_replace_for, 
 import analyze_incbins
 import os, sys
 import subprocess
-spacing = "    "
+spacing = "	"
 
 used_map_pointers = []
 

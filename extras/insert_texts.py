@@ -11,7 +11,7 @@ import analyze_incbins
 from gbz80disasm import text_asm_pretty_printer, output_bank_opcodes
 import os, sys
 import subprocess
-spacing = "    "
+spacing = "	"
 tx_fars = None
 failed_attempts = {}
 
