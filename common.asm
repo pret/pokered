@@ -115,43 +115,43 @@ Start:
 INCBIN "baserom.gbc",$150,$1AE - $150
 ; see also MapHeaderBanks
 MapHeaderPointers: ; $01AE
-	dw PalletTown_h ; PALLET_TOWN
-	dw ViridianCity_h ; VIRIDIAN_CITY
-	dw PewterCity_h ; PEWTER_CITY
-	dw CeruleanCity_h ; CERULEAN_CITY
-	dw LavenderTown_h ; LAVENDER_TOWN
-	dw VermilionCity_h ; VERMILION_CITY
-	dw CeladonCity_h ; CELADON_CITY
-	dw FuchsiaCity_h ; FUCHSIA_CITY
-	dw CinnabarIsland_h ; CINNABAR_ISLAND
-	dw IndigoPlateau_h ; INDIGO_PLATEAU
-	dw SaffronCity_h ; SAFFRON_CITY
-	dw SaffronCity_h ; unused
-	dw Route1_h ; ROUTE_1
-	dw Route2_h ; ROUTE_2
-	dw Route3_h ; ROUTE_3
-	dw Route4_h ; ROUTE_4
-	dw Route5_h ; ROUTE_5
-	dw Route6_h ; ROUTE_6
-	dw Route7_h ; ROUTE_7
-	dw Route8_h ; ROUTE_8
-	dw Route9_h ; ROUTE_9
-	dw Route10_h ; ROUTE_10
-	dw Route11_h ; ROUTE_11
-	dw Route12_h ; ROUTE_12
-	dw Route13_h ; ROUTE_13
-	dw Route14_h ; ROUTE_14
-	dw Route15_h ; ROUTE_15
-	dw Route16_h ; ROUTE_16
-	dw Route17_h ; ROUTE_17
-	dw Route18_h ; ROUTE_18
-	dw Route19_h ; ROUTE_19
-	dw Route20_h ; ROUTE_20
-	dw Route21_h ; ROUTE_21
-	dw Route22_h ; ROUTE_22
-	dw Route23_h ; ROUTE_23
-	dw Route24_h ; ROUTE_24
-	dw Route25_h ; ROUTE_25
+	dw PalletTown_h
+	dw ViridianCity_h
+	dw PewterCity_h
+	dw CeruleanCity_h
+	dw LavenderTown_h
+	dw VermilionCity_h
+	dw CeladonCity_h
+	dw FuchsiaCity_h
+	dw CinnabarIsland_h
+	dw IndigoPlateau_h
+	dw SaffronCity_h
+	dw SaffronCity_h
+	dw Route1_h
+	dw Route2_h
+	dw Route3_h
+	dw Route4_h
+	dw Route5_h
+	dw Route6_h
+	dw Route7_h
+	dw Route8_h
+	dw Route9_h
+	dw Route10_h
+	dw Route11_h
+	dw Route12_h
+	dw Route13_h
+	dw Route14_h
+	dw Route15_h
+	dw Route16_h
+	dw Route17_h
+	dw Route18_h
+	dw Route19_h
+	dw Route20_h
+	dw Route21_h
+	dw Route22_h
+	dw Route23_h
+	dw Route24_h
+	dw Route25_h
 	dw RedsHouse1F_h
 	dw RedsHouse2F_h
 	dw BluesHouse_h
@@ -184,7 +184,7 @@ MapHeaderPointers: ; $01AE
 	dw BikeShop_h
 	dw CeruleanMart_h
 	dw MtMoonPokecenter_h
-	dw CeruleanHouseTrashed_h ; copy of map 62
+	dw CeruleanHouseTrashed_h ; copy
 	dw Route5Gate_h
 	dw UndergroundTunnelEntranceRoute5_h
 	dw DayCareM_h
@@ -193,7 +193,7 @@ MapHeaderPointers: ; $01AE
 	dw UndergroundTunnelEntranceRoute6_h ; unused
 	dw Route7Gate_h
 	dw UndergroundPathEntranceRoute7_h
-	dw $575d ;FREEZE
+	dw $575d
 	dw Route8Gate_h
 	dw UndergroundPathEntranceRoute8_h
 	dw RockTunnelPokecenter_h
@@ -219,11 +219,11 @@ MapHeaderPointers: ; $01AE
 	dw SSAnne7_h
 	dw SSAnne8_h
 	dw SSAnne9_h
-	dw SSAnne10_h ; id=104
+	dw SSAnne10_h
 	dw Lance_h ; unused
 	dw Lance_h ; unused
 	dw Lance_h ; unused
-	dw VictoryRoad1_h ; id=108
+	dw VictoryRoad1_h
 	dw Lance_h ; unused
 	dw Lance_h ; unused
 	dw Lance_h ; unused
@@ -233,7 +233,7 @@ MapHeaderPointers: ; $01AE
 	dw Lance_h ; unused
 	dw Lance_h ; unused
 	dw Lance_h ; unused
-	dw HallofFameRoom_h ;id=118
+	dw HallofFameRoom_h
 	dw UndergroundPathNS_h
 	dw Gary_h
 	dw UndergroundPathWE_h
@@ -323,7 +323,7 @@ MapHeaderPointers: ; $01AE
 	dw RocketHideoutElevator_h ; unused
 	dw RocketHideoutElevator_h ; unused
 	dw SilphCo2_h
-	dw SilphCo3_h ; id=208
+	dw SilphCo3_h
 	dw SilphCo4_h
 	dw SilphCo5_h
 	dw SilphCo6_h
