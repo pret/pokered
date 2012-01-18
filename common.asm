@@ -52165,7 +52165,10 @@ _UnnamedText_1e93b: ; 0x8a35d
     db "#DEX rated?", $57
 ; 0x8a35d + 30 bytes
 
-INCBIN "baserom.gbc",$8a37b,$8a39a - $8a37b
+UnknownText_8a37b: ; 0x8a37b
+    db $0, "Closed link to", $4f
+    db "PROF.OAK's PC.@@"
+; 0x8a37b + 31 bytes
 
 _UnnamedText_1e946: ; 0x8a39a
     db $0, "Accessed PROF.", $4f
