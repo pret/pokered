@@ -52327,7 +52327,14 @@ _UnnamedText_1dfe7: ; 0x8aa5c
     db "the road's closed.", $57
 ; 0x8aa5c + 77 bytes
 
-INCBIN "baserom.gbc",$8aaa9,$8aaef - $8aaa9
+UnknownText_8aaa9: ; 0x8aaa9
+    db $0, "Whoa, boy!", $4f
+    db "I'm parched!", $55
+    db "...", $55
+    db "Huh? I can have", $55
+    db "this drink?", $55
+    db "Gee, thanks!@@"
+; 0x8aaa9 + 70 bytes
 
 _UnnamedText_1dff1: ; 0x8aaef
     db $0, $51
