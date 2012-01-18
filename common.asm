@@ -52366,7 +52366,11 @@ _UnnamedText_56419: ; 0x8abf0
     db "after @"
 ; 0x8abf0 + 23 bytes
 
-INCBIN "baserom.gbc",$8ac07,$8ac19 - $8ac07
+UnknownText_8ac07: ; 0x8ac07
+    TX_RAM $cd6d
+    db $0, $55
+    db "for a while.", $58
+; 0x8ac07 + 18 bytes
 
 _UnnamedText_5641e: ; 0x8ac19
     db $0, "Come see me in", $4f
@@ -52377,7 +52381,19 @@ _UnnamedText_56423: ; 0x8ac32
     db $0, "Your @"
 ; 0x8ac32 + 7 bytes
 
-INCBIN "baserom.gbc",$8ac39,$8ac7d - $8ac39
+UnknownText_8ac39: ; 0x8ac39
+    TX_RAM $cd6d
+    db $0, $4f
+    db "has grown a lot!", $51
+    db "By level, it's", $4f
+    db "grown by @"
+; 0x8ac39 + 46 bytes
+
+UnknownText_8ac67: ; 0x8ac67
+    TX_NUM $cd3e,$1,$3
+    db $0, "!", $51
+    db "Aren't I great?", $58
+; 0x8ac67 + 22 bytes
 
 _UnnamedText_56428: ; 0x8ac7d
     db $0, "You owe me ", $f0, "@"
