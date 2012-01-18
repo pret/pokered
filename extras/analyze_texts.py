@@ -401,6 +401,7 @@ def text_pretty_printer_at(start_address, label="SomeLabel"):
     #start with zero please
     byte_count = 0
 
+    output = ""
     had_text_end_byte = False
     had_text_end_byte_57_58 = False
     had_db_last = False
@@ -549,7 +550,7 @@ def text_pretty_printer_at(start_address, label="SomeLabel"):
     
             output += "\n"
     include_newline = "\n"
-    if output[-1] == "\n":
+    if len(output)!=0 and output[-1] == "\n":
         include_newline = ""
     output += include_newline + "; " + hex(start_address) + " + " + str(byte_count) + " bytes = " + hex(start_address + byte_count)
     print output
