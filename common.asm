@@ -190,7 +190,7 @@ MapHeaderPointers: ; $01AE
 	dw DayCareM_h
 	dw Route6Gate_h
 	dw UndergroundTunnelEntranceRoute6_h
-	dw $56e3 ; FREEZE id=75
+	dw UndergroundTunnelEntranceRoute6_h ; unused
 	dw Route7Gate_h
 	dw UndergroundPathEntranceRoute7_h
 	dw $575d ;FREEZE
@@ -288,7 +288,7 @@ MapHeaderPointers: ; $01AE
 	dw Lab4_h
 	dw CinnabarPokecenter_h
 	dw CinnabarMart_h
-	dw $5e72
+	dw CinnabarMart_h ; unused
 	dw IndigoPlateauLobby_h
 	dw CopycatsHouseF1_h
 	dw CopycatsHouseF2_h
@@ -319,9 +319,9 @@ MapHeaderPointers: ; $01AE
 	dw RocketHideout3_h
 	dw RocketHideout4_h
 	dw RocketHideoutElevator_h
-	dw $5704
-	dw $5704
-	dw $5704
+	dw RocketHideoutElevator_h ; unused
+	dw RocketHideoutElevator_h ; unused
+	dw RocketHideoutElevator_h ; unused
 	dw SilphCo2_h
 	dw SilphCo3_h ; id=208
 	dw SilphCo4_h
@@ -346,20 +346,20 @@ MapHeaderPointers: ; $01AE
 	dw UnknownDungeon1_h
 	dw NameRater_h
 	dw CeruleanHouse3_h
-	dw $56b2
+	dw Route16GateMap_h ; unused
 	dw RockTunnel2_h
 	dw SilphCo9_h
 	dw SilphCo10_h
 	dw SilphCo11_h
 	dw SilphCoElevator_h
-	dw $5ce5
-	dw $5ce5
+	dw SilphCo2_h ; unused
+	dw SilphCo2_h ; unused
 	dw BattleCenterM_h
 	dw TradeCenterM_h
-	dw $5CE5
-	dw $5CE5
-	dw $5CE5
-	dw $5CE5
+	dw SilphCo2_h ; unused
+	dw SilphCo2_h ; unused
+	dw SilphCo2_h ; unused
+	dw SilphCo2_h ; unused
 	dw Lorelei_h
 	dw Bruno_h
 	dw Agatha_h
