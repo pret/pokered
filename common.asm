@@ -52879,7 +52879,13 @@ _UnnamedText_4999f: ; 0x8cf83
     db "swimming!", $57
 ; 0x8cf83 + 56 bytes
 
-INCBIN "baserom.gbc",$8cfbb,$57
+UnknownText_8cfbb: ; 0x8cfbb
+    db $0, "Only truly skilled", $4f
+    db "trainers are", $55
+    db "allowed through.", $51
+    db "You don't have the", $4f
+    db "BOULDERBADGE yet!@@"
+; 0x8cfbb + 87 bytes
 
 _UnnamedText_1e715: ; 0x8d012
     db $0, $51
