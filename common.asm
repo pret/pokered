@@ -52711,7 +52711,19 @@ _UnnamedText_564c0: ; 0x8c9b3
     db "fish?", $57
 ; 0x8c9b3 + 77 bytes
 
-INCBIN "baserom.gbc",$8ca00,$8ca4f - $8ca00
+UnknownText_8ca00: ; 0x8ca00
+    db $0, "Grand! I like", $4f
+    db "your style!", $51
+    db "Take this and", $4f
+    db "fish, young one!", $51
+    db $52, " received", $4f
+    db "a @"
+; 0x8ca00 + 72 bytes
+
+UnknownText_8ca48: ; 0x8ca48
+    TX_RAM $cf4b
+    db $0, "!@@"
+; 0x8ca48 + 7 bytes
 
 _UnnamedText_564ca: ; 0x8ca4f
     db $0, $51
