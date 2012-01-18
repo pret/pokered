@@ -56574,10 +56574,8 @@ _UnnamedText_74ad3: ; 0x95ed5
     db "intense fight!", $55
     db "You have won!", $55
     db "As proof, here is", $55
-    db "the EARTHBADGE!@"
+    db "the EARTHBADGE!@@"
 ; 0x95ed5 + 85 bytes
-
-db $50
  
 _UnnamedText_95f2b: ; 0x95f2b
     db $0, "Having lost, I", $4f
@@ -56590,10 +56588,8 @@ _UnnamedText_95f2b: ; 0x95f2b
     db "of #MON!", $51
     db "Let us meet again", $4f
     db "some day!", $55
-    db "Farewell!@"
+    db "Farewell!@@"
 ; 0x95f2b + 160 bytes
- 
-db $50
 
 _ViridianGymText12: ; 0x95fcc
     db $0, "The EARTHBADGE", $4f
