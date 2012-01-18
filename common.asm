@@ -115,7 +115,7 @@ Start:
 INCBIN "baserom.gbc",$150,$1AE - $150
 ; see also MapHeaderBanks
 MapHeaderPointers: ; $01AE
-	dw PalletTown_h ; PALLET_TOWN
+	dw PalletTown_h ; PALLET_TOWN id=0
 	dw ViridianCity_h ; VIRIDIAN_CITY
 	dw PewterCity_h ; PEWTER_CITY
 	dw CeruleanCity_h ; CERULEAN_CITY
@@ -125,7 +125,7 @@ MapHeaderPointers: ; $01AE
 	dw FuchsiaCity_h ; FUCHSIA_CITY
 	dw CinnabarIsland_h ; CINNABAR_ISLAND
 	dw IndigoPlateau_h ; INDIGO_PLATEAU
-	dw SaffronCity_h ; SAFFRON_CITY
+	dw SaffronCity_h ; SAFFRON_CITY id=10
 	dw SaffronCity_h ; unused
 	dw Route1_h ; ROUTE_1
 	dw Route2_h ; ROUTE_2
@@ -135,7 +135,7 @@ MapHeaderPointers: ; $01AE
 	dw Route6_h ; ROUTE_6
 	dw Route7_h ; ROUTE_7
 	dw Route8_h ; ROUTE_8
-	dw Route9_h ; ROUTE_9
+	dw Route9_h ; ROUTE_9 id=20
 	dw Route10_h ; ROUTE_10
 	dw Route11_h ; ROUTE_11
 	dw Route12_h ; ROUTE_12
@@ -145,7 +145,7 @@ MapHeaderPointers: ; $01AE
 	dw Route16_h ; ROUTE_16
 	dw Route17_h ; ROUTE_17
 	dw Route18_h ; ROUTE_18
-	dw Route19_h ; ROUTE_19
+	dw Route19_h ; ROUTE_19 id=30
 	dw Route20_h ; ROUTE_20
 	dw Route21_h ; ROUTE_21
 	dw Route22_h ; ROUTE_22
@@ -155,7 +155,7 @@ MapHeaderPointers: ; $01AE
 	dw RedsHouse1F_h
 	dw RedsHouse2F_h
 	dw BluesHouse_h
-	dw OaksLab_h
+	dw OaksLab_h ;id=40
 	dw ViridianPokecenter_h
 	dw ViridianMart_h
 	dw School_h
@@ -165,7 +165,7 @@ MapHeaderPointers: ; $01AE
 	dw ViridianForestexit_h
 	dw Route2House_h
 	dw Route2Gate_h
-	dw ViridianForestEntrance_h
+	dw ViridianForestEntrance_h ;id=50
 	dw ViridianForest_h
 	dw MuseumF1_h
 	dw MuseumF2_h
@@ -175,7 +175,7 @@ MapHeaderPointers: ; $01AE
 	dw PewterHouse2_h
 	dw PewterPokecenter_h
 	dw MtMoon1_h
-	dw MtMoon2_h
+	dw MtMoon2_h ;id=60
 	dw MtMoon3_h
 	dw CeruleanHouseTrashed_h
 	dw CeruleanHouse2_h
@@ -185,17 +185,17 @@ MapHeaderPointers: ; $01AE
 	dw CeruleanMart_h
 	dw MtMoonPokecenter_h
 	dw CeruleanHouseTrashed_h ; copy of map 62
-	dw Route5Gate_h
+	dw Route5Gate_h ;id=70
 	dw UndergroundTunnelEntranceRoute5_h
 	dw DayCareM_h
 	dw Route6Gate_h
 	dw UndergroundTunnelEntranceRoute6_h
-	dw $56e3 ; FREEZE id=75
+	dw $56e3 ; FREEZE
 	dw Route7Gate_h
 	dw UndergroundPathEntranceRoute7_h
 	dw $575d ;FREEZE
 	dw Route8Gate_h
-	dw UndergroundPathEntranceRoute8_h
+	dw UndergroundPathEntranceRoute8_h ;id=80
 	dw RockTunnelPokecenter_h
 	dw RockTunnel1_h
 	dw PowerPlant_h
@@ -205,7 +205,7 @@ MapHeaderPointers: ; $01AE
 	dw Route12Gate_h
 	dw BillsHouse_h
 	dw VermilionPokecenter_h
-	dw FanClub_h
+	dw FanClub_h ;id=90
 	dw VermilionMart_h
 	dw VermilionGym_h
 	dw VermilionHouse1_h
@@ -215,17 +215,17 @@ MapHeaderPointers: ; $01AE
 	dw SSAnne3_h
 	dw SSAnne4_h
 	dw SSAnne5_h
-	dw SSAnne6_h
+	dw SSAnne6_h ;id=100
 	dw SSAnne7_h
 	dw SSAnne8_h
 	dw SSAnne9_h
-	dw SSAnne10_h ; id=104
+	dw SSAnne10_h
 	dw Lance_h ; unused
 	dw Lance_h ; unused
 	dw Lance_h ; unused
-	dw VictoryRoad1_h ; id=108
+	dw VictoryRoad1_h
 	dw Lance_h ; unused
-	dw Lance_h ; unused
+	dw Lance_h ; unused ;id=110
 	dw Lance_h ; unused
 	dw Lance_h ; unused
 	dw Lance_h
@@ -233,9 +233,9 @@ MapHeaderPointers: ; $01AE
 	dw Lance_h ; unused
 	dw Lance_h ; unused
 	dw Lance_h ; unused
-	dw HallofFameRoom_h ;id=118
+	dw HallofFameRoom_h
 	dw UndergroundPathNS_h
-	dw Gary_h
+	dw Gary_h ;id=120
 	dw UndergroundPathWE_h
 	dw CeladonMart1_h
 	dw CeladonMart2_h
@@ -245,7 +245,7 @@ MapHeaderPointers: ; $01AE
 	dw CeladonMartElevator_h
 	dw CeladonMansion1_h
 	dw CeladonMansion2_h
-	dw CeladonMansion3_h
+	dw CeladonMansion3_h ;id=130
 	dw CeladonMansion4_h
 	dw CeladonMansion5_h
 	dw CeladonPokecenter_h
@@ -255,7 +255,7 @@ MapHeaderPointers: ; $01AE
 	dw CeladonPrizeRoom_h
 	dw CeladonDiner_h
 	dw CeladonHouse_h
-	dw CeladonHotel_h
+	dw CeladonHotel_h ;id=140
 	dw LavenderPokecenter_h
 	dw PokemonTower1_h
 	dw PokemonTower2_h
@@ -265,7 +265,7 @@ MapHeaderPointers: ; $01AE
 	dw PokemonTower6_h
 	dw PokemonTower7_h
 	dw LavenderHouse1_h
-	dw LavenderMart_h
+	dw LavenderMart_h ;id=150
 	dw LavenderHouse2_h
 	dw FuchsiaMart_h
 	dw FuchsiaHouse1_h
@@ -275,7 +275,7 @@ MapHeaderPointers: ; $01AE
 	dw FuchsiaGym_h
 	dw FuchsiaMeetingRoom_h
 	dw SeafoamIslands2_h
-	dw SeafoamIslands3_h
+	dw SeafoamIslands3_h ;id=160
 	dw SeafoamIslands4_h
 	dw SeafoamIslands5_h
 	dw VermilionHouse2_h
@@ -285,7 +285,7 @@ MapHeaderPointers: ; $01AE
 	dw Lab1_h
 	dw Lab2_h
 	dw Lab3_h
-	dw Lab4_h
+	dw Lab4_h ;id=170
 	dw CinnabarPokecenter_h
 	dw CinnabarMart_h
 	dw $5e72
@@ -295,7 +295,7 @@ MapHeaderPointers: ; $01AE
 	dw FightingDojo_h
 	dw SaffronGym_h
 	dw SaffronHouse1_h
-	dw SaffronMart_h
+	dw SaffronMart_h ;id=180
 	dw SilphCo1_h
 	dw SaffronPokecenter_h
 	dw SaffronHouse2_h
@@ -305,7 +305,7 @@ MapHeaderPointers: ; $01AE
 	dw Route16GateUpstairs_h
 	dw Route16House_h
 	dw Route12House_h
-	dw Route18Gate_h
+	dw Route18Gate_h ;id=190
 	dw Route18GateHeader_h
 	dw SeafoamIslands1_h
 	dw Route22Gate_h
@@ -315,7 +315,7 @@ MapHeaderPointers: ; $01AE
 	dw DiglettsCave_h
 	dw VictoryRoad3_h
 	dw RocketHideout1_h
-	dw RocketHideout2_h
+	dw RocketHideout2_h ;200
 	dw RocketHideout3_h
 	dw RocketHideout4_h
 	dw RocketHideoutElevator_h
@@ -323,9 +323,9 @@ MapHeaderPointers: ; $01AE
 	dw $5704
 	dw $5704
 	dw SilphCo2_h
-	dw SilphCo3_h ; id=208
+	dw SilphCo3_h
 	dw SilphCo4_h
-	dw SilphCo5_h
+	dw SilphCo5_h ;210
 	dw SilphCo6_h
 	dw SilphCo7_h
 	dw SilphCo8_h
@@ -335,7 +335,7 @@ MapHeaderPointers: ; $01AE
 	dw SafariZoneEast_h
 	dw SafariZoneNorth_h
 	dw SafariZoneWest_h
-	dw SafariZoneCenter_h
+	dw SafariZoneCenter_h ;220
 	dw SafariZoneRestHouse1_h
 	dw SafariZoneSecretHouse_h
 	dw SafariZoneRestHouse2_h
@@ -345,7 +345,7 @@ MapHeaderPointers: ; $01AE
 	dw UnknownDungeon3_h
 	dw UnknownDungeon1_h
 	dw NameRater_h
-	dw CeruleanHouse3_h
+	dw CeruleanHouse3_h ;230
 	dw $56b2
 	dw RockTunnel2_h
 	dw SilphCo9_h
@@ -355,14 +355,14 @@ MapHeaderPointers: ; $01AE
 	dw $5ce5
 	dw $5ce5
 	dw BattleCenterM_h
-	dw TradeCenterM_h
+	dw TradeCenterM_h ;240
 	dw $5CE5
 	dw $5CE5
 	dw $5CE5
 	dw $5CE5
 	dw Lorelei_h
 	dw Bruno_h
-	dw Agatha_h
+	dw Agatha_h ;247
 
 INCBIN "baserom.gbc",$39E,$1627 - $39E
 
@@ -44669,8 +44669,9 @@ UnnamedText_74ace: ; 0x74ace
 INCBIN "baserom.gbc",$74ad3,$c
 
 ViridianGymText12: ; 0x74adf
-
-INCBIN "baserom.gbc",$74adf,5
+    TX_FAR _ViridianGymText12
+    db $50
+; 0x74adf + 5 bytes
 
 ViridianGymText13: ; 0x74ae4
 
@@ -56537,7 +56538,7 @@ _UnnamedText_74ace: ; 0x95e09
 
 INCBIN "baserom.gbc",$95ed5,$95fcc - $95ed5
 
-_UnnamedText_74adf: ; 0x95fcc
+_ViridianGymText12:
     db $0, "The EARTHBADGE", $4f
     db "makes #MON of", $55
     db "any level obey!", $51
