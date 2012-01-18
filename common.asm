@@ -52197,7 +52197,10 @@ _UnnamedText_6557: ; 0x8a605
     db "to @"
 ; 0x8a605 + 36 bytes
 
-INCBIN "baserom.gbc",$8a629,$8a62f - $8a629
+UnknownText_8a629: ; 0x8a629
+    TX_RAM $cd6d
+    db $0, "?", $57
+; 0x8a629 + 6 bytes
 
 _UnnamedText_699f: ; 0x8a62f
     db $0, "Right! So your", $4f
@@ -52216,7 +52219,11 @@ _UnnamedText_5a24: ; 0x8a677
     db "@"
 ; 0x8a677 + 10 bytes
 
-INCBIN "baserom.gbc",$8a681,$15
+UnknownText_8a681: ; 0x8a681
+    TX_RAM $cd6d
+    db $0, " will", $55
+    db "be traded.", $57
+; 0x8a681 + 21 bytes
 
 _Char00Text:
 	TX_NUM $FF8C,1,2
