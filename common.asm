@@ -115,43 +115,43 @@ Start:
 INCBIN "baserom.gbc",$150,$1AE - $150
 ; see also MapHeaderBanks
 MapHeaderPointers: ; $01AE
-	dw PalletTown_h ; PALLET_TOWN
-	dw ViridianCity_h ; VIRIDIAN_CITY
-	dw PewterCity_h ; PEWTER_CITY
-	dw CeruleanCity_h ; CERULEAN_CITY
-	dw LavenderTown_h ; LAVENDER_TOWN
-	dw VermilionCity_h ; VERMILION_CITY
-	dw CeladonCity_h ; CELADON_CITY
-	dw FuchsiaCity_h ; FUCHSIA_CITY
-	dw CinnabarIsland_h ; CINNABAR_ISLAND
-	dw IndigoPlateau_h ; INDIGO_PLATEAU
-	dw SaffronCity_h ; SAFFRON_CITY
-	dw SaffronCity_h ; unused
-	dw Route1_h ; ROUTE_1
-	dw Route2_h ; ROUTE_2
-	dw Route3_h ; ROUTE_3
-	dw Route4_h ; ROUTE_4
-	dw Route5_h ; ROUTE_5
-	dw Route6_h ; ROUTE_6
-	dw Route7_h ; ROUTE_7
-	dw Route8_h ; ROUTE_8
-	dw Route9_h ; ROUTE_9
-	dw Route10_h ; ROUTE_10
-	dw Route11_h ; ROUTE_11
-	dw Route12_h ; ROUTE_12
-	dw Route13_h ; ROUTE_13
-	dw Route14_h ; ROUTE_14
-	dw Route15_h ; ROUTE_15
-	dw Route16_h ; ROUTE_16
-	dw Route17_h ; ROUTE_17
-	dw Route18_h ; ROUTE_18
-	dw Route19_h ; ROUTE_19
-	dw Route20_h ; ROUTE_20
-	dw Route21_h ; ROUTE_21
-	dw Route22_h ; ROUTE_22
-	dw Route23_h ; ROUTE_23
-	dw Route24_h ; ROUTE_24
-	dw Route25_h ; ROUTE_25
+	dw PalletTown_h
+	dw ViridianCity_h
+	dw PewterCity_h
+	dw CeruleanCity_h
+	dw LavenderTown_h
+	dw VermilionCity_h
+	dw CeladonCity_h
+	dw FuchsiaCity_h
+	dw CinnabarIsland_h
+	dw IndigoPlateau_h
+	dw SaffronCity_h
+	dw SaffronCity_h
+	dw Route1_h
+	dw Route2_h
+	dw Route3_h
+	dw Route4_h
+	dw Route5_h
+	dw Route6_h
+	dw Route7_h
+	dw Route8_h
+	dw Route9_h
+	dw Route10_h
+	dw Route11_h
+	dw Route12_h
+	dw Route13_h
+	dw Route14_h
+	dw Route15_h
+	dw Route16_h
+	dw Route17_h
+	dw Route18_h
+	dw Route19_h
+	dw Route20_h
+	dw Route21_h
+	dw Route22_h
+	dw Route23_h
+	dw Route24_h
+	dw Route25_h
 	dw RedsHouse1F_h
 	dw RedsHouse2F_h
 	dw BluesHouse_h
@@ -184,13 +184,13 @@ MapHeaderPointers: ; $01AE
 	dw BikeShop_h
 	dw CeruleanMart_h
 	dw MtMoonPokecenter_h
-	dw CeruleanHouseTrashed_h ; copy of map 62
+	dw CeruleanHouseTrashed_h ; copy
 	dw Route5Gate_h
 	dw UndergroundTunnelEntranceRoute5_h
 	dw DayCareM_h
 	dw Route6Gate_h
 	dw UndergroundTunnelEntranceRoute6_h
-	dw $56e3 ; id=75
+	dw UndergroundTunnelEntranceRoute6_h ; unused
 	dw Route7Gate_h
 	dw UndergroundPathEntranceRoute7_h
 	dw $575d
@@ -219,11 +219,11 @@ MapHeaderPointers: ; $01AE
 	dw SSAnne7_h
 	dw SSAnne8_h
 	dw SSAnne9_h
-	dw SSAnne10_h ; id=104
+	dw SSAnne10_h
 	dw Lance_h ; unused
 	dw Lance_h ; unused
 	dw Lance_h ; unused
-	dw VictoryRoad1_h ; id=108
+	dw VictoryRoad1_h
 	dw Lance_h ; unused
 	dw Lance_h ; unused
 	dw Lance_h ; unused
@@ -233,9 +233,9 @@ MapHeaderPointers: ; $01AE
 	dw Lance_h ; unused
 	dw Lance_h ; unused
 	dw Lance_h ; unused
-	dw $6492
+	dw HallofFameRoom_h
 	dw UndergroundPathNS_h
-	dw $5f11
+	dw Gary_h
 	dw UndergroundPathWE_h
 	dw CeladonMart1_h
 	dw CeladonMart2_h
@@ -288,7 +288,7 @@ MapHeaderPointers: ; $01AE
 	dw Lab4_h
 	dw CinnabarPokecenter_h
 	dw CinnabarMart_h
-	dw $5e72
+	dw CinnabarMart_h ; unused
 	dw IndigoPlateauLobby_h
 	dw CopycatsHouseF1_h
 	dw CopycatsHouseF2_h
@@ -319,11 +319,11 @@ MapHeaderPointers: ; $01AE
 	dw RocketHideout3_h
 	dw RocketHideout4_h
 	dw RocketHideoutElevator_h
-	dw $5704
-	dw $5704
-	dw $5704
+	dw RocketHideoutElevator_h ; unused
+	dw RocketHideoutElevator_h ; unused
+	dw RocketHideoutElevator_h ; unused
 	dw SilphCo2_h
-	dw SilphCo3_h ; id=208
+	dw SilphCo3_h
 	dw SilphCo4_h
 	dw SilphCo5_h
 	dw SilphCo6_h
@@ -346,20 +346,20 @@ MapHeaderPointers: ; $01AE
 	dw UnknownDungeon1_h
 	dw NameRater_h
 	dw CeruleanHouse3_h
-	dw $56b2
+	dw Route16GateMap_h ; unused
 	dw RockTunnel2_h
 	dw SilphCo9_h
 	dw SilphCo10_h
 	dw SilphCo11_h
 	dw SilphCoElevator_h
-	dw $5ce5
-	dw $5ce5
+	dw SilphCo2_h ; unused
+	dw SilphCo2_h ; unused
 	dw BattleCenterM_h
 	dw TradeCenterM_h
-	dw $5CE5
-	dw $5CE5
-	dw $5CE5
-	dw $5CE5
+	dw SilphCo2_h ; unused
+	dw SilphCo2_h ; unused
+	dw SilphCo2_h ; unused
+	dw SilphCo2_h ; unused
 	dw Lorelei_h
 	dw Bruno_h
 	dw Agatha_h
@@ -2965,7 +2965,7 @@ INCBIN "baserom.gbc",$C000,$C23D - $C000
 
 ; see also MapHeaderPointers
 MapHeaderBanks: ; 423D
-	db BANK(PalletTown_h)
+	db BANK(PalletTown_h) ;PALLET_TOWN
 	db BANK(ViridianCity_h) ; VIRIDIAN_CITY
 	db BANK(PewterCity_h) ; PEWTER_CITY
 	db BANK(CeruleanCity_h) ; CERULEAN_CITY
@@ -2976,7 +2976,7 @@ MapHeaderBanks: ; 423D
 	db BANK(CinnabarIsland_h) ; CINNABAR_ISLAND
 	db BANK(IndigoPlateau_h) ; INDIGO_PLATEAU
 	db BANK(SaffronCity_h) ; SAFFRON_CITY
-	db $01 ; unused
+	db $1 ; unused
 	db BANK(Route1_h) ; ROUTE_1
 	db BANK(Route2_h) ; ROUTE_2
 	db BANK(Route3_h) ; ROUTE_3
@@ -3040,10 +3040,10 @@ MapHeaderBanks: ; 423D
 	db BANK(DayCareM_h)
 	db BANK(Route6Gate_h)
 	db BANK(UndergroundTunnelEntranceRoute6_h)
-	db $17
+	db $17 ;FREEZE
 	db BANK(Route7Gate_h)
 	db BANK(UndergroundPathEntranceRoute7_h)
-	db $17
+	db $17 ;FREEZE
 	db BANK(Route8Gate_h)
 	db BANK(UndergroundPathEntranceRoute8_h)
 	db BANK(RockTunnelPokecenter_h)
@@ -3070,22 +3070,22 @@ MapHeaderBanks: ; 423D
 	db BANK(SSAnne8_h)
 	db BANK(SSAnne9_h)
 	db BANK(SSAnne10_h)
-	db $1D
-	db $1D
-	db $1D
+	db $1D ;unused
+	db $1D ;unused
+	db $1D ;unused
 	db BANK(VictoryRoad1_h)
-	db $1D
-	db $1D
-	db $1D
-	db $1D
+	db $1D ;unused
+	db $1D ;unused
+	db $1D ;unused
+	db $1D ;unused
 	db BANK(Lance_h)
-	db $1D
-	db $1D
-	db $1D
-	db $1D
-	db $16
+	db $1D ;unused
+	db $1D ;unused
+	db $1D ;unused
+	db $1D ;unused
+	db BANK(HallofFameRoom_h)
 	db BANK(UndergroundPathNS_h)
-	db $1D
+	db BANK(Gary_h)
 	db BANK(UndergroundPathWE_h)
 	db BANK(CeladonMart1_h)
 	db BANK(CeladonMart2_h)
@@ -46792,7 +46792,16 @@ CopycatsHouseF1Object: ; 0x75ee3 (size=46)
     EVENT_DISP $4, $7, $3
     EVENT_DISP $4, $1, $7 ; COPYCATS_HOUSE_2F
 
-INCBIN "baserom.gbc",$75f11,$75f1d - $75f11
+;INCBIN "baserom.gbc",$75f11,$75f1d - $75f11
+
+Gary_h: ;0x75f11
+
+db $7 ;tileset
+db $4, $4 ;Height, Width
+dw GaryBlocks, GaryTexts, GaryScript
+db $0 ;No Connections
+
+dw GaryObject
 
 GaryScript: ; 0x75f1d
     call $3c3c
