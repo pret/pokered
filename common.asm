@@ -56134,7 +56134,15 @@ _UnnamedText_1d222: ; 0x94e80
     db "really energetic!", $58
 ; 0x94e80 + 32 bytes
 
-INCBIN "baserom.gbc",$94ea0,$94eb6 - $94ea0
+UnnamedText_94ea0: ; 0x94ea0
+    db $0, $52, " received", $4f
+    db "a @"
+; 0x94ea0 + 15 bytes
+
+UnnamedText_94eaf: ; 0x94eaf
+    TX_RAM $cd6d
+    db $0, "!@@"
+; 0x94eaf + 7 bytes
 
 _UnnamedText_1d243: ; 0x94eb6
     db $0, "That's PROF.OAK's", $4f
@@ -56161,7 +56169,20 @@ _UnnamedText_1d2fa: ; 0x94f36
     db "it fight!", $57
 ; 0x94f36 + 51 bytes
 
-INCBIN "baserom.gbc",$94f69,$9500f - $94f69
+UnnamedText_94f69: ; 0x94f69
+    db $0, "OAK: Oh, ", $52, "!", $51
+    db "How is my old", $4f
+    db "#MON?", $51
+    db "Well, it seems to", $4f
+    db "like you a lot.", $51
+    db "You must be", $4f
+    db "talented as a", $55
+    db "#MON trainer!", $51
+    db "What? You have", $4f
+    db "something for me?", $51
+    db $52, " delivered", $4f
+    db "OAK's PARCEL.@@"
+; 0x94f69 + 166 bytes
 
 _UnnamedText_1d304: ; 0x9500f
     db $0, $51
@@ -56177,7 +56198,18 @@ _UnnamedText_1d309: ; 0x95045
     db "you, ", $52, "!", $57
 ; 0x95045 + 40 bytes
 
-INCBIN "baserom.gbc",$9506d,$950f2 - $9506d
+UnnamedText_9506d: ; 0x9506d
+    db $0, "OAK: You can't get", $4f
+    db "detailed data on", $55
+    db "#MON by just", $55
+    db "seeing them.", $51
+    db "You must catch", $4f
+    db "them! Use these", $55
+    db "to capture wild", $55
+    db "#MON.", $51
+    db $52, " got 5", $4f
+    db "# BALLs!@@"
+; 0x9506d + 133 bytes
 
 _UnnamedText_1d313: ; 0x950f2
     db $0, $51
@@ -56277,7 +56309,15 @@ _UnnamedText_1d39a: ; 0x95444
     db "this one, then!", $57
 ; 0x95444 + 29 bytes
 
-INCBIN "baserom.gbc",$95461,$95477 - $95461
+UnnamedText_95461: ; 0x95461
+    db $0, $53, " received", $4f
+    db "a @"
+; 0x95461 + 15 bytes
+
+UnnamedText_95470: ; 0x95470
+    TX_RAM $cd6d
+    db $0, "!@@"
+; 0x95470 + 7 bytes
 
 _UnnamedText_1d3b9: ; 0x95477
     db $0, $53, ": Wait", $4f
@@ -56336,7 +56376,13 @@ _UnnamedText_1d3e6: ; 0x955a8
     db "encyclopedia!", $57
 ; 0x955a8 + 130 bytes
 
-INCBIN "baserom.gbc",$9562a,$3a
+_UnnamedText_9562a: ; 0x9562a
+    db $0, "OAK: ", $52, " and", $4f
+    db $53, "! Take", $55
+    db "these with you!", $51
+    db $52, " got", $4f
+    db "#DEX from OAK!@@"
+; 0x9562a + 58 bytes
 
 _UnnamedText_1d3f1: ; 0x95664
     db $0, "To make a complete", $4f
@@ -56614,7 +56660,7 @@ _ViridianGymText12: ; 0x95fcc
     db "LEAGUE challenge!", $57
 ; 0x95fcc + 182 bytes
 
-_UnnamedText_74ae9_part1: ; 0x96082
+ReceivedTM27Text: ; 0x96082
     db $0, $52, " received", $4f
     db "TM27!@@"
 ; 0x96082 + 19 bytes
