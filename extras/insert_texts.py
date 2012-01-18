@@ -618,6 +618,7 @@ def scan_rom_for_tx_fars_and_insert():
     for address_bundle in address_bundles:
         tx_far_address = address_bundle[1]
         tx_far_target_address = address_bundle[0]
+        if tx_far_address in [0xeff2]: continue #skip
         #if tx_far_address < 0x7627b: continue #because it stopped a few times for errors
 
         tx_far_label = "UnnamedText_%.2x" % (tx_far_address)
@@ -625,6 +626,7 @@ def scan_rom_for_tx_fars_and_insert():
 
         #let's also do a quick check if it might be in the file already
         if not (": ; " + hex(tx_far_address) in analyze_incbins.asm):
+            print "inserting text at " + hex(tx_far_address)
             result = insert_text(tx_far_target_address, tx_far_target_label, apply=True)
         else:
             #we can't just pretend like it worked, because we don't know what label was used
@@ -634,16 +636,18 @@ def scan_rom_for_tx_fars_and_insert():
                     tx_far_target_label = line.split(":")[0]
             result = "skip"
 
-        if result == True:
+        if result == True or result == None:
             local_reset_incbins()
             result2 = insert_text(tx_far_address, tx_far_label, apply=True)
             local_reset_incbins()
         elif result == "skip":
-            result2 = insert_text(tx_far_address, tx_far_label, apply=True)
-            local_reset_incbins()
+            print "skipping " + hex(tx_far_address)
+        #    result2 = insert_text(tx_far_address, tx_far_label, apply=True)
+        #    local_reset_incbins()
 
-        if not result or not result2:
-            sys.exit(0)
+        #just skip these for now
+        #if not result or not result2:
+        #    sys.exit(0)
 
 if __name__ == "__main__":
     #load map headers and object data
