@@ -1941,12 +1941,12 @@ MewPicBack:
 INCBIN "baserom.gbc",$425b,$42a7 - $425b
 
 UnnamedText_42a7: ; 0x42a7
-    TX_FAR _UnnamedText_42a7
+    TX_FAR SafariZoneEatingText
     db $50
 ; 0x42a7 + 5 bytes
 
 UnnamedText_42ac: ; 0x42ac
-    TX_FAR _UnnamedText_42ac
+    TX_FAR SafariZoneAngryText
     db $50
 ; 0x42ac + 5 bytes
 
@@ -51782,20 +51782,51 @@ _UnnamedText_3e887: ; 0x89baf
     db $0, "Hit @"
 ; 0x89baf + 6 bytes
 
-INCBIN "baserom.gbc",$89bb5,$89c1d - $89bb5
+UnnamedText_89bb5: ; 0x89bb5
+    TX_NUM $cd05, 1, 1
+    db $0, " times!", $58
+; 0x89bb5 + 13 bytes = 0x89bc2
+
+UnnamedText_89bc2: ; 0x89bc2
+    TX_RAM $cd6d
+    db $0, " gained", $4f
+    db "@@"
+; 0x89bc2 + 14 bytes = 0x89bd0
+
+UnnamedText_89bd0: ; 0x89bd0
+    db $0, "with EXP.ALL,", $55
+    db "@@"
+; 0x89bd0 + 17 bytes = 0x89be1
+
+UnnamedText_89be1: ; 0x89be1
+    db $0, "a boosted", $55
+    db "@@"
+    TX_NUM $cf4b, 2, 4
+    db $0, " EXP. Points!", $58
+; 0x89be1 + 32 bytes = 0x89c01
+
+UnnamedText_89c01: ; 0x89c01
+    TX_RAM $cd6d
+    db $0, " grew", $4f
+    db "to level @"
+    TX_NUM $d127, 1, 3
+    db $0, "!@@"
+; 0x89c01 + 28 bytes = 0x89c1d
 
 _UnnamedText_58e3b: ; 0x89c1d
     db $0, "Wild @"
-; 0x89c1d + 7 bytes
-
-INCBIN "baserom.gbc",$89c24,$89c33 - $89c24
+    TX_RAM $cfda
+    db $0, $4f
+    db "appeared!", $58
+; 0x89c1d + 22 bytes
 
 _UnnamedText_58e40: ; 0x89c33
     db $0, "The hooked", $4f
     db "@"
-; 0x89c33 + 13 bytes
-
-INCBIN "baserom.gbc",$89c40,$89c4f - $89c40
+    TX_RAM $cfda
+    db $0, $55
+    db "attacked!", $58
+; 0x89c33 + 28 bytes
 
 _UnnamedText_58e45: ; 0x89c4f
     TX_RAM $cfda
@@ -51820,14 +51851,35 @@ _UnnamedText_58e54: ; 0x89c9e
     db "can't be ID'd!", $58
 ; 0x89c9e + 30 bytes
 
-INCBIN "baserom.gbc",$89cbc,$89cf0 - $89cbc
+UnknownText_89cbc: ; 0x89cbc
+    db $0, "Go! @@"
+; 0x89cbc + 7 bytes
+    db $0, "Do it! @@"
+; 0x89cc3 + 10 bytes
+    db $0, "Get'm! @@"
+; 0x89ccd + 9 bytes
+
+UnknownText_89cd6: ; 0x89cd6
+    db $0, "The enemy's weak!", $4f
+    db "Get'm! @@"
+; 0x89cd6 + 26 bytes
 
 _UnnamedText_58ecc: ; 0x89cf0
     TX_RAM $d009
     db $0, "!", $57
 ; 0x89cf0 + 6 bytes
+    TX_RAM $d009
+    db $0, " @@"
+    db $0, "enough!@@"
+; 0x89cf0 + 23 bytes
 
-INCBIN "baserom.gbc",$89cf6,$89d15 - $89cf6
+_UnnamedText_89d07: ; 0x8d907
+    db $0, "OK!@@"
+; 0x8d907 + 6
+
+UnknownText_89d0d: ; 0x89d0d
+    db $0, "good!@@"
+; 0x89d0d + 8 bytes
 
 _UnnamedText_58f3e: ; 0x89d15
     db $0, $4f
@@ -51844,24 +51896,28 @@ _UnnamedText_2fb93: ; 0x89d38
     db "effective...", $58
 ; 0x89d38 + 27 bytes
 
-_UnnamedText_42a7: ; 0x89d53
+SafariZoneEatingText: ; 0x89d53
     db $0, "Wild @"
-; 0x89d53 + 7 bytes
+    TX_RAM $cfda
+    db $0, $4f
+    db "is eating!", $58
+; 0x89d53 + 23 bytes
 
-INCBIN "baserom.gbc",$89d5a,$89d6a - $89d5a
-
-_UnnamedText_42ac: ; 0x89d6a
+SafariZoneAngryText: ; 0x89d6a
     db $0, "Wild @"
-; 0x89d6a + 7 bytes
+    TX_RAM $cfda
+    db $0, $4f
+    db "is angry!", $58
+; 0x89d6a + 22 bytes
 
-INCBIN "baserom.gbc",$89d71,$f
-
+; money related
+; XXX $2 BCD macro
+; $2, pointer, byte
 _UnnamedText_1386b: ; 0x89d80
     db $0, $52, " picked up", $4f
     db $f0, "@"
-; 0x89d80 + 15 bytes
-
-INCBIN "baserom.gbc",$89d8f,$89d96 - $89d8f
+    db $2, $e5, $cc, $c3
+    db $0, "!", $58
 
 _UnnamedText_1c9c1: ; 0x89d96
     db $0, "Clear all saved", $4f
@@ -51901,9 +51957,9 @@ _UnnamedText_12e98: ; 0x89e31
     TX_RAM $cd6d
     db $0, $4f
     db "recovered by @"
-; 0x89e31 + 19 bytes
-
-INCBIN "baserom.gbc",$89e44,$89e4b - $89e44
+    TX_NUM $cefd, 2, 3
+    db $0, "!", $57
+; 0x89e31 + 26 bytes
 
 _UnnamedText_12e9d: ; 0x89e4b
     TX_RAM $cd6d
@@ -51947,7 +52003,13 @@ _UnnamedText_12ebb: ; 0x89ecd
     db "is revitalized!", $57
 ; 0x89ecd + 21 bytes
 
-INCBIN "baserom.gbc",$89ee2,$1c
+LevelUpText: ; 0x89ee2
+    TX_RAM $cd6d
+    db $0, " grew", $4f
+    db "to level @"
+    TX_NUM $d127, $1,$3
+    db $0, "!@@"
+; 0x89ee2 + 28 bytes
 
 _UnnamedText_17f23: ; 0x89efe
     db $0, $52, " turned on", $4f
@@ -52021,9 +52083,9 @@ _UnnamedText_7b4a: ; 0x8a073
 _UnnamedText_7b4f: ; 0x8a07e
     db $0, "Withdrew", $4f
     db "@"
-; 0x8a07e + 11 bytes
-
-INCBIN "baserom.gbc",$8a089,$8a08f - $8a089
+    TX_RAM $cd6d
+    db $0, ".", $58
+; 0x8a07e + 17 bytes
 
 _UnnamedText_7b54: ; 0x8a08f
     db $0, "There is nothing", $4f
@@ -52068,9 +52130,9 @@ _UnnamedText_217f8: ; 0x8a159
     TX_RAM $cf4b
     db $0, " was", $4f
     db "stored in Box @"
-; 0x8a159 + 24 bytes
-
-INCBIN "baserom.gbc",$8a171,$8a177 - $8a171
+    TX_RAM $cd3d
+    db $0, ".", $58
+; 30 bytes
 
 _UnnamedText_217fd: ; 0x8a177
     db $0, "You can't deposit", $4f
@@ -52088,8 +52150,10 @@ _UnnamedText_21807: ; 0x8a1b9
     db "taken out.", $55
     db "Got @"
 ; 0x8a1b9 + 24 bytes
-
-INCBIN "baserom.gbc",$8a1d1,$8a1d7 - $8a1d1
+UnknownText_8a1d1: ; 0x8a1d1
+    TX_RAM $cf4b
+    db $0, ".", $58
+; 0x8a1d1 + 6 bytes
 
 _UnnamedText_2180c: ; 0x8a1d7
     db $0, "What? There are", $4f
