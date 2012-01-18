@@ -55492,7 +55492,11 @@ _Route23Text8: ; 0x92700
     db $0, "VICTORY ROAD GATE", $4f
     db "- #MON LEAGUE", $57
 
-INCBIN "baserom.gbc",$92721,$92755 - $92721
+UnknownText_92721: ; 0x92721
+    db $0, "Congratulations!", $4f
+    db "You beat our 5", $55
+    db "contest trainers!@@"
+; 0x92721 + 52 bytes
 
 _UnnamedText_51515: ; 0x92755
     db $0, $51
