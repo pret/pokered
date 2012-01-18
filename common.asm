@@ -55885,13 +55885,37 @@ _UnnamedText_3f423: ; 0x94782
     db $59, "!", $58
 ; 0x94782 + 19 bytes
 
-INCBIN "baserom.gbc",$94795,$947ab - $94795
+UnknownText_94795: ; 0x94795
+    db $0, $5a, "'s", $4f
+    db "@"
+; 0x94795 + 5 bytes
+
+UnknownText_9479a: ; 0x9479a
+    TX_RAM $cf4b
+    db $0, "@@"
+; 0x9479a + 6 bytes
+
+UnknownText_947a0: ; 0x947a0
+    db $0, $4c, "greatly@@"
+; 0x947a0 + 11 bytes
 
 _UnnamedText_3f547: ; 0x947ab
     db $0, " rose!", $58
 ; 0x947ab + 8 bytes
 
-INCBIN "baserom.gbc",$947b3,$947c9 - $947b3
+UnknownText_947b3: ; 0x947b3
+    db $0, $59, "'s", $4f
+    db "@"
+; 0x947b3 + 5 bytes
+
+UnknownText_947b8: ; 0x947b8
+    TX_RAM $cf4b
+    db $0, "@@"
+; 0x947b8 + 6 bytes
+
+UnknownText_947be: ; 0x947be
+    db $0, $4c, "greatly@@"
+; 0x947be + 11 bytes
 
 _UnnamedText_3f683: ; 0x947c9
     db $0, " fell!", $58
@@ -55912,7 +55936,9 @@ _UnnamedText_3f80c: ; 0x947f9
     db "was blown away!", $58
 ; 0x947f9 + 19 bytes
 
-INCBIN "baserom.gbc",$9480c,$94810 - $9480c
+UnnamedText_9480c: ; 0x9480c
+    db $0, $5a, "@@"
+; 0x9480c + 4 bytes
 
 _UnnamedText_3f8f9: ; 0x94810
     db $0, $4f
@@ -55955,14 +55981,21 @@ _UnnamedText_3fa77: ; 0x9488c
     db "@"
 ; 0x9488c + 12 bytes
 
-INCBIN "baserom.gbc",$94898,$9489e - $94898
+UnnamedText_94898: ; 0x94898
+    TX_RAM $cd6d
+    db $0, "!", $58
+; 0x94898 + 6 bytes
 
 _UnnamedText_3fb09: ; 0x9489e
     db $0, $59, "'s", $4f
     db "@"
 ; 0x9489e + 5 bytes
 
-INCBIN "baserom.gbc",$948a3,$948b6 - $948a3
+UnnamedText_948a3: ; 0x948a3
+    TX_RAM $cd6d
+    db $0, " was", $55
+    db "disabled!", $58
+; 0x948a3 + 19 bytes
 
 _UnnamedText_3fb3e: ; 0x948b6
     db $0, "Nothing happened!", $58
@@ -56064,7 +56097,10 @@ _UnnamedText_3bb92: ; 0x94a6c
     db "@"
 ; 0x94a6c + 21 bytes
 
-INCBIN "baserom.gbc",$94a81,$94a87 - $94a81
+UnnamedText_94a81: ; 0x94a81
+    TX_RAM $cd6d
+    db $0, "!", $58
+; 0x94a81 + 6 bytes
 
 _UnnamedText_3bbd7: ; 0x94a87
     db $0, $5a, "'s", $4f
