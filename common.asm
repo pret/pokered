@@ -57463,7 +57463,10 @@ _UnnamedText_5c4a8: ; 0x98092
     db "with you!", $57
 ; 0x98092 + 27 bytes
 
-INCBIN "baserom.gbc",$980ad,$13
+ReceivedTM34Text: ; 0x980ad
+    db $0, $52, " received", $4f
+    db "TM34!@@"
+; 0x980c0
 
 _UnnamedText_5c4b2: ; 0x980c0
     db $0, $51
@@ -57490,7 +57493,15 @@ _UnnamedText_5c4b7: ; 0x981ab
     db "room for this!", $57
 ; 0x981ab + 30 bytes
 
-INCBIN "baserom.gbc",$981c9,$98232 - $981c9
+UnnamedText_981c9: ; 0x981c9
+    db $0, "I took", $4f
+    db "you for granted.", $51
+    db "As proof of your", $4f
+    db "victory, here's", $55
+    db "the BOULDERBADGE!", $51
+    db $52, " received", $4f
+    db "the BOULDERBADGE!@@"
+; 0x98232
 
 _UnnamedText_5c4c1: ; 0x98232
     db $0, $51
@@ -57626,7 +57637,10 @@ _PewterPokecenterText1: ; 0x98704
     db "I'm on the phone!", $51
     db "Scram!", $57
 
-INCBIN "baserom.gbc",$98744,$9875c - $98744
+UnnamedText_98744: ; 0x98744
+    db $0, "JIGGLYPUFF: Puu", $4f
+    db "pupuu!", $57
+; 0x9875c
 
 _UnnamedText_1d6ab: ; 0x9875c
     db $0, "Those miserable", $4f
@@ -57725,14 +57739,24 @@ _UnnamedText_5c7c8: ; 0x98ab0
     db "my favorite TM!", $57
 ; 0x98ab0 + 205 bytes
 
-INCBIN "baserom.gbc",$98b7d,$13
+ReceivedTM11Text: ; 0x98b7d
+    db $0, $52, " received", $4f
+    db "TM11!@@"
+; 0x98b90
 
 _UnnamedText_5c7d3: ; 0x98b90
     db $0, "You better make", $4f
     db "room for this!", $57
 ; 0x98b90 + 32 bytes
 
-INCBIN "baserom.gbc",$98bb0,$98c05 - $98bb0
+UnnamedText_98bb0: ; 0x98bb0
+    db $0, "Wow!", $4f
+    db "You're too much!", $51
+    db "All right!", $51
+    db "You can have the", $4f
+    db "CASCADEBADGE to", $55
+    db "show you beat me!@@"
+; 0x98c05
 
 _UnnamedText_5c7e9: ; 0x98c05
     db $0, "I'm more than good", $4f
@@ -57815,7 +57839,11 @@ _UnnamedText_1d81f: ; 0x98e83
     db "OK! Here you go!", $58
 ; 0x98e83 + 47 bytes
 
-INCBIN "baserom.gbc",$98eb2,$98ee0 - $98eb2
+UnnamedText_98eb2: ; 0x98eb2
+    db $0, $52, " exchanged", $4f
+    db "the BIKE VOUCHER", $55
+    db "for a BICYCLE.@@"
+; 0x98ee0
 
 _UnnamedText_1d82a: ; 0x98ee0
     db $0, "Come back again", $4f
@@ -58384,7 +58412,12 @@ _UnnamedText_1d94c: ; 0x99f97
     db "help your quest.", $58
 ; 0x99f97 + 100 bytes
 
-INCBIN "baserom.gbc",$99ffb,$9a011 - $99ffb
+UnnamedText_99ffb: ; 0x99ffb
+    db $0, $52, " received", $4f
+    db "a @"
+    TX_RAM $cf4b
+    db $0, "!@@"
+; 0x9a011
 
 _UnnamedText_1d956: ; 0x9a011
     db $0, $51
@@ -58500,7 +58533,12 @@ _UnnamedText_1dac7: ; 0x9a404
     db "@"
 ; 0x9a404 + 33 bytes
 
-INCBIN "baserom.gbc",$9a425,$9a44c - $9a425
+UnnamedText_9a425: ; 0x9a425
+    TX_RAM $cee9
+    db $0, "!", $51
+    db "That's a better", $4f
+    db "name than before!", $57
+; 0x9a44c
 
 _UnnamedText_1dacc: ; 0x9a44c
     db $0, "Fine! Come any", $4f
@@ -58514,11 +58552,11 @@ _UnnamedText_1dad1: ; 0x9a46b
     db "impeccable name!", $51
     db "Take good care of", $4f
     db "@"
-; 0x9a46b + 65 bytes
+    TX_RAM $cd6d
+    db $0, "!", $57
+; 0x9a4b2
 
-INCBIN "baserom.gbc",$9a4ac,$6
-
-_VermilionPokecenterText2: ; 0x9a4b2
+_VermilionPokecenterText2:
 _VermilionPokecenterText1: ; 0x9a4b2
     db $0, "Even if they are", $4f
     db "the same level,", $55
@@ -58610,7 +58648,12 @@ _UnnamedText_59c6a: ; 0x9a6e0
     db "you to have this!", $58
 ; 0x9a6e0 + 334 bytes
 
-INCBIN "baserom.gbc",$9a82e,$9a844 - $9a82e
+UnnamedText_9a82e: ; 0x9a82e
+    db $0, $52, " received", $4f
+    db "a @"
+    TX_RAM $cf4b
+    db $0, "!@@"
+; 0x9a844
 
 _UnnamedText_59c74: ; 0x9a844
     db $0, $51
