@@ -56863,7 +56863,10 @@ _UnnamedText_5c28e: ; 0x966b4
     db "get it examined!", $58
 ; 0x966b4 + 220 bytes
 
-INCBIN "baserom.gbc",$96790,$967a8 - $96790
+ReceivedOldAmberText: ; 0x96790
+    db $0, $52, " received", $4f
+    db "OLD AMBER!@@"
+; 0x96790 + 24 bytes
 
 _UnnamedText_5c299: ; 0x967a8
     db $0, "Ssh! Get the OLD", $4f
