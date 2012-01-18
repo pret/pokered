@@ -52113,7 +52113,11 @@ _UnnamedText_2181b: ; 0x8a23d
     db "@"
 ; 0x8a23d + 17 bytes
 
-INCBIN "baserom.gbc",$8a24e,$8a268 - $8a24e
+UnknownText_8a24e: ; 0x8a24e
+    TX_RAM $cf4b
+    db $0, " is", $55
+    db "gone forever. OK?", $57
+; 0x8a24e + 26 bytes
 
 _UnnamedText_21820: ; 0x8a268
     TX_RAM $cf4b
