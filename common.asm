@@ -56614,7 +56614,10 @@ _ViridianGymText12: ; 0x95fcc
     db "LEAGUE challenge!", $57
 ; 0x95fcc + 182 bytes
 
-INCBIN "baserom.gbc",$96082,$96095 - $96082
+_UnnamedText_74ae9_part1: ; 0x96082
+    db $0, $52, " received", $4f
+    db "TM27!@@"
+; 0x96082 + 19 bytes
 
 _UnnamedText_74ae9: ; 0x96095
     db $0, $51
