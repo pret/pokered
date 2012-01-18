@@ -52831,7 +52831,10 @@ _UnnamedText_1e62b: ; 0x8ce02
     db "to you with this!", $58
 ; 0x8ce02 + 100 bytes
 
-INCBIN "baserom.gbc",$8ce66,$8ce79 - $8ce66
+ReceivedHM02Text: ; 0x8ce66
+    db $0, $52, " received", $4f
+    db "HM02!@@"
+; 0x8ce66 + 19 bytes
 
 _UnnamedText_1e636: ; 0x8ce79
     db $0, "HM02 is FLY.", $4f
