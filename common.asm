@@ -52401,7 +52401,10 @@ INCBIN "baserom.gbc",$8acd6,$23
 
 SECTION "bank23",DATA,BANK[$23]
 
-INCBIN "baserom.gbc",$8c000,$8c013 - $8c000
+UnknownText_8c000: ; 0x8c000
+    db $0, "All right then,", $4f
+    db "@@"
+; 0x8c000 + 19 bytes
 
 _UnnamedText_5643b: ; 0x8c013
     db $0, "come again.", $57
@@ -52608,7 +52611,13 @@ _RockTunnel1Text8: ; 0x8c5b7
     db "CERULEAN CITY -", $55
     db "LAVENDER TOWN", $57
 
-INCBIN "baserom.gbc",$8c5e2,$8c5f3 - $8c5e2
+UnknownText_8c5e2: ; 0x8c5e2
+    db $0, "Bzzzt!", $57
+; 0x8c5e2 + 8 bytes
+
+UnknownText_8c5ea: ; 0x8c5ea
+    db $0, "Gyaoo!@@"
+; 0x8c5ea + 9 bytes
 
 _Route11GateText1: ; 0x8c5f3
     db $0, "When you catch", $4f
@@ -52678,7 +52687,10 @@ _UnnamedText_4959c: ; 0x8c86b
     db "it any more...", $58
 ; 0x8c86b + 91 bytes
 
-INCBIN "baserom.gbc",$8c8c6,$8c8d9 - $8c8c6
+ReceivedTM39Text: ; 0x8c8c6
+    db $0, $52, " received", $4f
+    db "TM39!@@"
+; 0x8c8c6 + 19 bytes
 
 _UnnamedText_495a7: ; 0x8c8d9
     db $0, "TM39 is a move", $4f
@@ -52694,7 +52706,11 @@ _UnnamedText_495ac: ; 0x8c93c
     db "room for this.", $57
 ; 0x8c93c + 30 bytes
 
-INCBIN "baserom.gbc",$8c95a,$8c986 - $8c95a
+nknownText_8c95a: ; 0x8c95a
+    db $0, "Looked into the", $4f
+    db "binoculars.", $51
+    db "A man fishing!", $57
+; 0x8c95a + 44 bytes
 
 _UnnamedText_495c4: ; 0x8c986
     db $0, "Looked into the", $4f
