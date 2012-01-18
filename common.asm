@@ -52383,21 +52383,37 @@ _UnnamedText_56428: ; 0x8ac7d
     db $0, "You owe me ", $f0, "@"
 ; 0x8ac7d + 14 bytes
 
-INCBIN "baserom.gbc",$8ac8b,$8acae - $8ac8b
+;XXX
+; 0x8ac8b
+db $2, $3f, $cd, $c2
+
+UnknownText_8ac8f: ; 0x8ac8f
+    db $0, $4f
+    db "for the return", $55
+    db "of this #MON.", $57
+; 0x8ac8f + 31 bytes
 
 _UnnamedText_5642d: ; 0x8acae
     db $0, $52, " got", $4f
     db "@"
 ; 0x8acae + 8 bytes
 
-INCBIN "baserom.gbc",$8acb6,$8acc1 - $8acb6
+UnknownText_8acb6: ; 0x8acb6
+    TX_RAM $da49
+    db $0, " back!", $57
+; 0x8acb6 + 11 bytes
 
 _UnnamedText_56432: ; 0x8acc1
     db $0, "Back already?", $4f
     db "Your @"
 ; 0x8acc1 + 21 bytes
 
-INCBIN "baserom.gbc",$8acd6,$23
+UnknownText_8acd6: ; 0x8acd6
+    TX_RAM $cd6d
+    db $0, $55
+    db "needs some more", $55
+    db "time with me.", $58
+; 0x8acd6 + 35 bytes
 
 SECTION "bank23",DATA,BANK[$23]
 
