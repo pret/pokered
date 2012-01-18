@@ -56127,7 +56127,23 @@ _OaksLabText39: ; 0x94ddf
     db "BALLs. They", $55
     db "contain #MON!", $57
 
-INCBIN "baserom.gbc",$94e06,$94e80 - $94e06
+UnnamedText_94e06: ; 0x94e06
+    db $0, "So! You want the", $4f
+    db "fire #MON,", $55
+    db "CHARMANDER?", $57
+; 0x94e06 + 41 bytes
+
+UnnamedText_94e2f: ; 0x94e2f
+    db $0, "So! You want the", $4f
+    db "water #MON,", $55
+    db "SQUIRTLE?", $57
+; 0x94e57
+
+UnnamedText_94e57: ; 0x94e57
+    db $0, "So! You want the", $4f
+    db "plant #MON,", $55
+    db "BULBASAUR?", $57
+; 0x94e57 + 41 bytes
 
 _UnnamedText_1d222: ; 0x94e80
     db $0, "This #MON is", $4f
