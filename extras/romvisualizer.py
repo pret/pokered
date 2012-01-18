@@ -6,12 +6,12 @@ import os
 changeset_numbers = range(266, 635)
 
 def take_snapshot_image(changeset_number):
-    "turn pokered.asm into an image at a certain version"
+    "turn common.asm into an image at a certain version"
 
-    print "reverting pokered.asm to r" + str(changeset_number)
+    print "reverting common.asm to r" + str(changeset_number)
 
     #revert the file
-    os.system("hg revert ../pokered.asm -r" + str(changeset_number))
+    os.system("hg revert ../common.asm -r" + str(changeset_number))
 
     print "generating the image.."
 
