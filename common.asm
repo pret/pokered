@@ -55500,7 +55500,15 @@ _UnnamedText_51515: ; 0x92755
     db "fabulous prize!", $58
 ; 0x92755 + 36 bytes
 
-INCBIN "baserom.gbc",$92779,$9278f - $92779
+UnknownText_92779: ; 0x92779
+    db $0, $52, " received", $4f
+    db "a @"
+; 0x92779 + 15 bytes
+
+UnknownText_92788: ; 0x92788
+    TX_RAM $cf4b
+    db $0, "!@@"
+; 0x92788 + 7 bytes
 
 _UnnamedText_51521: ; 0x9278f
     db $0, "You don't have", $4f
@@ -55821,10 +55829,8 @@ _UnnamedText_73909: ; 0x94671
 
 _UnnamedText_739d4: ; 0x946b0
     db $0, "Choose a", $4f
-    db $4a, " BOX.@"
+    db $4a, " BOX.@@"
 ; 0x946b0 + 17 bytes
-
-INCBIN "baserom.gbc",$946c1,$946c2 - $946c1
 
 _UnnamedText_3af3e: ; 0x946c2
     TX_RAM $cf4b
