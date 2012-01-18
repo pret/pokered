@@ -56873,7 +56873,18 @@ _UnnamedText_441cc: ; 0x9580c
     db "@"
 ; 0x9580c + 24 bytes
 
-INCBIN "baserom.gbc",$95824,$95858 - $95824
+UnnamedText_95824: ; 0x95824
+    TX_NUM $ffdb, 1, 3
+    db $0, " #MON seen", $4f
+    db "@"
+; 0x95835
+
+UnnamedText_95835: ; 0x95835
+    TX_NUM $ffdc, 1, 3
+    db $0, " #MON owned", $51
+    db "PROF.OAK's", $4f
+    db "Rating:", $58
+; 0x95858
 
 _UnnamedText_44201: ; 0x95858
     db $0, "You still have", $4f
