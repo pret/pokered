@@ -190,10 +190,10 @@ MapHeaderPointers: ; $01AE
 	dw DayCareM_h
 	dw Route6Gate_h
 	dw UndergroundTunnelEntranceRoute6_h
-	dw $56e3 ; id=75
+	dw $56e3 ; FREEZE id=75
 	dw Route7Gate_h
 	dw UndergroundPathEntranceRoute7_h
-	dw $575d
+	dw $575d ;FREEZE
 	dw Route8Gate_h
 	dw UndergroundPathEntranceRoute8_h
 	dw RockTunnelPokecenter_h
@@ -235,7 +235,7 @@ MapHeaderPointers: ; $01AE
 	dw Lance_h ; unused
 	dw $6492
 	dw UndergroundPathNS_h
-	dw $5f11
+	dw Gary_h
 	dw UndergroundPathWE_h
 	dw CeladonMart1_h
 	dw CeladonMart2_h
@@ -46780,7 +46780,16 @@ CopycatsHouseF1Object: ; 0x75ee3 (size=46)
     EVENT_DISP $4, $7, $3
     EVENT_DISP $4, $1, $7 ; COPYCATS_HOUSE_2F
 
-INCBIN "baserom.gbc",$75f11,$75f1d - $75f11
+;INCBIN "baserom.gbc",$75f11,$75f1d - $75f11
+
+Gary_h: ;0x75f11
+
+db $7 ;tileset
+db $4, $4 ;Height, Width
+dw GaryBlocks, GaryTexts, GaryScript
+db $0 ;No Connections
+
+dw GaryObject
 
 GaryScript: ; 0x75f1d
     call $3c3c

@@ -18,7 +18,7 @@ redrle: extras/redrle.c
 	${CC} -o $@ $>
 
 .asm.tx:
-	awk -f textpre.awk < $< > $@
+	awk -b -f textpre.awk < $< > $@
 
 pokered.gbc: pokered.o
 	rgblink -o $@ $<
