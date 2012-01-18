@@ -417,43 +417,46 @@ INCBIN "baserom.gbc",$39E,$1627 - $39E
 INCBIN "baserom.gbc",$1665,$172F - $1665
 
 Tset0B_Coll:
-	INCBIN "baserom.gbc",$172F,$1735-$172F
+	INCBIN "gfx/tilesets/0b.tilecoll"
 Tset00_Coll:
-	INCBIN "baserom.gbc",$1735,$1749-$1735
+	INCBIN "gfx/tilesets/00.tilecoll"
 Tset01_Coll:
-	INCBIN "baserom.gbc",$1749,$1753-$1749
+	INCBIN "gfx/tilesets/01.tilecoll"
 Tset02_Coll:
-	INCBIN "baserom.gbc",$1753,$1759-$1753
+	INCBIN "gfx/tilesets/02.tilecoll"
 Tset05_Coll:
-	INCBIN "baserom.gbc",$1759,$1765-$1759
+	INCBIN "gfx/tilesets/05.tilecoll"
 Tset03_Coll:
-	INCBIN "baserom.gbc",$1765,$1775-$1765
+	INCBIN "gfx/tilesets/03.tilecoll"
 Tset08_Coll:
-	INCBIN "baserom.gbc",$1775,$177F-$1775
+	INCBIN "gfx/tilesets/08.tilecoll"
 Tset09_Coll:
-	INCBIN "baserom.gbc",$177F,$178A-$177F
+	INCBIN "gfx/tilesets/09.tilecoll"
 Tset0D_Coll:
-	INCBIN "baserom.gbc",$178A,$1795-$178A
+	INCBIN "gfx/tilesets/0D.tilecoll"
 Tset0E_Coll:
-	INCBIN "baserom.gbc",$1795,$179A-$1795
+	INCBIN "gfx/tilesets/0E.tilecoll"
 Tset0F_Coll:
-	INCBIN "baserom.gbc",$179A,$17A2-$179A
+	INCBIN "gfx/tilesets/0F.tilecoll"
 Tset10_Coll:
-	INCBIN "baserom.gbc",$17A2,$17AC-$17A2
+	INCBIN "gfx/tilesets/10.tilecoll"
 Tset11_Coll:
-	INCBIN "baserom.gbc",$17AC,$17B8-$17AC
+	INCBIN "gfx/tilesets/11.tilecoll"
 Tset12_Coll:
-	INCBIN "baserom.gbc",$17B8,$17C0-$17B8
+	INCBIN "gfx/tilesets/12.tilecoll"
 Tset13_Coll:
-	INCBIN "baserom.gbc",$17C0,$17CA-$17C0
+	INCBIN "gfx/tilesets/13.tilecoll"
 Tset14_Coll:
-	INCBIN "baserom.gbc",$17CA,$17D1-$17CA
+	INCBIN "gfx/tilesets/14.tilecoll"
 Tset15_Coll:
-	INCBIN "baserom.gbc",$17D1,$17DD-$17D1
+	INCBIN "gfx/tilesets/15.tilecoll"
 Tset16_Coll:
-	INCBIN "baserom.gbc",$17DD,$17F0-$17DD
+	INCBIN "gfx/tilesets/16.tilecoll"
 Tset17_Coll:
-	INCBIN "baserom.gbc",$17F0,$190F-$17F0
+	INCBIN "gfx/tilesets/17.tilecoll"
+;Tile Collision ends 0x17f7
+
+INCBIN "baserom.gbc",$17F7,$190F-$17F7
 
 ClearScreen: ; 190F
 ; clears all tiles in the tilemap,
