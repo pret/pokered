@@ -55480,7 +55480,44 @@ _Route22Text3: ; 0x92606
     db $0, "#MON LEAGUE", $4f
     db "Front Gate", $57
 
-INCBIN "baserom.gbc",$9261e,$926dd - $9261e
+UnknownText_9261e: ; 0x9261e
+    db $0, "You can pass here", $4f
+    db "only if you have", $55
+    db "the @"
+; 0x9261e + 41 bytes
+
+UnknownText_92647: ; 0x92647
+    TX_RAM $cd6d
+    db $0, "!", $51
+    db "You don't have the", $4f
+    db "@"
+; 0x92647 + 25 bytes (0x92660)
+
+UnknownText_92660: ; 0x92660
+    TX_RAM $cd6d
+    db $0, " yet!", $51
+    db "You have to have", $4f
+    db "it to get to", $55
+    db "#MON LEAGUE!@@"
+; 0x92660 + 54 bytes
+
+UnknownText_92696: ; 0x92696
+    db $0, "You can pass here", $4f
+    db "only if you have", $55
+    db "the @"
+; 0x92696 + 41 bytes
+
+UnknownText_926bf: ; 0x926bf
+    TX_RAM $cd6d
+    db $0, "!", $51
+    db "Oh! That is the", $4f
+    db "@"
+; 0x926bf + 23 bytes
+
+UnknownText_926d6: ; 0x926d6
+    TX_RAM $cd6d
+    db $0, "!@@"
+; 0x926d6 + 7 bytes
 
 _UnnamedText_513a3: ; 0x926dd
     db $0, $51
