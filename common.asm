@@ -52888,7 +52888,15 @@ _UnnamedText_1e715: ; 0x8d012
     db "let you pass.", $57
 ; 0x8d012 + 44 bytes
 
-INCBIN "baserom.gbc",$8d03e,$39
+UnknownText_8d03e: ; 0x8d03e
+    db $0, "Oh! That is the", $4f
+    db "BOULDERBADGE!", $55
+    db "Go right ahead!@@"
+; 0x8d03e + 48 bytes
+
+UnknownText_8d06e: ; 0x8d06e
+    db $0, "Gyaoo!@@"
+; 0x8d06e + 9 bytes
 
 _UnnamedText_518ca: ; 0x8d077
     db $0, "VICTORY ROAD is", $4f
