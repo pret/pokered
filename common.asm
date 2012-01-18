@@ -58762,7 +58762,12 @@ _UnnamedText_5cb77: ; 0x9c069
     db "kid! Take this!", $57
 ; 0x9c069 + 119 bytes
 
-INCBIN "baserom.gbc",$9c0e0,$15
+UnnamedText_9c0e0: ; 0x9c0e0
+    db $0, $52, " received ", $4f
+    db "@"
+    TX_RAM $cf4b
+    db $0, "!@@"
+; 0x9c0f5
 
 _UnnamedText_5cb81: ; 0x9c0f5
     db $0, $51
@@ -58897,7 +58902,16 @@ _UnnamedText_560b1: ; 0x9c510
     db "fish?", $57
 ; 0x9c510 + 68 bytes
 
-INCBIN "baserom.gbc",$9c554,$9c5a4 - $9c554
+UnnamedText_9c554: ; 0x9c554
+    db $0, "Grand! I like", $4f
+    db "your style!", $51
+    db "Take this and", $4f
+    db "fish, young one!", $51
+    db $52, " received", $4f
+    db "an @"
+    TX_RAM $cf4b
+    db $0, "!@@"
+; 0x9c5a4
 
 _UnnamedText_560bb: ; 0x9c5a4
     db $0, $51
@@ -58976,7 +58990,12 @@ _UnnamedText_48278: ; 0x9c814
     db "useful!", $58
 ; 0x9c814 + 70 bytes
 
-INCBIN "baserom.gbc",$9c85a,$9c86e - $9c85a
+UnnamedText_9c85a: ; 0x9c85a
+    db $0, $52, " received", $4f
+    db "@"
+    TX_RAM $cf4b
+    db $0, "!@@"
+; 0x9c86e
 
 _UnnamedText_48283: ; 0x9c86e
     db $0, "TM18 is COUNTER!", $4f
@@ -59073,7 +59092,85 @@ _UnnamedText_484ee: ; 0x9cbb5
     db "drink?", $57
 ; 0x9cbb5 + 23 bytes
 
-INCBIN "baserom.gbc",$9cbcc,$1cb
+UnnamedText_9cbcc: ; 0x9cbcc
+    db $0, "Yay!", $51
+    db "FRESH WATER!", $51
+    db "Thank you!", $51
+    db "You can have this", $4f
+    db "from me!@@"
+; 0x9cc06
+
+UnnamedText_9cc06: ; 0x9cc06
+    db $0, $52, " received", $4f
+    db "@"
+    TX_RAM $cf4b
+    db $0, "!@@"
+; 0x9cc1a
+
+UnnamedText_9cc1a: ; 0x9cc1a
+    db $0, $51
+    db "@"
+    TX_RAM $cf4b
+    db $0, " contains", $4f
+    db "ICE BEAM!", $51
+    db "It can freeze the", $4f
+    db "target sometimes!@@"
+; 0x9cc5a
+
+UnnamedText_9cc5a: ; 0x9cc5a
+    db $0, "Yay!", $51
+    db "SODA POP!", $51
+    db "Thank you!", $51
+    db "You can have this", $4f
+    db "from me!@@"
+; 0x9cc91
+
+UnnamedText_9cc91: ; 0x9cc91
+    db $0, $52, " received", $4f
+    db "@"
+    TX_RAM $cf4b
+    db $0, "!@@"
+; 0x9cca4
+
+UnnamedText_9cca5: ; 0x9cca5
+    db $0, $51
+    db "@"
+    TX_RAM $cf4b
+    db $0, " contains", $4f
+    db "ROCK SLIDE!", $51
+    db "It can spook the", $4f
+    db "target sometimes!@@"
+; 0x9cce6
+
+UnnamedText_9cce6: ; 0x9cce6
+    db $0, "Yay!", $51
+    db "LEMONADE!", $51
+    db "Thank you!", $51
+    db "You can have this", $4f
+    db "from me!@@"
+; 0x9cd1d
+
+ReceivedTM49Text: ; 0x9cd1d
+    db $0, $52, " received", $4f
+    db "TM49!@@"
+; 0x9cd30
+
+UnnamedText_9cd30: ; 0x9cd30
+    db $0, $51
+    db "TM49 contains", $4f
+    db "TRI ATTACK!@@"
+; 0x9cd4d
+
+UnnamedText_9cd4d: ; 0x9cd4d
+    db $0, "You don't have", $4f
+    db "space for this!@@"
+; 0x9cd6d
+
+UnnamedText_9cd6d: ; 0x9cd6d
+    db $0, "No thank you!", $4f
+    db "I'm not thirsty", $55
+    db "after all!@@"
+; 0x9cd97
 
 _CeladonMartRoofText1: ; 0x9cd97
     db $0, "My sister is a", $4f
@@ -59178,7 +59275,13 @@ _UnnamedText_487d0: ; 0x9d03a
     db "come tell me!", $57
 ; 0x9d03a + 115 bytes
 
-INCBIN "baserom.gbc",$9d0ad,$40
+UnnamedText_9d0ad: ; 0x9d0ad
+    db $0, "Wow! Excellent!", $4f
+    db "You completed", $55
+    db "your #DEX!", $55
+    db "Congratulations!", $55
+    db "...@@"
+; 0x9d0ed
 
 _CeladonMansion3Text5: ; 0x9d0ed
     db $0, "It's the game", $4f
@@ -59276,7 +59379,12 @@ _UnnamedText_48a6d: ; 0x9d481
     db "this with you.", $57
 ; 0x9d481 + 139 bytes
 
-INCBIN "baserom.gbc",$9d50c,$14
+UnnamedText_9d50c: ; 0x9d50c
+    db $0, $52, " received", $4f
+    db "@"
+    TX_RAM $cf4b
+    db $0, "!@@"
+; 0x9d520
 
 _UnnamedText_48a77: ; 0x9d520
     db $0, $51
@@ -59479,7 +59587,10 @@ _UnnamedText_48d9c: ; 0x9da8e
     db "to play?", $58
 ; 0x9da8e + 27 bytes
 
-INCBIN "baserom.gbc",$9daa9,$9dac0 - $9daa9
+UnnamedText_9daa9: ; 0x9daa9
+    db $0, $52, " received", $4f
+    db "10 coins!@@"
+; 0x9dac0
 
 _UnnamedText_48da7: ; 0x9dac0
     db $0, "You don't need my", $4f
@@ -59528,7 +59639,10 @@ _UnnamedText_48e26: ; 0x9dc33
     db "some coins?", $58
 ; 0x9dc33 + 28 bytes
 
-INCBIN "baserom.gbc",$9dc4f,$9dc66 - $9dc4f
+UnnamedText_9dc4f: ; 0x9dc4f
+    db $0, $52, " received", $4f
+    db "20 coins!@@"
+; 0x9dc66
 
 _UnnamedText_48e31: ; 0x9dc66
     db $0, "You have lots of", $4f
@@ -59548,7 +59662,10 @@ _UnnamedText_48e88: ; 0x9dcad
     db "coins, shoo!", $58
 ; 0x9dcad + 62 bytes
 
-INCBIN "baserom.gbc",$9dceb,$9dd02 - $9dceb
+UnnamedText_9dceb: ; 0x9dceb
+    db $0, $52, " received", $4f
+    db "20 coins!@@"
+; 0x9dd02
 
 _UnnamedText_48e93: ; 0x9dd02
     db $0, "You've got your", $4f
@@ -59577,7 +59694,12 @@ _UnnamedText_48ed8: ; 0x9dd7a
     db "better tell BOSS!", $57
 ; 0x9dd7a + 54 bytes
 
-INCBIN "baserom.gbc",$9ddb0,$9dde2 - $9ddb0
+UnnamedText_9ddb0: ; 0x9ddb0
+    db $0, "Hey!", $51
+    db "A switch behind", $4f
+    db "the poster!?", $55
+    db "Let's push it!@@"
+; 0x9dde2
 
 _UnnamedText_48f19: ; 0x9dde2
     db $0, "Oops! Forgot the", $4f
@@ -59650,7 +59772,12 @@ _UnnamedText_491a7: ; 0x9e003
     db "more!", $58
 ; 0x9e003 + 119 bytes
 
-INCBIN "baserom.gbc",$9e07a,$9e090 - $9e07a
+UnnamedText_9e07a: ; 0x9e07a
+    db $0, $52, " received", $4f
+    db "a @"
+    TX_RAM $cf4b
+    db $0, "!@@"
+; 0x9e090
 
 _UnnamedText_491b2: ; 0x9e090
     db $0, "Make room for", $4f
@@ -59766,7 +59893,11 @@ _UnnamedText_7513f: ; 0x9e4b0
     db "ha hoo ee haheh!", $57
 ; 0x9e4b0 + 34 bytes
 
-INCBIN "baserom.gbc",$9e4d2,$9e4f9 - $9e4d2
+UnnamedText_9e4d2: ; 0x9e4d2
+    db $0, $52, " gave the", $4f
+    db "GOLD TEETH to the", $55
+    db "WARDEN!@@"
+; 0x9e4f9
 
 _UnnamedText_75149: ; 0x9e4f9
     db $0, $51
@@ -59786,7 +59917,12 @@ _UnnamedText_7514e: ; 0x9e51b
     db "your trouble.", $58
 ; 0x9e51b + 135 bytes
 
-INCBIN "baserom.gbc",$9e5a2,$9e5b6 - $9e5a2
+UnnamedText_9e5a2: ; 0x9e5a2
+    db $0, $52, " received", $4f
+    db "@"
+    TX_RAM $cf4b
+    db $0, "!@@"
+; 0x9e5b6
 
 _UnnamedText_75159: ; 0x9e5b6
     db $0, "WARDEN: HM04", $4f
@@ -59823,7 +59959,24 @@ _SafariZoneEntranceText1: ; 0x9e6c7
     db $0, "Welcome to the", $4f
     db "SAFARI ZONE!", $57
 
-INCBIN "baserom.gbc",$9e6e4,$9e79f - $9e6e4
+UnnamedText_9e6e4: ; 0x9e6e4
+    db $0, "For just ", $f0, "500,", $4f
+    db "you can catch all", $55
+    db "the #MON you", $55
+    db "want in the park!", $51
+    db "Would you like to", $4f
+    db "join the hunt?@@"
+; 0x9e747
+
+UnnamedText_9e747: ; 0x9e747
+    db $0, "That'll be ", $f0, "500", $4f
+    db "please!", $51
+    db "We only use a", $4f
+    db "special # BALL", $55
+    db "here.", $51
+    db $52, " received", $4f
+    db "30 SAFARI BALLs!@@"
+; 0x9e79f
 
 _UnnamedText_75360: ; 0x9e79f
     db $0, $51
@@ -59843,7 +59996,9 @@ _UnnamedText_7536a: ; 0x9e7fb
     db "money!", $57
 ; 0x9e7fb + 25 bytes
 
-INCBIN "baserom.gbc",$9e814,$11
+UnnamedText_9e814: ; 0x9e814
+    db $0, "Leaving early?@@"
+; 0x9e825
 
 _UnnamedText_753bb: ; 0x9e825
     db $0, "Please return any", $4f
