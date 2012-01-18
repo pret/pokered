@@ -56510,7 +56510,15 @@ _UnnamedText_1d4f5: ; 0x95c58
     db "PALLET TOWN?", $57
 ; 0x95c58 + 33 bytes
 
-INCBIN "baserom.gbc",$95c79,$5c
+ViridianMartParcelQuestText: ; 0x95c79
+    db $0, "You know PROF.", $4f
+    db "OAK, right?", $51
+    db "His order came in.", $4f
+    db "Will you take it", $55
+    db "to him?", $51
+    db $52, " got", $4f
+    db "OAK's PARCEL!@@"
+; 0x95c79 + 92 bytes
 
 _ViridianMartText2: ; 0x95cd5
     db $0, "This shop sells", $4f
