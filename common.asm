@@ -44671,11 +44671,18 @@ UnnamedText_74ace: ; 0x74ace
     db $50
 ; 0x74ace + 5 bytes
 
-INCBIN "baserom.gbc",$74ad3,$c
+UnnamedText_74ad3: ; 0x74ad3
+    TX_FAR _UnnamedText_74ad3
+    db $0B
+    db $50
+; 0x74ad3 + 6 bytes
+
+INCBIN "baserom.gbc",$74AD9,6
 
 ViridianGymText12: ; 0x74adf
-
-INCBIN "baserom.gbc",$74adf,5
+    TX_FAR _ViridianGymText12
+    db $50
+; 0x74adf + 5 bytes
 
 ViridianGymText13: ; 0x74ae4
 
@@ -45157,14 +45164,20 @@ CeruleanHouse3Object: ; 0x74ebe (size=34)
     EVENT_DISP $4, $7, $2
     EVENT_DISP $4, $7, $3
 
-INCBIN "baserom.gbc",$74ee0,$74f99 - $74ee0
+INCBIN "baserom.gbc",$74ee0,$B9
 
 UnnamedText_74f99: ; 0x74f99
     TX_FAR _UnnamedText_74f99
     db $50
 ; 0x74f99 + 5 bytes
 
-INCBIN "baserom.gbc",$74f9e,$74fd3 - $74f9e
+	db "FRESH WATER",$4E
+	db "SODA POP",$4E
+	db "LEMONADE",$4E
+	db "CANCEL@"
+	db $F0,"200",$4E
+	db $F0,"300",$4E
+	db $F0,"350",$4E,"@"
 
 UnnamedText_74fd3: ; 0x74fd3
     TX_FAR _UnnamedText_74fd3
@@ -45946,7 +45959,14 @@ CinnabarGymScript: ; 0x7574a
     jp $3d97
 ; 0x75759
 
-INCBIN "baserom.gbc",$75759,$757a6 - $75759
+INCBIN "baserom.gbc",$75759,$7577B - $75759
+
+Gym7CityName:
+	db "CINNABAR ISLAND@"
+Gym7LeaderName:
+	db "BLAINE@"
+
+INCBIN "baserom.gbc",$75792,$757a6 - $75792
 
 CinnabarGymScripts: ; 0x757a6
     dw CinnabarGymScript0, CinnabarGymScript1
@@ -46792,8 +46812,6 @@ CopycatsHouseF1Object: ; 0x75ee3 (size=46)
     EVENT_DISP $4, $7, $3
     EVENT_DISP $4, $1, $7 ; COPYCATS_HOUSE_2F
 
-;INCBIN "baserom.gbc",$75f11,$75f1d - $75f11
-
 Gary_h: ;0x75f11
 
 db $7 ;tileset
@@ -47153,9 +47171,9 @@ UnnamedText_76852: ; 0x76852
     db $50
 ; 0x76852 + 5 bytes
 
-INCBIN "baserom.gbc",$76857,$179f
+INCBIN "baserom.gbc",$76857,$76880 - $76857
 
-;10 $0s go here, does anything use this?
+;I'm pretty sure that the rest of the bank is assembly and thus doesn't use any of the 0s, but I've included some to be sure
 
 SECTION "bank1E",DATA,BANK[$1E]
 
@@ -56550,9 +56568,34 @@ _UnnamedText_74ace: ; 0x95e09
     db "greatest trainer!", $57
 ; 0x95e09 + 204 bytes
 
-INCBIN "baserom.gbc",$95ed5,$95fcc - $95ed5
+_UnnamedText_74ad3: ; 0x95ed5
+    db $0, "Ha!", $4f
+    db "That was a truly", $55
+    db "intense fight!", $55
+    db "You have won!", $55
+    db "As proof, here is", $55
+    db "the EARTHBADGE!@"
+; 0x95ed5 + 85 bytes
 
-_UnnamedText_74adf: ; 0x95fcc
+db $50
+ 
+_UnnamedText_95f2b: ; 0x95f2b
+    db $0, "Having lost, I", $4f
+    db "cannot face my", $55
+    db "underlings!", $55
+    db "TEAM ROCKET is", $55
+    db "finished forever!", $51
+    db "I will dedicate my", $4f
+    db "life to the study", $55
+    db "of #MON!", $51
+    db "Let us meet again", $4f
+    db "some day!", $55
+    db "Farewell!@"
+; 0x95f2b + 160 bytes
+ 
+db $50
+
+_ViridianGymText12: ; 0x95fcc
     db $0, "The EARTHBADGE", $4f
     db "makes #MON of", $55
     db "any level obey!", $51
