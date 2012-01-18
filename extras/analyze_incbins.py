@@ -79,7 +79,9 @@ def process_incbins():
                             "end": end,
                            }
         
-        processed_incbins[line_number] = processed_incbin
+        #don't add this incbin if the interval is 0
+        if interval != 0:
+            processed_incbins[line_number] = processed_incbin
 
 def find_incbin_to_replace_for(address):
     """returns a line number for which incbin to edit
@@ -235,7 +237,8 @@ def apply_diff(diff, try_fixing=True):
 
     #confirm it's working
     try:
-        subprocess.check_call("cd ../; make clean; LC_CTYPE=UTF-8 make", shell=True)
+        subprocess.check_call("cd ../; make clean; LC_CTYPE=C make", shell=True)
+        return True
     except Exception, exc:
         if try_fixing:
             os.system("mv ../common1.asm ../common.asm")

@@ -226,7 +226,7 @@ def parse_text_script(text_pointer, text_id, map_id, txfar=False):
                         "read_byte": read_byte, #split this up when we make a macro for this
                       }
 
-            offset += 4 + 1
+            offset += 4
         elif command_byte == 0xB:
             #0B = sound_86 (Hiro obtains ITEM)[same as 0F]
             command = {"type": command_byte, "start_address": offset, "end_address": offset}
@@ -385,34 +385,109 @@ def find_missing_08s(all_texts):
 
 def text_pretty_printer_at(start_address, label="SomeLabel"):
     commands = parse_text_script(start_address, None, None)
-    needs_to_begin_with_0 = False
+    needs_to_begin_with_0 = True #how should this be determined?
     
-    wanted_command = None
-    if needs_to_begin_with_0:
-        wanted_command = None
-        for command_id in commands:
-            command = commands[command_id]
-            if command["type"] == 0:
-                wanted_command = command_id
-    
-        if wanted_command == None:
-            raise "error: address did not start with a $0 text"
+    #wanted_command = None
+    #if needs_to_begin_with_0:
+    #    wanted_command = None
+    #    for command_id in commands:
+    #        command = commands[command_id]
+    #        if command["type"] == 0:
+    #            wanted_command = command_id
+    #
+    #    if wanted_command == None:
+    #        raise "error: address did not start with a $0 text"
     
     #start with zero please
     byte_count = 0
 
+    had_text_end_byte = False
+    had_text_end_byte_57_58 = False
+    had_db_last = False
     first_line = True
     for this_command in commands.keys():
-        if not "lines" in commands[this_command].keys(): continue
+        if not "lines" in commands[this_command].keys():
+            command = commands[this_command]
+            if not "type" in command.keys():
+                print "ERROR in command: " + str(command)
+                continue #dunno what to do here?
+
+            if   command["type"] == 0x1: #TX_RAM
+                if first_line:
+                    output = "\n"
+                    output += label + ": ; " + hex(start_address)
+                    first_line = False
+                p1 = command["pointer"][0]
+                p2 = command["pointer"][1]
+
+                #remember to account for big endian -> little endian
+                output += "\n" + spacing + "TX_RAM $%.2x%.2x" %(p2, p1) 
+                byte_count += 3
+                had_db_last = False
+            elif command["type"] == 0x17: #TX_FAR
+                if first_line:
+                    output = "\n"
+                    output += label + ": ; " + hex(start_address)
+                    first_line = False
+                #p1 = command["pointer"][0]
+                #p2 = command["pointer"][1]
+                output += "\n" + spacing + "TX_FAR _" + label
+                byte_count += 4 #$17, bank, address word
+                had_db_last = False
+            elif command["type"] == 0x9: #TX_RAM_HEX2DEC
+                if first_line:
+                    output = "\n" + label + ": ; " + hex(start_address)
+                    first_line = False
+                #address, read_byte
+                output += "\n" + spacing + "TX_NUM $%.2x%.2x, $%.2x" % (command["address"][1], command["address"][0], command["read_byte"])
+                had_db_last = False
+                byte_count += 4
+            elif command["type"] == 0x50 and not had_text_end_byte:
+                #had_text_end_byte helps us avoid repeating $50s
+                if first_line:
+                    output = "\n" + label + ": ; " + hex(start_address)
+                    first_line = False
+                if had_db_last:
+                    output += ", $50"
+                else:
+                    output += "\n" + spacing + "db $50"
+                byte_count += 1
+                had_db_last = True
+            elif command["type"] in [0x57, 0x58] and not had_text_end_byte_57_58:
+                if first_line: #shouldn't happen, really
+                    output = "\n" + label + ": ; " + hex(start_address)
+                    first_line = False
+                if had_db_last:
+                    output += ", $%.2x" % (command["type"])
+                else:
+                    output += "\n" + spacing + "db $%.2x" % (command["type"])
+                byte_count += 1
+                had_db_last = True
+            elif command["type"] in [0x57, 0x58] and had_text_end_byte_57_58:
+                pass #this is ok
+            elif command["type"] == 0x50 and had_text_end_byte:
+                pass #this is also ok
+            else:
+                print "ERROR in command: " + hex(command["type"])
+                had_db_last = False
+
+            #everything else is for $0s, really
+            continue
         lines = commands[this_command]["lines"]
+
+        #reset this in case we have non-$0s later
+        had_db_last = False
     
         #add the ending byte to the last line- always seems $57
-        lines[len(lines.keys())-1].append(commands[1]["type"])
+        #this should already be in there, but it's not because of a bug in the text parser
+        lines[len(lines.keys())-1].append(commands[len(commands.keys())-1]["type"])
     
         if first_line:
             output  = "\n"
             output += label + ": ; " + hex(start_address) + "\n"
             first_line = False
+        else:
+            output += "\n"
 
         first = True #first byte
         for line_id in lines:
@@ -421,11 +496,17 @@ def text_pretty_printer_at(start_address, label="SomeLabel"):
             if first and needs_to_begin_with_0:
                 output += "$0, "
                 first = False
+                byte_count += 1
          
             quotes_open = False
             first_byte = True
             was_byte = False
             for byte in line:
+                if byte == 0x50:
+                    had_text_end_byte = True #don't repeat it
+                if byte in [0x58, 0x57]:
+                    had_text_end_byte_57_58 = True
+
                 if byte in txt_bytes:
                     if not quotes_open and not first_byte: #start text
                         output += ", \""
@@ -467,9 +548,10 @@ def text_pretty_printer_at(start_address, label="SomeLabel"):
                 quotes_open = False
     
             output += "\n"
-
-    #output += "\n"
-    output += "; " + hex(start_address + byte_count)
+    include_newline = "\n"
+    if output[-1] == "\n":
+        include_newline = ""
+    output += include_newline + "; " + hex(start_address) + " + " + str(byte_count) + " bytes"
     print output
     return (output, byte_count)
 
@@ -515,27 +597,87 @@ def find_undone_texts():
     for result in sorted_results:
         print str(result[1]) + " times: " + hex(result[0])
 
+def scan_rom_for_tx_fars(printer=True):
+    """find TX_FARs
+    search only addresses that are INCBINed
+    keep only TX_FARs that are valid
+    
+    returns a list of [TX_FAR target address, TX_FAR address]"""
+    rom = extract_maps.rom
+
+    analyze_incbins.load_asm()
+    analyze_incbins.isolate_incbins()
+    analyze_incbins.process_incbins()
+
+    possible_tx_fars = []
+    possible_tx_far_targets = []
+    
+    for incbin_line_number in analyze_incbins.processed_incbins.keys():
+        incbin = analyze_incbins.processed_incbins[incbin_line_number]
+        start_address = incbin["start"]
+        end_address = incbin["end"]
+        if incbin["interval"] == 0: continue #skip this one
+
+        subrom = rom[start_address:end_address]
+        for address in range(start_address, end_address):
+            current_byte = ord(rom[address])
+            if current_byte == 0x17:
+                if ord(rom[address+4]) == 0x50:
+                    byte1 = ord(rom[address+1])
+                    byte2 = ord(rom[address+2])
+                    address2 = byte1 + (byte2 << 8)
+                    if address2 > 0x3fff:
+                        address2 = extract_maps.calculate_pointer(address2, ord(rom[address+3]))
+                    #print "possible TX_FAR at " + hex(address) + " to " + hex(address2)
+
+                    possible_tx_fars.append(address)
+                    possible_tx_far_targets.append([address2, address])
+
+    if printer:
+        pre_handled = []
+        #address_bundle is [TX_FAR target address, TX_FAR address]
+        for address_bundle in possible_tx_far_targets:
+            if address_bundle[0] in [0xa82f8, 0xa8315]:
+                continue #bad
+            if address_bundle[0] in pre_handled:
+                continue #already did this
+    
+            print "-------"
+            print "TX_FAR is at: " + hex(address_bundle[1])
+            
+            #let's try printing out the TX_FAR?
+            text_pretty_printer_at(address_bundle[1], "blah")
+
+            text_pretty_printer_at(address_bundle[0], "_blah")
+            print "-------"
+            pre_handled.append(address_bundle[0])
+    return possible_tx_far_targets
+
 if __name__ == "__main__":
     extract_maps.load_rom()
     extract_maps.load_map_pointers()
     extract_maps.read_all_map_headers()
-    text_output = analyze_texts()
+    #text_output = analyze_texts()
     #print text_output
 
-    missing_08s = find_missing_08s(text_output)
+    #these aren't really "missing", just a certain type that was
+    #known to be missed on a first pass.
+    #missing_08s = find_missing_08s(text_output)
 
-    print "\n\n---- stats ----\n\n"
+    #print "\n\n---- stats ----\n\n"
     
-    popular_text_commands = sorted(totals.iteritems(), key=itemgetter(1), reverse=True)
+    #popular_text_commands = sorted(totals.iteritems(), key=itemgetter(1), reverse=True)
     #convert the first values (command byte) to hex
-    for popular_item in popular_text_commands:
-        print hex(popular_item[0]) + " was used " + str(popular_item[1]) + " times."
+    #for popular_item in popular_text_commands:
+    #    print hex(popular_item[0]) + " was used " + str(popular_item[1]) + " times."
     #print "popular text commands: " + str(popular_text_commands)
     
-    print "total text commands: " + str(total_text_commands)
-    print "total text scripts: " + str(should_be_total)
-    print "missing 08s: " + str(missing_08s)
-    print "\n\n"
+    #print "total text commands: " + str(total_text_commands)
+    #print "total text scripts: " + str(should_be_total)
+    #print "missing 08s: " + str(missing_08s)
+    #print "\n\n"
 
     #text_pretty_printer_at(0x800b1)
-    find_undone_texts()
+    #find_undone_texts()
+
+    scan_rom_for_tx_fars()
