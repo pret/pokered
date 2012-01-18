@@ -52973,7 +52973,40 @@ _UnnamedText_51910: ; 0x8d23c
     db "here.", $57
 ; 0x8d23c + 43 bytes
 
-INCBIN "baserom.gbc",$8d267,$8d3f5 - $8d267
+UnknownText_8d267: ; 0x8d267
+    db $0, "Hiya! I'm a", $4f
+    db "#MON...", $55
+    db "...No I'm not!", $51
+    db "Call me BILL!", $4f
+    db "I'm a true blue", $55
+    db "#MANIAC! Hey!", $55
+    db "What's with that", $55
+    db "skeptical look?", $51
+    db "I'm not joshing", $4f
+    db "you, I screwed up", $55
+    db "an experiment and", $55
+    db "got combined with", $55
+    db "a #MON!", $51
+    db "So, how about it?", $4f
+    db "Help me out here!", $57
+; 0x8d267 + 222 bytes
+
+UnknownText_8d345: ; 0x8d345
+    db $0, "When I'm in the", $4f
+    db "TELEPORTER, go to", $55
+    db "my PC and run the", $55
+    db "Cell Separation", $55
+    db "System!", $57
+; 0x8d345 + 76 bytes
+
+UnknownText_8d391: ; 0x8d391
+    db $0, "No!? Come on, you", $4f
+    db "gotta help a guy", $55
+    db "in deep trouble!", $51
+    db "What do you say,", $4f
+    db "chief? Please?", $55
+    db "OK? All right!", $58
+; 0x8d391 + 100 bytes
 
 _UnnamedText_1e8ba: ; 0x8d3f5
     db $0, "BILL: Yeehah!", $4f
@@ -52989,7 +53022,15 @@ _UnnamedText_1e8ba: ; 0x8d3f5
     db "maybe this'll do.", $58
 ; 0x8d3f5 + 164 bytes
 
-INCBIN "baserom.gbc",$8d499,$8d4b0 - $8d499
+UnknownText_8d499: ; 0x8d499
+    db $0, $52, " received", $4f
+    db "an @"
+; 0x8d499 + 16 bytes
+
+UnknownText_8d4a9: ; 0x8d4a9
+    TX_RAM $cf4b
+    db $0, "!@@"
+; 0x8d4a9 + 7 bytes
 
 _UnnamedText_1e8c6: ; 0x8d4b0
     db $0, "You've got too", $4f
@@ -53029,7 +53070,15 @@ _UnnamedText_1cae3: ; 0x8d5bf
     db "Here you go!", $58
 ; 0x8d5bf + 132 bytes
 
-INCBIN "baserom.gbc",$8d643,15
+UnknownText_8d643: ; 0x8d643
+    db $0, $52, " got", $4f
+    db "@"
+; 0x8d643 + 8 bytes
+
+UnknownText_8d64b: ; 0x8d64b
+    TX_RAM $cf4b
+    db $0, "!@@"
+; 0x8d64b + 7 bytes
 
 _UnnamedText_1caee: ; 0x8d652
     db $0, "We also carry", $4f
