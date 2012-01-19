@@ -12044,8 +12044,8 @@ OaksLabScript: ; 0x1cb0e
 	ld [$cf0c], a
 	xor a
 	ld [$cc3c], a
-	ld hl, $4b28
-	ld a, [$d5f0]
+	ld hl, OaksLabScripts
+	ld a, [W_OAKSLABCURSCRIPT]
 	jp $3d97
 ; 0x1cb28
 
@@ -12065,22 +12065,25 @@ OaksLabScript0: ; 0x1cb4e
 	call Predef
 	ld hl, $d72e
 	res 4, [hl]
+
 	ld a, $1
-	ld [$d5f0], a
+	ld [W_OAKSLABCURSCRIPT], a
 	ret
 ; 0x1cb6e
 
 OaksLabScript1: ; 0x1cb6e
 	ld a, $8
 	ld [$ff00+$8c], a
-	ld de, $4b7e
-	call $363a
+	ld de, OakEntryMovement
+	call MoveSprite
+
 	ld a, $2
-	ld [$d5f0], a
+	ld [W_OAKSLABCURSCRIPT], a
 	ret
 ; 0x1cb7e
 
-db $40, $40, $40, $ff
+OakEntryMovement:
+	db $40, $40, $40, $ff
 
 OaksLabScript2: ; 0x1cb82
 	ld a, [$d730]
@@ -12094,15 +12097,16 @@ OaksLabScript2: ; 0x1cb82
 	ld [$cc4d], a
 	ld a, $15
 	call Predef
+
 	ld a, $3
-	ld [$d5f0], a
+	ld [W_OAKSLABCURSCRIPT], a
 	ret
 ; 0x1cba2
 
 OaksLabScript3: ; 0x1cba2
 	call Delay3
 	ld hl, $ccd3
-	ld de, $4bcf
+	ld de, PlayerEntryMovementRLE
 	call $350c
 	dec a
 	ld [$cd38], a
@@ -12111,18 +12115,20 @@ OaksLabScript3: ; 0x1cba2
 	ld [$ff00+$8c], a
 	xor a
 	ld [$ff00+$8d], a
-	call $34a6
+	call $34a6 ; face object
 	ld a, $5
 	ld [$ff00+$8c], a
 	xor a
 	ld [$ff00+$8d], a
-	call $34a6
+	call $34a6 ; face object
+
 	ld a, $4
-	ld [$d5f0], a
+	ld [W_OAKSLABCURSCRIPT], a
 	ret
 ; 0x1cbcf
 
-db $40, $8, $ff
+PlayerEntryMovementRLE:
+	db $40, $8, $ff
 
 OaksLabScript4: ; 0x1cbd2
 	ld a, [$cd38]
@@ -12136,13 +12142,14 @@ OaksLabScript4: ; 0x1cbd2
 	ld [$ff00+$8c], a
 	ld a, $4
 	ld [$ff00+$8d], a
-	call $34a6
+	call $34a6 ; face object
 	call $2429
 	ld hl, $d733
 	res 1, [hl]
 	call $2307
+
 	ld a, $5
-	ld [$d5f0], a
+	ld [W_OAKSLABCURSCRIPT], a
 	ret
 ; 0x1cbfd
 
@@ -12168,25 +12175,26 @@ OaksLabScript5: ; 0x1cbfd
 	set 1, [hl]
 	xor a
 	ld [$cd6b], a
+
 	ld a, $6
-	ld [$d5f0], a
+	ld [W_OAKSLABCURSCRIPT], a
 	ret
 ; 0x1cc36
 
 OaksLabScript6: ; 0x1cc36
-	ld a, [$d361]
+	ld a, [W_YCOORD]
 	cp $6
 	ret nz
 	ld a, $5
 	ld [$ff00+$8c], a
 	xor a
 	ld [$ff00+$8d], a
-	call $34a6
+	call $34a6 ; face object
 	ld a, $1
 	ld [$ff00+$8c], a
 	xor a
 	ld [$ff00+$8d], a
-	call $34a6
+	call $34a6 ; face object
 	call $2429
 	ld a, $c
 	ld [$ff00+$8c], a
@@ -12198,8 +12206,9 @@ OaksLabScript6: ; 0x1cc36
 	call $3486
 	ld a, $8
 	ld [$d528], a
+
 	ld a, $7
-	ld [$d5f0], a
+	ld [W_OAKSLABCURSCRIPT], a
 	ret
 ; 0x1cc72
 
@@ -12208,62 +12217,49 @@ OaksLabScript7: ; 0x1cc72
 	and a
 	ret nz
 	call Delay3
+
 	ld a, $6
-	ld [$d5f0], a
+	ld [W_OAKSLABCURSCRIPT], a
 	ret
 ; 0x1cc80
 
 OaksLabScript8: ; 0x1cc80
-	ld a, [$d717]
-	cp $b0
-	jr z, .asm_1cc8d ; 0x1cc85 $6
-	cp $b1
-	jr z, .asm_1cca8 ; 0x1cc89 $1d
-	jr .asm_1ccc5 ; 0x1cc8b $38
-.asm_1cc8d
-	ld de, $4c9c
-	ld a, [$d361]
-	cp $4
+	ld a, [W_PLAYERSTARTER]
+	cp CHARMANDER
+	jr z, .Charmander\@ ; 0x1cc85 $6
+	cp SQUIRTLE
+	jr z, .Squirtle\@ ; 0x1cc89 $1d
+	jr .Bulbasaur\@ ; 0x1cc8b $38
+.Charmander\@
+	ld de, .MiddleBallMovement1
+	ld a, [W_YCOORD]
+	cp $4 ; is the player standing below the table?
 	jr z, .asm_1ccf3 ; 0x1cc95 $5c
-	ld de, $4ca3
+	ld de, .MiddleBallMovement2
 	jr .asm_1ccf3 ; 0x1cc9a $57
-	nop
-	nop
-	ret nz
-	ret nz
-	ret nz
-	ld b, b
-	rst $38
-	nop
-	ret nz
-	ret nz
-	ret nz
-	rst $38
-.asm_1cca8
-	ld de, $4cb7
-	ld a, [$d361]
-	cp $4
+
+.MiddleBallMovement1
+	db 0,0,$C0,$C0,$C0,$40,$FF
+.MiddleBallMovement2
+	db 0,$C0,$C0,$C0,$FF
+
+.Squirtle\@
+	ld de, .RightBallMovement1
+	ld a, [W_YCOORD]
+	cp $4 ; is the player standing below the table?
 	jr z, .asm_1ccf3 ; 0x1ccb0 $41
-	ld de, $4cbf
+	ld de, .RightBallMovement2
 	jr .asm_1ccf3 ; 0x1ccb5 $3c
-	nop
-	nop
-	ret nz
-	ret nz
-	ret nz
-	ret nz
-	ld b, b
-	rst $38
-	nop
-	ret nz
-	ret nz
-	ret nz
-	ret nz
-	rst $38
-.asm_1ccc5
-	ld de, $4cef
-	ld a, [$d362]
-	cp $9
+
+.RightBallMovement1
+	db 0,0,$C0,$C0,$C0,$C0,$40,$FF
+.RightBallMovement2
+	db 0,$C0,$C0,$C0,$C0,$FF
+
+.Bulbasaur\@
+	ld de, .LeftBallMovement1
+	ld a, [W_XCOORD]
+	cp $9 ; is the player standing to the right of the table?
 	jr nz, .asm_1ccf3 ; 0x1cccd $24
 	push hl
 	ld a, $1
@@ -12281,19 +12277,22 @@ OaksLabScript8: ; 0x1cc80
 	ld [hl], $8
 	inc hl
 	ld [hl], $9
-	ld de, $4cf1
+	ld de, .LeftBallMovement2 ; the rival is not currently onscreen, so account for that
 	pop hl
 	jr .asm_1ccf3 ; 0x1cced $4
-	nop
-	ret nz
-	ret nz
-	rst $38
+
+.LeftBallMovement1
+	db 0,$C0 ; not yet terminated!
+.LeftBallMovement2
+	db $C0,$FF
+
 .asm_1ccf3
 	ld a, $1
 	ld [$ff00+$8c], a
-	call $363a
+	call MoveSprite
+
 	ld a, $9
-	ld [$d5f0], a
+	ld [W_OAKSLABCURSCRIPT], a
 	ret
 ; 0x1cd00
 
@@ -12307,7 +12306,7 @@ OaksLabScript9: ; 0x1cd00
 	ld [$ff00+$8c], a
 	ld a, $4
 	ld [$ff00+$8d], a
-	call $34a6
+	call $34a6 ; face object
 	ld a, $d
 	ld [$ff00+$8c], a
 	call $2920
@@ -12329,7 +12328,7 @@ OaksLabScript9: ; 0x1cd00
 	call Predef
 	call Delay3
 	ld a, [$cd3d]
-	ld [$d715], a
+	ld [W_RIVALSTARTER], a
 	ld [$cf91], a
 	ld [$d11e], a
 	call GetMonName
@@ -12337,7 +12336,7 @@ OaksLabScript9: ; 0x1cd00
 	ld [$ff00+$8c], a
 	ld a, $4
 	ld [$ff00+$8d], a
-	call $34a6
+	call $34a6 ; face object
 	ld a, $e
 	ld [$ff00+$8c], a
 	call $2920
@@ -12345,25 +12344,26 @@ OaksLabScript9: ; 0x1cd00
 	set 2, [hl]
 	xor a
 	ld [$cd6b], a
+
 	ld a, $a
-	ld [$d5f0], a
+	ld [W_OAKSLABCURSCRIPT], a
 	ret
 ; 0x1cd6d
 
 OaksLabScript10: ; 0x1cd6d
-	ld a, [$d361]
+	ld a, [W_YCOORD]
 	cp $6
 	ret nz
 	ld a, $1
 	ld [$ff00+$8c], a
 	xor a
 	ld [$ff00+$8d], a
-	call $34a6
+	call $34a6 ; face object
 	ld a, $8
 	ld [$d528], a
 	ld c, $2
 	ld a, $de
-	call $23a1
+	call $23a1 ; play music
 	ld a, $f
 	ld [$ff00+$8c], a
 	call $2920
@@ -12382,9 +12382,10 @@ OaksLabScript10: ; 0x1cd6d
 	ld de, $cc97
 	ld a, $1
 	ld [$ff00+$8c], a
-	call $363a
+	call MoveSprite
+
 	ld a, $b
-	ld [$d5f0], a
+	ld [W_OAKSLABCURSCRIPT], a
 	ret
 ; 0x1cdb9
 
@@ -12392,22 +12393,24 @@ OaksLabScript11: ; 0x1cdb9
 	ld a, [$d730]
 	bit 0, a
 	ret nz
-	ld a, $e1
-	ld [$d059], a
-	ld a, [$d715]
-	cp $b1
-	jr nz, .asm_1cdcf ; 0x1cdc9 $4
+
+	; define which team rival uses, and fight it
+	ld a, SONY1 + 200
+	ld [W_CUROPPONENT], a
+	ld a, [W_RIVALSTARTER]
+	cp SQUIRTLE
+	jr nz, .NotSquirtle\@ ; 0x1cdc9 $4
 	ld a, $1
-	jr .asm_1cdd9 ; 0x1cdcd $a
-.asm_1cdcf
-	cp $99
-	jr nz, .asm_1cdd7 ; 0x1cdd1 $4
+	jr .done\@ ; 0x1cdcd $a
+.NotSquirtle\@
+	cp BULBASAUR
+	jr nz, .Charmander\@ ; 0x1cdd1 $4
 	ld a, $2
-	jr .asm_1cdd9 ; 0x1cdd5 $2
-.asm_1cdd7
+	jr .done\@ ; 0x1cdd5 $2
+.Charmander\@
 	ld a, $3
-.asm_1cdd9
-	ld [$d05d], a
+.done\@
+	ld [W_TRAINERNO], a
 	ld a, $1
 	ld [$cf13], a
 	call $32ef
@@ -12421,8 +12424,9 @@ OaksLabScript11: ; 0x1cdb9
 	ld [$cd6b], a
 	ld a, $8
 	ld [$d528], a
+
 	ld a, $c
-	ld [$d5f0], a
+	ld [W_OAKSLABCURSCRIPT], a
 	ret
 ; 0x1ce03
 
@@ -12439,13 +12443,14 @@ OaksLabScript12: ; 0x1ce03
 	ld [$ff00+$8c], a
 	xor a
 	ld [$ff00+$8d], a
-	call $34a6
+	call $34a6 ; face object
 	ld a, $7
 	call Predef
 	ld hl, $d74b
 	set 3, [hl]
+
 	ld a, $d
-	ld [$d5f0], a
+	ld [W_OAKSLABCURSCRIPT], a
 	ret
 ; 0x1ce32
 
@@ -12460,10 +12465,11 @@ OaksLabScript13: ; 0x1ce32
 	call Bankswitch
 	ld a, $1
 	ld [$ff00+$8c], a
-	ld de, $4e66
-	call $363a
-	ld a, [$d362]
+	ld de, .RivalExitMovement
+	call MoveSprite
+	ld a, [W_XCOORD]
 	cp $4
+	; move left or right depending on where the player is standing
 	jr nz, .asm_1ce5b ; 0x1ce55 $4
 	ld a, $c0
 	jr .asm_1ce5d ; 0x1ce59 $2
@@ -12471,12 +12477,13 @@ OaksLabScript13: ; 0x1ce32
 	ld a, $80
 .asm_1ce5d
 	ld [$cc5b], a
+
 	ld a, $e
-	ld [$d5f0], a
+	ld [W_OAKSLABCURSCRIPT], a
 	ret
 ; 0x1ce66
 
-	; 0x1ce66
+.RivalExitMovement
 	db $E0,0,0,0,0,0,$FF
 
 OaksLabScript14: ; 0x1ce6d
@@ -12489,10 +12496,10 @@ OaksLabScript14: ; 0x1ce6d
 	call Predef
 	xor a
 	ld [$cd6b], a
-	call $2307
+	call $2307 ; reset to map music
 	ld a, $12
-	ld [$d5f0], a
-	jr .asm_1ceaf ; 0x1ce8a $23
+	ld [W_OAKSLABCURSCRIPT], a
+	jr .done\@ ; 0x1ce8a $23
 .asm_1ce8c
 	ld a, [$cf0f]
 	cp $5
@@ -12502,17 +12509,17 @@ OaksLabScript14: ; 0x1ce6d
 	jr nz, .asm_1cea1 ; 0x1ce98 $7
 	ld a, $c
 	ld [$c109], a
-	jr .asm_1ceaf ; 0x1ce9f $e
+	jr .done\@ ; 0x1ce9f $e
 .asm_1cea1
 	ld a, $8
 	ld [$c109], a
-	jr .asm_1ceaf ; 0x1cea6 $7
+	jr .done\@ ; 0x1cea6 $7
 .asm_1cea8
 	cp $4
 	ret nz
 	xor a
 	ld [$c109], a
-.asm_1ceaf
+.done\@
 	ret
 ; 0x1ceb0
 
@@ -12545,9 +12552,10 @@ OaksLabScript15: ; 0x1ceb0
 	ld a, $1
 	ld [$ff00+$8c], a
 	ld de, $cc97
-	call $363a
+	call MoveSprite
+
 	ld a, $10
-	ld [$d5f0], a
+	ld [W_OAKSLABCURSCRIPT], a
 	ret
 ; 0x1cefd
 
@@ -12556,12 +12564,12 @@ Function1CEFD ; 0x1cefd
 	ld [$ff00+$8c], a
 	ld a, $4
 	ld [$ff00+$8d], a
-	call $34a6
+	call $34a6 ; face object
 	ld a, $8
 	ld [$ff00+$8c], a
 	xor a
 	ld [$ff00+$8d], a
-	jp $34a6
+	jp $34a6 ; face object
 ; 0x1cf12
 
 OaksLabScript16: ; 0x1cf12
@@ -12572,21 +12580,21 @@ OaksLabScript16: ; 0x1cf12
 	call $2307
 	ld a, $fc
 	ld [$cd6b], a
-	call $4efd
+	call Function1CEFD
 	ld a, $16
 	ld [$ff00+$8c], a
 	call $2920
-	call $20af
-	call $4efd
+	call DelayFrame
+	call Function1CEFD
 	ld a, $17
 	ld [$ff00+$8c], a
 	call $2920
-	call $20af
-	call $4efd
+	call DelayFrame
+	call Function1CEFD
 	ld a, $18
 	ld [$ff00+$8c], a
 	call $2920
-	call $20af
+	call DelayFrame
 	ld a, $19
 	ld [$ff00+$8c], a
 	call $2920
@@ -12599,7 +12607,7 @@ OaksLabScript16: ; 0x1cf12
 	ld [$cc4d], a
 	ld a, $11
 	call Predef
-	call $4efd
+	call Function1CEFD
 	ld a, $1a
 	ld [$ff00+$8c], a
 	call $2920
@@ -12607,7 +12615,7 @@ OaksLabScript16: ; 0x1cf12
 	ld [$ff00+$8c], a
 	ld a, $c
 	ld [$ff00+$8d], a
-	call $34a6
+	call $34a6 ; face object
 	call Delay3
 	ld a, $1b
 	ld [$ff00+$8c], a
@@ -12640,9 +12648,10 @@ OaksLabScript16: ; 0x1cf12
 	ld a, $1
 	ld [$ff00+$8c], a
 	ld de, $cc97
-	call $363a
+	call MoveSprite
+
 	ld a, $11
-	ld [$d5f0], a
+	ld [W_OAKSLABCURSCRIPT], a
 	ret
 ; 0x1cfd4
 
@@ -12667,8 +12676,9 @@ OaksLabScript17: ; 0x1cfd4
 	ld [$d5f1], a
 	xor a
 	ld [$cd6b], a
+
 	ld a, $12
-	ld [$d5f0], a
+	ld [W_OAKSLABCURSCRIPT], a
 	ret
 ; 0x1d009
 
@@ -12677,18 +12687,18 @@ OaksLabScript18: ; 0x1d009
 ; 0x1d00a
 
 Function1D00A: ; 0x1d00a
-	ld hl, $d31e
+	ld hl, W_BAGITEM01
 	ld bc, $0000
 .asm_1d010
 	ld a, [hli]
 	cp $ff
 	ret z
-	cp $46
-	jr z, .asm_1d01c ; 0x1d016 $4
+	cp OAKS_PARCEL
+	jr z, .GotParcel ; 0x1d016 $4
 	inc hl
 	inc c
 	jr .asm_1d010 ; 0x1d01a $f4
-.asm_1d01c
+.GotParcel
 	ld hl, $d31d
 	ld a, c
 	ld [$cf92], a
@@ -12887,7 +12897,7 @@ asm_03e85: ; 0x1d1e5
 	ld a, $fc
 	ld [$cd6b], a
 	ld a, $8
-	ld [$d5f0], a
+	ld [W_OAKSLABCURSCRIPT], a
 asm_6ccd7: ; 0x1d21f
 	jp $24d7
 ; 0x1d222
@@ -12961,7 +12971,7 @@ OaksLabText5: ; 0x1d248
 	call PrintText
 	call $500a
 	ld a, $f
-	ld [$d5f0], a
+	ld [W_OAKSLABCURSCRIPT], a
 	jr .asm_0f042 ; 0x1d2c6
 .asm_333a2 ; 0x1d2c8
 	ld hl, $5309
