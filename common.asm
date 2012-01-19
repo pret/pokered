@@ -45961,9 +45961,7 @@ SafariZoneEntranceScript: ; 0x751cd
 ; 0x751d9
 
 SafariZoneEntranceScripts: ; 0x751d9
-	dw SafariZoneEntranceScript0, SafariZoneEntranceScript1
-
-INCBIN "baserom.gbc",$751dd,$a
+	dw SafariZoneEntranceScript0, SafariZoneEntranceScript1, SafariZoneEntranceScript2, SafariZoneEntranceScript3, SafariZoneEntranceScript4, SafariZoneEntranceScript5, SafariZoneEntranceScript6
 
 SafariZoneEntranceScript0: ; 0x751e7
 	ld hl, $5221
@@ -46000,6 +45998,7 @@ INCBIN "baserom.gbc",$75221,$75226 - $75221
 SafariZoneEntranceScript1: ; 0x75226
 	call $52b4
 	ret nz
+SafariZoneEntranceScript2: ; 0x7522a
 	xor a
 	ld [$ff00+$b4], a
 	ld [$cd6b], a
@@ -46012,7 +46011,66 @@ SafariZoneEntranceScript1: ; 0x75226
 	ret
 ; 0x75240
 
-INCBIN "baserom.gbc",$75240,$79
+SafariZoneEntranceScript3: ; 0x75240
+	call $52b4
+	ret nz
+	xor a
+	ld [$cd6b], a
+	ld a, $5
+	ld [$d61f], a
+	ret
+; 0x7524e
+
+SafariZoneEntranceScript5: ; 0x7524e
+	ld a, $4
+	ld [$d528], a
+	ld hl, $d790
+	bit 6, [hl]
+	res 6, [hl]
+	jr z, .asm_7527f ; 0x7525a $23
+	res 7, [hl]
+	call $2429
+	ld a, $f0
+	ld [$cd6b], a
+	ld a, $6
+	ld [$ff00+$8c], a
+	call $2920
+	xor a
+	ld [$da47], a
+	ld a, $80
+	ld c, $3
+	call $52a3
+	ld a, $4
+	ld [$d61f], a
+	jr .asm_75286 ; 0x7527d $7
+.asm_7527f
+	ld a, $5
+	ld [$ff00+$8c], a
+	call $2920
+.asm_75286
+	ret
+; 0x75287
+
+SafariZoneEntranceScript4: ; 0x75287
+	call $52b4
+	ret nz
+	xor a
+	ld [$cd6b], a
+	ld a, $0
+	ld [$d61f], a
+	ret
+; 0x75295
+
+SafariZoneEntranceScript6: ; 0x75295
+	call $52b4
+	ret nz
+	call Delay3
+	ld a, [$cf0d]
+	ld [$d61f], a
+	ret
+; 0x752a3
+
+INCBIN "baserom.gbc",$752a3,$752b9 - $752a3
 
 SafariZoneEntranceTexts: ; 0x752b9
 	dw SafariZoneEntranceText1, SafariZoneEntranceText2, SafariZoneEntranceText3, SafariZoneEntranceText4, SafariZoneEntranceText5, SafariZoneEntranceText6
