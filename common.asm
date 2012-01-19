@@ -2967,11 +2967,11 @@ INCBIN "baserom.gbc",$8000,$822E - $8000
 PalletTown_mh: ;0x822E - 0x8236
 
 db $80
-    dw PalletTown_md_1 ;dw $67C5 ;Channel 1 ($A7C5)
+    dw PalletTown_md_1 ;Channel 1 ($A7C5)
 db $01
-	dw $685F ;Channel 2 ($A85f)
+	dw PalletTown_md_2 ;Channel 2 ($A85f)
 db $02
-	dw $68DE ;Channel 3 ($A8DE)
+	dw PalletTown_md_3 ;Channel 3 ($A8DE)
 
 ;Pokemon Center
 Pokecenter_mh: ;0x8237 - 0x823F
@@ -3164,10 +3164,19 @@ db $03
 
 INCBIN "baserom.gbc",$82FD,$A7C5 - $82FD
 
+; Music Data
+; The start and stop of these byte ranges were based off the theory they're lined
+; consecutively (Right up against each other).
 PalletTown_md_1:
-INCBIN "music/PalletTownCh1.md" ;0xA7C5-0xA85F (154 bytes)
+INCBIN "music/PalletTownCh1.md" ;0xA7C5-0xA85E (153 bytes)
 
-INCBIN "baserom.gbc",$A85F,$C000 - $A85F
+PalletTown_md_2:
+INCBIN "music/PalletTownCh2.md" ;0xA85F-0xA8DD (126 bytes)
+
+PalletTown_md_3:
+INCBIN "music/PalletTownCh3.md" ;0xA8DE-0xAA75 (407 bytes) ;Suspiciously Big
+
+INCBIN "baserom.gbc",$AA76,$C000 - $AA76
 
 SECTION "bank3",DATA,BANK[$3]
 
