@@ -29814,7 +29814,7 @@ PredefPointers: ; 7E79
 	dbw $1C,$4F60
 	dbw $09,$7D6B
 	dbw $05,$7C47; 4C player exclamation
-	dbw $01,$5AAF
+	dbw $01,$5AAF; return immediately
 	dbw $01,$64EB
 	dbw $0D,$7CA1
 	dbw $1C,$780F
