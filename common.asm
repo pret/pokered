@@ -433,11 +433,11 @@ Tset08_Coll:
 Tset09_Coll:
 	INCBIN "gfx/tilesets/09.tilecoll"
 Tset0D_Coll:
-	INCBIN "gfx/tilesets/0D.tilecoll"
+	INCBIN "gfx/tilesets/0d.tilecoll"
 Tset0E_Coll:
-	INCBIN "gfx/tilesets/0E.tilecoll"
+	INCBIN "gfx/tilesets/0e.tilecoll"
 Tset0F_Coll:
-	INCBIN "gfx/tilesets/0F.tilecoll"
+	INCBIN "gfx/tilesets/0f.tilecoll"
 Tset10_Coll:
 	INCBIN "gfx/tilesets/10.tilecoll"
 Tset11_Coll:
@@ -2965,13 +2965,14 @@ INCBIN "baserom.gbc",$8000,$822E - $8000
 
 ;Pallet Town
 PalletTown_mh: ;0x822E - 0x8236
+
 db $80
-	dw $67C5 ;Channel 1
+    dw PalletTown_md_1 ;dw $67C5 ;Channel 1 ($A7C5)
 db $01
-	dw $685F ;Channel 2
+	dw $685F ;Channel 2 ($A85f)
 db $02
-	dw $68DE ;Channel 3
-	
+	dw $68DE ;Channel 3 ($A8DE)
+
 ;Pokemon Center
 Pokecenter_mh: ;0x8237 - 0x823F
 db $80
@@ -2990,7 +2991,7 @@ db $01
 db $02
 	dw $7DFA ;Channel 3
 
-;Viridian City, Pewter City, Saffron City	
+;Viridian City, Pewter City, Saffron City
 Cities1_mh: ;0x8249 - 0x8254
 db $C0
 	dw $6A76 ;Channel 1
@@ -3000,7 +3001,7 @@ db $02
 	dw $6C32 ;Channel 3
 db $03
 	dw $6CEF ;Channel 4
-	
+
 ;Cerulean City, Fuchsia City
 Cities2_mh: ;0x8255 - 0x825D
 db $80
@@ -3009,7 +3010,7 @@ db $01
 	dw $7569 ;Channel 2
 db $02
 	dw $7640 ;Channel 3
-	
+
 ;Celedon City
 Celedon_mh: ;0x825E - 0x8266
 db $80
@@ -3018,7 +3019,7 @@ db $01
 	dw $773A ;Channel 2
 db $02
 	dw $77B5 ;Channel 3
-	
+
 ;Cinnabar Island
 Cinnabar_mh: ;0x8267-0x826F
 db $80
@@ -3027,7 +3028,7 @@ db $01
 	dw $78D4 ;Channel 2
 db $02
 	dw $793D ;Channel 3
-	
+
 ;Vermillion City
 Vermillion_mh: ;0x8270 - 0x827B
 db $C0
@@ -3038,7 +3039,7 @@ db $02
 	dw $7AA6 ;Channel 3
 db $03
 	dw $7B0D ;Channel 4
-	
+
 ;Lavender Town
 Lavender_mh: ;0x827C - 0x8287
 db $C0
@@ -3049,7 +3050,7 @@ db $02
 	dw $7BAE ;Channel 3
 db $03
 	dw $7C21 ;Channel 4
-	
+
 ;SS Anne
 SSAnne_mh: ;0x8288 - 0x8290
 db $80
@@ -3058,7 +3059,7 @@ db $01
 	dw $7419 ;Channel 2
 db $02
 	dw $74CB ;Channel 3
-	
+
 ;Meet Prof. Oak
 MeetProfOak_mh: ;0x8291 - 0x8299
 db $80
@@ -3067,7 +3068,7 @@ db $01
 	dw $6FA9 ;Channel 2
 db $02
 	dw $703D ;Channel 3
-	
+
 ;Meet Rival
 MeetRival_mh: ;0x829A - 0x82A2
 db $80
@@ -3076,7 +3077,7 @@ db $01
 	dw $71BB ;Channel 2
 db $02
 	dw $7233 ;Channel 3
-	
+
 ;Guy walks you to museum
 MuseumGuy_mh: ;0x82A3 - 0x82AE
 db $C0
@@ -3087,7 +3088,7 @@ db $02
 	dw $6E6E ;Channel 3
 db $03
 	dw $6ED1 ;Channel 4
-	
+
 ;Safari Zone
 SafariZone_mh: ;0x82AF - 0x82B7
 db $80
@@ -3096,7 +3097,7 @@ db $01
 	dw $7C6A ;Channel 2
 db $02
 	dw $7C94 ;Channel 3
-	
+
 ;Pokemon Get Healed
 PkmnHealed_mh: ;0x82B8 - 0x82C0
 db $80
@@ -3105,7 +3106,7 @@ db $01
 	dw $5BC4 ;Channel 2
 db $02
 	dw $5BD2 ;Channel 3
-	
+
 ;Routes 1 and 2
 Routes1_mh: ;0x82C1 - 0x82CC
 db $C0
@@ -3116,7 +3117,7 @@ db $02
 	dw $5CD8 ;Channel 3
 db $03
 	dw $5D24 ;Channel 4
-	
+
 ;Routes 24 and 25
 Routes2_mh: ;0x82CD - 0x82D8
 db $C0
@@ -3127,7 +3128,7 @@ db $02
 	dw $5E9B ;Channel 3
 db $03
 	dw $5F08 ;Channel 4
-	
+
 ;Routes 3, 4, 5, 6, 7, 8, 9, 10, 16, 17, 18, 19, 20, 21, 22
 Routes3_mh: ;0x82D9 - 0x82E4
 db $C0
@@ -3138,7 +3139,7 @@ db $02
 	dw $607F ;Channel 3
 db $03
 	dw $6131 ;Channel 4
-	
+
 ;Routes 11, 12, 13, 14, 15
 Routes4_mh: ;0x82E5 - 0x82F0
 db $C0
@@ -3149,7 +3150,7 @@ db $02
 	dw $63C4 ;Channel 3
 db $03
 	dw $649D ;Channel 4
-	
+
 ;Indigo Plateau
 IndigoPlateau_mh: ;0x82F1 - 0x82FC
 db $C0
@@ -3161,7 +3162,12 @@ db $02
 db $03
 	dw $670F ;Channel 4
 
-INCBIN "baserom.gbc",$82FD,$C000 - $82FD
+INCBIN "baserom.gbc",$82FD,$A7C5 - $82FD
+
+PalletTown_md_1:
+INCBIN "music/PalletTownCh1.md" ;0xA7C5-0xA85F (154 bytes)
+
+INCBIN "baserom.gbc",$A85F,$C000 - $A85F
 
 SECTION "bank3",DATA,BANK[$3]
 
