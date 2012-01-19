@@ -488,6 +488,16 @@ def text_pretty_printer_at(start_address, label="SomeLabel"):
                     output += "\n" + spacing + "db $11"
                 byte_count += 1
                 had_db_last = True
+            elif command["type"] == 0x6: #wait for keypress
+                if first_line:
+                    output = "\n" + label + ": ; " + hex(start_address)
+                    first_line = False
+                if had_db_last:
+                    output += ", $6"
+                else:
+                    output += "\n" + spacing + "db $6"
+                byte_count += 1
+                had_db_last = True
             else:
                 print "ERROR in command: " + hex(command["type"])
                 had_db_last = False

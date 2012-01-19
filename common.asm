@@ -14914,10 +14914,12 @@ Route8GateText3:
 Route7GateText3:
 Route6GateText3:
 Route5GateText3: ; 0x1dfec
-
-INCBIN "baserom.gbc",$1dfec,$5
-
-INCBIN "baserom.gbc",$1dff1,$1dff6 - $1dff1
+UnnamedText_1dfec: ; 0x1dfec
+	TX_FAR _UnnamedText_8aaa9 ; 0x8aaa9
+	db $11
+	TX_FAR _UnnamedText_1dff1 ; 0x8aaef
+	db $50
+; 0x1dff6
 
 UnnamedText_1dff6: ; 0x1dff6
 	TX_FAR _UnnamedText_1dff6
@@ -33169,14 +33171,21 @@ DayCareMBlocks: ; 16 0x5522f 522F
 FuchsiaHouse3Blocks: ; 16
 	INCBIN "maps/fuchsiahouse3.blk"
 
-INCBIN "baserom.gbc",$5524f,$554e3 - $5524f
+INCBIN "baserom.gbc",$5524f,$554d8 - $5524f
+
+UnnamedText_554d8: ; 0x554d8
+	TX_FAR _UnnamedText_554d8 ; 0x89bee
+	db $50
+; 0x554dd
+
+INCBIN "baserom.gbc",$554dd,$554e3 - $554dd
 
 Route2Script: ; 0x554e3
 	jp $3c3c
 ; 0x554e6
 
 Route2Texts:
-dw Route2Text1, Route2Text2, Route2Text3, Route2Text4
+	dw Route2Text1, Route2Text2, Route2Text3, Route2Text4
 
 Route2Text3: ; 0x554ee
 	TX_FAR _Route2Text3
@@ -38734,12 +38743,15 @@ PewterGymText4: ; 0x5c4a8
 ; 0x5c4a8 + 5 bytes
 
 PewterGymText5: ; 0x5c4ad
-INCBIN "baserom.gbc",$5c4ad,6
+INCBIN "baserom.gbc",$5c4ad,5
 
-INCBIN "baserom.gbc",$5c4b3,$5c4b7 - $5c4b3
+UnnamedText_5c4b2:
+	TX_FAR _UnnamedText_5c4b2
+	db $50
 
 PewterGymText6: ; 0x5c4b7
-INCBIN "baserom.gbc",$5c4b7,5
+	TX_FAR _UnnamedText_5c4b7
+	db $50
 
 INCBIN "baserom.gbc",$5c4bc,$5c4c1 - $5c4bc
 
@@ -40087,7 +40099,12 @@ UnnamedText_5d162: ; 0x5d162
 	db $50
 ; 0x5d162 + 5 bytes
 
-INCBIN "baserom.gbc",$5d167,$5d16e - $5d167
+UnnamedText_5d167: ; 0x5d167
+	TX_FAR _UnnamedText_5d167 ; 0xa1c73
+	db $11 ; play same sound as red giving oak parcel
+	db $6 ; wait for keypress
+	db $50
+; 0x5d16e
 
 UnnamedText_5d16e: ; 0x5d16e
 	TX_FAR _UnnamedText_5d16e
@@ -40100,13 +40117,13 @@ SaffronGymText10: ; 0x5d173
 ; 0x5d173 + 5 bytes
 
 SaffronGymText11: ; 0x5d178
-
-INCBIN "baserom.gbc",$5d178,5
-
-INCBIN "baserom.gbc",$5d17d,$5d182 - $5d17d
+	TX_FAR ReceivedTM46Text
+	db $b
+	TX_FAR _UnnamedText_5d17d
+	db $50
 
 SaffronGymText12: ; 0x5d182
-	TX_FAR _UnnamedText_5d182
+	TX_FAR _UnnamedText_5d182 ; pack full
 	db $50
 ; 0x5d182 + 5 bytes
 
@@ -53068,6 +53085,7 @@ UnnamedText_89bd0: ; 0x89bd0
 UnnamedText_89be1: ; 0x89be1
 	db $0, "a boosted", $55
 	db "@@"
+_UnnamedText_554d8:
 	TX_NUM $cf4b, 2, 4
 	db $0, " EXP. Points!", $58
 ; 0x89be1 + 32 bytes = 0x89c01
@@ -53675,7 +53693,7 @@ _UnnamedText_1dfe7: ; 0x8aa5c
 	db "the road's closed.", $57
 ; 0x8aa5c + 77 bytes
 
-UnknownText_8aaa9: ; 0x8aaa9
+_UnnamedText_8aaa9: ; 0x8aaa9
 	db $0, "Whoa, boy!", $4f
 	db "I'm parched!", $55
 	db "...", $55
@@ -62139,7 +62157,7 @@ _UnnamedText_5d162: ; 0xa1bb4
 	db "you my powers!", $57
 ; 0xa1bb4 + 191 bytes
 
-UnnamedText_a1c73: ; 0xa1c73
+_UnnamedText_5d167: ; 0xa1c73
 	db $0, "I'm", $4f
 	db "shocked!", $55
 	db "But, a loss is a", $55
@@ -62173,7 +62191,7 @@ _UnnamedText_5d173: ; 0xa1d16
 	db "this TM with you!", $57
 ; 0xa1d16 + 183 bytes
 
-UnnamedText_a1dcd: ; 0xa1dcd
+ReceivedTM46Text: ; 0xa1dcd
 	db $0, $52, " received", $4f
 	db "TM46!@@"
 ; 0xa1de0
