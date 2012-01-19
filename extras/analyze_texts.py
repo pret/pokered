@@ -432,7 +432,7 @@ def text_pretty_printer_at(start_address, label="SomeLabel"):
                     first_line = False
                 #p1 = command["pointer"][0]
                 #p2 = command["pointer"][1]
-                output += "\n" + spacing + "TX_FAR _" + label
+                output += "\n" + spacing + "TX_FAR _" + label + " ; " + hex(command["pointer"])
                 byte_count += 4 #$17, bank, address word
                 had_db_last = False
             elif command["type"] == 0x9: #TX_RAM_HEX2DEC
@@ -468,6 +468,26 @@ def text_pretty_printer_at(start_address, label="SomeLabel"):
                 pass #this is ok
             elif command["type"] == 0x50 and had_text_end_byte:
                 pass #this is also ok
+            elif command["type"] == 0x0b:
+                if first_line:
+                    output = "\n" + label + ": ; " + hex(start_address)
+                    first_line = False
+                if had_db_last:
+                    output += ", $0b"
+                else:
+                    output += "\n" + spacing + "db $0B"
+                byte_count += 1
+                had_db_last = True
+            elif command["type"] == 0x11:
+                if first_line:
+                    output = "\n" + label + ": ; " + hex(start_address)
+                    first_line = False
+                if had_db_last:
+                    output += ", $11"
+                else:
+                    output += "\n" + spacing + "db $11"
+                byte_count += 1
+                had_db_last = True
             else:
                 print "ERROR in command: " + hex(command["type"])
                 had_db_last = False

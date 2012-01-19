@@ -45382,7 +45382,9 @@ UnnamedText_7513f: ; 0x7513f
     db $50
 ; 0x7513f + 5 bytes
 
-INCBIN "baserom.gbc",$75144,$75149 - $75144
+UnnamedText_75144: ; 0x75144
+    TX_FAR _UnnamedText_75144
+    db $0b
 
 UnnamedText_75149: ; 0x75149
     TX_FAR _UnnamedText_75149
@@ -45394,7 +45396,10 @@ UnnamedText_7514e: ; 0x7514e
     db $50
 ; 0x7514e + 5 bytes
 
-INCBIN "baserom.gbc",$75153,$75159 - $75153
+UnnamedText_75153: ; 0x75153
+    TX_FAR UnnamedText_9e5a2 ; 0x9e5a2
+    db $0B, $50
+; 0x75153 + 6 bytes = 0x75159
 
 UnnamedText_75159: ; 0x75159
     TX_FAR _UnnamedText_75159
@@ -45528,9 +45533,74 @@ SafariZoneEntranceText1: ; 0x752c5
     TX_FAR _SafariZoneEntranceText1
     db $50
 
-SafariZoneEntranceText4:
+SafariZoneEntranceText4: ; 0x752ca
+    TX_FAR UnnamedText_9e6e4 ; 0x9e6e4
+    db $8
+    ld a, $13
+    ld [$d125], a
+    call $30e8
+    call $35ec
+    ld a, [$cc26]
+    and a
+    jp nz, $5346
+    xor a
+    ld [$ff00+$9f], a
+    ld a, $5
+    ld [$ff00+$a0], a
+    ld a, $0
+    ld [$ff00+$a1], a
+    call $35a6
+    jr nc, .asm_752f9 ; 0x752ef $8
+    ld hl, $536a
+    call PrintText
+    jr .asm_7534c ; 0x752f7 $53
+.asm_752f9
+    xor a
+    ld [$cd3d], a
+    ld a, $5
+    ld [$cd3e], a
+    ld a, $0
+    ld [$cd3f], a
+    ld hl, $cd3f
+    ld de, $d349
+    ld c, $3
+    ld a, $c
+    call Predef
+    ld a, $13
+    ld [$d125], a
+    call $30e8
+    ld hl, $535b
+    call PrintText
+    ld a, $1e
+    ld [$da47], a
+    ld a, $1
+    ld [$d70d], a
+    ld a, $f6
+    ld [$d70e], a
+    ld a, $40
+    ld c, $3
+    call $52a3
+    ld hl, $d790
+    set 7, [hl]
+    res 6, [hl]
+    ld a, $3
+    ld [$d61f], a
+    jr .asm_75358 ; 0x75344 $12
+    ld hl, $5365
+    call PrintText
+.asm_7534c
+    ld a, $80
+    ld c, $1
+    call $52a3
+    ld a, $4
+    ld [$d61f], a
+.asm_75358
+    jp $24d7
+; 0x7535b
 
-INCBIN "baserom.gbc",$752ca,$75360 - $752ca
+UnnamedText_7535b: ; 0x7535b
+    TX_FAR UnnamedText_9e747 ; 0x9e747
+    db $0B
 
 UnnamedText_75360: ; 0x75360
     TX_FAR _UnnamedText_75360
@@ -45548,10 +45618,40 @@ UnnamedText_7536a: ; 0x7536a
 ; 0x7536a + 5 bytes
 
 SafariZoneEntranceText5: ; 0x7536f
-
-INCBIN "baserom.gbc",$7536f,6
-
-INCBIN "baserom.gbc",$75375,$753bb - $75375
+    TX_FAR UnnamedText_9e814 ; 0x9e814
+    db $8
+    call $35ec
+    ld a, [$cc26]
+    and a
+    jr nz, .asm_7539c ; 0x7537b $1f
+    ld hl, $53bb
+    call PrintText
+    xor a
+    ld [$c109], a
+    ld a, $80
+    ld c, $3
+    call $52a3
+    ld hl, $d790
+    res 6, [hl]
+    res 7, [hl]
+    ld a, $0
+    ld [$cf0d], a
+    jr .asm_753b3 ; 0x7539a $17
+.asm_7539c
+    ld hl, $53c0
+    call PrintText
+    ld a, $4
+    ld [$c109], a
+    ld a, $40
+    ld c, $1
+    call $52a3
+    ld a, $5
+    ld [$cf0d], a
+.asm_753b3
+    ld a, $6
+    ld [$d61f], a
+    jp $24d7
+; 0x753bb
 
 UnnamedText_753bb: ; 0x753bb
     TX_FAR _UnnamedText_753bb
@@ -45711,8 +45811,8 @@ FuchsiaGymText9: ; 0x75590
 ; 0x75590 + 5 bytes
 
 FuchsiaGymText10: ; 0x75595
-
-INCBIN "baserom.gbc",$75595,$7559a - $75595
+    TX_FAR UnnamedText_a00eb ; 0xa00eb
+    db $11
 
 UnnamedText_7559a: ; 0x7559a
     TX_FAR _UnnamedText_7559a
@@ -46053,7 +46153,11 @@ UnnamedText_75914: ; 0x75914
     db $50
 ; 0x75914 + 5 bytes
 
-INCBIN "baserom.gbc",$75919,7
+UnnamedText_75919: ; 0x75919
+    TX_FAR UnnamedText_a08c7
+    db $11
+    db $d
+    db $50
 
 UnnamedText_75920: ; 0x75920
     TX_FAR _UnnamedText_75920
@@ -46065,12 +46169,12 @@ UnnamedText_75925: ; 0x75925
     db $50
 ; 0x75925 + 5 bytes
 
-INCBIN "baserom.gbc",$7592a,5
-
-UnnamedText_7592f: ; 0x7592f
+UnnamedText_7592a: ; 0x7592a
+    TX_FAR UnnamedText_a09a8 ; 0xa09a8
+    db $0B
     TX_FAR _UnnamedText_7592f
     db $50
-; 0x7592f + 5 bytes
+; 0x75934
 
 UnnamedText_75934: ; 0x75934
     TX_FAR _UnnamedText_75934
@@ -46516,7 +46620,10 @@ UnnamedText_75cc8: ; 0x75cc8
     db $50
 ; 0x75cc8 + 5 bytes
 
-INCBIN "baserom.gbc",$75ccd,6
+UnnamedText_75ccd: ; 0x75ccd
+    TX_FAR UnnamedText_a0f48 ; 0xa0f48
+    db $0B, $50
+; 0x75cd3
 
 UnnamedText_75cd3: ; 0x75cd3
     TX_FAR _UnnamedText_75cd3
@@ -59893,7 +60000,7 @@ _UnnamedText_7513f: ; 0x9e4b0
     db "ha hoo ee haheh!", $57
 ; 0x9e4b0 + 34 bytes
 
-UnnamedText_9e4d2: ; 0x9e4d2
+_UnnamedText_75144: ; 0x9e4d2
     db $0, $52, " gave the", $4f
     db "GOLD TEETH to the", $55
     db "WARDEN!@@"
@@ -60093,7 +60200,14 @@ _UnnamedText_75590: ; 0xa0069
     db "too!", $57
 ; 0xa0069 + 130 bytes
 
-INCBIN "baserom.gbc",$a00eb,$a00ff - $a00eb
+UnnamedText_a00eb: ; 0xa00eb
+    db $0, $52, " received", $4f
+    db "@"
+; 0xa00eb + 13 bytes = 0xa00f8
+
+UnnamedText_a00f8: ; 0xa00f8
+    TX_RAM $cf4b
+    db $0, "!@@"
 
 _UnnamedText_7559a: ; 0xa00ff
     db $0, $51
@@ -60338,7 +60452,12 @@ _UnnamedText_75914: ; 0xa0844
     db "have BURN HEAL!", $57
 ; 0xa0844 + 131 bytes
 
-INCBIN "baserom.gbc",$a08c7,$a08fd - $a08c7
+UnnamedText_a08c7: ; 0xa08c7
+    db $0, "I have", $4f
+    db "burnt out!", $51
+    db "You have earned", $4f
+    db "the VOLCANOBADGE!@@"
+; 0xa08fd
 
 _UnnamedText_75920: ; 0xa08fd
     db $0, "FIRE BLAST is the", $4f
@@ -60358,7 +60477,15 @@ _UnnamedText_75925: ; 0xa0946
     db "have this too!", $57
 ; 0xa0946 + 98 bytes
 
-INCBIN "baserom.gbc",$a09a8,$a09bc - $a09a8
+UnnamedText_a09a8: ; 0xa09a8
+    db $0, $52, " received", $4f
+    db "@"
+; 0xa09a8 + 13 bytes = 0xa09b5
+
+UnnamedText_a09b5: ; 0xa09b5
+    TX_RAM $cf4b
+    db $0, "!@@"
+; 0xa09b5 + 7 bytes = 0xa09bc
 
 _UnnamedText_7592f: ; 0xa09bc
     db $0, $51
@@ -60553,7 +60680,15 @@ _UnnamedText_75cc8: ; 0xa0f09
     db "kinds of fun!", $58
 ; 0xa0f09 + 63 bytes
 
-INCBIN "baserom.gbc",$a0f48,$a0f5d - $a0f48
+UnnamedText_a0f48: ; 0xa0f48
+    db $0, $52, " received ", $4f
+    db "@"
+; 0xa0f56
+
+UnnamedText_a0f56: ; 0xa0f56
+    TX_RAM $cf4b
+    db $0, "!@@"
+; 0xa0f5d
 
 _UnnamedText_75cd3: ; 0xa0f5d
     db $0, "Tch-tch-tch!", $4f
