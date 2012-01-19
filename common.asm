@@ -63495,14 +63495,20 @@ _UnnamedText_e755: ; 0xa803c
 	db "@"
 ; 0xa803c + 13 bytes
 
-INCBIN "baserom.gbc",$a8049,$a804f - $a8049
+UnnamedText_a8049: ; 0xa8049
+	TX_RAM $cd6d
+	db $0, ".", $58
+; 0xa804f
 
 _UnnamedText_e75a: ; 0xa804f
 	db $0, "Is it OK to toss", $4f
 	db "@"
 ; 0xa804f + 19 bytes
 
-INCBIN "baserom.gbc",$a8062,$a8068 - $a8062
+UnnamedText_a8062: ; 0xa8062
+	TX_RAM $cf4b
+	db $0, "?", $58
+; 0xa8068
 
 _UnnamedText_e75f: ; 0xa8068
 	db $0, "That's too impor-", $4f
@@ -63515,21 +63521,41 @@ _UnnamedText_2fe3b: ; 0xa8088
 	db "@"
 ; 0xa8088 + 12 bytes
 
-INCBIN "baserom.gbc",$a8094,$a809a - $a8094
+UnnamedText_a8094: ; 0xa8094
+	TX_RAM $cf4b
+	db $0, "!", $58
+; 0xa809a
 
 _UnnamedText_71d88: ; 0xa809a
 	db $0, "Okay, connect the", $4f
 	db "cable like so!", $58
 ; 0xa809a + 34 bytes
 
-INCBIN "baserom.gbc",$a80bc,$a80d8 - $a80bc
+UnnamedText_a80bc: ; 0xa80bc
+	db $0, $52, " traded", $4f
+	db "@"
+
+UnnamedText_a80c7: ; 0xa80c7
+	TX_RAM $cd13
+	db $0, " for", $55
+	db "@"
+	TX_RAM $cd1e
+	db $0, "!@@"
+; 0xa80d8
 
 _UnnamedText_71d94: ; 0xa80d8
 	db $0, "I'm looking for", $4f
 	db "@"
 ; 0xa80d8 + 17 bytes
 
-INCBIN "baserom.gbc",$a80e9,$a810b - $a80e9
+UnnamedText_a80e9: ; 0xa80e9
+	TX_RAM $cd13
+	db $0, "! Wanna", $51
+	db "trade one for", $4f
+	db "@"
+	TX_RAM $cd1e
+	db $0, "? ", $57
+; 0xa810b
 
 _UnnamedText_71d99: ; 0xa810b
 	db $0, "Awww!", $4f
@@ -63541,7 +63567,12 @@ _UnnamedText_71d9e: ; 0xa811d
 	db "@"
 ; 0xa811d + 18 bytes
 
-INCBIN "baserom.gbc",$a812f,$a8155 - $a812f
+UnnamedText_a812f: ; 0xa812f
+	TX_RAM $cd13
+	db $0, "!", $51
+	db "If you get one,", $4f
+	db "come back here!", $57
+; 0xa8155
 
 _UnnamedText_71da3: ; 0xa8155
 	db $0, "Hey thanks!", $57
@@ -63552,7 +63583,10 @@ _UnnamedText_71da8: ; 0xa8162
 	db "@"
 ; 0xa8162 + 14 bytes
 
-INCBIN "baserom.gbc",$a8170,$a817c - $a8170
+UnnamedText_a8170: ; 0xa8170
+	TX_RAM $cd1e
+	db $0, " great?", $57
+; 0xa8170
 
 _UnnamedText_71dad: ; 0xa817c
 	db $0, "Hello there! Do", $4f
@@ -63560,7 +63594,13 @@ _UnnamedText_71dad: ; 0xa817c
 	db "your @"
 ; 0xa817c + 41 bytes
 
-INCBIN "baserom.gbc",$a81a5,$a81b5 - $a81a5
+UnnamedText_a81a5: ; 0xa81a5
+	TX_RAM $cd13
+	db $0, $4f
+	db "for @"
+	TX_RAM $cd1e
+	db $0, "?", $57
+; 0xa81b5
 
 _UnnamedText_71db2: ; 0xa81b5
 	db $0, "Well, if you", $4f
@@ -63570,9 +63610,11 @@ _UnnamedText_71db2: ; 0xa81b5
 _UnnamedText_71db7: ; 0xa81d3
 	db $0, "Hmmm? This isn't", $4f
 	db "@"
-; 0xa81d3 + 18 bytes
-
-INCBIN "baserom.gbc",$a81e5,$a8209 - $a81e5
+	TX_RAM $cd13
+	db $0, ".", $51
+	db "Think of me when", $4f
+	db "you get one.", $57
+; 0xa8209
 
 _UnnamedText_71dbc: ; 0xa8209
 	db $0, "Thanks!", $57
@@ -63580,16 +63622,22 @@ _UnnamedText_71dbc: ; 0xa8209
 
 _UnnamedText_71dc1: ; 0xa8212
 	db $0, "The @"
-; 0xa8212 + 6 bytes
-
-INCBIN "baserom.gbc",$a8218,$a8240 - $a8218
+	TX_RAM $cd13
+	db $0, " you", $4f
+	db "traded to me", $51
+	db "went and evolved!", $57
+; 0xa8240
 
 _UnnamedText_71dc6: ; 0xa8240
 	db $0, "Hi! Do you have", $4f
 	db "@"
-; 0xa8240 + 18 bytes
-
-INCBIN "baserom.gbc",$a8252,$a8274 - $a8252
+	TX_RAM $cd13
+	db $0, "?", $51
+	db "Want to trade it", $4f
+	db "for @"
+	TX_RAM $cd1e
+	db $0, "?", $57
+; 0xa8274
 
 _UnnamedText_71dcb: ; 0xa8274
 	db $0, "That's too bad.", $57
@@ -63598,9 +63646,11 @@ _UnnamedText_71dcb: ; 0xa8274
 _UnnamedText_71dd0: ; 0xa8284
 	db $0, "...This is no", $4f
 	db "@"
-; 0xa8284 + 16 bytes
-
-INCBIN "baserom.gbc",$a8294,$a82bc - $a8294
+	TX_RAM $cd13
+	db $0, ".", $51
+	db "If you get one,", $4f
+	db "trade it with me!", $57
+; 0xa82bc
 
 _UnnamedText_71dd5: ; 0xa82bc
 	db $0, "Thanks pal!", $57
@@ -63609,11 +63659,23 @@ _UnnamedText_71dd5: ; 0xa82bc
 _UnnamedText_71dda: ; 0xa82c9
 	db $0, "How is my old", $4f
 	db "@"
-; 0xa82c9 + 16 bytes
+	TX_RAM $cd1e
+	db $0, "?", $51
+	db "My @"
+	TX_RAM $cd13
+	db $0, " is", $4f
+	db "doing great!", $57
+; 0xa82f8
 
-INCBIN "baserom.gbc",$a82d9,$57
+; XXX
+db $0, $93, $a7, $a4, $b1, $a4, $7f, $a8, $b2, $ad, $be, $4f
+db $a0, $ad, $b8, $b3, $a7, $a8, $ad, $a6, $7f, $b3, $ae, $7f, $82, $94, $93, $e7, $58
+db $1, $6d, $cd
+db $0, $7f, $a7, $a0, $a2, $aa, $a4, $a3, $4f
+db $a0, $b6, $a0, $b8, $7f, $b6, $a8, $b3, $a7, $7f, $82, $94, $93, $e7, $58
 
 SECTION "bank2B",DATA,BANK[$2B]
+
 INCLUDE "text/pokedex.tx"
 
 SECTION "bank2C",DATA,BANK[$2C]
