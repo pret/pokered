@@ -4,6 +4,6 @@
 #spit out some constants
 
 for x in range(1, 51):
-    print "BOXITEM%.2d     EQU $%s" % (x, ("%.2x" % (0xd539+(x*2))).upper())
-    print "BOXCOUNT%.2d    EQU $%s" % (x, ("%.2x" % (0xd539+(x*2)+1)).upper())
+    print "W_BOXITEM%.2d       EQU $%s" % (x, ("%.2x" % (0xd539+(x*2))).upper())
+    print "W_BOXITEM%.2dQTY    EQU $%s" % (x, ("%.2x" % (0xd539+(x*2)+1)).upper())
 
