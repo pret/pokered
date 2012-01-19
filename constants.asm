@@ -21,7 +21,7 @@ FLYWARP_DATA: MACRO
 	db ((\2) & $01)	;sub-block Y
 	db ((\3) & $01)	;sub-block X
 	ENDM
-        
+
 ; external map entry macro
 EMAP: MACRO ; emap x-coordinate,y-coordinate,textpointer
 ; the appearance of towns and routes in the town map, indexed by map id
@@ -83,9 +83,9 @@ TX_FAR: MACRO
 TX_RAM: MACRO
 ; prints text to screen
 ; \1: RAM address to read from
-    db $1
-    dw \1
-    ENDM
+	db $1
+	dw \1
+	ENDM
 
 ; wram locations
 W_AICOUNT EQU $CCDF ; number of times remaining that AI action can occur
@@ -124,7 +124,7 @@ W_ISINBATTLE EQU $D057 ; no battle, this is 0
                        ; trainer battle, this is 2
 
 W_CUROPPONENT EQU $D059 ; in a wild battle, this is the species of pokemon
-			; in a trainer battle, this is the trainer class + $C8
+                        ; in a trainer battle, this is the trainer class + $C8
 
 W_BATTLETYPE EQU $D05A ; in normal battle, this is 0
                        ; in old man battle, this is 1
