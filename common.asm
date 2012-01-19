@@ -51060,7 +51060,28 @@ _UnnamedText_5a3b3: ; 0x85e64
 	db "#MON master!", $58
 ; 0x85e64 + 58 bytes
 
-INCBIN "baserom.gbc",$85e9e,$117
+UnnamedText_85e9e: ; 0x85e9e
+	db $0, "I still can't", $4f
+	db "believe my", $55
+	db "dragons lost to", $55
+	db "you, ", $52, "!", $51
+	db "You are now the", $4f
+	db "#MON LEAGUE", $55
+	db "champion!", $51
+	db "...Or, you would", $4f
+	db "have been, but", $55
+	db "you have one more", $55
+	db "challenge ahead.", $51
+	db "You have to face", $4f
+	db "another trainer!", $55
+	db "His name is...", $51
+	db $53, "!", $4f
+	db "He beat the ELITE", $55
+	db "FOUR before you!", $51
+	db "He is the real", $4f
+	db "#MON LEAGUE", $55
+	db "champion!@@"
+; 0x85e9e + 279 bytes = 0x85fb5
 
 _HallofFameRoomText1: ; 0x85fb5
 	db $0, "OAK: Er-hem!", $4f
