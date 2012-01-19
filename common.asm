@@ -1935,10 +1935,11 @@ SECTION "bank1",DATA,BANK[$1]
 
 INCBIN "baserom.gbc",$4000,$112
 
-MewPicFront:
+MewPicFront: ; 0x4112
 	INCBIN "pic/bmon/mew.pic"
 MewPicBack:
 	INCBIN "pic/monback/mewb.pic"
+; 0x425b
 
 INCBIN "baserom.gbc",$425b,$42a7 - $425b
 
@@ -1954,6 +1955,7 @@ UnnamedText_42ac: ; 0x42ac
 
 INCBIN "baserom.gbc",$42b1,$84
 
+; 0x4335
 IF _RED
 	ld de,$9600 ; where to put redgreenversion.2bpp in the VRAM
 	ld bc,$50 ; how big that file is
@@ -2563,7 +2565,7 @@ Function62CE: ; 62CE, XXX called by 4B2 948 989 5BF9 5D15
 INCBIN "baserom.gbc",$62FF,$6420-$62FF
 
 FirstMapSpec:
-	db $26 ; RedHouse1F
+	db REDS_HOUSE_2F ; RedsHouse2F
 ; Original Format:
 ;   [Event Displacement][Y-block][X-block][Y-sub_block][X-sub_block]
 ; Macro Format:
