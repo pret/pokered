@@ -433,11 +433,11 @@ Tset08_Coll:
 Tset09_Coll:
 	INCBIN "gfx/tilesets/09.tilecoll"
 Tset0D_Coll:
-	INCBIN "gfx/tilesets/0D.tilecoll"
+	INCBIN "gfx/tilesets/0d.tilecoll"
 Tset0E_Coll:
-	INCBIN "gfx/tilesets/0E.tilecoll"
+	INCBIN "gfx/tilesets/0e.tilecoll"
 Tset0F_Coll:
-	INCBIN "gfx/tilesets/0F.tilecoll"
+	INCBIN "gfx/tilesets/0f.tilecoll"
 Tset10_Coll:
 	INCBIN "gfx/tilesets/10.tilecoll"
 Tset11_Coll:
