@@ -2648,9 +2648,10 @@ UnnamedText_699f: ; 0x699f
 	db $50
 ; 0x699f + 5 bytes
 
-INCBIN "baserom.gbc",$69a4,$3
-
-ld de,DefaultNamesRival
+; 0x69a4
+	call Unnamed_6a12 ; 0x69a4 call 0x6a12
+	ld de, DefaultNamesRival
+; 0x69aa
 
 INCBIN "baserom.gbc",$69AA,$69B3 - $69AA
 
@@ -2663,7 +2664,9 @@ UnnamedText_69e7: ; 0x69e7
 	db $50
 ; 0x69e7 + 5 bytes
 
-INCBIN "baserom.gbc",$69ec,$bc
+INCBIN "baserom.gbc",$69ec,$6a12 - $69ec
+Unnamed_6a12: ; 0x6a12
+INCBIN "baserom.gbc",$6a12,$6aa8 - $6a12
 
 IF _RED
 DefaultNamesPlayer:
@@ -2791,7 +2794,8 @@ UnnamedText_705d: ; 0x705d
 	db $50
 ; 0x705d + 5 bytes
 
-INCBIN "baserom.gbc",$7062,$7063 - $7062
+; 0x7062
+db $a
 
 UnnamedText_7063: ; 0x7063
 	TX_FAR _UnnamedText_7063
@@ -2808,7 +2812,7 @@ UnnamedText_706d: ; 0x706d
 	db $50
 ; 0x706d + 5 bytes
 
-INCBIN "baserom.gbc",$7072,$7073 - $7072
+db $a
 
 UnnamedText_7073: ; 0x7073
 	TX_FAR _UnnamedText_7073
@@ -2832,7 +2836,9 @@ UnnamedText_72bd: ; 0x72bd
 	db $50
 ; 0x72bd + 5 bytes
 
-INCBIN "baserom.gbc",$72c2,$72c8 - $72c2
+UnnamedText_72c2: ; 0x72c2
+	TX_FAR UnnamedText_a29cc
+	db $a, $50
 
 UnnamedText_72c8: ; 0x72c8
 	TX_FAR _UnnamedText_72c8
