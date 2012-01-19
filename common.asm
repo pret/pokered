@@ -3188,7 +3188,7 @@ INCBIN "baserom.gbc",$AA76,$C000 - $AA76
 
 SECTION "bank3",DATA,BANK[$3]
 
-INCBIN "baserom.gbc",$C000,$C23D - $C000
+INCBIN "baserom.gbc",$C000,$C23D - $C000 
 
 ; see also MapHeaderPointers
 MapHeaderBanks: ; 423D
@@ -8735,7 +8735,92 @@ _UnnamedText_ef7d: ; 0xef7d
 	db $50
 ; 0xef7d + 5 bytes
 
-INCBIN "baserom.gbc",$ef82,$fbd9 - $ef82
+INCBIN "baserom.gbc",$ef82,$f6a5 - $ef82
+
+HealParty:
+	ld hl, W_PARTYMON1
+	ld de, W_PARTYMON1_HP
+.HealPokemon\@: ; 0xf704
+	ld a, [hli]
+	cp $ff
+	jr z, .DoneHealing\@ ; End if there's no Pokémon
+	push hl
+	push de
+	ld hl, $0003 ; Status offset
+	add hl, de
+	xor a
+	ld [hl], a ; Clean status conditions
+	push de
+	ld b, $4 ; A Pokémon has 4 moves
+.RestorePP\@:
+	ld hl, $0007 ; Move offset
+	add hl, de
+	ld a, [hl]
+	and a
+	jr z, .HealNext\@ ; Skip if there's no move here
+	dec a
+	ld hl, $001c ; PP offset
+	add hl, de
+	push hl
+	push de
+	push bc
+	ld hl, $4000
+	ld bc, $0006
+	call AddNTimes
+	ld de, $cd6d
+	ld a, $e
+	call FarCopyData
+	ld a, [$cd72]
+	pop bc
+	pop de
+	pop hl
+	inc de
+	push bc
+	ld b, a
+	ld a, [hl]
+	and $c0
+	add b
+	ld [hl], a
+	pop bc
+.HealNext\@:
+	dec b
+	jr nz, .RestorePP\@ ; Continue if there's still moves
+	pop de
+	ld hl, $0021 ; Max HP offset
+	add hl, de
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hl]
+	ld [de], a ; Restore full HP
+	pop de
+	pop hl
+	push hl
+	ld bc, $002c
+	ld h, d
+	ld l, e
+	add hl, bc
+	ld d, h
+	ld e, l
+	pop hl
+	jr .HealPokemon\@ ; Next Pokémon
+.DoneHealing\@ ; This calls $6606 for each Pokémon in party -- no idea why
+	xor a
+	ld [$cf92], a
+	ld [$d11e], a
+	ld a, [W_NUMINPARTY]
+	ld b, a
+.asm_f711
+	push bc
+	call $6606
+	pop bc
+	ld hl, $cf92
+	inc [hl]
+	dec b
+	jr nz, .asm_f711 ; 0xf71b $f4
+	ret
+
+INCBIN "baserom.gbc",$f71e,$fbd9 - $f71e
 
 UnnamedText_fbd9: ; 0xfbd9
 	TX_FAR _UnnamedText_fbd9
@@ -29759,7 +29844,7 @@ PredefPointers: ; 7E79
 	dbw $0F,$7103
 	dbw $1E,$5ABA
 	dbw $03,$7132
-	dbw $03,$76A5
+	dbw BANK(HealParty),HealParty
 	dbw BANK(AttackAnimation),AttackAnimation; 08 play attack animation
 	dbw $03,$771E
 	dbw $03,$771E
