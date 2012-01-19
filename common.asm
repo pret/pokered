@@ -47412,13 +47412,12 @@ CopycatsHouseF1Object: ; 0x75ee3 (size=46)
 	EVENT_DISP $4, $1, $7 ; COPYCATS_HOUSE_2F
 
 Gary_h: ;0x75f11
+	db $7 ;tileset
+	db $4, $4 ;Height, Width
+	dw GaryBlocks, GaryTexts, GaryScript
+	db $0 ;No Connections
 
-db $7 ;tileset
-db $4, $4 ;Height, Width
-dw GaryBlocks, GaryTexts, GaryScript
-db $0 ;No Connections
-
-dw GaryObject
+	dw GaryObject
 
 GaryScript: ; 0x75f1d
 	call $3c3c
@@ -47430,15 +47429,73 @@ GaryScript: ; 0x75f1d
 INCBIN "baserom.gbc",$75f29,$75f31 - $75f29
 
 GaryScripts: ; 0x75f31
-	dw GaryScript0
+	dw GaryScript0, GaryScript1, GaryScript2
 
-INCBIN "baserom.gbc",$75f33,$14
+INCBIN "baserom.gbc",$75f33 + 4,$14 - 4
 
 GaryScript0: ; 0x75f47
 	ret
 ; 0x75f48
 
-INCBIN "baserom.gbc",$75f48,$18e
+GaryScript1:
+	ld a, $ff
+	ld [$cd6b], a
+	ld hl, $ccd3
+	ld de, $5f63
+	call $350c
+	dec a
+	ld [$cd38], a
+	call $3486
+	ld a, $2
+	ld [$d64c], a
+	ret
+; 0x75f63
+
+INCBIN "baserom.gbc",$75f63,$75f6a - $75f63
+
+GaryScript2: ; 0x75f6a 5F6A
+	ld a, [$cd38]
+	and a
+	ret nz
+	call Delay3
+	xor a
+	ld [$cd6b], a
+	ld hl, $d355
+	res 7, [hl]
+	ld a, $1
+	ld [$ff00+$8c], a
+	call $2920
+	call Delay3
+	ld hl, $d72d
+	set 6, [hl]
+	set 7, [hl]
+	ld hl, $60f9
+	ld de, $60fe
+	call $3354
+	ld a, $f3
+	ld [$d059], a
+	ld a, [$d715]
+	cp $b1
+	jr nz, .asm_75fa5 ; 0x75f9f $4
+	ld a, $1
+	jr .asm_75faf ; 0x75fa3 $a
+.asm_75fa5
+	cp $99
+	jr nz, .asm_75fad ; 0x75fa7 $4
+	ld a, $2
+	jr .asm_75faf ; 0x75fab $2
+.asm_75fad
+	ld a, $3
+.asm_75faf
+	ld [$d05d], a
+	xor a
+	ld [$ff00+$b4], a
+	ld a, $3
+	ld [$d64c], a
+	ret
+; 0x75fbb
+
+INCBIN "baserom.gbc",$75fbb,$760d6 - $75fbb
 
 GaryTexts: ; 0x760d6
 	dw GaryText1, GaryText2, GaryText3, GaryText4, GaryText5
@@ -47479,8 +47536,14 @@ GaryText2: ; 0x76108
 	db $50
 
 GaryText3: ; 0x7610d
-
-INCBIN "baserom.gbc",$7610d,$76120 - $7610d
+	db $8
+	ld a, [$d717]
+	ld [$d11e], a
+	call GetMonName
+	ld hl, $6120
+	call PrintText
+	jp $24d7
+; 0x76120
 
 UnnamedText_76120: ; 0x76120
 	TX_FAR _UnnamedText_76120
