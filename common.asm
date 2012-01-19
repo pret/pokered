@@ -62982,20 +62982,24 @@ _ItemUseText002: ; 0xa8009
     db $0, "!", $57
 ; 0xa800e
 
-INCBIN "baserom.gbc",$a800f,$a801e - $a800f
+UnnamedText_a800f: ; 0xa800f
+    db $0, $52, " got on the@@"
+; 0xa801e
 
 _UnnamedText_e5f7: ; 0xa801e
     TX_RAM $cf4b
     db $0, "!", $58
 ; 0xa801e + 6 bytes
 
-INCBIN "baserom.gbc",$a8024,$a8030 - $a8024
+UnnamedText_a8024: ; 0xa8024
+    db $0, $52, " got off@@"
+; 0xa8030
 
 _UnnamedText_e601: ; 0xa8030
     db $0, "the @"
-; 0xa8030 + 6 bytes
-
-INCBIN "baserom.gbc",$a8036,$a803c - $a8036
+    TX_RAM $cf4b
+    db $0, ".", $58
+; 0xa803c
 
 _UnnamedText_e755: ; 0xa803c
     db $0, "Threw away", $4f
