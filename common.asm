@@ -46561,9 +46561,7 @@ Gym7LeaderName:
 INCBIN "baserom.gbc",$75792,$757a6 - $75792
 
 CinnabarGymScripts: ; 0x757a6
-	dw CinnabarGymScript0, CinnabarGymScript1
-
-INCBIN "baserom.gbc",$757aa,$4
+	dw CinnabarGymScript0, CinnabarGymScript1, CinnabarGymScript2, CinnabarGymScript3
 
 CinnabarGymScript0: ; 0x757ae
 	ld a, [$da38]
@@ -46602,7 +46600,86 @@ CinnabarGymScript1: ; 0x757dc
 	jp $2920
 ; 0x757f1
 
-INCBIN "baserom.gbc",$757f1,$ae
+INCBIN "baserom.gbc",$757f1,$757f6 - $757f1
+
+CinnabarGymScript2: ; 0x757f6
+	ld a, [$d057]
+	cp $ff
+	jp z, $5792
+	ld a, [$cc55]
+	ld [$ff00+$db], a
+	ld c, a
+	ld b, $2
+	ld hl, $d79a
+	call $57f1
+	ld a, c
+	and a
+	jr nz, .asm_7581b ; 0x7580e $b
+	call $3748
+	ld a, $ad
+	call $23b1
+	call $3748
+.asm_7581b
+	ld a, [$cc55]
+	ld [$ff00+$db], a
+	ld c, a
+	ld b, $1
+	ld hl, $d79a
+	call $57f1
+	ld a, [$cc55]
+	sub $2
+	ld c, a
+	ld b, $1
+	ld hl, $d79c
+	call $57f1
+	call $3ead
+	xor a
+	ld [$cd6b], a
+	ld [$da38], a
+	ld a, $0
+	ld [$d65e], a
+	ld [$da39], a
+	ret
+; 0x7584a
+
+CinnabarGymScript3: ; 0x7584a
+	ld a, [$d057]
+	cp $ff
+	jp z, $5792
+	ld a, $f0
+	ld [$cd6b], a
+	ld a, $a
+	ld [$ff00+$8c], a
+	call $2920
+	ld hl, $d79a
+	set 1, [hl]
+	ld bc, $ee01
+	call GiveItem
+	jr nc, .asm_75879 ; 0x75869 $e
+	ld a, $b
+	ld [$ff00+$8c], a
+	call $2920
+	ld hl, $d79a
+	set 0, [hl]
+	jr .asm_75880 ; 0x75877 $7
+.asm_75879
+	ld a, $c
+	ld [$ff00+$8c], a
+	call $2920
+.asm_75880
+	ld hl, $d356
+	set 6, [hl]
+	ld hl, $d72a
+	set 6, [hl]
+	ld a, [$d79a]
+	or $fc
+	ld [$d79a], a
+	ld hl, $d79b
+	set 0, [hl]
+	ld hl, $d126
+	set 5, [hl]
+	jp $5792
+; 0x7589f
 
 CinnabarGymTexts: ; 0x7589f
 	dw CinnabarGymText1, CinnabarGymText2, CinnabarGymText3, CinnabarGymText4, CinnabarGymText5, CinnabarGymText6, CinnabarGymText7, CinnabarGymText8, CinnabarGymText9
@@ -47249,7 +47326,14 @@ Lab4Text2: ; 0x75dda
 	call Predef
 	jp $24d7
 
-INCBIN "baserom.gbc",$75de8,$8
+; 0x75de8
+; XXX todo
+;db $6, $18, $21, $eb, $50
+;db $c3, $d6, $35
+	ld b, $18
+	ld hl, $50eb
+	jp $35d6
+; 0x75df0
 
 Lab4Object: ; 0x75df0 (size=32)
 	db $17 ; border tile
