@@ -3530,307 +3530,307 @@ Show	equ $15
 MapHSXX:
 	db $FF,$FF,$FF
 MapHS00:
-	db $00,$01,Hide
+	db PALLET_TOWN,$01,Hide
 MapHS01:
-	db $01,$05,Show
-	db $01,$07,Hide
+	db VIRIDIAN_CITY,$05,Show
+	db VIRIDIAN_CITY,$07,Hide
 MapHS02:
-	db $02,$03,Show
-	db $02,$05,Show
+	db PEWTER_CITY,$03,Show
+	db PEWTER_CITY,$05,Show
 MapHS03:
-	db $03,$01,Hide
-	db $03,$02,Show
-	db $03,$06,Hide
-	db $03,$0A,Show
-	db $03,$0B,Show
+	db CERULEAN_CITY,$01,Hide
+	db CERULEAN_CITY,$02,Show
+	db CERULEAN_CITY,$06,Hide
+	db CERULEAN_CITY,$0A,Show
+	db CERULEAN_CITY,$0B,Show
 MapHS0A:
-	db $0A,$01,Show
-	db $0A,$02,Show
-	db $0A,$03,Show
-	db $0A,$04,Show
-	db $0A,$05,Show
-	db $0A,$06,Show
-	db $0A,$07,Show
-	db $0A,$08,Hide
-	db $0A,$09,Hide
-	db $0A,$0A,Hide
-	db $0A,$0B,Hide
-	db $0A,$0C,Hide
-	db $0A,$0D,Hide
-	db $0A,$0E,Show
-	db $0A,$0F,Hide
+	db SAFFRON_CITY,$01,Show
+	db SAFFRON_CITY,$02,Show
+	db SAFFRON_CITY,$03,Show
+	db SAFFRON_CITY,$04,Show
+	db SAFFRON_CITY,$05,Show
+	db SAFFRON_CITY,$06,Show
+	db SAFFRON_CITY,$07,Show
+	db SAFFRON_CITY,$08,Hide
+	db SAFFRON_CITY,$09,Hide
+	db SAFFRON_CITY,$0A,Hide
+	db SAFFRON_CITY,$0B,Hide
+	db SAFFRON_CITY,$0C,Hide
+	db SAFFRON_CITY,$0D,Hide
+	db SAFFRON_CITY,$0E,Show
+	db SAFFRON_CITY,$0F,Hide
 MapHS0D:
-	db $0D,$01,Show
-	db $0D,$02,Show
+	db ROUTE_2,$01,Show
+	db ROUTE_2,$02,Show
 MapHS0F:
-	db $0F,$03,Show
+	db ROUTE_4,$03,Show
 MapHS14:
-	db $14,$0A,Show
+	db ROUTE_9,$0A,Show
 MapHS17:
-	db $17,$01,Show
-	db $17,$09,Show
-	db $17,$0A,Show
+	db ROUTE_12,$01,Show
+	db ROUTE_12,$09,Show
+	db ROUTE_12,$0A,Show
 MapHS1A:
-	db $1A,$0B,Show
+	db ROUTE_15,$0B,Show
 MapHS1B:
-	db $1B,$07,Show
+	db ROUTE_16,$07,Show
 MapHS21:
-	db $21,$01,Hide
-	db $21,$02,Hide
+	db ROUTE_22,$01,Hide
+	db ROUTE_22,$02,Hide
 MapHS23:
-	db $23,$01,Show
-	db $23,$08,Show
+	db ROUTE_24,$01,Show
+	db ROUTE_24,$08,Show
 MapHS24:
-	db $24,$0A,Show
+	db ROUTE_25,$0A,Show
 MapHS27:
-	db $27,$01,Show
-	db $27,$02,Hide
-	db $27,$03,Show
+	db BLUES_HOUSE,$01,Show
+	db BLUES_HOUSE,$02,Hide
+	db BLUES_HOUSE,$03,Show
 MapHS28:
-	db $28,$01,Show
-	db $28,$02,Show
-	db $28,$03,Show
-	db $28,$04,Show
-	db $28,$05,Hide
-	db $28,$06,Show
-	db $28,$07,Show
-	db $28,$08,Hide
+	db OAKS_LAB,$01,Show
+	db OAKS_LAB,$02,Show
+	db OAKS_LAB,$03,Show
+	db OAKS_LAB,$04,Show
+	db OAKS_LAB,$05,Hide
+	db OAKS_LAB,$06,Show
+	db OAKS_LAB,$07,Show
+	db OAKS_LAB,$08,Hide
 MapHS2D:
-	db $2D,$01,Show
-	db $2D,$0B,Show
+	db VIRIDIAN_GYM,$01,Show
+	db VIRIDIAN_GYM,$0B,Show
 MapHS34:
-	db $34,$05,Show
+	db MUSEUM_1F,$05,Show
 MapHSE4:
-	db $E4,$01,Show
-	db $E4,$02,Show
-	db $E4,$03,Show
+	db UNKNOWN_DUNGEON_1,$01,Show
+	db UNKNOWN_DUNGEON_1,$02,Show
+	db UNKNOWN_DUNGEON_1,$03,Show
 MapHS8F:
-	db $8F,$01,Show
+	db POKEMONTOWER_2,$01,Show
 MapHS90:
-	db $90,$04,Show
+	db POKEMONTOWER_3,$04,Show
 MapHS91:
-	db $91,$04,Show
-	db $91,$05,Show
-	db $91,$06,Show
+	db POKEMONTOWER_4,$04,Show
+	db POKEMONTOWER_4,$05,Show
+	db POKEMONTOWER_4,$06,Show
 MapHS92:
-	db $92,$06,Show
+	db POKEMONTOWER_5,$06,Show
 MapHS93:
-	db $93,$04,Show
-	db $93,$05,Show
+	db POKEMONTOWER_6,$04,Show
+	db POKEMONTOWER_6,$05,Show
 MapHS94:
-	db $94,$01,Show
-	db $94,$02,Show
-	db $94,$03,Show
-	db $94,$04,Show
+	db POKEMONTOWER_7,$01,Show
+	db POKEMONTOWER_7,$02,Show
+	db POKEMONTOWER_7,$03,Show
+	db POKEMONTOWER_7,$04,Show
 MapHS95:
-	db $95,$05,Hide
+	db LAVENDER_HOUSE_1,$05,Hide
 MapHS84:
-	db $84,$02,Show
+	db CELADON_MANSION_5,$02,Show
 MapHS87:
-	db $87,$0B,Show
+	db GAME_CORNER,$0B,Show
 MapHS9B:
-	db $9B,$02,Show
+	db FUCHSIA_HOUSE_2,$02,Show
 MapHSA5:
-	db $A5,$02,Show
-	db $A5,$03,Show
+	db MANSION_1,$02,Show
+	db MANSION_1,$03,Show
 MapHSB1:
-	db $B1,$06,Show
-	db $B1,$07,Show
+	db FIGHTINGDOJO,$06,Show
+	db FIGHTINGDOJO,$07,Show
 MapHSB5:
-	db $B5,$01,Hide
+	db SILPH_CO_1F,$01,Hide
 MapHS53:
-	db $53,$01,Show
-	db $53,$02,Show
-	db $53,$03,Show
-	db $53,$04,Show
-	db $53,$05,Show
-	db $53,$06,Show
-	db $53,$07,Show
-	db $53,$08,Show
-	db $53,$09,Show
-	db $53,$0A,Show
-	db $53,$0B,Show
-	db $53,$0C,Show
-	db $53,$0D,Show
-	db $53,$0E,Show
+	db POWER_PLANT,$01,Show
+	db POWER_PLANT,$02,Show
+	db POWER_PLANT,$03,Show
+	db POWER_PLANT,$04,Show
+	db POWER_PLANT,$05,Show
+	db POWER_PLANT,$06,Show
+	db POWER_PLANT,$07,Show
+	db POWER_PLANT,$08,Show
+	db POWER_PLANT,$09,Show
+	db POWER_PLANT,$0A,Show
+	db POWER_PLANT,$0B,Show
+	db POWER_PLANT,$0C,Show
+	db POWER_PLANT,$0D,Show
+	db POWER_PLANT,$0E,Show
 MapHSC2:
-	db $C2,$06,Show
-	db $C2,$07,Show
-	db $C2,$08,Show
-	db $C2,$09,Show
-	db $C2,$0A,Show
-	db $C2,$0D,Show
+	db VICTORY_ROAD_2,$06,Show
+	db VICTORY_ROAD_2,$07,Show
+	db VICTORY_ROAD_2,$08,Show
+	db VICTORY_ROAD_2,$09,Show
+	db VICTORY_ROAD_2,$0A,Show
+	db VICTORY_ROAD_2,$0D,Show
 MapHS58:
-	db $58,$01,Show
-	db $58,$02,Hide
-	db $58,$03,Hide
+	db BILLS_HOUSE,$01,Show
+	db BILLS_HOUSE,$02,Hide
+	db BILLS_HOUSE,$03,Hide
 MapHS33:
-	db $33,$05,Show
-	db $33,$06,Show
-	db $33,$07,Show
+	db VIRIDIAN_FOREST,$05,Show
+	db VIRIDIAN_FOREST,$06,Show
+	db VIRIDIAN_FOREST,$07,Show
 MapHS3B:
-	db $3B,$08,Show
-	db $3B,$09,Show
-	db $3B,$0A,Show
-	db $3B,$0B,Show
-	db $3B,$0C,Show
-	db $3B,$0D,Show
+	db MT_MOON_1,$08,Show
+	db MT_MOON_1,$09,Show
+	db MT_MOON_1,$0A,Show
+	db MT_MOON_1,$0B,Show
+	db MT_MOON_1,$0C,Show
+	db MT_MOON_1,$0D,Show
 MapHS3D:
-	db $3D,$06,Show
-	db $3D,$07,Show
-	db $3D,$08,Show
-	db $3D,$09,Show
+	db MT_MOON_3,$06,Show
+	db MT_MOON_3,$07,Show
+	db MT_MOON_3,$08,Show
+	db MT_MOON_3,$09,Show
 MapHS60:
-	db $60,$02,Hide
+	db SS_ANNE_2,$02,Hide
 MapHS66:
-	db $66,$0A,Show
+	db SS_ANNE_8,$0A,Show
 MapHS67:
-	db $67,$06,Show
-	db $67,$09,Show
+	db SS_ANNE_9,$06,Show
+	db SS_ANNE_9,$09,Show
 MapHS68:
-	db $68,$09,Show
-	db $68,$0A,Show
-	db $68,$0B,Show
+	db SS_ANNE_10,$09,Show
+	db SS_ANNE_10,$0A,Show
+	db SS_ANNE_10,$0B,Show
 MapHSC6:
-	db $C6,$05,Show
-	db $C6,$06,Show
-	db $C6,$0A,Show
+	db VICTORY_ROAD_3,$05,Show
+	db VICTORY_ROAD_3,$06,Show
+	db VICTORY_ROAD_3,$0A,Show
 MapHSC7:
-	db $C7,$06,Show
-	db $C7,$07,Show
+	db ROCKET_HIDEOUT_1,$06,Show
+	db ROCKET_HIDEOUT_1,$07,Show
 MapHSC8:
-	db $C8,$02,Show
-	db $C8,$03,Show
-	db $C8,$04,Show
-	db $C8,$05,Show
+	db ROCKET_HIDEOUT_2,$02,Show
+	db ROCKET_HIDEOUT_2,$03,Show
+	db ROCKET_HIDEOUT_2,$04,Show
+	db ROCKET_HIDEOUT_2,$05,Show
 MapHSC9:
-	db $C9,$03,Show
-	db $C9,$04,Show
+	db ROCKET_HIDEOUT_3,$03,Show
+	db ROCKET_HIDEOUT_3,$04,Show
 MapHSCA:
-	db $CA,$01,Show
-	db $CA,$05,Show
-	db $CA,$06,Show
-	db $CA,$07,Show
-	db $CA,$08,Hide
-	db $CA,$09,Hide
+	db ROCKET_HIDEOUT_4,$01,Show
+	db ROCKET_HIDEOUT_4,$05,Show
+	db ROCKET_HIDEOUT_4,$06,Show
+	db ROCKET_HIDEOUT_4,$07,Show
+	db ROCKET_HIDEOUT_4,$08,Hide
+	db ROCKET_HIDEOUT_4,$09,Hide
 MapHSCF:
-	db $CF,$01,Show
-	db $CF,$02,Show
-	db $CF,$03,Show
-	db $CF,$04,Show
-	db $CF,$05,Show
+	db SILPH_CO_2F,$01,Show
+	db SILPH_CO_2F,$02,Show
+	db SILPH_CO_2F,$03,Show
+	db SILPH_CO_2F,$04,Show
+	db SILPH_CO_2F,$05,Show
 MapHSD0:
-	db $D0,$02,Show
-	db $D0,$03,Show
-	db $D0,$04,Show
+	db SILPH_CO_3F,$02,Show
+	db SILPH_CO_3F,$03,Show
+	db SILPH_CO_3F,$04,Show
 MapHSD1:
-	db $D1,$02,Show
-	db $D1,$03,Show
-	db $D1,$04,Show
-	db $D1,$05,Show
-	db $D1,$06,Show
-	db $D1,$07,Show
+	db SILPH_CO_4F,$02,Show
+	db SILPH_CO_4F,$03,Show
+	db SILPH_CO_4F,$04,Show
+	db SILPH_CO_4F,$05,Show
+	db SILPH_CO_4F,$06,Show
+	db SILPH_CO_4F,$07,Show
 MapHSD2:
-	db $D2,$02,Show
-	db $D2,$03,Show
-	db $D2,$04,Show
-	db $D2,$05,Show
-	db $D2,$06,Show
-	db $D2,$07,Show
-	db $D2,$08,Show
+	db SILPH_CO_5F,$02,Show
+	db SILPH_CO_5F,$03,Show
+	db SILPH_CO_5F,$04,Show
+	db SILPH_CO_5F,$05,Show
+	db SILPH_CO_5F,$06,Show
+	db SILPH_CO_5F,$07,Show
+	db SILPH_CO_5F,$08,Show
 MapHSD3:
-	db $D3,$06,Show
-	db $D3,$07,Show
-	db $D3,$08,Show
-	db $D3,$09,Show
-	db $D3,$0A,Show
+	db SILPH_CO_6F,$06,Show
+	db SILPH_CO_6F,$07,Show
+	db SILPH_CO_6F,$08,Show
+	db SILPH_CO_6F,$09,Show
+	db SILPH_CO_6F,$0A,Show
 MapHSD4:
-	db $D4,$05,Show
-	db $D4,$06,Show
-	db $D4,$07,Show
-	db $D4,$08,Show
-	db $D4,$09,Show
-	db $D4,$0A,Show
-	db $D4,$0B,Show
-	db $D4,$0C,Show
+	db SILPH_CO_7F,$05,Show
+	db SILPH_CO_7F,$06,Show
+	db SILPH_CO_7F,$07,Show
+	db SILPH_CO_7F,$08,Show
+	db SILPH_CO_7F,$09,Show
+	db SILPH_CO_7F,$0A,Show
+	db SILPH_CO_7F,$0B,Show
+	db SILPH_CO_7F,$0C,Show
 MapHSD5:
-	db $D5,$02,Show
-	db $D5,$03,Show
-	db $D5,$04,Show
+	db SILPH_CO_8F,$02,Show
+	db SILPH_CO_8F,$03,Show
+	db SILPH_CO_8F,$04,Show
 MapHSE9:
-	db $E9,$02,Show
-	db $E9,$03,Show
-	db $E9,$04,Show
+	db SILPH_CO_9F,$02,Show
+	db SILPH_CO_9F,$03,Show
+	db SILPH_CO_9F,$04,Show
 MapHSEA:
-	db $EA,$01,Show
-	db $EA,$02,Show
-	db $EA,$03,Show
-	db $EA,$04,Show
-	db $EA,$05,Show
-	db $EA,$06,Show
+	db SILPH_CO_10F,$01,Show
+	db SILPH_CO_10F,$02,Show
+	db SILPH_CO_10F,$03,Show
+	db SILPH_CO_10F,$04,Show
+	db SILPH_CO_10F,$05,Show
+	db SILPH_CO_10F,$06,Show
 MapHSEB:
-	db $EB,$03,Show
-	db $EB,$04,Show
-	db $EB,$05,Show
+	db SILPH_CO_11F,$03,Show
+	db SILPH_CO_11F,$04,Show
+	db SILPH_CO_11F,$05,Show
 MapHSF4:
 	db $F4,$02,Show
 MapHSD6:
-	db $D6,$02,Show
+	db MANSION_2,$02,Show
 MapHSD7:
-	db $D7,$03,Show
-	db $D7,$04,Show
+	db MANSION_3,$03,Show
+	db MANSION_3,$04,Show
 MapHSD8:
-	db $D8,$03,Show
-	db $D8,$04,Show
-	db $D8,$05,Show
-	db $D8,$06,Show
-	db $D8,$08,Show
+	db MANSION_4,$03,Show
+	db MANSION_4,$04,Show
+	db MANSION_4,$05,Show
+	db MANSION_4,$06,Show
+	db MANSION_4,$08,Show
 MapHSD9:
-	db $D9,$01,Show
-	db $D9,$02,Show
-	db $D9,$03,Show
-	db $D9,$04,Show
+	db SAFARI_ZONE_EAST,$01,Show
+	db SAFARI_ZONE_EAST,$02,Show
+	db SAFARI_ZONE_EAST,$03,Show
+	db SAFARI_ZONE_EAST,$04,Show
 MapHSDA:
-	db $DA,$01,Show
-	db $DA,$02,Show
+	db SAFARI_ZONE_NORTH,$01,Show
+	db SAFARI_ZONE_NORTH,$02,Show
 MapHSDB:
-	db $DB,$01,Show
-	db $DB,$02,Show
-	db $DB,$03,Show
-	db $DB,$04,Show
+	db SAFARI_ZONE_WEST,$01,Show
+	db SAFARI_ZONE_WEST,$02,Show
+	db SAFARI_ZONE_WEST,$03,Show
+	db SAFARI_ZONE_WEST,$04,Show
 MapHSDC:
-	db $DC,$01,Show
+	db SAFARI_ZONE_CENTER,$01,Show
 MapHSE2:
-	db $E2,$01,Show
-	db $E2,$02,Show
-	db $E2,$03,Show
+	db UNKNOWN_DUNGEON_2,$01,Show
+	db UNKNOWN_DUNGEON_2,$02,Show
+	db UNKNOWN_DUNGEON_2,$03,Show
 MapHSE3:
-	db $E3,$01,Show
-	db $E3,$02,Show
-	db $E3,$03,Show
+	db UNKNOWN_DUNGEON_3,$01,Show
+	db UNKNOWN_DUNGEON_3,$02,Show
+	db UNKNOWN_DUNGEON_3,$03,Show
 MapHS6C:
-	db $6C,$03,Show
-	db $6C,$04,Show
+	db VICTORY_ROAD_1,$03,Show
+	db VICTORY_ROAD_1,$04,Show
 MapHS78:
-	db $78,$02,Hide
+	db CHAMPIONS_ROOM,$02,Hide
 MapHSC0:
-	db $C0,$01,Show
-	db $C0,$02,Show
+	db SEAFOAM_ISLANDS_1,$01,Show
+	db SEAFOAM_ISLANDS_1,$02,Show
 MapHS9F:
-	db $9F,$01,Hide
-	db $9F,$02,Hide
+	db SEAFOAM_ISLANDS_2,$01,Hide
+	db SEAFOAM_ISLANDS_2,$02,Hide
 MapHSA0:
-	db $A0,$01,Hide
-	db $A0,$02,Hide
+	db SEAFOAM_ISLANDS_3,$01,Hide
+	db SEAFOAM_ISLANDS_3,$02,Hide
 MapHSA1:
-	db $A1,$02,Show
-	db $A1,$03,Show
-	db $A1,$05,Hide
-	db $A1,$06,Hide
+	db SEAFOAM_ISLANDS_4,$02,Show
+	db SEAFOAM_ISLANDS_4,$03,Show
+	db SEAFOAM_ISLANDS_4,$05,Hide
+	db SEAFOAM_ISLANDS_4,$06,Hide
 MapHSA2:
-	db $A2,$01,Hide
-	db $A2,$02,Hide
-	db $A2,$03,Show
+	db SEAFOAM_ISLANDS_5,$01,Hide
+	db SEAFOAM_ISLANDS_5,$02,Hide
+	db SEAFOAM_ISLANDS_5,$03,Show
 
 	db $FF
 
