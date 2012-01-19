@@ -48449,7 +48449,9 @@ INCBIN "baserom.gbc",$7C000,$4000
 
 SECTION "bank20",DATA,BANK[$20]
 
-INCBIN "baserom.gbc",$80000,$80009 - $80000
+UnnamedText_80000: ; 0x80000
+	db $0, "Bingo!@@"
+; 0xa80009
 
 _UnnamedText_526f3: ; 0x80009
 	db $0, $4f
@@ -48462,7 +48464,10 @@ _UnnamedText_526f8: ; 0x80029
 	db "CARD KEY!", $57
 ; 0x80029 + 28 bytes
 
-INCBIN "baserom.gbc",$80045,$8004d - $80045
+UnnamedText_80045: ; 0x80045
+	TX_RAM $cd6d
+	db $0, ": @@"
+; 0xa8004d
 
 _UnnamedText_70847: ; 0x8004d
 	db $0, "Not even a nibble!", $58
@@ -48531,7 +48536,12 @@ _ViridianCityText12: ; 0x800fc
 	db $0, "Heal Your #MON!", $4f
 	db "#MON CENTER", $57
 
-INCBIN "baserom.gbc",$80119,$8012a - $80119
+UnnamedText_80119: ; 0x80119
+	db $0, $52, " found", $4f
+	db "@"
+	TX_RAM $cf4b
+	db $0, "!@@"
+; 0x8012a
 
 _UnnamedText_4e2c: ; 0x8012a
 	db $0, "No more room for", $4f
@@ -48545,7 +48555,22 @@ _UnnamedText_59091: ; 0x80143
 	db "If you caught @"
 ; 0x80143 + 52 bytes
 
-INCBIN "baserom.gbc",$80177,$801e4 - $80177
+UnnamedText_80177: ; 0x80177
+	TX_NUM $ffdb, 1, 3
+	db $0, $4f
+	db "kinds of #MON,", $55
+	db "I'm supposed to", $55
+	db "give you an", $55
+	db "@"
+	TX_RAM $cc5b
+	db $0, "!", $51
+	db "So, ", $52, "! Have", $4f
+	db "you caught at", $55
+	db "least @"
+	TX_NUM $ffdb, 1, 3
+	db $0, " kinds of", $55
+	db "#MON?", $57
+; 0x801e4
 
 _UnnamedText_59096: ; 0x801e4
 	db $0, "Let's see...", $4f
@@ -48553,21 +48578,49 @@ _UnnamedText_59096: ; 0x801e4
 	db "caught only @"
 ; 0x801e4 + 42 bytes
 
-INCBIN "baserom.gbc",$8020e,$80250 - $8020e
+UnnamedText_8020e: ; 0x8020e
+	TX_NUM $ffdd, 1, 3
+	db $0, $55
+	db "kinds of #MON!", $51
+	db "You need @"
+	TX_NUM $ffdb, 1, 3
+	db $0, " kinds", $4f
+	db "if you want the", $55
+	db "@"
+	TX_RAM $cc5b
+	db $0, ".", $57
+; 0x80250
 
 _UnnamedText_5909b: ; 0x80250
 	db $0, "Oh. I see.", $51
 	db "When you get @"
-; 0x80250 + 26 bytes
-
-INCBIN "baserom.gbc",$8026a,$8028c - $8026a
+	TX_NUM $ffdb, 1, 3
+	db $0, $4f
+	db "kinds, come back", $55
+	db "for @"
+	TX_RAM $cc5b
+	db $0, ".", $57
+; 0x8028c
 
 _UnnamedText_590a0: ; 0x8028c
 	db $0, "Great! You have", $4f
 	db "caught @"
 ; 0x8028c + 25 bytes
 
-INCBIN "baserom.gbc",$802a5,$802ec - $802a5
+UnnamedText_802a5: ; 0x802a5
+	TX_NUM $ffdd, 1, 3
+	db $0, " kinds ", $55
+	db "of #MON!", $55
+	db "Congratulations!", $51
+	db "Here you go!", $58
+; 0x802a5 + 52 bytes = 0x802d9
+
+UnnamedText_802d9: ; 0x802d9
+	db $0, $52, " got the", $4f
+	db "@"
+	TX_RAM $cc5b
+	db $0, "!@@"
+; 0xa802ec
 
 _UnnamedText_590ab: ; 0x802ec
 	db $0, "Oh! I see you", $4f
@@ -48576,7 +48629,10 @@ _UnnamedText_590ab: ; 0x802ec
 	db "@"
 ; 0x802ec + 43 bytes
 
-INCBIN "baserom.gbc",$80317,$6
+UnnamedText_80317: ; 0x80317
+	TX_RAM $cc5b
+	db $0, ".", $57
+; 0x80317 + 6 bytes = 0x8031d
 
 _ViridianForestText1: ; 0x8031d
 	db $0, "I came here with", $4f
@@ -48819,7 +48875,17 @@ _UnnamedText_49f64: ; 0x80979
 	db "HELIX FOSSIL?", $57
 ; 0x80979 + 28 bytes
 
-INCBIN "baserom.gbc",$80995,$809cc - $80995
+UnnamedText_80995: ; 0x80995
+	db $0, $52, " got the", $4f
+	db "@"
+	TX_RAM $cf4b
+	db $0, "!@@"
+; 0x809a8
+
+UnnamedText_809a8: ; 0x809a8
+	db $0, "Look, you've got", $4f
+	db "no room for this.@@"
+; 0x809cc
 
 _UnnamedText_49f85: ; 0x809cc
 	db $0, "Hey, stop!", $51
@@ -48849,7 +48915,10 @@ _UnnamedText_49f94: ; 0x80a37
 	db "fossils.", $57
 ; 0x80a37 + 92 bytes
 
-INCBIN "baserom.gbc",$80a93,$80ab3 - $80a93
+UnnamedText_80a93: ; 0x80a93
+	db $0, "All right. Then", $4f
+	db "this is mine!@@"
+; 0x80ab3
 
 _UnnamedText_49f9f: ; 0x80ab3
 	db $0, "TEAM ROCKET will", $4f
@@ -49099,7 +49168,16 @@ _UnnamedText_61816: ; 0x812a6
 	db "fillets du beef?", $57
 ; 0x812a6 + 55 bytes
 
-INCBIN "baserom.gbc",$812dd,$81347 - $812dd
+UnnamedText_812dd: ; 0x812dd
+	db $0, "CAPTAIN: Ooargh...", $4f
+	db "I feel hideous...", $55
+	db "Urrp! Seasick...", $51
+	db $52, " rubbed", $4f
+	db "the CAPTAIN's", $55
+	db "back!", $51
+	db "Rub-rub...", $4f
+	db "Rub-rub...@@"
+; 0x81347
 
 _UnnamedText_61927: ; 0x81347
 	db $0, "CAPTAIN: Whew!", $4f
@@ -49117,7 +49195,12 @@ _UnnamedText_61927: ; 0x81347
 	db "any time!", $58
 ; 0x81347 + 198 bytes
 
-INCBIN "baserom.gbc",$8140d,$8141c - $8140d
+UnnamedText_8140d: ; 0x8140d
+	db $0, $52, " got", $4f
+	db "@"
+	TX_RAM $cf4b
+	db $0, "!@@"
+; 0x8141c
 
 _UnnamedText_61932: ; 0x8141c
 	db $0, "CAPTAIN: Whew!", $51
@@ -49402,10 +49485,8 @@ _UnnamedText_61e3e: ; 0x81bc9
 
 _UnnamedText_61e43: ; 0x81bf3
 	db $0, "I like feisty", $4f
-	db "kids like you!@"
-; 0x81bf3 + 30 bytes
-
-INCBIN "baserom.gbc",$81c11,$81c12 - $81c11
+	db "kids like you!@@"
+; 0x81bf3 + 31 bytes
 
 _UnnamedText_61e48: ; 0x81c12
 	db $0, "Argh!", $4f
@@ -49525,7 +49606,9 @@ _UnnamedText_44ac8: ; 0x81efc
 	db "stronger!", $57
 ; 0x81efc + 46 bytes
 
-INCBIN "baserom.gbc",$81f2a,$81f34 - $81f2a
+UnnamedText_81f2a: ; 0x81f2a
+	db $0, "Why...?@@"
+; 0x81f34
 
 _UnnamedText_44ca1: ; 0x81f34
 	db $0, "Who are you? How", $4f
@@ -49724,7 +49807,10 @@ _UnnamedText_455ec: ; 0x82418
 	db "the LIFT KEY!", $57
 ; 0x82418 + 32 bytes
 
-INCBIN "baserom.gbc",$82438,$1c
+UnnamedText_82438: ; 0x82438
+	db $0, "It appears to", $4f
+	db "need a key.@@"
+; 0xa82454
 
 _UnnamedText_59ded: ; 0x82454
 	db $0, "Eeek!", $4f
@@ -49736,7 +49822,12 @@ _UnnamedText_59ded: ; 0x82454
 	db "please take this!", $58
 ; 0x82454 + 102 bytes
 
-INCBIN "baserom.gbc",$824ba,$824c9 - $824ba
+UnnamedText_824ba: ; 0x824ba
+	db $0, $52, " got", $4f
+	db "@"
+	TX_RAM $cf4b
+	db $0, "!@@"
+; 0x824c9
 
 _UnnamedText_59df8: ; 0x824c9
 	db $0, "TM36 is", $4f
@@ -50506,7 +50597,12 @@ _UnnamedText_62311: ; 0x84e9b
 	db "will do!", $58
 ; 0x84e9b + 200 bytes
 
-INCBIN "baserom.gbc",$84f63,$84f74 - $84f63
+UnnamedText_84f63: ; 0x84f63
+	db $0, $52, " got a", $4f
+	db "@"
+	TX_RAM $cf4b
+	db $0, "!@@"
+; 0x84f74
 
 _UnnamedText_6231c: ; 0x84f74
 	db $0, "PRESIDENT: You", $4f
@@ -50816,7 +50912,12 @@ _UnnamedText_4a350: ; 0x858a4
 	db "You have won!", $58
 ; 0x858a4 + 159 bytes
 
-INCBIN "baserom.gbc",$85943,$85957 - $85943
+UnnamedText_85943: ; 0x85943
+	db $0, $52, " received", $4f
+	db "@"
+	TX_RAM $cf4b
+	db $0, "!@@"
+; 0x85957
 
 _UnnamedText_4a35b: ; 0x85957
 	db $0, "HM03 is SURF!", $51
@@ -50893,7 +50994,9 @@ _SafariZoneRestHouse4Text3: ; 0x85c17
 	db "a VAPOREON!", $55
 	db "I wonder why?", $57
 
-INCBIN "baserom.gbc",$85c72,$85c79 - $85c72
+UnnamedText_85c72: ; 0x85c72
+	db $0, "Mew!@@"
+; 0x85c79
 
 _UnnamedText_5da9a: ; 0x85c79
 	db $0, "I wonder if you", $4f
@@ -51061,9 +51164,11 @@ _UnnamedText_76120: ; 0x863ca
 	db "much since you", $55
 	db "first left with", $55
 	db "@"
-; 0x863ca + 122 bytes
-
-INCBIN "baserom.gbc",$86444,$1f
+	TX_RAM $cd6d
+	db $0, "!", $51
+	db $52, ", you have", $4f
+	db "come of age!", $57
+; 0xa86463
 
 _UnnamedText_76125: ; 0x86463
 	db $0, "OAK: ", $53, "! I'm", $4f
