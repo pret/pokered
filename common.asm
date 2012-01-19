@@ -12047,9 +12047,7 @@ OaksLabScript: ; 0x1cb0e
 ; 0x1cb28
 
 OaksLabScripts: ; 0x1cb28
-    dw OaksLabScript0, OaksLabScript1, OaksLabScript2, OaksLabScript3, OaksLabScript4, OaksLabScript5, OaksLabScript6, OaksLabScript7
-
-INCBIN "baserom.gbc",$1cb38,$16
+    dw OaksLabScript0, OaksLabScript1, OaksLabScript2, OaksLabScript3, OaksLabScript4, OaksLabScript5, OaksLabScript6, OaksLabScript7, OaksLabScript8, OaksLabScript9, OaksLabScript10, OaksLabScript11, OaksLabScript12, OaksLabScript13, OaksLabScript14, OaksLabScript15, OaksLabScript16, OaksLabScript17, OaksLabScript18
 
 OaksLabScript0: ; 0x1cb4e
     ld a, [$d74b]
@@ -12212,7 +12210,492 @@ OaksLabScript7: ; 0x1cc72
     ret
 ; 0x1cc80
 
-INCBIN "baserom.gbc",$1cc80,$402
+OaksLabScript8: ; 0x1cc80
+	ld a, [$d717]
+	cp $b0
+	jr z, .asm_1cc8d ; 0x1cc85 $6
+	cp $b1
+	jr z, .asm_1cca8 ; 0x1cc89 $1d
+	jr .asm_1ccc5 ; 0x1cc8b $38
+.asm_1cc8d
+	ld de, $4c9c
+	ld a, [$d361]
+	cp $4
+	jr z, .asm_1ccf3 ; 0x1cc95 $5c
+	ld de, $4ca3
+	jr .asm_1ccf3 ; 0x1cc9a $57
+	nop
+	nop
+	ret nz
+	ret nz
+	ret nz
+	ld b, b
+	rst $38
+	nop
+	ret nz
+	ret nz
+	ret nz
+	rst $38
+.asm_1cca8
+	ld de, $4cb7
+	ld a, [$d361]
+	cp $4
+	jr z, .asm_1ccf3 ; 0x1ccb0 $41
+	ld de, $4cbf
+	jr .asm_1ccf3 ; 0x1ccb5 $3c
+	nop
+	nop
+	ret nz
+	ret nz
+	ret nz
+	ret nz
+	ld b, b
+	rst $38
+	nop
+	ret nz
+	ret nz
+	ret nz
+	ret nz
+	rst $38
+.asm_1ccc5
+	ld de, $4cef
+	ld a, [$d362]
+	cp $9
+	jr nz, .asm_1ccf3 ; 0x1cccd $24
+	push hl
+	ld a, $1
+	ld [$ff00+$8c], a
+	ld a, $4
+	ld [$ff00+$8b], a
+	call $34fc
+	push hl
+	ld [hl], $4c
+	inc hl
+	inc hl
+	ld [hl], $0
+	pop hl
+	inc h
+	ld [hl], $8
+	inc hl
+	ld [hl], $9
+	ld de, $4cf1
+	pop hl
+	jr .asm_1ccf3 ; 0x1cced $4
+	nop
+	ret nz
+	ret nz
+	rst $38
+.asm_1ccf3
+	ld a, $1
+	ld [$ff00+$8c], a
+	call $363a
+	ld a, $9
+	ld [$d5f0], a
+	ret
+; 0x1cd00
+
+OaksLabScript9: ; 0x1cd00
+	ld a, [$d730]
+	bit 0, a
+	ret nz
+	ld a, $fc
+	ld [$cd6b], a
+	ld a, $1
+	ld [$ff00+$8c], a
+	ld a, $4
+	ld [$ff00+$8d], a
+	call $34a6
+	ld a, $d
+	ld [$ff00+$8c], a
+	call $2920
+	ld a, [$cd3e]
+	cp $2
+	jr nz, .asm_1cd28 ; 0x1cd22 $4
+	ld a, $2b
+	jr .asm_1cd32 ; 0x1cd26 $a
+.asm_1cd28
+	cp $3
+	jr nz, .asm_1cd30 ; 0x1cd2a $4
+	ld a, $2c
+	jr .asm_1cd32 ; 0x1cd2e $2
+.asm_1cd30
+	ld a, $2d
+.asm_1cd32
+	ld [$cc4d], a
+	ld a, $11
+	call Predef
+	call Delay3
+	ld a, [$cd3d]
+	ld [$d715], a
+	ld [$cf91], a
+	ld [$d11e], a
+	call GetMonName
+	ld a, $1
+	ld [$ff00+$8c], a
+	ld a, $4
+	ld [$ff00+$8d], a
+	call $34a6
+	ld a, $e
+	ld [$ff00+$8c], a
+	call $2920
+	ld hl, $d74b
+	set 2, [hl]
+	xor a
+	ld [$cd6b], a
+	ld a, $a
+	ld [$d5f0], a
+	ret
+; 0x1cd6d
+
+OaksLabScript10: ; 0x1cd6d
+	ld a, [$d361]
+	cp $6
+	ret nz
+	ld a, $1
+	ld [$ff00+$8c], a
+	xor a
+	ld [$ff00+$8d], a
+	call $34a6
+	ld a, $8
+	ld [$d528], a
+	ld c, $2
+	ld a, $de
+	call $23a1
+	ld a, $f
+	ld [$ff00+$8c], a
+	call $2920
+	ld a, $1
+	ld [$ff00+$9b], a
+	ld a, $1
+	swap a
+	ld [$ff00+$95], a
+	ld a, $22
+	call Predef
+	ld a, [$ff00+$95]
+	dec a
+	ld [$ff00+$95], a
+	ld a, $20
+	call Predef
+	ld de, $cc97
+	ld a, $1
+	ld [$ff00+$8c], a
+	call $363a
+	ld a, $b
+	ld [$d5f0], a
+	ret
+; 0x1cdb9
+
+OaksLabScript11: ; 0x1cdb9
+	ld a, [$d730]
+	bit 0, a
+	ret nz
+	ld a, $e1
+	ld [$d059], a
+	ld a, [$d715]
+	cp $b1
+	jr nz, .asm_1cdcf ; 0x1cdc9 $4
+	ld a, $1
+	jr .asm_1cdd9 ; 0x1cdcd $a
+.asm_1cdcf
+	cp $99
+	jr nz, .asm_1cdd7 ; 0x1cdd1 $4
+	ld a, $2
+	jr .asm_1cdd9 ; 0x1cdd5 $2
+.asm_1cdd7
+	ld a, $3
+.asm_1cdd9
+	ld [$d05d], a
+	ld a, $1
+	ld [$cf13], a
+	call $32ef
+	ld hl, $53be
+	ld de, $53c3
+	call $3354
+	ld hl, $d72d
+	set 6, [hl]
+	set 7, [hl]
+	xor a
+	ld [$cd6b], a
+	ld a, $8
+	ld [$d528], a
+	ld a, $c
+	ld [$d5f0], a
+	ret
+; 0x1ce03
+
+OaksLabScript12: ; 0x1ce03
+	ld a, $f0
+	ld [$cd6b], a
+	ld a, $8
+	ld [$d528], a
+	call $2429
+	ld a, $1
+	ld [$cf13], a
+	call $32f9
+	ld a, $1
+	ld [$ff00+$8c], a
+	xor a
+	ld [$ff00+$8d], a
+	call $34a6
+	ld a, $7
+	call Predef
+	ld hl, $d74b
+	set 3, [hl]
+	ld a, $d
+	ld [$d5f0], a
+	ret
+; 0x1ce32
+
+OaksLabScript13: ; 0x1ce32
+	ld c, $14
+	call $3739
+	ld a, $10
+	ld [$ff00+$8c], a
+	call $2920
+	ld b, $2
+	ld hl, $5b47
+	call Bankswitch
+	ld a, $1
+	ld [$ff00+$8c], a
+	ld de, $4e66
+	call $363a
+	ld a, [$d362]
+	cp $4
+	jr nz, .asm_1ce5b ; 0x1ce55 $4
+	ld a, $c0
+	jr .asm_1ce5d ; 0x1ce59 $2
+.asm_1ce5b
+	ld a, $80
+.asm_1ce5d
+	ld [$cc5b], a
+	ld a, $e
+	ld [$d5f0], a
+	ret
+; 0x1ce66
+
+	; 0x1ce66
+	db $E0,0,0,0,0,0,$FF
+
+OaksLabScript14: ; 0x1ce6d
+	ld a, [$d730]
+	bit 0, a
+	jr nz, .asm_1ce8c ; 0x1ce72 $18
+	ld a, $2a
+	ld [$cc4d], a
+	ld a, $11
+	call Predef
+	xor a
+	ld [$cd6b], a
+	call $2307
+	ld a, $12
+	ld [$d5f0], a
+	jr .asm_1ceaf ; 0x1ce8a $23
+.asm_1ce8c
+	ld a, [$cf0f]
+	cp $5
+	jr nz, .asm_1cea8 ; 0x1ce91 $15
+	ld a, [$d362]
+	cp $4
+	jr nz, .asm_1cea1 ; 0x1ce98 $7
+	ld a, $c
+	ld [$c109], a
+	jr .asm_1ceaf ; 0x1ce9f $e
+.asm_1cea1
+	ld a, $8
+	ld [$c109], a
+	jr .asm_1ceaf ; 0x1cea6 $7
+.asm_1cea8
+	cp $4
+	ret nz
+	xor a
+	ld [$c109], a
+.asm_1ceaf
+	ret
+; 0x1ceb0
+
+OaksLabScript15: ; 0x1ceb0
+	xor a
+	ld [$ff00+$b4], a
+	call $3c3c
+	ld a, $ff
+	ld [$c0ee], a
+	call $23b1
+	ld b, $2
+	ld hl, $5b47
+	call Bankswitch
+	ld a, $15
+	ld [$ff00+$8c], a
+	call $2920
+	call $502b
+	ld a, $2a
+	ld [$cc4d], a
+	ld a, $15
+	call Predef
+	ld a, [$cd37]
+	ld [$d157], a
+	ld b, $0
+	ld c, a
+	ld hl, $cc97
+	ld a, $40
+	call $36e0
+	ld [hl], $ff
+	ld a, $1
+	ld [$ff00+$8c], a
+	ld de, $cc97
+	call $363a
+	ld a, $10
+	ld [$d5f0], a
+	ret
+; 0x1cefd
+
+Function1CEFD ; 0x1cefd
+	ld a, $1
+	ld [$ff00+$8c], a
+	ld a, $4
+	ld [$ff00+$8d], a
+	call $34a6
+	ld a, $8
+	ld [$ff00+$8c], a
+	xor a
+	ld [$ff00+$8d], a
+	jp $34a6
+; 0x1cf12
+
+OaksLabScript16: ; 0x1cf12
+	ld a, [$d730]
+	bit 0, a
+	ret nz
+	call $3c3c
+	call $2307
+	ld a, $fc
+	ld [$cd6b], a
+	call $4efd
+	ld a, $16
+	ld [$ff00+$8c], a
+	call $2920
+	call $20af
+	call $4efd
+	ld a, $17
+	ld [$ff00+$8c], a
+	call $2920
+	call $20af
+	call $4efd
+	ld a, $18
+	ld [$ff00+$8c], a
+	call $2920
+	call $20af
+	ld a, $19
+	ld [$ff00+$8c], a
+	call $2920
+	call Delay3
+	ld a, $2f
+	ld [$cc4d], a
+	ld a, $11
+	call Predef
+	ld a, $30
+	ld [$cc4d], a
+	ld a, $11
+	call Predef
+	call $4efd
+	ld a, $1a
+	ld [$ff00+$8c], a
+	call $2920
+	ld a, $1
+	ld [$ff00+$8c], a
+	ld a, $c
+	ld [$ff00+$8d], a
+	call $34a6
+	call Delay3
+	ld a, $1b
+	ld [$ff00+$8c], a
+	call $2920
+	ld hl, $d74b
+	set 5, [hl]
+	ld hl, $d74e
+	set 0, [hl]
+	ld a, $1
+	ld [$cc4d], a
+	ld a, $11
+	call Predef
+	ld a, $2
+	ld [$cc4d], a
+	ld a, $15
+	call Predef
+	ld a, [$d157]
+	ld b, $0
+	ld c, a
+	ld hl, $cc97
+	xor a
+	call $36e0
+	ld [hl], $ff
+	ld a, $ff
+	ld [$c0ee], a
+	call $23b1
+	ld b, $2
+	ld hl, $5b47
+	call Bankswitch
+	ld a, $1
+	ld [$ff00+$8c], a
+	ld de, $cc97
+	call $363a
+	ld a, $11
+	ld [$d5f0], a
+	ret
+; 0x1cfd4
+
+OaksLabScript17: ; 0x1cfd4
+	ld a, [$d730]
+	bit 0, a
+	ret nz
+	call $2307
+	ld a, $2a
+	ld [$cc4d], a
+	ld a, $11
+	call Predef
+	ld hl, $d7eb
+	set 0, [hl]
+	res 1, [hl]
+	set 7, [hl]
+	ld a, $22
+	ld [$cc4d], a
+	ld a, $15
+	call Predef
+	ld a, $5
+	ld [$d5f1], a
+	xor a
+	ld [$cd6b], a
+	ld a, $12
+	ld [$d5f0], a
+	ret
+; 0x1d009
+
+OaksLabScript18: ; 0x1d009
+	ret
+; 0x1d00a
+
+Function1D00A: ; 0x1d00a
+	ld hl, $d31e
+	ld bc, $0000
+.asm_1d010
+	ld a, [hli]
+	cp $ff
+	ret z
+	cp $46
+	jr z, .asm_1d01c ; 0x1d016 $4
+	inc hl
+	inc c
+	jr .asm_1d010 ; 0x1d01a $f4
+.asm_1d01c
+	ld hl, $d31d
+	ld a, c
+	ld [$cf92], a
+	ld a, $1
+	ld [$cf96], a
+	jp $2bbb
+; 0x1d02b
+
+
+INCBIN "baserom.gbc",$1d02b,$1d082-$1d02b
 
 OaksLabTexts: ; 0x1d082
     dw OaksLabText1, OaksLabText2, OaksLabText3, OaksLabText4, OaksLabText5, OaksLabText6, OaksLabText7, OaksLabText8, OaksLabText9, OaksLabText10, OaksLabText11, OaksLabText12, OaksLabText13, OaksLabText14, OaksLabText15, OaksLabText16, OaksLabText17, OaksLabText18, OaksLabText19, OaksLabText20, OaksLabText21, OaksLabText22, OaksLabText23, OaksLabText24, OaksLabText25, OaksLabText26, OaksLabText27, OaksLabText28, OaksLabText29, OaksLabText30, OaksLabText31, OaksLabText32, OaksLabText33, OaksLabText34, OaksLabText35, OaksLabText36, OaksLabText37, OaksLabText38
