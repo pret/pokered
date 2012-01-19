@@ -33465,12 +33465,12 @@ Route9Texts: ; 0x556d5
 	dw Route9Text1, Route9Text2, Route9Text3, Route9Text4, Route9Text5, Route9Text6, Route9Text7, Route9Text8, Route9Text9, Route9Text10, Route9Text11
 
 Route12Text13: ; 0x556eb
-
-INCBIN "baserom.gbc",$556eb,$556f0 - $556eb
-
+	TX_RAM $cf30
+	db $d7, $92
 Route12Text14: ; 0x556f0
+	db $57
 
-INCBIN "baserom.gbc",$556f0,$55758 - $556f0
+INCBIN "baserom.gbc",$556f1,$55758 - $556f1
 
 Route9Text1: ; 0x55758
 	db $8 ; asm
