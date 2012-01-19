@@ -20,3 +20,7 @@ baserom.sgm
 baserom.sav
 pokered.sgm
 pokered.sav
+
+#for vim configuration
+#url: http://www.vim.org/scripts/script.php?script_id=441
+.lvimrc

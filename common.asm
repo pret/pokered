@@ -62112,7 +62112,11 @@ _UnnamedText_72d2: ; 0xa4014
     db "Please wait.", $57
 ; 0xa4014 + 40 bytes
 
-INCBIN "baserom.gbc",$a403c,$a4051 - $a403c
+UnnamedText_a403c: ; 0xa403c
+    TX_RAM $cd6d
+    db $0, " used", $4f
+    db "STRENGTH.@@"
+; 0xa4051
 
 _UnnamedText_cdbb: ; 0xa4051
     TX_RAM $cd6d
@@ -62172,7 +62176,12 @@ _UnnamedText_1342f: ; 0xa4168
     db "here.", $58
 ; 0xa4168 + 24 bytes
 
-INCBIN "baserom.gbc",$a4180,$a418f - $a4180
+UnnamedText_a4180: ; 0xa4180
+    db $0, $52, " got", $4f
+    db "@"
+    TX_RAM $cd6d
+    db $0, "!@@"
+; 0xa418f
 
 _UnnamedText_4fe3f: ; 0xa418f
     db $0, "There's no more", $4f
@@ -62180,7 +62189,14 @@ _UnnamedText_4fe3f: ; 0xa418f
     db "@"
 ; 0xa418f + 32 bytes
 
-INCBIN "baserom.gbc",$a41af,$a41d6 - $a41af
+UnnamedText_a41af: ; 0xa41af
+    TX_RAM $de06
+    db $0, " was", $55
+    db "sent to #MON", $55
+    db "BOX @"
+    TX_RAM $cf4b
+    db $0, " on PC!", $57
+; 0xa41ca + 12 bytes = 0xa41d6
 
 _UnnamedText_4fe44: ; 0xa41d6
     db $0, "There's no more", $4f
@@ -62271,7 +62287,10 @@ _UnnamedText_191ca: ; 0xa45ea
     db "have this TM.", $58
 ; 0xa45ea + 176 bytes
 
-INCBIN "baserom.gbc",$a469a,$a46ad - $a469a
+ReceivedTM42Text: ; 0xa469a
+    db $0, $52, " received", $4f
+    db "TM42!@@"
+; 0xa46ad
 
 _UnnamedText_191d5: ; 0xa46ad
     db $0, "TM42 contains", $4f
@@ -62519,7 +62538,16 @@ _UnnamedText_196d9: ; 0xa4f27
     db "you believe me?", $57
 ; 0xa4f27 + 91 bytes
 
-INCBIN "baserom.gbc",$a4f82,$a4fb3 - $a4f82
+ReceivedTM28Text: ; 0xa4f82
+    db $0, $52, " recovered", $4f
+    db "TM28!@@"
+; 0xa4f96
+
+UnnamedText_a4f96: ; 0xa4f96
+    db $0, $51
+    db "I better get", $4f
+    db "moving! Bye!@@"
+; 0xa4fb3
 
 _UnnamedText_196e9: ; 0xa4fb3
     db $0, "Make room for", $4f
@@ -62848,7 +62876,12 @@ _UnnamedText_199d2: ; 0xa5afd
     db "dropping by!", $58
 ; 0xa5afd + 93 bytes
 
-INCBIN "baserom.gbc",$a5b5a,$a5b6e - $a5b5a
+UnnamedText_a5b5a: ; 0xa5b5a
+    db $0, $52, " received", $4f
+    db "@"
+    TX_RAM $cf4b
+    db $0, "!@@"
+; 0xa5b6e
 
 _UnnamedText_199dd: ; 0xa5b6e
     db $0, "TM41 teaches", $4f
@@ -63243,7 +63276,10 @@ _UnnamedText_da4c: ; 0xa685e
     db "@"
 ; 0xa685e + 11 bytes
 
-INCBIN "baserom.gbc",$a6869,$a686f - $a6869
+UnnamedText_a6869: ; 0xa6869
+    TX_RAM $cd6d
+    db $0, "!", $58
+; 0xa686f
 
 _UnnamedText_da51: ; 0xa686f
     db $0, "There's no place", $4f
@@ -63256,7 +63292,10 @@ _UnnamedText_df24: ; 0xa688c
     db "@"
 ; 0xa688c + 7 bytes
 
-INCBIN "baserom.gbc",$a6893,$a689e - $a6893
+UnnamedText_a6893: ; 0xa6893
+    TX_RAM $cf4b
+    db $0, " rose.", $58
+; 0xa689e
 
 _UnnamedText_df29: ; 0xa689e
     db $0, "It won't have any", $4f
@@ -63285,14 +63324,19 @@ _UnnamedText_e210: ; 0xa690c
     db "#MON woke up.", $58
 ; 0xa690c + 28 bytes
 
-INCBIN "baserom.gbc",$a6928,$a6940 - $a6928
+UnnamedText_a6928: ; 0xa6928
+    db $0, $52, " played the", $4f
+    db "# FLUTE.@@"
+; 0xa6940
 
 _UnnamedText_e247: ; 0xa6940
     db $0, "Coins", $4f
     db "@"
 ; 0xa6940 + 8 bytes
-
-INCBIN "baserom.gbc",$a6948,$a694f - $a6948
+    db $2, $a4, $d5, $c2
+; 0xa694c
+    db $0, " ", $58
+; 0xa694f
 
 _UnnamedText_e30d: ; 0xa694f
     db $0, "Yes! ITEMFINDER", $4f
@@ -63331,7 +63375,85 @@ _UnnamedText_e471: ; 0xa6a0d
     db $0, "PP was restored.", $58
 ; 0xa6a0d + 18 bytes
 
-INCBIN "baserom.gbc",$a6a1f,$175
+UnnamedText_a6a1f: ; 0xa6a1f
+    db $0, "Booted up a TM!", $58
+; 0xa6a30
+
+UnnamedText_a6a30: ; 0xa6a30
+    db $0, "Booted up an HM!", $58
+; 0xa6a42
+
+UnnamedText_a6a42: ; 0xa6a42
+    db $0, "It contained", $4f
+    db "@"
+    TX_RAM $cf4b
+    db $0, "!", $51
+    db "Teach @"
+    TX_RAM $cf4b
+    db $0, $4f
+    db "to a #MON?", $57
+; 0xa6a6e
+
+UnnamedText_a6a6e: ; 0xa6a6e
+    TX_RAM $cd6d
+    db $0, " is not", $4f
+    db "compatible with", $55
+    db "@"
+    TX_RAM $cf4b
+    db $0, ".", $51
+    db "It can't learn", $4f
+    db "@"
+; 0xa6a8b + 21 bytes = 0xa6aa0
+
+UnnamedText_a6aa0: ; 0xa6aa0
+    TX_RAM $cf4b
+    db $0, ".", $58
+; 0xa6aa0 + 6 bytes = 0xa6aa6
+
+UnnamedText_a6aa6: ; 0xa6aa6
+    db $0, "OAK: ", $52, "!", $4f
+    db "This isn't the", $55
+    db "time to use that! ", $58
+; 0xa6aa6 + 42 bytes = 0xa6ad0
+
+UnnamedText_a6ad0: ; 0xa6ad0
+    db $0, "This isn't yours", $4f
+    db "to use!", $58
+; 0xa6ad0 + 25 bytes = 0xa6ae9
+
+UnnamedText_a6ae9: ; 0xa6ae9
+    db $0, "It won't have any", $4f
+    db "effect.", $58
+; 0xa6ae9 + 26 bytes = 0xa6b03
+
+UnnamedText_a6b03: ; 0xa6b03
+    db $0, "The trainer", $4f
+    db "blocked the BALL!", $58
+; 0xa6b03 + 31 bytes = 0xa6b22
+
+UnnamedText_a6b22: ; 0xa6b22
+    db $0, "Don't be a thief!", $58
+; 0xa6b22 + 18 bytes = 0xa6b34
+
+UnnamedText_a6b34: ; 0xa6b34
+    db $0, "No cycling", $4e, "allowed here.", $58
+; 0xa6b34 + 26 bytes = 0xa6b4e
+
+UnnamedText_a6b4e: ; 0xa6b4e
+    db $0, "No SURFing on", $4f
+    db "@"
+; 0xa6b4e + 16 bytes = 0xa6b5e
+
+UnnamedText_a6b5e: ; 0xa6b5e
+    TX_RAM $cd6d
+    db $0, " here!", $58
+; 0xa6b5e + 11 bytes = 0xa6b69
+
+UnnamedText_a6b69: ; 0xa6b69
+    db $0, "The #MON BOX", $4f
+    db "is full! Can't", $55
+    db "use that item!", $58
+; 0xa6b69 + 43 bytes = 0xa6b94
 
 SECTION "bank2A",DATA,BANK[$2A]
 
@@ -63343,20 +63465,24 @@ _ItemUseText002: ; 0xa8009
     db $0, "!", $57
 ; 0xa800e
 
-INCBIN "baserom.gbc",$a800f,$a801e - $a800f
+UnnamedText_a800f: ; 0xa800f
+    db $0, $52, " got on the@@"
+; 0xa801e
 
 _UnnamedText_e5f7: ; 0xa801e
     TX_RAM $cf4b
     db $0, "!", $58
 ; 0xa801e + 6 bytes
 
-INCBIN "baserom.gbc",$a8024,$a8030 - $a8024
+UnnamedText_a8024: ; 0xa8024
+    db $0, $52, " got off@@"
+; 0xa8030
 
 _UnnamedText_e601: ; 0xa8030
     db $0, "the @"
-; 0xa8030 + 6 bytes
-
-INCBIN "baserom.gbc",$a8036,$a803c - $a8036
+    TX_RAM $cf4b
+    db $0, ".", $58
+; 0xa803c
 
 _UnnamedText_e755: ; 0xa803c
     db $0, "Threw away", $4f
