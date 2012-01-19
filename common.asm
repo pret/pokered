@@ -60391,7 +60391,16 @@ _UnnamedText_561bd: ; 0xa0695
     db "fish?", $57
 ; 0xa0695 + 83 bytes
 
-INCBIN "baserom.gbc",$a06e8,$a0737 - $a06e8
+UnnamedText_a06e8: ; 0xa06e8
+    db $0, "Grand! I like", $4f
+    db "your style!", $51
+    db "Take this and", $4f
+    db "fish, young one!", $51
+    db $52, " received", $4f
+    db "a @"
+    TX_RAM $cf4b
+    db $0, "!@@"
+; 0xa0737
 
 _UnnamedText_56212: ; 0xa0737
     db $0, "Oh... That's so", $4f
@@ -60758,23 +60767,40 @@ _UnnamedText_75dd5: ; 0xa118d
     db "It was @"
 ; 0xa118d + 54 bytes
 
-INCBIN "baserom.gbc",$a11c3,$13
+UnnamedText_a11c3: ; 0xa11c3
+    TX_RAM $cf4b
+    db $0, $4f
+    db "like I think!", $58
+; 0xa11d6
 
 _UnnamedText_610ae: ; 0xa11d6
     db $0, "Oh! That is", $4f
     db "@"
 ; 0xa11d6 + 14 bytes
 
-INCBIN "baserom.gbc",$a11e4,$a1259 - $a11e4
+UnnamedText_a11e4: ; 0xa11e4
+    TX_RAM $cd6d
+    db $0, "!", $51
+    db "It is fossil of", $4f
+    db "@"
+    TX_RAM $cf4b
+    db $0, ", a", $55
+    db "#MON that is", $55
+    db "already extinct!", $51
+    db "My Resurrection", $4f
+    db "Machine will make", $55
+    db "that #MON live", $55
+    db "again!", $57
+; 0xa1259
 
 _UnnamedText_610b3: ; 0xa1259
     db $0, "So! You hurry and", $4f
     db "give me that!", $51
     db $52, " handed", $4f
     db "over @"
-; 0xa1259 + 48 bytes
-
-INCBIN "baserom.gbc",$a1289,$a128f - $a1289
+    TX_RAM $cd6d
+    db $0, "!", $58
+; 0xa128f
 
 _UnnamedText_610b8: ; 0xa128f
     db $0, "I take a little", $4f
@@ -60876,7 +60902,20 @@ _UnnamedText_5ccd9: ; 0xa1636
     db "this, then!", $58
 ; 0xa1636 + 63 bytes
 
-INCBIN "baserom.gbc",$a1675,$a16c5 - $a1675
+UnnamedText_a1675: ; 0xa1675
+    db $0, $52, " received", $4f
+    db "@"
+    TX_RAM $cf4b
+    db $0, "!@@"
+; 0xa1689
+
+UnnamedText_a1689: ; 0xa1689
+    db $0, $51
+    db "TM31 contains my", $4f
+    db "favorite, MIMIC!", $51
+    db "Use it on a good", $4f
+    db "#MON!@@"
+; 0xa16c5
 
 _UnnamedText_5cce9: ; 0xa16c5
     db $0, $52, ": Hi!", $4f
@@ -60889,7 +60928,10 @@ _UnnamedText_5cce9: ; 0xa16c5
     db "It's a scream!", $57
 ; 0xa16c5 + 110 bytes
 
-INCBIN "baserom.gbc",$a1733,$16
+UnnamedText_a1733: ; 0xa1733
+    db $0, "Don't you want", $4f
+    db "this?@@"
+; 0xa1749
 
 _CopycatsHouseF2Text2: ; 0xa1749
     db $0, "DODUO: Giiih!", $51
@@ -61058,7 +61100,17 @@ _UnnamedText_5d162: ; 0xa1bb4
     db "you my powers!", $57
 ; 0xa1bb4 + 191 bytes
 
-INCBIN "baserom.gbc",$a1c73,$a1cdc - $a1c73
+UnnamedText_a1c73: ; 0xa1c73
+    db $0, "I'm", $4f
+    db "shocked!", $55
+    db "But, a loss is a", $55
+    db "loss.", $51
+    db "I admit I didn't", $4f
+    db "work hard enough", $55
+    db "to win!", $51
+    db "You earned the", $4f
+    db "MARSHBADGE!@@"
+; 0xa1cdc
 
 _UnnamedText_5d16e: ; 0xa1cdc
     db $0, "Everyone has", $4f
@@ -61082,7 +61134,10 @@ _UnnamedText_5d173: ; 0xa1d16
     db "this TM with you!", $57
 ; 0xa1d16 + 183 bytes
 
-INCBIN "baserom.gbc",$a1dcd,$a1de0 - $a1dcd
+UnnamedText_a1dcd: ; 0xa1dcd
+    db $0, $52, " received", $4f
+    db "TM46!@@"
+; 0xa1de0
 
 _UnnamedText_5d17d: ; 0xa1de0
     db $0, $51
@@ -61309,7 +61364,15 @@ _UnnamedText_1de75: ; 0xa24fe
     db "You wanted this!", $58
 ; 0xa24fe + 44 bytes
 
-INCBIN "baserom.gbc",$a252a,$a253e - $a252a
+UnnamedText_a252a: ; 0xa252a
+    db $0, $52, " received", $4f
+    db "@"
+; 0xa2537
+
+UnnamedText_a2537: ; 0xa2537
+    TX_RAM $cf4b
+    db $0, "!@@"
+; 0xa253e
 
 _UnnamedText_1de80: ; 0xa253e
     db $0, "TM29 is PSYCHIC!", $51
@@ -61354,9 +61417,9 @@ _UnnamedText_6e11: ; 0xa2619
     db $0, "?", $4f
     db "That will be", $55
     db $f0, "@"
-; 0xa2619 + 21 bytes
-
-INCBIN "baserom.gbc",$a262e,$a2639 - $a262e
+    db $2, $9f, $ff, $c3
+    db $0, ". OK?", $57
+; 0xa2639
 
 _UnnamedText_6e16: ; 0xa2639
     db $0, "Here you are!", $4f
@@ -61381,9 +61444,9 @@ _UnnamedText_6e25: ; 0xa2690
 _UnnamedText_6e2a: ; 0xa26ae
     db $0, "I can pay you", $4f
     db $f0, "@"
-; 0xa26ae + 17 bytes
-
-INCBIN "baserom.gbc",$a26bf,$a26cf - $a26bf
+    db $2, $9f, $ff, $c3 ; XXX
+    db $0, " for that.", $57
+; 0xa26cf
 
 _UnnamedText_6e2f: ; 0xa26cf
     db $0, "You don't have", $4f
@@ -61404,7 +61467,16 @@ _UnnamedText_6e3e: ; 0xa2719
     db "else I can do?", $57
 ; 0xa2719 + 34 bytes
 
-INCBIN "baserom.gbc",$a273b,$a2750 - $a273b
+UnnamedText_a273b: ; 0xa273b
+    TX_RAM $d036
+    db $0, " learned", $4f
+    db "@"
+; 0xa2749
+
+UnnamedText_a2749: ; 0xa2749
+    TX_RAM $cf4b
+    db $0, "!@@"
+; 0xa2750
 
 _UnnamedText_6fb4: ; 0xa2750
     db $0, "Which move should", $4e, "be forgotten?", $57
@@ -61415,7 +61487,10 @@ _UnnamedText_6fb9: ; 0xa2771
     db "@"
 ; 0xa2771 + 19 bytes
 
-INCBIN "baserom.gbc",$a2784,$a278a - $a2784
+UnnamedText_a2784: ; 0xa2784
+    TX_RAM $cf4b
+    db $0, "?", $57
+; 0xa278a
 
 _UnnamedText_6fbe: ; 0xa278a
     TX_RAM $d036
@@ -61424,7 +61499,10 @@ _UnnamedText_6fbe: ; 0xa278a
     db "@"
 ; 0xa278a + 20 bytes
 
-INCBIN "baserom.gbc",$a279e,$a27a4 - $a279e
+UnnamedText_a279e: ; 0xa279e
+    TX_RAM $cf4b
+    db $0, "!", $58
+; 0xa27a4
 
 _UnnamedText_6fc3: ; 0xa27a4
     TX_RAM $d036
@@ -61433,14 +61511,45 @@ _UnnamedText_6fc3: ; 0xa27a4
     db "@"
 ; 0xa27a4 + 25 bytes
 
-INCBIN "baserom.gbc",$a27bd,$a2830 - $a27bd
+UnnamedText_a27bd: ; 0xa27bd
+    TX_RAM $cf4b
+    db $0, "!", $51
+    db "But, @"
+    TX_RAM $d036
+    db $0, $4f
+    db "can't learn more", $55
+    db "than 4 moves!", $51
+    db "Delete an older", $4f
+    db "move to make room", $55
+    db "for @"
+; 0xa2813
+
+UnnamedText_a2813: ; 0xa2813
+    TX_RAM $cf4b
+    db $0, "?", $57
+; 0xa2819
+
+UnnamedText_a2819: ; 0xa2819
+    db $0, "1, 2 and...@@"
+; 0xa2827
+
+UnnamedText_a2827: ; 0xa2827
+    db $0, " Poof!@@"
+; 0xa2830
 
 _UnnamedText_6fdc: ; 0xa2830
     db $0, $51
     db "@"
 ; 0xa2830 + 3 bytes
 
-INCBIN "baserom.gbc",$a2833,$a284d - $a2833
+UnnamedText_a2833: ; 0xa2833
+    TX_RAM $d036
+    db $0, " forgot", $4f
+    db "@"
+    TX_RAM $cd6d
+    db $0, "!", $51
+    db "And...", $58
+; 0xa284d
 
 _UnnamedText_6fe1: ; 0xa284d
     db $0, "HM techniques", $4f
@@ -61495,7 +61604,9 @@ _UnnamedText_72bd: ; 0xa2985
     db "to save the game.", $57
 ; 0xa2985 + 71 bytes
 
-INCBIN "baserom.gbc",$a29cc,$a29db - $a29cc
+UnnamedText_a29cc: ; 0xa29cc
+    db $0, "Please wait.@@"
+; 0xa29b
 
 _UnnamedText_72c8: ; 0xa29db
     db $0, "The link has been", $4f
