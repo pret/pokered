@@ -43767,7 +43767,7 @@ Tset17_Block:
 
 SECTION "bank1A",DATA,BANK[$1A]
 
-DecrementPP:
+DecrementPP: ; 0x68000
 ; after using a move, decrement pp in battle and (if not transformed?) in party
 	ld a,[de]
 	cp a,STRUGGLE
@@ -43796,12 +43796,16 @@ DecrementPP:
 	add hl,bc
 	dec [hl] ; Decrement PP
 	ret
+; 0x6802f
 
+Version_GFX:
 IF _RED
 	INCBIN "gfx/red/redgreenversion.1bpp"
+	; 80 bytes
 ENDC
 IF _BLUE
 	INCBIN "gfx/blue/blueversion.1bpp"
+	; 64 bytes
 ENDC
 
 Tset05_GFX:
@@ -44282,7 +44286,9 @@ UnnamedText_71d88: ; 0x71d88
 	db $50
 ; 0x71d88 + 5 bytes
 
-INCBIN "baserom.gbc",$71d8d,$71d94 - $71d8d
+UnnamedText_71d8d: ; 0x71d8d
+	TX_FAR _UnnamedText_71d8d ; 0xa80bc
+	db $11, $a, $50
 
 UnnamedText_71d94: ; 0x71d94
 	TX_FAR _UnnamedText_71d94
@@ -45120,7 +45126,7 @@ INCBIN "baserom.gbc",$748D6,$116
 ViridianGymTexts: ; 0x749ec
 	dw ViridianGymText1, ViridianGymText2, ViridianGymText3, ViridianGymText4, ViridianGymText5, ViridianGymText6, ViridianGymText7, ViridianGymText8, ViridianGymText9, ViridianGymText10, ViridianGymText11, ViridianGymText12, ViridianGymText13, ViridianGymText14
 
-INCBIN "baserom.gbc",$74a02 + 6,$67 - 6
+INCBIN "baserom.gbc",$74a08,$61
 
 ViridianGymText1: ; 0x74a69
 	db $08 ; asm
@@ -46004,7 +46010,7 @@ SafariZoneEntranceScript0: ; 0x751e7
 	ret
 ; 0x75221
 
-INCBIN "baserom.gbc",$75221,$75226 - $75221
+db $2, $3, $2, $4, $ff
 
 SafariZoneEntranceScript1: ; 0x75226
 	call $52b4
@@ -63873,7 +63879,7 @@ _UnnamedText_71d88: ; 0xa809a
 	db "cable like so!", $58
 ; 0xa809a + 34 bytes
 
-UnnamedText_a80bc: ; 0xa80bc
+_UnnamedText_71d8d: ; 0xa80bc
 	db $0, $52, " traded", $4f
 	db "@"
 
