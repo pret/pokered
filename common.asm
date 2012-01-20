@@ -3099,11 +3099,11 @@ db $03
 ;Safari Zone
 SafariZone_mh: ;0x82AF - 0x82B7
 db $80
-	dw $7C2E ;Channel 1
+	dw SafariZone_md_1 ;Channel 1
 db $01
-	dw $7C6A ;Channel 2
+	dw SafariZone_md_2 ;Channel 2
 db $02
-	dw $7C94 ;Channel 3
+	dw SafariZone_md_3 ;Channel 3
 
 ;Pokemon Get Healed
 PkmnHealed_mh: ;0x82B8 - 0x82C0
