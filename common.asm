@@ -3108,11 +3108,11 @@ db $02
 ;Pokemon Get Healed
 PkmnHealed_mh: ;0x82B8 - 0x82C0
 db $80
-	dw $5BA3 ;Channel 1
+	dw PkmnHealed_md_1 ;Channel 1
 db $01
-	dw $5BC4 ;Channel 2
+	dw PkmnHealed_md_2 ;Channel 2
 db $02
-	dw $5BD2 ;Channel 3
+	dw PkmnHealed_md_3 ;Channel 3
 
 ;Routes 1 and 2
 Routes1_mh: ;0x82C1 - 0x82CC
@@ -3173,7 +3173,16 @@ db $03
 ; The start and stop of these byte ranges were based off the theory they're lined
 ; consecutively (Right up against each other).
 
-INCBIN "baserom.gbc",$82FD,$9bde - $82FD
+INCBIN "baserom.gbc",$82FD,$9ba3 - $82FD
+
+PkmnHealed_md_1: ;9BA3 - 9BC3
+INCBIN "baserom.gbc",$9ba3,$9bc4 - $9ba3
+
+PkmnHealed_md_2: ;9BC4 - 9BD1
+INCBIN "baserom.gbc",$9bc4,$9bd2 - $9bc4
+
+PkmnHealed_md_3: ;9BD2 - 9BDD
+INCBIN "baserom.gbc",$9bd2,$9bde - $9bd2
 
 GlobalSongSpeed: ;9bde - 9bdf (2-byte data)
 dw $ED ;Not a pointer, (supposedly) speed of songs on all channels
