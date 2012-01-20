@@ -3175,14 +3175,15 @@ INCBIN "baserom.gbc",$82FD,$A7C5 - $82FD
 ; Music Data
 ; The start and stop of these byte ranges were based off the theory they're lined
 ; consecutively (Right up against each other).
-PalletTown_md_1:
-INCBIN "music/PalletTownCh1.md" ;0xA7C5-0xA85E (153 bytes)
 
-PalletTown_md_2:
-INCBIN "music/PalletTownCh2.md" ;0xA85F-0xA8DD (126 bytes)
+PalletTown_md_1: ; 0xa7c5 (154 bytes)
+INCBIN "baserom.gbc",$a7c5,$a85f - $a7c5
 
-PalletTown_md_3:
-INCBIN "music/PalletTownCh3.md" ;0xA8DE-0xAA75 (407 bytes) ;Suspiciously Big
+PalletTown_md_2: ; 0xa85f (127 bytes)
+INCBIN "baserom.gbc",$a85f,$a8de - $a85f
+
+PalletTown_md_3: ; 0xa8de (408 bytes)
+INCBIN "baserom.gbc",$a8de,$aa76 - $a8de
 
 INCBIN "baserom.gbc",$AA76,$C000 - $AA76
 
