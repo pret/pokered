@@ -3061,11 +3061,11 @@ db $03
 ;SS Anne
 SSAnne_mh: ;0x8288 - 0x8290
 db $80
-	dw $73A7 ;Channel 1
+	dw SSAnne_md_1 ;Channel 1
 db $01
-	dw $7419 ;Channel 2
+	dw SSAnne_md_2 ;Channel 2
 db $02
-	dw $74CB ;Channel 3
+	dw SSAnne_md_3 ;Channel 3
 
 ;Meet Prof. Oak
 MeetProfOak_mh: ;0x8291 - 0x8299
@@ -3201,7 +3201,16 @@ INCBIN "baserom.gbc",$ac32,$acef - $ac32
 Cities1_md_4: ;ACEF - ADAD
 INCBIN "baserom.gbc",$acef,$adae - $acef
 
-INCBIN "baserom.gbc",$adae,$b504 - $adae
+INCBIN "baserom.gbc",$adae,$b3a7 - $adae
+
+SSAnne_md_1: ;B3A7 - B418
+INCBIN "baserom.gbc",$b3a7,$b419 - $b3a7
+
+SSAnne_md_2: ;B419 - B4CA
+INCBIN "baserom.gbc",$b419,$b4cb - $b419
+
+SSAnne_md_3: ;B4CB - B503
+INCBIN "baserom.gbc",$b4cb,$b504 - $b4cb
 
 Cities2_md_1: ;B504 - B568
 INCBIN "baserom.gbc",$b504,$b569 - $b504
