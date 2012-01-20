@@ -3039,24 +3039,24 @@ db $02
 ;Vermillion City
 Vermillion_mh: ;0x8270 - 0x827B
 db $C0
-	dw $79EB ;Channel 1
+	dw Vermillion_md_1 ;Channel 1
 db $01
-	dw $7A61 ;Channel 2
+	dw Vermillion_md_2 ;Channel 2
 db $02
-	dw $7AA6 ;Channel 3
+	dw Vermillion_md_3 ;Channel 3
 db $03
-	dw $7B0D ;Channel 4
+	dw Vermillion_md_4 ;Channel 4
 
 ;Lavender Town
 Lavender_mh: ;0x827C - 0x8287
 db $C0
-	dw $7B58 ;Channel 1
+	dw Lavender_md_1 ;Channel 1
 db $01
-	dw $7B9E ;Channel 2
+	dw Lavender_md_2 ;Channel 2
 db $02
-	dw $7BAE ;Channel 3
+	dw Lavender_md_3 ;Channel 3
 db $03
-	dw $7C21 ;Channel 4
+	dw Lavender_md_4 ;Channel 4
 
 ;SS Anne
 SSAnne_mh: ;0x8288 - 0x8290
@@ -3230,7 +3230,31 @@ INCBIN "baserom.gbc",$b8d4,$b93d - $b8d4
 Cinnabar_md_3: ;B93D - B9EA
 INCBIN "baserom.gbc",$b93d,$b9eb - $b93d
 
-INCBIN "baserom.gbc",$b9eb,$bcbb - $b9eb
+Vermillion_md_1: ;B9EB - BA60
+INCBIN "baserom.gbc",$b9eb,$ba61 - $b9eb
+
+Vermillion_md_2: ;BA61 - BAA5
+INCBIN "baserom.gbc",$ba61,$baa6 - $ba61
+
+Vermillion_md_3: ;BAA6 - BB0C
+INCBIN "baserom.gbc",$baa6,$bb0d - $baa6
+
+Vermillion_md_4: ;BB0D - BB57
+INCBIN "baserom.gbc",$bb0d,$bb58 - $bb0d
+
+Lavender_md_1: ;BB58 - BB9D
+INCBIN "baserom.gbc",$bb58,$bb9e - $bb58
+
+Lavender_md_2: ;BB9E - BBAD
+INCBIN "baserom.gbc",$bb9e,$bbae - $bb9e
+
+Lavender_md_3: ;BBAE - BC20
+INCBIN "baserom.gbc",$bbae,$bc21 - $bbae
+
+Lavender_md_4: ;BC21 - BC2D
+INCBIN "baserom.gbc",$bc21,$bc2e - $bc21
+
+INCBIN "baserom.gbc",$bc2e,$bcbb - $bc2e
 
 Gym_md_1: ;bcbb - bd6a (175 bytes)
 INCBIN "baserom.gbc",$bcbb,$bd6b - $bcbb
