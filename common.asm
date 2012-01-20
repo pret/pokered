@@ -10476,7 +10476,12 @@ UnnamedText_196d9: ; 0x196d9
 	db $50
 ; 0x196d9 + 5 bytes
 
-INCBIN "baserom.gbc",$196de,$196e9 - $196de
+UnnamedText_196de: ; 0x196de
+	TX_FAR ReceivedTM28Text ; 0xa4f82
+	db $0B
+	TX_FAR UnnamedText_a4f96 ; 0xa4f96
+	db $0D, $50
+; 0x196e9
 
 UnnamedText_196e9: ; 0x196e9
 	TX_FAR _UnnamedText_196e9
