@@ -3210,7 +3210,9 @@ MeetProfOak_md_2: ;AFA9 - B03D
 INCBIN "baserom.gbc",$afa9,$b03d - $afa9
 
 MeetProfOak_md_3: ;B03D - B11F
-INCBIN "baserom.gbc",$b03d,$b3a7 - $b03d
+INCBIN "baserom.gbc",$b03d,$b120 - $b03d
+
+INCBIN "baserom.gbc",$b120,$b3a7 - $b120
 
 SSAnne_md_1: ;B3A7 - B418
 INCBIN "baserom.gbc",$b3a7,$b419 - $b3a7
