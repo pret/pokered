@@ -3079,11 +3079,11 @@ db $02
 ;Meet Rival
 MeetRival_mh: ;0x829A - 0x82A2
 db $80
-	dw $7120 ;Channel 1
+	dw MeetRival_md_1 ;Channel 1
 db $01
-	dw $71BB ;Channel 2
+	dw MeetRival_md_2 ;Channel 2
 db $02
-	dw $7233 ;Channel 3
+	dw MeetRival_md_3 ;Channel 3
 
 ;Guy walks you to museum
 MuseumGuy_mh: ;0x82A3 - 0x82AE
@@ -3212,7 +3212,14 @@ INCBIN "baserom.gbc",$afa9,$b03d - $afa9
 MeetProfOak_md_3: ;B03D - B11F
 INCBIN "baserom.gbc",$b03d,$b120 - $b03d
 
-INCBIN "baserom.gbc",$b120,$b3a7 - $b120
+MeetRival_md_1: ;B120 - B1BA
+INCBIN "baserom.gbc",$b120,$b1bb - $b120
+
+MeetRival_md_2: ;B1BB - B232
+INCBIN "baserom.gbc",$b1bb,$b233 - $b1bb
+
+MeetRival_md_3: ;B233 - B3A6
+INCBIN "baserom.gbc",$b233,$b3a7 - $b233
 
 SSAnne_md_1: ;B3A7 - B418
 INCBIN "baserom.gbc",$b3a7,$b419 - $b3a7
