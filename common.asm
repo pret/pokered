@@ -3030,11 +3030,11 @@ db $02
 ;Cinnabar Island
 Cinnabar_mh: ;0x8267-0x826F
 db $80
-	dw $786D ;Channel 1
+	dw Cinnabar_md_1 ;Channel 1
 db $01
-	dw $78D4 ;Channel 2
+	dw Cinnabar_md_2 ;Channel 2
 db $02
-	dw $793D ;Channel 3
+	dw Cinnabar_md_3 ;Channel 3
 
 ;Vermillion City
 Vermillion_mh: ;0x8270 - 0x827B
@@ -3221,7 +3221,16 @@ INCBIN "baserom.gbc",$b73a,$b7b5 - $b73a
 Celedon_md_3: ;B7B5 - B86C
 INCBIN "baserom.gbc",$b7b5,$b86d - $b7b5
 
-INCBIN "baserom.gbc",$b86d,$bcbb - $b86d
+Cinnabar_md_1: ;B86D - B8D3
+INCBIN "baserom.gbc",$b86d,$b8d4 - $b86d
+
+Cinnabar_md_2: ;B8D4 - B93C
+INCBIN "baserom.gbc",$b8d4,$b93d - $b8d4
+
+Cinnabar_md_3: ;B93D - B9EA
+INCBIN "baserom.gbc",$b93d,$b9eb - $b93d
+
+INCBIN "baserom.gbc",$b9eb,$bcbb - $b9eb
 
 Gym_md_1: ;bcbb - bd6a (175 bytes)
 INCBIN "baserom.gbc",$bcbb,$bd6b - $bcbb
