@@ -3070,11 +3070,11 @@ db $02
 ;Meet Prof. Oak
 MeetProfOak_mh: ;0x8291 - 0x8299
 db $80
-	dw $6F59 ;Channel 1
+	dw MeetProfOak_md_1 ;Channel 1
 db $01
-	dw $6FA9 ;Channel 2
+	dw MeetProfOak_md_2 ;Channel 2
 db $02
-	dw $703D ;Channel 3
+	dw MeetProfOak_md_3 ;Channel 3
 
 ;Meet Rival
 MeetRival_mh: ;0x829A - 0x82A2
@@ -3201,7 +3201,16 @@ INCBIN "baserom.gbc",$ac32,$acef - $ac32
 Cities1_md_4: ;ACEF - ADAD
 INCBIN "baserom.gbc",$acef,$adae - $acef
 
-INCBIN "baserom.gbc",$adae,$b3a7 - $adae
+INCBIN "baserom.gbc",$adae,$af59 - $adae
+
+MeetProfOak_md_1: ;AF59 - AFA8
+INCBIN "baserom.gbc",$af59,$afa9 - $af59
+
+MeetProfOak_md_2: ;AFA9 - B03D
+INCBIN "baserom.gbc",$afa9,$b03d - $afa9
+
+MeetProfOak_md_3: ;B03D - B11F
+INCBIN "baserom.gbc",$b03d,$b3a7 - $b03d
 
 SSAnne_md_1: ;B3A7 - B418
 INCBIN "baserom.gbc",$b3a7,$b419 - $b3a7
