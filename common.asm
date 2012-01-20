@@ -3291,7 +3291,14 @@ INCBIN "baserom.gbc",$bbae,$bc21 - $bbae
 Lavender_md_4: ;BC21 - BC2D
 INCBIN "baserom.gbc",$bc21,$bc2e - $bc21
 
-INCBIN "baserom.gbc",$bc2e,$bcbb - $bc2e
+SafariZone_md_1: ;BC2E - BC69
+INCBIN "baserom.gbc",$bc2e,$bc6a - $bc2e
+
+SafariZone_md_2: ;BC6A - BC93
+INCBIN "baserom.gbc",$bc6a,$bc94 - $bc6a
+
+SafariZone_md_3: ;BC94 - BCBA
+INCBIN "baserom.gbc",$bc94,$bcbb - $bc94
 
 Gym_md_1: ;bcbb - bd6a (175 bytes)
 INCBIN "baserom.gbc",$bcbb,$bd6b - $bcbb
