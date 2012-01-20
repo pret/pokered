@@ -2973,7 +2973,6 @@ INCBIN "baserom.gbc",$8000,$822E - $8000
 
 ;Pallet Town
 PalletTown_mh: ;0x822E - 0x8236
-
 db $80
     dw PalletTown_md_1 ;Channel 1 ($A7C5 - $A85E)
 db $01
@@ -3002,13 +3001,13 @@ db $02
 ;Viridian City, Pewter City, Saffron City
 Cities1_mh: ;0x8249 - 0x8254
 db $C0
-	dw $6A76 ;Channel 1
+	dw Cities1_mb_1 ;Channel 1
 db $01
-	dw $6B92 ;Channel 2
+	dw Cities1_mb_2 ;Channel 2
 db $02
-	dw $6C32 ;Channel 3
+	dw Cities1_mb_3 ;Channel 3
 db $03
-	dw $6CEF ;Channel 4
+	dw Cities1_mb_4 ;Channel 4
 
 ;Cerulean City, Fuchsia City
 Cities2_mh: ;0x8255 - 0x825D
@@ -3170,11 +3169,16 @@ db $02
 db $03
 	dw $670F ;Channel 4
 
-INCBIN "baserom.gbc",$82FD,$A7C5 - $82FD
-
 ; Music Data
 ; The start and stop of these byte ranges were based off the theory they're lined
 ; consecutively (Right up against each other).
+
+INCBIN "baserom.gbc",$82FD,$9bde - $82FD
+
+GlobalSongSpeed: ;9bde - 9bdf (2-byte data)
+dw $ED ;Not a pointer, (supposedly) speed of songs on all channels
+
+INCBIN "baserom.gbc",$9be0,$A7C5 - $9be0
 
 PalletTown_md_1: ; a7c5 - a85e (154 bytes)
 INCBIN "baserom.gbc",$a7c5,$a85f - $a7c5
@@ -3185,7 +3189,19 @@ INCBIN "baserom.gbc",$a85f,$a8de - $a85f
 PalletTown_md_3: ; a8de - aa75 (408 bytes)
 INCBIN "baserom.gbc",$a8de,$aa76 - $a8de
 
-INCBIN "baserom.gbc",$aa76,$bcbb - $aa76
+Cities1_mb_1: ;AA76 - AB91
+INCBIN "baserom.gbc",$aa76,$ab92 - $aa76
+
+Cities1_mb_2: ;AB92 - AC02
+INCBIN "baserom.gbc",$ab92,$ac32 - $ab92
+
+Cities1_mb_3: ;AC32 - AC7F
+INCBIN "baserom.gbc",$ac32,$acef - $ac32
+
+Cities1_mb_4: ;ACEF - ADAD
+INCBIN "baserom.gbc",$acef,$adae - $acef
+
+INCBIN "baserom.gbc",$adae,$bcbb - $adae
 
 Gym_md_1: ;bcbb - bd6a (175 bytes)
 INCBIN "baserom.gbc",$bcbb,$bd6b - $bcbb
