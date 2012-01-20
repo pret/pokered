@@ -3001,31 +3001,31 @@ db $02
 ;Viridian City, Pewter City, Saffron City
 Cities1_mh: ;0x8249 - 0x8254
 db $C0
-	dw Cities1_mb_1 ;Channel 1
+	dw Cities1_md_1 ;Channel 1
 db $01
-	dw Cities1_mb_2 ;Channel 2
+	dw Cities1_md_2 ;Channel 2
 db $02
-	dw Cities1_mb_3 ;Channel 3
+	dw Cities1_md_3 ;Channel 3
 db $03
-	dw Cities1_mb_4 ;Channel 4
+	dw Cities1_md_4 ;Channel 4
 
 ;Cerulean City, Fuchsia City
 Cities2_mh: ;0x8255 - 0x825D
 db $80
-	dw $7504 ;Channel 1
+	dw Cities2_md_1 ;Channel 1
 db $01
-	dw $7569 ;Channel 2
+        dw Cities2_md_2 ;Channel 2
 db $02
-	dw $7640 ;Channel 3
+	dw Cities2_md_3 ;Channel 3
 
 ;Celedon City
 Celedon_mh: ;0x825E - 0x8266
 db $80
-	dw $76C7 ;Channel 1
+	dw Celedon_md_1 ;Channel 1
 db $01
-	dw $773A ;Channel 2
+	dw Celedon_md_2 ;Channel 2
 db $02
-	dw $77B5 ;Channel 3
+	dw Celedon_md_3 ;Channel 3
 
 ;Cinnabar Island
 Cinnabar_mh: ;0x8267-0x826F
@@ -3189,19 +3189,39 @@ INCBIN "baserom.gbc",$a85f,$a8de - $a85f
 PalletTown_md_3: ; a8de - aa75 (408 bytes)
 INCBIN "baserom.gbc",$a8de,$aa76 - $a8de
 
-Cities1_mb_1: ;AA76 - AB91
+Cities1_md_1: ;AA76 - AB91
 INCBIN "baserom.gbc",$aa76,$ab92 - $aa76
 
-Cities1_mb_2: ;AB92 - AC02
+Cities1_md_2: ;AB92 - AC02
 INCBIN "baserom.gbc",$ab92,$ac32 - $ab92
 
-Cities1_mb_3: ;AC32 - AC7F
+Cities1_md_3: ;AC32 - AC7F
 INCBIN "baserom.gbc",$ac32,$acef - $ac32
 
-Cities1_mb_4: ;ACEF - ADAD
+Cities1_md_4: ;ACEF - ADAD
 INCBIN "baserom.gbc",$acef,$adae - $acef
 
-INCBIN "baserom.gbc",$adae,$bcbb - $adae
+INCBIN "baserom.gbc",$adae,$b504 - $adae
+
+Cities2_md_1: ;B504 - B568
+INCBIN "baserom.gbc",$b504,$b569 - $b504
+
+Cities2_md_2: ;B569 - B63F
+INCBIN "baserom.gbc",$b569,$b640 - $b569
+
+Cities2_md_3: ;B640 - B6C6
+INCBIN "baserom.gbc",$b640,$b6c7 - $b640
+
+Celedon_md_1: ;B6C7 - B739
+INCBIN "baserom.gbc",$b6c7,$b73a - $b6c7
+
+Celedon_md_2: ;B73A - B7B4
+INCBIN "baserom.gbc",$b73a,$b7b5 - $b73a
+
+Celedon_md_3: ;B7B5 - B86C
+INCBIN "baserom.gbc",$b7b5,$b86d - $b7b5
+
+INCBIN "baserom.gbc",$b86d,$bcbb - $b86d
 
 Gym_md_1: ;bcbb - bd6a (175 bytes)
 INCBIN "baserom.gbc",$bcbb,$bd6b - $bcbb
@@ -3223,7 +3243,7 @@ INCBIN "baserom.gbc",$bf70,$c000 - $bf70
 
 SECTION "bank3",DATA,BANK[$3]
 
-INCBIN "baserom.gbc",$C000,$C23D - $C000 
+INCBIN "baserom.gbc",$C000,$C23D - $C000
 
 ; see also MapHeaderPointers
 MapHeaderBanks: ; 423D
