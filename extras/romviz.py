@@ -20,26 +20,12 @@ analyze_incbins.process_incbins()
 width = 1024
 height = 1024
 
-color_table = {}
-print "creating color table..."
-for value in range(0, 256):
-    color_table[value] = (value, value, value)
+im = Image.new("P", (width, height), 0)
 
-im = Image.new("RGB", (width, height))
-
-print "drawing base color..."
-for pos in range(0, len(extract_maps.rom)):
-    widthx = pos % width
-    heighty = floor(pos / height)
-    #im.putpixel((widthx, heighty), color_table[ord(extract_maps.rom[pos])])
-    im.putpixel((widthx, heighty), (0, 0, 0))
-
-    #print "Searching for incbin... for pos= " + hex(pos)
-    #incbin_found = analyze_incbins.find_incbin_to_replace_for(pos)
-    #if incbin_found == None:
-    #    im.putpixel((widthx, heighty), (0, 0, 0))
-    #else:
-    #    im.putpixel((widthx, heighty), (255, 255, 255))
+im.putpalette([
+    0, 0, 0,
+    126, 30, 156,
+])
 
 print "drawing incbins..."
 for incbin_key in analyze_incbins.processed_incbins:
@@ -50,6 +36,6 @@ for incbin_key in analyze_incbins.processed_incbins:
     for pos in range(start, end+1):
         widthx = pos % width
         heighty = floor(pos / height)
-        im.putpixel((widthx, heighty), (255, 0, 0))
+        im.putpixel((widthx, heighty), 1)
 
 im.save("test.png")
