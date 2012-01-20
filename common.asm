@@ -3088,13 +3088,13 @@ db $02
 ;Guy walks you to museum
 MuseumGuy_mh: ;0x82A3 - 0x82AE
 db $C0
-	dw $6DAE ;Channel 1
+	dw MuseumGuy_md_1 ;Channel 1
 db $01
-	dw $6DF1 ;Channel 2
+	dw MuseumGuy_md_2 ;Channel 2
 db $02
-	dw $6E6E ;Channel 3
+	dw MuseumGuy_md_3 ;Channel 3
 db $03
-	dw $6ED1 ;Channel 4
+	dw MuseumGuy_md_4 ;Channel 4
 
 ;Safari Zone
 SafariZone_mh: ;0x82AF - 0x82B7
@@ -3201,7 +3201,17 @@ INCBIN "baserom.gbc",$ac32,$acef - $ac32
 Cities1_md_4: ;ACEF - ADAD
 INCBIN "baserom.gbc",$acef,$adae - $acef
 
-INCBIN "baserom.gbc",$adae,$af59 - $adae
+MuseumGuy_md_1: ;ADAE - ADF0
+INCBIN "baserom.gbc",$adae,$adf1 - $adae
+
+MuseumGuy_md_2: ;ADF1 - AE6D
+INCBIN "baserom.gbc",$adf1,$ae6e - $adf1
+
+MuseumGuy_md_3: ;AE6E - AED0
+INCBIN "baserom.gbc",$ae6e,$aed1 - $ae6e
+
+MuseumGuy_md_4: ;AED1 - AF58
+INCBIN "baserom.gbc",$aed1,$af59 - $aed1
 
 MeetProfOak_md_1: ;AF59 - AFA8
 INCBIN "baserom.gbc",$af59,$afa9 - $af59
