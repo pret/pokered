@@ -546,7 +546,7 @@ end_08_scripts_with = [
 0xc9, #ret
 ###0xda, 0xe9, 0xd2, 0xc2, 0xca, 0xc3, 0x38, 0x30, 0x20, 0x28, 0x18, 0xd8, 0xd0, 0xc0, 0xc8, 0xc9
 ]
-relative_jumps = [0x38, 0x30, 0x20, 0x28, 0x18, 0xc3]
+relative_jumps = [0x38, 0x30, 0x20, 0x28, 0x18, 0xc3, 0xda]
 relative_unconditional_jumps = [0xc3, 0x18]
 
 #TODO: replace call and a pointer with call and a label
@@ -746,7 +746,7 @@ def output_bank_opcodes(original_offset, max_byte_count=0x4000):
                     if current_byte == 0xc3:
                         if number == 0x3d97: used_3d97 = True
                     #if number == 0x24d7: #jp
-                    if not has_outstanding_labels(byte_labels):
+                    if not has_outstanding_labels(byte_labels) or all_outstanding_labels_are_reverse(byte_labels, offset):
                         keep_reading = False
                         is_data = False
                         break
@@ -754,11 +754,17 @@ def output_bank_opcodes(original_offset, max_byte_count=0x4000):
                 is_data = True
 
             #stop reading at a jump, relative jump or return
-            if current_byte in end_08_scripts_with or (current_byte == 0x18 and target_address < offset):
-                if not has_outstanding_labels(byte_labels) or (current_byte == 0x18 and target_address < offset):
+            if current_byte in end_08_scripts_with:
+                if not has_outstanding_labels(byte_labels) and all_outstanding_labels_are_reverse(byte_labels, offset):
                     keep_reading = False
                     is_data = False #cleanup
                     break
+                else:
+                    is_data = False
+                    keep_reading = True
+            else:
+                is_data = False
+                keep_reading = True
         else:
 #        if is_data and keep_reading:
             output += spacing + "db $" + hex(ord(rom[offset]))[2:] #+ " ; " + hex(offset)
@@ -791,6 +797,13 @@ def has_outstanding_labels(byte_labels):
         real_line = byte_labels[label_line]
         if real_line["definition"] == False: return True
     return False
+
+def all_outstanding_labels_are_reverse(byte_labels, offset):
+    for label_id in byte_labels.keys():
+        line = byte_labels[label_id] # label_id is also the address
+        if line["definition"] == False:
+            if not label_id < offset: return False
+    return True
 
 def text_asm_pretty_printer(label, address_of_08, include_08=True):
     """returns (output, end_address)"""
