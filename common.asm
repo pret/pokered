@@ -10489,7 +10489,7 @@ CeruleanCityText2: ; 0x1967c
 	ld a, [$d75b]
 	bit 7, a
 	jr nz, .asm_4ca20 ; 0x19682 $29
-	ld hl, $56d9
+	ld hl, UnnamedText_196d9
 	call PrintText
 	ld hl, $d72d
 	set 6, [hl]
@@ -10505,21 +10505,21 @@ CeruleanCityText2: ; 0x1967c
 	ld [$d60f], a
 	jp $24d7
 .asm_4ca20 ; 0x196ad
-	ld hl, $56f3
+	ld hl, UnnamedText_196f3
 	call PrintText
 	ld bc, $e401
 	call GiveItem
 	jr c, .asm_8bbbd ; 0x196b9 $8
-	ld hl, $56e9
+	ld hl, UnnamedText_196e9
 	call PrintText
 	jr .asm_e4e6f ; 0x196c1 $13
 .asm_8bbbd ; 0x196c3
 	ld a, $1
 	ld [$cc3c], a
-	ld hl, $56de
+	ld hl, UnnamedText_196de
 	call PrintText
 	ld b, $1d
-	ld hl, $4872
+	ld hl, Unnamed_ASM_74872
 	call Bankswitch
 .asm_e4e6f ; 0x196d6
 	jp $24d7
@@ -10530,7 +10530,12 @@ UnnamedText_196d9: ; 0x196d9
 	db $50
 ; 0x196d9 + 5 bytes
 
-INCBIN "baserom.gbc",$196de,$196e9 - $196de
+UnnamedText_196de: ; 0x196de
+	TX_FAR ReceivedTM28Text ; 0xa4f82
+	db $0B
+	TX_FAR UnnamedText_a4f96 ; 0xa4f96
+	db $0D, $50
+; 0x196e9
 
 UnnamedText_196e9: ; 0x196e9
 	TX_FAR _UnnamedText_196e9
@@ -45467,7 +45472,24 @@ CredPAAD:
 TheEndGfx: ; 473E
 	INCBIN "gfx/theend.2bpp"
 
-INCBIN "baserom.gbc",$747de,$74897 - $747de
+INCBIN "baserom.gbc",$747de,$74872 - $747de
+
+Unnamed_ASM_74872:	; code similar to this appears in a lot of banks; this particular
+	call $20EF		; one is called after you beat the Rocket that gives you TM28 DIG
+	ld a, $07		; the screen then fades out, he disappears, and fades back in
+	ld [$CC4D], a
+	ld a, $15
+	call $3E6D
+	ld a, $09
+	ld [$CC4D], a
+	ld a, $11
+	call $3E6D
+	ld a, $06
+	ld [$CC4D], a
+	ld a, $11
+	call Predef
+	call $20D1
+	ret
 
 ViridianGym_h: ; 0x74897 to 0x748a3 (12 bytes) (id=45)
 	db $07 ; tileset
