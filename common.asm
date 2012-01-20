@@ -3117,13 +3117,13 @@ db $02
 ;Routes 1 and 2
 Routes1_mh: ;0x82C1 - 0x82CC
 db $C0
-	dw $5BDE ;Channel 1
+	dw Routes1_md_1 ;Channel 1
 db $01
-	dw $5C51 ;Channel 2
+	dw Routes1_md_2 ;Channel 2
 db $02
-	dw $5CD8 ;Channel 3
+	dw Routes1_md_3 ;Channel 3
 db $03
-	dw $5D24 ;Channel 4
+	dw Routes1_md_4 ;Channel 4
 
 ;Routes 24 and 25
 Routes2_mh: ;0x82CD - 0x82D8
@@ -3184,10 +3184,19 @@ INCBIN "baserom.gbc",$9bc4,$9bd2 - $9bc4
 PkmnHealed_md_3: ;9BD2 - 9BDD
 INCBIN "baserom.gbc",$9bd2,$9bde - $9bd2
 
-GlobalSongSpeed: ;9bde - 9bdf (2-byte data)
-dw $ED ;Not a pointer, (supposedly) speed of songs on all channels
+Routes1_md_1: ;9BDE - 9C50
+INCBIN "baserom.gbc",$9bde,$9c51 - $9bde
 
-INCBIN "baserom.gbc",$9be0,$A7C5 - $9be0
+Routes1_md_2: ;9C51 - 9CD7
+INCBIN "baserom.gbc",$9c51,$9cd8 - $9c51
+
+Routes1_md_3: ;9CD8 - 9D23
+INCBIN "baserom.gbc",$9cd8,$9d24 - $9cd8
+
+Routes1_md_4: ;9D24 - 9DB8
+INCBIN "baserom.gbc",$9d24,$9db9 - $9d24
+
+INCBIN "baserom.gbc",$9db9,$A7C5 - $9db9
 
 PalletTown_md_1: ; a7c5 - a85e (154 bytes)
 INCBIN "baserom.gbc",$a7c5,$a85f - $a7c5
