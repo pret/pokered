@@ -20,10 +20,11 @@ analyze_incbins.process_incbins()
 width = 1024
 height = 1024
 
-im = Image.new("P", (width, height), 255)
+im = Image.new("P", (width, height), 0)
 
 im.putpalette([
-    0,
+    0, 0, 0,
+    126, 30, 156,
 ])
 
 print "drawing incbins..."
@@ -35,6 +36,6 @@ for incbin_key in analyze_incbins.processed_incbins:
     for pos in range(start, end+1):
         widthx = pos % width
         heighty = floor(pos / height)
-        im.putpixel((widthx, heighty), 0)
+        im.putpixel((widthx, heighty), 1)
 
 im.save("test.png")
