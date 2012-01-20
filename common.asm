@@ -2975,29 +2975,29 @@ INCBIN "baserom.gbc",$8000,$822E - $8000
 PalletTown_mh: ;0x822E - 0x8236
 
 db $80
-    dw PalletTown_md_1 ;Channel 1 ($A7C5)
+    dw PalletTown_md_1 ;Channel 1 ($A7C5 - $A85E)
 db $01
-	dw PalletTown_md_2 ;Channel 2 ($A85f)
+	dw PalletTown_md_2 ;Channel 2 ($A85f - $A8DD)
 db $02
-	dw PalletTown_md_3 ;Channel 3 ($A8DE)
+	dw PalletTown_md_3 ;Channel 3 ($A8DE - $AA75)
 
 ;Pokemon Center
 Pokecenter_mh: ;0x8237 - 0x823F
 db $80
-	dw $7E56 ;Channel 1
+	dw Pokecenter_md_1 ;Channel 1 ($BE56 - $BEF8)
 db $01
-	dw $7EF9 ;Channel 2
+	dw Pokecenter_md_2 ;Channel 2 ($BEF9 - $BF6F)
 db $02
-	dw $7F70 ;Channel 3
+	dw Pokecenter_md_3 ;Channel 3 ($BF70 - $BFFF)
 
 ;Gyms
 Gym_mh: ;0x8240 - 0x8248
 db $80
-	dw $7CBB ;Channel 1
+	dw Gym_md_1 ;Channel 1 ($BCBB - $BD6A)
 db $01
-	dw $7D6B ;Channel 2
+	dw Gym_md_2 ;Channel 2 ($BD6B - $BDF9)
 db $02
-	dw $7DFA ;Channel 3
+	dw Gym_md_3 ;Channel 3 ($BDFA - $BE55)
 
 ;Viridian City, Pewter City, Saffron City
 Cities1_mh: ;0x8249 - 0x8254
@@ -3176,16 +3176,34 @@ INCBIN "baserom.gbc",$82FD,$A7C5 - $82FD
 ; The start and stop of these byte ranges were based off the theory they're lined
 ; consecutively (Right up against each other).
 
-PalletTown_md_1: ; 0xa7c5 (154 bytes)
+PalletTown_md_1: ; a7c5 - a85e (154 bytes)
 INCBIN "baserom.gbc",$a7c5,$a85f - $a7c5
 
-PalletTown_md_2: ; 0xa85f (127 bytes)
+PalletTown_md_2: ; a85f - a8dd (127 bytes)
 INCBIN "baserom.gbc",$a85f,$a8de - $a85f
 
-PalletTown_md_3: ; 0xa8de (408 bytes)
+PalletTown_md_3: ; a8de - aa75 (408 bytes)
 INCBIN "baserom.gbc",$a8de,$aa76 - $a8de
 
-INCBIN "baserom.gbc",$AA76,$C000 - $AA76
+INCBIN "baserom.gbc",$aa76,$bcbb - $aa76
+
+Gym_md_1: ;bcbb - bd6a (175 bytes)
+INCBIN "baserom.gbc",$bcbb,$bd6b - $bcbb
+
+Gym_md_2: ;bd6b - bdf9 (142 bytes)
+INCBIN "baserom.gbc",$bd6b,$bdfa - $bd6b
+
+Gym_md_3: ;bdfa - be55 (91 bytes)
+INCBIN "baserom.gbc",$bdfa,$be56 - $bdfa
+
+Pokecenter_md_1: ;be56 - bef8 (162 bytes)
+INCBIN "baserom.gbc",$be56,$bef9 - $be56
+
+Pokecenter_md_2: ;0xbef9 - bf6f (118 bytes)
+INCBIN "baserom.gbc",$bef9,$bf70 - $bef9
+
+Pokecenter_md_3: ;0xbf70 - bfff (143 bytes)
+INCBIN "baserom.gbc",$bf70,$c000 - $bf70
 
 SECTION "bank3",DATA,BANK[$3]
 
