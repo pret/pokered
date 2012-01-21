@@ -546,7 +546,7 @@ end_08_scripts_with = [
 0xc9, #ret
 ###0xda, 0xe9, 0xd2, 0xc2, 0xca, 0xc3, 0x38, 0x30, 0x20, 0x28, 0x18, 0xd8, 0xd0, 0xc0, 0xc8, 0xc9
 ]
-relative_jumps = [0x38, 0x30, 0x20, 0x28, 0x18, 0xc3, 0xda]
+relative_jumps = [0x38, 0x30, 0x20, 0x28, 0x18, 0xc3, 0xda, 0xc2] 
 relative_unconditional_jumps = [0xc3, 0x18]
 
 #TODO: replace call and a pointer with call and a label
@@ -724,7 +724,7 @@ def output_bank_opcodes(original_offset, max_byte_count=0x4000):
                     number += byte2 << 8;
 
                     insertion = "$%.4x" % (number)
-                    if maybe_byte in call_commands:
+                    if maybe_byte in call_commands or current_byte in relative_unconditional_jumps or current_byte in relative_jumps:
                         if insertion[1:] in asm_commands:
                             insertion = asm_commands[insertion[1:]]
 
