@@ -6,16 +6,16 @@ INCBIN "baserom.gbc",$82FD,$9ba3 - $82FD
 
 ;Pokemon Healed Music
 PkmnHealed_md_1: ;9BA3 - 9BC3
-;INCBIN "baserom.gbc",$9ba3,$9bc4 - $9ba3
 
 ;Setup
-	mus_tempo $0, $90
-	mus_volume $77
-	mus_duty $2
-	db $E8
-	mus_vel $8, $1
+	mus_tempo 0, 144
+	mus_volume 119
+	mus_duty duty50
+	db $E8 ;??
+	mus_vel 8, 1
 
-;Song
+;Music
+	;Piece 1
 	mus_note noteRst, note8
 	db $EB, $00
 	mus_note noteE, note2_4
@@ -33,10 +33,32 @@ PkmnHealed_md_1: ;9BA3 - 9BC3
 	db $EB, $00
 	mus_note noteE, note2_4
 	mus_note noteB, note4
-	mus_end
+	mus_end ;End
 
 PkmnHealed_md_2: ;9BC4 - 9BD1
-INCBIN "baserom.gbc",$9bc4,$9bd2 - $9bc4
+;Setup
+	mus_duty duty50
+
+;Music
+	;Octave Switch
+	db dNormSpd
+	mus_note noteRst, note4
+	db oct3
+	
+	;Piece 1
+	mus_note noteB, note4
+	mus_note noteB, note4
+	mus_note noteB, note8
+	mus_note noteG#, note8
+	
+	;Octave Switch
+	db dNormSpd
+	mus_note noteRst, note4_16
+	db oct4
+	
+	;Piece 2
+	mus_note noteE, note2
+	mus_end ;End
 
 PkmnHealed_md_3: ;9BD2 - 9BDD
 INCBIN "baserom.gbc",$9bd2,$9bde - $9bd2

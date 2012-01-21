@@ -2625,6 +2625,12 @@ oct5		EQU $E2
 oct6		EQU $E1
 oct7		EQU $E0
 
+;duty
+duty12_5	EQU $0
+duty25		EQU $1
+duty50		EQU $2
+duty75		EQU $3
+
 ;Write a music note
 ;format: mus_note pitch delay
 mus_note: MACRO
