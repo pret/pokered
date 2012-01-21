@@ -33,6 +33,7 @@ PkmnHealed_md_1: ;9BA3 - 9BC3
 	db $EB, $00
 	mus_note noteE, note2_4
 	mus_note noteB, note4
+	
 	mus_end ;End
 
 PkmnHealed_md_2: ;9BC4 - 9BD1
@@ -58,10 +59,27 @@ PkmnHealed_md_2: ;9BC4 - 9BD1
 	
 	;Piece 2
 	mus_note noteE, note2
+	
 	mus_end ;End
 
 PkmnHealed_md_3: ;9BD2 - 9BDD
-INCBIN "baserom.gbc",$9bd2,$9bde - $9bd2
+;Music
+	;Octave Switch
+	db dNormSpd
+	mus_note noteC#, note16
+	db oct3
+
+	;Piece 1
+	mus_note noteE, note8
+	mus_note noteRst, note8
+	mus_note noteE, note8
+	mus_note noteRst, note8
+	mus_note noteE, note8
+	mus_note noteG#, note8
+	mus_note noteE, note4_8
+	mus_note noteRst, note8
+	
+	mus_end ;End
 
 ;Routes 1 and 2
 Routes1_md_1: ;9BDE - 9C50
