@@ -10273,7 +10273,7 @@ ViridianCityText6: ; 0x19196
 	ld hl, $51ca
 	call PrintText
 	ld bc,(TM_42 << 8) | 1
-	call $3e2e
+	call GIveItem
 	jr nc, .asm_b655e ; 0x191aa
 	ld hl, $51cf
 	call PrintText
@@ -11190,7 +11190,7 @@ CeladonCityText5: ; 0x1999e
 	ld hl, $59d2
 	call PrintText
 	ld bc,(TM_41 << 8) | 1
-	call $3e2e
+	call GiveItem
 	jr c, .asm_890ec ; 0x199b2
 	ld hl, $59e2
 	call PrintText
@@ -12635,7 +12635,7 @@ Route1Text1: ; 0x1cab8
 	ld hl, $4ae3
 	call PrintText
 	ld bc, (POTION << 8) | 1
-	call $3e2e
+	call GiveItem
 	jr nc, .asm_a630e ; 0x1cace
 	ld hl, $4ae8
 	jr .asm_46d43 ; 0x1cad3
@@ -13628,7 +13628,7 @@ OaksLabText5: ; 0x1d248
 	set 4, [hl]
 	jr nz, .asm_17c30 ; 0x1d2d7
 	ld bc, (POKE_BALL << 8) | 5
-	call $3e2e
+	call GiveItem
 	ld hl, $530e
 	call PrintText
 	jr .asm_0f042 ; 0x1d2e5
@@ -14337,7 +14337,7 @@ BikeShopText1: ; 0x1d745
 	ld hl, $581f
 	call PrintText
 	ld bc,(BICYCLE << 8) | 1
-	call $3e2e
+	call GiveItem
 	jr nc, .asm_d0d90 ; 0x1d769
 	ld a, $2d
 	ldh [$db], a
@@ -14577,7 +14577,7 @@ LavenderHouse1Text5: ; 0x1d918
 	ld hl, $594c
 	call PrintText
 	ld bc, (POKE_FLUTE << 8) | 1
-	call $3e2e
+	call GiveItem
 	jr nc, .asm_5ce36 ; 0x1d92c
 	ld hl, $5951
 	call PrintText
@@ -15109,7 +15109,7 @@ SaffronHouse2Text1: ; 0x1de41
 	ld hl, $5e75
 	call PrintText
 	ld bc,(TM_29 << 8) | 1
-	call $3e2e
+	call GiveItem
 	jr nc, .asm_4b1da ; 0x1de55
 	ld hl, $5e7a
 	call PrintText
@@ -15855,7 +15855,7 @@ Route16HouseText1: ; 0x1e5ff
 	ld hl, $662b
 	call PrintText
 	ld bc,(HM_02 << 8) | 1
-	call $3e2e
+	call GiveItem
 	jr nc, .asm_d3ee3 ; 0x1e616
 	ld hl, $d7e0
 	set 6, [hl]
@@ -16100,7 +16100,7 @@ BillsHouseText2: ; 0x1e874
 	ld hl, $68ba
 	call PrintText
 	ld bc,(S_S__TICKET << 8) | 1
-	call $3e2e
+	call GiveItem
 	jr nc, .asm_18a67 ; 0x1e888
 	ld hl, $68bf
 	call PrintText
@@ -26768,7 +26768,7 @@ CeladonMart3Text1: ; 0x4824a
 	ld hl, $4278
 	call PrintText
 	ld bc,(TM_18 << 8) | 1
-	call $3e2e
+	call GiveItem
 	jr nc, .asm_95f37 ; 0x4825e
 	ld hl, $d778
 	set 7, [hl]
@@ -28232,7 +28232,7 @@ CeladonDinerText5: ; 0x49173
 	ld hl, $51a7
 	call PrintText
 	ld bc,(COIN_CASE << 8) | 1
-	call $3e2e
+	call GiveItem
 	jr nc, .asm_78e93 ; 0x49187
 	ld hl, $d783
 	set 0, [hl]
@@ -28779,7 +28779,7 @@ Route12GateUpstairsText1: ; 0x49569
 	ld hl, $559c
 	call PrintText
 	ld bc,(TM_39 << 8) | 1
-	call $3e2e
+	call GiveItem
 	jr nc, .asm_4c2be ; 0x4957c
 	ld hl, $55a1
 	call PrintText
@@ -29597,7 +29597,7 @@ MtMoon3Text6: ; 0x49ee9
 	and a
 	jr nz, .asm_1fa5e ; 0x49efc
 	ld bc,(DOME_FOSSIL << 8) | 1
-	call $3e2e
+	call GiveItem
 	jp nc, $5f76
 	call $5f69
 	ld a, $6d
@@ -29628,7 +29628,7 @@ MtMoon3Text7: ; 0x49f29
 	and a
 	jr nz, .asm_8e988 ; 0x49f3c
 	ld bc,(HELIX_FOSSIL << 8) | 1
-	call $3e2e
+	call GiveItem
 	jp nc, $5f76
 	call $5f69
 	ld a, $6e
@@ -29855,7 +29855,7 @@ SafariZoneSecretHouseText1: ; 0x4a31c
 	ld hl, $6350
 	call PrintText
 	ld bc,(HM_03 << 8) | 1
-	call $3e2e
+	call GiveItem
 	jr nc, .asm_a21d2 ; 0x4a330
 	ld hl, $6355
 	call PrintText
@@ -35276,7 +35276,7 @@ VermilionHouse2Text1: ; 0x56075
 	and a
 	jr nz, asm_eb1b7 ; 0x5608a
 	ld bc,(OLD_ROD << 8) | 1
-	call $3e2e
+	call GiveItem
 	jr nc, asm_fd67b ; 0x56092
 	ld hl, $d728
 	set 3, [hl]
@@ -35416,7 +35416,7 @@ FuchsiaHouse3Text1: ; 0x56181
 	and a
 	jr nz, asm_3ace4 ; 0x56196
 	ld bc,(GOOD_ROD << 8) | 1
-	call $3e2e
+	call GiveItem
 	jr nc, asm_628ee ; 0x5619e
 	ld hl, $d728
 	set 4, [hl]
@@ -35663,7 +35663,7 @@ Route12HouseText1: ; 0x56484
 	and a
 	jr nz, asm_a2d76 ; 0x56499
 	ld bc,(SUPER_ROD << 8) | 1
-	call $3e2e
+	call GiveItem
 	jr nc, asm_e3b89 ; 0x564a1
 	ld hl, $d728
 	set 5, [hl]
@@ -37925,7 +37925,7 @@ FanClubText5: ; 0x59c1c
 	ld hl, $5c6a
 	call PrintText
 	ld bc,(BIKE_VOUCHER << 8) | 1
-	call $3e2e
+	call GiveItem
 	jr nc, asm_867d4 ; 0x59c3d
 	ld hl, $5c6f
 	call PrintText
@@ -38050,7 +38050,7 @@ SilphCo2Text1: ; 0x59dc1
 	ld hl, $5ded
 	call PrintText
 	ld bc,(TM_36 << 8) | 1
-	call $3e2e
+	call GiveItem
 	ld hl, $5dfd
 	jr nc, asm_2c1e0 ; 0x59dd8
 	ld hl, $d826
@@ -38946,7 +38946,7 @@ MuseumF1Text3: ; 0x5c256
 	ld hl, $428e
 	call PrintText
 	ld bc,(OLD_AMBER << 8) | 1
-	call $3e2e
+	call GiveItem
 	jr nc, .asm_91ebf ; 0x5c26a
 	ld hl, $d754
 	set 1, [hl]
@@ -40103,7 +40103,7 @@ CopycatsHouseF2Text1: ; 0x5cc82
 	ld hl, $4cd9
 	call PrintText
 	ld bc,(TM_31 << 8) | 1
-	call $3e2e
+	call GiveItem
 	jr nc, .asm_16690 ; 0x5cca8
 	ld hl, $4cde
 	call PrintText
@@ -43348,7 +43348,7 @@ SSAnne7Text1: ; 0x618ad
 	ld hl, $5927
 	call PrintText
 	ld bc,(HM_01 << 8) | 1
-	call $3e2e
+	call GiveItem
 	jr nc, .asm_ccdcd ; 0x618c7
 	ld hl, $592c
 	call PrintText
@@ -44159,7 +44159,7 @@ SilphCo11Text1: ; 0x622dc
 	ld hl, $6311
 	call PrintText
 	ld bc,(MASTER_BALL << 8) | 1
-	call $3e2e
+	call GiveItem
 	jr nc, .asm_36088 ; 0x622f1
 	ld hl, $6316
 	call PrintText
@@ -46530,7 +46530,7 @@ FuchsiaHouse2Text1: ; 0x750c2
 	ld hl, $514e
 	call PrintText
 	ld bc,(HM_04 << 8) | 1
-	call $3e2e
+	call GiveItem
 	jr nc, .asm_53b90 ; 0x75115
 	ld hl, $5153
 	call PrintText
@@ -47913,7 +47913,7 @@ Lab3Text1: ; 0x75c94
 	ld hl, $5cc8
 	call PrintText
 	ld bc,(TM_35 << 8) | 1
-	call $3e2e
+	call GiveItem
 	jr nc, .asm_6c187 ; 0x75ca8
 	ld hl, $5ccd
 	call PrintText

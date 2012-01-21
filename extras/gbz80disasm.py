@@ -566,6 +566,8 @@ asm_commands = {
     "24d7": "TextScriptEnd",
     "3e5c": "GenRandom", #bank 4
     "6581": "ItemUseNotTime",
+    "3a87": "AddNTimes",
+    "3dab": "IsInArray", #bank 3
 }
 
 def random_asm_label():
