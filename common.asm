@@ -2973,223 +2973,438 @@ INCBIN "baserom.gbc",$8000,$822E - $8000
 
 ;Pallet Town
 PalletTown_mh: ;0x822E - 0x8236
-
 db $80
-    dw PalletTown_md_1 ;Channel 1 ($A7C5)
+    dw PalletTown_md_1 ;Channel 1 ($A7C5 - $A85E)
 db $01
-	dw PalletTown_md_2 ;Channel 2 ($A85f)
+	dw PalletTown_md_2 ;Channel 2 ($A85f - $A8DD)
 db $02
-	dw PalletTown_md_3 ;Channel 3 ($A8DE)
+	dw PalletTown_md_3 ;Channel 3 ($A8DE - $AA75)
 
 ;Pokemon Center
 Pokecenter_mh: ;0x8237 - 0x823F
 db $80
-	dw $7E56 ;Channel 1
+	dw Pokecenter_md_1 ;Channel 1 ($BE56 - $BEF8)
 db $01
-	dw $7EF9 ;Channel 2
+	dw Pokecenter_md_2 ;Channel 2 ($BEF9 - $BF6F)
 db $02
-	dw $7F70 ;Channel 3
+	dw Pokecenter_md_3 ;Channel 3 ($BF70 - $BFFF)
 
 ;Gyms
 Gym_mh: ;0x8240 - 0x8248
 db $80
-	dw $7CBB ;Channel 1
+	dw Gym_md_1 ;Channel 1 ($BCBB - $BD6A)
 db $01
-	dw $7D6B ;Channel 2
+	dw Gym_md_2 ;Channel 2 ($BD6B - $BDF9)
 db $02
-	dw $7DFA ;Channel 3
+	dw Gym_md_3 ;Channel 3 ($BDFA - $BE55)
 
 ;Viridian City, Pewter City, Saffron City
 Cities1_mh: ;0x8249 - 0x8254
 db $C0
-	dw $6A76 ;Channel 1
+	dw Cities1_md_1 ;Channel 1
 db $01
-	dw $6B92 ;Channel 2
+	dw Cities1_md_2 ;Channel 2
 db $02
-	dw $6C32 ;Channel 3
+	dw Cities1_md_3 ;Channel 3
 db $03
-	dw $6CEF ;Channel 4
+	dw Cities1_md_4 ;Channel 4
 
 ;Cerulean City, Fuchsia City
 Cities2_mh: ;0x8255 - 0x825D
 db $80
-	dw $7504 ;Channel 1
+	dw Cities2_md_1 ;Channel 1
 db $01
-	dw $7569 ;Channel 2
+        dw Cities2_md_2 ;Channel 2
 db $02
-	dw $7640 ;Channel 3
+	dw Cities2_md_3 ;Channel 3
 
 ;Celedon City
 Celedon_mh: ;0x825E - 0x8266
 db $80
-	dw $76C7 ;Channel 1
+	dw Celedon_md_1 ;Channel 1
 db $01
-	dw $773A ;Channel 2
+	dw Celedon_md_2 ;Channel 2
 db $02
-	dw $77B5 ;Channel 3
+	dw Celedon_md_3 ;Channel 3
 
 ;Cinnabar Island
 Cinnabar_mh: ;0x8267-0x826F
 db $80
-	dw $786D ;Channel 1
+	dw Cinnabar_md_1 ;Channel 1
 db $01
-	dw $78D4 ;Channel 2
+	dw Cinnabar_md_2 ;Channel 2
 db $02
-	dw $793D ;Channel 3
+	dw Cinnabar_md_3 ;Channel 3
 
 ;Vermillion City
 Vermillion_mh: ;0x8270 - 0x827B
 db $C0
-	dw $79EB ;Channel 1
+	dw Vermillion_md_1 ;Channel 1
 db $01
-	dw $7A61 ;Channel 2
+	dw Vermillion_md_2 ;Channel 2
 db $02
-	dw $7AA6 ;Channel 3
+	dw Vermillion_md_3 ;Channel 3
 db $03
-	dw $7B0D ;Channel 4
+	dw Vermillion_md_4 ;Channel 4
 
 ;Lavender Town
 Lavender_mh: ;0x827C - 0x8287
 db $C0
-	dw $7B58 ;Channel 1
+	dw Lavender_md_1 ;Channel 1
 db $01
-	dw $7B9E ;Channel 2
+	dw Lavender_md_2 ;Channel 2
 db $02
-	dw $7BAE ;Channel 3
+	dw Lavender_md_3 ;Channel 3
 db $03
-	dw $7C21 ;Channel 4
+	dw Lavender_md_4 ;Channel 4
 
 ;SS Anne
 SSAnne_mh: ;0x8288 - 0x8290
 db $80
-	dw $73A7 ;Channel 1
+	dw SSAnne_md_1 ;Channel 1
 db $01
-	dw $7419 ;Channel 2
+	dw SSAnne_md_2 ;Channel 2
 db $02
-	dw $74CB ;Channel 3
+	dw SSAnne_md_3 ;Channel 3
 
 ;Meet Prof. Oak
 MeetProfOak_mh: ;0x8291 - 0x8299
 db $80
-	dw $6F59 ;Channel 1
+	dw MeetProfOak_md_1 ;Channel 1
 db $01
-	dw $6FA9 ;Channel 2
+	dw MeetProfOak_md_2 ;Channel 2
 db $02
-	dw $703D ;Channel 3
+	dw MeetProfOak_md_3 ;Channel 3
 
 ;Meet Rival
 MeetRival_mh: ;0x829A - 0x82A2
 db $80
-	dw $7120 ;Channel 1
+	dw MeetRival_md_1 ;Channel 1
 db $01
-	dw $71BB ;Channel 2
+	dw MeetRival_md_2 ;Channel 2
 db $02
-	dw $7233 ;Channel 3
+	dw MeetRival_md_3 ;Channel 3
 
 ;Guy walks you to museum
 MuseumGuy_mh: ;0x82A3 - 0x82AE
 db $C0
-	dw $6DAE ;Channel 1
+	dw MuseumGuy_md_1 ;Channel 1
 db $01
-	dw $6DF1 ;Channel 2
+	dw MuseumGuy_md_2 ;Channel 2
 db $02
-	dw $6E6E ;Channel 3
+	dw MuseumGuy_md_3 ;Channel 3
 db $03
-	dw $6ED1 ;Channel 4
+	dw MuseumGuy_md_4 ;Channel 4
 
 ;Safari Zone
 SafariZone_mh: ;0x82AF - 0x82B7
 db $80
-	dw $7C2E ;Channel 1
+	dw SafariZone_md_1 ;Channel 1
 db $01
-	dw $7C6A ;Channel 2
+	dw SafariZone_md_2 ;Channel 2
 db $02
-	dw $7C94 ;Channel 3
+	dw SafariZone_md_3 ;Channel 3
 
 ;Pokemon Get Healed
 PkmnHealed_mh: ;0x82B8 - 0x82C0
 db $80
-	dw $5BA3 ;Channel 1
+	dw PkmnHealed_md_1 ;Channel 1
 db $01
-	dw $5BC4 ;Channel 2
+	dw PkmnHealed_md_2 ;Channel 2
 db $02
-	dw $5BD2 ;Channel 3
+	dw PkmnHealed_md_3 ;Channel 3
 
 ;Routes 1 and 2
 Routes1_mh: ;0x82C1 - 0x82CC
 db $C0
-	dw $5BDE ;Channel 1
+	dw Routes1_md_1 ;Channel 1
 db $01
-	dw $5C51 ;Channel 2
+	dw Routes1_md_2 ;Channel 2
 db $02
-	dw $5CD8 ;Channel 3
+	dw Routes1_md_3 ;Channel 3
 db $03
-	dw $5D24 ;Channel 4
+	dw Routes1_md_4 ;Channel 4
 
 ;Routes 24 and 25
 Routes2_mh: ;0x82CD - 0x82D8
 db $C0
-	dw $5DB9 ;Channel 1
+	dw Routes2_md_1 ;Channel 1
 db $01
-	dw $5E4F ;Channel 2
+	dw Routes2_md_2 ;Channel 2
 db $02
-	dw $5E9B ;Channel 3
+	dw Routes2_md_3 ;Channel 3
 db $03
-	dw $5F08 ;Channel 4
+	dw Routes2_md_4 ;Channel 4
 
 ;Routes 3, 4, 5, 6, 7, 8, 9, 10, 16, 17, 18, 19, 20, 21, 22
 Routes3_mh: ;0x82D9 - 0x82E4
 db $C0
-	dw $5FAD ;Channel 1
+	dw Routes3_md_1 ;Channel 1
 db $01
-	dw $6009 ;Channel 2
+	dw Routes3_md_2 ;Channel 2
 db $02
-	dw $607F ;Channel 3
+	dw Routes3_md_3 ;Channel 3
 db $03
-	dw $6131 ;Channel 4
+	dw Routes3_md_4 ;Channel 4
 
 ;Routes 11, 12, 13, 14, 15
 Routes4_mh: ;0x82E5 - 0x82F0
 db $C0
-	dw $626A ;Channel 1
+	dw Routes4_md_1 ;Channel 1
 db $01
-	dw $6304 ;Channel 2
+	dw Routes4_md_2 ;Channel 2
 db $02
-	dw $63C4 ;Channel 3
+	dw Routes4_md_3 ;Channel 3
 db $03
-	dw $649D ;Channel 4
+	dw Routes4_md_4 ;Channel 4
 
 ;Indigo Plateau
 IndigoPlateau_mh: ;0x82F1 - 0x82FC
 db $C0
-	dw $65F0 ;Channel 1
+	dw IndigoPlateau_md_1 ;Channel 1
 db $01
-	dw $6664 ;Channel 2
+	dw IndigoPlateau_md_2 ;Channel 2
 db $02
-	dw $66BA ;Channel 3
+	dw IndigoPlateau_md_3 ;Channel 3
 db $03
-	dw $670F ;Channel 4
-
-INCBIN "baserom.gbc",$82FD,$A7C5 - $82FD
+	dw IndigoPlateau_md_4 ;Channel 4
 
 ; Music Data
 ; The start and stop of these byte ranges were based off the theory they're lined
 ; consecutively (Right up against each other).
 
-PalletTown_md_1: ; 0xa7c5 (154 bytes)
+INCBIN "baserom.gbc",$82FD,$9ba3 - $82FD
+
+;Pokemon Healed Music
+PkmnHealed_md_1: ;9BA3 - 9BC3
+INCBIN "baserom.gbc",$9ba3,$9bc4 - $9ba3
+
+PkmnHealed_md_2: ;9BC4 - 9BD1
+INCBIN "baserom.gbc",$9bc4,$9bd2 - $9bc4
+
+PkmnHealed_md_3: ;9BD2 - 9BDD
+INCBIN "baserom.gbc",$9bd2,$9bde - $9bd2
+
+;Routes 1 and 2
+Routes1_md_1: ;9BDE - 9C50
+INCBIN "baserom.gbc",$9bde,$9c51 - $9bde
+
+Routes1_md_2: ;9C51 - 9CD7
+INCBIN "baserom.gbc",$9c51,$9cd8 - $9c51
+
+Routes1_md_3: ;9CD8 - 9D23
+INCBIN "baserom.gbc",$9cd8,$9d24 - $9cd8
+
+Routes1_md_4: ;9D24 - 9DB8
+INCBIN "baserom.gbc",$9d24,$9db9 - $9d24
+
+;Routes 24 and 25
+Routes2_md_1: ;9BD9 - 9E4E
+INCBIN "baserom.gbc",$9db9,$9e4f - $9db9
+
+Routes2_md_2: ;9E4F - 9E9A
+INCBIN "baserom.gbc",$9e4f,$9e9b - $9e4f
+
+Routes2_md_3: ;9E9B - 9F07
+INCBIN "baserom.gbc",$9e9b,$9f08 - $9e9b
+
+Routes2_md_4: ;9F08 - 9FAC
+INCBIN "baserom.gbc",$9f08,$9fad - $9f08
+
+;Routes 3, 4, 5, 6, 7, 8, 9, 10, 16, 17, 18, 19, 20, 21, 22
+Routes3_md_1: ;9FAD - A008
+INCBIN "baserom.gbc",$9fad,$a009 - $9fad
+
+Routes3_md_2: ;A009 - A07E
+INCBIN "baserom.gbc",$a009,$a07f - $a009
+
+Routes3_md_3: ;A07F - 6130
+INCBIN "baserom.gbc",$a07f,$a131 - $a07f
+
+Routes3_md_4: ;A131 -A26A
+INCBIN "baserom.gbc",$a131,$a26a - $a131
+
+;Routes 11, 12, 13, 14, 15
+Routes4_md_1: ;a26a - a303
+INCBIN "baserom.gbc",$a26a,$a304 - $a26a
+
+Routes4_md_2: ;a304 - a3c3
+INCBIN "baserom.gbc",$a304,$a3c4 - $a304
+
+Routes4_md_3: ;a3c4 - a49c
+INCBIN "baserom.gbc",$a3c4,$a49d - $a3c4
+
+Routes4_md_4: ;a49d - a5ef
+INCBIN "baserom.gbc",$a49d,$a5f0 - $a49d
+
+;Indigo Plateau
+IndigoPlateau_md_1: ;a5f0 - a663
+INCBIN "baserom.gbc",$a5f0,$a664 - $a5f0
+
+IndigoPlateau_md_2: ;a664 - a6b9
+INCBIN "baserom.gbc",$a664,$a6ba - $a664
+
+IndigoPlateau_md_3: ;a6ba - a70e
+INCBIN "baserom.gbc",$a6ba,$a70f - $a6ba
+
+IndigoPlateau_md_4: ;a70f - a7c4
+INCBIN "baserom.gbc",$a70f,$a7c5 - $a70f
+
+;Pallet Town
+PalletTown_md_1: ; a7c5 - a85e (154 bytes)
 INCBIN "baserom.gbc",$a7c5,$a85f - $a7c5
 
-PalletTown_md_2: ; 0xa85f (127 bytes)
+PalletTown_md_2: ; a85f - a8dd (127 bytes)
 INCBIN "baserom.gbc",$a85f,$a8de - $a85f
 
-PalletTown_md_3: ; 0xa8de (408 bytes)
+PalletTown_md_3: ; a8de - aa75 (408 bytes)
 INCBIN "baserom.gbc",$a8de,$aa76 - $a8de
 
-INCBIN "baserom.gbc",$AA76,$C000 - $AA76
+;Viridian City, Pewter City, Saffron City
+Cities1_md_1: ;AA76 - AB91
+INCBIN "baserom.gbc",$aa76,$ab92 - $aa76
+
+Cities1_md_2: ;AB92 - AC02
+INCBIN "baserom.gbc",$ab92,$ac32 - $ab92
+
+Cities1_md_3: ;AC32 - AC7F
+INCBIN "baserom.gbc",$ac32,$acef - $ac32
+
+Cities1_md_4: ;ACEF - ADAD
+INCBIN "baserom.gbc",$acef,$adae - $acef
+
+;Guy walks you to museum
+MuseumGuy_md_1: ;ADAE - ADF0
+INCBIN "baserom.gbc",$adae,$adf1 - $adae
+
+MuseumGuy_md_2: ;ADF1 - AE6D
+INCBIN "baserom.gbc",$adf1,$ae6e - $adf1
+
+MuseumGuy_md_3: ;AE6E - AED0
+INCBIN "baserom.gbc",$ae6e,$aed1 - $ae6e
+
+MuseumGuy_md_4: ;AED1 - AF58
+INCBIN "baserom.gbc",$aed1,$af59 - $aed1
+
+;Meet Prof. Oak
+MeetProfOak_md_1: ;AF59 - AFA8
+INCBIN "baserom.gbc",$af59,$afa9 - $af59
+
+MeetProfOak_md_2: ;AFA9 - B03D
+INCBIN "baserom.gbc",$afa9,$b03d - $afa9
+
+MeetProfOak_md_3: ;B03D - B11F
+INCBIN "baserom.gbc",$b03d,$b120 - $b03d
+
+;Meet Rival
+MeetRival_md_1: ;B120 - B1BA
+INCBIN "baserom.gbc",$b120,$b1bb - $b120
+
+MeetRival_md_2: ;B1BB - B232
+INCBIN "baserom.gbc",$b1bb,$b233 - $b1bb
+
+MeetRival_md_3: ;B233 - B3A6
+INCBIN "baserom.gbc",$b233,$b3a7 - $b233
+
+;SS Anne
+SSAnne_md_1: ;B3A7 - B418
+INCBIN "baserom.gbc",$b3a7,$b419 - $b3a7
+
+SSAnne_md_2: ;B419 - B4CA
+INCBIN "baserom.gbc",$b419,$b4cb - $b419
+
+SSAnne_md_3: ;B4CB - B503
+INCBIN "baserom.gbc",$b4cb,$b504 - $b4cb
+
+;Cerulean City, Fuchsia City
+Cities2_md_1: ;B504 - B568
+INCBIN "baserom.gbc",$b504,$b569 - $b504
+
+Cities2_md_2: ;B569 - B63F
+INCBIN "baserom.gbc",$b569,$b640 - $b569
+
+Cities2_md_3: ;B640 - B6C6
+INCBIN "baserom.gbc",$b640,$b6c7 - $b640
+
+;Celedon City
+Celedon_md_1: ;B6C7 - B739
+INCBIN "baserom.gbc",$b6c7,$b73a - $b6c7
+
+Celedon_md_2: ;B73A - B7B4
+INCBIN "baserom.gbc",$b73a,$b7b5 - $b73a
+
+Celedon_md_3: ;B7B5 - B86C
+INCBIN "baserom.gbc",$b7b5,$b86d - $b7b5
+
+;Cinnabar Island
+Cinnabar_md_1: ;B86D - B8D3
+INCBIN "baserom.gbc",$b86d,$b8d4 - $b86d
+
+Cinnabar_md_2: ;B8D4 - B93C
+INCBIN "baserom.gbc",$b8d4,$b93d - $b8d4
+
+Cinnabar_md_3: ;B93D - B9EA
+INCBIN "baserom.gbc",$b93d,$b9eb - $b93d
+
+;Vermillion City
+Vermillion_md_1: ;B9EB - BA60
+INCBIN "baserom.gbc",$b9eb,$ba61 - $b9eb
+
+Vermillion_md_2: ;BA61 - BAA5
+INCBIN "baserom.gbc",$ba61,$baa6 - $ba61
+
+Vermillion_md_3: ;BAA6 - BB0C
+INCBIN "baserom.gbc",$baa6,$bb0d - $baa6
+
+Vermillion_md_4: ;BB0D - BB57
+INCBIN "baserom.gbc",$bb0d,$bb58 - $bb0d
+
+;Lavender Town
+Lavender_md_1: ;BB58 - BB9D
+INCBIN "baserom.gbc",$bb58,$bb9e - $bb58
+
+Lavender_md_2: ;BB9E - BBAD
+INCBIN "baserom.gbc",$bb9e,$bbae - $bb9e
+
+Lavender_md_3: ;BBAE - BC20
+INCBIN "baserom.gbc",$bbae,$bc21 - $bbae
+
+Lavender_md_4: ;BC21 - BC2D
+INCBIN "baserom.gbc",$bc21,$bc2e - $bc21
+
+;Safari Zone
+SafariZone_md_1: ;BC2E - BC69
+INCBIN "baserom.gbc",$bc2e,$bc6a - $bc2e
+
+SafariZone_md_2: ;BC6A - BC93
+INCBIN "baserom.gbc",$bc6a,$bc94 - $bc6a
+
+SafariZone_md_3: ;BC94 - BCBA
+INCBIN "baserom.gbc",$bc94,$bcbb - $bc94
+
+;Gyms
+Gym_md_1: ;bcbb - bd6a (175 bytes)
+INCBIN "baserom.gbc",$bcbb,$bd6b - $bcbb
+
+Gym_md_2: ;bd6b - bdf9 (142 bytes)
+INCBIN "baserom.gbc",$bd6b,$bdfa - $bd6b
+
+Gym_md_3: ;bdfa - be55 (91 bytes)
+INCBIN "baserom.gbc",$bdfa,$be56 - $bdfa
+
+;Pokemon Center
+Pokecenter_md_1: ;be56 - bef8 (162 bytes)
+INCBIN "baserom.gbc",$be56,$bef9 - $be56
+
+Pokecenter_md_2: ;0xbef9 - bf6f (118 bytes)
+INCBIN "baserom.gbc",$bef9,$bf70 - $bef9
+
+Pokecenter_md_3: ;0xbf70 - bfff (143 bytes)
+INCBIN "baserom.gbc",$bf70,$c000 - $bf70
 
 SECTION "bank3",DATA,BANK[$3]
 
-INCBIN "baserom.gbc",$C000,$C23D - $C000 
+INCBIN "baserom.gbc",$C000,$C23D - $C000
 
 ; see also MapHeaderPointers
 MapHeaderBanks: ; 423D
