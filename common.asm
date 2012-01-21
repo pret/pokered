@@ -8705,7 +8705,7 @@ Next625F:
 	call GenRandom
 	srl a
 	jr c,Next6278
-	and 3
+	and %11
 	cp 2
 	jr nc,Next625F
 	; choose which monster appears
@@ -8730,33 +8730,34 @@ GoodRodMons:
 
 SuperRodCode: ; $6283 0xe283
 	call $62B4 ; probably sets carry if in battle or not by water
-	jp c, ItemUseNotTime ; don't use SUPER_ROD in battle
-Next6289: ; not in battle
+	jp c, ItemUseNotTime
 	call ReadSuperRodData ; 0xe8ea
-	ld a, e ; $2 means no fishing data found, $1 means a pokemon was picked
+	ld a, e
 Next628E:
-	ld [$CD3D], a ; set ReadSuperRodData return value
-	dec a ; decrease return value of ReadSuperRodData
-	jr nz, .next\@ ; if e was $2 (no fishing data for this map) then skip ahead
-	; store level and species data, SUPER_ROD always catches a bite
+	ld [$CD3D], a
+
+	dec a ; is there a bite?
+	jr nz, .next\@
+	; if yes, store level and species data
 	ld a, 1
-	ld [$D05F], a ; set "found pokemon"
-	ld a, b ; load level into a
-	ld [$D127], a ; set level
-	ld a, c ; load species id into a
-	ld [$D059], a ; set species id
+	ld [$D05F], a
+	ld a, b ; level
+	ld [W_CURENEMYLVL], a
+	ld a, c ; species
+	ld [W_CUROPPONENT], a
+
 .next\@
-	ld hl, $D700 ; bike speed address?
+	ld hl, $D700
 	ld a, [hl] ; store the value in a
 	push af
 	push hl
-	ld [hl], 0 ; blank $D700
+	ld [hl], 0
 	ld b, $1C
-	ld hl, $47B6 ; probably setup battle?
-	call Bankswitch ; call 0x707b6
+	ld hl, $47B6
+	call Bankswitch
 	pop hl
 	pop af
-	ld [hl], a ; restore the original value
+	ld [hl], a
 	ret
 
 INCBIN "baserom.gbc",$e2b4,$e30d - $e2b4
@@ -8845,42 +8846,53 @@ UnnamedText_e75f: ; 0xe75f
 INCBIN "baserom.gbc",$e764,$e8ea - $e764
 
 ; 68EA 0xe8ea
-ReadSuperRodData: ; called from SuperRodCode
-	ld a, [W_CURMAP] ; load map id
-	ld de, $0003 ; third byte starts the pointer to this map's fishing group
-	ld hl, SuperRodData ; array to search
-	call IsInArray ; search array at hl, skip de bytes between reads
-	jr c, .ReadFishingGroup ; jump if carry is set (b is index; hl has address of the bth index)
+ReadSuperRodData:
+; return e = 2 if no fish on this map
+; return e = 1 if a bite, bc = level,species
+; return e = 0 if no bite
+	ld a, [W_CURMAP]
+	ld de, 3 ; each fishing group is three bytes wide
+	ld hl, SuperRodData
+	call IsInArray
+	jr c, .ReadFishingGroup
 	ld e, $2 ; $2 if no fishing groups found
 	ret
+
 .ReadFishingGroup ; 0xe8f6
-	inc hl ; first byte of pointer to fishing group is hl+1
-	ld a, [hli] ; load first byte of fishing group pointer and increment hl
-	ld h, [hl] ; load second byte of fishing group pointer
-	ld l, a ; set the first byte in the "l" part of the hl register
-	ld b, [hl] ; read fishing group data, how many mons
-	inc hl ; first line of data in fishing group
-	ld e, $0 ; no level/mon selected yet
+; hl points to the fishing group
+	inc hl ; skip map id
+
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+
+	ld b, [hl] ; how many mons in group
+	inc hl ; point to data
+	ld e, $0 ; no bite yet
+
 .RandomLoop ; 0xe90c
 	call GenRandom
-	srl a ; shift right into carry
-	ret c ; no battle if carry
-	and $3 ; check if first two bits are set
-	cp b ; check against b (H_RAND something) and set the carry
-	jr nc, .RandomLoop ; if carry then keep generating random numbers
-	add a ; double it (two bytes per mon)
+	srl a
+	ret c ; 50% chance of no battle
+
+	and %11 ; 2-bit random number
+	cp b
+	jr nc, .RandomLoop ; if a is greater than the number of mons, regenerate
+
+	; get the mon
+	add a
 	ld c, a
 	ld b, $0
-	add hl, bc ; get the address of this mon/level combo in this fishing group
+	add hl, bc
 	ld b, [hl] ; level
 	inc hl
-	ld c, [hl] ; species id
+	ld c, [hl] ; species
 	ld e, $1 ; $1 if there's a bite
 	ret
 ; 0xe919
 
 ; super rod data
-; map, pointer to fishing group
+; format: map, pointer to fishing group
 SuperRodData: ; 6919
 	dbw PALLET_TOWN, FishingGroup1
 	dbw VIRIDIAN_CITY, FishingGroup1
