@@ -3018,14 +3018,14 @@ Cities2_mh: ;0x8255 - 0x825D
 	db $02
 	dw Cities2_md_3 ;Channel 3
 
-;Celedon City
-Celedon_mh: ;0x825E - 0x8266
+;Celadon City
+Celadon_mh: ;0x825E - 0x8266
 	db $80
-	dw Celedon_md_1 ;Channel 1
+	dw Celadon_md_1 ;Channel 1
 	db $01
-	dw Celedon_md_2 ;Channel 2
+	dw Celadon_md_2 ;Channel 2
 	db $02
-	dw Celedon_md_3 ;Channel 3
+	dw Celadon_md_3 ;Channel 3
 
 ;Cinnabar Island
 Cinnabar_mh: ;0x8267-0x826F
@@ -3326,14 +3326,14 @@ INCBIN "baserom.gbc",$b569,$b640 - $b569
 Cities2_md_3: ;B640 - B6C6
 INCBIN "baserom.gbc",$b640,$b6c7 - $b640
 
-;Celedon City
-Celedon_md_1: ;B6C7 - B739
+;Celadon City
+Celadon_md_1: ;B6C7 - B739
 INCBIN "baserom.gbc",$b6c7,$b73a - $b6c7
 
-Celedon_md_2: ;B73A - B7B4
+Celadon_md_2: ;B73A - B7B4
 INCBIN "baserom.gbc",$b73a,$b7b5 - $b73a
 
-Celedon_md_3: ;B7B5 - B86C
+Celadon_md_3: ;B7B5 - B86C
 INCBIN "baserom.gbc",$b7b5,$b86d - $b7b5
 
 ;Cinnabar Island
