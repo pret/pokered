@@ -2970,7 +2970,6 @@ SECTION "bank2",DATA,BANK[$2]
 INCBIN "baserom.gbc",$8000,$822E - $8000
 
 ;Music Headers
-
 ;Pallet Town
 PalletTown_mh: ;0x822E - 0x8236
 db $80
@@ -3177,7 +3176,34 @@ INCBIN "baserom.gbc",$82FD,$9ba3 - $82FD
 
 ;Pokemon Healed Music
 PkmnHealed_md_1: ;9BA3 - 9BC3
-INCBIN "baserom.gbc",$9ba3,$9bc4 - $9ba3
+;INCBIN "baserom.gbc",$9ba3,$9bc4 - $9ba3
+
+;Setup
+	mus_tempo $0, $90
+	mus_volume $77
+	mus_duty $2
+	db $E8
+	mus_vel $8, $1
+
+;Song
+	mus_note noteRst, note8
+	db $EB, $00
+	mus_note noteE, note2_4
+	mus_note noteB, note8
+	db $EB, $00
+	mus_note noteF, note4_16
+	mus_note noteB, note8
+	db $EB, $00
+	mus_note noteE, note4_16
+	mus_note noteE, note8
+	mus_note noteRst, note4
+	db $EB, $00
+	mus_note noteD#, note2_4
+	mus_note noteE, note4
+	db $EB, $00
+	mus_note noteE, note2_4
+	mus_note noteB, note4
+	mus_end
 
 PkmnHealed_md_2: ;9BC4 - 9BD1
 INCBIN "baserom.gbc",$9bc4,$9bd2 - $9bc4
