@@ -2565,3 +2565,133 @@ BRUNOS_ROOM_WIDTH  EQU $05
 ; Agatha_h map_id=247
 AGATHAS_ROOM_HEIGHT EQU $06
 AGATHAS_ROOM_WIDTH  EQU $05
+
+;Sound Constants (Copied from pkms.asm with modifications)
+MUSIC		EQU 0
+SFX			EQU 4
+CH1			EQU 0
+CH2			EQU 1
+CH3			EQU 2
+CH4			EQU 3
+
+;Note Pitch
+noteC		EQU $0
+noteC#		EQU $1
+noteD		EQU $2
+noteD#		EQU $3
+noteE		EQU $4
+noteF		EQU $5
+noteF#		EQU $6
+noteG		EQU $7
+noteG#		EQU $8
+noteA		EQU $9
+noteA#		EQU $A
+noteB		EQU $B
+noteRst		EQU $C
+
+;Note Delay
+note16		EQU $0 ;1/16
+note8		EQU $1 ;1/8
+note8_16	EQU $2 ;1/8 + 1/16
+note4		EQU $3 ;1/4
+note4_16	EQU $4 ;1/4 + 1/16
+note4_8		EQU $5 ;1/4 + 1/8
+note4_8_16 	EQU $6 ;1/4 + 1/8 + 1/16
+note2		EQU $7 ;1/2
+note2_16	EQU $8 ;1/2 + 1/16
+note2_8		EQU $9 ;1/2 + 1/8
+note2_8_16	EQU $A ;1/2 + 1/8 + 1/16
+note2_4		EQU $B ;1/2 + 1/4
+note2_4_16 	EQU $C ;1/2 + 1/4 + 1/16
+note2_4_8	EQU $D ;1/2 + 1/4 + 1/8
+note2_4_8_16 EQU $E ;1/2 + 1/4 + 1/8 + 1/16
+note1		EQU $F ;1
+
+;Drum
+dNote		EQU $B0
+dRst		EQU $C0
+d5d3Spd		EQU $D4
+d4d3Spd		EQU $D8
+dNormSpd	EQU $DC
+d2Spd		EQU $D0
+
+; octaves
+oct0		EQU $E7
+oct1		EQU $E6
+oct2		EQU $E5
+oct3		EQU $E4
+oct4		EQU $E3
+oct5		EQU $E2
+oct6		EQU $E1
+oct7		EQU $E0
+
+;Write a music note
+;format: mus_note pitch delay
+mus_note: MACRO
+	db ((\1 << 4) | \2)
+ENDM
+
+; set velocity/note fade (\1 is velocity, \2 is note length, both 0-15)
+; format: mus_vel vel, length
+mus_vel: MACRO
+	db $DC
+	db	((\1 << 4) | \2)
+ENDM
+
+; stop sound
+; format: mus_end
+mus_end: MACRO
+	db $FF
+ENDM
+
+; ???
+; format: mus_E8
+mus_E8: MACRO
+	db $E8
+ENDM
+
+; set modulation (\1 is delay, \2 is depth, \3 is rate)
+; format: mus_mod delay, depth, rate
+mus_mod: MACRO
+	db	$EA
+	db	\1
+	db	((\2 << 4) | \3)
+ENDM
+
+; set duty cycle (\1: 0 = 12.5%, 1 = 25%, 2 = 50%, 3 = 75%)
+; format: mus_duty duty
+mus_duty: MACRO
+	db	$EC
+	db	\1
+ENDM
+
+; set music tempo (\1 is divider, \2 is modifier)
+; format:	mus_tempo divider, modifier
+mus_tempo: MACRO
+	db	$ED
+	db	\1
+	db	\2
+ENDM
+
+; set volume (\1 is volume)
+; format: mus_volume volume
+; (may actually be panning?)
+mus_volume: MACRO
+	db	$F0
+	db	\1
+ENDM
+
+; call \1
+; format: mus_call offset
+mus_call: MACRO
+	db	$FD
+	dw	((\1 % $4000) + ((\1 >= $4000) * $4000))
+ENDM
+
+; jump \1 \2
+; format: mus_jump offset loop
+mus_jump: MACRO
+	db	$FE
+	db	\2
+	dw	((\1 % $4000) + ((\1 >= $4000) * $4000))
+ENDM
