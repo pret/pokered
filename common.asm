@@ -49147,7 +49147,7 @@ INCBIN "baserom.gbc",$79E6A,$7AF74 - $79E6A
 
 PointerTable6F74: ; 6F74
 	dw $7de7
-	dw UnnamedText_7068
+	dw $7068
 	dw $708d
 	dw $70ce
 	dw $70df
@@ -49164,7 +49164,7 @@ PointerTable6F74: ; 6F74
 	dw $726a
 	dw $727b
 	dw $729c
-	dw UnnamedText_72bd
+	dw $72bd
 	dw $72ca
 	dw $72db
 	dw $72fc
