@@ -17251,8 +17251,8 @@ UnnamedText_37e83: ; 0x37e83
 
 SECTION "bankE",DATA,BANK[$E]
 
-Attacks: ; 4000
-; characteristics of each attack
+Moves: ; 4000
+; characteristics of each move
 ; animation, effect, power, type, accuracy, PP
 db POUND       ,$00,$28,NORMAL,$FF,35
 db KARATE_CHOP ,$00,$32,NORMAL,$FF,25
@@ -17422,12 +17422,12 @@ db STRUGGLE    ,$30,$32,NORMAL,$FF,10
 
 INCBIN "baserom.gbc",$383DE,$39884 - $383DE
 
-ReadAttack: ; 5884
+ReadMove: ; 5884
 	push hl
 	push de
 	push bc
 	dec a
-	ld hl,Attacks
+	ld hl,Moves
 	ld bc,6
 	call AddNTimes
 	ld de,$CFCC
@@ -17684,7 +17684,7 @@ ReadTrainer: ; 5C53
 .IterateTrainer
 	ld a,[hli]
 	cp $FF ; is the trainer special?
-	jr z,.SpecialTrainer\@ ; if so, check for special attacks
+	jr z,.SpecialTrainer\@ ; if so, check for special moves
 	ld [W_CURENEMYLVL],a
 .LoopTrainerData\@
 	ld a,[hli]
@@ -17704,7 +17704,7 @@ ReadTrainer: ; 5C53
 ; - if [W_LONEATTACKNO] != 0, one pokemon on the team has a special move
 	ld a,[hli]
 	and a ; have we reached the end of the trainer data?
-	jr z,.AddLoneAttack\@
+	jr z,.AddLoneMove\@
 	ld [W_CURENEMYLVL],a
 	ld a,[hli]
 	ld [$CF91],a
@@ -17714,16 +17714,16 @@ ReadTrainer: ; 5C53
 	call AddPokemonToParty
 	pop hl
 	jr .SpecialTrainer\@
-.AddLoneAttack\@
+.AddLoneMove\@
 ; does the trainer have a single monster with a different move
 	ld a,[W_LONEATTACKNO] ; Brock is 01, Misty is 02, Erika is 04, etc
 	and a
-	jr z,.AddTeamAttack\@
+	jr z,.AddTeamMove\@
 	dec a
 	add a,a
 	ld c,a
 	ld b,0
-	ld hl,LoneAttacks
+	ld hl,LoneMoves
 	add hl,bc
 	ld a,[hli]
 	ld d,[hl]
@@ -17732,34 +17732,34 @@ ReadTrainer: ; 5C53
 	call AddNTimes
 	ld [hl],d
 	jr .FinishUp\@
-.AddTeamAttack\@
+.AddTeamMove\@
 ; check if our trainer's team has special moves
 
 ; get trainer class number
 	ld a,[$D059]
 	sub $C8
 	ld b,a
-	ld hl,TeamAttacks
+	ld hl,TeamMoves
 
-; iterate through entries in TeamAttacks, checking each for our trainer class
-.IterateTeamAttacks\@
+; iterate through entries in TeamMoves, checking each for our trainer class
+.IterateTeamMoves\@
 	ld a,[hli]
 	cp b
-	jr z,.GiveTeamAttacks\@ ; is there a match?
+	jr z,.GiveTeamMoves\@ ; is there a match?
 	inc hl ; if not, go to the next entry
 	inc a
-	jr nz,.IterateTeamAttacks\@
+	jr nz,.IterateTeamMoves\@
 
 	; no matches found. is this trainer champion rival?
 	ld a,b
 	cp SONY3
 	jr z,.ChampionRival\@
 	jr .FinishUp\@ ; nope
-.GiveTeamAttacks\@
+.GiveTeamMoves\@
 	ld a,[hl]
 	ld [$D95E],a
 	jr .FinishUp\@
-.ChampionRival\@ ; give attacks to his team
+.ChampionRival\@ ; give moves to his team
 
 ; pidgeot
 	ld a,SKY_ATTACK
@@ -17800,7 +17800,7 @@ ReadTrainer: ; 5C53
 	jr nz,.LastLoop\@
 	ret
 
-LoneAttacks: ; 5D22
+LoneMoves: ; 5D22
 ; these are used for gym leaders.
 ; this is not automatic! you have to write the number you want to W_LONEATTACKNO
 ; first. e.g., erika's script writes 4 to W_LONEATTACKNO to get mega drain,
@@ -17818,10 +17818,10 @@ LoneAttacks: ; 5D22
 	db 3,FIRE_BLAST
 	db 4,FISSURE
 
-TeamAttacks: ; 5D32
+TeamMoves: ; 5D32
 ; these are used for elite four.
 ; this is automatic, based on trainer class.
-; don't be confused by LoneAttacks above, the two data structures are
+; don't be confused by LoneMoves above, the two data structures are
 	; _completely_ unrelated.
 
 ; first byte: trainer (all trainers in this class have this move)
@@ -18823,199 +18823,199 @@ UnnamedText_3af4d: ; 0x3af4d
 
 INCBIN "baserom.gbc",$3af52,$10a
 
-EvosAttacksPointerTable: ; 705C
-	dw Mon112_EvosAttacks
-	dw Mon115_EvosAttacks
-	dw Mon032_EvosAttacks
-	dw Mon035_EvosAttacks
-	dw Mon021_EvosAttacks
-	dw Mon100_EvosAttacks
-	dw Mon034_EvosAttacks
-	dw Mon080_EvosAttacks
-	dw Mon002_EvosAttacks
-	dw Mon103_EvosAttacks
-	dw Mon108_EvosAttacks
-	dw Mon102_EvosAttacks
-	dw Mon088_EvosAttacks
-	dw Mon094_EvosAttacks
-	dw Mon029_EvosAttacks
-	dw Mon031_EvosAttacks
-	dw Mon104_EvosAttacks
-	dw Mon111_EvosAttacks
-	dw Mon131_EvosAttacks
-	dw Mon059_EvosAttacks
-	dw Mon151_EvosAttacks
-	dw Mon130_EvosAttacks
-	dw Mon090_EvosAttacks
-	dw Mon072_EvosAttacks
-	dw Mon092_EvosAttacks
-	dw Mon123_EvosAttacks
-	dw Mon120_EvosAttacks
-	dw Mon009_EvosAttacks
-	dw Mon127_EvosAttacks
-	dw Mon114_EvosAttacks
-	dw Mon152_EvosAttacks	;MissingNo
-	dw Mon153_EvosAttacks	;MissingNo
-	dw Mon058_EvosAttacks
-	dw Mon095_EvosAttacks
-	dw Mon022_EvosAttacks
-	dw Mon016_EvosAttacks
-	dw Mon079_EvosAttacks
-	dw Mon064_EvosAttacks
-	dw Mon075_EvosAttacks
-	dw Mon113_EvosAttacks
-	dw Mon067_EvosAttacks
-	dw Mon122_EvosAttacks
-	dw Mon106_EvosAttacks
-	dw Mon107_EvosAttacks
-	dw Mon024_EvosAttacks
-	dw Mon047_EvosAttacks
-	dw Mon054_EvosAttacks
-	dw Mon096_EvosAttacks
-	dw Mon076_EvosAttacks
-	dw Mon154_EvosAttacks	;MissingNo
-	dw Mon126_EvosAttacks
-	dw Mon155_EvosAttacks	;MissingNo
-	dw Mon125_EvosAttacks
-	dw Mon082_EvosAttacks
-	dw Mon109_EvosAttacks
-	dw Mon156_EvosAttacks	;MissingNo
-	dw Mon056_EvosAttacks
-	dw Mon086_EvosAttacks
-	dw Mon050_EvosAttacks
-	dw Mon128_EvosAttacks
-	dw Mon157_EvosAttacks	;MissingNo
-	dw Mon158_EvosAttacks	;MissingNo
-	dw Mon159_EvosAttacks	;MissingNo
-	dw Mon083_EvosAttacks
-	dw Mon048_EvosAttacks
-	dw Mon149_EvosAttacks
-	dw Mon160_EvosAttacks	;MissingNo
-	dw Mon161_EvosAttacks	;MissingNo
-	dw Mon162_EvosAttacks	;MissingNo
-	dw Mon084_EvosAttacks
-	dw Mon060_EvosAttacks
-	dw Mon124_EvosAttacks
-	dw Mon146_EvosAttacks
-	dw Mon144_EvosAttacks
-	dw Mon145_EvosAttacks
-	dw Mon132_EvosAttacks
-	dw Mon052_EvosAttacks
-	dw Mon098_EvosAttacks
-	dw Mon163_EvosAttacks	;MissingNo
-	dw Mon164_EvosAttacks	;MissingNo
-	dw Mon165_EvosAttacks	;MissingNo
-	dw Mon037_EvosAttacks
-	dw Mon038_EvosAttacks
-	dw Mon025_EvosAttacks
-	dw Mon026_EvosAttacks
-	dw Mon166_EvosAttacks	;MissingNo
-	dw Mon167_EvosAttacks	;MissingNo
-	dw Mon147_EvosAttacks
-	dw Mon148_EvosAttacks
-	dw Mon140_EvosAttacks
-	dw Mon141_EvosAttacks
-	dw Mon116_EvosAttacks
-	dw Mon117_EvosAttacks
-	dw Mon168_EvosAttacks	;MissingNo
-	dw Mon169_EvosAttacks	;MissingNo
-	dw Mon027_EvosAttacks
-	dw Mon028_EvosAttacks
-	dw Mon138_EvosAttacks
-	dw Mon139_EvosAttacks
-	dw Mon039_EvosAttacks
-	dw Mon040_EvosAttacks
-	dw Mon133_EvosAttacks
-	dw Mon136_EvosAttacks
-	dw Mon135_EvosAttacks
-	dw Mon134_EvosAttacks
-	dw Mon066_EvosAttacks
-	dw Mon041_EvosAttacks
-	dw Mon023_EvosAttacks
-	dw Mon046_EvosAttacks
-	dw Mon061_EvosAttacks
-	dw Mon062_EvosAttacks
-	dw Mon013_EvosAttacks
-	dw Mon014_EvosAttacks
-	dw Mon015_EvosAttacks
-	dw Mon170_EvosAttacks	;MissingNo
-	dw Mon085_EvosAttacks
-	dw Mon057_EvosAttacks
-	dw Mon051_EvosAttacks
-	dw Mon049_EvosAttacks
-	dw Mon087_EvosAttacks
-	dw Mon171_EvosAttacks	;MissingNo
-	dw Mon172_EvosAttacks	;MissingNo
-	dw Mon010_EvosAttacks
-	dw Mon011_EvosAttacks
-	dw Mon012_EvosAttacks
-	dw Mon068_EvosAttacks
-	dw Mon173_EvosAttacks	;MissingNo
-	dw Mon055_EvosAttacks
-	dw Mon097_EvosAttacks
-	dw Mon042_EvosAttacks
-	dw Mon150_EvosAttacks
-	dw Mon143_EvosAttacks
-	dw Mon129_EvosAttacks
-	dw Mon174_EvosAttacks	;MissingNo
-	dw Mon175_EvosAttacks	;MissingNo
-	dw Mon089_EvosAttacks
-	dw Mon176_EvosAttacks	;MissingNo
-	dw Mon099_EvosAttacks
-	dw Mon091_EvosAttacks
-	dw Mon177_EvosAttacks	;MissingNo
-	dw Mon101_EvosAttacks
-	dw Mon036_EvosAttacks
-	dw Mon110_EvosAttacks
-	dw Mon053_EvosAttacks
-	dw Mon105_EvosAttacks
-	dw Mon178_EvosAttacks	;MissingNo
-	dw Mon093_EvosAttacks
-	dw Mon063_EvosAttacks
-	dw Mon065_EvosAttacks
-	dw Mon017_EvosAttacks
-	dw Mon018_EvosAttacks
-	dw Mon121_EvosAttacks
-	dw Mon001_EvosAttacks
-	dw Mon003_EvosAttacks
-	dw Mon073_EvosAttacks
-	dw Mon179_EvosAttacks	;MissingNo
-	dw Mon118_EvosAttacks
-	dw Mon119_EvosAttacks
-	dw Mon180_EvosAttacks	;MissingNo
-	dw Mon181_EvosAttacks	;MissingNo
-	dw Mon182_EvosAttacks	;MissingNo
-	dw Mon183_EvosAttacks	;MissingNo
-	dw Mon077_EvosAttacks
-	dw Mon078_EvosAttacks
-	dw Mon019_EvosAttacks
-	dw Mon020_EvosAttacks
-	dw Mon033_EvosAttacks
-	dw Mon030_EvosAttacks
-	dw Mon074_EvosAttacks
-	dw Mon137_EvosAttacks
-	dw Mon142_EvosAttacks
-	dw Mon184_EvosAttacks	;MissingNo
-	dw Mon081_EvosAttacks
-	dw Mon185_EvosAttacks	;MissingNo
-	dw Mon186_EvosAttacks	;MissingNo
-	dw Mon004_EvosAttacks
-	dw Mon007_EvosAttacks
-	dw Mon005_EvosAttacks
-	dw Mon008_EvosAttacks
-	dw Mon006_EvosAttacks
-	dw Mon187_EvosAttacks	;MissingNo
-	dw Mon188_EvosAttacks	;MissingNo
-	dw Mon189_EvosAttacks	;MissingNo
-	dw Mon190_EvosAttacks	;MissingNo
-	dw Mon043_EvosAttacks
-	dw Mon044_EvosAttacks
-	dw Mon045_EvosAttacks
-	dw Mon069_EvosAttacks
-	dw Mon070_EvosAttacks
-	dw Mon071_EvosAttacks
+EvosMovesPointerTable: ; 705C
+	dw Mon112_EvosMoves
+	dw Mon115_EvosMoves
+	dw Mon032_EvosMoves
+	dw Mon035_EvosMoves
+	dw Mon021_EvosMoves
+	dw Mon100_EvosMoves
+	dw Mon034_EvosMoves
+	dw Mon080_EvosMoves
+	dw Mon002_EvosMoves
+	dw Mon103_EvosMoves
+	dw Mon108_EvosMoves
+	dw Mon102_EvosMoves
+	dw Mon088_EvosMoves
+	dw Mon094_EvosMoves
+	dw Mon029_EvosMoves
+	dw Mon031_EvosMoves
+	dw Mon104_EvosMoves
+	dw Mon111_EvosMoves
+	dw Mon131_EvosMoves
+	dw Mon059_EvosMoves
+	dw Mon151_EvosMoves
+	dw Mon130_EvosMoves
+	dw Mon090_EvosMoves
+	dw Mon072_EvosMoves
+	dw Mon092_EvosMoves
+	dw Mon123_EvosMoves
+	dw Mon120_EvosMoves
+	dw Mon009_EvosMoves
+	dw Mon127_EvosMoves
+	dw Mon114_EvosMoves
+	dw Mon152_EvosMoves	;MissingNo
+	dw Mon153_EvosMoves	;MissingNo
+	dw Mon058_EvosMoves
+	dw Mon095_EvosMoves
+	dw Mon022_EvosMoves
+	dw Mon016_EvosMoves
+	dw Mon079_EvosMoves
+	dw Mon064_EvosMoves
+	dw Mon075_EvosMoves
+	dw Mon113_EvosMoves
+	dw Mon067_EvosMoves
+	dw Mon122_EvosMoves
+	dw Mon106_EvosMoves
+	dw Mon107_EvosMoves
+	dw Mon024_EvosMoves
+	dw Mon047_EvosMoves
+	dw Mon054_EvosMoves
+	dw Mon096_EvosMoves
+	dw Mon076_EvosMoves
+	dw Mon154_EvosMoves	;MissingNo
+	dw Mon126_EvosMoves
+	dw Mon155_EvosMoves	;MissingNo
+	dw Mon125_EvosMoves
+	dw Mon082_EvosMoves
+	dw Mon109_EvosMoves
+	dw Mon156_EvosMoves	;MissingNo
+	dw Mon056_EvosMoves
+	dw Mon086_EvosMoves
+	dw Mon050_EvosMoves
+	dw Mon128_EvosMoves
+	dw Mon157_EvosMoves	;MissingNo
+	dw Mon158_EvosMoves	;MissingNo
+	dw Mon159_EvosMoves	;MissingNo
+	dw Mon083_EvosMoves
+	dw Mon048_EvosMoves
+	dw Mon149_EvosMoves
+	dw Mon160_EvosMoves	;MissingNo
+	dw Mon161_EvosMoves	;MissingNo
+	dw Mon162_EvosMoves	;MissingNo
+	dw Mon084_EvosMoves
+	dw Mon060_EvosMoves
+	dw Mon124_EvosMoves
+	dw Mon146_EvosMoves
+	dw Mon144_EvosMoves
+	dw Mon145_EvosMoves
+	dw Mon132_EvosMoves
+	dw Mon052_EvosMoves
+	dw Mon098_EvosMoves
+	dw Mon163_EvosMoves	;MissingNo
+	dw Mon164_EvosMoves	;MissingNo
+	dw Mon165_EvosMoves	;MissingNo
+	dw Mon037_EvosMoves
+	dw Mon038_EvosMoves
+	dw Mon025_EvosMoves
+	dw Mon026_EvosMoves
+	dw Mon166_EvosMoves	;MissingNo
+	dw Mon167_EvosMoves	;MissingNo
+	dw Mon147_EvosMoves
+	dw Mon148_EvosMoves
+	dw Mon140_EvosMoves
+	dw Mon141_EvosMoves
+	dw Mon116_EvosMoves
+	dw Mon117_EvosMoves
+	dw Mon168_EvosMoves	;MissingNo
+	dw Mon169_EvosMoves	;MissingNo
+	dw Mon027_EvosMoves
+	dw Mon028_EvosMoves
+	dw Mon138_EvosMoves
+	dw Mon139_EvosMoves
+	dw Mon039_EvosMoves
+	dw Mon040_EvosMoves
+	dw Mon133_EvosMoves
+	dw Mon136_EvosMoves
+	dw Mon135_EvosMoves
+	dw Mon134_EvosMoves
+	dw Mon066_EvosMoves
+	dw Mon041_EvosMoves
+	dw Mon023_EvosMoves
+	dw Mon046_EvosMoves
+	dw Mon061_EvosMoves
+	dw Mon062_EvosMoves
+	dw Mon013_EvosMoves
+	dw Mon014_EvosMoves
+	dw Mon015_EvosMoves
+	dw Mon170_EvosMoves	;MissingNo
+	dw Mon085_EvosMoves
+	dw Mon057_EvosMoves
+	dw Mon051_EvosMoves
+	dw Mon049_EvosMoves
+	dw Mon087_EvosMoves
+	dw Mon171_EvosMoves	;MissingNo
+	dw Mon172_EvosMoves	;MissingNo
+	dw Mon010_EvosMoves
+	dw Mon011_EvosMoves
+	dw Mon012_EvosMoves
+	dw Mon068_EvosMoves
+	dw Mon173_EvosMoves	;MissingNo
+	dw Mon055_EvosMoves
+	dw Mon097_EvosMoves
+	dw Mon042_EvosMoves
+	dw Mon150_EvosMoves
+	dw Mon143_EvosMoves
+	dw Mon129_EvosMoves
+	dw Mon174_EvosMoves	;MissingNo
+	dw Mon175_EvosMoves	;MissingNo
+	dw Mon089_EvosMoves
+	dw Mon176_EvosMoves	;MissingNo
+	dw Mon099_EvosMoves
+	dw Mon091_EvosMoves
+	dw Mon177_EvosMoves	;MissingNo
+	dw Mon101_EvosMoves
+	dw Mon036_EvosMoves
+	dw Mon110_EvosMoves
+	dw Mon053_EvosMoves
+	dw Mon105_EvosMoves
+	dw Mon178_EvosMoves	;MissingNo
+	dw Mon093_EvosMoves
+	dw Mon063_EvosMoves
+	dw Mon065_EvosMoves
+	dw Mon017_EvosMoves
+	dw Mon018_EvosMoves
+	dw Mon121_EvosMoves
+	dw Mon001_EvosMoves
+	dw Mon003_EvosMoves
+	dw Mon073_EvosMoves
+	dw Mon179_EvosMoves	;MissingNo
+	dw Mon118_EvosMoves
+	dw Mon119_EvosMoves
+	dw Mon180_EvosMoves	;MissingNo
+	dw Mon181_EvosMoves	;MissingNo
+	dw Mon182_EvosMoves	;MissingNo
+	dw Mon183_EvosMoves	;MissingNo
+	dw Mon077_EvosMoves
+	dw Mon078_EvosMoves
+	dw Mon019_EvosMoves
+	dw Mon020_EvosMoves
+	dw Mon033_EvosMoves
+	dw Mon030_EvosMoves
+	dw Mon074_EvosMoves
+	dw Mon137_EvosMoves
+	dw Mon142_EvosMoves
+	dw Mon184_EvosMoves	;MissingNo
+	dw Mon081_EvosMoves
+	dw Mon185_EvosMoves	;MissingNo
+	dw Mon186_EvosMoves	;MissingNo
+	dw Mon004_EvosMoves
+	dw Mon007_EvosMoves
+	dw Mon005_EvosMoves
+	dw Mon008_EvosMoves
+	dw Mon006_EvosMoves
+	dw Mon187_EvosMoves	;MissingNo
+	dw Mon188_EvosMoves	;MissingNo
+	dw Mon189_EvosMoves	;MissingNo
+	dw Mon190_EvosMoves	;MissingNo
+	dw Mon043_EvosMoves
+	dw Mon044_EvosMoves
+	dw Mon045_EvosMoves
+	dw Mon069_EvosMoves
+	dw Mon070_EvosMoves
+	dw Mon071_EvosMoves
 
-Mon112_EvosAttacks:
+Mon112_EvosMoves:
 ;RHYDON
 ;Evolutions
 	db 0
@@ -19027,7 +19027,7 @@ Mon112_EvosAttacks:
 	db 55,LEER
 	db 64,TAKE_DOWN
 	db 0
-Mon115_EvosAttacks:
+Mon115_EvosMoves:
 ;KANGASKHAN
 ;Evolutions
 	db 0
@@ -19038,7 +19038,7 @@ Mon115_EvosAttacks:
 	db 41,LEER
 	db 46,DIZZY_PUNCH
 	db 0
-Mon032_EvosAttacks:
+Mon032_EvosMoves:
 ;NIDORAN_M
 ;Evolutions
 	db EV_LEVEL,16,NIDORINO
@@ -19051,7 +19051,7 @@ Mon032_EvosAttacks:
 	db 36,HORN_DRILL
 	db 43,DOUBLE_KICK
 	db 0
-Mon035_EvosAttacks:
+Mon035_EvosMoves:
 ;CLEFAIRY
 ;Evolutions
 	db EV_ITEM,MOON_STONE,1,CLEFABLE
@@ -19064,7 +19064,7 @@ Mon035_EvosAttacks:
 	db 39,DEFENSE_CURL
 	db 48,LIGHT_SCREEN
 	db 0
-Mon021_EvosAttacks:
+Mon021_EvosMoves:
 ;SPEAROW
 ;Evolutions
 	db EV_LEVEL,20,FEAROW
@@ -19076,7 +19076,7 @@ Mon021_EvosAttacks:
 	db 29,DRILL_PECK
 	db 36,AGILITY
 	db 0
-Mon100_EvosAttacks:
+Mon100_EvosMoves:
 ;VOLTORB
 ;Evolutions
 	db EV_LEVEL,30,ELECTRODE
@@ -19088,7 +19088,7 @@ Mon100_EvosAttacks:
 	db 36,SWIFT
 	db 43,EXPLOSION
 	db 0
-Mon034_EvosAttacks:
+Mon034_EvosMoves:
 ;NIDOKING
 ;Evolutions
 	db 0
@@ -19097,7 +19097,7 @@ Mon034_EvosAttacks:
 	db 14,POISON_STING
 	db 23,THRASH
 	db 0
-Mon080_EvosAttacks:
+Mon080_EvosMoves:
 ;SLOWBRO
 ;Evolutions
 	db 0
@@ -19110,7 +19110,7 @@ Mon080_EvosAttacks:
 	db 44,AMNESIA
 	db 55,PSYCHIC_M
 	db 0
-Mon002_EvosAttacks:
+Mon002_EvosMoves:
 ;IVYSAUR
 ;Evolutions
 	db EV_LEVEL,32,VENUSAUR
@@ -19124,14 +19124,14 @@ Mon002_EvosAttacks:
 	db 46,SLEEP_POWDER
 	db 54,SOLARBEAM
 	db 0
-Mon103_EvosAttacks:
+Mon103_EvosMoves:
 ;EXEGGUTOR
 ;Evolutions
 	db 0
 ;Learnset
 	db 28,STOMP
 	db 0
-Mon108_EvosAttacks:
+Mon108_EvosMoves:
 ;LICKITUNG
 ;Evolutions
 	db 0
@@ -19142,7 +19142,7 @@ Mon108_EvosAttacks:
 	db 31,SLAM
 	db 39,SCREECH
 	db 0
-Mon102_EvosAttacks:
+Mon102_EvosMoves:
 ;EXEGGCUTE
 ;Evolutions
 	db EV_ITEM,LEAF_STONE ,1,EXEGGUTOR
@@ -19155,7 +19155,7 @@ Mon102_EvosAttacks:
 	db 42,SOLARBEAM
 	db 48,SLEEP_POWDER
 	db 0
-Mon088_EvosAttacks:
+Mon088_EvosMoves:
 ;GRIMER
 ;Evolutions
 	db EV_LEVEL,38,MUK
@@ -19168,7 +19168,7 @@ Mon088_EvosAttacks:
 	db 48,SCREECH
 	db 55,ACID_ARMOR
 	db 0
-Mon094_EvosAttacks:
+Mon094_EvosMoves:
 ;GENGAR
 ;Evolutions
 	db 0
@@ -19176,7 +19176,7 @@ Mon094_EvosAttacks:
 	db 29,HYPNOSIS
 	db 38,DREAM_EATER
 	db 0
-Mon029_EvosAttacks:
+Mon029_EvosMoves:
 ;NIDORAN_F
 ;Evolutions
 	db EV_LEVEL,16,NIDORINA
@@ -19189,7 +19189,7 @@ Mon029_EvosAttacks:
 	db 36,FURY_SWIPES
 	db 43,DOUBLE_KICK
 	db 0
-Mon031_EvosAttacks:
+Mon031_EvosMoves:
 ;NIDOQUEEN
 ;Evolutions
 	db 0
@@ -19198,7 +19198,7 @@ Mon031_EvosAttacks:
 	db 14,POISON_STING
 	db 23,BODY_SLAM
 	db 0
-Mon104_EvosAttacks:
+Mon104_EvosMoves:
 ;CUBONE
 ;Evolutions
 	db EV_LEVEL,28,MAROWAK
@@ -19210,7 +19210,7 @@ Mon104_EvosAttacks:
 	db 43,BONEMERANG
 	db 46,RAGE
 	db 0
-Mon111_EvosAttacks:
+Mon111_EvosMoves:
 ;RHYHORN
 ;Evolutions
 	db EV_LEVEL,42,RHYDON
@@ -19223,7 +19223,7 @@ Mon111_EvosAttacks:
 	db 50,LEER
 	db 55,TAKE_DOWN
 	db 0
-Mon131_EvosAttacks:
+Mon131_EvosMoves:
 ;LAPRAS
 ;Evolutions
 	db 0
@@ -19235,13 +19235,13 @@ Mon131_EvosAttacks:
 	db 38,ICE_BEAM
 	db 46,HYDRO_PUMP
 	db 0
-Mon059_EvosAttacks:
+Mon059_EvosMoves:
 ;ARCANINE
 ;Evolutions
 	db 0
 ;Learnset
 	db 0
-Mon151_EvosAttacks:
+Mon151_EvosMoves:
 ;MEW
 ;Evolutions
 	db 0
@@ -19251,7 +19251,7 @@ Mon151_EvosAttacks:
 	db 30,METRONOME
 	db 40,PSYCHIC_M
 	db 0
-Mon130_EvosAttacks:
+Mon130_EvosMoves:
 ;GYARADOS
 ;Evolutions
 	db 0
@@ -19262,7 +19262,7 @@ Mon130_EvosAttacks:
 	db 41,HYDRO_PUMP
 	db 52,HYPER_BEAM
 	db 0
-Mon090_EvosAttacks:
+Mon090_EvosMoves:
 ;SHELLDER
 ;Evolutions
 	db EV_ITEM,WATER_STONE ,1,CLOYSTER
@@ -19274,7 +19274,7 @@ Mon090_EvosAttacks:
 	db 39,LEER
 	db 50,ICE_BEAM
 	db 0
-Mon072_EvosAttacks:
+Mon072_EvosMoves:
 ;TENTACOOL
 ;Evolutions
 	db EV_LEVEL,30,TENTACRUEL
@@ -19289,7 +19289,7 @@ Mon072_EvosAttacks:
 	db 40,SCREECH
 	db 48,HYDRO_PUMP
 	db 0
-Mon092_EvosAttacks:
+Mon092_EvosMoves:
 ;GASTLY
 ;Evolutions
 	db EV_LEVEL,25,HAUNTER
@@ -19298,7 +19298,7 @@ Mon092_EvosAttacks:
 	db 27,HYPNOSIS
 	db 35,DREAM_EATER
 	db 0
-Mon123_EvosAttacks:
+Mon123_EvosMoves:
 ;SCYTHER
 ;Evolutions
 	db 0
@@ -19310,7 +19310,7 @@ Mon123_EvosAttacks:
 	db 35,SWORDS_DANCE
 	db 42,AGILITY
 	db 0
-Mon120_EvosAttacks:
+Mon120_EvosMoves:
 ;STARYU
 ;Evolutions
 	db EV_ITEM,WATER_STONE ,1,STARMIE
@@ -19324,7 +19324,7 @@ Mon120_EvosAttacks:
 	db 42,LIGHT_SCREEN
 	db 47,HYDRO_PUMP
 	db 0
-Mon009_EvosAttacks:
+Mon009_EvosMoves:
 ;BLASTOISE
 ;Evolutions
 	db 0
@@ -19336,7 +19336,7 @@ Mon009_EvosAttacks:
 	db 42,SKULL_BASH
 	db 52,HYDRO_PUMP
 	db 0
-Mon127_EvosAttacks:
+Mon127_EvosMoves:
 ;PINSIR
 ;Evolutions
 	db 0
@@ -19348,7 +19348,7 @@ Mon127_EvosAttacks:
 	db 49,SLASH
 	db 54,SWORDS_DANCE
 	db 0
-Mon114_EvosAttacks:
+Mon114_EvosMoves:
 ;TANGELA
 ;Evolutions
 	db 0
@@ -19361,20 +19361,20 @@ Mon114_EvosAttacks:
 	db 49,GROWTH
 	db 0
 
-Mon152_EvosAttacks:
+Mon152_EvosMoves:
 ;MISSINGNO
 ;Evolutions
 	db 0
 ;Learnset
 	db 0
 
-Mon153_EvosAttacks:
+Mon153_EvosMoves:
 ;MISSINGNO
 ;Evolutions
 	db 0
 ;Learnset
 	db 0
-Mon058_EvosAttacks:
+Mon058_EvosMoves:
 ;GROWLITHE
 ;Evolutions
 	db EV_ITEM,FIRE_STONE,1,ARCANINE
@@ -19386,7 +19386,7 @@ Mon058_EvosAttacks:
 	db 39,AGILITY
 	db 50,FLAMETHROWER
 	db 0
-Mon095_EvosAttacks:
+Mon095_EvosMoves:
 ;ONIX
 ;Evolutions
 	db 0
@@ -19397,7 +19397,7 @@ Mon095_EvosAttacks:
 	db 33,SLAM
 	db 43,HARDEN
 	db 0
-Mon022_EvosAttacks:
+Mon022_EvosMoves:
 ;FEAROW
 ;Evolutions
 	db 0
@@ -19408,7 +19408,7 @@ Mon022_EvosAttacks:
 	db 34,DRILL_PECK
 	db 43,AGILITY
 	db 0
-Mon016_EvosAttacks:
+Mon016_EvosMoves:
 ;PIDGEY
 ;Evolutions
 	db EV_LEVEL,18,PIDGEOTTO
@@ -19421,7 +19421,7 @@ Mon016_EvosAttacks:
 	db 36,AGILITY
 	db 44,MIRROR_MOVE
 	db 0
-Mon079_EvosAttacks:
+Mon079_EvosMoves:
 ;SLOWPOKE
 ;Evolutions
 	db EV_LEVEL,37,SLOWBRO
@@ -19434,7 +19434,7 @@ Mon079_EvosAttacks:
 	db 40,AMNESIA
 	db 48,PSYCHIC_M
 	db 0
-Mon064_EvosAttacks:
+Mon064_EvosMoves:
 ;KADABRA
 ;Evolutions
 	db EV_TRADE,1,ALAKAZAM
@@ -19447,7 +19447,7 @@ Mon064_EvosAttacks:
 	db 38,PSYCHIC_M
 	db 42,REFLECT
 	db 0
-Mon075_EvosAttacks:
+Mon075_EvosMoves:
 ;GRAVELER
 ;Evolutions
 	db EV_TRADE,1,GOLEM
@@ -19460,7 +19460,7 @@ Mon075_EvosAttacks:
 	db 36,EARTHQUAKE
 	db 43,EXPLOSION
 	db 0
-Mon113_EvosAttacks:
+Mon113_EvosMoves:
 ;CHANSEY
 ;Evolutions
 	db 0
@@ -19472,7 +19472,7 @@ Mon113_EvosAttacks:
 	db 48,LIGHT_SCREEN
 	db 54,DOUBLE_EDGE
 	db 0
-Mon067_EvosAttacks:
+Mon067_EvosMoves:
 ;MACHOKE
 ;Evolutions
 	db EV_TRADE,1,MACHAMP
@@ -19484,7 +19484,7 @@ Mon067_EvosAttacks:
 	db 44,SEISMIC_TOSS
 	db 52,SUBMISSION
 	db 0
-Mon122_EvosAttacks:
+Mon122_EvosMoves:
 ;MR_MIME
 ;Evolutions
 	db 0
@@ -19495,7 +19495,7 @@ Mon122_EvosAttacks:
 	db 39,MEDITATE
 	db 47,SUBSTITUTE
 	db 0
-Mon106_EvosAttacks:
+Mon106_EvosMoves:
 ;HITMONLEE
 ;Evolutions
 	db 0
@@ -19506,7 +19506,7 @@ Mon106_EvosAttacks:
 	db 48,HI_JUMP_KICK
 	db 53,MEGA_KICK
 	db 0
-Mon107_EvosAttacks:
+Mon107_EvosMoves:
 ;HITMONCHAN
 ;Evolutions
 	db 0
@@ -19517,7 +19517,7 @@ Mon107_EvosAttacks:
 	db 48,MEGA_PUNCH
 	db 53,COUNTER
 	db 0
-Mon024_EvosAttacks:
+Mon024_EvosMoves:
 ;ARBOK
 ;Evolutions
 	db 0
@@ -19528,7 +19528,7 @@ Mon024_EvosAttacks:
 	db 36,SCREECH
 	db 47,ACID
 	db 0
-Mon047_EvosAttacks:
+Mon047_EvosMoves:
 ;PARASECT
 ;Evolutions
 	db 0
@@ -19539,7 +19539,7 @@ Mon047_EvosAttacks:
 	db 39,SLASH
 	db 48,GROWTH
 	db 0
-Mon054_EvosAttacks:
+Mon054_EvosMoves:
 ;PSYDUCK
 ;Evolutions
 	db EV_LEVEL,33,GOLDUCK
@@ -19551,7 +19551,7 @@ Mon054_EvosAttacks:
 	db 43,FURY_SWIPES
 	db 52,HYDRO_PUMP
 	db 0
-Mon096_EvosAttacks:
+Mon096_EvosMoves:
 ;DROWZEE
 ;Evolutions
 	db EV_LEVEL,26,HYPNO
@@ -19564,7 +19564,7 @@ Mon096_EvosAttacks:
 	db 32,PSYCHIC_M
 	db 37,MEDITATE
 	db 0
-Mon076_EvosAttacks:
+Mon076_EvosMoves:
 ;GOLEM
 ;Evolutions
 	db 0
@@ -19577,13 +19577,13 @@ Mon076_EvosAttacks:
 	db 43,EXPLOSION
 	db 0
 
-Mon154_EvosAttacks:
+Mon154_EvosMoves:
 ;MISSINGNO
 ;Evolutions
 	db 0
 ;Learnset
 	db 0
-Mon126_EvosAttacks:
+Mon126_EvosMoves:
 ;MAGMAR
 ;Evolutions
 	db 0
@@ -19596,13 +19596,13 @@ Mon126_EvosAttacks:
 	db 55,FLAMETHROWER
 	db 0
 
-Mon155_EvosAttacks:
+Mon155_EvosMoves:
 ;MISSINGNO
 ;Evolutions
 	db 0
 ;Learnset
 	db 0
-Mon125_EvosAttacks:
+Mon125_EvosMoves:
 ;ELECTABUZZ
 ;Evolutions
 	db 0
@@ -19613,7 +19613,7 @@ Mon125_EvosAttacks:
 	db 49,LIGHT_SCREEN
 	db 54,THUNDER
 	db 0
-Mon082_EvosAttacks:
+Mon082_EvosMoves:
 ;MAGNETON
 ;Evolutions
 	db 0
@@ -19625,7 +19625,7 @@ Mon082_EvosAttacks:
 	db 46,SWIFT
 	db 54,SCREECH
 	db 0
-Mon109_EvosAttacks:
+Mon109_EvosMoves:
 ;KOFFING
 ;Evolutions
 	db EV_LEVEL,35,WEEZING
@@ -19638,13 +19638,13 @@ Mon109_EvosAttacks:
 	db 48,EXPLOSION
 	db 0
 
-Mon156_EvosAttacks:
+Mon156_EvosMoves:
 ;MISSINGNO
 ;Evolutions
 	db 0
 ;Learnset
 	db 0
-Mon056_EvosAttacks:
+Mon056_EvosMoves:
 ;MANKEY
 ;Evolutions
 	db EV_LEVEL,28,PRIMEAPE
@@ -19656,7 +19656,7 @@ Mon056_EvosAttacks:
 	db 33,SEISMIC_TOSS
 	db 39,THRASH
 	db 0
-Mon086_EvosAttacks:
+Mon086_EvosMoves:
 ;SEEL
 ;Evolutions
 	db EV_LEVEL,34,DEWGONG
@@ -19668,7 +19668,7 @@ Mon086_EvosAttacks:
 	db 45,TAKE_DOWN
 	db 50,ICE_BEAM
 	db 0
-Mon050_EvosAttacks:
+Mon050_EvosMoves:
 ;DIGLETT
 ;Evolutions
 	db EV_LEVEL,26,DUGTRIO
@@ -19680,7 +19680,7 @@ Mon050_EvosAttacks:
 	db 31,SLASH
 	db 40,EARTHQUAKE
 	db 0
-Mon128_EvosAttacks:
+Mon128_EvosMoves:
 ;TAUROS
 ;Evolutions
 	db 0
@@ -19692,27 +19692,27 @@ Mon128_EvosAttacks:
 	db 51,TAKE_DOWN
 	db 0
 
-Mon157_EvosAttacks:
+Mon157_EvosMoves:
 ;MISSINGNO
 ;Evolutions
 	db 0
 ;Learnset
 	db 0
 
-Mon158_EvosAttacks:
+Mon158_EvosMoves:
 ;MISSINGNO
 ;Evolutions
 	db 0
 ;Learnset
 	db 0
 
-Mon159_EvosAttacks:
+Mon159_EvosMoves:
 ;MISSINGNO
 ;Evolutions
 	db 0
 ;Learnset
 	db 0
-Mon083_EvosAttacks:
+Mon083_EvosMoves:
 ;FARFETCH_D
 ;Evolutions
 	db 0
@@ -19723,7 +19723,7 @@ Mon083_EvosAttacks:
 	db 31,AGILITY
 	db 39,SLASH
 	db 0
-Mon048_EvosAttacks:
+Mon048_EvosMoves:
 ;VENONAT
 ;Evolutions
 	db EV_LEVEL,31,VENOMOTH
@@ -19736,7 +19736,7 @@ Mon048_EvosAttacks:
 	db 38,SLEEP_POWDER
 	db 43,PSYCHIC_M
 	db 0
-Mon149_EvosAttacks:
+Mon149_EvosMoves:
 ;DRAGONITE
 ;Evolutions
 	db 0
@@ -19748,27 +19748,27 @@ Mon149_EvosAttacks:
 	db 60,HYPER_BEAM
 	db 0
 
-Mon160_EvosAttacks:
+Mon160_EvosMoves:
 ;MISSINGNO
 ;Evolutions
 	db 0
 ;Learnset
 	db 0
 
-Mon161_EvosAttacks:
+Mon161_EvosMoves:
 ;MISSINGNO
 ;Evolutions
 	db 0
 ;Learnset
 	db 0
 
-Mon162_EvosAttacks:
+Mon162_EvosMoves:
 ;MISSINGNO
 ;Evolutions
 	db 0
 ;Learnset
 	db 0
-Mon084_EvosAttacks:
+Mon084_EvosMoves:
 ;DODUO
 ;Evolutions
 	db EV_LEVEL,31,DODRIO
@@ -19781,7 +19781,7 @@ Mon084_EvosAttacks:
 	db 40,TRI_ATTACK
 	db 44,AGILITY
 	db 0
-Mon060_EvosAttacks:
+Mon060_EvosMoves:
 ;POLIWAG
 ;Evolutions
 	db EV_LEVEL,25,POLIWHIRL
@@ -19794,7 +19794,7 @@ Mon060_EvosAttacks:
 	db 38,AMNESIA
 	db 45,HYDRO_PUMP
 	db 0
-Mon124_EvosAttacks:
+Mon124_EvosMoves:
 ;JYNX
 ;Evolutions
 	db 0
@@ -19806,7 +19806,7 @@ Mon124_EvosAttacks:
 	db 47,THRASH
 	db 58,BLIZZARD
 	db 0
-Mon146_EvosAttacks:
+Mon146_EvosMoves:
 ;MOLTRES
 ;Evolutions
 	db 0
@@ -19815,7 +19815,7 @@ Mon146_EvosAttacks:
 	db 55,AGILITY
 	db 60,SKY_ATTACK
 	db 0
-Mon144_EvosAttacks:
+Mon144_EvosMoves:
 ;ARTICUNO
 ;Evolutions
 	db 0
@@ -19824,7 +19824,7 @@ Mon144_EvosAttacks:
 	db 55,AGILITY
 	db 60,MIST
 	db 0
-Mon145_EvosAttacks:
+Mon145_EvosMoves:
 ;ZAPDOS
 ;Evolutions
 	db 0
@@ -19833,13 +19833,13 @@ Mon145_EvosAttacks:
 	db 55,AGILITY
 	db 60,LIGHT_SCREEN
 	db 0
-Mon132_EvosAttacks:
+Mon132_EvosMoves:
 ;DITTO
 ;Evolutions
 	db 0
 ;Learnset
 	db 0
-Mon052_EvosAttacks:
+Mon052_EvosMoves:
 ;MEOWTH
 ;Evolutions
 	db EV_LEVEL,28,PERSIAN
@@ -19851,7 +19851,7 @@ Mon052_EvosAttacks:
 	db 33,FURY_SWIPES
 	db 44,SLASH
 	db 0
-Mon098_EvosAttacks:
+Mon098_EvosMoves:
 ;KRABBY
 ;Evolutions
 	db EV_LEVEL,28,KINGLER
@@ -19864,27 +19864,27 @@ Mon098_EvosAttacks:
 	db 40,HARDEN
 	db 0
 
-Mon163_EvosAttacks:
+Mon163_EvosMoves:
 ;MISSINGNO
 ;Evolutions
 	db 0
 ;Learnset
 	db 0
 
-Mon164_EvosAttacks:
+Mon164_EvosMoves:
 ;MISSINGNO
 ;Evolutions
 	db 0
 ;Learnset
 	db 0
 
-Mon165_EvosAttacks:
+Mon165_EvosMoves:
 ;MISSINGNO
 ;Evolutions
 	db 0
 ;Learnset
 	db 0
-Mon037_EvosAttacks:
+Mon037_EvosMoves:
 ;VULPIX
 ;Evolutions
 	db EV_ITEM,FIRE_STONE,1,NINETALES
@@ -19896,13 +19896,13 @@ Mon037_EvosAttacks:
 	db 35,FLAMETHROWER
 	db 42,FIRE_SPIN
 	db 0
-Mon038_EvosAttacks:
+Mon038_EvosMoves:
 ;NINETALES
 ;Evolutions
 	db 0
 ;Learnset
 	db 0
-Mon025_EvosAttacks:
+Mon025_EvosMoves:
 ;PIKACHU
 ;Evolutions
 	db EV_ITEM,THUNDER_STONE ,1,RAICHU
@@ -19914,27 +19914,27 @@ Mon025_EvosAttacks:
 	db 33,AGILITY
 	db 43,THUNDER
 	db 0
-Mon026_EvosAttacks:
+Mon026_EvosMoves:
 ;RAICHU
 ;Evolutions
 	db 0
 ;Learnset
 	db 0
 
-Mon166_EvosAttacks:
+Mon166_EvosMoves:
 ;MISSINGNO
 ;Evolutions
 	db 0
 ;Learnset
 	db 0
 
-Mon167_EvosAttacks:
+Mon167_EvosMoves:
 ;MISSINGNO
 ;Evolutions
 	db 0
 ;Learnset
 	db 0
-Mon147_EvosAttacks:
+Mon147_EvosMoves:
 ;DRATINI
 ;Evolutions
 	db EV_LEVEL,30,DRAGONAIR
@@ -19946,7 +19946,7 @@ Mon147_EvosAttacks:
 	db 40,DRAGON_RAGE
 	db 50,HYPER_BEAM
 	db 0
-Mon148_EvosAttacks:
+Mon148_EvosMoves:
 ;DRAGONAIR
 ;Evolutions
 	db EV_LEVEL,55,DRAGONITE
@@ -19958,7 +19958,7 @@ Mon148_EvosAttacks:
 	db 45,DRAGON_RAGE
 	db 55,HYPER_BEAM
 	db 0
-Mon140_EvosAttacks:
+Mon140_EvosMoves:
 ;KABUTO
 ;Evolutions
 	db EV_LEVEL,40,KABUTOPS
@@ -19969,7 +19969,7 @@ Mon140_EvosAttacks:
 	db 44,LEER
 	db 49,HYDRO_PUMP
 	db 0
-Mon141_EvosAttacks:
+Mon141_EvosMoves:
 ;KABUTOPS
 ;Evolutions
 	db 0
@@ -19979,7 +19979,7 @@ Mon141_EvosAttacks:
 	db 46,LEER
 	db 53,HYDRO_PUMP
 	db 0
-Mon116_EvosAttacks:
+Mon116_EvosMoves:
 ;HORSEA
 ;Evolutions
 	db EV_LEVEL,32,SEADRA
@@ -19991,7 +19991,7 @@ Mon116_EvosAttacks:
 	db 37,AGILITY
 	db 45,HYDRO_PUMP
 	db 0
-Mon117_EvosAttacks:
+Mon117_EvosMoves:
 ;SEADRA
 ;Evolutions
 	db 0
@@ -20003,20 +20003,20 @@ Mon117_EvosAttacks:
 	db 52,HYDRO_PUMP
 	db 0
 
-Mon168_EvosAttacks:
+Mon168_EvosMoves:
 ;MISSINGNO
 ;Evolutions
 	db 0
 ;Learnset
 	db 0
 
-Mon169_EvosAttacks:
+Mon169_EvosMoves:
 ;MISSINGNO
 ;Evolutions
 	db 0
 ;Learnset
 	db 0
-Mon027_EvosAttacks:
+Mon027_EvosMoves:
 ;SANDSHREW
 ;Evolutions
 	db EV_LEVEL,22,SANDSLASH
@@ -20028,7 +20028,7 @@ Mon027_EvosAttacks:
 	db 31,SWIFT
 	db 38,FURY_SWIPES
 	db 0
-Mon028_EvosAttacks:
+Mon028_EvosMoves:
 ;SANDSLASH
 ;Evolutions
 	db 0
@@ -20039,7 +20039,7 @@ Mon028_EvosAttacks:
 	db 36,SWIFT
 	db 47,FURY_SWIPES
 	db 0
-Mon138_EvosAttacks:
+Mon138_EvosMoves:
 ;OMANYTE
 ;Evolutions
 	db EV_LEVEL,40,OMASTAR
@@ -20050,7 +20050,7 @@ Mon138_EvosAttacks:
 	db 46,SPIKE_CANNON
 	db 53,HYDRO_PUMP
 	db 0
-Mon139_EvosAttacks:
+Mon139_EvosMoves:
 ;OMASTAR
 ;Evolutions
 	db 0
@@ -20060,7 +20060,7 @@ Mon139_EvosAttacks:
 	db 44,SPIKE_CANNON
 	db 49,HYDRO_PUMP
 	db 0
-Mon039_EvosAttacks:
+Mon039_EvosMoves:
 ;JIGGLYPUFF
 ;Evolutions
 	db EV_ITEM,MOON_STONE,1,WIGGLYTUFF
@@ -20074,13 +20074,13 @@ Mon039_EvosAttacks:
 	db 34,BODY_SLAM
 	db 39,DOUBLE_EDGE
 	db 0
-Mon040_EvosAttacks:
+Mon040_EvosMoves:
 ;WIGGLYTUFF
 ;Evolutions
 	db 0
 ;Learnset
 	db 0
-Mon133_EvosAttacks:
+Mon133_EvosMoves:
 ;EEVEE
 ;Evolutions
 	db EV_ITEM,FIRE_STONE,1,FLAREON
@@ -20093,7 +20093,7 @@ Mon133_EvosAttacks:
 	db 37,BITE
 	db 45,TAKE_DOWN
 	db 0
-Mon136_EvosAttacks:
+Mon136_EvosMoves:
 ;FLAREON
 ;Evolutions
 	db 0
@@ -20107,7 +20107,7 @@ Mon136_EvosAttacks:
 	db 48,RAGE
 	db 54,FLAMETHROWER
 	db 0
-Mon135_EvosAttacks:
+Mon135_EvosMoves:
 ;JOLTEON
 ;Evolutions
 	db 0
@@ -20121,7 +20121,7 @@ Mon135_EvosAttacks:
 	db 48,PIN_MISSILE
 	db 54,THUNDER
 	db 0
-Mon134_EvosAttacks:
+Mon134_EvosMoves:
 ;VAPOREON
 ;Evolutions
 	db 0
@@ -20135,7 +20135,7 @@ Mon134_EvosAttacks:
 	db 48,MIST
 	db 54,HYDRO_PUMP
 	db 0
-Mon066_EvosAttacks:
+Mon066_EvosMoves:
 ;MACHOP
 ;Evolutions
 	db EV_LEVEL,28,MACHOKE
@@ -20147,7 +20147,7 @@ Mon066_EvosAttacks:
 	db 39,SEISMIC_TOSS
 	db 46,SUBMISSION
 	db 0
-Mon041_EvosAttacks:
+Mon041_EvosMoves:
 ;ZUBAT
 ;Evolutions
 	db EV_LEVEL,22,GOLBAT
@@ -20159,7 +20159,7 @@ Mon041_EvosAttacks:
 	db 28,WING_ATTACK
 	db 36,HAZE
 	db 0
-Mon023_EvosAttacks:
+Mon023_EvosMoves:
 ;EKANS
 ;Evolutions
 	db EV_LEVEL,22,ARBOK
@@ -20171,7 +20171,7 @@ Mon023_EvosAttacks:
 	db 31,SCREECH
 	db 38,ACID
 	db 0
-Mon046_EvosAttacks:
+Mon046_EvosMoves:
 ;PARAS
 ;Evolutions
 	db EV_LEVEL,24,PARASECT
@@ -20183,7 +20183,7 @@ Mon046_EvosAttacks:
 	db 34,SLASH
 	db 41,GROWTH
 	db 0
-Mon061_EvosAttacks:
+Mon061_EvosMoves:
 ;POLIWHIRL
 ;Evolutions
 	db EV_ITEM,WATER_STONE ,1,POLIWRATH
@@ -20196,7 +20196,7 @@ Mon061_EvosAttacks:
 	db 41,AMNESIA
 	db 49,HYDRO_PUMP
 	db 0
-Mon062_EvosAttacks:
+Mon062_EvosMoves:
 ;POLIWRATH
 ;Evolutions
 	db 0
@@ -20204,21 +20204,21 @@ Mon062_EvosAttacks:
 	db 16,HYPNOSIS
 	db 19,WATER_GUN
 	db 0
-Mon013_EvosAttacks:
+Mon013_EvosMoves:
 ;WEEDLE
 ;Evolutions
 	db EV_LEVEL,7,KAKUNA
 	db 0
 ;Learnset
 	db 0
-Mon014_EvosAttacks:
+Mon014_EvosMoves:
 ;KAKUNA
 ;Evolutions
 	db EV_LEVEL,10,BEEDRILL
 	db 0
 ;Learnset
 	db 0
-Mon015_EvosAttacks:
+Mon015_EvosMoves:
 ;BEEDRILL
 ;Evolutions
 	db 0
@@ -20231,13 +20231,13 @@ Mon015_EvosAttacks:
 	db 35,AGILITY
 	db 0
 
-Mon170_EvosAttacks:
+Mon170_EvosMoves:
 ;MISSINGNO
 ;Evolutions
 	db 0
 ;Learnset
 	db 0
-Mon085_EvosAttacks:
+Mon085_EvosMoves:
 ;DODRIO
 ;Evolutions
 	db 0
@@ -20249,7 +20249,7 @@ Mon085_EvosAttacks:
 	db 45,TRI_ATTACK
 	db 51,AGILITY
 	db 0
-Mon057_EvosAttacks:
+Mon057_EvosMoves:
 ;PRIMEAPE
 ;Evolutions
 	db 0
@@ -20260,7 +20260,7 @@ Mon057_EvosAttacks:
 	db 37,SEISMIC_TOSS
 	db 46,THRASH
 	db 0
-Mon051_EvosAttacks:
+Mon051_EvosMoves:
 ;DUGTRIO
 ;Evolutions
 	db 0
@@ -20271,7 +20271,7 @@ Mon051_EvosAttacks:
 	db 35,SLASH
 	db 47,EARTHQUAKE
 	db 0
-Mon049_EvosAttacks:
+Mon049_EvosMoves:
 ;VENOMOTH
 ;Evolutions
 	db 0
@@ -20283,7 +20283,7 @@ Mon049_EvosAttacks:
 	db 43,SLEEP_POWDER
 	db 50,PSYCHIC_M
 	db 0
-Mon087_EvosAttacks:
+Mon087_EvosMoves:
 ;DEWGONG
 ;Evolutions
 	db 0
@@ -20295,34 +20295,34 @@ Mon087_EvosAttacks:
 	db 56,ICE_BEAM
 	db 0
 
-Mon171_EvosAttacks:
+Mon171_EvosMoves:
 ;MISSINGNO
 ;Evolutions
 	db 0
 ;Learnset
 	db 0
 
-Mon172_EvosAttacks:
+Mon172_EvosMoves:
 ;MISSINGNO
 ;Evolutions
 	db 0
 ;Learnset
 	db 0
-Mon010_EvosAttacks:
+Mon010_EvosMoves:
 ;CATERPIE
 ;Evolutions
 	db EV_LEVEL,7,METAPOD
 	db 0
 ;Learnset
 	db 0
-Mon011_EvosAttacks:
+Mon011_EvosMoves:
 ;METAPOD
 ;Evolutions
 	db EV_LEVEL,10,BUTTERFREE
 	db 0
 ;Learnset
 	db 0
-Mon012_EvosAttacks:
+Mon012_EvosMoves:
 ;BUTTERFREE
 ;Evolutions
 	db 0
@@ -20335,7 +20335,7 @@ Mon012_EvosAttacks:
 	db 26,WHIRLWIND
 	db 32,PSYBEAM
 	db 0
-Mon068_EvosAttacks:
+Mon068_EvosMoves:
 ;MACHAMP
 ;Evolutions
 	db 0
@@ -20347,13 +20347,13 @@ Mon068_EvosAttacks:
 	db 52,SUBMISSION
 	db 0
 
-Mon173_EvosAttacks:
+Mon173_EvosMoves:
 ;MISSINGNO
 ;Evolutions
 	db 0
 ;Learnset
 	db 0
-Mon055_EvosAttacks:
+Mon055_EvosMoves:
 ;GOLDUCK
 ;Evolutions
 	db 0
@@ -20364,7 +20364,7 @@ Mon055_EvosAttacks:
 	db 48,FURY_SWIPES
 	db 59,HYDRO_PUMP
 	db 0
-Mon097_EvosAttacks:
+Mon097_EvosMoves:
 ;HYPNO
 ;Evolutions
 	db 0
@@ -20376,7 +20376,7 @@ Mon097_EvosAttacks:
 	db 37,PSYCHIC_M
 	db 43,MEDITATE
 	db 0
-Mon042_EvosAttacks:
+Mon042_EvosMoves:
 ;GOLBAT
 ;Evolutions
 	db 0
@@ -20387,7 +20387,7 @@ Mon042_EvosAttacks:
 	db 32,WING_ATTACK
 	db 43,HAZE
 	db 0
-Mon150_EvosAttacks:
+Mon150_EvosMoves:
 ;MEWTWO
 ;Evolutions
 	db 0
@@ -20398,7 +20398,7 @@ Mon150_EvosAttacks:
 	db 75,MIST
 	db 81,AMNESIA
 	db 0
-Mon143_EvosAttacks:
+Mon143_EvosMoves:
 ;SNORLAX
 ;Evolutions
 	db 0
@@ -20408,7 +20408,7 @@ Mon143_EvosAttacks:
 	db 48,DOUBLE_EDGE
 	db 56,HYPER_BEAM
 	db 0
-Mon129_EvosAttacks:
+Mon129_EvosMoves:
 ;MAGIKARP
 ;Evolutions
 	db EV_LEVEL,20,GYARADOS
@@ -20417,20 +20417,20 @@ Mon129_EvosAttacks:
 	db 15,TACKLE
 	db 0
 
-Mon174_EvosAttacks:
+Mon174_EvosMoves:
 ;MISSINGNO
 ;Evolutions
 	db 0
 ;Learnset
 	db 0
 
-Mon175_EvosAttacks:
+Mon175_EvosMoves:
 ;MISSINGNO
 ;Evolutions
 	db 0
 ;Learnset
 	db 0
-Mon089_EvosAttacks:
+Mon089_EvosMoves:
 ;MUK
 ;Evolutions
 	db 0
@@ -20443,13 +20443,13 @@ Mon089_EvosAttacks:
 	db 60,ACID_ARMOR
 	db 0
 
-Mon176_EvosAttacks:
+Mon176_EvosMoves:
 ;MISSINGNO
 ;Evolutions
 	db 0
 ;Learnset
 	db 0
-Mon099_EvosAttacks:
+Mon099_EvosMoves:
 ;KINGLER
 ;Evolutions
 	db 0
@@ -20460,7 +20460,7 @@ Mon099_EvosAttacks:
 	db 42,CRABHAMMER
 	db 49,HARDEN
 	db 0
-Mon091_EvosAttacks:
+Mon091_EvosMoves:
 ;CLOYSTER
 ;Evolutions
 	db 0
@@ -20468,13 +20468,13 @@ Mon091_EvosAttacks:
 	db 50,SPIKE_CANNON
 	db 0
 
-Mon177_EvosAttacks:
+Mon177_EvosMoves:
 ;MISSINGNO
 ;Evolutions
 	db 0
 ;Learnset
 	db 0
-Mon101_EvosAttacks:
+Mon101_EvosMoves:
 ;ELECTRODE
 ;Evolutions
 	db 0
@@ -20485,13 +20485,13 @@ Mon101_EvosAttacks:
 	db 40,SWIFT
 	db 50,EXPLOSION
 	db 0
-Mon036_EvosAttacks:
+Mon036_EvosMoves:
 ;CLEFABLE
 ;Evolutions
 	db 0
 ;Learnset
 	db 0
-Mon110_EvosAttacks:
+Mon110_EvosMoves:
 ;WEEZING
 ;Evolutions
 	db 0
@@ -20502,7 +20502,7 @@ Mon110_EvosAttacks:
 	db 49,HAZE
 	db 53,EXPLOSION
 	db 0
-Mon053_EvosAttacks:
+Mon053_EvosMoves:
 ;PERSIAN
 ;Evolutions
 	db 0
@@ -20513,7 +20513,7 @@ Mon053_EvosAttacks:
 	db 37,FURY_SWIPES
 	db 51,SLASH
 	db 0
-Mon105_EvosAttacks:
+Mon105_EvosMoves:
 ;MAROWAK
 ;Evolutions
 	db 0
@@ -20525,13 +20525,13 @@ Mon105_EvosAttacks:
 	db 55,RAGE
 	db 0
 
-Mon178_EvosAttacks:
+Mon178_EvosMoves:
 ;MISSINGNO
 ;Evolutions
 	db 0
 ;Learnset
 	db 0
-Mon093_EvosAttacks:
+Mon093_EvosMoves:
 ;HAUNTER
 ;Evolutions
 	db EV_TRADE,1,GENGAR
@@ -20540,14 +20540,14 @@ Mon093_EvosAttacks:
 	db 29,HYPNOSIS
 	db 38,DREAM_EATER
 	db 0
-Mon063_EvosAttacks:
+Mon063_EvosMoves:
 ;ABRA
 ;Evolutions
 	db EV_LEVEL,16,KADABRA
 	db 0
 ;Learnset
 	db 0
-Mon065_EvosAttacks:
+Mon065_EvosMoves:
 ;ALAKAZAM
 ;Evolutions
 	db 0
@@ -20559,7 +20559,7 @@ Mon065_EvosAttacks:
 	db 38,PSYCHIC_M
 	db 42,REFLECT
 	db 0
-Mon017_EvosAttacks:
+Mon017_EvosMoves:
 ;PIDGEOTTO
 ;Evolutions
 	db EV_LEVEL,36,PIDGEOT
@@ -20572,7 +20572,7 @@ Mon017_EvosAttacks:
 	db 40,AGILITY
 	db 49,MIRROR_MOVE
 	db 0
-Mon018_EvosAttacks:
+Mon018_EvosMoves:
 ;PIDGEOT
 ;Evolutions
 	db 0
@@ -20584,13 +20584,13 @@ Mon018_EvosAttacks:
 	db 44,AGILITY
 	db 54,MIRROR_MOVE
 	db 0
-Mon121_EvosAttacks:
+Mon121_EvosMoves:
 ;STARMIE
 ;Evolutions
 	db 0
 ;Learnset
 	db 0
-Mon001_EvosAttacks:
+Mon001_EvosMoves:
 ;BULBASAUR
 ;Evolutions
 	db EV_LEVEL,16,IVYSAUR
@@ -20604,7 +20604,7 @@ Mon001_EvosAttacks:
 	db 41,SLEEP_POWDER
 	db 48,SOLARBEAM
 	db 0
-Mon003_EvosAttacks:
+Mon003_EvosMoves:
 ;VENUSAUR
 ;Evolutions
 	db 0
@@ -20617,7 +20617,7 @@ Mon003_EvosAttacks:
 	db 55,SLEEP_POWDER
 	db 65,SOLARBEAM
 	db 0
-Mon073_EvosAttacks:
+Mon073_EvosMoves:
 ;TENTACRUEL
 ;Evolutions
 	db 0
@@ -20632,13 +20632,13 @@ Mon073_EvosAttacks:
 	db 50,HYDRO_PUMP
 	db 0
 
-Mon179_EvosAttacks:
+Mon179_EvosMoves:
 ;MISSINGNO
 ;Evolutions
 	db 0
 ;Learnset
 	db 0
-Mon118_EvosAttacks:
+Mon118_EvosMoves:
 ;GOLDEEN
 ;Evolutions
 	db EV_LEVEL,33,SEAKING
@@ -20651,7 +20651,7 @@ Mon118_EvosAttacks:
 	db 45,HORN_DRILL
 	db 54,AGILITY
 	db 0
-Mon119_EvosAttacks:
+Mon119_EvosMoves:
 ;SEAKING
 ;Evolutions
 	db 0
@@ -20664,34 +20664,34 @@ Mon119_EvosAttacks:
 	db 54,AGILITY
 	db 0
 
-Mon180_EvosAttacks:
+Mon180_EvosMoves:
 ;MISSINGNO
 ;Evolutions
 	db 0
 ;Learnset
 	db 0
 
-Mon181_EvosAttacks:
+Mon181_EvosMoves:
 ;MISSINGNO
 ;Evolutions
 	db 0
 ;Learnset
 	db 0
 
-Mon182_EvosAttacks:
+Mon182_EvosMoves:
 ;MISSINGNO
 ;Evolutions
 	db 0
 ;Learnset
 	db 0
 
-Mon183_EvosAttacks:
+Mon183_EvosMoves:
 ;MISSINGNO
 ;Evolutions
 	db 0
 ;Learnset
 	db 0
-Mon077_EvosAttacks:
+Mon077_EvosMoves:
 ;PONYTA
 ;Evolutions
 	db EV_LEVEL,40,RAPIDASH
@@ -20704,7 +20704,7 @@ Mon077_EvosAttacks:
 	db 43,TAKE_DOWN
 	db 48,AGILITY
 	db 0
-Mon078_EvosAttacks:
+Mon078_EvosMoves:
 ;RAPIDASH
 ;Evolutions
 	db 0
@@ -20716,7 +20716,7 @@ Mon078_EvosAttacks:
 	db 47,TAKE_DOWN
 	db 55,AGILITY
 	db 0
-Mon019_EvosAttacks:
+Mon019_EvosMoves:
 ;RATTATA
 ;Evolutions
 	db EV_LEVEL,20,RATICATE
@@ -20727,7 +20727,7 @@ Mon019_EvosAttacks:
 	db 23,FOCUS_ENERGY
 	db 34,SUPER_FANG
 	db 0
-Mon020_EvosAttacks:
+Mon020_EvosMoves:
 ;RATICATE
 ;Evolutions
 	db 0
@@ -20737,7 +20737,7 @@ Mon020_EvosAttacks:
 	db 27,FOCUS_ENERGY
 	db 41,SUPER_FANG
 	db 0
-Mon033_EvosAttacks:
+Mon033_EvosMoves:
 ;NIDORINO
 ;Evolutions
 	db EV_ITEM,MOON_STONE,1,NIDOKING
@@ -20750,7 +20750,7 @@ Mon033_EvosAttacks:
 	db 41,HORN_DRILL
 	db 50,DOUBLE_KICK
 	db 0
-Mon030_EvosAttacks:
+Mon030_EvosMoves:
 ;NIDORINA
 ;Evolutions
 	db EV_ITEM,MOON_STONE,1,NIDOQUEEN
@@ -20763,7 +20763,7 @@ Mon030_EvosAttacks:
 	db 41,FURY_SWIPES
 	db 50,DOUBLE_KICK
 	db 0
-Mon074_EvosAttacks:
+Mon074_EvosMoves:
 ;GEODUDE
 ;Evolutions
 	db EV_LEVEL,25,GRAVELER
@@ -20776,7 +20776,7 @@ Mon074_EvosAttacks:
 	db 31,EARTHQUAKE
 	db 36,EXPLOSION
 	db 0
-Mon137_EvosAttacks:
+Mon137_EvosMoves:
 ;PORYGON
 ;Evolutions
 	db 0
@@ -20786,7 +20786,7 @@ Mon137_EvosAttacks:
 	db 35,AGILITY
 	db 42,TRI_ATTACK
 	db 0
-Mon142_EvosAttacks:
+Mon142_EvosMoves:
 ;AERODACTYL
 ;Evolutions
 	db 0
@@ -20797,13 +20797,13 @@ Mon142_EvosAttacks:
 	db 54,HYPER_BEAM
 	db 0
 
-Mon184_EvosAttacks:
+Mon184_EvosMoves:
 ;MISSINGNO
 ;Evolutions
 	db 0
 ;Learnset
 	db 0
-Mon081_EvosAttacks:
+Mon081_EvosMoves:
 ;MAGNEMITE
 ;Evolutions
 	db EV_LEVEL,30,MAGNETON
@@ -20817,20 +20817,20 @@ Mon081_EvosAttacks:
 	db 47,SCREECH
 	db 0
 
-Mon185_EvosAttacks:
+Mon185_EvosMoves:
 ;MISSINGNO
 ;Evolutions
 	db 0
 ;Learnset
 	db 0
 
-Mon186_EvosAttacks:
+Mon186_EvosMoves:
 ;MISSINGNO
 ;Evolutions
 	db 0
 ;Learnset
 	db 0
-Mon004_EvosAttacks:
+Mon004_EvosMoves:
 ;CHARMANDER
 ;Evolutions
 	db EV_LEVEL,16,CHARMELEON
@@ -20843,7 +20843,7 @@ Mon004_EvosAttacks:
 	db 38,FLAMETHROWER
 	db 46,FIRE_SPIN
 	db 0
-Mon007_EvosAttacks:
+Mon007_EvosMoves:
 ;SQUIRTLE
 ;Evolutions
 	db EV_LEVEL,16,WARTORTLE
@@ -20856,7 +20856,7 @@ Mon007_EvosAttacks:
 	db 35,SKULL_BASH
 	db 42,HYDRO_PUMP
 	db 0
-Mon005_EvosAttacks:
+Mon005_EvosMoves:
 ;CHARMELEON
 ;Evolutions
 	db EV_LEVEL,36,CHARIZARD
@@ -20869,7 +20869,7 @@ Mon005_EvosAttacks:
 	db 42,FLAMETHROWER
 	db 56,FIRE_SPIN
 	db 0
-Mon008_EvosAttacks:
+Mon008_EvosMoves:
 ;WARTORTLE
 ;Evolutions
 	db EV_LEVEL,36,BLASTOISE
@@ -20882,7 +20882,7 @@ Mon008_EvosAttacks:
 	db 39,SKULL_BASH
 	db 47,HYDRO_PUMP
 	db 0
-Mon006_EvosAttacks:
+Mon006_EvosMoves:
 ;CHARIZARD
 ;Evolutions
 	db 0
@@ -20895,34 +20895,34 @@ Mon006_EvosAttacks:
 	db 55,FIRE_SPIN
 	db 0
 
-Mon187_EvosAttacks:
+Mon187_EvosMoves:
 ;MISSINGNO
 ;Evolutions
 	db 0
 ;Learnset
 	db 0
 
-Mon188_EvosAttacks:
+Mon188_EvosMoves:
 ;MISSINGNO
 ;Evolutions
 	db 0
 ;Learnset
 	db 0
 
-Mon189_EvosAttacks:
+Mon189_EvosMoves:
 ;MISSINGNO
 ;Evolutions
 	db 0
 ;Learnset
 	db 0
 
-Mon190_EvosAttacks:
+Mon190_EvosMoves:
 ;MISSINGNO
 ;Evolutions
 	db 0
 ;Learnset
 	db 0
-Mon043_EvosAttacks:
+Mon043_EvosMoves:
 ;ODDISH
 ;Evolutions
 	db EV_LEVEL,21,GLOOM
@@ -20935,7 +20935,7 @@ Mon043_EvosAttacks:
 	db 33,PETAL_DANCE
 	db 46,SOLARBEAM
 	db 0
-Mon044_EvosAttacks:
+Mon044_EvosMoves:
 ;GLOOM
 ;Evolutions
 	db EV_ITEM,LEAF_STONE ,1,VILEPLUME
@@ -20948,7 +20948,7 @@ Mon044_EvosAttacks:
 	db 38,PETAL_DANCE
 	db 52,SOLARBEAM
 	db 0
-Mon045_EvosAttacks:
+Mon045_EvosMoves:
 ;VILEPLUME
 ;Evolutions
 	db 0
@@ -20957,7 +20957,7 @@ Mon045_EvosAttacks:
 	db 17,STUN_SPORE
 	db 19,SLEEP_POWDER
 	db 0
-Mon069_EvosAttacks:
+Mon069_EvosMoves:
 ;BELLSPROUT
 ;Evolutions
 	db EV_LEVEL,21,WEEPINBELL
@@ -20971,7 +20971,7 @@ Mon069_EvosAttacks:
 	db 33,RAZOR_LEAF
 	db 42,SLAM
 	db 0
-Mon070_EvosAttacks:
+Mon070_EvosMoves:
 ;WEEPINBELL
 ;Evolutions
 	db EV_ITEM,LEAF_STONE ,1,VICTREEBEL
@@ -20985,7 +20985,7 @@ Mon070_EvosAttacks:
 	db 38,RAZOR_LEAF
 	db 49,SLAM
 	db 0
-Mon071_EvosAttacks:
+Mon071_EvosMoves:
 ;VICTREEBEL
 ;Evolutions
 	db 0
@@ -21035,15 +21035,15 @@ INCBIN "baserom.gbc",$3bbe1,$41f
 
 SECTION "bankF",DATA,BANK[$F]
 
-; These are move effects (second value from the Attacks table in bank $E).
+; These are move effects (second value from the Moves table in bank $E).
 EffectsArray1: ; 4000
 	db $18,$19,$1C,$2E,$2F,$31,$38,$39,$40,$41,$42,$43,$4F,$52,$54,$55,$FF
 EffectsArray2: ; 4011
-; attacks that do damage but not through normal calculations
+; moves that do damage but not through normal calculations
 ; e.g., Super Fang, Psywave
 	db $28,$29,$FF
 EffectsArray3: ; 4014
-; non-damaging, stat‐affecting or status‐causing attacks?
+; non-damaging, stat‐affecting or status‐causing moves?
 ; e.g., Meditate, Bide, Hypnosis
 	db $01,$0A,$0B,$0C,$0D,$0E,$0F,$12,$13,$14,$15,$16,$17,$1A,$20,$32,$33,$34,$35,$36,$37,$3A,$3B,$3C,$3D,$3E,$3F,$FF
 EffectsArray4: ; 4030
@@ -21051,7 +21051,7 @@ EffectsArray4: ; 4030
 EffectsArray5: ; 403B
 	db $03,$07,$08,$10,$11,$1D,$1E,$27,$28,$29,$2B,$2C,$2D,$30 ; fallthru
 EffectsArray5B: ; 4049
-; attacks that prevent the player from switching attacks?
+; moves that prevent the player from switching moves?
 	db $1B,$2A,$FF
 
 INCBIN "baserom.gbc",$3c04c,$3c1a8 - $3c04c
@@ -21388,7 +21388,7 @@ INCBIN "baserom.gbc",$3d435,$274
 	ld de,$CCDC ; pointer to the move just used
 	ld b,BANK(DecrementPP)
 	call Bankswitch
-	ld a,[$CFD3] ; effect of the attack just used
+	ld a,[$CFD3] ; effect of the move just used
 	ld hl,EffectsArray1
 	ld de,1
 	call IsInArray
@@ -22099,7 +22099,7 @@ UnnamedText_3e887: ; 0x3e887
 
 INCBIN "baserom.gbc",$3e88c,$67b
 
-PlayAttackAnimation: ; 6F07
+PlayMoveAnimation: ; 6F07
 	ld [$D07C],a
 	call Delay3
 	ld a,8
@@ -30106,7 +30106,7 @@ PredefPointers: ; 7E79
 	dbw $1E,$5ABA
 	dbw $03,$7132
 	dbw BANK(HealParty),HealParty
-	dbw BANK(AttackAnimation),AttackAnimation; 08 play attack animation
+	dbw BANK(MoveAnimation),MoveAnimation; 08 play move animation
 	dbw $03,$771E
 	dbw $03,$771E
 	dbw $03,$781D
@@ -48709,7 +48709,7 @@ IF _BLUE
 	INCBIN "gfx/blue/slotmachine2.2bpp"
 ENDC
 
-AttackAnimation: ; 4D5E
+MoveAnimation: ; 4D5E
 	push hl
 	push de
 	push bc
@@ -48722,17 +48722,17 @@ AttackAnimation: ; 4D5E
 
 	; if throwing a Poké Ball, skip the regular animation code
 	cp a,TOSS_ANIM
-	jr nz,.AttackAnimation\@
+	jr nz,.MoveAnimation\@
 	ld de,.AnimationFinished\@
 	push de
 	jp TossBallAnimation
 
-.AttackAnimation\@
+.MoveAnimation\@
 	; check if battle animations are disabled in the options
 	ld a,[$D355]
 	bit 7,a
 	jr nz,.AnimationsDisabled\@
-	call ShareAttackAnimations
+	call ShareMoveAnimations
 	call PlayAnimation
 	jr .next4\@
 .AnimationsDisabled\@
@@ -48754,7 +48754,7 @@ AttackAnimation: ; 4D5E
 	pop hl
 	ret
 
-ShareAttackAnimations: ; 4DA6
+ShareMoveAnimations: ; 4DA6
 ; some moves just reuse animations from status conditions
 	ld a,[H_WHOSETURN]
 	and a
@@ -48904,7 +48904,7 @@ Func586F: ; 586F
 	ld a,b
 	ret
 IsCryMove:
-; set carry if the attack animation involves playing a monster cry
+; set carry if the move animation involves playing a monster cry
 	ld a,[$D07C]
 	cp a,GROWL
 	jr z,.CryMove
