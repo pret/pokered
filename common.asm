@@ -8012,8 +8012,8 @@ ItemUsePtrTable:	;$D5E1
 	dw $6476            ; LIFT_KEY
 	dw $6476            ; EXP__ALL
 	dw $624C            ; OLD_ROD
-	dw GoodRodCode ;$6259
-	dw $6283            ; SUPER_ROD
+	dw GoodRodCode 		; GOOD_ROD $6259
+	dw SuperRodCode     ; SUPER_ROD $6283
 	dw $6317            ; PP_UP (see other?)
 	dw $631E            ; ETHER
 	dw $631E            ; MAX_ETHER
@@ -8484,7 +8484,7 @@ UnnamedText_e247: ; 0xe247
 INCBIN "baserom.gbc",$e24c,$d
 
 GoodRodCode: ; 6259 0xe259
-	call $62B4
+	call $62B4 ; probably sets carry if not in battle or not by water
 	jp c,ItemUseNotTime
 Next625F:
 	call GenRandom
@@ -8513,34 +8513,35 @@ GoodRodMons:
 	db 10,GOLDEEN
 	db 10,POLIWAG
 
-Next6283:
-	call $62B4
-	jp c,ItemUseNotTime
-Next6289:
-	call $68EA
-	ld a,e
+SuperRodCode: ; $6283 0xe283
+	call $62B4 ; probably sets carry if in battle or not by water
+	jp c, ItemUseNotTime ; don't use SUPER_ROD in battle
+Next6289: ; not in battle
+	call ReadSuperRodData ; 0xe8ea
+	ld a, e ; $2 means no fishing data found, $1 means a pokemon was picked
 Next628E:
-	ld [$CD3D],a
-	dec a
-	jr nz,.next\@
-	ld a,1
-	ld [$D05F],a
-	ld a,b
-	ld [$D127],a
-	ld a,c
-	ld [$D059],a
+	ld [$CD3D], a ; set ReadSuperRodData return value
+	dec a ; decrease return value of ReadSuperRodData
+	jr nz, .next\@ ; if e was $2 (no fishing data for this map) then skip ahead
+	; store level and species data, SUPER_ROD always catches a bite
+	ld a, 1
+	ld [$D05F], a ; set "found pokemon"
+	ld a, b ; load level into a
+	ld [$D127], a ; set level
+	ld a, c ; load species id into a
+	ld [$D059], a ; set species id
 .next\@
-	ld hl,$D700
-	ld a,[hl]
+	ld hl, $D700 ; bike speed address?
+	ld a, [hl] ; store the value in a
 	push af
 	push hl
-	ld [hl],0
-	ld b,$1C
-	ld hl,$47B6
-	call Bankswitch
+	ld [hl], 0 ; blank $D700
+	ld b, $1C
+	ld hl, $47B6 ; probably setup battle?
+	call Bankswitch ; call 0x707b6
 	pop hl
 	pop af
-	ld [hl],a
+	ld [hl], a ; restore the original value
 	ret
 
 INCBIN "baserom.gbc",$e2b4,$e30d - $e2b4
@@ -8626,44 +8627,80 @@ UnnamedText_e75f: ; 0xe75f
 	db $50
 ; 0xe75f + 5 bytes
 
-INCBIN "baserom.gbc",$e764,$1b5
+INCBIN "baserom.gbc",$e764,$e8ea - $e764
+
+; 68EA 0xe8ea
+ReadSuperRodData: ; called from SuperRodCode
+	ld a, [W_CURMAP] ; load map id
+	ld de, $0003 ; third byte starts the pointer to this map's fishing group
+	ld hl, SuperRodData ; array to search
+	call IsInArray ; search array at hl, skip de bytes between reads
+	jr c, .ReadFishingGroup ; jump if carry is set (b is index; hl has address of the bth index)
+	ld e, $2 ; $2 if no fishing groups found
+	ret
+.ReadFishingGroup ; 0xe8f6
+	inc hl ; first byte of pointer to fishing group is hl+1
+	ld a, [hli] ; load first byte of fishing group pointer and increment hl
+	ld h, [hl] ; load second byte of fishing group pointer
+	ld l, a ; set the first byte in the "l" part of the hl register
+	ld b, [hl] ; read fishing group data, how many mons
+	inc hl ; first line of data in fishing group
+	ld e, $0 ; no level/mon selected yet
+.RandomLoop ; 0xe90c
+	call GenRandom
+	srl a ; shift right into carry
+	ret c ; no battle if carry
+	and $3 ; check if first two bits are set
+	cp b ; check against b (H_RAND something) and set the carry
+	jr nc, .RandomLoop ; if carry then keep generating random numbers
+	add a ; double it (two bytes per mon)
+	ld c, a
+	ld b, $0
+	add hl, bc ; get the address of this mon/level combo in this fishing group
+	ld b, [hl] ; level
+	inc hl
+	ld c, [hl] ; species id
+	ld e, $1 ; $1 if there's a bite
+	ret
+; 0xe919
 
 ; super rod data
 ; map, pointer to fishing group
 SuperRodData: ; 6919
-	dbw $00,FishingGroup1
-	dbw $01,FishingGroup1
-	dbw $03,FishingGroup3
-	dbw $05,FishingGroup4
-	dbw $06,FishingGroup5
-	dbw $07,FishingGroup10
-	dbw $08,FishingGroup8
-	dbw $0F,FishingGroup3
-	dbw $11,FishingGroup4
-	dbw $15,FishingGroup5
-	dbw $16,FishingGroup4
-	dbw $17,FishingGroup7
-	dbw $18,FishingGroup7
-	dbw $1C,FishingGroup7
-	dbw $1D,FishingGroup7
-	dbw $1E,FishingGroup8
-	dbw $1F,FishingGroup8
-	dbw $20,FishingGroup8
-	dbw $21,FishingGroup2
-	dbw $22,FishingGroup9
-	dbw $23,FishingGroup3
-	dbw $24,FishingGroup3
-	dbw $41,FishingGroup3
-	dbw $5E,FishingGroup4
-	dbw $A1,FishingGroup8
-	dbw $A2,FishingGroup8
-	dbw $D9,FishingGroup6
-	dbw $DA,FishingGroup6
-	dbw $DB,FishingGroup6
-	dbw $DC,FishingGroup6
-	dbw $E2,FishingGroup9
-	dbw $E3,FishingGroup9
-	dbw $E4,FishingGroup9
+	dbw PALLET_TOWN, FishingGroup1
+	dbw VIRIDIAN_CITY, FishingGroup1
+	dbw CERULEAN_CITY, FishingGroup3
+	dbw VERMILION_CITY, FishingGroup4
+	dbw CELADON_CITY, FishingGroup5
+	dbw FUCHSIA_CITY, FishingGroup10
+	dbw CINNABAR_ISLAND, FishingGroup8
+	dbw ROUTE_4, FishingGroup3
+	dbw ROUTE_6, FishingGroup4
+	dbw ROUTE_10, FishingGroup5
+	dbw ROUTE_11, FishingGroup4
+	dbw ROUTE_12, FishingGroup7
+	dbw ROUTE_13, FishingGroup7
+	dbw ROUTE_17, FishingGroup7
+	dbw ROUTE_18, FishingGroup7
+	dbw ROUTE_19, FishingGroup8
+	dbw ROUTE_20, FishingGroup8
+	dbw ROUTE_21, FishingGroup8
+	dbw ROUTE_22, FishingGroup2
+	dbw ROUTE_23, FishingGroup9
+	dbw ROUTE_24, FishingGroup3
+	dbw ROUTE_25, FishingGroup3
+	dbw CERULEAN_GYM, FishingGroup3
+	dbw VERMILION_DOCK, FishingGroup4
+;XXX syntax errors on the rest?
+	dbw $A1, FishingGroup8 ; SEAFOAM_ISLANDS_4
+	dbw $A2, FishingGroup8 ; SEAFOAM_ISLANDS_5
+	dbw SAFARI_ZONE_EAST, FishingGroup6
+	dbw $DA, FishingGroup6 ; SAFARI_ZONE_NORTH
+	dbw SAFARI_ZONE_WEST, FishingGroup6 
+	dbw $DC, FishingGroup6 ; SAFARI_ZONE_CENTER
+	dbw $E2, FishingGroup9 ; UNKNOWN_DUNGEON_2
+	dbw $E3, FishingGroup9 ; UNKNOWN_DUNGEON_3
+	dbw $E4, FishingGroup9 ; UNKNOWN_DUNGEON_1
 	db $FF
 
 ; fishing groups
