@@ -9017,13 +9017,13 @@ HealParty:
 	push hl
 	push de
 	push bc
-	ld hl, $4000
+	ld hl, Moves
 	ld bc, $0006
 	call AddNTimes
 	ld de, $cd6d
-	ld a, $e
-	call FarCopyData
-	ld a, [$cd72]
+	ld a, BANK(Moves)
+	call FarCopyData ; copy move header to memory
+	ld a, [$cd72] ; get default PP
 	pop bc
 	pop de
 	pop hl
