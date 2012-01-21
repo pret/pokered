@@ -10568,20 +10568,23 @@ CeruleanCityScript1: ; 0x19567
 	call $3354
 	ld a, $e1
 	ld [$d059], a
-	ld a, [$d715]
-	cp $b1
-	jr nz, .asm_19598 ; 0x19592 $4
+
+	; select which team to use during the encounter
+	ld a, [W_RIVALSTARTER]
+	cp SQUIRTLE
+	jr nz, .NotSquirtle\@ ; 0x19592 $4
 	ld a, $7
-	jr .asm_195a2 ; 0x19596 $a
-.asm_19598
-	cp $99
-	jr nz, .asm_195a0 ; 0x1959a $4
+	jr .done\@
+.NotSquirtle\@
+	cp BULBASAUR
+	jr nz, .Charmander\@ ; 0x1959a $4
 	ld a, $8
-	jr .asm_195a2 ; 0x1959e $2
-.asm_195a0
+	jr .done\@
+.Charmander\@
 	ld a, $9
-.asm_195a2
-	ld [$d05d], a
+.done\@
+	ld [W_TRAINERNO], a
+
 	xor a
 	ld [$ff00+$b4], a
 	call $555d
@@ -41773,20 +41776,23 @@ PokemonTower2Text1: ; 0x605df
 	call $3354
 	ld a, $f2
 	ld [$d059], a
-	ld a, [$d715]
-	cp $b1
-	jr nz, .asm_0860c ; 0x6060f
+
+	; select which team to use during the encounter
+	ld a, [W_RIVALSTARTER]
+	cp SQUIRTLE
+	jr nz, .NotSquirtle\@ ; 0x6060f
 	ld a, $4
-	jr .asm_99cea ; 0x60613
-.asm_0860c ; 0x60615
-	cp $99
-	jr nz, .asm_b3e6e ; 0x60617
+	jr .done\@
+.NotSquirtle\@ ; 0x60615
+	cp BULBASAUR
+	jr nz, .Charmander\@ ; 0x60617
 	ld a, $5
-	jr .asm_99cea ; 0x6061b
-.asm_b3e6e ; 0x6061d
+	jr .done\@
+.Charmander\@ ; 0x6061d
 	ld a, $6
-.asm_99cea ; 0x6061f
-	ld [$d05d], a
+.done\@
+	ld [W_TRAINERNO], a
+
 	ld a, $1
 	ld [$d62b], a
 	ld [$da39], a
@@ -42846,20 +42852,23 @@ SSAnne2Script1: ; 0x61430
 	call Delay3
 	ld a, $f2
 	ld [$d059], a
-	ld a, [$d715]
-	cp $b1
-	jr nz, .asm_61457 ; 0x61451 $4
+
+	; select which team to use during the encounter
+	ld a, [W_RIVALSTARTER]
+	cp SQUIRTLE
+	jr nz, .NotSquirtle\@ ; 0x61451 $4
 	ld a, $1
-	jr .asm_61461 ; 0x61455 $a
-.asm_61457
-	cp $99
-	jr nz, .asm_6145f ; 0x61459 $4
+	jr .done\@
+.NotSquirtle\@
+	cp BULBASAUR
+	jr nz, .Charmander\@ ; 0x61459 $4
 	ld a, $2
-	jr .asm_61461 ; 0x6145d $2
-.asm_6145f
+	jr .done\@
+.Charmander\@
 	ld a, $3
-.asm_61461
-	ld [$d05d], a
+.done\@
+	ld [W_TRAINERNO], a
+
 	call $5416
 	ld a, $2
 	ld [$d665], a
@@ -48227,20 +48236,23 @@ GaryScript2: ; 0x75f6a 5F6A
 	call $3354
 	ld a, $f3
 	ld [$d059], a
-	ld a, [$d715]
-	cp $b1
-	jr nz, .asm_75fa5 ; 0x75f9f $4
+
+	; select which team to use during the encounter
+	ld a, [W_RIVALSTARTER]
+	cp SQUIRTLE
+	jr nz, .NotSquirtle\@ ; 0x75f9f $4
 	ld a, $1
-	jr .asm_75faf ; 0x75fa3 $a
-.asm_75fa5
-	cp $99
-	jr nz, .asm_75fad ; 0x75fa7 $4
+	jr .done\@
+.NotSquirtle\@
+	cp BULBASAUR
+	jr nz, .Charmander\@ ; 0x75fa7 $4
 	ld a, $2
-	jr .asm_75faf ; 0x75fab $2
-.asm_75fad
+	jr .done\@
+.Charmander\@
 	ld a, $3
-.asm_75faf
-	ld [$d05d], a
+.done\@
+	ld [W_TRAINERNO], a
+
 	xor a
 	ld [$ff00+$b4], a
 	ld a, $3
