@@ -3128,13 +3128,13 @@ db $03
 ;Routes 24 and 25
 Routes2_mh: ;0x82CD - 0x82D8
 db $C0
-	dw $5DB9 ;Channel 1
+	dw Routes2_md_1 ;Channel 1
 db $01
-	dw $5E4F ;Channel 2
+	dw Routes2_md_2 ;Channel 2
 db $02
-	dw $5E9B ;Channel 3
+	dw Routes2_md_3 ;Channel 3
 db $03
-	dw $5F08 ;Channel 4
+	dw Routes2_md_4 ;Channel 4
 
 ;Routes 3, 4, 5, 6, 7, 8, 9, 10, 16, 17, 18, 19, 20, 21, 22
 Routes3_mh: ;0x82D9 - 0x82E4
@@ -3196,7 +3196,19 @@ INCBIN "baserom.gbc",$9cd8,$9d24 - $9cd8
 Routes1_md_4: ;9D24 - 9DB8
 INCBIN "baserom.gbc",$9d24,$9db9 - $9d24
 
-INCBIN "baserom.gbc",$9db9,$A7C5 - $9db9
+Routes2_md_1: ;9BD9 - 9E4E
+INCBIN "baserom.gbc",$9db9,$9e4f - $9db9
+
+Routes2_md_2: ;9E4F - 9E9A
+INCBIN "baserom.gbc",$9e4f,$9e9b - $9e4f
+
+Routes2_md_3: ;9E9B - 9F07
+INCBIN "baserom.gbc",$9e9b,$9f08 - $9e9b
+
+Routes2_md_4: ;9F08 - 9FAC
+INCBIN "baserom.gbc",$9f08,$9fad - $9f08
+
+INCBIN "baserom.gbc",$9fad,$a7c5 - $9fad
 
 PalletTown_md_1: ; a7c5 - a85e (154 bytes)
 INCBIN "baserom.gbc",$a7c5,$a85f - $a7c5
