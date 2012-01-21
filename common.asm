@@ -3150,13 +3150,13 @@ db $03
 ;Routes 11, 12, 13, 14, 15
 Routes4_mh: ;0x82E5 - 0x82F0
 db $C0
-	dw $626A ;Channel 1
+	dw Routes4_md_1 ;Channel 1
 db $01
-	dw $6304 ;Channel 2
+	dw Routes4_md_2 ;Channel 2
 db $02
-	dw $63C4 ;Channel 3
+	dw Routes4_md_3 ;Channel 3
 db $03
-	dw $649D ;Channel 4
+	dw Routes4_md_4 ;Channel 4
 
 ;Indigo Plateau
 IndigoPlateau_mh: ;0x82F1 - 0x82FC
@@ -3175,6 +3175,7 @@ db $03
 
 INCBIN "baserom.gbc",$82FD,$9ba3 - $82FD
 
+;Pokemon Healed Music
 PkmnHealed_md_1: ;9BA3 - 9BC3
 INCBIN "baserom.gbc",$9ba3,$9bc4 - $9ba3
 
@@ -3184,6 +3185,7 @@ INCBIN "baserom.gbc",$9bc4,$9bd2 - $9bc4
 PkmnHealed_md_3: ;9BD2 - 9BDD
 INCBIN "baserom.gbc",$9bd2,$9bde - $9bd2
 
+;Routes 1 and 2
 Routes1_md_1: ;9BDE - 9C50
 INCBIN "baserom.gbc",$9bde,$9c51 - $9bde
 
@@ -3196,6 +3198,7 @@ INCBIN "baserom.gbc",$9cd8,$9d24 - $9cd8
 Routes1_md_4: ;9D24 - 9DB8
 INCBIN "baserom.gbc",$9d24,$9db9 - $9d24
 
+;Routes 24 and 25
 Routes2_md_1: ;9BD9 - 9E4E
 INCBIN "baserom.gbc",$9db9,$9e4f - $9db9
 
@@ -3208,6 +3211,7 @@ INCBIN "baserom.gbc",$9e9b,$9f08 - $9e9b
 Routes2_md_4: ;9F08 - 9FAC
 INCBIN "baserom.gbc",$9f08,$9fad - $9f08
 
+;Routes 3, 4, 5, 6, 7, 8, 9, 10, 16, 17, 18, 19, 20, 21, 22
 Routes3_md_1: ;9FAD - A008
 INCBIN "baserom.gbc",$9fad,$a009 - $9fad
 
@@ -3218,10 +3222,24 @@ Routes3_md_3: ;A07F - 6130
 INCBIN "baserom.gbc",$a07f,$a131 - $a07f
 
 Routes3_md_4: ;A131 -A26A
-INCBIN "baserom.gbc",$a131,$a26b - $a131
+INCBIN "baserom.gbc",$a131,$a26a - $a131
 
-INCBIN "baserom.gbc",$a26b,$a7c5 - $a26b
+;Routes 11, 12, 13, 14, 15
+Routes4_md_1: ;a26a - a303
+INCBIN "baserom.gbc",$a26a,$a304 - $a26a
 
+Routes4_md_2: ;a304 - a3c3
+INCBIN "baserom.gbc",$a304,$a3c4 - $a304
+
+Routes4_md_3: ;a3c4 - a49c
+INCBIN "baserom.gbc",$a3c4,$a49d - $a3c4
+
+Routes4_md_4: ;a49d - a5ef
+INCBIN "baserom.gbc",$a49d,$a5f0 - $a49d
+
+INCBIN "baserom.gbc",$a5f0,$a7c5 - $a5f0
+
+;Pallet Town
 PalletTown_md_1: ; a7c5 - a85e (154 bytes)
 INCBIN "baserom.gbc",$a7c5,$a85f - $a7c5
 
@@ -3231,6 +3249,7 @@ INCBIN "baserom.gbc",$a85f,$a8de - $a85f
 PalletTown_md_3: ; a8de - aa75 (408 bytes)
 INCBIN "baserom.gbc",$a8de,$aa76 - $a8de
 
+;Viridian City, Pewter City, Saffron City
 Cities1_md_1: ;AA76 - AB91
 INCBIN "baserom.gbc",$aa76,$ab92 - $aa76
 
@@ -3243,6 +3262,7 @@ INCBIN "baserom.gbc",$ac32,$acef - $ac32
 Cities1_md_4: ;ACEF - ADAD
 INCBIN "baserom.gbc",$acef,$adae - $acef
 
+;Guy walks you to museum
 MuseumGuy_md_1: ;ADAE - ADF0
 INCBIN "baserom.gbc",$adae,$adf1 - $adae
 
@@ -3255,6 +3275,7 @@ INCBIN "baserom.gbc",$ae6e,$aed1 - $ae6e
 MuseumGuy_md_4: ;AED1 - AF58
 INCBIN "baserom.gbc",$aed1,$af59 - $aed1
 
+;Meet Prof. Oak
 MeetProfOak_md_1: ;AF59 - AFA8
 INCBIN "baserom.gbc",$af59,$afa9 - $af59
 
@@ -3264,6 +3285,7 @@ INCBIN "baserom.gbc",$afa9,$b03d - $afa9
 MeetProfOak_md_3: ;B03D - B11F
 INCBIN "baserom.gbc",$b03d,$b120 - $b03d
 
+;Meet Rival
 MeetRival_md_1: ;B120 - B1BA
 INCBIN "baserom.gbc",$b120,$b1bb - $b120
 
@@ -3273,6 +3295,7 @@ INCBIN "baserom.gbc",$b1bb,$b233 - $b1bb
 MeetRival_md_3: ;B233 - B3A6
 INCBIN "baserom.gbc",$b233,$b3a7 - $b233
 
+;SS Anne
 SSAnne_md_1: ;B3A7 - B418
 INCBIN "baserom.gbc",$b3a7,$b419 - $b3a7
 
@@ -3282,6 +3305,7 @@ INCBIN "baserom.gbc",$b419,$b4cb - $b419
 SSAnne_md_3: ;B4CB - B503
 INCBIN "baserom.gbc",$b4cb,$b504 - $b4cb
 
+;Cerulean City, Fuchsia City
 Cities2_md_1: ;B504 - B568
 INCBIN "baserom.gbc",$b504,$b569 - $b504
 
@@ -3291,6 +3315,7 @@ INCBIN "baserom.gbc",$b569,$b640 - $b569
 Cities2_md_3: ;B640 - B6C6
 INCBIN "baserom.gbc",$b640,$b6c7 - $b640
 
+;Celedon City
 Celedon_md_1: ;B6C7 - B739
 INCBIN "baserom.gbc",$b6c7,$b73a - $b6c7
 
@@ -3300,6 +3325,7 @@ INCBIN "baserom.gbc",$b73a,$b7b5 - $b73a
 Celedon_md_3: ;B7B5 - B86C
 INCBIN "baserom.gbc",$b7b5,$b86d - $b7b5
 
+;Cinnabar Island
 Cinnabar_md_1: ;B86D - B8D3
 INCBIN "baserom.gbc",$b86d,$b8d4 - $b86d
 
@@ -3309,6 +3335,7 @@ INCBIN "baserom.gbc",$b8d4,$b93d - $b8d4
 Cinnabar_md_3: ;B93D - B9EA
 INCBIN "baserom.gbc",$b93d,$b9eb - $b93d
 
+;Vermillion City
 Vermillion_md_1: ;B9EB - BA60
 INCBIN "baserom.gbc",$b9eb,$ba61 - $b9eb
 
@@ -3321,6 +3348,7 @@ INCBIN "baserom.gbc",$baa6,$bb0d - $baa6
 Vermillion_md_4: ;BB0D - BB57
 INCBIN "baserom.gbc",$bb0d,$bb58 - $bb0d
 
+;Lavender Town
 Lavender_md_1: ;BB58 - BB9D
 INCBIN "baserom.gbc",$bb58,$bb9e - $bb58
 
@@ -3333,6 +3361,7 @@ INCBIN "baserom.gbc",$bbae,$bc21 - $bbae
 Lavender_md_4: ;BC21 - BC2D
 INCBIN "baserom.gbc",$bc21,$bc2e - $bc21
 
+;Safari Zone
 SafariZone_md_1: ;BC2E - BC69
 INCBIN "baserom.gbc",$bc2e,$bc6a - $bc2e
 
@@ -3342,6 +3371,7 @@ INCBIN "baserom.gbc",$bc6a,$bc94 - $bc6a
 SafariZone_md_3: ;BC94 - BCBA
 INCBIN "baserom.gbc",$bc94,$bcbb - $bc94
 
+;Gyms
 Gym_md_1: ;bcbb - bd6a (175 bytes)
 INCBIN "baserom.gbc",$bcbb,$bd6b - $bcbb
 
@@ -3351,6 +3381,7 @@ INCBIN "baserom.gbc",$bd6b,$bdfa - $bd6b
 Gym_md_3: ;bdfa - be55 (91 bytes)
 INCBIN "baserom.gbc",$bdfa,$be56 - $bdfa
 
+;Pokemon Center
 Pokecenter_md_1: ;be56 - bef8 (162 bytes)
 INCBIN "baserom.gbc",$be56,$bef9 - $be56
 
