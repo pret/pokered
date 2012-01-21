@@ -3161,13 +3161,13 @@ db $03
 ;Indigo Plateau
 IndigoPlateau_mh: ;0x82F1 - 0x82FC
 db $C0
-	dw $65F0 ;Channel 1
+	dw IndigoPlateau_md_1 ;Channel 1
 db $01
-	dw $6664 ;Channel 2
+	dw IndigoPlateau_md_2 ;Channel 2
 db $02
-	dw $66BA ;Channel 3
+	dw IndigoPlateau_md_3 ;Channel 3
 db $03
-	dw $670F ;Channel 4
+	dw IndigoPlateau_md_4 ;Channel 4
 
 ; Music Data
 ; The start and stop of these byte ranges were based off the theory they're lined
@@ -3237,7 +3237,18 @@ INCBIN "baserom.gbc",$a3c4,$a49d - $a3c4
 Routes4_md_4: ;a49d - a5ef
 INCBIN "baserom.gbc",$a49d,$a5f0 - $a49d
 
-INCBIN "baserom.gbc",$a5f0,$a7c5 - $a5f0
+;Indigo Plateau
+IndigoPlateau_md_1: ;a5f0 - a663
+INCBIN "baserom.gbc",$a5f0,$a664 - $a5f0
+
+IndigoPlateau_md_2: ;a664 - a6b9
+INCBIN "baserom.gbc",$a664,$a6ba - $a664
+
+IndigoPlateau_md_3: ;a6ba - a70e
+INCBIN "baserom.gbc",$a6ba,$a70f - $a6ba
+
+IndigoPlateau_md_4: ;a70f - a7c4
+INCBIN "baserom.gbc",$a70f,$a7c5 - $a70f
 
 ;Pallet Town
 PalletTown_md_1: ; a7c5 - a85e (154 bytes)
