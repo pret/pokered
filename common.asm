@@ -2973,200 +2973,200 @@ INCBIN "baserom.gbc",$8000,$822E - $8000
 
 ;Pallet Town
 PalletTown_mh: ;0x822E - 0x8236
-db $80
-    dw PalletTown_md_1 ;Channel 1 ($A7C5 - $A85E)
-db $01
+	db $80
+	dw PalletTown_md_1 ;Channel 1 ($A7C5 - $A85E)
+	db $01
 	dw PalletTown_md_2 ;Channel 2 ($A85f - $A8DD)
-db $02
+	db $02
 	dw PalletTown_md_3 ;Channel 3 ($A8DE - $AA75)
 
 ;Pokemon Center
 Pokecenter_mh: ;0x8237 - 0x823F
-db $80
+	db $80
 	dw Pokecenter_md_1 ;Channel 1 ($BE56 - $BEF8)
-db $01
+	db $01
 	dw Pokecenter_md_2 ;Channel 2 ($BEF9 - $BF6F)
-db $02
+	db $02
 	dw Pokecenter_md_3 ;Channel 3 ($BF70 - $BFFF)
 
 ;Gyms
 Gym_mh: ;0x8240 - 0x8248
-db $80
+	db $80
 	dw Gym_md_1 ;Channel 1 ($BCBB - $BD6A)
-db $01
+	db $01
 	dw Gym_md_2 ;Channel 2 ($BD6B - $BDF9)
-db $02
+	db $02
 	dw Gym_md_3 ;Channel 3 ($BDFA - $BE55)
 
 ;Viridian City, Pewter City, Saffron City
 Cities1_mh: ;0x8249 - 0x8254
-db $C0
+	db $C0
 	dw Cities1_md_1 ;Channel 1
-db $01
+	db $01
 	dw Cities1_md_2 ;Channel 2
-db $02
+	db $02
 	dw Cities1_md_3 ;Channel 3
-db $03
+	db $03
 	dw Cities1_md_4 ;Channel 4
 
 ;Cerulean City, Fuchsia City
 Cities2_mh: ;0x8255 - 0x825D
-db $80
+	db $80
 	dw Cities2_md_1 ;Channel 1
-db $01
-        dw Cities2_md_2 ;Channel 2
-db $02
+	db $01
+	dw Cities2_md_2 ;Channel 2
+	db $02
 	dw Cities2_md_3 ;Channel 3
 
 ;Celedon City
 Celedon_mh: ;0x825E - 0x8266
-db $80
+	db $80
 	dw Celedon_md_1 ;Channel 1
-db $01
+	db $01
 	dw Celedon_md_2 ;Channel 2
-db $02
+	db $02
 	dw Celedon_md_3 ;Channel 3
 
 ;Cinnabar Island
 Cinnabar_mh: ;0x8267-0x826F
-db $80
+	db $80
 	dw Cinnabar_md_1 ;Channel 1
-db $01
+	db $01
 	dw Cinnabar_md_2 ;Channel 2
-db $02
+	db $02
 	dw Cinnabar_md_3 ;Channel 3
 
 ;Vermillion City
 Vermillion_mh: ;0x8270 - 0x827B
-db $C0
+	db $C0
 	dw Vermillion_md_1 ;Channel 1
-db $01
+	db $01
 	dw Vermillion_md_2 ;Channel 2
-db $02
+	db $02
 	dw Vermillion_md_3 ;Channel 3
-db $03
+	db $03
 	dw Vermillion_md_4 ;Channel 4
 
 ;Lavender Town
 Lavender_mh: ;0x827C - 0x8287
-db $C0
+	db $C0
 	dw Lavender_md_1 ;Channel 1
-db $01
+	db $01
 	dw Lavender_md_2 ;Channel 2
-db $02
+	db $02
 	dw Lavender_md_3 ;Channel 3
-db $03
+	db $03
 	dw Lavender_md_4 ;Channel 4
 
 ;SS Anne
 SSAnne_mh: ;0x8288 - 0x8290
-db $80
+	db $80
 	dw SSAnne_md_1 ;Channel 1
-db $01
+	db $01
 	dw SSAnne_md_2 ;Channel 2
-db $02
+	db $02
 	dw SSAnne_md_3 ;Channel 3
 
 ;Meet Prof. Oak
 MeetProfOak_mh: ;0x8291 - 0x8299
-db $80
+	db $80
 	dw MeetProfOak_md_1 ;Channel 1
-db $01
+	db $01
 	dw MeetProfOak_md_2 ;Channel 2
-db $02
+	db $02
 	dw MeetProfOak_md_3 ;Channel 3
 
 ;Meet Rival
 MeetRival_mh: ;0x829A - 0x82A2
-db $80
+	db $80
 	dw MeetRival_md_1 ;Channel 1
-db $01
+	db $01
 	dw MeetRival_md_2 ;Channel 2
-db $02
+	db $02
 	dw MeetRival_md_3 ;Channel 3
 
 ;Guy walks you to museum
 MuseumGuy_mh: ;0x82A3 - 0x82AE
-db $C0
+	db $C0
 	dw MuseumGuy_md_1 ;Channel 1
-db $01
+	db $01
 	dw MuseumGuy_md_2 ;Channel 2
-db $02
+	db $02
 	dw MuseumGuy_md_3 ;Channel 3
-db $03
+	db $03
 	dw MuseumGuy_md_4 ;Channel 4
 
 ;Safari Zone
 SafariZone_mh: ;0x82AF - 0x82B7
-db $80
+	db $80
 	dw SafariZone_md_1 ;Channel 1
-db $01
+	db $01
 	dw SafariZone_md_2 ;Channel 2
-db $02
+	db $02
 	dw SafariZone_md_3 ;Channel 3
 
 ;Pokemon Get Healed
 PkmnHealed_mh: ;0x82B8 - 0x82C0
-db $80
+	db $80
 	dw PkmnHealed_md_1 ;Channel 1
-db $01
+	db $01
 	dw PkmnHealed_md_2 ;Channel 2
-db $02
+	db $02
 	dw PkmnHealed_md_3 ;Channel 3
 
 ;Routes 1 and 2
 Routes1_mh: ;0x82C1 - 0x82CC
-db $C0
+	db $C0
 	dw Routes1_md_1 ;Channel 1
-db $01
+	db $01
 	dw Routes1_md_2 ;Channel 2
-db $02
+	db $02
 	dw Routes1_md_3 ;Channel 3
-db $03
+	db $03
 	dw Routes1_md_4 ;Channel 4
 
 ;Routes 24 and 25
 Routes2_mh: ;0x82CD - 0x82D8
-db $C0
+	db $C0
 	dw Routes2_md_1 ;Channel 1
-db $01
+	db $01
 	dw Routes2_md_2 ;Channel 2
-db $02
+	db $02
 	dw Routes2_md_3 ;Channel 3
-db $03
+	db $03
 	dw Routes2_md_4 ;Channel 4
 
 ;Routes 3, 4, 5, 6, 7, 8, 9, 10, 16, 17, 18, 19, 20, 21, 22
 Routes3_mh: ;0x82D9 - 0x82E4
-db $C0
+	db $C0
 	dw Routes3_md_1 ;Channel 1
-db $01
+	db $01
 	dw Routes3_md_2 ;Channel 2
-db $02
+	db $02
 	dw Routes3_md_3 ;Channel 3
-db $03
+	db $03
 	dw Routes3_md_4 ;Channel 4
 
 ;Routes 11, 12, 13, 14, 15
 Routes4_mh: ;0x82E5 - 0x82F0
-db $C0
+	db $C0
 	dw Routes4_md_1 ;Channel 1
-db $01
+	db $01
 	dw Routes4_md_2 ;Channel 2
-db $02
+	db $02
 	dw Routes4_md_3 ;Channel 3
-db $03
+	db $03
 	dw Routes4_md_4 ;Channel 4
 
 ;Indigo Plateau
 IndigoPlateau_mh: ;0x82F1 - 0x82FC
-db $C0
+	db $C0
 	dw IndigoPlateau_md_1 ;Channel 1
-db $01
+	db $01
 	dw IndigoPlateau_md_2 ;Channel 2
-db $02
+	db $02
 	dw IndigoPlateau_md_3 ;Channel 3
-db $03
+	db $03
 	dw IndigoPlateau_md_4 ;Channel 4
 
 ; Music Data
