@@ -364,7 +364,2417 @@ MapHeaderPointers: ; $01AE
 	dw Bruno_h
 	dw Agatha_h ;247
 
-INCBIN "baserom.gbc",$39E,$1627 - $39E
+; this function calls a function that takes necessary actions
+; at the beginning of each overworld loop iteration as the player jumps
+; down a ledge
+; it also ends the jump when it's completed
+HandleMidJump: ; 39E
+	ld b,$1c
+	ld hl,$487e
+	jp Bankswitch
+
+; this is jumped to immediately after loading a save / starting a new game / loading a new map
+EnterMap: ; 3A6
+	ld a,$ff
+	ld [$cd6b],a
+	call LoadMapData ; load map data
+	ld b,$03
+	ld hl,$4335
+	call Bankswitch ; initialize some variables
+	ld hl,$d72c
+	bit 0,[hl]
+	jr z,.doNotCountSteps\@
+	ld a,$03
+	ld [$d13c],a ; some kind of step counter (counts up to 3 steps?)
+.doNotCountSteps\@
+	ld hl,$d72e
+	bit 5,[hl] ; did a battle happen immediately before this?
+	res 5,[hl] ; unset the "battle just happened" flag
+	call z,$12e7
+	call nz,MapEntryAfterBattle
+	ld hl,$d732
+	ld a,[hl]
+	and a,$18
+	jr z,.didNotFlyOrTeleportIn\@
+	res 3,[hl]
+	ld b,$1c
+	ld hl,$4510
+	call Bankswitch ; display fly/teleport in graphical effect
+	call $2429 ; move sprites
+.didNotFlyOrTeleportIn\@
+	ld b,$03
+	ld hl,$438b
+	call Bankswitch ; handle currents in SF islands and forced bike riding in cycling road
+	ld hl,$d72d
+	res 5,[hl]
+	call $2429 ; move sprites
+	ld hl,$d126
+	set 5,[hl]
+	set 6,[hl]
+	xor a
+	ld [$cd6b],a
+
+OverworldLoop: ; 3FF
+	call DelayFrame
+OverworldLoopLessDelay:
+	call DelayFrame
+	call LoadGBPal
+	ld a,[$d736]
+	bit 6,a ; jumping down a ledge?
+	call nz,$039e
+	ld a,[$cfc5] ; walking animation counter
+	and a
+	jp nz,.moveAhead\@ ; if the player sprite has not yet completed the walking animation
+	call GetJoypadStateOverworld ; get joypad state (which is possibly simulated)
+	ld b,$07
+	ld hl,$6988
+	call Bankswitch
+	ld a,[$da46]
+	and a
+	jp nz,WarpFound2
+	ld hl,$d72d
+	bit 3,[hl]
+	res 3,[hl]
+	jp nz,WarpFound2
+	ld a,[$d732]
+	and a,$18
+	jp nz,HandleFlyOrTeleportAway
+	ld a,[W_CUROPPONENT]
+	and a
+	jp nz,.newBattle\@
+	ld a,[$d730]
+	bit 7,a ; are we simulating button presses?
+	jr z,.notSimulating\@
+	ld a,[$ffb4]
+	jr .checkIfStartIsPressed\@
+.notSimulating\@
+	ld a,[$ffb3]
+.checkIfStartIsPressed\@
+	bit 3,a ; start button
+	jr z,.startButtonNotPressed\@
+; if START is pressed
+	xor a
+	ld [$ff8c],a ; the $2920 ID for the start menu is 0
+	jp .displayDialogue\@
+.startButtonNotPressed\@
+	bit 0,a ; A button
+	jp z,.checkIfDownButtonIsPressed\@
+; if A is pressed
+	ld a,[$d730]
+	bit 2,a
+	jp nz,.noDirectionButtonsPressed\@
+	call $30fd
+	jr nz,.checkForOpponent\@
+	call $3eb5 ; check for hidden items, PC's, etc.
+	ld a,[$ffeb]
+	and a
+	jp z,OverworldLoop
+	call IsSpriteOrSignInFrontOfPlayer ; check for sign or sprite in front of the player
+	ld a,[$ff8c] ; $2920 ID for NPC/sign text, if any
+	and a
+	jp z,OverworldLoop
+.displayDialogue\@
+	ld a,$35
+	call Predef ; check what is in front of the player
+	call $2429 ; move sprites
+	ld a,[$cd60]
+	bit 2,a
+	jr nz,.checkForOpponent\@
+	bit 0,a
+	jr nz,.checkForOpponent\@
+	ld a,[$c45c]
+	ld [$cf0e],a
+	call $2920 ; display either the start menu or the NPC/sign text
+	ld a,[$cc47]
+	and a
+	jr z,.checkForOpponent\@
+	dec a
+	ld a,$00
+	ld [$cc47],a
+	jr z,.changeMap\@
+	ld a,$52
+	call Predef
+	ld a,[W_CURMAP]
+	ld [$d71a],a
+	call $62ce
+	ld a,[W_CURMAP]
+	call SwitchToMapRomBank ; switch to the ROM bank of the current map
+	ld hl,$d367
+	set 7,[hl]
+.changeMap\@
+	jp EnterMap
+.checkForOpponent\@
+	ld a,[W_CUROPPONENT]
+	and a
+	jp nz,.newBattle\@
+	jp OverworldLoop
+.noDirectionButtonsPressed\@
+	ld hl,$cd60
+	res 2,[hl]
+	call $2429 ; move sprites
+	ld a,$01
+	ld [$cc4b],a
+	ld a,[$d528] ; the direction that was pressed last time
+	and a
+	jp z,OverworldLoop
+; if a direction was pressed last time
+	ld [$d529],a ; save the last direction
+	xor a
+	ld [$d528],a ; zero the direction
+	jp OverworldLoop
+.checkIfDownButtonIsPressed\@
+	ld a,[$ffb4] ; current joypad state
+	bit 7,a ; down button
+	jr z,.checkIfUpButtonIsPressed\@
+	ld a,$01
+	ld [$c103],a
+	ld a,$04
+	jr .handleDirectionButtonPress\@
+.checkIfUpButtonIsPressed\@
+	bit 6,a ; up button
+	jr z,.checkIfLeftButtonIsPressed\@
+	ld a,$ff
+	ld [$c103],a
+	ld a,$08
+	jr .handleDirectionButtonPress\@
+.checkIfLeftButtonIsPressed\@
+	bit 5,a ; left button
+	jr z,.checkIfRightButtonIsPressed\@
+	ld a,$ff
+	ld [$c105],a
+	ld a,$02
+	jr .handleDirectionButtonPress\@
+.checkIfRightButtonIsPressed\@
+	bit 4,a ; right button
+	jr z,.noDirectionButtonsPressed\@
+	ld a,$01
+	ld [$c105],a
+.handleDirectionButtonPress\@
+	ld [$d52a],a ; new direction
+	ld a,[$d730]
+	bit 7,a ; are we simulating button presses?
+	jr nz,.noDirectionChange\@ ; ignore direction changes if we are
+	ld a,[$cc4b]
+	and a
+	jr z,.noDirectionChange\@
+	ld a,[$d52a] ; new direction
+	ld b,a
+	ld a,[$d529] ; old direction
+	cp b
+	jr z,.noDirectionChange\@
+; the code below is strange
+; it computes whether or not the player did a 180 degree turn, but then overwrites the result
+; also, it does a seemingly pointless loop afterwards
+	swap a ; put old direction in upper half
+	or b ; put new direction in lower half
+	cp a,$48 ; change dir from down to up
+	jr nz,.notDownToUp\@
+	ld a,$02
+	ld [$d528],a
+	jr .oddLoop\@
+.notDownToUp\@
+	cp a,$84 ; change dir from up to down
+	jr nz,.notUpToDown\@
+	ld a,$01
+	ld [$d528],a
+	jr .oddLoop\@
+.notUpToDown\@
+	cp a,$12 ; change dir from right to left
+	jr nz,.notRightToLeft\@
+	ld a,$04
+	ld [$d528],a
+	jr .oddLoop\@
+.notRightToLeft\@
+	cp a,$21 ; change dir from left to right
+	jr nz,.oddLoop\@
+	ld a,$08
+	ld [$d528],a
+.oddLoop\@
+	ld hl,$cd60
+	set 2,[hl]
+	ld hl,$cc4b
+	dec [hl]
+	jr nz,.oddLoop\@
+	ld a,[$d52a]
+	ld [$d528],a
+	call $0683
+	jp c,$0637
+	jp OverworldLoop
+.noDirectionChange\@
+	ld a,[$d52a] ; current direction
+	ld [$d528],a ; save direction
+	call $2429 ; move sprites
+	ld a,[$d700]
+	cp a,$02 ; surfing
+	jr z,.surfing\@
+; not surfing
+	call CollisionCheckOnLand
+	jr nc,.noCollision\@
+	push hl
+	ld hl,$d736
+	bit 2,[hl]
+	pop hl
+	jp z,OverworldLoop
+	push hl
+	call ExtraWarpCheck ; sets carry if there is a potential to warp
+	pop hl
+	jp c,CheckWarpsCollision
+	jp OverworldLoop
+.surfing\@
+	call CollisionCheckOnWater
+	jp c,OverworldLoop
+.noCollision\@
+	ld a,$08
+	ld [$cfc5],a ; walking animation counter
+	jr .moveAhead2\@
+.moveAhead\@
+	ld a,[$d736]
+	bit 7,a
+	jr z,.noSpinning\@
+	ld b,$11
+	ld hl,$4fd7
+	call Bankswitch ; spin while moving
+.noSpinning\@
+	call $2429 ; move sprites
+.moveAhead2\@
+	ld hl,$cd60
+	res 2,[hl]
+	ld a,[$d700]
+	dec a ; riding a bike?
+	jr nz,.normalPlayerSpriteAdvancement\@
+	ld a,[$d736]
+	bit 6,a ; jumping a ledge?
+	jr nz,.normalPlayerSpriteAdvancement\@
+	call BikeSpeedup ; if riding a bike and not jumping a ledge
+.normalPlayerSpriteAdvancement\@
+	call AdvancePlayerSprite
+	ld a,[$cfc5] ; walking animation counter
+	and a
+	jp nz,CheckMapConnections ; it seems like this check will never succeed (the other place where CheckMapConnections is run works)
+; walking animation finished
+	ld a,[$d730]
+	bit 7,a
+	jr nz,.doneStepCounting\@ ; if button presses are being simulated, don't count steps
+; step counting
+	ld hl,$d13b ; step counter
+	dec [hl]
+	ld a,[$d72c]
+	bit 0,a
+	jr z,.doneStepCounting\@
+	ld hl,$d13c
+	dec [hl]
+	jr nz,.doneStepCounting\@
+	ld hl,$d72c
+	res 0,[hl]
+.doneStepCounting\@
+	ld a,[$d790]
+	bit 7,a ; in the safari zone?
+	jr z,.notSafariZone\@
+	ld b,$07
+	ld hl,$6997
+	call Bankswitch
+	ld a,[$da46]
+	and a
+	jp nz,WarpFound2
+.notSafariZone\@
+	ld a,[W_ISINBATTLE]
+	and a
+	jp nz,CheckWarpsNoCollision
+	ld a,$13
+	call Predef ; decrement HP of poisoned pokemon
+	ld a,[$d12d]
+	and a
+	jp nz,HandleBlackOut ; if all pokemon fainted
+.newBattle\@
+	call NewBattle
+	ld hl,$d736
+	res 2,[hl]
+	jp nc,CheckWarpsNoCollision ; check for warps if there was no battle
+; if a battle occurred
+	ld hl,$d72d
+	res 6,[hl]
+	ld hl,$d733
+	res 3,[hl]
+	ld hl,$d126
+	set 5,[hl]
+	set 6,[hl]
+	xor a
+	ld [$ffb4],a ; clear joypad state
+	ld a,[W_CURMAP]
+	cp a,CINNABAR_GYM
+	jr nz,.notCinnabarGyn\@
+	ld hl,$d79b
+	set 7,[hl]
+.notCinnabarGyn\@
+	ld hl,$d72e
+	set 5,[hl]
+	ld a,[W_CURMAP]
+	cp a,OAKS_LAB
+	jp z,.noFaintCheck\@
+	ld hl,$4a83
+	ld b,$0f
+	call Bankswitch ; check if all the player's pokemon fainted
+	ld a,d
+	and a
+	jr z,.allPokemonFainted\@
+.noFaintCheck\@
+	ld c,$0a
+	call DelayFrames
+	jp EnterMap
+.allPokemonFainted\@
+	ld a,$ff
+	ld [$d057],a
+	call RunMapScript
+	jp HandleBlackOut
+
+; function to determine if there will be a battle and execute it (either a trainer battle or wild battle)
+; sets carry if a battle occurred and unsets carry if not
+NewBattle: ; 683
+	ld a,[$d72d]
+	bit 4,a
+	jr nz,.noBattle\@
+	call $30fd
+	jr nz,.noBattle\@
+	ld a,[$d72e]
+	bit 4,a
+	jr nz,.noBattle\@
+	ld b,$0f
+	ld hl,$6f12
+	jp Bankswitch ; determines if a battle will occurr and runs the battle if so
+.noBattle\@
+	and a
+	ret
+
+; function to make bikes twice as fast as walking
+BikeSpeedup: ; 6A0
+	ld a,[$cc57]
+	and a
+	ret nz
+	ld a,[W_CURMAP]
+	cp a,ROUTE_17 ; Cycling Road
+	jr nz,.goFaster\@
+	ld a,[$ffb4] ; current joypad state
+	and a,%01110000 ; bit mask for up, left, right buttons
+	ret nz
+.goFaster\@
+	jp AdvancePlayerSprite
+
+; check if the player has stepped onto a warp after having not collided
+CheckWarpsNoCollision: ; 6B4
+	ld a,[$d3ae] ; number of warps
+	and a
+	jp z,CheckMapConnections
+	ld a,[$d3ae] ; number of warps
+	ld b,$00
+	ld c,a
+	ld a,[W_YCOORD]
+	ld d,a
+	ld a,[W_XCOORD]
+	ld e,a
+	ld hl,$d3af ; start of warp entries
+CheckWarpsNoCollisionLoop: ; 6CC
+	ld a,[hli] ; check if the warp's Y position matches
+	cp d
+	jr nz,CheckWarpsNoCollisionRetry1
+	ld a,[hli] ; check if the warp's X position matches
+	cp e
+	jr nz,CheckWarpsNoCollisionRetry2
+; if a match was found
+	push hl
+	push bc
+	ld hl,$d736
+	set 2,[hl]
+	ld b,$03
+	ld hl,$449d
+	call Bankswitch ; check if the player sprite is standing on a "door" tile
+	pop bc
+	pop hl
+	jr c,WarpFound1 ; if it is, go to 0735
+	push hl
+	push bc
+	call ExtraWarpCheck ; sets carry if the warp is confirmed
+	pop bc
+	pop hl
+	jr nc,CheckWarpsNoCollisionRetry2
+; if the extra check passed
+	ld a,[$d733]
+	bit 2,a
+	jr nz,WarpFound1
+	push de
+	push bc
+	call $019a ; update joypad state
+	pop bc
+	pop de
+	ld a,[$ffb4] ; current joypad state
+	and a,%11110000 ; bit mask for directional buttons
+	jr z,CheckWarpsNoCollisionRetry2 ; if directional buttons aren't being pressed, do not pass through the warp
+	jr WarpFound1
+
+; check if the player has stepped onto a warp after having collided
+CheckWarpsCollision: ; 706
+	ld a,[$d3ae] ; number of warps
+	ld c,a
+	ld hl,$d3af ; start of warp entries
+.loop\@
+	ld a,[hli] ; Y coordinate of warp
+	ld b,a
+	ld a,[W_YCOORD]
+	cp b
+	jr nz,.retry1\@
+	ld a,[hli] ; X coordinate of warp
+	ld b,a
+	ld a,[W_XCOORD]
+	cp b
+	jr nz,.retry2\@
+	ld a,[hli]
+	ld [$d42f],a ; save target warp ID
+	ld a,[hl]
+	ld [$ff8b],a ; save target map
+	jr WarpFound2
+.retry1\@
+	inc hl
+.retry2\@
+	inc hl
+	inc hl
+	dec c
+	jr nz,.loop\@
+	jp OverworldLoop
+
+CheckWarpsNoCollisionRetry1: ; 72F
+	inc hl
+CheckWarpsNoCollisionRetry2: ; 730
+	inc hl
+	inc hl
+	jp ContinueCheckWarpsNoCollisionLoop
+
+WarpFound1: ; 735
+	ld a,[hli]
+	ld [$d42f],a ; save target warp ID
+	ld a,[hli]
+	ld [$ff8b],a ; save target map
+
+WarpFound2: ; 73C
+	ld a,[$d3ae] ; number of warps
+	sub c
+	ld [$d73b],a ; save ID of used warp
+	ld a,[W_CURMAP]
+	ld [$d73c],a
+	call CheckIfInOutsideMap ; check if the tileset number is 0 or the map is Route 12
+	jr nz,.indoorMaps\@
+; this is for handling "outside" maps that can't have the 0xFF destination map
+	ld a,[W_CURMAP]
+	ld [$d365],a ; save current map as previous map
+	ld a,[W_CURMAPWIDTH]
+	ld [$d366],a
+	ld a,[$ff8b] ; destination map number
+	ld [W_CURMAP],a ; change current map to destination map
+	cp a,ROCK_TUNNEL_1
+	jr nz,.notRockTunnel\@
+	ld a,$06
+	ld [$d35d],a
+	call GBFadeIn1
+.notRockTunnel\@
+	call PlayMapChangeSound
+	jr .done\@
+; for maps that can have the 0xFF destination map, which means to return to the outside map; not all these maps are necessarily indoors, though
+.indoorMaps\@
+	ld a,[$ff8b] ; destination map
+	cp a,$ff
+	jr z,.goBackOutside\@
+; if not going back to the previous map
+	ld [W_CURMAP],a ; current map number
+	ld b,$1c
+	ld hl,$4787
+	call Bankswitch ; check if the warp was a Silph Co. teleporter
+	ld a,[$cd5b]
+	dec a
+	jr nz,.notTeleporter\@
+; if it's a Silph Co. teleporter
+	ld hl,$d732
+	set 3,[hl]
+	call DoFlyOrTeleportAwayGraphics
+	jr .skipMapChangeSound\@
+.notTeleporter\@
+	call PlayMapChangeSound
+.skipMapChangeSound\@
+	ld hl,$d736
+	res 0,[hl]
+	res 1,[hl]
+	jr .done\@
+.goBackOutside\@
+	ld a,[$d365] ; previous map
+	ld [W_CURMAP],a
+	call PlayMapChangeSound
+	xor a
+	ld [$d35d],a
+.done\@
+	ld hl,$d736
+	set 0,[hl]
+	call $12da
+	jp EnterMap
+
+ContinueCheckWarpsNoCollisionLoop: ; 7B5
+	inc b ; increment warp number
+	dec c ; decrement number of warps
+	jp nz,CheckWarpsNoCollisionLoop
+
+; if no matching warp was found
+CheckMapConnections: ; 7BA
+.checkWestMap\@
+	ld a,[W_XCOORD]
+	cp a,$ff
+	jr nz,.checkEastMap\@
+	ld a,[$d387]
+	ld [W_CURMAP],a
+	ld a,[$d38f] ; new X coordinate upon entering west map
+	ld [W_XCOORD],a
+	ld a,[W_YCOORD]
+	ld c,a
+	ld a,[$d38e] ; Y adjustment upon entering west map
+	add c
+	ld c,a
+	ld [W_YCOORD],a
+	ld a,[$d390] ; pointer to upper left corner of map without adjustment for Y position
+	ld l,a
+	ld a,[$d391]
+	ld h,a
+	srl c
+	jr z,.savePointer1\@
+.pointerAdjustmentLoop1\@
+	ld a,[$d38d] ; width of connected map
+	add a,$06
+	ld e,a
+	ld d,$00
+	ld b,$00
+	add hl,de
+	dec c
+	jr nz,.pointerAdjustmentLoop1\@
+.savePointer1\@
+	ld a,l
+	ld [$d35f],a ; pointer to upper left corner of current tile block map section
+	ld a,h
+	ld [$d360],a
+	jp .loadNewMap\@
+.checkEastMap\@
+	ld b,a
+	ld a,[$d525] ; map width
+	cp b
+	jr nz,.checkNorthMap\@
+	ld a,[$d392]
+	ld [W_CURMAP],a
+	ld a,[$d39a] ; new X coordinate upon entering east map
+	ld [W_XCOORD],a
+	ld a,[W_YCOORD]
+	ld c,a
+	ld a,[$d399] ; Y adjustment upon entering east map
+	add c
+	ld c,a
+	ld [W_YCOORD],a
+	ld a,[$d39b] ; pointer to upper left corner of map without adjustment for Y position
+	ld l,a
+	ld a,[$d39c]
+	ld h,a
+	srl c
+	jr z,.savePointer2\@
+.pointerAdjustmentLoop2\@
+	ld a,[$d398]
+	add a,$06
+	ld e,a
+	ld d,$00
+	ld b,$00
+	add hl,de
+	dec c
+	jr nz,.pointerAdjustmentLoop2\@
+.savePointer2\@
+	ld a,l
+	ld [$d35f],a ; pointer to upper left corner of current tile block map section
+	ld a,h
+	ld [$d360],a
+	jp .loadNewMap\@
+.checkNorthMap\@
+	ld a,[W_YCOORD]
+	cp a,$ff
+	jr nz,.checkSouthMap\@
+	ld a,[$d371]
+	ld [W_CURMAP],a
+	ld a,[$d378] ; new Y coordinate upon entering north map
+	ld [W_YCOORD],a
+	ld a,[W_XCOORD]
+	ld c,a
+	ld a,[$d379] ; X adjustment upon entering north map
+	add c
+	ld c,a
+	ld [W_XCOORD],a
+	ld a,[$d37a] ; pointer to upper left corner of map without adjustment for X position
+	ld l,a
+	ld a,[$d37b]
+	ld h,a
+	ld b,$00
+	srl c
+	add hl,bc
+	ld a,l
+	ld [$d35f],a ; pointer to upper left corner of current tile block map section
+	ld a,h
+	ld [$d360],a
+	jp .loadNewMap\@
+.checkSouthMap\@
+	ld b,a
+	ld a,[$d524]
+	cp b
+	jr nz,.didNotEnterConnectedMap\@
+	ld a,[$d37c]
+	ld [W_CURMAP],a
+	ld a,[$d383] ; new Y coordinate upon entering south map
+	ld [W_YCOORD],a
+	ld a,[W_XCOORD]
+	ld c,a
+	ld a,[$d384] ; X adjustment upon entering south map
+	add c
+	ld c,a
+	ld [W_XCOORD],a
+	ld a,[$d385] ; pointer to upper left corner of map without adjustment for X position
+	ld l,a
+	ld a,[$d386]
+	ld h,a
+	ld b,$00
+	srl c
+	add hl,bc
+	ld a,l
+	ld [$d35f],a ; pointer to upper left corner of current tile block map section
+	ld a,h
+	ld [$d360],a
+.loadNewMap\@ ; load the connected map that was entered
+	call LoadMapHeader
+	call $2312 ; music
+	ld b,$09
+	call $3def ; SGB palette
+	ld b,$05
+	ld hl,$785b ; load tile pattern data for sprites
+	call Bankswitch
+	call LoadTileBlockMap
+	jp OverworldLoopLessDelay
+.didNotEnterConnectedMap\@
+	jp OverworldLoop
+
+; function to play a sound when changing maps
+PlayMapChangeSound:
+	ld a,[$c448] ; upper left tile of the 4x4 square the player's sprite is standing on
+	cp a,$0b ; door tile in tileset 0
+	jr nz,.didNotGoThroughDoor\@
+	ld a,$ad
+	jr .playSound\@
+.didNotGoThroughDoor\@
+	ld a,$b5
+.playSound\@
+	call $23b1
+	ld a,[$d35d]
+	and a
+	ret nz
+	jp GBFadeIn1
+
+; function to set the Z flag if the tileset number is 0 or the map is Route 12
+; strangely, Route 12 has tileset 0, so the check is redundant
+CheckIfInOutsideMap: ; 8E1
+	ld a,[W_CURMAPTILESET]
+	and a
+	ret z
+	cp a,ROUTE_12
+	ret
+
+; this function is an extra check that sometimes has to pass in order to warp, beyond just standing on a warp
+; the "sometimes" qualification is necessary because of CheckWarpsNoCollision's behavior
+; depending on the map, either "function 1" or "function 2" is used for the check
+; "function 1" passes when the player is at the edge of the map and is facing towards the outside of the map
+; "function 2" passes when the the tile in front of the player is among a certain set
+; sets carry if the check passes, otherwise clears carry
+ExtraWarpCheck: ; 8E9
+	ld a,[W_CURMAP]
+	cp a,SS_ANNE_3
+	jr z,.useFunction1\@
+	cp a,ROCKET_HIDEOUT_1
+	jr z,.useFunction2\@
+	cp a,ROCKET_HIDEOUT_2
+	jr z,.useFunction2\@
+	cp a,ROCKET_HIDEOUT_4
+	jr z,.useFunction2\@
+	cp a,ROCK_TUNNEL_1
+	jr z,.useFunction2\@
+	ld a,[W_CURMAPTILESET]
+	and a ; outside tileset
+	jr z,.useFunction2\@
+	cp a,$0d ; S.S. Anne tileset
+	jr z,.useFunction2\@
+	cp a,$0e ; Vermilion Port tileset
+	jr z,.useFunction2\@
+	cp a,$17 ; Indigo Plateau tileset
+	jr z,.useFunction2\@
+.useFunction1\@
+	ld hl,$43ff
+	jr .doBankswitch\@
+.useFunction2\@
+	ld hl,$444e
+.doBankswitch\@
+	ld b,$03
+	jp Bankswitch
+
+MapEntryAfterBattle: ; 91F
+	ld b,$03
+	ld hl,$435f
+	call Bankswitch ; function that appears to disable warp testing after collisions if the player is standing on a warp
+	ld a,[$d35d]
+	and a
+	jp z,GBFadeIn2
+	jp LoadGBPal
+
+; for when all the player's pokemon faint
+; other code prints the "you blacked out" message before this is called
+HandleBlackOut: ; 931
+	call GBFadeIn1
+	ld a,$08
+	call StopMusic
+	ld hl,$d72e
+	res 5,[hl]
+	ld a,$01
+	ld [$ffb8],a
+	ld [$2000],a
+	call $40b0
+	call $62ce
+	call $2312
+	jp $5d5f
+
+StopMusic: ; 951
+	ld [$cfc7],a
+	ld a,$ff
+	ld [$c0ee],a
+	call $23b1
+.waitLoop\@
+	ld a,[$cfc7]
+	and a
+	jr nz,.waitLoop\@
+	jp $200e
+
+HandleFlyOrTeleportAway: ; 965
+	call $2429 ; move sprites
+	call $3dd7
+	xor a
+	ld [$cf0b],a
+	ld [$d700],a
+	ld [$d057],a
+	ld [$d35d],a
+	ld hl,$d732
+	set 2,[hl]
+	res 5,[hl]
+	call DoFlyOrTeleportAwayGraphics
+	ld a,$01
+	ld [$ffb8],a
+	ld [$2000],a
+	call $62ce
+	jp $5d5f
+
+; function that calls a function to do fly away or teleport away graphics
+DoFlyOrTeleportAwayGraphics: ; 98F
+	ld b,$1c
+	ld hl,$45ba
+	jp Bankswitch
+
+; load sprite graphics based on whether the player is standing, biking, or surfing
+LoadPlayerSpriteGraphics: ; 997
+	ld a,[$d700]
+	dec a
+	jr z,.ridingBike\@
+	ld a,[$ffd7]
+	and a
+	jr nz,.determineGraphics\@
+	jr .startWalking\@
+.ridingBike\@
+	call IsBikeRidingAllowed
+	jr c,.determineGraphics\@ ; don't start walking if bike riding is allowed
+.startWalking\@
+	xor a
+	ld [$d700],a
+	ld [$d11a],a
+	jp LoadWalkingPlayerSpriteGraphics
+.determineGraphics\@
+	ld a,[$d700]
+	and a
+	jp z,LoadWalkingPlayerSpriteGraphics
+	dec a
+	jp z,LoadBikePlayerSpriteGraphics
+	dec a
+	jp z,LoadSurfingPlayerSpriteGraphics
+	jp LoadWalkingPlayerSpriteGraphics
+
+; function to check if bike riding is allowed on the current map
+; sets carry if bike is allowed, clears carry otherwise
+IsBikeRidingAllowed:
+	ld a,[W_CURMAP]
+	cp a,ROUTE_23
+	jr z,.allowed\@
+	cp a,INDIGO_PLATEAU
+	jr z,.allowed\@
+	ld a,[W_CURMAPTILESET]
+	ld b,a
+	ld hl,BikeRidingTilesets
+.loop\@
+	ld a,[hli]
+	cp b
+	jr z,.allowed\@
+	inc a
+	jr nz,.loop\@
+	and a
+	ret
+.allowed\@
+	scf
+	ret
+
+BikeRidingTilesets:
+db $00, $03, $0B, $0E, $11, $FF
+
+; load the tile pattern data of the current tileset into VRAM
+LoadTilesetTilePatternData: ; 9E8
+	ld a,[$d52e]
+	ld l,a
+	ld a,[$d52f]
+	ld h,a
+	ld de,$9000
+	ld bc,$0600
+	ld a,[$d52b]
+	jp $17f7
+
+; this loads the current maps complete tile map (which references blocks, not individual tiles) to C6E8
+; it can also load partial tile maps of connected maps into a border of length 3 around the current map
+LoadTileBlockMap: ; 9FC
+; fill C6E8-CBFB with the background tile
+	ld hl,$c6e8
+	ld a,[$d3ad] ; background tile number
+	ld d,a
+	ld bc,$0514
+.backgroundTileLoop\@
+	ld a,d
+	ld [hli],a
+	dec bc
+	ld a,c
+	or b
+	jr nz,.backgroundTileLoop\@
+; load tile map of current map (made of tile block IDs)
+; a 3-byte border at the edges of the map is kept so that there is space for map connections
+	ld hl,$c6e8
+	ld a,[W_CURMAPWIDTH]
+	ld [$ff8c],a
+	add a,$06 ; border (east and west)
+	ld [$ff8b],a ; map width + border
+	ld b,$00
+	ld c,a
+; make space for north border (next 3 lines)
+	add hl,bc
+	add hl,bc
+	add hl,bc
+	ld c,$03
+	add hl,bc ; this puts us past the (west) border
+	ld a,[$d36a] ; tile map pointer
+	ld e,a
+	ld a,[$d36b]
+	ld d,a ; de = tile map pointer
+	ld a,[W_CURMAPHEIGHT]
+	ld b,a
+.rowLoop\@ ; copy one row each iteration
+	push hl
+	ld a,[$ff8c] ; map width (without border)
+	ld c,a
+.rowInnerLoop\@
+	ld a,[de]
+	inc de
+	ld [hli],a
+	dec c
+	jr nz,.rowInnerLoop\@
+; add the map width plus the border to the base address of the current row to get the next row's address
+	pop hl
+	ld a,[$ff8b] ; map width + border
+	add l
+	ld l,a
+	jr nc,.noCarry\@
+	inc h
+.noCarry\@
+	dec b
+	jr nz,.rowLoop\@
+.northConnection\@
+	ld a,[$d371]
+	cp a,$ff
+	jr z,.southConnection\@
+	call SwitchToMapRomBank
+	ld a,[$d372]
+	ld l,a
+	ld a,[$d373]
+	ld h,a
+	ld a,[$d374]
+	ld e,a
+	ld a,[$d375]
+	ld d,a
+	ld a,[$d376]
+	ld [$ff8b],a
+	ld a,[$d377]
+	ld [$ff8c],a
+	call LoadNorthSouthConnectionsTileMap
+.southConnection\@
+	ld a,[$d37c]
+	cp a,$ff
+	jr z,.westConnection\@
+	call SwitchToMapRomBank
+	ld a,[$d37d]
+	ld l,a
+	ld a,[$d37e]
+	ld h,a
+	ld a,[$d37f]
+	ld e,a
+	ld a,[$d380]
+	ld d,a
+	ld a,[$d381]
+	ld [$ff8b],a
+	ld a,[$d382]
+	ld [$ff8c],a
+	call LoadNorthSouthConnectionsTileMap
+.westConnection\@
+	ld a,[$d387]
+	cp a,$ff
+	jr z,.eastConnection\@
+	call SwitchToMapRomBank
+	ld a,[$d388]
+	ld l,a
+	ld a,[$d389]
+	ld h,a
+	ld a,[$d38a]
+	ld e,a
+	ld a,[$d38b]
+	ld d,a
+	ld a,[$d38c]
+	ld b,a
+	ld a,[$d38d]
+	ld [$ff8b],a
+	call LoadEastWestConnectionsTileMap
+.eastConnection\@
+	ld a,[$d392]
+	cp a,$ff
+	jr z,.done\@
+	call SwitchToMapRomBank
+	ld a,[$d393]
+	ld l,a
+	ld a,[$d394]
+	ld h,a
+	ld a,[$d395]
+	ld e,a
+	ld a,[$d396]
+	ld d,a
+	ld a,[$d397]
+	ld b,a
+	ld a,[$d398]
+	ld [$ff8b],a
+	call LoadEastWestConnectionsTileMap
+.done\@
+	ret
+
+LoadNorthSouthConnectionsTileMap: ; ADE
+	ld c,$03
+.loop\@
+	push de
+	push hl
+	ld a,[$ff8b] ; width of connection
+	ld b,a
+.innerLoop\@
+	ld a,[hli]
+	ld [de],a
+	inc de
+	dec b
+	jr nz,.innerLoop\@
+	pop hl
+	pop de
+	ld a,[$ff8c] ; width of connected map
+	add l
+	ld l,a
+	jr nc,.noCarry1\@
+	inc h
+.noCarry1\@
+	ld a,[W_CURMAPWIDTH]
+	add a,$06
+	add e
+	ld e,a
+	jr nc,.noCarry2\@
+	inc d
+.noCarry2\@
+	dec c
+	jr nz,.loop\@
+	ret
+
+LoadEastWestConnectionsTileMap: ; B02
+	push hl
+	push de
+	ld c,$03
+.innerLoop\@
+	ld a,[hli]
+	ld [de],a
+	inc de
+	dec c
+	jr nz,.innerLoop\@
+	pop de
+	pop hl
+	ld a,[$ff8b] ; width of connected map
+	add l
+	ld l,a
+	jr nc,.noCarry1\@
+	inc h
+.noCarry1\@
+	ld a,[W_CURMAPWIDTH]
+	add a,$06
+	add e
+	ld e,a
+	jr nc,.noCarry2\@
+	inc d
+.noCarry2\@
+	dec b
+	jr nz,LoadEastWestConnectionsTileMap
+	ret
+
+; function to check if there is a sign or sprite in front of the player
+; if so, it is stored in [$FF8C]
+; if not, [$FF8C] is set to 0
+IsSpriteOrSignInFrontOfPlayer: ; B23
+	xor a
+	ld [$ff8c],a
+	ld a,[$d4b0] ; number of signs in the map
+	and a
+	jr z,.extendRangeOverCounter\@
+; if there are signs
+	ld a,$35
+	call Predef ; get the coordinates in front of the player in de
+	ld hl,$d4b1 ; start of sign coordinates
+	ld a,[$d4b0] ; number of signs in the map
+	ld b,a
+	ld c,$00
+.signLoop\@
+	inc c
+	ld a,[hli] ; sign Y
+	cp d
+	jr z,.yCoordMatched\@
+	inc hl
+	jr .retry\@
+.yCoordMatched\@
+	ld a,[hli] ; sign X
+	cp e
+	jr nz,.retry\@
+.xCoordMatched\@
+; found sign
+	push hl
+	push bc
+	ld hl,$d4d1 ; start of sign text ID's
+	ld b,$00
+	dec c
+	add hl,bc
+	ld a,[hl]
+	ld [$ff8c],a ; store sign text ID
+	pop bc
+	pop hl
+	ret
+.retry\@
+	dec b
+	jr nz,.signLoop\@
+; check if the player is front of a counter in a pokemon center, pokemart, etc. and if so, extend the range at which he can talk to the NPC
+.extendRangeOverCounter\@
+	ld a,$35
+	call Predef ; get the tile in front of the player in c
+	ld hl,$d532 ; list of tiles that extend talking range (counter tiles)
+	ld b,$03
+	ld d,$20 ; talking range in pixels (long range)
+.counterTilesLoop\@
+	ld a,[hli]
+	cp c
+	jr z,IsSpriteInFrontOfPlayer2 ; jumps if the tile in front of the player is a counter tile
+	dec b
+	jr nz,.counterTilesLoop\@
+
+; part of the above function, but sometimes its called on its own, when signs are irrelevant
+; the caller must zero [$FF8C]
+IsSpriteInFrontOfPlayer: ; B6B
+	ld d,$10 ; talking range in pixels (normal range)
+IsSpriteInFrontOfPlayer2: ; B6D
+	ld bc,$3c40 ; Y and X position of player sprite
+	ld a,[$c109] ; direction the player is facing
+.checkIfPlayerFacingUp\@
+	cp a,$04
+	jr nz,.checkIfPlayerFacingDown\@
+; facing up
+	ld a,b
+	sub d
+	ld b,a
+	ld a,$08
+	jr .doneCheckingDirection\@
+.checkIfPlayerFacingDown\@
+	cp a,$00
+	jr nz,.checkIfPlayerFacingRight\@
+; facing down
+	ld a,b
+	add d
+	ld b,a
+	ld a,$04
+	jr .doneCheckingDirection\@
+.checkIfPlayerFacingRight\@
+	cp a,$0c
+	jr nz,.playerFacingLeft\@
+; facing right
+	ld a,c
+	add d
+	ld c,a
+	ld a,$01
+	jr .doneCheckingDirection\@
+.playerFacingLeft\@
+; facing left
+	ld a,c
+	sub d
+	ld c,a
+	ld a,$02
+.doneCheckingDirection\@
+	ld [$d52a],a
+	ld a,[$d4e1] ; number of sprites
+	and a
+	ret z
+; if there are sprites
+	ld hl,$c110
+	ld d,a
+	ld e,$01
+.spriteLoop\@
+	push hl
+	ld a,[hli] ; image (0 if no sprite)
+	and a
+	jr z,.nextSprite\@
+	inc l
+	ld a,[hli] ; sprite visibility
+	inc a
+	jr z,.nextSprite\@
+	inc l
+	ld a,[hli] ; Y location
+	cp b
+	jr nz,.nextSprite\@
+	inc l
+	ld a,[hl] ; X location
+	cp c
+	jr z,.foundSpriteInFrontOfPlayer\@
+.nextSprite\@
+	pop hl
+	ld a,l
+	add a,$10
+	ld l,a
+	inc e
+	dec d
+	jr nz,.spriteLoop\@
+	ret
+.foundSpriteInFrontOfPlayer\@
+	pop hl
+	ld a,l
+	and a,$f0
+	inc a
+	ld l,a
+	set 7,[hl]
+	ld a,e
+	ld [$ff8c],a ; store sprite ID
+	ret
+
+; function to check if the player will jump down a ledge and check if the tile ahead is passable (when not surfing)
+; sets the carry flag if there is a collision, and unsets it if there isn't a collision
+CollisionCheckOnLand: ; BD1
+	ld a,[$d736]
+	bit 6,a ; is the player jumping?
+	jr nz,.noCollision\@
+; if not jumping a ledge
+	ld a,[$cd38]
+	and a
+	jr nz,.noCollision\@
+	ld a,[$d52a] ; the direction that the player is trying to go in
+	ld d,a
+	ld a,[$c10c] ; the player sprite's collision data (bit field) (set in the sprite movement code)
+	and d ; check if a sprite is in the direction the player is trying to go
+	jr nz,.collision\@
+	xor a
+	ld [$ff8c],a
+	call IsSpriteInFrontOfPlayer ; check for sprite collisions again? when does the above check fail to detect a sprite collision?
+	ld a,[$ff8c]
+	and a ; was there a sprite collision?
+	jr nz,.collision\@
+; if no sprite collision
+	ld hl,TilePairCollisionsLand
+	call CheckForJumpingAndTilePairCollisions
+	jr c,.collision\@
+	call CheckTilePassable
+	jr nc,.noCollision\@
+.collision\@
+	ld a,[$c02a]
+	cp a,$b4 ; check if collision sound is already playing
+	jr z,.setCarry\@
+	ld a,$b4
+	call $23b1 ; play collision sound (if it's not already playing)
+.setCarry\@
+	scf
+	ret
+.noCollision\@
+	and a
+	ret
+
+; function that checks if the tile in front of the player is passable
+; clears carry if it is, sets carry if not
+CheckTilePassable: ; C10
+	ld a,$35
+	call Predef ; get tile in front of player
+	ld a,[$cfc6] ; tile in front of player
+	ld c,a
+	ld hl,$d530 ; pointer to list of passable tiles
+	ld a,[hli]
+	ld h,[hl]
+	ld l,a ; hl now points to passable tiles
+.loop\@
+	ld a,[hli]
+	cp a,$ff
+	jr z,.tileNotPassable\@
+	cp c
+	ret z
+	jr .loop\@
+.tileNotPassable\@
+	scf
+	ret
+
+; check if the player is going to jump down a small ledge
+; and check for collisions that only occur between certain pairs of tiles
+; Input: hl - address of directional collision data
+; sets carry if there is a collision and unsets carry if not
+CheckForJumpingAndTilePairCollisions: ; C2A
+	push hl
+	ld a,$35
+	call Predef ; get the tile in front of the player
+	push de
+	push bc
+	ld b,$06
+	ld hl,$6672
+	call Bankswitch ; check if the player is trying to jump a ledge
+	pop bc
+	pop de
+	pop hl
+	and a
+	ld a,[$d736]
+	bit 6,a ; is the player jumping?
+	ret nz
+; if not jumping
+	ld a,[$c45c] ; tile the player is on
+	ld [$cf0e],a
+	ld a,[$cfc6] ; tile in front of the player
+	ld c,a
+.tilePairCollisionLoop\@
+	ld a,[W_CURMAPTILESET] ; tileset number
+	ld b,a
+	ld a,[hli]
+	cp a,$ff
+	jr z,.noMatch\@
+	cp b
+	jr z,.tilesetMatches\@
+	inc hl
+.retry\@
+	inc hl
+	jr .tilePairCollisionLoop\@
+.tilesetMatches\@
+	ld a,[$cf0e] ; tile the player is on
+	ld b,a
+	ld a,[hl]
+	cp b
+	jr z,.currentTileMatchesFirstInPair\@
+	inc hl
+	ld a,[hl]
+	cp b
+	jr z,.currentTileMatchesSecondInPair\@
+	jr .retry\@
+.currentTileMatchesFirstInPair\@
+	inc hl
+	ld a,[hl]
+	cp c
+	jr z,.foundMatch\@
+	jr .tilePairCollisionLoop\@
+.currentTileMatchesSecondInPair\@
+	dec hl
+	ld a,[hli]
+	cp c
+	inc hl
+	jr nz,.tilePairCollisionLoop\@
+.foundMatch\@
+	scf
+	ret
+.noMatch\@
+	and a
+	ret
+
+; FORMAT: tileset number, tile 1, tile 2
+; terminated by 0xFF
+; these entries indicate that the player may not cross between tile 1 and tile 2
+; it's mainly used to simulate differences in elevation
+
+TilePairCollisionsLand: ; C7E
+db $11, $20, $05;
+db $11, $41, $05;
+db $03, $30, $2E;
+db $11, $2A, $05;
+db $11, $05, $21;
+db $03, $52, $2E;
+db $03, $55, $2E;
+db $03, $56, $2E;
+db $03, $20, $2E;
+db $03, $5E, $2E;
+db $03, $5F, $2E;
+db $FF;
+
+TilePairCollisionsWater: ; CA0
+db $03, $14, $2E;
+db $03, $48, $2E;
+db $11, $14, $05;
+db $FF;
+
+; this builds a tile map from the tile block map based on the current X/Y coordinates of the player's character
+LoadCurrentMapView: ; CAA
+	ld a,[$ffb8]
+	push af
+	ld a,[$d52b] ; tile data ROM bank
+	ld [$ffb8],a
+	ld [$2000],a ; switch to ROM bank that contains tile data
+	ld a,[$d35f] ; address of upper left corner of current map view
+	ld e,a
+	ld a,[$d360]
+	ld d,a
+	ld hl,$c508
+	ld b,$05
+.rowLoop\@ ; each loop iteration fills in one row of tile blocks
+	push hl
+	push de
+	ld c,$06
+.rowInnerLoop\@ ; loop to draw each tile block of the current row
+	push bc
+	push de
+	push hl
+	ld a,[de]
+	ld c,a ; tile block number
+	call DrawTileBlock
+	pop hl
+	pop de
+	pop bc
+	inc hl
+	inc hl
+	inc hl
+	inc hl
+	inc de
+	dec c
+	jr nz,.rowInnerLoop\@
+; update tile block map pointer to next row's address
+	pop de
+	ld a,[W_CURMAPWIDTH]
+	add a,$06
+	add e
+	ld e,a
+	jr nc,.noCarry\@
+	inc d
+.noCarry\@
+; update tile map pointer to next row's address
+	pop hl
+	ld a,$60
+	add l
+	ld l,a
+	jr nc,.noCarry2\@
+	inc h
+.noCarry2\@
+	dec b
+	jr nz,.rowLoop\@
+	ld hl,$c508
+	ld bc,$0000
+.adjustForYCoordWithinTileBlock\@
+	ld a,[W_YBLOCKCOORD]
+	and a
+	jr z,.adjustForXCoordWithinTileBlock\@
+	ld bc,$0030
+	add hl,bc
+.adjustForXCoordWithinTileBlock\@
+	ld a,[W_XBLOCKCOORD]
+	and a
+	jr z,.copyToVisibleAreaBuffer\@
+	ld bc,$0002
+	add hl,bc
+.copyToVisibleAreaBuffer\@
+	ld de,$c3a0 ; base address for the tiles that are directly transfered to VRAM during V-blank
+	ld b,$12
+.rowLoop2\@
+	ld c,$14
+.rowInnerLoop2\@
+	ld a,[hli]
+	ld [de],a
+	inc de
+	dec c
+	jr nz,.rowInnerLoop2\@
+	ld a,$04
+	add l
+	ld l,a
+	jr nc,.noCarry3\@
+	inc h
+.noCarry3\@
+	dec b
+	jr nz,.rowLoop2\@
+	pop af
+	ld [$ffb8],a
+	ld [$2000],a ; restore previous ROM bank
+	ret
+
+AdvancePlayerSprite: ; D27
+	ld a,[$c103] ; delta Y
+	ld b,a
+	ld a,[$c105] ; delta X
+	ld c,a
+	ld hl,$cfc5 ; walking animation counter
+	dec [hl]
+	jr nz,.afterUpdateMapCoords\@
+; if it's the end of the animation, update the player's map coordinates
+	ld a,[W_YCOORD]
+	add b
+	ld [W_YCOORD],a
+	ld a,[W_XCOORD]
+	add c
+	ld [W_XCOORD],a
+.afterUpdateMapCoords\@
+	ld a,[$cfc5] ; walking animation counter
+	cp a,$07
+	jp nz,.scrollBackgroundAndSprites\@
+; if this is the first iteration of the animation
+	ld a,c
+	cp a,$01
+	jr nz,.checkIfMovingWest\@
+; moving east
+	ld a,[$d526]
+	ld e,a
+	and a,$e0
+	ld d,a
+	ld a,e
+	add a,$02
+	and a,$1f
+	or d
+	ld [$d526],a
+	jr .adjustXCoordWithinBlock\@
+.checkIfMovingWest\@
+	cp a,$ff
+	jr nz,.checkIfMovingSouth\@
+; moving west
+	ld a,[$d526]
+	ld e,a
+	and a,$e0
+	ld d,a
+	ld a,e
+	sub a,$02
+	and a,$1f
+	or d
+	ld [$d526],a
+	jr .adjustXCoordWithinBlock\@
+.checkIfMovingSouth\@
+	ld a,b
+	cp a,$01
+	jr nz,.checkIfMovingNorth\@
+; moving south
+	ld a,[$d526]
+	add a,$40
+	ld [$d526],a
+	jr nc,.adjustXCoordWithinBlock\@
+	ld a,[$d527]
+	inc a
+	and a,$03
+	or a,$98
+	ld [$d527],a
+	jr .adjustXCoordWithinBlock\@
+.checkIfMovingNorth\@
+	cp a,$ff
+	jr nz,.adjustXCoordWithinBlock\@
+; moving north
+	ld a,[$d526]
+	sub a,$40
+	ld [$d526],a
+	jr nc,.adjustXCoordWithinBlock\@
+	ld a,[$d527]
+	dec a
+	and a,$03
+	or a,$98
+	ld [$d527],a
+.adjustXCoordWithinBlock\@
+	ld a,c
+	and a
+	jr z,.pointlessJump\@ ; mistake?
+.pointlessJump\@
+	ld hl,W_XBLOCKCOORD
+	ld a,[hl]
+	add c
+	ld [hl],a
+	cp a,$02
+	jr nz,.checkForMoveToWestBlock\@
+; moved into the tile block to the east
+	xor a
+	ld [hl],a
+	ld hl,$d4e3
+	inc [hl]
+	ld de,$d35f
+	call MoveTileBlockMapPointerEast
+	jr .updateMapView\@
+.checkForMoveToWestBlock\@
+	cp a,$ff
+	jr nz,.adjustYCoordWithinBlock\@
+; moved into the tile block to the west
+	ld a,$01
+	ld [hl],a
+	ld hl,$d4e3
+	dec [hl]
+	ld de,$d35f
+	call MoveTileBlockMapPointerWest
+	jr .updateMapView\@
+.adjustYCoordWithinBlock\@
+	ld hl,W_YBLOCKCOORD
+	ld a,[hl]
+	add b
+	ld [hl],a
+	cp a,$02
+	jr nz,.checkForMoveToNorthBlock\@
+; moved into the tile block to the south
+	xor a
+	ld [hl],a
+	ld hl,$d4e2
+	inc [hl]
+	ld de,$d35f
+	ld a,[W_CURMAPWIDTH]
+	call MoveTileBlockMapPointerSouth
+	jr .updateMapView\@
+.checkForMoveToNorthBlock\@
+	cp a,$ff
+	jr nz,.updateMapView\@
+; moved into the tile block to the north
+	ld a,$01
+	ld [hl],a
+	ld hl,$d4e2
+	dec [hl]
+	ld de,$d35f
+	ld a,[W_CURMAPWIDTH]
+	call MoveTileBlockMapPointerNorth
+.updateMapView\@
+	call LoadCurrentMapView
+	ld a,[$c103] ; delta Y
+	cp a,$01
+	jr nz,.checkIfMovingNorth2\@
+; if moving south
+	call ScheduleSouthRowRedraw
+	jr .scrollBackgroundAndSprites\@
+.checkIfMovingNorth2\@
+	cp a,$ff
+	jr nz,.checkIfMovingEast2\@
+; if moving north
+	call ScheduleNorthRowRedraw
+	jr .scrollBackgroundAndSprites\@
+.checkIfMovingEast2\@
+	ld a,[$c105] ; delta X
+	cp a,$01
+	jr nz,.checkIfMovingWest2\@
+; if moving east
+	call ScheduleEastColumnRedraw
+	jr .scrollBackgroundAndSprites\@
+.checkIfMovingWest2\@
+	cp a,$ff
+	jr nz,.scrollBackgroundAndSprites\@
+; if moving west
+	call ScheduleWestColumnRedraw
+.scrollBackgroundAndSprites\@
+	ld a,[$c103] ; delta Y
+	ld b,a
+	ld a,[$c105] ; delta X
+	ld c,a
+	sla b
+	sla c
+	ld a,[$ffaf]
+	add b
+	ld [$ffaf],a ; update background scroll Y
+	ld a,[$ffae]
+	add c
+	ld [$ffae],a ; update background scroll X
+; shift all the sprites in the direction opposite of the player's motion
+; so that the player appears to move relative to them
+	ld hl,$c114
+	ld a,[$d4e1] ; number of sprites
+	and a ; are there any sprites?
+	jr z,.done\@
+	ld e,a
+.spriteShiftLoop\@
+	ld a,[hl]
+	sub b
+	ld [hli],a
+	inc l
+	ld a,[hl]
+	sub c
+	ld [hl],a
+	ld a,$0e
+	add l
+	ld l,a
+	dec e
+	jr nz,.spriteShiftLoop\@
+.done\@
+	ret
+
+; the following four functions are used to move the pointer to the upper left
+; corner of the tile block map in the direction of motion
+
+MoveTileBlockMapPointerEast: ; E65
+	ld a,[de]
+	add a,$01
+	ld [de],a
+	ret nc
+	inc de
+	ld a,[de]
+	inc a
+	ld [de],a
+	ret
+
+MoveTileBlockMapPointerWest: ; E6F
+	ld a,[de]
+	sub a,$01
+	ld [de],a
+	ret nc
+	inc de
+	ld a,[de]
+	dec a
+	ld [de],a
+	ret
+
+MoveTileBlockMapPointerSouth: ; E79
+	add a,$06
+	ld b,a
+	ld a,[de]
+	add b
+	ld [de],a
+	ret nc
+	inc de
+	ld a,[de]
+	inc a
+	ld [de],a
+	ret
+
+MoveTileBlockMapPointerNorth: ; E85
+	add a,$06
+	ld b,a
+	ld a,[de]
+	sub b
+	ld [de],a
+	ret nc
+	inc de
+	ld a,[de]
+	dec a
+	ld [de],a
+	ret
+
+; the following 6 functions are used to tell the V-blank handler to redraw
+; the portion of the map that was newly exposed due to the player's movement
+
+ScheduleNorthRowRedraw: ; E91
+	ld hl,$c3a0
+	call ScheduleRowRedrawHelper
+	ld a,[$d526]
+	ld [$ffd1],a
+	ld a,[$d527]
+	ld [$ffd2],a
+	ld a,$02
+	ld [$ffd0],a
+	ret
+
+ScheduleRowRedrawHelper: ; EA6
+	ld de,$cbfc
+	ld c,$28
+.loop\@
+	ld a,[hli]
+	ld [de],a
+	inc de
+	dec c
+	jr nz,.loop\@
+	ret
+
+ScheduleSouthRowRedraw: ; EB2
+	ld hl,$c4e0
+	call $0ea6
+	ld a,[$d526]
+	ld l,a
+	ld a,[$d527]
+	ld h,a
+	ld bc,$0200
+	add hl,bc
+	ld a,h
+	and a,$03
+	or a,$98
+	ld [$ffd2],a
+	ld a,l
+	ld [$ffd1],a
+	ld a,$02
+	ld [$ffd0],a
+	ret
+
+ScheduleEastColumnRedraw: ; ED3
+	ld hl,$c3b2
+	call ScheduleColumnRedrawHelper
+	ld a,[$d526]
+	ld c,a
+	and a,$e0
+	ld b,a
+	ld a,c
+	add a,$12
+	and a,$1f
+	or b
+	ld [$ffd1],a
+	ld a,[$d527]
+	ld [$ffd2],a
+	ld a,$01
+	ld [$ffd0],a
+	ret
+
+ScheduleColumnRedrawHelper: ; EF2
+	ld de,$cbfc
+	ld c,$12
+.loop\@
+	ld a,[hli]
+	ld [de],a
+	inc de
+	ld a,[hl]
+	ld [de],a
+	inc de
+	ld a,$13
+	add l
+	ld l,a
+	jr nc,.noCarry\@
+	inc h
+.noCarry\@
+	dec c
+	jr nz,.loop\@
+	ret
+
+ScheduleWestColumnRedraw: ; F08
+	ld hl,$c3a0
+	call ScheduleColumnRedrawHelper
+	ld a,[$d526]
+	ld [$ffd1],a
+	ld a,[$d527]
+	ld [$ffd2],a
+	ld a,$01
+	ld [$ffd0],a
+	ret
+
+; function to write the tiles that make up a tile block to memory
+; Input: c = tile block ID, hl = destination address
+DrawTileBlock: ; F1D
+	push hl
+	ld a,[$d52c] ; pointer to tiles
+	ld l,a
+	ld a,[$d52d]
+	ld h,a
+	ld a,c
+	swap a
+	ld b,a
+	and a,$f0
+	ld c,a
+	ld a,b
+	and a,$0f
+	ld b,a ; bc = tile block ID * 0x10
+	add hl,bc
+	ld d,h
+	ld e,l ; de = address of the tile block's tiles
+	pop hl
+	ld c,$04 ; 4 loop iterations
+.loop\@ ; each loop iteration, write 4 tile numbers
+	push bc
+	ld a,[de]
+	ld [hli],a
+	inc de
+	ld a,[de]
+	ld [hli],a
+	inc de
+	ld a,[de]
+	ld [hli],a
+	inc de
+	ld a,[de]
+	ld [hl],a
+	inc de
+	ld bc,$0015
+	add hl,bc
+	pop bc
+	dec c
+	jr nz,.loop\@
+	ret
+
+; function to update joypad state and simulate button presses
+GetJoypadStateOverworld: ; F4D
+	xor a
+	ld [$c103],a
+	ld [$c105],a
+	call RunMapScript
+	call $019a ; update joypad state
+	ld a,[$d733]
+	bit 3,a ; check if a trainer wants a challenge
+	jr nz,.notForcedDownwards\@
+	ld a,[W_CURMAP]
+	cp a,ROUTE_17 ; Cycling Road
+	jr nz,.notForcedDownwards\@
+	ld a,[$ffb4] ; current joypad state
+	and a,%11110011 ; bit mask for all directions and A/B
+	jr nz,.notForcedDownwards\@
+	ld a,%10000000 ; down pressed
+	ld [$ffb4],a ; on the cycling road, if there isn't a trainer and the player isn't pressing buttons, simulate a down press
+.notForcedDownwards\@
+	ld a,[$d730]
+	bit 7,a
+	ret z
+; if simulating button presses
+	ld a,[$ffb4] ; current joypad state
+	ld b,a
+	ld a,[$cd3b] ; bit mask for button presses that override simulated ones
+	and b
+	ret nz ; return if the simulated button presses are overridden
+	ld hl,$cd38 ; index of current simulated button press
+	dec [hl]
+	ld a,[hl]
+	cp a,$ff
+	jr z,.doneSimulating\@ ; if the end of the simulated button presses has been reached
+	ld hl,$ccd3 ; base address of simulated button presses
+; add offset to base address
+	add l
+	ld l,a
+	jr nc,.noCarry\@
+	inc h
+.noCarry\@
+	ld a,[hl]
+	ld [$ffb4],a ; store simulated button press in joypad state
+	and a
+	ret nz
+	ld [$ffb3],a
+	ld [$ffb2],a
+	ret
+; if done simulating button presses
+.doneSimulating\@
+	xor a
+	ld [$cd3a],a
+	ld [$cd38],a
+	ld [$ccd3],a
+	ld [$cd6b],a
+	ld [$ffb4],a
+	ld hl,$d736
+	ld a,[hl]
+	and a,$f8
+	ld [hl],a
+	ld hl,$d730
+	res 7,[hl]
+	ret
+
+; function to check the tile ahead to determine if the character should get on land or keep surfing
+; sets carry if there is a collision and clears carry otherwise
+; It seems that this function has a bug in it, but due to luck, it doesn't
+; show up. After detecting a sprite collision, it jumps to the code that
+; checks if the next tile is passable instead of just directly jumping to the
+; "collision detected" code. However, it doesn't store the next tile in c,
+; so the old value of c is used. 2429 is always called before this function,
+; and 2429 always sets c to 0xF0. There is no 0xF0 background tile, so it
+; is considered impassable and it is detected as a collision.
+CollisionCheckOnWater: ; FB7
+	ld a,[$d730]
+	bit 7,a
+	jp nz,.noCollision\@ ; return and clear carry if button presses are being simulated
+	ld a,[$d52a] ; the direction that the player is trying to go in
+	ld d,a
+	ld a,[$c10c] ; the player sprite's collision data (bit field) (set in the sprite movement code)
+	and d ; check if a sprite is in the direction the player is trying to go
+	jr nz,.checkIfNextTileIsPassable\@ ; bug?
+	ld hl,TilePairCollisionsWater
+	call CheckForJumpingAndTilePairCollisions
+	jr c,.collision\@
+	ld a,$35
+	call Predef ; get tile in front of player (puts it in c and [$CFC6])
+	ld a,[$cfc6] ; tile in front of player
+	cp a,$14 ; water tile
+	jr z,.noCollision\@ ; keep surfing if it's a water tile
+	cp a,$32 ; either the left tile of the S.S. Anne boarding platform or the tile on eastern coastlines (depending on the current tileset)
+	jr z,.checkIfVermilionDockTileset\@
+	cp a,$48 ; tile on right on coast lines in Safari Zone
+	jr z,.noCollision\@ ; keep surfing
+; check if the [land] tile in front of the player is passable
+.checkIfNextTileIsPassable\@
+	ld hl,$d530 ; pointer to list of passable tiles
+	ld a,[hli]
+	ld h,[hl]
+	ld l,a
+.loop\@
+	ld a,[hli]
+	cp a,$ff
+	jr z,.collision\@
+	cp c
+	jr z,.stopSurfing\@ ; stop surfing if the tile is passable
+	jr .loop\@
+.collision\@
+	ld a,[$c02a]
+	cp a,$b4 ; check if collision sound is already playing
+	jr z,.setCarry\@
+	ld a,$b4
+	call $23b1 ; play collision sound (if it's not already playing)
+.setCarry\@
+	scf
+	jr .done\@
+.noCollision\@
+	and a
+.done\@
+	ret
+.stopSurfing\@
+	xor a
+	ld [$d700],a
+	call LoadPlayerSpriteGraphics
+	call $2307
+	jr .noCollision\@
+.checkIfVermilionDockTileset\@
+	ld a,[W_CURMAPTILESET] ; tileset
+	cp a,$0e ; Vermilion Dock tileset
+	jr nz,.noCollision\@ ; keep surfing if it's not the boarding platform tile
+	jr .stopSurfing\@ ; if it is the boarding platform tile, stop surfing
+
+; function to run the current map's script
+RunMapScript: ; 101B
+	push hl
+	push de
+	push bc
+	ld b,$03
+	ld hl,$7225
+	call Bankswitch ; check if the player is pushing a boulder
+	ld a,[$cd60]
+	bit 1,a ; is the player pushing a boulder?
+	jr z,.afterBoulderEffect\@
+	ld b,$03
+	ld hl,$72b5
+	call Bankswitch ; displays dust effect when pushing a boulder
+.afterBoulderEffect\@
+	pop bc
+	pop de
+	pop hl
+	call $310e
+	ld a,[W_CURMAP] ; current map number
+	call SwitchToMapRomBank ; change to the ROM bank the map's data is in
+	ld hl,W_MAPSCRIPTPTR
+	ld a,[hli]
+	ld h,[hl]
+	ld l,a
+	ld de,.return\@
+	push de
+	jp [hl] ; jump to script
+.return\@
+	ret
+
+LoadWalkingPlayerSpriteGraphics:
+	ld de,$4180
+	ld hl,$8000
+	jr LoadPlayerSpriteGraphicsCommon
+
+LoadSurfingPlayerSpriteGraphics:
+	ld de,$76c0
+	ld hl,$8000
+	jr LoadPlayerSpriteGraphicsCommon
+
+LoadBikePlayerSpriteGraphics:
+	ld de,$4000
+	ld hl,$8000
+
+LoadPlayerSpriteGraphicsCommon:
+	push de
+	push hl
+	ld bc,$050c
+	call $1848
+	pop hl
+	pop de
+	ld a,$c0
+	add e
+	ld e,a
+	jr nc,.noCarry\@
+	inc d
+.noCarry\@
+	set 3,h
+	ld bc,$050c
+	jp $1848
+
+; function to load data from the map header
+LoadMapHeader: ; 107C
+	ld b,$03
+	ld hl,$7113
+	call Bankswitch
+	ld a,[W_CURMAPTILESET]
+	ld [$d119],a
+	ld a,[W_CURMAP]
+	call SwitchToMapRomBank
+	ld a,[W_CURMAPTILESET]
+	ld b,a
+	res 7,a
+	ld [W_CURMAPTILESET],a
+	ld [$ff8b],a
+	bit 7,b
+	ret nz
+	ld hl,MapHeaderPointers
+	ld a,[W_CURMAP]
+	sla a
+	jr nc,.noCarry1\@
+	inc h
+.noCarry1\@
+	add l
+	ld l,a
+	jr nc,.noCarry2\@
+	inc h
+.noCarry2\@
+	ld a,[hli]
+	ld h,[hl]
+	ld l,a ; hl = base of map header
+; copy the first 10 bytes (the fixed area) of the map data to D367-D370
+	ld de,$d367
+	ld c,$0a
+.copyFixedHeaderLoop\@
+	ld a,[hli]
+	ld [de],a
+	inc de
+	dec c
+	jr nz,.copyFixedHeaderLoop\@
+; initialize all the connected maps to disabled at first, before loading the actual values
+	ld a,$ff
+	ld [$d371],a
+	ld [$d37c],a
+	ld [$d387],a
+	ld [$d392],a
+; copy connection data (if any) to WRAM
+	ld a,[W_MAPCONNECTIONS]
+	ld b,a
+.checkNorth\@
+	bit 3,b
+	jr z,.checkSouth\@
+	ld de,W_MAPCONN1PTR
+	call CopyMapConnectionHeader
+.checkSouth\@
+	bit 2,b
+	jr z,.checkWest\@
+	ld de,W_MAPCONN2PTR
+	call CopyMapConnectionHeader
+.checkWest\@
+	bit 1,b
+	jr z,.checkEast\@
+	ld de,W_MAPCONN3PTR
+	call CopyMapConnectionHeader
+.checkEast\@
+	bit 0,b
+	jr z,.getObjectDataPointer\@
+	ld de,W_MAPCONN4PTR
+	call CopyMapConnectionHeader
+.getObjectDataPointer\@
+	ld a,[hli]
+	ld [$d3a9],a
+	ld a,[hli]
+	ld [$d3aa],a
+	push hl
+	ld a,[$d3a9]
+	ld l,a
+	ld a,[$d3aa]
+	ld h,a ; hl = base of object data
+	ld de,$d3ad ; background tile ID
+	ld a,[hli]
+	ld [de],a ; save background tile ID
+.loadWarpData\@
+	ld a,[hli] ; number of warps
+	ld [$d3ae],a ; save the number of warps
+	and a ; are there any warps?
+	jr z,.loadSignData\@ ; if not, skip this
+	ld c,a
+	ld de,$d3af ; base address of warps
+.warpLoop\@ ; one warp per loop iteration
+	ld b,$04
+.warpInnerLoop\@
+	ld a,[hli]
+	ld [de],a
+	inc de
+	dec b
+	jr nz,.warpInnerLoop\@
+	dec c
+	jr nz,.warpLoop\@
+.loadSignData\@
+	ld a,[hli] ; number of signs
+	ld [$d4b0],a ; save the number of signs
+	and a ; are there any signs?
+	jr z,.loadSpriteData\@ ; if not, skip this
+	ld c,a
+	ld de,$d4d1 ; base address of sign text IDs
+	ld a,d
+	ld [$ff95],a
+	ld a,e
+	ld [$ff96],a
+	ld de,$d4b1 ; base address of sign coordinates
+.signLoop\@
+	ld a,[hli]
+	ld [de],a
+	inc de
+	ld a,[hli]
+	ld [de],a
+	inc de
+	push de
+	ld a,[$ff95]
+	ld d,a
+	ld a,[$ff96]
+	ld e,a
+	ld a,[hli]
+	ld [de],a
+	inc de
+	ld a,d
+	ld [$ff95],a
+	ld a,e
+	ld [$ff96],a
+	pop de
+	dec c
+	jr nz,.signLoop\@
+.loadSpriteData\@
+	ld a,[$d72e]
+	bit 5,a ; did a battle happen immediately before this?
+	jp nz,.finishUp\@ ; if so, skip this because battles don't destroy this data
+	ld a,[hli]
+	ld [$d4e1],a ; save the number of sprites
+	push hl
+; zero C110-C1FF and C210-C2FF
+	ld hl,$c110
+	ld de,$c210
+	xor a
+	ld b,$f0
+.zeroSpriteDataLoop\@
+	ld [hli],a
+	ld [de],a
+	inc e
+	dec b
+	jr nz,.zeroSpriteDataLoop\@
+; initialize all C100-C1FF sprite entries to disabled (other than player's)
+	ld hl,$c112
+	ld de,$0010
+	ld c,$0f
+.disableSpriteEntriesLoop\@
+	ld [hl],$ff
+	add hl,de
+	dec c
+	jr nz,.disableSpriteEntriesLoop\@
+	pop hl
+	ld de,$c110
+	ld a,[$d4e1] ; number of sprites
+	and a ; are there any sprites?
+	jp z,.finishUp\@ ; if there are no sprites, skip the rest
+	ld b,a
+	ld c,$00
+.loadSpriteLoop\@
+	ld a,[hli]
+	ld [de],a ; store picture ID at C1X0
+	inc d
+	ld a,$04
+	add e
+	ld e,a
+	ld a,[hli]
+	ld [de],a ; store Y position at C2X4
+	inc e
+	ld a,[hli]
+	ld [de],a ; store X position at C2X5
+	inc e
+	ld a,[hli]
+	ld [de],a ; store movement byte 1 at C2X6
+	ld a,[hli]
+	ld [$ff8d],a ; save movement byte 2
+	ld a,[hli]
+	ld [$ff8e],a ; save text ID and flags byte
+	push bc
+	push hl
+	ld b,$00
+	ld hl,$d4e4 ; base address of sprite entries
+	add hl,bc
+	ld a,[$ff8d]
+	ld [hli],a ; store movement byte 2 in byte 0 of sprite entry
+	ld a,[$ff8e]
+	ld [hl],a ; this appears pointless, since the value is overwritten immediately after
+	ld a,[$ff8e]
+	ld [$ff8d],a
+	and a,$3f
+	ld [hl],a ; store text ID in byte 1 of sprite entry
+	pop hl
+	ld a,[$ff8d]
+	bit 6,a
+	jr nz,.trainerSprite\@
+	bit 7,a
+	jr nz,.itemBallSprite\@
+	jr .regularSprite\@
+.trainerSprite\@
+	ld a,[hli]
+	ld [$ff8d],a ; save trainer class
+	ld a,[hli]
+	ld [$ff8e],a ; save trainer number (within class)
+	push hl
+	ld hl,$d504 ; base address of extra sprite info entries
+	add hl,bc
+	ld a,[$ff8d]
+	ld [hli],a ; store trainer class in byte 0 of the entry
+	ld a,[$ff8e]
+	ld [hl],a ; store trainer number in byte 1 of the entry
+	pop hl
+	jr .nextSprite\@
+.itemBallSprite\@
+	ld a,[hli]
+	ld [$ff8d],a ; save item number
+	push hl
+	ld hl,$d504 ; base address of extra sprite info
+	add hl,bc
+	ld a,[$ff8d]
+	ld [hli],a ; store item number in byte 0 of the entry
+	xor a
+	ld [hl],a ; zero byte 1, since it is not used
+	pop hl
+	jr .nextSprite\@
+.regularSprite\@
+	push hl
+	ld hl,$d504 ; base address of extra sprite info
+	add hl,bc
+; zero both bytes, since regular sprites don't use this extra space
+	xor a
+	ld [hli],a
+	ld [hl],a
+	pop hl
+.nextSprite\@
+	pop bc
+	dec d
+	ld a,$0a
+	add e
+	ld e,a
+	inc c
+	inc c
+	dec b
+	jp nz,.loadSpriteLoop\@
+.finishUp\@
+	ld a,$19
+	call Predef ; load tileset data
+	ld hl,$4eb8
+	ld b,$03
+	call Bankswitch ; load wild pokemon data
+	pop hl ; restore hl from before going to the warp/sign/sprite data (this value was saved for seemingly no purpose)
+	ld a,[W_CURMAPHEIGHT] ; map height in 4x4 tile blocks
+	add a ; double it
+	ld [$d524],a ; store map height in 2x2 tile blocks
+	ld a,[W_CURMAPWIDTH] ; map width in 4x4 tile blocks
+	add a ; double it
+	ld [$d525],a ; map width in 2x2 tile blocks
+	ld a,[W_CURMAP]
+	ld c,a
+	ld b,$00
+	ld a,[$ffb8]
+	push af
+	ld a,$03
+	ld [$ffb8],a
+	ld [$2000],a
+	ld hl,$404d
+	add hl,bc
+	add hl,bc
+	ld a,[hli]
+	ld [$d35b],a ; music 1
+	ld a,[hl]
+	ld [$d35c],a ; music 2
+	pop af
+	ld [$ffb8],a
+	ld [$2000],a
+	ret
+
+; function to copy map connection data from ROM to WRAM
+; Input: hl = source, de = destination
+CopyMapConnectionHeader: ; 1238
+	ld c,$0b
+.loop\@
+	ld a,[hli]
+	ld [de],a
+	inc de
+	dec c
+	jr nz,.loop\@
+	ret
+
+; function to load map data
+LoadMapData: ; 1241
+	ld a,[$ffb8]
+	push af
+	call DisableLCD
+	ld a,$98
+	ld [$d527],a
+	xor a
+	ld [$d526],a
+	ld [$ffaf],a
+	ld [$ffae],a
+	ld [$cfc5],a
+	ld [$d119],a
+	ld [$d11a],a
+	ld [$d3a8],a
+	call $36a0 ; transfer tile pattern data for text windows into VRAM
+	call LoadMapHeader
+	ld b,$05
+	ld hl,$785b
+	call Bankswitch ; load tile pattern data for sprites
+	call LoadTileBlockMap
+	call LoadTilesetTilePatternData
+	call LoadCurrentMapView
+; copy current map view to VRAM
+	ld hl,$c3a0
+	ld de,$9800
+	ld b,$12
+.vramCopyLoop\@
+	ld c,$14
+.vramCopyInnerLoop\@
+	ld a,[hli]
+	ld [de],a
+	inc e
+	dec c
+	jr nz,.vramCopyInnerLoop\@
+	ld a,$0c
+	add e
+	ld e,a
+	jr nc,.noCarry\@
+	inc d
+.noCarry\@
+	dec b
+	jr nz,.vramCopyLoop\@
+	ld a,$01
+	ld [$cfcb],a
+	call EnableLCD
+	ld b,$09
+	call $3def ; handle SGB palette
+	call LoadPlayerSpriteGraphics
+	ld a,[$d732]
+	and a,$18 ; did the player fly or teleport in?
+	jr nz,.restoreRomBank\@
+	ld a,[$d733]
+	bit 1,a
+	jr nz,.restoreRomBank\@
+	call $235f ; music related
+	call $2312 ; music related
+.restoreRomBank\@
+	pop af
+	ld [$ffb8],a
+	ld [$2000],a
+	ret
+
+; function to switch to the ROM bank that a map is stored in
+; Input: a = map number
+SwitchToMapRomBank: ; 12BC
+	push hl
+	push bc
+	ld c,a
+	ld b,$00
+	ld a,$03
+	call BankswitchHome ; switch to ROM bank 3
+	ld hl,MapHeaderBanks
+	add hl,bc
+	ld a,[hl]
+	ld [$ffe8],a ; save map ROM bank
+	call BankswitchBack
+	ld a,[$ffe8]
+	ld [$ffb8],a
+	ld [$2000],a ; switch to map ROM bank
+	pop bc
+	pop hl
+	ret
+
+INCBIN "baserom.gbc",$12DA,$1627 - $12DA
 
 ;XXX what does this do
 ;XXX what points to this
