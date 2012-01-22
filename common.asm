@@ -28940,15 +28940,17 @@ UnnamedText_495ac: ; 0x495ac
 
 Route12GateUpstairsText2: ; 0x495b1
 	db $08 ; asm
-	ld hl, $55b8
+	ld hl, UnnamedText_495b8
 	jp Unnamed_55c9
 
-;TX_FAR at 0x495b8
-db $17, $5a, $49, $23, $50
+UnnamedText_495b8: ; 0x495b8
+	TX_FAR _UnnamedText_495b8 ; 0x8c95a
+	db $50
+; 0x495bd
 
 Route12GateUpstairsText3: ; 0x495bd
 	db $8
-	ld hl, $55c4
+	ld hl, UnnamedText_495c4
 	jp Unnamed_55c9
 ; 0x495c4
 
@@ -28958,7 +28960,18 @@ UnnamedText_495c4: ; 0x495c4
 ; 0x495c4 + 5 bytes
 
 Unnamed_55c9:
-INCBIN "baserom.gbc",$495c9,$15
+	ld a, [$c109]
+	cp $4
+	jr z, .asm_495d4 ; 0x495ce $4
+	ld a, $1
+	jr .asm_495d8 ; 0x495d2 $4
+.asm_495d4
+	call PrintText
+	xor a
+.asm_495d8
+	ld [$cc3c], a
+	jp TextScriptEnd
+; 0x495de
 
 Route12GateUpstairsObject: ; 0x495de (size=24)
 	db $a ; border tile
@@ -29096,11 +29109,11 @@ Route16GateMapText1: ; 0x49760
 	db $08 ; asm
 	call $5755
 	jr z, .asm_0bdf3 ; 0x49764
-	ld hl, $577c
+	ld hl, UnnamedText_4977c
 	call PrintText
 	jr .asm_56c9d ; 0x4976c
 .asm_0bdf3 ; 0x4976e
-	ld hl, $5777
+	ld hl, UnnamedText_49777
 	call PrintText
 .asm_56c9d ; 0x49774
 	jp TextScriptEnd
@@ -29175,7 +29188,7 @@ Route16GateUpstairsTexts: ; 0x4980e
 
 Route16GateUpstairsText1: ; 0x49816
 	db $08 ; asm
-	ld hl, $5820
+	ld hl, UnnamedText_49820
 	call PrintText
 	jp TextScriptEnd
 
@@ -29186,7 +29199,7 @@ UnnamedText_49820: ; 0x49820
 
 Route16GateUpstairsText2: ; 0x49825
 	db $08 ; asm
-	ld hl, $582f
+	ld hl, UnnamedText_4982f
 	call PrintText
 	jp TextScriptEnd
 
@@ -29197,7 +29210,7 @@ UnnamedText_4982f: ; 0x4982f
 
 Route16GateUpstairsText3: ; 0x49834
 	db $8
-	ld hl, $583b
+	ld hl, UnnamedText_4983b
 	jp $55c9
 ; 0x4983b
 
@@ -29297,11 +29310,11 @@ Route18GateText1: ; 0x49911
 	db $08 ; asm
 	call $5755
 	jr z, .asm_3c84d ; 0x49915
-	ld hl, $592d
+	ld hl, UnnamedText_4992d
 	call PrintText
 	jr .asm_a8410 ; 0x4991d
 .asm_3c84d ; 0x4991f
-	ld hl, $5928
+	ld hl, UnnamedText_49928
 	call PrintText
 .asm_a8410 ; 0x49925
 	jp TextScriptEnd
@@ -29309,17 +29322,17 @@ Route18GateText1: ; 0x49911
 UnnamedText_49928: ; 0x49928
 	TX_FAR _UnnamedText_49928
 	db $50
-; 0x49928 + 5 bytes
+; 0x4992d
 
 UnnamedText_4992d: ; 0x4992d
 	TX_FAR _UnnamedText_4992d
 	db $50
-; 0x4992d + 5 bytes
+; 0x49932
 
 Route18GateText2: ; 0x49932
 	TX_FAR _UnnamedText_49932
 	db $50
-; 0x49932 + 5 bytes
+; 0x49937
 
 Route18GateObject: ; 0x49937 (size=50)
 	db $a ; border tile
@@ -29662,17 +29675,17 @@ MtMoon3Text1: ; 0x49e79
 	jr z, .asm_be1e0 ; 0x49e7f
 	and $c0
 	jr nz, .asm_f8cd4 ; 0x49e83
-	ld hl, $5f8f
+	ld hl, UnnamedText_49f8f
 	call PrintText
 	jr .asm_f1fba ; 0x49e8b
 .asm_be1e0 ; 0x49e8d
-	ld hl, $5f85
+	ld hl, UnnamedText_49f85
 	call PrintText
 	ld hl, $d72d
 	set 6, [hl]
 	set 7, [hl]
-	ld hl, $5f8a
-	ld de, $5f8a
+	ld hl, UnnamedText_49f8a
+	ld de, $5f8a ; maybe UnnamedText_49f8a
 	call $3354
 	ldh a, [$8c]
 	ld [$cf13], a
@@ -29683,7 +29696,7 @@ MtMoon3Text1: ; 0x49e79
 	ld [$da39], a
 	jr .asm_f1fba ; 0x49eb6
 .asm_f8cd4 ; 0x49eb8
-	ld hl, $5f94
+	ld hl, UnnamedText_49f94
 	call PrintText
 .asm_f1fba ; 0x49ebe
 	jp TextScriptEnd
@@ -29716,7 +29729,7 @@ MtMoon3Text6: ; 0x49ee9
 	db $08 ; asm
 	ld a, $1
 	ld [$cc3c], a
-	ld hl, $5f24
+	ld hl, UnnamedText_49f24
 	call PrintText
 	call $35ec
 	ld a, [$cc26]
@@ -29747,7 +29760,7 @@ MtMoon3Text7: ; 0x49f29
 	db $08 ; asm
 	ld a, $1
 	ld [$cc3c], a
-	ld hl, $5f64
+	ld hl, UnnamedText_49f64
 	call PrintText
 	call $35ec
 	ld a, [$cc26]
@@ -29755,8 +29768,8 @@ MtMoon3Text7: ; 0x49f29
 	jr nz, .asm_8e988 ; 0x49f3c
 	ld bc,(HELIX_FOSSIL << 8) | 1
 	call GiveItem
-	jp nc, $5f76
-	call $5f69
+	jp nc, Unnamed_49f76
+	call Unnamed_49f69
 	ld a, $6e
 	ld [$cc4d], a
 	ld a, $11
@@ -29774,7 +29787,26 @@ UnnamedText_49f64: ; 0x49f64
 	db $50
 ; 0x49f64 + 5 bytes
 
-INCBIN "baserom.gbc",$49f69,$49f85 - $49f69
+Unnamed_49f69: ; 0x49f69
+	ld hl, UnnamedText_49f6f
+	jp PrintText
+; 0x49f6f
+
+UnnamedText_49f6f: ; 0x49f6f
+	TX_FAR _UnnamedText_49f6f ; 0x80995
+	db $11, $d, $50
+; 0x49f76
+
+Unnamed_49f76: ; 0x49f76
+	ld hl, UnnamedText_49f7f
+	call PrintText
+	jp TextScriptEnd
+; 0x49f7f
+
+UnnamedText_49f7f: ; 0x49f7f
+	TX_FAR _UnnamedText_49f7f ; 0x809a8
+	db $d, $50
+; 0x49f85
 
 UnnamedText_49f85: ; 0x49f85
 	TX_FAR _UnnamedText_49f85
@@ -29978,22 +30010,22 @@ SafariZoneSecretHouseText1: ; 0x4a31c
 	ld a, [$d857]
 	bit 0, a
 	jr nz, .asm_20a9b ; 0x4a322
-	ld hl, $6350
+	ld hl, UnnamedText_4a350
 	call PrintText
-	ld bc,(HM_03 << 8) | 1
+	ld bc, (HM_03 << 8) | 1
 	call GiveItem
 	jr nc, .asm_a21d2 ; 0x4a330
-	ld hl, $6355
+	ld hl, UnnamedText_4a355
 	call PrintText
 	ld hl, $d857
 	set 0, [hl]
 	jr .asm_8f1fc ; 0x4a33d
 .asm_a21d2 ; 0x4a33f
-	ld hl, $6360
+	ld hl, UnnamedText_4a360
 	call PrintText
 	jr .asm_8f1fc ; 0x4a345
 .asm_20a9b ; 0x4a347
-	ld hl, $635b
+	ld hl, UnnamedText_4a35b
 	call PrintText
 .asm_8f1fc ; 0x4a34d
 	jp TextScriptEnd
@@ -30003,7 +30035,10 @@ UnnamedText_4a350: ; 0x4a350
 	db $50
 ; 0x4a350 + 5 bytes
 
-INCBIN "baserom.gbc",$4a355,$4a35b - $4a355
+UnnamedText_4a355: ; 0x4a355
+	TX_FAR _UnnamedText_4a355 ; 0x85943
+	db $0B, $50
+; 0x4a35b
 
 UnnamedText_4a35b: ; 0x4a35b
 	TX_FAR _UnnamedText_4a35b
@@ -31295,11 +31330,11 @@ Route22Text1: ; 0x5117b
 	ld a, [$d7eb]
 	bit 5, a
 	jr z, .asm_a88cf ; 0x51181
-	ld hl, $51b2
+	ld hl, UnnamedText_511b2
 	call PrintText
 	jr .asm_48088 ; 0x51189
 .asm_a88cf ; 0x5118b
-	ld hl, $51ad
+	ld hl, UnnamedText_511ad
 	call PrintText
 .asm_48088 ; 0x51191
 	jp TextScriptEnd
@@ -31309,11 +31344,11 @@ Route22Text2: ; 0x51194
 	ld a, [$d7eb]
 	bit 6, a
 	jr z, .asm_58c0a ; 0x5119a
-	ld hl, $51c6
+	ld hl, UnnamedText_511c6
 	call PrintText
 	jr .asm_673ee ; 0x511a2
 .asm_58c0a ; 0x511a4
-	ld hl, $51c1
+	ld hl, UnnamedText_511c1
 	call PrintText
 .asm_673ee ; 0x511aa
 	jp TextScriptEnd
@@ -31365,7 +31400,7 @@ Route22Text3: ; 0x511d5
 Route23Script: ; 0x511da
 	call $51e9
 	call $3c3c
-	ld hl, $5213
+	ld hl, Route23Scripts
 	ld a, [$d667]
 	jp $3d97
 ; 0x511e9
@@ -49911,14 +49946,14 @@ _UnnamedText_49f64: ; 0x80979
 	db "HELIX FOSSIL?", $57
 ; 0x80979 + 28 bytes
 
-UnnamedText_80995: ; 0x80995
+_UnnamedText_49f6f: ; 0x80995
 	db $0, $52, " got the", $4f
 	db "@"
 	TX_RAM $cf4b
 	db $0, "!@@"
 ; 0x809a8
 
-UnnamedText_809a8: ; 0x809a8
+_UnnamedText_49f7f: ; 0x809a8
 	db $0, "Look, you've got", $4f
 	db "no room for this.@@"
 ; 0x809cc
@@ -51948,7 +51983,7 @@ _UnnamedText_4a350: ; 0x858a4
 	db "You have won!", $58
 ; 0x858a4 + 159 bytes
 
-UnnamedText_85943: ; 0x85943
+_UnnamedText_4a355: ; 0x85943
 	db $0, $52, " received", $4f
 	db "@"
 	TX_RAM $cf4b
@@ -54706,7 +54741,7 @@ _UnnamedText_495ac: ; 0x8c93c
 	db "room for this.", $57
 ; 0x8c93c + 30 bytes
 
-nknownText_8c95a: ; 0x8c95a
+_UnnamedText_495b8: ; 0x8c95a
 	db $0, "Looked into the", $4f
 	db "binoculars.", $51
 	db "A man fishing!", $57
