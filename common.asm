@@ -26859,20 +26859,20 @@ CeladonMart3Text1: ; 0x4824a
 	ld a, [$d778]
 	bit 7, a
 	jr nz, .asm_a5463 ; 0x48250
-	ld hl, $4278
+	ld hl, UnnamedText_48278
 	call PrintText
-	ld bc,(TM_18 << 8) | 1
+	ld bc, (TM_18 << 8) | 1
 	call GiveItem
 	jr nc, .asm_95f37 ; 0x4825e
 	ld hl, $d778
 	set 7, [hl]
-	ld hl, $427d
+	ld hl, ReceivedTM18Text
 	jr .asm_81359 ; 0x48268
 .asm_95f37 ; 0x4826a
-	ld hl, $4288
+	ld hl, TM18NoRoomText
 	jr .asm_81359 ; 0x4826d
 .asm_a5463 ; 0x4826f
-	ld hl, $4283
+	ld hl, TM18ExplanationText
 .asm_81359 ; 0x48272
 	call PrintText
 	jp TextScriptEnd
@@ -26882,15 +26882,18 @@ UnnamedText_48278: ; 0x48278
 	db $50
 ; 0x48278 + 5 bytes
 
-INCBIN "baserom.gbc",$4827d,$48283 - $4827d
+ReceivedTM18Text: ; 0x4827d
+	TX_FAR _ReceivedTM18Text ; 0x9c85a
+	db $0B, $50
+; 0x48283
 
-UnnamedText_48283: ; 0x48283
-	TX_FAR _UnnamedText_48283
+TM18ExplanationText: ; 0x48283
+	TX_FAR _TM18ExplanationText
 	db $50
 ; 0x48283 + 5 bytes
 
-UnnamedText_48288: ; 0x48288
-	TX_FAR _UnnamedText_48288
+TM18NoRoomText: ; 0x48288
+	TX_FAR _TM18NoRoomText
 	db $50
 ; 0x48288 + 5 bytes
 
@@ -27067,7 +27070,7 @@ CeladonMartRoofText2: ; 0x4856c
 	jr z, .asm_914b9 ; 0x48574
 	ld a, $1
 	ld [$cc3c], a
-	ld hl, $459d
+	ld hl, CeladonMartRoofText4
 	call PrintText
 	call $35ec
 	ld a, [$cc26]
@@ -27076,20 +27079,17 @@ CeladonMartRoofText2: ; 0x4856c
 	call $440c
 	jr .asm_05aa4 ; 0x4858d
 .asm_914b9 ; 0x4858f
-	ld hl, $4598
+	ld hl, CeladonMartRoofText3
 	call PrintText
 .asm_05aa4 ; 0x48595
 	jp TextScriptEnd
 
-CeladonMartRoofText3:
-
-UnnamedText_48598: ; 0x48598
+CeladonMartRoofText3: ; 0x48598
 	TX_FAR _UnnamedText_48598
 	db $50
 ; 0x48598 + 5 bytes
 
 CeladonMartRoofText4:
-
 UnnamedText_4859d: ; 0x4859d
 	TX_FAR _UnnamedText_4859d
 	db $50
@@ -27336,10 +27336,10 @@ CeladonMansion3Text4: ; 0x487b2
 	ld a, [$d11e]
 	cp $96
 	jr nc, .asm_f03d0 ; 0x487c0
-	ld hl, $47d0
+	ld hl, UnnamedText_487d0
 	jr .asm_c13f0 ; 0x487c5
 .asm_f03d0 ; 0x487c7
-	ld hl, $47d5
+	ld hl, UnnamedText_487d5
 .asm_c13f0 ; 0x487ca
 	call PrintText
 	jp TextScriptEnd
@@ -27347,9 +27347,19 @@ CeladonMansion3Text4: ; 0x487b2
 UnnamedText_487d0: ; 0x487d0
 	TX_FAR _UnnamedText_487d0
 	db $50
-; 0x487d0 + 5 bytes
+; 0x487d5
 
-INCBIN "baserom.gbc",$487d5,$16
+UnnamedText_487d5: ; 0x487d5
+	TX_FAR _UnnamedText_487d5 ; 0x9d0ad
+	db $6
+	db $8
+	ld hl, $66e2
+	ld b, $15
+	call Bankswitch
+	ld a, $1
+	ld [$cc3c], a
+	jp TextScriptEnd
+; 0x487eb
 
 CeladonMansion3Text5: ; 0x487eb
 	TX_FAR _CeladonMansion3Text5
@@ -27511,7 +27521,7 @@ CeladonGymScript: ; 0x4890a
 INCBIN "baserom.gbc",$48927,$7f
 
 CeladonGymTexts: ; 0x489a6
-	dw CeladonGymText1, CeladonGymText2, CeladonGymText3, CeladonGymText4, CeladonGymText5, CeladonGymText6, CeladonGymText7, CeladonGymText8, CeladonGymText9, CeladonGymText10, CeladonGymText11
+	dw CeladonGymText1, CeladonGymText2, CeladonGymText3, CeladonGymText4, CeladonGymText5, CeladonGymText6, CeladonGymText7, CeladonGymText8, CeladonGymText9, TM21Text, TM21NoRoomText
 
 INCBIN "baserom.gbc",$489bc,$55
 
@@ -27526,11 +27536,11 @@ CeladonGymText1: ; 0x48a11
 	call $30b6
 	jr .asm_96252 ; 0x48a23
 .asm_3b22c ; 0x48a25
-	ld hl, $4a68
+	ld hl, UnnamedText_48a68
 	call PrintText
 	jr .asm_96252 ; 0x48a2b
 .asm_16064 ; 0x48a2d
-	ld hl, $4a5e
+	ld hl, UnnamedText_48a5e
 	call PrintText
 	ld hl, $d72d
 	set 6, [hl]
@@ -27571,17 +27581,15 @@ UnnamedText_48a6d: ; 0x48a6d
 	db $50
 ; 0x48a6d + 5 bytes
 
-CeladonGymText10: ; 0x48a72
-INCBIN "baserom.gbc",$48a72,$4
-db $0b
-
-UnnamedText_48a77: ; 0x48a77
-	TX_FAR _UnnamedText_48a77
+TM21Text: ; 0x48a72
+	TX_FAR _ReceivedTM21Text ; 0x9d50c
+	db $0B
+	TX_FAR _TM21ExplanationText ; 0x9d520
 	db $50
-; 0x48a77 + 5 bytes
+; 0x48a7c
 
-CeladonGymText11: ; 0x48a7c
-	TX_FAR _UnnamedText_48a7c
+TM21NoRoomText: ; 0x48a7c
+	TX_FAR _TM21NoRoomText
 	db $50
 ; 0x48a7c + 5 bytes
 
@@ -27798,7 +27806,7 @@ CeladonGameCornerText1: ; 0x48ca4
 CeladonGameCornerText2: ; 0x48ca9
 	db $08 ; asm
 	call $4f1e
-	ld hl, $4d22
+	ld hl, UnnamedText_48d22
 	call PrintText
 	call $35ec
 	ld a, [$cc26]
@@ -27840,16 +27848,16 @@ CeladonGameCornerText2: ; 0x48ca9
 	ld a, $b
 	call Predef
 	call $4f1e
-	ld hl, $4d27
+	ld hl, UnnamedText_48d27
 	jr .asm_e2afd ; 0x48d0d
 .asm_c650b ; 0x48d0f
-	ld hl, $4d2c
+	ld hl, UnnamedText_48d2c
 	jr .asm_e2afd ; 0x48d12
 .asm_31338 ; 0x48d14
-	ld hl, $4d36
+	ld hl, UnnamedText_48d36
 	jr .asm_e2afd ; 0x48d17
 .asm_ed086 ; 0x48d19
-	ld hl, $4d3b
+	ld hl, UnnamedText_48d3b
 .asm_e2afd ; 0x48d1c
 	call PrintText
 	jp TextScriptEnd
@@ -27857,32 +27865,32 @@ CeladonGameCornerText2: ; 0x48ca9
 UnnamedText_48d22: ; 0x48d22
 	TX_FAR _UnnamedText_48d22
 	db $50
-; 0x48d22 + 5 bytes
+; 0x48d27
 
 UnnamedText_48d27: ; 0x48d27
 	TX_FAR _UnnamedText_48d27
 	db $50
-; 0x48d27 + 5 bytes
+; 0x48d2c
 
 UnnamedText_48d2c: ; 0x48d2c
 	TX_FAR _UnnamedText_48d2c
 	db $50
-; 0x48d2c + 5 bytes
+; 0x48d31
 
 UnnamedText_48d31: ; 0x48d31
 	TX_FAR _UnnamedText_48d31
 	db $50
-; 0x48d31 + 5 bytes
+; 0x48d36
 
 UnnamedText_48d36: ; 0x48d36
 	TX_FAR _UnnamedText_48d36
 	db $50
-; 0x48d36 + 5 bytes
+; 0x48d3b
 
 UnnamedText_48d3b: ; 0x48d3b
 	TX_FAR _UnnamedText_48d3b
 	db $50
-; 0x48d3b + 5 bytes
+; 0x48d40
 
 CeladonGameCornerText3: ; 0x48d40
 	TX_FAR _CeladonGameCornerText3
@@ -27897,9 +27905,9 @@ CeladonGameCornerText5: ; 0x48d4a
 	ld a, [$d77e]
 	bit 2, a
 	jr nz, .asm_d0957 ; 0x48d50
-	ld hl, $4d9c
+	ld hl, UnnamedText_48d9c
 	call PrintText
-	ld b,COIN_CASE
+	ld b, COIN_CASE
 	call $3493
 	jr z, .asm_5aef9 ; 0x48d5d
 	call $4f95
@@ -27918,16 +27926,16 @@ CeladonGameCornerText5: ; 0x48d4a
 	set 2, [hl]
 	ld a, $1
 	ld [$cc3c], a
-	ld hl, $4da1
+	ld hl, Received10CoinsText
 	jr .asm_c7d1a ; 0x48d87
 .asm_d0957 ; 0x48d89
-	ld hl, $4dac
+	ld hl, UnnamedText_48dac
 	jr .asm_c7d1a ; 0x48d8c
 .asm_98546 ; 0x48d8e
-	ld hl, $4da7
+	ld hl, UnnamedText_48da7
 	jr .asm_c7d1a ; 0x48d91
 .asm_5aef9 ; 0x48d93
-	ld hl, $4f19
+	ld hl, UnnamedText_48f19
 .asm_c7d1a ; 0x48d96
 	call PrintText
 	jp TextScriptEnd
@@ -27937,7 +27945,9 @@ UnnamedText_48d9c: ; 0x48d9c
 	db $50
 ; 0x48d9c + 5 bytes
 
-INCBIN "baserom.gbc",$48da1,$48da7 - $48da1
+Received10CoinsText: ; 0x48da1
+	TX_FAR _Received10CoinsText ; 0x9daa9
+	db $0B, $50
 
 UnnamedText_48da7: ; 0x48da7
 	TX_FAR _UnnamedText_48da7
@@ -27983,9 +27993,9 @@ CeladonGameCornerText9: ; 0x48dd9
 	ld a, [$d77e]
 	bit 4, a
 	jr nz, .asm_ed8bc ; 0x48ddf
-	ld hl, $4e26
+	ld hl, UnnamedText_48e26
 	call PrintText
-	ld b,COIN_CASE
+	ld b, COIN_CASE
 	call $3493
 	jr z, .asm_df794 ; 0x48dec
 	call $4f95
@@ -28002,16 +28012,16 @@ CeladonGameCornerText9: ; 0x48dd9
 	call Predef
 	ld hl, $d77e
 	set 4, [hl]
-	ld hl, $4e2b
+	ld hl, Received20CoinsText
 	jr .asm_0ddc2 ; 0x48e11
 .asm_ed8bc ; 0x48e13
-	ld hl, $4e36
+	ld hl, UnnamedText_48e36
 	jr .asm_0ddc2 ; 0x48e16
 .asm_f17c3 ; 0x48e18
-	ld hl, $4e31
+	ld hl, UnnamedText_48e31
 	jr .asm_0ddc2 ; 0x48e1b
 .asm_df794 ; 0x48e1d
-	ld hl, $4f19
+	ld hl, UnnamedText_48f19
 .asm_0ddc2 ; 0x48e20
 	call PrintText
 	jp TextScriptEnd
@@ -28021,7 +28031,10 @@ UnnamedText_48e26: ; 0x48e26
 	db $50
 ; 0x48e26 + 5 bytes
 
-INCBIN "baserom.gbc",$48e2b,$48e31 - $48e2b
+Received20CoinsText: ; 0x48e2b
+	TX_FAR _Received20CoinsText ; 0x9dc4f
+	db $0B, $50
+; 0x48e31
 
 UnnamedText_48e31: ; 0x48e31
 	TX_FAR _UnnamedText_48e31
@@ -28057,16 +28070,16 @@ CeladonGameCornerText10: ; 0x48e3b
 	call Predef
 	ld hl, $d77e
 	set 3, [hl]
-	ld hl, $4e8d
+	ld hl, UnnamedText_48e8d
 	jr .asm_78d65 ; 0x48e73
 .asm_ff080 ; 0x48e75
-	ld hl, $4e98
+	ld hl, UnnamedText_48e98
 	jr .asm_78d65 ; 0x48e78
 .asm_9505a ; 0x48e7a
-	ld hl, $4e93
+	ld hl, UnnamedText_48e93
 	jr .asm_78d65 ; 0x48e7d
 .asm_4fb0c ; 0x48e7f
-	ld hl, $4f19
+	ld hl, UnnamedText_48f19
 .asm_78d65 ; 0x48e82
 	call PrintText
 	jp TextScriptEnd
@@ -28076,7 +28089,10 @@ UnnamedText_48e88: ; 0x48e88
 	db $50
 ; 0x48e88 + 5 bytes
 
-INCBIN "baserom.gbc",$48e8d,$48e93 - $48e8d
+UnnamedText_48e8d: ; 0x48e8d
+	TX_FAR _UnnamedText_48e8d ; 0x9dceb
+	db $0B, $50
+; 0x48e93
 
 UnnamedText_48e93: ; 0x48e93
 	TX_FAR _UnnamedText_48e93
@@ -28090,13 +28106,13 @@ UnnamedText_48e98: ; 0x48e98
 
 CeladonGameCornerText11: ; 0x48e9d
 	db $08 ; asm
-	ld hl, $4ece
+	ld hl, UnnamedText_48ece
 	call PrintText
 	ld hl, $d72d
 	set 6, [hl]
 	set 7, [hl]
-	ld hl, $4ed3
-	ld de, $4ed3
+	ld hl, UnnamedText_48ed3
+	ld de, $4ed3 ; maybe UnnamedText_48ed3
 	call $3354
 	ldh a, [$8c]
 	ld [$cf13], a
@@ -28129,7 +28145,7 @@ CeladonGameCornerText12: ; 0x48edd
 	db $08 ; asm
 	ld a, $1
 	ld [$cc3c], a
-	ld hl, $4f09
+	ld hl, UnnamedText_48f09
 	call PrintText
 	call $3748
 	ld a, $ad
@@ -28144,7 +28160,14 @@ CeladonGameCornerText12: ; 0x48edd
 	call Predef
 	jp TextScriptEnd
 
-INCBIN "baserom.gbc",$48f09,$48f19 - $48f09
+UnnamedText_48f09: ; 0x48f09
+	TX_FAR _UnnamedText_48f09 ; 0x9ddb0
+	db $8
+	ld a, $9d
+	call $23b1
+	call $3748
+	jp TextScriptEnd
+; 0x48f19
 
 UnnamedText_48f19: ; 0x48f19
 	TX_FAR _UnnamedText_48f19
@@ -28323,22 +28346,22 @@ CeladonDinerText5: ; 0x49173
 	ld a, [$d783]
 	bit 0, a
 	jr nz, .asm_eb14d ; 0x49179
-	ld hl, $51a7
+	ld hl, UnnamedText_491a7
 	call PrintText
-	ld bc,(COIN_CASE << 8) | 1
+	ld bc, (COIN_CASE << 8) | 1
 	call GiveItem
 	jr nc, .asm_78e93 ; 0x49187
 	ld hl, $d783
 	set 0, [hl]
-	ld hl, $51ac
+	ld hl, ReceivedCoinCaseText
 	call PrintText
 	jr .asm_68b61 ; 0x49194
 .asm_78e93 ; 0x49196
-	ld hl, $51b2
+	ld hl, CoinCaseNoRoomText
 	call PrintText
 	jr .asm_68b61 ; 0x4919c
 .asm_eb14d ; 0x4919e
-	ld hl, $51b7
+	ld hl, UnnamedText_491b7
 	call PrintText
 .asm_68b61 ; 0x491a4
 	jp TextScriptEnd
@@ -28348,10 +28371,13 @@ UnnamedText_491a7: ; 0x491a7
 	db $50
 ; 0x491a7 + 5 bytes
 
-INCBIN "baserom.gbc",$491ac,$491b2 - $491ac
+ReceivedCoinCaseText: ; 0x491ac
+	TX_FAR _ReceivedCoinCaseText ; 0x9e07a
+	db $11, $50
+; 0x491b2
 
-UnnamedText_491b2: ; 0x491b2
-	TX_FAR _UnnamedText_491b2
+CoinCaseNoRoomText: ; 0x491b2
+	TX_FAR _CoinCaseNoRoomText
 	db $50
 ; 0x491b2 + 5 bytes
 
@@ -28511,8 +28537,8 @@ MtMoonPokecenterText4: ; 0x492ec
 	db $08 ; asm
 	ld a, [$d7c6]
 	add a
-	jp c, $5353
-	ld hl, $535c
+	jp c, .asm_49353
+	ld hl, UnnamedText_4935c
 	call PrintText
 	ld a, $13
 	ld [$d125], a
@@ -28520,19 +28546,19 @@ MtMoonPokecenterText4: ; 0x492ec
 	call $35ec
 	ld a, [$cc26]
 	and a
-	jp nz, $534e
+	jp nz, .asm_4934e
 	ldh [$9f], a
 	ldh [$a1], a
 	ld a, $5
 	ldh [$a0], a
 	call $35a6
 	jr nc, .asm_faa09 ; 0x49317
-	ld hl, $5366
-	jr .asm_ae354 ; 0x4931c
+	ld hl, UnnamedText_49366
+	jr .asm_49356 ; 0x4931c
 .asm_faa09 ; 0x4931e
 	ld bc,(MAGIKARP << 8) | 5
 	call GivePokemon
-	jr nc, .asm_38361 ; 0x49324
+	jr nc, .asm_49359 ; 0x49324
 	xor a
 	ld [W_WHICHTRADE], a
 	ld [$cd3f], a
@@ -28548,13 +28574,15 @@ MtMoonPokecenterText4: ; 0x492ec
 	call $30e8
 	ld hl, $d7c6
 	set 7, [hl]
-	jr .asm_38361 ; 0x4934c
-	ld hl, $5361
-	jr .asm_ae354 ; 0x49351
-	ld hl, $536b
-.asm_ae354 ; 0x49356
+	jr .asm_49359 ; 0x4934c
+.asm_4934e ; 0x4934e
+	ld hl, UnnamedText_49361
+	jr .asm_49356 ; 0x49351
+.asm_49353 ; 0x49353
+	ld hl, UnnamedText_4936b
+.asm_49356 ; 0x49356
 	call PrintText
-.asm_38361 ; 0x49359
+.asm_49359 ; 0x49359
 	jp TextScriptEnd
 
 UnnamedText_4935c: ; 0x4935c
@@ -28743,7 +28771,7 @@ Route11GateUpstairsText2: ; 0x4946c
 	ld hl, $d7d6
 	set 7, [hl]
 .asm_4949b
-	ld hl, $54a3
+	ld hl, UnnamedText_494a3
 	call PrintText
 .asm_494a1
 	jr asm_49469 ; 0x494a1 $c6
@@ -28758,12 +28786,12 @@ Route11GateUpstairsText3: ; 0x494a8
 	db $08 ; asm
 	ld a, [$c109]
 	cp $4
-	jp nz, $55c9
+	jp nz, Unnamed_55c9
 	ld a, [$d7d8]
 	bit 7, a
-	ld hl, $54c4
+	ld hl, UnnamedText_494c4
 	jr z, .asm_5ac80 ; 0x494b9
-	ld hl, $54c9
+	ld hl, UnnamedText_494c9
 .asm_5ac80 ; 0x494be
 	call PrintText
 	jp TextScriptEnd
@@ -28781,7 +28809,7 @@ UnnamedText_494c9: ; 0x494c9
 Route11GateUpstairsText4: ; 0x494ce
 	db $8
 	ld hl, $54d5
-	jp $55c9
+	jp Unnamed_55c9
 ; 0x494d5
 
 UnnamedText_494d5: ; 0x494d5
@@ -28870,22 +28898,22 @@ Route12GateUpstairsText1: ; 0x49569
 	ld a, [$d7d7]
 	rrca
 	jr c, .asm_0ad3c ; 0x4956e
-	ld hl, $559c
+	ld hl, UnnamedText_4959c
 	call PrintText
-	ld bc,(TM_39 << 8) | 1
+	ld bc, (TM_39 << 8) | 1
 	call GiveItem
 	jr nc, .asm_4c2be ; 0x4957c
-	ld hl, $55a1
+	ld hl, ReceivedTM39Text
 	call PrintText
 	ld hl, $d7d7
 	set 0, [hl]
 	jr .asm_4ba56 ; 0x49589
 .asm_4c2be ; 0x4958b
-	ld hl, $55ac
+	ld hl, UnnamedText_495ac
 	call PrintText
 	jr .asm_4ba56 ; 0x49591
 .asm_0ad3c ; 0x49593
-	ld hl, $55a7
+	ld hl, UnnamedText_495a7
 	call PrintText
 .asm_4ba56 ; 0x49599
 	jp TextScriptEnd
@@ -28895,7 +28923,10 @@ UnnamedText_4959c: ; 0x4959c
 	db $50
 ; 0x4959c + 5 bytes
 
-INCBIN "baserom.gbc",$495a1,$495a7 - $495a1
+ReceivedTM39Text: ; 0x495a1
+	TX_FAR _ReceivedTM39Text ; 0x8c8c6
+	db $0B, $50
+; 0x495a7
 
 UnnamedText_495a7: ; 0x495a7
 	TX_FAR _UnnamedText_495a7
@@ -28910,7 +28941,7 @@ UnnamedText_495ac: ; 0x495ac
 Route12GateUpstairsText2: ; 0x495b1
 	db $08 ; asm
 	ld hl, $55b8
-	jp $55c9
+	jp Unnamed_55c9
 
 ;TX_FAR at 0x495b8
 db $17, $5a, $49, $23, $50
@@ -28918,7 +28949,7 @@ db $17, $5a, $49, $23, $50
 Route12GateUpstairsText3: ; 0x495bd
 	db $8
 	ld hl, $55c4
-	jp $55c9
+	jp Unnamed_55c9
 ; 0x495c4
 
 UnnamedText_495c4: ; 0x495c4
@@ -28926,6 +28957,7 @@ UnnamedText_495c4: ; 0x495c4
 	db $50
 ; 0x495c4 + 5 bytes
 
+Unnamed_55c9:
 INCBIN "baserom.gbc",$495c9,$15
 
 Route12GateUpstairsObject: ; 0x495de (size=24)
@@ -54655,7 +54687,7 @@ _UnnamedText_4959c: ; 0x8c86b
 	db "it any more...", $58
 ; 0x8c86b + 91 bytes
 
-ReceivedTM39Text: ; 0x8c8c6
+_ReceivedTM39Text: ; 0x8c8c6
 	db $0, $52, " received", $4f
 	db "TM39!@@"
 ; 0x8c8c6 + 19 bytes
@@ -60712,21 +60744,21 @@ _UnnamedText_48278: ; 0x9c814
 	db "useful!", $58
 ; 0x9c814 + 70 bytes
 
-UnnamedText_9c85a: ; 0x9c85a
+_ReceivedTM18Text: ; 0x9c85a
 	db $0, $52, " received", $4f
 	db "@"
 	TX_RAM $cf4b
 	db $0, "!@@"
 ; 0x9c86e
 
-_UnnamedText_48283: ; 0x9c86e
+_TM18ExplanationText: ; 0x9c86e
 	db $0, "TM18 is COUNTER!", $4f
 	db "Not like the one", $55
 	db "I'm leaning on,", $55
 	db "mind you!", $57
 ; 0x9c86e + 60 bytes
 
-_UnnamedText_48288: ; 0x9c8aa
+_TM18NoRoomText: ; 0x9c8aa
 	db $0, "Your pack is full", $4f
 	db "of items!", $57
 ; 0x9c8aa + 29 bytes
@@ -60997,7 +61029,7 @@ _UnnamedText_487d0: ; 0x9d03a
 	db "come tell me!", $57
 ; 0x9d03a + 115 bytes
 
-UnnamedText_9d0ad: ; 0x9d0ad
+_UnnamedText_487d5: ; 0x9d0ad
 	db $0, "Wow! Excellent!", $4f
 	db "You completed", $55
 	db "your #DEX!", $55
@@ -61101,14 +61133,14 @@ _UnnamedText_48a6d: ; 0x9d481
 	db "this with you.", $57
 ; 0x9d481 + 139 bytes
 
-UnnamedText_9d50c: ; 0x9d50c
+_ReceivedTM21Text: ; 0x9d50c
 	db $0, $52, " received", $4f
 	db "@"
 	TX_RAM $cf4b
 	db $0, "!@@"
 ; 0x9d520
 
-_UnnamedText_48a77: ; 0x9d520
+_TM21ExplanationText: ; 0x9d520
 	db $0, $51
 	db "TM21 contains", $4f
 	db "MEGA DRAIN.", $51
@@ -61118,7 +61150,7 @@ _UnnamedText_48a77: ; 0x9d520
 	db "your #MON!", $57
 ; 0x9d520 + 86 bytes
 
-_UnnamedText_48a7c: ; 0x9d576
+_TM21NoRoomText: ; 0x9d576
 	db $0, "You should make", $4f
 	db "room for this.", $57
 ; 0x9d576 + 32 bytes
@@ -61309,7 +61341,7 @@ _UnnamedText_48d9c: ; 0x9da8e
 	db "to play?", $58
 ; 0x9da8e + 27 bytes
 
-UnnamedText_9daa9: ; 0x9daa9
+_Received10CoinsText: ; 0x9daa9
 	db $0, $52, " received", $4f
 	db "10 coins!@@"
 ; 0x9dac0
@@ -61361,7 +61393,7 @@ _UnnamedText_48e26: ; 0x9dc33
 	db "some coins?", $58
 ; 0x9dc33 + 28 bytes
 
-UnnamedText_9dc4f: ; 0x9dc4f
+_Received20CoinsText: ; 0x9dc4f
 	db $0, $52, " received", $4f
 	db "20 coins!@@"
 ; 0x9dc66
@@ -61384,7 +61416,7 @@ _UnnamedText_48e88: ; 0x9dcad
 	db "coins, shoo!", $58
 ; 0x9dcad + 62 bytes
 
-UnnamedText_9dceb: ; 0x9dceb
+_UnnamedText_48e8d: ; 0x9dceb
 	db $0, $52, " received", $4f
 	db "20 coins!@@"
 ; 0x9dd02
@@ -61416,7 +61448,7 @@ _UnnamedText_48ed8: ; 0x9dd7a
 	db "better tell BOSS!", $57
 ; 0x9dd7a + 54 bytes
 
-UnnamedText_9ddb0: ; 0x9ddb0
+_UnnamedText_48f09: ; 0x9ddb0
 	db $0, "Hey!", $51
 	db "A switch behind", $4f
 	db "the poster!?", $55
@@ -61494,14 +61526,14 @@ _UnnamedText_491a7: ; 0x9e003
 	db "more!", $58
 ; 0x9e003 + 119 bytes
 
-UnnamedText_9e07a: ; 0x9e07a
+_ReceivedCoinCaseText: ; 0x9e07a
 	db $0, $52, " received", $4f
 	db "a @"
 	TX_RAM $cf4b
 	db $0, "!@@"
 ; 0x9e090
 
-_UnnamedText_491b2: ; 0x9e090
+_CoinCaseNoRoomText: ; 0x9e090
 	db $0, "Make room for", $4f
 	db "this!", $57
 ; 0x9e090 + 21 bytes
