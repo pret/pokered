@@ -12638,8 +12638,8 @@ Route1Text1: ; 0x1cab8
 	bit 0, [hl]
 	set 0, [hl]
 	jr nz, .asm_02840 ; 0x1cac0
-	ld hl, $4ae3
-	call PrintText
+	ld hl, Route1ViridianMartSampleText
+	call PrintText 
 	ld bc, (POTION << 8) | 1
 	call GiveItem
 	jr nc, .asm_a630e ; 0x1cace
@@ -12654,8 +12654,8 @@ Route1Text1: ; 0x1cab8
 	call PrintText
 	jp $24d7
 
-UnnamedText_1cae3: ; 0x1cae3
-	TX_FAR _UnnamedText_1cae3
+Route1ViridianMartSampleText: ; 0x1cae3
+	TX_FAR _Route1ViridianMartSampleText
 	db $50
 ; 0x1cae3 + 5 bytes
 
@@ -13370,33 +13370,33 @@ OaksLabText1: ; 0x1d0ce
 	ld a, [$d74b]
 	bit 0, a
 	jr nz, .asm_6a7a2 ; 0x1d0d4
-	ld hl, $50f3
+	ld hl, OaksLabGaryText1
 	call PrintText
 	jr .asm_ff2ed ; 0x1d0dc
 .asm_6a7a2 ; 0x1d0de
 	bit 2, a
 	jr nz, .asm_56780 ; 0x1d0e0
-	ld hl, $50f8
+	ld hl, OaksLabText40
 	call PrintText
 	jr .asm_ff2ed ; 0x1d0e8
 .asm_56780 ; 0x1d0ea
-	ld hl, $50fd
+	ld hl, OaksLabText41
 	call PrintText
 .asm_ff2ed ; 0x1d0f0
 	jp $24d7
 
-UnnamedText_1d0f3: ; 0x1d0f3
-	TX_FAR _UnnamedText_1d0f3
+OaksLabGaryText1: ; 0x1d0f3
+	TX_FAR _OaksLabGaryText1
 	db $50
-; 0x1d0f3 + 5 bytes
+; 0x1d0f8
 
-UnnamedText_1d0f8: ; 0x1d0f8
-	TX_FAR _UnnamedText_1d0f8
+OaksLabText40: ; 0x1d0f8
+	TX_FAR _OaksLabText40
 	db $50
 ; 0x1d0f8 + 5 bytes
 
-UnnamedText_1d0fd: ; 0x1d0fd
-	TX_FAR _UnnamedText_1d0fd
+OaksLabText41: ; 0x1d0fd
+	TX_FAR _OaksLabText41
 	db $50
 ; 0x1d0fd + 5 bytes
 
@@ -55041,7 +55041,7 @@ _UnnamedText_1e8da: ; 0x8d57f
 	db "#MON on my PC!", $57
 ; 0x8d57f + 64 bytes
 
-_UnnamedText_1cae3: ; 0x8d5bf
+_Route1ViridianMartSampleText: ; 0x8d5bf
 	db $0, "Hi! I work at a", $4f
 	db "#MON MART.", $51
 	db "It's a convenient", $4f
@@ -58227,13 +58227,13 @@ _TradeCenterMText1: ; 0x94b04
 INCLUDE "text/mapRedsHouse1F.tx"
 INCLUDE "text/mapBluesHouse.tx"
 
-_UnnamedText_1d0f3: ; 0x94d5b
+_OaksLabGaryText1: ; 0x94d5b
 	db $0, $53, ": Yo", $4f
 	db $52, "! Gramps", $55
 	db "isn't around!", $57
 ; 0x94d5b + 30 bytes
 
-_UnnamedText_1d0f8: ; 0x94d79
+_OaksLabText40: ; 0x94d79
 	db $0, $53, ": Heh, I", $4f
 	db "don't need to be", $55
 	db "greedy like you!", $51
@@ -58241,7 +58241,7 @@ _UnnamedText_1d0f8: ; 0x94d79
 	db "choose, ", $52, "!", $57
 ; 0x94d79 + 68 bytes
 
-_UnnamedText_1d0fd: ; 0x94dbd
+_OaksLabText41: ; 0x94dbd
 	db $0, $53, ": My", $4f
 	db "#MON looks a", $55
 	db "lot stronger.", $57
