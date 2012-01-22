@@ -8864,9 +8864,10 @@ ReadSuperRodData:
 	ret
 
 .ReadFishingGroup ; 0xe8f6
-; hl points to the fishing group
+; hl points to the fishing group entry in the index
 	inc hl ; skip map id
 
+	; read fishing group address
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
