@@ -13448,7 +13448,8 @@ asm_5e6bb: ; 0x1d133
 ; 0x1d152
 
 OaksLabText39:
-	db $17, $df, $4d, $25, $50
+	TX_FAR _OaksLabText39
+	db $50
 
 asm_9eaa4: ; 0x1d157
 	ld a, $5
@@ -13497,11 +13498,11 @@ asm_2391d: ; 0x1d19f
 asm_ddec1: ; 0x1d1a9
 	ld hl, $51ae
 	jr asm_b5ddf ; 0x1d1ac $5
-	rla ; probably a TX_FAR
-	ld d, a
-	ld c, [hl]
-	dec h
-	ld d, b
+
+UnnamedText_1d1ae: ; 0x1d1ae
+	TX_FAR _UnnamedText_1d1ae
+	db $50
+
 asm_b5ddf: ; 0x1d1b3
 	call PrintText
 	ld a, $1
@@ -58265,7 +58266,7 @@ UnnamedText_94e2f: ; 0x94e2f
 	db "SQUIRTLE?", $57
 ; 0x94e57
 
-UnnamedText_94e57: ; 0x94e57
+_UnnamedText_1d1ae: ; 0x94e57
 	db $0, "So! You want the", $4f
 	db "plant #MON,", $55
 	db "BULBASAUR?", $57
