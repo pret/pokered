@@ -14348,12 +14348,12 @@ BikeShopText1: ; 0x1d745
 	call PrintText
 	jp $57f5
 .asm_260d4 ; 0x1d756
-	ld b,BIKE_VOUCHER
+	ld b, BIKE_VOUCHER
 	call $3493
 	jr z, .asm_41190 ; 0x1d75b
 	ld hl, UnnamedText_1d81f
 	call PrintText
-	ld bc,(BICYCLE << 8) | 1
+	ld bc, (BICYCLE << 8) | 1
 	call GiveItem
 	jr nc, .asm_d0d90 ; 0x1d769
 	ld a, $2d
@@ -14458,7 +14458,7 @@ UnnamedText_1d834: ; 0x1d834
 
 BikeShopText2: ; 0x1d839
 	db $08 ; asm
-	ld hl, $5843
+	ld hl, UnnamedText_1d843
 	call PrintText
 	jp TextScriptEnd
 
@@ -14471,9 +14471,9 @@ BikeShopText3: ; 0x1d848
 	db $08 ; asm
 	ld a, [$d75f]
 	bit 0, a
-	ld hl, $5861
+	ld hl, UnnamedText_1d861
 	jr nz, .asm_34d2d ; 0x1d851
-	ld hl, $585c
+	ld hl, UnnamedText_1d85c
 .asm_34d2d ; 0x1d856
 	call PrintText
 	jp TextScriptEnd
@@ -14530,11 +14530,11 @@ LavenderHouse1Text1: ; 0x1d8b8
 	ld a, [$d7e0]
 	bit 7, a
 	jr nz, .asm_72e5d ; 0x1d8be
-	ld hl, $58d1
+	ld hl, UnnamedText_1d8d1
 	call PrintText
 	jr .asm_6957f ; 0x1d8c6
 .asm_72e5d ; 0x1d8c8
-	ld hl, $58d6
+	ld hl, UnnamedText_1d8d6
 	call PrintText
 .asm_6957f ; 0x1d8ce
 	jp TextScriptEnd
@@ -14554,11 +14554,11 @@ LavenderHouse1Text2: ; 0x1d8db
 	ld a, [$d7e0]
 	bit 7, a
 	jr nz, .asm_06470 ; 0x1d8e1
-	ld hl, $58f4
+	ld hl, UnnamedText_1d8f4
 	call PrintText
 	jr .asm_3d208 ; 0x1d8e9
 .asm_06470 ; 0x1d8eb
-	ld hl, $58f9
+	ld hl, UnnamedText_1d8f9
 	call PrintText
 .asm_3d208 ; 0x1d8f1
 	jp TextScriptEnd
@@ -14593,22 +14593,22 @@ LavenderHouse1Text5: ; 0x1d918
 	ld a, [$d76c]
 	bit 0, a
 	jr nz, .asm_15ac2 ; 0x1d91e
-	ld hl, $594c
+	ld hl, UnnamedText_1d94c
 	call PrintText
 	ld bc, (POKE_FLUTE << 8) | 1
 	call GiveItem
 	jr nc, .asm_5ce36 ; 0x1d92c
-	ld hl, $5951
+	ld hl, UnnamedText_1d951
 	call PrintText
 	ld hl, $d76c
 	set 0, [hl]
 	jr .asm_da749 ; 0x1d939
 .asm_5ce36 ; 0x1d93b
-	ld hl, $595b
+	ld hl, UnnamedText_1d95b
 	call PrintText
 	jr .asm_da749 ; 0x1d941
 .asm_15ac2 ; 0x1d943
-	ld hl, $5960
+	ld hl, UnnamedText_1d960
 	call PrintText
 .asm_da749 ; 0x1d949
 	jp TextScriptEnd
@@ -14618,12 +14618,12 @@ UnnamedText_1d94c: ; 0x1d94c
 	db $50
 ; 0x1d94c + 5 bytes
 
-INCBIN "baserom.gbc",$1d951,$1d956 - $1d951
-
-UnnamedText_1d956: ; 0x1d956
-	TX_FAR _UnnamedText_1d956
+UnnamedText_1d951: ; 0x1d951
+	TX_FAR _UnnamedText_1d951 ; 0x99ffb
+	db $11
+	TX_FAR _UnnamedText_1d956 ; 0x9a011
 	db $50
-; 0x1d956 + 5 bytes
+; 0x1d95b
 
 UnnamedText_1d95b: ; 0x1d95b
 	TX_FAR _UnnamedText_1d95b
@@ -14689,11 +14689,11 @@ LavenderHouse2Text2: ; 0x1d9c3
 	ld a, [$d7e0]
 	bit 7, a
 	jr nz, .asm_65711 ; 0x1d9c9
-	ld hl, $59dc
+	ld hl, UnnamedText_1d9dc
 	call PrintText
 	jr .asm_64be1 ; 0x1d9d1
 .asm_65711 ; 0x1d9d3
-	ld hl, $59e1
+	ld hl, UnnamedText_1d9e1
 	call PrintText
 .asm_64be1 ; 0x1d9d9
 	jp TextScriptEnd
@@ -14742,10 +14742,10 @@ INCBIN "baserom.gbc",$1da15,$41
 NameRaterText1: ; 0x1da56
 	db $8
 	call $36f4
-	ld hl, $5ab3
+	ld hl, UnnamedText_1dab3
 	call $5a15
 	jr nz, .asm_1daae ; 0x1da60 $4c
-	ld hl, $5ab8
+	ld hl, UnnamedText_1dab8
 	call PrintText
 	xor a
 	ld [$d07d], a
@@ -14760,23 +14760,23 @@ NameRaterText1: ; 0x1da56
 	jr c, .asm_1daae ; 0x1da80 $2c
 	call $15b4
 	call $5a20
-	ld hl, $5ad1
+	ld hl, UnnamedText_1dad1
 	jr c, .asm_1daa8 ; 0x1da8b $1b
-	ld hl, $5abd
+	ld hl, UnnamedText_1dabd
 	call $5a15
 	jr nz, .asm_1daae ; 0x1da93 $19
-	ld hl, $5ac2
+	ld hl, UnnamedText_1dac2
 	call PrintText
 	ld b, $1
 	ld hl, $655c
 	call Bankswitch
 	jr c, .asm_1daae ; 0x1daa3 $9
-	ld hl, $5ac7
+	ld hl, UnnamedText_1dac7
 .asm_1daa8
 	call PrintText
 	jp TextScriptEnd
 .asm_1daae
-	ld hl, $5acc
+	ld hl, UnnamedText_1dacc
 	jr .asm_1daa8 ; 0x1dab1 $f5
 ; 0x1dab3
 
@@ -60120,7 +60120,7 @@ _UnnamedText_1d94c: ; 0x99f97
 	db "help your quest.", $58
 ; 0x99f97 + 100 bytes
 
-UnnamedText_99ffb: ; 0x99ffb
+_UnnamedText_1d951: ; 0x99ffb
 	db $0, $52, " received", $4f
 	db "a @"
 	TX_RAM $cf4b
