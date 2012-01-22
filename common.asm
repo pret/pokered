@@ -14086,9 +14086,9 @@ ViridianHouseText2: ; 0x1d59a
 
 ViridianHouseText3: ; 0x1d59f
 	db $08 ; asm
-	ld hl, $55b1
+	ld hl, UnnamedText_1d5b1
 	call PrintText
-	ld a,SPEAROW
+	ld a, SPEAROW
 	call $13d0
 	call $3748
 	jp TextScriptEnd
@@ -14233,11 +14233,11 @@ CeruleanHouseTrashedText1: ; 0x1d68f
 	call Predef
 	and b
 	jr z, .asm_f8734 ; 0x1d698
-	ld hl, $56b0
+	ld hl, UnnamedText_1d6b0
 	call PrintText
 	jr .asm_8dfe9 ; 0x1d6a0
 .asm_f8734 ; 0x1d6a2
-	ld hl, $56ab
+	ld hl, UnnamedText_1d6ab
 	call PrintText
 .asm_8dfe9 ; 0x1d6a8
 	jp TextScriptEnd
@@ -14344,14 +14344,14 @@ BikeShopText1: ; 0x1d745
 	ld a, [$d75f]
 	bit 0, a
 	jr z, .asm_260d4 ; 0x1d74b
-	ld hl, $582f
+	ld hl, UnnamedText_1d82f
 	call PrintText
 	jp $57f5
 .asm_260d4 ; 0x1d756
 	ld b,BIKE_VOUCHER
 	call $3493
 	jr z, .asm_41190 ; 0x1d75b
-	ld hl, $581f
+	ld hl, UnnamedText_1d81f
 	call PrintText
 	ld bc,(BICYCLE << 8) | 1
 	call GiveItem
@@ -14363,15 +14363,15 @@ BikeShopText1: ; 0x1d745
 	call Bankswitch
 	ld hl, $d75f
 	set 0, [hl]
-	ld hl, $5824
+	ld hl, UnnamedText_1d824
 	call PrintText
 	jr .asm_99ef2 ; 0x1d782
 .asm_d0d90 ; 0x1d784
-	ld hl, $5834
+	ld hl, UnnamedText_1d834
 	call PrintText
 	jr .asm_99ef2 ; 0x1d78a
 .asm_41190 ; 0x1d78c
-	ld hl, $5810
+	ld hl, UnnamedText_1d810
 	call PrintText
 	xor a
 	ld [$cc26], a
@@ -14397,7 +14397,7 @@ BikeShopText1: ; 0x1d745
 	ld hl, $c3e4
 	ld de, $5807
 	call $1955
-	ld hl, $5815
+	ld hl, UnnamedText_1d815
 	call PrintText
 	call $3abe
 	bit 1, a
@@ -14407,10 +14407,10 @@ BikeShopText1: ; 0x1d745
 	ld a, [$cc26]
 	and a
 	jr nz, .asm_b7579 ; 0x1d7e7
-	ld hl, $581a
+	ld hl, UnnamedText_1d81a
 	call PrintText
 .asm_b7579 ; 0x1d7ef
-	ld hl, $582a
+	ld hl, UnnamedText_1d82a
 	call PrintText
 .asm_99ef2 ; 0x1d7f5
 	jp TextScriptEnd
@@ -14437,7 +14437,9 @@ UnnamedText_1d81f: ; 0x1d81f
 	db $50
 ; 0x1d81f + 5 bytes
 
-INCBIN "baserom.gbc",$1d824,$1d82a - $1d824
+UnnamedText_1d824: ; 0x1d824
+	TX_FAR _UnnamedText_1d824 ; 0x98eb2
+	db $11, $50
 
 UnnamedText_1d82a: ; 0x1d82a
 	TX_FAR _UnnamedText_1d82a
@@ -59545,7 +59547,7 @@ _UnnamedText_1d81f: ; 0x98e83
 	db "OK! Here you go!", $58
 ; 0x98e83 + 47 bytes
 
-UnnamedText_98eb2: ; 0x98eb2
+_UnnamedText_1d824: ; 0x98eb2
 	db $0, $52, " exchanged", $4f
 	db "the BIKE VOUCHER", $55
 	db "for a BICYCLE.@@"
