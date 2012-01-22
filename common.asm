@@ -10153,7 +10153,7 @@ PalletTownText7: ; sign by Blue’s house
 
 ViridianCityScript: ; 0x18ff1
 	call $3c3c
-	ld hl, $4ffd
+	ld hl, ViridianCityScripts
 	ld a, [$d5f4]
 	jp $3d97
 ; 0x18ffd
@@ -10379,7 +10379,7 @@ UnnamedText_19232: ; 0x19232
 
 PewterCityScript: ; 0x19237
 	call $3c3c
-	ld hl, $5243
+	ld hl, PewterCityScripts
 	ld a, [$d5f7]
 	jp $3d97
 ; 0x19243
@@ -10548,7 +10548,7 @@ PewterCityText12: ; 0x1947b
 
 CeruleanCityScript: ; 0x19480
 	call $3c3c
-	ld hl, $549d
+	ld hl, CeruleanCityScripts
 	ld a, [$d60f]
 	jp $3d97
 ; 0x1948c
@@ -10963,7 +10963,7 @@ VermilionCityScript: ; 0x197a1
 	bit 5, [hl]
 	res 5, [hl]
 	call nz, $57c0
-	ld hl, $57dc
+	ld hl, VermilionCityScripts
 	ld a, [$d62a]
 	jp $3d97
 ; 0x197c0
@@ -12547,7 +12547,7 @@ CinnabarIslandScript: ; 0x1ca19
 	res 0, [hl]
 	ld hl, $d7a3
 	res 1, [hl]
-	ld hl, $4a34
+	ld hl, CinnabarIslandScripts
 	ld a, [$d639]
 	jp $3d97
 ; 0x1ca34
@@ -15275,7 +15275,7 @@ Route5Gate_h: ; 0x1df27 to 0x1df33 (12 bytes) (bank=7) (id=70)
 Route5GateScript: ; 0x1df33
 	call $3c3c
 	ld a, [$d662]
-	ld hl, $5f3f
+	ld hl, Route5GateScripts
 	jp $3d97
 ; 0x1df3f
 
@@ -15412,7 +15412,7 @@ Route6Gate_h: ; 0x1e031 to 0x1e03d (12 bytes) (bank=7) (id=73)
 
 Route6GateScript: ; 0x1e03d
 	call $3c3c
-	ld hl, $604a
+	ld hl, Route6GateScripts
 	ld a, [$d636]
 	call $3d97
 	ret
@@ -15494,7 +15494,7 @@ Route7Gate_h: ; 0x1e0f4 to 0x1e100 (12 bytes) (bank=7) (id=76)
 Route7GateScript: ; 0x1e100
 	call $3c3c
 	ld a, [$d663]
-	ld hl, $610d
+	ld hl, Route7GateScripts
 	call $3d97
 	ret
 ; 0x1e10d
@@ -15575,7 +15575,7 @@ Route8Gate_h: ; 0x1e1bb to 0x1e1c7 (12 bytes) (bank=7) (id=79)
 
 Route8GateScript: ; 0x1e1c7
 	call $3c3c
-	ld hl, $61d3
+	ld hl, Route8GateScripts
 	ld a, [$d637]
 	jp $3d97
 ; 0x1e1d3
@@ -15948,7 +15948,7 @@ Route22Gate_h: ; 0x1e677 to 0x1e683 (12 bytes) (bank=7) (id=193)
 
 Route22GateScript: ; 0x1e683
 	call $3c3c
-	ld hl, $669e
+	ld hl, Route22GateScripts
 	ld a, [$d60e]
 	call $3d97
 	ld a, [$d361]
@@ -16067,7 +16067,7 @@ BillsHouse_h: ; 0x1e75e to 0x1e76a (12 bytes) (bank=7) (id=88)
 BillsHouseScript: ; 0x1e76a
 	call $3c3c
 	ld a, [$d661]
-	ld hl, $6776
+	ld hl, BillsHouseScripts
 	jp $3d97
 ; 0x1e776
 
@@ -26441,7 +26441,7 @@ SeafoamIslands4Script: ; 0x4658d
 	bit 4, a
 	ret nz
 .asm_465ed
-	ld hl, $65fb
+	ld hl, SeafoamIslands4Scripts
 	ld a, [$d666]
 	jp $3d97
 ; 0x465f6
@@ -26538,7 +26538,7 @@ SeafoamIslands5_h: ; 0x4678d to 0x46799 (12 bytes) (bank=11) (id=162)
 SeafoamIslands5Script: ; 0x46799
 	call $3c3c
 	ld a, [$d668]
-	ld hl, $67ad
+	ld hl, SeafoamIslands5Scripts
 	jp $3d97
 ; 0x467a5
 
@@ -27778,7 +27778,7 @@ CeladonGameCornerScript: ; 0x48bbd
 	call $4bcf
 	call $4bec
 	call $3c3c
-	ld hl, $4c12
+	ld hl, CeladonGameCornerScripts
 	ld a, [$d65f]
 	jp $3d97
 ; 0x48bcf
@@ -29059,7 +29059,7 @@ Route16GateMapScript: ; 0x496be
 	res 5, [hl]
 	call $3c3c
 	ld a, [$d660]
-	ld hl, $56cf
+	ld hl, Route16GateMapScripts
 	jp $3d97
 ; 0x496cf
 
@@ -29260,7 +29260,7 @@ Route18GateScript: ; 0x49876
 	res 5, [hl]
 	call $3c3c
 	ld a, [$d669]
-	ld hl, $5887
+	ld hl, Route18GateScripts
 	jp $3d97
 ; 0x49887
 
@@ -31156,7 +31156,7 @@ Route20Text11: ; 0x50ead
 
 Route22Script: ; 0x50eb2
 	call $3c3c
-	ld hl, $4ebe
+	ld hl, Route22Scripts
 	ld a, [$d60a]
 	jp $3d97
 ; 0x50ebe
@@ -38681,7 +38681,7 @@ HallofFameRoom_h: ; 0x5a492 to 0x5a49e (12 bytes) (id=118)
 
 HallofFameRoomScript: ; 0x5a49e
 	call $3c3c
-	ld hl, $64b2
+	ld hl, HallofFameRoomScripts
 	ld a, [$d64b]
 	jp $3d97
 ; 0x5a4aa
@@ -38905,7 +38905,7 @@ MuseumF1Script: ; 0x5c0f7
 	ld [$cf0c], a
 	xor a
 	ld [$cc3c], a
-	ld hl, $4109
+	ld hl, MuseumF1Scripts
 	ld a, [$d619]
 	jp $3d97
 ; 0x5c109
@@ -41883,7 +41883,7 @@ PokemonTower2_h: ; 0x604e6 to 0x604f2 (12 bytes) (id=143)
 
 PokemonTower2Script: ; 0x604f2
 	call $3c3c
-	ld hl, $4509
+	ld hl, PokemonTower2Scripts
 	ld a, [$d62b]
 	jp $3d97
 ; 0x604fe
@@ -43017,7 +43017,7 @@ SSAnne2_h: ; 0x61393 to 0x6139f (12 bytes) (id=96)
 
 SSAnne2Script: ; 0x6139f
 	call $3c3c
-	ld hl, $53b3
+	ld hl, SSAnne2Scripts
 	ld a, [$d665]
 	jp $3d97
 ; 0x613ab
@@ -46818,7 +46818,7 @@ SafariZoneEntrance_h: ; 0x751c1 to 0x751cd (12 bytes) (id=156)
 
 SafariZoneEntranceScript: ; 0x751cd
 	call $3c3c
-	ld hl, $51d9
+	ld hl, SafariZoneEntranceScripts
 	ld a, [$d61f]
 	jp $3d97
 ; 0x751d9
@@ -47467,7 +47467,7 @@ CinnabarGym_h: ; 0x7573e to 0x7574a (12 bytes) (id=166)
 CinnabarGymScript: ; 0x7574a
 	call $5759
 	call $3c3c
-	ld hl, $57a6
+	ld hl, CinnabarGymScripts
 	ld a, [$d65e]
 	jp $3d97
 ; 0x75759
@@ -48426,7 +48426,7 @@ Gary_h: ;0x75f11
 
 GaryScript: ; 0x75f1d
 	call $3c3c
-	ld hl, $5f31
+	ld hl, GaryScripts
 	ld a, [$d64c]
 	jp $3d97
 ; 0x75f29
