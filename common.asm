@@ -15125,22 +15125,22 @@ SaffronHouse2Text1: ; 0x1de41
 	ld a, [$d7bd]
 	bit 0, a
 	jr nz, .asm_9e72b ; 0x1de47
-	ld hl, $5e75
+	ld hl, UnnamedText_1de75
 	call PrintText
 	ld bc,(TM_29 << 8) | 1
 	call GiveItem
 	jr nc, .asm_4b1da ; 0x1de55
-	ld hl, $5e7a
+	ld hl, UnnamedText_1de7a
 	call PrintText
 	ld hl, $d7bd
 	set 0, [hl]
 	jr .asm_fe4e1 ; 0x1de62
 .asm_4b1da ; 0x1de64
-	ld hl, $5e85
+	ld hl, UnnamedText_1de85
 	call PrintText
 	jr .asm_fe4e1 ; 0x1de6a
 .asm_9e72b ; 0x1de6c
-	ld hl, $5e80
+	ld hl, UnnamedText_1de80
 	call PrintText
 .asm_fe4e1 ; 0x1de72
 	jp TextScriptEnd
@@ -15150,7 +15150,10 @@ UnnamedText_1de75: ; 0x1de75
 	db $50
 ; 0x1de75 + 5 bytes
 
-INCBIN "baserom.gbc",$1de7a,$1de80 - $1de7a
+UnnamedText_1de7a: ; 0x1de7a
+	TX_FAR _UnnamedText_1de7a ; 0xa252a
+	db $0B, $50
+; 0x1de80
 
 UnnamedText_1de80: ; 0x1de80
 	TX_FAR _UnnamedText_1de80
@@ -15333,20 +15336,20 @@ Route5GateText1: ; 0x1dfaa
 	ld a, [$ff00+$db]
 	and a
 	jr nz, .asm_768a2 ; 0x1dfbd $11
-	ld hl, $5fe7
+	ld hl, UnnamedText_1dfe7
 	call PrintText
 	call $5f43
 	ld a, $1
 	ld [$d662], a
 	jp TextScriptEnd
 .asm_768a2 ; 0x1dfd0
-	ld hl, $5fec
+	ld hl, UnnamedText_1dfec
 	call PrintText
 	ld hl, $d728
 	set 6, [hl]
 	jp TextScriptEnd
 .asm_88856 ; 0x1dfde
-	ld hl, $5ff6
+	ld hl, UnnamedText_1dff6
 	call PrintText
 	jp TextScriptEnd
 ; 0x1dfe7
@@ -15355,7 +15358,6 @@ Route8GateText2:
 Route7GateText2:
 Route6GateText2:
 Route5GateText2: ; 0x1dfe7
-
 UnnamedText_1dfe7: ; 0x1dfe7
 	TX_FAR _UnnamedText_1dfe7
 	db $50
@@ -15869,45 +15871,47 @@ Route16HouseText1: ; 0x1e5ff
 	db $08 ; asm
 	ld a, [$d7e0]
 	bit 6, a
-	ld hl, $6636
+	ld hl, HM02ExplanationText
 	jr nz, .asm_13616 ; 0x1e608
-	ld hl, $662b
+	ld hl, Route16HouseText3
 	call PrintText
-	ld bc,(HM_02 << 8) | 1
+	ld bc, (HM_02 << 8) | 1
 	call GiveItem
 	jr nc, .asm_d3ee3 ; 0x1e616
 	ld hl, $d7e0
 	set 6, [hl]
-	ld hl, $6630
+	ld hl, ReceivedHM02Text
 	jr .asm_13616 ; 0x1e620
 .asm_d3ee3 ; 0x1e622
-	ld hl, $663b
+	ld hl, HM02NoRoomText
 .asm_13616 ; 0x1e625
 	call PrintText
 	jp TextScriptEnd
 
-UnnamedText_1e62b: ; 0x1e62b
-	TX_FAR _UnnamedText_1e62b
+Route16HouseText3: ; 0x1e62b
+	TX_FAR _Route16HouseText3
 	db $50
 ; 0x1e62b + 5 bytes
 
-INCBIN "baserom.gbc",$1e630,$1e636 - $1e630
+ReceivedHM02Text: ; 0x1e630
+	TX_FAR _ReceivedHM02Text ; 0x8ce66
+	db $11, $50
 
-UnnamedText_1e636: ; 0x1e636
-	TX_FAR _UnnamedText_1e636
+HM02ExplanationText: ; 0x1e636
+	TX_FAR _HM02ExplanationText
 	db $50
 ; 0x1e636 + 5 bytes
 
-UnnamedText_1e63b: ; 0x1e63b
-	TX_FAR _UnnamedText_1e63b
+HM02NoRoomText: ; 0x1e63b
+	TX_FAR _HM02NoRoomText
 	db $50
 ; 0x1e63b + 5 bytes
 
 Route16HouseText2: ; 0x1e640
 	db $08 ; asm
-	ld hl, $6652
+	ld hl, UnnamedText_1e652
 	call PrintText
-	ld a,FEAROW
+	ld a, FEAROW
 	call $13d0
 	call $3748
 	jp TextScriptEnd
@@ -15995,13 +15999,13 @@ Route22GateText1: ; 0x1e6e1
 	ld a, [$d356]
 	bit 0, a
 	jr nz, .asm_8a809 ; 0x1e6e7 $d
-	ld hl, $6704
+	ld hl, UnnamedText_1e704
 	call PrintText
 	call $66ba
 	ld a, $1
 	jr .asm_20f7e ; 0x1e6f4 $8
 .asm_8a809 ; 0x1e6f6
-	ld hl, $671a
+	ld hl, UnnamedText_1e71a
 	call PrintText
 	ld a, $2
 .asm_20f7e ; 0x1e6fe
@@ -16009,14 +16013,25 @@ Route22GateText1: ; 0x1e6e1
 	jp TextScriptEnd
 ; 0x1e704
 
-INCBIN "baserom.gbc",$1e704,$1e715 - $1e704
+UnnamedText_1e704: ; 0x1e704
+	TX_FAR _UnnamedText_1e704 ; 0x8cfbb
+	db $8
+	ld a, $a5
+	call $3740
+	call $3748
+	ld hl, $6715
+	ret
+; 0x1e715
 
 UnnamedText_1e715: ; 0x1e715
 	TX_FAR _UnnamedText_1e715
 	db $50
-; 0x1e715 + 5 bytes
+; 0x1e71a
 
-INCBIN "baserom.gbc",$1e71a,$6
+UnnamedText_1e71a: ; 0x1e71a
+	TX_FAR _UnnamedText_1e71a ; 0x8d03e
+	db $0B, $50
+; 0x1e720
 
 Route22GateObject: ; 0x1e720 (size=42)
 	db $a ; border tile
@@ -16075,53 +16090,51 @@ BillsHouseText4:
 
 BillsHouseText1: ; 0x1e83d
 	db $8
-	ld hl, $6865
+	ld hl, UnnamedText_1e865
 	call PrintText
 	call $35ec
 	ld a, [$cc26]
 	and a
 	jr nz, asm_6b196 ; 0x1e84b $d
 asm_4d03c:
-	ld hl, $686a
+	ld hl, UnnamedText_1e86a
 	call PrintText
 	ld a, $1
 	ld [$d661], a
 	jr asm_fd4e2 ; 0x1e858 $8
 asm_6b196: ; 0x1e85a
-	ld hl, $686f
+	ld hl, UnnamedText_1e86f
 	call PrintText
 	jr asm_4d03c ; 0x1e860 $eb
 asm_fd4e2 ; 0x1e862
 	jp TextScriptEnd
 
-; dunno what this is (rla indicates $17 or TX_FAR)
-	rla
-	ld h, a
-	ld d, d
-	inc hl
-	ld d, b
-	rla
-	ld b, l
-	ld d, e
-	inc hl
-	ld d, b
-	rla
-	sub c
-	ld d, e
-	inc hl
-	ld d, b
+UnnamedText_1e865: ; 0x1e865
+	TX_FAR _UnnamedText_1e865 ; 0x8d267
+	db $50
+; 0x1e86a
+
+UnnamedText_1e86a: ; 0x1e86a
+	TX_FAR _UnnamedText_1e86a ; 0x8d345
+	db $50
+; 0x1e86f
+
+UnnamedText_1e86f: ; 0x1e86f
+	TX_FAR _UnnamedText_1e86f ; 0x8d391
+	db $50
+; 0x1e874
 
 BillsHouseText2: ; 0x1e874
 	db $08 ; asm
 	ld a, [$d7f2]
 	bit 4, a
 	jr nz, .asm_5491f ; 0x1e87a
-	ld hl, $68ba
+	ld hl, BillThankYouText
 	call PrintText
-	ld bc,(S_S__TICKET << 8) | 1
+	ld bc, (S_S__TICKET << 8) | 1
 	call GiveItem
 	jr nc, .asm_18a67 ; 0x1e888
-	ld hl, $68bf
+	ld hl, SSTicketReceivedText
 	call PrintText
 	ld hl, $d7f2
 	set 4, [hl]
@@ -16134,24 +16147,26 @@ BillsHouseText2: ; 0x1e874
 	ld a, $11
 	call Predef
 .asm_5491f ; 0x1e8a9
-	ld hl, $68cb
+	ld hl, UnnamedText_1e8cb
 	call PrintText
 	jr .asm_bd408 ; 0x1e8af
 .asm_18a67 ; 0x1e8b1
-	ld hl, $68c6
+	ld hl, SSTicketNoRoomText
 	call PrintText
 .asm_bd408 ; 0x1e8b7
 	jp TextScriptEnd
 
-UnnamedText_1e8ba: ; 0x1e8ba
-	TX_FAR _UnnamedText_1e8ba
+BillThankYouText: ; 0x1e8ba
+	TX_FAR _BillThankYouText
 	db $50
 ; 0x1e8ba + 5 bytes
 
-INCBIN "baserom.gbc",$1e8bf,$1e8c6 - $1e8bf
+SSTicketReceivedText: ; 0x1e8bf
+	TX_FAR _SSTicketReceivedText ; 0x8d499
+	db $11, $6, $50
 
-UnnamedText_1e8c6: ; 0x1e8c6
-	TX_FAR _UnnamedText_1e8c6
+SSTicketNoRoomText: ; 0x1e8c6
+	TX_FAR _SSTicketNoRoomText
 	db $50
 ; 0x1e8c6 + 5 bytes
 
@@ -16162,7 +16177,7 @@ UnnamedText_1e8cb: ; 0x1e8cb
 
 BillsHouseText3: ; 0x1e8d0
 	db $08 ; asm
-	ld hl, $68da
+	ld hl, UnnamedText_1e8da
 	call PrintText
 	jp TextScriptEnd
 ; 0x1e8da
@@ -18742,7 +18757,7 @@ Function674B: ; 674B
 	ld bc,4
 	call CopyData
 
-	ld hl,AIBattleWithdrawText
+	ld hl, AIBattleWithdrawText
 	call PrintText
 
 	ld a,1
@@ -18882,7 +18897,7 @@ AIPrintItemUse_:
 	ld a,[$CF05]
 	ld [$D11E],a
 	call GetItemName
-	ld hl,AIBattleUseItemText
+	ld hl, AIBattleUseItemText
 	jp PrintText
 
 AIBattleUseItemText:
@@ -21334,7 +21349,7 @@ EnemySendOut: ; 490E
 	ld a,[$D355]
 	bit 6,a
 	jr nz,.next4\@
-	ld hl,TrainerAboutToUseText
+	ld hl, TrainerAboutToUseText
 	call PrintText
 	ld hl,$C42C
 	ld bc,$0801
@@ -24116,14 +24131,14 @@ LavenderTownTexts: ; 0x4410e
 
 LavenderTownText1: ; 0x44120
 	db $08 ; asm
-	ld hl, $413c
+	ld hl, UnnamedText_4413c
 	call PrintText
 	call $35ec
 	ld a, [$cc26]
 	and a
-	ld hl, $4146
+	ld hl, UnnamedText_44146
 	jr nz, .asm_40831 ; 0x44131
-	ld hl, $4141
+	ld hl, UnnamedText_44141
 .asm_40831 ; 0x44136
 	call PrintText
 	jp TextScriptEnd
@@ -25261,13 +25276,13 @@ RocketHideout4Text1: ; 0x4553a
 	ld a, [$d81b]
 	bit 7, a
 	jp nz, $5571
-	ld hl, $557a
+	ld hl, UnnamedText_4557a
 	call PrintText
 	ld hl, $d72d
 	set 6, [hl]
 	set 7, [hl]
-	ld hl, $557f
-	ld de, $557f
+	ld hl, UnnamedText_4557f
+	ld de, $557f ; probably UnnamedText_4557f
 	call $3354
 	ldh a, [$8c]
 	ld [$cf13], a
@@ -25279,7 +25294,7 @@ RocketHideout4Text1: ; 0x4553a
 	ld [$d634], a
 	ld [$da39], a
 	jr .asm_209f0 ; 0x4556f
-	ld hl, $5584
+	ld hl, RocketHideout4Text10
 	call PrintText
 .asm_209f0 ; 0x45577
 	jp TextScriptEnd
@@ -25301,7 +25316,7 @@ RocketHideout4Text10: ; 0x45584
 
 RocketHideout4Text2: ; 0x45589
 	db $08 ; asm
-	ld hl, $5515
+	ld hl, $5515 ; XXX
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -25425,7 +25440,7 @@ RocketHideoutElevatorTexts: ; 0x4576b
 
 RocketHideoutElevatorText1: ; 0x4576d
 	db $08 ; asm
-	ld b,LIFT_KEY
+	ld b, LIFT_KEY
 	call $3493
 	jr z, .asm_8d8f0 ; 0x45773
 	call $5741
@@ -25434,12 +25449,14 @@ RocketHideoutElevatorText1: ; 0x4576d
 	call Predef
 	jr .asm_46c43 ; 0x45780
 .asm_8d8f0 ; 0x45782
-	ld hl, $578b
+	ld hl, UnnamedText_4578b
 	call PrintText
 .asm_46c43 ; 0x45788
 	jp TextScriptEnd
 
-INCBIN "baserom.gbc",$4578b,$6
+UnnamedText_4578b: ; 0x4578b
+	TX_FAR _UnnamedText_4578b ; 0x82438
+	db $d, $50
 
 RocketHideoutElevatorObject: ; 0x45791 (size=23)
 	db $f ; border tile
@@ -26732,10 +26749,10 @@ RedsHouse1FTexts: ; 416B
 
 RedsHouse1FText1: ; Mom
 	db 8
-	ld a,[$D72E]
-	bit 3,a
-	jr nz,.heal\@ ; if player has received a Pokémon from Oak, heal team
-	ld hl,MomWakeUpText
+	ld a, [$D72E]
+	bit 3, a
+	jr nz, .heal\@ ; if player has received a Pokémon from Oak, heal team
+	ld hl, MomWakeUpText
 	call PrintText
 	jr .done\@
 .heal\@
@@ -26748,24 +26765,24 @@ MomWakeUpText:
 	db "@"
 
 MomHealPokemon:
-	ld hl,MomHealText1
+	ld hl, MomHealText1
 	call PrintText
 	call GBFadeOut2
 	call $3071
-	ld a,7
+	ld a, 7
 	call Predef
-	ld a,$E8
-	ld [$C0EE],a
+	ld a, $E8
+	ld [$C0EE], a
 	call $23B1 ; play sound?
 .next\@
-	ld a,[$C026]
+	ld a, [$C026]
 	cp $E8
-	jr z,.next\@
-	ld a,[$D35B]
-	ld [$C0EE],a
+	jr z, .next\@
+	ld a, [$D35B]
+	ld [$C0EE], a
 	call $23B1
 	call GBFadeIn2
-	ld hl,MomHealText2
+	ld hl, MomHealText2
 	jp PrintText
 
 MomHealText1:
@@ -50794,7 +50811,7 @@ _UnnamedText_455ec: ; 0x82418
 	db "the LIFT KEY!", $57
 ; 0x82418 + 32 bytes
 
-UnnamedText_82438: ; 0x82438
+_UnnamedText_4578b: ; 0x82438
 	db $0, "It appears to", $4f
 	db "need a key.@@"
 ; 0xa82454
@@ -54801,7 +54818,7 @@ _UnnamedText_49847: ; 0x8cdc6
 	db "path over water!", $57
 ; 0x8cdc6 + 60 bytes
 
-_UnnamedText_1e62b: ; 0x8ce02
+_Route16HouseText3: ; 0x8ce02
 	db $0, "Oh, you found my", $4f
 	db "secret retreat!", $51
 	db "Please don't tell", $4f
@@ -54810,12 +54827,12 @@ _UnnamedText_1e62b: ; 0x8ce02
 	db "to you with this!", $58
 ; 0x8ce02 + 100 bytes
 
-ReceivedHM02Text: ; 0x8ce66
+_ReceivedHM02Text: ; 0x8ce66
 	db $0, $52, " received", $4f
 	db "HM02!@@"
 ; 0x8ce66 + 19 bytes
 
-_UnnamedText_1e636: ; 0x8ce79
+_HM02ExplanationText: ; 0x8ce79
 	db $0, "HM02 is FLY.", $4f
 	db "It will take you", $55
 	db "back to any town.", $51
@@ -54823,7 +54840,7 @@ _UnnamedText_1e636: ; 0x8ce79
 	db "use!", $57
 ; 0x8ce79 + 69 bytes
 
-_UnnamedText_1e63b: ; 0x8cebe
+_HM02NoRoomText: ; 0x8cebe
 	db $0, "You don't have any", $4f
 	db "room for this.", $57
 ; 0x8cebe + 34 bytes
@@ -54861,13 +54878,13 @@ _UnnamedText_4999f: ; 0x8cf83
 	db "swimming!", $57
 ; 0x8cf83 + 56 bytes
 
-UnknownText_8cfbb: ; 0x8cfbb
+_UnnamedText_1e704: ; 0x8cfbb
 	db $0, "Only truly skilled", $4f
 	db "trainers are", $55
 	db "allowed through.", $51
 	db "You don't have the", $4f
 	db "BOULDERBADGE yet!@@"
-; 0x8cfbb + 87 bytes
+; 0x8d012
 
 _UnnamedText_1e715: ; 0x8d012
 	db $0, $51
@@ -54876,7 +54893,7 @@ _UnnamedText_1e715: ; 0x8d012
 	db "let you pass.", $57
 ; 0x8d012 + 44 bytes
 
-UnknownText_8d03e: ; 0x8d03e
+_UnnamedText_1e71a: ; 0x8d03e
 	db $0, "Oh! That is the", $4f
 	db "BOULDERBADGE!", $55
 	db "Go right ahead!@@"
@@ -54969,7 +54986,7 @@ _UnnamedText_51910: ; 0x8d23c
 	db "here.", $57
 ; 0x8d23c + 43 bytes
 
-UnknownText_8d267: ; 0x8d267
+_UnnamedText_1e865: ; 0x8d267
 	db $0, "Hiya! I'm a", $4f
 	db "#MON...", $55
 	db "...No I'm not!", $51
@@ -54987,7 +55004,7 @@ UnknownText_8d267: ; 0x8d267
 	db "Help me out here!", $57
 ; 0x8d267 + 222 bytes
 
-UnknownText_8d345: ; 0x8d345
+_UnnamedText_1e86a: ; 0x8d345
 	db $0, "When I'm in the", $4f
 	db "TELEPORTER, go to", $55
 	db "my PC and run the", $55
@@ -54995,7 +55012,7 @@ UnknownText_8d345: ; 0x8d345
 	db "System!", $57
 ; 0x8d345 + 76 bytes
 
-UnknownText_8d391: ; 0x8d391
+_UnnamedText_1e86f: ; 0x8d391
 	db $0, "No!? Come on, you", $4f
 	db "gotta help a guy", $55
 	db "in deep trouble!", $51
@@ -55004,7 +55021,7 @@ UnknownText_8d391: ; 0x8d391
 	db "OK? All right!", $58
 ; 0x8d391 + 100 bytes
 
-_UnnamedText_1e8ba: ; 0x8d3f5
+_BillThankYouText: ; 0x8d3f5
 	db $0, "BILL: Yeehah!", $4f
 	db "Thanks, bud! I", $55
 	db "owe you one!", $51
@@ -55018,17 +55035,14 @@ _UnnamedText_1e8ba: ; 0x8d3f5
 	db "maybe this'll do.", $58
 ; 0x8d3f5 + 164 bytes
 
-UnknownText_8d499: ; 0x8d499
+_SSTicketReceivedText: ; 0x8d499
 	db $0, $52, " received", $4f
 	db "an @"
-; 0x8d499 + 16 bytes
-
-UnknownText_8d4a9: ; 0x8d4a9
 	TX_RAM $cf4b
 	db $0, "!@@"
-; 0x8d4a9 + 7 bytes
+; 0x8d4b0
 
-_UnnamedText_1e8c6: ; 0x8d4b0
+_SSTicketNoRoomText: ; 0x8d4b0
 	db $0, "You've got too", $4f
 	db "much stuff, bud!", $57
 ; 0x8d4b0 + 32 bytes
@@ -62965,7 +62979,7 @@ _UnnamedText_1de75: ; 0xa24fe
 	db "You wanted this!", $58
 ; 0xa24fe + 44 bytes
 
-UnnamedText_a252a: ; 0xa252a
+_UnnamedText_1de7a: ; 0xa252a
 	db $0, $52, " received", $4f
 	db "@"
 ; 0xa2537
