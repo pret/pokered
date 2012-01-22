@@ -10107,7 +10107,7 @@ PalletTownText1: ; 4F96 0x18f96
 	ld hl,OakWalksUpText
 .done\@
 	call PrintText
-	jp $24D7
+	jp TextScriptEnd
 
 OakAppearsText:
 	TX_FAR _OakAppearsText
@@ -10121,7 +10121,7 @@ OakAppearsText:
 	call Predef ; display ! over head
 	ld a,4
 	ld [$D528],a
-	jp $24D7
+	jp TextScriptEnd
 
 OakWalksUpText:
 	TX_FAR _OakWalksUpText
@@ -11503,7 +11503,7 @@ BluesHouseText1: ; 5B5D 0x19B5D
 	ld hl,DaisyBagFullText
 	call PrintText
 .done\@
-	jp $24D7
+	jp TextScriptEnd
 
 DaisyInitialText:
 	TX_FAR _DaisyInitialText
@@ -26758,7 +26758,7 @@ RedsHouse1FText1: ; Mom
 .heal\@
 	call MomHealPokemon
 .done\@
-	jp $24D7
+	jp TextScriptEnd
 
 MomWakeUpText:
 	TX_FAR _MomWakeUpText
@@ -26801,7 +26801,7 @@ RedsHouse1FText2: ; TV
 	ld hl,StandByMeText
 .done\@
 	call PrintText
-	jp $24D7
+	jp TextScriptEnd
 
 StandByMeText:
 	TX_FAR _StandByMeText
