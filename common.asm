@@ -13589,7 +13589,7 @@ OaksLabText5: ; 0x1d248
 	bit 5, a
 	jr z, .asm_b28b0 ; 0x1d264
 .asm_50e81 ; 0x1d266
-	ld hl, $531d
+	ld hl, UnnamedText_1d31d
 	call PrintText
 	ld a, $1
 	ld [$cc3c], a
@@ -13611,29 +13611,29 @@ OaksLabText5: ; 0x1d248
 	ld a, [$d72e]
 	bit 3, a
 	jr nz, .asm_4a5e0 ; 0x1d297
-	ld hl, $52f0
+	ld hl, UnnamedText_1d2f0
 	call PrintText
 	jr .asm_0f042 ; 0x1d29f
 .asm_4a5e0 ; 0x1d2a1
-	ld hl, $52f5
+	ld hl, UnnamedText_1d2f5
 	call PrintText
 	jr .asm_0f042 ; 0x1d2a7
 .asm_76269 ; 0x1d2a9
-	ld b,OAKS_PARCEL
+	ld b, OAKS_PARCEL
 	call $3493
 	jr nz, .asm_a8fcf ; 0x1d2ae
-	ld hl, $52fa
+	ld hl, UnnamedText_1d2fa
 	call PrintText
 	jr .asm_0f042 ; 0x1d2b6
 .asm_a8fcf ; 0x1d2b8
-	ld hl, $52ff
+	ld hl, OaksLabDeliverParcelText
 	call PrintText
 	call $500a
 	ld a, $f
 	ld [W_OAKSLABCURSCRIPT], a
 	jr .asm_0f042 ; 0x1d2c6
 .asm_333a2 ; 0x1d2c8
-	ld hl, $5309
+	ld hl, OaksLabAroundWorldText
 	call PrintText
 	jr .asm_0f042 ; 0x1d2ce
 .asm_f1adc ; 0x1d2d0
@@ -13643,11 +13643,11 @@ OaksLabText5: ; 0x1d248
 	jr nz, .asm_17c30 ; 0x1d2d7
 	ld bc, (POKE_BALL << 8) | 5
 	call GiveItem
-	ld hl, $530e
+	ld hl, OaksLabGivePokeballsText
 	call PrintText
 	jr .asm_0f042 ; 0x1d2e5
 .asm_17c30 ; 0x1d2e7
-	ld hl, $5318
+	ld hl, OaksLabPleaseVisitText
 	call PrintText
 .asm_0f042 ; 0x1d2ed
 	jp TextScriptEnd
@@ -13656,39 +13656,39 @@ OaksLabText5: ; 0x1d248
 UnnamedText_1d2f0: ; 0x1d2f0
 	TX_FAR _UnnamedText_1d2f0
 	db $50
-; 0x1d2f0 + 5 bytes
+; 0x1d2f5
 
 UnnamedText_1d2f5: ; 0x1d2f5
 	TX_FAR _UnnamedText_1d2f5
 	db $50
-; 0x1d2f5 + 5 bytes
+; 0x1d2fa
 
 UnnamedText_1d2fa: ; 0x1d2fa
 	TX_FAR _UnnamedText_1d2fa
 	db $50
-; 0x1d2fa + 5 bytes
+; 0x1d2ff
 
-INCBIN "baserom.gbc",$1d2ff,$1d304 - $1d2ff
-
-UnnamedText_1d304: ; 0x1d304
-	TX_FAR _UnnamedText_1d304
+OaksLabDeliverParcelText: ; 0x1d2ff
+	TX_FAR _OaksLabDeliverParcelText1 ; 0x94f69
+	db $11
+	TX_FAR _OaksLabDeliverParcelText2
 	db $50
-; 0x1d304 + 5 bytes
+; 0x1d309
 
-UnnamedText_1d309: ; 0x1d309
-	TX_FAR _UnnamedText_1d309
+OaksLabAroundWorldText: ; 0x1d309
+	TX_FAR _OaksLabAroundWorldText
 	db $50
-; 0x1d309 + 5 bytes
+; 0x1d30e
 
-INCBIN "baserom.gbc",$1d30e,$1d313 - $1d30e
-
-UnnamedText_1d313: ; 0x1d313
-	TX_FAR _UnnamedText_1d313
+OaksLabGivePokeballsText: ; 0x1d30e
+	TX_FAR _OaksLabGivePokeballsText1 ; 0x9506d
+	db $11
+	TX_FAR _OaksLabGivePokeballsText2
 	db $50
-; 0x1d313 + 5 bytes
+; 0x1d318
 
-UnnamedText_1d318: ; 0x1d318
-	TX_FAR _UnnamedText_1d318
+OaksLabPleaseVisitText: ; 0x1d318
+	TX_FAR _OaksLabPleaseVisitText
 	db $50
 ; 0x1d318 + 5 bytes
 
@@ -13702,7 +13702,7 @@ OaksLabText33:
 OaksLabText7: ; 0x1d322
 OaksLabText6: ; 0x1d322
 	db $08 ; asm
-	ld hl, $532c
+	ld hl, UnnamedText_1d32c
 	call PrintText
 	jp TextScriptEnd
 
@@ -13719,7 +13719,7 @@ OaksLabText8: ; 0x1d331
 OaksLabText36:
 OaksLabText9: ; 0x1d336
 	db $08 ; asm
-	ld hl, $5340
+	ld hl, UnnamedText_1d340
 	call PrintText
 	jp TextScriptEnd
 
@@ -13730,160 +13730,163 @@ UnnamedText_1d340: ; 0x1d340
 
 OaksLabText17: ; 0x1d345
 	db $8
-	ld hl, $534f
+	ld hl, OaksLabRivalWaitingText
 	call PrintText
 	jp TextScriptEnd
 ; 0x1d34f
 
-UnnamedText_1d34f: ; 0x1d34f
-	TX_FAR _UnnamedText_1d34f
+OaksLabRivalWaitingText: ; 0x1d34f
+	TX_FAR _OaksLabRivalWaitingText
 	db $50
 ; 0x1d34f + 5 bytes
 
 OaksLabText18: ; 0x1d354
 	db $8
-	ld hl, $535e
+	ld hl, OaksLabChooseMonText
 	call PrintText
 	jp TextScriptEnd
 ; 0x1d35e
 
-UnnamedText_1d35e: ; 0x1d35e
-	TX_FAR _UnnamedText_1d35e
+OaksLabChooseMonText: ; 0x1d35e
+	TX_FAR _OaksLabChooseMonText
 	db $50
 ; 0x1d35e + 5 bytes
 
 OaksLabText19: ; 0x1d363
 	db $8
-	ld hl, $536d
+	ld hl, OaksLabRivalInterjectionText
 	call PrintText
 	jp TextScriptEnd
 ; 0x1d36d
 
-UnnamedText_1d36d: ; 0x1d36d
-	TX_FAR _UnnamedText_1d36d
+OaksLabRivalInterjectionText: ; 0x1d36d
+	TX_FAR _OaksLabRivalInterjectionText
 	db $50
 ; 0x1d36d + 5 bytes
 
 OaksLabText20: ; 0x1d372
 	db $8
-	ld hl, $537c
+	ld hl, OaksLabBePatientText
 	call PrintText
 	jp TextScriptEnd
 ; 0x1d37c
 
-UnnamedText_1d37c: ; 0x1d37c
-	TX_FAR _UnnamedText_1d37c
+OaksLabBePatientText: ; 0x1d37c
+	TX_FAR _OaksLabBePatientText
 	db $50
 ; 0x1d37c + 5 bytes
 
 OaksLabText12: ; 0x1d381
+	db $8
+	ld hl, OaksLabLeavingText
+	call PrintText
+	jp TextScriptEnd
+; 0x1d38b
 
-INCBIN "baserom.gbc",$1d381,$5
-
-INCBIN "baserom.gbc",$1d386,$1d38b - $1d386
-
-UnnamedText_1d38b: ; 0x1d38b
-	TX_FAR _UnnamedText_1d38b
+OaksLabLeavingText: ; 0x1d38b
+	TX_FAR _OaksLabLeavingText
 	db $50
 ; 0x1d38b + 5 bytes
 
 OaksLabText13: ; 0x1d390
+	db $8
+	ld hl, OaksLabRivalPickingMonText
+	call PrintText
+	jp TextScriptEnd
+; 0x1d39a
 
-INCBIN "baserom.gbc",$1d390,$5
-
-INCBIN "baserom.gbc",$1d395,$1d39a - $1d395
-
-UnnamedText_1d39a: ; 0x1d39a
-	TX_FAR _UnnamedText_1d39a
+OaksLabRivalPickingMonText: ; 0x1d39a
+	TX_FAR _OaksLabRivalPickingMonText
 	db $50
-; 0x1d39a + 5 bytes
+; 0x1d39f
 
 OaksLabText14: ; 0x1d39f
 	db $8
-	ld hl, $53a9
+	ld hl, OaksLabRivalReceivedMonText
 	call PrintText
 	jp TextScriptEnd
 ; 0x1d3a9
 
-INCBIN "baserom.gbc",$1d3a9,$1d3af - $1d3a9
+OaksLabRivalReceivedMonText: ; 0x1d3a9
+	TX_FAR _OaksLabRivalReceivedMonText ; 0x95461
+	db $11, $50
+; 0x1d3af
 
-OaksLabText15: ; 0x1d3af to 0x1d3b9
+OaksLabText15: ; 0x1d3af
 	db $8
-	ld hl, $53b9
+	ld hl, OaksLabRivalChallengeText
 	call PrintText
 	jp TextScriptEnd
 ; 0x1d3b9
 
-UnnamedText_1d3b9: ; 0x1d3b9
-	TX_FAR _UnnamedText_1d3b9
+OaksLabRivalChallengeText: ; 0x1d3b9
+	TX_FAR _OaksLabRivalChallengeText
 	db $50
-; 0x1d3b9 + 5 bytes
+; 0x1d3be
 
 UnnamedText_1d3be: ; 0x1d3be
 	TX_FAR _UnnamedText_1d3be
 	db $50
-; 0x1d3be + 5 bytes
+; 0x1d3c3
 
 UnnamedText_1d3c3: ; 0x1d3c3
 	TX_FAR _UnnamedText_1d3c3
 	db $50
-; 0x1d3c3 + 5 bytes
+; 0x1d3c8
 
 OaksLabText16: ; 0x1d3c8
 	db $8
-	ld hl, $53d2
+	ld hl, OaksLabRivalToughenUpText
 	call PrintText
 	jp TextScriptEnd
 ; 0x1d3d2
 
-UnnamedText_1d3d2: ; 0x1d3d2
-	TX_FAR _UnnamedText_1d3d2
+OaksLabRivalToughenUpText: ; 0x1d3d2
+	TX_FAR _OaksLabRivalToughenUpText
 	db $50
-; 0x1d3d2 + 5 bytes
+; 0x1d3d7
 
 OaksLabText21: ; 0x1d3d7
-	TX_FAR _UnnamedText_1d3d7
+	TX_FAR _OaksLabText21
 	db $50
-; 0x1d3d7 + 5 bytes
+; 0x1d3dc
 
 OaksLabText22: ; 0x1d3dc
-	TX_FAR _UnnamedText_1d3dc
+	TX_FAR _OaksLabText22
 	db $50
-; 0x1d3dc + 5 bytes
+; 0x1d3e1
 
 OaksLabText23: ; 0x1d3e1
-	TX_FAR _UnnamedText_1d3e1
+	TX_FAR _OaksLabText23
 	db $50
-; 0x1d3e1 + 5 bytes
+; 0x1d3e6
 
 OaksLabText24: ; 0x1d3e6
-
-UnnamedText_1d3e6: ; 0x1d3e6
-	TX_FAR _UnnamedText_1d3e6
+	TX_FAR _OaksLabText24
 	db $50
-; 0x1d3e6 + 5 bytes
+; 0x1d3eb
 
 OaksLabText25: ; 0x1d3eb
-
-INCBIN "baserom.gbc",$1d3eb,$4
-	db $11
-	db $50
+	TX_FAR _OaksLabText25
+	db $11, $50
+; 0x1d3f1
 
 OaksLabText26: ; 0x1d3f1
-	TX_FAR _UnnamedText_1d3f1
+	TX_FAR _OaksLabText26
 	db $50
-; 0x1d3f1 + 5 bytes
+; 0x1d3f6
 
 OaksLabText27: ; 0x1d3f6
 	TX_FAR _OaksLabText27
 	db $50
+; 0x1d3fb
 
 OaksLabText38:
 OaksLabText37:
 OaksLabText11:
 OaksLabText10: ; 0x1d3fb
 	db $08 ; asm
-	ld hl, $5405
+	ld hl, UnnamedText_1d405
 	call PrintText
 	jp TextScriptEnd
 
@@ -58317,7 +58320,7 @@ _UnnamedText_1d2fa: ; 0x94f36
 	db "it fight!", $57
 ; 0x94f36 + 51 bytes
 
-UnnamedText_94f69: ; 0x94f69
+_OaksLabDeliverParcelText1: ; 0x94f69
 	db $0, "OAK: Oh, ", $52, "!", $51
 	db "How is my old", $4f
 	db "#MON?", $51
@@ -58332,7 +58335,7 @@ UnnamedText_94f69: ; 0x94f69
 	db "OAK's PARCEL.@@"
 ; 0x94f69 + 166 bytes
 
-_UnnamedText_1d304: ; 0x9500f
+_OaksLabDeliverParcelText2: ; 0x9500f
 	db $0, $51
 	db "Ah! This is the", $4f
 	db "custom # BALL", $55
@@ -58340,13 +58343,13 @@ _UnnamedText_1d304: ; 0x9500f
 	db "Thank you!", $57
 ; 0x9500f + 54 bytes
 
-_UnnamedText_1d309: ; 0x95045
+_OaksLabAroundWorldText: ; 0x95045
 	db $0, "#MON around the", $4f
 	db "world wait for", $55
 	db "you, ", $52, "!", $57
 ; 0x95045 + 40 bytes
 
-UnnamedText_9506d: ; 0x9506d
+_OaksLabGivePokeballsText1: ; 0x9506d
 	db $0, "OAK: You can't get", $4f
 	db "detailed data on", $55
 	db "#MON by just", $55
@@ -58359,7 +58362,7 @@ UnnamedText_9506d: ; 0x9506d
 	db "# BALLs!@@"
 ; 0x9506d + 133 bytes
 
-_UnnamedText_1d313: ; 0x950f2
+_OaksLabGivePokeballsText2: ; 0x950f2
 	db $0, $51
 	db "When a wild", $4f
 	db "#MON appears,", $55
@@ -58374,7 +58377,7 @@ _UnnamedText_1d313: ; 0x950f2
 	db "have to be lucky!", $57
 ; 0x950f2 + 172 bytes
 
-_UnnamedText_1d318: ; 0x9519e
+_OaksLabPleaseVisitText: ; 0x9519e
 	db $0, "OAK: Come see me", $4f
 	db "sometimes.", $51
 	db "I want to know how", $4f
@@ -58408,13 +58411,13 @@ _UnnamedText_1d340: ; 0x9526b
 	db "in high regard!", $57
 ; 0x9526b + 80 bytes
 
-_UnnamedText_1d34f: ; 0x952bb
+_OaksLabRivalWaitingText: ; 0x952bb
 	db $0, $53, ": Gramps!", $4f
 	db "I'm fed up with", $55
 	db "waiting!", $57
 ; 0x952bb + 36 bytes
 
-_UnnamedText_1d35e: ; 0x952df
+_OaksLabChooseMonText: ; 0x952df
 	db $0, "OAK: ", $53, "?", $4f
 	db "Let me think...", $51
 	db "Oh, that's right,", $4f
@@ -58435,39 +58438,39 @@ _UnnamedText_1d35e: ; 0x952df
 	db "one! Choose!", $57
 ; 0x952df + 253 bytes
 
-_UnnamedText_1d36d: ; 0x953dc
+_OaksLabRivalInterjectionText: ; 0x953dc
 	db $0, $53, ": Hey!", $4f
 	db "Gramps! What", $55
 	db "about me?", $57
 ; 0x953dc + 32 bytes
 
-_UnnamedText_1d37c: ; 0x953fc
+_OaksLabBePatientText: ; 0x953fc
 	db $0, "OAK: Be patient!", $4f
 	db $53, ", you can", $55
 	db "have one too!", $57
 ; 0x953fc + 43 bytes
 
-_UnnamedText_1d38b: ; 0x95427
+_OaksLabLeavingText: ; 0x95427
 	db $0, "OAK: Hey! Don't go", $4f
 	db "away yet!", $57
 ; 0x95427 + 29 bytes
 
-_UnnamedText_1d39a: ; 0x95444
+_OaksLabRivalPickingMonText: ; 0x95444
 	db $0, $53, ": I'll take", $4f
 	db "this one, then!", $57
 ; 0x95444 + 29 bytes
 
-UnnamedText_95461: ; 0x95461
+_OaksLabRivalReceivedMonText: ; 0x95461
 	db $0, $53, " received", $4f
 	db "a @"
-; 0x95461 + 15 bytes
+; 0x95470
 
 UnnamedText_95470: ; 0x95470
 	TX_RAM $cd6d
 	db $0, "!@@"
 ; 0x95470 + 7 bytes
 
-_UnnamedText_1d3b9: ; 0x95477
+_OaksLabRivalChallengeText: ; 0x95477
 	db $0, $53, ": Wait", $4f
 	db $52, "!", $55
 	db "Let's check out", $55
@@ -58488,7 +58491,7 @@ _UnnamedText_1d3c3: ; 0x954e4
 	db "I great or what?", $58
 ; 0x954e4 + 30 bytes
 
-_UnnamedText_1d3d2: ; 0x95502
+_OaksLabRivalToughenUpText: ; 0x95502
 	db $0, $53, ": Okay!", $4f
 	db "I'll make my", $55
 	db "#MON fight to", $55
@@ -58497,22 +58500,22 @@ _UnnamedText_1d3d2: ; 0x95502
 	db "Smell you later!", $57
 ; 0x95502 + 79 bytes
 
-_UnnamedText_1d3d7: ; 0x95551
+_OaksLabText21: ; 0x95551
 	db $0, $53, ": Gramps!", $57
 ; 0x95551 + 12 bytes
 
-_UnnamedText_1d3dc: ; 0x9555d
+_OaksLabText22: ; 0x9555d
 	db $0, $53, ": What did", $4f
 	db "you call me for?", $57
 ; 0x9555d + 30 bytes
 
-_UnnamedText_1d3e1: ; 0x9557b
+_OaksLabText23: ; 0x9557b
 	db $0, "OAK: Oh right! I", $4f
 	db "have a request", $55
 	db "of you two.", $57
 ; 0x9557b + 45 bytes
 
-_UnnamedText_1d3e6: ; 0x955a8
+_OaksLabText24: ; 0x955a8
 	db $0, "On the desk there", $4f
 	db "is my invention,", $55
 	db "#DEX!", $51
@@ -58524,7 +58527,7 @@ _UnnamedText_1d3e6: ; 0x955a8
 	db "encyclopedia!", $57
 ; 0x955a8 + 130 bytes
 
-_UnnamedText_9562a: ; 0x9562a
+_OaksLabText25: ; 0x9562a
 	db $0, "OAK: ", $52, " and", $4f
 	db $53, "! Take", $55
 	db "these with you!", $51
@@ -58532,7 +58535,7 @@ _UnnamedText_9562a: ; 0x9562a
 	db "#DEX from OAK!@@"
 ; 0x9562a + 58 bytes
 
-_UnnamedText_1d3f1: ; 0x95664
+_OaksLabText26: ; 0x95664
 	db $0, "To make a complete", $4f
 	db "guide on all the", $55
 	db "#MON in the", $55
