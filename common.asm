@@ -13369,20 +13369,20 @@ OaksLabText1: ; 0x1d0ce
 	db $08 ; asm
 	ld a, [$d74b]
 	bit 0, a
-	jr nz, .asm_6a7a2 ; 0x1d0d4
+	jr nz, .asm_1d0de ; 0x1d0d4
 	ld hl, OaksLabGaryText1
 	call PrintText
-	jr .asm_ff2ed ; 0x1d0dc
-.asm_6a7a2 ; 0x1d0de
+	jr .asm_1d0f0 ; 0x1d0dc
+.asm_1d0de ; 0x1d0de
 	bit 2, a
-	jr nz, .asm_56780 ; 0x1d0e0
+	jr nz, .asm_1d0ea ; 0x1d0e0
 	ld hl, OaksLabText40
 	call PrintText
-	jr .asm_ff2ed ; 0x1d0e8
-.asm_56780 ; 0x1d0ea
+	jr .asm_1d0f0 ; 0x1d0e8
+.asm_1d0ea ; 0x1d0ea
 	ld hl, OaksLabText41
 	call PrintText
-.asm_ff2ed ; 0x1d0f0
+.asm_1d0f0 ; 0x1d0f0
 	jp $24d7
 
 OaksLabGaryText1: ; 0x1d0f3
@@ -13409,7 +13409,7 @@ OaksLabText2: ; 0x1d102
 	ld [$cd3e], a
 	ld a, $b0
 	ld b, $2
-	jr asm_5e6bb ; 0x1d111 $20
+	jr asm_1d133 ; 0x1d111 $20
 
 OaksLabText30:
 OaksLabText3: ; 0x1d113
@@ -13420,7 +13420,7 @@ OaksLabText3: ; 0x1d113
 	ld [$cd3e], a
 	ld a, $b1
 	ld b, $3
-	jr asm_5e6bb ; 0x1d122 $f
+	jr asm_1d133 ; 0x1d122 $f
 
 OaksLabText31:
 OaksLabText4: ; 0x1d124
@@ -13432,7 +13432,7 @@ OaksLabText4: ; 0x1d124
 	ld a, $99
 	ld b, $4
 
-asm_5e6bb: ; 0x1d133
+asm_1d133: ; 0x1d133
 	ld [$cf91], a
 	ld [$d11e], a
 	ld a, b
@@ -13441,7 +13441,7 @@ asm_5e6bb: ; 0x1d133
 	bit 2, a
 	jp nz, $522d
 	bit 1, a
-	jr nz, asm_9eaa4 ; 0x1d147 $e
+	jr nz, asm_1d157 ; 0x1d147 $e
 	ld hl, OaksLabText39
 	call PrintText
 	jp $24d7
@@ -13451,7 +13451,7 @@ OaksLabText39:
 	TX_FAR _OaksLabText39
 	db $50
 
-asm_9eaa4: ; 0x1d157
+asm_1d157: ; 0x1d157
 	ld a, $5
 	ld [$ff00+$8c], a
 	ld a, $9
@@ -13476,66 +13476,68 @@ asm_9eaa4: ; 0x1d157
 	call $3739
 	ld a, [$cf13]
 	cp $2
-	jr z, asm_f6e3a ; 0x1d18d $6
+	jr z, OaksLabLookAtCharmander
 	cp $3
-	jr z, asm_2391d ; 0x1d191 $c
-	jr asm_ddec1 ; 0x1d193 $14
-asm_f6e3a: ; 0x1d195
-	ld hl, $519a
-	jr asm_b5ddf ; 0x1d198 $19
-	rla ; probably a TX_FAR
-	ld b, $4e
-	dec h
-	ld d, b
-asm_2391d: ; 0x1d19f
-	ld hl, $51a4
-	jr asm_b5ddf ; 0x1d1a2 $f
-	rla ; probably a TX_FAR
-	cpl
-	ld c, [hl]
-	dec h
-	ld d, b
-asm_ddec1: ; 0x1d1a9
-	ld hl, $51ae
-	jr asm_b5ddf ; 0x1d1ac $5
+	jr z, OaksLabLookAtSquirtle
+	jr OaksLabLookAtBulbasaur
 
-UnnamedText_1d1ae: ; 0x1d1ae
-	TX_FAR _UnnamedText_1d1ae
+OaksLabLookAtCharmander ; 0x1d195
+	ld hl, OaksLabCharmanderText
+	jr OaksLabMonChoiceMenu
+OaksLabCharmanderText: ; 0x1d19a
+	TX_FAR _OaksLabCharmanderText ; 0x94e06
 	db $50
+; 0x1d19f
 
-asm_b5ddf: ; 0x1d1b3
+OaksLabLookAtSquirtle: ; 0x1d19f
+	ld hl, OaksLabSquirtleText
+	jr OaksLabMonChoiceMenu
+OaksLabSquirtleText: ; 0x1d1a4
+	TX_FAR _OaksLabSquirtleText ; 0x94e2f
+	db $50
+; 0x1d1a9
+
+OaksLabLookAtBulbasaur: ; 0x1d1a9
+	ld hl, OaksLabBulbasaurText
+	jr OaksLabMonChoiceMenu
+OaksLabBulbasaurText: ; 0x1d1ae
+	TX_FAR _OaksLabBulbasaurText ; 0x94e57
+	db $50
+; 0x1d1b3
+
+OaksLabMonChoiceMenu: ; 0x1d1b3
 	call PrintText
 	ld a, $1
 	ld [$cc3c], a
-	call $35ec
+	call $35ec ; yes/no menu
 	ld a, [$cc26]
 	and a
-	jr nz, asm_6ccd7 ; 0x1d1c2 $5b
+	jr nz, OaksLabMonChoiceEnd
 	ld a, [$cf91]
 	ld [$d717], a
 	ld [$d11e], a
 	call GetMonName
 	ld a, [$cf13]
 	cp $2
-	jr nz, asm_5b538 ; 0x1d1d5 $4
+	jr nz, asm_1d1db ; 0x1d1d5 $4
 	ld a, $2b
-	jr asm_03e85 ; 0x1d1d9 $a
-asm_5b538: ; 0x1d1db
+	jr asm_1d1e5 ; 0x1d1d9 $a
+asm_1d1db: ; 0x1d1db
 	cp $3
-	jr nz, asm_f8b3f ; 0x1d1dd $4
+	jr nz, asm_1d1e3 ; 0x1d1dd $4
 	ld a, $2c
-	jr asm_03e85 ; 0x1d1e1 $2
-asm_f8b3f: ; 0x1d1e3
+	jr asm_1d1e5 ; 0x1d1e1 $2
+asm_1d1e3: ; 0x1d1e3
 	ld a, $2d
-asm_03e85: ; 0x1d1e5
+asm_1d1e5: ; 0x1d1e5
 	ld [$cc4d], a
 	ld a, $11
 	call Predef
 	ld a, $1
 	ld [$cc3c], a
-	ld hl, $5222
+	ld hl, OaksLabMonEnergeticText
 	call PrintText
-	ld hl, $5227
+	ld hl, OaksLabReceivedMonText
 	call PrintText
 	xor a
 	ld [$cc49], a
@@ -13550,21 +13552,26 @@ asm_03e85: ; 0x1d1e5
 	ld [$cd6b], a
 	ld a, $8
 	ld [W_OAKSLABCURSCRIPT], a
-asm_6ccd7: ; 0x1d21f
-	jp $24d7
+OaksLabMonChoiceEnd: ; 0x1d21f
+	jp TextScriptEnd
 ; 0x1d222
 
-UnnamedText_1d222: ; 0x1d222
-	TX_FAR _UnnamedText_1d222
+OaksLabMonEnergeticText: ; 0x1d222
+	TX_FAR _OaksLabMonEnergeticText
 	db $50
 ; 0x1d222 + 5 bytes
 
-INCBIN "baserom.gbc",$1d227,$1d243 - $1d227
+OaksLabReceivedMonText: ; 0x1d227
+	TX_FAR _OaksLabReceivedMonText ; 0x94ea0
+	db $11, $50
+; 0x1d22d
 
-UnnamedText_1d243: ; 0x1d243
-	TX_FAR _UnnamedText_1d243
+INCBIN "baserom.gbc",$1d22d,$1d243 - $1d22d
+
+OaksLabLastMonText: ; 0x1d243
+	TX_FAR _OaksLabLastMonText
 	db $50
-; 0x1d243 + 5 bytes
+; 0x1d248
 
 OaksLabText32:
 OaksLabText5: ; 0x1d248
@@ -58253,57 +58260,55 @@ _OaksLabText39: ; 0x94ddf
 	db "Those are #", $4f
 	db "BALLs. They", $55
 	db "contain #MON!", $57
+; 0x94e06
 
-UnnamedText_94e06: ; 0x94e06
+_OaksLabCharmanderText: ; 0x94e06
 	db $0, "So! You want the", $4f
 	db "fire #MON,", $55
 	db "CHARMANDER?", $57
-; 0x94e06 + 41 bytes
+; 0x94e2f
 
-UnnamedText_94e2f: ; 0x94e2f
+_OaksLabSquirtleText: ; 0x94e2f
 	db $0, "So! You want the", $4f
 	db "water #MON,", $55
 	db "SQUIRTLE?", $57
 ; 0x94e57
 
-_UnnamedText_1d1ae: ; 0x94e57
+_OaksLabBulbasaurText: ; 0x94e57
 	db $0, "So! You want the", $4f
 	db "plant #MON,", $55
 	db "BULBASAUR?", $57
-; 0x94e57 + 41 bytes
+; 0x94e80
 
-_UnnamedText_1d222: ; 0x94e80
+_OaksLabMonEnergeticText: ; 0x94e80
 	db $0, "This #MON is", $4f
 	db "really energetic!", $58
-; 0x94e80 + 32 bytes
+; 0x94ea0
 
-UnnamedText_94ea0: ; 0x94ea0
+_OaksLabReceivedMonText: ; 0x94ea0
 	db $0, $52, " received", $4f
 	db "a @"
-; 0x94ea0 + 15 bytes
-
-UnnamedText_94eaf: ; 0x94eaf
 	TX_RAM $cd6d
 	db $0, "!@@"
-; 0x94eaf + 7 bytes
+; 0x94eb6
 
-_UnnamedText_1d243: ; 0x94eb6
+_OaksLabLastMonText: ; 0x94eb6
 	db $0, "That's PROF.OAK's", $4f
 	db "last #MON!", $57
-; 0x94eb6 + 28 bytes
+; 0x94ed2
 
 _UnnamedText_1d2f0: ; 0x94ed2
 	db $0, "OAK: Now, ", $52, ",", $4f
 	db "which #MON do", $55
 	db "you want?", $57
-; 0x94ed2 + 38 bytes
+; 0x94ef8
 
 _UnnamedText_1d2f5: ; 0x94ef8
 	db $0, "OAK: If a wild", $4f
 	db "#MON appears,", $55
 	db "your #MON can", $55
 	db "fight against it!", $57
-; 0x94ef8 + 62 bytes
+; 0x94f36
 
 _UnnamedText_1d2fa: ; 0x94f36
 	db $0, "OAK: ", $52, ",", $4f
