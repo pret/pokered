@@ -22049,7 +22049,65 @@ UnnamedText_3ddca: ; 0x3ddca
 	db $50
 ; 0x3ddca + 5 bytes
 
-INCBIN "baserom.gbc",$3ddcf,$3e2ac - $3ddcf
+INCBIN "baserom.gbc",$3ddcf,$3e04f - $3ddcf
+
+; azure heights claims "the fastest pokémon (who are,not coincidentally,
+; among the most popular) tend to CH about 20 to 25% of the time."
+CriticalHitProbability: ; 0x3e04f
+	ld a, [hld]                  ; read base power from RAM
+	and a
+	ret z                        ; do nothing if zero
+	dec hl
+	ld c, [hl]                   ; read move id
+	ld a, [de]
+	bit 2, a
+	jr nz, .asm_3e061
+	sla b
+	jr nc, .asm_3e063
+	ld b, $ff
+	jr .asm_3e063
+.asm_3e061
+	srl b
+.asm_3e063
+	ld hl, HighCriticalMoves      ; table of high critical hit moves
+.Loop
+	ld a, [hli]                  ; read move from move table
+	cp c                         ; does it match the move about to be used?
+	jr z, .HighCritical          ; if so, the move about to be used is a high critical hit ratio move 
+	inc a                        ; move on to the next move, FF terminates loop
+	jr nz, .Loop                 ; check the next move in HighCriticalMoves
+	srl b                        ; /2 for regular move (effective 1/512?)
+	jr .SkipHighCritical         ; continue as a normal move
+.HighCritical
+	sla b                        ; *2 for high critical hit moves
+	jr nc, .asm_3e077
+	ld b, $ff                    ; set to FF (max) on overflow
+.asm_3e077
+	sla b                        ; *4 for high critical move (effective 1/64?)
+	jr nc, .SkipHighCritical
+	ld b, $ff
+.SkipHighCritical
+	call $6e9b                   ; probably generates a random value, in "a"
+	rlc a
+	rlc a
+	rlc a
+	cp b                         ; check a against $ff
+	ret nc                       ; no critical hit if no borrow
+	ld a, $1
+	ld [$d05e], a                ; set critical hit flag
+	ret
+; 0x3e08e
+
+; high critical hit moves
+HighCriticalMoves: ; 0x3e08e
+	db KARATE_CHOP
+	db RAZOR_LEAF
+	db CRABHAMMER
+	db SLASH
+	db $FF
+; 0x3e093
+
+INCBIN "baserom.gbc",$3e093,$3e2ac - $3e093
 
 UnnamedText_3e2ac: ; 0x3e2ac
 	TX_FAR _UnnamedText_3e2ac
