@@ -8699,20 +8699,20 @@ UnnamedText_e247: ; 0xe247
 OldRodCode:
 	call $62b4 ; probably sets carry if not in battle or not by water
 	jp c, ItemUseNotTime
-	ld bc, $0585
+	ld bc, (5 << 8) | MAGIKARP
 	ld a, $1 ; set bite
-	jr Next628E ; 0xe257 $34
+	jr RodResponse ; 0xe257 $34
 
 GoodRodCode: ; 6259 0xe259
 	call $62B4 ; probably sets carry if not in battle or not by water
 	jp c,ItemUseNotTime
-Next625F:
+.RandomLoop
 	call GenRandom
 	srl a
-	jr c,Next6278
+	jr c, .SetBite
 	and %11
 	cp 2
-	jr nc,Next625F
+	jr nc, .RandomLoop
 	; choose which monster appears
 	ld hl,GoodRodMons
 	add a,a
@@ -8723,11 +8723,11 @@ Next625F:
 	inc hl
 	ld c,[hl]
 	and a
-Next6278:
+.SetBite
 	ld a,0
 	rla
 	xor 1
-	jr Next628E
+	jr RodResponse
 
 GoodRodMons:
 	db 10,GOLDEEN
@@ -8738,7 +8738,7 @@ SuperRodCode: ; $6283 0xe283
 	jp c, ItemUseNotTime
 	call ReadSuperRodData ; 0xe8ea
 	ld a, e
-Next628E:
+RodResponse:
 	ld [$CD3D], a
 
 	dec a ; is there a bite?
