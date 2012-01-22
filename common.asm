@@ -8226,7 +8226,7 @@ ItemUsePtrTable:	;$D5E1
 	dw $6140            ; POKE_FLUTE
 	dw $6476            ; LIFT_KEY
 	dw $6476            ; EXP__ALL
-	dw $624C            ; OLD_ROD
+	dw OldRodCode       ; OLD_ROD
 	dw GoodRodCode 		; GOOD_ROD $6259
 	dw SuperRodCode     ; SUPER_ROD $6283
 	dw $6317            ; PP_UP (see other?)
@@ -8696,7 +8696,12 @@ UnnamedText_e247: ; 0xe247
 	db $50
 ; 0xe247 + 5 bytes
 
-INCBIN "baserom.gbc",$e24c,$d
+OldRodCode:
+	call $62b4 ; probably sets carry if not in battle or not by water
+	jp c, ItemUseNotTime
+	ld bc, $0585
+	ld a, $1 ; set bite
+	jr Next628E ; 0xe257 $34
 
 GoodRodCode: ; 6259 0xe259
 	call $62B4 ; probably sets carry if not in battle or not by water
@@ -10273,7 +10278,7 @@ ViridianCityText6: ; 0x19196
 	ld hl, $51ca
 	call PrintText
 	ld bc,(TM_42 << 8) | 1
-	call GIveItem
+	call GiveItem
 	jr nc, .asm_b655e ; 0x191aa
 	ld hl, $51cf
 	call PrintText
