@@ -2,6 +2,8 @@
 #author: Bryan Bishop <kanzure@gmail.com>
 #date: 2012-01-09
 import extract_maps
+import os
+import json
 from copy import copy, deepcopy
 from pretty_map_headers import random_hash, map_name_cleaner
 from ctypes import c_int8
@@ -552,24 +554,32 @@ relative_unconditional_jumps = [0xc3, 0x18]
 #TODO: replace call and a pointer with call and a label
 call_commands = [0xdc, 0xd4, 0xc4, 0xcc, 0xcd]
 
-asm_commands = {
-    "3c49": "PrintText",
-    "35d6": "Bankswitch",
-    "3927": "AddPokemonToParty",
-    "3e48": "GivePokemon",
-    "3dd7": "Delay3",
-    "3e2e": "GiveItem",
-    "2f9e": "GetMonName",
-    "3e6d": "Predef", #library of pre-defined asm routines
-    "00b5": "CopyData",
-    "2ff3": "GetMachineName",
-    "24d7": "TextScriptEnd",
-    "3e5c": "GenRandom", #bank 4
-    "6581": "ItemUseNotTime",
-    "3a87": "AddNTimes",
-    "3dab": "IsInArray", #bank 3
-    "039e": "HandleMidJump",
-}
+
+all_labels = {}
+
+def load_labels(filename="labels.json"):
+    global all_labels
+    if os.path.exists(filename):
+        all_labels = json.loads(open(filename, "r").read())
+    else:
+        print "You must run analyze_incbins.scan_for_predefined_labels() to create \"labels.json\"."
+load_labels()
+
+def find_label(local_address, bank_id=0):
+    global all_labels
+
+    #turn local_address into a string
+    if type(local_address) == str:
+        if "0x" in local_address: local_address = local_address.replace("0x", "$")
+        elif not "$" in local_address: local_address = "$" + local_address
+    if type(local_address) == int:
+        local_address = "$%.2x" % (local_address)
+    local_address = local_address.upper()
+
+    for label_entry in all_labels:
+        if label_entry["local_pointer"].upper() == local_address:
+            return label_entry["label"]
+    return None
 
 def random_asm_label():
     return ".ASM_" + random_hash()
@@ -586,6 +596,10 @@ def output_bank_opcodes(original_offset, max_byte_count=0x4000):
     #i = offset
     #ad = end_address
     #a, oa = current_byte_number
+
+    bank_id = 0
+    if original_offset > 0x4000:
+        bank_id = original_offset / 0x4000
 
     last_hl_address = None #for when we're scanning the main map script
     last_a_address = None
@@ -726,8 +740,9 @@ def output_bank_opcodes(original_offset, max_byte_count=0x4000):
 
                     insertion = "$%.4x" % (number)
                     if maybe_byte in call_commands or current_byte in relative_unconditional_jumps or current_byte in relative_jumps:
-                        if insertion[1:] in asm_commands:
-                            insertion = asm_commands[insertion[1:]]
+                        result = find_label(insertion[1:], bank_id)
+                        if result != None:
+                            insertion = result
 
                     opstr = opstr[:opstr.find("?")].lower() + insertion + opstr[opstr.find("?")+1:].lower()
                     output += spacing + opstr #+ " ; " + hex(offset)

@@ -18,6 +18,9 @@ syntax: glob
 #swap files for vim
 .*.swp
 
+#no data from extras/
+extras/*.json
+
 #for any of the poor souls with save game files in their working directory
 baserom.sgm
 baserom.sav
@@ -27,5 +30,3 @@ pokered.sav
 #for vim configuration
 #url: http://www.vim.org/scripts/script.php?script_id=441
 .lvimrc
-
-*.exe
