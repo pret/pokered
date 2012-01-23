@@ -5229,7 +5229,101 @@ UnnamedText_7073: ; 0x7073
 	db $50
 ; 0x7073 + 5 bytes
 
-INCBIN "baserom.gbc",$7078,$72b3 - $7078
+INCBIN "baserom.gbc",$7078,$710b - $7078
+
+; function that displays the start menu
+DrawStartMenu: ; 710B
+	ld a,[$d74b]
+	bit 5,a ; does the player have the pokedex?
+; menu with pokedex
+	ld hl,$c3aa
+	ld b,$0e
+	ld c,$08
+	jr nz,.drawTextBoxBorder\@
+; shorter menu if the player doesn't have the pokedex
+	ld hl,$c3aa
+	ld b,$0c
+	ld c,$08
+.drawTextBoxBorder\@
+	call TextBoxBorder
+	ld a,%11001011 ; bit mask for down, up, start, B, and A buttons
+	ld [$cc29],a
+	ld a,$02
+	ld [$cc24],a ; Y position of first menu choice
+	ld a,$0b
+	ld [$cc25],a ; X position of first menu choice
+	ld a,[$cc2d] ; remembered menu selection from last time
+	ld [$cc26],a
+	ld [$cc2a],a
+	xor a
+	ld [$cc37],a
+	ld hl,$d730
+	set 6,[hl] ; no pauses between printing each letter
+	ld hl,$c3d4
+	ld a,[$d74b]
+	bit 5,a ; does the player have the pokedex?
+; case for not having pokdex
+	ld a,$06
+	jr z,.storeMenuItemCount\@
+; case for having pokedex
+	ld de,StartMenuPokedexText
+	call PrintStartMenuItem
+	ld a,$07
+.storeMenuItemCount\@
+	ld [$cc28],a ; number of menu items
+	ld de,StartMenuPokemonText
+	call PrintStartMenuItem
+	ld de,StartMenuItemText
+	call PrintStartMenuItem
+	ld de,$d158 ; player's name
+	call PrintStartMenuItem
+	ld a,[$d72e]
+	bit 6,a ; is the player using the link feature?
+; case for not using link feature
+	ld de,StartMenuSaveText
+	jr z,.printSaveOrResetText\@
+; case for using link feature
+	ld de,StartMenuResetText
+.printSaveOrResetText\@
+	call PrintStartMenuItem
+	ld de,StartMenuOptionText
+	call PrintStartMenuItem
+	ld de,StartMenuExitText
+	call PlaceString
+	ld hl,$d730
+	res 6,[hl] ; turn pauses between printing letters back on
+	ret
+
+StartMenuPokedexText: ; 718F
+db "POKéDEX@"
+
+StartMenuPokemonText: ; 7197
+db "POKéMON@"
+
+StartMenuItemText: ; 719F
+db "ITEM@"
+
+StartMenuSaveText: ; 71A4
+db "SAVE@"
+
+StartMenuResetText: ; 71A9
+db "RESET@"
+
+StartMenuExitText: ; 71AF
+db "EXIT@"
+
+StartMenuOptionText: ; 71B4
+db "OPTION@"
+
+PrintStartMenuItem: ; 71BB
+	push hl
+	call PlaceString
+	pop hl
+	ld de,$28
+	add hl,de
+	ret
+
+INCBIN "baserom.gbc",$71c5,$72b3 - $71c5
 
 UnnamedText_72b3: ; 0x72b3
 	TX_FAR _UnnamedText_72b3
