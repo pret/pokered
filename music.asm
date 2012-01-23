@@ -3060,7 +3060,173 @@ branch_a6fe:
 	; A70E
 
 IndigoPlateau_md_4: ;a70f - a7c4
-INCBIN "baserom.gbc",$a70f,$a7c5 - $a70f
+	; A70F
+	
+;piece 1
+	db $D6
+	mus_note noteB, note1
+	mus_note noteC#, note8
+	mus_note noteB, note1
+	mus_note noteC#, note8
+	mus_note noteB, note1
+	mus_note noteC#, note8
+	mus_note noteB, note2
+	mus_note noteC#, note8
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	
+branch_a728:
+	mus_call branch_a791
+	mus_call branch_a77e
+	mus_call branch_a791
+	mus_call branch_a7a8
+	mus_call branch_a791
+	mus_call branch_a77e
+	mus_call branch_a791
+	mus_call branch_a7a8
+	mus_call branch_a791
+	mus_call branch_a77e
+	mus_call branch_a791
+	mus_call branch_a7a8
+	mus_call branch_a77e
+	mus_call branch_a7a8
+	mus_note noteB, note1
+	mus_note noteC#, note8
+	mus_note noteB, note2
+	mus_note noteC#, note8
+	mus_note noteB, note2
+	mus_note noteC#, note8_16
+	mus_note noteB, note1
+	mus_note noteC#, note8
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note16
+	mus_note noteC#, note8
+	mus_note noteB, note16
+	mus_note noteC#, note8
+	mus_note noteB, note16
+	mus_note noteC#, note8
+	mus_note noteB, note16
+	mus_note noteC#, note8
+	mus_jump 0, branch_a728
+
+branch_a77e:
+	mus_note noteB, note4
+	mus_note noteC#, note8
+	mus_note noteB, note4
+	mus_note noteC#, note8_16
+	mus_note noteB, note4
+	mus_note noteC#, note4
+	mus_note noteB, note4
+	mus_note noteC#, note8_16
+	mus_note noteB, note4
+	mus_note noteC#, note8
+	mus_note noteB, note4
+	mus_note noteC#, note8_16
+	mus_note noteB, note4
+	mus_note noteC#, note4
+	mus_note noteB, note8
+	mus_note noteC#, note4
+	mus_note noteB, note8
+	mus_note noteC#, note8_16
+	mus_end
+	; A790
+
+;piece 2
+branch_a791:
+	mus_note noteB, note4
+	mus_note noteC#, note8
+	mus_note noteB, note4
+	mus_note noteC#, note8_16
+	mus_note noteB, note4
+	mus_note noteC#, note4
+	mus_note noteB, note4
+	mus_note noteC#, note8_16
+	mus_note noteB, note4
+	mus_note noteC#, note8
+	mus_note noteB, note4
+	mus_note noteC#, note8_16
+	mus_note noteB, note4
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_end
+	; A7A7
+
+;piece 3
+branch_a7a8:
+	mus_note noteB, note4
+	mus_note noteC#, note8
+	mus_note noteB, note4
+	mus_note noteC#, note8_16
+	mus_note noteB, note4
+	mus_note noteC#, note8
+	mus_note noteB, note4
+	mus_note noteC#, note8_16
+	mus_note noteB, note4
+	mus_note noteC#, note8
+	mus_note noteB, note4
+	mus_note noteC#, note8
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_end
+	; A7C4
 
 ;Pallet Town
 PalletTown_md_1: ; a7c5 - a85e (154 bytes)
