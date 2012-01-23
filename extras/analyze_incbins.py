@@ -244,6 +244,158 @@ def apply_diff(diff, try_fixing=True):
             os.system("mv ../common1.asm ../common.asm")
         return False
 
+def index(seq, f):
+    """return the index of the first item in seq
+    where f(item) == True."""
+    return next((i for i in xrange(len(seq)) if f(seq[i])), None)
+
+def is_probably_pointer(input):
+    try:
+        blah = int(input, 16)
+        return True
+    except:
+        return False
+
+label_errors = ""
+def get_labels_between(start_line_id, end_line_id, bank_id):
+    labels = []
+    #line = {
+    #   "line_number": 15,
+    #   "bank_id": 32,
+    #   "label": "PalletTownText1",
+    #   "local_pointer": "$5315",
+    #   "address": 0x75315,
+    #}
+    global label_errors
+    errors = ""
+    current_line_offset = 0
+
+    sublines = asm[start_line_id : end_line_id + 1]
+    for line in sublines:
+        label = {}
+        line_id = start_line_id + current_line_offset
+        address = None
+        local_pointer = None
+
+        if ": ; 0x" in line:
+            temp = line.split(": ; 0x")[1]
+            if not " " in temp:
+                address = int("0x" + temp, 16)
+            else:
+                temp2 = temp.split(" ")[0]
+                address = int("0x" + temp2, 16)
+        elif ": ; " in line:
+            partial = line.split(": ; ")[1]
+            if ": ; $" in line:
+                temp = line.split(": ; $")[1]
+                if " " in temp:
+                    temp = temp.split(" ")[0]
+                local_pointer = "$" + temp
+            elif " " in partial:
+                if " to " in partial:
+                    temp = partial.split(" to ")[0]
+                    if "0x" in temp:
+                        address = int(temp, 16)
+                    elif len(temp) == 4:
+                        local_pointer = "$" + temp
+                    else:
+                        errors += "found \" to \" in partial on line " + str(line_id) + ", but don't know what to do (debug14)" + "\n"
+                        errors += "line is: " + line + "\n"
+                        continue
+                elif len(partial[4]) == 4 or partial[4] == " ": #then it's probably a local pointer
+                    temp = partial[0:4]
+                    local_pointer = "$" + temp
+                else:
+                    errors += "found \": ; \" and another \" \" in line " + str(line_id) + ", but don't know what to do (debug15)" + "\n"
+                    errors += "line is: " + line + "\n"
+                    continue
+            else:
+                if len(partial) > 3 and partial[2] == ":": #14:3BAC
+                    temp = partial[2].split(":")[1]
+                    if len(temp) == 3 or len(temp) == 4:
+                        local_pointer = "$" + temp
+                    else:
+                        temp = temp.split(" ")[0]
+                        local_pointer = "$" + temp
+                elif len(partial) == 4 or (len(partial) == 3 and is_probably_pointer(partial)):
+                    local_pointer = "$" + partial
+                else:
+                    errors += "found \": ; \" in line " + str(line_id) + ", but don't know what to do (debug16)" + "\n"
+                    errors += "line is: " + line + "\n"
+                    continue
+        else:
+            #this line doesn't have a label
+            continue
+
+        if local_pointer != None and not is_probably_pointer(local_pointer.replace("0x", "").replace("$", "")):
+            continue
+
+        line_label = line.split(": ;")[0]
+
+        if address == None and local_pointer != None:
+            temp = int(local_pointer.replace("$", "0x"), 16)
+            if temp < 0x4000 or bank_id == 0:
+                address = temp
+            else:
+                address = calculate_pointer(int(local_pointer.replace("$", "0x"), 16), bank_id)
+        elif local_pointer == None and address != None:
+            if address < 0x4000:
+                local_pointer = hex(address).replace("0x", "$")
+            else:
+                local_pointer = hex((address % 0x4000) + 0x4000).replace("0x", "$")
+
+        print line_label + " is at " + hex(address)
+
+        current_line_offset += 1
+   
+    label_errors += errors
+    return labels
+
+def scan_for_predefined_labels():
+    """looks through the asm file for labels at specific addresses,
+    this relies on the label having its address after. ex:
+
+    ViridianCity_h: ; 0x18357 to 0x18384 (45 bytes) (bank=6) (id=1)
+    PalletTownText1: ; 4F96 0x18f96
+    ViridianCityText1: ; 0x19102
+
+    It would be more productive to use rgbasm to spit out all label
+    addresses, but faster to write this script. rgbasm would be able
+    to grab all label addresses better than this script..
+    """
+    bank_intervals = {}
+
+    #figure out line numbers for each bank
+    for bank_id in range(0x2d):
+        abbreviation = ("%.x" % (bank_id)).upper()
+        abbreviation_next = ("%.x" % (bank_id+1)).upper()
+        if bank_id == 0:
+            abbreviation = "0"
+            abbreviation_next = "1"
+
+        start_line_id = index(asm, lambda line: "\"bank" + abbreviation + "\"" in line)
+
+        if bank_id != 0x2c:
+            end_line_id = index(asm, lambda line: "\"bank" + abbreviation_next + "\"" in line)
+        else:
+            end_line_id = len(asm) - 1
+
+        print "bank" + abbreviation + " starts at " + str(start_line_id) + " to " + str(end_line_id)
+
+        bank_intervals[bank_id] = {
+                                    "start": start_line_id,
+                                    "end": end_line_id,
+                                  }
+     
+    for bank_id in bank_intervals.keys():
+        bank_data = bank_intervals[bank_id]
+
+        start_line_id = bank_data["start"]
+        end_line_id   = bank_data["end"]
+
+        labels = get_labels_between(start_line_id, end_line_id, bank_id)
+        bank_intervals[bank_id]["labels"] = labels
+
 if __name__ == "__main__":
     #load map headers
     load_rom()
@@ -252,14 +404,19 @@ if __name__ == "__main__":
     
     #load incbins (mandatory)
     load_asm()
-    isolate_incbins()
-    process_incbins() #print processed_incbins
+    #isolate_incbins()
+    #process_incbins()
+    #print processed_incbins
     
     #line_number = find_incbin_to_replace_for(0x492c3)
     #newlines = split_incbin_line_into_three(line_number, 0x492c3, 12)
     #diff = generate_diff_insert(line_number, newlines)
     #print diff
 
-    insert_map_header_asm(86)
+    #insert_map_header_asm(86)
     #dump_all_remaining_maps()
+
+    scan_for_predefined_labels()
+    print "Errors:"
+    print label_errors
 
