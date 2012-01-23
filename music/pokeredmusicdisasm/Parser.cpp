@@ -114,7 +114,6 @@ void Parser::ParseNext() // Parses the block immidiately following
 	for(unsigned int i = filePos; (i <= fileLength) && (stop == false); i++)
 	{
 		// There's a way to make this block shorter but for now it does it's job
-		filePos = i;
 
 		// Check to see if it's the correct data type and if so then use it
 		if(tmpCall.IsValid(&rawBytesFixed[i])) // Should have made IsValid static
@@ -203,6 +202,8 @@ void Parser::ParseNext() // Parses the block immidiately following
 			unkCode << "db $" << hex << uppercase << (short)rawBytesFixed[i];
 			parsedString.push_back(unkCode.str());
 		}
+
+		filePos = i;
 
 		// If the stop address parameter is set, break when we get there
 		if( (stopAddress != 0) && (i >= stopAddress) ) break;

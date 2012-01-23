@@ -1255,7 +1255,128 @@ branch_9FC3:
 	;No end byte until indigo plateu channel 1
 
 Routes3_md_2: ;A009 - A07E
-INCBIN "baserom.gbc",$a009,$a07f - $a009
+	; A009
+	mus_mod 8, 2, 3
+	mus_duty duty50
+	mus_vel 12, 7
+
+	mus_octave oct2
+	mus_note noteG, note16
+	mus_note noteA#, note16
+	mus_note noteB, note4_8
+	mus_note noteA, note16
+	mus_note noteB, note16
+
+	mus_octave oct3
+	mus_note noteC, note16
+	mus_note noteRst, note2_4_8_16
+	mus_note noteRst, note1
+	mus_vel 12, 7
+	mus_duty duty50
+
+	mus_octave oct3
+	mus_note noteC, note4_8
+
+	mus_octave oct2
+	mus_note noteG, note16
+
+	mus_octave oct3
+	mus_note noteC, note16
+	mus_note noteE, note2_8
+
+	mus_octave oct2
+	mus_note noteG, note8
+
+	mus_octave oct3
+	mus_note noteC, note8
+	mus_note noteG, note8
+	mus_note noteF, note8
+	mus_note noteE, note8
+	mus_note noteD, note8
+	mus_note noteC, note8
+	mus_note noteD, note2
+	mus_note noteF, note2
+	mus_vel 12, 5
+	mus_duty duty75
+
+	mus_octave oct2
+	mus_note noteA#, note2
+	mus_note noteA, note2
+	mus_vel 12, 7
+	mus_duty duty50
+
+	mus_octave oct3
+	mus_note noteC, note4_8
+
+	mus_octave oct2
+	mus_note noteG, note16
+
+	mus_octave oct3
+	mus_note noteC, note16
+	mus_note noteE, note2_8
+
+	mus_octave oct2
+	mus_note noteG, note8
+
+	mus_octave oct3
+	mus_note noteC, note8
+	mus_note noteG, note8
+	mus_note noteF, note8
+	mus_note noteE, note8
+	mus_note noteD, note8
+	mus_note noteC, note8
+	mus_note noteD, note2
+	mus_note noteF, note2
+	mus_vel 12, 5
+	mus_duty duty75
+
+	mus_octave oct2
+	mus_note noteA#, note2
+
+	mus_octave oct3
+	mus_note noteD, note4_8
+	mus_vel 12, 7
+	mus_duty duty50
+	mus_note noteC, note16
+	mus_note noteD, note16
+	mus_note noteE, note8
+	mus_note noteD, note8
+	mus_note noteE, note8
+	mus_note noteC, note2
+
+	mus_octave oct2
+	mus_note noteB, note16
+
+	mus_octave oct3
+	mus_note noteC, note16
+	mus_note noteD, note8
+
+	mus_octave oct2
+	mus_note noteG, note4
+
+	mus_octave oct3
+	mus_note noteG, note2
+	mus_note noteF, note16
+	mus_note noteE, note16
+	db $D8
+	db $D3
+	mus_note noteF, note4
+	mus_note noteE, note4
+	db $D8
+	mus_note noteRst, note4_16
+	mus_note noteC, note4
+	db $D8
+	mus_note noteRst, note4_8
+	mus_note noteC, note2_4
+	mus_vel 10, 0
+	mus_duty duty75
+
+	mus_octave oct2
+	mus_note noteA, note2
+	mus_note noteB, note2
+	mus_jump 0, $601A
+	; A07E
+	;No end byte until indigo plateu channel 1
 
 Routes3_md_3: ;A07F - 6130
 INCBIN "baserom.gbc",$a07f,$a131 - $a07f
