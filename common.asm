@@ -597,8 +597,8 @@ OverworldLoopLessDelay:
 	jr nz,.oddLoop\@
 	ld a,[$d52a]
 	ld [$d528],a
-	call $0683
-	jp c,$0637
+	call NewBattle
+	jp c,.battleOccurred\@
 	jp OverworldLoop
 .noDirectionChange\@
 	ld a,[$d52a] ; current direction
@@ -690,7 +690,7 @@ OverworldLoopLessDelay:
 	ld hl,$d736
 	res 2,[hl]
 	jp nc,CheckWarpsNoCollision ; check for warps if there was no battle
-; if a battle occurred
+.battleOccurred\@
 	ld hl,$d72d
 	res 6,[hl]
 	ld hl,$d733
