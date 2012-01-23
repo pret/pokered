@@ -2910,7 +2910,73 @@ branch_a659:
 	; A663
 
 IndigoPlateau_md_2: ;a664 - a6b9
-INCBIN "baserom.gbc",$a664,$a6ba - $a664
+; A664
+	mus_duty duty75
+	mus_mod 8, 2, 5
+	mus_vel 12, 2
+
+	mus_octave oct2
+	mus_note noteD, note2
+	mus_note noteD, note2
+	mus_note noteD, note2
+	mus_note noteD, note4
+	mus_vel 5, 10
+	mus_note noteD#, note4
+	
+branch_a673:
+	mus_call branch_a6af
+	mus_vel 12, 5
+	mus_note noteA, note4
+	mus_call branch_a6af
+	mus_vel 12, 5
+	mus_note noteA#, note4
+	mus_call branch_a6af
+	mus_vel 12, 5
+	mus_note noteA, note4
+	mus_call branch_a6af
+	mus_vel 12, 7
+	mus_note noteC#, note4
+	mus_call branch_a6af
+	mus_vel 12, 5
+	mus_note noteA, note4
+	mus_call branch_a6af
+	mus_vel 12, 5
+	mus_note noteA#, note4
+	mus_call branch_a6af
+	mus_vel 12, 5
+
+	mus_octave oct3
+	mus_note noteC, note8
+	mus_vel 12, 7
+
+	mus_octave oct3
+	mus_note noteC#, note8
+	mus_note noteD, note2
+
+	mus_octave oct2
+	mus_note noteD, note2
+
+	mus_octave oct3
+	mus_note noteC, note2
+	mus_vel 4, 13
+
+	mus_octave oct3
+	mus_note noteD#, note2
+	mus_jump 0, branch_a673
+	
+branch_a6af:
+	mus_vel 12, 2
+
+	mus_octave oct2
+	mus_note noteD, note4
+	mus_note noteD, note4
+	mus_note noteD, note4
+	mus_note noteD, note4
+	mus_note noteD, note4
+	mus_note noteD, note4
+	mus_note noteD, note4
+	mus_end
+	; A6B9
 
 IndigoPlateau_md_3: ;a6ba - a70e
 INCBIN "baserom.gbc",$a6ba,$a70f - $a6ba
