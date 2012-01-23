@@ -5672,7 +5672,7 @@ IndigoPlateau_mh: ;0x82F1 - 0x82FC
 	db $03
 	dw IndigoPlateau_md_4 ;Channel 4
 
-INCLUDE "music/music.asm"
+INCLUDE "music.asm"
 	
 SECTION "bank3",DATA,BANK[$3]
 
