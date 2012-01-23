@@ -604,67 +604,3380 @@ Routes1_md_4: ;9D24 - 9DB8
 ; 9DB8
 
 ;Routes 24 and 25
-Routes2_md_1: ;9BD9 - 9E4E
-INCBIN "baserom.gbc",$9db9,$9e4f - $9db9
+Routes2_md_1: ;9DB9 - 9E4E
+	; 9DB9
+	mus_tempo 0, 152
+	mus_volume 119
+	mus_mod 9, 2, 5
+	mus_duty duty25
+
+branch_9DBC:
+	mus_vel 11, 2
+
+	mus_octave oct1
+	mus_note noteB, note4
+
+	mus_octave oct2
+	mus_note noteG#, note4_8
+	mus_note noteF#, note8
+	mus_note noteE, note8
+	mus_note noteD#, note16
+	mus_note noteF#, note16
+	mus_note noteE, note8
+
+	mus_octave oct1
+	mus_note noteB, note8
+
+	mus_octave oct2
+	mus_note noteE, note8
+	mus_note noteA, note8
+	mus_note noteG#, note4
+	mus_note noteF#, note4
+
+	mus_octave oct1
+	mus_note noteB, note4
+
+	mus_octave oct2
+	mus_note noteG#, note4_8
+	mus_note noteF#, note8
+	mus_note noteE, note8
+	mus_note noteD#, note16
+	mus_note noteF#, note16
+	mus_note noteB, note8
+
+	mus_octave oct1
+	mus_note noteB, note8
+
+	mus_octave oct2
+	mus_note noteE, note8
+	mus_note noteA, note8
+	mus_note noteG#, note4
+	mus_note noteB, note4
+	db $D8
+	mus_note noteB, note8_16
+
+	mus_octave oct3
+	mus_note noteE, note8
+
+	mus_octave oct2
+	mus_note noteA, note8
+
+	mus_octave oct3
+	mus_note noteE, note8
+	mus_note noteE, note8
+
+	mus_octave oct2
+	mus_note noteA, note8
+
+	mus_octave oct3
+	mus_note noteE, note8
+	mus_note noteD#, note8
+
+	mus_octave oct2
+	mus_note noteG#, note8
+
+	mus_octave oct3
+	mus_note noteD#, note8
+	mus_note noteD#, note8
+
+	mus_octave oct2
+	mus_note noteG#, note8
+
+	mus_octave oct3
+	mus_note noteD#, note8
+	mus_note noteC#, note8
+
+	mus_octave oct2
+	mus_note noteF#, note8
+
+	mus_octave oct3
+	mus_note noteC#, note8
+	mus_note noteC#, note8
+
+	mus_octave oct2
+	mus_note noteF#, note8
+
+	mus_octave oct3
+	mus_note noteC#, note8
+
+	mus_octave oct2
+	mus_note noteB, note8
+	mus_note noteE, note8
+	mus_note noteB, note8
+	mus_note noteB, note8
+	mus_note noteE, note8
+	mus_note noteG#, note8
+	mus_note noteF#, note8
+	mus_note noteG#, note8
+	mus_note noteA, note8
+	mus_note noteA, note8
+	mus_note noteF#, note8
+	mus_note noteA, note8
+	mus_note noteF#, note8
+	mus_note noteG#, note8
+	mus_note noteA, note8
+	mus_note noteA, note8
+	mus_note noteF#, note8
+	mus_note noteA, note8
+	mus_note noteG#, note8
+	mus_note noteE, note8
+	mus_note noteB, note8
+	mus_note noteB, note8
+	mus_note noteE, note8
+	mus_note noteB, note8
+	mus_note noteB, note8
+	mus_note noteE, note8
+	mus_note noteB, note8
+	mus_note noteB, note8
+	mus_note noteE, note8
+	mus_note noteB, note8
+	mus_note noteA, note8
+	mus_note noteB, note8
+	mus_note noteA, note8
+
+	mus_octave oct3
+	mus_note noteC#, note8
+
+	mus_octave oct2
+	mus_note noteB, note8
+
+	mus_octave oct3
+	mus_note noteC#, note8
+	mus_note noteD, note8
+
+	mus_octave oct2
+	mus_note noteB, note8
+
+	mus_octave oct3
+	mus_note noteD, note8
+	mus_note noteF#, note8
+	mus_note noteE, note8
+	mus_note noteD#, note8
+	mus_note noteE, note8
+
+	mus_octave oct2
+	mus_note noteB, note8
+
+	mus_octave oct3
+	mus_note noteE, note8
+	mus_note noteE, note8
+
+	mus_octave oct2
+	mus_note noteB, note8
+
+	mus_octave oct3
+	mus_note noteE, note8
+	mus_note noteE, note8
+
+	mus_octave oct2
+	mus_note noteB, note8
+
+	mus_octave oct3
+	mus_note noteE, note8
+	mus_note noteE, note8
+
+	mus_octave oct2
+	mus_note noteB, note8
+
+	mus_octave oct3
+	mus_note noteE, note8
+	mus_jump 0, branch_9DBC
+	mus_end
+	; 9E4E
 
 Routes2_md_2: ;9E4F - 9E9A
-INCBIN "baserom.gbc",$9e4f,$9e9b - $9e4f
+
+	; 9E4F
+	mus_mod 8, 2, 6
+	mus_duty duty75
+	
+branch_9E54:
+	mus_vel 13, 4
+
+	mus_octave oct3
+	mus_note noteE, note4_8
+
+	mus_octave oct2
+	mus_note noteB, note16
+
+	mus_octave oct3
+	mus_note noteE, note16
+	mus_note noteF#, note4_8
+	mus_note noteA, note8
+	mus_note noteG#, note8_16
+	mus_note noteE, note16
+	mus_note noteF#, note2
+
+	mus_octave oct2
+	mus_note noteD#, note4
+
+	mus_octave oct3
+	mus_note noteE, note4_8
+
+	mus_octave oct2
+	mus_note noteB, note16
+
+	mus_octave oct3
+	mus_note noteE, note16
+	mus_note noteF#, note4_8
+	mus_note noteA, note8
+	mus_note noteG#, note8_16
+	mus_note noteE, note16
+	mus_note noteB, note2
+
+	mus_octave oct2
+	mus_note noteG#, note4
+
+	mus_octave oct4
+	mus_note noteC#, note4_8
+
+	mus_octave oct3
+	mus_note noteB, note16
+	mus_note noteA, note16
+	mus_note noteB, note4_8
+	mus_note noteA, note16
+	mus_note noteG#, note16
+	mus_note noteA, note4_8
+	mus_note noteG#, note16
+	mus_note noteF#, note16
+	mus_note noteG#, note4
+	mus_note noteF#, note8
+	mus_note noteE, note8
+	mus_note noteD, note8
+	mus_note noteD, note16
+	mus_note noteE, note16
+	mus_note noteF#, note2
+	mus_note noteA, note4
+	mus_note noteG#, note8_16
+	mus_note noteF#, note16
+	mus_note noteE, note2
+	mus_note noteF#, note8
+	mus_note noteE, note8
+	mus_note noteD, note8
+	mus_note noteD, note16
+	mus_note noteE, note16
+	mus_note noteF#, note8
+	mus_note noteF#, note16
+	mus_note noteG#, note16
+	mus_note noteA, note4
+
+	mus_octave oct4
+	mus_note noteC#, note4
+
+	mus_octave oct3
+	mus_note noteB, note8_16
+	mus_note noteA, note16
+	mus_note noteG#, note2
+	mus_note noteRst, note4
+	mus_jump 0, branch_9E54
+	mus_end
+	; 9E9A
 
 Routes2_md_3: ;9E9B - 9F07
-INCBIN "baserom.gbc",$9e9b,$9f08 - $9e9b
+	; 9E9B
+	mus_mod 9, 2, 8
+	
+branch_9E9E:
+	mus_vel 1, 1
+
+	mus_octave oct2
+	mus_note noteE, note8
+	mus_note noteRst, note8
+
+	mus_octave oct1
+	mus_note noteB, note4_8
+
+	mus_octave oct2
+	mus_note noteD, note16
+	mus_note noteC#, note16
+	mus_note noteD, note8
+	mus_note noteD#, note8
+	mus_note noteE, note8
+	mus_note noteRst, note8
+
+	mus_octave oct1
+	mus_note noteB, note4_8
+
+	mus_octave oct2
+	mus_note noteD, note16
+	mus_note noteC#, note16
+
+	mus_octave oct1
+	mus_note noteA, note8
+
+	mus_octave oct2
+	mus_note noteC#, note8
+	mus_note noteE, note8
+	mus_note noteRst, note8
+
+	mus_octave oct1
+	mus_note noteB, note4_8
+
+	mus_octave oct2
+	mus_note noteD, note16
+	mus_note noteC#, note16
+	mus_note noteD, note8
+	mus_note noteD#, note8
+	mus_note noteE, note8
+	mus_note noteRst, note8
+
+	mus_octave oct1
+	mus_note noteB, note4
+
+	mus_octave oct2
+	mus_note noteC#, note8
+
+	mus_octave oct1
+	mus_note noteB, note8
+
+	mus_octave oct2
+	mus_note noteD, note8
+	mus_note noteF#, note8
+	mus_note noteE, note8
+	mus_note noteRst, note8
+
+	mus_octave oct1
+	mus_note noteA, note8
+	mus_note noteRst, note8
+
+	mus_octave oct2
+	mus_note noteD#, note8
+	mus_note noteRst, note8
+
+	mus_octave oct1
+	mus_note noteG#, note8
+	mus_note noteRst, note8
+
+	mus_octave oct2
+	mus_note noteC#, note8
+	mus_note noteRst, note8
+
+	mus_octave oct1
+	mus_note noteF#, note8
+	mus_note noteRst, note8
+	mus_note noteB, note8
+	mus_note noteRst, note8
+	mus_note noteE, note8
+	mus_note noteG#, note8
+	mus_note noteF#, note8
+	mus_note noteRst, note8
+	mus_note noteA, note8
+	mus_note noteRst, note8
+	mus_note noteF#, note8
+	mus_note noteRst, note8
+	mus_note noteA, note8
+	mus_note noteRst, note8
+	mus_note noteG#, note8
+	mus_note noteRst, note8
+	mus_note noteB, note8
+	mus_note noteRst, note8
+	mus_note noteG#, note8
+	mus_note noteRst, note8
+	mus_note noteB, note8
+	mus_note noteRst, note8
+	mus_note noteF#, note8
+	mus_note noteRst, note8
+	mus_note noteA, note8
+	mus_note noteRst, note8
+
+	mus_octave oct2
+	mus_note noteC#, note8
+	mus_note noteRst, note8
+
+	mus_octave oct1
+	mus_note noteA, note8
+
+	mus_octave oct2
+	mus_note noteC#, note8
+
+	mus_octave oct1
+	mus_note noteB, note8
+	mus_note noteRst, note8
+
+	mus_octave oct2
+	mus_note noteE, note8
+	mus_note noteRst, note8
+	mus_note noteG#, note8
+	mus_note noteRst, note8
+	mus_note noteE, note8
+	mus_note noteRst, note8
+	mus_jump 0, branch_9E9E
+	mus_end
+	; 9F07
 
 Routes2_md_4: ;9F08 - 9FAC
-INCBIN "baserom.gbc",$9f08,$9fad - $9f08
+	; 9F08
+	mus_vel 11, 1
+	mus_note noteC, note4
+	mus_note noteRst, note8
+	mus_note noteB, note16
+	mus_note noteC, note4
+	mus_note noteRst, note4_16
+	mus_note noteB, note16
+	mus_note noteC, note4
+	mus_note noteB, note16
+	mus_note noteC, note4
+	mus_note noteB, note8
+	mus_note noteC, note4
+	mus_note noteB, note8
+	mus_note noteC, note4
+	mus_note noteB, note8
+	mus_note noteC, note4
+	mus_note noteRst, note8
+	db $D8
+	mus_note noteB, note8
+	mus_note noteC, note4
+	mus_note noteB, note8
+	mus_note noteC, note4
+	mus_note noteB, note8
+	mus_note noteC, note4
+	mus_note noteB, note8_16
+	mus_note noteC, note4
+	mus_note noteB, note8_16
+	mus_note noteC, note4
+	mus_vel 11, 0
+	mus_note noteC, note4
+	mus_note noteRst, note8_16
+	mus_note noteB, note8
+	mus_note noteC, note4
+	mus_note noteRst, note8
+	mus_note noteB, note8
+	mus_note noteC, note4
+	mus_note noteRst, note4
+	mus_note noteB, note16
+	mus_note noteC, note4
+	mus_note noteB, note16
+	mus_note noteC, note4
+	mus_note noteB, note8
+	mus_note noteC, note4
+	mus_note noteRst, note8
+	mus_note noteB, note8
+	mus_note noteC, note4
+	mus_note noteRst, note8
+	db $D8
+	mus_note noteB, note8
+	mus_note noteC, note4
+	mus_note noteB, note8
+	mus_note noteC, note4
+	mus_note noteB, note8
+	mus_note noteC, note4
+	mus_note noteB, note8_16
+	mus_note noteC, note4
+	mus_note noteB, note8_16
+	mus_note noteC, note4
+	mus_note noteB, note8
+	mus_note noteC, note4
+	mus_note noteB, note8
+	mus_note noteC, note4
+	mus_note noteB, note8
+	mus_note noteC, note4
+	mus_note noteB, note8_16
+	mus_note noteC, note4
+	mus_note noteRst, note8_16
+	mus_vel 11, 0
+	mus_note noteC, note4
+	mus_note noteRst, note4_16
+	mus_note noteB, note16
+	mus_note noteC, note4
+	mus_note noteB, note16
+	mus_note noteC, note4
+	mus_note noteB, note8
+	mus_note noteC, note4
+	mus_note noteB, note8
+	mus_note noteC, note4
+	mus_note noteB, note8
+	mus_note noteC, note4
+	mus_note noteRst, note8
+	db $D8
+	mus_note noteB, note8
+	mus_note noteC, note4
+	mus_note noteB, note8
+	mus_note noteC, note4
+	mus_note noteB, note8
+	mus_note noteC, note4
+	mus_note noteB, note8_16
+	mus_note noteC, note4
+	mus_note noteRst, note8_16
+	mus_vel 11, 0
+	mus_note noteC, note4
+	mus_note noteRst, note8_16
+	mus_note noteB, note8
+	mus_note noteC, note4
+	mus_note noteRst, note8
+	mus_note noteB, note8
+	mus_note noteC, note4
+	mus_note noteRst, note4
+	mus_note noteB, note16
+	mus_note noteC, note4
+	mus_note noteB, note16
+	mus_note noteC, note4
+	mus_note noteB, note8
+	mus_note noteC, note4
+	mus_note noteB, note8
+	mus_note noteC, note4
+	mus_note noteB, note8
+	mus_note noteC, note4
+	mus_note noteRst, note8
+	db $D8
+	mus_note noteB, note8
+	mus_note noteC, note4
+	mus_note noteB, note8
+	mus_note noteC, note4
+	mus_note noteB, note8
+	mus_note noteC, note4
+	mus_note noteB, note8_16
+	mus_note noteC, note4
+	mus_note noteRst, note8_16
+	mus_note noteB, note8_16
+	mus_note noteC, note4
+	mus_note noteB, note8_16
+	mus_note noteC, note4
+	mus_note noteB, note8_16
+	mus_note noteC, note4
+	mus_note noteRst, note8_16
+	mus_vel 11, 0
+	mus_note noteC, note4
+	mus_note noteRst, note4_16
+	mus_note noteB, note16
+	mus_note noteC, note4
+	mus_note noteB, note16
+	mus_note noteC, note4
+	mus_note noteB, note8
+	mus_note noteC, note4
+	mus_note noteB, note8
+	mus_note noteC, note4
+	mus_note noteB, note8
+	mus_note noteC, note4
+	mus_note noteRst, note8
+	db $D8
+	mus_note noteB, note8
+	mus_note noteC, note4
+	mus_note noteB, note8
+	mus_note noteC, note4
+	mus_note noteB, note8
+	mus_note noteC, note4
+	mus_note noteB, note8_16
+	mus_note noteC, note4
+	mus_note noteRst, note8_16
+	mus_note noteB, note8_16
+	mus_note noteC, note4
+	mus_note noteRst, note8_16
+	mus_jump 0, Routes2_md_4
+	mus_end
+	; 9FAC
 
 ;Routes 3, 4, 5, 6, 7, 8, 9, 10, 16, 17, 18, 19, 20, 21, 22
 Routes3_md_1: ;9FAD - A008
-INCBIN "baserom.gbc",$9fad,$a009 - $9fad
+	; 9FAD
+	mus_tempo 0, 148
+	mus_volume 119
+	mus_duty duty75
+	mus_mod 6, 3, 4
+	db $E8
+	mus_vel 11, 5
+
+	mus_octave oct2
+	mus_note noteE, note16
+	mus_note noteF#, note16
+	mus_note noteG, note4_8
+	mus_note noteF, note16
+	mus_note noteG, note16
+	mus_note noteE, note16
+	mus_note noteRst, note1
+	mus_note noteRst, note2_4_8_16
+
+branch_9FC3:
+	mus_vel 11, 5
+	mus_note noteE, note4_8
+	mus_note noteD, note16
+	mus_note noteE, note16
+	mus_note noteC, note4
+	mus_note noteE, note4
+	mus_note noteC, note4_8
+	mus_note noteD, note16
+	mus_note noteE, note16
+	mus_note noteF, note8
+	mus_note noteG, note8
+	mus_note noteG, note8
+	mus_note noteA, note8
+	mus_vel 10, 7
+	mus_note noteA#, note2
+	mus_note noteF, note2
+	mus_note noteD, note2
+	mus_note noteF, note2
+	mus_vel 11, 5
+	mus_note noteE, note4_8
+	mus_note noteD, note16
+	mus_note noteE, note16
+	mus_note noteC, note4
+	mus_note noteE, note4
+	mus_note noteC, note4_8
+	mus_note noteD, note16
+	mus_note noteE, note16
+	mus_note noteF, note8
+	mus_note noteG, note8
+	mus_note noteG, note8
+	mus_note noteA, note8
+	mus_vel 10, 7
+	mus_note noteA#, note2
+	mus_note noteA#, note2
+	mus_note noteD, note2
+	mus_note noteF, note2
+	mus_vel 11, 5
+	mus_note noteE, note4
+	mus_note noteE, note8
+	mus_note noteF, note8
+	mus_note noteG, note4
+	mus_note noteF, note8
+	mus_note noteE, note8
+	mus_note noteB, note8
+
+	mus_octave oct1
+	mus_note noteG, note4
+
+	mus_octave oct2
+	mus_note noteB, note2
+	mus_note noteA, note8
+	db $D8
+	mus_note noteRst, note4
+	mus_note noteA, note4
+	mus_note noteF, note4
+	mus_note noteA, note4
+	db $D8
+	mus_note noteE, note1
+	mus_note noteA, note2_4
+	db $D8
+	mus_note noteA, note16
+	mus_note noteF, note2_4
+	mus_note noteG, note2_4
+	mus_jump 0, branch_9FC3
+	;A008
+	;No end byte until indigo plateu channel 1
 
 Routes3_md_2: ;A009 - A07E
-INCBIN "baserom.gbc",$a009,$a07f - $a009
+	; A009
+	mus_mod 8, 2, 3
+	mus_duty duty50
+	mus_vel 12, 7
 
-Routes3_md_3: ;A07F - 6130
-INCBIN "baserom.gbc",$a07f,$a131 - $a07f
+	mus_octave oct2
+	mus_note noteG, note16
+	mus_note noteA#, note16
+	mus_note noteB, note4_8
+	mus_note noteA, note16
+	mus_note noteB, note16
 
-Routes3_md_4: ;A131 -A26A
-INCBIN "baserom.gbc",$a131,$a26a - $a131
+	mus_octave oct3
+	mus_note noteC, note16
+	mus_note noteRst, note2_4_8_16
+	mus_note noteRst, note1
+
+branch_A01A:
+	mus_vel 12, 7
+	mus_duty duty50
+
+	mus_octave oct3
+	mus_note noteC, note4_8
+
+	mus_octave oct2
+	mus_note noteG, note16
+
+	mus_octave oct3
+	mus_note noteC, note16
+	mus_note noteE, note2_8
+
+	mus_octave oct2
+	mus_note noteG, note8
+
+	mus_octave oct3
+	mus_note noteC, note8
+	mus_note noteG, note8
+	mus_note noteF, note8
+	mus_note noteE, note8
+	mus_note noteD, note8
+	mus_note noteC, note8
+	mus_note noteD, note2
+	mus_note noteF, note2
+	mus_vel 12, 5
+	mus_duty duty75
+
+	mus_octave oct2
+	mus_note noteA#, note2
+	mus_note noteA, note2
+	mus_vel 12, 7
+	mus_duty duty50
+
+	mus_octave oct3
+	mus_note noteC, note4_8
+
+	mus_octave oct2
+	mus_note noteG, note16
+
+	mus_octave oct3
+	mus_note noteC, note16
+	mus_note noteE, note2_8
+
+	mus_octave oct2
+	mus_note noteG, note8
+
+	mus_octave oct3
+	mus_note noteC, note8
+	mus_note noteG, note8
+	mus_note noteF, note8
+	mus_note noteE, note8
+	mus_note noteD, note8
+	mus_note noteC, note8
+	mus_note noteD, note2
+	mus_note noteF, note2
+	mus_vel 12, 5
+	mus_duty duty75
+
+	mus_octave oct2
+	mus_note noteA#, note2
+
+	mus_octave oct3
+	mus_note noteD, note4_8
+	mus_vel 12, 7
+	mus_duty duty50
+	mus_note noteC, note16
+	mus_note noteD, note16
+	mus_note noteE, note8
+	mus_note noteD, note8
+	mus_note noteE, note8
+	mus_note noteC, note2
+
+	mus_octave oct2
+	mus_note noteB, note16
+
+	mus_octave oct3
+	mus_note noteC, note16
+	mus_note noteD, note8
+
+	mus_octave oct2
+	mus_note noteG, note4
+
+	mus_octave oct3
+	mus_note noteG, note2
+	mus_note noteF, note16
+	mus_note noteE, note16
+	db $D8
+	db $D3
+	mus_note noteF, note4
+	mus_note noteE, note4
+	db $D8
+	mus_note noteRst, note4_16
+	mus_note noteC, note4
+	db $D8
+	mus_note noteRst, note4_8
+	mus_note noteC, note2_4
+	mus_vel 10, 0
+	mus_duty duty75
+
+	mus_octave oct2
+	mus_note noteA, note2
+	mus_note noteB, note2
+	mus_jump 0, branch_A01A
+	; A07E
+	;No end byte until indigo plateu channel 1
+
+Routes3_md_3: ;A07F - A130
+	; A07F
+	mus_mod 4, 1, 0
+	db $D6
+	mus_note noteC#, note8_16
+
+	mus_octave oct3
+	mus_note noteG, note8
+	mus_note noteA#, note8
+	mus_note noteB, note2
+	mus_note noteA, note2
+	mus_note noteG, note8
+	mus_note noteRst, note8
+	mus_note noteG, note4_8_16
+	mus_note noteRst, note16
+	mus_note noteG, note16
+	mus_note noteRst, note16
+	mus_note noteG, note16
+	mus_note noteRst, note16
+	mus_note noteG, note8
+	mus_note noteRst, note8
+	mus_note noteG, note8
+	mus_note noteRst, note8
+	mus_note noteG, note2
+	mus_note noteG, note8
+	mus_note noteRst, note8
+	mus_note noteG, note4_8_16
+	mus_note noteRst, note16
+	mus_note noteG, note16
+	mus_note noteRst, note16
+	mus_note noteG, note16
+	mus_note noteRst, note16
+	mus_note noteG, note8
+	mus_note noteRst, note8
+	mus_note noteG, note8
+	mus_note noteRst, note8
+	mus_note noteG, note2
+	
+branch_A0A3:
+	mus_vel 1, 2
+	mus_note noteE, note16
+	mus_note noteRst, note16
+	mus_note noteG, note4
+	mus_note noteE, note16
+	mus_note noteE, note16
+	mus_note noteE, note16
+	mus_note noteRst, note16
+	mus_note noteE, note16
+	mus_note noteRst, note16
+	mus_note noteG, note4
+	mus_note noteE, note16
+	mus_note noteRst, note16
+	mus_note noteG, note4
+	mus_note noteE, note16
+	mus_note noteE, note16
+	mus_note noteE, note16
+	mus_note noteRst, note16
+	mus_note noteE, note16
+	mus_note noteRst, note16
+	mus_note noteG, note8
+	mus_note noteA, note8
+	mus_note noteF, note16
+	mus_note noteRst, note16
+	mus_note noteA#, note4
+	mus_note noteF, note16
+	mus_note noteF, note16
+	mus_note noteF, note16
+	mus_note noteRst, note16
+	mus_note noteF, note16
+	mus_note noteRst, note16
+	mus_note noteA#, note4
+	mus_note noteF, note16
+	mus_note noteRst, note16
+	mus_note noteA#, note4
+	mus_note noteF, note16
+	mus_note noteF, note16
+	mus_note noteF, note16
+	mus_note noteRst, note16
+	mus_note noteF, note16
+	mus_note noteRst, note16
+	mus_note noteA#, note8
+	mus_note noteF, note8
+	mus_note noteE, note16
+	mus_note noteRst, note16
+	mus_note noteG, note4
+	mus_note noteE, note16
+	mus_note noteE, note16
+	mus_note noteE, note16
+	mus_note noteRst, note16
+	mus_note noteE, note16
+	mus_note noteRst, note16
+	mus_note noteG, note4
+	mus_note noteE, note16
+	mus_note noteRst, note16
+	mus_note noteG, note4
+	mus_note noteE, note16
+	mus_note noteE, note16
+	mus_note noteE, note16
+	mus_note noteRst, note16
+	mus_note noteE, note16
+	mus_note noteRst, note16
+	mus_note noteG, note8
+	mus_note noteA, note8
+	mus_note noteF, note16
+	mus_note noteRst, note16
+	mus_note noteA#, note4
+	mus_note noteF, note16
+	mus_note noteF, note16
+	mus_note noteF, note16
+	mus_note noteRst, note16
+	mus_note noteF, note16
+	mus_note noteRst, note16
+	mus_note noteA#, note4
+	mus_note noteF, note16
+	mus_note noteRst, note16
+	mus_note noteA#, note4
+	mus_note noteF, note16
+	mus_note noteF, note16
+	mus_note noteF, note16
+	mus_note noteRst, note16
+	mus_note noteF, note16
+	mus_note noteRst, note16
+	mus_note noteA#, note8
+	mus_note noteA, note8
+	mus_note noteG, note16
+	mus_note noteRst, note16
+
+	mus_octave oct4
+	mus_note noteC, note4
+
+	mus_octave oct3
+	mus_note noteG, note16
+	mus_note noteG, note16
+	mus_note noteG, note16
+	mus_note noteRst, note16
+	mus_note noteG, note16
+	mus_note noteRst, note16
+
+	mus_octave oct4
+	mus_note noteC, note4
+
+	mus_octave oct3
+	mus_note noteG, note16
+	mus_note noteRst, note16
+
+	mus_octave oct4
+	mus_note noteD, note4
+
+	mus_octave oct3
+	mus_note noteG, note16
+	mus_note noteG, note16
+	mus_note noteG, note16
+	mus_note noteRst, note16
+	mus_note noteG, note16
+	mus_note noteRst, note16
+
+	mus_octave oct4
+	mus_note noteD, note4
+
+	mus_octave oct3
+	mus_note noteF, note16
+	mus_note noteRst, note16
+
+	mus_octave oct4
+	mus_note noteC, note4
+
+	mus_octave oct3
+	mus_note noteF, note16
+	mus_note noteF, note16
+	mus_note noteF, note16
+	mus_note noteRst, note16
+	mus_note noteF, note16
+	mus_note noteRst, note16
+
+	mus_octave oct4
+	mus_note noteC, note4
+
+	mus_octave oct3
+	mus_note noteF, note16
+	mus_note noteRst, note16
+	mus_note noteA, note4
+	mus_note noteF, note16
+	mus_note noteF, note16
+	mus_note noteF, note16
+	mus_note noteRst, note16
+	mus_note noteF, note16
+	mus_note noteRst, note16
+	mus_note noteA, note4
+	mus_jump 0, branch_A0A3
+	; A130
+	;No end byte until indigo plateu channel 1
+
+Routes3_md_4: ;A131 -A269
+	; A131
+	db $D6
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note2
+	mus_note noteC#, note8
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note2_4
+	mus_note noteC#, note8
+	mus_note noteB, note8
+	mus_note noteC#, note8
+	mus_note noteB, note8
+	mus_note noteC#, note8_16
+	mus_note noteB, note4
+	mus_note noteC#, note8
+	mus_note noteB, note4
+	mus_note noteC#, note8
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note2_4
+	mus_note noteC#, note8
+	mus_note noteB, note8
+	mus_note noteC#, note8
+	mus_note noteB, note8
+	mus_note noteC#, note8_16
+	mus_note noteB, note4
+	mus_note noteC#, note8
+	mus_note noteB, note4
+	mus_note noteC#, note8_16
+	mus_note noteB, note4
+	mus_note noteC#, note8
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+
+branch_A17A:
+	mus_note noteB, note2_4
+	mus_note noteC#, note8
+	mus_note noteB, note8
+	mus_note noteC#, note8
+	mus_note noteB, note8
+	mus_note noteC#, note8_16
+	mus_note noteB, note4
+	mus_note noteC#, note8
+	mus_note noteB, note4
+	mus_note noteC#, note8
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note2_4
+	mus_note noteC#, note8
+	mus_note noteB, note8
+	mus_note noteC#, note8
+	mus_note noteB, note8
+	mus_note noteC#, note8
+	mus_note noteB, note4
+	mus_note noteC#, note8
+	mus_note noteB, note2
+	mus_note noteC#, note8
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note2_4
+	mus_note noteC#, note8
+	mus_note noteB, note8
+	mus_note noteC#, note8
+	mus_note noteB, note8
+	mus_note noteC#, note8_16
+	mus_note noteB, note4
+	mus_note noteC#, note8
+	mus_note noteB, note2_8
+	mus_note noteC#, note8
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note2_4
+	mus_note noteC#, note8
+	mus_note noteB, note8
+	mus_note noteC#, note8
+	mus_note noteB, note8
+	mus_note noteC#, note4
+	mus_note noteB, note4
+	mus_note noteC#, note8
+	mus_note noteB, note4
+	mus_note noteC#, note8
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note2_4
+	mus_note noteC#, note8
+	mus_note noteB, note8
+	mus_note noteC#, note8
+	mus_note noteB, note8
+	mus_note noteC#, note8
+	mus_note noteB, note4
+	mus_note noteC#, note8
+	mus_note noteB, note2
+	mus_note noteC#, note8
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note2_4
+	mus_note noteC#, note8
+	mus_note noteB, note8
+	mus_note noteC#, note8
+	mus_note noteB, note8
+	mus_note noteC#, note8
+	mus_note noteB, note4
+	mus_note noteC#, note8
+	mus_note noteB, note2_8
+	mus_note noteC#, note8
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note2_4
+	mus_note noteC#, note8
+	mus_note noteB, note8
+	mus_note noteC#, note8
+	mus_note noteB, note8
+	mus_note noteC#, note8
+	mus_note noteB, note4
+	mus_note noteC#, note8
+	mus_note noteB, note2
+	mus_note noteC#, note8
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note2_4
+	mus_note noteC#, note8
+	mus_note noteB, note8
+	mus_note noteC#, note8
+	mus_note noteB, note8
+	mus_note noteC#, note8
+	mus_note noteB, note4
+	mus_note noteC#, note8
+	mus_note noteB, note4
+	mus_note noteC#, note8
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note2_4
+	mus_note noteC#, note8
+	mus_note noteB, note8
+	mus_note noteC#, note8
+	mus_note noteB, note8
+	mus_note noteC#, note8
+	mus_note noteB, note4
+	mus_note noteC#, note8
+	mus_note noteB, note2_8
+	mus_note noteC#, note8
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note2_4
+	mus_note noteC#, note8
+	mus_note noteB, note8
+	mus_note noteC#, note8
+	mus_note noteB, note8
+	mus_note noteC#, note8
+	mus_note noteB, note4
+	mus_note noteC#, note8
+	mus_note noteB, note2
+	mus_note noteC#, note8
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note2_4
+	mus_note noteC#, note8
+	mus_note noteB, note8
+	mus_note noteC#, note8
+	mus_note noteB, note8
+	mus_note noteC#, note8
+	mus_note noteB, note4
+	mus_note noteC#, note8
+	mus_note noteB, note2
+	mus_note noteC#, note8
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note2_4
+	mus_note noteC#, note8
+	mus_note noteB, note8
+	mus_note noteC#, note8
+	mus_note noteB, note8
+	mus_note noteC#, note8
+	mus_note noteB, note4
+	mus_note noteC#, note8
+	mus_note noteB, note4
+	mus_note noteC#, note8
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_jump 0, branch_A17A
+	; A269
+	;No end byte until indigo plateu channel 1
 
 ;Routes 11, 12, 13, 14, 15
 Routes4_md_1: ;a26a - a303
-INCBIN "baserom.gbc",$a26a,$a304 - $a26a
+	; A26A
+	mus_tempo 0, 148
+	mus_volume 119
+	mus_duty duty75
+	mus_mod 10, 3, 4
+	db $E8
+	mus_vel 10, 2
+
+	mus_octave oct1
+	mus_note noteG#, note4
+	mus_note noteG#, note4
+	mus_note noteG#, note4
+	mus_vel 7, 15
+	mus_note noteG#, note4
+	mus_vel 10, 2
+	mus_note noteG#, note4
+	mus_note noteG#, note4
+	mus_note noteG#, note4
+	mus_vel 11, 7
+	mus_note noteB, note16
+
+	mus_octave oct2
+	mus_note noteE, note16
+	mus_note noteF#, note16
+	mus_note noteB, note16
+
+branch_A28A:
+	mus_vel 11, 7
+	mus_note noteB, note4_8
+	mus_note noteE, note8
+	mus_note noteE, note4
+
+	mus_octave oct3
+	mus_note noteE, note4
+	mus_note noteD, note4
+	mus_note noteC#, note4
+
+	mus_octave oct2
+	mus_note noteB, note4
+	mus_note noteA, note4
+	mus_vel 11, 1
+	mus_note noteG#, note8_16
+	mus_vel 11, 7
+	mus_note noteE, note16
+	mus_note noteF#, note2_4
+	mus_note noteE, note2
+	mus_note noteD#, note4
+	mus_note noteF#, note4
+	mus_note noteB, note4_8
+	mus_note noteE, note8
+	mus_note noteE, note4
+
+	mus_octave oct3
+	mus_note noteE, note4
+	mus_note noteD, note4
+	mus_note noteC#, note4
+
+	mus_octave oct2
+	mus_note noteB, note4
+
+	mus_octave oct3
+	mus_note noteC#, note4
+	mus_vel 11, 1
+	mus_note noteE, note8_16
+	mus_vel 11, 7
+	mus_note noteD#, note16
+	mus_note noteE, note2_4
+
+	mus_octave oct2
+	mus_note noteB, note8_16
+	mus_note noteA, note16
+	mus_note noteG#, note2
+
+	mus_octave oct3
+	mus_note noteE, note4
+
+	mus_octave oct2
+	mus_note noteD, note8
+	mus_note noteE, note8
+	mus_note noteF#, note8
+	mus_note noteG#, note8
+	mus_note noteA, note8
+	mus_note noteB, note8
+
+	mus_octave oct3
+	mus_note noteC#, note8
+	mus_note noteD, note8
+	mus_note noteD, note8
+
+	mus_octave oct2
+	mus_note noteA, note8
+	mus_note noteF#, note8
+	mus_note noteE, note8
+	mus_note noteD, note8
+	mus_note noteE, note8
+	mus_note noteF#, note8
+	mus_note noteA, note8
+	mus_note noteG#, note8
+	mus_note noteF#, note8
+	mus_note noteE, note8
+	mus_note noteF#, note8
+	mus_note noteG#, note8
+	mus_note noteA, note8
+	mus_note noteB, note8
+
+	mus_octave oct3
+	mus_note noteD#, note8
+	mus_note noteE, note8
+
+	mus_octave oct2
+	mus_note noteB, note8
+	mus_note noteG#, note8
+	mus_note noteF#, note8
+	mus_note noteE, note8
+	mus_note noteF#, note8
+	mus_note noteG#, note8
+	mus_note noteB, note8
+	db $D8
+	mus_note noteB, note4_8
+	mus_note noteA, note4
+	mus_note noteG#, note4
+	mus_note noteF#, note4
+
+	mus_octave oct3
+	mus_note noteE, note4
+	mus_note noteD#, note4
+	mus_note noteC#, note4
+	mus_note noteC#, note4
+
+	mus_octave oct2
+	mus_note noteB, note4
+	mus_note noteA, note4
+	mus_note noteB, note4
+
+	mus_octave oct3
+	mus_note noteC#, note4
+	mus_note noteD#, note4
+
+	mus_octave oct2
+	mus_note noteE, note8_16
+	mus_note noteF#, note8_16
+	mus_note noteG#, note8_16
+	mus_note noteA, note8_16
+	mus_note noteB, note4
+
+	mus_octave oct3
+	mus_note noteC#, note4
+	mus_note noteD#, note4
+	mus_note noteE, note8_16
+
+	mus_octave oct2
+	mus_note noteB, note8_16
+	mus_note noteG#, note8_16
+	mus_note noteF#, note8_16
+	mus_note noteE, note8_16
+	mus_note noteF#, note8_16
+	mus_note noteG#, note8_16
+	mus_note noteA, note8_16
+	mus_jump 0, branch_A28A
+	; A303
+	;No end byte until indigo plateu channel 1
 
 Routes4_md_2: ;a304 - a3c3
-INCBIN "baserom.gbc",$a304,$a3c4 - $a304
+	; a304
+	mus_mod 12, 2, 4
+	mus_duty duty25
+	mus_vel 9, 2
+
+	mus_octave oct2
+	mus_note noteE, note8_16
+	mus_note noteF#, note16
+	mus_vel 9, 0
+	mus_note noteE, note2_4
+	mus_vel 9, 2
+
+	mus_octave oct1
+	mus_note noteB, note8_16
+
+	mus_octave oct2
+	mus_note noteC, note16
+	mus_vel 9, 0
+
+	mus_octave oct1
+	mus_note noteB, note2
+	mus_duty duty75
+	mus_vel 12, 7
+
+	mus_octave oct2
+	mus_note noteE, note16
+	mus_note noteF#, note16
+	mus_note noteB, note16
+
+	mus_octave oct3
+	mus_note noteD#, note16
+
+branch_A325:
+	mus_vel 12, 7
+	mus_note noteE, note4_8
+
+	mus_octave oct2
+	mus_note noteB, note8
+	mus_note noteB, note4
+
+	mus_octave oct3
+	mus_note noteB, note4
+	mus_note noteA, note4
+	mus_note noteG#, note4
+	mus_note noteF#, note4
+	mus_note noteF#, note16
+	mus_note noteA, note16
+	mus_note noteG#, note16
+	mus_note noteF#, note16
+	mus_vel 12, 2
+	mus_note noteG#, note8_16
+	mus_note noteE, note16
+	mus_vel 10, 0
+
+	mus_octave oct2
+	mus_note noteB, note2_4
+	mus_duty duty12_5
+	mus_vel 12, 2
+
+	mus_octave oct1
+	mus_note noteB, note8_16
+	mus_vel 12, 7
+
+	mus_octave oct2
+	mus_note noteC, note16
+
+	mus_octave oct1
+	mus_note noteB, note2
+
+	mus_octave oct2
+	mus_note noteD#, note4
+	mus_duty duty75
+
+	mus_octave oct3
+	mus_note noteE, note4_8
+
+	mus_octave oct2
+	mus_note noteB, note8
+	mus_note noteB, note4
+
+	mus_octave oct3
+	mus_note noteB, note4
+	mus_note noteA, note4
+	mus_note noteG#, note4
+	mus_note noteF#, note4
+	mus_note noteA, note16
+
+	mus_octave oct4
+	mus_note noteC#, note16
+
+	mus_octave oct3
+	mus_note noteB, note16
+	mus_note noteA, note16
+	mus_vel 12, 2
+	mus_note noteB, note8_16
+	mus_vel 12, 7
+	mus_note noteA, note16
+	mus_vel 11, 0
+	mus_note noteG#, note4_8
+	mus_vel 9, 0
+	mus_note noteG#, note4_8
+	mus_vel 7, 0
+	mus_note noteG#, note4_8
+	mus_vel 6, 15
+	mus_note noteG#, note4_8
+	mus_vel 12, 7
+	mus_note noteG#, note4
+	db $D8
+	mus_note noteRst, note4
+	mus_note noteA, note4
+	mus_note noteG#, note4
+	mus_note noteF#, note4
+	db $D8
+	mus_note noteA, note16
+	mus_note noteF#, note4_8
+	db $D8
+	mus_note noteG, note1
+	mus_note noteF#, note4_8
+	mus_duty duty12_5
+	db $D8
+	mus_note noteA, note16
+
+	mus_octave oct2
+	mus_note noteF#, note4
+	mus_note noteE, note4
+	mus_note noteF#, note4
+	mus_note noteA, note4_8
+	mus_duty duty75
+	db $D8
+	mus_note noteRst, note2
+
+	mus_octave oct3
+	mus_note noteF#, note4_8
+	mus_note noteG#, note4
+	mus_note noteF#, note4
+	db $D8
+	mus_note noteRst, note4_16
+	mus_note noteE, note4
+	db $D8
+	mus_note noteA#, note16
+	mus_note noteE, note2_4
+	mus_duty duty12_5
+	db $D8
+	mus_note noteA, note16
+
+	mus_octave oct2
+	mus_note noteE, note4
+	mus_note noteD#, note4
+	mus_note noteE, note4
+	mus_note noteG#, note4_8
+	mus_duty duty75
+	db $D8
+	mus_note noteRst, note2
+
+	mus_octave oct3
+	mus_note noteE, note4_8
+	mus_note noteF#, note4
+	mus_note noteD#, note4
+
+	mus_octave oct2
+	mus_note noteB, note4
+	db $D8
+	mus_note noteA#, note16
+
+	mus_octave oct3
+	mus_note noteB, note1
+	db $D8
+	mus_note noteA#, note2
+	mus_note noteB, note2
+	db $D8
+	mus_note noteB, note16
+	mus_note noteA, note4_8
+	db $D8
+	mus_note noteB, note2
+	mus_note noteA, note4_8
+	mus_vel 10, 7
+	mus_note noteG#, note16
+	mus_note noteF#, note16
+	mus_vel 11, 0
+	mus_note noteE, note2_4
+	mus_vel 10, 0
+	mus_note noteE, note2
+	mus_vel 10, 7
+	mus_note noteE, note2_8
+	mus_jump 0, branch_A325
+	; A3C3
+	;No end byte until indigo plateu channel 1
 
 Routes4_md_3: ;a3c4 - a49c
-INCBIN "baserom.gbc",$a3c4,$a49d - $a3c4
+; A3C4
+	mus_vel 1, 0
+
+	mus_octave oct3
+	mus_note noteE, note16
+	mus_note noteRst, note8_16
+	mus_note noteE, note16
+	mus_note noteRst, note8_16
+	mus_note noteE, note16
+	mus_note noteRst, note8_16
+	mus_note noteE, note16
+	mus_note noteRst, note8_16
+	mus_note noteE, note16
+	mus_note noteRst, note8_16
+	mus_note noteE, note16
+	mus_note noteRst, note8_16
+	mus_note noteE, note16
+	mus_note noteRst, note8_16
+	mus_note noteD#, note16
+	mus_note noteRst, note8_16
+	
+branch_A3D7:
+	mus_note noteE, note16
+	mus_note noteRst, note8_16
+	mus_note noteE, note16
+	mus_note noteE, note16
+	mus_note noteE, note16
+	mus_note noteE, note16
+	mus_note noteE, note16
+	mus_note noteRst, note16
+	mus_note noteE, note16
+	mus_note noteRst, note8_16
+	mus_note noteE, note16
+	mus_note noteRst, note16
+	mus_note noteF#, note16
+	mus_note noteRst, note8_16
+	mus_note noteF#, note16
+	mus_note noteF#, note16
+	mus_note noteF#, note16
+	mus_note noteF#, note16
+	mus_note noteF#, note16
+	mus_note noteRst, note16
+	mus_note noteF#, note16
+	mus_note noteRst, note8_16
+	mus_note noteA, note16
+	mus_note noteRst, note16
+	mus_note noteG#, note16
+	mus_note noteRst, note8_16
+	mus_note noteG#, note16
+	mus_note noteG#, note16
+	mus_note noteG#, note16
+	mus_note noteG#, note16
+	mus_note noteG#, note16
+	mus_note noteRst, note16
+	mus_note noteG#, note16
+	mus_note noteRst, note8_16
+	mus_note noteG#, note16
+	mus_note noteRst, note16
+	mus_note noteG#, note16
+	mus_note noteRst, note8_16
+	mus_note noteG#, note16
+	mus_note noteG#, note16
+	mus_note noteG#, note16
+	mus_note noteG#, note16
+	mus_note noteG#, note16
+	mus_note noteRst, note16
+	mus_note noteG#, note16
+	mus_note noteRst, note8_16
+	mus_note noteG#, note16
+	mus_note noteRst, note16
+	mus_note noteE, note16
+	mus_note noteRst, note8_16
+	mus_note noteE, note16
+	mus_note noteE, note16
+	mus_note noteE, note16
+	mus_note noteE, note16
+	mus_note noteE, note16
+	mus_note noteRst, note16
+	mus_note noteE, note16
+	mus_note noteRst, note8_16
+	mus_note noteE, note16
+	mus_note noteRst, note16
+	mus_note noteF#, note16
+	mus_note noteRst, note8_16
+	mus_note noteF#, note16
+	mus_note noteF#, note16
+	mus_note noteF#, note16
+	mus_note noteF#, note16
+	mus_note noteF#, note16
+	mus_note noteRst, note16
+	mus_note noteF#, note16
+	mus_note noteRst, note8_16
+	mus_note noteA, note16
+	mus_note noteRst, note16
+	mus_note noteB, note16
+	mus_note noteRst, note8_16
+	mus_note noteB, note16
+	mus_note noteB, note16
+	mus_note noteB, note16
+	mus_note noteB, note16
+	mus_note noteB, note16
+	mus_note noteRst, note16
+	mus_note noteB, note16
+	mus_note noteRst, note8_16
+	mus_note noteB, note16
+	mus_note noteRst, note16
+	mus_note noteE, note16
+	mus_note noteRst, note8_16
+	mus_note noteE, note16
+	mus_note noteE, note16
+	mus_note noteE, note16
+	mus_note noteE, note16
+	mus_note noteE, note16
+	mus_note noteRst, note16
+	mus_note noteE, note16
+	mus_note noteRst, note16
+	mus_note noteE, note16
+	mus_note noteRst, note16
+	mus_note noteA, note16
+	mus_note noteRst, note16
+	mus_note noteF#, note16
+	mus_note noteRst, note8_16
+	mus_note noteF#, note16
+	mus_note noteF#, note16
+	mus_note noteF#, note16
+	mus_note noteF#, note16
+	mus_note noteF#, note16
+	mus_note noteRst, note16
+	mus_note noteF#, note16
+	mus_note noteRst, note8_16
+	mus_note noteF#, note16
+	mus_note noteRst, note16
+	mus_note noteD, note16
+	mus_note noteRst, note8_16
+	mus_note noteD, note16
+	mus_note noteD, note16
+	mus_note noteD, note16
+	mus_note noteD, note16
+	mus_note noteD, note16
+	mus_note noteRst, note16
+	mus_note noteD, note16
+	mus_note noteRst, note8_16
+	mus_note noteD, note16
+	mus_note noteRst, note16
+	mus_note noteE, note16
+	mus_note noteRst, note8_16
+	mus_note noteE, note16
+	mus_note noteE, note16
+	mus_note noteE, note16
+	mus_note noteE, note16
+	mus_note noteE, note16
+	mus_note noteRst, note16
+	mus_note noteE, note16
+	mus_note noteRst, note8_16
+	mus_note noteE, note16
+	mus_note noteRst, note16
+	mus_note noteG#, note16
+	mus_note noteRst, note8_16
+	mus_note noteG#, note16
+	mus_note noteG#, note16
+	mus_note noteG#, note16
+	mus_note noteG#, note16
+	mus_note noteG#, note16
+	mus_note noteRst, note16
+	mus_note noteG#, note16
+	mus_note noteRst, note8_16
+	mus_note noteG#, note16
+	mus_note noteRst, note16
+	mus_note noteF#, note16
+	mus_note noteRst, note8_16
+	mus_note noteF#, note16
+	mus_note noteF#, note16
+	mus_note noteF#, note16
+	mus_note noteF#, note16
+	mus_note noteF#, note16
+	mus_note noteRst, note16
+	mus_note noteF#, note16
+	mus_note noteRst, note8_16
+	mus_note noteF#, note16
+	mus_note noteRst, note16
+	mus_note noteB, note16
+	mus_note noteRst, note8_16
+	mus_note noteB, note16
+	mus_note noteB, note16
+	mus_note noteB, note16
+	mus_note noteB, note16
+	mus_note noteB, note16
+	mus_note noteRst, note16
+	mus_note noteB, note16
+	mus_note noteRst, note8_16
+	mus_note noteB, note16
+	mus_note noteRst, note16
+	mus_note noteG#, note16
+	mus_note noteRst, note8_16
+	mus_note noteG#, note16
+	mus_note noteG#, note16
+	mus_note noteG#, note16
+	mus_note noteG#, note16
+	mus_note noteG#, note16
+	mus_note noteRst, note16
+	mus_note noteG#, note16
+	mus_note noteRst, note8_16
+	mus_note noteG#, note16
+	mus_note noteRst, note16
+	mus_note noteE, note16
+	mus_note noteRst, note8_16
+	mus_note noteE, note16
+	mus_note noteE, note16
+	mus_note noteE, note16
+	mus_note noteE, note16
+	mus_note noteE, note16
+	mus_note noteRst, note16
+	mus_note noteE, note16
+	mus_note noteRst, note8_16
+	mus_note noteD#, note16
+	mus_note noteRst, note16
+	mus_jump 0, branch_A3D7
+	; A49C
+	;No end byte until indigo plateu channel 1
 
 Routes4_md_4: ;a49d - a5ef
-INCBIN "baserom.gbc",$a49d,$a5f0 - $a49d
+	; A49D
+	mus_vel 12, 15
+	mus_note noteRst, note2_4
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+
+branch_A4A8:
+	mus_note noteB, note4
+	mus_note noteC#, note8
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note8
+	mus_note noteC#, note8
+	mus_note noteB, note8
+	mus_note noteC#, note8_16
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note4
+	mus_note noteC#, note8
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note4
+	mus_note noteC#, note8
+	mus_note noteB, note8
+	mus_note noteC#, note8
+	mus_note noteB, note4
+	mus_note noteC#, note8
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note8
+	mus_note noteC#, note8
+	mus_note noteB, note8
+	mus_note noteC#, note8
+	mus_note noteB, note8
+	mus_note noteC#, note8
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note4
+	mus_note noteC#, note8
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note8
+	mus_note noteC#, note8
+	mus_note noteB, note8
+	mus_note noteC#, note8
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note4
+	mus_note noteC#, note8
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note8
+	mus_note noteC#, note8
+	mus_note noteB, note8
+	mus_note noteC#, note8
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note4
+	mus_note noteC#, note8
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note4
+	mus_note noteC#, note8
+	mus_note noteB, note8
+	mus_note noteC#, note8
+	mus_note noteB, note4
+	mus_note noteC#, note8
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note8
+	mus_note noteC#, note8
+	mus_note noteB, note8
+	mus_note noteC#, note8
+	mus_note noteB, note8
+	mus_note noteC#, note8
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note4
+	mus_note noteC#, note8
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note8
+	mus_note noteC#, note8
+	mus_note noteB, note8
+	mus_note noteC#, note8
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note4
+	mus_note noteC#, note8
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note8
+	mus_note noteC#, note8
+	mus_note noteB, note8
+	mus_note noteC#, note8
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note4
+	mus_note noteC#, note8
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note4
+	mus_note noteC#, note8
+	mus_note noteB, note8
+	mus_note noteC#, note8
+	mus_note noteB, note4
+	mus_note noteC#, note8
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note8
+	mus_note noteC#, note8
+	mus_note noteB, note8
+	mus_note noteC#, note8
+	mus_note noteB, note8
+	mus_note noteC#, note8
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note4
+	mus_note noteC#, note8
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note8
+	mus_note noteC#, note8
+	mus_note noteB, note8
+	mus_note noteC#, note8
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note4
+	mus_note noteC#, note8
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note8
+	mus_note noteC#, note8
+	mus_note noteB, note8
+	mus_note noteC#, note8
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note4
+	mus_note noteC#, note8
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note4
+	mus_note noteC#, note8
+	mus_note noteB, note8
+	mus_note noteC#, note8
+	mus_note noteB, note4
+	mus_note noteC#, note8
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note8
+	mus_note noteC#, note8
+	mus_note noteB, note8
+	mus_note noteC#, note8
+	mus_note noteB, note8
+	mus_note noteC#, note8
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note4
+	mus_note noteC#, note8
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note8
+	mus_note noteC#, note8
+	mus_note noteB, note8
+	mus_note noteC#, note8
+	mus_note noteB, note8
+	mus_note noteC#, note8
+	mus_note noteB, note8
+	mus_note noteC#, note8
+	mus_jump 0, $64A8
+	; A5EF
+	;No end byte until indigo plateu channel 1
 
 ;Indigo Plateau
 IndigoPlateau_md_1: ;a5f0 - a663
-INCBIN "baserom.gbc",$a5f0,$a664 - $a5f0
+	mus_tempo 0, 132
+	mus_volume 119
+	mus_duty duty75
+	mus_mod 6, 3, 4
+	db $E8
+	mus_vel 11, 2
+
+	mus_octave oct1
+	mus_note noteA, note2
+	mus_note noteA, note2
+	mus_note noteA, note2
+	mus_note noteA, note4
+	mus_vel 10, 4
+	mus_note noteA#, note4
+	
+branch_a605:
+	mus_call branch_a659
+	mus_vel 11, 4
+
+	mus_octave oct2
+	mus_note noteD, note4
+	mus_call branch_a659
+	mus_vel 11, 4
+
+	mus_octave oct2
+	mus_note noteD#, note4
+	mus_call branch_a659
+	mus_vel 11, 4
+
+	mus_octave oct2
+	mus_note noteD, note4
+	mus_call branch_a659
+	mus_vel 10, 0
+
+	mus_octave oct1
+	mus_note noteA#, note4
+	mus_call branch_a659
+	mus_vel 11, 4
+
+	mus_octave oct2
+	mus_note noteD, note4
+	mus_vel 13, 4
+
+	mus_octave oct2
+	mus_note noteA, note4
+	mus_note noteA, note4
+	mus_note noteA, note4
+	mus_note noteA, note4
+	mus_note noteA, note4
+	mus_note noteA, note4
+	mus_note noteA, note4
+	mus_vel 11, 4
+
+	mus_octave oct2
+	mus_note noteD#, note4
+	mus_vel 13, 4
+
+	mus_octave oct2
+	mus_note noteA#, note4
+	mus_note noteA#, note4
+	mus_note noteA#, note4
+	mus_note noteA#, note4
+	mus_note noteA#, note4
+	mus_note noteA#, note4
+	mus_note noteA#, note4
+	mus_vel 11, 4
+
+	mus_octave oct2
+	mus_note noteF, note8
+	mus_vel 11, 4
+
+	mus_octave oct2
+	mus_note noteG, note8
+	mus_vel 11, 0
+	mus_note noteA, note2
+
+	mus_octave oct1
+	mus_note noteA, note2
+	mus_vel 11, 7
+
+	mus_octave oct2
+	mus_note noteF, note2
+	mus_vel 4, 14
+
+	mus_octave oct1
+	mus_note noteA#, note2
+	mus_jump 0, branch_a605
+	
+branch_a659:
+	mus_vel 11, 2
+
+	mus_octave oct1
+	mus_note noteA, note4
+	mus_note noteA, note4
+	mus_note noteA, note4
+	mus_note noteA, note4
+	mus_note noteA, note4
+	mus_note noteA, note4
+	mus_note noteA, note4
+	mus_end
+	; A663
 
 IndigoPlateau_md_2: ;a664 - a6b9
-INCBIN "baserom.gbc",$a664,$a6ba - $a664
+; A664
+	mus_duty duty75
+	mus_mod 8, 2, 5
+	mus_vel 12, 2
+
+	mus_octave oct2
+	mus_note noteD, note2
+	mus_note noteD, note2
+	mus_note noteD, note2
+	mus_note noteD, note4
+	mus_vel 5, 10
+	mus_note noteD#, note4
+	
+branch_a673:
+	mus_call branch_a6af
+	mus_vel 12, 5
+	mus_note noteA, note4
+	mus_call branch_a6af
+	mus_vel 12, 5
+	mus_note noteA#, note4
+	mus_call branch_a6af
+	mus_vel 12, 5
+	mus_note noteA, note4
+	mus_call branch_a6af
+	mus_vel 12, 7
+	mus_note noteC#, note4
+	mus_call branch_a6af
+	mus_vel 12, 5
+	mus_note noteA, note4
+	mus_call branch_a6af
+	mus_vel 12, 5
+	mus_note noteA#, note4
+	mus_call branch_a6af
+	mus_vel 12, 5
+
+	mus_octave oct3
+	mus_note noteC, note8
+	mus_vel 12, 7
+
+	mus_octave oct3
+	mus_note noteC#, note8
+	mus_note noteD, note2
+
+	mus_octave oct2
+	mus_note noteD, note2
+
+	mus_octave oct3
+	mus_note noteC, note2
+	mus_vel 4, 13
+
+	mus_octave oct3
+	mus_note noteD#, note2
+	mus_jump 0, branch_a673
+	
+branch_a6af:
+	mus_vel 12, 2
+
+	mus_octave oct2
+	mus_note noteD, note4
+	mus_note noteD, note4
+	mus_note noteD, note4
+	mus_note noteD, note4
+	mus_note noteD, note4
+	mus_note noteD, note4
+	mus_note noteD, note4
+	mus_end
+	; A6B9
 
 IndigoPlateau_md_3: ;a6ba - a70e
-INCBIN "baserom.gbc",$a6ba,$a70f - $a6ba
+	; A6BA
+	mus_vel 1, 0
+
+	mus_octave oct3
+	mus_note noteD, note8
+	mus_note noteRst, note4_8
+	mus_note noteD, note8
+	mus_note noteRst, note4_8
+	mus_note noteD, note8
+	mus_note noteRst, note4_8
+	mus_note noteD, note8
+	mus_note noteRst, note8
+	mus_note noteD#, note4
+	
+branch_a6c6:
+	mus_call branch_a6fe
+	mus_call branch_a6fe
+	mus_call branch_a6fe
+	mus_note noteD, note8
+	mus_note noteRst, note8
+	mus_note noteD, note8
+	mus_note noteRst, note8
+	mus_note noteD, note8
+	mus_note noteRst, note8
+	mus_note noteD, note8
+	mus_note noteRst, note8
+	mus_note noteD, note8
+	mus_note noteRst, note8
+	mus_note noteD, note8
+	mus_note noteRst, note8
+	mus_note noteD, note8
+	mus_note noteRst, note8
+	mus_note noteF#, note4
+	mus_call branch_a6fe
+	mus_call branch_a6fe
+	mus_note noteD, note8
+	mus_note noteRst, note8
+	mus_note noteD, note8
+	mus_note noteRst, note8
+	mus_note noteD, note8
+	mus_note noteRst, note8
+	mus_note noteD, note8
+	mus_note noteRst, note8
+	mus_note noteD, note8
+	mus_note noteRst, note8
+	mus_note noteD, note8
+	mus_note noteRst, note8
+	mus_note noteD, note8
+	mus_note noteRst, note8
+	mus_note noteA#, note16
+	mus_note noteRst, note16
+	mus_note noteA#, note16
+	mus_note noteRst, note16
+	mus_note noteA, note2
+	mus_note noteD, note2
+	mus_note noteA#, note2
+	mus_note noteD#, note2
+	mus_jump 0, branch_a6c6
+
+	
+branch_a6fe:
+	mus_octave oct3
+	mus_note noteD, note8
+	mus_note noteRst, note8
+	mus_note noteD, note8
+	mus_note noteRst, note8
+	mus_note noteD, note8
+	mus_note noteRst, note8
+	mus_note noteD, note8
+	mus_note noteRst, note8
+	mus_note noteD, note8
+	mus_note noteRst, note8
+	mus_note noteD, note8
+	mus_note noteRst, note8
+	mus_note noteD, note8
+	mus_note noteRst, note8
+	mus_note noteA, note4
+	mus_end
+	; A70E
 
 IndigoPlateau_md_4: ;a70f - a7c4
-INCBIN "baserom.gbc",$a70f,$a7c5 - $a70f
+	; A70F
+	
+;piece 1
+	db $D6
+	mus_note noteB, note1
+	mus_note noteC#, note8
+	mus_note noteB, note1
+	mus_note noteC#, note8
+	mus_note noteB, note1
+	mus_note noteC#, note8
+	mus_note noteB, note2
+	mus_note noteC#, note8
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	
+branch_a728:
+	mus_call branch_a791
+	mus_call branch_a77e
+	mus_call branch_a791
+	mus_call branch_a7a8
+	mus_call branch_a791
+	mus_call branch_a77e
+	mus_call branch_a791
+	mus_call branch_a7a8
+	mus_call branch_a791
+	mus_call branch_a77e
+	mus_call branch_a791
+	mus_call branch_a7a8
+	mus_call branch_a77e
+	mus_call branch_a7a8
+	mus_note noteB, note1
+	mus_note noteC#, note8
+	mus_note noteB, note2
+	mus_note noteC#, note8
+	mus_note noteB, note2
+	mus_note noteC#, note8_16
+	mus_note noteB, note1
+	mus_note noteC#, note8
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note16
+	mus_note noteC#, note8
+	mus_note noteB, note16
+	mus_note noteC#, note8
+	mus_note noteB, note16
+	mus_note noteC#, note8
+	mus_note noteB, note16
+	mus_note noteC#, note8
+	mus_jump 0, branch_a728
+
+branch_a77e:
+	mus_note noteB, note4
+	mus_note noteC#, note8
+	mus_note noteB, note4
+	mus_note noteC#, note8_16
+	mus_note noteB, note4
+	mus_note noteC#, note4
+	mus_note noteB, note4
+	mus_note noteC#, note8_16
+	mus_note noteB, note4
+	mus_note noteC#, note8
+	mus_note noteB, note4
+	mus_note noteC#, note8_16
+	mus_note noteB, note4
+	mus_note noteC#, note4
+	mus_note noteB, note8
+	mus_note noteC#, note4
+	mus_note noteB, note8
+	mus_note noteC#, note8_16
+	mus_end
+	; A790
+
+;piece 2
+branch_a791:
+	mus_note noteB, note4
+	mus_note noteC#, note8
+	mus_note noteB, note4
+	mus_note noteC#, note8_16
+	mus_note noteB, note4
+	mus_note noteC#, note4
+	mus_note noteB, note4
+	mus_note noteC#, note8_16
+	mus_note noteB, note4
+	mus_note noteC#, note8
+	mus_note noteB, note4
+	mus_note noteC#, note8_16
+	mus_note noteB, note4
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_end
+	; A7A7
+
+;piece 3
+branch_a7a8:
+	mus_note noteB, note4
+	mus_note noteC#, note8
+	mus_note noteB, note4
+	mus_note noteC#, note8_16
+	mus_note noteB, note4
+	mus_note noteC#, note8
+	mus_note noteB, note4
+	mus_note noteC#, note8_16
+	mus_note noteB, note4
+	mus_note noteC#, note8
+	mus_note noteB, note4
+	mus_note noteC#, note8
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note4
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_note noteB, note16
+	mus_note noteC#, note8_16
+	mus_end
+	; A7C4
 
 ;Pallet Town
 PalletTown_md_1: ; a7c5 - a85e (154 bytes)
-INCBIN "baserom.gbc",$a7c5,$a85f - $a7c5
+	; A7C5
+	mus_tempo 0, 160
+	mus_volume 119
+	mus_duty duty50
+	mus_vel 12, 3
+
+branch_a7ce:
+	mus_octave oct2
+	mus_note noteB, note4
+
+	mus_octave oct3
+	mus_note noteC, note8
+	mus_note noteD, note4
+	mus_note noteG, note8
+	mus_note noteD, note8
+	mus_note noteC, note8
+
+	mus_octave oct2
+	mus_note noteB, note4
+	mus_note noteG, note8
+
+	mus_octave oct3
+	mus_note noteD, note4
+	mus_note noteD, note8
+	mus_note noteC, note8
+
+	mus_octave oct2
+	mus_note noteB, note8
+	mus_note noteRst, note8
+	mus_note noteB, note8
+
+	mus_octave oct3
+	mus_note noteC, note8
+
+	mus_octave oct2
+	mus_note noteB, note8
+
+	mus_octave oct3
+	mus_note noteC, note2
+	mus_note noteRst, note8
+
+	mus_octave oct2
+	mus_note noteB, note8
+
+	mus_octave oct3
+	mus_note noteC, note8
+
+	mus_octave oct2
+	mus_note noteA, note8
+	mus_note noteB, note8
+	mus_note noteG, note8
+	mus_note noteA, note8
+	mus_note noteF#, note8
+	mus_note noteB, note4
+
+	mus_octave oct3
+	mus_note noteC, note8
+	mus_note noteD, note4
+	mus_note noteG, note8
+	mus_note noteD, note8
+	mus_note noteC, note8
+
+	mus_octave oct2
+	mus_note noteB, note4
+	mus_note noteG, note8
+
+	mus_octave oct3
+	mus_note noteD, note4
+	mus_note noteD, note8
+	mus_note noteG, note8
+	mus_note noteF#, note8
+	mus_note noteE, note4
+	mus_note noteD, note8
+	mus_note noteC, note4
+
+	mus_octave oct2
+	mus_note noteA, note8
+	mus_note noteB, note8
+
+	mus_octave oct3
+	mus_note noteC, note8
+	mus_note noteD, note8
+	mus_note noteC, note8
+
+	mus_octave oct2
+	mus_note noteB, note8
+	mus_note noteA, note8
+	mus_note noteG, note4
+	mus_note noteF#, note4
+
+	mus_octave oct3
+	mus_note noteC, note8
+
+	mus_octave oct2
+	mus_note noteG, note8
+	mus_note noteE, note8
+	mus_note noteG, note8
+
+	mus_octave oct3
+	mus_note noteD, note8
+
+	mus_octave oct2
+	mus_note noteA, note8
+	mus_note noteF#, note8
+	mus_note noteA, note8
+	mus_vel 11, 3
+	mus_note noteB, note8
+	mus_note noteG, note8
+	mus_note noteD, note8
+	mus_note noteG, note8
+	mus_note noteB, note8
+	mus_note noteG, note8
+	mus_note noteD, note8
+	mus_note noteG, note8
+
+	mus_octave oct3
+	mus_note noteC, note8
+
+	mus_octave oct2
+	mus_note noteG, note8
+	mus_note noteE, note8
+	mus_note noteG, note8
+
+	mus_octave oct3
+	mus_note noteD, note8
+
+	mus_octave oct2
+	mus_note noteA, note8
+	mus_note noteF#, note8
+	mus_note noteA, note8
+	mus_note noteB, note8
+	mus_note noteG, note8
+	mus_note noteD, note8
+	mus_note noteG, note8
+	mus_note noteB, note8
+	mus_note noteG, note8
+	mus_note noteD, note8
+	mus_note noteG, note8
+	mus_note noteA, note8
+	mus_note noteE, note8
+	mus_note noteC, note8
+	mus_note noteE, note8
+	mus_note noteA, note8
+	mus_note noteE, note8
+	mus_note noteC, note8
+	mus_note noteE, note8
+	mus_note noteA, note8
+	mus_note noteE, note8
+	mus_note noteC, note8
+	mus_note noteE, note8
+	mus_note noteA, note8
+	mus_note noteE, note8
+	mus_note noteC, note8
+	mus_note noteE, note8
+	mus_note noteF#, note8
+	mus_note noteD, note8
+	mus_note noteC, note8
+	mus_note noteD, note8
+	mus_note noteG, note8
+	mus_note noteE, note8
+	mus_note noteC, note8
+	mus_note noteE, note8
+	mus_note noteG, note8
+	mus_note noteE, note8
+	mus_note noteC, note8
+	mus_note noteE, note8
+	mus_note noteF#, note8
+	mus_note noteD, note8
+	mus_note noteC, note8
+	mus_note noteD, note8
+	mus_jump 0, branch_a7ce
+	mus_end
+	; A85E
 
 PalletTown_md_2: ; a85f - a8dd (127 bytes)
-INCBIN "baserom.gbc",$a85f,$a8de - $a85f
+	; A85F
+	mus_duty duty50
+
+branch_a861:
+	mus_vel 13, 3
+
+	mus_octave oct4
+	mus_note noteD, note8
+	mus_vel 10, 3
+	mus_note noteC, note8
+	mus_vel 13, 3
+
+	mus_octave oct3
+	mus_note noteB, note8
+	mus_vel 11, 3
+	mus_note noteA, note8
+	mus_vel 13, 3
+
+	mus_octave oct4
+	mus_note noteG, note8
+	mus_vel 11, 3
+	mus_note noteE, note8
+	mus_vel 13, 3
+	mus_note noteF#, note8
+	mus_note noteE, note8
+	mus_note noteD, note4_8
+
+	mus_octave oct3
+	mus_note noteB, note8
+	mus_note noteG, note8
+	mus_note noteG, note8
+	mus_note noteA, note8
+	mus_note noteB, note8
+
+	mus_octave oct4
+	mus_note noteC, note2_8
+
+	mus_octave oct3
+	mus_note noteF#, note8
+	mus_note noteG, note8
+	mus_note noteA, note8
+	mus_note noteB, note4_8
+
+	mus_octave oct4
+	mus_note noteC, note16
+
+	mus_octave oct3
+	mus_note noteB, note16
+	mus_note noteA, note2
+
+	mus_octave oct4
+	mus_note noteD, note8
+	mus_vel 10, 3
+	mus_note noteC, note8
+	mus_vel 13, 3
+
+	mus_octave oct3
+	mus_note noteB, note8
+	mus_vel 11, 3
+
+	mus_octave oct4
+	mus_note noteD, note8
+	mus_vel 13, 3
+	mus_note noteG, note8
+	mus_vel 10, 3
+	mus_note noteF#, note8
+	mus_vel 11, 3
+	mus_note noteF#, note8
+	mus_vel 13, 3
+	mus_note noteG, note8
+	mus_note noteE, note4_8
+	mus_note noteD, note8
+	mus_note noteD, note2
+	mus_note noteC, note8
+
+	mus_octave oct3
+	mus_note noteB, note8
+	mus_note noteA, note8
+	mus_note noteG, note8
+
+	mus_octave oct4
+	mus_note noteD, note8
+	mus_note noteC, note8
+
+	mus_octave oct3
+	mus_note noteB, note8
+	mus_note noteA, note8
+	mus_note noteG, note2_8
+	mus_note noteG, note8
+	mus_note noteA, note8
+	mus_note noteB, note8
+
+	mus_octave oct4
+	mus_note noteC, note2
+	mus_note noteD, note4_8
+	mus_note noteC, note8
+
+	mus_octave oct3
+	mus_note noteB, note2
+	mus_note noteRst, note8
+	mus_note noteG, note8
+	mus_note noteA, note8
+	mus_note noteB, note8
+
+	mus_octave oct4
+	mus_note noteC, note4
+	mus_note noteC, note4
+	mus_note noteD, note4_8
+	mus_note noteC, note16
+	mus_note noteD, note16
+
+	mus_octave oct3
+	mus_note noteB, note2
+	mus_note noteRst, note8
+	mus_note noteB, note8
+	mus_note noteA, note8
+	mus_note noteG, note8
+	mus_note noteA, note2
+	mus_note noteE, note4
+	mus_note noteB, note4
+	mus_note noteA, note2
+	mus_note noteG, note4
+	mus_note noteE, note4
+	mus_note noteF#, note2
+	mus_note noteG, note4
+	mus_note noteB, note4
+	mus_note noteB, note2
+	mus_note noteA, note2
+	mus_jump 0, branch_a861
+	mus_end
+	; A8DD
 
 PalletTown_md_3: ; a8de - aa75 (408 bytes)
-INCBIN "baserom.gbc",$a8de,$aa76 - $a8de
+;INCBIN "baserom.gbc",$a8de,$aa76 - $a8de
 
+	; A8DE
+	mus_mod 24, 2, 8
+	mus_vel 1, 2
+
+branch_a8e3:
+	mus_octave oct3
+	mus_note noteG, note4_8
+	mus_note noteE, note4_8
+	mus_note noteF#, note4
+	mus_note noteG, note4_8
+	mus_note noteA, note4_8
+	mus_note noteG, note4
+	mus_note noteE, note4_8
+	mus_note noteF#, note4_8
+	mus_note noteE, note4
+	mus_note noteG, note4_8
+	mus_note noteE, note4_8
+	mus_note noteD, note4
+	mus_note noteG, note4_8
+	mus_note noteE, note4_8
+	mus_note noteF#, note4
+	mus_note noteG, note4_8
+	mus_note noteA, note4_8
+	mus_note noteG, note4
+	mus_note noteE, note4_8
+	mus_note noteF#, note4_8
+	mus_note noteA, note4
+	mus_note noteG, note4_8
+	mus_note noteE, note4_8
+	mus_note noteD, note4
+	mus_note noteC, note2
+	mus_note noteD, note2
+	mus_note noteG, note2
+	mus_note noteE, note4
+	mus_note noteD, note4
+	mus_note noteC, note2
+	mus_note noteD, note2
+	mus_note noteG, note2
+	mus_note noteA, note4
+	mus_note noteG, note4
+	mus_note noteE, note2
+	mus_note noteA, note2
+	mus_note noteE, note2
+	mus_note noteG, note2
+	mus_note noteF#, note2
+	mus_note noteE, note2
+	mus_note noteE, note2
+	mus_note noteF#, note2
+	mus_jump 0, branch_a8e3
+	mus_end
+	; A912
+
+	mus_tempo 0, 144
+	mus_volume 119
+	mus_mod 5, 1, 6
+	
+branch_a91b:
+	mus_vel 1, 0
+
+	mus_octave oct5
+	mus_note noteE, note16
+	mus_note noteRst, note16
+
+	mus_octave oct4
+	mus_note noteB, note16
+	mus_note noteRst, note16
+
+	mus_octave oct5
+	mus_note noteC#, note16
+	mus_note noteRst, note16
+
+	mus_octave oct4
+	mus_note noteB, note16
+
+	mus_octave oct5
+	mus_note noteE, note16
+	mus_note noteRst, note4
+	mus_note noteE, note8
+	mus_note noteRst, note8
+	mus_note noteD#, note16
+	mus_note noteRst, note16
+
+	mus_octave oct4
+	mus_note noteB, note16
+	mus_note noteRst, note16
+
+	mus_octave oct5
+	mus_note noteC#, note16
+	mus_note noteRst, note16
+
+	mus_octave oct4
+	mus_note noteB, note16
+
+	mus_octave oct5
+	mus_note noteD#, note16
+	mus_note noteRst, note2
+	mus_note noteC#, note16
+	mus_note noteRst, note16
+	mus_note noteD#, note16
+	mus_note noteRst, note16
+	mus_note noteC#, note16
+
+	mus_octave oct4
+	mus_note noteB, note16
+	mus_note noteRst, note8
+
+	mus_octave oct5
+	mus_note noteC#, note16
+	mus_note noteRst, note16
+	mus_note noteD#, note16
+	mus_note noteRst, note16
+	mus_note noteC#, note16
+
+	mus_octave oct4
+	mus_note noteB, note16
+	mus_note noteRst, note8
+
+	mus_octave oct5
+	mus_note noteD#, note4
+	mus_note noteC#, note4
+	mus_note noteD#, note16
+	mus_note noteE, note16
+	mus_note noteRst, note16
+	mus_note noteF#, note16
+	mus_note noteRst, note16
+
+	mus_octave oct4
+	mus_note noteB, note8
+	mus_note noteRst, note16
+
+	mus_octave oct5
+	mus_note noteE, note16
+	mus_note noteRst, note16
+
+	mus_octave oct4
+	mus_note noteB, note16
+	mus_note noteRst, note16
+
+	mus_octave oct5
+	mus_note noteC#, note16
+	mus_note noteRst, note16
+
+	mus_octave oct4
+	mus_note noteB, note16
+
+	mus_octave oct5
+	mus_note noteE, note16
+	mus_note noteRst, note2
+	mus_note noteD#, note16
+	mus_note noteRst, note16
+
+	mus_octave oct4
+	mus_note noteB, note16
+	mus_note noteRst, note16
+
+	mus_octave oct5
+	mus_note noteC#, note16
+	mus_note noteRst, note16
+
+	mus_octave oct4
+	mus_note noteB, note16
+
+	mus_octave oct5
+	mus_note noteD#, note16
+	mus_note noteRst, note4
+
+	mus_octave oct4
+	mus_note noteB, note8
+	mus_note noteRst, note8
+
+	mus_octave oct5
+	mus_note noteC#, note16
+	mus_note noteRst, note16
+	mus_note noteD#, note16
+	mus_note noteRst, note16
+	mus_note noteC#, note16
+
+	mus_octave oct4
+	mus_note noteB, note16
+	mus_note noteRst, note8
+
+	mus_octave oct5
+	mus_note noteC#, note16
+	mus_note noteRst, note16
+	mus_note noteD#, note16
+	mus_note noteRst, note16
+	mus_note noteE, note16
+	mus_note noteF#, note16
+	mus_note noteRst, note8
+	mus_note noteF#, note4
+	mus_note noteE, note4
+	mus_note noteF#, note16
+	mus_note noteG#, note16
+	mus_note noteRst, note16
+	mus_note noteF#, note16
+	mus_note noteRst, note16
+	mus_note noteD#, note8
+	mus_note noteRst, note8_16
+
+	mus_octave oct4
+	mus_note noteA, note8
+	mus_note noteRst, note8
+	mus_note noteB, note8
+	mus_note noteRst, note8
+
+	mus_octave oct5
+	mus_note noteC#, note8
+	mus_note noteRst, note8
+	mus_note noteE, note8
+	mus_note noteF#, note2
+	mus_note noteRst, note8
+	mus_note noteE, note8
+	mus_note noteD#, note8
+	mus_note noteC#, note8
+	mus_note noteRst, note8
+
+	mus_octave oct4
+	mus_note noteG#, note8
+	mus_note noteRst, note8
+	mus_note noteA, note8
+	mus_note noteRst, note8
+	mus_note noteB, note8
+	mus_note noteRst, note8
+
+	mus_octave oct5
+	mus_note noteD#, note8
+	mus_note noteE, note2
+	mus_note noteRst, note8
+	mus_note noteD#, note8
+	mus_note noteC#, note8
+	mus_note noteD#, note8
+
+	mus_octave oct4
+	mus_note noteA, note8
+	mus_note noteG#, note8
+	mus_note noteA, note8
+	mus_note noteA#, note16
+	mus_note noteB, note16
+	mus_note noteRst, note4
+	mus_note noteF#, note8
+	mus_note noteRst, note8
+	mus_note noteB, note8
+	mus_note noteA#, note8
+	mus_note noteB, note8
+
+	mus_octave oct5
+	mus_note noteC, note16
+	mus_note noteC#, note16
+	mus_note noteRst, note2
+
+	mus_octave oct4
+	mus_note noteF#, note8
+	mus_note noteF, note8
+	mus_note noteF#, note8
+	mus_note noteG#, note8
+	mus_note noteA, note8
+
+	mus_octave oct5
+	mus_note noteE, note8
+	mus_note noteD#, note8
+	mus_note noteC#, note8
+
+	mus_octave oct4
+	mus_note noteB, note8
+	mus_note noteRst, note4_8
+	mus_note noteB, note8
+	mus_note noteRst, note4_8
+	mus_jump 0, branch_a91b
+	mus_end
+	; A9CE
+	
+	; A9CF
+	mus_tempo 0, 144
+	mus_volume 119
+	db $E8
+	mus_mod 6, 1, 5
+	
+branch_a9d8:
+	mus_vel 1, 0
+
+	mus_octave oct5
+	mus_note noteE, note16
+	mus_note noteRst, note16
+	mus_note noteG#, note16
+	mus_note noteRst, note16
+	mus_note noteF#, note16
+	mus_note noteRst, note16
+	mus_note noteA, note16
+	mus_note noteG#, note16
+	mus_note noteRst, note2
+	mus_note noteD#, note16
+	mus_note noteRst, note16
+	mus_note noteF#, note16
+	mus_note noteRst, note16
+	mus_note noteE, note16
+	mus_note noteRst, note16
+	mus_note noteG#, note16
+	mus_note noteF#, note16
+	mus_note noteRst, note4
+
+	mus_octave oct4
+	mus_note noteB, note8
+	mus_note noteRst, note8
+
+	mus_octave oct5
+	mus_note noteC#, note16
+	mus_note noteRst, note16
+	mus_note noteD#, note16
+	mus_note noteRst, note16
+	mus_note noteE, note16
+	mus_note noteF#, note16
+	mus_note noteRst, note8
+	mus_note noteC#, note16
+	mus_note noteRst, note16
+	mus_note noteD#, note16
+	mus_note noteRst, note16
+	mus_note noteE, note16
+	mus_note noteF#, note16
+	mus_note noteRst, note8
+	mus_note noteF#, note4
+	mus_note noteE, note4
+	mus_note noteF#, note16
+	mus_note noteG#, note16
+	mus_note noteRst, note16
+	mus_note noteF#, note16
+	mus_note noteRst, note16
+	mus_note noteD#, note8
+	mus_note noteRst, note16
+	mus_note noteE, note16
+	mus_note noteRst, note16
+	mus_note noteG#, note16
+	mus_note noteRst, note16
+	mus_note noteF#, note16
+	mus_note noteRst, note16
+	mus_note noteA, note16
+	mus_note noteG#, note16
+	mus_note noteRst, note4
+	mus_note noteE, note8
+	mus_note noteRst, note8
+	mus_note noteD#, note16
+	mus_note noteRst, note16
+	mus_note noteF#, note16
+	mus_note noteRst, note16
+	mus_note noteE, note16
+	mus_note noteRst, note16
+	mus_note noteG#, note16
+	mus_note noteF#, note16
+	mus_note noteRst, note2
+	mus_note noteC#, note16
+	mus_note noteRst, note16
+	mus_note noteD#, note16
+	mus_note noteRst, note16
+	mus_note noteE, note16
+	mus_note noteF#, note16
+	mus_note noteRst, note8
+	mus_note noteC#, note16
+	mus_note noteRst, note16
+	mus_note noteD#, note16
+	mus_note noteRst, note16
+	mus_note noteE, note16
+	mus_note noteF#, note16
+	mus_note noteRst, note8
+	mus_note noteF#, note4
+	mus_note noteE, note4
+	mus_note noteF#, note16
+	mus_note noteG#, note16
+	mus_note noteRst, note16
+	mus_note noteB, note16
+	mus_note noteRst, note16
+	mus_note noteF#, note8
+	mus_note noteRst, note16
+	mus_note noteC#, note8
+	mus_note noteRst, note8
+	mus_note noteD#, note8
+	mus_note noteRst, note8
+	mus_note noteE, note8
+	mus_note noteRst, note8
+	mus_note noteG#, note8
+	mus_note noteRst, note8
+	mus_note noteD#, note2
+	mus_note noteRst, note8
+	mus_note noteE, note8
+	mus_note noteD#, note8
+	mus_note noteC#, note8
+
+	mus_octave oct4
+	mus_note noteB, note8
+	mus_note noteRst, note8
+
+	mus_octave oct5
+	mus_note noteC#, note8
+	mus_note noteRst, note8
+	mus_note noteD#, note8
+	mus_note noteRst, note8
+	mus_note noteF#, note8
+	mus_note noteRst, note8
+	mus_note noteC#, note2
+	mus_note noteRst, note8
+	mus_note noteD#, note8
+	mus_note noteC#, note8
+
+	mus_octave oct4
+	mus_note noteB, note8
+	mus_note noteA, note8
+	mus_note noteG#, note8
+	mus_note noteA, note8
+	mus_note noteG#, note16
+	mus_note noteF#, note16
+	mus_note noteRst, note2
+	mus_note noteB, note8
+	mus_note noteA#, note8
+	mus_note noteB, note8
+	mus_note noteA, note16
+	mus_note noteG#, note16
+	mus_note noteRst, note4
+	mus_note noteG#, note8
+	mus_note noteRst, note8
+	mus_note noteF#, note8
+	mus_note noteF, note8
+	mus_note noteF#, note8
+	mus_note noteG#, note8
+	mus_note noteA, note8
+	mus_note noteE, note8
+	mus_note noteC#, note8
+	mus_note noteE, note8
+	mus_note noteF#, note8
+	mus_note noteRst, note4_8
+	mus_note noteD#, note8
+	mus_note noteRst, note4_8
+	mus_jump 0, branch_a9d8
+	mus_end
+	; AA6E
+	
+	; AA6F
+	mus_tempo 0, 232
+	mus_jump 0, $6A79 ;;Leads into city music not dugout yet
+	; AA75
+	
 ;Viridian City, Pewter City, Saffron City
 Cities1_md_1: ;AA76 - AB91
 INCBIN "baserom.gbc",$aa76,$ab92 - $aa76
