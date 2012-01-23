@@ -37,6 +37,9 @@ public:
 	std::string GetFilename();
 	void SetFilename(std::string value);
 
+	unsigned int GetStopAddress();
+	void SetStopAddress(unsigned int value);
+
 	std::string GetParsedAsm();
 
 	// File Operations
@@ -55,6 +58,9 @@ private:
 	unsigned int fileLength;
 	unsigned int filePos;
 	bool stop;
+
+	// Optional Settings
+	unsigned int stopAddress;
 
 	// A lot of tmp classes
 	Call tmpCall;
