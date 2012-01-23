@@ -421,7 +421,7 @@ OverworldLoopLessDelay:
 	call LoadGBPal
 	ld a,[$d736]
 	bit 6,a ; jumping down a ledge?
-	call nz,$039e
+	call nz, HandleMidJump
 	ld a,[$cfc5] ; walking animation counter
 	and a
 	jp nz,.moveAhead\@ ; if the player sprite has not yet completed the walking animation
