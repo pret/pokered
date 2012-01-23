@@ -152,6 +152,8 @@ W_BATTLETYPE EQU $D05A ; in normal battle, this is 0
 W_LONEATTACKNO EQU $D05C ; which entry in LoneAttacks to use
 W_TRAINERNO    EQU $D05D ; which instance of [youngster, lass, etc] is this?
 
+W_MOVEMISSED EQU $D05F
+
 ; not entirely sure that all these bits are 100% correct
 ; Battle Status Byte 1
 ; bit 0 - bide
