@@ -23788,7 +23788,7 @@ EnemySendOut: ; 490E
 	ld [hl],a
 	dec a
 	ld [W_AICOUNT],a
-	ld hl,$D062
+	ld hl,W_PLAYERBATTSTATUS1
 	res 5,[hl]
 	ld hl,$C3B2
 	ld a,8
@@ -23994,7 +23994,7 @@ UnnamedText_3d430: ; 0x3d430
 INCBIN "baserom.gbc",$3d435,$274
 
 ; in-battle stuff
-	ld hl,$D062
+	ld hl,W_PLAYERBATTSTATUS1
 	res 4,[hl]
 	res 6,[hl]
 	call $5AF5
@@ -24002,17 +24002,17 @@ INCBIN "baserom.gbc",$3d435,$274
 	ld de,$CCDC ; pointer to the move just used
 	ld b,BANK(DecrementPP)
 	call Bankswitch
-	ld a,[$CFD3] ; effect of the move just used
+	ld a,[W_PLAYERMOVEEFFECT] ; effect of the move just used
 	ld hl,EffectsArray1
 	ld de,1
 	call IsInArray
 	jp c,$7132
-	ld a,[$CFD3]
+	ld a,[W_PLAYERMOVEEFFECT]
 	ld hl,EffectsArray5B
 	ld de,1
 	call IsInArray
 	call c,$7132
-	ld a,[$CFD3]
+	ld a,[W_PLAYERMOVEEFFECT]
 	ld hl,EffectsArray2
 	ld de,1
 	call IsInArray
@@ -24027,33 +24027,33 @@ INCBIN "baserom.gbc",$3d435,$274
 	call $6687
 	call $656B
 .next11\@
-	ld a,[$D05F]
+	ld a,[W_MOVEMISSED]
 	and a
 	jr z,.next\@
-	ld a,[$CFD3]
+	ld a,[W_PLAYERMOVEEFFECT]
 	sub a,7
 	jr z,.next2\@
 	jr .next3\@ ; 574B
 .next\@
-	ld a,[$CFD3]
+	ld a,[W_PLAYERMOVEEFFECT]
 	and a
 	ld a,4
 	jr z,.next2\@
 	ld a,5
 .next2\@
 	push af
-	ld a,[$D063]
+	ld a,[W_PLAYERBATTSTATUS2]
 	bit 4,a
 	ld hl,$5747
 	ld b,$1E
 	call nz,Bankswitch
 	pop af
 	ld [$CC5B],a
-	ld a,[$CFD2]
+	ld a,[W_PLAYERMOVENUM]
 	call $6F07
 	call $6ED3
 	call $4D60
-	ld a,[$D063]
+	ld a,[W_PLAYERBATTSTATUS2]
 	bit 4,a
 	ld hl,$5771
 	ld b,$1E
@@ -24062,7 +24062,7 @@ INCBIN "baserom.gbc",$3d435,$274
 .next3\@
 	ld c,$1E
 	call $3739
-	ld a,[$CFD3]
+	ld a,[W_PLAYERMOVEEFFECT]
 	cp a,$2B
 	jr z,.next5\@
 	cp a,$27 ; XXX SLP | FRZ ?
@@ -24074,7 +24074,7 @@ INCBIN "baserom.gbc",$3d435,$274
 	ld a,$A7
 	call $6F07
 .next4\@
-	ld a,[$CFD3]
+	ld a,[W_PLAYERMOVEEFFECT]
 	cp a,9
 	jr nz,.next6\@ ; 577A
 	call $62FD
@@ -24088,16 +24088,16 @@ INCBIN "baserom.gbc",$3d435,$274
 	call $6348
 	jp $569A
 .next7\@
-	ld a,[$CFD3]
+	ld a,[W_PLAYERMOVEEFFECT]
 	ld hl,EffectsArray3
 	ld de,1
 	call IsInArray
 	jp c,$7132
-	ld a,[$D05F]
+	ld a,[W_MOVEMISSED]
 	and a
 	jr z,.next8\@ ; 57A6
 	call $5BE2
-	ld a,[$CFD3]
+	ld a,[W_PLAYERMOVEEFFECT]
 	cp a,7
 	jr z,.next9\@ ; 57B9
 	jp Function580A
@@ -24110,7 +24110,7 @@ INCBIN "baserom.gbc",$3d435,$274
 	ld a,1
 	ld [$CCF4],a
 .next9\@
-	ld a,[$CFD3]
+	ld a,[W_PLAYERMOVEEFFECT]
 	ld hl,EffectsArray4
 	ld de,1
 	call IsInArray
@@ -24122,7 +24122,7 @@ INCBIN "baserom.gbc",$3d435,$274
 	ret z
 	call $62B6
 
-	ld hl,$D062
+	ld hl,W_PLAYERBATTSTATUS1
 	bit 2,[hl]
 	jr z,.next10\@ ; 57EF
 	ld a,[$D06A]
@@ -24136,7 +24136,7 @@ INCBIN "baserom.gbc",$3d435,$274
 	xor a
 	ld [W_NUMHITS],a ; reset
 .next10\@
-	ld a,[$CFD3]
+	ld a,[W_PLAYERMOVEEFFECT]
 	and a
 	jp z,Function580A
 	ld hl,EffectsArray5
@@ -24247,7 +24247,7 @@ Function5854: ; 5854
 	jp $5A37
 
 FlinchedCheck: ; 58AC
-	ld hl,$D062
+	ld hl,W_PLAYERBATTSTATUS1
 	bit 3,[hl]
 	jp z,HyperBeamCheck
 	res 3,[hl]
@@ -24257,7 +24257,7 @@ FlinchedCheck: ; 58AC
 	jp $5A37
 
 HyperBeamCheck: ; 58C2
-	ld hl,$D063
+	ld hl,W_PLAYERBATTSTATUS2
 	bit 5,[hl]
 	jr z,.next\@ ; 58D7
 	res 5,[hl]
@@ -24279,13 +24279,13 @@ HyperBeamCheck: ; 58C2
 	ld hl,DisabledNoMoreText
 	call PrintText
 .next2\@
-	ld a,[$D062]
+	ld a,[W_PLAYERBATTSTATUS1]
 	add a
 	jr nc,.next3\@ ; 5929
 	ld hl,$D06B
 	dec [hl]
 	jr nz,.next4\@ ; 5907
-	ld hl,$D062
+	ld hl,W_PLAYERBATTSTATUS1
 	res 7,[hl]
 	ld hl,ConfusedNoMoreText
 	call PrintText
@@ -24300,7 +24300,7 @@ HyperBeamCheck: ; 58C2
 	call $6E9B
 	cp a,$80
 	jr c,.next3\@
-	ld hl,$D062
+	ld hl,W_PLAYERBATTSTATUS1
 	ld a,[hl]
 	and a,$80
 	ld [hl],a
@@ -24326,11 +24326,11 @@ HyperBeamCheck: ; 58C2
 	ld hl,FullyParalyzedText
 	call PrintText
 .next5\@
-	ld hl,$D062
+	ld hl,W_PLAYERBATTSTATUS1
 	ld a,[hl]
 	and a,$CC
 	ld [hl],a
-	ld a,[$CFD3]
+	ld a,[W_PLAYERMOVEEFFECT]
 	cp a,$2B
 	jr z,.next8\@ ; 5966
 	cp a,$27
@@ -24345,11 +24345,11 @@ HyperBeamCheck: ; 58C2
 	ld hl,$580A
 	jp $5A37
 .next7\@
-	ld hl,$D062
+	ld hl,W_PLAYERBATTSTATUS1
 	bit 0,[hl]
 	jr z,.next10\@ ; 59D0
 	xor a
-	ld [$CFD2],a
+	ld [W_PLAYERMOVENUM],a
 	ld hl,$D0D7
 	ld a,[hli]
 	ld b,a
@@ -24367,7 +24367,7 @@ HyperBeamCheck: ; 58C2
 	ld hl,$580A
 	jp $5A37
 .next11\@
-	ld hl,$D062
+	ld hl,W_PLAYERBATTSTATUS1
 	res 0,[hl]
 	ld hl,UnleashedEnergyText
 	call PrintText
@@ -24384,20 +24384,20 @@ HyperBeamCheck: ; 58C2
 	or b
 	jr nz,.next12\@ ; 59C2
 	ld a,1
-	ld [$D05F],a
+	ld [W_MOVEMISSED],a
 .next12\@
 	xor a
 	ld [hli],a
 	ld [hl],a
 	ld a,$75
-	ld [$CFD2],a
+	ld [W_PLAYERMOVENUM],a
 	ld hl,$5705
 	jp $5A37
 .next10\@
 	bit 1,[hl]
 	jr z,.next13\@ ; 59FF
 	ld a,$25
-	ld [$CFD2],a
+	ld [W_PLAYERMOVENUM],a
 	ld hl,ThrashingAboutText
 	call PrintText
 	ld hl,$D06A
@@ -24405,7 +24405,7 @@ HyperBeamCheck: ; 58C2
 	ld hl,$56DC
 	jp nz,$5A37
 	push hl
-	ld hl,$D062
+	ld hl,W_PLAYERBATTSTATUS1
 	res 1,[hl]
 	set 7,[hl]
 	call $6E9B ; random number?
@@ -47177,12 +47177,12 @@ DecrementPP: ; 0x68000
 	cp a, STRUGGLE
 	ret z                ; if the pokemon is using "struggle", there's nothing to do
                          ; we don't decrement PP for "struggle"
-	ld hl, $D062
-	ld a, [hli]          ; load the $D062 pokemon status flags and increment hl to load the
-                         ; $D063 status flags later
+	ld hl, W_PLAYERBATTSTATUS1
+	ld a, [hli]          ; load the W_PLAYERBATTSTATUS1 pokemon status flags and increment hl to load the
+                         ; W_PLAYERBATTSTATUS2 status flags later
 	and a, 7             ; check to see if bits 0, 1, or 2 are set
 	ret nz               ; if any of these statuses are true, don't decrement PP
-	bit 6, [hl]          ; check 6th bit status flag on $D063
+	bit 6, [hl]          ; check 6th bit status flag on W_PLAYERBATTSTATUS2
 	ret nz               ; and return if it is set
 	ld hl, $D02D         ; PP of first move (in battle)
 	call .DecrementPP\@
