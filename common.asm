@@ -31,8 +31,8 @@ SECTION "joypad",HOME[$60]
 	reti
 
 SECTION "bank0",HOME[$61]
-DisableLCD:
-;$0061
+
+DisableLCD: ; $0061
 	xor a
 	ld [$ff0f],a
 	ld a,[$ffff]
@@ -50,15 +50,13 @@ DisableLCD:
 	ld [$ffff],a
 	ret
 
-EnableLCD:
-;$007b
+EnableLCD: ; $007b
 	ld a,[$ff40]
 	set 7,a
 	ld [$ff40],a
 	ret
 
-CleanLCD_OAM:
-;$0082
+CleanLCD_OAM: ; $0082
 	xor a
 	ld hl,$c300
 	ld b,$a0
@@ -68,8 +66,7 @@ CleanLCD_OAM:
 	jr nz,.jr0\@
 	ret
 
-ResetLCD_OAM:
-;$008d
+ResetLCD_OAM: ; $008d
 	ld a,$a0
 	ld hl,$c300
 	ld de,$0004
@@ -3374,16 +3371,16 @@ MartInventories: ; 2442
 	; first byte $FE, next byte # of items, last byte $FF
 
 ; Viridian
-ViridianMartText4: ; XXX confirm
+ViridianMartText4: ; 2442 XXX confirm
 	db $FE,4,POKE_BALL,ANTIDOTE,PARLYZ_HEAL,BURN_HEAL,$FF
 
 ; Pewter
-PewterMartText1:
+PewterMartText1: ; 2449
 	db $FE,7,POKE_BALL,POTION,ESCAPE_ROPE,ANTIDOTE,BURN_HEAL,AWAKENING
 	db PARLYZ_HEAL,$FF
 
 ; Cerulean
-CeruleanMartText1:
+CeruleanMartText1: ; 2453
 	db $FE,7,POKE_BALL,POTION,REPEL,ANTIDOTE,BURN_HEAL,AWAKENING
 	db PARLYZ_HEAL,$FF
 
@@ -3391,61 +3388,61 @@ CeruleanMartText1:
 	db $FE,1,BICYCLE,$FF
 
 ; Vermilion
-VermilionMartText1:
+VermilionMartText1: ; 2461
 	db $FE,6,POKE_BALL,SUPER_POTION,ICE_HEAL,AWAKENING,PARLYZ_HEAL
 	db REPEL,$FF
 
 ; Lavender
-LavenderMartText1:
+LavenderMartText1: ; 246a
 	db $FE,9,GREAT_BALL,SUPER_POTION,REVIVE,ESCAPE_ROPE,SUPER_REPEL
 	db ANTIDOTE,BURN_HEAL,ICE_HEAL,PARLYZ_HEAL,$FF
 
 ; Celadon Dept. Store 2F (1)
-CeladonMart2Text1:
+CeladonMart2Text1: ; 2476
 	db $FE,9,GREAT_BALL,SUPER_POTION,REVIVE,SUPER_REPEL,ANTIDOTE
 	db BURN_HEAL,ICE_HEAL,AWAKENING,PARLYZ_HEAL,$FF
 
 ; Celadon Dept. Store 2F (2)
-CeladonMart2Text2:
+CeladonMart2Text2: ; 2482
 	db $FE,9,TM_32,TM_33,TM_02,TM_07,TM_37,TM_01,TM_05,TM_09,TM_17,$FF
 
 ; Celadon Dept. Store 4F
-CeladonMart4Text1:
+CeladonMart4Text1: ; 248e
 	db $FE,5,POKE_DOLL,FIRE_STONE,THUNDER_STONE,WATER_STONE,LEAF_STONE,$FF
 
 ; Celadon Dept. Store 5F (1)
-CeladonMart5Text3:
+CeladonMart5Text3: ; 2496
 	db $FE,7,X_ACCURACY,GUARD_SPEC_,DIRE_HIT,X_ATTACK,X_DEFEND,X_SPEED
 	db X_SPECIAL,$FF
 
 ; Celadon Dept. Store 5F (2)
-CeladonMart5Text4:
+CeladonMart5Text4: ; 24a0
 	db $FE,5,HP_UP,PROTEIN,IRON,CARBOS,CALCIUM,$FF
 
 ; Fuchsia
-FuchsiaMartText1:
+FuchsiaMartText1: ; 24a8
 	db $FE,6,ULTRA_BALL,GREAT_BALL,SUPER_POTION,REVIVE,FULL_HEAL
 	db SUPER_REPEL,$FF
 
-; unused?
+; unused? 24b1
 	db $FE,5,GREAT_BALL,HYPER_POTION,SUPER_POTION,FULL_HEAL,REVIVE,$FF
 
 ; Cinnabar
-CinnabarMartText1:
+CinnabarMartText1: ; 24b9
 	db $FE,7,ULTRA_BALL,GREAT_BALL,HYPER_POTION,MAX_REPEL,ESCAPE_ROPE
 	db FULL_HEAL,REVIVE,$FF
 
 ; Saffron
-SaffronMartText1:
+SaffronMartText1: ; 24c3
 	db $FE,6,GREAT_BALL,HYPER_POTION,MAX_REPEL,ESCAPE_ROPE,FULL_HEAL
 	db REVIVE,$FF
 
 ; Indigo
-IndigoPlateauLobbyText4:
+IndigoPlateauLobbyText4: ; 24cc
 	db $FE,7,ULTRA_BALL,GREAT_BALL,FULL_RESTORE,MAX_POTION,FULL_HEAL
 	db REVIVE,MAX_REPEL,$FF
 
-TextScriptEndingChar:
+TextScriptEndingChar: ; 24D6
 	db "@"
 TextScriptEnd: ; 24D7 24d7
 	ld hl,TextScriptEndingChar
@@ -3484,7 +3481,7 @@ SeafoamIslands2Text2:
 SeafoamIslands2Text1:
 FuchsiaHouse2Text3:
 VictoryRoad1Text7:
-VictoryRoad1Text6: ; _VictoryRoad1Text6
+VictoryRoad1Text6:
 VictoryRoad1Text5: ; 0x24e5
 	TX_FAR _VictoryRoad1Text5
 	db $50
@@ -3856,7 +3853,7 @@ GetItemName: ; 2FCF
 	pop hl
 	ret
 
-GetMachineName:
+GetMachineName: ; 2ff3
 ; copies the name of the TM/HM in [$D11E] to $CD6D
 	push hl
 	push de
@@ -3909,9 +3906,9 @@ GetMachineName:
 	pop hl
 	ret
 
-TechnicalPrefix:
+TechnicalPrefix: ; 303c
 	db "TM"
-HiddenPrefix:
+HiddenPrefix: ; 303e
 	db "HM"
 
 INCBIN "baserom.gbc",$3040,$31cc - $3040
@@ -5094,7 +5091,7 @@ IntroPredef3B: ; 62A4
 	ld a,1
 	jp $3E6D
 
-Function62CE: ; 62CE, XXX called by 4B2 948 989 5BF9 5D15
+Function62CE: ; 62CE XXX called by 4B2 948 989 5BF9 5D15
 	call $62FF
 	ld a,$19
 	call $3E6D
@@ -11992,10 +11989,10 @@ CeladonCityObject: ; 0x18022 (size=189)
 	EVENT_DISP $19, $1b, $23 ; CELADON_HOUSE
 	EVENT_DISP $19, $1b, $2b ; CELADON_HOTEL
 
-CeladonCityBlocks: ; 450
+CeladonCityBlocks: ; 0x180df 450
 	INCBIN "maps/celadoncity.blk"
 
-PalletTown_h:
+PalletTown_h: ; 0x182a1
 	db $00 ; tileset
 	db PALLET_TOWN_HEIGHT, PALLET_TOWN_WIDTH ; dimensions
 	dw PalletTownBlocks, PalletTownTexts, PalletTownScript
@@ -12112,7 +12109,7 @@ ViridianCityObject: ; 0x18384 (size=104)
 	EVENT_DISP $14, $9, $15 ; VIRIDIAN_HOUSE
 	EVENT_DISP $14, $7, $20 ; VIRIDIAN_GYM
 
-ViridianCityBlocks: ; 360
+ViridianCityBlocks: ; 0x183ec 360
 	INCBIN "maps/viridiancity.blk"
 
 PewterCity_h: ; 0x18554 to 0x18576 (34 bytes) (bank=6) (id=2)
@@ -12180,7 +12177,7 @@ PewterCityObject: ; 0x18577 (size=111)
 	EVENT_DISP $14, $1d, $7 ; PEWTER_HOUSE_2
 	EVENT_DISP $14, $19, $d ; PEWTER_POKECENTER
 
-PewterCityBlocks: ; 360
+PewterCityBlocks: ; 0x185e6 360
 	INCBIN "maps/pewtercity.blk"
 
 CeruleanCity_h: ; 0x1874e to 0x18786 (56 bytes) (bank=6) (id=3)
@@ -12271,7 +12268,7 @@ CeruleanCityObject: ; 0x18786 (size=170)
 	EVENT_DISP $14, $b, $9 ; CERULEAN_HOUSE_3
 	EVENT_DISP $14, $9, $9 ; CERULEAN_HOUSE_3
 
-CeruleanCityBlocks: ; 360
+CeruleanCityBlocks: ; 0x18830 360
 	INCBIN "maps/ceruleancity.blk"
 
 VermilionCity_h: ; 0x18998 to 0x189ba (34 bytes) (bank=6) (id=5)
@@ -12342,7 +12339,7 @@ VermilionCityObject: ; 0x189ba (size=133)
 	EVENT_DISP $14, $d, $f ; VERMILION_HOUSE_3
 	EVENT_DISP $14, $3, $7 ; VERMILION_HOUSE_2
 
-VermilionCityBlocks: ; 360
+VermilionCityBlocks: ; 0x18a3f 360
 	INCBIN "maps/vermilioncity.blk"
 
 FuchsiaCity_h: ; 0x18ba7 to 0x18bd4 (45 bytes) (bank=6) (id=7)
@@ -12431,7 +12428,7 @@ FuchsiaCityObject: ; 0x18bd4 (size=178)
 	EVENT_DISP $14, $1b, $1f ; FUCHSIA_HOUSE_3
 	EVENT_DISP $14, $18, $1f ; FUCHSIA_HOUSE_3
 
-FuchsiaCityBlocks: ; 360
+FuchsiaCityBlocks: ; 0x18c86 360
 	INCBIN "maps/fuchsiacity.blk"
 
 INCBIN "baserom.gbc",$18dee,$6d
@@ -12630,27 +12627,32 @@ OakWalksUpText:
 	TX_FAR _OakWalksUpText
 	db "@"
 
-PalletTownText2: ; girl 0x18fd3
+PalletTownText2: ; 0x18fd3 girl
 	TX_FAR _PalletTownText2 ; dc 42 29 pointing to 0xa42dc
 	db "@"
+; 0x18fd8
 
-PalletTownText3: ; fat man
+PalletTownText3: ; 0x18fd8 fat man
 	TX_FAR _PalletTownText3
 	db "@"
+; 0x18fdd
 
-PalletTownText4: ; sign by lab
+PalletTownText4: ; 0x18fdd sign by lab
 	TX_FAR _PalletTownText4
 	db "@"
+; 0x18fe2
 
-PalletTownText5: ; sign by fence
+PalletTownText5: ; 0x18fe2 sign by fence
 	TX_FAR _PalletTownText5
 	db "@"
+; 0x18fe7
 
-PalletTownText6: ; sign by Red’s house
+PalletTownText6: ; 0x18fe7 sign by Red’s house
 	TX_FAR _PalletTownText6
 	db "@"
+; 0x18fec
 
-PalletTownText7: ; sign by Blue’s house
+PalletTownText7: ; 0x18fec sign by Blue’s house
 	TX_FAR _PalletTownText7
 	db "@"
 
@@ -13947,23 +13949,23 @@ UnnamedText_19b2a: ; 0x19b2a
 	db $50
 ; 0x19b2a + 5 bytes
 
-BluesHouse_h: ; 0x19b2f
+BluesHouse_h: ; 0x19b2f id=39
 	db $08 ; tileset
 	db BLUES_HOUSE_HEIGHT, BLUES_HOUSE_WIDTH ; dimensions
 	dw BluesHouseBlocks, BluesHouseTexts, BluesHouseScript
 	db 0
 	dw BluesHouseObject
 
-BluesHouseScript:
+BluesHouseScript: ; 0x19b3b
 	call $3C3C
 	ld hl,BluesHouseScriptPointers
 	ld a,[$D5F3]
 	jp $3D97
 
-BluesHouseScriptPointers:
+BluesHouseScriptPointers: ; 0x19b47
 	dw BluesHouseScript1,BluesHouseScript2
 
-BluesHouseScript1:
+BluesHouseScript1: ; 0x19b4a
 	ld hl,$D74A
 	set 1,[hl]
 
@@ -13972,7 +13974,7 @@ BluesHouseScript1:
 	ld [$D5F3],a
 	ret
 
-BluesHouseScript2:
+BluesHouseScript2: ; 0x19B56
 	ret
 
 BluesHouseTexts: ; 0x19B57
@@ -14014,35 +14016,35 @@ BluesHouseText1: ; 5B5D 0x19B5D
 .done\@
 	jp TextScriptEnd
 
-DaisyInitialText:
+DaisyInitialText: ; 0x19baa
 	TX_FAR _DaisyInitialText
 	db "@"
 
-DaisyOfferMapText:
+DaisyOfferMapText: ; 0x19baf
 	TX_FAR _DaisyOfferMapText
 	db "@"
 
-GotMapText:
+GotMapText: ; 0x19bb4
 	TX_FAR _GotMapText
 	db $11,"@"
 
-DaisyBagFullText:
+DaisyBagFullText: ; 0x19bba
 	TX_FAR _DaisyBagFullText
 	db "@"
 
-DaisyUseMapText:
+DaisyUseMapText: ; 0x19bbf
 	TX_FAR _DaisyUseMapText
 	db "@"
 
-BluesHouseText2: ; Daisy, walking around
+BluesHouseText2: ; 0x19bc4 Daisy, walking around
 	TX_FAR _BluesHouseText2
 	db "@"
 
-BluesHouseText3: ; map on table
+BluesHouseText3: ; 0x19bc9 map on table
 	TX_FAR _BluesHouseText3
 	db "@"
 
-BluesHouseObject:
+BluesHouseObject: ; 0x19bce
 	db $0A ; border tile
 
 	db 2 ; warps
@@ -14063,7 +14065,7 @@ BluesHouseObject:
 	dw $C712
 	db 7,3
 
-BluesHouseBlocks:
+BluesHouseBlocks: ; 0x19bf6
 	INCBIN "maps/blueshouse.blk"
 
 VermilionHouse3_h: ; 0x19c06 to 0x19c12 (12 bytes) (bank=6) (id=196)
@@ -14105,7 +14107,7 @@ VermilionHouse3Object: ; 0x19c25 (size=26)
 	EVENT_DISP $4, $7, $2
 	EVENT_DISP $4, $7, $3
 
-VermilionHouse3Blocks: ; 16
+VermilionHouse3Blocks: ; 0x19c3f 16
 	INCBIN "maps/vermilionhouse3.blk"
 
 IndigoPlateauLobby_h: ; 0x19c4f to 0x19c5b (12 bytes) (bank=6) (id=174)
@@ -14138,7 +14140,7 @@ IndigoPlateauLobbyScript: ; 0x19c5b
 	ret
 ; 0x19c7f
 
-IndigoPlateauLobbyTexts:
+IndigoPlateauLobbyTexts: ; 0x19c7f
 	dw IndigoPlateauLobbyText1, IndigoPlateauLobbyText2, IndigoPlateauLobbyText3, IndigoPlateauLobbyText4, IndigoPlateauLobbyText5
 
 IndigoPlateauLobbyText1: ; 0x19c8a
@@ -14154,7 +14156,7 @@ IndigoPlateauLobbyText3: ; 0x19c8f
 	TX_FAR _IndigoPlateauLobbyText3
 	db $50
 
-IndigoPlateauLobbyText5:
+IndigoPlateauLobbyText5: ; 0x19c94
 	db $f6
 
 IndigoPlateauLobbyObject: ; 0x19c95 (size=58)
@@ -14179,7 +14181,7 @@ IndigoPlateauLobbyObject: ; 0x19c95 (size=58)
 	EVENT_DISP $8, $b, $8
 	EVENT_DISP $8, $0, $8 ; LORELEIS_ROOM
 
-IndigoPlateauLobbyBlocks: ; 48
+IndigoPlateauLobbyBlocks: ; 0x19ccf 48
 	INCBIN "maps/indigoplateaulobby.blk"
 
 SilphCo4_h: ; 0x19cff to 0x19d0b (12 bytes) (bank=6) (id=209)
@@ -14320,7 +14322,7 @@ SilphCo4Object: ; 0x19e35 (size=111)
 	EVENT_DISP $f, $f, $3 ; SILPH_CO_10F
 	EVENT_DISP $f, $b, $11 ; SILPH_CO_10F
 
-SilphCo4Blocks: ; 135
+SilphCo4Blocks: ; 0x19ea4 135
 	INCBIN "maps/silphco4.blk"
 
 SilphCo5_h: ; 0x19f2b to 0x19f37 (12 bytes) (bank=6) (id=210)
@@ -14498,7 +14500,7 @@ SilphCo5Object: ; 0x1a08d (size=137)
 	EVENT_DISP $f, $5, $b ; SILPH_CO_3F
 	EVENT_DISP $f, $f, $3 ; SILPH_CO_3F
 
-SilphCo5Blocks: ; 135
+SilphCo5Blocks: ; 0x1a116 135
 	INCBIN "maps/silphco5.blk"
 
 SilphCo6_h: ; 0x1a19d to 0x1a1a9 (12 bytes) (bank=6) (id=211)
@@ -14706,7 +14708,7 @@ SilphCo6Object: ; 0x1a2fb (size=112)
 	EVENT_DISP $d, $3, $3 ; SILPH_CO_4F
 	EVENT_DISP $d, $3, $17 ; SILPH_CO_2F
 
-SilphCo6Blocks: ; 117
+SilphCo6Blocks: ; 0x1a36b 117
 	INCBIN "maps/silphco6.blk"
 
 INCBIN "baserom.gbc",$1a3e0,$1c20
@@ -14767,7 +14769,7 @@ CinnabarIslandObject: ; 0x1c022 (size=71)
 	EVENT_DISP $a, $b, $b ; CINNABAR_POKECENTER
 	EVENT_DISP $a, $b, $f ; CINNABAR_MART
 
-CinnabarIslandBlocks: ; 90
+CinnabarIslandBlocks: ; 0x1c069 90
 	INCBIN "maps/cinnabarisland.blk"
 
 Route1_h: ; 0x1c0c3 to 0x1c0e5 (34 bytes) (bank=7) (id=12)
@@ -14808,13 +14810,13 @@ Route1Object: ; 0x1c0e5 (size=19)
 
 INCBIN "baserom.gbc",$1c0f8,$4
 
-Route1Blocks: ; 180
+Route1Blocks: ; 0x1c0fc 180
 	INCBIN "maps/route1.blk"
 
-UndergroundPathEntranceRoute8Blocks: ; 16
+UndergroundPathEntranceRoute8Blocks: ; 0x1c1b0 16
 	INCBIN "maps/undergroundpathentranceroute8.blk"
 
-OaksLabBlocks: ; 30
+OaksLabBlocks: ; 0x1c1c0 30
 	INCBIN "maps/oakslab.blk"
 
 Route16HouseBlocks:
@@ -14828,18 +14830,18 @@ LavenderHouse2Blocks:
 CeruleanHouse2Blocks:
 PewterHouse1Blocks:
 PewterHouse2Blocks:
-ViridianHouseBlocks: ; 16 0x1c1de 41DE
+ViridianHouseBlocks: ; 0x1c1de 41DE size=16
 	INCBIN "maps/viridianhouse.blk"
 
 CeladonMansion5Blocks:
-SchoolBlocks: ; 16 0x1c1ee 41EE
+SchoolBlocks: ; 0x1c1ee 41EE size=16
 	INCBIN "maps/school.blk"
 
-CeruleanHouseTrashedBlocks: ; 16
+CeruleanHouseTrashedBlocks: ; 0x1c1fe size=16
 	INCBIN "maps/ceruleanhousetrashed.blk"
 
 DiglettsCaveEntranceRoute11Blocks:
-DiglettsCaveRoute2Blocks: ; 16
+DiglettsCaveRoute2Blocks: ; 0x1c20e size=16
 	INCBIN "maps/diglettscaveroute2.blk"
 
 MonsterNames: ; 421E
@@ -15107,10 +15109,8 @@ CinnabarIslandScript1: ; 0x1ca73
 CinnabarIslandTexts: ; 0x1ca81
 	dw CinnabarIslandText1, CinnabarIslandText2, CinnabarIslandText3, CinnabarIslandText4, CinnabarIslandText5, CinnabarIslandText6, CinnabarIslandText7, CinnabarIslandText8
 
-CinnabarIslandText8:
-
-UnnamedText_1ca91: ; 0x1ca91
-	TX_FAR _UnnamedText_1ca91
+CinnabarIslandText8: ; 0x1ca91
+	TX_FAR _CinnabarIslandText8
 	db $50
 ; 0x1ca91 + 5 bytes
 
@@ -15242,7 +15242,7 @@ OaksLabScript1: ; 0x1cb6e
 	ret
 ; 0x1cb7e
 
-OakEntryMovement:
+OakEntryMovement: ; 0x1cb7e
 	db $40, $40, $40, $ff
 
 OaksLabScript2: ; 0x1cb82
@@ -15287,7 +15287,7 @@ OaksLabScript3: ; 0x1cba2
 	ret
 ; 0x1cbcf
 
-PlayerEntryMovementRLE:
+PlayerEntryMovementRLE: ; 0x1cbcf
 	db $40, $8, $ff
 
 OaksLabScript4: ; 0x1cbd2
@@ -15956,7 +15956,7 @@ asm_1d133: ; 0x1d133
 	jp TextScriptEnd
 ; 0x1d152
 
-OaksLabText39:
+OaksLabText39: ; 0x1d152
 	TX_FAR _OaksLabText39
 	db $50
 
@@ -16525,7 +16525,7 @@ ViridianMartObject: ; 0x1d50a (size=38)
 	EVENT_DISP $4, $7, $3
 	EVENT_DISP $4, $7, $4
 
-ViridianMartBlocks: ; 16
+ViridianMartBlocks: ; 0x1d530 16
 	INCBIN "maps/viridianmart.blk"
 
 School_h: ; 0x1d540 to 0x1d54c (12 bytes) (bank=7) (id=43)
@@ -17015,7 +17015,7 @@ BikeShopObject: ; 0x1d866 (size=38)
 	EVENT_DISP $4, $7, $2
 	EVENT_DISP $4, $7, $3
 
-BikeShopBlocks: ; 16
+BikeShopBlocks: ; 0x1d88c 16
 	INCBIN "maps/bikeshop.blk"
 
 LavenderHouse1_h: ; 0x1d89c to 0x1d8a8 (12 bytes) (bank=7) (id=149)
@@ -17465,7 +17465,7 @@ VermilionDockObject: ; 0x1dcc6 (size=20)
 	EVENT_DISP $e, $0, $e
 	EVENT_DISP $e, $2, $e ; SS_ANNE_1
 
-VermilionDockBlocks: ; 84
+VermilionDockBlocks: ; 0x1dcda 84
 	INCBIN "maps/vermiliondock.blk"
 
 CeladonMansion5_h: ; 0x1dd2e to 0x1dd3a (12 bytes) (bank=7) (id=132)
@@ -17557,7 +17557,7 @@ FuchsiaMartObject: ; 0x1dd9b (size=38)
 	EVENT_DISP $4, $7, $3
 	EVENT_DISP $4, $7, $4
 
-FuchsiaMartBlocks: ; 16
+FuchsiaMartBlocks: ; 0x1ddc1 16
 	INCBIN "maps/fuchsiamart.blk"
 
 SaffronHouse1_h: ; 0x1ddd1 to 0x1dddd (12 bytes) (bank=7) (id=179)
@@ -17908,7 +17908,7 @@ Route5GateObject: ; 0x1dffb (size=42)
 	EVENT_DISP $4, $0, $3
 	EVENT_DISP $4, $0, $4
 
-Route5GateBlocks: ; 12
+Route5GateBlocks: ; 0x1e025 12
 	INCBIN "maps/route5gate.blk"
 
 Route6Gate_h: ; 0x1e031 to 0x1e03d (12 bytes) (bank=7) (id=73)
@@ -17989,7 +17989,7 @@ Route6GateObject: ; 0x1e0be (size=42)
 	EVENT_DISP $4, $0, $3
 	EVENT_DISP $4, $0, $4
 
-Route6GateBlocks: ; 12
+Route6GateBlocks: ; 0x1e0e8 12
 	INCBIN "maps/route6gate.blk"
 
 Route7Gate_h: ; 0x1e0f4 to 0x1e100 (12 bytes) (bank=7) (id=76)
@@ -18071,7 +18071,7 @@ Route7GateObject: ; 0x1e185 (size=42)
 	EVENT_DISP $3, $3, $5
 	EVENT_DISP $3, $4, $5
 
-Route7GateBlocks: ; 12
+Route7GateBlocks: ; 0x1e1af 12
 	INCBIN "maps/route7gate.blk"
 
 Route8Gate_h: ; 0x1e1bb to 0x1e1c7 (12 bytes) (bank=7) (id=79)
@@ -18151,7 +18151,7 @@ Route8GateObject: ; 0x1e247 (size=42)
 	EVENT_DISP $3, $3, $5
 	EVENT_DISP $3, $4, $5
 
-Route8GateBlocks: ; 12
+Route8GateBlocks: ; 0x1e271 12
 	INCBIN "maps/route8gate.blk"
 
 UndergroundPathEntranceRoute8_h: ; 0x1e27d to 0x1e289 (12 bytes) (bank=7) (id=80)
@@ -18227,22 +18227,22 @@ asm_234cc:
 	jp TextScriptEnd
 ; 0x1e374
 
-PowerPlantText1: ; maybe
+PowerPlantText1: ; 0x1e374
 	db $8 ; asm
 	ld hl, $62fb
 	jr asm_234cc ; 0x1e378 $ee
 
-PowerPlantText2:
+PowerPlantText2: ; 0x1e37a
 	db $8 ; asm
 	ld hl, $6307
 	jr asm_234cc ; 0x1e37e $e8
 
-PowerPlantText3:
+PowerPlantText3: ; 0x1e380
 	db $8 ; asm
 	ld hl, $6313
 	jr asm_234cc ; 0x1e384 $e2
 
-PowerPlantText4:
+PowerPlantText4: ; 0x1e386
 	db $8 ; asm
 	ld hl, $631f
 	jr asm_234cc ; 0x1e38a $dc
@@ -18252,22 +18252,22 @@ PowerPlantText5:
 	ld hl, $632b
 	jr asm_234cc ; 0x1e390 $d6
 
-PowerPlantText6:
+PowerPlantText6: ; 0x1e392
 	db $8 ; asm
 	ld hl, $6337
 	jr asm_234cc ; 0x1e396 $d0
 
-PowerPlantText7:
+PowerPlantText7: ; 0x1e398
 	db $8 ; asm
 	ld hl, $6343
 	jr asm_234cc ; 0x1e39c $ca
 
-PowerPlantText8:
+PowerPlantText8: ; 0x1e39e
 	db $8 ; asm
 	ld hl, $634f
 	jr asm_234cc ; 0x1e3a2 $c4
 
-PowerPlantText9:
+PowerPlantText9: ; 0x1e3a4
 	db $8 ; asm
 	ld hl, $635b
 	jr asm_234cc ; 0x1e3a8 $be
@@ -18316,7 +18316,7 @@ PowerPlantObject: ; 0x1e3bf (size=135)
 	EVENT_DISP $14, $23, $5
 	EVENT_DISP $14, $b, $0
 
-PowerPlantBlocks: ; 360
+PowerPlantBlocks: ; 0x1e446 360
 	INCBIN "maps/powerplant.blk"
 
 DiglettsCaveEntranceRoute11_h: ; 0x1e5ae to 0x1e5ba (12 bytes) (bank=7) (id=85)
@@ -18562,7 +18562,7 @@ Route22GateObject: ; 0x1e720 (size=42)
 	EVENT_DISP $5, $0, $4
 	EVENT_DISP $5, $0, $5
 
-Route22GateBlocks: ; 20
+Route22GateBlocks: ; 0x1e74a 20
 	INCBIN "maps/route22gate.blk"
 
 BillsHouse_h: ; 0x1e75e to 0x1e76a (12 bytes) (bank=7) (id=88)
@@ -18594,7 +18594,7 @@ INCBIN "baserom.gbc",$1e783,$b1
 BillsHouseTexts: ; 0x1e834
 	dw BillsHouseText1, BillsHouseText2, BillsHouseText3, BillsHouseText4
 
-BillsHouseText4:
+BillsHouseText4: ; 0x1e83c
 	db $fd
 
 BillsHouseText1: ; 0x1e83d
@@ -18714,7 +18714,7 @@ BillsHouseObject: ; 0x1e8df (size=38)
 	EVENT_DISP $4, $7, $2
 	EVENT_DISP $4, $7, $3
 
-BillsHouseBlocks:
+BillsHouseBlocks: ; 0x1e905
 	INCBIN "maps/billshouse.blk"
 
 INCBIN "baserom.gbc",$1e915,$1e93b - $1e915
@@ -19037,11 +19037,11 @@ BlastoisePicBack:
 	INCBIN "pic/monback/blastoiseb.pic"
 PinsirPicFront:
 	INCBIN "pic/bmon/pinsir.pic"
-PinsirPicBack:
+PinsirPicBack: ; 0x27aaa
 	INCBIN "pic/monback/pinsirb.pic"
-TangelaPicFront:
+TangelaPicFront: ; 0x27b39
 	INCBIN "pic/bmon/tangela.pic"
-TangelaPicBack:
+TangelaPicBack: ; 0x27ce7
 	INCBIN "pic/monback/tangelab.pic"
 
 INCBIN "baserom.gbc",$27d6b,$27DAE - $27d6b
@@ -19128,7 +19128,7 @@ SaveTrainerName: ; 7E4A
 	jr nz,.CopyCharacter\@
 	ret
 
-TrainerNamePointers:
+TrainerNamePointers: ; 0x27e64
 ; what is the point of these?
 	dw YoungsterName
 	dw BugCatcherName
@@ -21131,7 +21131,7 @@ Function669B: ; 669B
 	ld a,$8E
 	jp $3740
 
-AIUseFullRestore:
+AIUseFullRestore: ; 0x3a6a0
 	call AICureStatus
 	ld a,FULL_RESTORE
 	ld [$CF05],a
@@ -21154,20 +21154,21 @@ AIUseFullRestore:
 	ld [$CEEA],a
 	ld [W_OPPONENTHP],a
 	jr Function6718
+; 0x3a6ca
 
-AIUsePotion:
+AIUsePotion: ; 0x3a6ca
 ; enemy trainer heals his monster with a potion
 	ld a,POTION
 	ld b,20
 	jr AIRecoverHP
 
-AIUseSuperPotion:
+AIUseSuperPotion: ; 0x3a6d0
 ; enemy trainer heals his monster with a super potion
 	ld a,SUPER_POTION
 	ld b,50
 	jr AIRecoverHP
 
-AIUseHyperPotion:
+AIUseHyperPotion: ; 0x3a6d6
 ; enemy trainer heals his monster with a hyper potion
 	ld a,HYPER_POTION
 	ld b,200
@@ -21283,17 +21284,17 @@ Function674B: ; 674B
 	scf
 	ret
 
-AIBattleWithdrawText:
+AIBattleWithdrawText: ; 0x3a781
 	TX_FAR _AIBattleWithdrawText
 	db "@"
 
-AIUseFullHeal:
+AIUseFullHeal: ; 0x3a786
 	call $669B
 	call AICureStatus
 	ld a,FULL_HEAL
 	jp AIPrintItemUse
 
-AICureStatus:
+AICureStatus: ; 0x3a791
 ; cures the status of enemy's active pokemon
 	ld a,[W_OPPONENTNUMBER]
 	ld hl,$D8A8
@@ -21306,28 +21307,28 @@ AICureStatus:
 	res 0,[hl]
 	ret
 
-AIUseXAccuracy: ; unused
+AIUseXAccuracy: ; 0x3a7a8 unused
 	call $669B
 	ld hl,$D068
 	set 0,[hl]
 	ld a,X_ACCURACY
 	jp AIPrintItemUse
 
-AIUseGuardSpec:
+AIUseGuardSpec: ; 0x3a7b5
 	call $669B
 	ld hl,$D068
 	set 1,[hl]
 	ld a,GUARD_SPEC_
 	jp AIPrintItemUse
 
-AIUseDireHit: ; unused
+AIUseDireHit: ; 0x3a7c2 unused
 	call $669B
 	ld hl,$D068
 	set 2,[hl]
 	ld a,DIRE_HIT
 	jp AIPrintItemUse
 
-Function67CF: ; 67CF
+Function67CF: ; 0x3a7cf 67CF
 	ld [$FF99],a
 	ld hl,$CFF4
 	ld a,[hli]
@@ -21352,27 +21353,27 @@ Function67CF: ; 67CF
 	sub c
 	ret
 
-AIUseXAttack:
+AIUseXAttack: ; 0x3a7f2
 	ld b,$A
 	ld a,X_ATTACK
 	jr AIIncreaseStat
 
-AIUseXDefend:
+AIUseXDefend: ; 0x3a7f8
 	ld b,$B
 	ld a,X_DEFEND
 	jr AIIncreaseStat
 
-AIUseXSpeed:
+AIUseXSpeed: ; 0x3a7fe
 	ld b,$C
 	ld a,X_SPEED
 	jr AIIncreaseStat
 
-AIUseXSpecial:
+AIUseXSpecial: ; 0x3a804
 	ld b,$D
 	ld a,X_SPECIAL
 	; fallthrough
 
-AIIncreaseStat:
+AIIncreaseStat: ; 0x3a808
 	ld [$CF05],a
 	push bc
 	call AIPrintItemUse_
@@ -21396,12 +21397,12 @@ AIIncreaseStat:
 	ld [hl],a
 	jp DecrementAICount
 
-AIPrintItemUse:
+AIPrintItemUse: ; 0x3a82c
 	ld [$CF05],a
 	call AIPrintItemUse_
 	jp DecrementAICount
 
-AIPrintItemUse_:
+AIPrintItemUse_: ; 0x3a835
 ; print "x used [$CF05] on z!"
 	ld a,[$CF05]
 	ld [$D11E],a
@@ -21409,7 +21410,7 @@ AIPrintItemUse_:
 	ld hl, AIBattleUseItemText
 	jp PrintText
 
-AIBattleUseItemText:
+AIBattleUseItemText: ; 0x3a844
 	TX_FAR _AIBattleUseItemText
 	db "@"
 
@@ -23926,11 +23927,11 @@ EnemySendOut: ; 490E
 	call $3719
 	jp $51BA
 
-TrainerAboutToUseText:
+TrainerAboutToUseText: ; 0x3ca79
 	TX_FAR _TrainerAboutToUseText
 	db "@"
 
-TrainerSentOutText:
+TrainerSentOutText: ; 0x3ca7e
 	TX_FAR _TrainerSentOutText
 	db "@"
 
@@ -24145,17 +24146,17 @@ INCBIN "baserom.gbc",$3d435,$274
 	call nc,$7132
 	jp Function580A
 
-MultiHitText:
+MultiHitText: ; 0x3d805
 	TX_FAR _MultiHitText
 	db "@"
 
-Function580A: ; 580A
+Function580A: ; 0x3d80a 580A
 	xor a
 	ld [$CD6A],a
 	ld b,1
 	ret
 
-Function5811: ; 5811
+Function5811: ; 0x3d811 5811
 ; print the ghost battle messages
 	call $583A
 	ret nz
@@ -24175,15 +24176,15 @@ Function5811: ; 5811
 	xor a
 	ret
 
-ScaredText:
+ScaredText: ; 0x3d830
 	TX_FAR _ScaredText
 	db "@"
 
-GetOutText:
+GetOutText: ; 0x3d835
 	TX_FAR _GetOutText
 	db "@"
 
-Function583A: ; 583A
+Function583A: ; 0x3d83a 583A
 	ld a,[W_ISINBATTLE]
 	dec a
 	ret nz
@@ -26622,13 +26623,13 @@ LavenderTownObject: ; 0x4402d (size=88)
 	EVENT_DISP $a, $d, $3 ; LAVENDER_HOUSE_2
 	EVENT_DISP $a, $d, $7 ; NAME_RATERS_HOUSE
 
-LavenderTownBlocks: ; 90
+LavenderTownBlocks: ; 0x44085 90
 	INCBIN "maps/lavendertown.blk"
 
-ViridianPokecenterBlocks: ; 28
+ViridianPokecenterBlocks: ; 0x440df 28
 	INCBIN "maps/viridianpokecenter.blk"
 
-SafariZoneRestHouse1Blocks: ; 16
+SafariZoneRestHouse1Blocks: ; 0x440fb 16
 	INCBIN "maps/safarizoneresthouse1.blk"
 
 LavenderTownScript: ; 0x4410b
@@ -26879,8 +26880,7 @@ Mansion1Subscript1: ; 0x442c5
 
 INCBIN "baserom.gbc",$44304,$4432c - $44304
 
-Mansion1Texts: ; 4432c
-
+Mansion1Texts: ; 0x4432c
 INCBIN "baserom.gbc",$4432c,$44341 - $4432c
 
 Mansion1Text1: ; 0x44341
@@ -26951,7 +26951,7 @@ Mansion1Object: ; 0x443a4 (size=90)
 	EVENT_DISP $f, $1b, $1a
 	EVENT_DISP $f, $1b, $1b
 
-Mansion1Blocks: ; 203
+Mansion1Blocks: ; 0x44405 203
 	INCBIN "maps/mansion1.blk"
 
 RockTunnel1_h: ; 0x444d0 to 0x444dc (12 bytes) (bank=11) (id=82)
@@ -27162,7 +27162,7 @@ RockTunnel1Object: ; 0x445f6 (size=127)
 	EVENT_DISP $14, $b, $11 ; ROCK_TUNNEL_2
 	EVENT_DISP $14, $11, $25 ; ROCK_TUNNEL_2
 
-RockTunnel1Blocks: ; 360
+RockTunnel1Blocks: ; 0x44675 360
 	INCBIN "maps/rocktunnel1.blk"
 
 SeafoamIslands1_h: ; 0x447dd to 0x447e9 (12 bytes) (bank=11) (id=192)
@@ -27250,7 +27250,7 @@ SeafoamIslands1Object: ; 0x4484f (size=72)
 
 INCBIN "baserom.gbc",$44897,$8
 
-SeafoamIslands1Blocks: ; 135
+SeafoamIslands1Blocks: ; 0x4489f 135
 	INCBIN "maps/seafoamislands1.blk"
 
 SSAnne3_h: ; 0x44926 to 0x44932 (12 bytes) (bank=11) (id=97)
@@ -27288,7 +27288,7 @@ SSAnne3Object: ; 0x4493c (size=26)
 	EVENT_DISP $a, $3, $0 ; SS_ANNE_5
 	EVENT_DISP $a, $3, $13 ; SS_ANNE_2
 
-SSAnne3Blocks: ; 30
+SSAnne3Blocks: ; 0x44956 30
 	INCBIN "maps/ssanne3.blk"
 
 VictoryRoad3_h: ; 0x44974 to 0x44980 (12 bytes) (bank=11) (id=198)
@@ -27430,7 +27430,7 @@ VictoryRoad3Object: ; 0x44acd (size=106)
 	EVENT_DISP $f, $f, $1b ; VICTORY_ROAD_2
 	EVENT_DISP $f, $0, $2 ; VICTORY_ROAD_2
 
-VictoryRoad3Blocks: ; 135
+VictoryRoad3Blocks: ; 0x44b37 135
 	INCBIN "maps/victoryroad3.blk"
 
 RocketHideout1_h: ; 0x44bbe to 0x44bca (12 bytes) (bank=11) (id=199)
@@ -27589,7 +27589,7 @@ RocketHideout1Object: ; 0x44ce7 (size=98)
 	EVENT_DISP $f, $18, $15 ; ROCKET_HIDEOUT_2
 	EVENT_DISP $f, $13, $19 ; ROCKET_HIDEOUT_ELEVATOR
 
-RocketHideout1Blocks: ; 210
+RocketHideout1Blocks: ; 0x44d49 210
 	INCBIN "maps/rockethideout1.blk"
 
 RocketHideout2_h: ; 0x44e1b to 0x44e27 (12 bytes) (bank=11) (id=200)
@@ -27664,7 +27664,7 @@ RocketHideout2Object: ; 0x450f7 (size=80)
 	EVENT_DISP $f, $16, $15 ; ROCKET_HIDEOUT_1
 	EVENT_DISP $f, $13, $19 ; ROCKET_HIDEOUT_ELEVATOR
 
-RocketHideout2Blocks: ; 210
+RocketHideout2Blocks: ; 0x45147 210
 	INCBIN "maps/rockethideout2.blk"
 
 RocketHideout3_h: ; 0x45219 to 0x45225 (12 bytes) (bank=11) (id=201)
@@ -27753,7 +27753,7 @@ RocketHideout3Object: ; 0x4534d (size=50)
 	EVENT_DISP $f, $6, $19 ; ROCKET_HIDEOUT_2
 	EVENT_DISP $f, $12, $13 ; ROCKET_HIDEOUT_4
 
-RocketHideout3Blocks: ; 210
+RocketHideout3Blocks: ; 0x4537f 210
 	INCBIN "maps/rockethideout3.blk"
 
 RocketHideout4_h: ; 0x45451 to 0x4545d (12 bytes) (bank=11) (id=202)
@@ -27916,7 +27916,7 @@ RocketHideout4Object: ; 0x455f1 (size=95)
 	EVENT_DISP $f, $f, $18 ; ROCKET_HIDEOUT_ELEVATOR
 	EVENT_DISP $f, $f, $19 ; ROCKET_HIDEOUT_ELEVATOR
 
-RocketHideout4Blocks: ; 180
+RocketHideout4Blocks: ; 0x45650 180
 	INCBIN "maps/rockethideout4.blk"
 
 RocketHideoutElevator_h: ; 0x45704 to 0x45710 (12 bytes) (bank=11) (id=203)
@@ -27985,7 +27985,7 @@ RocketHideoutElevatorObject: ; 0x45791 (size=23)
 	EVENT_DISP $3, $1, $2 ; ROCKET_HIDEOUT_1
 	EVENT_DISP $3, $1, $3 ; ROCKET_HIDEOUT_1
 
-RocketHideoutElevatorBlocks: ; 12
+RocketHideoutElevatorBlocks: ; 0x457a8 12
 	INCBIN "maps/rockethideoutelevator.blk"
 
 SilphCoElevator_h: ; 0x457b4 to 0x457c0 (12 bytes) (bank=11) (id=236)
@@ -28042,7 +28042,7 @@ SilphCoElevatorObject: ; 0x45844 (size=23)
 	EVENT_DISP $2, $3, $1
 	EVENT_DISP $2, $3, $2
 
-SilphCoElevatorBlocks: ; 4
+SilphCoElevatorBlocks: ; 0x4585b 4
 	INCBIN "maps/silphcoelevator.blk"
 
 SafariZoneEast_h: ; 0x4585f to 0x4586b (12 bytes) (bank=11) (id=217)
@@ -28100,7 +28100,7 @@ SafariZoneEastObject: ; 0x4588b (size=81)
 	EVENT_DISP $f, $17, $0 ; SAFARI_ZONE_CENTER
 	EVENT_DISP $f, $9, $19 ; SAFARI_ZONE_REST_HOUSE_3
 
-SafariZoneEastBlocks: ; 195
+SafariZoneEastBlocks: ; 0x458dc 195
 	INCBIN "maps/safarizoneeast.blk"
 
 SafariZoneNorth_h: ; 0x4599f to 0x459ab (12 bytes) (bank=11) (id=218)
@@ -28174,7 +28174,7 @@ SafariZoneNorthObject: ; 0x459d5 (size=105)
 	EVENT_DISP $14, $1f, $27 ; SAFARI_ZONE_EAST
 	EVENT_DISP $14, $3, $23 ; SAFARI_ZONE_REST_HOUSE_4
 
-SafariZoneNorthBlocks: ; 360
+SafariZoneNorthBlocks: ; 0x45a3e 360
 	INCBIN "maps/safarizonenorth.blk"
 
 SafariZoneCenter_h: ; 0x45ba6 to 0x45bb2 (12 bytes) (bank=11) (id=220)
@@ -28232,7 +28232,7 @@ SafariZoneCenterObject: ; 0x45bc5 (size=89)
 	EVENT_DISP $f, $b, $1d ; SAFARI_ZONE_EAST
 	EVENT_DISP $f, $13, $11 ; SAFARI_ZONE_REST_HOUSE_1
 
-SafariZoneCenterBlocks: ; 195
+SafariZoneCenterBlocks: ; 0x45c1e 195
 	INCBIN "maps/safarizonecenter.blk"
 
 SafariZoneRestHouse1_h: ; 0x45ce1 to 0x45ced (12 bytes) (bank=11) (id=221)
@@ -28454,7 +28454,7 @@ UnknownDungeon2Object: ; 0x45e14 (size=73)
 	EVENT_DISP $f, $3, $1 ; UNKNOWN_DUNGEON_1
 	EVENT_DISP $f, $b, $3 ; UNKNOWN_DUNGEON_1
 
-UnknownDungeon2Blocks: ; 135
+UnknownDungeon2Blocks: ; 0x45e5d 135
 	INCBIN "maps/unknowndungeon2.blk"
 
 UnknownDungeon3_h: ; 0x45ee4 to 0x45ef0 (12 bytes) (bank=11) (id=227)
@@ -28506,7 +28506,7 @@ UnknownDungeon3Object: ; 0x45f36 (size=34)
 	; warp-to
 	EVENT_DISP $f, $6, $3 ; UNKNOWN_DUNGEON_1
 
-UnknownDungeon3Blocks: ; 135
+UnknownDungeon3Blocks: ; 0x45f58 135
 	INCBIN "maps/unknowndungeon3.blk"
 
 RockTunnel2_h: ; 0x45fdf to 0x45feb (12 bytes) (bank=11) (id=232)
@@ -28729,7 +28729,7 @@ RockTunnel2Object: ; 0x4613d (size=100)
 	EVENT_DISP $14, $b, $17 ; ROCK_TUNNEL_1
 	EVENT_DISP $14, $3, $3 ; ROCK_TUNNEL_1
 
-RockTunnel2Blocks: ; 360
+RockTunnel2Blocks: ; 0x461a1 360
 	INCBIN "maps/rocktunnel2.blk"
 
 SeafoamIslands2_h: ; 0x46309 to 0x46315 (12 bytes) (bank=11) (id=159)
@@ -28813,7 +28813,7 @@ SeafoamIslands2Object: ; 0x46376 (size=72)
 	EVENT_DISP $f, $b, $19 ; SEAFOAM_ISLANDS_3
 	EVENT_DISP $f, $3, $19 ; SEAFOAM_ISLANDS_1
 
-SeafoamIslands2Blocks: ; 135
+SeafoamIslands2Blocks: ; 0x463be 135
 	INCBIN "maps/seafoamislands2.blk"
 
 SeafoamIslands3_h: ; 0x46445 to 0x46451 (12 bytes) (bank=11) (id=160)
@@ -28897,7 +28897,7 @@ SeafoamIslands3Object: ; 0x464b2 (size=72)
 	EVENT_DISP $f, $b, $19 ; SEAFOAM_ISLANDS_2
 	EVENT_DISP $f, $e, $19 ; SEAFOAM_ISLANDS_4
 
-SeafoamIslands3Blocks: ; 135
+SeafoamIslands3Blocks: ; 0x464fa 135
 	INCBIN "maps/seafoamislands3.blk"
 
 SeafoamIslands4_h: ; 0x46581 to 0x4658d (12 bytes) (bank=11) (id=161)
@@ -29035,7 +29035,7 @@ SeafoamIslands4Object: ; 0x466a6 (size=96)
 	EVENT_DISP $f, $11, $14 ; SEAFOAM_ISLANDS_5
 	EVENT_DISP $f, $11, $15 ; SEAFOAM_ISLANDS_5
 
-SeafoamIslands4Blocks: ; 135
+SeafoamIslands4Blocks: ; 0x46706 135
 	INCBIN "maps/seafoamislands4.blk"
 
 SeafoamIslands5_h: ; 0x4678d to 0x46799 (12 bytes) (bank=11) (id=162)
@@ -29159,7 +29159,7 @@ SeafoamIslands5Object: ; 0x468bc (size=62)
 	EVENT_DISP $f, $7, $b ; SEAFOAM_ISLANDS_4
 	EVENT_DISP $f, $4, $19 ; SEAFOAM_ISLANDS_4
 
-SeafoamIslands5Blocks: ; 135
+SeafoamIslands5Blocks: ; 0x468fa 135
 	INCBIN "maps/seafoamislands5.blk"
 
 INCBIN "baserom.gbc",$46981,$167f
@@ -29214,23 +29214,23 @@ Route7Object: ; 0x48022 (size=47)
 	EVENT_DISP $a, $a, $b ; ROUTE_7_GATE
 	EVENT_DISP $a, $d, $5 ; PATH_ENTRANCE_ROUTE_7
 
-Route7Blocks: ; 90
+Route7Blocks: ; 4051 90
 	INCBIN "maps/route7.blk"
 
 CeladonPokecenterBlocks:
 RockTunnelPokecenterBlocks:
-MtMoonPokecenterBlocks: ; 28
+MtMoonPokecenterBlocks: ; 40ab 28
 	INCBIN "maps/mtmoonpokecenter.blk"
 
 Route18GateBlocks:
 Route15GateBlocks:
-Route11GateBlocks: ; 20
+Route11GateBlocks: ; 40c7 20
 	INCBIN "maps/route11gate.blk"
 
 Route18GateHeaderBlocks:
 Route16GateUpstairsBlocks:
 Route12GateUpstairsBlocks:
-Route11GateUpstairsBlocks: ; 16 40db
+Route11GateUpstairsBlocks: ; 40db 16
 	INCBIN "maps/route11gateupstairs.blk"
 
 INCBIN "baserom.gbc",$480eb,$48152 - $480eb
@@ -29258,7 +29258,7 @@ RedsHouse1FScript: ; 4168
 RedsHouse1FTexts: ; 416B
 	dw RedsHouse1FText1,RedsHouse1FText2
 
-RedsHouse1FText1: ; Mom
+RedsHouse1FText1: ; 416F Mom
 	db 8
 	ld a, [$D72E]
 	bit 3, a
@@ -29271,11 +29271,11 @@ RedsHouse1FText1: ; Mom
 .done\@
 	jp TextScriptEnd
 
-MomWakeUpText:
+MomWakeUpText: ; 0x48185
 	TX_FAR _MomWakeUpText
 	db "@"
 
-MomHealPokemon:
+MomHealPokemon: ; 0x4818a
 	ld hl, MomHealText1
 	call PrintText
 	call GBFadeOut2
@@ -29296,14 +29296,14 @@ MomHealPokemon:
 	ld hl, MomHealText2
 	jp PrintText
 
-MomHealText1:
+MomHealText1: ; 0x481bc
 	TX_FAR _MomHealText1
 	db "@"
-MomHealText2:
+MomHealText2: ; 0x481c1
 	TX_FAR _MomHealText2
 	db "@"
 
-RedsHouse1FText2: ; TV
+RedsHouse1FText2: ; 0x481c6 TV
 	db 8
 	ld a,[$C109]
 	cp 4
@@ -29314,15 +29314,15 @@ RedsHouse1FText2: ; TV
 	call PrintText
 	jp TextScriptEnd
 
-StandByMeText:
+StandByMeText: ; 0x481da
 	TX_FAR _StandByMeText
 	db "@"
 
-TVWrongSideText:
+TVWrongSideText: ; 0x481df
 	TX_FAR _TVWrongSideText
 	db "@"
 
-RedsHouse1FObject:
+RedsHouse1FObject: ; 0x481e4
 	db $0A ; border tile
 
 	db 3 ; warps
@@ -29491,7 +29491,7 @@ CeladonMart3Object: ; 0x482c4 (size=94)
 	EVENT_DISP $a, $1, $10 ; CELADON_MART_2
 	EVENT_DISP $a, $1, $1 ; CELADON_MART_ELEVATOR
 
-CeladonMart3Blocks: ; 40
+CeladonMart3Blocks: ; 0x48322 40
 	INCBIN "maps/celadonmart3.blk"
 
 CeladonMart4_h: ; 0x4834a to 0x48356 (12 bytes) (bank=12) (id=125)
@@ -29542,7 +29542,7 @@ CeladonMart4Object: ; 0x48370 (size=49)
 	EVENT_DISP $a, $1, $10 ; CELADON_MART_5
 	EVENT_DISP $a, $1, $1 ; CELADON_MART_ELEVATOR
 
-CeladonMart4Blocks: ; 40
+CeladonMart4Blocks: ; 0x483a1 40
 	INCBIN "maps/celadonmart4.blk"
 
 CeladonMartRoof_h: ; 0x483c9 to 0x483d5 (12 bytes) (bank=12) (id=126)
@@ -29632,7 +29632,7 @@ CeladonMartRoofObject: ; 0x485a8 (size=36)
 	; warp-to
 	EVENT_DISP $a, $2, $f ; CELADON_MART_5
 
-CeladonMartRoofBlocks: ; 40
+CeladonMartRoofBlocks: ; 0x485cc 40
 	INCBIN "maps/celadonmart5.blk"
 
 CeladonMartElevator_h: ; 0x485f4 to 0x48600 (12 bytes) (bank=12) (id=127)
@@ -29689,7 +29689,7 @@ CeladonMartElevatorObject: ; 0x4866d (size=23)
 	EVENT_DISP $2, $3, $1 ; CELADON_MART_1
 	EVENT_DISP $2, $3, $2 ; CELADON_MART_1
 
-CeladonMartElevatorBlocks: ; 4
+CeladonMartElevatorBlocks: ; 0x48684 4
 	INCBIN "maps/celadonmart6.blk"
 
 CeladonMansion1_h: ; 0x48688 to 0x48694 (12 bytes) (bank=12) (id=128)
@@ -29766,7 +29766,7 @@ CeladonMansion1Object: ; 0x486cf (size=71)
 	EVENT_DISP $4, $1, $7 ; CELADON_MANSION_2
 	EVENT_DISP $4, $1, $2 ; CELADON_MANSION_2
 
-CeladonMansion1Blocks: ; 24
+CeladonMansion1Blocks: ; 0x48716 24
 	INCBIN "maps/celadonmansion1.blk"
 
 CeladonMansion2_h: ; 0x4872e to 0x4873a (12 bytes) (bank=12) (id=129)
@@ -29809,7 +29809,7 @@ CeladonMansion2Object: ; 0x48745 (size=39)
 	EVENT_DISP $4, $1, $2 ; CELADON_MANSION_1
 	EVENT_DISP $4, $1, $4 ; CELADON_MANSION_3
 
-CeladonMansion2Blocks: ; 24
+CeladonMansion2Blocks: ; 0x4876c 24
 	INCBIN "maps/celadonmansion2.blk"
 
 CeladonMansion3_h: ; 0x48784 to 0x48790 (12 bytes) (bank=12) (id=130)
@@ -29915,7 +29915,7 @@ CeladonMansion3Object: ; 0x487ff (size=72)
 	EVENT_DISP $4, $1, $2 ; CELADON_MANSION_4
 	EVENT_DISP $4, $1, $4 ; CELADON_MANSION_2
 
-CeladonMansion3Blocks: ; 24
+CeladonMansion3Blocks: ; 0x48847 24
 	INCBIN "maps/celadonmansion3.blk"
 
 CeladonMansion4_h: ; 0x4885f to 0x4886b (12 bytes) (bank=12) (id=131)
@@ -29955,7 +29955,7 @@ CeladonMansion4Object: ; 0x48875 (size=31)
 	EVENT_DISP $4, $1, $2 ; CELADON_MANSION_3
 	EVENT_DISP $4, $7, $2 ; CELADON_MANSION_5
 
-CeladonMansion4Blocks: ; 24
+CeladonMansion4Blocks: ; 0x48894 24
 	INCBIN "maps/celadonmansion4.blk"
 
 CeladonPokecenter_h: ; 0x488ac to 0x488b8 (12 bytes) (bank=12) (id=133)
@@ -30274,7 +30274,7 @@ CeladonGymObject: ; 0x48b30 (size=84)
 	EVENT_DISP $5, $11, $4
 	EVENT_DISP $5, $11, $5
 
-CeladonGymBlocks: ; 45
+CeladonGymBlocks: ; 0x48b84 45
 	INCBIN "maps/celadongym.blk"
 
 CeladonGameCorner_h: ; 0x48bb1 to 0x48bbd (12 bytes) (bank=12) (id=135)
@@ -30716,7 +30716,7 @@ CeladonGameCornerObject: ; 0x48fa0 (size=99)
 	EVENT_DISP $a, $11, $10
 	EVENT_DISP $a, $4, $11 ; ROCKET_HIDEOUT_1
 
-CeladonGameCornerBlocks: ; 90
+CeladonGameCornerBlocks: ; 0x49003 90
 	INCBIN "maps/celadongamecorner.blk"
 
 CeladonMart5_h: ; 0x4905d to 0x49069 (12 bytes) (bank=12) (id=136)
@@ -30768,7 +30768,7 @@ CeladonMart5Object: ; 0x49085 (size=55)
 	EVENT_DISP $a, $1, $10 ; CELADON_MART_4
 	EVENT_DISP $a, $1, $1 ; CELADON_MART_ELEVATOR
 
-CeladonMart5Blocks: ; 40
+CeladonMart5Blocks: ; 0x490bc 40
 	INCBIN "maps/celadonhouse.blk"
 
 CeladonPrizeRoom_h: ; 0x490e4 to 0x490f0 (12 bytes) (bank=12) (id=137)
@@ -30817,7 +30817,7 @@ CeladonPrizeRoomObject: ; 0x49108 (size=41)
 	EVENT_DISP $5, $7, $4
 	EVENT_DISP $5, $7, $5
 
-CeladonPrizeRoomBlocks: ; 20
+CeladonPrizeRoomBlocks: ; 0x49131 20
 	INCBIN "maps/celadonprizeroom.blk"
 
 CeladonDiner_h: ; 0x49145 to 0x49151 (12 bytes) (bank=12) (id=138)
@@ -30917,7 +30917,7 @@ CeladonDinerObject: ; 0x491bc (size=50)
 	EVENT_DISP $5, $7, $3
 	EVENT_DISP $5, $7, $4
 
-CeladonDinerBlocks: ; 20
+CeladonDinerBlocks: ; 0x491ee 20
 	INCBIN "maps/celadondiner.blk"
 
 CeladonHouse_h: ; 0x49202 to 0x4920e (12 bytes) (bank=12) (id=139)
@@ -30966,7 +30966,7 @@ CeladonHouseObject: ; 0x49227 (size=38)
 	EVENT_DISP $4, $7, $2
 	EVENT_DISP $4, $7, $3
 
-CeladonHouseBlocks: ; 16
+CeladonHouseBlocks: ; 0x4924d 16
 	INCBIN "maps/celadonhouse2.blk"
 
 CeladonHotel_h: ; 0x4925d to 0x49269 (12 bytes) (bank=12) (id=140)
@@ -31014,7 +31014,7 @@ CeladonHotelObject: ; 0x49281 (size=38)
 	EVENT_DISP $7, $7, $3
 	EVENT_DISP $7, $7, $4
 
-CeladonHotelBlocks: ; 28
+CeladonHotelBlocks: ; 0x492a7 28
 	INCBIN "maps/celadonhotel.blk"
 
 MtMoonPokecenter_h: ; 0x492c3 to 0x492cf (12 bytes) (bank=12) (id=68)
@@ -31386,7 +31386,7 @@ Route12GateObject: ; 0x4950e (size=50)
 	EVENT_DISP $5, $7, $5
 	EVENT_DISP $5, $6, $8 ; ROUTE_12_GATE_2F
 
-Route12GateBlocks: ; 20
+Route12GateBlocks: ; 0x49540 20
 	INCBIN "maps/route12gate.blk"
 
 Route12GateUpstairs_h: ; 0x49554 to 0x49560 (12 bytes) (id=195)
@@ -31679,7 +31679,7 @@ Route16GateMapObject: ; 0x4978b (size=88)
 	EVENT_DISP $4, $3, $7
 	EVENT_DISP $4, $c, $6 ; ROUTE_16_GATE_2F
 
-Route16GateMapBlocks: ; 28
+Route16GateMapBlocks: ; 0x497e3 28
 	INCBIN "maps/route16gatemap.blk"
 
 Route16GateUpstairs_h: ; 0x497ff to 0x4980b (12 bytes) (id=187)
@@ -32139,7 +32139,7 @@ MtMoon1Object: ; 0x49b06 (size=145)
 	EVENT_DISP $14, $b, $11 ; MT_MOON_2
 	EVENT_DISP $14, $f, $19 ; MT_MOON_2
 
-MtMoon1Blocks: ; 360
+MtMoon1Blocks: ; 0x49b97 360
 	INCBIN "maps/mtmoon1.blk"
 
 MtMoon3_h: ; 0x49cff to 0x49d0b (12 bytes) (id=61)
@@ -32429,7 +32429,7 @@ MtMoon3Object: ; 0x49fdb (size=102)
 	EVENT_DISP $14, $1b, $f ; MT_MOON_2
 	EVENT_DISP $14, $7, $5 ; MT_MOON_2
 
-MtMoon3Blocks: ; 360
+MtMoon3Blocks: ; 0x4a041 360
 	INCBIN "maps/mtmoon3.blk"
 
 SafariZoneWest_h: ; 0x4a1a9 to 0x4a1b5 (12 bytes) (id=219)
@@ -32498,7 +32498,7 @@ SafariZoneWestObject: ; 0x4a1dc (size=108)
 	EVENT_DISP $f, $3, $3 ; SAFARI_ZONE_SECRET_HOUSE
 	EVENT_DISP $f, $b, $b ; SAFARI_ZONE_REST_HOUSE_2
 
-SafariZoneWestBlocks: ; 195
+SafariZoneWestBlocks: ; 0x4a248 195
 	INCBIN "maps/safarizonewest.blk"
 
 SafariZoneSecretHouse_h: ; 0x4a30b to 0x4a317 (12 bytes) (id=222)
@@ -32577,7 +32577,7 @@ SafariZoneSecretHouseObject: ; 0x4a365 (size=26)
 	EVENT_DISP $4, $7, $2 ; SAFARI_ZONE_WEST
 	EVENT_DISP $4, $7, $3 ; SAFARI_ZONE_WEST
 
-SafariZoneSecretHouseBlocks: ; 16
+SafariZoneSecretHouseBlocks: ; 0x4a37f 16
 	INCBIN "maps/safarizonesecrethouse.blk"
 
 INCBIN "baserom.gbc",$4a38f,$1c71
@@ -32734,7 +32734,7 @@ BattleCenterMObject: ; 0x4fd53 (size=10)
 	db $1 ; people
 	db SPRITE_RED, $2 + 4, $2 + 4, $ff, $0, $1 ; person
 
-BattleCenterMBlocks: ; 20
+BattleCenterMBlocks: ; 0x4fd5d 20
 	INCBIN "maps/battlecenterm.blk"
 
 TradeCenterM_h: ; 0x4fd71 to 0x4fd7d (12 bytes) (id=240)
@@ -32766,7 +32766,7 @@ TradeCenterMObject: ; 0x4fd87 (size=10)
 	db $1 ; people
 	db SPRITE_RED, $2 + 4, $2 + 4, $ff, $0, $1 ; person
 
-TradeCenterMBlocks: ; 20
+TradeCenterMBlocks: ; 0x4fd91 20
 	INCBIN "maps/tradecenterm.blk"
 
 INCBIN "baserom.gbc",$4fda5,$4fe3f - $4fda5
@@ -32985,7 +32985,7 @@ Route22Object: ; 0x50022 (size=27)
 	; warp-to
 	EVENT_DISP $14, $5, $8 ; ROUTE_22_GATE
 
-Route22Blocks: ; 180
+Route22Blocks: ; 0x5003d 180
 	INCBIN "maps/route22.blk"
 
 Route20_h: ; 0x500f1 to 0x50113 (34 bytes) (id=31)
@@ -33041,7 +33041,7 @@ Route20Object: ; 0x50113 (size=106)
 	EVENT_DISP $32, $5, $30 ; SEAFOAM_ISLANDS_1
 	EVENT_DISP $32, $9, $3a ; SEAFOAM_ISLANDS_1
 
-Route20Blocks: ; 450
+Route20Blocks: ; 0x5017d 450
 	INCBIN "maps/route20.blk"
 
 Route23_h: ; 0x5033f to 0x50361 (34 bytes) (id=34)
@@ -33097,7 +33097,7 @@ Route23Object: ; 0x50361 (size=81)
 	EVENT_DISP $a, $1f, $4 ; VICTORY_ROAD_1
 	EVENT_DISP $a, $1f, $e ; VICTORY_ROAD_2
 
-Route23Blocks: ; 720
+Route23Blocks: ; 0x503b2 720
 	INCBIN "maps/route23.blk"
 
 Route24_h: ; 0x50682 to 0x506a4 (34 bytes) (id=35)
@@ -33143,7 +33143,7 @@ Route24Object: ; 0x506a4 (size=67)
 	db SPRITE_BUG_CATCHER, $1f + 4, $b + 4, $ff, $d2, $47, BUG_CATCHER + $C8, $9 ; trainer
 	db SPRITE_BALL, $5 + 4, $a + 4, $ff, $ff, $88, TM_45 ; item
 
-Route24Blocks: ; 180
+Route24Blocks: ; 0x506e7 180
 	INCBIN "maps/route24.blk"
 
 Route25_h: ; 0x5079b to 0x507b2 (23 bytes) (id=36)
@@ -33189,7 +33189,7 @@ Route25Object: ; 0x507b2 (size=94)
 	; warp-to
 	EVENT_DISP $1e, $3, $2d ; BILLS_HOUSE
 
-Route25Blocks: ; 270
+Route25Blocks: ; 0x50810 270
 	INCBIN "maps/route25.blk"
 
 IndigoPlateau_h: ; 0x5091e to 0x50935 (23 bytes) (id=9)
@@ -33231,7 +33231,7 @@ IndigoPlateauObject: ; 0x50936 (size=20)
 	EVENT_DISP $a, $5, $9 ; INDIGO_PLATEAU_LOBBY
 	EVENT_DISP $a, $5, $a ; INDIGO_PLATEAU_LOBBY
 
-IndigoPlateauBlocks: ; 90
+IndigoPlateauBlocks: ; 0x5094a 90
 	INCBIN "maps/indigoplateau.blk"
 
 SaffronCity_h: ; 0x509a4 to 0x509dc (56 bytes) (id=10)
@@ -33326,7 +33326,7 @@ SaffronCityObject: ; 0x509dc (size=188)
 	EVENT_DISP $14, $1d, $9 ; SAFFRON_POKECENTER
 	EVENT_DISP $14, $1d, $1d ; SAFFRON_HOUSE_2
 
-SaffronCityBlocks: ; 360
+SaffronCityBlocks: ; 0x50a98 360
 	INCBIN "maps/saffroncity.blk"
 
 SaffronCityScript: ; 0x50c00
@@ -34636,7 +34636,7 @@ VictoryRoad2Object: ; 0x51915 (size=154)
 	EVENT_DISP $f, $7, $1b ; VICTORY_ROAD_3
 	EVENT_DISP $f, $1, $1 ; VICTORY_ROAD_3
 
-VictoryRoad2Blocks: ; 135
+VictoryRoad2Blocks: ; 0x519af 135
 	INCBIN "maps/victoryroad2.blk"
 
 MtMoon2_h: ; 0x51a36 to 0x51a42 (12 bytes) (id=60)
@@ -34687,7 +34687,7 @@ MtMoon2Object: ; 0x51a4d (size=68)
 	EVENT_DISP $e, $3, $17 ; MT_MOON_3
 	EVENT_DISP $e, $3, $1b
 
-MtMoon2Blocks: ; 196
+MtMoon2Blocks: ; 0x51a91 196
 	INCBIN "maps/mtmoon2.blk"
 
 SilphCo7_h: ; 0x51b55 to 0x51b61 (12 bytes) (id=212)
@@ -34990,7 +34990,7 @@ SilphCo7Object: ; 0x51ed7 (size=128)
 	EVENT_DISP $d, $3, $5 ; SILPH_CO_3F
 	EVENT_DISP $d, $f, $15 ; SILPH_CO_5F
 
-SilphCo7Blocks: ; 117
+SilphCo7Blocks: ; 0x51f57 117
 	INCBIN "maps/silphco7.blk"
 
 Mansion2_h: ; 0x51fcc to 0x51fd8 (12 bytes) (id=214)
@@ -35295,7 +35295,7 @@ UnnamedText_526f8: ; 0x526f8
 
 INCBIN "baserom.gbc",$526fd,$1e
 
-CeladonPrizeMenu: ; 14:671B 0x5271b
+CeladonPrizeMenu: ; 0x5271b 14:671B
 	ld b,COIN_CASE
 	call IsItemInBag
 	jr nz,.havingCoinCase\@
@@ -35817,7 +35817,7 @@ Route2Object: ; 0x54022 (size=72)
 
 INCBIN "baserom.gbc",$5406a,$14
 
-Route2Blocks: ; 360
+Route2Blocks: ; 0x5407e 360
 	INCBIN "maps/route2.blk"
 
 Route3_h: ; 0x541e6 to 0x54208 (34 bytes) (id=14)
@@ -35865,7 +35865,7 @@ Route3Object: ; 0x54208 (size=77)
 	db SPRITE_BUG_CATCHER, $6 + 4, $18 + 4, $ff, $d3, $48, BUG_CATCHER + $C8, $6 ; trainer
 	db SPRITE_LASS, $a + 4, $21 + 4, $ff, $d1, $49, LASS + $C8, $3 ; trainer
 
-Route3Blocks: ; 315
+Route3Blocks: ; 0x54255 315
 	INCBIN "maps/route3.blk"
 
 Route4_h: ; 0x54390 to 0x543b2 (34 bytes) (id=15)
@@ -35917,7 +35917,7 @@ Route4Object: ; 0x543b2 (size=58)
 	EVENT_DISP $2d, $5, $12 ; MT_MOON_1
 	EVENT_DISP $2d, $5, $18 ; MT_MOON_2
 
-Route4Blocks: ; 405
+Route4Blocks: ; 0x543ec 405
 	INCBIN "maps/route4.blk"
 
 Route5_h: ; 0x54581 to 0x545a3 (34 bytes) (id=16)
@@ -35968,7 +35968,7 @@ Route5Object: ; 0x545a3 (size=47)
 	EVENT_DISP $a, $1b, $11 ; PATH_ENTRANCE_ROUTE_5
 	EVENT_DISP $a, $15, $a ; DAYCAREM
 
-Route5Blocks: ; 180
+Route5Blocks: ; 0x545d2 180
 	INCBIN "maps/route5.blk"
 
 Route9_h: ; 0x54686 to 0x546a8 (34 bytes) (id=20)
@@ -36017,7 +36017,7 @@ Route9Object: ; 0x546a8 (size=86)
 	db SPRITE_BUG_CATCHER, $8 + 4, $28 + 4, $ff, $d3, $49, BUG_CATCHER + $C8, $e ; trainer
 	db SPRITE_BALL, $f + 4, $a + 4, $ff, $ff, $8a, TM_30 ; item
 
-Route9Blocks: ; 270
+Route9Blocks: ; 0x546fe 270
 	INCBIN "maps/route9.blk"
 
 Route13_h: ; 0x5480c to 0x5482e (34 bytes) (id=24)
@@ -36068,7 +36068,7 @@ Route13Object: ; 0x5482e (size=93)
 	db SPRITE_BIKER, $7 + 4, $a + 4, $ff, $d1, $49, BIKER + $C8, $1 ; trainer
 	db SPRITE_BLACK_HAIR_BOY_1, $d + 4, $7 + 4, $ff, $d1, $4a, BIRD_KEEPER + $C8, $3 ; trainer
 
-Route13Blocks: ; 270
+Route13Blocks: ; 0x5488b 270
 	INCBIN "maps/route13.blk"
 
 Route14_h: ; 0x54999 to 0x549bb (34 bytes) (id=25)
@@ -36117,7 +36117,7 @@ Route14Object: ; 0x549bb (size=87)
 	db SPRITE_BIKER, $1e + 4, $f + 4, $ff, $d2, $49, BIKER + $C8, $f ; trainer
 	db SPRITE_BIKER, $1f + 4, $4 + 4, $ff, $d3, $4a, BIKER + $C8, $2 ; trainer
 
-Route14Blocks: ; 270
+Route14Blocks: ; 0x54a12 270
 	INCBIN "maps/route14.blk"
 
 Route17_h: ; 0x54b20 to 0x54b42 (34 bytes) (id=28)
@@ -36171,7 +36171,7 @@ Route17Object: ; 0x54b42 (size=102)
 	db SPRITE_BIKER, $62 + 4, $5 + 4, $ff, $d2, $49, BIKER + $C8, $b ; trainer
 	db SPRITE_BIKER, $76 + 4, $a + 4, $ff, $d0, $4a, BIKER + $C8, $c ; trainer
 
-Route17Blocks: ; 720
+Route17Blocks: ; 0x54ba8 720
 	INCBIN "maps/route17.blk"
 
 Route19_h: ; 0x54e78 to 0x54e9a (34 bytes) (id=30)
@@ -36220,7 +36220,7 @@ Route19Object: ; 0x54e9a (size=87)
 	db SPRITE_SWIMMER, $2a + 4, $9 + 4, $ff, $d1, $49, SWIMMER + $C8, $8 ; trainer
 	db SPRITE_SWIMMER, $2c + 4, $a + 4, $ff, $d0, $4a, BEAUTY + $C8, $e ; trainer
 
-Route19Blocks: ; 270
+Route19Blocks: ; 0x54ef1 270
 	INCBIN "maps/route19.blk"
 
 Route21_h: ; 0x54fff to 0x55021 (34 bytes) (id=32)
@@ -36267,15 +36267,15 @@ Route21Object: ; 0x55021 (size=76)
 	db SPRITE_FISHER2, $38 + 4, $e + 4, $ff, $d2, $48, FISHER + $C8, $8 ; trainer
 	db SPRITE_FISHER2, $39 + 4, $11 + 4, $ff, $d3, $49, FISHER + $C8, $a ; trainer
 
-Route21Blocks: ; 450
+Route21Blocks: ; 0x5506d 450
 	INCBIN "maps/route21.blk"
 
 VermilionHouse2Blocks:
 Route12HouseBlocks:
-DayCareMBlocks: ; 16 0x5522f 522F
+DayCareMBlocks: ; 0x5522f 522F 16
 	INCBIN "maps/daycarem.blk"
 
-FuchsiaHouse3Blocks: ; 16
+FuchsiaHouse3Blocks: ; 0x5523f 16
 	INCBIN "maps/fuchsiahouse3.blk"
 
 INCBIN "baserom.gbc",$5524f,$554d8 - $5524f
@@ -38071,7 +38071,7 @@ CeladonMart2Object: ; 0x56111 (size=55)
 	EVENT_DISP $a, $1, $10 ; CELADON_MART_3
 	EVENT_DISP $a, $1, $1 ; CELADON_MART_ELEVATOR
 
-CeladonMart2Blocks: ; 40
+CeladonMart2Blocks: ; 0x56148 40
 	INCBIN "maps/celadonmart2.blk"
 
 FuchsiaHouse3_h: ; 0x56170 to 0x5617c (12 bytes) (id=164)
@@ -38559,7 +38559,7 @@ SilphCo8Object: ; 0x56613 (size=90)
 	EVENT_DISP $d, $5, $b ; SILPH_CO_2F
 	EVENT_DISP $d, $9, $b ; SILPH_CO_8F
 
-SilphCo8Blocks: ; 117
+SilphCo8Blocks: ; 0x5666d 117
 	INCBIN "maps/silphco8.blk"
 
 INCBIN "baserom.gbc",$566e2,$191e
@@ -38618,7 +38618,7 @@ Route6Object: ; 0x58022 (size=87)
 	EVENT_DISP $a, $7, $a ; ROUTE_6_GATE
 	EVENT_DISP $a, $d, $11 ; PATH_ENTRANCE_ROUTE_6
 
-Route6Blocks: ; 180
+Route6Blocks: ; 0x58079 180
 	INCBIN "maps/route6.blk"
 
 Route8_h: ; 0x5812d to 0x5814f (34 bytes) (id=19)
@@ -38678,7 +38678,7 @@ Route8Object: ; 0x5814f (size=119)
 	EVENT_DISP $1e, $a, $8 ; ROUTE_8_GATE
 	EVENT_DISP $1e, $3, $d ; PATH_ENTRANCE_ROUTE_8
 
-Route8Blocks: ; 270
+Route8Blocks: ; 0x581c6 270
 	INCBIN "maps/route8.blk"
 
 Route10_h: ; 0x582d4 to 0x582f6 (34 bytes) (id=21)
@@ -38736,7 +38736,7 @@ Route10Object: ; 0x582f6 (size=96)
 	EVENT_DISP $a, $35, $8 ; ROCK_TUNNEL_1
 	EVENT_DISP $a, $27, $6 ; POWER_PLANT
 
-Route10Blocks: ; 360
+Route10Blocks: ; 0x58356 360
 	INCBIN "maps/route10.blk"
 
 Route11_h: ; 0x584be to 0x584e0 (34 bytes) (id=22)
@@ -38797,7 +38797,7 @@ Route11Object: ; 0x584e0 (size=127)
 	EVENT_DISP $1e, $9, $3a ; ROUTE_11_GATE_1F
 	EVENT_DISP $1e, $5, $4 ; DIGLETTS_CAVE_ENTRANCE
 
-Route11Blocks: ; 270
+Route11Blocks: ; 0x5855f 270
 	INCBIN "maps/route11.blk"
 
 Route12_h: ; 0x5866d to 0x5869a (45 bytes) (id=23)
@@ -38864,7 +38864,7 @@ Route12Object: ; 0x5869a (size=118)
 	EVENT_DISP $a, $15, $a ; ROUTE_12_GATE
 	EVENT_DISP $a, $4d, $b ; ROUTE_12_HOUSE
 
-Route12Blocks: ; 540
+Route12Blocks: ; 0x58710 540
 	INCBIN "maps/route12.blk"
 
 Route15_h: ; 0x5892c to 0x5894e (34 bytes) (id=26)
@@ -38924,7 +38924,7 @@ Route15Object: ; 0x5894e (size=126)
 	EVENT_DISP $1e, $8, $e ; ROUTE_15_GATE
 	EVENT_DISP $1e, $9, $e ; ROUTE_15_GATE
 
-Route15Blocks: ; 270
+Route15Blocks: ; 0x589cc 270
 	INCBIN "maps/route15.blk"
 
 Route16_h: ; 0x58ada to 0x58afc (34 bytes) (id=27)
@@ -38991,7 +38991,7 @@ Route16Object: ; 0x58afc (size=136)
 	EVENT_DISP $14, $5, $18 ; ROUTE_16_GATE_1F
 	EVENT_DISP $14, $5, $7 ; ROUTE_16_HOUSE
 
-Route16Blocks: ; 180
+Route16Blocks: ; 0x58b84 180
 	INCBIN "maps/route16.blk"
 
 Route18_h: ; 0x58c38 to 0x58c5a (34 bytes) (id=29)
@@ -39044,7 +39044,7 @@ Route18Object: ; 0x58c5a (size=66)
 	EVENT_DISP $19, $8, $28 ; ROUTE_18_GATE_1F
 	EVENT_DISP $19, $9, $28 ; ROUTE_18_GATE_1F
 
-Route18Blocks: ; 225
+Route18Blocks: ; 0x58c9c 225
 	INCBIN "maps/route18.blk"
 
 INCBIN "baserom.gbc",$58d7d,$58e3b - $58d7d
@@ -40709,7 +40709,7 @@ FanClubObject: ; 0x59c97 (size=62)
 	EVENT_DISP $4, $7, $2
 	EVENT_DISP $4, $7, $3
 
-FanClubBlocks: ; 16
+FanClubBlocks: ; 0x59cd5 16
 	INCBIN "maps/fanclub.blk"
 
 SilphCo2_h: ; 0x59ce5 to 0x59cf1 (12 bytes) (id=207)
@@ -40893,7 +40893,7 @@ SilphCo2Object: ; 0x59e66 (size=98)
 	EVENT_DISP $f, $f, $1b ; SILPH_CO_8F
 	EVENT_DISP $f, $f, $9 ; SILPH_CO_6F
 
-SilphCo2Blocks: ; 135
+SilphCo2Blocks: ; 0x59ec8 135
 	INCBIN "maps/silphco2.blk"
 
 SilphCo3_h: ; 0x59f4f to 0x59f5b (12 bytes) (id=208)
@@ -41021,7 +41021,7 @@ SilphCo3Object: ; 0x5a035 (size=113)
 	EVENT_DISP $f, $b, $b ; SILPH_CO_7F
 	EVENT_DISP $f, $f, $1b ; SILPH_CO_3F
 
-SilphCo3Blocks: ; 135
+SilphCo3Blocks: ; 0x5a0a6 135
 	INCBIN "maps/silphco3.blk"
 
 SilphCo10_h: ; 0x5a12d to 0x5a139 (12 bytes) (id=234)
@@ -41142,7 +41142,7 @@ SilphCo10Object: ; 0x5a1fb (size=95)
 	EVENT_DISP $8, $f, $d ; SILPH_CO_4F
 	EVENT_DISP $8, $7, $d ; SILPH_CO_4F
 
-SilphCo10Blocks: ; 72
+SilphCo10Blocks: ; 0x5a25a 72
 	INCBIN "maps/silphco10.blk"
 
 Lance_h: ; 0x5a2a2 to 0x5a2ae (12 bytes) (id=113)
@@ -41207,7 +41207,7 @@ LanceObject: ; 0x5a3c5 (size=36)
 	EVENT_DISP $d, $0, $5 ; CHAMPIONS_ROOM
 	EVENT_DISP $d, $0, $6 ; CHAMPIONS_ROOM
 
-LanceBlocks: ; 169
+LanceBlocks: ; 0x5a3e9 169
 	INCBIN "maps/lance.blk"
 
 HallofFameRoom_h: ; 0x5a492 to 0x5a49e (12 bytes) (id=118)
@@ -41346,7 +41346,7 @@ HallofFameRoomObject: ; 0x5a571 (size=26)
 	EVENT_DISP $5, $7, $4 ; CHAMPIONS_ROOM
 	EVENT_DISP $5, $7, $5 ; CHAMPIONS_ROOM
 
-HallofFameRoomBlocks: ; 20
+HallofFameRoomBlocks: ; 0x5a58b 20
 	INCBIN "maps/halloffameroom.blk"
 
 INCBIN "baserom.gbc",$5a59f,$1a61
@@ -41356,33 +41356,33 @@ SECTION "bank17",DATA,BANK[$17]
 SaffronMartBlocks:
 LavenderMartBlocks:
 CeruleanMartBlocks:
-VermilionMartBlocks: ; 16
+VermilionMartBlocks: ; 0x5c000 16
 	INCBIN "maps/vermilionmart.blk"
 
 CopycatsHouseF2Blocks:
-RedsHouse2FBlocks:
+RedsHouse2FBlocks: ; 0x5c010 16?
 	INCBIN "maps/redshouse2f.blk"
 
-MuseumF1Blocks: ; 40
+MuseumF1Blocks: ; 0x5c020 40
 	INCBIN "maps/museumf1.blk"
 
-MuseumF2Blocks: ; 28
+MuseumF2Blocks: ; 0x5c048 28
 	INCBIN "maps/museumf2.blk"
 
 SaffronPokecenterBlocks:
 VermilionPokecenterBlocks:
 LavenderPokecenterBlocks:
-PewterPokecenterBlocks: ; 28
+PewterPokecenterBlocks: ; 0x5c064 28
 	INCBIN "maps/pewterpokecenter.blk"
 
 UndergroundTunnelEntranceRoute7Blocks:
 UndergroundTunnelEntranceRoute6Blocks:
-UndergroundTunnelEntranceRoute5Blocks: ; 16
+UndergroundTunnelEntranceRoute5Blocks: ; 0x5c080 16
 	INCBIN "maps/undergroundtunnelentranceroute5.blk"
 
 Route2GateBlocks:
 ViridianForestEntranceBlocks:
-ViridianForestexitBlocks: ; 20
+ViridianForestexitBlocks: ; 0x5c090 20
 	INCBIN "maps/viridianforestexit.blk"
 
 RedsHouse2F_h:
@@ -41410,13 +41410,13 @@ RedsHouse2FScript1:
 	ld [$D60C],a
 	ret
 
-RedsHouse2FScript2:
+RedsHouse2FScript2: ; 0x5c0ed
 	ret
 
-RedsHouse2FTexts:
+RedsHouse2FTexts: ; 0x5c0ef
 	db "@"
 
-RedsHouse2FObject:
+RedsHouse2FObject: ; 0x5c0d0 ?
 	db $0A ; border tile
 
 	db 1 ; warps
@@ -41986,7 +41986,7 @@ PewterGymObject: ; 0x5c52e (size=42)
 	EVENT_DISP $5, $d, $4
 	EVENT_DISP $5, $d, $5
 
-PewterGymBlocks: ; 35
+PewterGymBlocks: ; 0x5c558 35
 	INCBIN "maps/pewtergym.blk"
 
 PewterPokecenter_h: ; 0x5c57b to 0x5c587 (12 bytes) (id=58)
@@ -42141,7 +42141,7 @@ CeruleanPokecenterObject: ; 0x5c65f (size=44)
 	EVENT_DISP $7, $7, $3
 	EVENT_DISP $7, $7, $4
 
-CeruleanPokecenterBlocks: ; 28
+CeruleanPokecenterBlocks: ; 0x5c68b 28
 	INCBIN "maps/ceruleanpokecenter.blk"
 
 CeruleanGym_h: ; 0x5c6a7 to 0x5c6b3 (12 bytes) (id=65)
@@ -42321,7 +42321,7 @@ CeruleanGymObject: ; 0x5c834 (size=50)
 	EVENT_DISP $5, $d, $4
 	EVENT_DISP $5, $d, $5
 
-CeruleanGymBlocks: ; 35
+CeruleanGymBlocks: ; 0x5c866 35
 	INCBIN "maps/ceruleangym.blk"
 
 CeruleanMart_h: ; 0x5c889 to 0x5c895 (12 bytes) (id=67)
@@ -42773,7 +42773,7 @@ VermilionGymObject: ; 0x5cbfe (size=58)
 	EVENT_DISP $5, $11, $4
 	EVENT_DISP $5, $11, $5
 
-VermilionGymBlocks: ; 45
+VermilionGymBlocks: ; 0x5cc38 45
 	INCBIN "maps/vermiliongym.blk"
 
 CopycatsHouseF2_h: ; 0x5cc65 to 0x5cc71 (12 bytes) (id=176)
@@ -43174,7 +43174,7 @@ FightingDojoObject: ; 0x5cf9b (size=72)
 	EVENT_DISP $5, $b, $4
 	EVENT_DISP $5, $b, $5
 
-FightingDojoBlocks: ; 30
+FightingDojoBlocks: ; 0x5cfe3 30
 	INCBIN "maps/fightingdojo.blk"
 
 SaffronGym_h: ; 0x5d001 to 0x5d00d (12 bytes) (id=178)
@@ -43528,7 +43528,7 @@ SaffronGymObject: ; 0x5d259 (size=330)
 	EVENT_DISP $a, $11, $f ; SAFFRON_GYM
 	EVENT_DISP $a, $11, $13 ; SAFFRON_GYM
 
-SaffronGymBlocks: ; 90
+SaffronGymBlocks: ; 0x5d3a3 90
 	INCBIN "maps/saffrongym.blk"
 
 SaffronMart_h: ; 0x5d3fd to 0x5d409 (12 bytes) (id=180)
@@ -43624,7 +43624,7 @@ SilphCo1Object: ; 0x5d470 (size=50)
 	EVENT_DISP $f, $0, $14 ; SILPH_CO_ELEVATOR
 	EVENT_DISP $f, $a, $10 ; SILPH_CO_3F
 
-SilphCo1Blocks: ; 135
+SilphCo1Blocks: ; 0x5d4a2 135
 	INCBIN "maps/silphco1.blk"
 
 SaffronPokecenter_h: ; 0x5d529 to 0x5d535 (12 bytes) (id=182)
@@ -44139,7 +44139,7 @@ SilphCo9Object: ; 0x5d93f (size=74)
 	EVENT_DISP $d, $3, $9 ; SILPH_CO_3F
 	EVENT_DISP $d, $f, $11 ; SILPH_CO_5F
 
-SilphCo9Blocks: ; 117
+SilphCo9Blocks: ; 0x5d989 117
 	INCBIN "maps/silphco9.blk"
 
 VictoryRoad1_h: ; 0x5d9fe to 0x5da0a (12 bytes) (id=108)
@@ -44237,7 +44237,7 @@ VictoryRoad1Object: ; 0x5dab8 (size=76)
 	EVENT_DISP $a, $11, $9
 	EVENT_DISP $a, $1, $1 ; VICTORY_ROAD_2
 
-VictoryRoad1Blocks: ; 90
+VictoryRoad1Blocks: ; 0x5db04 90
 	INCBIN "maps/victoryroad1.blk"
 
 INCBIN "baserom.gbc",$5db5e,$5db81 - $5db5e
@@ -44357,13 +44357,13 @@ SECTION "bank18",DATA,BANK[$18]
 ViridianForestBlocks:
 	INCBIN "maps/viridianforest.blk"
 
-UndergroundPathNSBlocks: ; 96
+UndergroundPathNSBlocks: ; 0x60198 96
 	INCBIN "maps/undergroundpathns.blk"
 
 INCBIN "baserom.gbc",$601f8,$1c8
 
 SSAnne10Blocks:
-SSAnne9Blocks: ; 96
+SSAnne9Blocks: ; 0x603c0 96
 	INCBIN "maps/ssanne9.blk"
 
 PokemonTower1_h: ; 0x60420 to 0x6042c (12 bytes) (id=142)
@@ -44423,7 +44423,7 @@ PokemonTower1Object: ; 0x60452 (size=58)
 	EVENT_DISP $a, $11, $b
 	EVENT_DISP $a, $9, $12 ; POKEMONTOWER_2
 
-PokemonTower1Blocks: ; 90
+PokemonTower1Blocks: ; 0x6048c 90
 	INCBIN "maps/pokemontower1.blk"
 
 PokemonTower2_h: ; 0x604e6 to 0x604f2 (12 bytes) (id=143)
@@ -44625,7 +44625,7 @@ PokemonTower2Object: ; 0x60646 (size=32)
 	EVENT_DISP $a, $9, $3 ; POKEMONTOWER_3
 	EVENT_DISP $a, $9, $12 ; POKEMONTOWER_1
 
-PokemonTower2Blocks: ; 90
+PokemonTower2Blocks: ; 0x60666 90
 	INCBIN "maps/pokemontower2.blk"
 
 PokemonTower3_h: ; 0x606c0 to 0x606cc (12 bytes) (id=144)
@@ -44735,7 +44735,7 @@ PokemonTower3Object: ; 0x6075d (size=51)
 	EVENT_DISP $a, $9, $3 ; POKEMONTOWER_2
 	EVENT_DISP $a, $9, $12 ; POKEMONTOWER_4
 
-PokemonTower3Blocks: ; 90
+PokemonTower3Blocks: ; 0x60790 90
 	INCBIN "maps/pokemontower3.blk"
 
 PokemonTower4_h: ; 0x607ea to 0x607f6 (12 bytes) (id=145)
@@ -44847,7 +44847,7 @@ PokemonTower4Object: ; 0x6088b (size=65)
 	EVENT_DISP $a, $9, $3 ; POKEMONTOWER_5
 	EVENT_DISP $a, $9, $12 ; POKEMONTOWER_3
 
-PokemonTower4Blocks: ; 90
+PokemonTower4Blocks: ; 0x608cc 90
 	INCBIN "maps/pokemontower4.blk"
 
 PokemonTower5_h: ; 0x60926 to 0x60932 (12 bytes) (id=146)
@@ -44989,7 +44989,7 @@ PokemonTower5Object: ; 0x60a48 (size=65)
 	EVENT_DISP $a, $9, $3 ; POKEMONTOWER_4
 	EVENT_DISP $a, $9, $12 ; POKEMONTOWER_6
 
-PokemonTower5Blocks: ; 90
+PokemonTower5Blocks: ; 0x60a89 90
 	INCBIN "maps/pokemontower5.blk"
 
 PokemonTower6_h: ; 0x60ae3 to 0x60aef (12 bytes) (id=147)
@@ -45118,7 +45118,7 @@ PokemonTower6Object: ; 0x60c5b (size=58)
 	EVENT_DISP $a, $9, $12 ; POKEMONTOWER_5
 	EVENT_DISP $a, $10, $9 ; POKEMONTOWER_7
 
-PokemonTower6Blocks: ; 90
+PokemonTower6Blocks: ; 0x60c95 90
 	INCBIN "maps/pokemontower6.blk"
 
 INCBIN "baserom.gbc",$60cef,$a
@@ -45258,7 +45258,7 @@ PokemonTower7Object: ; 0x60ef6 (size=42)
 	; warp-to
 	EVENT_DISP $a, $10, $9 ; POKEMONTOWER_6
 
-PokemonTower7Blocks: ; 90
+PokemonTower7Blocks: ; 0x60f20 90
 	INCBIN "maps/pokemontower7.blk"
 
 CeladonMart1_h: ; 0x60f7a to 0x60f86 (12 bytes) (id=122)
@@ -45314,7 +45314,7 @@ CeladonMart1Object: ; 0x60f9e (size=64)
 	EVENT_DISP $a, $1, $c ; CELADON_MART_2
 	EVENT_DISP $a, $1, $1 ; CELADON_MART_ELEVATOR
 
-CeladonMart1Blocks: ; 40
+CeladonMart1Blocks: ; 0x60fde 40
 	INCBIN "maps/celadonmart1.blk"
 
 INCBIN "baserom.gbc",$61006,$610ae - $61006
@@ -45557,7 +45557,7 @@ SSAnne1Object: ; 0x61277 (size=104)
 	EVENT_DISP $14, $f, $25 ; SS_ANNE_4
 	EVENT_DISP $14, $10, $3 ; SS_ANNE_6
 
-SSAnne1Blocks: ; 180
+SSAnne1Blocks: ; 0x612df 180
 	INCBIN "maps/ssanne1.blk"
 
 SSAnne2_h: ; 0x61393 to 0x6139f (12 bytes) (id=96)
@@ -45784,7 +45784,7 @@ SSAnne2Object: ; 0x61514 (size=90)
 	EVENT_DISP $14, $c, $2 ; SS_ANNE_3
 	EVENT_DISP $14, $4, $24 ; SS_ANNE_7
 
-SSAnne2Blocks: ; 180
+SSAnne2Blocks: ; 0x6156e 180
 	INCBIN "maps/ssanne2.blk"
 
 SSAnne4_h: ; 0x61622 to 0x6162e (12 bytes) (id=98)
@@ -45826,7 +45826,7 @@ SSAnne4Object: ; 0x61632 (size=52)
 	EVENT_DISP $f, $3, $7 ; SS_ANNE_10
 	EVENT_DISP $f, $5, $1b ; SS_ANNE_1
 
-SSAnne4Blocks: ; 60
+SSAnne4Blocks: ; 0x61666 60
 	INCBIN "maps/ssanne4.blk"
 
 SSAnne5_h: ; 0x616a2 to 0x616ae (12 bytes) (id=99)
@@ -45928,7 +45928,7 @@ SSAnne5Object: ; 0x6172b (size=54)
 	EVENT_DISP $a, $6, $d ; SS_ANNE_3
 	EVENT_DISP $a, $7, $d ; SS_ANNE_3
 
-SSAnne5Blocks: ; 70
+SSAnne5Blocks: ; 0x61761 70
 	INCBIN "maps/ssanne5.blk"
 
 SSAnne6_h: ; 0x617a7 to 0x617b3 (12 bytes) (id=100)
@@ -46031,7 +46031,7 @@ SSAnne6Object: ; 0x6181b (size=54)
 	; warp-to
 	EVENT_DISP $7, $0, $6 ; SS_ANNE_1
 
-SSAnne6Blocks: ; 56
+SSAnne6Blocks: ; 0x61851 56
 	INCBIN "maps/ssanne6.blk"
 
 SSAnne7_h: ; 0x61889 to 0x61895 (12 bytes) (id=101)
@@ -46153,7 +46153,7 @@ SSAnne7Object: ; 0x61946 (size=24)
 	; warp-to
 	EVENT_DISP $3, $7, $0 ; SS_ANNE_2
 
-SSAnne7Blocks: ; 12
+SSAnne7Blocks: ; 0x6195e 12
 	INCBIN "maps/ssanne7.blk"
 
 SSAnne8_h: ; 0x6196a to 0x61976 (12 bytes) (id=102)
@@ -46326,7 +46326,7 @@ SSAnne8Object: ; 0x61a60 (size=127)
 	EVENT_DISP $c, $a, $a ; SS_ANNE_1
 	EVENT_DISP $c, $a, $14 ; SS_ANNE_1
 
-SSAnne8Blocks: ; 96
+SSAnne8Blocks: ; 0x61adf 96
 	INCBIN "maps/ssanne8.blk"
 
 SSAnne9_h: ; 0x61b3f to 0x61b4b (12 bytes) (id=103)
@@ -46865,7 +46865,7 @@ DiglettsCaveObject: ; 0x61f72 (size=20)
 	EVENT_DISP $14, $5, $5 ; DIGLETTS_CAVE_EXIT
 	EVENT_DISP $14, $1f, $25 ; DIGLETTS_CAVE_ENTRANCE
 
-DiglettsCaveBlocks: ; 360
+DiglettsCaveBlocks: ; 0x61f86 360
 	INCBIN "maps/diglettscave.blk"
 
 SilphCo11_h: ; 0x620ee to 0x620fa (12 bytes) (id=235)
@@ -47030,7 +47030,7 @@ SilphCo11Object: ; 0x62380 (size=72)
 	EVENT_DISP $9, $5, $5
 	EVENT_DISP $9, $2, $3 ; SILPH_CO_7F
 
-SilphCo11Blocks: ; 81
+SilphCo11Blocks: ; 0x623c8 81
 	INCBIN "maps/silphco11.blk"
 
 INCBIN "baserom.gbc",$62419,$62453 - $62419
@@ -48214,21 +48214,21 @@ INCBIN "baserom.gbc",$739d9,$627
 
 SECTION "bank1D",DATA,BANK[$1D]
 
-CopycatsHouseF1Blocks:
+CopycatsHouseF1Blocks: ; 0x74000
 	INCBIN "maps/copycatshousef1.blk"
 
 CinnabarMartBlocks:
-PewterMartBlocks: ; 16
+PewterMartBlocks: ; 0x74010 16
 	INCBIN "maps/pewtermart.blk"
 
-FuchsiaHouse1Blocks: ; 16
+FuchsiaHouse1Blocks: ; 0x74020 16
 	INCBIN "maps/fuchsiahouse1.blk"
 
 CinnabarPokecenterBlocks:
-FuchsiaPokecenterBlocks: ; 28
+FuchsiaPokecenterBlocks: ; 0x74030 28
 	INCBIN "maps/fuchsiapokecenter.blk"
 
-CeruleanHouse3Blocks: ; 16
+CeruleanHouse3Blocks: ; 0x7404c 16
 	INCBIN "maps/ceruleanhouse3.blk"
 
 INCBIN "baserom.gbc",$7405c,$6f
@@ -48855,7 +48855,7 @@ ViridianGymObject: ; 0x74bde (size=105)
 	EVENT_DISP $a, $11, $10
 	EVENT_DISP $a, $11, $11
 
-ViridianGymBlocks: ; 90
+ViridianGymBlocks: ; 0x74c47 90
 	INCBIN "maps/viridiangym.blk"
 
 PewterMart_h: ; 0x74ca1 to 0x74cad (12 bytes) (id=56)
@@ -48963,7 +48963,7 @@ UnknownDungeon1Object: ; 0x74d15 (size=97)
 	EVENT_DISP $f, $b, $3 ; UNKNOWN_DUNGEON_2
 	EVENT_DISP $f, $6, $0 ; UNKNOWN_DUNGEON_3
 
-UnknownDungeon1Blocks: ; 135
+UnknownDungeon1Blocks: ; 0x74d76 135
 	INCBIN "maps/unknowndungeon1.blk"
 
 CeruleanHouse3_h: ; 0x74dfd to 0x74e09 (12 bytes) (id=230)
@@ -49393,7 +49393,7 @@ FuchsiaHouse2Object: ; 0x75180 (size=45)
 	EVENT_DISP $5, $7, $4
 	EVENT_DISP $5, $7, $5
 
-FuchsiaHouse2Blocks: ; 20
+FuchsiaHouse2Blocks: ; 0x751ad 20
 	INCBIN "maps/fuchsiahouse2.blk"
 
 SafariZoneEntrance_h: ; 0x751c1 to 0x751cd (12 bytes) (id=156)
@@ -49716,7 +49716,7 @@ SafariZoneEntranceObject: ; 0x753f5 (size=48)
 	EVENT_DISP $4, $0, $3 ; SAFARI_ZONE_CENTER
 	EVENT_DISP $4, $0, $4 ; SAFARI_ZONE_CENTER
 
-SafariZoneEntranceBlocks: ; 12
+SafariZoneEntranceBlocks: ; 0x75425 12
 	INCBIN "maps/safarizoneentrance.blk"
 
 FuchsiaGym_h: ; 0x75431 to 0x7543d (12 bytes) (id=157)
@@ -49992,7 +49992,7 @@ FuchsiaGymObject: ; 0x75658 (size=82)
 	EVENT_DISP $5, $11, $4
 	EVENT_DISP $5, $11, $5
 
-FuchsiaGymBlocks: ; 45
+FuchsiaGymBlocks: ; 0x756aa 45
 	INCBIN "maps/fuchsiagym.blk"
 
 FuchsiaMeetingRoom_h: ; 0x756d7 to 0x756e3 (12 bytes) (id=158)
@@ -50041,7 +50041,7 @@ FuchsiaMeetingRoomObject: ; 0x756fc (size=38)
 	EVENT_DISP $7, $7, $4
 	EVENT_DISP $7, $7, $5
 
-FuchsiaMeetingRoomBlocks: ; 28
+FuchsiaMeetingRoomBlocks: ; 0x75722 28
 	INCBIN "maps/fuchsiameetingroom.blk"
 
 CinnabarGym_h: ; 0x7573e to 0x7574a (12 bytes) (id=166)
@@ -50527,7 +50527,7 @@ CinnabarGymObject: ; 0x75acc (size=90)
 	EVENT_DISP $a, $11, $10
 	EVENT_DISP $a, $11, $11
 
-CinnabarGymBlocks: ; 90
+CinnabarGymBlocks: ; 0x75b26 90
 	INCBIN "maps/cinnabargym.blk"
 
 Lab1_h: ; 0x75b80 to 0x75b8c (12 bytes) (id=167)
@@ -50592,7 +50592,7 @@ Lab1Object: ; 0x75bb3 (size=62)
 	EVENT_DISP $9, $4, $c ; CINNABAR_LAB_3
 	EVENT_DISP $9, $4, $10 ; CINNABAR_LAB_4
 
-Lab1Blocks: ; 36
+Lab1Blocks: ; 0x75bf1 36
 	INCBIN "maps/lab1.blk"
 
 Lab2_h: ; 0x75c15 to 0x75c21 (12 bytes) (id=168)
@@ -50647,7 +50647,7 @@ Lab2Object: ; 0x75c45 (size=38)
 	EVENT_DISP $4, $7, $2 ; CINNABAR_LAB_1
 	EVENT_DISP $4, $7, $3 ; CINNABAR_LAB_1
 
-Lab2Blocks: ; 16
+Lab2Blocks: ; 0x75c6b 16
 	INCBIN "maps/lab2.blk"
 
 Lab3_h: ; 0x75c7b to 0x75c87 (12 bytes) (id=169)
@@ -50743,7 +50743,7 @@ Lab3Object: ; 0x75cec (size=41)
 	EVENT_DISP $4, $7, $2 ; CINNABAR_LAB_1
 	EVENT_DISP $4, $7, $3 ; CINNABAR_LAB_1
 
-Lab3Blocks: ; 16
+Lab3Blocks: ; 0x75d15 16
 	INCBIN "maps/lab3.blk"
 
 Lab4_h: ; 0x75d25 to 0x75d31 (12 bytes) (id=170)
@@ -50861,7 +50861,7 @@ Lab4Object: ; 0x75df0 (size=32)
 	EVENT_DISP $4, $7, $2 ; CINNABAR_LAB_1
 	EVENT_DISP $4, $7, $3 ; CINNABAR_LAB_1
 
-Lab4Blocks: ; 16
+Lab4Blocks: ; 0x75e10 16
 	INCBIN "maps/lab4.blk"
 
 CinnabarPokecenter_h: ; 0x75e20 to 0x75e2c (12 bytes) (id=171)
@@ -51177,7 +51177,7 @@ GaryObject: ; 0x7612f (size=48)
 	EVENT_DISP $4, $0, $3 ; HALL_OF_FAME
 	EVENT_DISP $4, $0, $4 ; HALL_OF_FAME
 
-GaryBlocks: ; 16
+GaryBlocks: ; 0x7615f 16
 	INCBIN "maps/gary.blk"
 
 Lorelei_h: ; 0x7616f to 0x7617b (12 bytes) (id=245)
@@ -51252,7 +51252,7 @@ LoreleiObject: ; 0x76280 (size=44)
 	EVENT_DISP $5, $0, $4 ; BRUNOS_ROOM
 	EVENT_DISP $5, $0, $5 ; BRUNOS_ROOM
 
-LoreleiBlocks: ; 30
+LoreleiBlocks: ; 0x762ac 30
 	INCBIN "maps/loreli.blk"
 
 Bruno_h: ; 0x762ca to 0x762d6 (12 bytes) (id=246)
@@ -51327,7 +51327,7 @@ BrunoObject: ; 0x763d7 (size=44)
 	EVENT_DISP $5, $0, $4 ; AGATHAS_ROOM
 	EVENT_DISP $5, $0, $5 ; AGATHAS_ROOM
 
-BrunoBlocks: ; 30
+BrunoBlocks: ; 0x76403 30
 	INCBIN "maps/bruno.blk"
 
 Agatha_h: ; 0x76421 to 0x7642d (12 bytes) (id=247)
@@ -51402,7 +51402,7 @@ AgathaObject: ; 0x76534 (size=44)
 	EVENT_DISP $5, $0, $4 ; LANCES_ROOM
 	EVENT_DISP $5, $0, $5 ; LANCES_ROOM
 
-AgathaBlocks: ; 30
+AgathaBlocks: ; 0x76560 30
 	INCBIN "maps/agatha.blk"
 
 INCBIN "baserom.gbc",$7657e,$76670 - $7657e
@@ -66857,7 +66857,7 @@ _UnnamedText_19b2a: ; 0xa61ca
 	db $0, "...", $57
 ; 0xa61ca + 5 bytes
 
-_UnnamedText_1ca91: ; 0xa61cf
+_CinnabarIslandText8: ; 0xa61cf
 	db $0, "The door is", $4f
 	db "locked...", $57
 ; 0xa61cf + 23 bytes
