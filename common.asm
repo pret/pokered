@@ -24238,7 +24238,7 @@ Function5854: ; 5854
 	jp $5A37
 
 .HeldInPlaceCheck\@
-	ld a,[W_CURMONBATTSTATUS]
+	ld a,[W_ENEMYBATTSTATUS1]
 	bit 5,a
 	jp z,FlinchedCheck
 	ld hl,CantMoveText
