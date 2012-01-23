@@ -6,6 +6,7 @@
 import sys, os
 from copy import copy, deepcopy
 import subprocess
+import json
 from extract_maps import rom, assert_rom, load_rom, calculate_pointer, load_map_pointers, read_all_map_headers, map_headers
 
 try:
@@ -259,7 +260,7 @@ def is_probably_pointer(input):
 label_errors = ""
 def get_labels_between(start_line_id, end_line_id, bank_id):
     labels = []
-    #line = {
+    #label = {
     #   "line_number": 15,
     #   "bank_id": 32,
     #   "label": "PalletTownText1",
@@ -345,9 +346,17 @@ def get_labels_between(start_line_id, end_line_id, bank_id):
                 local_pointer = hex((address % 0x4000) + 0x4000).replace("0x", "$")
 
         print line_label + " is at " + hex(address)
+        
+        label = {
+            "line_number": line_id,
+            "bank_id": bank_id,
+            "label": line_label,
+            "local_pointer": local_pointer,
+            "address": address
+        }
+        labels.append(label)
 
-        current_line_offset += 1
-   
+        current_line_offset += 1 
     label_errors += errors
     return labels
 
@@ -364,6 +373,7 @@ def scan_for_predefined_labels():
     to grab all label addresses better than this script..
     """
     bank_intervals = {}
+    all_labels = []
 
     #figure out line numbers for each bank
     for bank_id in range(0x2d):
@@ -394,7 +404,16 @@ def scan_for_predefined_labels():
         end_line_id   = bank_data["end"]
 
         labels = get_labels_between(start_line_id, end_line_id, bank_id)
-        bank_intervals[bank_id]["labels"] = labels
+        #bank_intervals[bank_id]["labels"] = labels
+        all_labels.extend(labels)
+
+    write_all_labels(all_labels)
+    return all_labels
+
+def write_all_labels(all_labels):
+    fh = open("labels.json", "w")
+    fh.write(json.dumps(all_labels))
+    fh.close()
 
 if __name__ == "__main__":
     #load map headers
