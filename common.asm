@@ -364,7 +364,2417 @@ MapHeaderPointers: ; $01AE
 	dw Bruno_h
 	dw Agatha_h ;247
 
-INCBIN "baserom.gbc",$39E,$1627 - $39E
+; this function calls a function that takes necessary actions
+; at the beginning of each overworld loop iteration as the player jumps
+; down a ledge
+; it also ends the jump when it's completed
+HandleMidJump: ; 39E
+	ld b,$1c
+	ld hl,$487e
+	jp Bankswitch
+
+; this is jumped to immediately after loading a save / starting a new game / loading a new map
+EnterMap: ; 3A6
+	ld a,$ff
+	ld [$cd6b],a
+	call LoadMapData ; load map data
+	ld b,$03
+	ld hl,$4335
+	call Bankswitch ; initialize some variables
+	ld hl,$d72c
+	bit 0,[hl]
+	jr z,.doNotCountSteps\@
+	ld a,$03
+	ld [$d13c],a ; some kind of step counter (counts up to 3 steps?)
+.doNotCountSteps\@
+	ld hl,$d72e
+	bit 5,[hl] ; did a battle happen immediately before this?
+	res 5,[hl] ; unset the "battle just happened" flag
+	call z,$12e7
+	call nz,MapEntryAfterBattle
+	ld hl,$d732
+	ld a,[hl]
+	and a,$18
+	jr z,.didNotFlyOrTeleportIn\@
+	res 3,[hl]
+	ld b,$1c
+	ld hl,$4510
+	call Bankswitch ; display fly/teleport in graphical effect
+	call $2429 ; move sprites
+.didNotFlyOrTeleportIn\@
+	ld b,$03
+	ld hl,$438b
+	call Bankswitch ; handle currents in SF islands and forced bike riding in cycling road
+	ld hl,$d72d
+	res 5,[hl]
+	call $2429 ; move sprites
+	ld hl,$d126
+	set 5,[hl]
+	set 6,[hl]
+	xor a
+	ld [$cd6b],a
+
+OverworldLoop: ; 3FF
+	call DelayFrame
+OverworldLoopLessDelay:
+	call DelayFrame
+	call LoadGBPal
+	ld a,[$d736]
+	bit 6,a ; jumping down a ledge?
+	call nz,$039e
+	ld a,[$cfc5] ; walking animation counter
+	and a
+	jp nz,.moveAhead\@ ; if the player sprite has not yet completed the walking animation
+	call GetJoypadStateOverworld ; get joypad state (which is possibly simulated)
+	ld b,$07
+	ld hl,$6988
+	call Bankswitch
+	ld a,[$da46]
+	and a
+	jp nz,WarpFound2
+	ld hl,$d72d
+	bit 3,[hl]
+	res 3,[hl]
+	jp nz,WarpFound2
+	ld a,[$d732]
+	and a,$18
+	jp nz,HandleFlyOrTeleportAway
+	ld a,[W_CUROPPONENT]
+	and a
+	jp nz,.newBattle\@
+	ld a,[$d730]
+	bit 7,a ; are we simulating button presses?
+	jr z,.notSimulating\@
+	ld a,[$ffb4]
+	jr .checkIfStartIsPressed\@
+.notSimulating\@
+	ld a,[$ffb3]
+.checkIfStartIsPressed\@
+	bit 3,a ; start button
+	jr z,.startButtonNotPressed\@
+; if START is pressed
+	xor a
+	ld [$ff8c],a ; the $2920 ID for the start menu is 0
+	jp .displayDialogue\@
+.startButtonNotPressed\@
+	bit 0,a ; A button
+	jp z,.checkIfDownButtonIsPressed\@
+; if A is pressed
+	ld a,[$d730]
+	bit 2,a
+	jp nz,.noDirectionButtonsPressed\@
+	call $30fd
+	jr nz,.checkForOpponent\@
+	call $3eb5 ; check for hidden items, PC's, etc.
+	ld a,[$ffeb]
+	and a
+	jp z,OverworldLoop
+	call IsSpriteOrSignInFrontOfPlayer ; check for sign or sprite in front of the player
+	ld a,[$ff8c] ; $2920 ID for NPC/sign text, if any
+	and a
+	jp z,OverworldLoop
+.displayDialogue\@
+	ld a,$35
+	call Predef ; check what is in front of the player
+	call $2429 ; move sprites
+	ld a,[$cd60]
+	bit 2,a
+	jr nz,.checkForOpponent\@
+	bit 0,a
+	jr nz,.checkForOpponent\@
+	ld a,[$c45c]
+	ld [$cf0e],a
+	call $2920 ; display either the start menu or the NPC/sign text
+	ld a,[$cc47]
+	and a
+	jr z,.checkForOpponent\@
+	dec a
+	ld a,$00
+	ld [$cc47],a
+	jr z,.changeMap\@
+	ld a,$52
+	call Predef
+	ld a,[W_CURMAP]
+	ld [$d71a],a
+	call $62ce
+	ld a,[W_CURMAP]
+	call SwitchToMapRomBank ; switch to the ROM bank of the current map
+	ld hl,$d367
+	set 7,[hl]
+.changeMap\@
+	jp EnterMap
+.checkForOpponent\@
+	ld a,[W_CUROPPONENT]
+	and a
+	jp nz,.newBattle\@
+	jp OverworldLoop
+.noDirectionButtonsPressed\@
+	ld hl,$cd60
+	res 2,[hl]
+	call $2429 ; move sprites
+	ld a,$01
+	ld [$cc4b],a
+	ld a,[$d528] ; the direction that was pressed last time
+	and a
+	jp z,OverworldLoop
+; if a direction was pressed last time
+	ld [$d529],a ; save the last direction
+	xor a
+	ld [$d528],a ; zero the direction
+	jp OverworldLoop
+.checkIfDownButtonIsPressed\@
+	ld a,[$ffb4] ; current joypad state
+	bit 7,a ; down button
+	jr z,.checkIfUpButtonIsPressed\@
+	ld a,$01
+	ld [$c103],a
+	ld a,$04
+	jr .handleDirectionButtonPress\@
+.checkIfUpButtonIsPressed\@
+	bit 6,a ; up button
+	jr z,.checkIfLeftButtonIsPressed\@
+	ld a,$ff
+	ld [$c103],a
+	ld a,$08
+	jr .handleDirectionButtonPress\@
+.checkIfLeftButtonIsPressed\@
+	bit 5,a ; left button
+	jr z,.checkIfRightButtonIsPressed\@
+	ld a,$ff
+	ld [$c105],a
+	ld a,$02
+	jr .handleDirectionButtonPress\@
+.checkIfRightButtonIsPressed\@
+	bit 4,a ; right button
+	jr z,.noDirectionButtonsPressed\@
+	ld a,$01
+	ld [$c105],a
+.handleDirectionButtonPress\@
+	ld [$d52a],a ; new direction
+	ld a,[$d730]
+	bit 7,a ; are we simulating button presses?
+	jr nz,.noDirectionChange\@ ; ignore direction changes if we are
+	ld a,[$cc4b]
+	and a
+	jr z,.noDirectionChange\@
+	ld a,[$d52a] ; new direction
+	ld b,a
+	ld a,[$d529] ; old direction
+	cp b
+	jr z,.noDirectionChange\@
+; the code below is strange
+; it computes whether or not the player did a 180 degree turn, but then overwrites the result
+; also, it does a seemingly pointless loop afterwards
+	swap a ; put old direction in upper half
+	or b ; put new direction in lower half
+	cp a,$48 ; change dir from down to up
+	jr nz,.notDownToUp\@
+	ld a,$02
+	ld [$d528],a
+	jr .oddLoop\@
+.notDownToUp\@
+	cp a,$84 ; change dir from up to down
+	jr nz,.notUpToDown\@
+	ld a,$01
+	ld [$d528],a
+	jr .oddLoop\@
+.notUpToDown\@
+	cp a,$12 ; change dir from right to left
+	jr nz,.notRightToLeft\@
+	ld a,$04
+	ld [$d528],a
+	jr .oddLoop\@
+.notRightToLeft\@
+	cp a,$21 ; change dir from left to right
+	jr nz,.oddLoop\@
+	ld a,$08
+	ld [$d528],a
+.oddLoop\@
+	ld hl,$cd60
+	set 2,[hl]
+	ld hl,$cc4b
+	dec [hl]
+	jr nz,.oddLoop\@
+	ld a,[$d52a]
+	ld [$d528],a
+	call $0683
+	jp c,$0637
+	jp OverworldLoop
+.noDirectionChange\@
+	ld a,[$d52a] ; current direction
+	ld [$d528],a ; save direction
+	call $2429 ; move sprites
+	ld a,[$d700]
+	cp a,$02 ; surfing
+	jr z,.surfing\@
+; not surfing
+	call CollisionCheckOnLand
+	jr nc,.noCollision\@
+	push hl
+	ld hl,$d736
+	bit 2,[hl]
+	pop hl
+	jp z,OverworldLoop
+	push hl
+	call ExtraWarpCheck ; sets carry if there is a potential to warp
+	pop hl
+	jp c,CheckWarpsCollision
+	jp OverworldLoop
+.surfing\@
+	call CollisionCheckOnWater
+	jp c,OverworldLoop
+.noCollision\@
+	ld a,$08
+	ld [$cfc5],a ; walking animation counter
+	jr .moveAhead2\@
+.moveAhead\@
+	ld a,[$d736]
+	bit 7,a
+	jr z,.noSpinning\@
+	ld b,$11
+	ld hl,$4fd7
+	call Bankswitch ; spin while moving
+.noSpinning\@
+	call $2429 ; move sprites
+.moveAhead2\@
+	ld hl,$cd60
+	res 2,[hl]
+	ld a,[$d700]
+	dec a ; riding a bike?
+	jr nz,.normalPlayerSpriteAdvancement\@
+	ld a,[$d736]
+	bit 6,a ; jumping a ledge?
+	jr nz,.normalPlayerSpriteAdvancement\@
+	call BikeSpeedup ; if riding a bike and not jumping a ledge
+.normalPlayerSpriteAdvancement\@
+	call AdvancePlayerSprite
+	ld a,[$cfc5] ; walking animation counter
+	and a
+	jp nz,CheckMapConnections ; it seems like this check will never succeed (the other place where CheckMapConnections is run works)
+; walking animation finished
+	ld a,[$d730]
+	bit 7,a
+	jr nz,.doneStepCounting\@ ; if button presses are being simulated, don't count steps
+; step counting
+	ld hl,$d13b ; step counter
+	dec [hl]
+	ld a,[$d72c]
+	bit 0,a
+	jr z,.doneStepCounting\@
+	ld hl,$d13c
+	dec [hl]
+	jr nz,.doneStepCounting\@
+	ld hl,$d72c
+	res 0,[hl]
+.doneStepCounting\@
+	ld a,[$d790]
+	bit 7,a ; in the safari zone?
+	jr z,.notSafariZone\@
+	ld b,$07
+	ld hl,$6997
+	call Bankswitch
+	ld a,[$da46]
+	and a
+	jp nz,WarpFound2
+.notSafariZone\@
+	ld a,[W_ISINBATTLE]
+	and a
+	jp nz,CheckWarpsNoCollision
+	ld a,$13
+	call Predef ; decrement HP of poisoned pokemon
+	ld a,[$d12d]
+	and a
+	jp nz,HandleBlackOut ; if all pokemon fainted
+.newBattle\@
+	call NewBattle
+	ld hl,$d736
+	res 2,[hl]
+	jp nc,CheckWarpsNoCollision ; check for warps if there was no battle
+; if a battle occurred
+	ld hl,$d72d
+	res 6,[hl]
+	ld hl,$d733
+	res 3,[hl]
+	ld hl,$d126
+	set 5,[hl]
+	set 6,[hl]
+	xor a
+	ld [$ffb4],a ; clear joypad state
+	ld a,[W_CURMAP]
+	cp a,CINNABAR_GYM
+	jr nz,.notCinnabarGyn\@
+	ld hl,$d79b
+	set 7,[hl]
+.notCinnabarGyn\@
+	ld hl,$d72e
+	set 5,[hl]
+	ld a,[W_CURMAP]
+	cp a,OAKS_LAB
+	jp z,.noFaintCheck\@
+	ld hl,$4a83
+	ld b,$0f
+	call Bankswitch ; check if all the player's pokemon fainted
+	ld a,d
+	and a
+	jr z,.allPokemonFainted\@
+.noFaintCheck\@
+	ld c,$0a
+	call DelayFrames
+	jp EnterMap
+.allPokemonFainted\@
+	ld a,$ff
+	ld [$d057],a
+	call RunMapScript
+	jp HandleBlackOut
+
+; function to determine if there will be a battle and execute it (either a trainer battle or wild battle)
+; sets carry if a battle occurred and unsets carry if not
+NewBattle: ; 683
+	ld a,[$d72d]
+	bit 4,a
+	jr nz,.noBattle\@
+	call $30fd
+	jr nz,.noBattle\@
+	ld a,[$d72e]
+	bit 4,a
+	jr nz,.noBattle\@
+	ld b,$0f
+	ld hl,$6f12
+	jp Bankswitch ; determines if a battle will occurr and runs the battle if so
+.noBattle\@
+	and a
+	ret
+
+; function to make bikes twice as fast as walking
+BikeSpeedup: ; 6A0
+	ld a,[$cc57]
+	and a
+	ret nz
+	ld a,[W_CURMAP]
+	cp a,ROUTE_17 ; Cycling Road
+	jr nz,.goFaster\@
+	ld a,[$ffb4] ; current joypad state
+	and a,%01110000 ; bit mask for up, left, right buttons
+	ret nz
+.goFaster\@
+	jp AdvancePlayerSprite
+
+; check if the player has stepped onto a warp after having not collided
+CheckWarpsNoCollision: ; 6B4
+	ld a,[$d3ae] ; number of warps
+	and a
+	jp z,CheckMapConnections
+	ld a,[$d3ae] ; number of warps
+	ld b,$00
+	ld c,a
+	ld a,[W_YCOORD]
+	ld d,a
+	ld a,[W_XCOORD]
+	ld e,a
+	ld hl,$d3af ; start of warp entries
+CheckWarpsNoCollisionLoop: ; 6CC
+	ld a,[hli] ; check if the warp's Y position matches
+	cp d
+	jr nz,CheckWarpsNoCollisionRetry1
+	ld a,[hli] ; check if the warp's X position matches
+	cp e
+	jr nz,CheckWarpsNoCollisionRetry2
+; if a match was found
+	push hl
+	push bc
+	ld hl,$d736
+	set 2,[hl]
+	ld b,$03
+	ld hl,$449d
+	call Bankswitch ; check if the player sprite is standing on a "door" tile
+	pop bc
+	pop hl
+	jr c,WarpFound1 ; if it is, go to 0735
+	push hl
+	push bc
+	call ExtraWarpCheck ; sets carry if the warp is confirmed
+	pop bc
+	pop hl
+	jr nc,CheckWarpsNoCollisionRetry2
+; if the extra check passed
+	ld a,[$d733]
+	bit 2,a
+	jr nz,WarpFound1
+	push de
+	push bc
+	call $019a ; update joypad state
+	pop bc
+	pop de
+	ld a,[$ffb4] ; current joypad state
+	and a,%11110000 ; bit mask for directional buttons
+	jr z,CheckWarpsNoCollisionRetry2 ; if directional buttons aren't being pressed, do not pass through the warp
+	jr WarpFound1
+
+; check if the player has stepped onto a warp after having collided
+CheckWarpsCollision: ; 706
+	ld a,[$d3ae] ; number of warps
+	ld c,a
+	ld hl,$d3af ; start of warp entries
+.loop\@
+	ld a,[hli] ; Y coordinate of warp
+	ld b,a
+	ld a,[W_YCOORD]
+	cp b
+	jr nz,.retry1\@
+	ld a,[hli] ; X coordinate of warp
+	ld b,a
+	ld a,[W_XCOORD]
+	cp b
+	jr nz,.retry2\@
+	ld a,[hli]
+	ld [$d42f],a ; save target warp ID
+	ld a,[hl]
+	ld [$ff8b],a ; save target map
+	jr WarpFound2
+.retry1\@
+	inc hl
+.retry2\@
+	inc hl
+	inc hl
+	dec c
+	jr nz,.loop\@
+	jp OverworldLoop
+
+CheckWarpsNoCollisionRetry1: ; 72F
+	inc hl
+CheckWarpsNoCollisionRetry2: ; 730
+	inc hl
+	inc hl
+	jp ContinueCheckWarpsNoCollisionLoop
+
+WarpFound1: ; 735
+	ld a,[hli]
+	ld [$d42f],a ; save target warp ID
+	ld a,[hli]
+	ld [$ff8b],a ; save target map
+
+WarpFound2: ; 73C
+	ld a,[$d3ae] ; number of warps
+	sub c
+	ld [$d73b],a ; save ID of used warp
+	ld a,[W_CURMAP]
+	ld [$d73c],a
+	call CheckIfInOutsideMap ; check if the tileset number is 0 or the map is Route 12
+	jr nz,.indoorMaps\@
+; this is for handling "outside" maps that can't have the 0xFF destination map
+	ld a,[W_CURMAP]
+	ld [$d365],a ; save current map as previous map
+	ld a,[W_CURMAPWIDTH]
+	ld [$d366],a
+	ld a,[$ff8b] ; destination map number
+	ld [W_CURMAP],a ; change current map to destination map
+	cp a,ROCK_TUNNEL_1
+	jr nz,.notRockTunnel\@
+	ld a,$06
+	ld [$d35d],a
+	call GBFadeIn1
+.notRockTunnel\@
+	call PlayMapChangeSound
+	jr .done\@
+; for maps that can have the 0xFF destination map, which means to return to the outside map; not all these maps are necessarily indoors, though
+.indoorMaps\@
+	ld a,[$ff8b] ; destination map
+	cp a,$ff
+	jr z,.goBackOutside\@
+; if not going back to the previous map
+	ld [W_CURMAP],a ; current map number
+	ld b,$1c
+	ld hl,$4787
+	call Bankswitch ; check if the warp was a Silph Co. teleporter
+	ld a,[$cd5b]
+	dec a
+	jr nz,.notTeleporter\@
+; if it's a Silph Co. teleporter
+	ld hl,$d732
+	set 3,[hl]
+	call DoFlyOrTeleportAwayGraphics
+	jr .skipMapChangeSound\@
+.notTeleporter\@
+	call PlayMapChangeSound
+.skipMapChangeSound\@
+	ld hl,$d736
+	res 0,[hl]
+	res 1,[hl]
+	jr .done\@
+.goBackOutside\@
+	ld a,[$d365] ; previous map
+	ld [W_CURMAP],a
+	call PlayMapChangeSound
+	xor a
+	ld [$d35d],a
+.done\@
+	ld hl,$d736
+	set 0,[hl]
+	call $12da
+	jp EnterMap
+
+ContinueCheckWarpsNoCollisionLoop: ; 7B5
+	inc b ; increment warp number
+	dec c ; decrement number of warps
+	jp nz,CheckWarpsNoCollisionLoop
+
+; if no matching warp was found
+CheckMapConnections: ; 7BA
+.checkWestMap\@
+	ld a,[W_XCOORD]
+	cp a,$ff
+	jr nz,.checkEastMap\@
+	ld a,[$d387]
+	ld [W_CURMAP],a
+	ld a,[$d38f] ; new X coordinate upon entering west map
+	ld [W_XCOORD],a
+	ld a,[W_YCOORD]
+	ld c,a
+	ld a,[$d38e] ; Y adjustment upon entering west map
+	add c
+	ld c,a
+	ld [W_YCOORD],a
+	ld a,[$d390] ; pointer to upper left corner of map without adjustment for Y position
+	ld l,a
+	ld a,[$d391]
+	ld h,a
+	srl c
+	jr z,.savePointer1\@
+.pointerAdjustmentLoop1\@
+	ld a,[$d38d] ; width of connected map
+	add a,$06
+	ld e,a
+	ld d,$00
+	ld b,$00
+	add hl,de
+	dec c
+	jr nz,.pointerAdjustmentLoop1\@
+.savePointer1\@
+	ld a,l
+	ld [$d35f],a ; pointer to upper left corner of current tile block map section
+	ld a,h
+	ld [$d360],a
+	jp .loadNewMap\@
+.checkEastMap\@
+	ld b,a
+	ld a,[$d525] ; map width
+	cp b
+	jr nz,.checkNorthMap\@
+	ld a,[$d392]
+	ld [W_CURMAP],a
+	ld a,[$d39a] ; new X coordinate upon entering east map
+	ld [W_XCOORD],a
+	ld a,[W_YCOORD]
+	ld c,a
+	ld a,[$d399] ; Y adjustment upon entering east map
+	add c
+	ld c,a
+	ld [W_YCOORD],a
+	ld a,[$d39b] ; pointer to upper left corner of map without adjustment for Y position
+	ld l,a
+	ld a,[$d39c]
+	ld h,a
+	srl c
+	jr z,.savePointer2\@
+.pointerAdjustmentLoop2\@
+	ld a,[$d398]
+	add a,$06
+	ld e,a
+	ld d,$00
+	ld b,$00
+	add hl,de
+	dec c
+	jr nz,.pointerAdjustmentLoop2\@
+.savePointer2\@
+	ld a,l
+	ld [$d35f],a ; pointer to upper left corner of current tile block map section
+	ld a,h
+	ld [$d360],a
+	jp .loadNewMap\@
+.checkNorthMap\@
+	ld a,[W_YCOORD]
+	cp a,$ff
+	jr nz,.checkSouthMap\@
+	ld a,[$d371]
+	ld [W_CURMAP],a
+	ld a,[$d378] ; new Y coordinate upon entering north map
+	ld [W_YCOORD],a
+	ld a,[W_XCOORD]
+	ld c,a
+	ld a,[$d379] ; X adjustment upon entering north map
+	add c
+	ld c,a
+	ld [W_XCOORD],a
+	ld a,[$d37a] ; pointer to upper left corner of map without adjustment for X position
+	ld l,a
+	ld a,[$d37b]
+	ld h,a
+	ld b,$00
+	srl c
+	add hl,bc
+	ld a,l
+	ld [$d35f],a ; pointer to upper left corner of current tile block map section
+	ld a,h
+	ld [$d360],a
+	jp .loadNewMap\@
+.checkSouthMap\@
+	ld b,a
+	ld a,[$d524]
+	cp b
+	jr nz,.didNotEnterConnectedMap\@
+	ld a,[$d37c]
+	ld [W_CURMAP],a
+	ld a,[$d383] ; new Y coordinate upon entering south map
+	ld [W_YCOORD],a
+	ld a,[W_XCOORD]
+	ld c,a
+	ld a,[$d384] ; X adjustment upon entering south map
+	add c
+	ld c,a
+	ld [W_XCOORD],a
+	ld a,[$d385] ; pointer to upper left corner of map without adjustment for X position
+	ld l,a
+	ld a,[$d386]
+	ld h,a
+	ld b,$00
+	srl c
+	add hl,bc
+	ld a,l
+	ld [$d35f],a ; pointer to upper left corner of current tile block map section
+	ld a,h
+	ld [$d360],a
+.loadNewMap\@ ; load the connected map that was entered
+	call LoadMapHeader
+	call $2312 ; music
+	ld b,$09
+	call $3def ; SGB palette
+	ld b,$05
+	ld hl,$785b ; load tile pattern data for sprites
+	call Bankswitch
+	call LoadTileBlockMap
+	jp OverworldLoopLessDelay
+.didNotEnterConnectedMap\@
+	jp OverworldLoop
+
+; function to play a sound when changing maps
+PlayMapChangeSound:
+	ld a,[$c448] ; upper left tile of the 4x4 square the player's sprite is standing on
+	cp a,$0b ; door tile in tileset 0
+	jr nz,.didNotGoThroughDoor\@
+	ld a,$ad
+	jr .playSound\@
+.didNotGoThroughDoor\@
+	ld a,$b5
+.playSound\@
+	call $23b1
+	ld a,[$d35d]
+	and a
+	ret nz
+	jp GBFadeIn1
+
+; function to set the Z flag if the tileset number is 0 or the map is Route 12
+; strangely, Route 12 has tileset 0, so the check is redundant
+CheckIfInOutsideMap: ; 8E1
+	ld a,[W_CURMAPTILESET]
+	and a
+	ret z
+	cp a,ROUTE_12
+	ret
+
+; this function is an extra check that sometimes has to pass in order to warp, beyond just standing on a warp
+; the "sometimes" qualification is necessary because of CheckWarpsNoCollision's behavior
+; depending on the map, either "function 1" or "function 2" is used for the check
+; "function 1" passes when the player is at the edge of the map and is facing towards the outside of the map
+; "function 2" passes when the the tile in front of the player is among a certain set
+; sets carry if the check passes, otherwise clears carry
+ExtraWarpCheck: ; 8E9
+	ld a,[W_CURMAP]
+	cp a,SS_ANNE_3
+	jr z,.useFunction1\@
+	cp a,ROCKET_HIDEOUT_1
+	jr z,.useFunction2\@
+	cp a,ROCKET_HIDEOUT_2
+	jr z,.useFunction2\@
+	cp a,ROCKET_HIDEOUT_4
+	jr z,.useFunction2\@
+	cp a,ROCK_TUNNEL_1
+	jr z,.useFunction2\@
+	ld a,[W_CURMAPTILESET]
+	and a ; outside tileset
+	jr z,.useFunction2\@
+	cp a,$0d ; S.S. Anne tileset
+	jr z,.useFunction2\@
+	cp a,$0e ; Vermilion Port tileset
+	jr z,.useFunction2\@
+	cp a,$17 ; Indigo Plateau tileset
+	jr z,.useFunction2\@
+.useFunction1\@
+	ld hl,$43ff
+	jr .doBankswitch\@
+.useFunction2\@
+	ld hl,$444e
+.doBankswitch\@
+	ld b,$03
+	jp Bankswitch
+
+MapEntryAfterBattle: ; 91F
+	ld b,$03
+	ld hl,$435f
+	call Bankswitch ; function that appears to disable warp testing after collisions if the player is standing on a warp
+	ld a,[$d35d]
+	and a
+	jp z,GBFadeIn2
+	jp LoadGBPal
+
+; for when all the player's pokemon faint
+; other code prints the "you blacked out" message before this is called
+HandleBlackOut: ; 931
+	call GBFadeIn1
+	ld a,$08
+	call StopMusic
+	ld hl,$d72e
+	res 5,[hl]
+	ld a,$01
+	ld [$ffb8],a
+	ld [$2000],a
+	call $40b0
+	call $62ce
+	call $2312
+	jp $5d5f
+
+StopMusic: ; 951
+	ld [$cfc7],a
+	ld a,$ff
+	ld [$c0ee],a
+	call $23b1
+.waitLoop\@
+	ld a,[$cfc7]
+	and a
+	jr nz,.waitLoop\@
+	jp $200e
+
+HandleFlyOrTeleportAway: ; 965
+	call $2429 ; move sprites
+	call $3dd7
+	xor a
+	ld [$cf0b],a
+	ld [$d700],a
+	ld [$d057],a
+	ld [$d35d],a
+	ld hl,$d732
+	set 2,[hl]
+	res 5,[hl]
+	call DoFlyOrTeleportAwayGraphics
+	ld a,$01
+	ld [$ffb8],a
+	ld [$2000],a
+	call $62ce
+	jp $5d5f
+
+; function that calls a function to do fly away or teleport away graphics
+DoFlyOrTeleportAwayGraphics: ; 98F
+	ld b,$1c
+	ld hl,$45ba
+	jp Bankswitch
+
+; load sprite graphics based on whether the player is standing, biking, or surfing
+LoadPlayerSpriteGraphics: ; 997
+	ld a,[$d700]
+	dec a
+	jr z,.ridingBike\@
+	ld a,[$ffd7]
+	and a
+	jr nz,.determineGraphics\@
+	jr .startWalking\@
+.ridingBike\@
+	call IsBikeRidingAllowed
+	jr c,.determineGraphics\@ ; don't start walking if bike riding is allowed
+.startWalking\@
+	xor a
+	ld [$d700],a
+	ld [$d11a],a
+	jp LoadWalkingPlayerSpriteGraphics
+.determineGraphics\@
+	ld a,[$d700]
+	and a
+	jp z,LoadWalkingPlayerSpriteGraphics
+	dec a
+	jp z,LoadBikePlayerSpriteGraphics
+	dec a
+	jp z,LoadSurfingPlayerSpriteGraphics
+	jp LoadWalkingPlayerSpriteGraphics
+
+; function to check if bike riding is allowed on the current map
+; sets carry if bike is allowed, clears carry otherwise
+IsBikeRidingAllowed:
+	ld a,[W_CURMAP]
+	cp a,ROUTE_23
+	jr z,.allowed\@
+	cp a,INDIGO_PLATEAU
+	jr z,.allowed\@
+	ld a,[W_CURMAPTILESET]
+	ld b,a
+	ld hl,BikeRidingTilesets
+.loop\@
+	ld a,[hli]
+	cp b
+	jr z,.allowed\@
+	inc a
+	jr nz,.loop\@
+	and a
+	ret
+.allowed\@
+	scf
+	ret
+
+BikeRidingTilesets:
+db $00, $03, $0B, $0E, $11, $FF
+
+; load the tile pattern data of the current tileset into VRAM
+LoadTilesetTilePatternData: ; 9E8
+	ld a,[$d52e]
+	ld l,a
+	ld a,[$d52f]
+	ld h,a
+	ld de,$9000
+	ld bc,$0600
+	ld a,[$d52b]
+	jp $17f7
+
+; this loads the current maps complete tile map (which references blocks, not individual tiles) to C6E8
+; it can also load partial tile maps of connected maps into a border of length 3 around the current map
+LoadTileBlockMap: ; 9FC
+; fill C6E8-CBFB with the background tile
+	ld hl,$c6e8
+	ld a,[$d3ad] ; background tile number
+	ld d,a
+	ld bc,$0514
+.backgroundTileLoop\@
+	ld a,d
+	ld [hli],a
+	dec bc
+	ld a,c
+	or b
+	jr nz,.backgroundTileLoop\@
+; load tile map of current map (made of tile block IDs)
+; a 3-byte border at the edges of the map is kept so that there is space for map connections
+	ld hl,$c6e8
+	ld a,[W_CURMAPWIDTH]
+	ld [$ff8c],a
+	add a,$06 ; border (east and west)
+	ld [$ff8b],a ; map width + border
+	ld b,$00
+	ld c,a
+; make space for north border (next 3 lines)
+	add hl,bc
+	add hl,bc
+	add hl,bc
+	ld c,$03
+	add hl,bc ; this puts us past the (west) border
+	ld a,[$d36a] ; tile map pointer
+	ld e,a
+	ld a,[$d36b]
+	ld d,a ; de = tile map pointer
+	ld a,[W_CURMAPHEIGHT]
+	ld b,a
+.rowLoop\@ ; copy one row each iteration
+	push hl
+	ld a,[$ff8c] ; map width (without border)
+	ld c,a
+.rowInnerLoop\@
+	ld a,[de]
+	inc de
+	ld [hli],a
+	dec c
+	jr nz,.rowInnerLoop\@
+; add the map width plus the border to the base address of the current row to get the next row's address
+	pop hl
+	ld a,[$ff8b] ; map width + border
+	add l
+	ld l,a
+	jr nc,.noCarry\@
+	inc h
+.noCarry\@
+	dec b
+	jr nz,.rowLoop\@
+.northConnection\@
+	ld a,[$d371]
+	cp a,$ff
+	jr z,.southConnection\@
+	call SwitchToMapRomBank
+	ld a,[$d372]
+	ld l,a
+	ld a,[$d373]
+	ld h,a
+	ld a,[$d374]
+	ld e,a
+	ld a,[$d375]
+	ld d,a
+	ld a,[$d376]
+	ld [$ff8b],a
+	ld a,[$d377]
+	ld [$ff8c],a
+	call LoadNorthSouthConnectionsTileMap
+.southConnection\@
+	ld a,[$d37c]
+	cp a,$ff
+	jr z,.westConnection\@
+	call SwitchToMapRomBank
+	ld a,[$d37d]
+	ld l,a
+	ld a,[$d37e]
+	ld h,a
+	ld a,[$d37f]
+	ld e,a
+	ld a,[$d380]
+	ld d,a
+	ld a,[$d381]
+	ld [$ff8b],a
+	ld a,[$d382]
+	ld [$ff8c],a
+	call LoadNorthSouthConnectionsTileMap
+.westConnection\@
+	ld a,[$d387]
+	cp a,$ff
+	jr z,.eastConnection\@
+	call SwitchToMapRomBank
+	ld a,[$d388]
+	ld l,a
+	ld a,[$d389]
+	ld h,a
+	ld a,[$d38a]
+	ld e,a
+	ld a,[$d38b]
+	ld d,a
+	ld a,[$d38c]
+	ld b,a
+	ld a,[$d38d]
+	ld [$ff8b],a
+	call LoadEastWestConnectionsTileMap
+.eastConnection\@
+	ld a,[$d392]
+	cp a,$ff
+	jr z,.done\@
+	call SwitchToMapRomBank
+	ld a,[$d393]
+	ld l,a
+	ld a,[$d394]
+	ld h,a
+	ld a,[$d395]
+	ld e,a
+	ld a,[$d396]
+	ld d,a
+	ld a,[$d397]
+	ld b,a
+	ld a,[$d398]
+	ld [$ff8b],a
+	call LoadEastWestConnectionsTileMap
+.done\@
+	ret
+
+LoadNorthSouthConnectionsTileMap: ; ADE
+	ld c,$03
+.loop\@
+	push de
+	push hl
+	ld a,[$ff8b] ; width of connection
+	ld b,a
+.innerLoop\@
+	ld a,[hli]
+	ld [de],a
+	inc de
+	dec b
+	jr nz,.innerLoop\@
+	pop hl
+	pop de
+	ld a,[$ff8c] ; width of connected map
+	add l
+	ld l,a
+	jr nc,.noCarry1\@
+	inc h
+.noCarry1\@
+	ld a,[W_CURMAPWIDTH]
+	add a,$06
+	add e
+	ld e,a
+	jr nc,.noCarry2\@
+	inc d
+.noCarry2\@
+	dec c
+	jr nz,.loop\@
+	ret
+
+LoadEastWestConnectionsTileMap: ; B02
+	push hl
+	push de
+	ld c,$03
+.innerLoop\@
+	ld a,[hli]
+	ld [de],a
+	inc de
+	dec c
+	jr nz,.innerLoop\@
+	pop de
+	pop hl
+	ld a,[$ff8b] ; width of connected map
+	add l
+	ld l,a
+	jr nc,.noCarry1\@
+	inc h
+.noCarry1\@
+	ld a,[W_CURMAPWIDTH]
+	add a,$06
+	add e
+	ld e,a
+	jr nc,.noCarry2\@
+	inc d
+.noCarry2\@
+	dec b
+	jr nz,LoadEastWestConnectionsTileMap
+	ret
+
+; function to check if there is a sign or sprite in front of the player
+; if so, it is stored in [$FF8C]
+; if not, [$FF8C] is set to 0
+IsSpriteOrSignInFrontOfPlayer: ; B23
+	xor a
+	ld [$ff8c],a
+	ld a,[$d4b0] ; number of signs in the map
+	and a
+	jr z,.extendRangeOverCounter\@
+; if there are signs
+	ld a,$35
+	call Predef ; get the coordinates in front of the player in de
+	ld hl,$d4b1 ; start of sign coordinates
+	ld a,[$d4b0] ; number of signs in the map
+	ld b,a
+	ld c,$00
+.signLoop\@
+	inc c
+	ld a,[hli] ; sign Y
+	cp d
+	jr z,.yCoordMatched\@
+	inc hl
+	jr .retry\@
+.yCoordMatched\@
+	ld a,[hli] ; sign X
+	cp e
+	jr nz,.retry\@
+.xCoordMatched\@
+; found sign
+	push hl
+	push bc
+	ld hl,$d4d1 ; start of sign text ID's
+	ld b,$00
+	dec c
+	add hl,bc
+	ld a,[hl]
+	ld [$ff8c],a ; store sign text ID
+	pop bc
+	pop hl
+	ret
+.retry\@
+	dec b
+	jr nz,.signLoop\@
+; check if the player is front of a counter in a pokemon center, pokemart, etc. and if so, extend the range at which he can talk to the NPC
+.extendRangeOverCounter\@
+	ld a,$35
+	call Predef ; get the tile in front of the player in c
+	ld hl,$d532 ; list of tiles that extend talking range (counter tiles)
+	ld b,$03
+	ld d,$20 ; talking range in pixels (long range)
+.counterTilesLoop\@
+	ld a,[hli]
+	cp c
+	jr z,IsSpriteInFrontOfPlayer2 ; jumps if the tile in front of the player is a counter tile
+	dec b
+	jr nz,.counterTilesLoop\@
+
+; part of the above function, but sometimes its called on its own, when signs are irrelevant
+; the caller must zero [$FF8C]
+IsSpriteInFrontOfPlayer: ; B6B
+	ld d,$10 ; talking range in pixels (normal range)
+IsSpriteInFrontOfPlayer2: ; B6D
+	ld bc,$3c40 ; Y and X position of player sprite
+	ld a,[$c109] ; direction the player is facing
+.checkIfPlayerFacingUp\@
+	cp a,$04
+	jr nz,.checkIfPlayerFacingDown\@
+; facing up
+	ld a,b
+	sub d
+	ld b,a
+	ld a,$08
+	jr .doneCheckingDirection\@
+.checkIfPlayerFacingDown\@
+	cp a,$00
+	jr nz,.checkIfPlayerFacingRight\@
+; facing down
+	ld a,b
+	add d
+	ld b,a
+	ld a,$04
+	jr .doneCheckingDirection\@
+.checkIfPlayerFacingRight\@
+	cp a,$0c
+	jr nz,.playerFacingLeft\@
+; facing right
+	ld a,c
+	add d
+	ld c,a
+	ld a,$01
+	jr .doneCheckingDirection\@
+.playerFacingLeft\@
+; facing left
+	ld a,c
+	sub d
+	ld c,a
+	ld a,$02
+.doneCheckingDirection\@
+	ld [$d52a],a
+	ld a,[$d4e1] ; number of sprites
+	and a
+	ret z
+; if there are sprites
+	ld hl,$c110
+	ld d,a
+	ld e,$01
+.spriteLoop\@
+	push hl
+	ld a,[hli] ; image (0 if no sprite)
+	and a
+	jr z,.nextSprite\@
+	inc l
+	ld a,[hli] ; sprite visibility
+	inc a
+	jr z,.nextSprite\@
+	inc l
+	ld a,[hli] ; Y location
+	cp b
+	jr nz,.nextSprite\@
+	inc l
+	ld a,[hl] ; X location
+	cp c
+	jr z,.foundSpriteInFrontOfPlayer\@
+.nextSprite\@
+	pop hl
+	ld a,l
+	add a,$10
+	ld l,a
+	inc e
+	dec d
+	jr nz,.spriteLoop\@
+	ret
+.foundSpriteInFrontOfPlayer\@
+	pop hl
+	ld a,l
+	and a,$f0
+	inc a
+	ld l,a
+	set 7,[hl]
+	ld a,e
+	ld [$ff8c],a ; store sprite ID
+	ret
+
+; function to check if the player will jump down a ledge and check if the tile ahead is passable (when not surfing)
+; sets the carry flag if there is a collision, and unsets it if there isn't a collision
+CollisionCheckOnLand: ; BD1
+	ld a,[$d736]
+	bit 6,a ; is the player jumping?
+	jr nz,.noCollision\@
+; if not jumping a ledge
+	ld a,[$cd38]
+	and a
+	jr nz,.noCollision\@
+	ld a,[$d52a] ; the direction that the player is trying to go in
+	ld d,a
+	ld a,[$c10c] ; the player sprite's collision data (bit field) (set in the sprite movement code)
+	and d ; check if a sprite is in the direction the player is trying to go
+	jr nz,.collision\@
+	xor a
+	ld [$ff8c],a
+	call IsSpriteInFrontOfPlayer ; check for sprite collisions again? when does the above check fail to detect a sprite collision?
+	ld a,[$ff8c]
+	and a ; was there a sprite collision?
+	jr nz,.collision\@
+; if no sprite collision
+	ld hl,TilePairCollisionsLand
+	call CheckForJumpingAndTilePairCollisions
+	jr c,.collision\@
+	call CheckTilePassable
+	jr nc,.noCollision\@
+.collision\@
+	ld a,[$c02a]
+	cp a,$b4 ; check if collision sound is already playing
+	jr z,.setCarry\@
+	ld a,$b4
+	call $23b1 ; play collision sound (if it's not already playing)
+.setCarry\@
+	scf
+	ret
+.noCollision\@
+	and a
+	ret
+
+; function that checks if the tile in front of the player is passable
+; clears carry if it is, sets carry if not
+CheckTilePassable: ; C10
+	ld a,$35
+	call Predef ; get tile in front of player
+	ld a,[$cfc6] ; tile in front of player
+	ld c,a
+	ld hl,$d530 ; pointer to list of passable tiles
+	ld a,[hli]
+	ld h,[hl]
+	ld l,a ; hl now points to passable tiles
+.loop\@
+	ld a,[hli]
+	cp a,$ff
+	jr z,.tileNotPassable\@
+	cp c
+	ret z
+	jr .loop\@
+.tileNotPassable\@
+	scf
+	ret
+
+; check if the player is going to jump down a small ledge
+; and check for collisions that only occur between certain pairs of tiles
+; Input: hl - address of directional collision data
+; sets carry if there is a collision and unsets carry if not
+CheckForJumpingAndTilePairCollisions: ; C2A
+	push hl
+	ld a,$35
+	call Predef ; get the tile in front of the player
+	push de
+	push bc
+	ld b,$06
+	ld hl,$6672
+	call Bankswitch ; check if the player is trying to jump a ledge
+	pop bc
+	pop de
+	pop hl
+	and a
+	ld a,[$d736]
+	bit 6,a ; is the player jumping?
+	ret nz
+; if not jumping
+	ld a,[$c45c] ; tile the player is on
+	ld [$cf0e],a
+	ld a,[$cfc6] ; tile in front of the player
+	ld c,a
+.tilePairCollisionLoop\@
+	ld a,[W_CURMAPTILESET] ; tileset number
+	ld b,a
+	ld a,[hli]
+	cp a,$ff
+	jr z,.noMatch\@
+	cp b
+	jr z,.tilesetMatches\@
+	inc hl
+.retry\@
+	inc hl
+	jr .tilePairCollisionLoop\@
+.tilesetMatches\@
+	ld a,[$cf0e] ; tile the player is on
+	ld b,a
+	ld a,[hl]
+	cp b
+	jr z,.currentTileMatchesFirstInPair\@
+	inc hl
+	ld a,[hl]
+	cp b
+	jr z,.currentTileMatchesSecondInPair\@
+	jr .retry\@
+.currentTileMatchesFirstInPair\@
+	inc hl
+	ld a,[hl]
+	cp c
+	jr z,.foundMatch\@
+	jr .tilePairCollisionLoop\@
+.currentTileMatchesSecondInPair\@
+	dec hl
+	ld a,[hli]
+	cp c
+	inc hl
+	jr nz,.tilePairCollisionLoop\@
+.foundMatch\@
+	scf
+	ret
+.noMatch\@
+	and a
+	ret
+
+; FORMAT: tileset number, tile 1, tile 2
+; terminated by 0xFF
+; these entries indicate that the player may not cross between tile 1 and tile 2
+; it's mainly used to simulate differences in elevation
+
+TilePairCollisionsLand: ; C7E
+db $11, $20, $05;
+db $11, $41, $05;
+db $03, $30, $2E;
+db $11, $2A, $05;
+db $11, $05, $21;
+db $03, $52, $2E;
+db $03, $55, $2E;
+db $03, $56, $2E;
+db $03, $20, $2E;
+db $03, $5E, $2E;
+db $03, $5F, $2E;
+db $FF;
+
+TilePairCollisionsWater: ; CA0
+db $03, $14, $2E;
+db $03, $48, $2E;
+db $11, $14, $05;
+db $FF;
+
+; this builds a tile map from the tile block map based on the current X/Y coordinates of the player's character
+LoadCurrentMapView: ; CAA
+	ld a,[$ffb8]
+	push af
+	ld a,[$d52b] ; tile data ROM bank
+	ld [$ffb8],a
+	ld [$2000],a ; switch to ROM bank that contains tile data
+	ld a,[$d35f] ; address of upper left corner of current map view
+	ld e,a
+	ld a,[$d360]
+	ld d,a
+	ld hl,$c508
+	ld b,$05
+.rowLoop\@ ; each loop iteration fills in one row of tile blocks
+	push hl
+	push de
+	ld c,$06
+.rowInnerLoop\@ ; loop to draw each tile block of the current row
+	push bc
+	push de
+	push hl
+	ld a,[de]
+	ld c,a ; tile block number
+	call DrawTileBlock
+	pop hl
+	pop de
+	pop bc
+	inc hl
+	inc hl
+	inc hl
+	inc hl
+	inc de
+	dec c
+	jr nz,.rowInnerLoop\@
+; update tile block map pointer to next row's address
+	pop de
+	ld a,[W_CURMAPWIDTH]
+	add a,$06
+	add e
+	ld e,a
+	jr nc,.noCarry\@
+	inc d
+.noCarry\@
+; update tile map pointer to next row's address
+	pop hl
+	ld a,$60
+	add l
+	ld l,a
+	jr nc,.noCarry2\@
+	inc h
+.noCarry2\@
+	dec b
+	jr nz,.rowLoop\@
+	ld hl,$c508
+	ld bc,$0000
+.adjustForYCoordWithinTileBlock\@
+	ld a,[W_YBLOCKCOORD]
+	and a
+	jr z,.adjustForXCoordWithinTileBlock\@
+	ld bc,$0030
+	add hl,bc
+.adjustForXCoordWithinTileBlock\@
+	ld a,[W_XBLOCKCOORD]
+	and a
+	jr z,.copyToVisibleAreaBuffer\@
+	ld bc,$0002
+	add hl,bc
+.copyToVisibleAreaBuffer\@
+	ld de,$c3a0 ; base address for the tiles that are directly transfered to VRAM during V-blank
+	ld b,$12
+.rowLoop2\@
+	ld c,$14
+.rowInnerLoop2\@
+	ld a,[hli]
+	ld [de],a
+	inc de
+	dec c
+	jr nz,.rowInnerLoop2\@
+	ld a,$04
+	add l
+	ld l,a
+	jr nc,.noCarry3\@
+	inc h
+.noCarry3\@
+	dec b
+	jr nz,.rowLoop2\@
+	pop af
+	ld [$ffb8],a
+	ld [$2000],a ; restore previous ROM bank
+	ret
+
+AdvancePlayerSprite: ; D27
+	ld a,[$c103] ; delta Y
+	ld b,a
+	ld a,[$c105] ; delta X
+	ld c,a
+	ld hl,$cfc5 ; walking animation counter
+	dec [hl]
+	jr nz,.afterUpdateMapCoords\@
+; if it's the end of the animation, update the player's map coordinates
+	ld a,[W_YCOORD]
+	add b
+	ld [W_YCOORD],a
+	ld a,[W_XCOORD]
+	add c
+	ld [W_XCOORD],a
+.afterUpdateMapCoords\@
+	ld a,[$cfc5] ; walking animation counter
+	cp a,$07
+	jp nz,.scrollBackgroundAndSprites\@
+; if this is the first iteration of the animation
+	ld a,c
+	cp a,$01
+	jr nz,.checkIfMovingWest\@
+; moving east
+	ld a,[$d526]
+	ld e,a
+	and a,$e0
+	ld d,a
+	ld a,e
+	add a,$02
+	and a,$1f
+	or d
+	ld [$d526],a
+	jr .adjustXCoordWithinBlock\@
+.checkIfMovingWest\@
+	cp a,$ff
+	jr nz,.checkIfMovingSouth\@
+; moving west
+	ld a,[$d526]
+	ld e,a
+	and a,$e0
+	ld d,a
+	ld a,e
+	sub a,$02
+	and a,$1f
+	or d
+	ld [$d526],a
+	jr .adjustXCoordWithinBlock\@
+.checkIfMovingSouth\@
+	ld a,b
+	cp a,$01
+	jr nz,.checkIfMovingNorth\@
+; moving south
+	ld a,[$d526]
+	add a,$40
+	ld [$d526],a
+	jr nc,.adjustXCoordWithinBlock\@
+	ld a,[$d527]
+	inc a
+	and a,$03
+	or a,$98
+	ld [$d527],a
+	jr .adjustXCoordWithinBlock\@
+.checkIfMovingNorth\@
+	cp a,$ff
+	jr nz,.adjustXCoordWithinBlock\@
+; moving north
+	ld a,[$d526]
+	sub a,$40
+	ld [$d526],a
+	jr nc,.adjustXCoordWithinBlock\@
+	ld a,[$d527]
+	dec a
+	and a,$03
+	or a,$98
+	ld [$d527],a
+.adjustXCoordWithinBlock\@
+	ld a,c
+	and a
+	jr z,.pointlessJump\@ ; mistake?
+.pointlessJump\@
+	ld hl,W_XBLOCKCOORD
+	ld a,[hl]
+	add c
+	ld [hl],a
+	cp a,$02
+	jr nz,.checkForMoveToWestBlock\@
+; moved into the tile block to the east
+	xor a
+	ld [hl],a
+	ld hl,$d4e3
+	inc [hl]
+	ld de,$d35f
+	call MoveTileBlockMapPointerEast
+	jr .updateMapView\@
+.checkForMoveToWestBlock\@
+	cp a,$ff
+	jr nz,.adjustYCoordWithinBlock\@
+; moved into the tile block to the west
+	ld a,$01
+	ld [hl],a
+	ld hl,$d4e3
+	dec [hl]
+	ld de,$d35f
+	call MoveTileBlockMapPointerWest
+	jr .updateMapView\@
+.adjustYCoordWithinBlock\@
+	ld hl,W_YBLOCKCOORD
+	ld a,[hl]
+	add b
+	ld [hl],a
+	cp a,$02
+	jr nz,.checkForMoveToNorthBlock\@
+; moved into the tile block to the south
+	xor a
+	ld [hl],a
+	ld hl,$d4e2
+	inc [hl]
+	ld de,$d35f
+	ld a,[W_CURMAPWIDTH]
+	call MoveTileBlockMapPointerSouth
+	jr .updateMapView\@
+.checkForMoveToNorthBlock\@
+	cp a,$ff
+	jr nz,.updateMapView\@
+; moved into the tile block to the north
+	ld a,$01
+	ld [hl],a
+	ld hl,$d4e2
+	dec [hl]
+	ld de,$d35f
+	ld a,[W_CURMAPWIDTH]
+	call MoveTileBlockMapPointerNorth
+.updateMapView\@
+	call LoadCurrentMapView
+	ld a,[$c103] ; delta Y
+	cp a,$01
+	jr nz,.checkIfMovingNorth2\@
+; if moving south
+	call ScheduleSouthRowRedraw
+	jr .scrollBackgroundAndSprites\@
+.checkIfMovingNorth2\@
+	cp a,$ff
+	jr nz,.checkIfMovingEast2\@
+; if moving north
+	call ScheduleNorthRowRedraw
+	jr .scrollBackgroundAndSprites\@
+.checkIfMovingEast2\@
+	ld a,[$c105] ; delta X
+	cp a,$01
+	jr nz,.checkIfMovingWest2\@
+; if moving east
+	call ScheduleEastColumnRedraw
+	jr .scrollBackgroundAndSprites\@
+.checkIfMovingWest2\@
+	cp a,$ff
+	jr nz,.scrollBackgroundAndSprites\@
+; if moving west
+	call ScheduleWestColumnRedraw
+.scrollBackgroundAndSprites\@
+	ld a,[$c103] ; delta Y
+	ld b,a
+	ld a,[$c105] ; delta X
+	ld c,a
+	sla b
+	sla c
+	ld a,[$ffaf]
+	add b
+	ld [$ffaf],a ; update background scroll Y
+	ld a,[$ffae]
+	add c
+	ld [$ffae],a ; update background scroll X
+; shift all the sprites in the direction opposite of the player's motion
+; so that the player appears to move relative to them
+	ld hl,$c114
+	ld a,[$d4e1] ; number of sprites
+	and a ; are there any sprites?
+	jr z,.done\@
+	ld e,a
+.spriteShiftLoop\@
+	ld a,[hl]
+	sub b
+	ld [hli],a
+	inc l
+	ld a,[hl]
+	sub c
+	ld [hl],a
+	ld a,$0e
+	add l
+	ld l,a
+	dec e
+	jr nz,.spriteShiftLoop\@
+.done\@
+	ret
+
+; the following four functions are used to move the pointer to the upper left
+; corner of the tile block map in the direction of motion
+
+MoveTileBlockMapPointerEast: ; E65
+	ld a,[de]
+	add a,$01
+	ld [de],a
+	ret nc
+	inc de
+	ld a,[de]
+	inc a
+	ld [de],a
+	ret
+
+MoveTileBlockMapPointerWest: ; E6F
+	ld a,[de]
+	sub a,$01
+	ld [de],a
+	ret nc
+	inc de
+	ld a,[de]
+	dec a
+	ld [de],a
+	ret
+
+MoveTileBlockMapPointerSouth: ; E79
+	add a,$06
+	ld b,a
+	ld a,[de]
+	add b
+	ld [de],a
+	ret nc
+	inc de
+	ld a,[de]
+	inc a
+	ld [de],a
+	ret
+
+MoveTileBlockMapPointerNorth: ; E85
+	add a,$06
+	ld b,a
+	ld a,[de]
+	sub b
+	ld [de],a
+	ret nc
+	inc de
+	ld a,[de]
+	dec a
+	ld [de],a
+	ret
+
+; the following 6 functions are used to tell the V-blank handler to redraw
+; the portion of the map that was newly exposed due to the player's movement
+
+ScheduleNorthRowRedraw: ; E91
+	ld hl,$c3a0
+	call ScheduleRowRedrawHelper
+	ld a,[$d526]
+	ld [$ffd1],a
+	ld a,[$d527]
+	ld [$ffd2],a
+	ld a,$02
+	ld [$ffd0],a
+	ret
+
+ScheduleRowRedrawHelper: ; EA6
+	ld de,$cbfc
+	ld c,$28
+.loop\@
+	ld a,[hli]
+	ld [de],a
+	inc de
+	dec c
+	jr nz,.loop\@
+	ret
+
+ScheduleSouthRowRedraw: ; EB2
+	ld hl,$c4e0
+	call $0ea6
+	ld a,[$d526]
+	ld l,a
+	ld a,[$d527]
+	ld h,a
+	ld bc,$0200
+	add hl,bc
+	ld a,h
+	and a,$03
+	or a,$98
+	ld [$ffd2],a
+	ld a,l
+	ld [$ffd1],a
+	ld a,$02
+	ld [$ffd0],a
+	ret
+
+ScheduleEastColumnRedraw: ; ED3
+	ld hl,$c3b2
+	call ScheduleColumnRedrawHelper
+	ld a,[$d526]
+	ld c,a
+	and a,$e0
+	ld b,a
+	ld a,c
+	add a,$12
+	and a,$1f
+	or b
+	ld [$ffd1],a
+	ld a,[$d527]
+	ld [$ffd2],a
+	ld a,$01
+	ld [$ffd0],a
+	ret
+
+ScheduleColumnRedrawHelper: ; EF2
+	ld de,$cbfc
+	ld c,$12
+.loop\@
+	ld a,[hli]
+	ld [de],a
+	inc de
+	ld a,[hl]
+	ld [de],a
+	inc de
+	ld a,$13
+	add l
+	ld l,a
+	jr nc,.noCarry\@
+	inc h
+.noCarry\@
+	dec c
+	jr nz,.loop\@
+	ret
+
+ScheduleWestColumnRedraw: ; F08
+	ld hl,$c3a0
+	call ScheduleColumnRedrawHelper
+	ld a,[$d526]
+	ld [$ffd1],a
+	ld a,[$d527]
+	ld [$ffd2],a
+	ld a,$01
+	ld [$ffd0],a
+	ret
+
+; function to write the tiles that make up a tile block to memory
+; Input: c = tile block ID, hl = destination address
+DrawTileBlock: ; F1D
+	push hl
+	ld a,[$d52c] ; pointer to tiles
+	ld l,a
+	ld a,[$d52d]
+	ld h,a
+	ld a,c
+	swap a
+	ld b,a
+	and a,$f0
+	ld c,a
+	ld a,b
+	and a,$0f
+	ld b,a ; bc = tile block ID * 0x10
+	add hl,bc
+	ld d,h
+	ld e,l ; de = address of the tile block's tiles
+	pop hl
+	ld c,$04 ; 4 loop iterations
+.loop\@ ; each loop iteration, write 4 tile numbers
+	push bc
+	ld a,[de]
+	ld [hli],a
+	inc de
+	ld a,[de]
+	ld [hli],a
+	inc de
+	ld a,[de]
+	ld [hli],a
+	inc de
+	ld a,[de]
+	ld [hl],a
+	inc de
+	ld bc,$0015
+	add hl,bc
+	pop bc
+	dec c
+	jr nz,.loop\@
+	ret
+
+; function to update joypad state and simulate button presses
+GetJoypadStateOverworld: ; F4D
+	xor a
+	ld [$c103],a
+	ld [$c105],a
+	call RunMapScript
+	call $019a ; update joypad state
+	ld a,[$d733]
+	bit 3,a ; check if a trainer wants a challenge
+	jr nz,.notForcedDownwards\@
+	ld a,[W_CURMAP]
+	cp a,ROUTE_17 ; Cycling Road
+	jr nz,.notForcedDownwards\@
+	ld a,[$ffb4] ; current joypad state
+	and a,%11110011 ; bit mask for all directions and A/B
+	jr nz,.notForcedDownwards\@
+	ld a,%10000000 ; down pressed
+	ld [$ffb4],a ; on the cycling road, if there isn't a trainer and the player isn't pressing buttons, simulate a down press
+.notForcedDownwards\@
+	ld a,[$d730]
+	bit 7,a
+	ret z
+; if simulating button presses
+	ld a,[$ffb4] ; current joypad state
+	ld b,a
+	ld a,[$cd3b] ; bit mask for button presses that override simulated ones
+	and b
+	ret nz ; return if the simulated button presses are overridden
+	ld hl,$cd38 ; index of current simulated button press
+	dec [hl]
+	ld a,[hl]
+	cp a,$ff
+	jr z,.doneSimulating\@ ; if the end of the simulated button presses has been reached
+	ld hl,$ccd3 ; base address of simulated button presses
+; add offset to base address
+	add l
+	ld l,a
+	jr nc,.noCarry\@
+	inc h
+.noCarry\@
+	ld a,[hl]
+	ld [$ffb4],a ; store simulated button press in joypad state
+	and a
+	ret nz
+	ld [$ffb3],a
+	ld [$ffb2],a
+	ret
+; if done simulating button presses
+.doneSimulating\@
+	xor a
+	ld [$cd3a],a
+	ld [$cd38],a
+	ld [$ccd3],a
+	ld [$cd6b],a
+	ld [$ffb4],a
+	ld hl,$d736
+	ld a,[hl]
+	and a,$f8
+	ld [hl],a
+	ld hl,$d730
+	res 7,[hl]
+	ret
+
+; function to check the tile ahead to determine if the character should get on land or keep surfing
+; sets carry if there is a collision and clears carry otherwise
+; It seems that this function has a bug in it, but due to luck, it doesn't
+; show up. After detecting a sprite collision, it jumps to the code that
+; checks if the next tile is passable instead of just directly jumping to the
+; "collision detected" code. However, it doesn't store the next tile in c,
+; so the old value of c is used. 2429 is always called before this function,
+; and 2429 always sets c to 0xF0. There is no 0xF0 background tile, so it
+; is considered impassable and it is detected as a collision.
+CollisionCheckOnWater: ; FB7
+	ld a,[$d730]
+	bit 7,a
+	jp nz,.noCollision\@ ; return and clear carry if button presses are being simulated
+	ld a,[$d52a] ; the direction that the player is trying to go in
+	ld d,a
+	ld a,[$c10c] ; the player sprite's collision data (bit field) (set in the sprite movement code)
+	and d ; check if a sprite is in the direction the player is trying to go
+	jr nz,.checkIfNextTileIsPassable\@ ; bug?
+	ld hl,TilePairCollisionsWater
+	call CheckForJumpingAndTilePairCollisions
+	jr c,.collision\@
+	ld a,$35
+	call Predef ; get tile in front of player (puts it in c and [$CFC6])
+	ld a,[$cfc6] ; tile in front of player
+	cp a,$14 ; water tile
+	jr z,.noCollision\@ ; keep surfing if it's a water tile
+	cp a,$32 ; either the left tile of the S.S. Anne boarding platform or the tile on eastern coastlines (depending on the current tileset)
+	jr z,.checkIfVermilionDockTileset\@
+	cp a,$48 ; tile on right on coast lines in Safari Zone
+	jr z,.noCollision\@ ; keep surfing
+; check if the [land] tile in front of the player is passable
+.checkIfNextTileIsPassable\@
+	ld hl,$d530 ; pointer to list of passable tiles
+	ld a,[hli]
+	ld h,[hl]
+	ld l,a
+.loop\@
+	ld a,[hli]
+	cp a,$ff
+	jr z,.collision\@
+	cp c
+	jr z,.stopSurfing\@ ; stop surfing if the tile is passable
+	jr .loop\@
+.collision\@
+	ld a,[$c02a]
+	cp a,$b4 ; check if collision sound is already playing
+	jr z,.setCarry\@
+	ld a,$b4
+	call $23b1 ; play collision sound (if it's not already playing)
+.setCarry\@
+	scf
+	jr .done\@
+.noCollision\@
+	and a
+.done\@
+	ret
+.stopSurfing\@
+	xor a
+	ld [$d700],a
+	call LoadPlayerSpriteGraphics
+	call $2307
+	jr .noCollision\@
+.checkIfVermilionDockTileset\@
+	ld a,[W_CURMAPTILESET] ; tileset
+	cp a,$0e ; Vermilion Dock tileset
+	jr nz,.noCollision\@ ; keep surfing if it's not the boarding platform tile
+	jr .stopSurfing\@ ; if it is the boarding platform tile, stop surfing
+
+; function to run the current map's script
+RunMapScript: ; 101B
+	push hl
+	push de
+	push bc
+	ld b,$03
+	ld hl,$7225
+	call Bankswitch ; check if the player is pushing a boulder
+	ld a,[$cd60]
+	bit 1,a ; is the player pushing a boulder?
+	jr z,.afterBoulderEffect\@
+	ld b,$03
+	ld hl,$72b5
+	call Bankswitch ; displays dust effect when pushing a boulder
+.afterBoulderEffect\@
+	pop bc
+	pop de
+	pop hl
+	call $310e
+	ld a,[W_CURMAP] ; current map number
+	call SwitchToMapRomBank ; change to the ROM bank the map's data is in
+	ld hl,W_MAPSCRIPTPTR
+	ld a,[hli]
+	ld h,[hl]
+	ld l,a
+	ld de,.return\@
+	push de
+	jp [hl] ; jump to script
+.return\@
+	ret
+
+LoadWalkingPlayerSpriteGraphics:
+	ld de,$4180
+	ld hl,$8000
+	jr LoadPlayerSpriteGraphicsCommon
+
+LoadSurfingPlayerSpriteGraphics:
+	ld de,$76c0
+	ld hl,$8000
+	jr LoadPlayerSpriteGraphicsCommon
+
+LoadBikePlayerSpriteGraphics:
+	ld de,$4000
+	ld hl,$8000
+
+LoadPlayerSpriteGraphicsCommon:
+	push de
+	push hl
+	ld bc,$050c
+	call $1848
+	pop hl
+	pop de
+	ld a,$c0
+	add e
+	ld e,a
+	jr nc,.noCarry\@
+	inc d
+.noCarry\@
+	set 3,h
+	ld bc,$050c
+	jp $1848
+
+; function to load data from the map header
+LoadMapHeader: ; 107C
+	ld b,$03
+	ld hl,$7113
+	call Bankswitch
+	ld a,[W_CURMAPTILESET]
+	ld [$d119],a
+	ld a,[W_CURMAP]
+	call SwitchToMapRomBank
+	ld a,[W_CURMAPTILESET]
+	ld b,a
+	res 7,a
+	ld [W_CURMAPTILESET],a
+	ld [$ff8b],a
+	bit 7,b
+	ret nz
+	ld hl,MapHeaderPointers
+	ld a,[W_CURMAP]
+	sla a
+	jr nc,.noCarry1\@
+	inc h
+.noCarry1\@
+	add l
+	ld l,a
+	jr nc,.noCarry2\@
+	inc h
+.noCarry2\@
+	ld a,[hli]
+	ld h,[hl]
+	ld l,a ; hl = base of map header
+; copy the first 10 bytes (the fixed area) of the map data to D367-D370
+	ld de,$d367
+	ld c,$0a
+.copyFixedHeaderLoop\@
+	ld a,[hli]
+	ld [de],a
+	inc de
+	dec c
+	jr nz,.copyFixedHeaderLoop\@
+; initialize all the connected maps to disabled at first, before loading the actual values
+	ld a,$ff
+	ld [$d371],a
+	ld [$d37c],a
+	ld [$d387],a
+	ld [$d392],a
+; copy connection data (if any) to WRAM
+	ld a,[W_MAPCONNECTIONS]
+	ld b,a
+.checkNorth\@
+	bit 3,b
+	jr z,.checkSouth\@
+	ld de,W_MAPCONN1PTR
+	call CopyMapConnectionHeader
+.checkSouth\@
+	bit 2,b
+	jr z,.checkWest\@
+	ld de,W_MAPCONN2PTR
+	call CopyMapConnectionHeader
+.checkWest\@
+	bit 1,b
+	jr z,.checkEast\@
+	ld de,W_MAPCONN3PTR
+	call CopyMapConnectionHeader
+.checkEast\@
+	bit 0,b
+	jr z,.getObjectDataPointer\@
+	ld de,W_MAPCONN4PTR
+	call CopyMapConnectionHeader
+.getObjectDataPointer\@
+	ld a,[hli]
+	ld [$d3a9],a
+	ld a,[hli]
+	ld [$d3aa],a
+	push hl
+	ld a,[$d3a9]
+	ld l,a
+	ld a,[$d3aa]
+	ld h,a ; hl = base of object data
+	ld de,$d3ad ; background tile ID
+	ld a,[hli]
+	ld [de],a ; save background tile ID
+.loadWarpData\@
+	ld a,[hli] ; number of warps
+	ld [$d3ae],a ; save the number of warps
+	and a ; are there any warps?
+	jr z,.loadSignData\@ ; if not, skip this
+	ld c,a
+	ld de,$d3af ; base address of warps
+.warpLoop\@ ; one warp per loop iteration
+	ld b,$04
+.warpInnerLoop\@
+	ld a,[hli]
+	ld [de],a
+	inc de
+	dec b
+	jr nz,.warpInnerLoop\@
+	dec c
+	jr nz,.warpLoop\@
+.loadSignData\@
+	ld a,[hli] ; number of signs
+	ld [$d4b0],a ; save the number of signs
+	and a ; are there any signs?
+	jr z,.loadSpriteData\@ ; if not, skip this
+	ld c,a
+	ld de,$d4d1 ; base address of sign text IDs
+	ld a,d
+	ld [$ff95],a
+	ld a,e
+	ld [$ff96],a
+	ld de,$d4b1 ; base address of sign coordinates
+.signLoop\@
+	ld a,[hli]
+	ld [de],a
+	inc de
+	ld a,[hli]
+	ld [de],a
+	inc de
+	push de
+	ld a,[$ff95]
+	ld d,a
+	ld a,[$ff96]
+	ld e,a
+	ld a,[hli]
+	ld [de],a
+	inc de
+	ld a,d
+	ld [$ff95],a
+	ld a,e
+	ld [$ff96],a
+	pop de
+	dec c
+	jr nz,.signLoop\@
+.loadSpriteData\@
+	ld a,[$d72e]
+	bit 5,a ; did a battle happen immediately before this?
+	jp nz,.finishUp\@ ; if so, skip this because battles don't destroy this data
+	ld a,[hli]
+	ld [$d4e1],a ; save the number of sprites
+	push hl
+; zero C110-C1FF and C210-C2FF
+	ld hl,$c110
+	ld de,$c210
+	xor a
+	ld b,$f0
+.zeroSpriteDataLoop\@
+	ld [hli],a
+	ld [de],a
+	inc e
+	dec b
+	jr nz,.zeroSpriteDataLoop\@
+; initialize all C100-C1FF sprite entries to disabled (other than player's)
+	ld hl,$c112
+	ld de,$0010
+	ld c,$0f
+.disableSpriteEntriesLoop\@
+	ld [hl],$ff
+	add hl,de
+	dec c
+	jr nz,.disableSpriteEntriesLoop\@
+	pop hl
+	ld de,$c110
+	ld a,[$d4e1] ; number of sprites
+	and a ; are there any sprites?
+	jp z,.finishUp\@ ; if there are no sprites, skip the rest
+	ld b,a
+	ld c,$00
+.loadSpriteLoop\@
+	ld a,[hli]
+	ld [de],a ; store picture ID at C1X0
+	inc d
+	ld a,$04
+	add e
+	ld e,a
+	ld a,[hli]
+	ld [de],a ; store Y position at C2X4
+	inc e
+	ld a,[hli]
+	ld [de],a ; store X position at C2X5
+	inc e
+	ld a,[hli]
+	ld [de],a ; store movement byte 1 at C2X6
+	ld a,[hli]
+	ld [$ff8d],a ; save movement byte 2
+	ld a,[hli]
+	ld [$ff8e],a ; save text ID and flags byte
+	push bc
+	push hl
+	ld b,$00
+	ld hl,$d4e4 ; base address of sprite entries
+	add hl,bc
+	ld a,[$ff8d]
+	ld [hli],a ; store movement byte 2 in byte 0 of sprite entry
+	ld a,[$ff8e]
+	ld [hl],a ; this appears pointless, since the value is overwritten immediately after
+	ld a,[$ff8e]
+	ld [$ff8d],a
+	and a,$3f
+	ld [hl],a ; store text ID in byte 1 of sprite entry
+	pop hl
+	ld a,[$ff8d]
+	bit 6,a
+	jr nz,.trainerSprite\@
+	bit 7,a
+	jr nz,.itemBallSprite\@
+	jr .regularSprite\@
+.trainerSprite\@
+	ld a,[hli]
+	ld [$ff8d],a ; save trainer class
+	ld a,[hli]
+	ld [$ff8e],a ; save trainer number (within class)
+	push hl
+	ld hl,$d504 ; base address of extra sprite info entries
+	add hl,bc
+	ld a,[$ff8d]
+	ld [hli],a ; store trainer class in byte 0 of the entry
+	ld a,[$ff8e]
+	ld [hl],a ; store trainer number in byte 1 of the entry
+	pop hl
+	jr .nextSprite\@
+.itemBallSprite\@
+	ld a,[hli]
+	ld [$ff8d],a ; save item number
+	push hl
+	ld hl,$d504 ; base address of extra sprite info
+	add hl,bc
+	ld a,[$ff8d]
+	ld [hli],a ; store item number in byte 0 of the entry
+	xor a
+	ld [hl],a ; zero byte 1, since it is not used
+	pop hl
+	jr .nextSprite\@
+.regularSprite\@
+	push hl
+	ld hl,$d504 ; base address of extra sprite info
+	add hl,bc
+; zero both bytes, since regular sprites don't use this extra space
+	xor a
+	ld [hli],a
+	ld [hl],a
+	pop hl
+.nextSprite\@
+	pop bc
+	dec d
+	ld a,$0a
+	add e
+	ld e,a
+	inc c
+	inc c
+	dec b
+	jp nz,.loadSpriteLoop\@
+.finishUp\@
+	ld a,$19
+	call Predef ; load tileset data
+	ld hl,$4eb8
+	ld b,$03
+	call Bankswitch ; load wild pokemon data
+	pop hl ; restore hl from before going to the warp/sign/sprite data (this value was saved for seemingly no purpose)
+	ld a,[W_CURMAPHEIGHT] ; map height in 4x4 tile blocks
+	add a ; double it
+	ld [$d524],a ; store map height in 2x2 tile blocks
+	ld a,[W_CURMAPWIDTH] ; map width in 4x4 tile blocks
+	add a ; double it
+	ld [$d525],a ; map width in 2x2 tile blocks
+	ld a,[W_CURMAP]
+	ld c,a
+	ld b,$00
+	ld a,[$ffb8]
+	push af
+	ld a,$03
+	ld [$ffb8],a
+	ld [$2000],a
+	ld hl,$404d
+	add hl,bc
+	add hl,bc
+	ld a,[hli]
+	ld [$d35b],a ; music 1
+	ld a,[hl]
+	ld [$d35c],a ; music 2
+	pop af
+	ld [$ffb8],a
+	ld [$2000],a
+	ret
+
+; function to copy map connection data from ROM to WRAM
+; Input: hl = source, de = destination
+CopyMapConnectionHeader: ; 1238
+	ld c,$0b
+.loop\@
+	ld a,[hli]
+	ld [de],a
+	inc de
+	dec c
+	jr nz,.loop\@
+	ret
+
+; function to load map data
+LoadMapData: ; 1241
+	ld a,[$ffb8]
+	push af
+	call DisableLCD
+	ld a,$98
+	ld [$d527],a
+	xor a
+	ld [$d526],a
+	ld [$ffaf],a
+	ld [$ffae],a
+	ld [$cfc5],a
+	ld [$d119],a
+	ld [$d11a],a
+	ld [$d3a8],a
+	call $36a0 ; transfer tile pattern data for text windows into VRAM
+	call LoadMapHeader
+	ld b,$05
+	ld hl,$785b
+	call Bankswitch ; load tile pattern data for sprites
+	call LoadTileBlockMap
+	call LoadTilesetTilePatternData
+	call LoadCurrentMapView
+; copy current map view to VRAM
+	ld hl,$c3a0
+	ld de,$9800
+	ld b,$12
+.vramCopyLoop\@
+	ld c,$14
+.vramCopyInnerLoop\@
+	ld a,[hli]
+	ld [de],a
+	inc e
+	dec c
+	jr nz,.vramCopyInnerLoop\@
+	ld a,$0c
+	add e
+	ld e,a
+	jr nc,.noCarry\@
+	inc d
+.noCarry\@
+	dec b
+	jr nz,.vramCopyLoop\@
+	ld a,$01
+	ld [$cfcb],a
+	call EnableLCD
+	ld b,$09
+	call $3def ; handle SGB palette
+	call LoadPlayerSpriteGraphics
+	ld a,[$d732]
+	and a,$18 ; did the player fly or teleport in?
+	jr nz,.restoreRomBank\@
+	ld a,[$d733]
+	bit 1,a
+	jr nz,.restoreRomBank\@
+	call $235f ; music related
+	call $2312 ; music related
+.restoreRomBank\@
+	pop af
+	ld [$ffb8],a
+	ld [$2000],a
+	ret
+
+; function to switch to the ROM bank that a map is stored in
+; Input: a = map number
+SwitchToMapRomBank: ; 12BC
+	push hl
+	push bc
+	ld c,a
+	ld b,$00
+	ld a,$03
+	call BankswitchHome ; switch to ROM bank 3
+	ld hl,MapHeaderBanks
+	add hl,bc
+	ld a,[hl]
+	ld [$ffe8],a ; save map ROM bank
+	call BankswitchBack
+	ld a,[$ffe8]
+	ld [$ffb8],a
+	ld [$2000],a ; switch to map ROM bank
+	pop bc
+	pop hl
+	ret
+
+INCBIN "baserom.gbc",$12DA,$1627 - $12DA
 
 ;XXX what does this do
 ;XXX what points to this
@@ -1212,7 +3622,7 @@ Route2Text2: ; 24f4 0x424f4
 	db $08 ; asm
 	ld a, $5c
 	call Predef
-	jp $24d7
+	jp TextScriptEnd
 
 INCBIN "baserom.gbc",$24fd,$2a55 - $24fd
 
@@ -2819,7 +5229,101 @@ UnnamedText_7073: ; 0x7073
 	db $50
 ; 0x7073 + 5 bytes
 
-INCBIN "baserom.gbc",$7078,$72b3 - $7078
+INCBIN "baserom.gbc",$7078,$710b - $7078
+
+; function that displays the start menu
+DrawStartMenu: ; 710B
+	ld a,[$d74b]
+	bit 5,a ; does the player have the pokedex?
+; menu with pokedex
+	ld hl,$c3aa
+	ld b,$0e
+	ld c,$08
+	jr nz,.drawTextBoxBorder\@
+; shorter menu if the player doesn't have the pokedex
+	ld hl,$c3aa
+	ld b,$0c
+	ld c,$08
+.drawTextBoxBorder\@
+	call TextBoxBorder
+	ld a,%11001011 ; bit mask for down, up, start, B, and A buttons
+	ld [$cc29],a
+	ld a,$02
+	ld [$cc24],a ; Y position of first menu choice
+	ld a,$0b
+	ld [$cc25],a ; X position of first menu choice
+	ld a,[$cc2d] ; remembered menu selection from last time
+	ld [$cc26],a
+	ld [$cc2a],a
+	xor a
+	ld [$cc37],a
+	ld hl,$d730
+	set 6,[hl] ; no pauses between printing each letter
+	ld hl,$c3d4
+	ld a,[$d74b]
+	bit 5,a ; does the player have the pokedex?
+; case for not having pokdex
+	ld a,$06
+	jr z,.storeMenuItemCount\@
+; case for having pokedex
+	ld de,StartMenuPokedexText
+	call PrintStartMenuItem
+	ld a,$07
+.storeMenuItemCount\@
+	ld [$cc28],a ; number of menu items
+	ld de,StartMenuPokemonText
+	call PrintStartMenuItem
+	ld de,StartMenuItemText
+	call PrintStartMenuItem
+	ld de,$d158 ; player's name
+	call PrintStartMenuItem
+	ld a,[$d72e]
+	bit 6,a ; is the player using the link feature?
+; case for not using link feature
+	ld de,StartMenuSaveText
+	jr z,.printSaveOrResetText\@
+; case for using link feature
+	ld de,StartMenuResetText
+.printSaveOrResetText\@
+	call PrintStartMenuItem
+	ld de,StartMenuOptionText
+	call PrintStartMenuItem
+	ld de,StartMenuExitText
+	call PlaceString
+	ld hl,$d730
+	res 6,[hl] ; turn pauses between printing letters back on
+	ret
+
+StartMenuPokedexText: ; 718F
+db "POKéDEX@"
+
+StartMenuPokemonText: ; 7197
+db "POKéMON@"
+
+StartMenuItemText: ; 719F
+db "ITEM@"
+
+StartMenuSaveText: ; 71A4
+db "SAVE@"
+
+StartMenuResetText: ; 71A9
+db "RESET@"
+
+StartMenuExitText: ; 71AF
+db "EXIT@"
+
+StartMenuOptionText: ; 71B4
+db "OPTION@"
+
+PrintStartMenuItem: ; 71BB
+	push hl
+	call PlaceString
+	pop hl
+	ld de,$28
+	add hl,de
+	ret
+
+INCBIN "baserom.gbc",$71c5,$72b3 - $71c5
 
 UnnamedText_72b3: ; 0x72b3
 	TX_FAR _UnnamedText_72b3
@@ -7994,7 +10498,7 @@ ItemUsePtrTable:	;$D5E1
 	dw $6140            ; POKE_FLUTE
 	dw $6476            ; LIFT_KEY
 	dw $6476            ; EXP__ALL
-	dw $624C            ; OLD_ROD
+	dw OldRodCode       ; OLD_ROD
 	dw GoodRodCode 		; GOOD_ROD $6259
 	dw SuperRodCode     ; SUPER_ROD $6283
 	dw $6317            ; PP_UP (see other?)
@@ -8464,18 +10968,23 @@ UnnamedText_e247: ; 0xe247
 	db $50
 ; 0xe247 + 5 bytes
 
-INCBIN "baserom.gbc",$e24c,$d
+OldRodCode:
+	call $62b4 ; probably sets carry if not in battle or not by water
+	jp c, ItemUseNotTime
+	ld bc, (5 << 8) | MAGIKARP
+	ld a, $1 ; set bite
+	jr RodResponse ; 0xe257 $34
 
 GoodRodCode: ; 6259 0xe259
 	call $62B4 ; probably sets carry if not in battle or not by water
 	jp c,ItemUseNotTime
-Next625F:
+.RandomLoop
 	call GenRandom
 	srl a
-	jr c,Next6278
+	jr c, .SetBite
 	and %11
 	cp 2
-	jr nc,Next625F
+	jr nc, .RandomLoop
 	; choose which monster appears
 	ld hl,GoodRodMons
 	add a,a
@@ -8486,11 +10995,11 @@ Next625F:
 	inc hl
 	ld c,[hl]
 	and a
-Next6278:
+.SetBite
 	ld a,0
 	rla
 	xor 1
-	jr Next628E
+	jr RodResponse
 
 GoodRodMons:
 	db 10,GOLDEEN
@@ -8501,7 +11010,7 @@ SuperRodCode: ; $6283 0xe283
 	jp c, ItemUseNotTime
 	call ReadSuperRodData ; 0xe8ea
 	ld a, e
-Next628E:
+RodResponse:
 	ld [$CD3D], a
 
 	dec a ; is there a bite?
@@ -8627,9 +11136,10 @@ ReadSuperRodData:
 	ret
 
 .ReadFishingGroup ; 0xe8f6
-; hl points to the fishing group
+; hl points to the fishing group entry in the index
 	inc hl ; skip map id
 
+	; read fishing group address
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
@@ -9869,7 +12379,7 @@ PalletTownText1: ; 4F96 0x18f96
 	ld hl,OakWalksUpText
 .done\@
 	call PrintText
-	jp $24D7
+	jp TextScriptEnd
 
 OakAppearsText:
 	TX_FAR _OakAppearsText
@@ -9883,7 +12393,7 @@ OakAppearsText:
 	call Predef ; display ! over head
 	ld a,4
 	ld [$D528],a
-	jp $24D7
+	jp TextScriptEnd
 
 OakWalksUpText:
 	TX_FAR _OakWalksUpText
@@ -9915,7 +12425,7 @@ PalletTownText7: ; sign by Blue’s house
 
 ViridianCityScript: ; 0x18ff1
 	call $3c3c
-	ld hl, $4ffd
+	ld hl, ViridianCityScripts
 	ld a, [$d5f4]
 	jp $3d97
 ; 0x18ffd
@@ -9951,7 +12461,7 @@ ViridianCityText2: ; 0x19107
 	ld hl, $5122
 .asm_ae9fe ; 0x1911c
 	call PrintText
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_19122: ; 0x19122
 	TX_FAR _UnnamedText_19122
@@ -9978,7 +12488,7 @@ ViridianCityText3: ; 0x1912c
 	ld hl, $5152
 	call PrintText
 .asm_d611f ; 0x1914a
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_1914d: ; 0x1914d
 	TX_FAR _UnnamedText_1914d
@@ -10007,7 +12517,7 @@ ViridianCityText4: ; 0x1915c
 	ld hl, $517a
 	call PrintText
 .asm_700a6 ; 0x19172
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_19175: ; 0x19175
 	TX_FAR _UnnamedText_19175
@@ -10026,7 +12536,7 @@ ViridianCityText5: ; 0x1917f
 	call $50cf
 	ld a, $3
 	ld [$d5f4], a
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_19191: ; 0x19191
 	TX_FAR _UnnamedText_19191
@@ -10041,7 +12551,7 @@ ViridianCityText6: ; 0x19196
 	ld hl, $51ca
 	call PrintText
 	ld bc,(TM_42 << 8) | 1
-	call $3e2e
+	call GiveItem
 	jr nc, .asm_b655e ; 0x191aa
 	ld hl, $51cf
 	call PrintText
@@ -10056,7 +12566,7 @@ ViridianCityText6: ; 0x19196
 	ld hl, $51d5
 	call PrintText
 .asm_3c73c ; 0x191c7
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_191ca: ; 0x191ca
 	TX_FAR _UnnamedText_191ca
@@ -10094,7 +12604,7 @@ ViridianCityText7: ; 0x191df
 	ld hl, $5214
 	call PrintText
 .asm_2413a ; 0x19207
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_1920a: ; 0x1920a
 	TX_FAR _UnnamedText_1920a
@@ -10141,7 +12651,7 @@ UnnamedText_19232: ; 0x19232
 
 PewterCityScript: ; 0x19237
 	call $3c3c
-	ld hl, $5243
+	ld hl, PewterCityScripts
 	ld a, [$d5f7]
 	jp $3d97
 ; 0x19243
@@ -10201,7 +12711,7 @@ PewterCityText3: ; 0x193b1
 	ld a, $1
 	ld [$d5f7], a
 .asm_ac429 ; 0x193ee
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_193f1: ; 0x193f1
 	TX_FAR _UnnamedText_193f1
@@ -10240,7 +12750,7 @@ PewterCityText4: ; 0x19405
 	ld hl, $5431
 	call PrintText
 .asm_e4604 ; 0x19424
-	jp $24d7
+	jp TextScriptEnd
 ; 0x19427
 
 UnnamedText_19427: ; 0x19427
@@ -10274,7 +12784,7 @@ PewterCityText5: ; 0x19436
 	call $32f4
 	ld a, $4
 	ld [$d5f7], a
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_1945d: ; 0x1945d
 	TX_FAR _UnnamedText_1945d
@@ -10310,7 +12820,7 @@ PewterCityText12: ; 0x1947b
 
 CeruleanCityScript: ; 0x19480
 	call $3c3c
-	ld hl, $549d
+	ld hl, CeruleanCityScripts
 	ld a, [$d60f]
 	jp $3d97
 ; 0x1948c
@@ -10502,7 +13012,7 @@ CeruleanCityText1: ; 0x1964f
 	ld hl, $5668
 	call PrintText
 .asm_815c6 ; 0x19665
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_19668: ; 0x19668
 	TX_FAR _UnnamedText_19668
@@ -10543,7 +13053,7 @@ CeruleanCityText2: ; 0x1967c
 	call $32d7
 	ld a, $4
 	ld [$d60f], a
-	jp $24d7
+	jp TextScriptEnd
 .asm_4ca20 ; 0x196ad
 	ld hl, UnnamedText_196f3
 	call PrintText
@@ -10562,7 +13072,7 @@ CeruleanCityText2: ; 0x1967c
 	ld hl, Unnamed_ASM_74872
 	call Bankswitch
 .asm_e4e6f ; 0x196d6
-	jp $24d7
+	jp TextScriptEnd
 ; 0x196d9
 
 UnnamedText_196d9: ; 0x196d9
@@ -10627,7 +13137,7 @@ CeruleanCityText7: ; 0x1970c
 	ld hl, $573a
 	call PrintText
 .asm_d486e ; 0x1972d
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_19730: ; 0x19730
 	TX_FAR _UnnamedText_19730
@@ -10668,7 +13178,7 @@ CeruleanCityText8: ; 0x1973f
 	ld hl, $577e
 	call PrintText
 .asm_f2f38 ; 0x1976c
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_1976f: ; 0x1976f
 	TX_FAR _UnnamedText_1976f
@@ -10725,7 +13235,7 @@ VermilionCityScript: ; 0x197a1
 	bit 5, [hl]
 	res 5, [hl]
 	call nz, $57c0
-	ld hl, $57dc
+	ld hl, VermilionCityScripts
 	ld a, [$d62a]
 	jp $3d97
 ; 0x197c0
@@ -10802,7 +13312,7 @@ VermilionCityText2: ; 0x1988e
 	ld hl, $58ac
 	call PrintText
 .asm_735d9 ; 0x198a4
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_198a7: ; 0x198a7
 	TX_FAR _UnnamedText_198a7
@@ -10851,7 +13361,7 @@ VermilionCityText3: ; 0x198b1
 	ld hl, $5918
 	call PrintText
 .asm_79bd1 ; 0x198fc
-	jp $24d7
+	jp TextScriptEnd
 
 INCBIN "baserom.gbc",$198ff,$19904 - $198ff
 
@@ -10958,7 +13468,7 @@ CeladonCityText5: ; 0x1999e
 	ld hl, $59d2
 	call PrintText
 	ld bc,(TM_41 << 8) | 1
-	call $3e2e
+	call GiveItem
 	jr c, .asm_890ec ; 0x199b2
 	ld hl, $59e2
 	call PrintText
@@ -10973,7 +13483,7 @@ CeladonCityText5: ; 0x1999e
 	ld hl, $59dd
 	call PrintText
 .asm_c765a ; 0x199cf
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_199d2: ; 0x199d2
 	TX_FAR _UnnamedText_199d2
@@ -11001,7 +13511,7 @@ CeladonCityText7: ; 0x199ec
 	db $08 ; asm
 	ld a, $6f
 	call $13d0
-	jp $24d7
+	jp TextScriptEnd
 
 CeladonCityText8: ; 0x199f9
 	TX_FAR _CeladonCityText8
@@ -11102,7 +13612,7 @@ FuchsiaCityText19: ; 0x19a90
 	call PrintText
 	ld a, $28
 	call $349b
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_19a9f: ; 0x19a9f
 	TX_FAR _UnnamedText_19a9f
@@ -11115,7 +13625,7 @@ FuchsiaCityText20: ; 0x19aa4
 	call PrintText
 	ld a, $6
 	call $349b
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_19ab3: ; 0x19ab3
 	TX_FAR _UnnamedText_19ab3
@@ -11128,7 +13638,7 @@ FuchsiaCityText21: ; 0x19ab8
 	call PrintText
 	ld a, $2
 	call $349b
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_19ac7: ; 0x19ac7
 	TX_FAR _UnnamedText_19ac7
@@ -11141,7 +13651,7 @@ FuchsiaCityText22: ; 0x19acc
 	call PrintText
 	ld a, $25
 	call $349b
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_19adb: ; 0x19adb
 	TX_FAR _UnnamedText_19adb
@@ -11154,7 +13664,7 @@ FuchsiaCityText23: ; 0x19ae0
 	call PrintText
 	ld a, $13
 	call $349b
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_19aef: ; 0x19aef
 	TX_FAR _UnnamedText_19aef
@@ -11183,7 +13693,7 @@ FuchsiaCityText24: ; 0x19af4
 .asm_81556 ; 0x19b1a
 	call $349b
 .asm_4343f ; 0x19b1d
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_19b20: ; 0x19b20
 	TX_FAR _UnnamedText_19b20
@@ -11265,7 +13775,7 @@ BluesHouseText1: ; 5B5D 0x19B5D
 	ld hl,DaisyBagFullText
 	call PrintText
 .done\@
-	jp $24D7
+	jp TextScriptEnd
 
 DaisyInitialText:
 	TX_FAR _DaisyInitialText
@@ -11340,7 +13850,7 @@ VermilionHouse3Text1: ; 0x19c17
 	ld [W_WHICHTRADE], a
 	ld a, $54
 	call Predef
-	jp $24d7
+	jp TextScriptEnd
 
 VermilionHouse3Object: ; 0x19c25 (size=26)
 	db $a ; border tile
@@ -11466,7 +13976,7 @@ SilphCo4Text1: ; 0x19dd3
 	ld hl, $5de0
 	ld de, $5de5
 	call $622f
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_19de0: ; 0x19de0
 	TX_FAR _UnnamedText_19de0
@@ -11482,7 +13992,7 @@ SilphCo4Text2: ; 0x19dea
 	db $08 ; asm
 	ld hl, $5dae
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_19df4: ; 0x19df4
 	TX_FAR _UnnamedText_19df4
@@ -11503,7 +14013,7 @@ SilphCo4Text3: ; 0x19e03
 	db $08 ; asm
 	ld hl, $5dba
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_19e0d: ; 0x19e0d
 	TX_FAR _UnnamedText_19e0d
@@ -11524,7 +14034,7 @@ SilphCo4Text4: ; 0x19e1c
 	db $08 ; asm
 	ld hl, $5dc6
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_19e26: ; 0x19e26
 	TX_FAR _UnnamedText_19e26
@@ -11607,7 +14117,7 @@ SilphCo5Text1: ; 0x1a003
 	ld hl, $6010
 	ld de, $6015
 	call $622f
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_1a010: ; 0x1a010
 	TX_FAR _UnnamedText_1a010
@@ -11623,7 +14133,7 @@ SilphCo5Text2: ; 0x1a01a
 	db $08 ; asm
 	ld hl, $5fd2
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_1a024: ; 0x1a024
 	TX_FAR _UnnamedText_1a024
@@ -11644,7 +14154,7 @@ SilphCo5Text3: ; 0x1a033
 	db $08 ; asm
 	ld hl, $5fde
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_1a03d: ; 0x1a03d
 	TX_FAR _UnnamedText_1a03d
@@ -11665,7 +14175,7 @@ SilphCo5Text4: ; 0x1a04c
 	db $08 ; asm
 	ld hl, $5fea
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_1a056: ; 0x1a056
 	TX_FAR _UnnamedText_1a056
@@ -11686,7 +14196,7 @@ SilphCo5Text5: ; 0x1a065
 	db $08 ; asm
 	ld hl, $5ff6
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_1a06f: ; 0x1a06f
 	TX_FAR _UnnamedText_1a06f
@@ -11785,7 +14295,7 @@ SilphCo6Text1: ; 0x1a23d
 	ld hl, $624a
 	ld de, $624f
 	call $622f
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_1a24a: ; 0x1a24a
 	TX_FAR _UnnamedText_1a24a
@@ -11802,7 +14312,7 @@ SilphCo6Text2: ; 0x1a254
 	ld hl, $6261
 	ld de, $6266
 	call $622f
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_1a261: ; 0x1a261
 	TX_FAR _UnnamedText_1a261
@@ -11819,7 +14329,7 @@ SilphCo6Text3: ; 0x1a26b
 	ld hl, $6278
 	ld de, $627d
 	call $622f
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_1a278: ; 0x1a278
 	TX_FAR _UnnamedText_1a278
@@ -11836,7 +14346,7 @@ SilphCo6Text4: ; 0x1a282
 	ld hl, $628f
 	ld de, $6294
 	call $622f
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_1a28f: ; 0x1a28f
 	TX_FAR _UnnamedText_1a28f
@@ -11853,7 +14363,7 @@ SilphCo6Text5: ; 0x1a299
 	ld hl, $62a6
 	ld de, $62ab
 	call $622f
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_1a2a6: ; 0x1a2a6
 	TX_FAR _UnnamedText_1a2a6
@@ -11869,7 +14379,7 @@ SilphCo6Text6: ; 0x1a2b0
 	db $08 ; asm
 	ld hl, $620a
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_1a2ba: ; 0x1a2ba
 	TX_FAR _UnnamedText_1a2ba
@@ -11890,7 +14400,7 @@ SilphCo6Text7: ; 0x1a2c9
 	db $08 ; asm
 	ld hl, $6216
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_1a2d3: ; 0x1a2d3
 	TX_FAR _UnnamedText_1a2d3
@@ -11911,7 +14421,7 @@ SilphCo6Text8: ; 0x1a2e2
 	db $08 ; asm
 	ld hl, $6222
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_1a2ec: ; 0x1a2ec
 	TX_FAR _UnnamedText_1a2ec
@@ -12309,7 +14819,7 @@ CinnabarIslandScript: ; 0x1ca19
 	res 0, [hl]
 	ld hl, $d7a3
 	res 1, [hl]
-	ld hl, $4a34
+	ld hl, CinnabarIslandScripts
 	ld a, [$d639]
 	jp $3d97
 ; 0x1ca34
@@ -12400,10 +14910,10 @@ Route1Text1: ; 0x1cab8
 	bit 0, [hl]
 	set 0, [hl]
 	jr nz, .asm_02840 ; 0x1cac0
-	ld hl, $4ae3
-	call PrintText
+	ld hl, Route1ViridianMartSampleText
+	call PrintText 
 	ld bc, (POTION << 8) | 1
-	call $3e2e
+	call GiveItem
 	jr nc, .asm_a630e ; 0x1cace
 	ld hl, $4ae8
 	jr .asm_46d43 ; 0x1cad3
@@ -12414,10 +14924,10 @@ Route1Text1: ; 0x1cab8
 	ld hl, $4aee
 .asm_46d43 ; 0x1cadd
 	call PrintText
-	jp $24d7
+	jp TextScriptEnd
 
-UnnamedText_1cae3: ; 0x1cae3
-	TX_FAR _UnnamedText_1cae3
+Route1ViridianMartSampleText: ; 0x1cae3
+	TX_FAR _Route1ViridianMartSampleText
 	db $50
 ; 0x1cae3 + 5 bytes
 
@@ -13131,34 +15641,34 @@ OaksLabText1: ; 0x1d0ce
 	db $08 ; asm
 	ld a, [$d74b]
 	bit 0, a
-	jr nz, .asm_6a7a2 ; 0x1d0d4
-	ld hl, $50f3
+	jr nz, .asm_1d0de ; 0x1d0d4
+	ld hl, OaksLabGaryText1
 	call PrintText
-	jr .asm_ff2ed ; 0x1d0dc
-.asm_6a7a2 ; 0x1d0de
+	jr .asm_1d0f0 ; 0x1d0dc
+.asm_1d0de ; 0x1d0de
 	bit 2, a
-	jr nz, .asm_56780 ; 0x1d0e0
-	ld hl, $50f8
+	jr nz, .asm_1d0ea ; 0x1d0e0
+	ld hl, OaksLabText40
 	call PrintText
-	jr .asm_ff2ed ; 0x1d0e8
-.asm_56780 ; 0x1d0ea
-	ld hl, $50fd
+	jr .asm_1d0f0 ; 0x1d0e8
+.asm_1d0ea ; 0x1d0ea
+	ld hl, OaksLabText41
 	call PrintText
-.asm_ff2ed ; 0x1d0f0
-	jp $24d7
+.asm_1d0f0 ; 0x1d0f0
+	jp TextScriptEnd
 
-UnnamedText_1d0f3: ; 0x1d0f3
-	TX_FAR _UnnamedText_1d0f3
+OaksLabGaryText1: ; 0x1d0f3
+	TX_FAR _OaksLabGaryText1
 	db $50
-; 0x1d0f3 + 5 bytes
+; 0x1d0f8
 
-UnnamedText_1d0f8: ; 0x1d0f8
-	TX_FAR _UnnamedText_1d0f8
+OaksLabText40: ; 0x1d0f8
+	TX_FAR _OaksLabText40
 	db $50
 ; 0x1d0f8 + 5 bytes
 
-UnnamedText_1d0fd: ; 0x1d0fd
-	TX_FAR _UnnamedText_1d0fd
+OaksLabText41: ; 0x1d0fd
+	TX_FAR _OaksLabText41
 	db $50
 ; 0x1d0fd + 5 bytes
 
@@ -13171,7 +15681,7 @@ OaksLabText2: ; 0x1d102
 	ld [$cd3e], a
 	ld a, $b0
 	ld b, $2
-	jr asm_5e6bb ; 0x1d111 $20
+	jr asm_1d133 ; 0x1d111 $20
 
 OaksLabText30:
 OaksLabText3: ; 0x1d113
@@ -13182,7 +15692,7 @@ OaksLabText3: ; 0x1d113
 	ld [$cd3e], a
 	ld a, $b1
 	ld b, $3
-	jr asm_5e6bb ; 0x1d122 $f
+	jr asm_1d133 ; 0x1d122 $f
 
 OaksLabText31:
 OaksLabText4: ; 0x1d124
@@ -13194,7 +15704,7 @@ OaksLabText4: ; 0x1d124
 	ld a, $99
 	ld b, $4
 
-asm_5e6bb: ; 0x1d133
+asm_1d133: ; 0x1d133
 	ld [$cf91], a
 	ld [$d11e], a
 	ld a, b
@@ -13203,16 +15713,17 @@ asm_5e6bb: ; 0x1d133
 	bit 2, a
 	jp nz, $522d
 	bit 1, a
-	jr nz, asm_9eaa4 ; 0x1d147 $e
+	jr nz, asm_1d157 ; 0x1d147 $e
 	ld hl, OaksLabText39
 	call PrintText
-	jp $24d7
+	jp TextScriptEnd
 ; 0x1d152
 
 OaksLabText39:
-	db $17, $df, $4d, $25, $50
+	TX_FAR _OaksLabText39
+	db $50
 
-asm_9eaa4: ; 0x1d157
+asm_1d157: ; 0x1d157
 	ld a, $5
 	ld [$ff00+$8c], a
 	ld a, $9
@@ -13237,66 +15748,68 @@ asm_9eaa4: ; 0x1d157
 	call $3739
 	ld a, [$cf13]
 	cp $2
-	jr z, asm_f6e3a ; 0x1d18d $6
+	jr z, OaksLabLookAtCharmander
 	cp $3
-	jr z, asm_2391d ; 0x1d191 $c
-	jr asm_ddec1 ; 0x1d193 $14
-asm_f6e3a: ; 0x1d195
-	ld hl, $519a
-	jr asm_b5ddf ; 0x1d198 $19
-	rla ; probably a TX_FAR
-	ld b, $4e
-	dec h
-	ld d, b
-asm_2391d: ; 0x1d19f
-	ld hl, $51a4
-	jr asm_b5ddf ; 0x1d1a2 $f
-	rla ; probably a TX_FAR
-	cpl
-	ld c, [hl]
-	dec h
-	ld d, b
-asm_ddec1: ; 0x1d1a9
-	ld hl, $51ae
-	jr asm_b5ddf ; 0x1d1ac $5
-	rla ; probably a TX_FAR
-	ld d, a
-	ld c, [hl]
-	dec h
-	ld d, b
-asm_b5ddf: ; 0x1d1b3
+	jr z, OaksLabLookAtSquirtle
+	jr OaksLabLookAtBulbasaur
+
+OaksLabLookAtCharmander ; 0x1d195
+	ld hl, OaksLabCharmanderText
+	jr OaksLabMonChoiceMenu
+OaksLabCharmanderText: ; 0x1d19a
+	TX_FAR _OaksLabCharmanderText ; 0x94e06
+	db $50
+; 0x1d19f
+
+OaksLabLookAtSquirtle: ; 0x1d19f
+	ld hl, OaksLabSquirtleText
+	jr OaksLabMonChoiceMenu
+OaksLabSquirtleText: ; 0x1d1a4
+	TX_FAR _OaksLabSquirtleText ; 0x94e2f
+	db $50
+; 0x1d1a9
+
+OaksLabLookAtBulbasaur: ; 0x1d1a9
+	ld hl, OaksLabBulbasaurText
+	jr OaksLabMonChoiceMenu
+OaksLabBulbasaurText: ; 0x1d1ae
+	TX_FAR _OaksLabBulbasaurText ; 0x94e57
+	db $50
+; 0x1d1b3
+
+OaksLabMonChoiceMenu: ; 0x1d1b3
 	call PrintText
 	ld a, $1
 	ld [$cc3c], a
-	call $35ec
+	call $35ec ; yes/no menu
 	ld a, [$cc26]
 	and a
-	jr nz, asm_6ccd7 ; 0x1d1c2 $5b
+	jr nz, OaksLabMonChoiceEnd
 	ld a, [$cf91]
 	ld [$d717], a
 	ld [$d11e], a
 	call GetMonName
 	ld a, [$cf13]
 	cp $2
-	jr nz, asm_5b538 ; 0x1d1d5 $4
+	jr nz, asm_1d1db ; 0x1d1d5 $4
 	ld a, $2b
-	jr asm_03e85 ; 0x1d1d9 $a
-asm_5b538: ; 0x1d1db
+	jr asm_1d1e5 ; 0x1d1d9 $a
+asm_1d1db: ; 0x1d1db
 	cp $3
-	jr nz, asm_f8b3f ; 0x1d1dd $4
+	jr nz, asm_1d1e3 ; 0x1d1dd $4
 	ld a, $2c
-	jr asm_03e85 ; 0x1d1e1 $2
-asm_f8b3f: ; 0x1d1e3
+	jr asm_1d1e5 ; 0x1d1e1 $2
+asm_1d1e3: ; 0x1d1e3
 	ld a, $2d
-asm_03e85: ; 0x1d1e5
+asm_1d1e5: ; 0x1d1e5
 	ld [$cc4d], a
 	ld a, $11
 	call Predef
 	ld a, $1
 	ld [$cc3c], a
-	ld hl, $5222
+	ld hl, OaksLabMonEnergeticText
 	call PrintText
-	ld hl, $5227
+	ld hl, OaksLabReceivedMonText
 	call PrintText
 	xor a
 	ld [$cc49], a
@@ -13311,21 +15824,26 @@ asm_03e85: ; 0x1d1e5
 	ld [$cd6b], a
 	ld a, $8
 	ld [W_OAKSLABCURSCRIPT], a
-asm_6ccd7: ; 0x1d21f
-	jp $24d7
+OaksLabMonChoiceEnd: ; 0x1d21f
+	jp TextScriptEnd
 ; 0x1d222
 
-UnnamedText_1d222: ; 0x1d222
-	TX_FAR _UnnamedText_1d222
+OaksLabMonEnergeticText: ; 0x1d222
+	TX_FAR _OaksLabMonEnergeticText
 	db $50
 ; 0x1d222 + 5 bytes
 
-INCBIN "baserom.gbc",$1d227,$1d243 - $1d227
+OaksLabReceivedMonText: ; 0x1d227
+	TX_FAR _OaksLabReceivedMonText ; 0x94ea0
+	db $11, $50
+; 0x1d22d
 
-UnnamedText_1d243: ; 0x1d243
-	TX_FAR _UnnamedText_1d243
+INCBIN "baserom.gbc",$1d22d,$1d243 - $1d22d
+
+OaksLabLastMonText: ; 0x1d243
+	TX_FAR _OaksLabLastMonText
 	db $50
-; 0x1d243 + 5 bytes
+; 0x1d248
 
 OaksLabText32:
 OaksLabText5: ; 0x1d248
@@ -13343,7 +15861,7 @@ OaksLabText5: ; 0x1d248
 	bit 5, a
 	jr z, .asm_b28b0 ; 0x1d264
 .asm_50e81 ; 0x1d266
-	ld hl, $531d
+	ld hl, UnnamedText_1d31d
 	call PrintText
 	ld a, $1
 	ld [$cc3c], a
@@ -13365,29 +15883,29 @@ OaksLabText5: ; 0x1d248
 	ld a, [$d72e]
 	bit 3, a
 	jr nz, .asm_4a5e0 ; 0x1d297
-	ld hl, $52f0
+	ld hl, UnnamedText_1d2f0
 	call PrintText
 	jr .asm_0f042 ; 0x1d29f
 .asm_4a5e0 ; 0x1d2a1
-	ld hl, $52f5
+	ld hl, UnnamedText_1d2f5
 	call PrintText
 	jr .asm_0f042 ; 0x1d2a7
 .asm_76269 ; 0x1d2a9
-	ld b,OAKS_PARCEL
+	ld b, OAKS_PARCEL
 	call $3493
 	jr nz, .asm_a8fcf ; 0x1d2ae
-	ld hl, $52fa
+	ld hl, UnnamedText_1d2fa
 	call PrintText
 	jr .asm_0f042 ; 0x1d2b6
 .asm_a8fcf ; 0x1d2b8
-	ld hl, $52ff
+	ld hl, OaksLabDeliverParcelText
 	call PrintText
 	call $500a
 	ld a, $f
 	ld [W_OAKSLABCURSCRIPT], a
 	jr .asm_0f042 ; 0x1d2c6
 .asm_333a2 ; 0x1d2c8
-	ld hl, $5309
+	ld hl, OaksLabAroundWorldText
 	call PrintText
 	jr .asm_0f042 ; 0x1d2ce
 .asm_f1adc ; 0x1d2d0
@@ -13396,53 +15914,53 @@ OaksLabText5: ; 0x1d248
 	set 4, [hl]
 	jr nz, .asm_17c30 ; 0x1d2d7
 	ld bc, (POKE_BALL << 8) | 5
-	call $3e2e
-	ld hl, $530e
+	call GiveItem
+	ld hl, OaksLabGivePokeballsText
 	call PrintText
 	jr .asm_0f042 ; 0x1d2e5
 .asm_17c30 ; 0x1d2e7
-	ld hl, $5318
+	ld hl, OaksLabPleaseVisitText
 	call PrintText
 .asm_0f042 ; 0x1d2ed
-	jp $24d7
+	jp TextScriptEnd
 ; 0x1d2f0
 
 UnnamedText_1d2f0: ; 0x1d2f0
 	TX_FAR _UnnamedText_1d2f0
 	db $50
-; 0x1d2f0 + 5 bytes
+; 0x1d2f5
 
 UnnamedText_1d2f5: ; 0x1d2f5
 	TX_FAR _UnnamedText_1d2f5
 	db $50
-; 0x1d2f5 + 5 bytes
+; 0x1d2fa
 
 UnnamedText_1d2fa: ; 0x1d2fa
 	TX_FAR _UnnamedText_1d2fa
 	db $50
-; 0x1d2fa + 5 bytes
+; 0x1d2ff
 
-INCBIN "baserom.gbc",$1d2ff,$1d304 - $1d2ff
-
-UnnamedText_1d304: ; 0x1d304
-	TX_FAR _UnnamedText_1d304
+OaksLabDeliverParcelText: ; 0x1d2ff
+	TX_FAR _OaksLabDeliverParcelText1 ; 0x94f69
+	db $11
+	TX_FAR _OaksLabDeliverParcelText2
 	db $50
-; 0x1d304 + 5 bytes
+; 0x1d309
 
-UnnamedText_1d309: ; 0x1d309
-	TX_FAR _UnnamedText_1d309
+OaksLabAroundWorldText: ; 0x1d309
+	TX_FAR _OaksLabAroundWorldText
 	db $50
-; 0x1d309 + 5 bytes
+; 0x1d30e
 
-INCBIN "baserom.gbc",$1d30e,$1d313 - $1d30e
-
-UnnamedText_1d313: ; 0x1d313
-	TX_FAR _UnnamedText_1d313
+OaksLabGivePokeballsText: ; 0x1d30e
+	TX_FAR _OaksLabGivePokeballsText1 ; 0x9506d
+	db $11
+	TX_FAR _OaksLabGivePokeballsText2
 	db $50
-; 0x1d313 + 5 bytes
+; 0x1d318
 
-UnnamedText_1d318: ; 0x1d318
-	TX_FAR _UnnamedText_1d318
+OaksLabPleaseVisitText: ; 0x1d318
+	TX_FAR _OaksLabPleaseVisitText
 	db $50
 ; 0x1d318 + 5 bytes
 
@@ -13456,9 +15974,9 @@ OaksLabText33:
 OaksLabText7: ; 0x1d322
 OaksLabText6: ; 0x1d322
 	db $08 ; asm
-	ld hl, $532c
+	ld hl, UnnamedText_1d32c
 	call PrintText
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_1d32c: ; 0x1d32c
 	TX_FAR _UnnamedText_1d32c
@@ -13473,9 +15991,9 @@ OaksLabText8: ; 0x1d331
 OaksLabText36:
 OaksLabText9: ; 0x1d336
 	db $08 ; asm
-	ld hl, $5340
+	ld hl, UnnamedText_1d340
 	call PrintText
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_1d340: ; 0x1d340
 	TX_FAR _UnnamedText_1d340
@@ -13484,162 +16002,165 @@ UnnamedText_1d340: ; 0x1d340
 
 OaksLabText17: ; 0x1d345
 	db $8
-	ld hl, $534f
+	ld hl, OaksLabRivalWaitingText
 	call PrintText
-	jp $24d7
+	jp TextScriptEnd
 ; 0x1d34f
 
-UnnamedText_1d34f: ; 0x1d34f
-	TX_FAR _UnnamedText_1d34f
+OaksLabRivalWaitingText: ; 0x1d34f
+	TX_FAR _OaksLabRivalWaitingText
 	db $50
 ; 0x1d34f + 5 bytes
 
 OaksLabText18: ; 0x1d354
 	db $8
-	ld hl, $535e
+	ld hl, OaksLabChooseMonText
 	call PrintText
-	jp $24d7
+	jp TextScriptEnd
 ; 0x1d35e
 
-UnnamedText_1d35e: ; 0x1d35e
-	TX_FAR _UnnamedText_1d35e
+OaksLabChooseMonText: ; 0x1d35e
+	TX_FAR _OaksLabChooseMonText
 	db $50
 ; 0x1d35e + 5 bytes
 
 OaksLabText19: ; 0x1d363
 	db $8
-	ld hl, $536d
+	ld hl, OaksLabRivalInterjectionText
 	call PrintText
-	jp $24d7
+	jp TextScriptEnd
 ; 0x1d36d
 
-UnnamedText_1d36d: ; 0x1d36d
-	TX_FAR _UnnamedText_1d36d
+OaksLabRivalInterjectionText: ; 0x1d36d
+	TX_FAR _OaksLabRivalInterjectionText
 	db $50
 ; 0x1d36d + 5 bytes
 
 OaksLabText20: ; 0x1d372
 	db $8
-	ld hl, $537c
+	ld hl, OaksLabBePatientText
 	call PrintText
-	jp $24d7
+	jp TextScriptEnd
 ; 0x1d37c
 
-UnnamedText_1d37c: ; 0x1d37c
-	TX_FAR _UnnamedText_1d37c
+OaksLabBePatientText: ; 0x1d37c
+	TX_FAR _OaksLabBePatientText
 	db $50
 ; 0x1d37c + 5 bytes
 
 OaksLabText12: ; 0x1d381
+	db $8
+	ld hl, OaksLabLeavingText
+	call PrintText
+	jp TextScriptEnd
+; 0x1d38b
 
-INCBIN "baserom.gbc",$1d381,$5
-
-INCBIN "baserom.gbc",$1d386,$1d38b - $1d386
-
-UnnamedText_1d38b: ; 0x1d38b
-	TX_FAR _UnnamedText_1d38b
+OaksLabLeavingText: ; 0x1d38b
+	TX_FAR _OaksLabLeavingText
 	db $50
 ; 0x1d38b + 5 bytes
 
 OaksLabText13: ; 0x1d390
+	db $8
+	ld hl, OaksLabRivalPickingMonText
+	call PrintText
+	jp TextScriptEnd
+; 0x1d39a
 
-INCBIN "baserom.gbc",$1d390,$5
-
-INCBIN "baserom.gbc",$1d395,$1d39a - $1d395
-
-UnnamedText_1d39a: ; 0x1d39a
-	TX_FAR _UnnamedText_1d39a
+OaksLabRivalPickingMonText: ; 0x1d39a
+	TX_FAR _OaksLabRivalPickingMonText
 	db $50
-; 0x1d39a + 5 bytes
+; 0x1d39f
 
 OaksLabText14: ; 0x1d39f
 	db $8
-	ld hl, $53a9
+	ld hl, OaksLabRivalReceivedMonText
 	call PrintText
-	jp $24d7
+	jp TextScriptEnd
 ; 0x1d3a9
 
-INCBIN "baserom.gbc",$1d3a9,$1d3af - $1d3a9
+OaksLabRivalReceivedMonText: ; 0x1d3a9
+	TX_FAR _OaksLabRivalReceivedMonText ; 0x95461
+	db $11, $50
+; 0x1d3af
 
-OaksLabText15: ; 0x1d3af to 0x1d3b9
+OaksLabText15: ; 0x1d3af
 	db $8
-	ld hl, $53b9
+	ld hl, OaksLabRivalChallengeText
 	call PrintText
-	jp $24d7
+	jp TextScriptEnd
 ; 0x1d3b9
 
-UnnamedText_1d3b9: ; 0x1d3b9
-	TX_FAR _UnnamedText_1d3b9
+OaksLabRivalChallengeText: ; 0x1d3b9
+	TX_FAR _OaksLabRivalChallengeText
 	db $50
-; 0x1d3b9 + 5 bytes
+; 0x1d3be
 
 UnnamedText_1d3be: ; 0x1d3be
 	TX_FAR _UnnamedText_1d3be
 	db $50
-; 0x1d3be + 5 bytes
+; 0x1d3c3
 
 UnnamedText_1d3c3: ; 0x1d3c3
 	TX_FAR _UnnamedText_1d3c3
 	db $50
-; 0x1d3c3 + 5 bytes
+; 0x1d3c8
 
 OaksLabText16: ; 0x1d3c8
 	db $8
-	ld hl, $53d2
+	ld hl, OaksLabRivalToughenUpText
 	call PrintText
-	jp $24d7
+	jp TextScriptEnd
 ; 0x1d3d2
 
-UnnamedText_1d3d2: ; 0x1d3d2
-	TX_FAR _UnnamedText_1d3d2
+OaksLabRivalToughenUpText: ; 0x1d3d2
+	TX_FAR _OaksLabRivalToughenUpText
 	db $50
-; 0x1d3d2 + 5 bytes
+; 0x1d3d7
 
 OaksLabText21: ; 0x1d3d7
-	TX_FAR _UnnamedText_1d3d7
+	TX_FAR _OaksLabText21
 	db $50
-; 0x1d3d7 + 5 bytes
+; 0x1d3dc
 
 OaksLabText22: ; 0x1d3dc
-	TX_FAR _UnnamedText_1d3dc
+	TX_FAR _OaksLabText22
 	db $50
-; 0x1d3dc + 5 bytes
+; 0x1d3e1
 
 OaksLabText23: ; 0x1d3e1
-	TX_FAR _UnnamedText_1d3e1
+	TX_FAR _OaksLabText23
 	db $50
-; 0x1d3e1 + 5 bytes
+; 0x1d3e6
 
 OaksLabText24: ; 0x1d3e6
-
-UnnamedText_1d3e6: ; 0x1d3e6
-	TX_FAR _UnnamedText_1d3e6
+	TX_FAR _OaksLabText24
 	db $50
-; 0x1d3e6 + 5 bytes
+; 0x1d3eb
 
 OaksLabText25: ; 0x1d3eb
-
-INCBIN "baserom.gbc",$1d3eb,$4
-	db $11
-	db $50
+	TX_FAR _OaksLabText25
+	db $11, $50
+; 0x1d3f1
 
 OaksLabText26: ; 0x1d3f1
-	TX_FAR _UnnamedText_1d3f1
+	TX_FAR _OaksLabText26
 	db $50
-; 0x1d3f1 + 5 bytes
+; 0x1d3f6
 
 OaksLabText27: ; 0x1d3f6
 	TX_FAR _OaksLabText27
 	db $50
+; 0x1d3fb
 
 OaksLabText38:
 OaksLabText37:
 OaksLabText11:
 OaksLabText10: ; 0x1d3fb
 	db $08 ; asm
-	ld hl, $5405
+	ld hl, UnnamedText_1d405
 	call PrintText
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_1d405: ; 0x1d405
 	TX_FAR _UnnamedText_1d405
@@ -13837,12 +16358,12 @@ ViridianHouseText2: ; 0x1d59a
 
 ViridianHouseText3: ; 0x1d59f
 	db $08 ; asm
-	ld hl, $55b1
+	ld hl, UnnamedText_1d5b1
 	call PrintText
-	ld a,SPEAROW
+	ld a, SPEAROW
 	call $13d0
 	call $3748
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_1d5b1: ; 0x1d5b1
 	TX_FAR _UnnamedText_1d5b1
@@ -13893,7 +16414,7 @@ PewterHouse1Text1: ; 0x1d5fc
 	ld a, $3
 	call $13d0
 	call $3748
-	jp $24d7
+	jp TextScriptEnd
 
 PewterHouse1Text2: ; 0x1d60c
 	TX_FAR _PewterHouse1Text2
@@ -13984,14 +16505,14 @@ CeruleanHouseTrashedText1: ; 0x1d68f
 	call Predef
 	and b
 	jr z, .asm_f8734 ; 0x1d698
-	ld hl, $56b0
+	ld hl, UnnamedText_1d6b0
 	call PrintText
 	jr .asm_8dfe9 ; 0x1d6a0
 .asm_f8734 ; 0x1d6a2
-	ld hl, $56ab
+	ld hl, UnnamedText_1d6ab
 	call PrintText
 .asm_8dfe9 ; 0x1d6a8
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_1d6ab: ; 0x1d6ab
 	TX_FAR _UnnamedText_1d6ab
@@ -14056,7 +16577,7 @@ CeruleanHouse2Text2: ; 0x1d702
 	ld [W_WHICHTRADE], a
 	ld a, $54
 	call Predef
-	jp $24d7
+	jp TextScriptEnd
 
 CeruleanHouse2Object: ; 0x1d710 (size=32)
 	db $a ; border tile
@@ -14095,17 +16616,17 @@ BikeShopText1: ; 0x1d745
 	ld a, [$d75f]
 	bit 0, a
 	jr z, .asm_260d4 ; 0x1d74b
-	ld hl, $582f
+	ld hl, UnnamedText_1d82f
 	call PrintText
 	jp $57f5
 .asm_260d4 ; 0x1d756
-	ld b,BIKE_VOUCHER
+	ld b, BIKE_VOUCHER
 	call $3493
 	jr z, .asm_41190 ; 0x1d75b
-	ld hl, $581f
+	ld hl, UnnamedText_1d81f
 	call PrintText
-	ld bc,(BICYCLE << 8) | 1
-	call $3e2e
+	ld bc, (BICYCLE << 8) | 1
+	call GiveItem
 	jr nc, .asm_d0d90 ; 0x1d769
 	ld a, $2d
 	ldh [$db], a
@@ -14114,15 +16635,15 @@ BikeShopText1: ; 0x1d745
 	call Bankswitch
 	ld hl, $d75f
 	set 0, [hl]
-	ld hl, $5824
+	ld hl, UnnamedText_1d824
 	call PrintText
 	jr .asm_99ef2 ; 0x1d782
 .asm_d0d90 ; 0x1d784
-	ld hl, $5834
+	ld hl, UnnamedText_1d834
 	call PrintText
 	jr .asm_99ef2 ; 0x1d78a
 .asm_41190 ; 0x1d78c
-	ld hl, $5810
+	ld hl, UnnamedText_1d810
 	call PrintText
 	xor a
 	ld [$cc26], a
@@ -14148,7 +16669,7 @@ BikeShopText1: ; 0x1d745
 	ld hl, $c3e4
 	ld de, $5807
 	call $1955
-	ld hl, $5815
+	ld hl, UnnamedText_1d815
 	call PrintText
 	call $3abe
 	bit 1, a
@@ -14158,13 +16679,13 @@ BikeShopText1: ; 0x1d745
 	ld a, [$cc26]
 	and a
 	jr nz, .asm_b7579 ; 0x1d7e7
-	ld hl, $581a
+	ld hl, UnnamedText_1d81a
 	call PrintText
 .asm_b7579 ; 0x1d7ef
-	ld hl, $582a
+	ld hl, UnnamedText_1d82a
 	call PrintText
 .asm_99ef2 ; 0x1d7f5
-	jp $24d7
+	jp TextScriptEnd
 
 INCBIN "baserom.gbc",$1d7f8,$1d810 - $1d7f8
 
@@ -14188,7 +16709,9 @@ UnnamedText_1d81f: ; 0x1d81f
 	db $50
 ; 0x1d81f + 5 bytes
 
-INCBIN "baserom.gbc",$1d824,$1d82a - $1d824
+UnnamedText_1d824: ; 0x1d824
+	TX_FAR _UnnamedText_1d824 ; 0x98eb2
+	db $11, $50
 
 UnnamedText_1d82a: ; 0x1d82a
 	TX_FAR _UnnamedText_1d82a
@@ -14207,9 +16730,9 @@ UnnamedText_1d834: ; 0x1d834
 
 BikeShopText2: ; 0x1d839
 	db $08 ; asm
-	ld hl, $5843
+	ld hl, UnnamedText_1d843
 	call PrintText
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_1d843: ; 0x1d843
 	TX_FAR _UnnamedText_1d843
@@ -14220,12 +16743,12 @@ BikeShopText3: ; 0x1d848
 	db $08 ; asm
 	ld a, [$d75f]
 	bit 0, a
-	ld hl, $5861
+	ld hl, UnnamedText_1d861
 	jr nz, .asm_34d2d ; 0x1d851
-	ld hl, $585c
+	ld hl, UnnamedText_1d85c
 .asm_34d2d ; 0x1d856
 	call PrintText
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_1d85c: ; 0x1d85c
 	TX_FAR _UnnamedText_1d85c
@@ -14279,14 +16802,14 @@ LavenderHouse1Text1: ; 0x1d8b8
 	ld a, [$d7e0]
 	bit 7, a
 	jr nz, .asm_72e5d ; 0x1d8be
-	ld hl, $58d1
+	ld hl, UnnamedText_1d8d1
 	call PrintText
 	jr .asm_6957f ; 0x1d8c6
 .asm_72e5d ; 0x1d8c8
-	ld hl, $58d6
+	ld hl, UnnamedText_1d8d6
 	call PrintText
 .asm_6957f ; 0x1d8ce
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_1d8d1: ; 0x1d8d1
 	TX_FAR _UnnamedText_1d8d1
@@ -14303,14 +16826,14 @@ LavenderHouse1Text2: ; 0x1d8db
 	ld a, [$d7e0]
 	bit 7, a
 	jr nz, .asm_06470 ; 0x1d8e1
-	ld hl, $58f4
+	ld hl, UnnamedText_1d8f4
 	call PrintText
 	jr .asm_3d208 ; 0x1d8e9
 .asm_06470 ; 0x1d8eb
-	ld hl, $58f9
+	ld hl, UnnamedText_1d8f9
 	call PrintText
 .asm_3d208 ; 0x1d8f1
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_1d8f4: ; 0x1d8f4
 	TX_FAR _UnnamedText_1d8f4
@@ -14327,14 +16850,14 @@ LavenderHouse1Text3: ; 0x1d8fe
 	db $8
 	ld a, $2f
 	call $13d0
-	jp $24d7
+	jp TextScriptEnd
 
 LavenderHouse1Text4: ; 0x1d90b
 	TX_FAR _LavenderHouse1Text4
 	db $8
 	ld a, $a7
 	call $13d0
-	jp $24d7
+	jp TextScriptEnd
 ; 0x1d918
 
 LavenderHouse1Text5: ; 0x1d918
@@ -14342,37 +16865,37 @@ LavenderHouse1Text5: ; 0x1d918
 	ld a, [$d76c]
 	bit 0, a
 	jr nz, .asm_15ac2 ; 0x1d91e
-	ld hl, $594c
+	ld hl, UnnamedText_1d94c
 	call PrintText
 	ld bc, (POKE_FLUTE << 8) | 1
-	call $3e2e
+	call GiveItem
 	jr nc, .asm_5ce36 ; 0x1d92c
-	ld hl, $5951
+	ld hl, UnnamedText_1d951
 	call PrintText
 	ld hl, $d76c
 	set 0, [hl]
 	jr .asm_da749 ; 0x1d939
 .asm_5ce36 ; 0x1d93b
-	ld hl, $595b
+	ld hl, UnnamedText_1d95b
 	call PrintText
 	jr .asm_da749 ; 0x1d941
 .asm_15ac2 ; 0x1d943
-	ld hl, $5960
+	ld hl, UnnamedText_1d960
 	call PrintText
 .asm_da749 ; 0x1d949
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_1d94c: ; 0x1d94c
 	TX_FAR _UnnamedText_1d94c
 	db $50
 ; 0x1d94c + 5 bytes
 
-INCBIN "baserom.gbc",$1d951,$1d956 - $1d951
-
-UnnamedText_1d956: ; 0x1d956
-	TX_FAR _UnnamedText_1d956
+UnnamedText_1d951: ; 0x1d951
+	TX_FAR _UnnamedText_1d951 ; 0x99ffb
+	db $11
+	TX_FAR _UnnamedText_1d956 ; 0x9a011
 	db $50
-; 0x1d956 + 5 bytes
+; 0x1d95b
 
 UnnamedText_1d95b: ; 0x1d95b
 	TX_FAR _UnnamedText_1d95b
@@ -14430,7 +16953,7 @@ LavenderHouse2Text1: ; 0x1d9b6
 	db $8
 	ld a, $11
 	call $13d0
-	jp $24d7
+	jp TextScriptEnd
 ; 0x1d9c3
 
 LavenderHouse2Text2: ; 0x1d9c3
@@ -14438,14 +16961,14 @@ LavenderHouse2Text2: ; 0x1d9c3
 	ld a, [$d7e0]
 	bit 7, a
 	jr nz, .asm_65711 ; 0x1d9c9
-	ld hl, $59dc
+	ld hl, UnnamedText_1d9dc
 	call PrintText
 	jr .asm_64be1 ; 0x1d9d1
 .asm_65711 ; 0x1d9d3
-	ld hl, $59e1
+	ld hl, UnnamedText_1d9e1
 	call PrintText
 .asm_64be1 ; 0x1d9d9
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_1d9dc: ; 0x1d9dc
 	TX_FAR _UnnamedText_1d9dc
@@ -14491,10 +17014,10 @@ INCBIN "baserom.gbc",$1da15,$41
 NameRaterText1: ; 0x1da56
 	db $8
 	call $36f4
-	ld hl, $5ab3
+	ld hl, UnnamedText_1dab3
 	call $5a15
 	jr nz, .asm_1daae ; 0x1da60 $4c
-	ld hl, $5ab8
+	ld hl, UnnamedText_1dab8
 	call PrintText
 	xor a
 	ld [$d07d], a
@@ -14509,23 +17032,23 @@ NameRaterText1: ; 0x1da56
 	jr c, .asm_1daae ; 0x1da80 $2c
 	call $15b4
 	call $5a20
-	ld hl, $5ad1
+	ld hl, UnnamedText_1dad1
 	jr c, .asm_1daa8 ; 0x1da8b $1b
-	ld hl, $5abd
+	ld hl, UnnamedText_1dabd
 	call $5a15
 	jr nz, .asm_1daae ; 0x1da93 $19
-	ld hl, $5ac2
+	ld hl, UnnamedText_1dac2
 	call PrintText
 	ld b, $1
 	ld hl, $655c
 	call Bankswitch
 	jr c, .asm_1daae ; 0x1daa3 $9
-	ld hl, $5ac7
+	ld hl, UnnamedText_1dac7
 .asm_1daa8
 	call PrintText
-	jp $24d7
+	jp TextScriptEnd
 .asm_1daae
-	ld hl, $5acc
+	ld hl, UnnamedText_1dacc
 	jr .asm_1daa8 ; 0x1dab1 $f5
 ; 0x1dab3
 
@@ -14606,7 +17129,7 @@ VermilionHouse1Text2: ; 0x1db0b
 	ld a, $24
 	call $13d0
 	call $3748
-	jp $24d7
+	jp TextScriptEnd
 
 VermilionHouse1Text3: ; 0x1db1b
 	TX_FAR _VermilionHouse1Text3
@@ -14737,7 +17260,7 @@ CeladonMansion5Text2: ; 0x1dd46
 	ld a, $11
 	call Predef
 .asm_24365 ; 0x1dd59
-	jp $24d7
+	jp TextScriptEnd
 
 CeladonMansion5Object: ; 0x1dd5c (size=32)
 	db $a ; border tile
@@ -14824,7 +17347,7 @@ SaffronHouse1Text2: ; 0x1dded
 	db $8
 	ld a, $24
 	call $13d0
-	jp $24d7
+	jp TextScriptEnd
 ; 0x1ddfa
 
 SaffronHouse1Text3: ; 0x1ddfa
@@ -14874,32 +17397,35 @@ SaffronHouse2Text1: ; 0x1de41
 	ld a, [$d7bd]
 	bit 0, a
 	jr nz, .asm_9e72b ; 0x1de47
-	ld hl, $5e75
+	ld hl, UnnamedText_1de75
 	call PrintText
 	ld bc,(TM_29 << 8) | 1
-	call $3e2e
+	call GiveItem
 	jr nc, .asm_4b1da ; 0x1de55
-	ld hl, $5e7a
+	ld hl, UnnamedText_1de7a
 	call PrintText
 	ld hl, $d7bd
 	set 0, [hl]
 	jr .asm_fe4e1 ; 0x1de62
 .asm_4b1da ; 0x1de64
-	ld hl, $5e85
+	ld hl, UnnamedText_1de85
 	call PrintText
 	jr .asm_fe4e1 ; 0x1de6a
 .asm_9e72b ; 0x1de6c
-	ld hl, $5e80
+	ld hl, UnnamedText_1de80
 	call PrintText
 .asm_fe4e1 ; 0x1de72
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_1de75: ; 0x1de75
 	TX_FAR _UnnamedText_1de75
 	db $50
 ; 0x1de75 + 5 bytes
 
-INCBIN "baserom.gbc",$1de7a,$1de80 - $1de7a
+UnnamedText_1de7a: ; 0x1de7a
+	TX_FAR _UnnamedText_1de7a ; 0xa252a
+	db $0B, $50
+; 0x1de80
 
 UnnamedText_1de80: ; 0x1de80
 	TX_FAR _UnnamedText_1de80
@@ -14991,7 +17517,7 @@ Route2HouseText2: ; 0x1def9
 	ld [W_WHICHTRADE], a
 	ld a, $54
 	call Predef
-	jp $24d7
+	jp TextScriptEnd
 
 Route2HouseObject: ; 0x1df07 (size=32)
 	db $a ; border tile
@@ -15021,7 +17547,7 @@ Route5Gate_h: ; 0x1df27 to 0x1df33 (12 bytes) (bank=7) (id=70)
 Route5GateScript: ; 0x1df33
 	call $3c3c
 	ld a, [$d662]
-	ld hl, $5f3f
+	ld hl, Route5GateScripts
 	jp $3d97
 ; 0x1df3f
 
@@ -15082,29 +17608,28 @@ Route5GateText1: ; 0x1dfaa
 	ld a, [$ff00+$db]
 	and a
 	jr nz, .asm_768a2 ; 0x1dfbd $11
-	ld hl, $5fe7
+	ld hl, UnnamedText_1dfe7
 	call PrintText
 	call $5f43
 	ld a, $1
 	ld [$d662], a
-	jp $24d7
+	jp TextScriptEnd
 .asm_768a2 ; 0x1dfd0
-	ld hl, $5fec
+	ld hl, UnnamedText_1dfec
 	call PrintText
 	ld hl, $d728
 	set 6, [hl]
-	jp $24d7
+	jp TextScriptEnd
 .asm_88856 ; 0x1dfde
-	ld hl, $5ff6
+	ld hl, UnnamedText_1dff6
 	call PrintText
-	jp $24d7
+	jp TextScriptEnd
 ; 0x1dfe7
 
 Route8GateText2:
 Route7GateText2:
 Route6GateText2:
 Route5GateText2: ; 0x1dfe7
-
 UnnamedText_1dfe7: ; 0x1dfe7
 	TX_FAR _UnnamedText_1dfe7
 	db $50
@@ -15159,7 +17684,7 @@ Route6Gate_h: ; 0x1e031 to 0x1e03d (12 bytes) (bank=7) (id=73)
 
 Route6GateScript: ; 0x1e03d
 	call $3c3c
-	ld hl, $604a
+	ld hl, Route6GateScripts
 	ld a, [$d636]
 	call $3d97
 	ret
@@ -15241,7 +17766,7 @@ Route7Gate_h: ; 0x1e0f4 to 0x1e100 (12 bytes) (bank=7) (id=76)
 Route7GateScript: ; 0x1e100
 	call $3c3c
 	ld a, [$d663]
-	ld hl, $610d
+	ld hl, Route7GateScripts
 	call $3d97
 	ret
 ; 0x1e10d
@@ -15322,7 +17847,7 @@ Route8Gate_h: ; 0x1e1bb to 0x1e1c7 (12 bytes) (bank=7) (id=79)
 
 Route8GateScript: ; 0x1e1c7
 	call $3c3c
-	ld hl, $61d3
+	ld hl, Route8GateScripts
 	ld a, [$d637]
 	jp $3d97
 ; 0x1e1d3
@@ -15462,7 +17987,7 @@ asm_234cc:
 	call $31cc
 	ld a, [$da39]
 	ld [$d663], a
-	jp $24d7
+	jp TextScriptEnd
 ; 0x1e374
 
 PowerPlantText1: ; maybe
@@ -15520,7 +18045,7 @@ PowerPlantText9:
 	ld a, $4b
 	call $13d0
 	call $3748
-	jp $24d7
+	jp TextScriptEnd
 ; 0x1e3bf
 
 PowerPlantObject: ; 0x1e3bf (size=135)
@@ -15618,48 +18143,50 @@ Route16HouseText1: ; 0x1e5ff
 	db $08 ; asm
 	ld a, [$d7e0]
 	bit 6, a
-	ld hl, $6636
+	ld hl, HM02ExplanationText
 	jr nz, .asm_13616 ; 0x1e608
-	ld hl, $662b
+	ld hl, Route16HouseText3
 	call PrintText
-	ld bc,(HM_02 << 8) | 1
-	call $3e2e
+	ld bc, (HM_02 << 8) | 1
+	call GiveItem
 	jr nc, .asm_d3ee3 ; 0x1e616
 	ld hl, $d7e0
 	set 6, [hl]
-	ld hl, $6630
+	ld hl, ReceivedHM02Text
 	jr .asm_13616 ; 0x1e620
 .asm_d3ee3 ; 0x1e622
-	ld hl, $663b
+	ld hl, HM02NoRoomText
 .asm_13616 ; 0x1e625
 	call PrintText
-	jp $24d7
+	jp TextScriptEnd
 
-UnnamedText_1e62b: ; 0x1e62b
-	TX_FAR _UnnamedText_1e62b
+Route16HouseText3: ; 0x1e62b
+	TX_FAR _Route16HouseText3
 	db $50
 ; 0x1e62b + 5 bytes
 
-INCBIN "baserom.gbc",$1e630,$1e636 - $1e630
+ReceivedHM02Text: ; 0x1e630
+	TX_FAR _ReceivedHM02Text ; 0x8ce66
+	db $11, $50
 
-UnnamedText_1e636: ; 0x1e636
-	TX_FAR _UnnamedText_1e636
+HM02ExplanationText: ; 0x1e636
+	TX_FAR _HM02ExplanationText
 	db $50
 ; 0x1e636 + 5 bytes
 
-UnnamedText_1e63b: ; 0x1e63b
-	TX_FAR _UnnamedText_1e63b
+HM02NoRoomText: ; 0x1e63b
+	TX_FAR _HM02NoRoomText
 	db $50
 ; 0x1e63b + 5 bytes
 
 Route16HouseText2: ; 0x1e640
 	db $08 ; asm
-	ld hl, $6652
+	ld hl, UnnamedText_1e652
 	call PrintText
-	ld a,FEAROW
+	ld a, FEAROW
 	call $13d0
 	call $3748
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_1e652: ; 0x1e652
 	TX_FAR _UnnamedText_1e652
@@ -15693,7 +18220,7 @@ Route22Gate_h: ; 0x1e677 to 0x1e683 (12 bytes) (bank=7) (id=193)
 
 Route22GateScript: ; 0x1e683
 	call $3c3c
-	ld hl, $669e
+	ld hl, Route22GateScripts
 	ld a, [$d60e]
 	call $3d97
 	ld a, [$d361]
@@ -15744,28 +18271,39 @@ Route22GateText1: ; 0x1e6e1
 	ld a, [$d356]
 	bit 0, a
 	jr nz, .asm_8a809 ; 0x1e6e7 $d
-	ld hl, $6704
+	ld hl, UnnamedText_1e704
 	call PrintText
 	call $66ba
 	ld a, $1
 	jr .asm_20f7e ; 0x1e6f4 $8
 .asm_8a809 ; 0x1e6f6
-	ld hl, $671a
+	ld hl, UnnamedText_1e71a
 	call PrintText
 	ld a, $2
 .asm_20f7e ; 0x1e6fe
 	ld [$d60e], a
-	jp $24d7
+	jp TextScriptEnd
 ; 0x1e704
 
-INCBIN "baserom.gbc",$1e704,$1e715 - $1e704
+UnnamedText_1e704: ; 0x1e704
+	TX_FAR _UnnamedText_1e704 ; 0x8cfbb
+	db $8
+	ld a, $a5
+	call $3740
+	call $3748
+	ld hl, $6715
+	ret
+; 0x1e715
 
 UnnamedText_1e715: ; 0x1e715
 	TX_FAR _UnnamedText_1e715
 	db $50
-; 0x1e715 + 5 bytes
+; 0x1e71a
 
-INCBIN "baserom.gbc",$1e71a,$6
+UnnamedText_1e71a: ; 0x1e71a
+	TX_FAR _UnnamedText_1e71a ; 0x8d03e
+	db $0B, $50
+; 0x1e720
 
 Route22GateObject: ; 0x1e720 (size=42)
 	db $a ; border tile
@@ -15801,7 +18339,7 @@ BillsHouse_h: ; 0x1e75e to 0x1e76a (12 bytes) (bank=7) (id=88)
 BillsHouseScript: ; 0x1e76a
 	call $3c3c
 	ld a, [$d661]
-	ld hl, $6776
+	ld hl, BillsHouseScripts
 	jp $3d97
 ; 0x1e776
 
@@ -15824,53 +18362,51 @@ BillsHouseText4:
 
 BillsHouseText1: ; 0x1e83d
 	db $8
-	ld hl, $6865
+	ld hl, UnnamedText_1e865
 	call PrintText
 	call $35ec
 	ld a, [$cc26]
 	and a
 	jr nz, asm_6b196 ; 0x1e84b $d
 asm_4d03c:
-	ld hl, $686a
+	ld hl, UnnamedText_1e86a
 	call PrintText
 	ld a, $1
 	ld [$d661], a
 	jr asm_fd4e2 ; 0x1e858 $8
 asm_6b196: ; 0x1e85a
-	ld hl, $686f
+	ld hl, UnnamedText_1e86f
 	call PrintText
 	jr asm_4d03c ; 0x1e860 $eb
 asm_fd4e2 ; 0x1e862
-	jp $24d7
+	jp TextScriptEnd
 
-; dunno what this is (rla indicates $17 or TX_FAR)
-	rla
-	ld h, a
-	ld d, d
-	inc hl
-	ld d, b
-	rla
-	ld b, l
-	ld d, e
-	inc hl
-	ld d, b
-	rla
-	sub c
-	ld d, e
-	inc hl
-	ld d, b
+UnnamedText_1e865: ; 0x1e865
+	TX_FAR _UnnamedText_1e865 ; 0x8d267
+	db $50
+; 0x1e86a
+
+UnnamedText_1e86a: ; 0x1e86a
+	TX_FAR _UnnamedText_1e86a ; 0x8d345
+	db $50
+; 0x1e86f
+
+UnnamedText_1e86f: ; 0x1e86f
+	TX_FAR _UnnamedText_1e86f ; 0x8d391
+	db $50
+; 0x1e874
 
 BillsHouseText2: ; 0x1e874
 	db $08 ; asm
 	ld a, [$d7f2]
 	bit 4, a
 	jr nz, .asm_5491f ; 0x1e87a
-	ld hl, $68ba
+	ld hl, BillThankYouText
 	call PrintText
-	ld bc,(S_S__TICKET << 8) | 1
-	call $3e2e
+	ld bc, (S_S__TICKET << 8) | 1
+	call GiveItem
 	jr nc, .asm_18a67 ; 0x1e888
-	ld hl, $68bf
+	ld hl, SSTicketReceivedText
 	call PrintText
 	ld hl, $d7f2
 	set 4, [hl]
@@ -15883,24 +18419,26 @@ BillsHouseText2: ; 0x1e874
 	ld a, $11
 	call Predef
 .asm_5491f ; 0x1e8a9
-	ld hl, $68cb
+	ld hl, UnnamedText_1e8cb
 	call PrintText
 	jr .asm_bd408 ; 0x1e8af
 .asm_18a67 ; 0x1e8b1
-	ld hl, $68c6
+	ld hl, SSTicketNoRoomText
 	call PrintText
 .asm_bd408 ; 0x1e8b7
-	jp $24d7
+	jp TextScriptEnd
 
-UnnamedText_1e8ba: ; 0x1e8ba
-	TX_FAR _UnnamedText_1e8ba
+BillThankYouText: ; 0x1e8ba
+	TX_FAR _BillThankYouText
 	db $50
 ; 0x1e8ba + 5 bytes
 
-INCBIN "baserom.gbc",$1e8bf,$1e8c6 - $1e8bf
+SSTicketReceivedText: ; 0x1e8bf
+	TX_FAR _SSTicketReceivedText ; 0x8d499
+	db $11, $6, $50
 
-UnnamedText_1e8c6: ; 0x1e8c6
-	TX_FAR _UnnamedText_1e8c6
+SSTicketNoRoomText: ; 0x1e8c6
+	TX_FAR _SSTicketNoRoomText
 	db $50
 ; 0x1e8c6 + 5 bytes
 
@@ -15911,9 +18449,9 @@ UnnamedText_1e8cb: ; 0x1e8cb
 
 BillsHouseText3: ; 0x1e8d0
 	db $08 ; asm
-	ld hl, $68da
+	ld hl, UnnamedText_1e8da
 	call PrintText
-	jp $24d7
+	jp TextScriptEnd
 ; 0x1e8da
 
 UnnamedText_1e8da: ; 0x1e8da
@@ -18491,7 +21029,7 @@ Function674B: ; 674B
 	ld bc,4
 	call CopyData
 
-	ld hl,AIBattleWithdrawText
+	ld hl, AIBattleWithdrawText
 	call PrintText
 
 	ld a,1
@@ -18631,7 +21169,7 @@ AIPrintItemUse_:
 	ld a,[$CF05]
 	ld [$D11E],a
 	call GetItemName
-	ld hl,AIBattleUseItemText
+	ld hl, AIBattleUseItemText
 	jp PrintText
 
 AIBattleUseItemText:
@@ -21083,7 +23621,7 @@ EnemySendOut: ; 490E
 	ld a,[$D355]
 	bit 6,a
 	jr nz,.next4\@
-	ld hl,TrainerAboutToUseText
+	ld hl, TrainerAboutToUseText
 	call PrintText
 	ld hl,$C42C
 	ld bc,$0801
@@ -21811,7 +24349,65 @@ UnnamedText_3ddca: ; 0x3ddca
 	db $50
 ; 0x3ddca + 5 bytes
 
-INCBIN "baserom.gbc",$3ddcf,$3e2ac - $3ddcf
+INCBIN "baserom.gbc",$3ddcf,$3e04f - $3ddcf
+
+; azure heights claims "the fastest pokémon (who are,not coincidentally,
+; among the most popular) tend to CH about 20 to 25% of the time."
+CriticalHitProbability: ; 0x3e04f
+	ld a, [hld]                  ; read base power from RAM
+	and a
+	ret z                        ; do nothing if zero
+	dec hl
+	ld c, [hl]                   ; read move id
+	ld a, [de]
+	bit 2, a
+	jr nz, .asm_3e061
+	sla b
+	jr nc, .asm_3e063
+	ld b, $ff
+	jr .asm_3e063
+.asm_3e061
+	srl b
+.asm_3e063
+	ld hl, HighCriticalMoves      ; table of high critical hit moves
+.Loop
+	ld a, [hli]                  ; read move from move table
+	cp c                         ; does it match the move about to be used?
+	jr z, .HighCritical          ; if so, the move about to be used is a high critical hit ratio move 
+	inc a                        ; move on to the next move, FF terminates loop
+	jr nz, .Loop                 ; check the next move in HighCriticalMoves
+	srl b                        ; /2 for regular move (effective 1/512?)
+	jr .SkipHighCritical         ; continue as a normal move
+.HighCritical
+	sla b                        ; *2 for high critical hit moves
+	jr nc, .asm_3e077
+	ld b, $ff                    ; set to FF (max) on overflow
+.asm_3e077
+	sla b                        ; *4 for high critical move (effective 1/64?)
+	jr nc, .SkipHighCritical
+	ld b, $ff
+.SkipHighCritical
+	call $6e9b                   ; probably generates a random value, in "a"
+	rlc a
+	rlc a
+	rlc a
+	cp b                         ; check a against $ff
+	ret nc                       ; no critical hit if no borrow
+	ld a, $1
+	ld [$d05e], a                ; set critical hit flag
+	ret
+; 0x3e08e
+
+; high critical hit moves
+HighCriticalMoves: ; 0x3e08e
+	db KARATE_CHOP
+	db RAZOR_LEAF
+	db CRABHAMMER
+	db SLASH
+	db $FF
+; 0x3e093
+
+INCBIN "baserom.gbc",$3e093,$3e2ac - $3e093
 
 UnnamedText_3e2ac: ; 0x3e2ac
 	TX_FAR _UnnamedText_3e2ac
@@ -23807,17 +26403,17 @@ LavenderTownTexts: ; 0x4410e
 
 LavenderTownText1: ; 0x44120
 	db $08 ; asm
-	ld hl, $413c
+	ld hl, UnnamedText_4413c
 	call PrintText
 	call $35ec
 	ld a, [$cc26]
 	and a
-	ld hl, $4146
+	ld hl, UnnamedText_44146
 	jr nz, .asm_40831 ; 0x44131
-	ld hl, $4141
+	ld hl, UnnamedText_44141
 .asm_40831 ; 0x44136
 	call PrintText
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_4413c: ; 0x4413c
 	TX_FAR _UnnamedText_4413c
@@ -24054,7 +26650,7 @@ Mansion1Text1: ; 0x44341
 	db $08 ; asm
 	ld hl, $4334
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_4434b: ; 0x4434b
 	TX_FAR _UnnamedText_4434b
@@ -24181,7 +26777,7 @@ RockTunnel1Text7:
 	ld hl, $454d
 asm_0c916: ; 0x44582
 	call $31cc
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_44588: ; 0x44588
 	TX_FAR _UnnamedText_44588
@@ -24486,25 +27082,25 @@ VictoryRoad3Text1: ; 0x44a69
 	db $08 ; asm
 	ld hl, $4a38
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 VictoryRoad3Text2: ; 0x44a73
 	db $08 ; asm
 	ld hl, $4a44
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 VictoryRoad3Text3: ; 0x44a7d
 	db $08 ; asm
 	ld hl, $4a50
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 VictoryRoad3Text4: ; 0x44a87
 	db $08 ; asm
 	ld hl, $4a5c
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_44a91: ; 0x44a91
 	TX_FAR _UnnamedText_44a91
@@ -24628,31 +27224,31 @@ RocketHideout1Text1: ; 0x44c5f
 	db $08 ; asm
 	ld hl, $4c22
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 RocketHideout1Text2: ; 0x44c69
 	db $08 ; asm
 	ld hl, $4c2e
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 RocketHideout1Text3: ; 0x44c73
 	db $08 ; asm
 	ld hl, $4c3a
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 RocketHideout1Text4: ; 0x44c7d
 	db $08 ; asm
 	ld hl, $4c46
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 RocketHideout1Text5: ; 0x44c87
 	db $08 ; asm
 	ld hl, $4c52
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 INCBIN "baserom.gbc",$44c91,$44ca1 - $44c91
 
@@ -24786,7 +27382,7 @@ RocketHideout2Text1: ; 0x450de
 	db $08 ; asm
 	ld hl, $50d1
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_450e8: ; 0x450e8
 	TX_FAR _UnnamedText_450e8
@@ -24861,7 +27457,7 @@ RocketHideout3Text1: ; 0x4531b
 	db $08 ; asm
 	ld hl, $5302
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_45325: ; 0x45325
 	TX_FAR _UnnamedText_45325
@@ -24882,7 +27478,7 @@ RocketHideout3Text2: ; 0x45334
 	db $08 ; asm
 	ld hl, $530e
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_4533e: ; 0x4533e
 	TX_FAR _UnnamedText_4533e
@@ -24952,13 +27548,13 @@ RocketHideout4Text1: ; 0x4553a
 	ld a, [$d81b]
 	bit 7, a
 	jp nz, $5571
-	ld hl, $557a
+	ld hl, UnnamedText_4557a
 	call PrintText
 	ld hl, $d72d
 	set 6, [hl]
 	set 7, [hl]
-	ld hl, $557f
-	ld de, $557f
+	ld hl, UnnamedText_4557f
+	ld de, $557f ; probably UnnamedText_4557f
 	call $3354
 	ldh a, [$8c]
 	ld [$cf13], a
@@ -24970,10 +27566,10 @@ RocketHideout4Text1: ; 0x4553a
 	ld [$d634], a
 	ld [$da39], a
 	jr .asm_209f0 ; 0x4556f
-	ld hl, $5584
+	ld hl, RocketHideout4Text10
 	call PrintText
 .asm_209f0 ; 0x45577
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_4557a: ; 0x4557a
 	TX_FAR _UnnamedText_4557a
@@ -24992,9 +27588,9 @@ RocketHideout4Text10: ; 0x45584
 
 RocketHideout4Text2: ; 0x45589
 	db $08 ; asm
-	ld hl, $5515
+	ld hl, $5515 ; XXX
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_45593: ; 0x45593
 	TX_FAR _UnnamedText_45593
@@ -25015,7 +27611,7 @@ RocketHideout4Text3: ; 0x455a2
 	db $08 ; asm
 	ld hl, $5521
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_455ac: ; 0x455ac
 	TX_FAR _UnnamedText_455ac
@@ -25036,7 +27632,7 @@ RocketHideout4Text4: ; 0x455bb
 	db $08 ; asm
 	ld hl, $552d
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_455c5: ; 0x455c5
 	TX_FAR _UnnamedText_455c5
@@ -25116,7 +27712,7 @@ RocketHideoutElevatorTexts: ; 0x4576b
 
 RocketHideoutElevatorText1: ; 0x4576d
 	db $08 ; asm
-	ld b,LIFT_KEY
+	ld b, LIFT_KEY
 	call $3493
 	jr z, .asm_8d8f0 ; 0x45773
 	call $5741
@@ -25125,12 +27721,14 @@ RocketHideoutElevatorText1: ; 0x4576d
 	call Predef
 	jr .asm_46c43 ; 0x45780
 .asm_8d8f0 ; 0x45782
-	ld hl, $578b
+	ld hl, UnnamedText_4578b
 	call PrintText
 .asm_46c43 ; 0x45788
-	jp $24d7
+	jp TextScriptEnd
 
-INCBIN "baserom.gbc",$4578b,$6
+UnnamedText_4578b: ; 0x4578b
+	TX_FAR _UnnamedText_4578b ; 0x82438
+	db $d, $50
 
 RocketHideoutElevatorObject: ; 0x45791 (size=23)
 	db $f ; border tile
@@ -25187,7 +27785,7 @@ SilphCoElevatorText1: ; 0x45835
 	ld hl, $5811
 	ld a, $61
 	call Predef
-	jp $24d7
+	jp TextScriptEnd
 
 SilphCoElevatorObject: ; 0x45844 (size=23)
 	db $f ; border tile
@@ -25649,7 +28247,7 @@ UnknownDungeon3Text1: ; 0x45f1c
 	db $08 ; asm
 	ld hl, $5f0f
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 INCBIN "baserom.gbc",$45f26,$10
 
@@ -25701,49 +28299,49 @@ RockTunnel2Text1: ; 0x46075
 	db $08 ; asm
 	ld hl, $6014
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 RockTunnel2Text2: ; 0x4607f
 	db $08 ; asm
 	ld hl, $6020
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 RockTunnel2Text3: ; 0x46089
 	db $08 ; asm
 	ld hl, $602c
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 RockTunnel2Text4: ; 0x46093
 	db $08 ; asm
 	ld hl, $6038
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 RockTunnel2Text5: ; 0x4609d
 	db $08 ; asm
 	ld hl, $6044
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 RockTunnel2Text6: ; 0x460a7
 	db $08 ; asm
 	ld hl, $6050
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 RockTunnel2Text7: ; 0x460b1
 	db $08 ; asm
 	ld hl, $605c
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 RockTunnel2Text8: ; 0x460bb
 	db $08 ; asm
 	ld hl, $6068
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_460c5: ; 0x460c5
 	TX_FAR _UnnamedText_460c5
@@ -26115,7 +28713,7 @@ SeafoamIslands4Script: ; 0x4658d
 	bit 4, a
 	ret nz
 .asm_465ed
-	ld hl, $65fb
+	ld hl, SeafoamIslands4Scripts
 	ld a, [$d666]
 	jp $3d97
 ; 0x465f6
@@ -26212,7 +28810,7 @@ SeafoamIslands5_h: ; 0x4678d to 0x46799 (12 bytes) (bank=11) (id=162)
 SeafoamIslands5Script: ; 0x46799
 	call $3c3c
 	ld a, [$d668]
-	ld hl, $67ad
+	ld hl, SeafoamIslands5Scripts
 	jp $3d97
 ; 0x467a5
 
@@ -26278,7 +28876,7 @@ SeafoamIslands5Text3: ; 0x46893
 	call LoadTrainerHeader
 	ld a, $4
 	ld [$d668], a
-	jp $24d7
+	jp TextScriptEnd
 
 ; 0x468a2 TX_FAR
 db $17, $75, $40, $22
@@ -26423,40 +29021,40 @@ RedsHouse1FTexts: ; 416B
 
 RedsHouse1FText1: ; Mom
 	db 8
-	ld a,[$D72E]
-	bit 3,a
-	jr nz,.heal\@ ; if player has received a Pokémon from Oak, heal team
-	ld hl,MomWakeUpText
+	ld a, [$D72E]
+	bit 3, a
+	jr nz, .heal\@ ; if player has received a Pokémon from Oak, heal team
+	ld hl, MomWakeUpText
 	call PrintText
 	jr .done\@
 .heal\@
 	call MomHealPokemon
 .done\@
-	jp $24D7
+	jp TextScriptEnd
 
 MomWakeUpText:
 	TX_FAR _MomWakeUpText
 	db "@"
 
 MomHealPokemon:
-	ld hl,MomHealText1
+	ld hl, MomHealText1
 	call PrintText
 	call GBFadeOut2
 	call $3071
-	ld a,7
+	ld a, 7
 	call Predef
-	ld a,$E8
-	ld [$C0EE],a
+	ld a, $E8
+	ld [$C0EE], a
 	call $23B1 ; play sound?
 .next\@
-	ld a,[$C026]
+	ld a, [$C026]
 	cp $E8
-	jr z,.next\@
-	ld a,[$D35B]
-	ld [$C0EE],a
+	jr z, .next\@
+	ld a, [$D35B]
+	ld [$C0EE], a
 	call $23B1
 	call GBFadeIn2
-	ld hl,MomHealText2
+	ld hl, MomHealText2
 	jp PrintText
 
 MomHealText1:
@@ -26475,7 +29073,7 @@ RedsHouse1FText2: ; TV
 	ld hl,StandByMeText
 .done\@
 	call PrintText
-	jp $24D7
+	jp TextScriptEnd
 
 StandByMeText:
 	TX_FAR _StandByMeText
@@ -26533,38 +29131,41 @@ CeladonMart3Text1: ; 0x4824a
 	ld a, [$d778]
 	bit 7, a
 	jr nz, .asm_a5463 ; 0x48250
-	ld hl, $4278
+	ld hl, UnnamedText_48278
 	call PrintText
-	ld bc,(TM_18 << 8) | 1
-	call $3e2e
+	ld bc, (TM_18 << 8) | 1
+	call GiveItem
 	jr nc, .asm_95f37 ; 0x4825e
 	ld hl, $d778
 	set 7, [hl]
-	ld hl, $427d
+	ld hl, ReceivedTM18Text
 	jr .asm_81359 ; 0x48268
 .asm_95f37 ; 0x4826a
-	ld hl, $4288
+	ld hl, TM18NoRoomText
 	jr .asm_81359 ; 0x4826d
 .asm_a5463 ; 0x4826f
-	ld hl, $4283
+	ld hl, TM18ExplanationText
 .asm_81359 ; 0x48272
 	call PrintText
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_48278: ; 0x48278
 	TX_FAR _UnnamedText_48278
 	db $50
 ; 0x48278 + 5 bytes
 
-INCBIN "baserom.gbc",$4827d,$48283 - $4827d
+ReceivedTM18Text: ; 0x4827d
+	TX_FAR _ReceivedTM18Text ; 0x9c85a
+	db $0B, $50
+; 0x48283
 
-UnnamedText_48283: ; 0x48283
-	TX_FAR _UnnamedText_48283
+TM18ExplanationText: ; 0x48283
+	TX_FAR _TM18ExplanationText
 	db $50
 ; 0x48283 + 5 bytes
 
-UnnamedText_48288: ; 0x48288
-	TX_FAR _UnnamedText_48288
+TM18NoRoomText: ; 0x48288
+	TX_FAR _TM18NoRoomText
 	db $50
 ; 0x48288 + 5 bytes
 
@@ -26741,7 +29342,7 @@ CeladonMartRoofText2: ; 0x4856c
 	jr z, .asm_914b9 ; 0x48574
 	ld a, $1
 	ld [$cc3c], a
-	ld hl, $459d
+	ld hl, CeladonMartRoofText4
 	call PrintText
 	call $35ec
 	ld a, [$cc26]
@@ -26750,20 +29351,17 @@ CeladonMartRoofText2: ; 0x4856c
 	call $440c
 	jr .asm_05aa4 ; 0x4858d
 .asm_914b9 ; 0x4858f
-	ld hl, $4598
+	ld hl, CeladonMartRoofText3
 	call PrintText
 .asm_05aa4 ; 0x48595
-	jp $24d7
+	jp TextScriptEnd
 
-CeladonMartRoofText3:
-
-UnnamedText_48598: ; 0x48598
+CeladonMartRoofText3: ; 0x48598
 	TX_FAR _UnnamedText_48598
 	db $50
 ; 0x48598 + 5 bytes
 
 CeladonMartRoofText4:
-
 UnnamedText_4859d: ; 0x4859d
 	TX_FAR _UnnamedText_4859d
 	db $50
@@ -26834,7 +29432,7 @@ CeladonMartElevatorText1: ; 0x4865e
 	ld hl, $464a
 	ld a, $61
 	call Predef
-	jp $24d7
+	jp TextScriptEnd
 
 CeladonMartElevatorObject: ; 0x4866d (size=23)
 	db $f ; border tile
@@ -27010,20 +29608,30 @@ CeladonMansion3Text4: ; 0x487b2
 	ld a, [$d11e]
 	cp $96
 	jr nc, .asm_f03d0 ; 0x487c0
-	ld hl, $47d0
+	ld hl, UnnamedText_487d0
 	jr .asm_c13f0 ; 0x487c5
 .asm_f03d0 ; 0x487c7
-	ld hl, $47d5
+	ld hl, UnnamedText_487d5
 .asm_c13f0 ; 0x487ca
 	call PrintText
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_487d0: ; 0x487d0
 	TX_FAR _UnnamedText_487d0
 	db $50
-; 0x487d0 + 5 bytes
+; 0x487d5
 
-INCBIN "baserom.gbc",$487d5,$16
+UnnamedText_487d5: ; 0x487d5
+	TX_FAR _UnnamedText_487d5 ; 0x9d0ad
+	db $6
+	db $8
+	ld hl, $66e2
+	ld b, $15
+	call Bankswitch
+	ld a, $1
+	ld [$cc3c], a
+	jp TextScriptEnd
+; 0x487eb
 
 CeladonMansion3Text5: ; 0x487eb
 	TX_FAR _CeladonMansion3Text5
@@ -27185,7 +29793,7 @@ CeladonGymScript: ; 0x4890a
 INCBIN "baserom.gbc",$48927,$7f
 
 CeladonGymTexts: ; 0x489a6
-	dw CeladonGymText1, CeladonGymText2, CeladonGymText3, CeladonGymText4, CeladonGymText5, CeladonGymText6, CeladonGymText7, CeladonGymText8, CeladonGymText9, CeladonGymText10, CeladonGymText11
+	dw CeladonGymText1, CeladonGymText2, CeladonGymText3, CeladonGymText4, CeladonGymText5, CeladonGymText6, CeladonGymText7, CeladonGymText8, CeladonGymText9, TM21Text, TM21NoRoomText
 
 INCBIN "baserom.gbc",$489bc,$55
 
@@ -27200,11 +29808,11 @@ CeladonGymText1: ; 0x48a11
 	call $30b6
 	jr .asm_96252 ; 0x48a23
 .asm_3b22c ; 0x48a25
-	ld hl, $4a68
+	ld hl, UnnamedText_48a68
 	call PrintText
 	jr .asm_96252 ; 0x48a2b
 .asm_16064 ; 0x48a2d
-	ld hl, $4a5e
+	ld hl, UnnamedText_48a5e
 	call PrintText
 	ld hl, $d72d
 	set 6, [hl]
@@ -27222,7 +29830,7 @@ CeladonGymText1: ; 0x48a11
 	ld [$d5ff], a
 	ld [$da39], a
 .asm_96252 ; 0x48a5b
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_48a5e: ; 0x48a5e
 	TX_FAR _UnnamedText_48a5e
@@ -27245,17 +29853,15 @@ UnnamedText_48a6d: ; 0x48a6d
 	db $50
 ; 0x48a6d + 5 bytes
 
-CeladonGymText10: ; 0x48a72
-INCBIN "baserom.gbc",$48a72,$4
-db $0b
-
-UnnamedText_48a77: ; 0x48a77
-	TX_FAR _UnnamedText_48a77
+TM21Text: ; 0x48a72
+	TX_FAR _ReceivedTM21Text ; 0x9d50c
+	db $0B
+	TX_FAR _TM21ExplanationText ; 0x9d520
 	db $50
-; 0x48a77 + 5 bytes
+; 0x48a7c
 
-CeladonGymText11: ; 0x48a7c
-	TX_FAR _UnnamedText_48a7c
+TM21NoRoomText: ; 0x48a7c
+	TX_FAR _TM21NoRoomText
 	db $50
 ; 0x48a7c + 5 bytes
 
@@ -27263,7 +29869,7 @@ CeladonGymText2: ; 0x48a81
 	db $08 ; asm
 	ld hl, $49bc
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_48a8b: ; 0x48a8b
 	TX_FAR _UnnamedText_48a8b
@@ -27284,7 +29890,7 @@ CeladonGymText3: ; 0x48a9a
 	db $08 ; asm
 	ld hl, $49c8
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_48aa4: ; 0x48aa4
 	TX_FAR _UnnamedText_48aa4
@@ -27305,7 +29911,7 @@ CeladonGymText4: ; 0x48ab3
 	db $08 ; asm
 	ld hl, $49d4
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_48abd: ; 0x48abd
 	TX_FAR _UnnamedText_48abd
@@ -27326,7 +29932,7 @@ CeladonGymText5: ; 0x48acc
 	db $08 ; asm
 	ld hl, $49e0
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_48ad6: ; 0x48ad6
 	TX_FAR _UnnamedText_48ad6
@@ -27347,7 +29953,7 @@ CeladonGymText6: ; 0x48ae5
 	db $08 ; asm
 	ld hl, $49ec
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_48aef: ; 0x48aef
 	TX_FAR _UnnamedText_48aef
@@ -27368,7 +29974,7 @@ CeladonGymText7: ; 0x48afe
 	db $08 ; asm
 	ld hl, $49f8
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_48b08: ; 0x48b08
 	TX_FAR _UnnamedText_48b08
@@ -27389,7 +29995,7 @@ CeladonGymText8: ; 0x48b17
 	db $08 ; asm
 	ld hl, $4a04
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_48b21: ; 0x48b21
 	TX_FAR _UnnamedText_48b21
@@ -27444,7 +30050,7 @@ CeladonGameCornerScript: ; 0x48bbd
 	call $4bcf
 	call $4bec
 	call $3c3c
-	ld hl, $4c12
+	ld hl, CeladonGameCornerScripts
 	ld a, [$d65f]
 	jp $3d97
 ; 0x48bcf
@@ -27472,7 +30078,7 @@ CeladonGameCornerText1: ; 0x48ca4
 CeladonGameCornerText2: ; 0x48ca9
 	db $08 ; asm
 	call $4f1e
-	ld hl, $4d22
+	ld hl, UnnamedText_48d22
 	call PrintText
 	call $35ec
 	ld a, [$cc26]
@@ -27514,49 +30120,49 @@ CeladonGameCornerText2: ; 0x48ca9
 	ld a, $b
 	call Predef
 	call $4f1e
-	ld hl, $4d27
+	ld hl, UnnamedText_48d27
 	jr .asm_e2afd ; 0x48d0d
 .asm_c650b ; 0x48d0f
-	ld hl, $4d2c
+	ld hl, UnnamedText_48d2c
 	jr .asm_e2afd ; 0x48d12
 .asm_31338 ; 0x48d14
-	ld hl, $4d36
+	ld hl, UnnamedText_48d36
 	jr .asm_e2afd ; 0x48d17
 .asm_ed086 ; 0x48d19
-	ld hl, $4d3b
+	ld hl, UnnamedText_48d3b
 .asm_e2afd ; 0x48d1c
 	call PrintText
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_48d22: ; 0x48d22
 	TX_FAR _UnnamedText_48d22
 	db $50
-; 0x48d22 + 5 bytes
+; 0x48d27
 
 UnnamedText_48d27: ; 0x48d27
 	TX_FAR _UnnamedText_48d27
 	db $50
-; 0x48d27 + 5 bytes
+; 0x48d2c
 
 UnnamedText_48d2c: ; 0x48d2c
 	TX_FAR _UnnamedText_48d2c
 	db $50
-; 0x48d2c + 5 bytes
+; 0x48d31
 
 UnnamedText_48d31: ; 0x48d31
 	TX_FAR _UnnamedText_48d31
 	db $50
-; 0x48d31 + 5 bytes
+; 0x48d36
 
 UnnamedText_48d36: ; 0x48d36
 	TX_FAR _UnnamedText_48d36
 	db $50
-; 0x48d36 + 5 bytes
+; 0x48d3b
 
 UnnamedText_48d3b: ; 0x48d3b
 	TX_FAR _UnnamedText_48d3b
 	db $50
-; 0x48d3b + 5 bytes
+; 0x48d40
 
 CeladonGameCornerText3: ; 0x48d40
 	TX_FAR _CeladonGameCornerText3
@@ -27571,9 +30177,9 @@ CeladonGameCornerText5: ; 0x48d4a
 	ld a, [$d77e]
 	bit 2, a
 	jr nz, .asm_d0957 ; 0x48d50
-	ld hl, $4d9c
+	ld hl, UnnamedText_48d9c
 	call PrintText
-	ld b,COIN_CASE
+	ld b, COIN_CASE
 	call $3493
 	jr z, .asm_5aef9 ; 0x48d5d
 	call $4f95
@@ -27592,26 +30198,28 @@ CeladonGameCornerText5: ; 0x48d4a
 	set 2, [hl]
 	ld a, $1
 	ld [$cc3c], a
-	ld hl, $4da1
+	ld hl, Received10CoinsText
 	jr .asm_c7d1a ; 0x48d87
 .asm_d0957 ; 0x48d89
-	ld hl, $4dac
+	ld hl, UnnamedText_48dac
 	jr .asm_c7d1a ; 0x48d8c
 .asm_98546 ; 0x48d8e
-	ld hl, $4da7
+	ld hl, UnnamedText_48da7
 	jr .asm_c7d1a ; 0x48d91
 .asm_5aef9 ; 0x48d93
-	ld hl, $4f19
+	ld hl, UnnamedText_48f19
 .asm_c7d1a ; 0x48d96
 	call PrintText
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_48d9c: ; 0x48d9c
 	TX_FAR _UnnamedText_48d9c
 	db $50
 ; 0x48d9c + 5 bytes
 
-INCBIN "baserom.gbc",$48da1,$48da7 - $48da1
+Received10CoinsText: ; 0x48da1
+	TX_FAR _Received10CoinsText ; 0x9daa9
+	db $0B, $50
 
 UnnamedText_48da7: ; 0x48da7
 	TX_FAR _UnnamedText_48da7
@@ -27636,7 +30244,7 @@ CeladonGameCornerText7: ; 0x48db6
 	ld hl, $4dcf
 .asm_be3fd ; 0x48dc4
 	call PrintText
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_48dca: ; 0x48dca
 	TX_FAR _UnnamedText_48dca
@@ -27657,9 +30265,9 @@ CeladonGameCornerText9: ; 0x48dd9
 	ld a, [$d77e]
 	bit 4, a
 	jr nz, .asm_ed8bc ; 0x48ddf
-	ld hl, $4e26
+	ld hl, UnnamedText_48e26
 	call PrintText
-	ld b,COIN_CASE
+	ld b, COIN_CASE
 	call $3493
 	jr z, .asm_df794 ; 0x48dec
 	call $4f95
@@ -27676,26 +30284,29 @@ CeladonGameCornerText9: ; 0x48dd9
 	call Predef
 	ld hl, $d77e
 	set 4, [hl]
-	ld hl, $4e2b
+	ld hl, Received20CoinsText
 	jr .asm_0ddc2 ; 0x48e11
 .asm_ed8bc ; 0x48e13
-	ld hl, $4e36
+	ld hl, UnnamedText_48e36
 	jr .asm_0ddc2 ; 0x48e16
 .asm_f17c3 ; 0x48e18
-	ld hl, $4e31
+	ld hl, UnnamedText_48e31
 	jr .asm_0ddc2 ; 0x48e1b
 .asm_df794 ; 0x48e1d
-	ld hl, $4f19
+	ld hl, UnnamedText_48f19
 .asm_0ddc2 ; 0x48e20
 	call PrintText
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_48e26: ; 0x48e26
 	TX_FAR _UnnamedText_48e26
 	db $50
 ; 0x48e26 + 5 bytes
 
-INCBIN "baserom.gbc",$48e2b,$48e31 - $48e2b
+Received20CoinsText: ; 0x48e2b
+	TX_FAR _Received20CoinsText ; 0x9dc4f
+	db $0B, $50
+; 0x48e31
 
 UnnamedText_48e31: ; 0x48e31
 	TX_FAR _UnnamedText_48e31
@@ -27731,26 +30342,29 @@ CeladonGameCornerText10: ; 0x48e3b
 	call Predef
 	ld hl, $d77e
 	set 3, [hl]
-	ld hl, $4e8d
+	ld hl, UnnamedText_48e8d
 	jr .asm_78d65 ; 0x48e73
 .asm_ff080 ; 0x48e75
-	ld hl, $4e98
+	ld hl, UnnamedText_48e98
 	jr .asm_78d65 ; 0x48e78
 .asm_9505a ; 0x48e7a
-	ld hl, $4e93
+	ld hl, UnnamedText_48e93
 	jr .asm_78d65 ; 0x48e7d
 .asm_4fb0c ; 0x48e7f
-	ld hl, $4f19
+	ld hl, UnnamedText_48f19
 .asm_78d65 ; 0x48e82
 	call PrintText
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_48e88: ; 0x48e88
 	TX_FAR _UnnamedText_48e88
 	db $50
 ; 0x48e88 + 5 bytes
 
-INCBIN "baserom.gbc",$48e8d,$48e93 - $48e8d
+UnnamedText_48e8d: ; 0x48e8d
+	TX_FAR _UnnamedText_48e8d ; 0x9dceb
+	db $0B, $50
+; 0x48e93
 
 UnnamedText_48e93: ; 0x48e93
 	TX_FAR _UnnamedText_48e93
@@ -27764,13 +30378,13 @@ UnnamedText_48e98: ; 0x48e98
 
 CeladonGameCornerText11: ; 0x48e9d
 	db $08 ; asm
-	ld hl, $4ece
+	ld hl, UnnamedText_48ece
 	call PrintText
 	ld hl, $d72d
 	set 6, [hl]
 	set 7, [hl]
-	ld hl, $4ed3
-	ld de, $4ed3
+	ld hl, UnnamedText_48ed3
+	ld de, $4ed3 ; maybe UnnamedText_48ed3
 	call $3354
 	ldh a, [$8c]
 	ld [$cf13], a
@@ -27782,7 +30396,7 @@ CeladonGameCornerText11: ; 0x48e9d
 	ldh [$b2], a
 	ld a, $1
 	ld [$d65f], a
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_48ece: ; 0x48ece
 	TX_FAR _UnnamedText_48ece
@@ -27803,7 +30417,7 @@ CeladonGameCornerText12: ; 0x48edd
 	db $08 ; asm
 	ld a, $1
 	ld [$cc3c], a
-	ld hl, $4f09
+	ld hl, UnnamedText_48f09
 	call PrintText
 	call $3748
 	ld a, $ad
@@ -27816,9 +30430,16 @@ CeladonGameCornerText12: ; 0x48edd
 	ld bc, $0208
 	ld a, $17
 	call Predef
-	jp $24d7
+	jp TextScriptEnd
 
-INCBIN "baserom.gbc",$48f09,$48f19 - $48f09
+UnnamedText_48f09: ; 0x48f09
+	TX_FAR _UnnamedText_48f09 ; 0x9ddb0
+	db $8
+	ld a, $9d
+	call $23b1
+	call $3748
+	jp TextScriptEnd
+; 0x48f19
 
 UnnamedText_48f19: ; 0x48f19
 	TX_FAR _UnnamedText_48f19
@@ -27997,35 +30618,38 @@ CeladonDinerText5: ; 0x49173
 	ld a, [$d783]
 	bit 0, a
 	jr nz, .asm_eb14d ; 0x49179
-	ld hl, $51a7
+	ld hl, UnnamedText_491a7
 	call PrintText
-	ld bc,(COIN_CASE << 8) | 1
-	call $3e2e
+	ld bc, (COIN_CASE << 8) | 1
+	call GiveItem
 	jr nc, .asm_78e93 ; 0x49187
 	ld hl, $d783
 	set 0, [hl]
-	ld hl, $51ac
+	ld hl, ReceivedCoinCaseText
 	call PrintText
 	jr .asm_68b61 ; 0x49194
 .asm_78e93 ; 0x49196
-	ld hl, $51b2
+	ld hl, CoinCaseNoRoomText
 	call PrintText
 	jr .asm_68b61 ; 0x4919c
 .asm_eb14d ; 0x4919e
-	ld hl, $51b7
+	ld hl, UnnamedText_491b7
 	call PrintText
 .asm_68b61 ; 0x491a4
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_491a7: ; 0x491a7
 	TX_FAR _UnnamedText_491a7
 	db $50
 ; 0x491a7 + 5 bytes
 
-INCBIN "baserom.gbc",$491ac,$491b2 - $491ac
+ReceivedCoinCaseText: ; 0x491ac
+	TX_FAR _ReceivedCoinCaseText ; 0x9e07a
+	db $11, $50
+; 0x491b2
 
-UnnamedText_491b2: ; 0x491b2
-	TX_FAR _UnnamedText_491b2
+CoinCaseNoRoomText: ; 0x491b2
+	TX_FAR _CoinCaseNoRoomText
 	db $50
 ; 0x491b2 + 5 bytes
 
@@ -28185,8 +30809,8 @@ MtMoonPokecenterText4: ; 0x492ec
 	db $08 ; asm
 	ld a, [$d7c6]
 	add a
-	jp c, $5353
-	ld hl, $535c
+	jp c, .asm_49353
+	ld hl, UnnamedText_4935c
 	call PrintText
 	ld a, $13
 	ld [$d125], a
@@ -28194,19 +30818,19 @@ MtMoonPokecenterText4: ; 0x492ec
 	call $35ec
 	ld a, [$cc26]
 	and a
-	jp nz, $534e
+	jp nz, .asm_4934e
 	ldh [$9f], a
 	ldh [$a1], a
 	ld a, $5
 	ldh [$a0], a
 	call $35a6
 	jr nc, .asm_faa09 ; 0x49317
-	ld hl, $5366
-	jr .asm_ae354 ; 0x4931c
+	ld hl, UnnamedText_49366
+	jr .asm_49356 ; 0x4931c
 .asm_faa09 ; 0x4931e
 	ld bc,(MAGIKARP << 8) | 5
 	call GivePokemon
-	jr nc, .asm_38361 ; 0x49324
+	jr nc, .asm_49359 ; 0x49324
 	xor a
 	ld [W_WHICHTRADE], a
 	ld [$cd3f], a
@@ -28222,14 +30846,16 @@ MtMoonPokecenterText4: ; 0x492ec
 	call $30e8
 	ld hl, $d7c6
 	set 7, [hl]
-	jr .asm_38361 ; 0x4934c
-	ld hl, $5361
-	jr .asm_ae354 ; 0x49351
-	ld hl, $536b
-.asm_ae354 ; 0x49356
+	jr .asm_49359 ; 0x4934c
+.asm_4934e ; 0x4934e
+	ld hl, UnnamedText_49361
+	jr .asm_49356 ; 0x49351
+.asm_49353 ; 0x49353
+	ld hl, UnnamedText_4936b
+.asm_49356 ; 0x49356
 	call PrintText
-.asm_38361 ; 0x49359
-	jp $24d7
+.asm_49359 ; 0x49359
+	jp TextScriptEnd
 
 UnnamedText_4935c: ; 0x4935c
 	TX_FAR _UnnamedText_4935c
@@ -28391,7 +31017,7 @@ Route11GateUpstairsText1: ; 0x4945f
 	ld a, $54
 	call Predef
 asm_49469:
-	jp $24d7
+	jp TextScriptEnd
 
 Route11GateUpstairsText2: ; 0x4946c
 	db $8
@@ -28417,7 +31043,7 @@ Route11GateUpstairsText2: ; 0x4946c
 	ld hl, $d7d6
 	set 7, [hl]
 .asm_4949b
-	ld hl, $54a3
+	ld hl, UnnamedText_494a3
 	call PrintText
 .asm_494a1
 	jr asm_49469 ; 0x494a1 $c6
@@ -28432,15 +31058,15 @@ Route11GateUpstairsText3: ; 0x494a8
 	db $08 ; asm
 	ld a, [$c109]
 	cp $4
-	jp nz, $55c9
+	jp nz, Unnamed_55c9
 	ld a, [$d7d8]
 	bit 7, a
-	ld hl, $54c4
+	ld hl, UnnamedText_494c4
 	jr z, .asm_5ac80 ; 0x494b9
-	ld hl, $54c9
+	ld hl, UnnamedText_494c9
 .asm_5ac80 ; 0x494be
 	call PrintText
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_494c4: ; 0x494c4
 	TX_FAR _UnnamedText_494c4
@@ -28455,7 +31081,7 @@ UnnamedText_494c9: ; 0x494c9
 Route11GateUpstairsText4: ; 0x494ce
 	db $8
 	ld hl, $54d5
-	jp $55c9
+	jp Unnamed_55c9
 ; 0x494d5
 
 UnnamedText_494d5: ; 0x494d5
@@ -28544,32 +31170,35 @@ Route12GateUpstairsText1: ; 0x49569
 	ld a, [$d7d7]
 	rrca
 	jr c, .asm_0ad3c ; 0x4956e
-	ld hl, $559c
+	ld hl, UnnamedText_4959c
 	call PrintText
-	ld bc,(TM_39 << 8) | 1
-	call $3e2e
+	ld bc, (TM_39 << 8) | 1
+	call GiveItem
 	jr nc, .asm_4c2be ; 0x4957c
-	ld hl, $55a1
+	ld hl, ReceivedTM39Text
 	call PrintText
 	ld hl, $d7d7
 	set 0, [hl]
 	jr .asm_4ba56 ; 0x49589
 .asm_4c2be ; 0x4958b
-	ld hl, $55ac
+	ld hl, UnnamedText_495ac
 	call PrintText
 	jr .asm_4ba56 ; 0x49591
 .asm_0ad3c ; 0x49593
-	ld hl, $55a7
+	ld hl, UnnamedText_495a7
 	call PrintText
 .asm_4ba56 ; 0x49599
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_4959c: ; 0x4959c
 	TX_FAR _UnnamedText_4959c
 	db $50
 ; 0x4959c + 5 bytes
 
-INCBIN "baserom.gbc",$495a1,$495a7 - $495a1
+ReceivedTM39Text: ; 0x495a1
+	TX_FAR _ReceivedTM39Text ; 0x8c8c6
+	db $0B, $50
+; 0x495a7
 
 UnnamedText_495a7: ; 0x495a7
 	TX_FAR _UnnamedText_495a7
@@ -28583,16 +31212,18 @@ UnnamedText_495ac: ; 0x495ac
 
 Route12GateUpstairsText2: ; 0x495b1
 	db $08 ; asm
-	ld hl, $55b8
-	jp $55c9
+	ld hl, UnnamedText_495b8
+	jp Unnamed_55c9
 
-;TX_FAR at 0x495b8
-db $17, $5a, $49, $23, $50
+UnnamedText_495b8: ; 0x495b8
+	TX_FAR _UnnamedText_495b8 ; 0x8c95a
+	db $50
+; 0x495bd
 
 Route12GateUpstairsText3: ; 0x495bd
 	db $8
-	ld hl, $55c4
-	jp $55c9
+	ld hl, UnnamedText_495c4
+	jp Unnamed_55c9
 ; 0x495c4
 
 UnnamedText_495c4: ; 0x495c4
@@ -28600,7 +31231,19 @@ UnnamedText_495c4: ; 0x495c4
 	db $50
 ; 0x495c4 + 5 bytes
 
-INCBIN "baserom.gbc",$495c9,$15
+Unnamed_55c9:
+	ld a, [$c109]
+	cp $4
+	jr z, .asm_495d4 ; 0x495ce $4
+	ld a, $1
+	jr .asm_495d8 ; 0x495d2 $4
+.asm_495d4
+	call PrintText
+	xor a
+.asm_495d8
+	ld [$cc3c], a
+	jp TextScriptEnd
+; 0x495de
 
 Route12GateUpstairsObject: ; 0x495de (size=24)
 	db $a ; border tile
@@ -28688,7 +31331,7 @@ Route16GateMapScript: ; 0x496be
 	res 5, [hl]
 	call $3c3c
 	ld a, [$d660]
-	ld hl, $56cf
+	ld hl, Route16GateMapScripts
 	jp $3d97
 ; 0x496cf
 
@@ -28738,14 +31381,14 @@ Route16GateMapText1: ; 0x49760
 	db $08 ; asm
 	call $5755
 	jr z, .asm_0bdf3 ; 0x49764
-	ld hl, $577c
+	ld hl, UnnamedText_4977c
 	call PrintText
 	jr .asm_56c9d ; 0x4976c
 .asm_0bdf3 ; 0x4976e
-	ld hl, $5777
+	ld hl, UnnamedText_49777
 	call PrintText
 .asm_56c9d ; 0x49774
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_49777: ; 0x49777
 	TX_FAR _UnnamedText_49777
@@ -28817,9 +31460,9 @@ Route16GateUpstairsTexts: ; 0x4980e
 
 Route16GateUpstairsText1: ; 0x49816
 	db $08 ; asm
-	ld hl, $5820
+	ld hl, UnnamedText_49820
 	call PrintText
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_49820: ; 0x49820
 	TX_FAR _UnnamedText_49820
@@ -28828,9 +31471,9 @@ UnnamedText_49820: ; 0x49820
 
 Route16GateUpstairsText2: ; 0x49825
 	db $08 ; asm
-	ld hl, $582f
+	ld hl, UnnamedText_4982f
 	call PrintText
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_4982f: ; 0x4982f
 	TX_FAR _UnnamedText_4982f
@@ -28839,7 +31482,7 @@ UnnamedText_4982f: ; 0x4982f
 
 Route16GateUpstairsText3: ; 0x49834
 	db $8
-	ld hl, $583b
+	ld hl, UnnamedText_4983b
 	jp $55c9
 ; 0x4983b
 
@@ -28889,7 +31532,7 @@ Route18GateScript: ; 0x49876
 	res 5, [hl]
 	call $3c3c
 	ld a, [$d669]
-	ld hl, $5887
+	ld hl, Route18GateScripts
 	jp $3d97
 ; 0x49887
 
@@ -28939,29 +31582,29 @@ Route18GateText1: ; 0x49911
 	db $08 ; asm
 	call $5755
 	jr z, .asm_3c84d ; 0x49915
-	ld hl, $592d
+	ld hl, UnnamedText_4992d
 	call PrintText
 	jr .asm_a8410 ; 0x4991d
 .asm_3c84d ; 0x4991f
-	ld hl, $5928
+	ld hl, UnnamedText_49928
 	call PrintText
 .asm_a8410 ; 0x49925
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_49928: ; 0x49928
 	TX_FAR _UnnamedText_49928
 	db $50
-; 0x49928 + 5 bytes
+; 0x4992d
 
 UnnamedText_4992d: ; 0x4992d
 	TX_FAR _UnnamedText_4992d
 	db $50
-; 0x4992d + 5 bytes
+; 0x49932
 
 Route18GateText2: ; 0x49932
 	TX_FAR _UnnamedText_49932
 	db $50
-; 0x49932 + 5 bytes
+; 0x49937
 
 Route18GateObject: ; 0x49937 (size=50)
 	db $a ; border tile
@@ -29006,7 +31649,7 @@ Route18GateHeaderText1: ; 0x4997e
 	ld [W_WHICHTRADE], a
 	ld a, $54
 	call Predef
-	jp $24d7
+	jp TextScriptEnd
 
 Route18GateHeaderText2: ; 0x4998c
 	db $8
@@ -29075,43 +31718,43 @@ MtMoon1Text1: ; 0x49a52
 	db $08 ; asm
 	ld hl, $59fd
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 MtMoon1Text2: ; 0x49a5c
 	db $08 ; asm
 	ld hl, $5a09
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 MtMoon1Text3: ; 0x49a66
 	db $08 ; asm
 	ld hl, $5a15
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 MtMoon1Text4: ; 0x49a70
 	db $08 ; asm
 	ld hl, $5a21
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 MtMoon1Text5: ; 0x49a7a
 	db $08 ; asm
 	ld hl, $5a2d
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 MtMoon1Text6: ; 0x49a84
 	db $08 ; asm
 	ld hl, $5a39
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 MtMoon1Text7: ; 0x49a8e
 	db $08 ; asm
 	ld hl, $5a45
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_49a98: ; 0x49a98
 	TX_FAR _UnnamedText_49a98
@@ -29304,17 +31947,17 @@ MtMoon3Text1: ; 0x49e79
 	jr z, .asm_be1e0 ; 0x49e7f
 	and $c0
 	jr nz, .asm_f8cd4 ; 0x49e83
-	ld hl, $5f8f
+	ld hl, UnnamedText_49f8f
 	call PrintText
 	jr .asm_f1fba ; 0x49e8b
 .asm_be1e0 ; 0x49e8d
-	ld hl, $5f85
+	ld hl, UnnamedText_49f85
 	call PrintText
 	ld hl, $d72d
 	set 6, [hl]
 	set 7, [hl]
-	ld hl, $5f8a
-	ld de, $5f8a
+	ld hl, UnnamedText_49f8a
+	ld de, $5f8a ; maybe UnnamedText_49f8a
 	call $3354
 	ldh a, [$8c]
 	ld [$cf13], a
@@ -29325,47 +31968,47 @@ MtMoon3Text1: ; 0x49e79
 	ld [$da39], a
 	jr .asm_f1fba ; 0x49eb6
 .asm_f8cd4 ; 0x49eb8
-	ld hl, $5f94
+	ld hl, UnnamedText_49f94
 	call PrintText
 .asm_f1fba ; 0x49ebe
-	jp $24d7
+	jp TextScriptEnd
 
 MtMoon3Text2: ; 0x49ec1
 	db $08 ; asm
 	ld hl, $5e48
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 MtMoon3Text3: ; 0x49ecb
 	db $08 ; asm
 	ld hl, $5e54
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 MtMoon3Text4: ; 0x49ed5
 	db $08 ; asm
 	ld hl, $5e60
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 MtMoon3Text5: ; 0x49edf
 	db $08 ; asm
 	ld hl, $5e6c
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 MtMoon3Text6: ; 0x49ee9
 	db $08 ; asm
 	ld a, $1
 	ld [$cc3c], a
-	ld hl, $5f24
+	ld hl, UnnamedText_49f24
 	call PrintText
 	call $35ec
 	ld a, [$cc26]
 	and a
 	jr nz, .asm_1fa5e ; 0x49efc
 	ld bc,(DOME_FOSSIL << 8) | 1
-	call $3e2e
+	call GiveItem
 	jp nc, $5f76
 	call $5f69
 	ld a, $6d
@@ -29378,7 +32021,7 @@ MtMoon3Text6: ; 0x49ee9
 	ld [$d607], a
 	ld [$da39], a
 .asm_1fa5e ; 0x49f21
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_49f24: ; 0x49f24
 	TX_FAR _UnnamedText_49f24
@@ -29389,16 +32032,16 @@ MtMoon3Text7: ; 0x49f29
 	db $08 ; asm
 	ld a, $1
 	ld [$cc3c], a
-	ld hl, $5f64
+	ld hl, UnnamedText_49f64
 	call PrintText
 	call $35ec
 	ld a, [$cc26]
 	and a
 	jr nz, .asm_8e988 ; 0x49f3c
 	ld bc,(HELIX_FOSSIL << 8) | 1
-	call $3e2e
-	jp nc, $5f76
-	call $5f69
+	call GiveItem
+	jp nc, Unnamed_49f76
+	call Unnamed_49f69
 	ld a, $6e
 	ld [$cc4d], a
 	ld a, $11
@@ -29409,14 +32052,33 @@ MtMoon3Text7: ; 0x49f29
 	ld [$d607], a
 	ld [$da39], a
 .asm_8e988 ; 0x49f61
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_49f64: ; 0x49f64
 	TX_FAR _UnnamedText_49f64
 	db $50
 ; 0x49f64 + 5 bytes
 
-INCBIN "baserom.gbc",$49f69,$49f85 - $49f69
+Unnamed_49f69: ; 0x49f69
+	ld hl, UnnamedText_49f6f
+	jp PrintText
+; 0x49f6f
+
+UnnamedText_49f6f: ; 0x49f6f
+	TX_FAR _UnnamedText_49f6f ; 0x80995
+	db $11, $d, $50
+; 0x49f76
+
+Unnamed_49f76: ; 0x49f76
+	ld hl, UnnamedText_49f7f
+	call PrintText
+	jp TextScriptEnd
+; 0x49f7f
+
+UnnamedText_49f7f: ; 0x49f7f
+	TX_FAR _UnnamedText_49f7f ; 0x809a8
+	db $d, $50
+; 0x49f85
 
 UnnamedText_49f85: ; 0x49f85
 	TX_FAR _UnnamedText_49f85
@@ -29620,32 +32282,35 @@ SafariZoneSecretHouseText1: ; 0x4a31c
 	ld a, [$d857]
 	bit 0, a
 	jr nz, .asm_20a9b ; 0x4a322
-	ld hl, $6350
+	ld hl, UnnamedText_4a350
 	call PrintText
-	ld bc,(HM_03 << 8) | 1
-	call $3e2e
+	ld bc, (HM_03 << 8) | 1
+	call GiveItem
 	jr nc, .asm_a21d2 ; 0x4a330
-	ld hl, $6355
+	ld hl, UnnamedText_4a355
 	call PrintText
 	ld hl, $d857
 	set 0, [hl]
 	jr .asm_8f1fc ; 0x4a33d
 .asm_a21d2 ; 0x4a33f
-	ld hl, $6360
+	ld hl, UnnamedText_4a360
 	call PrintText
 	jr .asm_8f1fc ; 0x4a345
 .asm_20a9b ; 0x4a347
-	ld hl, $635b
+	ld hl, UnnamedText_4a35b
 	call PrintText
 .asm_8f1fc ; 0x4a34d
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_4a350: ; 0x4a350
 	TX_FAR _UnnamedText_4a350
 	db $50
 ; 0x4a350 + 5 bytes
 
-INCBIN "baserom.gbc",$4a355,$4a35b - $4a355
+UnnamedText_4a355: ; 0x4a355
+	TX_FAR _UnnamedText_4a355 ; 0x85943
+	db $0B, $50
+; 0x4a35b
 
 UnnamedText_4a35b: ; 0x4a35b
 	TX_FAR _UnnamedText_4a35b
@@ -30550,61 +33215,61 @@ Route20Text1: ; 0x50db3
 	db $08 ; asm
 	ld hl, $4d3a
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 Route20Text2: ; 0x50dbd
 	db $08 ; asm
 	ld hl, $4d46
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 Route20Text3: ; 0x50dc7
 	db $08 ; asm
 	ld hl, $4d52
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 Route20Text4: ; 0x50dd1
 	db $08 ; asm
 	ld hl, $4d5e
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 Route20Text5: ; 0x50ddb
 	db $08 ; asm
 	ld hl, $4d6a
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 Route20Text6: ; 0x50de5
 	db $08 ; asm
 	ld hl, $4d76
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 Route20Text7: ; 0x50def
 	db $08 ; asm
 	ld hl, $4d82
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 Route20Text8: ; 0x50df9
 	db $08 ; asm
 	ld hl, $4d8e
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 Route20Text9: ; 0x50e03
 	db $08 ; asm
 	ld hl, $4d9a
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 Route20Text10: ; 0x50e0d
 	db $08 ; asm
 	ld hl, $4da6
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_50e17: ; 0x50e17
 	TX_FAR _UnnamedText_50e17
@@ -30763,7 +33428,7 @@ Route20Text11: ; 0x50ead
 
 Route22Script: ; 0x50eb2
 	call $3c3c
-	ld hl, $4ebe
+	ld hl, Route22Scripts
 	ld a, [$d60a]
 	jp $3d97
 ; 0x50ebe
@@ -30937,28 +33602,28 @@ Route22Text1: ; 0x5117b
 	ld a, [$d7eb]
 	bit 5, a
 	jr z, .asm_a88cf ; 0x51181
-	ld hl, $51b2
+	ld hl, UnnamedText_511b2
 	call PrintText
 	jr .asm_48088 ; 0x51189
 .asm_a88cf ; 0x5118b
-	ld hl, $51ad
+	ld hl, UnnamedText_511ad
 	call PrintText
 .asm_48088 ; 0x51191
-	jp $24d7
+	jp TextScriptEnd
 
 Route22Text2: ; 0x51194
 	db $08 ; asm
 	ld a, [$d7eb]
 	bit 6, a
 	jr z, .asm_58c0a ; 0x5119a
-	ld hl, $51c6
+	ld hl, UnnamedText_511c6
 	call PrintText
 	jr .asm_673ee ; 0x511a2
 .asm_58c0a ; 0x511a4
-	ld hl, $51c1
+	ld hl, UnnamedText_511c1
 	call PrintText
 .asm_673ee ; 0x511aa
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_511ad: ; 0x511ad
 	TX_FAR _UnnamedText_511ad
@@ -31007,7 +33672,7 @@ Route22Text3: ; 0x511d5
 Route23Script: ; 0x511da
 	call $51e9
 	call $3c3c
-	ld hl, $5213
+	ld hl, Route23Scripts
 	ld a, [$d667]
 	jp $3d97
 ; 0x511e9
@@ -31066,43 +33731,43 @@ Route23Text1: ; 0x51307
 	db $08 ; asm
 	ld a, $6
 	call $5346
-	jp $24d7
+	jp TextScriptEnd
 
 Route23Text2: ; 0x51310
 	db $08 ; asm
 	ld a, $5
 	call $5346
-	jp $24d7
+	jp TextScriptEnd
 
 Route23Text3: ; 0x51319
 	db $08 ; asm
 	ld a, $4
 	call $5346
-	jp $24d7
+	jp TextScriptEnd
 
 Route23Text4: ; 0x51322
 	db $08 ; asm
 	ld a, $3
 	call $5346
-	jp $24d7
+	jp TextScriptEnd
 
 Route23Text5: ; 0x5132b
 	db $08 ; asm
 	ld a, $2
 	call $5346
-	jp $24d7
+	jp TextScriptEnd
 
 Route23Text6: ; 0x51334
 	db $08 ; asm
 	ld a, $1
 	call $5346
-	jp $24d7
+	jp TextScriptEnd
 
 Route23Text7: ; 0x5133d
 	db $8
 	ld a, $0
 	call $5346
-	jp $24d7
+	jp TextScriptEnd
 ; 0x51346
 
 INCBIN "baserom.gbc",$51346,$513a3 - $51346
@@ -31166,17 +33831,17 @@ Route24Text1: ; 0x514a4
 	ld a, $3
 	ld [$d602], a
 	ld [$da39], a
-	jp $24d7
+	jp TextScriptEnd
 .asm_a03f5 ; 0x514f9
 	ld hl, $5530
 	call PrintText
-	jp $24d7
+	jp TextScriptEnd
 .asm_3a23d ; 0x51502
 	ld hl, $5521
 	call PrintText
 	ld hl, $d7f0
 	set 1, [hl]
-	jp $24d7
+	jp TextScriptEnd
 ; 0x51510
 
 INCBIN "baserom.gbc",$51510,$51515 - $51510
@@ -31212,37 +33877,37 @@ Route24Text2: ; 0x51535
 	db $08 ; asm
 	ld hl, $545b
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 Route24Text3: ; 0x5153f
 	db $08 ; asm
 	ld hl, $5467
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 Route24Text4: ; 0x51549
 	db $08 ; asm
 	ld hl, $5473
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 Route24Text5: ; 0x51553
 	db $08 ; asm
 	ld hl, $547f
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 Route24Text6: ; 0x5155d
 	db $08 ; asm
 	ld hl, $548b
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 Route24Text7: ; 0x51567
 	db $08 ; asm
 	ld hl, $5497
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_51571: ; 0x51571
 	TX_FAR _UnnamedText_51571
@@ -31356,55 +34021,55 @@ Route25Text1: ; 0x516ab
 	db $08 ; asm
 	ld hl, $563e
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 Route25Text2: ; 0x516b5
 	db $08 ; asm
 	ld hl, $564a
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 Route25Text3: ; 0x516bf
 	db $08 ; asm
 	ld hl, $5656
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 Route25Text4: ; 0x516c9
 	db $08 ; asm
 	ld hl, $5662
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 Route25Text5: ; 0x516d3
 	db $08 ; asm
 	ld hl, $566e
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 Route25Text6: ; 0x516dd
 	db $08 ; asm
 	ld hl, $567a
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 Route25Text7: ; 0x516e7
 	db $08 ; asm
 	ld hl, $5686
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 Route25Text8: ; 0x516f1
 	db $08 ; asm
 	ld hl, $5692
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 Route25Text9: ; 0x516fb
 	db $08 ; asm
 	ld hl, $569e
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_51705: ; 0x51705
 	TX_FAR _UnnamedText_51705
@@ -31582,37 +34247,37 @@ VictoryRoad2Text1: ; 0x5187e
 	db $08 ; asm
 	ld hl, $5835
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 VictoryRoad2Text2: ; 0x51888
 	db $08 ; asm
 	ld hl, $5841
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 VictoryRoad2Text3: ; 0x51892
 	db $08 ; asm
 	ld hl, $584d
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 VictoryRoad2Text4: ; 0x5189c
 	db $08 ; asm
 	ld hl, $5859
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 VictoryRoad2Text5: ; 0x518a6
 	db $08 ; asm
 	ld hl, $5865
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 VictoryRoad2Text6: ; 0x518b0
 	db $08 ; asm
 	ld hl, $5871
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 INCBIN "baserom.gbc",$518ba,$518ca - $518ba
 
@@ -31839,7 +34504,7 @@ SilphCo7Text1: ; 0x51d8e
 	ld hl, $5de2
 	call PrintText
 .asm_b3069 ; 0x51dd0
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_51dd3: ; 0x51dd3
 	TX_FAR _UnnamedText_51dd3
@@ -31873,7 +34538,7 @@ SilphCo7Text2: ; 0x51de7
 	ld hl, $5e05
 	call PrintText
 .asm_e4d89 ; 0x51dfd
-	jp $24d7
+	jp TextScriptEnd
 ; 0x51e00
 
 UnnamedText_51e00: ; 0x51e00
@@ -31898,7 +34563,7 @@ SilphCo7Text3: ; 0x51e0a
 	ld hl, $5e28
 	call PrintText
 .asm_6472b ; 0x51e20
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_51e23: ; 0x51e23
 	TX_FAR _UnnamedText_51e23
@@ -31922,7 +34587,7 @@ SilphCo7Text4: ; 0x51e2d
 	ld hl, $5e4b
 	call PrintText
 .asm_27a32 ; 0x51e43
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_51e46: ; 0x51e46
 	TX_FAR _UnnamedText_51e46
@@ -31938,7 +34603,7 @@ SilphCo7Text5: ; 0x51e50
 	db $08 ; asm
 	ld hl, $5d5d
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_51e5a: ; 0x51e5a
 	TX_FAR _UnnamedText_51e5a
@@ -31959,7 +34624,7 @@ SilphCo7Text6: ; 0x51e69
 	db $08 ; asm
 	ld hl, $5d69
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_51e73: ; 0x51e73
 	TX_FAR _UnnamedText_51e73
@@ -31980,7 +34645,7 @@ SilphCo7Text7: ; 0x51e82
 	db $08 ; asm
 	ld hl, $5d75
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_51e8c: ; 0x51e8c
 	TX_FAR _UnnamedText_51e8c
@@ -32001,7 +34666,7 @@ SilphCo7Text8: ; 0x51e9b
 	db $08 ; asm
 	ld hl, $5d81
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_51ea5: ; 0x51ea5
 	TX_FAR _UnnamedText_51ea5
@@ -32022,7 +34687,7 @@ SilphCo7Text9: ; 0x51eb4
 	db $08 ; asm
 	ld hl, $5ebe
 	call PrintText
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_51ebe: ; 0x51ebe
 	TX_FAR _UnnamedText_51ebe
@@ -32115,7 +34780,7 @@ Mansion2Text1: ; 0x52064
 	db $08 ; asm
 	ld hl, $6057
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_5206e: ; 0x5206e
 	TX_FAR _UnnamedText_5206e
@@ -32212,13 +34877,13 @@ Mansion3Text1: ; 0x522af
 	db $08 ; asm
 	ld hl, $6296
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 Mansion3Text2: ; 0x522b9
 	db $08 ; asm
 	ld hl, $62a2
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_522c3: ; 0x522c3
 	TX_FAR _UnnamedText_522c3
@@ -32308,13 +34973,13 @@ Mansion4Text1: ; 0x52461
 	db $08 ; asm
 	ld hl, $6448
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 Mansion4Text2: ; 0x5246b
 	db $08 ; asm
 	ld hl, $6454
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_52475: ; 0x52475
 	TX_FAR _UnnamedText_52475
@@ -33420,7 +36085,7 @@ Route3Text2: ; 0x5558b
 	db $08 ; asm
 	ld hl, $5525
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_55595: ; 0x55595
 	TX_FAR _UnnamedText_55595
@@ -33441,7 +36106,7 @@ Route3Text3: ; 0x555a4
 	db $08 ; asm
 	ld hl, $5531
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_555ae: ; 0x555ae
 	TX_FAR _UnnamedText_555ae
@@ -33462,7 +36127,7 @@ Route3Text4: ; 0x555bd
 	db $08 ; asm
 	ld hl, $553d
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_555c7: ; 0x555c7
 	TX_FAR _UnnamedText_555c7
@@ -33483,7 +36148,7 @@ Route3Text5: ; 0x555d6
 	db $08 ; asm
 	ld hl, $5549
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_555e0: ; 0x555e0
 	TX_FAR _UnnamedText_555e0
@@ -33504,7 +36169,7 @@ Route3Text6: ; 0x555ef
 	db $08 ; asm
 	ld hl, $5555
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_555f9: ; 0x555f9
 	TX_FAR _UnnamedText_555f9
@@ -33525,7 +36190,7 @@ Route3Text7: ; 0x55608
 	db $08 ; asm
 	ld hl, $5561
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_55612: ; 0x55612
 	TX_FAR _UnnamedText_55612
@@ -33546,7 +36211,7 @@ Route3Text8: ; 0x55621
 	db $08 ; asm
 	ld hl, $556d
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_5562b: ; 0x5562b
 	TX_FAR _UnnamedText_5562b
@@ -33567,7 +36232,7 @@ Route3Text9: ; 0x5563a
 	db $08 ; asm
 	ld hl, $5579
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_55644: ; 0x55644
 	TX_FAR _UnnamedText_55644
@@ -33613,7 +36278,7 @@ Route4Text2: ; 0x5568f
 	db $08 ; asm
 	ld hl, $567d
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_55699: ; 0x55699
 	TX_FAR _UnnamedText_55699
@@ -33717,7 +36382,7 @@ Route9Text9:
 	ld hl, $574b
 asm_8be3d: ; 0x5578c
 	call $31cc
-	jp $24d7
+	jp TextScriptEnd
 ; 0x55792
 
 UnnamedText_55792: ; 0x55792
@@ -33880,7 +36545,7 @@ Route13Text1: ; 0x558ca
 	db $08 ; asm
 	ld hl, $5851
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_558d4: ; 0x558d4
 	TX_FAR _UnnamedText_558d4
@@ -33901,7 +36566,7 @@ Route13Text2: ; 0x558e3
 	db $08 ; asm
 	ld hl, $585d
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_558ed: ; 0x558ed
 	TX_FAR _UnnamedText_558ed
@@ -33922,7 +36587,7 @@ Route13Text3: ; 0x558fc
 	db $08 ; asm
 	ld hl, $5869
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_55906: ; 0x55906
 	TX_FAR _UnnamedText_55906
@@ -33943,7 +36608,7 @@ Route13Text4: ; 0x55915
 	db $08 ; asm
 	ld hl, $5875
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_5591f: ; 0x5591f
 	TX_FAR _UnnamedText_5591f
@@ -33964,7 +36629,7 @@ Route13Text5: ; 0x5592e
 	db $08 ; asm
 	ld hl, $5881
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_55938: ; 0x55938
 	TX_FAR _UnnamedText_55938
@@ -33985,7 +36650,7 @@ Route13Text6: ; 0x55947
 	db $08 ; asm
 	ld hl, $588d
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_55951: ; 0x55951
 	TX_FAR _UnnamedText_55951
@@ -34006,7 +36671,7 @@ Route13Text7: ; 0x55960
 	db $08 ; asm
 	ld hl, $5899
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_5596a: ; 0x5596a
 	TX_FAR _UnnamedText_5596a
@@ -34027,7 +36692,7 @@ Route13Text8: ; 0x55979
 	db $08 ; asm
 	ld hl, $58a5
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_55983: ; 0x55983
 	TX_FAR _UnnamedText_55983
@@ -34048,7 +36713,7 @@ Route13Text9: ; 0x55992
 	db $08 ; asm
 	ld hl, $58b1
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_5599c: ; 0x5599c
 	TX_FAR _UnnamedText_5599c
@@ -34069,7 +36734,7 @@ Route13Text10: ; 0x559ab
 	db $08 ; asm
 	ld hl, $58bd
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_559b5: ; 0x559b5
 	TX_FAR _UnnamedText_559b5
@@ -34119,7 +36784,7 @@ Route14Text1: ; 0x55a7b
 	db $08 ; asm
 	ld hl, $5a02
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_55a85: ; 0x55a85
 	TX_FAR _UnnamedText_55a85
@@ -34140,7 +36805,7 @@ Route14Text2: ; 0x55a94
 	db $08 ; asm
 	ld hl, $5a0e
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_55a9e: ; 0x55a9e
 	TX_FAR _UnnamedText_55a9e
@@ -34161,7 +36826,7 @@ Route14Text3: ; 0x55aad
 	db $08 ; asm
 	ld hl, $5a1a
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_55ab7: ; 0x55ab7
 	TX_FAR _UnnamedText_55ab7
@@ -34182,7 +36847,7 @@ Route14Text4: ; 0x55ac6
 	db $08 ; asm
 	ld hl, $5a26
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_55ad0: ; 0x55ad0
 	TX_FAR _UnnamedText_55ad0
@@ -34203,7 +36868,7 @@ Route14Text5: ; 0x55adf
 	db $08 ; asm
 	ld hl, $5a32
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_55ae9: ; 0x55ae9
 	TX_FAR _UnnamedText_55ae9
@@ -34224,7 +36889,7 @@ Route14Text6: ; 0x55af8
 	db $08 ; asm
 	ld hl, $5a3e
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_55b02: ; 0x55b02
 	TX_FAR _UnnamedText_55b02
@@ -34245,7 +36910,7 @@ Route14Text7: ; 0x55b11
 	db $08 ; asm
 	ld hl, $5a4a
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_55b1b: ; 0x55b1b
 	TX_FAR _UnnamedText_55b1b
@@ -34266,7 +36931,7 @@ Route14Text8: ; 0x55b2a
 	db $08 ; asm
 	ld hl, $5a56
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_55b34: ; 0x55b34
 	TX_FAR _UnnamedText_55b34
@@ -34287,7 +36952,7 @@ Route14Text9: ; 0x55b43
 	db $08 ; asm
 	ld hl, $5a62
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_55b4d: ; 0x55b4d
 	TX_FAR _UnnamedText_55b4d
@@ -34308,7 +36973,7 @@ Route14Text10: ; 0x55b5c
 	db $08 ; asm
 	ld hl, $5a6e
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_55b66: ; 0x55b66
 	TX_FAR _UnnamedText_55b66
@@ -34350,7 +37015,7 @@ Route17Text1: ; 0x55c2c
 	db $08 ; asm
 	ld hl, $5bb3
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_55c36: ; 0x55c36
 	TX_FAR _UnnamedText_55c36
@@ -34371,7 +37036,7 @@ Route17Text2: ; 0x55c45
 	db $08 ; asm
 	ld hl, $5bbf
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_55c4f: ; 0x55c4f
 	TX_FAR _UnnamedText_55c4f
@@ -34392,7 +37057,7 @@ Route17Text3: ; 0x55c5e
 	db $08 ; asm
 	ld hl, $5bcb
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_55c68: ; 0x55c68
 	TX_FAR _UnnamedText_55c68
@@ -34413,7 +37078,7 @@ Route17Text4: ; 0x55c77
 	db $08 ; asm
 	ld hl, $5bd7
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_55c81: ; 0x55c81
 	TX_FAR _UnnamedText_55c81
@@ -34434,7 +37099,7 @@ Route17Text5: ; 0x55c90
 	db $08 ; asm
 	ld hl, $5be3
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_55c9a: ; 0x55c9a
 	TX_FAR _UnnamedText_55c9a
@@ -34455,7 +37120,7 @@ Route17Text6: ; 0x55ca9
 	db $08 ; asm
 	ld hl, $5bef
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_55cb3: ; 0x55cb3
 	TX_FAR _UnnamedText_55cb3
@@ -34476,7 +37141,7 @@ Route17Text7: ; 0x55cc2
 	db $08 ; asm
 	ld hl, $5bfb
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_55ccc: ; 0x55ccc
 	TX_FAR _UnnamedText_55ccc
@@ -34497,7 +37162,7 @@ Route17Text8: ; 0x55cdb
 	db $08 ; asm
 	ld hl, $5c07
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_55ce5: ; 0x55ce5
 	TX_FAR _UnnamedText_55ce5
@@ -34518,7 +37183,7 @@ Route17Text9: ; 0x55cf4
 	db $08 ; asm
 	ld hl, $5c13
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_55cfe: ; 0x55cfe
 	TX_FAR _UnnamedText_55cfe
@@ -34539,7 +37204,7 @@ Route17Text10: ; 0x55d0d
 	db $08 ; asm
 	ld hl, $5c1f
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_55d17: ; 0x55d17
 	TX_FAR _UnnamedText_55d17
@@ -34601,61 +37266,61 @@ Route19Text1: ; 0x55dec
 	db $08 ; asm
 	ld hl, $5d73
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 Route19Text2: ; 0x55df6
 	db $08 ; asm
 	ld hl, $5d7f
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 Route19Text3: ; 0x55e00
 	db $08 ; asm
 	ld hl, $5d8b
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 Route19Text4: ; 0x55e0a
 	db $08 ; asm
 	ld hl, $5d97
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 Route19Text5: ; 0x55e14
 	db $08 ; asm
 	ld hl, $5da3
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 Route19Text6: ; 0x55e1e
 	db $08 ; asm
 	ld hl, $5daf
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 Route19Text7: ; 0x55e28
 	db $08 ; asm
 	ld hl, $5dbb
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 Route19Text8: ; 0x55e32
 	db $08 ; asm
 	ld hl, $5dc7
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 Route19Text9: ; 0x55e3c
 	db $08 ; asm
 	ld hl, $5dd3
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 Route19Text10: ; 0x55e46
 	db $08 ; asm
 	ld hl, $5ddf
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_55e50: ; 0x55e50
 	TX_FAR _UnnamedText_55e50
@@ -34832,55 +37497,55 @@ Route21Text1: ; 0x55f83
 	db $08 ; asm
 	ld hl, $5f16
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 Route21Text2: ; 0x55f8d
 	db $08 ; asm
 	ld hl, $5f22
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 Route21Text3: ; 0x55f97
 	db $08 ; asm
 	ld hl, $5f2e
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 Route21Text4: ; 0x55fa1
 	db $08 ; asm
 	ld hl, $5f3a
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 Route21Text5: ; 0x55fab
 	db $08 ; asm
 	ld hl, $5f46
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 Route21Text6: ; 0x55fb5
 	db $08 ; asm
 	ld hl, $5f52
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 Route21Text7: ; 0x55fbf
 	db $08 ; asm
 	ld hl, $5f5e
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 Route21Text8: ; 0x55fc9
 	db $08 ; asm
 	ld hl, $5f6a
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 Route21Text9: ; 0x55fd3
 	db $08 ; asm
 	ld hl, $5f76
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_55fdd: ; 0x55fdd
 	TX_FAR _UnnamedText_55fdd
@@ -35044,7 +37709,7 @@ VermilionHouse2Text1: ; 0x56075
 	and a
 	jr nz, asm_eb1b7 ; 0x5608a
 	ld bc,(OLD_ROD << 8) | 1
-	call $3e2e
+	call GiveItem
 	jr nc, asm_fd67b ; 0x56092
 	ld hl, $d728
 	set 3, [hl]
@@ -35060,7 +37725,7 @@ asm_03ef5 ; 0x560a8
 	ld hl, $60c5
 asm_5dd95 ; 0x560ab
 	call PrintText
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_560b1: ; 0x560b1
 	TX_FAR _UnnamedText_560b1
@@ -35184,7 +37849,7 @@ FuchsiaHouse3Text1: ; 0x56181
 	and a
 	jr nz, asm_3ace4 ; 0x56196
 	ld bc,(GOOD_ROD << 8) | 1
-	call $3e2e
+	call GiveItem
 	jr nc, asm_628ee ; 0x5619e
 	ld hl, $d728
 	set 4, [hl]
@@ -35200,7 +37865,7 @@ asm_6084e ; 0x561b4
 	ld hl, $6217
 asm_1b09c ; 0x561b7
 	call PrintText
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_561bd: ; 0x561bd
 	TX_FAR _UnnamedText_561bd
@@ -35431,7 +38096,7 @@ Route12HouseText1: ; 0x56484
 	and a
 	jr nz, asm_a2d76 ; 0x56499
 	ld bc,(SUPER_ROD << 8) | 1
-	call $3e2e
+	call GiveItem
 	jr nc, asm_e3b89 ; 0x564a1
 	ld hl, $d728
 	set 5, [hl]
@@ -35447,7 +38112,7 @@ asm_b4cad ; 0x564b7
 	ld hl, $64d4
 asm_df984 ; 0x564ba
 	call PrintText
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_564c0: ; 0x564c0
 	TX_FAR _UnnamedText_564c0
@@ -35527,7 +38192,7 @@ SilphCo8Text1: ; 0x565aa
 	ld hl, $65be
 asm_a468f ; 0x565b8
 	call PrintText
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_565be: ; 0x565be
 	TX_FAR _UnnamedText_565be
@@ -35543,19 +38208,19 @@ SilphCo8Text2: ; 0x565c8
 	db $08 ; asm
 	ld hl, $6585
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 SilphCo8Text3: ; 0x565d2
 	db $08 ; asm
 	ld hl, $6591
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 SilphCo8Text4: ; 0x565dc
 	db $08 ; asm
 	ld hl, $659d
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_565e6: ; 0x565e6
 	TX_FAR _UnnamedText_565e6
@@ -36214,7 +38879,7 @@ Route6Text1: ; 0x59120
 	db $8
 	ld hl, $50d7
 	call $31cc
-	jp $24d7
+	jp TextScriptEnd
 ; 0x5912a
 
 UnnamedText_5912a: ; 0x5912a
@@ -36236,7 +38901,7 @@ Route6Text2: ; 0x59139
 	db $08 ; asm
 	ld hl, $50e3
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_59143: ; 0x59143
 	TX_FAR _UnnamedText_59143
@@ -36252,7 +38917,7 @@ Route6Text3: ; 0x5914d
 	db $08 ; asm
 	ld hl, $50ef
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_59157: ; 0x59157
 	TX_FAR _UnnamedText_59157
@@ -36273,7 +38938,7 @@ Route6Text4: ; 0x59166
 	db $08 ; asm
 	ld hl, $50fb
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_59170: ; 0x59170
 	TX_FAR _UnnamedText_59170
@@ -36294,7 +38959,7 @@ Route6Text5: ; 0x5917f
 	db $08 ; asm
 	ld hl, $5107
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_59189: ; 0x59189
 	TX_FAR _UnnamedText_59189
@@ -36315,7 +38980,7 @@ Route6Text6: ; 0x59198
 	db $08 ; asm
 	ld hl, $5113
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_591a2: ; 0x591a2
 	TX_FAR _UnnamedText_591a2
@@ -36371,7 +39036,7 @@ Route8Text2: ; 0x59269
 	db $08 ; asm
 	ld hl, $51ef
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_59273: ; 0x59273
 	TX_FAR _UnnamedText_59273
@@ -36392,7 +39057,7 @@ Route8Text3: ; 0x59282
 	db $08 ; asm
 	ld hl, $51fb
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_5928c: ; 0x5928c
 	TX_FAR _UnnamedText_5928c
@@ -36413,7 +39078,7 @@ Route8Text4: ; 0x5929b
 	db $08 ; asm
 	ld hl, $5207
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_592a5: ; 0x592a5
 	TX_FAR _UnnamedText_592a5
@@ -36434,7 +39099,7 @@ Route8Text5: ; 0x592b4
 	db $08 ; asm
 	ld hl, $5213
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_592be: ; 0x592be
 	TX_FAR _UnnamedText_592be
@@ -36455,7 +39120,7 @@ Route8Text6: ; 0x592cd
 	db $08 ; asm
 	ld hl, $521f
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_592d7: ; 0x592d7
 	TX_FAR _UnnamedText_592d7
@@ -36476,7 +39141,7 @@ Route8Text7: ; 0x592e6
 	db $08 ; asm
 	ld hl, $522b
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_592f0: ; 0x592f0
 	TX_FAR _UnnamedText_592f0
@@ -36497,7 +39162,7 @@ Route8Text8: ; 0x592ff
 	db $08 ; asm
 	ld hl, $5237
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_59309: ; 0x59309
 	TX_FAR _UnnamedText_59309
@@ -36518,7 +39183,7 @@ Route8Text9: ; 0x59318
 	db $08 ; asm
 	ld hl, $5243
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_59322: ; 0x59322
 	TX_FAR _UnnamedText_59322
@@ -36560,7 +39225,7 @@ Route10Text1: ; 0x593ac
 	db $08 ; asm
 	ld hl, $5363
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_593b6: ; 0x593b6
 	TX_FAR _UnnamedText_593b6
@@ -36581,7 +39246,7 @@ Route10Text2: ; 0x593c5
 	db $08 ; asm
 	ld hl, $536f
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_593cf: ; 0x593cf
 	TX_FAR _UnnamedText_593cf
@@ -36602,7 +39267,7 @@ Route10Text3: ; 0x593de
 	db $08 ; asm
 	ld hl, $537b
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_593e8: ; 0x593e8
 	TX_FAR _UnnamedText_593e8
@@ -36623,7 +39288,7 @@ Route10Text4: ; 0x593f7
 	db $08 ; asm
 	ld hl, $5387
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_59401: ; 0x59401
 	TX_FAR _UnnamedText_59401
@@ -36644,7 +39309,7 @@ Route10Text5: ; 0x59410
 	db $08 ; asm
 	ld hl, $5393
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_5941a: ; 0x5941a
 	TX_FAR _UnnamedText_5941a
@@ -36665,7 +39330,7 @@ Route10Text6: ; 0x59429
 	db $08 ; asm
 	ld hl, $539f
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_59433: ; 0x59433
 	TX_FAR _UnnamedText_59433
@@ -36726,7 +39391,7 @@ Route11Text2: ; 0x5950d
 	db $08 ; asm
 	ld hl, $5487
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_59517: ; 0x59517
 	TX_FAR _UnnamedText_59517
@@ -36747,7 +39412,7 @@ Route11Text3: ; 0x59526
 	db $08 ; asm
 	ld hl, $5493
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_59530: ; 0x59530
 	TX_FAR _UnnamedText_59530
@@ -36768,7 +39433,7 @@ Route11Text4: ; 0x5953f
 	db $08 ; asm
 	ld hl, $549f
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_59549: ; 0x59549
 	TX_FAR _UnnamedText_59549
@@ -36789,7 +39454,7 @@ Route11Text5: ; 0x59558
 	db $08 ; asm
 	ld hl, $54ab
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_59562: ; 0x59562
 	TX_FAR _UnnamedText_59562
@@ -36810,7 +39475,7 @@ Route11Text6: ; 0x59571
 	db $08 ; asm
 	ld hl, $54b7
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_5957b: ; 0x5957b
 	TX_FAR _UnnamedText_5957b
@@ -36831,7 +39496,7 @@ Route11Text7: ; 0x5958a
 	db $08 ; asm
 	ld hl, $54c3
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_59594: ; 0x59594
 	TX_FAR _UnnamedText_59594
@@ -36852,7 +39517,7 @@ Route11Text8: ; 0x595a3
 	db $08 ; asm
 	ld hl, $54cf
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_595ad: ; 0x595ad
 	TX_FAR _UnnamedText_595ad
@@ -36873,7 +39538,7 @@ Route11Text9: ; 0x595bc
 	db $08 ; asm
 	ld hl, $54db
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_595c6: ; 0x595c6
 	TX_FAR _UnnamedText_595c6
@@ -36894,7 +39559,7 @@ Route11Text10: ; 0x595d5
 	db $08 ; asm
 	ld hl, $54e7
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_595df: ; 0x595df
 	TX_FAR _UnnamedText_595df
@@ -36950,7 +39615,7 @@ Route12Text2: ; 0x596f5
 	db $08 ; asm
 	ld hl, $5691
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_596ff: ; 0x596ff
 	TX_FAR _UnnamedText_596ff
@@ -36971,7 +39636,7 @@ Route12Text3: ; 0x5970e
 	db $08 ; asm
 	ld hl, $569d
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_59718: ; 0x59718
 	TX_FAR _UnnamedText_59718
@@ -36992,7 +39657,7 @@ Route12Text4: ; 0x59727
 	db $08 ; asm
 	ld hl, $56a9
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_59731: ; 0x59731
 	TX_FAR _UnnamedText_59731
@@ -37013,7 +39678,7 @@ Route12Text5: ; 0x59740
 	db $08 ; asm
 	ld hl, $56b5
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_5974a: ; 0x5974a
 	TX_FAR _UnnamedText_5974a
@@ -37034,7 +39699,7 @@ Route12Text6: ; 0x59759
 	db $08 ; asm
 	ld hl, $56c1
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_59763: ; 0x59763
 	TX_FAR _UnnamedText_59763
@@ -37055,7 +39720,7 @@ Route12Text7: ; 0x59772
 	db $08 ; asm
 	ld hl, $56cd
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_5977c: ; 0x5977c
 	TX_FAR _UnnamedText_5977c
@@ -37076,7 +39741,7 @@ Route12Text8: ; 0x5978b
 	db $08 ; asm
 	ld hl, $56d9
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_59795: ; 0x59795
 	TX_FAR _UnnamedText_59795
@@ -37168,7 +39833,7 @@ Route15Text10:
 	ld hl, $584b
 asm_33cb7: ; 0x59892
 	call $31cc
-	jp $24d7
+	jp TextScriptEnd
 ; 0x59898
 
 UnnamedText_59898: ; 0x59898
@@ -37346,7 +40011,7 @@ Route16Text1: ; 0x59a18
 	db $08 ; asm
 	ld hl, $59cf
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_59a22: ; 0x59a22
 	TX_FAR _UnnamedText_59a22
@@ -37367,7 +40032,7 @@ Route16Text2: ; 0x59a31
 	db $08 ; asm
 	ld hl, $59db
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_59a3b: ; 0x59a3b
 	TX_FAR _UnnamedText_59a3b
@@ -37388,7 +40053,7 @@ Route16Text3: ; 0x59a4a
 	db $08 ; asm
 	ld hl, $59e7
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_59a54: ; 0x59a54
 	TX_FAR _UnnamedText_59a54
@@ -37409,7 +40074,7 @@ Route16Text4: ; 0x59a63
 	db $08 ; asm
 	ld hl, $59f3
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_59a6d: ; 0x59a6d
 	TX_FAR _UnnamedText_59a6d
@@ -37430,7 +40095,7 @@ Route16Text5: ; 0x59a7c
 	db $08 ; asm
 	ld hl, $59ff
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_59a86: ; 0x59a86
 	TX_FAR _UnnamedText_59a86
@@ -37451,7 +40116,7 @@ Route16Text6: ; 0x59a95
 	db $08 ; asm
 	ld hl, $5a0b
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_59a9f: ; 0x59a9f
 	TX_FAR _UnnamedText_59a9f
@@ -37511,7 +40176,7 @@ Route18Text1: ; 0x59b0f
 	db $08 ; asm
 	ld hl, $5aea
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_59b19: ; 0x59b19
 	TX_FAR _UnnamedText_59b19
@@ -37532,7 +40197,7 @@ Route18Text2: ; 0x59b28
 	db $08 ; asm
 	ld hl, $5af6
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_59b32: ; 0x59b32
 	TX_FAR _UnnamedText_59b32
@@ -37553,7 +40218,7 @@ Route18Text3: ; 0x59b41
 	db $08 ; asm
 	ld hl, $5b02
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_59b4b: ; 0x59b4b
 	TX_FAR _UnnamedText_59b4b
@@ -37611,7 +40276,7 @@ asm_67b22 ; 0x59ba9
 	ld hl, $d771
 	res 7, [hl]
 asm_64f01 ; 0x59bb4
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_59bb7: ; 0x59bb7
 	TX_FAR _UnnamedText_59bb7
@@ -37639,7 +40304,7 @@ asm_5cd59 ; 0x59bd6
 	ld hl, $d771
 	res 6, [hl]
 asm_59625 ; 0x59be1
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_59be4: ; 0x59be4
 	TX_FAR _UnnamedText_59be4
@@ -37658,7 +40323,7 @@ FanClubText3: ; 0x59bee
 	ld a, $54
 	call $13d0
 	call $3748
-	jp $24d7
+	jp TextScriptEnd
 ; 0x59c00
 
 UnnamedText_59c00: ; 0x59c00
@@ -37673,7 +40338,7 @@ FanClubText4: ; 0x59c05
 	ld a,SEEL
 	call $13d0
 	call $3748
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_59c17: ; 0x59c17
 	TX_FAR _UnnamedText_59c17
@@ -37693,7 +40358,7 @@ FanClubText5: ; 0x59c1c
 	ld hl, $5c6a
 	call PrintText
 	ld bc,(BIKE_VOUCHER << 8) | 1
-	call $3e2e
+	call GiveItem
 	jr nc, asm_867d4 ; 0x59c3d
 	ld hl, $5c6f
 	call PrintText
@@ -37712,7 +40377,7 @@ asm_38bb3 ; 0x59c5c
 	ld hl, $5c7e
 	call PrintText
 asm_d3c26 ; 0x59c62
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_59c65: ; 0x59c65
 	TX_FAR _UnnamedText_59c65
@@ -37818,7 +40483,7 @@ SilphCo2Text1: ; 0x59dc1
 	ld hl, $5ded
 	call PrintText
 	ld bc,(TM_36 << 8) | 1
-	call $3e2e
+	call GiveItem
 	ld hl, $5dfd
 	jr nc, asm_2c1e0 ; 0x59dd8
 	ld hl, $d826
@@ -37829,7 +40494,7 @@ asm_b8a0d ; 0x59de4
 	ld hl, $5df8
 asm_2c1e0 ; 0x59de7
 	call PrintText
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_59ded: ; 0x59ded
 	TX_FAR _UnnamedText_59ded
@@ -37852,25 +40517,25 @@ SilphCo2Text2: ; 0x59e02
 	db $08 ; asm
 	ld hl, $5d90
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 SilphCo2Text3: ; 0x59e0c
 	db $08 ; asm
 	ld hl, $5d9c
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 SilphCo2Text4: ; 0x59e16
 	db $08 ; asm
 	ld hl, $5da8
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 SilphCo2Text5: ; 0x59e20
 	db $08 ; asm
 	ld hl, $5db4
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_59e2a: ; 0x59e2a
 	TX_FAR _UnnamedText_59e2a
@@ -38000,7 +40665,7 @@ SilphCo3Text1: ; 0x59fe5
 	ld hl, $5ff9
 asm_8c56f ; 0x59ff3
 	call PrintText
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_59ff9: ; 0x59ff9
 	TX_FAR _UnnamedText_59ff9
@@ -38016,7 +40681,7 @@ SilphCo3Text2: ; 0x5a003
 	db $08 ; asm
 	ld hl, $5fcc
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_5a00d: ; 0x5a00d
 	TX_FAR _UnnamedText_5a00d
@@ -38037,7 +40702,7 @@ SilphCo3Text3: ; 0x5a01c
 	db $08 ; asm
 	ld hl, $5fd8
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_5a026: ; 0x5a026
 	TX_FAR _UnnamedText_5a026
@@ -38122,13 +40787,13 @@ SilphCo10Text1: ; 0x5a1ab
 	db $08 ; asm
 	ld hl, $6192
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 SilphCo10Text2: ; 0x5a1b5
 	db $08 ; asm
 	ld hl, $619e
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 SilphCo10Text3: ; 0x5a1bf
 	db $08 ; asm
@@ -38139,7 +40804,7 @@ SilphCo10Text3: ; 0x5a1bf
 	ld hl, $61d3
 asm_cf85f ; 0x5a1cd
 	call PrintText
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_5a1d3: ; 0x5a1d3
 	TX_FAR _UnnamedText_5a1d3
@@ -38243,7 +40908,7 @@ LanceText1: ; 0x5a3a4
 	db $08 ; asm
 	ld hl, $6397
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_5a3ae: ; 0x5a3ae
 	TX_FAR _UnnamedText_5a3ae
@@ -38288,7 +40953,7 @@ HallofFameRoom_h: ; 0x5a492 to 0x5a49e (12 bytes) (id=118)
 
 HallofFameRoomScript: ; 0x5a49e
 	call $3c3c
-	ld hl, $64b2
+	ld hl, HallofFameRoomScripts
 	ld a, [$d64b]
 	jp $3d97
 ; 0x5a4aa
@@ -38512,7 +41177,7 @@ MuseumF1Script: ; 0x5c0f7
 	ld [$cf0c], a
 	xor a
 	ld [$cc3c], a
-	ld hl, $4109
+	ld hl, MuseumF1Scripts
 	ld a, [$d619]
 	jp $3d97
 ; 0x5c109
@@ -38647,7 +41312,7 @@ asm_d1144:
 	ld hl, $4238
 	call PrintText
 asm_d1145: ; 0x5c217
-	jp $24d7
+	jp TextScriptEnd
 ; 0x5c21a
 
 UnnamedText_5c21a: ; 0x5c21a
@@ -38699,7 +41364,7 @@ MuseumF1Text2: ; 0x5c247
 	db $08 ; asm
 	ld hl, $4251
 	call PrintText
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_5c251: ; 0x5c251
 	TX_FAR _UnnamedText_5c251
@@ -38714,7 +41379,7 @@ MuseumF1Text3: ; 0x5c256
 	ld hl, $428e
 	call PrintText
 	ld bc,(OLD_AMBER << 8) | 1
-	call $3e2e
+	call GiveItem
 	jr nc, .asm_91ebf ; 0x5c26a
 	ld hl, $d754
 	set 1, [hl]
@@ -38731,7 +41396,7 @@ MuseumF1Text3: ; 0x5c256
 	ld hl, $4299
 .asm_52e0f ; 0x5c288
 	call PrintText
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_5c28e: ; 0x5c28e
 	TX_FAR _UnnamedText_5c28e
@@ -38754,7 +41419,7 @@ MuseumF1Text4: ; 0x5c2a3
 	db $08 ; asm
 	ld hl, $42ad
 	call PrintText
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_5c2ad: ; 0x5c2ad
 	TX_FAR _UnnamedText_5c2ad
@@ -38765,7 +41430,7 @@ MuseumF1Text5: ; 0x5c2b2
 	db $08 ; asm
 	ld hl, $42bc
 	call PrintText
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_5c2bc: ; 0x5c2bc
 	TX_FAR _UnnamedText_5c2bc
@@ -38925,7 +41590,7 @@ PewterGymText1: ; 0x5c44e
 	ld [$d5fc], a
 	ld [$da39], a
 .asm_e0ffb ; 0x5c49b
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_5c49e: ; 0x5c49e
 	TX_FAR _UnnamedText_5c49e
@@ -38964,7 +41629,7 @@ PewterGymText2: ; 0x5c4c6
 	db $08 ; asm
 	ld hl, $4441
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_5c4d0: ; 0x5c4d0
 	TX_FAR _UnnamedText_5c4d0
@@ -39006,7 +41671,7 @@ PewterGymText3: ; 0x5c4df
 	ld hl, $4529
 	call PrintText
 .asm_07013 ; 0x5c512
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_5c515: ; 0x5c515
 	TX_FAR _UnnamedText_5c515
@@ -39124,7 +41789,7 @@ PewterPokecenterText3: ; 0x5c59b
 	ld c, $30
 	call $3739
 	call $2307
-	jp $24d7
+	jp TextScriptEnd
 ; 0x5c603
 
 PewterPokecenterText5: ; broken TX_FAR to _PewterPokecenterText4
@@ -39271,7 +41936,7 @@ CeruleanGymText1: ; 0x5c771
 	ld a, $3
 	ld [$d5fd], a
 .asm_95b04 ; 0x5c7bb
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_5c7be: ; 0x5c7be
 	TX_FAR _UnnamedText_5c7be
@@ -39304,7 +41969,7 @@ CeruleanGymText2: ; 0x5c7df
 	db $08 ; asm
 	ld hl, $4758
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_5c7e9: ; 0x5c7e9
 	TX_FAR _UnnamedText_5c7e9
@@ -39325,7 +41990,7 @@ CeruleanGymText3: ; 0x5c7f8
 	db $08 ; asm
 	ld hl, $4764
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_5c802: ; 0x5c802
 	TX_FAR _UnnamedText_5c802
@@ -39354,7 +42019,7 @@ CeruleanGymText4: ; 0x5c811
 	ld hl, $482f
 	call PrintText
 .asm_18a31 ; 0x5c827
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_5c82a: ; 0x5c82a
 	TX_FAR _UnnamedText_5c82a
@@ -39509,7 +42174,7 @@ LavenderMartText3: ; 0x5c93a
 	ld hl, $4958
 	call PrintText
 .asm_6d225 ; 0x5c950
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_5c953: ; 0x5c953
 	TX_FAR _UnnamedText_5c953
@@ -39698,7 +42363,7 @@ VermilionGymText1: ; 0x5cb1d
 	ld [$d5fe], a
 	ld [$da39], a
 .asm_23621 ; 0x5cb6a
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_5cb6d: ; 0x5cb6d
 	TX_FAR _UnnamedText_5cb6d
@@ -39735,7 +42400,7 @@ VermilionGymText2: ; 0x5cb90
 	db $08 ; asm
 	ld hl, $4af8
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_5cb9a: ; 0x5cb9a
 	TX_FAR _UnnamedText_5cb9a
@@ -39756,7 +42421,7 @@ VermilionGymText3: ; 0x5cba9
 	db $08 ; asm
 	ld hl, $4b04
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_5cbb3: ; 0x5cbb3
 	TX_FAR _UnnamedText_5cbb3
@@ -39777,7 +42442,7 @@ VermilionGymText4: ; 0x5cbc2
 	db $08 ; asm
 	ld hl, $4b10
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_5cbcc: ; 0x5cbcc
 	TX_FAR _UnnamedText_5cbcc
@@ -39806,7 +42471,7 @@ VermilionGymText5: ; 0x5cbdb
 	ld hl, $4bf9
 	call PrintText
 .asm_c2b38 ; 0x5cbf1
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_5cbf4: ; 0x5cbf4
 	TX_FAR _UnnamedText_5cbf4
@@ -39871,7 +42536,7 @@ CopycatsHouseF2Text1: ; 0x5cc82
 	ld hl, $4cd9
 	call PrintText
 	ld bc,(TM_31 << 8) | 1
-	call $3e2e
+	call GiveItem
 	jr nc, .asm_16690 ; 0x5cca8
 	ld hl, $4cde
 	call PrintText
@@ -39891,7 +42556,7 @@ CopycatsHouseF2Text1: ; 0x5cc82
 	ld hl, $4ce9
 	call PrintText
 .asm_62ecd ; 0x5ccd1
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_5ccd4: ; 0x5ccd4
 	TX_FAR _UnnamedText_5ccd4
@@ -39935,7 +42600,7 @@ CopycatsHouseF2Text7: ; 0x5cd03
 	ld hl, $4d17
 .asm_399a4 ; 0x5cd11
 	call PrintText
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_5cd17: ; 0x5cd17
 	TX_FAR _UnnamedText_5cd17
@@ -40021,7 +42686,7 @@ FightingDojoText1: ; 0x5ce44
 	ld hl, $4e98
 	call PrintText
 .asm_9dba4 ; 0x5ce8b
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_5ce8e: ; 0x5ce8e
 	TX_FAR _UnnamedText_5ce8e
@@ -40047,7 +42712,7 @@ FightingDojoText2: ; 0x5cea2
 	db $08 ; asm
 	ld hl, $4e13
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_5ceac: ; 0x5ceac
 	TX_FAR _UnnamedText_5ceac
@@ -40068,7 +42733,7 @@ FightingDojoText3: ; 0x5cebb
 	db $08 ; asm
 	ld hl, $4e1f
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_5cec5: ; 0x5cec5
 	TX_FAR _UnnamedText_5cec5
@@ -40089,7 +42754,7 @@ FightingDojoText4: ; 0x5ced4
 	db $08 ; asm
 	ld hl, $4e2b
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_5cede: ; 0x5cede
 	TX_FAR _UnnamedText_5cede
@@ -40110,7 +42775,7 @@ FightingDojoText5: ; 0x5ceed
 	db $08 ; asm
 	ld hl, $4e37
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_5cef7: ; 0x5cef7
 	TX_FAR _UnnamedText_5cef7
@@ -40157,7 +42822,7 @@ FightingDojoText6: ; 0x5cf06
 	set 6, [hl]
 	set 0, [hl]
 .asm_3a2c8 ; 0x5cf46
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_5cf49: ; 0x5cf49
 	TX_FAR _UnnamedText_5cf49
@@ -40194,7 +42859,7 @@ FightingDojoText7: ; 0x5cf4e
 	ld a, $11
 	call Predef
 .asm_f1f47 ; 0x5cf8e
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_5cf91: ; 0x5cf91
 	TX_FAR _UnnamedText_5cf91
@@ -40292,7 +42957,7 @@ SaffronGymText1: ; 0x5d118
 	ld a, $3
 	ld [$d65c], a
 .asm_34c2c ; 0x5d15f
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_5d162: ; 0x5d162
 	TX_FAR _UnnamedText_5d162
@@ -40331,43 +42996,43 @@ SaffronGymText2: ; 0x5d187
 	db $08 ; asm
 	ld hl, $50c3
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 SaffronGymText3: ; 0x5d191
 	db $08 ; asm
 	ld hl, $50cf
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 SaffronGymText4: ; 0x5d19b
 	db $08 ; asm
 	ld hl, $50db
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 SaffronGymText5: ; 0x5d1a5
 	db $08 ; asm
 	ld hl, $50e7
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 SaffronGymText6: ; 0x5d1af
 	db $08 ; asm
 	ld hl, $50f3
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 SaffronGymText7: ; 0x5d1b9
 	db $08 ; asm
 	ld hl, $50ff
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 SaffronGymText8: ; 0x5d1c3
 	db $08 ; asm
 	ld hl, $510b
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 SaffronGymText9: ; 0x5d1cd
 	db $08 ; asm
@@ -40381,7 +43046,7 @@ SaffronGymText9: ; 0x5d1cd
 	ld hl, $51eb
 	call PrintText
 .asm_e9907 ; 0x5d1e3
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_5d1e6: ; 0x5d1e6
 	TX_FAR _UnnamedText_5d1e6
@@ -40816,7 +43481,7 @@ Route2GateText1: ; 0x5d5db
 	ld hl, $5616
 	call PrintText
 .asm_ad646 ; 0x5d613
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_5d616: ; 0x5d616
 	TX_FAR _UnnamedText_5d616
@@ -41088,7 +43753,7 @@ SilphCo9Text1: ; 0x5d8b8
 	ld hl, $58ef
 	call PrintText
 .asm_b6e28 ; 0x5d8e2
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_5d8e5: ; 0x5d8e5
 	TX_FAR _UnnamedText_5d8e5
@@ -41109,19 +43774,19 @@ SilphCo9Text2: ; 0x5d8f4
 	db $08 ; asm
 	ld hl, $5893
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 SilphCo9Text3: ; 0x5d8fe
 	db $08 ; asm
 	ld hl, $589f
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 SilphCo9Text4: ; 0x5d908
 	db $08 ; asm
 	ld hl, $58ab
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_5d912: ; 0x5d912
 	TX_FAR _UnnamedText_5d912
@@ -41229,13 +43894,13 @@ VictoryRoad1Text1: ; 0x5da86
 	db $08 ; asm
 	ld hl, $5a6d
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 VictoryRoad1Text2: ; 0x5da90
 	db $08 ; asm
 	ld hl, $5a79
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_5da9a: ; 0x5da9a
 	TX_FAR _UnnamedText_5da9a
@@ -41490,7 +44155,7 @@ PokemonTower2_h: ; 0x604e6 to 0x604f2 (12 bytes) (id=143)
 
 PokemonTower2Script: ; 0x604f2
 	call $3c3c
-	ld hl, $4509
+	ld hl, PokemonTower2Scripts
 	ld a, [$d62b]
 	jp $3d97
 ; 0x604fe
@@ -41636,7 +44301,7 @@ PokemonTower2Text1: ; 0x605df
 	ld [$d62b], a
 	ld [$da39], a
 .asm_41852 ; 0x6062a
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_6062d: ; 0x6062d
 	TX_FAR _UnnamedText_6062d
@@ -41711,19 +44376,19 @@ PokemonTower3Text1: ; 0x60712
 	db $08 ; asm
 	ld hl, $46ed
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 PokemonTower3Text2: ; 0x6071c
 	db $08 ; asm
 	ld hl, $46f9
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 PokemonTower3Text3: ; 0x60726
 	db $08 ; asm
 	ld hl, $4705
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_60730: ; 0x60730
 	TX_FAR _UnnamedText_60730
@@ -41821,19 +44486,19 @@ PokemonTower4Text1: ; 0x60840
 	db $08 ; asm
 	ld hl, $481b
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 PokemonTower4Text2: ; 0x6084a
 	db $08 ; asm
 	ld hl, $4827
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 PokemonTower4Text3: ; 0x60854
 	db $08 ; asm
 	ld hl, $4833
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_6085e: ; 0x6085e
 	TX_FAR _UnnamedText_6085e
@@ -41937,7 +44602,7 @@ PokemonTower5Text2: ; 0x609df
 	db $08 ; asm
 	ld hl, $49a9
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_609e9: ; 0x609e9
 	TX_FAR _UnnamedText_609e9
@@ -41958,7 +44623,7 @@ PokemonTower5Text3: ; 0x609f8
 	db $08 ; asm
 	ld hl, $49b5
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_60a02: ; 0x60a02
 	TX_FAR _UnnamedText_60a02
@@ -41979,7 +44644,7 @@ PokemonTower5Text4: ; 0x60a11
 	db $08 ; asm
 	ld hl, $49c1
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_60a1b: ; 0x60a1b
 	TX_FAR _UnnamedText_60a1b
@@ -42000,7 +44665,7 @@ PokemonTower5Text5: ; 0x60a2a
 	db $08 ; asm
 	ld hl, $49cd
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_60a34: ; 0x60a34
 	TX_FAR _UnnamedText_60a34
@@ -42075,19 +44740,19 @@ PokemonTower6Text1: ; 0x60be4
 	db $08 ; asm
 	ld hl, $4bbf
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 PokemonTower6Text2: ; 0x60bee
 	db $08 ; asm
 	ld hl, $4bcb
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 PokemonTower6Text3: ; 0x60bf8
 	db $08 ; asm
 	ld hl, $4bd7
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 PokemonTower6Text7: ; 0x60c02
 INCBIN "baserom.gbc",$60c02,$60c1f - $60c02
@@ -42206,19 +44871,19 @@ PokemonTower7Text1: ; 0x60e6c
 	db $08 ; asm
 	ld hl, $4e47
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 PokemonTower7Text2: ; 0x60e76
 	db $08 ; asm
 	ld hl, $4e53
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 PokemonTower7Text3: ; 0x60e80
 	db $08 ; asm
 	ld hl, $4e5f
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 PokemonTower7Text4: ; 0x60e8a
 	db $08 ; asm
@@ -42243,7 +44908,7 @@ PokemonTower7Text4: ; 0x60e8a
 	ld a, $4
 	ld [$d630], a
 	ld [$da39], a
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_60ec4: ; 0x60ec4
 	TX_FAR _UnnamedText_60ec4
@@ -42428,19 +45093,19 @@ ViridianForestText2: ; 0x6116c
 	db $08 ; asm
 	ld hl, $5142
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 ViridianForestText3: ; 0x61176
 	db $08 ; asm
 	ld hl, $514e
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 ViridianForestText4: ; 0x61180
 	db $08 ; asm
 	ld hl, $515a
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_6118a: ; 0x6118a
 	TX_FAR _UnnamedText_6118a
@@ -42624,7 +45289,7 @@ SSAnne2_h: ; 0x61393 to 0x6139f (12 bytes) (id=96)
 
 SSAnne2Script: ; 0x6139f
 	call $3c3c
-	ld hl, $53b3
+	ld hl, SSAnne2Scripts
 	ld a, [$d665]
 	jp $3d97
 ; 0x613ab
@@ -42784,7 +45449,7 @@ SSAnne2Text2: ; 0x614e6
 	ld hl, $5505
 	ld de, $550a
 	call $3354
-	jp $24d7
+	jp TextScriptEnd
 ; 0x61500
 
 UnnamedText_61500: ; 0x61500
@@ -42924,7 +45589,7 @@ SSAnne5Text4: ; 0x616f9
 	db $08 ; asm
 	ld hl, $56d1
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_61703: ; 0x61703
 	TX_FAR _UnnamedText_61703
@@ -42945,7 +45610,7 @@ SSAnne5Text5: ; 0x61712
 	db $08 ; asm
 	ld hl, $56dd
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_6171c: ; 0x6171c
 	TX_FAR _UnnamedText_6171c
@@ -43043,7 +45708,7 @@ SSAnne6Text7: ; 0x617e3
 	ld hl, $5816
 .asm_63292 ; 0x61801
 	call PrintText
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_61807: ; 0x61807
 	TX_FAR _UnnamedText_61807
@@ -43116,7 +45781,7 @@ SSAnne7Text1: ; 0x618ad
 	ld hl, $5927
 	call PrintText
 	ld bc,(HM_01 << 8) | 1
-	call $3e2e
+	call GiveItem
 	jr nc, .asm_ccdcd ; 0x618c7
 	ld hl, $592c
 	call PrintText
@@ -43133,7 +45798,7 @@ SSAnne7Text1: ; 0x618ad
 	ld hl, $5932
 	call PrintText
 .asm_0faf5 ; 0x618e9
-	jp $24d7
+	jp TextScriptEnd
 
 INCBIN "baserom.gbc",$618ec,$61927 - $618ec
 
@@ -43210,32 +45875,32 @@ SSAnne8Text1: ; 0x619d6
 	db $08 ; asm
 	ld hl, $59a5
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 SSAnne8Text2: ; 0x619e0
 	db $08 ; asm
 	ld hl, $59b1
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 SSAnne8Text3: ; 0x619ea
 	db $08 ; asm
 	ld hl, $59bd
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 SSAnne8Text4: ; 0x619f4
 	db $08 ; asm
 	ld hl, $59c9
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 SSAnne8Text8: ; 0x619fe
 	TX_FAR _SSAnne8Text8
 	db $08 ; asm
 	ld a, $65
 	call $13d0
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_61a0b: ; 0x61a0b
 	TX_FAR _UnnamedText_61a0b
@@ -43386,25 +46051,25 @@ SSAnne9Text1: ; 0x61bb5
 	db $08 ; asm
 	ld hl, $5b84
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 SSAnne9Text2: ; 0x61bbf
 	db $08 ; asm
 	ld hl, $5b90
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 SSAnne9Text3: ; 0x61bc9
 	db $08 ; asm
 	ld hl, $5b9c
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 SSAnne9Text4: ; 0x61bd3
 	db $08 ; asm
 	ld hl, $5ba8
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 SSAnne9Text5: ; 0x61bdd
 	db $08 ; asm
@@ -43414,7 +46079,7 @@ SSAnne9Text5: ; 0x61bdd
 	call $3725
 	ld a, $84
 	call $349b
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_61bf2: ; 0x61bf2
 	TX_FAR _UnnamedText_61bf2
@@ -43425,7 +46090,7 @@ SSAnne9Text7: ; 0x61bf7
 	db $08 ; asm
 	ld hl, $5c01
 	call PrintText
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_61c01: ; 0x61c01
 	TX_FAR _UnnamedText_61c01
@@ -43436,7 +46101,7 @@ SSAnne9Text8: ; 0x61c06
 	db $08 ; asm
 	ld hl, $5c10
 	call PrintText
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_61c10: ; 0x61c10
 	TX_FAR _UnnamedText_61c10
@@ -43447,7 +46112,7 @@ SSAnne9Text10: ; 0x61c15
 	db $08 ; asm
 	ld hl, $5c1f
 	call PrintText
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_61c1f: ; 0x61c1f
 	TX_FAR _UnnamedText_61c1f
@@ -43458,7 +46123,7 @@ SSAnne9Text11: ; 0x61c24
 	db $08 ; asm
 	ld hl, $5c2e
 	call PrintText
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_61c2e: ; 0x61c2e
 	TX_FAR _UnnamedText_61c2e
@@ -43469,7 +46134,7 @@ SSAnne9Text12: ; 0x61c33
 	db $08 ; asm
 	ld hl, $5c3d
 	call PrintText
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_61c3d: ; 0x61c3d
 	TX_FAR _UnnamedText_61c3d
@@ -43480,7 +46145,7 @@ SSAnne9Text13: ; 0x61c42
 	db $08 ; asm
 	ld hl, $5c4c
 	call PrintText
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_61c4c: ; 0x61c4c
 	TX_FAR _UnnamedText_61c4c
@@ -43624,44 +46289,44 @@ SSAnne10Text1: ; 0x61dcd
 	db $08 ; asm
 	ld hl, $5d84
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 SSAnne10Text2: ; 0x61dd7
 	db $08 ; asm
 	ld hl, $5d90
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 SSAnne10Text3: ; 0x61de1
 	db $08 ; asm
 	ld hl, $5d9c
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 SSAnne10Text4: ; 0x61deb
 	db $08 ; asm
 	ld hl, $5da8
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 SSAnne10Text5: ; 0x61df5
 	db $08 ; asm
 	ld hl, $5db4
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 SSAnne10Text6: ; 0x61dff
 	db $08 ; asm
 	ld hl, $5dc0
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 SSAnne10Text8: ; 0x61e09
 	TX_FAR _SSAnne10Text8
 	db $8 ; 0x61e0d
 	ld a, $29
 	call $13d0
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_61e16: ; 0x61e16
 	TX_FAR _UnnamedText_61e16
@@ -43927,7 +46592,7 @@ SilphCo11Text1: ; 0x622dc
 	ld hl, $6311
 	call PrintText
 	ld bc,(MASTER_BALL << 8) | 1
-	call $3e2e
+	call GiveItem
 	jr nc, .asm_36088 ; 0x622f1
 	ld hl, $6316
 	call PrintText
@@ -43941,7 +46606,7 @@ SilphCo11Text1: ; 0x622dc
 	ld hl, $631c
 	call PrintText
 .asm_fd405 ; 0x6230e
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_62311: ; 0x62311
 	TX_FAR _UnnamedText_62311
@@ -43982,7 +46647,7 @@ SilphCo11Text4: ; 0x6233a
 	db $08 ; asm
 	ld hl, $62c3
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_62344: ; 0x62344
 	TX_FAR _UnnamedText_62344
@@ -44003,7 +46668,7 @@ SilphCo11Text5: ; 0x62353
 	db $08 ; asm
 	ld hl, $62cf
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_6235d: ; 0x6235d
 	TX_FAR _UnnamedText_6235d
@@ -44194,32 +46859,43 @@ SECTION "bank1A",DATA,BANK[$1A]
 
 DecrementPP: ; 0x68000
 ; after using a move, decrement pp in battle and (if not transformed?) in party
-	ld a,[de]
-	cp a,STRUGGLE
-	ret z
-	ld hl,$D062
-	ld a,[hli]
-	and a,7
-	ret nz
-	bit 6,[hl]
-	ret nz
-	ld hl,$D02D ; PP of first move (in battle)
+	ld a, [de]
+	cp a, STRUGGLE
+	ret z                ; if the pokemon is using "struggle", there's nothing to do
+                         ; we don't decrement PP for "struggle"
+	ld hl, $D062
+	ld a, [hli]          ; load the $D062 pokemon status flags and increment hl to load the
+                         ; $D063 status flags later
+	and a, 7             ; check to see if bits 0, 1, or 2 are set
+	ret nz               ; if any of these statuses are true, don't decrement PP
+	bit 6, [hl]          ; check 6th bit status flag on $D063
+	ret nz               ; and return if it is set
+	ld hl, $D02D         ; PP of first move (in battle)
 	call .DecrementPP\@
 
-	ld a,[$D064]
-	bit 3,a ; XXX transform status?
-	ret nz
+	ld a, [$D064]        ; load pokemon status bits?
+	bit 3, a             ; XXX transform status?
+	ret nz               ; If it is, return.  Pokemon Red stores the "current pokemon's" PP
+                         ; separately from the "Pokemon in your party's" PP.  This is
+                         ; duplication -- in all cases *other* than Pokemon with Transform.
+                         ; Normally, this means we have to go on and make the same     
+                         ; modification to the "party's pokemon" PP that we made to the
+                         ; "current pokemon's" PP.  But, if we're dealing with a Transformed
+                         ; Pokemon, it has separate PP for the move set that it copied from
+                         ; its opponent, which is *not* the same as its real PP as part of your
+                         ; party.  So we return, and don't do that part.
 
-	ld hl,$D188 ; PP of first move (in party)
-	ld a,[$CC2F] ; which mon in party is active
-	ld bc,$2C
-	call AddNTimes
+	ld hl, $D188         ; PP of first move (in party)
+	ld a, [$CC2F]        ; which mon in party is active
+	ld bc, $2C           ; XXX probably size of party pokemon's data structure
+	call AddNTimes       ; calculate address of the mon to modify
 .DecrementPP\@
-	ld a,[$CC2E] ; which move (0, 1, 2, 3) did we use?
-	ld c,a
-	ld b,0
-	add hl,bc
-	dec [hl] ; Decrement PP
+	ld a, [$CC2E]        ; which move (0, 1, 2, 3) did we use?
+	ld c, a
+	ld b, 0
+	add hl ,bc           ; calculate the address in memory of the PP we need to decrement
+                         ; based on the move chosen.
+	dec [hl]             ; Decrement PP
 	ret
 ; 0x6802f
 
@@ -45612,7 +48288,7 @@ ViridianGymText1: ; 0x74a69
 	ld a, $3
 	ld [$d5fb], a
 .asm_6dff7 ; 0x74acb
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_74ace: ; 0x74ace
 	TX_FAR _UnnamedText_74ace
@@ -45650,7 +48326,7 @@ ViridianGymText2: ; 0x74af3
 	db $08 ; asm
 	ld hl, $4a08
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_74afd: ; 0x74afd
 	TX_FAR _UnnamedText_74afd
@@ -45671,7 +48347,7 @@ ViridianGymText3: ; 0x74b0c
 	db $08 ; asm
 	ld hl, $4a14
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_74b16: ; 0x74b16
 	TX_FAR _UnnamedText_74b16
@@ -45692,7 +48368,7 @@ ViridianGymText4: ; 0x74b25
 	db $08 ; asm
 	ld hl, $4a20
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_74b2f: ; 0x74b2f
 	TX_FAR _UnnamedText_74b2f
@@ -45713,7 +48389,7 @@ ViridianGymText5: ; 0x74b3e
 	db $08 ; asm
 	ld hl, $4a2c
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_74b48: ; 0x74b48
 	TX_FAR _UnnamedText_74b48
@@ -45734,7 +48410,7 @@ ViridianGymText6: ; 0x74b57
 	db $08 ; asm
 	ld hl, $4a38
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_74b61: ; 0x74b61
 	TX_FAR _UnnamedText_74b61
@@ -45755,7 +48431,7 @@ ViridianGymText7: ; 0x74b70
 	db $08 ; asm
 	ld hl, $4a44
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_74b7a: ; 0x74b7a
 	TX_FAR _UnnamedText_74b7a
@@ -45776,7 +48452,7 @@ ViridianGymText8: ; 0x74b89
 	db $08 ; asm
 	ld hl, $4a50
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_74b93: ; 0x74b93
 	TX_FAR _UnnamedText_74b93
@@ -45797,7 +48473,7 @@ ViridianGymText9: ; 0x74ba2
 	db $08 ; asm
 	ld hl, $4a5c
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_74bac: ; 0x74bac
 	TX_FAR _UnnamedText_74bac
@@ -45826,7 +48502,7 @@ ViridianGymText10: ; 0x74bbb
 	ld hl, $4bd9
 	call PrintText
 .asm_6064d ; 0x74bd1
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_74bd4: ; 0x74bd4
 	TX_FAR _UnnamedText_74bd4
@@ -45889,7 +48565,7 @@ PewterMartText2: ; 0x74cbc
 	db $08 ; asm
 	ld hl, $4cc6
 	call PrintText
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_74cc6: ; 0x74cc6
 	TX_FAR _UnnamedText_74cc6
@@ -45900,7 +48576,7 @@ PewterMartText3: ; 0x74ccb
 	db $08 ; asm
 	ld hl, $4cd5
 	call PrintText
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_74cd5: ; 0x74cd5
 	TX_FAR _UnnamedText_74cd5
@@ -46035,7 +48711,7 @@ CeruleanHouse3Text1: ; 0x74e15
 	ld [$cc36], a
 	ld hl, $4e81
 	call PrintText
-	jp $24d7
+	jp TextScriptEnd
 ; 0x74e6d
 
 db $8,BOULDERBADGE,CASCADEBADGE,THUNDERBADGE,RAINBOWBADGE,SOULBADGE,MARSHBADGE,VOLCANOBADGE,EARTHBADGE,$FF
@@ -46298,7 +48974,7 @@ FuchsiaHouse2Text1: ; 0x750c2
 	ld hl, $514e
 	call PrintText
 	ld bc,(HM_04 << 8) | 1
-	call $3e2e
+	call GiveItem
 	jr nc, .asm_53b90 ; 0x75115
 	ld hl, $5153
 	call PrintText
@@ -46313,7 +48989,7 @@ FuchsiaHouse2Text1: ; 0x750c2
 	ld hl, $515e
 	call PrintText
 .asm_52039 ; 0x75132
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_75135: ; 0x75135
 	TX_FAR _UnnamedText_75135
@@ -46369,7 +49045,7 @@ FuchsiaHouse2Text4: ; 0x75163
 	ld hl, $5176
 .asm_4c9a2 ; 0x75170
 	call PrintText
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_75176: ; 0x75176
 	TX_FAR _UnnamedText_75176
@@ -46414,7 +49090,7 @@ SafariZoneEntrance_h: ; 0x751c1 to 0x751cd (12 bytes) (id=156)
 
 SafariZoneEntranceScript: ; 0x751cd
 	call $3c3c
-	ld hl, $51d9
+	ld hl, SafariZoneEntranceScripts
 	ld a, [$d61f]
 	jp $3d97
 ; 0x751d9
@@ -46601,7 +49277,7 @@ SafariZoneEntranceText4: ; 0x752ca
 	ld a, $4
 	ld [$d61f], a
 .asm_75358
-	jp $24d7
+	jp TextScriptEnd
 ; 0x7535b
 
 UnnamedText_7535b: ; 0x7535b
@@ -46656,7 +49332,7 @@ SafariZoneEntranceText5: ; 0x7536f
 .asm_753b3
 	ld a, $6
 	ld [$d61f], a
-	jp $24d7
+	jp TextScriptEnd
 ; 0x753bb
 
 UnnamedText_753bb: ; 0x753bb
@@ -46686,7 +49362,7 @@ SafariZoneEntranceText2: ; 0x753ca
 	ld hl, $53eb
 .asm_278a6 ; 0x753e0
 	call PrintText
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_753e6: ; 0x753e6
 	TX_FAR _UnnamedText_753e6
@@ -46794,7 +49470,7 @@ FuchsiaGymText1: ; 0x75534
 	ld a, $3
 	ld [$d65b], a
 .asm_e84c6 ; 0x7557e
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_75581: ; 0x75581
 	TX_FAR _UnnamedText_75581
@@ -46834,7 +49510,7 @@ FuchsiaGymText2: ; 0x755a4
 	db $08 ; asm
 	ld hl, $54eb
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_755ae: ; 0x755ae
 	TX_FAR _UnnamedText_755ae
@@ -46855,7 +49531,7 @@ FuchsiaGymText3: ; 0x755bd
 	db $08 ; asm
 	ld hl, $54f7
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_755c7: ; 0x755c7
 	TX_FAR _UnnamedText_755c7
@@ -46876,7 +49552,7 @@ FuchsiaGymText4: ; 0x755d6
 	db $08 ; asm
 	ld hl, $5503
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_755e0: ; 0x755e0
 	TX_FAR _UnnamedText_755e0
@@ -46897,7 +49573,7 @@ FuchsiaGymText5: ; 0x755ef
 	db $08 ; asm
 	ld hl, $550f
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_755f9: ; 0x755f9
 	TX_FAR _UnnamedText_755f9
@@ -46918,7 +49594,7 @@ FuchsiaGymText6: ; 0x75608
 	db $08 ; asm
 	ld hl, $551b
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_75612: ; 0x75612
 	TX_FAR _UnnamedText_75612
@@ -46939,7 +49615,7 @@ FuchsiaGymText7: ; 0x75621
 	db $08 ; asm
 	ld hl, $5527
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_7562b: ; 0x7562b
 	TX_FAR _UnnamedText_7562b
@@ -46965,7 +49641,7 @@ FuchsiaGymText8: ; 0x7563a
 	ld hl, $564e
 .asm_50671 ; 0x75648
 	call PrintText
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_7564e: ; 0x7564e
 	TX_FAR _UnnamedText_7564e
@@ -47063,7 +49739,7 @@ CinnabarGym_h: ; 0x7573e to 0x7574a (12 bytes) (id=166)
 CinnabarGymScript: ; 0x7574a
 	call $5759
 	call $3c3c
-	ld hl, $57a6
+	ld hl, CinnabarGymScripts
 	ld a, [$d65e]
 	jp $3d97
 ; 0x75759
@@ -47215,11 +49891,11 @@ CinnabarGymText1: ; 0x758df
 	jr nz, .asm_3012f ; 0x758e9 $9
 	call z, $5857
 	call $30b6
-	jp $24d7
+	jp TextScriptEnd
 .asm_3012f ; 0x758f4
 	ld hl, $5920
 	call PrintText
-	jp $24d7
+	jp TextScriptEnd
 .asm_d9332 ; 0x758fd
 	ld hl, $5914
 	call PrintText
@@ -47279,7 +49955,7 @@ CinnabarGymText2: ; 0x75939
 .asm_46bb4 ; 0x75956
 	ld hl, $5969
 	call PrintText
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_7595f: ; 0x7595f
 	TX_FAR _UnnamedText_7595f
@@ -47311,7 +49987,7 @@ CinnabarGymText3: ; 0x7596e
 .asm_4b406 ; 0x7598b
 	ld hl, $599e
 	call PrintText
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_75994: ; 0x75994
 	TX_FAR _UnnamedText_75994
@@ -47343,7 +50019,7 @@ CinnabarGymText4: ; 0x759a3
 .asm_c0673 ; 0x759c0
 	ld hl, $59d3
 	call PrintText
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_759c9: ; 0x759c9
 	TX_FAR _UnnamedText_759c9
@@ -47375,7 +50051,7 @@ CinnabarGymText5: ; 0x759d8
 .asm_5cfd7 ; 0x759f5
 	ld hl, $5a08
 	call PrintText
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_759fe: ; 0x759fe
 	TX_FAR _UnnamedText_759fe
@@ -47407,7 +50083,7 @@ CinnabarGymText6: ; 0x75a0d
 .asm_776b4 ; 0x75a2a
 	ld hl, $5a3d
 	call PrintText
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_75a33: ; 0x75a33
 	TX_FAR _UnnamedText_75a33
@@ -47439,7 +50115,7 @@ CinnabarGymText7: ; 0x75a42
 .asm_2f755 ; 0x75a5f
 	ld hl, $5a72
 	call PrintText
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_75a68: ; 0x75a68
 	TX_FAR _UnnamedText_75a68
@@ -47471,7 +50147,7 @@ CinnabarGymText8: ; 0x75a77
 .asm_d87be ; 0x75a94
 	ld hl, $5aa7
 	call PrintText
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_75a9d: ; 0x75a9d
 	TX_FAR _UnnamedText_75a9d
@@ -47499,7 +50175,7 @@ CinnabarGymText9: ; 0x75aac
 	ld hl, $5ac7
 .asm_0b11d ; 0x75abc
 	call PrintText
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_75ac2: ; 0x75ac2
 	TX_FAR _UnnamedText_75ac2
@@ -47635,7 +50311,7 @@ Lab2Text3:
 asm_78552: ; 0x75c3d
 	ld a, $54
 	call Predef
-	jp $24d7
+	jp TextScriptEnd
 
 Lab2Object: ; 0x75c45 (size=38)
 	db $17 ; border tile
@@ -47681,7 +50357,7 @@ Lab3Text1: ; 0x75c94
 	ld hl, $5cc8
 	call PrintText
 	ld bc,(TM_35 << 8) | 1
-	call $3e2e
+	call GiveItem
 	jr nc, .asm_6c187 ; 0x75ca8
 	ld hl, $5ccd
 	call PrintText
@@ -47696,7 +50372,7 @@ Lab3Text1: ; 0x75c94
 	ld hl, $5cd3
 	call PrintText
 .asm_eb896 ; 0x75cc5
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_75cc8: ; 0x75cc8
 	TX_FAR _UnnamedText_75cc8
@@ -47790,7 +50466,7 @@ Lab4Text1: ; 0x75d6c
 	ld hl, $5dcb
 	call PrintText
 .asm_75d93
-	jp $24d7
+	jp TextScriptEnd
 .asm_75d96
 	bit 1, a
 	jr z, .asm_75da2 ; 0x75d98 $8
@@ -47841,7 +50517,7 @@ Lab4Text2: ; 0x75dda
 	ld [W_WHICHTRADE], a
 	ld a, $54
 	call Predef
-	jp $24d7
+	jp TextScriptEnd
 
 ; 0x75de8
 ; XXX todo
@@ -47990,7 +50666,7 @@ CopycatsHouseF1Text3: ; 0x75ed6
 	db $8
 	ld a, $28
 	call $13d0
-	jp $24d7
+	jp TextScriptEnd
 
 CopycatsHouseF1Object: ; 0x75ee3 (size=46)
 	db $a ; border tile
@@ -48022,7 +50698,7 @@ Gary_h: ;0x75f11
 
 GaryScript: ; 0x75f1d
 	call $3c3c
-	ld hl, $5f31
+	ld hl, GaryScripts
 	ld a, [$d64c]
 	jp $3d97
 ; 0x75f29
@@ -48113,7 +50789,7 @@ GaryText1: ; 0x760e0
 	ld hl, $6103
 .asm_17e9f ; 0x760ee
 	call PrintText
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_760f4: ; 0x760f4
 	TX_FAR _UnnamedText_760f4
@@ -48146,7 +50822,7 @@ GaryText3: ; 0x7610d
 	call GetMonName
 	ld hl, $6120
 	call PrintText
-	jp $24d7
+	jp TextScriptEnd
 ; 0x76120
 
 UnnamedText_76120: ; 0x76120
@@ -48218,7 +50894,7 @@ LoreleiText1: ; 0x76262
 	db $08 ; asm
 	ld hl, $6255
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_7626c: ; 0x7626c
 	TX_FAR _UnnamedText_7626c
@@ -48293,7 +50969,7 @@ BrunoText1: ; 0x763b9
 	db $08 ; asm
 	ld hl, $63ac
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_763c3: ; 0x763c3
 	TX_FAR _UnnamedText_763c3
@@ -48368,7 +51044,7 @@ AgathaText1: ; 0x76516
 	db $08 ; asm
 	ld hl, $6509
 	call LoadTrainerHeader
-	jp $24d7
+	jp TextScriptEnd
 
 UnnamedText_76520: ; 0x76520
 	TX_FAR _UnnamedText_76520
@@ -49542,14 +52218,14 @@ _UnnamedText_49f64: ; 0x80979
 	db "HELIX FOSSIL?", $57
 ; 0x80979 + 28 bytes
 
-UnnamedText_80995: ; 0x80995
+_UnnamedText_49f6f: ; 0x80995
 	db $0, $52, " got the", $4f
 	db "@"
 	TX_RAM $cf4b
 	db $0, "!@@"
 ; 0x809a8
 
-UnnamedText_809a8: ; 0x809a8
+_UnnamedText_49f7f: ; 0x809a8
 	db $0, "Look, you've got", $4f
 	db "no room for this.@@"
 ; 0x809cc
@@ -50474,7 +53150,7 @@ _UnnamedText_455ec: ; 0x82418
 	db "the LIFT KEY!", $57
 ; 0x82418 + 32 bytes
 
-UnnamedText_82438: ; 0x82438
+_UnnamedText_4578b: ; 0x82438
 	db $0, "It appears to", $4f
 	db "need a key.@@"
 ; 0xa82454
@@ -51579,7 +54255,7 @@ _UnnamedText_4a350: ; 0x858a4
 	db "You have won!", $58
 ; 0x858a4 + 159 bytes
 
-UnnamedText_85943: ; 0x85943
+_UnnamedText_4a355: ; 0x85943
 	db $0, $52, " received", $4f
 	db "@"
 	TX_RAM $cf4b
@@ -54318,7 +56994,7 @@ _UnnamedText_4959c: ; 0x8c86b
 	db "it any more...", $58
 ; 0x8c86b + 91 bytes
 
-ReceivedTM39Text: ; 0x8c8c6
+_ReceivedTM39Text: ; 0x8c8c6
 	db $0, $52, " received", $4f
 	db "TM39!@@"
 ; 0x8c8c6 + 19 bytes
@@ -54337,7 +57013,7 @@ _UnnamedText_495ac: ; 0x8c93c
 	db "room for this.", $57
 ; 0x8c93c + 30 bytes
 
-nknownText_8c95a: ; 0x8c95a
+_UnnamedText_495b8: ; 0x8c95a
 	db $0, "Looked into the", $4f
 	db "binoculars.", $51
 	db "A man fishing!", $57
@@ -54481,7 +57157,7 @@ _UnnamedText_49847: ; 0x8cdc6
 	db "path over water!", $57
 ; 0x8cdc6 + 60 bytes
 
-_UnnamedText_1e62b: ; 0x8ce02
+_Route16HouseText3: ; 0x8ce02
 	db $0, "Oh, you found my", $4f
 	db "secret retreat!", $51
 	db "Please don't tell", $4f
@@ -54490,12 +57166,12 @@ _UnnamedText_1e62b: ; 0x8ce02
 	db "to you with this!", $58
 ; 0x8ce02 + 100 bytes
 
-ReceivedHM02Text: ; 0x8ce66
+_ReceivedHM02Text: ; 0x8ce66
 	db $0, $52, " received", $4f
 	db "HM02!@@"
 ; 0x8ce66 + 19 bytes
 
-_UnnamedText_1e636: ; 0x8ce79
+_HM02ExplanationText: ; 0x8ce79
 	db $0, "HM02 is FLY.", $4f
 	db "It will take you", $55
 	db "back to any town.", $51
@@ -54503,7 +57179,7 @@ _UnnamedText_1e636: ; 0x8ce79
 	db "use!", $57
 ; 0x8ce79 + 69 bytes
 
-_UnnamedText_1e63b: ; 0x8cebe
+_HM02NoRoomText: ; 0x8cebe
 	db $0, "You don't have any", $4f
 	db "room for this.", $57
 ; 0x8cebe + 34 bytes
@@ -54541,13 +57217,13 @@ _UnnamedText_4999f: ; 0x8cf83
 	db "swimming!", $57
 ; 0x8cf83 + 56 bytes
 
-UnknownText_8cfbb: ; 0x8cfbb
+_UnnamedText_1e704: ; 0x8cfbb
 	db $0, "Only truly skilled", $4f
 	db "trainers are", $55
 	db "allowed through.", $51
 	db "You don't have the", $4f
 	db "BOULDERBADGE yet!@@"
-; 0x8cfbb + 87 bytes
+; 0x8d012
 
 _UnnamedText_1e715: ; 0x8d012
 	db $0, $51
@@ -54556,7 +57232,7 @@ _UnnamedText_1e715: ; 0x8d012
 	db "let you pass.", $57
 ; 0x8d012 + 44 bytes
 
-UnknownText_8d03e: ; 0x8d03e
+_UnnamedText_1e71a: ; 0x8d03e
 	db $0, "Oh! That is the", $4f
 	db "BOULDERBADGE!", $55
 	db "Go right ahead!@@"
@@ -54649,7 +57325,7 @@ _UnnamedText_51910: ; 0x8d23c
 	db "here.", $57
 ; 0x8d23c + 43 bytes
 
-UnknownText_8d267: ; 0x8d267
+_UnnamedText_1e865: ; 0x8d267
 	db $0, "Hiya! I'm a", $4f
 	db "#MON...", $55
 	db "...No I'm not!", $51
@@ -54667,7 +57343,7 @@ UnknownText_8d267: ; 0x8d267
 	db "Help me out here!", $57
 ; 0x8d267 + 222 bytes
 
-UnknownText_8d345: ; 0x8d345
+_UnnamedText_1e86a: ; 0x8d345
 	db $0, "When I'm in the", $4f
 	db "TELEPORTER, go to", $55
 	db "my PC and run the", $55
@@ -54675,7 +57351,7 @@ UnknownText_8d345: ; 0x8d345
 	db "System!", $57
 ; 0x8d345 + 76 bytes
 
-UnknownText_8d391: ; 0x8d391
+_UnnamedText_1e86f: ; 0x8d391
 	db $0, "No!? Come on, you", $4f
 	db "gotta help a guy", $55
 	db "in deep trouble!", $51
@@ -54684,7 +57360,7 @@ UnknownText_8d391: ; 0x8d391
 	db "OK? All right!", $58
 ; 0x8d391 + 100 bytes
 
-_UnnamedText_1e8ba: ; 0x8d3f5
+_BillThankYouText: ; 0x8d3f5
 	db $0, "BILL: Yeehah!", $4f
 	db "Thanks, bud! I", $55
 	db "owe you one!", $51
@@ -54698,17 +57374,14 @@ _UnnamedText_1e8ba: ; 0x8d3f5
 	db "maybe this'll do.", $58
 ; 0x8d3f5 + 164 bytes
 
-UnknownText_8d499: ; 0x8d499
+_SSTicketReceivedText: ; 0x8d499
 	db $0, $52, " received", $4f
 	db "an @"
-; 0x8d499 + 16 bytes
-
-UnknownText_8d4a9: ; 0x8d4a9
 	TX_RAM $cf4b
 	db $0, "!@@"
-; 0x8d4a9 + 7 bytes
+; 0x8d4b0
 
-_UnnamedText_1e8c6: ; 0x8d4b0
+_SSTicketNoRoomText: ; 0x8d4b0
 	db $0, "You've got too", $4f
 	db "much stuff, bud!", $57
 ; 0x8d4b0 + 32 bytes
@@ -54734,7 +57407,7 @@ _UnnamedText_1e8da: ; 0x8d57f
 	db "#MON on my PC!", $57
 ; 0x8d57f + 64 bytes
 
-_UnnamedText_1cae3: ; 0x8d5bf
+_Route1ViridianMartSampleText: ; 0x8d5bf
 	db $0, "Hi! I work at a", $4f
 	db "#MON MART.", $51
 	db "It's a convenient", $4f
@@ -57920,13 +60593,13 @@ _TradeCenterMText1: ; 0x94b04
 INCLUDE "text/mapRedsHouse1F.tx"
 INCLUDE "text/mapBluesHouse.tx"
 
-_UnnamedText_1d0f3: ; 0x94d5b
+_OaksLabGaryText1: ; 0x94d5b
 	db $0, $53, ": Yo", $4f
 	db $52, "! Gramps", $55
 	db "isn't around!", $57
 ; 0x94d5b + 30 bytes
 
-_UnnamedText_1d0f8: ; 0x94d79
+_OaksLabText40: ; 0x94d79
 	db $0, $53, ": Heh, I", $4f
 	db "don't need to be", $55
 	db "greedy like you!", $51
@@ -57934,7 +60607,7 @@ _UnnamedText_1d0f8: ; 0x94d79
 	db "choose, ", $52, "!", $57
 ; 0x94d79 + 68 bytes
 
-_UnnamedText_1d0fd: ; 0x94dbd
+_OaksLabText41: ; 0x94dbd
 	db $0, $53, ": My", $4f
 	db "#MON looks a", $55
 	db "lot stronger.", $57
@@ -57945,57 +60618,55 @@ _OaksLabText39: ; 0x94ddf
 	db "Those are #", $4f
 	db "BALLs. They", $55
 	db "contain #MON!", $57
+; 0x94e06
 
-UnnamedText_94e06: ; 0x94e06
+_OaksLabCharmanderText: ; 0x94e06
 	db $0, "So! You want the", $4f
 	db "fire #MON,", $55
 	db "CHARMANDER?", $57
-; 0x94e06 + 41 bytes
+; 0x94e2f
 
-UnnamedText_94e2f: ; 0x94e2f
+_OaksLabSquirtleText: ; 0x94e2f
 	db $0, "So! You want the", $4f
 	db "water #MON,", $55
 	db "SQUIRTLE?", $57
 ; 0x94e57
 
-UnnamedText_94e57: ; 0x94e57
+_OaksLabBulbasaurText: ; 0x94e57
 	db $0, "So! You want the", $4f
 	db "plant #MON,", $55
 	db "BULBASAUR?", $57
-; 0x94e57 + 41 bytes
+; 0x94e80
 
-_UnnamedText_1d222: ; 0x94e80
+_OaksLabMonEnergeticText: ; 0x94e80
 	db $0, "This #MON is", $4f
 	db "really energetic!", $58
-; 0x94e80 + 32 bytes
+; 0x94ea0
 
-UnnamedText_94ea0: ; 0x94ea0
+_OaksLabReceivedMonText: ; 0x94ea0
 	db $0, $52, " received", $4f
 	db "a @"
-; 0x94ea0 + 15 bytes
-
-UnnamedText_94eaf: ; 0x94eaf
 	TX_RAM $cd6d
 	db $0, "!@@"
-; 0x94eaf + 7 bytes
+; 0x94eb6
 
-_UnnamedText_1d243: ; 0x94eb6
+_OaksLabLastMonText: ; 0x94eb6
 	db $0, "That's PROF.OAK's", $4f
 	db "last #MON!", $57
-; 0x94eb6 + 28 bytes
+; 0x94ed2
 
 _UnnamedText_1d2f0: ; 0x94ed2
 	db $0, "OAK: Now, ", $52, ",", $4f
 	db "which #MON do", $55
 	db "you want?", $57
-; 0x94ed2 + 38 bytes
+; 0x94ef8
 
 _UnnamedText_1d2f5: ; 0x94ef8
 	db $0, "OAK: If a wild", $4f
 	db "#MON appears,", $55
 	db "your #MON can", $55
 	db "fight against it!", $57
-; 0x94ef8 + 62 bytes
+; 0x94f36
 
 _UnnamedText_1d2fa: ; 0x94f36
 	db $0, "OAK: ", $52, ",", $4f
@@ -58004,7 +60675,7 @@ _UnnamedText_1d2fa: ; 0x94f36
 	db "it fight!", $57
 ; 0x94f36 + 51 bytes
 
-UnnamedText_94f69: ; 0x94f69
+_OaksLabDeliverParcelText1: ; 0x94f69
 	db $0, "OAK: Oh, ", $52, "!", $51
 	db "How is my old", $4f
 	db "#MON?", $51
@@ -58019,7 +60690,7 @@ UnnamedText_94f69: ; 0x94f69
 	db "OAK's PARCEL.@@"
 ; 0x94f69 + 166 bytes
 
-_UnnamedText_1d304: ; 0x9500f
+_OaksLabDeliverParcelText2: ; 0x9500f
 	db $0, $51
 	db "Ah! This is the", $4f
 	db "custom # BALL", $55
@@ -58027,13 +60698,13 @@ _UnnamedText_1d304: ; 0x9500f
 	db "Thank you!", $57
 ; 0x9500f + 54 bytes
 
-_UnnamedText_1d309: ; 0x95045
+_OaksLabAroundWorldText: ; 0x95045
 	db $0, "#MON around the", $4f
 	db "world wait for", $55
 	db "you, ", $52, "!", $57
 ; 0x95045 + 40 bytes
 
-UnnamedText_9506d: ; 0x9506d
+_OaksLabGivePokeballsText1: ; 0x9506d
 	db $0, "OAK: You can't get", $4f
 	db "detailed data on", $55
 	db "#MON by just", $55
@@ -58046,7 +60717,7 @@ UnnamedText_9506d: ; 0x9506d
 	db "# BALLs!@@"
 ; 0x9506d + 133 bytes
 
-_UnnamedText_1d313: ; 0x950f2
+_OaksLabGivePokeballsText2: ; 0x950f2
 	db $0, $51
 	db "When a wild", $4f
 	db "#MON appears,", $55
@@ -58061,7 +60732,7 @@ _UnnamedText_1d313: ; 0x950f2
 	db "have to be lucky!", $57
 ; 0x950f2 + 172 bytes
 
-_UnnamedText_1d318: ; 0x9519e
+_OaksLabPleaseVisitText: ; 0x9519e
 	db $0, "OAK: Come see me", $4f
 	db "sometimes.", $51
 	db "I want to know how", $4f
@@ -58095,13 +60766,13 @@ _UnnamedText_1d340: ; 0x9526b
 	db "in high regard!", $57
 ; 0x9526b + 80 bytes
 
-_UnnamedText_1d34f: ; 0x952bb
+_OaksLabRivalWaitingText: ; 0x952bb
 	db $0, $53, ": Gramps!", $4f
 	db "I'm fed up with", $55
 	db "waiting!", $57
 ; 0x952bb + 36 bytes
 
-_UnnamedText_1d35e: ; 0x952df
+_OaksLabChooseMonText: ; 0x952df
 	db $0, "OAK: ", $53, "?", $4f
 	db "Let me think...", $51
 	db "Oh, that's right,", $4f
@@ -58122,39 +60793,39 @@ _UnnamedText_1d35e: ; 0x952df
 	db "one! Choose!", $57
 ; 0x952df + 253 bytes
 
-_UnnamedText_1d36d: ; 0x953dc
+_OaksLabRivalInterjectionText: ; 0x953dc
 	db $0, $53, ": Hey!", $4f
 	db "Gramps! What", $55
 	db "about me?", $57
 ; 0x953dc + 32 bytes
 
-_UnnamedText_1d37c: ; 0x953fc
+_OaksLabBePatientText: ; 0x953fc
 	db $0, "OAK: Be patient!", $4f
 	db $53, ", you can", $55
 	db "have one too!", $57
 ; 0x953fc + 43 bytes
 
-_UnnamedText_1d38b: ; 0x95427
+_OaksLabLeavingText: ; 0x95427
 	db $0, "OAK: Hey! Don't go", $4f
 	db "away yet!", $57
 ; 0x95427 + 29 bytes
 
-_UnnamedText_1d39a: ; 0x95444
+_OaksLabRivalPickingMonText: ; 0x95444
 	db $0, $53, ": I'll take", $4f
 	db "this one, then!", $57
 ; 0x95444 + 29 bytes
 
-UnnamedText_95461: ; 0x95461
+_OaksLabRivalReceivedMonText: ; 0x95461
 	db $0, $53, " received", $4f
 	db "a @"
-; 0x95461 + 15 bytes
+; 0x95470
 
 UnnamedText_95470: ; 0x95470
 	TX_RAM $cd6d
 	db $0, "!@@"
 ; 0x95470 + 7 bytes
 
-_UnnamedText_1d3b9: ; 0x95477
+_OaksLabRivalChallengeText: ; 0x95477
 	db $0, $53, ": Wait", $4f
 	db $52, "!", $55
 	db "Let's check out", $55
@@ -58175,7 +60846,7 @@ _UnnamedText_1d3c3: ; 0x954e4
 	db "I great or what?", $58
 ; 0x954e4 + 30 bytes
 
-_UnnamedText_1d3d2: ; 0x95502
+_OaksLabRivalToughenUpText: ; 0x95502
 	db $0, $53, ": Okay!", $4f
 	db "I'll make my", $55
 	db "#MON fight to", $55
@@ -58184,22 +60855,22 @@ _UnnamedText_1d3d2: ; 0x95502
 	db "Smell you later!", $57
 ; 0x95502 + 79 bytes
 
-_UnnamedText_1d3d7: ; 0x95551
+_OaksLabText21: ; 0x95551
 	db $0, $53, ": Gramps!", $57
 ; 0x95551 + 12 bytes
 
-_UnnamedText_1d3dc: ; 0x9555d
+_OaksLabText22: ; 0x9555d
 	db $0, $53, ": What did", $4f
 	db "you call me for?", $57
 ; 0x9555d + 30 bytes
 
-_UnnamedText_1d3e1: ; 0x9557b
+_OaksLabText23: ; 0x9557b
 	db $0, "OAK: Oh right! I", $4f
 	db "have a request", $55
 	db "of you two.", $57
 ; 0x9557b + 45 bytes
 
-_UnnamedText_1d3e6: ; 0x955a8
+_OaksLabText24: ; 0x955a8
 	db $0, "On the desk there", $4f
 	db "is my invention,", $55
 	db "#DEX!", $51
@@ -58211,7 +60882,7 @@ _UnnamedText_1d3e6: ; 0x955a8
 	db "encyclopedia!", $57
 ; 0x955a8 + 130 bytes
 
-_UnnamedText_9562a: ; 0x9562a
+_OaksLabText25: ; 0x9562a
 	db $0, "OAK: ", $52, " and", $4f
 	db $53, "! Take", $55
 	db "these with you!", $51
@@ -58219,7 +60890,7 @@ _UnnamedText_9562a: ; 0x9562a
 	db "#DEX from OAK!@@"
 ; 0x9562a + 58 bytes
 
-_UnnamedText_1d3f1: ; 0x95664
+_OaksLabText26: ; 0x95664
 	db $0, "To make a complete", $4f
 	db "guide on all the", $55
 	db "#MON in the", $55
@@ -59229,7 +61900,7 @@ _UnnamedText_1d81f: ; 0x98e83
 	db "OK! Here you go!", $58
 ; 0x98e83 + 47 bytes
 
-UnnamedText_98eb2: ; 0x98eb2
+_UnnamedText_1d824: ; 0x98eb2
 	db $0, $52, " exchanged", $4f
 	db "the BIKE VOUCHER", $55
 	db "for a BICYCLE.@@"
@@ -59802,7 +62473,7 @@ _UnnamedText_1d94c: ; 0x99f97
 	db "help your quest.", $58
 ; 0x99f97 + 100 bytes
 
-UnnamedText_99ffb: ; 0x99ffb
+_UnnamedText_1d951: ; 0x99ffb
 	db $0, $52, " received", $4f
 	db "a @"
 	TX_RAM $cf4b
@@ -60380,21 +63051,21 @@ _UnnamedText_48278: ; 0x9c814
 	db "useful!", $58
 ; 0x9c814 + 70 bytes
 
-UnnamedText_9c85a: ; 0x9c85a
+_ReceivedTM18Text: ; 0x9c85a
 	db $0, $52, " received", $4f
 	db "@"
 	TX_RAM $cf4b
 	db $0, "!@@"
 ; 0x9c86e
 
-_UnnamedText_48283: ; 0x9c86e
+_TM18ExplanationText: ; 0x9c86e
 	db $0, "TM18 is COUNTER!", $4f
 	db "Not like the one", $55
 	db "I'm leaning on,", $55
 	db "mind you!", $57
 ; 0x9c86e + 60 bytes
 
-_UnnamedText_48288: ; 0x9c8aa
+_TM18NoRoomText: ; 0x9c8aa
 	db $0, "Your pack is full", $4f
 	db "of items!", $57
 ; 0x9c8aa + 29 bytes
@@ -60665,7 +63336,7 @@ _UnnamedText_487d0: ; 0x9d03a
 	db "come tell me!", $57
 ; 0x9d03a + 115 bytes
 
-UnnamedText_9d0ad: ; 0x9d0ad
+_UnnamedText_487d5: ; 0x9d0ad
 	db $0, "Wow! Excellent!", $4f
 	db "You completed", $55
 	db "your #DEX!", $55
@@ -60769,14 +63440,14 @@ _UnnamedText_48a6d: ; 0x9d481
 	db "this with you.", $57
 ; 0x9d481 + 139 bytes
 
-UnnamedText_9d50c: ; 0x9d50c
+_ReceivedTM21Text: ; 0x9d50c
 	db $0, $52, " received", $4f
 	db "@"
 	TX_RAM $cf4b
 	db $0, "!@@"
 ; 0x9d520
 
-_UnnamedText_48a77: ; 0x9d520
+_TM21ExplanationText: ; 0x9d520
 	db $0, $51
 	db "TM21 contains", $4f
 	db "MEGA DRAIN.", $51
@@ -60786,7 +63457,7 @@ _UnnamedText_48a77: ; 0x9d520
 	db "your #MON!", $57
 ; 0x9d520 + 86 bytes
 
-_UnnamedText_48a7c: ; 0x9d576
+_TM21NoRoomText: ; 0x9d576
 	db $0, "You should make", $4f
 	db "room for this.", $57
 ; 0x9d576 + 32 bytes
@@ -60977,7 +63648,7 @@ _UnnamedText_48d9c: ; 0x9da8e
 	db "to play?", $58
 ; 0x9da8e + 27 bytes
 
-UnnamedText_9daa9: ; 0x9daa9
+_Received10CoinsText: ; 0x9daa9
 	db $0, $52, " received", $4f
 	db "10 coins!@@"
 ; 0x9dac0
@@ -61029,7 +63700,7 @@ _UnnamedText_48e26: ; 0x9dc33
 	db "some coins?", $58
 ; 0x9dc33 + 28 bytes
 
-UnnamedText_9dc4f: ; 0x9dc4f
+_Received20CoinsText: ; 0x9dc4f
 	db $0, $52, " received", $4f
 	db "20 coins!@@"
 ; 0x9dc66
@@ -61052,7 +63723,7 @@ _UnnamedText_48e88: ; 0x9dcad
 	db "coins, shoo!", $58
 ; 0x9dcad + 62 bytes
 
-UnnamedText_9dceb: ; 0x9dceb
+_UnnamedText_48e8d: ; 0x9dceb
 	db $0, $52, " received", $4f
 	db "20 coins!@@"
 ; 0x9dd02
@@ -61084,7 +63755,7 @@ _UnnamedText_48ed8: ; 0x9dd7a
 	db "better tell BOSS!", $57
 ; 0x9dd7a + 54 bytes
 
-UnnamedText_9ddb0: ; 0x9ddb0
+_UnnamedText_48f09: ; 0x9ddb0
 	db $0, "Hey!", $51
 	db "A switch behind", $4f
 	db "the poster!?", $55
@@ -61162,14 +63833,14 @@ _UnnamedText_491a7: ; 0x9e003
 	db "more!", $58
 ; 0x9e003 + 119 bytes
 
-UnnamedText_9e07a: ; 0x9e07a
+_ReceivedCoinCaseText: ; 0x9e07a
 	db $0, $52, " received", $4f
 	db "a @"
 	TX_RAM $cf4b
 	db $0, "!@@"
 ; 0x9e090
 
-_UnnamedText_491b2: ; 0x9e090
+_CoinCaseNoRoomText: ; 0x9e090
 	db $0, "Make room for", $4f
 	db "this!", $57
 ; 0x9e090 + 21 bytes
@@ -62647,7 +65318,7 @@ _UnnamedText_1de75: ; 0xa24fe
 	db "You wanted this!", $58
 ; 0xa24fe + 44 bytes
 
-UnnamedText_a252a: ; 0xa252a
+_UnnamedText_1de7a: ; 0xa252a
 	db $0, $52, " received", $4f
 	db "@"
 ; 0xa2537

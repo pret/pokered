@@ -93,6 +93,8 @@ W_AICOUNT EQU $CCDF ; number of times remaining that AI action can occur
 
 W_WHICHTRADE EQU $CD3D ; which entry from TradeMons to select
 
+W_WHICHPOKEMON EQU $CF92 ; which pokemon you selected
+
 W_OPPONENTHP     EQU $CFE6 ; active opponent's hp (16 bits)
 W_OPPONENTNUMBER EQU $CFE8 ; active opponent's position in team (0 to 5)
 W_OPPONENTSTATUS EQU $CFE9 ; active opponent's status condition
@@ -2637,6 +2639,12 @@ mus_note: MACRO
 	db ((\1 << 4) | \2)
 ENDM
 
+;Write an octave note
+;format: mus_octave octave
+mus_octave: MACRO
+	db \1
+ENDM
+
 ; set velocity/note fade (\1 is velocity, \2 is note length, both 0-15)
 ; format: mus_vel vel, length
 mus_vel: MACRO
@@ -2691,13 +2699,15 @@ ENDM
 ; format: mus_call offset
 mus_call: MACRO
 	db	$FD
-	dw	((\1 % $4000) + ((\1 >= $4000) * $4000))
+	;dw	((\1 % $4000) + ((\1 >= $4000) * $4000))
+	dw \1
 ENDM
 
 ; jump \1 \2
-; format: mus_jump offset loop
+; format: mus_jump loop offset
 mus_jump: MACRO
 	db	$FE
-	db	\2
-	dw	((\1 % $4000) + ((\1 >= $4000) * $4000))
+	db	\1
+	dw  \2
+	;dw	((\2 % $4000) + ((\2 >= $4000) * $4000))
 ENDM
