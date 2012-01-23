@@ -95,6 +95,8 @@ W_WHICHTRADE EQU $CD3D ; which entry from TradeMons to select
 
 W_WHICHPOKEMON EQU $CF92 ; which pokemon you selected
 
+W_WALKCOUNTER EQU $CFC5 ; walk animation counter
+
 W_OPPONENTHP     EQU $CFE6 ; active opponent's hp (16 bits)
 W_OPPONENTNUMBER EQU $CFE8 ; active opponent's position in team (0 to 5)
 W_OPPONENTSTATUS EQU $CFE9 ; active opponent's status condition

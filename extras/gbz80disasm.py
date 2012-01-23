@@ -568,6 +568,7 @@ asm_commands = {
     "6581": "ItemUseNotTime",
     "3a87": "AddNTimes",
     "3dab": "IsInArray", #bank 3
+    "039e": "HandleMidJump",
 }
 
 def random_asm_label():

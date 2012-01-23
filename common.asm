@@ -421,7 +421,7 @@ OverworldLoopLessDelay:
 	call LoadGBPal
 	ld a,[$d736]
 	bit 6,a ; jumping down a ledge?
-	call nz,$039e
+	call nz, HandleMidJump
 	ld a,[$cfc5] ; walking animation counter
 	and a
 	jp nz,.moveAhead\@ ; if the player sprite has not yet completed the walking animation
@@ -3624,7 +3624,158 @@ Route2Text2: ; 24f4 0x424f4
 	call Predef
 	jp TextScriptEnd
 
-INCBIN "baserom.gbc",$24fd,$2a55 - $24fd
+INCBIN "baserom.gbc",$24fd,$2920 - $24fd
+
+; this function is used to display sign messages, sprite dialog, etc.
+; INPUT: [$ff8c] = sprite ID or text ID
+DisplayTextID: ; 2920
+	ld a,[$ffb8]
+	push af
+	ld b,BANK(DisplayTextIDInit)
+	ld hl,DisplayTextIDInit ; initialization
+	call Bankswitch
+	ld hl,$cf11
+	bit 0,[hl]
+	res 0,[hl]
+	jr nz,.skipSwitchToMapBank\@
+	ld a,[W_CURMAP]
+	call SwitchToMapRomBank
+.skipSwitchToMapBank\@
+	ld a,$1e
+	ld [$ffd5],a ; joypad poll timer
+	ld hl,W_MAPTEXTPTR
+	ld a,[hli]
+	ld h,[hl]
+	ld l,a ; hl = map text pointer
+	ld d,$00
+	ld a,[$ff8c] ; text ID
+	ld [$cf13],a
+	and a
+	jp z,$2acd
+	cp a,$d3 ; safari game over
+	jp z,$2a90
+	cp a,$d0 ; fainted
+	jp z,$2a9b
+	cp a,$d1 ; blacked out
+	jp z,$2aa9
+	cp a,$d2 ; repel wore off
+	jp z,$2abf
+	ld a,[$d4e1] ; number of sprites
+	ld e,a
+	ld a,[$ff8c] ; sprite ID
+	cp e
+	jr z,.spriteHandling\@
+	jr nc,.skipSpriteHandling\@
+.spriteHandling\@
+; get the text ID of the sprite
+	push hl
+	push de
+	push bc
+	ld b,$04
+	ld hl,$7074
+	call Bankswitch ; update the graphics of the sprite the player is talking to (to face the right direction)
+	pop bc
+	pop de
+	ld hl,$d4e4 ; NPC text entries
+	ld a,[$ff8c]
+	dec a
+	add a
+	add l
+	ld l,a
+	jr nc,.noCarry\@
+	inc h
+.noCarry\@
+	inc hl
+	ld a,[hl] ; a = text ID of the sprite
+	pop hl
+.skipSpriteHandling\@
+; look up the address of the text in the map's text entries
+	dec a
+	ld e,a
+	sla e
+	add hl,de
+	ld a,[hli]
+	ld h,[hl]
+	ld l,a
+	ld a,[hl] ; hl = address of the text
+; check for special cases
+	cp a,$fe   ; Pokemart NPC
+	jp z,$2a2e
+	cp a,$ff   ; Pokemon Center NPC
+	jp z,$2a72
+	cp a,$fc   ; Item Storage PC
+	jp z,$3460
+	cp a,$fd   ; Bill's PC
+	jp z,$346a
+	cp a,$f9   ; Pokemon Center PC
+	jp z,$347f
+	cp a,$f5   ; Vending Machine
+	jr nz,.notVendingMachine\@
+	ld b,$1d
+	ld hl,$4ee0
+	call Bankswitch
+	jr .skipTextDisplay\@
+.notVendingMachine\@
+	cp a,$f7   ; slot machine
+	jp z,$3474
+	cp a,$f6   ; cable connection NPC in Pokemon Center
+	jr nz,.notSpecialCase\@
+	ld hl,$71c5
+	ld b,$01
+	call Bankswitch
+	jr .skipTextDisplay\@
+.notSpecialCase\@
+	call $3c59 ; display the text
+	ld a,[$cc3c]
+	and a
+	jr nz,.holdBoxOpen\@
+.skipTextDisplay\@
+	ld a,[$cc47]
+	and a
+	jr nz,.holdBoxOpen\@
+	call $3865 ; wait for a button press after displaying all the text
+; loop to hold the dialogue box open as long as the player keeps holding down the A button
+.holdBoxOpen\@
+	call $019a ; update joypad state
+	ld a,[$ffb4]
+	bit 0,a ; is the A button being pressed?
+	jr nz,.holdBoxOpen\@
+	ld a,[W_CURMAP]
+	call SwitchToMapRomBank
+	ld a,$90
+	ld [$ffb0],a ; move the window off the screen
+	call DelayFrame
+	call LoadGBPal
+	xor a
+	ld [$ffba],a ; disable continuous WRAM to VRAM transfer each V-blank
+; loop to make sprites face the directions they originally faced before the dialogue
+	ld hl,$c219
+	ld c,$0f
+	ld de,$0010
+.restoreSpriteFacingDirectionLoop\@
+	ld a,[hl]
+	dec h
+	ld [hl],a
+	inc h
+	add hl,de
+	dec c
+	jr nz,.restoreSpriteFacingDirectionLoop\@
+	ld a,$05
+	ld [$ffb8],a
+	ld [$2000],a
+	call $785b ; reload sprite tile pattern data (since it was partially overwritten by text tile patterns)
+	ld hl,$cfc4
+	res 0,[hl]
+	ld a,[$d732]
+	bit 3,a
+	call z,LoadPlayerSpriteGraphics
+	call LoadCurrentMapView
+	pop af
+	ld [$ffb8],a
+	ld [$2000],a
+	jp $2429 ; move sprites
+
+INCBIN "baserom.gbc",$2a2e,$2a55 - $2a2e
 
 UnnamedText_2a55: ; 0x2a55
 	TX_FAR _UnnamedText_2a55
@@ -5229,7 +5380,87 @@ UnnamedText_7073: ; 0x7073
 	db $50
 ; 0x7073 + 5 bytes
 
-INCBIN "baserom.gbc",$7078,$710b - $7078
+INCBIN "baserom.gbc",$7078,$7096 - $7078
+
+; function that performs initialization for DisplayTextID
+DisplayTextIDInit: ; 7096
+	xor a
+	ld [$cf94],a
+	ld a,[$cf0c]
+	bit 0,a
+	jr nz,.skipDrawingTextBoxBorder\@
+	ld a,[$ff8c] ; text ID (or sprite ID)
+	and a
+	jr nz,.notStartMenu\@
+; if text ID is 0 (i.e. the start menu)
+; Note that the start menu text border is also drawn in the function directly
+; below this, so this seems unnecessary.
+	ld a,[$d74b]
+	bit 5,a ; does the player have the pokedex?
+; start menu with pokedex
+	ld hl,$c3aa
+	ld b,$0e
+	ld c,$08
+	jr nz,.drawTextBoxBorder\@
+; start menu without pokedex
+	ld hl,$c3aa
+	ld b,$0c
+	ld c,$08
+	jr .drawTextBoxBorder\@
+; if text ID is not 0 (i.e. not the start menu) then do a standard dialogue text box
+.notStartMenu\@
+	ld hl,$c490
+	ld b,$04
+	ld c,$12
+.drawTextBoxBorder\@
+	call TextBoxBorder
+.skipDrawingTextBoxBorder\@
+	ld hl,$cfc4
+	set 0,[hl]
+	ld hl,$cd60
+	bit 4,[hl]
+	res 4,[hl]
+	jr nz,.skipMovingSprites\@
+	call $2429 ; move sprites
+.skipMovingSprites\@
+; loop to copy C1X9 (direction the sprite is facing) to C2X9 for each sprite
+; this is done because when you talk to an NPC, they turn to look your way
+; the original direction they were facing must be restored after the dialogue is over
+	ld hl,$c119
+	ld c,$0f
+	ld de,$0010
+.spriteFacingDirectionCopyLoop\@
+	ld a,[hl]
+	inc h
+	ld [hl],a
+	dec h
+	add hl,de
+	dec c
+	jr nz,.spriteFacingDirectionCopyLoop\@
+; loop to force all the sprites in the middle of animation to stand still
+; (so that they don't like they're frozen mid-step during the dialogue)
+	ld hl,$c102
+	ld de,$0010
+	ld c,e
+.spriteStandStillLoop\@
+	ld a,[hl]
+	cp a,$ff ; is the sprite visible?
+	jr z,.nextSprite\@
+; if it is visible
+	and a,$fc
+	ld [hl],a
+.nextSprite\@
+	add hl,de
+	dec c
+	jr nz,.spriteStandStillLoop\@
+	ld b,$9c ; window background address
+	call $18d6 ; transfer background in WRAM to VRAM
+	xor a
+	ld [$ffb0],a ; put the window on the screen
+	call $3680 ; transfer tile pattern data for text into VRAM
+	ld a,$01
+	ld [$ffba],a ; enable continuous WRAM to VRAM transfer each V-blank
+	ret
 
 ; function that displays the start menu
 DrawStartMenu: ; 710B
