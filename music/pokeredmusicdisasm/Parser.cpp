@@ -9,6 +9,7 @@ Parser::Parser()
 	fileLength = 0;
 	filePos = 0;
 	stop = false;
+	stopAddress = 0;
 }
 
 Parser::Parser(std::string filename)
@@ -44,6 +45,16 @@ void Parser::SetFilename(std::string value)
 {
 	filename = value;
 	Read();
+}
+
+unsigned int Parser::GetStopAddress()
+{
+	return stopAddress;
+}
+
+void Parser::SetStopAddress(unsigned int value)
+{
+	stopAddress = value;
 }
 
 string Parser::GetParsedAsm()
@@ -192,6 +203,9 @@ void Parser::ParseNext() // Parses the block immidiately following
 			unkCode << "db $" << hex << uppercase << (short)rawBytesFixed[i];
 			parsedString.push_back(unkCode.str());
 		}
+
+		// If the stop address parameter is set, break when we get there
+		if( (stopAddress != 0) && (i >= stopAddress) ) break;
 	}
 
 	// Now record the postion we left off
