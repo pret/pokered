@@ -702,10 +702,10 @@ OverworldLoopLessDelay:
 	ld [$ffb4],a ; clear joypad state
 	ld a,[W_CURMAP]
 	cp a,CINNABAR_GYM
-	jr nz,.notCinnabarGyn\@
+	jr nz,.notCinnabarGym\@
 	ld hl,$d79b
 	set 7,[hl]
-.notCinnabarGyn\@
+.notCinnabarGym\@
 	ld hl,$d72e
 	set 5,[hl]
 	ld a,[W_CURMAP]
