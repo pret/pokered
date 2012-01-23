@@ -2053,7 +2053,192 @@ branch_A28A:
 	; A303
 
 Routes4_md_2: ;a304 - a3c3
-INCBIN "baserom.gbc",$a304,$a3c4 - $a304
+	; a304
+	mus_mod 12, 2, 4
+	mus_duty duty25
+	mus_vel 9, 2
+
+	mus_octave oct2
+	mus_note noteE, note8_16
+	mus_note noteF#, note16
+	mus_vel 9, 0
+	mus_note noteE, note2_4
+	mus_vel 9, 2
+
+	mus_octave oct1
+	mus_note noteB, note8_16
+
+	mus_octave oct2
+	mus_note noteC, note16
+	mus_vel 9, 0
+
+	mus_octave oct1
+	mus_note noteB, note2
+	mus_duty duty75
+	mus_vel 12, 7
+
+	mus_octave oct2
+	mus_note noteE, note16
+	mus_note noteF#, note16
+	mus_note noteB, note16
+
+	mus_octave oct3
+	mus_note noteD#, note16
+
+branch_A325:
+	mus_vel 12, 7
+	mus_note noteE, note4_8
+
+	mus_octave oct2
+	mus_note noteB, note8
+	mus_note noteB, note4
+
+	mus_octave oct3
+	mus_note noteB, note4
+	mus_note noteA, note4
+	mus_note noteG#, note4
+	mus_note noteF#, note4
+	mus_note noteF#, note16
+	mus_note noteA, note16
+	mus_note noteG#, note16
+	mus_note noteF#, note16
+	mus_vel 12, 2
+	mus_note noteG#, note8_16
+	mus_note noteE, note16
+	mus_vel 10, 0
+
+	mus_octave oct2
+	mus_note noteB, note2_4
+	mus_duty duty12_5
+	mus_vel 12, 2
+
+	mus_octave oct1
+	mus_note noteB, note8_16
+	mus_vel 12, 7
+
+	mus_octave oct2
+	mus_note noteC, note16
+
+	mus_octave oct1
+	mus_note noteB, note2
+
+	mus_octave oct2
+	mus_note noteD#, note4
+	mus_duty duty75
+
+	mus_octave oct3
+	mus_note noteE, note4_8
+
+	mus_octave oct2
+	mus_note noteB, note8
+	mus_note noteB, note4
+
+	mus_octave oct3
+	mus_note noteB, note4
+	mus_note noteA, note4
+	mus_note noteG#, note4
+	mus_note noteF#, note4
+	mus_note noteA, note16
+
+	mus_octave oct4
+	mus_note noteC#, note16
+
+	mus_octave oct3
+	mus_note noteB, note16
+	mus_note noteA, note16
+	mus_vel 12, 2
+	mus_note noteB, note8_16
+	mus_vel 12, 7
+	mus_note noteA, note16
+	mus_vel 11, 0
+	mus_note noteG#, note4_8
+	mus_vel 9, 0
+	mus_note noteG#, note4_8
+	mus_vel 7, 0
+	mus_note noteG#, note4_8
+	mus_vel 6, 15
+	mus_note noteG#, note4_8
+	mus_vel 12, 7
+	mus_note noteG#, note4
+	db $D8
+	mus_note noteRst, note4
+	mus_note noteA, note4
+	mus_note noteG#, note4
+	mus_note noteF#, note4
+	db $D8
+	mus_note noteA, note16
+	mus_note noteF#, note4_8
+	db $D8
+	mus_note noteG, note1
+	mus_note noteF#, note4_8
+	mus_duty duty12_5
+	db $D8
+	mus_note noteA, note16
+
+	mus_octave oct2
+	mus_note noteF#, note4
+	mus_note noteE, note4
+	mus_note noteF#, note4
+	mus_note noteA, note4_8
+	mus_duty duty75
+	db $D8
+	mus_note noteRst, note2
+
+	mus_octave oct3
+	mus_note noteF#, note4_8
+	mus_note noteG#, note4
+	mus_note noteF#, note4
+	db $D8
+	mus_note noteRst, note4_16
+	mus_note noteE, note4
+	db $D8
+	mus_note noteA#, note16
+	mus_note noteE, note2_4
+	mus_duty duty12_5
+	db $D8
+	mus_note noteA, note16
+
+	mus_octave oct2
+	mus_note noteE, note4
+	mus_note noteD#, note4
+	mus_note noteE, note4
+	mus_note noteG#, note4_8
+	mus_duty duty75
+	db $D8
+	mus_note noteRst, note2
+
+	mus_octave oct3
+	mus_note noteE, note4_8
+	mus_note noteF#, note4
+	mus_note noteD#, note4
+
+	mus_octave oct2
+	mus_note noteB, note4
+	db $D8
+	mus_note noteA#, note16
+
+	mus_octave oct3
+	mus_note noteB, note1
+	db $D8
+	mus_note noteA#, note2
+	mus_note noteB, note2
+	db $D8
+	mus_note noteB, note16
+	mus_note noteA, note4_8
+	db $D8
+	mus_note noteB, note2
+	mus_note noteA, note4_8
+	mus_vel 10, 7
+	mus_note noteG#, note16
+	mus_note noteF#, note16
+	mus_vel 11, 0
+	mus_note noteE, note2_4
+	mus_vel 10, 0
+	mus_note noteE, note2
+	mus_vel 10, 7
+	mus_note noteE, note2_8
+	mus_jump 0, branch_A325
+	; A3C3
 
 Routes4_md_3: ;a3c4 - a49c
 INCBIN "baserom.gbc",$a3c4,$a49d - $a3c4
