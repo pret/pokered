@@ -1271,6 +1271,8 @@ Routes3_md_2: ;A009 - A07E
 	mus_note noteC, note16
 	mus_note noteRst, note2_4_8_16
 	mus_note noteRst, note1
+
+branch_A01A:
 	mus_vel 12, 7
 	mus_duty duty50
 
@@ -1374,7 +1376,7 @@ Routes3_md_2: ;A009 - A07E
 	mus_octave oct2
 	mus_note noteA, note2
 	mus_note noteB, note2
-	mus_jump 0, $601A
+	mus_jump 0, branch_A01A
 	; A07E
 	;No end byte until indigo plateu channel 1
 
