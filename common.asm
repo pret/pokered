@@ -12685,12 +12685,12 @@ ViridianCityText2: ; 0x19107
 	db $08 ; asm
 	ld a, [$d356]
 	cp $7f
-	ld hl, $5127
+	ld hl, UnnamedText_19127
 	jr z, .asm_ae9fe ; 0x19110
 	ld a, [$d751]
 	bit 1, a
 	jr nz, .asm_ae9fe ; 0x19117
-	ld hl, $5122
+	ld hl, UnnamedText_19122
 .asm_ae9fe ; 0x1911c
 	call PrintText
 	jp TextScriptEnd
@@ -12707,17 +12707,17 @@ UnnamedText_19127: ; 0x19127
 
 ViridianCityText3: ; 0x1912c
 	db $08 ; asm
-	ld hl, $514d
+	ld hl, UnnamedText_1914d
 	call PrintText
 	call $35ec
 	ld a, [$cc26]
 	and a
 	jr nz, .asm_6dfea ; 0x1913a
-	ld hl, $5157
+	ld hl, UnnamedText_19157
 	call PrintText
 	jr .asm_d611f ; 0x19142
 .asm_6dfea ; 0x19144
-	ld hl, $5152
+	ld hl, UnnamedText_19152
 	call PrintText
 .asm_d611f ; 0x1914a
 	jp TextScriptEnd
@@ -12742,11 +12742,11 @@ ViridianCityText4: ; 0x1915c
 	ld a, [$d74b]
 	bit 5, a
 	jr nz, .asm_83894 ; 0x19162
-	ld hl, $5175
+	ld hl, UnnamedText_19175
 	call PrintText
 	jr .asm_700a6 ; 0x1916a
 .asm_83894 ; 0x1916c
-	ld hl, $517a
+	ld hl, UnnamedText_1917a
 	call PrintText
 .asm_700a6 ; 0x19172
 	jp TextScriptEnd
@@ -12763,7 +12763,7 @@ UnnamedText_1917a: ; 0x1917a
 
 ViridianCityText5: ; 0x1917f
 	db $08 ; asm
-	ld hl, $5191
+	ld hl, UnnamedText_19191
 	call PrintText
 	call $50cf
 	ld a, $3
@@ -12780,22 +12780,22 @@ ViridianCityText6: ; 0x19196
 	ld a, [$d74c]
 	bit 1, a
 	jr nz, .asm_4e5a0 ; 0x1919c
-	ld hl, $51ca
+	ld hl, UnnamedText_191ca
 	call PrintText
-	ld bc,(TM_42 << 8) | 1
+	ld bc, (TM_42 << 8) | 1
 	call GiveItem
 	jr nc, .asm_b655e ; 0x191aa
-	ld hl, $51cf
+	ld hl, ReceivedTM42Text
 	call PrintText
 	ld hl, $d74c
 	set 1, [hl]
 	jr .asm_3c73c ; 0x191b7
 .asm_b655e ; 0x191b9
-	ld hl, $51da
+	ld hl, UnnamedText_191da
 	call PrintText
 	jr .asm_3c73c ; 0x191bf
 .asm_4e5a0 ; 0x191c1
-	ld hl, $51d5
+	ld hl, UnnamedText_191d5
 	call PrintText
 .asm_3c73c ; 0x191c7
 	jp TextScriptEnd
@@ -12805,7 +12805,10 @@ UnnamedText_191ca: ; 0x191ca
 	db $50
 ; 0x191ca + 5 bytes
 
-INCBIN "baserom.gbc",$191cf,$191d5 - $191cf
+ReceivedTM42Text: ; 0x191cf
+	TX_FAR _ReceivedTM42Text ; 0xa469a
+	db $10, $50
+; 0x191cf + 6 bytes = 0x191d5
 
 UnnamedText_191d5: ; 0x191d5
 	TX_FAR _UnnamedText_191d5
@@ -12819,7 +12822,7 @@ UnnamedText_191da: ; 0x191da
 
 ViridianCityText7: ; 0x191df
 	db $08 ; asm
-	ld hl, $520a
+	ld hl, UnnamedText_1920a
 	call PrintText
 	ld c, $2
 	call $3739
@@ -12827,13 +12830,13 @@ ViridianCityText7: ; 0x191df
 	ld a, [$cc26]
 	and a
 	jr z, .asm_42f68 ; 0x191f2
-	ld hl, $520f
+	ld hl, UnnamedText_1920f
 	call PrintText
 	ld a, $1
 	ld [$d5f4], a
 	jr .asm_2413a ; 0x191ff
 .asm_42f68 ; 0x19201
-	ld hl, $5214
+	ld hl, UnnamedText_19214
 	call PrintText
 .asm_2413a ; 0x19207
 	jp TextScriptEnd
@@ -12917,17 +12920,17 @@ PewterCityText2: ; 0x193ac
 
 PewterCityText3: ; 0x193b1
 	db $08 ; asm
-	ld hl, $53f1
+	ld hl, UnnamedText_193f1
 	call PrintText
 	call $35ec
 	ld a, [$cc26]
 	and a
 	jr nz, .asm_f46a9 ; 0x193bf
-	ld hl, $53f6
+	ld hl, UnnamedText_193f6
 	call PrintText
 	jr .asm_ac429 ; 0x193c7
 .asm_f46a9 ; 0x193c9
-	ld hl, $53fb
+	ld hl, UnnamedText_193fb
 	call PrintText
 	xor a
 	ldh [$b3], a
@@ -12969,17 +12972,17 @@ UnnamedText_19400: ; 0x19400
 
 PewterCityText4: ; 0x19405
 	db $8
-	ld hl, $5427
+	ld hl, UnnamedText_19427
 	call PrintText
 	call $35ec
 	ld a, [$cc26]
 	cp $0
 	jr nz, .asm_e4603
-	ld hl, $542c
+	ld hl, UnnamedText_1942c
 	call PrintText
 	jr .asm_e4604 ; 0x1941c $6
 .asm_e4603
-	ld hl, $5431
+	ld hl, UnnamedText_19431
 	call PrintText
 .asm_e4604 ; 0x19424
 	jp TextScriptEnd
@@ -13002,7 +13005,7 @@ UnnamedText_19431: ; 0x19431
 
 PewterCityText5: ; 0x19436
 	db $08 ; asm
-	ld hl, $545d
+	ld hl, UnnamedText_1945d
 	call PrintText
 	xor a
 	ldh [$b4], a
@@ -13237,11 +13240,11 @@ CeruleanCityText1: ; 0x1964f
 	ld a, [$d75a]
 	bit 0, a
 	jr z, .asm_a89f9 ; 0x19655
-	ld hl, $5677
+	ld hl, UnnamedText_19677
 	call PrintText
 	jr .asm_815c6 ; 0x1965d
 .asm_a89f9 ; 0x1965f
-	ld hl, $5668
+	ld hl, UnnamedText_19668
 	call PrintText
 .asm_815c6 ; 0x19665
 	jp TextScriptEnd
@@ -13356,17 +13359,17 @@ CeruleanCityText7: ; 0x1970c
 	ldh a, [$d3]
 	cp $b4
 	jr c, .asm_e9fc9 ; 0x19711
-	ld hl, $5730
+	ld hl, UnnamedText_19730
 	call PrintText
 	jr .asm_d486e ; 0x19719
 .asm_e9fc9 ; 0x1971b
 	cp $64
 	jr c, .asm_df99b ; 0x1971d
-	ld hl, $5735
+	ld hl, UnnamedText_19735
 	call PrintText
 	jr .asm_d486e ; 0x19725
 .asm_df99b ; 0x19727
-	ld hl, $573a
+	ld hl, UnnamedText_1973a
 	call PrintText
 .asm_d486e ; 0x1972d
 	jp TextScriptEnd
@@ -13391,23 +13394,23 @@ CeruleanCityText8: ; 0x1973f
 	ldh a, [$d3]
 	cp $b4
 	jr c, .asm_e28da ; 0x19744
-	ld hl, $576f
+	ld hl, UnnamedText_1976f
 	call PrintText
 	jr .asm_f2f38 ; 0x1974c
 .asm_e28da ; 0x1974e
 	cp $78
 	jr c, .asm_15d08 ; 0x19750
-	ld hl, $5774
+	ld hl, UnnamedText_19774
 	call PrintText
 	jr .asm_f2f38 ; 0x19758
 .asm_15d08 ; 0x1975a
 	cp $3c
 	jr c, .asm_d7fea ; 0x1975c
-	ld hl, $5779
+	ld hl, UnnamedText_19779
 	call PrintText
 	jr .asm_f2f38 ; 0x19764
 .asm_d7fea ; 0x19766
-	ld hl, $577e
+	ld hl, UnnamedText_1977e
 	call PrintText
 .asm_f2f38 ; 0x1976c
 	jp TextScriptEnd
@@ -13537,11 +13540,11 @@ VermilionCityText2: ; 0x1988e
 	ld a, [$d803]
 	bit 2, a
 	jr nz, .asm_359bd ; 0x19894
-	ld hl, $58a7
+	ld hl, UnnamedText_198a7
 	call PrintText
 	jr .asm_735d9 ; 0x1989c
 .asm_359bd ; 0x1989e
-	ld hl, $58ac
+	ld hl, UnnamedText_198ac
 	call PrintText
 .asm_735d9 ; 0x198a4
 	jp TextScriptEnd
@@ -13568,11 +13571,11 @@ VermilionCityText3: ; 0x198b1
 	call $34bf
 	jr nc, .asm_57b73 ; 0x198c6
 .asm_07af3 ; 0x198c8
-	ld hl, $5904
+	ld hl, UnnamedText_19904
 	call PrintText
 	jr .asm_79bd1 ; 0x198ce
 .asm_57b73 ; 0x198d0
-	ld hl, $5909
+	ld hl, UnnamedText_19909
 	call PrintText
 	ld b, $3f
 	ld a, $1c
@@ -13580,17 +13583,17 @@ VermilionCityText3: ; 0x198b1
 	ld a, b
 	and a
 	jr nz, .asm_0419b ; 0x198df
-	ld hl, $5913
+	ld hl, UnnamedText_19913
 	call PrintText
 	jr .asm_79bd1 ; 0x198e7
 .asm_0419b ; 0x198e9
-	ld hl, $590e
+	ld hl, UnnamedText_1990e
 	call PrintText
 	ld a, $4
 	ld [$d62a], a
 	jr .asm_79bd1 ; 0x198f4
 .asm_3e0e9 ; 0x198f6
-	ld hl, $5918
+	ld hl, UnnamedText_19918
 	call PrintText
 .asm_79bd1 ; 0x198fc
 	jp TextScriptEnd
@@ -13697,22 +13700,22 @@ CeladonCityText5: ; 0x1999e
 	ld a, [$d777]
 	bit 0, a
 	jr nz, .asm_7053f ; 0x199a4
-	ld hl, $59d2
+	ld hl, UnnamedText_199d2
 	call PrintText
-	ld bc,(TM_41 << 8) | 1
+	ld bc, (TM_41 << 8) | 1
 	call GiveItem
 	jr c, .asm_890ec ; 0x199b2
-	ld hl, $59e2
+	ld hl, UnnamedText_199e2
 	call PrintText
 	jr .asm_c765a ; 0x199ba
 .asm_890ec ; 0x199bc
-	ld hl, $59d7
+	ld hl, UnnamedText_199d7
 	call PrintText
 	ld hl, $d777
 	set 0, [hl]
 	jr .asm_c765a ; 0x199c7
 .asm_7053f ; 0x199c9
-	ld hl, $59dd
+	ld hl, UnnamedText_199dd
 	call PrintText
 .asm_c765a ; 0x199cf
 	jp TextScriptEnd
@@ -13722,7 +13725,10 @@ UnnamedText_199d2: ; 0x199d2
 	db $50
 ; 0x199d2 + 5 bytes
 
-INCBIN "baserom.gbc",$199d7,$199dd - $199d7
+UnnamedText_199d7: ; 0x199d7
+	TX_FAR _UnnamedText_199d7 ; 0xa5b5a
+	db $0B, $50
+; 0x199d7 + 6 bytes = 0x199dd
 
 UnnamedText_199dd: ; 0x199dd
 	TX_FAR _UnnamedText_199dd
@@ -13840,7 +13846,7 @@ FuchsiaCityText18: ; 0x19a8b
 
 FuchsiaCityText19: ; 0x19a90
 	db $08 ; asm
-	ld hl, $5a9f
+	ld hl, UnnamedText_19a9f
 	call PrintText
 	ld a, $28
 	call $349b
@@ -13853,7 +13859,7 @@ UnnamedText_19a9f: ; 0x19a9f
 
 FuchsiaCityText20: ; 0x19aa4
 	db $08 ; asm
-	ld hl, $5ab3
+	ld hl, UnnamedText_19ab3
 	call PrintText
 	ld a, $6
 	call $349b
@@ -13866,7 +13872,7 @@ UnnamedText_19ab3: ; 0x19ab3
 
 FuchsiaCityText21: ; 0x19ab8
 	db $08 ; asm
-	ld hl, $5ac7
+	ld hl, UnnamedText_19ac7
 	call PrintText
 	ld a, $2
 	call $349b
@@ -13879,7 +13885,7 @@ UnnamedText_19ac7: ; 0x19ac7
 
 FuchsiaCityText22: ; 0x19acc
 	db $08 ; asm
-	ld hl, $5adb
+	ld hl, UnnamedText_19adb
 	call PrintText
 	ld a, $25
 	call $349b
@@ -13892,7 +13898,7 @@ UnnamedText_19adb: ; 0x19adb
 
 FuchsiaCityText23: ; 0x19ae0
 	db $08 ; asm
-	ld hl, $5aef
+	ld hl, UnnamedText_19aef
 	call PrintText
 	ld a, $13
 	call $349b
@@ -13910,16 +13916,16 @@ FuchsiaCityText24: ; 0x19af4
 	jr nz, .asm_3b4e8 ; 0x19afa
 	bit 7, a
 	jr nz, .asm_667d5 ; 0x19afe
-	ld hl, $5b2a
+	ld hl, UnnamedText_19b2a
 	call PrintText
 	jr .asm_4343f ; 0x19b06
 .asm_3b4e8 ; 0x19b08
-	ld hl, $5b20
+	ld hl, UnnamedText_19b20
 	call PrintText
 	ld a, $62
 	jr .asm_81556 ; 0x19b10
 .asm_667d5 ; 0x19b12
-	ld hl, $5b25
+	ld hl, UnnamedText_19b25
 	call PrintText
 	ld a, $5a
 .asm_81556 ; 0x19b1a
@@ -34722,7 +34728,7 @@ SilphCo7Text1: ; 0x51d8e
 .asm_d7e17 ; 0x51da5
 	ld hl, UnnamedText_51dd3
 	call PrintText
-	ld bc,(LAPRAS << 8) | 15
+	ld bc, (LAPRAS << 8) | 15
 	call GivePokemon
 	jr nc, .asm_b3069 ; 0x51db1
 	ld a, [$ccd3]
@@ -35602,7 +35608,7 @@ HandlePrizeChoice: ; 14:68C6
 	ld c,a
 	pop af
 	ld b,a
-	call $3E48 ; GivePokemon
+	call GivePokemon
 	push af
 	ld a,[$CCD3] ; XXX is there room?
 	and a
@@ -43084,7 +43090,7 @@ FightingDojoText6: ; 0x5cf06
 	jr nz, .asm_3a2c8 ; 0x5cf28
 	ld a, [$cf91]
 	ld b, a
-	ld c,30
+	ld c, 30
 	call GivePokemon
 	jr nc, .asm_3a2c8 ; 0x5cf33
 	ld a, $4a
@@ -49257,19 +49263,19 @@ FuchsiaHouse2Text1: ; 0x750c2
 	ld a, [$d78e]
 	bit 1, a
 	jr nz, .asm_60cba ; 0x750d6
-	ld hl, $5135
+	ld hl, UnnamedText_75135
 	call PrintText
 	call $35ec
 	ld a, [$cc26]
 	and a
-	ld hl, $513f
+	ld hl, UnnamedText_7513f
 	jr nz, .asm_61238 ; 0x750e8
-	ld hl, $513a
+	ld hl, UnnamedText_7513a
 .asm_61238 ; 0x750ed
 	call PrintText
 	jr .asm_52039 ; 0x750f0
 .asm_3f30f ; 0x750f2
-	ld hl, $5144
+	ld hl, UnnamedText_75144
 	call PrintText
 	ld a, $40
 	ldh [$db], a
@@ -49279,22 +49285,22 @@ FuchsiaHouse2Text1: ; 0x750c2
 	ld hl, $d78e
 	set 1, [hl]
 .asm_60cba ; 0x75109
-	ld hl, $514e
+	ld hl, UnnamedText_7514e
 	call PrintText
 	ld bc,(HM_04 << 8) | 1
 	call GiveItem
 	jr nc, .asm_53b90 ; 0x75115
-	ld hl, $5153
+	ld hl, UnnamedText_75153
 	call PrintText
 	ld hl, $d78e
 	set 0, [hl]
 	jr .asm_52039 ; 0x75122
 .asm_58feb ; 0x75124
-	ld hl, $5159
+	ld hl, UnnamedText_75159
 	call PrintText
 	jr .asm_52039 ; 0x7512a
 .asm_53b90 ; 0x7512c
-	ld hl, $515e
+	ld hl, UnnamedText_7515e
 	call PrintText
 .asm_52039 ; 0x75132
 	jp TextScriptEnd
@@ -49348,9 +49354,9 @@ FuchsiaHouse2Text4: ; 0x75163
 	db $08 ; asm
 	ldh a, [$8c]
 	cp $4
-	ld hl, $517b
+	ld hl, UnnamedText_7517b
 	jr nz, .asm_4c9a2 ; 0x7516b
-	ld hl, $5176
+	ld hl, UnnamedText_75176
 .asm_4c9a2 ; 0x75170
 	call PrintText
 	jp TextScriptEnd
@@ -49541,7 +49547,7 @@ SafariZoneEntranceText4: ; 0x752ca
 	ld [$ff00+$a1], a
 	call $35a6
 	jr nc, .asm_752f9 ; 0x752ef $8
-	ld hl, $536a
+	ld hl, UnnamedText_7536a
 	call PrintText
 	jr .asm_7534c ; 0x752f7 $53
 .asm_752f9
@@ -49559,7 +49565,7 @@ SafariZoneEntranceText4: ; 0x752ca
 	ld a, $13
 	ld [$d125], a
 	call $30e8
-	ld hl, $535b
+	ld hl, UnnamedText_7535b
 	call PrintText
 	ld a, $1e
 	ld [$da47], a
@@ -49576,7 +49582,7 @@ SafariZoneEntranceText4: ; 0x752ca
 	ld a, $3
 	ld [$d61f], a
 	jr .asm_75358 ; 0x75344 $12
-	ld hl, $5365
+	ld hl, UnnamedText_75365
 	call PrintText
 .asm_7534c
 	ld a, $80
@@ -49614,7 +49620,7 @@ SafariZoneEntranceText5: ; 0x7536f
 	ld a, [$cc26]
 	and a
 	jr nz, .asm_7539c ; 0x7537b $1f
-	ld hl, $53bb
+	ld hl, UnnamedText_753bb
 	call PrintText
 	xor a
 	ld [$c109], a
@@ -49628,7 +49634,7 @@ SafariZoneEntranceText5: ; 0x7536f
 	ld [$cf0d], a
 	jr .asm_753b3 ; 0x7539a $17
 .asm_7539c
-	ld hl, $53c0
+	ld hl, UnnamedText_753c0
 	call PrintText
 	ld a, $4
 	ld [$c109], a
@@ -49660,14 +49666,14 @@ SafariZoneEntranceText6: ; 0x753c5
 
 SafariZoneEntranceText2: ; 0x753ca
 	db $08 ; asm
-	ld hl, $53e6
+	ld hl, UnnamedText_753e6
 	call PrintText
 	call $35ec
 	ld a, [$cc26]
 	and a
-	ld hl, $53f0
+	ld hl, UnnamedText_753f0
 	jr nz, .asm_278a6 ; 0x753db
-	ld hl, $53eb
+	ld hl, UnnamedText_753eb
 .asm_278a6 ; 0x753e0
 	call PrintText
 	jp TextScriptEnd
@@ -49755,17 +49761,17 @@ FuchsiaGymText1: ; 0x75534
 	call $30b6
 	jr .asm_e84c6 ; 0x75546
 .asm_adc3b ; 0x75548
-	ld hl, $558b
+	ld hl, UnnamedText_7558b
 	call PrintText
 	jr .asm_e84c6 ; 0x7554e
 .asm_181b6 ; 0x75550
-	ld hl, $5581
+	ld hl, UnnamedText_75581
 	call PrintText
 	ld hl, $d72d
 	set 6, [hl]
 	set 7, [hl]
-	ld hl, $5586
-	ld de, $5586
+	ld hl, UnnamedText_75586
+	ld de, $5586 ; probably UnnamedText_75586
 	call $3354
 	ldh a, [$8c]
 	ld [$cf13], a
@@ -49944,9 +49950,9 @@ FuchsiaGymText8: ; 0x7563a
 	db $08 ; asm
 	ld a, [$d792]
 	bit 1, a
-	ld hl, $5653
+	ld hl, UnnamedText_75653
 	jr nz, .asm_50671 ; 0x75643
-	ld hl, $564e
+	ld hl, UnnamedText_7564e
 .asm_50671 ; 0x75648
 	call PrintText
 	jp TextScriptEnd
@@ -50201,14 +50207,14 @@ CinnabarGymText1: ; 0x758df
 	call $30b6
 	jp TextScriptEnd
 .asm_3012f ; 0x758f4
-	ld hl, $5920
+	ld hl, UnnamedText_75920
 	call PrintText
 	jp TextScriptEnd
 .asm_d9332 ; 0x758fd
-	ld hl, $5914
+	ld hl, UnnamedText_75914
 	call PrintText
-	ld hl, $5919
-	ld de, $5919
+	ld hl, UnnamedText_75919
+	ld de, UnnamedText_75919 ; $5919 XXX
 	call $3354
 	ld a, $7
 	ld [$d05c], a
@@ -50254,14 +50260,14 @@ CinnabarGymText2: ; 0x75939
 	ld a, [$d79a]
 	bit 2, a
 	jr nz, .asm_46bb4 ; 0x75942
-	ld hl, $595f
+	ld hl, UnnamedText_7595f
 	call PrintText
-	ld hl, $5964
-	ld de, $5964
+	ld hl, UnnamedText_75964
+	ld de, UnnamedText_75964 ; $5964 XXX
 	call $3354
 	jp $58b7
 .asm_46bb4 ; 0x75956
-	ld hl, $5969
+	ld hl, UnnamedText_75969
 	call PrintText
 	jp TextScriptEnd
 
@@ -50286,14 +50292,14 @@ CinnabarGymText3: ; 0x7596e
 	ld a, [$d79a]
 	bit 3, a
 	jr nz, .asm_4b406 ; 0x75977
-	ld hl, $5994
+	ld hl, UnnamedText_75994
 	call PrintText
-	ld hl, $5999
-	ld de, $5999
+	ld hl, UnnamedText_75999
+	ld de, UnnamedText_75999 ; $5999 XXX
 	call $3354
 	jp $58b7
 .asm_4b406 ; 0x7598b
-	ld hl, $599e
+	ld hl, UnnamedText_7599e
 	call PrintText
 	jp TextScriptEnd
 
@@ -50318,14 +50324,14 @@ CinnabarGymText4: ; 0x759a3
 	ld a, [$d79a]
 	bit 4, a
 	jr nz, .asm_c0673 ; 0x759ac
-	ld hl, $59c9
+	ld hl, UnnamedText_759c9
 	call PrintText
-	ld hl, $59ce
-	ld de, $59ce
+	ld hl, UnnamedText_759ce
+	ld de, UnnamedText_759ce ; $59ce XXX
 	call $3354
 	jp $58b7
 .asm_c0673 ; 0x759c0
-	ld hl, $59d3
+	ld hl, UnnamedText_759d3
 	call PrintText
 	jp TextScriptEnd
 
@@ -50350,14 +50356,14 @@ CinnabarGymText5: ; 0x759d8
 	ld a, [$d79a]
 	bit 5, a
 	jr nz, .asm_5cfd7 ; 0x759e1
-	ld hl, $59fe
+	ld hl, UnnamedText_759fe
 	call PrintText
-	ld hl, $5a03
-	ld de, $5a03
+	ld hl, UnnamedText_75a03
+	ld de, UnnamedText_75a03 ; $5a03 XXX
 	call $3354
 	jp $58b7
 .asm_5cfd7 ; 0x759f5
-	ld hl, $5a08
+	ld hl, UnnamedText_75a08
 	call PrintText
 	jp TextScriptEnd
 
@@ -50382,14 +50388,14 @@ CinnabarGymText6: ; 0x75a0d
 	ld a, [$d79a]
 	bit 6, a
 	jr nz, .asm_776b4 ; 0x75a16
-	ld hl, $5a33
+	ld hl, UnnamedText_75a33
 	call PrintText
-	ld hl, $5a38
-	ld de, $5a38
+	ld hl, UnnamedText_75a38
+	ld de, UnnamedText_75a38
 	call $3354
 	jp $58b7
 .asm_776b4 ; 0x75a2a
-	ld hl, $5a3d
+	ld hl, UnnamedText_75a3d
 	call PrintText
 	jp TextScriptEnd
 
@@ -50414,7 +50420,7 @@ CinnabarGymText7: ; 0x75a42
 	ld a, [$d79a]
 	bit 7, a
 	jr nz, .asm_2f755 ; 0x75a4b
-	ld hl, $5a68
+	ld hl, UnnamedText_75a68
 	call PrintText
 	ld hl, $5a6d
 	ld de, $5a6d
@@ -50446,14 +50452,14 @@ CinnabarGymText8: ; 0x75a77
 	ld a, [$d79b]
 	bit 0, a
 	jr nz, .asm_d87be ; 0x75a80
-	ld hl, $5a9d
+	ld hl, UnnamedText_75a9d
 	call PrintText
-	ld hl, $5aa2
-	ld de, $5aa2
+	ld hl, UnnamedText_75aa2
+	ld de, UnnamedText_75aa2 ; $5aa2 XXX
 	call $3354
 	jp $58b7
 .asm_d87be ; 0x75a94
-	ld hl, $5aa7
+	ld hl, UnnamedText_75aa7
 	call PrintText
 	jp TextScriptEnd
 
@@ -50477,10 +50483,10 @@ CinnabarGymText9: ; 0x75aac
 	ld a, [$d79a]
 	bit 1, a
 	jr nz, .asm_627d9 ; 0x75ab2
-	ld hl, $5ac2
+	ld hl, UnnamedText_75ac2
 	jr .asm_0b11d ; 0x75ab7
 .asm_627d9 ; 0x75ab9
-	ld hl, $5ac7
+	ld hl, UnnamedText_75ac7
 .asm_0b11d ; 0x75abc
 	call PrintText
 	jp TextScriptEnd
@@ -50662,22 +50668,22 @@ Lab3Text1: ; 0x75c94
 	ld a, [$d7a1]
 	bit 7, a
 	jr nz, .asm_e551a ; 0x75c9a
-	ld hl, $5cc8
+	ld hl, UnnamedText_75cc8
 	call PrintText
-	ld bc,(TM_35 << 8) | 1
+	ld bc, (TM_35 << 8) | 1
 	call GiveItem
 	jr nc, .asm_6c187 ; 0x75ca8
-	ld hl, $5ccd
+	ld hl, UnnamedText_75ccd
 	call PrintText
 	ld hl, $d7a1
 	set 7, [hl]
 	jr .asm_eb896 ; 0x75cb5
 .asm_6c187 ; 0x75cb7
-	ld hl, $5cd8
+	ld hl, UnnamedText_75cd8
 	call PrintText
 	jr .asm_eb896 ; 0x75cbd
 .asm_e551a ; 0x75cbf
-	ld hl, $5cd3
+	ld hl, UnnamedText_75cd3
 	call PrintText
 .asm_eb896 ; 0x75cc5
 	jp TextScriptEnd
@@ -50760,7 +50766,7 @@ Lab4Text1: ; 0x75d6c
 	ld a, [$d7a3]
 	bit 0, a
 	jr nz, .asm_75d96 ; 0x75d72 $22
-	ld hl, $5dc6
+	ld hl, UnnamedText_75dc6
 	call PrintText
 	call $5d38
 	ld a, [$cd37]
@@ -50771,19 +50777,19 @@ Lab4Text1: ; 0x75d6c
 	call Bankswitch
 	jr .asm_75d93 ; 0x75d8b $6
 .asm_75d8d
-	ld hl, $5dcb
+	ld hl, UnnamedText_75dcb
 	call PrintText
 .asm_75d93
 	jp TextScriptEnd
 .asm_75d96
 	bit 1, a
 	jr z, .asm_75da2 ; 0x75d98 $8
-	ld hl, $5dd0
+	ld hl, UnnamedText_75dd0
 	call PrintText
 	jr .asm_75d93 ; 0x75da0 $f1
 .asm_75da2
 	call $5de8
-	ld hl, $5dd5
+	ld hl, UnnamedText_75dd5
 	call PrintText
 	ld hl, $d7a3
 	set 2, [hl]
@@ -51092,9 +51098,9 @@ GaryText1: ; 0x760e0
 	db $08 ; asm
 	ld a, [$d867]
 	bit 1, a
-	ld hl, $60f4
+	ld hl, UnnamedText_760f4
 	jr z, .asm_17e9f ; 0x760e9
-	ld hl, $6103
+	ld hl, UnnamedText_76103
 .asm_17e9f ; 0x760ee
 	call PrintText
 	jp TextScriptEnd
@@ -51128,7 +51134,7 @@ GaryText3: ; 0x7610d
 	ld a, [$d717]
 	ld [$d11e], a
 	call GetMonName
-	ld hl, $6120
+	ld hl, UnnamedText_76120
 	call PrintText
 	jp TextScriptEnd
 ; 0x76120
@@ -66066,7 +66072,7 @@ _UnnamedText_191ca: ; 0xa45ea
 	db "have this TM.", $58
 ; 0xa45ea + 176 bytes
 
-ReceivedTM42Text: ; 0xa469a
+_ReceivedTM42Text: ; 0xa469a
 	db $0, $52, " received", $4f
 	db "TM42!@@"
 ; 0xa46ad
@@ -66655,7 +66661,7 @@ _UnnamedText_199d2: ; 0xa5afd
 	db "dropping by!", $58
 ; 0xa5afd + 93 bytes
 
-UnnamedText_a5b5a: ; 0xa5b5a
+_UnnamedText_199d7: ; 0xa5b5a
 	db $0, $52, " received", $4f
 	db "@"
 	TX_RAM $cf4b
