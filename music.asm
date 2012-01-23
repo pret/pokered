@@ -1168,7 +1168,91 @@ Routes2_md_4: ;9F08 - 9FAC
 
 ;Routes 3, 4, 5, 6, 7, 8, 9, 10, 16, 17, 18, 19, 20, 21, 22
 Routes3_md_1: ;9FAD - A008
-INCBIN "baserom.gbc",$9fad,$a009 - $9fad
+	; 9FAD
+	mus_tempo 0, 148
+	mus_volume 119
+	mus_duty duty75
+	mus_mod 6, 3, 4
+	db $E8
+	mus_vel 11, 5
+
+	mus_octave oct2
+	mus_note noteE, note16
+	mus_note noteF#, note16
+	mus_note noteG, note4_8
+	mus_note noteF, note16
+	mus_note noteG, note16
+	mus_note noteE, note16
+	mus_note noteRst, note1
+	mus_note noteRst, note2_4_8_16
+
+branch_9FC3:
+	mus_vel 11, 5
+	mus_note noteE, note4_8
+	mus_note noteD, note16
+	mus_note noteE, note16
+	mus_note noteC, note4
+	mus_note noteE, note4
+	mus_note noteC, note4_8
+	mus_note noteD, note16
+	mus_note noteE, note16
+	mus_note noteF, note8
+	mus_note noteG, note8
+	mus_note noteG, note8
+	mus_note noteA, note8
+	mus_vel 10, 7
+	mus_note noteA#, note2
+	mus_note noteF, note2
+	mus_note noteD, note2
+	mus_note noteF, note2
+	mus_vel 11, 5
+	mus_note noteE, note4_8
+	mus_note noteD, note16
+	mus_note noteE, note16
+	mus_note noteC, note4
+	mus_note noteE, note4
+	mus_note noteC, note4_8
+	mus_note noteD, note16
+	mus_note noteE, note16
+	mus_note noteF, note8
+	mus_note noteG, note8
+	mus_note noteG, note8
+	mus_note noteA, note8
+	mus_vel 10, 7
+	mus_note noteA#, note2
+	mus_note noteA#, note2
+	mus_note noteD, note2
+	mus_note noteF, note2
+	mus_vel 11, 5
+	mus_note noteE, note4
+	mus_note noteE, note8
+	mus_note noteF, note8
+	mus_note noteG, note4
+	mus_note noteF, note8
+	mus_note noteE, note8
+	mus_note noteB, note8
+
+	mus_octave oct1
+	mus_note noteG, note4
+
+	mus_octave oct2
+	mus_note noteB, note2
+	mus_note noteA, note8
+	db $D8
+	mus_note noteRst, note4
+	mus_note noteA, note4
+	mus_note noteF, note4
+	mus_note noteA, note4
+	db $D8
+	mus_note noteE, note1
+	mus_note noteA, note2_4
+	db $D8
+	mus_note noteA, note16
+	mus_note noteF, note2_4
+	mus_note noteG, note2_4
+	mus_jump 0, branch_9FC3
+	;A008
+	;No end byte until indigo plateu channel 1
 
 Routes3_md_2: ;A009 - A07E
 INCBIN "baserom.gbc",$a009,$a07f - $a009

@@ -10,6 +10,7 @@ int main(int argc, char** argv)
 	const unsigned char parameters = 2;
 	const unsigned char self = 1;
 	const unsigned char _max_argc = parameters + self;
+	const string defFileLoc = "../baserom.gbc";
 
 	string arg1;	// Offset
 	string arg2;	// File or "--" (if "--" then the file is assumed)
@@ -24,7 +25,7 @@ int main(int argc, char** argv)
 	else if(argc == (_max_argc - 1))
 	{
 		arg1 = argv[1];
-		arg2 = "../baserom.gbc";
+		arg2 = defFileLoc;
 	}
 
 	// Process any parameters
@@ -39,6 +40,7 @@ int main(int argc, char** argv)
 
 	if(arg1 == "") Console::Ask("What offset in the file in hex (0x----): ", arg1);
 	if(arg2 == "") Console::Ask("What file: ", arg2);
+	if(arg2 == "--") arg2 = defFileLoc;	// You can also put "--" for the default file location
 
 	// Weird way of converting arg1 to an unsigned integer
 	Parser p(arg2);
