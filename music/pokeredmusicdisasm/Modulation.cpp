@@ -72,7 +72,7 @@ string Modulation::GenAsm()
 	if(tmpRet != "") return tmpRet;
 
 	stringstream tmpAsmOut;
-	tmpAsmOut << "mus_mod " << hex << (short)delay << ", " << (short)depth << ", " << (short)rate;
+	tmpAsmOut << "mus_mod " << (short)delay << ", " << (short)depth << ", " << (short)rate;
 	return tmpAsmOut.str();
 }
 
