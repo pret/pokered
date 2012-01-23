@@ -6,6 +6,9 @@ syntax: glob
 #compiled object file
 *.o
 
+#no binaries
+*.exe
+
 #roms
 *.gbc
 
