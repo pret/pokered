@@ -1380,8 +1380,197 @@ branch_A01A:
 	; A07E
 	;No end byte until indigo plateu channel 1
 
-Routes3_md_3: ;A07F - 6130
-INCBIN "baserom.gbc",$a07f,$a131 - $a07f
+Routes3_md_3: ;A07F - A130
+	; A07F
+	mus_mod 4, 1, 0
+	db $D6
+	mus_note noteC#, note8_16
+
+	mus_octave oct3
+	mus_note noteG, note8
+	mus_note noteA#, note8
+	mus_note noteB, note2
+	mus_note noteA, note2
+	mus_note noteG, note8
+	mus_note noteRst, note8
+	mus_note noteG, note4_8_16
+	mus_note noteRst, note16
+	mus_note noteG, note16
+	mus_note noteRst, note16
+	mus_note noteG, note16
+	mus_note noteRst, note16
+	mus_note noteG, note8
+	mus_note noteRst, note8
+	mus_note noteG, note8
+	mus_note noteRst, note8
+	mus_note noteG, note2
+	mus_note noteG, note8
+	mus_note noteRst, note8
+	mus_note noteG, note4_8_16
+	mus_note noteRst, note16
+	mus_note noteG, note16
+	mus_note noteRst, note16
+	mus_note noteG, note16
+	mus_note noteRst, note16
+	mus_note noteG, note8
+	mus_note noteRst, note8
+	mus_note noteG, note8
+	mus_note noteRst, note8
+	mus_note noteG, note2
+	
+branch_A0A3:
+	mus_vel 1, 2
+	mus_note noteE, note16
+	mus_note noteRst, note16
+	mus_note noteG, note4
+	mus_note noteE, note16
+	mus_note noteE, note16
+	mus_note noteE, note16
+	mus_note noteRst, note16
+	mus_note noteE, note16
+	mus_note noteRst, note16
+	mus_note noteG, note4
+	mus_note noteE, note16
+	mus_note noteRst, note16
+	mus_note noteG, note4
+	mus_note noteE, note16
+	mus_note noteE, note16
+	mus_note noteE, note16
+	mus_note noteRst, note16
+	mus_note noteE, note16
+	mus_note noteRst, note16
+	mus_note noteG, note8
+	mus_note noteA, note8
+	mus_note noteF, note16
+	mus_note noteRst, note16
+	mus_note noteA#, note4
+	mus_note noteF, note16
+	mus_note noteF, note16
+	mus_note noteF, note16
+	mus_note noteRst, note16
+	mus_note noteF, note16
+	mus_note noteRst, note16
+	mus_note noteA#, note4
+	mus_note noteF, note16
+	mus_note noteRst, note16
+	mus_note noteA#, note4
+	mus_note noteF, note16
+	mus_note noteF, note16
+	mus_note noteF, note16
+	mus_note noteRst, note16
+	mus_note noteF, note16
+	mus_note noteRst, note16
+	mus_note noteA#, note8
+	mus_note noteF, note8
+	mus_note noteE, note16
+	mus_note noteRst, note16
+	mus_note noteG, note4
+	mus_note noteE, note16
+	mus_note noteE, note16
+	mus_note noteE, note16
+	mus_note noteRst, note16
+	mus_note noteE, note16
+	mus_note noteRst, note16
+	mus_note noteG, note4
+	mus_note noteE, note16
+	mus_note noteRst, note16
+	mus_note noteG, note4
+	mus_note noteE, note16
+	mus_note noteE, note16
+	mus_note noteE, note16
+	mus_note noteRst, note16
+	mus_note noteE, note16
+	mus_note noteRst, note16
+	mus_note noteG, note8
+	mus_note noteA, note8
+	mus_note noteF, note16
+	mus_note noteRst, note16
+	mus_note noteA#, note4
+	mus_note noteF, note16
+	mus_note noteF, note16
+	mus_note noteF, note16
+	mus_note noteRst, note16
+	mus_note noteF, note16
+	mus_note noteRst, note16
+	mus_note noteA#, note4
+	mus_note noteF, note16
+	mus_note noteRst, note16
+	mus_note noteA#, note4
+	mus_note noteF, note16
+	mus_note noteF, note16
+	mus_note noteF, note16
+	mus_note noteRst, note16
+	mus_note noteF, note16
+	mus_note noteRst, note16
+	mus_note noteA#, note8
+	mus_note noteA, note8
+	mus_note noteG, note16
+	mus_note noteRst, note16
+
+	mus_octave oct4
+	mus_note noteC, note4
+
+	mus_octave oct3
+	mus_note noteG, note16
+	mus_note noteG, note16
+	mus_note noteG, note16
+	mus_note noteRst, note16
+	mus_note noteG, note16
+	mus_note noteRst, note16
+
+	mus_octave oct4
+	mus_note noteC, note4
+
+	mus_octave oct3
+	mus_note noteG, note16
+	mus_note noteRst, note16
+
+	mus_octave oct4
+	mus_note noteD, note4
+
+	mus_octave oct3
+	mus_note noteG, note16
+	mus_note noteG, note16
+	mus_note noteG, note16
+	mus_note noteRst, note16
+	mus_note noteG, note16
+	mus_note noteRst, note16
+
+	mus_octave oct4
+	mus_note noteD, note4
+
+	mus_octave oct3
+	mus_note noteF, note16
+	mus_note noteRst, note16
+
+	mus_octave oct4
+	mus_note noteC, note4
+
+	mus_octave oct3
+	mus_note noteF, note16
+	mus_note noteF, note16
+	mus_note noteF, note16
+	mus_note noteRst, note16
+	mus_note noteF, note16
+	mus_note noteRst, note16
+
+	mus_octave oct4
+	mus_note noteC, note4
+
+	mus_octave oct3
+	mus_note noteF, note16
+	mus_note noteRst, note16
+	mus_note noteA, note4
+	mus_note noteF, note16
+	mus_note noteF, note16
+	mus_note noteF, note16
+	mus_note noteRst, note16
+	mus_note noteF, note16
+	mus_note noteRst, note16
+	mus_note noteA, note4
+	mus_jump 0, branch_A0A3
+	; A130
+	;No end byte until indigo plateu channel 1
 
 Routes3_md_4: ;A131 -A26A
 INCBIN "baserom.gbc",$a131,$a26a - $a131
