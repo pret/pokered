@@ -2979,7 +2979,85 @@ branch_a6af:
 	; A6B9
 
 IndigoPlateau_md_3: ;a6ba - a70e
-INCBIN "baserom.gbc",$a6ba,$a70f - $a6ba
+	; A6BA
+	mus_vel 1, 0
+
+	mus_octave oct3
+	mus_note noteD, note8
+	mus_note noteRst, note4_8
+	mus_note noteD, note8
+	mus_note noteRst, note4_8
+	mus_note noteD, note8
+	mus_note noteRst, note4_8
+	mus_note noteD, note8
+	mus_note noteRst, note8
+	mus_note noteD#, note4
+	
+branch_a6c6:
+	mus_call branch_a6fe
+	mus_call branch_a6fe
+	mus_call branch_a6fe
+	mus_note noteD, note8
+	mus_note noteRst, note8
+	mus_note noteD, note8
+	mus_note noteRst, note8
+	mus_note noteD, note8
+	mus_note noteRst, note8
+	mus_note noteD, note8
+	mus_note noteRst, note8
+	mus_note noteD, note8
+	mus_note noteRst, note8
+	mus_note noteD, note8
+	mus_note noteRst, note8
+	mus_note noteD, note8
+	mus_note noteRst, note8
+	mus_note noteF#, note4
+	mus_call branch_a6fe
+	mus_call branch_a6fe
+	mus_note noteD, note8
+	mus_note noteRst, note8
+	mus_note noteD, note8
+	mus_note noteRst, note8
+	mus_note noteD, note8
+	mus_note noteRst, note8
+	mus_note noteD, note8
+	mus_note noteRst, note8
+	mus_note noteD, note8
+	mus_note noteRst, note8
+	mus_note noteD, note8
+	mus_note noteRst, note8
+	mus_note noteD, note8
+	mus_note noteRst, note8
+	mus_note noteA#, note16
+	mus_note noteRst, note16
+	mus_note noteA#, note16
+	mus_note noteRst, note16
+	mus_note noteA, note2
+	mus_note noteD, note2
+	mus_note noteA#, note2
+	mus_note noteD#, note2
+	mus_jump 0, branch_a6c6
+
+	
+branch_a6fe:
+	mus_octave oct3
+	mus_note noteD, note8
+	mus_note noteRst, note8
+	mus_note noteD, note8
+	mus_note noteRst, note8
+	mus_note noteD, note8
+	mus_note noteRst, note8
+	mus_note noteD, note8
+	mus_note noteRst, note8
+	mus_note noteD, note8
+	mus_note noteRst, note8
+	mus_note noteD, note8
+	mus_note noteRst, note8
+	mus_note noteD, note8
+	mus_note noteRst, note8
+	mus_note noteA, note4
+	mus_end
+	; A70E
 
 IndigoPlateau_md_4: ;a70f - a7c4
 INCBIN "baserom.gbc",$a70f,$a7c5 - $a70f
