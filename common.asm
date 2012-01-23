@@ -26965,19 +26965,21 @@ RockTunnel1_h: ; 0x444d0 to 0x444dc (12 bytes) (bank=11) (id=82)
 
 RockTunnel1Script: ; 0x444dc
 	call $3c3c
-	ld hl, $4505
-	ld de, $44ef
+	ld hl, Unnamed_44505 ; $4505
+	ld de, Unnamed_444ef ; $44ef
 	ld a, [$d621]
 	call $3160
 	ld [$d621], a
 	ret
 ; 0x444ef
 
+Unnamed_444ef:
 INCBIN "baserom.gbc",$444ef,$6
 
 RockTunnel1Texts: ; 0x444f5
 	dw RockTunnel1Text1, RockTunnel1Text2, RockTunnel1Text3, RockTunnel1Text4, RockTunnel1Text5, RockTunnel1Text6, RockTunnel1Text7, RockTunnel1Text8
 
+Unnamed_44505:
 INCBIN "baserom.gbc",$44505,$55
 
 RockTunnel1Text1: ; 0x4455a
@@ -33381,8 +33383,7 @@ SaffronCityText11: ; 0x50c67
 
 SaffronCityText12: ; 0x50c6c
 	TX_FAR _SaffronCityText12
-
-INCBIN "baserom.gbc",$50c70,$50c72 - $50c70
+	db $15, $50
 
 SaffronCityText13: ; 0x50c72
 	TX_FAR _SaffronCityText13
@@ -33447,6 +33448,8 @@ INCBIN "baserom.gbc",$50cc6,$5c
 Route20Texts: ; 0x50d22
 	dw Route20Text1, Route20Text2, Route20Text3, Route20Text4, Route20Text5, Route20Text6, Route20Text7, Route20Text8, Route20Text9, Route20Text10, Route20Text11, Route20Text12
 
+Route20TrainerHeaders:
+Route20TrainerHeader1:
 INCBIN "baserom.gbc",$50d3a,$79
 
 Route20Text1: ; 0x50db3
