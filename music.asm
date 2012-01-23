@@ -3405,7 +3405,137 @@ branch_a7ce:
 	; A85E
 
 PalletTown_md_2: ; a85f - a8dd (127 bytes)
-INCBIN "baserom.gbc",$a85f,$a8de - $a85f
+	; A85F
+	mus_duty duty50
+
+branch_a861:
+	mus_vel 13, 3
+
+	mus_octave oct4
+	mus_note noteD, note8
+	mus_vel 10, 3
+	mus_note noteC, note8
+	mus_vel 13, 3
+
+	mus_octave oct3
+	mus_note noteB, note8
+	mus_vel 11, 3
+	mus_note noteA, note8
+	mus_vel 13, 3
+
+	mus_octave oct4
+	mus_note noteG, note8
+	mus_vel 11, 3
+	mus_note noteE, note8
+	mus_vel 13, 3
+	mus_note noteF#, note8
+	mus_note noteE, note8
+	mus_note noteD, note4_8
+
+	mus_octave oct3
+	mus_note noteB, note8
+	mus_note noteG, note8
+	mus_note noteG, note8
+	mus_note noteA, note8
+	mus_note noteB, note8
+
+	mus_octave oct4
+	mus_note noteC, note2_8
+
+	mus_octave oct3
+	mus_note noteF#, note8
+	mus_note noteG, note8
+	mus_note noteA, note8
+	mus_note noteB, note4_8
+
+	mus_octave oct4
+	mus_note noteC, note16
+
+	mus_octave oct3
+	mus_note noteB, note16
+	mus_note noteA, note2
+
+	mus_octave oct4
+	mus_note noteD, note8
+	mus_vel 10, 3
+	mus_note noteC, note8
+	mus_vel 13, 3
+
+	mus_octave oct3
+	mus_note noteB, note8
+	mus_vel 11, 3
+
+	mus_octave oct4
+	mus_note noteD, note8
+	mus_vel 13, 3
+	mus_note noteG, note8
+	mus_vel 10, 3
+	mus_note noteF#, note8
+	mus_vel 11, 3
+	mus_note noteF#, note8
+	mus_vel 13, 3
+	mus_note noteG, note8
+	mus_note noteE, note4_8
+	mus_note noteD, note8
+	mus_note noteD, note2
+	mus_note noteC, note8
+
+	mus_octave oct3
+	mus_note noteB, note8
+	mus_note noteA, note8
+	mus_note noteG, note8
+
+	mus_octave oct4
+	mus_note noteD, note8
+	mus_note noteC, note8
+
+	mus_octave oct3
+	mus_note noteB, note8
+	mus_note noteA, note8
+	mus_note noteG, note2_8
+	mus_note noteG, note8
+	mus_note noteA, note8
+	mus_note noteB, note8
+
+	mus_octave oct4
+	mus_note noteC, note2
+	mus_note noteD, note4_8
+	mus_note noteC, note8
+
+	mus_octave oct3
+	mus_note noteB, note2
+	mus_note noteRst, note8
+	mus_note noteG, note8
+	mus_note noteA, note8
+	mus_note noteB, note8
+
+	mus_octave oct4
+	mus_note noteC, note4
+	mus_note noteC, note4
+	mus_note noteD, note4_8
+	mus_note noteC, note16
+	mus_note noteD, note16
+
+	mus_octave oct3
+	mus_note noteB, note2
+	mus_note noteRst, note8
+	mus_note noteB, note8
+	mus_note noteA, note8
+	mus_note noteG, note8
+	mus_note noteA, note2
+	mus_note noteE, note4
+	mus_note noteB, note4
+	mus_note noteA, note2
+	mus_note noteG, note4
+	mus_note noteE, note4
+	mus_note noteF#, note2
+	mus_note noteG, note4
+	mus_note noteB, note4
+	mus_note noteB, note2
+	mus_note noteA, note2
+	mus_jump 0, branch_a861
+	mus_end
+	; A8DD
 
 PalletTown_md_3: ; a8de - aa75 (408 bytes)
 INCBIN "baserom.gbc",$a8de,$aa76 - $a8de
