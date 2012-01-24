@@ -25241,21 +25241,314 @@ SubstituteBrokeText: ; 0x3e2b1
 	db $50
 ; 0x3e2b1 + 5 bytes
 
-INCBIN "baserom.gbc",$3e2b6,$3e2f8 - $3e2b6
+; this function raises the attack modifier of a pokemon using Rage when that pokemon is attacked
+HandleBuildingRage: ; 62B6
+; values for the player turn
+	ld hl,W_ENEMYBATTSTATUS2
+	ld de,W_ENEMYMONATTACKMOD
+	ld bc,W_ENEMYMOVENUM
+	ld a,[H_WHOSETURN]
+	and a
+	jr z,.next\@
+; values for the enemy turn
+	ld hl,W_PLAYERBATTSTATUS2
+	ld de,W_PLAYERMONATTACKMOD
+	ld bc,W_PLAYERMOVENUM
+.next\@
+	bit 6,[hl] ; is the pokemon being attacked under the effect of Rage?
+	ret z ; return if not
+	ld a,[de]
+	cp a,$0d ; maximum stat modifier value
+	ret z ; return if attack modifier is already maxed
+	ld a,[H_WHOSETURN]
+	xor a,$01 ; flip turn for the stat modifier raising function
+	ld [H_WHOSETURN],a
+; change the target pokemon's move to $00 and the effect to the one
+; that causes the attack modifier to go up one stage
+	ld h,b
+	ld l,c
+	ld [hl],$00 ; null move number
+	inc hl
+	ld [hl],ATTACK_UP1_EFFECT
+	push hl
+	ld hl,BuildingRageText
+	call PrintText
+	call $7428 ; stat modifier raising function
+	pop hl
+	xor a
+	ldd [hl],a ; null move effect
+	ld a,RAGE
+	ld [hl],a ; restore the target pokemon's move number to Rage
+	ld a,[H_WHOSETURN]
+	xor a,$01 ; flip turn back to the way it was
+	ld [H_WHOSETURN],a
+	ret
 
-UnnamedText_3e2f8: ; 0x3e2f8
-	TX_FAR _UnnamedText_3e2f8
+BuildingRageText: ; 0x3e2f8
+	TX_FAR _BuildingRageText
 	db $50
 ; 0x3e2f8 + 5 bytes
 
-INCBIN "baserom.gbc",$3e2fd,$3e324 - $3e2fd
+; copy last move for Mirror Move
+; sets zero flag on failure and unsets zero flag on success
+MirrorMoveCopyMove: ; 62FD
+	ld a,[H_WHOSETURN]
+	and a
+; values for player turn
+	ld a,[$ccf2]
+	ld hl,W_PLAYERSELECTEDMOVE
+	ld de,W_PLAYERMOVENUM
+	jr z,.next\@
+; values for enemy turn
+	ld a,[$ccf1]
+	ld de,W_ENEMYMOVENUM
+	ld hl,W_ENEMYSELECTEDMOVE
+.next\@
+	ld [hl],a
+	cp a,MIRROR_MOVE ; did the target pokemon also use Mirror Move?
+	jr z,.mirrorMoveFailed\@
+	and a ; null move?
+	jr nz,ReloadMoveData
+.mirrorMoveFailed\@
+; Mirror Move fails on itself and null moves
+	ld hl,MirrorMoveFailedText
+	call PrintText
+	xor a
+	ret
 
-UnnamedText_3e324: ; 0x3e324
-	TX_FAR _UnnamedText_3e324
+MirrorMoveFailedText: ; 0x3e324
+	TX_FAR _MirrorMoveFailedText
 	db $50
 ; 0x3e324 + 5 bytes
 
-INCBIN "baserom.gbc",$3e329,$14b
+; function used to reload move data for moves like Mirror Move and Metronome
+ReloadMoveData: ; 6329
+	ld [$d11e],a
+	dec a
+	ld hl,Moves
+	ld bc,$0006
+	call AddNTimes
+	ld a,BANK(Moves)
+	call FarCopyData ; copy the move's stats
+	call IncrementMovePP
+; the follow two function calls are used to reload the move name
+	call $3058
+	call $3826
+	ld a,$01
+	and a
+	ret
+
+; function that picks a random move for metronome
+MetronomePickMove: ; 6348
+	xor a
+	ld [$cc5b],a
+	ld a,METRONOME
+	call PlayMoveAnimation ; play Metronome's animation
+; values for player turn
+	ld de,W_PLAYERMOVENUM
+	ld hl,W_PLAYERSELECTEDMOVE
+	ld a,[H_WHOSETURN]
+	and a
+	jr z,.pickMoveLoop\@
+; values for enemy turn
+	ld de,W_ENEMYMOVENUM
+	ld hl,W_ENEMYSELECTEDMOVE
+; loop to pick a random number in the range [1, $a5) to be the move used by Metronome
+.pickMoveLoop\@
+	call $6e9b ; random number
+	and a
+	jr z,.pickMoveLoop\@
+	cp a,$a5 ; max normal move number + 1 (this is Struggle's move number)
+	jr nc,.pickMoveLoop\@
+	cp a,METRONOME
+	jr z,.pickMoveLoop\@
+	ld [hl],a
+	jr ReloadMoveData
+
+; this function increments the current move's PP
+; it's used to prevent moves that run another move within the same turn
+; (like Mirror Move and Metronome) from losing 2 PP
+IncrementMovePP: ; 6373
+	ld a,[H_WHOSETURN]
+	and a
+; values for player turn
+	ld hl,W_PLAYERMONPP
+	ld de,W_PARTYMON1_MOVE1PP
+	ld a,[W_PLAYERMOVELISTINDEX]
+	jr z,.next\@
+; values for enemy turn
+	ld hl,W_ENEMYMONPP
+	ld de,$d8c1 ; enemy party pokemon 1 PP
+	ld a,[W_ENEMYMOVELISTINDEX]
+.next\@
+	ld b,$00
+	ld c,a
+	add hl,bc
+	inc [hl] ; increment PP in the currently battling pokemon memory location
+	ld h,d
+	ld l,e
+	add hl,bc
+	ld a,[H_WHOSETURN]
+	and a
+	ld a,[W_PLAYERMONNUMBER] ; value for player turn
+	jr z,.next2\@
+	ld a,[W_ENEMYMONNUMBER] ; value for enemy turn
+.next2\@
+	ld bc,$002c
+	call AddNTimes
+	inc [hl] ; increment PP in the party memory location
+	ret
+
+; function to adjust the base damage of an attack to account for type effectiveness
+AdjustDamageForMoveType: ; 63A5
+; values for player turn
+	ld hl,W_PLAYERMONTYPES
+	ld a,[hli]
+	ld b,a    ; b = type 1 of attacker
+	ld c,[hl] ; c = type 2 of attacker
+	ld hl,W_ENEMYMONTYPES
+	ld a,[hli]
+	ld d,a    ; d = type 1 of defender
+	ld e,[hl] ; e = type 2 of defender
+	ld a,[W_PLAYERMOVETYPE]
+	ld [$d11e],a
+	ld a,[H_WHOSETURN]
+	and a
+	jr z,.next\@
+; values for enemy turn
+	ld hl,W_ENEMYMONTYPES
+	ld a,[hli]
+	ld b,a    ; b = type 1 of attacker
+	ld c,[hl] ; c = type 2 of attacker
+	ld hl,W_PLAYERMONTYPES
+	ld a,[hli]
+	ld d,a    ; d = type 1 of defender
+	ld e,[hl] ; e = type 2 of defender
+	ld a,[W_ENEMYMOVETYPE]
+	ld [$d11e],a
+.next\@
+	ld a,[$d11e] ; move type
+	cp b ; does the move type match type 1 of the attacker?
+	jr z,.sameTypeAttackBonus\@
+	cp c ; does the move type match type 2 of the attacker?
+	jr z,.sameTypeAttackBonus\@
+	jr .skipSameTypeAttackBonus\@
+.sameTypeAttackBonus\@
+; if the move type matches one of the attacker's types
+	ld hl,W_DAMAGE + 1
+	ld a,[hld]
+	ld h,[hl]
+	ld l,a    ; hl = damage
+	ld b,h
+	ld c,l    ; bc = damage
+	srl b
+	rr c      ; bc = floor(0.5 * damage)
+	add hl,bc ; hl = floor(1.5 * damage)
+; store damage
+	ld a,h
+	ld [W_DAMAGE],a
+	ld a,l
+	ld [W_DAMAGE + 1],a
+	ld hl,$d05b
+	set 7,[hl]
+.skipSameTypeAttackBonus\@
+	ld a,[$d11e]
+	ld b,a ; b = move type
+	ld hl,TypeEffects
+.loop\@
+	ld a,[hli] ; a = "attacking type" of the current type pair
+	cp a,$ff
+	jr z,.done\@
+	cp b ; does move type match "attacking type"?
+	jr nz,.nextTypePair\@
+	ld a,[hl] ; a = "defending type" of the current type pair
+	cp d ; does type 1 of defender match "defending type"?
+	jr z,.matchingPairFound\@
+	cp e ; does type 2 of defender match "defending type"?
+	jr z,.matchingPairFound\@
+	jr .nextTypePair\@
+.matchingPairFound\@
+; if the move type matches the "attacking type" and one of the defender's types matches the "defending type"
+	push hl
+	push bc
+	inc hl
+	ld a,[$d05b]
+	and a,$80
+	ld b,a
+	ld a,[hl] ; a = damage multiplier
+	ld [$ff99],a
+	add b
+	ld [$d05b],a
+	xor a
+	ld [$ff96],a
+	ld hl,W_DAMAGE
+	ld a,[hli]
+	ld [$ff97],a
+	ld a,[hld]
+	ld [$ff98],a
+	call $38ac ; multiply
+	ld a,10
+	ld [$ff99],a
+	ld b,$04
+	call $38b9 ; divide
+	ld a,[$ff97]
+	ld [hli],a
+	ld b,a
+	ld a,[$ff98]
+	ld [hl],a
+	or b ; is damage 0?
+	jr nz,.skipTypeImmunity\@
+.typeImmunity\@
+; if damage is 0, make the move miss
+	inc a
+	ld [W_MOVEMISSED],a
+.skipTypeImmunity\@
+	pop bc
+	pop hl
+.nextTypePair\@
+	inc hl
+	inc hl
+	jp .loop\@
+.done\@
+	ret
+
+; function to tell how effective the type of an enemy attack is on the player's current pokemon
+; this doesn't take into account the effects that dual types can have
+; (e.g. 4x weakness / resistance, weaknesses and resistances canceling)
+; the result is stored in [$D11E]
+; ($05 is not very effective, $10 is neutral, $14 is super effective)
+; as far is can tell, this is only used once in some AI code to help decide which move to use
+AIGetTypeEffectiveness: ; 6449
+	ld a,[W_ENEMYMOVETYPE]
+	ld d,a                 ; d = type of enemy move
+	ld hl,W_PLAYERMONTYPES
+	ld b,[hl]              ; b = type 1 of player's pokemon
+	inc hl
+	ld c,[hl]              ; c = type 2 of player's pokemon
+	ld a,$10
+	ld [$d11e],a           ; initialize [$D11E] to neutral effectiveness
+	ld hl,TypeEffects
+.loop\@
+	ld a,[hli]
+	cp a,$ff
+	ret z
+	cp d                   ; match the type of the move
+	jr nz,.nextTypePair1\@
+	ld a,[hli]
+	cp b                   ; match with type 1 of pokemon
+	jr z,.done\@
+	cp c                   ; or match with type 2 of pokemon
+	jr z,.done\@
+	jr .nextTypePair2\@
+.nextTypePair1\@
+	inc hl
+.nextTypePair2\@
+	inc hl
+	jr .loop\@
+.done\@
+	ld a,[hl]
+	ld [$d11e],a           ; store damage multiplier
+	ret
 
 TypeEffects: ; 6474
 ; format: attacking type, defending type, damage multiplier
@@ -57070,12 +57363,12 @@ _SubstituteBrokeText: ; 0x89b6a
 	db "SUBSTITUTE broke!", $58
 ; 0x89b6a + 22 bytes
 
-_UnnamedText_3e2f8: ; 0x89b80
+_BuildingRageText: ; 0x89b80
 	db $0, $5a, "'s", $4f
 	db "RAGE is building!", $58
 ; 0x89b80 + 22 bytes
 
-_UnnamedText_3e324: ; 0x89b96
+_MirrorMoveFailedText: ; 0x89b96
 	db $0, "The MIRROR MOVE", $4e, "failed!", $58
 ; 0x89b96 + 25 bytes
 
