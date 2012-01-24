@@ -5958,7 +5958,7 @@ Celadon_mh: ; 0x825E - 0x8266
 	dw Celadon_md_3 ;Channel 3
 
 ;Cinnabar Island
-Cinnabar_mh: ; 0x8267-0x826F
+Cinnabar_mh: ; 0x8267 - 0x826F
 	db $80
 	dw Cinnabar_md_1 ;Channel 1
 	db $01
@@ -10935,7 +10935,7 @@ ItemUsePtrTable:	;$D5E1
 	dw $631E            ; ELIXER
 	dw $631E            ; MAX_ELIXER
 
-ItemUseBall:	;03:5687
+ItemUseBall: ; 03:5687
 	ld a,[W_ISINBATTLE]
 	and a
 	jp z,ItemUseNotTime ; not in battle
@@ -11331,7 +11331,7 @@ ItemUseBallText06:
 	db $13,$06
 	db "@"
 
-ItemUseTownMap:	;03:5968
+ItemUseTownMap: ; 03:5968
 	ld a,[W_ISINBATTLE]	;in-battle or outside
 	and a
 	jp nz,ItemUseNotTime	;OAK: "this isn't the time..."
@@ -11506,12 +11506,11 @@ UnnamedText_e471: ; 0xe471
 
 INCBIN "baserom.gbc",$e476,$3
 
-ItemUseTMHM:	;03:6479
+ItemUseTMHM: ; 03:6479
 	INCBIN "baserom.gbc",$E479,$E581 - $E479
-ItemUseNotTime:	;03:6581
+ItemUseNotTime: ; 03:6581
 	INCBIN "baserom.gbc",$E581,$E5E8 - $E581
-;ItemUseTexts:	;03:65e8
-ItemUseText00:	;03:65e8
+ItemUseText00: ; 03:65e8
 	TX_FAR _ItemUseText001
 	db $05
 	TX_FAR _ItemUseText002
@@ -48710,7 +48709,8 @@ TheEndGfx: ; 473E
 
 INCBIN "baserom.gbc",$747de,$74872 - $747de
 
-Unnamed_ASM_74872:	; code similar to this appears in a lot of banks; this particular
+Unnamed_ASM_74872: ; 0x74872
+                    ; code similar to this appears in a lot of banks; this particular
 	call $20EF		; one is called after you beat the Rocket that gives you TM28 DIG
 	ld a, $07		; the screen then fades out, he disappears, and fades back in
 	ld [$CC4D], a
@@ -49314,6 +49314,7 @@ UnnamedText_74f99: ; 0x74f99
 	db $50
 ; 0x74f99 + 5 bytes
 
+Unnamed_74f9e: ; 0x74f9e
 	db "FRESH WATER",$4E
 	db "SODA POP",$4E
 	db "LEMONADE",$4E
@@ -49342,7 +49343,27 @@ UnnamedText_74fe2: ; 0x74fe2
 	db $50
 ; 0x74fe2 + 5 bytes
 
-INCBIN "baserom.gbc",$74fe7,$25
+Unknown_74fe7: ; 0x74fe7
+	ld hl, Unknown_75000
+	ld a, [$cc26]
+	add a
+	add a
+	ld d, $0
+	ld e, a
+	add hl, de
+	ld a, [hli]
+	ld [$ff00+$db], a
+	ld a, [hli]
+	ld [$ff00+$dc], a
+	ld a, [hli]
+	ld [$ff00+$dd], a
+	ld a, [hl]
+	ld [$ff00+$de], a
+	ret
+; 0x75000
+
+Unknown_75000:
+INCBIN "baserom.gbc",$75000,$c
 
 FuchsiaHouse1_h: ; 0x7500c to 0x75018 (12 bytes) (id=153)
 	db $08 ; tileset
@@ -49620,7 +49641,7 @@ SafariZoneEntranceScript0: ; 0x751e7
 	ret nc
 	ld a, $3
 	ld [$ff00+$8c], a
-	call $2920
+	call DisplayTextID
 	ld a, $ff
 	ld [$cd6b], a
 	xor a
@@ -49644,6 +49665,7 @@ SafariZoneEntranceScript0: ; 0x751e7
 	ret
 ; 0x75221
 
+Unknown_75221: ; 0x75221
 db $2, $3, $2, $4, $ff
 
 SafariZoneEntranceScript1: ; 0x75226
@@ -49721,6 +49743,7 @@ SafariZoneEntranceScript6: ; 0x75295
 	ret
 ; 0x752a3
 
+Unknown_752a3: ; 0x752a3
 INCBIN "baserom.gbc",$752a3,$752b9 - $752a3
 
 SafariZoneEntranceTexts: ; 0x752b9
@@ -49734,6 +49757,7 @@ SafariZoneEntranceText1: ; 0x752c5
 SafariZoneEntranceText4: ; 0x752ca
 	TX_FAR UnnamedText_9e6e4 ; 0x9e6e4
 	db $8
+; 0x752cf
 	ld a, $13
 	ld [$d125], a
 	call $30e8
@@ -49940,9 +49964,9 @@ FuchsiaGymScript: ; 0x7543d
 
 INCBIN "baserom.gbc",$75453,$12
 
-Gym5CityName:
+Gym5CityName: ; 0x75465
 	db "FUCHSIA CITY@"
-Gym5LeaderName:
+Gym5LeaderName: ; 0x75472
 	db "KOGA@"
 
 INCBIN "baserom.gbc",$75477,$5E
@@ -50262,9 +50286,9 @@ CinnabarGymScript: ; 0x7574a
 
 INCBIN "baserom.gbc",$75759,$7577B - $75759
 
-Gym7CityName:
+Gym7CityName: ; 0x7577B
 	db "CINNABAR ISLAND@"
-Gym7LeaderName:
+Gym7LeaderName: ; 0x7578b
 	db "BLAINE@"
 
 INCBIN "baserom.gbc",$75792,$757a6 - $75792
@@ -50820,7 +50844,7 @@ Lab2Text2: ; 0x75c2f
 	ld [W_WHICHTRADE], a
 	jr asm_78552 ; 0x75c35 $6
 
-Lab2Text3:
+Lab2Text3: ; 0x75c37
 	db $8
 	ld a, $8
 	ld [W_WHICHTRADE], a
@@ -50958,7 +50982,7 @@ Lab4Script: ; 0x75d31
 	jp $3c3c
 ; 0x75d34
 
-Lab4Texts:
+Lab4Texts: ; 0x75d34
 	dw Lab4Text1, Lab4Text2
 
 INCBIN "baserom.gbc",$75d34 + 4,$38 -4
@@ -51077,10 +51101,10 @@ CinnabarPokecenterScript: ; 0x75e2c
 	jp $3c3c
 ; 0x75e32
 
-CinnabarPokecenterTexts:
+CinnabarPokecenterTexts: ; 0x75e32
 	dw CinnabarPokecenterText1, CinnabarPokecenterText2, CinnabarPokecenterText3, CinnabarPokecenterText4
 
-CinnabarPokecenterText1:
+CinnabarPokecenterText1: ; 0x75e3a
 	db $ff
 
 CinnabarPokecenterText2: ; 0x75e3b
@@ -51091,7 +51115,7 @@ CinnabarPokecenterText3: ; 0x75e40
 	TX_FAR _CinnabarPokecenterText3
 	db $50
 
-CinnabarPokecenterText4:
+CinnabarPokecenterText4: ; 0x75e45
 	db $f6
 
 CinnabarPokecenterObject: ; 0x75e46 (size=44)
@@ -51230,7 +51254,7 @@ GaryScript0: ; 0x75f47
 	ret
 ; 0x75f48
 
-GaryScript1:
+GaryScript1: ; 0x75f48
 	ld a, $ff
 	ld [$cd6b], a
 	ld hl, $ccd3
@@ -51607,7 +51631,7 @@ AgathaBlocks: ; 0x76560 30
 
 INCBIN "baserom.gbc",$7657e,$76670 - $7657e
 
-HallOfFameNoText:
+HallOfFameNoText: ; 0x76670
 	db "HALL OF FAME No   @"
 
 UnnamedText_76683: ; 0x76683
@@ -51895,7 +51919,7 @@ RealPlayAnimation: ; 4E53
 
 INCBIN "baserom.gbc",$78EC8,$7986F - $78EC8
 
-Func586F: ; 586F
+Func586F: ; 0x7986F 586F
 	ld hl,MoveSoundTable
 	ld e,a
 	ld d,0
@@ -51934,7 +51958,7 @@ Func586F: ; 586F
 .done\@
 	ld a,b
 	ret
-IsCryMove:
+IsCryMove: ; 0x798ad
 ; set carry if the move animation involves playing a monster cry
 	ld a,[$D07C]
 	cp a,GROWL
@@ -51947,7 +51971,7 @@ IsCryMove:
 	scf
 	ret
 
-MoveSoundTable:
+MoveSoundTable: ; 0x798bc
 	db $a0,$00,$80
 	db $a2,$10,$80
 	db $b3,$00,$80
