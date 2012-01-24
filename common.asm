@@ -24844,7 +24844,63 @@ HighCriticalMoves: ; 0x3e08e
 	db $FF
 ; 0x3e093
 
-INCBIN "baserom.gbc",$3e093,$3e0df - $3e093
+; function to determine if Counter hits and if so, how much damage it does
+HandleCounterMove: ; 6093
+	ld a,[H_WHOSETURN] ; whose turn
+	and a
+; player's turn
+	ld hl,W_ENEMYSELECTEDMOVE
+	ld de,W_ENEMYMOVEPOWER
+	ld a,[W_PLAYERSELECTEDMOVE]
+	jr z,.next\@
+; enemy's turn
+	ld hl,W_PLAYERSELECTEDMOVE
+	ld de,W_PLAYERMOVEPOWER
+	ld a,[W_ENEMYSELECTEDMOVE]
+.next\@
+	cp a,COUNTER
+	ret nz ; return if not using Counter
+	ld a,$01
+	ld [W_MOVEMISSED],a ; initialize the move missed variable to true (it is set to false below if the move hits)
+	ld a,[hl]
+	cp a,COUNTER
+	ret z ; if the target also used Counter, miss
+	ld a,[de]
+	and a
+	ret z ; if the move the target used has 0 power, miss
+; check if the move the target used was Normal or Fighting type
+	inc de
+	ld a,[de]
+	and a ; normal type
+	jr z,.counterableType\@
+	cp a,FIGHTING
+	jr z,.counterableType\@
+; if the move wasn't Normal or Fighting type, miss
+	xor a
+	ret
+.counterableType\@
+	ld hl,W_DAMAGE
+	ld a,[hli]
+	or [hl]
+	ret z ; Counter misses if the target did no damage to the Counter user
+; double the damage that the target did to the Counter user
+	ld a,[hl]
+	add a
+	ldd [hl],a
+	ld a,[hl]
+	adc a
+	ld [hl],a
+	jr nc,.noCarry\@
+; damage is capped at 0xFFFF
+	ld a,$ff
+	ld [hli],a
+	ld [hl],a
+.noCarry\@
+	xor a
+	ld [W_MOVEMISSED],a
+	call MoveHitTest ; do the normal move hit test in addition to Counter's special rules
+	xor a
+	ret
 
 ApplyDamageToEnemyPokemon: ; 60DF
 	ld a,[W_PLAYERMOVEEFFECT]
@@ -25083,7 +25139,197 @@ TypeEffects: ; 6474
 	db DRAGON,DRAGON,20
 	db $FF
 
-INCBIN "baserom.gbc",$3e56b,$3e887 - $3e56b
+; some tests that need to pass for a move to hit
+MoveHitTest: ; 656B
+; player's turn
+	ld hl,W_ENEMYBATTSTATUS1
+	ld de,W_PLAYERMOVEEFFECT
+	ld bc,W_ENEMYMONSTATUS
+	ld a,[H_WHOSETURN]
+	and a
+	jr z,.dreamEaterCheck\@
+; enemy's turn
+	ld hl,W_PLAYERBATTSTATUS1
+	ld de,W_ENEMYMOVEEFFECT
+	ld bc,W_PLAYERMONSTATUS
+.dreamEaterCheck\@
+	ld a,[de]
+	cp a,DREAM_EATER_EFFECT
+	jr nz,.swiftCheck\@
+	ld a,[bc]
+	and a,$07 ; is the target pokemon sleeping?
+	jp z,.moveMissed\@
+.swiftCheck\@
+	ld a,[de]
+	cp a,SWIFT_EFFECT
+	ret z ; Swift never misses (interestingly, Azure Heights lists this is a myth, but it is appears to be true)
+	call $7b79 ; substitute check (note that this overwrites a)
+	jr z,.checkForDigOrFlyStatus\@
+; this code is buggy. it's supposed to prevent HP draining moves from working on substitutes.
+; since $7b79 overwrites a with either $00 or $01, it never works.
+	cp a,DRAIN_HP_EFFECT ; $03
+	jp z,.moveMissed\@
+	cp a,DREAM_EATER_EFFECT ; $08
+	jp z,.moveMissed\@
+.checkForDigOrFlyStatus\@
+	bit 6,[hl]
+	jp nz,.moveMissed\@
+	ld a,[H_WHOSETURN]
+	and a
+	jr nz,.enemyTurn\@
+.playerTurn\@
+; this checks if the move effect is disallowed by mist
+	ld a,[W_PLAYERMOVEEFFECT]
+	cp a,$12
+	jr c,.skipEnemyMistCheck\@
+	cp a,$1a
+	jr c,.enemyMistCheck\@
+	cp a,$3a
+	jr c,.skipEnemyMistCheck\@
+	cp a,$42
+	jr c,.enemyMistCheck\@
+	jr .skipEnemyMistCheck\@
+.enemyMistCheck\@
+; if move effect is from $12 to $19 inclusive or $3a to $41 inclusive
+; i.e. the following moves
+; GROWL, TAIL WHIP, LEER, STRING SHOT, SAND-ATTACK, SMOKESCREEN, KINESIS,
+; FLASH, CONVERSION, HAZE*, SCREECH, LIGHT SCREEN*, REFLECT*
+; the moves that are marked with an asterisk are not affected since this
+; function is not called when those moves are used
+; XXX are there are any others like those three?
+	ld a,[W_ENEMYBATTSTATUS2]
+	bit 1,a
+	jp nz,.moveMissed\@
+.skipEnemyMistCheck\@
+	ld a,[W_PLAYERBATTSTATUS2]
+	bit 0,a ; is the player using X Accuracy?
+	ret nz ; if so, always hit regardless of accuracy/evasion
+	jr .calcHitChance\@
+.enemyTurn\@
+	ld a,[W_ENEMYMOVEEFFECT]
+	cp a,$12
+	jr c,.skipPlayerMistCheck\@
+	cp a,$1a
+	jr c,.playerMistCheck\@
+	cp a,$3a
+	jr c,.skipPlayerMistCheck\@
+	cp a,$42
+	jr c,.playerMistCheck\@
+	jr .skipPlayerMistCheck\@
+.playerMistCheck\@
+; similar to enemy mist check
+	ld a,[W_PLAYERBATTSTATUS2]
+	bit 1,a
+	jp nz,.moveMissed\@
+.skipPlayerMistCheck\@
+	ld a,[W_ENEMYBATTSTATUS2]
+	bit 0,a ; is the enemy using X Accuracy?
+	ret nz ; if so, always hit regardless of accuracy/evasion
+.calcHitChance\@
+	call CalcHitChance ; scale the move accuracy according to attacker's accuracy and target's evasion
+	ld a,[W_PLAYERMOVEACCURACY]
+	ld b,a
+	ld a,[H_WHOSETURN]
+	and a
+	jr z,.doAccuracyCheck\@
+	ld a,[W_ENEMYMOVEACCURACY]
+	ld b,a
+.doAccuracyCheck\@
+; if the random number generated is greater than or equal to the scaled accuracy, the move misses
+; note that this means that even the highest accuracy is still just a 255/256 chance, not 100%
+	call $6e9b ; random number
+	cp b
+	jr nc,.moveMissed\@
+	ret
+.moveMissed\@
+	xor a
+	ld hl,W_DAMAGE ; zero the damage
+	ld [hli],a
+	ld [hl],a
+	inc a
+	ld [W_MOVEMISSED],a
+	ld a,[H_WHOSETURN]
+	and a
+	jr z,.playerTurn2\@
+.enemyTurn2\@
+	ld hl,W_ENEMYBATTSTATUS1
+	res 5,[hl] ; end multi-turn attack e.g. wrap
+	ret
+.playerTurn2\@
+	ld hl,W_PLAYERBATTSTATUS1
+	res 5,[hl] ; end multi-turn attack e.g. wrap
+	ret
+
+; values for player turn
+CalcHitChance: ; 6624
+	ld hl,W_PLAYERMOVEACCURACY
+	ld a,[H_WHOSETURN]
+	and a
+	ld a,[W_PLAYERMONACCURACYMOD]
+	ld b,a
+	ld a,[W_ENEMYMONEVASIONMOD]
+	ld c,a
+	jr z,.next\@
+; values for enemy turn
+	ld hl,W_ENEMYMOVEACCURACY
+	ld a,[W_ENEMYMONACCURACYMOD]
+	ld b,a
+	ld a,[W_PLAYERMONEVASIONMOD]
+	ld c,a
+.next\@
+	ld a,$0e
+	sub c
+	ld c,a ; c = 14 - EVASIONMOD (this "reflects" the value over 7, so that an increase in the target's evasion decreases the hit chance instead of increasing the hit chance)
+; zero the high bytes of the multiplicand
+	xor a
+	ld [$ff96],a
+	ld [$ff97],a
+	ld a,[hl]
+	ld [$ff98],a ; set multiplicand to move accuracy
+	push hl
+	ld d,$02 ; loop has two iterations
+; loop to do the calculations, the first iteration multiplies by the accuracy ratio and the second iteration multiplies by the evasion ratio
+.loop\@
+	push bc
+	ld hl,$76cb ; stat modifier ratios
+	dec b
+	sla b
+	ld c,b
+	ld b,$00
+	add hl,bc ; hl = address of stat modifier ratio
+	pop bc
+	ld a,[hli]
+	ld [$ff99],a ; set multiplier to the numerator of the ratio
+	call $38ac ; multiply
+	ld a,[hl]
+	ld [$ff99],a ; set divisor to the the denominator of the ratio (the dividend is the product of the previous multiplication)
+	ld b,$04 ; number of significant bytes in the dividend
+	call $38b9 ; divide
+	ld a,[$ff98]
+	ld b,a
+	ld a,[$ff97]
+	or b
+	jp nz,.nextCalculation\@
+; make sure the result is always at least one
+	ld [$ff97],a
+	ld a,$01
+	ld [$ff98],a
+.nextCalculation\@
+	ld b,c
+	dec d
+	jr nz,.loop\@
+	ld a,[$ff97]
+	and a ; is the calculated hit chance over 0xFF?
+	ld a,[$ff98]
+	jr z,.storeAccuracy\@
+; if calculated hit chance over 0xFF
+	ld a,$ff ; set the hit chance to 0xFF
+.storeAccuracy\@
+	pop hl
+	ld [hl],a ; store the hit chance in the move accuracy variable
+	ret
+
+INCBIN "baserom.gbc",$3e687,$3e887 - $3e687
 
 UnnamedText_3e887: ; 0x3e887
 	TX_FAR _UnnamedText_3e887
