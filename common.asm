@@ -24948,11 +24948,11 @@ HandleCounterMove: ; 6093
 
 ApplyDamageToEnemyPokemon: ; 60DF
 	ld a,[W_PLAYERMOVEEFFECT]
-	cp a,$26 ; OHKO
+	cp a,OHKO_EFFECT
 	jr z,.applyDamage\@
-	cp a,$28 ; super fang's effect
+	cp a,SUPER_FANG_EFFECT
 	jr z,.superFangEffect\@
-	cp a,$29 ; special damage (fixed or random damage)
+	cp a,SPECIAL_DAMAGE_EFFECT
 	jr z,.specialDamage\@
 	ld a,[W_PLAYERMOVEPOWER]
 	and a
@@ -24985,10 +24985,10 @@ ApplyDamageToEnemyPokemon: ; 60DF
 	jr z,.storeDamage\@
 	cp a,NIGHT_SHADE
 	jr z,.storeDamage\@
-	ld b,$14 ; Sonic Boom damage
+	ld b,SONICBOOM_DAMAGE
 	cp a,SONICBOOM
 	jr z,.storeDamage\@
-	ld b,$28 ; Dragon Rage damage
+	ld b,DRAGON_RAGE_DAMAGE
 	cp a,DRAGON_RAGE
 	jr z,.storeDamage\@
 ; Psywave
@@ -24997,7 +24997,7 @@ ApplyDamageToEnemyPokemon: ; 60DF
 	srl a
 	add b
 	ld b,a ; b = level * 1.5
-; loop until a random number between 1 and b is found
+; loop until a random number in the range [1, b) is found
 .loop\@
 	call $6e9b ; random number
 	and a
@@ -25020,7 +25020,7 @@ ApplyDamageToEnemyPokemon: ; 60DF
 	jr z,.done\@ ; we're done if damage is 0
 	ld a,[W_ENEMYBATTSTATUS2]
 	bit 4,a ; does the enemy have a substitute?
-	jp nz,$625e
+	jp nz,AttackSubstitute
 ; subtract the damage from the pokemon's current HP
 ; also, save the current HP at $CEEB
 	ld a,[hld]
@@ -25037,7 +25037,7 @@ ApplyDamageToEnemyPokemon: ; 60DF
 	ld [W_ENEMYMONCURHP],a
 	jr nc,.animateHpBar\@
 ; if more damage was done than the current HP, zero the HP and set the damage
-; equal to how much HP the pokemon had before fainting
+; equal to how much HP the pokemon had before the attack
 	ld a,[$ceec]
 	ld [hli],a
 	ld a,[$ceeb]
@@ -25065,7 +25065,171 @@ ApplyDamageToEnemyPokemon: ; 60DF
 .done\@
 	jp $4d5a ; redraw pokemon names and HP bars
 
-INCBIN "baserom.gbc",$3e1a0,$3e2ac - $3e1a0
+ApplyDamageToPlayerPokemon: ; 61A0
+	ld a,[W_ENEMYMOVEEFFECT]
+	cp a,OHKO_EFFECT
+	jr z,.applyDamage\@
+	cp a,SUPER_FANG_EFFECT
+	jr z,.superFangEffect\@
+	cp a,SPECIAL_DAMAGE_EFFECT
+	jr z,.specialDamage\@
+	ld a,[W_ENEMYMOVEPOWER]
+	and a
+	jp z,.done\@
+	jr .applyDamage\@
+.superFangEffect\@
+; set the damage to half the target's HP
+	ld hl,W_PLAYERMONCURHP
+	ld de,W_DAMAGE
+	ld a,[hli]
+	srl a
+	ld [de],a
+	inc de
+	ld b,a
+	ld a,[hl]
+	rr a
+	ld [de],a
+	or b
+	jr nz,.applyDamage\@
+; make sure Super Fang's damage is always at least 1
+	ld a,$01
+	ld [de],a
+	jr .applyDamage\@
+.specialDamage\@
+	ld hl,W_ENEMYMONLEVEL
+	ld a,[hl]
+	ld b,a
+	ld a,[W_ENEMYMOVENUM]
+	cp a,SEISMIC_TOSS
+	jr z,.storeDamage\@
+	cp a,NIGHT_SHADE
+	jr z,.storeDamage\@
+	ld b,SONICBOOM_DAMAGE
+	cp a,SONICBOOM
+	jr z,.storeDamage\@
+	ld b,DRAGON_RAGE_DAMAGE
+	cp a,DRAGON_RAGE
+	jr z,.storeDamage\@
+; Psywave
+	ld a,[hl]
+	ld b,a
+	srl a
+	add b
+	ld b,a ; b = attacker's level * 1.5
+; loop until a random number in the range [0, b) is found
+; this differs from the range when the player attacks, which is [1, b)
+; it's possible for the enemy to do 0 damage with Psywave, but the player always does at least 1 damage
+.loop\@
+	call $6e9b ; random number
+	cp b
+	jr nc,.loop\@
+	ld b,a
+.storeDamage\@
+	ld hl,W_DAMAGE
+	xor a
+	ld [hli],a
+	ld a,b
+	ld [hl],a
+.applyDamage\@
+	ld hl,W_DAMAGE
+	ld a,[hli]
+	ld b,a
+	ld a,[hl]
+	or b
+	jr z,.done\@ ; we're done if damage is 0
+	ld a,[W_PLAYERBATTSTATUS2]
+	bit 4,a ; does the player have a substitute?
+	jp nz,AttackSubstitute
+; subtract the damage from the pokemon's current HP
+; also, save the current HP at $CEEB and the new HP at $CEED
+	ld a,[hld]
+	ld b,a
+	ld a,[W_PLAYERMONCURHP + 1]
+	ld [$ceeb],a
+	sub b
+	ld [W_PLAYERMONCURHP + 1],a
+	ld [$ceed],a
+	ld b,[hl]
+	ld a,[W_PLAYERMONCURHP]
+	ld [$ceec],a
+	sbc b
+	ld [W_PLAYERMONCURHP],a
+	ld [$ceee],a
+	jr nc,.animateHpBar\@
+; if more damage was done than the current HP, zero the HP and set the damage
+; equal to how much HP the pokemon had before the attack
+	ld a,[$ceec]
+	ld [hli],a
+	ld a,[$ceeb]
+	ld [hl],a
+	xor a
+	ld hl,W_PLAYERMONCURHP
+	ld [hli],a
+	ld [hl],a
+	ld hl,$ceed
+	ld [hli],a
+	ld [hl],a
+.animateHpBar\@
+	ld hl,W_PLAYERMONMAXHP
+	ld a,[hli]
+	ld [$ceea],a
+	ld a,[hl]
+	ld [$cee9],a
+	ld hl,$c45e
+	ld a,$01
+	ld [$cf94],a
+	ld a,$48
+	call Predef ; animate the HP bar shortening
+.done\@
+	jp $4d5a ; redraw pokemon names and HP bars
+
+AttackSubstitute: ; 625E
+	ld hl,UnnamedText_3e2ac
+	call PrintText
+; values for player turn
+	ld de,W_ENEMYSUBSITUTEHP
+	ld bc,W_ENEMYBATTSTATUS2
+	ld a,[H_WHOSETURN]
+	and a
+	jr z,.applyDamageToSubstitute\@
+; values for enemy turn
+	ld de,W_PLAYERSUBSITUTEHP
+	ld bc,W_PLAYERBATTSTATUS2
+.applyDamageToSubstitute\@
+	ld hl,W_DAMAGE
+	ld a,[hli]
+	and a
+	jr nz,.substituteBroke\@ ; damage > 0xFF always breaks substitutes
+; subtract damage from HP of substitute
+	ld a,[de]
+	sub [hl]
+	ld [de],a
+	ret nc
+.substituteBroke\@
+	ld h,b
+	ld l,c
+	res 4,[hl] ; unset the substitute bit
+	ld hl,UnnamedText_3e2b1
+	call PrintText
+; flip whose turn it is for the next function call
+	ld a,[H_WHOSETURN]
+	xor a,$01
+	ld [H_WHOSETURN],a
+	ld hl,$5747
+	ld b,$1e ; animate the substitute breaking
+	call Bankswitch ; substitute
+; flip the turn back to the way it was
+	ld a,[H_WHOSETURN]
+	xor a,$01
+	ld [H_WHOSETURN],a
+	ld hl,W_PLAYERMOVEEFFECT ; value for player's turn
+	and a
+	jr z,.nullifyEffect\@
+	ld hl,W_ENEMYMOVEEFFECT ; value for enemy's turn
+.nullifyEffect\@
+	xor a
+	ld [hl],a ; zero the effect of the attacker's move
+	jp $4d5a ; redraw pokemon names and HP bars
 
 UnnamedText_3e2ac: ; 0x3e2ac
 	TX_FAR _UnnamedText_3e2ac
