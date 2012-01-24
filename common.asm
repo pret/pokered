@@ -594,8 +594,8 @@ OverworldLoopLessDelay: ; 402
 	jr nz,.oddLoop\@
 	ld a,[$d52a]
 	ld [$d528],a
-	call $0683
-	jp c,$0637
+	call NewBattle
+	jp c,.battleOccurred\@
 	jp OverworldLoop
 .noDirectionChange\@
 	ld a,[$d52a] ; current direction
@@ -687,7 +687,7 @@ OverworldLoopLessDelay: ; 402
 	ld hl,$d736
 	res 2,[hl]
 	jp nc,CheckWarpsNoCollision ; check for warps if there was no battle
-; if a battle occurred
+.battleOccurred\@
 	ld hl,$d72d
 	res 6,[hl]
 	ld hl,$d733
@@ -21225,7 +21225,7 @@ CooltrainerFAI:
 
 BrockAI:
 ; if his active monster has a status condition, use a full heal
-	ld a,[W_OPPONENTSTATUS]
+	ld a,[W_ENEMYMONSTATUS]
 	and a
 	ret z
 	jp AIUseFullHeal
@@ -21351,7 +21351,7 @@ AIUseFullRestore: ; 0x3a6a0
 	ld a,[hl]
 	ld [de],a
 	ld [$CEEA],a
-	ld [W_OPPONENTHP],a
+	ld [W_ENEMYMONCURHP],a
 	jr Function6718
 ; 0x3a6ca
 
@@ -21456,13 +21456,13 @@ Function674B: ; 674B
 
 ; prepare to withdraw the active monster: copy hp, number, and status to roster
 
-	ld a,[W_OPPONENTNUMBER]
+	ld a,[W_ENEMYMONNUMBER]
 	ld hl,W_ENEMYMON1HP
 	ld bc,$2C
 	call AddNTimes
 	ld d,h
 	ld e,l
-	ld hl,W_OPPONENTHP
+	ld hl,W_ENEMYMONCURHP
 	ld bc,4
 	call CopyData
 
@@ -21495,13 +21495,13 @@ AIUseFullHeal: ; 0x3a786
 
 AICureStatus: ; 0x3a791
 ; cures the status of enemy's active pokemon
-	ld a,[W_OPPONENTNUMBER]
+	ld a,[W_ENEMYMONNUMBER]
 	ld hl,$D8A8
 	ld bc,$2C
 	call AddNTimes
 	xor a
 	ld [hl],a ; clear status in enemy team roster
-	ld [W_OPPONENTSTATUS],a ; clear status of active enemy
+	ld [W_ENEMYMONSTATUS],a ; clear status of active enemy
 	ld hl,$D069
 	res 0,[hl]
 	ret
@@ -23988,7 +23988,7 @@ EnemySendOut: ; 490E
 	ld [hl],a
 	dec a
 	ld [W_AICOUNT],a
-	ld hl,$D062
+	ld hl,W_PLAYERBATTSTATUS1
 	res 5,[hl]
 	ld hl,$C3B2
 	ld a,8
@@ -24194,7 +24194,7 @@ UnnamedText_3d430: ; 0x3d430
 INCBIN "baserom.gbc",$3d435,$274
 
 ; in-battle stuff
-	ld hl,$D062
+	ld hl,W_PLAYERBATTSTATUS1
 	res 4,[hl]
 	res 6,[hl]
 	call $5AF5
@@ -24202,17 +24202,17 @@ INCBIN "baserom.gbc",$3d435,$274
 	ld de,$CCDC ; pointer to the move just used
 	ld b,BANK(DecrementPP)
 	call Bankswitch
-	ld a,[$CFD3] ; effect of the move just used
+	ld a,[W_PLAYERMOVEEFFECT] ; effect of the move just used
 	ld hl,EffectsArray1
 	ld de,1
 	call IsInArray
 	jp c,$7132
-	ld a,[$CFD3]
+	ld a,[W_PLAYERMOVEEFFECT]
 	ld hl,EffectsArray5B
 	ld de,1
 	call IsInArray
 	call c,$7132
-	ld a,[$CFD3]
+	ld a,[W_PLAYERMOVEEFFECT]
 	ld hl,EffectsArray2
 	ld de,1
 	call IsInArray
@@ -24227,33 +24227,33 @@ INCBIN "baserom.gbc",$3d435,$274
 	call $6687
 	call $656B
 .next11\@
-	ld a,[$D05F]
+	ld a,[W_MOVEMISSED]
 	and a
 	jr z,.next\@
-	ld a,[$CFD3]
+	ld a,[W_PLAYERMOVEEFFECT]
 	sub a,7
 	jr z,.next2\@
 	jr .next3\@ ; 574B
 .next\@
-	ld a,[$CFD3]
+	ld a,[W_PLAYERMOVEEFFECT]
 	and a
 	ld a,4
 	jr z,.next2\@
 	ld a,5
 .next2\@
 	push af
-	ld a,[$D063]
+	ld a,[W_PLAYERBATTSTATUS2]
 	bit 4,a
 	ld hl,$5747
 	ld b,$1E
 	call nz,Bankswitch
 	pop af
 	ld [$CC5B],a
-	ld a,[$CFD2]
+	ld a,[W_PLAYERMOVENUM]
 	call $6F07
 	call $6ED3
 	call $4D60
-	ld a,[$D063]
+	ld a,[W_PLAYERBATTSTATUS2]
 	bit 4,a
 	ld hl,$5771
 	ld b,$1E
@@ -24262,7 +24262,7 @@ INCBIN "baserom.gbc",$3d435,$274
 .next3\@
 	ld c,$1E
 	call $3739
-	ld a,[$CFD3]
+	ld a,[W_PLAYERMOVEEFFECT]
 	cp a,$2B
 	jr z,.next5\@
 	cp a,$27 ; XXX SLP | FRZ ?
@@ -24274,7 +24274,7 @@ INCBIN "baserom.gbc",$3d435,$274
 	ld a,$A7
 	call $6F07
 .next4\@
-	ld a,[$CFD3]
+	ld a,[W_PLAYERMOVEEFFECT]
 	cp a,9
 	jr nz,.next6\@ ; 577A
 	call $62FD
@@ -24288,16 +24288,16 @@ INCBIN "baserom.gbc",$3d435,$274
 	call $6348
 	jp $569A
 .next7\@
-	ld a,[$CFD3]
+	ld a,[W_PLAYERMOVEEFFECT]
 	ld hl,EffectsArray3
 	ld de,1
 	call IsInArray
 	jp c,$7132
-	ld a,[$D05F]
+	ld a,[W_MOVEMISSED]
 	and a
 	jr z,.next8\@ ; 57A6
 	call $5BE2
-	ld a,[$CFD3]
+	ld a,[W_PLAYERMOVEEFFECT]
 	cp a,7
 	jr z,.next9\@ ; 57B9
 	jp Function580A
@@ -24310,7 +24310,7 @@ INCBIN "baserom.gbc",$3d435,$274
 	ld a,1
 	ld [$CCF4],a
 .next9\@
-	ld a,[$CFD3]
+	ld a,[W_PLAYERMOVEEFFECT]
 	ld hl,EffectsArray4
 	ld de,1
 	call IsInArray
@@ -24322,7 +24322,7 @@ INCBIN "baserom.gbc",$3d435,$274
 	ret z
 	call $62B6
 
-	ld hl,$D062
+	ld hl,W_PLAYERBATTSTATUS1
 	bit 2,[hl]
 	jr z,.next10\@ ; 57EF
 	ld a,[$D06A]
@@ -24336,7 +24336,7 @@ INCBIN "baserom.gbc",$3d435,$274
 	xor a
 	ld [W_NUMHITS],a ; reset
 .next10\@
-	ld a,[$CFD3]
+	ld a,[W_PLAYERMOVEEFFECT]
 	and a
 	jp z,Function580A
 	ld hl,EffectsArray5
@@ -24362,7 +24362,7 @@ Function5811: ; 0x3d811 5811
 	ld a,[H_WHOSETURN]
 	and a
 	jr nz,.Ghost\@
-	ld a,[W_CURMONSTATUS] ; player’s turn
+	ld a,[W_PLAYERMONSTATUS] ; player’s turn
 	and a,SLP | FRZ
 	ret nz
 	ld hl,ScaredText
@@ -24401,13 +24401,13 @@ Function583A: ; 0x3d83a 583A
 	ret
 
 Function5854: ; 5854
-	ld hl,W_CURMONSTATUS
+	ld hl,W_PLAYERMONSTATUS
 	ld a,[hl]
 	and a,SLP
 	jr z,.FrozenCheck\@ ; to 5884
 
 	dec a
-	ld [W_CURMONSTATUS],a ; decrement sleep count
+	ld [W_PLAYERMONSTATUS],a ; decrement sleep count
 	and a
 	jr z,.WakeUp\@ ; to 5874
 
@@ -24438,7 +24438,7 @@ Function5854: ; 5854
 	jp $5A37
 
 .HeldInPlaceCheck\@
-	ld a,[W_CURMONBATTSTATUS]
+	ld a,[W_ENEMYBATTSTATUS1]
 	bit 5,a
 	jp z,FlinchedCheck
 	ld hl,CantMoveText
@@ -24447,7 +24447,7 @@ Function5854: ; 5854
 	jp $5A37
 
 FlinchedCheck: ; 58AC
-	ld hl,$D062
+	ld hl,W_PLAYERBATTSTATUS1
 	bit 3,[hl]
 	jp z,HyperBeamCheck
 	res 3,[hl]
@@ -24457,7 +24457,7 @@ FlinchedCheck: ; 58AC
 	jp $5A37
 
 HyperBeamCheck: ; 58C2
-	ld hl,$D063
+	ld hl,W_PLAYERBATTSTATUS2
 	bit 5,[hl]
 	jr z,.next\@ ; 58D7
 	res 5,[hl]
@@ -24479,13 +24479,13 @@ HyperBeamCheck: ; 58C2
 	ld hl,DisabledNoMoreText
 	call PrintText
 .next2\@
-	ld a,[$D062]
+	ld a,[W_PLAYERBATTSTATUS1]
 	add a
 	jr nc,.next3\@ ; 5929
 	ld hl,$D06B
 	dec [hl]
 	jr nz,.next4\@ ; 5907
-	ld hl,$D062
+	ld hl,W_PLAYERBATTSTATUS1
 	res 7,[hl]
 	ld hl,ConfusedNoMoreText
 	call PrintText
@@ -24500,7 +24500,7 @@ HyperBeamCheck: ; 58C2
 	call $6E9B
 	cp a,$80
 	jr c,.next3\@
-	ld hl,$D062
+	ld hl,W_PLAYERBATTSTATUS1
 	ld a,[hl]
 	and a,$80
 	ld [hl],a
@@ -24517,7 +24517,7 @@ HyperBeamCheck: ; 58C2
 	ld hl,$580A
 	jp $5A37
 .ParalysisCheck\@
-	ld hl,W_CURMONSTATUS
+	ld hl,W_PLAYERMONSTATUS
 	bit 6,[hl]
 	jr z,.next7\@ ; 5975
 	call $6E9B ; random number?
@@ -24526,11 +24526,11 @@ HyperBeamCheck: ; 58C2
 	ld hl,FullyParalyzedText
 	call PrintText
 .next5\@
-	ld hl,$D062
+	ld hl,W_PLAYERBATTSTATUS1
 	ld a,[hl]
 	and a,$CC
 	ld [hl],a
-	ld a,[$CFD3]
+	ld a,[W_PLAYERMOVEEFFECT]
 	cp a,$2B
 	jr z,.next8\@ ; 5966
 	cp a,$27
@@ -24545,11 +24545,11 @@ HyperBeamCheck: ; 58C2
 	ld hl,$580A
 	jp $5A37
 .next7\@
-	ld hl,$D062
+	ld hl,W_PLAYERBATTSTATUS1
 	bit 0,[hl]
 	jr z,.next10\@ ; 59D0
 	xor a
-	ld [$CFD2],a
+	ld [W_PLAYERMOVENUM],a
 	ld hl,$D0D7
 	ld a,[hli]
 	ld b,a
@@ -24567,7 +24567,7 @@ HyperBeamCheck: ; 58C2
 	ld hl,$580A
 	jp $5A37
 .next11\@
-	ld hl,$D062
+	ld hl,W_PLAYERBATTSTATUS1
 	res 0,[hl]
 	ld hl,UnleashedEnergyText
 	call PrintText
@@ -24584,20 +24584,20 @@ HyperBeamCheck: ; 58C2
 	or b
 	jr nz,.next12\@ ; 59C2
 	ld a,1
-	ld [$D05F],a
+	ld [W_MOVEMISSED],a
 .next12\@
 	xor a
 	ld [hli],a
 	ld [hl],a
 	ld a,$75
-	ld [$CFD2],a
+	ld [W_PLAYERMOVENUM],a
 	ld hl,$5705
 	jp $5A37
 .next10\@
 	bit 1,[hl]
 	jr z,.next13\@ ; 59FF
 	ld a,$25
-	ld [$CFD2],a
+	ld [W_PLAYERMOVENUM],a
 	ld hl,ThrashingAboutText
 	call PrintText
 	ld hl,$D06A
@@ -24605,7 +24605,7 @@ HyperBeamCheck: ; 58C2
 	ld hl,$56DC
 	jp nz,$5A37
 	push hl
-	ld hl,$D062
+	ld hl,W_PLAYERBATTSTATUS1
 	res 1,[hl]
 	set 7,[hl]
 	call $6E9B ; random number?
@@ -24844,7 +24844,128 @@ HighCriticalMoves: ; 0x3e08e
 	db $FF
 ; 0x3e093
 
-INCBIN "baserom.gbc",$3e093,$3e2ac - $3e093
+INCBIN "baserom.gbc",$3e093,$3e0df - $3e093
+
+ApplyDamageToEnemyPokemon: ; 60DF
+	ld a,[W_PLAYERMOVEEFFECT]
+	cp a,$26 ; OHKO
+	jr z,.applyDamage\@
+	cp a,$28 ; super fang's effect
+	jr z,.superFangEffect\@
+	cp a,$29 ; special damage (fixed or random damage)
+	jr z,.specialDamage\@
+	ld a,[W_PLAYERMOVEPOWER]
+	and a
+	jp z,.done\@
+	jr .applyDamage\@
+.superFangEffect\@
+; set the damage to half the target's HP
+	ld hl,W_ENEMYMONCURHP
+	ld de,W_DAMAGE
+	ld a,[hli]
+	srl a
+	ld [de],a
+	inc de
+	ld b,a
+	ld a,[hl]
+	rr a
+	ld [de],a
+	or b
+	jr nz,.applyDamage\@
+; make sure Super Fang's damage is always at least 1
+	ld a,$01
+	ld [de],a
+	jr .applyDamage\@
+.specialDamage\@
+	ld hl,W_PLAYERMONLEVEL
+	ld a,[hl]
+	ld b,a
+	ld a,[W_PLAYERMOVENUM]
+	cp a,SEISMIC_TOSS
+	jr z,.storeDamage\@
+	cp a,NIGHT_SHADE
+	jr z,.storeDamage\@
+	ld b,$14 ; Sonic Boom damage
+	cp a,SONICBOOM
+	jr z,.storeDamage\@
+	ld b,$28 ; Dragon Rage damage
+	cp a,DRAGON_RAGE
+	jr z,.storeDamage\@
+; Psywave
+	ld a,[hl]
+	ld b,a
+	srl a
+	add b
+	ld b,a ; b = level * 1.5
+; loop until a random number between 1 and b is found
+.loop\@
+	call $6e9b ; random number
+	and a
+	jr z,.loop\@
+	cp b
+	jr nc,.loop\@
+	ld b,a
+.storeDamage\@
+	ld hl,W_DAMAGE
+	xor a
+	ld [hli],a
+	ld a,b
+	ld [hl],a
+.applyDamage\@
+	ld hl,W_DAMAGE
+	ld a,[hli]
+	ld b,a
+	ld a,[hl]
+	or b
+	jr z,.done\@ ; we're done if damage is 0
+	ld a,[W_ENEMYBATTSTATUS2]
+	bit 4,a ; does the enemy have a substitute?
+	jp nz,$625e
+; subtract the damage from the pokemon's current HP
+; also, save the current HP at $CEEB
+	ld a,[hld]
+	ld b,a
+	ld a,[W_ENEMYMONCURHP + 1]
+	ld [$ceeb],a
+	sub b
+	ld [W_ENEMYMONCURHP + 1],a
+	ld a,[hl]
+	ld b,a
+	ld a,[W_ENEMYMONCURHP]
+	ld [$ceec],a
+	sbc b
+	ld [W_ENEMYMONCURHP],a
+	jr nc,.animateHpBar\@
+; if more damage was done than the current HP, zero the HP and set the damage
+; equal to how much HP the pokemon had before fainting
+	ld a,[$ceec]
+	ld [hli],a
+	ld a,[$ceeb]
+	ld [hl],a
+	xor a
+	ld hl,W_ENEMYMONCURHP
+	ld [hli],a
+	ld [hl],a
+.animateHpBar\@
+	ld hl,W_ENEMYMONMAXHP
+	ld a,[hli]
+	ld [$ceea],a
+	ld a,[hl]
+	ld [$cee9],a
+	ld hl,W_ENEMYMONCURHP
+	ld a,[hli]
+	ld [$ceee],a
+	ld a,[hl]
+	ld [$ceed],a
+	ld hl,$c3ca
+	xor a
+	ld [$cf94],a
+	ld a,$48
+	call Predef ; animate the HP bar shortening
+.done\@
+	jp $4d5a ; redraw pokemon names and HP bars
+
+INCBIN "baserom.gbc",$3e1a0,$3e2ac - $3e1a0
 
 UnnamedText_3e2ac: ; 0x3e2ac
 	TX_FAR _UnnamedText_3e2ac
@@ -47376,12 +47497,12 @@ DecrementPP: ; 0x68000
 	cp a, STRUGGLE
 	ret z                ; if the pokemon is using "struggle", there's nothing to do
                          ; we don't decrement PP for "struggle"
-	ld hl, $D062
-	ld a, [hli]          ; load the $D062 pokemon status flags and increment hl to load the
-                         ; $D063 status flags later
+	ld hl, W_PLAYERBATTSTATUS1
+	ld a, [hli]          ; load the W_PLAYERBATTSTATUS1 pokemon status flags and increment hl to load the
+                         ; W_PLAYERBATTSTATUS2 status flags later
 	and a, 7             ; check to see if bits 0, 1, or 2 are set
 	ret nz               ; if any of these statuses are true, don't decrement PP
-	bit 6, [hl]          ; check 6th bit status flag on $D063
+	bit 6, [hl]          ; check 6th bit status flag on W_PLAYERBATTSTATUS2
 	ret nz               ; and return if it is set
 	ld hl, $D02D         ; PP of first move (in battle)
 	call .DecrementPP\@

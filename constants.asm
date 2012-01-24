@@ -89,6 +89,9 @@ TX_RAM: MACRO
 
 ; wram locations
 
+W_PLAYERSELECTEDMOVE EQU $CCDC
+W_ENEMYSELECTEDMOVE  EQU $CCDD
+
 W_AICOUNT EQU $CCDF ; number of times remaining that AI action can occur
 
 W_WHICHTRADE EQU $CD3D ; which entry from TradeMons to select
@@ -97,9 +100,23 @@ W_WHICHPOKEMON EQU $CF92 ; which pokemon you selected
 
 W_WALKCOUNTER EQU $CFC5 ; walk animation counter
 
-W_OPPONENTHP     EQU $CFE6 ; active opponent's hp (16 bits)
-W_OPPONENTNUMBER EQU $CFE8 ; active opponent's position in team (0 to 5)
-W_OPPONENTSTATUS EQU $CFE9 ; active opponent's status condition
+W_ENEMYMOVENUM      EQU $CFCC
+W_ENEMYMOVEEFFECT   EQU $CFCD
+W_ENEMYMOVEPOWER    EQU $CFCE
+W_ENEMYMOVETYPE     EQU $CFCF
+W_ENEMYMOVEACCURACY EQU $CFD0
+W_ENEMYMOVEMAXPP    EQU $CFD1
+
+W_PLAYERMOVENUM      EQU $CFD2
+W_PLAYERMOVEEFFECT   EQU $CFD3
+W_PLAYERMOVEPOWER    EQU $CFD4
+W_PLAYERMOVETYPE     EQU $CFD5
+W_PLAYERMOVEACCURACY EQU $CFD6
+W_PLAYERMOVEMAXPP    EQU $CFD7
+
+W_ENEMYMONCURHP EQU $CFE6 ; active opponent's hp (16 bits)
+W_ENEMYMONNUMBER EQU $CFE8 ; active opponent's position in team (0 to 5)
+W_ENEMYMONSTATUS EQU $CFE9 ; active opponent's status condition
 	; bit 0 slp
 	; bit 1 slp
 	; bit 2 slp
@@ -108,8 +125,11 @@ W_OPPONENTSTATUS EQU $CFE9 ; active opponent's status condition
 	; bit 5 frz
 	; bit 6 par
 	; unused? (XXX confirm)
+W_ENEMYMONLEVEL EQU $CFF3
+W_ENEMYMONMAXHP EQU $CFF4 ; (16 bits)
 
-W_CURMONSTATUS EQU $D018 ; the status of the player’s current monster
+W_PLAYERMONCURHP EQU $D015 ; active opponent's hp (16 bits)
+W_PLAYERMONSTATUS EQU $D018 ; the status of the player’s current monster
 	; bit 0 slp
 	; bit 1 slp
 	; bit 2 slp
@@ -118,9 +138,8 @@ W_CURMONSTATUS EQU $D018 ; the status of the player’s current monster
 	; bit 5 frz
 	; bit 6 par
 	; unused? (XXX confirm)
-
-W_CURMONBATTSTATUS EQU $D067 ; various battle statuses
-	; bit 5 held in place (Bind, Clamp, etc.)
+W_PLAYERMONLEVEL EQU $D022
+W_PLAYERMONMAXHP EQU $D023 ; (16 bits)
 
 W_TRAINERCLASS EQU $D031
 
@@ -138,7 +157,51 @@ W_BATTLETYPE EQU $D05A ; in normal battle, this is 0
 W_LONEATTACKNO EQU $D05C ; which entry in LoneAttacks to use
 W_TRAINERNO    EQU $D05D ; which instance of [youngster, lass, etc] is this?
 
+W_MOVEMISSED EQU $D05F
+
+; not entirely sure that all these bits are 100% correct
+; Battle Status Byte 1
+; bit 0 - bide
+; bit 1 - thrash / petal dance
+; bit 2 - attacking multiple times (e.g. double kick)
+; bit 3 - flinch
+; bit 4 - charging up for attack
+; bit 5 - using multi-turn move (e.g. wrap)
+; bit 6 - invulnerable to normal attack (using fly/dig)
+; bit 7 - confusion
+
+; Battle Status Byte 2
+; bit 0 - X Accuracy effect
+; bit 1 - protected by "mist"
+; bit 2 - focus energy effect
+; bit 4 - has a substitute
+; bit 5 - need to recharge
+; bit 6 - rage
+; bit 7 - leech seeded
+
+; Battle Status Byte 3
+; bit 0 - toxic
+; bit 1 - light screen
+; bit 2 - reflect
+; bit 3 - tranformed
+
+W_PLAYERBATTSTATUS1 EQU $D062
+W_PLAYERBATTSTATUS2 EQU $D063
+W_PLAYERBATTSTATUS3 EQU $D062
+
+W_ENEMYBATTSTATUS1 EQU $D067
+W_ENEMYBATTSTATUS2 EQU $D068
+W_ENEMYBATTSTATUS3 EQU $D069
+
+W_PLAYERTOXICCOUNTER EQU $D06C
+W_PLAYERDISABLEDMOVE EQU $D06D
+
+W_ENEMYTOXICCOUNTER EQU $D071
+W_ENEMYDISABLEDMOVE EQU $D072
+
 W_NUMHITS EQU $D074 ; number of hits in attacks like Doubleslap, etc.
+
+W_DAMAGE EQU $D0D7
 
 ; List type
 ; used in $D0B6
