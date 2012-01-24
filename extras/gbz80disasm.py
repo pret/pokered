@@ -578,7 +578,8 @@ def find_label(local_address, bank_id=0):
 
     for label_entry in all_labels:
         if label_entry["local_pointer"].upper() == local_address:
-            return label_entry["label"]
+            if label_entry["bank_id"] == bank_id:
+                return label_entry["label"]
     return None
 
 def random_asm_label():
