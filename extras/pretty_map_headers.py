@@ -751,6 +751,6 @@ if __name__ == "__main__":
 
     #prepare to pretty print tx_fars
     #first you must load all_texts
-    tx_fars = find_all_tx_fars()
-    for entry in tx_fars:
-        print tx_far_pretty_printer(entry)
+    #tx_fars = find_all_tx_fars()
+    #for entry in tx_fars:
+    #    print tx_far_pretty_printer(entry)
