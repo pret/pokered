@@ -14407,7 +14407,21 @@ INCBIN "baserom.gbc",$19d21,$7f
 SilphCo4Texts: ; 0x19da0
 	dw SilphCo4Text1, SilphCo4Text2, SilphCo4Text3, SilphCo4Text4, SilphCo4Text5, SilphCo4Text6, SilphCo4Text7
 
-INCBIN "baserom.gbc",$19dae,$19dc6 - $19dae
+TrainerHeader_19dae: ; 0x19dae
+	db $2 ; flag's bit
+	db ($4 << 4) ; trainer's view range
+	dw $d829 ; flag's byte
+	dw UnnamedText_19df4 ; 0x5df4 TextBeforeBattle
+	dw UnnamedText_19dfe ; 0x5dfe TextAfterBattle
+	dw UnnamedText_19df9 ; 0x5df9 TextEndBattle
+; 0x19db8
+
+INCBIN "baserom.gbc",$19db8,$19dba - $19db8
+
+TrainerHeader_19dba: ; 0x19dba
+INCBIN "baserom.gbc",$19dba,$19dc2 - $19dba
+
+INCBIN "baserom.gbc",$19dc2,4
 
 TrainerHeader_19dc6: ; 0x19dc6
 	db $4 ; flag's bit
@@ -14439,7 +14453,7 @@ UnnamedText_19de5: ; 0x19de5
 
 SilphCo4Text2: ; 0x19dea
 	db $08 ; asm
-	ld hl, $5dae
+	ld hl, TrainerHeader_19dae
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -14559,7 +14573,26 @@ INCBIN "baserom.gbc",$19f4d,$6f
 SilphCo5Texts: ; 0x19fbc
 	dw SilphCo5Text1, SilphCo5Text2, SilphCo5Text3, SilphCo5Text4, SilphCo5Text5, SilphCo5Text6, SilphCo5Text7, SilphCo5Text8, SilphCo5Text9, SilphCo5Text10, SilphCo5Text11
 
-INCBIN "baserom.gbc",$19fd2,$31
+TrainerHeader_19fd2: ; 0x19fd2
+	db $2 ; flag's bit
+	db ($1 << 4) ; trainer's view range
+	dw $d82b ; flag's byte
+	dw UnnamedText_1a024 ; 0x6024 TextBeforeBattle
+	dw UnnamedText_1a02e ; 0x602e TextAfterBattle
+	dw UnnamedText_1a029 ; 0x6029 TextEndBattle
+	dw UnnamedText_1a029 ; 0x6029 TextEndBattle
+; 0x19fde
+
+TrainerHeader_19fde: ; 0x19fde
+	db $3 ; flag's bit
+	db ($2 << 4) ; trainer's view range
+	dw $d82b ; flag's byte
+	dw UnnamedText_1a03d ; 0x603d TextBeforeBattle
+	dw UnnamedText_1a047 ; 0x6047 TextAfterBattle
+	dw UnnamedText_1a042 ; 0x6042 TextEndBattle
+; 0x19fe8
+
+INCBIN "baserom.gbc",$19fe8,$1a003 - $19fe8
 
 SilphCo5Text1: ; 0x1a003
 	db $08 ; asm
@@ -14580,7 +14613,7 @@ UnnamedText_1a015: ; 0x1a015
 
 SilphCo5Text2: ; 0x1a01a
 	db $08 ; asm
-	ld hl, $5fd2
+	ld hl, TrainerHeader_19fd2
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -14601,7 +14634,7 @@ UnnamedText_1a02e: ; 0x1a02e
 
 SilphCo5Text3: ; 0x1a033
 	db $08 ; asm
-	ld hl, $5fde
+	ld hl, TrainerHeader_19fde
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
