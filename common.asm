@@ -14407,7 +14407,18 @@ INCBIN "baserom.gbc",$19d21,$7f
 SilphCo4Texts: ; 0x19da0
 	dw SilphCo4Text1, SilphCo4Text2, SilphCo4Text3, SilphCo4Text4, SilphCo4Text5, SilphCo4Text6, SilphCo4Text7
 
-INCBIN "baserom.gbc",$19dae,$25
+INCBIN "baserom.gbc",$19dae,$19dc6 - $19dae
+
+TrainerHeader_19dc6: ; 0x19dc6
+	db $4 ; flag's bit
+	db ($4 << 4) ; trainer's view range
+	dw $d829 ; flag's byte
+	dw UnnamedText_19e26 ; 0x5e26 TextBeforeBattle
+	dw UnnamedText_19e30 ; 0x5e30 TextAfterBattle
+	dw UnnamedText_19e2b ; 0x5e2b TextEndBattle
+; 0x19dd0
+
+INCBIN "baserom.gbc",$19dd0,$19dd3 - $19dd0
 
 SilphCo4Text1: ; 0x19dd3
 	db $08 ; asm
@@ -14470,7 +14481,7 @@ UnnamedText_19e17: ; 0x19e17
 
 SilphCo4Text4: ; 0x19e1c
 	db $08 ; asm
-	ld hl, $5dc6
+	ld hl, TrainerHeader_19dc6
 	call LoadTrainerHeader
 	jp TextScriptEnd
 

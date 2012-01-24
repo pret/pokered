@@ -91,7 +91,7 @@ def pretty_print_trainer_header(address, label=None):
         label = "$" + hex(partial_pointer)[2:]
         #sys.exit(0)
 
-    output += spacing + "dw " + label + " ; " + hex(partial_pointer) + " TextEndBattle\n"
+    #output += spacing + "dw " + label + " ; " + hex(partial_pointer) + " TextEndBattle\n"
 
     output += "; " + hex(address+10) + "\n"
 
