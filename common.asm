@@ -21225,7 +21225,7 @@ CooltrainerFAI:
 
 BrockAI:
 ; if his active monster has a status condition, use a full heal
-	ld a,[W_OPPONENTSTATUS]
+	ld a,[W_ENEMYMONSTATUS]
 	and a
 	ret z
 	jp AIUseFullHeal
@@ -21351,7 +21351,7 @@ AIUseFullRestore: ; 0x3a6a0
 	ld a,[hl]
 	ld [de],a
 	ld [$CEEA],a
-	ld [W_OPPONENTHP],a
+	ld [W_ENEMYMONCURHP],a
 	jr Function6718
 ; 0x3a6ca
 
@@ -21456,13 +21456,13 @@ Function674B: ; 674B
 
 ; prepare to withdraw the active monster: copy hp, number, and status to roster
 
-	ld a,[W_OPPONENTNUMBER]
+	ld a,[W_ENEMYMONNUMBER]
 	ld hl,W_ENEMYMON1HP
 	ld bc,$2C
 	call AddNTimes
 	ld d,h
 	ld e,l
-	ld hl,W_OPPONENTHP
+	ld hl,W_ENEMYMONCURHP
 	ld bc,4
 	call CopyData
 
@@ -21495,13 +21495,13 @@ AIUseFullHeal: ; 0x3a786
 
 AICureStatus: ; 0x3a791
 ; cures the status of enemy's active pokemon
-	ld a,[W_OPPONENTNUMBER]
+	ld a,[W_ENEMYMONNUMBER]
 	ld hl,$D8A8
 	ld bc,$2C
 	call AddNTimes
 	xor a
 	ld [hl],a ; clear status in enemy team roster
-	ld [W_OPPONENTSTATUS],a ; clear status of active enemy
+	ld [W_ENEMYMONSTATUS],a ; clear status of active enemy
 	ld hl,$D069
 	res 0,[hl]
 	ret
@@ -24362,7 +24362,7 @@ Function5811: ; 0x3d811 5811
 	ld a,[H_WHOSETURN]
 	and a
 	jr nz,.Ghost\@
-	ld a,[W_CURMONSTATUS] ; player’s turn
+	ld a,[W_PLAYERMONSTATUS] ; player’s turn
 	and a,SLP | FRZ
 	ret nz
 	ld hl,ScaredText
@@ -24401,13 +24401,13 @@ Function583A: ; 0x3d83a 583A
 	ret
 
 Function5854: ; 5854
-	ld hl,W_CURMONSTATUS
+	ld hl,W_PLAYERMONSTATUS
 	ld a,[hl]
 	and a,SLP
 	jr z,.FrozenCheck\@ ; to 5884
 
 	dec a
-	ld [W_CURMONSTATUS],a ; decrement sleep count
+	ld [W_PLAYERMONSTATUS],a ; decrement sleep count
 	and a
 	jr z,.WakeUp\@ ; to 5874
 
@@ -24517,7 +24517,7 @@ HyperBeamCheck: ; 58C2
 	ld hl,$580A
 	jp $5A37
 .ParalysisCheck\@
-	ld hl,W_CURMONSTATUS
+	ld hl,W_PLAYERMONSTATUS
 	bit 6,[hl]
 	jr z,.next7\@ ; 5975
 	call $6E9B ; random number?
@@ -24844,7 +24844,128 @@ HighCriticalMoves: ; 0x3e08e
 	db $FF
 ; 0x3e093
 
-INCBIN "baserom.gbc",$3e093,$3e2ac - $3e093
+INCBIN "baserom.gbc",$3e093,$3e0df - $3e093
+
+ApplyDamageToEnemyPokemon: ; 60DF
+	ld a,[W_PLAYERMOVEEFFECT]
+	cp a,$26 ; OHKO
+	jr z,.applyDamage\@
+	cp a,$28 ; super fang's effect
+	jr z,.superFangEffect\@
+	cp a,$29 ; special damage (fixed or random damage)
+	jr z,.specialDamage\@
+	ld a,[W_PLAYERMOVEPOWER]
+	and a
+	jp z,.done\@
+	jr .applyDamage\@
+.superFangEffect\@
+; set the damage to half the target's HP
+	ld hl,W_ENEMYMONCURHP
+	ld de,W_DAMAGE
+	ld a,[hli]
+	srl a
+	ld [de],a
+	inc de
+	ld b,a
+	ld a,[hl]
+	rr a
+	ld [de],a
+	or b
+	jr nz,.applyDamage\@
+; make sure Super Fang's damage is always at least 1
+	ld a,$01
+	ld [de],a
+	jr .applyDamage\@
+.specialDamage\@
+	ld hl,W_PLAYERMONLEVEL
+	ld a,[hl]
+	ld b,a
+	ld a,[W_PLAYERMOVENUM]
+	cp a,SEISMIC_TOSS
+	jr z,.storeDamage\@
+	cp a,NIGHT_SHADE
+	jr z,.storeDamage\@
+	ld b,$14 ; Sonic Boom damage
+	cp a,SONICBOOM
+	jr z,.storeDamage\@
+	ld b,$28 ; Dragon Rage damage
+	cp a,DRAGON_RAGE
+	jr z,.storeDamage\@
+; Psywave
+	ld a,[hl]
+	ld b,a
+	srl a
+	add b
+	ld b,a ; b = level * 1.5
+; loop until a random number between 1 and b is found
+.loop\@
+	call $6e9b ; random number
+	and a
+	jr z,.loop\@
+	cp b
+	jr nc,.loop\@
+	ld b,a
+.storeDamage\@
+	ld hl,W_DAMAGE
+	xor a
+	ld [hli],a
+	ld a,b
+	ld [hl],a
+.applyDamage\@
+	ld hl,W_DAMAGE
+	ld a,[hli]
+	ld b,a
+	ld a,[hl]
+	or b
+	jr z,.done\@ ; we're done if damage is 0
+	ld a,[W_ENEMYBATTSTATUS2]
+	bit 4,a ; does the enemy have a substitute?
+	jp nz,$625e
+; subtract the damage from the pokemon's current HP
+; also, save the current HP at $CEEB
+	ld a,[hld]
+	ld b,a
+	ld a,[W_ENEMYMONCURHP + 1]
+	ld [$ceeb],a
+	sub b
+	ld [W_ENEMYMONCURHP + 1],a
+	ld a,[hl]
+	ld b,a
+	ld a,[W_ENEMYMONCURHP]
+	ld [$ceec],a
+	sbc b
+	ld [W_ENEMYMONCURHP],a
+	jr nc,.animateHpBar\@
+; if more damage was done than the current HP, zero the HP and set the damage
+; equal to how HP the pokemon had before fainting
+	ld a,[$ceec]
+	ld [hli],a
+	ld a,[$ceeb]
+	ld [hl],a
+	xor a
+	ld hl,W_ENEMYMONCURHP
+	ld [hli],a
+	ld [hl],a
+.animateHpBar\@
+	ld hl,W_ENEMYMONMAXHP
+	ld a,[hli]
+	ld [$ceea],a
+	ld a,[hl]
+	ld [$cee9],a
+	ld hl,W_ENEMYMONCURHP
+	ld a,[hli]
+	ld [$ceee],a
+	ld a,[hl]
+	ld [$ceed],a
+	ld hl,$c3ca
+	xor a
+	ld [$cf94],a
+	ld a,$48
+	call Predef ; animate the HP bar shortening
+.done\@
+	jp $4d5a ; redraw pokemon names and HP bars
+
+INCBIN "baserom.gbc",$3e1a0,$3e2ac - $3e1a0
 
 UnnamedText_3e2ac: ; 0x3e2ac
 	TX_FAR _UnnamedText_3e2ac

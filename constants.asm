@@ -114,9 +114,9 @@ W_PLAYERMOVETYPE     EQU $CFD5
 W_PLAYERMOVEACCURACY EQU $CFD6
 W_PLAYERMOVEMAXPP    EQU $CFD7
 
-W_OPPONENTHP     EQU $CFE6 ; active opponent's hp (16 bits)
-W_OPPONENTNUMBER EQU $CFE8 ; active opponent's position in team (0 to 5)
-W_OPPONENTSTATUS EQU $CFE9 ; active opponent's status condition
+W_ENEMYMONCURHP EQU $CFE6 ; active opponent's hp (16 bits)
+W_ENEMYMONNUMBER EQU $CFE8 ; active opponent's position in team (0 to 5)
+W_ENEMYMONSTATUS EQU $CFE9 ; active opponent's status condition
 	; bit 0 slp
 	; bit 1 slp
 	; bit 2 slp
@@ -125,8 +125,11 @@ W_OPPONENTSTATUS EQU $CFE9 ; active opponent's status condition
 	; bit 5 frz
 	; bit 6 par
 	; unused? (XXX confirm)
+W_ENEMYMONLEVEL EQU $CFF3
+W_ENEMYMONMAXHP EQU $CFF4 ; (16 bits)
 
-W_CURMONSTATUS EQU $D018 ; the status of the player’s current monster
+W_PLAYERMONCURHP EQU $D015 ; active opponent's hp (16 bits)
+W_PLAYERMONSTATUS EQU $D018 ; the status of the player’s current monster
 	; bit 0 slp
 	; bit 1 slp
 	; bit 2 slp
@@ -135,6 +138,8 @@ W_CURMONSTATUS EQU $D018 ; the status of the player’s current monster
 	; bit 5 frz
 	; bit 6 par
 	; unused? (XXX confirm)
+W_PLAYERMONLEVEL EQU $D022
+W_PLAYERMONMAXHP EQU $D023 ; (16 bits)
 
 W_TRAINERCLASS EQU $D031
 
@@ -195,6 +200,8 @@ W_ENEMYTOXICCOUNTER EQU $D071
 W_ENEMYDISABLEDMOVE EQU $D072
 
 W_NUMHITS EQU $D074 ; number of hits in attacks like Doubleslap, etc.
+
+W_DAMAGE EQU $D0D7
 
 ; List type
 ; used in $D0B6
