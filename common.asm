@@ -10956,11 +10956,12 @@ ItemUseBall: ; 03:5687
 	ld [$d11c],a
 	ld a,[W_BATTLETYPE]
 	cp a,2		;SafariBattle
-	jr nz,.next2\@
+	jr nz,.skipSafariZoneCode\@
+.safariZone\@
 	; remove a Safari Ball from inventory
 	ld hl,W_NUMSAFARIBALLS
 	dec [hl]
-.next2\@	;$56b6
+.skipSafariZoneCode\@	;$56b6
 	call GoPAL_SET_CF1C
 	ld a,$43
 	ld [$d11e],a
@@ -10974,62 +10975,69 @@ ItemUseBall: ; 03:5687
 	jp z,$5801
 	ld a,[W_BATTLETYPE]
 	dec a
-	jr nz,.next3\@
-	ld hl,W_GRASSRATE	;backups wildMon data
+	jr nz,.notOldManBattle\@
+.oldManBattle\@
+	ld hl,W_GRASSRATE
 	ld de,W_PLAYERNAME
 	ld bc,11
-	call CopyData
+	call CopyData ; save the player's name in the Wild Monster data (part of the Cinnabar Island Missingno glitch)
 	jp .BallSuccess\@	;$578b
-.next3\@	;$56e9
+.notOldManBattle\@	;$56e9
 	ld a,[W_CURMAP]
-	cp a,$93	;MonTower 6F
-	jr nz,.next4\@
+	cp a,POKEMONTOWER_6
+	jr nz,.loop\@
 	ld a,[$cfd8]
 	cp a,MAROWAK
 	ld b,$10
 	jp z,$5801
-.next4\@	;$56fa
-	call $3e5c	;GetRandom
+; if not fighting ghost Marowak, loop until a random number in the current
+; pokeball's allowed range is found
+.loop\@	;$56fa
+	call GenRandom
 	ld b,a
 	ld hl,$cf91
 	ld a,[hl]
-	cp a,MASTER_BALL;1
+	cp a,MASTER_BALL
 	jp z,.BallSuccess\@	;$578b
-	cp a,POKE_BALL	;4
-	jr z,.next5\@
+	cp a,POKE_BALL
+	jr z,.checkForAilments
 	ld a,200
 	cp b
-	jr c,.next4\@	;get only numbers < 200
+	jr c,.loop\@	;get only numbers <= 200 for Great Ball
 	ld a,[hl]
-	cp a,GREAT_BALL	;3
-	jr z,.next5\@
-	ld a,150	;get only numbers < 150
+	cp a,GREAT_BALL
+	jr z,.checkForAilments
+	ld a,150	;get only numbers <= 150 for Ultra Ball
 	cp b
-	jr c,.next4\@
-.next5\@	;$571a
-	ld a,[$cfe9]	;status ailments
+	jr c,.loop\@
+.checkForAilments\@	;$571a
+; pokemon can be caught more easily with any (primary) status ailment
+; Frozen/Asleep pokemon are relatively even easier to catch
+; for Frozen/Asleep pokemon, any random number from 0-24 ensures a catch.
+; for the others, a random number from 0-11 ensures a catch.
+	ld a,[W_ENEMYMONSTATUS]	;status ailments
 	and a
-	jr z,.next6\@
+	jr z,.noAilments\@
 	and a,(FRZ + SLP)	;is frozen and/or asleep?
 	ld c,12
-	jr z,.noAilments\@
+	jr z,.notFrozenOrAsleep\@
 	ld c,25
-.noAilments\@	;$5728
+.notFrozenOrAsleep\@	;$5728
 	ld a,b
 	sub c
 	jp c,.BallSuccess\@	;$578b
 	ld b,a
-.next6\@	;$572e
+.noAilments\@	;$572e
 	push bc		;save RANDOM number
 	xor a
-	ld [$ff96],a
-	ld hl,$cff4	;enemy: Max HP
+	ld [H_MULTIPLICAND],a
+	ld hl,W_ENEMYMONMAXHP
 	ld a,[hli]
-	ld [$ff97],a
+	ld [H_MULTIPLICAND + 1],a
 	ld a,[hl]
-	ld [$ff98],a
+	ld [H_MULTIPLICAND + 2],a
 	ld a,255
-	ld [$ff99],a
+	ld [H_MULTIPLIER],a
 	call $38ac	;Multiply: MaxHP * 255
 	ld a,[$cf91]
 	cp a,GREAT_BALL
@@ -11037,10 +11045,10 @@ ItemUseBall: ; 03:5687
 	jr nz,.next7\@
 	ld a,8
 .next7\@	;$574d
-	ld [$ff99],a
-	ld b,4		;GreatBall's BallFactor
+	ld [H_DIVISOR],a
+	ld b,4		;number of significant bytes
 	call $38b9	;Divide
-	ld hl,$cfe6	;currentHP
+	ld hl,W_ENEMYMONCURHP
 	ld a,[hli]
 	ld b,a
 	ld a,[hl]
@@ -11051,44 +11059,44 @@ ItemUseBall: ; 03:5687
 	srl b
 	rr a
 	srl b
-	rr a
+	rr a ; a = current HP / 4
 	and a
 	jr nz,.next8\@
 	inc a
 .next8\@	;$5766
-	ld [$ff99],a
+	ld [H_DIVISOR],a
 	ld b,4
-	call $38b9	;Divide
-	ld a,[$ff97]
+	call $38b9	; Divide: ((MaxHP * 255) / BallFactor) / (CurHP / 4)
+	ld a,[H_QUOTIENT + 2]
 	and a
 	jr z,.next9\@
 	ld a,255
-	ld [$ff98],a
+	ld [H_QUOTIENT + 3],a
 .next9\@	;$5776
 	pop bc
 	ld a,[$d007]	;enemy: Catch Rate
 	cp b
 	jr c,.next10\@
-	ld a,[$ff97]
+	ld a,[H_QUOTIENT + 2]
 	and a
-	jr nz,.BallSuccess\@
-	call $3e5c	;get random number
+	jr nz,.BallSuccess\@ ; if ((MaxHP * 255) / BallFactor) / (CurHP / 4) > 0x255, automatic success
+	call GenRandom
 	ld b,a
-	ld a,[$ff98]
+	ld a,[H_QUOTIENT + 3]
 	cp b
 	jr c,.next10\@
 .BallSuccess\@	;$578b
 	jr .BallSuccess2\@
 .next10\@	;$578d
-	ld a,[$ff98]
+	ld a,[H_QUOTIENT + 3]
 	ld [$d11e],a
 	xor a
-	ld [$ff96],a
-	ld [$ff97],a
+	ld [H_MULTIPLICAND],a
+	ld [H_MULTIPLICAND + 1],a
 	ld a,[$d007]	;enemy: Catch Rate
-	ld [$ff98],a
+	ld [H_MULTIPLICAND + 2],a
 	ld a,100
-	ld [$ff99],a
+	ld [H_MULTIPLIER],a
 	call $38ac	;Multiply: CatchRate * 100
 	ld a,[$cf91]
 	ld b,255
@@ -11102,21 +11110,21 @@ ItemUseBall: ; 03:5687
 	jr z,.next11\@
 .next11\@	;$57b8
 	ld a,b
-	ld [$ff99],a
+	ld [H_DIVISOR],a
 	ld b,4
 	call $38b9	;Divide
-	ld a,[$ff97]
+	ld a,[H_QUOTIENT + 2]
 	and a
 	ld b,$63
 	jr nz,.next12\@
 	ld a,[$d11e]
-	ld [$ff99],a
+	ld [H_MULTIPLIER],a
 	call $38ac
 	ld a,255
-	ld [$ff99],a
+	ld [H_DIVISOR],a
 	ld b,4
 	call $38b9
-	ld a,[$cfe9]	;status ailments
+	ld a,[W_ENEMYMONSTATUS]	;status ailments
 	and a
 	jr z,.next13\@
 	and a,(FRZ + SLP)
@@ -11124,11 +11132,11 @@ ItemUseBall: ; 03:5687
 	jr z,.next14\@
 	ld b,10
 .next14\@	;$57e6
-	ld a,[$ff98]
+	ld a,[H_QUOTIENT + 3]
 	add b
-	ld [$ff98],a
+	ld [H_QUOTIENT + 3],a
 .next13\@	;$57eb
-	ld a,[$ff98]
+	ld a,[H_QUOTIENT + 3]
 	cp a,10
 	ld b,$20
 	jr c,.next12\@
@@ -21626,17 +21634,17 @@ AIUseDireHit: ; 0x3a7c2 unused
 	jp AIPrintItemUse
 
 Function67CF: ; 0x3a7cf 67CF
-	ld [$FF99],a
+	ld [H_DIVISOR],a
 	ld hl,$CFF4
 	ld a,[hli]
-	ld [$FF95],a
+	ld [H_DIVIDEND],a
 	ld a,[hl]
-	ld [$FF96],a
+	ld [H_DIVIDEND + 1],a
 	ld b,2
 	call $38B9
-	ld a,[$FF98]
+	ld a,[H_QUOTIENT + 3]
 	ld c,a
-	ld a,[$FF97]
+	ld a,[H_QUOTIENT + 2]
 	ld b,a
 	ld hl,$CFE7
 	ld a,[hld]
@@ -25530,25 +25538,25 @@ AdjustDamageForMoveType: ; 63A5
 	and a,$80
 	ld b,a
 	ld a,[hl] ; a = damage multiplier
-	ld [$ff99],a
+	ld [H_MULTIPLIER],a
 	add b
 	ld [$d05b],a
 	xor a
-	ld [$ff96],a
+	ld [H_MULTIPLICAND],a
 	ld hl,W_DAMAGE
 	ld a,[hli]
-	ld [$ff97],a
+	ld [H_MULTIPLICAND + 1],a
 	ld a,[hld]
-	ld [$ff98],a
+	ld [H_MULTIPLICAND + 2],a
 	call $38ac ; multiply
 	ld a,10
-	ld [$ff99],a
+	ld [H_DIVISOR],a
 	ld b,$04
 	call $38b9 ; divide
-	ld a,[$ff97]
+	ld a,[H_QUOTIENT + 2]
 	ld [hli],a
 	ld b,a
-	ld a,[$ff98]
+	ld a,[H_QUOTIENT + 3]
 	ld [hl],a
 	or b ; is damage 0?
 	jr nz,.skipTypeImmunity\@
@@ -25837,10 +25845,10 @@ CalcHitChance: ; 6624
 	ld c,a ; c = 14 - EVASIONMOD (this "reflects" the value over 7, so that an increase in the target's evasion decreases the hit chance instead of increasing the hit chance)
 ; zero the high bytes of the multiplicand
 	xor a
-	ld [$ff96],a
-	ld [$ff97],a
+	ld [H_MULTIPLICAND],a
+	ld [H_MULTIPLICAND + 1],a
 	ld a,[hl]
-	ld [$ff98],a ; set multiplicand to move accuracy
+	ld [H_MULTIPLICAND + 2],a ; set multiplicand to move accuracy
 	push hl
 	ld d,$02 ; loop has two iterations
 ; loop to do the calculations, the first iteration multiplies by the accuracy ratio and the second iteration multiplies by the evasion ratio
@@ -25854,28 +25862,28 @@ CalcHitChance: ; 6624
 	add hl,bc ; hl = address of stat modifier ratio
 	pop bc
 	ld a,[hli]
-	ld [$ff99],a ; set multiplier to the numerator of the ratio
+	ld [H_MULTIPLIER],a ; set multiplier to the numerator of the ratio
 	call $38ac ; multiply
 	ld a,[hl]
-	ld [$ff99],a ; set divisor to the the denominator of the ratio (the dividend is the product of the previous multiplication)
+	ld [H_DIVISOR],a ; set divisor to the the denominator of the ratio (the dividend is the product of the previous multiplication)
 	ld b,$04 ; number of significant bytes in the dividend
 	call $38b9 ; divide
-	ld a,[$ff98]
+	ld a,[H_QUOTIENT + 3]
 	ld b,a
-	ld a,[$ff97]
+	ld a,[H_QUOTIENT + 2]
 	or b
 	jp nz,.nextCalculation\@
 ; make sure the result is always at least one
-	ld [$ff97],a
+	ld [H_QUOTIENT + 2],a
 	ld a,$01
-	ld [$ff98],a
+	ld [H_QUOTIENT + 3],a
 .nextCalculation\@
 	ld b,c
 	dec d
 	jr nz,.loop\@
-	ld a,[$ff97]
+	ld a,[H_QUOTIENT + 2]
 	and a ; is the calculated hit chance over 0xFF?
-	ld a,[$ff98]
+	ld a,[H_QUOTIENT + 3]
 	jr z,.storeAccuracy\@
 ; if calculated hit chance over 0xFF
 	ld a,$ff ; set the hit chance to 0xFF

@@ -699,6 +699,18 @@ W_BOXITEM50QTY    EQU $D59E
 W_SAFARITIMER1 EQU $D70D ; use 01 for maximum
 W_SAFARITIMER2 EQU $D70E ; use F4 for maximum
 
+; Note: the following multiplication and division addresses are used for multiple purposes
+; and so they overlap with each other
+
+H_MULTIPLICAND EQU $FF96 ; 3 bytes, big endian order
+H_MULTIPLIER   EQU $FF99 ; 1 byte
+H_PRODUCT      EQU $FF95 ; 4 bytes, big endian order
+
+H_DIVIDEND     EQU $FF95 ; 4 bytes, big endian order
+H_DIVISOR      EQU $FF99 ; 1 byte
+H_QUOTIENT     EQU $FF95 ; 4 bytes, big endian order
+H_REMAINDER    EQU $FF99 ; 1 byte
+
 H_RAND1 EQU $FFD3
 H_RAND2 EQU $FFD4
 
