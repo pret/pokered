@@ -25184,7 +25184,7 @@ ApplyDamageToPlayerPokemon: ; 61A0
 	jp $4d5a ; redraw pokemon names and HP bars
 
 AttackSubstitute: ; 625E
-	ld hl,UnnamedText_3e2ac
+	ld hl,SubstituteTookDamageText
 	call PrintText
 ; values for player turn
 	ld de,W_ENEMYSUBSITUTEHP
@@ -25209,7 +25209,7 @@ AttackSubstitute: ; 625E
 	ld h,b
 	ld l,c
 	res 4,[hl] ; unset the substitute bit
-	ld hl,UnnamedText_3e2b1
+	ld hl,SubstituteBrokeText
 	call PrintText
 ; flip whose turn it is for the next function call
 	ld a,[H_WHOSETURN]
@@ -25231,13 +25231,13 @@ AttackSubstitute: ; 625E
 	ld [hl],a ; zero the effect of the attacker's move
 	jp $4d5a ; redraw pokemon names and HP bars
 
-UnnamedText_3e2ac: ; 0x3e2ac
-	TX_FAR _UnnamedText_3e2ac
+SubstituteTookDamageText: ; 0x3e2ac
+	TX_FAR _SubstituteTookDamageText
 	db $50
 ; 0x3e2ac + 5 bytes
 
-UnnamedText_3e2b1: ; 0x3e2b1
-	TX_FAR _UnnamedText_3e2b1
+SubstituteBrokeText: ; 0x3e2b1
+	TX_FAR _SubstituteBrokeText
 	db $50
 ; 0x3e2b1 + 5 bytes
 
@@ -57059,13 +57059,13 @@ _UnnamedText_3ddca: ; 0x89b32
 	db "ignored orders!", $58
 ; 0x89b32 + 21 bytes
 
-_UnnamedText_3e2ac: ; 0x89b47
+_SubstituteTookDamageText: ; 0x89b47
 	db $0, "The SUBSTITUTE", $4f
 	db "took damage for", $55
 	db $59, "!", $58
 ; 0x89b47 + 35 bytes
 
-_UnnamedText_3e2b1: ; 0x89b6a
+_SubstituteBrokeText: ; 0x89b6a
 	db $0, $59, "'s", $4f
 	db "SUBSTITUTE broke!", $58
 ; 0x89b6a + 22 bytes
