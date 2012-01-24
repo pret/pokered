@@ -4150,7 +4150,7 @@ GetName: ; 376B
 	ld e,l
 	ld d,h
 	jr .gotPtr\@
-.otherEntries\@ ;$378d
+.otherEntries\@ ; $378d
 	;2-7 = OTHER ENTRIES
 	ld a,[$d0b7]
 	ld [$ffb8],a
@@ -4162,7 +4162,7 @@ GetName: ; 376B
 	ld e,a
 	jr nc,.skip\@
 	inc d
-.skip\@ ;$37a0
+.skip\@ ; $37a0
 	ld hl,NamePointers
 	add hl,de
 	ld a,[hli]
@@ -4192,7 +4192,7 @@ GetName: ; 376B
 	ld de,$cd6d
 	ld bc,$0014
 	call CopyData
-.gotPtr\@       ;$37cd
+.gotPtr\@ ; $37cd
 	ld a,e
 	ld [$cf8d],a
 	ld a,d
@@ -4406,7 +4406,7 @@ Delay3: ; 3DD7
 
 INCBIN "baserom.gbc",$3DDC,$3DED - $3DDC
 
-GoPAL_SET_CF1C:	; 3ded
+GoPAL_SET_CF1C: ; 3ded
 	ld b,$ff
 GoPAL_SET: 	; 3def
 	ld a,[$cf1b]
@@ -10833,7 +10833,7 @@ CaveMons:
 
 ENDC
 
-GetItemUse: ;$D5C7
+GetItemUse: ; $D5C7
 	ld a,1
 	ld [$cd6a],a
 	ld a,[$cf91]	;contains item_ID
@@ -10850,7 +10850,7 @@ GetItemUse: ;$D5C7
 	ld l,a
 	jp [hl]
 
-ItemUsePtrTable:	;$D5E1
+ItemUsePtrTable: ; $D5E1
 	dw ItemUseBall      ;$5687 masterball
 	dw ItemUseBall      ;$5687 ultraball
 	dw ItemUseBall      ;$5687 greatball
