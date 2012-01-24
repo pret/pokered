@@ -3,6 +3,8 @@
 #date: 2012-01-24
 from optparse import OptionParser
 from gbz80disasm import load_labels, find_label
+from extract_maps import calculate_pointer
+import sys
 spacing = "\t"
 
 def pretty_print_trainer_header(address, label=None):
@@ -44,6 +46,12 @@ def pretty_print_trainer_header(address, label=None):
     pointer_byte2 = ord(rom[address+5])
     partial_pointer = (pointer_byte1 + (pointer_byte2 << 8))
     label = find_label(partial_pointer, bank_id)
+    if label == None:
+        print "label not found for (TextBeforeBattle) " + hex(calculate_pointer(partial_pointer, bank_id))
+        print ""
+        label = "$" + hex(partial_pointer)[2:]
+        #sys.exit(0)
+
     output += spacing + "dw " + label + " ; " + hex(partial_pointer) + " TextBeforeBattle\n"
 
     #TextAfterBattle
@@ -51,6 +59,12 @@ def pretty_print_trainer_header(address, label=None):
     pointer_byte2 = ord(rom[address+7])
     partial_pointer = (pointer_byte1 + (pointer_byte2 << 8))
     label = find_label(partial_pointer, bank_id)
+    if label == None:
+        print "label not found for (TextAfterBattle) " + hex(calculate_pointer(partial_pointer, bank_id))
+        print ""
+        label = "$" + hex(partial_pointer)[2:]
+        #sys.exit(0)
+
     output += spacing + "dw " + label + " ; " + hex(partial_pointer) + " TextAfterBattle\n"
 
     #TextEndBattle
@@ -58,6 +72,12 @@ def pretty_print_trainer_header(address, label=None):
     pointer_byte2 = ord(rom[address+9])
     partial_pointer = (pointer_byte1 + (pointer_byte2 << 8))
     label = find_label(partial_pointer, bank_id)
+    if label == None:
+        print "label not found for (TextEndBattle) " + hex(calculate_pointer(partial_pointer, bank_id))
+        print ""
+        label = "$" + hex(partial_pointer)[2:]
+        #sys.exit(0)
+
     output += spacing + "dw " + label + " ; " + hex(partial_pointer) + " TextEndBattle\n"
 
     #TextEndBattle
@@ -65,6 +85,12 @@ def pretty_print_trainer_header(address, label=None):
     pointer_byte2 = ord(rom[address+11])
     partial_pointer = (pointer_byte1 + (pointer_byte2 << 8))
     label = find_label(partial_pointer, bank_id)
+    if label == None:
+        print "label not found for (TextEndBattle) " + hex(calculate_pointer(partial_pointer, bank_id))
+        print ""
+        label = "$" + hex(partial_pointer)[2:]
+        #sys.exit(0)
+
     output += spacing + "dw " + label + " ; " + hex(partial_pointer) + " TextEndBattle\n"
 
     output += "; " + hex(address+10) + "\n"
