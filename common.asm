@@ -24942,15 +24942,71 @@ HighCriticalMoves: ; 0x3e08e
 	db $FF
 ; 0x3e093
 
-INCBIN "baserom.gbc",$3e093,$3e0df - $3e093
+; function to determine if Counter hits and if so, how much damage it does
+HandleCounterMove: ; 6093
+	ld a,[H_WHOSETURN] ; whose turn
+	and a
+; player's turn
+	ld hl,W_ENEMYSELECTEDMOVE
+	ld de,W_ENEMYMOVEPOWER
+	ld a,[W_PLAYERSELECTEDMOVE]
+	jr z,.next\@
+; enemy's turn
+	ld hl,W_PLAYERSELECTEDMOVE
+	ld de,W_PLAYERMOVEPOWER
+	ld a,[W_ENEMYSELECTEDMOVE]
+.next\@
+	cp a,COUNTER
+	ret nz ; return if not using Counter
+	ld a,$01
+	ld [W_MOVEMISSED],a ; initialize the move missed variable to true (it is set to false below if the move hits)
+	ld a,[hl]
+	cp a,COUNTER
+	ret z ; if the target also used Counter, miss
+	ld a,[de]
+	and a
+	ret z ; if the move the target used has 0 power, miss
+; check if the move the target used was Normal or Fighting type
+	inc de
+	ld a,[de]
+	and a ; normal type
+	jr z,.counterableType\@
+	cp a,FIGHTING
+	jr z,.counterableType\@
+; if the move wasn't Normal or Fighting type, miss
+	xor a
+	ret
+.counterableType\@
+	ld hl,W_DAMAGE
+	ld a,[hli]
+	or [hl]
+	ret z ; Counter misses if the target did no damage to the Counter user
+; double the damage that the target did to the Counter user
+	ld a,[hl]
+	add a
+	ldd [hl],a
+	ld a,[hl]
+	adc a
+	ld [hl],a
+	jr nc,.noCarry\@
+; damage is capped at 0xFFFF
+	ld a,$ff
+	ld [hli],a
+	ld [hl],a
+.noCarry\@
+	xor a
+	ld [W_MOVEMISSED],a
+	call MoveHitTest ; do the normal move hit test in addition to Counter's special rules
+	xor a
+	ret
 
 ApplyDamageToEnemyPokemon: ; 60DF
 	ld a,[W_PLAYERMOVEEFFECT]
-	cp a,$26 ; OHKO
+	cp a,OHKO_EFFECT
 	jr z,.applyDamage\@
-	cp a,$28 ; super fang's effect
+	cp a,SUPER_FANG_EFFECT
 	jr z,.superFangEffect\@
-	cp a,$29 ; special damage (fixed or random damage)
+	cp a,SPECIAL_DAMAGE_EFFECT
 	jr z,.specialDamage\@
 	ld a,[W_PLAYERMOVEPOWER]
 	and a
@@ -24983,10 +25039,10 @@ ApplyDamageToEnemyPokemon: ; 60DF
 	jr z,.storeDamage\@
 	cp a,NIGHT_SHADE
 	jr z,.storeDamage\@
-	ld b,$14 ; Sonic Boom damage
+	ld b,SONICBOOM_DAMAGE
 	cp a,SONICBOOM
 	jr z,.storeDamage\@
-	ld b,$28 ; Dragon Rage damage
+	ld b,DRAGON_RAGE_DAMAGE
 	cp a,DRAGON_RAGE
 	jr z,.storeDamage\@
 ; Psywave
@@ -24995,7 +25051,7 @@ ApplyDamageToEnemyPokemon: ; 60DF
 	srl a
 	add b
 	ld b,a ; b = level * 1.5
-; loop until a random number between 1 and b is found
+; loop until a random number in the range [1, b) is found
 .loop\@
 	call $6e9b ; random number
 	and a
@@ -25018,7 +25074,7 @@ ApplyDamageToEnemyPokemon: ; 60DF
 	jr z,.done\@ ; we're done if damage is 0
 	ld a,[W_ENEMYBATTSTATUS2]
 	bit 4,a ; does the enemy have a substitute?
-	jp nz,$625e
+	jp nz,AttackSubstitute
 ; subtract the damage from the pokemon's current HP
 ; also, save the current HP at $CEEB
 	ld a,[hld]
@@ -25035,7 +25091,7 @@ ApplyDamageToEnemyPokemon: ; 60DF
 	ld [W_ENEMYMONCURHP],a
 	jr nc,.animateHpBar\@
 ; if more damage was done than the current HP, zero the HP and set the damage
-; equal to how much HP the pokemon had before fainting
+; equal to how much HP the pokemon had before the attack
 	ld a,[$ceec]
 	ld [hli],a
 	ld a,[$ceeb]
@@ -25063,15 +25119,179 @@ ApplyDamageToEnemyPokemon: ; 60DF
 .done\@
 	jp $4d5a ; redraw pokemon names and HP bars
 
-INCBIN "baserom.gbc",$3e1a0,$3e2ac - $3e1a0
+ApplyDamageToPlayerPokemon: ; 61A0
+	ld a,[W_ENEMYMOVEEFFECT]
+	cp a,OHKO_EFFECT
+	jr z,.applyDamage\@
+	cp a,SUPER_FANG_EFFECT
+	jr z,.superFangEffect\@
+	cp a,SPECIAL_DAMAGE_EFFECT
+	jr z,.specialDamage\@
+	ld a,[W_ENEMYMOVEPOWER]
+	and a
+	jp z,.done\@
+	jr .applyDamage\@
+.superFangEffect\@
+; set the damage to half the target's HP
+	ld hl,W_PLAYERMONCURHP
+	ld de,W_DAMAGE
+	ld a,[hli]
+	srl a
+	ld [de],a
+	inc de
+	ld b,a
+	ld a,[hl]
+	rr a
+	ld [de],a
+	or b
+	jr nz,.applyDamage\@
+; make sure Super Fang's damage is always at least 1
+	ld a,$01
+	ld [de],a
+	jr .applyDamage\@
+.specialDamage\@
+	ld hl,W_ENEMYMONLEVEL
+	ld a,[hl]
+	ld b,a
+	ld a,[W_ENEMYMOVENUM]
+	cp a,SEISMIC_TOSS
+	jr z,.storeDamage\@
+	cp a,NIGHT_SHADE
+	jr z,.storeDamage\@
+	ld b,SONICBOOM_DAMAGE
+	cp a,SONICBOOM
+	jr z,.storeDamage\@
+	ld b,DRAGON_RAGE_DAMAGE
+	cp a,DRAGON_RAGE
+	jr z,.storeDamage\@
+; Psywave
+	ld a,[hl]
+	ld b,a
+	srl a
+	add b
+	ld b,a ; b = attacker's level * 1.5
+; loop until a random number in the range [0, b) is found
+; this differs from the range when the player attacks, which is [1, b)
+; it's possible for the enemy to do 0 damage with Psywave, but the player always does at least 1 damage
+.loop\@
+	call $6e9b ; random number
+	cp b
+	jr nc,.loop\@
+	ld b,a
+.storeDamage\@
+	ld hl,W_DAMAGE
+	xor a
+	ld [hli],a
+	ld a,b
+	ld [hl],a
+.applyDamage\@
+	ld hl,W_DAMAGE
+	ld a,[hli]
+	ld b,a
+	ld a,[hl]
+	or b
+	jr z,.done\@ ; we're done if damage is 0
+	ld a,[W_PLAYERBATTSTATUS2]
+	bit 4,a ; does the player have a substitute?
+	jp nz,AttackSubstitute
+; subtract the damage from the pokemon's current HP
+; also, save the current HP at $CEEB and the new HP at $CEED
+	ld a,[hld]
+	ld b,a
+	ld a,[W_PLAYERMONCURHP + 1]
+	ld [$ceeb],a
+	sub b
+	ld [W_PLAYERMONCURHP + 1],a
+	ld [$ceed],a
+	ld b,[hl]
+	ld a,[W_PLAYERMONCURHP]
+	ld [$ceec],a
+	sbc b
+	ld [W_PLAYERMONCURHP],a
+	ld [$ceee],a
+	jr nc,.animateHpBar\@
+; if more damage was done than the current HP, zero the HP and set the damage
+; equal to how much HP the pokemon had before the attack
+	ld a,[$ceec]
+	ld [hli],a
+	ld a,[$ceeb]
+	ld [hl],a
+	xor a
+	ld hl,W_PLAYERMONCURHP
+	ld [hli],a
+	ld [hl],a
+	ld hl,$ceed
+	ld [hli],a
+	ld [hl],a
+.animateHpBar\@
+	ld hl,W_PLAYERMONMAXHP
+	ld a,[hli]
+	ld [$ceea],a
+	ld a,[hl]
+	ld [$cee9],a
+	ld hl,$c45e
+	ld a,$01
+	ld [$cf94],a
+	ld a,$48
+	call Predef ; animate the HP bar shortening
+.done\@
+	jp $4d5a ; redraw pokemon names and HP bars
 
-UnnamedText_3e2ac: ; 0x3e2ac
-	TX_FAR _UnnamedText_3e2ac
+AttackSubstitute: ; 625E
+	ld hl,SubstituteTookDamageText
+	call PrintText
+; values for player turn
+	ld de,W_ENEMYSUBSITUTEHP
+	ld bc,W_ENEMYBATTSTATUS2
+	ld a,[H_WHOSETURN]
+	and a
+	jr z,.applyDamageToSubstitute\@
+; values for enemy turn
+	ld de,W_PLAYERSUBSITUTEHP
+	ld bc,W_PLAYERBATTSTATUS2
+.applyDamageToSubstitute\@
+	ld hl,W_DAMAGE
+	ld a,[hli]
+	and a
+	jr nz,.substituteBroke\@ ; damage > 0xFF always breaks substitutes
+; subtract damage from HP of substitute
+	ld a,[de]
+	sub [hl]
+	ld [de],a
+	ret nc
+.substituteBroke\@
+	ld h,b
+	ld l,c
+	res 4,[hl] ; unset the substitute bit
+	ld hl,SubstituteBrokeText
+	call PrintText
+; flip whose turn it is for the next function call
+	ld a,[H_WHOSETURN]
+	xor a,$01
+	ld [H_WHOSETURN],a
+	ld hl,$5747
+	ld b,$1e ; animate the substitute breaking
+	call Bankswitch ; substitute
+; flip the turn back to the way it was
+	ld a,[H_WHOSETURN]
+	xor a,$01
+	ld [H_WHOSETURN],a
+	ld hl,W_PLAYERMOVEEFFECT ; value for player's turn
+	and a
+	jr z,.nullifyEffect\@
+	ld hl,W_ENEMYMOVEEFFECT ; value for enemy's turn
+.nullifyEffect\@
+	xor a
+	ld [hl],a ; zero the effect of the attacker's move
+	jp $4d5a ; redraw pokemon names and HP bars
+
+SubstituteTookDamageText: ; 0x3e2ac
+	TX_FAR _SubstituteTookDamageText
 	db $50
 ; 0x3e2ac + 5 bytes
 
-UnnamedText_3e2b1: ; 0x3e2b1
-	TX_FAR _UnnamedText_3e2b1
+SubstituteBrokeText: ; 0x3e2b1
+	TX_FAR _SubstituteBrokeText
 	db $50
 ; 0x3e2b1 + 5 bytes
 
@@ -25181,7 +25401,197 @@ TypeEffects: ; 6474
 	db DRAGON,DRAGON,20
 	db $FF
 
-INCBIN "baserom.gbc",$3e56b,$3e887 - $3e56b
+; some tests that need to pass for a move to hit
+MoveHitTest: ; 656B
+; player's turn
+	ld hl,W_ENEMYBATTSTATUS1
+	ld de,W_PLAYERMOVEEFFECT
+	ld bc,W_ENEMYMONSTATUS
+	ld a,[H_WHOSETURN]
+	and a
+	jr z,.dreamEaterCheck\@
+; enemy's turn
+	ld hl,W_PLAYERBATTSTATUS1
+	ld de,W_ENEMYMOVEEFFECT
+	ld bc,W_PLAYERMONSTATUS
+.dreamEaterCheck\@
+	ld a,[de]
+	cp a,DREAM_EATER_EFFECT
+	jr nz,.swiftCheck\@
+	ld a,[bc]
+	and a,$07 ; is the target pokemon sleeping?
+	jp z,.moveMissed\@
+.swiftCheck\@
+	ld a,[de]
+	cp a,SWIFT_EFFECT
+	ret z ; Swift never misses (interestingly, Azure Heights lists this is a myth, but it appears to be true)
+	call $7b79 ; substitute check (note that this overwrites a)
+	jr z,.checkForDigOrFlyStatus\@
+; this code is buggy. it's supposed to prevent HP draining moves from working on substitutes.
+; since $7b79 overwrites a with either $00 or $01, it never works.
+	cp a,DRAIN_HP_EFFECT ; $03
+	jp z,.moveMissed\@
+	cp a,DREAM_EATER_EFFECT ; $08
+	jp z,.moveMissed\@
+.checkForDigOrFlyStatus\@
+	bit 6,[hl]
+	jp nz,.moveMissed\@
+	ld a,[H_WHOSETURN]
+	and a
+	jr nz,.enemyTurn\@
+.playerTurn\@
+; this checks if the move effect is disallowed by mist
+	ld a,[W_PLAYERMOVEEFFECT]
+	cp a,$12
+	jr c,.skipEnemyMistCheck\@
+	cp a,$1a
+	jr c,.enemyMistCheck\@
+	cp a,$3a
+	jr c,.skipEnemyMistCheck\@
+	cp a,$42
+	jr c,.enemyMistCheck\@
+	jr .skipEnemyMistCheck\@
+.enemyMistCheck\@
+; if move effect is from $12 to $19 inclusive or $3a to $41 inclusive
+; i.e. the following moves
+; GROWL, TAIL WHIP, LEER, STRING SHOT, SAND-ATTACK, SMOKESCREEN, KINESIS,
+; FLASH, CONVERSION, HAZE*, SCREECH, LIGHT SCREEN*, REFLECT*
+; the moves that are marked with an asterisk are not affected since this
+; function is not called when those moves are used
+; XXX are there are any others like those three?
+	ld a,[W_ENEMYBATTSTATUS2]
+	bit 1,a
+	jp nz,.moveMissed\@
+.skipEnemyMistCheck\@
+	ld a,[W_PLAYERBATTSTATUS2]
+	bit 0,a ; is the player using X Accuracy?
+	ret nz ; if so, always hit regardless of accuracy/evasion
+	jr .calcHitChance\@
+.enemyTurn\@
+	ld a,[W_ENEMYMOVEEFFECT]
+	cp a,$12
+	jr c,.skipPlayerMistCheck\@
+	cp a,$1a
+	jr c,.playerMistCheck\@
+	cp a,$3a
+	jr c,.skipPlayerMistCheck\@
+	cp a,$42
+	jr c,.playerMistCheck\@
+	jr .skipPlayerMistCheck\@
+.playerMistCheck\@
+; similar to enemy mist check
+	ld a,[W_PLAYERBATTSTATUS2]
+	bit 1,a
+	jp nz,.moveMissed\@
+.skipPlayerMistCheck\@
+	ld a,[W_ENEMYBATTSTATUS2]
+	bit 0,a ; is the enemy using X Accuracy?
+	ret nz ; if so, always hit regardless of accuracy/evasion
+.calcHitChance\@
+	call CalcHitChance ; scale the move accuracy according to attacker's accuracy and target's evasion
+	ld a,[W_PLAYERMOVEACCURACY]
+	ld b,a
+	ld a,[H_WHOSETURN]
+	and a
+	jr z,.doAccuracyCheck\@
+	ld a,[W_ENEMYMOVEACCURACY]
+	ld b,a
+.doAccuracyCheck\@
+; if the random number generated is greater than or equal to the scaled accuracy, the move misses
+; note that this means that even the highest accuracy is still just a 255/256 chance, not 100%
+	call $6e9b ; random number
+	cp b
+	jr nc,.moveMissed\@
+	ret
+.moveMissed\@
+	xor a
+	ld hl,W_DAMAGE ; zero the damage
+	ld [hli],a
+	ld [hl],a
+	inc a
+	ld [W_MOVEMISSED],a
+	ld a,[H_WHOSETURN]
+	and a
+	jr z,.playerTurn2\@
+.enemyTurn2\@
+	ld hl,W_ENEMYBATTSTATUS1
+	res 5,[hl] ; end multi-turn attack e.g. wrap
+	ret
+.playerTurn2\@
+	ld hl,W_PLAYERBATTSTATUS1
+	res 5,[hl] ; end multi-turn attack e.g. wrap
+	ret
+
+; values for player turn
+CalcHitChance: ; 6624
+	ld hl,W_PLAYERMOVEACCURACY
+	ld a,[H_WHOSETURN]
+	and a
+	ld a,[W_PLAYERMONACCURACYMOD]
+	ld b,a
+	ld a,[W_ENEMYMONEVASIONMOD]
+	ld c,a
+	jr z,.next\@
+; values for enemy turn
+	ld hl,W_ENEMYMOVEACCURACY
+	ld a,[W_ENEMYMONACCURACYMOD]
+	ld b,a
+	ld a,[W_PLAYERMONEVASIONMOD]
+	ld c,a
+.next\@
+	ld a,$0e
+	sub c
+	ld c,a ; c = 14 - EVASIONMOD (this "reflects" the value over 7, so that an increase in the target's evasion decreases the hit chance instead of increasing the hit chance)
+; zero the high bytes of the multiplicand
+	xor a
+	ld [$ff96],a
+	ld [$ff97],a
+	ld a,[hl]
+	ld [$ff98],a ; set multiplicand to move accuracy
+	push hl
+	ld d,$02 ; loop has two iterations
+; loop to do the calculations, the first iteration multiplies by the accuracy ratio and the second iteration multiplies by the evasion ratio
+.loop\@
+	push bc
+	ld hl,$76cb ; stat modifier ratios
+	dec b
+	sla b
+	ld c,b
+	ld b,$00
+	add hl,bc ; hl = address of stat modifier ratio
+	pop bc
+	ld a,[hli]
+	ld [$ff99],a ; set multiplier to the numerator of the ratio
+	call $38ac ; multiply
+	ld a,[hl]
+	ld [$ff99],a ; set divisor to the the denominator of the ratio (the dividend is the product of the previous multiplication)
+	ld b,$04 ; number of significant bytes in the dividend
+	call $38b9 ; divide
+	ld a,[$ff98]
+	ld b,a
+	ld a,[$ff97]
+	or b
+	jp nz,.nextCalculation\@
+; make sure the result is always at least one
+	ld [$ff97],a
+	ld a,$01
+	ld [$ff98],a
+.nextCalculation\@
+	ld b,c
+	dec d
+	jr nz,.loop\@
+	ld a,[$ff97]
+	and a ; is the calculated hit chance over 0xFF?
+	ld a,[$ff98]
+	jr z,.storeAccuracy\@
+; if calculated hit chance over 0xFF
+	ld a,$ff ; set the hit chance to 0xFF
+.storeAccuracy\@
+	pop hl
+	ld [hl],a ; store the hit chance in the move accuracy variable
+	ret
+
+INCBIN "baserom.gbc",$3e687,$3e887 - $3e687
 
 UnnamedText_3e887: ; 0x3e887
 	TX_FAR _UnnamedText_3e887
@@ -56703,13 +57113,13 @@ _UnnamedText_3ddca: ; 0x89b32
 	db "ignored orders!", $58
 ; 0x89b32 + 21 bytes
 
-_UnnamedText_3e2ac: ; 0x89b47
+_SubstituteTookDamageText: ; 0x89b47
 	db $0, "The SUBSTITUTE", $4f
 	db "took damage for", $55
 	db $59, "!", $58
 ; 0x89b47 + 35 bytes
 
-_UnnamedText_3e2b1: ; 0x89b6a
+_SubstituteBrokeText: ; 0x89b6a
 	db $0, $59, "'s", $4f
 	db "SUBSTITUTE broke!", $58
 ; 0x89b6a + 22 bytes
