@@ -24937,7 +24937,7 @@ ApplyDamageToEnemyPokemon: ; 60DF
 	ld [W_ENEMYMONCURHP],a
 	jr nc,.animateHpBar\@
 ; if more damage was done than the current HP, zero the HP and set the damage
-; equal to how HP the pokemon had before fainting
+; equal to how much HP the pokemon had before fainting
 	ld a,[$ceec]
 	ld [hli],a
 	ld a,[$ceeb]
