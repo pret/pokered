@@ -25370,7 +25370,7 @@ MoveHitTest: ; 656B
 .swiftCheck\@
 	ld a,[de]
 	cp a,SWIFT_EFFECT
-	ret z ; Swift never misses (interestingly, Azure Heights lists this is a myth, but it is appears to be true)
+	ret z ; Swift never misses (interestingly, Azure Heights lists this is a myth, but it appears to be true)
 	call $7b79 ; substitute check (note that this overwrites a)
 	jr z,.checkForDigOrFlyStatus\@
 ; this code is buggy. it's supposed to prevent HP draining moves from working on substitutes.
