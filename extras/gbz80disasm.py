@@ -567,18 +567,22 @@ load_labels()
 
 def find_label(local_address, bank_id=0):
     global all_labels
+    #keep an integer
+    if type(local_address) == str:
+        local_address1 = int(local_address.replace("$", "0x"), 16)
+    else: local_address1 = local_address
 
     #turn local_address into a string
     if type(local_address) == str:
         if "0x" in local_address: local_address = local_address.replace("0x", "$")
         elif not "$" in local_address: local_address = "$" + local_address
     if type(local_address) == int:
-        local_address = "$%.2x" % (local_address)
+        local_address = "$%.x" % (local_address)
     local_address = local_address.upper()
 
     for label_entry in all_labels:
         if label_entry["local_pointer"].upper() == local_address:
-            if label_entry["bank_id"] == bank_id:
+            if label_entry["bank_id"] == bank_id or (local_address1 < 0x8000 and (label_entry["bank_id"] == 0 or label_entry["bank_id"] == 1)):
                 return label_entry["label"]
     return None
 
@@ -599,8 +603,9 @@ def output_bank_opcodes(original_offset, max_byte_count=0x4000):
     #a, oa = current_byte_number
 
     bank_id = 0
-    if original_offset > 0x4000:
+    if original_offset > 0x8000:
         bank_id = original_offset / 0x4000
+    print "bank id is: " + str(bank_id)
 
     last_hl_address = None #for when we're scanning the main map script
     last_a_address = None
@@ -741,7 +746,7 @@ def output_bank_opcodes(original_offset, max_byte_count=0x4000):
 
                     insertion = "$%.4x" % (number)
                     if maybe_byte in call_commands or current_byte in relative_unconditional_jumps or current_byte in relative_jumps:
-                        result = find_label(insertion[1:], bank_id)
+                        result = find_label(insertion, bank_id)
                         if result != None:
                             insertion = result
 
