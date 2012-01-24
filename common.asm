@@ -11396,7 +11396,7 @@ UnnamedText_e247: ; 0xe247
 	db $50
 ; 0xe247 + 5 bytes
 
-OldRodCode:
+OldRodCode: ; 0xe24c
 	call $62b4 ; probably sets carry if not in battle or not by water
 	jp c, ItemUseNotTime
 	ld bc, (5 << 8) | MAGIKARP
