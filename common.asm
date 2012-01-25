@@ -45972,7 +45972,7 @@ PewterGymScript: ; 0x5c387
 	ret
 ; 0x5c3a4
 
-PewterGymScript_Unknown5c3a4: ; 0x5c3ar
+PewterGymScript_Unknown5c3a4: ; 0x5c3a4
 INCBIN "baserom.gbc",$5c3a4,$91
 
 PewterGymTexts: ; 0x5c435
@@ -46413,7 +46413,7 @@ CeruleanGymText5: ; 0x5c7c8
 ; 0x5c7c8 + 5 bytes
 
 CeruleanGymText6: ; 0x5c7cd
-ReceivedTM11Text: ; 05c7cd
+ReceivedTM11Text: ; 0x5c7cd
 	TX_FAR _ReceivedTM11Text ; 0x98b7d
 	db $0B, $50
 ; 0x5c7cd + 6 bytes = 0x5c7d3
