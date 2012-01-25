@@ -4765,7 +4765,63 @@ GetName: ; 376B
 	ld [$2000],a
 	ret
 
-INCBIN "baserom.gbc",$37df,$3927 - $37df
+INCBIN "baserom.gbc",$37df,$3831 - $37df
+
+; this function is used when lower button sensitivity is wanted (e.g. menus)
+; OUTPUT: [$ffb5] = pressed buttons in usual format
+; there are two flags that control its functionality, [$ffb6] and [$ffb7]
+; there are esentially three modes of operation
+; 1. Get newly pressed buttons only
+;    ([$ffb7] == 0, [$ffb6] == any)
+;    Just copies [$ffb3] to [$ffb5].
+; 2. Get currently pressed buttons at low sample rate with delay
+;    ([$ffb7] == 0, [$ffb6] != 0)
+;    If the user holds down buttons for more than half a second,
+;    report buttons as being pressed up to 12 times per second thereafter.
+;    If the user holds down buttons for less than half a second,
+;    report only one button press.
+; 3. Same as 2, but report no buttons as pressed if A or B is held down.
+;    ([$ffb7] == 0, [$ffb6] == 0)
+GetJoypadStateLowSensitivity: ; 3831
+	call GetJoypadState
+	ld a,[$ffb7] ; flag
+	and a ; get all currently pressed buttons or only newly pressed buttons?
+	ld a,[$ffb3] ; newly pressed buttons
+	jr z,.storeButtonState\@
+	ld a,[$ffb4] ; all currently pressed buttons
+.storeButtonState\@
+	ld [$ffb5],a
+	ld a,[$ffb3] ; newly pressed buttons
+	and a ; have any buttons been newly pressed since last check?
+	jr z,.noNewlyPressedButtons\@
+.newlyPressedButtons\@
+	ld a,30 ; half a second delay
+	ld [$ffd5],a ; frame counter
+	ret
+.noNewlyPressedButtons\@
+	ld a,[$ffd5] ; frame counter
+	and a ; is the delay over?
+	jr z,.delayOver\@
+.delayNotOver\@
+	xor a
+	ld [$ffb5],a ; report no buttons as pressed
+	ret
+.delayOver\@
+; if [$ffb6] = 0 and A or B is pressed, report no buttons as pressed
+	ld a,[$ffb4]
+	and a,%00000011 ; A and B buttons
+	jr z,.setShortDelay\@
+	ld a,[$ffb6] ; flag
+	and a
+	jr nz,.setShortDelay\@
+	xor a
+	ld [$ffb5],a             
+.setShortDelay\@
+	ld a,5 ; 1/12 of a second delay
+	ld [$ffd5],a ; frame counter
+	ret
+
+INCBIN "baserom.gbc",$3865,$3927 - $3865
 
 AddPokemonToParty: ; 0x3927
 	push hl
