@@ -4300,7 +4300,157 @@ branch_ab8a:
 	; AB91
 
 Cities1_md_2: ;AB92 - AC02
-INCBIN "baserom.gbc",$ab92,$ac32 - $ab92
+	; AB92
+	mus_mod 5, 1, 5
+	mus_call branch_ac00
+
+	mus_octave oct3
+	mus_note noteG#, note8
+	mus_vel 12, 4
+	mus_note noteE, note4_8
+	mus_vel 12, 5
+	mus_duty duty75
+
+	mus_octave oct2
+	mus_note noteC#, note4
+	mus_note noteD#, note4
+	mus_note noteE, note4_8
+	mus_note noteF#, note4_8
+	mus_note noteG#, note4
+	mus_call branch_ac00
+
+	mus_octave oct3
+	mus_note noteG#, note8
+	mus_vel 12, 4
+	mus_note noteE, note2_4_8
+	mus_duty duty75
+
+	mus_octave oct2
+	mus_note noteE, note4_8
+	mus_note noteF#, note4_8
+	mus_note noteG#, note4
+	mus_vel 11, 7
+	mus_duty duty50
+	mus_mod 8, 1, 7
+
+	mus_octave oct4
+	mus_note noteC#, note2_4
+
+	mus_octave oct3
+	mus_note noteA, note4
+
+	mus_octave oct4
+	mus_note noteE, note2
+	mus_note noteF#, note8
+	mus_note noteE, note8
+	mus_note noteD#, note8
+	mus_note noteC#, note8
+
+	mus_octave oct3
+	mus_note noteB, note2_4
+	mus_note noteG#, note4
+	mus_note noteB, note1
+	mus_note noteF#, note2_4
+	mus_note noteG#, note8
+	mus_note noteA, note8
+	mus_note noteB, note4
+	mus_note noteA, note4
+	mus_note noteG#, note4
+	mus_note noteF#, note4
+	mus_note noteG#, note2_4
+	mus_note noteE, note4
+	mus_note noteB, note1
+
+	mus_octave oct4
+	mus_note noteC#, note2_4
+	mus_note noteD#, note8
+	mus_note noteE, note8
+	mus_note noteF#, note4
+	mus_note noteE, note4
+	mus_note noteD#, note4
+	mus_note noteC#, note4
+
+	mus_octave oct3
+	mus_note noteB, note2_4
+
+	mus_octave oct4
+	mus_note noteC#, note8
+	mus_note noteD#, note8
+	mus_note noteC#, note4
+
+	mus_octave oct3
+	mus_note noteB, note4
+	mus_note noteA, note4
+	mus_note noteG#, note4
+	mus_note noteA, note2_4
+	mus_note noteB, note8
+
+	mus_octave oct4
+	mus_note noteC, note8
+	mus_note noteC, note4
+
+	mus_octave oct3
+	mus_note noteB, note4
+	mus_note noteA, note4
+	mus_note noteF#, note4
+	mus_vel 11, 7
+	mus_note noteA, note2
+
+	mus_octave oct4
+	mus_note noteC, note2
+
+	mus_octave oct3
+	mus_note noteB, note2_4_8
+	mus_vel 8, 4
+	mus_note noteG#, note16
+	mus_vel 10, 4
+	mus_note noteA, note16
+	mus_jump 0, Cities1_md_2
+	
+branch_ac00:
+	mus_duty duty50
+	mus_vel 12, 3
+
+	mus_octave oct3
+	mus_note noteB, note4
+	mus_note noteA, note4
+	mus_vel 12, 4
+	mus_note noteG#, note2_8
+	mus_vel 12, 3
+	mus_note noteG#, note8
+	mus_note noteA, note8
+	mus_note noteB, note4
+	mus_note noteB, note8
+	mus_note noteA, note8
+	mus_note noteG#, note8
+	mus_note noteA, note8
+	mus_vel 12, 4
+	mus_note noteF#, note2_8
+	mus_vel 12, 5
+	mus_duty duty75
+
+	mus_octave oct2
+	mus_note noteE, note4
+	mus_note noteD#, note2
+	mus_note noteE, note4
+	mus_note noteF#, note4
+	mus_vel 12, 3
+	mus_duty duty50
+
+	mus_octave oct3
+	mus_note noteA, note4
+	mus_note noteG#, note4
+	mus_vel 12, 4
+	mus_note noteF#, note2_8
+	mus_vel 12, 3
+	mus_note noteF#, note8
+	mus_note noteG#, note8
+	mus_note noteA, note4
+	mus_note noteA, note8
+	mus_note noteG#, note8
+	mus_note noteF#, note8
+	mus_end
+	; AC31
 
 Cities1_md_3: ;AC32 - AC7F
 INCBIN "baserom.gbc",$ac32,$acef - $ac32
