@@ -4452,8 +4452,187 @@ branch_ac00:
 	mus_end
 	; AC31
 
-Cities1_md_3: ;AC32 - AC7F
-INCBIN "baserom.gbc",$ac32,$acef - $ac32
+Cities1_md_3: ;AC32 - ACEE --AC7F
+	; AC32
+	mus_vel 1, 1
+	db $E8
+	
+branch_ac35:
+	mus_mod 0, 0, 0
+
+	mus_octave oct3
+	mus_call branch_acc5
+	mus_call branch_acc5
+	mus_call branch_acce
+	mus_note noteG#, note8
+	mus_note noteE, note8
+	mus_note noteF#, note8
+	mus_note noteG#, note8
+	mus_note noteRst, note8
+	mus_note noteE, note8
+	mus_note noteF#, note8
+	mus_note noteG#, note8
+	mus_call branch_acc5
+	mus_note noteB, note8
+	mus_note noteE, note8
+	mus_note noteF#, note8
+	mus_note noteG#, note8
+	mus_note noteRst, note8
+	mus_note noteE, note8
+	mus_note noteF#, note8
+	mus_note noteG#, note8
+	mus_call branch_acc5
+	mus_call branch_acce
+	mus_note noteG#, note8
+	mus_note noteE, note8
+	mus_note noteF#, note8
+	mus_note noteG#, note8
+	mus_note noteRst, note8
+	mus_note noteG#, note8
+	mus_note noteE, note8
+	mus_note noteB, note8
+	mus_note noteRst, note8
+	mus_note noteE, note8
+	mus_note noteF#, note8
+	mus_note noteE, note8
+	mus_note noteG#, note8
+	mus_note noteE, note8
+	mus_note noteB, note8
+	mus_note noteE, note8
+	mus_mod 8, 2, 5
+	mus_note noteA, note2
+	mus_note noteE, note2
+	mus_note noteA, note2
+	mus_note noteF#, note2
+	mus_note noteG#, note2
+	mus_note noteE, note2
+	mus_note noteG#, note2_4
+	mus_note noteE, note4
+	mus_note noteF#, note8
+	mus_note noteF#, note8
+	mus_note noteD#, note8
+	mus_note noteE, note4
+	mus_note noteF#, note8
+	mus_note noteD#, note8
+	mus_note noteE, note8
+	mus_note noteF#, note8
+	mus_note noteF#, note8
+	mus_note noteB, note8
+	mus_note noteA, note8
+	mus_note noteG#, note8
+	mus_note noteA, note8
+	mus_note noteG#, note8
+	mus_note noteF#, note8
+	mus_note noteG#, note8
+	mus_note noteG#, note8
+	mus_note noteE, note8
+	mus_note noteG#, note8
+	mus_note noteRst, note8
+	mus_note noteE, note8
+	mus_note noteF#, note8
+	mus_note noteG#, note8
+	mus_note noteRst, note8
+	mus_note noteE, note8
+	mus_note noteF#, note8
+	mus_note noteG#, note8
+	mus_note noteB, note8
+	mus_note noteA, note8
+	mus_note noteG#, note8
+	mus_note noteF#, note8
+	mus_note noteA, note2
+	mus_note noteE, note2
+	mus_note noteA, note2
+	mus_note noteB, note8
+	mus_note noteA, note8
+	mus_note noteG#, note8
+	mus_note noteF#, note8
+	mus_note noteG#, note2
+	mus_note noteE, note2
+	mus_note noteB, note4
+	mus_note noteE, note4
+	mus_note noteF#, note4
+	mus_note noteG#, note4
+	mus_note noteRst, note8
+	mus_note noteD#, note8
+	mus_note noteE, note8
+	mus_note noteF#, note8
+	mus_note noteRst, note8
+	mus_note noteF#, note8
+	mus_note noteB, note8
+	mus_note noteA, note8
+	mus_note noteA, note4
+	mus_note noteG#, note4
+	mus_note noteF#, note8
+	mus_note noteD#, note8
+	mus_note noteA, note8
+	mus_note noteF#, note8
+	mus_note noteRst, note8
+	mus_note noteE, note8
+	mus_note noteF#, note8
+	mus_note noteG#, note8
+	mus_note noteRst, note8
+	mus_note noteE, note8
+	mus_note noteF#, note16
+	mus_note noteG#, note16
+	mus_note noteE, note16
+	mus_note noteF#, note16
+	mus_note noteG#, note4
+	mus_note noteB, note8
+	mus_note noteA, note8
+	mus_note noteG#, note8
+	mus_note noteA, note8
+	mus_note noteG#, note8
+	mus_note noteF#, note8
+	mus_jump 0, branch_ac35
+
+branch_acc5:
+	mus_note noteRst, note8
+	mus_note noteE, note8
+	mus_note noteF#, note8
+	mus_note noteG#, note8
+	mus_note noteRst, note8
+	mus_note noteE, note8
+	mus_note noteF#, note8
+	mus_note noteG#, note8
+	mus_end
+	; ACCD
+
+	; ACCE
+branch_acce:
+	mus_note noteA, note8
+	mus_note noteF#, note8
+	mus_note noteG#, note8
+	mus_note noteA, note8
+	mus_note noteRst, note8
+	mus_note noteA, note8
+	mus_note noteG#, note8
+	mus_note noteF#, note8
+	mus_note noteRst, note8
+	mus_note noteF#, note8
+	mus_note noteG#, note8
+	mus_note noteA, note8
+	mus_note noteRst, note8
+	mus_note noteA, note8
+	mus_note noteG#, note8
+	mus_note noteF#, note8
+	mus_note noteD#, note8
+	mus_note noteD#, note8
+	mus_note noteE, note8
+	mus_note noteF#, note8
+	mus_note noteRst, note8
+	mus_note noteD#, note8
+	mus_note noteE, note8
+	mus_note noteF#, note8
+	mus_note noteRst, note8
+	mus_note noteD#, note8
+	mus_note noteE, note8
+	mus_note noteF#, note8
+	mus_note noteRst, note8
+	mus_note noteD#, note8
+	mus_note noteE, note8
+	mus_note noteF#, note8
+	mus_end
+	; ACEE
 
 Cities1_md_4: ;ACEF - ADAD
 INCBIN "baserom.gbc",$acef,$adae - $acef
