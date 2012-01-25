@@ -4635,7 +4635,195 @@ branch_acce:
 	; ACEE
 
 Cities1_md_4: ;ACEF - ADAD
-INCBIN "baserom.gbc",$acef,$adae - $acef
+	; ACEF
+	mus_vel 15, 13
+	mus_note noteD#, note4_8_16
+	mus_note noteF#, note2_4_8
+	
+branch_acf3:
+	mus_call branch_ad36
+	mus_call branch_ad45
+	mus_call branch_ad45
+	mus_jump 2, branch_acf3
+	mus_call branch_ad36
+	mus_call branch_ad5f
+	mus_call branch_ad52
+	mus_note noteB, note4_8
+	mus_note noteC, note4_8_16
+	mus_note noteB, note4_8
+	mus_note noteC, note4_8_16
+	mus_note noteB, note4
+	mus_note noteC, note2
+	mus_call branch_ad6e
+	mus_call branch_ad5f
+	mus_call branch_ad52
+	mus_call branch_ad6e
+	mus_call branch_ad52
+	mus_note noteB, note4_8
+	mus_note noteC, note4_8_16
+	mus_note noteB, note4_8
+	mus_note noteC, note4_8_16
+	mus_note noteB, note8
+	mus_note noteC, note2
+	mus_note noteB, note8
+	mus_note noteC, note4_8_16
+	mus_note noteB, note4_8
+	mus_note noteC, note4_8_16
+	mus_note noteB, note4_8
+	mus_note noteC, note4_8_16
+	mus_note noteB, note4
+	mus_note noteC, note4_8_16
+	mus_note noteB, note4_8
+	mus_note noteC, note4_8_16
+	mus_note noteB, note4_8
+	mus_note noteC, note2_16
+	mus_note noteB, note4
+	mus_note noteC, note2_16
+	mus_jump 0, Cities1_md_4
+	
+branch_ad36:
+	mus_note noteB, note4_8
+	mus_note noteC, note2_16
+	mus_note noteB, note4_8
+	mus_note noteC, note2_16
+	mus_note noteB, note4
+	mus_note noteC, note2_16
+	mus_note noteB, note4_8
+	mus_note noteC, note2_16
+	mus_note noteB, note4_8
+	mus_note noteC, note2_16
+	mus_note noteB, note8
+	mus_note noteC, note2_16
+	mus_note noteB, note8
+	mus_note noteC, note2_16
+	mus_end
+	; AD44
+
+	; AD45
+branch_ad45:
+	mus_note noteB, note4_8
+	mus_note noteC, note2_16
+	mus_note noteB, note4_8
+	mus_note noteC, note2_16
+	mus_note noteB, note4
+	mus_note noteC, note2_16
+	mus_note noteB, note4_8
+	mus_note noteC, note2_16
+	mus_note noteB, note4_8
+	mus_note noteC, note2_16
+	mus_note noteB, note4
+	mus_note noteC, note2_16
+	mus_end
+	; AD51
+
+	; AD52
+branch_ad52:
+	mus_note noteB, note4_8
+	mus_note noteC, note4_8_16
+	mus_note noteB, note4_8
+	mus_note noteC, note4_8_16
+	mus_note noteB, note4
+	mus_note noteC, note2
+	mus_note noteB, note4_8
+	mus_note noteC, note4_8_16
+	mus_note noteB, note4_8
+	mus_note noteC, note4_8_16
+	mus_note noteB, note4
+	mus_note noteC, note2
+	mus_end
+	; AD5E
+
+	; AD5F
+branch_ad5f:
+	mus_note noteB, note4_8
+	mus_note noteC, note4_8_16
+	mus_note noteB, note4_8
+	mus_note noteC, note4_8_16
+	mus_note noteB, note4
+	mus_note noteC, note2
+	mus_note noteB, note4_8
+	mus_note noteC, note4_8_16
+	mus_note noteB, note4_8
+	mus_note noteC, note4_8_16
+	mus_note noteB, note8
+	mus_note noteC, note2
+	mus_note noteB, note8
+	mus_note noteC, note4_8_16
+	mus_end
+	; AD6D
+
+	; AD6E
+branch_ad6e:
+	mus_note noteB, note4_8
+	mus_note noteC, note4_8_16
+	mus_note noteB, note4_8
+	mus_note noteC, note4_8_16
+	mus_note noteB, note8
+	mus_note noteC, note2
+	mus_note noteB, note8
+	mus_note noteC, note2
+	mus_end
+	; AD76
+
+	; AD77
+branch_ad77:
+	db $F8
+	mus_tempo 1, 0
+	mus_volume 119
+	mus_mod 6, 2, 6
+	mus_duty duty50
+	db $E8
+	db $D4
+	mus_note noteB, note8
+
+	mus_octave oct2
+	mus_note noteG#, note8
+	mus_note noteG#, note8
+	mus_note noteG#, note8
+	mus_vel 11, 3
+
+	mus_octave oct3
+	mus_note noteE, note4
+	mus_end
+	; AD8D
+
+	; AD8E
+branch_ad8e:
+	db $F8
+	mus_mod 8, 2, 7
+	mus_duty duty50
+	db $D4
+	mus_note noteRst, note8
+
+	mus_octave oct3
+	mus_note noteE, note8
+	mus_note noteE, note8
+	mus_note noteE, note8
+	mus_vel 12, 3
+	mus_note noteB, note4
+	mus_end
+	; AD9D
+
+	; AD9E
+branch_ad9e:
+	db $F8
+	db $D4
+	mus_note noteC#, note16
+
+	mus_octave oct3
+	mus_note noteB, note16
+	mus_note noteRst, note16
+	mus_note noteB, note16
+	mus_note noteRst, note16
+	mus_note noteB, note16
+	mus_note noteRst, note16
+	mus_vel 1, 0
+
+	mus_octave oct3
+	mus_note noteB, note8
+	mus_note noteRst, note8
+	mus_end
+	; ADAD
 
 ;Guy walks you to museum
 MuseumGuy_md_1: ;ADAE - ADF0
