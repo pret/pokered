@@ -6,15 +6,15 @@ from gbz80disasm import load_labels, find_label
 from extract_maps import calculate_pointer
 import sys
 spacing = "\t"
+rom = None
 
 def pretty_print_trainer_header(address, label=None):
     """make pretty text for a trainer header"""
+    global rom
     output = ""
     bank_id = 0
     if address > 0x4000:
         bank_id = address / 0x4000
-    
-    rom = open("../baserom.gbc", "r").read()
     
     #convert address to an integer if necessary
     if type(address) == str:
@@ -97,6 +97,12 @@ def pretty_print_trainer_header(address, label=None):
 
     return output
 
+def all_trainer_headers_at(address):
+    i = 0
+    while ord(rom[address + (i*12)]) != 0xff:
+        print pretty_print_trainer_header(address + (i*12))
+        i += 1
+
 def main():
     load_labels()
 
@@ -111,7 +117,11 @@ def main():
     address = int(args[0], 16)
     label = args[1]
 
-    print pretty_print_trainer_header(address, label)
+    global rom
+    rom = open("../baserom.gbc", "r").read()
+
+    #print pretty_print_trainer_header(address, label)
+    print all_trainer_headers_at(address)
 
 if __name__ == "__main__":
     main()
