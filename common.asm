@@ -108,8 +108,79 @@ jp Start
 
 Section "start",HOME[$150]
 Start: ; 0x150
+	cp $11 ; value that indicates Gameboy Color
+	jr z,.gbcDetected\@
+	xor a
+	jr .storeValue\@
+.gbcDetected\@
+	ld a,$00
+.storeValue\@
+	ld [$cf1a],a ; same value ($00) either way
+	jp InitGame
 
-INCBIN "baserom.gbc",$150,$1AE - $150
+; this function directly reads the joypad I/O register
+; it reads many times in order to give the joypad a chance to stabilize
+; it saves a result in [$fff8] in the following format
+; (set bit indicates pressed button)
+; bit 0 - A button
+; bit 1 - B button
+; bit 2 - Select button
+; bit 3 - Start button
+; bit 4 - Right
+; bit 5 - Left
+; bit 6 - Up
+; bit 7 - Down
+ReadJoypadRegister: ; 15F
+	ld a,%00100000 ; select direction keys
+	ld c,$00
+	ld [rJOYP],a
+	ld a,[rJOYP]
+	ld a,[rJOYP]
+	ld a,[rJOYP]
+	ld a,[rJOYP]
+	ld a,[rJOYP]
+	ld a,[rJOYP]
+	cpl ; complement the result so that a set bit indicates a pressed key
+	and a,%00001111
+	swap a ; put direction keys in upper nibble
+	ld b,a
+	ld a,%00010000 ; select button keys
+	ld [rJOYP],a
+	ld a,[rJOYP]
+	ld a,[rJOYP]
+	ld a,[rJOYP]
+	ld a,[rJOYP]
+	ld a,[rJOYP]
+	ld a,[rJOYP]
+	ld a,[rJOYP]
+	ld a,[rJOYP]
+	ld a,[rJOYP]
+	ld a,[rJOYP]
+	cpl ; complement the result so that a set bit indicates a pressed key
+	and a,%00001111
+	or b ; put button keys in lower nibble
+	ld [$fff8],a ; save joypad state
+	ld a,%00110000 ; unselect all keys
+	ld [rJOYP],a
+	ret
+
+; function to update the joypad state variables
+; output:
+; [$ffb2] = keys released since last time
+; [$ffb3] = keys pressed since last time
+; [$ffb4] = currently pressed keys
+GetJoypadState: ; 19A
+	ld a, [$ffb8]
+	push af
+	ld a,$3
+	ld [$ffb8],a
+	ld [$2000],a
+	call $4000
+	pop af
+	ld [$ff00+$b8],a
+	ld [$2000],a
+	ret
+
 ; see also MapHeaderBanks
 MapHeaderPointers: ; $01AE
 	dw PalletTown_h
@@ -419,7 +490,7 @@ OverworldLoopLessDelay: ; 402
 	ld a,[$d736]
 	bit 6,a ; jumping down a ledge?
 	call nz, HandleMidJump
-	ld a,[$cfc5] ; walking animation counter
+	ld a,[W_WALKCOUNTER]
 	and a
 	jp nz,.moveAhead\@ ; if the player sprite has not yet completed the walking animation
 	call GetJoypadStateOverworld ; get joypad state (which is possibly simulated)
@@ -622,7 +693,7 @@ OverworldLoopLessDelay: ; 402
 	jp c,OverworldLoop
 .noCollision\@
 	ld a,$08
-	ld [$cfc5],a ; walking animation counter
+	ld [W_WALKCOUNTER],a
 	jr .moveAhead2\@
 .moveAhead\@
 	ld a,[$d736]
@@ -645,7 +716,7 @@ OverworldLoopLessDelay: ; 402
 	call BikeSpeedup ; if riding a bike and not jumping a ledge
 .normalPlayerSpriteAdvancement\@
 	call AdvancePlayerSprite
-	ld a,[$cfc5] ; walking animation counter
+	ld a,[W_WALKCOUNTER]
 	and a
 	jp nz,CheckMapConnections ; it seems like this check will never succeed (the other place where CheckMapConnections is run works)
 ; walking animation finished
@@ -799,7 +870,7 @@ CheckWarpsNoCollisionLoop: ; 6CC
 	jr nz,WarpFound1
 	push de
 	push bc
-	call $019a ; update joypad state
+	call GetJoypadState
 	pop bc
 	pop de
 	ld a,[$ffb4] ; current joypad state
@@ -1823,7 +1894,7 @@ AdvancePlayerSprite: ; D27
 	ld b,a
 	ld a,[$c105] ; delta X
 	ld c,a
-	ld hl,$cfc5 ; walking animation counter
+	ld hl,W_WALKCOUNTER ; walking animation counter
 	dec [hl]
 	jr nz,.afterUpdateMapCoords\@
 ; if it's the end of the animation, update the player's map coordinates
@@ -1834,7 +1905,7 @@ AdvancePlayerSprite: ; D27
 	add c
 	ld [W_XCOORD],a
 .afterUpdateMapCoords\@
-	ld a,[$cfc5] ; walking animation counter
+	ld a,[W_WALKCOUNTER] ; walking animation counter
 	cp a,$07
 	jp nz,.scrollBackgroundAndSprites\@
 ; if this is the first iteration of the animation
@@ -2205,7 +2276,7 @@ GetJoypadStateOverworld: ; F4D
 	ld [$c103],a
 	ld [$c105],a
 	call RunMapScript
-	call $019a ; update joypad state
+	call GetJoypadState
 	ld a,[$d733]
 	bit 3,a ; check if a trainer wants a challenge
 	jr nz,.notForcedDownwards\@
@@ -2698,7 +2769,7 @@ LoadMapData: ; 1241
 	ld [$d526],a
 	ld [$ffaf],a
 	ld [$ffae],a
-	ld [$cfc5],a
+	ld [W_WALKCOUNTER],a
 	ld [$d119],a
 	ld [$d11a],a
 	ld [$d3a8],a
@@ -3456,7 +3527,7 @@ TextCommand09: ; 1BFF
 ; (no arguments)
 TextCommand0A: ; 1C1D
 	push bc
-	call $019a ; update joypad state
+	call GetJoypadState
 	ld a,[$ffb4]
 	and a,%00000011 ; A and B buttons
 	jr nz,.skipDelay\@
@@ -3533,7 +3604,7 @@ TextCommand0C: ; 1C78
 	ld a,$75 ; ellipsis
 	ld [hli],a
 	push de
-	call $019a ; update joypad state
+	call GetJoypadState
 	pop de
 	ld a,[$ffb4] ; joypad state
 	and a,%00000011 ; is A or B button pressed?
@@ -3617,7 +3688,128 @@ GetRowColAddressBgMap: ; 1CDD
 	ld h,a
 	ret
 
-INCBIN "baserom.gbc",$1CF0,$20AF - $1CF0
+; clears a VRAM background map with blank space tiles
+; INPUT: h - high byte of background tile map address in VRAM
+ClearBgMap: ; 1CF0
+	ld a,$7f ; blank space
+	jr .next\@
+	ld a,l ; XXX does anything call this?
+.next\@
+	ld de,$400 ; size of VRAM background map
+	ld l,e
+.loop\@
+	ld [hli],a
+	dec e
+	jr nz,.loop\@
+	dec d
+	jr nz,.loop\@
+	ret
+
+INCBIN "baserom.gbc",$1D01,$1F54 - $1D01
+
+; initialization code
+; explanation for %11100011 (value stored in rLCDC)
+; * LCD enabled
+; * Window tile map at $9C00
+; * Window display enabled
+; * BG and window tile data at $8800
+; * BG tile map at $9800
+; * 8x8 OBJ size
+; * OBJ display enabled
+; * BG display enabled
+InitGame: ; 1F54
+	di
+; zero I/O registers
+	xor a
+	ld [$ff0f],a
+	ld [$ffff],a
+	ld [$ff43],a
+	ld [$ff42],a
+	ld [$ff01],a
+	ld [$ff02],a
+	ld [$ff4b],a
+	ld [$ff4a],a
+	ld [$ff06],a
+	ld [$ff07],a
+	ld [$ff47],a
+	ld [$ff48],a
+	ld [$ff49],a
+	ld a,%10000000 ; enable LCD
+	ld [rLCDC],a
+	call DisableLCD ; why enable then disable?
+	ld sp,$dfff ; initialize stack pointer
+	ld hl,$c000 ; start of WRAM
+	ld bc,$2000 ; size of WRAM
+.zeroWramLoop\@
+	ld [hl],0
+	inc hl
+	dec bc
+	ld a,b
+	or c
+	jr nz,.zeroWramLoop\@
+	call ZeroVram
+	ld hl,$ff80
+	ld bc,$007f
+	call $36e0 ; zero HRAM
+	call CleanLCD_OAM ; this is unnecessary since it was already cleared above
+	ld a,$01
+	ld [$ffb8],a
+	ld [$2000],a
+	call $4bed ; copy DMA code to HRAM
+	xor a
+	ld [$ffd7],a
+	ld [$ff41],a
+	ld [$ffae],a
+	ld [$ffaf],a
+	ld [$ff0f],a
+	ld a,%00001101 ; enable V-blank, timer, and serial interrupts
+	ld [rIE],a
+	ld a,$90 ; put the window off the screen
+	ld [$ffb0],a
+	ld [rWX],a
+	ld a,$07
+	ld [rWY],a
+	ld a,$ff
+	ld [$ffaa],a
+	ld h,$98
+	call ClearBgMap ; fill $9800-$9BFF (BG tile map) with $7F tiles
+	ld h,$9c
+	call ClearBgMap ; fill $9C00-$9FFF (Window tile map) with $7F tiles
+	ld a,%11100011
+	ld [rLCDC],a ; enabled LCD
+	ld a,$10
+	ld [$ff8a],a
+	call $200e
+	ei
+	ld a,$40
+	call Predef ; SGB border
+	ld a,$1f
+	ld [$c0ef],a
+	ld [$c0f0],a
+	ld a,$9c
+	ld [$ffbd],a
+	xor a
+	ld [$ffbc],a
+	dec a
+	ld [$cfcb],a
+	ld a,$32
+	call Predef ; display the copyrights, GameFreak logo, and battle animation
+	call DisableLCD
+	call ZeroVram
+	call $3ddc
+	call CleanLCD_OAM
+	ld a,%11100011
+	ld [rLCDC],a ; enable LCD
+	jp $42b7
+
+; zeroes all VRAM
+ZeroVram: ; 2004
+	ld hl,$8000
+	ld bc,$2000
+	xor a
+	jp $36e0
+
+INCBIN "baserom.gbc",$200E,$20AF - $200E
 
 DelayFrame: ; 20AF
 ; delay for one frame
@@ -4101,7 +4293,7 @@ DisplayTextID: ; 2920
 	call $3865 ; wait for a button press after displaying all the text
 ; loop to hold the dialogue box open as long as the player keeps holding down the A button
 .holdBoxOpen\@
-	call $019a ; update joypad state
+	call GetJoypadState
 	ld a,[$ffb4]
 	bit 0,a ; is the A button being pressed?
 	jr nz,.holdBoxOpen\@
@@ -5208,7 +5400,7 @@ MainMenu: ; 0x5af2
 	ld [$FFB3],a
 	ld [$FFB2],a
 	ld [$FFB4],a
-	call $19A
+	call GetJoypadState
 	ld a,[$FFB4]
 	bit 0,a
 	jr nz,.next5\@
@@ -5226,7 +5418,7 @@ MainMenu: ; 0x5af2
 	and a
 	jp z,$5D5F
 	ld a,[W_CURMAP] ; map ID
-	cp a,$76 ; Hall of Fame
+	cp a,HALL_OF_FAME
 	jp nz,$5D5F
 	xor a
 	ld [$D71A],a
