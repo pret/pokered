@@ -3249,7 +3249,375 @@ ProtectedDelay3: ; 0x1b3a
 	pop bc
 	ret
 
-INCBIN "baserom.gbc",$1B40,$20AF - $1B40
+TextCommandProcessor: ; 1B40
+	ld a,[$d358]
+	push af
+	set 1,a
+	ld e,a
+	ld a,[$fff4]
+	xor e
+	ld [$d358],a
+	ld a,c
+	ld [$cc3a],a
+	ld a,b
+	ld [$cc3b],a
+
+NextTextCommand: ; 1B55
+	ld a,[hli]
+	cp a,$50 ; terminator
+	jr nz,.doTextCommand\@
+	pop af
+	ld [$d358],a
+	ret
+.doTextCommand\@
+	push hl
+	cp a,$17
+	jp z,TextCommand17
+	cp a,$0e
+	jp nc,TextCommand0B ; if a != 0x17 and a >= 0xE, go to command 0xB
+; if a < 0xE, use a jump table
+	ld hl,TextCommandJumpTable
+	push bc
+	add a
+	ld b,$00
+	ld c,a
+	add hl,bc
+	pop bc
+	ld a,[hli]
+	ld h,[hl]
+	ld l,a
+	jp [hl]
+
+; draw box
+; 04AAAABBCC
+; AAAA = address of upper left corner
+; BB = height
+; CC = width
+TextCommand04: ; 1B78
+	pop hl
+	ld a,[hli]
+	ld e,a
+	ld a,[hli]
+	ld d,a
+	ld a,[hli]
+	ld b,a
+	ld a,[hli]
+	ld c,a
+	push hl
+	ld h,d
+	ld l,e
+	call TextBoxBorder
+	pop hl
+	jr NextTextCommand
+
+; place string inline
+; 00{string}
+TextCommand00: ; 1B8A
+	pop hl
+	ld d,h
+	ld e,l
+	ld h,b
+	ld l,c
+	call PlaceString
+	ld h,d
+	ld l,e
+	inc hl
+	jr NextTextCommand
+
+; place string from RAM
+; 01AAAA
+; AAAA = address of string
+TextCommand01: ; 1B97
+	pop hl
+	ld a,[hli]
+	ld e,a
+	ld a,[hli]
+	ld d,a
+	push hl
+	ld h,b
+	ld l,c
+	call PlaceString
+	pop hl
+	jr NextTextCommand
+
+; print BCD number
+; 02AAAABB
+; AAAA = address of BCD number
+; BB
+; bits 0-4 = length in bytes
+; bits 5-7 = unknown flags
+TextCommand02: ; 1BA5
+	pop hl
+	ld a,[hli]
+	ld e,a
+	ld a,[hli]
+	ld d,a
+	ld a,[hli]
+	push hl
+	ld h,b
+	ld l,c
+	ld c,a
+	call $15cd
+	ld b,h
+	ld c,l
+	pop hl
+	jr NextTextCommand
+
+; repoint destination address
+; 03AAAA
+; AAAA = new destination address
+TextCommand03: ; 1BB7
+	pop hl
+	ld a,[hli]
+	ld [$cc3a],a
+	ld c,a
+	ld a,[hli]
+	ld [$cc3b],a
+	ld b,a
+	jp NextTextCommand
+
+; repoint destination to second line of dialogue text box
+; 05
+; (no arguments)
+TextCommand05: ; 1BC5
+	pop hl
+	ld bc,$c4e1 ; address of second line of dialogue text box
+	jp NextTextCommand
+
+; blink arrow and wait for A or B to be pressed
+; 06
+; (no arguments)
+TextCommand06: ; 1BCC
+	ld a,[W_ISLINKBATTLE]
+	cp a,$04
+	jp z,TextCommand0D
+	ld a,$ee ; down arrow
+	ld [$c4f2],a ; place down arrow in lower right corner of dialogue text box
+	push bc
+	call $3898 ; blink arrow and wait for A or B to be pressed
+	pop bc
+	ld a,$7f ; blank space
+	ld [$c4f2],a ; overwrite down arrow with blank space
+	pop hl
+	jp NextTextCommand
+
+; scroll text up one line
+; 07
+; (no arguments)
+TextCommand07: ; 1BE7
+	ld a,$7f ; blank space
+	ld [$c4f2],a ; place blank space in lower right corner of dialogue text box
+	call $1b18 ; scroll up text
+	call $1b18
+	pop hl
+	ld bc,$c4e1 ; address of second line of dialogue text box
+	jp NextTextCommand
+
+; execute asm inline
+; 08{code}
+TextCommand08: ; 1BF9
+	pop hl
+	ld de,NextTextCommand
+	push de ; return address
+	jp [hl]
+
+; print decimal number (converted from binary number)
+; 09AAAABB
+; AAAA = address of number
+; BB
+; bits 0-3 = how many digits to display
+; bits 4-7 = how long the number is in bytes
+TextCommand09: ; 1BFF
+	pop hl
+	ld a,[hli]
+	ld e,a
+	ld a,[hli]
+	ld d,a
+	ld a,[hli]
+	push hl
+	ld h,b
+	ld l,c
+	ld b,a
+	and a,$0f
+	ld c,a
+	ld a,b
+	and a,$f0
+	swap a
+	set 6,a
+	ld b,a
+	call $3c5f
+	ld b,h
+	ld c,l
+	pop hl
+	jp NextTextCommand
+
+; wait half a second if the user doesn't hold A or B
+; 0A
+; (no arguments)
+TextCommand0A: ; 1C1D
+	push bc
+	call $019a ; update joypad state
+	ld a,[$ffb4]
+	and a,%00000011 ; A and B buttons
+	jr nz,.skipDelay\@
+	ld c,30
+	call DelayFrames
+.skipDelay\@
+	pop bc
+	pop hl
+	jp NextTextCommand
+
+; plays sounds
+; this actually handles various command ID's, not just 0B
+; (no arguments)
+TextCommand0B: ; 1C31
+	pop hl
+	push bc
+	dec hl
+	ld a,[hli]
+	ld b,a ; b = command number that got us here
+	push hl
+	ld hl,TextCommandSounds
+.loop\@
+	ld a,[hli]
+	cp b
+	jr z,.matchFound\@
+	inc hl
+	jr .loop\@
+.matchFound\@
+	cp a,$14
+	jr z,.pokemonCry\@
+	cp a,$15
+	jr z,.pokemonCry\@
+	cp a,$16
+	jr z,.pokemonCry\@
+	ld a,[hl]
+	call $23b1
+	call $3748
+	pop hl
+	pop bc
+	jp NextTextCommand
+.pokemonCry\@
+	push de
+	ld a,[hl]
+	call $13d0
+	pop de
+	pop hl
+	pop bc
+	jp NextTextCommand
+
+; format: text command ID, sound ID or cry ID
+TextCommandSounds: ; 1C64
+db $0B,$86
+db $12,$9A
+db $0E,$91
+db $0F,$86
+db $10,$89
+db $11,$94
+db $13,$98
+db $14,$A8
+db $15,$97
+db $16,$78
+
+; draw ellipses
+; 0CAA
+; AA = number of ellipses to draw
+TextCommand0C: ; 1C78
+	pop hl
+	ld a,[hli]
+	ld d,a
+	push hl
+	ld h,b
+	ld l,c
+.loop\@
+	ld a,$75 ; ellipsis
+	ld [hli],a
+	push de
+	call $019a ; update joypad state
+	pop de
+	ld a,[$ffb4] ; joypad state
+	and a,%00000011 ; is A or B button pressed?
+	jr nz,.skipDelay\@ ; if so, skip the delay
+	ld c,10
+	call DelayFrames
+.skipDelay\@
+	dec d
+	jr nz,.loop\@
+	ld b,h
+	ld c,l
+	pop hl
+	jp NextTextCommand
+
+; wait for A or B to be pressed
+; 0D
+; (no arguments)
+TextCommand0D: ; 1C9A
+	push bc
+	call $3898 ; wait for A or B to be pressed
+	pop bc
+	pop hl
+	jp NextTextCommand
+
+; process text commands in another ROM bank
+; 17AAAABB
+; AAAA = address of text commands
+; BB = bank
+TextCommand17: ; 1CA3
+	pop hl
+	ld a,[$ffb8]
+	push af
+	ld a,[hli]
+	ld e,a
+	ld a,[hli]
+	ld d,a
+	ld a,[hli]
+	ld [$ffb8],a
+	ld [$2000],a
+	push hl
+	ld l,e
+	ld h,d
+	call TextCommandProcessor
+	pop hl
+	pop af
+	ld [$ffb8],a
+	ld [$2000],a
+	jp NextTextCommand
+
+TextCommandJumpTable: ; 1CC1
+dw TextCommand00
+dw TextCommand01
+dw TextCommand02
+dw TextCommand03
+dw TextCommand04
+dw TextCommand05
+dw TextCommand06
+dw TextCommand07
+dw TextCommand08
+dw TextCommand09
+dw TextCommand0A
+dw TextCommand0B
+dw TextCommand0C
+dw TextCommand0D
+
+; this function seems to be used only once
+; it store the address of a row and column of the VRAM background map in hl
+; INPUT: h - row, l - column, b - high byte of background tile map address in VRAM
+GetRowColAddressBgMap: ; 1CDD
+	xor a
+	srl h
+	rr a
+	srl h
+	rr a
+	srl h
+	rr a
+	or l
+	ld l,a
+	ld a,b
+	or h
+	ld h,a
+	ret
+
+INCBIN "baserom.gbc",$1CF0,$20AF - $1CF0
 
 DelayFrame: ; 20AF
 ; delay for one frame
@@ -4083,7 +4451,7 @@ MoveSprite: ; 363A
 
 .loop\@
 	ld a,[de]
-	ldi [hl],a
+	ld [hli],a
 	inc de
 	inc c
 	cp a,$FF ; have we reached the end of the movement data?
