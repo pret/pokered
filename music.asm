@@ -4889,7 +4889,130 @@ branch_adec:
 	; ADF0
 
 MuseumGuy_md_2: ;ADF1 - AE6D
-INCBIN "baserom.gbc",$adf1,$ae6e - $adf1
+	; ADF1
+	mus_duty duty50
+	mus_vel 12, 1
+
+	mus_octave oct3
+	mus_note noteE, note8
+	mus_note noteD, note8
+	mus_note noteC#, note8
+	mus_note noteD, note8
+	mus_note noteC#, note8
+
+	mus_octave oct2
+	mus_note noteB, note8
+	mus_note noteA, note8
+	mus_note noteG#, note8
+	mus_note noteE, note4
+	mus_note noteE, note16
+	mus_note noteG#, note16
+	mus_note noteB, note16
+
+	mus_octave oct3
+	mus_note noteD#, note16
+	mus_note noteE, note2
+
+	mus_octave oct2
+	mus_note noteA, note8
+
+	mus_octave oct3
+	mus_note noteC#, note8
+	mus_note noteE, note4
+	mus_note noteD, note8
+	mus_note noteF#, note8
+	mus_note noteA, note4
+
+	mus_octave oct2
+	mus_note noteA, note8
+
+	mus_octave oct3
+	mus_note noteC#, note8
+	mus_note noteE, note4
+	mus_note noteD, note8
+	mus_note noteC#, note8
+
+	mus_octave oct2
+	mus_note noteB, note4
+	mus_note noteA, note8
+
+	mus_octave oct3
+	mus_note noteC#, note8
+	mus_note noteE, note4
+	mus_note noteD, note8
+	mus_note noteF#, note8
+	mus_note noteA, note8
+	mus_note noteA, note8
+	mus_note noteG#, note8
+	mus_note noteE, note8
+	mus_note noteF#, note8
+	mus_note noteG#, note8
+	mus_note noteA, note8
+	mus_note noteA, note8
+	mus_note noteA, note4
+
+branch_ae26:
+	mus_octave oct2
+	mus_note noteA, note8
+
+	mus_octave oct3
+	mus_note noteC#, note8
+	mus_note noteE, note8_16
+	mus_vel 8, 1
+	mus_note noteE, note16
+	mus_vel 12, 1
+	mus_note noteD, note8
+	mus_note noteF#, note8
+	mus_note noteA, note8_16
+	mus_vel 9, 1
+	mus_note noteA, note16
+	mus_vel 12, 1
+
+	mus_octave oct2
+	mus_note noteA, note8
+
+	mus_octave oct3
+	mus_note noteC#, note8
+	mus_note noteE, note4
+	mus_note noteD, note16
+	mus_note noteC#, note16
+	mus_note noteC, note16
+
+	mus_octave oct2
+	mus_note noteB, note16
+	mus_note noteB, note8_16
+	mus_vel 10, 1
+	mus_note noteG#, note16
+	mus_vel 12, 1
+	mus_note noteA, note8
+
+	mus_octave oct3
+	mus_note noteC#, note8
+	mus_note noteE, note8_16
+	mus_vel 9, 1
+	mus_note noteE, note16
+	mus_vel 12, 1
+	mus_note noteD, note8
+	mus_note noteF#, note8
+	mus_note noteA, note8_16
+	mus_vel 8, 1
+	mus_note noteA, note16
+	mus_vel 12, 1
+	mus_note noteG#, note8
+	mus_note noteE, note16
+	mus_vel 8, 1
+	mus_note noteE, note16
+	mus_vel 12, 1
+	mus_note noteF#, note8
+	mus_vel 8, 1
+	mus_note noteF#, note16
+	mus_vel 12, 1
+	mus_note noteG#, note16
+	mus_note noteA, note8
+	mus_note noteA, note8
+	mus_note noteA, note4
+	mus_jump 0, branch_ae26
+	; AE6D
 
 MuseumGuy_md_3: ;AE6E - AED0
 INCBIN "baserom.gbc",$ae6e,$aed1 - $ae6e
