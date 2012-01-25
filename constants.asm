@@ -717,10 +717,15 @@ H_RAND2 EQU $FFD4
 H_WHOSETURN EQU $FFF3 ; 0 on player’s turn, 1 on enemy’s turn
 
 ; hardware registers, from the pandocs http://nocash.emubase.de/pandocs.htm
+rJOYP EQU $FF00
 rDIV EQU $FF04
+rLCDC EQU $FF40
 rBGP EQU $FF47
 rOBP0 EQU $FF48
 rOBP1 EQU $FF49
+rWX EQU $FF4A
+rWY EQU $FF4B
+rIE EQU $FFFF
 
 
 ; pokemon name constants
