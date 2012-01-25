@@ -4827,7 +4827,66 @@ branch_ad9e:
 
 ;Guy walks you to museum
 MuseumGuy_md_1: ;ADAE - ADF0
-INCBIN "baserom.gbc",$adae,$adf1 - $adae
+	; ADAE
+	mus_tempo 0, 128
+	mus_volume 119
+	mus_duty duty50
+	db $E8
+	mus_vel 11, 1
+
+	mus_octave oct2
+	mus_note noteB, note8
+	mus_note noteA, note8
+	mus_note noteG#, note8
+	mus_note noteA, note8
+	mus_note noteG#, note8
+	mus_note noteF#, note8
+	mus_note noteE, note8
+	mus_note noteD#, note8
+
+	mus_octave oct1
+	mus_note noteB, note4
+	mus_note noteB, note16
+
+	mus_octave oct2
+	mus_note noteD#, note16
+	mus_note noteE, note16
+	mus_note noteG#, note16
+	mus_note noteB, note2_8
+	mus_call branch_ade7
+	mus_call branch_adec
+	mus_call branch_ade7
+	mus_note noteE, note4
+	mus_note noteE, note4
+	mus_note noteE, note8
+	mus_note noteE, note4_8
+	
+branch_add6:
+	mus_call branch_ade7
+	mus_call branch_adec
+	mus_call branch_ade7
+	mus_note noteE, note4
+	mus_note noteE, note4
+	mus_note noteE, note8
+	mus_note noteE, note4_8
+	mus_jump 0, branch_add6
+	
+branch_ade7:
+	mus_note noteE, note8
+	mus_note noteE, note4_8
+	mus_note noteF#, note8
+	mus_note noteF#, note4_8
+	mus_end
+	; ADEB
+
+	; ADEC
+branch_adec:
+	mus_note noteE, note8
+	mus_note noteE, note4_8
+	mus_note noteD, note8
+	mus_note noteD, note4_8
+	mus_end
+	; ADF0
 
 MuseumGuy_md_2: ;ADF1 - AE6D
 INCBIN "baserom.gbc",$adf1,$ae6e - $adf1
