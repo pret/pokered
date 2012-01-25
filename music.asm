@@ -5261,7 +5261,84 @@ branch_aee1:
 
 ;Meet Prof. Oak
 MeetProfOak_md_1: ;AF59 - AFA8
-INCBIN "baserom.gbc",$af59,$afa9 - $af59
+	; AF59
+	mus_tempo 0, 112
+	mus_volume 119
+	mus_duty duty75
+	db $E8
+	mus_vel 11, 4
+
+	mus_octave oct2
+	mus_note noteF#, note16
+	mus_note noteB, note16
+
+	mus_octave oct3
+	mus_note noteD#, note16
+	mus_note noteE, note16
+	mus_note noteF#, note2_4
+	mus_vel 10, 2
+
+	mus_octave oct2
+	mus_note noteE, note4_8
+	mus_note noteB, note2_8
+	mus_note noteE, note4_8
+	mus_note noteB, note2_8
+	mus_note noteE, note4_8
+	mus_note noteD#, note4
+	mus_note noteF#, note8
+	mus_note noteF#, note4
+	mus_note noteE, note4_8
+	mus_note noteD#, note4
+	mus_note noteF#, note8
+	mus_note noteF#, note4
+	mus_note noteE, note4_8
+	mus_note noteB, note2_8
+	mus_note noteE, note4_8
+	mus_note noteB, note2_8
+	mus_note noteE, note4_8
+	mus_note noteD#, note4
+	mus_note noteF#, note8
+	mus_note noteF#, note4
+	mus_note noteE, note4_8
+	mus_note noteD#, note4
+	mus_note noteF#, note8
+	mus_note noteF#, note4
+	
+branch_af85:
+	mus_note noteF#, note4_8
+	mus_note noteE, note4
+	mus_note noteA, note8
+	mus_note noteA, note4
+	mus_note noteF#, note4_8
+	mus_note noteE, note4
+	mus_note noteA, note8
+	mus_note noteA, note4
+	mus_note noteF#, note4_8
+	mus_note noteE, note4
+	mus_note noteG#, note8
+	mus_note noteG#, note4
+	mus_note noteF#, note4_8
+	mus_note noteE, note4
+	mus_note noteG#, note8
+	mus_note noteG#, note4
+	mus_note noteE, note4_8
+	mus_note noteD#, note4
+	mus_note noteF#, note8
+	mus_note noteF#, note4
+	mus_note noteE, note4_8
+	mus_note noteD#, note4
+	mus_note noteF#, note8
+	mus_note noteF#, note4
+	mus_note noteF#, note4_8
+	mus_note noteE, note4
+	mus_note noteG#, note8
+	mus_note noteG#, note4
+	mus_note noteF#, note4_8
+	mus_note noteE, note4
+	mus_note noteG#, note8
+	mus_note noteG#, note4
+	mus_jump 0, branch_af85
+	; AFA8
 
 MeetProfOak_md_2: ;AFA9 - B03D
 INCBIN "baserom.gbc",$afa9,$b03d - $afa9
