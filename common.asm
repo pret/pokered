@@ -14293,12 +14293,13 @@ VermilionCityScript: ; 0x197a1
 	pop hl
 	bit 5, [hl]
 	res 5, [hl]
-	call nz, $57c0
+	call nz, VermilionCityScript_Unknown197c0
 	ld hl, VermilionCityScripts
 	ld a, [$d62a]
 	jp $3d97
 ; 0x197c0
 
+VermilionCityScript_Unknown197c0: ; 0x197c0
 INCBIN "baserom.gbc",$197c0,$197dc - $197c0
 
 VermilionCityScripts: ; 0x197dc
@@ -15016,9 +15017,9 @@ SilphCo4_h: ; 0x19cff to 0x19d0b (12 bytes) (bank=6) (id=209)
 	dw SilphCo4Object ; objects
 
 SilphCo4Script: ; 0x19d0b
-	call $5d21
+	call SilphCo4Script_Unknown19d21
 	call $3c3c
-	ld hl, $5dae
+	ld hl, SilphCo4TrainerHeaders
 	ld de, $5d9a
 	ld a, [$d645]
 	call $3160
@@ -15026,6 +15027,7 @@ SilphCo4Script: ; 0x19d0b
 	ret
 ; 0x19d21
 
+SilphCo4Script_Unknown19d21: ; 0x19d21
 INCBIN "baserom.gbc",$19d21,$7f
 
 SilphCo4Texts: ; 0x19da0
@@ -15190,7 +15192,7 @@ SilphCo5_h: ; 0x19f2b to 0x19f37 (12 bytes) (bank=6) (id=210)
 SilphCo5Script: ; 0x19f37
 	call Unnamed_19f4d
 	call $3c3c
-	ld hl, $5fd2
+	ld hl, SilphCo5TrainerHeaders
 	ld de, $5fb6
 	ld a, [$d646]
 	call $3160
@@ -15410,7 +15412,7 @@ SilphCo6_h: ; 0x1a19d to 0x1a1a9 (12 bytes) (bank=6) (id=211)
 SilphCo6Script: ; 0x1a1a9
 	call Unnamed_1a1bf
 	call $3c3c
-	ld hl, $620a
+	ld hl, SilphCo6TrainerHeaders
 	ld de, $61f0
 	ld a, [$d647]
 	call $3160
@@ -15424,6 +15426,7 @@ INCBIN "baserom.gbc",$1a1bf,$37
 SilphCo6Texts: ; 0x1a1f6
 	dw SilphCo6Text1, SilphCo6Text2, SilphCo6Text3, SilphCo6Text4, SilphCo6Text5, SilphCo6Text6, SilphCo6Text7, SilphCo6Text8, SilphCo6Text9, SilphCo6Text10
 
+SilphCo6TrainerHeaders:
 TrainerHeader_1a20a: ; 0x1a20a
 	db $6 ; flag's bit
 	db ($2 << 4) ; trainer's view range
@@ -17371,13 +17374,14 @@ ViridianMart_h: ; 0x1d462 to 0x1d46e (12 bytes) (bank=7) (id=42)
 	dw ViridianMartObject ; objects
 
 ViridianMartScript: ; 0x1d46e
-	call $547d
+	call ViridianMartScript_Unknown1d47d
 	call $3c3c
 	ld hl, $5495
 	ld a, [$d60d]
 	jp $3d97
 ; 0x1d47d
 
+ViridianMartScript_Unknown1d47d: ; 0x1d47d
 INCBIN "baserom.gbc",$1d47d,$1e
 
 ViridianMartScript0: ; 0x1d49b
@@ -19138,13 +19142,14 @@ PowerPlant_h: ; 0x1e2ba to 0x1e2c6 (12 bytes) (bank=7) (id=83)
 PowerPlantScript: ; 0x1e2c6
 	call $3c3c
 	ld hl, $62fb
-	ld de, $62d9
+	ld de, PowerPlantScript_Unknown1e2d9
 	ld a, [$d663]
 	call $3160
 	ld [$d663], a
 	ret
 ; 0x1e2d9
 
+PowerPlantScript_Unknown1e2d9: ; 0x1e2d9
 INCBIN "baserom.gbc",$1e2d9,$6
 
 PowerPlantTexts: ; 0x1e2df
@@ -19203,13 +19208,15 @@ PowerPlantText9: ; 0x1e3a4
 	db $8 ; asm
 	ld hl, $635b
 	jr asm_234cc ; 0x1e3a8 $be
-	rla ; probably a TX_FAR
-	ld [$ff00+c], a
-	ld b, l
-	inc hl
-	ld d, b
-	rla
-	ld [$2345], a
+; 0x1e3aa
+
+UnnamedText_1e3aa: ; 0x1e3aa
+	TX_FAR _UnnamedText_1e3aa ; 0x8c5e2
+	db $50
+; 0x1e3af
+
+UnnamedText_1e3af: ; 0x1e3af
+	TX_FAR _UnnamedText_1e3af ; 0x8c5ea
 	db $8
 	ld a, $4b
 	call $13d0
@@ -28599,7 +28606,7 @@ Mansion1_h: ; 0x442a3 to 0x442af (12 bytes) (bank=11) (id=165)
 Mansion1Script:
 	call Mansion1Subscript1
 	call $3c3c
-	ld hl, $4334
+	ld hl, Mansion1TrainerHeaders
 	ld de, $4326
 	ld a, [$d63a]
 	call $3160
@@ -28637,8 +28644,9 @@ Mansion1Subscript1: ; 0x442c5
 INCBIN "baserom.gbc",$44304,$4432c - $44304
 
 Mansion1Texts: ; 0x4432c
-INCBIN "baserom.gbc",$4432c,$44334 - $4432c
+	dw Mansion1Text1, Mansion1Text2, Mansion1Text3, Mansion1Text4
 
+Mansion1TrainerHeaders:
 TrainerHeader_44334: ; 0x44334
 	db $1 ; flag's bit
 	db ($3 << 4) ; trainer's view range
@@ -28672,9 +28680,9 @@ UnnamedText_44355: ; 0x44355
 	db $50
 ; 0x44355 + 5 bytes
 
-UnnamedText_4435a: ; 0x4435a
+Mansion1Text4: ; 0x4435a
 	db $8
-	ld hl, $4395
+	ld hl, UnnamedText_44395
 	call PrintText
 	call $35ec
 	ld a, [$cc26]
@@ -28684,7 +28692,7 @@ UnnamedText_4435a: ; 0x4435a
 	ld [$cc3c], a
 	ld hl, $d126
 	set 5, [hl]
-	ld hl, $439a
+	ld hl, UnnamedText_4439a
 	call PrintText
 	ld a, $ad
 	call $23b1
@@ -28695,7 +28703,7 @@ UnnamedText_4435a: ; 0x4435a
 	res 0, [hl]
 	jr .asm_44392 ; 0x4438a $6
 .asm_4438c
-	ld hl, $439f
+	ld hl, UnnamedText_4439f
 	call PrintText
 .asm_44392
 	jp TextScriptEnd
@@ -28976,7 +28984,7 @@ SeafoamIslands1Script: ; 0x447e9
 	bit 7, [hl]
 	res 7, [hl]
 	jr z, .asm_4483b ; 0x447f8 $41
-	ld hl, $4846
+	ld hl, SeafoamIslands1Script_Unknown44846
 	call $34e4
 	ret nc
 	ld hl, $d7e8
@@ -29007,10 +29015,11 @@ SeafoamIslands1Script: ; 0x447e9
 .asm_4483b
 	ld a, $9f
 	ld [$d71d], a
-	ld hl, $4846
+	ld hl, SeafoamIslands1Script_Unknown44846
 	jp $6981
 ; 0x44846
 
+SeafoamIslands1Script_Unknown44846: ; 0x44846
 INCBIN "baserom.gbc",$44846,$5
 
 SeafoamIslands1Texts: ; 0x4484b
@@ -29095,9 +29104,9 @@ VictoryRoad3_h: ; 0x44974 to 0x44980 (12 bytes) (bank=11) (id=198)
 	dw VictoryRoad3Object ; objects
 
 VictoryRoad3Script: ; 0x44980
-	call $4996
+	call VictoryRoad3Script_Unknown44996
 	call $3c3c
-	ld hl, $4a38
+	ld hl, VictoryRoad3TrainerHeaders
 	ld de, $49b1
 	ld a, [$d640]
 	call $3160
@@ -29105,6 +29114,7 @@ VictoryRoad3Script: ; 0x44980
 	ret
 ; 0x44996
 
+VictoryRoad3Script_Unknown44996: ; 0x44996
 INCBIN "baserom.gbc",$44996,$8e
 
 VictoryRoad3Texts: ; 0x44a24
@@ -29280,7 +29290,7 @@ RocketHideout1_h: ; 0x44bbe to 0x44bca (12 bytes) (bank=11) (id=199)
 RocketHideout1Script: ; 0x44bca
 	call Unknown_44be0
 	call $3c3c
-	ld hl, $4c22
+	ld hl, RocketHideout1TrainerHeaders
 	ld de, $4c0e
 	ld a, [$d631]
 	call $3160
@@ -29501,14 +29511,15 @@ RocketHideout2_h: ; 0x44e1b to 0x44e27 (12 bytes) (bank=11) (id=200)
 
 RocketHideout2Script: ; 0x44e27
 	call $3c3c
-	ld hl, $50d1
-	ld de, $4e3a
+	ld hl, RocketHideout2TrainerHeaders
+	ld de, RocketHideout2_Unknown44e3a
 	ld a, [$d632]
 	call $3160
 	ld [$d632], a
 	ret
 ; 0x44e3a
 
+RocketHideout2_Unknown44e3a: ; 0x44ea
 INCBIN "baserom.gbc",$44e3a,$28d
 
 RocketHideout2Texts: ; 0x450c7
@@ -29587,14 +29598,15 @@ RocketHideout3_h: ; 0x45219 to 0x45225 (12 bytes) (bank=11) (id=201)
 
 RocketHideout3Script: ; 0x45225
 	call $3c3c
-	ld hl, $5302
-	ld de, $5238
+	ld hl, RocketHideout3TrainerHeaders
+	ld de, RocketHideout3Script_Unknown45238
 	ld a, [$d633]
 	call $3160
 	ld [$d633], a
 	ret
 ; 0x45238
 
+RocketHideout3Script_Unknown45238: ; 0x45238
 INCBIN "baserom.gbc",$45238,$c2
 
 RocketHideout3Texts: ; 0x452fa
@@ -29909,7 +29921,7 @@ RocketHideoutElevatorScript: ; 0x45710
 	bit 5, [hl]
 	res 5, [hl]
 	push hl
-	call nz, $572c
+	call nz, RocketHideoutElevatorScript_Unknown4572c
 	pop hl
 	bit 7, [hl]
 	res 7, [hl]
@@ -29921,6 +29933,7 @@ RocketHideoutElevatorScript: ; 0x45710
 	ret
 ; 0x4572c
 
+RocketHideoutElevatorScript_Unknown4572c: ; 0x4572c
 INCBIN "baserom.gbc",$4572c,$3f
 
 RocketHideoutElevatorTexts: ; 0x4576b
@@ -29978,7 +29991,7 @@ SilphCoElevatorScript: ; 0x457c0
 	bit 5, [hl]
 	res 5, [hl]
 	push hl
-	call nz, $57dc
+	call nz, SilphCoElevatorScript_Unknown457dc
 	pop hl
 	bit 7, [hl]
 	res 7, [hl]
@@ -29990,6 +30003,7 @@ SilphCoElevatorScript: ; 0x457c0
 	ret
 ; 0x457dc
 
+SilphCoElevatorScript_Unknown457dc: ; 0x457dc
 INCBIN "baserom.gbc",$457dc,$57
 
 SilphCoElevatorTexts: ; 0x45833
@@ -30444,14 +30458,15 @@ UnknownDungeon3_h: ; 0x45ee4 to 0x45ef0 (12 bytes) (bank=11) (id=227)
 
 UnknownDungeon3Script: ; 0x45ef0
 	call $3c3c
-	ld hl, $5f0f
-	ld de, $5f03
+	ld hl, UnknownDungeon3TrainerHeaders
+	ld de, UnknownDungeon3Script_Unknown45f03
 	ld a, [$d650]
 	call $3160
 	ld [$d650], a
 	ret
 ; 0x45f03
 
+UnknownDungeon3Script_Unknown45f03: ; 0x45f03
 INCBIN "baserom.gbc",$45f03,$6
 
 UnknownDungeon3Texts: ; 0x45f09
@@ -30514,14 +30529,15 @@ RockTunnel2_h: ; 0x45fdf to 0x45feb (12 bytes) (bank=11) (id=232)
 
 RockTunnel2Script: ; 0x45feb
 	call $3c3c
-	ld hl, $6014
-	ld de, $5ffe
+	ld hl, RockTunnel2TrainerHeaders
+	ld de, RockTunnel2Script_Unknown45ffe
 	ld a, [$d620]
 	call $3160
 	ld [$d620], a
 	ret
 ; 0x45ffe
 
+RockTunnel2Script_Unknown45ffe: ; 0x45ffe
 INCBIN "baserom.gbc",$45ffe,$6
 
 RockTunnel2Texts: ; 0x46004
@@ -30822,7 +30838,7 @@ SeafoamIslands2Script: ; 0x46315
 	bit 7, [hl]
 	res 7, [hl]
 	jr z, .asm_46362 ; 0x4631f $41
-	ld hl, $636d
+	ld hl, SeafoamIslands2Script_Unknown4636d
 	call $34e4
 	ret nc
 	ld hl, $d87f
@@ -30853,10 +30869,11 @@ SeafoamIslands2Script: ; 0x46315
 .asm_46362
 	ld a, $a0
 	ld [$d71d], a
-	ld hl, $636d
+	ld hl, SeafoamIslands2Script_Unknown4636d
 	jp $6981
 ; 0x4636d
 
+SeafoamIslands2Script_Unknown4636d: ; 0x4636d
 INCBIN "baserom.gbc",$4636d,$5
 
 SeafoamIslands2Texts: ; 0x46372
@@ -30906,7 +30923,7 @@ SeafoamIslands3Script: ; 0x46451
 	bit 7, [hl]
 	res 7, [hl]
 	jr z, .asm_4649e ; 0x4645b $41
-	ld hl, $64a9
+	ld hl, SeafoamIslands3Script_Unknown464a9
 	call $34e4
 	ret nc
 	ld hl, $d880
@@ -30937,10 +30954,11 @@ SeafoamIslands3Script: ; 0x46451
 .asm_4649e
 	ld a, $a1
 	ld [$d71d], a
-	ld hl, $64a9
+	ld hl, SeafoamIslands3Script_Unknown464a9
 	jp $6981
 ; 0x464a9
 
+SeafoamIslands3Script_Unknown464a9: ; 0x464a9
 INCBIN "baserom.gbc",$464a9,$5
 
 SeafoamIslands3Texts: ; 0x464ae
@@ -30990,7 +31008,7 @@ SeafoamIslands4Script: ; 0x4658d
 	bit 7, [hl]
 	res 7, [hl]
 	jr z, .asm_465dc ; 0x46597 $43
-	ld hl, $65f6
+	ld hl, SeafoamIslands4Script_Unknown465f6
 	call $34e4
 	ret nc
 	ld hl, $d881
@@ -31022,7 +31040,7 @@ SeafoamIslands4Script: ; 0x4658d
 .asm_465dc
 	ld a, $a2
 	ld [$d71d], a
-	ld hl, $65f6
+	ld hl, SeafoamIslands4Script_Unknown465f6
 	call $6981
 	ld a, [$d732]
 	bit 4, a
@@ -31033,6 +31051,7 @@ SeafoamIslands4Script: ; 0x4658d
 	jp $3d97
 ; 0x465f6
 
+SeafoamIslands4Script_Unknown465f6: ; 0x465f6
 INCBIN "baserom.gbc",$465f6,$465fb - $465f6
 
 SeafoamIslands4Scripts: ; 0x465fb
@@ -31052,7 +31071,7 @@ SeafoamIslands4Script0: ; 0x46603
 	cp $f
 	ret nz
 	ld hl, $ccd3
-	ld de, $6632
+	ld de, SeafoamIslands4Script0_Unknown46632
 	call $350c
 	dec a
 	ld [$cd38], a
@@ -31064,6 +31083,7 @@ SeafoamIslands4Script0: ; 0x46603
 	ret
 ; 0x46632
 
+SeafoamIslands4Script0_Unknown46632: ; 0x46632
 INCBIN "baserom.gbc",$46632,$46639 - $46632
 
 SeafoamIslands4Script1: ; 0x46639
@@ -31325,7 +31345,8 @@ Route7Script: ; 0x48152
 	jp $3c3c
 ; 0x48155
 
-INCBIN "baserom.gbc",$48155,$2
+; XXX
+db $57, $41
 
 Route7Text1: ; 0x48157
 	TX_FAR _Route7Text1
@@ -31734,7 +31755,7 @@ CeladonMartElevatorScript: ; 0x48600
 	bit 5, [hl]
 	res 5, [hl]
 	push hl
-	call nz, $461c
+	call nz, CeladonMartElevatorScript_Unknown4861c
 	pop hl
 	bit 7, [hl]
 	res 7, [hl]
@@ -31746,6 +31767,7 @@ CeladonMartElevatorScript: ; 0x48600
 	ret
 ; 0x4861c
 
+CeladonMartElevatorScript_Unknown4861c: ; 0x4861c
 INCBIN "baserom.gbc",$4861c,$40
 
 CeladonMartElevatorTexts: ; 0x4865c
@@ -32105,9 +32127,9 @@ CeladonGymScript: ; 0x4890a
 	ld hl, $d126
 	bit 6, [hl]
 	res 6, [hl]
-	call nz, $4927
+	call nz, CeladonGymScript_Unknown48927
 	call $3c3c
-	ld hl, $49bc
+	ld hl, CeladonGymTrainerHeaders
 	ld de, $494e
 	ld a, [$d5ff]
 	call $3160
@@ -32115,6 +32137,7 @@ CeladonGymScript: ; 0x4890a
 	ret
 ; 0x48927
 
+CeladonGymScript_Unknown48927: ; 0x48927
 INCBIN "baserom.gbc",$48927,$7f
 
 CeladonGymTexts: ; 0x489a6
@@ -36989,13 +37012,13 @@ VictoryRoad2Script: ; 0x5179d
 	ld hl, $d126
 	bit 6, [hl]
 	res 6, [hl]
-	call nz, $57c4
+	call nz, VictoryRoad2Script_Unknown517c4
 	ld hl, $d126
 	bit 5, [hl]
 	res 5, [hl]
 	call nz, $57c9
 	call $3c3c
-	ld hl, $5835
+	ld hl, VictoryRoad2TrainerHeaders
 	ld de, $57eb
 	ld a, [$d63f]
 	call $3160
@@ -37003,11 +37026,13 @@ VictoryRoad2Script: ; 0x5179d
 	ret
 ; 0x517c4
 
+VictoryRoad2Script_Unknown517c4: ; 0x517c4
 INCBIN "baserom.gbc",$517c4,$57
 
 VictoryRoad2Texts: ; 0x5181b
 	dw VictoryRoad2Text1, VictoryRoad2Text2, VictoryRoad2Text3, VictoryRoad2Text4, VictoryRoad2Text5, VictoryRoad2Text6, VictoryRoad2Text7, VictoryRoad2Text8, VictoryRoad2Text9, VictoryRoad2Text10, VictoryRoad2Text11, VictoryRoad2Text12, VictoryRoad2Text13
 
+VictoryRoad2TrainerHeaders:
 TrainerHeader_51835: ; 0x51835
 	db $1 ; flag's bit
 	db ($4 << 4) ; trainer's view range
@@ -37291,9 +37316,9 @@ SilphCo7_h: ; 0x51b55 to 0x51b61 (12 bytes) (id=212)
 	dw SilphCo7Object ; objects
 
 SilphCo7Script: ; 0x51b61
-	call $5b77
+	call SilphCo7Script_Unknown51b77
 	call $3c3c
-	ld hl, $5d5d
+	ld hl, SilphCo7TrainerHeaders
 	ld de, $5c17
 	ld a, [$d648]
 	call $3160
@@ -37301,11 +37326,13 @@ SilphCo7Script: ; 0x51b61
 	ret
 ; 0x51b77
 
+SilphCo7Script_Unknown51b77: ; 0x5177
 INCBIN "baserom.gbc",$51b77,$1c8
 
 SilphCo7Texts: ; 0x51d3f
 	dw SilphCo7Text1, SilphCo7Text2, SilphCo7Text3, SilphCo7Text4, SilphCo7Text5, SilphCo7Text6, SilphCo7Text7, SilphCo7Text8, SilphCo7Text9, SilphCo7Text10, SilphCo7Text11, SilphCo7Text12, SilphCo7Text13, SilphCo7Text14, SilphCo7Text15
 
+SilphCo7TrainerHeaders:
 TrainerHeader_51d5d: ; 0x51d5d
 	db $5 ; flag's bit
 	db ($2 << 4) ; trainer's view range
@@ -37634,9 +37661,9 @@ Mansion2_h: ; 0x51fcc to 0x51fd8 (12 bytes) (id=214)
 	dw Mansion2Object ; objects
 
 Mansion2Script:
-	call $5fee
+	call Mansion2Script_Unknown51fee
 	call $3c3c
-	ld hl, $6057
+	ld hl, Mansion2TrainerHeaders
 	ld de, $6047
 	ld a, [$d63c]
 	call $3160
@@ -37644,6 +37671,7 @@ Mansion2Script:
 	ret
 ; 0x51fee
 
+Mansion2Script_Unknown51fee: ; 0x51fee
 INCBIN "baserom.gbc",$51fee,$5204d - $51fee
 
 Mansion2Texts: ; 0x5204d
@@ -39370,7 +39398,7 @@ Route5Text1: ; 0x556b7
 
 Route9Script: ; 0x556bc
 	call $3c3c
-	ld hl, $56eb
+	ld hl, Route9TrainerHeaders
 	ld de, Unknown_556cf
 	ld a, [$d604]
 	call $3160
@@ -39666,19 +39694,21 @@ Route9Text11: ; 0x55819
 
 Route13Script: ; 0x5581e
 	call $3c3c
-	ld hl, $5851
-	ld de, $5831
+	ld hl, Route13TrainerHeaders
+	ld de, Route13Script_Unknown55831
 	ld a, [$d61a]
 	call $3160
 	ld [$d61a], a
 	ret
 ; 0x55831
 
+Route13Script_Unknown55831: ; 0x55831
 INCBIN "baserom.gbc",$55831,$6
 
 Route13Texts: ; 0x55837
 	dw Route13Text1, Route13Text2, Route13Text3, Route13Text4, Route13Text5, Route13Text6, Route13Text7, Route13Text8, Route13Text9, Route13Text10, Route13Text11, Route13Text12, Route13Text13
 
+Route13TrainerHeaders:
 TrainerHeader_55851: ; 0x55851
 	db $1 ; flag's bit
 	db ($2 << 4) ; trainer's view range
@@ -43264,7 +43294,7 @@ Route10Text10: ; 0x59447
 
 Route11Script: ; 0x5944c
 	call $3c3c
-	ld hl, $547b
+	ld hl, Route11TrainerHeaders
 	ld de, Route11_Unknown5945f
 	ld a, [$d623]
 	call $3160
@@ -44742,7 +44772,7 @@ SilphCo2_h: ; 0x59ce5 to 0x59cf1 (12 bytes) (id=207)
 	dw SilphCo2Object ; objects
 
 SilphCo2Script: ; 0x59cf1
-	call $5d07
+	call SilphCo2_Unknown59d07
 	call $3c3c
 	ld hl, SilphCo2TrainerHeaders
 	ld de, $5d80
@@ -44752,6 +44782,7 @@ SilphCo2Script: ; 0x59cf1
 	ret
 ; 0x59d07
 
+SilphCo2_Unknown59d07: ; 0x59d07
 INCBIN "baserom.gbc",$59d07,$7f
 
 SilphCo2Texts: ; 0x59d86
@@ -45931,7 +45962,7 @@ PewterGymScript: ; 0x5c387
 	ld hl, $d126
 	bit 6, [hl]
 	res 6, [hl]
-	call nz, $43a4
+	call nz, PewterGymScript_Unknown5c3a4
 	call $3c3c
 	ld hl, PewterGymTrainerHeaders
 	ld de, $43ca
@@ -45941,6 +45972,7 @@ PewterGymScript: ; 0x5c387
 	ret
 ; 0x5c3a4
 
+PewterGymScript_Unknown5c3a4: ; 0x5c3ar
 INCBIN "baserom.gbc",$5c3a4,$91
 
 PewterGymTexts: ; 0x5c435
@@ -47113,7 +47145,7 @@ FightingDojo_h: ; 0x5cd51 to 0x5cd5d (12 bytes) (id=177)
 
 FightingDojoScript: ; 0x5cd5d
 	call $3c3c
-	ld hl, FightingDojoTrainerHeader1
+	ld hl, FightingDojoTrainerHeaders
 	ld de, $4d7b
 	ld a, [$d642]
 	call $3160
@@ -50632,10 +50664,11 @@ SSAnne7_h: ; 0x61889 to 0x61895 (12 bytes) (id=101)
 	dw SSAnne7Object ; objects
 
 SSAnne7Script: ; 0x61895
-	call $589b
+	call SSAnne7Script_Unknown6189b
 	jp $3c3c
 ; 0x6189b
 
+SSAnne7Script_Unknown6189b: ; 0x6189b
 INCBIN "baserom.gbc",$6189b,$c
 
 SSAnne7Texts: ; 0x618a7
@@ -50755,42 +50788,84 @@ SSAnne8_h: ; 0x6196a to 0x61976 (12 bytes) (id=102)
 
 SSAnne8Script: ; 0x61976
 	call $3c3c
-	ld hl, $59a5
-	ld de, $5989
+	ld hl, SSAnne8TrainerHeaders
+	ld de, SSAnne8Script_Unknown61989
 	ld a, [$d608]
 	call $3160
 	ld [$d608], a
 	ret
 ; 0x61989
 
+SSAnne8Script_Unknown61989: ; 0x61989
 INCBIN "baserom.gbc",$61989,$6
 
 SSAnne8Texts: ; 0x6198f
 	dw SSAnne8Text1, SSAnne8Text2, SSAnne8Text3, SSAnne8Text4, SSAnne8Text5, SSAnne8Text6, SSAnne8Text7, SSAnne8Text8, SSAnne8Text9, SSAnne8Text10, SSAnne8Text11
 
-INCBIN "baserom.gbc",$619a5,$31
+SSAnne8TrainerHeaders:
+SSAnne8TrainerHeader1: ; 0x619a5
+	db $1 ; flag's bit
+	db ($2 << 4) ; trainer's view range
+	dw $d805 ; flag's byte
+	dw UnnamedText_61a0b ; 0x5a0b TextBeforeBattle
+	dw UnnamedText_61a15 ; 0x5a15 TextAfterBattle
+	dw UnnamedText_61a10 ; 0x5a10 TextEndBattle
+	dw UnnamedText_61a10 ; 0x5a10 TextEndBattle
+; 0x619b1
+
+TrainerHeader_619b1: ; 0x619b1
+	db $2 ; flag's bit
+	db ($3 << 4) ; trainer's view range
+	dw $d805 ; flag's byte
+	dw UnnamedText_61a1a ; 0x5a1a TextBeforeBattle
+	dw UnnamedText_5a24 ; 0x5a24 TextAfterBattle
+	dw UnnamedText_61a1f ; 0x5a1f TextEndBattle
+	dw UnnamedText_61a1f ; 0x5a1f TextEndBattle
+; 0x619bd
+
+TrainerHeader_619bd: ; 0x619bd
+	db $3 ; flag's bit
+	db ($2 << 4) ; trainer's view range
+	dw $d805 ; flag's byte
+	dw UnnamedText_61a29 ; 0x5a29 TextBeforeBattle
+	dw UnnamedText_61a33 ; 0x5a33 TextAfterBattle
+	dw UnnamedText_61a2e ; 0x5a2e TextEndBattle
+	dw UnnamedText_61a2e ; 0x5a2e TextEndBattle
+; 0x619c9
+
+TrainerHeader_619c9: ; 0x619c9
+	db $4 ; flag's bit
+	db ($2 << 4) ; trainer's view range
+	dw $d805 ; flag's byte
+	dw UnnamedText_61a38 ; 0x5a38 TextBeforeBattle
+	dw UnnamedText_61a42 ; 0x5a42 TextAfterBattle
+	dw UnnamedText_61a3d ; 0x5a3d TextEndBattle
+	dw UnnamedText_61a3d ; 0x5a3d TextEndBattle
+; 0x619d5
+
+db $ff
 
 SSAnne8Text1: ; 0x619d6
 	db $08 ; asm
-	ld hl, $59a5
+	ld hl, SSAnne8TrainerHeader1
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 SSAnne8Text2: ; 0x619e0
 	db $08 ; asm
-	ld hl, $59b1
+	ld hl, TrainerHeader_619b1
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 SSAnne8Text3: ; 0x619ea
 	db $08 ; asm
-	ld hl, $59bd
+	ld hl, TrainerHeader_619bd
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 SSAnne8Text4: ; 0x619f4
 	db $08 ; asm
-	ld hl, $59c9
+	ld hl, TrainerHeader_619c9
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -50931,42 +51006,85 @@ SSAnne9Script: ; 0x61b4b
 	ld [$cf0c], a
 	xor a
 	ld [$cc3c], a
-	ld hl, $5b84
-	ld de, $5b64
+	ld hl, SSAnne9TrainerHeaders
+	ld de, SSAnne9Script_Unknown61b64
 	ld a, [$d609]
 	call $3160
 	ld [$d609], a
 	ret
 ; 0x61b64
 
+SSAnne9Script_Unknown61b64: ; 0x61b64
 INCBIN "baserom.gbc",$61b64,$6
 
 SSAnne9Texts: ; 0x61b6a
 	dw SSAnne9Text1, SSAnne9Text2, SSAnne9Text3, SSAnne9Text4, SSAnne9Text5, SSAnne9Text6, SSAnne9Text7, SSAnne9Text8, SSAnne9Text9, SSAnne9Text10, SSAnne9Text11, SSAnne9Text12, SSAnne9Text13
 
-INCBIN "baserom.gbc",$61b84,$31
+SSAnne9TrainerHeaders:
+SSAnne9TrainerHeader1: ; 0x61b84
+	db $1 ; flag's bit
+	db ($2 << 4) ; trainer's view range
+	dw $d807 ; flag's byte
+	dw UnnamedText_61c51 ; 0x5c51 TextBeforeBattle
+	dw UnnamedText_61c5b ; 0x5c5b TextAfterBattle
+	dw UnnamedText_61c56 ; 0x5c56 TextEndBattle
+	dw UnnamedText_61c56 ; 0x5c56 TextEndBattle
+; 0x61b90
+
+TrainerHeader_61b90: ; 0x61b90
+	db $2 ; flag's bit
+	db ($3 << 4) ; trainer's view range
+	dw $d807 ; flag's byte
+	dw UnnamedText_61c60 ; 0x5c60 TextBeforeBattle
+	dw UnnamedText_61c6a ; 0x5c6a TextAfterBattle
+	dw UnnamedText_61c65 ; 0x5c65 TextEndBattle
+	dw UnnamedText_61c65 ; 0x5c65 TextEndBattle
+; 0x61b9c
+
+TrainerHeader_61b9c: ; 0x61b9c
+	db $3 ; flag's bit
+	db ($3 << 4) ; trainer's view range
+	dw $d807 ; flag's byte
+	dw UnnamedText_61c6f ; 0x5c6f TextBeforeBattle
+	dw UnnamedText_61c79 ; 0x5c79 TextAfterBattle
+	dw UnnamedText_61c74 ; 0x5c74 TextEndBattle
+	dw UnnamedText_61c74 ; 0x5c74 TextEndBattle
+; 0x61ba8
+
+TrainerHeader_61ba8: ; 0x61ba8
+	db $4 ; flag's bit
+	db ($2 << 4) ; trainer's view range
+	dw $d807 ; flag's byte
+	dw UnnamedText_61c7e ; 0x5c7e TextBeforeBattle
+	dw UnnamedText_61c88 ; 0x5c88 TextAfterBattle
+	dw UnnamedText_61c83 ; 0x5c83 TextEndBattle
+	dw UnnamedText_61c83 ; 0x5c83 TextEndBattle
+; 0x61bb4
+
+
+db $ff
 
 SSAnne9Text1: ; 0x61bb5
 	db $08 ; asm
-	ld hl, $5b84
+	ld hl, SSAnne9TrainerHeader1
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 SSAnne9Text2: ; 0x61bbf
 	db $08 ; asm
-	ld hl, $5b90
+	ld hl, TrainerHeader_61b90
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 SSAnne9Text3: ; 0x61bc9
 	db $08 ; asm
-	ld hl, $5b9c
+	ld hl, TrainerHeader_61b9c
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 SSAnne9Text4: ; 0x61bd3
 	db $08 ; asm
-	ld hl, $5ba8
+	ld hl, TrainerHeader_61ba8
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -51169,54 +51287,116 @@ SSAnne10_h: ; 0x61d49 to 0x61d55 (12 bytes) (id=104)
 
 SSAnne10Script: ; 0x61d55
 	call $3c3c
-	ld hl, $5d84
-	ld de, $5d68
+	ld hl, SSAnne10TrainerHeaders
+	ld de, SSAnne10Script_Unknown61d68
 	ld a, [$d629]
 	call $3160
 	ld [$d629], a
 	ret
 ; 0x61d68
 
+SSAnne10Script_Unknown61d68: ; 0x61d68
 INCBIN "baserom.gbc",$61d68,$6
 
 SSAnne10Texts: ; 0x61d6e
 	dw SSAnne10Text1, SSAnne10Text2, SSAnne10Text3, SSAnne10Text4, SSAnne10Text5, SSAnne10Text6, SSAnne10Text7, SSAnne10Text8, SSAnne10Text9, SSAnne10Text10, SSAnne10Text11
 
-INCBIN "baserom.gbc",$61d84,$49
+SSAnne10TrainerHeaders:
+SSAnne10TrainerHeader1: ; 0x61d84
+	db $1 ; flag's bit
+	db ($2 << 4) ; trainer's view range
+	dw $d809 ; flag's byte
+	dw UnnamedText_61e16 ; 0x5e16 TextBeforeBattle
+	dw UnnamedText_61e20 ; 0x5e20 TextAfterBattle
+	dw UnnamedText_61e1b ; 0x5e1b TextEndBattle
+	dw UnnamedText_61e1b ; 0x5e1b TextEndBattle
+; 0x61d90
+
+TrainerHeader_61d90: ; 0x61d90
+	db $2 ; flag's bit
+	db ($3 << 4) ; trainer's view range
+	dw $d809 ; flag's byte
+	dw UnnamedText_61e25 ; 0x5e25 TextBeforeBattle
+	dw UnnamedText_61e2f ; 0x5e2f TextAfterBattle
+	dw UnnamedText_61e2a ; 0x5e2a TextEndBattle
+	dw UnnamedText_61e2a ; 0x5e2a TextEndBattle
+; 0x61d9c
+
+TrainerHeader_61d9c: ; 0x61d9c
+	db $3 ; flag's bit
+	db ($2 << 4) ; trainer's view range
+	dw $d809 ; flag's byte
+	dw UnnamedText_61e34 ; 0x5e34 TextBeforeBattle
+	dw UnnamedText_61e3e ; 0x5e3e TextAfterBattle
+	dw UnnamedText_61e39 ; 0x5e39 TextEndBattle
+	dw UnnamedText_61e39 ; 0x5e39 TextEndBattle
+; 0x61da8
+
+TrainerHeader_61da8: ; 0x61da8
+	db $4 ; flag's bit
+	db ($2 << 4) ; trainer's view range
+	dw $d809 ; flag's byte
+	dw UnnamedText_61e43 ; 0x5e43 TextBeforeBattle
+	dw UnnamedText_61e4d ; 0x5e4d TextAfterBattle
+	dw UnnamedText_61e48 ; 0x5e48 TextEndBattle
+	dw UnnamedText_61e48 ; 0x5e48 TextEndBattle
+; 0x61db4
+
+TrainerHeader_61db4: ; 0x61db4
+	db $5 ; flag's bit
+	db ($2 << 4) ; trainer's view range
+	dw $d809 ; flag's byte
+	dw UnnamedText_61e52 ; 0x5e52 TextBeforeBattle
+	dw UnnamedText_61e5c ; 0x5e5c TextAfterBattle
+	dw UnnamedText_61e57 ; 0x5e57 TextEndBattle
+	dw UnnamedText_61e57 ; 0x5e57 TextEndBattle
+; 0x61dc0
+
+TrainerHeader_61dc0: ; 0x61dc0
+	db $6 ; flag's bit
+	db ($3 << 4) ; trainer's view range
+	dw $d809 ; flag's byte
+	dw UnnamedText_61e61 ; 0x5e61 TextBeforeBattle
+	dw UnnamedText_61e6b ; 0x5e6b TextAfterBattle
+	dw UnnamedText_61e66 ; 0x5e66 TextEndBattle
+	dw UnnamedText_61e66 ; 0x5e66 TextEndBattle
+; 0x61dcc
+
+db $ff
 
 SSAnne10Text1: ; 0x61dcd
 	db $08 ; asm
-	ld hl, $5d84
+	ld hl, SSAnne10TrainerHeader1
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 SSAnne10Text2: ; 0x61dd7
 	db $08 ; asm
-	ld hl, $5d90
+	ld hl, TrainerHeader_61d90
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 SSAnne10Text3: ; 0x61de1
 	db $08 ; asm
-	ld hl, $5d9c
+	ld hl, TrainerHeader_61d9c
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 SSAnne10Text4: ; 0x61deb
 	db $08 ; asm
-	ld hl, $5da8
+	ld hl, TrainerHeader_61da8
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 SSAnne10Text5: ; 0x61df5
 	db $08 ; asm
-	ld hl, $5db4
+	ld hl, TrainerHeader_61db4
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 SSAnne10Text6: ; 0x61dff
 	db $08 ; asm
-	ld hl, $5dc0
+	ld hl, TrainerHeader_61dc0
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -51376,8 +51556,7 @@ UndergroundPathNSScript: ; 0x61f26
 ; 0x61f29
 
 UndergroundPathNSTexts:
-
-INCBIN "baserom.gbc",$61f29,$1
+	db $50
 
 UndergroundPathNSObject: ; 0x61f2a (size=20)
 	db $1 ; border tile
@@ -51466,9 +51645,9 @@ SilphCo11_h: ; 0x620ee to 0x620fa (12 bytes) (id=235)
 	dw SilphCo11Object ; objects
 
 SilphCo11Script: ; 0x620fa
-	call $6110
+	call SilphCo11Script_Unknown62110
 	call $3c3c
-	ld hl, $62c3
+	ld hl, SilphCo11TrainerHeaders
 	ld de, $61cf
 	ld a, [$d659]
 	call $3160
@@ -51476,12 +51655,34 @@ SilphCo11Script: ; 0x620fa
 	ret
 ; 0x62110
 
+SilphCo11Script_Unknown62110: ; 0x62110
 INCBIN "baserom.gbc",$62110,$1a7
 
 SilphCo11Texts: ; 0x622b7
 	dw SilphCo11Text1, SilphCo11Text2, SilphCo11Text3, SilphCo11Text4, SilphCo11Text5, SilphCo11Text6
 
-INCBIN "baserom.gbc",$622c3,$19
+SilphCo11TrainerHeaders:
+SilphCo11TrainerHeader1: ; 0x622c3
+	db $4 ; flag's bit
+	db ($4 << 4) ; trainer's view range
+	dw $d837 ; flag's byte
+	dw UnnamedText_62344 ; 0x6344 TextBeforeBattle
+	dw UnnamedText_6234e ; 0x634e TextAfterBattle
+	dw UnnamedText_62349 ; 0x6349 TextEndBattle
+	dw UnnamedText_62349 ; 0x6349 TextEndBattle
+; 0x622cf
+
+TrainerHeader_622cf: ; 0x622cf
+	db $5 ; flag's bit
+	db ($3 << 4) ; trainer's view range
+	dw $d837 ; flag's byte
+	dw UnnamedText_6235d ; 0x635d TextBeforeBattle
+	dw UnnamedText_62367 ; 0x6367 TextAfterBattle
+	dw UnnamedText_62362 ; 0x6362 TextEndBattle
+	dw UnnamedText_62362 ; 0x6362 TextEndBattle
+; 0x622db
+
+db $ff
 
 SilphCo11Text1: ; 0x622dc
 	db $08 ; asm
@@ -51548,7 +51749,7 @@ SilphCo11Text6: ; 0x62335
 
 SilphCo11Text4: ; 0x6233a
 	db $08 ; asm
-	ld hl, $62c3
+	ld hl, SilphCo11TrainerHeader1
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -51569,7 +51770,7 @@ UnnamedText_6234e: ; 0x6234e
 
 SilphCo11Text5: ; 0x62353
 	db $08 ; asm
-	ld hl, $62cf
+	ld hl, TrainerHeader_622cf
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -51588,7 +51789,14 @@ UnnamedText_62367: ; 0x62367
 	db $50
 ; 0x62367 + 5 bytes
 
-INCBIN "baserom.gbc",$6236c,$6237b - $6236c
+UnknownText_6236c: ; 0x6236c
+	db $8
+	ld hl, UnnamedText_6237b
+	call PrintText
+	ld a, $aa
+	call $349b
+	jp TextScriptEnd
+; 0x6237b
 
 UnnamedText_6237b: ; 0x6237b
 	TX_FAR _UnnamedText_6237b
@@ -51701,7 +51909,17 @@ UnnamedText_624df: ; 0x624df
 	db $50
 ; 0x624df + 5 bytes
 
-INCBIN "baserom.gbc",$624e4,$624f8 - $624e4
+UnnamedText_624e4: ; 0x624e4
+	db $8
+	ld a, [$d838]
+	bit 7, a
+	ld hl, UnnamedText_624fd
+	jr nz, .asm_624f2 ; 0x624ed $3
+	ld hl, UnnamedText_624f8
+.asm_624f2
+	call PrintText
+	jp TextScriptEnd
+; 0x624f8
 
 UnnamedText_624f8: ; 0x624f8
 	TX_FAR _UnnamedText_624f8
@@ -53130,7 +53348,7 @@ ViridianGymScript: ; 0x748a3
 	ld de, Gym8LeaderName
 	call $317f
 	call $3c3c
-	ld hl, $4a08
+	ld hl, ViridianGymTrainerHeaders
 	ld de, $48e1
 	ld a, [$d5fb]
 	call $3160
@@ -53148,7 +53366,88 @@ INCBIN "baserom.gbc",$748D6,$116
 ViridianGymTexts: ; 0x749ec
 	dw ViridianGymText1, ViridianGymText2, ViridianGymText3, ViridianGymText4, ViridianGymText5, ViridianGymText6, ViridianGymText7, ViridianGymText8, ViridianGymText9, ViridianGymText10, ViridianGymText11, ViridianGymText12, ViridianGymText13, ViridianGymText14
 
-INCBIN "baserom.gbc",$74a08,$61
+ViridianGymTrainerHeaders:
+ViridianGymTrainerHeader1: ; 0x74a08
+	db $2 ; flag's bit
+	db ($4 << 4) ; trainer's view range
+	dw $d751 ; flag's byte
+	dw UnnamedText_74afd ; 0x4afd TextBeforeBattle
+	dw UnnamedText_74b07 ; 0x4b07 TextAfterBattle
+	dw UnnamedText_74b02 ; 0x4b02 TextEndBattle
+	dw UnnamedText_74b02 ; 0x4b02 TextEndBattle
+; 0x74a14
+
+TrainerHeader_74a14: ; 0x74a14
+	db $3 ; flag's bit
+	db ($4 << 4) ; trainer's view range
+	dw $d751 ; flag's byte
+	dw UnnamedText_74b16 ; 0x4b16 TextBeforeBattle
+	dw UnnamedText_74b20 ; 0x4b20 TextAfterBattle
+	dw UnnamedText_74b1b ; 0x4b1b TextEndBattle
+	dw UnnamedText_74b1b ; 0x4b1b TextEndBattle
+; 0x74a20
+
+TrainerHeader_74a20: ; 0x74a20
+	db $4 ; flag's bit
+	db ($4 << 4) ; trainer's view range
+	dw $d751 ; flag's byte
+	dw UnnamedText_74b2f ; 0x4b2f TextBeforeBattle
+	dw UnnamedText_74b39 ; 0x4b39 TextAfterBattle
+	dw UnnamedText_74b34 ; 0x4b34 TextEndBattle
+	dw UnnamedText_74b34 ; 0x4b34 TextEndBattle
+; 0x74a2c
+
+TrainerHeader_74a2c: ; 0x74a2c
+	db $5 ; flag's bit
+	db ($2 << 4) ; trainer's view range
+	dw $d751 ; flag's byte
+	dw UnnamedText_74b48 ; 0x4b48 TextBeforeBattle
+	dw UnnamedText_74b52 ; 0x4b52 TextAfterBattle
+	dw UnnamedText_74b4d ; 0x4b4d TextEndBattle
+	dw UnnamedText_74b4d ; 0x4b4d TextEndBattle
+; 0x74a38
+
+TrainerHeader_74a38: ; 0x74a38
+	db $6 ; flag's bit
+	db ($3 << 4) ; trainer's view range
+	dw $d751 ; flag's byte
+	dw UnnamedText_74b61 ; 0x4b61 TextBeforeBattle
+	dw UnnamedText_74b6b ; 0x4b6b TextAfterBattle
+	dw UnnamedText_74b66 ; 0x4b66 TextEndBattle
+	dw UnnamedText_74b66 ; 0x4b66 TextEndBattle
+; 0x74a44
+
+TrainerHeader_74a44: ; 0x74a44
+	db $7 ; flag's bit
+	db ($4 << 4) ; trainer's view range
+	dw $d751 ; flag's byte
+	dw UnnamedText_74b7a ; 0x4b7a TextBeforeBattle
+	dw UnnamedText_74b84 ; 0x4b84 TextAfterBattle
+	dw UnnamedText_74b7f ; 0x4b7f TextEndBattle
+	dw UnnamedText_74b7f ; 0x4b7f TextEndBattle
+; 0x74a50
+
+TrainerHeader_74a50: ; 0x74a50
+	db $8 ; flag's bit
+	db ($3 << 4) ; trainer's view range
+	dw $d751 ; flag's byte
+	dw UnnamedText_74b93 ; 0x4b93 TextBeforeBattle
+	dw UnnamedText_74b9d ; 0x4b9d TextAfterBattle
+	dw UnnamedText_74b98 ; 0x4b98 TextEndBattle
+	dw UnnamedText_74b98 ; 0x4b98 TextEndBattle
+; 0x74a5c
+
+TrainerHeader_74a5c: ; 0x74a5c
+	db $9 ; flag's bit
+	db ($4 << 4) ; trainer's view range
+	dw $d751 ; flag's byte
+	dw UnnamedText_74bac ; 0x4bac TextBeforeBattle
+	dw UnnamedText_74bb6 ; 0x4bb6 TextAfterBattle
+	dw UnnamedText_74bb1 ; 0x4bb1 TextEndBattle
+	dw UnnamedText_74bb1 ; 0x4bb1 TextEndBattle
+; 0x74a68
+
+db $ff
 
 ViridianGymText1: ; 0x74a69
 	db $08 ; asm
@@ -53229,7 +53528,7 @@ ViridianGymText14: ; 0x74aee
 
 ViridianGymText2: ; 0x74af3
 	db $08 ; asm
-	ld hl, $4a08
+	ld hl, ViridianGymTrainerHeader1
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -53250,7 +53549,7 @@ UnnamedText_74b07: ; 0x74b07
 
 ViridianGymText3: ; 0x74b0c
 	db $08 ; asm
-	ld hl, $4a14
+	ld hl, TrainerHeader_74a14
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -53271,7 +53570,7 @@ UnnamedText_74b20: ; 0x74b20
 
 ViridianGymText4: ; 0x74b25
 	db $08 ; asm
-	ld hl, $4a20
+	ld hl, TrainerHeader_74a20
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -53292,7 +53591,7 @@ UnnamedText_74b39: ; 0x74b39
 
 ViridianGymText5: ; 0x74b3e
 	db $08 ; asm
-	ld hl, $4a2c
+	ld hl, TrainerHeader_74a2c
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -53313,7 +53612,7 @@ UnnamedText_74b52: ; 0x74b52
 
 ViridianGymText6: ; 0x74b57
 	db $08 ; asm
-	ld hl, $4a38
+	ld hl, TrainerHeader_74a38
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -53334,7 +53633,7 @@ UnnamedText_74b6b: ; 0x74b6b
 
 ViridianGymText7: ; 0x74b70
 	db $08 ; asm
-	ld hl, $4a44
+	ld hl, TrainerHeader_74a44
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -53355,7 +53654,7 @@ UnnamedText_74b84: ; 0x74b84
 
 ViridianGymText8: ; 0x74b89
 	db $08 ; asm
-	ld hl, $4a50
+	ld hl, TrainerHeader_74a50
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -53376,7 +53675,7 @@ UnnamedText_74b9d: ; 0x74b9d
 
 ViridianGymText9: ; 0x74ba2
 	db $08 ; asm
-	ld hl, $4a5c
+	ld hl, TrainerHeader_74a5c
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -54342,9 +54641,9 @@ FuchsiaGym_h: ; 0x75431 to 0x7543d (12 bytes) (id=157)
 	dw FuchsiaGymObject ; objects
 
 FuchsiaGymScript: ; 0x7543d
-	call $5453
+	call FuchsiaGymScript_Unknown75453
 	call $3c3c
-	ld hl, $54eb
+	ld hl, FuchsiaGymTrainerHeaders
 	ld de, $5482
 	ld a, [$d65b]
 	call $3160
@@ -54352,6 +54651,7 @@ FuchsiaGymScript: ; 0x7543d
 	ret
 ; 0x75453
 
+FuchsiaGymScript_Unknown75453: ; 0x75453
 INCBIN "baserom.gbc",$75453,$12
 
 Gym5CityName: ; 0x75465
@@ -54364,7 +54664,68 @@ INCBIN "baserom.gbc",$75477,$5E
 FuchsiaGymTexts: ; 0x754d5
 	dw FuchsiaGymText1, FuchsiaGymText2, FuchsiaGymText3, FuchsiaGymText4, FuchsiaGymText5, FuchsiaGymText6, FuchsiaGymText7, FuchsiaGymText8, FuchsiaGymText9, FuchsiaGymText10, FuchsiaGymText11
 
-INCBIN "baserom.gbc",$754eb,$49
+FuchsiaGymTrainerHeaders:
+FuchsiaGymTrainerHeader1: ; 0x754eb
+	db $2 ; flag's bit
+	db ($2 << 4) ; trainer's view range
+	dw $d792 ; flag's byte
+	dw UnnamedText_755ae ; 0x55ae TextBeforeBattle
+	dw UnnamedText_755b8 ; 0x55b8 TextAfterBattle
+	dw UnnamedText_755b3 ; 0x55b3 TextEndBattle
+	dw UnnamedText_755b3 ; 0x55b3 TextEndBattle
+; 0x754f7
+
+TrainerHeader_754f7: ; 0x754f7
+	db $3 ; flag's bit
+	db ($2 << 4) ; trainer's view range
+	dw $d792 ; flag's byte
+	dw UnnamedText_755c7 ; 0x55c7 TextBeforeBattle
+	dw UnnamedText_755d1 ; 0x55d1 TextAfterBattle
+	dw UnnamedText_755cc ; 0x55cc TextEndBattle
+	dw UnnamedText_755cc ; 0x55cc TextEndBattle
+; 0x75503
+
+TrainerHeader_75503: ; 0x75503
+	db $4 ; flag's bit
+	db ($4 << 4) ; trainer's view range
+	dw $d792 ; flag's byte
+	dw UnnamedText_755e0 ; 0x55e0 TextBeforeBattle
+	dw UnnamedText_755ea ; 0x55ea TextAfterBattle
+	dw UnnamedText_755e5 ; 0x55e5 TextEndBattle
+	dw UnnamedText_755e5 ; 0x55e5 TextEndBattle
+; 0x7550f
+
+TrainerHeader_7550f: ; 0x7550f
+	db $5 ; flag's bit
+	db ($2 << 4) ; trainer's view range
+	dw $d792 ; flag's byte
+	dw UnnamedText_755f9 ; 0x55f9 TextBeforeBattle
+	dw UnnamedText_75603 ; 0x5603 TextAfterBattle
+	dw UnnamedText_755fe ; 0x55fe TextEndBattle
+	dw UnnamedText_755fe ; 0x55fe TextEndBattle
+; 0x7551b
+
+TrainerHeader_7551b: ; 0x7551b
+	db $6 ; flag's bit
+	db ($2 << 4) ; trainer's view range
+	dw $d792 ; flag's byte
+	dw UnnamedText_75612 ; 0x5612 TextBeforeBattle
+	dw UnnamedText_7561c ; 0x561c TextAfterBattle
+	dw UnnamedText_75617 ; 0x5617 TextEndBattle
+	dw UnnamedText_75617 ; 0x5617 TextEndBattle
+; 0x75527
+
+TrainerHeader_75527: ; 0x75527
+	db $7 ; flag's bit
+	db ($2 << 4) ; trainer's view range
+	dw $d792 ; flag's byte
+	dw UnnamedText_7562b ; 0x562b TextBeforeBattle
+	dw UnnamedText_75635 ; 0x5635 TextAfterBattle
+	dw UnnamedText_75630 ; 0x5630 TextEndBattle
+	dw UnnamedText_75630 ; 0x5630 TextEndBattle
+; 0x75533
+
+db $ff
 
 FuchsiaGymText1: ; 0x75534
 	db $08 ; asm
@@ -54438,7 +54799,7 @@ FuchsiaGymText11: ; 0x7559f
 
 FuchsiaGymText2: ; 0x755a4
 	db $08 ; asm
-	ld hl, $54eb
+	ld hl, FuchsiaGymTrainerHeader1
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -54459,7 +54820,7 @@ UnnamedText_755b8: ; 0x755b8
 
 FuchsiaGymText3: ; 0x755bd
 	db $08 ; asm
-	ld hl, $54f7
+	ld hl, TrainerHeader_754f7
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -54480,7 +54841,7 @@ UnnamedText_755d1: ; 0x755d1
 
 FuchsiaGymText4: ; 0x755d6
 	db $08 ; asm
-	ld hl, $5503
+	ld hl, TrainerHeader_75503
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -54501,7 +54862,7 @@ UnnamedText_755ea: ; 0x755ea
 
 FuchsiaGymText5: ; 0x755ef
 	db $08 ; asm
-	ld hl, $550f
+	ld hl, TrainerHeader_7550f
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -54522,7 +54883,7 @@ UnnamedText_75603: ; 0x75603
 
 FuchsiaGymText6: ; 0x75608
 	db $08 ; asm
-	ld hl, $551b
+	ld hl, TrainerHeader_7551b
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -54543,7 +54904,7 @@ UnnamedText_7561c: ; 0x7561c
 
 FuchsiaGymText7: ; 0x75621
 	db $08 ; asm
-	ld hl, $5527
+	ld hl, TrainerHeader_75527
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -54667,13 +55028,14 @@ CinnabarGym_h: ; 0x7573e to 0x7574a (12 bytes) (id=166)
 	dw CinnabarGymObject ; objects
 
 CinnabarGymScript: ; 0x7574a
-	call $5759
+	call CinnabarGymScript_Unknown75759
 	call $3c3c
 	ld hl, CinnabarGymScripts
 	ld a, [$d65e]
 	jp $3d97
 ; 0x75759
 
+CinnabarGymScript_Unknown75759: ; 0x75759
 INCBIN "baserom.gbc",$75759,$7577B - $75759
 
 Gym7CityName: ; 0x7577B
@@ -55803,9 +56165,9 @@ Lorelei_h: ; 0x7616f to 0x7617b (12 bytes) (id=245)
 	dw LoreleiObject ; objects
 
 LoreleiScript: ; 0x7617b
-	call $6191
+	call LoreleiScript_Unknown76191
 	call $3c3c
-	ld hl, $6255
+	ld hl, LoreleiTrainerHeaders
 	ld de, $61bb
 	ld a, [$d64d]
 	call $3160
@@ -55813,16 +56175,28 @@ LoreleiScript: ; 0x7617b
 	ret
 ; 0x76191
 
+LoreleiScript_Unknown76191: ; 0x76191
 INCBIN "baserom.gbc",$76191,$c0
 
 LoreleiTexts: ; 0x76251
 	dw LoreleiText1, LoreleiText2
 
-INCBIN "baserom.gbc",$76255,$d
+LoreleiTrainerHeaders:
+LoreleiTrainerHeader1: ; 0x76255
+	db $1 ; flag's bit
+	db ($0 << 4) ; trainer's view range
+	dw $d863 ; flag's byte
+	dw UnnamedText_7626c ; 0x626c TextBeforeBattle
+	dw UnnamedText_76276 ; 0x6276 TextAfterBattle
+	dw UnnamedText_76271 ; 0x6271 TextEndBattle
+	dw UnnamedText_76271 ; 0x6271 TextEndBattle
+; 0x76261
+
+db $ff
 
 LoreleiText1: ; 0x76262
 	db $08 ; asm
-	ld hl, $6255
+	ld hl, LoreleiTrainerHeader1
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -55878,9 +56252,9 @@ Bruno_h: ; 0x762ca to 0x762d6 (12 bytes) (id=246)
 	dw BrunoObject ; objects
 
 BrunoScript: ; 0x762d6
-	call $62ec
+	call BrunoScript_Unknown762ec
 	call $3c3c
-	ld hl, $63ac
+	ld hl, BrunoTrainerHeaders
 	ld de, $6312
 	ld a, [$d64e]
 	call $3160
@@ -55888,16 +56262,28 @@ BrunoScript: ; 0x762d6
 	ret
 ; 0x762ec
 
+BrunoScript_Unknown762ec: ; 0x762ec
 INCBIN "baserom.gbc",$762ec,$bc
 
 BrunoTexts: ; 0x763a8
 	dw BrunoText1, BrunoText2
 
-INCBIN "baserom.gbc",$763ac,$d
+BrunoTrainerHeaders:
+BrunoTrainerHeader1: ; 0x763ac
+	db $1 ; flag's bit
+	db ($0 << 4) ; trainer's view range
+	dw $d864 ; flag's byte
+	dw UnnamedText_763c3 ; 0x63c3 TextBeforeBattle
+	dw UnnamedText_763cd ; 0x63cd TextAfterBattle
+	dw UnnamedText_763c8 ; 0x63c8 TextEndBattle
+	dw UnnamedText_763c8 ; 0x63c8 TextEndBattle
+; 0x763b8
+
+db $ff
 
 BrunoText1: ; 0x763b9
 	db $08 ; asm
-	ld hl, $63ac
+	ld hl, BrunoTrainerHeader1
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -55953,9 +56339,9 @@ Agatha_h: ; 0x76421 to 0x7642d (12 bytes) (id=247)
 	dw AgathaObject ; objects
 
 AgathaScript: ; 0x7642d
-	call $6443
+	call AgathaScript_Unknown76443
 	call $3c3c
-	ld hl, $6509
+	ld hl, AgathaTrainerHeaders
 	ld de, $6469
 	ld a, [$d64f]
 	call $3160
@@ -55963,16 +56349,28 @@ AgathaScript: ; 0x7642d
 	ret
 ; 0x76443
 
+AgathaScript_Unknown76443: ; 0x76443
 INCBIN "baserom.gbc",$76443,$c2
 
 AgathaTexts: ; 0x76505
 	dw AgathaText1, AgathaText2
 
-INCBIN "baserom.gbc",$76509,$d
+AgathaTrainerHeaders:
+AgathaTrainerHeader1: ; 0x76509
+	db $1 ; flag's bit
+	db ($0 << 4) ; trainer's view range
+	dw $d865 ; flag's byte
+	dw UnnamedText_76520 ; 0x6520 TextBeforeBattle
+	dw UnnamedText_7652a ; 0x652a TextAfterBattle
+	dw UnnamedText_76525 ; 0x6525 TextEndBattle
+	dw UnnamedText_76525 ; 0x6525 TextEndBattle
+; 0x76515
+
+db $ff
 
 AgathaText1: ; 0x76516
 	db $08 ; asm
-	ld hl, $6509
+	ld hl, AgathaTrainerHeader1
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -61848,11 +62246,11 @@ _RockTunnel1Text8: ; 0x8c5b7
 	db "CERULEAN CITY -", $55
 	db "LAVENDER TOWN", $57
 
-UnknownText_8c5e2: ; 0x8c5e2
+_UnnamedText_1e3aa: ; 0x8c5e2
 	db $0, "Bzzzt!", $57
 ; 0x8c5e2 + 8 bytes
 
-UnknownText_8c5ea: ; 0x8c5ea
+_UnnamedText_1e3af: ; 0x8c5ea
 	db $0, "Gyaoo!@@"
 ; 0x8c5ea + 9 bytes
 
