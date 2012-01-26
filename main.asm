@@ -4847,7 +4847,338 @@ AddNTimes: ; 3A87
 	jr nz,.loop\@
 	ret
 
-INCBIN "baserom.gbc",$3A8E,$3C49 - $3A8E
+; Compare strings, c bytes in length, at de and hl.
+; Often used to compare big endian numbers in battle calculations.
+StringCmp: ; 3A8E
+	ld a,[de]
+	cp [hl]
+	ret nz
+	inc de
+	inc hl
+	dec c
+	jr nz,StringCmp
+	ret
+
+; INPUT:
+; a = oam block index (each block is 4 oam entries)
+; b = Y coordinate of upper left corner of sprite
+; c = X coordinate of upper left corner of sprite
+; de = base address of 4 tile number and attribute pairs
+WriteOAMBlock: ; 3A97
+	ld h,$c3
+	swap a ; multiply by 16
+	ld l,a
+	call .writeOneEntry\@ ; upper left
+	push bc
+	ld a,8
+	add c
+	ld c,a
+	call .writeOneEntry\@ ; upper right
+	pop bc
+	ld a,8
+	add b
+	ld b,a
+	call .writeOneEntry\@ ; lower left
+	ld a,8
+	add c
+	ld c,a
+	                      ; lower right
+.writeOneEntry\@
+	ld [hl],b ; Y coordinate
+	inc hl
+	ld [hl],c ; X coordinate
+	inc hl
+	ld a,[de] ; tile number
+	inc de
+	ld [hli],a
+	ld a,[de] ; attribute
+	inc de
+	ld [hli],a
+	ret
+
+HandleMenuInput: ; 3ABE
+	xor a
+	ld [$d09b],a
+
+HandleMenuInputPokemonSelection: ; 3AC2
+	ld a,[H_DOWNARROWBLINKCNT1]
+	push af
+	ld a,[H_DOWNARROWBLINKCNT2]
+	push af ; save existing values on stack
+	xor a
+	ld [H_DOWNARROWBLINKCNT1],a ; blinking down arrow timing value 1
+	ld a,$06
+	ld [H_DOWNARROWBLINKCNT2],a ; blinking down arrow timing value 2
+.loop1\@
+	xor a
+	ld [$d08b],a ; counter for pokemon shaking animation
+	call PlaceMenuCursor
+	call Delay3
+.loop2\@
+	push hl
+	ld a,[$d09b]
+	and a ; is it a pokemon selection menu?
+	jr z,.getJoypadState\@
+	ld b,$1c
+	ld hl,$56ff ; shake mini sprite of selected pokemon
+	call Bankswitch
+.getJoypadState\@
+	pop hl
+	call GetJoypadStateLowSensitivity
+	ld a,[$ffb5]
+	and a ; was a key pressed?
+	jr nz,.keyPressed\@
+	push hl
+	FuncCoord 18,11 ; coordinates of blinking down arrow in some menus
+	ld hl,Coord
+	call $3c04 ; blink down arrow (if any)
+	pop hl
+	ld a,[W_MENUJOYPADPOLLCOUNT]
+	dec a
+	jr z,.giveUpWaiting\@
+	jr .loop2\@
+.giveUpWaiting\@
+; if a key wasn't pressed within the specified number of checks
+	pop af
+	ld [H_DOWNARROWBLINKCNT2],a
+	pop af
+	ld [H_DOWNARROWBLINKCNT1],a ; restore previous values
+	xor a
+	ld [W_MENUWRAPPINGENABLED],a ; disable menu wrapping
+	ret
+.keyPressed\@
+	xor a
+	ld [$cc4b],a
+	ld a,[$ffb5]
+	ld b,a
+	bit 6,a ; pressed Up key?
+	jr z,.checkIfDownPressed\@
+.upPressed\@
+	ld a,[W_CURMENUITEMID] ; selected menu item
+	and a ; already at the top of the menu?
+	jr z,.alreadyAtTop\@
+.notAtTop\@
+	dec a
+	ld [W_CURMENUITEMID],a ; move selected menu item up one space
+	jr .checkOtherKeys\@
+.alreadyAtTop\@
+	ld a,[W_MENUWRAPPINGENABLED]
+	and a ; is wrapping around enabled?
+	jr z,.noWrappingAround\@
+	ld a,[W_MAXMENUITEMID]
+	ld [W_CURMENUITEMID],a ; wrap to the bottom of the menu
+	jr .checkOtherKeys\@
+.checkIfDownPressed\@
+	bit 7,a
+	jr z,.checkOtherKeys\@
+.downPressed\@
+	ld a,[W_CURMENUITEMID]
+	inc a
+	ld c,a
+	ld a,[W_MAXMENUITEMID]
+	cp c
+	jr nc,.notAtBottom\@
+.alreadyAtBottom\@
+	ld a,[W_MENUWRAPPINGENABLED]
+	and a ; is wrapping around enabled?
+	jr z,.noWrappingAround\@
+	ld c,$00 ; wrap from bottom to top
+.notAtBottom\@
+	ld a,c
+	ld [W_CURMENUITEMID],a
+.checkOtherKeys\@
+	ld a,[W_MENUWATCHEDKEYS]
+	and b ; does the menu care about any of the pressed keys?
+	jp z,.loop1\@
+.checkIfAButtonOrBButtonPressed\@
+	ld a,[$ffb5]
+	and a,%00000011 ; pressed A button or B button?
+	jr z,.skipPlayingSound\@
+.AButtonOrBButtonPressed\@
+	push hl
+	ld hl,$cd60
+	bit 5,[hl]
+	pop hl
+	jr nz,.skipPlayingSound\@
+	ld a,$90
+	call $23b1 ; play sound
+.skipPlayingSound\@
+	pop af
+	ld [H_DOWNARROWBLINKCNT2],a
+	pop af
+	ld [H_DOWNARROWBLINKCNT1],a ; restore previous values
+	xor a
+	ld [W_MENUWRAPPINGENABLED],a ; disable menu wrapping
+	ld a,[$ffb5]
+	ret
+.noWrappingAround\@
+	ld a,[$cc37]
+	and a ; should we return if the user tried to go past the top or bottom?
+	jr z,.checkOtherKeys\@
+	jr .checkIfAButtonOrBButtonPressed\@
+
+PlaceMenuCursor: ; 3B7C
+	ld a,[W_TOPMENUITEMY]
+	and a ; is the y coordinate 0?
+	jr z,.adjustForXCoord\@
+	ld hl,$c3a0
+	ld bc,20 ; screen width
+.topMenuItemLoop\@
+	add hl,bc
+	dec a
+	jr nz,.topMenuItemLoop\@
+.adjustForXCoord\@
+	ld a,[W_TOPMENUITEMX]
+	ld b,$00
+	ld c,a
+	add hl,bc
+	push hl
+	ld a,[W_OLDMENUITEMID]
+	and a ; was the previous menu id 0?
+	jr z,.checkForArrow1\@
+	push af
+	ld a,[$fff6]
+	bit 1,a ; is the menu double spaced?
+	jr z,.doubleSpaced1\@
+	ld bc,20
+	jr .getOldMenuItemScreenPosition\@
+.doubleSpaced1\@
+	ld bc,40
+.getOldMenuItemScreenPosition\@
+	pop af
+.oldMenuItemLoop\@
+	add hl,bc
+	dec a
+	jr nz,.oldMenuItemLoop\@
+.checkForArrow1\@
+	ld a,[hl]
+	cp a,$ed ; was an arrow next to the previously selected menu item?
+	jr nz,.skipClearingArrow\@
+.clearArrow\@
+	ld a,[W_TILEBEHINDCURSOR]
+	ld [hl],a
+.skipClearingArrow\@
+	pop hl
+	ld a,[W_CURMENUITEMID]
+	and a
+	jr z,.checkForArrow2\@
+	push af
+	ld a,[$fff6]
+	bit 1,a ; is the menu double spaced?
+	jr z,.doubleSpaced2\@
+	ld bc,20
+	jr .getCurrentMenuItemScreenPosition\@
+.doubleSpaced2\@
+	ld bc,40
+.getCurrentMenuItemScreenPosition\@
+	pop af
+.currentMenuItemLoop\@
+	add hl,bc
+	dec a
+	jr nz,.currentMenuItemLoop\@
+.checkForArrow2\@
+	ld a,[hl]
+	cp a,$ed ; has the right arrow already been placed?
+	jr z,.skipSavingTile\@ ; if so, don't lose the saved tile
+	ld [W_TILEBEHINDCURSOR],a ; save tile before overwriting with right arrow
+.skipSavingTile\@
+	ld a,$ed ; place right arrow
+	ld [hl],a
+	ld a,l
+	ld [W_MENUCURSORLOCATION],a
+	ld a,h
+	ld [W_MENUCURSORLOCATION + 1],a
+	ld a,[W_CURMENUITEMID]
+	ld [W_OLDMENUITEMID],a
+	ret
+
+; Used when swapping positions of items in a list menu.
+; The item that the user selects first is marked with an outline of a right arrow
+; to distinguish it from the arrow being used to select the second item.
+PlaceUnfilledArrowMenuCursor: ; 3BEC
+	ld b,a
+	ld a,[W_MENUCURSORLOCATION]
+	ld l,a
+	ld a,[W_MENUCURSORLOCATION + 1]
+	ld h,a
+	ld [hl],$ec ; outline of right arrow
+	ld a,b
+	ret
+
+; Replaces the menu cursor with a blank space.
+EraseMenuCursor: ; 3BF9
+	ld a,[W_MENUCURSORLOCATION]
+	ld l,a
+	ld a,[W_MENUCURSORLOCATION + 1]
+	ld h,a
+	ld [hl],$7f ; blank space
+	ret
+
+; This toggles a blinking down arrow at hl on and off after a delay has passed.
+; This is often called even when no blinking is occurring.
+; The reason is that most functions that call this initialize H_DOWNARROWBLINKCNT1 to 0.
+; The effect is that if the tile at hl is initialized with a down arrow,
+; this function will toggle that down arrow on and off, but if the tile isn't
+; initliazed with a down arrow, this function does nothing.
+; That allows this to be called without worrying about if a down arrow should
+; be blinking.
+HandleDownArrowBlinkTiming: ; 3C04
+	ld a,[hl]
+	ld b,a
+	ld a,$ee ; down arrow
+	cp b
+	jr nz,.downArrowOff\@
+.downArrowOn\@
+	ld a,[H_DOWNARROWBLINKCNT1]
+	dec a
+	ld [H_DOWNARROWBLINKCNT1],a
+	ret nz
+	ld a,[H_DOWNARROWBLINKCNT2]
+	dec a
+	ld [H_DOWNARROWBLINKCNT2],a
+	ret nz
+	ld a,$7f ; blank space
+	ld [hl],a
+	ld a,$ff
+	ld [H_DOWNARROWBLINKCNT1],a
+	ld a,$06
+	ld [H_DOWNARROWBLINKCNT2],a
+	ret
+.downArrowOff\@
+	ld a,[H_DOWNARROWBLINKCNT1]
+	and a
+	ret z
+	dec a
+	ld [H_DOWNARROWBLINKCNT1],a
+	ret nz
+	dec a
+	ld [H_DOWNARROWBLINKCNT1],a
+	ld a,[H_DOWNARROWBLINKCNT2]
+	dec a
+	ld [H_DOWNARROWBLINKCNT2],a
+	ret nz
+	ld a,$06
+	ld [H_DOWNARROWBLINKCNT2],a
+	ld a,$ee ; down arrow
+	ld [hl],a
+	ret
+
+; The following code either enables or disables the automatic drawing of
+; text boxes by DisplayTextID. Both functions cause DisplayTextID to wait
+; for a button press after displaying text (unless [$cc47] is set).
+
+EnableAutoTextBoxDrawing: ; 3C3C
+	xor a
+	jr AutoTextBoxDrawingCommon
+
+DisableAutoTextBoxDrawing: ; 3C3F
+	ld a,$01
+
+AutoTextBoxDrawingCommon: ; 3C41
+	ld [$cf0c],a ; control text box drawing
+	xor a
+	ld [$cc3c],a ; make DisplayTextID wait for button press
+	ret
 
 PrintText: ; 3C49
 ; given a pointer in hl, print the text there
