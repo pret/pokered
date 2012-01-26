@@ -5910,7 +5910,138 @@ branch_b1a5:
 ; B1BA
 
 MeetRival_md_2: ;B1BB - B232
-INCBIN "baserom.gbc",$b1bb,$b233 - $b1bb
+; B1BB
+        mus_duty duty75
+        mus_mod 10, 2, 6
+        mus_vel 12, 7
+
+        mus_octave oct3
+                mus_note noteB, note16; B1C3
+                mus_note noteA#, note16
+                mus_note noteA, note16
+                mus_note noteG#, note16
+                mus_note noteG, note8
+                mus_note noteF#, note16; B1C8
+                mus_note noteF, note16
+                mus_note noteE, note16
+                mus_note noteD#, note16
+                mus_note noteD, note4_8
+
+        mus_octave oct2; B1CD
+                mus_note noteG, note16
+                mus_note noteRst, note8_16
+
+                mus_note noteG, note16
+                mus_note noteRst, note8_16
+
+                mus_note noteD, note16; B1D2
+                mus_note noteRst, note16
+
+        mus_octave oct3
+                mus_note noteD, note8
+                mus_note noteF, note8
+                mus_note noteF#, note8; B1D7
+
+branch_b1d8:
+        mus_vel 12, 7
+                mus_note noteG, note4
+                mus_note noteD, note8
+                mus_note noteF, note4_8
+                mus_note noteF#, note4; B1DD
+                mus_note noteG, note8
+                mus_note noteRst, note4
+
+                mus_note noteG, note4
+                mus_note noteG, note8
+                mus_note noteA#, note8; B1E2
+                mus_note noteB, note8
+
+        mus_octave oct4
+                mus_note noteC, note4
+
+        mus_octave oct3
+                mus_note noteG, note8; B1E7
+                mus_note noteA#, note4_8
+                mus_note noteB, note4
+
+        mus_octave oct4
+                mus_note noteC, note8
+                mus_note noteRst, note4; B1EC
+
+                mus_note noteC, note4
+                mus_note noteC, note8
+
+        mus_octave oct3
+                mus_note noteB, note8
+
+        mus_octave oct4; B1F1
+                mus_note noteC, note8
+
+        mus_vel 11, 0
+                mus_note noteD, note1
+
+        mus_vel 11, 5
+                mus_note noteD, note4_8; B1F8
+
+        mus_vel 12, 7
+                mus_note noteF, note4
+                mus_note noteD, note8
+                mus_note noteC, note8
+                mus_note noteD, note8; B1FE
+
+        mus_vel 11, 0
+                mus_note noteC, note2
+
+        mus_vel 12, 7
+                mus_note noteC, note2
+
+        mus_octave oct3; B205
+                mus_note noteC, note8
+                mus_note noteRst, note4
+
+                mus_note noteA#, note4
+                mus_note noteG, note8
+                mus_note noteF, note8; B20A
+
+        mus_vel 11, 0
+                mus_note noteG, note1
+
+        mus_vel 11, 3
+                mus_note noteG, note8
+
+        mus_octave oct2; B211
+                mus_note noteG, note8
+                mus_note noteRst, note4
+
+                mus_note noteG, note4
+
+        mus_octave oct3
+                mus_note noteD, note8; B216
+                mus_note noteF, note8
+                mus_note noteF#, note8
+
+        mus_jump 0, branch_b1d8
+        mus_duty duty75
+        mus_mod 10, 2, 6; B221
+        mus_vel 12, 7
+
+        mus_octave oct2
+                mus_note noteG, note16
+                mus_note noteRst, note8_16
+
+                mus_note noteG, note16; B227
+                mus_note noteRst, note8_16
+
+                mus_note noteD, note16
+                mus_note noteRst, note16
+
+        mus_octave oct3
+                mus_note noteD, note8; B22C
+                mus_note noteF, note8
+                mus_note noteF#, note8
+
+        mus_jump 0, branch_b1d8
+; B232
 
 MeetRival_md_3: ;B233 - B3A6
 INCBIN "baserom.gbc",$b233,$b3a7 - $b233
