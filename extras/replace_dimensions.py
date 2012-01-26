@@ -39,7 +39,7 @@ asm = None
 asm_lines = None
 def load_asm():
     global asm, asm_lines
-    asm = open("../common.asm", "r").read()
+    asm = open("../main.asm", "r").read()
     asm_lines = asm.split("\n")
 
 def get_xy_movement_of_connection_strip(map_id, connection_id):

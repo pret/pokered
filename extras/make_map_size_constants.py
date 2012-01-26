@@ -23,8 +23,8 @@ def get_map_size_constants(do_sed=False):
         output += constant_name + "_WIDTH  EQU $%.2x\n" % (width)
         output += "\n"
 
-        sed_lines += "sed -i 's/" + base_name + "Height/" + constant_name + "_HEIGHT" + "/g' common.asm" + "\n"
-        sed_lines += "sed -i 's/" + base_name + "Width/" + constant_name + "_WIDTH" + "/g' common.asm" + "\n"
+        sed_lines += "sed -i 's/" + base_name + "Height/" + constant_name + "_HEIGHT" + "/g' main.asm" + "\n"
+        sed_lines += "sed -i 's/" + base_name + "Width/" + constant_name + "_WIDTH" + "/g' main.asm" + "\n"
 
     if do_sed:
         return sed_lines

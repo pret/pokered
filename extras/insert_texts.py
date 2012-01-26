@@ -610,7 +610,7 @@ def scan_for_map_scripts_pointer():
 
 def scan_rom_for_tx_fars_and_insert():
     """calls analyze_texts.scan_rom_for_tx_fars()
-    looks through INCBIN'd addresses from common.asm,
+    looks through INCBIN'd addresses from main.asm,
     finds TX_FARs that aren't included yet.
     """
     x = 0

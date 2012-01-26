@@ -27,7 +27,7 @@ def offset_to_pointer(offset):
     if type(offset) == str: offset = int(offset, base)
     return int(offset) % 0x4000 + 0x4000
 
-def load_asm(filename="../common.asm"):
+def load_asm(filename="../main.asm"):
     "loads the asm source code into memory"
     global asm
     asm = open(filename, "r").read().split("\n")
@@ -86,7 +86,7 @@ def process_incbins():
 
 def find_incbin_to_replace_for(address):
     """returns a line number for which incbin to edit
-    if you were to insert bytes into common.asm"""
+    if you were to insert bytes into main.asm"""
     if type(address) == str: address = int(address, 16)
 
     for incbin_key in processed_incbins.keys():
@@ -155,7 +155,7 @@ def generate_diff_insert(line_number, newline):
     newfile_fh.close()
 
     try:
-        diffcontent = subprocess.check_output("diff -u ../common.asm " + newfile_filename, shell=True)
+        diffcontent = subprocess.check_output("diff -u ../main.asm " + newfile_filename, shell=True)
     except AttributeError, exc:
         raise exc
     except Exception, exc:
@@ -195,7 +195,7 @@ def insert_map_header_asm(map_id):
     fh.close()
 
     #apply the patch
-    os.system("patch ../common.asm temp.patch")
+    os.system("patch ../main.asm temp.patch")
     
     #remove the patch
     os.system("rm temp.patch")
@@ -230,8 +230,8 @@ def apply_diff(diff, try_fixing=True):
     fh.close()
 
     #apply the patch
-    os.system("cp ../common.asm ../common1.asm")
-    os.system("patch ../common.asm temp.patch")
+    os.system("cp ../main.asm ../main1.asm")
+    os.system("patch ../main.asm temp.patch")
 
     #remove the patch
     os.system("rm temp.patch")
@@ -242,7 +242,7 @@ def apply_diff(diff, try_fixing=True):
         return True
     except Exception, exc:
         if try_fixing:
-            os.system("mv ../common1.asm ../common.asm")
+            os.system("mv ../main1.asm ../main.asm")
         return False
 
 def index(seq, f):
