@@ -4821,7 +4821,122 @@ GetJoypadStateLowSensitivity: ; 3831
 	ld [$ffd5],a ; frame counter
 	ret
 
-INCBIN "baserom.gbc",$3865,$3927 - $3865
+INCBIN "baserom.gbc",$3865,$38AC - $3865
+
+; function to do multiplication
+; all values are big endian
+; INPUT
+; FF96-FF98 =  multiplicand
+; FF99 = multiplier
+; OUTPUT
+; FF95-FF98 = product
+Multiply: ; 38AC
+	push hl
+	push bc
+	ld hl,$7d41
+	ld b,$0d
+	call Bankswitch
+	pop bc
+	pop hl
+	ret
+
+; function to do division
+; all values are big endian
+; INPUT
+; FF95-FF98 = dividend
+; FF99 = divisor
+; b = number of signficant bytes in the dividend (starting from FF95)
+; all bytes considered "not signifcant" will be treated as 0
+; OUTPUT
+; FF95-FF98 = quotient
+; FF99 = remainder
+Divide: ; 38B9
+	push hl
+	push de
+	push bc
+	ld a,[$ffb8]
+	push af
+	ld a,$0d
+	ld [$ffb8],a
+	ld [$2000],a
+	call $7da5
+	pop af
+	ld [$ffb8],a
+	ld [$2000],a
+	pop bc
+	pop de
+	pop hl
+	ret
+
+; This function is used to wait a short period after printing a letter to the
+; screen unless the player presses the A/B button or the delay is turned off
+; through the [$d730] or [$d358] flags.
+PrintLetterDelay: ; 38D3
+	ld a,[$d730]
+	bit 6,a
+	ret nz
+	ld a,[$d358]
+	bit 1,a
+	ret z
+	push hl
+	push de
+	push bc
+	ld a,[$d358]
+	bit 0,a
+	jr z,.waitOneFrame\@
+	ld a,[$d355]
+	and a,$0f
+	ld [$ffd5],a ; frame counter
+	jr .checkButtons\@
+.waitOneFrame\@
+	ld a,1
+	ld [$ffd5],a ; frame counter
+.checkButtons\@
+	call GetJoypadState
+	ld a,[$ffb4]
+.checkAButton\@
+	bit 0,a ; is the A button pressed?
+	jr z,.checkBButton\@
+	jr .endWait\@
+.checkBButton\@
+	bit 1,a ; is the B button pressed?
+	jr z,.buttonsNotPressed\@
+.endWait\@
+	call DelayFrame
+	jr .done\@
+.buttonsNotPressed\@ ; if neither A nor B is pressed
+	ld a,[$ffd5] ; frame counter
+	and a
+	jr nz,.checkButtons\@
+.done\@
+	pop bc
+	pop de
+	pop hl
+	ret
+
+; Copies [hl, bc) to [de, bc - hl).
+; In other words, the source data is from hl up to but not including bc,
+; and the destination is de.
+CopyDataUntil: ; 3913
+	ld a,[hli]
+	ld [de],a
+	inc de
+	ld a,h
+	cp b
+	jr nz,CopyDataUntil
+	ld a,l
+	cp c
+	jr nz,CopyDataUntil
+	ret
+
+; Function to remove a pokemon from the party or the current box.
+; W_WHICHPOKEMON determines the pokemon.
+; [$cf95] == 0 specifies the party.
+; [$cf95] != 0 specifies the current box.
+RemovePokemon: ; 391F
+	ld hl,$7b68
+	ld b,$01
+	jp Bankswitch
 
 AddPokemonToParty: ; 0x3927
 	push hl
