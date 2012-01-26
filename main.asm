@@ -4269,7 +4269,7 @@ DisplayTextID: ; 2920
 	cp a,$f5   ; Vending Machine
 	jr nz,.notVendingMachine\@
 	ld b,$1d
-	ld hl,$4ee0
+	ld hl,Unknown_74ee0
 	call Bankswitch
 	jr .skipTextDisplay\@
 .notVendingMachine\@
@@ -53996,6 +53996,7 @@ CeruleanHouse3Object: ; 0x74ebe (size=34)
 	EVENT_DISP $4, $7, $2
 	EVENT_DISP $4, $7, $3
 
+Unknown_74ee0:
 INCBIN "baserom.gbc",$74ee0,$B9
 
 UnnamedText_74f99: ; 0x74f99
