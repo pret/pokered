@@ -89,8 +89,35 @@ TX_RAM: MACRO
 
 ; wram locations
 
+; coordinates of the position of the cursor for the top menu item (id 0)
+W_TOPMENUITEMY EQU $CC24
+W_TOPMENUITEMX EQU $CC25
+
+; the id of the currently selected menu item
+; the top item has id 0, the one below that has id 1, etc.
+W_CURMENUITEMID EQU $CC26
+
+; the tile that was behind the menu cursor's current location
+W_TILEBEHINDCURSOR EQU $CC27
+
+W_MAXMENUITEMID EQU $CC28 ; id of the bottom menu item
+
+W_MENUWATCHEDKEYS EQU $CC29 ; bit mask of keys that the menu will respond to
+
+W_OLDMENUITEMID EQU $CC2A ; id of previously selected menu item
+
+; how many times should HandleMenuInput poll the joypad state before it returns?
+W_MENUJOYPADPOLLCOUNT EQU $CC34
+
 W_PLAYERMOVELISTINDEX EQU $CC2E
 W_PLAYERMONNUMBER EQU $CC2F
+
+; the address of the menu cursor's current location within C3A0-C507
+W_MENUCURSORLOCATION EQU $CC30 ; 2 bytes
+
+; set to 1 if you can go from the bottom to the top or top to bottom of a menu
+; set to 0 if you can't go past the top or bottom of the menu
+W_MENUWRAPPINGENABLED EQU $CC4A
 
 ; current HP of player and enemy substitutes
 W_PLAYERSUBSITUTEHP EQU $CCD7
@@ -698,6 +725,10 @@ W_BOXITEM50QTY    EQU $D59E
 
 W_SAFARITIMER1 EQU $D70D ; use 01 for maximum
 W_SAFARITIMER2 EQU $D70E ; use F4 for maximum
+
+; counters for blinking down arrow
+H_DOWNARROWBLINKCNT1 EQU $FF8B
+H_DOWNARROWBLINKCNT2 EQU $FF8C
 
 ; Note: the following multiplication and division addresses are used for multiple purposes
 ; and so they overlap with each other

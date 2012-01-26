@@ -13,11 +13,12 @@
 #include "Modulation.h"
 #include "Note.h"
 #include "Octave.h"
-#include "Parser.h"
 #include "Stop.h"
 #include "Tempo.h"
 #include "Velocity.h"
 #include "Volume.h"
+#include "UnkCode.h"
+#include "UnkEB.h"
 
 // This is the final class, it takes all of the data types, abstract class, and helper functions and uses them
 // for parsing
@@ -49,30 +50,40 @@ public:
 	void Parse(unsigned int offset);
 	void ParseNext(); // Parses the block immidiately following
 
+	// Templates
+	template<class T>
+	bool ParseData(unsigned int& pos, bool reado = false);
+
+	const enum dataType : unsigned char
+	{
+		DATA_NA,
+		DATA_CALL,
+		DATA_DUTY,
+		DATA_JUMP,
+		DATA_MODULATION,
+		DATA_NOTE,
+		DATA_OCTAVE,
+		DATA_STOP,
+		DATA_TEMPO,
+		DATA_UNKCODE,
+		DATA_UNKEB,
+		DATA_VELOCITY,
+		DATA_VOLUME
+	};
+
 private:
 	std::string filename;
 	std::vector<AbstractData*> parsedBytes;
 	std::vector<std::string> parsedString;
 
 	char* rawBytes;
+	unsigned char* rawBytesFixed;
 	unsigned int fileLength;
 	unsigned int filePos;
 	bool stop;
 
 	// Optional Settings
 	unsigned int stopAddress;
-
-	// A lot of tmp classes
-	Call tmpCall;
-	Duty tmpDuty;
-	Jump tmpJump;
-	Modulation tmpModulation;
-	Note tmpNote;
-	Octave tmpOctave;
-	Stop tmpStop;
-	Tempo tmpTempo;
-	Velocity tmpVelocity;
-	Volume tmpVolume;
 };
 
 #endif
