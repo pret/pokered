@@ -56809,10 +56809,10 @@ AgathaTrainerHeader1: ; 0x76509
 	db $1 ; flag's bit
 	db ($0 << 4) ; trainer's view range
 	dw $d865 ; flag's byte
-	dw UnnamedText_76520 ; 0x6520 TextBeforeBattle
-	dw UnnamedText_7652a ; 0x652a TextAfterBattle
-	dw UnnamedText_76525 ; 0x6525 TextEndBattle
-	dw UnnamedText_76525 ; 0x6525 TextEndBattle
+	dw AgathaBeforeBattleText ; 0x6520 TextBeforeBattle
+	dw AgathaAfterBattleText ; 0x652a TextAfterBattle
+	dw AgathaAlreadyBattledText ; 0x6525 TextEndBattle
+	dw AgathaAlreadyBattledText ; 0x6525 TextEndBattle
 ; 0x76515
 
 db $ff
@@ -56823,23 +56823,23 @@ AgathaText1: ; 0x76516
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_76520: ; 0x76520
-	TX_FAR _UnnamedText_76520
+AgathaBeforeBattleText: ; 0x76520
+	TX_FAR _AgathaBeforeBattleText
 	db $50
 ; 0x76520 + 5 bytes
 
-UnnamedText_76525: ; 0x76525
-	TX_FAR _UnnamedText_76525
+AgathaAlreadyBattledText: ; 0x76525
+	TX_FAR _AgathaAlreadyBattledText
 	db $50
 ; 0x76525 + 5 bytes
 
-UnnamedText_7652a: ; 0x7652a
-	TX_FAR _UnnamedText_7652a
+AgathaAfterBattleText: ; 0x7652a
+	TX_FAR _AgathaAfterBattleText
 	db $50
 ; 0x7652a + 5 bytes
 
 AgathaText2: ; 0x7652f
-	TX_FAR _UnnamedText_7652f
+	TX_FAR _AgathaText2
 	db $50
 ; 0x7652f + 5 bytes
 
@@ -60415,7 +60415,7 @@ _UnnamedText_763d2: ; 0x8684b
 	db "Don't run away!", $57
 ; 0x8684b + 32 bytes
 
-_UnnamedText_76520: ; 0x8686b
+_AgathaBeforeBattleText: ; 0x8686b
 	db $0, "I am AGATHA of", $4f
 	db "the ELITE FOUR!", $51
 	db "OAK's taken a lot", $4f
@@ -60435,13 +60435,13 @@ _UnnamedText_76520: ; 0x8686b
 	db "trainer fights!", $57
 ; 0x8686b + 261 bytes
 
-_UnnamedText_76525: ; 0x86970
+_AgathaAlreadyBattledText: ; 0x86970
 	db $0, "Oh ho!", $4f
 	db "You're something", $55
 	db "special, child!", $58
 ; 0x86970 + 40 bytes
 
-_UnnamedText_7652a: ; 0x86998
+_AgathaAfterBattleText: ; 0x86998
 	db $0, "You win! I see", $4f
 	db "what the old duff", $55
 	db "sees in you now!", $51
@@ -60450,7 +60450,7 @@ _UnnamedText_7652a: ; 0x86998
 	db "along now, child!", $57
 ; 0x86998 + 101 bytes
 
-_UnnamedText_7652f: ; 0x869fd
+_AgathaText2: ; 0x869fd
 	db $0, "Someone's voice:", $4f
 	db "Don't run away!", $57
 ; 0x869fd + 32 bytes
