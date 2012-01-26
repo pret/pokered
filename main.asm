@@ -38274,7 +38274,7 @@ Mansion3TrainerHeader1: ; 0x52296
 	dw UnnamedText_522c8 ; 0x62c8 TextEndBattle
 ; 0x522a2
 
-TrainerHeader_522a2: ; 0x522a2
+Mansion3TrainerHeader2: ; 0x522a2
 	db $2 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d849 ; flag's byte
@@ -38294,7 +38294,7 @@ Mansion3Text1: ; 0x522af
 
 Mansion3Text2: ; 0x522b9
 	db $08 ; asm
-	ld hl, TrainerHeader_522a2
+	ld hl, Mansion3TrainerHeader2
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -38393,7 +38393,7 @@ Mansion4TrainerHeader1: ; 0x52448
 	dw UnnamedText_5247a ; 0x647a TextEndBattle
 ; 0x52454
 
-TrainerHeader_52454: ; 0x52454
+Mansion4TrainerHeader2: ; 0x52454
 	db $2 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d84b ; flag's byte
@@ -38413,7 +38413,7 @@ Mansion4Text1: ; 0x52461
 
 Mansion4Text2: ; 0x5246b
 	db $08 ; asm
-	ld hl, TrainerHeader_52454
+	ld hl, Mansion4TrainerHeader2
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
