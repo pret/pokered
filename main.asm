@@ -56811,8 +56811,8 @@ AgathaTrainerHeader1: ; 0x76509
 	dw $d865 ; flag's byte
 	dw AgathaBeforeBattleText ; 0x6520 TextBeforeBattle
 	dw AgathaAfterBattleText ; 0x652a TextAfterBattle
-	dw AgathaAlreadyBattledText ; 0x6525 TextEndBattle
-	dw AgathaAlreadyBattledText ; 0x6525 TextEndBattle
+	dw AgathaEndBattle ; 0x6525 TextEndBattle
+	dw AgathaEndBattle ; 0x6525 TextEndBattle
 ; 0x76515
 
 db $ff
@@ -56828,8 +56828,8 @@ AgathaBeforeBattleText: ; 0x76520
 	db $50
 ; 0x76520 + 5 bytes
 
-AgathaAlreadyBattledText: ; 0x76525
-	TX_FAR _AgathaAlreadyBattledText
+AgathaEndBattle: ; 0x76525
+	TX_FAR _AgathaEndBattle
 	db $50
 ; 0x76525 + 5 bytes
 
@@ -60435,7 +60435,7 @@ _AgathaBeforeBattleText: ; 0x8686b
 	db "trainer fights!", $57
 ; 0x8686b + 261 bytes
 
-_AgathaAlreadyBattledText: ; 0x86970
+_AgathaEndBattle: ; 0x86970
 	db $0, "Oh ho!", $4f
 	db "You're something", $55
 	db "special, child!", $58
