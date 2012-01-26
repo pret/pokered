@@ -14507,16 +14507,18 @@ CeruleanCityTexts: ; 0x1962d
 
 CeruleanCityText1: ; 0x1964f
 	db $08 ; asm
-	ld a, [$d75a]
+	ld a, [$d75a] ; rival battle flag
 	bit 0, a
-	jr z, .asm_a89f9 ; 0x19655
+	; do pre-battle text
+	jr z, .PreBattleText
+	; or talk about bill
 	ld hl, UnnamedText_19677
 	call PrintText
-	jr .asm_815c6 ; 0x1965d
-.asm_a89f9 ; 0x1965f
+	jr .end ; 0x1965d
+.PreBattleText ; 0x1965f
 	ld hl, UnnamedText_19668
 	call PrintText
-.asm_815c6 ; 0x19665
+.end ; 0x19665
 	jp TextScriptEnd
 
 UnnamedText_19668: ; 0x19668
