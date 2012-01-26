@@ -64,7 +64,9 @@ string Parser::GetParsedAsm()
 
 	for(unsigned int i = 0; i < parsedString.size(); i++)
 	{
-		tmpStr += parsedString[i] + "\n";
+		// Ensure each line isn't already a new-line, this prevents double or tripple empty lines from piling up
+		if(parsedString[i] != "\n") tmpStr += parsedString[i] + "\n";
+		else tmpStr += parsedString[i];
 	}
 
 	return tmpStr;
