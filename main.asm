@@ -14119,15 +14119,15 @@ CeruleanCityText2: ; 0x1967c
 	ld bc, $e401
 	call GiveItem
 	jr c, .asm_8bbbd ; 0x196b9 $8
-	ld hl, UnnamedText_196e9
+	ld hl, TM28NoRoomText
 	call PrintText
 	jr .asm_e4e6f ; 0x196c1 $13
 .asm_8bbbd ; 0x196c3
 	ld a, $1
 	ld [$cc3c], a
-	ld hl, UnnamedText_196de
+	ld hl, ReceivedTM28Text
 	call PrintText
-	ld b, $1d
+	ld b, BANK(Unnamed_ASM_74872)
 	ld hl, Unnamed_ASM_74872
 	call Bankswitch
 .asm_e4e6f ; 0x196d6
@@ -14139,15 +14139,15 @@ UnnamedText_196d9: ; 0x196d9
 	db $50
 ; 0x196d9 + 5 bytes
 
-UnnamedText_196de: ; 0x196de
-	TX_FAR ReceivedTM28Text ; 0xa4f82
+ReceivedTM28Text: ; 0x196de
+	TX_FAR _ReceivedTM28Text ; 0xa4f82
 	db $0B
-	TX_FAR UnnamedText_a4f96 ; 0xa4f96
+	TX_FAR _ReceivedTM28Text2 ; 0xa4f96
 	db $0D, $50
 ; 0x196e9
 
-UnnamedText_196e9: ; 0x196e9
-	TX_FAR _UnnamedText_196e9
+TM28NoRoomText: ; 0x196e9
+	TX_FAR _TM28NoRoomText
 	db $50
 ; 0x196e9 + 5 bytes
 
@@ -14396,11 +14396,11 @@ VermilionCityText3: ; 0x198b1
 	call $34bf
 	jr nc, .asm_57b73 ; 0x198c6
 .asm_07af3 ; 0x198c8
-	ld hl, UnnamedText_19904
+	ld hl, SSAnneWelcomeText4
 	call PrintText
 	jr .asm_79bd1 ; 0x198ce
 .asm_57b73 ; 0x198d0
-	ld hl, UnnamedText_19909
+	ld hl, SSAnneWelcomeText9
 	call PrintText
 	ld b, $3f
 	ld a, $1c
@@ -14408,45 +14408,45 @@ VermilionCityText3: ; 0x198b1
 	ld a, b
 	and a
 	jr nz, .asm_0419b ; 0x198df
-	ld hl, UnnamedText_19913
+	ld hl, SSAnneNoTicketText
 	call PrintText
 	jr .asm_79bd1 ; 0x198e7
 .asm_0419b ; 0x198e9
-	ld hl, UnnamedText_1990e
+	ld hl, SSAnneFlashedTicketText
 	call PrintText
 	ld a, $4
 	ld [$d62a], a
 	jr .asm_79bd1 ; 0x198f4
 .asm_3e0e9 ; 0x198f6
-	ld hl, UnnamedText_19918
+	ld hl, SSAnneNotHereText
 	call PrintText
 .asm_79bd1 ; 0x198fc
 	jp TextScriptEnd
 
 INCBIN "baserom.gbc",$198ff,$19904 - $198ff
 
-UnnamedText_19904: ; 0x19904
-	TX_FAR _UnnamedText_19904
+SSAnneWelcomeText4: ; 0x19904
+	TX_FAR _SSAnneWelcomeText4
 	db $50
 ; 0x19904 + 5 bytes
 
-UnnamedText_19909: ; 0x19909
-	TX_FAR _UnnamedText_19909
+SSAnneWelcomeText9: ; 0x19909
+	TX_FAR _SSAnneWelcomeText9
 	db $50
 ; 0x19909 + 5 bytes
 
-UnnamedText_1990e: ; 0x1990e
-	TX_FAR _UnnamedText_1990e
+SSAnneFlashedTicketText: ; 0x1990e
+	TX_FAR _SSAnneFlashedTicketText
 	db $50
 ; 0x1990e + 5 bytes
 
-UnnamedText_19913: ; 0x19913
-	TX_FAR _UnnamedText_19913
+SSAnneNoTicketText: ; 0x19913
+	TX_FAR _SSAnneNoTicketText
 	db $50
 ; 0x19913 + 5 bytes
 
-UnnamedText_19918: ; 0x19918
-	TX_FAR _UnnamedText_19918
+SSAnneNotHereText: ; 0x19918
+	TX_FAR _SSAnneNotHereText
 	db $50
 ; 0x19918 + 5 bytes
 
@@ -14525,43 +14525,43 @@ CeladonCityText5: ; 0x1999e
 	ld a, [$d777]
 	bit 0, a
 	jr nz, .asm_7053f ; 0x199a4
-	ld hl, UnnamedText_199d2
+	ld hl, TM41PreText
 	call PrintText
 	ld bc, (TM_41 << 8) | 1
 	call GiveItem
 	jr c, .asm_890ec ; 0x199b2
-	ld hl, UnnamedText_199e2
+	ld hl, TM41NoRoomText
 	call PrintText
 	jr .asm_c765a ; 0x199ba
 .asm_890ec ; 0x199bc
-	ld hl, UnnamedText_199d7
+	ld hl, ReceivedTM41Text
 	call PrintText
 	ld hl, $d777
 	set 0, [hl]
 	jr .asm_c765a ; 0x199c7
 .asm_7053f ; 0x199c9
-	ld hl, UnnamedText_199dd
+	ld hl, TM41ExplanationText
 	call PrintText
 .asm_c765a ; 0x199cf
 	jp TextScriptEnd
 
-UnnamedText_199d2: ; 0x199d2
-	TX_FAR _UnnamedText_199d2
+TM41PreText: ; 0x199d2
+	TX_FAR _TM41PreText
 	db $50
 ; 0x199d2 + 5 bytes
 
-UnnamedText_199d7: ; 0x199d7
-	TX_FAR _UnnamedText_199d7 ; 0xa5b5a
+ReceivedTM41Text: ; 0x199d7
+	TX_FAR _ReceivedTM41Text ; 0xa5b5a
 	db $0B, $50
 ; 0x199d7 + 6 bytes = 0x199dd
 
-UnnamedText_199dd: ; 0x199dd
-	TX_FAR _UnnamedText_199dd
+TM41ExplanationText: ; 0x199dd
+	TX_FAR _TM41ExplanationText
 	db $50
 ; 0x199dd + 5 bytes
 
-UnnamedText_199e2: ; 0x199e2
-	TX_FAR _UnnamedText_199e2
+TM41NoRoomText: ; 0x199e2
+	TX_FAR _TM41NoRoomText
 	db $50
 ; 0x199e2 + 5 bytes
 
@@ -14671,66 +14671,66 @@ FuchsiaCityText18: ; 0x19a8b
 
 FuchsiaCityText19: ; 0x19a90
 	db $08 ; asm
-	ld hl, UnnamedText_19a9f
+	ld hl, FuchsiaCityChanseyText
 	call PrintText
 	ld a, $28
 	call $349b
 	jp TextScriptEnd
 
-UnnamedText_19a9f: ; 0x19a9f
-	TX_FAR _UnnamedText_19a9f
+FuchsiaCityChanseyText: ; 0x19a9f
+	TX_FAR _FuchsiaCityChanseyText
 	db $50
 ; 0x19a9f + 5 bytes
 
 FuchsiaCityText20: ; 0x19aa4
 	db $08 ; asm
-	ld hl, UnnamedText_19ab3
+	ld hl, FuchsiaCityVoltorbText
 	call PrintText
 	ld a, $6
 	call $349b
 	jp TextScriptEnd
 
-UnnamedText_19ab3: ; 0x19ab3
-	TX_FAR _UnnamedText_19ab3
+FuchsiaCityVoltorbText: ; 0x19ab3
+	TX_FAR _FuchsiaCityVoltorbText
 	db $50
 ; 0x19ab3 + 5 bytes
 
 FuchsiaCityText21: ; 0x19ab8
 	db $08 ; asm
-	ld hl, UnnamedText_19ac7
+	ld hl, FuchsiaCityKangaskhanText
 	call PrintText
 	ld a, $2
 	call $349b
 	jp TextScriptEnd
 
-UnnamedText_19ac7: ; 0x19ac7
-	TX_FAR _UnnamedText_19ac7
+FuchsiaCityKangaskhanText: ; 0x19ac7
+	TX_FAR _FuchsiaCityKangaskhanText
 	db $50
 ; 0x19ac7 + 5 bytes
 
 FuchsiaCityText22: ; 0x19acc
 	db $08 ; asm
-	ld hl, UnnamedText_19adb
+	ld hl, FuchsiaCitySlowpokeText
 	call PrintText
 	ld a, $25
 	call $349b
 	jp TextScriptEnd
 
-UnnamedText_19adb: ; 0x19adb
-	TX_FAR _UnnamedText_19adb
+FuchsiaCitySlowpokeText: ; 0x19adb
+	TX_FAR _FuchsiaCitySlowpokeText
 	db $50
 ; 0x19adb + 5 bytes
 
 FuchsiaCityText23: ; 0x19ae0
 	db $08 ; asm
-	ld hl, UnnamedText_19aef
+	ld hl, FuchsiaCityLaprasText
 	call PrintText
 	ld a, $13
 	call $349b
 	jp TextScriptEnd
 
-UnnamedText_19aef: ; 0x19aef
-	TX_FAR _UnnamedText_19aef
+FuchsiaCityLaprasText: ; 0x19aef
+	TX_FAR _FuchsiaCityLaprasText
 	db $50
 ; 0x19aef + 5 bytes
 
@@ -14745,12 +14745,12 @@ FuchsiaCityText24: ; 0x19af4
 	call PrintText
 	jr .asm_4343f ; 0x19b06
 .asm_3b4e8 ; 0x19b08
-	ld hl, UnnamedText_19b20
+	ld hl, FuchsiaCityOmanyteText
 	call PrintText
 	ld a, $62
 	jr .asm_81556 ; 0x19b10
 .asm_667d5 ; 0x19b12
-	ld hl, UnnamedText_19b25
+	ld hl, FuchsiaCityKabutoText
 	call PrintText
 	ld a, $5a
 .asm_81556 ; 0x19b1a
@@ -14758,13 +14758,13 @@ FuchsiaCityText24: ; 0x19af4
 .asm_4343f ; 0x19b1d
 	jp TextScriptEnd
 
-UnnamedText_19b20: ; 0x19b20
-	TX_FAR _UnnamedText_19b20
+FuchsiaCityOmanyteText: ; 0x19b20
+	TX_FAR _FuchsiaCityOmanyteText
 	db $50
 ; 0x19b20 + 5 bytes
 
-UnnamedText_19b25: ; 0x19b25
-	TX_FAR _UnnamedText_19b25
+FuchsiaCityKabutoText: ; 0x19b25
+	TX_FAR _FuchsiaCityKabutoText
 	db $50
 ; 0x19b25 + 5 bytes
 
@@ -71337,18 +71337,18 @@ _UnnamedText_196d9: ; 0xa4f27
 	db "you believe me?", $57
 ; 0xa4f27 + 91 bytes
 
-ReceivedTM28Text: ; 0xa4f82
+_ReceivedTM28Text: ; 0xa4f82
 	db $0, $52, " recovered", $4f
 	db "TM28!@@"
 ; 0xa4f96
 
-UnnamedText_a4f96: ; 0xa4f96
+_ReceivedTM28Text2: ; 0xa4f96
 	db $0, $51
 	db "I better get", $4f
 	db "moving! Bye!@@"
 ; 0xa4fb3
 
-_UnnamedText_196e9: ; 0xa4fb3
+_TM28NoRoomText: ; 0xa4fb3
 	db $0, "Make room for", $4f
 	db "this!", $51
 	db "I can't run until", $4f
@@ -71556,26 +71556,26 @@ _UnnamedText_198ac: ; 0xa56e2
 	db "about a year.", $57
 ; 0xa56e2 + 59 bytes
 
-_UnnamedText_19904: ; 0xa571d
+_SSAnneWelcomeText4: ; 0xa571d
 	db $0, "Welcome to S.S.", $4f
 	db "ANNE!", $57
 ; 0xa571d + 23 bytes
 
-_UnnamedText_19909: ; 0xa5734
+_SSAnneWelcomeText9: ; 0xa5734
 	db $0, "Welcome to S.S.", $4f
 	db "ANNE!", $51
 	db "Excuse me, do you", $4f
 	db "have a ticket?", $58
 ; 0xa5734 + 56 bytes
 
-_UnnamedText_1990e: ; 0xa576c
+_SSAnneFlashedTicketText: ; 0xa576c
 	db $0, $52, " flashed", $4f
 	db "the S.S.TICKET!", $51
 	db "Great! Welcome to", $4f
 	db "S.S.ANNE!", $57
 ; 0xa576c + 55 bytes
 
-_UnnamedText_19913: ; 0xa57a3
+_SSAnneNoTicketText: ; 0xa57a3
 	db $0, $52, " doesn't", $4f
 	db "have the needed", $55
 	db "S.S.TICKET.", $51
@@ -71584,7 +71584,7 @@ _UnnamedText_19913: ; 0xa57a3
 	db "to get aboard.", $57
 ; 0xa57a3 + 78 bytes
 
-_UnnamedText_19918: ; 0xa57f1
+_SSAnneNotHereText: ; 0xa57f1
 	db $0, "The ship set sail.", $57
 ; 0xa57f1 + 20 bytes
 
@@ -71666,7 +71666,7 @@ _CeladonCityText4: ; 0xa5aa6
 	db "have cashed in my", $55
 	db "coins for prizes!", $57
 
-_UnnamedText_199d2: ; 0xa5afd
+_TM41PreText: ; 0xa5afd
 	db $0, "Hello, there!", $51
 	db "I've seen you,", $4f
 	db "but I never had a", $55
@@ -71675,14 +71675,14 @@ _UnnamedText_199d2: ; 0xa5afd
 	db "dropping by!", $58
 ; 0xa5afd + 93 bytes
 
-_UnnamedText_199d7: ; 0xa5b5a
+_ReceivedTM41Text: ; 0xa5b5a
 	db $0, $52, " received", $4f
 	db "@"
 	TX_RAM $cf4b
 	db $0, "!@@"
 ; 0xa5b6e
 
-_UnnamedText_199dd: ; 0xa5b6e
+_TM41ExplanationText: ; 0xa5b6e
 	db $0, "TM41 teaches", $4f
 	db "SOFTBOILED!", $51
 	db "Only one #MON", $4f
@@ -71691,7 +71691,7 @@ _UnnamedText_199dd: ; 0xa5b6e
 	db "CHANSEY!", $57
 ; 0xa5b6e + 74 bytes
 
-_UnnamedText_199e2: ; 0xa5bb8
+_TM41NoRoomText: ; 0xa5bb8
 	db $0, "Oh, your pack is", $4f
 	db "full of items!", $57
 ; 0xa5bb8 + 33 bytes
@@ -71819,19 +71819,19 @@ _FuchsiaCityText18: ; 0xa6011
 	db "The Poisonous", $4f
 	db "Ninja Master", $57
 
-_UnnamedText_19a9f: ; 0xa6050
+_FuchsiaCityChanseyText: ; 0xa6050
 	db $0, "Name: CHANSEY", $51
 	db "Catching one is", $4f
 	db "all up to chance.", $58
 ; 0xa6050 + 49 bytes
 
-_UnnamedText_19ab3: ; 0xa6081
+_FuchsiaCityVoltorbText: ; 0xa6081
 	db $0, "Name: VOLTORB", $51
 	db "The very image of", $4f
 	db "a # BALL.", $58
 ; 0xa6081 + 43 bytes
 
-_UnnamedText_19ac7: ; 0xa60ac
+_FuchsiaCityKangaskhanText: ; 0xa60ac
 	db $0, "Name: KANGASKHAN", $51
 	db "A maternal #MON", $4f
 	db "that raises its", $55
@@ -71839,26 +71839,26 @@ _UnnamedText_19ac7: ; 0xa60ac
 	db "on its belly.", $58
 ; 0xa60ac + 81 bytes
 
-_UnnamedText_19adb: ; 0xa60fd
+_FuchsiaCitySlowpokeText: ; 0xa60fd
 	db $0, "Name: SLOWPOKE", $51
 	db "Friendly and very", $4f
 	db "slow moving.", $58
 ; 0xa60fd + 47 bytes
 
-_UnnamedText_19aef: ; 0xa612c
+_FuchsiaCityLaprasText: ; 0xa612c
 	db $0, "Name: LAPRAS", $51
 	db "A.K.A. the king", $4f
 	db "of the seas.", $58
 ; 0xa612c + 43 bytes
 
-_UnnamedText_19b20: ; 0xa6157
+_FuchsiaCityOmanyteText: ; 0xa6157
 	db $0, "Name: OMANYTE", $51
 	db "A #MON that", $4f
 	db "was resurrected", $55
 	db "from a fossil.", $58
 ; 0xa6157 + 58 bytes
 
-_UnnamedText_19b25: ; 0xa6191
+_FuchsiaCityKabutoText: ; 0xa6191
 	db $0, "Name: KABUTO", $51
 	db "A #MON that", $4f
 	db "was resurrected", $55
