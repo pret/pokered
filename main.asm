@@ -45759,10 +45759,10 @@ LanceTrainerHeader1: ; 0x5a397
 	db $1 ; flag's bit
 	db ($0 << 4) ; trainer's view range
 	dw $d866 ; flag's byte
-	dw UnnamedText_5a3ae ; 0x63ae TextBeforeBattle
-	dw UnnamedText_5a3b8 ; 0x63b8 TextAfterBattle
-	dw UnnamedText_5a3b3 ; 0x63b3 TextEndBattle
-	dw UnnamedText_5a3b3 ; 0x63b3 TextEndBattle
+	dw LanceBeforeBattleText ; 0x63ae TextBeforeBattle
+	dw LanceAfterBattleText ; 0x63b8 TextAfterBattle
+	dw LanceEndBattleText ; 0x63b3 TextEndBattle
+	dw LanceEndBattleText ; 0x63b3 TextEndBattle
 ; 0x5a3a3
 
 db $ff
@@ -45773,18 +45773,18 @@ LanceText1: ; 0x5a3a4
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_5a3ae: ; 0x5a3ae
-	TX_FAR _UnnamedText_5a3ae
+LanceBeforeBattleText: ; 0x5a3ae
+	TX_FAR _LanceBeforeBattleText
 	db $50
 ; 0x5a3ae + 5 bytes
 
-UnnamedText_5a3b3: ; 0x5a3b3
-	TX_FAR _UnnamedText_5a3b3
+LanceEndBattleText: ; 0x5a3b3
+	TX_FAR _LanceEndBattleText
 	db $50
 ; 0x5a3b3 + 5 bytes
 
-UnnamedText_5a3b8: ; 0x5a3b8
-	TX_FAR _UnnamedText_5a3b8 ; 0x85e9e
+LanceAfterBattleText: ; 0x5a3b8
+	TX_FAR _LanceAfterBattleText ; 0x85e9e
 	db $8
 	ld hl, $d866
 	set 6, [hl]
@@ -56635,10 +56635,10 @@ LoreleiTrainerHeader1: ; 0x76255
 	db $1 ; flag's bit
 	db ($0 << 4) ; trainer's view range
 	dw $d863 ; flag's byte
-	dw UnnamedText_7626c ; 0x626c TextBeforeBattle
-	dw UnnamedText_76276 ; 0x6276 TextAfterBattle
-	dw UnnamedText_76271 ; 0x6271 TextEndBattle
-	dw UnnamedText_76271 ; 0x6271 TextEndBattle
+	dw LoreleiBeforeBattleText ; 0x626c TextBeforeBattle
+	dw LoreleiAfterBattleText ; 0x6276 TextAfterBattle
+	dw LoreleiEndBattleText ; 0x6271 TextEndBattle
+	dw LoreleiEndBattleText ; 0x6271 TextEndBattle
 ; 0x76261
 
 db $ff
@@ -56649,18 +56649,18 @@ LoreleiText1: ; 0x76262
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_7626c: ; 0x7626c
-	TX_FAR _UnnamedText_7626c
+LoreleiBeforeBattleText: ; 0x7626c
+	TX_FAR _LoreleiBeforeBattleText
 	db $50
 ; 0x7626c + 5 bytes
 
-UnnamedText_76271: ; 0x76271
-	TX_FAR _UnnamedText_76271
+LoreleiEndBattleText: ; 0x76271
+	TX_FAR _LoreleiEndBattleText
 	db $50
 ; 0x76271 + 5 bytes
 
-UnnamedText_76276: ; 0x76276
-	TX_FAR _UnnamedText_76276
+LoreleiAfterBattleText: ; 0x76276
+	TX_FAR _LoreleiAfterBattleText
 	db $50
 ; 0x76276 + 5 bytes
 
@@ -56722,10 +56722,10 @@ BrunoTrainerHeader1: ; 0x763ac
 	db $1 ; flag's bit
 	db ($0 << 4) ; trainer's view range
 	dw $d864 ; flag's byte
-	dw UnnamedText_763c3 ; 0x63c3 TextBeforeBattle
-	dw UnnamedText_763cd ; 0x63cd TextAfterBattle
-	dw UnnamedText_763c8 ; 0x63c8 TextEndBattle
-	dw UnnamedText_763c8 ; 0x63c8 TextEndBattle
+	dw BrunoBeforeBattleText ; 0x63c3 TextBeforeBattle
+	dw BrunoAfterBattleText ; 0x63cd TextAfterBattle
+	dw BrunoEndBattleText ; 0x63c8 TextEndBattle
+	dw BrunoEndBattleText ; 0x63c8 TextEndBattle
 ; 0x763b8
 
 db $ff
@@ -56736,18 +56736,18 @@ BrunoText1: ; 0x763b9
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_763c3: ; 0x763c3
-	TX_FAR _UnnamedText_763c3
+BrunoBeforeBattleText: ; 0x763c3
+	TX_FAR _BrunoBeforeBattleText
 	db $50
 ; 0x763c3 + 5 bytes
 
-UnnamedText_763c8: ; 0x763c8
-	TX_FAR _UnnamedText_763c8
+BrunoEndBattleText: ; 0x763c8
+	TX_FAR _BrunoEndBattleText
 	db $50
 ; 0x763c8 + 5 bytes
 
-UnnamedText_763cd: ; 0x763cd
-	TX_FAR _UnnamedText_763cd
+BrunoAfterBattleText: ; 0x763cd
+	TX_FAR _BrunoAfterBattleText
 	db $50
 ; 0x763cd + 5 bytes
 
@@ -56811,8 +56811,8 @@ AgathaTrainerHeader1: ; 0x76509
 	dw $d865 ; flag's byte
 	dw AgathaBeforeBattleText ; 0x6520 TextBeforeBattle
 	dw AgathaAfterBattleText ; 0x652a TextAfterBattle
-	dw AgathaEndBattle ; 0x6525 TextEndBattle
-	dw AgathaEndBattle ; 0x6525 TextEndBattle
+	dw AgathaEndBattleText ; 0x6525 TextEndBattle
+	dw AgathaEndBattleText ; 0x6525 TextEndBattle
 ; 0x76515
 
 db $ff
@@ -56828,8 +56828,8 @@ AgathaBeforeBattleText: ; 0x76520
 	db $50
 ; 0x76520 + 5 bytes
 
-AgathaEndBattle: ; 0x76525
-	TX_FAR _AgathaEndBattle
+AgathaEndBattleText: ; 0x76525
+	TX_FAR _AgathaEndBattleText
 	db $50
 ; 0x76525 + 5 bytes
 
@@ -60150,7 +60150,7 @@ _UnnamedText_5dab3: ; 0x85d1a
 	db "better than me!", $57
 ; 0x85d1a + 34 bytes
 
-_UnnamedText_5a3ae: ; 0x85d3c
+_LanceBeforeBattleText: ; 0x85d3c
 	db $0, "Ah! I heard about", $4f
 	db "you ", $52, "!", $51
 	db "I lead the ELITE", $4f
@@ -60173,14 +60173,14 @@ _UnnamedText_5a3ae: ; 0x85d3c
 	db "with me, ", $52, "!", $57
 ; 0x85d3c + 296 bytes
 
-_UnnamedText_5a3b3: ; 0x85e64
+_LanceEndBattleText: ; 0x85e64
 	db $0, "That's it!", $51
 	db "I hate to admit", $4f
 	db "it, but you are a", $55
 	db "#MON master!", $58
 ; 0x85e64 + 58 bytes
 
-_UnnamedText_5a3b8: ; 0x85e9e
+_LanceAfterBattleText: ; 0x85e9e
 	db $0, "I still can't", $4f
 	db "believe my", $55
 	db "dragons lost to", $55
@@ -60345,7 +60345,7 @@ _UnnamedText_7612a: ; 0x86567
 	db "Come with me!", $57
 ; 0x86567 + 136 bytes
 
-_UnnamedText_7626c: ; 0x865ef
+_LoreleiBeforeBattleText: ; 0x865ef
 	db $0, "Welcome to", $4f
 	db "#MON LEAGUE!", $51
 	db "I am LORELEI of", $4f
@@ -60363,12 +60363,12 @@ _UnnamedText_7626c: ; 0x865ef
 	db "Are you ready?", $57
 ; 0x865ef + 213 bytes
 
-_UnnamedText_76271: ; 0x866c4
+_LoreleiEndBattleText: ; 0x866c4
 	db $0, "How", $4f
 	db "dare you!", $58
 ; 0x866c4 + 15 bytes
 
-_UnnamedText_76276: ; 0x866d3
+_LoreleiAfterBattleText: ; 0x866d3
 	db $0, "You're better", $4f
 	db "than I thought!", $55
 	db "Go on ahead!", $51
@@ -60382,7 +60382,7 @@ _UnnamedText_7627b: ; 0x86729
 	db "Don't run away!", $57
 ; 0x86729 + 32 bytes
 
-_UnnamedText_763c3: ; 0x86749
+_BrunoBeforeBattleText: ; 0x86749
 	db $0, "I am BRUNO of", $4f
 	db "the ELITE FOUR!", $51
 	db "Through rigorous", $4f
@@ -60399,12 +60399,12 @@ _UnnamedText_763c3: ; 0x86749
 	db "Hoo hah!", $57
 ; 0x86749 + 188 bytes
 
-_UnnamedText_763c8: ; 0x86805
+_BrunoEndBattleText: ; 0x86805
 	db $0, "Why?", $4f
 	db "How could I lose?", $58
 ; 0x86805 + 24 bytes
 
-_UnnamedText_763cd: ; 0x8681d
+_BrunoAfterBattleText: ; 0x8681d
 	db $0, "My job is done!", $4f
 	db "Go face your next", $55
 	db "challenge!", $57
@@ -60435,7 +60435,7 @@ _AgathaBeforeBattleText: ; 0x8686b
 	db "trainer fights!", $57
 ; 0x8686b + 261 bytes
 
-_AgathaEndBattle: ; 0x86970
+_AgathaEndBattleText: ; 0x86970
 	db $0, "Oh ho!", $4f
 	db "You're something", $55
 	db "special, child!", $58
