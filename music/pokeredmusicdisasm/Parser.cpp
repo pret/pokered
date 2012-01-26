@@ -18,6 +18,7 @@ Parser::Parser(std::string filename)
 	fileLength = 0;
 	filePos = 0;
 	stop = false;
+	stopAddress = 0;
 
 	SetFilename(filename);
 }
@@ -63,7 +64,9 @@ string Parser::GetParsedAsm()
 
 	for(unsigned int i = 0; i < parsedString.size(); i++)
 	{
-		tmpStr += parsedString[i] + "\n";
+		// Ensure each line isn't already a new-line, this prevents double or tripple empty lines from piling up
+		if(parsedString[i] != "\n") tmpStr += parsedString[i] + "\n";
+		else tmpStr += parsedString[i];
 	}
 
 	return tmpStr;
@@ -87,6 +90,8 @@ void Parser::Read()
 	// Read filedata
 	tmpFile.read(rawBytes, fileLength);
 	tmpFile.close();
+
+	rawBytesFixed = (unsigned char*)rawBytes;
 }
 
 // Code Operations
@@ -96,114 +101,165 @@ void Parser::Parse(unsigned int offset)
 	ParseNext();
 }
 
+template<class T>
+bool Parser::ParseData(unsigned int& pos, bool reado)
+{
+	// Create the class to use if correct and a dummy class for validating
+	T* tmpC = 0;
+	T dummy;
+
+	// If the bytes are this data type then create and save it
+	if(dummy.IsValid(&rawBytesFixed[pos]))
+	{
+		// Ensure this whole opperation isn't read-only (just peeking)
+		if(!reado)
+		{
+			// Initialize the class
+			tmpC = new T(&rawBytesFixed[pos]);
+
+			// Push it onto the stack and it's assembly generation onto the output class
+			parsedBytes.push_back(tmpC);	// 
+			parsedString.push_back(tmpC->GenAsm());
+
+			// If the class had any arguments, increment the counter that much forward
+			pos += tmpC->Arguments();
+		}
+		return true;	// Let the code know this class was valid
+	}
+
+	return false;	// Let the code know this class wasn't valid
+}
+
 void Parser::ParseNext() // Parses the block immidiately following
 {
 	stringstream tmpStr;
-	unsigned char* rawBytesFixed = (unsigned char*)rawBytes;
 	stop = false;
 
 	// Smart generation
-	bool indent = false;
-	bool firstNonNote = false;	// First byte wasn't a note or octacve switch, add ";Setup" comment
-	bool firstNote = false;	// First note or octave
+	bool firstNonNote = false;	// (unused so far)First byte wasn't a note or octacve switch, add ";Setup" comment
+	bool firstNote = false;	// (unused so far) First note or octave
+	unsigned char lDataType = DATA_NA;
 
 	stringstream pos;
 	pos << "; " << hex << uppercase << (unsigned int)filePos;
 	parsedString.push_back(pos.str());
 
+	unsigned int count = 1;	// Counter for processed instructions
 	for(unsigned int i = filePos; (i <= fileLength) && (stop == false); i++)
 	{
-		// There's a way to make this block shorter but for now it does it's job
+		// First peek to see what kind of data it is, then perform any pre and post setup
+		if(ParseData<Call>(i, true))
+		{
+			if(lDataType == DATA_NOTE) parsedString.push_back("\n"); // Insert a newline after notes
 
-		// Check to see if it's the correct data type and if so then use it
-		if(tmpCall.IsValid(&rawBytesFixed[i])) // Should have made IsValid static
+			ParseData<Call>(i);
+			lDataType = DATA_CALL;
+		}
+		else if(ParseData<Duty>(i, true))
 		{
-			// Call data type
+			if(lDataType == DATA_NOTE) parsedString.push_back("\n"); // Insert a newline after notes
 
-			// Create data type then move the increment pointer further up as needed
-			parsedBytes.push_back(new Call(&rawBytesFixed[i]));
-			parsedString.push_back(parsedBytes[parsedBytes.size() - 1]->GenAsm());
-			i += tmpCall.Arguments(); // should have made Arguments static
+			ParseData<Duty>(i);
+			lDataType = DATA_DUTY;
+		}
+		else if(ParseData<Jump>(i, true))
+		{
+			if(lDataType == DATA_NOTE) parsedString.push_back("\n"); // Insert a newline after notes
 
-			Call* _tmp = (Call*)parsedBytes[parsedBytes.size() - 1];
+			ParseData<Jump>(i);
+			lDataType = DATA_JUMP;
 		}
-		else if(tmpDuty.IsValid(&rawBytesFixed[i]))
+		else if(ParseData<Modulation>(i, true))
 		{
-			// Duty data type
-			parsedBytes.push_back(new Duty(&rawBytesFixed[i]));
-			parsedString.push_back(parsedBytes[parsedBytes.size() - 1]->GenAsm());
-			i += tmpDuty.Arguments();
-		}
-		else if(tmpJump.IsValid(&rawBytesFixed[i]))
-		{
-			// Jump data type
-			parsedBytes.push_back(new Jump(&rawBytesFixed[i]));
-			parsedString.push_back(parsedBytes[parsedBytes.size() - 1]->GenAsm());
-			i += tmpJump.Arguments();
+			if(lDataType == DATA_NOTE) parsedString.push_back("\n"); // Insert a newline after notes
 
-			Jump* _tmp = (Jump*)parsedBytes[parsedBytes.size() - 1];
+			ParseData<Modulation>(i);
+			lDataType = DATA_MODULATION;
 		}
-		else if(tmpModulation.IsValid(&rawBytesFixed[i]))
+		else if(ParseData<Note>(i, true))
 		{
-			// Modulation data type
-			parsedBytes.push_back(new Modulation(&rawBytesFixed[i]));
-			parsedString.push_back(parsedBytes[parsedBytes.size() - 1]->GenAsm());
-			i += tmpModulation.Arguments();
-		}
-		else if(tmpNote.IsValid(&rawBytesFixed[i]))
-		{
-			// Note data type
-			parsedBytes.push_back(new Note(&rawBytesFixed[i]));
-			parsedString.push_back(parsedBytes[parsedBytes.size() - 1]->GenAsm());
-			i += tmpNote.Arguments();
-		}
-		else if(tmpOctave.IsValid(&rawBytesFixed[i]))
-		{
-			// Octave data type
-			parsedBytes.push_back(new Octave(&rawBytesFixed[i]));
-			parsedString.push_back("\n" + parsedBytes[parsedBytes.size() - 1]->GenAsm());
-			i += tmpOctave.Arguments();
-		}
-		else if(tmpStop.IsValid(&rawBytesFixed[i]))
-		{
-			// Stop data type
-			parsedBytes.push_back(new Stop(&rawBytesFixed[i]));
-			parsedString.push_back(parsedBytes[parsedBytes.size() - 1]->GenAsm());
-			i += tmpStop.Arguments();
+			 // Insert a newline after certain types
+			if((lDataType == DATA_UNKCODE) ||
+				(lDataType == DATA_UNKEB)) parsedString.push_back("\n");
 
-			stop = true;	// Stop all further processing, we've reached the end of the song
+			// If the previous item was a rest note then insert a new line
+			else if(lDataType == DATA_NOTE)
+			{
+				Note* _tmpNote = (Note*)parsedBytes[parsedBytes.size() - 1];
+				if(_tmpNote->GetPitch() == _tmpNote->noteRst) parsedString.push_back("\n");
+			}
+
+			ParseData<Note>(i);
+
+			// Further indent each note
+			parsedString[parsedString.size() - 1] = "\t" + parsedString[parsedString.size() - 1];
+			lDataType = DATA_NOTE;
 		}
-		else if(tmpTempo.IsValid(&rawBytesFixed[i]))
+		else if(ParseData<Octave>(i, true))
 		{
-			// Tempo data type
-			parsedBytes.push_back(new Tempo(&rawBytesFixed[i]));
-			parsedString.push_back(parsedBytes[parsedBytes.size() - 1]->GenAsm());
-			i += tmpTempo.Arguments();
+			// Insert new-line if previous line isn't a newline
+			if(parsedString[parsedString.size() - 1] != "\n") parsedString.push_back("\n");
+
+			ParseData<Octave>(i);
+			lDataType = DATA_OCTAVE;
 		}
-		else if(tmpVelocity.IsValid(&rawBytesFixed[i]))
+		else if(ParseData<Tempo>(i, true))
 		{
-			// Velocity data type
-			parsedBytes.push_back(new Velocity(&rawBytesFixed[i]));
-			parsedString.push_back(parsedBytes[parsedBytes.size() - 1]->GenAsm());
-			i += tmpVelocity.Arguments();
+			if(lDataType == DATA_NOTE) parsedString.push_back("\n"); // Insert a newline after notes
+
+			ParseData<Tempo>(i);
+			lDataType = DATA_TEMPO;
 		}
-		else if(tmpVolume.IsValid(&rawBytesFixed[i]))
+		else if(ParseData<Velocity>(i, true))
 		{
-			// Volume data type
-			parsedBytes.push_back(new Volume(&rawBytesFixed[i]));
-			parsedString.push_back(parsedBytes[parsedBytes.size() - 1]->GenAsm());
-			i += tmpVolume.Arguments();
+			if(lDataType == DATA_NOTE) parsedString.push_back("\n"); // Insert a newline after notes
+
+			ParseData<Velocity>(i);
+			lDataType = DATA_VELOCITY;
+		}
+		else if(ParseData<Volume>(i, true))
+		{
+			if(lDataType == DATA_NOTE) parsedString.push_back("\n"); // Insert a newline after notes
+
+			ParseData<Volume>(i);
+			lDataType = DATA_VOLUME;
+		}
+		else if(ParseData<UnkEB>(i, true))	// The opcode is 0xEB which is unknown and takes a 1-byte argument
+		{
+			if(lDataType == DATA_NOTE) parsedString.push_back("\n"); // Insert a newline after notes
+
+			ParseData<UnkEB>(i);
+			lDataType = DATA_UNKEB;
+		}
+		else if(ParseData<Stop>(i, true))
+		{
+			if(lDataType == DATA_NOTE) parsedString.push_back("\n"); // Insert a newline after notes
+
+			ParseData<Stop>(i);
+			stop = true; // Raise the stop flag informing the parser to stop
+			lDataType = DATA_STOP;
 		}
 		else
 		{
-			// Unknown code
-			stringstream unkCode;
-			short tmpByte = (short)rawBytesFixed[i];
-			unkCode << "db $" << hex << uppercase << (short)rawBytesFixed[i];
-			parsedString.push_back(unkCode.str());
+			if(lDataType == DATA_NOTE) parsedString.push_back("\n"); // Insert a newline after notes
+
+			ParseData<UnkCode>(i);	// The opcode is unknown - process the raw byte and move on
+			lDataType = DATA_UNKCODE;
+		}
+
+		// Put everything tabbed over at least 1 time to fix some weird RGBDS bug by pre-pending a tab character
+		parsedString[parsedString.size() - 1] = "\t" + parsedString[parsedString.size() - 1];
+
+		// Append File Position in hexidecimal at end of line every 5 instructions
+		if((count % 5) == 0)
+		{
+			stringstream _tmpCount;
+			_tmpCount << hex << uppercase << i;
+			parsedString[parsedString.size() - 1] = parsedString[parsedString.size() - 1] + "; " + _tmpCount.str();
 		}
 
 		filePos = i;
+		count++;
 
 		// If the stop address parameter is set, break when we get there
 		if( (stopAddress != 0) && (i >= stopAddress) ) break;
