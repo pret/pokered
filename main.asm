@@ -20,7 +20,7 @@ SECTION "rst38",HOME[$38]
 
 ; interrupts
 SECTION "vblank",HOME[$40]
-	jp $2024
+	jp VBlankHandler
 SECTION "lcdc",HOME[$48]
 	db $FF
 SECTION "timer",HOME[$50]
@@ -2139,18 +2139,19 @@ MoveTileBlockMapPointerNorth: ; E85
 ; the portion of the map that was newly exposed due to the player's movement
 
 ScheduleNorthRowRedraw: ; E91
-	ld hl,$c3a0
+	FuncCoord 0,0
+	ld hl,Coord
 	call ScheduleRowRedrawHelper
 	ld a,[$d526]
-	ld [$ffd1],a
+	ld [H_SCREENEDGEREDRAWADDR],a
 	ld a,[$d527]
-	ld [$ffd2],a
-	ld a,$02
-	ld [$ffd0],a
+	ld [H_SCREENEDGEREDRAWADDR + 1],a
+	ld a,REDRAWROW
+	ld [H_SCREENEDGEREDRAW],a
 	ret
 
 ScheduleRowRedrawHelper: ; EA6
-	ld de,$cbfc
+	ld de,W_SCREENEDGETILES
 	ld c,$28
 .loop\@
 	ld a,[hli]
@@ -2161,8 +2162,9 @@ ScheduleRowRedrawHelper: ; EA6
 	ret
 
 ScheduleSouthRowRedraw: ; EB2
-	ld hl,$c4e0
-	call $0ea6
+	FuncCoord 0,16
+	ld hl,Coord
+	call ScheduleRowRedrawHelper
 	ld a,[$d526]
 	ld l,a
 	ld a,[$d527]
@@ -2172,33 +2174,34 @@ ScheduleSouthRowRedraw: ; EB2
 	ld a,h
 	and a,$03
 	or a,$98
-	ld [$ffd2],a
+	ld [H_SCREENEDGEREDRAWADDR + 1],a
 	ld a,l
-	ld [$ffd1],a
-	ld a,$02
-	ld [$ffd0],a
+	ld [H_SCREENEDGEREDRAWADDR],a
+	ld a,REDRAWROW
+	ld [H_SCREENEDGEREDRAW],a
 	ret
 
 ScheduleEastColumnRedraw: ; ED3
-	ld hl,$c3b2
+	FuncCoord 18,0
+	ld hl,Coord
 	call ScheduleColumnRedrawHelper
 	ld a,[$d526]
 	ld c,a
 	and a,$e0
 	ld b,a
 	ld a,c
-	add a,$12
+	add a,18
 	and a,$1f
 	or b
-	ld [$ffd1],a
+	ld [H_SCREENEDGEREDRAWADDR],a
 	ld a,[$d527]
-	ld [$ffd2],a
-	ld a,$01
-	ld [$ffd0],a
+	ld [H_SCREENEDGEREDRAWADDR + 1],a
+	ld a,REDRAWCOL
+	ld [H_SCREENEDGEREDRAW],a
 	ret
 
 ScheduleColumnRedrawHelper: ; EF2
-	ld de,$cbfc
+	ld de,W_SCREENEDGETILES
 	ld c,$12
 .loop\@
 	ld a,[hli]
@@ -2207,7 +2210,7 @@ ScheduleColumnRedrawHelper: ; EF2
 	ld a,[hl]
 	ld [de],a
 	inc de
-	ld a,$13
+	ld a,19
 	add l
 	ld l,a
 	jr nc,.noCarry\@
@@ -2218,14 +2221,15 @@ ScheduleColumnRedrawHelper: ; EF2
 	ret
 
 ScheduleWestColumnRedraw: ; F08
-	ld hl,$c3a0
+	FuncCoord 0,0
+	ld hl,Coord
 	call ScheduleColumnRedrawHelper
 	ld a,[$d526]
-	ld [$ffd1],a
+	ld [H_SCREENEDGEREDRAWADDR],a
 	ld a,[$d527]
-	ld [$ffd2],a
-	ld a,$01
-	ld [$ffd0],a
+	ld [H_SCREENEDGEREDRAWADDR + 1],a
+	ld a,REDRAWCOL
+	ld [H_SCREENEDGEREDRAW],a
 	ret
 
 ; function to write the tiles that make up a tile block to memory
@@ -3705,7 +3709,469 @@ ClearBgMap: ; 1CF0
 	jr nz,.loop\@
 	ret
 
-INCBIN "baserom.gbc",$1D01,$1F54 - $1D01
+; When the player takes a step, a row or column of 2x2 tile blocks at the edge
+; of the screen toward which they moved is exposed and has to be redrawn.
+; This function does the redrawing.
+RedrawExposedScreenEdge: ; 1D01
+	ld a,[H_SCREENEDGEREDRAW]
+	and a
+	ret z
+	ld b,a
+	xor a
+	ld [H_SCREENEDGEREDRAW],a
+	dec b
+	jr nz,.redrawRow\@
+.redrawColumn\@
+	ld hl,W_SCREENEDGETILES
+	ld a,[H_SCREENEDGEREDRAWADDR]
+	ld e,a
+	ld a,[H_SCREENEDGEREDRAWADDR + 1]
+	ld d,a
+	ld c,18 ; screen height
+.loop1\@
+	ld a,[hli]
+	ld [de],a
+	inc de
+	ld a,[hli]
+	ld [de],a
+	ld a,31
+	add e
+	ld e,a
+	jr nc,.noCarry\@
+	inc d
+.noCarry\@
+; the following 4 lines wrap us from bottom to top if necessary
+	ld a,d
+	and a,$03
+	or a,$98
+	ld d,a
+	dec c
+	jr nz,.loop1\@
+	xor a
+	ld [H_SCREENEDGEREDRAW],a
+	ret
+.redrawRow\@
+	ld hl,W_SCREENEDGETILES
+	ld a,[H_SCREENEDGEREDRAWADDR]
+	ld e,a
+	ld a,[H_SCREENEDGEREDRAWADDR + 1]
+	ld d,a
+	push de
+	call .drawHalf\@ ; draw upper half
+	pop de
+	ld a,32 ; width of VRAM background map
+	add e
+	ld e,a
+	                 ; draw lower half
+.drawHalf\@
+	ld c,10
+.loop2\@
+	ld a,[hli]
+	ld [de],a
+	inc de
+	ld a,[hli]
+	ld [de],a
+	ld a,e
+	inc a
+; the following 6 lines wrap us from the right edge to the left edge if necessary
+	and a,$1f
+	ld b,a
+	ld a,e
+	and a,$e0
+	or b
+	ld e,a
+	dec c
+	jr nz,.loop2\@
+	ret
+
+; This function automatically transfers tile number data from the tile map at
+; C3A0 to VRAM during V-blank. Note that it only transfers one third of the
+; background per V-blank. It cycles through which third it draws.
+; This transfer is turned off when walking around the map, but is turned
+; on when talking to sprites, battling, using menus, etc. This is because
+; the above function, RedrawExposedScreenEdge, is used when walking to
+; improve efficiency.
+AutoBgMapTransfer: ; 1D57
+	ld a,[H_AUTOBGTRANSFERENABLED]
+	and a
+	ret z
+	ld hl,[sp + 0]
+	ld a,h
+	ld [H_SPTEMP],a
+	ld a,l
+	ld [H_SPTEMP + 1],a ; save stack pinter
+	ld a,[H_AUTOBGTRANSFERPORTION]
+	and a
+	jr z,.transferTopThird\@
+	dec a
+	jr z,.transferMiddleThird\@
+.transferBottomThird\@
+	FuncCoord 0,12
+	ld hl,Coord
+	ld sp,hl
+	ld a,[H_AUTOBGTRANSFERDEST + 1]
+	ld h,a
+	ld a,[H_AUTOBGTRANSFERDEST]
+	ld l,a
+	ld de,(12 * 32)
+	add hl,de
+	xor a ; TRANSFERTOP
+	jr .doTransfer\@
+.transferTopThird\@
+	FuncCoord 0,0
+	ld hl,Coord
+	ld sp,hl
+	ld a,[H_AUTOBGTRANSFERDEST + 1]
+	ld h,a
+	ld a,[H_AUTOBGTRANSFERDEST]
+	ld l,a
+	ld a,TRANSFERMIDDLE
+	jr .doTransfer\@
+.transferMiddleThird\@
+	FuncCoord 0,6
+	ld hl,Coord
+	ld sp,hl
+	ld a,[H_AUTOBGTRANSFERDEST + 1]
+	ld h,a
+	ld a,[H_AUTOBGTRANSFERDEST]
+	ld l,a
+	ld de,(6 * 32)
+	add hl,de
+	ld a,TRANSFERBOTTOM
+.doTransfer\@
+	ld [H_AUTOBGTRANSFERPORTION],a ; store next portion
+	ld b,6
+
+; unrolled loop and using pop for speed
+TransferBgRows: ; 1D9E
+	pop de
+	ld [hl],e
+	inc l
+	ld [hl],d
+	inc l
+	pop de
+	ld [hl],e
+	inc l
+	ld [hl],d
+	inc l
+	pop de
+	ld [hl],e
+	inc l
+	ld [hl],d
+	inc l
+	pop de
+	ld [hl],e
+	inc l
+	ld [hl],d
+	inc l
+	pop de
+	ld [hl],e
+	inc l
+	ld [hl],d
+	inc l
+	pop de
+	ld [hl],e
+	inc l
+	ld [hl],d
+	inc l
+	pop de
+	ld [hl],e
+	inc l
+	ld [hl],d
+	inc l
+	pop de
+	ld [hl],e
+	inc l
+	ld [hl],d
+	inc l
+	pop de
+	ld [hl],e
+	inc l
+	ld [hl],d
+	inc l
+	pop de
+	ld [hl],e
+	inc l
+	ld [hl],d
+	ld a,13
+	add l
+	ld l,a
+	jr nc,.noCarry\@
+	inc h
+.noCarry\@
+	dec b
+	jr nz,TransferBgRows
+	ld a,[H_SPTEMP]
+	ld h,a
+	ld a,[H_SPTEMP + 1]
+	ld l,a
+	ld sp,hl ; restore stack pointer
+	ret
+
+; Copies [H_VBCOPYBGNUMROWS] rows from H_VBCOPYBGSRC to H_VBCOPYBGDEST.
+; If H_VBCOPYBGSRC is XX00, the transfer is disabled.
+VBlankCopyBgMap: ; 1DE1
+	ld a,[H_VBCOPYBGSRC] ; doubles as enabling byte
+	and a
+	ret z
+	ld hl,[sp + 0]
+	ld a,h
+	ld [H_SPTEMP],a
+	ld a,l
+	ld [H_SPTEMP + 1],a ; save stack pointer
+	ld a,[H_VBCOPYBGSRC]
+	ld l,a
+	ld a,[H_VBCOPYBGSRC + 1]
+	ld h,a
+	ld sp,hl
+	ld a,[H_VBCOPYBGDEST]
+	ld l,a
+	ld a,[H_VBCOPYBGDEST + 1]
+	ld h,a
+	ld a,[H_VBCOPYBGNUMROWS]
+	ld b,a
+	xor a
+	ld [H_VBCOPYBGSRC],a ; disable transfer so it doesn't continue next V-blank
+	jr TransferBgRows
+
+; This function copies ([H_VBCOPYDOUBLESIZE] * 4) source bytes
+; from H_VBCOPYDOUBLESRC to H_VBCOPYDOUBLEDEST.
+; It copies each source byte to the destination twice (next to each other).
+; The function updates the source and destination addresses, so the transfer
+; can be continued easily by repeatingly calling this function.
+VBlankCopyDouble: ; 1E02
+	ld a,[H_VBCOPYDOUBLESIZE]
+	and a ; are there any bytes to copy?
+	ret z
+	ld hl,[sp + 0]
+	ld a,h
+	ld [H_SPTEMP],a
+	ld a,l
+	ld [H_SPTEMP + 1],a ; save stack pointer
+	ld a,[H_VBCOPYDOUBLESRC]
+	ld l,a
+	ld a,[H_VBCOPYDOUBLESRC + 1]
+	ld h,a
+	ld sp,hl
+	ld a,[H_VBCOPYDOUBLEDEST]
+	ld l,a
+	ld a,[H_VBCOPYDOUBLEDEST + 1]
+	ld h,a
+	ld a,[H_VBCOPYDOUBLESIZE]
+	ld b,a
+	xor a
+	ld [H_VBCOPYDOUBLESIZE],a ; disable transfer so it doesn't continue next V-blank
+.loop\@
+	pop de
+	ld [hl],e
+	inc l
+	ld [hl],e
+	inc l
+	ld [hl],d
+	inc l
+	ld [hl],d
+	inc l
+	pop de
+	ld [hl],e
+	inc l
+	ld [hl],e
+	inc l
+	ld [hl],d
+	inc l
+	ld [hl],d
+	inc l
+	pop de
+	ld [hl],e
+	inc l
+	ld [hl],e
+	inc l
+	ld [hl],d
+	inc l
+	ld [hl],d
+	inc l
+	pop de
+	ld [hl],e
+	inc l
+	ld [hl],e
+	inc l
+	ld [hl],d
+	inc l
+	ld [hl],d
+	inc hl
+	dec b
+	jr nz,.loop\@
+	ld a,l
+	ld [H_VBCOPYDOUBLEDEST],a
+	ld a,h
+	ld [H_VBCOPYDOUBLEDEST + 1],a ; update destination address
+	ld hl,[sp + 0]
+	ld a,l
+	ld [H_VBCOPYDOUBLESRC],a
+	ld a,h
+	ld [H_VBCOPYDOUBLESRC + 1],a ; update source address
+	ld a,[H_SPTEMP]
+	ld h,a
+	ld a,[H_SPTEMP + 1]
+	ld l,a
+	ld sp,hl ; restore stack pointer
+	ret
+
+; Copies ([H_VBCOPYSIZE] * 8) bytes from H_VBCOPYSRC to H_VBCOPYDEST.
+; The function updates the source and destination addresses, so the transfer
+; can be continued easily by repeatingly calling this function.
+VBlankCopy: ; 1E5E
+	ld a,[H_VBCOPYSIZE]
+	and a ; are there any bytes to copy?
+	ret z
+	ld hl,[sp + 0]
+	ld a,h
+	ld [H_SPTEMP],a
+	ld a,l
+	ld [H_SPTEMP + 1],a ; save stack pointer
+	ld a,[H_VBCOPYSRC]
+	ld l,a
+	ld a,[H_VBCOPYSRC + 1]
+	ld h,a
+	ld sp,hl
+	ld a,[H_VBCOPYDEST]
+	ld l,a
+	ld a,[H_VBCOPYDEST + 1]
+	ld h,a
+	ld a,[H_VBCOPYSIZE]
+	ld b,a
+	xor a
+	ld [H_VBCOPYSIZE],a ; disable transfer so it doesn't continue next V-blank
+.loop\@
+	pop de
+	ld [hl],e
+	inc l
+	ld [hl],d
+	inc l
+	pop de
+	ld [hl],e
+	inc l
+	ld [hl],d
+	inc l
+	pop de
+	ld [hl],e
+	inc l
+	ld [hl],d
+	inc l
+	pop de
+	ld [hl],e
+	inc l
+	ld [hl],d
+	inc l
+	pop de
+	ld [hl],e
+	inc l
+	ld [hl],d
+	inc l
+	pop de
+	ld [hl],e
+	inc l
+	ld [hl],d
+	inc l
+	pop de
+	ld [hl],e
+	inc l
+	ld [hl],d
+	inc l
+	pop de
+	ld [hl],e
+	inc l
+	ld [hl],d
+	inc hl
+	dec b
+	jr nz,.loop\@
+	ld a,l
+	ld [H_VBCOPYDEST],a
+	ld a,h
+	ld [H_VBCOPYDEST + 1],a
+	ld hl,[sp + 0]
+	ld a,l
+	ld [H_VBCOPYSRC],a
+	ld a,h
+	ld [H_VBCOPYSRC + 1],a
+	ld a,[H_SPTEMP]
+	ld h,a
+	ld a,[H_SPTEMP + 1]
+	ld l,a
+	ld sp,hl ; restore stack pointer
+	ret
+
+; This function updates the moving water and flower background tiles.
+UpdateMovingBgTiles: ; 1EBE
+	ld a,[$ffd7]
+	and a
+	ret z
+	ld a,[$ffd8]
+	inc a
+	ld [$ffd8],a
+	cp a,20
+	ret c
+	cp a,21
+	jr z,.updateFlowerTile\@
+	ld hl,$9140 ; water tile pattern VRAM location
+	ld c,16 ; number of bytes in a tile pattern
+	ld a,[$d085]
+	inc a
+	and a,$07
+	ld [$d085],a
+	and a,$04
+	jr nz,.rotateWaterLeftLoop\@
+.rotateWaterRightloop\@
+	ld a,[hl]
+	rrca
+	ld [hli],a
+	dec c
+	jr nz,.rotateWaterRightloop\@
+	jr .done\@
+.rotateWaterLeftLoop\@
+	ld a,[hl]
+	rlca
+	ld [hli],a
+	dec c
+	jr nz,.rotateWaterLeftLoop\@
+.done\@
+	ld a,[$ffd7]
+	rrca
+	ret nc
+	xor a
+	ld [$ffd8],a
+	ret
+.updateFlowerTile\@
+	xor a
+	ld [$ffd8],a
+	ld a,[$d085]
+	and a,$03
+	cp a,2
+	ld hl,FlowerTilePattern1
+	jr c,.writeTilePatternToVram\@
+	ld hl,FlowerTilePattern2
+	jr z,.writeTilePatternToVram\@
+	ld hl,FlowerTilePattern3
+.writeTilePatternToVram\@
+	ld de,$9030 ; flower tile pattern VRAM location
+	ld c,16 ; number of bytes in a tile pattern
+.flowerTileLoop\@
+	ld a,[hli]
+	ld [de],a
+	inc de
+	dec c
+	jr nz,.flowerTileLoop\@
+	ret
+
+FlowerTilePattern1: ; 1F19
+INCBIN "baserom.gbc",$1f19,16
+
+FlowerTilePattern2: ; 1F29
+INCBIN "baserom.gbc",$1f29,16
+
+FlowerTilePattern3: ; 1F39
+INCBIN "baserom.gbc",$1f39,16
+
+INCBIN "baserom.gbc",$1F49,$1F54 - $1F49
 
 ; initialization code
 ; explanation for %11100011 (value stored in rLCDC)
@@ -3766,9 +4232,9 @@ InitGame: ; 1F54
 	ld [rIE],a
 	ld a,$90 ; put the window off the screen
 	ld [$ffb0],a
-	ld [rWX],a
-	ld a,$07
 	ld [rWY],a
+	ld a,$07
+	ld [rWX],a
 	ld a,$ff
 	ld [$ffaa],a
 	ld h,$98
@@ -3809,17 +4275,92 @@ ZeroVram: ; 2004
 	xor a
 	jp $36e0
 
-INCBIN "baserom.gbc",$200E,$20AF - $200E
+INCBIN "baserom.gbc",$200E,$2024 - $200E
+
+VBlankHandler: ; 2024
+	push af
+	push bc
+	push de
+	push hl
+	ld a,[$ffb8] ; current ROM bank
+	ld [$d122],a
+	ld a,[$ffae]
+	ld [rSCX],a
+	ld a,[$ffaf]
+	ld [rSCY],a
+	ld a,[$d0a0]
+	and a
+	jr nz,.doVramTransfers\@
+	ld a,[$ffb0]
+	ld [rWY],a
+.doVramTransfers\@
+	call AutoBgMapTransfer
+	call VBlankCopyBgMap
+	call RedrawExposedScreenEdge
+	call VBlankCopy
+	call VBlankCopyDouble
+	call UpdateMovingBgTiles
+	call $ff80 ; OAM DMA
+	ld a,$01
+	ld [$ffb8],a
+	ld [$2000],a
+	call $4b0f ; update OAM buffer with current sprite data
+	call GenRandom
+	ld a,[H_VBLANKOCCURRED]
+	and a
+	jr z,.next\@
+	xor a
+	ld [H_VBLANKOCCURRED],a
+.next\@
+	ld a,[H_FRAMECOUNTER]
+	and a
+	jr z,.handleMusic\@
+	dec a
+	ld [H_FRAMECOUNTER],a
+.handleMusic\@
+	call $28cb
+	ld a,[$c0ef] ; music ROM bank
+	ld [$ffb8],a
+	ld [$2000],a
+	cp a,$02
+	jr nz,.checkIfBank08\@
+.bank02\@
+	call $5103
+	jr .afterMusic\@
+.checkIfBank08\@
+	cp a,$08
+	jr nz,.bank1F\@
+.bank08\@
+	call $536e
+	call $5879
+	jr .afterMusic\@
+.bank1F\@
+	call $5177
+.afterMusic\@
+	ld b,$06
+	ld hl,$4dee
+	call Bankswitch ; keep track of time played
+	ld a,[$fff9]
+	and a
+	call z,ReadJoypadRegister
+	ld a,[$d122]
+	ld [$ffb8],a
+	ld [$2000],a
+	pop hl
+	pop de
+	pop bc
+	pop af
+	reti
 
 DelayFrame: ; 20AF
 ; delay for one frame
 	ld a,1
-	ld [$FFD6],a
+	ld [H_VBLANKOCCURRED],a
 
 ; wait for the next Vblank, halting to conserve battery
 .halt\@
 	db $76 ; XXX this is a hack--rgbasm adds a nop after this instr even when ints are enabled
-	ld a,[$FFD6]
+	ld a,[H_VBLANKOCCURRED]
 	and a
 	jr nz,.halt\@
 
@@ -4198,8 +4739,8 @@ DisplayTextID: ; 2920
 	ld a,[W_CURMAP]
 	call SwitchToMapRomBank
 .skipSwitchToMapBank\@
-	ld a,$1e
-	ld [$ffd5],a ; joypad poll timer
+	ld a,30 ; half a second
+	ld [H_FRAMECOUNTER],a ; used as joypad poll timer
 	ld hl,W_MAPTEXTPTR
 	ld a,[hli]
 	ld h,[hl]
@@ -4796,10 +5337,10 @@ GetJoypadStateLowSensitivity: ; 3831
 	jr z,.noNewlyPressedButtons\@
 .newlyPressedButtons\@
 	ld a,30 ; half a second delay
-	ld [$ffd5],a ; frame counter
+	ld [H_FRAMECOUNTER],a
 	ret
 .noNewlyPressedButtons\@
-	ld a,[$ffd5] ; frame counter
+	ld a,[H_FRAMECOUNTER]
 	and a ; is the delay over?
 	jr z,.delayOver\@
 .delayNotOver\@
@@ -4818,7 +5359,7 @@ GetJoypadStateLowSensitivity: ; 3831
 	ld [$ffb5],a             
 .setShortDelay\@
 	ld a,5 ; 1/12 of a second delay
-	ld [$ffd5],a ; frame counter
+	ld [H_FRAMECOUNTER],a
 	ret
 
 INCBIN "baserom.gbc",$3865,$38AC - $3865
@@ -4886,11 +5427,11 @@ PrintLetterDelay: ; 38D3
 	jr z,.waitOneFrame\@
 	ld a,[$d355]
 	and a,$0f
-	ld [$ffd5],a ; frame counter
+	ld [H_FRAMECOUNTER],a
 	jr .checkButtons\@
 .waitOneFrame\@
 	ld a,1
-	ld [$ffd5],a ; frame counter
+	ld [H_FRAMECOUNTER],a
 .checkButtons\@
 	call GetJoypadState
 	ld a,[$ffb4]
@@ -4905,7 +5446,7 @@ PrintLetterDelay: ; 38D3
 	call DelayFrame
 	jr .done\@
 .buttonsNotPressed\@ ; if neither A nor B is pressed
-	ld a,[$ffd5] ; frame counter
+	ld a,[H_FRAMECOUNTER]
 	and a
 	jr nz,.checkButtons\@
 .done\@
@@ -12100,7 +12641,7 @@ ItemUseBall: ; 03:5687
 	ld [H_MULTIPLICAND + 2],a
 	ld a,255
 	ld [H_MULTIPLIER],a
-	call $38ac	;Multiply: MaxHP * 255
+	call Multiply	; MaxHP * 255
 	ld a,[$cf91]
 	cp a,GREAT_BALL
 	ld a,12		;any other BallFactor
@@ -12109,7 +12650,7 @@ ItemUseBall: ; 03:5687
 .next7\@	;$574d
 	ld [H_DIVISOR],a
 	ld b,4		;number of significant bytes
-	call $38b9	;Divide
+	call Divide
 	ld hl,W_ENEMYMONCURHP
 	ld a,[hli]
 	ld b,a
@@ -12128,7 +12669,7 @@ ItemUseBall: ; 03:5687
 .next8\@	;$5766
 	ld [H_DIVISOR],a
 	ld b,4
-	call $38b9	; Divide: ((MaxHP * 255) / BallFactor) / (CurHP / 4)
+	call Divide	; ((MaxHP * 255) / BallFactor) / (CurHP / 4)
 	ld a,[H_QUOTIENT + 2]
 	and a
 	jr z,.next9\@
@@ -12159,7 +12700,7 @@ ItemUseBall: ; 03:5687
 	ld [H_MULTIPLICAND + 2],a
 	ld a,100
 	ld [H_MULTIPLIER],a
-	call $38ac	;Multiply: CatchRate * 100
+	call Multiply	; CatchRate * 100
 	ld a,[$cf91]
 	ld b,255
 	cp a,POKE_BALL
@@ -12174,18 +12715,18 @@ ItemUseBall: ; 03:5687
 	ld a,b
 	ld [H_DIVISOR],a
 	ld b,4
-	call $38b9	;Divide
+	call Divide
 	ld a,[H_QUOTIENT + 2]
 	and a
 	ld b,$63
 	jr nz,.next12\@
 	ld a,[$d11e]
 	ld [H_MULTIPLIER],a
-	call $38ac
+	call Multiply
 	ld a,255
 	ld [H_DIVISOR],a
 	ld b,4
-	call $38b9
+	call Divide
 	ld a,[W_ENEMYMONSTATUS]	;status ailments
 	and a
 	jr z,.next13\@
@@ -22723,7 +23264,7 @@ Function67CF: ; 0x3a7cf 67CF
 	ld a,[hl]
 	ld [H_DIVIDEND + 1],a
 	ld b,2
-	call $38B9
+	call Divide
 	ld a,[H_QUOTIENT + 3]
 	ld c,a
 	ld a,[H_QUOTIENT + 2]
@@ -26630,11 +27171,11 @@ AdjustDamageForMoveType: ; 63A5
 	ld [H_MULTIPLICAND + 1],a
 	ld a,[hld]
 	ld [H_MULTIPLICAND + 2],a
-	call $38ac ; multiply
+	call Multiply
 	ld a,10
 	ld [H_DIVISOR],a
 	ld b,$04
-	call $38b9 ; divide
+	call Divide
 	ld a,[H_QUOTIENT + 2]
 	ld [hli],a
 	ld b,a
@@ -26945,11 +27486,11 @@ CalcHitChance: ; 6624
 	pop bc
 	ld a,[hli]
 	ld [H_MULTIPLIER],a ; set multiplier to the numerator of the ratio
-	call $38ac ; multiply
+	call Multiply
 	ld a,[hl]
 	ld [H_DIVISOR],a ; set divisor to the the denominator of the ratio (the dividend is the product of the previous multiplication)
 	ld b,$04 ; number of significant bytes in the dividend
-	call $38b9 ; divide
+	call Divide
 	ld a,[H_QUOTIENT + 3]
 	ld b,a
 	ld a,[H_QUOTIENT + 2]
