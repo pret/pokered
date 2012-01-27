@@ -6334,8 +6334,8 @@ UnnamedText_4e2c: ; 0x4e2c
 
 INCBIN "baserom.gbc",$4e31,$5a24 - $4e31
 
-UnnamedText_5a24: ; 0x5a24
-	TX_FAR _UnnamedText_5a24
+SSAnne8AfterBattleTxt2: ; 0x5a24
+	TX_FAR _SSAnne8AfterBattleTxt2
 	db $50
 ; 0x5a24 + 5 bytes
 
@@ -16023,34 +16023,34 @@ SilphCo4Texts: ; 0x19da0
 	dw SilphCo4Text1, SilphCo4Text2, SilphCo4Text3, SilphCo4Text4, SilphCo4Text5, SilphCo4Text6, SilphCo4Text7
 
 SilphCo4TrainerHeaders:
-TrainerHeader_19dae: ; 0x19dae
+SilphCo4TH1: ; 0x19dae
 	db $2 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d829 ; flag's byte
-	dw UnnamedText_19df4 ; 0x5df4 TextBeforeBattle
-	dw UnnamedText_19dfe ; 0x5dfe TextAfterBattle
-	dw UnnamedText_19df9 ; 0x5df9 TextEndBattle
-	dw UnnamedText_19df9 ; 0x5df9 TextEndBattle
+	dw SilphCo4B4BattleTxt2 ; 0x5df4 TextBeforeBattle
+	dw SilphCo4AfterBattleTxt2 ; 0x5dfe TextAfterBattle
+	dw SilphCo4EndBattleTxt2 ; 0x5df9 TextEndBattle
+	dw SilphCo4EndBattleTxt2 ; 0x5df9 TextEndBattle
 ; 0x19dba
 
-TrainerHeader_19dba: ; 0x19dba
+SilphCo4TH2: ; 0x19dba
 	db $3 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d829 ; flag's byte
-	dw UnnamedText_19e0d ; 0x5e0d TextBeforeBattle
-	dw UnnamedText_19e17 ; 0x5e17 TextAfterBattle
-	dw UnnamedText_19e12 ; 0x5e12 TextEndBattle
-	dw UnnamedText_19e12 ; 0x5e12 TextEndBattle
+	dw SilphCo4B4BattleTxt3 ; 0x5e0d TextBeforeBattle
+	dw SilphCo4AfterBattleTxt3 ; 0x5e17 TextAfterBattle
+	dw SilphCo4EndBattleTxt3 ; 0x5e12 TextEndBattle
+	dw SilphCo4EndBattleTxt3 ; 0x5e12 TextEndBattle
 ; 0x19dc4
 
-TrainerHeader_19dc6: ; 0x19dc6
+SilphCo4TH3: ; 0x19dc6
 	db $4 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d829 ; flag's byte
-	dw UnnamedText_19e26 ; 0x5e26 TextBeforeBattle
-	dw UnnamedText_19e30 ; 0x5e30 TextAfterBattle
-	dw UnnamedText_19e2b ; 0x5e2b TextEndBattle
-	dw UnnamedText_19e2b ; 0x5e2b TextEndBattle
+	dw SilphCo4B4BattleTxt4 ; 0x5e26 TextBeforeBattle
+	dw SilphCo4AfterBattleTxt4 ; 0x5e30 TextAfterBattle
+	dw SilphCo4EndBattleTxt4 ; 0x5e2b TextEndBattle
+	dw SilphCo4EndBattleTxt4 ; 0x5e2b TextEndBattle
 ; 0x19dd2
 
 db $ff
@@ -16074,64 +16074,64 @@ UnnamedText_19de5: ; 0x19de5
 
 SilphCo4Text2: ; 0x19dea
 	db $08 ; asm
-	ld hl, TrainerHeader_19dae
+	ld hl, SilphCo4TH1
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_19df4: ; 0x19df4
-	TX_FAR _UnnamedText_19df4
+SilphCo4B4BattleTxt2: ; 0x19df4
+	TX_FAR _SilphCo4B4BattleTxt2
 	db $50
 ; 0x19df4 + 5 bytes
 
-UnnamedText_19df9: ; 0x19df9
-	TX_FAR _UnnamedText_19df9
+SilphCo4EndBattleTxt2: ; 0x19df9
+	TX_FAR _SilphCo4EndBattleTxt2
 	db $50
 ; 0x19df9 + 5 bytes
 
-UnnamedText_19dfe: ; 0x19dfe
-	TX_FAR _UnnamedText_19dfe
+SilphCo4AfterBattleTxt2: ; 0x19dfe
+	TX_FAR _SilphCo4AfterBattleTxt2
 	db $50
 ; 0x19dfe + 5 bytes
 
 SilphCo4Text3: ; 0x19e03
 	db $08 ; asm
-	ld hl, TrainerHeader_19dba
+	ld hl, SilphCo4TH2
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_19e0d: ; 0x19e0d
-	TX_FAR _UnnamedText_19e0d
+SilphCo4B4BattleTxt3: ; 0x19e0d
+	TX_FAR _SilphCo4B4BattleTxt3
 	db $50
 ; 0x19e0d + 5 bytes
 
-UnnamedText_19e12: ; 0x19e12
-	TX_FAR _UnnamedText_19e12
+SilphCo4EndBattleTxt3: ; 0x19e12
+	TX_FAR _SilphCo4EndBattleTxt3
 	db $50
 ; 0x19e12 + 5 bytes
 
-UnnamedText_19e17: ; 0x19e17
-	TX_FAR _UnnamedText_19e17
+SilphCo4AfterBattleTxt3: ; 0x19e17
+	TX_FAR _SilphCo4AfterBattleTxt3
 	db $50
 ; 0x19e17 + 5 bytes
 
 SilphCo4Text4: ; 0x19e1c
 	db $08 ; asm
-	ld hl, TrainerHeader_19dc6
+	ld hl, SilphCo4TH3
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_19e26: ; 0x19e26
-	TX_FAR _UnnamedText_19e26
+SilphCo4B4BattleTxt4: ; 0x19e26
+	TX_FAR _SilphCo4B4BattleTxt4
 	db $50
 ; 0x19e26 + 5 bytes
 
-UnnamedText_19e2b: ; 0x19e2b
-	TX_FAR _UnnamedText_19e2b
+SilphCo4EndBattleTxt4: ; 0x19e2b
+	TX_FAR _SilphCo4EndBattleTxt4
 	db $50
 ; 0x19e2b + 5 bytes
 
-UnnamedText_19e30: ; 0x19e30
-	TX_FAR _UnnamedText_19e30
+SilphCo4AfterBattleTxt4: ; 0x19e30
+	TX_FAR _SilphCo4AfterBattleTxt4
 	db $50
 ; 0x19e30 + 5 bytes
 
@@ -16196,44 +16196,44 @@ SilphCo5Texts: ; 0x19fbc
 	dw SilphCo5Text1, SilphCo5Text2, SilphCo5Text3, SilphCo5Text4, SilphCo5Text5, SilphCo5Text6, SilphCo5Text7, SilphCo5Text8, SilphCo5Text9, SilphCo5Text10, SilphCo5Text11
 
 SilphCo5TrainerHeaders:
-TrainerHeader_19fd2: ; 0x19fd2
+SilphCo5TH1: ; 0x19fd2
 	db $2 ; flag's bit
 	db ($1 << 4) ; trainer's view range
 	dw $d82b ; flag's byte
-	dw UnnamedText_1a024 ; 0x6024 TextBeforeBattle
-	dw UnnamedText_1a02e ; 0x602e TextAfterBattle
-	dw UnnamedText_1a029 ; 0x6029 TextEndBattle
-	dw UnnamedText_1a029 ; 0x6029 TextEndBattle
+	dw SilphCo5B4BattleTxt2 ; 0x6024 TextBeforeBattle
+	dw SilphCo5AfterBattleTxt2 ; 0x602e TextAfterBattle
+	dw SilphCo5EndBattleTxt2 ; 0x6029 TextEndBattle
+	dw SilphCo5EndBattleTxt2 ; 0x6029 TextEndBattle
 ; 0x19fde
 
-TrainerHeader_19fde: ; 0x19fde
+SilphCo5TH2: ; 0x19fde
 	db $3 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d82b ; flag's byte
-	dw UnnamedText_1a03d ; 0x603d TextBeforeBattle
-	dw UnnamedText_1a047 ; 0x6047 TextAfterBattle
-	dw UnnamedText_1a042 ; 0x6042 TextEndBattle
-	dw UnnamedText_1a042 ; 0x6042 TextEndBattle
+	dw SilphCo5B4BattleTxt3 ; 0x603d TextBeforeBattle
+	dw SilphCo5AfterBattleTxt3 ; 0x6047 TextAfterBattle
+	dw SilphCo5EndBattleTxt3 ; 0x6042 TextEndBattle
+	dw SilphCo5EndBattleTxt3 ; 0x6042 TextEndBattle
 ; 0x19fea
 
-TrainerHeader_19fea: ; 0x19fea
+SilphCo5TH3: ; 0x19fea
 	db $4 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d82b ; flag's byte
-	dw UnnamedText_1a056 ; 0x6056 TextBeforeBattle
-	dw UnnamedText_1a060 ; 0x6060 TextAfterBattle
-	dw UnnamedText_1a05b ; 0x605b TextEndBattle
-	dw UnnamedText_1a05b ; 0x605b TextEndBattle
+	dw SilphCo5B4BattleTxt4 ; 0x6056 TextBeforeBattle
+	dw SilphCo5AfterBattleTxt4 ; 0x6060 TextAfterBattle
+	dw SilphCo5EndBattleTxt4 ; 0x605b TextEndBattle
+	dw SilphCo5EndBattleTxt4 ; 0x605b TextEndBattle
 ; 0x19ff4
 
-TrainerHeader_19ff6: ; 0x19ff6
+SilphCo5TH4: ; 0x19ff6
 	db $5 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d82b ; flag's byte
-	dw UnnamedText_1a06f ; 0x606f TextBeforeBattle
-	dw UnnamedText_1a079 ; 0x6079 TextAfterBattle
-	dw UnnamedText_1a074 ; 0x6074 TextEndBattle
-	dw UnnamedText_1a074 ; 0x6074 TextEndBattle
+	dw SilphCo5B4BattleTxt5 ; 0x606f TextBeforeBattle
+	dw SilphCo5AfterBattleTxt5 ; 0x6079 TextAfterBattle
+	dw SilphCo5EndBattleTxt5 ; 0x6074 TextEndBattle
+	dw SilphCo5EndBattleTxt5 ; 0x6074 TextEndBattle
 ; 0x1a002
 
 db $ff
@@ -16257,85 +16257,85 @@ UnnamedText_1a015: ; 0x1a015
 
 SilphCo5Text2: ; 0x1a01a
 	db $08 ; asm
-	ld hl, TrainerHeader_19fd2
+	ld hl, SilphCo5TH1
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_1a024: ; 0x1a024
-	TX_FAR _UnnamedText_1a024
+SilphCo5B4BattleTxt2: ; 0x1a024
+	TX_FAR _SilphCo5B4BattleTxt2
 	db $50
 ; 0x1a024 + 5 bytes
 
-UnnamedText_1a029: ; 0x1a029
-	TX_FAR _UnnamedText_1a029
+SilphCo5EndBattleTxt2: ; 0x1a029
+	TX_FAR _SilphCo5EndBattleTxt2
 	db $50
 ; 0x1a029 + 5 bytes
 
-UnnamedText_1a02e: ; 0x1a02e
-	TX_FAR _UnnamedText_1a02e
+SilphCo5AfterBattleTxt2: ; 0x1a02e
+	TX_FAR _SilphCo5AfterBattleTxt2
 	db $50
 ; 0x1a02e + 5 bytes
 
 SilphCo5Text3: ; 0x1a033
 	db $08 ; asm
-	ld hl, TrainerHeader_19fde
+	ld hl, SilphCo5TH2
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_1a03d: ; 0x1a03d
-	TX_FAR _UnnamedText_1a03d
+SilphCo5B4BattleTxt3: ; 0x1a03d
+	TX_FAR _SilphCo5B4BattleTxt3
 	db $50
 ; 0x1a03d + 5 bytes
 
-UnnamedText_1a042: ; 0x1a042
-	TX_FAR _UnnamedText_1a042
+SilphCo5EndBattleTxt3: ; 0x1a042
+	TX_FAR _SilphCo5EndBattleTxt3
 	db $50
 ; 0x1a042 + 5 bytes
 
-UnnamedText_1a047: ; 0x1a047
-	TX_FAR _UnnamedText_1a047
+SilphCo5AfterBattleTxt3: ; 0x1a047
+	TX_FAR _SilphCo5AfterBattleTxt3
 	db $50
 ; 0x1a047 + 5 bytes
 
 SilphCo5Text4: ; 0x1a04c
 	db $08 ; asm
-	ld hl, TrainerHeader_19fea
+	ld hl, SilphCo5TH3
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_1a056: ; 0x1a056
-	TX_FAR _UnnamedText_1a056
+SilphCo5B4BattleTxt4: ; 0x1a056
+	TX_FAR _SilphCo5B4BattleTxt4
 	db $50
 ; 0x1a056 + 5 bytes
 
-UnnamedText_1a05b: ; 0x1a05b
-	TX_FAR _UnnamedText_1a05b
+SilphCo5EndBattleTxt4: ; 0x1a05b
+	TX_FAR _SilphCo5EndBattleTxt4
 	db $50
 ; 0x1a05b + 5 bytes
 
-UnnamedText_1a060: ; 0x1a060
-	TX_FAR _UnnamedText_1a060
+SilphCo5AfterBattleTxt4: ; 0x1a060
+	TX_FAR _SilphCo5AfterBattleTxt4
 	db $50
 ; 0x1a060 + 5 bytes
 
 SilphCo5Text5: ; 0x1a065
 	db $08 ; asm
-	ld hl, TrainerHeader_19ff6
+	ld hl, SilphCo5TH4
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_1a06f: ; 0x1a06f
-	TX_FAR _UnnamedText_1a06f
+SilphCo5B4BattleTxt5: ; 0x1a06f
+	TX_FAR _SilphCo5B4BattleTxt5
 	db $50
 ; 0x1a06f + 5 bytes
 
-UnnamedText_1a074: ; 0x1a074
-	TX_FAR _UnnamedText_1a074
+SilphCo5EndBattleTxt5: ; 0x1a074
+	TX_FAR _SilphCo5EndBattleTxt5
 	db $50
 ; 0x1a074 + 5 bytes
 
-UnnamedText_1a079: ; 0x1a079
-	TX_FAR _UnnamedText_1a079
+SilphCo5AfterBattleTxt5: ; 0x1a079
+	TX_FAR _SilphCo5AfterBattleTxt5
 	db $50
 ; 0x1a079 + 5 bytes
 
@@ -16416,34 +16416,34 @@ SilphCo6Texts: ; 0x1a1f6
 	dw SilphCo6Text1, SilphCo6Text2, SilphCo6Text3, SilphCo6Text4, SilphCo6Text5, SilphCo6Text6, SilphCo6Text7, SilphCo6Text8, SilphCo6Text9, SilphCo6Text10
 
 SilphCo6TrainerHeaders:
-TrainerHeader_1a20a: ; 0x1a20a
+SilphCo6TH1: ; 0x1a20a
 	db $6 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d82d ; flag's byte
-	dw UnnamedText_1a2ba ; 0x62ba TextBeforeBattle
-	dw UnnamedText_1a2c4 ; 0x62c4 TextAfterBattle
-	dw UnnamedText_1a2bf ; 0x62bf TextEndBattle
-	dw UnnamedText_1a2bf ; 0x62bf TextEndBattle
+	dw SilphCo6B4BattleTxt2 ; 0x62ba TextBeforeBattle
+	dw SilphCo6AfterBattleTxt2 ; 0x62c4 TextAfterBattle
+	dw SilphCo6EndBattleTxt2 ; 0x62bf TextEndBattle
+	dw SilphCo6EndBattleTxt2 ; 0x62bf TextEndBattle
 ; 0x1a216
 
-TrainerHeader_1a216: ; 0x1a216
+SilphCo6TH2: ; 0x1a216
 	db $7 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d82d ; flag's byte
-	dw UnnamedText_1a2d3 ; 0x62d3 TextBeforeBattle
-	dw UnnamedText_1a2dd ; 0x62dd TextAfterBattle
-	dw UnnamedText_1a2d8 ; 0x62d8 TextEndBattle
-	dw UnnamedText_1a2d8 ; 0x62d8 TextEndBattle
+	dw SilphCo6B4BattleTxt3 ; 0x62d3 TextBeforeBattle
+	dw SilphCo6AfterBattleTxt3 ; 0x62dd TextAfterBattle
+	dw SilphCo6EndBattleTxt3 ; 0x62d8 TextEndBattle
+	dw SilphCo6EndBattleTxt3 ; 0x62d8 TextEndBattle
 ; 0x1a222
 
-TrainerHeader_1a222: ; 0x1a222
+SilphCo6TH3: ; 0x1a222
 	db $8 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d82d ; flag's byte
-	dw UnnamedText_1a2ec ; 0x62ec TextBeforeBattle
-	dw UnnamedText_1a2f6 ; 0x62f6 TextAfterBattle
-	dw UnnamedText_1a2f1 ; 0x62f1 TextEndBattle
-	dw UnnamedText_1a2f1 ; 0x62f1 TextEndBattle
+	dw SilphCo6B4BattleTxt4 ; 0x62ec TextBeforeBattle
+	dw SilphCo6AfterBattleTxt4 ; 0x62f6 TextAfterBattle
+	dw SilphCo6EndBattleTxt4 ; 0x62f1 TextEndBattle
+	dw SilphCo6EndBattleTxt4 ; 0x62f1 TextEndBattle
 ; 0x1a22e
 
 db $ff
@@ -16538,64 +16538,64 @@ UnnamedText_1a2ab: ; 0x1a2ab
 
 SilphCo6Text6: ; 0x1a2b0
 	db $08 ; asm
-	ld hl, TrainerHeader_1a20a
+	ld hl, SilphCo6TH1
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_1a2ba: ; 0x1a2ba
-	TX_FAR _UnnamedText_1a2ba
+SilphCo6B4BattleTxt2: ; 0x1a2ba
+	TX_FAR _SilphCo6B4BattleTxt2
 	db $50
 ; 0x1a2ba + 5 bytes
 
-UnnamedText_1a2bf: ; 0x1a2bf
-	TX_FAR _UnnamedText_1a2bf
+SilphCo6EndBattleTxt2: ; 0x1a2bf
+	TX_FAR _SilphCo6EndBattleTxt2
 	db $50
 ; 0x1a2bf + 5 bytes
 
-UnnamedText_1a2c4: ; 0x1a2c4
-	TX_FAR _UnnamedText_1a2c4
+SilphCo6AfterBattleTxt2: ; 0x1a2c4
+	TX_FAR _SilphCo6AfterBattleTxt2
 	db $50
 ; 0x1a2c4 + 5 bytes
 
 SilphCo6Text7: ; 0x1a2c9
 	db $08 ; asm
-	ld hl, TrainerHeader_1a216
+	ld hl, SilphCo6TH2
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_1a2d3: ; 0x1a2d3
-	TX_FAR _UnnamedText_1a2d3
+SilphCo6B4BattleTxt3: ; 0x1a2d3
+	TX_FAR _SilphCo6B4BattleTxt3
 	db $50
 ; 0x1a2d3 + 5 bytes
 
-UnnamedText_1a2d8: ; 0x1a2d8
-	TX_FAR _UnnamedText_1a2d8
+SilphCo6EndBattleTxt3: ; 0x1a2d8
+	TX_FAR _SilphCo6EndBattleTxt3
 	db $50
 ; 0x1a2d8 + 5 bytes
 
-UnnamedText_1a2dd: ; 0x1a2dd
-	TX_FAR _UnnamedText_1a2dd
+SilphCo6AfterBattleTxt3: ; 0x1a2dd
+	TX_FAR _SilphCo6AfterBattleTxt3
 	db $50
 ; 0x1a2dd + 5 bytes
 
 SilphCo6Text8: ; 0x1a2e2
 	db $08 ; asm
-	ld hl, TrainerHeader_1a222
+	ld hl, SilphCo6TH3
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_1a2ec: ; 0x1a2ec
-	TX_FAR _UnnamedText_1a2ec
+SilphCo6B4BattleTxt4: ; 0x1a2ec
+	TX_FAR _SilphCo6B4BattleTxt4
 	db $50
 ; 0x1a2ec + 5 bytes
 
-UnnamedText_1a2f1: ; 0x1a2f1
-	TX_FAR _UnnamedText_1a2f1
+SilphCo6EndBattleTxt4: ; 0x1a2f1
+	TX_FAR _SilphCo6EndBattleTxt4
 	db $50
 ; 0x1a2f1 + 5 bytes
 
-UnnamedText_1a2f6: ; 0x1a2f6
-	TX_FAR _UnnamedText_1a2f6
+SilphCo6AfterBattleTxt4: ; 0x1a2f6
+	TX_FAR _SilphCo6AfterBattleTxt4
 	db $50
 ; 0x1a2f6 + 5 bytes
 
@@ -29636,36 +29636,36 @@ Mansion1Texts: ; 0x4432c
 	dw Mansion1Text1, Mansion1Text2, Mansion1Text3, Mansion1Text4
 
 Mansion1TrainerHeaders:
-TrainerHeader_44334: ; 0x44334
+Mansion1TH1: ; 0x44334
 	db $1 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d798 ; flag's byte
-	dw UnnamedText_4434b ; 0x434b TextBeforeBattle
-	dw UnnamedText_44355 ; 0x4355 TextAfterBattle
-	dw UnnamedText_44350 ; 0x4350 TextEndBattle
-	dw UnnamedText_44350 ; 0x4350 TextEndBattle
+	dw Mansion1B4BattleTxt2 ; 0x434b TextBeforeBattle
+	dw Mansion1AfterBattleTxt2 ; 0x4355 TextAfterBattle
+	dw Mansion1EndBattleTxt2 ; 0x4350 TextEndBattle
+	dw Mansion1EndBattleTxt2 ; 0x4350 TextEndBattle
 ; 0x44340
 
 db $ff
 
 Mansion1Text1: ; 0x44341
 	db $08 ; asm
-	ld hl, TrainerHeader_44334
+	ld hl, Mansion1TH1
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_4434b: ; 0x4434b
-	TX_FAR _UnnamedText_4434b
+Mansion1B4BattleTxt2: ; 0x4434b
+	TX_FAR _Mansion1B4BattleTxt2
 	db $50
 ; 0x4434b + 5 bytes
 
-UnnamedText_44350: ; 0x44350
-	TX_FAR _UnnamedText_44350
+Mansion1EndBattleTxt2: ; 0x44350
+	TX_FAR _Mansion1EndBattleTxt2
 	db $50
 ; 0x44350 + 5 bytes
 
-UnnamedText_44355: ; 0x44355
-	TX_FAR _UnnamedText_44355
+Mansion1AfterBattleTxt2: ; 0x44355
+	TX_FAR _Mansion1AfterBattleTxt2
 	db $50
 ; 0x44355 + 5 bytes
 
@@ -30110,129 +30110,129 @@ VictoryRoad3Texts: ; 0x44a24
 	dw VictoryRoad3Text1, VictoryRoad3Text2, VictoryRoad3Text3, VictoryRoad3Text4, VictoryRoad3Text5, VictoryRoad3Text6, VictoryRoad3Text7, VictoryRoad3Text8, VictoryRoad3Text9, VictoryRoad3Text10
 
 VictoryRoad3TrainerHeaders:
-TrainerHeader_44a38: ; 0x44a38
+VictoryRoad3TH1: ; 0x44a38
 	db $1 ; flag's bit
 	db ($1 << 4) ; trainer's view range
 	dw $d813 ; flag's byte
-	dw UnnamedText_44a91 ; 0x4a91 TextBeforeBattle
-	dw UnnamedText_44a9b ; 0x4a9b TextAfterBattle
-	dw UnnamedText_44a96 ; 0x4a96 TextEndBattle
-	dw UnnamedText_44a96 ; 0x4a96 TextEndBattle
+	dw VictoryRoad3B4BattleTxt2 ; 0x4a91 TextBeforeBattle
+	dw VictoryRoad3AfterBattleTxt2 ; 0x4a9b TextAfterBattle
+	dw VictoryRoad3EndBattleTxt2 ; 0x4a96 TextEndBattle
+	dw VictoryRoad3EndBattleTxt2 ; 0x4a96 TextEndBattle
 ; 0x44a44
 
-TrainerHeader_44a44: ; 0x44a44
+VictoryRoad3TH2: ; 0x44a44
 	db $2 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d813 ; flag's byte
-	dw UnnamedText_44aa0 ; 0x4aa0 TextBeforeBattle
-	dw UnnamedText_44aaa ; 0x4aaa TextAfterBattle
-	dw UnnamedText_44aa5 ; 0x4aa5 TextEndBattle
-	dw UnnamedText_44aa5 ; 0x4aa5 TextEndBattle
+	dw VictoryRoad3B4BattleTxt3 ; 0x4aa0 TextBeforeBattle
+	dw VictoryRoad3AfterBattleTxt3 ; 0x4aaa TextAfterBattle
+	dw VictoryRoad3EndBattleTxt3 ; 0x4aa5 TextEndBattle
+	dw VictoryRoad3EndBattleTxt3 ; 0x4aa5 TextEndBattle
 ; 0x44a50
 
-TrainerHeader_44a50: ; 0x44a50
+VictoryRoad3TH3: ; 0x44a50
 	db $3 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d813 ; flag's byte
-	dw UnnamedText_44aaf ; 0x4aaf TextBeforeBattle
-	dw UnnamedText_44ab9 ; 0x4ab9 TextAfterBattle
-	dw UnnamedText_44ab4 ; 0x4ab4 TextEndBattle
-	dw UnnamedText_44ab4 ; 0x4ab4 TextEndBattle
+	dw VictoryRoad3B4BattleTxt4 ; 0x4aaf TextBeforeBattle
+	dw VictoryRoad3AfterBattleTxt4 ; 0x4ab9 TextAfterBattle
+	dw VictoryRoad3EndBattleTxt4 ; 0x4ab4 TextEndBattle
+	dw VictoryRoad3EndBattleTxt4 ; 0x4ab4 TextEndBattle
 ; 0x44a5c
 
-TrainerHeader_44a5c: ; 0x44a5c
+VictoryRoad3TH4: ; 0x44a5c
 	db $4 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d813 ; flag's byte
-	dw UnnamedText_44abe ; 0x4abe TextBeforeBattle
-	dw UnnamedText_44ac8 ; 0x4ac8 TextAfterBattle
-	dw UnnamedText_44ac3 ; 0x4ac3 TextEndBattle
-	dw UnnamedText_44ac3 ; 0x4ac3 TextEndBattle
+	dw VictoryRoad3B4BattleTxt5 ; 0x4abe TextBeforeBattle
+	dw VictoryRoad3AfterBattleTxt5 ; 0x4ac8 TextAfterBattle
+	dw VictoryRoad3EndBattleTxt5 ; 0x4ac3 TextEndBattle
+	dw VictoryRoad3EndBattleTxt5 ; 0x4ac3 TextEndBattle
 ; 0x44a68
 
 db $ff
 
 VictoryRoad3Text1: ; 0x44a69
 	db $08 ; asm
-	ld hl, TrainerHeader_44a38
+	ld hl, VictoryRoad3TH1
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 VictoryRoad3Text2: ; 0x44a73
 	db $08 ; asm
-	ld hl, TrainerHeader_44a44
+	ld hl, VictoryRoad3TH2
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 VictoryRoad3Text3: ; 0x44a7d
 	db $08 ; asm
-	ld hl, TrainerHeader_44a50
+	ld hl, VictoryRoad3TH3
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 VictoryRoad3Text4: ; 0x44a87
 	db $08 ; asm
-	ld hl, TrainerHeader_44a5c
+	ld hl, VictoryRoad3TH4
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_44a91: ; 0x44a91
-	TX_FAR _UnnamedText_44a91
+VictoryRoad3B4BattleTxt2: ; 0x44a91
+	TX_FAR _VictoryRoad3B4BattleTxt2
 	db $50
 ; 0x44a91 + 5 bytes
 
-UnnamedText_44a96: ; 0x44a96
-	TX_FAR _UnnamedText_44a96
+VictoryRoad3EndBattleTxt2: ; 0x44a96
+	TX_FAR _VictoryRoad3EndBattleTxt2
 	db $50
 ; 0x44a96 + 5 bytes
 
-UnnamedText_44a9b: ; 0x44a9b
-	TX_FAR _UnnamedText_44a9b
+VictoryRoad3AfterBattleTxt2: ; 0x44a9b
+	TX_FAR _VictoryRoad3AfterBattleTxt2
 	db $50
 ; 0x44a9b + 5 bytes
 
-UnnamedText_44aa0: ; 0x44aa0
-	TX_FAR _UnnamedText_44aa0
+VictoryRoad3B4BattleTxt3: ; 0x44aa0
+	TX_FAR _VictoryRoad3B4BattleTxt3
 	db $50
 ; 0x44aa0 + 5 bytes
 
-UnnamedText_44aa5: ; 0x44aa5
-	TX_FAR _UnnamedText_44aa5
+VictoryRoad3EndBattleTxt3: ; 0x44aa5
+	TX_FAR _VictoryRoad3EndBattleTxt3
 	db $50
 ; 0x44aa5 + 5 bytes
 
-UnnamedText_44aaa: ; 0x44aaa
-	TX_FAR _UnnamedText_44aaa
+VictoryRoad3AfterBattleTxt3: ; 0x44aaa
+	TX_FAR _VictoryRoad3AfterBattleTxt3
 	db $50
 ; 0x44aaa + 5 bytes
 
-UnnamedText_44aaf: ; 0x44aaf
-	TX_FAR _UnnamedText_44aaf
+VictoryRoad3B4BattleTxt4: ; 0x44aaf
+	TX_FAR _VictoryRoad3B4BattleTxt4
 	db $50
 ; 0x44aaf + 5 bytes
 
-UnnamedText_44ab4: ; 0x44ab4
-	TX_FAR _UnnamedText_44ab4
+VictoryRoad3EndBattleTxt4: ; 0x44ab4
+	TX_FAR _VictoryRoad3EndBattleTxt4
 	db $50
 ; 0x44ab4 + 5 bytes
 
-UnnamedText_44ab9: ; 0x44ab9
-	TX_FAR _UnnamedText_44ab9
+VictoryRoad3AfterBattleTxt4: ; 0x44ab9
+	TX_FAR _VictoryRoad3AfterBattleTxt4
 	db $50
 ; 0x44ab9 + 5 bytes
 
-UnnamedText_44abe: ; 0x44abe
-	TX_FAR _UnnamedText_44abe
+VictoryRoad3B4BattleTxt5: ; 0x44abe
+	TX_FAR _VictoryRoad3B4BattleTxt5
 	db $50
 ; 0x44abe + 5 bytes
 
-UnnamedText_44ac3: ; 0x44ac3
-	TX_FAR _UnnamedText_44ac3
+VictoryRoad3EndBattleTxt5: ; 0x44ac3
+	TX_FAR _VictoryRoad3EndBattleTxt5
 	db $50
 ; 0x44ac3 + 5 bytes
 
-UnnamedText_44ac8: ; 0x44ac8
-	TX_FAR _UnnamedText_44ac8
+VictoryRoad3AfterBattleTxt5: ; 0x44ac8
+	TX_FAR _VictoryRoad3AfterBattleTxt5
 	db $50
 ; 0x44ac8 + 5 bytes
 
@@ -30294,90 +30294,90 @@ RocketHideout1Texts: ; 0x44c14
 	dw RocketHideout1Text1, RocketHideout1Text2, RocketHideout1Text3, RocketHideout1Text4, RocketHideout1Text5, RocketHideout1Text6, RocketHideout1Text7
 
 RocketHideout1TrainerHeaders:
-TrainerHeader_44c22: ; 0x44c22
+RocketHideout1TH1: ; 0x44c22
 	db $1 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d815 ; flag's byte
-	dw UnnamedText_44ca1 ; 0x4ca1 TextBeforeBattle
-	dw UnnamedText_44cab ; 0x4cab TextAfterBattle
-	dw UnnamedText_44ca6 ; 0x4ca6 TextEndBattle
-	dw UnnamedText_44ca6 ; 0x4ca6 TextEndBattle
+	dw RocketHideout1B4BattleTxt2 ; 0x4ca1 TextBeforeBattle
+	dw RocketHideout1AfterBattleTxt2 ; 0x4cab TextAfterBattle
+	dw RocketHideout1EndBattleTxt2 ; 0x4ca6 TextEndBattle
+	dw RocketHideout1EndBattleTxt2 ; 0x4ca6 TextEndBattle
 ; 0x44c2e
 
-TrainerHeader_44c2e: ; 0x44c2e
+RocketHideout1TH2: ; 0x44c2e
 	db $2 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d815 ; flag's byte
-	dw UnnamedText_44cb0 ; 0x4cb0 TextBeforeBattle
-	dw UnnamedText_44cba ; 0x4cba TextAfterBattle
-	dw UnnamedText_44cb5 ; 0x4cb5 TextEndBattle
-	dw UnnamedText_44cb5 ; 0x4cb5 TextEndBattle
+	dw RocketHideout1B4BattleTxt3 ; 0x4cb0 TextBeforeBattle
+	dw RocketHideout1AfterBattleTxt3 ; 0x4cba TextAfterBattle
+	dw RocketHideout1EndBattleTxt3 ; 0x4cb5 TextEndBattle
+	dw RocketHideout1EndBattleTxt3 ; 0x4cb5 TextEndBattle
 ; 0x44c3a
 
-TrainerHeader_44c3a: ; 0x44c3a
+RocketHideout1TH3: ; 0x44c3a
 	db $3 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d815 ; flag's byte
-	dw UnnamedText_44cbf ; 0x4cbf TextBeforeBattle
-	dw UnnamedText_44cc9 ; 0x4cc9 TextAfterBattle
-	dw UnnamedText_44cc4 ; 0x4cc4 TextEndBattle
-	dw UnnamedText_44cc4 ; 0x4cc4 TextEndBattle
+	dw RocketHideout1B4BattleTxt4 ; 0x4cbf TextBeforeBattle
+	dw RocketHideout1AfterBattleTxt4 ; 0x4cc9 TextAfterBattle
+	dw RocketHideout1EndBattleTxt4 ; 0x4cc4 TextEndBattle
+	dw RocketHideout1EndBattleTxt4 ; 0x4cc4 TextEndBattle
 ; 0x44c46
 
-TrainerHeader_44c46: ; 0x44c46
+RocketHideout1TH4: ; 0x44c46
 	db $4 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d815 ; flag's byte
-	dw UnnamedText_44cce ; 0x4cce TextBeforeBattle
-	dw UnnamedText_44cd8 ; 0x4cd8 TextAfterBattle
-	dw UnnamedText_44cd3 ; 0x4cd3 TextEndBattle
-	dw UnnamedText_44cd3 ; 0x4cd3 TextEndBattle
+	dw RocketHideout1B4BattleTxt5 ; 0x4cce TextBeforeBattle
+	dw RocketHideout1AfterBattleTxt5 ; 0x4cd8 TextAfterBattle
+	dw RocketHideout1EndBattleTxt5 ; 0x4cd3 TextEndBattle
+	dw RocketHideout1EndBattleTxt5 ; 0x4cd3 TextEndBattle
 ; 0x44c52
 
-TrainerHeader_44c52: ; 0x44c52
+RocketHideout1TH5: ; 0x44c52
 	db $5 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d815 ; flag's byte
-	dw UnnamedText_44cdd ; 0x4cdd TextBeforeBattle
-	dw UnnamedText_44ce2 ; 0x4ce2 TextAfterBattle
-	dw UnnamedText_44c91 ; 0x4c91 TextEndBattle
-	dw UnnamedText_44c91 ; 0x4c91 TextEndBattle
+	dw RocketHideout1B4BattleTxt6 ; 0x4cdd TextBeforeBattle
+	dw RocketHideout1AfterBattleTxt6 ; 0x4ce2 TextAfterBattle
+	dw RocketHideout1EndBattleTxt6 ; 0x4c91 TextEndBattle
+	dw RocketHideout1EndBattleTxt6 ; 0x4c91 TextEndBattle
 ; 0x44c5e
 
 db $ff
 
 RocketHideout1Text1: ; 0x44c5f
 	db $08 ; asm
-	ld hl, TrainerHeader_44c22
+	ld hl, RocketHideout1TH1
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 RocketHideout1Text2: ; 0x44c69
 	db $08 ; asm
-	ld hl, TrainerHeader_44c2e
+	ld hl, RocketHideout1TH2
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 RocketHideout1Text3: ; 0x44c73
 	db $08 ; asm
-	ld hl, TrainerHeader_44c3a
+	ld hl, RocketHideout1TH3
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 RocketHideout1Text4: ; 0x44c7d
 	db $08 ; asm
-	ld hl, TrainerHeader_44c46
+	ld hl, RocketHideout1TH4
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 RocketHideout1Text5: ; 0x44c87
 	db $08 ; asm
-	ld hl, TrainerHeader_44c52
+	ld hl, RocketHideout1TH5
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_44c91: ; 0x44c91
-	TX_FAR _UnnamedText_44c91 ; 0x81f2a
+RocketHideout1EndBattleTxt6: ; 0x44c91
+	TX_FAR _RocketHideout1EndBattleTxt6 ; 0x81f2a
 	db $8
 	ld hl, $d815
 	set 5, [hl]
@@ -30389,73 +30389,73 @@ UnnamedText_44c9f: ; 0x44c9f
 	db $6, $50
 ; 0x44ca1
 
-UnnamedText_44ca1: ; 0x44ca1
-	TX_FAR _UnnamedText_44ca1
+RocketHideout1B4BattleTxt2: ; 0x44ca1
+	TX_FAR _RocketHideout1B4BattleTxt2
 	db $50
 ; 0x44ca1 + 5 bytes
 
-UnnamedText_44ca6: ; 0x44ca6
-	TX_FAR _UnnamedText_44ca6
+RocketHideout1EndBattleTxt2: ; 0x44ca6
+	TX_FAR _RocketHideout1EndBattleTxt2
 	db $50
 ; 0x44ca6 + 5 bytes
 
-UnnamedText_44cab: ; 0x44cab
-	TX_FAR _UnnamedText_44cab
+RocketHideout1AfterBattleTxt2: ; 0x44cab
+	TX_FAR _RocketHideout1AfterBattleTxt2
 	db $50
 ; 0x44cab + 5 bytes
 
-UnnamedText_44cb0: ; 0x44cb0
-	TX_FAR _UnnamedText_44cb0
+RocketHideout1B4BattleTxt3: ; 0x44cb0
+	TX_FAR _RocketHideout1B4BattleTxt3
 	db $50
 ; 0x44cb0 + 5 bytes
 
-UnnamedText_44cb5: ; 0x44cb5
-	TX_FAR _UnnamedText_44cb5
+RocketHideout1EndBattleTxt3: ; 0x44cb5
+	TX_FAR _RocketHideout1EndBattleTxt3
 	db $50
 ; 0x44cb5 + 5 bytes
 
-UnnamedText_44cba: ; 0x44cba
-	TX_FAR _UnnamedText_44cba
+RocketHideout1AfterBattleTxt3: ; 0x44cba
+	TX_FAR _RocketHideout1AfterBattleTxt3
 	db $50
 ; 0x44cba + 5 bytes
 
-UnnamedText_44cbf: ; 0x44cbf
-	TX_FAR _UnnamedText_44cbf
+RocketHideout1B4BattleTxt4: ; 0x44cbf
+	TX_FAR _RocketHideout1B4BattleTxt4
 	db $50
 ; 0x44cbf + 5 bytes
 
-UnnamedText_44cc4: ; 0x44cc4
-	TX_FAR _UnnamedText_44cc4
+RocketHideout1EndBattleTxt4: ; 0x44cc4
+	TX_FAR _RocketHideout1EndBattleTxt4
 	db $50
 ; 0x44cc4 + 5 bytes
 
-UnnamedText_44cc9: ; 0x44cc9
-	TX_FAR _UnnamedText_44cc9
+RocketHideout1AfterBattleTxt4: ; 0x44cc9
+	TX_FAR _RocketHideout1AfterBattleTxt4
 	db $50
 ; 0x44cc9 + 5 bytes
 
-UnnamedText_44cce: ; 0x44cce
-	TX_FAR _UnnamedText_44cce
+RocketHideout1B4BattleTxt5: ; 0x44cce
+	TX_FAR _RocketHideout1B4BattleTxt5
 	db $50
 ; 0x44cce + 5 bytes
 
-UnnamedText_44cd3: ; 0x44cd3
-	TX_FAR _UnnamedText_44cd3
+RocketHideout1EndBattleTxt5: ; 0x44cd3
+	TX_FAR _RocketHideout1EndBattleTxt5
 	db $50
 ; 0x44cd3 + 5 bytes
 
-UnnamedText_44cd8: ; 0x44cd8
-	TX_FAR _UnnamedText_44cd8
+RocketHideout1AfterBattleTxt5: ; 0x44cd8
+	TX_FAR _RocketHideout1AfterBattleTxt5
 	db $50
 ; 0x44cd8 + 5 bytes
 
-UnnamedText_44cdd: ; 0x44cdd
-	TX_FAR _UnnamedText_44cdd
+RocketHideout1B4BattleTxt6: ; 0x44cdd
+	TX_FAR _RocketHideout1B4BattleTxt6
 	db $50
 ; 0x44cdd + 5 bytes
 
-UnnamedText_44ce2: ; 0x44ce2
-	TX_FAR _UnnamedText_44ce2
+RocketHideout1AfterBattleTxt6: ; 0x44ce2
+	TX_FAR _RocketHideout1AfterBattleTxt6
 	db $50
 ; 0x44ce2 + 5 bytes
 
@@ -30515,36 +30515,36 @@ RocketHideout2Texts: ; 0x450c7
 	dw RocketHideout2Text1, RocketHideout2Text2, RocketHideout2Text3, RocketHideout2Text4, RocketHideout2Text5
 
 RocketHideout2TrainerHeaders:
-TrainerHeader_450d1: ; 0x450d1
+RocketHideout2TH1: ; 0x450d1
 	db $1 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d817 ; flag's byte
-	dw UnnamedText_450e8 ; 0x50e8 TextBeforeBattle
-	dw UnnamedText_450f2 ; 0x50f2 TextAfterBattle
-	dw UnnamedText_450ed ; 0x50ed TextEndBattle
-	dw UnnamedText_450ed ; 0x50ed TextEndBattle
+	dw RocketHideout2B4BattleTxt2 ; 0x50e8 TextBeforeBattle
+	dw RocketHideout2AfterBattleTxt2 ; 0x50f2 TextAfterBattle
+	dw RocketHideout2EndBattleTxt2 ; 0x50ed TextEndBattle
+	dw RocketHideout2EndBattleTxt2 ; 0x50ed TextEndBattle
 ; 0x450dd
 
 db $ff
 
 RocketHideout2Text1: ; 0x450de
 	db $08 ; asm
-	ld hl, TrainerHeader_450d1
+	ld hl, RocketHideout2TH1
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_450e8: ; 0x450e8
-	TX_FAR _UnnamedText_450e8
+RocketHideout2B4BattleTxt2: ; 0x450e8
+	TX_FAR _RocketHideout2B4BattleTxt2
 	db $50
 ; 0x450e8 + 5 bytes
 
-UnnamedText_450ed: ; 0x450ed
-	TX_FAR _UnnamedText_450ed
+RocketHideout2EndBattleTxt2: ; 0x450ed
+	TX_FAR _RocketHideout2EndBattleTxt2
 	db $50
 ; 0x450ed + 5 bytes
 
-UnnamedText_450f2: ; 0x450f2
-	TX_FAR _UnnamedText_450f2
+RocketHideout2AfterBattleTxt2: ; 0x450f2
+	TX_FAR _RocketHideout2AfterBattleTxt2
 	db $50
 ; 0x450f2 + 5 bytes
 
@@ -30602,67 +30602,67 @@ RocketHideout3Texts: ; 0x452fa
 	dw RocketHideout3Text1, RocketHideout3Text2, RocketHideout3Text3, RocketHideout3Text4
 
 RocketHideout3TrainerHeaders:
-TrainerHeader_45302: ; 0x45302
+RocketHideout3TH1: ; 0x45302
 	db $1 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d819 ; flag's byte
-	dw UnnamedText_45325 ; 0x5325 TextBeforeBattle
-	dw UnnamedText_4532f ; 0x532f TextAfterBattle
-	dw UnnamedText_4532a ; 0x532a TextEndBattle
-	dw UnnamedText_4532a ; 0x532a TextEndBattle
+	dw RocketHideout3B4BattleTxt2 ; 0x5325 TextBeforeBattle
+	dw RocketHideout3AfterBattleTxt2 ; 0x532f TextAfterBattle
+	dw RocketHideout3EndBattleTxt2 ; 0x532a TextEndBattle
+	dw RocketHideout3EndBattleTxt2 ; 0x532a TextEndBattle
 ; 0x4530e
 
-TrainerHeader_4530e: ; 0x4530e
+RocketHideout3TH2: ; 0x4530e
 	db $2 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d819 ; flag's byte
-	dw UnnamedText_4533e ; 0x533e TextBeforeBattle
-	dw UnnamedText_45348 ; 0x5348 TextAfterBattle
-	dw UnnamedText_45343 ; 0x5343 TextEndBattle
-	dw UnnamedText_45343 ; 0x5343 TextEndBattle
+	dw RocketHideout3B4BattleTxt3 ; 0x533e TextBeforeBattle
+	dw RocketHideout3AfterBattleTxt3 ; 0x5348 TextAfterBattle
+	dw RocketHideout3EndBattleTxt3 ; 0x5343 TextEndBattle
+	dw RocketHideout3EndBattleTxt3 ; 0x5343 TextEndBattle
 ; 0x4531a
 
 db $ff
 
 RocketHideout3Text1: ; 0x4531b
 	db $08 ; asm
-	ld hl, TrainerHeader_45302
+	ld hl, RocketHideout3TH1
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_45325: ; 0x45325
-	TX_FAR _UnnamedText_45325
+RocketHideout3B4BattleTxt2: ; 0x45325
+	TX_FAR _RocketHideout3B4BattleTxt2
 	db $50
 ; 0x45325 + 5 bytes
 
-UnnamedText_4532a: ; 0x4532a
-	TX_FAR _UnnamedText_4532a
+RocketHideout3EndBattleTxt2: ; 0x4532a
+	TX_FAR _RocketHideout3EndBattleTxt2
 	db $50
 ; 0x4532a + 5 bytes
 
-UnnamedText_4532f: ; 0x4532f
-	TX_FAR _UnnamedText_4532f
+RocketHideout3AfterBattleTxt2: ; 0x4532f
+	TX_FAR _RocketHideout3AfterBattleTxt2
 	db $50
 ; 0x4532f + 5 bytes
 
 RocketHideout3Text2: ; 0x45334
 	db $08 ; asm
-	ld hl, TrainerHeader_4530e
+	ld hl, RocketHideout3TH2
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_4533e: ; 0x4533e
-	TX_FAR _UnnamedText_4533e
+RocketHideout3B4BattleTxt3: ; 0x4533e
+	TX_FAR _RocketHideout3B4BattleTxt3
 	db $50
 ; 0x4533e + 5 bytes
 
-UnnamedText_45343: ; 0x45343
-	TX_FAR _UnnamedText_45343
+RocketHideout3EndBattleTxt3: ; 0x45343
+	TX_FAR _RocketHideout3EndBattleTxt3
 	db $50
 ; 0x45343 + 5 bytes
 
-UnnamedText_45348: ; 0x45348
-	TX_FAR _UnnamedText_45348
+RocketHideout3AfterBattleTxt3: ; 0x45348
+	TX_FAR _RocketHideout3AfterBattleTxt3
 	db $50
 ; 0x45348 + 5 bytes
 
@@ -30699,7 +30699,7 @@ RocketHideout4_h: ; 0x45451 to 0x4545d (12 bytes) (bank=11) (id=202)
 RocketHideout4Script: ; 0x4545d
 	call Unnamed_45473
 	call $3c3c
-	ld hl, TrainerHeader_45515
+	ld hl, RocketHideout4TH1
 	ld de, $54ae
 	ld a, [$d634]
 	call $3160
@@ -30714,34 +30714,34 @@ RocketHideout4Texts: ; 0x45501
 	dw RocketHideout4Text1, RocketHideout4Text2, RocketHideout4Text3, RocketHideout4Text4, RocketHideout4Text5, RocketHideout4Text6, RocketHideout4Text7, RocketHideout4Text8, RocketHideout4Text9, RocketHideout4Text10
 
 RocketHideout4TrainerHeaders:
-TrainerHeader_45515: ; 0x45515
+RocketHideout4TH1: ; 0x45515
 	db $2 ; flag's bit
 	db ($0 << 4) ; trainer's view range
 	dw $d81b ; flag's byte
-	dw UnnamedText_45593 ; 0x5593 TextBeforeBattle
-	dw UnnamedText_4559d ; 0x559d TextAfterBattle
-	dw UnnamedText_45598 ; 0x5598 TextEndBattle
-	dw UnnamedText_45598 ; 0x5598 TextEndBattle
+	dw RocketHideout4B4BattleTxt2 ; 0x5593 TextBeforeBattle
+	dw RocketHideout4AfterBattleTxt2 ; 0x559d TextAfterBattle
+	dw RocketHideout4EndBattleTxt2 ; 0x5598 TextEndBattle
+	dw RocketHideout4EndBattleTxt2 ; 0x5598 TextEndBattle
 ; 0x45521
 
-TrainerHeader_45521: ; 0x45521
+RocketHideout4TH2: ; 0x45521
 	db $3 ; flag's bit
 	db ($0 << 4) ; trainer's view range
 	dw $d81b ; flag's byte
-	dw UnnamedText_455ac ; 0x55ac TextBeforeBattle
-	dw UnnamedText_455b6 ; 0x55b6 TextAfterBattle
-	dw UnnamedText_455b1 ; 0x55b1 TextEndBattle
-	dw UnnamedText_455b1 ; 0x55b1 TextEndBattle
+	dw RocketHideout4B4BattleTxt3 ; 0x55ac TextBeforeBattle
+	dw RocketHideout4AfterBattleTxt3 ; 0x55b6 TextAfterBattle
+	dw RocketHideout4EndBattleTxt3 ; 0x55b1 TextEndBattle
+	dw RocketHideout4EndBattleTxt3 ; 0x55b1 TextEndBattle
 ; 0x4552d
 
-TrainerHeader_4552d: ; 0x4552d
+RocketHideout4TH3: ; 0x4552d
 	db $4 ; flag's bit
 	db ($1 << 4) ; trainer's view range
 	dw $d81b ; flag's byte
-	dw UnnamedText_455c5 ; 0x55c5 TextBeforeBattle
-	dw UnknownText_455cf ; 0x55cf TextAfterBattle
-	dw UnnamedText_455ca ; 0x55ca TextEndBattle
-	dw UnnamedText_455ca ; 0x55ca TextEndBattle
+	dw RocketHideout4B4BattleTxt4 ; 0x55c5 TextBeforeBattle
+	dw RocketHideout4AfterBattleTxt4 ; 0x55cf TextAfterBattle
+	dw RocketHideout4EndBattleTxt4 ; 0x55ca TextEndBattle
+	dw RocketHideout4EndBattleTxt4 ; 0x55ca TextEndBattle
 ; 0x45539
 
 db $ff
@@ -30791,63 +30791,63 @@ RocketHideout4Text10: ; 0x45584
 
 RocketHideout4Text2: ; 0x45589
 	db $08 ; asm
-	ld hl, TrainerHeader_45515
+	ld hl, RocketHideout4TH1
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_45593: ; 0x45593
-	TX_FAR _UnnamedText_45593
+RocketHideout4B4BattleTxt2: ; 0x45593
+	TX_FAR _RocketHideout4B4BattleTxt2
 	db $50
 ; 0x45593 + 5 bytes
 
-UnnamedText_45598: ; 0x45598
-	TX_FAR _UnnamedText_45598
+RocketHideout4EndBattleTxt2: ; 0x45598
+	TX_FAR _RocketHideout4EndBattleTxt2
 	db $50
 ; 0x45598 + 5 bytes
 
-UnnamedText_4559d: ; 0x4559d
-	TX_FAR _UnnamedText_4559d
+RocketHideout4AfterBattleTxt2: ; 0x4559d
+	TX_FAR _RocketHideout4AfterBattleTxt2
 	db $50
 ; 0x4559d + 5 bytes
 
 RocketHideout4Text3: ; 0x455a2
 	db $08 ; asm
-	ld hl, TrainerHeader_45521
+	ld hl, RocketHideout4TH2
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_455ac: ; 0x455ac
-	TX_FAR _UnnamedText_455ac
+RocketHideout4B4BattleTxt3: ; 0x455ac
+	TX_FAR _RocketHideout4B4BattleTxt3
 	db $50
 ; 0x455ac + 5 bytes
 
-UnnamedText_455b1: ; 0x455b1
-	TX_FAR _UnnamedText_455b1
+RocketHideout4EndBattleTxt3: ; 0x455b1
+	TX_FAR _RocketHideout4EndBattleTxt3
 	db $50
 ; 0x455b1 + 5 bytes
 
-UnnamedText_455b6: ; 0x455b6
-	TX_FAR _UnnamedText_455b6
+RocketHideout4AfterBattleTxt3: ; 0x455b6
+	TX_FAR _RocketHideout4AfterBattleTxt3
 	db $50
 ; 0x455b6 + 5 bytes
 
 RocketHideout4Text4: ; 0x455bb
 	db $08 ; asm
-	ld hl, TrainerHeader_4552d
+	ld hl, RocketHideout4TH3
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_455c5: ; 0x455c5
-	TX_FAR _UnnamedText_455c5
+RocketHideout4B4BattleTxt4: ; 0x455c5
+	TX_FAR _RocketHideout4B4BattleTxt4
 	db $50
 ; 0x455c5 + 5 bytes
 
-UnnamedText_455ca: ; 0x455ca
-	TX_FAR _UnnamedText_455ca
+RocketHideout4EndBattleTxt4: ; 0x455ca
+	TX_FAR _RocketHideout4EndBattleTxt4
 	db $50
 ; 0x455ca + 5 bytes
 
-UnknownText_455cf: ; 0x455cf
+RocketHideout4AfterBattleTxt4: ; 0x455cf
 	db $8
 	ld hl, $55ec
 	call PrintText
@@ -31462,7 +31462,7 @@ UnknownDungeon3Texts: ; 0x45f09
 	dw UnknownDungeon3Text1, UnknownDungeon3Text2, UnknownDungeon3Text3
 
 UnknownDungeon3TrainerHeaders:
-TrainerHeader_45f0f: ; 0x45f0f
+UnknownDungeon3TH1: ; 0x45f0f
 	db $1 ; flag's bit
 	db ($0 << 4) ; trainer's view range
 	dw $d85f ; flag's byte
@@ -31476,7 +31476,7 @@ db $ff
 
 UnknownDungeon3Text1: ; 0x45f1c
 	db $08 ; asm
-	ld hl, TrainerHeader_45f0f
+	ld hl, UnknownDungeon3TH1
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -31533,253 +31533,253 @@ RockTunnel2Texts: ; 0x46004
 	dw RockTunnel2Text1, RockTunnel2Text2, RockTunnel2Text3, RockTunnel2Text4, RockTunnel2Text5, RockTunnel2Text6, RockTunnel2Text7, RockTunnel2Text8
 
 RockTunnel2TrainerHeaders:
-TrainerHeader_46014: ; 0x46014
+RockTunnel2TH1: ; 0x46014
 	db $1 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d87d ; flag's byte
-	dw UnnamedText_460c5 ; 0x60c5 TextBeforeBattle
-	dw UnnamedText_460cf ; 0x60cf TextAfterBattle
-	dw UnnamedText_460ca ; 0x60ca TextEndBattle
-	dw UnnamedText_460ca ; 0x60ca TextEndBattle
+	dw RockTunnel2B4BattleTxt2 ; 0x60c5 TextBeforeBattle
+	dw RockTunnel2AfterBattleTxt2 ; 0x60cf TextAfterBattle
+	dw RockTunnel2EndBattleTxt2 ; 0x60ca TextEndBattle
+	dw RockTunnel2EndBattleTxt2 ; 0x60ca TextEndBattle
 ; 0x46020
 
-TrainerHeader_46020: ; 0x46020
+RockTunnel2TH2: ; 0x46020
 	db $2 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d87d ; flag's byte
-	dw UnnamedText_460d4 ; 0x60d4 TextBeforeBattle
-	dw UnnamedText_460de ; 0x60de TextAfterBattle
-	dw UnnamedText_460d9 ; 0x60d9 TextEndBattle
-	dw UnnamedText_460d9 ; 0x60d9 TextEndBattle
+	dw RockTunnel2B4BattleTxt3 ; 0x60d4 TextBeforeBattle
+	dw RockTunnel2AfterBattleTxt3 ; 0x60de TextAfterBattle
+	dw RockTunnel2EndBattleTxt3 ; 0x60d9 TextEndBattle
+	dw RockTunnel2EndBattleTxt3 ; 0x60d9 TextEndBattle
 ; 0x4602c
 
-TrainerHeader_4602c: ; 0x4602c
+RockTunnel2TH3: ; 0x4602c
 	db $3 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d87d ; flag's byte
-	dw UnnamedText_460e3 ; 0x60e3 TextBeforeBattle
-	dw UnnamedText_460ed ; 0x60ed TextAfterBattle
-	dw UnnamedText_460e8 ; 0x60e8 TextEndBattle
-	dw UnnamedText_460e8 ; 0x60e8 TextEndBattle
+	dw RockTunnel2B4BattleTxt4 ; 0x60e3 TextBeforeBattle
+	dw RockTunnel2AfterBattleTxt4 ; 0x60ed TextAfterBattle
+	dw RockTunnel2EndBattleTxt4 ; 0x60e8 TextEndBattle
+	dw RockTunnel2EndBattleTxt4 ; 0x60e8 TextEndBattle
 ; 0x46038
 
-TrainerHeader_46038: ; 0x46038
+RockTunnel2TH4: ; 0x46038
 	db $4 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d87d ; flag's byte
-	dw UnnamedText_460f2 ; 0x60f2 TextBeforeBattle
-	dw UnnamedText_460fc ; 0x60fc TextAfterBattle
-	dw UnnamedText_460f7 ; 0x60f7 TextEndBattle
-	dw UnnamedText_460f7 ; 0x60f7 TextEndBattle
+	dw RockTunnel2B4BattleTxt5 ; 0x60f2 TextBeforeBattle
+	dw RockTunnel2AfterBattleTxt5 ; 0x60fc TextAfterBattle
+	dw RockTunnel2EndBattleTxt5 ; 0x60f7 TextEndBattle
+	dw RockTunnel2EndBattleTxt5 ; 0x60f7 TextEndBattle
 ; 0x46044
 
-TrainerHeader_46044: ; 0x46044
+RockTunnel2TH5: ; 0x46044
 	db $5 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d87d ; flag's byte
-	dw UnnamedText_46101 ; 0x6101 TextBeforeBattle
-	dw UnnamedText_4610b ; 0x610b TextAfterBattle
-	dw UnnamedText_46106 ; 0x6106 TextEndBattle
-	dw UnnamedText_46106 ; 0x6106 TextEndBattle
+	dw RockTunnel2B4BattleTxt6 ; 0x6101 TextBeforeBattle
+	dw RockTunnel2AfterBattleTxt6 ; 0x610b TextAfterBattle
+	dw RockTunnel2EndBattleTxt6 ; 0x6106 TextEndBattle
+	dw RockTunnel2EndBattleTxt6 ; 0x6106 TextEndBattle
 ; 0x46050
 
-TrainerHeader_46050: ; 0x46050
+RockTunnel2TH6: ; 0x46050
 	db $6 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d87d ; flag's byte
-	dw UnnamedText_46110 ; 0x6110 TextBeforeBattle
-	dw UnnamedText_4611a ; 0x611a TextAfterBattle
-	dw UnnamedText_46115 ; 0x6115 TextEndBattle
-	dw UnnamedText_46115 ; 0x6115 TextEndBattle
+	dw RockTunnel2B4BattleTxt7 ; 0x6110 TextBeforeBattle
+	dw RockTunnel2AfterBattleTxt7 ; 0x611a TextAfterBattle
+	dw RockTunnel2EndBattleTxt7 ; 0x6115 TextEndBattle
+	dw RockTunnel2EndBattleTxt7 ; 0x6115 TextEndBattle
 ; 0x4605c
 
-TrainerHeader_4605c: ; 0x4605c
+RockTunnel2TH7: ; 0x4605c
 	db $7 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d87d ; flag's byte
-	dw UnnamedText_4611f ; 0x611f TextBeforeBattle
-	dw UnnamedText_46129 ; 0x6129 TextAfterBattle
-	dw UnnamedText_46124 ; 0x6124 TextEndBattle
-	dw UnnamedText_46124 ; 0x6124 TextEndBattle
+	dw RockTunnel2B4BattleTxt8 ; 0x611f TextBeforeBattle
+	dw RockTunnel2AfterBattleTxt8 ; 0x6129 TextAfterBattle
+	dw RockTunnel2EndBattleTxt8 ; 0x6124 TextEndBattle
+	dw RockTunnel2EndBattleTxt8 ; 0x6124 TextEndBattle
 ; 0x46068
 
-TrainerHeader_46068: ; 0x46068
+RockTunnel2TH8: ; 0x46068
 	db $8 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d87d ; flag's byte
-	dw UnnamedText_4612e ; 0x612e TextBeforeBattle
-	dw UnnamedText_46138 ; 0x6138 TextAfterBattle
-	dw UnnamedText_46133 ; 0x6133 TextEndBattle
-	dw UnnamedText_46133 ; 0x6133 TextEndBattle
+	dw RockTunnel2B4BattleTxt9 ; 0x612e TextBeforeBattle
+	dw RockTunnel2AfterBattleTxt9 ; 0x6138 TextAfterBattle
+	dw RockTunnel2EndBattleTxt9 ; 0x6133 TextEndBattle
+	dw RockTunnel2EndBattleTxt9 ; 0x6133 TextEndBattle
 ; 0x46074
 
 db $ff
 
 RockTunnel2Text1: ; 0x46075
 	db $08 ; asm
-	ld hl, TrainerHeader_46014
+	ld hl, RockTunnel2TH1
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 RockTunnel2Text2: ; 0x4607f
 	db $08 ; asm
-	ld hl, TrainerHeader_46020
+	ld hl, RockTunnel2TH2
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 RockTunnel2Text3: ; 0x46089
 	db $08 ; asm
-	ld hl, TrainerHeader_4602c
+	ld hl, RockTunnel2TH3
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 RockTunnel2Text4: ; 0x46093
 	db $08 ; asm
-	ld hl, TrainerHeader_46038
+	ld hl, RockTunnel2TH4
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 RockTunnel2Text5: ; 0x4609d
 	db $08 ; asm
-	ld hl, TrainerHeader_46044
+	ld hl, RockTunnel2TH5
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 RockTunnel2Text6: ; 0x460a7
 	db $08 ; asm
-	ld hl, TrainerHeader_46050
+	ld hl, RockTunnel2TH6
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 RockTunnel2Text7: ; 0x460b1
 	db $08 ; asm
-	ld hl, TrainerHeader_4605c
+	ld hl, RockTunnel2TH7
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 RockTunnel2Text8: ; 0x460bb
 	db $08 ; asm
-	ld hl, TrainerHeader_46068
+	ld hl, RockTunnel2TH8
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_460c5: ; 0x460c5
-	TX_FAR _UnnamedText_460c5
+RockTunnel2B4BattleTxt2: ; 0x460c5
+	TX_FAR _RockTunnel2B4BattleTxt2
 	db $50
 ; 0x460c5 + 5 bytes
 
-UnnamedText_460ca: ; 0x460ca
-	TX_FAR _UnnamedText_460ca
+RockTunnel2EndBattleTxt2: ; 0x460ca
+	TX_FAR _RockTunnel2EndBattleTxt2
 	db $50
 ; 0x460ca + 5 bytes
 
-UnnamedText_460cf: ; 0x460cf
-	TX_FAR _UnnamedText_460cf
+RockTunnel2AfterBattleTxt2: ; 0x460cf
+	TX_FAR _RockTunnel2AfterBattleTxt2
 	db $50
 ; 0x460cf + 5 bytes
 
-UnnamedText_460d4: ; 0x460d4
-	TX_FAR _UnnamedText_460d4
+RockTunnel2B4BattleTxt3: ; 0x460d4
+	TX_FAR _RockTunnel2B4BattleTxt3
 	db $50
 ; 0x460d4 + 5 bytes
 
-UnnamedText_460d9: ; 0x460d9
-	TX_FAR _UnnamedText_460d9
+RockTunnel2EndBattleTxt3: ; 0x460d9
+	TX_FAR _RockTunnel2EndBattleTxt3
 	db $50
 ; 0x460d9 + 5 bytes
 
-UnnamedText_460de: ; 0x460de
-	TX_FAR _UnnamedText_460de
+RockTunnel2AfterBattleTxt3: ; 0x460de
+	TX_FAR _RockTunnel2AfterBattleTxt3
 	db $50
 ; 0x460de + 5 bytes
 
-UnnamedText_460e3: ; 0x460e3
-	TX_FAR _UnnamedText_460e3
+RockTunnel2B4BattleTxt4: ; 0x460e3
+	TX_FAR _RockTunnel2B4BattleTxt4
 	db $50
 ; 0x460e3 + 5 bytes
 
-UnnamedText_460e8: ; 0x460e8
-	TX_FAR _UnnamedText_460e8
+RockTunnel2EndBattleTxt4: ; 0x460e8
+	TX_FAR _RockTunnel2EndBattleTxt4
 	db $50
 ; 0x460e8 + 5 bytes
 
-UnnamedText_460ed: ; 0x460ed
-	TX_FAR _UnnamedText_460ed
+RockTunnel2AfterBattleTxt4: ; 0x460ed
+	TX_FAR _RockTunnel2AfterBattleTxt4
 	db $50
 ; 0x460ed + 5 bytes
 
-UnnamedText_460f2: ; 0x460f2
-	TX_FAR _UnnamedText_460f2
+RockTunnel2B4BattleTxt5: ; 0x460f2
+	TX_FAR _RockTunnel2B4BattleTxt5
 	db $50
 ; 0x460f2 + 5 bytes
 
-UnnamedText_460f7: ; 0x460f7
-	TX_FAR _UnnamedText_460f7
+RockTunnel2EndBattleTxt5: ; 0x460f7
+	TX_FAR _RockTunnel2EndBattleTxt5
 	db $50
 ; 0x460f7 + 5 bytes
 
-UnnamedText_460fc: ; 0x460fc
-	TX_FAR _UnnamedText_460fc
+RockTunnel2AfterBattleTxt5: ; 0x460fc
+	TX_FAR _RockTunnel2AfterBattleTxt5
 	db $50
 ; 0x460fc + 5 bytes
 
-UnnamedText_46101: ; 0x46101
-	TX_FAR _UnnamedText_46101
+RockTunnel2B4BattleTxt6: ; 0x46101
+	TX_FAR _RockTunnel2B4BattleTxt6
 	db $50
 ; 0x46101 + 5 bytes
 
-UnnamedText_46106: ; 0x46106
-	TX_FAR _UnnamedText_46106
+RockTunnel2EndBattleTxt6: ; 0x46106
+	TX_FAR _RockTunnel2EndBattleTxt6
 	db $50
 ; 0x46106 + 5 bytes
 
-UnnamedText_4610b: ; 0x4610b
-	TX_FAR _UnnamedText_4610b
+RockTunnel2AfterBattleTxt6: ; 0x4610b
+	TX_FAR _RockTunnel2AfterBattleTxt6
 	db $50
 ; 0x4610b + 5 bytes
 
-UnnamedText_46110: ; 0x46110
-	TX_FAR _UnnamedText_46110
+RockTunnel2B4BattleTxt7: ; 0x46110
+	TX_FAR _RockTunnel2B4BattleTxt7
 	db $50
 ; 0x46110 + 5 bytes
 
-UnnamedText_46115: ; 0x46115
-	TX_FAR _UnnamedText_46115
+RockTunnel2EndBattleTxt7: ; 0x46115
+	TX_FAR _RockTunnel2EndBattleTxt7
 	db $50
 ; 0x46115 + 5 bytes
 
-UnnamedText_4611a: ; 0x4611a
-	TX_FAR _UnnamedText_4611a
+RockTunnel2AfterBattleTxt7: ; 0x4611a
+	TX_FAR _RockTunnel2AfterBattleTxt7
 	db $50
 ; 0x4611a + 5 bytes
 
-UnnamedText_4611f: ; 0x4611f
-	TX_FAR _UnnamedText_4611f
+RockTunnel2B4BattleTxt8: ; 0x4611f
+	TX_FAR _RockTunnel2B4BattleTxt8
 	db $50
 ; 0x4611f + 5 bytes
 
-UnnamedText_46124: ; 0x46124
-	TX_FAR _UnnamedText_46124
+RockTunnel2EndBattleTxt8: ; 0x46124
+	TX_FAR _RockTunnel2EndBattleTxt8
 	db $50
 ; 0x46124 + 5 bytes
 
-UnnamedText_46129: ; 0x46129
-	TX_FAR _UnnamedText_46129
+RockTunnel2AfterBattleTxt8: ; 0x46129
+	TX_FAR _RockTunnel2AfterBattleTxt8
 	db $50
 ; 0x46129 + 5 bytes
 
-UnnamedText_4612e: ; 0x4612e
-	TX_FAR _UnnamedText_4612e
+RockTunnel2B4BattleTxt9: ; 0x4612e
+	TX_FAR _RockTunnel2B4BattleTxt9
 	db $50
 ; 0x4612e + 5 bytes
 
-UnnamedText_46133: ; 0x46133
-	TX_FAR _UnnamedText_46133
+RockTunnel2EndBattleTxt9: ; 0x46133
+	TX_FAR _RockTunnel2EndBattleTxt9
 	db $50
 ; 0x46133 + 5 bytes
 
-UnnamedText_46138: ; 0x46138
-	TX_FAR _UnnamedText_46138
+RockTunnel2AfterBattleTxt9: ; 0x46138
+	TX_FAR _RockTunnel2AfterBattleTxt9
 	db $50
 ; 0x46138 + 5 bytes
 
@@ -32193,28 +32193,28 @@ SeafoamIslands5Texts: ; 0x4687c
 	dw SeafoamIslands5Text1, SeafoamIslands5Text2, SeafoamIslands5Text3, SeafoamIslands5Text4, SeafoamIslands5Text5
 
 SeafoamIslands5TrainerHeaders:
-TrainerHeader_46886: ; 0x46886
+SeafoamIslands5TH1: ; 0x46886
 	db $2 ; flag's bit
 	db ($0 << 4) ; trainer's view range
 	dw $d882 ; flag's byte
-	dw UnnamedText_468a2 ; 0x68a2 TextBeforeBattle
-	dw UnnamedText_468a2 ; 0x68a2 TextAfterBattle
-	dw UnnamedText_468a2 ; 0x68a2 TextEndBattle
-	dw UnnamedText_468a2 ; 0x68a2 TextEndBattle
+	dw SeafoamIslands5B4BattleTxt2 ; 0x68a2 TextBeforeBattle
+	dw SeafoamIslands5B4BattleTxt2 ; 0x68a2 TextAfterBattle
+	dw SeafoamIslands5B4BattleTxt2 ; 0x68a2 TextEndBattle
+	dw SeafoamIslands5B4BattleTxt2 ; 0x68a2 TextEndBattle
 ; 0x46892
 
 db $ff
 
 SeafoamIslands5Text3: ; 0x46893
 	db $08 ; asm
-	ld hl, TrainerHeader_46886
+	ld hl, SeafoamIslands5TH1
 	call LoadTrainerHeader
 	ld a, $4
 	ld [$d668], a
 	jp TextScriptEnd
 
-UnnamedText_468a2: ; 0x468a2
-	TX_FAR _UnnamedText_468a2 ; 0x88075
+SeafoamIslands5B4BattleTxt2: ; 0x468a2
+	TX_FAR _SeafoamIslands5B4BattleTxt2 ; 0x88075
 	db $8
 	ld a, $4a
 	call $13d0
@@ -33133,74 +33133,74 @@ CeladonGymTexts: ; 0x489a6
 	dw CeladonGymText1, CeladonGymText2, CeladonGymText3, CeladonGymText4, CeladonGymText5, CeladonGymText6, CeladonGymText7, CeladonGymText8, CeladonGymText9, TM21Text, TM21NoRoomText
 
 CeladonGymTrainerHeaders:
-TrainerHeader_489bc: ; 0x489bc
+CeladonGymTH1: ; 0x489bc
 	db $2 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d77c ; flag's byte
-	dw UnnamedText_48a8b ; 0x4a8b TextBeforeBattle
-	dw UnnamedText_48a95 ; 0x4a95 TextAfterBattle
-	dw UnnamedText_48a90 ; 0x4a90 TextEndBattle
-	dw UnnamedText_48a90 ; 0x4a90 TextEndBattle
+	dw CeladonGymB4BattleTxt2 ; 0x4a8b TextBeforeBattle
+	dw CeladonGymAfterBattleTxt2 ; 0x4a95 TextAfterBattle
+	dw CeladonGymEndBattleTxt2 ; 0x4a90 TextEndBattle
+	dw CeladonGymEndBattleTxt2 ; 0x4a90 TextEndBattle
 ; 0x489c8
 
-TrainerHeader_489c8: ; 0x489c8
+CeladonGymTH2: ; 0x489c8
 	db $3 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d77c ; flag's byte
-	dw UnnamedText_48aa4 ; 0x4aa4 TextBeforeBattle
-	dw UnnamedText_48aae ; 0x4aae TextAfterBattle
-	dw UnnamedText_48aa9 ; 0x4aa9 TextEndBattle
-	dw UnnamedText_48aa9 ; 0x4aa9 TextEndBattle
+	dw CeladonGymB4BattleTxt3 ; 0x4aa4 TextBeforeBattle
+	dw CeladonGymAfterBattleTxt3 ; 0x4aae TextAfterBattle
+	dw CeladonGymEndBattleTxt3 ; 0x4aa9 TextEndBattle
+	dw CeladonGymEndBattleTxt3 ; 0x4aa9 TextEndBattle
 ; 0x489d4
 
-TrainerHeader_489d4: ; 0x489d4
+CeladonGymTH3: ; 0x489d4
 	db $4 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d77c ; flag's byte
-	dw UnnamedText_48abd ; 0x4abd TextBeforeBattle
-	dw UnnamedText_48ac7 ; 0x4ac7 TextAfterBattle
-	dw UnnamedText_48ac2 ; 0x4ac2 TextEndBattle
-	dw UnnamedText_48ac2 ; 0x4ac2 TextEndBattle
+	dw CeladonGymB4BattleTxt4 ; 0x4abd TextBeforeBattle
+	dw CeladonGymAfterBattleTxt4 ; 0x4ac7 TextAfterBattle
+	dw CeladonGymEndBattleTxt4 ; 0x4ac2 TextEndBattle
+	dw CeladonGymEndBattleTxt4 ; 0x4ac2 TextEndBattle
 ; 0x489e0
 
-TrainerHeader_489e0: ; 0x489e0
+CeladonGymTH4: ; 0x489e0
 	db $5 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d77c ; flag's byte
-	dw UnnamedText_48ad6 ; 0x4ad6 TextBeforeBattle
-	dw UnnamedText_48ae0 ; 0x4ae0 TextAfterBattle
-	dw UnnamedText_48adb ; 0x4adb TextEndBattle
-	dw UnnamedText_48adb ; 0x4adb TextEndBattle
+	dw CeladonGymB4BattleTxt5 ; 0x4ad6 TextBeforeBattle
+	dw CeladonGymAfterBattleTxt5 ; 0x4ae0 TextAfterBattle
+	dw CeladonGymEndBattleTxt5 ; 0x4adb TextEndBattle
+	dw CeladonGymEndBattleTxt5 ; 0x4adb TextEndBattle
 ; 0x489ec
 
-TrainerHeader_489ec: ; 0x489ec
+CeladonGymTH5: ; 0x489ec
 	db $6 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d77c ; flag's byte
-	dw UnnamedText_48aef ; 0x4aef TextBeforeBattle
-	dw UnnamedText_48af9 ; 0x4af9 TextAfterBattle
-	dw UnnamedText_48af4 ; 0x4af4 TextEndBattle
-	dw UnnamedText_48af4 ; 0x4af4 TextEndBattle
+	dw CeladonGymB4BattleTxt6 ; 0x4aef TextBeforeBattle
+	dw CeladonGymAfterBattleTxt6 ; 0x4af9 TextAfterBattle
+	dw CeladonGymEndBattleTxt6 ; 0x4af4 TextEndBattle
+	dw CeladonGymEndBattleTxt6 ; 0x4af4 TextEndBattle
 ; 0x489f8
 
-TrainerHeader_489f8: ; 0x489f8
+CeladonGymTH6: ; 0x489f8
 	db $7 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d77c ; flag's byte
-	dw UnnamedText_48b08 ; 0x4b08 TextBeforeBattle
-	dw UnnamedText_48b12 ; 0x4b12 TextAfterBattle
-	dw UnnamedText_48b0d ; 0x4b0d TextEndBattle
-	dw UnnamedText_48b0d ; 0x4b0d TextEndBattle
+	dw CeladonGymB4BattleTxt7 ; 0x4b08 TextBeforeBattle
+	dw CeladonGymAfterBattleTxt7 ; 0x4b12 TextAfterBattle
+	dw CeladonGymEndBattleTxt7 ; 0x4b0d TextEndBattle
+	dw CeladonGymEndBattleTxt7 ; 0x4b0d TextEndBattle
 ; 0x48a04
 
-TrainerHeader_48a04: ; 0x48a04
+CeladonGymTH7: ; 0x48a04
 	db $8 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d77c ; flag's byte
-	dw UnnamedText_48b21 ; 0x4b21 TextBeforeBattle
-	dw UnnamedText_48b2b ; 0x4b2b TextAfterBattle
-	dw UnnamedText_48b26 ; 0x4b26 TextEndBattle
-	dw UnnamedText_48b26 ; 0x4b26 TextEndBattle
+	dw CeladonGymB4BattleTxt8 ; 0x4b21 TextBeforeBattle
+	dw CeladonGymAfterBattleTxt8 ; 0x4b2b TextAfterBattle
+	dw CeladonGymEndBattleTxt8 ; 0x4b26 TextEndBattle
+	dw CeladonGymEndBattleTxt8 ; 0x4b26 TextEndBattle
 ; 0x48a10
 
 db $ff
@@ -33275,148 +33275,148 @@ TM21NoRoomText: ; 0x48a7c
 
 CeladonGymText2: ; 0x48a81
 	db $08 ; asm
-	ld hl, TrainerHeader_489bc
+	ld hl, CeladonGymTH1
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_48a8b: ; 0x48a8b
-	TX_FAR _UnnamedText_48a8b
+CeladonGymB4BattleTxt2: ; 0x48a8b
+	TX_FAR _CeladonGymB4BattleTxt2
 	db $50
 ; 0x48a8b + 5 bytes
 
-UnnamedText_48a90: ; 0x48a90
-	TX_FAR _UnnamedText_48a90
+CeladonGymEndBattleTxt2: ; 0x48a90
+	TX_FAR _CeladonGymEndBattleTxt2
 	db $50
 ; 0x48a90 + 5 bytes
 
-UnnamedText_48a95: ; 0x48a95
-	TX_FAR _UnnamedText_48a95
+CeladonGymAfterBattleTxt2: ; 0x48a95
+	TX_FAR _CeladonGymAfterBattleTxt2
 	db $50
 ; 0x48a95 + 5 bytes
 
 CeladonGymText3: ; 0x48a9a
 	db $08 ; asm
-	ld hl, TrainerHeader_489c8
+	ld hl, CeladonGymTH2
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_48aa4: ; 0x48aa4
-	TX_FAR _UnnamedText_48aa4
+CeladonGymB4BattleTxt3: ; 0x48aa4
+	TX_FAR _CeladonGymB4BattleTxt3
 	db $50
 ; 0x48aa4 + 5 bytes
 
-UnnamedText_48aa9: ; 0x48aa9
-	TX_FAR _UnnamedText_48aa9
+CeladonGymEndBattleTxt3: ; 0x48aa9
+	TX_FAR _CeladonGymEndBattleTxt3
 	db $50
 ; 0x48aa9 + 5 bytes
 
-UnnamedText_48aae: ; 0x48aae
-	TX_FAR _UnnamedText_48aae
+CeladonGymAfterBattleTxt3: ; 0x48aae
+	TX_FAR _CeladonGymAfterBattleTxt3
 	db $50
 ; 0x48aae + 5 bytes
 
 CeladonGymText4: ; 0x48ab3
 	db $08 ; asm
-	ld hl, TrainerHeader_489d4
+	ld hl, CeladonGymTH3
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_48abd: ; 0x48abd
-	TX_FAR _UnnamedText_48abd
+CeladonGymB4BattleTxt4: ; 0x48abd
+	TX_FAR _CeladonGymB4BattleTxt4
 	db $50
 ; 0x48abd + 5 bytes
 
-UnnamedText_48ac2: ; 0x48ac2
-	TX_FAR _UnnamedText_48ac2
+CeladonGymEndBattleTxt4: ; 0x48ac2
+	TX_FAR _CeladonGymEndBattleTxt4
 	db $50
 ; 0x48ac2 + 5 bytes
 
-UnnamedText_48ac7: ; 0x48ac7
-	TX_FAR _UnnamedText_48ac7
+CeladonGymAfterBattleTxt4: ; 0x48ac7
+	TX_FAR _CeladonGymAfterBattleTxt4
 	db $50
 ; 0x48ac7 + 5 bytes
 
 CeladonGymText5: ; 0x48acc
 	db $08 ; asm
-	ld hl, TrainerHeader_489e0
+	ld hl, CeladonGymTH4
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_48ad6: ; 0x48ad6
-	TX_FAR _UnnamedText_48ad6
+CeladonGymB4BattleTxt5: ; 0x48ad6
+	TX_FAR _CeladonGymB4BattleTxt5
 	db $50
 ; 0x48ad6 + 5 bytes
 
-UnnamedText_48adb: ; 0x48adb
-	TX_FAR _UnnamedText_48adb
+CeladonGymEndBattleTxt5: ; 0x48adb
+	TX_FAR _CeladonGymEndBattleTxt5
 	db $50
 ; 0x48adb + 5 bytes
 
-UnnamedText_48ae0: ; 0x48ae0
-	TX_FAR _UnnamedText_48ae0
+CeladonGymAfterBattleTxt5: ; 0x48ae0
+	TX_FAR _CeladonGymAfterBattleTxt5
 	db $50
 ; 0x48ae0 + 5 bytes
 
 CeladonGymText6: ; 0x48ae5
 	db $08 ; asm
-	ld hl, TrainerHeader_489ec
+	ld hl, CeladonGymTH5
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_48aef: ; 0x48aef
-	TX_FAR _UnnamedText_48aef
+CeladonGymB4BattleTxt6: ; 0x48aef
+	TX_FAR _CeladonGymB4BattleTxt6
 	db $50
 ; 0x48aef + 5 bytes
 
-UnnamedText_48af4: ; 0x48af4
-	TX_FAR _UnnamedText_48af4
+CeladonGymEndBattleTxt6: ; 0x48af4
+	TX_FAR _CeladonGymEndBattleTxt6
 	db $50
 ; 0x48af4 + 5 bytes
 
-UnnamedText_48af9: ; 0x48af9
-	TX_FAR _UnnamedText_48af9
+CeladonGymAfterBattleTxt6: ; 0x48af9
+	TX_FAR _CeladonGymAfterBattleTxt6
 	db $50
 ; 0x48af9 + 5 bytes
 
 CeladonGymText7: ; 0x48afe
 	db $08 ; asm
-	ld hl, TrainerHeader_489f8
+	ld hl, CeladonGymTH6
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_48b08: ; 0x48b08
-	TX_FAR _UnnamedText_48b08
+CeladonGymB4BattleTxt7: ; 0x48b08
+	TX_FAR _CeladonGymB4BattleTxt7
 	db $50
 ; 0x48b08 + 5 bytes
 
-UnnamedText_48b0d: ; 0x48b0d
-	TX_FAR _UnnamedText_48b0d
+CeladonGymEndBattleTxt7: ; 0x48b0d
+	TX_FAR _CeladonGymEndBattleTxt7
 	db $50
 ; 0x48b0d + 5 bytes
 
-UnnamedText_48b12: ; 0x48b12
-	TX_FAR _UnnamedText_48b12
+CeladonGymAfterBattleTxt7: ; 0x48b12
+	TX_FAR _CeladonGymAfterBattleTxt7
 	db $50
 ; 0x48b12 + 5 bytes
 
 CeladonGymText8: ; 0x48b17
 	db $08 ; asm
-	ld hl, TrainerHeader_48a04
+	ld hl, CeladonGymTH7
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_48b21: ; 0x48b21
-	TX_FAR _UnnamedText_48b21
+CeladonGymB4BattleTxt8: ; 0x48b21
+	TX_FAR _CeladonGymB4BattleTxt8
 	db $50
 ; 0x48b21 + 5 bytes
 
-UnnamedText_48b26: ; 0x48b26
-	TX_FAR _UnnamedText_48b26
+CeladonGymEndBattleTxt8: ; 0x48b26
+	TX_FAR _CeladonGymEndBattleTxt8
 	db $50
 ; 0x48b26 + 5 bytes
 
-UnnamedText_48b2b: ; 0x48b2b
-	TX_FAR _UnnamedText_48b2b
+CeladonGymAfterBattleTxt8: ; 0x48b2b
+	TX_FAR _CeladonGymAfterBattleTxt8
 	db $50
 ; 0x48b2b + 5 bytes
 
@@ -35109,7 +35109,7 @@ MtMoon1_h: ; 0x499bc to 0x499c8 (12 bytes) (id=59)
 
 MtMoon1Script: ; 0x499c8
 	call $3c3c
-	ld hl, TrainerHeader_499fd
+	ld hl, MtMoon1TH1
 	ld de, Unknown_59db
 	ld a, [$d606]
 	call $3160
@@ -35124,222 +35124,222 @@ MtMoon1Texts: ; 0x499e1
 	dw MtMoon1Text1, MtMoon1Text2, MtMoon1Text3, MtMoon1Text4, MtMoon1Text5, MtMoon1Text6, MtMoon1Text7, MtMoon1Text8, MtMoon1Text9, MtMoon1Text10, MtMoon1Text11, MtMoon1Text12, MtMoon1Text13, MtMoon1Text14
 
 MtMoon1TrainerHeaders:
-TrainerHeader_499fd: ; 0x499fd
+MtMoon1TH1: ; 0x499fd
 	db $1 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d7f5 ; flag's byte
-	dw UnnamedText_49a98 ; 0x5a98 TextBeforeBattle
-	dw UnnamedText_49aa2 ; 0x5aa2 TextAfterBattle
-	dw UnnamedText_49a9d ; 0x5a9d TextEndBattle
-	dw UnnamedText_49a9d ; 0x5a9d TextEndBattle
+	dw MtMoon1B4BattleTxt2 ; 0x5a98 TextBeforeBattle
+	dw MtMoon1AfterBattleTxt2 ; 0x5aa2 TextAfterBattle
+	dw MtMoon1EndBattleTxt2 ; 0x5a9d TextEndBattle
+	dw MtMoon1EndBattleTxt2 ; 0x5a9d TextEndBattle
 ; 0x49a09
 
-TrainerHeader_49a09: ; 0x49a09
+MtMoon1TH2: ; 0x49a09
 	db $2 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7f5 ; flag's byte
-	dw UnnamedText_49aa7 ; 0x5aa7 TextBeforeBattle
-	dw UnnamedText_49ab1 ; 0x5ab1 TextAfterBattle
-	dw UnnamedText_49aac ; 0x5aac TextEndBattle
-	dw UnnamedText_49aac ; 0x5aac TextEndBattle
+	dw MtMoon1B4BattleTxt3 ; 0x5aa7 TextBeforeBattle
+	dw MtMoon1AfterBattleTxt3 ; 0x5ab1 TextAfterBattle
+	dw MtMoon1EndBattleTxt3 ; 0x5aac TextEndBattle
+	dw MtMoon1EndBattleTxt3 ; 0x5aac TextEndBattle
 ; 0x49a15
 
-TrainerHeader_49a15: ; 0x49a15
+MtMoon1TH3: ; 0x49a15
 	db $3 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7f5 ; flag's byte
-	dw UnnamedText_49ab6 ; 0x5ab6 TextBeforeBattle
-	dw UnnamedText_49ac0 ; 0x5ac0 TextAfterBattle
-	dw UnnamedText_49abb ; 0x5abb TextEndBattle
-	dw UnnamedText_49abb ; 0x5abb TextEndBattle
+	dw MtMoon1B4BattleTxt4 ; 0x5ab6 TextBeforeBattle
+	dw MtMoon1AfterBattleTxt4 ; 0x5ac0 TextAfterBattle
+	dw MtMoon1EndBattleTxt4 ; 0x5abb TextEndBattle
+	dw MtMoon1EndBattleTxt4 ; 0x5abb TextEndBattle
 ; 0x49a21
 
-TrainerHeader_49a21: ; 0x49a21
+MtMoon1TH4: ; 0x49a21
 	db $4 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7f5 ; flag's byte
-	dw UnnamedText_49ac5 ; 0x5ac5 TextBeforeBattle
-	dw UnnamedText_49acf ; 0x5acf TextAfterBattle
-	dw UnnamedText_49aca ; 0x5aca TextEndBattle
-	dw UnnamedText_49aca ; 0x5aca TextEndBattle
+	dw MtMoon1B4BattleTxt5 ; 0x5ac5 TextBeforeBattle
+	dw MtMoon1AfterBattleTxt5 ; 0x5acf TextAfterBattle
+	dw MtMoon1EndBattleTxt5 ; 0x5aca TextEndBattle
+	dw MtMoon1EndBattleTxt5 ; 0x5aca TextEndBattle
 ; 0x49a2d
 
-TrainerHeader_49a2d: ; 0x49a2d
+MtMoon1TH5: ; 0x49a2d
 	db $5 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7f5 ; flag's byte
-	dw UnnamedText_49ad4 ; 0x5ad4 TextBeforeBattle
-	dw UnnamedText_49ade ; 0x5ade TextAfterBattle
-	dw UnnamedText_49ad9 ; 0x5ad9 TextEndBattle
-	dw UnnamedText_49ad9 ; 0x5ad9 TextEndBattle
+	dw MtMoon1B4BattleTxt6 ; 0x5ad4 TextBeforeBattle
+	dw MtMoon1AfterBattleTxt6 ; 0x5ade TextAfterBattle
+	dw MtMoon1EndBattleTxt6 ; 0x5ad9 TextEndBattle
+	dw MtMoon1EndBattleTxt6 ; 0x5ad9 TextEndBattle
 ; 0x49a39
 
-TrainerHeader_49a39: ; 0x49a39
+MtMoon1TH6: ; 0x49a39
 	db $6 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7f5 ; flag's byte
-	dw UnnamedText_49ae3 ; 0x5ae3 TextBeforeBattle
-	dw UnnamedText_49aed ; 0x5aed TextAfterBattle
-	dw UnnamedText_49ae8 ; 0x5ae8 TextEndBattle
-	dw UnnamedText_49ae8 ; 0x5ae8 TextEndBattle
+	dw MtMoon1B4BattleTxt7 ; 0x5ae3 TextBeforeBattle
+	dw MtMoon1AfterBattleTxt7 ; 0x5aed TextAfterBattle
+	dw MtMoon1EndBattleTxt7 ; 0x5ae8 TextEndBattle
+	dw MtMoon1EndBattleTxt7 ; 0x5ae8 TextEndBattle
 ; 0x49a45
 
-TrainerHeader_49a45: ; 0x49a45
+MtMoon1TH7: ; 0x49a45
 	db $7 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7f5 ; flag's byte
-	dw MainMenu ; 0x5af2 TextBeforeBattle
-	dw UnnamedText_49afc ; 0x5afc TextAfterBattle
-	dw UnnamedText_49af7 ; 0x5af7 TextEndBattle
-	dw UnnamedText_49af7 ; 0x5af7 TextEndBattle
+	dw MtMoon1B4BattleTxt8 ; 0x5af2 TextBeforeBattle
+	dw MtMoon1AfterBattleTxt8 ; 0x5afc TextAfterBattle
+	dw MtMoon1EndBattleTxt8 ; 0x5af7 TextEndBattle
+	dw MtMoon1EndBattleTxt8 ; 0x5af7 TextEndBattle
 ; 0x49a51
 
 db $ff
 
 MtMoon1Text1: ; 0x49a52
 	db $08 ; asm
-	ld hl, TrainerHeader_499fd
+	ld hl, MtMoon1TH1
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 MtMoon1Text2: ; 0x49a5c
 	db $08 ; asm
-	ld hl, TrainerHeader_49a09
+	ld hl, MtMoon1TH2
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 MtMoon1Text3: ; 0x49a66
 	db $08 ; asm
-	ld hl, TrainerHeader_49a15
+	ld hl, MtMoon1TH3
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 MtMoon1Text4: ; 0x49a70
 	db $08 ; asm
-	ld hl, TrainerHeader_49a21
+	ld hl, MtMoon1TH4
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 MtMoon1Text5: ; 0x49a7a
 	db $08 ; asm
-	ld hl, TrainerHeader_49a2d
+	ld hl, MtMoon1TH5
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 MtMoon1Text6: ; 0x49a84
 	db $08 ; asm
-	ld hl, TrainerHeader_49a39
+	ld hl, MtMoon1TH6
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 MtMoon1Text7: ; 0x49a8e
 	db $08 ; asm
-	ld hl, TrainerHeader_49a45
+	ld hl, MtMoon1TH7
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_49a98: ; 0x49a98
-	TX_FAR _UnnamedText_49a98
+MtMoon1B4BattleTxt2: ; 0x49a98
+	TX_FAR _MtMoon1B4BattleTxt2
 	db $50
 ; 0x49a98 + 5 bytes
 
-UnnamedText_49a9d: ; 0x49a9d
-	TX_FAR _UnnamedText_49a9d
+MtMoon1EndBattleTxt2: ; 0x49a9d
+	TX_FAR _MtMoon1EndBattleTxt2
 	db $50
 ; 0x49a9d + 5 bytes
 
-UnnamedText_49aa2: ; 0x49aa2
-	TX_FAR _UnnamedText_49aa2
+MtMoon1AfterBattleTxt2: ; 0x49aa2
+	TX_FAR _MtMoon1AfterBattleTxt2
 	db $50
 ; 0x49aa2 + 5 bytes
 
-UnnamedText_49aa7: ; 0x49aa7
-	TX_FAR _UnnamedText_49aa7
+MtMoon1B4BattleTxt3: ; 0x49aa7
+	TX_FAR _MtMoon1B4BattleTxt3
 	db $50
 ; 0x49aa7 + 5 bytes
 
-UnnamedText_49aac: ; 0x49aac
-	TX_FAR _UnnamedText_49aac
+MtMoon1EndBattleTxt3: ; 0x49aac
+	TX_FAR _MtMoon1EndBattleTxt3
 	db $50
 ; 0x49aac + 5 bytes
 
-UnnamedText_49ab1: ; 0x49ab1
-	TX_FAR _UnnamedText_49ab1
+MtMoon1AfterBattleTxt3: ; 0x49ab1
+	TX_FAR _MtMoon1AfterBattleTxt3
 	db $50
 ; 0x49ab1 + 5 bytes
 
-UnnamedText_49ab6: ; 0x49ab6
-	TX_FAR _UnnamedText_49ab6
+MtMoon1B4BattleTxt4: ; 0x49ab6
+	TX_FAR _MtMoon1B4BattleTxt4
 	db $50
 ; 0x49ab6 + 5 bytes
 
-UnnamedText_49abb: ; 0x49abb
-	TX_FAR _UnnamedText_49abb
+MtMoon1EndBattleTxt4: ; 0x49abb
+	TX_FAR _MtMoon1EndBattleTxt4
 	db $50
 ; 0x49abb + 5 bytes
 
-UnnamedText_49ac0: ; 0x49ac0
-	TX_FAR _UnnamedText_49ac0
+MtMoon1AfterBattleTxt4: ; 0x49ac0
+	TX_FAR _MtMoon1AfterBattleTxt4
 	db $50
 ; 0x49ac0 + 5 bytes
 
-UnnamedText_49ac5: ; 0x49ac5
-	TX_FAR _UnnamedText_49ac5
+MtMoon1B4BattleTxt5: ; 0x49ac5
+	TX_FAR _MtMoon1B4BattleTxt5
 	db $50
 ; 0x49ac5 + 5 bytes
 
-UnnamedText_49aca: ; 0x49aca
-	TX_FAR _UnnamedText_49aca
+MtMoon1EndBattleTxt5: ; 0x49aca
+	TX_FAR _MtMoon1EndBattleTxt5
 	db $50
 ; 0x49aca + 5 bytes
 
-UnnamedText_49acf: ; 0x49acf
-	TX_FAR _UnnamedText_49acf
+MtMoon1AfterBattleTxt5: ; 0x49acf
+	TX_FAR _MtMoon1AfterBattleTxt5
 	db $50
 ; 0x49acf + 5 bytes
 
-UnnamedText_49ad4: ; 0x49ad4
-	TX_FAR _UnnamedText_49ad4
+MtMoon1B4BattleTxt6: ; 0x49ad4
+	TX_FAR _MtMoon1B4BattleTxt6
 	db $50
 ; 0x49ad4 + 5 bytes
 
-UnnamedText_49ad9: ; 0x49ad9
-	TX_FAR _UnnamedText_49ad9
+MtMoon1EndBattleTxt6: ; 0x49ad9
+	TX_FAR _MtMoon1EndBattleTxt6
 	db $50
 ; 0x49ad9 + 5 bytes
 
-UnnamedText_49ade: ; 0x49ade
-	TX_FAR _UnnamedText_49ade
+MtMoon1AfterBattleTxt6: ; 0x49ade
+	TX_FAR _MtMoon1AfterBattleTxt6
 	db $50
 ; 0x49ade + 5 bytes
 
-UnnamedText_49ae3: ; 0x49ae3
-	TX_FAR _UnnamedText_49ae3
+MtMoon1B4BattleTxt7: ; 0x49ae3
+	TX_FAR _MtMoon1B4BattleTxt7
 	db $50
 ; 0x49ae3 + 5 bytes
 
-UnnamedText_49ae8: ; 0x49ae8
-	TX_FAR _UnnamedText_49ae8
+MtMoon1EndBattleTxt7: ; 0x49ae8
+	TX_FAR _MtMoon1EndBattleTxt7
 	db $50
 ; 0x49ae8 + 5 bytes
 
-UnnamedText_49aed: ; 0x49aed
-	TX_FAR _UnnamedText_49aed
+MtMoon1AfterBattleTxt7: ; 0x49aed
+	TX_FAR _MtMoon1AfterBattleTxt7
 	db $50
 ; 0x49aed + 5 bytes
 
-UnnamedText_49af2: ; 0x49af2
-	TX_FAR _UnnamedText_49af2
+MtMoon1B4BattleTxt8: ; 0x49af2
+	TX_FAR _MtMoon1B4BattleTxt8
 	db $50
 ; 0x49af2 + 5 bytes
 
-UnnamedText_49af7: ; 0x49af7
-	TX_FAR _UnnamedText_49af7
+MtMoon1EndBattleTxt8: ; 0x49af7
+	TX_FAR _MtMoon1EndBattleTxt8
 	db $50
 ; 0x49af7 + 5 bytes
 
-UnnamedText_49afc: ; 0x49afc
-	TX_FAR _UnnamedText_49afc
+MtMoon1AfterBattleTxt8: ; 0x49afc
+	TX_FAR _MtMoon1AfterBattleTxt8
 	db $50
 ; 0x49afc + 5 bytes
 
@@ -35421,44 +35421,44 @@ MtMoon3Texts: ; 0x49e34
 	dw MtMoon3Text1, MtMoon3Text2, MtMoon3Text3, MtMoon3Text4, MtMoon3Text5, MtMoon3Text6, MtMoon3Text7, MtMoon3Text8, MtMoon3Text9, Unnamed_49f99
 
 MtMoon3TrainerHeaders:
-TrainerHeader_49e48: ; 0x49e48
+MtMoon3TH1: ; 0x49e48
 	db $2 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7f6 ; flag's byte
-	dw UnnamedText_49f9f ; 0x5f9f TextBeforeBattle
-	dw UnnamedText_49fa9 ; 0x5fa9 TextAfterBattle
-	dw UnnamedText_49fa4 ; 0x5fa4 TextEndBattle
-	dw UnnamedText_49fa4 ; 0x5fa4 TextEndBattle
+	dw MtMoon3B4BattleTxt2 ; 0x5f9f TextBeforeBattle
+	dw MtMoon3AfterBattleTxt2 ; 0x5fa9 TextAfterBattle
+	dw MtMoon3EndBattleTxt2 ; 0x5fa4 TextEndBattle
+	dw MtMoon3EndBattleTxt2 ; 0x5fa4 TextEndBattle
 ; 0x49e54
 
-TrainerHeader_49e54: ; 0x49e54
+MtMoon3TH2: ; 0x49e54
 	db $3 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7f6 ; flag's byte
-	dw UnnamedText_49fae ; 0x5fae TextBeforeBattle
-	dw UnnamedText_49fb8 ; 0x5fb8 TextAfterBattle
-	dw UnnamedText_49fb3 ; 0x5fb3 TextEndBattle
-	dw UnnamedText_49fb3 ; 0x5fb3 TextEndBattle
+	dw MtMoon3B4BattleTxt3 ; 0x5fae TextBeforeBattle
+	dw MtMoon3AfterBattleTxt3 ; 0x5fb8 TextAfterBattle
+	dw MtMoon3EndBattleTxt3 ; 0x5fb3 TextEndBattle
+	dw MtMoon3EndBattleTxt3 ; 0x5fb3 TextEndBattle
 ; 0x49e60
 
-TrainerHeader_49e60: ; 0x49e60
+MtMoon3TH3: ; 0x49e60
 	db $4 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7f6 ; flag's byte
-	dw UnnamedText_49fbd ; 0x5fbd TextBeforeBattle
-	dw UnnamedText_49fc7 ; 0x5fc7 TextAfterBattle
-	dw UnnamedText_49fc2 ; 0x5fc2 TextEndBattle
-	dw UnnamedText_49fc2 ; 0x5fc2 TextEndBattle
+	dw MtMoon3B4BattleTxt4 ; 0x5fbd TextBeforeBattle
+	dw MtMoon3AfterBattleTxt4 ; 0x5fc7 TextAfterBattle
+	dw MtMoon3EndBattleTxt4 ; 0x5fc2 TextEndBattle
+	dw MtMoon3EndBattleTxt4 ; 0x5fc2 TextEndBattle
 ; 0x49e6c
 
-TrainerHeader_49e6c: ; 0x49e6c
+MtMoon3TH4: ; 0x49e6c
 	db $5 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7f6 ; flag's byte
-	dw UnnamedText_49fcc ; 0x5fcc TextBeforeBattle
-	dw UnnamedText_49fd6 ; 0x5fd6 TextAfterBattle
-	dw UnnamedText_49fd1 ; 0x5fd1 TextEndBattle
-	dw UnnamedText_49fd1 ; 0x5fd1 TextEndBattle
+	dw MtMoon3B4BattleTxt5 ; 0x5fcc TextBeforeBattle
+	dw MtMoon3AfterBattleTxt5 ; 0x5fd6 TextAfterBattle
+	dw MtMoon3EndBattleTxt5 ; 0x5fd1 TextEndBattle
+	dw MtMoon3EndBattleTxt5 ; 0x5fd1 TextEndBattle
 ; 0x49e78
 
 db $ff
@@ -35498,19 +35498,19 @@ MtMoon3Text1: ; 0x49e79
 
 MtMoon3Text2: ; 0x49ec1
 	db $08 ; asm
-	ld hl, TrainerHeader_49e48
+	ld hl, MtMoon3TH1
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 MtMoon3Text3: ; 0x49ecb
 	db $08 ; asm
-	ld hl, TrainerHeader_49e54
+	ld hl, MtMoon3TH2
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 MtMoon3Text4: ; 0x49ed5
 	db $08 ; asm
-	ld hl, TrainerHeader_49e60
+	ld hl, MtMoon3TH3
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -35626,63 +35626,63 @@ UnnamedText_49f94: ; 0x49f94
 Unnamed_49f99: ; 0x49f99
 INCBIN "baserom.gbc",$49f99,$49f9f - $49f99
 
-UnnamedText_49f9f: ; 0x49f9f
-	TX_FAR _UnnamedText_49f9f
+MtMoon3B4BattleTxt2: ; 0x49f9f
+	TX_FAR _MtMoon3B4BattleTxt2
 	db $50
 ; 0x49f9f + 5 bytes
 
-UnnamedText_49fa4: ; 0x49fa4
-	TX_FAR _UnnamedText_49fa4
+MtMoon3EndBattleTxt2: ; 0x49fa4
+	TX_FAR _MtMoon3EndBattleTxt2
 	db $50
 ; 0x49fa4 + 5 bytes
 
-UnnamedText_49fa9: ; 0x49fa9
-	TX_FAR _UnnamedText_49fa9
+MtMoon3AfterBattleTxt2: ; 0x49fa9
+	TX_FAR _MtMoon3AfterBattleTxt2
 	db $50
 ; 0x49fa9 + 5 bytes
 
-UnnamedText_49fae: ; 0x49fae
-	TX_FAR _UnnamedText_49fae
+MtMoon3B4BattleTxt3: ; 0x49fae
+	TX_FAR _MtMoon3B4BattleTxt3
 	db $50
 ; 0x49fae + 5 bytes
 
-UnnamedText_49fb3: ; 0x49fb3
-	TX_FAR _UnnamedText_49fb3
+MtMoon3EndBattleTxt3: ; 0x49fb3
+	TX_FAR _MtMoon3EndBattleTxt3
 	db $50
 ; 0x49fb3 + 5 bytes
 
-UnnamedText_49fb8: ; 0x49fb8
-	TX_FAR _UnnamedText_49fb8
+MtMoon3AfterBattleTxt3: ; 0x49fb8
+	TX_FAR _MtMoon3AfterBattleTxt3
 	db $50
 ; 0x49fb8 + 5 bytes
 
-UnnamedText_49fbd: ; 0x49fbd
-	TX_FAR _UnnamedText_49fbd
+MtMoon3B4BattleTxt4: ; 0x49fbd
+	TX_FAR _MtMoon3B4BattleTxt4
 	db $50
 ; 0x49fbd + 5 bytes
 
-UnnamedText_49fc2: ; 0x49fc2
-	TX_FAR _UnnamedText_49fc2
+MtMoon3EndBattleTxt4: ; 0x49fc2
+	TX_FAR _MtMoon3EndBattleTxt4
 	db $50
 ; 0x49fc2 + 5 bytes
 
-UnnamedText_49fc7: ; 0x49fc7
-	TX_FAR _UnnamedText_49fc7
+MtMoon3AfterBattleTxt4: ; 0x49fc7
+	TX_FAR _MtMoon3AfterBattleTxt4
 	db $50
 ; 0x49fc7 + 5 bytes
 
-UnnamedText_49fcc: ; 0x49fcc
-	TX_FAR _UnnamedText_49fcc
+MtMoon3B4BattleTxt5: ; 0x49fcc
+	TX_FAR _MtMoon3B4BattleTxt5
 	db $50
 ; 0x49fcc + 5 bytes
 
-UnnamedText_49fd1: ; 0x49fd1
-	TX_FAR _UnnamedText_49fd1
+MtMoon3EndBattleTxt5: ; 0x49fd1
+	TX_FAR _MtMoon3EndBattleTxt5
 	db $50
 ; 0x49fd1 + 5 bytes
 
-UnnamedText_49fd6: ; 0x49fd6
-	TX_FAR _UnnamedText_49fd6
+MtMoon3AfterBattleTxt5: ; 0x49fd6
+	TX_FAR _MtMoon3AfterBattleTxt5
 	db $50
 ; 0x49fd6 + 5 bytes
 
@@ -36737,100 +36737,100 @@ Route20TrainerHeader1:
 	db $1 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7e7 ; flag's byte
-	dw UnnamedText_50e17 ; 0x4e17 TextBeforeBattle
-	dw UnnamedText_50e21 ; 0x4e21 TextAfterBattle
-	dw UnnamedText_50e1c ; 0x4e1c TextEndBattle
-	dw UnnamedText_50e1c ; 0x4e1c TextEndBattle
+	dw Route20B4BattleTxt1 ; 0x4e17 TextBeforeBattle
+	dw Route20AfterBattleTxt1 ; 0x4e21 TextAfterBattle
+	dw Route20EndBattleTxt1 ; 0x4e1c TextEndBattle
+	dw Route20EndBattleTxt1 ; 0x4e1c TextEndBattle
 ; 0x50d46
 
 Route20TrainerHeader2: ; 0x50d46
 	db $2 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7e7 ; flag's byte
-	dw UnnamedText_50e26 ; 0x4e26 TextBeforeBattle
-	dw UnnamedText_50e30 ; 0x4e30 TextAfterBattle
-	dw UnnamedText_50e2b ; 0x4e2b TextEndBattle
-	dw UnnamedText_50e2b ; 0x4e2b TextEndBattle
+	dw Route20B4BattleTxt2 ; 0x4e26 TextBeforeBattle
+	dw Route20AfterBattleTxt2 ; 0x4e30 TextAfterBattle
+	dw Route20EndBattleTxt2 ; 0x4e2b TextEndBattle
+	dw Route20EndBattleTxt2 ; 0x4e2b TextEndBattle
 ; 0x50d52
 
 Route20TrainerHeader3: ; 0x50d52
 	db $3 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d7e7 ; flag's byte
-	dw UnnamedText_50e35 ; 0x4e35 TextBeforeBattle
-	dw UnnamedText_50e3f ; 0x4e3f TextAfterBattle
-	dw UnnamedText_50e3a ; 0x4e3a TextEndBattle
-	dw UnnamedText_50e3a ; 0x4e3a TextEndBattle
+	dw Route20B4BattleTxt3 ; 0x4e35 TextBeforeBattle
+	dw Route20AfterBattleTxt3 ; 0x4e3f TextAfterBattle
+	dw Route20EndBattleTxt3 ; 0x4e3a TextEndBattle
+	dw Route20EndBattleTxt3 ; 0x4e3a TextEndBattle
 ; 0x50d5e
 
 Route20TrainerHeader4: ; 0x50d5e
 	db $4 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7e7 ; flag's byte
-	dw UnnamedText_50e44 ; 0x4e44 TextBeforeBattle
-	dw UnnamedText_50e4e ; 0x4e4e TextAfterBattle
-	dw UnnamedText_50e49 ; 0x4e49 TextEndBattle
-	dw UnnamedText_50e49 ; 0x4e49 TextEndBattle
+	dw Route20B4BattleTxt4 ; 0x4e44 TextBeforeBattle
+	dw Route20AfterBattleTxt4 ; 0x4e4e TextAfterBattle
+	dw Route20EndBattleTxt4 ; 0x4e49 TextEndBattle
+	dw Route20EndBattleTxt4 ; 0x4e49 TextEndBattle
 ; 0x50d6a
 
 Route20TrainerHeader5: ; 0x50d6a
 	db $5 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7e7 ; flag's byte
-	dw UnnamedText_50e53 ; 0x4e53 TextBeforeBattle
-	dw UnnamedText_50e5d ; 0x4e5d TextAfterBattle
-	dw UnnamedText_50e58 ; 0x4e58 TextEndBattle
-	dw UnnamedText_50e58 ; 0x4e58 TextEndBattle
+	dw Route20B4BattleTxt5 ; 0x4e53 TextBeforeBattle
+	dw Route20AfterBattleTxt5 ; 0x4e5d TextAfterBattle
+	dw Route20EndBattleTxt5 ; 0x4e58 TextEndBattle
+	dw Route20EndBattleTxt5 ; 0x4e58 TextEndBattle
 ; 0x50d76
 
 Route20TrainerHeader6: ; 0x50d76
 	db $6 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7e7 ; flag's byte
-	dw UnnamedText_50e62 ; 0x4e62 TextBeforeBattle
-	dw UnnamedText_50e6c ; 0x4e6c TextAfterBattle
-	dw UnnamedText_50e67 ; 0x4e67 TextEndBattle
-	dw UnnamedText_50e67 ; 0x4e67 TextEndBattle
+	dw Route20B4BattleTxt6 ; 0x4e62 TextBeforeBattle
+	dw Route20AfterBattleTxt6 ; 0x4e6c TextAfterBattle
+	dw Route20EndBattleTxt6 ; 0x4e67 TextEndBattle
+	dw Route20EndBattleTxt6 ; 0x4e67 TextEndBattle
 ; 0x50d82
 
 Route20TrainerHeader7: ; 0x50d82
 	db $7 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d7e7 ; flag's byte
-	dw UnnamedText_50e71 ; 0x4e71 TextBeforeBattle
-	dw UnnamedText_50e7b ; 0x4e7b TextAfterBattle
-	dw UnnamedText_50e76 ; 0x4e76 TextEndBattle
-	dw UnnamedText_50e76 ; 0x4e76 TextEndBattle
+	dw Route20B4BattleTxt7 ; 0x4e71 TextBeforeBattle
+	dw Route20AfterBattleTxt7 ; 0x4e7b TextAfterBattle
+	dw Route20EndBattleTxt7 ; 0x4e76 TextEndBattle
+	dw Route20EndBattleTxt7 ; 0x4e76 TextEndBattle
 ; 0x50d8e
 
 Route20TrainerHeader8: ; 0x50d8e
 	db $8 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7e7 ; flag's byte
-	dw UnnamedText_50e80 ; 0x4e80 TextBeforeBattle
-	dw UnnamedText_50e8a ; 0x4e8a TextAfterBattle
-	dw UnnamedText_50e85 ; 0x4e85 TextEndBattle
-	dw UnnamedText_50e85 ; 0x4e85 TextEndBattle
+	dw Route20B4BattleTxt8 ; 0x4e80 TextBeforeBattle
+	dw Route20AfterBattleTxt8 ; 0x4e8a TextAfterBattle
+	dw Route20EndBattleTxt8 ; 0x4e85 TextEndBattle
+	dw Route20EndBattleTxt8 ; 0x4e85 TextEndBattle
 ; 0x50d9a
 
 Route20TrainerHeader9: ; 0x50d9a
 	db $9 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7e7 ; flag's byte
-	dw UnnamedText_50e8f ; 0x4e8f TextBeforeBattle
-	dw UnnamedText_50e99 ; 0x4e99 TextAfterBattle
-	dw UnnamedText_50e94 ; 0x4e94 TextEndBattle
-	dw UnnamedText_50e94 ; 0x4e94 TextEndBattle
+	dw Route20B4BattleTxt9 ; 0x4e8f TextBeforeBattle
+	dw Route20AfterBattleTxt9 ; 0x4e99 TextAfterBattle
+	dw Route20EndBattleTxt9 ; 0x4e94 TextEndBattle
+	dw Route20EndBattleTxt9 ; 0x4e94 TextEndBattle
 ; 0x50da6
 
 Route20TrainerHeader10: ; 0x50da6
 	db $a ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7e7 ; flag's byte
-	dw UnnamedText_50e9e ; 0x4e9e TextBeforeBattle
-	dw UnnamedText_50ea8 ; 0x4ea8 TextAfterBattle
-	dw UnnamedText_50ea3 ; 0x4ea3 TextEndBattle
-	dw UnnamedText_50ea3 ; 0x4ea3 TextEndBattle
+	dw Route20B4BattleTxt10 ; 0x4e9e TextBeforeBattle
+	dw Route20AfterBattleTxt10 ; 0x4ea8 TextAfterBattle
+	dw Route20EndBattleTxt10 ; 0x4ea3 TextEndBattle
+	dw Route20EndBattleTxt10 ; 0x4ea3 TextEndBattle
 ; 0x50db2
 
 db $ff
@@ -36895,153 +36895,153 @@ Route20Text10: ; 0x50e0d
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_50e17: ; 0x50e17
-	TX_FAR _UnnamedText_50e17
+Route20B4BattleTxt1: ; 0x50e17
+	TX_FAR _Route20B4BattleTxt1
 	db $50
 ; 0x50e17 + 5 bytes
 
-UnnamedText_50e1c: ; 0x50e1c
-	TX_FAR _UnnamedText_50e1c
+Route20EndBattleTxt1: ; 0x50e1c
+	TX_FAR _Route20EndBattleTxt1
 	db $50
 ; 0x50e1c + 5 bytes
 
-UnnamedText_50e21: ; 0x50e21
-	TX_FAR _UnnamedText_50e21
+Route20AfterBattleTxt1: ; 0x50e21
+	TX_FAR _Route20AfterBattleTxt1
 	db $50
 ; 0x50e21 + 5 bytes
 
-UnnamedText_50e26: ; 0x50e26
-	TX_FAR _UnnamedText_50e26
+Route20B4BattleTxt2: ; 0x50e26
+	TX_FAR _Route20B4BattleTxt2
 	db $50
 ; 0x50e26 + 5 bytes
 
-UnnamedText_50e2b: ; 0x50e2b
-	TX_FAR _UnnamedText_50e2b
+Route20EndBattleTxt2: ; 0x50e2b
+	TX_FAR _Route20EndBattleTxt2
 	db $50
 ; 0x50e2b + 5 bytes
 
-UnnamedText_50e30: ; 0x50e30
-	TX_FAR _UnnamedText_50e30
+Route20AfterBattleTxt2: ; 0x50e30
+	TX_FAR _Route20AfterBattleTxt2
 	db $50
 ; 0x50e30 + 5 bytes
 
-UnnamedText_50e35: ; 0x50e35
-	TX_FAR _UnnamedText_50e35
+Route20B4BattleTxt3: ; 0x50e35
+	TX_FAR _Route20B4BattleTxt3
 	db $50
 ; 0x50e35 + 5 bytes
 
-UnnamedText_50e3a: ; 0x50e3a
-	TX_FAR _UnnamedText_50e3a
+Route20EndBattleTxt3: ; 0x50e3a
+	TX_FAR _Route20EndBattleTxt3
 	db $50
 ; 0x50e3a + 5 bytes
 
-UnnamedText_50e3f: ; 0x50e3f
-	TX_FAR _UnnamedText_50e3f
+Route20AfterBattleTxt3: ; 0x50e3f
+	TX_FAR _Route20AfterBattleTxt3
 	db $50
 ; 0x50e3f + 5 bytes
 
-UnnamedText_50e44: ; 0x50e44
-	TX_FAR _UnnamedText_50e44
+Route20B4BattleTxt4: ; 0x50e44
+	TX_FAR _Route20B4BattleTxt4
 	db $50
 ; 0x50e44 + 5 bytes
 
-UnnamedText_50e49: ; 0x50e49
-	TX_FAR _UnnamedText_50e49
+Route20EndBattleTxt4: ; 0x50e49
+	TX_FAR _Route20EndBattleTxt4
 	db $50
 ; 0x50e49 + 5 bytes
 
-UnnamedText_50e4e: ; 0x50e4e
-	TX_FAR _UnnamedText_50e4e
+Route20AfterBattleTxt4: ; 0x50e4e
+	TX_FAR _Route20AfterBattleTxt4
 	db $50
 ; 0x50e4e + 5 bytes
 
-UnnamedText_50e53: ; 0x50e53
-	TX_FAR _UnnamedText_50e53
+Route20B4BattleTxt5: ; 0x50e53
+	TX_FAR _Route20B4BattleTxt5
 	db $50
 ; 0x50e53 + 5 bytes
 
-UnnamedText_50e58: ; 0x50e58
-	TX_FAR _UnnamedText_50e58
+Route20EndBattleTxt5: ; 0x50e58
+	TX_FAR _Route20EndBattleTxt5
 	db $50
 ; 0x50e58 + 5 bytes
 
-UnnamedText_50e5d: ; 0x50e5d
-	TX_FAR _UnnamedText_50e5d
+Route20AfterBattleTxt5: ; 0x50e5d
+	TX_FAR _Route20AfterBattleTxt5
 	db $50
 ; 0x50e5d + 5 bytes
 
-UnnamedText_50e62: ; 0x50e62
-	TX_FAR _UnnamedText_50e62
+Route20B4BattleTxt6: ; 0x50e62
+	TX_FAR _Route20B4BattleTxt6
 	db $50
 ; 0x50e62 + 5 bytes
 
-UnnamedText_50e67: ; 0x50e67
-	TX_FAR _UnnamedText_50e67
+Route20EndBattleTxt6: ; 0x50e67
+	TX_FAR _Route20EndBattleTxt6
 	db $50
 ; 0x50e67 + 5 bytes
 
-UnnamedText_50e6c: ; 0x50e6c
-	TX_FAR _UnnamedText_50e6c
+Route20AfterBattleTxt6: ; 0x50e6c
+	TX_FAR _Route20AfterBattleTxt6
 	db $50
 ; 0x50e6c + 5 bytes
 
-UnnamedText_50e71: ; 0x50e71
-	TX_FAR _UnnamedText_50e71
+Route20B4BattleTxt7: ; 0x50e71
+	TX_FAR _Route20B4BattleTxt7
 	db $50
 ; 0x50e71 + 5 bytes
 
-UnnamedText_50e76: ; 0x50e76
-	TX_FAR _UnnamedText_50e76
+Route20EndBattleTxt7: ; 0x50e76
+	TX_FAR _Route20EndBattleTxt7
 	db $50
 ; 0x50e76 + 5 bytes
 
-UnnamedText_50e7b: ; 0x50e7b
-	TX_FAR _UnnamedText_50e7b
+Route20AfterBattleTxt7: ; 0x50e7b
+	TX_FAR _Route20AfterBattleTxt7
 	db $50
 ; 0x50e7b + 5 bytes
 
-UnnamedText_50e80: ; 0x50e80
-	TX_FAR _UnnamedText_50e80
+Route20B4BattleTxt8: ; 0x50e80
+	TX_FAR _Route20B4BattleTxt8
 	db $50
 ; 0x50e80 + 5 bytes
 
-UnnamedText_50e85: ; 0x50e85
-	TX_FAR _UnnamedText_50e85
+Route20EndBattleTxt8: ; 0x50e85
+	TX_FAR _Route20EndBattleTxt8
 	db $50
 ; 0x50e85 + 5 bytes
 
-UnnamedText_50e8a: ; 0x50e8a
-	TX_FAR _UnnamedText_50e8a
+Route20AfterBattleTxt8: ; 0x50e8a
+	TX_FAR _Route20AfterBattleTxt8
 	db $50
 ; 0x50e8a + 5 bytes
 
-UnnamedText_50e8f: ; 0x50e8f
-	TX_FAR _UnnamedText_50e8f
+Route20B4BattleTxt9: ; 0x50e8f
+	TX_FAR _Route20B4BattleTxt9
 	db $50
 ; 0x50e8f + 5 bytes
 
-UnnamedText_50e94: ; 0x50e94
-	TX_FAR _UnnamedText_50e94
+Route20EndBattleTxt9: ; 0x50e94
+	TX_FAR _Route20EndBattleTxt9
 	db $50
 ; 0x50e94 + 5 bytes
 
-UnnamedText_50e99: ; 0x50e99
-	TX_FAR _UnnamedText_50e99
+Route20AfterBattleTxt9: ; 0x50e99
+	TX_FAR _Route20AfterBattleTxt9
 	db $50
 ; 0x50e99 + 5 bytes
 
-UnnamedText_50e9e: ; 0x50e9e
-	TX_FAR _UnnamedText_50e9e
+Route20B4BattleTxt10: ; 0x50e9e
+	TX_FAR _Route20B4BattleTxt10
 	db $50
 ; 0x50e9e + 5 bytes
 
-UnnamedText_50ea3: ; 0x50ea3
-	TX_FAR _UnnamedText_50ea3
+Route20EndBattleTxt10: ; 0x50ea3
+	TX_FAR _Route20EndBattleTxt10
 	db $50
 ; 0x50ea3 + 5 bytes
 
-UnnamedText_50ea8: ; 0x50ea8
-	TX_FAR _UnnamedText_50ea8
+Route20AfterBattleTxt10: ; 0x50ea8
+	TX_FAR _Route20AfterBattleTxt10
 	db $50
 ; 0x50ea8 + 5 bytes
 
@@ -37425,60 +37425,60 @@ Route24TrainerHeader1: ; 0x5145b
 	db $2 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7ef ; flag's byte
-	dw UnnamedText_51571 ; 0x5571 TextBeforeBattle
-	dw UnnamedText_5157b ; 0x557b TextAfterBattle
-	dw UnnamedText_51576 ; 0x5576 TextEndBattle
-	dw UnnamedText_51576 ; 0x5576 TextEndBattle
+	dw Route24B4BattleTxt1 ; 0x5571 TextBeforeBattle
+	dw Route24AfterBattleTxt1 ; 0x557b TextAfterBattle
+	dw Route24EndBattleTxt1 ; 0x5576 TextEndBattle
+	dw Route24EndBattleTxt1 ; 0x5576 TextEndBattle
 ; 0x51467
 
 Route24TrainerHeader2: ; 0x51467
 	db $3 ; flag's bit
 	db ($1 << 4) ; trainer's view range
 	dw $d7ef ; flag's byte
-	dw UnnamedText_51580 ; 0x5580 TextBeforeBattle
-	dw UnnamedText_5158a ; 0x558a TextAfterBattle
-	dw UnnamedText_51585 ; 0x5585 TextEndBattle
-	dw UnnamedText_51585 ; 0x5585 TextEndBattle
+	dw Route24B4BattleTxt2 ; 0x5580 TextBeforeBattle
+	dw Route24AfterBattleTxt2 ; 0x558a TextAfterBattle
+	dw Route24EndBattleTxt2 ; 0x5585 TextEndBattle
+	dw Route24EndBattleTxt2 ; 0x5585 TextEndBattle
 ; 0x51473
 
 Route24TrainerHeader3: ; 0x51473
 	db $4 ; flag's bit
 	db ($1 << 4) ; trainer's view range
 	dw $d7ef ; flag's byte
-	dw UnnamedText_5158f ; 0x558f TextBeforeBattle
-	dw UnnamedText_51599 ; 0x5599 TextAfterBattle
-	dw UnnamedText_51594 ; 0x5594 TextEndBattle
-	dw UnnamedText_51594 ; 0x5594 TextEndBattle
+	dw Route24B4BattleTxt3 ; 0x558f TextBeforeBattle
+	dw Route24AfterBattleTxt3 ; 0x5599 TextAfterBattle
+	dw Route24EndBattleTxt3 ; 0x5594 TextEndBattle
+	dw Route24EndBattleTxt3 ; 0x5594 TextEndBattle
 ; 0x5147f
 
 Route24TrainerHeader4: ; 0x5147f
 	db $5 ; flag's bit
 	db ($1 << 4) ; trainer's view range
 	dw $d7ef ; flag's byte
-	dw UnnamedText_5159e ; 0x559e TextBeforeBattle
-	dw UnnamedText_515a8 ; 0x55a8 TextAfterBattle
-	dw UnnamedText_515a3 ; 0x55a3 TextEndBattle
-	dw UnnamedText_515a3 ; 0x55a3 TextEndBattle
+	dw Route24B4BattleTxt4 ; 0x559e TextBeforeBattle
+	dw Route24AfterBattleTxt4 ; 0x55a8 TextAfterBattle
+	dw Route24EndBattleTxt4 ; 0x55a3 TextEndBattle
+	dw Route24EndBattleTxt4 ; 0x55a3 TextEndBattle
 ; 0x5148b
 
 Route24TrainerHeader5: ; 0x5148b
 	db $6 ; flag's bit
 	db ($1 << 4) ; trainer's view range
 	dw $d7ef ; flag's byte
-	dw UnnamedText_515ad ; 0x55ad TextBeforeBattle
-	dw UnnamedText_515b7 ; 0x55b7 TextAfterBattle
-	dw UnnamedText_515b2 ; 0x55b2 TextEndBattle
-	dw UnnamedText_515b2 ; 0x55b2 TextEndBattle
+	dw Route24B4BattleTxt5 ; 0x55ad TextBeforeBattle
+	dw Route24AfterBattleTxt5 ; 0x55b7 TextAfterBattle
+	dw Route24EndBattleTxt5 ; 0x55b2 TextEndBattle
+	dw Route24EndBattleTxt5 ; 0x55b2 TextEndBattle
 ; 0x51497
 
 Route24TrainerHeader6: ; 0x51497
 	db $7 ; flag's bit
 	db ($1 << 4) ; trainer's view range
 	dw $d7ef ; flag's byte
-	dw UnnamedText_515bc ; 0x55bc TextBeforeBattle
-	dw UnnamedText_515c6 ; 0x55c6 TextAfterBattle
-	dw UnnamedText_515c1 ; 0x55c1 TextEndBattle
-	dw UnnamedText_515c1 ; 0x55c1 TextEndBattle
+	dw Route24B4BattleTxt6 ; 0x55bc TextBeforeBattle
+	dw Route24AfterBattleTxt6 ; 0x55c6 TextAfterBattle
+	dw Route24EndBattleTxt6 ; 0x55c1 TextEndBattle
+	dw Route24EndBattleTxt6 ; 0x55c1 TextEndBattle
 ; 0x514a3
 
 db $ff
@@ -37596,93 +37596,93 @@ Route24Text7: ; 0x51567
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_51571: ; 0x51571
-	TX_FAR _UnnamedText_51571
+Route24B4BattleTxt1: ; 0x51571
+	TX_FAR _Route24B4BattleTxt1
 	db $50
 ; 0x51571 + 5 bytes
 
-UnnamedText_51576: ; 0x51576
-	TX_FAR _UnnamedText_51576
+Route24EndBattleTxt1: ; 0x51576
+	TX_FAR _Route24EndBattleTxt1
 	db $50
 ; 0x51576 + 5 bytes
 
-UnnamedText_5157b: ; 0x5157b
-	TX_FAR _UnnamedText_5157b
+Route24AfterBattleTxt1: ; 0x5157b
+	TX_FAR _Route24AfterBattleTxt1
 	db $50
 ; 0x5157b + 5 bytes
 
-UnnamedText_51580: ; 0x51580
-	TX_FAR _UnnamedText_51580
+Route24B4BattleTxt2: ; 0x51580
+	TX_FAR _Route24B4BattleTxt2
 	db $50
 ; 0x51580 + 5 bytes
 
-UnnamedText_51585: ; 0x51585
-	TX_FAR _UnnamedText_51585
+Route24EndBattleTxt2: ; 0x51585
+	TX_FAR _Route24EndBattleTxt2
 	db $50
 ; 0x51585 + 5 bytes
 
-UnnamedText_5158a: ; 0x5158a
-	TX_FAR _UnnamedText_5158a
+Route24AfterBattleTxt2: ; 0x5158a
+	TX_FAR _Route24AfterBattleTxt2
 	db $50
 ; 0x5158a + 5 bytes
 
-UnnamedText_5158f: ; 0x5158f
-	TX_FAR _UnnamedText_5158f
+Route24B4BattleTxt3: ; 0x5158f
+	TX_FAR _Route24B4BattleTxt3
 	db $50
 ; 0x5158f + 5 bytes
 
-UnnamedText_51594: ; 0x51594
-	TX_FAR _UnnamedText_51594
+Route24EndBattleTxt3: ; 0x51594
+	TX_FAR _Route24EndBattleTxt3
 	db $50
 ; 0x51594 + 5 bytes
 
-UnnamedText_51599: ; 0x51599
-	TX_FAR _UnnamedText_51599
+Route24AfterBattleTxt3: ; 0x51599
+	TX_FAR _Route24AfterBattleTxt3
 	db $50
 ; 0x51599 + 5 bytes
 
-UnnamedText_5159e: ; 0x5159e
-	TX_FAR _UnnamedText_5159e
+Route24B4BattleTxt4: ; 0x5159e
+	TX_FAR _Route24B4BattleTxt4
 	db $50
 ; 0x5159e + 5 bytes
 
-UnnamedText_515a3: ; 0x515a3
-	TX_FAR _UnnamedText_515a3
+Route24EndBattleTxt4: ; 0x515a3
+	TX_FAR _Route24EndBattleTxt4
 	db $50
 ; 0x515a3 + 5 bytes
 
-UnnamedText_515a8: ; 0x515a8
-	TX_FAR _UnnamedText_515a8
+Route24AfterBattleTxt4: ; 0x515a8
+	TX_FAR _Route24AfterBattleTxt4
 	db $50
 ; 0x515a8 + 5 bytes
 
-UnnamedText_515ad: ; 0x515ad
-	TX_FAR _UnnamedText_515ad
+Route24B4BattleTxt5: ; 0x515ad
+	TX_FAR _Route24B4BattleTxt5
 	db $50
 ; 0x515ad + 5 bytes
 
-UnnamedText_515b2: ; 0x515b2
-	TX_FAR _UnnamedText_515b2
+Route24EndBattleTxt5: ; 0x515b2
+	TX_FAR _Route24EndBattleTxt5
 	db $50
 ; 0x515b2 + 5 bytes
 
-UnnamedText_515b7: ; 0x515b7
-	TX_FAR _UnnamedText_515b7
+Route24AfterBattleTxt5: ; 0x515b7
+	TX_FAR _Route24AfterBattleTxt5
 	db $50
 ; 0x515b7 + 5 bytes
 
-UnnamedText_515bc: ; 0x515bc
-	TX_FAR _UnnamedText_515bc
+Route24B4BattleTxt6: ; 0x515bc
+	TX_FAR _Route24B4BattleTxt6
 	db $50
 ; 0x515bc + 5 bytes
 
-UnnamedText_515c1: ; 0x515c1
-	TX_FAR _UnnamedText_515c1
+Route24EndBattleTxt6: ; 0x515c1
+	TX_FAR _Route24EndBattleTxt6
 	db $50
 ; 0x515c1 + 5 bytes
 
-UnnamedText_515c6: ; 0x515c6
-	TX_FAR _UnnamedText_515c6
+Route24AfterBattleTxt6: ; 0x515c6
+	TX_FAR _Route24AfterBattleTxt6
 	db $50
 ; 0x515c6 + 5 bytes
 
@@ -37708,90 +37708,90 @@ Route25TrainerHeader1: ; 0x5163e
 	db $1 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d7f1 ; flag's byte
-	dw UnnamedText_51705 ; 0x5705 TextBeforeBattle
-	dw UnnamedText_5170f ; 0x570f TextAfterBattle
-	dw UnnamedText_5170a ; 0x570a TextEndBattle
-	dw UnnamedText_5170a ; 0x570a TextEndBattle
+	dw Route25B4BattleTxt1 ; 0x5705 TextBeforeBattle
+	dw Route25AfterBattleTxt1 ; 0x570f TextAfterBattle
+	dw Route25EndBattleTxt1 ; 0x570a TextEndBattle
+	dw Route25EndBattleTxt1 ; 0x570a TextEndBattle
 ; 0x5164a
 
 Route25TrainerHeader2: ; 0x5164a
 	db $2 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7f1 ; flag's byte
-	dw UnnamedText_51714 ; 0x5714 TextBeforeBattle
-	dw UnnamedText_5171e ; 0x571e TextAfterBattle
-	dw UnnamedText_51719 ; 0x5719 TextEndBattle
-	dw UnnamedText_51719 ; 0x5719 TextEndBattle
+	dw Route25B4BattleTxt2 ; 0x5714 TextBeforeBattle
+	dw Route25AfterBattleTxt2 ; 0x571e TextAfterBattle
+	dw Route25EndBattleTxt2 ; 0x5719 TextEndBattle
+	dw Route25EndBattleTxt2 ; 0x5719 TextEndBattle
 ; 0x51656
 
 Route25TrainerHeader3: ; 0x51656
 	db $3 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7f1 ; flag's byte
-	dw UnnamedText_51723 ; 0x5723 TextBeforeBattle
-	dw UnnamedText_5172d ; 0x572d TextAfterBattle
-	dw UnnamedText_51728 ; 0x5728 TextEndBattle
-	dw UnnamedText_51728 ; 0x5728 TextEndBattle
+	dw Route25B4BattleTxt3 ; 0x5723 TextBeforeBattle
+	dw Route25AfterBattleTxt3 ; 0x572d TextAfterBattle
+	dw Route25EndBattleTxt3 ; 0x5728 TextEndBattle
+	dw Route25EndBattleTxt3 ; 0x5728 TextEndBattle
 ; 0x51662
 
 Route25TrainerHeader4: ; 0x51662
 	db $4 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d7f1 ; flag's byte
-	dw UnnamedText_51732 ; 0x5732 TextBeforeBattle
-	dw UnnamedText_5173c ; 0x573c TextAfterBattle
-	dw UnnamedText_51737 ; 0x5737 TextEndBattle
-	dw UnnamedText_51737 ; 0x5737 TextEndBattle
+	dw Route25B4BattleTxt4 ; 0x5732 TextBeforeBattle
+	dw Route25AfterBattleTxt4 ; 0x573c TextAfterBattle
+	dw Route25EndBattleTxt4 ; 0x5737 TextEndBattle
+	dw Route25EndBattleTxt4 ; 0x5737 TextEndBattle
 ; 0x5166e
 
 Route25TrainerHeader5: ; 0x5166e
 	db $5 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7f1 ; flag's byte
-	dw UnnamedText_51741 ; 0x5741 TextBeforeBattle
-	dw UnnamedText_5174b ; 0x574b TextAfterBattle
-	dw UnnamedText_51746 ; 0x5746 TextEndBattle
-	dw UnnamedText_51746 ; 0x5746 TextEndBattle
+	dw Route25B4BattleTxt5 ; 0x5741 TextBeforeBattle
+	dw Route25AfterBattleTxt5 ; 0x574b TextAfterBattle
+	dw Route25EndBattleTxt5 ; 0x5746 TextEndBattle
+	dw Route25EndBattleTxt5 ; 0x5746 TextEndBattle
 ; 0x5167a
 
 Route25TrainerHeader6: ; 0x5167a
 	db $6 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7f1 ; flag's byte
-	dw UnnamedText_51750 ; 0x5750 TextBeforeBattle
-	dw UnnamedText_5175a ; 0x575a TextAfterBattle
-	dw UnnamedText_51755 ; 0x5755 TextEndBattle
-	dw UnnamedText_51755 ; 0x5755 TextEndBattle
+	dw Route25B4BattleTxt6 ; 0x5750 TextBeforeBattle
+	dw Route25AfterBattleTxt6 ; 0x575a TextAfterBattle
+	dw Route25EndBattleTxt6 ; 0x5755 TextEndBattle
+	dw Route25EndBattleTxt6 ; 0x5755 TextEndBattle
 ; 0x51686
 
 Route25TrainerHeader7: ; 0x51686
 	db $7 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7f1 ; flag's byte
-	dw UnnamedText_5175f ; 0x575f TextBeforeBattle
-	dw UnnamedText_51769 ; 0x5769 TextAfterBattle
-	dw UnnamedText_51764 ; 0x5764 TextEndBattle
-	dw UnnamedText_51764 ; 0x5764 TextEndBattle
+	dw Route25B4BattleTxt7 ; 0x575f TextBeforeBattle
+	dw Route25AfterBattleTxt7 ; 0x5769 TextAfterBattle
+	dw Route25EndBattleTxt7 ; 0x5764 TextEndBattle
+	dw Route25EndBattleTxt7 ; 0x5764 TextEndBattle
 ; 0x51692
 
 Route25TrainerHeader8: ; 0x51692
 	db $8 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d7f1 ; flag's byte
-	dw UnnamedText_5176e ; 0x576e TextBeforeBattle
-	dw UnnamedText_51778 ; 0x5778 TextAfterBattle
-	dw UnnamedText_51773 ; 0x5773 TextEndBattle
-	dw UnnamedText_51773 ; 0x5773 TextEndBattle
+	dw Route25B4BattleTxt8 ; 0x576e TextBeforeBattle
+	dw Route25AfterBattleTxt8 ; 0x5778 TextAfterBattle
+	dw Route25EndBattleTxt8 ; 0x5773 TextEndBattle
+	dw Route25EndBattleTxt8 ; 0x5773 TextEndBattle
 ; 0x5169e
 
 Route25TrainerHeader9: ; 0x5169e
 	db $9 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d7f1 ; flag's byte
-	dw UnnamedText_5177d ; 0x577d TextBeforeBattle
-	dw UnnamedText_51787 ; 0x5787 TextAfterBattle
-	dw UnnamedText_51782 ; 0x5782 TextEndBattle
-	dw UnnamedText_51782 ; 0x5782 TextEndBattle
+	dw Route25B4BattleTxt9 ; 0x577d TextBeforeBattle
+	dw Route25AfterBattleTxt9 ; 0x5787 TextAfterBattle
+	dw Route25EndBattleTxt9 ; 0x5782 TextEndBattle
+	dw Route25EndBattleTxt9 ; 0x5782 TextEndBattle
 ; 0x516aa
 
 db $ff
@@ -37850,138 +37850,138 @@ Route25Text9: ; 0x516fb
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_51705: ; 0x51705
-	TX_FAR _UnnamedText_51705
+Route25B4BattleTxt1: ; 0x51705
+	TX_FAR _Route25B4BattleTxt1
 	db $50
 ; 0x51705 + 5 bytes
 
-UnnamedText_5170a: ; 0x5170a
-	TX_FAR _UnnamedText_5170a
+Route25EndBattleTxt1: ; 0x5170a
+	TX_FAR _Route25EndBattleTxt1
 	db $50
 ; 0x5170a + 5 bytes
 
-UnnamedText_5170f: ; 0x5170f
-	TX_FAR _UnnamedText_5170f
+Route25AfterBattleTxt1: ; 0x5170f
+	TX_FAR _Route25AfterBattleTxt1
 	db $50
 ; 0x5170f + 5 bytes
 
-UnnamedText_51714: ; 0x51714
-	TX_FAR _UnnamedText_51714
+Route25B4BattleTxt2: ; 0x51714
+	TX_FAR _Route25B4BattleTxt2
 	db $50
 ; 0x51714 + 5 bytes
 
-UnnamedText_51719: ; 0x51719
-	TX_FAR _UnnamedText_51719
+Route25EndBattleTxt2: ; 0x51719
+	TX_FAR _Route25EndBattleTxt2
 	db $50
 ; 0x51719 + 5 bytes
 
-UnnamedText_5171e: ; 0x5171e
-	TX_FAR _UnnamedText_5171e
+Route25AfterBattleTxt2: ; 0x5171e
+	TX_FAR _Route25AfterBattleTxt2
 	db $50
 ; 0x5171e + 5 bytes
 
-UnnamedText_51723: ; 0x51723
-	TX_FAR _UnnamedText_51723
+Route25B4BattleTxt3: ; 0x51723
+	TX_FAR _Route25B4BattleTxt3
 	db $50
 ; 0x51723 + 5 bytes
 
-UnnamedText_51728: ; 0x51728
-	TX_FAR _UnnamedText_51728
+Route25EndBattleTxt3: ; 0x51728
+	TX_FAR _Route25EndBattleTxt3
 	db $50
 ; 0x51728 + 5 bytes
 
-UnnamedText_5172d: ; 0x5172d
-	TX_FAR _UnnamedText_5172d
+Route25AfterBattleTxt3: ; 0x5172d
+	TX_FAR _Route25AfterBattleTxt3
 	db $50
 ; 0x5172d + 5 bytes
 
-UnnamedText_51732: ; 0x51732
-	TX_FAR _UnnamedText_51732
+Route25B4BattleTxt4: ; 0x51732
+	TX_FAR _Route25B4BattleTxt4
 	db $50
 ; 0x51732 + 5 bytes
 
-UnnamedText_51737: ; 0x51737
-	TX_FAR _UnnamedText_51737
+Route25EndBattleTxt4: ; 0x51737
+	TX_FAR _Route25EndBattleTxt4
 	db $50
 ; 0x51737 + 5 bytes
 
-UnnamedText_5173c: ; 0x5173c
-	TX_FAR _UnnamedText_5173c
+Route25AfterBattleTxt4: ; 0x5173c
+	TX_FAR _Route25AfterBattleTxt4
 	db $50
 ; 0x5173c + 5 bytes
 
-UnnamedText_51741: ; 0x51741
-	TX_FAR _UnnamedText_51741
+Route25B4BattleTxt5: ; 0x51741
+	TX_FAR _Route25B4BattleTxt5
 	db $50
 ; 0x51741 + 5 bytes
 
-UnnamedText_51746: ; 0x51746
-	TX_FAR _UnnamedText_51746
+Route25EndBattleTxt5: ; 0x51746
+	TX_FAR _Route25EndBattleTxt5
 	db $50
 ; 0x51746 + 5 bytes
 
-UnnamedText_5174b: ; 0x5174b
-	TX_FAR _UnnamedText_5174b
+Route25AfterBattleTxt5: ; 0x5174b
+	TX_FAR _Route25AfterBattleTxt5
 	db $50
 ; 0x5174b + 5 bytes
 
-UnnamedText_51750: ; 0x51750
-	TX_FAR _UnnamedText_51750
+Route25B4BattleTxt6: ; 0x51750
+	TX_FAR _Route25B4BattleTxt6
 	db $50
 ; 0x51750 + 5 bytes
 
-UnnamedText_51755: ; 0x51755
-	TX_FAR _UnnamedText_51755
+Route25EndBattleTxt6: ; 0x51755
+	TX_FAR _Route25EndBattleTxt6
 	db $50
 ; 0x51755 + 5 bytes
 
-UnnamedText_5175a: ; 0x5175a
-	TX_FAR _UnnamedText_5175a
+Route25AfterBattleTxt6: ; 0x5175a
+	TX_FAR _Route25AfterBattleTxt6
 	db $50
 ; 0x5175a + 5 bytes
 
-UnnamedText_5175f: ; 0x5175f
-	TX_FAR _UnnamedText_5175f
+Route25B4BattleTxt7: ; 0x5175f
+	TX_FAR _Route25B4BattleTxt7
 	db $50
 ; 0x5175f + 5 bytes
 
-UnnamedText_51764: ; 0x51764
-	TX_FAR _UnnamedText_51764
+Route25EndBattleTxt7: ; 0x51764
+	TX_FAR _Route25EndBattleTxt7
 	db $50
 ; 0x51764 + 5 bytes
 
-UnnamedText_51769: ; 0x51769
-	TX_FAR _UnnamedText_51769
+Route25AfterBattleTxt7: ; 0x51769
+	TX_FAR _Route25AfterBattleTxt7
 	db $50
 ; 0x51769 + 5 bytes
 
-UnnamedText_5176e: ; 0x5176e
-	TX_FAR _UnnamedText_5176e
+Route25B4BattleTxt8: ; 0x5176e
+	TX_FAR _Route25B4BattleTxt8
 	db $50
 ; 0x5176e + 5 bytes
 
-UnnamedText_51773: ; 0x51773
-	TX_FAR _UnnamedText_51773
+Route25EndBattleTxt8: ; 0x51773
+	TX_FAR _Route25EndBattleTxt8
 	db $50
 ; 0x51773 + 5 bytes
 
-UnnamedText_51778: ; 0x51778
-	TX_FAR _UnnamedText_51778
+Route25AfterBattleTxt8: ; 0x51778
+	TX_FAR _Route25AfterBattleTxt8
 	db $50
 ; 0x51778 + 5 bytes
 
-UnnamedText_5177d: ; 0x5177d
-	TX_FAR _UnnamedText_5177d
+Route25B4BattleTxt9: ; 0x5177d
+	TX_FAR _Route25B4BattleTxt9
 	db $50
 ; 0x5177d + 5 bytes
 
-UnnamedText_51782: ; 0x51782
-	TX_FAR _UnnamedText_51782
+Route25EndBattleTxt9: ; 0x51782
+	TX_FAR _Route25EndBattleTxt9
 	db $50
 ; 0x51782 + 5 bytes
 
-UnnamedText_51787: ; 0x51787
-	TX_FAR _UnnamedText_51787
+Route25AfterBattleTxt9: ; 0x51787
+	TX_FAR _Route25AfterBattleTxt9
 	db $50
 ; 0x51787 + 5 bytes
 
@@ -38026,60 +38026,60 @@ VictoryRoad2TrainerHeader1: ; 0x51835
 	db $1 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7ee ; flag's byte
-	dw UnnamedText_518ca ; 0x58ca TextBeforeBattle
-	dw UnnamedText_518d4 ; 0x58d4 TextAfterBattle
-	dw UnnamedText_518cf ; 0x58cf TextEndBattle
-	dw UnnamedText_518cf ; 0x58cf TextEndBattle
+	dw VictoryRoad2B4BattleTxt1 ; 0x58ca TextBeforeBattle
+	dw VictoryRoad2AfterBattleTxt1 ; 0x58d4 TextAfterBattle
+	dw VictoryRoad2EndBattleTxt1 ; 0x58cf TextEndBattle
+	dw VictoryRoad2EndBattleTxt1 ; 0x58cf TextEndBattle
 ; 0x51841
 
 VictoryRoad2TrainerHeader2: ; 0x51841
 	db $2 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7ee ; flag's byte
-	dw UnnamedText_518d9 ; 0x58d9 TextBeforeBattle
-	dw UnnamedText_518e3 ; 0x58e3 TextAfterBattle
-	dw UnnamedText_518de ; 0x58de TextEndBattle
-	dw UnnamedText_518de ; 0x58de TextEndBattle
+	dw VictoryRoad2B4BattleTxt2 ; 0x58d9 TextBeforeBattle
+	dw VictoryRoad2AfterBattleTxt2 ; 0x58e3 TextAfterBattle
+	dw VictoryRoad2EndBattleTxt2 ; 0x58de TextEndBattle
+	dw VictoryRoad2EndBattleTxt2 ; 0x58de TextEndBattle
 ; 0x5184d
 
 VictoryRoad2TrainerHeader3: ; 0x5184d
 	db $3 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7ee ; flag's byte
-	dw UnnamedText_518e8 ; 0x58e8 TextBeforeBattle
-	dw UnnamedText_518f2 ; 0x58f2 TextAfterBattle
-	dw UnnamedText_518ed ; 0x58ed TextEndBattle
-	dw UnnamedText_518ed ; 0x58ed TextEndBattle
+	dw VictoryRoad2B4BattleTxt3 ; 0x58e8 TextBeforeBattle
+	dw VictoryRoad2AfterBattleTxt3 ; 0x58f2 TextAfterBattle
+	dw VictoryRoad2EndBattleTxt3 ; 0x58ed TextEndBattle
+	dw VictoryRoad2EndBattleTxt3 ; 0x58ed TextEndBattle
 ; 0x51859
 
 VictoryRoad2TrainerHeader4: ; 0x51859
 	db $4 ; flag's bit
 	db ($1 << 4) ; trainer's view range
 	dw $d7ee ; flag's byte
-	dw UnnamedText_518f7 ; 0x58f7 TextBeforeBattle
-	dw UnnamedText_51901 ; 0x5901 TextAfterBattle
-	dw UnnamedText_518fc ; 0x58fc TextEndBattle
-	dw UnnamedText_518fc ; 0x58fc TextEndBattle
+	dw VictoryRoad2B4BattleTxt4 ; 0x58f7 TextBeforeBattle
+	dw VictoryRoad2AfterBattleTxt4 ; 0x5901 TextAfterBattle
+	dw VictoryRoad2EndBattleTxt4 ; 0x58fc TextEndBattle
+	dw VictoryRoad2EndBattleTxt4 ; 0x58fc TextEndBattle
 ; 0x51865
 
 VictoryRoad2TrainerHeader5: ; 0x51865
 	db $5 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7ee ; flag's byte
-	dw UnnamedText_51906 ; 0x5906 TextBeforeBattle
-	dw UnnamedText_51910 ; 0x5910 TextAfterBattle
-	dw UnnamedText_5190b ; 0x590b TextEndBattle
-	dw UnnamedText_5190b ; 0x590b TextEndBattle
+	dw VictoryRoad2B4BattleTxt5 ; 0x5906 TextBeforeBattle
+	dw VictoryRoad2AfterBattleTxt5 ; 0x5910 TextAfterBattle
+	dw VictoryRoad2EndBattleTxt5 ; 0x590b TextEndBattle
+	dw VictoryRoad2EndBattleTxt5 ; 0x590b TextEndBattle
 ; 0x51871
 
 VictoryRoad2TrainerHeader6: ; 0x51871
 	db $6 ; flag's bit
 	db ($0 << 4) ; trainer's view range
 	dw $d7ee ; flag's byte
-	dw UnnamedText_518ba ; 0x58ba TextBeforeBattle
-	dw UnnamedText_518ba ; 0x58ba TextAfterBattle
-	dw UnnamedText_518ba ; 0x58ba TextEndBattle
-	dw UnnamedText_518ba ; 0x58ba TextEndBattle
+	dw VictoryRoad2B4BattleTxt6 ; 0x58ba TextBeforeBattle
+	dw VictoryRoad2B4BattleTxt6 ; 0x58ba TextAfterBattle
+	dw VictoryRoad2B4BattleTxt6 ; 0x58ba TextEndBattle
+	dw VictoryRoad2B4BattleTxt6 ; 0x58ba TextEndBattle
 ; 0x5187d
 
 db $ff
@@ -38120,8 +38120,8 @@ VictoryRoad2Text6: ; 0x518b0
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_518ba: ; 0x518ba
-	TX_FAR _UnnamedText_518ba ; 0x8d06e
+VictoryRoad2B4BattleTxt6: ; 0x518ba
+	TX_FAR _VictoryRoad2B4BattleTxt6 ; 0x8d06e
 	db $8
 	ld a, $49
 	call $13d0
@@ -38129,78 +38129,78 @@ UnnamedText_518ba: ; 0x518ba
 	jp TextScriptEnd
 ; 0x518ca
 
-UnnamedText_518ca: ; 0x518ca
-	TX_FAR _UnnamedText_518ca
+VictoryRoad2B4BattleTxt1: ; 0x518ca
+	TX_FAR _VictoryRoad2B4BattleTxt1
 	db $50
 ; 0x518ca + 5 bytes
 
-UnnamedText_518cf: ; 0x518cf
-	TX_FAR _UnnamedText_518cf
+VictoryRoad2EndBattleTxt1: ; 0x518cf
+	TX_FAR _VictoryRoad2EndBattleTxt1
 	db $50
 ; 0x518cf + 5 bytes
 
-UnnamedText_518d4: ; 0x518d4
-	TX_FAR _UnnamedText_518d4
+VictoryRoad2AfterBattleTxt1: ; 0x518d4
+	TX_FAR _VictoryRoad2AfterBattleTxt1
 	db $50
 ; 0x518d4 + 5 bytes
 
-UnnamedText_518d9: ; 0x518d9
-	TX_FAR _UnnamedText_518d9
+VictoryRoad2B4BattleTxt2: ; 0x518d9
+	TX_FAR _VictoryRoad2B4BattleTxt2
 	db $50
 ; 0x518d9 + 5 bytes
 
-UnnamedText_518de: ; 0x518de
-	TX_FAR _UnnamedText_518de
+VictoryRoad2EndBattleTxt2: ; 0x518de
+	TX_FAR _VictoryRoad2EndBattleTxt2
 	db $50
 ; 0x518de + 5 bytes
 
-UnnamedText_518e3: ; 0x518e3
-	TX_FAR _UnnamedText_518e3
+VictoryRoad2AfterBattleTxt2: ; 0x518e3
+	TX_FAR _VictoryRoad2AfterBattleTxt2
 	db $50
 ; 0x518e3 + 5 bytes
 
-UnnamedText_518e8: ; 0x518e8
-	TX_FAR _UnnamedText_518e8
+VictoryRoad2B4BattleTxt3: ; 0x518e8
+	TX_FAR _VictoryRoad2B4BattleTxt3
 	db $50
 ; 0x518e8 + 5 bytes
 
-UnnamedText_518ed: ; 0x518ed
-	TX_FAR _UnnamedText_518ed
+VictoryRoad2EndBattleTxt3: ; 0x518ed
+	TX_FAR _VictoryRoad2EndBattleTxt3
 	db $50
 ; 0x518ed + 5 bytes
 
-UnnamedText_518f2: ; 0x518f2
-	TX_FAR _UnnamedText_518f2
+VictoryRoad2AfterBattleTxt3: ; 0x518f2
+	TX_FAR _VictoryRoad2AfterBattleTxt3
 	db $50
 ; 0x518f2 + 5 bytes
 
-UnnamedText_518f7: ; 0x518f7
-	TX_FAR _UnnamedText_518f7
+VictoryRoad2B4BattleTxt4: ; 0x518f7
+	TX_FAR _VictoryRoad2B4BattleTxt4
 	db $50
 ; 0x518f7 + 5 bytes
 
-UnnamedText_518fc: ; 0x518fc
-	TX_FAR _UnnamedText_518fc
+VictoryRoad2EndBattleTxt4: ; 0x518fc
+	TX_FAR _VictoryRoad2EndBattleTxt4
 	db $50
 ; 0x518fc + 5 bytes
 
-UnnamedText_51901: ; 0x51901
-	TX_FAR _UnnamedText_51901
+VictoryRoad2AfterBattleTxt4: ; 0x51901
+	TX_FAR _VictoryRoad2AfterBattleTxt4
 	db $50
 ; 0x51901 + 5 bytes
 
-UnnamedText_51906: ; 0x51906
-	TX_FAR _UnnamedText_51906
+VictoryRoad2B4BattleTxt5: ; 0x51906
+	TX_FAR _VictoryRoad2B4BattleTxt5
 	db $50
 ; 0x51906 + 5 bytes
 
-UnnamedText_5190b: ; 0x5190b
-	TX_FAR _UnnamedText_5190b
+VictoryRoad2EndBattleTxt5: ; 0x5190b
+	TX_FAR _VictoryRoad2EndBattleTxt5
 	db $50
 ; 0x5190b + 5 bytes
 
-UnnamedText_51910: ; 0x51910
-	TX_FAR _UnnamedText_51910
+VictoryRoad2AfterBattleTxt5: ; 0x51910
+	TX_FAR _VictoryRoad2AfterBattleTxt5
 	db $50
 ; 0x51910 + 5 bytes
 
@@ -38326,40 +38326,40 @@ SilphCo7TrainerHeader1: ; 0x51d5d
 	db $5 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d82f ; flag's byte
-	dw UnnamedText_51e5a ; 0x5e5a TextBeforeBattle
-	dw UnnamedText_51e64 ; 0x5e64 TextAfterBattle
-	dw UnnamedText_51e5f ; 0x5e5f TextEndBattle
-	dw UnnamedText_51e5f ; 0x5e5f TextEndBattle
+	dw SilphCo7B4BattleTxt1 ; 0x5e5a TextBeforeBattle
+	dw SilphCo7AfterBattleTxt1 ; 0x5e64 TextAfterBattle
+	dw SilphCo7EndBattleTxt1 ; 0x5e5f TextEndBattle
+	dw SilphCo7EndBattleTxt1 ; 0x5e5f TextEndBattle
 ; 0x51d69
 
 SilphCo7TrainerHeader2: ; 0x51d69
 	db $6 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d82f ; flag's byte
-	dw UnnamedText_51e73 ; 0x5e73 TextBeforeBattle
-	dw UnnamedText_51e7d ; 0x5e7d TextAfterBattle
-	dw UnnamedText_51e78 ; 0x5e78 TextEndBattle
-	dw UnnamedText_51e78 ; 0x5e78 TextEndBattle
+	dw SilphCo7B4BattleTxt2 ; 0x5e73 TextBeforeBattle
+	dw SilphCo7AfterBattleTxt2 ; 0x5e7d TextAfterBattle
+	dw SilphCo7EndBattleTxt2 ; 0x5e78 TextEndBattle
+	dw SilphCo7EndBattleTxt2 ; 0x5e78 TextEndBattle
 ; 0x51d75
 
 SilphCo7TrainerHeader3: ; 0x51d75
 	db $7 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d82f ; flag's byte
-	dw UnnamedText_51e8c ; 0x5e8c TextBeforeBattle
-	dw UnnamedText_51e96 ; 0x5e96 TextAfterBattle
-	dw UnnamedText_51e91 ; 0x5e91 TextEndBattle
-	dw UnnamedText_51e91 ; 0x5e91 TextEndBattle
+	dw SilphCo7B4BattleTxt3 ; 0x5e8c TextBeforeBattle
+	dw SilphCo7AfterBattleTxt3 ; 0x5e96 TextAfterBattle
+	dw SilphCo7EndBattleTxt3 ; 0x5e91 TextEndBattle
+	dw SilphCo7EndBattleTxt3 ; 0x5e91 TextEndBattle
 ; 0x51d81
 
 SilphCo7TrainerHeader4: ; 0x51d81
 	db $8 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d82f ; flag's byte
-	dw UnnamedText_51ea5 ; 0x5ea5 TextBeforeBattle
-	dw UnnamedText_51eaf ; 0x5eaf TextAfterBattle
-	dw UnnamedText_51eaa ; 0x5eaa TextEndBattle
-	dw UnnamedText_51eaa ; 0x5eaa TextEndBattle
+	dw SilphCo7B4BattleTxt4 ; 0x5ea5 TextBeforeBattle
+	dw SilphCo7AfterBattleTxt4 ; 0x5eaf TextAfterBattle
+	dw SilphCo7EndBattleTxt4 ; 0x5eaa TextEndBattle
+	dw SilphCo7EndBattleTxt4 ; 0x5eaa TextEndBattle
 ; 0x51d8d
 
 db $ff
@@ -38495,18 +38495,18 @@ SilphCo7Text5: ; 0x51e50
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_51e5a: ; 0x51e5a
-	TX_FAR _UnnamedText_51e5a
+SilphCo7B4BattleTxt1: ; 0x51e5a
+	TX_FAR _SilphCo7B4BattleTxt1
 	db $50
 ; 0x51e5a + 5 bytes
 
-UnnamedText_51e5f: ; 0x51e5f
-	TX_FAR _UnnamedText_51e5f
+SilphCo7EndBattleTxt1: ; 0x51e5f
+	TX_FAR _SilphCo7EndBattleTxt1
 	db $50
 ; 0x51e5f + 5 bytes
 
-UnnamedText_51e64: ; 0x51e64
-	TX_FAR _UnnamedText_51e64
+SilphCo7AfterBattleTxt1: ; 0x51e64
+	TX_FAR _SilphCo7AfterBattleTxt1
 	db $50
 ; 0x51e64 + 5 bytes
 
@@ -38516,18 +38516,18 @@ SilphCo7Text6: ; 0x51e69
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_51e73: ; 0x51e73
-	TX_FAR _UnnamedText_51e73
+SilphCo7B4BattleTxt2: ; 0x51e73
+	TX_FAR _SilphCo7B4BattleTxt2
 	db $50
 ; 0x51e73 + 5 bytes
 
-UnnamedText_51e78: ; 0x51e78
-	TX_FAR _UnnamedText_51e78
+SilphCo7EndBattleTxt2: ; 0x51e78
+	TX_FAR _SilphCo7EndBattleTxt2
 	db $50
 ; 0x51e78 + 5 bytes
 
-UnnamedText_51e7d: ; 0x51e7d
-	TX_FAR _UnnamedText_51e7d
+SilphCo7AfterBattleTxt2: ; 0x51e7d
+	TX_FAR _SilphCo7AfterBattleTxt2
 	db $50
 ; 0x51e7d + 5 bytes
 
@@ -38537,18 +38537,18 @@ SilphCo7Text7: ; 0x51e82
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_51e8c: ; 0x51e8c
-	TX_FAR _UnnamedText_51e8c
+SilphCo7B4BattleTxt3: ; 0x51e8c
+	TX_FAR _SilphCo7B4BattleTxt3
 	db $50
 ; 0x51e8c + 5 bytes
 
-UnnamedText_51e91: ; 0x51e91
-	TX_FAR _UnnamedText_51e91
+SilphCo7EndBattleTxt3: ; 0x51e91
+	TX_FAR _SilphCo7EndBattleTxt3
 	db $50
 ; 0x51e91 + 5 bytes
 
-UnnamedText_51e96: ; 0x51e96
-	TX_FAR _UnnamedText_51e96
+SilphCo7AfterBattleTxt3: ; 0x51e96
+	TX_FAR _SilphCo7AfterBattleTxt3
 	db $50
 ; 0x51e96 + 5 bytes
 
@@ -38558,18 +38558,18 @@ SilphCo7Text8: ; 0x51e9b
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_51ea5: ; 0x51ea5
-	TX_FAR _UnnamedText_51ea5
+SilphCo7B4BattleTxt4: ; 0x51ea5
+	TX_FAR _SilphCo7B4BattleTxt4
 	db $50
 ; 0x51ea5 + 5 bytes
 
-UnnamedText_51eaa: ; 0x51eaa
-	TX_FAR _UnnamedText_51eaa
+SilphCo7EndBattleTxt4: ; 0x51eaa
+	TX_FAR _SilphCo7EndBattleTxt4
 	db $50
 ; 0x51eaa + 5 bytes
 
-UnnamedText_51eaf: ; 0x51eaf
-	TX_FAR _UnnamedText_51eaf
+SilphCo7AfterBattleTxt4: ; 0x51eaf
+	TX_FAR _SilphCo7AfterBattleTxt4
 	db $50
 ; 0x51eaf + 5 bytes
 
@@ -38671,10 +38671,10 @@ Mansion2TrainerHeader1: ; 0x52057
 	db $1 ; flag's bit
 	db ($0 << 4) ; trainer's view range
 	dw $d847 ; flag's byte
-	dw UnnamedText_5206e ; 0x606e TextBeforeBattle
-	dw UnnamedText_52078 ; 0x6078 TextAfterBattle
-	dw UnnamedText_52073 ; 0x6073 TextEndBattle
-	dw UnnamedText_52073 ; 0x6073 TextEndBattle
+	dw Mansion2B4BattleTxt1 ; 0x606e TextBeforeBattle
+	dw Mansion2AfterBattleTxt1 ; 0x6078 TextAfterBattle
+	dw Mansion2EndBattleTxt1 ; 0x6073 TextEndBattle
+	dw Mansion2EndBattleTxt1 ; 0x6073 TextEndBattle
 ; 0x52063
 
 db $ff
@@ -38685,18 +38685,18 @@ Mansion2Text1: ; 0x52064
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_5206e: ; 0x5206e
-	TX_FAR _UnnamedText_5206e
+Mansion2B4BattleTxt1: ; 0x5206e
+	TX_FAR _Mansion2B4BattleTxt1
 	db $50
 ; 0x5206e + 5 bytes
 
-UnnamedText_52073: ; 0x52073
-	TX_FAR _UnnamedText_52073
+Mansion2EndBattleTxt1: ; 0x52073
+	TX_FAR _Mansion2EndBattleTxt1
 	db $50
 ; 0x52073 + 5 bytes
 
-UnnamedText_52078: ; 0x52078
-	TX_FAR _UnnamedText_52078
+Mansion2AfterBattleTxt1: ; 0x52078
+	TX_FAR _Mansion2AfterBattleTxt1
 	db $50
 ; 0x52078 + 5 bytes
 
@@ -38809,20 +38809,20 @@ Mansion3TrainerHeader1: ; 0x52296
 	db $1 ; flag's bit
 	db ($0 << 4) ; trainer's view range
 	dw $d849 ; flag's byte
-	dw UnnamedText_522c3 ; 0x62c3 TextBeforeBattle
-	dw UnnamedText_522cd ; 0x62cd TextAfterBattle
-	dw UnnamedText_522c8 ; 0x62c8 TextEndBattle
-	dw UnnamedText_522c8 ; 0x62c8 TextEndBattle
+	dw Mansion3B4BattleTxt1 ; 0x62c3 TextBeforeBattle
+	dw Mansion3AfterBattleTxt1 ; 0x62cd TextAfterBattle
+	dw Mansion3EndBattleTxt1 ; 0x62c8 TextEndBattle
+	dw Mansion3EndBattleTxt1 ; 0x62c8 TextEndBattle
 ; 0x522a2
 
 Mansion3TrainerHeader2: ; 0x522a2
 	db $2 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d849 ; flag's byte
-	dw UnnamedText_522d2 ; 0x62d2 TextBeforeBattle
-	dw UnnamedText_522dc ; 0x62dc TextAfterBattle
-	dw UnnamedText_522d7 ; 0x62d7 TextEndBattle
-	dw UnnamedText_522d7 ; 0x62d7 TextEndBattle
+	dw Mansion3B4BattleTxt2 ; 0x62d2 TextBeforeBattle
+	dw Mansion3AfterBattleTxt2 ; 0x62dc TextAfterBattle
+	dw Mansion3EndBattleTxt2 ; 0x62d7 TextEndBattle
+	dw Mansion3EndBattleTxt2 ; 0x62d7 TextEndBattle
 ; 0x522ae
 
 db $ff
@@ -38839,33 +38839,33 @@ Mansion3Text2: ; 0x522b9
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_522c3: ; 0x522c3
-	TX_FAR _UnnamedText_522c3
+Mansion3B4BattleTxt1: ; 0x522c3
+	TX_FAR _Mansion3B4BattleTxt1
 	db $50
 ; 0x522c3 + 5 bytes
 
-UnnamedText_522c8: ; 0x522c8
-	TX_FAR _UnnamedText_522c8
+Mansion3EndBattleTxt1: ; 0x522c8
+	TX_FAR _Mansion3EndBattleTxt1
 	db $50
 ; 0x522c8 + 5 bytes
 
-UnnamedText_522cd: ; 0x522cd
-	TX_FAR _UnnamedText_522cd
+Mansion3AfterBattleTxt1: ; 0x522cd
+	TX_FAR _Mansion3AfterBattleTxt1
 	db $50
 ; 0x522cd + 5 bytes
 
-UnnamedText_522d2: ; 0x522d2
-	TX_FAR _UnnamedText_522d2
+Mansion3B4BattleTxt2: ; 0x522d2
+	TX_FAR _Mansion3B4BattleTxt2
 	db $50
 ; 0x522d2 + 5 bytes
 
-UnnamedText_522d7: ; 0x522d7
-	TX_FAR _UnnamedText_522d7
+Mansion3EndBattleTxt2: ; 0x522d7
+	TX_FAR _Mansion3EndBattleTxt2
 	db $50
 ; 0x522d7 + 5 bytes
 
-UnnamedText_522dc: ; 0x522dc
-	TX_FAR _UnnamedText_522dc
+Mansion3AfterBattleTxt2: ; 0x522dc
+	TX_FAR _Mansion3AfterBattleTxt2
 	db $50
 ; 0x522dc + 5 bytes
 
@@ -38928,20 +38928,20 @@ Mansion4TrainerHeader1: ; 0x52448
 	db $1 ; flag's bit
 	db ($0 << 4) ; trainer's view range
 	dw $d84b ; flag's byte
-	dw UnnamedText_52475 ; 0x6475 TextBeforeBattle
-	dw UnnamedText_5247f ; 0x647f TextAfterBattle
-	dw UnnamedText_5247a ; 0x647a TextEndBattle
-	dw UnnamedText_5247a ; 0x647a TextEndBattle
+	dw Mansion4B4BattleTxt1 ; 0x6475 TextBeforeBattle
+	dw Mansion4AfterBattleTxt1 ; 0x647f TextAfterBattle
+	dw Mansion4EndBattleTxt1 ; 0x647a TextEndBattle
+	dw Mansion4EndBattleTxt1 ; 0x647a TextEndBattle
 ; 0x52454
 
 Mansion4TrainerHeader2: ; 0x52454
 	db $2 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d84b ; flag's byte
-	dw UnnamedText_52484 ; 0x6484 TextBeforeBattle
-	dw Map03FlyWarp ; 0x648e TextAfterBattle
-	dw UnnamedText_52489 ; 0x6489 TextEndBattle
-	dw UnnamedText_52489 ; 0x6489 TextEndBattle
+	dw Mansion4B4BattleTxt2 ; 0x6484 TextBeforeBattle
+	dw Mansion4AfterBattleTxt2 ; 0x648e TextAfterBattle
+	dw Mansion4EndBattleTxt2 ; 0x6489 TextEndBattle
+	dw Mansion4EndBattleTxt2 ; 0x6489 TextEndBattle
 ; 0x52460
 
 db $ff
@@ -38958,33 +38958,33 @@ Mansion4Text2: ; 0x5246b
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_52475: ; 0x52475
-	TX_FAR _UnnamedText_52475
+Mansion4B4BattleTxt1: ; 0x52475
+	TX_FAR _Mansion4B4BattleTxt1
 	db $50
 ; 0x52475 + 5 bytes
 
-UnnamedText_5247a: ; 0x5247a
-	TX_FAR _UnnamedText_5247a
+Mansion4EndBattleTxt1: ; 0x5247a
+	TX_FAR _Mansion4EndBattleTxt1
 	db $50
 ; 0x5247a + 5 bytes
 
-UnnamedText_5247f: ; 0x5247f
-	TX_FAR _UnnamedText_5247f
+Mansion4AfterBattleTxt1: ; 0x5247f
+	TX_FAR _Mansion4AfterBattleTxt1
 	db $50
 ; 0x5247f + 5 bytes
 
-UnnamedText_52484: ; 0x52484
-	TX_FAR _UnnamedText_52484
+Mansion4B4BattleTxt2: ; 0x52484
+	TX_FAR _Mansion4B4BattleTxt2
 	db $50
 ; 0x52484 + 5 bytes
 
-UnnamedText_52489: ; 0x52489
-	TX_FAR _UnnamedText_52489
+Mansion4EndBattleTxt2: ; 0x52489
+	TX_FAR _Mansion4EndBattleTxt2
 	db $50
 ; 0x52489 + 5 bytes
 
-UnnamedText_5248e: ; 0x5248e
-	TX_FAR _UnnamedText_5248e
+Mansion4AfterBattleTxt2: ; 0x5248e
+	TX_FAR _Mansion4AfterBattleTxt2
 	db $50
 ; 0x5248e + 5 bytes
 
@@ -40058,80 +40058,80 @@ Route3TrainerHeader1: ; 0x55525
 	db $2 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d7c3 ; flag's byte
-	dw UnnamedText_55595 ; 0x5595 TextBeforeBattle
-	dw UnnamedText_5559f ; 0x559f TextAfterBattle
-	dw UnnamedText_5559a ; 0x559a TextEndBattle
-	dw UnnamedText_5559a ; 0x559a TextEndBattle
+	dw Route3B4BattleTxt1 ; 0x5595 TextBeforeBattle
+	dw Route3AfterBattleTxt1 ; 0x559f TextAfterBattle
+	dw Route3EndBattleTxt1 ; 0x559a TextEndBattle
+	dw Route3EndBattleTxt1 ; 0x559a TextEndBattle
 ; 0x55531
 
-TrainerHeader_55531: ; 0x55531
+Route3TH1: ; 0x55531
 	db $3 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7c3 ; flag's byte
-	dw UnnamedText_555ae ; 0x55ae TextBeforeBattle
-	dw UnnamedText_555b8 ; 0x55b8 TextAfterBattle
-	dw UnnamedText_555b3 ; 0x55b3 TextEndBattle
-	dw UnnamedText_555b3 ; 0x55b3 TextEndBattle
+	dw Route3B4BattleTxt2 ; 0x55ae TextBeforeBattle
+	dw Route3AfterBattleTxt2 ; 0x55b8 TextAfterBattle
+	dw Route3EndBattleTxt2 ; 0x55b3 TextEndBattle
+	dw Route3EndBattleTxt2 ; 0x55b3 TextEndBattle
 ; 0x5553d
 
-TrainerHeader_5553d: ; 0x5553d
+Route3TH2: ; 0x5553d
 	db $4 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d7c3 ; flag's byte
-	dw UnnamedText_555c7 ; 0x55c7 TextBeforeBattle
-	dw UnnamedText_555d1 ; 0x55d1 TextAfterBattle
-	dw UnnamedText_555cc ; 0x55cc TextEndBattle
-	dw UnnamedText_555cc ; 0x55cc TextEndBattle
+	dw Route3B4BattleTxt3 ; 0x55c7 TextBeforeBattle
+	dw Route3AfterBattleTxt3 ; 0x55d1 TextAfterBattle
+	dw Route3EndBattleTxt3 ; 0x55cc TextEndBattle
+	dw Route3EndBattleTxt3 ; 0x55cc TextEndBattle
 ; 0x55549
 
-TrainerHeader_55549: ; 0x55549
+Route3TH3: ; 0x55549
 	db $5 ; flag's bit
 	db ($1 << 4) ; trainer's view range
 	dw $d7c3 ; flag's byte
-	dw UnnamedText_555e0 ; 0x55e0 TextBeforeBattle
-	dw UnnamedText_555ea ; 0x55ea TextAfterBattle
-	dw UnnamedText_555e5 ; 0x55e5 TextEndBattle
-	dw UnnamedText_555e5 ; 0x55e5 TextEndBattle
+	dw Route3B4BattleTxt4 ; 0x55e0 TextBeforeBattle
+	dw Route3AfterBattleTxt4 ; 0x55ea TextAfterBattle
+	dw Route3EndBattleTxt4 ; 0x55e5 TextEndBattle
+	dw Route3EndBattleTxt4 ; 0x55e5 TextEndBattle
 ; 0x55555
 
-TrainerHeader_55555: ; 0x55555
+Route3TH4: ; 0x55555
 	db $6 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7c3 ; flag's byte
-	dw UnnamedText_555f9 ; 0x55f9 TextBeforeBattle
-	dw UnnamedText_55603 ; 0x5603 TextAfterBattle
-	dw UnnamedText_555fe ; 0x55fe TextEndBattle
-	dw UnnamedText_555fe ; 0x55fe TextEndBattle
+	dw Route3B4BattleTxt5 ; 0x55f9 TextBeforeBattle
+	dw Route3AfterBattleTxt5 ; 0x5603 TextAfterBattle
+	dw Route3EndBattleTxt5 ; 0x55fe TextEndBattle
+	dw Route3EndBattleTxt5 ; 0x55fe TextEndBattle
 ; 0x55561
 
-TrainerHeader_55561: ; 0x55561
+Route3TH5: ; 0x55561
 	db $7 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7c3 ; flag's byte
-	dw UnnamedText_55612 ; 0x5612 TextBeforeBattle
-	dw UnnamedText_5561c ; 0x561c TextAfterBattle
-	dw UnnamedText_55617 ; 0x5617 TextEndBattle
-	dw UnnamedText_55617 ; 0x5617 TextEndBattle
+	dw Route3B4BattleTxt6 ; 0x5612 TextBeforeBattle
+	dw Route3AfterBattleTxt6 ; 0x561c TextAfterBattle
+	dw Route3EndBattleTxt6 ; 0x5617 TextEndBattle
+	dw Route3EndBattleTxt6 ; 0x5617 TextEndBattle
 ; 0x5556d
 
-TrainerHeader_5556d: ; 0x5556d
+Route3TH6: ; 0x5556d
 	db $8 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7c3 ; flag's byte
-	dw UnnamedText_5562b ; 0x562b TextBeforeBattle
-	dw UnnamedText_55635 ; 0x5635 TextAfterBattle
-	dw UnnamedText_55630 ; 0x5630 TextEndBattle
-	dw UnnamedText_55630 ; 0x5630 TextEndBattle
+	dw Route3B4BattleTxt7 ; 0x562b TextBeforeBattle
+	dw Route3AfterBattleTxt7 ; 0x5635 TextAfterBattle
+	dw Route3EndBattleTxt7 ; 0x5630 TextEndBattle
+	dw Route3EndBattleTxt7 ; 0x5630 TextEndBattle
 ; 0x55579
 
-TrainerHeader_55579: ; 0x55579
+Route3TH7: ; 0x55579
 	db $9 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d7c3 ; flag's byte
-	dw UnnamedText_55644 ; 0x5644 TextBeforeBattle
-	dw UnnamedText_5564e ; 0x564e TextAfterBattle
-	dw UnnamedText_55649 ; 0x5649 TextEndBattle
-	dw UnnamedText_55649 ; 0x5649 TextEndBattle
+	dw Route3B4BattleTxt8 ; 0x5644 TextBeforeBattle
+	dw Route3AfterBattleTxt8 ; 0x564e TextAfterBattle
+	dw Route3EndBattleTxt8 ; 0x5649 TextEndBattle
+	dw Route3EndBattleTxt8 ; 0x5649 TextEndBattle
 ; 0x55585
 
 db $ff
@@ -40146,165 +40146,165 @@ Route3Text2: ; 0x5558b
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_55595: ; 0x55595
-	TX_FAR _UnnamedText_55595
+Route3B4BattleTxt1: ; 0x55595
+	TX_FAR _Route3B4BattleTxt1
 	db $50
 ; 0x55595 + 5 bytes
 
-UnnamedText_5559a: ; 0x5559a
-	TX_FAR _UnnamedText_5559a
+Route3EndBattleTxt1: ; 0x5559a
+	TX_FAR _Route3EndBattleTxt1
 	db $50
 ; 0x5559a + 5 bytes
 
-UnnamedText_5559f: ; 0x5559f
-	TX_FAR _UnnamedText_5559f
+Route3AfterBattleTxt1: ; 0x5559f
+	TX_FAR _Route3AfterBattleTxt1
 	db $50
 ; 0x5559f + 5 bytes
 
 Route3Text3: ; 0x555a4
 	db $08 ; asm
-	ld hl, TrainerHeader_55531
+	ld hl, Route3TH1
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_555ae: ; 0x555ae
-	TX_FAR _UnnamedText_555ae
+Route3B4BattleTxt2: ; 0x555ae
+	TX_FAR _Route3B4BattleTxt2
 	db $50
 ; 0x555ae + 5 bytes
 
-UnnamedText_555b3: ; 0x555b3
-	TX_FAR _UnnamedText_555b3
+Route3EndBattleTxt2: ; 0x555b3
+	TX_FAR _Route3EndBattleTxt2
 	db $50
 ; 0x555b3 + 5 bytes
 
-UnnamedText_555b8: ; 0x555b8
-	TX_FAR _UnnamedText_555b8
+Route3AfterBattleTxt2: ; 0x555b8
+	TX_FAR _Route3AfterBattleTxt2
 	db $50
 ; 0x555b8 + 5 bytes
 
 Route3Text4: ; 0x555bd
 	db $08 ; asm
-	ld hl, TrainerHeader_5553d
+	ld hl, Route3TH2
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_555c7: ; 0x555c7
-	TX_FAR _UnnamedText_555c7
+Route3B4BattleTxt3: ; 0x555c7
+	TX_FAR _Route3B4BattleTxt3
 	db $50
 ; 0x555c7 + 5 bytes
 
-UnnamedText_555cc: ; 0x555cc
-	TX_FAR _UnnamedText_555cc
+Route3EndBattleTxt3: ; 0x555cc
+	TX_FAR _Route3EndBattleTxt3
 	db $50
 ; 0x555cc + 5 bytes
 
-UnnamedText_555d1: ; 0x555d1
-	TX_FAR _UnnamedText_555d1
+Route3AfterBattleTxt3: ; 0x555d1
+	TX_FAR _Route3AfterBattleTxt3
 	db $50
 ; 0x555d1 + 5 bytes
 
 Route3Text5: ; 0x555d6
 	db $08 ; asm
-	ld hl, TrainerHeader_55549
+	ld hl, Route3TH3
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_555e0: ; 0x555e0
-	TX_FAR _UnnamedText_555e0
+Route3B4BattleTxt4: ; 0x555e0
+	TX_FAR _Route3B4BattleTxt4
 	db $50
 ; 0x555e0 + 5 bytes
 
-UnnamedText_555e5: ; 0x555e5
-	TX_FAR _UnnamedText_555e5
+Route3EndBattleTxt4: ; 0x555e5
+	TX_FAR _Route3EndBattleTxt4
 	db $50
 ; 0x555e5 + 5 bytes
 
-UnnamedText_555ea: ; 0x555ea
-	TX_FAR _UnnamedText_555ea
+Route3AfterBattleTxt4: ; 0x555ea
+	TX_FAR _Route3AfterBattleTxt4
 	db $50
 ; 0x555ea + 5 bytes
 
 Route3Text6: ; 0x555ef
 	db $08 ; asm
-	ld hl, TrainerHeader_55555
+	ld hl, Route3TH4
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_555f9: ; 0x555f9
-	TX_FAR _UnnamedText_555f9
+Route3B4BattleTxt5: ; 0x555f9
+	TX_FAR _Route3B4BattleTxt5
 	db $50
 ; 0x555f9 + 5 bytes
 
-UnnamedText_555fe: ; 0x555fe
-	TX_FAR _UnnamedText_555fe
+Route3EndBattleTxt5: ; 0x555fe
+	TX_FAR _Route3EndBattleTxt5
 	db $50
 ; 0x555fe + 5 bytes
 
-UnnamedText_55603: ; 0x55603
-	TX_FAR _UnnamedText_55603
+Route3AfterBattleTxt5: ; 0x55603
+	TX_FAR _Route3AfterBattleTxt5
 	db $50
 ; 0x55603 + 5 bytes
 
 Route3Text7: ; 0x55608
 	db $08 ; asm
-	ld hl, TrainerHeader_55561
+	ld hl, Route3TH5
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_55612: ; 0x55612
-	TX_FAR _UnnamedText_55612
+Route3B4BattleTxt6: ; 0x55612
+	TX_FAR _Route3B4BattleTxt6
 	db $50
 ; 0x55612 + 5 bytes
 
-UnnamedText_55617: ; 0x55617
-	TX_FAR _UnnamedText_55617
+Route3EndBattleTxt6: ; 0x55617
+	TX_FAR _Route3EndBattleTxt6
 	db $50
 ; 0x55617 + 5 bytes
 
-UnnamedText_5561c: ; 0x5561c
-	TX_FAR _UnnamedText_5561c
+Route3AfterBattleTxt6: ; 0x5561c
+	TX_FAR _Route3AfterBattleTxt6
 	db $50
 ; 0x5561c + 5 bytes
 
 Route3Text8: ; 0x55621
 	db $08 ; asm
-	ld hl, TrainerHeader_5556d
+	ld hl, Route3TH6
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_5562b: ; 0x5562b
-	TX_FAR _UnnamedText_5562b
+Route3B4BattleTxt7: ; 0x5562b
+	TX_FAR _Route3B4BattleTxt7
 	db $50
 ; 0x5562b + 5 bytes
 
-UnnamedText_55630: ; 0x55630
-	TX_FAR _UnnamedText_55630
+Route3EndBattleTxt7: ; 0x55630
+	TX_FAR _Route3EndBattleTxt7
 	db $50
 ; 0x55630 + 5 bytes
 
-UnnamedText_55635: ; 0x55635
-	TX_FAR _UnnamedText_55635
+Route3AfterBattleTxt7: ; 0x55635
+	TX_FAR _Route3AfterBattleTxt7
 	db $50
 ; 0x55635 + 5 bytes
 
 Route3Text9: ; 0x5563a
 	db $08 ; asm
-	ld hl, TrainerHeader_55579
+	ld hl, Route3TH7
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_55644: ; 0x55644
-	TX_FAR _UnnamedText_55644
+Route3B4BattleTxt8: ; 0x55644
+	TX_FAR _Route3B4BattleTxt8
 	db $50
 ; 0x55644 + 5 bytes
 
-UnnamedText_55649: ; 0x55649
-	TX_FAR _UnnamedText_55649
+Route3EndBattleTxt8: ; 0x55649
+	TX_FAR _Route3EndBattleTxt8
 	db $50
 ; 0x55649 + 5 bytes
 
-UnnamedText_5564e: ; 0x5564e
-	TX_FAR _UnnamedText_5564e
+Route3AfterBattleTxt8: ; 0x5564e
+	TX_FAR _Route3AfterBattleTxt8
 	db $50
 ; 0x5564e + 5 bytes
 
@@ -40333,10 +40333,10 @@ Route4TrainerHeader1: ; 0x5567d
 	db $2 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7c5 ; flag's byte
-	dw UnnamedText_55699 ; 0x5699 TextBeforeBattle
-	dw UnnamedText_556a3 ; 0x56a3 TextAfterBattle
-	dw UnnamedText_5569e ; 0x569e TextEndBattle
-	dw UnnamedText_5569e ; 0x569e TextEndBattle
+	dw Route4B4BattleTxt1 ; 0x5699 TextBeforeBattle
+	dw Route4AfterBattleTxt1 ; 0x56a3 TextAfterBattle
+	dw Route4EndBattleTxt1 ; 0x569e TextEndBattle
+	dw Route4EndBattleTxt1 ; 0x569e TextEndBattle
 ; 0x55689
 
 db $ff
@@ -40351,18 +40351,18 @@ Route4Text2: ; 0x5568f
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_55699: ; 0x55699
-	TX_FAR _UnnamedText_55699
+Route4B4BattleTxt1: ; 0x55699
+	TX_FAR _Route4B4BattleTxt1
 	db $50
 ; 0x55699 + 5 bytes
 
-UnnamedText_5569e: ; 0x5569e
-	TX_FAR _UnnamedText_5569e
+Route4EndBattleTxt1: ; 0x5569e
+	TX_FAR _Route4EndBattleTxt1
 	db $50
 ; 0x5569e + 5 bytes
 
-UnnamedText_556a3: ; 0x556a3
-	TX_FAR _UnnamedText_556a3
+Route4AfterBattleTxt1: ; 0x556a3
+	TX_FAR _Route4AfterBattleTxt1
 	db $50
 ; 0x556a3 + 5 bytes
 
@@ -40406,90 +40406,90 @@ Route9TrainerHeader1: ; 0x556eb
 	db $1 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7cf ; flag's byte
-	dw UnnamedText_55792 ; 0x5792 TextBeforeBattle
-	dw UnnamedText_5579c ; 0x579c TextAfterBattle
-	dw UnnamedText_55797 ; 0x5797 TextEndBattle
-	dw UnnamedText_55797 ; 0x5797 TextEndBattle
+	dw Route9B4BattleTxt1 ; 0x5792 TextBeforeBattle
+	dw Route9AfterBattleTxt1 ; 0x579c TextAfterBattle
+	dw Route9EndBattleTxt1 ; 0x5797 TextEndBattle
+	dw Route9EndBattleTxt1 ; 0x5797 TextEndBattle
 ; 0x556f7
 
-TrainerHeader_556f7: ; 0x556f7
+Route9TH1: ; 0x556f7
 	db $2 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d7cf ; flag's byte
-	dw UnnamedText_557a1 ; 0x57a1 TextBeforeBattle
-	dw UnnamedText_557ab ; 0x57ab TextAfterBattle
-	dw UnnamedText_557a6 ; 0x57a6 TextEndBattle
-	dw UnnamedText_557a6 ; 0x57a6 TextEndBattle
+	dw Route9B4BattleTxt2 ; 0x57a1 TextBeforeBattle
+	dw Route9AfterBattleTxt2 ; 0x57ab TextAfterBattle
+	dw Route9EndBattleTxt2 ; 0x57a6 TextEndBattle
+	dw Route9EndBattleTxt2 ; 0x57a6 TextEndBattle
 ; 0x55703
 
-TrainerHeader_55703: ; 0x55703
+Route9TH2: ; 0x55703
 	db $3 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7cf ; flag's byte
-	dw UnnamedText_557b0 ; 0x57b0 TextBeforeBattle
-	dw UnnamedText_557ba ; 0x57ba TextAfterBattle
-	dw UnnamedText_557b5 ; 0x57b5 TextEndBattle
-	dw UnnamedText_557b5 ; 0x57b5 TextEndBattle
+	dw Route9B4BattleTxt3 ; 0x57b0 TextBeforeBattle
+	dw Route9AfterBattleTxt3 ; 0x57ba TextAfterBattle
+	dw Route9EndBattleTxt3 ; 0x57b5 TextEndBattle
+	dw Route9EndBattleTxt3 ; 0x57b5 TextEndBattle
 ; 0x5570f
 
-TrainerHeader_5570f: ; 0x5570f
+Route9TH3: ; 0x5570f
 	db $4 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d7cf ; flag's byte
-	dw UnnamedText_557bf ; 0x57bf TextBeforeBattle
-	dw UnnamedText_557c9 ; 0x57c9 TextAfterBattle
-	dw UnnamedText_557c4 ; 0x57c4 TextEndBattle
-	dw UnnamedText_557c4 ; 0x57c4 TextEndBattle
+	dw Route9B4BattleTxt4 ; 0x57bf TextBeforeBattle
+	dw Route9AfterBattleTxt4 ; 0x57c9 TextAfterBattle
+	dw Route9EndBattleTxt4 ; 0x57c4 TextEndBattle
+	dw Route9EndBattleTxt4 ; 0x57c4 TextEndBattle
 ; 0x5571b
 
-TrainerHeader_5571b: ; 0x5571b
+Route9TH4: ; 0x5571b
 	db $5 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d7cf ; flag's byte
-	dw UnnamedText_557ce ; 0x57ce TextBeforeBattle
-	dw UnnamedText_557d8 ; 0x57d8 TextAfterBattle
-	dw UnnamedText_557d3 ; 0x57d3 TextEndBattle
-	dw UnnamedText_557d3 ; 0x57d3 TextEndBattle
+	dw Route9B4BattleTxt5 ; 0x57ce TextBeforeBattle
+	dw Route9AfterBattleTxt5 ; 0x57d8 TextAfterBattle
+	dw Route9EndBattleTxt5 ; 0x57d3 TextEndBattle
+	dw Route9EndBattleTxt5 ; 0x57d3 TextEndBattle
 ; 0x55727
 
-TrainerHeader_55727: ; 0x55727
+Route9TH5: ; 0x55727
 	db $6 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7cf ; flag's byte
-	dw UnnamedText_557dd ; 0x57dd TextBeforeBattle
-	dw UnnamedText_557e7 ; 0x57e7 TextAfterBattle
-	dw UnnamedText_557e2 ; 0x57e2 TextEndBattle
-	dw UnnamedText_557e2 ; 0x57e2 TextEndBattle
+	dw Route9B4BattleTxt6 ; 0x57dd TextBeforeBattle
+	dw Route9AfterBattleTxt6 ; 0x57e7 TextAfterBattle
+	dw Route9EndBattleTxt6 ; 0x57e2 TextEndBattle
+	dw Route9EndBattleTxt6 ; 0x57e2 TextEndBattle
 ; 0x55733
 
-TrainerHeader_55733: ; 0x55733
+Route9TH6: ; 0x55733
 	db $7 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7cf ; flag's byte
-	dw UnnamedText_557ec ; 0x57ec TextBeforeBattle
-	dw UnnamedText_557f6 ; 0x57f6 TextAfterBattle
-	dw UnnamedText_557f1 ; 0x57f1 TextEndBattle
-	dw UnnamedText_557f1 ; 0x57f1 TextEndBattle
+	dw Route9B4BattleTxt7 ; 0x57ec TextBeforeBattle
+	dw Route9AfterBattleTxt7 ; 0x57f6 TextAfterBattle
+	dw Route9EndBattleTxt7 ; 0x57f1 TextEndBattle
+	dw Route9EndBattleTxt7 ; 0x57f1 TextEndBattle
 ; 0x5573f
 
-TrainerHeader_5573f: ; 0x5573f
+Route9TH7: ; 0x5573f
 	db $8 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d7cf ; flag's byte
-	dw UnnamedText_557fb ; 0x57fb TextBeforeBattle
-	dw UnnamedText_55805 ; 0x5805 TextAfterBattle
-	dw UnnamedText_55800 ; 0x5800 TextEndBattle
-	dw UnnamedText_55800 ; 0x5800 TextEndBattle
+	dw Route9B4BattleTxt8 ; 0x57fb TextBeforeBattle
+	dw Route9AfterBattleTxt8 ; 0x5805 TextAfterBattle
+	dw Route9EndBattleTxt8 ; 0x5800 TextEndBattle
+	dw Route9EndBattleTxt8 ; 0x5800 TextEndBattle
 ; 0x5574b
 
-TrainerHeader_5574b: ; 0x5574b
+Route9TH8: ; 0x5574b
 	db $9 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d7cf ; flag's byte
-	dw UnnamedText_5580a ; 0x580a TextBeforeBattle
-	dw UnnamedText_55814 ; 0x5814 TextAfterBattle
-	dw UnnamedText_5580f ; 0x580f TextEndBattle
-	dw UnnamedText_5580f ; 0x580f TextEndBattle
+	dw Route9B4BattleTxt9 ; 0x580a TextBeforeBattle
+	dw Route9AfterBattleTxt9 ; 0x5814 TextAfterBattle
+	dw Route9EndBattleTxt9 ; 0x580f TextEndBattle
+	dw Route9EndBattleTxt9 ; 0x580f TextEndBattle
 ; 0x55757
 
 db $ff
@@ -40501,179 +40501,179 @@ Route9Text1: ; 0x55758
 
 Route9Text2:
 	db $8 ; asm
-	ld hl, TrainerHeader_556f7
+	ld hl, Route9TH1
 	jr asm_8be3d ; 0x55762 $28
 
 Route9Text3:
 	db $8 ; asm
-	ld hl, TrainerHeader_55703
+	ld hl, Route9TH2
 	jr asm_8be3d ; 0x55768 $22
 
 Route9Text4:
 	db $8 ; asm
-	ld hl, TrainerHeader_5570f
+	ld hl, Route9TH3
 	jr asm_8be3d ; 0x5576e $1c
 
 Route9Text5:
 	db $8 ; asm
-	ld hl, TrainerHeader_5571b
+	ld hl, Route9TH4
 	jr asm_8be3d ; 0x55774 $16
 
 Route9Text6:
 	db $8 ; asm
-	ld hl, TrainerHeader_55727
+	ld hl, Route9TH5
 	jr asm_8be3d ; 0x5577a $10
 
 Route9Text7:
 	db $8 ; asm
-	ld hl, TrainerHeader_55733
+	ld hl, Route9TH6
 	jr asm_8be3d ; 0x55780 $a
 
 Route9Text8:
 	db $8 ; asm
-	ld hl, TrainerHeader_5573f
+	ld hl, Route9TH7
 	jr asm_8be3d ; 0x55786 $4
 
 Route9Text9:
 	db $8 ; asm
-	ld hl, TrainerHeader_5574b
+	ld hl, Route9TH8
 asm_8be3d: ; 0x5578c
 	call LoadTrainerHeader
 	jp TextScriptEnd
 ; 0x55792
 
-UnnamedText_55792: ; 0x55792
-	TX_FAR _UnnamedText_55792
+Route9B4BattleTxt1: ; 0x55792
+	TX_FAR _Route9B4BattleTxt1
 	db $50
 ; 0x55792 + 5 bytes
 
-UnnamedText_55797: ; 0x55797
-	TX_FAR _UnnamedText_55797
+Route9EndBattleTxt1: ; 0x55797
+	TX_FAR _Route9EndBattleTxt1
 	db $50
 ; 0x55797 + 5 bytes
 
-UnnamedText_5579c: ; 0x5579c
-	TX_FAR _UnnamedText_5579c
+Route9AfterBattleTxt1: ; 0x5579c
+	TX_FAR _Route9AfterBattleTxt1
 	db $50
 ; 0x5579c + 5 bytes
 
-UnnamedText_557a1: ; 0x557a1
-	TX_FAR _UnnamedText_557a1
+Route9B4BattleTxt2: ; 0x557a1
+	TX_FAR _Route9B4BattleTxt2
 	db $50
 ; 0x557a1 + 5 bytes
 
-UnnamedText_557a6: ; 0x557a6
-	TX_FAR _UnnamedText_557a6
+Route9EndBattleTxt2: ; 0x557a6
+	TX_FAR _Route9EndBattleTxt2
 	db $50
 ; 0x557a6 + 5 bytes
 
-UnnamedText_557ab: ; 0x557ab
-	TX_FAR _UnnamedText_557ab
+Route9AfterBattleTxt2: ; 0x557ab
+	TX_FAR _Route9AfterBattleTxt2
 	db $50
 ; 0x557ab + 5 bytes
 
-UnnamedText_557b0: ; 0x557b0
-	TX_FAR _UnnamedText_557b0
+Route9B4BattleTxt3: ; 0x557b0
+	TX_FAR _Route9B4BattleTxt3
 	db $50
 ; 0x557b0 + 5 bytes
 
-UnnamedText_557b5: ; 0x557b5
-	TX_FAR _UnnamedText_557b5
+Route9EndBattleTxt3: ; 0x557b5
+	TX_FAR _Route9EndBattleTxt3
 	db $50
 ; 0x557b5 + 5 bytes
 
-UnnamedText_557ba: ; 0x557ba
-	TX_FAR _UnnamedText_557ba
+Route9AfterBattleTxt3: ; 0x557ba
+	TX_FAR _Route9AfterBattleTxt3
 	db $50
 ; 0x557ba + 5 bytes
 
-UnnamedText_557bf: ; 0x557bf
-	TX_FAR _UnnamedText_557bf
+Route9B4BattleTxt4: ; 0x557bf
+	TX_FAR _Route9B4BattleTxt4
 	db $50
 ; 0x557bf + 5 bytes
 
-UnnamedText_557c4: ; 0x557c4
-	TX_FAR _UnnamedText_557c4
+Route9EndBattleTxt4: ; 0x557c4
+	TX_FAR _Route9EndBattleTxt4
 	db $50
 ; 0x557c4 + 5 bytes
 
-UnnamedText_557c9: ; 0x557c9
-	TX_FAR _UnnamedText_557c9
+Route9AfterBattleTxt4: ; 0x557c9
+	TX_FAR _Route9AfterBattleTxt4
 	db $50
 ; 0x557c9 + 5 bytes
 
-UnnamedText_557ce: ; 0x557ce
-	TX_FAR _UnnamedText_557ce
+Route9B4BattleTxt5: ; 0x557ce
+	TX_FAR _Route9B4BattleTxt5
 	db $50
 ; 0x557ce + 5 bytes
 
-UnnamedText_557d3: ; 0x557d3
-	TX_FAR _UnnamedText_557d3
+Route9EndBattleTxt5: ; 0x557d3
+	TX_FAR _Route9EndBattleTxt5
 	db $50
 ; 0x557d3 + 5 bytes
 
-UnnamedText_557d8: ; 0x557d8
-	TX_FAR _UnnamedText_557d8
+Route9AfterBattleTxt5: ; 0x557d8
+	TX_FAR _Route9AfterBattleTxt5
 	db $50
 ; 0x557d8 + 5 bytes
 
-UnnamedText_557dd: ; 0x557dd
-	TX_FAR _UnnamedText_557dd
+Route9B4BattleTxt6: ; 0x557dd
+	TX_FAR _Route9B4BattleTxt6
 	db $50
 ; 0x557dd + 5 bytes
 
-UnnamedText_557e2: ; 0x557e2
-	TX_FAR _UnnamedText_557e2
+Route9EndBattleTxt6: ; 0x557e2
+	TX_FAR _Route9EndBattleTxt6
 	db $50
 ; 0x557e2 + 5 bytes
 
-UnnamedText_557e7: ; 0x557e7
-	TX_FAR _UnnamedText_557e7
+Route9AfterBattleTxt6: ; 0x557e7
+	TX_FAR _Route9AfterBattleTxt6
 	db $50
 ; 0x557e7 + 5 bytes
 
-UnnamedText_557ec: ; 0x557ec
-	TX_FAR _UnnamedText_557ec
+Route9B4BattleTxt7: ; 0x557ec
+	TX_FAR _Route9B4BattleTxt7
 	db $50
 ; 0x557ec + 5 bytes
 
-UnnamedText_557f1: ; 0x557f1
-	TX_FAR _UnnamedText_557f1
+Route9EndBattleTxt7: ; 0x557f1
+	TX_FAR _Route9EndBattleTxt7
 	db $50
 ; 0x557f1 + 5 bytes
 
-UnnamedText_557f6: ; 0x557f6
-	TX_FAR _UnnamedText_557f6
+Route9AfterBattleTxt7: ; 0x557f6
+	TX_FAR _Route9AfterBattleTxt7
 	db $50
 ; 0x557f6 + 5 bytes
 
-UnnamedText_557fb: ; 0x557fb
-	TX_FAR _UnnamedText_557fb
+Route9B4BattleTxt8: ; 0x557fb
+	TX_FAR _Route9B4BattleTxt8
 	db $50
 ; 0x557fb + 5 bytes
 
-UnnamedText_55800: ; 0x55800
-	TX_FAR _UnnamedText_55800
+Route9EndBattleTxt8: ; 0x55800
+	TX_FAR _Route9EndBattleTxt8
 	db $50
 ; 0x55800 + 5 bytes
 
-UnnamedText_55805: ; 0x55805
-	TX_FAR _UnnamedText_55805
+Route9AfterBattleTxt8: ; 0x55805
+	TX_FAR _Route9AfterBattleTxt8
 	db $50
 ; 0x55805 + 5 bytes
 
-UnnamedText_5580a: ; 0x5580a
-	TX_FAR _UnnamedText_5580a
+Route9B4BattleTxt9: ; 0x5580a
+	TX_FAR _Route9B4BattleTxt9
 	db $50
 ; 0x5580a + 5 bytes
 
-UnnamedText_5580f: ; 0x5580f
-	TX_FAR _UnnamedText_5580f
+Route9EndBattleTxt9: ; 0x5580f
+	TX_FAR _Route9EndBattleTxt9
 	db $50
 ; 0x5580f + 5 bytes
 
-UnnamedText_55814: ; 0x55814
-	TX_FAR _UnnamedText_55814
+Route9AfterBattleTxt9: ; 0x55814
+	TX_FAR _Route9AfterBattleTxt9
 	db $50
 ; 0x55814 + 5 bytes
 
@@ -40698,315 +40698,315 @@ Route13Texts: ; 0x55837
 	dw Route13Text1, Route13Text2, Route13Text3, Route13Text4, Route13Text5, Route13Text6, Route13Text7, Route13Text8, Route13Text9, Route13Text10, Route13Text11, Route13Text12, Route13Text13
 
 Route13TrainerHeaders:
-TrainerHeader_55851: ; 0x55851
+Route13TH1: ; 0x55851
 	db $1 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d7d9 ; flag's byte
-	dw UnnamedText_558d4 ; 0x58d4 TextBeforeBattle
-	dw UnnamedText_558de ; 0x58de TextAfterBattle
-	dw UnnamedText_558d9 ; 0x58d9 TextEndBattle
-	dw UnnamedText_558d9 ; 0x58d9 TextEndBattle
+	dw Route13B4BattleTxt2 ; 0x58d4 TextBeforeBattle
+	dw Route13AfterBattleTxt2 ; 0x58de TextAfterBattle
+	dw Route13EndBattleTxt2 ; 0x58d9 TextEndBattle
+	dw Route13EndBattleTxt2 ; 0x58d9 TextEndBattle
 ; 0x5585d
 
-TrainerHeader_5585d: ; 0x5585d
+Route13TH2: ; 0x5585d
 	db $2 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d7d9 ; flag's byte
-	dw UnnamedText_558ed ; 0x58ed TextBeforeBattle
-	dw UnnamedText_558f7 ; 0x58f7 TextAfterBattle
-	dw UnnamedText_558f2 ; 0x58f2 TextEndBattle
-	dw UnnamedText_558f2 ; 0x58f2 TextEndBattle
+	dw Route13B4BattleTxt3 ; 0x58ed TextBeforeBattle
+	dw Route13AfterBattleTxt3 ; 0x58f7 TextAfterBattle
+	dw Route13EndBattleTxt3 ; 0x58f2 TextEndBattle
+	dw Route13EndBattleTxt3 ; 0x58f2 TextEndBattle
 ; 0x55869
 
-TrainerHeader_55869: ; 0x55869
+Route13TH3: ; 0x55869
 	db $3 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d7d9 ; flag's byte
-	dw UnnamedText_55906 ; 0x5906 TextBeforeBattle
-	dw UnnamedText_55910 ; 0x5910 TextAfterBattle
-	dw UnnamedText_5590b ; 0x590b TextEndBattle
-	dw UnnamedText_5590b ; 0x590b TextEndBattle
+	dw Route13B4BattleTxt4 ; 0x5906 TextBeforeBattle
+	dw Route13AfterBattleTxt4 ; 0x5910 TextAfterBattle
+	dw Route13EndBattleTxt4 ; 0x590b TextEndBattle
+	dw Route13EndBattleTxt4 ; 0x590b TextEndBattle
 ; 0x55875
 
-TrainerHeader_55875: ; 0x55875
+Route13TH4: ; 0x55875
 	db $4 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d7d9 ; flag's byte
-	dw UnnamedText_5591f ; 0x591f TextBeforeBattle
-	dw UnnamedText_55929 ; 0x5929 TextAfterBattle
-	dw UnnamedText_55924 ; 0x5924 TextEndBattle
-	dw UnnamedText_55924 ; 0x5924 TextEndBattle
+	dw Route13B4BattleTxt5 ; 0x591f TextBeforeBattle
+	dw Route13AfterBattleTxt5 ; 0x5929 TextAfterBattle
+	dw Route13EndBattleTxt5 ; 0x5924 TextEndBattle
+	dw Route13EndBattleTxt5 ; 0x5924 TextEndBattle
 ; 0x55881
 
-TrainerHeader_55881: ; 0x55881
+Route13TH5: ; 0x55881
 	db $5 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7d9 ; flag's byte
-	dw UnnamedText_55938 ; 0x5938 TextBeforeBattle
-	dw UnnamedText_55942 ; 0x5942 TextAfterBattle
-	dw UnnamedText_5593d ; 0x593d TextEndBattle
-	dw UnnamedText_5593d ; 0x593d TextEndBattle
+	dw Route13B4BattleTxt6 ; 0x5938 TextBeforeBattle
+	dw Route13AfterBattleTxt6 ; 0x5942 TextAfterBattle
+	dw Route13EndBattleTxt6 ; 0x593d TextEndBattle
+	dw Route13EndBattleTxt6 ; 0x593d TextEndBattle
 ; 0x5588d
 
-TrainerHeader_5588d: ; 0x5588d
+Route13TH6: ; 0x5588d
 	db $6 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d7d9 ; flag's byte
-	dw UnnamedText_55951 ; 0x5951 TextBeforeBattle
-	dw UnnamedText_5595b ; 0x595b TextAfterBattle
-	dw UnnamedText_55956 ; 0x5956 TextEndBattle
-	dw UnnamedText_55956 ; 0x5956 TextEndBattle
+	dw Route13B4BattleTxt7 ; 0x5951 TextBeforeBattle
+	dw Route13AfterBattleTxt7 ; 0x595b TextAfterBattle
+	dw Route13EndBattleTxt7 ; 0x5956 TextEndBattle
+	dw Route13EndBattleTxt7 ; 0x5956 TextEndBattle
 ; 0x55899
 
-TrainerHeader_55899: ; 0x55899
+Route13TH7: ; 0x55899
 	db $7 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7d9 ; flag's byte
-	dw UnnamedText_5596a ; 0x596a TextBeforeBattle
-	dw UnnamedText_55974 ; 0x5974 TextAfterBattle
-	dw UnnamedText_5596f ; 0x596f TextEndBattle
-	dw UnnamedText_5596f ; 0x596f TextEndBattle
+	dw Route13B4BattleTxt8 ; 0x596a TextBeforeBattle
+	dw Route13AfterBattleTxt8 ; 0x5974 TextAfterBattle
+	dw Route13EndBattleTxt8 ; 0x596f TextEndBattle
+	dw Route13EndBattleTxt8 ; 0x596f TextEndBattle
 ; 0x558a5
 
-TrainerHeader_558a5: ; 0x558a5
+Route13TH8: ; 0x558a5
 	db $8 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d7d9 ; flag's byte
-	dw UnnamedText_55983 ; 0x5983 TextBeforeBattle
-	dw UnnamedText_5598d ; 0x598d TextAfterBattle
-	dw UnnamedText_55988 ; 0x5988 TextEndBattle
-	dw UnnamedText_55988 ; 0x5988 TextEndBattle
+	dw Route13B4BattleTxt9 ; 0x5983 TextBeforeBattle
+	dw Route13AfterBattleTxt9 ; 0x598d TextAfterBattle
+	dw Route13EndBattleTxt9 ; 0x5988 TextEndBattle
+	dw Route13EndBattleTxt9 ; 0x5988 TextEndBattle
 ; 0x558b1
 
-TrainerHeader_558b1: ; 0x558b1
+Route13TH9: ; 0x558b1
 	db $9 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d7d9 ; flag's byte
-	dw UnnamedText_5599c ; 0x599c TextBeforeBattle
-	dw UnnamedText_559a6 ; 0x59a6 TextAfterBattle
-	dw UnnamedText_559a1 ; 0x59a1 TextEndBattle
-	dw UnnamedText_559a1 ; 0x59a1 TextEndBattle
+	dw Route13B4BattleTxt10 ; 0x599c TextBeforeBattle
+	dw Route13AfterBattleTxt10 ; 0x59a6 TextAfterBattle
+	dw Route13EndBattleTxt10 ; 0x59a1 TextEndBattle
+	dw Route13EndBattleTxt10 ; 0x59a1 TextEndBattle
 ; 0x558bd
 
-TrainerHeader_558bd: ; 0x558bd
+Route13TH10: ; 0x558bd
 	db $a ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7d9 ; flag's byte
-	dw UnnamedText_559b5 ; 0x59b5 TextBeforeBattle
-	dw UnnamedText_559bf ; 0x59bf TextAfterBattle
-	dw UnnamedText_559ba ; 0x59ba TextEndBattle
-	dw UnnamedText_559ba ; 0x59ba TextEndBattle
+	dw Route13B4BattleTxt11 ; 0x59b5 TextBeforeBattle
+	dw Route13AfterBattleTxt11 ; 0x59bf TextAfterBattle
+	dw Route13EndBattleTxt11 ; 0x59ba TextEndBattle
+	dw Route13EndBattleTxt11 ; 0x59ba TextEndBattle
 ; 0x558c9
 
 db $ff
 
 Route13Text1: ; 0x558ca
 	db $08 ; asm
-	ld hl, TrainerHeader_55851
+	ld hl, Route13TH1
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_558d4: ; 0x558d4
-	TX_FAR _UnnamedText_558d4
+Route13B4BattleTxt2: ; 0x558d4
+	TX_FAR _Route13B4BattleTxt2
 	db $50
 ; 0x558d4 + 5 bytes
 
-UnnamedText_558d9: ; 0x558d9
-	TX_FAR _UnnamedText_558d9
+Route13EndBattleTxt2: ; 0x558d9
+	TX_FAR _Route13EndBattleTxt2
 	db $50
 ; 0x558d9 + 5 bytes
 
-UnnamedText_558de: ; 0x558de
-	TX_FAR _UnnamedText_558de
+Route13AfterBattleTxt2: ; 0x558de
+	TX_FAR _Route13AfterBattleTxt2
 	db $50
 ; 0x558de + 5 bytes
 
 Route13Text2: ; 0x558e3
 	db $08 ; asm
-	ld hl, TrainerHeader_5585d
+	ld hl, Route13TH2
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_558ed: ; 0x558ed
-	TX_FAR _UnnamedText_558ed
+Route13B4BattleTxt3: ; 0x558ed
+	TX_FAR _Route13B4BattleTxt3
 	db $50
 ; 0x558ed + 5 bytes
 
-UnnamedText_558f2: ; 0x558f2
-	TX_FAR _UnnamedText_558f2
+Route13EndBattleTxt3: ; 0x558f2
+	TX_FAR _Route13EndBattleTxt3
 	db $50
 ; 0x558f2 + 5 bytes
 
-UnnamedText_558f7: ; 0x558f7
-	TX_FAR _UnnamedText_558f7
+Route13AfterBattleTxt3: ; 0x558f7
+	TX_FAR _Route13AfterBattleTxt3
 	db $50
 ; 0x558f7 + 5 bytes
 
 Route13Text3: ; 0x558fc
 	db $08 ; asm
-	ld hl, TrainerHeader_55869
+	ld hl, Route13TH3
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_55906: ; 0x55906
-	TX_FAR _UnnamedText_55906
+Route13B4BattleTxt4: ; 0x55906
+	TX_FAR _Route13B4BattleTxt4
 	db $50
 ; 0x55906 + 5 bytes
 
-UnnamedText_5590b: ; 0x5590b
-	TX_FAR _UnnamedText_5590b
+Route13EndBattleTxt4: ; 0x5590b
+	TX_FAR _Route13EndBattleTxt4
 	db $50
 ; 0x5590b + 5 bytes
 
-UnnamedText_55910: ; 0x55910
-	TX_FAR _UnnamedText_55910
+Route13AfterBattleTxt4: ; 0x55910
+	TX_FAR _Route13AfterBattleTxt4
 	db $50
 ; 0x55910 + 5 bytes
 
 Route13Text4: ; 0x55915
 	db $08 ; asm
-	ld hl, TrainerHeader_55875
+	ld hl, Route13TH4
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_5591f: ; 0x5591f
-	TX_FAR _UnnamedText_5591f
+Route13B4BattleTxt5: ; 0x5591f
+	TX_FAR _Route13B4BattleTxt5
 	db $50
 ; 0x5591f + 5 bytes
 
-UnnamedText_55924: ; 0x55924
-	TX_FAR _UnnamedText_55924
+Route13EndBattleTxt5: ; 0x55924
+	TX_FAR _Route13EndBattleTxt5
 	db $50
 ; 0x55924 + 5 bytes
 
-UnnamedText_55929: ; 0x55929
-	TX_FAR _UnnamedText_55929
+Route13AfterBattleTxt5: ; 0x55929
+	TX_FAR _Route13AfterBattleTxt5
 	db $50
 ; 0x55929 + 5 bytes
 
 Route13Text5: ; 0x5592e
 	db $08 ; asm
-	ld hl, TrainerHeader_55881
+	ld hl, Route13TH5
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_55938: ; 0x55938
-	TX_FAR _UnnamedText_55938
+Route13B4BattleTxt6: ; 0x55938
+	TX_FAR _Route13B4BattleTxt6
 	db $50
 ; 0x55938 + 5 bytes
 
-UnnamedText_5593d: ; 0x5593d
-	TX_FAR _UnnamedText_5593d
+Route13EndBattleTxt6: ; 0x5593d
+	TX_FAR _Route13EndBattleTxt6
 	db $50
 ; 0x5593d + 5 bytes
 
-UnnamedText_55942: ; 0x55942
-	TX_FAR _UnnamedText_55942
+Route13AfterBattleTxt6: ; 0x55942
+	TX_FAR _Route13AfterBattleTxt6
 	db $50
 ; 0x55942 + 5 bytes
 
 Route13Text6: ; 0x55947
 	db $08 ; asm
-	ld hl, TrainerHeader_5588d
+	ld hl, Route13TH6
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_55951: ; 0x55951
-	TX_FAR _UnnamedText_55951
+Route13B4BattleTxt7: ; 0x55951
+	TX_FAR _Route13B4BattleTxt7
 	db $50
 ; 0x55951 + 5 bytes
 
-UnnamedText_55956: ; 0x55956
-	TX_FAR _UnnamedText_55956
+Route13EndBattleTxt7: ; 0x55956
+	TX_FAR _Route13EndBattleTxt7
 	db $50
 ; 0x55956 + 5 bytes
 
-UnnamedText_5595b: ; 0x5595b
-	TX_FAR _UnnamedText_5595b
+Route13AfterBattleTxt7: ; 0x5595b
+	TX_FAR _Route13AfterBattleTxt7
 	db $50
 ; 0x5595b + 5 bytes
 
 Route13Text7: ; 0x55960
 	db $08 ; asm
-	ld hl, TrainerHeader_55899
+	ld hl, Route13TH7
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_5596a: ; 0x5596a
-	TX_FAR _UnnamedText_5596a
+Route13B4BattleTxt8: ; 0x5596a
+	TX_FAR _Route13B4BattleTxt8
 	db $50
 ; 0x5596a + 5 bytes
 
-UnnamedText_5596f: ; 0x5596f
-	TX_FAR _UnnamedText_5596f
+Route13EndBattleTxt8: ; 0x5596f
+	TX_FAR _Route13EndBattleTxt8
 	db $50
 ; 0x5596f + 5 bytes
 
-UnnamedText_55974: ; 0x55974
-	TX_FAR _UnnamedText_55974
+Route13AfterBattleTxt8: ; 0x55974
+	TX_FAR _Route13AfterBattleTxt8
 	db $50
 ; 0x55974 + 5 bytes
 
 Route13Text8: ; 0x55979
 	db $08 ; asm
-	ld hl, TrainerHeader_558a5
+	ld hl, Route13TH8
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_55983: ; 0x55983
-	TX_FAR _UnnamedText_55983
+Route13B4BattleTxt9: ; 0x55983
+	TX_FAR _Route13B4BattleTxt9
 	db $50
 ; 0x55983 + 5 bytes
 
-UnnamedText_55988: ; 0x55988
-	TX_FAR _UnnamedText_55988
+Route13EndBattleTxt9: ; 0x55988
+	TX_FAR _Route13EndBattleTxt9
 	db $50
 ; 0x55988 + 5 bytes
 
-UnnamedText_5598d: ; 0x5598d
-	TX_FAR _UnnamedText_5598d
+Route13AfterBattleTxt9: ; 0x5598d
+	TX_FAR _Route13AfterBattleTxt9
 	db $50
 ; 0x5598d + 5 bytes
 
 Route13Text9: ; 0x55992
 	db $08 ; asm
-	ld hl, TrainerHeader_558b1
+	ld hl, Route13TH9
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_5599c: ; 0x5599c
-	TX_FAR _UnnamedText_5599c
+Route13B4BattleTxt10: ; 0x5599c
+	TX_FAR _Route13B4BattleTxt10
 	db $50
 ; 0x5599c + 5 bytes
 
-UnnamedText_559a1: ; 0x559a1
-	TX_FAR _UnnamedText_559a1
+Route13EndBattleTxt10: ; 0x559a1
+	TX_FAR _Route13EndBattleTxt10
 	db $50
 ; 0x559a1 + 5 bytes
 
-UnnamedText_559a6: ; 0x559a6
-	TX_FAR _UnnamedText_559a6
+Route13AfterBattleTxt10: ; 0x559a6
+	TX_FAR _Route13AfterBattleTxt10
 	db $50
 ; 0x559a6 + 5 bytes
 
 Route13Text10: ; 0x559ab
 	db $08 ; asm
-	ld hl, TrainerHeader_558bd
+	ld hl, Route13TH10
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_559b5: ; 0x559b5
-	TX_FAR _UnnamedText_559b5
+Route13B4BattleTxt11: ; 0x559b5
+	TX_FAR _Route13B4BattleTxt11
 	db $50
 ; 0x559b5 + 5 bytes
 
-UnnamedText_559ba: ; 0x559ba
-	TX_FAR _UnnamedText_559ba
+Route13EndBattleTxt11: ; 0x559ba
+	TX_FAR _Route13EndBattleTxt11
 	db $50
 ; 0x559ba + 5 bytes
 
-UnnamedText_559bf: ; 0x559bf
-	TX_FAR _UnnamedText_559bf
+Route13AfterBattleTxt11: ; 0x559bf
+	TX_FAR _Route13AfterBattleTxt11
 	db $50
 ; 0x559bf + 5 bytes
 
@@ -41043,100 +41043,100 @@ Route14TrainerHeader1: ; 0x55a02
 	db $1 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d7db ; flag's byte
-	dw UnnamedText_55a85 ; 0x5a85 TextBeforeBattle
-	dw UnnamedText_55a8f ; 0x5a8f TextAfterBattle
-	dw UnnamedText_55a8a ; 0x5a8a TextEndBattle
-	dw UnnamedText_55a8a ; 0x5a8a TextEndBattle
+	dw Route14B4BattleTxt1 ; 0x5a85 TextBeforeBattle
+	dw Route14AfterBattleTxt1 ; 0x5a8f TextAfterBattle
+	dw Route14EndBattleTxt1 ; 0x5a8a TextEndBattle
+	dw Route14EndBattleTxt1 ; 0x5a8a TextEndBattle
 ; 0x55a0e
 
-TrainerHeader_55a0e: ; 0x55a0e
+Route14TH1: ; 0x55a0e
 	db $2 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d7db ; flag's byte
-	dw UnnamedText_55a9e ; 0x5a9e TextBeforeBattle
-	dw UnnamedText_55aa8 ; 0x5aa8 TextAfterBattle
-	dw UnnamedText_55aa3 ; 0x5aa3 TextEndBattle
-	dw UnnamedText_55aa3 ; 0x5aa3 TextEndBattle
+	dw Route14B4BattleTxt2 ; 0x5a9e TextBeforeBattle
+	dw Route14AfterBattleTxt2 ; 0x5aa8 TextAfterBattle
+	dw Route14EndBattleTxt2 ; 0x5aa3 TextEndBattle
+	dw Route14EndBattleTxt2 ; 0x5aa3 TextEndBattle
 ; 0x55a1a
 
-TrainerHeader_55a1a: ; 0x55a1a
+Route14TH2: ; 0x55a1a
 	db $3 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7db ; flag's byte
-	dw UnnamedText_55ab7 ; 0x5ab7 TextBeforeBattle
-	dw UnnamedText_55ac1 ; 0x5ac1 TextAfterBattle
-	dw UnnamedText_55abc ; 0x5abc TextEndBattle
-	dw UnnamedText_55abc ; 0x5abc TextEndBattle
+	dw Route14B4BattleTxt3 ; 0x5ab7 TextBeforeBattle
+	dw Route14AfterBattleTxt3 ; 0x5ac1 TextAfterBattle
+	dw Route14EndBattleTxt3 ; 0x5abc TextEndBattle
+	dw Route14EndBattleTxt3 ; 0x5abc TextEndBattle
 ; 0x55a26
 
-TrainerHeader_55a26: ; 0x55a26
+Route14TH3: ; 0x55a26
 	db $4 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7db ; flag's byte
-	dw UnnamedText_55ad0 ; 0x5ad0 TextBeforeBattle
-	dw UnnamedText_55ada ; 0x5ada TextAfterBattle
-	dw UnnamedText_55ad5 ; 0x5ad5 TextEndBattle
-	dw UnnamedText_55ad5 ; 0x5ad5 TextEndBattle
+	dw Route14B4BattleTxt4 ; 0x5ad0 TextBeforeBattle
+	dw Route14AfterBattleTxt4 ; 0x5ada TextAfterBattle
+	dw Route14EndBattleTxt4 ; 0x5ad5 TextEndBattle
+	dw Route14EndBattleTxt4 ; 0x5ad5 TextEndBattle
 ; 0x55a32
 
-TrainerHeader_55a32: ; 0x55a32
+Route14TH4: ; 0x55a32
 	db $5 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7db ; flag's byte
-	dw UnnamedText_55ae9 ; 0x5ae9 TextBeforeBattle
-	dw UnnamedText_55af3 ; 0x5af3 TextAfterBattle
-	dw UnnamedText_55aee ; 0x5aee TextEndBattle
-	dw UnnamedText_55aee ; 0x5aee TextEndBattle
+	dw Route14B4BattleTxt5 ; 0x5ae9 TextBeforeBattle
+	dw Route14AfterBattleTxt5 ; 0x5af3 TextAfterBattle
+	dw Route14EndBattleTxt5 ; 0x5aee TextEndBattle
+	dw Route14EndBattleTxt5 ; 0x5aee TextEndBattle
 ; 0x55a3e
 
-TrainerHeader_55a3e: ; 0x55a3e
+Route14TH5: ; 0x55a3e
 	db $6 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7db ; flag's byte
-	dw UnnamedText_55b02 ; 0x5b02 TextBeforeBattle
-	dw UnnamedText_55b0c ; 0x5b0c TextAfterBattle
-	dw UnnamedText_55b07 ; 0x5b07 TextEndBattle
-	dw UnnamedText_55b07 ; 0x5b07 TextEndBattle
+	dw Route14B4BattleTxt6 ; 0x5b02 TextBeforeBattle
+	dw Route14AfterBattleTxt6 ; 0x5b0c TextAfterBattle
+	dw Route14EndBattleTxt6 ; 0x5b07 TextEndBattle
+	dw Route14EndBattleTxt6 ; 0x5b07 TextEndBattle
 ; 0x55a4a
 
-TrainerHeader_55a4a: ; 0x55a4a
+Route14TH6: ; 0x55a4a
 	db $7 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7db ; flag's byte
-	dw UnnamedText_55b1b ; 0x5b1b TextBeforeBattle
-	dw UnnamedText_55b25 ; 0x5b25 TextAfterBattle
-	dw UnnamedText_55b20 ; 0x5b20 TextEndBattle
-	dw UnnamedText_55b20 ; 0x5b20 TextEndBattle
+	dw Route14B4BattleTxt7 ; 0x5b1b TextBeforeBattle
+	dw Route14AfterBattleTxt7 ; 0x5b25 TextAfterBattle
+	dw Route14EndBattleTxt7 ; 0x5b20 TextEndBattle
+	dw Route14EndBattleTxt7 ; 0x5b20 TextEndBattle
 ; 0x55a56
 
-TrainerHeader_55a56: ; 0x55a56
+Route14TH7: ; 0x55a56
 	db $8 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7db ; flag's byte
-	dw UnnamedText_55b34 ; 0x5b34 TextBeforeBattle
-	dw UnnamedText_55b3e ; 0x5b3e TextAfterBattle
-	dw UnnamedText_55b39 ; 0x5b39 TextEndBattle
-	dw UnnamedText_55b39 ; 0x5b39 TextEndBattle
+	dw Route14B4BattleTxt8 ; 0x5b34 TextBeforeBattle
+	dw Route14AfterBattleTxt8 ; 0x5b3e TextAfterBattle
+	dw Route14EndBattleTxt8 ; 0x5b39 TextEndBattle
+	dw Route14EndBattleTxt8 ; 0x5b39 TextEndBattle
 ; 0x55a62
 
-TrainerHeader_55a62: ; 0x55a62
+Route14TH8: ; 0x55a62
 	db $9 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7db ; flag's byte
-	dw UnnamedText_55b4d ; 0x5b4d TextBeforeBattle
-	dw UnnamedText_55b57 ; 0x5b57 TextAfterBattle
-	dw UnnamedText_55b52 ; 0x5b52 TextEndBattle
-	dw UnnamedText_55b52 ; 0x5b52 TextEndBattle
+	dw Route14B4BattleTxt9 ; 0x5b4d TextBeforeBattle
+	dw Route14AfterBattleTxt9 ; 0x5b57 TextAfterBattle
+	dw Route14EndBattleTxt9 ; 0x5b52 TextEndBattle
+	dw Route14EndBattleTxt9 ; 0x5b52 TextEndBattle
 ; 0x55a6e
 
-TrainerHeader_55a6e: ; 0x55a6e
+Route14TH9: ; 0x55a6e
 	db $a ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7db ; flag's byte
-	dw UnnamedText_55b66 ; 0x5b66 TextBeforeBattle
-	dw UnnamedText_55b70 ; 0x5b70 TextAfterBattle
-	dw UnnamedText_55b6b ; 0x5b6b TextEndBattle
-	dw UnnamedText_55b6b ; 0x5b6b TextEndBattle
+	dw Route14B4BattleTxt10 ; 0x5b66 TextBeforeBattle
+	dw Route14AfterBattleTxt10 ; 0x5b70 TextAfterBattle
+	dw Route14EndBattleTxt10 ; 0x5b6b TextEndBattle
+	dw Route14EndBattleTxt10 ; 0x5b6b TextEndBattle
 ; 0x55a7a
 
 db $ff
@@ -41147,207 +41147,207 @@ Route14Text1: ; 0x55a7b
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_55a85: ; 0x55a85
-	TX_FAR _UnnamedText_55a85
+Route14B4BattleTxt1: ; 0x55a85
+	TX_FAR _Route14B4BattleTxt1
 	db $50
 ; 0x55a85 + 5 bytes
 
-UnnamedText_55a8a: ; 0x55a8a
-	TX_FAR _UnnamedText_55a8a
+Route14EndBattleTxt1: ; 0x55a8a
+	TX_FAR _Route14EndBattleTxt1
 	db $50
 ; 0x55a8a + 5 bytes
 
-UnnamedText_55a8f: ; 0x55a8f
-	TX_FAR _UnnamedText_55a8f
+Route14AfterBattleTxt1: ; 0x55a8f
+	TX_FAR _Route14AfterBattleTxt1
 	db $50
 ; 0x55a8f + 5 bytes
 
 Route14Text2: ; 0x55a94
 	db $08 ; asm
-	ld hl, TrainerHeader_55a0e
+	ld hl, Route14TH1
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_55a9e: ; 0x55a9e
-	TX_FAR _UnnamedText_55a9e
+Route14B4BattleTxt2: ; 0x55a9e
+	TX_FAR _Route14B4BattleTxt2
 	db $50
 ; 0x55a9e + 5 bytes
 
-UnnamedText_55aa3: ; 0x55aa3
-	TX_FAR _UnnamedText_55aa3
+Route14EndBattleTxt2: ; 0x55aa3
+	TX_FAR _Route14EndBattleTxt2
 	db $50
 ; 0x55aa3 + 5 bytes
 
-UnnamedText_55aa8: ; 0x55aa8
-	TX_FAR _UnnamedText_55aa8
+Route14AfterBattleTxt2: ; 0x55aa8
+	TX_FAR _Route14AfterBattleTxt2
 	db $50
 ; 0x55aa8 + 5 bytes
 
 Route14Text3: ; 0x55aad
 	db $08 ; asm
-	ld hl, TrainerHeader_55a1a
+	ld hl, Route14TH2
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_55ab7: ; 0x55ab7
-	TX_FAR _UnnamedText_55ab7
+Route14B4BattleTxt3: ; 0x55ab7
+	TX_FAR _Route14B4BattleTxt3
 	db $50
 ; 0x55ab7 + 5 bytes
 
-UnnamedText_55abc: ; 0x55abc
-	TX_FAR _UnnamedText_55abc
+Route14EndBattleTxt3: ; 0x55abc
+	TX_FAR _Route14EndBattleTxt3
 	db $50
 ; 0x55abc + 5 bytes
 
-UnnamedText_55ac1: ; 0x55ac1
-	TX_FAR _UnnamedText_55ac1
+Route14AfterBattleTxt3: ; 0x55ac1
+	TX_FAR _Route14AfterBattleTxt3
 	db $50
 ; 0x55ac1 + 5 bytes
 
 Route14Text4: ; 0x55ac6
 	db $08 ; asm
-	ld hl, TrainerHeader_55a26
+	ld hl, Route14TH3
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_55ad0: ; 0x55ad0
-	TX_FAR _UnnamedText_55ad0
+Route14B4BattleTxt4: ; 0x55ad0
+	TX_FAR _Route14B4BattleTxt4
 	db $50
 ; 0x55ad0 + 5 bytes
 
-UnnamedText_55ad5: ; 0x55ad5
-	TX_FAR _UnnamedText_55ad5
+Route14EndBattleTxt4: ; 0x55ad5
+	TX_FAR _Route14EndBattleTxt4
 	db $50
 ; 0x55ad5 + 5 bytes
 
-UnnamedText_55ada: ; 0x55ada
-	TX_FAR _UnnamedText_55ada
+Route14AfterBattleTxt4: ; 0x55ada
+	TX_FAR _Route14AfterBattleTxt4
 	db $50
 ; 0x55ada + 5 bytes
 
 Route14Text5: ; 0x55adf
 	db $08 ; asm
-	ld hl, TrainerHeader_55a32
+	ld hl, Route14TH4
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_55ae9: ; 0x55ae9
-	TX_FAR _UnnamedText_55ae9
+Route14B4BattleTxt5: ; 0x55ae9
+	TX_FAR _Route14B4BattleTxt5
 	db $50
 ; 0x55ae9 + 5 bytes
 
-UnnamedText_55aee: ; 0x55aee
-	TX_FAR _UnnamedText_55aee
+Route14EndBattleTxt5: ; 0x55aee
+	TX_FAR _Route14EndBattleTxt5
 	db $50
 ; 0x55aee + 5 bytes
 
-UnnamedText_55af3: ; 0x55af3
-	TX_FAR _UnnamedText_55af3
+Route14AfterBattleTxt5: ; 0x55af3
+	TX_FAR _Route14AfterBattleTxt5
 	db $50
 ; 0x55af3 + 5 bytes
 
 Route14Text6: ; 0x55af8
 	db $08 ; asm
-	ld hl, TrainerHeader_55a3e
+	ld hl, Route14TH5
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_55b02: ; 0x55b02
-	TX_FAR _UnnamedText_55b02
+Route14B4BattleTxt6: ; 0x55b02
+	TX_FAR _Route14B4BattleTxt6
 	db $50
 ; 0x55b02 + 5 bytes
 
-UnnamedText_55b07: ; 0x55b07
-	TX_FAR _UnnamedText_55b07
+Route14EndBattleTxt6: ; 0x55b07
+	TX_FAR _Route14EndBattleTxt6
 	db $50
 ; 0x55b07 + 5 bytes
 
-UnnamedText_55b0c: ; 0x55b0c
-	TX_FAR _UnnamedText_55b0c
+Route14AfterBattleTxt6: ; 0x55b0c
+	TX_FAR _Route14AfterBattleTxt6
 	db $50
 ; 0x55b0c + 5 bytes
 
 Route14Text7: ; 0x55b11
 	db $08 ; asm
-	ld hl, TrainerHeader_55a4a
+	ld hl, Route14TH6
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_55b1b: ; 0x55b1b
-	TX_FAR _UnnamedText_55b1b
+Route14B4BattleTxt7: ; 0x55b1b
+	TX_FAR _Route14B4BattleTxt7
 	db $50
 ; 0x55b1b + 5 bytes
 
-UnnamedText_55b20: ; 0x55b20
-	TX_FAR _UnnamedText_55b20
+Route14EndBattleTxt7: ; 0x55b20
+	TX_FAR _Route14EndBattleTxt7
 	db $50
 ; 0x55b20 + 5 bytes
 
-UnnamedText_55b25: ; 0x55b25
-	TX_FAR _UnnamedText_55b25
+Route14AfterBattleTxt7: ; 0x55b25
+	TX_FAR _Route14AfterBattleTxt7
 	db $50
 ; 0x55b25 + 5 bytes
 
 Route14Text8: ; 0x55b2a
 	db $08 ; asm
-	ld hl, TrainerHeader_55a56
+	ld hl, Route14TH7
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_55b34: ; 0x55b34
-	TX_FAR _UnnamedText_55b34
+Route14B4BattleTxt8: ; 0x55b34
+	TX_FAR _Route14B4BattleTxt8
 	db $50
 ; 0x55b34 + 5 bytes
 
-UnnamedText_55b39: ; 0x55b39
-	TX_FAR _UnnamedText_55b39
+Route14EndBattleTxt8: ; 0x55b39
+	TX_FAR _Route14EndBattleTxt8
 	db $50
 ; 0x55b39 + 5 bytes
 
-UnnamedText_55b3e: ; 0x55b3e
-	TX_FAR _UnnamedText_55b3e
+Route14AfterBattleTxt8: ; 0x55b3e
+	TX_FAR _Route14AfterBattleTxt8
 	db $50
 ; 0x55b3e + 5 bytes
 
 Route14Text9: ; 0x55b43
 	db $08 ; asm
-	ld hl, TrainerHeader_55a62
+	ld hl, Route14TH8
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_55b4d: ; 0x55b4d
-	TX_FAR _UnnamedText_55b4d
+Route14B4BattleTxt9: ; 0x55b4d
+	TX_FAR _Route14B4BattleTxt9
 	db $50
 ; 0x55b4d + 5 bytes
 
-UnnamedText_55b52: ; 0x55b52
-	TX_FAR _UnnamedText_55b52
+Route14EndBattleTxt9: ; 0x55b52
+	TX_FAR _Route14EndBattleTxt9
 	db $50
 ; 0x55b52 + 5 bytes
 
-UnnamedText_55b57: ; 0x55b57
-	TX_FAR _UnnamedText_55b57
+Route14AfterBattleTxt9: ; 0x55b57
+	TX_FAR _Route14AfterBattleTxt9
 	db $50
 ; 0x55b57 + 5 bytes
 
 Route14Text10: ; 0x55b5c
 	db $08 ; asm
-	ld hl, TrainerHeader_55a6e
+	ld hl, Route14TH9
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_55b66: ; 0x55b66
-	TX_FAR _UnnamedText_55b66
+Route14B4BattleTxt10: ; 0x55b66
+	TX_FAR _Route14B4BattleTxt10
 	db $50
 ; 0x55b66 + 5 bytes
 
-UnnamedText_55b6b: ; 0x55b6b
-	TX_FAR _UnnamedText_55b6b
+Route14EndBattleTxt10: ; 0x55b6b
+	TX_FAR _Route14EndBattleTxt10
 	db $50
 ; 0x55b6b + 5 bytes
 
-UnnamedText_55b70: ; 0x55b70
-	TX_FAR _UnnamedText_55b70
+Route14AfterBattleTxt10: ; 0x55b70
+	TX_FAR _Route14AfterBattleTxt10
 	db $50
 ; 0x55b70 + 5 bytes
 
@@ -41376,100 +41376,100 @@ Route17TrainerHeader1: ; 0x55bb3
 	db $1 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7e1 ; flag's byte
-	dw UnnamedText_55c36 ; 0x5c36 TextBeforeBattle
-	dw UnnamedText_55c40 ; 0x5c40 TextAfterBattle
-	dw UnnamedText_55c3b ; 0x5c3b TextEndBattle
-	dw UnnamedText_55c3b ; 0x5c3b TextEndBattle
+	dw Route17B4BattleTxt1 ; 0x5c36 TextBeforeBattle
+	dw Route17AfterBattleTxt1 ; 0x5c40 TextAfterBattle
+	dw Route17EndBattleTxt1 ; 0x5c3b TextEndBattle
+	dw Route17EndBattleTxt1 ; 0x5c3b TextEndBattle
 ; 0x55bbf
 
-TrainerHeader_55bbf: ; 0x55bbf
+Route17TH1: ; 0x55bbf
 	db $2 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7e1 ; flag's byte
-	dw UnnamedText_55c4f ; 0x5c4f TextBeforeBattle
-	dw UnnamedText_55c59 ; 0x5c59 TextAfterBattle
-	dw UnnamedText_55c54 ; 0x5c54 TextEndBattle
-	dw UnnamedText_55c54 ; 0x5c54 TextEndBattle
+	dw Route17B4BattleTxt2 ; 0x5c4f TextBeforeBattle
+	dw Route17AfterBattleTxt2 ; 0x5c59 TextAfterBattle
+	dw Route17EndBattleTxt2 ; 0x5c54 TextEndBattle
+	dw Route17EndBattleTxt2 ; 0x5c54 TextEndBattle
 ; 0x55bcb
 
-TrainerHeader_55bcb: ; 0x55bcb
+Route17TH2: ; 0x55bcb
 	db $3 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7e1 ; flag's byte
-	dw UnnamedText_55c68 ; 0x5c68 TextBeforeBattle
-	dw UnnamedText_55c72 ; 0x5c72 TextAfterBattle
-	dw UnnamedText_55c6d ; 0x5c6d TextEndBattle
-	dw UnnamedText_55c6d ; 0x5c6d TextEndBattle
+	dw Route17B4BattleTxt3 ; 0x5c68 TextBeforeBattle
+	dw Route17AfterBattleTxt3 ; 0x5c72 TextAfterBattle
+	dw Route17EndBattleTxt3 ; 0x5c6d TextEndBattle
+	dw Route17EndBattleTxt3 ; 0x5c6d TextEndBattle
 ; 0x55bd7
 
-TrainerHeader_55bd7: ; 0x55bd7
+Route17TH3: ; 0x55bd7
 	db $4 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7e1 ; flag's byte
-	dw UnnamedText_55c81 ; 0x5c81 TextBeforeBattle
-	dw UnnamedText_55c8b ; 0x5c8b TextAfterBattle
-	dw UnnamedText_55c86 ; 0x5c86 TextEndBattle
-	dw UnnamedText_55c86 ; 0x5c86 TextEndBattle
+	dw Route17B4BattleTxt4 ; 0x5c81 TextBeforeBattle
+	dw Route17AfterBattleTxt4 ; 0x5c8b TextAfterBattle
+	dw Route17EndBattleTxt4 ; 0x5c86 TextEndBattle
+	dw Route17EndBattleTxt4 ; 0x5c86 TextEndBattle
 ; 0x55be3
 
-TrainerHeader_55be3: ; 0x55be3
+Route17TH4: ; 0x55be3
 	db $5 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7e1 ; flag's byte
-	dw UnnamedText_55c9a ; 0x5c9a TextBeforeBattle
-	dw UnnamedText_55ca4 ; 0x5ca4 TextAfterBattle
-	dw UnnamedText_55c9f ; 0x5c9f TextEndBattle
-	dw UnnamedText_55c9f ; 0x5c9f TextEndBattle
+	dw Route17B4BattleTxt5 ; 0x5c9a TextBeforeBattle
+	dw Route17AfterBattleTxt5 ; 0x5ca4 TextAfterBattle
+	dw Route17EndBattleTxt5 ; 0x5c9f TextEndBattle
+	dw Route17EndBattleTxt5 ; 0x5c9f TextEndBattle
 ; 0x55bef
 
-TrainerHeader_55bef: ; 0x55bef
+Route17TH5: ; 0x55bef
 	db $6 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d7e1 ; flag's byte
-	dw UnnamedText_55cb3 ; 0x5cb3 TextBeforeBattle
-	dw UnnamedText_55cbd ; 0x5cbd TextAfterBattle
-	dw UnnamedText_55cb8 ; 0x5cb8 TextEndBattle
-	dw UnnamedText_55cb8 ; 0x5cb8 TextEndBattle
+	dw Route17B4BattleTxt6 ; 0x5cb3 TextBeforeBattle
+	dw Route17AfterBattleTxt6 ; 0x5cbd TextAfterBattle
+	dw Route17EndBattleTxt6 ; 0x5cb8 TextEndBattle
+	dw Route17EndBattleTxt6 ; 0x5cb8 TextEndBattle
 ; 0x55bfb
 
-TrainerHeader_55bfb: ; 0x55bfb
+Route17TH6: ; 0x55bfb
 	db $7 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7e1 ; flag's byte
-	dw UnnamedText_55ccc ; 0x5ccc TextBeforeBattle
-	dw UnnamedText_55cd6 ; 0x5cd6 TextAfterBattle
-	dw UnnamedText_55cd1 ; 0x5cd1 TextEndBattle
-	dw UnnamedText_55cd1 ; 0x5cd1 TextEndBattle
+	dw Route17B4BattleTxt7 ; 0x5ccc TextBeforeBattle
+	dw Route17AfterBattleTxt7 ; 0x5cd6 TextAfterBattle
+	dw Route17EndBattleTxt7 ; 0x5cd1 TextEndBattle
+	dw Route17EndBattleTxt7 ; 0x5cd1 TextEndBattle
 ; 0x55c07
 
-TrainerHeader_55c07: ; 0x55c07
+Route17TH7: ; 0x55c07
 	db $8 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d7e1 ; flag's byte
-	dw UnnamedText_55ce5 ; 0x5ce5 TextBeforeBattle
-	dw UnnamedText_55cef ; 0x5cef TextAfterBattle
-	dw UnnamedText_55cea ; 0x5cea TextEndBattle
-	dw UnnamedText_55cea ; 0x5cea TextEndBattle
+	dw Route17B4BattleTxt8 ; 0x5ce5 TextBeforeBattle
+	dw Route17AfterBattleTxt8 ; 0x5cef TextAfterBattle
+	dw Route17EndBattleTxt8 ; 0x5cea TextEndBattle
+	dw Route17EndBattleTxt8 ; 0x5cea TextEndBattle
 ; 0x55c13
 
-TrainerHeader_55c13: ; 0x55c13
+Route17TH8: ; 0x55c13
 	db $9 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7e1 ; flag's byte
-	dw UnnamedText_55cfe ; 0x5cfe TextBeforeBattle
-	dw UnnamedText_55d08 ; 0x5d08 TextAfterBattle
-	dw UnnamedText_55d03 ; 0x5d03 TextEndBattle
-	dw UnnamedText_55d03 ; 0x5d03 TextEndBattle
+	dw Route17B4BattleTxt9 ; 0x5cfe TextBeforeBattle
+	dw Route17AfterBattleTxt9 ; 0x5d08 TextAfterBattle
+	dw Route17EndBattleTxt9 ; 0x5d03 TextEndBattle
+	dw Route17EndBattleTxt9 ; 0x5d03 TextEndBattle
 ; 0x55c1f
 
-TrainerHeader_55c1f: ; 0x55c1f
+Route17TH9: ; 0x55c1f
 	db $a ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7e1 ; flag's byte
-	dw UnnamedText_55d17 ; 0x5d17 TextBeforeBattle
-	dw UnnamedText_55d21 ; 0x5d21 TextAfterBattle
-	dw UnnamedText_55d1c ; 0x5d1c TextEndBattle
-	dw UnnamedText_55d1c ; 0x5d1c TextEndBattle
+	dw Route17B4BattleTxt10 ; 0x5d17 TextBeforeBattle
+	dw Route17AfterBattleTxt10 ; 0x5d21 TextAfterBattle
+	dw Route17EndBattleTxt10 ; 0x5d1c TextEndBattle
+	dw Route17EndBattleTxt10 ; 0x5d1c TextEndBattle
 ; 0x55c2b
 
 db $ff
@@ -41480,207 +41480,207 @@ Route17Text1: ; 0x55c2c
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_55c36: ; 0x55c36
-	TX_FAR _UnnamedText_55c36
+Route17B4BattleTxt1: ; 0x55c36
+	TX_FAR _Route17B4BattleTxt1
 	db $50
 ; 0x55c36 + 5 bytes
 
-UnnamedText_55c3b: ; 0x55c3b
-	TX_FAR _UnnamedText_55c3b
+Route17EndBattleTxt1: ; 0x55c3b
+	TX_FAR _Route17EndBattleTxt1
 	db $50
 ; 0x55c3b + 5 bytes
 
-UnnamedText_55c40: ; 0x55c40
-	TX_FAR _UnnamedText_55c40
+Route17AfterBattleTxt1: ; 0x55c40
+	TX_FAR _Route17AfterBattleTxt1
 	db $50
 ; 0x55c40 + 5 bytes
 
 Route17Text2: ; 0x55c45
 	db $08 ; asm
-	ld hl, TrainerHeader_55bbf
+	ld hl, Route17TH1
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_55c4f: ; 0x55c4f
-	TX_FAR _UnnamedText_55c4f
+Route17B4BattleTxt2: ; 0x55c4f
+	TX_FAR _Route17B4BattleTxt2
 	db $50
 ; 0x55c4f + 5 bytes
 
-UnnamedText_55c54: ; 0x55c54
-	TX_FAR _UnnamedText_55c54
+Route17EndBattleTxt2: ; 0x55c54
+	TX_FAR _Route17EndBattleTxt2
 	db $50
 ; 0x55c54 + 5 bytes
 
-UnnamedText_55c59: ; 0x55c59
-	TX_FAR _UnnamedText_55c59
+Route17AfterBattleTxt2: ; 0x55c59
+	TX_FAR _Route17AfterBattleTxt2
 	db $50
 ; 0x55c59 + 5 bytes
 
 Route17Text3: ; 0x55c5e
 	db $08 ; asm
-	ld hl, TrainerHeader_55bcb
+	ld hl, Route17TH2
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_55c68: ; 0x55c68
-	TX_FAR _UnnamedText_55c68
+Route17B4BattleTxt3: ; 0x55c68
+	TX_FAR _Route17B4BattleTxt3
 	db $50
 ; 0x55c68 + 5 bytes
 
-UnnamedText_55c6d: ; 0x55c6d
-	TX_FAR _UnnamedText_55c6d
+Route17EndBattleTxt3: ; 0x55c6d
+	TX_FAR _Route17EndBattleTxt3
 	db $50
 ; 0x55c6d + 5 bytes
 
-UnnamedText_55c72: ; 0x55c72
-	TX_FAR _UnnamedText_55c72
+Route17AfterBattleTxt3: ; 0x55c72
+	TX_FAR _Route17AfterBattleTxt3
 	db $50
 ; 0x55c72 + 5 bytes
 
 Route17Text4: ; 0x55c77
 	db $08 ; asm
-	ld hl, TrainerHeader_55bd7
+	ld hl, Route17TH3
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_55c81: ; 0x55c81
-	TX_FAR _UnnamedText_55c81
+Route17B4BattleTxt4: ; 0x55c81
+	TX_FAR _Route17B4BattleTxt4
 	db $50
 ; 0x55c81 + 5 bytes
 
-UnnamedText_55c86: ; 0x55c86
-	TX_FAR _UnnamedText_55c86
+Route17EndBattleTxt4: ; 0x55c86
+	TX_FAR _Route17EndBattleTxt4
 	db $50
 ; 0x55c86 + 5 bytes
 
-UnnamedText_55c8b: ; 0x55c8b
-	TX_FAR _UnnamedText_55c8b
+Route17AfterBattleTxt4: ; 0x55c8b
+	TX_FAR _Route17AfterBattleTxt4
 	db $50
 ; 0x55c8b + 5 bytes
 
 Route17Text5: ; 0x55c90
 	db $08 ; asm
-	ld hl, TrainerHeader_55be3
+	ld hl, Route17TH4
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_55c9a: ; 0x55c9a
-	TX_FAR _UnnamedText_55c9a
+Route17B4BattleTxt5: ; 0x55c9a
+	TX_FAR _Route17B4BattleTxt5
 	db $50
 ; 0x55c9a + 5 bytes
 
-UnnamedText_55c9f: ; 0x55c9f
-	TX_FAR _UnnamedText_55c9f
+Route17EndBattleTxt5: ; 0x55c9f
+	TX_FAR _Route17EndBattleTxt5
 	db $50
 ; 0x55c9f + 5 bytes
 
-UnnamedText_55ca4: ; 0x55ca4
-	TX_FAR _UnnamedText_55ca4
+Route17AfterBattleTxt5: ; 0x55ca4
+	TX_FAR _Route17AfterBattleTxt5
 	db $50
 ; 0x55ca4 + 5 bytes
 
 Route17Text6: ; 0x55ca9
 	db $08 ; asm
-	ld hl, TrainerHeader_55bef
+	ld hl, Route17TH5
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_55cb3: ; 0x55cb3
-	TX_FAR _UnnamedText_55cb3
+Route17B4BattleTxt6: ; 0x55cb3
+	TX_FAR _Route17B4BattleTxt6
 	db $50
 ; 0x55cb3 + 5 bytes
 
-UnnamedText_55cb8: ; 0x55cb8
-	TX_FAR _UnnamedText_55cb8
+Route17EndBattleTxt6: ; 0x55cb8
+	TX_FAR _Route17EndBattleTxt6
 	db $50
 ; 0x55cb8 + 5 bytes
 
-UnnamedText_55cbd: ; 0x55cbd
-	TX_FAR _UnnamedText_55cbd
+Route17AfterBattleTxt6: ; 0x55cbd
+	TX_FAR _Route17AfterBattleTxt6
 	db $50
 ; 0x55cbd + 5 bytes
 
 Route17Text7: ; 0x55cc2
 	db $08 ; asm
-	ld hl, TrainerHeader_55bfb
+	ld hl, Route17TH6
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_55ccc: ; 0x55ccc
-	TX_FAR _UnnamedText_55ccc
+Route17B4BattleTxt7: ; 0x55ccc
+	TX_FAR _Route17B4BattleTxt7
 	db $50
 ; 0x55ccc + 5 bytes
 
-UnnamedText_55cd1: ; 0x55cd1
-	TX_FAR _UnnamedText_55cd1
+Route17EndBattleTxt7: ; 0x55cd1
+	TX_FAR _Route17EndBattleTxt7
 	db $50
 ; 0x55cd1 + 5 bytes
 
-UnnamedText_55cd6: ; 0x55cd6
-	TX_FAR _UnnamedText_55cd6
+Route17AfterBattleTxt7: ; 0x55cd6
+	TX_FAR _Route17AfterBattleTxt7
 	db $50
 ; 0x55cd6 + 5 bytes
 
 Route17Text8: ; 0x55cdb
 	db $08 ; asm
-	ld hl, TrainerHeader_55c07
+	ld hl, Route17TH7
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_55ce5: ; 0x55ce5
-	TX_FAR _UnnamedText_55ce5
+Route17B4BattleTxt8: ; 0x55ce5
+	TX_FAR _Route17B4BattleTxt8
 	db $50
 ; 0x55ce5 + 5 bytes
 
-UnnamedText_55cea: ; 0x55cea
-	TX_FAR _UnnamedText_55cea
+Route17EndBattleTxt8: ; 0x55cea
+	TX_FAR _Route17EndBattleTxt8
 	db $50
 ; 0x55cea + 5 bytes
 
-UnnamedText_55cef: ; 0x55cef
-	TX_FAR _UnnamedText_55cef
+Route17AfterBattleTxt8: ; 0x55cef
+	TX_FAR _Route17AfterBattleTxt8
 	db $50
 ; 0x55cef + 5 bytes
 
 Route17Text9: ; 0x55cf4
 	db $08 ; asm
-	ld hl, TrainerHeader_55c13
+	ld hl, Route17TH8
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_55cfe: ; 0x55cfe
-	TX_FAR _UnnamedText_55cfe
+Route17B4BattleTxt9: ; 0x55cfe
+	TX_FAR _Route17B4BattleTxt9
 	db $50
 ; 0x55cfe + 5 bytes
 
-UnnamedText_55d03: ; 0x55d03
-	TX_FAR _UnnamedText_55d03
+Route17EndBattleTxt9: ; 0x55d03
+	TX_FAR _Route17EndBattleTxt9
 	db $50
 ; 0x55d03 + 5 bytes
 
-UnnamedText_55d08: ; 0x55d08
-	TX_FAR _UnnamedText_55d08
+Route17AfterBattleTxt9: ; 0x55d08
+	TX_FAR _Route17AfterBattleTxt9
 	db $50
 ; 0x55d08 + 5 bytes
 
 Route17Text10: ; 0x55d0d
 	db $08 ; asm
-	ld hl, TrainerHeader_55c1f
+	ld hl, Route17TH9
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_55d17: ; 0x55d17
-	TX_FAR _UnnamedText_55d17
+Route17B4BattleTxt10: ; 0x55d17
+	TX_FAR _Route17B4BattleTxt10
 	db $50
 ; 0x55d17 + 5 bytes
 
-UnnamedText_55d1c: ; 0x55d1c
-	TX_FAR _UnnamedText_55d1c
+Route17EndBattleTxt10: ; 0x55d1c
+	TX_FAR _Route17EndBattleTxt10
 	db $50
 ; 0x55d1c + 5 bytes
 
-UnnamedText_55d21: ; 0x55d21
-	TX_FAR _UnnamedText_55d21
+Route17AfterBattleTxt10: ; 0x55d21
+	TX_FAR _Route17AfterBattleTxt10
 	db $50
 ; 0x55d21 + 5 bytes
 
@@ -41729,100 +41729,100 @@ Route19TrainerHeader1: ; 0x55d73
 	db $1 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7e5 ; flag's byte
-	dw UnnamedText_55e50 ; 0x5e50 TextBeforeBattle
-	dw UnnamedText_55e5a ; 0x5e5a TextAfterBattle
-	dw UnnamedText_55e55 ; 0x5e55 TextEndBattle
-	dw UnnamedText_55e55 ; 0x5e55 TextEndBattle
+	dw Route19B4BattleTxt1 ; 0x5e50 TextBeforeBattle
+	dw Route19AfterBattleTxt1 ; 0x5e5a TextAfterBattle
+	dw Route19EndBattleTxt1 ; 0x5e55 TextEndBattle
+	dw Route19EndBattleTxt1 ; 0x5e55 TextEndBattle
 ; 0x55d7f
 
-TrainerHeader_55d7f: ; 0x55d7f
+Route19TH1: ; 0x55d7f
 	db $2 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7e5 ; flag's byte
-	dw UnnamedText_55e5f ; 0x5e5f TextBeforeBattle
-	dw UnnamedText_55e69 ; 0x5e69 TextAfterBattle
-	dw UnnamedText_55e64 ; 0x5e64 TextEndBattle
-	dw UnnamedText_55e64 ; 0x5e64 TextEndBattle
+	dw Route19B4BattleTxt2 ; 0x5e5f TextBeforeBattle
+	dw Route19AfterBattleTxt2 ; 0x5e69 TextAfterBattle
+	dw Route19EndBattleTxt2 ; 0x5e64 TextEndBattle
+	dw Route19EndBattleTxt2 ; 0x5e64 TextEndBattle
 ; 0x55d8b
 
-TrainerHeader_55d8b: ; 0x55d8b
+Route19TH2: ; 0x55d8b
 	db $3 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7e5 ; flag's byte
-	dw UnnamedText_55e6e ; 0x5e6e TextBeforeBattle
-	dw UnnamedText_55e78 ; 0x5e78 TextAfterBattle
-	dw UnnamedText_55e73 ; 0x5e73 TextEndBattle
-	dw UnnamedText_55e73 ; 0x5e73 TextEndBattle
+	dw Route19B4BattleTxt3 ; 0x5e6e TextBeforeBattle
+	dw Route19AfterBattleTxt3 ; 0x5e78 TextAfterBattle
+	dw Route19EndBattleTxt3 ; 0x5e73 TextEndBattle
+	dw Route19EndBattleTxt3 ; 0x5e73 TextEndBattle
 ; 0x55d97
 
-TrainerHeader_55d97: ; 0x55d97
+Route19TH3: ; 0x55d97
 	db $4 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7e5 ; flag's byte
-	dw UnnamedText_55e7d ; 0x5e7d TextBeforeBattle
-	dw UnnamedText_55e87 ; 0x5e87 TextAfterBattle
-	dw UnnamedText_55e82 ; 0x5e82 TextEndBattle
-	dw UnnamedText_55e82 ; 0x5e82 TextEndBattle
+	dw Route19B4BattleTxt4 ; 0x5e7d TextBeforeBattle
+	dw Route19AfterBattleTxt4 ; 0x5e87 TextAfterBattle
+	dw Route19EndBattleTxt4 ; 0x5e82 TextEndBattle
+	dw Route19EndBattleTxt4 ; 0x5e82 TextEndBattle
 ; 0x55da3
 
-TrainerHeader_55da3: ; 0x55da3
+Route19TH4: ; 0x55da3
 	db $5 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7e5 ; flag's byte
-	dw UnnamedText_55e8c ; 0x5e8c TextBeforeBattle
-	dw UnnamedText_55e96 ; 0x5e96 TextAfterBattle
-	dw UnnamedText_55e91 ; 0x5e91 TextEndBattle
-	dw UnnamedText_55e91 ; 0x5e91 TextEndBattle
+	dw Route19B4BattleTxt5 ; 0x5e8c TextBeforeBattle
+	dw Route19AfterBattleTxt5 ; 0x5e96 TextAfterBattle
+	dw Route19EndBattleTxt5 ; 0x5e91 TextEndBattle
+	dw Route19EndBattleTxt5 ; 0x5e91 TextEndBattle
 ; 0x55daf
 
-TrainerHeader_55daf: ; 0x55daf
+Route19TH5: ; 0x55daf
 	db $6 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7e5 ; flag's byte
-	dw UnnamedText_55e9b ; 0x5e9b TextBeforeBattle
-	dw UnnamedText_55ea5 ; 0x5ea5 TextAfterBattle
-	dw UnnamedText_55ea0 ; 0x5ea0 TextEndBattle
-	dw UnnamedText_55ea0 ; 0x5ea0 TextEndBattle
+	dw Route19B4BattleTxt6 ; 0x5e9b TextBeforeBattle
+	dw Route19AfterBattleTxt6 ; 0x5ea5 TextAfterBattle
+	dw Route19EndBattleTxt6 ; 0x5ea0 TextEndBattle
+	dw Route19EndBattleTxt6 ; 0x5ea0 TextEndBattle
 ; 0x55dbb
 
-TrainerHeader_55dbb: ; 0x55dbb
+Route19TH6: ; 0x55dbb
 	db $7 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7e5 ; flag's byte
-	dw UnnamedText_55eaa ; 0x5eaa TextBeforeBattle
-	dw UnnamedText_55eb4 ; 0x5eb4 TextAfterBattle
-	dw UnnamedText_55eaf ; 0x5eaf TextEndBattle
-	dw UnnamedText_55eaf ; 0x5eaf TextEndBattle
+	dw Route19B4BattleTxt7 ; 0x5eaa TextBeforeBattle
+	dw Route19AfterBattleTxt7 ; 0x5eb4 TextAfterBattle
+	dw Route19EndBattleTxt7 ; 0x5eaf TextEndBattle
+	dw Route19EndBattleTxt7 ; 0x5eaf TextEndBattle
 ; 0x55dc7
 
-TrainerHeader_55dc7: ; 0x55dc7
+Route19TH7: ; 0x55dc7
 	db $8 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7e5 ; flag's byte
-	dw UnnamedText_55eb9 ; 0x5eb9 TextBeforeBattle
-	dw UnnamedText_55ec3 ; 0x5ec3 TextAfterBattle
-	dw UnnamedText_55ebe ; 0x5ebe TextEndBattle
-	dw UnnamedText_55ebe ; 0x5ebe TextEndBattle
+	dw Route19B4BattleTxt8 ; 0x5eb9 TextBeforeBattle
+	dw Route19AfterBattleTxt8 ; 0x5ec3 TextAfterBattle
+	dw Route19EndBattleTxt8 ; 0x5ebe TextEndBattle
+	dw Route19EndBattleTxt8 ; 0x5ebe TextEndBattle
 ; 0x55dd3
 
-TrainerHeader_55dd3: ; 0x55dd3
+Route19TH8: ; 0x55dd3
 	db $9 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7e5 ; flag's byte
-	dw UnnamedText_55ec8 ; 0x5ec8 TextBeforeBattle
-	dw UnnamedText_55ed2 ; 0x5ed2 TextAfterBattle
-	dw UnnamedText_55ecd ; 0x5ecd TextEndBattle
-	dw UnnamedText_55ecd ; 0x5ecd TextEndBattle
+	dw Route19B4BattleTxt9 ; 0x5ec8 TextBeforeBattle
+	dw Route19AfterBattleTxt9 ; 0x5ed2 TextAfterBattle
+	dw Route19EndBattleTxt9 ; 0x5ecd TextEndBattle
+	dw Route19EndBattleTxt9 ; 0x5ecd TextEndBattle
 ; 0x55ddf
 
-TrainerHeader_55ddf: ; 0x55ddf
+Route19TH9: ; 0x55ddf
 	db $a ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7e5 ; flag's byte
-	dw UnnamedText_55ed7 ; 0x5ed7 TextBeforeBattle
-	dw UnnamedText_55ee1 ; 0x5ee1 TextAfterBattle
-	dw UnnamedText_55edc ; 0x5edc TextEndBattle
-	dw UnnamedText_55edc ; 0x5edc TextEndBattle
+	dw Route19B4BattleTxt10 ; 0x5ed7 TextBeforeBattle
+	dw Route19AfterBattleTxt10 ; 0x5ee1 TextAfterBattle
+	dw Route19EndBattleTxt10 ; 0x5edc TextEndBattle
+	dw Route19EndBattleTxt10 ; 0x5edc TextEndBattle
 ; 0x55deb
 
 db $ff
@@ -41835,205 +41835,205 @@ Route19Text1: ; 0x55dec
 
 Route19Text2: ; 0x55df6
 	db $08 ; asm
-	ld hl, TrainerHeader_55d7f
+	ld hl, Route19TH1
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 Route19Text3: ; 0x55e00
 	db $08 ; asm
-	ld hl, TrainerHeader_55d8b
+	ld hl, Route19TH2
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 Route19Text4: ; 0x55e0a
 	db $08 ; asm
-	ld hl, TrainerHeader_55d97
+	ld hl, Route19TH3
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 Route19Text5: ; 0x55e14
 	db $08 ; asm
-	ld hl, TrainerHeader_55da3
+	ld hl, Route19TH4
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 Route19Text6: ; 0x55e1e
 	db $08 ; asm
-	ld hl, TrainerHeader_55daf
+	ld hl, Route19TH5
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 Route19Text7: ; 0x55e28
 	db $08 ; asm
-	ld hl, TrainerHeader_55dbb
+	ld hl, Route19TH6
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 Route19Text8: ; 0x55e32
 	db $08 ; asm
-	ld hl, TrainerHeader_55dc7
+	ld hl, Route19TH7
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 Route19Text9: ; 0x55e3c
 	db $08 ; asm
-	ld hl, TrainerHeader_55dd3
+	ld hl, Route19TH8
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 Route19Text10: ; 0x55e46
 	db $08 ; asm
-	ld hl, TrainerHeader_55ddf
+	ld hl, Route19TH9
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_55e50: ; 0x55e50
-	TX_FAR _UnnamedText_55e50
+Route19B4BattleTxt1: ; 0x55e50
+	TX_FAR _Route19B4BattleTxt1
 	db $50
 ; 0x55e50 + 5 bytes
 
-UnnamedText_55e55: ; 0x55e55
-	TX_FAR _UnnamedText_55e55
+Route19EndBattleTxt1: ; 0x55e55
+	TX_FAR _Route19EndBattleTxt1
 	db $50
 ; 0x55e55 + 5 bytes
 
-UnnamedText_55e5a: ; 0x55e5a
-	TX_FAR _UnnamedText_55e5a
+Route19AfterBattleTxt1: ; 0x55e5a
+	TX_FAR _Route19AfterBattleTxt1
 	db $50
 ; 0x55e5a + 5 bytes
 
-UnnamedText_55e5f: ; 0x55e5f
-	TX_FAR _UnnamedText_55e5f
+Route19B4BattleTxt2: ; 0x55e5f
+	TX_FAR _Route19B4BattleTxt2
 	db $50
 ; 0x55e5f + 5 bytes
 
-UnnamedText_55e64: ; 0x55e64
-	TX_FAR _UnnamedText_55e64
+Route19EndBattleTxt2: ; 0x55e64
+	TX_FAR _Route19EndBattleTxt2
 	db $50
 ; 0x55e64 + 5 bytes
 
-UnnamedText_55e69: ; 0x55e69
-	TX_FAR _UnnamedText_55e69
+Route19AfterBattleTxt2: ; 0x55e69
+	TX_FAR _Route19AfterBattleTxt2
 	db $50
 ; 0x55e69 + 5 bytes
 
-UnnamedText_55e6e: ; 0x55e6e
-	TX_FAR _UnnamedText_55e6e
+Route19B4BattleTxt3: ; 0x55e6e
+	TX_FAR _Route19B4BattleTxt3
 	db $50
 ; 0x55e6e + 5 bytes
 
-UnnamedText_55e73: ; 0x55e73
-	TX_FAR _UnnamedText_55e73
+Route19EndBattleTxt3: ; 0x55e73
+	TX_FAR _Route19EndBattleTxt3
 	db $50
 ; 0x55e73 + 5 bytes
 
-UnnamedText_55e78: ; 0x55e78
-	TX_FAR _UnnamedText_55e78
+Route19AfterBattleTxt3: ; 0x55e78
+	TX_FAR _Route19AfterBattleTxt3
 	db $50
 ; 0x55e78 + 5 bytes
 
-UnnamedText_55e7d: ; 0x55e7d
-	TX_FAR _UnnamedText_55e7d
+Route19B4BattleTxt4: ; 0x55e7d
+	TX_FAR _Route19B4BattleTxt4
 	db $50
 ; 0x55e7d + 5 bytes
 
-UnnamedText_55e82: ; 0x55e82
-	TX_FAR _UnnamedText_55e82
+Route19EndBattleTxt4: ; 0x55e82
+	TX_FAR _Route19EndBattleTxt4
 	db $50
 ; 0x55e82 + 5 bytes
 
-UnnamedText_55e87: ; 0x55e87
-	TX_FAR _UnnamedText_55e87
+Route19AfterBattleTxt4: ; 0x55e87
+	TX_FAR _Route19AfterBattleTxt4
 	db $50
 ; 0x55e87 + 5 bytes
 
-UnnamedText_55e8c: ; 0x55e8c
-	TX_FAR _UnnamedText_55e8c
+Route19B4BattleTxt5: ; 0x55e8c
+	TX_FAR _Route19B4BattleTxt5
 	db $50
 ; 0x55e8c + 5 bytes
 
-UnnamedText_55e91: ; 0x55e91
-	TX_FAR _UnnamedText_55e91
+Route19EndBattleTxt5: ; 0x55e91
+	TX_FAR _Route19EndBattleTxt5
 	db $50
 ; 0x55e91 + 5 bytes
 
-UnnamedText_55e96: ; 0x55e96
-	TX_FAR _UnnamedText_55e96
+Route19AfterBattleTxt5: ; 0x55e96
+	TX_FAR _Route19AfterBattleTxt5
 	db $50
 ; 0x55e96 + 5 bytes
 
-UnnamedText_55e9b: ; 0x55e9b
-	TX_FAR _UnnamedText_55e9b
+Route19B4BattleTxt6: ; 0x55e9b
+	TX_FAR _Route19B4BattleTxt6
 	db $50
 ; 0x55e9b + 5 bytes
 
-UnnamedText_55ea0: ; 0x55ea0
-	TX_FAR _UnnamedText_55ea0
+Route19EndBattleTxt6: ; 0x55ea0
+	TX_FAR _Route19EndBattleTxt6
 	db $50
 ; 0x55ea0 + 5 bytes
 
-UnnamedText_55ea5: ; 0x55ea5
-	TX_FAR _UnnamedText_55ea5
+Route19AfterBattleTxt6: ; 0x55ea5
+	TX_FAR _Route19AfterBattleTxt6
 	db $50
 ; 0x55ea5 + 5 bytes
 
-UnnamedText_55eaa: ; 0x55eaa
-	TX_FAR _UnnamedText_55eaa
+Route19B4BattleTxt7: ; 0x55eaa
+	TX_FAR _Route19B4BattleTxt7
 	db $50
 ; 0x55eaa + 5 bytes
 
-UnnamedText_55eaf: ; 0x55eaf
-	TX_FAR _UnnamedText_55eaf
+Route19EndBattleTxt7: ; 0x55eaf
+	TX_FAR _Route19EndBattleTxt7
 	db $50
 ; 0x55eaf + 5 bytes
 
-UnnamedText_55eb4: ; 0x55eb4
-	TX_FAR _UnnamedText_55eb4
+Route19AfterBattleTxt7: ; 0x55eb4
+	TX_FAR _Route19AfterBattleTxt7
 	db $50
 ; 0x55eb4 + 5 bytes
 
-UnnamedText_55eb9: ; 0x55eb9
-	TX_FAR _UnnamedText_55eb9
+Route19B4BattleTxt8: ; 0x55eb9
+	TX_FAR _Route19B4BattleTxt8
 	db $50
 ; 0x55eb9 + 5 bytes
 
-UnnamedText_55ebe: ; 0x55ebe
-	TX_FAR _UnnamedText_55ebe
+Route19EndBattleTxt8: ; 0x55ebe
+	TX_FAR _Route19EndBattleTxt8
 	db $50
 ; 0x55ebe + 5 bytes
 
-UnnamedText_55ec3: ; 0x55ec3
-	TX_FAR _UnnamedText_55ec3
+Route19AfterBattleTxt8: ; 0x55ec3
+	TX_FAR _Route19AfterBattleTxt8
 	db $50
 ; 0x55ec3 + 5 bytes
 
-UnnamedText_55ec8: ; 0x55ec8
-	TX_FAR _UnnamedText_55ec8
+Route19B4BattleTxt9: ; 0x55ec8
+	TX_FAR _Route19B4BattleTxt9
 	db $50
 ; 0x55ec8 + 5 bytes
 
-UnnamedText_55ecd: ; 0x55ecd
-	TX_FAR _UnnamedText_55ecd
+Route19EndBattleTxt9: ; 0x55ecd
+	TX_FAR _Route19EndBattleTxt9
 	db $50
 ; 0x55ecd + 5 bytes
 
-UnnamedText_55ed2: ; 0x55ed2
-	TX_FAR _UnnamedText_55ed2
+Route19AfterBattleTxt9: ; 0x55ed2
+	TX_FAR _Route19AfterBattleTxt9
 	db $50
 ; 0x55ed2 + 5 bytes
 
-UnnamedText_55ed7: ; 0x55ed7
-	TX_FAR _UnnamedText_55ed7
+Route19B4BattleTxt10: ; 0x55ed7
+	TX_FAR _Route19B4BattleTxt10
 	db $50
 ; 0x55ed7 + 5 bytes
 
-UnnamedText_55edc: ; 0x55edc
-	TX_FAR _UnnamedText_55edc
+Route19EndBattleTxt10: ; 0x55edc
+	TX_FAR _Route19EndBattleTxt10
 	db $50
 ; 0x55edc + 5 bytes
 
-UnnamedText_55ee1: ; 0x55ee1
-	TX_FAR _UnnamedText_55ee1
+Route19AfterBattleTxt10: ; 0x55ee1
+	TX_FAR _Route19AfterBattleTxt10
 	db $50
 ; 0x55ee1 + 5 bytes
 
@@ -42062,90 +42062,90 @@ Route21TrainerHeader1: ; 0x55f16
 	db $1 ; flag's bit
 	db ($0 << 4) ; trainer's view range
 	dw $d7e9 ; flag's byte
-	dw UnnamedText_55fdd ; 0x5fdd TextBeforeBattle
-	dw UnnamedText_55fe7 ; 0x5fe7 TextAfterBattle
-	dw UnnamedText_55fe2 ; 0x5fe2 TextEndBattle
-	dw UnnamedText_55fe2 ; 0x5fe2 TextEndBattle
+	dw Route21B4BattleTxt1 ; 0x5fdd TextBeforeBattle
+	dw Route21AfterBattleTxt1 ; 0x5fe7 TextAfterBattle
+	dw Route21EndBattleTxt1 ; 0x5fe2 TextEndBattle
+	dw Route21EndBattleTxt1 ; 0x5fe2 TextEndBattle
 ; 0x55f22
 
-TrainerHeader_55f22: ; 0x55f22
+Route21TH1: ; 0x55f22
 	db $2 ; flag's bit
 	db ($0 << 4) ; trainer's view range
 	dw $d7e9 ; flag's byte
-	dw UnnamedText_55fec ; 0x5fec TextBeforeBattle
-	dw UnnamedText_55ff6 ; 0x5ff6 TextAfterBattle
-	dw UnnamedText_55ff1 ; 0x5ff1 TextEndBattle
-	dw UnnamedText_55ff1 ; 0x5ff1 TextEndBattle
+	dw Route21B4BattleTxt2 ; 0x5fec TextBeforeBattle
+	dw Route21AfterBattleTxt2 ; 0x5ff6 TextAfterBattle
+	dw Route21EndBattleTxt2 ; 0x5ff1 TextEndBattle
+	dw Route21EndBattleTxt2 ; 0x5ff1 TextEndBattle
 ; 0x55f2e
 
-TrainerHeader_55f2e: ; 0x55f2e
+Route21TH2: ; 0x55f2e
 	db $3 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7e9 ; flag's byte
-	dw UnnamedText_55ffb ; 0x5ffb TextBeforeBattle
-	dw UnnamedText_56005 ; 0x6005 TextAfterBattle
-	dw UnnamedText_56000 ; 0x6000 TextEndBattle
-	dw UnnamedText_56000 ; 0x6000 TextEndBattle
+	dw Route21B4BattleTxt3 ; 0x5ffb TextBeforeBattle
+	dw Route21AfterBattleTxt3 ; 0x6005 TextAfterBattle
+	dw Route21EndBattleTxt3 ; 0x6000 TextEndBattle
+	dw Route21EndBattleTxt3 ; 0x6000 TextEndBattle
 ; 0x55f3a
 
-TrainerHeader_55f3a: ; 0x55f3a
+Route21TH3: ; 0x55f3a
 	db $4 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7e9 ; flag's byte
-	dw UnnamedText_5600a ; 0x600a TextBeforeBattle
-	dw UnnamedText_56014 ; 0x6014 TextAfterBattle
-	dw UnnamedText_5600f ; 0x600f TextEndBattle
-	dw UnnamedText_5600f ; 0x600f TextEndBattle
+	dw Route21B4BattleTxt4 ; 0x600a TextBeforeBattle
+	dw Route21AfterBattleTxt4 ; 0x6014 TextAfterBattle
+	dw Route21EndBattleTxt4 ; 0x600f TextEndBattle
+	dw Route21EndBattleTxt4 ; 0x600f TextEndBattle
 ; 0x55f46
 
-TrainerHeader_55f46: ; 0x55f46
+Route21TH4: ; 0x55f46
 	db $5 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7e9 ; flag's byte
-	dw UnnamedText_56019 ; 0x6019 TextBeforeBattle
-	dw UnnamedText_56023 ; 0x6023 TextAfterBattle
-	dw UnnamedText_5601e ; 0x601e TextEndBattle
-	dw UnnamedText_5601e ; 0x601e TextEndBattle
+	dw Route21B4BattleTxt5 ; 0x6019 TextBeforeBattle
+	dw Route21AfterBattleTxt5 ; 0x6023 TextAfterBattle
+	dw Route21EndBattleTxt5 ; 0x601e TextEndBattle
+	dw Route21EndBattleTxt5 ; 0x601e TextEndBattle
 ; 0x55f52
 
-TrainerHeader_55f52: ; 0x55f52
+Route21TH5: ; 0x55f52
 	db $6 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7e9 ; flag's byte
-	dw UnnamedText_56028 ; 0x6028 TextBeforeBattle
-	dw UnnamedText_56032 ; 0x6032 TextAfterBattle
-	dw UnnamedText_5602d ; 0x602d TextEndBattle
-	dw UnnamedText_5602d ; 0x602d TextEndBattle
+	dw Route21B4BattleTxt6 ; 0x6028 TextBeforeBattle
+	dw Route21AfterBattleTxt6 ; 0x6032 TextAfterBattle
+	dw Route21EndBattleTxt6 ; 0x602d TextEndBattle
+	dw Route21EndBattleTxt6 ; 0x602d TextEndBattle
 ; 0x55f5e
 
-TrainerHeader_55f5e: ; 0x55f5e
+Route21TH6: ; 0x55f5e
 	db $7 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7e9 ; flag's byte
-	dw UnnamedText_56037 ; 0x6037 TextBeforeBattle
-	dw UnnamedText_56041 ; 0x6041 TextAfterBattle
-	dw UnnamedText_5603c ; 0x603c TextEndBattle
-	dw UnnamedText_5603c ; 0x603c TextEndBattle
+	dw Route21B4BattleTxt7 ; 0x6037 TextBeforeBattle
+	dw Route21AfterBattleTxt7 ; 0x6041 TextAfterBattle
+	dw Route21EndBattleTxt7 ; 0x603c TextEndBattle
+	dw Route21EndBattleTxt7 ; 0x603c TextEndBattle
 ; 0x55f6a
 
-TrainerHeader_55f6a: ; 0x55f6a
+Route21TH7: ; 0x55f6a
 	db $8 ; flag's bit
 	db ($0 << 4) ; trainer's view range
 	dw $d7e9 ; flag's byte
-	dw UnnamedText_56046 ; 0x6046 TextBeforeBattle
-	dw UnnamedText_56050 ; 0x6050 TextAfterBattle
-	dw UnnamedText_5604b ; 0x604b TextEndBattle
-	dw UnnamedText_5604b ; 0x604b TextEndBattle
+	dw Route21B4BattleTxt8 ; 0x6046 TextBeforeBattle
+	dw Route21AfterBattleTxt8 ; 0x6050 TextAfterBattle
+	dw Route21EndBattleTxt8 ; 0x604b TextEndBattle
+	dw Route21EndBattleTxt8 ; 0x604b TextEndBattle
 ; 0x55f76
 
-TrainerHeader_55f76: ; 0x55f76
+Route21TH8: ; 0x55f76
 	db $9 ; flag's bit
 	db ($0 << 4) ; trainer's view range
 	dw $d7e9 ; flag's byte
-	dw UnnamedText_56055 ; 0x6055 TextBeforeBattle
-	dw UnnamedText_5605f ; 0x605f TextAfterBattle
-	dw UnnamedText_5605a ; 0x605a TextEndBattle
-	dw UnnamedText_5605a ; 0x605a TextEndBattle
+	dw Route21B4BattleTxt9 ; 0x6055 TextBeforeBattle
+	dw Route21AfterBattleTxt9 ; 0x605f TextAfterBattle
+	dw Route21EndBattleTxt9 ; 0x605a TextEndBattle
+	dw Route21EndBattleTxt9 ; 0x605a TextEndBattle
 ; 0x55f82
 
 db $ff
@@ -42158,184 +42158,184 @@ Route21Text1: ; 0x55f83
 
 Route21Text2: ; 0x55f8d
 	db $08 ; asm
-	ld hl, TrainerHeader_55f22
+	ld hl, Route21TH1
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 Route21Text3: ; 0x55f97
 	db $08 ; asm
-	ld hl, TrainerHeader_55f2e
+	ld hl, Route21TH2
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 Route21Text4: ; 0x55fa1
 	db $08 ; asm
-	ld hl, TrainerHeader_55f3a
+	ld hl, Route21TH3
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 Route21Text5: ; 0x55fab
 	db $08 ; asm
-	ld hl, TrainerHeader_55f46
+	ld hl, Route21TH4
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 Route21Text6: ; 0x55fb5
 	db $08 ; asm
-	ld hl, TrainerHeader_55f52
+	ld hl, Route21TH5
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 Route21Text7: ; 0x55fbf
 	db $08 ; asm
-	ld hl, TrainerHeader_55f5e
+	ld hl, Route21TH6
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 Route21Text8: ; 0x55fc9
 	db $08 ; asm
-	ld hl, TrainerHeader_55f6a
+	ld hl, Route21TH7
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 Route21Text9: ; 0x55fd3
 	db $08 ; asm
-	ld hl, TrainerHeader_55f76
+	ld hl, Route21TH8
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_55fdd: ; 0x55fdd
-	TX_FAR _UnnamedText_55fdd
+Route21B4BattleTxt1: ; 0x55fdd
+	TX_FAR _Route21B4BattleTxt1
 	db $50
 ; 0x55fdd + 5 bytes
 
-UnnamedText_55fe2: ; 0x55fe2
-	TX_FAR _UnnamedText_55fe2
+Route21EndBattleTxt1: ; 0x55fe2
+	TX_FAR _Route21EndBattleTxt1
 	db $50
 ; 0x55fe2 + 5 bytes
 
-UnnamedText_55fe7: ; 0x55fe7
-	TX_FAR _UnnamedText_55fe7
+Route21AfterBattleTxt1: ; 0x55fe7
+	TX_FAR _Route21AfterBattleTxt1
 	db $50
 ; 0x55fe7 + 5 bytes
 
-UnnamedText_55fec: ; 0x55fec
-	TX_FAR _UnnamedText_55fec
+Route21B4BattleTxt2: ; 0x55fec
+	TX_FAR _Route21B4BattleTxt2
 	db $50
 ; 0x55fec + 5 bytes
 
-UnnamedText_55ff1: ; 0x55ff1
-	TX_FAR _UnnamedText_55ff1
+Route21EndBattleTxt2: ; 0x55ff1
+	TX_FAR _Route21EndBattleTxt2
 	db $50
 ; 0x55ff1 + 5 bytes
 
-UnnamedText_55ff6: ; 0x55ff6
-	TX_FAR _UnnamedText_55ff6
+Route21AfterBattleTxt2: ; 0x55ff6
+	TX_FAR _Route21AfterBattleTxt2
 	db $50
 ; 0x55ff6 + 5 bytes
 
-UnnamedText_55ffb: ; 0x55ffb
-	TX_FAR _UnnamedText_55ffb
+Route21B4BattleTxt3: ; 0x55ffb
+	TX_FAR _Route21B4BattleTxt3
 	db $50
 ; 0x55ffb + 5 bytes
 
-UnnamedText_56000: ; 0x56000
-	TX_FAR _UnnamedText_56000
+Route21EndBattleTxt3: ; 0x56000
+	TX_FAR _Route21EndBattleTxt3
 	db $50
 ; 0x56000 + 5 bytes
 
-UnnamedText_56005: ; 0x56005
-	TX_FAR _UnnamedText_56005
+Route21AfterBattleTxt3: ; 0x56005
+	TX_FAR _Route21AfterBattleTxt3
 	db $50
 ; 0x56005 + 5 bytes
 
-UnnamedText_5600a: ; 0x5600a
-	TX_FAR _UnnamedText_5600a
+Route21B4BattleTxt4: ; 0x5600a
+	TX_FAR _Route21B4BattleTxt4
 	db $50
 ; 0x5600a + 5 bytes
 
-UnnamedText_5600f: ; 0x5600f
-	TX_FAR _UnnamedText_5600f
+Route21EndBattleTxt4: ; 0x5600f
+	TX_FAR _Route21EndBattleTxt4
 	db $50
 ; 0x5600f + 5 bytes
 
-UnnamedText_56014: ; 0x56014
-	TX_FAR _UnnamedText_56014
+Route21AfterBattleTxt4: ; 0x56014
+	TX_FAR _Route21AfterBattleTxt4
 	db $50
 ; 0x56014 + 5 bytes
 
-UnnamedText_56019: ; 0x56019
-	TX_FAR _UnnamedText_56019
+Route21B4BattleTxt5: ; 0x56019
+	TX_FAR _Route21B4BattleTxt5
 	db $50
 ; 0x56019 + 5 bytes
 
-UnnamedText_5601e: ; 0x5601e
-	TX_FAR _UnnamedText_5601e
+Route21EndBattleTxt5: ; 0x5601e
+	TX_FAR _Route21EndBattleTxt5
 	db $50
 ; 0x5601e + 5 bytes
 
-UnnamedText_56023: ; 0x56023
-	TX_FAR _UnnamedText_56023
+Route21AfterBattleTxt5: ; 0x56023
+	TX_FAR _Route21AfterBattleTxt5
 	db $50
 ; 0x56023 + 5 bytes
 
-UnnamedText_56028: ; 0x56028
-	TX_FAR _UnnamedText_56028
+Route21B4BattleTxt6: ; 0x56028
+	TX_FAR _Route21B4BattleTxt6
 	db $50
 ; 0x56028 + 5 bytes
 
-UnnamedText_5602d: ; 0x5602d
-	TX_FAR _UnnamedText_5602d
+Route21EndBattleTxt6: ; 0x5602d
+	TX_FAR _Route21EndBattleTxt6
 	db $50
 ; 0x5602d + 5 bytes
 
-UnnamedText_56032: ; 0x56032
-	TX_FAR _UnnamedText_56032
+Route21AfterBattleTxt6: ; 0x56032
+	TX_FAR _Route21AfterBattleTxt6
 	db $50
 ; 0x56032 + 5 bytes
 
-UnnamedText_56037: ; 0x56037
-	TX_FAR _UnnamedText_56037
+Route21B4BattleTxt7: ; 0x56037
+	TX_FAR _Route21B4BattleTxt7
 	db $50
 ; 0x56037 + 5 bytes
 
-UnnamedText_5603c: ; 0x5603c
-	TX_FAR _UnnamedText_5603c
+Route21EndBattleTxt7: ; 0x5603c
+	TX_FAR _Route21EndBattleTxt7
 	db $50
 ; 0x5603c + 5 bytes
 
-UnnamedText_56041: ; 0x56041
-	TX_FAR _UnnamedText_56041
+Route21AfterBattleTxt7: ; 0x56041
+	TX_FAR _Route21AfterBattleTxt7
 	db $50
 ; 0x56041 + 5 bytes
 
-UnnamedText_56046: ; 0x56046
-	TX_FAR _UnnamedText_56046
+Route21B4BattleTxt8: ; 0x56046
+	TX_FAR _Route21B4BattleTxt8
 	db $50
 ; 0x56046 + 5 bytes
 
-UnnamedText_5604b: ; 0x5604b
-	TX_FAR _UnnamedText_5604b
+Route21EndBattleTxt8: ; 0x5604b
+	TX_FAR _Route21EndBattleTxt8
 	db $50
 ; 0x5604b + 5 bytes
 
-UnnamedText_56050: ; 0x56050
-	TX_FAR _UnnamedText_56050
+Route21AfterBattleTxt8: ; 0x56050
+	TX_FAR _Route21AfterBattleTxt8
 	db $50
 ; 0x56050 + 5 bytes
 
-UnnamedText_56055: ; 0x56055
-	TX_FAR _UnnamedText_56055
+Route21B4BattleTxt9: ; 0x56055
+	TX_FAR _Route21B4BattleTxt9
 	db $50
 ; 0x56055 + 5 bytes
 
-UnnamedText_5605a: ; 0x5605a
-	TX_FAR _UnnamedText_5605a
+Route21EndBattleTxt9: ; 0x5605a
+	TX_FAR _Route21EndBattleTxt9
 	db $50
 ; 0x5605a + 5 bytes
 
-UnnamedText_5605f: ; 0x5605f
-	TX_FAR _UnnamedText_5605f
+Route21AfterBattleTxt9: ; 0x5605f
+	TX_FAR _Route21AfterBattleTxt9
 	db $50
 ; 0x5605f + 5 bytes
 
@@ -42615,7 +42615,7 @@ DayCareMText1: ; 0x56254
 	pop af
 	ld hl, UnnamedText_56437
 	jp c, Unnamed_56409
-	ld hl, TrainerHeader_5571b
+	ld hl, Route9TH4
 	ld b, $8
 	call Bankswitch
 	ld hl, UnnamedText_5644a
@@ -42855,30 +42855,30 @@ SilphCo8TrainerHeader1: ; 0x56585
 	db $2 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d831 ; flag's byte
-	dw UnnamedText_565e6 ; 0x65e6 TextBeforeBattle
-	dw UnnamedText_565f0 ; 0x65f0 TextAfterBattle
-	dw UnnamedText_565eb ; 0x65eb TextEndBattle
-	dw UnnamedText_565eb ; 0x65eb TextEndBattle
+	dw SilphCo8B4BattleTxt1 ; 0x65e6 TextBeforeBattle
+	dw SilphCo8AfterBattleTxt1 ; 0x65f0 TextAfterBattle
+	dw SilphCo8EndBattleTxt1 ; 0x65eb TextEndBattle
+	dw SilphCo8EndBattleTxt1 ; 0x65eb TextEndBattle
 ; 0x56591
 
-TrainerHeader_56591: ; 0x56591
+SilphCo8TH1: ; 0x56591
 	db $3 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d831 ; flag's byte
-	dw UnnamedText_565f5 ; 0x65f5 TextBeforeBattle
-	dw UnnamedText_565ff ; 0x65ff TextAfterBattle
-	dw UnnamedText_565fa ; 0x65fa TextEndBattle
-	dw UnnamedText_565fa ; 0x65fa TextEndBattle
+	dw SilphCo8B4BattleTxt2 ; 0x65f5 TextBeforeBattle
+	dw SilphCo8AfterBattleTxt2 ; 0x65ff TextAfterBattle
+	dw SilphCo8EndBattleTxt2 ; 0x65fa TextEndBattle
+	dw SilphCo8EndBattleTxt2 ; 0x65fa TextEndBattle
 ; 0x5659d
 
-TrainerHeader_5659d: ; 0x5659d
+SilphCo8TH2: ; 0x5659d
 	db $4 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d831 ; flag's byte
-	dw UnnamedText_56604 ; 0x6604 TextBeforeBattle
-	dw UnnamedText_5660e ; 0x660e TextAfterBattle
-	dw UnnamedText_56609 ; 0x6609 TextEndBattle
-	dw UnnamedText_56609 ; 0x6609 TextEndBattle
+	dw SilphCo8B4BattleTxt3 ; 0x6604 TextBeforeBattle
+	dw SilphCo8AfterBattleTxt3 ; 0x660e TextAfterBattle
+	dw SilphCo8EndBattleTxt3 ; 0x6609 TextEndBattle
+	dw SilphCo8EndBattleTxt3 ; 0x6609 TextEndBattle
 ; 0x565a9
 
 db $ff
@@ -42912,58 +42912,58 @@ SilphCo8Text2: ; 0x565c8
 
 SilphCo8Text3: ; 0x565d2
 	db $08 ; asm
-	ld hl, TrainerHeader_56591
+	ld hl, SilphCo8TH1
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 SilphCo8Text4: ; 0x565dc
 	db $08 ; asm
-	ld hl, TrainerHeader_5659d
+	ld hl, SilphCo8TH2
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_565e6: ; 0x565e6
-	TX_FAR _UnnamedText_565e6
+SilphCo8B4BattleTxt1: ; 0x565e6
+	TX_FAR _SilphCo8B4BattleTxt1
 	db $50
 ; 0x565e6 + 5 bytes
 
-UnnamedText_565eb: ; 0x565eb
-	TX_FAR _UnnamedText_565eb
+SilphCo8EndBattleTxt1: ; 0x565eb
+	TX_FAR _SilphCo8EndBattleTxt1
 	db $50
 ; 0x565eb + 5 bytes
 
-UnnamedText_565f0: ; 0x565f0
-	TX_FAR _UnnamedText_565f0
+SilphCo8AfterBattleTxt1: ; 0x565f0
+	TX_FAR _SilphCo8AfterBattleTxt1
 	db $50
 ; 0x565f0 + 5 bytes
 
-UnnamedText_565f5: ; 0x565f5
-	TX_FAR _UnnamedText_565f5
+SilphCo8B4BattleTxt2: ; 0x565f5
+	TX_FAR _SilphCo8B4BattleTxt2
 	db $50
 ; 0x565f5 + 5 bytes
 
-UnnamedText_565fa: ; 0x565fa
-	TX_FAR _UnnamedText_565fa
+SilphCo8EndBattleTxt2: ; 0x565fa
+	TX_FAR _SilphCo8EndBattleTxt2
 	db $50
 ; 0x565fa + 5 bytes
 
-UnnamedText_565ff: ; 0x565ff
-	TX_FAR _UnnamedText_565ff
+SilphCo8AfterBattleTxt2: ; 0x565ff
+	TX_FAR _SilphCo8AfterBattleTxt2
 	db $50
 ; 0x565ff + 5 bytes
 
-UnnamedText_56604: ; 0x56604
-	TX_FAR _UnnamedText_56604
+SilphCo8B4BattleTxt3: ; 0x56604
+	TX_FAR _SilphCo8B4BattleTxt3
 	db $50
 ; 0x56604 + 5 bytes
 
-UnnamedText_56609: ; 0x56609
-	TX_FAR _UnnamedText_56609
+SilphCo8EndBattleTxt3: ; 0x56609
+	TX_FAR _SilphCo8EndBattleTxt3
 	db $50
 ; 0x56609 + 5 bytes
 
-UnnamedText_5660e: ; 0x5660e
-	TX_FAR _UnnamedText_5660e
+SilphCo8AfterBattleTxt3: ; 0x5660e
+	TX_FAR _SilphCo8AfterBattleTxt3
 	db $50
 ; 0x5660e + 5 bytes
 
@@ -43580,60 +43580,60 @@ Route6TrainerHeader1: ; 0x590d7
 	db $1 ; flag's bit
 	db ($0 << 4) ; trainer's view range
 	dw $d7c9 ; flag's byte
-	dw UnnamedText_5912a ; 0x512a TextBeforeBattle
-	dw UnnamedText_59134 ; 0x5134 TextAfterBattle
-	dw UnnamedText_5912f ; 0x512f TextEndBattle
-	dw UnnamedText_5912f ; 0x512f TextEndBattle
+	dw Route6B4BattleTxt1 ; 0x512a TextBeforeBattle
+	dw Route6AfterBattleTxt1 ; 0x5134 TextAfterBattle
+	dw Route6EndBattleTxt1 ; 0x512f TextEndBattle
+	dw Route6EndBattleTxt1 ; 0x512f TextEndBattle
 ; 0x590e3
 
-TrainerHeader_590e3: ; 0x590e3
+Route6TH1: ; 0x590e3
 	db $2 ; flag's bit
 	db ($0 << 4) ; trainer's view range
 	dw $d7c9 ; flag's byte
-	dw UnnamedText_59143 ; 0x5143 TextBeforeBattle
-	dw UnnamedText_59134 ; 0x5134 TextAfterBattle
-	dw UnnamedText_59148 ; 0x5148 TextEndBattle
-	dw UnnamedText_59148 ; 0x5148 TextEndBattle
+	dw Route6B4BattleTxt2 ; 0x5143 TextBeforeBattle
+	dw Route6AfterBattleTxt1 ; 0x5134 TextAfterBattle
+	dw Route6EndBattleTxt2 ; 0x5148 TextEndBattle
+	dw Route6EndBattleTxt2 ; 0x5148 TextEndBattle
 ; 0x590ef
 
-TrainerHeader_590ef: ; 0x590ef
+Route6TH2: ; 0x590ef
 	db $3 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7c9 ; flag's byte
-	dw UnnamedText_59157 ; 0x5157 TextBeforeBattle
-	dw UnnamedText_59161 ; 0x5161 TextAfterBattle
-	dw UnnamedText_5915c ; 0x515c TextEndBattle
-	dw UnnamedText_5915c ; 0x515c TextEndBattle
+	dw Route6B4BattleTxt3 ; 0x5157 TextBeforeBattle
+	dw Route6AfterBattleTxt3 ; 0x5161 TextAfterBattle
+	dw Route6EndBattleTxt3 ; 0x515c TextEndBattle
+	dw Route6EndBattleTxt3 ; 0x515c TextEndBattle
 ; 0x590fb
 
-TrainerHeader_590fb: ; 0x590fb
+Route6TH3: ; 0x590fb
 	db $4 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7c9 ; flag's byte
-	dw UnnamedText_59170 ; 0x5170 TextBeforeBattle
-	dw UnnamedText_5917a ; 0x517a TextAfterBattle
-	dw UnnamedText_59175 ; 0x5175 TextEndBattle
-	dw UnnamedText_59175 ; 0x5175 TextEndBattle
+	dw Route6B4BattleTxt4 ; 0x5170 TextBeforeBattle
+	dw Route6AfterBattleTxt4 ; 0x517a TextAfterBattle
+	dw Route6EndBattleTxt4 ; 0x5175 TextEndBattle
+	dw Route6EndBattleTxt4 ; 0x5175 TextEndBattle
 ; 0x59107
 
-TrainerHeader_59107: ; 0x59107
+Route6TH4: ; 0x59107
 	db $5 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7c9 ; flag's byte
-	dw UnnamedText_59189 ; 0x5189 TextBeforeBattle
-	dw UnnamedText_59193 ; 0x5193 TextAfterBattle
-	dw UnnamedText_5918e ; 0x518e TextEndBattle
-	dw UnnamedText_5918e ; 0x518e TextEndBattle
+	dw Route6B4BattleTxt5 ; 0x5189 TextBeforeBattle
+	dw Route6AfterBattleTxt5 ; 0x5193 TextAfterBattle
+	dw Route6EndBattleTxt5 ; 0x518e TextEndBattle
+	dw Route6EndBattleTxt5 ; 0x518e TextEndBattle
 ; 0x59113
 
-TrainerHeader_59113: ; 0x59113
+Route6TH5: ; 0x59113
 	db $6 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7c9 ; flag's byte
-	dw UnnamedText_591a2 ; 0x51a2 TextBeforeBattle
-	dw UnnamedText_591ac ; 0x51ac TextAfterBattle
-	dw UnnamedText_591a7 ; 0x51a7 TextEndBattle
-	dw UnnamedText_591a7 ; 0x51a7 TextEndBattle
+	dw Route6B4BattleTxt6 ; 0x51a2 TextBeforeBattle
+	dw Route6AfterBattleTxt6 ; 0x51ac TextAfterBattle
+	dw Route6EndBattleTxt6 ; 0x51a7 TextEndBattle
+	dw Route6EndBattleTxt6 ; 0x51a7 TextEndBattle
 ; 0x5911e
 
 db $ff
@@ -43645,118 +43645,118 @@ Route6Text1: ; 0x59120
 	jp TextScriptEnd
 ; 0x5912a
 
-UnnamedText_5912a: ; 0x5912a
-	TX_FAR _UnnamedText_5912a
+Route6B4BattleTxt1: ; 0x5912a
+	TX_FAR _Route6B4BattleTxt1
 	db $50
 ; 0x5912a + 5 bytes
 
-UnnamedText_5912f: ; 0x5912f
-	TX_FAR _UnnamedText_5912f
+Route6EndBattleTxt1: ; 0x5912f
+	TX_FAR _Route6EndBattleTxt1
 	db $50
 ; 0x5912f + 5 bytes
 
-UnnamedText_59134: ; 0x59134
-	TX_FAR _UnnamedText_59134
+Route6AfterBattleTxt1: ; 0x59134
+	TX_FAR _Route6AfterBattleTxt1
 	db $50
 ; 0x59134 + 5 bytes
 
 Route6Text2: ; 0x59139
 	db $08 ; asm
-	ld hl, TrainerHeader_590e3
+	ld hl, Route6TH1
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_59143: ; 0x59143
-	TX_FAR _UnnamedText_59143
+Route6B4BattleTxt2: ; 0x59143
+	TX_FAR _Route6B4BattleTxt2
 	db $50
 ; 0x59143 + 5 bytes
 
-UnnamedText_59148: ; 0x59148
-	TX_FAR _UnnamedText_59148
+Route6EndBattleTxt2: ; 0x59148
+	TX_FAR _Route6EndBattleTxt2
 	db $50
 ; 0x59148 + 5 bytes
 
 Route6Text3: ; 0x5914d
 	db $08 ; asm
-	ld hl, TrainerHeader_590ef
+	ld hl, Route6TH2
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_59157: ; 0x59157
-	TX_FAR _UnnamedText_59157
+Route6B4BattleTxt3: ; 0x59157
+	TX_FAR _Route6B4BattleTxt3
 	db $50
 ; 0x59157 + 5 bytes
 
-UnnamedText_5915c: ; 0x5915c
-	TX_FAR _UnnamedText_5915c
+Route6EndBattleTxt3: ; 0x5915c
+	TX_FAR _Route6EndBattleTxt3
 	db $50
 ; 0x5915c + 5 bytes
 
-UnnamedText_59161: ; 0x59161
-	TX_FAR _UnnamedText_59161
+Route6AfterBattleTxt3: ; 0x59161
+	TX_FAR _Route6AfterBattleTxt3
 	db $50
 ; 0x59161 + 5 bytes
 
 Route6Text4: ; 0x59166
 	db $08 ; asm
-	ld hl, TrainerHeader_590fb
+	ld hl, Route6TH3
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_59170: ; 0x59170
-	TX_FAR _UnnamedText_59170
+Route6B4BattleTxt4: ; 0x59170
+	TX_FAR _Route6B4BattleTxt4
 	db $50
 ; 0x59170 + 5 bytes
 
-UnnamedText_59175: ; 0x59175
-	TX_FAR _UnnamedText_59175
+Route6EndBattleTxt4: ; 0x59175
+	TX_FAR _Route6EndBattleTxt4
 	db $50
 ; 0x59175 + 5 bytes
 
-UnnamedText_5917a: ; 0x5917a
-	TX_FAR _UnnamedText_5917a
+Route6AfterBattleTxt4: ; 0x5917a
+	TX_FAR _Route6AfterBattleTxt4
 	db $50
 ; 0x5917a + 5 bytes
 
 Route6Text5: ; 0x5917f
 	db $08 ; asm
-	ld hl, TrainerHeader_59107
+	ld hl, Route6TH4
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_59189: ; 0x59189
-	TX_FAR _UnnamedText_59189
+Route6B4BattleTxt5: ; 0x59189
+	TX_FAR _Route6B4BattleTxt5
 	db $50
 ; 0x59189 + 5 bytes
 
-UnnamedText_5918e: ; 0x5918e
-	TX_FAR _UnnamedText_5918e
+Route6EndBattleTxt5: ; 0x5918e
+	TX_FAR _Route6EndBattleTxt5
 	db $50
 ; 0x5918e + 5 bytes
 
-UnnamedText_59193: ; 0x59193
-	TX_FAR _UnnamedText_59193
+Route6AfterBattleTxt5: ; 0x59193
+	TX_FAR _Route6AfterBattleTxt5
 	db $50
 ; 0x59193 + 5 bytes
 
 Route6Text6: ; 0x59198
 	db $08 ; asm
-	ld hl, TrainerHeader_59113
+	ld hl, Route6TH5
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_591a2: ; 0x591a2
-	TX_FAR _UnnamedText_591a2
+Route6B4BattleTxt6: ; 0x591a2
+	TX_FAR _Route6B4BattleTxt6
 	db $50
 ; 0x591a2 + 5 bytes
 
-UnnamedText_591a7: ; 0x591a7
-	TX_FAR _UnnamedText_591a7
+Route6EndBattleTxt6: ; 0x591a7
+	TX_FAR _Route6EndBattleTxt6
 	db $50
 ; 0x591a7 + 5 bytes
 
-UnnamedText_591ac: ; 0x591ac
-	TX_FAR _UnnamedText_591ac
+Route6AfterBattleTxt6: ; 0x591ac
+	TX_FAR _Route6AfterBattleTxt6
 	db $50
 ; 0x591ac + 5 bytes
 
@@ -43785,90 +43785,90 @@ Route8TrainerHeader1: ; 0x591e3
 	db $1 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7cd ; flag's byte
-	dw UnnamedText_5925a ; 0x525a TextBeforeBattle
-	dw UnnamedText_59264 ; 0x5264 TextAfterBattle
-	dw UnnamedText_5925f ; 0x525f TextEndBattle
-	dw UnnamedText_5925f ; 0x525f TextEndBattle
+	dw Route8B4BattleTxt1 ; 0x525a TextBeforeBattle
+	dw Route8AfterBattleTxt1 ; 0x5264 TextAfterBattle
+	dw Route8EndBattleTxt1 ; 0x525f TextEndBattle
+	dw Route8EndBattleTxt1 ; 0x525f TextEndBattle
 ; 0x591ef
 
-TrainerHeader_591ef: ; 0x591ef
+Route8TH1: ; 0x591ef
 	db $2 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7cd ; flag's byte
-	dw UnnamedText_59273 ; 0x5273 TextBeforeBattle
-	dw UnnamedText_5927d ; 0x527d TextAfterBattle
-	dw UnnamedText_59278 ; 0x5278 TextEndBattle
-	dw UnnamedText_59278 ; 0x5278 TextEndBattle
+	dw Route8B4BattleTxt2 ; 0x5273 TextBeforeBattle
+	dw Route8AfterBattleTxt2 ; 0x527d TextAfterBattle
+	dw Route8EndBattleTxt2 ; 0x5278 TextEndBattle
+	dw Route8EndBattleTxt2 ; 0x5278 TextEndBattle
 ; 0x591fb
 
-TrainerHeader_591fb: ; 0x591fb
+Route8TH2: ; 0x591fb
 	db $3 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7cd ; flag's byte
-	dw UnnamedText_5928c ; 0x528c TextBeforeBattle
-	dw UnnamedText_59296 ; 0x5296 TextAfterBattle
-	dw UnnamedText_59291 ; 0x5291 TextEndBattle
-	dw UnnamedText_59291 ; 0x5291 TextEndBattle
+	dw Route8B4BattleTxt3 ; 0x528c TextBeforeBattle
+	dw Route8AfterBattleTxt3 ; 0x5296 TextAfterBattle
+	dw Route8EndBattleTxt3 ; 0x5291 TextEndBattle
+	dw Route8EndBattleTxt3 ; 0x5291 TextEndBattle
 ; 0x59207
 
-TrainerHeader_59207: ; 0x59207
+Route8TH3: ; 0x59207
 	db $4 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d7cd ; flag's byte
-	dw UnnamedText_592a5 ; 0x52a5 TextBeforeBattle
-	dw UnnamedText_592af ; 0x52af TextAfterBattle
-	dw UnnamedText_592aa ; 0x52aa TextEndBattle
-	dw UnnamedText_592aa ; 0x52aa TextEndBattle
+	dw Route8B4BattleTxt4 ; 0x52a5 TextBeforeBattle
+	dw Route8AfterBattleTxt4 ; 0x52af TextAfterBattle
+	dw Route8EndBattleTxt4 ; 0x52aa TextEndBattle
+	dw Route8EndBattleTxt4 ; 0x52aa TextEndBattle
 ; 0x59213
 
-TrainerHeader_59213: ; 0x59213
+Route8TH4: ; 0x59213
 	db $5 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7cd ; flag's byte
-	dw UnnamedText_592be ; 0x52be TextBeforeBattle
-	dw UnnamedText_592c8 ; 0x52c8 TextAfterBattle
-	dw UnnamedText_592c3 ; 0x52c3 TextEndBattle
-	dw UnnamedText_592c3 ; 0x52c3 TextEndBattle
+	dw Route8B4BattleTxt5 ; 0x52be TextBeforeBattle
+	dw Route8AfterBattleTxt5 ; 0x52c8 TextAfterBattle
+	dw Route8EndBattleTxt5 ; 0x52c3 TextEndBattle
+	dw Route8EndBattleTxt5 ; 0x52c3 TextEndBattle
 ; 0x5921f
 
-TrainerHeader_5921f: ; 0x5921f
+Route8TH5: ; 0x5921f
 	db $6 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7cd ; flag's byte
-	dw UnnamedText_592d7 ; 0x52d7 TextBeforeBattle
-	dw UnnamedText_592e1 ; 0x52e1 TextAfterBattle
-	dw UnnamedText_592dc ; 0x52dc TextEndBattle
-	dw UnnamedText_592dc ; 0x52dc TextEndBattle
+	dw Route8B4BattleTxt6 ; 0x52d7 TextBeforeBattle
+	dw Route8AfterBattleTxt6 ; 0x52e1 TextAfterBattle
+	dw Route8EndBattleTxt6 ; 0x52dc TextEndBattle
+	dw Route8EndBattleTxt6 ; 0x52dc TextEndBattle
 ; 0x5922b
 
-TrainerHeader_5922b: ; 0x5922b
+Route8TH6: ; 0x5922b
 	db $7 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d7cd ; flag's byte
-	dw UnnamedText_592f0 ; 0x52f0 TextBeforeBattle
-	dw UnnamedText_592fa ; 0x52fa TextAfterBattle
-	dw UnnamedText_592f5 ; 0x52f5 TextEndBattle
-	dw UnnamedText_592f5 ; 0x52f5 TextEndBattle
+	dw Route8B4BattleTxt7 ; 0x52f0 TextBeforeBattle
+	dw Route8AfterBattleTxt7 ; 0x52fa TextAfterBattle
+	dw Route8EndBattleTxt7 ; 0x52f5 TextEndBattle
+	dw Route8EndBattleTxt7 ; 0x52f5 TextEndBattle
 ; 0x59237
 
-TrainerHeader_59237: ; 0x59237
+Route8TH7: ; 0x59237
 	db $8 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d7cd ; flag's byte
-	dw UnnamedText_59309 ; 0x5309 TextBeforeBattle
-	dw UnnamedText_59313 ; 0x5313 TextAfterBattle
-	dw UnnamedText_5930e ; 0x530e TextEndBattle
-	dw UnnamedText_5930e ; 0x530e TextEndBattle
+	dw Route8B4BattleTxt8 ; 0x5309 TextBeforeBattle
+	dw Route8AfterBattleTxt8 ; 0x5313 TextAfterBattle
+	dw Route8EndBattleTxt8 ; 0x530e TextEndBattle
+	dw Route8EndBattleTxt8 ; 0x530e TextEndBattle
 ; 0x59243
 
-TrainerHeader_59243: ; 0x59243
+Route8TH8: ; 0x59243
 	db $9 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7cd ; flag's byte
-	dw UnnamedText_59322 ; 0x5322 TextBeforeBattle
-	dw UnnamedText_5932c ; 0x532c TextAfterBattle
-	dw UnnamedText_59327 ; 0x5327 TextEndBattle
-	dw UnnamedText_59327 ; 0x5327 TextEndBattle
+	dw Route8B4BattleTxt9 ; 0x5322 TextBeforeBattle
+	dw Route8AfterBattleTxt9 ; 0x532c TextAfterBattle
+	dw Route8EndBattleTxt9 ; 0x5327 TextEndBattle
+	dw Route8EndBattleTxt9 ; 0x5327 TextEndBattle
 ; 0x5924e
 
 db $ff
@@ -43880,186 +43880,186 @@ Route8Text1: ; 0x59250
 	jp TextScriptEnd
 ; 0x5925a
 
-UnnamedText_5925a: ; 0x5925a
-	TX_FAR _UnnamedText_5925a
+Route8B4BattleTxt1: ; 0x5925a
+	TX_FAR _Route8B4BattleTxt1
 	db $50
 ; 0x5925f
 
-UnnamedText_5925f: ; 0x5925f
-	TX_FAR _UnnamedText_5925f
+Route8EndBattleTxt1: ; 0x5925f
+	TX_FAR _Route8EndBattleTxt1
 	db $50
 ; 0x5925f + 5 bytes
 
-UnnamedText_59264: ; 0x59264
-	TX_FAR _UnnamedText_59264
+Route8AfterBattleTxt1: ; 0x59264
+	TX_FAR _Route8AfterBattleTxt1
 	db $50
 ; 0x59264 + 5 bytes
 
 Route8Text2: ; 0x59269
 	db $08 ; asm
-	ld hl, TrainerHeader_591ef
+	ld hl, Route8TH1
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_59273: ; 0x59273
-	TX_FAR _UnnamedText_59273
+Route8B4BattleTxt2: ; 0x59273
+	TX_FAR _Route8B4BattleTxt2
 	db $50
 ; 0x59273 + 5 bytes
 
-UnnamedText_59278: ; 0x59278
-	TX_FAR _UnnamedText_59278
+Route8EndBattleTxt2: ; 0x59278
+	TX_FAR _Route8EndBattleTxt2
 	db $50
 ; 0x59278 + 5 bytes
 
-UnnamedText_5927d: ; 0x5927d
-	TX_FAR _UnnamedText_5927d
+Route8AfterBattleTxt2: ; 0x5927d
+	TX_FAR _Route8AfterBattleTxt2
 	db $50
 ; 0x5927d + 5 bytes
 
 Route8Text3: ; 0x59282
 	db $08 ; asm
-	ld hl, TrainerHeader_591fb
+	ld hl, Route8TH2
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_5928c: ; 0x5928c
-	TX_FAR _UnnamedText_5928c
+Route8B4BattleTxt3: ; 0x5928c
+	TX_FAR _Route8B4BattleTxt3
 	db $50
 ; 0x5928c + 5 bytes
 
-UnnamedText_59291: ; 0x59291
-	TX_FAR _UnnamedText_59291
+Route8EndBattleTxt3: ; 0x59291
+	TX_FAR _Route8EndBattleTxt3
 	db $50
 ; 0x59291 + 5 bytes
 
-UnnamedText_59296: ; 0x59296
-	TX_FAR _UnnamedText_59296
+Route8AfterBattleTxt3: ; 0x59296
+	TX_FAR _Route8AfterBattleTxt3
 	db $50
 ; 0x59296 + 5 bytes
 
 Route8Text4: ; 0x5929b
 	db $08 ; asm
-	ld hl, TrainerHeader_59207
+	ld hl, Route8TH3
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_592a5: ; 0x592a5
-	TX_FAR _UnnamedText_592a5
+Route8B4BattleTxt4: ; 0x592a5
+	TX_FAR _Route8B4BattleTxt4
 	db $50
 ; 0x592a5 + 5 bytes
 
-UnnamedText_592aa: ; 0x592aa
-	TX_FAR _UnnamedText_592aa
+Route8EndBattleTxt4: ; 0x592aa
+	TX_FAR _Route8EndBattleTxt4
 	db $50
 ; 0x592aa + 5 bytes
 
-UnnamedText_592af: ; 0x592af
-	TX_FAR _UnnamedText_592af
+Route8AfterBattleTxt4: ; 0x592af
+	TX_FAR _Route8AfterBattleTxt4
 	db $50
 ; 0x592af + 5 bytes
 
 Route8Text5: ; 0x592b4
 	db $08 ; asm
-	ld hl, TrainerHeader_59213
+	ld hl, Route8TH4
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_592be: ; 0x592be
-	TX_FAR _UnnamedText_592be
+Route8B4BattleTxt5: ; 0x592be
+	TX_FAR _Route8B4BattleTxt5
 	db $50
 ; 0x592be + 5 bytes
 
-UnnamedText_592c3: ; 0x592c3
-	TX_FAR _UnnamedText_592c3
+Route8EndBattleTxt5: ; 0x592c3
+	TX_FAR _Route8EndBattleTxt5
 	db $50
 ; 0x592c3 + 5 bytes
 
-UnnamedText_592c8: ; 0x592c8
-	TX_FAR _UnnamedText_592c8
+Route8AfterBattleTxt5: ; 0x592c8
+	TX_FAR _Route8AfterBattleTxt5
 	db $50
 ; 0x592c8 + 5 bytes
 
 Route8Text6: ; 0x592cd
 	db $08 ; asm
-	ld hl, TrainerHeader_5921f
+	ld hl, Route8TH5
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_592d7: ; 0x592d7
-	TX_FAR _UnnamedText_592d7
+Route8B4BattleTxt6: ; 0x592d7
+	TX_FAR _Route8B4BattleTxt6
 	db $50
 ; 0x592d7 + 5 bytes
 
-UnnamedText_592dc: ; 0x592dc
-	TX_FAR _UnnamedText_592dc
+Route8EndBattleTxt6: ; 0x592dc
+	TX_FAR _Route8EndBattleTxt6
 	db $50
 ; 0x592dc + 5 bytes
 
-UnnamedText_592e1: ; 0x592e1
-	TX_FAR _UnnamedText_592e1
+Route8AfterBattleTxt6: ; 0x592e1
+	TX_FAR _Route8AfterBattleTxt6
 	db $50
 ; 0x592e1 + 5 bytes
 
 Route8Text7: ; 0x592e6
 	db $08 ; asm
-	ld hl, TrainerHeader_5922b
+	ld hl, Route8TH6
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_592f0: ; 0x592f0
-	TX_FAR _UnnamedText_592f0
+Route8B4BattleTxt7: ; 0x592f0
+	TX_FAR _Route8B4BattleTxt7
 	db $50
 ; 0x592f0 + 5 bytes
 
-UnnamedText_592f5: ; 0x592f5
-	TX_FAR _UnnamedText_592f5
+Route8EndBattleTxt7: ; 0x592f5
+	TX_FAR _Route8EndBattleTxt7
 	db $50
 ; 0x592f5 + 5 bytes
 
-UnnamedText_592fa: ; 0x592fa
-	TX_FAR _UnnamedText_592fa
+Route8AfterBattleTxt7: ; 0x592fa
+	TX_FAR _Route8AfterBattleTxt7
 	db $50
 ; 0x592fa + 5 bytes
 
 Route8Text8: ; 0x592ff
 	db $08 ; asm
-	ld hl, TrainerHeader_59237
+	ld hl, Route8TH7
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_59309: ; 0x59309
-	TX_FAR _UnnamedText_59309
+Route8B4BattleTxt8: ; 0x59309
+	TX_FAR _Route8B4BattleTxt8
 	db $50
 ; 0x59309 + 5 bytes
 
-UnnamedText_5930e: ; 0x5930e
-	TX_FAR _UnnamedText_5930e
+Route8EndBattleTxt8: ; 0x5930e
+	TX_FAR _Route8EndBattleTxt8
 	db $50
 ; 0x5930e + 5 bytes
 
-UnnamedText_59313: ; 0x59313
-	TX_FAR _UnnamedText_59313
+Route8AfterBattleTxt8: ; 0x59313
+	TX_FAR _Route8AfterBattleTxt8
 	db $50
 ; 0x59313 + 5 bytes
 
 Route8Text9: ; 0x59318
 	db $08 ; asm
-	ld hl, TrainerHeader_59243
+	ld hl, Route8TH8
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_59322: ; 0x59322
-	TX_FAR _UnnamedText_59322
+Route8B4BattleTxt9: ; 0x59322
+	TX_FAR _Route8B4BattleTxt9
 	db $50
 ; 0x59322 + 5 bytes
 
-UnnamedText_59327: ; 0x59327
-	TX_FAR _UnnamedText_59327
+Route8EndBattleTxt9: ; 0x59327
+	TX_FAR _Route8EndBattleTxt9
 	db $50
 ; 0x59327 + 5 bytes
 
-UnnamedText_5932c: ; 0x5932c
-	TX_FAR _UnnamedText_5932c
+Route8AfterBattleTxt9: ; 0x5932c
+	TX_FAR _Route8AfterBattleTxt9
 	db $50
 ; 0x5932c + 5 bytes
 
@@ -44088,60 +44088,60 @@ Route10TrainerHeader1: ; 0x59363
 	db $1 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7d1 ; flag's byte
-	dw UnnamedText_593b6 ; 0x53b6 TextBeforeBattle
-	dw UnnamedText_593c0 ; 0x53c0 TextAfterBattle
-	dw UnnamedText_593bb ; 0x53bb TextEndBattle
-	dw UnnamedText_593bb ; 0x53bb TextEndBattle
+	dw Route10B4BattleTxt1 ; 0x53b6 TextBeforeBattle
+	dw Route10AfterBattleTxt1 ; 0x53c0 TextAfterBattle
+	dw Route10EndBattleTxt1 ; 0x53bb TextEndBattle
+	dw Route10EndBattleTxt1 ; 0x53bb TextEndBattle
 ; 0x5936f
 
-TrainerHeader_5936f: ; 0x5936f
+Route10TH1: ; 0x5936f
 	db $2 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7d1 ; flag's byte
-	dw UnnamedText_593cf ; 0x53cf TextBeforeBattle
-	dw UnnamedText_593d9 ; 0x53d9 TextAfterBattle
-	dw UnnamedText_593d4 ; 0x53d4 TextEndBattle
-	dw UnnamedText_593d4 ; 0x53d4 TextEndBattle
+	dw Route10B4BattleTxt2 ; 0x53cf TextBeforeBattle
+	dw Route10AfterBattleTxt2 ; 0x53d9 TextAfterBattle
+	dw Route10EndBattleTxt2 ; 0x53d4 TextEndBattle
+	dw Route10EndBattleTxt2 ; 0x53d4 TextEndBattle
 ; 0x5937b
 
-TrainerHeader_5937b: ; 0x5937b
+Route10TH2: ; 0x5937b
 	db $3 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7d1 ; flag's byte
-	dw UnnamedText_593e8 ; 0x53e8 TextBeforeBattle
-	dw UnnamedText_593f2 ; 0x53f2 TextAfterBattle
-	dw UnnamedText_593ed ; 0x53ed TextEndBattle
-	dw UnnamedText_593ed ; 0x53ed TextEndBattle
+	dw Route10B4BattleTxt3 ; 0x53e8 TextBeforeBattle
+	dw Route10AfterBattleTxt3 ; 0x53f2 TextAfterBattle
+	dw Route10EndBattleTxt3 ; 0x53ed TextEndBattle
+	dw Route10EndBattleTxt3 ; 0x53ed TextEndBattle
 ; 0x59387
 
-TrainerHeader_59387: ; 0x59387
+Route10TH3: ; 0x59387
 	db $4 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7d1 ; flag's byte
-	dw UnnamedText_59401 ; 0x5401 TextBeforeBattle
-	dw UnnamedText_5940b ; 0x540b TextAfterBattle
-	dw UnnamedText_59406 ; 0x5406 TextEndBattle
-	dw UnnamedText_59406 ; 0x5406 TextEndBattle
+	dw Route10B4BattleTxt4 ; 0x5401 TextBeforeBattle
+	dw Route10AfterBattleTxt4 ; 0x540b TextAfterBattle
+	dw Route10EndBattleTxt4 ; 0x5406 TextEndBattle
+	dw Route10EndBattleTxt4 ; 0x5406 TextEndBattle
 ; 0x59393
 
-TrainerHeader_59393: ; 0x59393
+Route10TH4: ; 0x59393
 	db $5 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d7d1 ; flag's byte
-	dw UnnamedText_5941a ; 0x541a TextBeforeBattle
-	dw UnnamedText_59424 ; 0x5424 TextAfterBattle
-	dw UnnamedText_5941f ; 0x541f TextEndBattle
-	dw UnnamedText_5941f ; 0x541f TextEndBattle
+	dw Route10B4BattleTxt5 ; 0x541a TextBeforeBattle
+	dw Route10AfterBattleTxt5 ; 0x5424 TextAfterBattle
+	dw Route10EndBattleTxt5 ; 0x541f TextEndBattle
+	dw Route10EndBattleTxt5 ; 0x541f TextEndBattle
 ; 0x5939f
 
-TrainerHeader_5939f: ; 0x5939f
+Route10TH5: ; 0x5939f
 	db $6 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d7d1 ; flag's byte
-	dw UnnamedText_59433 ; 0x5433 TextBeforeBattle
-	dw UnnamedText_5943d ; 0x543d TextAfterBattle
-	dw UnnamedText_59438 ; 0x5438 TextEndBattle
-	dw UnnamedText_59438 ; 0x5438 TextEndBattle
+	dw Route10B4BattleTxt6 ; 0x5433 TextBeforeBattle
+	dw Route10AfterBattleTxt6 ; 0x543d TextAfterBattle
+	dw Route10EndBattleTxt6 ; 0x5438 TextEndBattle
+	dw Route10EndBattleTxt6 ; 0x5438 TextEndBattle
 ; 0x593ab
 
 db $ff
@@ -44152,123 +44152,123 @@ Route10Text1: ; 0x593ac
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_593b6: ; 0x593b6
-	TX_FAR _UnnamedText_593b6
+Route10B4BattleTxt1: ; 0x593b6
+	TX_FAR _Route10B4BattleTxt1
 	db $50
 ; 0x593b6 + 5 bytes
 
-UnnamedText_593bb: ; 0x593bb
-	TX_FAR _UnnamedText_593bb
+Route10EndBattleTxt1: ; 0x593bb
+	TX_FAR _Route10EndBattleTxt1
 	db $50
 ; 0x593bb + 5 bytes
 
-UnnamedText_593c0: ; 0x593c0
-	TX_FAR _UnnamedText_593c0
+Route10AfterBattleTxt1: ; 0x593c0
+	TX_FAR _Route10AfterBattleTxt1
 	db $50
 ; 0x593c0 + 5 bytes
 
 Route10Text2: ; 0x593c5
 	db $08 ; asm
-	ld hl, TrainerHeader_5936f
+	ld hl, Route10TH1
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_593cf: ; 0x593cf
-	TX_FAR _UnnamedText_593cf
+Route10B4BattleTxt2: ; 0x593cf
+	TX_FAR _Route10B4BattleTxt2
 	db $50
 ; 0x593cf + 5 bytes
 
-UnnamedText_593d4: ; 0x593d4
-	TX_FAR _UnnamedText_593d4
+Route10EndBattleTxt2: ; 0x593d4
+	TX_FAR _Route10EndBattleTxt2
 	db $50
 ; 0x593d4 + 5 bytes
 
-UnnamedText_593d9: ; 0x593d9
-	TX_FAR _UnnamedText_593d9
+Route10AfterBattleTxt2: ; 0x593d9
+	TX_FAR _Route10AfterBattleTxt2
 	db $50
 ; 0x593d9 + 5 bytes
 
 Route10Text3: ; 0x593de
 	db $08 ; asm
-	ld hl, TrainerHeader_5937b
+	ld hl, Route10TH2
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_593e8: ; 0x593e8
-	TX_FAR _UnnamedText_593e8
+Route10B4BattleTxt3: ; 0x593e8
+	TX_FAR _Route10B4BattleTxt3
 	db $50
 ; 0x593e8 + 5 bytes
 
-UnnamedText_593ed: ; 0x593ed
-	TX_FAR _UnnamedText_593ed
+Route10EndBattleTxt3: ; 0x593ed
+	TX_FAR _Route10EndBattleTxt3
 	db $50
 ; 0x593ed + 5 bytes
 
-UnnamedText_593f2: ; 0x593f2
-	TX_FAR _UnnamedText_593f2
+Route10AfterBattleTxt3: ; 0x593f2
+	TX_FAR _Route10AfterBattleTxt3
 	db $50
 ; 0x593f2 + 5 bytes
 
 Route10Text4: ; 0x593f7
 	db $08 ; asm
-	ld hl, TrainerHeader_59387
+	ld hl, Route10TH3
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_59401: ; 0x59401
-	TX_FAR _UnnamedText_59401
+Route10B4BattleTxt4: ; 0x59401
+	TX_FAR _Route10B4BattleTxt4
 	db $50
 ; 0x59401 + 5 bytes
 
-UnnamedText_59406: ; 0x59406
-	TX_FAR _UnnamedText_59406
+Route10EndBattleTxt4: ; 0x59406
+	TX_FAR _Route10EndBattleTxt4
 	db $50
 ; 0x59406 + 5 bytes
 
-UnnamedText_5940b: ; 0x5940b
-	TX_FAR _UnnamedText_5940b
+Route10AfterBattleTxt4: ; 0x5940b
+	TX_FAR _Route10AfterBattleTxt4
 	db $50
 ; 0x5940b + 5 bytes
 
 Route10Text5: ; 0x59410
 	db $08 ; asm
-	ld hl, TrainerHeader_59393
+	ld hl, Route10TH4
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_5941a: ; 0x5941a
-	TX_FAR _UnnamedText_5941a
+Route10B4BattleTxt5: ; 0x5941a
+	TX_FAR _Route10B4BattleTxt5
 	db $50
 ; 0x5941a + 5 bytes
 
-UnnamedText_5941f: ; 0x5941f
-	TX_FAR _UnnamedText_5941f
+Route10EndBattleTxt5: ; 0x5941f
+	TX_FAR _Route10EndBattleTxt5
 	db $50
 ; 0x5941f + 5 bytes
 
-UnnamedText_59424: ; 0x59424
-	TX_FAR _UnnamedText_59424
+Route10AfterBattleTxt5: ; 0x59424
+	TX_FAR _Route10AfterBattleTxt5
 	db $50
 ; 0x59424 + 5 bytes
 
 Route10Text6: ; 0x59429
 	db $08 ; asm
-	ld hl, TrainerHeader_5939f
+	ld hl, Route10TH5
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_59433: ; 0x59433
-	TX_FAR _UnnamedText_59433
+Route10B4BattleTxt6: ; 0x59433
+	TX_FAR _Route10B4BattleTxt6
 	db $50
 ; 0x59433 + 5 bytes
 
-UnnamedText_59438: ; 0x59438
-	TX_FAR _UnnamedText_59438
+Route10EndBattleTxt6: ; 0x59438
+	TX_FAR _Route10EndBattleTxt6
 	db $50
 ; 0x59438 + 5 bytes
 
-UnnamedText_5943d: ; 0x5943d
-	TX_FAR _UnnamedText_5943d
+Route10AfterBattleTxt6: ; 0x5943d
+	TX_FAR _Route10AfterBattleTxt6
 	db $50
 ; 0x5943d + 5 bytes
 
@@ -44302,100 +44302,100 @@ Route11TrainerHeader1: ; 0x5947b
 	db $1 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7d5 ; flag's byte
-	dw UnnamedText_594fe ; 0x54fe TextBeforeBattle
-	dw UnnamedText_59508 ; 0x5508 TextAfterBattle
-	dw UnnamedText_59503 ; 0x5503 TextEndBattle
-	dw UnnamedText_59503 ; 0x5503 TextEndBattle
+	dw Route11B4BattleTxt1 ; 0x54fe TextBeforeBattle
+	dw Route11AfterBattleTxt1 ; 0x5508 TextAfterBattle
+	dw Route11EndBattleTxt1 ; 0x5503 TextEndBattle
+	dw Route11EndBattleTxt1 ; 0x5503 TextEndBattle
 ; 0x59487
 
-TrainerHeader_59487: ; 0x59487
+Route11TH1: ; 0x59487
 	db $2 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d7d5 ; flag's byte
-	dw UnnamedText_59517 ; 0x5517 TextBeforeBattle
-	dw UnnamedText_59521 ; 0x5521 TextAfterBattle
-	dw UnnamedText_5951c ; 0x551c TextEndBattle
-	dw UnnamedText_5951c ; 0x551c TextEndBattle
+	dw Route11B4BattleTxt2 ; 0x5517 TextBeforeBattle
+	dw Route11AfterBattleTxt2 ; 0x5521 TextAfterBattle
+	dw Route11EndBattleTxt2 ; 0x551c TextEndBattle
+	dw Route11EndBattleTxt2 ; 0x551c TextEndBattle
 ; 0x59493
 
-TrainerHeader_59493: ; 0x59493
+Route11TH2: ; 0x59493
 	db $3 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7d5 ; flag's byte
-	dw UnnamedText_59530 ; 0x5530 TextBeforeBattle
-	dw UnnamedText_5953a ; 0x553a TextAfterBattle
-	dw UnnamedText_59535 ; 0x5535 TextEndBattle
-	dw UnnamedText_59535 ; 0x5535 TextEndBattle
+	dw Route11B4BattleTxt3 ; 0x5530 TextBeforeBattle
+	dw Route11AfterBattleTxt3 ; 0x553a TextAfterBattle
+	dw Route11EndBattleTxt3 ; 0x5535 TextEndBattle
+	dw Route11EndBattleTxt3 ; 0x5535 TextEndBattle
 ; 0x5949f
 
-TrainerHeader_5949f: ; 0x5949f
+Route11TH3: ; 0x5949f
 	db $4 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7d5 ; flag's byte
-	dw UnnamedText_59549 ; 0x5549 TextBeforeBattle
-	dw UnnamedText_59553 ; 0x5553 TextAfterBattle
-	dw UnnamedText_5954e ; 0x554e TextEndBattle
-	dw UnnamedText_5954e ; 0x554e TextEndBattle
+	dw Route11B4BattleTxt4 ; 0x5549 TextBeforeBattle
+	dw Route11AfterBattleTxt4 ; 0x5553 TextAfterBattle
+	dw Route11EndBattleTxt4 ; 0x554e TextEndBattle
+	dw Route11EndBattleTxt4 ; 0x554e TextEndBattle
 ; 0x594ab
 
-TrainerHeader_594ab: ; 0x594ab
+Route11TH4: ; 0x594ab
 	db $5 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7d5 ; flag's byte
-	dw UnnamedText_59562 ; 0x5562 TextBeforeBattle
-	dw UnnamedText_5956c ; 0x556c TextAfterBattle
-	dw UnnamedText_59567 ; 0x5567 TextEndBattle
-	dw UnnamedText_59567 ; 0x5567 TextEndBattle
+	dw Route11B4BattleTxt5 ; 0x5562 TextBeforeBattle
+	dw Route11AfterBattleTxt5 ; 0x556c TextAfterBattle
+	dw Route11EndBattleTxt5 ; 0x5567 TextEndBattle
+	dw Route11EndBattleTxt5 ; 0x5567 TextEndBattle
 ; 0x594b7
 
-TrainerHeader_594b7: ; 0x594b7
+Route11TH5: ; 0x594b7
 	db $6 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7d5 ; flag's byte
-	dw UnnamedText_5957b ; 0x557b TextBeforeBattle
-	dw UnnamedText_59585 ; 0x5585 TextAfterBattle
-	dw UnnamedText_59580 ; 0x5580 TextEndBattle
-	dw UnnamedText_59580 ; 0x5580 TextEndBattle
+	dw Route11B4BattleTxt6 ; 0x557b TextBeforeBattle
+	dw Route11AfterBattleTxt6 ; 0x5585 TextAfterBattle
+	dw Route11EndBattleTxt6 ; 0x5580 TextEndBattle
+	dw Route11EndBattleTxt6 ; 0x5580 TextEndBattle
 ; 0x594c3
 
-TrainerHeader_594c3: ; 0x594c3
+Route11TH6: ; 0x594c3
 	db $7 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7d5 ; flag's byte
-	dw UnnamedText_59594 ; 0x5594 TextBeforeBattle
-	dw UnnamedText_5959e ; 0x559e TextAfterBattle
-	dw UnnamedText_59599 ; 0x5599 TextEndBattle
-	dw UnnamedText_59599 ; 0x5599 TextEndBattle
+	dw Route11B4BattleTxt7 ; 0x5594 TextBeforeBattle
+	dw Route11AfterBattleTxt7 ; 0x559e TextAfterBattle
+	dw Route11EndBattleTxt7 ; 0x5599 TextEndBattle
+	dw Route11EndBattleTxt7 ; 0x5599 TextEndBattle
 ; 0x594cf
 
-TrainerHeader_594cf: ; 0x594cf
+Route11TH7: ; 0x594cf
 	db $8 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7d5 ; flag's byte
-	dw UnnamedText_595ad ; 0x55ad TextBeforeBattle
-	dw UnnamedText_595b7 ; 0x55b7 TextAfterBattle
-	dw UnnamedText_595b2 ; 0x55b2 TextEndBattle
-	dw UnnamedText_595b2 ; 0x55b2 TextEndBattle
+	dw Route11B4BattleTxt8 ; 0x55ad TextBeforeBattle
+	dw Route11AfterBattleTxt8 ; 0x55b7 TextAfterBattle
+	dw Route11EndBattleTxt8 ; 0x55b2 TextEndBattle
+	dw Route11EndBattleTxt8 ; 0x55b2 TextEndBattle
 ; 0x594db
 
-TrainerHeader_594db: ; 0x594db
+Route11TH8: ; 0x594db
 	db $9 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7d5 ; flag's byte
-	dw UnnamedText_595c6 ; 0x55c6 TextBeforeBattle
-	dw UnnamedText_595d0 ; 0x55d0 TextAfterBattle
-	dw UnnamedText_595cb ; 0x55cb TextEndBattle
-	dw UnnamedText_595cb ; 0x55cb TextEndBattle
+	dw Route11B4BattleTxt9 ; 0x55c6 TextBeforeBattle
+	dw Route11AfterBattleTxt9 ; 0x55d0 TextAfterBattle
+	dw Route11EndBattleTxt9 ; 0x55cb TextEndBattle
+	dw Route11EndBattleTxt9 ; 0x55cb TextEndBattle
 ; 0x594e7
 
-TrainerHeader_594e7: ; 0x594e7
+Route11TH9: ; 0x594e7
 	db $a ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7d5 ; flag's byte
-	dw UnnamedText_595df ; 0x55df TextBeforeBattle
-	dw UnnamedText_595e9 ; 0x55e9 TextAfterBattle
-	dw UnnamedText_595e4 ; 0x55e4 TextEndBattle
-	dw UnnamedText_595e4 ; 0x55e4 TextEndBattle
+	dw Route11B4BattleTxt10 ; 0x55df TextBeforeBattle
+	dw Route11AfterBattleTxt10 ; 0x55e9 TextAfterBattle
+	dw Route11EndBattleTxt10 ; 0x55e4 TextEndBattle
+	dw Route11EndBattleTxt10 ; 0x55e4 TextEndBattle
 ; 0x594f3
 
 db $ff
@@ -44407,207 +44407,207 @@ UnnamedText_594f4: ; 0x594f4
 	jp TextScriptEnd
 ; 0x594fe
 
-UnnamedText_594fe: ; 0x594fe
-	TX_FAR _UnnamedText_594fe
+Route11B4BattleTxt1: ; 0x594fe
+	TX_FAR _Route11B4BattleTxt1
 	db $50
 ; 0x594fe + 5 bytes
 
-UnnamedText_59503: ; 0x59503
-	TX_FAR _UnnamedText_59503
+Route11EndBattleTxt1: ; 0x59503
+	TX_FAR _Route11EndBattleTxt1
 	db $50
 ; 0x59503 + 5 bytes
 
-UnnamedText_59508: ; 0x59508
-	TX_FAR _UnnamedText_59508
+Route11AfterBattleTxt1: ; 0x59508
+	TX_FAR _Route11AfterBattleTxt1
 	db $50
 ; 0x59508 + 5 bytes
 
 Route11Text2: ; 0x5950d
 	db $08 ; asm
-	ld hl, TrainerHeader_59487
+	ld hl, Route11TH1
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_59517: ; 0x59517
-	TX_FAR _UnnamedText_59517
+Route11B4BattleTxt2: ; 0x59517
+	TX_FAR _Route11B4BattleTxt2
 	db $50
 ; 0x59517 + 5 bytes
 
-UnnamedText_5951c: ; 0x5951c
-	TX_FAR _UnnamedText_5951c
+Route11EndBattleTxt2: ; 0x5951c
+	TX_FAR _Route11EndBattleTxt2
 	db $50
 ; 0x5951c + 5 bytes
 
-UnnamedText_59521: ; 0x59521
-	TX_FAR _UnnamedText_59521
+Route11AfterBattleTxt2: ; 0x59521
+	TX_FAR _Route11AfterBattleTxt2
 	db $50
 ; 0x59521 + 5 bytes
 
 Route11Text3: ; 0x59526
 	db $08 ; asm
-	ld hl, TrainerHeader_59493
+	ld hl, Route11TH2
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_59530: ; 0x59530
-	TX_FAR _UnnamedText_59530
+Route11B4BattleTxt3: ; 0x59530
+	TX_FAR _Route11B4BattleTxt3
 	db $50
 ; 0x59530 + 5 bytes
 
-UnnamedText_59535: ; 0x59535
-	TX_FAR _UnnamedText_59535
+Route11EndBattleTxt3: ; 0x59535
+	TX_FAR _Route11EndBattleTxt3
 	db $50
 ; 0x59535 + 5 bytes
 
-UnnamedText_5953a: ; 0x5953a
-	TX_FAR _UnnamedText_5953a
+Route11AfterBattleTxt3: ; 0x5953a
+	TX_FAR _Route11AfterBattleTxt3
 	db $50
 ; 0x5953a + 5 bytes
 
 Route11Text4: ; 0x5953f
 	db $08 ; asm
-	ld hl, TrainerHeader_5949f
+	ld hl, Route11TH3
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_59549: ; 0x59549
-	TX_FAR _UnnamedText_59549
+Route11B4BattleTxt4: ; 0x59549
+	TX_FAR _Route11B4BattleTxt4
 	db $50
 ; 0x59549 + 5 bytes
 
-UnnamedText_5954e: ; 0x5954e
-	TX_FAR _UnnamedText_5954e
+Route11EndBattleTxt4: ; 0x5954e
+	TX_FAR _Route11EndBattleTxt4
 	db $50
 ; 0x5954e + 5 bytes
 
-UnnamedText_59553: ; 0x59553
-	TX_FAR _UnnamedText_59553
+Route11AfterBattleTxt4: ; 0x59553
+	TX_FAR _Route11AfterBattleTxt4
 	db $50
 ; 0x59553 + 5 bytes
 
 Route11Text5: ; 0x59558
 	db $08 ; asm
-	ld hl, TrainerHeader_594ab
+	ld hl, Route11TH4
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_59562: ; 0x59562
-	TX_FAR _UnnamedText_59562
+Route11B4BattleTxt5: ; 0x59562
+	TX_FAR _Route11B4BattleTxt5
 	db $50
 ; 0x59562 + 5 bytes
 
-UnnamedText_59567: ; 0x59567
-	TX_FAR _UnnamedText_59567
+Route11EndBattleTxt5: ; 0x59567
+	TX_FAR _Route11EndBattleTxt5
 	db $50
 ; 0x59567 + 5 bytes
 
-UnnamedText_5956c: ; 0x5956c
-	TX_FAR _UnnamedText_5956c
+Route11AfterBattleTxt5: ; 0x5956c
+	TX_FAR _Route11AfterBattleTxt5
 	db $50
 ; 0x5956c + 5 bytes
 
 Route11Text6: ; 0x59571
 	db $08 ; asm
-	ld hl, TrainerHeader_594b7
+	ld hl, Route11TH5
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_5957b: ; 0x5957b
-	TX_FAR _UnnamedText_5957b
+Route11B4BattleTxt6: ; 0x5957b
+	TX_FAR _Route11B4BattleTxt6
 	db $50
 ; 0x5957b + 5 bytes
 
-UnnamedText_59580: ; 0x59580
-	TX_FAR _UnnamedText_59580
+Route11EndBattleTxt6: ; 0x59580
+	TX_FAR _Route11EndBattleTxt6
 	db $50
 ; 0x59580 + 5 bytes
 
-UnnamedText_59585: ; 0x59585
-	TX_FAR _UnnamedText_59585
+Route11AfterBattleTxt6: ; 0x59585
+	TX_FAR _Route11AfterBattleTxt6
 	db $50
 ; 0x59585 + 5 bytes
 
 Route11Text7: ; 0x5958a
 	db $08 ; asm
-	ld hl, TrainerHeader_594c3
+	ld hl, Route11TH6
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_59594: ; 0x59594
-	TX_FAR _UnnamedText_59594
+Route11B4BattleTxt7: ; 0x59594
+	TX_FAR _Route11B4BattleTxt7
 	db $50
 ; 0x59594 + 5 bytes
 
-UnnamedText_59599: ; 0x59599
-	TX_FAR _UnnamedText_59599
+Route11EndBattleTxt7: ; 0x59599
+	TX_FAR _Route11EndBattleTxt7
 	db $50
 ; 0x59599 + 5 bytes
 
-UnnamedText_5959e: ; 0x5959e
-	TX_FAR _UnnamedText_5959e
+Route11AfterBattleTxt7: ; 0x5959e
+	TX_FAR _Route11AfterBattleTxt7
 	db $50
 ; 0x5959e + 5 bytes
 
 Route11Text8: ; 0x595a3
 	db $08 ; asm
-	ld hl, TrainerHeader_594cf
+	ld hl, Route11TH7
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_595ad: ; 0x595ad
-	TX_FAR _UnnamedText_595ad
+Route11B4BattleTxt8: ; 0x595ad
+	TX_FAR _Route11B4BattleTxt8
 	db $50
 ; 0x595ad + 5 bytes
 
-UnnamedText_595b2: ; 0x595b2
-	TX_FAR _UnnamedText_595b2
+Route11EndBattleTxt8: ; 0x595b2
+	TX_FAR _Route11EndBattleTxt8
 	db $50
 ; 0x595b2 + 5 bytes
 
-UnnamedText_595b7: ; 0x595b7
-	TX_FAR _UnnamedText_595b7
+Route11AfterBattleTxt8: ; 0x595b7
+	TX_FAR _Route11AfterBattleTxt8
 	db $50
 ; 0x595b7 + 5 bytes
 
 Route11Text9: ; 0x595bc
 	db $08 ; asm
-	ld hl, TrainerHeader_594db
+	ld hl, Route11TH8
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_595c6: ; 0x595c6
-	TX_FAR _UnnamedText_595c6
+Route11B4BattleTxt9: ; 0x595c6
+	TX_FAR _Route11B4BattleTxt9
 	db $50
 ; 0x595c6 + 5 bytes
 
-UnnamedText_595cb: ; 0x595cb
-	TX_FAR _UnnamedText_595cb
+Route11EndBattleTxt9: ; 0x595cb
+	TX_FAR _Route11EndBattleTxt9
 	db $50
 ; 0x595cb + 5 bytes
 
-UnnamedText_595d0: ; 0x595d0
-	TX_FAR _UnnamedText_595d0
+Route11AfterBattleTxt9: ; 0x595d0
+	TX_FAR _Route11AfterBattleTxt9
 	db $50
 ; 0x595d0 + 5 bytes
 
 Route11Text10: ; 0x595d5
 	db $08 ; asm
-	ld hl, TrainerHeader_594e7
+	ld hl, Route11TH9
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_595df: ; 0x595df
-	TX_FAR _UnnamedText_595df
+Route11B4BattleTxt10: ; 0x595df
+	TX_FAR _Route11B4BattleTxt10
 	db $50
 ; 0x595df + 5 bytes
 
-UnnamedText_595e4: ; 0x595e4
-	TX_FAR _UnnamedText_595e4
+Route11EndBattleTxt10: ; 0x595e4
+	TX_FAR _Route11EndBattleTxt10
 	db $50
 ; 0x595e4 + 5 bytes
 
-UnnamedText_595e9: ; 0x595e9
-	TX_FAR _UnnamedText_595e9
+Route11AfterBattleTxt10: ; 0x595e9
+	TX_FAR _Route11AfterBattleTxt10
 	db $50
 ; 0x595e9 + 5 bytes
 
@@ -44635,70 +44635,70 @@ Route12TrainerHeader1: ; 0x59691
 	db $2 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7d7 ; flag's byte
-	dw UnnamedText_596ff ; 0x56ff TextBeforeBattle
-	dw UnnamedText_59709 ; 0x5709 TextAfterBattle
-	dw UnnamedText_59704 ; 0x5704 TextEndBattle
-	dw UnnamedText_59704 ; 0x5704 TextEndBattle
+	dw Route12B4BattleTxt1 ; 0x56ff TextBeforeBattle
+	dw Route12AfterBattleTxt1 ; 0x5709 TextAfterBattle
+	dw Route12EndBattleTxt1 ; 0x5704 TextEndBattle
+	dw Route12EndBattleTxt1 ; 0x5704 TextEndBattle
 ; 0x5969d
 
-TrainerHeader_5969d: ; 0x5969d
+Route12TH1: ; 0x5969d
 	db $3 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7d7 ; flag's byte
-	dw UnnamedText_59718 ; 0x5718 TextBeforeBattle
-	dw UnnamedText_59722 ; 0x5722 TextAfterBattle
-	dw UnnamedText_5971d ; 0x571d TextEndBattle
-	dw UnnamedText_5971d ; 0x571d TextEndBattle
+	dw Route12B4BattleTxt2 ; 0x5718 TextBeforeBattle
+	dw Route12AfterBattleTxt2 ; 0x5722 TextAfterBattle
+	dw Route12EndBattleTxt2 ; 0x571d TextEndBattle
+	dw Route12EndBattleTxt2 ; 0x571d TextEndBattle
 ; 0x596a9
 
-TrainerHeader_596a9: ; 0x596a9
+Route12TH2: ; 0x596a9
 	db $4 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7d7 ; flag's byte
-	dw UnnamedText_59731 ; 0x5731 TextBeforeBattle
-	dw UnnamedText_5973b ; 0x573b TextAfterBattle
-	dw UnnamedText_59736 ; 0x5736 TextEndBattle
-	dw UnnamedText_59736 ; 0x5736 TextEndBattle
+	dw Route12B4BattleTxt3 ; 0x5731 TextBeforeBattle
+	dw Route12AfterBattleTxt3 ; 0x573b TextAfterBattle
+	dw Route12EndBattleTxt3 ; 0x5736 TextEndBattle
+	dw Route12EndBattleTxt3 ; 0x5736 TextEndBattle
 ; 0x596b5
 
-TrainerHeader_596b5: ; 0x596b5
+Route12TH3: ; 0x596b5
 	db $5 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7d7 ; flag's byte
-	dw UnnamedText_5974a ; 0x574a TextBeforeBattle
-	dw UnnamedText_59754 ; 0x5754 TextAfterBattle
-	dw UnnamedText_5974f ; 0x574f TextEndBattle
-	dw UnnamedText_5974f ; 0x574f TextEndBattle
+	dw Route12B4BattleTxt4 ; 0x574a TextBeforeBattle
+	dw Route12AfterBattleTxt4 ; 0x5754 TextAfterBattle
+	dw Route12EndBattleTxt4 ; 0x574f TextEndBattle
+	dw Route12EndBattleTxt4 ; 0x574f TextEndBattle
 ; 0x596c1
 
-TrainerHeader_596c1: ; 0x596c1
+Route12TH4: ; 0x596c1
 	db $6 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7d7 ; flag's byte
-	dw UnnamedText_59763 ; 0x5763 TextBeforeBattle
-	dw UnnamedText_5976d ; 0x576d TextAfterBattle
-	dw UnnamedText_59768 ; 0x5768 TextEndBattle
-	dw UnnamedText_59768 ; 0x5768 TextEndBattle
+	dw Route12B4BattleTxt5 ; 0x5763 TextBeforeBattle
+	dw Route12AfterBattleTxt5 ; 0x576d TextAfterBattle
+	dw Route12EndBattleTxt5 ; 0x5768 TextEndBattle
+	dw Route12EndBattleTxt5 ; 0x5768 TextEndBattle
 ; 0x596cd
 
-TrainerHeader_596cd: ; 0x596cd
+Route12TH5: ; 0x596cd
 	db $7 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7d7 ; flag's byte
-	dw UnnamedText_5977c ; 0x577c TextBeforeBattle
-	dw UnnamedText_59786 ; 0x5786 TextAfterBattle
-	dw UnnamedText_59781 ; 0x5781 TextEndBattle
-	dw UnnamedText_59781 ; 0x5781 TextEndBattle
+	dw Route12B4BattleTxt6 ; 0x577c TextBeforeBattle
+	dw Route12AfterBattleTxt6 ; 0x5786 TextAfterBattle
+	dw Route12EndBattleTxt6 ; 0x5781 TextEndBattle
+	dw Route12EndBattleTxt6 ; 0x5781 TextEndBattle
 ; 0x596d9
 
-TrainerHeader_596d9: ; 0x596d9
+Route12TH6: ; 0x596d9
 	db $8 ; flag's bit
 	db ($1 << 4) ; trainer's view range
 	dw $d7d7 ; flag's byte
-	dw UnnamedText_59795 ; 0x5795 TextBeforeBattle
-	dw UnnamedText_5979f ; 0x579f TextAfterBattle
-	dw UnnamedText_5979a ; 0x579a TextEndBattle
-	dw UnnamedText_5979a ; 0x579a TextEndBattle
+	dw Route12B4BattleTxt7 ; 0x5795 TextBeforeBattle
+	dw Route12AfterBattleTxt7 ; 0x579f TextAfterBattle
+	dw Route12EndBattleTxt7 ; 0x579a TextEndBattle
+	dw Route12EndBattleTxt7 ; 0x579a TextEndBattle
 ; 0x596e5
 
 db $ff
@@ -44725,144 +44725,144 @@ Route12Text2: ; 0x596f5
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_596ff: ; 0x596ff
-	TX_FAR _UnnamedText_596ff
+Route12B4BattleTxt1: ; 0x596ff
+	TX_FAR _Route12B4BattleTxt1
 	db $50
 ; 0x596ff + 5 bytes
 
-UnnamedText_59704: ; 0x59704
-	TX_FAR _UnnamedText_59704
+Route12EndBattleTxt1: ; 0x59704
+	TX_FAR _Route12EndBattleTxt1
 	db $50
 ; 0x59704 + 5 bytes
 
-UnnamedText_59709: ; 0x59709
-	TX_FAR _UnnamedText_59709
+Route12AfterBattleTxt1: ; 0x59709
+	TX_FAR _Route12AfterBattleTxt1
 	db $50
 ; 0x59709 + 5 bytes
 
 Route12Text3: ; 0x5970e
 	db $08 ; asm
-	ld hl, TrainerHeader_5969d
+	ld hl, Route12TH1
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_59718: ; 0x59718
-	TX_FAR _UnnamedText_59718
+Route12B4BattleTxt2: ; 0x59718
+	TX_FAR _Route12B4BattleTxt2
 	db $50
 ; 0x59718 + 5 bytes
 
-UnnamedText_5971d: ; 0x5971d
-	TX_FAR _UnnamedText_5971d
+Route12EndBattleTxt2: ; 0x5971d
+	TX_FAR _Route12EndBattleTxt2
 	db $50
 ; 0x5971d + 5 bytes
 
-UnnamedText_59722: ; 0x59722
-	TX_FAR _UnnamedText_59722
+Route12AfterBattleTxt2: ; 0x59722
+	TX_FAR _Route12AfterBattleTxt2
 	db $50
 ; 0x59722 + 5 bytes
 
 Route12Text4: ; 0x59727
 	db $08 ; asm
-	ld hl, TrainerHeader_596a9
+	ld hl, Route12TH2
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_59731: ; 0x59731
-	TX_FAR _UnnamedText_59731
+Route12B4BattleTxt3: ; 0x59731
+	TX_FAR _Route12B4BattleTxt3
 	db $50
 ; 0x59731 + 5 bytes
 
-UnnamedText_59736: ; 0x59736
-	TX_FAR _UnnamedText_59736
+Route12EndBattleTxt3: ; 0x59736
+	TX_FAR _Route12EndBattleTxt3
 	db $50
 ; 0x59736 + 5 bytes
 
-UnnamedText_5973b: ; 0x5973b
-	TX_FAR _UnnamedText_5973b
+Route12AfterBattleTxt3: ; 0x5973b
+	TX_FAR _Route12AfterBattleTxt3
 	db $50
 ; 0x5973b + 5 bytes
 
 Route12Text5: ; 0x59740
 	db $08 ; asm
-	ld hl, TrainerHeader_596b5
+	ld hl, Route12TH3
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_5974a: ; 0x5974a
-	TX_FAR _UnnamedText_5974a
+Route12B4BattleTxt4: ; 0x5974a
+	TX_FAR _Route12B4BattleTxt4
 	db $50
 ; 0x5974a + 5 bytes
 
-UnnamedText_5974f: ; 0x5974f
-	TX_FAR _UnnamedText_5974f
+Route12EndBattleTxt4: ; 0x5974f
+	TX_FAR _Route12EndBattleTxt4
 	db $50
 ; 0x5974f + 5 bytes
 
-UnnamedText_59754: ; 0x59754
-	TX_FAR _UnnamedText_59754
+Route12AfterBattleTxt4: ; 0x59754
+	TX_FAR _Route12AfterBattleTxt4
 	db $50
 ; 0x59754 + 5 bytes
 
 Route12Text6: ; 0x59759
 	db $08 ; asm
-	ld hl, TrainerHeader_596c1
+	ld hl, Route12TH4
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_59763: ; 0x59763
-	TX_FAR _UnnamedText_59763
+Route12B4BattleTxt5: ; 0x59763
+	TX_FAR _Route12B4BattleTxt5
 	db $50
 ; 0x59763 + 5 bytes
 
-UnnamedText_59768: ; 0x59768
-	TX_FAR _UnnamedText_59768
+Route12EndBattleTxt5: ; 0x59768
+	TX_FAR _Route12EndBattleTxt5
 	db $50
 ; 0x59768 + 5 bytes
 
-UnnamedText_5976d: ; 0x5976d
-	TX_FAR _UnnamedText_5976d
+Route12AfterBattleTxt5: ; 0x5976d
+	TX_FAR _Route12AfterBattleTxt5
 	db $50
 ; 0x5976d + 5 bytes
 
 Route12Text7: ; 0x59772
 	db $08 ; asm
-	ld hl, TrainerHeader_596cd
+	ld hl, Route12TH5
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_5977c: ; 0x5977c
-	TX_FAR _UnnamedText_5977c
+Route12B4BattleTxt6: ; 0x5977c
+	TX_FAR _Route12B4BattleTxt6
 	db $50
 ; 0x5977c + 5 bytes
 
-UnnamedText_59781: ; 0x59781
-	TX_FAR _UnnamedText_59781
+Route12EndBattleTxt6: ; 0x59781
+	TX_FAR _Route12EndBattleTxt6
 	db $50
 ; 0x59781 + 5 bytes
 
-UnnamedText_59786: ; 0x59786
-	TX_FAR _UnnamedText_59786
+Route12AfterBattleTxt6: ; 0x59786
+	TX_FAR _Route12AfterBattleTxt6
 	db $50
 ; 0x59786 + 5 bytes
 
 Route12Text8: ; 0x5978b
 	db $08 ; asm
-	ld hl, TrainerHeader_596d9
+	ld hl, Route12TH6
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_59795: ; 0x59795
-	TX_FAR _UnnamedText_59795
+Route12B4BattleTxt7: ; 0x59795
+	TX_FAR _Route12B4BattleTxt7
 	db $50
 ; 0x59795 + 5 bytes
 
-UnnamedText_5979a: ; 0x5979a
-	TX_FAR _UnnamedText_5979a
+Route12EndBattleTxt7: ; 0x5979a
+	TX_FAR _Route12EndBattleTxt7
 	db $50
 ; 0x5979a + 5 bytes
 
-UnnamedText_5979f: ; 0x5979f
-	TX_FAR _UnnamedText_5979f
+Route12AfterBattleTxt7: ; 0x5979f
+	TX_FAR _Route12AfterBattleTxt7
 	db $50
 ; 0x5979f + 5 bytes
 
@@ -44895,100 +44895,100 @@ Route15TrainerHeader1: ; 0x597df
 	db $1 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d7dd ; flag's byte
-	dw UnnamedText_59898 ; 0x5898 TextBeforeBattle
-	dw UnnamedText_598a2 ; 0x58a2 TextAfterBattle
-	dw UnnamedText_5989d ; 0x589d TextEndBattle
-	dw UnnamedText_5989d ; 0x589d TextEndBattle
+	dw Route15B4BattleTxt1 ; 0x5898 TextBeforeBattle
+	dw Route15AfterBattleTxt1 ; 0x58a2 TextAfterBattle
+	dw Route15EndBattleTxt1 ; 0x589d TextEndBattle
+	dw Route15EndBattleTxt1 ; 0x589d TextEndBattle
 ; 0x597eb
 
-TrainerHeader_597eb: ; 0x597eb
+Route15TH1: ; 0x597eb
 	db $2 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7dd ; flag's byte
-	dw UnnamedText_598a7 ; 0x58a7 TextBeforeBattle
-	dw UnnamedText_598b1 ; 0x58b1 TextAfterBattle
-	dw UnnamedText_598ac ; 0x58ac TextEndBattle
-	dw UnnamedText_598ac ; 0x58ac TextEndBattle
+	dw Route15B4BattleTxt2 ; 0x58a7 TextBeforeBattle
+	dw Route15AfterBattleTxt2 ; 0x58b1 TextAfterBattle
+	dw Route15EndBattleTxt2 ; 0x58ac TextEndBattle
+	dw Route15EndBattleTxt2 ; 0x58ac TextEndBattle
 ; 0x597f7
 
-TrainerHeader_597f7: ; 0x597f7
+Route15TH2: ; 0x597f7
 	db $3 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7dd ; flag's byte
-	dw UnnamedText_598b6 ; 0x58b6 TextBeforeBattle
-	dw UnnamedText_598c0 ; 0x58c0 TextAfterBattle
-	dw UnnamedText_598bb ; 0x58bb TextEndBattle
-	dw UnnamedText_598bb ; 0x58bb TextEndBattle
+	dw Route15B4BattleTxt3 ; 0x58b6 TextBeforeBattle
+	dw Route15AfterBattleTxt3 ; 0x58c0 TextAfterBattle
+	dw Route15EndBattleTxt3 ; 0x58bb TextEndBattle
+	dw Route15EndBattleTxt3 ; 0x58bb TextEndBattle
 ; 0x59803
 
-TrainerHeader_59803: ; 0x59803
+Route15TH3: ; 0x59803
 	db $4 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7dd ; flag's byte
-	dw UnnamedText_598c5 ; 0x58c5 TextBeforeBattle
-	dw UnnamedText_598cf ; 0x58cf TextAfterBattle
-	dw UnnamedText_598ca ; 0x58ca TextEndBattle
-	dw UnnamedText_598ca ; 0x58ca TextEndBattle
+	dw Route15B4BattleTxt4 ; 0x58c5 TextBeforeBattle
+	dw Route15AfterBattleTxt4 ; 0x58cf TextAfterBattle
+	dw Route15EndBattleTxt4 ; 0x58ca TextEndBattle
+	dw Route15EndBattleTxt4 ; 0x58ca TextEndBattle
 ; 0x5980f
 
-TrainerHeader_5980f: ; 0x5980f
+Route15TH4: ; 0x5980f
 	db $5 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d7dd ; flag's byte
-	dw UnnamedText_598d4 ; 0x58d4 TextBeforeBattle
-	dw UnnamedText_598de ; 0x58de TextAfterBattle
-	dw UnnamedText_598d9 ; 0x58d9 TextEndBattle
-	dw UnnamedText_598d9 ; 0x58d9 TextEndBattle
+	dw Route15B4BattleTxt5 ; 0x58d4 TextBeforeBattle
+	dw Route15AfterBattleTxt5 ; 0x58de TextAfterBattle
+	dw Route15EndBattleTxt5 ; 0x58d9 TextEndBattle
+	dw Route15EndBattleTxt5 ; 0x58d9 TextEndBattle
 ; 0x5981b
 
-TrainerHeader_5981b: ; 0x5981b
+Route15TH5: ; 0x5981b
 	db $6 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7dd ; flag's byte
-	dw UnnamedText_598e3 ; 0x58e3 TextBeforeBattle
-	dw UnnamedText_598ed ; 0x58ed TextAfterBattle
-	dw UnnamedText_598e8 ; 0x58e8 TextEndBattle
-	dw UnnamedText_598e8 ; 0x58e8 TextEndBattle
+	dw Route15B4BattleTxt6 ; 0x58e3 TextBeforeBattle
+	dw Route15AfterBattleTxt6 ; 0x58ed TextAfterBattle
+	dw Route15EndBattleTxt6 ; 0x58e8 TextEndBattle
+	dw Route15EndBattleTxt6 ; 0x58e8 TextEndBattle
 ; 0x59827
 
-TrainerHeader_59827: ; 0x59827
+Route15TH6: ; 0x59827
 	db $7 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7dd ; flag's byte
-	dw UnnamedText_598f2 ; 0x58f2 TextBeforeBattle
-	dw UnnamedText_598fc ; 0x58fc TextAfterBattle
-	dw UnnamedText_598f7 ; 0x58f7 TextEndBattle
-	dw UnnamedText_598f7 ; 0x58f7 TextEndBattle
+	dw Route15B4BattleTxt7 ; 0x58f2 TextBeforeBattle
+	dw Route15AfterBattleTxt7 ; 0x58fc TextAfterBattle
+	dw Route15EndBattleTxt7 ; 0x58f7 TextEndBattle
+	dw Route15EndBattleTxt7 ; 0x58f7 TextEndBattle
 ; 0x59833
 
-TrainerHeader_59833: ; 0x59833
+Route15TH7: ; 0x59833
 	db $8 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7dd ; flag's byte
-	dw UnnamedText_59901 ; 0x5901 TextBeforeBattle
-	dw UnnamedText_5990b ; 0x590b TextAfterBattle
-	dw UnnamedText_59906 ; 0x5906 TextEndBattle
-	dw UnnamedText_59906 ; 0x5906 TextEndBattle
+	dw Route15B4BattleTxt8 ; 0x5901 TextBeforeBattle
+	dw Route15AfterBattleTxt8 ; 0x590b TextAfterBattle
+	dw Route15EndBattleTxt8 ; 0x5906 TextEndBattle
+	dw Route15EndBattleTxt8 ; 0x5906 TextEndBattle
 ; 0x5983f
 
-TrainerHeader_5983f: ; 0x5983f
+Route15TH8: ; 0x5983f
 	db $9 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7dd ; flag's byte
-	dw UnnamedText_59910 ; 0x5910 TextBeforeBattle
-	dw UnnamedText_5991a ; 0x591a TextAfterBattle
-	dw UnnamedText_59915 ; 0x5915 TextEndBattle
-	dw UnnamedText_59915 ; 0x5915 TextEndBattle
+	dw Route15B4BattleTxt9 ; 0x5910 TextBeforeBattle
+	dw Route15AfterBattleTxt9 ; 0x591a TextAfterBattle
+	dw Route15EndBattleTxt9 ; 0x5915 TextEndBattle
+	dw Route15EndBattleTxt9 ; 0x5915 TextEndBattle
 ; 0x5984b
 
-TrainerHeader_5984b: ; 0x5984b
+Route15TH9: ; 0x5984b
 	db $a ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7dd ; flag's byte
-	dw UnnamedText_5991f ; 0x591f TextBeforeBattle
-	dw UnnamedText_59929 ; 0x5929 TextAfterBattle
-	dw UnnamedText_59924 ; 0x5924 TextEndBattle
-	dw UnnamedText_59924 ; 0x5924 TextEndBattle
+	dw Route15B4BattleTxt10 ; 0x591f TextBeforeBattle
+	dw Route15AfterBattleTxt10 ; 0x5929 TextAfterBattle
+	dw Route15EndBattleTxt10 ; 0x5924 TextEndBattle
+	dw Route15EndBattleTxt10 ; 0x5924 TextEndBattle
 ; 0x59857
 
 db $ff
@@ -45000,199 +45000,199 @@ Route15Text1: ; 0x59858
 
 Route15Text2:
 	db $8 ; asm
-	ld hl, TrainerHeader_597eb
+	ld hl, Route15TH1
 	jr asm_33cb7 ; 0x59862 $2e
 
 Route15Text3:
 	db $8 ; asm
-	ld hl, TrainerHeader_597f7
+	ld hl, Route15TH2
 	jr asm_33cb7 ; 0x59868 $28
 
 Route15Text4:
 	db $8 ; asm
-	ld hl, TrainerHeader_59803
+	ld hl, Route15TH3
 	jr asm_33cb7 ; 0x5986e $22
 
 Route15Text5:
 	db $8 ; asm
-	ld hl, TrainerHeader_5980f
+	ld hl, Route15TH4
 	jr asm_33cb7 ; 0x59874 $1c
 
 Route15Text6:
 	db $8 ; asm
-	ld hl, TrainerHeader_5981b
+	ld hl, Route15TH5
 	jr asm_33cb7 ; 0x5987a $16
 
 Route15Text7:
 	db $8 ; asm
-	ld hl, TrainerHeader_59827
+	ld hl, Route15TH6
 	jr asm_33cb7 ; 0x59880 $10
 
 Route15Text8:
 	db $8 ; asm
-	ld hl, TrainerHeader_59833
+	ld hl, Route15TH7
 	jr asm_33cb7 ; 0x59886 $a
 
 Route15Text9:
 	db $8 ; asm
-	ld hl, TrainerHeader_5983f
+	ld hl, Route15TH8
 	jr asm_33cb7 ; 0x5988c $4
 
 Route15Text10:
 	db $8 ; asm
-	ld hl, TrainerHeader_5984b
+	ld hl, Route15TH9
 asm_33cb7: ; 0x59892
 	call LoadTrainerHeader
 	jp TextScriptEnd
 ; 0x59898
 
-UnnamedText_59898: ; 0x59898
-	TX_FAR _UnnamedText_59898
+Route15B4BattleTxt1: ; 0x59898
+	TX_FAR _Route15B4BattleTxt1
 	db $50
 ; 0x59898 + 5 bytes
 
-UnnamedText_5989d: ; 0x5989d
-	TX_FAR _UnnamedText_5989d
+Route15EndBattleTxt1: ; 0x5989d
+	TX_FAR _Route15EndBattleTxt1
 	db $50
 ; 0x5989d + 5 bytes
 
-UnnamedText_598a2: ; 0x598a2
-	TX_FAR _UnnamedText_598a2
+Route15AfterBattleTxt1: ; 0x598a2
+	TX_FAR _Route15AfterBattleTxt1
 	db $50
 ; 0x598a2 + 5 bytes
 
-UnnamedText_598a7: ; 0x598a7
-	TX_FAR _UnnamedText_598a7
+Route15B4BattleTxt2: ; 0x598a7
+	TX_FAR _Route15B4BattleTxt2
 	db $50
 ; 0x598a7 + 5 bytes
 
-UnnamedText_598ac: ; 0x598ac
-	TX_FAR _UnnamedText_598ac
+Route15EndBattleTxt2: ; 0x598ac
+	TX_FAR _Route15EndBattleTxt2
 	db $50
 ; 0x598ac + 5 bytes
 
-UnnamedText_598b1: ; 0x598b1
-	TX_FAR _UnnamedText_598b1
+Route15AfterBattleTxt2: ; 0x598b1
+	TX_FAR _Route15AfterBattleTxt2
 	db $50
 ; 0x598b1 + 5 bytes
 
-UnnamedText_598b6: ; 0x598b6
-	TX_FAR _UnnamedText_598b6
+Route15B4BattleTxt3: ; 0x598b6
+	TX_FAR _Route15B4BattleTxt3
 	db $50
 ; 0x598b6 + 5 bytes
 
-UnnamedText_598bb: ; 0x598bb
-	TX_FAR _UnnamedText_598bb
+Route15EndBattleTxt3: ; 0x598bb
+	TX_FAR _Route15EndBattleTxt3
 	db $50
 ; 0x598bb + 5 bytes
 
-UnnamedText_598c0: ; 0x598c0
-	TX_FAR _UnnamedText_598c0
+Route15AfterBattleTxt3: ; 0x598c0
+	TX_FAR _Route15AfterBattleTxt3
 	db $50
 ; 0x598c0 + 5 bytes
 
-UnnamedText_598c5: ; 0x598c5
-	TX_FAR _UnnamedText_598c5
+Route15B4BattleTxt4: ; 0x598c5
+	TX_FAR _Route15B4BattleTxt4
 	db $50
 ; 0x598c5 + 5 bytes
 
-UnnamedText_598ca: ; 0x598ca
-	TX_FAR _UnnamedText_598ca
+Route15EndBattleTxt4: ; 0x598ca
+	TX_FAR _Route15EndBattleTxt4
 	db $50
 ; 0x598ca + 5 bytes
 
-UnnamedText_598cf: ; 0x598cf
-	TX_FAR _UnnamedText_598cf
+Route15AfterBattleTxt4: ; 0x598cf
+	TX_FAR _Route15AfterBattleTxt4
 	db $50
 ; 0x598cf + 5 bytes
 
-UnnamedText_598d4: ; 0x598d4
-	TX_FAR _UnnamedText_598d4
+Route15B4BattleTxt5: ; 0x598d4
+	TX_FAR _Route15B4BattleTxt5
 	db $50
 ; 0x598d4 + 5 bytes
 
-UnnamedText_598d9: ; 0x598d9
-	TX_FAR _UnnamedText_598d9
+Route15EndBattleTxt5: ; 0x598d9
+	TX_FAR _Route15EndBattleTxt5
 	db $50
 ; 0x598d9 + 5 bytes
 
-UnnamedText_598de: ; 0x598de
-	TX_FAR _UnnamedText_598de
+Route15AfterBattleTxt5: ; 0x598de
+	TX_FAR _Route15AfterBattleTxt5
 	db $50
 ; 0x598de + 5 bytes
 
-UnnamedText_598e3: ; 0x598e3
-	TX_FAR _UnnamedText_598e3
+Route15B4BattleTxt6: ; 0x598e3
+	TX_FAR _Route15B4BattleTxt6
 	db $50
 ; 0x598e3 + 5 bytes
 
-UnnamedText_598e8: ; 0x598e8
-	TX_FAR _UnnamedText_598e8
+Route15EndBattleTxt6: ; 0x598e8
+	TX_FAR _Route15EndBattleTxt6
 	db $50
 ; 0x598e8 + 5 bytes
 
-UnnamedText_598ed: ; 0x598ed
-	TX_FAR _UnnamedText_598ed
+Route15AfterBattleTxt6: ; 0x598ed
+	TX_FAR _Route15AfterBattleTxt6
 	db $50
 ; 0x598ed + 5 bytes
 
-UnnamedText_598f2: ; 0x598f2
-	TX_FAR _UnnamedText_598f2
+Route15B4BattleTxt7: ; 0x598f2
+	TX_FAR _Route15B4BattleTxt7
 	db $50
 ; 0x598f2 + 5 bytes
 
-UnnamedText_598f7: ; 0x598f7
-	TX_FAR _UnnamedText_598f7
+Route15EndBattleTxt7: ; 0x598f7
+	TX_FAR _Route15EndBattleTxt7
 	db $50
 ; 0x598f7 + 5 bytes
 
-UnnamedText_598fc: ; 0x598fc
-	TX_FAR _UnnamedText_598fc
+Route15AfterBattleTxt7: ; 0x598fc
+	TX_FAR _Route15AfterBattleTxt7
 	db $50
 ; 0x598fc + 5 bytes
 
-UnnamedText_59901: ; 0x59901
-	TX_FAR _UnnamedText_59901
+Route15B4BattleTxt8: ; 0x59901
+	TX_FAR _Route15B4BattleTxt8
 	db $50
 ; 0x59901 + 5 bytes
 
-UnnamedText_59906: ; 0x59906
-	TX_FAR _UnnamedText_59906
+Route15EndBattleTxt8: ; 0x59906
+	TX_FAR _Route15EndBattleTxt8
 	db $50
 ; 0x59906 + 5 bytes
 
-UnnamedText_5990b: ; 0x5990b
-	TX_FAR _UnnamedText_5990b
+Route15AfterBattleTxt8: ; 0x5990b
+	TX_FAR _Route15AfterBattleTxt8
 	db $50
 ; 0x5990b + 5 bytes
 
-UnnamedText_59910: ; 0x59910
-	TX_FAR _UnnamedText_59910
+Route15B4BattleTxt9: ; 0x59910
+	TX_FAR _Route15B4BattleTxt9
 	db $50
 ; 0x59910 + 5 bytes
 
-UnnamedText_59915: ; 0x59915
-	TX_FAR _UnnamedText_59915
+Route15EndBattleTxt9: ; 0x59915
+	TX_FAR _Route15EndBattleTxt9
 	db $50
 ; 0x59915 + 5 bytes
 
-UnnamedText_5991a: ; 0x5991a
-	TX_FAR _UnnamedText_5991a
+Route15AfterBattleTxt9: ; 0x5991a
+	TX_FAR _Route15AfterBattleTxt9
 	db $50
 ; 0x5991a + 5 bytes
 
-UnnamedText_5991f: ; 0x5991f
-	TX_FAR _UnnamedText_5991f
+Route15B4BattleTxt10: ; 0x5991f
+	TX_FAR _Route15B4BattleTxt10
 	db $50
 ; 0x5991f + 5 bytes
 
-UnnamedText_59924: ; 0x59924
-	TX_FAR _UnnamedText_59924
+Route15EndBattleTxt10: ; 0x59924
+	TX_FAR _Route15EndBattleTxt10
 	db $50
 ; 0x59924 + 5 bytes
 
-UnnamedText_59929: ; 0x59929
-	TX_FAR _UnnamedText_59929
+Route15AfterBattleTxt10: ; 0x59929
+	TX_FAR _Route15AfterBattleTxt10
 	db $50
 ; 0x59929 + 5 bytes
 
@@ -45220,60 +45220,60 @@ Route16TrainerHeader1: ; 0x599cf
 	db $1 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7df ; flag's byte
-	dw UnnamedText_59a22 ; 0x5a22 TextBeforeBattle
-	dw UnnamedText_59a2c ; 0x5a2c TextAfterBattle
-	dw UnnamedText_59a27 ; 0x5a27 TextEndBattle
-	dw UnnamedText_59a27 ; 0x5a27 TextEndBattle
+	dw Route16B4BattleTxt1 ; 0x5a22 TextBeforeBattle
+	dw Route16AfterBattleTxt1 ; 0x5a2c TextAfterBattle
+	dw Route16EndBattleTxt1 ; 0x5a27 TextEndBattle
+	dw Route16EndBattleTxt1 ; 0x5a27 TextEndBattle
 ; 0x599db
 
-TrainerHeader_599db: ; 0x599db
+Route16TH1: ; 0x599db
 	db $2 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d7df ; flag's byte
-	dw UnnamedText_59a3b ; 0x5a3b TextBeforeBattle
-	dw UnnamedText_59a45 ; 0x5a45 TextAfterBattle
-	dw UnnamedText_59a40 ; 0x5a40 TextEndBattle
-	dw UnnamedText_59a40 ; 0x5a40 TextEndBattle
+	dw Route16B4BattleTxt2 ; 0x5a3b TextBeforeBattle
+	dw Route16AfterBattleTxt2 ; 0x5a45 TextAfterBattle
+	dw Route16EndBattleTxt2 ; 0x5a40 TextEndBattle
+	dw Route16EndBattleTxt2 ; 0x5a40 TextEndBattle
 ; 0x599e7
 
-TrainerHeader_599e7: ; 0x599e7
+Route16TH2: ; 0x599e7
 	db $3 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d7df ; flag's byte
-	dw UnnamedText_59a54 ; 0x5a54 TextBeforeBattle
-	dw UnnamedText_59a5e ; 0x5a5e TextAfterBattle
-	dw UnnamedText_59a59 ; 0x5a59 TextEndBattle
-	dw UnnamedText_59a59 ; 0x5a59 TextEndBattle
+	dw Route16B4BattleTxt3 ; 0x5a54 TextBeforeBattle
+	dw Route16AfterBattleTxt3 ; 0x5a5e TextAfterBattle
+	dw Route16EndBattleTxt3 ; 0x5a59 TextEndBattle
+	dw Route16EndBattleTxt3 ; 0x5a59 TextEndBattle
 ; 0x599f3
 
-TrainerHeader_599f3: ; 0x599f3
+Route16TH3: ; 0x599f3
 	db $4 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d7df ; flag's byte
-	dw UnnamedText_59a6d ; 0x5a6d TextBeforeBattle
-	dw UnnamedText_59a77 ; 0x5a77 TextAfterBattle
-	dw UnnamedText_59a72 ; 0x5a72 TextEndBattle
-	dw UnnamedText_59a72 ; 0x5a72 TextEndBattle
+	dw Route16B4BattleTxt4 ; 0x5a6d TextBeforeBattle
+	dw Route16AfterBattleTxt4 ; 0x5a77 TextAfterBattle
+	dw Route16EndBattleTxt4 ; 0x5a72 TextEndBattle
+	dw Route16EndBattleTxt4 ; 0x5a72 TextEndBattle
 ; 0x599ff
 
-TrainerHeader_599ff: ; 0x599ff
+Route16TH4: ; 0x599ff
 	db $5 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d7df ; flag's byte
-	dw UnnamedText_59a86 ; 0x5a86 TextBeforeBattle
-	dw UnnamedText_59a90 ; 0x5a90 TextAfterBattle
-	dw UnnamedText_59a8b ; 0x5a8b TextEndBattle
-	dw UnnamedText_59a8b ; 0x5a8b TextEndBattle
+	dw Route16B4BattleTxt5 ; 0x5a86 TextBeforeBattle
+	dw Route16AfterBattleTxt5 ; 0x5a90 TextAfterBattle
+	dw Route16EndBattleTxt5 ; 0x5a8b TextEndBattle
+	dw Route16EndBattleTxt5 ; 0x5a8b TextEndBattle
 ; 0x59a0b
 
-TrainerHeader_59a0b: ; 0x59a0b
+Route16TH5: ; 0x59a0b
 	db $6 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7df ; flag's byte
-	dw UnnamedText_59a9f ; 0x5a9f TextBeforeBattle
-	dw UnnamedText_59aa9 ; 0x5aa9 TextAfterBattle
-	dw UnnamedText_59aa4 ; 0x5aa4 TextEndBattle
-	dw UnnamedText_59aa4 ; 0x5aa4 TextEndBattle
+	dw Route16B4BattleTxt6 ; 0x5a9f TextBeforeBattle
+	dw Route16AfterBattleTxt6 ; 0x5aa9 TextAfterBattle
+	dw Route16EndBattleTxt6 ; 0x5aa4 TextEndBattle
+	dw Route16EndBattleTxt6 ; 0x5aa4 TextEndBattle
 ; 0x59a17
 
 db $ff
@@ -45284,123 +45284,123 @@ Route16Text1: ; 0x59a18
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_59a22: ; 0x59a22
-	TX_FAR _UnnamedText_59a22
+Route16B4BattleTxt1: ; 0x59a22
+	TX_FAR _Route16B4BattleTxt1
 	db $50
 ; 0x59a22 + 5 bytes
 
-UnnamedText_59a27: ; 0x59a27
-	TX_FAR _UnnamedText_59a27
+Route16EndBattleTxt1: ; 0x59a27
+	TX_FAR _Route16EndBattleTxt1
 	db $50
 ; 0x59a27 + 5 bytes
 
-UnnamedText_59a2c: ; 0x59a2c
-	TX_FAR _UnnamedText_59a2c
+Route16AfterBattleTxt1: ; 0x59a2c
+	TX_FAR _Route16AfterBattleTxt1
 	db $50
 ; 0x59a2c + 5 bytes
 
 Route16Text2: ; 0x59a31
 	db $08 ; asm
-	ld hl, TrainerHeader_599db
+	ld hl, Route16TH1
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_59a3b: ; 0x59a3b
-	TX_FAR _UnnamedText_59a3b
+Route16B4BattleTxt2: ; 0x59a3b
+	TX_FAR _Route16B4BattleTxt2
 	db $50
 ; 0x59a3b + 5 bytes
 
-UnnamedText_59a40: ; 0x59a40
-	TX_FAR _UnnamedText_59a40
+Route16EndBattleTxt2: ; 0x59a40
+	TX_FAR _Route16EndBattleTxt2
 	db $50
 ; 0x59a40 + 5 bytes
 
-UnnamedText_59a45: ; 0x59a45
-	TX_FAR _UnnamedText_59a45
+Route16AfterBattleTxt2: ; 0x59a45
+	TX_FAR _Route16AfterBattleTxt2
 	db $50
 ; 0x59a45 + 5 bytes
 
 Route16Text3: ; 0x59a4a
 	db $08 ; asm
-	ld hl, TrainerHeader_599e7
+	ld hl, Route16TH2
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_59a54: ; 0x59a54
-	TX_FAR _UnnamedText_59a54
+Route16B4BattleTxt3: ; 0x59a54
+	TX_FAR _Route16B4BattleTxt3
 	db $50
 ; 0x59a54 + 5 bytes
 
-UnnamedText_59a59: ; 0x59a59
-	TX_FAR _UnnamedText_59a59
+Route16EndBattleTxt3: ; 0x59a59
+	TX_FAR _Route16EndBattleTxt3
 	db $50
 ; 0x59a59 + 5 bytes
 
-UnnamedText_59a5e: ; 0x59a5e
-	TX_FAR _UnnamedText_59a5e
+Route16AfterBattleTxt3: ; 0x59a5e
+	TX_FAR _Route16AfterBattleTxt3
 	db $50
 ; 0x59a5e + 5 bytes
 
 Route16Text4: ; 0x59a63
 	db $08 ; asm
-	ld hl, TrainerHeader_599f3
+	ld hl, Route16TH3
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_59a6d: ; 0x59a6d
-	TX_FAR _UnnamedText_59a6d
+Route16B4BattleTxt4: ; 0x59a6d
+	TX_FAR _Route16B4BattleTxt4
 	db $50
 ; 0x59a6d + 5 bytes
 
-UnnamedText_59a72: ; 0x59a72
-	TX_FAR _UnnamedText_59a72
+Route16EndBattleTxt4: ; 0x59a72
+	TX_FAR _Route16EndBattleTxt4
 	db $50
 ; 0x59a72 + 5 bytes
 
-UnnamedText_59a77: ; 0x59a77
-	TX_FAR _UnnamedText_59a77
+Route16AfterBattleTxt4: ; 0x59a77
+	TX_FAR _Route16AfterBattleTxt4
 	db $50
 ; 0x59a77 + 5 bytes
 
 Route16Text5: ; 0x59a7c
 	db $08 ; asm
-	ld hl, TrainerHeader_599ff
+	ld hl, Route16TH4
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_59a86: ; 0x59a86
-	TX_FAR _UnnamedText_59a86
+Route16B4BattleTxt5: ; 0x59a86
+	TX_FAR _Route16B4BattleTxt5
 	db $50
 ; 0x59a86 + 5 bytes
 
-UnnamedText_59a8b: ; 0x59a8b
-	TX_FAR _UnnamedText_59a8b
+Route16EndBattleTxt5: ; 0x59a8b
+	TX_FAR _Route16EndBattleTxt5
 	db $50
 ; 0x59a8b + 5 bytes
 
-UnnamedText_59a90: ; 0x59a90
-	TX_FAR _UnnamedText_59a90
+Route16AfterBattleTxt5: ; 0x59a90
+	TX_FAR _Route16AfterBattleTxt5
 	db $50
 ; 0x59a90 + 5 bytes
 
 Route16Text6: ; 0x59a95
 	db $08 ; asm
-	ld hl, TrainerHeader_59a0b
+	ld hl, Route16TH5
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_59a9f: ; 0x59a9f
-	TX_FAR _UnnamedText_59a9f
+Route16B4BattleTxt6: ; 0x59a9f
+	TX_FAR _Route16B4BattleTxt6
 	db $50
 ; 0x59a9f + 5 bytes
 
-UnnamedText_59aa4: ; 0x59aa4
-	TX_FAR _UnnamedText_59aa4
+Route16EndBattleTxt6: ; 0x59aa4
+	TX_FAR _Route16EndBattleTxt6
 	db $50
 ; 0x59aa4 + 5 bytes
 
-UnnamedText_59aa9: ; 0x59aa9
-	TX_FAR _UnnamedText_59aa9
+Route16AfterBattleTxt6: ; 0x59aa9
+	TX_FAR _Route16AfterBattleTxt6
 	db $50
 ; 0x59aa9 + 5 bytes
 
@@ -45447,30 +45447,30 @@ Route18TrainerHeader1: ; 0x59aea
 	db $1 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7e3 ; flag's byte
-	dw UnnamedText_59b19 ; 0x5b19 TextBeforeBattle
-	dw UnnamedText_59b23 ; 0x5b23 TextAfterBattle
-	dw UnnamedText_59b1e ; 0x5b1e TextEndBattle
-	dw UnnamedText_59b1e ; 0x5b1e TextEndBattle
+	dw Route18B4BattleTxt1 ; 0x5b19 TextBeforeBattle
+	dw Route18AfterBattleTxt1 ; 0x5b23 TextAfterBattle
+	dw Route18EndBattleTxt1 ; 0x5b1e TextEndBattle
+	dw Route18EndBattleTxt1 ; 0x5b1e TextEndBattle
 ; 0x59af6
 
-TrainerHeader_59af6: ; 0x59af6
+Route18TH1: ; 0x59af6
 	db $2 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7e3 ; flag's byte
-	dw UnnamedText_59b32 ; 0x5b32 TextBeforeBattle
-	dw UnnamedText_59b3c ; 0x5b3c TextAfterBattle
-	dw UnnamedText_59b37 ; 0x5b37 TextEndBattle
-	dw UnnamedText_59b37 ; 0x5b37 TextEndBattle
+	dw Route18B4BattleTxt2 ; 0x5b32 TextBeforeBattle
+	dw Route18AfterBattleTxt2 ; 0x5b3c TextAfterBattle
+	dw Route18EndBattleTxt2 ; 0x5b37 TextEndBattle
+	dw Route18EndBattleTxt2 ; 0x5b37 TextEndBattle
 ; 0x59b02
 
-TrainerHeader_59b02: ; 0x59b02
+Route18TH2: ; 0x59b02
 	db $3 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7e3 ; flag's byte
-	dw UnnamedText_59b4b ; 0x5b4b TextBeforeBattle
-	dw UnnamedText_59b55 ; 0x5b55 TextAfterBattle
-	dw UnnamedText_59b50 ; 0x5b50 TextEndBattle
-	dw UnnamedText_59b50 ; 0x5b50 TextEndBattle
+	dw Route18B4BattleTxt3 ; 0x5b4b TextBeforeBattle
+	dw Route18AfterBattleTxt3 ; 0x5b55 TextAfterBattle
+	dw Route18EndBattleTxt3 ; 0x5b50 TextEndBattle
+	dw Route18EndBattleTxt3 ; 0x5b50 TextEndBattle
 ; 0x59b0e
 
 db $ff
@@ -45481,60 +45481,60 @@ Route18Text1: ; 0x59b0f
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_59b19: ; 0x59b19
-	TX_FAR _UnnamedText_59b19
+Route18B4BattleTxt1: ; 0x59b19
+	TX_FAR _Route18B4BattleTxt1
 	db $50
 ; 0x59b19 + 5 bytes
 
-UnnamedText_59b1e: ; 0x59b1e
-	TX_FAR _UnnamedText_59b1e
+Route18EndBattleTxt1: ; 0x59b1e
+	TX_FAR _Route18EndBattleTxt1
 	db $50
 ; 0x59b1e + 5 bytes
 
-UnnamedText_59b23: ; 0x59b23
-	TX_FAR _UnnamedText_59b23
+Route18AfterBattleTxt1: ; 0x59b23
+	TX_FAR _Route18AfterBattleTxt1
 	db $50
 ; 0x59b23 + 5 bytes
 
 Route18Text2: ; 0x59b28
 	db $08 ; asm
-	ld hl, TrainerHeader_59af6
+	ld hl, Route18TH1
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_59b32: ; 0x59b32
-	TX_FAR _UnnamedText_59b32
+Route18B4BattleTxt2: ; 0x59b32
+	TX_FAR _Route18B4BattleTxt2
 	db $50
 ; 0x59b32 + 5 bytes
 
-UnnamedText_59b37: ; 0x59b37
-	TX_FAR _UnnamedText_59b37
+Route18EndBattleTxt2: ; 0x59b37
+	TX_FAR _Route18EndBattleTxt2
 	db $50
 ; 0x59b37 + 5 bytes
 
-UnnamedText_59b3c: ; 0x59b3c
-	TX_FAR _UnnamedText_59b3c
+Route18AfterBattleTxt2: ; 0x59b3c
+	TX_FAR _Route18AfterBattleTxt2
 	db $50
 ; 0x59b3c + 5 bytes
 
 Route18Text3: ; 0x59b41
 	db $08 ; asm
-	ld hl, TrainerHeader_59b02
+	ld hl, Route18TH2
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_59b4b: ; 0x59b4b
-	TX_FAR _UnnamedText_59b4b
+Route18B4BattleTxt3: ; 0x59b4b
+	TX_FAR _Route18B4BattleTxt3
 	db $50
 ; 0x59b4b + 5 bytes
 
-UnnamedText_59b50: ; 0x59b50
-	TX_FAR _UnnamedText_59b50
+Route18EndBattleTxt3: ; 0x59b50
+	TX_FAR _Route18EndBattleTxt3
 	db $50
 ; 0x59b50 + 5 bytes
 
-UnnamedText_59b55: ; 0x59b55
-	TX_FAR _UnnamedText_59b55
+Route18AfterBattleTxt3: ; 0x59b55
+	TX_FAR _Route18AfterBattleTxt3
 	db $50
 ; 0x59b55 + 5 bytes
 
@@ -45782,40 +45782,40 @@ SilphCo2TrainerHeader1: ; 0x59d90
 	db $2 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d825 ; flag's byte
-	dw UnnamedText_59e2a ; 0x5e2a TextBeforeBattle
-	dw UnnamedText_59e34 ; 0x5e34 TextAfterBattle
-	dw UnnamedText_59e2f ; 0x5e2f TextEndBattle
-	dw UnnamedText_59e2f ; 0x5e2f TextEndBattle
+	dw SilphCo2B4BattleTxt1 ; 0x5e2a TextBeforeBattle
+	dw SilphCo2AfterBattleTxt1 ; 0x5e34 TextAfterBattle
+	dw SilphCo2EndBattleTxt1 ; 0x5e2f TextEndBattle
+	dw SilphCo2EndBattleTxt1 ; 0x5e2f TextEndBattle
 ; 0x59d9c
 
-TrainerHeader_59d9c: ; 0x59d9c
+SilphCo2TH1: ; 0x59d9c
 	db $3 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d825 ; flag's byte
-	dw UnnamedText_59e39 ; 0x5e39 TextBeforeBattle
-	dw UnnamedText_59e43 ; 0x5e43 TextAfterBattle
-	dw UnnamedText_59e3e ; 0x5e3e TextEndBattle
-	dw UnnamedText_59e3e ; 0x5e3e TextEndBattle
+	dw SilphCo2B4BattleTxt2 ; 0x5e39 TextBeforeBattle
+	dw SilphCo2AfterBattleTxt2 ; 0x5e43 TextAfterBattle
+	dw SilphCo2EndBattleTxt2 ; 0x5e3e TextEndBattle
+	dw SilphCo2EndBattleTxt2 ; 0x5e3e TextEndBattle
 ; 0x59da8
 
-TrainerHeader_59da8: ; 0x59da8
+SilphCo2TH2: ; 0x59da8
 	db $4 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d825 ; flag's byte
-	dw UnnamedText_59e48 ; 0x5e48 TextBeforeBattle
-	dw UnnamedText_59e52 ; 0x5e52 TextAfterBattle
-	dw UnnamedText_59e4d ; 0x5e4d TextEndBattle
-	dw UnnamedText_59e4d ; 0x5e4d TextEndBattle
+	dw SilphCo2B4BattleTxt3 ; 0x5e48 TextBeforeBattle
+	dw SilphCo2AfterBattleTxt3 ; 0x5e52 TextAfterBattle
+	dw SilphCo2EndBattleTxt3 ; 0x5e4d TextEndBattle
+	dw SilphCo2EndBattleTxt3 ; 0x5e4d TextEndBattle
 ; 0x59db4
 
-TrainerHeader_59db4: ; 0x59db4
+SilphCo2TH3: ; 0x59db4
 	db $5 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d825 ; flag's byte
-	dw UnnamedText_59e57 ; 0x5e57 TextBeforeBattle
-	dw UnnamedText_59e61 ; 0x5e61 TextAfterBattle
-	dw UnnamedText_59e5c ; 0x5e5c TextEndBattle
-	dw UnnamedText_59e5c ; 0x5e5c TextEndBattle
+	dw SilphCo2B4BattleTxt4 ; 0x5e57 TextBeforeBattle
+	dw SilphCo2AfterBattleTxt4 ; 0x5e61 TextAfterBattle
+	dw SilphCo2EndBattleTxt4 ; 0x5e5c TextEndBattle
+	dw SilphCo2EndBattleTxt4 ; 0x5e5c TextEndBattle
 ; 0x59dc0
 
 db $ff
@@ -45869,79 +45869,79 @@ SilphCo2Text2: ; 0x59e02
 
 SilphCo2Text3: ; 0x59e0c
 	db $08 ; asm
-	ld hl, TrainerHeader_59d9c
+	ld hl, SilphCo2TH1
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 SilphCo2Text4: ; 0x59e16
 	db $08 ; asm
-	ld hl, TrainerHeader_59da8
+	ld hl, SilphCo2TH2
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 SilphCo2Text5: ; 0x59e20
 	db $08 ; asm
-	ld hl, TrainerHeader_59db4
+	ld hl, SilphCo2TH3
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_59e2a: ; 0x59e2a
-	TX_FAR _UnnamedText_59e2a
+SilphCo2B4BattleTxt1: ; 0x59e2a
+	TX_FAR _SilphCo2B4BattleTxt1
 	db $50
 ; 0x59e2a + 5 bytes
 
-UnnamedText_59e2f: ; 0x59e2f
-	TX_FAR _UnnamedText_59e2f
+SilphCo2EndBattleTxt1: ; 0x59e2f
+	TX_FAR _SilphCo2EndBattleTxt1
 	db $50
 ; 0x59e2f + 5 bytes
 
-UnnamedText_59e34: ; 0x59e34
-	TX_FAR _UnnamedText_59e34
+SilphCo2AfterBattleTxt1: ; 0x59e34
+	TX_FAR _SilphCo2AfterBattleTxt1
 	db $50
 ; 0x59e34 + 5 bytes
 
-UnnamedText_59e39: ; 0x59e39
-	TX_FAR _UnnamedText_59e39
+SilphCo2B4BattleTxt2: ; 0x59e39
+	TX_FAR _SilphCo2B4BattleTxt2
 	db $50
 ; 0x59e39 + 5 bytes
 
-UnnamedText_59e3e: ; 0x59e3e
-	TX_FAR _UnnamedText_59e3e
+SilphCo2EndBattleTxt2: ; 0x59e3e
+	TX_FAR _SilphCo2EndBattleTxt2
 	db $50
 ; 0x59e3e + 5 bytes
 
-UnnamedText_59e43: ; 0x59e43
-	TX_FAR _UnnamedText_59e43
+SilphCo2AfterBattleTxt2: ; 0x59e43
+	TX_FAR _SilphCo2AfterBattleTxt2
 	db $50
 ; 0x59e43 + 5 bytes
 
-UnnamedText_59e48: ; 0x59e48
-	TX_FAR _UnnamedText_59e48
+SilphCo2B4BattleTxt3: ; 0x59e48
+	TX_FAR _SilphCo2B4BattleTxt3
 	db $50
 ; 0x59e48 + 5 bytes
 
-UnnamedText_59e4d: ; 0x59e4d
-	TX_FAR _UnnamedText_59e4d
+SilphCo2EndBattleTxt3: ; 0x59e4d
+	TX_FAR _SilphCo2EndBattleTxt3
 	db $50
 ; 0x59e4d + 5 bytes
 
-UnnamedText_59e52: ; 0x59e52
-	TX_FAR _UnnamedText_59e52
+SilphCo2AfterBattleTxt3: ; 0x59e52
+	TX_FAR _SilphCo2AfterBattleTxt3
 	db $50
 ; 0x59e52 + 5 bytes
 
-UnnamedText_59e57: ; 0x59e57
-	TX_FAR _UnnamedText_59e57
+SilphCo2B4BattleTxt4: ; 0x59e57
+	TX_FAR _SilphCo2B4BattleTxt4
 	db $50
 ; 0x59e57 + 5 bytes
 
-UnnamedText_59e5c: ; 0x59e5c
-	TX_FAR _UnnamedText_59e5c
+SilphCo2EndBattleTxt4: ; 0x59e5c
+	TX_FAR _SilphCo2EndBattleTxt4
 	db $50
 ; 0x59e5c + 5 bytes
 
-UnnamedText_59e61: ; 0x59e61
-	TX_FAR _UnnamedText_59e61
+SilphCo2AfterBattleTxt4: ; 0x59e61
+	TX_FAR _SilphCo2AfterBattleTxt4
 	db $50
 ; 0x59e61 + 5 bytes
 
@@ -46008,20 +46008,20 @@ SilphCo3TrainerHeader1: ; 0x59fcc
 	db $2 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d827 ; flag's byte
-	dw UnnamedText_5a00d ; 0x600d TextBeforeBattle
-	dw UnnamedText_5a017 ; 0x6017 TextAfterBattle
-	dw UnnamedText_5a012 ; 0x6012 TextEndBattle
-	dw UnnamedText_5a012 ; 0x6012 TextEndBattle
+	dw SilphCo3B4BattleTxt1 ; 0x600d TextBeforeBattle
+	dw SilphCo3AfterBattleTxt1 ; 0x6017 TextAfterBattle
+	dw SilphCo3EndBattleTxt1 ; 0x6012 TextEndBattle
+	dw SilphCo3EndBattleTxt1 ; 0x6012 TextEndBattle
 ; 0x59fd8
 
-TrainerHeader_59fd8: ; 0x59fd8
+SilphCo3TH1: ; 0x59fd8
 	db $3 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d827 ; flag's byte
-	dw UnnamedText_5a026 ; 0x6026 TextBeforeBattle
-	dw UnnamedText_5a030 ; 0x6030 TextAfterBattle
-	dw UnnamedText_5a02b ; 0x602b TextEndBattle
-	dw UnnamedText_5a02b ; 0x602b TextEndBattle
+	dw SilphCo3B4BattleTxt2 ; 0x6026 TextBeforeBattle
+	dw SilphCo3AfterBattleTxt2 ; 0x6030 TextAfterBattle
+	dw SilphCo3EndBattleTxt2 ; 0x602b TextEndBattle
+	dw SilphCo3EndBattleTxt2 ; 0x602b TextEndBattle
 ; 0x59fe4
 
 db $ff
@@ -46053,39 +46053,39 @@ SilphCo3Text2: ; 0x5a003
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_5a00d: ; 0x5a00d
-	TX_FAR _UnnamedText_5a00d
+SilphCo3B4BattleTxt1: ; 0x5a00d
+	TX_FAR _SilphCo3B4BattleTxt1
 	db $50
 ; 0x5a00d + 5 bytes
 
-UnnamedText_5a012: ; 0x5a012
-	TX_FAR _UnnamedText_5a012
+SilphCo3EndBattleTxt1: ; 0x5a012
+	TX_FAR _SilphCo3EndBattleTxt1
 	db $50
 ; 0x5a012 + 5 bytes
 
-UnnamedText_5a017: ; 0x5a017
-	TX_FAR _UnnamedText_5a017
+SilphCo3AfterBattleTxt1: ; 0x5a017
+	TX_FAR _SilphCo3AfterBattleTxt1
 	db $50
 ; 0x5a017 + 5 bytes
 
 SilphCo3Text3: ; 0x5a01c
 	db $08 ; asm
-	ld hl, TrainerHeader_59fd8
+	ld hl, SilphCo3TH1
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_5a026: ; 0x5a026
-	TX_FAR _UnnamedText_5a026
+SilphCo3B4BattleTxt2: ; 0x5a026
+	TX_FAR _SilphCo3B4BattleTxt2
 	db $50
 ; 0x5a026 + 5 bytes
 
-UnnamedText_5a02b: ; 0x5a02b
-	TX_FAR _UnnamedText_5a02b
+SilphCo3EndBattleTxt2: ; 0x5a02b
+	TX_FAR _SilphCo3EndBattleTxt2
 	db $50
 ; 0x5a02b + 5 bytes
 
-UnnamedText_5a030: ; 0x5a030
-	TX_FAR _UnnamedText_5a030
+SilphCo3AfterBattleTxt2: ; 0x5a030
+	TX_FAR _SilphCo3AfterBattleTxt2
 	db $50
 ; 0x5a030 + 5 bytes
 
@@ -46157,20 +46157,20 @@ SilphCo10TrainerHeader1: ; 0x5a192
 	db $1 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d835 ; flag's byte
-	dw UnnamedText_5a1dd ; 0x61dd TextBeforeBattle
-	dw UnnamedText_5a1e7 ; 0x61e7 TextAfterBattle
-	dw UnnamedText_5a1e2 ; 0x61e2 TextEndBattle
-	dw UnnamedText_5a1e2 ; 0x61e2 TextEndBattle
+	dw SilphCo10B4BattleTxt1 ; 0x61dd TextBeforeBattle
+	dw SilphCo10AfterBattleTxt1 ; 0x61e7 TextAfterBattle
+	dw SilphCo10EndBattleTxt1 ; 0x61e2 TextEndBattle
+	dw SilphCo10EndBattleTxt1 ; 0x61e2 TextEndBattle
 ; 0x5a19e
 
-TrainerHeader_5a19e: ; 0x5a19e
+SilphCo10TH1: ; 0x5a19e
 	db $2 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d835 ; flag's byte
-	dw UnnamedText_5a1ec ; 0x61ec TextBeforeBattle
-	dw UnnamedText_5a1f6 ; 0x61f6 TextAfterBattle
-	dw UnnamedText_5a1f1 ; 0x61f1 TextEndBattle
-	dw UnnamedText_5a1f1 ; 0x61f1 TextEndBattle
+	dw SilphCo10B4BattleTxt2 ; 0x61ec TextBeforeBattle
+	dw SilphCo10AfterBattleTxt2 ; 0x61f6 TextAfterBattle
+	dw SilphCo10EndBattleTxt2 ; 0x61f1 TextEndBattle
+	dw SilphCo10EndBattleTxt2 ; 0x61f1 TextEndBattle
 ; 0x5a1aa
 
 db $ff
@@ -46183,7 +46183,7 @@ SilphCo10Text1: ; 0x5a1ab
 
 SilphCo10Text2: ; 0x5a1b5
 	db $08 ; asm
-	ld hl, TrainerHeader_5a19e
+	ld hl, SilphCo10TH1
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -46208,33 +46208,33 @@ UnnamedText_5a1d8: ; 0x5a1d8
 	db $50
 ; 0x5a1d8 + 5 bytes
 
-UnnamedText_5a1dd: ; 0x5a1dd
-	TX_FAR _UnnamedText_5a1dd
+SilphCo10B4BattleTxt1: ; 0x5a1dd
+	TX_FAR _SilphCo10B4BattleTxt1
 	db $50
 ; 0x5a1dd + 5 bytes
 
-UnnamedText_5a1e2: ; 0x5a1e2
-	TX_FAR _UnnamedText_5a1e2
+SilphCo10EndBattleTxt1: ; 0x5a1e2
+	TX_FAR _SilphCo10EndBattleTxt1
 	db $50
 ; 0x5a1e2 + 5 bytes
 
-UnnamedText_5a1e7: ; 0x5a1e7
-	TX_FAR _UnnamedText_5a1e7
+SilphCo10AfterBattleTxt1: ; 0x5a1e7
+	TX_FAR _SilphCo10AfterBattleTxt1
 	db $50
 ; 0x5a1e7 + 5 bytes
 
-UnnamedText_5a1ec: ; 0x5a1ec
-	TX_FAR _UnnamedText_5a1ec
+SilphCo10B4BattleTxt2: ; 0x5a1ec
+	TX_FAR _SilphCo10B4BattleTxt2
 	db $50
 ; 0x5a1ec + 5 bytes
 
-UnnamedText_5a1f1: ; 0x5a1f1
-	TX_FAR _UnnamedText_5a1f1
+SilphCo10EndBattleTxt2: ; 0x5a1f1
+	TX_FAR _SilphCo10EndBattleTxt2
 	db $50
 ; 0x5a1f1 + 5 bytes
 
-UnnamedText_5a1f6: ; 0x5a1f6
-	TX_FAR _UnnamedText_5a1f6
+SilphCo10AfterBattleTxt2: ; 0x5a1f6
+	TX_FAR _SilphCo10AfterBattleTxt2
 	db $50
 ; 0x5a1f6 + 5 bytes
 
@@ -46972,10 +46972,10 @@ PewterGymTrainerHeader1: ; 0x5c441
 	db $2 ; flag's bit
 	db ($5 << 4) ; trainer's view range
 	dw $d755 ; flag's byte
-	dw UnnamedText_5c4d0 ; 0x44d0 TextBeforeBattle
-	dw UnnamedText_5c4da ; 0x44da TextAfterBattle
-	dw UnnamedText_5c4d5 ; 0x44d5 TextEndBattle
-	dw UnnamedText_5c4d5 ; 0x44d5 TextEndBattle
+	dw PewterGymB4BattleTxt1 ; 0x44d0 TextBeforeBattle
+	dw PewterGymAfterBattleTxt1 ; 0x44da TextAfterBattle
+	dw PewterGymEndBattleTxt1 ; 0x44d5 TextEndBattle
+	dw PewterGymEndBattleTxt1 ; 0x44d5 TextEndBattle
 ; 0x5c44d
 
 db $ff
@@ -47056,18 +47056,18 @@ PewterGymText2: ; 0x5c4c6
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_5c4d0: ; 0x5c4d0
-	TX_FAR _UnnamedText_5c4d0
+PewterGymB4BattleTxt1: ; 0x5c4d0
+	TX_FAR _PewterGymB4BattleTxt1
 	db $50
 ; 0x5c4d0 + 5 bytes
 
-UnnamedText_5c4d5: ; 0x5c4d5
-	TX_FAR _UnnamedText_5c4d5
+PewterGymEndBattleTxt1: ; 0x5c4d5
+	TX_FAR _PewterGymEndBattleTxt1
 	db $50
 ; 0x5c4d5 + 5 bytes
 
-UnnamedText_5c4da: ; 0x5c4da
-	TX_FAR _UnnamedText_5c4da
+PewterGymAfterBattleTxt1: ; 0x5c4da
+	TX_FAR _PewterGymAfterBattleTxt1
 	db $50
 ; 0x5c4da + 5 bytes
 
@@ -47332,20 +47332,20 @@ CeruleanGymTrainerHeader1: ; 0x5c758
 	db $2 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d75e ; flag's byte
-	dw UnnamedText_5c7e9 ; 0x47e9 TextBeforeBattle
-	dw UnnamedText_5c7f3 ; 0x47f3 TextAfterBattle
-	dw UnnamedText_5c7ee ; 0x47ee TextEndBattle
-	dw UnnamedText_5c7ee ; 0x47ee TextEndBattle
+	dw CeruleanGymB4BattleTxt1 ; 0x47e9 TextBeforeBattle
+	dw CeruleanGymAfterBattleTxt1 ; 0x47f3 TextAfterBattle
+	dw CeruleanGymEndBattleTxt1 ; 0x47ee TextEndBattle
+	dw CeruleanGymEndBattleTxt1 ; 0x47ee TextEndBattle
 ; 0x5c764
 
-TrainerHeader_5c764: ; 0x5c764
+CeruleanGymTH1: ; 0x5c764
 	db $3 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d75e ; flag's byte
-	dw UnnamedText_5c802 ; 0x4802 TextBeforeBattle
-	dw UnnamedText_5c80c ; 0x480c TextAfterBattle
-	dw UnnamedText_5c807 ; 0x4807 TextEndBattle
-	dw UnnamedText_5c807 ; 0x4807 TextEndBattle
+	dw CeruleanGymB4BattleTxt2 ; 0x4802 TextBeforeBattle
+	dw CeruleanGymAfterBattleTxt2 ; 0x480c TextAfterBattle
+	dw CeruleanGymEndBattleTxt2 ; 0x4807 TextEndBattle
+	dw CeruleanGymEndBattleTxt2 ; 0x4807 TextEndBattle
 ; 0x5c770
 
 db $ff
@@ -47423,39 +47423,39 @@ CeruleanGymText2: ; 0x5c7df
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_5c7e9: ; 0x5c7e9
-	TX_FAR _UnnamedText_5c7e9
+CeruleanGymB4BattleTxt1: ; 0x5c7e9
+	TX_FAR _CeruleanGymB4BattleTxt1
 	db $50
 ; 0x5c7e9 + 5 bytes
 
-UnnamedText_5c7ee: ; 0x5c7ee
-	TX_FAR _UnnamedText_5c7ee
+CeruleanGymEndBattleTxt1: ; 0x5c7ee
+	TX_FAR _CeruleanGymEndBattleTxt1
 	db $50
 ; 0x5c7ee + 5 bytes
 
-UnnamedText_5c7f3: ; 0x5c7f3
-	TX_FAR _UnnamedText_5c7f3
+CeruleanGymAfterBattleTxt1: ; 0x5c7f3
+	TX_FAR _CeruleanGymAfterBattleTxt1
 	db $50
 ; 0x5c7f3 + 5 bytes
 
 CeruleanGymText3: ; 0x5c7f8
 	db $08 ; asm
-	ld hl, TrainerHeader_5c764
+	ld hl, CeruleanGymTH1
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_5c802: ; 0x5c802
-	TX_FAR _UnnamedText_5c802
+CeruleanGymB4BattleTxt2: ; 0x5c802
+	TX_FAR _CeruleanGymB4BattleTxt2
 	db $50
 ; 0x5c802 + 5 bytes
 
-UnnamedText_5c807: ; 0x5c807
-	TX_FAR _UnnamedText_5c807
+CeruleanGymEndBattleTxt2: ; 0x5c807
+	TX_FAR _CeruleanGymEndBattleTxt2
 	db $50
 ; 0x5c807 + 5 bytes
 
-UnnamedText_5c80c: ; 0x5c80c
-	TX_FAR _UnnamedText_5c80c
+CeruleanGymAfterBattleTxt2: ; 0x5c80c
+	TX_FAR _CeruleanGymAfterBattleTxt2
 	db $50
 ; 0x5c80c + 5 bytes
 
@@ -47784,30 +47784,30 @@ VermilionGymTrainerHeader1: ; 0x5caf8
 	db $2 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d773 ; flag's byte
-	dw UnnamedText_5cb9a ; 0x4b9a TextBeforeBattle
-	dw UnnamedText_5cba4 ; 0x4ba4 TextAfterBattle
-	dw UnnamedText_5cb9f ; 0x4b9f TextEndBattle
-	dw UnnamedText_5cb9f ; 0x4b9f TextEndBattle
+	dw VermilionGymB4BattleTxt1 ; 0x4b9a TextBeforeBattle
+	dw VermilionGymAfterBattleTxt1 ; 0x4ba4 TextAfterBattle
+	dw VermilionGymEndBattleTxt1 ; 0x4b9f TextEndBattle
+	dw VermilionGymEndBattleTxt1 ; 0x4b9f TextEndBattle
 ; 0x5cb04
 
-TrainerHeader_5cb04: ; 0x5cb04
+VermilionGymTH1: ; 0x5cb04
 	db $3 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d773 ; flag's byte
-	dw UnnamedText_5cbb3 ; 0x4bb3 TextBeforeBattle
-	dw UnnamedText_5cbbd ; 0x4bbd TextAfterBattle
-	dw UnnamedText_5cbb8 ; 0x4bb8 TextEndBattle
-	dw UnnamedText_5cbb8 ; 0x4bb8 TextEndBattle
+	dw VermilionGymB4BattleTxt2 ; 0x4bb3 TextBeforeBattle
+	dw VermilionGymAfterBattleTxt2 ; 0x4bbd TextAfterBattle
+	dw VermilionGymEndBattleTxt2 ; 0x4bb8 TextEndBattle
+	dw VermilionGymEndBattleTxt2 ; 0x4bb8 TextEndBattle
 ; 0x5cb10
 
-TrainerHeader_5cb10: ; 0x5cb10
+VermilionGymTH2: ; 0x5cb10
 	db $4 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d773 ; flag's byte
-	dw UnnamedText_5cbcc ; 0x4bcc TextBeforeBattle
-	dw UnnamedText_5cbd6 ; 0x4bd6 TextAfterBattle
-	dw UnnamedText_5cbd1 ; 0x4bd1 TextEndBattle
-	dw UnnamedText_5cbd1 ; 0x4bd1 TextEndBattle
+	dw VermilionGymB4BattleTxt3 ; 0x4bcc TextBeforeBattle
+	dw VermilionGymAfterBattleTxt3 ; 0x4bd6 TextAfterBattle
+	dw VermilionGymEndBattleTxt3 ; 0x4bd1 TextEndBattle
+	dw VermilionGymEndBattleTxt3 ; 0x4bd1 TextEndBattle
 ; 0x5cb1c
 
 db $ff
@@ -47885,60 +47885,60 @@ VermilionGymText2: ; 0x5cb90
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_5cb9a: ; 0x5cb9a
-	TX_FAR _UnnamedText_5cb9a
+VermilionGymB4BattleTxt1: ; 0x5cb9a
+	TX_FAR _VermilionGymB4BattleTxt1
 	db $50
 ; 0x5cb9a + 5 bytes
 
-UnnamedText_5cb9f: ; 0x5cb9f
-	TX_FAR _UnnamedText_5cb9f
+VermilionGymEndBattleTxt1: ; 0x5cb9f
+	TX_FAR _VermilionGymEndBattleTxt1
 	db $50
 ; 0x5cb9f + 5 bytes
 
-UnnamedText_5cba4: ; 0x5cba4
-	TX_FAR _UnnamedText_5cba4
+VermilionGymAfterBattleTxt1: ; 0x5cba4
+	TX_FAR _VermilionGymAfterBattleTxt1
 	db $50
 ; 0x5cba4 + 5 bytes
 
 VermilionGymText3: ; 0x5cba9
 	db $08 ; asm
-	ld hl, TrainerHeader_5cb04
+	ld hl, VermilionGymTH1
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_5cbb3: ; 0x5cbb3
-	TX_FAR _UnnamedText_5cbb3
+VermilionGymB4BattleTxt2: ; 0x5cbb3
+	TX_FAR _VermilionGymB4BattleTxt2
 	db $50
 ; 0x5cbb3 + 5 bytes
 
-UnnamedText_5cbb8: ; 0x5cbb8
-	TX_FAR _UnnamedText_5cbb8
+VermilionGymEndBattleTxt2: ; 0x5cbb8
+	TX_FAR _VermilionGymEndBattleTxt2
 	db $50
 ; 0x5cbb8 + 5 bytes
 
-UnnamedText_5cbbd: ; 0x5cbbd
-	TX_FAR _UnnamedText_5cbbd
+VermilionGymAfterBattleTxt2: ; 0x5cbbd
+	TX_FAR _VermilionGymAfterBattleTxt2
 	db $50
 ; 0x5cbbd + 5 bytes
 
 VermilionGymText4: ; 0x5cbc2
 	db $08 ; asm
-	ld hl, TrainerHeader_5cb10
+	ld hl, VermilionGymTH2
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_5cbcc: ; 0x5cbcc
-	TX_FAR _UnnamedText_5cbcc
+VermilionGymB4BattleTxt3: ; 0x5cbcc
+	TX_FAR _VermilionGymB4BattleTxt3
 	db $50
 ; 0x5cbcc + 5 bytes
 
-UnnamedText_5cbd1: ; 0x5cbd1
-	TX_FAR _UnnamedText_5cbd1
+VermilionGymEndBattleTxt3: ; 0x5cbd1
+	TX_FAR _VermilionGymEndBattleTxt3
 	db $50
 ; 0x5cbd1 + 5 bytes
 
-UnnamedText_5cbd6: ; 0x5cbd6
-	TX_FAR _UnnamedText_5cbd6
+VermilionGymAfterBattleTxt3: ; 0x5cbd6
+	TX_FAR _VermilionGymAfterBattleTxt3
 	db $50
 ; 0x5cbd6 + 5 bytes
 
@@ -48152,40 +48152,40 @@ FightingDojoTrainerHeader1: ; 0x5ce13
 	db $2 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7b1 ; flag's byte
-	dw UnnamedText_5ceac ; 0x4eac TextBeforeBattle
-	dw UnnamedText_5ceb6 ; 0x4eb6 TextAfterBattle
-	dw UnnamedText_5ceb1 ; 0x4eb1 TextEndBattle
-	dw UnnamedText_5ceb1 ; 0x4eb1 TextEndBattle
+	dw FightingDojoB4BattleTxt1 ; 0x4eac TextBeforeBattle
+	dw FightingDojoAfterBattleTxt1 ; 0x4eb6 TextAfterBattle
+	dw FightingDojoEndBattleTxt1 ; 0x4eb1 TextEndBattle
+	dw FightingDojoEndBattleTxt1 ; 0x4eb1 TextEndBattle
 ; 0x5ce1f
 
-TrainerHeader_5ce1f: ; 0x5ce1f
+FightingDojoTH1: ; 0x5ce1f
 	db $3 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7b1 ; flag's byte
-	dw UnnamedText_5cec5 ; 0x4ec5 TextBeforeBattle
-	dw UnnamedText_5cecf ; 0x4ecf TextAfterBattle
-	dw UnnamedText_5ceca ; 0x4eca TextEndBattle
-	dw UnnamedText_5ceca ; 0x4eca TextEndBattle
+	dw FightingDojoB4BattleTxt2 ; 0x4ec5 TextBeforeBattle
+	dw FightingDojoAfterBattleTxt2 ; 0x4ecf TextAfterBattle
+	dw FightingDojoEndBattleTxt2 ; 0x4eca TextEndBattle
+	dw FightingDojoEndBattleTxt2 ; 0x4eca TextEndBattle
 ; 0x5ce2b
 
-TrainerHeader_5ce2b: ; 0x5ce2b
+FightingDojoTH2: ; 0x5ce2b
 	db $4 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7b1 ; flag's byte
-	dw UnnamedText_5cede ; 0x4ede TextBeforeBattle
-	dw UnnamedText_5cee8 ; 0x4ee8 TextAfterBattle
-	dw UnnamedText_5cee3 ; 0x4ee3 TextEndBattle
-	dw UnnamedText_5cee3 ; 0x4ee3 TextEndBattle
+	dw FightingDojoB4BattleTxt3 ; 0x4ede TextBeforeBattle
+	dw FightingDojoAfterBattleTxt3 ; 0x4ee8 TextAfterBattle
+	dw FightingDojoEndBattleTxt3 ; 0x4ee3 TextEndBattle
+	dw FightingDojoEndBattleTxt3 ; 0x4ee3 TextEndBattle
 ; 0x5ce37
 
-TrainerHeader_5ce37: ; 0x5ce37
+FightingDojoTH3: ; 0x5ce37
 	db $5 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7b1 ; flag's byte
-	dw UnnamedText_5cef7 ; 0x4ef7 TextBeforeBattle
-	dw UnnamedText_5cf01 ; 0x4f01 TextAfterBattle
-	dw UnnamedText_5cefc ; 0x4efc TextEndBattle
-	dw UnnamedText_5cefc ; 0x4efc TextEndBattle
+	dw FightingDojoB4BattleTxt4 ; 0x4ef7 TextBeforeBattle
+	dw FightingDojoAfterBattleTxt4 ; 0x4f01 TextAfterBattle
+	dw FightingDojoEndBattleTxt4 ; 0x4efc TextEndBattle
+	dw FightingDojoEndBattleTxt4 ; 0x4efc TextEndBattle
 ; 0x5ce43
 
 db $ff
@@ -48249,81 +48249,81 @@ FightingDojoText2: ; 0x5cea2
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_5ceac: ; 0x5ceac
-	TX_FAR _UnnamedText_5ceac
+FightingDojoB4BattleTxt1: ; 0x5ceac
+	TX_FAR _FightingDojoB4BattleTxt1
 	db $50
 ; 0x5ceac + 5 bytes
 
-UnnamedText_5ceb1: ; 0x5ceb1
-	TX_FAR _UnnamedText_5ceb1
+FightingDojoEndBattleTxt1: ; 0x5ceb1
+	TX_FAR _FightingDojoEndBattleTxt1
 	db $50
 ; 0x5ceb1 + 5 bytes
 
-UnnamedText_5ceb6: ; 0x5ceb6
-	TX_FAR _UnnamedText_5ceb6
+FightingDojoAfterBattleTxt1: ; 0x5ceb6
+	TX_FAR _FightingDojoAfterBattleTxt1
 	db $50
 ; 0x5ceb6 + 5 bytes
 
 FightingDojoText3: ; 0x5cebb
 	db $08 ; asm
-	ld hl, TrainerHeader_5ce1f
+	ld hl, FightingDojoTH1
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_5cec5: ; 0x5cec5
-	TX_FAR _UnnamedText_5cec5
+FightingDojoB4BattleTxt2: ; 0x5cec5
+	TX_FAR _FightingDojoB4BattleTxt2
 	db $50
 ; 0x5cec5 + 5 bytes
 
-UnnamedText_5ceca: ; 0x5ceca
-	TX_FAR _UnnamedText_5ceca
+FightingDojoEndBattleTxt2: ; 0x5ceca
+	TX_FAR _FightingDojoEndBattleTxt2
 	db $50
 ; 0x5ceca + 5 bytes
 
-UnnamedText_5cecf: ; 0x5cecf
-	TX_FAR _UnnamedText_5cecf
+FightingDojoAfterBattleTxt2: ; 0x5cecf
+	TX_FAR _FightingDojoAfterBattleTxt2
 	db $50
 ; 0x5cecf + 5 bytes
 
 FightingDojoText4: ; 0x5ced4
 	db $08 ; asm
-	ld hl, TrainerHeader_5ce2b
+	ld hl, FightingDojoTH2
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_5cede: ; 0x5cede
-	TX_FAR _UnnamedText_5cede
+FightingDojoB4BattleTxt3: ; 0x5cede
+	TX_FAR _FightingDojoB4BattleTxt3
 	db $50
 ; 0x5cede + 5 bytes
 
-UnnamedText_5cee3: ; 0x5cee3
-	TX_FAR _UnnamedText_5cee3
+FightingDojoEndBattleTxt3: ; 0x5cee3
+	TX_FAR _FightingDojoEndBattleTxt3
 	db $50
 ; 0x5cee3 + 5 bytes
 
-UnnamedText_5cee8: ; 0x5cee8
-	TX_FAR _UnnamedText_5cee8
+FightingDojoAfterBattleTxt3: ; 0x5cee8
+	TX_FAR _FightingDojoAfterBattleTxt3
 	db $50
 ; 0x5cee8 + 5 bytes
 
 FightingDojoText5: ; 0x5ceed
 	db $08 ; asm
-	ld hl, TrainerHeader_5ce37
+	ld hl, FightingDojoTH3
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_5cef7: ; 0x5cef7
-	TX_FAR _UnnamedText_5cef7
+FightingDojoB4BattleTxt4: ; 0x5cef7
+	TX_FAR _FightingDojoB4BattleTxt4
 	db $50
 ; 0x5cef7 + 5 bytes
 
-UnnamedText_5cefc: ; 0x5cefc
-	TX_FAR _UnnamedText_5cefc
+FightingDojoEndBattleTxt4: ; 0x5cefc
+	TX_FAR _FightingDojoEndBattleTxt4
 	db $50
 ; 0x5cefc + 5 bytes
 
-UnnamedText_5cf01: ; 0x5cf01
-	TX_FAR _UnnamedText_5cf01
+FightingDojoAfterBattleTxt4: ; 0x5cf01
+	TX_FAR _FightingDojoAfterBattleTxt4
 	db $50
 ; 0x5cf01 + 5 bytes
 
@@ -48463,70 +48463,70 @@ SaffronGymTrainerHeader1: ; 0x5d0c3
 	db $2 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7b3 ; flag's byte
-	dw UnnamedText_5d1f0 ; 0x51f0 TextBeforeBattle
-	dw UnnamedText_5d1fa ; 0x51fa TextAfterBattle
-	dw UnnamedText_5d1f5 ; 0x51f5 TextEndBattle
-	dw UnnamedText_5d1f5 ; 0x51f5 TextEndBattle
+	dw SaffronGymB4BattleTxt1 ; 0x51f0 TextBeforeBattle
+	dw SaffronGymAfterBattleTxt1 ; 0x51fa TextAfterBattle
+	dw SaffronGymEndBattleTxt1 ; 0x51f5 TextEndBattle
+	dw SaffronGymEndBattleTxt1 ; 0x51f5 TextEndBattle
 ; 0x5d0cf
 
-TrainerHeader_5d0cf: ; 0x5d0cf
+SaffronGymTH1: ; 0x5d0cf
 	db $3 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7b3 ; flag's byte
-	dw UnnamedText_5d1ff ; 0x51ff TextBeforeBattle
-	dw UnnamedText_5d209 ; 0x5209 TextAfterBattle
-	dw UnnamedText_5d204 ; 0x5204 TextEndBattle
-	dw UnnamedText_5d204 ; 0x5204 TextEndBattle
+	dw SaffronGymB4BattleTxt2 ; 0x51ff TextBeforeBattle
+	dw SaffronGymAfterBattleTxt2 ; 0x5209 TextAfterBattle
+	dw SaffronGymEndBattleTxt2 ; 0x5204 TextEndBattle
+	dw SaffronGymEndBattleTxt2 ; 0x5204 TextEndBattle
 ; 0x5d0db
 
-TrainerHeader_5d0db: ; 0x5d0db
+SaffronGymTH2: ; 0x5d0db
 	db $4 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7b3 ; flag's byte
-	dw UnnamedText_5d20e ; 0x520e TextBeforeBattle
-	dw UnnamedText_5d218 ; 0x5218 TextAfterBattle
-	dw UnnamedText_5d213 ; 0x5213 TextEndBattle
-	dw UnnamedText_5d213 ; 0x5213 TextEndBattle
+	dw SaffronGymB4BattleTxt3 ; 0x520e TextBeforeBattle
+	dw SaffronGymAfterBattleTxt3 ; 0x5218 TextAfterBattle
+	dw SaffronGymEndBattleTxt3 ; 0x5213 TextEndBattle
+	dw SaffronGymEndBattleTxt3 ; 0x5213 TextEndBattle
 ; 0x5d0e7
 
-TrainerHeader_5d0e7: ; 0x5d0e7
+SaffronGymTH3: ; 0x5d0e7
 	db $5 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7b3 ; flag's byte
-	dw UnnamedText_5d21d ; 0x521d TextBeforeBattle
-	dw UnnamedText_5d227 ; 0x5227 TextAfterBattle
-	dw UnnamedText_5d222 ; 0x5222 TextEndBattle
-	dw UnnamedText_5d222 ; 0x5222 TextEndBattle
+	dw SaffronGymB4BattleTxt4 ; 0x521d TextBeforeBattle
+	dw SaffronGymAfterBattleTxt4 ; 0x5227 TextAfterBattle
+	dw SaffronGymEndBattleTxt4 ; 0x5222 TextEndBattle
+	dw SaffronGymEndBattleTxt4 ; 0x5222 TextEndBattle
 ; 0x5d0f3
 
-TrainerHeader_5d0f3: ; 0x5d0f3
+SaffronGymTH4: ; 0x5d0f3
 	db $6 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7b3 ; flag's byte
-	dw UnnamedText_5d22c ; 0x522c TextBeforeBattle
-	dw UnnamedText_5d236 ; 0x5236 TextAfterBattle
-	dw UnnamedText_5d231 ; 0x5231 TextEndBattle
-	dw UnnamedText_5d231 ; 0x5231 TextEndBattle
+	dw SaffronGymB4BattleTxt5 ; 0x522c TextBeforeBattle
+	dw SaffronGymAfterBattleTxt5 ; 0x5236 TextAfterBattle
+	dw SaffronGymEndBattleTxt5 ; 0x5231 TextEndBattle
+	dw SaffronGymEndBattleTxt5 ; 0x5231 TextEndBattle
 ; 0x5d0ff
 
-TrainerHeader_5d0ff: ; 0x5d0ff
+SaffronGymTH5: ; 0x5d0ff
 	db $7 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7b3 ; flag's byte
-	dw UnnamedText_5d23b ; 0x523b TextBeforeBattle
-	dw UnnamedText_5d245 ; 0x5245 TextAfterBattle
-	dw UnnamedText_5d240 ; 0x5240 TextEndBattle
-	dw UnnamedText_5d240 ; 0x5240 TextEndBattle
+	dw SaffronGymB4BattleTxt6 ; 0x523b TextBeforeBattle
+	dw SaffronGymAfterBattleTxt6 ; 0x5245 TextAfterBattle
+	dw SaffronGymEndBattleTxt6 ; 0x5240 TextEndBattle
+	dw SaffronGymEndBattleTxt6 ; 0x5240 TextEndBattle
 ; 0x5d10b
 
-TrainerHeader_5d10b: ; 0x5d10b
+SaffronGymTH6: ; 0x5d10b
 	db $8 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7b3 ; flag's byte
-	dw UnnamedText_5d24a ; 0x524a TextBeforeBattle
-	dw UnnamedText_5d254 ; 0x5254 TextAfterBattle
-	dw UnnamedText_5d24f ; 0x524f TextEndBattle
-	dw UnnamedText_5d24f ; 0x524f TextEndBattle
+	dw SaffronGymB4BattleTxt7 ; 0x524a TextBeforeBattle
+	dw SaffronGymAfterBattleTxt7 ; 0x5254 TextAfterBattle
+	dw SaffronGymEndBattleTxt7 ; 0x524f TextEndBattle
+	dw SaffronGymEndBattleTxt7 ; 0x524f TextEndBattle
 ; 0x5d117
 
 db $ff
@@ -48606,37 +48606,37 @@ SaffronGymText2: ; 0x5d187
 
 SaffronGymText3: ; 0x5d191
 	db $08 ; asm
-	ld hl, TrainerHeader_5d0cf
+	ld hl, SaffronGymTH1
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 SaffronGymText4: ; 0x5d19b
 	db $08 ; asm
-	ld hl, TrainerHeader_5d0db
+	ld hl, SaffronGymTH2
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 SaffronGymText5: ; 0x5d1a5
 	db $08 ; asm
-	ld hl, TrainerHeader_5d0e7
+	ld hl, SaffronGymTH3
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 SaffronGymText6: ; 0x5d1af
 	db $08 ; asm
-	ld hl, TrainerHeader_5d0f3
+	ld hl, SaffronGymTH4
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 SaffronGymText7: ; 0x5d1b9
 	db $08 ; asm
-	ld hl, TrainerHeader_5d0ff
+	ld hl, SaffronGymTH5
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 SaffronGymText8: ; 0x5d1c3
 	db $08 ; asm
-	ld hl, TrainerHeader_5d10b
+	ld hl, SaffronGymTH6
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -48664,108 +48664,108 @@ UnnamedText_5d1eb: ; 0x5d1eb
 	db $50
 ; 0x5d1eb + 5 bytes
 
-UnnamedText_5d1f0: ; 0x5d1f0
-	TX_FAR _UnnamedText_5d1f0
+SaffronGymB4BattleTxt1: ; 0x5d1f0
+	TX_FAR _SaffronGymB4BattleTxt1
 	db $50
 ; 0x5d1f0 + 5 bytes
 
-UnnamedText_5d1f5: ; 0x5d1f5
-	TX_FAR _UnnamedText_5d1f5
+SaffronGymEndBattleTxt1: ; 0x5d1f5
+	TX_FAR _SaffronGymEndBattleTxt1
 	db $50
 ; 0x5d1f5 + 5 bytes
 
-UnnamedText_5d1fa: ; 0x5d1fa
-	TX_FAR _UnnamedText_5d1fa
+SaffronGymAfterBattleTxt1: ; 0x5d1fa
+	TX_FAR _SaffronGymAfterBattleTxt1
 	db $50
 ; 0x5d1fa + 5 bytes
 
-UnnamedText_5d1ff: ; 0x5d1ff
-	TX_FAR _UnnamedText_5d1ff
+SaffronGymB4BattleTxt2: ; 0x5d1ff
+	TX_FAR _SaffronGymB4BattleTxt2
 	db $50
 ; 0x5d1ff + 5 bytes
 
-UnnamedText_5d204: ; 0x5d204
-	TX_FAR _UnnamedText_5d204
+SaffronGymEndBattleTxt2: ; 0x5d204
+	TX_FAR _SaffronGymEndBattleTxt2
 	db $50
 ; 0x5d204 + 5 bytes
 
-UnnamedText_5d209: ; 0x5d209
-	TX_FAR _UnnamedText_5d209
+SaffronGymAfterBattleTxt2: ; 0x5d209
+	TX_FAR _SaffronGymAfterBattleTxt2
 	db $50
 ; 0x5d209 + 5 bytes
 
-UnnamedText_5d20e: ; 0x5d20e
-	TX_FAR _UnnamedText_5d20e
+SaffronGymB4BattleTxt3: ; 0x5d20e
+	TX_FAR _SaffronGymB4BattleTxt3
 	db $50
 ; 0x5d20e + 5 bytes
 
-UnnamedText_5d213: ; 0x5d213
-	TX_FAR _UnnamedText_5d213
+SaffronGymEndBattleTxt3: ; 0x5d213
+	TX_FAR _SaffronGymEndBattleTxt3
 	db $50
 ; 0x5d213 + 5 bytes
 
-UnnamedText_5d218: ; 0x5d218
-	TX_FAR _UnnamedText_5d218
+SaffronGymAfterBattleTxt3: ; 0x5d218
+	TX_FAR _SaffronGymAfterBattleTxt3
 	db $50
 ; 0x5d218 + 5 bytes
 
-UnnamedText_5d21d: ; 0x5d21d
-	TX_FAR _UnnamedText_5d21d
+SaffronGymB4BattleTxt4: ; 0x5d21d
+	TX_FAR _SaffronGymB4BattleTxt4
 	db $50
 ; 0x5d21d + 5 bytes
 
-UnnamedText_5d222: ; 0x5d222
-	TX_FAR _UnnamedText_5d222
+SaffronGymEndBattleTxt4: ; 0x5d222
+	TX_FAR _SaffronGymEndBattleTxt4
 	db $50
 ; 0x5d222 + 5 bytes
 
-UnnamedText_5d227: ; 0x5d227
-	TX_FAR _UnnamedText_5d227
+SaffronGymAfterBattleTxt4: ; 0x5d227
+	TX_FAR _SaffronGymAfterBattleTxt4
 	db $50
 ; 0x5d227 + 5 bytes
 
-UnnamedText_5d22c: ; 0x5d22c
-	TX_FAR _UnnamedText_5d22c
+SaffronGymB4BattleTxt5: ; 0x5d22c
+	TX_FAR _SaffronGymB4BattleTxt5
 	db $50
 ; 0x5d22c + 5 bytes
 
-UnnamedText_5d231: ; 0x5d231
-	TX_FAR _UnnamedText_5d231
+SaffronGymEndBattleTxt5: ; 0x5d231
+	TX_FAR _SaffronGymEndBattleTxt5
 	db $50
 ; 0x5d231 + 5 bytes
 
-UnnamedText_5d236: ; 0x5d236
-	TX_FAR _UnnamedText_5d236
+SaffronGymAfterBattleTxt5: ; 0x5d236
+	TX_FAR _SaffronGymAfterBattleTxt5
 	db $50
 ; 0x5d236 + 5 bytes
 
-UnnamedText_5d23b: ; 0x5d23b
-	TX_FAR _UnnamedText_5d23b
+SaffronGymB4BattleTxt6: ; 0x5d23b
+	TX_FAR _SaffronGymB4BattleTxt6
 	db $50
 ; 0x5d23b + 5 bytes
 
-UnnamedText_5d240: ; 0x5d240
-	TX_FAR _UnnamedText_5d240
+SaffronGymEndBattleTxt6: ; 0x5d240
+	TX_FAR _SaffronGymEndBattleTxt6
 	db $50
 ; 0x5d240 + 5 bytes
 
-UnnamedText_5d245: ; 0x5d245
-	TX_FAR _UnnamedText_5d245
+SaffronGymAfterBattleTxt6: ; 0x5d245
+	TX_FAR _SaffronGymAfterBattleTxt6
 	db $50
 ; 0x5d245 + 5 bytes
 
-UnnamedText_5d24a: ; 0x5d24a
-	TX_FAR _UnnamedText_5d24a
+SaffronGymB4BattleTxt7: ; 0x5d24a
+	TX_FAR _SaffronGymB4BattleTxt7
 	db $50
 ; 0x5d24a + 5 bytes
 
-UnnamedText_5d24f: ; 0x5d24f
-	TX_FAR _UnnamedText_5d24f
+SaffronGymEndBattleTxt7: ; 0x5d24f
+	TX_FAR _SaffronGymEndBattleTxt7
 	db $50
 ; 0x5d24f + 5 bytes
 
-UnnamedText_5d254: ; 0x5d254
-	TX_FAR _UnnamedText_5d254
+SaffronGymAfterBattleTxt7: ; 0x5d254
+	TX_FAR _SaffronGymAfterBattleTxt7
 	db $50
 ; 0x5d254 + 5 bytes
 
@@ -49344,30 +49344,30 @@ SilphCo9TrainerHeader1: ; 0x5d893
 	db $2 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d833 ; flag's byte
-	dw UnnamedText_5d912 ; 0x5912 TextBeforeBattle
-	dw UnnamedText_5d91c ; 0x591c TextAfterBattle
-	dw UnnamedText_5d917 ; 0x5917 TextEndBattle
-	dw UnnamedText_5d917 ; 0x5917 TextEndBattle
+	dw SilphCo9B4BattleTxt1 ; 0x5912 TextBeforeBattle
+	dw SilphCo9AfterBattleTxt1 ; 0x591c TextAfterBattle
+	dw SilphCo9EndBattleTxt1 ; 0x5917 TextEndBattle
+	dw SilphCo9EndBattleTxt1 ; 0x5917 TextEndBattle
 ; 0x5d89f
 
-TrainerHeader_5d89f: ; 0x5d89f
+SilphCo9TH1: ; 0x5d89f
 	db $3 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d833 ; flag's byte
-	dw UnnamedText_5d921 ; 0x5921 TextBeforeBattle
-	dw UnnamedText_5d92b ; 0x592b TextAfterBattle
-	dw UnnamedText_5d926 ; 0x5926 TextEndBattle
-	dw UnnamedText_5d926 ; 0x5926 TextEndBattle
+	dw SilphCo9B4BattleTxt2 ; 0x5921 TextBeforeBattle
+	dw SilphCo9AfterBattleTxt2 ; 0x592b TextAfterBattle
+	dw SilphCo9EndBattleTxt2 ; 0x5926 TextEndBattle
+	dw SilphCo9EndBattleTxt2 ; 0x5926 TextEndBattle
 ; 0x5d8ab
 
-TrainerHeader_5d8ab: ; 0x5d8ab
+SilphCo9TH2: ; 0x5d8ab
 	db $4 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d833 ; flag's byte
-	dw UnnamedText_5d930 ; 0x5930 TextBeforeBattle
-	dw UnnamedText_5d93a ; 0x593a TextAfterBattle
-	dw UnnamedText_5d935 ; 0x5935 TextEndBattle
-	dw UnnamedText_5d935 ; 0x5935 TextEndBattle
+	dw SilphCo9B4BattleTxt3 ; 0x5930 TextBeforeBattle
+	dw SilphCo9AfterBattleTxt3 ; 0x593a TextAfterBattle
+	dw SilphCo9EndBattleTxt3 ; 0x5935 TextEndBattle
+	dw SilphCo9EndBattleTxt3 ; 0x5935 TextEndBattle
 ; 0x5d8b7
 
 db $ff
@@ -49416,58 +49416,58 @@ SilphCo9Text2: ; 0x5d8f4
 
 SilphCo9Text3: ; 0x5d8fe
 	db $08 ; asm
-	ld hl, TrainerHeader_5d89f
+	ld hl, SilphCo9TH1
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 SilphCo9Text4: ; 0x5d908
 	db $08 ; asm
-	ld hl, TrainerHeader_5d8ab
+	ld hl, SilphCo9TH2
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_5d912: ; 0x5d912
-	TX_FAR _UnnamedText_5d912
+SilphCo9B4BattleTxt1: ; 0x5d912
+	TX_FAR _SilphCo9B4BattleTxt1
 	db $50
 ; 0x5d912 + 5 bytes
 
-UnnamedText_5d917: ; 0x5d917
-	TX_FAR _UnnamedText_5d917
+SilphCo9EndBattleTxt1: ; 0x5d917
+	TX_FAR _SilphCo9EndBattleTxt1
 	db $50
 ; 0x5d917 + 5 bytes
 
-UnnamedText_5d91c: ; 0x5d91c
-	TX_FAR _UnnamedText_5d91c
+SilphCo9AfterBattleTxt1: ; 0x5d91c
+	TX_FAR _SilphCo9AfterBattleTxt1
 	db $50
 ; 0x5d91c + 5 bytes
 
-UnnamedText_5d921: ; 0x5d921
-	TX_FAR _UnnamedText_5d921
+SilphCo9B4BattleTxt2: ; 0x5d921
+	TX_FAR _SilphCo9B4BattleTxt2
 	db $50
 ; 0x5d921 + 5 bytes
 
-UnnamedText_5d926: ; 0x5d926
-	TX_FAR _UnnamedText_5d926
+SilphCo9EndBattleTxt2: ; 0x5d926
+	TX_FAR _SilphCo9EndBattleTxt2
 	db $50
 ; 0x5d926 + 5 bytes
 
-UnnamedText_5d92b: ; 0x5d92b
-	TX_FAR _UnnamedText_5d92b
+SilphCo9AfterBattleTxt2: ; 0x5d92b
+	TX_FAR _SilphCo9AfterBattleTxt2
 	db $50
 ; 0x5d92b + 5 bytes
 
-UnnamedText_5d930: ; 0x5d930
-	TX_FAR _UnnamedText_5d930
+SilphCo9B4BattleTxt3: ; 0x5d930
+	TX_FAR _SilphCo9B4BattleTxt3
 	db $50
 ; 0x5d930 + 5 bytes
 
-UnnamedText_5d935: ; 0x5d935
-	TX_FAR _UnnamedText_5d935
+SilphCo9EndBattleTxt3: ; 0x5d935
+	TX_FAR _SilphCo9EndBattleTxt3
 	db $50
 ; 0x5d935 + 5 bytes
 
-UnnamedText_5d93a: ; 0x5d93a
-	TX_FAR _UnnamedText_5d93a
+SilphCo9AfterBattleTxt3: ; 0x5d93a
+	TX_FAR _SilphCo9AfterBattleTxt3
 	db $50
 ; 0x5d93a + 5 bytes
 
@@ -49531,20 +49531,20 @@ VictoryRoad1TrainerHeader1: ; 0x5da6d
 	db $1 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d869 ; flag's byte
-	dw UnnamedText_5da9a ; 0x5a9a TextBeforeBattle
-	dw UnnamedText_5daa4 ; 0x5aa4 TextAfterBattle
-	dw UnnamedText_5da9f ; 0x5a9f TextEndBattle
-	dw UnnamedText_5da9f ; 0x5a9f TextEndBattle
+	dw VictoryRoad1B4BattleTxt1 ; 0x5a9a TextBeforeBattle
+	dw VictoryRoad1AfterBattleTxt1 ; 0x5aa4 TextAfterBattle
+	dw VictoryRoad1EndBattleTxt1 ; 0x5a9f TextEndBattle
+	dw VictoryRoad1EndBattleTxt1 ; 0x5a9f TextEndBattle
 ; 0x5da79
 
-TrainerHeader_5da79: ; 0x5da79
+VictoryRoad1TH1: ; 0x5da79
 	db $2 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d869 ; flag's byte
-	dw UnnamedText_5daa9 ; 0x5aa9 TextBeforeBattle
-	dw UnnamedText_5dab3 ; 0x5ab3 TextAfterBattle
-	dw UnnamedText_5daae ; 0x5aae TextEndBattle
-	dw UnnamedText_5daae ; 0x5aae TextEndBattle
+	dw VictoryRoad1B4BattleTxt2 ; 0x5aa9 TextBeforeBattle
+	dw VictoryRoad1AfterBattleTxt2 ; 0x5ab3 TextAfterBattle
+	dw VictoryRoad1EndBattleTxt2 ; 0x5aae TextEndBattle
+	dw VictoryRoad1EndBattleTxt2 ; 0x5aae TextEndBattle
 ; 0x5da85
 
 db $ff
@@ -49557,37 +49557,37 @@ VictoryRoad1Text1: ; 0x5da86
 
 VictoryRoad1Text2: ; 0x5da90
 	db $08 ; asm
-	ld hl, TrainerHeader_5da79
+	ld hl, VictoryRoad1TH1
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_5da9a: ; 0x5da9a
-	TX_FAR _UnnamedText_5da9a
+VictoryRoad1B4BattleTxt1: ; 0x5da9a
+	TX_FAR _VictoryRoad1B4BattleTxt1
 	db $50
 ; 0x5da9a + 5 bytes
 
-UnnamedText_5da9f: ; 0x5da9f
-	TX_FAR _UnnamedText_5da9f
+VictoryRoad1EndBattleTxt1: ; 0x5da9f
+	TX_FAR _VictoryRoad1EndBattleTxt1
 	db $50
 ; 0x5da9f + 5 bytes
 
-UnnamedText_5daa4: ; 0x5daa4
-	TX_FAR _UnnamedText_5daa4
+VictoryRoad1AfterBattleTxt1: ; 0x5daa4
+	TX_FAR _VictoryRoad1AfterBattleTxt1
 	db $50
 ; 0x5daa4 + 5 bytes
 
-UnnamedText_5daa9: ; 0x5daa9
-	TX_FAR _UnnamedText_5daa9
+VictoryRoad1B4BattleTxt2: ; 0x5daa9
+	TX_FAR _VictoryRoad1B4BattleTxt2
 	db $50
 ; 0x5daa9 + 5 bytes
 
-UnnamedText_5daae: ; 0x5daae
-	TX_FAR _UnnamedText_5daae
+VictoryRoad1EndBattleTxt2: ; 0x5daae
+	TX_FAR _VictoryRoad1EndBattleTxt2
 	db $50
 ; 0x5daae + 5 bytes
 
-UnnamedText_5dab3: ; 0x5dab3
-	TX_FAR _UnnamedText_5dab3
+VictoryRoad1AfterBattleTxt2: ; 0x5dab3
+	TX_FAR _VictoryRoad1AfterBattleTxt2
 	db $50
 ; 0x5dab3 + 5 bytes
 
@@ -50035,30 +50035,30 @@ PokemonTower3TrainerHeader1: ; 0x606ed
 	db $1 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d765 ; flag's byte
-	dw UnnamedText_60730 ; 0x4730 TextBeforeBattle
-	dw UnnamedText_6073a ; 0x473a TextAfterBattle
-	dw UnnamedText_60735 ; 0x4735 TextEndBattle
-	dw UnnamedText_60735 ; 0x4735 TextEndBattle
+	dw PokemonTower3B4BattleTxt1 ; 0x4730 TextBeforeBattle
+	dw PokemonTower3AfterBattleTxt1 ; 0x473a TextAfterBattle
+	dw PokemonTower3EndBattleTxt1 ; 0x4735 TextEndBattle
+	dw PokemonTower3EndBattleTxt1 ; 0x4735 TextEndBattle
 ; 0x606f9
 
-TrainerHeader_606f9: ; 0x606f9
+PokemonTower3TH1: ; 0x606f9
 	db $2 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d765 ; flag's byte
-	dw UnnamedText_6073f ; 0x473f TextBeforeBattle
-	dw UnnamedText_60749 ; 0x4749 TextAfterBattle
-	dw UnnamedText_60744 ; 0x4744 TextEndBattle
-	dw UnnamedText_60744 ; 0x4744 TextEndBattle
+	dw PokemonTower3B4BattleTxt2 ; 0x473f TextBeforeBattle
+	dw PokemonTower3AfterBattleTxt2 ; 0x4749 TextAfterBattle
+	dw PokemonTower3EndBattleTxt2 ; 0x4744 TextEndBattle
+	dw PokemonTower3EndBattleTxt2 ; 0x4744 TextEndBattle
 ; 0x60705
 
-TrainerHeader_60705: ; 0x60705
+PokemonTower3TH2: ; 0x60705
 	db $3 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d765 ; flag's byte
-	dw UnnamedText_6074e ; 0x474e TextBeforeBattle
-	dw UnnamedText_60758 ; 0x4758 TextAfterBattle
-	dw UnnamedText_60753 ; 0x4753 TextEndBattle
-	dw UnnamedText_60753 ; 0x4753 TextEndBattle
+	dw PokemonTower3B4BattleTxt3 ; 0x474e TextBeforeBattle
+	dw PokemonTower3AfterBattleTxt3 ; 0x4758 TextAfterBattle
+	dw PokemonTower3EndBattleTxt3 ; 0x4753 TextEndBattle
+	dw PokemonTower3EndBattleTxt3 ; 0x4753 TextEndBattle
 ; 0x60711
 db $ff
 
@@ -50070,58 +50070,58 @@ PokemonTower3Text1: ; 0x60712
 
 PokemonTower3Text2: ; 0x6071c
 	db $08 ; asm
-	ld hl, TrainerHeader_606f9
+	ld hl, PokemonTower3TH1
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 PokemonTower3Text3: ; 0x60726
 	db $08 ; asm
-	ld hl, TrainerHeader_60705
+	ld hl, PokemonTower3TH2
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_60730: ; 0x60730
-	TX_FAR _UnnamedText_60730
+PokemonTower3B4BattleTxt1: ; 0x60730
+	TX_FAR _PokemonTower3B4BattleTxt1
 	db $50
 ; 0x60730 + 5 bytes
 
-UnnamedText_60735: ; 0x60735
-	TX_FAR _UnnamedText_60735
+PokemonTower3EndBattleTxt1: ; 0x60735
+	TX_FAR _PokemonTower3EndBattleTxt1
 	db $50
 ; 0x60735 + 5 bytes
 
-UnnamedText_6073a: ; 0x6073a
-	TX_FAR _UnnamedText_6073a
+PokemonTower3AfterBattleTxt1: ; 0x6073a
+	TX_FAR _PokemonTower3AfterBattleTxt1
 	db $50
 ; 0x6073a + 5 bytes
 
-UnnamedText_6073f: ; 0x6073f
-	TX_FAR _UnnamedText_6073f
+PokemonTower3B4BattleTxt2: ; 0x6073f
+	TX_FAR _PokemonTower3B4BattleTxt2
 	db $50
 ; 0x6073f + 5 bytes
 
-UnnamedText_60744: ; 0x60744
-	TX_FAR _UnnamedText_60744
+PokemonTower3EndBattleTxt2: ; 0x60744
+	TX_FAR _PokemonTower3EndBattleTxt2
 	db $50
 ; 0x60744 + 5 bytes
 
-UnnamedText_60749: ; 0x60749
-	TX_FAR _UnnamedText_60749
+PokemonTower3AfterBattleTxt2: ; 0x60749
+	TX_FAR _PokemonTower3AfterBattleTxt2
 	db $50
 ; 0x60749 + 5 bytes
 
-UnnamedText_6074e: ; 0x6074e
-	TX_FAR _UnnamedText_6074e
+PokemonTower3B4BattleTxt3: ; 0x6074e
+	TX_FAR _PokemonTower3B4BattleTxt3
 	db $50
 ; 0x6074e + 5 bytes
 
-UnnamedText_60753: ; 0x60753
-	TX_FAR _UnnamedText_60753
+PokemonTower3EndBattleTxt3: ; 0x60753
+	TX_FAR _PokemonTower3EndBattleTxt3
 	db $50
 ; 0x60753 + 5 bytes
 
-UnnamedText_60758: ; 0x60758
-	TX_FAR _UnnamedText_60758
+PokemonTower3AfterBattleTxt3: ; 0x60758
+	TX_FAR _PokemonTower3AfterBattleTxt3
 	db $50
 ; 0x60758 + 5 bytes
 
@@ -50176,30 +50176,30 @@ PokemonTower4TrainerHeader1: ; 0x6081b
 	db $1 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d766 ; flag's byte
-	dw UnnamedText_6085e ; 0x485e TextBeforeBattle
-	dw UnnamedText_60868 ; 0x4868 TextAfterBattle
-	dw UnnamedText_60863 ; 0x4863 TextEndBattle
-	dw UnnamedText_60863 ; 0x4863 TextEndBattle
+	dw PokemonTower4B4BattleTxt1 ; 0x485e TextBeforeBattle
+	dw PokemonTower4AfterBattleTxt1 ; 0x4868 TextAfterBattle
+	dw PokemonTower4EndBattleTxt1 ; 0x4863 TextEndBattle
+	dw PokemonTower4EndBattleTxt1 ; 0x4863 TextEndBattle
 ; 0x60827
 
-TrainerHeader_60827: ; 0x60827
+PokemonTower4TH1: ; 0x60827
 	db $2 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d766 ; flag's byte
-	dw UnnamedText_6086d ; 0x486d TextBeforeBattle
-	dw UnnamedText_60877 ; 0x4877 TextAfterBattle
-	dw UnnamedText_60872 ; 0x4872 TextEndBattle
-	dw UnnamedText_60872 ; 0x4872 TextEndBattle
+	dw PokemonTower4B4BattleTxt2 ; 0x486d TextBeforeBattle
+	dw PokemonTower4AfterBattleTxt2 ; 0x4877 TextAfterBattle
+	dw PokemonTower4EndBattleTxt2 ; 0x4872 TextEndBattle
+	dw PokemonTower4EndBattleTxt2 ; 0x4872 TextEndBattle
 ; 0x60833
 
-TrainerHeader_60833: ; 0x60833
+PokemonTower4TH2: ; 0x60833
 	db $3 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d766 ; flag's byte
-	dw UnnamedText_6087c ; 0x487c TextBeforeBattle
-	dw UnnamedText_60886 ; 0x4886 TextAfterBattle
-	dw UnnamedText_60881 ; 0x4881 TextEndBattle
-	dw UnnamedText_60881 ; 0x4881 TextEndBattle
+	dw PokemonTower4B4BattleTxt3 ; 0x487c TextBeforeBattle
+	dw PokemonTower4AfterBattleTxt3 ; 0x4886 TextAfterBattle
+	dw PokemonTower4EndBattleTxt3 ; 0x4881 TextEndBattle
+	dw PokemonTower4EndBattleTxt3 ; 0x4881 TextEndBattle
 ; 0x6083f
 
 db $ff
@@ -50212,58 +50212,58 @@ PokemonTower4Text1: ; 0x60840
 
 PokemonTower4Text2: ; 0x6084a
 	db $08 ; asm
-	ld hl, TrainerHeader_60827
+	ld hl, PokemonTower4TH1
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 PokemonTower4Text3: ; 0x60854
 	db $08 ; asm
-	ld hl, TrainerHeader_60833
+	ld hl, PokemonTower4TH2
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_6085e: ; 0x6085e
-	TX_FAR _UnnamedText_6085e
+PokemonTower4B4BattleTxt1: ; 0x6085e
+	TX_FAR _PokemonTower4B4BattleTxt1
 	db $50
 ; 0x6085e + 5 bytes
 
-UnnamedText_60863: ; 0x60863
-	TX_FAR _UnnamedText_60863
+PokemonTower4EndBattleTxt1: ; 0x60863
+	TX_FAR _PokemonTower4EndBattleTxt1
 	db $50
 ; 0x60863 + 5 bytes
 
-UnnamedText_60868: ; 0x60868
-	TX_FAR _UnnamedText_60868
+PokemonTower4AfterBattleTxt1: ; 0x60868
+	TX_FAR _PokemonTower4AfterBattleTxt1
 	db $50
 ; 0x60868 + 5 bytes
 
-UnnamedText_6086d: ; 0x6086d
-	TX_FAR _UnnamedText_6086d
+PokemonTower4B4BattleTxt2: ; 0x6086d
+	TX_FAR _PokemonTower4B4BattleTxt2
 	db $50
 ; 0x6086d + 5 bytes
 
-UnnamedText_60872: ; 0x60872
-	TX_FAR _UnnamedText_60872
+PokemonTower4EndBattleTxt2: ; 0x60872
+	TX_FAR _PokemonTower4EndBattleTxt2
 	db $50
 ; 0x60872 + 5 bytes
 
-UnnamedText_60877: ; 0x60877
-	TX_FAR _UnnamedText_60877
+PokemonTower4AfterBattleTxt2: ; 0x60877
+	TX_FAR _PokemonTower4AfterBattleTxt2
 	db $50
 ; 0x60877 + 5 bytes
 
-UnnamedText_6087c: ; 0x6087c
-	TX_FAR _UnnamedText_6087c
+PokemonTower4B4BattleTxt3: ; 0x6087c
+	TX_FAR _PokemonTower4B4BattleTxt3
 	db $50
 ; 0x6087c + 5 bytes
 
-UnnamedText_60881: ; 0x60881
-	TX_FAR _UnnamedText_60881
+PokemonTower4EndBattleTxt3: ; 0x60881
+	TX_FAR _PokemonTower4EndBattleTxt3
 	db $50
 ; 0x60881 + 5 bytes
 
-UnnamedText_60886: ; 0x60886
-	TX_FAR _UnnamedText_60886
+PokemonTower4AfterBattleTxt3: ; 0x60886
+	TX_FAR _PokemonTower4AfterBattleTxt3
 	db $50
 ; 0x60886 + 5 bytes
 
@@ -50320,40 +50320,40 @@ PokemonTower5TrainerHeader1: ; 0x609a9
 	db $2 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d767 ; flag's byte
-	dw UnnamedText_609e9 ; 0x49e9 TextBeforeBattle
-	dw UnnamedText_609f3 ; 0x49f3 TextAfterBattle
-	dw UnnamedText_609ee ; 0x49ee TextEndBattle
-	dw UnnamedText_609ee ; 0x49ee TextEndBattle
+	dw PokemonTower5B4BattleTxt1 ; 0x49e9 TextBeforeBattle
+	dw PokemonTower5AfterBattleTxt1 ; 0x49f3 TextAfterBattle
+	dw PokemonTower5EndBattleTxt1 ; 0x49ee TextEndBattle
+	dw PokemonTower5EndBattleTxt1 ; 0x49ee TextEndBattle
 ; 0x609b5
 
-TrainerHeader_609b5: ; 0x609b5
+PokemonTower5TH1: ; 0x609b5
 	db $3 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d767 ; flag's byte
-	dw UnnamedText_60a02 ; 0x4a02 TextBeforeBattle
-	dw UnnamedText_60a0c ; 0x4a0c TextAfterBattle
-	dw UnnamedText_60a07 ; 0x4a07 TextEndBattle
-	dw UnnamedText_60a07 ; 0x4a07 TextEndBattle
+	dw PokemonTower5B4BattleTxt2 ; 0x4a02 TextBeforeBattle
+	dw PokemonTower5AfterBattleTxt2 ; 0x4a0c TextAfterBattle
+	dw PokemonTower5EndBattleTxt2 ; 0x4a07 TextEndBattle
+	dw PokemonTower5EndBattleTxt2 ; 0x4a07 TextEndBattle
 ; 0x609c1
 
-TrainerHeader_609c1: ; 0x609c1
+PokemonTower5TH2: ; 0x609c1
 	db $4 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d767 ; flag's byte
-	dw UnnamedText_60a1b ; 0x4a1b TextBeforeBattle
-	dw UnnamedText_60a25 ; 0x4a25 TextAfterBattle
-	dw UnnamedText_60a20 ; 0x4a20 TextEndBattle
-	dw UnnamedText_60a20 ; 0x4a20 TextEndBattle
+	dw PokemonTower5B4BattleTxt3 ; 0x4a1b TextBeforeBattle
+	dw PokemonTower5AfterBattleTxt3 ; 0x4a25 TextAfterBattle
+	dw PokemonTower5EndBattleTxt3 ; 0x4a20 TextEndBattle
+	dw PokemonTower5EndBattleTxt3 ; 0x4a20 TextEndBattle
 ; 0x609cd
 
-TrainerHeader_609cd: ; 0x609cd
+PokemonTower5TH3: ; 0x609cd
 	db $5 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d767 ; flag's byte
-	dw UnnamedText_60a34 ; 0x4a34 TextBeforeBattle
-	dw UnnamedText_60a3e ; 0x4a3e TextAfterBattle
-	dw UnnamedText_60a39 ; 0x4a39 TextEndBattle
-	dw UnnamedText_60a39 ; 0x4a39 TextEndBattle
+	dw PokemonTower5B4BattleTxt4 ; 0x4a34 TextBeforeBattle
+	dw PokemonTower5AfterBattleTxt4 ; 0x4a3e TextAfterBattle
+	dw PokemonTower5EndBattleTxt4 ; 0x4a39 TextEndBattle
+	dw PokemonTower5EndBattleTxt4 ; 0x4a39 TextEndBattle
 ; 0x609d9
 
 db $ff
@@ -50368,60 +50368,60 @@ PokemonTower5Text2: ; 0x609df
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_609e9: ; 0x609e9
-	TX_FAR _UnnamedText_609e9
+PokemonTower5B4BattleTxt1: ; 0x609e9
+	TX_FAR _PokemonTower5B4BattleTxt1
 	db $50
 ; 0x609e9 + 5 bytes
 
-UnnamedText_609ee: ; 0x609ee
-	TX_FAR _UnnamedText_609ee
+PokemonTower5EndBattleTxt1: ; 0x609ee
+	TX_FAR _PokemonTower5EndBattleTxt1
 	db $50
 ; 0x609ee + 5 bytes
 
-UnnamedText_609f3: ; 0x609f3
-	TX_FAR _UnnamedText_609f3
+PokemonTower5AfterBattleTxt1: ; 0x609f3
+	TX_FAR _PokemonTower5AfterBattleTxt1
 	db $50
 ; 0x609f3 + 5 bytes
 
 PokemonTower5Text3: ; 0x609f8
 	db $08 ; asm
-	ld hl, TrainerHeader_609b5
+	ld hl, PokemonTower5TH1
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_60a02: ; 0x60a02
-	TX_FAR _UnnamedText_60a02
+PokemonTower5B4BattleTxt2: ; 0x60a02
+	TX_FAR _PokemonTower5B4BattleTxt2
 	db $50
 ; 0x60a02 + 5 bytes
 
-UnnamedText_60a07: ; 0x60a07
-	TX_FAR _UnnamedText_60a07
+PokemonTower5EndBattleTxt2: ; 0x60a07
+	TX_FAR _PokemonTower5EndBattleTxt2
 	db $50
 ; 0x60a07 + 5 bytes
 
-UnnamedText_60a0c: ; 0x60a0c
-	TX_FAR _UnnamedText_60a0c
+PokemonTower5AfterBattleTxt2: ; 0x60a0c
+	TX_FAR _PokemonTower5AfterBattleTxt2
 	db $50
 ; 0x60a0c + 5 bytes
 
 PokemonTower5Text4: ; 0x60a11
 	db $08 ; asm
-	ld hl, TrainerHeader_609c1
+	ld hl, PokemonTower5TH2
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_60a1b: ; 0x60a1b
-	TX_FAR _UnnamedText_60a1b
+PokemonTower5B4BattleTxt3: ; 0x60a1b
+	TX_FAR _PokemonTower5B4BattleTxt3
 	db $50
 ; 0x60a1b + 5 bytes
 
-UnnamedText_60a20: ; 0x60a20
-	TX_FAR _UnnamedText_60a20
+PokemonTower5EndBattleTxt3: ; 0x60a20
+	TX_FAR _PokemonTower5EndBattleTxt3
 	db $50
 ; 0x60a20 + 5 bytes
 
-UnnamedText_60a25: ; 0x60a25
-	TX_FAR _UnnamedText_60a25
+PokemonTower5AfterBattleTxt3: ; 0x60a25
+	TX_FAR _PokemonTower5AfterBattleTxt3
 	db $50
 ; 0x60a25 + 5 bytes
 
@@ -50431,18 +50431,18 @@ PokemonTower5Text5: ; 0x60a2a
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_60a34: ; 0x60a34
-	TX_FAR _UnnamedText_60a34
+PokemonTower5B4BattleTxt4: ; 0x60a34
+	TX_FAR _PokemonTower5B4BattleTxt4
 	db $50
 ; 0x60a34 + 5 bytes
 
-UnnamedText_60a39: ; 0x60a39
-	TX_FAR _UnnamedText_60a39
+PokemonTower5EndBattleTxt4: ; 0x60a39
+	TX_FAR _PokemonTower5EndBattleTxt4
 	db $50
 ; 0x60a39 + 5 bytes
 
-UnnamedText_60a3e: ; 0x60a3e
-	TX_FAR _UnnamedText_60a3e
+PokemonTower5AfterBattleTxt4: ; 0x60a3e
+	TX_FAR _PokemonTower5AfterBattleTxt4
 	db $50
 ; 0x60a3e + 5 bytes
 
@@ -50503,30 +50503,30 @@ PokemonTower6TrainerHeader1: ; 0x60bbf
 	db $1 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d768 ; flag's byte
-	dw UnnamedText_60c29 ; 0x4c29 TextBeforeBattle
-	dw UnnamedText_60c33 ; 0x4c33 TextAfterBattle
-	dw UnnamedText_60c2e ; 0x4c2e TextEndBattle
-	dw UnnamedText_60c2e ; 0x4c2e TextEndBattle
+	dw PokemonTower6B4BattleTxt1 ; 0x4c29 TextBeforeBattle
+	dw PokemonTower6AfterBattleTxt1 ; 0x4c33 TextAfterBattle
+	dw PokemonTower6EndBattleTxt1 ; 0x4c2e TextEndBattle
+	dw PokemonTower6EndBattleTxt1 ; 0x4c2e TextEndBattle
 ; 0x60bcb
 
-TrainerHeader_60bcb: ; 0x60bcb
+PokemonTower6TH1: ; 0x60bcb
 	db $2 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d768 ; flag's byte
-	dw UnnamedText_60c38 ; 0x4c38 TextBeforeBattle
-	dw UnnamedText_60c42 ; 0x4c42 TextAfterBattle
-	dw UnnamedText_60c3d ; 0x4c3d TextEndBattle
-	dw UnnamedText_60c3d ; 0x4c3d TextEndBattle
+	dw PokemonTower6B4BattleTxt2 ; 0x4c38 TextBeforeBattle
+	dw PokemonTower6AfterBattleTxt2 ; 0x4c42 TextAfterBattle
+	dw PokemonTower6EndBattleTxt2 ; 0x4c3d TextEndBattle
+	dw PokemonTower6EndBattleTxt2 ; 0x4c3d TextEndBattle
 ; 0x60bd7
 
-TrainerHeader_60bd7: ; 0x60bd7
+PokemonTower6TH2: ; 0x60bd7
 	db $3 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d768 ; flag's byte
-	dw UnnamedText_60c47 ; 0x4c47 TextBeforeBattle
-	dw UnnamedText_60c51 ; 0x4c51 TextAfterBattle
-	dw UnnamedText_60c4c ; 0x4c4c TextEndBattle
-	dw UnnamedText_60c4c ; 0x4c4c TextEndBattle
+	dw PokemonTower6B4BattleTxt3 ; 0x4c47 TextBeforeBattle
+	dw PokemonTower6AfterBattleTxt3 ; 0x4c51 TextAfterBattle
+	dw PokemonTower6EndBattleTxt3 ; 0x4c4c TextEndBattle
+	dw PokemonTower6EndBattleTxt3 ; 0x4c4c TextEndBattle
 ; 0x60be3
 
 db $ff
@@ -50539,13 +50539,13 @@ PokemonTower6Text1: ; 0x60be4
 
 PokemonTower6Text2: ; 0x60bee
 	db $08 ; asm
-	ld hl, TrainerHeader_60bcb
+	ld hl, PokemonTower6TH1
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 PokemonTower6Text3: ; 0x60bf8
 	db $08 ; asm
-	ld hl, TrainerHeader_60bd7
+	ld hl, PokemonTower6TH2
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -50573,48 +50573,48 @@ UnnamedText_60c24: ; 0x60c24
 	db $50
 ; 0x60c24 + 5 bytes
 
-UnnamedText_60c29: ; 0x60c29
-	TX_FAR _UnnamedText_60c29
+PokemonTower6B4BattleTxt1: ; 0x60c29
+	TX_FAR _PokemonTower6B4BattleTxt1
 	db $50
 ; 0x60c29 + 5 bytes
 
-UnnamedText_60c2e: ; 0x60c2e
-	TX_FAR _UnnamedText_60c2e
+PokemonTower6EndBattleTxt1: ; 0x60c2e
+	TX_FAR _PokemonTower6EndBattleTxt1
 	db $50
 ; 0x60c2e + 5 bytes
 
-UnnamedText_60c33: ; 0x60c33
-	TX_FAR _UnnamedText_60c33
+PokemonTower6AfterBattleTxt1: ; 0x60c33
+	TX_FAR _PokemonTower6AfterBattleTxt1
 	db $50
 ; 0x60c33 + 5 bytes
 
-UnnamedText_60c38: ; 0x60c38
-	TX_FAR _UnnamedText_60c38
+PokemonTower6B4BattleTxt2: ; 0x60c38
+	TX_FAR _PokemonTower6B4BattleTxt2
 	db $50
 ; 0x60c38 + 5 bytes
 
-UnnamedText_60c3d: ; 0x60c3d
-	TX_FAR _UnnamedText_60c3d
+PokemonTower6EndBattleTxt2: ; 0x60c3d
+	TX_FAR _PokemonTower6EndBattleTxt2
 	db $50
 ; 0x60c3d + 5 bytes
 
-UnnamedText_60c42: ; 0x60c42
-	TX_FAR _UnnamedText_60c42
+PokemonTower6AfterBattleTxt2: ; 0x60c42
+	TX_FAR _PokemonTower6AfterBattleTxt2
 	db $50
 ; 0x60c42 + 5 bytes
 
-UnnamedText_60c47: ; 0x60c47
-	TX_FAR _UnnamedText_60c47
+PokemonTower6B4BattleTxt3: ; 0x60c47
+	TX_FAR _PokemonTower6B4BattleTxt3
 	db $50
 ; 0x60c47 + 5 bytes
 
-UnnamedText_60c4c: ; 0x60c4c
-	TX_FAR _UnnamedText_60c4c
+PokemonTower6EndBattleTxt3: ; 0x60c4c
+	TX_FAR _PokemonTower6EndBattleTxt3
 	db $50
 ; 0x60c4c + 5 bytes
 
-UnnamedText_60c51: ; 0x60c51
-	TX_FAR _UnnamedText_60c51
+PokemonTower6AfterBattleTxt3: ; 0x60c51
+	TX_FAR _PokemonTower6AfterBattleTxt3
 	db $50
 ; 0x60c51 + 5 bytes
 
@@ -50676,30 +50676,30 @@ PokemonTower7TrainerHeader1: ; 0x60e47
 	db $1 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d769 ; flag's byte
-	dw UnnamedText_60ec9 ; 0x4ec9 TextBeforeBattle
-	dw UnnamedText_60ed3 ; 0x4ed3 TextAfterBattle
-	dw UnnamedText_60ece ; 0x4ece TextEndBattle
-	dw UnnamedText_60ece ; 0x4ece TextEndBattle
+	dw PokemonTower7B4BattleTxt1 ; 0x4ec9 TextBeforeBattle
+	dw PokemonTower7AfterBattleTxt1 ; 0x4ed3 TextAfterBattle
+	dw PokemonTower7EndBattleTxt1 ; 0x4ece TextEndBattle
+	dw PokemonTower7EndBattleTxt1 ; 0x4ece TextEndBattle
 ; 0x60e53
 
-TrainerHeader_60e53: ; 0x60e53
+PokemonTower7TH1: ; 0x60e53
 	db $2 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d769 ; flag's byte
-	dw UnnamedText_60ed8 ; 0x4ed8 TextBeforeBattle
-	dw UnnamedText_60ee2 ; 0x4ee2 TextAfterBattle
-	dw UnnamedText_60edd ; 0x4edd TextEndBattle
-	dw UnnamedText_60edd ; 0x4edd TextEndBattle
+	dw PokemonTower7B4BattleTxt2 ; 0x4ed8 TextBeforeBattle
+	dw PokemonTower7AfterBattleTxt2 ; 0x4ee2 TextAfterBattle
+	dw PokemonTower7EndBattleTxt2 ; 0x4edd TextEndBattle
+	dw PokemonTower7EndBattleTxt2 ; 0x4edd TextEndBattle
 ; 0x60e5f
 
-TrainerHeader_60e5f: ; 0x60e5f
+PokemonTower7TH2: ; 0x60e5f
 	db $3 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d769 ; flag's byte
-	dw UnnamedText_60ee7 ; 0x4ee7 TextBeforeBattle
-	dw UnnamedText_60ef1 ; 0x4ef1 TextAfterBattle
-	dw UnnamedText_60eec ; 0x4eec TextEndBattle
-	dw UnnamedText_60eec ; 0x4eec TextEndBattle
+	dw PokemonTower7B4BattleTxt3 ; 0x4ee7 TextBeforeBattle
+	dw PokemonTower7AfterBattleTxt3 ; 0x4ef1 TextAfterBattle
+	dw PokemonTower7EndBattleTxt3 ; 0x4eec TextEndBattle
+	dw PokemonTower7EndBattleTxt3 ; 0x4eec TextEndBattle
 ; 0x60e6b
 
 db $ff
@@ -50712,13 +50712,13 @@ PokemonTower7Text1: ; 0x60e6c
 
 PokemonTower7Text2: ; 0x60e76
 	db $08 ; asm
-	ld hl, TrainerHeader_60e53
+	ld hl, PokemonTower7TH1
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 PokemonTower7Text3: ; 0x60e80
 	db $08 ; asm
-	ld hl, TrainerHeader_60e5f
+	ld hl, PokemonTower7TH2
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -50752,48 +50752,48 @@ UnnamedText_60ec4: ; 0x60ec4
 	db $50
 ; 0x60ec4 + 5 bytes
 
-UnnamedText_60ec9: ; 0x60ec9
-	TX_FAR _UnnamedText_60ec9
+PokemonTower7B4BattleTxt1: ; 0x60ec9
+	TX_FAR _PokemonTower7B4BattleTxt1
 	db $50
 ; 0x60ec9 + 5 bytes
 
-UnnamedText_60ece: ; 0x60ece
-	TX_FAR _UnnamedText_60ece
+PokemonTower7EndBattleTxt1: ; 0x60ece
+	TX_FAR _PokemonTower7EndBattleTxt1
 	db $50
 ; 0x60ece + 5 bytes
 
-UnnamedText_60ed3: ; 0x60ed3
-	TX_FAR _UnnamedText_60ed3
+PokemonTower7AfterBattleTxt1: ; 0x60ed3
+	TX_FAR _PokemonTower7AfterBattleTxt1
 	db $50
 ; 0x60ed3 + 5 bytes
 
-UnnamedText_60ed8: ; 0x60ed8
-	TX_FAR _UnnamedText_60ed8
+PokemonTower7B4BattleTxt2: ; 0x60ed8
+	TX_FAR _PokemonTower7B4BattleTxt2
 	db $50
 ; 0x60ed8 + 5 bytes
 
-UnnamedText_60edd: ; 0x60edd
-	TX_FAR _UnnamedText_60edd
+PokemonTower7EndBattleTxt2: ; 0x60edd
+	TX_FAR _PokemonTower7EndBattleTxt2
 	db $50
 ; 0x60edd + 5 bytes
 
-UnnamedText_60ee2: ; 0x60ee2
-	TX_FAR _UnnamedText_60ee2
+PokemonTower7AfterBattleTxt2: ; 0x60ee2
+	TX_FAR _PokemonTower7AfterBattleTxt2
 	db $50
 ; 0x60ee2 + 5 bytes
 
-UnnamedText_60ee7: ; 0x60ee7
-	TX_FAR _UnnamedText_60ee7
+PokemonTower7B4BattleTxt3: ; 0x60ee7
+	TX_FAR _PokemonTower7B4BattleTxt3
 	db $50
 ; 0x60ee7 + 5 bytes
 
-UnnamedText_60eec: ; 0x60eec
-	TX_FAR _UnnamedText_60eec
+PokemonTower7EndBattleTxt3: ; 0x60eec
+	TX_FAR _PokemonTower7EndBattleTxt3
 	db $50
 ; 0x60eec + 5 bytes
 
-UnnamedText_60ef1: ; 0x60ef1
-	TX_FAR _UnnamedText_60ef1
+PokemonTower7AfterBattleTxt3: ; 0x60ef1
+	TX_FAR _PokemonTower7AfterBattleTxt3
 	db $50
 ; 0x60ef1 + 5 bytes
 
@@ -50926,30 +50926,30 @@ ViridianForestTrainerHeader1: ; 0x61142
 	db $2 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7f3 ; flag's byte
-	dw UnnamedText_6118a ; 0x518a TextBeforeBattle
-	dw UnnamedText_61194 ; 0x5194 TextAfterBattle
-	dw UnnamedText_6118f ; 0x518f TextEndBattle
-	dw UnnamedText_6118f ; 0x518f TextEndBattle
+	dw ViridianForestB4BattleTxt1 ; 0x518a TextBeforeBattle
+	dw ViridianForestAfterBattleTxt1 ; 0x5194 TextAfterBattle
+	dw ViridianForestEndBattleTxt1 ; 0x518f TextEndBattle
+	dw ViridianForestEndBattleTxt1 ; 0x518f TextEndBattle
 ; 0x6114e
 
-TrainerHeader_6114e: ; 0x6114e
+ViridianForestTH1: ; 0x6114e
 	db $3 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7f3 ; flag's byte
-	dw UnnamedText_61199 ; 0x5199 TextBeforeBattle
-	dw UnnamedText_611a3 ; 0x51a3 TextAfterBattle
-	dw UnnamedText_6119e ; 0x519e TextEndBattle
-	dw UnnamedText_6119e ; 0x519e TextEndBattle
+	dw ViridianForestB4BattleTxt2 ; 0x5199 TextBeforeBattle
+	dw ViridianForestAfterBattleTxt2 ; 0x51a3 TextAfterBattle
+	dw ViridianForestEndBattleTxt2 ; 0x519e TextEndBattle
+	dw ViridianForestEndBattleTxt2 ; 0x519e TextEndBattle
 ; 0x6115a
 
-TrainerHeader_6115a: ; 0x6115a
+ViridianForestTH2: ; 0x6115a
 	db $4 ; flag's bit
 	db ($1 << 4) ; trainer's view range
 	dw $d7f3 ; flag's byte
-	dw UnnamedText_611a8 ; 0x51a8 TextBeforeBattle
-	dw UnnamedText_611b2 ; 0x51b2 TextAfterBattle
-	dw UnnamedText_611ad ; 0x51ad TextEndBattle
-	dw UnnamedText_611ad ; 0x51ad TextEndBattle
+	dw ViridianForestB4BattleTxt3 ; 0x51a8 TextBeforeBattle
+	dw ViridianForestAfterBattleTxt3 ; 0x51b2 TextAfterBattle
+	dw ViridianForestEndBattleTxt3 ; 0x51ad TextEndBattle
+	dw ViridianForestEndBattleTxt3 ; 0x51ad TextEndBattle
 ; 0x61166
 
 db $ff
@@ -50966,58 +50966,58 @@ ViridianForestText2: ; 0x6116c
 
 ViridianForestText3: ; 0x61176
 	db $08 ; asm
-	ld hl, TrainerHeader_6114e
+	ld hl, ViridianForestTH1
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 ViridianForestText4: ; 0x61180
 	db $08 ; asm
-	ld hl, TrainerHeader_6115a
+	ld hl, ViridianForestTH2
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_6118a: ; 0x6118a
-	TX_FAR _UnnamedText_6118a
+ViridianForestB4BattleTxt1: ; 0x6118a
+	TX_FAR _ViridianForestB4BattleTxt1
 	db $50
 ; 0x6118a + 5 bytes
 
-UnnamedText_6118f: ; 0x6118f
-	TX_FAR _UnnamedText_6118f
+ViridianForestEndBattleTxt1: ; 0x6118f
+	TX_FAR _ViridianForestEndBattleTxt1
 	db $50
 ; 0x6118f + 5 bytes
 
-UnnamedText_61194: ; 0x61194
-	TX_FAR _UnnamedText_61194
+ViridianForestAfterBattleTxt1: ; 0x61194
+	TX_FAR _ViridianForestAfterBattleTxt1
 	db $50
 ; 0x61194 + 5 bytes
 
-UnnamedText_61199: ; 0x61199
-	TX_FAR _UnnamedText_61199
+ViridianForestB4BattleTxt2: ; 0x61199
+	TX_FAR _ViridianForestB4BattleTxt2
 	db $50
 ; 0x61199 + 5 bytes
 
-UnnamedText_6119e: ; 0x6119e
-	TX_FAR _UnnamedText_6119e
+ViridianForestEndBattleTxt2: ; 0x6119e
+	TX_FAR _ViridianForestEndBattleTxt2
 	db $50
 ; 0x6119e + 5 bytes
 
-UnnamedText_611a3: ; 0x611a3
-	TX_FAR _UnnamedText_611a3
+ViridianForestAfterBattleTxt2: ; 0x611a3
+	TX_FAR _ViridianForestAfterBattleTxt2
 	db $50
 ; 0x611a3 + 5 bytes
 
-UnnamedText_611a8: ; 0x611a8
-	TX_FAR _UnnamedText_611a8
+ViridianForestB4BattleTxt3: ; 0x611a8
+	TX_FAR _ViridianForestB4BattleTxt3
 	db $50
 ; 0x611a8 + 5 bytes
 
-UnnamedText_611ad: ; 0x611ad
-	TX_FAR _UnnamedText_611ad
+ViridianForestEndBattleTxt3: ; 0x611ad
+	TX_FAR _ViridianForestEndBattleTxt3
 	db $50
 ; 0x611ad + 5 bytes
 
-UnnamedText_611b2: ; 0x611b2
-	TX_FAR _UnnamedText_611b2
+ViridianForestAfterBattleTxt3: ; 0x611b2
+	TX_FAR _ViridianForestAfterBattleTxt3
 	db $50
 ; 0x611b2 + 5 bytes
 
@@ -51446,20 +51446,20 @@ SSAnneTrainerHeader1: ; 0x616d1
 	db $4 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7ff ; flag's byte
-	dw UnnamedText_61703 ; 0x5703 TextBeforeBattle
-	dw UnnamedText_6170d ; 0x570d TextAfterBattle
-	dw UnnamedText_61708 ; 0x5708 TextEndBattle
-	dw UnnamedText_61708 ; 0x5708 TextEndBattle
+	dw SSAnneB4BattleTxt1 ; 0x5703 TextBeforeBattle
+	dw SSAnneAfterBattleTxt1 ; 0x570d TextAfterBattle
+	dw SSAnneEndBattleTxt1 ; 0x5708 TextEndBattle
+	dw SSAnneEndBattleTxt1 ; 0x5708 TextEndBattle
 ; 0x616dd
 
-TrainerHeader_616dd: ; 0x616dd
+SSAnneTH1: ; 0x616dd
 	db $5 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7ff ; flag's byte
-	dw UnnamedText_6171c ; 0x571c TextBeforeBattle
-	dw UnnamedText_61726 ; 0x5726 TextAfterBattle
-	dw UnnamedText_61721 ; 0x5721 TextEndBattle
-	dw UnnamedText_61721 ; 0x5721 TextEndBattle
+	dw SSAnneB4BattleTxt2 ; 0x571c TextBeforeBattle
+	dw SSAnneAfterBattleTxt2 ; 0x5726 TextAfterBattle
+	dw SSAnneEndBattleTxt2 ; 0x5721 TextEndBattle
+	dw SSAnneEndBattleTxt2 ; 0x5721 TextEndBattle
 ; 0x616e9
 
 db $ff
@@ -51482,39 +51482,39 @@ SSAnne5Text4: ; 0x616f9
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_61703: ; 0x61703
-	TX_FAR _UnnamedText_61703
+SSAnneB4BattleTxt1: ; 0x61703
+	TX_FAR _SSAnneB4BattleTxt1
 	db $50
 ; 0x61703 + 5 bytes
 
-UnnamedText_61708: ; 0x61708
-	TX_FAR _UnnamedText_61708
+SSAnneEndBattleTxt1: ; 0x61708
+	TX_FAR _SSAnneEndBattleTxt1
 	db $50
 ; 0x61708 + 5 bytes
 
-UnnamedText_6170d: ; 0x6170d
-	TX_FAR _UnnamedText_6170d
+SSAnneAfterBattleTxt1: ; 0x6170d
+	TX_FAR _SSAnneAfterBattleTxt1
 	db $50
 ; 0x6170d + 5 bytes
 
 SSAnne5Text5: ; 0x61712
 	db $08 ; asm
-	ld hl, TrainerHeader_616dd
+	ld hl, SSAnneTH1
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_6171c: ; 0x6171c
-	TX_FAR _UnnamedText_6171c
+SSAnneB4BattleTxt2: ; 0x6171c
+	TX_FAR _SSAnneB4BattleTxt2
 	db $50
 ; 0x6171c + 5 bytes
 
-UnnamedText_61721: ; 0x61721
-	TX_FAR _UnnamedText_61721
+SSAnneEndBattleTxt2: ; 0x61721
+	TX_FAR _SSAnneEndBattleTxt2
 	db $50
 ; 0x61721 + 5 bytes
 
-UnnamedText_61726: ; 0x61726
-	TX_FAR _UnnamedText_61726
+SSAnneAfterBattleTxt2: ; 0x61726
+	TX_FAR _SSAnneAfterBattleTxt2
 	db $50
 ; 0x61726 + 5 bytes
 
@@ -51796,40 +51796,40 @@ SSAnne8TrainerHeader1: ; 0x619a5
 	db $1 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d805 ; flag's byte
-	dw UnnamedText_61a0b ; 0x5a0b TextBeforeBattle
-	dw UnnamedText_61a15 ; 0x5a15 TextAfterBattle
-	dw UnnamedText_61a10 ; 0x5a10 TextEndBattle
-	dw UnnamedText_61a10 ; 0x5a10 TextEndBattle
+	dw SSAnne8B4BattleTxt1 ; 0x5a0b TextBeforeBattle
+	dw SSAnne8AfterBattleTxt1 ; 0x5a15 TextAfterBattle
+	dw SSAnne8EndBattleTxt1 ; 0x5a10 TextEndBattle
+	dw SSAnne8EndBattleTxt1 ; 0x5a10 TextEndBattle
 ; 0x619b1
 
-TrainerHeader_619b1: ; 0x619b1
+SSAnne8TH1: ; 0x619b1
 	db $2 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d805 ; flag's byte
-	dw UnnamedText_61a1a ; 0x5a1a TextBeforeBattle
-	dw UnnamedText_5a24 ; 0x5a24 TextAfterBattle
-	dw UnnamedText_61a1f ; 0x5a1f TextEndBattle
-	dw UnnamedText_61a1f ; 0x5a1f TextEndBattle
+	dw SSAnne8B4BattleTxt2 ; 0x5a1a TextBeforeBattle
+	dw SSAnne8AfterBattleTxt2 ; 0x5a24 TextAfterBattle
+	dw SSAnne8EndBattleTxt2 ; 0x5a1f TextEndBattle
+	dw SSAnne8EndBattleTxt2 ; 0x5a1f TextEndBattle
 ; 0x619bd
 
-TrainerHeader_619bd: ; 0x619bd
+SSAnne8TH2: ; 0x619bd
 	db $3 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d805 ; flag's byte
-	dw UnnamedText_61a29 ; 0x5a29 TextBeforeBattle
-	dw UnnamedText_61a33 ; 0x5a33 TextAfterBattle
-	dw UnnamedText_61a2e ; 0x5a2e TextEndBattle
-	dw UnnamedText_61a2e ; 0x5a2e TextEndBattle
+	dw SSAnne8B4BattleTxt3 ; 0x5a29 TextBeforeBattle
+	dw SSAnne8AfterBattleTxt3 ; 0x5a33 TextAfterBattle
+	dw SSAnne8EndBattleTxt3 ; 0x5a2e TextEndBattle
+	dw SSAnne8EndBattleTxt3 ; 0x5a2e TextEndBattle
 ; 0x619c9
 
-TrainerHeader_619c9: ; 0x619c9
+SSAnne8TH3: ; 0x619c9
 	db $4 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d805 ; flag's byte
-	dw UnnamedText_61a38 ; 0x5a38 TextBeforeBattle
-	dw UnnamedText_61a42 ; 0x5a42 TextAfterBattle
-	dw UnnamedText_61a3d ; 0x5a3d TextEndBattle
-	dw UnnamedText_61a3d ; 0x5a3d TextEndBattle
+	dw SSAnne8B4BattleTxt4 ; 0x5a38 TextBeforeBattle
+	dw SSAnne8AfterBattleTxt4 ; 0x5a42 TextAfterBattle
+	dw SSAnne8EndBattleTxt4 ; 0x5a3d TextEndBattle
+	dw SSAnne8EndBattleTxt4 ; 0x5a3d TextEndBattle
 ; 0x619d5
 
 db $ff
@@ -51842,19 +51842,19 @@ SSAnne8Text1: ; 0x619d6
 
 SSAnne8Text2: ; 0x619e0
 	db $08 ; asm
-	ld hl, TrainerHeader_619b1
+	ld hl, SSAnne8TH1
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 SSAnne8Text3: ; 0x619ea
 	db $08 ; asm
-	ld hl, TrainerHeader_619bd
+	ld hl, SSAnne8TH2
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 SSAnne8Text4: ; 0x619f4
 	db $08 ; asm
-	ld hl, TrainerHeader_619c9
+	ld hl, SSAnne8TH3
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -51865,28 +51865,28 @@ SSAnne8Text8: ; 0x619fe
 	call $13d0
 	jp TextScriptEnd
 
-UnnamedText_61a0b: ; 0x61a0b
-	TX_FAR _UnnamedText_61a0b
+SSAnne8B4BattleTxt1: ; 0x61a0b
+	TX_FAR _SSAnne8B4BattleTxt1
 	db $50
 ; 0x61a0b + 5 bytes
 
-UnnamedText_61a10: ; 0x61a10
-	TX_FAR _UnnamedText_61a10
+SSAnne8EndBattleTxt1: ; 0x61a10
+	TX_FAR _SSAnne8EndBattleTxt1
 	db $50
 ; 0x61a10 + 5 bytes
 
-UnnamedText_61a15: ; 0x61a15
-	TX_FAR _UnnamedText_61a15
+SSAnne8AfterBattleTxt1: ; 0x61a15
+	TX_FAR _SSAnne8AfterBattleTxt1
 	db $50
 ; 0x61a15 + 5 bytes
 
-UnnamedText_61a1a: ; 0x61a1a
-	TX_FAR _UnnamedText_61a1a
+SSAnne8B4BattleTxt2: ; 0x61a1a
+	TX_FAR _SSAnne8B4BattleTxt2
 	db $50
 ; 0x61a1a + 5 bytes
 
-UnnamedText_61a1f: ; 0x61a1f
-	TX_FAR _UnnamedText_61a1f
+SSAnne8EndBattleTxt2: ; 0x61a1f
+	TX_FAR _SSAnne8EndBattleTxt2
 	db $50
 ; 0x61a1f + 5 bytes
 
@@ -51895,33 +51895,33 @@ UnnamedText_61a24: ; 0x61a24
 	db $50
 ; 0x61a24 + 5 bytes
 
-UnnamedText_61a29: ; 0x61a29
-	TX_FAR _UnnamedText_61a29
+SSAnne8B4BattleTxt3: ; 0x61a29
+	TX_FAR _SSAnne8B4BattleTxt3
 	db $50
 ; 0x61a29 + 5 bytes
 
-UnnamedText_61a2e: ; 0x61a2e
-	TX_FAR _UnnamedText_61a2e
+SSAnne8EndBattleTxt3: ; 0x61a2e
+	TX_FAR _SSAnne8EndBattleTxt3
 	db $50
 ; 0x61a2e + 5 bytes
 
-UnnamedText_61a33: ; 0x61a33
-	TX_FAR _UnnamedText_61a33
+SSAnne8AfterBattleTxt3: ; 0x61a33
+	TX_FAR _SSAnne8AfterBattleTxt3
 	db $50
 ; 0x61a33 + 5 bytes
 
-UnnamedText_61a38: ; 0x61a38
-	TX_FAR _UnnamedText_61a38
+SSAnne8B4BattleTxt4: ; 0x61a38
+	TX_FAR _SSAnne8B4BattleTxt4
 	db $50
 ; 0x61a38 + 5 bytes
 
-UnnamedText_61a3d: ; 0x61a3d
-	TX_FAR _UnnamedText_61a3d
+SSAnne8EndBattleTxt4: ; 0x61a3d
+	TX_FAR _SSAnne8EndBattleTxt4
 	db $50
 ; 0x61a3d + 5 bytes
 
-UnnamedText_61a42: ; 0x61a42
-	TX_FAR _UnnamedText_61a42
+SSAnne8AfterBattleTxt4: ; 0x61a42
+	TX_FAR _SSAnne8AfterBattleTxt4
 	db $50
 ; 0x61a42 + 5 bytes
 
@@ -52014,40 +52014,40 @@ SSAnne9TrainerHeader1: ; 0x61b84
 	db $1 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d807 ; flag's byte
-	dw UnnamedText_61c51 ; 0x5c51 TextBeforeBattle
-	dw UnnamedText_61c5b ; 0x5c5b TextAfterBattle
-	dw UnnamedText_61c56 ; 0x5c56 TextEndBattle
-	dw UnnamedText_61c56 ; 0x5c56 TextEndBattle
+	dw SSAnne9B4BattleTxt1 ; 0x5c51 TextBeforeBattle
+	dw SSAnne9AfterBattleTxt1 ; 0x5c5b TextAfterBattle
+	dw SSAnne9EndBattleTxt1 ; 0x5c56 TextEndBattle
+	dw SSAnne9EndBattleTxt1 ; 0x5c56 TextEndBattle
 ; 0x61b90
 
-TrainerHeader_61b90: ; 0x61b90
+SSAnne9TH1: ; 0x61b90
 	db $2 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d807 ; flag's byte
-	dw UnnamedText_61c60 ; 0x5c60 TextBeforeBattle
-	dw UnnamedText_61c6a ; 0x5c6a TextAfterBattle
-	dw UnnamedText_61c65 ; 0x5c65 TextEndBattle
-	dw UnnamedText_61c65 ; 0x5c65 TextEndBattle
+	dw SSAnne9B4BattleTxt2 ; 0x5c60 TextBeforeBattle
+	dw SSAnne9AfterBattleTxt2 ; 0x5c6a TextAfterBattle
+	dw SSAnne9EndBattleTxt2 ; 0x5c65 TextEndBattle
+	dw SSAnne9EndBattleTxt2 ; 0x5c65 TextEndBattle
 ; 0x61b9c
 
-TrainerHeader_61b9c: ; 0x61b9c
+SSAnne9TH2: ; 0x61b9c
 	db $3 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d807 ; flag's byte
-	dw UnnamedText_61c6f ; 0x5c6f TextBeforeBattle
-	dw UnnamedText_61c79 ; 0x5c79 TextAfterBattle
-	dw UnnamedText_61c74 ; 0x5c74 TextEndBattle
-	dw UnnamedText_61c74 ; 0x5c74 TextEndBattle
+	dw SSAnne9B4BattleTxt3 ; 0x5c6f TextBeforeBattle
+	dw SSAnne9AfterBattleTxt3 ; 0x5c79 TextAfterBattle
+	dw SSAnne9EndBattleTxt3 ; 0x5c74 TextEndBattle
+	dw SSAnne9EndBattleTxt3 ; 0x5c74 TextEndBattle
 ; 0x61ba8
 
-TrainerHeader_61ba8: ; 0x61ba8
+SSAnne9TH3: ; 0x61ba8
 	db $4 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d807 ; flag's byte
-	dw UnnamedText_61c7e ; 0x5c7e TextBeforeBattle
-	dw UnnamedText_61c88 ; 0x5c88 TextAfterBattle
-	dw UnnamedText_61c83 ; 0x5c83 TextEndBattle
-	dw UnnamedText_61c83 ; 0x5c83 TextEndBattle
+	dw SSAnne9B4BattleTxt4 ; 0x5c7e TextBeforeBattle
+	dw SSAnne9AfterBattleTxt4 ; 0x5c88 TextAfterBattle
+	dw SSAnne9EndBattleTxt4 ; 0x5c83 TextEndBattle
+	dw SSAnne9EndBattleTxt4 ; 0x5c83 TextEndBattle
 ; 0x61bb4
 
 
@@ -52061,19 +52061,19 @@ SSAnne9Text1: ; 0x61bb5
 
 SSAnne9Text2: ; 0x61bbf
 	db $08 ; asm
-	ld hl, TrainerHeader_61b90
+	ld hl, SSAnne9TH1
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 SSAnne9Text3: ; 0x61bc9
 	db $08 ; asm
-	ld hl, TrainerHeader_61b9c
+	ld hl, SSAnne9TH2
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 SSAnne9Text4: ; 0x61bd3
 	db $08 ; asm
-	ld hl, TrainerHeader_61ba8
+	ld hl, SSAnne9TH3
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -52158,63 +52158,63 @@ UnnamedText_61c4c: ; 0x61c4c
 	db $50
 ; 0x61c4c + 5 bytes
 
-UnnamedText_61c51: ; 0x61c51
-	TX_FAR _UnnamedText_61c51
+SSAnne9B4BattleTxt1: ; 0x61c51
+	TX_FAR _SSAnne9B4BattleTxt1
 	db $50
 ; 0x61c51 + 5 bytes
 
-UnnamedText_61c56: ; 0x61c56
-	TX_FAR _UnnamedText_61c56
+SSAnne9EndBattleTxt1: ; 0x61c56
+	TX_FAR _SSAnne9EndBattleTxt1
 	db $50
 ; 0x61c56 + 5 bytes
 
-UnnamedText_61c5b: ; 0x61c5b
-	TX_FAR _UnnamedText_61c5b
+SSAnne9AfterBattleTxt1: ; 0x61c5b
+	TX_FAR _SSAnne9AfterBattleTxt1
 	db $50
 ; 0x61c5b + 5 bytes
 
-UnnamedText_61c60: ; 0x61c60
-	TX_FAR _UnnamedText_61c60
+SSAnne9B4BattleTxt2: ; 0x61c60
+	TX_FAR _SSAnne9B4BattleTxt2
 	db $50
 ; 0x61c60 + 5 bytes
 
-UnnamedText_61c65: ; 0x61c65
-	TX_FAR _UnnamedText_61c65
+SSAnne9EndBattleTxt2: ; 0x61c65
+	TX_FAR _SSAnne9EndBattleTxt2
 	db $50
 ; 0x61c65 + 5 bytes
 
-UnnamedText_61c6a: ; 0x61c6a
-	TX_FAR _UnnamedText_61c6a
+SSAnne9AfterBattleTxt2: ; 0x61c6a
+	TX_FAR _SSAnne9AfterBattleTxt2
 	db $50
 ; 0x61c6a + 5 bytes
 
-UnnamedText_61c6f: ; 0x61c6f
-	TX_FAR _UnnamedText_61c6f
+SSAnne9B4BattleTxt3: ; 0x61c6f
+	TX_FAR _SSAnne9B4BattleTxt3
 	db $50
 ; 0x61c6f + 5 bytes
 
-UnnamedText_61c74: ; 0x61c74
-	TX_FAR _UnnamedText_61c74
+SSAnne9EndBattleTxt3: ; 0x61c74
+	TX_FAR _SSAnne9EndBattleTxt3
 	db $50
 ; 0x61c74 + 5 bytes
 
-UnnamedText_61c79: ; 0x61c79
-	TX_FAR _UnnamedText_61c79
+SSAnne9AfterBattleTxt3: ; 0x61c79
+	TX_FAR _SSAnne9AfterBattleTxt3
 	db $50
 ; 0x61c79 + 5 bytes
 
-UnnamedText_61c7e: ; 0x61c7e
-	TX_FAR _UnnamedText_61c7e
+SSAnne9B4BattleTxt4: ; 0x61c7e
+	TX_FAR _SSAnne9B4BattleTxt4
 	db $50
 ; 0x61c7e + 5 bytes
 
-UnnamedText_61c83: ; 0x61c83
-	TX_FAR _UnnamedText_61c83
+SSAnne9EndBattleTxt4: ; 0x61c83
+	TX_FAR _SSAnne9EndBattleTxt4
 	db $50
 ; 0x61c83 + 5 bytes
 
-UnnamedText_61c88: ; 0x61c88
-	TX_FAR _UnnamedText_61c88
+SSAnne9AfterBattleTxt4: ; 0x61c88
+	TX_FAR _SSAnne9AfterBattleTxt4
 	db $50
 ; 0x61c88 + 5 bytes
 
@@ -52295,60 +52295,60 @@ SSAnne10TrainerHeader1: ; 0x61d84
 	db $1 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d809 ; flag's byte
-	dw UnnamedText_61e16 ; 0x5e16 TextBeforeBattle
-	dw UnnamedText_61e20 ; 0x5e20 TextAfterBattle
-	dw UnnamedText_61e1b ; 0x5e1b TextEndBattle
-	dw UnnamedText_61e1b ; 0x5e1b TextEndBattle
+	dw SSAnne10B4BattleTxt1 ; 0x5e16 TextBeforeBattle
+	dw SSAnne10AfterBattleTxt1 ; 0x5e20 TextAfterBattle
+	dw SSAnne10EndBattleTxt1 ; 0x5e1b TextEndBattle
+	dw SSAnne10EndBattleTxt1 ; 0x5e1b TextEndBattle
 ; 0x61d90
 
-TrainerHeader_61d90: ; 0x61d90
+SSAnne10TH1: ; 0x61d90
 	db $2 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d809 ; flag's byte
-	dw UnnamedText_61e25 ; 0x5e25 TextBeforeBattle
-	dw UnnamedText_61e2f ; 0x5e2f TextAfterBattle
-	dw UnnamedText_61e2a ; 0x5e2a TextEndBattle
-	dw UnnamedText_61e2a ; 0x5e2a TextEndBattle
+	dw SSAnne10B4BattleTxt2 ; 0x5e25 TextBeforeBattle
+	dw SSAnne10AfterBattleTxt2 ; 0x5e2f TextAfterBattle
+	dw SSAnne10EndBattleTxt2 ; 0x5e2a TextEndBattle
+	dw SSAnne10EndBattleTxt2 ; 0x5e2a TextEndBattle
 ; 0x61d9c
 
-TrainerHeader_61d9c: ; 0x61d9c
+SSAnne10TH2: ; 0x61d9c
 	db $3 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d809 ; flag's byte
-	dw UnnamedText_61e34 ; 0x5e34 TextBeforeBattle
-	dw UnnamedText_61e3e ; 0x5e3e TextAfterBattle
-	dw UnnamedText_61e39 ; 0x5e39 TextEndBattle
-	dw UnnamedText_61e39 ; 0x5e39 TextEndBattle
+	dw SSAnne10B4BattleTxt3 ; 0x5e34 TextBeforeBattle
+	dw SSAnne10AfterBattleTxt3 ; 0x5e3e TextAfterBattle
+	dw SSAnne10EndBattleTxt3 ; 0x5e39 TextEndBattle
+	dw SSAnne10EndBattleTxt3 ; 0x5e39 TextEndBattle
 ; 0x61da8
 
-TrainerHeader_61da8: ; 0x61da8
+SSAnne10TH3: ; 0x61da8
 	db $4 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d809 ; flag's byte
-	dw UnnamedText_61e43 ; 0x5e43 TextBeforeBattle
-	dw UnnamedText_61e4d ; 0x5e4d TextAfterBattle
-	dw UnnamedText_61e48 ; 0x5e48 TextEndBattle
-	dw UnnamedText_61e48 ; 0x5e48 TextEndBattle
+	dw SSAnne10B4BattleTxt4 ; 0x5e43 TextBeforeBattle
+	dw SSAnne10AfterBattleTxt4 ; 0x5e4d TextAfterBattle
+	dw SSAnne10EndBattleTxt4 ; 0x5e48 TextEndBattle
+	dw SSAnne10EndBattleTxt4 ; 0x5e48 TextEndBattle
 ; 0x61db4
 
-TrainerHeader_61db4: ; 0x61db4
+SSAnne10TH4: ; 0x61db4
 	db $5 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d809 ; flag's byte
-	dw UnnamedText_61e52 ; 0x5e52 TextBeforeBattle
-	dw UnnamedText_61e5c ; 0x5e5c TextAfterBattle
-	dw UnnamedText_61e57 ; 0x5e57 TextEndBattle
-	dw UnnamedText_61e57 ; 0x5e57 TextEndBattle
+	dw SSAnne10B4BattleTxt5 ; 0x5e52 TextBeforeBattle
+	dw SSAnne10AfterBattleTxt5 ; 0x5e5c TextAfterBattle
+	dw SSAnne10EndBattleTxt5 ; 0x5e57 TextEndBattle
+	dw SSAnne10EndBattleTxt5 ; 0x5e57 TextEndBattle
 ; 0x61dc0
 
-TrainerHeader_61dc0: ; 0x61dc0
+SSAnne10TH5: ; 0x61dc0
 	db $6 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d809 ; flag's byte
-	dw UnnamedText_61e61 ; 0x5e61 TextBeforeBattle
-	dw UnnamedText_61e6b ; 0x5e6b TextAfterBattle
-	dw UnnamedText_61e66 ; 0x5e66 TextEndBattle
-	dw UnnamedText_61e66 ; 0x5e66 TextEndBattle
+	dw SSAnne10B4BattleTxt6 ; 0x5e61 TextBeforeBattle
+	dw SSAnne10AfterBattleTxt6 ; 0x5e6b TextAfterBattle
+	dw SSAnne10EndBattleTxt6 ; 0x5e66 TextEndBattle
+	dw SSAnne10EndBattleTxt6 ; 0x5e66 TextEndBattle
 ; 0x61dcc
 
 db $ff
@@ -52361,31 +52361,31 @@ SSAnne10Text1: ; 0x61dcd
 
 SSAnne10Text2: ; 0x61dd7
 	db $08 ; asm
-	ld hl, TrainerHeader_61d90
+	ld hl, SSAnne10TH1
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 SSAnne10Text3: ; 0x61de1
 	db $08 ; asm
-	ld hl, TrainerHeader_61d9c
+	ld hl, SSAnne10TH2
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 SSAnne10Text4: ; 0x61deb
 	db $08 ; asm
-	ld hl, TrainerHeader_61da8
+	ld hl, SSAnne10TH3
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 SSAnne10Text5: ; 0x61df5
 	db $08 ; asm
-	ld hl, TrainerHeader_61db4
+	ld hl, SSAnne10TH4
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 SSAnne10Text6: ; 0x61dff
 	db $08 ; asm
-	ld hl, TrainerHeader_61dc0
+	ld hl, SSAnne10TH5
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -52396,93 +52396,93 @@ SSAnne10Text8: ; 0x61e09
 	call $13d0
 	jp TextScriptEnd
 
-UnnamedText_61e16: ; 0x61e16
-	TX_FAR _UnnamedText_61e16
+SSAnne10B4BattleTxt1: ; 0x61e16
+	TX_FAR _SSAnne10B4BattleTxt1
 	db $50
 ; 0x61e16 + 5 bytes
 
-UnnamedText_61e1b: ; 0x61e1b
-	TX_FAR _UnnamedText_61e1b
+SSAnne10EndBattleTxt1: ; 0x61e1b
+	TX_FAR _SSAnne10EndBattleTxt1
 	db $50
 ; 0x61e1b + 5 bytes
 
-UnnamedText_61e20: ; 0x61e20
-	TX_FAR _UnnamedText_61e20
+SSAnne10AfterBattleTxt1: ; 0x61e20
+	TX_FAR _SSAnne10AfterBattleTxt1
 	db $50
 ; 0x61e20 + 5 bytes
 
-UnnamedText_61e25: ; 0x61e25
-	TX_FAR _UnnamedText_61e25
+SSAnne10B4BattleTxt2: ; 0x61e25
+	TX_FAR _SSAnne10B4BattleTxt2
 	db $50
 ; 0x61e25 + 5 bytes
 
-UnnamedText_61e2a: ; 0x61e2a
-	TX_FAR _UnnamedText_61e2a
+SSAnne10EndBattleTxt2: ; 0x61e2a
+	TX_FAR _SSAnne10EndBattleTxt2
 	db $50
 ; 0x61e2a + 5 bytes
 
-UnnamedText_61e2f: ; 0x61e2f
-	TX_FAR _UnnamedText_61e2f
+SSAnne10AfterBattleTxt2: ; 0x61e2f
+	TX_FAR _SSAnne10AfterBattleTxt2
 	db $50
 ; 0x61e2f + 5 bytes
 
-UnnamedText_61e34: ; 0x61e34
-	TX_FAR _UnnamedText_61e34
+SSAnne10B4BattleTxt3: ; 0x61e34
+	TX_FAR _SSAnne10B4BattleTxt3
 	db $50
 ; 0x61e34 + 5 bytes
 
-UnnamedText_61e39: ; 0x61e39
-	TX_FAR _UnnamedText_61e39
+SSAnne10EndBattleTxt3: ; 0x61e39
+	TX_FAR _SSAnne10EndBattleTxt3
 	db $50
 ; 0x61e39 + 5 bytes
 
-UnnamedText_61e3e: ; 0x61e3e
-	TX_FAR _UnnamedText_61e3e
+SSAnne10AfterBattleTxt3: ; 0x61e3e
+	TX_FAR _SSAnne10AfterBattleTxt3
 	db $50
 ; 0x61e3e + 5 bytes
 
-UnnamedText_61e43: ; 0x61e43
-	TX_FAR _UnnamedText_61e43
+SSAnne10B4BattleTxt4: ; 0x61e43
+	TX_FAR _SSAnne10B4BattleTxt4
 	db $50
 ; 0x61e43 + 5 bytes
 
-UnnamedText_61e48: ; 0x61e48
-	TX_FAR _UnnamedText_61e48
+SSAnne10EndBattleTxt4: ; 0x61e48
+	TX_FAR _SSAnne10EndBattleTxt4
 	db $50
 ; 0x61e48 + 5 bytes
 
-UnnamedText_61e4d: ; 0x61e4d
-	TX_FAR _UnnamedText_61e4d
+SSAnne10AfterBattleTxt4: ; 0x61e4d
+	TX_FAR _SSAnne10AfterBattleTxt4
 	db $50
 ; 0x61e4d + 5 bytes
 
-UnnamedText_61e52: ; 0x61e52
-	TX_FAR _UnnamedText_61e52
+SSAnne10B4BattleTxt5: ; 0x61e52
+	TX_FAR _SSAnne10B4BattleTxt5
 	db $50
 ; 0x61e52 + 5 bytes
 
-UnnamedText_61e57: ; 0x61e57
-	TX_FAR _UnnamedText_61e57
+SSAnne10EndBattleTxt5: ; 0x61e57
+	TX_FAR _SSAnne10EndBattleTxt5
 	db $50
 ; 0x61e57 + 5 bytes
 
-UnnamedText_61e5c: ; 0x61e5c
-	TX_FAR _UnnamedText_61e5c
+SSAnne10AfterBattleTxt5: ; 0x61e5c
+	TX_FAR _SSAnne10AfterBattleTxt5
 	db $50
 ; 0x61e5c + 5 bytes
 
-UnnamedText_61e61: ; 0x61e61
-	TX_FAR _UnnamedText_61e61
+SSAnne10B4BattleTxt6: ; 0x61e61
+	TX_FAR _SSAnne10B4BattleTxt6
 	db $50
 ; 0x61e61 + 5 bytes
 
-UnnamedText_61e66: ; 0x61e66
-	TX_FAR _UnnamedText_61e66
+SSAnne10EndBattleTxt6: ; 0x61e66
+	TX_FAR _SSAnne10EndBattleTxt6
 	db $50
 ; 0x61e66 + 5 bytes
 
-UnnamedText_61e6b: ; 0x61e6b
-	TX_FAR _UnnamedText_61e6b
+SSAnne10AfterBattleTxt6: ; 0x61e6b
+	TX_FAR _SSAnne10AfterBattleTxt6
 	db $50
 ; 0x61e6b + 5 bytes
 
@@ -52655,20 +52655,20 @@ SilphCo11TrainerHeader1: ; 0x622c3
 	db $4 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d837 ; flag's byte
-	dw UnnamedText_62344 ; 0x6344 TextBeforeBattle
-	dw UnnamedText_6234e ; 0x634e TextAfterBattle
-	dw UnnamedText_62349 ; 0x6349 TextEndBattle
-	dw UnnamedText_62349 ; 0x6349 TextEndBattle
+	dw SilphCo11B4BattleTxt1 ; 0x6344 TextBeforeBattle
+	dw SilphCo11AfterBattleTxt1 ; 0x634e TextAfterBattle
+	dw SilphCo11EndBattleTxt1 ; 0x6349 TextEndBattle
+	dw SilphCo11EndBattleTxt1 ; 0x6349 TextEndBattle
 ; 0x622cf
 
-TrainerHeader_622cf: ; 0x622cf
+SilphCo11TH1: ; 0x622cf
 	db $5 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d837 ; flag's byte
-	dw UnnamedText_6235d ; 0x635d TextBeforeBattle
-	dw UnnamedText_62367 ; 0x6367 TextAfterBattle
-	dw UnnamedText_62362 ; 0x6362 TextEndBattle
-	dw UnnamedText_62362 ; 0x6362 TextEndBattle
+	dw SilphCo11B4BattleTxt2 ; 0x635d TextBeforeBattle
+	dw SilphCo11AfterBattleTxt2 ; 0x6367 TextAfterBattle
+	dw SilphCo11EndBattleTxt2 ; 0x6362 TextEndBattle
+	dw SilphCo11EndBattleTxt2 ; 0x6362 TextEndBattle
 ; 0x622db
 
 db $ff
@@ -52742,39 +52742,39 @@ SilphCo11Text4: ; 0x6233a
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_62344: ; 0x62344
-	TX_FAR _UnnamedText_62344
+SilphCo11B4BattleTxt1: ; 0x62344
+	TX_FAR _SilphCo11B4BattleTxt1
 	db $50
 ; 0x62344 + 5 bytes
 
-UnnamedText_62349: ; 0x62349
-	TX_FAR _UnnamedText_62349
+SilphCo11EndBattleTxt1: ; 0x62349
+	TX_FAR _SilphCo11EndBattleTxt1
 	db $50
 ; 0x62349 + 5 bytes
 
-UnnamedText_6234e: ; 0x6234e
-	TX_FAR _UnnamedText_6234e
+SilphCo11AfterBattleTxt1: ; 0x6234e
+	TX_FAR _SilphCo11AfterBattleTxt1
 	db $50
 ; 0x6234e + 5 bytes
 
 SilphCo11Text5: ; 0x62353
 	db $08 ; asm
-	ld hl, TrainerHeader_622cf
+	ld hl, SilphCo11TH1
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_6235d: ; 0x6235d
-	TX_FAR _UnnamedText_6235d
+SilphCo11B4BattleTxt2: ; 0x6235d
+	TX_FAR _SilphCo11B4BattleTxt2
 	db $50
 ; 0x6235d + 5 bytes
 
-UnnamedText_62362: ; 0x62362
-	TX_FAR _UnnamedText_62362
+SilphCo11EndBattleTxt2: ; 0x62362
+	TX_FAR _SilphCo11EndBattleTxt2
 	db $50
 ; 0x62362 + 5 bytes
 
-UnnamedText_62367: ; 0x62367
-	TX_FAR _UnnamedText_62367
+SilphCo11AfterBattleTxt2: ; 0x62367
+	TX_FAR _SilphCo11AfterBattleTxt2
 	db $50
 ; 0x62367 + 5 bytes
 
@@ -54360,80 +54360,80 @@ ViridianGymTrainerHeader1: ; 0x74a08
 	db $2 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d751 ; flag's byte
-	dw UnnamedText_74afd ; 0x4afd TextBeforeBattle
-	dw UnnamedText_74b07 ; 0x4b07 TextAfterBattle
-	dw UnnamedText_74b02 ; 0x4b02 TextEndBattle
-	dw UnnamedText_74b02 ; 0x4b02 TextEndBattle
+	dw ViridianGymB4BattleTxt1 ; 0x4afd TextBeforeBattle
+	dw ViridianGymAfterBattleTxt1 ; 0x4b07 TextAfterBattle
+	dw ViridianGymEndBattleTxt1 ; 0x4b02 TextEndBattle
+	dw ViridianGymEndBattleTxt1 ; 0x4b02 TextEndBattle
 ; 0x74a14
 
-TrainerHeader_74a14: ; 0x74a14
+ViridianGymTH1: ; 0x74a14
 	db $3 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d751 ; flag's byte
-	dw UnnamedText_74b16 ; 0x4b16 TextBeforeBattle
-	dw UnnamedText_74b20 ; 0x4b20 TextAfterBattle
-	dw UnnamedText_74b1b ; 0x4b1b TextEndBattle
-	dw UnnamedText_74b1b ; 0x4b1b TextEndBattle
+	dw ViridianGymB4BattleTxt2 ; 0x4b16 TextBeforeBattle
+	dw ViridianGymAfterBattleTxt2 ; 0x4b20 TextAfterBattle
+	dw ViridianGymEndBattleTxt2 ; 0x4b1b TextEndBattle
+	dw ViridianGymEndBattleTxt2 ; 0x4b1b TextEndBattle
 ; 0x74a20
 
-TrainerHeader_74a20: ; 0x74a20
+ViridianGymTH2: ; 0x74a20
 	db $4 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d751 ; flag's byte
-	dw UnnamedText_74b2f ; 0x4b2f TextBeforeBattle
-	dw UnnamedText_74b39 ; 0x4b39 TextAfterBattle
-	dw UnnamedText_74b34 ; 0x4b34 TextEndBattle
-	dw UnnamedText_74b34 ; 0x4b34 TextEndBattle
+	dw ViridianGymB4BattleTxt3 ; 0x4b2f TextBeforeBattle
+	dw ViridianGymAfterBattleTxt3 ; 0x4b39 TextAfterBattle
+	dw ViridianGymEndBattleTxt3 ; 0x4b34 TextEndBattle
+	dw ViridianGymEndBattleTxt3 ; 0x4b34 TextEndBattle
 ; 0x74a2c
 
-TrainerHeader_74a2c: ; 0x74a2c
+ViridianGymTH3: ; 0x74a2c
 	db $5 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d751 ; flag's byte
-	dw UnnamedText_74b48 ; 0x4b48 TextBeforeBattle
-	dw UnnamedText_74b52 ; 0x4b52 TextAfterBattle
-	dw UnnamedText_74b4d ; 0x4b4d TextEndBattle
-	dw UnnamedText_74b4d ; 0x4b4d TextEndBattle
+	dw ViridianGymB4BattleTxt4 ; 0x4b48 TextBeforeBattle
+	dw ViridianGymAfterBattleTxt4 ; 0x4b52 TextAfterBattle
+	dw ViridianGymEndBattleTxt4 ; 0x4b4d TextEndBattle
+	dw ViridianGymEndBattleTxt4 ; 0x4b4d TextEndBattle
 ; 0x74a38
 
-TrainerHeader_74a38: ; 0x74a38
+ViridianGymTH4: ; 0x74a38
 	db $6 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d751 ; flag's byte
-	dw UnnamedText_74b61 ; 0x4b61 TextBeforeBattle
-	dw UnnamedText_74b6b ; 0x4b6b TextAfterBattle
-	dw UnnamedText_74b66 ; 0x4b66 TextEndBattle
-	dw UnnamedText_74b66 ; 0x4b66 TextEndBattle
+	dw ViridianGymB4BattleTxt5 ; 0x4b61 TextBeforeBattle
+	dw ViridianGymAfterBattleTxt5 ; 0x4b6b TextAfterBattle
+	dw ViridianGymEndBattleTxt5 ; 0x4b66 TextEndBattle
+	dw ViridianGymEndBattleTxt5 ; 0x4b66 TextEndBattle
 ; 0x74a44
 
-TrainerHeader_74a44: ; 0x74a44
+ViridianGymTH5: ; 0x74a44
 	db $7 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d751 ; flag's byte
-	dw UnnamedText_74b7a ; 0x4b7a TextBeforeBattle
-	dw UnnamedText_74b84 ; 0x4b84 TextAfterBattle
-	dw UnnamedText_74b7f ; 0x4b7f TextEndBattle
-	dw UnnamedText_74b7f ; 0x4b7f TextEndBattle
+	dw ViridianGymB4BattleTxt6 ; 0x4b7a TextBeforeBattle
+	dw ViridianGymAfterBattleTxt6 ; 0x4b84 TextAfterBattle
+	dw ViridianGymEndBattleTxt6 ; 0x4b7f TextEndBattle
+	dw ViridianGymEndBattleTxt6 ; 0x4b7f TextEndBattle
 ; 0x74a50
 
-TrainerHeader_74a50: ; 0x74a50
+ViridianGymTH6: ; 0x74a50
 	db $8 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d751 ; flag's byte
-	dw UnnamedText_74b93 ; 0x4b93 TextBeforeBattle
-	dw UnnamedText_74b9d ; 0x4b9d TextAfterBattle
-	dw UnnamedText_74b98 ; 0x4b98 TextEndBattle
-	dw UnnamedText_74b98 ; 0x4b98 TextEndBattle
+	dw ViridianGymB4BattleTxt7 ; 0x4b93 TextBeforeBattle
+	dw ViridianGymAfterBattleTxt7 ; 0x4b9d TextAfterBattle
+	dw ViridianGymEndBattleTxt7 ; 0x4b98 TextEndBattle
+	dw ViridianGymEndBattleTxt7 ; 0x4b98 TextEndBattle
 ; 0x74a5c
 
-TrainerHeader_74a5c: ; 0x74a5c
+ViridianGymTH7: ; 0x74a5c
 	db $9 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d751 ; flag's byte
-	dw UnnamedText_74bac ; 0x4bac TextBeforeBattle
-	dw UnnamedText_74bb6 ; 0x4bb6 TextAfterBattle
-	dw UnnamedText_74bb1 ; 0x4bb1 TextEndBattle
-	dw UnnamedText_74bb1 ; 0x4bb1 TextEndBattle
+	dw ViridianGymB4BattleTxt8 ; 0x4bac TextBeforeBattle
+	dw ViridianGymAfterBattleTxt8 ; 0x4bb6 TextAfterBattle
+	dw ViridianGymEndBattleTxt8 ; 0x4bb1 TextEndBattle
+	dw ViridianGymEndBattleTxt8 ; 0x4bb1 TextEndBattle
 ; 0x74a68
 
 db $ff
@@ -54521,165 +54521,165 @@ ViridianGymText2: ; 0x74af3
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_74afd: ; 0x74afd
-	TX_FAR _UnnamedText_74afd
+ViridianGymB4BattleTxt1: ; 0x74afd
+	TX_FAR _ViridianGymB4BattleTxt1
 	db $50
 ; 0x74afd + 5 bytes
 
-UnnamedText_74b02: ; 0x74b02
-	TX_FAR _UnnamedText_74b02
+ViridianGymEndBattleTxt1: ; 0x74b02
+	TX_FAR _ViridianGymEndBattleTxt1
 	db $50
 ; 0x74b02 + 5 bytes
 
-UnnamedText_74b07: ; 0x74b07
-	TX_FAR _UnnamedText_74b07
+ViridianGymAfterBattleTxt1: ; 0x74b07
+	TX_FAR _ViridianGymAfterBattleTxt1
 	db $50
 ; 0x74b07 + 5 bytes
 
 ViridianGymText3: ; 0x74b0c
 	db $08 ; asm
-	ld hl, TrainerHeader_74a14
+	ld hl, ViridianGymTH1
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_74b16: ; 0x74b16
-	TX_FAR _UnnamedText_74b16
+ViridianGymB4BattleTxt2: ; 0x74b16
+	TX_FAR _ViridianGymB4BattleTxt2
 	db $50
 ; 0x74b16 + 5 bytes
 
-UnnamedText_74b1b: ; 0x74b1b
-	TX_FAR _UnnamedText_74b1b
+ViridianGymEndBattleTxt2: ; 0x74b1b
+	TX_FAR _ViridianGymEndBattleTxt2
 	db $50
 ; 0x74b1b + 5 bytes
 
-UnnamedText_74b20: ; 0x74b20
-	TX_FAR _UnnamedText_74b20
+ViridianGymAfterBattleTxt2: ; 0x74b20
+	TX_FAR _ViridianGymAfterBattleTxt2
 	db $50
 ; 0x74b20 + 5 bytes
 
 ViridianGymText4: ; 0x74b25
 	db $08 ; asm
-	ld hl, TrainerHeader_74a20
+	ld hl, ViridianGymTH2
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_74b2f: ; 0x74b2f
-	TX_FAR _UnnamedText_74b2f
+ViridianGymB4BattleTxt3: ; 0x74b2f
+	TX_FAR _ViridianGymB4BattleTxt3
 	db $50
 ; 0x74b2f + 5 bytes
 
-UnnamedText_74b34: ; 0x74b34
-	TX_FAR _UnnamedText_74b34
+ViridianGymEndBattleTxt3: ; 0x74b34
+	TX_FAR _ViridianGymEndBattleTxt3
 	db $50
 ; 0x74b34 + 5 bytes
 
-UnnamedText_74b39: ; 0x74b39
-	TX_FAR _UnnamedText_74b39
+ViridianGymAfterBattleTxt3: ; 0x74b39
+	TX_FAR _ViridianGymAfterBattleTxt3
 	db $50
 ; 0x74b39 + 5 bytes
 
 ViridianGymText5: ; 0x74b3e
 	db $08 ; asm
-	ld hl, TrainerHeader_74a2c
+	ld hl, ViridianGymTH3
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_74b48: ; 0x74b48
-	TX_FAR _UnnamedText_74b48
+ViridianGymB4BattleTxt4: ; 0x74b48
+	TX_FAR _ViridianGymB4BattleTxt4
 	db $50
 ; 0x74b48 + 5 bytes
 
-UnnamedText_74b4d: ; 0x74b4d
-	TX_FAR _UnnamedText_74b4d
+ViridianGymEndBattleTxt4: ; 0x74b4d
+	TX_FAR _ViridianGymEndBattleTxt4
 	db $50
 ; 0x74b4d + 5 bytes
 
-UnnamedText_74b52: ; 0x74b52
-	TX_FAR _UnnamedText_74b52
+ViridianGymAfterBattleTxt4: ; 0x74b52
+	TX_FAR _ViridianGymAfterBattleTxt4
 	db $50
 ; 0x74b52 + 5 bytes
 
 ViridianGymText6: ; 0x74b57
 	db $08 ; asm
-	ld hl, TrainerHeader_74a38
+	ld hl, ViridianGymTH4
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_74b61: ; 0x74b61
-	TX_FAR _UnnamedText_74b61
+ViridianGymB4BattleTxt5: ; 0x74b61
+	TX_FAR _ViridianGymB4BattleTxt5
 	db $50
 ; 0x74b61 + 5 bytes
 
-UnnamedText_74b66: ; 0x74b66
-	TX_FAR _UnnamedText_74b66
+ViridianGymEndBattleTxt5: ; 0x74b66
+	TX_FAR _ViridianGymEndBattleTxt5
 	db $50
 ; 0x74b66 + 5 bytes
 
-UnnamedText_74b6b: ; 0x74b6b
-	TX_FAR _UnnamedText_74b6b
+ViridianGymAfterBattleTxt5: ; 0x74b6b
+	TX_FAR _ViridianGymAfterBattleTxt5
 	db $50
 ; 0x74b6b + 5 bytes
 
 ViridianGymText7: ; 0x74b70
 	db $08 ; asm
-	ld hl, TrainerHeader_74a44
+	ld hl, ViridianGymTH5
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_74b7a: ; 0x74b7a
-	TX_FAR _UnnamedText_74b7a
+ViridianGymB4BattleTxt6: ; 0x74b7a
+	TX_FAR _ViridianGymB4BattleTxt6
 	db $50
 ; 0x74b7a + 5 bytes
 
-UnnamedText_74b7f: ; 0x74b7f
-	TX_FAR _UnnamedText_74b7f
+ViridianGymEndBattleTxt6: ; 0x74b7f
+	TX_FAR _ViridianGymEndBattleTxt6
 	db $50
 ; 0x74b7f + 5 bytes
 
-UnnamedText_74b84: ; 0x74b84
-	TX_FAR _UnnamedText_74b84
+ViridianGymAfterBattleTxt6: ; 0x74b84
+	TX_FAR _ViridianGymAfterBattleTxt6
 	db $50
 ; 0x74b84 + 5 bytes
 
 ViridianGymText8: ; 0x74b89
 	db $08 ; asm
-	ld hl, TrainerHeader_74a50
+	ld hl, ViridianGymTH6
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_74b93: ; 0x74b93
-	TX_FAR _UnnamedText_74b93
+ViridianGymB4BattleTxt7: ; 0x74b93
+	TX_FAR _ViridianGymB4BattleTxt7
 	db $50
 ; 0x74b93 + 5 bytes
 
-UnnamedText_74b98: ; 0x74b98
-	TX_FAR _UnnamedText_74b98
+ViridianGymEndBattleTxt7: ; 0x74b98
+	TX_FAR _ViridianGymEndBattleTxt7
 	db $50
 ; 0x74b98 + 5 bytes
 
-UnnamedText_74b9d: ; 0x74b9d
-	TX_FAR _UnnamedText_74b9d
+ViridianGymAfterBattleTxt7: ; 0x74b9d
+	TX_FAR _ViridianGymAfterBattleTxt7
 	db $50
 ; 0x74b9d + 5 bytes
 
 ViridianGymText9: ; 0x74ba2
 	db $08 ; asm
-	ld hl, TrainerHeader_74a5c
+	ld hl, ViridianGymTH7
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_74bac: ; 0x74bac
-	TX_FAR _UnnamedText_74bac
+ViridianGymB4BattleTxt8: ; 0x74bac
+	TX_FAR _ViridianGymB4BattleTxt8
 	db $50
 ; 0x74bac + 5 bytes
 
-UnnamedText_74bb1: ; 0x74bb1
-	TX_FAR _UnnamedText_74bb1
+ViridianGymEndBattleTxt8: ; 0x74bb1
+	TX_FAR _ViridianGymEndBattleTxt8
 	db $50
 ; 0x74bb1 + 5 bytes
 
-UnnamedText_74bb6: ; 0x74bb6
-	TX_FAR _UnnamedText_74bb6
+ViridianGymAfterBattleTxt8: ; 0x74bb6
+	TX_FAR _ViridianGymAfterBattleTxt8
 	db $50
 ; 0x74bb6 + 5 bytes
 
@@ -55659,60 +55659,60 @@ FuchsiaGymTrainerHeader1: ; 0x754eb
 	db $2 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d792 ; flag's byte
-	dw UnnamedText_755ae ; 0x55ae TextBeforeBattle
-	dw UnnamedText_755b8 ; 0x55b8 TextAfterBattle
-	dw UnnamedText_755b3 ; 0x55b3 TextEndBattle
-	dw UnnamedText_755b3 ; 0x55b3 TextEndBattle
+	dw FuchsiaGymB4BattleTxt1 ; 0x55ae TextBeforeBattle
+	dw FuchsiaGymAfterBattleTxt1 ; 0x55b8 TextAfterBattle
+	dw FuchsiaGymEndBattleTxt1 ; 0x55b3 TextEndBattle
+	dw FuchsiaGymEndBattleTxt1 ; 0x55b3 TextEndBattle
 ; 0x754f7
 
-TrainerHeader_754f7: ; 0x754f7
+FuchsiaGymTH1: ; 0x754f7
 	db $3 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d792 ; flag's byte
-	dw UnnamedText_755c7 ; 0x55c7 TextBeforeBattle
-	dw UnnamedText_755d1 ; 0x55d1 TextAfterBattle
-	dw UnnamedText_755cc ; 0x55cc TextEndBattle
-	dw UnnamedText_755cc ; 0x55cc TextEndBattle
+	dw FuchsiaGymB4BattleTxt2 ; 0x55c7 TextBeforeBattle
+	dw FuchsiaGymAfterBattleTxt2 ; 0x55d1 TextAfterBattle
+	dw FuchsiaGymEndBattleTxt2 ; 0x55cc TextEndBattle
+	dw FuchsiaGymEndBattleTxt2 ; 0x55cc TextEndBattle
 ; 0x75503
 
-TrainerHeader_75503: ; 0x75503
+FuchsiaGymTH2: ; 0x75503
 	db $4 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d792 ; flag's byte
-	dw UnnamedText_755e0 ; 0x55e0 TextBeforeBattle
-	dw UnnamedText_755ea ; 0x55ea TextAfterBattle
-	dw UnnamedText_755e5 ; 0x55e5 TextEndBattle
-	dw UnnamedText_755e5 ; 0x55e5 TextEndBattle
+	dw FuchsiaGymB4BattleTxt3 ; 0x55e0 TextBeforeBattle
+	dw FuchsiaGymAfterBattleTxt3 ; 0x55ea TextAfterBattle
+	dw FuchsiaGymEndBattleTxt3 ; 0x55e5 TextEndBattle
+	dw FuchsiaGymEndBattleTxt3 ; 0x55e5 TextEndBattle
 ; 0x7550f
 
-TrainerHeader_7550f: ; 0x7550f
+FuchsiaGymTH3: ; 0x7550f
 	db $5 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d792 ; flag's byte
-	dw UnnamedText_755f9 ; 0x55f9 TextBeforeBattle
-	dw UnnamedText_75603 ; 0x5603 TextAfterBattle
-	dw UnnamedText_755fe ; 0x55fe TextEndBattle
-	dw UnnamedText_755fe ; 0x55fe TextEndBattle
+	dw FuchsiaGymB4BattleTxt4 ; 0x55f9 TextBeforeBattle
+	dw FuchsiaGymAfterBattleTxt4 ; 0x5603 TextAfterBattle
+	dw FuchsiaGymEndBattleTxt4 ; 0x55fe TextEndBattle
+	dw FuchsiaGymEndBattleTxt4 ; 0x55fe TextEndBattle
 ; 0x7551b
 
-TrainerHeader_7551b: ; 0x7551b
+FuchsiaGymTH4: ; 0x7551b
 	db $6 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d792 ; flag's byte
-	dw UnnamedText_75612 ; 0x5612 TextBeforeBattle
-	dw UnnamedText_7561c ; 0x561c TextAfterBattle
-	dw UnnamedText_75617 ; 0x5617 TextEndBattle
-	dw UnnamedText_75617 ; 0x5617 TextEndBattle
+	dw FuchsiaGymB4BattleTxt5 ; 0x5612 TextBeforeBattle
+	dw FuchsiaGymAfterBattleTxt5 ; 0x561c TextAfterBattle
+	dw FuchsiaGymEndBattleTxt5 ; 0x5617 TextEndBattle
+	dw FuchsiaGymEndBattleTxt5 ; 0x5617 TextEndBattle
 ; 0x75527
 
-TrainerHeader_75527: ; 0x75527
+FuchsiaGymTH5: ; 0x75527
 	db $7 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d792 ; flag's byte
-	dw UnnamedText_7562b ; 0x562b TextBeforeBattle
-	dw UnnamedText_75635 ; 0x5635 TextAfterBattle
-	dw UnnamedText_75630 ; 0x5630 TextEndBattle
-	dw UnnamedText_75630 ; 0x5630 TextEndBattle
+	dw FuchsiaGymB4BattleTxt6 ; 0x562b TextBeforeBattle
+	dw FuchsiaGymAfterBattleTxt6 ; 0x5635 TextAfterBattle
+	dw FuchsiaGymEndBattleTxt6 ; 0x5630 TextEndBattle
+	dw FuchsiaGymEndBattleTxt6 ; 0x5630 TextEndBattle
 ; 0x75533
 
 db $ff
@@ -55793,123 +55793,123 @@ FuchsiaGymText2: ; 0x755a4
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_755ae: ; 0x755ae
-	TX_FAR _UnnamedText_755ae
+FuchsiaGymB4BattleTxt1: ; 0x755ae
+	TX_FAR _FuchsiaGymB4BattleTxt1
 	db $50
 ; 0x755ae + 5 bytes
 
-UnnamedText_755b3: ; 0x755b3
-	TX_FAR _UnnamedText_755b3
+FuchsiaGymEndBattleTxt1: ; 0x755b3
+	TX_FAR _FuchsiaGymEndBattleTxt1
 	db $50
 ; 0x755b3 + 5 bytes
 
-UnnamedText_755b8: ; 0x755b8
-	TX_FAR _UnnamedText_755b8
+FuchsiaGymAfterBattleTxt1: ; 0x755b8
+	TX_FAR _FuchsiaGymAfterBattleTxt1
 	db $50
 ; 0x755b8 + 5 bytes
 
 FuchsiaGymText3: ; 0x755bd
 	db $08 ; asm
-	ld hl, TrainerHeader_754f7
+	ld hl, FuchsiaGymTH1
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_755c7: ; 0x755c7
-	TX_FAR _UnnamedText_755c7
+FuchsiaGymB4BattleTxt2: ; 0x755c7
+	TX_FAR _FuchsiaGymB4BattleTxt2
 	db $50
 ; 0x755c7 + 5 bytes
 
-UnnamedText_755cc: ; 0x755cc
-	TX_FAR _UnnamedText_755cc
+FuchsiaGymEndBattleTxt2: ; 0x755cc
+	TX_FAR _FuchsiaGymEndBattleTxt2
 	db $50
 ; 0x755cc + 5 bytes
 
-UnnamedText_755d1: ; 0x755d1
-	TX_FAR _UnnamedText_755d1
+FuchsiaGymAfterBattleTxt2: ; 0x755d1
+	TX_FAR _FuchsiaGymAfterBattleTxt2
 	db $50
 ; 0x755d1 + 5 bytes
 
 FuchsiaGymText4: ; 0x755d6
 	db $08 ; asm
-	ld hl, TrainerHeader_75503
+	ld hl, FuchsiaGymTH2
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_755e0: ; 0x755e0
-	TX_FAR _UnnamedText_755e0
+FuchsiaGymB4BattleTxt3: ; 0x755e0
+	TX_FAR _FuchsiaGymB4BattleTxt3
 	db $50
 ; 0x755e0 + 5 bytes
 
-UnnamedText_755e5: ; 0x755e5
-	TX_FAR _UnnamedText_755e5
+FuchsiaGymEndBattleTxt3: ; 0x755e5
+	TX_FAR _FuchsiaGymEndBattleTxt3
 	db $50
 ; 0x755e5 + 5 bytes
 
-UnnamedText_755ea: ; 0x755ea
-	TX_FAR _UnnamedText_755ea
+FuchsiaGymAfterBattleTxt3: ; 0x755ea
+	TX_FAR _FuchsiaGymAfterBattleTxt3
 	db $50
 ; 0x755ea + 5 bytes
 
 FuchsiaGymText5: ; 0x755ef
 	db $08 ; asm
-	ld hl, TrainerHeader_7550f
+	ld hl, FuchsiaGymTH3
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_755f9: ; 0x755f9
-	TX_FAR _UnnamedText_755f9
+FuchsiaGymB4BattleTxt4: ; 0x755f9
+	TX_FAR _FuchsiaGymB4BattleTxt4
 	db $50
 ; 0x755f9 + 5 bytes
 
-UnnamedText_755fe: ; 0x755fe
-	TX_FAR _UnnamedText_755fe
+FuchsiaGymEndBattleTxt4: ; 0x755fe
+	TX_FAR _FuchsiaGymEndBattleTxt4
 	db $50
 ; 0x755fe + 5 bytes
 
-UnnamedText_75603: ; 0x75603
-	TX_FAR _UnnamedText_75603
+FuchsiaGymAfterBattleTxt4: ; 0x75603
+	TX_FAR _FuchsiaGymAfterBattleTxt4
 	db $50
 ; 0x75603 + 5 bytes
 
 FuchsiaGymText6: ; 0x75608
 	db $08 ; asm
-	ld hl, TrainerHeader_7551b
+	ld hl, FuchsiaGymTH4
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_75612: ; 0x75612
-	TX_FAR _UnnamedText_75612
+FuchsiaGymB4BattleTxt5: ; 0x75612
+	TX_FAR _FuchsiaGymB4BattleTxt5
 	db $50
 ; 0x75612 + 5 bytes
 
-UnnamedText_75617: ; 0x75617
-	TX_FAR _UnnamedText_75617
+FuchsiaGymEndBattleTxt5: ; 0x75617
+	TX_FAR _FuchsiaGymEndBattleTxt5
 	db $50
 ; 0x75617 + 5 bytes
 
-UnnamedText_7561c: ; 0x7561c
-	TX_FAR _UnnamedText_7561c
+FuchsiaGymAfterBattleTxt5: ; 0x7561c
+	TX_FAR _FuchsiaGymAfterBattleTxt5
 	db $50
 ; 0x7561c + 5 bytes
 
 FuchsiaGymText7: ; 0x75621
 	db $08 ; asm
-	ld hl, TrainerHeader_75527
+	ld hl, FuchsiaGymTH5
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_7562b: ; 0x7562b
-	TX_FAR _UnnamedText_7562b
+FuchsiaGymB4BattleTxt6: ; 0x7562b
+	TX_FAR _FuchsiaGymB4BattleTxt6
 	db $50
 ; 0x7562b + 5 bytes
 
-UnnamedText_75630: ; 0x75630
-	TX_FAR _UnnamedText_75630
+FuchsiaGymEndBattleTxt6: ; 0x75630
+	TX_FAR _FuchsiaGymEndBattleTxt6
 	db $50
 ; 0x75630 + 5 bytes
 
-UnnamedText_75635: ; 0x75635
-	TX_FAR _UnnamedText_75635
+FuchsiaGymAfterBattleTxt6: ; 0x75635
+	TX_FAR _FuchsiaGymAfterBattleTxt6
 	db $50
 ; 0x75635 + 5 bytes
 
@@ -58301,53 +58301,53 @@ _ViridianForestText1: ; 0x8031d
 	db "They're out for", $4f
 	db "#MON fights!", $57
 
-_UnnamedText_6118a: ; 0x80359
+_ViridianForestB4BattleTxt1: ; 0x80359
 	db $0, "Hey! You have", $4f
 	db "#MON! Come on!", $55
 	db "Let's battle'em!", $57
 ; 0x80359 + 46 bytes
 
-_UnnamedText_6118f: ; 0x80387
+_ViridianForestEndBattleTxt1: ; 0x80387
 	db $0, "No!", $4f
 	db "CATERPIE can't", $55
 	db "cut it!", $58
 ; 0x80387 + 27 bytes
 
-_UnnamedText_61194: ; 0x803a2
+_ViridianForestAfterBattleTxt1: ; 0x803a2
 	db $0, "Ssh! You'll scare", $4f
 	db "the bugs away!", $57
 ; 0x803a2 + 33 bytes
 
-_UnnamedText_61199: ; 0x803c3
+_ViridianForestB4BattleTxt2: ; 0x803c3
 	db $0, "Yo! You can't jam", $4f
 	db "out if you're a", $55
 	db "#MON trainer!", $57
 ; 0x803c3 + 47 bytes
 
-_UnnamedText_6119e: ; 0x803f2
+_ViridianForestEndBattleTxt2: ; 0x803f2
 	db $0, "Huh?", $4f
 	db "I ran out of", $55
 	db "#MON!", $58
 ; 0x803f2 + 25 bytes
 
-_UnnamedText_611a3: ; 0x8040b
+_ViridianForestAfterBattleTxt2: ; 0x8040b
 	db $0, "Darn! I'm going", $4f
 	db "to catch some", $55
 	db "stronger ones!", $57
 ; 0x8040b + 45 bytes
 
-_UnnamedText_611a8: ; 0x80438
+_ViridianForestB4BattleTxt3: ; 0x80438
 	db $0, "Hey, wait up!", $4f
 	db "What's the hurry?", $57
 ; 0x80438 + 32 bytes
 
-_UnnamedText_611ad: ; 0x80458
+_ViridianForestEndBattleTxt3: ; 0x80458
 	db $0, "I", $4f
 	db "give! You're good", $55
 	db "at this!", $58
 ; 0x80458 + 29 bytes
 
-_UnnamedText_611b2: ; 0x80475
+_ViridianForestAfterBattleTxt3: ; 0x80475
 	db $0, "Sometimes, you", $4f
 	db "can find stuff on", $55
 	db "the ground!", $51
@@ -58403,115 +58403,115 @@ _ViridianForestText14: ; 0x80667
 	db "VIRIDIAN FOREST", $55
 	db "PEWTER CITY AHEAD", $57
 
-_UnnamedText_49a98: ; 0x80692
+_MtMoon1B4BattleTxt2: ; 0x80692
 	db $0, "WHOA! You shocked", $4f
 	db "me! Oh, you're", $55
 	db "just a kid!", $57
 ; 0x80692 + 45 bytes
 
-_UnnamedText_49a9d: ; 0x806bf
+_MtMoon1EndBattleTxt2: ; 0x806bf
 	db $0, "Wow!", $4f
 	db "Shocked again!", $58
 ; 0x806bf + 21 bytes
 
-_UnnamedText_49aa2: ; 0x806d4
+_MtMoon1AfterBattleTxt2: ; 0x806d4
 	db $0, "Kids like you", $4f
 	db "shouldn't be", $55
 	db "here!", $57
 ; 0x806d4 + 33 bytes
 
-_UnnamedText_49aa7: ; 0x806f5
+_MtMoon1B4BattleTxt3: ; 0x806f5
 	db $0, "Did you come to", $4f
 	db "explore too?", $57
 ; 0x806f5 + 30 bytes
 
-_UnnamedText_49aac: ; 0x80713
+_MtMoon1EndBattleTxt3: ; 0x80713
 	db $0, "Losing", $4f
 	db "stinks!", $58
 ; 0x80713 + 16 bytes
 
-_UnnamedText_49ab1: ; 0x80723
+_MtMoon1AfterBattleTxt3: ; 0x80723
 	db $0, "I came down here", $4f
 	db "to show off to", $55
 	db "girls.", $57
 ; 0x80723 + 40 bytes
 
-_UnnamedText_49ab6: ; 0x8074b
+_MtMoon1B4BattleTxt4: ; 0x8074b
 	db $0, "Wow! It's way", $4f
 	db "bigger in here", $55
 	db "than I thought!", $57
 ; 0x8074b + 45 bytes
 
-_UnnamedText_49abb: ; 0x80778
+_MtMoon1EndBattleTxt4: ; 0x80778
 	db $0, "Oh!", $4f
 	db "I lost it!", $58
 ; 0x80778 + 16 bytes
 
-_UnnamedText_49ac0: ; 0x80788
+_MtMoon1AfterBattleTxt4: ; 0x80788
 	db $0, "How do you get", $4f
 	db "out of here?", $57
 ; 0x80788 + 29 bytes
 
-_UnnamedText_49ac5: ; 0x807a5
+_MtMoon1B4BattleTxt5: ; 0x807a5
 	db $0, "What! Don't sneak", $4f
 	db "up on me!", $57
 ; 0x807a5 + 28 bytes
 
-_UnnamedText_49aca: ; 0x807c1
+_MtMoon1EndBattleTxt5: ; 0x807c1
 	db $0, "My", $4f
 	db "#MON won't do!", $58
 ; 0x807c1 + 18 bytes
 
-_UnnamedText_49acf: ; 0x807d3
+_MtMoon1AfterBattleTxt5: ; 0x807d3
 	db $0, "I have to find", $4f
 	db "stronger #MON.", $57
 ; 0x807d3 + 31 bytes
 
-_UnnamedText_49ad4: ; 0x807f2
+_MtMoon1B4BattleTxt6: ; 0x807f2
 	db $0, "What? I'm waiting", $4f
 	db "for my friends to", $55
 	db "find me here.", $57
 ; 0x807f2 + 50 bytes
 
-_UnnamedText_49ad9: ; 0x80824
+_MtMoon1EndBattleTxt6: ; 0x80824
 	db $0, "I lost?", $58
 ; 0x80824 + 9 bytes
 
-_UnnamedText_49ade: ; 0x8082d
+_MtMoon1AfterBattleTxt6: ; 0x8082d
 	db $0, "I heard there are", $4f
 	db "some very rare", $55
 	db "fossils here.", $57
 ; 0x8082d + 48 bytes
 
-_UnnamedText_49ae3: ; 0x8085d
+_MtMoon1B4BattleTxt7: ; 0x8085d
 	db $0, "Suspicious men", $4f
 	db "are in the cave.", $55
 	db "What about you?", $57
 ; 0x8085d + 49 bytes
 
-_UnnamedText_49ae8: ; 0x8088e
+_MtMoon1EndBattleTxt7: ; 0x8088e
 	db $0, "You", $4f
 	db "got me!", $58
 ; 0x8088e + 13 bytes
 
-_UnnamedText_49aed: ; 0x8089b
+_MtMoon1AfterBattleTxt7: ; 0x8089b
 	db $0, "I saw them! I'm", $4f
 	db "sure they're from", $55
 	db "TEAM ROCKET!", $57
 ; 0x8089b + 46 bytes
 
-_UnnamedText_49af2: ; 0x808c9
+_MtMoon1B4BattleTxt8: ; 0x808c9
 	db $0, "Go through this", $4f
 	db "cave to get to", $55
 	db "CERULEAN CITY!", $57
 ; 0x808c9 + 47 bytes
 
-_UnnamedText_49af7: ; 0x808f8
+_MtMoon1EndBattleTxt8: ; 0x808f8
 	db $0, "I", $4f
 	db "lost.", $58
 ; 0x808f8 + 9 bytes
 
-_UnnamedText_49afc: ; 0x80901
+_MtMoon1AfterBattleTxt8: ; 0x80901
 	db $0, "ZUBAT is tough!", $4f
 	db "But, it can be", $55
 	db "useful if you", $55
@@ -58581,70 +58581,70 @@ UnnamedText_80a93: ; 0x80a93
 	db "this is mine!@@"
 ; 0x80ab3
 
-_UnnamedText_49f9f: ; 0x80ab3
+_MtMoon3B4BattleTxt2: ; 0x80ab3
 	db $0, "TEAM ROCKET will", $4f
 	db "find the fossils,", $55
 	db "revive and sell", $55
 	db "them for cash!", $57
 ; 0x80ab3 + 67 bytes
 
-_UnnamedText_49fa4: ; 0x80af6
+_MtMoon3EndBattleTxt2: ; 0x80af6
 	db $0, "Urgh!", $4f
 	db "Now I'm mad!", $58
 ; 0x80af6 + 19 bytes
 
-_UnnamedText_49fa9: ; 0x80b09
+_MtMoon3AfterBattleTxt2: ; 0x80b09
 	db $0, "You made me mad!", $4f
 	db "TEAM ROCKET will", $55
 	db "blacklist you!", $57
 ; 0x80b09 + 50 bytes
 
-_UnnamedText_49fae: ; 0x80b3b
+_MtMoon3B4BattleTxt3: ; 0x80b3b
 	db $0, "We, TEAM ROCKET,", $4f
 	db "are #MON", $55
 	db "gangsters!", $57
 ; 0x80b3b + 38 bytes
 
-_UnnamedText_49fb3: ; 0x80b61
+_MtMoon3EndBattleTxt3: ; 0x80b61
 	db $0, "I blew", $4f
 	db "it!", $58
 ; 0x80b61 + 12 bytes
 
-_UnnamedText_49fb8: ; 0x80b6d
+_MtMoon3AfterBattleTxt3: ; 0x80b6d
 	db $0, "Darn it all! My", $4f
 	db "associates won't", $55
 	db "stand for this!", $57
 ; 0x80b6d + 49 bytes
 
-_UnnamedText_49fbd: ; 0x80b9e
+_MtMoon3B4BattleTxt4: ; 0x80b9e
 	db $0, "We're pulling a", $4f
 	db "big job here!", $55
 	db "Get lost, kid!", $57
 ; 0x80b9e + 45 bytes
 
-_UnnamedText_49fc2: ; 0x80bcb
+_MtMoon3EndBattleTxt4: ; 0x80bcb
 	db $0, "So, you", $4f
 	db "are good.", $58
 ; 0x80bcb + 19 bytes
 
-_UnnamedText_49fc7: ; 0x80bde
+_MtMoon3AfterBattleTxt4: ; 0x80bde
 	db $0, "If you find a", $4f
 	db "fossil, give it", $55
 	db "to me and scram!", $57
 ; 0x80bde + 48 bytes
 
-_UnnamedText_49fcc: ; 0x80c0e
+_MtMoon3B4BattleTxt5: ; 0x80c0e
 	db $0, "Little kids", $4f
 	db "should leave", $55
 	db "grown-ups alone!", $57
 ; 0x80c0e + 43 bytes
 
-_UnnamedText_49fd1: ; 0x80c39
+_MtMoon3EndBattleTxt5: ; 0x80c39
 	db $0, "I'm", $4f
 	db "steamed!", $58
 ; 0x80c39 + 13 bytes
 
-_UnnamedText_49fd6: ; 0x80c46
+_MtMoon3AfterBattleTxt5: ; 0x80c46
 	db $0, "#MON lived", $4f
 	db "here long before", $55
 	db "people came.", $57
@@ -58738,34 +58738,34 @@ _SSAnne5Text3: ; 0x80fda
 	db "I stepped out to", $4f
 	db "get some air.", $57
 
-_UnnamedText_61703: ; 0x8100b
+_SSAnneB4BattleTxt1: ; 0x8100b
 	db $0, "Hey matey!", $51
 	db "Let's do a little", $4f
 	db "jig!", $57
 ; 0x8100b + 34 bytes
 
-_UnnamedText_61708: ; 0x8102d
+_SSAnneEndBattleTxt1: ; 0x8102d
 	db $0, "You're", $4f
 	db "impressive!", $58
 ; 0x8102d + 19 bytes
 
-_UnnamedText_6170d: ; 0x81040
+_SSAnneAfterBattleTxt1: ; 0x81040
 	db $0, "How many kinds of", $4f
 	db "#MON do you", $55
 	db "think there are?", $57
 ; 0x81040 + 48 bytes
 
-_UnnamedText_6171c: ; 0x81070
+_SSAnneB4BattleTxt2: ; 0x81070
 	db $0, "Ahoy there!", $4f
 	db "Are you seasick?", $57
 ; 0x81070 + 30 bytes
 
-_UnnamedText_61721: ; 0x8108e
+_SSAnneEndBattleTxt2: ; 0x8108e
 	db $0, "I was", $4f
 	db "just careless!", $58
 ; 0x8108e + 22 bytes
 
-_UnnamedText_61726: ; 0x810a4
+_SSAnneAfterBattleTxt2: ; 0x810a4
 	db $0, "My Pa said there", $4f
 	db "are 100 kinds of", $55
 	db "#MON. I think", $55
@@ -58889,29 +58889,29 @@ _SSAnne8Text8: ; 0x814d7
 	db $0, "WIGGLYTUFF: Puup", $4f
 	db "pupuu!@@"
 
-_UnnamedText_61a0b: ; 0x814f1
+_SSAnne8B4BattleTxt1: ; 0x814f1
 	db $0, "I travel alone", $4f
 	db "on my journeys!", $51
 	db "My #MON are my", $4f
 	db "only friends!", $57
 ; 0x814f1 + 61 bytes
 
-_UnnamedText_61a10: ; 0x8152e
+_SSAnne8EndBattleTxt1: ; 0x8152e
 	db $0, "My, my", $4f
 	db "friends...", $58
 ; 0x8152e + 19 bytes
 
-_UnnamedText_61a15: ; 0x81541
+_SSAnne8AfterBattleTxt1: ; 0x81541
 	db $0, "You should be", $4f
 	db "nice to friends!", $57
 ; 0x81541 + 32 bytes
 
-_UnnamedText_61a1a: ; 0x81561
+_SSAnne8B4BattleTxt2: ; 0x81561
 	db $0, "You pup! How dare", $4f
 	db "you barge in!", $57
 ; 0x81561 + 33 bytes
 
-_UnnamedText_61a1f: ; 0x81582
+_SSAnne8EndBattleTxt2: ; 0x81582
 	db $0, "Humph!", $4f
 	db "You rude child!", $58
 ; 0x81582 + 24 bytes
@@ -58921,36 +58921,36 @@ _UnnamedText_61a24: ; 0x8159a
 	db "alone! Get out!", $57
 ; 0x8159a + 35 bytes
 
-_UnnamedText_61a29: ; 0x815bd
+_SSAnne8B4BattleTxt3: ; 0x815bd
 	db $0, "I love #MON!", $4f
 	db "Do you?", $57
 ; 0x815bd + 22 bytes
 
-_UnnamedText_61a2e: ; 0x815d3
+_SSAnne8EndBattleTxt3: ; 0x815d3
 	db $0, "Wow! ", $4f
 	db "You're great!", $58
 ; 0x815d3 + 20 bytes
 
-_UnnamedText_61a33: ; 0x815e7
+_SSAnne8AfterBattleTxt3: ; 0x815e7
 	db $0, "Let me be your", $4f
 	db "friend, OK?", $51
 	db "Then we can trade", $4f
 	db "#MON!", $57
 ; 0x815e7 + 52 bytes
 
-_UnnamedText_61a38: ; 0x8161b
+_SSAnne8B4BattleTxt4: ; 0x8161b
 	db $0, "I collected these", $4f
 	db "#MON from all", $55
 	db "around the world!", $57
 ; 0x8161b + 51 bytes
 
-_UnnamedText_61a3d: ; 0x8164e
+_SSAnne8EndBattleTxt4: ; 0x8164e
 	db $0, "Oh no!", $4f
 	db "I went around the", $55
 	db "world for these!", $58
 ; 0x8164e + 43 bytes
 
-_UnnamedText_61a42: ; 0x81679
+_SSAnne8AfterBattleTxt4: ; 0x81679
 	db $0, "You hurt my poor", $4f
 	db "worldly #MON!", $51
 	db "I demand that you", $4f
@@ -59027,67 +59027,67 @@ _UnnamedText_61c4c: ; 0x81905
 	db "get seasick!", $57
 ; 0x81905 + 33 bytes
 
-_UnnamedText_61c51: ; 0x81926
+_SSAnne9B4BattleTxt1: ; 0x81926
 	db $0, "Competing against", $4f
 	db "the young keeps", $55
 	db "me youthful.", $57
 ; 0x81926 + 48 bytes
 
-_UnnamedText_61c56: ; 0x81956
+_SSAnne9EndBattleTxt1: ; 0x81956
 	db $0, "Good", $4f
 	db "fight! Ah, I feel", $55
 	db "young again!", $58
 ; 0x81956 + 37 bytes
 
-_UnnamedText_61c5b: ; 0x8197b
+_SSAnne9AfterBattleTxt1: ; 0x8197b
 	db $0, "15 years ago, I", $4f
 	db "would have won!", $57
 ; 0x8197b + 33 bytes
 
-_UnnamedText_61c60: ; 0x8199c
+_SSAnne9B4BattleTxt2: ; 0x8199c
 	db $0, "Check out what I", $4f
 	db "fished up!", $57
 ; 0x8199c + 29 bytes
 
-_UnnamedText_61c65: ; 0x819b9
+_SSAnne9EndBattleTxt2: ; 0x819b9
 	db $0, "I'm", $4f
 	db "all out!", $58
 ; 0x819b9 + 13 bytes
 
-_UnnamedText_61c6a: ; 0x819c6
+_SSAnne9AfterBattleTxt2: ; 0x819c6
 	db $0, "Party?", $51
 	db "The cruise ship's", $4f
 	db "party should be", $55
 	db "over by now.", $57
 ; 0x819c6 + 54 bytes
 
-_UnnamedText_61c6f: ; 0x819fc
+_SSAnne9B4BattleTxt3: ; 0x819fc
 	db $0, "Which do you like,", $4f
 	db "a strong or a", $55
 	db "rare #MON?", $57
 ; 0x819fc + 45 bytes
 
-_UnnamedText_61c74: ; 0x81a29
+_SSAnne9EndBattleTxt3: ; 0x81a29
 	db $0, "I must", $4f
 	db "salute you!", $58
 ; 0x81a29 + 20 bytes
 
-_UnnamedText_61c79: ; 0x81a3d
+_SSAnne9AfterBattleTxt3: ; 0x81a3d
 	db $0, "I prefer strong", $4f
 	db "and rare #MON.", $57
 ; 0x81a3d + 32 bytes
 
-_UnnamedText_61c7e: ; 0x81a5d
+_SSAnne9B4BattleTxt4: ; 0x81a5d
 	db $0, "I never saw you", $4f
 	db "at the party.", $57
 ; 0x81a5d + 31 bytes
 
-_UnnamedText_61c83: ; 0x81a7c
+_SSAnne9EndBattleTxt4: ; 0x81a7c
 	db $0, "Take", $4f
 	db "it easy!", $58
 ; 0x81a7c + 15 bytes
 
-_UnnamedText_61c88: ; 0x81a8b
+_SSAnne9AfterBattleTxt4: ; 0x81a8b
 	db $0, "Oh, I adore your", $4f
 	db "strong #MON!", $57
 ; 0x81a8b + 31 bytes
@@ -59096,101 +59096,101 @@ _SSAnne10Text8: ; 0x81aaa
 	db $0, "MACHOKE: Gwoh!", $4f
 	db "Goggoh!@@"
 
-_UnnamedText_61e16: ; 0x81ac3
+_SSAnne10B4BattleTxt1: ; 0x81ac3
 	db $0, "You know what they", $4f
 	db "say about sailors", $55
 	db "and fighting!", $57
 ; 0x81ac3 + 52 bytes
 
-_UnnamedText_61e1b: ; 0x81af7
+_SSAnne10EndBattleTxt1: ; 0x81af7
 	db $0, "Right!", $4f
 	db "Good fight, mate!", $58
 ; 0x81af7 + 26 bytes
 
-_UnnamedText_61e20: ; 0x81b11
+_SSAnne10AfterBattleTxt1: ; 0x81b11
 	db $0, "Haha! Want to be", $4f
 	db "a sailor, mate?", $57
 ; 0x81b11 + 34 bytes
 
-_UnnamedText_61e25: ; 0x81b33
+_SSAnne10B4BattleTxt2: ; 0x81b33
 	db $0, "My sailor's pride", $4f
 	db "is at stake!", $57
 ; 0x81b33 + 31 bytes
 
-_UnnamedText_61e2a: ; 0x81b52
+_SSAnne10EndBattleTxt2: ; 0x81b52
 	db $0, "Your", $4f
 	db "spirit sank me!", $58
 ; 0x81b52 + 22 bytes
 
-_UnnamedText_61e2f: ; 0x81b68
+_SSAnne10AfterBattleTxt2: ; 0x81b68
 	db $0, "Did you see the", $4f
 	db "FISHING GURU in", $55
 	db "VERMILION CITY?", $57
 ; 0x81b68 + 49 bytes
 
-_UnnamedText_61e34: ; 0x81b99
+_SSAnne10B4BattleTxt3: ; 0x81b99
 	db $0, "Us sailors have", $4f
 	db "#MON too!", $57
 ; 0x81b99 + 27 bytes
 
-_UnnamedText_61e39: ; 0x81bb4
+_SSAnne10EndBattleTxt3: ; 0x81bb4
 	db $0, "OK, ", $4f
 	db "you're not bad.", $58
 ; 0x81bb4 + 21 bytes
 
-_UnnamedText_61e3e: ; 0x81bc9
+_SSAnne10AfterBattleTxt3: ; 0x81bc9
 	db $0, "We caught all our", $4f
 	db "#MON while", $55
 	db "out at sea!", $57
 ; 0x81bc9 + 42 bytes
 
-_UnnamedText_61e43: ; 0x81bf3
+_SSAnne10B4BattleTxt4: ; 0x81bf3
 	db $0, "I like feisty", $4f
 	db "kids like you!@@"
 ; 0x81bf3 + 31 bytes
 
-_UnnamedText_61e48: ; 0x81c12
+_SSAnne10EndBattleTxt4: ; 0x81c12
 	db $0, "Argh!", $4f
 	db "Lost it!", $58
 ; 0x81c12 + 16 bytes
 
-_UnnamedText_61e4d: ; 0x81c22
+_SSAnne10AfterBattleTxt4: ; 0x81c22
 	db $0, "Sea #MON live", $4f
 	db "in deep water.", $55
 	db "You'll need a ROD!", $57
 ; 0x81c22 + 48 bytes
 
-_UnnamedText_61e52: ; 0x81c52
+_SSAnne10B4BattleTxt5: ; 0x81c52
 	db $0, "Matey, you're", $4f
 	db "walking the plank", $55
 	db "if you lose!", $57
 ; 0x81c52 + 45 bytes
 
-_UnnamedText_61e57: ; 0x81c7f
+_SSAnne10EndBattleTxt5: ; 0x81c7f
 	db $0, "Argh!", $4f
 	db "Beaten by a kid!", $58
 ; 0x81c7f + 24 bytes
 
-_UnnamedText_61e5c: ; 0x81c97
+_SSAnne10AfterBattleTxt5: ; 0x81c97
 	db $0, "Jellyfish some-", $4f
 	db "times drift into", $55
 	db "the ship.", $57
 ; 0x81c97 + 44 bytes
 
-_UnnamedText_61e61: ; 0x81cc3
+_SSAnne10B4BattleTxt6: ; 0x81cc3
 	db $0, "Hello stranger!", $4f
 	db "Stop and chat!", $51
 	db "All my #MON", $4f
 	db "are from the sea!", $57
 ; 0x81cc3 + 62 bytes
 
-_UnnamedText_61e66: ; 0x81d01
+_SSAnne10EndBattleTxt6: ; 0x81d01
 	db $0, "Darn!", $4f
 	db "I let that one", $55
 	db "get away!", $58
 ; 0x81d01 + 32 bytes
 
-_UnnamedText_61e6b: ; 0x81d21
+_SSAnne10AfterBattleTxt6: ; 0x81d21
 	db $0, "I was going to", $4f
 	db "make you my", $55
 	db "assistant too!", $57
@@ -59203,193 +59203,193 @@ _SSAnne10Text7: ; 0x81d4c
 	db "STRENGTH to move", $55
 	db "big rocks!", $57
 
-_UnnamedText_44a91: ; 0x81d9b
+_VictoryRoad3B4BattleTxt2: ; 0x81d9b
 	db $0, "I heard rumors of", $4f
 	db "a child prodigy!", $57
 ; 0x81d9b + 36 bytes
 
-_UnnamedText_44a96: ; 0x81dbf
+_VictoryRoad3EndBattleTxt2: ; 0x81dbf
 	db $0, "The", $4f
 	db "rumors were true!", $58
 ; 0x81dbf + 23 bytes
 
-_UnnamedText_44a9b: ; 0x81dd6
+_VictoryRoad3AfterBattleTxt2: ; 0x81dd6
 	db $0, "You beat GIOVANNI", $4f
 	db "of TEAM ROCKET?", $57
 ; 0x81dd6 + 35 bytes
 
-_UnnamedText_44aa0: ; 0x81df9
+_VictoryRoad3B4BattleTxt3: ; 0x81df9
 	db $0, "I'll show you just", $4f
 	db "how good you are!", $57
 ; 0x81df9 + 37 bytes
 
-_UnnamedText_44aa5: ; 0x81e1e
+_VictoryRoad3EndBattleTxt3: ; 0x81e1e
 	db $0, "I'm", $4f
 	db "furious!", $58
 ; 0x81e1e + 13 bytes
 
-_UnnamedText_44aaa: ; 0x81e2b
+_VictoryRoad3AfterBattleTxt3: ; 0x81e2b
 	db $0, "You showed me just", $4f
 	db "how good I was!", $57
 ; 0x81e2b + 36 bytes
 
-_UnnamedText_44aaf: ; 0x81e4f
+_VictoryRoad3B4BattleTxt4: ; 0x81e4f
 	db $0, "Only the chosen", $4f
 	db "can pass here!", $57
 ; 0x81e4f + 32 bytes
 
-_UnnamedText_44ab4: ; 0x81e6f
+_VictoryRoad3EndBattleTxt4: ; 0x81e6f
 	db $0, "I", $4f
 	db "don't believe it!", $58
 ; 0x81e6f + 20 bytes
 
-_UnnamedText_44ab9: ; 0x81e83
+_VictoryRoad3AfterBattleTxt4: ; 0x81e83
 	db $0, "All trainers here", $4f
 	db "are headed to the", $55
 	db "#MON LEAGUE!", $55
 	db "Be careful!", $57
 ; 0x81e83 + 62 bytes
 
-_UnnamedText_44abe: ; 0x81ec1
+_VictoryRoad3B4BattleTxt5: ; 0x81ec1
 	db $0, "Trainers live to", $4f
 	db "seek stronger", $55
 	db "opponents!", $57
 ; 0x81ec1 + 43 bytes
 
-_UnnamedText_44ac3: ; 0x81eec
+_VictoryRoad3EndBattleTxt5: ; 0x81eec
 	db $0, "Oh!", $4f
 	db "So strong!", $58
 ; 0x81eec + 16 bytes
 
-_UnnamedText_44ac8: ; 0x81efc
+_VictoryRoad3AfterBattleTxt5: ; 0x81efc
 	db $0, "By fighting tough", $4f
 	db "battles, you get", $55
 	db "stronger!", $57
 ; 0x81efc + 46 bytes
 
-_UnnamedText_44c91: ; 0x81f2a
+_RocketHideout1EndBattleTxt6: ; 0x81f2a
 	db $0, "Why...?@@"
 ; 0x81f34
 
-_UnnamedText_44ca1: ; 0x81f34
+_RocketHideout1B4BattleTxt2: ; 0x81f34
 	db $0, "Who are you? How", $4f
 	db "did you get here?", $57
 ; 0x81f34 + 36 bytes
 
-_UnnamedText_44ca6: ; 0x81f58
+_RocketHideout1EndBattleTxt2: ; 0x81f58
 	db $0, "Oww!", $4f
 	db "Beaten!", $58
 ; 0x81f58 + 14 bytes
 
-_UnnamedText_44cab: ; 0x81f66
+_RocketHideout1AfterBattleTxt2: ; 0x81f66
 	db $0, "Are you dissing", $4f
 	db "TEAM ROCKET?", $57
 ; 0x81f66 + 30 bytes
 
-_UnnamedText_44cb0: ; 0x81f84
+_RocketHideout1B4BattleTxt3: ; 0x81f84
 	db $0, "You broke into", $4f
 	db "our operation?", $57
 ; 0x81f84 + 31 bytes
 
-_UnnamedText_44cb5: ; 0x81fa3
+_RocketHideout1EndBattleTxt3: ; 0x81fa3
 	db $0, "Burnt!", $58
 ; 0x81fa3 + 8 bytes
 
-_UnnamedText_44cba: ; 0x81fab
+_RocketHideout1AfterBattleTxt3: ; 0x81fab
 	db $0, "You're not going", $4f
 	db "to get away with", $55
 	db "this, brat!", $57
 ; 0x81fab + 46 bytes
 
-_UnnamedText_44cbf: ; 0x81fd9
+_RocketHideout1B4BattleTxt4: ; 0x81fd9
 	db $0, "Intruder alert!", $57
 ; 0x81fd9 + 17 bytes
 
-_UnnamedText_44cc4: ; 0x81fea
+_RocketHideout1EndBattleTxt4: ; 0x81fea
 	db $0, "I", $4f
 	db "can't do it!", $58
 ; 0x81fea + 15 bytes
 
-_UnnamedText_44cc9: ; 0x81ff9
+_RocketHideout1AfterBattleTxt4: ; 0x81ff9
 	db $0, "SILPH SCOPE?", $4f
 	db "I don't know", $55
 	db "where it is!", $57
 ; 0x81ff9 + 39 bytes
 
-_UnnamedText_44cce: ; 0x82020
+_RocketHideout1B4BattleTxt5: ; 0x82020
 	db $0, "Why did you come", $4f
 	db "here?", $57
 ; 0x82020 + 24 bytes
 
-_UnnamedText_44cd3: ; 0x82038
+_RocketHideout1EndBattleTxt5: ; 0x82038
 	db $0, "This", $4f
 	db "won't do!", $58
 ; 0x82038 + 15 bytes
 
-_UnnamedText_44cd8: ; 0x82047
+_RocketHideout1AfterBattleTxt5: ; 0x82047
 	db $0, "OK, I'll talk!", $4f
 	db "Take the elevator", $55
 	db "to see my BOSS!", $57
 ; 0x82047 + 49 bytes
 
-_UnnamedText_44cdd: ; 0x82078
+_RocketHideout1B4BattleTxt6: ; 0x82078
 	db $0, "Are you lost, you", $4f
 	db "little rat?", $57
 ; 0x82078 + 31 bytes
 
-_UnnamedText_44ce2: ; 0x82097
+_RocketHideout1AfterBattleTxt6: ; 0x82097
 	db $0, "Uh-oh, that fight", $4f
 	db "opened the door!", $57
 ; 0x82097 + 36 bytes
 
-_UnnamedText_450e8: ; 0x820bb
+_RocketHideout2B4BattleTxt2: ; 0x820bb
 	db $0, "BOSS said you can", $4f
 	db "see GHOSTs with", $55
 	db "the SILPH SCOPE!", $57
 ; 0x820bb + 52 bytes
 
-_UnnamedText_450ed: ; 0x820ef
+_RocketHideout2EndBattleTxt2: ; 0x820ef
 	db $0, "I", $4f
 	db "surrender!", $58
 ; 0x820ef + 14 bytes
 
-_UnnamedText_450f2: ; 0x820fd
+_RocketHideout2AfterBattleTxt2: ; 0x820fd
 	db $0, "The TEAM ROCKET", $4f
 	db "HQ has 4 basement", $55
 	db "floors. Can you", $55
 	db "reach the BOSS?", $57
 ; 0x820fd + 67 bytes
 
-_UnnamedText_45325: ; 0x82140
+_RocketHideout3B4BattleTxt2: ; 0x82140
 	db $0, "Stop meddling in", $4f
 	db "TEAM ROCKET's", $55
 	db "affairs!", $57
 ; 0x82140 + 40 bytes
 
-_UnnamedText_4532a: ; 0x82168
+_RocketHideout3EndBattleTxt2: ; 0x82168
 	db $0, "Oof!", $4f
 	db "Taken down!", $58
 ; 0x82168 + 18 bytes
 
-_UnnamedText_4532f: ; 0x8217a
+_RocketHideout3AfterBattleTxt2: ; 0x8217a
 	db $0, "SILPH SCOPE?", $4f
 	db "The machine the", $55
 	db "BOSS stole. It's", $55
 	db "here somewhere.", $57
 ; 0x8217a + 62 bytes
 
-_UnnamedText_4533e: ; 0x821b8
+_RocketHideout3B4BattleTxt3: ; 0x821b8
 	db $0, "We got word from", $4f
 	db "upstairs that you", $55
 	db "were coming!", $57
 ; 0x821b8 + 49 bytes
 
-_UnnamedText_45343: ; 0x821e9
+_RocketHideout3EndBattleTxt3: ; 0x821e9
 	db $0, "What?", $4f
 	db "I lost? No!", $58
 ; 0x821e9 + 19 bytes
 
-_UnnamedText_45348: ; 0x821fc
+_RocketHideout3AfterBattleTxt3: ; 0x821fc
 	db $0, "Go ahead and go!", $4f
 	db "But, you need the", $55
 	db "LIFT KEY to run", $55
@@ -59421,45 +59421,45 @@ _UnnamedText_45584: ; 0x82283
 	db "again...", $57
 ; 0x82283 + 163 bytes
 
-_UnnamedText_45593: ; 0x82326
+_RocketHideout4B4BattleTxt2: ; 0x82326
 	db $0, "I know you! You", $4f
 	db "ruined our plans", $55
 	db "at MT.MOON!", $57
 ; 0x82326 + 46 bytes
 
-_UnnamedText_45598: ; 0x82354
+_RocketHideout4EndBattleTxt2: ; 0x82354
 	db $0, "Burned", $4f
 	db "again!", $58
 ; 0x82354 + 15 bytes
 
-_UnnamedText_4559d: ; 0x82363
+_RocketHideout4AfterBattleTxt2: ; 0x82363
 	db $0, "Do you have", $4f
 	db "something against", $55
 	db "TEAM ROCKET?", $57
 ; 0x82363 + 44 bytes
 
-_UnnamedText_455ac: ; 0x8238f
+_RocketHideout4B4BattleTxt3: ; 0x8238f
 	db $0, "How can you not", $4f
 	db "see the beauty of", $55
 	db "our evil?", $57
 ; 0x8238f + 45 bytes
 
-_UnnamedText_455b1: ; 0x823bc
+_RocketHideout4EndBattleTxt3: ; 0x823bc
 	db $0, "Ayaya!", $58
 ; 0x823bc + 8 bytes
 
-_UnnamedText_455b6: ; 0x823c4
+_RocketHideout4AfterBattleTxt3: ; 0x823c4
 	db $0, "BOSS! I'm sorry I", $4f
 	db "failed you!", $57
 ; 0x823c4 + 30 bytes
 
-_UnnamedText_455c5: ; 0x823e2
+_RocketHideout4B4BattleTxt4: ; 0x823e2
 	db $0, "The elevator", $4f
 	db "doesn't work? Who", $55
 	db "has the LIFT KEY?", $57
 ; 0x823e2 + 49 bytes
 
-_UnnamedText_455ca: ; 0x82413
+_RocketHideout4EndBattleTxt4: ; 0x82413
 	db $0, "No!", $58
 ; 0x82413 + 5 bytes
 
@@ -59504,48 +59504,48 @@ _TM36NoRoomText: ; 0x8251c
 	db "room for this.", $57
 ; 0x8251c + 34 bytes
 
-_UnnamedText_59e2a: ; 0x8253e
+_SilphCo2B4BattleTxt1: ; 0x8253e
 	db $0, "Help! I'm a SILPH", $4f
 	db "employee.", $57
 ; 0x8253e + 28 bytes
 
-_UnnamedText_59e2f: ; 0x8255a
+_SilphCo2EndBattleTxt1: ; 0x8255a
 	db $0, "How", $4f
 	db "did you know I", $55
 	db "was a ROCKET?", $58
 ; 0x8255a + 34 bytes
 
-_UnnamedText_59e34: ; 0x8257c
+_SilphCo2AfterBattleTxt1: ; 0x8257c
 	db $0, "I work for both", $4f
 	db "SILPH and TEAM", $55
 	db "ROCKET!", $57
 ; 0x8257c + 40 bytes
 
-_UnnamedText_59e39: ; 0x825a4
+_SilphCo2B4BattleTxt2: ; 0x825a4
 	db $0, "It's off limits", $4f
 	db "here! Go home!", $57
 ; 0x825a4 + 31 bytes
 
-_UnnamedText_59e3e: ; 0x825c3
+_SilphCo2EndBattleTxt2: ; 0x825c3
 	db $0, "You're", $4f
 	db "good.", $58
 ; 0x825c3 + 13 bytes
 
-_UnnamedText_59e43: ; 0x825d0
+_SilphCo2AfterBattleTxt2: ; 0x825d0
 	db $0, "Can you solve the", $4f
 	db "maze in here?", $57
 ; 0x825d0 + 33 bytes
 
-_UnnamedText_59e48: ; 0x825f1
+_SilphCo2B4BattleTxt3: ; 0x825f1
 	db $0, "No kids are", $4f
 	db "allowed in here!", $57
 ; 0x825f1 + 30 bytes
 
-_UnnamedText_59e4d: ; 0x8260f
+_SilphCo2EndBattleTxt3: ; 0x8260f
 	db $0, "Tough!", $58
 ; 0x8260f + 8 bytes
 
-_UnnamedText_59e52: ; 0x82617
+_SilphCo2AfterBattleTxt3: ; 0x82617
 	db $0, "Diamond shaped", $4f
 	db "tiles are", $55
 	db "teleport blocks!", $51
@@ -59553,16 +59553,16 @@ _UnnamedText_59e52: ; 0x82617
 	db "transporters!", $57
 ; 0x82617 + 72 bytes
 
-_UnnamedText_59e57: ; 0x8265f
+_SilphCo2B4BattleTxt4: ; 0x8265f
 	db $0, "Hey kid! What are", $4f
 	db "you doing here?", $57
 ; 0x8265f + 35 bytes
 
-_UnnamedText_59e5c: ; 0x82682
+_SilphCo2EndBattleTxt4: ; 0x82682
 	db $0, "I goofed!", $58
 ; 0x82682 + 11 bytes
 
-_UnnamedText_59e61: ; 0x8268d
+_SilphCo2AfterBattleTxt4: ; 0x8268d
 	db $0, "SILPH CO. will", $4f
 	db "be merged with", $55
 	db "TEAM ROCKET!", $57
@@ -59579,34 +59579,34 @@ _UnnamedText_59ffe: ; 0x826de
 	db "saved us!", $57
 ; 0x826de + 32 bytes
 
-_UnnamedText_5a00d: ; 0x826fe
+_SilphCo3B4BattleTxt1: ; 0x826fe
 	db $0, "Quit messing with", $4f
 	db "us, kid!", $57
 ; 0x826fe + 28 bytes
 
-_UnnamedText_5a012: ; 0x8271a
+_SilphCo3EndBattleTxt1: ; 0x8271a
 	db $0, "I give", $4f
 	db "up!", $58
 ; 0x8271a + 12 bytes
 
-_UnnamedText_5a017: ; 0x82726
+_SilphCo3AfterBattleTxt1: ; 0x82726
 	db $0, "A hint? You can", $4f
 	db "open doors with a", $55
 	db "CARD KEY!", $57
 ; 0x82726 + 45 bytes
 
-_UnnamedText_5a026: ; 0x82753
+_SilphCo3B4BattleTxt2: ; 0x82753
 	db $0, "I support TEAM", $4f
 	db "ROCKET more than", $55
 	db "I support SILPH!", $57
 ; 0x82753 + 50 bytes
 
-_UnnamedText_5a02b: ; 0x82785
+_SilphCo3EndBattleTxt2: ; 0x82785
 	db $0, "You", $4f
 	db "really got me!", $58
 ; 0x82785 + 20 bytes
 
-_UnnamedText_5a030: ; 0x82799
+_SilphCo3AfterBattleTxt2: ; 0x82799
 	db $0, "Humph...", $51
 	db "TEAM ROCKET said", $4f
 	db "that if I helped", $55
@@ -59624,49 +59624,49 @@ _UnnamedText_19de5: ; 0x82803
 	db "is gone?", $57
 ; 0x82803 + 27 bytes
 
-_UnnamedText_19df4: ; 0x8281e
+_SilphCo4B4BattleTxt2: ; 0x8281e
 	db $0, "TEAM ROCKET has", $4f
 	db "taken command of", $55
 	db "SILPH CO.!", $57
 ; 0x8281e + 45 bytes
 
-_UnnamedText_19df9: ; 0x8284b
+_SilphCo4EndBattleTxt2: ; 0x8284b
 	db $0, "Arrgh!", $58
 ; 0x8284b + 8 bytes
 
-_UnnamedText_19dfe: ; 0x82853
+_SilphCo4AfterBattleTxt2: ; 0x82853
 	db $0, "Fwahahaha!", $4f
 	db "My BOSS has been", $55
 	db "after this place!", $57
 ; 0x82853 + 47 bytes
 
-_UnnamedText_19e0d: ; 0x82882
+_SilphCo4B4BattleTxt3: ; 0x82882
 	db $0, "My #MON are my", $4f
 	db "loyal soldiers!", $57
 ; 0x82882 + 32 bytes
 
-_UnnamedText_19e12: ; 0x828a2
+_SilphCo4EndBattleTxt3: ; 0x828a2
 	db $0, "Darn!", $4f
 	db "You weak #MON!", $58
 ; 0x828a2 + 22 bytes
 
-_UnnamedText_19e17: ; 0x828b8
+_SilphCo4AfterBattleTxt3: ; 0x828b8
 	db $0, "The doors are", $4f
 	db "electronically", $55
 	db "locked! A CARD", $55
 	db "KEY opens them!", $57
 ; 0x828b8 + 61 bytes
 
-_UnnamedText_19e26: ; 0x828f5
+_SilphCo4B4BattleTxt4: ; 0x828f5
 	db $0, "Intruder spotted!", $57
 ; 0x828f5 + 19 bytes
 
-_UnnamedText_19e2b: ; 0x82908
+_SilphCo4EndBattleTxt4: ; 0x82908
 	db $0, "Who", $4f
 	db "are you?", $58
 ; 0x82908 + 14 bytes
 
-_UnnamedText_19e30: ; 0x82916
+_SilphCo4AfterBattleTxt4: ; 0x82916
 	db $0, "I better tell the", $4f
 	db "BOSS on 11F!", $57
 ; 0x82916 + 32 bytes
@@ -59684,40 +59684,40 @@ _UnnamedText_1a015: ; 0x82978
 	db "hero! Thank you!", $57
 ; 0x82978 + 50 bytes
 
-_UnnamedText_1a024: ; 0x829aa
+_SilphCo5B4BattleTxt2: ; 0x829aa
 	db $0, "I heard a kid was", $4f
 	db "wandering around.", $57
 ; 0x829aa + 37 bytes
 
-_UnnamedText_1a029: ; 0x829cf
+_SilphCo5EndBattleTxt2: ; 0x829cf
 	db $0, "Boom!", $58
 ; 0x829cf + 7 bytes
 
-_UnnamedText_1a02e: ; 0x829d6
+_SilphCo5AfterBattleTxt2: ; 0x829d6
 	db $0, "It's not smart", $4f
 	db "to pick a fight", $55
 	db "with TEAM ROCKET!", $57
 ; 0x829d6 + 49 bytes
 
-_UnnamedText_1a03d: ; 0x82a07
+_SilphCo5B4BattleTxt3: ; 0x82a07
 	db $0, "We study #", $4f
 	db "BALL technology", $55
 	db "on this floor!", $57
 ; 0x82a07 + 43 bytes
 
-_UnnamedText_1a042: ; 0x82a32
+_SilphCo5EndBattleTxt3: ; 0x82a32
 	db $0, "Dang!", $4f
 	db "Blast it!", $58
 ; 0x82a32 + 17 bytes
 
-_UnnamedText_1a047: ; 0x82a43
+_SilphCo5AfterBattleTxt3: ; 0x82a43
 	db $0, "We worked on the", $4f
 	db "ultimate #", $55
 	db "BALL which would", $55
 	db "catch anything!", $57
 ; 0x82a43 + 62 bytes
 
-_UnnamedText_1a056: ; 0x82a81
+_SilphCo5B4BattleTxt4: ; 0x82a81
 	db $0, "Whaaat? There", $4f
 	db "shouldn't be any", $55
 	db "children here?", $57
@@ -59725,28 +59725,28 @@ _UnnamedText_1a056: ; 0x82a81
 
 SECTION "bank21",DATA,BANK[$21]
 
-_UnnamedText_1a05b: ; 0x84000
+_SilphCo5EndBattleTxt4: ; 0x84000
 	db $0, "Oh", $4f
 	db "goodness!", $58
 ; 0x84000 + 14 bytes
 
-_UnnamedText_1a060: ; 0x8400e
+_SilphCo5AfterBattleTxt4: ; 0x8400e
 	db $0, "You're only on 5F.", $4f
 	db "It's a long way", $55
 	db "to my BOSS!", $57
 ; 0x8400e + 46 bytes
 
-_UnnamedText_1a06f: ; 0x8403c
+_SilphCo5B4BattleTxt5: ; 0x8403c
 	db $0, "Show TEAM ROCKET", $4f
 	db "a little respect!", $57
 ; 0x8403c + 36 bytes
 
-_UnnamedText_1a074: ; 0x84060
+_SilphCo5EndBattleTxt5: ; 0x84060
 	db $0, "Cough...", $4f
 	db "Cough...", $58
 ; 0x84060 + 19 bytes
 
-_UnnamedText_1a079: ; 0x84073
+_SilphCo5AfterBattleTxt5: ; 0x84073
 	db $0, "Which reminds me.", $51
 	db "KOFFING evolves", $4f
 	db "into WEEZING!", $57
@@ -59831,23 +59831,23 @@ _UnnamedText_1a2ab: ; 0x842dd
 	db "get older!", $57
 ; 0x842dd + 41 bytes
 
-_UnnamedText_1a2ba: ; 0x84306
+_SilphCo6B4BattleTxt2: ; 0x84306
 	db $0, "I am one of the 4", $4f
 	db "ROCKET BROTHERS!", $57
 ; 0x84306 + 36 bytes
 
-_UnnamedText_1a2bf: ; 0x8432a
+_SilphCo6EndBattleTxt2: ; 0x8432a
 	db $0, "Flame", $4f
 	db "out!", $58
 ; 0x8432a + 12 bytes
 
-_UnnamedText_1a2c4: ; 0x84336
+_SilphCo6AfterBattleTxt2: ; 0x84336
 	db $0, "No matter!", $4f
 	db "My brothers will", $55
 	db "avenge me!", $57
 ; 0x84336 + 40 bytes
 
-_UnnamedText_1a2d3: ; 0x8435e
+_SilphCo6B4BattleTxt3: ; 0x8435e
 	db $0, "That rotten", $4f
 	db "PRESIDENT!", $51
 	db "He shouldn't have", $4f
@@ -59855,27 +59855,27 @@ _UnnamedText_1a2d3: ; 0x8435e
 	db "TIKSI BRANCH!", $57
 ; 0x8435e + 70 bytes
 
-_UnnamedText_1a2d8: ; 0x843a4
+_SilphCo6EndBattleTxt3: ; 0x843a4
 	db $0, "Shoot!", $58
 ; 0x843a4 + 8 bytes
 
-_UnnamedText_1a2dd: ; 0x843ac
+_SilphCo6AfterBattleTxt3: ; 0x843ac
 	db $0, "TIKSI BRANCH?", $4f
 	db "It's in Russian", $55
 	db "no man's land!", $57
 ; 0x843ac + 44 bytes
 
-_UnnamedText_1a2ec: ; 0x843d8
+_SilphCo6B4BattleTxt4: ; 0x843d8
 	db $0, "You dare betray", $4f
 	db "TEAM ROCKET?", $57
 ; 0x843d8 + 30 bytes
 
-_UnnamedText_1a2f1: ; 0x843f6
+_SilphCo6EndBattleTxt4: ; 0x843f6
 	db $0, "You", $4f
 	db "traitor!", $58
 ; 0x843f6 + 14 bytes
 
-_UnnamedText_1a2f6: ; 0x84404
+_SilphCo6AfterBattleTxt4: ; 0x84404
 	db $0, "If you stand for", $4f
 	db "justice, you", $55
 	db "betray evil!", $57
@@ -59957,66 +59957,66 @@ _UnnamedText_51e4b: ; 0x846e2
 	db "Oh thank you!", $57
 ; 0x846e2 + 29 bytes
 
-_UnnamedText_51e5a: ; 0x846ff
+_SilphCo7B4BattleTxt1: ; 0x846ff
 	db $0, "Oh ho! I smell a", $4f
 	db "little rat!", $57
 ; 0x846ff + 30 bytes
 
-_UnnamedText_51e5f: ; 0x8471d
+_SilphCo7EndBattleTxt1: ; 0x8471d
 	db $0, "Lights", $4f
 	db "out!", $58
 ; 0x8471d + 13 bytes
 
-_UnnamedText_51e64: ; 0x8472a
+_SilphCo7AfterBattleTxt1: ; 0x8472a
 	db $0, "You won't find my", $4f
 	db "BOSS by just", $55
 	db "scurrying around!", $57
 ; 0x8472a + 49 bytes
 
-_UnnamedText_51e73: ; 0x8475b
+_SilphCo7B4BattleTxt2: ; 0x8475b
 	db $0, "Heheh!", $51
 	db "You mistook me for", $4f
 	db "a SILPH worker?", $57
 ; 0x8475b + 43 bytes
 
-_UnnamedText_51e78: ; 0x84786
+_SilphCo7EndBattleTxt2: ; 0x84786
 	db $0, "I'm", $4f
 	db "done!", $58
 ; 0x84786 + 10 bytes
 
-_UnnamedText_51e7d: ; 0x84790
+_SilphCo7AfterBattleTxt2: ; 0x84790
 	db $0, "Despite your age,", $4f
 	db "you are a skilled", $55
 	db "trainer!", $57
 ; 0x84790 + 46 bytes
 
-_UnnamedText_51e8c: ; 0x847be
+_SilphCo7B4BattleTxt3: ; 0x847be
 	db $0, "I am one of the 4", $4f
 	db "ROCKET BROTHERS!", $57
 ; 0x847be + 36 bytes
 
-_UnnamedText_51e91: ; 0x847e2
+_SilphCo7EndBattleTxt3: ; 0x847e2
 	db $0, "Aack!", $4f
 	db "Brothers, I lost!", $58
 ; 0x847e2 + 25 bytes
 
-_UnnamedText_51e96: ; 0x847fb
+_SilphCo7AfterBattleTxt3: ; 0x847fb
 	db $0, "Doesn't matter.", $4f
 	db "My brothers will", $55
 	db "repay the favor!", $57
 ; 0x847fb + 50 bytes
 
-_UnnamedText_51ea5: ; 0x8482d
+_SilphCo7B4BattleTxt4: ; 0x8482d
 	db $0, "A child intruder?", $4f
 	db "That must be you!", $57
 ; 0x8482d + 37 bytes
 
-_UnnamedText_51eaa: ; 0x84852
+_SilphCo7EndBattleTxt4: ; 0x84852
 	db $0, "Fine!", $4f
 	db "I lost!", $58
 ; 0x84852 + 15 bytes
 
-_UnnamedText_51eaf: ; 0x84861
+_SilphCo7AfterBattleTxt4: ; 0x84861
 	db $0, "Go on home", $4f
 	db "before my BOSS", $55
 	db "gets ticked off!", $57
@@ -60088,49 +60088,49 @@ _UnnamedText_565c3: ; 0x84ae6
 	db "us!", $57
 ; 0x84ae6 + 23 bytes
 
-_UnnamedText_565e6: ; 0x84afd
+_SilphCo8B4BattleTxt1: ; 0x84afd
 	db $0, "That's as far as", $4f
 	db "you'll go!", $57
 ; 0x84afd + 27 bytes
 
-_UnnamedText_565eb: ; 0x84b18
+_SilphCo8EndBattleTxt1: ; 0x84b18
 	db $0, "Not", $4f
 	db "enough grit!", $58
 ; 0x84b18 + 18 bytes
 
-_UnnamedText_565f0: ; 0x84b2a
+_SilphCo8AfterBattleTxt1: ; 0x84b2a
 	db $0, "If you don't turn", $4f
 	db "back, I'll call", $55
 	db "for backup!", $57
 ; 0x84b2a + 45 bytes
 
-_UnnamedText_565f5: ; 0x84b57
+_SilphCo8B4BattleTxt2: ; 0x84b57
 	db $0, "You're causing us", $4f
 	db "problems!", $57
 ; 0x84b57 + 28 bytes
 
-_UnnamedText_565fa: ; 0x84b73
+_SilphCo8EndBattleTxt2: ; 0x84b73
 	db $0, "Huh?", $4f
 	db "I lost?", $58
 ; 0x84b73 + 14 bytes
 
-_UnnamedText_565ff: ; 0x84b81
+_SilphCo8AfterBattleTxt2: ; 0x84b81
 	db $0, "So, what do you", $4f
 	db "think of SILPH", $55
 	db "BUILDING's maze?", $57
 ; 0x84b81 + 48 bytes
 
-_UnnamedText_56604: ; 0x84bb1
+_SilphCo8B4BattleTxt3: ; 0x84bb1
 	db $0, "I am one of the 4", $4f
 	db "ROCKET BROTHERS!", $57
 ; 0x84bb1 + 36 bytes
 
-_UnnamedText_56609: ; 0x84bd5
+_SilphCo8EndBattleTxt3: ; 0x84bd5
 	db $0, "Whoo!", $4f
 	db "Oh brothers!", $58
 ; 0x84bd5 + 20 bytes
 
-_UnnamedText_5660e: ; 0x84be9
+_SilphCo8AfterBattleTxt3: ; 0x84be9
 	db $0, "I'll leave you up", $4f
 	db "to my brothers!", $57
 ; 0x84be9 + 34 bytes
@@ -60150,50 +60150,50 @@ _UnnamedText_5d8ef: ; 0x84c48
 	db "much!", $57
 ; 0x84c48 + 20 bytes
 
-_UnnamedText_5d912: ; 0x84c5c
+_SilphCo9B4BattleTxt1: ; 0x84c5c
 	db $0, "Your #MON seem", $4f
 	db "to adore you, kid!", $57
 ; 0x84c5c + 35 bytes
 
-_UnnamedText_5d917: ; 0x84c7f
+_SilphCo9EndBattleTxt1: ; 0x84c7f
 	db $0, "Ghaaah!", $58
 ; 0x84c7f + 9 bytes
 
-_UnnamedText_5d91c: ; 0x84c88
+_SilphCo9AfterBattleTxt1: ; 0x84c88
 	db $0, "If I had started", $4f
 	db "as a trainer at", $55
 	db "your age...", $57
 ; 0x84c88 + 46 bytes
 
-_UnnamedText_5d921: ; 0x84cb6
+_SilphCo9B4BattleTxt2: ; 0x84cb6
 	db $0, "Your #MON have", $4f
 	db "weak points! I", $55
 	db "can nail them!", $57
 ; 0x84cb6 + 46 bytes
 
-_UnnamedText_5d926: ; 0x84ce4
+_SilphCo9EndBattleTxt2: ; 0x84ce4
 	db $0, "You", $4f
 	db "hammered me!", $58
 ; 0x84ce4 + 18 bytes
 
-_UnnamedText_5d92b: ; 0x84cf6
+_SilphCo9AfterBattleTxt2: ; 0x84cf6
 	db $0, "Exploiting weak", $4f
 	db "spots does work!", $55
 	db "Think about", $55
 	db "element types!", $57
 ; 0x84cf6 + 61 bytes
 
-_UnnamedText_5d930: ; 0x84d33
+_SilphCo9B4BattleTxt3: ; 0x84d33
 	db $0, "I am one of the 4", $4f
 	db "ROCKET BROTHERS!", $57
 ; 0x84d33 + 36 bytes
 
-_UnnamedText_5d935: ; 0x84d57
+_SilphCo9EndBattleTxt3: ; 0x84d57
 	db $0, "Warg!", $4f
 	db "Brothers, I lost!", $58
 ; 0x84d57 + 25 bytes
 
-_UnnamedText_5d93a: ; 0x84d70
+_SilphCo9AfterBattleTxt3: ; 0x84d70
 	db $0, "My brothers will", $4f
 	db "avenge me!", $57
 ; 0x84d70 + 29 bytes
@@ -60208,34 +60208,34 @@ _UnnamedText_5a1d8: ; 0x84da1
 	db "about my crying!", $57
 ; 0x84da1 + 36 bytes
 
-_UnnamedText_5a1dd: ; 0x84dc5
+_SilphCo10B4BattleTxt1: ; 0x84dc5
 	db $0, "Welcome to the", $4f
 	db "10F! So good of", $55
 	db "you to join me!", $57
 ; 0x84dc5 + 48 bytes
 
-_UnnamedText_5a1e2: ; 0x84df5
+_SilphCo10EndBattleTxt1: ; 0x84df5
 	db $0, "I'm", $4f
 	db "stunned!", $58
 ; 0x84df5 + 13 bytes
 
-_UnnamedText_5a1e7: ; 0x84e02
+_SilphCo10AfterBattleTxt1: ; 0x84e02
 	db $0, "Nice try, but the", $4f
 	db "boardroom is up", $55
 	db "one more floor!", $57
 ; 0x84e02 + 51 bytes
 
-_UnnamedText_5a1ec: ; 0x84e35
+_SilphCo10B4BattleTxt2: ; 0x84e35
 	db $0, "Enough of your", $4f
 	db "silly games!", $57
 ; 0x84e35 + 29 bytes
 
-_UnnamedText_5a1f1: ; 0x84e52
+_SilphCo10EndBattleTxt2: ; 0x84e52
 	db $0, "No", $4f
 	db "continues left!", $58
 ; 0x84e52 + 20 bytes
 
-_UnnamedText_5a1f6: ; 0x84e66
+_SilphCo10AfterBattleTxt2: ; 0x84e66
 	db $0, "Are you satisfied", $4f
 	db "with beating me?", $55
 	db "Then go on home!", $57
@@ -60324,33 +60324,33 @@ _UnnamedText_62335: ; 0x85131
 	db "shall return!", $57
 ; 0x85131 + 165 bytes
 
-_UnnamedText_62344: ; 0x851d6
+_SilphCo11B4BattleTxt1: ; 0x851d6
 	db $0, "Stop right there!", $4f
 	db "Don't you move!", $57
 ; 0x851d6 + 34 bytes
 
-_UnnamedText_62349: ; 0x851f8
+_SilphCo11EndBattleTxt1: ; 0x851f8
 	db $0, "Don't...", $4f
 	db "Please!", $58
 ; 0x851f8 + 17 bytes
 
-_UnnamedText_6234e: ; 0x85209
+_SilphCo11AfterBattleTxt1: ; 0x85209
 	db $0, "So, you want to", $4f
 	db "see my BOSS?", $57
 ; 0x85209 + 30 bytes
 
-_UnnamedText_6235d: ; 0x85227
+_SilphCo11B4BattleTxt2: ; 0x85227
 	db $0, "Halt! Do you have", $4f
 	db "an appointment", $55
 	db "with my BOSS?", $57
 ; 0x85227 + 48 bytes
 
-_UnnamedText_62362: ; 0x85257
+_SilphCo11EndBattleTxt2: ; 0x85257
 	db $0, "Gaah!", $4f
 	db "Demolished!", $58
 ; 0x85257 + 19 bytes
 
-_UnnamedText_62367: ; 0x8526a
+_SilphCo11AfterBattleTxt2: ; 0x8526a
 	db $0, "Watch your step,", $4f
 	db "my BOSS likes his", $55
 	db "#MON tough!", $57
@@ -60361,18 +60361,18 @@ _UnnamedText_6237b: ; 0x8529a
 	db "#MON on it!", $57
 ; 0x8529a + 29 bytes
 
-_UnnamedText_5206e: ; 0x852b7
+_Mansion2B4BattleTxt1: ; 0x852b7
 	db $0, "I can't get out!", $4f
 	db "This old place is", $55
 	db "one big puzzle!", $57
 ; 0x852b7 + 51 bytes
 
-_UnnamedText_52073: ; 0x852ea
+_Mansion2EndBattleTxt1: ; 0x852ea
 	db $0, "Oh no!", $4f
 	db "My bag of loot!", $58
 ; 0x852ea + 24 bytes
 
-_UnnamedText_52078: ; 0x85302
+_Mansion2AfterBattleTxt1: ; 0x85302
 	db $0, "Switches open and", $4f
 	db "close alternating", $55
 	db "sets of doors!", $57
@@ -60405,31 +60405,31 @@ _UnnamedText_520cc: ; 0x853f1
 	db $0, "Not quite yet!", $57
 ; 0x853f1 + 16 bytes
 
-_UnnamedText_522c3: ; 0x85401
+_Mansion3B4BattleTxt1: ; 0x85401
 	db $0, "This place is", $4f
 	db "like, huge!", $57
 ; 0x85401 + 27 bytes
 
-_UnnamedText_522c8: ; 0x8541c
+_Mansion3EndBattleTxt1: ; 0x8541c
 	db $0, "Ayah!", $58
 ; 0x8541c + 7 bytes
 
-_UnnamedText_522cd: ; 0x85423
+_Mansion3AfterBattleTxt1: ; 0x85423
 	db $0, "I wonder where", $4f
 	db "my partner went.", $57
 ; 0x85423 + 33 bytes
 
-_UnnamedText_522d2: ; 0x85444
+_Mansion3B4BattleTxt2: ; 0x85444
 	db $0, "My mentor once", $4f
 	db "lived here.", $57
 ; 0x85444 + 28 bytes
 
-_UnnamedText_522d7: ; 0x85460
+_Mansion3EndBattleTxt2: ; 0x85460
 	db $0, "Whew!", $4f
 	db "Overwhelming!", $58
 ; 0x85460 + 21 bytes
 
-_UnnamedText_522dc: ; 0x85475
+_Mansion3AfterBattleTxt2: ; 0x85475
 	db $0, "So, you're stuck?", $4f
 	db "Try jumping off", $55
 	db "over there!", $57
@@ -60441,31 +60441,31 @@ _Mansion3Text5: ; 0x854a3
 	db "We named the", $4f
 	db "newborn MEWTWO.", $57
 
-_UnnamedText_52475: ; 0x854df
+_Mansion4B4BattleTxt1: ; 0x854df
 	db $0, "Uh-oh. Where am", $4f
 	db "I now?", $57
 ; 0x854df + 24 bytes
 
-_UnnamedText_5247a: ; 0x854f7
+_Mansion4EndBattleTxt1: ; 0x854f7
 	db $0, "Awooh!", $58
 ; 0x854f7 + 8 bytes
 
-_UnnamedText_5247f: ; 0x854ff
+_Mansion4AfterBattleTxt1: ; 0x854ff
 	db $0, "You can find stuff", $4f
 	db "lying around.", $57
 ; 0x854ff + 34 bytes
 
-_UnnamedText_52484: ; 0x85521
+_Mansion4B4BattleTxt2: ; 0x85521
 	db $0, "This place is", $4f
 	db "ideal for a lab.", $57
 ; 0x85521 + 32 bytes
 
-_UnnamedText_52489: ; 0x85541
+_Mansion4EndBattleTxt2: ; 0x85541
 	db $0, "What", $4f
 	db "was that for?", $58
 ; 0x85541 + 20 bytes
 
-_UnnamedText_5248e: ; 0x85555
+_Mansion4AfterBattleTxt2: ; 0x85555
 	db $0, "I like it here!", $4f
 	db "It's conducive to", $55
 	db "my studies!", $57
@@ -60659,34 +60659,34 @@ _UnknownDungeon3MewtwoText: ; 0x85c72
 	db $0, "Mew!@@"
 ; 0x85c79
 
-_UnnamedText_5da9a: ; 0x85c79
+_VictoryRoad1B4BattleTxt1: ; 0x85c79
 	db $0, "I wonder if you", $4f
 	db "are good enough", $55
 	db "for me!", $57
 ; 0x85c79 + 41 bytes
 
-_UnnamedText_5da9f: ; 0x85ca2
+_VictoryRoad1EndBattleTxt1: ; 0x85ca2
 	db $0, "I", $4f
 	db "lost out!", $58
 ; 0x85ca2 + 13 bytes
 
-_UnnamedText_5daa4: ; 0x85caf
+_VictoryRoad1AfterBattleTxt1: ; 0x85caf
 	db $0, "I never wanted to", $4f
 	db "lose to anybody!", $57
 ; 0x85caf + 36 bytes
 
-_UnnamedText_5daa9: ; 0x85cd3
+_VictoryRoad1B4BattleTxt2: ; 0x85cd3
 	db $0, "I can see you're", $4f
 	db "good! Let me see", $55
 	db "exactly how good!", $57
 ; 0x85cd3 + 52 bytes
 
-_UnnamedText_5daae: ; 0x85d07
+_VictoryRoad1EndBattleTxt2: ; 0x85d07
 	db $0, "I", $4f
 	db "had a chance...", $58
 ; 0x85d07 + 19 bytes
 
-_UnnamedText_5dab3: ; 0x85d1a
+_VictoryRoad1AfterBattleTxt2: ; 0x85d1a
 	db $0, "I concede, you're", $4f
 	db "better than me!", $57
 ; 0x85d1a + 34 bytes
@@ -60996,139 +60996,139 @@ _AgathaText2: ; 0x869fd
 	db "Don't run away!", $57
 ; 0x869fd + 32 bytes
 
-_UnnamedText_460c5: ; 0x86a1d
+_RockTunnel2B4BattleTxt2: ; 0x86a1d
 	db $0, "Hikers leave twigs", $4f
 	db "as trail markers.", $57
 ; 0x86a1d + 38 bytes
 
-_UnnamedText_460ca: ; 0x86a43
+_RockTunnel2EndBattleTxt2: ; 0x86a43
 	db $0, "Ohhh!", $4f
 	db "I did my best!", $58
 ; 0x86a43 + 22 bytes
 
-_UnnamedText_460cf: ; 0x86a59
+_RockTunnel2AfterBattleTxt2: ; 0x86a59
 	db $0, "I want to go ", $4f
 	db "home!", $57
 ; 0x86a59 + 21 bytes
 
-_UnnamedText_460d4: ; 0x86a6e
+_RockTunnel2B4BattleTxt3: ; 0x86a6e
 	db $0, "Hahaha! Can you", $4f
 	db "beat my power?", $57
 ; 0x86a6e + 32 bytes
 
-_UnnamedText_460d9: ; 0x86a8e
+_RockTunnel2EndBattleTxt3: ; 0x86a8e
 	db $0, "Oops!", $4f
 	db "Out-muscled!", $58
 ; 0x86a8e + 20 bytes
 
-_UnnamedText_460de: ; 0x86aa2
+_RockTunnel2AfterBattleTxt3: ; 0x86aa2
 	db $0, "I go for power", $4f
 	db "because I hate", $55
 	db "thinking!", $57
 ; 0x86aa2 + 41 bytes
 
-_UnnamedText_460e3: ; 0x86acb
+_RockTunnel2B4BattleTxt4: ; 0x86acb
 	db $0, "You have a", $4f
 	db "#DEX?", $55
 	db "I want one too!", $57
 ; 0x86acb + 34 bytes
 
-_UnnamedText_460e8: ; 0x86aed
+_RockTunnel2EndBattleTxt4: ; 0x86aed
 	db $0, "Shoot!", $4f
 	db "I'm so jealous!", $58
 ; 0x86aed + 23 bytes
 
-_UnnamedText_460ed: ; 0x86b04
+_RockTunnel2AfterBattleTxt4: ; 0x86b04
 	db $0, "When you finish", $4f
 	db "your #DEX, can", $55
 	db "I have it?", $57
 ; 0x86b04 + 43 bytes
 
-_UnnamedText_460f2: ; 0x86b2f
+_RockTunnel2B4BattleTxt5: ; 0x86b2f
 	db $0, "Do you know about", $4f
 	db "costume players?", $57
 ; 0x86b2f + 36 bytes
 
-_UnnamedText_460f7: ; 0x86b53
+_RockTunnel2EndBattleTxt5: ; 0x86b53
 	db $0, "Well,", $4f
 	db "that's that.", $58
 ; 0x86b53 + 19 bytes
 
-_UnnamedText_460fc: ; 0x86b66
+_RockTunnel2AfterBattleTxt5: ; 0x86b66
 	db $0, "Costume players", $4f
 	db "dress up as", $55
 	db "#MON for fun.", $57
 ; 0x86b66 + 43 bytes
 
-_UnnamedText_46101: ; 0x86b91
+_RockTunnel2B4BattleTxt6: ; 0x86b91
 	db $0, "My #MON", $4f
 	db "techniques will", $55
 	db "leave you crying!", $57
 ; 0x86b91 + 43 bytes
 
-_UnnamedText_46106: ; 0x86bbc
+_RockTunnel2EndBattleTxt6: ; 0x86bbc
 	db $0, "I give!", $4f
 	db "You're a better", $55
 	db "technician!", $58
 ; 0x86bbc + 36 bytes
 
-_UnnamedText_4610b: ; 0x86be0
+_RockTunnel2AfterBattleTxt6: ; 0x86be0
 	db $0, "In mountains,", $4f
 	db "you'll often find", $55
 	db "rock-type #MON.", $57
 ; 0x86be0 + 48 bytes
 
-_UnnamedText_46110: ; 0x86c10
+_RockTunnel2B4BattleTxt7: ; 0x86c10
 	db $0, "I don't often", $4f
 	db "come here, but I", $55
 	db "will fight you.", $57
 ; 0x86c10 + 47 bytes
 
-_UnnamedText_46115: ; 0x86c3f
+_RockTunnel2EndBattleTxt7: ; 0x86c3f
 	db $0, "Oh!", $4f
 	db "I lost!", $58
 ; 0x86c3f + 13 bytes
 
-_UnnamedText_4611a: ; 0x86c4c
+_RockTunnel2AfterBattleTxt7: ; 0x86c4c
 	db $0, "I like tiny", $4f
 	db "#MON, big ones", $55
 	db "are too scary!", $57
 ; 0x86c4c + 43 bytes
 
-_UnnamedText_4611f: ; 0x86c77
+_RockTunnel2B4BattleTxt8: ; 0x86c77
 	db $0, "Hit me with your", $4f
 	db "best shot!", $57
 ; 0x86c77 + 29 bytes
 
-_UnnamedText_46124: ; 0x86c94
+_RockTunnel2EndBattleTxt8: ; 0x86c94
 	db $0, "Fired", $4f
 	db "away!", $58
 ; 0x86c94 + 13 bytes
 
 SECTION "bank22",DATA,BANK[$22]
 
-_UnnamedText_46129: ; 0x88000
+_RockTunnel2AfterBattleTxt8: ; 0x88000
 	db $0, "I'll raise my", $4f
 	db "#MON to beat", $55
 	db "yours, kid!", $57
 ; 0x88000 + 39 bytes
 
-_UnnamedText_4612e: ; 0x88027
+_RockTunnel2B4BattleTxt9: ; 0x88027
 	db $0, "I draw #MON", $4f
 	db "when I'm home.", $57
 ; 0x88027 + 27 bytes
 
-_UnnamedText_46133: ; 0x88042
+_RockTunnel2EndBattleTxt9: ; 0x88042
 	db $0, "Whew!", $4f
 	db "I'm exhausted!", $58
 ; 0x88042 + 21 bytes
 
-_UnnamedText_46138: ; 0x88057
+_RockTunnel2AfterBattleTxt9: ; 0x88057
 	db $0, "I'm an artist,", $4f
 	db "not a fighter.", $57
 ; 0x88057 + 30 bytes
 
-_UnnamedText_468a2: ; 0x88075
+_SeafoamIslands5B4BattleTxt2: ; 0x88075
 	db $0, "Gyaoo!@@"
 
 _SeafoamIslands5Text4: ; 0x8807e
@@ -62789,7 +62789,7 @@ _UnnamedText_69e7: ; 0x8a64a
 	db "name is ", $53, "!", $58
 ; 0x8a64a + 45 bytes
 
-_UnnamedText_5a24: ; 0x8a677
+_SSAnne8AfterBattleTxt2: ; 0x8a677
 	TX_RAM $cd3f
 	db $0, " and", $4f
 	db "@"
@@ -63556,88 +63556,88 @@ _UnnamedText_1e71a: ; 0x8d03e
 	db "Go right ahead!@@"
 ; 0x8d03e + 48 bytes
 
-_UnnamedText_518ba: ; 0x8d06e
+_VictoryRoad2B4BattleTxt6: ; 0x8d06e
 	db $0, "Gyaoo!@@"
 ; 0x8d06e + 9 bytes
 
-_UnnamedText_518ca: ; 0x8d077
+_VictoryRoad2B4BattleTxt1: ; 0x8d077
 	db $0, "VICTORY ROAD is", $4f
 	db "the final test", $55
 	db "for trainers!", $57
 ; 0x8d077 + 46 bytes
 
-_UnnamedText_518cf: ; 0x8d0a5
+_VictoryRoad2EndBattleTxt1: ; 0x8d0a5
 	db $0, "Aiyah!", $58
 ; 0x8d0a5 + 8 bytes
 
-_UnnamedText_518d4: ; 0x8d0ad
+_VictoryRoad2AfterBattleTxt1: ; 0x8d0ad
 	db $0, "If you get stuck,", $4f
 	db "try moving some", $55
 	db "boulders around!", $57
 ; 0x8d0ad + 52 bytes
 
-_UnnamedText_518d9: ; 0x8d0e1
+_VictoryRoad2B4BattleTxt2: ; 0x8d0e1
 	db $0, "Ah, so you wish", $4f
 	db "to challenge the", $55
 	db "ELITE FOUR?", $57
 ; 0x8d0e1 + 46 bytes
 
-_UnnamedText_518de: ; 0x8d10f
+_VictoryRoad2EndBattleTxt2: ; 0x8d10f
 	db $0, "You", $4f
 	db "got me!", $58
 ; 0x8d10f + 13 bytes
 
-_UnnamedText_518e3: ; 0x8d11c
+_VictoryRoad2AfterBattleTxt2: ; 0x8d11c
 	db $0, $53, " also came", $4f
 	db "through here!", $57
 ; 0x8d11c + 27 bytes
 
-_UnnamedText_518e8: ; 0x8d137
+_VictoryRoad2B4BattleTxt3: ; 0x8d137
 	db $0, "Come on!", $4f
 	db "I'll whip you!", $57
 ; 0x8d137 + 24 bytes
 
-_UnnamedText_518ed: ; 0x8d14f
+_VictoryRoad2EndBattleTxt3: ; 0x8d14f
 	db $0, "I got", $4f
 	db "whipped!", $58
 ; 0x8d14f + 16 bytes
 
-_UnnamedText_518f2: ; 0x8d15f
+_VictoryRoad2AfterBattleTxt3: ; 0x8d15f
 	db $0, "You earned the", $4f
 	db "right to be on", $55
 	db "VICTORY ROAD!", $57
 ; 0x8d15f + 45 bytes
 
-_UnnamedText_518f7: ; 0x8d18c
+_VictoryRoad2B4BattleTxt4: ; 0x8d18c
 	db $0, "If you can get", $4f
 	db "through here, you", $55
 	db "can go meet the", $55
 	db "ELITE FOUR!", $57
 ; 0x8d18c + 62 bytes
 
-_UnnamedText_518fc: ; 0x8d1ca
+_VictoryRoad2EndBattleTxt4: ; 0x8d1ca
 	db $0, "No!", $4f
 	db "Unbelievable!", $58
 ; 0x8d1ca + 19 bytes
 
-_UnnamedText_51901: ; 0x8d1dd
+_VictoryRoad2AfterBattleTxt4: ; 0x8d1dd
 	db $0, "I can beat you", $4f
 	db "when it comes to", $55
 	db "knowledge about", $55
 	db "#MON!", $57
 ; 0x8d1dd + 55 bytes
 
-_UnnamedText_51906: ; 0x8d214
+_VictoryRoad2B4BattleTxt5: ; 0x8d214
 	db $0, "Is VICTORY ROAD", $4f
 	db "too tough?", $57
 ; 0x8d214 + 28 bytes
 
-_UnnamedText_5190b: ; 0x8d230
+_VictoryRoad2EndBattleTxt5: ; 0x8d230
 	db $0, "Well", $4f
 	db "done!", $58
 ; 0x8d230 + 12 bytes
 
-_UnnamedText_51910: ; 0x8d23c
+_VictoryRoad2AfterBattleTxt5: ; 0x8d23c
 	db $0, "Many trainers give", $4f
 	db "up the challenge", $55
 	db "here.", $57
@@ -63789,133 +63789,133 @@ _Route3Text1: ; 0x8d779
 	db "CERULEAN takes a", $55
 	db "lot out of you!", $57
 
-_UnnamedText_55595: ; 0x8d7d5
+_Route3B4BattleTxt1: ; 0x8d7d5
 	db $0, "Hey! I met you in", $4f
 	db "VIRIDIAN FOREST!", $57
 ; 0x8d7d5 + 36 bytes
 
-_UnnamedText_5559a: ; 0x8d7f9
+_Route3EndBattleTxt1: ; 0x8d7f9
 	db $0, "You", $4f
 	db "beat me again!", $58
 ; 0x8d7f9 + 20 bytes
 
-_UnnamedText_5559f: ; 0x8d80d
+_Route3AfterBattleTxt1: ; 0x8d80d
 	db $0, "There are other", $4f
 	db "kinds of #MON", $55
 	db "than those found", $55
 	db "in the forest!", $57
 ; 0x8d80d + 63 bytes
 
-_UnnamedText_555ae: ; 0x8d84c
+_Route3B4BattleTxt2: ; 0x8d84c
 	db $0, "Hi! I like shorts!", $4f
 	db "They're comfy and", $55
 	db "easy to wear!", $57
 ; 0x8d84c + 51 bytes
 
-_UnnamedText_555b3: ; 0x8d87f
+_Route3EndBattleTxt2: ; 0x8d87f
 	db $0, "I don't", $4f
 	db "believe it!", $58
 ; 0x8d87f + 20 bytes
 
-_UnnamedText_555b8: ; 0x8d893
+_Route3AfterBattleTxt2: ; 0x8d893
 	db $0, "Are you storing", $4f
 	db "your #MON on", $55
 	db "PC? Each BOX can", $55
 	db "hold 20 #MON!", $57
 ; 0x8d893 + 61 bytes
 
-_UnnamedText_555c7: ; 0x8d8d0
+_Route3B4BattleTxt3: ; 0x8d8d0
 	db $0, "You looked at me,", $4f
 	db "didn't you?", $57
 ; 0x8d8d0 + 30 bytes
 
-_UnnamedText_555cc: ; 0x8d8ee
+_Route3EndBattleTxt3: ; 0x8d8ee
 	db $0, "You're", $4f
 	db "mean!", $58
 ; 0x8d8ee + 13 bytes
 
-_UnnamedText_555d1: ; 0x8d8fb
+_Route3AfterBattleTxt3: ; 0x8d8fb
 	db $0, "Quit staring if", $4f
 	db "you don't want to", $55
 	db "fight!", $57
 ; 0x8d8fb + 41 bytes
 
-_UnnamedText_555e0: ; 0x8d924
+_Route3B4BattleTxt4: ; 0x8d924
 	db $0, "Are you a trainer?", $4f
 	db "Let's fight!", $57
 ; 0x8d924 + 32 bytes
 
-_UnnamedText_555e5: ; 0x8d944
+_Route3EndBattleTxt4: ; 0x8d944
 	db $0, "If I", $4f
 	db "had new #MON I", $55
 	db "would've won!", $58
 ; 0x8d944 + 34 bytes
 
-_UnnamedText_555ea: ; 0x8d966
+_Route3AfterBattleTxt4: ; 0x8d966
 	db $0, "If a #MON BOX", $4f
 	db "on the PC gets", $55
 	db "full, just switch", $55
 	db "to another BOX!", $57
 ; 0x8d966 + 64 bytes
 
-_UnnamedText_555f9: ; 0x8d9a6
+_Route3B4BattleTxt5: ; 0x8d9a6
 	db $0, "That look you", $4f
 	db "gave me, it's so", $55
 	db "intriguing!", $57
 ; 0x8d9a6 + 43 bytes
 
-_UnnamedText_555fe: ; 0x8d9d1
+_Route3EndBattleTxt5: ; 0x8d9d1
 	db $0, "Be nice!", $58
 ; 0x8d9d1 + 10 bytes
 
-_UnnamedText_55603: ; 0x8d9db
+_Route3AfterBattleTxt5: ; 0x8d9db
 	db $0, "Avoid fights by", $4f
 	db "not letting", $55
 	db "people see you!", $57
 ; 0x8d9db + 45 bytes
 
-_UnnamedText_55612: ; 0x8da08
+_Route3B4BattleTxt6: ; 0x8da08
 	db $0, "Hey! You're not", $4f
 	db "wearing shorts!", $57
 ; 0x8da08 + 32 bytes
 
-_UnnamedText_55617: ; 0x8da28
+_Route3EndBattleTxt6: ; 0x8da28
 	db $0, "Lost!", $4f
 	db "Lost! Lost!", $58
 ; 0x8da28 + 19 bytes
 
-_UnnamedText_5561c: ; 0x8da3b
+_Route3AfterBattleTxt6: ; 0x8da3b
 	db $0, "I always wear", $4f
 	db "shorts, even in", $55
 	db "winter!", $57
 ; 0x8da3b + 39 bytes
 
-_UnnamedText_5562b: ; 0x8da62
+_Route3B4BattleTxt7: ; 0x8da62
 	db $0, "You can fight my", $4f
 	db "new #MON!", $57
 ; 0x8da62 + 28 bytes
 
-_UnnamedText_55630: ; 0x8da7e
+_Route3EndBattleTxt7: ; 0x8da7e
 	db $0, "Done", $4f
 	db "like dinner!", $58
 ; 0x8da7e + 19 bytes
 
-_UnnamedText_55635: ; 0x8da91
+_Route3AfterBattleTxt7: ; 0x8da91
 	db $0, "Trained #MON", $4f
 	db "are stronger than", $55
 	db "the wild ones!", $57
 ; 0x8da91 + 47 bytes
 
-_UnnamedText_55644: ; 0x8dac0
+_Route3B4BattleTxt8: ; 0x8dac0
 	db $0, "Eek! Did you", $4f
 	db "touch me?", $57
 ; 0x8dac0 + 24 bytes
 
-_UnnamedText_55649: ; 0x8dad8
+_Route3EndBattleTxt8: ; 0x8dad8
 	db $0, "That's it?", $58
 ; 0x8dad8 + 11 bytes
 
-_UnnamedText_5564e: ; 0x8dae3
+_Route3AfterBattleTxt8: ; 0x8dae3
 	db $0, "ROUTE 4 is at the", $4f
 	db "foot of MT.MOON.", $57
 ; 0x8dae3 + 36 bytes
@@ -63929,17 +63929,17 @@ _Route4Text1: ; 0x8db1e
 	db "over a rocky", $55
 	db "#MON, GEODUDE!", $57
 
-_UnnamedText_55699: ; 0x8db4b
+_Route4B4BattleTxt1: ; 0x8db4b
 	db $0, "I came to get my", $4f
 	db "mushroom #MON!", $57
 ; 0x8db4b + 33 bytes
 
-_UnnamedText_5569e: ; 0x8db6c
+_Route4EndBattleTxt1: ; 0x8db6c
 	db $0, "Oh! My cute", $4f
 	db "mushroom #MON!", $58
 ; 0x8db6c + 28 bytes
 
-_UnnamedText_556a3: ; 0x8db88
+_Route4AfterBattleTxt1: ; 0x8db88
 	db $0, "There might not", $4f
 	db "be any more", $55
 	db "mushrooms here.", $51
@@ -63961,93 +63961,93 @@ _Route5Text1: ; 0x8dc07
 	db "CERULEAN CITY -", $55
 	db "VERMILION CITY", $57
 
-_UnnamedText_5912a: ; 0x8dc38
+_Route6B4BattleTxt1: ; 0x8dc38
 	db $0, "Who's there?", $4f
 	db "Quit listening in", $55
 	db "on us!", $57
 ; 0x8dc38 + 38 bytes
 
-_UnnamedText_5912f: ; 0x8dc5e
+_Route6EndBattleTxt1: ; 0x8dc5e
 	db $0, "I", $4f
 	db "just can't win!", $58
 ; 0x8dc5e + 18 bytes
 
-_UnnamedText_59134: ; 0x8dc70
+_Route6AfterBattleTxt1: ; 0x8dc70
 	db $0, "Whisper...", $4f
 	db "whisper...", $57
 ; 0x8dc70 + 23 bytes
 
-_UnnamedText_59143: ; 0x8dc87
+_Route6B4BattleTxt2: ; 0x8dc87
 	db $0, "Excuse me! This", $4f
 	db "is a private", $55
 	db "conversation!", $57
 ; 0x8dc87 + 44 bytes
 
-_UnnamedText_59148: ; 0x8dcb3
+_Route6EndBattleTxt2: ; 0x8dcb3
 	db $0, "Ugh!", $4f
 	db "I hate losing!", $58
 ; 0x8dcb3 + 21 bytes
 
-_UnnamedText_59157: ; 0x8dcc8
+_Route6B4BattleTxt3: ; 0x8dcc8
 	db $0, "There aren't many", $4f
 	db "bugs out here.", $57
 ; 0x8dcc8 + 33 bytes
 
-_UnnamedText_5915c: ; 0x8dce9
+_Route6EndBattleTxt3: ; 0x8dce9
 	db $0, "No!", $4f
 	db "You're kidding!", $58
 ; 0x8dce9 + 20 bytes
 
-_UnnamedText_59161: ; 0x8dcfd
+_Route6AfterBattleTxt3: ; 0x8dcfd
 	db $0, "I like bugs, so", $4f
 	db "I'm going back to", $55
 	db "VIRIDIAN FOREST.", $57
 ; 0x8dcfd + 51 bytes
 
-_UnnamedText_59170: ; 0x8dd30
+_Route6B4BattleTxt4: ; 0x8dd30
 	db $0, "Huh? You want", $4f
 	db "to talk to me?", $57
 ; 0x8dd30 + 30 bytes
 
-_UnnamedText_59175: ; 0x8dd4e
+_Route6EndBattleTxt4: ; 0x8dd4e
 	db $0, "I", $4f
 	db "didn't start it!", $58
 ; 0x8dd4e + 19 bytes
 
-_UnnamedText_5917a: ; 0x8dd61
+_Route6AfterBattleTxt4: ; 0x8dd61
 	db $0, "I should carry", $4f
 	db "more #MON with", $55
 	db "me for safety.", $57
 ; 0x8dd61 + 46 bytes
 
-_UnnamedText_59189: ; 0x8dd8f
+_Route6B4BattleTxt5: ; 0x8dd8f
 	db $0, "Me? Well, OK.", $4f
 	db "I'll play!", $57
 ; 0x8dd8f + 25 bytes
 
-_UnnamedText_5918e: ; 0x8dda8
+_Route6EndBattleTxt5: ; 0x8dda8
 	db $0, "Just", $4f
 	db "didn't work!", $58
 ; 0x8dda8 + 18 bytes
 
-_UnnamedText_59193: ; 0x8ddba
+_Route6AfterBattleTxt5: ; 0x8ddba
 	db $0, "I want to get", $4f
 	db "stronger! What's", $55
 	db "your secret?", $57
 ; 0x8ddba + 44 bytes
 
-_UnnamedText_591a2: ; 0x8dde6
+_Route6B4BattleTxt6: ; 0x8dde6
 	db $0, "I've never seen", $4f
 	db "you around!", $55
 	db "Are you good?", $57
 ; 0x8dde6 + 42 bytes
 
-_UnnamedText_591a7: ; 0x8de10
+_Route6EndBattleTxt6: ; 0x8de10
 	db $0, "You", $4f
 	db "are too good!", $58
 ; 0x8de10 + 19 bytes
 
-_UnnamedText_591ac: ; 0x8de23
+_Route6AfterBattleTxt6: ; 0x8de23
 	db $0, "Are my #MON", $4f
 	db "weak? Or, am I", $55
 	db "just bad?", $57
@@ -64063,148 +64063,148 @@ _Route7Text1: ; 0x8de7a
 	db "CELADON CITY -", $55
 	db "LAVENDER TOWN", $57
 
-_UnnamedText_5925a: ; 0x8dea9
+_Route8B4BattleTxt1: ; 0x8dea9
 	db $0, "You look good at", $4f
 	db "#MON, but", $55
 	db "how's your chem?", $57
 ; 0x8dea9 + 44 bytes
 
-_UnnamedText_5925f: ; 0x8ded5
+_Route8EndBattleTxt1: ; 0x8ded5
 	db $0, "Ow!", $4f
 	db "Meltdown!", $58
 ; 0x8ded5 + 15 bytes
 
-_UnnamedText_59264: ; 0x8dee4
+_Route8AfterBattleTxt1: ; 0x8dee4
 	db $0, "I am better at", $4f
 	db "school than this!", $57
 ; 0x8dee4 + 34 bytes
 
-_UnnamedText_59273: ; 0x8df06
+_Route8B4BattleTxt2: ; 0x8df06
 	db $0, "All right! Let's", $4f
 	db "roll the dice!", $57
 ; 0x8df06 + 32 bytes
 
-_UnnamedText_59278: ; 0x8df26
+_Route8EndBattleTxt2: ; 0x8df26
 	db $0, "Drat!", $4f
 	db "Came up short!", $58
 ; 0x8df26 + 22 bytes
 
-_UnnamedText_5927d: ; 0x8df3c
+_Route8AfterBattleTxt2: ; 0x8df3c
 	db $0, "Lady Luck's not", $4f
 	db "with me today!", $57
 ; 0x8df3c + 31 bytes
 
-_UnnamedText_5928c: ; 0x8df5b
+_Route8B4BattleTxt3: ; 0x8df5b
 	db $0, "You need strategy", $4f
 	db "to win at this!", $57
 ; 0x8df5b + 35 bytes
 
-_UnnamedText_59291: ; 0x8df7e
+_Route8EndBattleTxt3: ; 0x8df7e
 	db $0, "It's", $4f
 	db "not logical!", $58
 ; 0x8df7e + 18 bytes
 
-_UnnamedText_59296: ; 0x8df90
+_Route8AfterBattleTxt3: ; 0x8df90
 	db $0, "Go with GRIMER", $4f
 	db "first...and...", $55
 	db "...and...then...", $57
 ; 0x8df90 + 48 bytes
 
-_UnnamedText_592a5: ; 0x8dfc0
+_Route8B4BattleTxt4: ; 0x8dfc0
 	db $0, "I like NIDORAN, so", $4f
 	db "I collect them!", $57
 ; 0x8dfc0 + 36 bytes
 
-_UnnamedText_592aa: ; 0x8dfe4
+_Route8EndBattleTxt4: ; 0x8dfe4
 	db $0, "Why? Why??", $58
 ; 0x8dfe4 + 12 bytes
 
-_UnnamedText_592af: ; 0x8dff0
+_Route8AfterBattleTxt4: ; 0x8dff0
 	db $0, "When #MON grow", $4f
 	db "up they get ugly!", $55
 	db "They shouldn't", $55
 	db "evolve!", $57
 ; 0x8dff0 + 56 bytes
 
-_UnnamedText_592be: ; 0x8e028
+_Route8B4BattleTxt5: ; 0x8e028
 	db $0, "School is fun, but", $4f
 	db "so are #MON.", $57
 ; 0x8e028 + 33 bytes
 
-_UnnamedText_592c3: ; 0x8e049
+_Route8EndBattleTxt5: ; 0x8e049
 	db $0, "I'll", $4f
 	db "stay with school.", $58
 ; 0x8e049 + 23 bytes
 
-_UnnamedText_592c8: ; 0x8e060
+_Route8AfterBattleTxt5: ; 0x8e060
 	db $0, "We're stuck here", $4f
 	db "because of the", $55
 	db "gates at SAFFRON.", $57
 ; 0x8e060 + 50 bytes
 
-_UnnamedText_592d7: ; 0x8e092
+_Route8B4BattleTxt6: ; 0x8e092
 	db $0, "MEOWTH is so cute,", $4f
 	db "meow, meow, meow!", $57
 ; 0x8e092 + 38 bytes
 
-_UnnamedText_592dc: ; 0x8e0b8
+_Route8EndBattleTxt6: ; 0x8e0b8
 	db $0, "Meow!", $58
 ; 0x8e0b8 + 7 bytes
 
-_UnnamedText_592e1: ; 0x8e0bf
+_Route8AfterBattleTxt6: ; 0x8e0bf
 	db $0, "I think PIDGEY", $4f
 	db "and RATTATA", $55
 	db "are cute too!", $57
 ; 0x8e0bf + 42 bytes
 
-_UnnamedText_592f0: ; 0x8e0e9
+_Route8B4BattleTxt7: ; 0x8e0e9
 	db $0, "We must look", $4f
 	db "silly standing", $55
 	db "here like this!", $57
 ; 0x8e0e9 + 45 bytes
 
-_UnnamedText_592f5: ; 0x8e116
+_Route8EndBattleTxt7: ; 0x8e116
 	db $0, "Look what", $4f
 	db "you did!", $58
 ; 0x8e116 + 20 bytes
 
-_UnnamedText_592fa: ; 0x8e12a
+_Route8AfterBattleTxt7: ; 0x8e12a
 	db $0, "SAFFRON's gate", $4f
 	db "keeper won't let", $55
 	db "us through.", $55
 	db "He's so mean!", $57
 ; 0x8e12a + 56 bytes
 
-_UnnamedText_59309: ; 0x8e162
+_Route8B4BattleTxt8: ; 0x8e162
 	db $0, "I'm a rambling,", $4f
 	db "gambling dude!", $57
 ; 0x8e162 + 31 bytes
 
-_UnnamedText_5930e: ; 0x8e181
+_Route8EndBattleTxt8: ; 0x8e181
 	db $0, "Missed", $4f
 	db "the big score!", $58
 ; 0x8e181 + 23 bytes
 
-_UnnamedText_59313: ; 0x8e198
+_Route8AfterBattleTxt8: ; 0x8e198
 	db $0, "Gambling and", $4f
 	db "#MON are like", $55
 	db "eating peanuts!", $55
 	db "Just can't stop!", $57
 ; 0x8e198 + 60 bytes
 
-_UnnamedText_59322: ; 0x8e1d4
+_Route8B4BattleTxt9: ; 0x8e1d4
 	db $0, "What's a cute,", $4f
 	db "round and fluffy", $55
 	db "#MON?", $57
 ; 0x8e1d4 + 38 bytes
 
-_UnnamedText_59327: ; 0x8e1fa
+_Route8EndBattleTxt9: ; 0x8e1fa
 	db $0, "Stop!", $51
 	db "Don't be so mean", $4f
 	db "to my CLEFAIRY!", $58
 ; 0x8e1fa + 39 bytes
 
-_UnnamedText_5932c: ; 0x8e221
+_Route8AfterBattleTxt9: ; 0x8e221
 	db $0, "I heard that", $4f
 	db "CLEFAIRY evolves", $55
 	db "when it's exposed", $55
@@ -64216,151 +64216,151 @@ _Route8Text10: ; 0x8e262
 	db "CELADON CITY -", $55
 	db "LAVENDER TOWN", $57
 
-_UnnamedText_55792: ; 0x8e291
+_Route9B4BattleTxt1: ; 0x8e291
 	db $0, "You have #MON", $4f
 	db "with you!", $55
 	db "You're mine!", $57
 ; 0x8e291 + 37 bytes
 
-_UnnamedText_55797: ; 0x8e2b6
+_Route9EndBattleTxt1: ; 0x8e2b6
 	db $0, "You", $4f
 	db "deceived me!", $58
 ; 0x8e2b6 + 18 bytes
 
-_UnnamedText_5579c: ; 0x8e2c8
+_Route9AfterBattleTxt1: ; 0x8e2c8
 	db $0, "You need light to", $4f
 	db "get through that", $55
 	db "dark tunnel ahead.", $57
 ; 0x8e2c8 + 55 bytes
 
-_UnnamedText_557a1: ; 0x8e2ff
+_Route9B4BattleTxt2: ; 0x8e2ff
 	db $0, "Who's that walking", $4f
 	db "with those good", $55
 	db "looking #MON?", $57
 ; 0x8e2ff + 49 bytes
 
-_UnnamedText_557a6: ; 0x8e330
+_Route9EndBattleTxt2: ; 0x8e330
 	db $0, "Out", $4f
 	db "like a light!", $58
 ; 0x8e330 + 19 bytes
 
-_UnnamedText_557ab: ; 0x8e343
+_Route9AfterBattleTxt2: ; 0x8e343
 	db $0, "Keep walking!", $57
 ; 0x8e343 + 15 bytes
 
-_UnnamedText_557b0: ; 0x8e352
+_Route9B4BattleTxt3: ; 0x8e352
 	db $0, "I'm taking ROCK", $4f
 	db "TUNNEL to go to", $55
 	db "LAVENDER...", $57
 ; 0x8e352 + 44 bytes
 
-_UnnamedText_557b5: ; 0x8e37e
+_Route9EndBattleTxt3: ; 0x8e37e
 	db $0, "Can't", $4f
 	db "measure up!", $58
 ; 0x8e37e + 18 bytes
 
-_UnnamedText_557ba: ; 0x8e390
+_Route9AfterBattleTxt3: ; 0x8e390
 	db $0, "Are you off to", $4f
 	db "ROCK TUNNEL too?", $57
 ; 0x8e390 + 33 bytes
 
-_UnnamedText_557bf: ; 0x8e3b1
+_Route9B4BattleTxt4: ; 0x8e3b1
 	db $0, "Don't you dare", $4f
 	db "condescend me!", $57
 ; 0x8e3b1 + 30 bytes
 
-_UnnamedText_557c4: ; 0x8e3cf
+_Route9EndBattleTxt4: ; 0x8e3cf
 	db $0, "No!", $4f
 	db "You're too much!", $58
 ; 0x8e3cf + 21 bytes
 
-_UnnamedText_557c9: ; 0x8e3e4
+_Route9AfterBattleTxt4: ; 0x8e3e4
 	db $0, "You're obviously", $4f
 	db "talented! Good", $55
 	db "luck to you!", $57
 ; 0x8e3e4 + 45 bytes
 
-_UnnamedText_557ce: ; 0x8e411
+_Route9B4BattleTxt5: ; 0x8e411
 	db $0, "Bwahaha!", $4f
 	db "Great! I was", $55
 	db "bored, eh!", $57
 ; 0x8e411 + 34 bytes
 
-_UnnamedText_557d3: ; 0x8e433
+_Route9EndBattleTxt5: ; 0x8e433
 	db $0, "Keep it", $4f
 	db "coming, eh!", $51
 	db "Oh wait. I'm out", $4f
 	db "of #MON!", $58
 ; 0x8e433 + 46 bytes
 
-_UnnamedText_557d8: ; 0x8e461
+_Route9AfterBattleTxt5: ; 0x8e461
 	db $0, "You sure had guts", $4f
 	db "standing up to me", $55
 	db "there, eh?", $57
 ; 0x8e461 + 48 bytes
 
-_UnnamedText_557dd: ; 0x8e491
+_Route9B4BattleTxt6: ; 0x8e491
 	db $0, "Hahaha!", $4f
 	db "Aren't you a", $55
 	db "little toughie!", $57
 ; 0x8e491 + 37 bytes
 
-_UnnamedText_557e2: ; 0x8e4b6
+_Route9EndBattleTxt6: ; 0x8e4b6
 	db $0, "What's", $4f
 	db "that?", $58
 ; 0x8e4b6 + 13 bytes
 
-_UnnamedText_557e7: ; 0x8e4c3
+_Route9AfterBattleTxt6: ; 0x8e4c3
 	db $0, "Hahaha! Kids", $4f
 	db "should be tough!", $57
 ; 0x8e4c3 + 31 bytes
 
-_UnnamedText_557ec: ; 0x8e4e2
+_Route9B4BattleTxt7: ; 0x8e4e2
 	db $0, "I got up early", $4f
 	db "every day to", $55
 	db "raise my #MON", $55
 	db "from cocoons!", $57
 ; 0x8e4e2 + 57 bytes
 
-_UnnamedText_557f1: ; 0x8e51b
+_Route9EndBattleTxt7: ; 0x8e51b
 	db $0, "WHAT?", $51
 	db "What a total", $4f
 	db "waste of time!", $58
 ; 0x8e51b + 35 bytes
 
-_UnnamedText_557f6: ; 0x8e53e
+_Route9AfterBattleTxt7: ; 0x8e53e
 	db $0, "I have to collect", $4f
 	db "more than bugs to", $55
 	db "get stronger...", $57
 ; 0x8e53e + 53 bytes
 
-_UnnamedText_557fb: ; 0x8e573
+_Route9B4BattleTxt8: ; 0x8e573
 	db $0, "Hahahaha!", $4f
 	db "Come on, dude!", $57
 ; 0x8e573 + 26 bytes
 
-_UnnamedText_55800: ; 0x8e58d
+_Route9EndBattleTxt8: ; 0x8e58d
 	db $0, "Hahahaha!", $4f
 	db "You beat me fair!", $58
 ; 0x8e58d + 29 bytes
 
-_UnnamedText_55805: ; 0x8e5aa
+_Route9AfterBattleTxt8: ; 0x8e5aa
 	db $0, "Hahahaha!", $4f
 	db "Us hearty guys", $55
 	db "always laugh!", $57
 ; 0x8e5aa + 40 bytes
 
-_UnnamedText_5580a: ; 0x8e5d2
+_Route9B4BattleTxt9: ; 0x8e5d2
 	db $0, "Go, my super bug", $4f
 	db "#MON!", $57
 ; 0x8e5d2 + 24 bytes
 
-_UnnamedText_5580f: ; 0x8e5ea
+_Route9EndBattleTxt9: ; 0x8e5ea
 	db $0, "My", $4f
 	db "bugs...", $58
 ; 0x8e5ea + 12 bytes
 
-_UnnamedText_55814: ; 0x8e5f6
+_Route9AfterBattleTxt9: ; 0x8e5f6
 	db $0, "If you don't like", $4f
 	db "bug #MON, you", $55
 	db "bug me!", $57
@@ -64371,100 +64371,100 @@ _Route9Text11: ; 0x8e61e
 	db "CERULEAN CITY-", $55
 	db "ROCK TUNNEL", $57
 
-_UnnamedText_593b6: ; 0x8e642
+_Route10B4BattleTxt1: ; 0x8e642
 	db $0, "Wow, are you a", $4f
 	db "#MANIAC too?", $55
 	db "Want to see my", $55
 	db "collection?", $57
 ; 0x8e642 + 56 bytes
 
-_UnnamedText_593bb: ; 0x8e67a
+_Route10EndBattleTxt1: ; 0x8e67a
 	db $0, "Humph.", $4f
 	db "I'm not angry!", $58
 ; 0x8e67a + 22 bytes
 
-_UnnamedText_593c0: ; 0x8e690
+_Route10AfterBattleTxt1: ; 0x8e690
 	db $0, "I have more rare", $4f
 	db "#MON at home!", $57
 ; 0x8e690 + 32 bytes
 
-_UnnamedText_593cf: ; 0x8e6b0
+_Route10B4BattleTxt2: ; 0x8e6b0
 	db $0, "Ha-hahah-ah-ha!", $57
 ; 0x8e6b0 + 17 bytes
 
-_UnnamedText_593d4: ; 0x8e6c1
+_Route10EndBattleTxt2: ; 0x8e6c1
 	db $0, "Ha-haha!", $4f
 	db "Not laughing!", $55
 	db "Ha-hay fever!", $55
 	db "Haha-ha-choo!", $58
 ; 0x8e6c1 + 52 bytes
 
-_UnnamedText_593d9: ; 0x8e6f5
+_Route10AfterBattleTxt2: ; 0x8e6f5
 	db $0, "Haha-ha-choo!", $4f
 	db "Ha-choo!", $55
 	db "Snort! Snivel!", $57
 ; 0x8e6f5 + 39 bytes
 
-_UnnamedText_593e8: ; 0x8e71c
+_Route10B4BattleTxt3: ; 0x8e71c
 	db $0, "Hi kid, want to", $4f
 	db "see my #MON?", $57
 ; 0x8e71c + 30 bytes
 
-_UnnamedText_593ed: ; 0x8e73a
+_Route10EndBattleTxt3: ; 0x8e73a
 	db $0, "Oh no!", $4f
 	db "My #MON!", $58
 ; 0x8e73a + 17 bytes
 
-_UnnamedText_593f2: ; 0x8e74b
+_Route10AfterBattleTxt3: ; 0x8e74b
 	db $0, "I don't like you", $4f
 	db "for beating me!", $57
 ; 0x8e74b + 33 bytes
 
-_UnnamedText_59401: ; 0x8e76c
+_Route10B4BattleTxt4: ; 0x8e76c
 	db $0, "I've been to a", $4f
 	db "#MON GYM a few", $55
 	db "times. But, I", $55
 	db "lost each time.", $57
 ; 0x8e76c + 60 bytes
 
-_UnnamedText_59406: ; 0x8e7a8
+_Route10EndBattleTxt4: ; 0x8e7a8
 	db $0, "Ohh!", $4f
 	db "Blew it again!", $58
 ; 0x8e7a8 + 21 bytes
 
-_UnnamedText_5940b: ; 0x8e7bd
+_Route10AfterBattleTxt4: ; 0x8e7bd
 	db $0, "I noticed some", $4f
 	db "#MANIACs", $55
 	db "prowling around.", $57
 ; 0x8e7bd + 42 bytes
 
-_UnnamedText_5941a: ; 0x8e7e7
+_Route10B4BattleTxt5: ; 0x8e7e7
 	db $0, "Ah! This mountain", $4f
 	db "air is delicious!", $57
 ; 0x8e7e7 + 37 bytes
 
-_UnnamedText_5941f: ; 0x8e80c
+_Route10EndBattleTxt5: ; 0x8e80c
 	db $0, "That", $4f
 	db "cleared my head!", $58
 ; 0x8e80c + 23 bytes
 
-_UnnamedText_59424: ; 0x8e823
+_Route10AfterBattleTxt5: ; 0x8e823
 	db $0, "I feel bloated on", $4f
 	db "mountain air!", $57
 ; 0x8e823 + 33 bytes
 
-_UnnamedText_59433: ; 0x8e844
+_Route10B4BattleTxt6: ; 0x8e844
 	db $0, "I'm feeling a bit", $4f
 	db "faint from this", $55
 	db "tough hike.", $57
 ; 0x8e844 + 46 bytes
 
-_UnnamedText_59438: ; 0x8e872
+_Route10EndBattleTxt6: ; 0x8e872
 	db $0, "I'm", $4f
 	db "not up to it!", $58
 ; 0x8e872 + 18 bytes
 
-_UnnamedText_5943d: ; 0x8e884
+_Route10AfterBattleTxt6: ; 0x8e884
 	db $0, "The #MON here", $4f
 	db "are so chunky!", $55
 	db "There should be a", $55
@@ -64479,126 +64479,126 @@ _Route10Text7: ; 0x8e8d4
 _Route10Text10: ; 0x8e8e1
 	db $0, "POWER PLANT", $57
 
-_UnnamedText_594fe: ; 0x8e8ee
+_Route11B4BattleTxt1: ; 0x8e8ee
 	db $0, "Win, lose or draw!", $57
 ; 0x8e8ee + 20 bytes
 
-_UnnamedText_59503: ; 0x8e902
+_Route11EndBattleTxt1: ; 0x8e902
 	db $0, "Atcha!", $4f
 	db "Didn't go my way!", $58
 ; 0x8e902 + 25 bytes
 
-_UnnamedText_59508: ; 0x8e91b
+_Route11AfterBattleTxt1: ; 0x8e91b
 	db $0, "#MON is life!", $4f
 	db "And to live is to", $55
 	db "gamble!", $57
 ; 0x8e91b + 41 bytes
 
-_UnnamedText_59517: ; 0x8e944
+_Route11B4BattleTxt2: ; 0x8e944
 	db $0, "Competition! I", $4f
 	db "can't get enough!", $57
 ; 0x8e944 + 33 bytes
 
-_UnnamedText_5951c: ; 0x8e965
+_Route11EndBattleTxt2: ; 0x8e965
 	db $0, "I had", $4f
 	db "a chance!", $58
 ; 0x8e965 + 17 bytes
 
-_UnnamedText_59521: ; 0x8e976
+_Route11AfterBattleTxt2: ; 0x8e976
 	db $0, "You can't be a", $4f
 	db "coward in the", $55
 	db "world of #MON!", $57
 ; 0x8e976 + 44 bytes
 
-_UnnamedText_59530: ; 0x8e9a2
+_Route11B4BattleTxt3: ; 0x8e9a2
 	db $0, "Let's go, but", $4f
 	db "don't cheat!", $57
 ; 0x8e9a2 + 26 bytes
 
-_UnnamedText_59535: ; 0x8e9bc
+_Route11EndBattleTxt3: ; 0x8e9bc
 	db $0, "Huh?", $4f
 	db "That's not right!", $58
 ; 0x8e9bc + 23 bytes
 
-_UnnamedText_5953a: ; 0x8e9d3
+_Route11AfterBattleTxt3: ; 0x8e9d3
 	db $0, "I did my best! I", $4f
 	db "have no regrets!", $57
 ; 0x8e9d3 + 35 bytes
 
-_UnnamedText_59549: ; 0x8e9f6
+_Route11B4BattleTxt4: ; 0x8e9f6
 	db $0, "Careful!", $4f
 	db "I'm laying down", $55
 	db "some cables!", $57
 ; 0x8e9f6 + 38 bytes
 
-_UnnamedText_5954e: ; 0x8ea1c
+_Route11EndBattleTxt4: ; 0x8ea1c
 	db $0, "That", $4f
 	db "was electric!", $58
 ; 0x8ea1c + 20 bytes
 
-_UnnamedText_59553: ; 0x8ea30
+_Route11AfterBattleTxt4: ; 0x8ea30
 	db $0, "Spread the word", $4f
 	db "to save energy!", $57
 ; 0x8ea30 + 33 bytes
 
-_UnnamedText_59562: ; 0x8ea51
+_Route11B4BattleTxt5: ; 0x8ea51
 	db $0, "I just became a", $4f
 	db "trainer! But, I", $55
 	db "think I can win!", $57
 ; 0x8ea51 + 50 bytes
 
-_UnnamedText_59567: ; 0x8ea83
+_Route11EndBattleTxt5: ; 0x8ea83
 	db $0, "My", $4f
 	db "#MON couldn't!", $58
 ; 0x8ea83 + 18 bytes
 
-_UnnamedText_5956c: ; 0x8ea95
+_Route11AfterBattleTxt5: ; 0x8ea95
 	db $0, "What do you want?", $4f
 	db "Leave me alone!", $57
 ; 0x8ea95 + 35 bytes
 
-_UnnamedText_5957b: ; 0x8eab8
+_Route11B4BattleTxt6: ; 0x8eab8
 	db $0, "Fwahaha! I have", $4f
 	db "never lost!", $57
 ; 0x8eab8 + 29 bytes
 
-_UnnamedText_59580: ; 0x8ead5
+_Route11EndBattleTxt6: ; 0x8ead5
 	db $0, "My", $4f
 	db "first loss!", $58
 ; 0x8ead5 + 16 bytes
 
-_UnnamedText_59585: ; 0x8eae5
+_Route11AfterBattleTxt6: ; 0x8eae5
 	db $0, "Luck of the draw!", $4f
 	db "Just luck!", $57
 ; 0x8eae5 + 30 bytes
 
-_UnnamedText_59594: ; 0x8eb03
+_Route11B4BattleTxt7: ; 0x8eb03
 	db $0, "I have never won", $4f
 	db "before...", $57
 ; 0x8eb03 + 28 bytes
 
-_UnnamedText_59599: ; 0x8eb1f
+_Route11EndBattleTxt7: ; 0x8eb1f
 	db $0, "I saw", $4f
 	db "this coming...", $58
 ; 0x8eb1f + 22 bytes
 
-_UnnamedText_5959e: ; 0x8eb35
+_Route11AfterBattleTxt7: ; 0x8eb35
 	db $0, "It's just luck.", $4f
 	db "Luck of the draw.", $57
 ; 0x8eb35 + 34 bytes
 
-_UnnamedText_595ad: ; 0x8eb57
+_Route11B4BattleTxt8: ; 0x8eb57
 	db $0, "I'm the best in", $4f
 	db "my class!", $57
 ; 0x8eb57 + 26 bytes
 
-_UnnamedText_595b2: ; 0x8eb71
+_Route11EndBattleTxt8: ; 0x8eb71
 	db $0, "Darn!", $4f
 	db "I need to make my", $55
 	db "#MON stronger!", $58
 ; 0x8eb71 + 40 bytes
 
-_UnnamedText_595b7: ; 0x8eb99
+_Route11AfterBattleTxt8: ; 0x8eb99
 	db $0, "There's a fat", $4f
 	db "#MON that", $55
 	db "comes down from", $55
@@ -64607,34 +64607,34 @@ _UnnamedText_595b7: ; 0x8eb99
 	db "you can get it.", $57
 ; 0x8eb99 + 85 bytes
 
-_UnnamedText_595c6: ; 0x8ebee
+_Route11B4BattleTxt9: ; 0x8ebee
 	db $0, "Watch out for", $4f
 	db "live wires!", $57
 ; 0x8ebee + 27 bytes
 
 SECTION "bank24",DATA,BANK[$24]
 
-_UnnamedText_595cb: ; 0x90000
+_Route11EndBattleTxt9: ; 0x90000
 	db $0, "Whoa!", $4f
 	db "You spark plug!", $58
 ; 0x90000 + 23 bytes
 
-_UnnamedText_595d0: ; 0x90017
+_Route11AfterBattleTxt9: ; 0x90017
 	db $0, "Well, better get", $4f
 	db "back to work.", $57
 ; 0x90017 + 32 bytes
 
-_UnnamedText_595df: ; 0x90037
+_Route11B4BattleTxt10: ; 0x90037
 	db $0, "My #MON should", $4f
 	db "be ready by now!", $57
 ; 0x90037 + 33 bytes
 
-_UnnamedText_595e4: ; 0x90058
+_Route11EndBattleTxt10: ; 0x90058
 	db $0, "Too", $4f
 	db "much, too young!", $58
 ; 0x90058 + 22 bytes
 
-_UnnamedText_595e9: ; 0x9006e
+_Route11AfterBattleTxt10: ; 0x9006e
 	db $0, "I better go find", $4f
 	db "stronger ones!", $57
 ; 0x9006e + 33 bytes
@@ -64659,113 +64659,113 @@ _UnnamedText_596f0: ; 0x900ef
 	db "to the mountains!", $57
 ; 0x900ef + 69 bytes
 
-_UnnamedText_596ff: ; 0x90134
+_Route12B4BattleTxt1: ; 0x90134
 	db $0, "Yeah! I got a", $4f
 	db "bite, here!", $57
 ; 0x90134 + 27 bytes
 
-_UnnamedText_59704: ; 0x9014f
+_Route12EndBattleTxt1: ; 0x9014f
 	db $0, "Tch!", $4f
 	db "Just a small fry!", $58
 ; 0x9014f + 24 bytes
 
-_UnnamedText_59709: ; 0x90167
+_Route12AfterBattleTxt1: ; 0x90167
 	db $0, "Hang on! My line's", $4f
 	db "snagged!", $57
 ; 0x90167 + 28 bytes
 
-_UnnamedText_59718: ; 0x90183
+_Route12B4BattleTxt2: ; 0x90183
 	db $0, "Be patient!", $4f
 	db "Fishing is a", $55
 	db "waiting game!", $57
 ; 0x90183 + 40 bytes
 
-_UnnamedText_5971d: ; 0x901ab
+_Route12EndBattleTxt2: ; 0x901ab
 	db $0, "That", $4f
 	db "one got away!", $58
 ; 0x901ab + 20 bytes
 
-_UnnamedText_59722: ; 0x901bf
+_Route12AfterBattleTxt2: ; 0x901bf
 	db $0, "With a better ROD,", $4f
 	db "I could catch", $55
 	db "better #MON!", $57
 ; 0x901bf + 47 bytes
 
-_UnnamedText_59731: ; 0x901ee
+_Route12B4BattleTxt3: ; 0x901ee
 	db $0, "Have you found a", $4f
 	db "MOON STONE?", $57
 ; 0x901ee + 30 bytes
 
-_UnnamedText_59736: ; 0x9020c
+_Route12EndBattleTxt3: ; 0x9020c
 	db $0, "Oww!", $58
 ; 0x9020c + 6 bytes
 
-_UnnamedText_5973b: ; 0x90212
+_Route12AfterBattleTxt3: ; 0x90212
 	db $0, "I could have made", $4f
 	db "my #MON evolve", $55
 	db "with MOON STONE!", $57
 ; 0x90212 + 51 bytes
 
-_UnnamedText_5974a: ; 0x90245
+_Route12B4BattleTxt4: ; 0x90245
 	db $0, "Electricity is my", $4f
 	db "specialty!", $57
 ; 0x90245 + 30 bytes
 
-_UnnamedText_5974f: ; 0x90263
+_Route12EndBattleTxt4: ; 0x90263
 	db $0, "Unplugged!", $58
 ; 0x90263 + 12 bytes
 
-_UnnamedText_59754: ; 0x9026f
+_Route12AfterBattleTxt4: ; 0x9026f
 	db $0, "Water conducts", $4f
 	db "electricity, so", $55
 	db "you should zap", $55
 	db "sea #MON!", $57
 ; 0x9026f + 57 bytes
 
-_UnnamedText_59763: ; 0x902a8
+_Route12B4BattleTxt5: ; 0x902a8
 	db $0, "The FISHING FOOL", $4f
 	db "vs. #MON KID!", $57
 ; 0x902a8 + 32 bytes
 
-_UnnamedText_59768: ; 0x902c8
+_Route12EndBattleTxt5: ; 0x902c8
 	db $0, "Too", $4f
 	db "much!", $58
 ; 0x902c8 + 11 bytes
 
-_UnnamedText_5976d: ; 0x902d3
+_Route12AfterBattleTxt5: ; 0x902d3
 	db $0, "You beat me at", $4f
 	db "#MON, but I'm", $55
 	db "good at fishing!", $57
 ; 0x902d3 + 46 bytes
 
-_UnnamedText_5977c: ; 0x90301
+_Route12B4BattleTxt6: ; 0x90301
 	db $0, "I'd rather be", $4f
 	db "working!", $57
 ; 0x90301 + 23 bytes
 
-_UnnamedText_59781: ; 0x90318
+_Route12EndBattleTxt6: ; 0x90318
 	db $0, "It's", $4f
 	db "not easy...", $58
 ; 0x90318 + 17 bytes
 
-_UnnamedText_59786: ; 0x90329
+_Route12AfterBattleTxt6: ; 0x90329
 	db $0, "It's all right.", $4f
 	db "Losing doesn't", $55
 	db "bug me any more.", $57
 ; 0x90329 + 47 bytes
 
-_UnnamedText_59795: ; 0x90358
+_Route12B4BattleTxt7: ; 0x90358
 	db $0, "You never know", $4f
 	db "what you could", $55
 	db "catch!", $57
 ; 0x90358 + 38 bytes
 
-_UnnamedText_5979a: ; 0x9037e
+_Route12EndBattleTxt7: ; 0x9037e
 	db $0, "Lost", $4f
 	db "it!", $58
 ; 0x9037e + 10 bytes
 
-_UnnamedText_5979f: ; 0x90388
+_Route12AfterBattleTxt7: ; 0x90388
 	db $0, "I catch MAGIKARP", $4f
 	db "all the time, but", $55
 	db "they're so weak!", $57
@@ -64778,160 +64778,160 @@ _Route12Text11: ; 0x903bc
 _Route12Text12: ; 0x903d9
 	db $0, "SPORT FISHING AREA", $57
 
-_UnnamedText_558d4: ; 0x903ed
+_Route13B4BattleTxt2: ; 0x903ed
 	db $0, "My bird #MON", $4f
 	db "want to scrap!", $57
 ; 0x903ed + 29 bytes
 
-_UnnamedText_558d9: ; 0x9040a
+_Route13EndBattleTxt2: ; 0x9040a
 	db $0, "My", $4f
 	db "bird combo lost?", $58
 ; 0x9040a + 21 bytes
 
-_UnnamedText_558de: ; 0x9041f
+_Route13AfterBattleTxt2: ; 0x9041f
 	db $0, "My #MON look", $4f
 	db "happy even though", $55
 	db "they lost.", $57
 ; 0x9041f + 43 bytes
 
-_UnnamedText_558ed: ; 0x9044a
+_Route13B4BattleTxt3: ; 0x9044a
 	db $0, "I'm told I'm good", $4f
 	db "for a kid!", $57
 ; 0x9044a + 28 bytes
 
-_UnnamedText_558f2: ; 0x90466
+_Route13EndBattleTxt3: ; 0x90466
 	db $0, "Ohh!", $4f
 	db "I lost!", $58
 ; 0x90466 + 14 bytes
 
-_UnnamedText_558f7: ; 0x90474
+_Route13AfterBattleTxt3: ; 0x90474
 	db $0, "I want to become", $4f
 	db "a good trainer.", $55
 	db "I'll train hard.", $57
 ; 0x90474 + 50 bytes
 
-_UnnamedText_55906: ; 0x904a6
+_Route13B4BattleTxt4: ; 0x904a6
 	db $0, "Wow! Your BADGEs", $4f
 	db "are too cool!", $57
 ; 0x904a6 + 32 bytes
 
-_UnnamedText_5590b: ; 0x904c6
+_Route13EndBattleTxt4: ; 0x904c6
 	db $0, "Not", $4f
 	db "enough!", $58
 ; 0x904c6 + 13 bytes
 
-_UnnamedText_55910: ; 0x904d3
+_Route13AfterBattleTxt4: ; 0x904d3
 	db $0, "You got those", $4f
 	db "BADGEs from GYM", $55
 	db "LEADERs. I know!", $57
 ; 0x904d3 + 48 bytes
 
-_UnnamedText_5591f: ; 0x90503
+_Route13B4BattleTxt5: ; 0x90503
 	db $0, "My cute #MON", $4f
 	db "wish to make your", $55
 	db "acquaintance.", $57
 ; 0x90503 + 46 bytes
 
-_UnnamedText_55924: ; 0x90531
+_Route13EndBattleTxt5: ; 0x90531
 	db $0, "Wow!", $4f
 	db "You totally won!", $58
 ; 0x90531 + 23 bytes
 
-_UnnamedText_55929: ; 0x90548
+_Route13AfterBattleTxt5: ; 0x90548
 	db $0, "You have to make", $4f
 	db "#MON fight to", $55
 	db "toughen them up!", $57
 ; 0x90548 + 49 bytes
 
-_UnnamedText_55938: ; 0x90579
+_Route13B4BattleTxt6: ; 0x90579
 	db $0, "I found CARBOS in", $4f
 	db "a cave once.", $57
 ; 0x90579 + 32 bytes
 
-_UnnamedText_5593d: ; 0x90599
+_Route13EndBattleTxt6: ; 0x90599
 	db $0, "Just", $4f
 	db "messed up!", $58
 ; 0x90599 + 17 bytes
 
-_UnnamedText_55942: ; 0x905aa
+_Route13AfterBattleTxt6: ; 0x905aa
 	db $0, "CARBOS boosted", $4f
 	db "the SPEED of my", $55
 	db "#MON.", $57
 ; 0x905aa + 38 bytes
 
-_UnnamedText_55951: ; 0x905d0
+_Route13B4BattleTxt7: ; 0x905d0
 	db $0, "The wind's blowing", $4f
 	db "my way!", $57
 ; 0x905d0 + 27 bytes
 
-_UnnamedText_55956: ; 0x905eb
+_Route13EndBattleTxt7: ; 0x905eb
 	db $0, "The", $4f
 	db "wind turned!", $58
 ; 0x905eb + 18 bytes
 
-_UnnamedText_5595b: ; 0x905fd
+_Route13AfterBattleTxt7: ; 0x905fd
 	db $0, "I'm beat. I guess", $4f
 	db "I'll FLY home.", $57
 ; 0x905fd + 32 bytes
 
-_UnnamedText_5596a: ; 0x9061d
+_Route13B4BattleTxt8: ; 0x9061d
 	db $0, "Sure, I'll play", $4f
 	db "with you!", $57
 ; 0x9061d + 26 bytes
 
-_UnnamedText_5596f: ; 0x90637
+_Route13EndBattleTxt8: ; 0x90637
 	db $0, "Oh!", $4f
 	db "You little brute!", $58
 ; 0x90637 + 23 bytes
 
-_UnnamedText_55974: ; 0x9064e
+_Route13AfterBattleTxt8: ; 0x9064e
 	db $0, "I wonder which is", $4f
 	db "stronger, male or", $55
 	db "female #MON?", $57
 ; 0x9064e + 50 bytes
 
-_UnnamedText_55983: ; 0x90680
+_Route13B4BattleTxt9: ; 0x90680
 	db $0, "Do you want to", $4f
 	db "#MON with me?", $57
 ; 0x90680 + 30 bytes
 
-_UnnamedText_55988: ; 0x9069e
+_Route13EndBattleTxt9: ; 0x9069e
 	db $0, "It's over", $4f
 	db "already?", $58
 ; 0x9069e + 19 bytes
 
-_UnnamedText_5598d: ; 0x906b1
+_Route13AfterBattleTxt9: ; 0x906b1
 	db $0, "I don't know", $4f
 	db "anything about", $55
 	db "#MON. I just", $55
 	db "like cool ones!", $57
 ; 0x906b1 + 57 bytes
 
-_UnnamedText_5599c: ; 0x906ea
+_Route13B4BattleTxt10: ; 0x906ea
 	db $0, "What're you", $4f
 	db "lookin' at?", $57
 ; 0x906ea + 24 bytes
 
-_UnnamedText_559a1: ; 0x90702
+_Route13EndBattleTxt10: ; 0x90702
 	db $0, "Dang!", $4f
 	db "Stripped gears!", $58
 ; 0x90702 + 23 bytes
 
-_UnnamedText_559a6: ; 0x90719
+_Route13AfterBattleTxt10: ; 0x90719
 	db $0, "Get lost!", $57
 ; 0x90719 + 11 bytes
 
-_UnnamedText_559b5: ; 0x90724
+_Route13B4BattleTxt11: ; 0x90724
 	db $0, "I always go with", $4f
 	db "bird #MON!", $57
 ; 0x90724 + 29 bytes
 
-_UnnamedText_559ba: ; 0x90741
+_Route13EndBattleTxt11: ; 0x90741
 	db $0, "Out", $4f
 	db "of power!", $58
 ; 0x90741 + 15 bytes
 
-_UnnamedText_559bf: ; 0x90750
+_Route13AfterBattleTxt11: ; 0x90750
 	db $0, "I wish I could", $4f
 	db "fly like PIDGEY", $55
 	db "and PIDGEOTTO...", $57
@@ -64953,150 +64953,150 @@ _Route13Text13: ; 0x907eb
 	db "North to SILENCE", $55
 	db "BRIDGE", $57
 
-_UnnamedText_55a85: ; 0x9080d
+_Route14B4BattleTxt1: ; 0x9080d
 	db $0, "You need to use", $4f
 	db "TMs to teach good", $55
 	db "moves to #MON!", $57
 ; 0x9080d + 50 bytes
 
-_UnnamedText_55a8a: ; 0x9083f
+_Route14EndBattleTxt1: ; 0x9083f
 	db $0, "Not", $4f
 	db "good enough!", $58
 ; 0x9083f + 18 bytes
 
-_UnnamedText_55a8f: ; 0x90851
+_Route14AfterBattleTxt1: ; 0x90851
 	db $0, "You have some HMs", $4f
 	db "right? #MON", $55
 	db "can't ever forget", $55
 	db "those moves.", $57
 ; 0x90851 + 61 bytes
 
-_UnnamedText_55a9e: ; 0x9088e
+_Route14B4BattleTxt2: ; 0x9088e
 	db $0, "My bird #MON", $4f
 	db "should be ready", $55
 	db "for battle.", $57
 ; 0x9088e + 42 bytes
 
-_UnnamedText_55aa3: ; 0x908b8
+_Route14EndBattleTxt2: ; 0x908b8
 	db $0, "Not", $4f
 	db "ready yet!", $58
 ; 0x908b8 + 16 bytes
 
-_UnnamedText_55aa8: ; 0x908c8
+_Route14AfterBattleTxt2: ; 0x908c8
 	db $0, "They need to learn", $4f
 	db "better moves.", $57
 ; 0x908c8 + 34 bytes
 
-_UnnamedText_55ab7: ; 0x908ea
+_Route14B4BattleTxt3: ; 0x908ea
 	db $0, "TMs are on sale", $4f
 	db "in CELADON!", $55
 	db "But, only a few", $55
 	db "people have HMs!", $57
 ; 0x908ea + 62 bytes
 
-_UnnamedText_55abc: ; 0x90928
+_Route14EndBattleTxt3: ; 0x90928
 	db $0, "Aww,", $4f
 	db "bummer!", $58
 ; 0x90928 + 14 bytes
 
-_UnnamedText_55ac1: ; 0x90936
+_Route14AfterBattleTxt3: ; 0x90936
 	db $0, "Teach #MON", $4f
 	db "moves of the same", $55
 	db "element type for", $55
 	db "more power.", $57
 ; 0x90936 + 59 bytes
 
-_UnnamedText_55ad0: ; 0x90971
+_Route14B4BattleTxt4: ; 0x90971
 	db $0, "Have you taught", $4f
 	db "your bird #MON", $55
 	db "how to FLY?", $57
 ; 0x90971 + 44 bytes
 
-_UnnamedText_55ad5: ; 0x9099d
+_Route14EndBattleTxt4: ; 0x9099d
 	db $0, "Shot", $4f
 	db "down in flames!", $58
 ; 0x9099d + 22 bytes
 
-_UnnamedText_55ada: ; 0x909b3
+_Route14AfterBattleTxt4: ; 0x909b3
 	db $0, "Bird #MON are", $4f
 	db "my true love!", $57
 ; 0x909b3 + 29 bytes
 
-_UnnamedText_55ae9: ; 0x909d0
+_Route14B4BattleTxt5: ; 0x909d0
 	db $0, "Have you heard of", $4f
 	db "the legendary", $55
 	db "#MON?", $57
 ; 0x909d0 + 39 bytes
 
-_UnnamedText_55aee: ; 0x909f7
+_Route14EndBattleTxt5: ; 0x909f7
 	db $0, "Why?", $4f
 	db "Why'd I lose?", $58
 ; 0x909f7 + 19 bytes
 
-_UnnamedText_55af3: ; 0x90a0a
+_Route14AfterBattleTxt5: ; 0x90a0a
 	db $0, "The 3 legendary", $4f
 	db "#MON are all", $55
 	db "birds of prey.", $57
 ; 0x90a0a + 45 bytes
 
-_UnnamedText_55b02: ; 0x90a37
+_Route14B4BattleTxt6: ; 0x90a37
 	db $0, "I'm not into it,", $4f
 	db "but OK! Let's go!", $57
 ; 0x90a37 + 34 bytes
 
-_UnnamedText_55b07: ; 0x90a59
+_Route14EndBattleTxt6: ; 0x90a59
 	db $0, "I", $4f
 	db "knew it!", $58
 ; 0x90a59 + 12 bytes
 
-_UnnamedText_55b0c: ; 0x90a65
+_Route14AfterBattleTxt6: ; 0x90a65
 	db $0, "Winning, losing,", $4f
 	db "it doesn't matter", $55
 	db "in the long run!", $57
 ; 0x90a65 + 52 bytes
 
-_UnnamedText_55b1b: ; 0x90a99
+_Route14B4BattleTxt7: ; 0x90a99
 	db $0, "C'mon, c'mon.", $4f
 	db "Let's go, let's", $55
 	db "go, let's go!", $57
 ; 0x90a99 + 40 bytes
 
-_UnnamedText_55b20: ; 0x90ac1
+_Route14EndBattleTxt7: ; 0x90ac1
 	db $0, "Arrg!", $4f
 	db "Lost! Get lost!", $58
 ; 0x90ac1 + 23 bytes
 
-_UnnamedText_55b25: ; 0x90ad8
+_Route14AfterBattleTxt7: ; 0x90ad8
 	db $0, "What, what, what?", $4f
 	db "What do you want?", $57
 ; 0x90ad8 + 37 bytes
 
-_UnnamedText_55b34: ; 0x90afd
+_Route14B4BattleTxt8: ; 0x90afd
 	db $0, "Perfect! I need to", $4f
 	db "burn some time!", $57
 ; 0x90afd + 36 bytes
 
-_UnnamedText_55b39: ; 0x90b21
+_Route14EndBattleTxt8: ; 0x90b21
 	db $0, "What?", $4f
 	db "You!?", $58
 ; 0x90b21 + 13 bytes
 
-_UnnamedText_55b3e: ; 0x90b2e
+_Route14AfterBattleTxt8: ; 0x90b2e
 	db $0, "Raising #MON", $4f
 	db "is a drag, man.", $57
 ; 0x90b2e + 30 bytes
 
-_UnnamedText_55b4d: ; 0x90b4c
+_Route14B4BattleTxt9: ; 0x90b4c
 	db $0, "We ride out here", $4f
 	db "because there's", $55
 	db "more room!", $57
 ; 0x90b4c + 44 bytes
 
-_UnnamedText_55b52: ; 0x90b78
+_Route14EndBattleTxt9: ; 0x90b78
 	db $0, "Wipe out!", $58
 ; 0x90b78 + 11 bytes
 
-_UnnamedText_55b57: ; 0x90b83
+_Route14AfterBattleTxt9: ; 0x90b83
 	db $0, "It's cool you", $4f
 	db "made your #MON", $55
 	db "so strong!", $51
@@ -65104,17 +65104,17 @@ _UnnamedText_55b57: ; 0x90b83
 	db "And you know it!", $57
 ; 0x90b83 + 73 bytes
 
-_UnnamedText_55b66: ; 0x90bcc
+_Route14B4BattleTxt10: ; 0x90bcc
 	db $0, "#MON fight?", $4f
 	db "Cool! Rumble!", $57
 ; 0x90bcc + 27 bytes
 
-_UnnamedText_55b6b: ; 0x90be7
+_Route14EndBattleTxt10: ; 0x90be7
 	db $0, "Blown", $4f
 	db "away!", $58
 ; 0x90be7 + 13 bytes
 
-_UnnamedText_55b70: ; 0x90bf4
+_Route14AfterBattleTxt10: ; 0x90bf4
 	db $0, "You know who'd", $4f
 	db "win, you and me", $55
 	db "one on one!", $57
@@ -65125,18 +65125,18 @@ _Route14Text11: ; 0x90c1f
 	db "West to FUCHSIA", $55
 	db "CITY", $57
 
-_UnnamedText_59898: ; 0x90c3e
+_Route15B4BattleTxt1: ; 0x90c3e
 	db $0, "Let me try out the", $4f
 	db "#MON I just", $55
 	db "got in a trade!", $57
 ; 0x90c3e + 48 bytes
 
-_UnnamedText_5989d: ; 0x90c6e
+_Route15EndBattleTxt1: ; 0x90c6e
 	db $0, "Not", $4f
 	db "good enough!", $58
 ; 0x90c6e + 18 bytes
 
-_UnnamedText_598a2: ; 0x90c80
+_Route15AfterBattleTxt1: ; 0x90c80
 	db $0, "You can't change", $4f
 	db "the nickname of", $55
 	db "any #MON you", $55
@@ -65145,148 +65145,148 @@ _UnnamedText_598a2: ; 0x90c80
 	db "Trainer can.", $57
 ; 0x90c80 + 93 bytes
 
-_UnnamedText_598a7: ; 0x90cdd
+_Route15B4BattleTxt2: ; 0x90cdd
 	db $0, "You look gentle,", $4f
 	db "so I think I can", $55
 	db "beat you!", $57
 ; 0x90cdd + 45 bytes
 
-_UnnamedText_598ac: ; 0x90d0a
+_Route15EndBattleTxt2: ; 0x90d0a
 	db $0, "No,", $4f
 	db "wrong!", $58
 ; 0x90d0a + 12 bytes
 
-_UnnamedText_598b1: ; 0x90d16
+_Route15AfterBattleTxt2: ; 0x90d16
 	db $0, "I'm afraid of", $4f
 	db "BIKERs, they look", $55
 	db "so ugly and mean!", $57
 ; 0x90d16 + 50 bytes
 
-_UnnamedText_598b6: ; 0x90d48
+_Route15B4BattleTxt3: ; 0x90d48
 	db $0, "When I whistle, I", $4f
 	db "can summon bird", $55
 	db "#MON!", $57
 ; 0x90d48 + 41 bytes
 
-_UnnamedText_598bb: ; 0x90d71
+_Route15EndBattleTxt3: ; 0x90d71
 	db $0, "Ow!", $4f
 	db "That's tragic!", $58
 ; 0x90d71 + 19 bytes
 
-_UnnamedText_598c0: ; 0x90d84
+_Route15AfterBattleTxt3: ; 0x90d84
 	db $0, "Maybe I'm not cut", $4f
 	db "out for battles.", $57
 ; 0x90d84 + 35 bytes
 
-_UnnamedText_598c5: ; 0x90da7
+_Route15B4BattleTxt4: ; 0x90da7
 	db $0, "Hmm? My birds are", $4f
 	db "shivering! You're", $55
 	db "good, aren't you?", $57
 ; 0x90da7 + 53 bytes
 
-_UnnamedText_598ca: ; 0x90ddc
+_Route15EndBattleTxt4: ; 0x90ddc
 	db $0, "Just", $4f
 	db "as I thought!", $58
 ; 0x90ddc + 20 bytes
 
-_UnnamedText_598cf: ; 0x90df0
+_Route15AfterBattleTxt4: ; 0x90df0
 	db $0, "Did you know moves", $4f
 	db "like EARTHQUAKE", $55
 	db "don't have any", $55
 	db "effect on birds?", $57
 ; 0x90df0 + 67 bytes
 
-_UnnamedText_598d4: ; 0x90e33
+_Route15B4BattleTxt5: ; 0x90e33
 	db $0, "Oh, you're a", $4f
 	db "little cutie!", $57
 ; 0x90e33 + 27 bytes
 
-_UnnamedText_598d9: ; 0x90e4e
+_Route15EndBattleTxt5: ; 0x90e4e
 	db $0, "You looked", $4f
 	db "so cute too!", $58
 ; 0x90e4e + 25 bytes
 
-_UnnamedText_598de: ; 0x90e67
+_Route15AfterBattleTxt5: ; 0x90e67
 	db $0, "I forgive you!", $4f
 	db "I can take it!", $57
 ; 0x90e67 + 31 bytes
 
-_UnnamedText_598e3: ; 0x90e86
+_Route15B4BattleTxt6: ; 0x90e86
 	db $0, "I raise #MON", $4f
 	db "because I live", $55
 	db "alone!", $57
 ; 0x90e86 + 36 bytes
 
-_UnnamedText_598e8: ; 0x90eaa
+_Route15EndBattleTxt6: ; 0x90eaa
 	db $0, "I didn't", $4f
 	db "ask for this!", $58
 ; 0x90eaa + 23 bytes
 
-_UnnamedText_598ed: ; 0x90ec1
+_Route15AfterBattleTxt6: ; 0x90ec1
 	db $0, "I just like going", $4f
 	db "home to be with", $55
 	db "my #MON!", $57
 ; 0x90ec1 + 44 bytes
 
-_UnnamedText_598f2: ; 0x90eed
+_Route15B4BattleTxt7: ; 0x90eed
 	db $0, "Hey kid! C'mon!", $4f
 	db "I just got these!", $57
 ; 0x90eed + 34 bytes
 
-_UnnamedText_598f7: ; 0x90f0f
+_Route15EndBattleTxt7: ; 0x90f0f
 	db $0, "Why", $4f
 	db "not?", $58
 ; 0x90f0f + 10 bytes
 
-_UnnamedText_598fc: ; 0x90f19
+_Route15AfterBattleTxt7: ; 0x90f19
 	db $0, "You only live", $4f
 	db "once, so I live", $55
 	db "as an outlaw!", $55
 	db "TEAM ROCKET RULES!", $57
 ; 0x90f19 + 64 bytes
 
-_UnnamedText_59901: ; 0x90f59
+_Route15B4BattleTxt8: ; 0x90f59
 	db $0, "Fork over all your", $4f
 	db "cash when you", $55
 	db "lose to me, kid!", $57
 ; 0x90f59 + 51 bytes
 
-_UnnamedText_59906: ; 0x90f8c
+_Route15EndBattleTxt8: ; 0x90f8c
 	db $0, "That", $4f
 	db "can't be true!", $58
 ; 0x90f8c + 20 bytes
 
-_UnnamedText_5990b: ; 0x90fa0
+_Route15AfterBattleTxt8: ; 0x90fa0
 	db $0, "I was just joking", $4f
 	db "about the money!", $57
 ; 0x90fa0 + 36 bytes
 
-_UnnamedText_59910: ; 0x90fc4
+_Route15B4BattleTxt9: ; 0x90fc4
 	db $0, "What's cool?", $4f
 	db "Trading #MON!", $57
 ; 0x90fc4 + 27 bytes
 
-_UnnamedText_59915: ; 0x90fdf
+_Route15EndBattleTxt9: ; 0x90fdf
 	db $0, "I", $4f
 	db "said trade!", $58
 ; 0x90fdf + 15 bytes
 
-_UnnamedText_5991a: ; 0x90fee
+_Route15AfterBattleTxt9: ; 0x90fee
 	db $0, "I trade #MON", $4f
 	db "with my friends!", $57
 ; 0x90fee + 31 bytes
 
-_UnnamedText_5991f: ; 0x9100d
+_Route15B4BattleTxt10: ; 0x9100d
 	db $0, "Want to play with", $4f
 	db "my #MON?", $57
 ; 0x9100d + 28 bytes
 
-_UnnamedText_59924: ; 0x91029
+_Route15EndBattleTxt10: ; 0x91029
 	db $0, "I was", $4f
 	db "too impatient!", $58
 ; 0x91029 + 22 bytes
 
-_UnnamedText_59929: ; 0x9103f
+_Route15AfterBattleTxt10: ; 0x9103f
 	db $0, "I'll go train with", $4f
 	db "weaker people.@"
 	db $50
@@ -65297,93 +65297,93 @@ _Route15Text12: ; 0x91062
 	db "West to FUCHSIA", $55
 	db "CITY", $57
 
-_UnnamedText_59a22: ; 0x91081
+_Route16B4BattleTxt1: ; 0x91081
 	db $0, "What do you want?", $57
 ; 0x91081 + 19 bytes
 
-_UnnamedText_59a27: ; 0x91094
+_Route16EndBattleTxt1: ; 0x91094
 	db $0, "Don't you", $4f
 	db "dare laugh!", $58
 ; 0x91094 + 22 bytes
 
-_UnnamedText_59a2c: ; 0x910aa
+_Route16AfterBattleTxt1: ; 0x910aa
 	db $0, "We like just", $4f
 	db "hanging here,", $55
 	db "what's it to you?", $57
 ; 0x910aa + 45 bytes
 
-_UnnamedText_59a3b: ; 0x910d7
+_Route16B4BattleTxt2: ; 0x910d7
 	db $0, "Nice BIKE!", $4f
 	db "Hand it over!", $57
 ; 0x910d7 + 26 bytes
 
-_UnnamedText_59a40: ; 0x910f1
+_Route16EndBattleTxt2: ; 0x910f1
 	db $0, "Knock", $4f
 	db "out!", $58
 ; 0x910f1 + 12 bytes
 
-_UnnamedText_59a45: ; 0x910fd
+_Route16AfterBattleTxt2: ; 0x910fd
 	db $0, "Forget it, who", $4f
 	db "needs your BIKE!", $57
 ; 0x910fd + 33 bytes
 
-_UnnamedText_59a54: ; 0x9111e
+_Route16B4BattleTxt3: ; 0x9111e
 	db $0, "Come out and play,", $4f
 	db "little mouse!", $57
 ; 0x9111e + 34 bytes
 
-_UnnamedText_59a59: ; 0x91140
+_Route16EndBattleTxt3: ; 0x91140
 	db $0, "You", $4f
 	db "little rat!", $58
 ; 0x91140 + 17 bytes
 
-_UnnamedText_59a5e: ; 0x91151
+_Route16AfterBattleTxt3: ; 0x91151
 	db $0, "I hate losing!", $4f
 	db "Get away from me!", $57
 ; 0x91151 + 34 bytes
 
-_UnnamedText_59a6d: ; 0x91173
+_Route16B4BattleTxt4: ; 0x91173
 	db $0, "Hey, you just", $4f
 	db "bumped me!", $57
 ; 0x91173 + 26 bytes
 
-_UnnamedText_59a72: ; 0x9118d
+_Route16EndBattleTxt4: ; 0x9118d
 	db $0, "Kaboom!", $58
 ; 0x9118d + 9 bytes
 
-_UnnamedText_59a77: ; 0x91196
+_Route16AfterBattleTxt4: ; 0x91196
 	db $0, "You can also get", $4f
 	db "to FUCHSIA from", $55
 	db "VERMILION using a", $55
 	db "coastal road.", $57
 ; 0x91196 + 66 bytes
 
-_UnnamedText_59a86: ; 0x911d8
+_Route16B4BattleTxt5: ; 0x911d8
 	db $0, "I'm feeling", $4f
 	db "hungry and mean!", $57
 ; 0x911d8 + 29 bytes
 
-_UnnamedText_59a8b: ; 0x911f5
+_Route16EndBattleTxt5: ; 0x911f5
 	db $0, "Bad,", $4f
 	db "bad, bad!", $58
 ; 0x911f5 + 16 bytes
 
-_UnnamedText_59a90: ; 0x91205
+_Route16AfterBattleTxt5: ; 0x91205
 	db $0, "I like my #MON", $4f
 	db "ferocious! They", $55
 	db "tear up enemies!", $57
 ; 0x91205 + 49 bytes
 
-_UnnamedText_59a9f: ; 0x91236
+_Route16B4BattleTxt6: ; 0x91236
 	db $0, "Sure, I'll go!", $57
 ; 0x91236 + 15 bytes
 
-_UnnamedText_59aa4: ; 0x91245
+_Route16EndBattleTxt6: ; 0x91245
 	db $0, "Don't make", $4f
 	db "me mad!", $58
 ; 0x91245 + 19 bytes
 
-_UnnamedText_59aa9: ; 0x91258
+_Route16AfterBattleTxt6: ; 0x91258
 	db $0, "I like harassing", $4f
 	db "people with my", $55
 	db "vicious #MON!", $57
@@ -65414,151 +65414,151 @@ _Route16Text9: ; 0x9132c
 	db "CELADON CITY -", $55
 	db "FUCHSIA CITY", $57
 
-_UnnamedText_55c36: ; 0x91352
+_Route17B4BattleTxt1: ; 0x91352
 	db $0, "There's no money", $4f
 	db "in fighting kids!", $57
 ; 0x91352 + 35 bytes
 
-_UnnamedText_55c3b: ; 0x91375
+_Route17EndBattleTxt1: ; 0x91375
 	db $0, "Burned", $4f
 	db "out!", $58
 ; 0x91375 + 13 bytes
 
-_UnnamedText_55c40: ; 0x91382
+_Route17AfterBattleTxt1: ; 0x91382
 	db $0, "Good stuff is", $4f
 	db "lying around on", $55
 	db "CYCLING ROAD!", $57
 ; 0x91382 + 45 bytes
 
-_UnnamedText_55c4f: ; 0x913af
+_Route17B4BattleTxt2: ; 0x913af
 	db $0, "What do you want,", $4f
 	db "kiddo?", $57
 ; 0x913af + 26 bytes
 
-_UnnamedText_55c54: ; 0x913c9
+_Route17EndBattleTxt2: ; 0x913c9
 	db $0, "Whoo!", $58
 ; 0x913c9 + 7 bytes
 
-_UnnamedText_55c59: ; 0x913d0
+_Route17AfterBattleTxt2: ; 0x913d0
 	db $0, "I could belly-", $4f
 	db "bump you outta", $55
 	db "here!", $57
 ; 0x913d0 + 37 bytes
 
-_UnnamedText_55c68: ; 0x913f5
+_Route17B4BattleTxt3: ; 0x913f5
 	db $0, "You heading to", $4f
 	db "FUCHSIA?", $57
 ; 0x913f5 + 25 bytes
 
-_UnnamedText_55c6d: ; 0x9140e
+_Route17EndBattleTxt3: ; 0x9140e
 	db $0, "Crash and", $4f
 	db "burn!", $58
 ; 0x9140e + 17 bytes
 
-_UnnamedText_55c72: ; 0x9141f
+_Route17AfterBattleTxt3: ; 0x9141f
 	db $0, "I love racing", $4f
 	db "downhill!", $57
 ; 0x9141f + 25 bytes
 
-_UnnamedText_55c81: ; 0x91438
+_Route17B4BattleTxt4: ; 0x91438
 	db $0, "We're BIKERs!", $4f
 	db "Highway stars!", $57
 ; 0x91438 + 29 bytes
 
-_UnnamedText_55c86: ; 0x91455
+_Route17EndBattleTxt4: ; 0x91455
 	db $0, "Smoked!", $58
 ; 0x91455 + 9 bytes
 
-_UnnamedText_55c8b: ; 0x9145e
+_Route17AfterBattleTxt4: ; 0x9145e
 	db $0, "Are you looking", $4f
 	db "for adventure?", $57
 ; 0x9145e + 32 bytes
 
-_UnnamedText_55c9a: ; 0x9147e
+_Route17B4BattleTxt5: ; 0x9147e
 	db $0, "Let VOLTORB", $4f
 	db "electrify you!", $57
 ; 0x9147e + 28 bytes
 
-_UnnamedText_55c9f: ; 0x9149a
+_Route17EndBattleTxt5: ; 0x9149a
 	db $0, "Grounded", $4f
 	db "out!", $58
 ; 0x9149a + 15 bytes
 
-_UnnamedText_55ca4: ; 0x914a9
+_Route17AfterBattleTxt5: ; 0x914a9
 	db $0, "I got my VOLTORB", $4f
 	db "at the abandoned", $55
 	db "POWER PLANT.", $57
 ; 0x914a9 + 48 bytes
 
-_UnnamedText_55cb3: ; 0x914d9
+_Route17B4BattleTxt6: ; 0x914d9
 	db $0, "My #MON won't", $4f
 	db "evolve! Why?", $57
 ; 0x914d9 + 27 bytes
 
-_UnnamedText_55cb8: ; 0x914f4
+_Route17EndBattleTxt6: ; 0x914f4
 	db $0, "Why,", $4f
 	db "you!", $58
 ; 0x914f4 + 11 bytes
 
-_UnnamedText_55cbd: ; 0x914ff
+_Route17AfterBattleTxt6: ; 0x914ff
 	db $0, "Maybe some #MON", $4f
 	db "need element", $55
 	db "STONEs to evolve.", $57
 ; 0x914ff + 48 bytes
 
-_UnnamedText_55ccc: ; 0x9152f
+_Route17B4BattleTxt7: ; 0x9152f
 	db $0, "I need a little", $4f
 	db "exercise!", $57
 ; 0x9152f + 27 bytes
 
-_UnnamedText_55cd1: ; 0x9154a
+_Route17EndBattleTxt7: ; 0x9154a
 	db $0, "Whew!", $4f
 	db "Good workout!", $58
 ; 0x9154a + 21 bytes
 
-_UnnamedText_55cd6: ; 0x9155f
+_Route17AfterBattleTxt7: ; 0x9155f
 	db $0, "I'm sure I lost", $4f
 	db "weight there!", $57
 ; 0x9155f + 30 bytes
 
-_UnnamedText_55ce5: ; 0x9157d
+_Route17B4BattleTxt8: ; 0x9157d
 	db $0, "Be a rebel!", $57
 ; 0x9157d + 13 bytes
 
-_UnnamedText_55cea: ; 0x9158a
+_Route17EndBattleTxt8: ; 0x9158a
 	db $0, "Aaaargh!", $58
 ; 0x9158a + 10 bytes
 
-_UnnamedText_55cef: ; 0x91594
+_Route17AfterBattleTxt8: ; 0x91594
 	db $0, "Be ready to fight", $4f
 	db "for your beliefs!", $57
 ; 0x91594 + 37 bytes
 
-_UnnamedText_55cfe: ; 0x915b9
+_Route17B4BattleTxt9: ; 0x915b9
 	db $0, "Nice BIKE!", $4f
 	db "How's it handle?", $57
 ; 0x915b9 + 28 bytes
 
-_UnnamedText_55d03: ; 0x915d5
+_Route17EndBattleTxt9: ; 0x915d5
 	db $0, "Shoot!", $58
 ; 0x915d5 + 8 bytes
 
-_UnnamedText_55d08: ; 0x915dd
+_Route17AfterBattleTxt9: ; 0x915dd
 	db $0, "The slope makes", $4f
 	db "it hard to steer!", $57
 ; 0x915dd + 35 bytes
 
-_UnnamedText_55d17: ; 0x91600
+_Route17B4BattleTxt10: ; 0x91600
 	db $0, "Get lost kid!", $4f
 	db "I'm bushed!", $57
 ; 0x91600 + 26 bytes
 
-_UnnamedText_55d1c: ; 0x9161a
+_Route17EndBattleTxt10: ; 0x9161a
 	db $0, "Are you", $4f
 	db "satisfied?", $58
 ; 0x9161a + 20 bytes
 
-_UnnamedText_55d21: ; 0x9162e
+_Route17AfterBattleTxt10: ; 0x9162e
 	db $0, "I need to catch", $4f
 	db "a few Zs!", $57
 ; 0x9162e + 27 bytes
@@ -65599,48 +65599,48 @@ _Route17Text16: ; 0x91782
 	db $0, "CYCLING ROAD", $4f
 	db "Slope ends here!", $57
 
-_UnnamedText_59b19: ; 0x917a1
+_Route18B4BattleTxt1: ; 0x917a1
 	db $0, "I always check", $4f
 	db "every grassy area", $55
 	db "for new #MON.", $57
 ; 0x917a1 + 48 bytes
 
-_UnnamedText_59b1e: ; 0x917d1
+_Route18EndBattleTxt1: ; 0x917d1
 	db $0, "Tch!", $58
 ; 0x917d1 + 6 bytes
 
-_UnnamedText_59b23: ; 0x917d7
+_Route18AfterBattleTxt1: ; 0x917d7
 	db $0, "I wish I had a", $4f
 	db "BIKE!", $57
 ; 0x917d7 + 22 bytes
 
-_UnnamedText_59b32: ; 0x917ed
+_Route18B4BattleTxt2: ; 0x917ed
 	db $0, "Kurukkoo!", $4f
 	db "How do you like", $55
 	db "my bird call?", $57
 ; 0x917ed + 41 bytes
 
-_UnnamedText_59b37: ; 0x91816
+_Route18EndBattleTxt2: ; 0x91816
 	db $0, "I", $4f
 	db "had to bug you!", $58
 ; 0x91816 + 19 bytes
 
-_UnnamedText_59b3c: ; 0x91829
+_Route18AfterBattleTxt2: ; 0x91829
 	db $0, "I also collect sea", $4f
 	db "#MON on", $55
 	db "weekends!", $57
 ; 0x91829 + 38 bytes
 
-_UnnamedText_59b4b: ; 0x9184f
+_Route18B4BattleTxt3: ; 0x9184f
 	db $0, "This is my turf!", $4f
 	db "Get out of here!", $57
 ; 0x9184f + 35 bytes
 
-_UnnamedText_59b50: ; 0x91872
+_Route18EndBattleTxt3: ; 0x91872
 	db $0, "Darn!", $58
 ; 0x91872 + 7 bytes
 
-_UnnamedText_59b55: ; 0x91879
+_Route18AfterBattleTxt3: ; 0x91879
 	db $0, "This is my fave", $4f
 	db "#MON hunting", $55
 	db "area!", $57
@@ -65656,153 +65656,153 @@ _Route18Text5: ; 0x918c3
 	db "No pedestrians", $55
 	db "permitted!", $57
 
-_UnnamedText_55e50: ; 0x918eb
+_Route19B4BattleTxt1: ; 0x918eb
 	db $0, "Have to warm up", $4f
 	db "before my swim!", $57
 ; 0x918eb + 33 bytes
 
-_UnnamedText_55e55: ; 0x9190c
+_Route19EndBattleTxt1: ; 0x9190c
 	db $0, "All", $4f
 	db "warmed up!", $58
 ; 0x9190c + 16 bytes
 
-_UnnamedText_55e5a: ; 0x9191c
+_Route19AfterBattleTxt1: ; 0x9191c
 	db $0, "Thanks, kid! I'm", $4f
 	db "ready for a swim!", $57
 ; 0x9191c + 35 bytes
 
-_UnnamedText_55e5f: ; 0x9193f
+_Route19B4BattleTxt2: ; 0x9193f
 	db $0, "Wait! You'll have", $4f
 	db "a heart attack!", $57
 ; 0x9193f + 34 bytes
 
-_UnnamedText_55e64: ; 0x91961
+_Route19EndBattleTxt2: ; 0x91961
 	db $0, "Ooh!", $4f
 	db "That's chilly!", $58
 ; 0x91961 + 20 bytes
 
-_UnnamedText_55e69: ; 0x91975
+_Route19AfterBattleTxt2: ; 0x91975
 	db $0, "Watch out for", $4f
 	db "TENTACOOL!", $57
 ; 0x91975 + 26 bytes
 
-_UnnamedText_55e6e: ; 0x9198f
+_Route19B4BattleTxt3: ; 0x9198f
 	db $0, "I love swimming!", $4f
 	db "What about you?", $57
 ; 0x9198f + 34 bytes
 
-_UnnamedText_55e73: ; 0x919b1
+_Route19EndBattleTxt3: ; 0x919b1
 	db $0, "Belly", $4f
 	db "flop!", $58
 ; 0x919b1 + 13 bytes
 
-_UnnamedText_55e78: ; 0x919be
+_Route19AfterBattleTxt3: ; 0x919be
 	db $0, "I can beat #MON", $4f
 	db "at swimming!", $57
 ; 0x919be + 30 bytes
 
-_UnnamedText_55e7d: ; 0x919dc
+_Route19B4BattleTxt4: ; 0x919dc
 	db $0, "What's beyond the", $4f
 	db "horizon?", $57
 ; 0x919dc + 27 bytes
 
-_UnnamedText_55e82: ; 0x919f7
+_Route19EndBattleTxt4: ; 0x919f7
 	db $0, "Glub!", $58
 ; 0x919f7 + 7 bytes
 
-_UnnamedText_55e87: ; 0x919fe
+_Route19AfterBattleTxt4: ; 0x919fe
 	db $0, "I see a couple of", $4f
 	db "islands!", $57
 ; 0x919fe + 28 bytes
 
-_UnnamedText_55e8c: ; 0x91a1a
+_Route19B4BattleTxt5: ; 0x91a1a
 	db $0, "I tried diving", $4f
 	db "for #MON, but", $55
 	db "it was a no go!", $57
 ; 0x91a1a + 46 bytes
 
-_UnnamedText_55e91: ; 0x91a48
+_Route19EndBattleTxt5: ; 0x91a48
 	db $0, "Help!", $58
 ; 0x91a48 + 7 bytes
 
-_UnnamedText_55e96: ; 0x91a4f
+_Route19AfterBattleTxt5: ; 0x91a4f
 	db $0, "You have to fish", $4f
 	db "for sea #MON!", $57
 ; 0x91a4f + 32 bytes
 
-_UnnamedText_55e9b: ; 0x91a6f
+_Route19B4BattleTxt6: ; 0x91a6f
 	db $0, "I look at the", $4f
 	db "sea to forget!", $57
 ; 0x91a6f + 30 bytes
 
-_UnnamedText_55ea0: ; 0x91a8d
+_Route19EndBattleTxt6: ; 0x91a8d
 	db $0, "Ooh!", $4f
 	db "Traumatic!", $58
 ; 0x91a8d + 17 bytes
 
-_UnnamedText_55ea5: ; 0x91a9e
+_Route19AfterBattleTxt6: ; 0x91a9e
 	db $0, "I'm looking at the", $4f
 	db "sea to forget!", $57
 ; 0x91a9e + 34 bytes
 
-_UnnamedText_55eaa: ; 0x91ac0
+_Route19B4BattleTxt7: ; 0x91ac0
 	db $0, "Oh, I just love", $4f
 	db "your ride! Can I", $55
 	db "have it if I win?", $57
 ; 0x91ac0 + 52 bytes
 
-_UnnamedText_55eaf: ; 0x91af4
+_Route19EndBattleTxt7: ; 0x91af4
 	db $0, "Oh!", $4f
 	db "I lost!", $58
 ; 0x91af4 + 13 bytes
 
-_UnnamedText_55eb4: ; 0x91b01
+_Route19AfterBattleTxt7: ; 0x91b01
 	db $0, "It's still a long", $4f
 	db "way to go to", $55
 	db "SEAFOAM ISLANDS.", $57
 ; 0x91b01 + 48 bytes
 
-_UnnamedText_55eb9: ; 0x91b31
+_Route19B4BattleTxt8: ; 0x91b31
 	db $0, "Swimming's great!", $4f
 	db "Sunburns aren't!", $57
 ; 0x91b31 + 34 bytes
 
-_UnnamedText_55ebe: ; 0x91b53
+_Route19EndBattleTxt8: ; 0x91b53
 	db $0, "Shocker!", $58
 ; 0x91b53 + 10 bytes
 
-_UnnamedText_55ec3: ; 0x91b5d
+_Route19AfterBattleTxt8: ; 0x91b5d
 	db $0, "My boy friend", $4f
 	db "wanted to swim to", $55
 	db "SEAFOAM ISLANDS.", $57
 ; 0x91b5d + 50 bytes
 
-_UnnamedText_55ec8: ; 0x91b8f
+_Route19B4BattleTxt9: ; 0x91b8f
 	db $0, "These waters are", $4f
 	db "treacherous!", $57
 ; 0x91b8f + 31 bytes
 
-_UnnamedText_55ecd: ; 0x91bae
+_Route19EndBattleTxt9: ; 0x91bae
 	db $0, "Ooh!", $4f
 	db "Dangerous!", $58
 ; 0x91bae + 17 bytes
 
-_UnnamedText_55ed2: ; 0x91bbf
+_Route19AfterBattleTxt9: ; 0x91bbf
 	db $0, "I got a cramp!", $4f
 	db "Glub, glub...", $57
 ; 0x91bbf + 30 bytes
 
-_UnnamedText_55ed7: ; 0x91bdd
+_Route19B4BattleTxt10: ; 0x91bdd
 	db $0, "I swam here, but", $4f
 	db "I'm tired.", $57
 ; 0x91bdd + 28 bytes
 
-_UnnamedText_55edc: ; 0x91bf9
+_Route19EndBattleTxt10: ; 0x91bf9
 	db $0, "I'm", $4f
 	db "exhausted...", $58
 ; 0x91bf9 + 17 bytes
 
-_UnnamedText_55ee1: ; 0x91c0a
+_Route19AfterBattleTxt10: ; 0x91c0a
 	db $0, "LAPRAS is so big,", $4f
 	db "it must keep you", $55
 	db "dry on water.", $57
@@ -65813,154 +65813,154 @@ _Route19Text11: ; 0x91c3c
 	db "FUCHSIA CITY -", $55
 	db "SEAFOAM ISLANDS", $57
 
-_UnnamedText_50e17: ; 0x91c69
+_Route20B4BattleTxt1: ; 0x91c69
 	db $0, "The water is", $4f
 	db "shallow here.", $57
 ; 0x91c69 + 28 bytes
 
-_UnnamedText_50e1c: ; 0x91c85
+_Route20EndBattleTxt1: ; 0x91c85
 	db $0, "Splash!", $58
 ; 0x91c85 + 9 bytes
 
-_UnnamedText_50e21: ; 0x91c8e
+_Route20AfterBattleTxt1: ; 0x91c8e
 	db $0, "I wish I could", $4f
 	db "ride my #MON.", $57
 ; 0x91c8e + 30 bytes
 
-_UnnamedText_50e26: ; 0x91cac
+_Route20B4BattleTxt2: ; 0x91cac
 	db $0, "SEAFOAM is a", $4f
 	db "quiet getaway!", $57
 ; 0x91cac + 29 bytes
 
-_UnnamedText_50e2b: ; 0x91cc9
+_Route20EndBattleTxt2: ; 0x91cc9
 	db $0, "Quit it!", $58
 ; 0x91cc9 + 10 bytes
 
-_UnnamedText_50e30: ; 0x91cd3
+_Route20AfterBattleTxt2: ; 0x91cd3
 	db $0, "There's a huge", $4f
 	db "cavern underneath", $55
 	db "this island.", $57
 ; 0x91cd3 + 46 bytes
 
-_UnnamedText_50e35: ; 0x91d01
+_Route20B4BattleTxt3: ; 0x91d01
 	db $0, "I love floating", $4f
 	db "with the fishes!", $57
 ; 0x91d01 + 34 bytes
 
-_UnnamedText_50e3a: ; 0x91d23
+_Route20EndBattleTxt3: ; 0x91d23
 	db $0, "Yowch!", $58
 ; 0x91d23 + 8 bytes
 
-_UnnamedText_50e3f: ; 0x91d2b
+_Route20AfterBattleTxt3: ; 0x91d2b
 	db $0, "Want to float", $4f
 	db "with me?", $57
 ; 0x91d2b + 24 bytes
 
-_UnnamedText_50e44: ; 0x91d43
+_Route20B4BattleTxt4: ; 0x91d43
 	db $0, "Are you on", $4f
 	db "vacation too?", $57
 ; 0x91d43 + 26 bytes
 
-_UnnamedText_50e49: ; 0x91d5d
+_Route20EndBattleTxt4: ; 0x91d5d
 	db $0, "No", $4f
 	db "mercy at all!", $58
 ; 0x91d5d + 18 bytes
 
-_UnnamedText_50e4e: ; 0x91d6f
+_Route20AfterBattleTxt4: ; 0x91d6f
 	db $0, "SEAFOAM used to", $4f
 	db "be one island!", $57
 ; 0x91d6f + 32 bytes
 
-_UnnamedText_50e53: ; 0x91d8f
+_Route20B4BattleTxt5: ; 0x91d8f
 	db $0, "Check out my buff", $4f
 	db "physique!", $57
 ; 0x91d8f + 29 bytes
 
-_UnnamedText_50e58: ; 0x91dac
+_Route20EndBattleTxt5: ; 0x91dac
 	db $0, "Wimpy!", $58
 ; 0x91dac + 8 bytes
 
-_UnnamedText_50e5d: ; 0x91db4
+_Route20AfterBattleTxt5: ; 0x91db4
 	db $0, "I should've been", $4f
 	db "buffing up my", $55
 	db "#MON, not me!", $57
 ; 0x91db4 + 45 bytes
 
-_UnnamedText_50e62: ; 0x91de1
+_Route20B4BattleTxt6: ; 0x91de1
 	db $0, "Why are you", $4f
 	db "riding a #MON?", $55
 	db "Can't you swim?", $57
 ; 0x91de1 + 43 bytes
 
-_UnnamedText_50e67: ; 0x91e0c
+_Route20EndBattleTxt6: ; 0x91e0c
 	db $0, "Ouch!", $4f
 	db "Torpedoed!", $58
 ; 0x91e0c + 18 bytes
 
-_UnnamedText_50e6c: ; 0x91e1e
+_Route20AfterBattleTxt6: ; 0x91e1e
 	db $0, "Riding a #MON", $4f
 	db "sure looks fun!", $57
 ; 0x91e1e + 31 bytes
 
-_UnnamedText_50e71: ; 0x91e3d
+_Route20B4BattleTxt7: ; 0x91e3d
 	db $0, "I rode my bird", $4f
 	db "#MON here!", $57
 ; 0x91e3d + 27 bytes
 
-_UnnamedText_50e76: ; 0x91e58
+_Route20EndBattleTxt7: ; 0x91e58
 	db $0, "Oh", $4f
 	db "no!", $58
 ; 0x91e58 + 8 bytes
 
-_UnnamedText_50e7b: ; 0x91e60
+_Route20AfterBattleTxt7: ; 0x91e60
 	db $0, "My birds can't", $4f
 	db "FLY me back!", $57
 ; 0x91e60 + 28 bytes
 
-_UnnamedText_50e80: ; 0x91e7c
+_Route20B4BattleTxt8: ; 0x91e7c
 	db $0, "My boy friend gave", $4f
 	db "me big pearls!", $57
 ; 0x91e7c + 35 bytes
 
-_UnnamedText_50e85: ; 0x91e9f
+_Route20EndBattleTxt8: ; 0x91e9f
 	db $0, "Don't", $4f
 	db "touch my pearls!", $58
 ; 0x91e9f + 23 bytes
 
-_UnnamedText_50e8a: ; 0x91eb6
+_Route20AfterBattleTxt8: ; 0x91eb6
 	db $0, "Will my pearls", $4f
 	db "grow bigger", $55
 	db "inside CLOYSTER?", $57
 ; 0x91eb6 + 45 bytes
 
-_UnnamedText_50e8f: ; 0x91ee3
+_Route20B4BattleTxt9: ; 0x91ee3
 	db $0, "I swam here from", $4f
 	db "CINNABAR ISLAND!", $57
 ; 0x91ee3 + 35 bytes
 
-_UnnamedText_50e94: ; 0x91f06
+_Route20EndBattleTxt9: ; 0x91f06
 	db $0, "I'm", $4f
 	db "so disappointed!", $58
 ; 0x91f06 + 21 bytes
 
-_UnnamedText_50e99: ; 0x91f1b
+_Route20AfterBattleTxt9: ; 0x91f1b
 	db $0, "#MON have", $4f
 	db "taken over an", $55
 	db "abandoned mansion", $55
 	db "on CINNABAR!", $57
 ; 0x91f1b + 56 bytes
 
-_UnnamedText_50e9e: ; 0x91f53
+_Route20B4BattleTxt10: ; 0x91f53
 	db $0, "CINNABAR, in the", $4f
 	db "west, has a LAB", $55
 	db "for #MON.", $57
 ; 0x91f53 + 44 bytes
 
-_UnnamedText_50ea3: ; 0x91f7f
+_Route20EndBattleTxt10: ; 0x91f7f
 	db $0, "Wait!", $58
 ; 0x91f7f + 7 bytes
 
-_UnnamedText_50ea8: ; 0x91f86
+_Route20AfterBattleTxt10: ; 0x91f86
 	db $0, "CINNABAR is a ", $4f
 	db "volcanic island!", $57
 ; 0x91f86 + 33 bytes
@@ -65969,140 +65969,140 @@ _Route20Text12: ; 0x91fa7
 _Route20Text11: ; 0x91fa7
 	db $0, "SEAFOAM ISLANDS", $57
 
-_UnnamedText_55fdd: ; 0x91fb8
+_Route21B4BattleTxt1: ; 0x91fb8
 	db $0, "You want to know", $4f
 	db "if the fish are", $55
 	db "biting?", $57
 ; 0x91fb8 + 42 bytes
 
-_UnnamedText_55fe2: ; 0x91fe2
+_Route21EndBattleTxt1: ; 0x91fe2
 	db $0, "Dang!", $58
 ; 0x91fe2 + 7 bytes
 
-_UnnamedText_55fe7: ; 0x91fe9
+_Route21AfterBattleTxt1: ; 0x91fe9
 	db $0, "I can't catch", $4f
 	db "anything good!", $57
 ; 0x91fe9 + 29 bytes
 
-_UnnamedText_55fec: ; 0x92006
+_Route21B4BattleTxt2: ; 0x92006
 	db $0, "I got a big haul!", $4f
 	db "Wanna go for it?", $57
 ; 0x92006 + 36 bytes
 
-_UnnamedText_55ff1: ; 0x9202a
+_Route21EndBattleTxt2: ; 0x9202a
 	db $0, "Darn", $4f
 	db "MAGIKARP!", $58
 ; 0x9202a + 16 bytes
 
-_UnnamedText_55ff6: ; 0x9203a
+_Route21AfterBattleTxt2: ; 0x9203a
 	db $0, "I seem to only", $4f
 	db "catch MAGIKARP!", $57
 ; 0x9203a + 32 bytes
 
-_UnnamedText_55ffb: ; 0x9205a
+_Route21B4BattleTxt3: ; 0x9205a
 	db $0, "The sea cleanses", $4f
 	db "my body and soul!", $57
 ; 0x9205a + 36 bytes
 
-_UnnamedText_56000: ; 0x9207e
+_Route21EndBattleTxt3: ; 0x9207e
 	db $0, "Ayah!", $58
 ; 0x9207e + 7 bytes
 
-_UnnamedText_56005: ; 0x92085
+_Route21AfterBattleTxt3: ; 0x92085
 	db $0, "I like the", $4f
 	db "mountains too!", $57
 ; 0x92085 + 27 bytes
 
-_UnnamedText_5600a: ; 0x920a0
+_Route21B4BattleTxt4: ; 0x920a0
 	db $0, "What's wrong with", $4f
 	db "me swimming?", $57
 ; 0x920a0 + 31 bytes
 
-_UnnamedText_5600f: ; 0x920bf
+_Route21EndBattleTxt4: ; 0x920bf
 	db $0, "Cheap", $4f
 	db "shot!", $58
 ; 0x920bf + 13 bytes
 
-_UnnamedText_56014: ; 0x920cc
+_Route21AfterBattleTxt4: ; 0x920cc
 	db $0, "I look like what?", $4f
 	db "A studded inner", $55
 	db "tube? Get lost!", $57
 ; 0x920cc + 51 bytes
 
-_UnnamedText_56019: ; 0x920ff
+_Route21B4BattleTxt5: ; 0x920ff
 	db $0, "I caught all my", $4f
 	db "#MON at sea!", $57
 ; 0x920ff + 30 bytes
 
-_UnnamedText_5601e: ; 0x9211d
+_Route21EndBattleTxt5: ; 0x9211d
 	db $0, "Diver!!", $4f
 	db "Down!!", $58
 ; 0x9211d + 16 bytes
 
-_UnnamedText_56023: ; 0x9212d
+_Route21AfterBattleTxt5: ; 0x9212d
 	db $0, "Where'd you catch", $4f
 	db "your #MON?", $57
 ; 0x9212d + 29 bytes
 
-_UnnamedText_56028: ; 0x9214a
+_Route21B4BattleTxt6: ; 0x9214a
 	db $0, "Right now, I'm in", $4f
 	db "a triathlon meet!", $57
 ; 0x9214a + 36 bytes
 
-_UnnamedText_5602d: ; 0x9216e
+_Route21EndBattleTxt6: ; 0x9216e
 	db $0, "Pant...", $4f
 	db "pant...pant...", $58
 ; 0x9216e + 24 bytes
 
-_UnnamedText_56032: ; 0x92186
+_Route21AfterBattleTxt6: ; 0x92186
 	db $0, "I'm beat!", $4f
 	db "But, I still have", $55
 	db "the bike race and", $55
 	db "marathon left!", $57
 ; 0x92186 + 61 bytes
 
-_UnnamedText_56037: ; 0x921c3
+_Route21B4BattleTxt7: ; 0x921c3
 	db $0, "Ahh! Feel the sun", $4f
 	db "and the wind!", $57
 ; 0x921c3 + 33 bytes
 
-_UnnamedText_5603c: ; 0x921e4
+_Route21EndBattleTxt7: ; 0x921e4
 	db $0, "Yow!", $4f
 	db "I lost!", $58
 ; 0x921e4 + 14 bytes
 
-_UnnamedText_56041: ; 0x921f2
+_Route21AfterBattleTxt7: ; 0x921f2
 	db $0, "I'm sunburnt to a", $4f
 	db "crisp!", $57
 ; 0x921f2 + 25 bytes
 
-_UnnamedText_56046: ; 0x9220b
+_Route21B4BattleTxt8: ; 0x9220b
 	db $0, "Hey, don't scare", $4f
 	db "away the fish!", $57
 ; 0x9220b + 32 bytes
 
-_UnnamedText_5604b: ; 0x9222b
+_Route21EndBattleTxt8: ; 0x9222b
 	db $0, "Sorry!", $4f
 	db "I didn't mean it!", $58
 ; 0x9222b + 25 bytes
 
-_UnnamedText_56050: ; 0x92244
+_Route21AfterBattleTxt8: ; 0x92244
 	db $0, "I was just angry", $4f
 	db "that I couldn't", $55
 	db "catch anything.", $57
 ; 0x92244 + 49 bytes
 
-_UnnamedText_56055: ; 0x92275
+_Route21B4BattleTxt9: ; 0x92275
 	db $0, "Keep me company", $4f
 	db "'til I get a hit!", $57
 ; 0x92275 + 34 bytes
 
-_UnnamedText_5605a: ; 0x92297
+_Route21EndBattleTxt9: ; 0x92297
 	db $0, "That", $4f
 	db "burned some time.", $58
 ; 0x92297 + 24 bytes
 
-_UnnamedText_5605f: ; 0x922af
+_Route21AfterBattleTxt9: ; 0x922af
 	db $0, "Oh wait! I got a", $4f
 	db "bite! Yeah!", $57
 ; 0x922af + 30 bytes
@@ -66303,85 +66303,85 @@ _UnnamedText_51530: ; 0x928a0
 	db "TEAM ROCKET!", $57
 ; 0x928a0 + 66 bytes
 
-_UnnamedText_51571: ; 0x928e2
+_Route24B4BattleTxt1: ; 0x928e2
 	db $0, "I saw your feat", $4f
 	db "from the grass!", $57
 ; 0x928e2 + 33 bytes
 
 SECTION "bank25",DATA,BANK[$25]
 
-_UnnamedText_51576: ; 0x94000
+_Route24EndBattleTxt1: ; 0x94000
 	db $0, "I", $4f
 	db "thought not!", $58
 ; 0x94000 + 16 bytes
 
-_UnnamedText_5157b: ; 0x94010
+_Route24AfterBattleTxt1: ; 0x94010
 	db $0, "I hid because the", $4f
 	db "people on the", $55
 	db "bridge scared me!", $57
 ; 0x94010 + 51 bytes
 
-_UnnamedText_51580: ; 0x94043
+_Route24B4BattleTxt2: ; 0x94043
 	db $0, "OK! I'm No. 5!", $4f
 	db "I'll stomp you!", $57
 ; 0x94043 + 30 bytes
 
-_UnnamedText_51585: ; 0x94061
+_Route24EndBattleTxt2: ; 0x94061
 	db $0, "Whoa!", $4f
 	db "Too much!", $58
 ; 0x94061 + 17 bytes
 
-_UnnamedText_5158a: ; 0x94072
+_Route24AfterBattleTxt2: ; 0x94072
 	db $0, "I did my best, I", $4f
 	db "have no regrets!", $57
 ; 0x94072 + 35 bytes
 
-_UnnamedText_5158f: ; 0x94095
+_Route24B4BattleTxt3: ; 0x94095
 	db $0, "I'm No. 4!", $4f
 	db "Getting tired?", $57
 ; 0x94095 + 26 bytes
 
-_UnnamedText_51594: ; 0x940af
+_Route24EndBattleTxt3: ; 0x940af
 	db $0, "I lost", $4f
 	db "too!", $58
 ; 0x940af + 13 bytes
 
-_UnnamedText_51599: ; 0x940bc
+_Route24AfterBattleTxt3: ; 0x940bc
 	db $0, "I did my best, so", $4f
 	db "I've no regrets!", $57
 ; 0x940bc + 35 bytes
 
-_UnnamedText_5159e: ; 0x940df
+_Route24B4BattleTxt4: ; 0x940df
 	db $0, "Here's No. 3!", $4f
 	db "I won't be easy!", $57
 ; 0x940df + 30 bytes
 
-_UnnamedText_515a3: ; 0x940fd
+_Route24EndBattleTxt4: ; 0x940fd
 	db $0, "Ow!", $4f
 	db "Stomped flat!", $58
 ; 0x940fd + 19 bytes
 
-_UnnamedText_515a8: ; 0x94110
+_Route24AfterBattleTxt4: ; 0x94110
 	db $0, "I did my best, I", $4f
 	db "have no regrets!", $57
 ; 0x94110 + 35 bytes
 
-_UnnamedText_515ad: ; 0x94133
+_Route24B4BattleTxt5: ; 0x94133
 	db $0, "I'm second!", $4f
 	db "Now it's serious!", $57
 ; 0x94133 + 29 bytes
 
-_UnnamedText_515b2: ; 0x94150
+_Route24EndBattleTxt5: ; 0x94150
 	db $0, "How could I", $4f
 	db "lose?", $58
 ; 0x94150 + 19 bytes
 
-_UnnamedText_515b7: ; 0x94163
+_Route24AfterBattleTxt5: ; 0x94163
 	db $0, "I did my best, I", $4f
 	db "have no regrets!", $57
 ; 0x94163 + 35 bytes
 
-_UnnamedText_515bc: ; 0x94186
+_Route24B4BattleTxt6: ; 0x94186
 	db $0, "This is NUGGET", $4f
 	db "BRIDGE! Beat us 5", $55
 	db "trainers and win", $55
@@ -66390,163 +66390,163 @@ _UnnamedText_515bc: ; 0x94186
 	db "what it takes?", $57
 ; 0x94186 + 98 bytes
 
-_UnnamedText_515c1: ; 0x941e8
+_Route24EndBattleTxt6: ; 0x941e8
 	db $0, "Whoo!", $4f
 	db "Good stuff!", $58
 ; 0x941e8 + 19 bytes
 
-_UnnamedText_515c6: ; 0x941fb
+_Route24AfterBattleTxt6: ; 0x941fb
 	db $0, "I did my best, I", $4f
 	db "have no regrets!", $57
 ; 0x941fb + 35 bytes
 
-_UnnamedText_51705: ; 0x9421e
+_Route25B4BattleTxt1: ; 0x9421e
 	db $0, "Local trainers", $4f
 	db "come here to", $55
 	db "practice!", $57
 ; 0x9421e + 39 bytes
 
-_UnnamedText_5170a: ; 0x94245
+_Route25EndBattleTxt1: ; 0x94245
 	db $0, "You're", $4f
 	db "decent.", $58
 ; 0x94245 + 15 bytes
 
-_UnnamedText_5170f: ; 0x94254
+_Route25AfterBattleTxt1: ; 0x94254
 	db $0, "All #MON have", $4f
 	db "weaknesses. It's", $55
 	db "best to raise", $55
 	db "different kinds.", $57
 ; 0x94254 + 62 bytes
 
-_UnnamedText_51714: ; 0x94292
+_Route25B4BattleTxt2: ; 0x94292
 	db $0, "Dad took me to a", $4f
 	db "great party on", $55
 	db "S.S.ANNE at", $55
 	db "VERMILION CITY!", $57
 ; 0x94292 + 61 bytes
 
-_UnnamedText_51719: ; 0x942cf
+_Route25EndBattleTxt2: ; 0x942cf
 	db $0, "I'm", $4f
 	db "not mad!", $58
 ; 0x942cf + 13 bytes
 
-_UnnamedText_5171e: ; 0x942dc
+_Route25AfterBattleTxt2: ; 0x942dc
 	db $0, "On S.S.ANNE, I", $4f
 	db "saw trainers from", $55
 	db "around the world.", $57
 ; 0x942dc + 52 bytes
 
-_UnnamedText_51723: ; 0x94310
+_Route25B4BattleTxt3: ; 0x94310
 	db $0, "I'm a cool guy.", $4f
 	db "I've got a girl", $55
 	db "friend!", $57
 ; 0x94310 + 39 bytes
 
-_UnnamedText_51728: ; 0x94337
+_Route25EndBattleTxt3: ; 0x94337
 	db $0, "Aww,", $4f
 	db "darn...", $58
 ; 0x94337 + 14 bytes
 
-_UnnamedText_5172d: ; 0x94345
+_Route25AfterBattleTxt3: ; 0x94345
 	db $0, "Oh well. My girl", $4f
 	db "will cheer me up.", $57
 ; 0x94345 + 36 bytes
 
-_UnnamedText_51732: ; 0x94369
+_Route25B4BattleTxt4: ; 0x94369
 	db $0, "Hi! My boy", $4f
 	db "friend is cool!", $57
 ; 0x94369 + 28 bytes
 
-_UnnamedText_51737: ; 0x94385
+_Route25EndBattleTxt4: ; 0x94385
 	db $0, "I was in", $4f
 	db "bad condition!", $58
 ; 0x94385 + 25 bytes
 
-_UnnamedText_5173c: ; 0x9439e
+_Route25AfterBattleTxt4: ; 0x9439e
 	db $0, "I wish my guy was", $4f
 	db "as good as you!", $57
 ; 0x9439e + 35 bytes
 
-_UnnamedText_51741: ; 0x943c1
+_Route25B4BattleTxt5: ; 0x943c1
 	db $0, "I knew I had to", $4f
 	db "fight you!", $57
 ; 0x943c1 + 28 bytes
 
-_UnnamedText_51746: ; 0x943dd
+_Route25EndBattleTxt5: ; 0x943dd
 	db $0, "I knew", $4f
 	db "I'd lose too!", $58
 ; 0x943dd + 21 bytes
 
-_UnnamedText_5174b: ; 0x943f2
+_Route25AfterBattleTxt5: ; 0x943f2
 	db $0, "If your #MON", $4f
 	db "gets confused or", $55
 	db "falls asleep,", $55
 	db "switch it!", $57
 ; 0x943f2 + 56 bytes
 
-_UnnamedText_51750: ; 0x9442a
+_Route25B4BattleTxt6: ; 0x9442a
 	db $0, "My friend has a", $4f
 	db "cute #MON.", $55
 	db "I'm so jealous!", $57
 ; 0x9442a + 43 bytes
 
-_UnnamedText_51755: ; 0x94455
+_Route25EndBattleTxt6: ; 0x94455
 	db $0, "I'm", $4f
 	db "not so jealous!", $58
 ; 0x94455 + 20 bytes
 
-_UnnamedText_5175a: ; 0x94469
+_Route25AfterBattleTxt6: ; 0x94469
 	db $0, "You came from MT.", $4f
 	db "MOON? May I have", $55
 	db "a CLEFAIRY?", $57
 ; 0x94469 + 48 bytes
 
-_UnnamedText_5175f: ; 0x94499
+_Route25B4BattleTxt7: ; 0x94499
 	db $0, "I just got down", $4f
 	db "from MT.MOON,", $55
 	db "but I'm ready!", $57
 ; 0x94499 + 45 bytes
 
-_UnnamedText_51764: ; 0x944c6
+_Route25EndBattleTxt7: ; 0x944c6
 	db $0, "You", $4f
 	db "worked hard!", $58
 ; 0x944c6 + 18 bytes
 
-_UnnamedText_51769: ; 0x944d8
+_Route25AfterBattleTxt7: ; 0x944d8
 	db $0, "Drat!", $4f
 	db "A ZUBAT bit me", $55
 	db "back in there.", $57
 ; 0x944d8 + 37 bytes
 
-_UnnamedText_5176e: ; 0x944fd
+_Route25B4BattleTxt8: ; 0x944fd
 	db $0, "I'm off to see a", $4f
 	db "#MON collector", $55
 	db "at the cape!", $57
 ; 0x944fd + 45 bytes
 
-_UnnamedText_51773: ; 0x9452a
+_Route25EndBattleTxt8: ; 0x9452a
 	db $0, "You", $4f
 	db "got me.", $58
 ; 0x9452a + 13 bytes
 
-_UnnamedText_51778: ; 0x94537
+_Route25AfterBattleTxt8: ; 0x94537
 	db $0, "The collector has", $4f
 	db "many rare kinds", $55
 	db "of #MON.", $57
 ; 0x94537 + 44 bytes
 
-_UnnamedText_5177d: ; 0x94563
+_Route25B4BattleTxt9: ; 0x94563
 	db $0, "You're going to", $4f
 	db "see BILL? First,", $55
 	db "let's fight!", $57
 ; 0x94563 + 45 bytes
 
-_UnnamedText_51782: ; 0x94590
+_Route25EndBattleTxt9: ; 0x94590
 	db $0, "You're", $4f
 	db "something.", $58
 ; 0x94590 + 18 bytes
 
-_UnnamedText_51787: ; 0x945a2
+_Route25AfterBattleTxt9: ; 0x945a2
 	db $0, "The trail below", $4f
 	db "is a shortcut to", $55
 	db "CERULEAN CITY.", $57
@@ -67517,131 +67517,131 @@ _UnnamedText_74aee: ; 0x96104
 	db "space for this!", $57
 ; 0x96104 + 33 bytes
 
-_UnnamedText_74afd: ; 0x96125
+_ViridianGymB4BattleTxt1: ; 0x96125
 	db $0, "Heh! You must be", $4f
 	db "running out of", $55
 	db "steam by now!", $57
 ; 0x96125 + 47 bytes
 
-_UnnamedText_74b02: ; 0x96154
+_ViridianGymEndBattleTxt1: ; 0x96154
 	db $0, "I", $4f
 	db "ran out of gas!", $58
 ; 0x96154 + 19 bytes
 
-_UnnamedText_74b07: ; 0x96167
+_ViridianGymAfterBattleTxt1: ; 0x96167
 	db $0, "You need power to", $4f
 	db "keep up with our", $55
 	db "GYM LEADER!", $57
 ; 0x96167 + 48 bytes
 
-_UnnamedText_74b16: ; 0x96197
+_ViridianGymB4BattleTxt2: ; 0x96197
 	db $0, "Rrrroar! I'm", $4f
 	db "working myself", $55
 	db "into a rage!", $57
 ; 0x96197 + 41 bytes
 
-_UnnamedText_74b1b: ; 0x961c0
+_ViridianGymEndBattleTxt2: ; 0x961c0
 	db $0, "Wargh!", $58
 ; 0x961c0 + 8 bytes
 
-_UnnamedText_74b20: ; 0x961c8
+_ViridianGymAfterBattleTxt2: ; 0x961c8
 	db $0, "I'm still not", $4f
 	db "worthy!", $57
 ; 0x961c8 + 22 bytes
 
-_UnnamedText_74b2f: ; 0x961de
+_ViridianGymB4BattleTxt3: ; 0x961de
 	db $0, "#MON and I, we", $4f
 	db "make wonderful", $55
 	db "music together!", $57
 ; 0x961de + 47 bytes
 
-_UnnamedText_74b34: ; 0x9620d
+_ViridianGymEndBattleTxt3: ; 0x9620d
 	db $0, "You are in", $4f
 	db "perfect harmony!", $58
 ; 0x9620d + 29 bytes
 
-_UnnamedText_74b39: ; 0x9622a
+_ViridianGymAfterBattleTxt3: ; 0x9622a
 	db $0, "Do you know the", $4f
 	db "identity of our", $55
 	db "GYM LEADER?", $57
 ; 0x9622a + 45 bytes
 
-_UnnamedText_74b48: ; 0x96257
+_ViridianGymB4BattleTxt4: ; 0x96257
 	db $0, "Karate is the", $4f
 	db "ultimate form of", $55
 	db "martial arts!", $57
 ; 0x96257 + 46 bytes
 
-_UnnamedText_74b4d: ; 0x96285
+_ViridianGymEndBattleTxt4: ; 0x96285
 	db $0, "Atcho!", $58
 ; 0x96285 + 8 bytes
 
-_UnnamedText_74b52: ; 0x9628d
+_ViridianGymAfterBattleTxt4: ; 0x9628d
 	db $0, "If my #MON", $4f
 	db "were as good at", $55
 	db "Karate as I...", $57
 ; 0x9628d + 43 bytes
 
-_UnnamedText_74b61: ; 0x962b8
+_ViridianGymB4BattleTxt5: ; 0x962b8
 	db $0, "The truly talented", $4f
 	db "win with style!", $57
 ; 0x962b8 + 36 bytes
 
-_UnnamedText_74b66: ; 0x962dc
+_ViridianGymEndBattleTxt5: ; 0x962dc
 	db $0, "I", $4f
 	db "lost my grip!", $58
 ; 0x962dc + 17 bytes
 
-_UnnamedText_74b6b: ; 0x962ed
+_ViridianGymAfterBattleTxt5: ; 0x962ed
 	db $0, "The LEADER will", $4f
 	db "scold me!", $57
 ; 0x962ed + 27 bytes
 
-_UnnamedText_74b7a: ; 0x96308
+_ViridianGymB4BattleTxt6: ; 0x96308
 	db $0, "I'm the KARATE", $4f
 	db "KING! Your fate", $55
 	db "rests with me!", $57
 ; 0x96308 + 46 bytes
 
-_UnnamedText_74b7f: ; 0x96336
+_ViridianGymEndBattleTxt6: ; 0x96336
 	db $0, "Ayah!", $58
 ; 0x96336 + 7 bytes
 
-_UnnamedText_74b84: ; 0x9633d
+_ViridianGymAfterBattleTxt6: ; 0x9633d
 	db $0, "#MON LEAGUE?", $4f
 	db "You? Don't get", $55
 	db "cocky!", $57
 ; 0x9633d + 35 bytes
 
-_UnnamedText_74b93: ; 0x96360
+_ViridianGymB4BattleTxt7: ; 0x96360
 	db $0, "Your #MON will", $4f
 	db "cower at the", $55
 	db "crack of my whip!", $57
 ; 0x96360 + 47 bytes
 
-_UnnamedText_74b98: ; 0x9638f
+_ViridianGymEndBattleTxt7: ; 0x9638f
 	db $0, "Yowch!", $4f
 	db "Whiplash!", $58
 ; 0x9638f + 18 bytes
 
-_UnnamedText_74b9d: ; 0x963a1
+_ViridianGymAfterBattleTxt7: ; 0x963a1
 	db $0, "Wait! I was just", $4f
 	db "careless!", $57
 ; 0x963a1 + 28 bytes
 
-_UnnamedText_74bac: ; 0x963bd
+_ViridianGymB4BattleTxt8: ; 0x963bd
 	db $0, "VIRIDIAN GYM was", $4f
 	db "closed for a long", $55
 	db "time, but now our", $55
 	db "LEADER is back!", $57
 ; 0x963bd + 70 bytes
 
-_UnnamedText_74bb1: ; 0x96403
+_ViridianGymEndBattleTxt8: ; 0x96403
 	db $0, "I", $4f
 	db "was beaten?", $58
 ; 0x96403 + 15 bytes
 
-_UnnamedText_74bb6: ; 0x96412
+_ViridianGymAfterBattleTxt8: ; 0x96412
 	db $0, "You can go onto", $4f
 	db "#MON LEAGUE", $55
 	db "only by defeating", $55
@@ -67895,7 +67895,7 @@ _UnnamedText_5c4c1: ; 0x98232
 	db "used any time!", $58
 ; 0x98232 + 124 bytes
 
-_UnnamedText_5c4d0: ; 0x982ae
+_PewterGymB4BattleTxt1: ; 0x982ae
 	db $0, "Stop right there,", $4f
 	db "kid!", $51
 	db "You're still light", $4f
@@ -67903,14 +67903,14 @@ _UnnamedText_5c4d0: ; 0x982ae
 	db "BROCK!", $57
 ; 0x982ae + 67 bytes
 
-_UnnamedText_5c4d5: ; 0x982f1
+_PewterGymEndBattleTxt1: ; 0x982f1
 	db $0, "Darn!", $51
 	db "Light years isn't", $4f
 	db "time! It measures", $55
 	db "distance!", $58
 ; 0x982f1 + 52 bytes
 
-_UnnamedText_5c4da: ; 0x98325
+_PewterGymAfterBattleTxt1: ; 0x98325
 	db $0, "You're pretty hot,", $4f
 	db "but not as hot", $55
 	db "as BROCK!", $57
@@ -68137,36 +68137,36 @@ _UnnamedText_5c7d8: ; 0x98bb0
 	db "show you beat me!@@"
 ; 0x98c05
 
-_UnnamedText_5c7e9: ; 0x98c05
+_CeruleanGymB4BattleTxt1: ; 0x98c05
 	db $0, "I'm more than good", $4f
 	db "enough for you!", $51
 	db "MISTY can wait!", $57
 ; 0x98c05 + 51 bytes
 
-_UnnamedText_5c7ee: ; 0x98c38
+_CeruleanGymEndBattleTxt1: ; 0x98c38
 	db $0, "You", $4f
 	db "overwhelmed me!", $58
 ; 0x98c38 + 21 bytes
 
-_UnnamedText_5c7f3: ; 0x98c4d
+_CeruleanGymAfterBattleTxt1: ; 0x98c4d
 	db $0, "You have to face", $4f
 	db "other trainers to", $55
 	db "find out how good", $55
 	db "you really are.", $57
 ; 0x98c4d + 70 bytes
 
-_UnnamedText_5c802: ; 0x98c93
+_CeruleanGymB4BattleTxt2: ; 0x98c93
 	db $0, "Splash!", $51
 	db "I'm first up!", $4f
 	db "Let's do it!", $57
 ; 0x98c93 + 34 bytes
 
-_UnnamedText_5c807: ; 0x98cb5
+_CeruleanGymEndBattleTxt2: ; 0x98cb5
 	db $0, "That", $4f
 	db "can't be!", $58
 ; 0x98cb5 + 15 bytes
 
-_UnnamedText_5c80c: ; 0x98cc4
+_CeruleanGymAfterBattleTxt2: ; 0x98cc4
 	db $0, "MISTY is going to", $4f
 	db "keep improving!", $51
 	db "She won't lose to", $4f
@@ -68454,93 +68454,93 @@ _PokemonTower2Text2: ; 0x9971a
 	db "might be able to", $55
 	db "unmask them.", $57
 
-_UnnamedText_60730: ; 0x99776
+_PokemonTower3B4BattleTxt1: ; 0x99776
 	db $0, "Urrg...Awaa...", $4f
 	db "Huhu...graa..", $57
 ; 0x99776 + 30 bytes
 
-_UnnamedText_60735: ; 0x99794
+_PokemonTower3EndBattleTxt1: ; 0x99794
 	db $0, "Hwa!", $4f
 	db "I'm saved!", $58
 ; 0x99794 + 16 bytes
 
-_UnnamedText_6073a: ; 0x997a4
+_PokemonTower3AfterBattleTxt1: ; 0x997a4
 	db $0, "The GHOSTs can be", $4f
 	db "identified by the", $55
 	db "SILPH SCOPE.", $57
 ; 0x997a4 + 50 bytes
 
-_UnnamedText_6073f: ; 0x997d6
+_PokemonTower3B4BattleTxt2: ; 0x997d6
 	db $0, "Kekeke....", $4f
 	db "Kwaaah!", $57
 ; 0x997d6 + 20 bytes
 
-_UnnamedText_60744: ; 0x997ea
+_PokemonTower3EndBattleTxt2: ; 0x997ea
 	db $0, "Hmm?", $4f
 	db "What am I doing?", $58
 ; 0x997ea + 23 bytes
 
-_UnnamedText_60749: ; 0x99801
+_PokemonTower3AfterBattleTxt2: ; 0x99801
 	db $0, "Sorry! I was", $4f
 	db "possessed!", $57
 ; 0x99801 + 25 bytes
 
-_UnnamedText_6074e: ; 0x9981a
+_PokemonTower3B4BattleTxt3: ; 0x9981a
 	db $0, "Be gone!", $4f
 	db "Evil spirit!", $57
 ; 0x9981a + 23 bytes
 
-_UnnamedText_60753: ; 0x99831
+_PokemonTower3EndBattleTxt3: ; 0x99831
 	db $0, "Whew!", $4f
 	db "The spirit left!", $58
 ; 0x99831 + 24 bytes
 
-_UnnamedText_60758: ; 0x99849
+_PokemonTower3AfterBattleTxt3: ; 0x99849
 	db $0, "My friends were", $4f
 	db "possessed too!", $57
 ; 0x99849 + 32 bytes
 
-_UnnamedText_6085e: ; 0x99869
+_PokemonTower4B4BattleTxt1: ; 0x99869
 	db $0, "GHOST! No!", $4f
 	db "Kwaaah!", $57
 ; 0x99869 + 20 bytes
 
-_UnnamedText_60863: ; 0x9987d
+_PokemonTower4EndBattleTxt1: ; 0x9987d
 	db $0, "Where", $4f
 	db "is the GHOST?", $58
 ; 0x9987d + 21 bytes
 
-_UnnamedText_60868: ; 0x99892
+_PokemonTower4AfterBattleTxt1: ; 0x99892
 	db $0, "I must have been", $4f
 	db "dreaming...", $57
 ; 0x99892 + 30 bytes
 
-_UnnamedText_6086d: ; 0x998b0
+_PokemonTower4B4BattleTxt2: ; 0x998b0
 	db $0, "Be cursed with", $4f
 	db "me! Kwaaah!", $57
 ; 0x998b0 + 28 bytes
 
-_UnnamedText_60872: ; 0x998cc
+_PokemonTower4EndBattleTxt2: ; 0x998cc
 	db $0, "What!", $58
 ; 0x998cc + 7 bytes
 
-_UnnamedText_60877: ; 0x998d3
+_PokemonTower4AfterBattleTxt2: ; 0x998d3
 	db $0, "We can't crack", $4f
 	db "the identity of", $55
 	db "the GHOSTs.", $57
 ; 0x998d3 + 43 bytes
 
-_UnnamedText_6087c: ; 0x998fe
+_PokemonTower4B4BattleTxt3: ; 0x998fe
 	db $0, "Huhuhu...", $4f
 	db "Beat me not!", $57
 ; 0x998fe + 24 bytes
 
-_UnnamedText_60881: ; 0x99916
+_PokemonTower4EndBattleTxt3: ; 0x99916
 	db $0, "Huh?", $4f
 	db "Who? What?", $58
 ; 0x99916 + 17 bytes
 
-_UnnamedText_60886: ; 0x99927
+_PokemonTower4AfterBattleTxt3: ; 0x99927
 	db $0, "May the departed", $4f
 	db "souls of #MON", $55
 	db "rest in peace...", $57
@@ -68552,57 +68552,57 @@ _PokemonTower5Text1: ; 0x99958
 	db "with white magic!", $51
 	db "You can rest here!", $57
 
-_UnnamedText_609e9: ; 0x9999f
+_PokemonTower5B4BattleTxt1: ; 0x9999f
 	db $0, "Give...me...", $4f
 	db "your...soul...", $57
 ; 0x9999f + 29 bytes
 
-_UnnamedText_609ee: ; 0x999bc
+_PokemonTower5EndBattleTxt1: ; 0x999bc
 	db $0, "Gasp!", $58
 ; 0x999bc + 7 bytes
 
-_UnnamedText_609f3: ; 0x999c3
+_PokemonTower5AfterBattleTxt1: ; 0x999c3
 	db $0, "I was under", $4f
 	db "possession!", $57
 ; 0x999c3 + 25 bytes
 
-_UnnamedText_60a02: ; 0x999dc
+_PokemonTower5B4BattleTxt2: ; 0x999dc
 	db $0, "You...shall...", $4f
 	db "join...us...", $57
 ; 0x999dc + 29 bytes
 
-_UnnamedText_60a07: ; 0x999f9
+_PokemonTower5EndBattleTxt2: ; 0x999f9
 	db $0, "What", $4f
 	db "a nightmare!", $58
 ; 0x999f9 + 19 bytes
 
-_UnnamedText_60a0c: ; 0x99a0c
+_PokemonTower5AfterBattleTxt2: ; 0x99a0c
 	db $0, "I was possessed!", $57
 ; 0x99a0c + 18 bytes
 
-_UnnamedText_60a1b: ; 0x99a1e
+_PokemonTower5B4BattleTxt3: ; 0x99a1e
 	db $0, "Zombies!", $57
 ; 0x99a1e + 10 bytes
 
-_UnnamedText_60a20: ; 0x99a28
+_PokemonTower5EndBattleTxt3: ; 0x99a28
 	db $0, "Ha?", $58
 ; 0x99a28 + 5 bytes
 
-_UnnamedText_60a25: ; 0x99a2d
+_PokemonTower5AfterBattleTxt3: ; 0x99a2d
 	db $0, "I regained my", $4f
 	db "senses!", $57
 ; 0x99a2d + 23 bytes
 
-_UnnamedText_60a34: ; 0x99a44
+_PokemonTower5B4BattleTxt4: ; 0x99a44
 	db $0, "Urgah...", $4f
 	db "Urff....", $57
 ; 0x99a44 + 19 bytes
 
-_UnnamedText_60a39: ; 0x99a57
+_PokemonTower5EndBattleTxt4: ; 0x99a57
 	db $0, "Whoo!", $58
 ; 0x99a57 + 7 bytes
 
-_UnnamedText_60a3e: ; 0x99a5e
+_PokemonTower5AfterBattleTxt4: ; 0x99a5e
 	db $0, "I fell to evil", $4f
 	db "spirits despite", $55
 	db "my training!", $57
@@ -68628,45 +68628,45 @@ _UnnamedText_60c24: ; 0x99afc
 	db "the afterlife!", $57
 ; 0x99afc + 60 bytes
 
-_UnnamedText_60c29: ; 0x99b38
+_PokemonTower6B4BattleTxt1: ; 0x99b38
 	db $0, "Give...me...", $4f
 	db "blood...", $57
 ; 0x99b38 + 23 bytes
 
-_UnnamedText_60c2e: ; 0x99b4f
+_PokemonTower6EndBattleTxt1: ; 0x99b4f
 	db $0, "Groan!", $58
 ; 0x99b4f + 8 bytes
 
-_UnnamedText_60c33: ; 0x99b57
+_PokemonTower6AfterBattleTxt1: ; 0x99b57
 	db $0, "I feel anemic and", $4f
 	db "weak...", $57
 ; 0x99b57 + 27 bytes
 
-_UnnamedText_60c38: ; 0x99b72
+_PokemonTower6B4BattleTxt2: ; 0x99b72
 	db $0, "Urff... Kwaah!", $57
 ; 0x99b72 + 16 bytes
 
-_UnnamedText_60c3d: ; 0x99b82
+_PokemonTower6EndBattleTxt2: ; 0x99b82
 	db $0, "Some-", $4f
 	db "thing fell out!", $58
 ; 0x99b82 + 23 bytes
 
-_UnnamedText_60c42: ; 0x99b99
+_PokemonTower6AfterBattleTxt2: ; 0x99b99
 	db $0, "Hair didn't fall", $4f
 	db "out! It was an", $55
 	db "evil spirit!", $57
 ; 0x99b99 + 45 bytes
 
-_UnnamedText_60c47: ; 0x99bc6
+_PokemonTower6B4BattleTxt3: ; 0x99bc6
 	db $0, "Ke..ke...ke...", $4f
 	db "ke..ke...ke!!", $57
 ; 0x99bc6 + 30 bytes
 
-_UnnamedText_60c4c: ; 0x99be4
+_PokemonTower6EndBattleTxt3: ; 0x99be4
 	db $0, "Keee!", $58
 ; 0x99be4 + 7 bytes
 
-_UnnamedText_60c51: ; 0x99beb
+_PokemonTower6AfterBattleTxt3: ; 0x99beb
 	db $0, "What's going on", $4f
 	db "here?", $57
 ; 0x99beb + 22 bytes
@@ -68697,21 +68697,21 @@ _UnnamedText_60ec4: ; 0x99c1a
 	db "of this tower.", $57
 ; 0x99c1a + 279 bytes
 
-_UnnamedText_60ec9: ; 0x99d31
+_PokemonTower7B4BattleTxt1: ; 0x99d31
 	db $0, "What do you want?", $4f
 	db "Why are you here?", $57
 ; 0x99d31 + 37 bytes
 
-_UnnamedText_60ece: ; 0x99d56
+_PokemonTower7EndBattleTxt1: ; 0x99d56
 	db $0, "I give up!", $58
 ; 0x99d56 + 12 bytes
 
-_UnnamedText_60ed3: ; 0x99d62
+_PokemonTower7AfterBattleTxt1: ; 0x99d62
 	db $0, "I'm not going to", $4f
 	db "forget this!", $57
 ; 0x99d62 + 30 bytes
 
-_UnnamedText_60ed8: ; 0x99d80
+_PokemonTower7B4BattleTxt2: ; 0x99d80
 	db $0, "This old guy came", $4f
 	db "and complained", $55
 	db "about us harming", $55
@@ -68720,12 +68720,12 @@ _UnnamedText_60ed8: ; 0x99d80
 	db "over as adults!", $57
 ; 0x99d80 + 97 bytes
 
-_UnnamedText_60edd: ; 0x99de1
+_PokemonTower7EndBattleTxt2: ; 0x99de1
 	db $0, "Please!", $4f
 	db "No more!", $58
 ; 0x99de1 + 18 bytes
 
-_UnnamedText_60ee2: ; 0x99df3
+_PokemonTower7AfterBattleTxt2: ; 0x99df3
 	db $0, "#MON are only", $4f
 	db "good for making", $55
 	db "money!", $51
@@ -68733,17 +68733,17 @@ _UnnamedText_60ee2: ; 0x99df3
 	db "business!", $57
 ; 0x99df3 + 64 bytes
 
-_UnnamedText_60ee7: ; 0x99e33
+_PokemonTower7B4BattleTxt3: ; 0x99e33
 	db $0, "You're not saving", $4f
 	db "anyone, kid!", $57
 ; 0x99e33 + 31 bytes
 
-_UnnamedText_60eec: ; 0x99e52
+_PokemonTower7EndBattleTxt3: ; 0x99e52
 	db $0, "Don't", $4f
 	db "fight us ROCKETs!", $58
 ; 0x99e52 + 24 bytes
 
-_UnnamedText_60ef1: ; 0x99e6a
+_PokemonTower7AfterBattleTxt3: ; 0x99e6a
 	db $0, "You're not getting", $4f
 	db "away with this!", $57
 ; 0x99e6a + 35 bytes
@@ -69169,52 +69169,52 @@ _ReceivedThunderbadgeText: ; 0x9c151
 	db "the THUNDERBADGE!", $58
 ; 0x9c151 + 67 bytes
 
-_UnnamedText_5cb9a: ; 0x9c194
+_VermilionGymB4BattleTxt1: ; 0x9c194
 	db $0, "When I was in the", $4f
 	db "Army, LT.SURGE", $55
 	db "was my strict CO!", $57
 ; 0x9c194 + 52 bytes
 
-_UnnamedText_5cb9f: ; 0x9c1c8
+_VermilionGymEndBattleTxt1: ; 0x9c1c8
 	db $0, "Stop!", $4f
 	db "You're very good!", $58
 ; 0x9c1c8 + 24 bytes
 
-_UnnamedText_5cba4: ; 0x9c1e0
+_VermilionGymAfterBattleTxt1: ; 0x9c1e0
 	db $0, "The door won't", $4f
 	db "open?", $51
 	db "LT.SURGE always", $4f
 	db "was cautious!", $57
 ; 0x9c1e0 + 51 bytes
 
-_UnnamedText_5cbb3: ; 0x9c213
+_VermilionGymB4BattleTxt2: ; 0x9c213
 	db $0, "I'm a lightweight,", $4f
 	db "but I'm good with", $55
 	db "electricity!", $57
 ; 0x9c213 + 49 bytes
 
-_UnnamedText_5cbb8: ; 0x9c244
+_VermilionGymEndBattleTxt2: ; 0x9c244
 	db $0, "Fried!", $58
 ; 0x9c244 + 8 bytes
 
-_UnnamedText_5cbbd: ; 0x9c24c
+_VermilionGymAfterBattleTxt2: ; 0x9c24c
 	db $0, "OK, I'll talk!", $51
 	db "LT.SURGE said he", $4f
 	db "hid door switches", $55
 	db "inside something!", $57
 ; 0x9c24c + 68 bytes
 
-_UnnamedText_5cbcc: ; 0x9c290
+_VermilionGymB4BattleTxt3: ; 0x9c290
 	db $0, "This is no place", $4f
 	db "for kids!", $57
 ; 0x9c290 + 28 bytes
 
-_UnnamedText_5cbd1: ; 0x9c2ac
+_VermilionGymEndBattleTxt3: ; 0x9c2ac
 	db $0, "Wow!", $4f
 	db "Surprised me!", $58
 ; 0x9c2ac + 20 bytes
 
-_UnnamedText_5cbd6: ; 0x9c2c0
+_VermilionGymAfterBattleTxt3: ; 0x9c2c0
 	db $0, "LT.SURGE set up", $4f
 	db "double locks!", $55
 	db "Here's a hint!", $51
@@ -69780,34 +69780,34 @@ _TM21NoRoomText: ; 0x9d576
 	db "room for this.", $57
 ; 0x9d576 + 32 bytes
 
-_UnnamedText_48a8b: ; 0x9d596
+_CeladonGymB4BattleTxt2: ; 0x9d596
 	db $0, "Hey!", $51
 	db "You are not", $4f
 	db "allowed in here!", $57
 ; 0x9d596 + 35 bytes
 
-_UnnamedText_48a90: ; 0x9d5b9
+_CeladonGymEndBattleTxt2: ; 0x9d5b9
 	db $0, "You're", $4f
 	db "too rough!", $58
 ; 0x9d5b9 + 18 bytes
 
-_UnnamedText_48a95: ; 0x9d5cb
+_CeladonGymAfterBattleTxt2: ; 0x9d5cb
 	db $0, "Bleaah!", $4f
 	db "I hope ERIKA", $55
 	db "wipes you out!", $57
 ; 0x9d5cb + 37 bytes
 
-_UnnamedText_48aa4: ; 0x9d5f0
+_CeladonGymB4BattleTxt3: ; 0x9d5f0
 	db $0, "I was getting", $4f
 	db "bored.", $57
 ; 0x9d5f0 + 22 bytes
 
-_UnnamedText_48aa9: ; 0x9d606
+_CeladonGymEndBattleTxt3: ; 0x9d606
 	db $0, "My", $4f
 	db "makeup!", $58
 ; 0x9d606 + 12 bytes
 
-_UnnamedText_48aae: ; 0x9d612
+_CeladonGymAfterBattleTxt3: ; 0x9d612
 	db $0, "Grass-type #MON", $4f
 	db "are tough against", $55
 	db "the water-type!", $51
@@ -69816,34 +69816,34 @@ _UnnamedText_48aae: ; 0x9d612
 	db "ground #MON!", $57
 ; 0x9d612 + 99 bytes
 
-_UnnamedText_48abd: ; 0x9d675
+_CeladonGymB4BattleTxt4: ; 0x9d675
 	db $0, "Aren't you the", $4f
 	db "peeping Tom?", $57
 ; 0x9d675 + 28 bytes
 
-_UnnamedText_48ac2: ; 0x9d691
+_CeladonGymEndBattleTxt4: ; 0x9d691
 	db $0, "I'm", $4f
 	db "in shock!", $58
 ; 0x9d691 + 14 bytes
 
-_UnnamedText_48ac7: ; 0x9d69f
+_CeladonGymAfterBattleTxt4: ; 0x9d69f
 	db $0, "Oh, you weren't", $4f
 	db "peeping? We get a", $55
 	db "lot of gawkers!", $57
 ; 0x9d69f + 50 bytes
 
-_UnnamedText_48ad6: ; 0x9d6d1
+_CeladonGymB4BattleTxt5: ; 0x9d6d1
 	db $0, "Look at my grass", $4f
 	db "#MON!", $51
 	db "They're so easy", $4f
 	db "to raise!", $57
 ; 0x9d6d1 + 49 bytes
 
-_UnnamedText_48adb: ; 0x9d702
+_CeladonGymEndBattleTxt5: ; 0x9d702
 	db $0, "No!", $58
 ; 0x9d702 + 5 bytes
 
-_UnnamedText_48ae0: ; 0x9d707
+_CeladonGymAfterBattleTxt5: ; 0x9d707
 	db $0, "We only use grass-", $4f
 	db "type #MON at", $55
 	db "our GYM!", $51
@@ -69852,43 +69852,43 @@ _UnnamedText_48ae0: ; 0x9d707
 	db "arrangements!", $57
 ; 0x9d707 + 91 bytes
 
-_UnnamedText_48aef: ; 0x9d762
+_CeladonGymB4BattleTxt6: ; 0x9d762
 	db $0, "Don't bring any", $4f
 	db "bugs or fire", $55
 	db "#MON in here!", $57
 ; 0x9d762 + 43 bytes
 
-_UnnamedText_48af4: ; 0x9d78d
+_CeladonGymEndBattleTxt6: ; 0x9d78d
 	db $0, "Oh!", $4f
 	db "You!", $58
 ; 0x9d78d + 10 bytes
 
-_UnnamedText_48af9: ; 0x9d797
+_CeladonGymAfterBattleTxt6: ; 0x9d797
 	db $0, "Our LEADER, ERIKA,", $4f
 	db "might be quiet,", $55
 	db "but she's also", $55
 	db "very skilled!", $57
 ; 0x9d797 + 64 bytes
 
-_UnnamedText_48b08: ; 0x9d7d7
+_CeladonGymB4BattleTxt7: ; 0x9d7d7
 	db $0, "Pleased to meet", $4f
 	db "you. My hobby is", $55
 	db "#MON training.", $57
 ; 0x9d7d7 + 49 bytes
 
-_UnnamedText_48b0d: ; 0x9d808
+_CeladonGymEndBattleTxt7: ; 0x9d808
 	db $0, "Oh!", $4f
 	db "Splendid!", $58
 ; 0x9d808 + 15 bytes
 
-_UnnamedText_48b12: ; 0x9d817
+_CeladonGymAfterBattleTxt7: ; 0x9d817
 	db $0, "I have a blind", $4f
 	db "date coming up.", $55
 	db "I have to learn", $55
 	db "to be polite.", $57
 ; 0x9d817 + 62 bytes
 
-_UnnamedText_48b21: ; 0x9d855
+_CeladonGymB4BattleTxt8: ; 0x9d855
 	db $0, "Welcome to", $4f
 	db "CELADON GYM!", $51
 	db "You better not", $4f
@@ -69896,12 +69896,12 @@ _UnnamedText_48b21: ; 0x9d855
 	db "girl power!", $57
 ; 0x9d855 + 66 bytes
 
-_UnnamedText_48b26: ; 0x9d897
+_CeladonGymEndBattleTxt8: ; 0x9d897
 	db $0, "Oh!", $4f
 	db "Beaten!", $58
 ; 0x9d897 + 13 bytes
 
-_UnnamedText_48b2b: ; 0x9d8a4
+_CeladonGymAfterBattleTxt8: ; 0x9d8a4
 	db $0, "I didn't bring my", $4f
 	db "best #MON!", $51
 	db "Wait 'til next", $4f
@@ -70495,7 +70495,7 @@ _UnnamedText_7559f: ; 0xa0143
 	db "this, child!", $57
 ; 0xa0143 + 29 bytes
 
-_UnnamedText_755ae: ; 0xa0160
+_FuchsiaGymB4BattleTxt1: ; 0xa0160
 	db $0, "Strength isn't", $4f
 	db "the key for", $55
 	db "#MON!", $51
@@ -70505,66 +70505,66 @@ _UnnamedText_755ae: ; 0xa0160
 	db "brute strength!", $57
 ; 0xa0160 + 98 bytes
 
-_UnnamedText_755b3: ; 0xa01c2
+_FuchsiaGymEndBattleTxt1: ; 0xa01c2
 	db $0, "What?", $4f
 	db "Extraordinary!", $58
 ; 0xa01c2 + 22 bytes
 
-_UnnamedText_755b8: ; 0xa01d8
+_FuchsiaGymAfterBattleTxt1: ; 0xa01d8
 	db $0, "So, you mix brawn", $4f
 	db "with brains?", $55
 	db "Good strategy!", $57
 ; 0xa01d8 + 47 bytes
 
-_UnnamedText_755c7: ; 0xa0207
+_FuchsiaGymB4BattleTxt2: ; 0xa0207
 	db $0, "I wanted to become", $4f
 	db "a ninja, so I", $55
 	db "joined this GYM!", $57
 ; 0xa0207 + 51 bytes
 
-_UnnamedText_755cc: ; 0xa023a
+_FuchsiaGymEndBattleTxt2: ; 0xa023a
 	db $0, "I'm done", $4f
 	db "for!", $58
 ; 0xa023a + 14 bytes
 
-_UnnamedText_755d1: ; 0xa0248
+_FuchsiaGymAfterBattleTxt2: ; 0xa0248
 	db $0, "I will keep on", $4f
 	db "training under", $55
 	db "KOGA, my ninja", $55
 	db "master!", $57
 ; 0xa0248 + 54 bytes
 
-_UnnamedText_755e0: ; 0xa027e
+_FuchsiaGymB4BattleTxt3: ; 0xa027e
 	db $0, "Let's see you", $4f
 	db "beat my special", $55
 	db "techniques!", $57
 ; 0xa027e + 42 bytes
 
-_UnnamedText_755e5: ; 0xa02a8
+_FuchsiaGymEndBattleTxt3: ; 0xa02a8
 	db $0, "You", $4f
 	db "had me fooled!", $58
 ; 0xa02a8 + 20 bytes
 
-_UnnamedText_755ea: ; 0xa02bc
+_FuchsiaGymAfterBattleTxt3: ; 0xa02bc
 	db $0, "I like poison and", $4f
 	db "sleep techniques,", $55
 	db "as they linger", $55
 	db "after battle!", $57
 ; 0xa02bc + 66 bytes
 
-_UnnamedText_755f9: ; 0xa02fe
+_FuchsiaGymB4BattleTxt4: ; 0xa02fe
 	db $0, "Stop right there!", $51
 	db "Our invisible", $4f
 	db "walls have you", $55
 	db "frustrated?", $57
 ; 0xa02fe + 60 bytes
 
-_UnnamedText_755fe: ; 0xa033a
+_FuchsiaGymEndBattleTxt4: ; 0xa033a
 	db $0, "Whoa!", $4f
 	db "He's got it!", $58
 ; 0xa033a + 19 bytes
 
-_UnnamedText_75603: ; 0xa034d
+_FuchsiaGymAfterBattleTxt4: ; 0xa034d
 	db $0, "You impressed me!", $4f
 	db "Here's a hint!", $51
 	db "Look very closely", $4f
@@ -70572,7 +70572,7 @@ _UnnamedText_75603: ; 0xa034d
 	db "invisible walls!", $57
 ; 0xa034d + 84 bytes
 
-_UnnamedText_75612: ; 0xa03a1
+_FuchsiaGymB4BattleTxt5: ; 0xa03a1
 	db $0, "I also study the", $4f
 	db "way of the ninja", $55
 	db "with master KOGA!", $51
@@ -70581,16 +70581,16 @@ _UnnamedText_75612: ; 0xa03a1
 	db "animals!", $57
 ; 0xa03a1 + 97 bytes
 
-_UnnamedText_75617: ; 0xa0402
+_FuchsiaGymEndBattleTxt5: ; 0xa0402
 	db $0, "Awoo!", $58
 ; 0xa0402 + 7 bytes
 
-_UnnamedText_7561c: ; 0xa0409
+_FuchsiaGymAfterBattleTxt5: ; 0xa0409
 	db $0, "I still have much", $4f
 	db "to learn!", $57
 ; 0xa0409 + 29 bytes
 
-_UnnamedText_7562b: ; 0xa0426
+_FuchsiaGymB4BattleTxt6: ; 0xa0426
 	db $0, "Master KOGA comes", $4f
 	db "from a long line", $55
 	db "of ninjas!", $51
@@ -70598,12 +70598,12 @@ _UnnamedText_7562b: ; 0xa0426
 	db "descend from?", $57
 ; 0xa0426 + 74 bytes
 
-_UnnamedText_75630: ; 0xa0470
+_FuchsiaGymEndBattleTxt6: ; 0xa0470
 	db $0, "Dropped", $4f
 	db "my balls!", $58
 ; 0xa0470 + 19 bytes
 
-_UnnamedText_75635: ; 0xa0483
+_FuchsiaGymAfterBattleTxt6: ; 0xa0483
 	db $0, "Where there is", $4f
 	db "light, there is", $55
 	db "shadow!", $51
@@ -70692,17 +70692,17 @@ _UnnamedText_5621c: ; 0xa0782
 	db "for my gift!", $57
 ; 0xa0782 + 38 bytes
 
-_UnnamedText_4434b: ; 0xa07a8
+_Mansion1B4BattleTxt2: ; 0xa07a8
 	db $0, "Who are you? There", $4f
 	db "shouldn't be", $55
 	db "anyone here.", $57
 ; 0xa07a8 + 45 bytes
 
-_UnnamedText_44350: ; 0xa07d5
+_Mansion1EndBattleTxt2: ; 0xa07d5
 	db $0, "Ouch!", $58
 ; 0xa07d5 + 7 bytes
 
-_UnnamedText_44355: ; 0xa07dc
+_Mansion1AfterBattleTxt2: ; 0xa07dc
 	db $0, "A key? I don't", $4f
 	db "know what you're", $55
 	db "talking about.", $57
@@ -71272,69 +71272,69 @@ _UnnamedText_5ce9d: ; 0xa1972
 	db "Karate with us!", $57
 ; 0xa1972 + 39 bytes
 
-_UnnamedText_5ceac: ; 0xa1999
+_FightingDojoB4BattleTxt1: ; 0xa1999
 	db $0, "Hoargh! Take your", $4f
 	db "shoes off!", $57
 ; 0xa1999 + 30 bytes
 
-_UnnamedText_5ceb1: ; 0xa19b7
+_FightingDojoEndBattleTxt1: ; 0xa19b7
 	db $0, "I give", $4f
 	db "up!", $58
 ; 0xa19b7 + 12 bytes
 
-_UnnamedText_5ceb6: ; 0xa19c3
+_FightingDojoAfterBattleTxt1: ; 0xa19c3
 	db $0, "You wait 'til you", $4f
 	db "see our Master!", $51
 	db "I'm a small fry", $4f
 	db "compared to him!", $57
 ; 0xa19c3 + 66 bytes
 
-_UnnamedText_5cec5: ; 0xa1a05
+_FightingDojoB4BattleTxt2: ; 0xa1a05
 	db $0, "I hear you're", $4f
 	db "good! Show me!", $57
 ; 0xa1a05 + 29 bytes
 
-_UnnamedText_5ceca: ; 0xa1a22
+_FightingDojoEndBattleTxt2: ; 0xa1a22
 	db $0, "Judge!", $4f
 	db "1 point!", $58
 ; 0xa1a22 + 17 bytes
 
-_UnnamedText_5cecf: ; 0xa1a33
+_FightingDojoAfterBattleTxt2: ; 0xa1a33
 	db $0, "Our Master is a", $4f
 	db "pro fighter!", $57
 ; 0xa1a33 + 30 bytes
 
-_UnnamedText_5cede: ; 0xa1a51
+_FightingDojoB4BattleTxt3: ; 0xa1a51
 	db $0, "Nothing tough", $4f
 	db "frightens me!", $51
 	db "I break boulders", $4f
 	db "for training!", $57
 ; 0xa1a51 + 60 bytes
 
-_UnnamedText_5cee3: ; 0xa1a8d
+_FightingDojoEndBattleTxt3: ; 0xa1a8d
 	db $0, "Yow!", $4f
 	db "Stubbed fingers!", $58
 ; 0xa1a8d + 23 bytes
 
-_UnnamedText_5cee8: ; 0xa1aa4
+_FightingDojoAfterBattleTxt3: ; 0xa1aa4
 	db $0, "The only thing", $4f
 	db "that frightens us", $55
 	db "is psychic power!", $57
 ; 0xa1aa4 + 52 bytes
 
-_UnnamedText_5cef7: ; 0xa1ad8
+_FightingDojoB4BattleTxt4: ; 0xa1ad8
 	db $0, "Hoohah!", $51
 	db "You're trespassing", $4f
 	db "in our FIGHTING", $55
 	db "DOJO!", $57
 ; 0xa1ad8 + 49 bytes
 
-_UnnamedText_5cefc: ; 0xa1b09
+_FightingDojoEndBattleTxt4: ; 0xa1b09
 	db $0, "Oof!", $4f
 	db "I give up!", $58
 ; 0xa1b09 + 17 bytes
 
-_UnnamedText_5cf01: ; 0xa1b1a
+_FightingDojoAfterBattleTxt4: ; 0xa1b1a
 	db $0, "The prime fighters", $4f
 	db "across the land", $55
 	db "train here.", $57
@@ -71446,18 +71446,18 @@ _UnnamedText_5d1eb: ; 0xa1ef0
 	db "at the slots!", $57
 ; 0xa1ef0 + 67 bytes
 
-_UnnamedText_5d1f0: ; 0xa1f33
+_SaffronGymB4BattleTxt1: ; 0xa1f33
 	db $0, "SABRINA is younger", $4f
 	db "than I, but I", $55
 	db "respect her!", $57
 ; 0xa1f33 + 47 bytes
 
-_UnnamedText_5d1f5: ; 0xa1f62
+_SaffronGymEndBattleTxt1: ; 0xa1f62
 	db $0, "Not", $4f
 	db "good enough!", $58
 ; 0xa1f62 + 18 bytes
 
-_UnnamedText_5d1fa: ; 0xa1f74
+_SaffronGymAfterBattleTxt1: ; 0xa1f74
 	db $0, "In a battle of", $4f
 	db "equals, the one", $55
 	db "with the stronger", $55
@@ -71467,23 +71467,23 @@ _UnnamedText_5d1fa: ; 0xa1f74
 	db "focus on winning!", $57
 ; 0xa1f74 + 108 bytes
 
-_UnnamedText_5d1ff: ; 0xa1fe0
+_SaffronGymB4BattleTxt2: ; 0xa1fe0
 	db $0, "Does our unseen", $4f
 	db "power scare you?", $57
 ; 0xa1fe0 + 34 bytes
 
-_UnnamedText_5d204: ; 0xa2002
+_SaffronGymEndBattleTxt2: ; 0xa2002
 	db $0, "I never", $4f
 	db "foresaw this!", $58
 ; 0xa2002 + 23 bytes
 
-_UnnamedText_5d209: ; 0xa2019
+_SaffronGymAfterBattleTxt2: ; 0xa2019
 	db $0, "Psychic #MON", $4f
 	db "fear only ghosts", $55
 	db "and bugs!", $57
 ; 0xa2019 + 41 bytes
 
-_UnnamedText_5d20e: ; 0xa2042
+_SaffronGymB4BattleTxt3: ; 0xa2042
 	db $0, "#MON take on", $4f
 	db "the appearance of", $55
 	db "their trainers.", $51
@@ -71491,52 +71491,52 @@ _UnnamedText_5d20e: ; 0xa2042
 	db "be tough, then!", $57
 ; 0xa2042 + 79 bytes
 
-_UnnamedText_5d213: ; 0xa2091
+_SaffronGymEndBattleTxt3: ; 0xa2091
 	db $0, "I knew", $4f
 	db "it!", $58
 ; 0xa2091 + 12 bytes
 
-_UnnamedText_5d218: ; 0xa209d
+_SaffronGymAfterBattleTxt3: ; 0xa209d
 	db $0, "I must teach", $4f
 	db "better techniques", $55
 	db "to my #MON!", $57
 ; 0xa209d + 44 bytes
 
-_UnnamedText_5d21d: ; 0xa20c9
+_SaffronGymB4BattleTxt4: ; 0xa20c9
 	db $0, "You know that", $4f
 	db "power alone isn't", $55
 	db "enough!", $57
 ; 0xa20c9 + 40 bytes
 
-_UnnamedText_5d222: ; 0xa20f1
+_SaffronGymEndBattleTxt4: ; 0xa20f1
 	db $0, "I don't", $4f
 	db "believe this!", $58
 ; 0xa20f1 + 22 bytes
 
-_UnnamedText_5d227: ; 0xa2107
+_SaffronGymAfterBattleTxt4: ; 0xa2107
 	db $0, "SABRINA just wiped", $4f
 	db "out the KARATE", $55
 	db "MASTER next door!", $57
 ; 0xa2107 + 53 bytes
 
-_UnnamedText_5d22c: ; 0xa213c
+_SaffronGymB4BattleTxt5: ; 0xa213c
 	db $0, "You and I, our", $4f
 	db "#MON shall", $55
 	db "fight!", $57
 ; 0xa213c + 34 bytes
 
-_UnnamedText_5d231: ; 0xa215e
+_SaffronGymEndBattleTxt5: ; 0xa215e
 	db $0, "I lost", $4f
 	db "after all!", $58
 ; 0xa215e + 19 bytes
 
-_UnnamedText_5d236: ; 0xa2171
+_SaffronGymAfterBattleTxt5: ; 0xa2171
 	db $0, "I knew that this", $4f
 	db "was going to take", $55
 	db "place.", $57
 ; 0xa2171 + 43 bytes
 
-_UnnamedText_5d23b: ; 0xa219c
+_SaffronGymB4BattleTxt6: ; 0xa219c
 	db $0, "SABRINA is young,", $4f
 	db "but she's also", $55
 	db "our LEADER!", $51
@@ -71544,12 +71544,12 @@ _UnnamedText_5d23b: ; 0xa219c
 	db "her easily!", $57
 ; 0xa219c + 72 bytes
 
-_UnnamedText_5d240: ; 0xa21e4
+_SaffronGymEndBattleTxt6: ; 0xa21e4
 	db $0, "I lost", $4f
 	db "my concentration!", $58
 ; 0xa21e4 + 26 bytes
 
-_UnnamedText_5d245: ; 0xa21fe
+_SaffronGymAfterBattleTxt6: ; 0xa21fe
 	db $0, "There used to be", $4f
 	db "2 #MON GYMs in", $55
 	db "SAFFRON.", $51
@@ -71560,7 +71560,7 @@ _UnnamedText_5d245: ; 0xa21fe
 	db "creamed them!", $57
 ; 0xa21fe + 121 bytes
 
-_UnnamedText_5d24a: ; 0xa2277
+_SaffronGymB4BattleTxt7: ; 0xa2277
 	db $0, "SAFFRON #MON", $4f
 	db "GYM is famous for", $55
 	db "its psychics!", $51
@@ -71569,11 +71569,11 @@ _UnnamedText_5d24a: ; 0xa2277
 	db "I can tell!", $57
 ; 0xa2277 + 83 bytes
 
-_UnnamedText_5d24f: ; 0xa22ca
+_SaffronGymEndBattleTxt7: ; 0xa22ca
 	db $0, "Arrrgh!", $58
 ; 0xa22ca + 9 bytes
 
-_UnnamedText_5d254: ; 0xa22d3
+_SaffronGymAfterBattleTxt7: ; 0xa22d3
 	db $0, "That's right! I", $4f
 	db "used telepathy to", $55
 	db "read your mind!", $57
