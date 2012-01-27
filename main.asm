@@ -14602,11 +14602,11 @@ ViridianCityText6: ; 0x19196
 	set 1, [hl]
 	jr .asm_3c73c ; 0x191b7
 .asm_b655e ; 0x191b9
-	ld hl, UnnamedText_191da
+	ld hl, TM42NoRoomText
 	call PrintText
 	jr .asm_3c73c ; 0x191bf
 .asm_4e5a0 ; 0x191c1
-	ld hl, UnnamedText_191d5
+	ld hl, TM42Explanation
 	call PrintText
 .asm_3c73c ; 0x191c7
 	jp TextScriptEnd
@@ -14621,13 +14621,13 @@ ReceivedTM42Text: ; 0x191cf
 	db $10, $50
 ; 0x191cf + 6 bytes = 0x191d5
 
-UnnamedText_191d5: ; 0x191d5
-	TX_FAR _UnnamedText_191d5
+TM42Explanation: ; 0x191d5
+	TX_FAR _TM42Explanation
 	db $50
 ; 0x191d5 + 5 bytes
 
-UnnamedText_191da: ; 0x191da
-	TX_FAR _UnnamedText_191da
+TM42NoRoomText: ; 0x191da
+	TX_FAR _TM42NoRoomText
 	db $50
 ; 0x191da + 5 bytes
 
@@ -14688,10 +14688,8 @@ ViridianCityText13: ; 0x1922d
 	TX_FAR _ViridianCityText13
 	db $50
 
-ViridianCityText14:
-
-UnnamedText_19232: ; 0x19232
-	TX_FAR _UnnamedText_19232
+ViridianCityText14: ; 0x19232
+	TX_FAR _ViridianCityText14
 	db $50
 ; 0x19232 + 5 bytes
 
@@ -19032,17 +19030,17 @@ LavenderHouse1Text5: ; 0x1d918
 	ld bc, (POKE_FLUTE << 8) | 1
 	call GiveItem
 	jr nc, .asm_5ce36 ; 0x1d92c
-	ld hl, UnnamedText_1d951
+	ld hl, ReceivedFluteText
 	call PrintText
 	ld hl, $d76c
 	set 0, [hl]
 	jr .asm_da749 ; 0x1d939
 .asm_5ce36 ; 0x1d93b
-	ld hl, UnnamedText_1d95b
+	ld hl, FluteNoRoomText
 	call PrintText
 	jr .asm_da749 ; 0x1d941
 .asm_15ac2 ; 0x1d943
-	ld hl, UnnamedText_1d960
+	ld hl, MrFujiAfterFluteText
 	call PrintText
 .asm_da749 ; 0x1d949
 	jp TextScriptEnd
@@ -19052,20 +19050,20 @@ UnnamedText_1d94c: ; 0x1d94c
 	db $50
 ; 0x1d94c + 5 bytes
 
-UnnamedText_1d951: ; 0x1d951
-	TX_FAR _UnnamedText_1d951 ; 0x99ffb
+ReceivedFluteText: ; 0x1d951
+	TX_FAR _ReceivedFluteText ; 0x99ffb
 	db $11
-	TX_FAR _UnnamedText_1d956 ; 0x9a011
+	TX_FAR _FluteExplanationText ; 0x9a011
 	db $50
 ; 0x1d95b
 
-UnnamedText_1d95b: ; 0x1d95b
-	TX_FAR _UnnamedText_1d95b
+FluteNoRoomText: ; 0x1d95b
+	TX_FAR _FluteNoRoomText
 	db $50
 ; 0x1d95b + 5 bytes
 
-UnnamedText_1d960: ; 0x1d960
-	TX_FAR _UnnamedText_1d960
+MrFujiAfterFluteText: ; 0x1d960
+	TX_FAR _MrFujiAfterFluteText
 	db $50
 ; 0x1d960 + 5 bytes
 
@@ -19559,43 +19557,43 @@ SaffronHouse2Text1: ; 0x1de41
 	ld a, [$d7bd]
 	bit 0, a
 	jr nz, .asm_9e72b ; 0x1de47
-	ld hl, UnnamedText_1de75
+	ld hl, TM29PreReceiveText
 	call PrintText
 	ld bc,(TM_29 << 8) | 1
 	call GiveItem
 	jr nc, .asm_4b1da ; 0x1de55
-	ld hl, UnnamedText_1de7a
+	ld hl, ReceivedTM29Text
 	call PrintText
 	ld hl, $d7bd
 	set 0, [hl]
 	jr .asm_fe4e1 ; 0x1de62
 .asm_4b1da ; 0x1de64
-	ld hl, UnnamedText_1de85
+	ld hl, TM29NoRoomText
 	call PrintText
 	jr .asm_fe4e1 ; 0x1de6a
 .asm_9e72b ; 0x1de6c
-	ld hl, UnnamedText_1de80
+	ld hl, TM29ExplanationText
 	call PrintText
 .asm_fe4e1 ; 0x1de72
 	jp TextScriptEnd
 
-UnnamedText_1de75: ; 0x1de75
-	TX_FAR _UnnamedText_1de75
+TM29PreReceiveText: ; 0x1de75
+	TX_FAR _TM29PreReceiveText
 	db $50
 ; 0x1de75 + 5 bytes
 
-UnnamedText_1de7a: ; 0x1de7a
-	TX_FAR _UnnamedText_1de7a ; 0xa252a
+ReceivedTM29Text: ; 0x1de7a
+	TX_FAR _ReceivedTM29Text ; 0xa252a
 	db $0B, $50
 ; 0x1de80
 
-UnnamedText_1de80: ; 0x1de80
-	TX_FAR _UnnamedText_1de80
+TM29ExplanationText: ; 0x1de80
+	TX_FAR _TM29ExplanationText
 	db $50
 ; 0x1de80 + 5 bytes
 
-UnnamedText_1de85: ; 0x1de85
-	TX_FAR _UnnamedText_1de85
+TM29NoRoomText: ; 0x1de85
+	TX_FAR _TM29NoRoomText
 	db $50
 ; 0x1de85 + 5 bytes
 
@@ -32476,7 +32474,7 @@ CeladonMart3Text1: ; 0x4824a
 	ld a, [$d778]
 	bit 7, a
 	jr nz, .asm_a5463 ; 0x48250
-	ld hl, UnnamedText_48278
+	ld hl, TM18PreReceiveText
 	call PrintText
 	ld bc, (TM_18 << 8) | 1
 	call GiveItem
@@ -32494,8 +32492,8 @@ CeladonMart3Text1: ; 0x4824a
 	call PrintText
 	jp TextScriptEnd
 
-UnnamedText_48278: ; 0x48278
-	TX_FAR _UnnamedText_48278
+TM18PreReceiveText: ; 0x48278
+	TX_FAR _TM18PreReceiveText
 	db $50
 ; 0x48278 + 5 bytes
 
@@ -34590,7 +34588,7 @@ Route12GateUpstairsText1: ; 0x49569
 	ld a, [$d7d7]
 	rrca
 	jr c, .asm_0ad3c ; 0x4956e
-	ld hl, UnnamedText_4959c
+	ld hl, TM39PreReceiveText
 	call PrintText
 	ld bc, (TM_39 << 8) | 1
 	call GiveItem
@@ -34601,17 +34599,17 @@ Route12GateUpstairsText1: ; 0x49569
 	set 0, [hl]
 	jr .asm_4ba56 ; 0x49589
 .asm_4c2be ; 0x4958b
-	ld hl, UnnamedText_495ac
+	ld hl, TM39NoRoomText
 	call PrintText
 	jr .asm_4ba56 ; 0x49591
 .asm_0ad3c ; 0x49593
-	ld hl, UnnamedText_495a7
+	ld hl, TM39ExplanationText
 	call PrintText
 .asm_4ba56 ; 0x49599
 	jp TextScriptEnd
 
-UnnamedText_4959c: ; 0x4959c
-	TX_FAR _UnnamedText_4959c
+TM39PreReceiveText: ; 0x4959c
+	TX_FAR _TM39PreReceiveText
 	db $50
 ; 0x4959c + 5 bytes
 
@@ -34620,13 +34618,13 @@ ReceivedTM39Text: ; 0x495a1
 	db $0B, $50
 ; 0x495a7
 
-UnnamedText_495a7: ; 0x495a7
-	TX_FAR _UnnamedText_495a7
+TM39ExplanationText: ; 0x495a7
+	TX_FAR _TM39ExplanationText
 	db $50
 ; 0x495a7 + 5 bytes
 
-UnnamedText_495ac: ; 0x495ac
-	TX_FAR _UnnamedText_495ac
+TM39NoRoomText: ; 0x495ac
+	TX_FAR _TM39NoRoomText
 	db $50
 ; 0x495ac + 5 bytes
 
@@ -47038,19 +47036,19 @@ UnnamedText_5c4a3: ; 0x5c4a3
 ; 0x5c4a3 + 5 bytes
 
 PewterGymText4: ; 0x5c4a8
-	TX_FAR _UnnamedText_5c4a8
+	TX_FAR _TM34PreReceiveText
 	db $50
 ; 0x5c4a8 + 5 bytes
 
 PewterGymText5: ; 0x5c4ad
 	TX_FAR _ReceivedTM34Text ; 0x980ad
 	db $0B
-	TX_FAR _UnnamedText_5c4b2 ; 0x980c0
+	TX_FAR _TM34ExplanationText ; 0x980c0
 	db $50
 ; 0x5c4ad + 10 bytes = 0x5c4b7
 
 PewterGymText6: ; 0x5c4b7
-	TX_FAR _UnnamedText_5c4b7
+	TX_FAR _TM34NoRoomText
 	db $50
 
 UnnamedText_5c4bc: ; 0x5c4bc
@@ -48026,7 +48024,7 @@ CopycatsHouseF2Text1: ; 0x5cc82
 	ld b, POKE_DOLL
 	call $3493 ; probably check has item or take item
 	jr z, .asm_62ecd ; 0x5cc9a
-	ld hl, UnnamedText_5ccd9
+	ld hl, TM31PreReceiveText
 	call PrintText
 	ld bc, (TM_31 << 8) | 1
 	call GiveItem
@@ -48056,8 +48054,8 @@ UnnamedText_5ccd4: ; 0x5ccd4
 	db $50
 ; 0x5ccd4 + 5 bytes
 
-UnnamedText_5ccd9: ; 0x5ccd9
-	TX_FAR _UnnamedText_5ccd9
+TM31PreReceiveText: ; 0x5ccd9
+	TX_FAR _TM31PreReceiveText
 	db $50
 ; 0x5ccd9 + 5 bytes
 
@@ -48600,11 +48598,11 @@ SaffronGymText10: ; 0x5d173
 SaffronGymText11: ; 0x5d178
 	TX_FAR ReceivedTM46Text
 	db $b
-	TX_FAR _UnnamedText_5d17d
+	TX_FAR _TM46ExplanationText
 	db $50
 
 SaffronGymText12: ; 0x5d182
-	TX_FAR _UnnamedText_5d182 ; pack full
+	TX_FAR _TM46NoRoomText ; pack full
 	db $50
 ; 0x5d182 + 5 bytes
 
@@ -54522,15 +54520,15 @@ ViridianGymText12: ; 0x74adf
 ; 0x74adf + 5 bytes
 
 ViridianGymText13: ; 0x74ae4
-	TX_FAR _UnnamedText_74ae4
+	TX_FAR _ReceivedTM27Text
 	db $0b
 
-UnnamedText_74ae9:
-	TX_FAR _UnnamedText_74ae9
+TM27ExplanationText:
+	TX_FAR _TM27ExplanationText
 	db $50
 
 ViridianGymText14: ; 0x74aee
-	TX_FAR _UnnamedText_74aee
+	TX_FAR _TM27NoRoomText
 	db $50
 ; 0x74aee + 5 bytes
 
@@ -55184,19 +55182,19 @@ FuchsiaHouse2Text1: ; 0x750c2
 	ld a, [$d78e]
 	bit 1, a
 	jr nz, .asm_60cba ; 0x750d6
-	ld hl, UnnamedText_75135
+	ld hl, WardenGibberishText1
 	call PrintText
 	call $35ec
 	ld a, [$cc26]
 	and a
-	ld hl, UnnamedText_7513f
+	ld hl, WardenGibberishText3
 	jr nz, .asm_61238 ; 0x750e8
-	ld hl, UnnamedText_7513a
+	ld hl, WardenGibberishText2
 .asm_61238 ; 0x750ed
 	call PrintText
 	jr .asm_52039 ; 0x750f0
 .asm_3f30f ; 0x750f2
-	ld hl, UnnamedText_75144
+	ld hl, WardenTeethText1
 	call PrintText
 	ld a, $40
 	ldh [$db], a
@@ -55206,67 +55204,67 @@ FuchsiaHouse2Text1: ; 0x750c2
 	ld hl, $d78e
 	set 1, [hl]
 .asm_60cba ; 0x75109
-	ld hl, UnnamedText_7514e
+	ld hl, WardenThankYouText
 	call PrintText
 	ld bc,(HM_04 << 8) | 1
 	call GiveItem
 	jr nc, .asm_53b90 ; 0x75115
-	ld hl, UnnamedText_75153
+	ld hl, ReceivedHM04Text
 	call PrintText
 	ld hl, $d78e
 	set 0, [hl]
 	jr .asm_52039 ; 0x75122
 .asm_58feb ; 0x75124
-	ld hl, UnnamedText_75159
+	ld hl, HM04ExplanationText
 	call PrintText
 	jr .asm_52039 ; 0x7512a
 .asm_53b90 ; 0x7512c
-	ld hl, UnnamedText_7515e
+	ld hl, HM04NoRoomText
 	call PrintText
 .asm_52039 ; 0x75132
 	jp TextScriptEnd
 
-UnnamedText_75135: ; 0x75135
-	TX_FAR _UnnamedText_75135
+WardenGibberishText1: ; 0x75135
+	TX_FAR _WardenGibberishText1
 	db $50
 ; 0x75135 + 5 bytes
 
-UnnamedText_7513a: ; 0x7513a
-	TX_FAR _UnnamedText_7513a
+WardenGibberishText2: ; 0x7513a
+	TX_FAR _WardenGibberishText2
 	db $50
 ; 0x7513a + 5 bytes
 
-UnnamedText_7513f: ; 0x7513f
-	TX_FAR _UnnamedText_7513f
+WardenGibberishText3: ; 0x7513f
+	TX_FAR _WardenGibberishText3
 	db $50
 ; 0x7513f + 5 bytes
 
-UnnamedText_75144: ; 0x75144
-	TX_FAR _UnnamedText_75144
+WardenTeethText1: ; 0x75144
+	TX_FAR _WardenTeethText1
 	db $0b
 
-UnnamedText_75149: ; 0x75149
-	TX_FAR _UnnamedText_75149
+WardenTeethText2: ; 0x75149
+	TX_FAR _WardenTeethText2
 	db $50
 ; 0x75149 + 5 bytes
 
-UnnamedText_7514e: ; 0x7514e
-	TX_FAR _UnnamedText_7514e
+WardenThankYouText: ; 0x7514e
+	TX_FAR _WardenThankYouText
 	db $50
 ; 0x7514e + 5 bytes
 
-UnnamedText_75153: ; 0x75153
-	TX_FAR UnnamedText_9e5a2 ; 0x9e5a2
+ReceivedHM04Text: ; 0x75153
+	TX_FAR _ReceivedHM04Text ; 0x9e5a2
 	db $0B, $50
 ; 0x75153 + 6 bytes = 0x75159
 
-UnnamedText_75159: ; 0x75159
-	TX_FAR _UnnamedText_75159
+HM04ExplanationText: ; 0x75159
+	TX_FAR _HM04ExplanationText
 	db $50
 ; 0x75159 + 5 bytes
 
-UnnamedText_7515e: ; 0x7515e
-	TX_FAR _UnnamedText_7515e
+HM04NoRoomText: ; 0x7515e
+	TX_FAR _HM04NoRoomText
 	db $50
 ; 0x7515e + 5 bytes
 
@@ -55793,16 +55791,16 @@ FuchsiaGymText9: ; 0x75590
 ; 0x75590 + 5 bytes
 
 FuchsiaGymText10: ; 0x75595
-	TX_FAR UnnamedText_a00eb ; 0xa00eb
+	TX_FAR _ReceivedTM06Text ; 0xa00eb
 	db $11
 
-UnnamedText_7559a: ; 0x7559a
-	TX_FAR _UnnamedText_7559a
+TM06ExplanationText: ; 0x7559a
+	TX_FAR _TM06ExplanationText
 	db $50
 ; 0x7559a + 5 bytes
 
 FuchsiaGymText11: ; 0x7559f
-	TX_FAR _UnnamedText_7559f
+	TX_FAR _TM06NoRoomText
 	db $50
 ; 0x7559f + 5 bytes
 
@@ -56229,15 +56227,15 @@ UnnamedText_75925: ; 0x75925
 	db $50
 ; 0x75925 + 5 bytes
 
-UnnamedText_7592a: ; 0x7592a
-	TX_FAR UnnamedText_a09a8 ; 0xa09a8
+ReceivedTM38Text: ; 0x7592a
+	TX_FAR _ReceivedTM38Text ; 0xa09a8
 	db $0B
-	TX_FAR _UnnamedText_7592f
+	TX_FAR _TM38ExplanationText
 	db $50
 ; 0x75934
 
-UnnamedText_75934: ; 0x75934
-	TX_FAR _UnnamedText_75934
+TM38NoRoomText: ; 0x75934
+	TX_FAR _TM38NoRoomText
 	db $50
 ; 0x75934 + 5 bytes
 
@@ -56655,43 +56653,43 @@ Lab3Text1: ; 0x75c94
 	ld a, [$d7a1]
 	bit 7, a
 	jr nz, .asm_e551a ; 0x75c9a
-	ld hl, UnnamedText_75cc8
+	ld hl, TM35PreReceiveText
 	call PrintText
 	ld bc, (TM_35 << 8) | 1
 	call GiveItem
 	jr nc, .asm_6c187 ; 0x75ca8
-	ld hl, UnnamedText_75ccd
+	ld hl, ReceivedTM35Text
 	call PrintText
 	ld hl, $d7a1
 	set 7, [hl]
 	jr .asm_eb896 ; 0x75cb5
 .asm_6c187 ; 0x75cb7
-	ld hl, UnnamedText_75cd8
+	ld hl, TM35NoRoomText
 	call PrintText
 	jr .asm_eb896 ; 0x75cbd
 .asm_e551a ; 0x75cbf
-	ld hl, UnnamedText_75cd3
+	ld hl, TM35ExplanationText
 	call PrintText
 .asm_eb896 ; 0x75cc5
 	jp TextScriptEnd
 
-UnnamedText_75cc8: ; 0x75cc8
-	TX_FAR _UnnamedText_75cc8
+TM35PreReceiveText: ; 0x75cc8
+	TX_FAR _TM35PreReceiveText
 	db $50
 ; 0x75cc8 + 5 bytes
 
-UnnamedText_75ccd: ; 0x75ccd
-	TX_FAR UnnamedText_a0f48 ; 0xa0f48
+ReceivedTM35Text: ; 0x75ccd
+	TX_FAR _ReceivedTM35Text ; 0xa0f48
 	db $0B, $50
 ; 0x75cd3
 
-UnnamedText_75cd3: ; 0x75cd3
-	TX_FAR _UnnamedText_75cd3
+TM35ExplanationText: ; 0x75cd3
+	TX_FAR _TM35ExplanationText
 	db $50
 ; 0x75cd3 + 5 bytes
 
-UnnamedText_75cd8: ; 0x75cd8
-	TX_FAR _UnnamedText_75cd8
+TM35NoRoomText: ; 0x75cd8
+	TX_FAR _TM35NoRoomText
 	db $50
 ; 0x75cd8 + 5 bytes
 
@@ -63322,7 +63320,7 @@ _Route12GateText1: ; 0x8c84a
 	db $0, "There's a lookout", $4f
 	db "spot upstairs.", $57
 
-_UnnamedText_4959c: ; 0x8c86b
+_TM39PreReceiveText: ; 0x8c86b
 	db $0, "My #MON's", $4f
 	db "ashes are stored", $55
 	db "in #MON TOWER.", $51
@@ -63336,7 +63334,7 @@ _ReceivedTM39Text: ; 0x8c8c6
 	db "TM39!@@"
 ; 0x8c8c6 + 19 bytes
 
-_UnnamedText_495a7: ; 0x8c8d9
+_TM39ExplanationText: ; 0x8c8d9
 	db $0, "TM39 is a move", $4f
 	db "called SWIFT.", $51
 	db "It's very accurate,", $4f
@@ -63345,7 +63343,7 @@ _UnnamedText_495a7: ; 0x8c8d9
 	db "afford to lose.", $57
 ; 0x8c8d9 + 99 bytes
 
-_UnnamedText_495ac: ; 0x8c93c
+_TM39NoRoomText: ; 0x8c93c
 	db $0, "You don't have", $4f
 	db "room for this.", $57
 ; 0x8c93c + 30 bytes
@@ -67514,13 +67512,12 @@ _ViridianGymText12: ; 0x95fcc
 	db "LEAGUE challenge!", $57
 ; 0x95fcc + 182 bytes
 
-ReceivedTM27Text: ; 0x96082
-_UnnamedText_74ae4:
+_ReceivedTM27Text: ; 0x96082
 	db $0, $52, " received", $4f
 	db "TM27!@@"
 ; 0x96082 + 19 bytes
 
-_UnnamedText_74ae9: ; 0x96095
+_TM27ExplanationText: ; 0x96095
 	db $0, $51
 	db "TM27 is FISSURE!", $4f
 	db "It will take out", $55
@@ -67531,7 +67528,7 @@ _UnnamedText_74ae9: ; 0x96095
 	db "too long ago...", $57
 ; 0x96095 + 111 bytes
 
-_UnnamedText_74aee: ; 0x96104
+_TM27NoRoomText: ; 0x96104
 	db $0, "You do not have", $4f
 	db "space for this!", $57
 ; 0x96104 + 33 bytes
@@ -67856,7 +67853,7 @@ _UnnamedText_5c4a3: ; 0x98000
 	db "your abilities!", $57
 ; 0x98000 + 146 bytes
 
-_UnnamedText_5c4a8: ; 0x98092
+_TM34PreReceiveText: ; 0x98092
 	db $0, "Wait! Take this", $4f
 	db "with you!", $57
 ; 0x98092 + 27 bytes
@@ -67866,7 +67863,7 @@ _ReceivedTM34Text: ; 0x980ad
 	db "TM34!@@"
 ; 0x980c0
 
-_UnnamedText_5c4b2: ; 0x980c0
+_TM34ExplanationText: ; 0x980c0
 	db $0, $51
 	db "A TM contains a", $4f
 	db "technique that", $55
@@ -67886,7 +67883,7 @@ _UnnamedText_5c4b2: ; 0x980c0
 	db "it back double!", $57
 ; 0x980c0 + 235 bytes
 
-_UnnamedText_5c4b7: ; 0x981ab
+_TM34NoRoomText: ; 0x981ab
 	db $0, "You don't have", $4f
 	db "room for this!", $57
 ; 0x981ab + 30 bytes
@@ -68810,14 +68807,14 @@ _UnnamedText_1d94c: ; 0x99f97
 	db "help your quest.", $58
 ; 0x99f97 + 100 bytes
 
-_UnnamedText_1d951: ; 0x99ffb
+_ReceivedFluteText: ; 0x99ffb
 	db $0, $52, " received", $4f
 	db "a @"
 	TX_RAM $cf4b
 	db $0, "!@@"
 ; 0x9a011
 
-_UnnamedText_1d956: ; 0x9a011
+_FluteExplanationText: ; 0x9a011
 	db $0, $51
 	db "Upon hearing #", $4f
 	db "FLUTE, sleeping", $55
@@ -68827,12 +68824,12 @@ _UnnamedText_1d956: ; 0x9a011
 	db "sleeping #MON.", $57
 ; 0x9a011 + 88 bytes
 
-_UnnamedText_1d95b: ; 0x9a069
+_FluteNoRoomText: ; 0x9a069
 	db $0, "You must make", $4f
 	db "room for this!", $57
 ; 0x9a069 + 30 bytes
 
-_UnnamedText_1d960: ; 0x9a087
+_MrFujiAfterFluteText: ; 0x9a087
 	db $0, "MR.FUJI: Has my", $4f
 	db "FLUTE helped you?", $57
 ; 0x9a087 + 35 bytes
@@ -69380,7 +69377,7 @@ _CeladonMart2Text5: ; 0x9c7dc
 	db "2F: TRAINER'S", $4f
 	db "    MARKET", $57
 
-_UnnamedText_48278: ; 0x9c814
+_TM18PreReceiveText: ; 0x9c814
 	db $0, "Oh, hi! I finally", $4f
 	db "finished #MON!", $51
 	db "Not done yet?", $4f
@@ -70273,7 +70270,7 @@ _FuchsiaPokecenterText3: ; 0x9e3de
 	db "The HQ governs", $55
 	db "all trainers.", $57
 
-_UnnamedText_75135: ; 0x9e444
+_WardenGibberishText1: ; 0x9e444
 	db $0, "WARDEN: Hif fuff", $4f
 	db "hefifoo!", $51
 	db "Ha lof ha feef ee", $4f
@@ -70281,29 +70278,29 @@ _UnnamedText_75135: ; 0x9e444
 	db "hee fwee!", $57
 ; 0x9e444 + 71 bytes
 
-_UnnamedText_7513a: ; 0x9e48b
+_WardenGibberishText2: ; 0x9e48b
 	db $0, "Ah howhee ho hoo!", $4f
 	db "Eef ee hafahi ho!", $57
 ; 0x9e48b + 37 bytes
 
-_UnnamedText_7513f: ; 0x9e4b0
+_WardenGibberishText3: ; 0x9e4b0
 	db $0, "Ha? He ohay heh", $4f
 	db "ha hoo ee haheh!", $57
 ; 0x9e4b0 + 34 bytes
 
-_UnnamedText_75144: ; 0x9e4d2
+_WardenTeethText1: ; 0x9e4d2
 	db $0, $52, " gave the", $4f
 	db "GOLD TEETH to the", $55
 	db "WARDEN!@@"
 ; 0x9e4f9
 
-_UnnamedText_75149: ; 0x9e4f9
+_WardenTeethText2: ; 0x9e4f9
 	db $0, $51
 	db "The WARDEN popped", $4f
 	db "in his teeth!", $58
 ; 0x9e4f9 + 34 bytes
 
-_UnnamedText_7514e: ; 0x9e51b
+_WardenThankYouText: ; 0x9e51b
 	db $0, "WARDEN: Thanks,", $4f
 	db "kid! No one could", $55
 	db "understand a word", $55
@@ -70315,14 +70312,14 @@ _UnnamedText_7514e: ; 0x9e51b
 	db "your trouble.", $58
 ; 0x9e51b + 135 bytes
 
-UnnamedText_9e5a2: ; 0x9e5a2
+_ReceivedHM04Text: ; 0x9e5a2
 	db $0, $52, " received", $4f
 	db "@"
 	TX_RAM $cf4b
 	db $0, "!@@"
 ; 0x9e5b6
 
-_UnnamedText_75159: ; 0x9e5b6
+_HM04ExplanationText: ; 0x9e5b6
 	db $0, "WARDEN: HM04", $4f
 	db "teaches STRENGTH!", $51
 	db "It lets #MON", $4f
@@ -70338,7 +70335,7 @@ _UnnamedText_75159: ; 0x9e5b6
 	db "rare SURF HM.", $57
 ; 0x9e5b6 + 196 bytes
 
-_UnnamedText_7515e: ; 0x9e67a
+_HM04NoRoomText: ; 0x9e67a
 	db $0, "Your pack is", $4f
 	db "stuffed full!", $57
 ; 0x9e67a + 28 bytes
@@ -70491,16 +70488,13 @@ _UnnamedText_75590: ; 0xa0069
 	db "too!", $57
 ; 0xa0069 + 130 bytes
 
-UnnamedText_a00eb: ; 0xa00eb
+_ReceivedTM06Text: ; 0xa00eb
 	db $0, $52, " received", $4f
 	db "@"
-; 0xa00eb + 13 bytes = 0xa00f8
-
-UnnamedText_a00f8: ; 0xa00f8
 	TX_RAM $cf4b
 	db $0, "!@@"
 
-_UnnamedText_7559a: ; 0xa00ff
+_TM06ExplanationText: ; 0xa00ff
 	db $0, $51
 	db "TM06 contains", $4f
 	db "TOXIC!", $51
@@ -70509,7 +70503,7 @@ _UnnamedText_7559a: ; 0xa00ff
 	db "400 years old!", $57
 ; 0xa00ff + 68 bytes
 
-_UnnamedText_7559f: ; 0xa0143
+_TM06NoRoomText: ; 0xa0143
 	db $0, "Make space for", $4f
 	db "this, child!", $57
 ; 0xa0143 + 29 bytes
@@ -70777,17 +70771,14 @@ _UnnamedText_75925: ; 0xa0946
 	db "have this too!", $57
 ; 0xa0946 + 98 bytes
 
-UnnamedText_a09a8: ; 0xa09a8
+_ReceivedTM38Text: ; 0xa09a8
 	db $0, $52, " received", $4f
 	db "@"
-; 0xa09a8 + 13 bytes = 0xa09b5
-
-UnnamedText_a09b5: ; 0xa09b5
 	TX_RAM $cf4b
 	db $0, "!@@"
-; 0xa09b5 + 7 bytes = 0xa09bc
+; 0xa09bc
 
-_UnnamedText_7592f: ; 0xa09bc
+_TM38ExplanationText: ; 0xa09bc
 	db $0, $51
 	db "TM38 contains", $4f
 	db "FIRE BLAST!", $51
@@ -70798,7 +70789,7 @@ _UnnamedText_7592f: ; 0xa09bc
 	db "good bets!", $57
 ; 0xa09bc + 98 bytes
 
-_UnnamedText_75934: ; 0xa0a1e
+_TM38NoRoomText: ; 0xa0a1e
 	db $0, "Make room for my", $4f
 	db "gift!", $57
 ; 0xa0a1e + 24 bytes
@@ -70973,24 +70964,21 @@ _Lab2Text1: ; 0xa0eb5
 	db "rare, prehistoric", $55
 	db "#MON!", $57
 
-_UnnamedText_75cc8: ; 0xa0f09
+_TM35PreReceiveText: ; 0xa0f09
 	db $0, "Tch-tch-tch!", $4f
 	db "I made a cool TM!", $51
 	db "It can cause all", $4f
 	db "kinds of fun!", $58
 ; 0xa0f09 + 63 bytes
 
-UnnamedText_a0f48: ; 0xa0f48
+_ReceivedTM35Text: ; 0xa0f48
 	db $0, $52, " received ", $4f
 	db "@"
-; 0xa0f56
-
-UnnamedText_a0f56: ; 0xa0f56
 	TX_RAM $cf4b
 	db $0, "!@@"
 ; 0xa0f5d
 
-_UnnamedText_75cd3: ; 0xa0f5d
+_TM35ExplanationText: ; 0xa0f5d
 	db $0, "Tch-tch-tch!", $4f
 	db "That's the sound", $55
 	db "of a METRONOME!", $51
@@ -71000,7 +70988,7 @@ _UnnamedText_75cd3: ; 0xa0f5d
 	db "it doesn't know!", $57
 ; 0xa0f5d + 106 bytes
 
-_UnnamedText_75cd8: ; 0xa0fc7
+_TM35NoRoomText: ; 0xa0fc7
 	db $0, "Your pack is", $4f
 	db "crammed full!", $57
 ; 0xa0fc7 + 28 bytes
@@ -71184,7 +71172,7 @@ _UnnamedText_5ccd4: ; 0xa15ad
 	db "favorite hobby!", $58
 ; 0xa15ad + 137 bytes
 
-_UnnamedText_5ccd9: ; 0xa1636
+_TM31PreReceiveText: ; 0xa1636
 	db $0, "Oh wow!", $4f
 	db "A # DOLL!", $51
 	db "For me?", $4f
@@ -71430,7 +71418,7 @@ ReceivedTM46Text: ; 0xa1dcd
 	db "TM46!@@"
 ; 0xa1de0
 
-_UnnamedText_5d17d: ; 0xa1de0
+_TM46ExplanationText: ; 0xa1de0
 	db $0, $51
 	db "TM46 is PSYWAVE!", $4f
 	db "It uses powerful", $55
@@ -71438,7 +71426,7 @@ _UnnamedText_5d17d: ; 0xa1de0
 	db "inflict damage!", $57
 ; 0xa1de0 + 69 bytes
 
-_UnnamedText_5d182: ; 0xa1e25
+_TM46NoRoomText: ; 0xa1e25
 	db $0, "Your pack is full", $4f
 	db "of other items!", $57
 ; 0xa1e25 + 35 bytes
@@ -71649,30 +71637,27 @@ _SaffronPokecenterText3: ; 0xa24bf
 	db "why it attracted", $55
 	db "TEAM ROCKET!", $57
 
-_UnnamedText_1de75: ; 0xa24fe
+_TM29PreReceiveText: ; 0xa24fe
 	db $0, "...Wait! Don't", $4f
 	db "say a word!", $51
 	db "You wanted this!", $58
 ; 0xa24fe + 44 bytes
 
-_UnnamedText_1de7a: ; 0xa252a
+_ReceivedTM29Text: ; 0xa252a
 	db $0, $52, " received", $4f
 	db "@"
-; 0xa2537
-
-UnnamedText_a2537: ; 0xa2537
 	TX_RAM $cf4b
 	db $0, "!@@"
 ; 0xa253e
 
-_UnnamedText_1de80: ; 0xa253e
+_TM29ExplanationText: ; 0xa253e
 	db $0, "TM29 is PSYCHIC!", $51
 	db "It can lower the", $4f
 	db "target's SPECIAL", $55
 	db "abilities.", $57
 ; 0xa253e + 62 bytes
 
-_UnnamedText_1de85: ; 0xa257c
+_TM29NoRoomText: ; 0xa257c
 	db $0, "Where do you plan", $4f
 	db "to put this?", $57
 ; 0xa257c + 32 bytes
@@ -72100,13 +72085,13 @@ _ReceivedTM42Text: ; 0xa469a
 	db "TM42!@@"
 ; 0xa46ad
 
-_UnnamedText_191d5: ; 0xa46ad
+_TM42Explanation: ; 0xa46ad
 	db $0, "TM42 contains", $4f
 	db "DREAM EATER...", $55
 	db "...Snore...", $57
 ; 0xa46ad + 42 bytes
 
-_UnnamedText_191da: ; 0xa46d7
+_TM42NoRoomText: ; 0xa46d7
 	db $0, "You have too much", $4f
 	db "stuff already.", $57
 ; 0xa46d7 + 34 bytes
@@ -72175,7 +72160,7 @@ _ViridianCityText13: ; 0xa4949
 	db $0, "VIRIDIAN CITY", $4f
 	db "#MON GYM", $57
 
-_UnnamedText_19232: ; 0xa4961
+_ViridianCityText14: ; 0xa4961
 	db $0, "The GYM's doors", $4f
 	db "are locked...", $57
 ; 0xa4961 + 30 bytes
