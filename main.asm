@@ -31466,10 +31466,10 @@ TrainerHeader_45f0f: ; 0x45f0f
 	db $1 ; flag's bit
 	db ($0 << 4) ; trainer's view range
 	dw $d85f ; flag's byte
-	dw UnnamedText_45f26 ; 0x5f26 TextBeforeBattle
-	dw UnnamedText_45f26 ; 0x5f26 TextAfterBattle
-	dw UnnamedText_45f26 ; 0x5f26 TextEndBattle
-	dw UnnamedText_45f26 ; 0x5f26 TextEndBattle
+	dw UnknownDungeon3MewtwoText ; 0x5f26 TextBeforeBattle
+	dw UnknownDungeon3MewtwoText ; 0x5f26 TextAfterBattle
+	dw UnknownDungeon3MewtwoText ; 0x5f26 TextEndBattle
+	dw UnknownDungeon3MewtwoText ; 0x5f26 TextEndBattle
 ; 0x45f1b
 
 db $ff
@@ -31480,8 +31480,8 @@ UnknownDungeon3Text1: ; 0x45f1c
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
-UnnamedText_45f26: ; 0x45f26
-	TX_FAR _UnnamedText_45f26 ; 0x85c72
+UnknownDungeon3MewtwoText: ; 0x45f26
+	TX_FAR _UnknownDungeon3MewtwoText ; 0x85c72
 	db $8
 	ld a, $83
 	call $13d0
@@ -35811,17 +35811,17 @@ SafariZoneSecretHouseText1: ; 0x4a31c
 	ld bc, (HM_03 << 8) | 1
 	call GiveItem
 	jr nc, .asm_a21d2 ; 0x4a330
-	ld hl, UnnamedText_4a355
+	ld hl, ReceivedHM03Text
 	call PrintText
 	ld hl, $d857
 	set 0, [hl]
 	jr .asm_8f1fc ; 0x4a33d
 .asm_a21d2 ; 0x4a33f
-	ld hl, UnnamedText_4a360
+	ld hl, HM03NoRoomText
 	call PrintText
 	jr .asm_8f1fc ; 0x4a345
 .asm_20a9b ; 0x4a347
-	ld hl, UnnamedText_4a35b
+	ld hl, HM03ExplanationText
 	call PrintText
 .asm_8f1fc ; 0x4a34d
 	jp TextScriptEnd
@@ -35831,18 +35831,18 @@ UnnamedText_4a350: ; 0x4a350
 	db $50
 ; 0x4a350 + 5 bytes
 
-UnnamedText_4a355: ; 0x4a355
-	TX_FAR _UnnamedText_4a355 ; 0x85943
+ReceivedHM03Text: ; 0x4a355
+	TX_FAR _ReceivedHM03Text ; 0x85943
 	db $0B, $50
 ; 0x4a35b
 
-UnnamedText_4a35b: ; 0x4a35b
-	TX_FAR _UnnamedText_4a35b
+HM03ExplanationText: ; 0x4a35b
+	TX_FAR _HM03ExplanationText
 	db $50
 ; 0x4a35b + 5 bytes
 
-UnnamedText_4a360: ; 0x4a360
-	TX_FAR _UnnamedText_4a360
+HM03NoRoomText: ; 0x4a360
+	TX_FAR _HM03NoRoomText
 	db $50
 ; 0x4a360 + 5 bytes
 
@@ -60573,14 +60573,14 @@ _UnnamedText_4a350: ; 0x858a4
 	db "You have won!", $58
 ; 0x858a4 + 159 bytes
 
-_UnnamedText_4a355: ; 0x85943
+_ReceivedHM03Text: ; 0x85943
 	db $0, $52, " received", $4f
 	db "@"
 	TX_RAM $cf4b
 	db $0, "!@@"
 ; 0x85957
 
-_UnnamedText_4a35b: ; 0x85957
+_HM03ExplanationText: ; 0x85957
 	db $0, "HM03 is SURF!", $51
 	db "#MON will be", $4f
 	db "able to ferry you", $55
@@ -60594,7 +60594,7 @@ _UnnamedText_4a35b: ; 0x85957
 	db "fabulous prize!", $57
 ; 0x85957 + 171 bytes
 
-_UnnamedText_4a360: ; 0x85a02
+_HM03NoRoomText: ; 0x85a02
 	db $0, "You don't have", $4f
 	db "room for this", $55
 	db "fabulous prize!", $57
@@ -60655,7 +60655,7 @@ _SafariZoneRestHouse4Text3: ; 0x85c17
 	db "a VAPOREON!", $55
 	db "I wonder why?", $57
 
-_UnnamedText_45f26: ; 0x85c72
+_UnknownDungeon3MewtwoText: ; 0x85c72
 	db $0, "Mew!@@"
 ; 0x85c79
 
