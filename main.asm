@@ -14958,8 +14958,8 @@ CeruleanCityScript1: ; 0x19567
 	ld hl, $d72d
 	set 6, [hl]
 	set 7, [hl]
-	ld hl, $566d
-	ld de, $5672
+	ld hl, UnnamedText_1966d
+	ld de, UnnamedText_19672
 	call $3354
 	ld a, $e1
 	ld [$d059], a
@@ -15092,8 +15092,8 @@ CeruleanCityText2: ; 0x1967c
 	ld hl, $d72d
 	set 6, [hl]
 	set 7, [hl]
-	ld hl, $56ee
-	ld de, $56ee
+	ld hl, UnnamedText_196ee
+	ld de, UnnamedText_196ee
 	call $3354
 	ld a, [$ff00+$8c]
 	ld [$cf13], a
@@ -17498,8 +17498,8 @@ OaksLabScript11: ; 0x1cdb9
 	ld a, $1
 	ld [$cf13], a
 	call $32ef
-	ld hl, $53be
-	ld de, $53c3
+	ld hl, UnnamedText_1d3be
+	ld de, UnnamedText_1d3c3
 	call $3354
 	ld hl, $d72d
 	set 6, [hl]
@@ -30753,14 +30753,14 @@ RocketHideout4Text1: ; 0x4553a
 	db $08 ; asm
 	ld a, [$d81b]
 	bit 7, a
-	jp nz, $5571
+	jp nz, .asm_545571
 	ld hl, UnnamedText_4557a
 	call PrintText
 	ld hl, $d72d
 	set 6, [hl]
 	set 7, [hl]
 	ld hl, UnnamedText_4557f
-	ld de, $557f ; probably UnnamedText_4557f
+	ld de, UnnamedText_4557f
 	call $3354
 	ldh a, [$8c]
 	ld [$cf13], a
@@ -30772,6 +30772,7 @@ RocketHideout4Text1: ; 0x4553a
 	ld [$d634], a
 	ld [$da39], a
 	jr .asm_209f0 ; 0x4556f
+.asm_545571
 	ld hl, RocketHideout4Text10
 	call PrintText
 .asm_209f0 ; 0x45577
@@ -33234,8 +33235,8 @@ CeladonGymText1: ; 0x48a11
 	ld hl, $d72d
 	set 6, [hl]
 	set 7, [hl]
-	ld hl, $4a63
-	ld de, $4a63
+	ld hl, UnnamedText_48a63
+	ld de, UnnamedText_48a63
 	call $3354
 	ldh a, [$8c]
 	ld [$cf13], a
@@ -33803,7 +33804,7 @@ CeladonGameCornerText11: ; 0x48e9d
 	set 6, [hl]
 	set 7, [hl]
 	ld hl, UnnamedText_48ed3
-	ld de, $4ed3 ; maybe UnnamedText_48ed3
+	ld de, UnnamedText_48ed3
 	call $3354
 	ldh a, [$8c]
 	ld [$cf13], a
@@ -37148,8 +37149,8 @@ Route22Script1: ; 0x50f62
 	ld hl, $d72d
 	set 6, [hl]
 	set 7, [hl]
-	ld hl, $51b7
-	ld de, $51bc
+	ld hl, UnnamedText_511b7
+	ld de, UnnamedText_511bc
 	call $3354
 	ld a, $e1
 	ld [$d059], a
@@ -47379,8 +47380,8 @@ CeruleanGymText1: ; 0x5c771
 	ld hl, $d72d
 	set 6, [hl]
 	set 7, [hl]
-	ld hl, $47d8
-	ld de, $47d8
+	ld hl, UnnamedText_5c7d8
+	ld de, UnnamedText_5c7d8
 	call $3354
 	ldh a, [$8c]
 	ld [$cf13], a
@@ -47841,8 +47842,8 @@ VermilionGymText1: ; 0x5cb1d
 	ld hl, $d72d
 	set 6, [hl]
 	set 7, [hl]
-	ld hl, $4b8b
-	ld de, $4b8b
+	ld hl, ReceivedThunderbadgeText
+	ld de, ReceivedThunderbadgeText
 	call $3354
 	ldh a, [$8c]
 	ld [$cf13], a
@@ -48211,8 +48212,8 @@ FightingDojoText1: ; 0x5ce44
 	ld hl, $d72d
 	set 6, [hl]
 	set 7, [hl]
-	ld hl, $4e93
-	ld de, $4e93
+	ld hl, UnnamedText_5ce93
+	ld de, UnnamedText_5ce93
 	call $3354
 	ldh a, [$8c]
 	ld [$cf13], a
@@ -48561,7 +48562,7 @@ SaffronGymText1: ; 0x5d118
 	set 6, [hl]
 	set 7, [hl]
 	ld hl, UnnamedText_5d167
-	ld de, $5167 ; probably UnnamedText_5d167
+	ld de, UnnamedText_5d167
 	call $3354
 	ldh a, [$8c]
 	ld [$cf13], a
@@ -51328,34 +51329,34 @@ SSAnne2Text1: ; 0x614e1
 
 SSAnne2Text2: ; 0x614e6
 	db $8
-	ld hl, UnnamedText_61500
+	ld hl, SSAnneRivalBeforeBattleText
 	call PrintText
 	ld hl, $d72d
 	set 6, [hl]
 	set 7, [hl]
-	ld hl, $5505
-	ld de, $550a
+	ld hl, SSAnneRivalDefeatedText
+	ld de, SSAnneRivalWonText
 	call $3354
 	jp TextScriptEnd
 ; 0x61500
 
-UnnamedText_61500: ; 0x61500
-	TX_FAR _UnnamedText_61500
+SSAnneRivalBeforeBattleText: ; 0x61500
+	TX_FAR _SSAnneRivalBeforeBattleText
 	db $50
 ; 0x61500 + 5 bytes
 
-UnnamedText_61505: ; 0x61505
-	TX_FAR _UnnamedText_61505
+SSAnneRivalDefeatedText: ; 0x61505
+	TX_FAR _SSAnneRivalDefeatedText
 	db $50
 ; 0x61505 + 5 bytes
 
-UnnamedText_6150a: ; 0x6150a
-	TX_FAR _UnnamedText_6150a
+SSAnneRivalWonText: ; 0x6150a
+	TX_FAR _SSAnneRivalWonText
 	db $50
 ; 0x6150a + 5 bytes
 
 SSAnne2Text3: ; 0x6150f
-	TX_FAR _UnnamedText_6150f
+	TX_FAR _SSAnneRivalCaptainText
 	db $50
 ; 0x6150f + 5 bytes
 
@@ -54486,8 +54487,8 @@ ViridianGymText1: ; 0x74a69
 	ld hl, $d72d
 	set 6, [hl]
 	set 7, [hl]
-	ld hl, $4ad3
-	ld de, $4ad3
+	ld hl, UnnamedText_74ad3
+	ld de, UnnamedText_74ad3
 	call $3354
 	ldh a, [$8c]
 	ld [$cf13], a
@@ -55756,7 +55757,7 @@ FuchsiaGymText1: ; 0x75534
 	set 6, [hl]
 	set 7, [hl]
 	ld hl, UnnamedText_75586
-	ld de, $5586 ; probably UnnamedText_75586
+	ld de, UnnamedText_75586
 	call $3354
 	ldh a, [$8c]
 	ld [$cf13], a
@@ -56408,8 +56409,8 @@ CinnabarGymText7: ; 0x75a42
 	jr nz, .asm_2f755 ; 0x75a4b
 	ld hl, UnnamedText_75a68
 	call PrintText
-	ld hl, $5a6d
-	ld de, $5a6d
+	ld hl, UnnamedText_75a6d
+	ld de, UnnamedText_75a6d
 	call $3354
 	jp $58b7
 .asm_2f755 ; 0x75a5f
@@ -57046,8 +57047,8 @@ GaryScript2: ; 0x75f6a 5F6A
 	ld hl, $d72d
 	set 6, [hl]
 	set 7, [hl]
-	ld hl, $60f9
-	ld de, $60fe
+	ld hl, UnnamedText_760f9
+	ld de, UnnamedText_760fe
 	call $3354
 	ld a, $f3
 	ld [$d059], a
@@ -58693,7 +58694,7 @@ _SSAnne2Text1: ; 0x80d34
 	db "hold parties with", $55
 	db "invited trainers!", $57
 
-_UnnamedText_61500: ; 0x80d9a
+_SSAnneRivalBeforeBattleText: ; 0x80d9a
 	db $0, $53, ": Bonjour!", $4f
 	db $52, "!", $51
 	db "Imagine seeing", $4f
@@ -58710,21 +58711,21 @@ _UnnamedText_61500: ; 0x80d9a
 	db "grassy areas!", $57
 ; 0x80d9a + 189 bytes
 
-_UnnamedText_61505: ; 0x80e57
+_SSAnneRivalDefeatedText: ; 0x80e57
 	db $0, "Humph!", $51
 	db "At least you're", $4f
 	db "raising your", $55
 	db "#MON!", $58
 ; 0x80e57 + 42 bytes
 
-_UnnamedText_6150a: ; 0x80e81
+_SSAnneRivalWonText: ; 0x80e81
 	db $0, $52, "! What are", $4f
 	db "you, seasick?", $51
 	db "You should shape", $4f
 	db "up, pal!", $58
 ; 0x80e81 + 53 bytes
 
-_UnnamedText_6150f: ; 0x80eb6
+_SSAnneRivalCaptainText: ; 0x80eb6
 	db $0, $53, ": I heard", $4f
 	db "there was a CUT", $55
 	db "master on board.", $51
