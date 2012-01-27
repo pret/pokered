@@ -49526,7 +49526,7 @@ INCBIN "baserom.gbc",$5da27,$38
 VictoryRoad1Texts: ; 0x5da5f
 	dw VictoryRoad1Text1, VictoryRoad1Text2, VictoryRoad1Text3, VictoryRoad1Text4, VictoryRoad1Text5, VictoryRoad1Text6, VictoryRoad1Text7
 
-VictoryRoad1TrainerHeaders
+VictoryRoad1TrainerHeaders:
 VictoryRoad1TrainerHeader1: ; 0x5da6d
 	db $1 ; flag's bit
 	db ($2 << 4) ; trainer's view range
