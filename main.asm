@@ -21045,7 +21045,7 @@ UnnamedText_21865: ; 0x21865
 	db $50
 ; 0x21865 + 5 bytes
 
-INCBIN "baserom.gbc",$2186a,$2796
+INCBIN "baserom.gbc",$2186a,$23f52 - $2186a
 
 SECTION "bank9",DATA,BANK[$9]
 
