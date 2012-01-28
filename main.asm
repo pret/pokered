@@ -6102,7 +6102,37 @@ MewPicBack: ; 0x4205
 	INCBIN "pic/monback/mewb.pic"
 ; 0x425b
 
-INCBIN "baserom.gbc",$425b,$42a7 - $425b
+MewBaseStats: ; 0x425b
+	db 151 ; pokedex id
+	db 100 ; base hp
+	db 100 ; base attack
+	db 100 ; base defense
+	db 100 ; base speed
+	db 100 ; base special
+
+	db PSYCHIC ; species type 1
+	db PSYCHIC ; species type 2
+
+	db 45 ; catch rate
+	db 64 ; base exp yield
+	db $55 ; sprite dimensions
+
+	dw MewPicFront
+	dw MewPicBack
+	
+	; attacks known at lvl 0
+	db POUND
+	db 0
+	db 0
+	db 0
+
+	db 3 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$426f,$4276 - $426f
+	db $ff ; probably "learn anything" not padding
+
+INCBIN "baserom.gbc",$4277,$30
 
 UnnamedText_42a7: ; 0x42a7
 	TX_FAR SafariZoneEatingText

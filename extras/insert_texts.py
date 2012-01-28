@@ -713,7 +713,7 @@ def base_data_pretty_printer(id):
     """
     output = ""
     rom = extract_maps.rom
-    base_address = 0x383de + (28 * (id))
+    base_address = 0x425b #0x383de + (28 * (id))
     
     pokedex_number = id
     mon_name = get_mon_name(id)
@@ -775,7 +775,7 @@ def base_data_pretty_printer(id):
 def insert_base_stats(id):
     insert_asm = base_data_pretty_printer(id)
 
-    address = 0x383de + (28 * (id))
+    address = 0x425b #0x383de + (28 * (id))
     line_number = find_incbin_to_replace_for(address)
     label = get_mon_name(id).title() + "BaseStats"
     if line_number == None:
@@ -836,8 +836,8 @@ if __name__ == "__main__":
     load_asm()
     isolate_incbins()
     process_incbins()
-    #insert_base_stats(1)
-    insert_all_base_stats()
+    insert_base_stats(150)
+    #insert_all_base_stats()
 
     #load texts (these two have different formats)
     #all_texts = pretty_map_headers.analyze_texts.analyze_texts()
