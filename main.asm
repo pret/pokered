@@ -16057,7 +16057,7 @@ SilphCo4Texts: ; 0x19da0
 	dw SilphCo4Text1, SilphCo4Text2, SilphCo4Text3, SilphCo4Text4, SilphCo4Text5, SilphCo4Text6, SilphCo4Text7
 
 SilphCo4TrainerHeaders:
-SilphCo4TrainerHeader1: ; 0x19dae
+SilphCo4TrainerHeader0: ; 0x19dae
 	db $2 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d829 ; flag's byte
@@ -16108,7 +16108,7 @@ UnnamedText_19de5: ; 0x19de5
 
 SilphCo4Text2: ; 0x19dea
 	db $08 ; asm
-	ld hl, SilphCo4TrainerHeader1
+	ld hl, SilphCo4TrainerHeader0
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -16230,7 +16230,7 @@ SilphCo5Texts: ; 0x19fbc
 	dw SilphCo5Text1, SilphCo5Text2, SilphCo5Text3, SilphCo5Text4, SilphCo5Text5, SilphCo5Text6, SilphCo5Text7, SilphCo5Text8, SilphCo5Text9, SilphCo5Text10, SilphCo5Text11
 
 SilphCo5TrainerHeaders:
-Silphco5TrainerHeader1: ; 0x19fd2
+Silphco5TrainerHeader0: ; 0x19fd2
 	db $2 ; flag's bit
 	db ($1 << 4) ; trainer's view range
 	dw $d82b ; flag's byte
@@ -16291,7 +16291,7 @@ UnnamedText_1a015: ; 0x1a015
 
 SilphCo5Text2: ; 0x1a01a
 	db $08 ; asm
-	ld hl, Silphco5TrainerHeader1
+	ld hl, Silphco5TrainerHeader0
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -16450,7 +16450,7 @@ SilphCo6Texts: ; 0x1a1f6
 	dw SilphCo6Text1, SilphCo6Text2, SilphCo6Text3, SilphCo6Text4, SilphCo6Text5, SilphCo6Text6, SilphCo6Text7, SilphCo6Text8, SilphCo6Text9, SilphCo6Text10
 
 SilphCo6TrainerHeaders:
-SilphCo6TrainerHeader1: ; 0x1a20a
+SilphCo6TrainerHeader0: ; 0x1a20a
 	db $6 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d82d ; flag's byte
@@ -16572,7 +16572,7 @@ UnnamedText_1a2ab: ; 0x1a2ab
 
 SilphCo6Text6: ; 0x1a2b0
 	db $08 ; asm
-	ld hl, SilphCo6TrainerHeader1
+	ld hl, SilphCo6TrainerHeader0
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -35220,7 +35220,7 @@ Mansion1Texts: ; 0x4432c
 	dw Mansion1Text1, Mansion1Text2, Mansion1Text3, Mansion1Text4
 
 Mansion1TrainerHeaders:
-Mansion1TrainerHeader1: ; 0x44334
+Mansion1TrainerHeader0: ; 0x44334
 	db $1 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d798 ; flag's byte
@@ -35234,7 +35234,7 @@ db $ff
 
 Mansion1Text1: ; 0x44341
 	db $08 ; asm
-	ld hl, Mansion1TrainerHeader1
+	ld hl, Mansion1TrainerHeader0
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -35694,7 +35694,7 @@ VictoryRoad3Texts: ; 0x44a24
 	dw VictoryRoad3Text1, VictoryRoad3Text2, VictoryRoad3Text3, VictoryRoad3Text4, VictoryRoad3Text5, VictoryRoad3Text6, VictoryRoad3Text7, VictoryRoad3Text8, VictoryRoad3Text9, VictoryRoad3Text10
 
 VictoryRoad3TrainerHeaders:
-VictoryRoad3TrainerHeader1: ; 0x44a38
+VictoryRoad3TrainerHeader0: ; 0x44a38
 	db $1 ; flag's bit
 	db ($1 << 4) ; trainer's view range
 	dw $d813 ; flag's byte
@@ -35738,7 +35738,7 @@ db $ff
 
 VictoryRoad3Text1: ; 0x44a69
 	db $08 ; asm
-	ld hl, VictoryRoad3TrainerHeader1
+	ld hl, VictoryRoad3TrainerHeader0
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -35878,7 +35878,7 @@ RocketHideout1Texts: ; 0x44c14
 	dw RocketHideout1Text1, RocketHideout1Text2, RocketHideout1Text3, RocketHideout1Text4, RocketHideout1Text5, RocketHideout1Text6, RocketHideout1Text7
 
 RocketHideout1TrainerHeaders:
-RocketHideout1TrainerHeader1: ; 0x44c22
+RocketHideout1TrainerHeader0: ; 0x44c22
 	db $1 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d815 ; flag's byte
@@ -35932,7 +35932,7 @@ db $ff
 
 RocketHideout1Text1: ; 0x44c5f
 	db $08 ; asm
-	ld hl, RocketHideout1TrainerHeader1
+	ld hl, RocketHideout1TrainerHeader0
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -36099,7 +36099,7 @@ RocketHideout2Texts: ; 0x450c7
 	dw RocketHideout2Text1, RocketHideout2Text2, RocketHideout2Text3, RocketHideout2Text4, RocketHideout2Text5
 
 RocketHideout2TrainerHeaders:
-RocketHideout2TrainerHeader1: ; 0x450d1
+RocketHideout2TrainerHeader0: ; 0x450d1
 	db $1 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d817 ; flag's byte
@@ -36113,7 +36113,7 @@ db $ff
 
 RocketHideout2Text1: ; 0x450de
 	db $08 ; asm
-	ld hl, RocketHideout2TrainerHeader1
+	ld hl, RocketHideout2TrainerHeader0
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -36186,7 +36186,7 @@ RocketHideout3Texts: ; 0x452fa
 	dw RocketHideout3Text1, RocketHideout3Text2, RocketHideout3Text3, RocketHideout3Text4
 
 RocketHideout3TrainerHeaders:
-RocketHideout3TrainerHeader1: ; 0x45302
+RocketHideout3TrainerHeader0: ; 0x45302
 	db $1 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d819 ; flag's byte
@@ -36210,7 +36210,7 @@ db $ff
 
 RocketHideout3Text1: ; 0x4531b
 	db $08 ; asm
-	ld hl, RocketHideout3TrainerHeader1
+	ld hl, RocketHideout3TrainerHeader0
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -36286,7 +36286,7 @@ RocketHideout4_h: ; 0x45451 to 0x4545d (12 bytes) (bank=11) (id=202)
 RocketHideout4Script: ; 0x4545d
 	call Unnamed_45473
 	call $3c3c
-	ld hl, RocketHideout4TrainerHeader1
+	ld hl, RocketHideout4TrainerHeader0
 	ld de, $54ae
 	ld a, [$d634]
 	call $3160
@@ -36301,7 +36301,7 @@ RocketHideout4Texts: ; 0x45501
 	dw RocketHideout4Text1, RocketHideout4Text2, RocketHideout4Text3, RocketHideout4Text4, RocketHideout4Text5, RocketHideout4Text6, RocketHideout4Text7, RocketHideout4Text8, RocketHideout4Text9, RocketHideout4Text10
 
 RocketHideout4TrainerHeaders:
-RocketHideout4TrainerHeader1: ; 0x45515
+RocketHideout4TrainerHeader0: ; 0x45515
 	db $2 ; flag's bit
 	db ($0 << 4) ; trainer's view range
 	dw $d81b ; flag's byte
@@ -36379,7 +36379,7 @@ RocketHideout4Text10: ; 0x45584
 
 RocketHideout4Text2: ; 0x45589
 	db $08 ; asm
-	ld hl, RocketHideout4TrainerHeader1
+	ld hl, RocketHideout4TrainerHeader0
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -37056,7 +37056,7 @@ UnknownDungeon3Texts: ; 0x45f09
 	dw UnknownDungeon3Text1, UnknownDungeon3Text2, UnknownDungeon3Text3
 
 UnknownDungeon3TrainerHeaders:
-UnknownDungeon3TrainerHeader1: ; 0x45f0f
+UnknownDungeon3TrainerHeader0: ; 0x45f0f
 	db $1 ; flag's bit
 	db ($0 << 4) ; trainer's view range
 	dw $d85f ; flag's byte
@@ -37070,7 +37070,7 @@ db $ff
 
 UnknownDungeon3Text1: ; 0x45f1c
 	db $08 ; asm
-	ld hl, UnknownDungeon3TrainerHeader1
+	ld hl, UnknownDungeon3TrainerHeader0
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -37127,7 +37127,7 @@ RockTunnel2Texts: ; 0x46004
 	dw RockTunnel2Text1, RockTunnel2Text2, RockTunnel2Text3, RockTunnel2Text4, RockTunnel2Text5, RockTunnel2Text6, RockTunnel2Text7, RockTunnel2Text8
 
 RockTunnel2TrainerHeaders:
-RockTunnel2TrainerHeader1: ; 0x46014
+RockTunnel2TrainerHeader0: ; 0x46014
 	db $1 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d87d ; flag's byte
@@ -37211,7 +37211,7 @@ db $ff
 
 RockTunnel2Text1: ; 0x46075
 	db $08 ; asm
-	ld hl, RockTunnel2TrainerHeader1
+	ld hl, RockTunnel2TrainerHeader0
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -37787,7 +37787,7 @@ SeafoamIslands5Texts: ; 0x4687c
 	dw SeafoamIslands5Text1, SeafoamIslands5Text2, SeafoamIslands5Text3, SeafoamIslands5Text4, SeafoamIslands5Text5
 
 SeafoamIslands5TrainerHeaders:
-SeafoamIslands5TrainerHeader1: ; 0x46886
+SeafoamIslands5TrainerHeader0: ; 0x46886
 	db $2 ; flag's bit
 	db ($0 << 4) ; trainer's view range
 	dw $d882 ; flag's byte
@@ -37801,7 +37801,7 @@ db $ff
 
 SeafoamIslands5Text3: ; 0x46893
 	db $08 ; asm
-	ld hl, SeafoamIslands5TrainerHeader1
+	ld hl, SeafoamIslands5TrainerHeader0
 	call LoadTrainerHeader
 	ld a, $4
 	ld [$d668], a
@@ -38727,7 +38727,7 @@ CeladonGymTexts: ; 0x489a6
 	dw CeladonGymText1, CeladonGymText2, CeladonGymText3, CeladonGymText4, CeladonGymText5, CeladonGymText6, CeladonGymText7, CeladonGymText8, CeladonGymText9, TM21Text, TM21NoRoomText
 
 CeladonGymTrainerHeaders:
-CeladonGymTrainerHeader1: ; 0x489bc
+CeladonGymTrainerHeader0: ; 0x489bc
 	db $2 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d77c ; flag's byte
@@ -38869,7 +38869,7 @@ TM21NoRoomText: ; 0x48a7c
 
 CeladonGymText2: ; 0x48a81
 	db $08 ; asm
-	ld hl, CeladonGymTrainerHeader1
+	ld hl, CeladonGymTrainerHeader0
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -40703,7 +40703,7 @@ MtMoon1_h: ; 0x499bc to 0x499c8 (12 bytes) (id=59)
 
 MtMoon1Script: ; 0x499c8
 	call $3c3c
-	ld hl, MtMoon1TrainerHeader1
+	ld hl, MtMoon1TrainerHeader0
 	ld de, Unknown_59db
 	ld a, [$d606]
 	call $3160
@@ -40718,7 +40718,7 @@ MtMoon1Texts: ; 0x499e1
 	dw MtMoon1Text1, MtMoon1Text2, MtMoon1Text3, MtMoon1Text4, MtMoon1Text5, MtMoon1Text6, MtMoon1Text7, MtMoon1Text8, MtMoon1Text9, MtMoon1Text10, MtMoon1Text11, MtMoon1Text12, MtMoon1Text13, MtMoon1Text14
 
 MtMoon1TrainerHeaders:
-MtMoon1TrainerHeader1: ; 0x499fd
+MtMoon1TrainerHeader0: ; 0x499fd
 	db $1 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d7f5 ; flag's byte
@@ -40792,7 +40792,7 @@ db $ff
 
 MtMoon1Text1: ; 0x49a52
 	db $08 ; asm
-	ld hl, MtMoon1TrainerHeader1
+	ld hl, MtMoon1TrainerHeader0
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -41015,7 +41015,7 @@ MtMoon3Texts: ; 0x49e34
 	dw MtMoon3Text1, MtMoon3Text2, MtMoon3Text3, MtMoon3Text4, MtMoon3Text5, MtMoon3Text6, MtMoon3Text7, MtMoon3Text8, MtMoon3Text9, Unnamed_49f99
 
 MtMoon3TrainerHeaders:
-MtMoon3TrainerHeader1: ; 0x49e48
+MtMoon3TrainerHeader0: ; 0x49e48
 	db $2 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7f6 ; flag's byte
@@ -41092,7 +41092,7 @@ MtMoon3Text1: ; 0x49e79
 
 MtMoon3Text2: ; 0x49ec1
 	db $08 ; asm
-	ld hl, MtMoon3TrainerHeader1
+	ld hl, MtMoon3TrainerHeader0
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -42327,7 +42327,7 @@ Route20Texts: ; 0x50d22
 	dw Route20Text1, Route20Text2, Route20Text3, Route20Text4, Route20Text5, Route20Text6, Route20Text7, Route20Text8, Route20Text9, Route20Text10, Route20Text11, Route20Text12
 
 Route20TrainerHeaders:
-Route20TrainerHeader1:
+Route20TrainerHeader0:
 	db $1 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7e7 ; flag's byte
@@ -42431,7 +42431,7 @@ db $ff
 
 Route20Text1: ; 0x50db3
 	db $08 ; asm
-	ld hl, Route20TrainerHeader1
+	ld hl, Route20TrainerHeader0
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -43015,7 +43015,7 @@ Route24Texts: ; 0x5144b
 	dw Route24Text1, Route24Text2, Route24Text3, Route24Text4, Route24Text5, Route24Text6, Route24Text7, Route24Text8
 
 Route24TrainerHeaders:
-Route24TrainerHeader1: ; 0x5145b
+Route24TrainerHeader0: ; 0x5145b
 	db $2 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7ef ; flag's byte
@@ -43156,7 +43156,7 @@ UnnamedText_51530: ; 0x51530
 
 Route24Text2: ; 0x51535
 	db $08 ; asm
-	ld hl, Route24TrainerHeader1
+	ld hl, Route24TrainerHeader0
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -43298,7 +43298,7 @@ Route25Texts: ; 0x51628
 	dw Route25Text1, Route25Text2, Route25Text3, Route25Text4, Route25Text5, Route25Text6, Route25Text7, Route25Text8, Route25Text9, Route25Text10, Route25Text11
 
 Route25TrainerHeaders:
-Route25TrainerHeader1: ; 0x5163e
+Route25TrainerHeader0: ; 0x5163e
 	db $1 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d7f1 ; flag's byte
@@ -43392,7 +43392,7 @@ db $ff
 
 Route25Text1: ; 0x516ab
 	db $08 ; asm
-	ld hl, Route25TrainerHeader1
+	ld hl, Route25TrainerHeader0
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -43616,7 +43616,7 @@ VictoryRoad2Texts: ; 0x5181b
 	dw VictoryRoad2Text1, VictoryRoad2Text2, VictoryRoad2Text3, VictoryRoad2Text4, VictoryRoad2Text5, VictoryRoad2Text6, VictoryRoad2Text7, VictoryRoad2Text8, VictoryRoad2Text9, VictoryRoad2Text10, VictoryRoad2Text11, VictoryRoad2Text12, VictoryRoad2Text13
 
 VictoryRoad2TrainerHeaders:
-VictoryRoad2TrainerHeader1: ; 0x51835
+VictoryRoad2TrainerHeader0: ; 0x51835
 	db $1 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7ee ; flag's byte
@@ -43680,7 +43680,7 @@ db $ff
 
 VictoryRoad2Text1: ; 0x5187e
 	db $08 ; asm
-	ld hl, VictoryRoad2TrainerHeader1
+	ld hl, VictoryRoad2TrainerHeader0
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -43916,7 +43916,7 @@ SilphCo7Texts: ; 0x51d3f
 	dw SilphCo7Text1, SilphCo7Text2, SilphCo7Text3, SilphCo7Text4, SilphCo7Text5, SilphCo7Text6, SilphCo7Text7, SilphCo7Text8, SilphCo7Text9, SilphCo7Text10, SilphCo7Text11, SilphCo7Text12, SilphCo7Text13, SilphCo7Text14, SilphCo7Text15
 
 SilphCo7TrainerHeaders:
-SilphCo7TrainerHeader1: ; 0x51d5d
+SilphCo7TrainerHeader0: ; 0x51d5d
 	db $5 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d82f ; flag's byte
@@ -44085,7 +44085,7 @@ UnnamedText_51e4b: ; 0x51e4b
 
 SilphCo7Text5: ; 0x51e50
 	db $08 ; asm
-	ld hl, SilphCo7TrainerHeader1
+	ld hl, SilphCo7TrainerHeader0
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -44261,7 +44261,7 @@ Mansion2Texts: ; 0x5204d
 	dw Mansion2Text1, Mansion2Text2, Mansion2Text3, Mansion2Text4, Mansion2Text5
 
 Mansion2TrainerHeaders:
-Mansion2TrainerHeader1: ; 0x52057
+Mansion2TrainerHeader0: ; 0x52057
 	db $1 ; flag's bit
 	db ($0 << 4) ; trainer's view range
 	dw $d847 ; flag's byte
@@ -44275,7 +44275,7 @@ db $ff
 
 Mansion2Text1: ; 0x52064
 	db $08 ; asm
-	ld hl, Mansion2TrainerHeader1
+	ld hl, Mansion2TrainerHeader0
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -44384,7 +44384,7 @@ Mansion3_h: ; 0x521e2 to 0x521ee (12 bytes) (id=215)
 Mansion3Script:
 	call Unnamed_52204
 	call $3c3c
-	ld hl, Mansion3TrainerHeader1
+	ld hl, Mansion3TrainerHeader0
 	ld de, $6235
 	ld a, [$d63d]
 	call $3160
@@ -44399,7 +44399,7 @@ Mansion3Texts: ; 0x5228a
 	dw Mansion3Text1, Mansion3Text2, Mansion3Text3, Mansion3Text4, Mansion3Text5, Mansion3Text6
 
 Mansion3TrainerHeaders:
-Mansion3TrainerHeader1: ; 0x52296
+Mansion3TrainerHeader0: ; 0x52296
 	db $1 ; flag's bit
 	db ($0 << 4) ; trainer's view range
 	dw $d849 ; flag's byte
@@ -44423,7 +44423,7 @@ db $ff
 
 Mansion3Text1: ; 0x522af
 	db $08 ; asm
-	ld hl, Mansion3TrainerHeader1
+	ld hl, Mansion3TrainerHeader0
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -44503,7 +44503,7 @@ Mansion4_h: ; 0x523ad to 0x523b9 (12 bytes) (id=216)
 Mansion4Script: ; 0x523b9
 	call Unknown_523cf
 	call $3c3c
-	ld hl, Mansion4TrainerHeader1
+	ld hl, Mansion4TrainerHeader0
 	ld de, $6430
 	ld a, [$d63e]
 	call $3160
@@ -44518,7 +44518,7 @@ Mansion4Texts: ; 0x52436
 INCBIN "baserom.gbc",$52436,$52448 - $52436
 
 Mansion4TrainerHeaders:
-Mansion4TrainerHeader1: ; 0x52448
+Mansion4TrainerHeader0: ; 0x52448
 	db $1 ; flag's bit
 	db ($0 << 4) ; trainer's view range
 	dw $d84b ; flag's byte
@@ -44542,7 +44542,7 @@ db $ff
 
 Mansion4Text1: ; 0x52461
 	db $08 ; asm
-	ld hl, Mansion4TrainerHeader1
+	ld hl, Mansion4TrainerHeader0
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -45633,7 +45633,7 @@ Route2Text4: ; 0x554f3
 
 Route3Script: ; 0x554f8
 	call $3c3c
-	ld hl, Route3TrainerHeader1
+	ld hl, Route3TrainerHeader0
 	ld de, Unknown_5550b
 	ld a, [$d5f8]
 	call $3160
@@ -45648,7 +45648,7 @@ Route3Texts: ; 0x55511
 	dw Route3Text1, Route3Text2, Route3Text3, Route3Text4, Route3Text5, Route3Text6, Route3Text7, Route3Text8, Route3Text9, Route3Text10
 
 Route3TrainerHeaders:
-Route3TrainerHeader1: ; 0x55525
+Route3TrainerHeader0: ; 0x55525
 	db $2 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d7c3 ; flag's byte
@@ -45736,7 +45736,7 @@ Route3Text1: ; 0x55586
 
 Route3Text2: ; 0x5558b
 	db $08 ; asm
-	ld hl, Route3TrainerHeader1
+	ld hl, Route3TrainerHeader0
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -45923,7 +45923,7 @@ Route4Texts: ; 0x55671
 	dw Route4Text1, Route4Text2, Route4Text3, Route4Text4, Route4Text5, Route4Text6
 
 Route4TrainerHeaders:
-Route4TrainerHeader1: ; 0x5567d
+Route4TrainerHeader0: ; 0x5567d
 	db $2 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7c5 ; flag's byte
@@ -45941,7 +45941,7 @@ Route4Text1: ; 0x5568a
 
 Route4Text2: ; 0x5568f
 	db $08 ; asm
-	ld hl, Route4TrainerHeader1
+	ld hl, Route4TrainerHeader0
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -45996,7 +45996,7 @@ Route9Texts: ; 0x556d5
 	dw Route9Text1, Route9Text2, Route9Text3, Route9Text4, Route9Text5, Route9Text6, Route9Text7, Route9Text8, Route9Text9, Route9Text10, Route9Text11
 
 Route9TrainerHeaders:
-Route9TrainerHeader1: ; 0x556eb
+Route9TrainerHeader0: ; 0x556eb
 	db $1 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7cf ; flag's byte
@@ -46090,7 +46090,7 @@ db $ff
 
 Route9Text1: ; 0x55758
 	db $8 ; asm
-	ld hl, Route9TrainerHeader1
+	ld hl, Route9TrainerHeader0
 	jr asm_8be3d ; 0x5575c $2e
 
 Route9Text2:
@@ -46292,7 +46292,7 @@ Route13Texts: ; 0x55837
 	dw Route13Text1, Route13Text2, Route13Text3, Route13Text4, Route13Text5, Route13Text6, Route13Text7, Route13Text8, Route13Text9, Route13Text10, Route13Text11, Route13Text12, Route13Text13
 
 Route13TrainerHeaders:
-Route13TH1: ; 0x55851
+Route13TrainerHeader0: ; 0x55851
 	db $1 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d7d9 ; flag's byte
@@ -46302,7 +46302,7 @@ Route13TH1: ; 0x55851
 	dw Route13EndBattleText2 ; 0x58d9 TextEndBattle
 ; 0x5585d
 
-Route13TH2: ; 0x5585d
+Route13TrainerHeader2: ; 0x5585d
 	db $2 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d7d9 ; flag's byte
@@ -46312,7 +46312,7 @@ Route13TH2: ; 0x5585d
 	dw Route13EndBattleText3 ; 0x58f2 TextEndBattle
 ; 0x55869
 
-Route13TH3: ; 0x55869
+Route13TrainerHeader3: ; 0x55869
 	db $3 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d7d9 ; flag's byte
@@ -46322,7 +46322,7 @@ Route13TH3: ; 0x55869
 	dw Route13EndBattleText4 ; 0x590b TextEndBattle
 ; 0x55875
 
-Route13TH4: ; 0x55875
+Route13TrainerHeader4: ; 0x55875
 	db $4 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d7d9 ; flag's byte
@@ -46332,7 +46332,7 @@ Route13TH4: ; 0x55875
 	dw Route13EndBattleText5 ; 0x5924 TextEndBattle
 ; 0x55881
 
-Route13TH5: ; 0x55881
+Route13TrainerHeader5: ; 0x55881
 	db $5 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7d9 ; flag's byte
@@ -46342,7 +46342,7 @@ Route13TH5: ; 0x55881
 	dw Route13EndBattleText6 ; 0x593d TextEndBattle
 ; 0x5588d
 
-Route13TH6: ; 0x5588d
+Route13TrainerHeader6: ; 0x5588d
 	db $6 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d7d9 ; flag's byte
@@ -46352,7 +46352,7 @@ Route13TH6: ; 0x5588d
 	dw Route13EndBattleText7 ; 0x5956 TextEndBattle
 ; 0x55899
 
-Route13TH7: ; 0x55899
+Route13TrainerHeader7: ; 0x55899
 	db $7 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7d9 ; flag's byte
@@ -46362,7 +46362,7 @@ Route13TH7: ; 0x55899
 	dw Route13EndBattleText8 ; 0x596f TextEndBattle
 ; 0x558a5
 
-Route13TH8: ; 0x558a5
+Route13TrainerHeader8: ; 0x558a5
 	db $8 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d7d9 ; flag's byte
@@ -46372,7 +46372,7 @@ Route13TH8: ; 0x558a5
 	dw Route13EndBattleText9 ; 0x5988 TextEndBattle
 ; 0x558b1
 
-Route13TH9: ; 0x558b1
+Route13TrainerHeader9: ; 0x558b1
 	db $9 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d7d9 ; flag's byte
@@ -46382,7 +46382,7 @@ Route13TH9: ; 0x558b1
 	dw Route13EndBattleText10 ; 0x59a1 TextEndBattle
 ; 0x558bd
 
-Route13TH10: ; 0x558bd
+Route13TrainerHeader10: ; 0x558bd
 	db $a ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7d9 ; flag's byte
@@ -46396,7 +46396,7 @@ db $ff
 
 Route13Text1: ; 0x558ca
 	db $08 ; asm
-	ld hl, Route13TH1
+	ld hl, Route13TrainerHeader0
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -46417,7 +46417,7 @@ Route13AfterBattleText2: ; 0x558de
 
 Route13Text2: ; 0x558e3
 	db $08 ; asm
-	ld hl, Route13TH2
+	ld hl, Route13TrainerHeader2
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -46438,7 +46438,7 @@ Route13AfterBattleText3: ; 0x558f7
 
 Route13Text3: ; 0x558fc
 	db $08 ; asm
-	ld hl, Route13TH3
+	ld hl, Route13TrainerHeader3
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -46459,7 +46459,7 @@ Route13AfterBattleText4: ; 0x55910
 
 Route13Text4: ; 0x55915
 	db $08 ; asm
-	ld hl, Route13TH4
+	ld hl, Route13TrainerHeader4
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -46480,7 +46480,7 @@ Route13AfterBattleText5: ; 0x55929
 
 Route13Text5: ; 0x5592e
 	db $08 ; asm
-	ld hl, Route13TH5
+	ld hl, Route13TrainerHeader5
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -46501,7 +46501,7 @@ Route13AfterBattleText6: ; 0x55942
 
 Route13Text6: ; 0x55947
 	db $08 ; asm
-	ld hl, Route13TH6
+	ld hl, Route13TrainerHeader6
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -46522,7 +46522,7 @@ Route13AfterBattleText7: ; 0x5595b
 
 Route13Text7: ; 0x55960
 	db $08 ; asm
-	ld hl, Route13TH7
+	ld hl, Route13TrainerHeader7
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -46543,7 +46543,7 @@ Route13AfterBattleText8: ; 0x55974
 
 Route13Text8: ; 0x55979
 	db $08 ; asm
-	ld hl, Route13TH8
+	ld hl, Route13TrainerHeader8
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -46564,7 +46564,7 @@ Route13AfterBattleText9: ; 0x5598d
 
 Route13Text9: ; 0x55992
 	db $08 ; asm
-	ld hl, Route13TH9
+	ld hl, Route13TrainerHeader9
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -46585,7 +46585,7 @@ Route13AfterBattleText10: ; 0x559a6
 
 Route13Text10: ; 0x559ab
 	db $08 ; asm
-	ld hl, Route13TH10
+	ld hl, Route13TrainerHeader10
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -46633,7 +46633,7 @@ Route14Texts: ; 0x559ec
 	dw Route14Text1, Route14Text2, Route14Text3, Route14Text4, Route14Text5, Route14Text6, Route14Text7, Route14Text8, Route14Text9, Route14Text10, Route14Text11
 
 Route14TrainerHeaders:
-Route14TrainerHeader1: ; 0x55a02
+Route14TrainerHeader0: ; 0x55a02
 	db $1 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d7db ; flag's byte
@@ -46643,7 +46643,7 @@ Route14TrainerHeader1: ; 0x55a02
 	dw Route14EndBattleText1 ; 0x5a8a TextEndBattle
 ; 0x55a0e
 
-Route14TH1: ; 0x55a0e
+Route14TrainerHeader1: ; 0x55a0e
 	db $2 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d7db ; flag's byte
@@ -46653,7 +46653,7 @@ Route14TH1: ; 0x55a0e
 	dw Route14EndBattleText2 ; 0x5aa3 TextEndBattle
 ; 0x55a1a
 
-Route14TH2: ; 0x55a1a
+Route14TrainerHeader2: ; 0x55a1a
 	db $3 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7db ; flag's byte
@@ -46663,7 +46663,7 @@ Route14TH2: ; 0x55a1a
 	dw Route14EndBattleText3 ; 0x5abc TextEndBattle
 ; 0x55a26
 
-Route14TH3: ; 0x55a26
+Route14TrainerHeader3: ; 0x55a26
 	db $4 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7db ; flag's byte
@@ -46673,7 +46673,7 @@ Route14TH3: ; 0x55a26
 	dw Route14EndBattleText4 ; 0x5ad5 TextEndBattle
 ; 0x55a32
 
-Route14TH4: ; 0x55a32
+Route14TrainerHeader4: ; 0x55a32
 	db $5 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7db ; flag's byte
@@ -46683,7 +46683,7 @@ Route14TH4: ; 0x55a32
 	dw Route14EndBattleText5 ; 0x5aee TextEndBattle
 ; 0x55a3e
 
-Route14TH5: ; 0x55a3e
+Route14TrainerHeader5: ; 0x55a3e
 	db $6 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7db ; flag's byte
@@ -46693,7 +46693,7 @@ Route14TH5: ; 0x55a3e
 	dw Route14EndBattleText6 ; 0x5b07 TextEndBattle
 ; 0x55a4a
 
-Route14TH6: ; 0x55a4a
+Route14TrainerHeader6: ; 0x55a4a
 	db $7 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7db ; flag's byte
@@ -46703,7 +46703,7 @@ Route14TH6: ; 0x55a4a
 	dw Route14EndBattleText7 ; 0x5b20 TextEndBattle
 ; 0x55a56
 
-Route14TH7: ; 0x55a56
+Route14TrainerHeader7: ; 0x55a56
 	db $8 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7db ; flag's byte
@@ -46713,7 +46713,7 @@ Route14TH7: ; 0x55a56
 	dw Route14EndBattleText8 ; 0x5b39 TextEndBattle
 ; 0x55a62
 
-Route14TH8: ; 0x55a62
+Route14TrainerHeader8: ; 0x55a62
 	db $9 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7db ; flag's byte
@@ -46723,7 +46723,7 @@ Route14TH8: ; 0x55a62
 	dw Route14EndBattleText9 ; 0x5b52 TextEndBattle
 ; 0x55a6e
 
-Route14TH9: ; 0x55a6e
+Route14TrainerHeader9: ; 0x55a6e
 	db $a ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7db ; flag's byte
@@ -46737,7 +46737,7 @@ db $ff
 
 Route14Text1: ; 0x55a7b
 	db $08 ; asm
-	ld hl, Route14TrainerHeader1
+	ld hl, Route14TrainerHeader0
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -46758,7 +46758,7 @@ Route14AfterBattleText1: ; 0x55a8f
 
 Route14Text2: ; 0x55a94
 	db $08 ; asm
-	ld hl, Route14TH1
+	ld hl, Route14TrainerHeader1
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -46779,7 +46779,7 @@ Route14AfterBattleText2: ; 0x55aa8
 
 Route14Text3: ; 0x55aad
 	db $08 ; asm
-	ld hl, Route14TH2
+	ld hl, Route14TrainerHeader2
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -46800,7 +46800,7 @@ Route14AfterBattleText3: ; 0x55ac1
 
 Route14Text4: ; 0x55ac6
 	db $08 ; asm
-	ld hl, Route14TH3
+	ld hl, Route14TrainerHeader3
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -46821,7 +46821,7 @@ Route14AfterBattleText4: ; 0x55ada
 
 Route14Text5: ; 0x55adf
 	db $08 ; asm
-	ld hl, Route14TH4
+	ld hl, Route14TrainerHeader4
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -46842,7 +46842,7 @@ Route14AfterBattleText5: ; 0x55af3
 
 Route14Text6: ; 0x55af8
 	db $08 ; asm
-	ld hl, Route14TH5
+	ld hl, Route14TrainerHeader5
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -46863,7 +46863,7 @@ Route14AfterBattleText6: ; 0x55b0c
 
 Route14Text7: ; 0x55b11
 	db $08 ; asm
-	ld hl, Route14TH6
+	ld hl, Route14TrainerHeader6
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -46884,7 +46884,7 @@ Route14AfterBattleText7: ; 0x55b25
 
 Route14Text8: ; 0x55b2a
 	db $08 ; asm
-	ld hl, Route14TH7
+	ld hl, Route14TrainerHeader7
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -46905,7 +46905,7 @@ Route14AfterBattleText8: ; 0x55b3e
 
 Route14Text9: ; 0x55b43
 	db $08 ; asm
-	ld hl, Route14TH8
+	ld hl, Route14TrainerHeader8
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -46926,7 +46926,7 @@ Route14AfterBattleText9: ; 0x55b57
 
 Route14Text10: ; 0x55b5c
 	db $08 ; asm
-	ld hl, Route14TH9
+	ld hl, Route14TrainerHeader9
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -46966,7 +46966,7 @@ Route17Texts: ; 0x55b93
 	dw Route17Text1, Route17Text2, Route17Text3, Route17Text4, Route17Text5, Route17Text6, Route17Text7, Route17Text8, Route17Text9, Route17Text10, Route17Text11, Route17Text12, Route17Text13, Route17Text14, Route17Text15, Route17Text16
 
 Route17TrainerHeaders:
-Route17TrainerHeader1: ; 0x55bb3
+Route17TrainerHeader0: ; 0x55bb3
 	db $1 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7e1 ; flag's byte
@@ -46976,7 +46976,7 @@ Route17TrainerHeader1: ; 0x55bb3
 	dw Route17EndBattleText1 ; 0x5c3b TextEndBattle
 ; 0x55bbf
 
-Route17TH1: ; 0x55bbf
+Route17TrainerHeader1: ; 0x55bbf
 	db $2 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7e1 ; flag's byte
@@ -46986,7 +46986,7 @@ Route17TH1: ; 0x55bbf
 	dw Route17EndBattleText2 ; 0x5c54 TextEndBattle
 ; 0x55bcb
 
-Route17TH2: ; 0x55bcb
+Route17TrainerHeader2: ; 0x55bcb
 	db $3 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7e1 ; flag's byte
@@ -46996,7 +46996,7 @@ Route17TH2: ; 0x55bcb
 	dw Route17EndBattleText3 ; 0x5c6d TextEndBattle
 ; 0x55bd7
 
-Route17TH3: ; 0x55bd7
+Route17TrainerHeader3: ; 0x55bd7
 	db $4 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7e1 ; flag's byte
@@ -47006,7 +47006,7 @@ Route17TH3: ; 0x55bd7
 	dw Route17EndBattleText4 ; 0x5c86 TextEndBattle
 ; 0x55be3
 
-Route17TH4: ; 0x55be3
+Route17TrainerHeader4: ; 0x55be3
 	db $5 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7e1 ; flag's byte
@@ -47016,7 +47016,7 @@ Route17TH4: ; 0x55be3
 	dw Route17EndBattleText5 ; 0x5c9f TextEndBattle
 ; 0x55bef
 
-Route17TH5: ; 0x55bef
+Route17TrainerHeader5: ; 0x55bef
 	db $6 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d7e1 ; flag's byte
@@ -47026,7 +47026,7 @@ Route17TH5: ; 0x55bef
 	dw Route17EndBattleText6 ; 0x5cb8 TextEndBattle
 ; 0x55bfb
 
-Route17TH6: ; 0x55bfb
+Route17TrainerHeader6: ; 0x55bfb
 	db $7 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7e1 ; flag's byte
@@ -47036,7 +47036,7 @@ Route17TH6: ; 0x55bfb
 	dw Route17EndBattleText7 ; 0x5cd1 TextEndBattle
 ; 0x55c07
 
-Route17TH7: ; 0x55c07
+Route17TrainerHeader7: ; 0x55c07
 	db $8 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d7e1 ; flag's byte
@@ -47046,7 +47046,7 @@ Route17TH7: ; 0x55c07
 	dw Route17EndBattleText8 ; 0x5cea TextEndBattle
 ; 0x55c13
 
-Route17TH8: ; 0x55c13
+Route17TrainerHeader8: ; 0x55c13
 	db $9 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7e1 ; flag's byte
@@ -47056,7 +47056,7 @@ Route17TH8: ; 0x55c13
 	dw Route17EndBattleText9 ; 0x5d03 TextEndBattle
 ; 0x55c1f
 
-Route17TH9: ; 0x55c1f
+Route17TrainerHeader9: ; 0x55c1f
 	db $a ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7e1 ; flag's byte
@@ -47070,7 +47070,7 @@ db $ff
 
 Route17Text1: ; 0x55c2c
 	db $08 ; asm
-	ld hl, Route17TrainerHeader1
+	ld hl, Route17TrainerHeader0
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -47091,7 +47091,7 @@ Route17AfterBattleText1: ; 0x55c40
 
 Route17Text2: ; 0x55c45
 	db $08 ; asm
-	ld hl, Route17TH1
+	ld hl, Route17TrainerHeader1
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -47112,7 +47112,7 @@ Route17AfterBattleText2: ; 0x55c59
 
 Route17Text3: ; 0x55c5e
 	db $08 ; asm
-	ld hl, Route17TH2
+	ld hl, Route17TrainerHeader2
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -47133,7 +47133,7 @@ Route17AfterBattleText3: ; 0x55c72
 
 Route17Text4: ; 0x55c77
 	db $08 ; asm
-	ld hl, Route17TH3
+	ld hl, Route17TrainerHeader3
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -47154,7 +47154,7 @@ Route17AfterBattleText4: ; 0x55c8b
 
 Route17Text5: ; 0x55c90
 	db $08 ; asm
-	ld hl, Route17TH4
+	ld hl, Route17TrainerHeader4
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -47175,7 +47175,7 @@ Route17AfterBattleText5: ; 0x55ca4
 
 Route17Text6: ; 0x55ca9
 	db $08 ; asm
-	ld hl, Route17TH5
+	ld hl, Route17TrainerHeader5
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -47196,7 +47196,7 @@ Route17AfterBattleText6: ; 0x55cbd
 
 Route17Text7: ; 0x55cc2
 	db $08 ; asm
-	ld hl, Route17TH6
+	ld hl, Route17TrainerHeader6
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -47217,7 +47217,7 @@ Route17AfterBattleText7: ; 0x55cd6
 
 Route17Text8: ; 0x55cdb
 	db $08 ; asm
-	ld hl, Route17TH7
+	ld hl, Route17TrainerHeader7
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -47238,7 +47238,7 @@ Route17AfterBattleText8: ; 0x55cef
 
 Route17Text9: ; 0x55cf4
 	db $08 ; asm
-	ld hl, Route17TH8
+	ld hl, Route17TrainerHeader8
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -47259,7 +47259,7 @@ Route17AfterBattleText9: ; 0x55d08
 
 Route17Text10: ; 0x55d0d
 	db $08 ; asm
-	ld hl, Route17TH9
+	ld hl, Route17TrainerHeader9
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -47319,7 +47319,7 @@ Route19Texts: ; 0x55d5d
 	dw Route19Text1, Route19Text2, Route19Text3, Route19Text4, Route19Text5, Route19Text6, Route19Text7, Route19Text8, Route19Text9, Route19Text10, Route19Text11
 
 Route19TrainerHeaders:
-Route19TrainerHeader1: ; 0x55d73
+Route19TrainerHeader0: ; 0x55d73
 	db $1 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7e5 ; flag's byte
@@ -47329,7 +47329,7 @@ Route19TrainerHeader1: ; 0x55d73
 	dw Route19EndBattleText1 ; 0x5e55 TextEndBattle
 ; 0x55d7f
 
-Route19TH1: ; 0x55d7f
+Route19TrainerHeader1: ; 0x55d7f
 	db $2 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7e5 ; flag's byte
@@ -47339,7 +47339,7 @@ Route19TH1: ; 0x55d7f
 	dw Route19EndBattleText2 ; 0x5e64 TextEndBattle
 ; 0x55d8b
 
-Route19TH2: ; 0x55d8b
+Route19TrainerHeader2: ; 0x55d8b
 	db $3 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7e5 ; flag's byte
@@ -47349,7 +47349,7 @@ Route19TH2: ; 0x55d8b
 	dw Route19EndBattleText3 ; 0x5e73 TextEndBattle
 ; 0x55d97
 
-Route19TH3: ; 0x55d97
+Route19TrainerHeader3: ; 0x55d97
 	db $4 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7e5 ; flag's byte
@@ -47359,7 +47359,7 @@ Route19TH3: ; 0x55d97
 	dw Route19EndBattleText4 ; 0x5e82 TextEndBattle
 ; 0x55da3
 
-Route19TH4: ; 0x55da3
+Route19TrainerHeader4: ; 0x55da3
 	db $5 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7e5 ; flag's byte
@@ -47369,7 +47369,7 @@ Route19TH4: ; 0x55da3
 	dw Route19EndBattleText5 ; 0x5e91 TextEndBattle
 ; 0x55daf
 
-Route19TH5: ; 0x55daf
+Route19TrainerHeader5: ; 0x55daf
 	db $6 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7e5 ; flag's byte
@@ -47379,7 +47379,7 @@ Route19TH5: ; 0x55daf
 	dw Route19EndBattleText6 ; 0x5ea0 TextEndBattle
 ; 0x55dbb
 
-Route19TH6: ; 0x55dbb
+Route19TrainerHeader6: ; 0x55dbb
 	db $7 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7e5 ; flag's byte
@@ -47389,7 +47389,7 @@ Route19TH6: ; 0x55dbb
 	dw Route19EndBattleText7 ; 0x5eaf TextEndBattle
 ; 0x55dc7
 
-Route19TH7: ; 0x55dc7
+Route19TrainerHeader7: ; 0x55dc7
 	db $8 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7e5 ; flag's byte
@@ -47399,7 +47399,7 @@ Route19TH7: ; 0x55dc7
 	dw Route19EndBattleText8 ; 0x5ebe TextEndBattle
 ; 0x55dd3
 
-Route19TH8: ; 0x55dd3
+Route19TrainerHeader8: ; 0x55dd3
 	db $9 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7e5 ; flag's byte
@@ -47409,7 +47409,7 @@ Route19TH8: ; 0x55dd3
 	dw Route19EndBattleText9 ; 0x5ecd TextEndBattle
 ; 0x55ddf
 
-Route19TH9: ; 0x55ddf
+Route19TrainerHeader9: ; 0x55ddf
 	db $a ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7e5 ; flag's byte
@@ -47423,61 +47423,61 @@ db $ff
 
 Route19Text1: ; 0x55dec
 	db $08 ; asm
-	ld hl, Route19TrainerHeader1
+	ld hl, Route19TrainerHeader0
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 Route19Text2: ; 0x55df6
 	db $08 ; asm
-	ld hl, Route19TH1
+	ld hl, Route19TrainerHeader1
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 Route19Text3: ; 0x55e00
 	db $08 ; asm
-	ld hl, Route19TH2
+	ld hl, Route19TrainerHeader2
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 Route19Text4: ; 0x55e0a
 	db $08 ; asm
-	ld hl, Route19TH3
+	ld hl, Route19TrainerHeader3
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 Route19Text5: ; 0x55e14
 	db $08 ; asm
-	ld hl, Route19TH4
+	ld hl, Route19TrainerHeader4
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 Route19Text6: ; 0x55e1e
 	db $08 ; asm
-	ld hl, Route19TH5
+	ld hl, Route19TrainerHeader5
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 Route19Text7: ; 0x55e28
 	db $08 ; asm
-	ld hl, Route19TH6
+	ld hl, Route19TrainerHeader6
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 Route19Text8: ; 0x55e32
 	db $08 ; asm
-	ld hl, Route19TH7
+	ld hl, Route19TrainerHeader7
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 Route19Text9: ; 0x55e3c
 	db $08 ; asm
-	ld hl, Route19TH8
+	ld hl, Route19TrainerHeader8
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 Route19Text10: ; 0x55e46
 	db $08 ; asm
-	ld hl, Route19TH9
+	ld hl, Route19TrainerHeader9
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -47652,7 +47652,7 @@ Route21Texts: ; 0x55f04
 	dw Route21Text1, Route21Text2, Route21Text3, Route21Text4, Route21Text5, Route21Text6, Route21Text7, Route21Text8, Route21Text9
 
 Route21TrainerHeaders:
-Route21TrainerHeader1: ; 0x55f16
+Route21TrainerHeader0: ; 0x55f16
 	db $1 ; flag's bit
 	db ($0 << 4) ; trainer's view range
 	dw $d7e9 ; flag's byte
@@ -47662,7 +47662,7 @@ Route21TrainerHeader1: ; 0x55f16
 	dw Route21EndBattleText1 ; 0x5fe2 TextEndBattle
 ; 0x55f22
 
-Route21TH1: ; 0x55f22
+Route21TrainerHeader1: ; 0x55f22
 	db $2 ; flag's bit
 	db ($0 << 4) ; trainer's view range
 	dw $d7e9 ; flag's byte
@@ -47672,7 +47672,7 @@ Route21TH1: ; 0x55f22
 	dw Route21EndBattleText2 ; 0x5ff1 TextEndBattle
 ; 0x55f2e
 
-Route21TH2: ; 0x55f2e
+Route21TrainerHeader2: ; 0x55f2e
 	db $3 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7e9 ; flag's byte
@@ -47682,7 +47682,7 @@ Route21TH2: ; 0x55f2e
 	dw Route21EndBattleText3 ; 0x6000 TextEndBattle
 ; 0x55f3a
 
-Route21TH3: ; 0x55f3a
+Route21TrainerHeader3: ; 0x55f3a
 	db $4 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7e9 ; flag's byte
@@ -47692,7 +47692,7 @@ Route21TH3: ; 0x55f3a
 	dw Route21EndBattleText4 ; 0x600f TextEndBattle
 ; 0x55f46
 
-Route21TH4: ; 0x55f46
+Route21TrainerHeader4: ; 0x55f46
 	db $5 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7e9 ; flag's byte
@@ -47702,7 +47702,7 @@ Route21TH4: ; 0x55f46
 	dw Route21EndBattleText5 ; 0x601e TextEndBattle
 ; 0x55f52
 
-Route21TH5: ; 0x55f52
+Route21TrainerHeader5: ; 0x55f52
 	db $6 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7e9 ; flag's byte
@@ -47712,7 +47712,7 @@ Route21TH5: ; 0x55f52
 	dw Route21EndBattleText6 ; 0x602d TextEndBattle
 ; 0x55f5e
 
-Route21TH6: ; 0x55f5e
+Route21TrainerHeader6: ; 0x55f5e
 	db $7 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7e9 ; flag's byte
@@ -47722,7 +47722,7 @@ Route21TH6: ; 0x55f5e
 	dw Route21EndBattleText7 ; 0x603c TextEndBattle
 ; 0x55f6a
 
-Route21TH7: ; 0x55f6a
+Route21TrainerHeader7: ; 0x55f6a
 	db $8 ; flag's bit
 	db ($0 << 4) ; trainer's view range
 	dw $d7e9 ; flag's byte
@@ -47732,7 +47732,7 @@ Route21TH7: ; 0x55f6a
 	dw Route21EndBattleText8 ; 0x604b TextEndBattle
 ; 0x55f76
 
-Route21TH8: ; 0x55f76
+Route21TrainerHeader8: ; 0x55f76
 	db $9 ; flag's bit
 	db ($0 << 4) ; trainer's view range
 	dw $d7e9 ; flag's byte
@@ -47746,55 +47746,55 @@ db $ff
 
 Route21Text1: ; 0x55f83
 	db $08 ; asm
-	ld hl, Route21TrainerHeader1
+	ld hl, Route21TrainerHeader0
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 Route21Text2: ; 0x55f8d
 	db $08 ; asm
-	ld hl, Route21TH1
+	ld hl, Route21TrainerHeader1
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 Route21Text3: ; 0x55f97
 	db $08 ; asm
-	ld hl, Route21TH2
+	ld hl, Route21TrainerHeader2
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 Route21Text4: ; 0x55fa1
 	db $08 ; asm
-	ld hl, Route21TH3
+	ld hl, Route21TrainerHeader3
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 Route21Text5: ; 0x55fab
 	db $08 ; asm
-	ld hl, Route21TH4
+	ld hl, Route21TrainerHeader4
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 Route21Text6: ; 0x55fb5
 	db $08 ; asm
-	ld hl, Route21TH5
+	ld hl, Route21TrainerHeader5
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 Route21Text7: ; 0x55fbf
 	db $08 ; asm
-	ld hl, Route21TH6
+	ld hl, Route21TrainerHeader6
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 Route21Text8: ; 0x55fc9
 	db $08 ; asm
-	ld hl, Route21TH7
+	ld hl, Route21TrainerHeader7
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 Route21Text9: ; 0x55fd3
 	db $08 ; asm
-	ld hl, Route21TH8
+	ld hl, Route21TrainerHeader8
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -48430,7 +48430,7 @@ SilphCo8_h: ; 0x564f8 to 0x56504 (12 bytes) (id=213)
 SilphCo8Script: ; 0x56504
 	call SilphCo8_Unknown5651a
 	call $3c3c
-	ld hl, SilphCo8TrainerHeader1
+	ld hl, SilphCo8TrainerHeader0
 	ld de, $6577
 	ld a, [$d649]
 	call $3160
@@ -48445,7 +48445,7 @@ SilphCo8Texts: ; 0x5657d
 	dw SilphCo8Text1, SilphCo8Text2, SilphCo8Text3, SilphCo8Text4
 
 SilphCo8TrainerHeaders:
-SilphCo8TrainerHeader1: ; 0x56585
+SilphCo8TrainerHeader0: ; 0x56585
 	db $2 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d831 ; flag's byte
@@ -48455,7 +48455,7 @@ SilphCo8TrainerHeader1: ; 0x56585
 	dw SilphCo8EndBattleText1 ; 0x65eb TextEndBattle
 ; 0x56591
 
-SilphCo8TH1: ; 0x56591
+SilphCo8TrainerHeader1: ; 0x56591
 	db $3 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d831 ; flag's byte
@@ -48465,7 +48465,7 @@ SilphCo8TH1: ; 0x56591
 	dw SilphCo8EndBattleText2 ; 0x65fa TextEndBattle
 ; 0x5659d
 
-SilphCo8TH2: ; 0x5659d
+SilphCo8TrainerHeader2: ; 0x5659d
 	db $4 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d831 ; flag's byte
@@ -48500,19 +48500,19 @@ UnnamedText_565c3: ; 0x565c3
 
 SilphCo8Text2: ; 0x565c8
 	db $08 ; asm
-	ld hl, SilphCo8TrainerHeader1
+	ld hl, SilphCo8TrainerHeader0
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 SilphCo8Text3: ; 0x565d2
 	db $08 ; asm
-	ld hl, SilphCo8TH1
+	ld hl, SilphCo8TrainerHeader1
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 SilphCo8Text4: ; 0x565dc
 	db $08 ; asm
-	ld hl, SilphCo8TH2
+	ld hl, SilphCo8TrainerHeader2
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -49170,7 +49170,7 @@ Route6Texts:
 	dw Route6Text1, Route6Text2, Route6Text3, Route6Text4, Route6Text5, Route6Text6, Route6Text7
 
 Route6TrainerHeaders:
-Route6TrainerHeader1: ; 0x590d7
+Route6TrainerHeader0: ; 0x590d7
 	db $1 ; flag's bit
 	db ($0 << 4) ; trainer's view range
 	dw $d7c9 ; flag's byte
@@ -49180,7 +49180,7 @@ Route6TrainerHeader1: ; 0x590d7
 	dw Route6EndBattleText1 ; 0x512f TextEndBattle
 ; 0x590e3
 
-Route6TH1: ; 0x590e3
+Route6TrainerHeader1: ; 0x590e3
 	db $2 ; flag's bit
 	db ($0 << 4) ; trainer's view range
 	dw $d7c9 ; flag's byte
@@ -49190,7 +49190,7 @@ Route6TH1: ; 0x590e3
 	dw Route6EndBattleText2 ; 0x5148 TextEndBattle
 ; 0x590ef
 
-Route6TH2: ; 0x590ef
+Route6TrainerHeader2: ; 0x590ef
 	db $3 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7c9 ; flag's byte
@@ -49200,7 +49200,7 @@ Route6TH2: ; 0x590ef
 	dw Route6EndBattleText3 ; 0x515c TextEndBattle
 ; 0x590fb
 
-Route6TH3: ; 0x590fb
+Route6TrainerHeader3: ; 0x590fb
 	db $4 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7c9 ; flag's byte
@@ -49210,7 +49210,7 @@ Route6TH3: ; 0x590fb
 	dw Route6EndBattleText4 ; 0x5175 TextEndBattle
 ; 0x59107
 
-Route6TH4: ; 0x59107
+Route6TrainerHeader4: ; 0x59107
 	db $5 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7c9 ; flag's byte
@@ -49220,7 +49220,7 @@ Route6TH4: ; 0x59107
 	dw Route6EndBattleText5 ; 0x518e TextEndBattle
 ; 0x59113
 
-Route6TH5: ; 0x59113
+Route6TrainerHeader5: ; 0x59113
 	db $6 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7c9 ; flag's byte
@@ -49234,7 +49234,7 @@ db $ff
 
 Route6Text1: ; 0x59120
 	db $8
-	ld hl, Route6TrainerHeader1
+	ld hl, Route6TrainerHeader0
 	call LoadTrainerHeader
 	jp TextScriptEnd
 ; 0x5912a
@@ -49256,7 +49256,7 @@ Route6AfterBattleText1: ; 0x59134
 
 Route6Text2: ; 0x59139
 	db $08 ; asm
-	ld hl, Route6TH1
+	ld hl, Route6TrainerHeader1
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -49272,7 +49272,7 @@ Route6EndBattleText2: ; 0x59148
 
 Route6Text3: ; 0x5914d
 	db $08 ; asm
-	ld hl, Route6TH2
+	ld hl, Route6TrainerHeader2
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -49293,7 +49293,7 @@ Route6AfterBattleText3: ; 0x59161
 
 Route6Text4: ; 0x59166
 	db $08 ; asm
-	ld hl, Route6TH3
+	ld hl, Route6TrainerHeader3
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -49314,7 +49314,7 @@ Route6AfterBattleText4: ; 0x5917a
 
 Route6Text5: ; 0x5917f
 	db $08 ; asm
-	ld hl, Route6TH4
+	ld hl, Route6TrainerHeader4
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -49335,7 +49335,7 @@ Route6AfterBattleText5: ; 0x59193
 
 Route6Text6: ; 0x59198
 	db $08 ; asm
-	ld hl, Route6TH5
+	ld hl, Route6TrainerHeader5
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -49375,7 +49375,7 @@ Route8Texts: ; 0x591cf
 	dw Route8Text1, Route8Text2, Route8Text3, Route8Text4, Route8Text5, Route8Text6, Route8Text7, Route8Text8, Route8Text9, Route8Text10
 
 Route8TrainerHeaders: ; 0x591e3
-Route8TrainerHeader1: ; 0x591e3
+Route8TrainerHeader0: ; 0x591e3
 	db $1 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7cd ; flag's byte
@@ -49385,7 +49385,7 @@ Route8TrainerHeader1: ; 0x591e3
 	dw Route8EndBattleText1 ; 0x525f TextEndBattle
 ; 0x591ef
 
-Route8TH1: ; 0x591ef
+Route8TrainerHeader1: ; 0x591ef
 	db $2 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7cd ; flag's byte
@@ -49395,7 +49395,7 @@ Route8TH1: ; 0x591ef
 	dw Route8EndBattleText2 ; 0x5278 TextEndBattle
 ; 0x591fb
 
-Route8TH2: ; 0x591fb
+Route8TrainerHeader2: ; 0x591fb
 	db $3 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7cd ; flag's byte
@@ -49405,7 +49405,7 @@ Route8TH2: ; 0x591fb
 	dw Route8EndBattleText3 ; 0x5291 TextEndBattle
 ; 0x59207
 
-Route8TH3: ; 0x59207
+Route8TrainerHeader3: ; 0x59207
 	db $4 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d7cd ; flag's byte
@@ -49415,7 +49415,7 @@ Route8TH3: ; 0x59207
 	dw Route8EndBattleText4 ; 0x52aa TextEndBattle
 ; 0x59213
 
-Route8TH4: ; 0x59213
+Route8TrainerHeader4: ; 0x59213
 	db $5 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7cd ; flag's byte
@@ -49425,7 +49425,7 @@ Route8TH4: ; 0x59213
 	dw Route8EndBattleText5 ; 0x52c3 TextEndBattle
 ; 0x5921f
 
-Route8TH5: ; 0x5921f
+Route8TrainerHeader5: ; 0x5921f
 	db $6 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7cd ; flag's byte
@@ -49435,7 +49435,7 @@ Route8TH5: ; 0x5921f
 	dw Route8EndBattleText6 ; 0x52dc TextEndBattle
 ; 0x5922b
 
-Route8TH6: ; 0x5922b
+Route8TrainerHeader6: ; 0x5922b
 	db $7 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d7cd ; flag's byte
@@ -49445,7 +49445,7 @@ Route8TH6: ; 0x5922b
 	dw Route8EndBattleText7 ; 0x52f5 TextEndBattle
 ; 0x59237
 
-Route8TH7: ; 0x59237
+Route8TrainerHeader7: ; 0x59237
 	db $8 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d7cd ; flag's byte
@@ -49455,7 +49455,7 @@ Route8TH7: ; 0x59237
 	dw Route8EndBattleText8 ; 0x530e TextEndBattle
 ; 0x59243
 
-Route8TH8: ; 0x59243
+Route8TrainerHeader8: ; 0x59243
 	db $9 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7cd ; flag's byte
@@ -49469,7 +49469,7 @@ db $ff
 
 Route8Text1: ; 0x59250
 	db $8
-	ld hl, Route8TrainerHeader1
+	ld hl, Route8TrainerHeader0
 	call LoadTrainerHeader
 	jp TextScriptEnd
 ; 0x5925a
@@ -49491,7 +49491,7 @@ Route8AfterBattleText1: ; 0x59264
 
 Route8Text2: ; 0x59269
 	db $08 ; asm
-	ld hl, Route8TH1
+	ld hl, Route8TrainerHeader1
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -49512,7 +49512,7 @@ Route8AfterBattleText2: ; 0x5927d
 
 Route8Text3: ; 0x59282
 	db $08 ; asm
-	ld hl, Route8TH2
+	ld hl, Route8TrainerHeader2
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -49533,7 +49533,7 @@ Route8AfterBattleText3: ; 0x59296
 
 Route8Text4: ; 0x5929b
 	db $08 ; asm
-	ld hl, Route8TH3
+	ld hl, Route8TrainerHeader3
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -49554,7 +49554,7 @@ Route8AfterBattleText4: ; 0x592af
 
 Route8Text5: ; 0x592b4
 	db $08 ; asm
-	ld hl, Route8TH4
+	ld hl, Route8TrainerHeader4
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -49575,7 +49575,7 @@ Route8AfterBattleText5: ; 0x592c8
 
 Route8Text6: ; 0x592cd
 	db $08 ; asm
-	ld hl, Route8TH5
+	ld hl, Route8TrainerHeader5
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -49596,7 +49596,7 @@ Route8AfterBattleText6: ; 0x592e1
 
 Route8Text7: ; 0x592e6
 	db $08 ; asm
-	ld hl, Route8TH6
+	ld hl, Route8TrainerHeader6
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -49617,7 +49617,7 @@ Route8AfterBattleText7: ; 0x592fa
 
 Route8Text8: ; 0x592ff
 	db $08 ; asm
-	ld hl, Route8TH7
+	ld hl, Route8TrainerHeader7
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -49638,7 +49638,7 @@ Route8AfterBattleText8: ; 0x59313
 
 Route8Text9: ; 0x59318
 	db $08 ; asm
-	ld hl, Route8TH8
+	ld hl, Route8TrainerHeader8
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -49678,7 +49678,7 @@ Route10Texts: ; 0x5934f
 	dw Route10Text1, Route10Text2, Route10Text3, Route10Text4, Route10Text5, Route10Text6, Route10Text7, Route10Text8, Route10Text9, Route10Text10
 
 Route10TrainerHeaders:
-Route10TrainerHeader1: ; 0x59363
+Route10TrainerHeader0: ; 0x59363
 	db $1 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7d1 ; flag's byte
@@ -49688,7 +49688,7 @@ Route10TrainerHeader1: ; 0x59363
 	dw Route10EndBattleText1 ; 0x53bb TextEndBattle
 ; 0x5936f
 
-Route10TH1: ; 0x5936f
+Route10TrainerHeader1: ; 0x5936f
 	db $2 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7d1 ; flag's byte
@@ -49698,7 +49698,7 @@ Route10TH1: ; 0x5936f
 	dw Route10EndBattleText2 ; 0x53d4 TextEndBattle
 ; 0x5937b
 
-Route10TH2: ; 0x5937b
+Route10TrainerHeader2: ; 0x5937b
 	db $3 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7d1 ; flag's byte
@@ -49708,7 +49708,7 @@ Route10TH2: ; 0x5937b
 	dw Route10EndBattleText3 ; 0x53ed TextEndBattle
 ; 0x59387
 
-Route10TH3: ; 0x59387
+Route10TrainerHeader3: ; 0x59387
 	db $4 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7d1 ; flag's byte
@@ -49718,7 +49718,7 @@ Route10TH3: ; 0x59387
 	dw Route10EndBattleText4 ; 0x5406 TextEndBattle
 ; 0x59393
 
-Route10TH4: ; 0x59393
+Route10TrainerHeader4: ; 0x59393
 	db $5 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d7d1 ; flag's byte
@@ -49728,7 +49728,7 @@ Route10TH4: ; 0x59393
 	dw Route10EndBattleText5 ; 0x541f TextEndBattle
 ; 0x5939f
 
-Route10TH5: ; 0x5939f
+Route10TrainerHeader5: ; 0x5939f
 	db $6 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d7d1 ; flag's byte
@@ -49742,7 +49742,7 @@ db $ff
 
 Route10Text1: ; 0x593ac
 	db $08 ; asm
-	ld hl, Route10TrainerHeader1
+	ld hl, Route10TrainerHeader0
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -49763,7 +49763,7 @@ Route10AfterBattleText1: ; 0x593c0
 
 Route10Text2: ; 0x593c5
 	db $08 ; asm
-	ld hl, Route10TH1
+	ld hl, Route10TrainerHeader1
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -49784,7 +49784,7 @@ Route10AfterBattleText2: ; 0x593d9
 
 Route10Text3: ; 0x593de
 	db $08 ; asm
-	ld hl, Route10TH2
+	ld hl, Route10TrainerHeader2
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -49805,7 +49805,7 @@ Route10AfterBattleText3: ; 0x593f2
 
 Route10Text4: ; 0x593f7
 	db $08 ; asm
-	ld hl, Route10TH3
+	ld hl, Route10TrainerHeader3
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -49826,7 +49826,7 @@ Route10AfterBattleText4: ; 0x5940b
 
 Route10Text5: ; 0x59410
 	db $08 ; asm
-	ld hl, Route10TH4
+	ld hl, Route10TrainerHeader4
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -49847,7 +49847,7 @@ Route10AfterBattleText5: ; 0x59424
 
 Route10Text6: ; 0x59429
 	db $08 ; asm
-	ld hl, Route10TH5
+	ld hl, Route10TrainerHeader5
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -49892,7 +49892,7 @@ Route11Texts: ; 0x59465
 	dw UnnamedText_594f4, Route11Text2, Route11Text3, Route11Text4, Route11Text5, Route11Text6, Route11Text7, Route11Text8, Route11Text9, Route11Text10, Route11Text11
 
 Route11TrainerHeaders:
-Route11TrainerHeader1: ; 0x5947b
+Route11TrainerHeader0: ; 0x5947b
 	db $1 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7d5 ; flag's byte
@@ -49902,7 +49902,7 @@ Route11TrainerHeader1: ; 0x5947b
 	dw Route11EndBattleText1 ; 0x5503 TextEndBattle
 ; 0x59487
 
-Route11TH1: ; 0x59487
+Route11TrainerHeader1: ; 0x59487
 	db $2 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d7d5 ; flag's byte
@@ -49912,7 +49912,7 @@ Route11TH1: ; 0x59487
 	dw Route11EndBattleText2 ; 0x551c TextEndBattle
 ; 0x59493
 
-Route11TH2: ; 0x59493
+Route11TrainerHeader2: ; 0x59493
 	db $3 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7d5 ; flag's byte
@@ -49922,7 +49922,7 @@ Route11TH2: ; 0x59493
 	dw Route11EndBattleText3 ; 0x5535 TextEndBattle
 ; 0x5949f
 
-Route11TH3: ; 0x5949f
+Route11TrainerHeader3: ; 0x5949f
 	db $4 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7d5 ; flag's byte
@@ -49932,7 +49932,7 @@ Route11TH3: ; 0x5949f
 	dw Route11EndBattleText4 ; 0x554e TextEndBattle
 ; 0x594ab
 
-Route11TH4: ; 0x594ab
+Route11TrainerHeader4: ; 0x594ab
 	db $5 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7d5 ; flag's byte
@@ -49942,7 +49942,7 @@ Route11TH4: ; 0x594ab
 	dw Route11EndBattleText5 ; 0x5567 TextEndBattle
 ; 0x594b7
 
-Route11TH5: ; 0x594b7
+Route11TrainerHeader5: ; 0x594b7
 	db $6 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7d5 ; flag's byte
@@ -49952,7 +49952,7 @@ Route11TH5: ; 0x594b7
 	dw Route11EndBattleText6 ; 0x5580 TextEndBattle
 ; 0x594c3
 
-Route11TH6: ; 0x594c3
+Route11TrainerHeader6: ; 0x594c3
 	db $7 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7d5 ; flag's byte
@@ -49962,7 +49962,7 @@ Route11TH6: ; 0x594c3
 	dw Route11EndBattleText7 ; 0x5599 TextEndBattle
 ; 0x594cf
 
-Route11TH7: ; 0x594cf
+Route11TrainerHeader7: ; 0x594cf
 	db $8 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7d5 ; flag's byte
@@ -49972,7 +49972,7 @@ Route11TH7: ; 0x594cf
 	dw Route11EndBattleText8 ; 0x55b2 TextEndBattle
 ; 0x594db
 
-Route11TH8: ; 0x594db
+Route11TrainerHeader8: ; 0x594db
 	db $9 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7d5 ; flag's byte
@@ -49982,7 +49982,7 @@ Route11TH8: ; 0x594db
 	dw Route11EndBattleText9 ; 0x55cb TextEndBattle
 ; 0x594e7
 
-Route11TH9: ; 0x594e7
+Route11TrainerHeader9: ; 0x594e7
 	db $a ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7d5 ; flag's byte
@@ -49996,7 +49996,7 @@ db $ff
 
 UnnamedText_594f4: ; 0x594f4
 	db $8
-	ld hl, Route11TrainerHeader1
+	ld hl, Route11TrainerHeader0
 	call LoadTrainerHeader
 	jp TextScriptEnd
 ; 0x594fe
@@ -50018,7 +50018,7 @@ Route11AfterBattleText1: ; 0x59508
 
 Route11Text2: ; 0x5950d
 	db $08 ; asm
-	ld hl, Route11TH1
+	ld hl, Route11TrainerHeader1
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -50039,7 +50039,7 @@ Route11AfterBattleText2: ; 0x59521
 
 Route11Text3: ; 0x59526
 	db $08 ; asm
-	ld hl, Route11TH2
+	ld hl, Route11TrainerHeader2
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -50060,7 +50060,7 @@ Route11AfterBattleText3: ; 0x5953a
 
 Route11Text4: ; 0x5953f
 	db $08 ; asm
-	ld hl, Route11TH3
+	ld hl, Route11TrainerHeader3
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -50081,7 +50081,7 @@ Route11AfterBattleText4: ; 0x59553
 
 Route11Text5: ; 0x59558
 	db $08 ; asm
-	ld hl, Route11TH4
+	ld hl, Route11TrainerHeader4
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -50102,7 +50102,7 @@ Route11AfterBattleText5: ; 0x5956c
 
 Route11Text6: ; 0x59571
 	db $08 ; asm
-	ld hl, Route11TH5
+	ld hl, Route11TrainerHeader5
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -50123,7 +50123,7 @@ Route11AfterBattleText6: ; 0x59585
 
 Route11Text7: ; 0x5958a
 	db $08 ; asm
-	ld hl, Route11TH6
+	ld hl, Route11TrainerHeader6
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -50144,7 +50144,7 @@ Route11AfterBattleText7: ; 0x5959e
 
 Route11Text8: ; 0x595a3
 	db $08 ; asm
-	ld hl, Route11TH7
+	ld hl, Route11TrainerHeader7
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -50165,7 +50165,7 @@ Route11AfterBattleText8: ; 0x595b7
 
 Route11Text9: ; 0x595bc
 	db $08 ; asm
-	ld hl, Route11TH8
+	ld hl, Route11TrainerHeader8
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -50186,7 +50186,7 @@ Route11AfterBattleText9: ; 0x595d0
 
 Route11Text10: ; 0x595d5
 	db $08 ; asm
-	ld hl, Route11TH9
+	ld hl, Route11TrainerHeader9
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -50225,7 +50225,7 @@ Route12Texts: ; 0x59675
 	dw Route12Text1, Route12Text2, Route12Text3, Route12Text4, Route12Text5, Route12Text6, Route12Text7, Route12Text8, Route12Text9, Route12Text10, Route12Text11, Route12Text12, Route12Text13, Route12Text14
 
 Route12TrainerHeaders:
-Route12TrainerHeader1: ; 0x59691
+Route12TrainerHeader0: ; 0x59691
 	db $2 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7d7 ; flag's byte
@@ -50235,7 +50235,7 @@ Route12TrainerHeader1: ; 0x59691
 	dw Route12EndBattleText1 ; 0x5704 TextEndBattle
 ; 0x5969d
 
-Route12TH1: ; 0x5969d
+Route12TrainerHeader1: ; 0x5969d
 	db $3 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7d7 ; flag's byte
@@ -50245,7 +50245,7 @@ Route12TH1: ; 0x5969d
 	dw Route12EndBattleText2 ; 0x571d TextEndBattle
 ; 0x596a9
 
-Route12TH2: ; 0x596a9
+Route12TrainerHeader2: ; 0x596a9
 	db $4 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7d7 ; flag's byte
@@ -50255,7 +50255,7 @@ Route12TH2: ; 0x596a9
 	dw Route12EndBattleText3 ; 0x5736 TextEndBattle
 ; 0x596b5
 
-Route12TH3: ; 0x596b5
+Route12TrainerHeader3: ; 0x596b5
 	db $5 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7d7 ; flag's byte
@@ -50265,7 +50265,7 @@ Route12TH3: ; 0x596b5
 	dw Route12EndBattleText4 ; 0x574f TextEndBattle
 ; 0x596c1
 
-Route12TH4: ; 0x596c1
+Route12TrainerHeader4: ; 0x596c1
 	db $6 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7d7 ; flag's byte
@@ -50275,7 +50275,7 @@ Route12TH4: ; 0x596c1
 	dw Route12EndBattleText5 ; 0x5768 TextEndBattle
 ; 0x596cd
 
-Route12TH5: ; 0x596cd
+Route12TrainerHeader5: ; 0x596cd
 	db $7 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7d7 ; flag's byte
@@ -50285,7 +50285,7 @@ Route12TH5: ; 0x596cd
 	dw Route12EndBattleText6 ; 0x5781 TextEndBattle
 ; 0x596d9
 
-Route12TH6: ; 0x596d9
+Route12TrainerHeader6: ; 0x596d9
 	db $8 ; flag's bit
 	db ($1 << 4) ; trainer's view range
 	dw $d7d7 ; flag's byte
@@ -50315,7 +50315,7 @@ UnnamedText_596f0: ; 0x596f0
 
 Route12Text2: ; 0x596f5
 	db $08 ; asm
-	ld hl, Route12TrainerHeader1
+	ld hl, Route12TrainerHeader0
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -50336,7 +50336,7 @@ Route12AfterBattleText1: ; 0x59709
 
 Route12Text3: ; 0x5970e
 	db $08 ; asm
-	ld hl, Route12TH1
+	ld hl, Route12TrainerHeader1
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -50357,7 +50357,7 @@ Route12AfterBattleText2: ; 0x59722
 
 Route12Text4: ; 0x59727
 	db $08 ; asm
-	ld hl, Route12TH2
+	ld hl, Route12TrainerHeader2
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -50378,7 +50378,7 @@ Route12AfterBattleText3: ; 0x5973b
 
 Route12Text5: ; 0x59740
 	db $08 ; asm
-	ld hl, Route12TH3
+	ld hl, Route12TrainerHeader3
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -50399,7 +50399,7 @@ Route12AfterBattleText4: ; 0x59754
 
 Route12Text6: ; 0x59759
 	db $08 ; asm
-	ld hl, Route12TH4
+	ld hl, Route12TrainerHeader4
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -50420,7 +50420,7 @@ Route12AfterBattleText5: ; 0x5976d
 
 Route12Text7: ; 0x59772
 	db $08 ; asm
-	ld hl, Route12TH5
+	ld hl, Route12TrainerHeader5
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -50441,7 +50441,7 @@ Route12AfterBattleText6: ; 0x59786
 
 Route12Text8: ; 0x5978b
 	db $08 ; asm
-	ld hl, Route12TH6
+	ld hl, Route12TrainerHeader6
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -50485,7 +50485,7 @@ Route15Texts: ; 0x597c7
 	dw Route15Text1, Route15Text2, Route15Text3, Route15Text4, Route15Text5, Route15Text6, Route15Text7, Route15Text8, Route15Text9, Route15Text10, Route15Text11, Route15Text12
 
 Route15TrainerHeaders:
-Route15TrainerHeader1: ; 0x597df
+Route15TrainerHeader0: ; 0x597df
 	db $1 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d7dd ; flag's byte
@@ -50495,7 +50495,7 @@ Route15TrainerHeader1: ; 0x597df
 	dw Route15EndBattleText1 ; 0x589d TextEndBattle
 ; 0x597eb
 
-Route15TH1: ; 0x597eb
+Route15TrainerHeader1: ; 0x597eb
 	db $2 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7dd ; flag's byte
@@ -50505,7 +50505,7 @@ Route15TH1: ; 0x597eb
 	dw Route15EndBattleText2 ; 0x58ac TextEndBattle
 ; 0x597f7
 
-Route15TH2: ; 0x597f7
+Route15TrainerHeader2: ; 0x597f7
 	db $3 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7dd ; flag's byte
@@ -50515,7 +50515,7 @@ Route15TH2: ; 0x597f7
 	dw Route15EndBattleText3 ; 0x58bb TextEndBattle
 ; 0x59803
 
-Route15TH3: ; 0x59803
+Route15TrainerHeader3: ; 0x59803
 	db $4 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7dd ; flag's byte
@@ -50525,7 +50525,7 @@ Route15TH3: ; 0x59803
 	dw Route15EndBattleText4 ; 0x58ca TextEndBattle
 ; 0x5980f
 
-Route15TH4: ; 0x5980f
+Route15TrainerHeader4: ; 0x5980f
 	db $5 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d7dd ; flag's byte
@@ -50535,7 +50535,7 @@ Route15TH4: ; 0x5980f
 	dw Route15EndBattleText5 ; 0x58d9 TextEndBattle
 ; 0x5981b
 
-Route15TH5: ; 0x5981b
+Route15TrainerHeader5: ; 0x5981b
 	db $6 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7dd ; flag's byte
@@ -50545,7 +50545,7 @@ Route15TH5: ; 0x5981b
 	dw Route15EndBattleText6 ; 0x58e8 TextEndBattle
 ; 0x59827
 
-Route15TH6: ; 0x59827
+Route15TrainerHeader6: ; 0x59827
 	db $7 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7dd ; flag's byte
@@ -50555,7 +50555,7 @@ Route15TH6: ; 0x59827
 	dw Route15EndBattleText7 ; 0x58f7 TextEndBattle
 ; 0x59833
 
-Route15TH7: ; 0x59833
+Route15TrainerHeader7: ; 0x59833
 	db $8 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7dd ; flag's byte
@@ -50565,7 +50565,7 @@ Route15TH7: ; 0x59833
 	dw Route15EndBattleText8 ; 0x5906 TextEndBattle
 ; 0x5983f
 
-Route15TH8: ; 0x5983f
+Route15TrainerHeader8: ; 0x5983f
 	db $9 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7dd ; flag's byte
@@ -50575,7 +50575,7 @@ Route15TH8: ; 0x5983f
 	dw Route15EndBattleText9 ; 0x5915 TextEndBattle
 ; 0x5984b
 
-Route15TH9: ; 0x5984b
+Route15TrainerHeader9: ; 0x5984b
 	db $a ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7dd ; flag's byte
@@ -50589,52 +50589,52 @@ db $ff
 
 Route15Text1: ; 0x59858
 	db $8 ; asm
-	ld hl, Route15TrainerHeader1
+	ld hl, Route15TrainerHeader0
 	jr asm_33cb7 ; 0x5985c $34
 
 Route15Text2:
 	db $8 ; asm
-	ld hl, Route15TH1
+	ld hl, Route15TrainerHeader1
 	jr asm_33cb7 ; 0x59862 $2e
 
 Route15Text3:
 	db $8 ; asm
-	ld hl, Route15TH2
+	ld hl, Route15TrainerHeader2
 	jr asm_33cb7 ; 0x59868 $28
 
 Route15Text4:
 	db $8 ; asm
-	ld hl, Route15TH3
+	ld hl, Route15TrainerHeader3
 	jr asm_33cb7 ; 0x5986e $22
 
 Route15Text5:
 	db $8 ; asm
-	ld hl, Route15TH4
+	ld hl, Route15TrainerHeader4
 	jr asm_33cb7 ; 0x59874 $1c
 
 Route15Text6:
 	db $8 ; asm
-	ld hl, Route15TH5
+	ld hl, Route15TrainerHeader5
 	jr asm_33cb7 ; 0x5987a $16
 
 Route15Text7:
 	db $8 ; asm
-	ld hl, Route15TH6
+	ld hl, Route15TrainerHeader6
 	jr asm_33cb7 ; 0x59880 $10
 
 Route15Text8:
 	db $8 ; asm
-	ld hl, Route15TH7
+	ld hl, Route15TrainerHeader7
 	jr asm_33cb7 ; 0x59886 $a
 
 Route15Text9:
 	db $8 ; asm
-	ld hl, Route15TH8
+	ld hl, Route15TrainerHeader8
 	jr asm_33cb7 ; 0x5988c $4
 
 Route15Text10:
 	db $8 ; asm
-	ld hl, Route15TH9
+	ld hl, Route15TrainerHeader9
 asm_33cb7: ; 0x59892
 	call LoadTrainerHeader
 	jp TextScriptEnd
@@ -50810,7 +50810,7 @@ Route16Texts: ; 0x599b9
 	dw Route16Text1, Route16Text2, Route16Text3, Route16Text4, Route16Text5, Route16Text6, Route16Text7, Route16Text8, Route16Text9, Route16Text10, Route16Text11
 
 Route16TrainerHeaders:
-Route16TrainerHeader1: ; 0x599cf
+Route16TrainerHeader0: ; 0x599cf
 	db $1 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7df ; flag's byte
@@ -50820,7 +50820,7 @@ Route16TrainerHeader1: ; 0x599cf
 	dw Route16EndBattleText1 ; 0x5a27 TextEndBattle
 ; 0x599db
 
-Route16TH1: ; 0x599db
+Route16TrainerHeader1: ; 0x599db
 	db $2 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d7df ; flag's byte
@@ -50830,7 +50830,7 @@ Route16TH1: ; 0x599db
 	dw Route16EndBattleText2 ; 0x5a40 TextEndBattle
 ; 0x599e7
 
-Route16TH2: ; 0x599e7
+Route16TrainerHeader2: ; 0x599e7
 	db $3 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d7df ; flag's byte
@@ -50840,7 +50840,7 @@ Route16TH2: ; 0x599e7
 	dw Route16EndBattleText3 ; 0x5a59 TextEndBattle
 ; 0x599f3
 
-Route16TH3: ; 0x599f3
+Route16TrainerHeader3: ; 0x599f3
 	db $4 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d7df ; flag's byte
@@ -50850,7 +50850,7 @@ Route16TH3: ; 0x599f3
 	dw Route16EndBattleText4 ; 0x5a72 TextEndBattle
 ; 0x599ff
 
-Route16TH4: ; 0x599ff
+Route16TrainerHeader4: ; 0x599ff
 	db $5 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d7df ; flag's byte
@@ -50860,7 +50860,7 @@ Route16TH4: ; 0x599ff
 	dw Route16EndBattleText5 ; 0x5a8b TextEndBattle
 ; 0x59a0b
 
-Route16TH5: ; 0x59a0b
+Route16TrainerHeader5: ; 0x59a0b
 	db $6 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7df ; flag's byte
@@ -50874,7 +50874,7 @@ db $ff
 
 Route16Text1: ; 0x59a18
 	db $08 ; asm
-	ld hl, Route16TrainerHeader1
+	ld hl, Route16TrainerHeader0
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -50895,7 +50895,7 @@ Route16AfterBattleText1: ; 0x59a2c
 
 Route16Text2: ; 0x59a31
 	db $08 ; asm
-	ld hl, Route16TH1
+	ld hl, Route16TrainerHeader1
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -50916,7 +50916,7 @@ Route16AfterBattleText2: ; 0x59a45
 
 Route16Text3: ; 0x59a4a
 	db $08 ; asm
-	ld hl, Route16TH2
+	ld hl, Route16TrainerHeader2
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -50937,7 +50937,7 @@ Route16AfterBattleText3: ; 0x59a5e
 
 Route16Text4: ; 0x59a63
 	db $08 ; asm
-	ld hl, Route16TH3
+	ld hl, Route16TrainerHeader3
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -50958,7 +50958,7 @@ Route16AfterBattleText4: ; 0x59a77
 
 Route16Text5: ; 0x59a7c
 	db $08 ; asm
-	ld hl, Route16TH4
+	ld hl, Route16TrainerHeader4
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -50979,7 +50979,7 @@ Route16AfterBattleText5: ; 0x59a90
 
 Route16Text6: ; 0x59a95
 	db $08 ; asm
-	ld hl, Route16TH5
+	ld hl, Route16TrainerHeader5
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -51037,7 +51037,7 @@ Route18Texts: ; 0x59ae0
 	dw Route18Text1, Route18Text2, Route18Text3, Route18Text4, Route18Text5
 
 Route18TrainerHeaders:
-Route18TrainerHeader1: ; 0x59aea
+Route18TrainerHeader0: ; 0x59aea
 	db $1 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7e3 ; flag's byte
@@ -51047,7 +51047,7 @@ Route18TrainerHeader1: ; 0x59aea
 	dw Route18EndBattleText1 ; 0x5b1e TextEndBattle
 ; 0x59af6
 
-Route18TH1: ; 0x59af6
+Route18TrainerHeader1: ; 0x59af6
 	db $2 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7e3 ; flag's byte
@@ -51057,7 +51057,7 @@ Route18TH1: ; 0x59af6
 	dw Route18EndBattleText2 ; 0x5b37 TextEndBattle
 ; 0x59b02
 
-Route18TH2: ; 0x59b02
+Route18TrainerHeader2: ; 0x59b02
 	db $3 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7e3 ; flag's byte
@@ -51071,7 +51071,7 @@ db $ff
 
 Route18Text1: ; 0x59b0f
 	db $08 ; asm
-	ld hl, Route18TrainerHeader1
+	ld hl, Route18TrainerHeader0
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -51092,7 +51092,7 @@ Route18AfterBattleText1: ; 0x59b23
 
 Route18Text2: ; 0x59b28
 	db $08 ; asm
-	ld hl, Route18TH1
+	ld hl, Route18TrainerHeader1
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -51113,7 +51113,7 @@ Route18AfterBattleText2: ; 0x59b3c
 
 Route18Text3: ; 0x59b41
 	db $08 ; asm
-	ld hl, Route18TH2
+	ld hl, Route18TrainerHeader2
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -51372,7 +51372,7 @@ SilphCo2Texts: ; 0x59d86
 	dw SilphCo2Text1, SilphCo2Text2, SilphCo2Text3, SilphCo2Text4, SilphCo2Text5
 
 SilphCo2TrainerHeaders:
-SilphCo2TrainerHeader1: ; 0x59d90
+SilphCo2TrainerHeader0: ; 0x59d90
 	db $2 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d825 ; flag's byte
@@ -51382,7 +51382,7 @@ SilphCo2TrainerHeader1: ; 0x59d90
 	dw SilphCo2EndBattleText1 ; 0x5e2f TextEndBattle
 ; 0x59d9c
 
-SilphCo2TH1: ; 0x59d9c
+SilphCo2TrainerHeader1: ; 0x59d9c
 	db $3 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d825 ; flag's byte
@@ -51392,7 +51392,7 @@ SilphCo2TH1: ; 0x59d9c
 	dw SilphCo2EndBattleText2 ; 0x5e3e TextEndBattle
 ; 0x59da8
 
-SilphCo2TH2: ; 0x59da8
+SilphCo2TrainerHeader2: ; 0x59da8
 	db $4 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d825 ; flag's byte
@@ -51402,7 +51402,7 @@ SilphCo2TH2: ; 0x59da8
 	dw SilphCo2EndBattleText3 ; 0x5e4d TextEndBattle
 ; 0x59db4
 
-SilphCo2TH3: ; 0x59db4
+SilphCo2TrainerHeader3: ; 0x59db4
 	db $5 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d825 ; flag's byte
@@ -51457,25 +51457,25 @@ TM36NoRoomText: ; 0x59dfd
 
 SilphCo2Text2: ; 0x59e02
 	db $08 ; asm
-	ld hl, SilphCo2TrainerHeader1
+	ld hl, SilphCo2TrainerHeader0
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 SilphCo2Text3: ; 0x59e0c
 	db $08 ; asm
-	ld hl, SilphCo2TH1
+	ld hl, SilphCo2TrainerHeader1
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 SilphCo2Text4: ; 0x59e16
 	db $08 ; asm
-	ld hl, SilphCo2TH2
+	ld hl, SilphCo2TrainerHeader2
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 SilphCo2Text5: ; 0x59e20
 	db $08 ; asm
-	ld hl, SilphCo2TH3
+	ld hl, SilphCo2TrainerHeader3
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -51598,7 +51598,7 @@ SilphCo3Texts: ; 0x59fc4
 	dw SilphCo3Text1, SilphCo3Text2, SilphCo3Text3, SilphCo3Text4
 
 SilphCo3TrainerHeaders:
-SilphCo3TrainerHeader1: ; 0x59fcc
+SilphCo3TrainerHeader0: ; 0x59fcc
 	db $2 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d827 ; flag's byte
@@ -51608,7 +51608,7 @@ SilphCo3TrainerHeader1: ; 0x59fcc
 	dw SilphCo3EndBattleText1 ; 0x6012 TextEndBattle
 ; 0x59fd8
 
-SilphCo3TH1: ; 0x59fd8
+SilphCo3TrainerHeader1: ; 0x59fd8
 	db $3 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d827 ; flag's byte
@@ -51643,7 +51643,7 @@ UnnamedText_59ffe: ; 0x59ffe
 
 SilphCo3Text2: ; 0x5a003
 	db $08 ; asm
-	ld hl, SilphCo3TrainerHeader1
+	ld hl, SilphCo3TrainerHeader0
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -51664,7 +51664,7 @@ SilphCo3AfterBattleText1: ; 0x5a017
 
 SilphCo3Text3: ; 0x5a01c
 	db $08 ; asm
-	ld hl, SilphCo3TH1
+	ld hl, SilphCo3TrainerHeader1
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -51747,7 +51747,7 @@ SilphCo10Texts: ; 0x5a186
 	dw SilphCo10Text1, SilphCo10Text2, SilphCo10Text3, SilphCo10Text4, SilphCo10Text5, SilphCo10Text6
 
 SilphCo10TrainerHeaders:
-SilphCo10TrainerHeader1: ; 0x5a192
+SilphCo10TrainerHeader0: ; 0x5a192
 	db $1 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d835 ; flag's byte
@@ -51757,7 +51757,7 @@ SilphCo10TrainerHeader1: ; 0x5a192
 	dw SilphCo10EndBattleText1 ; 0x61e2 TextEndBattle
 ; 0x5a19e
 
-SilphCo10TH1: ; 0x5a19e
+SilphCo10TrainerHeader1: ; 0x5a19e
 	db $2 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d835 ; flag's byte
@@ -51771,13 +51771,13 @@ db $ff
 
 SilphCo10Text1: ; 0x5a1ab
 	db $08 ; asm
-	ld hl, SilphCo10TrainerHeader1
+	ld hl, SilphCo10TrainerHeader0
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 SilphCo10Text2: ; 0x5a1b5
 	db $08 ; asm
-	ld hl, SilphCo10TH1
+	ld hl, SilphCo10TrainerHeader1
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -51890,7 +51890,7 @@ LanceTexts: ; 0x5a395
 	dw LanceText1
 
 LanceTrainerHeaders:
-LanceTrainerHeader1: ; 0x5a397
+LanceTrainerHeader0: ; 0x5a397
 	db $1 ; flag's bit
 	db ($0 << 4) ; trainer's view range
 	dw $d866 ; flag's byte
@@ -51904,7 +51904,7 @@ db $ff
 
 LanceText1: ; 0x5a3a4
 	db $08 ; asm
-	ld hl, LanceTrainerHeader1
+	ld hl, LanceTrainerHeader0
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -52562,7 +52562,7 @@ PewterGymTexts: ; 0x5c435
 	dw PewterGymText1, PewterGymText2, PewterGymText3, PewterGymText4, PewterGymText5, PewterGymText6
 
 PewterGymTrainerHeaders:
-PewterGymTrainerHeader1: ; 0x5c441
+PewterGymTrainerHeader0: ; 0x5c441
 	db $2 ; flag's bit
 	db ($5 << 4) ; trainer's view range
 	dw $d755 ; flag's byte
@@ -52646,7 +52646,7 @@ UnnamedText_5c4bc: ; 0x5c4bc
 
 PewterGymText2: ; 0x5c4c6
 	db $08 ; asm
-	ld hl, PewterGymTrainerHeader1
+	ld hl, PewterGymTrainerHeader0
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -52922,7 +52922,7 @@ CeruleanGymTexts: ; 0x5c74a
 	dw CeruleanGymText1, CeruleanGymText2, CeruleanGymText3, CeruleanGymText4, CeruleanGymText5, CeruleanGymText6, CeruleanGymText7
 
 CeruleanGymTrainerHeaders:
-CeruleanGymTrainerHeader1: ; 0x5c758
+CeruleanGymTrainerHeader0: ; 0x5c758
 	db $2 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d75e ; flag's byte
@@ -52932,7 +52932,7 @@ CeruleanGymTrainerHeader1: ; 0x5c758
 	dw CeruleanGymEndBattleText1 ; 0x47ee TextEndBattle
 ; 0x5c764
 
-CeruleanGymTH1: ; 0x5c764
+CeruleanGymTrainerHeader1: ; 0x5c764
 	db $3 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d75e ; flag's byte
@@ -53013,7 +53013,7 @@ UnnamedText_5c7d8: ; 0x5c7d8
 
 CeruleanGymText2: ; 0x5c7df
 	db $08 ; asm
-	ld hl, CeruleanGymTrainerHeader1
+	ld hl, CeruleanGymTrainerHeader0
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -53034,7 +53034,7 @@ CeruleanGymAfterBattleText1: ; 0x5c7f3
 
 CeruleanGymText3: ; 0x5c7f8
 	db $08 ; asm
-	ld hl, CeruleanGymTH1
+	ld hl, CeruleanGymTrainerHeader1
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -53359,7 +53359,7 @@ VermilionGymScript: ; 0x5ca26
 	res 6, [hl]
 	call nz, $4a6d
 	call $3c3c
-	ld hl, VermilionGymTrainerHeader1
+	ld hl, VermilionGymTrainerHeader0
 	ld de, $4a95
 	ld a, [$d5fe]
 	call $3160
@@ -53374,7 +53374,7 @@ VermilionGymTexts: ; 0x5cae8
 	dw VermilionGymText1, VermilionGymText2, VermilionGymText3, VermilionGymText4, VermilionGymText5, VermilionGymText6, VermilionGymText7, VermilionGymText8
 
 VermilionGymTrainerHeaders:
-VermilionGymTrainerHeader1: ; 0x5caf8
+VermilionGymTrainerHeader0: ; 0x5caf8
 	db $2 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d773 ; flag's byte
@@ -53384,7 +53384,7 @@ VermilionGymTrainerHeader1: ; 0x5caf8
 	dw VermilionGymEndBattleText1 ; 0x4b9f TextEndBattle
 ; 0x5cb04
 
-VermilionGymTH1: ; 0x5cb04
+VermilionGymTrainerHeader1: ; 0x5cb04
 	db $3 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d773 ; flag's byte
@@ -53394,7 +53394,7 @@ VermilionGymTH1: ; 0x5cb04
 	dw VermilionGymEndBattleText2 ; 0x4bb8 TextEndBattle
 ; 0x5cb10
 
-VermilionGymTH2: ; 0x5cb10
+VermilionGymTrainerHeader2: ; 0x5cb10
 	db $4 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d773 ; flag's byte
@@ -53475,7 +53475,7 @@ ReceivedThunderbadgeText:
 
 VermilionGymText2: ; 0x5cb90
 	db $08 ; asm
-	ld hl, VermilionGymTrainerHeader1
+	ld hl, VermilionGymTrainerHeader0
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -53496,7 +53496,7 @@ VermilionGymAfterBattleText1: ; 0x5cba4
 
 VermilionGymText3: ; 0x5cba9
 	db $08 ; asm
-	ld hl, VermilionGymTH1
+	ld hl, VermilionGymTrainerHeader1
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -53517,7 +53517,7 @@ VermilionGymAfterBattleText2: ; 0x5cbbd
 
 VermilionGymText4: ; 0x5cbc2
 	db $08 ; asm
-	ld hl, VermilionGymTH2
+	ld hl, VermilionGymTrainerHeader2
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -53742,7 +53742,7 @@ FightingDojoTexts: ; 0x5ce03
 	dw FightingDojoText1, FightingDojoText2, FightingDojoText3, FightingDojoText4, FightingDojoText5, FightingDojoText6, FightingDojoText7, FightingDojoText8
 
 FightingDojoTrainerHeaders:
-FightingDojoTrainerHeader1: ; 0x5ce13
+FightingDojoTrainerHeader0: ; 0x5ce13
 	db $2 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7b1 ; flag's byte
@@ -53752,7 +53752,7 @@ FightingDojoTrainerHeader1: ; 0x5ce13
 	dw FightingDojoEndBattleText1 ; 0x4eb1 TextEndBattle
 ; 0x5ce1f
 
-FightingDojoTH1: ; 0x5ce1f
+FightingDojoTrainerHeader1: ; 0x5ce1f
 	db $3 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7b1 ; flag's byte
@@ -53762,7 +53762,7 @@ FightingDojoTH1: ; 0x5ce1f
 	dw FightingDojoEndBattleText2 ; 0x4eca TextEndBattle
 ; 0x5ce2b
 
-FightingDojoTH2: ; 0x5ce2b
+FightingDojoTrainerHeader2: ; 0x5ce2b
 	db $4 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7b1 ; flag's byte
@@ -53772,7 +53772,7 @@ FightingDojoTH2: ; 0x5ce2b
 	dw FightingDojoEndBattleText3 ; 0x4ee3 TextEndBattle
 ; 0x5ce37
 
-FightingDojoTH3: ; 0x5ce37
+FightingDojoTrainerHeader3: ; 0x5ce37
 	db $5 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7b1 ; flag's byte
@@ -53839,7 +53839,7 @@ UnnamedText_5ce9d: ; 0x5ce9d
 
 FightingDojoText2: ; 0x5cea2
 	db $08 ; asm
-	ld hl, FightingDojoTrainerHeader1
+	ld hl, FightingDojoTrainerHeader0
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -53860,7 +53860,7 @@ FightingDojoAfterBattleText1: ; 0x5ceb6
 
 FightingDojoText3: ; 0x5cebb
 	db $08 ; asm
-	ld hl, FightingDojoTH1
+	ld hl, FightingDojoTrainerHeader1
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -53881,7 +53881,7 @@ FightingDojoAfterBattleText2: ; 0x5cecf
 
 FightingDojoText4: ; 0x5ced4
 	db $08 ; asm
-	ld hl, FightingDojoTH2
+	ld hl, FightingDojoTrainerHeader2
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -53902,7 +53902,7 @@ FightingDojoAfterBattleText3: ; 0x5cee8
 
 FightingDojoText5: ; 0x5ceed
 	db $08 ; asm
-	ld hl, FightingDojoTH3
+	ld hl, FightingDojoTrainerHeader3
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -54053,7 +54053,7 @@ SaffronGymTexts: ; 0x5d0ab
 	dw SaffronGymText1, SaffronGymText2, SaffronGymText3, SaffronGymText4, SaffronGymText5, SaffronGymText6, SaffronGymText7, SaffronGymText8, SaffronGymText9, SaffronGymText10, SaffronGymText11, SaffronGymText12
 
 SaffronGymTrainerHeaders:
-SaffronGymTrainerHeader1: ; 0x5d0c3
+SaffronGymTrainerHeader0: ; 0x5d0c3
 	db $2 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7b3 ; flag's byte
@@ -54063,7 +54063,7 @@ SaffronGymTrainerHeader1: ; 0x5d0c3
 	dw SaffronGymEndBattleText1 ; 0x51f5 TextEndBattle
 ; 0x5d0cf
 
-SaffronGymTH1: ; 0x5d0cf
+SaffronGymTrainerHeader1: ; 0x5d0cf
 	db $3 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7b3 ; flag's byte
@@ -54073,7 +54073,7 @@ SaffronGymTH1: ; 0x5d0cf
 	dw SaffronGymEndBattleText2 ; 0x5204 TextEndBattle
 ; 0x5d0db
 
-SaffronGymTH2: ; 0x5d0db
+SaffronGymTrainerHeader2: ; 0x5d0db
 	db $4 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7b3 ; flag's byte
@@ -54083,7 +54083,7 @@ SaffronGymTH2: ; 0x5d0db
 	dw SaffronGymEndBattleText3 ; 0x5213 TextEndBattle
 ; 0x5d0e7
 
-SaffronGymTH3: ; 0x5d0e7
+SaffronGymTrainerHeader3: ; 0x5d0e7
 	db $5 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7b3 ; flag's byte
@@ -54093,7 +54093,7 @@ SaffronGymTH3: ; 0x5d0e7
 	dw SaffronGymEndBattleText4 ; 0x5222 TextEndBattle
 ; 0x5d0f3
 
-SaffronGymTH4: ; 0x5d0f3
+SaffronGymTrainerHeader4: ; 0x5d0f3
 	db $6 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7b3 ; flag's byte
@@ -54103,7 +54103,7 @@ SaffronGymTH4: ; 0x5d0f3
 	dw SaffronGymEndBattleText5 ; 0x5231 TextEndBattle
 ; 0x5d0ff
 
-SaffronGymTH5: ; 0x5d0ff
+SaffronGymTrainerHeader5: ; 0x5d0ff
 	db $7 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7b3 ; flag's byte
@@ -54113,7 +54113,7 @@ SaffronGymTH5: ; 0x5d0ff
 	dw SaffronGymEndBattleText6 ; 0x5240 TextEndBattle
 ; 0x5d10b
 
-SaffronGymTH6: ; 0x5d10b
+SaffronGymTrainerHeader6: ; 0x5d10b
 	db $8 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7b3 ; flag's byte
@@ -54194,43 +54194,43 @@ SaffronGymText12: ; 0x5d182
 
 SaffronGymText2: ; 0x5d187
 	db $08 ; asm
-	ld hl, SaffronGymTrainerHeader1
+	ld hl, SaffronGymTrainerHeader0
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 SaffronGymText3: ; 0x5d191
 	db $08 ; asm
-	ld hl, SaffronGymTH1
+	ld hl, SaffronGymTrainerHeader1
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 SaffronGymText4: ; 0x5d19b
 	db $08 ; asm
-	ld hl, SaffronGymTH2
+	ld hl, SaffronGymTrainerHeader2
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 SaffronGymText5: ; 0x5d1a5
 	db $08 ; asm
-	ld hl, SaffronGymTH3
+	ld hl, SaffronGymTrainerHeader3
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 SaffronGymText6: ; 0x5d1af
 	db $08 ; asm
-	ld hl, SaffronGymTH4
+	ld hl, SaffronGymTrainerHeader4
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 SaffronGymText7: ; 0x5d1b9
 	db $08 ; asm
-	ld hl, SaffronGymTH5
+	ld hl, SaffronGymTrainerHeader5
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 SaffronGymText8: ; 0x5d1c3
 	db $08 ; asm
-	ld hl, SaffronGymTH6
+	ld hl, SaffronGymTrainerHeader6
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -54934,7 +54934,7 @@ SilphCo9Texts: ; 0x5d88b
 	dw SilphCo9Text1, SilphCo9Text2, SilphCo9Text3, SilphCo9Text4
 
 SilphCo9TrainerHeaders:
-SilphCo9TrainerHeader1: ; 0x5d893
+SilphCo9TrainerHeader0: ; 0x5d893
 	db $2 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d833 ; flag's byte
@@ -54944,7 +54944,7 @@ SilphCo9TrainerHeader1: ; 0x5d893
 	dw SilphCo9EndBattleText1 ; 0x5917 TextEndBattle
 ; 0x5d89f
 
-SilphCo9TH1: ; 0x5d89f
+SilphCo9TrainerHeader1: ; 0x5d89f
 	db $3 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d833 ; flag's byte
@@ -54954,7 +54954,7 @@ SilphCo9TH1: ; 0x5d89f
 	dw SilphCo9EndBattleText2 ; 0x5926 TextEndBattle
 ; 0x5d8ab
 
-SilphCo9TH2: ; 0x5d8ab
+SilphCo9TrainerHeader2: ; 0x5d8ab
 	db $4 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d833 ; flag's byte
@@ -55004,19 +55004,19 @@ UnnamedText_5d8ef: ; 0x5d8ef
 
 SilphCo9Text2: ; 0x5d8f4
 	db $08 ; asm
-	ld hl, SilphCo9TrainerHeader1
+	ld hl, SilphCo9TrainerHeader0
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 SilphCo9Text3: ; 0x5d8fe
 	db $08 ; asm
-	ld hl, SilphCo9TH1
+	ld hl, SilphCo9TrainerHeader1
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 SilphCo9Text4: ; 0x5d908
 	db $08 ; asm
-	ld hl, SilphCo9TH2
+	ld hl, SilphCo9TrainerHeader2
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -55121,7 +55121,7 @@ VictoryRoad1Texts: ; 0x5da5f
 	dw VictoryRoad1Text1, VictoryRoad1Text2, VictoryRoad1Text3, VictoryRoad1Text4, VictoryRoad1Text5, VictoryRoad1Text6, VictoryRoad1Text7
 
 VictoryRoad1TrainerHeaders:
-VictoryRoad1TrainerHeader1: ; 0x5da6d
+VictoryRoad1TrainerHeader0: ; 0x5da6d
 	db $1 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d869 ; flag's byte
@@ -55131,7 +55131,7 @@ VictoryRoad1TrainerHeader1: ; 0x5da6d
 	dw VictoryRoad1EndBattleText1 ; 0x5a9f TextEndBattle
 ; 0x5da79
 
-VictoryRoad1TH1: ; 0x5da79
+VictoryRoad1TrainerHeader1: ; 0x5da79
 	db $2 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d869 ; flag's byte
@@ -55145,13 +55145,13 @@ db $ff
 
 VictoryRoad1Text1: ; 0x5da86
 	db $08 ; asm
-	ld hl, VictoryRoad1TrainerHeader1
+	ld hl, VictoryRoad1TrainerHeader0
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 VictoryRoad1Text2: ; 0x5da90
 	db $08 ; asm
-	ld hl, VictoryRoad1TH1
+	ld hl, VictoryRoad1TrainerHeader1
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -55625,7 +55625,7 @@ PokemonTower3Texts: ; 0x606e5
 	dw PokemonTower3Text1, PokemonTower3Text2, PokemonTower3Text3, PokemonTower3Text4
 
 PokemonTower3TrainerHeaders:
-PokemonTower3TrainerHeader1: ; 0x606ed
+PokemonTower3TrainerHeader0: ; 0x606ed
 	db $1 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d765 ; flag's byte
@@ -55635,7 +55635,7 @@ PokemonTower3TrainerHeader1: ; 0x606ed
 	dw PokemonTower3EndBattleText1 ; 0x4735 TextEndBattle
 ; 0x606f9
 
-PokemonTower3TH1: ; 0x606f9
+PokemonTower3TrainerHeader1: ; 0x606f9
 	db $2 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d765 ; flag's byte
@@ -55645,7 +55645,7 @@ PokemonTower3TH1: ; 0x606f9
 	dw PokemonTower3EndBattleText2 ; 0x4744 TextEndBattle
 ; 0x60705
 
-PokemonTower3TH2: ; 0x60705
+PokemonTower3TrainerHeader2: ; 0x60705
 	db $3 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d765 ; flag's byte
@@ -55658,19 +55658,19 @@ db $ff
 
 PokemonTower3Text1: ; 0x60712
 	db $08 ; asm
-	ld hl, PokemonTower3TrainerHeader1
+	ld hl, PokemonTower3TrainerHeader0
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 PokemonTower3Text2: ; 0x6071c
 	db $08 ; asm
-	ld hl, PokemonTower3TH1
+	ld hl, PokemonTower3TrainerHeader1
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 PokemonTower3Text3: ; 0x60726
 	db $08 ; asm
-	ld hl, PokemonTower3TH2
+	ld hl, PokemonTower3TrainerHeader2
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -55766,7 +55766,7 @@ PokemonTower4Texts: ; 0x6080f
 	dw PokemonTower4Text1, PokemonTower4Text2, PokemonTower4Text3, PokemonTower4Text4, PokemonTower4Text5, PokemonTower4Text6
 
 PokemonTower4TrainerHeaders:
-PokemonTower4TrainerHeader1: ; 0x6081b
+PokemonTower4TrainerHeader0: ; 0x6081b
 	db $1 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d766 ; flag's byte
@@ -55776,7 +55776,7 @@ PokemonTower4TrainerHeader1: ; 0x6081b
 	dw PokemonTower4EndBattleText1 ; 0x4863 TextEndBattle
 ; 0x60827
 
-PokemonTower4TH1: ; 0x60827
+PokemonTower4TrainerHeader1: ; 0x60827
 	db $2 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d766 ; flag's byte
@@ -55786,7 +55786,7 @@ PokemonTower4TH1: ; 0x60827
 	dw PokemonTower4EndBattleText2 ; 0x4872 TextEndBattle
 ; 0x60833
 
-PokemonTower4TH2: ; 0x60833
+PokemonTower4TrainerHeader2: ; 0x60833
 	db $3 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d766 ; flag's byte
@@ -55800,19 +55800,19 @@ db $ff
 
 PokemonTower4Text1: ; 0x60840
 	db $08 ; asm
-	ld hl, PokemonTower4TrainerHeader1
+	ld hl, PokemonTower4TrainerHeader0
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 PokemonTower4Text2: ; 0x6084a
 	db $08 ; asm
-	ld hl, PokemonTower4TH1
+	ld hl, PokemonTower4TrainerHeader1
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 PokemonTower4Text3: ; 0x60854
 	db $08 ; asm
-	ld hl, PokemonTower4TH2
+	ld hl, PokemonTower4TrainerHeader2
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -55910,7 +55910,7 @@ PokemonTower5Texts: ; 0x6099b
 	dw PokemonTower5Text1, PokemonTower5Text2, PokemonTower5Text3, PokemonTower5Text4, PokemonTower5Text5, PokemonTower5Text6, PokemonTower5Text7
 
 PokemonTower5TrainerHeaders:
-PokemonTower5TrainerHeader1: ; 0x609a9
+PokemonTower5TrainerHeader0: ; 0x609a9
 	db $2 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d767 ; flag's byte
@@ -55920,7 +55920,7 @@ PokemonTower5TrainerHeader1: ; 0x609a9
 	dw PokemonTower5EndBattleText1 ; 0x49ee TextEndBattle
 ; 0x609b5
 
-PokemonTower5TH1: ; 0x609b5
+PokemonTower5TrainerHeader1: ; 0x609b5
 	db $3 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d767 ; flag's byte
@@ -55930,7 +55930,7 @@ PokemonTower5TH1: ; 0x609b5
 	dw PokemonTower5EndBattleText2 ; 0x4a07 TextEndBattle
 ; 0x609c1
 
-PokemonTower5TH2: ; 0x609c1
+PokemonTower5TrainerHeader2: ; 0x609c1
 	db $4 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d767 ; flag's byte
@@ -55940,7 +55940,7 @@ PokemonTower5TH2: ; 0x609c1
 	dw PokemonTower5EndBattleText3 ; 0x4a20 TextEndBattle
 ; 0x609cd
 
-PokemonTower5TH3: ; 0x609cd
+PokemonTower5TrainerHeader3: ; 0x609cd
 	db $5 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d767 ; flag's byte
@@ -55958,7 +55958,7 @@ PokemonTower5Text1: ; 0x609da
 
 PokemonTower5Text2: ; 0x609df
 	db $08 ; asm
-	ld hl, PokemonTower5TrainerHeader1
+	ld hl, PokemonTower5TrainerHeader0
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -55979,7 +55979,7 @@ PokemonTower5AfterBattleText1: ; 0x609f3
 
 PokemonTower5Text3: ; 0x609f8
 	db $08 ; asm
-	ld hl, PokemonTower5TH1
+	ld hl, PokemonTower5TrainerHeader1
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -56000,7 +56000,7 @@ PokemonTower5AfterBattleText2: ; 0x60a0c
 
 PokemonTower5Text4: ; 0x60a11
 	db $08 ; asm
-	ld hl, PokemonTower5TH2
+	ld hl, PokemonTower5TrainerHeader2
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -56093,7 +56093,7 @@ PokemonTower6Texts: ; 0x60bb1
 	dw PokemonTower6Text1, PokemonTower6Text2, PokemonTower6Text3, PokemonTower6Text4, PokemonTower6Text5, PokemonTower6Text6, PokemonTower6Text7
 
 PokemonTower6TrainerHeaders:
-PokemonTower6TrainerHeader1: ; 0x60bbf
+PokemonTower6TrainerHeader0: ; 0x60bbf
 	db $1 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d768 ; flag's byte
@@ -56103,7 +56103,7 @@ PokemonTower6TrainerHeader1: ; 0x60bbf
 	dw PokemonTower6EndBattleText1 ; 0x4c2e TextEndBattle
 ; 0x60bcb
 
-PokemonTower6TH1: ; 0x60bcb
+PokemonTower6TrainerHeader1: ; 0x60bcb
 	db $2 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d768 ; flag's byte
@@ -56113,7 +56113,7 @@ PokemonTower6TH1: ; 0x60bcb
 	dw PokemonTower6EndBattleText2 ; 0x4c3d TextEndBattle
 ; 0x60bd7
 
-PokemonTower6TH2: ; 0x60bd7
+PokemonTower6TrainerHeader2: ; 0x60bd7
 	db $3 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d768 ; flag's byte
@@ -56127,19 +56127,19 @@ db $ff
 
 PokemonTower6Text1: ; 0x60be4
 	db $08 ; asm
-	ld hl, PokemonTower6TrainerHeader1
+	ld hl, PokemonTower6TrainerHeader0
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 PokemonTower6Text2: ; 0x60bee
 	db $08 ; asm
-	ld hl, PokemonTower6TH1
+	ld hl, PokemonTower6TrainerHeader1
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 PokemonTower6Text3: ; 0x60bf8
 	db $08 ; asm
-	ld hl, PokemonTower6TH2
+	ld hl, PokemonTower6TrainerHeader2
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -56266,7 +56266,7 @@ PokemonTower7Texts: ; 0x60e3f
 	dw PokemonTower7Text1, PokemonTower7Text2, PokemonTower7Text3, PokemonTower7Text4
 
 PokemonTower7TrainerHeaders:
-PokemonTower7TrainerHeader1: ; 0x60e47
+PokemonTower7TrainerHeader0: ; 0x60e47
 	db $1 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d769 ; flag's byte
@@ -56276,7 +56276,7 @@ PokemonTower7TrainerHeader1: ; 0x60e47
 	dw PokemonTower7EndBattleText1 ; 0x4ece TextEndBattle
 ; 0x60e53
 
-PokemonTower7TH1: ; 0x60e53
+PokemonTower7TrainerHeader1: ; 0x60e53
 	db $2 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d769 ; flag's byte
@@ -56286,7 +56286,7 @@ PokemonTower7TH1: ; 0x60e53
 	dw PokemonTower7EndBattleText2 ; 0x4edd TextEndBattle
 ; 0x60e5f
 
-PokemonTower7TH2: ; 0x60e5f
+PokemonTower7TrainerHeader2: ; 0x60e5f
 	db $3 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d769 ; flag's byte
@@ -56300,19 +56300,19 @@ db $ff
 
 PokemonTower7Text1: ; 0x60e6c
 	db $08 ; asm
-	ld hl, PokemonTower7TrainerHeader1
+	ld hl, PokemonTower7TrainerHeader0
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 PokemonTower7Text2: ; 0x60e76
 	db $08 ; asm
-	ld hl, PokemonTower7TH1
+	ld hl, PokemonTower7TrainerHeader1
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 PokemonTower7Text3: ; 0x60e80
 	db $08 ; asm
-	ld hl, PokemonTower7TH2
+	ld hl, PokemonTower7TrainerHeader2
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -56516,7 +56516,7 @@ ViridianForestTexts: ; 0x61126
 	dw ViridianForestText1, ViridianForestText2, ViridianForestText3, ViridianForestText4, ViridianForestText5, ViridianForestText6, ViridianForestText7, ViridianForestText8, ViridianForestText9, ViridianForestText10, ViridianForestText11, ViridianForestText12, ViridianForestText13, ViridianForestText14
 
 ViridianForestTrainerHeaders:
-ViridianForestTrainerHeader1: ; 0x61142
+ViridianForestTrainerHeader0: ; 0x61142
 	db $2 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7f3 ; flag's byte
@@ -56526,7 +56526,7 @@ ViridianForestTrainerHeader1: ; 0x61142
 	dw ViridianForestEndBattleText1 ; 0x518f TextEndBattle
 ; 0x6114e
 
-ViridianForestTH1: ; 0x6114e
+ViridianForestTrainerHeader1: ; 0x6114e
 	db $3 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7f3 ; flag's byte
@@ -56536,7 +56536,7 @@ ViridianForestTH1: ; 0x6114e
 	dw ViridianForestEndBattleText2 ; 0x519e TextEndBattle
 ; 0x6115a
 
-ViridianForestTH2: ; 0x6115a
+ViridianForestTrainerHeader2: ; 0x6115a
 	db $4 ; flag's bit
 	db ($1 << 4) ; trainer's view range
 	dw $d7f3 ; flag's byte
@@ -56554,19 +56554,19 @@ ViridianForestText1: ; 0x61167
 
 ViridianForestText2: ; 0x6116c
 	db $08 ; asm
-	ld hl, ViridianForestTrainerHeader1
+	ld hl, ViridianForestTrainerHeader0
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 ViridianForestText3: ; 0x61176
 	db $08 ; asm
-	ld hl, ViridianForestTH1
+	ld hl, ViridianForestTrainerHeader1
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 ViridianForestText4: ; 0x61180
 	db $08 ; asm
-	ld hl, ViridianForestTH2
+	ld hl, ViridianForestTrainerHeader2
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -57045,7 +57045,7 @@ SSAnne5Texts: ; 0x616c7
 	dw SSAnne5Text1, SSAnne5Text2, SSAnne5Text3, SSAnne5Text4, SSAnne5Text5
 
 SSAnneTrainerHeaders:
-SSAnneTrainerHeader1: ; 0x616d1
+SSAnneTrainerHeader0: ; 0x616d1
 	db $4 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7ff ; flag's byte
@@ -57055,7 +57055,7 @@ SSAnneTrainerHeader1: ; 0x616d1
 	dw SSAnneEndBattleText1 ; 0x5708 TextEndBattle
 ; 0x616dd
 
-SSAnneTH1: ; 0x616dd
+SSAnneTrainerHeader1: ; 0x616dd
 	db $5 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d7ff ; flag's byte
@@ -57081,7 +57081,7 @@ SSAnne5Text3: ; 0x616f4
 
 SSAnne5Text4: ; 0x616f9
 	db $08 ; asm
-	ld hl, SSAnneTrainerHeader1
+	ld hl, SSAnneTrainerHeader0
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -57102,7 +57102,7 @@ SSAnneAfterBattleText1: ; 0x6170d
 
 SSAnne5Text5: ; 0x61712
 	db $08 ; asm
-	ld hl, SSAnneTH1
+	ld hl, SSAnneTrainerHeader1
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -57395,7 +57395,7 @@ SSAnne8Texts: ; 0x6198f
 	dw SSAnne8Text1, SSAnne8Text2, SSAnne8Text3, SSAnne8Text4, SSAnne8Text5, SSAnne8Text6, SSAnne8Text7, SSAnne8Text8, SSAnne8Text9, SSAnne8Text10, SSAnne8Text11
 
 SSAnne8TrainerHeaders:
-SSAnne8TrainerHeader1: ; 0x619a5
+SSAnne8TrainerHeader0: ; 0x619a5
 	db $1 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d805 ; flag's byte
@@ -57405,7 +57405,7 @@ SSAnne8TrainerHeader1: ; 0x619a5
 	dw SSAnne8EndBattleText1 ; 0x5a10 TextEndBattle
 ; 0x619b1
 
-SSAnne8TH1: ; 0x619b1
+SSAnne8TrainerHeader1: ; 0x619b1
 	db $2 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d805 ; flag's byte
@@ -57415,7 +57415,7 @@ SSAnne8TH1: ; 0x619b1
 	dw SSAnne8EndBattleText2 ; 0x5a1f TextEndBattle
 ; 0x619bd
 
-SSAnne8TH2: ; 0x619bd
+SSAnne8TrainerHeader2: ; 0x619bd
 	db $3 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d805 ; flag's byte
@@ -57425,7 +57425,7 @@ SSAnne8TH2: ; 0x619bd
 	dw SSAnne8EndBattleText3 ; 0x5a2e TextEndBattle
 ; 0x619c9
 
-SSAnne8TH3: ; 0x619c9
+SSAnne8TrainerHeader3: ; 0x619c9
 	db $4 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d805 ; flag's byte
@@ -57439,25 +57439,25 @@ db $ff
 
 SSAnne8Text1: ; 0x619d6
 	db $08 ; asm
-	ld hl, SSAnne8TrainerHeader1
+	ld hl, SSAnne8TrainerHeader0
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 SSAnne8Text2: ; 0x619e0
 	db $08 ; asm
-	ld hl, SSAnne8TH1
+	ld hl, SSAnne8TrainerHeader1
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 SSAnne8Text3: ; 0x619ea
 	db $08 ; asm
-	ld hl, SSAnne8TH2
+	ld hl, SSAnne8TrainerHeader2
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 SSAnne8Text4: ; 0x619f4
 	db $08 ; asm
-	ld hl, SSAnne8TH3
+	ld hl, SSAnne8TrainerHeader3
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -57613,7 +57613,7 @@ SSAnne9Texts: ; 0x61b6a
 	dw SSAnne9Text1, SSAnne9Text2, SSAnne9Text3, SSAnne9Text4, SSAnne9Text5, SSAnne9Text6, SSAnne9Text7, SSAnne9Text8, SSAnne9Text9, SSAnne9Text10, SSAnne9Text11, SSAnne9Text12, SSAnne9Text13
 
 SSAnne9TrainerHeaders:
-SSAnne9TrainerHeader1: ; 0x61b84
+SSAnne9TrainerHeader0: ; 0x61b84
 	db $1 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d807 ; flag's byte
@@ -57623,7 +57623,7 @@ SSAnne9TrainerHeader1: ; 0x61b84
 	dw SSAnne9EndBattleText1 ; 0x5c56 TextEndBattle
 ; 0x61b90
 
-SSAnne9TH1: ; 0x61b90
+SSAnne9TrainerHeader1: ; 0x61b90
 	db $2 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d807 ; flag's byte
@@ -57633,7 +57633,7 @@ SSAnne9TH1: ; 0x61b90
 	dw SSAnne9EndBattleText2 ; 0x5c65 TextEndBattle
 ; 0x61b9c
 
-SSAnne9TH2: ; 0x61b9c
+SSAnne9TrainerHeader2: ; 0x61b9c
 	db $3 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d807 ; flag's byte
@@ -57643,7 +57643,7 @@ SSAnne9TH2: ; 0x61b9c
 	dw SSAnne9EndBattleText3 ; 0x5c74 TextEndBattle
 ; 0x61ba8
 
-SSAnne9TH3: ; 0x61ba8
+SSAnne9TrainerHeader3: ; 0x61ba8
 	db $4 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d807 ; flag's byte
@@ -57658,25 +57658,25 @@ db $ff
 
 SSAnne9Text1: ; 0x61bb5
 	db $08 ; asm
-	ld hl, SSAnne9TrainerHeader1
+	ld hl, SSAnne9TrainerHeader0
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 SSAnne9Text2: ; 0x61bbf
 	db $08 ; asm
-	ld hl, SSAnne9TH1
+	ld hl, SSAnne9TrainerHeader1
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 SSAnne9Text3: ; 0x61bc9
 	db $08 ; asm
-	ld hl, SSAnne9TH2
+	ld hl, SSAnne9TrainerHeader2
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 SSAnne9Text4: ; 0x61bd3
 	db $08 ; asm
-	ld hl, SSAnne9TH3
+	ld hl, SSAnne9TrainerHeader3
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -57894,7 +57894,7 @@ SSAnne10Texts: ; 0x61d6e
 	dw SSAnne10Text1, SSAnne10Text2, SSAnne10Text3, SSAnne10Text4, SSAnne10Text5, SSAnne10Text6, SSAnne10Text7, SSAnne10Text8, SSAnne10Text9, SSAnne10Text10, SSAnne10Text11
 
 SSAnne10TrainerHeaders:
-SSAnne10TrainerHeader1: ; 0x61d84
+SSAnne10TrainerHeader0: ; 0x61d84
 	db $1 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d809 ; flag's byte
@@ -57904,7 +57904,7 @@ SSAnne10TrainerHeader1: ; 0x61d84
 	dw SSAnne10EndBattleText1 ; 0x5e1b TextEndBattle
 ; 0x61d90
 
-SSAnne10TH1: ; 0x61d90
+SSAnne10TrainerHeader1: ; 0x61d90
 	db $2 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d809 ; flag's byte
@@ -57914,7 +57914,7 @@ SSAnne10TH1: ; 0x61d90
 	dw SSAnne10EndBattleText2 ; 0x5e2a TextEndBattle
 ; 0x61d9c
 
-SSAnne10TH2: ; 0x61d9c
+SSAnne10TrainerHeader2: ; 0x61d9c
 	db $3 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d809 ; flag's byte
@@ -57924,7 +57924,7 @@ SSAnne10TH2: ; 0x61d9c
 	dw SSAnne10EndBattleText3 ; 0x5e39 TextEndBattle
 ; 0x61da8
 
-SSAnne10TH3: ; 0x61da8
+SSAnne10TrainerHeader3: ; 0x61da8
 	db $4 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d809 ; flag's byte
@@ -57934,7 +57934,7 @@ SSAnne10TH3: ; 0x61da8
 	dw SSAnne10EndBattleText4 ; 0x5e48 TextEndBattle
 ; 0x61db4
 
-SSAnne10TH4: ; 0x61db4
+SSAnne10TrainerHeader4: ; 0x61db4
 	db $5 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d809 ; flag's byte
@@ -57944,7 +57944,7 @@ SSAnne10TH4: ; 0x61db4
 	dw SSAnne10EndBattleText5 ; 0x5e57 TextEndBattle
 ; 0x61dc0
 
-SSAnne10TH5: ; 0x61dc0
+SSAnne10TrainerHeader5: ; 0x61dc0
 	db $6 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d809 ; flag's byte
@@ -57958,37 +57958,37 @@ db $ff
 
 SSAnne10Text1: ; 0x61dcd
 	db $08 ; asm
-	ld hl, SSAnne10TrainerHeader1
+	ld hl, SSAnne10TrainerHeader0
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 SSAnne10Text2: ; 0x61dd7
 	db $08 ; asm
-	ld hl, SSAnne10TH1
+	ld hl, SSAnne10TrainerHeader1
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 SSAnne10Text3: ; 0x61de1
 	db $08 ; asm
-	ld hl, SSAnne10TH2
+	ld hl, SSAnne10TrainerHeader2
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 SSAnne10Text4: ; 0x61deb
 	db $08 ; asm
-	ld hl, SSAnne10TH3
+	ld hl, SSAnne10TrainerHeader3
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 SSAnne10Text5: ; 0x61df5
 	db $08 ; asm
-	ld hl, SSAnne10TH4
+	ld hl, SSAnne10TrainerHeader4
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
 SSAnne10Text6: ; 0x61dff
 	db $08 ; asm
-	ld hl, SSAnne10TH5
+	ld hl, SSAnne10TrainerHeader5
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -58254,7 +58254,7 @@ SilphCo11Texts: ; 0x622b7
 	dw SilphCo11Text1, SilphCo11Text2, SilphCo11Text3, SilphCo11Text4, SilphCo11Text5, SilphCo11Text6
 
 SilphCo11TrainerHeaders:
-SilphCo11TrainerHeader1: ; 0x622c3
+SilphCo11TrainerHeader0: ; 0x622c3
 	db $4 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d837 ; flag's byte
@@ -58264,7 +58264,7 @@ SilphCo11TrainerHeader1: ; 0x622c3
 	dw SilphCo11EndBattleText1 ; 0x6349 TextEndBattle
 ; 0x622cf
 
-SilphCo11TH1: ; 0x622cf
+SilphCo11TrainerHeader1: ; 0x622cf
 	db $5 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d837 ; flag's byte
@@ -58341,7 +58341,7 @@ SilphCo11Text6: ; 0x62335
 
 SilphCo11Text4: ; 0x6233a
 	db $08 ; asm
-	ld hl, SilphCo11TrainerHeader1
+	ld hl, SilphCo11TrainerHeader0
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -58362,7 +58362,7 @@ SilphCo11AfterBattleText1: ; 0x6234e
 
 SilphCo11Text5: ; 0x62353
 	db $08 ; asm
-	ld hl, SilphCo11TH1
+	ld hl, SilphCo11TrainerHeader1
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -59959,7 +59959,7 @@ ViridianGymTexts: ; 0x749ec
 	dw ViridianGymText1, ViridianGymText2, ViridianGymText3, ViridianGymText4, ViridianGymText5, ViridianGymText6, ViridianGymText7, ViridianGymText8, ViridianGymText9, ViridianGymText10, ViridianGymText11, ViridianGymText12, ViridianGymText13, ViridianGymText14
 
 ViridianGymTrainerHeaders:
-ViridianGymTrainerHeader1: ; 0x74a08
+ViridianGymTrainerHeader0: ; 0x74a08
 	db $2 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d751 ; flag's byte
@@ -59969,7 +59969,7 @@ ViridianGymTrainerHeader1: ; 0x74a08
 	dw ViridianGymEndBattleText1 ; 0x4b02 TextEndBattle
 ; 0x74a14
 
-ViridianGymTH1: ; 0x74a14
+ViridianGymTrainerHeader1: ; 0x74a14
 	db $3 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d751 ; flag's byte
@@ -59979,7 +59979,7 @@ ViridianGymTH1: ; 0x74a14
 	dw ViridianGymEndBattleText2 ; 0x4b1b TextEndBattle
 ; 0x74a20
 
-ViridianGymTH2: ; 0x74a20
+ViridianGymTrainerHeader2: ; 0x74a20
 	db $4 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d751 ; flag's byte
@@ -59989,7 +59989,7 @@ ViridianGymTH2: ; 0x74a20
 	dw ViridianGymEndBattleText3 ; 0x4b34 TextEndBattle
 ; 0x74a2c
 
-ViridianGymTH3: ; 0x74a2c
+ViridianGymTrainerHeader3: ; 0x74a2c
 	db $5 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d751 ; flag's byte
@@ -59999,7 +59999,7 @@ ViridianGymTH3: ; 0x74a2c
 	dw ViridianGymEndBattleText4 ; 0x4b4d TextEndBattle
 ; 0x74a38
 
-ViridianGymTH4: ; 0x74a38
+ViridianGymTrainerHeader4: ; 0x74a38
 	db $6 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d751 ; flag's byte
@@ -60009,7 +60009,7 @@ ViridianGymTH4: ; 0x74a38
 	dw ViridianGymEndBattleText5 ; 0x4b66 TextEndBattle
 ; 0x74a44
 
-ViridianGymTH5: ; 0x74a44
+ViridianGymTrainerHeader5: ; 0x74a44
 	db $7 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d751 ; flag's byte
@@ -60019,7 +60019,7 @@ ViridianGymTH5: ; 0x74a44
 	dw ViridianGymEndBattleText6 ; 0x4b7f TextEndBattle
 ; 0x74a50
 
-ViridianGymTH6: ; 0x74a50
+ViridianGymTrainerHeader6: ; 0x74a50
 	db $8 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw $d751 ; flag's byte
@@ -60029,7 +60029,7 @@ ViridianGymTH6: ; 0x74a50
 	dw ViridianGymEndBattleText7 ; 0x4b98 TextEndBattle
 ; 0x74a5c
 
-ViridianGymTH7: ; 0x74a5c
+ViridianGymTrainerHeader7: ; 0x74a5c
 	db $9 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d751 ; flag's byte
@@ -60120,7 +60120,7 @@ ViridianGymText14: ; 0x74aee
 
 ViridianGymText2: ; 0x74af3
 	db $08 ; asm
-	ld hl, ViridianGymTrainerHeader1
+	ld hl, ViridianGymTrainerHeader0
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -60141,7 +60141,7 @@ ViridianGymAfterBattleText1: ; 0x74b07
 
 ViridianGymText3: ; 0x74b0c
 	db $08 ; asm
-	ld hl, ViridianGymTH1
+	ld hl, ViridianGymTrainerHeader1
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -60162,7 +60162,7 @@ ViridianGymAfterBattleText2: ; 0x74b20
 
 ViridianGymText4: ; 0x74b25
 	db $08 ; asm
-	ld hl, ViridianGymTH2
+	ld hl, ViridianGymTrainerHeader2
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -60183,7 +60183,7 @@ ViridianGymAfterBattleText3: ; 0x74b39
 
 ViridianGymText5: ; 0x74b3e
 	db $08 ; asm
-	ld hl, ViridianGymTH3
+	ld hl, ViridianGymTrainerHeader3
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -60204,7 +60204,7 @@ ViridianGymAfterBattleText4: ; 0x74b52
 
 ViridianGymText6: ; 0x74b57
 	db $08 ; asm
-	ld hl, ViridianGymTH4
+	ld hl, ViridianGymTrainerHeader4
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -60225,7 +60225,7 @@ ViridianGymAfterBattleText5: ; 0x74b6b
 
 ViridianGymText7: ; 0x74b70
 	db $08 ; asm
-	ld hl, ViridianGymTH5
+	ld hl, ViridianGymTrainerHeader5
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -60246,7 +60246,7 @@ ViridianGymAfterBattleText6: ; 0x74b84
 
 ViridianGymText8: ; 0x74b89
 	db $08 ; asm
-	ld hl, ViridianGymTH6
+	ld hl, ViridianGymTrainerHeader6
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -60267,7 +60267,7 @@ ViridianGymAfterBattleText7: ; 0x74b9d
 
 ViridianGymText9: ; 0x74ba2
 	db $08 ; asm
-	ld hl, ViridianGymTH7
+	ld hl, ViridianGymTrainerHeader7
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -61258,7 +61258,7 @@ FuchsiaGymTexts: ; 0x754d5
 	dw FuchsiaGymText1, FuchsiaGymText2, FuchsiaGymText3, FuchsiaGymText4, FuchsiaGymText5, FuchsiaGymText6, FuchsiaGymText7, FuchsiaGymText8, FuchsiaGymText9, FuchsiaGymText10, FuchsiaGymText11
 
 FuchsiaGymTrainerHeaders:
-FuchsiaGymTrainerHeader1: ; 0x754eb
+FuchsiaGymTrainerHeader0: ; 0x754eb
 	db $2 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw $d792 ; flag's byte
@@ -61392,7 +61392,7 @@ FuchsiaGymText11: ; 0x7559f
 
 FuchsiaGymText2: ; 0x755a4
 	db $08 ; asm
-	ld hl, FuchsiaGymTrainerHeader1
+	ld hl, FuchsiaGymTrainerHeader0
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -62775,7 +62775,7 @@ LoreleiTexts: ; 0x76251
 	dw LoreleiText1, LoreleiText2
 
 LoreleiTrainerHeaders:
-LoreleiTrainerHeader1: ; 0x76255
+LoreleiTrainerHeader0: ; 0x76255
 	db $1 ; flag's bit
 	db ($0 << 4) ; trainer's view range
 	dw $d863 ; flag's byte
@@ -62789,7 +62789,7 @@ db $ff
 
 LoreleiText1: ; 0x76262
 	db $08 ; asm
-	ld hl, LoreleiTrainerHeader1
+	ld hl, LoreleiTrainerHeader0
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -62862,7 +62862,7 @@ BrunoTexts: ; 0x763a8
 	dw BrunoText1, BrunoText2
 
 BrunoTrainerHeaders:
-BrunoTrainerHeader1: ; 0x763ac
+BrunoTrainerHeader0: ; 0x763ac
 	db $1 ; flag's bit
 	db ($0 << 4) ; trainer's view range
 	dw $d864 ; flag's byte
@@ -62876,7 +62876,7 @@ db $ff
 
 BrunoText1: ; 0x763b9
 	db $08 ; asm
-	ld hl, BrunoTrainerHeader1
+	ld hl, BrunoTrainerHeader0
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
@@ -62949,7 +62949,7 @@ AgathaTexts: ; 0x76505
 	dw AgathaText1, AgathaText2
 
 AgathaTrainerHeaders:
-AgathaTrainerHeader1: ; 0x76509
+AgathaTrainerHeader0: ; 0x76509
 	db $1 ; flag's bit
 	db ($0 << 4) ; trainer's view range
 	dw $d865 ; flag's byte
@@ -62963,7 +62963,7 @@ db $ff
 
 AgathaText1: ; 0x76516
 	db $08 ; asm
-	ld hl, AgathaTrainerHeader1
+	ld hl, AgathaTrainerHeader0
 	call LoadTrainerHeader
 	jp TextScriptEnd
 
