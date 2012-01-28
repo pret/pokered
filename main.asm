@@ -59762,7 +59762,7 @@ UnnamedText_739d4: ; 0x739d4
 	db $50
 ; 0x739d4 + 5 bytes
 
-INCBIN "baserom.gbc",$739d9,$627
+INCBIN "baserom.gbc",$739d9,452
 
 SECTION "bank1D",DATA,BANK[$1D]
 
