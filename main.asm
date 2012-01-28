@@ -45239,8 +45239,6 @@ UnnamedText_52a3d: ; 0x52a3d
 	db $50
 ; 0x52a3d + 5 bytes
 
-INCBIN "baserom.gbc",$52a42,$15be
-
 SECTION "bank15",DATA,BANK[$15]
 
 Route2_h:
