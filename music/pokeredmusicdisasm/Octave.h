@@ -24,17 +24,17 @@ public:
 
 	std::string LookupOctString();
 
-	const enum OctaveCode : unsigned char
-	{
-		oct0 = 0xE7,
-		oct1 = 0xE6,
-		oct2 = 0xE5,
-		oct3 = 0xE4,
-		oct4 = 0xE3,
-		oct5 = 0xE2,
-		oct6 = 0xE1,
-		oct7 = 0xE0,
-	};
+        enum OctaveCode : unsigned char
+        {
+            oct0 = 0xE7,
+            oct1 = 0xE6,
+            oct2 = 0xE5,
+            oct3 = 0xE4,
+            oct4 = 0xE3,
+            oct5 = 0xE2,
+            oct6 = 0xE1,
+            oct7 = 0xE0
+        };
 
 private:
 	unsigned char octave;

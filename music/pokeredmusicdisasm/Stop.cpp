@@ -27,7 +27,7 @@ bool Stop::IsValid(unsigned char* byte)
 string Stop::GenAsm()
 {
 	string tmpRet = AbstractData::GenAsm();
-	if(tmpRet != "") return false;
+	if(tmpRet != "") return tmpRet;
 
 	stringstream tmpAsmOut;
 	tmpAsmOut << "mus_end";

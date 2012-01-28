@@ -44,7 +44,7 @@ bool Volume::IsValid(unsigned char* byte)
 string Volume::GenAsm()
 {
 	string tmpRet = AbstractData::GenAsm();
-	if(tmpRet != "") return false;
+	if(tmpRet != "") return tmpRet;
 
 	stringstream tmpAsmOut;
 	tmpAsmOut << "mus_volume" << " " << (short)volume;

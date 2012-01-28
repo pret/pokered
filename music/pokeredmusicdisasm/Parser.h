@@ -54,22 +54,22 @@ public:
 	template<class T>
 	bool ParseData(unsigned int& pos, bool reado = false);
 
-	const enum dataType : unsigned char
-	{
-		DATA_NA,
-		DATA_CALL,
-		DATA_DUTY,
-		DATA_JUMP,
-		DATA_MODULATION,
-		DATA_NOTE,
-		DATA_OCTAVE,
-		DATA_STOP,
-		DATA_TEMPO,
-		DATA_UNKCODE,
-		DATA_UNKEB,
-		DATA_VELOCITY,
-		DATA_VOLUME
-	};
+        enum dataType : unsigned char
+        {
+            DATA_NA,
+            DATA_CALL,
+            DATA_DUTY,
+            DATA_JUMP,
+            DATA_MODULATION,
+            DATA_NOTE,
+            DATA_OCTAVE,
+            DATA_STOP,
+            DATA_TEMPO,
+            DATA_UNKCODE,
+            DATA_UNKEB,
+            DATA_VELOCITY,
+            DATA_VOLUME
+        };
 
 private:
 	std::string filename;

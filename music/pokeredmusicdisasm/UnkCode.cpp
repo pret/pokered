@@ -1,16 +1,4 @@
 #include <sstream>
-
-#include "Call.h"
-#include "Duty.h"
-#include "Jump.h"
-#include "Modulation.h"
-#include "Note.h"
-#include "Octave.h"
-#include "Stop.h"
-#include "Tempo.h"
-#include "Velocity.h"
-#include "Volume.h"
-
 #include "UnkCode.h"
 
 using namespace std;

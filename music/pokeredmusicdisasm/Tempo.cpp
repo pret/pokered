@@ -56,7 +56,7 @@ bool Tempo::IsValid(unsigned char* byte)
 string Tempo::GenAsm()
 {
 	string tmpRet = AbstractData::GenAsm();
-	if(tmpRet != "") return false;
+	if(tmpRet != "") return tmpRet;
 
 	stringstream tmpAsmOut;
 	tmpAsmOut << "mus_tempo" << " " << (short)divider << ", " << (short)modifier;

@@ -25,7 +25,7 @@ public:
     // Custom Functions
     std::string LookupDutyString();
 
-    const enum dutyList : unsigned char
+    enum dutyList : unsigned char
     {
         duty12_5 = 0x0,
         duty25 = 0x1,
