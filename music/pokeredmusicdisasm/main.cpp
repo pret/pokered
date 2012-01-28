@@ -33,6 +33,7 @@ void PrintUsage()
 	Console::PrintLn("--offset, -o - the parameterized offset in hexidecimal, It tells the parser where to start parsing");
 	Console::PrintLn("--file, -f - the parameterized file path, It tells the parser which rom file to parse");
 	Console::PrintLn("--stop, -s - tells the parser to stop at that hexidecimal address or until it reaches mus_end.");
+	Console::PrintLn("-fo - must be used with --stop, forces the program to proceed on despite discovering any mus_end");
 	Console::PrintLn("help, --help, -h - prints this info and exits, if the bare parameter is used it must be the first parameter");
 }
 
@@ -51,6 +52,7 @@ int main(int argc, char** argv)
 	string filePath = "";
 	unsigned int offset = 0;
 	unsigned int stop = 0;
+	bool force = false;
 
 	// Get the file path, this can be set with -f filename, --file=filename, arg #2, or missing (missing means default)
 	// the filepath can contain the actual filename or -- to use the built-in path, if the path is not missing then it must be set (can't be blank)
@@ -97,11 +99,21 @@ int main(int argc, char** argv)
 	else Console::Ask<unsigned int>("Offset: ", offset, ios_base::hex | ios_base::uppercase);
 
 	// Get the stop parameter, this can be set with -s <offset>, --stop=<offset> (it must be set via args)
-	if(a.SearchKeys("s") != -1) a.GetValueC<unsigned int>(a.SearchKeys("s"), offset, ios_base::hex | ios_base::uppercase, true);
+	if(a.SearchKeys("s") != -1) a.GetValueC<unsigned int>(a.SearchKeys("s"), stop, ios_base::hex | ios_base::uppercase, true);
 	else if(a.SearchKeys("stop") != -1) filePath = a.GetValue(a.SearchKeys("stop"));
+
+	// Get the force parameter, this can be set with -f (it must be set via args)
+	if(a.SearchKeys("fo") != -1) force = true;
+
+	if((stop == 0) && (force == true))
+	{
+		Console::ErrorLn("Error! You set the force command but did not set the stop command, this means it will parse every line until the end of the rom.");
+		return 1;
+	}
 
 	Parser p(filePath);
 	if(stop != 0) p.SetStopAddress(stop);
+	if(force) p.SetForce(true);
 	p.Parse(offset);
 
 	Console::PrintLn(p.GetParsedAsm().c_str());

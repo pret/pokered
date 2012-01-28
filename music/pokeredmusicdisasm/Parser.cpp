@@ -10,6 +10,7 @@ Parser::Parser()
 	filePos = 0;
 	stop = false;
 	stopAddress = 0;
+	force = false;
 }
 
 Parser::Parser(std::string filename)
@@ -19,6 +20,7 @@ Parser::Parser(std::string filename)
 	filePos = 0;
 	stop = false;
 	stopAddress = 0;
+	force = false;
 
 	SetFilename(filename);
 }
@@ -56,6 +58,16 @@ unsigned int Parser::GetStopAddress()
 void Parser::SetStopAddress(unsigned int value)
 {
 	stopAddress = value;
+}
+
+bool Parser::GetForce()
+{
+	return force;
+}
+
+void Parser::SetForce(bool value)
+{
+	force = value;
 }
 
 string Parser::GetParsedAsm()
@@ -139,14 +151,27 @@ void Parser::ParseNext() // Parses the block immidiately following
 	bool firstNonNote = false;	// (unused so far)First byte wasn't a note or octacve switch, add ";Setup" comment
 	bool firstNote = false;	// (unused so far) First note or octave
 	unsigned char lDataType = DATA_NA;
+	bool newBranch = false;	// Create a new branch
 
 	stringstream pos;
 	pos << "; " << hex << uppercase << (unsigned int)filePos;
 	parsedString.push_back(pos.str());
 
 	unsigned int count = 1;	// Counter for processed instructions
+	newBranch = true;
 	for(unsigned int i = filePos; (i <= fileLength) && (stop == false); i++)
 	{
+		if(newBranch)
+		{
+			stringstream _tmpBr;
+			_tmpBr << "\n";
+			_tmpBr << "UnknSong_md_" << hex << i << ":";
+			parsedString.push_back(_tmpBr.str());
+
+			_tmpBr.str("");
+			newBranch = false;
+		}
+
 		// First peek to see what kind of data it is, then perform any pre and post setup
 		if(ParseData<Call>(i, true))
 		{
@@ -236,7 +261,8 @@ void Parser::ParseNext() // Parses the block immidiately following
 			if(lDataType == DATA_NOTE) parsedString.push_back("\n"); // Insert a newline after notes
 
 			ParseData<Stop>(i);
-			stop = true; // Raise the stop flag informing the parser to stop
+			if(!force) stop = true; // Raise the stop flag informing the parser to stop
+			newBranch = true;
 			lDataType = DATA_STOP;
 		}
 		else
