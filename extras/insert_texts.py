@@ -1,19 +1,41 @@
 #!/usr/bin/python2.7
 #author: Bryan Bishop <kanzure@gmail.com>
-#date: 2012-01-07, 2012-01-17
+#date: 2012-01-07, 2012-01-17, 2012-01-27
 #insert TX_FAR targets into pokered.asm
+#and other insertion tasks
 import extract_maps
 from analyze_texts import analyze_texts, text_pretty_printer_at, scan_rom_for_tx_fars
 from pretty_map_headers import map_name_cleaner, make_text_label, map_constants, find_all_tx_fars, tx_far_pretty_printer, tx_far_label_maker
 import pretty_map_headers
 from analyze_incbins import asm, offset_to_pointer, find_incbin_to_replace_for, split_incbin_line_into_three, generate_diff_insert, load_asm, isolate_incbins, process_incbins, reset_incbins, apply_diff
 import analyze_incbins
-from gbz80disasm import text_asm_pretty_printer, output_bank_opcodes
+from gbz80disasm import text_asm_pretty_printer, output_bank_opcodes, load_labels, find_label
 import os, sys
 import subprocess
 spacing = "	"
 tx_fars = None
 failed_attempts = {}
+
+pokemons = ["BULBASAUR", "IVYSAUR", "VENUSAUR", "CHARMANDER", "CHARMELEON", "CHARIZARD", "SQUIRTLE", "WARTORTLE", "BLASTOISE", "CATERPIE", "METAPOD", "BUTTERFREE", "WEEDLE", "KAKUNA", "BEEDRILL", "PIDGEY", "PIDGEOTTO", "PIDGEOT", "RATTATA", "RATICATE", "SPEAROW", "FEAROW", "EKANS", "ARBOK", "PIKACHU", "RAICHU", "SANDSHREW", "SANDSLASH", "NIDORANF", "NIDORINA", "NIDOQUEEN", "NIDORANM", "NIDORINO", "NIDOKING", "CLEFAIRY", "CLEFABLE", "VULPIX", "NINETALES", "JIGGLYPUFF", "WIGGLYTUFF", "ZUBAT", "GOLBAT", "ODDISH", "GLOOM", "VILEPLUME", "PARAS", "PARASECT", "VENONAT", "VENOMOTH", "DIGLETT", "DUGTRIO", "MEOWTH", "PERSIAN", "PSYDUCK", "GOLDUCK", "MANKEY", "PRIMEAPE", "GROWLITHE", "ARCANINE", "POLIWAG", "POLIWHIRL", "POLIWRATH", "ABRA", "KADABRA", "ALAKAZAM", "MACHOP", "MACHOKE", "MACHAMP", "BELLSPROUT", "WEEPINBELL", "VICTREEBEL", "TENTACOOL", "TENTACRUEL", "GEODUDE", "GRAVELER", "GOLEM", "PONYTA", "RAPIDASH", "SLOWPOKE", "SLOWBRO", "MAGNEMITE", "MAGNETON", "FARFETCH_D", "DODUO", "DODRIO", "SEEL", "DEWGONG", "GRIMER", "MUK", "SHELLDER", "CLOYSTER", "GASTLY", "HAUNTER", "GENGAR", "ONIX", "DROWZEE", "HYPNO", "KRABBY", "KINGLER", "VOLTORB", "ELECTRODE", "EXEGGCUTE", "EXEGGUTOR", "CUBONE", "MAROWAK", "HITMONLEE", "HITMONCHAN", "LICKITUNG", "KOFFING", "WEEZING", "RHYHORN", "RHYDON", "CHANSEY", "TANGELA", "KANGASKHAN", "HORSEA", "SEADRA", "GOLDEEN", "SEAKING", "STARYU", "STARMIE", "MR_MIME", "SCYTHER", "JYNX", "ELECTABUZZ", "MAGMAR", "PINSIR", "TAUROS", "MAGIKARP", "GYARADOS", "LAPRAS", "DITTO", "EEVEE", "VAPOREON", "JOLTEON", "FLAREON", "PORYGON", "OMANYTE", "OMASTAR", "KABUTO", "KABUTOPS", "AERODACTYL", "SNORLAX", "ARTICUNO", "ZAPDOS", "MOLTRES", "DRATINI", "DRAGONAIR", "DRAGONITE", "MEWTWO", "MEW"]
+
+moves = [["POUND", 0x01], ["KARATE_CHOP", 0x02], ["DOUBLESLAP", 0x03], ["COMET_PUNCH", 0x04], ["MEGA_PUNCH", 0x05], ["PAY_DAY", 0x06], ["FIRE_PUNCH", 0x07], ["ICE_PUNCH", 0x08], ["THUNDERPUNCH", 0x09], ["SCRATCH", 0x0A], ["VICEGRIP", 0x0B], ["GUILLOTINE", 0x0C], ["RAZOR_WIND", 0x0D], ["SWORDS_DANCE", 0x0E], ["CUT", 0x0F], ["GUST", 0x10], ["WING_ATTACK", 0x11], ["WHIRLWIND", 0x12], ["FLY", 0x13], ["BIND", 0x14], ["SLAM", 0x15], ["VINE_WHIP", 0x16], ["STOMP", 0x17], ["DOUBLE_KICK", 0x18], ["MEGA_KICK", 0x19], ["JUMP_KICK", 0x1A], ["ROLLING_KICK", 0x1B], ["SAND_ATTACK", 0x1C], ["HEADBUTT", 0x1D], ["HORN_ATTACK", 0x1E], ["FURY_ATTACK", 0x1F], ["HORN_DRILL", 0x20], ["TACKLE", 0x21], ["BODY_SLAM", 0x22], ["WRAP", 0x23], ["TAKE_DOWN", 0x24], ["THRASH", 0x25], ["DOUBLE_EDGE", 0x26], ["TAIL_WHIP", 0x27], ["POISON_STING", 0x28], ["TWINEEDLE", 0x29], ["PIN_MISSILE", 0x2A], ["LEER", 0x2B], ["BITE", 0x2C], ["GROWL", 0x2D], ["ROAR", 0x2E], ["SING", 0x2F], ["SUPERSONIC", 0x30], ["SONICBOOM", 0x31], ["DISABLE", 0x32], ["ACID", 0x33], ["EMBER", 0x34], ["FLAMETHROWER", 0x35], ["MIST", 0x36], ["WATER_GUN", 0x37], ["HYDRO_PUMP", 0x38], ["SURF", 0x39], ["ICE_BEAM", 0x3A], ["BLIZZARD", 0x3B], ["PSYBEAM", 0x3C], ["BUBBLEBEAM", 0x3D], ["AURORA_BEAM", 0x3E], ["HYPER_BEAM", 0x3F], ["PECK", 0x40], ["DRILL_PECK", 0x41], ["SUBMISSION", 0x42], ["LOW_KICK", 0x43], ["COUNTER", 0x44], ["SEISMIC_TOSS", 0x45], ["STRENGTH", 0x46], ["ABSORB", 0x47], ["MEGA_DRAIN", 0x48], ["LEECH_SEED", 0x49], ["GROWTH", 0x4A], ["RAZOR_LEAF", 0x4B], ["SOLARBEAM", 0x4C], ["POISONPOWDER", 0x4D], ["STUN_SPORE", 0x4E], ["SLEEP_POWDER", 0x4F], ["PETAL_DANCE", 0x50], ["STRING_SHOT", 0x51], ["DRAGON_RAGE", 0x52], ["FIRE_SPIN", 0x53], ["THUNDERSHOCK", 0x54], ["THUNDERBOLT", 0x55], ["THUNDER_WAVE", 0x56], ["THUNDER", 0x57], ["ROCK_THROW", 0x58], ["EARTHQUAKE", 0x59], ["FISSURE", 0x5A], ["DIG", 0x5B], ["TOXIC", 0x5C], ["CONFUSION", 0x5D], ["PSYCHIC_M", 0x5E], ["HYPNOSIS", 0x5F], ["MEDITATE", 0x60], ["AGILITY", 0x61], ["QUICK_ATTACK", 0x62], ["RAGE", 0x63], ["TELEPORT", 0x64], ["NIGHT_SHADE", 0x65], ["MIMIC", 0x66], ["SCREECH", 0x67], ["DOUBLE_TEAM", 0x68], ["RECOVER", 0x69], ["HARDEN", 0x6A], ["MINIMIZE", 0x6B], ["SMOKESCREEN", 0x6C], ["CONFUSE_RAY", 0x6D], ["WITHDRAW", 0x6E], ["DEFENSE_CURL", 0x6F], ["BARRIER", 0x70], ["LIGHT_SCREEN", 0x71], ["HAZE", 0x72], ["REFLECT", 0x73], ["FOCUS_ENERGY", 0x74], ["BIDE", 0x75], ["METRONOME", 0x76], ["MIRROR_MOVE", 0x77], ["SELFDESTRUCT", 0x78], ["EGG_BOMB", 0x79], ["LICK", 0x7A], ["SMOG", 0x7B], ["SLUDGE", 0x7C], ["BONE_CLUB", 0x7D], ["FIRE_BLAST", 0x7E], ["WATERFALL", 0x7F], ["CLAMP", 0x80], ["SWIFT", 0x81], ["SKULL_BASH", 0x82], ["SPIKE_CANNON", 0x83], ["CONSTRICT", 0x84], ["AMNESIA", 0x85], ["KINESIS", 0x86], ["SOFTBOILED", 0x87], ["HI_JUMP_KICK", 0x88], ["GLARE", 0x89], ["DREAM_EATER", 0x8A], ["POISON_GAS", 0x8B], ["BARRAGE", 0x8C], ["LEECH_LIFE", 0x8D], ["LOVELY_KISS", 0x8E], ["SKY_ATTACK", 0x8F], ["TRANSFORM", 0x90], ["BUBBLE", 0x91], ["DIZZY_PUNCH", 0x92], ["SPORE", 0x93], ["FLASH", 0x94], ["PSYWAVE", 0x95], ["SPLASH", 0x96], ["ACID_ARMOR", 0x97], ["CRABHAMMER", 0x98], ["EXPLOSION", 0x99], ["FURY_SWIPES", 0x9A], ["BONEMERANG", 0x9B], ["REST", 0x9C], ["ROCK_SLIDE", 0x9D], ["HYPER_FANG", 0x9E], ["SHARPEN", 0x9F], ["CONVERSION", 0xA0], ["TRI_ATTACK", 0xA1], ["SUPER_FANG", 0xA2], ["SLASH", 0xA3], ["SUBSTITUTE", 0xA4], ["STRUGGLE", 0xA5]]
+
+elemental_types = [
+["NORMAL", "EQU", 0x00],
+["FIGHTING", "EQU", 0x01],
+["FLYING", "EQU", 0x02],
+["POISON", "EQU", 0x03],
+["GROUND", "EQU", 0x04],
+["ROCK", "EQU", 0x05],
+["BUG", "EQU", 0x07],
+["GHOST", "EQU", 0x08],
+["FIRE", "EQU", 0x14],
+["WATER", "EQU", 0x15],
+["GRASS", "EQU", 0x16],
+["ELECTRIC", "EQU", 0x17],
+["PSYCHIC", "EQU", 0x18],
+["ICE", "EQU", 0x19],
+["DRAGON", "EQU", 0x1A]]
 
 def local_reset_incbins():
     asm = None
@@ -649,11 +671,173 @@ def scan_rom_for_tx_fars_and_insert():
         #if not result or not result2:
         #    sys.exit(0)
 
+def get_mon_name(id):
+    return pokemons[id]
+
+def get_type_label(id):
+    for line in elemental_types:
+        if line[2] == id: return line[0]
+    return None
+
+def get_attack_label(id):
+    for move in moves:
+        if move[1] == id: return move[0]
+    return "0" #no move
+
+def get_pointer_target_at(address):
+    rom = extract_maps.rom
+    byte1 = ord(rom[address])
+    byte2 = ord(rom[address+1])
+    pointer = (byte1 + (byte2 << 8))
+    return pointer
+
+def get_frontsprite_label(id):
+    return get_mon_name(id).title() + "PicFront"
+def get_backsprite_label(id):
+    return get_mon_name(id).title() + "PicBack"
+
+def base_data_pretty_printer(id):
+    """returns beautified asm for this pokemon
+
+    uses 28 bytes
+
+    pokedex number, base hp, base attack, base defense, base speed, base special
+    type 1 (label), type 2 (label), catch rate, base experience yield
+    dimensions of frontsprite (byte)
+    frontsprite label pointer
+    backsprite label pointer
+    attacks known at level 1 (4 bytes, 4 constants)
+    growth rate (byte)
+    incbin - tm/hm flags (7 bytes)
+    padding (0)
+    """
+    output = ""
+    rom = extract_maps.rom
+    base_address = 0x383de + (28 * (id))
+    
+    pokedex_number = id
+    mon_name = get_mon_name(id)
+    base_hp = ord(rom[base_address + 1])
+    base_attack = ord(rom[base_address + 2])
+    base_defense = ord(rom[base_address + 3])
+    base_speed = ord(rom[base_address + 4])
+    base_special = ord(rom[base_address + 5])
+    
+    type1_id = ord(rom[base_address + 6])
+    type2_id = ord(rom[base_address + 7])
+    type1 = get_type_label(type1_id)
+    type2 = get_type_label(type2_id)
+
+    catch_rate = ord(rom[base_address + 8])
+    base_exp_yield = ord(rom[base_address + 9])
+    frontsprite_dimensions = ord(rom[base_address + 10])
+
+    frontsprite = get_frontsprite_label(id)
+    backsprite = get_backsprite_label(id)
+
+    #attacks known at level 0
+    attack1 = get_attack_label(ord(rom[base_address + 15]))
+    attack2 = get_attack_label(ord(rom[base_address + 16]))
+    attack3 = get_attack_label(ord(rom[base_address + 17]))
+    attack4 = get_attack_label(ord(rom[base_address + 18]))
+
+    growth_rate = ord(rom[base_address + 19])
+
+    incbin_start_address = base_address + 20
+    incbin_end_address = base_address + 27
+
+    output = mon_name.title() + ("BaseStats: ; 0x%.x" % (base_address)) + "\n"
+    output += spacing + "db " + str(id+1) + " ; pokedex id\n"
+    output += spacing + ("db " + str(base_hp)) + " ; base hp\n"
+    output += spacing + "db " + str(base_attack) + " ; base attack\n"
+    output += spacing + "db " + str(base_defense) + " ; base defense\n"
+    output += spacing + "db " + str(base_speed) + " ; base speed\n"
+    output += spacing + "db " + str(base_special) + " ; base special\n\n"
+    output += spacing + "db " + type1 + " ; species type 1\n"
+    output += spacing + "db " + type2 + " ; species type 2\n\n"
+    output += spacing + "db " + str(catch_rate) + " ; catch rate\n"
+    output += spacing + "db " + str(base_exp_yield) + " ; base exp yield\n"
+    output += spacing + ("db $%.2x" % (frontsprite_dimensions)) + " ; sprite dimensions\n\n"
+    output += spacing + "dw " + frontsprite + "\n"
+    output += spacing + "dw " + backsprite + "\n"
+    output += spacing + "\n" + spacing + "; attacks known at lvl 0\n"
+    output += spacing + "db " + attack1 + "\n"
+    output += spacing + "db " + attack2 + "\n"
+    output += spacing + "db " + attack3 + "\n"
+    output += spacing + "db " + attack4 + "\n\n"
+    output += spacing + "db " + str(growth_rate) + " ; growth rate\n"
+    output += spacing + "\n" + spacing + "; include learnset directly\n"
+    output += spacing + ("INCBIN \"baserom.gbc\",$%.x,$%.x - $%.x\n" % (incbin_start_address, incbin_end_address, incbin_start_address))
+    output += spacing + "db 0 ; padding\n"
+
+    return output
+
+def insert_base_stats(id):
+    insert_asm = base_data_pretty_printer(id)
+
+    address = 0x383de + (28 * (id))
+    line_number = find_incbin_to_replace_for(address)
+    label = get_mon_name(id).title() + "BaseStats"
+    if line_number == None:
+        print "skipping, already inserted at " + hex(address)
+        return
+
+    #also do a name check
+    if (label + ":") in "\n".join(analyze_incbins.asm):
+        print "skipping " + label + " because it is already in use.."
+        return
+    
+    newlines = split_incbin_line_into_three(line_number, address, 28 )
+
+    newlines = newlines.split("\n")
+    if len(newlines) == 2: index = 0 #replace the 1st line with new content
+    elif len(newlines) == 3: index = 1 #replace the 2nd line with new content
+    
+    newlines[index] = insert_asm
+
+    if len(newlines) == 3 and newlines[2][-2:] == "$0":
+        #get rid of the last incbin line if it is only including 0 bytes
+        del newlines[2]
+        #note that this has to be done after adding in the new asm
+    newlines = "\n".join(line for line in newlines)
+    newlines = newlines.replace("$x", "$")
+
+    diff = generate_diff_insert(line_number, newlines)
+    print diff
+    apply_diff(diff, try_fixing=False)
+
+def insert_all_base_stats():
+    for id in range(0, 152):
+        if id < 149: continue #skip
+        insert_base_stats(id)
+        
+        #reset everything
+        reset_incbins()
+        analyze_incbins.reset_incbins()
+        asm = None
+        incbin_lines = []
+        processed_incbins = {}
+        analyze_incbins.asm = None
+        analyze_incbins.incbin_lines = []
+        analyze_incbins.processed_incbins = {}
+
+        #reload
+        load_asm()
+        isolate_incbins()
+        process_incbins()
+
 if __name__ == "__main__":
     #load map headers and object data
     extract_maps.load_rom()
     extract_maps.load_map_pointers()
     extract_maps.read_all_map_headers()
+    load_labels()
+    #print base_data_pretty_printer(0)
+    load_asm()
+    isolate_incbins()
+    process_incbins()
+    #insert_base_stats(1)
+    insert_all_base_stats()
 
     #load texts (these two have different formats)
     #all_texts = pretty_map_headers.analyze_texts.analyze_texts()
@@ -661,10 +845,10 @@ if __name__ == "__main__":
     #tx_fars = pretty_map_headers.find_all_tx_fars()
 
     #load incbins
-    reset_incbins()
+    #reset_incbins()
 
     #scan_for_map_scripts_pointer()
-    scan_rom_for_tx_fars_and_insert()
+    #scan_rom_for_tx_fars_and_insert()
     #insert_text(0xa586b, "_VermilionCityText14")
 
     #insert _ViridianCityText10

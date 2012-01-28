@@ -21960,7 +21960,4508 @@ db SLASH       ,$00,$46,NORMAL,$FF,20
 db SUBSTITUTE  ,$4F,$00,NORMAL,$FF,10
 db STRUGGLE    ,$30,$32,NORMAL,$FF,10
 
-INCBIN "baserom.gbc",$383DE,$39884 - $383DE
+BulbasaurBaseStats: ; 0x383de
+	db 1 ; pokedex id
+	db 45 ; base hp
+	db 49 ; base attack
+	db 49 ; base defense
+	db 45 ; base speed
+	db 65 ; base special
+
+	db GRASS ; species type 1
+	db POISON ; species type 2
+
+	db 45 ; catch rate
+	db 64 ; base exp yield
+	db $55 ; sprite dimensions
+
+	dw BulbasaurPicFront
+	dw BulbasaurPicBack
+	
+	; attacks known at lvl 0
+	db TACKLE
+	db GROWL
+	db 0
+	db 0
+
+	db 3 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$383f2,$383f9 - $383f2
+	db 0 ; padding
+
+IvysaurBaseStats: ; 0x383fa
+	db 2 ; pokedex id
+	db 60 ; base hp
+	db 62 ; base attack
+	db 63 ; base defense
+	db 60 ; base speed
+	db 80 ; base special
+
+	db GRASS ; species type 1
+	db POISON ; species type 2
+
+	db 45 ; catch rate
+	db 141 ; base exp yield
+	db $66 ; sprite dimensions
+
+	dw IvysaurPicFront
+	dw IvysaurPicBack
+	
+	; attacks known at lvl 0
+	db TACKLE
+	db GROWL
+	db LEECH_SEED
+	db 0
+
+	db 3 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$3840e,$38415 - $3840e
+	db 0 ; padding
+
+VenusaurBaseStats: ; 0x38416
+	db 3 ; pokedex id
+	db 80 ; base hp
+	db 82 ; base attack
+	db 83 ; base defense
+	db 80 ; base speed
+	db 100 ; base special
+
+	db GRASS ; species type 1
+	db POISON ; species type 2
+
+	db 45 ; catch rate
+	db 208 ; base exp yield
+	db $77 ; sprite dimensions
+
+	dw VenusaurPicFront
+	dw VenusaurPicBack
+	
+	; attacks known at lvl 0
+	db TACKLE
+	db GROWL
+	db LEECH_SEED
+	db VINE_WHIP
+
+	db 3 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$3842a,$38431 - $3842a
+	db 0 ; padding
+
+CharmanderBaseStats: ; 0x38432
+	db 4 ; pokedex id
+	db 39 ; base hp
+	db 52 ; base attack
+	db 43 ; base defense
+	db 65 ; base speed
+	db 50 ; base special
+
+	db FIRE ; species type 1
+	db FIRE ; species type 2
+
+	db 45 ; catch rate
+	db 65 ; base exp yield
+	db $55 ; sprite dimensions
+
+	dw CharmanderPicFront
+	dw CharmanderPicBack
+	
+	; attacks known at lvl 0
+	db SCRATCH
+	db GROWL
+	db 0
+	db 0
+
+	db 3 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$38446,$3844d - $38446
+	db 0 ; padding
+
+CharmeleonBaseStats: ; 0x3844e
+	db 5 ; pokedex id
+	db 58 ; base hp
+	db 64 ; base attack
+	db 58 ; base defense
+	db 80 ; base speed
+	db 65 ; base special
+
+	db FIRE ; species type 1
+	db FIRE ; species type 2
+
+	db 45 ; catch rate
+	db 142 ; base exp yield
+	db $66 ; sprite dimensions
+
+	dw CharmeleonPicFront
+	dw CharmeleonPicBack
+	
+	; attacks known at lvl 0
+	db SCRATCH
+	db GROWL
+	db EMBER
+	db 0
+
+	db 3 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$38462,$38469 - $38462
+	db 0 ; padding
+
+CharizardBaseStats: ; 0x3846a
+	db 6 ; pokedex id
+	db 78 ; base hp
+	db 84 ; base attack
+	db 78 ; base defense
+	db 100 ; base speed
+	db 85 ; base special
+
+	db FIRE ; species type 1
+	db FLYING ; species type 2
+
+	db 45 ; catch rate
+	db 209 ; base exp yield
+	db $77 ; sprite dimensions
+
+	dw CharizardPicFront
+	dw CharizardPicBack
+	
+	; attacks known at lvl 0
+	db SCRATCH
+	db GROWL
+	db EMBER
+	db LEER
+
+	db 3 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$3847e,$38485 - $3847e
+	db 0 ; padding
+
+SquirtleBaseStats: ; 0x38486
+	db 7 ; pokedex id
+	db 44 ; base hp
+	db 48 ; base attack
+	db 65 ; base defense
+	db 43 ; base speed
+	db 50 ; base special
+
+	db WATER ; species type 1
+	db WATER ; species type 2
+
+	db 45 ; catch rate
+	db 66 ; base exp yield
+	db $55 ; sprite dimensions
+
+	dw SquirtlePicFront
+	dw SquirtlePicBack
+	
+	; attacks known at lvl 0
+	db TACKLE
+	db TAIL_WHIP
+	db 0
+	db 0
+
+	db 3 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$3849a,$384a1 - $3849a
+	db 0 ; padding
+
+WartortleBaseStats: ; 0x384a2
+	db 8 ; pokedex id
+	db 59 ; base hp
+	db 63 ; base attack
+	db 80 ; base defense
+	db 58 ; base speed
+	db 65 ; base special
+
+	db WATER ; species type 1
+	db WATER ; species type 2
+
+	db 45 ; catch rate
+	db 143 ; base exp yield
+	db $66 ; sprite dimensions
+
+	dw WartortlePicFront
+	dw WartortlePicBack
+	
+	; attacks known at lvl 0
+	db TACKLE
+	db TAIL_WHIP
+	db BUBBLE
+	db 0
+
+	db 3 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$384b6,$384bd - $384b6
+	db 0 ; padding
+
+BlastoiseBaseStats: ; 0x384be
+	db 9 ; pokedex id
+	db 79 ; base hp
+	db 83 ; base attack
+	db 100 ; base defense
+	db 78 ; base speed
+	db 85 ; base special
+
+	db WATER ; species type 1
+	db WATER ; species type 2
+
+	db 45 ; catch rate
+	db 210 ; base exp yield
+	db $77 ; sprite dimensions
+
+	dw BlastoisePicFront
+	dw BlastoisePicBack
+	
+	; attacks known at lvl 0
+	db TACKLE
+	db TAIL_WHIP
+	db BUBBLE
+	db WATER_GUN
+
+	db 3 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$384d2,$384d9 - $384d2
+	db 0 ; padding
+
+CaterpieBaseStats: ; 0x384da
+	db 10 ; pokedex id
+	db 45 ; base hp
+	db 30 ; base attack
+	db 35 ; base defense
+	db 45 ; base speed
+	db 20 ; base special
+
+	db BUG ; species type 1
+	db BUG ; species type 2
+
+	db 255 ; catch rate
+	db 53 ; base exp yield
+	db $55 ; sprite dimensions
+
+	dw CaterpiePicFront
+	dw CaterpiePicBack
+	
+	; attacks known at lvl 0
+	db TACKLE
+	db STRING_SHOT
+	db 0
+	db 0
+
+	db 0 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$384ee,$384f5 - $384ee
+	db 0 ; padding
+
+MetapodBaseStats: ; 0x384f6
+	db 11 ; pokedex id
+	db 50 ; base hp
+	db 20 ; base attack
+	db 55 ; base defense
+	db 30 ; base speed
+	db 25 ; base special
+
+	db BUG ; species type 1
+	db BUG ; species type 2
+
+	db 120 ; catch rate
+	db 72 ; base exp yield
+	db $55 ; sprite dimensions
+
+	dw MetapodPicFront
+	dw MetapodPicBack
+	
+	; attacks known at lvl 0
+	db HARDEN
+	db 0
+	db 0
+	db 0
+
+	db 0 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$3850a,$38511 - $3850a
+	db 0 ; padding
+
+ButterfreeBaseStats: ; 0x38512
+	db 12 ; pokedex id
+	db 60 ; base hp
+	db 45 ; base attack
+	db 50 ; base defense
+	db 70 ; base speed
+	db 80 ; base special
+
+	db BUG ; species type 1
+	db FLYING ; species type 2
+
+	db 45 ; catch rate
+	db 160 ; base exp yield
+	db $77 ; sprite dimensions
+
+	dw ButterfreePicFront
+	dw ButterfreePicBack
+	
+	; attacks known at lvl 0
+	db CONFUSION
+	db 0
+	db 0
+	db 0
+
+	db 0 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$38526,$3852d - $38526
+	db 0 ; padding
+
+WeedleBaseStats: ; 0x3852e
+	db 13 ; pokedex id
+	db 40 ; base hp
+	db 35 ; base attack
+	db 30 ; base defense
+	db 50 ; base speed
+	db 20 ; base special
+
+	db BUG ; species type 1
+	db POISON ; species type 2
+
+	db 255 ; catch rate
+	db 52 ; base exp yield
+	db $55 ; sprite dimensions
+
+	dw WeedlePicFront
+	dw WeedlePicBack
+	
+	; attacks known at lvl 0
+	db POISON_STING
+	db STRING_SHOT
+	db 0
+	db 0
+
+	db 0 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$38542,$38549 - $38542
+	db 0 ; padding
+
+KakunaBaseStats: ; 0x3854a
+	db 14 ; pokedex id
+	db 45 ; base hp
+	db 25 ; base attack
+	db 50 ; base defense
+	db 35 ; base speed
+	db 25 ; base special
+
+	db BUG ; species type 1
+	db POISON ; species type 2
+
+	db 120 ; catch rate
+	db 71 ; base exp yield
+	db $55 ; sprite dimensions
+
+	dw KakunaPicFront
+	dw KakunaPicBack
+	
+	; attacks known at lvl 0
+	db HARDEN
+	db 0
+	db 0
+	db 0
+
+	db 0 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$3855e,$38565 - $3855e
+	db 0 ; padding
+
+BeedrillBaseStats: ; 0x38566
+	db 15 ; pokedex id
+	db 65 ; base hp
+	db 80 ; base attack
+	db 40 ; base defense
+	db 75 ; base speed
+	db 45 ; base special
+
+	db BUG ; species type 1
+	db POISON ; species type 2
+
+	db 45 ; catch rate
+	db 159 ; base exp yield
+	db $77 ; sprite dimensions
+
+	dw BeedrillPicFront
+	dw BeedrillPicBack
+	
+	; attacks known at lvl 0
+	db FURY_ATTACK
+	db 0
+	db 0
+	db 0
+
+	db 0 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$3857a,$38581 - $3857a
+	db 0 ; padding
+
+PidgeyBaseStats: ; 0x38582
+	db 16 ; pokedex id
+	db 40 ; base hp
+	db 45 ; base attack
+	db 40 ; base defense
+	db 56 ; base speed
+	db 35 ; base special
+
+	db NORMAL ; species type 1
+	db FLYING ; species type 2
+
+	db 255 ; catch rate
+	db 55 ; base exp yield
+	db $55 ; sprite dimensions
+
+	dw PidgeyPicFront
+	dw PidgeyPicBack
+	
+	; attacks known at lvl 0
+	db GUST
+	db 0
+	db 0
+	db 0
+
+	db 3 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$38596,$3859d - $38596
+	db 0 ; padding
+
+PidgeottoBaseStats: ; 0x3859e
+	db 17 ; pokedex id
+	db 63 ; base hp
+	db 60 ; base attack
+	db 55 ; base defense
+	db 71 ; base speed
+	db 50 ; base special
+
+	db NORMAL ; species type 1
+	db FLYING ; species type 2
+
+	db 120 ; catch rate
+	db 113 ; base exp yield
+	db $66 ; sprite dimensions
+
+	dw PidgeottoPicFront
+	dw PidgeottoPicBack
+	
+	; attacks known at lvl 0
+	db GUST
+	db SAND_ATTACK
+	db 0
+	db 0
+
+	db 3 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$385b2,$385b9 - $385b2
+	db 0 ; padding
+
+PidgeotBaseStats: ; 0x385ba
+	db 18 ; pokedex id
+	db 83 ; base hp
+	db 80 ; base attack
+	db 75 ; base defense
+	db 91 ; base speed
+	db 70 ; base special
+
+	db NORMAL ; species type 1
+	db FLYING ; species type 2
+
+	db 45 ; catch rate
+	db 172 ; base exp yield
+	db $77 ; sprite dimensions
+
+	dw PidgeotPicFront
+	dw PidgeotPicBack
+	
+	; attacks known at lvl 0
+	db GUST
+	db SAND_ATTACK
+	db QUICK_ATTACK
+	db 0
+
+	db 3 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$385ce,$385d5 - $385ce
+	db 0 ; padding
+
+RattataBaseStats: ; 0x385d6
+	db 19 ; pokedex id
+	db 30 ; base hp
+	db 56 ; base attack
+	db 35 ; base defense
+	db 72 ; base speed
+	db 25 ; base special
+
+	db NORMAL ; species type 1
+	db NORMAL ; species type 2
+
+	db 255 ; catch rate
+	db 57 ; base exp yield
+	db $55 ; sprite dimensions
+
+	dw RattataPicFront
+	dw RattataPicBack
+	
+	; attacks known at lvl 0
+	db TACKLE
+	db TAIL_WHIP
+	db 0
+	db 0
+
+	db 0 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$385ea,$385f1 - $385ea
+	db 0 ; padding
+
+RaticateBaseStats: ; 0x385f2
+	db 20 ; pokedex id
+	db 55 ; base hp
+	db 81 ; base attack
+	db 60 ; base defense
+	db 97 ; base speed
+	db 50 ; base special
+
+	db NORMAL ; species type 1
+	db NORMAL ; species type 2
+
+	db 90 ; catch rate
+	db 116 ; base exp yield
+	db $66 ; sprite dimensions
+
+	dw RaticatePicFront
+	dw RaticatePicBack
+	
+	; attacks known at lvl 0
+	db TACKLE
+	db TAIL_WHIP
+	db QUICK_ATTACK
+	db 0
+
+	db 0 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$38606,$3860d - $38606
+	db 0 ; padding
+
+SpearowBaseStats: ; 0x3860e
+	db 21 ; pokedex id
+	db 40 ; base hp
+	db 60 ; base attack
+	db 30 ; base defense
+	db 70 ; base speed
+	db 31 ; base special
+
+	db NORMAL ; species type 1
+	db FLYING ; species type 2
+
+	db 255 ; catch rate
+	db 58 ; base exp yield
+	db $55 ; sprite dimensions
+
+	dw SpearowPicFront
+	dw SpearowPicBack
+	
+	; attacks known at lvl 0
+	db PECK
+	db GROWL
+	db 0
+	db 0
+
+	db 0 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$38622,$38629 - $38622
+	db 0 ; padding
+
+FearowBaseStats: ; 0x3862a
+	db 22 ; pokedex id
+	db 65 ; base hp
+	db 90 ; base attack
+	db 65 ; base defense
+	db 100 ; base speed
+	db 61 ; base special
+
+	db NORMAL ; species type 1
+	db FLYING ; species type 2
+
+	db 90 ; catch rate
+	db 162 ; base exp yield
+	db $77 ; sprite dimensions
+
+	dw FearowPicFront
+	dw FearowPicBack
+	
+	; attacks known at lvl 0
+	db PECK
+	db GROWL
+	db LEER
+	db 0
+
+	db 0 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$3863e,$38645 - $3863e
+	db 0 ; padding
+
+EkansBaseStats: ; 0x38646
+	db 23 ; pokedex id
+	db 35 ; base hp
+	db 60 ; base attack
+	db 44 ; base defense
+	db 55 ; base speed
+	db 40 ; base special
+
+	db POISON ; species type 1
+	db POISON ; species type 2
+
+	db 255 ; catch rate
+	db 62 ; base exp yield
+	db $55 ; sprite dimensions
+
+	dw EkansPicFront
+	dw EkansPicBack
+	
+	; attacks known at lvl 0
+	db WRAP
+	db LEER
+	db 0
+	db 0
+
+	db 0 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$3865a,$38661 - $3865a
+	db 0 ; padding
+
+ArbokBaseStats: ; 0x38662
+	db 24 ; pokedex id
+	db 60 ; base hp
+	db 85 ; base attack
+	db 69 ; base defense
+	db 80 ; base speed
+	db 65 ; base special
+
+	db POISON ; species type 1
+	db POISON ; species type 2
+
+	db 90 ; catch rate
+	db 147 ; base exp yield
+	db $77 ; sprite dimensions
+
+	dw ArbokPicFront
+	dw ArbokPicBack
+	
+	; attacks known at lvl 0
+	db WRAP
+	db LEER
+	db POISON_STING
+	db 0
+
+	db 0 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$38676,$3867d - $38676
+	db 0 ; padding
+
+PikachuBaseStats: ; 0x3867e
+	db 25 ; pokedex id
+	db 35 ; base hp
+	db 55 ; base attack
+	db 30 ; base defense
+	db 90 ; base speed
+	db 50 ; base special
+
+	db ELECTRIC ; species type 1
+	db ELECTRIC ; species type 2
+
+	db 190 ; catch rate
+	db 82 ; base exp yield
+	db $55 ; sprite dimensions
+
+	dw PikachuPicFront
+	dw PikachuPicBack
+	
+	; attacks known at lvl 0
+	db THUNDERSHOCK
+	db GROWL
+	db 0
+	db 0
+
+	db 0 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$38692,$38699 - $38692
+	db 0 ; padding
+
+RaichuBaseStats: ; 0x3869a
+	db 26 ; pokedex id
+	db 60 ; base hp
+	db 90 ; base attack
+	db 55 ; base defense
+	db 100 ; base speed
+	db 90 ; base special
+
+	db ELECTRIC ; species type 1
+	db ELECTRIC ; species type 2
+
+	db 75 ; catch rate
+	db 122 ; base exp yield
+	db $77 ; sprite dimensions
+
+	dw RaichuPicFront
+	dw RaichuPicBack
+	
+	; attacks known at lvl 0
+	db THUNDERSHOCK
+	db GROWL
+	db THUNDER_WAVE
+	db 0
+
+	db 0 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$386ae,$386b5 - $386ae
+	db 0 ; padding
+
+SandshrewBaseStats: ; 0x386b6
+	db 27 ; pokedex id
+	db 50 ; base hp
+	db 75 ; base attack
+	db 85 ; base defense
+	db 40 ; base speed
+	db 30 ; base special
+
+	db GROUND ; species type 1
+	db GROUND ; species type 2
+
+	db 255 ; catch rate
+	db 93 ; base exp yield
+	db $55 ; sprite dimensions
+
+	dw SandshrewPicFront
+	dw SandshrewPicBack
+	
+	; attacks known at lvl 0
+	db SCRATCH
+	db 0
+	db 0
+	db 0
+
+	db 0 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$386ca,$386d1 - $386ca
+	db 0 ; padding
+
+SandslashBaseStats: ; 0x386d2
+	db 28 ; pokedex id
+	db 75 ; base hp
+	db 100 ; base attack
+	db 110 ; base defense
+	db 65 ; base speed
+	db 55 ; base special
+
+	db GROUND ; species type 1
+	db GROUND ; species type 2
+
+	db 90 ; catch rate
+	db 163 ; base exp yield
+	db $66 ; sprite dimensions
+
+	dw SandslashPicFront
+	dw SandslashPicBack
+	
+	; attacks known at lvl 0
+	db SCRATCH
+	db SAND_ATTACK
+	db 0
+	db 0
+
+	db 0 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$386e6,$386ed - $386e6
+	db 0 ; padding
+
+NidoranFBaseStats: ; 0x386ee
+	db 29 ; pokedex id
+	db 55 ; base hp
+	db 47 ; base attack
+	db 52 ; base defense
+	db 41 ; base speed
+	db 40 ; base special
+
+	db POISON ; species type 1
+	db POISON ; species type 2
+
+	db 235 ; catch rate
+	db 59 ; base exp yield
+	db $55 ; sprite dimensions
+
+	dw NidoranFPicFront
+	dw NidoranFPicBack
+	
+	; attacks known at lvl 0
+	db GROWL
+	db TACKLE
+	db 0
+	db 0
+
+	db 3 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$38702,$38709 - $38702
+	db 0 ; padding
+
+NidorinaBaseStats: ; 0x3870a
+	db 30 ; pokedex id
+	db 70 ; base hp
+	db 62 ; base attack
+	db 67 ; base defense
+	db 56 ; base speed
+	db 55 ; base special
+
+	db POISON ; species type 1
+	db POISON ; species type 2
+
+	db 120 ; catch rate
+	db 117 ; base exp yield
+	db $66 ; sprite dimensions
+
+	dw NidorinaPicFront
+	dw NidorinaPicBack
+	
+	; attacks known at lvl 0
+	db GROWL
+	db TACKLE
+	db SCRATCH
+	db 0
+
+	db 3 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$3871e,$38725 - $3871e
+	db 0 ; padding
+
+NidoqueenBaseStats: ; 0x38726
+	db 31 ; pokedex id
+	db 90 ; base hp
+	db 82 ; base attack
+	db 87 ; base defense
+	db 76 ; base speed
+	db 75 ; base special
+
+	db POISON ; species type 1
+	db GROUND ; species type 2
+
+	db 45 ; catch rate
+	db 194 ; base exp yield
+	db $77 ; sprite dimensions
+
+	dw NidoqueenPicFront
+	dw NidoqueenPicBack
+	
+	; attacks known at lvl 0
+	db TACKLE
+	db SCRATCH
+	db TAIL_WHIP
+	db BODY_SLAM
+
+	db 3 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$3873a,$38741 - $3873a
+	db 0 ; padding
+
+NidoranMBaseStats: ; 0x38742
+	db 32 ; pokedex id
+	db 46 ; base hp
+	db 57 ; base attack
+	db 40 ; base defense
+	db 50 ; base speed
+	db 40 ; base special
+
+	db POISON ; species type 1
+	db POISON ; species type 2
+
+	db 235 ; catch rate
+	db 60 ; base exp yield
+	db $55 ; sprite dimensions
+
+	dw NidoranMPicFront
+	dw NidoranMPicBack
+	
+	; attacks known at lvl 0
+	db LEER
+	db TACKLE
+	db 0
+	db 0
+
+	db 3 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$38756,$3875d - $38756
+	db 0 ; padding
+
+NidorinoBaseStats: ; 0x3875e
+	db 33 ; pokedex id
+	db 61 ; base hp
+	db 72 ; base attack
+	db 57 ; base defense
+	db 65 ; base speed
+	db 55 ; base special
+
+	db POISON ; species type 1
+	db POISON ; species type 2
+
+	db 120 ; catch rate
+	db 118 ; base exp yield
+	db $66 ; sprite dimensions
+
+	dw NidorinoPicFront
+	dw NidorinoPicBack
+	
+	; attacks known at lvl 0
+	db LEER
+	db TACKLE
+	db HORN_ATTACK
+	db 0
+
+	db 3 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$38772,$38779 - $38772
+	db 0 ; padding
+
+NidokingBaseStats: ; 0x3877a
+	db 34 ; pokedex id
+	db 81 ; base hp
+	db 92 ; base attack
+	db 77 ; base defense
+	db 85 ; base speed
+	db 75 ; base special
+
+	db POISON ; species type 1
+	db GROUND ; species type 2
+
+	db 45 ; catch rate
+	db 195 ; base exp yield
+	db $77 ; sprite dimensions
+
+	dw NidokingPicFront
+	dw NidokingPicBack
+	
+	; attacks known at lvl 0
+	db TACKLE
+	db HORN_ATTACK
+	db POISON_STING
+	db THRASH
+
+	db 3 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$3878e,$38795 - $3878e
+	db 0 ; padding
+
+ClefairyBaseStats: ; 0x38796
+	db 35 ; pokedex id
+	db 70 ; base hp
+	db 45 ; base attack
+	db 48 ; base defense
+	db 35 ; base speed
+	db 60 ; base special
+
+	db NORMAL ; species type 1
+	db NORMAL ; species type 2
+
+	db 150 ; catch rate
+	db 68 ; base exp yield
+	db $55 ; sprite dimensions
+
+	dw ClefairyPicFront
+	dw ClefairyPicBack
+	
+	; attacks known at lvl 0
+	db POUND
+	db GROWL
+	db 0
+	db 0
+
+	db 4 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$387aa,$387b1 - $387aa
+	db 0 ; padding
+
+ClefableBaseStats: ; 0x387b2
+	db 36 ; pokedex id
+	db 95 ; base hp
+	db 70 ; base attack
+	db 73 ; base defense
+	db 60 ; base speed
+	db 85 ; base special
+
+	db NORMAL ; species type 1
+	db NORMAL ; species type 2
+
+	db 25 ; catch rate
+	db 129 ; base exp yield
+	db $66 ; sprite dimensions
+
+	dw ClefablePicFront
+	dw ClefablePicBack
+	
+	; attacks known at lvl 0
+	db SING
+	db DOUBLESLAP
+	db MINIMIZE
+	db METRONOME
+
+	db 4 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$387c6,$387cd - $387c6
+	db 0 ; padding
+
+VulpixBaseStats: ; 0x387ce
+	db 37 ; pokedex id
+	db 38 ; base hp
+	db 41 ; base attack
+	db 40 ; base defense
+	db 65 ; base speed
+	db 65 ; base special
+
+	db FIRE ; species type 1
+	db FIRE ; species type 2
+
+	db 190 ; catch rate
+	db 63 ; base exp yield
+	db $66 ; sprite dimensions
+
+	dw VulpixPicFront
+	dw VulpixPicBack
+	
+	; attacks known at lvl 0
+	db EMBER
+	db TAIL_WHIP
+	db 0
+	db 0
+
+	db 0 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$387e2,$387e9 - $387e2
+	db 0 ; padding
+
+NinetalesBaseStats: ; 0x387ea
+	db 38 ; pokedex id
+	db 73 ; base hp
+	db 76 ; base attack
+	db 75 ; base defense
+	db 100 ; base speed
+	db 100 ; base special
+
+	db FIRE ; species type 1
+	db FIRE ; species type 2
+
+	db 75 ; catch rate
+	db 178 ; base exp yield
+	db $77 ; sprite dimensions
+
+	dw NinetalesPicFront
+	dw NinetalesPicBack
+	
+	; attacks known at lvl 0
+	db EMBER
+	db TAIL_WHIP
+	db QUICK_ATTACK
+	db ROAR
+
+	db 0 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$387fe,$38805 - $387fe
+	db 0 ; padding
+
+JigglypuffBaseStats: ; 0x38806
+	db 39 ; pokedex id
+	db 115 ; base hp
+	db 45 ; base attack
+	db 20 ; base defense
+	db 20 ; base speed
+	db 25 ; base special
+
+	db NORMAL ; species type 1
+	db NORMAL ; species type 2
+
+	db 170 ; catch rate
+	db 76 ; base exp yield
+	db $55 ; sprite dimensions
+
+	dw JigglypuffPicFront
+	dw JigglypuffPicBack
+	
+	; attacks known at lvl 0
+	db SING
+	db 0
+	db 0
+	db 0
+
+	db 4 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$3881a,$38821 - $3881a
+	db 0 ; padding
+
+WigglytuffBaseStats: ; 0x38822
+	db 40 ; pokedex id
+	db 140 ; base hp
+	db 70 ; base attack
+	db 45 ; base defense
+	db 45 ; base speed
+	db 50 ; base special
+
+	db NORMAL ; species type 1
+	db NORMAL ; species type 2
+
+	db 50 ; catch rate
+	db 109 ; base exp yield
+	db $66 ; sprite dimensions
+
+	dw WigglytuffPicFront
+	dw WigglytuffPicBack
+	
+	; attacks known at lvl 0
+	db SING
+	db DISABLE
+	db DEFENSE_CURL
+	db DOUBLESLAP
+
+	db 4 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$38836,$3883d - $38836
+	db 0 ; padding
+
+ZubatBaseStats: ; 0x3883e
+	db 41 ; pokedex id
+	db 40 ; base hp
+	db 45 ; base attack
+	db 35 ; base defense
+	db 55 ; base speed
+	db 40 ; base special
+
+	db POISON ; species type 1
+	db FLYING ; species type 2
+
+	db 255 ; catch rate
+	db 54 ; base exp yield
+	db $55 ; sprite dimensions
+
+	dw ZubatPicFront
+	dw ZubatPicBack
+	
+	; attacks known at lvl 0
+	db LEECH_LIFE
+	db 0
+	db 0
+	db 0
+
+	db 0 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$38852,$38859 - $38852
+	db 0 ; padding
+
+GolbatBaseStats: ; 0x3885a
+	db 42 ; pokedex id
+	db 75 ; base hp
+	db 80 ; base attack
+	db 70 ; base defense
+	db 90 ; base speed
+	db 75 ; base special
+
+	db POISON ; species type 1
+	db FLYING ; species type 2
+
+	db 90 ; catch rate
+	db 171 ; base exp yield
+	db $77 ; sprite dimensions
+
+	dw GolbatPicFront
+	dw GolbatPicBack
+	
+	; attacks known at lvl 0
+	db LEECH_LIFE
+	db SCREECH
+	db BITE
+	db 0
+
+	db 0 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$3886e,$38875 - $3886e
+	db 0 ; padding
+
+OddishBaseStats: ; 0x38876
+	db 43 ; pokedex id
+	db 45 ; base hp
+	db 50 ; base attack
+	db 55 ; base defense
+	db 30 ; base speed
+	db 75 ; base special
+
+	db GRASS ; species type 1
+	db POISON ; species type 2
+
+	db 255 ; catch rate
+	db 78 ; base exp yield
+	db $55 ; sprite dimensions
+
+	dw OddishPicFront
+	dw OddishPicBack
+	
+	; attacks known at lvl 0
+	db ABSORB
+	db 0
+	db 0
+	db 0
+
+	db 3 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$3888a,$38891 - $3888a
+	db 0 ; padding
+
+GloomBaseStats: ; 0x38892
+	db 44 ; pokedex id
+	db 60 ; base hp
+	db 65 ; base attack
+	db 70 ; base defense
+	db 40 ; base speed
+	db 85 ; base special
+
+	db GRASS ; species type 1
+	db POISON ; species type 2
+
+	db 120 ; catch rate
+	db 132 ; base exp yield
+	db $66 ; sprite dimensions
+
+	dw GloomPicFront
+	dw GloomPicBack
+	
+	; attacks known at lvl 0
+	db ABSORB
+	db POISONPOWDER
+	db STUN_SPORE
+	db 0
+
+	db 3 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$388a6,$388ad - $388a6
+	db 0 ; padding
+
+VileplumeBaseStats: ; 0x388ae
+	db 45 ; pokedex id
+	db 75 ; base hp
+	db 80 ; base attack
+	db 85 ; base defense
+	db 50 ; base speed
+	db 100 ; base special
+
+	db GRASS ; species type 1
+	db POISON ; species type 2
+
+	db 45 ; catch rate
+	db 184 ; base exp yield
+	db $77 ; sprite dimensions
+
+	dw VileplumePicFront
+	dw VileplumePicBack
+	
+	; attacks known at lvl 0
+	db STUN_SPORE
+	db SLEEP_POWDER
+	db ACID
+	db PETAL_DANCE
+
+	db 3 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$388c2,$388c9 - $388c2
+	db 0 ; padding
+
+ParasBaseStats: ; 0x388ca
+	db 46 ; pokedex id
+	db 35 ; base hp
+	db 70 ; base attack
+	db 55 ; base defense
+	db 25 ; base speed
+	db 55 ; base special
+
+	db BUG ; species type 1
+	db GRASS ; species type 2
+
+	db 190 ; catch rate
+	db 70 ; base exp yield
+	db $55 ; sprite dimensions
+
+	dw ParasPicFront
+	dw ParasPicBack
+	
+	; attacks known at lvl 0
+	db SCRATCH
+	db 0
+	db 0
+	db 0
+
+	db 0 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$388de,$388e5 - $388de
+	db 0 ; padding
+
+ParasectBaseStats: ; 0x388e6
+	db 47 ; pokedex id
+	db 60 ; base hp
+	db 95 ; base attack
+	db 80 ; base defense
+	db 30 ; base speed
+	db 80 ; base special
+
+	db BUG ; species type 1
+	db GRASS ; species type 2
+
+	db 75 ; catch rate
+	db 128 ; base exp yield
+	db $77 ; sprite dimensions
+
+	dw ParasectPicFront
+	dw ParasectPicBack
+	
+	; attacks known at lvl 0
+	db SCRATCH
+	db STUN_SPORE
+	db LEECH_LIFE
+	db 0
+
+	db 0 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$388fa,$38901 - $388fa
+	db 0 ; padding
+
+VenonatBaseStats: ; 0x38902
+	db 48 ; pokedex id
+	db 60 ; base hp
+	db 55 ; base attack
+	db 50 ; base defense
+	db 45 ; base speed
+	db 40 ; base special
+
+	db BUG ; species type 1
+	db POISON ; species type 2
+
+	db 190 ; catch rate
+	db 75 ; base exp yield
+	db $55 ; sprite dimensions
+
+	dw VenonatPicFront
+	dw VenonatPicBack
+	
+	; attacks known at lvl 0
+	db TACKLE
+	db DISABLE
+	db 0
+	db 0
+
+	db 0 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$38916,$3891d - $38916
+	db 0 ; padding
+
+VenomothBaseStats: ; 0x3891e
+	db 49 ; pokedex id
+	db 70 ; base hp
+	db 65 ; base attack
+	db 60 ; base defense
+	db 90 ; base speed
+	db 90 ; base special
+
+	db BUG ; species type 1
+	db POISON ; species type 2
+
+	db 75 ; catch rate
+	db 138 ; base exp yield
+	db $77 ; sprite dimensions
+
+	dw VenomothPicFront
+	dw VenomothPicBack
+	
+	; attacks known at lvl 0
+	db TACKLE
+	db DISABLE
+	db POISONPOWDER
+	db LEECH_LIFE
+
+	db 0 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$38932,$38939 - $38932
+	db 0 ; padding
+
+DiglettBaseStats: ; 0x3893a
+	db 50 ; pokedex id
+	db 10 ; base hp
+	db 55 ; base attack
+	db 25 ; base defense
+	db 95 ; base speed
+	db 45 ; base special
+
+	db GROUND ; species type 1
+	db GROUND ; species type 2
+
+	db 255 ; catch rate
+	db 81 ; base exp yield
+	db $55 ; sprite dimensions
+
+	dw DiglettPicFront
+	dw DiglettPicBack
+	
+	; attacks known at lvl 0
+	db SCRATCH
+	db 0
+	db 0
+	db 0
+
+	db 0 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$3894e,$38955 - $3894e
+	db 0 ; padding
+
+DugtrioBaseStats: ; 0x38956
+	db 51 ; pokedex id
+	db 35 ; base hp
+	db 80 ; base attack
+	db 50 ; base defense
+	db 120 ; base speed
+	db 70 ; base special
+
+	db GROUND ; species type 1
+	db GROUND ; species type 2
+
+	db 50 ; catch rate
+	db 153 ; base exp yield
+	db $66 ; sprite dimensions
+
+	dw DugtrioPicFront
+	dw DugtrioPicBack
+	
+	; attacks known at lvl 0
+	db SCRATCH
+	db GROWL
+	db DIG
+	db 0
+
+	db 0 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$3896a,$38971 - $3896a
+	db 0 ; padding
+
+MeowthBaseStats: ; 0x38972
+	db 52 ; pokedex id
+	db 40 ; base hp
+	db 45 ; base attack
+	db 35 ; base defense
+	db 90 ; base speed
+	db 40 ; base special
+
+	db NORMAL ; species type 1
+	db NORMAL ; species type 2
+
+	db 255 ; catch rate
+	db 69 ; base exp yield
+	db $55 ; sprite dimensions
+
+	dw MeowthPicFront
+	dw MeowthPicBack
+	
+	; attacks known at lvl 0
+	db SCRATCH
+	db GROWL
+	db 0
+	db 0
+
+	db 0 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$38986,$3898d - $38986
+	db 0 ; padding
+
+PersianBaseStats: ; 0x3898e
+	db 53 ; pokedex id
+	db 65 ; base hp
+	db 70 ; base attack
+	db 60 ; base defense
+	db 115 ; base speed
+	db 65 ; base special
+
+	db NORMAL ; species type 1
+	db NORMAL ; species type 2
+
+	db 90 ; catch rate
+	db 148 ; base exp yield
+	db $77 ; sprite dimensions
+
+	dw PersianPicFront
+	dw PersianPicBack
+	
+	; attacks known at lvl 0
+	db SCRATCH
+	db GROWL
+	db BITE
+	db SCREECH
+
+	db 0 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$389a2,$389a9 - $389a2
+	db 0 ; padding
+
+PsyduckBaseStats: ; 0x389aa
+	db 54 ; pokedex id
+	db 50 ; base hp
+	db 52 ; base attack
+	db 48 ; base defense
+	db 55 ; base speed
+	db 50 ; base special
+
+	db WATER ; species type 1
+	db WATER ; species type 2
+
+	db 190 ; catch rate
+	db 80 ; base exp yield
+	db $55 ; sprite dimensions
+
+	dw PsyduckPicFront
+	dw PsyduckPicBack
+	
+	; attacks known at lvl 0
+	db SCRATCH
+	db 0
+	db 0
+	db 0
+
+	db 0 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$389be,$389c5 - $389be
+	db 0 ; padding
+
+GolduckBaseStats: ; 0x389c6
+	db 55 ; pokedex id
+	db 80 ; base hp
+	db 82 ; base attack
+	db 78 ; base defense
+	db 85 ; base speed
+	db 80 ; base special
+
+	db WATER ; species type 1
+	db WATER ; species type 2
+
+	db 75 ; catch rate
+	db 174 ; base exp yield
+	db $77 ; sprite dimensions
+
+	dw GolduckPicFront
+	dw GolduckPicBack
+	
+	; attacks known at lvl 0
+	db SCRATCH
+	db TAIL_WHIP
+	db DISABLE
+	db 0
+
+	db 0 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$389da,$389e1 - $389da
+	db 0 ; padding
+
+MankeyBaseStats: ; 0x389e2
+	db 56 ; pokedex id
+	db 40 ; base hp
+	db 80 ; base attack
+	db 35 ; base defense
+	db 70 ; base speed
+	db 35 ; base special
+
+	db FIGHTING ; species type 1
+	db FIGHTING ; species type 2
+
+	db 190 ; catch rate
+	db 74 ; base exp yield
+	db $55 ; sprite dimensions
+
+	dw MankeyPicFront
+	dw MankeyPicBack
+	
+	; attacks known at lvl 0
+	db SCRATCH
+	db LEER
+	db 0
+	db 0
+
+	db 0 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$389f6,$389fd - $389f6
+	db 0 ; padding
+
+PrimeapeBaseStats: ; 0x389fe
+	db 57 ; pokedex id
+	db 65 ; base hp
+	db 105 ; base attack
+	db 60 ; base defense
+	db 95 ; base speed
+	db 60 ; base special
+
+	db FIGHTING ; species type 1
+	db FIGHTING ; species type 2
+
+	db 75 ; catch rate
+	db 149 ; base exp yield
+	db $77 ; sprite dimensions
+
+	dw PrimeapePicFront
+	dw PrimeapePicBack
+	
+	; attacks known at lvl 0
+	db SCRATCH
+	db LEER
+	db KARATE_CHOP
+	db FURY_SWIPES
+
+	db 0 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$38a12,$38a19 - $38a12
+	db 0 ; padding
+
+GrowlitheBaseStats: ; 0x38a1a
+	db 58 ; pokedex id
+	db 55 ; base hp
+	db 70 ; base attack
+	db 45 ; base defense
+	db 60 ; base speed
+	db 50 ; base special
+
+	db FIRE ; species type 1
+	db FIRE ; species type 2
+
+	db 190 ; catch rate
+	db 91 ; base exp yield
+	db $55 ; sprite dimensions
+
+	dw GrowlithePicFront
+	dw GrowlithePicBack
+	
+	; attacks known at lvl 0
+	db BITE
+	db ROAR
+	db 0
+	db 0
+
+	db 5 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$38a2e,$38a35 - $38a2e
+	db 0 ; padding
+
+ArcanineBaseStats: ; 0x38a36
+	db 59 ; pokedex id
+	db 90 ; base hp
+	db 110 ; base attack
+	db 80 ; base defense
+	db 95 ; base speed
+	db 80 ; base special
+
+	db FIRE ; species type 1
+	db FIRE ; species type 2
+
+	db 75 ; catch rate
+	db 213 ; base exp yield
+	db $77 ; sprite dimensions
+
+	dw ArcaninePicFront
+	dw ArcaninePicBack
+	
+	; attacks known at lvl 0
+	db ROAR
+	db EMBER
+	db LEER
+	db TAKE_DOWN
+
+	db 5 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$38a4a,$38a51 - $38a4a
+	db 0 ; padding
+
+PoliwagBaseStats: ; 0x38a52
+	db 60 ; pokedex id
+	db 40 ; base hp
+	db 50 ; base attack
+	db 40 ; base defense
+	db 90 ; base speed
+	db 40 ; base special
+
+	db WATER ; species type 1
+	db WATER ; species type 2
+
+	db 255 ; catch rate
+	db 77 ; base exp yield
+	db $55 ; sprite dimensions
+
+	dw PoliwagPicFront
+	dw PoliwagPicBack
+	
+	; attacks known at lvl 0
+	db BUBBLE
+	db 0
+	db 0
+	db 0
+
+	db 3 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$38a66,$38a6d - $38a66
+	db 0 ; padding
+
+PoliwhirlBaseStats: ; 0x38a6e
+	db 61 ; pokedex id
+	db 65 ; base hp
+	db 65 ; base attack
+	db 65 ; base defense
+	db 90 ; base speed
+	db 50 ; base special
+
+	db WATER ; species type 1
+	db WATER ; species type 2
+
+	db 120 ; catch rate
+	db 131 ; base exp yield
+	db $66 ; sprite dimensions
+
+	dw PoliwhirlPicFront
+	dw PoliwhirlPicBack
+	
+	; attacks known at lvl 0
+	db BUBBLE
+	db HYPNOSIS
+	db WATER_GUN
+	db 0
+
+	db 3 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$38a82,$38a89 - $38a82
+	db 0 ; padding
+
+PoliwrathBaseStats: ; 0x38a8a
+	db 62 ; pokedex id
+	db 90 ; base hp
+	db 85 ; base attack
+	db 95 ; base defense
+	db 70 ; base speed
+	db 70 ; base special
+
+	db WATER ; species type 1
+	db FIGHTING ; species type 2
+
+	db 45 ; catch rate
+	db 185 ; base exp yield
+	db $77 ; sprite dimensions
+
+	dw PoliwrathPicFront
+	dw PoliwrathPicBack
+	
+	; attacks known at lvl 0
+	db HYPNOSIS
+	db WATER_GUN
+	db DOUBLESLAP
+	db BODY_SLAM
+
+	db 3 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$38a9e,$38aa5 - $38a9e
+	db 0 ; padding
+
+AbraBaseStats: ; 0x38aa6
+	db 63 ; pokedex id
+	db 25 ; base hp
+	db 20 ; base attack
+	db 15 ; base defense
+	db 90 ; base speed
+	db 105 ; base special
+
+	db PSYCHIC ; species type 1
+	db PSYCHIC ; species type 2
+
+	db 200 ; catch rate
+	db 73 ; base exp yield
+	db $55 ; sprite dimensions
+
+	dw AbraPicFront
+	dw AbraPicBack
+	
+	; attacks known at lvl 0
+	db TELEPORT
+	db 0
+	db 0
+	db 0
+
+	db 3 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$38aba,$38ac1 - $38aba
+	db 0 ; padding
+
+KadabraBaseStats: ; 0x38ac2
+	db 64 ; pokedex id
+	db 40 ; base hp
+	db 35 ; base attack
+	db 30 ; base defense
+	db 105 ; base speed
+	db 120 ; base special
+
+	db PSYCHIC ; species type 1
+	db PSYCHIC ; species type 2
+
+	db 100 ; catch rate
+	db 145 ; base exp yield
+	db $66 ; sprite dimensions
+
+	dw KadabraPicFront
+	dw KadabraPicBack
+	
+	; attacks known at lvl 0
+	db TELEPORT
+	db CONFUSION
+	db DISABLE
+	db 0
+
+	db 3 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$38ad6,$38add - $38ad6
+	db 0 ; padding
+
+AlakazamBaseStats: ; 0x38ade
+	db 65 ; pokedex id
+	db 55 ; base hp
+	db 50 ; base attack
+	db 45 ; base defense
+	db 120 ; base speed
+	db 135 ; base special
+
+	db PSYCHIC ; species type 1
+	db PSYCHIC ; species type 2
+
+	db 50 ; catch rate
+	db 186 ; base exp yield
+	db $77 ; sprite dimensions
+
+	dw AlakazamPicFront
+	dw AlakazamPicBack
+	
+	; attacks known at lvl 0
+	db TELEPORT
+	db CONFUSION
+	db DISABLE
+	db 0
+
+	db 3 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$38af2,$38af9 - $38af2
+	db 0 ; padding
+
+MachopBaseStats: ; 0x38afa
+	db 66 ; pokedex id
+	db 70 ; base hp
+	db 80 ; base attack
+	db 50 ; base defense
+	db 35 ; base speed
+	db 35 ; base special
+
+	db FIGHTING ; species type 1
+	db FIGHTING ; species type 2
+
+	db 180 ; catch rate
+	db 88 ; base exp yield
+	db $55 ; sprite dimensions
+
+	dw MachopPicFront
+	dw MachopPicBack
+	
+	; attacks known at lvl 0
+	db KARATE_CHOP
+	db 0
+	db 0
+	db 0
+
+	db 3 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$38b0e,$38b15 - $38b0e
+	db 0 ; padding
+
+MachokeBaseStats: ; 0x38b16
+	db 67 ; pokedex id
+	db 80 ; base hp
+	db 100 ; base attack
+	db 70 ; base defense
+	db 45 ; base speed
+	db 50 ; base special
+
+	db FIGHTING ; species type 1
+	db FIGHTING ; species type 2
+
+	db 90 ; catch rate
+	db 146 ; base exp yield
+	db $77 ; sprite dimensions
+
+	dw MachokePicFront
+	dw MachokePicBack
+	
+	; attacks known at lvl 0
+	db KARATE_CHOP
+	db LOW_KICK
+	db LEER
+	db 0
+
+	db 3 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$38b2a,$38b31 - $38b2a
+	db 0 ; padding
+
+MachampBaseStats: ; 0x38b32
+	db 68 ; pokedex id
+	db 90 ; base hp
+	db 130 ; base attack
+	db 80 ; base defense
+	db 55 ; base speed
+	db 65 ; base special
+
+	db FIGHTING ; species type 1
+	db FIGHTING ; species type 2
+
+	db 45 ; catch rate
+	db 193 ; base exp yield
+	db $77 ; sprite dimensions
+
+	dw MachampPicFront
+	dw MachampPicBack
+	
+	; attacks known at lvl 0
+	db KARATE_CHOP
+	db LOW_KICK
+	db LEER
+	db 0
+
+	db 3 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$38b46,$38b4d - $38b46
+	db 0 ; padding
+
+BellsproutBaseStats: ; 0x38b4e
+	db 69 ; pokedex id
+	db 50 ; base hp
+	db 75 ; base attack
+	db 35 ; base defense
+	db 40 ; base speed
+	db 70 ; base special
+
+	db GRASS ; species type 1
+	db POISON ; species type 2
+
+	db 255 ; catch rate
+	db 84 ; base exp yield
+	db $55 ; sprite dimensions
+
+	dw BellsproutPicFront
+	dw BellsproutPicBack
+	
+	; attacks known at lvl 0
+	db VINE_WHIP
+	db GROWTH
+	db 0
+	db 0
+
+	db 3 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$38b62,$38b69 - $38b62
+	db 0 ; padding
+
+WeepinbellBaseStats: ; 0x38b6a
+	db 70 ; pokedex id
+	db 65 ; base hp
+	db 90 ; base attack
+	db 50 ; base defense
+	db 55 ; base speed
+	db 85 ; base special
+
+	db GRASS ; species type 1
+	db POISON ; species type 2
+
+	db 120 ; catch rate
+	db 151 ; base exp yield
+	db $66 ; sprite dimensions
+
+	dw WeepinbellPicFront
+	dw WeepinbellPicBack
+	
+	; attacks known at lvl 0
+	db VINE_WHIP
+	db GROWTH
+	db WRAP
+	db 0
+
+	db 3 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$38b7e,$38b85 - $38b7e
+	db 0 ; padding
+
+VictreebelBaseStats: ; 0x38b86
+	db 71 ; pokedex id
+	db 80 ; base hp
+	db 105 ; base attack
+	db 65 ; base defense
+	db 70 ; base speed
+	db 100 ; base special
+
+	db GRASS ; species type 1
+	db POISON ; species type 2
+
+	db 45 ; catch rate
+	db 191 ; base exp yield
+	db $77 ; sprite dimensions
+
+	dw VictreebelPicFront
+	dw VictreebelPicBack
+	
+	; attacks known at lvl 0
+	db SLEEP_POWDER
+	db STUN_SPORE
+	db ACID
+	db RAZOR_LEAF
+
+	db 3 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$38b9a,$38ba1 - $38b9a
+	db 0 ; padding
+
+TentacoolBaseStats: ; 0x38ba2
+	db 72 ; pokedex id
+	db 40 ; base hp
+	db 40 ; base attack
+	db 35 ; base defense
+	db 70 ; base speed
+	db 100 ; base special
+
+	db WATER ; species type 1
+	db POISON ; species type 2
+
+	db 190 ; catch rate
+	db 105 ; base exp yield
+	db $55 ; sprite dimensions
+
+	dw TentacoolPicFront
+	dw TentacoolPicBack
+	
+	; attacks known at lvl 0
+	db ACID
+	db 0
+	db 0
+	db 0
+
+	db 5 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$38bb6,$38bbd - $38bb6
+	db 0 ; padding
+
+TentacruelBaseStats: ; 0x38bbe
+	db 73 ; pokedex id
+	db 80 ; base hp
+	db 70 ; base attack
+	db 65 ; base defense
+	db 100 ; base speed
+	db 120 ; base special
+
+	db WATER ; species type 1
+	db POISON ; species type 2
+
+	db 60 ; catch rate
+	db 205 ; base exp yield
+	db $66 ; sprite dimensions
+
+	dw TentacruelPicFront
+	dw TentacruelPicBack
+	
+	; attacks known at lvl 0
+	db ACID
+	db SUPERSONIC
+	db WRAP
+	db 0
+
+	db 5 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$38bd2,$38bd9 - $38bd2
+	db 0 ; padding
+
+GeodudeBaseStats: ; 0x38bda
+	db 74 ; pokedex id
+	db 40 ; base hp
+	db 80 ; base attack
+	db 100 ; base defense
+	db 20 ; base speed
+	db 30 ; base special
+
+	db ROCK ; species type 1
+	db GROUND ; species type 2
+
+	db 255 ; catch rate
+	db 86 ; base exp yield
+	db $55 ; sprite dimensions
+
+	dw GeodudePicFront
+	dw GeodudePicBack
+	
+	; attacks known at lvl 0
+	db TACKLE
+	db 0
+	db 0
+	db 0
+
+	db 3 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$38bee,$38bf5 - $38bee
+	db 0 ; padding
+
+GravelerBaseStats: ; 0x38bf6
+	db 75 ; pokedex id
+	db 55 ; base hp
+	db 95 ; base attack
+	db 115 ; base defense
+	db 35 ; base speed
+	db 45 ; base special
+
+	db ROCK ; species type 1
+	db GROUND ; species type 2
+
+	db 120 ; catch rate
+	db 134 ; base exp yield
+	db $66 ; sprite dimensions
+
+	dw GravelerPicFront
+	dw GravelerPicBack
+	
+	; attacks known at lvl 0
+	db TACKLE
+	db DEFENSE_CURL
+	db 0
+	db 0
+
+	db 3 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$38c0a,$38c11 - $38c0a
+	db 0 ; padding
+
+GolemBaseStats: ; 0x38c12
+	db 76 ; pokedex id
+	db 80 ; base hp
+	db 110 ; base attack
+	db 130 ; base defense
+	db 45 ; base speed
+	db 55 ; base special
+
+	db ROCK ; species type 1
+	db GROUND ; species type 2
+
+	db 45 ; catch rate
+	db 177 ; base exp yield
+	db $66 ; sprite dimensions
+
+	dw GolemPicFront
+	dw GolemPicBack
+	
+	; attacks known at lvl 0
+	db TACKLE
+	db DEFENSE_CURL
+	db 0
+	db 0
+
+	db 3 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$38c26,$38c2d - $38c26
+	db 0 ; padding
+
+PonytaBaseStats: ; 0x38c2e
+	db 77 ; pokedex id
+	db 50 ; base hp
+	db 85 ; base attack
+	db 55 ; base defense
+	db 90 ; base speed
+	db 65 ; base special
+
+	db FIRE ; species type 1
+	db FIRE ; species type 2
+
+	db 190 ; catch rate
+	db 152 ; base exp yield
+	db $66 ; sprite dimensions
+
+	dw PonytaPicFront
+	dw PonytaPicBack
+	
+	; attacks known at lvl 0
+	db EMBER
+	db 0
+	db 0
+	db 0
+
+	db 0 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$38c42,$38c49 - $38c42
+	db 0 ; padding
+
+RapidashBaseStats: ; 0x38c4a
+	db 78 ; pokedex id
+	db 65 ; base hp
+	db 100 ; base attack
+	db 70 ; base defense
+	db 105 ; base speed
+	db 80 ; base special
+
+	db FIRE ; species type 1
+	db FIRE ; species type 2
+
+	db 60 ; catch rate
+	db 192 ; base exp yield
+	db $77 ; sprite dimensions
+
+	dw RapidashPicFront
+	dw RapidashPicBack
+	
+	; attacks known at lvl 0
+	db EMBER
+	db TAIL_WHIP
+	db STOMP
+	db GROWL
+
+	db 0 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$38c5e,$38c65 - $38c5e
+	db 0 ; padding
+
+SlowpokeBaseStats: ; 0x38c66
+	db 79 ; pokedex id
+	db 90 ; base hp
+	db 65 ; base attack
+	db 65 ; base defense
+	db 15 ; base speed
+	db 40 ; base special
+
+	db WATER ; species type 1
+	db PSYCHIC ; species type 2
+
+	db 190 ; catch rate
+	db 99 ; base exp yield
+	db $55 ; sprite dimensions
+
+	dw SlowpokePicFront
+	dw SlowpokePicBack
+	
+	; attacks known at lvl 0
+	db CONFUSION
+	db 0
+	db 0
+	db 0
+
+	db 0 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$38c7a,$38c81 - $38c7a
+	db 0 ; padding
+
+SlowbroBaseStats: ; 0x38c82
+	db 80 ; pokedex id
+	db 95 ; base hp
+	db 75 ; base attack
+	db 110 ; base defense
+	db 30 ; base speed
+	db 80 ; base special
+
+	db WATER ; species type 1
+	db PSYCHIC ; species type 2
+
+	db 75 ; catch rate
+	db 164 ; base exp yield
+	db $77 ; sprite dimensions
+
+	dw SlowbroPicFront
+	dw SlowbroPicBack
+	
+	; attacks known at lvl 0
+	db CONFUSION
+	db DISABLE
+	db HEADBUTT
+	db 0
+
+	db 0 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$38c96,$38c9d - $38c96
+	db 0 ; padding
+
+MagnemiteBaseStats: ; 0x38c9e
+	db 81 ; pokedex id
+	db 25 ; base hp
+	db 35 ; base attack
+	db 70 ; base defense
+	db 45 ; base speed
+	db 95 ; base special
+
+	db ELECTRIC ; species type 1
+	db ELECTRIC ; species type 2
+
+	db 190 ; catch rate
+	db 89 ; base exp yield
+	db $55 ; sprite dimensions
+
+	dw MagnemitePicFront
+	dw MagnemitePicBack
+	
+	; attacks known at lvl 0
+	db TACKLE
+	db 0
+	db 0
+	db 0
+
+	db 0 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$38cb2,$38cb9 - $38cb2
+	db 0 ; padding
+
+MagnetonBaseStats: ; 0x38cba
+	db 82 ; pokedex id
+	db 50 ; base hp
+	db 60 ; base attack
+	db 95 ; base defense
+	db 70 ; base speed
+	db 120 ; base special
+
+	db ELECTRIC ; species type 1
+	db ELECTRIC ; species type 2
+
+	db 60 ; catch rate
+	db 161 ; base exp yield
+	db $66 ; sprite dimensions
+
+	dw MagnetonPicFront
+	dw MagnetonPicBack
+	
+	; attacks known at lvl 0
+	db TACKLE
+	db SONICBOOM
+	db THUNDERSHOCK
+	db 0
+
+	db 0 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$38cce,$38cd5 - $38cce
+	db 0 ; padding
+
+FarfetchdBaseStats: ; 0x38cd6
+	db 83 ; pokedex id
+	db 52 ; base hp
+	db 65 ; base attack
+	db 55 ; base defense
+	db 60 ; base speed
+	db 58 ; base special
+
+	db NORMAL ; species type 1
+	db FLYING ; species type 2
+
+	db 45 ; catch rate
+	db 94 ; base exp yield
+	db $66 ; sprite dimensions
+
+	dw FarfetchdPicFront
+	dw FarfetchdPicBack
+	
+	; attacks known at lvl 0
+	db PECK
+	db SAND_ATTACK
+	db 0
+	db 0
+
+	db 0 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$38cea,$38cf1 - $38cea
+	db 0 ; padding
+
+DoduoBaseStats: ; 0x38cf2
+	db 84 ; pokedex id
+	db 35 ; base hp
+	db 85 ; base attack
+	db 45 ; base defense
+	db 75 ; base speed
+	db 35 ; base special
+
+	db NORMAL ; species type 1
+	db FLYING ; species type 2
+
+	db 190 ; catch rate
+	db 96 ; base exp yield
+	db $55 ; sprite dimensions
+
+	dw DoduoPicFront
+	dw DoduoPicBack
+	
+	; attacks known at lvl 0
+	db PECK
+	db 0
+	db 0
+	db 0
+
+	db 0 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$38d06,$38d0d - $38d06
+	db 0 ; padding
+
+DodrioBaseStats: ; 0x38d0e
+	db 85 ; pokedex id
+	db 60 ; base hp
+	db 110 ; base attack
+	db 70 ; base defense
+	db 100 ; base speed
+	db 60 ; base special
+
+	db NORMAL ; species type 1
+	db FLYING ; species type 2
+
+	db 45 ; catch rate
+	db 158 ; base exp yield
+	db $77 ; sprite dimensions
+
+	dw DodrioPicFront
+	dw DodrioPicBack
+	
+	; attacks known at lvl 0
+	db PECK
+	db GROWL
+	db FURY_ATTACK
+	db 0
+
+	db 0 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$38d22,$38d29 - $38d22
+	db 0 ; padding
+
+SeelBaseStats: ; 0x38d2a
+	db 86 ; pokedex id
+	db 65 ; base hp
+	db 45 ; base attack
+	db 55 ; base defense
+	db 45 ; base speed
+	db 70 ; base special
+
+	db WATER ; species type 1
+	db WATER ; species type 2
+
+	db 190 ; catch rate
+	db 100 ; base exp yield
+	db $66 ; sprite dimensions
+
+	dw SeelPicFront
+	dw SeelPicBack
+	
+	; attacks known at lvl 0
+	db HEADBUTT
+	db 0
+	db 0
+	db 0
+
+	db 0 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$38d3e,$38d45 - $38d3e
+	db 0 ; padding
+
+DewgongBaseStats: ; 0x38d46
+	db 87 ; pokedex id
+	db 90 ; base hp
+	db 70 ; base attack
+	db 80 ; base defense
+	db 70 ; base speed
+	db 95 ; base special
+
+	db WATER ; species type 1
+	db ICE ; species type 2
+
+	db 75 ; catch rate
+	db 176 ; base exp yield
+	db $66 ; sprite dimensions
+
+	dw DewgongPicFront
+	dw DewgongPicBack
+	
+	; attacks known at lvl 0
+	db HEADBUTT
+	db GROWL
+	db AURORA_BEAM
+	db 0
+
+	db 0 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$38d5a,$38d61 - $38d5a
+	db 0 ; padding
+
+GrimerBaseStats: ; 0x38d62
+	db 88 ; pokedex id
+	db 80 ; base hp
+	db 80 ; base attack
+	db 50 ; base defense
+	db 25 ; base speed
+	db 40 ; base special
+
+	db POISON ; species type 1
+	db POISON ; species type 2
+
+	db 190 ; catch rate
+	db 90 ; base exp yield
+	db $55 ; sprite dimensions
+
+	dw GrimerPicFront
+	dw GrimerPicBack
+	
+	; attacks known at lvl 0
+	db POUND
+	db DISABLE
+	db 0
+	db 0
+
+	db 0 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$38d76,$38d7d - $38d76
+	db 0 ; padding
+
+MukBaseStats: ; 0x38d7e
+	db 89 ; pokedex id
+	db 105 ; base hp
+	db 105 ; base attack
+	db 75 ; base defense
+	db 50 ; base speed
+	db 65 ; base special
+
+	db POISON ; species type 1
+	db POISON ; species type 2
+
+	db 75 ; catch rate
+	db 157 ; base exp yield
+	db $77 ; sprite dimensions
+
+	dw MukPicFront
+	dw MukPicBack
+	
+	; attacks known at lvl 0
+	db POUND
+	db DISABLE
+	db POISON_GAS
+	db 0
+
+	db 0 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$38d92,$38d99 - $38d92
+	db 0 ; padding
+
+ShellderBaseStats: ; 0x38d9a
+	db 90 ; pokedex id
+	db 30 ; base hp
+	db 65 ; base attack
+	db 100 ; base defense
+	db 40 ; base speed
+	db 45 ; base special
+
+	db WATER ; species type 1
+	db WATER ; species type 2
+
+	db 190 ; catch rate
+	db 97 ; base exp yield
+	db $55 ; sprite dimensions
+
+	dw ShellderPicFront
+	dw ShellderPicBack
+	
+	; attacks known at lvl 0
+	db TACKLE
+	db WITHDRAW
+	db 0
+	db 0
+
+	db 5 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$38dae,$38db5 - $38dae
+	db 0 ; padding
+
+CloysterBaseStats: ; 0x38db6
+	db 91 ; pokedex id
+	db 50 ; base hp
+	db 95 ; base attack
+	db 180 ; base defense
+	db 70 ; base speed
+	db 85 ; base special
+
+	db WATER ; species type 1
+	db ICE ; species type 2
+
+	db 60 ; catch rate
+	db 203 ; base exp yield
+	db $77 ; sprite dimensions
+
+	dw CloysterPicFront
+	dw CloysterPicBack
+	
+	; attacks known at lvl 0
+	db WITHDRAW
+	db SUPERSONIC
+	db CLAMP
+	db AURORA_BEAM
+
+	db 5 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$38dca,$38dd1 - $38dca
+	db 0 ; padding
+
+GastlyBaseStats: ; 0x38dd2
+	db 92 ; pokedex id
+	db 30 ; base hp
+	db 35 ; base attack
+	db 30 ; base defense
+	db 80 ; base speed
+	db 100 ; base special
+
+	db GHOST ; species type 1
+	db POISON ; species type 2
+
+	db 190 ; catch rate
+	db 95 ; base exp yield
+	db $77 ; sprite dimensions
+
+	dw GastlyPicFront
+	dw GastlyPicBack
+	
+	; attacks known at lvl 0
+	db LICK
+	db CONFUSE_RAY
+	db NIGHT_SHADE
+	db 0
+
+	db 3 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$38de6,$38ded - $38de6
+	db 0 ; padding
+
+HaunterBaseStats: ; 0x38dee
+	db 93 ; pokedex id
+	db 45 ; base hp
+	db 50 ; base attack
+	db 45 ; base defense
+	db 95 ; base speed
+	db 115 ; base special
+
+	db GHOST ; species type 1
+	db POISON ; species type 2
+
+	db 90 ; catch rate
+	db 126 ; base exp yield
+	db $66 ; sprite dimensions
+
+	dw HaunterPicFront
+	dw HaunterPicBack
+	
+	; attacks known at lvl 0
+	db LICK
+	db CONFUSE_RAY
+	db NIGHT_SHADE
+	db 0
+
+	db 3 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$38e02,$38e09 - $38e02
+	db 0 ; padding
+
+GengarBaseStats: ; 0x38e0a
+	db 94 ; pokedex id
+	db 60 ; base hp
+	db 65 ; base attack
+	db 60 ; base defense
+	db 110 ; base speed
+	db 130 ; base special
+
+	db GHOST ; species type 1
+	db POISON ; species type 2
+
+	db 45 ; catch rate
+	db 190 ; base exp yield
+	db $66 ; sprite dimensions
+
+	dw GengarPicFront
+	dw GengarPicBack
+	
+	; attacks known at lvl 0
+	db LICK
+	db CONFUSE_RAY
+	db NIGHT_SHADE
+	db 0
+
+	db 3 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$38e1e,$38e25 - $38e1e
+	db 0 ; padding
+
+OnixBaseStats: ; 0x38e26
+	db 95 ; pokedex id
+	db 35 ; base hp
+	db 45 ; base attack
+	db 160 ; base defense
+	db 70 ; base speed
+	db 30 ; base special
+
+	db ROCK ; species type 1
+	db GROUND ; species type 2
+
+	db 45 ; catch rate
+	db 108 ; base exp yield
+	db $77 ; sprite dimensions
+
+	dw OnixPicFront
+	dw OnixPicBack
+	
+	; attacks known at lvl 0
+	db TACKLE
+	db SCREECH
+	db 0
+	db 0
+
+	db 0 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$38e3a,$38e41 - $38e3a
+	db 0 ; padding
+
+DrowzeeBaseStats: ; 0x38e42
+	db 96 ; pokedex id
+	db 60 ; base hp
+	db 48 ; base attack
+	db 45 ; base defense
+	db 42 ; base speed
+	db 90 ; base special
+
+	db PSYCHIC ; species type 1
+	db PSYCHIC ; species type 2
+
+	db 190 ; catch rate
+	db 102 ; base exp yield
+	db $66 ; sprite dimensions
+
+	dw DrowzeePicFront
+	dw DrowzeePicBack
+	
+	; attacks known at lvl 0
+	db POUND
+	db HYPNOSIS
+	db 0
+	db 0
+
+	db 0 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$38e56,$38e5d - $38e56
+	db 0 ; padding
+
+HypnoBaseStats: ; 0x38e5e
+	db 97 ; pokedex id
+	db 85 ; base hp
+	db 73 ; base attack
+	db 70 ; base defense
+	db 67 ; base speed
+	db 115 ; base special
+
+	db PSYCHIC ; species type 1
+	db PSYCHIC ; species type 2
+
+	db 75 ; catch rate
+	db 165 ; base exp yield
+	db $77 ; sprite dimensions
+
+	dw HypnoPicFront
+	dw HypnoPicBack
+	
+	; attacks known at lvl 0
+	db POUND
+	db HYPNOSIS
+	db DISABLE
+	db CONFUSION
+
+	db 0 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$38e72,$38e79 - $38e72
+	db 0 ; padding
+
+KrabbyBaseStats: ; 0x38e7a
+	db 98 ; pokedex id
+	db 30 ; base hp
+	db 105 ; base attack
+	db 90 ; base defense
+	db 50 ; base speed
+	db 25 ; base special
+
+	db WATER ; species type 1
+	db WATER ; species type 2
+
+	db 225 ; catch rate
+	db 115 ; base exp yield
+	db $55 ; sprite dimensions
+
+	dw KrabbyPicFront
+	dw KrabbyPicBack
+	
+	; attacks known at lvl 0
+	db BUBBLE
+	db LEER
+	db 0
+	db 0
+
+	db 0 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$38e8e,$38e95 - $38e8e
+	db 0 ; padding
+
+KinglerBaseStats: ; 0x38e96
+	db 99 ; pokedex id
+	db 55 ; base hp
+	db 130 ; base attack
+	db 115 ; base defense
+	db 75 ; base speed
+	db 50 ; base special
+
+	db WATER ; species type 1
+	db WATER ; species type 2
+
+	db 60 ; catch rate
+	db 206 ; base exp yield
+	db $77 ; sprite dimensions
+
+	dw KinglerPicFront
+	dw KinglerPicBack
+	
+	; attacks known at lvl 0
+	db BUBBLE
+	db LEER
+	db VICEGRIP
+	db 0
+
+	db 0 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$38eaa,$38eb1 - $38eaa
+	db 0 ; padding
+
+VoltorbBaseStats: ; 0x38eb2
+	db 100 ; pokedex id
+	db 40 ; base hp
+	db 30 ; base attack
+	db 50 ; base defense
+	db 100 ; base speed
+	db 55 ; base special
+
+	db ELECTRIC ; species type 1
+	db ELECTRIC ; species type 2
+
+	db 190 ; catch rate
+	db 103 ; base exp yield
+	db $55 ; sprite dimensions
+
+	dw VoltorbPicFront
+	dw VoltorbPicBack
+	
+	; attacks known at lvl 0
+	db TACKLE
+	db SCREECH
+	db 0
+	db 0
+
+	db 0 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$38ec6,$38ecd - $38ec6
+	db 0 ; padding
+
+ElectrodeBaseStats: ; 0x38ece
+	db 101 ; pokedex id
+	db 60 ; base hp
+	db 50 ; base attack
+	db 70 ; base defense
+	db 140 ; base speed
+	db 80 ; base special
+
+	db ELECTRIC ; species type 1
+	db ELECTRIC ; species type 2
+
+	db 60 ; catch rate
+	db 150 ; base exp yield
+	db $55 ; sprite dimensions
+
+	dw ElectrodePicFront
+	dw ElectrodePicBack
+	
+	; attacks known at lvl 0
+	db TACKLE
+	db SCREECH
+	db SONICBOOM
+	db 0
+
+	db 0 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$38ee2,$38ee9 - $38ee2
+	db 0 ; padding
+
+ExeggcuteBaseStats: ; 0x38eea
+	db 102 ; pokedex id
+	db 60 ; base hp
+	db 40 ; base attack
+	db 80 ; base defense
+	db 40 ; base speed
+	db 60 ; base special
+
+	db GRASS ; species type 1
+	db PSYCHIC ; species type 2
+
+	db 90 ; catch rate
+	db 98 ; base exp yield
+	db $77 ; sprite dimensions
+
+	dw ExeggcutePicFront
+	dw ExeggcutePicBack
+	
+	; attacks known at lvl 0
+	db BARRAGE
+	db HYPNOSIS
+	db 0
+	db 0
+
+	db 5 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$38efe,$38f05 - $38efe
+	db 0 ; padding
+
+ExeggutorBaseStats: ; 0x38f06
+	db 103 ; pokedex id
+	db 95 ; base hp
+	db 95 ; base attack
+	db 85 ; base defense
+	db 55 ; base speed
+	db 125 ; base special
+
+	db GRASS ; species type 1
+	db PSYCHIC ; species type 2
+
+	db 45 ; catch rate
+	db 212 ; base exp yield
+	db $77 ; sprite dimensions
+
+	dw ExeggutorPicFront
+	dw ExeggutorPicBack
+	
+	; attacks known at lvl 0
+	db BARRAGE
+	db HYPNOSIS
+	db 0
+	db 0
+
+	db 5 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$38f1a,$38f21 - $38f1a
+	db 0 ; padding
+
+CuboneBaseStats: ; 0x38f22
+	db 104 ; pokedex id
+	db 50 ; base hp
+	db 50 ; base attack
+	db 95 ; base defense
+	db 35 ; base speed
+	db 40 ; base special
+
+	db GROUND ; species type 1
+	db GROUND ; species type 2
+
+	db 190 ; catch rate
+	db 87 ; base exp yield
+	db $55 ; sprite dimensions
+
+	dw CubonePicFront
+	dw CubonePicBack
+	
+	; attacks known at lvl 0
+	db BONE_CLUB
+	db GROWL
+	db 0
+	db 0
+
+	db 0 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$38f36,$38f3d - $38f36
+	db 0 ; padding
+
+MarowakBaseStats: ; 0x38f3e
+	db 105 ; pokedex id
+	db 60 ; base hp
+	db 80 ; base attack
+	db 110 ; base defense
+	db 45 ; base speed
+	db 50 ; base special
+
+	db GROUND ; species type 1
+	db GROUND ; species type 2
+
+	db 75 ; catch rate
+	db 124 ; base exp yield
+	db $66 ; sprite dimensions
+
+	dw MarowakPicFront
+	dw MarowakPicBack
+	
+	; attacks known at lvl 0
+	db BONE_CLUB
+	db GROWL
+	db LEER
+	db FOCUS_ENERGY
+
+	db 0 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$38f52,$38f59 - $38f52
+	db 0 ; padding
+
+HitmonleeBaseStats: ; 0x38f5a
+	db 106 ; pokedex id
+	db 50 ; base hp
+	db 120 ; base attack
+	db 53 ; base defense
+	db 87 ; base speed
+	db 35 ; base special
+
+	db FIGHTING ; species type 1
+	db FIGHTING ; species type 2
+
+	db 45 ; catch rate
+	db 139 ; base exp yield
+	db $77 ; sprite dimensions
+
+	dw HitmonleePicFront
+	dw HitmonleePicBack
+	
+	; attacks known at lvl 0
+	db DOUBLE_KICK
+	db MEDITATE
+	db 0
+	db 0
+
+	db 0 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$38f6e,$38f75 - $38f6e
+	db 0 ; padding
+
+HitmonchanBaseStats: ; 0x38f76
+	db 107 ; pokedex id
+	db 50 ; base hp
+	db 105 ; base attack
+	db 79 ; base defense
+	db 76 ; base speed
+	db 35 ; base special
+
+	db FIGHTING ; species type 1
+	db FIGHTING ; species type 2
+
+	db 45 ; catch rate
+	db 140 ; base exp yield
+	db $66 ; sprite dimensions
+
+	dw HitmonchanPicFront
+	dw HitmonchanPicBack
+	
+	; attacks known at lvl 0
+	db COMET_PUNCH
+	db AGILITY
+	db 0
+	db 0
+
+	db 0 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$38f8a,$38f91 - $38f8a
+	db 0 ; padding
+
+LickitungBaseStats: ; 0x38f92
+	db 108 ; pokedex id
+	db 90 ; base hp
+	db 55 ; base attack
+	db 75 ; base defense
+	db 30 ; base speed
+	db 60 ; base special
+
+	db NORMAL ; species type 1
+	db NORMAL ; species type 2
+
+	db 45 ; catch rate
+	db 127 ; base exp yield
+	db $77 ; sprite dimensions
+
+	dw LickitungPicFront
+	dw LickitungPicBack
+	
+	; attacks known at lvl 0
+	db WRAP
+	db SUPERSONIC
+	db 0
+	db 0
+
+	db 0 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$38fa6,$38fad - $38fa6
+	db 0 ; padding
+
+KoffingBaseStats: ; 0x38fae
+	db 109 ; pokedex id
+	db 40 ; base hp
+	db 65 ; base attack
+	db 95 ; base defense
+	db 35 ; base speed
+	db 60 ; base special
+
+	db POISON ; species type 1
+	db POISON ; species type 2
+
+	db 190 ; catch rate
+	db 114 ; base exp yield
+	db $66 ; sprite dimensions
+
+	dw KoffingPicFront
+	dw KoffingPicBack
+	
+	; attacks known at lvl 0
+	db TACKLE
+	db SMOG
+	db 0
+	db 0
+
+	db 0 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$38fc2,$38fc9 - $38fc2
+	db 0 ; padding
+
+WeezingBaseStats: ; 0x38fca
+	db 110 ; pokedex id
+	db 65 ; base hp
+	db 90 ; base attack
+	db 120 ; base defense
+	db 60 ; base speed
+	db 85 ; base special
+
+	db POISON ; species type 1
+	db POISON ; species type 2
+
+	db 60 ; catch rate
+	db 173 ; base exp yield
+	db $77 ; sprite dimensions
+
+	dw WeezingPicFront
+	dw WeezingPicBack
+	
+	; attacks known at lvl 0
+	db TACKLE
+	db SMOG
+	db SLUDGE
+	db 0
+
+	db 0 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$38fde,$38fe5 - $38fde
+	db 0 ; padding
+
+RhyhornBaseStats: ; 0x38fe6
+	db 111 ; pokedex id
+	db 80 ; base hp
+	db 85 ; base attack
+	db 95 ; base defense
+	db 25 ; base speed
+	db 30 ; base special
+
+	db GROUND ; species type 1
+	db ROCK ; species type 2
+
+	db 120 ; catch rate
+	db 135 ; base exp yield
+	db $77 ; sprite dimensions
+
+	dw RhyhornPicFront
+	dw RhyhornPicBack
+	
+	; attacks known at lvl 0
+	db HORN_ATTACK
+	db 0
+	db 0
+	db 0
+
+	db 5 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$38ffa,$39001 - $38ffa
+	db 0 ; padding
+
+RhydonBaseStats: ; 0x39002
+	db 112 ; pokedex id
+	db 105 ; base hp
+	db 130 ; base attack
+	db 120 ; base defense
+	db 40 ; base speed
+	db 45 ; base special
+
+	db GROUND ; species type 1
+	db ROCK ; species type 2
+
+	db 60 ; catch rate
+	db 204 ; base exp yield
+	db $77 ; sprite dimensions
+
+	dw RhydonPicFront
+	dw RhydonPicBack
+	
+	; attacks known at lvl 0
+	db HORN_ATTACK
+	db STOMP
+	db TAIL_WHIP
+	db FURY_ATTACK
+
+	db 5 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$39016,$3901d - $39016
+	db 0 ; padding
+
+ChanseyBaseStats: ; 0x3901e
+	db 113 ; pokedex id
+	db 250 ; base hp
+	db 5 ; base attack
+	db 5 ; base defense
+	db 50 ; base speed
+	db 105 ; base special
+
+	db NORMAL ; species type 1
+	db NORMAL ; species type 2
+
+	db 30 ; catch rate
+	db 255 ; base exp yield
+	db $66 ; sprite dimensions
+
+	dw ChanseyPicFront
+	dw ChanseyPicBack
+	
+	; attacks known at lvl 0
+	db POUND
+	db DOUBLESLAP
+	db 0
+	db 0
+
+	db 4 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$39032,$39039 - $39032
+	db 0 ; padding
+
+TangelaBaseStats: ; 0x3903a
+	db 114 ; pokedex id
+	db 65 ; base hp
+	db 55 ; base attack
+	db 115 ; base defense
+	db 60 ; base speed
+	db 100 ; base special
+
+	db GRASS ; species type 1
+	db GRASS ; species type 2
+
+	db 45 ; catch rate
+	db 166 ; base exp yield
+	db $66 ; sprite dimensions
+
+	dw TangelaPicFront
+	dw TangelaPicBack
+	
+	; attacks known at lvl 0
+	db CONSTRICT
+	db BIND
+	db 0
+	db 0
+
+	db 0 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$3904e,$39055 - $3904e
+	db 0 ; padding
+
+KangaskhanBaseStats: ; 0x39056
+	db 115 ; pokedex id
+	db 105 ; base hp
+	db 95 ; base attack
+	db 80 ; base defense
+	db 90 ; base speed
+	db 40 ; base special
+
+	db NORMAL ; species type 1
+	db NORMAL ; species type 2
+
+	db 45 ; catch rate
+	db 175 ; base exp yield
+	db $77 ; sprite dimensions
+
+	dw KangaskhanPicFront
+	dw KangaskhanPicBack
+	
+	; attacks known at lvl 0
+	db COMET_PUNCH
+	db RAGE
+	db 0
+	db 0
+
+	db 0 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$3906a,$39071 - $3906a
+	db 0 ; padding
+
+HorseaBaseStats: ; 0x39072
+	db 116 ; pokedex id
+	db 30 ; base hp
+	db 40 ; base attack
+	db 70 ; base defense
+	db 60 ; base speed
+	db 70 ; base special
+
+	db WATER ; species type 1
+	db WATER ; species type 2
+
+	db 225 ; catch rate
+	db 83 ; base exp yield
+	db $55 ; sprite dimensions
+
+	dw HorseaPicFront
+	dw HorseaPicBack
+	
+	; attacks known at lvl 0
+	db BUBBLE
+	db 0
+	db 0
+	db 0
+
+	db 0 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$39086,$3908d - $39086
+	db 0 ; padding
+
+SeadraBaseStats: ; 0x3908e
+	db 117 ; pokedex id
+	db 55 ; base hp
+	db 65 ; base attack
+	db 95 ; base defense
+	db 85 ; base speed
+	db 95 ; base special
+
+	db WATER ; species type 1
+	db WATER ; species type 2
+
+	db 75 ; catch rate
+	db 155 ; base exp yield
+	db $66 ; sprite dimensions
+
+	dw SeadraPicFront
+	dw SeadraPicBack
+	
+	; attacks known at lvl 0
+	db BUBBLE
+	db SMOKESCREEN
+	db 0
+	db 0
+
+	db 0 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$390a2,$390a9 - $390a2
+	db 0 ; padding
+
+GoldeenBaseStats: ; 0x390aa
+	db 118 ; pokedex id
+	db 45 ; base hp
+	db 67 ; base attack
+	db 60 ; base defense
+	db 63 ; base speed
+	db 50 ; base special
+
+	db WATER ; species type 1
+	db WATER ; species type 2
+
+	db 225 ; catch rate
+	db 111 ; base exp yield
+	db $66 ; sprite dimensions
+
+	dw GoldeenPicFront
+	dw GoldeenPicBack
+	
+	; attacks known at lvl 0
+	db PECK
+	db TAIL_WHIP
+	db 0
+	db 0
+
+	db 0 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$390be,$390c5 - $390be
+	db 0 ; padding
+
+SeakingBaseStats: ; 0x390c6
+	db 119 ; pokedex id
+	db 80 ; base hp
+	db 92 ; base attack
+	db 65 ; base defense
+	db 68 ; base speed
+	db 80 ; base special
+
+	db WATER ; species type 1
+	db WATER ; species type 2
+
+	db 60 ; catch rate
+	db 170 ; base exp yield
+	db $77 ; sprite dimensions
+
+	dw SeakingPicFront
+	dw SeakingPicBack
+	
+	; attacks known at lvl 0
+	db PECK
+	db TAIL_WHIP
+	db SUPERSONIC
+	db 0
+
+	db 0 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$390da,$390e1 - $390da
+	db 0 ; padding
+
+StaryuBaseStats: ; 0x390e2
+	db 120 ; pokedex id
+	db 30 ; base hp
+	db 45 ; base attack
+	db 55 ; base defense
+	db 85 ; base speed
+	db 70 ; base special
+
+	db WATER ; species type 1
+	db WATER ; species type 2
+
+	db 225 ; catch rate
+	db 106 ; base exp yield
+	db $66 ; sprite dimensions
+
+	dw StaryuPicFront
+	dw StaryuPicBack
+	
+	; attacks known at lvl 0
+	db TACKLE
+	db 0
+	db 0
+	db 0
+
+	db 5 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$390f6,$390fd - $390f6
+	db 0 ; padding
+
+StarmieBaseStats: ; 0x390fe
+	db 121 ; pokedex id
+	db 60 ; base hp
+	db 75 ; base attack
+	db 85 ; base defense
+	db 115 ; base speed
+	db 100 ; base special
+
+	db WATER ; species type 1
+	db PSYCHIC ; species type 2
+
+	db 60 ; catch rate
+	db 207 ; base exp yield
+	db $66 ; sprite dimensions
+
+	dw StarmiePicFront
+	dw StarmiePicBack
+	
+	; attacks known at lvl 0
+	db TACKLE
+	db WATER_GUN
+	db HARDEN
+	db 0
+
+	db 5 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$39112,$39119 - $39112
+	db 0 ; padding
+
+MrMimeBaseStats: ; 0x3911a
+	db 122 ; pokedex id
+	db 40 ; base hp
+	db 45 ; base attack
+	db 65 ; base defense
+	db 90 ; base speed
+	db 100 ; base special
+
+	db PSYCHIC ; species type 1
+	db PSYCHIC ; species type 2
+
+	db 45 ; catch rate
+	db 136 ; base exp yield
+	db $66 ; sprite dimensions
+
+	dw MrMimePicFront
+	dw MrMimePicBack
+	
+	; attacks known at lvl 0
+	db CONFUSION
+	db BARRIER
+	db 0
+	db 0
+
+	db 0 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$3912e,$39135 - $3912e
+	db 0 ; padding
+
+ScytherBaseStats: ; 0x39136
+	db 123 ; pokedex id
+	db 70 ; base hp
+	db 110 ; base attack
+	db 80 ; base defense
+	db 105 ; base speed
+	db 55 ; base special
+
+	db BUG ; species type 1
+	db FLYING ; species type 2
+
+	db 45 ; catch rate
+	db 187 ; base exp yield
+	db $77 ; sprite dimensions
+
+	dw ScytherPicFront
+	dw ScytherPicBack
+	
+	; attacks known at lvl 0
+	db QUICK_ATTACK
+	db 0
+	db 0
+	db 0
+
+	db 0 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$3914a,$39151 - $3914a
+	db 0 ; padding
+
+JynxBaseStats: ; 0x39152
+	db 124 ; pokedex id
+	db 65 ; base hp
+	db 50 ; base attack
+	db 35 ; base defense
+	db 95 ; base speed
+	db 95 ; base special
+
+	db ICE ; species type 1
+	db PSYCHIC ; species type 2
+
+	db 45 ; catch rate
+	db 137 ; base exp yield
+	db $66 ; sprite dimensions
+
+	dw JynxPicFront
+	dw JynxPicBack
+	
+	; attacks known at lvl 0
+	db POUND
+	db LOVELY_KISS
+	db 0
+	db 0
+
+	db 0 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$39166,$3916d - $39166
+	db 0 ; padding
+
+ElectabuzzBaseStats: ; 0x3916e
+	db 125 ; pokedex id
+	db 65 ; base hp
+	db 83 ; base attack
+	db 57 ; base defense
+	db 105 ; base speed
+	db 85 ; base special
+
+	db ELECTRIC ; species type 1
+	db ELECTRIC ; species type 2
+
+	db 45 ; catch rate
+	db 156 ; base exp yield
+	db $66 ; sprite dimensions
+
+	dw ElectabuzzPicFront
+	dw ElectabuzzPicBack
+	
+	; attacks known at lvl 0
+	db QUICK_ATTACK
+	db LEER
+	db 0
+	db 0
+
+	db 0 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$39182,$39189 - $39182
+	db 0 ; padding
+
+MagmarBaseStats: ; 0x3918a
+	db 126 ; pokedex id
+	db 65 ; base hp
+	db 95 ; base attack
+	db 57 ; base defense
+	db 93 ; base speed
+	db 85 ; base special
+
+	db FIRE ; species type 1
+	db FIRE ; species type 2
+
+	db 45 ; catch rate
+	db 167 ; base exp yield
+	db $66 ; sprite dimensions
+
+	dw MagmarPicFront
+	dw MagmarPicBack
+	
+	; attacks known at lvl 0
+	db EMBER
+	db 0
+	db 0
+	db 0
+
+	db 0 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$3919e,$391a5 - $3919e
+	db 0 ; padding
+
+PinsirBaseStats: ; 0x391a6
+	db 127 ; pokedex id
+	db 65 ; base hp
+	db 125 ; base attack
+	db 100 ; base defense
+	db 85 ; base speed
+	db 55 ; base special
+
+	db BUG ; species type 1
+	db BUG ; species type 2
+
+	db 45 ; catch rate
+	db 200 ; base exp yield
+	db $77 ; sprite dimensions
+
+	dw PinsirPicFront
+	dw PinsirPicBack
+	
+	; attacks known at lvl 0
+	db VICEGRIP
+	db 0
+	db 0
+	db 0
+
+	db 5 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$391ba,$391c1 - $391ba
+	db 0 ; padding
+
+TaurosBaseStats: ; 0x391c2
+	db 128 ; pokedex id
+	db 75 ; base hp
+	db 100 ; base attack
+	db 95 ; base defense
+	db 110 ; base speed
+	db 70 ; base special
+
+	db NORMAL ; species type 1
+	db NORMAL ; species type 2
+
+	db 45 ; catch rate
+	db 211 ; base exp yield
+	db $77 ; sprite dimensions
+
+	dw TaurosPicFront
+	dw TaurosPicBack
+	
+	; attacks known at lvl 0
+	db TACKLE
+	db 0
+	db 0
+	db 0
+
+	db 5 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$391d6,$391dd - $391d6
+	db 0 ; padding
+
+MagikarpBaseStats: ; 0x391de
+	db 129 ; pokedex id
+	db 20 ; base hp
+	db 10 ; base attack
+	db 55 ; base defense
+	db 80 ; base speed
+	db 20 ; base special
+
+	db WATER ; species type 1
+	db WATER ; species type 2
+
+	db 255 ; catch rate
+	db 20 ; base exp yield
+	db $66 ; sprite dimensions
+
+	dw MagikarpPicFront
+	dw MagikarpPicBack
+	
+	; attacks known at lvl 0
+	db SPLASH
+	db 0
+	db 0
+	db 0
+
+	db 5 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$391f2,$391f9 - $391f2
+	db 0 ; padding
+
+GyaradosBaseStats: ; 0x391fa
+	db 130 ; pokedex id
+	db 95 ; base hp
+	db 125 ; base attack
+	db 79 ; base defense
+	db 81 ; base speed
+	db 100 ; base special
+
+	db WATER ; species type 1
+	db FLYING ; species type 2
+
+	db 45 ; catch rate
+	db 214 ; base exp yield
+	db $77 ; sprite dimensions
+
+	dw GyaradosPicFront
+	dw GyaradosPicBack
+	
+	; attacks known at lvl 0
+	db BITE
+	db DRAGON_RAGE
+	db LEER
+	db HYDRO_PUMP
+
+	db 5 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$3920e,$39215 - $3920e
+	db 0 ; padding
+
+LaprasBaseStats: ; 0x39216
+	db 131 ; pokedex id
+	db 130 ; base hp
+	db 85 ; base attack
+	db 80 ; base defense
+	db 60 ; base speed
+	db 95 ; base special
+
+	db WATER ; species type 1
+	db ICE ; species type 2
+
+	db 45 ; catch rate
+	db 219 ; base exp yield
+	db $77 ; sprite dimensions
+
+	dw LaprasPicFront
+	dw LaprasPicBack
+	
+	; attacks known at lvl 0
+	db WATER_GUN
+	db GROWL
+	db 0
+	db 0
+
+	db 5 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$3922a,$39231 - $3922a
+	db 0 ; padding
+
+DittoBaseStats: ; 0x39232
+	db 132 ; pokedex id
+	db 48 ; base hp
+	db 48 ; base attack
+	db 48 ; base defense
+	db 48 ; base speed
+	db 48 ; base special
+
+	db NORMAL ; species type 1
+	db NORMAL ; species type 2
+
+	db 35 ; catch rate
+	db 61 ; base exp yield
+	db $55 ; sprite dimensions
+
+	dw DittoPicFront
+	dw DittoPicBack
+	
+	; attacks known at lvl 0
+	db TRANSFORM
+	db 0
+	db 0
+	db 0
+
+	db 0 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$39246,$3924d - $39246
+	db 0 ; padding
+
+EeveeBaseStats: ; 0x3924e
+	db 133 ; pokedex id
+	db 55 ; base hp
+	db 55 ; base attack
+	db 50 ; base defense
+	db 55 ; base speed
+	db 65 ; base special
+
+	db NORMAL ; species type 1
+	db NORMAL ; species type 2
+
+	db 45 ; catch rate
+	db 92 ; base exp yield
+	db $55 ; sprite dimensions
+
+	dw EeveePicFront
+	dw EeveePicBack
+	
+	; attacks known at lvl 0
+	db TACKLE
+	db SAND_ATTACK
+	db 0
+	db 0
+
+	db 0 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$39262,$39269 - $39262
+	db 0 ; padding
+
+VaporeonBaseStats: ; 0x3926a
+	db 134 ; pokedex id
+	db 130 ; base hp
+	db 65 ; base attack
+	db 60 ; base defense
+	db 65 ; base speed
+	db 110 ; base special
+
+	db WATER ; species type 1
+	db WATER ; species type 2
+
+	db 45 ; catch rate
+	db 196 ; base exp yield
+	db $66 ; sprite dimensions
+
+	dw VaporeonPicFront
+	dw VaporeonPicBack
+	
+	; attacks known at lvl 0
+	db TACKLE
+	db SAND_ATTACK
+	db QUICK_ATTACK
+	db WATER_GUN
+
+	db 0 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$3927e,$39285 - $3927e
+	db 0 ; padding
+
+JolteonBaseStats: ; 0x39286
+	db 135 ; pokedex id
+	db 65 ; base hp
+	db 65 ; base attack
+	db 60 ; base defense
+	db 130 ; base speed
+	db 110 ; base special
+
+	db ELECTRIC ; species type 1
+	db ELECTRIC ; species type 2
+
+	db 45 ; catch rate
+	db 197 ; base exp yield
+	db $66 ; sprite dimensions
+
+	dw JolteonPicFront
+	dw JolteonPicBack
+	
+	; attacks known at lvl 0
+	db TACKLE
+	db SAND_ATTACK
+	db QUICK_ATTACK
+	db THUNDERSHOCK
+
+	db 0 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$3929a,$392a1 - $3929a
+	db 0 ; padding
+
+FlareonBaseStats: ; 0x392a2
+	db 136 ; pokedex id
+	db 65 ; base hp
+	db 130 ; base attack
+	db 60 ; base defense
+	db 65 ; base speed
+	db 110 ; base special
+
+	db FIRE ; species type 1
+	db FIRE ; species type 2
+
+	db 45 ; catch rate
+	db 198 ; base exp yield
+	db $66 ; sprite dimensions
+
+	dw FlareonPicFront
+	dw FlareonPicBack
+	
+	; attacks known at lvl 0
+	db TACKLE
+	db SAND_ATTACK
+	db QUICK_ATTACK
+	db EMBER
+
+	db 0 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$392b6,$392bd - $392b6
+	db 0 ; padding
+
+PorygonBaseStats: ; 0x392be
+	db 137 ; pokedex id
+	db 65 ; base hp
+	db 60 ; base attack
+	db 70 ; base defense
+	db 40 ; base speed
+	db 75 ; base special
+
+	db NORMAL ; species type 1
+	db NORMAL ; species type 2
+
+	db 45 ; catch rate
+	db 130 ; base exp yield
+	db $66 ; sprite dimensions
+
+	dw PorygonPicFront
+	dw PorygonPicBack
+	
+	; attacks known at lvl 0
+	db TACKLE
+	db SHARPEN
+	db CONVERSION
+	db 0
+
+	db 0 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$392d2,$392d9 - $392d2
+	db 0 ; padding
+
+OmanyteBaseStats: ; 0x392da
+	db 138 ; pokedex id
+	db 35 ; base hp
+	db 40 ; base attack
+	db 100 ; base defense
+	db 35 ; base speed
+	db 90 ; base special
+
+	db ROCK ; species type 1
+	db WATER ; species type 2
+
+	db 45 ; catch rate
+	db 120 ; base exp yield
+	db $55 ; sprite dimensions
+
+	dw OmanytePicFront
+	dw OmanytePicBack
+	
+	; attacks known at lvl 0
+	db WATER_GUN
+	db WITHDRAW
+	db 0
+	db 0
+
+	db 0 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$392ee,$392f5 - $392ee
+	db 0 ; padding
+
+OmastarBaseStats: ; 0x392f6
+	db 139 ; pokedex id
+	db 70 ; base hp
+	db 60 ; base attack
+	db 125 ; base defense
+	db 55 ; base speed
+	db 115 ; base special
+
+	db ROCK ; species type 1
+	db WATER ; species type 2
+
+	db 45 ; catch rate
+	db 199 ; base exp yield
+	db $66 ; sprite dimensions
+
+	dw OmastarPicFront
+	dw OmastarPicBack
+	
+	; attacks known at lvl 0
+	db WATER_GUN
+	db WITHDRAW
+	db HORN_ATTACK
+	db 0
+
+	db 0 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$3930a,$39311 - $3930a
+	db 0 ; padding
+
+KabutoBaseStats: ; 0x39312
+	db 140 ; pokedex id
+	db 30 ; base hp
+	db 80 ; base attack
+	db 90 ; base defense
+	db 55 ; base speed
+	db 45 ; base special
+
+	db ROCK ; species type 1
+	db WATER ; species type 2
+
+	db 45 ; catch rate
+	db 119 ; base exp yield
+	db $55 ; sprite dimensions
+
+	dw KabutoPicFront
+	dw KabutoPicBack
+	
+	; attacks known at lvl 0
+	db SCRATCH
+	db HARDEN
+	db 0
+	db 0
+
+	db 0 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$39326,$3932d - $39326
+	db 0 ; padding
+
+KabutopsBaseStats: ; 0x3932e
+	db 141 ; pokedex id
+	db 60 ; base hp
+	db 115 ; base attack
+	db 105 ; base defense
+	db 80 ; base speed
+	db 70 ; base special
+
+	db ROCK ; species type 1
+	db WATER ; species type 2
+
+	db 45 ; catch rate
+	db 201 ; base exp yield
+	db $66 ; sprite dimensions
+
+	dw KabutopsPicFront
+	dw KabutopsPicBack
+	
+	; attacks known at lvl 0
+	db SCRATCH
+	db HARDEN
+	db ABSORB
+	db 0
+
+	db 0 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$39342,$39349 - $39342
+	db 0 ; padding
+
+AerodactylBaseStats: ; 0x3934a
+	db 142 ; pokedex id
+	db 80 ; base hp
+	db 105 ; base attack
+	db 65 ; base defense
+	db 130 ; base speed
+	db 60 ; base special
+
+	db ROCK ; species type 1
+	db FLYING ; species type 2
+
+	db 45 ; catch rate
+	db 202 ; base exp yield
+	db $77 ; sprite dimensions
+
+	dw AerodactylPicFront
+	dw AerodactylPicBack
+	
+	; attacks known at lvl 0
+	db WING_ATTACK
+	db AGILITY
+	db 0
+	db 0
+
+	db 5 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$3935e,$39365 - $3935e
+	db 0 ; padding
+
+SnorlaxBaseStats: ; 0x39366
+	db 143 ; pokedex id
+	db 160 ; base hp
+	db 110 ; base attack
+	db 65 ; base defense
+	db 30 ; base speed
+	db 65 ; base special
+
+	db NORMAL ; species type 1
+	db NORMAL ; species type 2
+
+	db 25 ; catch rate
+	db 154 ; base exp yield
+	db $77 ; sprite dimensions
+
+	dw SnorlaxPicFront
+	dw SnorlaxPicBack
+	
+	; attacks known at lvl 0
+	db HEADBUTT
+	db AMNESIA
+	db REST
+	db 0
+
+	db 5 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$3937a,$39381 - $3937a
+	db 0 ; padding
+
+ArticunoBaseStats: ; 0x39382
+	db 144 ; pokedex id
+	db 90 ; base hp
+	db 85 ; base attack
+	db 100 ; base defense
+	db 85 ; base speed
+	db 125 ; base special
+
+	db ICE ; species type 1
+	db FLYING ; species type 2
+
+	db 3 ; catch rate
+	db 215 ; base exp yield
+	db $77 ; sprite dimensions
+
+	dw ArticunoPicFront
+	dw ArticunoPicBack
+	
+	; attacks known at lvl 0
+	db PECK
+	db ICE_BEAM
+	db 0
+	db 0
+
+	db 5 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$39396,$3939d - $39396
+	db 0 ; padding
+
+ZapdosBaseStats: ; 0x3939e
+	db 145 ; pokedex id
+	db 90 ; base hp
+	db 90 ; base attack
+	db 85 ; base defense
+	db 100 ; base speed
+	db 125 ; base special
+
+	db ELECTRIC ; species type 1
+	db FLYING ; species type 2
+
+	db 3 ; catch rate
+	db 216 ; base exp yield
+	db $77 ; sprite dimensions
+
+	dw ZapdosPicFront
+	dw ZapdosPicBack
+	
+	; attacks known at lvl 0
+	db THUNDERSHOCK
+	db DRILL_PECK
+	db 0
+	db 0
+
+	db 5 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$393b2,$393b9 - $393b2
+	db 0 ; padding
+
+MoltresBaseStats: ; 0x393ba
+	db 146 ; pokedex id
+	db 90 ; base hp
+	db 100 ; base attack
+	db 90 ; base defense
+	db 90 ; base speed
+	db 125 ; base special
+
+	db FIRE ; species type 1
+	db FLYING ; species type 2
+
+	db 3 ; catch rate
+	db 217 ; base exp yield
+	db $77 ; sprite dimensions
+
+	dw MoltresPicFront
+	dw MoltresPicBack
+	
+	; attacks known at lvl 0
+	db PECK
+	db FIRE_SPIN
+	db 0
+	db 0
+
+	db 5 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$393ce,$393d5 - $393ce
+	db 0 ; padding
+
+DratiniBaseStats: ; 0x393d6
+	db 147 ; pokedex id
+	db 41 ; base hp
+	db 64 ; base attack
+	db 45 ; base defense
+	db 50 ; base speed
+	db 50 ; base special
+
+	db DRAGON ; species type 1
+	db DRAGON ; species type 2
+
+	db 45 ; catch rate
+	db 67 ; base exp yield
+	db $55 ; sprite dimensions
+
+	dw DratiniPicFront
+	dw DratiniPicBack
+	
+	; attacks known at lvl 0
+	db WRAP
+	db LEER
+	db 0
+	db 0
+
+	db 5 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$393ea,$393f1 - $393ea
+	db 0 ; padding
+
+DragonairBaseStats: ; 0x393f2
+	db 148 ; pokedex id
+	db 61 ; base hp
+	db 84 ; base attack
+	db 65 ; base defense
+	db 70 ; base speed
+	db 70 ; base special
+
+	db DRAGON ; species type 1
+	db DRAGON ; species type 2
+
+	db 45 ; catch rate
+	db 144 ; base exp yield
+	db $66 ; sprite dimensions
+
+	dw DragonairPicFront
+	dw DragonairPicBack
+	
+	; attacks known at lvl 0
+	db WRAP
+	db LEER
+	db THUNDER_WAVE
+	db 0
+
+	db 5 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$39406,$3940d - $39406
+	db 0 ; padding
+
+DragoniteBaseStats: ; 0x3940e
+	db 149 ; pokedex id
+	db 91 ; base hp
+	db 134 ; base attack
+	db 95 ; base defense
+	db 80 ; base speed
+	db 100 ; base special
+
+	db DRAGON ; species type 1
+	db FLYING ; species type 2
+
+	db 45 ; catch rate
+	db 218 ; base exp yield
+	db $77 ; sprite dimensions
+
+	dw DragonitePicFront
+	dw DragonitePicBack
+	
+	; attacks known at lvl 0
+	db WRAP
+	db LEER
+	db THUNDER_WAVE
+	db AGILITY
+
+	db 5 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$39422,$39429 - $39422
+	db 0 ; padding
+
+MewtwoBaseStats: ; 0x3942a
+	db 150 ; pokedex id
+	db 106 ; base hp
+	db 110 ; base attack
+	db 90 ; base defense
+	db 130 ; base speed
+	db 154 ; base special
+
+	db PSYCHIC ; species type 1
+	db PSYCHIC ; species type 2
+
+	db 3 ; catch rate
+	db 220 ; base exp yield
+	db $77 ; sprite dimensions
+
+	dw MewtwoPicFront
+	dw MewtwoPicBack
+	
+	; attacks known at lvl 0
+	db CONFUSION
+	db DISABLE
+	db SWIFT
+	db PSYCHIC_M
+
+	db 5 ; growth rate
+	
+	; include learnset directly
+	INCBIN "baserom.gbc",$3943e,$39445 - $3943e
+	db 0 ; padding
+
+; XXX MewBaseStats
+INCBIN "baserom.gbc",$39446,$39884 - $39446
 
 ReadMove: ; 5884
 	push hl
