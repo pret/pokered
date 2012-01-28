@@ -22180,12 +22180,12 @@ BulbasaurBaseStats: ; 0x383de
 	
 	; learnset
 	db %10100100
-	db %11
-	db %111000
+	db %00000011
+	db %00111000
 	db %11000000
-	db %11
-	db %1000
-	db %110
+	db %00000011
+	db %00001000
+	db %00000110
 
 	db 0 ; padding
 
@@ -22217,12 +22217,12 @@ IvysaurBaseStats: ; 0x383fa
 	
 	; learnset
 	db %10100100
-	db %11
-	db %111000
+	db %00000011
+	db %00111000
 	db %11000000
-	db %11
-	db %1000
-	db %110
+	db %00000011
+	db %00001000
+	db %00000110
 
 	db 0 ; padding
 
@@ -22254,12 +22254,12 @@ VenusaurBaseStats: ; 0x38416
 	
 	; learnset
 	db %10100100
-	db %1000011
-	db %111000
+	db %01000011
+	db %00111000
 	db %11000000
-	db %11
-	db %1000
-	db %110
+	db %00000011
+	db %00001000
+	db %00000110
 
 	db 0 ; padding
 
@@ -22291,12 +22291,12 @@ CharmanderBaseStats: ; 0x38432
 	
 	; learnset
 	db %10110101
-	db %11
-	db %1001111
+	db %00000011
+	db %01001111
 	db %11001000
 	db %11100011
-	db %1000
-	db %100110
+	db %00001000
+	db %00100110
 
 	db 0 ; padding
 
@@ -22328,12 +22328,12 @@ CharmeleonBaseStats: ; 0x3844e
 	
 	; learnset
 	db %10110101
-	db %11
-	db %1001111
+	db %00000011
+	db %01001111
 	db %11001000
 	db %11100011
-	db %1000
-	db %100110
+	db %00001000
+	db %00100110
 
 	db 0 ; padding
 
@@ -22365,12 +22365,12 @@ CharizardBaseStats: ; 0x3846a
 	
 	; learnset
 	db %10110101
-	db %1000011
-	db %1001111
+	db %01000011
+	db %01001111
 	db %11001110
 	db %11100011
-	db %1000
-	db %100110
+	db %00001000
+	db %00100110
 
 	db 0 ; padding
 
@@ -22402,12 +22402,12 @@ SquirtleBaseStats: ; 0x38486
 	
 	; learnset
 	db %10110001
-	db %111111
-	db %1111
+	db %00111111
+	db %00001111
 	db %11001000
 	db %10000011
-	db %1000
-	db %110010
+	db %00001000
+	db %00110010
 
 	db 0 ; padding
 
@@ -22439,12 +22439,12 @@ WartortleBaseStats: ; 0x384a2
 	
 	; learnset
 	db %10110001
-	db %111111
-	db %1111
+	db %00111111
+	db %00001111
 	db %11001000
 	db %10000011
-	db %1000
-	db %110010
+	db %00001000
+	db %00110010
 
 	db 0 ; padding
 
@@ -22476,12 +22476,12 @@ BlastoiseBaseStats: ; 0x384be
 	
 	; learnset
 	db %10110001
-	db %1111111
-	db %1111
+	db %01111111
+	db %00001111
 	db %11001110
 	db %10000011
-	db %1000
-	db %110010
+	db %00001000
+	db %00110010
 
 	db 0 ; padding
 
@@ -22512,13 +22512,13 @@ CaterpieBaseStats: ; 0x384da
 	db 0 ; growth rate
 	
 	; learnset
-	db %0
-	db %0
-	db %0
-	db %0
-	db %0
-	db %0
-	db %0
+	db %00000000
+	db %00000000
+	db %00000000
+	db %00000000
+	db %00000000
+	db %00000000
+	db %00000000
 
 	db 0 ; padding
 
@@ -22549,13 +22549,13 @@ MetapodBaseStats: ; 0x384f6
 	db 0 ; growth rate
 	
 	; learnset
-	db %0
-	db %0
-	db %0
-	db %0
-	db %0
-	db %0
-	db %0
+	db %00000000
+	db %00000000
+	db %00000000
+	db %00000000
+	db %00000000
+	db %00000000
+	db %00000000
 
 	db 0 ; padding
 
@@ -22586,13 +22586,13 @@ ButterfreeBaseStats: ; 0x38512
 	db 0 ; growth rate
 	
 	; learnset
-	db %101010
-	db %1000011
-	db %111000
+	db %00101010
+	db %01000011
+	db %00111000
 	db %11110000
-	db %1000011
-	db %101000
-	db %10
+	db %01000011
+	db %00101000
+	db %00000010
 
 	db 0 ; padding
 
@@ -22623,13 +22623,13 @@ WeedleBaseStats: ; 0x3852e
 	db 0 ; growth rate
 	
 	; learnset
-	db %0
-	db %0
-	db %0
-	db %0
-	db %0
-	db %0
-	db %0
+	db %00000000
+	db %00000000
+	db %00000000
+	db %00000000
+	db %00000000
+	db %00000000
+	db %00000000
 
 	db 0 ; padding
 
@@ -22660,13 +22660,13 @@ KakunaBaseStats: ; 0x3854a
 	db 0 ; growth rate
 	
 	; learnset
-	db %0
-	db %0
-	db %0
-	db %0
-	db %0
-	db %0
-	db %0
+	db %00000000
+	db %00000000
+	db %00000000
+	db %00000000
+	db %00000000
+	db %00000000
+	db %00000000
 
 	db 0 ; padding
 
@@ -22697,13 +22697,13 @@ BeedrillBaseStats: ; 0x38566
 	db 0 ; growth rate
 	
 	; learnset
-	db %100100
-	db %1000011
-	db %11000
+	db %00100100
+	db %01000011
+	db %00011000
 	db %11000000
 	db %11000011
-	db %1000
-	db %110
+	db %00001000
+	db %00000110
 
 	db 0 ; padding
 
@@ -22734,13 +22734,13 @@ PidgeyBaseStats: ; 0x38582
 	db 3 ; growth rate
 	
 	; learnset
-	db %101010
-	db %11
-	db %1000
+	db %00101010
+	db %00000011
+	db %00001000
 	db %11000000
-	db %1000011
-	db %1100
-	db %1010
+	db %01000011
+	db %00001100
+	db %00001010
 
 	db 0 ; padding
 
@@ -22771,13 +22771,13 @@ PidgeottoBaseStats: ; 0x3859e
 	db 3 ; growth rate
 	
 	; learnset
-	db %101010
-	db %11
-	db %1000
+	db %00101010
+	db %00000011
+	db %00001000
 	db %11000000
-	db %1000011
-	db %1100
-	db %1010
+	db %01000011
+	db %00001100
+	db %00001010
 
 	db 0 ; padding
 
@@ -22808,13 +22808,13 @@ PidgeotBaseStats: ; 0x385ba
 	db 3 ; growth rate
 	
 	; learnset
-	db %101010
-	db %1000011
-	db %1000
+	db %00101010
+	db %01000011
+	db %00001000
 	db %11000000
-	db %1000011
-	db %1100
-	db %1010
+	db %01000011
+	db %00001100
+	db %00001010
 
 	db 0 ; padding
 
@@ -22846,12 +22846,12 @@ RattataBaseStats: ; 0x385d6
 	
 	; learnset
 	db %10100000
-	db %101111
+	db %00101111
 	db %10001000
 	db %11001001
 	db %11000010
-	db %1000
-	db %10
+	db %00001000
+	db %00000010
 
 	db 0 ; padding
 
@@ -22883,12 +22883,12 @@ RaticateBaseStats: ; 0x385f2
 	
 	; learnset
 	db %10100000
-	db %1111111
+	db %01111111
 	db %10001000
 	db %11001001
 	db %11000010
-	db %1000
-	db %10
+	db %00001000
+	db %00000010
 
 	db 0 ; padding
 
@@ -22919,13 +22919,13 @@ SpearowBaseStats: ; 0x3860e
 	db 0 ; growth rate
 	
 	; learnset
-	db %101010
-	db %11
-	db %1000
+	db %00101010
+	db %00000011
+	db %00001000
 	db %11000000
-	db %1000010
-	db %1100
-	db %1010
+	db %01000010
+	db %00001100
+	db %00001010
 
 	db 0 ; padding
 
@@ -22956,13 +22956,13 @@ FearowBaseStats: ; 0x3862a
 	db 0 ; growth rate
 	
 	; learnset
-	db %101010
-	db %1000011
-	db %1000
+	db %00101010
+	db %01000011
+	db %00001000
 	db %11000000
-	db %1000010
-	db %1100
-	db %1010
+	db %01000010
+	db %00001100
+	db %00001010
 
 	db 0 ; padding
 
@@ -22994,12 +22994,12 @@ EkansBaseStats: ; 0x38646
 	
 	; learnset
 	db %10100000
-	db %11
-	db %11000
+	db %00000011
+	db %00011000
 	db %11001110
 	db %10000010
 	db %10001000
-	db %100010
+	db %00100010
 
 	db 0 ; padding
 
@@ -23031,12 +23031,12 @@ ArbokBaseStats: ; 0x38662
 	
 	; learnset
 	db %10100000
-	db %1000011
-	db %11000
+	db %01000011
+	db %00011000
 	db %11001110
 	db %10000010
 	db %10001000
-	db %100010
+	db %00100010
 
 	db 0 ; padding
 
@@ -23072,8 +23072,8 @@ PikachuBaseStats: ; 0x3867e
 	db %10001101
 	db %11000001
 	db %11000011
-	db %11000
-	db %1000010
+	db %00011000
+	db %01000010
 
 	db 0 ; padding
 
@@ -23109,8 +23109,8 @@ RaichuBaseStats: ; 0x3869a
 	db %10001101
 	db %11000001
 	db %11000011
-	db %11000
-	db %1000010
+	db %00011000
+	db %01000010
 
 	db 0 ; padding
 
@@ -23142,12 +23142,12 @@ SandshrewBaseStats: ; 0x386b6
 	
 	; learnset
 	db %10100100
-	db %11
-	db %1101
+	db %00000011
+	db %00001101
 	db %11001110
 	db %11000010
 	db %10001000
-	db %100110
+	db %00100110
 
 	db 0 ; padding
 
@@ -23179,12 +23179,12 @@ SandslashBaseStats: ; 0x386d2
 	
 	; learnset
 	db %10100100
-	db %1000011
-	db %1101
+	db %01000011
+	db %00001101
 	db %11001110
 	db %11000010
 	db %10001000
-	db %100110
+	db %00100110
 
 	db 0 ; padding
 
@@ -23216,12 +23216,12 @@ NidoranFBaseStats: ; 0x386ee
 	
 	; learnset
 	db %10100000
-	db %100011
+	db %00100011
 	db %10001000
 	db %11000001
 	db %10000011
-	db %1000
-	db %10
+	db %00001000
+	db %00000010
 
 	db 0 ; padding
 
@@ -23253,12 +23253,12 @@ NidorinaBaseStats: ; 0x3870a
 	
 	; learnset
 	db %11100000
-	db %111111
+	db %00111111
 	db %10001000
 	db %11000001
 	db %10000011
-	db %1000
-	db %10
+	db %00001000
+	db %00000010
 
 	db 0 ; padding
 
@@ -23295,7 +23295,7 @@ NidoqueenBaseStats: ; 0x38726
 	db %11000111
 	db %10100011
 	db %10001000
-	db %110010
+	db %00110010
 
 	db 0 ; padding
 
@@ -23327,12 +23327,12 @@ NidoranMBaseStats: ; 0x38742
 	
 	; learnset
 	db %11100000
-	db %100011
+	db %00100011
 	db %10001000
 	db %11000001
 	db %10000011
-	db %1000
-	db %10
+	db %00001000
+	db %00000010
 
 	db 0 ; padding
 
@@ -23364,12 +23364,12 @@ NidorinoBaseStats: ; 0x3875e
 	
 	; learnset
 	db %11100000
-	db %111111
+	db %00111111
 	db %10001000
 	db %11000001
 	db %10000011
-	db %1000
-	db %10
+	db %00001000
+	db %00000010
 
 	db 0 ; padding
 
@@ -23406,7 +23406,7 @@ NidokingBaseStats: ; 0x3877a
 	db %11000111
 	db %10100011
 	db %10001000
-	db %110010
+	db %00110010
 
 	db 0 ; padding
 
@@ -23438,12 +23438,12 @@ ClefairyBaseStats: ; 0x38796
 	
 	; learnset
 	db %10110001
-	db %111111
+	db %00111111
 	db %10101111
 	db %11110001
 	db %10100111
-	db %111000
-	db %1100011
+	db %00111000
+	db %01100011
 
 	db 0 ; padding
 
@@ -23475,12 +23475,12 @@ ClefableBaseStats: ; 0x387b2
 	
 	; learnset
 	db %10110001
-	db %1111111
+	db %01111111
 	db %10101111
 	db %11110001
 	db %10100111
-	db %111000
-	db %1100011
+	db %00111000
+	db %01100011
 
 	db 0 ; padding
 
@@ -23512,12 +23512,12 @@ VulpixBaseStats: ; 0x387ce
 	
 	; learnset
 	db %10100000
-	db %11
-	db %1000
+	db %00000011
+	db %00001000
 	db %11001000
 	db %11100011
-	db %1000
-	db %10
+	db %00001000
+	db %00000010
 
 	db 0 ; padding
 
@@ -23549,12 +23549,12 @@ NinetalesBaseStats: ; 0x387ea
 	
 	; learnset
 	db %10100000
-	db %1000011
-	db %1000
+	db %01000011
+	db %00001000
 	db %11001000
 	db %11100011
-	db %1000
-	db %10
+	db %00001000
+	db %00000010
 
 	db 0 ; padding
 
@@ -23586,12 +23586,12 @@ JigglypuffBaseStats: ; 0x38806
 	
 	; learnset
 	db %10110001
-	db %111111
+	db %00111111
 	db %10101111
 	db %11110001
 	db %10100011
-	db %111000
-	db %1100011
+	db %00111000
+	db %01100011
 
 	db 0 ; padding
 
@@ -23623,12 +23623,12 @@ WigglytuffBaseStats: ; 0x38822
 	
 	; learnset
 	db %10110001
-	db %1111111
+	db %01111111
 	db %10101111
 	db %11110001
 	db %10100011
-	db %111000
-	db %1100011
+	db %00111000
+	db %01100011
 
 	db 0 ; padding
 
@@ -23659,13 +23659,13 @@ ZubatBaseStats: ; 0x3883e
 	db 0 ; growth rate
 	
 	; learnset
-	db %101010
-	db %11
-	db %11000
+	db %00101010
+	db %00000011
+	db %00011000
 	db %11000000
-	db %1000010
-	db %1000
-	db %10
+	db %01000010
+	db %00001000
+	db %00000010
 
 	db 0 ; padding
 
@@ -23696,13 +23696,13 @@ GolbatBaseStats: ; 0x3885a
 	db 0 ; growth rate
 	
 	; learnset
-	db %101010
-	db %1000011
-	db %11000
+	db %00101010
+	db %01000011
+	db %00011000
 	db %11000000
-	db %1000010
-	db %1000
-	db %10
+	db %01000010
+	db %00001000
+	db %00000010
 
 	db 0 ; padding
 
@@ -23733,13 +23733,13 @@ OddishBaseStats: ; 0x38876
 	db 3 ; growth rate
 	
 	; learnset
-	db %100100
-	db %11
-	db %111000
+	db %00100100
+	db %00000011
+	db %00111000
 	db %11000000
-	db %11
-	db %1000
-	db %110
+	db %00000011
+	db %00001000
+	db %00000110
 
 	db 0 ; padding
 
@@ -23770,13 +23770,13 @@ GloomBaseStats: ; 0x38892
 	db 3 ; growth rate
 	
 	; learnset
-	db %100100
-	db %11
-	db %111000
+	db %00100100
+	db %00000011
+	db %00111000
 	db %11000000
-	db %11
-	db %1000
-	db %110
+	db %00000011
+	db %00001000
+	db %00000110
 
 	db 0 ; padding
 
@@ -23808,12 +23808,12 @@ VileplumeBaseStats: ; 0x388ae
 	
 	; learnset
 	db %10100100
-	db %1000011
-	db %111000
+	db %01000011
+	db %00111000
 	db %11000000
-	db %11
-	db %1000
-	db %110
+	db %00000011
+	db %00001000
+	db %00000110
 
 	db 0 ; padding
 
@@ -23845,12 +23845,12 @@ ParasBaseStats: ; 0x388ca
 	
 	; learnset
 	db %10100100
-	db %11
-	db %111000
+	db %00000011
+	db %00111000
 	db %11001000
 	db %10000011
-	db %1000
-	db %110
+	db %00001000
+	db %00000110
 
 	db 0 ; padding
 
@@ -23882,12 +23882,12 @@ ParasectBaseStats: ; 0x388e6
 	
 	; learnset
 	db %10100100
-	db %1000011
-	db %111000
+	db %01000011
+	db %00111000
 	db %11001000
 	db %10000011
-	db %1000
-	db %110
+	db %00001000
+	db %00000110
 
 	db 0 ; padding
 
@@ -23918,13 +23918,13 @@ VenonatBaseStats: ; 0x38902
 	db 0 ; growth rate
 	
 	; learnset
-	db %100000
-	db %11
-	db %111000
+	db %00100000
+	db %00000011
+	db %00111000
 	db %11010000
-	db %11
-	db %101000
-	db %10
+	db %00000011
+	db %00101000
+	db %00000010
 
 	db 0 ; padding
 
@@ -23955,13 +23955,13 @@ VenomothBaseStats: ; 0x3891e
 	db 0 ; growth rate
 	
 	; learnset
-	db %101010
-	db %1000011
-	db %111000
+	db %00101010
+	db %01000011
+	db %00111000
 	db %11110000
-	db %1000011
-	db %101000
-	db %10
+	db %01000011
+	db %00101000
+	db %00000010
 
 	db 0 ; padding
 
@@ -23993,12 +23993,12 @@ DiglettBaseStats: ; 0x3893a
 	
 	; learnset
 	db %10100000
-	db %11
-	db %1000
+	db %00000011
+	db %00001000
 	db %11001110
-	db %10
+	db %00000010
 	db %10001000
-	db %10
+	db %00000010
 
 	db 0 ; padding
 
@@ -24030,12 +24030,12 @@ DugtrioBaseStats: ; 0x38956
 	
 	; learnset
 	db %10100000
-	db %1000011
-	db %1000
+	db %01000011
+	db %00001000
 	db %11001110
-	db %10
+	db %00000010
 	db %10001000
-	db %10
+	db %00000010
 
 	db 0 ; padding
 
@@ -24071,8 +24071,8 @@ MeowthBaseStats: ; 0x38972
 	db %10001000
 	db %11000001
 	db %11000010
-	db %1000
-	db %10
+	db %00001000
+	db %00000010
 
 	db 0 ; padding
 
@@ -24108,8 +24108,8 @@ PersianBaseStats: ; 0x3898e
 	db %10001000
 	db %11000001
 	db %11000010
-	db %1000
-	db %10
+	db %00001000
+	db %00000010
 
 	db 0 ; padding
 
@@ -24142,11 +24142,11 @@ PsyduckBaseStats: ; 0x389aa
 	; learnset
 	db %10110001
 	db %10111111
-	db %1111
+	db %00001111
 	db %11001000
 	db %11000010
-	db %1000
-	db %110010
+	db %00001000
+	db %00110010
 
 	db 0 ; padding
 
@@ -24179,11 +24179,11 @@ GolduckBaseStats: ; 0x389c6
 	; learnset
 	db %10110001
 	db %11111111
-	db %1111
+	db %00001111
 	db %11001000
 	db %11000010
-	db %1000
-	db %110010
+	db %00001000
+	db %00110010
 
 	db 0 ; padding
 
@@ -24220,7 +24220,7 @@ MankeyBaseStats: ; 0x389e2
 	db %11001001
 	db %11000110
 	db %10001000
-	db %100010
+	db %00100010
 
 	db 0 ; padding
 
@@ -24257,7 +24257,7 @@ PrimeapeBaseStats: ; 0x389fe
 	db %11001001
 	db %11000110
 	db %10001000
-	db %100010
+	db %00100010
 
 	db 0 ; padding
 
@@ -24289,12 +24289,12 @@ GrowlitheBaseStats: ; 0x38a1a
 	
 	; learnset
 	db %10100000
-	db %11
-	db %1001000
+	db %00000011
+	db %01001000
 	db %11001000
 	db %11100011
-	db %1000
-	db %10
+	db %00001000
+	db %00000010
 
 	db 0 ; padding
 
@@ -24326,12 +24326,12 @@ ArcanineBaseStats: ; 0x38a36
 	
 	; learnset
 	db %10100000
-	db %1000011
-	db %1001000
+	db %01000011
+	db %01001000
 	db %11101000
 	db %11100011
-	db %1000
-	db %10
+	db %00001000
+	db %00000010
 
 	db 0 ; padding
 
@@ -24363,12 +24363,12 @@ PoliwagBaseStats: ; 0x38a52
 	
 	; learnset
 	db %10100000
-	db %111111
-	db %1000
+	db %00111111
+	db %00001000
 	db %11010000
 	db %10000010
-	db %101000
-	db %10010
+	db %00101000
+	db %00010010
 
 	db 0 ; padding
 
@@ -24400,12 +24400,12 @@ PoliwhirlBaseStats: ; 0x38a6e
 	
 	; learnset
 	db %10110001
-	db %111111
-	db %1111
+	db %00111111
+	db %00001111
 	db %11010110
 	db %10000110
-	db %101000
-	db %110010
+	db %00101000
+	db %00110010
 
 	db 0 ; padding
 
@@ -24437,12 +24437,12 @@ PoliwrathBaseStats: ; 0x38a8a
 	
 	; learnset
 	db %10110001
-	db %1111111
-	db %1111
+	db %01111111
+	db %00001111
 	db %11010110
 	db %10000110
-	db %101000
-	db %110010
+	db %00101000
+	db %00110010
 
 	db 0 ; padding
 
@@ -24474,12 +24474,12 @@ AbraBaseStats: ; 0x38aa6
 	
 	; learnset
 	db %10110001
-	db %11
-	db %1111
+	db %00000011
+	db %00001111
 	db %11110000
 	db %10000111
-	db %111000
-	db %1000011
+	db %00111000
+	db %01000011
 
 	db 0 ; padding
 
@@ -24511,12 +24511,12 @@ KadabraBaseStats: ; 0x38ac2
 	
 	; learnset
 	db %10110001
-	db %11
-	db %1111
+	db %00000011
+	db %00001111
 	db %11111000
 	db %10000111
-	db %111000
-	db %1000011
+	db %00111000
+	db %01000011
 
 	db 0 ; padding
 
@@ -24548,12 +24548,12 @@ AlakazamBaseStats: ; 0x38ade
 	
 	; learnset
 	db %10110001
-	db %1000011
-	db %1111
+	db %01000011
+	db %00001111
 	db %11111000
 	db %10000111
-	db %111000
-	db %1000011
+	db %00111000
+	db %01000011
 
 	db 0 ; padding
 
@@ -24585,12 +24585,12 @@ MachopBaseStats: ; 0x38afa
 	
 	; learnset
 	db %10110001
-	db %11
-	db %1111
+	db %00000011
+	db %00001111
 	db %11001110
 	db %10100110
 	db %10001000
-	db %100010
+	db %00100010
 
 	db 0 ; padding
 
@@ -24622,12 +24622,12 @@ MachokeBaseStats: ; 0x38b16
 	
 	; learnset
 	db %10110001
-	db %11
-	db %1111
+	db %00000011
+	db %00001111
 	db %11001110
 	db %10100110
 	db %10001000
-	db %100010
+	db %00100010
 
 	db 0 ; padding
 
@@ -24659,12 +24659,12 @@ MachampBaseStats: ; 0x38b32
 	
 	; learnset
 	db %10110001
-	db %1000011
-	db %1111
+	db %01000011
+	db %00001111
 	db %11001110
 	db %10100110
 	db %10001000
-	db %100010
+	db %00100010
 
 	db 0 ; padding
 
@@ -24695,13 +24695,13 @@ BellsproutBaseStats: ; 0x38b4e
 	db 3 ; growth rate
 	
 	; learnset
-	db %100100
-	db %11
-	db %111000
+	db %00100100
+	db %00000011
+	db %00111000
 	db %11000000
-	db %11
-	db %1000
-	db %110
+	db %00000011
+	db %00001000
+	db %00000110
 
 	db 0 ; padding
 
@@ -24732,13 +24732,13 @@ WeepinbellBaseStats: ; 0x38b6a
 	db 3 ; growth rate
 	
 	; learnset
-	db %100100
-	db %11
-	db %111000
+	db %00100100
+	db %00000011
+	db %00111000
 	db %11000000
-	db %11
-	db %1000
-	db %110
+	db %00000011
+	db %00001000
+	db %00000110
 
 	db 0 ; padding
 
@@ -24770,12 +24770,12 @@ VictreebelBaseStats: ; 0x38b86
 	
 	; learnset
 	db %10100100
-	db %1000011
-	db %111000
+	db %01000011
+	db %00111000
 	db %11000000
-	db %11
-	db %1000
-	db %110
+	db %00000011
+	db %00001000
+	db %00000110
 
 	db 0 ; padding
 
@@ -24806,13 +24806,13 @@ TentacoolBaseStats: ; 0x38ba2
 	db 5 ; growth rate
 	
 	; learnset
-	db %100100
-	db %111111
-	db %11000
+	db %00100100
+	db %00111111
+	db %00011000
 	db %11000000
 	db %10000011
-	db %1000
-	db %10110
+	db %00001000
+	db %00010110
 
 	db 0 ; padding
 
@@ -24843,13 +24843,13 @@ TentacruelBaseStats: ; 0x38bbe
 	db 5 ; growth rate
 	
 	; learnset
-	db %100100
-	db %1111111
-	db %11000
+	db %00100100
+	db %01111111
+	db %00011000
 	db %11000000
 	db %10000011
-	db %1000
-	db %10110
+	db %00001000
+	db %00010110
 
 	db 0 ; padding
 
@@ -24881,12 +24881,12 @@ GeodudeBaseStats: ; 0x38bda
 	
 	; learnset
 	db %10100001
-	db %11
-	db %1111
+	db %00000011
+	db %00001111
 	db %11001110
-	db %101110
+	db %00101110
 	db %11001000
-	db %100010
+	db %00100010
 
 	db 0 ; padding
 
@@ -24918,12 +24918,12 @@ GravelerBaseStats: ; 0x38bf6
 	
 	; learnset
 	db %10100001
-	db %11
-	db %1111
+	db %00000011
+	db %00001111
 	db %11001110
-	db %101110
+	db %00101110
 	db %11001000
-	db %100010
+	db %00100010
 
 	db 0 ; padding
 
@@ -24955,12 +24955,12 @@ GolemBaseStats: ; 0x38c12
 	
 	; learnset
 	db %10110001
-	db %1000011
-	db %1111
+	db %01000011
+	db %00001111
 	db %11001110
-	db %101110
+	db %00101110
 	db %11001000
-	db %100010
+	db %00100010
 
 	db 0 ; padding
 
@@ -24992,12 +24992,12 @@ PonytaBaseStats: ; 0x38c2e
 	
 	; learnset
 	db %11100000
-	db %11
-	db %1000
+	db %00000011
+	db %00001000
 	db %11000000
 	db %11100011
-	db %1000
-	db %10
+	db %00001000
+	db %00000010
 
 	db 0 ; padding
 
@@ -25029,12 +25029,12 @@ RapidashBaseStats: ; 0x38c4a
 	
 	; learnset
 	db %11100000
-	db %1000011
-	db %1000
+	db %01000011
+	db %00001000
 	db %11000000
 	db %11100011
-	db %1000
-	db %10
+	db %00001000
+	db %00000010
 
 	db 0 ; padding
 
@@ -25067,11 +25067,11 @@ SlowpokeBaseStats: ; 0x38c66
 	; learnset
 	db %10100000
 	db %10111111
-	db %1000
+	db %00001000
 	db %11111110
 	db %11100011
-	db %111000
-	db %1110011
+	db %00111000
+	db %01110011
 
 	db 0 ; padding
 
@@ -25104,11 +25104,11 @@ SlowbroBaseStats: ; 0x38c82
 	; learnset
 	db %10110001
 	db %11111111
-	db %1111
+	db %00001111
 	db %11111110
 	db %11100011
-	db %111000
-	db %1110011
+	db %00111000
+	db %01110011
 
 	db 0 ; padding
 
@@ -25139,13 +25139,13 @@ MagnemiteBaseStats: ; 0x38c9e
 	db 0 ; growth rate
 	
 	; learnset
-	db %100000
-	db %11
+	db %00100000
+	db %00000011
 	db %10001000
 	db %11100001
-	db %1000011
-	db %11000
-	db %1000010
+	db %01000011
+	db %00011000
+	db %01000010
 
 	db 0 ; padding
 
@@ -25176,13 +25176,13 @@ MagnetonBaseStats: ; 0x38cba
 	db 0 ; growth rate
 	
 	; learnset
-	db %100000
-	db %1000011
+	db %00100000
+	db %01000011
 	db %10001000
 	db %11100001
-	db %1000011
-	db %11000
-	db %1000010
+	db %01000011
+	db %00011000
+	db %01000010
 
 	db 0 ; padding
 
@@ -25214,12 +25214,12 @@ FarfetchdBaseStats: ; 0x38cd6
 	
 	; learnset
 	db %10101110
-	db %11
-	db %1000
+	db %00000011
+	db %00001000
 	db %11000000
 	db %11000011
-	db %1000
-	db %1110
+	db %00001000
+	db %00001110
 
 	db 0 ; padding
 
@@ -25251,12 +25251,12 @@ DoduoBaseStats: ; 0x38cf2
 	
 	; learnset
 	db %10101000
-	db %11
-	db %1000
+	db %00000011
+	db %00001000
 	db %11000000
 	db %10000011
-	db %1100
-	db %1011
+	db %00001100
+	db %00001011
 
 	db 0 ; padding
 
@@ -25288,12 +25288,12 @@ DodrioBaseStats: ; 0x38d0e
 	
 	; learnset
 	db %10101000
-	db %1000011
-	db %1000
+	db %01000011
+	db %00001000
 	db %11000000
 	db %10000011
-	db %1100
-	db %1011
+	db %00001100
+	db %00001011
 
 	db 0 ; padding
 
@@ -25326,11 +25326,11 @@ SeelBaseStats: ; 0x38d2a
 	; learnset
 	db %11100000
 	db %10111111
-	db %1000
+	db %00001000
 	db %11000000
 	db %10000010
-	db %1000
-	db %110010
+	db %00001000
+	db %00110010
 
 	db 0 ; padding
 
@@ -25363,11 +25363,11 @@ DewgongBaseStats: ; 0x38d46
 	; learnset
 	db %11100000
 	db %11111111
-	db %1000
+	db %00001000
 	db %11000000
 	db %10000010
-	db %1000
-	db %110010
+	db %00001000
+	db %00110010
 
 	db 0 ; padding
 
@@ -25399,12 +25399,12 @@ GrimerBaseStats: ; 0x38d62
 	
 	; learnset
 	db %10100000
-	db %0
+	db %00000000
 	db %10011000
 	db %11000001
-	db %101010
-	db %1001000
-	db %10
+	db %00101010
+	db %01001000
+	db %00000010
 
 	db 0 ; padding
 
@@ -25436,12 +25436,12 @@ MukBaseStats: ; 0x38d7e
 	
 	; learnset
 	db %10100000
-	db %1000000
+	db %01000000
 	db %10011000
 	db %11000001
-	db %101010
-	db %1001000
-	db %10
+	db %00101010
+	db %01001000
+	db %00000010
 
 	db 0 ; padding
 
@@ -25472,13 +25472,13 @@ ShellderBaseStats: ; 0x38d9a
 	db 5 ; growth rate
 	
 	; learnset
-	db %100000
-	db %111111
-	db %1000
+	db %00100000
+	db %00111111
+	db %00001000
 	db %11100000
-	db %1001011
-	db %1001000
-	db %10011
+	db %01001011
+	db %01001000
+	db %00010011
 
 	db 0 ; padding
 
@@ -25509,13 +25509,13 @@ CloysterBaseStats: ; 0x38db6
 	db 5 ; growth rate
 	
 	; learnset
-	db %100000
-	db %1111111
-	db %1000
+	db %00100000
+	db %01111111
+	db %00001000
 	db %11100000
-	db %1001011
-	db %1001000
-	db %10011
+	db %01001011
+	db %01001000
+	db %00010011
 
 	db 0 ; padding
 
@@ -25546,13 +25546,13 @@ GastlyBaseStats: ; 0x38dd2
 	db 3 ; growth rate
 	
 	; learnset
-	db %100000
-	db %0
+	db %00100000
+	db %00000000
 	db %10011000
 	db %11010001
-	db %1010
-	db %1101010
-	db %10
+	db %00001010
+	db %01101010
+	db %00000010
 
 	db 0 ; padding
 
@@ -25583,13 +25583,13 @@ HaunterBaseStats: ; 0x38dee
 	db 3 ; growth rate
 	
 	; learnset
-	db %100000
-	db %0
+	db %00100000
+	db %00000000
 	db %10011000
 	db %11010001
-	db %1010
-	db %1101010
-	db %10
+	db %00001010
+	db %01101010
+	db %00000010
 
 	db 0 ; padding
 
@@ -25621,12 +25621,12 @@ GengarBaseStats: ; 0x38e0a
 	
 	; learnset
 	db %10110001
-	db %1000011
+	db %01000011
 	db %10011111
 	db %11010001
 	db %10001110
-	db %1101010
-	db %100010
+	db %01101010
+	db %00100010
 
 	db 0 ; padding
 
@@ -25658,12 +25658,12 @@ OnixBaseStats: ; 0x38e26
 	
 	; learnset
 	db %10100000
-	db %11
-	db %1000
+	db %00000011
+	db %00001000
 	db %11001110
 	db %10001010
 	db %11001000
-	db %100010
+	db %00100010
 
 	db 0 ; padding
 
@@ -25695,12 +25695,12 @@ DrowzeeBaseStats: ; 0x38e42
 	
 	; learnset
 	db %10110001
-	db %11
-	db %1111
+	db %00000011
+	db %00001111
 	db %11110000
 	db %10000111
-	db %111010
-	db %1000011
+	db %00111010
+	db %01000011
 
 	db 0 ; padding
 
@@ -25732,12 +25732,12 @@ HypnoBaseStats: ; 0x38e5e
 	
 	; learnset
 	db %10110001
-	db %1000011
-	db %1111
+	db %01000011
+	db %00001111
 	db %11110000
 	db %10000111
-	db %111010
-	db %1000011
+	db %00111010
+	db %01000011
 
 	db 0 ; padding
 
@@ -25769,12 +25769,12 @@ KrabbyBaseStats: ; 0x38e7a
 	
 	; learnset
 	db %10100100
-	db %111111
-	db %1000
+	db %00111111
+	db %00001000
 	db %11000000
-	db %10
-	db %1000
-	db %110110
+	db %00000010
+	db %00001000
+	db %00110110
 
 	db 0 ; padding
 
@@ -25806,12 +25806,12 @@ KinglerBaseStats: ; 0x38e96
 	
 	; learnset
 	db %10100100
-	db %1111111
-	db %1000
+	db %01111111
+	db %00001000
 	db %11000000
-	db %10
-	db %1000
-	db %110110
+	db %00000010
+	db %00001000
+	db %00110110
 
 	db 0 ; padding
 
@@ -25842,13 +25842,13 @@ VoltorbBaseStats: ; 0x38eb2
 	db 0 ; growth rate
 	
 	; learnset
-	db %100000
-	db %1
+	db %00100000
+	db %00000001
 	db %10001000
 	db %11100001
-	db %1001011
-	db %1011000
-	db %1000010
+	db %01001011
+	db %01011000
+	db %01000010
 
 	db 0 ; padding
 
@@ -25879,13 +25879,13 @@ ElectrodeBaseStats: ; 0x38ece
 	db 0 ; growth rate
 	
 	; learnset
-	db %100000
-	db %1000001
+	db %00100000
+	db %01000001
 	db %10001000
 	db %11100001
 	db %11001011
-	db %1011000
-	db %1000010
+	db %01011000
+	db %01000010
 
 	db 0 ; padding
 
@@ -25916,13 +25916,13 @@ ExeggcuteBaseStats: ; 0x38eea
 	db 5 ; growth rate
 	
 	; learnset
-	db %100000
-	db %11
-	db %1000
+	db %00100000
+	db %00000011
+	db %00001000
 	db %11110000
-	db %11011
-	db %1101000
-	db %10
+	db %00011011
+	db %01101000
+	db %00000010
 
 	db 0 ; padding
 
@@ -25953,13 +25953,13 @@ ExeggutorBaseStats: ; 0x38f06
 	db 5 ; growth rate
 	
 	; learnset
-	db %100000
-	db %1000011
-	db %111000
+	db %00100000
+	db %01000011
+	db %00111000
 	db %11110000
-	db %11011
-	db %1101000
-	db %100010
+	db %00011011
+	db %01101000
+	db %00100010
 
 	db 0 ; padding
 
@@ -25991,12 +25991,12 @@ CuboneBaseStats: ; 0x38f22
 	
 	; learnset
 	db %10110001
-	db %111111
-	db %1111
+	db %00111111
+	db %00001111
 	db %11001110
 	db %10100010
-	db %1000
-	db %100010
+	db %00001000
+	db %00100010
 
 	db 0 ; padding
 
@@ -26028,12 +26028,12 @@ MarowakBaseStats: ; 0x38f3e
 	
 	; learnset
 	db %10110001
-	db %1111111
-	db %1111
+	db %01111111
+	db %00001111
 	db %11001110
 	db %10100010
-	db %1000
-	db %100010
+	db %00001000
+	db %00100010
 
 	db 0 ; padding
 
@@ -26065,12 +26065,12 @@ HitmonleeBaseStats: ; 0x38f5a
 	
 	; learnset
 	db %10110001
-	db %11
-	db %1111
+	db %00000011
+	db %00001111
 	db %11000000
 	db %11000110
-	db %1000
-	db %100010
+	db %00001000
+	db %00100010
 
 	db 0 ; padding
 
@@ -26102,12 +26102,12 @@ HitmonchanBaseStats: ; 0x38f76
 	
 	; learnset
 	db %10110001
-	db %11
-	db %1111
+	db %00000011
+	db %00001111
 	db %11000000
 	db %11000110
-	db %1000
-	db %100010
+	db %00001000
+	db %00100010
 
 	db 0 ; padding
 
@@ -26139,12 +26139,12 @@ LickitungBaseStats: ; 0x38f92
 	
 	; learnset
 	db %10110101
-	db %1111111
+	db %01111111
 	db %10001111
 	db %11000111
 	db %10100010
-	db %1000
-	db %110110
+	db %00001000
+	db %00110110
 
 	db 0 ; padding
 
@@ -26175,13 +26175,13 @@ KoffingBaseStats: ; 0x38fae
 	db 0 ; growth rate
 	
 	; learnset
-	db %100000
-	db %0
+	db %00100000
+	db %00000000
 	db %10001000
 	db %11000001
-	db %101010
-	db %1001000
-	db %10
+	db %00101010
+	db %01001000
+	db %00000010
 
 	db 0 ; padding
 
@@ -26212,13 +26212,13 @@ WeezingBaseStats: ; 0x38fca
 	db 0 ; growth rate
 	
 	; learnset
-	db %100000
-	db %1000000
+	db %00100000
+	db %01000000
 	db %10001000
 	db %11000001
-	db %101010
-	db %1001000
-	db %10
+	db %00101010
+	db %01001000
+	db %00000010
 
 	db 0 ; padding
 
@@ -26250,12 +26250,12 @@ RhyhornBaseStats: ; 0x38fe6
 	
 	; learnset
 	db %11100000
-	db %11
+	db %00000011
 	db %10001000
 	db %11001111
 	db %10100010
 	db %10001000
-	db %100010
+	db %00100010
 
 	db 0 ; padding
 
@@ -26292,7 +26292,7 @@ RhydonBaseStats: ; 0x39002
 	db %11001111
 	db %10100010
 	db %10001000
-	db %110010
+	db %00110010
 
 	db 0 ; padding
 
@@ -26324,12 +26324,12 @@ ChanseyBaseStats: ; 0x3901e
 	
 	; learnset
 	db %10110001
-	db %1111111
+	db %01111111
 	db %10101111
 	db %11110001
 	db %10110111
-	db %111001
-	db %1100011
+	db %00111001
+	db %01100011
 
 	db 0 ; padding
 
@@ -26361,12 +26361,12 @@ TangelaBaseStats: ; 0x3903a
 	
 	; learnset
 	db %10100100
-	db %1000011
-	db %111000
+	db %01000011
+	db %00111000
 	db %11000000
 	db %10000010
-	db %1000
-	db %110
+	db %00001000
+	db %00000110
 
 	db 0 ; padding
 
@@ -26398,12 +26398,12 @@ KangaskhanBaseStats: ; 0x39056
 	
 	; learnset
 	db %10110001
-	db %1111111
+	db %01111111
 	db %10001111
 	db %11000111
 	db %10100010
 	db %10001000
-	db %110010
+	db %00110010
 
 	db 0 ; padding
 
@@ -26434,13 +26434,13 @@ HorseaBaseStats: ; 0x39072
 	db 0 ; growth rate
 	
 	; learnset
-	db %100000
-	db %111111
-	db %1000
+	db %00100000
+	db %00111111
+	db %00001000
 	db %11000000
 	db %11000010
-	db %1000
-	db %10010
+	db %00001000
+	db %00010010
 
 	db 0 ; padding
 
@@ -26471,13 +26471,13 @@ SeadraBaseStats: ; 0x3908e
 	db 0 ; growth rate
 	
 	; learnset
-	db %100000
-	db %1111111
-	db %1000
+	db %00100000
+	db %01111111
+	db %00001000
 	db %11000000
 	db %11000010
-	db %1000
-	db %10010
+	db %00001000
+	db %00010010
 
 	db 0 ; padding
 
@@ -26508,13 +26508,13 @@ GoldeenBaseStats: ; 0x390aa
 	db 0 ; growth rate
 	
 	; learnset
-	db %1100000
-	db %111111
-	db %1000
+	db %01100000
+	db %00111111
+	db %00001000
 	db %11000000
 	db %11000010
-	db %1000
-	db %10010
+	db %00001000
+	db %00010010
 
 	db 0 ; padding
 
@@ -26545,13 +26545,13 @@ SeakingBaseStats: ; 0x390c6
 	db 0 ; growth rate
 	
 	; learnset
-	db %1100000
-	db %1111111
-	db %1000
+	db %01100000
+	db %01111111
+	db %00001000
 	db %11000000
 	db %11000010
-	db %1000
-	db %10010
+	db %00001000
+	db %00010010
 
 	db 0 ; padding
 
@@ -26582,13 +26582,13 @@ StaryuBaseStats: ; 0x390e2
 	db 5 ; growth rate
 	
 	; learnset
-	db %100000
-	db %111111
+	db %00100000
+	db %00111111
 	db %10001000
 	db %11110001
 	db %11000011
-	db %111000
-	db %1010011
+	db %00111000
+	db %01010011
 
 	db 0 ; padding
 
@@ -26619,13 +26619,13 @@ StarmieBaseStats: ; 0x390fe
 	db 5 ; growth rate
 	
 	; learnset
-	db %100000
-	db %1111111
+	db %00100000
+	db %01111111
 	db %10001000
 	db %11110001
 	db %11000011
-	db %111000
-	db %1010011
+	db %00111000
+	db %01010011
 
 	db 0 ; padding
 
@@ -26657,12 +26657,12 @@ MrMimeBaseStats: ; 0x3911a
 	
 	; learnset
 	db %10110001
-	db %1000011
+	db %01000011
 	db %10101111
 	db %11110001
 	db %10000111
-	db %111000
-	db %1000010
+	db %00111000
+	db %01000010
 
 	db 0 ; padding
 
@@ -26693,13 +26693,13 @@ ScytherBaseStats: ; 0x39136
 	db 0 ; growth rate
 	
 	; learnset
-	db %100100
-	db %1000011
-	db %1000
+	db %00100100
+	db %01000011
+	db %00001000
 	db %11000000
 	db %11000010
-	db %1000
-	db %110
+	db %00001000
+	db %00000110
 
 	db 0 ; padding
 
@@ -26731,12 +26731,12 @@ JynxBaseStats: ; 0x39152
 	
 	; learnset
 	db %10110001
-	db %1111111
-	db %1111
+	db %01111111
+	db %00001111
 	db %11110000
 	db %10000111
-	db %101000
-	db %10
+	db %00101000
+	db %00000010
 
 	db 0 ; padding
 
@@ -26768,12 +26768,12 @@ ElectabuzzBaseStats: ; 0x3916e
 	
 	; learnset
 	db %10110001
-	db %1000011
+	db %01000011
 	db %10001111
 	db %11110001
 	db %11000111
-	db %111000
-	db %1100010
+	db %00111000
+	db %01100010
 
 	db 0 ; padding
 
@@ -26805,12 +26805,12 @@ MagmarBaseStats: ; 0x3918a
 	
 	; learnset
 	db %10110001
-	db %1000011
-	db %1111
+	db %01000011
+	db %00001111
 	db %11110000
 	db %10100110
-	db %101000
-	db %100010
+	db %00101000
+	db %00100010
 
 	db 0 ; padding
 
@@ -26842,12 +26842,12 @@ PinsirBaseStats: ; 0x391a6
 	
 	; learnset
 	db %10100100
-	db %1000011
-	db %1101
+	db %01000011
+	db %00001101
 	db %11000000
-	db %10
-	db %1000
-	db %100110
+	db %00000010
+	db %00001000
+	db %00100110
 
 	db 0 ; padding
 
@@ -26879,12 +26879,12 @@ TaurosBaseStats: ; 0x391c2
 	
 	; learnset
 	db %11100000
-	db %1110011
+	db %01110011
 	db %10001000
 	db %11000111
 	db %10100010
-	db %1000
-	db %100010
+	db %00001000
+	db %00100010
 
 	db 0 ; padding
 
@@ -26915,13 +26915,13 @@ MagikarpBaseStats: ; 0x391de
 	db 5 ; growth rate
 	
 	; learnset
-	db %0
-	db %0
-	db %0
-	db %0
-	db %0
-	db %0
-	db %0
+	db %00000000
+	db %00000000
+	db %00000000
+	db %00000000
+	db %00000000
+	db %00000000
+	db %00000000
 
 	db 0 ; padding
 
@@ -26953,12 +26953,12 @@ GyaradosBaseStats: ; 0x391fa
 	
 	; learnset
 	db %10100000
-	db %1111111
+	db %01111111
 	db %11001000
 	db %11000001
 	db %10100011
-	db %1000
-	db %110010
+	db %00001000
+	db %00110010
 
 	db 0 ; padding
 
@@ -26990,12 +26990,12 @@ LaprasBaseStats: ; 0x39216
 	
 	; learnset
 	db %11100000
-	db %1111111
+	db %01111111
 	db %11101000
 	db %11010001
 	db %10000011
-	db %101000
-	db %110010
+	db %00101000
+	db %00110010
 
 	db 0 ; padding
 
@@ -27026,13 +27026,13 @@ DittoBaseStats: ; 0x39232
 	db 0 ; growth rate
 	
 	; learnset
-	db %0
-	db %0
-	db %0
-	db %0
-	db %0
-	db %0
-	db %0
+	db %00000000
+	db %00000000
+	db %00000000
+	db %00000000
+	db %00000000
+	db %00000000
+	db %00000000
 
 	db 0 ; padding
 
@@ -27064,12 +27064,12 @@ EeveeBaseStats: ; 0x3924e
 	
 	; learnset
 	db %10100000
-	db %11
-	db %1000
+	db %00000011
+	db %00001000
 	db %11000000
 	db %11000011
-	db %1000
-	db %10
+	db %00001000
+	db %00000010
 
 	db 0 ; padding
 
@@ -27101,12 +27101,12 @@ VaporeonBaseStats: ; 0x3926a
 	
 	; learnset
 	db %10100000
-	db %1111111
-	db %1000
+	db %01111111
+	db %00001000
 	db %11000000
 	db %11000011
-	db %1000
-	db %10010
+	db %00001000
+	db %00010010
 
 	db 0 ; padding
 
@@ -27138,12 +27138,12 @@ JolteonBaseStats: ; 0x39286
 	
 	; learnset
 	db %10100000
-	db %1000011
+	db %01000011
 	db %10001000
 	db %11000001
 	db %11000011
-	db %11000
-	db %1000010
+	db %00011000
+	db %01000010
 
 	db 0 ; padding
 
@@ -27175,12 +27175,12 @@ FlareonBaseStats: ; 0x392a2
 	
 	; learnset
 	db %10100000
-	db %1000011
-	db %1000
+	db %01000011
+	db %00001000
 	db %11000000
 	db %11100011
-	db %1000
-	db %10
+	db %00001000
+	db %00000010
 
 	db 0 ; padding
 
@@ -27211,13 +27211,13 @@ PorygonBaseStats: ; 0x392be
 	db 0 ; growth rate
 	
 	; learnset
-	db %100000
-	db %1110011
+	db %00100000
+	db %01110011
 	db %10001000
 	db %11110001
 	db %11000011
-	db %111000
-	db %1000011
+	db %00111000
+	db %01000011
 
 	db 0 ; padding
 
@@ -27249,12 +27249,12 @@ OmanyteBaseStats: ; 0x392da
 	
 	; learnset
 	db %10100000
-	db %111111
-	db %1000
+	db %00111111
+	db %00001000
 	db %11000000
-	db %11
-	db %1000
-	db %10010
+	db %00000011
+	db %00001000
+	db %00010010
 
 	db 0 ; padding
 
@@ -27286,12 +27286,12 @@ OmastarBaseStats: ; 0x392f6
 	
 	; learnset
 	db %11100000
-	db %1111111
-	db %1101
+	db %01111111
+	db %00001101
 	db %11000000
 	db %10000011
-	db %1000
-	db %10010
+	db %00001000
+	db %00010010
 
 	db 0 ; padding
 
@@ -27323,12 +27323,12 @@ KabutoBaseStats: ; 0x39312
 	
 	; learnset
 	db %10100000
-	db %111111
-	db %1000
+	db %00111111
+	db %00001000
 	db %11000000
-	db %11
-	db %1000
-	db %10010
+	db %00000011
+	db %00001000
+	db %00010010
 
 	db 0 ; padding
 
@@ -27360,12 +27360,12 @@ KabutopsBaseStats: ; 0x3932e
 	
 	; learnset
 	db %10110110
-	db %1111111
-	db %1101
+	db %01111111
+	db %00001101
 	db %11000000
 	db %10000011
-	db %1000
-	db %10010
+	db %00001000
+	db %00010010
 
 	db 0 ; padding
 
@@ -27396,13 +27396,13 @@ AerodactylBaseStats: ; 0x3934a
 	db 5 ; growth rate
 	
 	; learnset
-	db %101010
-	db %1000011
-	db %1001000
+	db %00101010
+	db %01000011
+	db %01001000
 	db %11000000
-	db %1100011
-	db %1100
-	db %1010
+	db %01100011
+	db %00001100
+	db %00001010
 
 	db 0 ; padding
 
@@ -27439,7 +27439,7 @@ SnorlaxBaseStats: ; 0x39366
 	db %11010111
 	db %10101111
 	db %10101000
-	db %110010
+	db %00110010
 
 	db 0 ; padding
 
@@ -27470,13 +27470,13 @@ ArticunoBaseStats: ; 0x39382
 	db 5 ; growth rate
 	
 	; learnset
-	db %101010
-	db %1111111
-	db %1000
+	db %00101010
+	db %01111111
+	db %00001000
 	db %11000000
-	db %1000011
-	db %1100
-	db %1010
+	db %01000011
+	db %00001100
+	db %00001010
 
 	db 0 ; padding
 
@@ -27507,13 +27507,13 @@ ZapdosBaseStats: ; 0x3939e
 	db 5 ; growth rate
 	
 	; learnset
-	db %101010
-	db %1000011
+	db %00101010
+	db %01000011
 	db %10001000
 	db %11000001
-	db %1000011
-	db %11100
-	db %1001010
+	db %01000011
+	db %00011100
+	db %01001010
 
 	db 0 ; padding
 
@@ -27544,13 +27544,13 @@ MoltresBaseStats: ; 0x393ba
 	db 5 ; growth rate
 	
 	; learnset
-	db %101010
-	db %1000011
-	db %1000
+	db %00101010
+	db %01000011
+	db %00001000
 	db %11000000
-	db %1100011
-	db %1100
-	db %1010
+	db %01100011
+	db %00001100
+	db %00001010
 
 	db 0 ; padding
 
@@ -27582,12 +27582,12 @@ DratiniBaseStats: ; 0x393d6
 	
 	; learnset
 	db %10100000
-	db %111111
+	db %00111111
 	db %11001000
 	db %11000001
 	db %11100011
-	db %11000
-	db %10010
+	db %00011000
+	db %00010010
 
 	db 0 ; padding
 
@@ -27619,12 +27619,12 @@ DragonairBaseStats: ; 0x393f2
 	
 	; learnset
 	db %11100000
-	db %111111
+	db %00111111
 	db %11001000
 	db %11000001
 	db %11100011
-	db %11000
-	db %10010
+	db %00011000
+	db %00010010
 
 	db 0 ; padding
 
@@ -27656,12 +27656,12 @@ DragoniteBaseStats: ; 0x3940e
 	
 	; learnset
 	db %11100010
-	db %1111111
+	db %01111111
 	db %11001000
 	db %11000001
 	db %11100011
-	db %11000
-	db %110010
+	db %00011000
+	db %00110010
 
 	db 0 ; padding
 
@@ -27697,12 +27697,12 @@ MewtwoBaseStats: ; 0x3942a
 	db %10101111
 	db %11110001
 	db %10101111
-	db %111000
-	db %1100011
+	db %00111000
+	db %01100011
 
 	db 0 ; padding
 
-INCBIN "baserom.gbc",$39446,$43e
+INCBIN "baserom.gbc",$39446,$39884 - $39446
 
 ReadMove: ; 5884
 	push hl

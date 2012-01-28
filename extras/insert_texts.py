@@ -769,13 +769,13 @@ def base_data_pretty_printer(id):
     output += spacing + "\n" + spacing + "; learnset\n"
     
     #learnset crap
-    output += spacing + "db %" + bin(ord(rom[base_address + 20]))[2:] + "\n"
-    output += spacing + "db %" + bin(ord(rom[base_address + 21]))[2:] + "\n"
-    output += spacing + "db %" + bin(ord(rom[base_address + 22]))[2:] + "\n"
-    output += spacing + "db %" + bin(ord(rom[base_address + 23]))[2:] + "\n"
-    output += spacing + "db %" + bin(ord(rom[base_address + 24]))[2:] + "\n"
-    output += spacing + "db %" + bin(ord(rom[base_address + 25]))[2:] + "\n"
-    output += spacing + "db %" + bin(ord(rom[base_address + 26]))[2:] + "\n\n"
+    output += spacing + "db %" + bin(ord(rom[base_address + 20]))[2:].zfill(8) + "\n"
+    output += spacing + "db %" + bin(ord(rom[base_address + 21]))[2:].zfill(8) + "\n"
+    output += spacing + "db %" + bin(ord(rom[base_address + 22]))[2:].zfill(8) + "\n"
+    output += spacing + "db %" + bin(ord(rom[base_address + 23]))[2:].zfill(8) + "\n"
+    output += spacing + "db %" + bin(ord(rom[base_address + 24]))[2:].zfill(8) + "\n"
+    output += spacing + "db %" + bin(ord(rom[base_address + 25]))[2:].zfill(8) + "\n"
+    output += spacing + "db %" + bin(ord(rom[base_address + 26]))[2:].zfill(8) + "\n\n"
 
     output += spacing + "db 0 ; padding\n"
 
