@@ -41,6 +41,9 @@ public:
 	unsigned int GetStopAddress();
 	void SetStopAddress(unsigned int value);
 
+	bool GetForce();
+	void SetForce(bool value);
+
 	std::string GetParsedAsm();
 
 	// File Operations
@@ -81,6 +84,7 @@ private:
 	unsigned int fileLength;
 	unsigned int filePos;
 	bool stop;
+	bool force;
 
 	// Optional Settings
 	unsigned int stopAddress;

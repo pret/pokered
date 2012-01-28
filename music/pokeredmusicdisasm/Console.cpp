@@ -33,7 +33,7 @@ void Console::ErrorLn(const char* value)
 }
 
 // Higher
-void Console::Ask(const char* question, char* answer)
+/*void Console::Ask(const char* question, char* answer)
 {
     Print(question);
     Get(answer);
@@ -42,13 +42,4 @@ void Console::Ask(const char* question, string& answer)
 {
     Print(question);
     Get(answer);
-}
-
-// Better Error Handling
-int Console::atoi_ex(const char* input, bool supress)
-{
-	int convInp = atoi(input);
-	if((supress == false) && (convInp == 0))
-			PrintLn("Warning: the converted integer input is 0, this may not be what you intended");
-		return convInp;
-}
+}*/
