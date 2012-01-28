@@ -6129,8 +6129,14 @@ MewBaseStats: ; 0x425b
 	db 3 ; growth rate
 	
 	; include learnset directly
-	INCBIN "baserom.gbc",$426f,$4276 - $426f
-	db $ff ; probably "learn anything" not padding
+	db %11111111
+	db %11111111
+	db %11111111
+	db %11111111
+	db %11111111
+	db %11111111
+	db %11111111
+	db %11111111 ; usually spacing
 
 INCBIN "baserom.gbc",$4277,$30
 
