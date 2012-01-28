@@ -16827,7 +16827,7 @@ SilphCo6Object: ; 0x1a2fb (size=112)
 SilphCo6Blocks: ; 0x1a36b 117
 	INCBIN "maps/silphco6.blk"
 
-INCBIN "baserom.gbc",$1a3e0,$1c20
+INCBIN "baserom.gbc",$1a3e0,6376
 
 SECTION "bank7",DATA,BANK[$7]
 
