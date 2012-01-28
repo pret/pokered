@@ -2,7 +2,135 @@
 ; The start and stop of these byte ranges were based off the theory they're lined
 ; consecutively (Right up against each other).
 
-INCBIN "baserom.gbc",$82FD,$9ba3 - $82FD
+;INCBIN "baserom.gbc",$82FD,$9ba3 - $82FD
+; 82FD
+UnknSong_md_82FD:
+                mus_note noteD, note16
+                mus_note noteRst, note8
+
+                mus_note noteD#, note4
+
+        mus_end
+; 8300
+
+; 8301
+UnknSong_md_8301:
+                mus_note noteD, note16
+                mus_note noteB, note8
+                mus_note noteD#, note4
+
+        mus_end
+; 8304
+
+; 8305
+UnknSong_md_8305:
+                mus_note noteD, note16
+                mus_note noteA#, note8
+                mus_note noteD#, note4
+
+        mus_end
+; 8308
+
+; 8309
+UnknSong_md_8309:
+                mus_note noteD, note16
+                mus_note noteG#, note8
+                mus_note noteD#, note4
+
+        mus_end
+; 830C
+
+; 830D
+UnknSong_md_831F:
+                mus_note noteD, note2
+                mus_note noteG#, note4_16
+                mus_note noteD#, note2
+                mus_note noteD, note4_8_16
+                mus_note noteG#, note4_16; 8311
+                mus_note noteD#, note4_8_16
+                mus_note noteD, note4_8
+                mus_note noteG#, note4
+                mus_note noteD#, note4_8
+                mus_note noteD, note4_16; 8316
+                mus_note noteG#, note4
+                mus_note noteD#, note4_16
+                mus_note noteD, note4
+                mus_note noteG#, note8_16
+                mus_note noteD#, note4; 831B
+                mus_note noteD, note8_16
+                mus_note noteG#, note8
+                mus_note noteD#, note8_16
+
+        mus_end
+; 831F
+
+; 8320
+UnknSong_md_8320:
+                mus_note noteD, note16
+                mus_note noteF, note8
+                mus_note noteD, note2_8_16
+
+        mus_end
+; 8323
+
+; 8324
+UnknSong_md_8324:
+                mus_note noteD, note8
+                mus_note noteE, note8
+                mus_note noteD, note2_4
+                mus_note noteD, note16
+                mus_note noteF#, note8; 8328
+                mus_note noteD, note2_8_16
+
+        mus_end
+; 832A
+
+; 832B
+UnknSong_md_832B:
+                mus_note noteD, note16
+                mus_note noteG#, note8
+                mus_note noteC#, note16
+
+        mus_end
+; 832E
+
+; 832F
+UnknSong_md_832F:
+                mus_note noteD, note16
+                mus_note noteG#, note8_16
+                mus_note noteD, note4
+
+        mus_end
+; 8332
+
+; 8333
+UnknSong_md_8333:
+                mus_note noteD, note16
+                mus_note noteG#, note8_16
+                mus_note noteD, note4_8
+
+        mus_end
+; 8336
+
+; 8337
+UnknSong_md_8337:
+                mus_note noteD, note16
+                mus_note noteG#, note8_16
+                mus_note noteD, note4_8_16
+
+        mus_end
+; 833A
+
+; 833B
+UnknSong_md_833B:
+                mus_note noteD, note16
+                mus_note noteA#, note8
+                mus_note noteC#, note16
+
+        mus_end
+; 833E
+
+INCBIN "baserom.gbc",$833F,$9ba3 - $833F
 
 ;Pokemon Healed Music
 PkmnHealed_md_1: ;9BA3 - 9BC3
