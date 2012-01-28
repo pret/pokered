@@ -20972,8 +20972,6 @@ UnnamedText_1ecbd: ; 0x1ecbd
 	db $50
 ; 0x1ecbd + 5 bytes
 
-INCBIN "baserom.gbc",$1ecc2,$133e
-
 SECTION "bank8",DATA,BANK[$8]
 
 INCBIN "baserom.gbc",$20000,$217e9 - $20000
