@@ -48746,7 +48746,7 @@ SilphCo8Object: ; 0x56613 (size=90)
 SilphCo8Blocks: ; 0x5666d 117
 	INCBIN "maps/silphco8.blk"
 
-INCBIN "baserom.gbc",$566e2,$191e
+INCBIN "baserom.gbc",$566e2,873
 
 SECTION "bank16",DATA,BANK[$16]
 
