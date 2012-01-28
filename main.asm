@@ -38008,7 +38008,7 @@ SeafoamIslands5Object: ; 0x468bc (size=62)
 SeafoamIslands5Blocks: ; 0x468fa 135
 	INCBIN "maps/seafoamislands5.blk"
 
-INCBIN "baserom.gbc",$46981,$167f
+INCBIN "baserom.gbc",$46981,2262
 
 SECTION "bank12",DATA,BANK[$12]
 
