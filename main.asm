@@ -52239,7 +52239,7 @@ HallofFameRoomObject: ; 0x5a571 (size=26)
 HallofFameRoomBlocks: ; 0x5a58b 20
 	INCBIN "maps/halloffameroom.blk"
 
-INCBIN "baserom.gbc",$5a59f,$1a61
+INCBIN "baserom.gbc",$5a59f,27
 
 SECTION "bank17",DATA,BANK[$17]
 
