@@ -4749,15 +4749,15 @@ DisplayTextID: ; 2920
 	ld a,[$ff8c] ; text ID
 	ld [$cf13],a
 	and a
-	jp z,$2acd
+	jp z,DisplayStartMenu
 	cp a,$d3 ; safari game over
-	jp z,$2a90
+	jp z,DisplaySafariGameOverText
 	cp a,$d0 ; fainted
-	jp z,$2a9b
+	jp z,DisplayPokemonFaintedText
 	cp a,$d1 ; blacked out
-	jp z,$2aa9
+	jp z,DisplayPlayerBlackedOutText
 	cp a,$d2 ; repel wore off
-	jp z,$2abf
+	jp z,DisplayRepelWoreOffText
 	ld a,[$d4e1] ; number of sprites
 	ld e,a
 	ld a,[$ff8c] ; sprite ID
@@ -4794,13 +4794,13 @@ DisplayTextID: ; 2920
 	add hl,de
 	ld a,[hli]
 	ld h,[hl]
-	ld l,a
-	ld a,[hl] ; hl = address of the text
-; check for special cases
+	ld l,a ; hl = address of the text
+	ld a,[hl] ; a = first byte of text
+; check first byte of text for special cases
 	cp a,$fe   ; Pokemart NPC
-	jp z,$2a2e
+	jp z,DisplayPokemartDialogue
 	cp a,$ff   ; Pokemon Center NPC
-	jp z,$2a72
+	jp z,DisplayPokemonCenterDialogue
 	cp a,$fc   ; Item Storage PC
 	jp z,$3460
 	cp a,$fd   ; Bill's PC
@@ -4812,7 +4812,7 @@ DisplayTextID: ; 2920
 	ld b,$1d
 	ld hl,Unknown_74ee0
 	call Bankswitch
-	jr .skipTextDisplay\@
+	jr AfterDisplayingTextID
 .notVendingMachine\@
 	cp a,$f7   ; slot machine
 	jp z,$3474
@@ -4821,23 +4821,27 @@ DisplayTextID: ; 2920
 	ld hl,$71c5
 	ld b,$01
 	call Bankswitch
-	jr .skipTextDisplay\@
+	jr AfterDisplayingTextID
 .notSpecialCase\@
 	call $3c59 ; display the text
 	ld a,[$cc3c]
 	and a
-	jr nz,.holdBoxOpen\@
-.skipTextDisplay\@
+	jr nz,HoldTextDisplayOpen
+
+AfterDisplayingTextID: ; 29D6
 	ld a,[$cc47]
 	and a
-	jr nz,.holdBoxOpen\@
+	jr nz,HoldTextDisplayOpen
 	call $3865 ; wait for a button press after displaying all the text
+
 ; loop to hold the dialogue box open as long as the player keeps holding down the A button
-.holdBoxOpen\@
+HoldTextDisplayOpen: ; 29DF
 	call GetJoypadState
 	ld a,[$ffb4]
 	bit 0,a ; is the A button being pressed?
-	jr nz,.holdBoxOpen\@
+	jr nz,HoldTextDisplayOpen
+
+CloseTextDisplay: ; 29E8
 	ld a,[W_CURMAP]
 	call SwitchToMapRomBank
 	ld a,$90
@@ -4845,7 +4849,7 @@ DisplayTextID: ; 2920
 	call DelayFrame
 	call LoadGBPal
 	xor a
-	ld [$ffba],a ; disable continuous WRAM to VRAM transfer each V-blank
+	ld [H_AUTOBGTRANSFERENABLED],a ; disable continuous WRAM to VRAM transfer each V-blank
 ; loop to make sprites face the directions they originally faced before the dialogue
 	ld hl,$c219
 	ld c,$0f
@@ -4873,35 +4877,190 @@ DisplayTextID: ; 2920
 	ld [$2000],a
 	jp $2429 ; move sprites
 
-INCBIN "baserom.gbc",$2a2e,$2a55 - $2a2e
+DisplayPokemartDialogue: ; 2A2E
+	push hl
+	ld hl,PokemartGreetingText
+	call PrintText
+	pop hl
+	inc hl
+	call LoadPokemartInventory
+	ld a,$02
+	ld [$cf94],a ; selects between subtypes of menus
+	ld a,[$ffb8]
+	push af
+	ld a,$01
+	ld [$ffb8],a
+	ld [$2000],a
+	call $6c20
+	pop af
+	ld [$ffb8],a
+	ld [$2000],a
+	jp AfterDisplayingTextID
 
-UnnamedText_2a55: ; 0x2a55
-	TX_FAR _UnnamedText_2a55
+PokemartGreetingText: ; 0x2a55
+	TX_FAR _PokemartGreetingText
 	db $50
-; 0x2a55 + 5 bytes
 
-INCBIN "baserom.gbc",$2a5a,$2aa4 - $2a5a
+LoadPokemartInventory: ; 2A5A
+	ld a,$01
+	ld [$cfcb],a
+	ld a,h
+	ld [$d128],a
+	ld a,l
+	ld [$d129],a
+	ld de,$cf7b
+.loop\@
+	ld a,[hli]
+	ld [de],a
+	inc de
+	cp a,$ff
+	jr nz,.loop\@
+	ret
 
-UnnamedText_2aa4: ; 0x2aa4
-	TX_FAR _UnnamedText_2aa4
+DisplayPokemonCenterDialogue: ; 2A72
+	xor a
+	ld [$ff8b],a
+	ld [$ff8c],a
+	ld [$ff8d],a
+	inc hl
+	ld a,[$ffb8]
+	push af
+	ld a,$01
+	ld [$ffb8],a
+	ld [$2000],a
+	call $6fe6
+	pop af
+	ld [$ffb8],a
+	ld [$2000],a
+	jp AfterDisplayingTextID
+
+DisplaySafariGameOverText: ; 2A90
+	ld hl,$69ed
+	ld b,$07
+	call Bankswitch
+	jp AfterDisplayingTextID
+
+DisplayPokemonFaintedText: ; 2A9B
+	ld hl,PokemonFaintedText
+	call PrintText
+	jp AfterDisplayingTextID
+
+PokemonFaintedText: ; 0x2aa4
+	TX_FAR _PokemonFaintedText
 	db $50
-; 0x2aa4 + 5 bytes
 
-INCBIN "baserom.gbc",$2aa9,$2aba - $2aa9
+DisplayPlayerBlackedOutText: ; 2AA9
+	ld hl,PlayerBlackedOutText
+	call PrintText
+	ld a,[$d732]
+	res 5,a
+	ld [$d732],a
+	jp HoldTextDisplayOpen
 
-UnnamedText_2aba: ; 0x2aba
-	TX_FAR _UnnamedText_2aba
+PlayerBlackedOutText: ; 0x2aba
+	TX_FAR _PlayerBlackedOutText
 	db $50
-; 0x2aba + 5 bytes
 
-INCBIN "baserom.gbc",$2abf,$2ac8 - $2abf
+DisplayRepelWoreOffText: ; 2ABF
+	ld hl,RepelWoreOffText
+	call PrintText
+	jp AfterDisplayingTextID
 
-UnnamedText_2ac8: ; 0x2ac8
-	TX_FAR _UnnamedText_2ac8
+RepelWoreOffText: ; 0x2ac8
+	TX_FAR _RepelWoreOffText
 	db $50
-; 0x2ac8 + 5 bytes
 
-INCBIN "baserom.gbc",$2acd,$4d1
+DisplayStartMenu: ; 2ACD
+	ld a,$04
+	ld [$ffb8],a
+	ld [$2000],a ; ROM bank 4
+	ld a,[$d700] ; walking/biking/surfing
+	ld [$d11a],a
+	ld a,$8f ; Start menu sound
+	call $23b1
+	ld b,BANK(DrawStartMenu)
+	ld hl,DrawStartMenu
+	call Bankswitch
+	ld b,$03
+	ld hl,$452f
+	call Bankswitch ; print Safari Zone info, if in Safari Zone
+	call $2429 ; move sprites
+.loop\@
+	call HandleMenuInput
+	ld b,a
+.checkIfUpPressed\@
+	bit 6,a ; was Up pressed?
+	jr z,.checkIfDownPressed\@
+	ld a,[W_CURMENUITEMID] ; menu selection
+	and a
+	jr nz,.loop\@
+	ld a,[W_OLDMENUITEMID]
+	and a
+	jr nz,.loop\@
+; if the player pressed tried to go past the top item, wrap around to the bottom
+	ld a,[$d74b]
+	bit 5,a ; does the player have the pokedex?
+	ld a,6 ; there are 7 menu items with the pokedex, so the max index is 6
+	jr nz,.wrapMenuItemId\@
+	dec a ; there are only 6 menu items without the pokedex
+.wrapMenuItemId\@
+	ld [W_CURMENUITEMID],a
+	call EraseMenuCursor
+	jr .loop\@
+.checkIfDownPressed\@
+	bit 7,a
+	jr z,.buttonPressed\@
+; if the player pressed tried to go past the bottom item, wrap around to the top
+	ld a,[$d74b]
+	bit 5,a ; does the player have the pokedex?
+	ld a,[W_CURMENUITEMID]
+	ld c,7 ; there are 7 menu items with the pokedex
+	jr nz,.checkIfPastBottom\@
+	dec c ; there are only 6 menu items without the pokedex
+.checkIfPastBottom\@
+	cp c
+	jr nz,.loop\@
+; the player went past the bottom, so wrap to the top
+	xor a
+	ld [W_CURMENUITEMID],a
+	call EraseMenuCursor
+	jr .loop\@
+.buttonPressed\@ ; A, B, or Start button pressed
+	call PlaceUnfilledArrowMenuCursor
+	ld a,[W_CURMENUITEMID]
+	ld [$cc2d],a ; save current menu item ID
+	ld a,b
+	and a,%00001010 ; was the Start button or B button pressed?
+	jp nz,.closeMenu\@
+	call $36f4 ; copy background from $C3A0 to $CD81
+	ld a,[$d74b]
+	bit 5,a ; does the player have the pokedex?
+	ld a,[W_CURMENUITEMID]
+	jr nz,.displayMenuItem\@
+	inc a ; adjust position to account for missing pokedex menu item
+.displayMenuItem\@
+	cp a,0
+	jp z,$7095 ; POKEDEX
+	cp a,1
+	jp z,$70a9 ; POKEMON
+	cp a,2
+	jp z,$7302 ; ITEM
+	cp a,3
+	jp z,$7460 ; Trainer Info
+	cp a,4
+	jp z,$75e3 ; SAVE / RESET
+	cp a,5
+	jp z,$75f6 ; OPTION
+; EXIT falls through to here
+.closeMenu\@
+	call GetJoypadState
+	ld a,[$ffb3]
+	bit 0,a ; was A button newly pressed?
+	jr nz,.closeMenu\@
+	call $36a0 ; transfer tile pattern data for text windows into VRAM
+	jp CloseTextDisplay
+
+INCBIN "baserom.gbc",$2b7f,$2f9e - $2b7f
 
 GetMonName: ; 2F9E
 	push hl
@@ -5316,13 +5475,13 @@ INCBIN "baserom.gbc",$37df,$3831 - $37df
 ;    ([$ffb7] == 0, [$ffb6] == any)
 ;    Just copies [$ffb3] to [$ffb5].
 ; 2. Get currently pressed buttons at low sample rate with delay
-;    ([$ffb7] == 0, [$ffb6] != 0)
+;    ([$ffb7] == 1, [$ffb6] != 0)
 ;    If the user holds down buttons for more than half a second,
 ;    report buttons as being pressed up to 12 times per second thereafter.
 ;    If the user holds down buttons for less than half a second,
 ;    report only one button press.
 ; 3. Same as 2, but report no buttons as pressed if A or B is held down.
-;    ([$ffb7] == 0, [$ffb6] == 0)
+;    ([$ffb7] == 1, [$ffb6] == 0)
 GetJoypadStateLowSensitivity: ; 3831
 	call GetJoypadState
 	ld a,[$ffb7] ; flag
@@ -5748,9 +5907,10 @@ PlaceMenuCursor: ; 3B7C
 	ld [W_OLDMENUITEMID],a
 	ret
 
-; Used when swapping positions of items in a list menu.
-; The item that the user selects first is marked with an outline of a right arrow
-; to distinguish it from the arrow being used to select the second item.
+; This is used to mark a menu cursor other than the one currently being
+; manipulated. In the case of submenus, this is used to show the location of
+; the menu cursor in the parent menu. In the case of swapping items in list,
+; this is used to mark the item that was first chosen to be swapped.
 PlaceUnfilledArrowMenuCursor: ; 3BEC
 	ld b,a
 	ld a,[W_MENUCURSORLOCATION]
@@ -7178,7 +7338,7 @@ DisplayTextIDInit: ; 7096
 	ld [$ffb0],a ; put the window on the screen
 	call $3680 ; transfer tile pattern data for text into VRAM
 	ld a,$01
-	ld [$ffba],a ; enable continuous WRAM to VRAM transfer each V-blank
+	ld [H_AUTOBGTRANSFERENABLED],a ; enable continuous WRAM to VRAM transfer each V-blank
 	ret
 
 ; function that displays the start menu
@@ -59634,7 +59794,7 @@ INCBIN "baserom.gbc",$7405c,$6f
 
 Func40CB: ; 40CB
 	xor a
-	ld [$FFBA],a
+	ld [H_AUTOBGTRANSFERENABLED],a
 	call $3719
 	call $4183
 
@@ -59654,7 +59814,7 @@ Func40CB: ; 40CB
 	ld hl,$980C
 	call $4164
 	xor a
-	ld [$FFBA],a
+	ld [H_AUTOBGTRANSFERENABLED],a
 	call $3725
 	ld hl,$9800
 	call $4164
@@ -77248,24 +77408,24 @@ _TM29NoRoomText: ; 0xa257c
 	db "to put this?", $57
 ; 0xa257c + 32 bytes
 
-_UnnamedText_2a55: ; 0xa259c
+_PokemartGreetingText: ; 0xa259c
 	db $0, "Hi there!", $4e, "May I help you?", $57
 ; 0xa259c + 27 bytes
 
-_UnnamedText_2aa4: ; 0xa25b7
+_PokemonFaintedText: ; 0xa25b7
 	TX_RAM $cd6d
 	db $0, $4f
 	db "fainted!", $57
 ; 0xa25b7 + 14 bytes
 
-_UnnamedText_2aba: ; 0xa25c5
+_PlayerBlackedOutText: ; 0xa25c5
 	db $0, $52, " is out of", $4f
 	db "useable #MON!", $51
 	db $52, " blacked", $4f
 	db "out!", $58
 ; 0xa25c5 + 42 bytes
 
-_UnnamedText_2ac8: ; 0xa25ef
+_RepelWoreOffText: ; 0xa25ef
 	db $0, "REPEL's effect", $4f
 	db "wore off.", $57
 ; 0xa25ef + 25 bytes
