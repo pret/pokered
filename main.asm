@@ -58688,7 +58688,7 @@ UnnamedText_62511: ; 0x62511
 	db $50
 ; 0x62511 + 5 bytes
 
-INCBIN "baserom.gbc",$62516,$1aea
+INCBIN "baserom.gbc",$62516,20
 
 SECTION "bank19",DATA,BANK[$19]
 
