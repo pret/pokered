@@ -13912,7 +13912,7 @@ UnnamedText_17f32: ; 0x17f32
 	db $50
 ; 0x17f32 + 5 bytes
 
-INCBIN "baserom.gbc",$17f37,$c9
+INCBIN "baserom.gbc",$17f37,40
 
 SECTION "bank6",DATA,BANK[$6]
 
