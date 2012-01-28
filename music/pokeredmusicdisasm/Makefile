@@ -1,7 +1,7 @@
 
 OBJECTS = main.o Jump.o Modulation.o Note.o Octave.o Parser.o Stop.o \
 Tempo.o UnkCode.o UnkEB.o Velocity.o Volume.o Console.o AbstractData.o Call.o \
-Duty.o
+Duty.o args.o
 
 CC = g++
 CFLAGS = -std=c++0x
@@ -27,8 +27,8 @@ AbstractData.o: AbstractData.h
 Call.o: Call.h Call.cpp AbstractData.h
 	$(CC) $(CFLAGS) -c Call.cpp AbstractData.cpp
 
-main.o: main.cpp Console.h Parser.h
-	$(CC) $(CFLAGS) -c main.cpp Console.cpp Parser.cpp
+main.o: main.cpp Console.h Parser.h args.h
+	$(CC) $(CFLAGS) -c main.cpp Console.cpp Parser.cpp args.cpp
 
 Jump.o: Jump.h AbstractData.h
 	$(CC) $(CFLAGS) -c Jump.cpp AbstractData.cpp
@@ -60,6 +60,9 @@ Velocity.o: Velocity.h AbstractData.h
 Volume.o: Volume.h AbstractData.h
 	$(CC) $(CFLAGS) -c Volume.cpp AbstractData.cpp
 
+args.o: args.h
+	$(CC) $(CFLAGS) -c args.cpp
+	
 clean:
 	rm *.o
 	rm ../../extras/pokeredmusicdisasm.exe

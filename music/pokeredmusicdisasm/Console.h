@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+#include <sstream>
 
 // Just a Console Utility Library
 class Console
@@ -19,11 +20,22 @@ public:
     static void ErrorLn(const char* value);
 
     // Higher
-    static void Ask(const char* question, char* answer);
-    static void Ask(const char* question, std::string& answer);
+    //static void Ask(const char* question, char* answer);
+    //static void Ask(const char* question, std::string& answer);
 
-    // Better Error Handling
-    static int atoi_ex(const char* input, bool supress = false);
+	template<class T>
+	static void Ask(const char* question, T& answer, std::ios_base::fmtflags flags = std::ios_base::dec)
+	{
+		std::stringstream _tmpstr;
+		std::string _tmp;
+
+		Print(question);
+		Get(_tmp);
+
+		_tmpstr << _tmp;
+		_tmpstr.flags(flags);
+		_tmpstr >> answer;
+	}
 };
 
 #endif // CONSOLE_H

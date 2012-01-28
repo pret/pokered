@@ -1,69 +1,73 @@
 ﻿#include "Console.h"
 #include "Parser.h"
+#include "args.h"
 #include <sstream>
 #include <string>
 
 using namespace std;
 
+/* 
+	Usage:
+		pokeredmusicdisasm [<offset> [<file> | --]]
+		pokeredmusicdisasm [--offset=<offset> | -o <offset>] [--file=[<file> | --] | -f [<file> | --]] [--stop=<offset> | -s <offset>]
+*/
 int main(int argc, char** argv)
 {
+	Args a(argc, argv);
+
 	const unsigned char parameters = 2;
-	const unsigned char self = 1;
-	const unsigned char _max_argc = parameters + self;
 	const string defFileLoc = "../baserom.gbc";
 
-	string arg1;	// Offset
-	string arg2;	// File or "--" (if "--" then the file is assumed)
+	string filePath = "";
+	unsigned int offset = 0;
+	unsigned int stop = 0;
 
-	string paramStopAddr;
+	// Get the file path, this can be set with -f filename, --file=filename, arg #2, or missing (missing means default)
+	// the filepath can contain the actual filename or -- to use the built-in path, if the path is not missing then it must be set (can't be blank)
+	
+	// Does a -f or --file key exist
+	if(a.SearchKeys("f") != -1) filePath = a.GetValue(a.SearchKeys("f"), true);
+	else if(a.SearchKeys("file") != -1) filePath = a.GetValue(a.SearchKeys("file"));
 
-	if(argc >= _max_argc)
+	// BUG FIX: a short parameter can be either 1 or 2 parts so this causes the if statement below to load incorrect info if
+	// -f or --file isn't specified and the first argument is a short parameter "-x x"
+	else if((a.GetArgs() == (2 + 1)) && (a.IsShortOption(1, true))) filePath = defFileLoc;
+
+	// Does arg #2 exist
+	else if(a.GetArgs() >= 2 + 1) a.GetValueC<string>(2, filePath);
+
+	// Is there at least 1 arg (In that case it's missing and the default can be assumed)
+	else if(a.GetArgs() >= 1 + 1) filePath = defFileLoc;
+
+	// Ask the user
+	else Console::Ask("Filepath: ", filePath);
+
+	if(filePath == "--") filePath = defFileLoc;
+	else if(filePath == "")
 	{
-		arg1 = argv[1];
-		arg2 = argv[2];
-	}
-	else if(argc == (_max_argc - 1))
-	{
-		arg1 = argv[1];
-		arg2 = defFileLoc;
-	}
-
-	// Process any parameters
-	if(argc > _max_argc)
-	{
-		for(int i = _max_argc; i < argc; i++)
-		{
-			string tmpArgv = argv[i];
-			if(tmpArgv.substr(0, 7) == "--stop=") paramStopAddr = tmpArgv.substr(7);
-		}
-	}
-
-	if(arg1 == "") Console::Ask("What offset in the file in hex (0x----): ", arg1);
-	if(arg2 == "") Console::Ask("What file: ", arg2);
-	if(arg2 == "--") arg2 = defFileLoc;	// You can also put "--" for the default file location
-
-	// Weird way of converting arg1 to an unsigned integer
-	Parser p(arg2);
-
-	stringstream arg1Conv;
-	unsigned int arg1ConvNum;
-	arg1Conv << arg1;
-	arg1Conv << hex;
-	arg1Conv >> arg1ConvNum;
-
-	if(paramStopAddr != "")
-	{
-		stringstream paramStopAddrConv;
-		unsigned int paramStopAddrNum = 0;
-		paramStopAddrConv.str("");
-		paramStopAddrConv << paramStopAddr;
-		paramStopAddrConv << hex;
-		paramStopAddrConv >> paramStopAddrNum;
-		p.SetStopAddress(paramStopAddrNum);
+		Console::PrintLn("Filename can't be blank");
+		return 1;
 	}
 
-	p.Parse(arg1ConvNum);
+	// Get the offset, this can be set with -o <offset>, --offset=<offset>, or as arg #1
+	if(a.SearchKeys("o") != -1) a.GetValueC<unsigned int>(a.SearchKeys("o"), offset, ios_base::hex | ios_base::uppercase, true);
+	else if(a.SearchKeys("offset") != -1) a.GetValueC(a.SearchKeys("offset"), offset, ios_base::hex | ios_base::uppercase);
+
+	// Does arg #1 exist
+	else if(a.GetArgs() >= 1 + 1) a.GetValueC<unsigned int>(1, offset, ios_base::hex | ios_base::uppercase);
+
+	// Ask the user
+	else Console::Ask<unsigned int>("Offset: ", offset, ios_base::hex | ios_base::uppercase);
+
+	// Get the stop parameter, this can be set with -s <offset>, --stop=<offset> (it must be set via args)
+	if(a.SearchKeys("s") != -1) a.GetValueC<unsigned int>(a.SearchKeys("s"), offset, ios_base::hex | ios_base::uppercase, true);
+	else if(a.SearchKeys("stop") != -1) filePath = a.GetValue(a.SearchKeys("stop"));
+
+	Parser p(filePath);
+	if(stop != 0) p.SetStopAddress(stop);
+	p.Parse(offset);
+
 	Console::PrintLn(p.GetParsedAsm().c_str());
 
-	return 0;
+	return 0; 
 }
