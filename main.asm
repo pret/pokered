@@ -33438,7 +33438,7 @@ UnnamedText_3fb74: ; 0x3fb74
 	db $50
 ; 0x3fb74 + 5 bytes
 
-INCBIN "baserom.gbc",$3fb79,$487
+INCBIN "baserom.gbc",$3fb79,$3fbc8 - $3fb79
 
 SECTION "bank10",DATA,BANK[$10]
 
