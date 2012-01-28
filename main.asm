@@ -55475,7 +55475,7 @@ UnnamedText_5dedb: ; 0x5dedb
 	db $50
 ; 0x5dedb + 5 bytes
 
-INCBIN "baserom.gbc",$5dee0,$2120
+INCBIN "baserom.gbc",$5dee0,53
 
 SECTION "bank18",DATA,BANK[$18]
 
