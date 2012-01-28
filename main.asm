@@ -21991,7 +21991,7 @@ db SUBSTITUTE  ,$4F,$00,NORMAL,$FF,10
 db STRUGGLE    ,$30,$32,NORMAL,$FF,10
 
 BulbasaurBaseStats: ; 0x383de
-	db 1 ; pokedex id
+	db DEX_BULBASAUR ; pokedex id
 	db 45 ; base hp
 	db 49 ; base attack
 	db 49 ; base defense
@@ -22016,12 +22016,19 @@ BulbasaurBaseStats: ; 0x383de
 
 	db 3 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$383f2,$383f9 - $383f2
+	; learnset
+	db %10100100
+	db %11
+	db %111000
+	db %11000000
+	db %11
+	db %1000
+	db %110
+
 	db 0 ; padding
 
 IvysaurBaseStats: ; 0x383fa
-	db 2 ; pokedex id
+	db DEX_IVYSAUR ; pokedex id
 	db 60 ; base hp
 	db 62 ; base attack
 	db 63 ; base defense
@@ -22046,12 +22053,19 @@ IvysaurBaseStats: ; 0x383fa
 
 	db 3 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$3840e,$38415 - $3840e
+	; learnset
+	db %10100100
+	db %11
+	db %111000
+	db %11000000
+	db %11
+	db %1000
+	db %110
+
 	db 0 ; padding
 
 VenusaurBaseStats: ; 0x38416
-	db 3 ; pokedex id
+	db DEX_VENUSAUR ; pokedex id
 	db 80 ; base hp
 	db 82 ; base attack
 	db 83 ; base defense
@@ -22076,12 +22090,19 @@ VenusaurBaseStats: ; 0x38416
 
 	db 3 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$3842a,$38431 - $3842a
+	; learnset
+	db %10100100
+	db %1000011
+	db %111000
+	db %11000000
+	db %11
+	db %1000
+	db %110
+
 	db 0 ; padding
 
 CharmanderBaseStats: ; 0x38432
-	db 4 ; pokedex id
+	db DEX_CHARMANDER ; pokedex id
 	db 39 ; base hp
 	db 52 ; base attack
 	db 43 ; base defense
@@ -22106,12 +22127,19 @@ CharmanderBaseStats: ; 0x38432
 
 	db 3 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$38446,$3844d - $38446
+	; learnset
+	db %10110101
+	db %11
+	db %1001111
+	db %11001000
+	db %11100011
+	db %1000
+	db %100110
+
 	db 0 ; padding
 
 CharmeleonBaseStats: ; 0x3844e
-	db 5 ; pokedex id
+	db DEX_CHARMELEON ; pokedex id
 	db 58 ; base hp
 	db 64 ; base attack
 	db 58 ; base defense
@@ -22136,12 +22164,19 @@ CharmeleonBaseStats: ; 0x3844e
 
 	db 3 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$38462,$38469 - $38462
+	; learnset
+	db %10110101
+	db %11
+	db %1001111
+	db %11001000
+	db %11100011
+	db %1000
+	db %100110
+
 	db 0 ; padding
 
 CharizardBaseStats: ; 0x3846a
-	db 6 ; pokedex id
+	db DEX_CHARIZARD ; pokedex id
 	db 78 ; base hp
 	db 84 ; base attack
 	db 78 ; base defense
@@ -22166,12 +22201,19 @@ CharizardBaseStats: ; 0x3846a
 
 	db 3 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$3847e,$38485 - $3847e
+	; learnset
+	db %10110101
+	db %1000011
+	db %1001111
+	db %11001110
+	db %11100011
+	db %1000
+	db %100110
+
 	db 0 ; padding
 
 SquirtleBaseStats: ; 0x38486
-	db 7 ; pokedex id
+	db DEX_SQUIRTLE ; pokedex id
 	db 44 ; base hp
 	db 48 ; base attack
 	db 65 ; base defense
@@ -22196,12 +22238,19 @@ SquirtleBaseStats: ; 0x38486
 
 	db 3 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$3849a,$384a1 - $3849a
+	; learnset
+	db %10110001
+	db %111111
+	db %1111
+	db %11001000
+	db %10000011
+	db %1000
+	db %110010
+
 	db 0 ; padding
 
 WartortleBaseStats: ; 0x384a2
-	db 8 ; pokedex id
+	db DEX_WARTORTLE ; pokedex id
 	db 59 ; base hp
 	db 63 ; base attack
 	db 80 ; base defense
@@ -22226,12 +22275,19 @@ WartortleBaseStats: ; 0x384a2
 
 	db 3 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$384b6,$384bd - $384b6
+	; learnset
+	db %10110001
+	db %111111
+	db %1111
+	db %11001000
+	db %10000011
+	db %1000
+	db %110010
+
 	db 0 ; padding
 
 BlastoiseBaseStats: ; 0x384be
-	db 9 ; pokedex id
+	db DEX_BLASTOISE ; pokedex id
 	db 79 ; base hp
 	db 83 ; base attack
 	db 100 ; base defense
@@ -22256,12 +22312,19 @@ BlastoiseBaseStats: ; 0x384be
 
 	db 3 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$384d2,$384d9 - $384d2
+	; learnset
+	db %10110001
+	db %1111111
+	db %1111
+	db %11001110
+	db %10000011
+	db %1000
+	db %110010
+
 	db 0 ; padding
 
 CaterpieBaseStats: ; 0x384da
-	db 10 ; pokedex id
+	db DEX_CATERPIE ; pokedex id
 	db 45 ; base hp
 	db 30 ; base attack
 	db 35 ; base defense
@@ -22286,12 +22349,19 @@ CaterpieBaseStats: ; 0x384da
 
 	db 0 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$384ee,$384f5 - $384ee
+	; learnset
+	db %0
+	db %0
+	db %0
+	db %0
+	db %0
+	db %0
+	db %0
+
 	db 0 ; padding
 
 MetapodBaseStats: ; 0x384f6
-	db 11 ; pokedex id
+	db DEX_METAPOD ; pokedex id
 	db 50 ; base hp
 	db 20 ; base attack
 	db 55 ; base defense
@@ -22316,12 +22386,19 @@ MetapodBaseStats: ; 0x384f6
 
 	db 0 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$3850a,$38511 - $3850a
+	; learnset
+	db %0
+	db %0
+	db %0
+	db %0
+	db %0
+	db %0
+	db %0
+
 	db 0 ; padding
 
 ButterfreeBaseStats: ; 0x38512
-	db 12 ; pokedex id
+	db DEX_BUTTERFREE ; pokedex id
 	db 60 ; base hp
 	db 45 ; base attack
 	db 50 ; base defense
@@ -22346,12 +22423,19 @@ ButterfreeBaseStats: ; 0x38512
 
 	db 0 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$38526,$3852d - $38526
+	; learnset
+	db %101010
+	db %1000011
+	db %111000
+	db %11110000
+	db %1000011
+	db %101000
+	db %10
+
 	db 0 ; padding
 
 WeedleBaseStats: ; 0x3852e
-	db 13 ; pokedex id
+	db DEX_WEEDLE ; pokedex id
 	db 40 ; base hp
 	db 35 ; base attack
 	db 30 ; base defense
@@ -22376,12 +22460,19 @@ WeedleBaseStats: ; 0x3852e
 
 	db 0 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$38542,$38549 - $38542
+	; learnset
+	db %0
+	db %0
+	db %0
+	db %0
+	db %0
+	db %0
+	db %0
+
 	db 0 ; padding
 
 KakunaBaseStats: ; 0x3854a
-	db 14 ; pokedex id
+	db DEX_KAKUNA ; pokedex id
 	db 45 ; base hp
 	db 25 ; base attack
 	db 50 ; base defense
@@ -22406,12 +22497,19 @@ KakunaBaseStats: ; 0x3854a
 
 	db 0 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$3855e,$38565 - $3855e
+	; learnset
+	db %0
+	db %0
+	db %0
+	db %0
+	db %0
+	db %0
+	db %0
+
 	db 0 ; padding
 
 BeedrillBaseStats: ; 0x38566
-	db 15 ; pokedex id
+	db DEX_BEEDRILL ; pokedex id
 	db 65 ; base hp
 	db 80 ; base attack
 	db 40 ; base defense
@@ -22436,12 +22534,19 @@ BeedrillBaseStats: ; 0x38566
 
 	db 0 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$3857a,$38581 - $3857a
+	; learnset
+	db %100100
+	db %1000011
+	db %11000
+	db %11000000
+	db %11000011
+	db %1000
+	db %110
+
 	db 0 ; padding
 
 PidgeyBaseStats: ; 0x38582
-	db 16 ; pokedex id
+	db DEX_PIDGEY ; pokedex id
 	db 40 ; base hp
 	db 45 ; base attack
 	db 40 ; base defense
@@ -22466,12 +22571,19 @@ PidgeyBaseStats: ; 0x38582
 
 	db 3 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$38596,$3859d - $38596
+	; learnset
+	db %101010
+	db %11
+	db %1000
+	db %11000000
+	db %1000011
+	db %1100
+	db %1010
+
 	db 0 ; padding
 
 PidgeottoBaseStats: ; 0x3859e
-	db 17 ; pokedex id
+	db DEX_PIDGEOTTO ; pokedex id
 	db 63 ; base hp
 	db 60 ; base attack
 	db 55 ; base defense
@@ -22496,12 +22608,19 @@ PidgeottoBaseStats: ; 0x3859e
 
 	db 3 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$385b2,$385b9 - $385b2
+	; learnset
+	db %101010
+	db %11
+	db %1000
+	db %11000000
+	db %1000011
+	db %1100
+	db %1010
+
 	db 0 ; padding
 
 PidgeotBaseStats: ; 0x385ba
-	db 18 ; pokedex id
+	db DEX_PIDGEOT ; pokedex id
 	db 83 ; base hp
 	db 80 ; base attack
 	db 75 ; base defense
@@ -22526,12 +22645,19 @@ PidgeotBaseStats: ; 0x385ba
 
 	db 3 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$385ce,$385d5 - $385ce
+	; learnset
+	db %101010
+	db %1000011
+	db %1000
+	db %11000000
+	db %1000011
+	db %1100
+	db %1010
+
 	db 0 ; padding
 
 RattataBaseStats: ; 0x385d6
-	db 19 ; pokedex id
+	db DEX_RATTATA ; pokedex id
 	db 30 ; base hp
 	db 56 ; base attack
 	db 35 ; base defense
@@ -22556,12 +22682,19 @@ RattataBaseStats: ; 0x385d6
 
 	db 0 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$385ea,$385f1 - $385ea
+	; learnset
+	db %10100000
+	db %101111
+	db %10001000
+	db %11001001
+	db %11000010
+	db %1000
+	db %10
+
 	db 0 ; padding
 
 RaticateBaseStats: ; 0x385f2
-	db 20 ; pokedex id
+	db DEX_RATICATE ; pokedex id
 	db 55 ; base hp
 	db 81 ; base attack
 	db 60 ; base defense
@@ -22586,12 +22719,19 @@ RaticateBaseStats: ; 0x385f2
 
 	db 0 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$38606,$3860d - $38606
+	; learnset
+	db %10100000
+	db %1111111
+	db %10001000
+	db %11001001
+	db %11000010
+	db %1000
+	db %10
+
 	db 0 ; padding
 
 SpearowBaseStats: ; 0x3860e
-	db 21 ; pokedex id
+	db DEX_SPEAROW ; pokedex id
 	db 40 ; base hp
 	db 60 ; base attack
 	db 30 ; base defense
@@ -22616,12 +22756,19 @@ SpearowBaseStats: ; 0x3860e
 
 	db 0 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$38622,$38629 - $38622
+	; learnset
+	db %101010
+	db %11
+	db %1000
+	db %11000000
+	db %1000010
+	db %1100
+	db %1010
+
 	db 0 ; padding
 
 FearowBaseStats: ; 0x3862a
-	db 22 ; pokedex id
+	db DEX_FEAROW ; pokedex id
 	db 65 ; base hp
 	db 90 ; base attack
 	db 65 ; base defense
@@ -22646,12 +22793,19 @@ FearowBaseStats: ; 0x3862a
 
 	db 0 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$3863e,$38645 - $3863e
+	; learnset
+	db %101010
+	db %1000011
+	db %1000
+	db %11000000
+	db %1000010
+	db %1100
+	db %1010
+
 	db 0 ; padding
 
 EkansBaseStats: ; 0x38646
-	db 23 ; pokedex id
+	db DEX_EKANS ; pokedex id
 	db 35 ; base hp
 	db 60 ; base attack
 	db 44 ; base defense
@@ -22676,12 +22830,19 @@ EkansBaseStats: ; 0x38646
 
 	db 0 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$3865a,$38661 - $3865a
+	; learnset
+	db %10100000
+	db %11
+	db %11000
+	db %11001110
+	db %10000010
+	db %10001000
+	db %100010
+
 	db 0 ; padding
 
 ArbokBaseStats: ; 0x38662
-	db 24 ; pokedex id
+	db DEX_ARBOK ; pokedex id
 	db 60 ; base hp
 	db 85 ; base attack
 	db 69 ; base defense
@@ -22706,12 +22867,19 @@ ArbokBaseStats: ; 0x38662
 
 	db 0 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$38676,$3867d - $38676
+	; learnset
+	db %10100000
+	db %1000011
+	db %11000
+	db %11001110
+	db %10000010
+	db %10001000
+	db %100010
+
 	db 0 ; padding
 
 PikachuBaseStats: ; 0x3867e
-	db 25 ; pokedex id
+	db DEX_PIKACHU ; pokedex id
 	db 35 ; base hp
 	db 55 ; base attack
 	db 30 ; base defense
@@ -22736,12 +22904,19 @@ PikachuBaseStats: ; 0x3867e
 
 	db 0 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$38692,$38699 - $38692
+	; learnset
+	db %10110001
+	db %10000011
+	db %10001101
+	db %11000001
+	db %11000011
+	db %11000
+	db %1000010
+
 	db 0 ; padding
 
 RaichuBaseStats: ; 0x3869a
-	db 26 ; pokedex id
+	db DEX_RAICHU ; pokedex id
 	db 60 ; base hp
 	db 90 ; base attack
 	db 55 ; base defense
@@ -22766,12 +22941,19 @@ RaichuBaseStats: ; 0x3869a
 
 	db 0 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$386ae,$386b5 - $386ae
+	; learnset
+	db %10110001
+	db %11000011
+	db %10001101
+	db %11000001
+	db %11000011
+	db %11000
+	db %1000010
+
 	db 0 ; padding
 
 SandshrewBaseStats: ; 0x386b6
-	db 27 ; pokedex id
+	db DEX_SANDSHREW ; pokedex id
 	db 50 ; base hp
 	db 75 ; base attack
 	db 85 ; base defense
@@ -22796,12 +22978,19 @@ SandshrewBaseStats: ; 0x386b6
 
 	db 0 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$386ca,$386d1 - $386ca
+	; learnset
+	db %10100100
+	db %11
+	db %1101
+	db %11001110
+	db %11000010
+	db %10001000
+	db %100110
+
 	db 0 ; padding
 
 SandslashBaseStats: ; 0x386d2
-	db 28 ; pokedex id
+	db DEX_SANDSLASH ; pokedex id
 	db 75 ; base hp
 	db 100 ; base attack
 	db 110 ; base defense
@@ -22826,12 +23015,19 @@ SandslashBaseStats: ; 0x386d2
 
 	db 0 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$386e6,$386ed - $386e6
+	; learnset
+	db %10100100
+	db %1000011
+	db %1101
+	db %11001110
+	db %11000010
+	db %10001000
+	db %100110
+
 	db 0 ; padding
 
 NidoranFBaseStats: ; 0x386ee
-	db 29 ; pokedex id
+	db DEX_NIDORAN_F ; pokedex id
 	db 55 ; base hp
 	db 47 ; base attack
 	db 52 ; base defense
@@ -22856,12 +23052,19 @@ NidoranFBaseStats: ; 0x386ee
 
 	db 3 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$38702,$38709 - $38702
+	; learnset
+	db %10100000
+	db %100011
+	db %10001000
+	db %11000001
+	db %10000011
+	db %1000
+	db %10
+
 	db 0 ; padding
 
 NidorinaBaseStats: ; 0x3870a
-	db 30 ; pokedex id
+	db DEX_NIDORINA ; pokedex id
 	db 70 ; base hp
 	db 62 ; base attack
 	db 67 ; base defense
@@ -22886,12 +23089,19 @@ NidorinaBaseStats: ; 0x3870a
 
 	db 3 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$3871e,$38725 - $3871e
+	; learnset
+	db %11100000
+	db %111111
+	db %10001000
+	db %11000001
+	db %10000011
+	db %1000
+	db %10
+
 	db 0 ; padding
 
 NidoqueenBaseStats: ; 0x38726
-	db 31 ; pokedex id
+	db DEX_NIDOQUEEN ; pokedex id
 	db 90 ; base hp
 	db 82 ; base attack
 	db 87 ; base defense
@@ -22916,12 +23126,19 @@ NidoqueenBaseStats: ; 0x38726
 
 	db 3 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$3873a,$38741 - $3873a
+	; learnset
+	db %11110001
+	db %11111111
+	db %10001111
+	db %11000111
+	db %10100011
+	db %10001000
+	db %110010
+
 	db 0 ; padding
 
 NidoranMBaseStats: ; 0x38742
-	db 32 ; pokedex id
+	db DEX_NIDORAN_M ; pokedex id
 	db 46 ; base hp
 	db 57 ; base attack
 	db 40 ; base defense
@@ -22946,12 +23163,19 @@ NidoranMBaseStats: ; 0x38742
 
 	db 3 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$38756,$3875d - $38756
+	; learnset
+	db %11100000
+	db %100011
+	db %10001000
+	db %11000001
+	db %10000011
+	db %1000
+	db %10
+
 	db 0 ; padding
 
 NidorinoBaseStats: ; 0x3875e
-	db 33 ; pokedex id
+	db DEX_NIDORINO ; pokedex id
 	db 61 ; base hp
 	db 72 ; base attack
 	db 57 ; base defense
@@ -22976,12 +23200,19 @@ NidorinoBaseStats: ; 0x3875e
 
 	db 3 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$38772,$38779 - $38772
+	; learnset
+	db %11100000
+	db %111111
+	db %10001000
+	db %11000001
+	db %10000011
+	db %1000
+	db %10
+
 	db 0 ; padding
 
 NidokingBaseStats: ; 0x3877a
-	db 34 ; pokedex id
+	db DEX_NIDOKING ; pokedex id
 	db 81 ; base hp
 	db 92 ; base attack
 	db 77 ; base defense
@@ -23006,12 +23237,19 @@ NidokingBaseStats: ; 0x3877a
 
 	db 3 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$3878e,$38795 - $3878e
+	; learnset
+	db %11110001
+	db %11111111
+	db %10001111
+	db %11000111
+	db %10100011
+	db %10001000
+	db %110010
+
 	db 0 ; padding
 
 ClefairyBaseStats: ; 0x38796
-	db 35 ; pokedex id
+	db DEX_CLEFAIRY ; pokedex id
 	db 70 ; base hp
 	db 45 ; base attack
 	db 48 ; base defense
@@ -23036,12 +23274,19 @@ ClefairyBaseStats: ; 0x38796
 
 	db 4 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$387aa,$387b1 - $387aa
+	; learnset
+	db %10110001
+	db %111111
+	db %10101111
+	db %11110001
+	db %10100111
+	db %111000
+	db %1100011
+
 	db 0 ; padding
 
 ClefableBaseStats: ; 0x387b2
-	db 36 ; pokedex id
+	db DEX_CLEFABLE ; pokedex id
 	db 95 ; base hp
 	db 70 ; base attack
 	db 73 ; base defense
@@ -23066,12 +23311,19 @@ ClefableBaseStats: ; 0x387b2
 
 	db 4 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$387c6,$387cd - $387c6
+	; learnset
+	db %10110001
+	db %1111111
+	db %10101111
+	db %11110001
+	db %10100111
+	db %111000
+	db %1100011
+
 	db 0 ; padding
 
 VulpixBaseStats: ; 0x387ce
-	db 37 ; pokedex id
+	db DEX_VULPIX ; pokedex id
 	db 38 ; base hp
 	db 41 ; base attack
 	db 40 ; base defense
@@ -23096,12 +23348,19 @@ VulpixBaseStats: ; 0x387ce
 
 	db 0 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$387e2,$387e9 - $387e2
+	; learnset
+	db %10100000
+	db %11
+	db %1000
+	db %11001000
+	db %11100011
+	db %1000
+	db %10
+
 	db 0 ; padding
 
 NinetalesBaseStats: ; 0x387ea
-	db 38 ; pokedex id
+	db DEX_NINETALES ; pokedex id
 	db 73 ; base hp
 	db 76 ; base attack
 	db 75 ; base defense
@@ -23126,12 +23385,19 @@ NinetalesBaseStats: ; 0x387ea
 
 	db 0 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$387fe,$38805 - $387fe
+	; learnset
+	db %10100000
+	db %1000011
+	db %1000
+	db %11001000
+	db %11100011
+	db %1000
+	db %10
+
 	db 0 ; padding
 
 JigglypuffBaseStats: ; 0x38806
-	db 39 ; pokedex id
+	db DEX_JIGGLYPUFF ; pokedex id
 	db 115 ; base hp
 	db 45 ; base attack
 	db 20 ; base defense
@@ -23156,12 +23422,19 @@ JigglypuffBaseStats: ; 0x38806
 
 	db 4 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$3881a,$38821 - $3881a
+	; learnset
+	db %10110001
+	db %111111
+	db %10101111
+	db %11110001
+	db %10100011
+	db %111000
+	db %1100011
+
 	db 0 ; padding
 
 WigglytuffBaseStats: ; 0x38822
-	db 40 ; pokedex id
+	db DEX_WIGGLYTUFF ; pokedex id
 	db 140 ; base hp
 	db 70 ; base attack
 	db 45 ; base defense
@@ -23186,12 +23459,19 @@ WigglytuffBaseStats: ; 0x38822
 
 	db 4 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$38836,$3883d - $38836
+	; learnset
+	db %10110001
+	db %1111111
+	db %10101111
+	db %11110001
+	db %10100011
+	db %111000
+	db %1100011
+
 	db 0 ; padding
 
 ZubatBaseStats: ; 0x3883e
-	db 41 ; pokedex id
+	db DEX_ZUBAT ; pokedex id
 	db 40 ; base hp
 	db 45 ; base attack
 	db 35 ; base defense
@@ -23216,12 +23496,19 @@ ZubatBaseStats: ; 0x3883e
 
 	db 0 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$38852,$38859 - $38852
+	; learnset
+	db %101010
+	db %11
+	db %11000
+	db %11000000
+	db %1000010
+	db %1000
+	db %10
+
 	db 0 ; padding
 
 GolbatBaseStats: ; 0x3885a
-	db 42 ; pokedex id
+	db DEX_GOLBAT ; pokedex id
 	db 75 ; base hp
 	db 80 ; base attack
 	db 70 ; base defense
@@ -23246,12 +23533,19 @@ GolbatBaseStats: ; 0x3885a
 
 	db 0 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$3886e,$38875 - $3886e
+	; learnset
+	db %101010
+	db %1000011
+	db %11000
+	db %11000000
+	db %1000010
+	db %1000
+	db %10
+
 	db 0 ; padding
 
 OddishBaseStats: ; 0x38876
-	db 43 ; pokedex id
+	db DEX_ODDISH ; pokedex id
 	db 45 ; base hp
 	db 50 ; base attack
 	db 55 ; base defense
@@ -23276,12 +23570,19 @@ OddishBaseStats: ; 0x38876
 
 	db 3 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$3888a,$38891 - $3888a
+	; learnset
+	db %100100
+	db %11
+	db %111000
+	db %11000000
+	db %11
+	db %1000
+	db %110
+
 	db 0 ; padding
 
 GloomBaseStats: ; 0x38892
-	db 44 ; pokedex id
+	db DEX_GLOOM ; pokedex id
 	db 60 ; base hp
 	db 65 ; base attack
 	db 70 ; base defense
@@ -23306,12 +23607,19 @@ GloomBaseStats: ; 0x38892
 
 	db 3 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$388a6,$388ad - $388a6
+	; learnset
+	db %100100
+	db %11
+	db %111000
+	db %11000000
+	db %11
+	db %1000
+	db %110
+
 	db 0 ; padding
 
 VileplumeBaseStats: ; 0x388ae
-	db 45 ; pokedex id
+	db DEX_VILEPLUME ; pokedex id
 	db 75 ; base hp
 	db 80 ; base attack
 	db 85 ; base defense
@@ -23336,12 +23644,19 @@ VileplumeBaseStats: ; 0x388ae
 
 	db 3 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$388c2,$388c9 - $388c2
+	; learnset
+	db %10100100
+	db %1000011
+	db %111000
+	db %11000000
+	db %11
+	db %1000
+	db %110
+
 	db 0 ; padding
 
 ParasBaseStats: ; 0x388ca
-	db 46 ; pokedex id
+	db DEX_PARAS ; pokedex id
 	db 35 ; base hp
 	db 70 ; base attack
 	db 55 ; base defense
@@ -23366,12 +23681,19 @@ ParasBaseStats: ; 0x388ca
 
 	db 0 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$388de,$388e5 - $388de
+	; learnset
+	db %10100100
+	db %11
+	db %111000
+	db %11001000
+	db %10000011
+	db %1000
+	db %110
+
 	db 0 ; padding
 
 ParasectBaseStats: ; 0x388e6
-	db 47 ; pokedex id
+	db DEX_PARASECT ; pokedex id
 	db 60 ; base hp
 	db 95 ; base attack
 	db 80 ; base defense
@@ -23396,12 +23718,19 @@ ParasectBaseStats: ; 0x388e6
 
 	db 0 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$388fa,$38901 - $388fa
+	; learnset
+	db %10100100
+	db %1000011
+	db %111000
+	db %11001000
+	db %10000011
+	db %1000
+	db %110
+
 	db 0 ; padding
 
 VenonatBaseStats: ; 0x38902
-	db 48 ; pokedex id
+	db DEX_VENONAT ; pokedex id
 	db 60 ; base hp
 	db 55 ; base attack
 	db 50 ; base defense
@@ -23426,12 +23755,19 @@ VenonatBaseStats: ; 0x38902
 
 	db 0 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$38916,$3891d - $38916
+	; learnset
+	db %100000
+	db %11
+	db %111000
+	db %11010000
+	db %11
+	db %101000
+	db %10
+
 	db 0 ; padding
 
 VenomothBaseStats: ; 0x3891e
-	db 49 ; pokedex id
+	db DEX_VENOMOTH ; pokedex id
 	db 70 ; base hp
 	db 65 ; base attack
 	db 60 ; base defense
@@ -23456,12 +23792,19 @@ VenomothBaseStats: ; 0x3891e
 
 	db 0 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$38932,$38939 - $38932
+	; learnset
+	db %101010
+	db %1000011
+	db %111000
+	db %11110000
+	db %1000011
+	db %101000
+	db %10
+
 	db 0 ; padding
 
 DiglettBaseStats: ; 0x3893a
-	db 50 ; pokedex id
+	db DEX_DIGLETT ; pokedex id
 	db 10 ; base hp
 	db 55 ; base attack
 	db 25 ; base defense
@@ -23486,12 +23829,19 @@ DiglettBaseStats: ; 0x3893a
 
 	db 0 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$3894e,$38955 - $3894e
+	; learnset
+	db %10100000
+	db %11
+	db %1000
+	db %11001110
+	db %10
+	db %10001000
+	db %10
+
 	db 0 ; padding
 
 DugtrioBaseStats: ; 0x38956
-	db 51 ; pokedex id
+	db DEX_DUGTRIO ; pokedex id
 	db 35 ; base hp
 	db 80 ; base attack
 	db 50 ; base defense
@@ -23516,12 +23866,19 @@ DugtrioBaseStats: ; 0x38956
 
 	db 0 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$3896a,$38971 - $3896a
+	; learnset
+	db %10100000
+	db %1000011
+	db %1000
+	db %11001110
+	db %10
+	db %10001000
+	db %10
+
 	db 0 ; padding
 
 MeowthBaseStats: ; 0x38972
-	db 52 ; pokedex id
+	db DEX_MEOWTH ; pokedex id
 	db 40 ; base hp
 	db 45 ; base attack
 	db 35 ; base defense
@@ -23546,12 +23903,19 @@ MeowthBaseStats: ; 0x38972
 
 	db 0 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$38986,$3898d - $38986
+	; learnset
+	db %10100000
+	db %10001111
+	db %10001000
+	db %11000001
+	db %11000010
+	db %1000
+	db %10
+
 	db 0 ; padding
 
 PersianBaseStats: ; 0x3898e
-	db 53 ; pokedex id
+	db DEX_PERSIAN ; pokedex id
 	db 65 ; base hp
 	db 70 ; base attack
 	db 60 ; base defense
@@ -23576,12 +23940,19 @@ PersianBaseStats: ; 0x3898e
 
 	db 0 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$389a2,$389a9 - $389a2
+	; learnset
+	db %10100000
+	db %11001111
+	db %10001000
+	db %11000001
+	db %11000010
+	db %1000
+	db %10
+
 	db 0 ; padding
 
 PsyduckBaseStats: ; 0x389aa
-	db 54 ; pokedex id
+	db DEX_PSYDUCK ; pokedex id
 	db 50 ; base hp
 	db 52 ; base attack
 	db 48 ; base defense
@@ -23606,12 +23977,19 @@ PsyduckBaseStats: ; 0x389aa
 
 	db 0 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$389be,$389c5 - $389be
+	; learnset
+	db %10110001
+	db %10111111
+	db %1111
+	db %11001000
+	db %11000010
+	db %1000
+	db %110010
+
 	db 0 ; padding
 
 GolduckBaseStats: ; 0x389c6
-	db 55 ; pokedex id
+	db DEX_GOLDUCK ; pokedex id
 	db 80 ; base hp
 	db 82 ; base attack
 	db 78 ; base defense
@@ -23636,12 +24014,19 @@ GolduckBaseStats: ; 0x389c6
 
 	db 0 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$389da,$389e1 - $389da
+	; learnset
+	db %10110001
+	db %11111111
+	db %1111
+	db %11001000
+	db %11000010
+	db %1000
+	db %110010
+
 	db 0 ; padding
 
 MankeyBaseStats: ; 0x389e2
-	db 56 ; pokedex id
+	db DEX_MANKEY ; pokedex id
 	db 40 ; base hp
 	db 80 ; base attack
 	db 35 ; base defense
@@ -23666,12 +24051,19 @@ MankeyBaseStats: ; 0x389e2
 
 	db 0 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$389f6,$389fd - $389f6
+	; learnset
+	db %10110001
+	db %10000011
+	db %10001111
+	db %11001001
+	db %11000110
+	db %10001000
+	db %100010
+
 	db 0 ; padding
 
 PrimeapeBaseStats: ; 0x389fe
-	db 57 ; pokedex id
+	db DEX_PRIMEAPE ; pokedex id
 	db 65 ; base hp
 	db 105 ; base attack
 	db 60 ; base defense
@@ -23696,12 +24088,19 @@ PrimeapeBaseStats: ; 0x389fe
 
 	db 0 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$38a12,$38a19 - $38a12
+	; learnset
+	db %10110001
+	db %11000011
+	db %10001111
+	db %11001001
+	db %11000110
+	db %10001000
+	db %100010
+
 	db 0 ; padding
 
 GrowlitheBaseStats: ; 0x38a1a
-	db 58 ; pokedex id
+	db DEX_GROWLITHE ; pokedex id
 	db 55 ; base hp
 	db 70 ; base attack
 	db 45 ; base defense
@@ -23726,12 +24125,19 @@ GrowlitheBaseStats: ; 0x38a1a
 
 	db 5 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$38a2e,$38a35 - $38a2e
+	; learnset
+	db %10100000
+	db %11
+	db %1001000
+	db %11001000
+	db %11100011
+	db %1000
+	db %10
+
 	db 0 ; padding
 
 ArcanineBaseStats: ; 0x38a36
-	db 59 ; pokedex id
+	db DEX_ARCANINE ; pokedex id
 	db 90 ; base hp
 	db 110 ; base attack
 	db 80 ; base defense
@@ -23756,12 +24162,19 @@ ArcanineBaseStats: ; 0x38a36
 
 	db 5 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$38a4a,$38a51 - $38a4a
+	; learnset
+	db %10100000
+	db %1000011
+	db %1001000
+	db %11101000
+	db %11100011
+	db %1000
+	db %10
+
 	db 0 ; padding
 
 PoliwagBaseStats: ; 0x38a52
-	db 60 ; pokedex id
+	db DEX_POLIWAG ; pokedex id
 	db 40 ; base hp
 	db 50 ; base attack
 	db 40 ; base defense
@@ -23786,12 +24199,19 @@ PoliwagBaseStats: ; 0x38a52
 
 	db 3 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$38a66,$38a6d - $38a66
+	; learnset
+	db %10100000
+	db %111111
+	db %1000
+	db %11010000
+	db %10000010
+	db %101000
+	db %10010
+
 	db 0 ; padding
 
 PoliwhirlBaseStats: ; 0x38a6e
-	db 61 ; pokedex id
+	db DEX_POLIWHIRL ; pokedex id
 	db 65 ; base hp
 	db 65 ; base attack
 	db 65 ; base defense
@@ -23816,12 +24236,19 @@ PoliwhirlBaseStats: ; 0x38a6e
 
 	db 3 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$38a82,$38a89 - $38a82
+	; learnset
+	db %10110001
+	db %111111
+	db %1111
+	db %11010110
+	db %10000110
+	db %101000
+	db %110010
+
 	db 0 ; padding
 
 PoliwrathBaseStats: ; 0x38a8a
-	db 62 ; pokedex id
+	db DEX_POLIWRATH ; pokedex id
 	db 90 ; base hp
 	db 85 ; base attack
 	db 95 ; base defense
@@ -23846,12 +24273,19 @@ PoliwrathBaseStats: ; 0x38a8a
 
 	db 3 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$38a9e,$38aa5 - $38a9e
+	; learnset
+	db %10110001
+	db %1111111
+	db %1111
+	db %11010110
+	db %10000110
+	db %101000
+	db %110010
+
 	db 0 ; padding
 
 AbraBaseStats: ; 0x38aa6
-	db 63 ; pokedex id
+	db DEX_ABRA ; pokedex id
 	db 25 ; base hp
 	db 20 ; base attack
 	db 15 ; base defense
@@ -23876,12 +24310,19 @@ AbraBaseStats: ; 0x38aa6
 
 	db 3 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$38aba,$38ac1 - $38aba
+	; learnset
+	db %10110001
+	db %11
+	db %1111
+	db %11110000
+	db %10000111
+	db %111000
+	db %1000011
+
 	db 0 ; padding
 
 KadabraBaseStats: ; 0x38ac2
-	db 64 ; pokedex id
+	db DEX_KADABRA ; pokedex id
 	db 40 ; base hp
 	db 35 ; base attack
 	db 30 ; base defense
@@ -23906,12 +24347,19 @@ KadabraBaseStats: ; 0x38ac2
 
 	db 3 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$38ad6,$38add - $38ad6
+	; learnset
+	db %10110001
+	db %11
+	db %1111
+	db %11111000
+	db %10000111
+	db %111000
+	db %1000011
+
 	db 0 ; padding
 
 AlakazamBaseStats: ; 0x38ade
-	db 65 ; pokedex id
+	db DEX_ALAKAZAM ; pokedex id
 	db 55 ; base hp
 	db 50 ; base attack
 	db 45 ; base defense
@@ -23936,12 +24384,19 @@ AlakazamBaseStats: ; 0x38ade
 
 	db 3 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$38af2,$38af9 - $38af2
+	; learnset
+	db %10110001
+	db %1000011
+	db %1111
+	db %11111000
+	db %10000111
+	db %111000
+	db %1000011
+
 	db 0 ; padding
 
 MachopBaseStats: ; 0x38afa
-	db 66 ; pokedex id
+	db DEX_MACHOP ; pokedex id
 	db 70 ; base hp
 	db 80 ; base attack
 	db 50 ; base defense
@@ -23966,12 +24421,19 @@ MachopBaseStats: ; 0x38afa
 
 	db 3 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$38b0e,$38b15 - $38b0e
+	; learnset
+	db %10110001
+	db %11
+	db %1111
+	db %11001110
+	db %10100110
+	db %10001000
+	db %100010
+
 	db 0 ; padding
 
 MachokeBaseStats: ; 0x38b16
-	db 67 ; pokedex id
+	db DEX_MACHOKE ; pokedex id
 	db 80 ; base hp
 	db 100 ; base attack
 	db 70 ; base defense
@@ -23996,12 +24458,19 @@ MachokeBaseStats: ; 0x38b16
 
 	db 3 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$38b2a,$38b31 - $38b2a
+	; learnset
+	db %10110001
+	db %11
+	db %1111
+	db %11001110
+	db %10100110
+	db %10001000
+	db %100010
+
 	db 0 ; padding
 
 MachampBaseStats: ; 0x38b32
-	db 68 ; pokedex id
+	db DEX_MACHAMP ; pokedex id
 	db 90 ; base hp
 	db 130 ; base attack
 	db 80 ; base defense
@@ -24026,12 +24495,19 @@ MachampBaseStats: ; 0x38b32
 
 	db 3 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$38b46,$38b4d - $38b46
+	; learnset
+	db %10110001
+	db %1000011
+	db %1111
+	db %11001110
+	db %10100110
+	db %10001000
+	db %100010
+
 	db 0 ; padding
 
 BellsproutBaseStats: ; 0x38b4e
-	db 69 ; pokedex id
+	db DEX_BELLSPROUT ; pokedex id
 	db 50 ; base hp
 	db 75 ; base attack
 	db 35 ; base defense
@@ -24056,12 +24532,19 @@ BellsproutBaseStats: ; 0x38b4e
 
 	db 3 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$38b62,$38b69 - $38b62
+	; learnset
+	db %100100
+	db %11
+	db %111000
+	db %11000000
+	db %11
+	db %1000
+	db %110
+
 	db 0 ; padding
 
 WeepinbellBaseStats: ; 0x38b6a
-	db 70 ; pokedex id
+	db DEX_WEEPINBELL ; pokedex id
 	db 65 ; base hp
 	db 90 ; base attack
 	db 50 ; base defense
@@ -24086,12 +24569,19 @@ WeepinbellBaseStats: ; 0x38b6a
 
 	db 3 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$38b7e,$38b85 - $38b7e
+	; learnset
+	db %100100
+	db %11
+	db %111000
+	db %11000000
+	db %11
+	db %1000
+	db %110
+
 	db 0 ; padding
 
 VictreebelBaseStats: ; 0x38b86
-	db 71 ; pokedex id
+	db DEX_VICTREEBEL ; pokedex id
 	db 80 ; base hp
 	db 105 ; base attack
 	db 65 ; base defense
@@ -24116,12 +24606,19 @@ VictreebelBaseStats: ; 0x38b86
 
 	db 3 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$38b9a,$38ba1 - $38b9a
+	; learnset
+	db %10100100
+	db %1000011
+	db %111000
+	db %11000000
+	db %11
+	db %1000
+	db %110
+
 	db 0 ; padding
 
 TentacoolBaseStats: ; 0x38ba2
-	db 72 ; pokedex id
+	db DEX_TENTACOOL ; pokedex id
 	db 40 ; base hp
 	db 40 ; base attack
 	db 35 ; base defense
@@ -24146,12 +24643,19 @@ TentacoolBaseStats: ; 0x38ba2
 
 	db 5 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$38bb6,$38bbd - $38bb6
+	; learnset
+	db %100100
+	db %111111
+	db %11000
+	db %11000000
+	db %10000011
+	db %1000
+	db %10110
+
 	db 0 ; padding
 
 TentacruelBaseStats: ; 0x38bbe
-	db 73 ; pokedex id
+	db DEX_TENTACRUEL ; pokedex id
 	db 80 ; base hp
 	db 70 ; base attack
 	db 65 ; base defense
@@ -24176,12 +24680,19 @@ TentacruelBaseStats: ; 0x38bbe
 
 	db 5 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$38bd2,$38bd9 - $38bd2
+	; learnset
+	db %100100
+	db %1111111
+	db %11000
+	db %11000000
+	db %10000011
+	db %1000
+	db %10110
+
 	db 0 ; padding
 
 GeodudeBaseStats: ; 0x38bda
-	db 74 ; pokedex id
+	db DEX_GEODUDE ; pokedex id
 	db 40 ; base hp
 	db 80 ; base attack
 	db 100 ; base defense
@@ -24206,12 +24717,19 @@ GeodudeBaseStats: ; 0x38bda
 
 	db 3 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$38bee,$38bf5 - $38bee
+	; learnset
+	db %10100001
+	db %11
+	db %1111
+	db %11001110
+	db %101110
+	db %11001000
+	db %100010
+
 	db 0 ; padding
 
 GravelerBaseStats: ; 0x38bf6
-	db 75 ; pokedex id
+	db DEX_GRAVELER ; pokedex id
 	db 55 ; base hp
 	db 95 ; base attack
 	db 115 ; base defense
@@ -24236,12 +24754,19 @@ GravelerBaseStats: ; 0x38bf6
 
 	db 3 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$38c0a,$38c11 - $38c0a
+	; learnset
+	db %10100001
+	db %11
+	db %1111
+	db %11001110
+	db %101110
+	db %11001000
+	db %100010
+
 	db 0 ; padding
 
 GolemBaseStats: ; 0x38c12
-	db 76 ; pokedex id
+	db DEX_GOLEM ; pokedex id
 	db 80 ; base hp
 	db 110 ; base attack
 	db 130 ; base defense
@@ -24266,12 +24791,19 @@ GolemBaseStats: ; 0x38c12
 
 	db 3 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$38c26,$38c2d - $38c26
+	; learnset
+	db %10110001
+	db %1000011
+	db %1111
+	db %11001110
+	db %101110
+	db %11001000
+	db %100010
+
 	db 0 ; padding
 
 PonytaBaseStats: ; 0x38c2e
-	db 77 ; pokedex id
+	db DEX_PONYTA ; pokedex id
 	db 50 ; base hp
 	db 85 ; base attack
 	db 55 ; base defense
@@ -24296,12 +24828,19 @@ PonytaBaseStats: ; 0x38c2e
 
 	db 0 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$38c42,$38c49 - $38c42
+	; learnset
+	db %11100000
+	db %11
+	db %1000
+	db %11000000
+	db %11100011
+	db %1000
+	db %10
+
 	db 0 ; padding
 
 RapidashBaseStats: ; 0x38c4a
-	db 78 ; pokedex id
+	db DEX_RAPIDASH ; pokedex id
 	db 65 ; base hp
 	db 100 ; base attack
 	db 70 ; base defense
@@ -24326,12 +24865,19 @@ RapidashBaseStats: ; 0x38c4a
 
 	db 0 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$38c5e,$38c65 - $38c5e
+	; learnset
+	db %11100000
+	db %1000011
+	db %1000
+	db %11000000
+	db %11100011
+	db %1000
+	db %10
+
 	db 0 ; padding
 
 SlowpokeBaseStats: ; 0x38c66
-	db 79 ; pokedex id
+	db DEX_SLOWPOKE ; pokedex id
 	db 90 ; base hp
 	db 65 ; base attack
 	db 65 ; base defense
@@ -24356,12 +24902,19 @@ SlowpokeBaseStats: ; 0x38c66
 
 	db 0 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$38c7a,$38c81 - $38c7a
+	; learnset
+	db %10100000
+	db %10111111
+	db %1000
+	db %11111110
+	db %11100011
+	db %111000
+	db %1110011
+
 	db 0 ; padding
 
 SlowbroBaseStats: ; 0x38c82
-	db 80 ; pokedex id
+	db DEX_SLOWBRO ; pokedex id
 	db 95 ; base hp
 	db 75 ; base attack
 	db 110 ; base defense
@@ -24386,12 +24939,19 @@ SlowbroBaseStats: ; 0x38c82
 
 	db 0 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$38c96,$38c9d - $38c96
+	; learnset
+	db %10110001
+	db %11111111
+	db %1111
+	db %11111110
+	db %11100011
+	db %111000
+	db %1110011
+
 	db 0 ; padding
 
 MagnemiteBaseStats: ; 0x38c9e
-	db 81 ; pokedex id
+	db DEX_MAGNEMITE ; pokedex id
 	db 25 ; base hp
 	db 35 ; base attack
 	db 70 ; base defense
@@ -24416,12 +24976,19 @@ MagnemiteBaseStats: ; 0x38c9e
 
 	db 0 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$38cb2,$38cb9 - $38cb2
+	; learnset
+	db %100000
+	db %11
+	db %10001000
+	db %11100001
+	db %1000011
+	db %11000
+	db %1000010
+
 	db 0 ; padding
 
 MagnetonBaseStats: ; 0x38cba
-	db 82 ; pokedex id
+	db DEX_MAGNETON ; pokedex id
 	db 50 ; base hp
 	db 60 ; base attack
 	db 95 ; base defense
@@ -24446,12 +25013,19 @@ MagnetonBaseStats: ; 0x38cba
 
 	db 0 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$38cce,$38cd5 - $38cce
+	; learnset
+	db %100000
+	db %1000011
+	db %10001000
+	db %11100001
+	db %1000011
+	db %11000
+	db %1000010
+
 	db 0 ; padding
 
 FarfetchdBaseStats: ; 0x38cd6
-	db 83 ; pokedex id
+	db DEX_FARFETCH_D ; pokedex id
 	db 52 ; base hp
 	db 65 ; base attack
 	db 55 ; base defense
@@ -24476,12 +25050,19 @@ FarfetchdBaseStats: ; 0x38cd6
 
 	db 0 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$38cea,$38cf1 - $38cea
+	; learnset
+	db %10101110
+	db %11
+	db %1000
+	db %11000000
+	db %11000011
+	db %1000
+	db %1110
+
 	db 0 ; padding
 
 DoduoBaseStats: ; 0x38cf2
-	db 84 ; pokedex id
+	db DEX_DODUO ; pokedex id
 	db 35 ; base hp
 	db 85 ; base attack
 	db 45 ; base defense
@@ -24506,12 +25087,19 @@ DoduoBaseStats: ; 0x38cf2
 
 	db 0 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$38d06,$38d0d - $38d06
+	; learnset
+	db %10101000
+	db %11
+	db %1000
+	db %11000000
+	db %10000011
+	db %1100
+	db %1011
+
 	db 0 ; padding
 
 DodrioBaseStats: ; 0x38d0e
-	db 85 ; pokedex id
+	db DEX_DODRIO ; pokedex id
 	db 60 ; base hp
 	db 110 ; base attack
 	db 70 ; base defense
@@ -24536,12 +25124,19 @@ DodrioBaseStats: ; 0x38d0e
 
 	db 0 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$38d22,$38d29 - $38d22
+	; learnset
+	db %10101000
+	db %1000011
+	db %1000
+	db %11000000
+	db %10000011
+	db %1100
+	db %1011
+
 	db 0 ; padding
 
 SeelBaseStats: ; 0x38d2a
-	db 86 ; pokedex id
+	db DEX_SEEL ; pokedex id
 	db 65 ; base hp
 	db 45 ; base attack
 	db 55 ; base defense
@@ -24566,12 +25161,19 @@ SeelBaseStats: ; 0x38d2a
 
 	db 0 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$38d3e,$38d45 - $38d3e
+	; learnset
+	db %11100000
+	db %10111111
+	db %1000
+	db %11000000
+	db %10000010
+	db %1000
+	db %110010
+
 	db 0 ; padding
 
 DewgongBaseStats: ; 0x38d46
-	db 87 ; pokedex id
+	db DEX_DEWGONG ; pokedex id
 	db 90 ; base hp
 	db 70 ; base attack
 	db 80 ; base defense
@@ -24596,12 +25198,19 @@ DewgongBaseStats: ; 0x38d46
 
 	db 0 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$38d5a,$38d61 - $38d5a
+	; learnset
+	db %11100000
+	db %11111111
+	db %1000
+	db %11000000
+	db %10000010
+	db %1000
+	db %110010
+
 	db 0 ; padding
 
 GrimerBaseStats: ; 0x38d62
-	db 88 ; pokedex id
+	db DEX_GRIMER ; pokedex id
 	db 80 ; base hp
 	db 80 ; base attack
 	db 50 ; base defense
@@ -24626,12 +25235,19 @@ GrimerBaseStats: ; 0x38d62
 
 	db 0 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$38d76,$38d7d - $38d76
+	; learnset
+	db %10100000
+	db %0
+	db %10011000
+	db %11000001
+	db %101010
+	db %1001000
+	db %10
+
 	db 0 ; padding
 
 MukBaseStats: ; 0x38d7e
-	db 89 ; pokedex id
+	db DEX_MUK ; pokedex id
 	db 105 ; base hp
 	db 105 ; base attack
 	db 75 ; base defense
@@ -24656,12 +25272,19 @@ MukBaseStats: ; 0x38d7e
 
 	db 0 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$38d92,$38d99 - $38d92
+	; learnset
+	db %10100000
+	db %1000000
+	db %10011000
+	db %11000001
+	db %101010
+	db %1001000
+	db %10
+
 	db 0 ; padding
 
 ShellderBaseStats: ; 0x38d9a
-	db 90 ; pokedex id
+	db DEX_SHELLDER ; pokedex id
 	db 30 ; base hp
 	db 65 ; base attack
 	db 100 ; base defense
@@ -24686,12 +25309,19 @@ ShellderBaseStats: ; 0x38d9a
 
 	db 5 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$38dae,$38db5 - $38dae
+	; learnset
+	db %100000
+	db %111111
+	db %1000
+	db %11100000
+	db %1001011
+	db %1001000
+	db %10011
+
 	db 0 ; padding
 
 CloysterBaseStats: ; 0x38db6
-	db 91 ; pokedex id
+	db DEX_CLOYSTER ; pokedex id
 	db 50 ; base hp
 	db 95 ; base attack
 	db 180 ; base defense
@@ -24716,12 +25346,19 @@ CloysterBaseStats: ; 0x38db6
 
 	db 5 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$38dca,$38dd1 - $38dca
+	; learnset
+	db %100000
+	db %1111111
+	db %1000
+	db %11100000
+	db %1001011
+	db %1001000
+	db %10011
+
 	db 0 ; padding
 
 GastlyBaseStats: ; 0x38dd2
-	db 92 ; pokedex id
+	db DEX_GASTLY ; pokedex id
 	db 30 ; base hp
 	db 35 ; base attack
 	db 30 ; base defense
@@ -24746,12 +25383,19 @@ GastlyBaseStats: ; 0x38dd2
 
 	db 3 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$38de6,$38ded - $38de6
+	; learnset
+	db %100000
+	db %0
+	db %10011000
+	db %11010001
+	db %1010
+	db %1101010
+	db %10
+
 	db 0 ; padding
 
 HaunterBaseStats: ; 0x38dee
-	db 93 ; pokedex id
+	db DEX_HAUNTER ; pokedex id
 	db 45 ; base hp
 	db 50 ; base attack
 	db 45 ; base defense
@@ -24776,12 +25420,19 @@ HaunterBaseStats: ; 0x38dee
 
 	db 3 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$38e02,$38e09 - $38e02
+	; learnset
+	db %100000
+	db %0
+	db %10011000
+	db %11010001
+	db %1010
+	db %1101010
+	db %10
+
 	db 0 ; padding
 
 GengarBaseStats: ; 0x38e0a
-	db 94 ; pokedex id
+	db DEX_GENGAR ; pokedex id
 	db 60 ; base hp
 	db 65 ; base attack
 	db 60 ; base defense
@@ -24806,12 +25457,19 @@ GengarBaseStats: ; 0x38e0a
 
 	db 3 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$38e1e,$38e25 - $38e1e
+	; learnset
+	db %10110001
+	db %1000011
+	db %10011111
+	db %11010001
+	db %10001110
+	db %1101010
+	db %100010
+
 	db 0 ; padding
 
 OnixBaseStats: ; 0x38e26
-	db 95 ; pokedex id
+	db DEX_ONIX ; pokedex id
 	db 35 ; base hp
 	db 45 ; base attack
 	db 160 ; base defense
@@ -24836,12 +25494,19 @@ OnixBaseStats: ; 0x38e26
 
 	db 0 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$38e3a,$38e41 - $38e3a
+	; learnset
+	db %10100000
+	db %11
+	db %1000
+	db %11001110
+	db %10001010
+	db %11001000
+	db %100010
+
 	db 0 ; padding
 
 DrowzeeBaseStats: ; 0x38e42
-	db 96 ; pokedex id
+	db DEX_DROWZEE ; pokedex id
 	db 60 ; base hp
 	db 48 ; base attack
 	db 45 ; base defense
@@ -24866,12 +25531,19 @@ DrowzeeBaseStats: ; 0x38e42
 
 	db 0 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$38e56,$38e5d - $38e56
+	; learnset
+	db %10110001
+	db %11
+	db %1111
+	db %11110000
+	db %10000111
+	db %111010
+	db %1000011
+
 	db 0 ; padding
 
 HypnoBaseStats: ; 0x38e5e
-	db 97 ; pokedex id
+	db DEX_HYPNO ; pokedex id
 	db 85 ; base hp
 	db 73 ; base attack
 	db 70 ; base defense
@@ -24896,12 +25568,19 @@ HypnoBaseStats: ; 0x38e5e
 
 	db 0 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$38e72,$38e79 - $38e72
+	; learnset
+	db %10110001
+	db %1000011
+	db %1111
+	db %11110000
+	db %10000111
+	db %111010
+	db %1000011
+
 	db 0 ; padding
 
 KrabbyBaseStats: ; 0x38e7a
-	db 98 ; pokedex id
+	db DEX_KRABBY ; pokedex id
 	db 30 ; base hp
 	db 105 ; base attack
 	db 90 ; base defense
@@ -24926,12 +25605,19 @@ KrabbyBaseStats: ; 0x38e7a
 
 	db 0 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$38e8e,$38e95 - $38e8e
+	; learnset
+	db %10100100
+	db %111111
+	db %1000
+	db %11000000
+	db %10
+	db %1000
+	db %110110
+
 	db 0 ; padding
 
 KinglerBaseStats: ; 0x38e96
-	db 99 ; pokedex id
+	db DEX_KINGLER ; pokedex id
 	db 55 ; base hp
 	db 130 ; base attack
 	db 115 ; base defense
@@ -24956,12 +25642,19 @@ KinglerBaseStats: ; 0x38e96
 
 	db 0 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$38eaa,$38eb1 - $38eaa
+	; learnset
+	db %10100100
+	db %1111111
+	db %1000
+	db %11000000
+	db %10
+	db %1000
+	db %110110
+
 	db 0 ; padding
 
 VoltorbBaseStats: ; 0x38eb2
-	db 100 ; pokedex id
+	db DEX_VOLTORB ; pokedex id
 	db 40 ; base hp
 	db 30 ; base attack
 	db 50 ; base defense
@@ -24986,12 +25679,19 @@ VoltorbBaseStats: ; 0x38eb2
 
 	db 0 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$38ec6,$38ecd - $38ec6
+	; learnset
+	db %100000
+	db %1
+	db %10001000
+	db %11100001
+	db %1001011
+	db %1011000
+	db %1000010
+
 	db 0 ; padding
 
 ElectrodeBaseStats: ; 0x38ece
-	db 101 ; pokedex id
+	db DEX_ELECTRODE ; pokedex id
 	db 60 ; base hp
 	db 50 ; base attack
 	db 70 ; base defense
@@ -25016,12 +25716,19 @@ ElectrodeBaseStats: ; 0x38ece
 
 	db 0 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$38ee2,$38ee9 - $38ee2
+	; learnset
+	db %100000
+	db %1000001
+	db %10001000
+	db %11100001
+	db %11001011
+	db %1011000
+	db %1000010
+
 	db 0 ; padding
 
 ExeggcuteBaseStats: ; 0x38eea
-	db 102 ; pokedex id
+	db DEX_EXEGGCUTE ; pokedex id
 	db 60 ; base hp
 	db 40 ; base attack
 	db 80 ; base defense
@@ -25046,12 +25753,19 @@ ExeggcuteBaseStats: ; 0x38eea
 
 	db 5 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$38efe,$38f05 - $38efe
+	; learnset
+	db %100000
+	db %11
+	db %1000
+	db %11110000
+	db %11011
+	db %1101000
+	db %10
+
 	db 0 ; padding
 
 ExeggutorBaseStats: ; 0x38f06
-	db 103 ; pokedex id
+	db DEX_EXEGGUTOR ; pokedex id
 	db 95 ; base hp
 	db 95 ; base attack
 	db 85 ; base defense
@@ -25076,12 +25790,19 @@ ExeggutorBaseStats: ; 0x38f06
 
 	db 5 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$38f1a,$38f21 - $38f1a
+	; learnset
+	db %100000
+	db %1000011
+	db %111000
+	db %11110000
+	db %11011
+	db %1101000
+	db %100010
+
 	db 0 ; padding
 
 CuboneBaseStats: ; 0x38f22
-	db 104 ; pokedex id
+	db DEX_CUBONE ; pokedex id
 	db 50 ; base hp
 	db 50 ; base attack
 	db 95 ; base defense
@@ -25106,12 +25827,19 @@ CuboneBaseStats: ; 0x38f22
 
 	db 0 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$38f36,$38f3d - $38f36
+	; learnset
+	db %10110001
+	db %111111
+	db %1111
+	db %11001110
+	db %10100010
+	db %1000
+	db %100010
+
 	db 0 ; padding
 
 MarowakBaseStats: ; 0x38f3e
-	db 105 ; pokedex id
+	db DEX_MAROWAK ; pokedex id
 	db 60 ; base hp
 	db 80 ; base attack
 	db 110 ; base defense
@@ -25136,12 +25864,19 @@ MarowakBaseStats: ; 0x38f3e
 
 	db 0 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$38f52,$38f59 - $38f52
+	; learnset
+	db %10110001
+	db %1111111
+	db %1111
+	db %11001110
+	db %10100010
+	db %1000
+	db %100010
+
 	db 0 ; padding
 
 HitmonleeBaseStats: ; 0x38f5a
-	db 106 ; pokedex id
+	db DEX_HITMONLEE ; pokedex id
 	db 50 ; base hp
 	db 120 ; base attack
 	db 53 ; base defense
@@ -25166,12 +25901,19 @@ HitmonleeBaseStats: ; 0x38f5a
 
 	db 0 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$38f6e,$38f75 - $38f6e
+	; learnset
+	db %10110001
+	db %11
+	db %1111
+	db %11000000
+	db %11000110
+	db %1000
+	db %100010
+
 	db 0 ; padding
 
 HitmonchanBaseStats: ; 0x38f76
-	db 107 ; pokedex id
+	db DEX_HITMONCHAN ; pokedex id
 	db 50 ; base hp
 	db 105 ; base attack
 	db 79 ; base defense
@@ -25196,12 +25938,19 @@ HitmonchanBaseStats: ; 0x38f76
 
 	db 0 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$38f8a,$38f91 - $38f8a
+	; learnset
+	db %10110001
+	db %11
+	db %1111
+	db %11000000
+	db %11000110
+	db %1000
+	db %100010
+
 	db 0 ; padding
 
 LickitungBaseStats: ; 0x38f92
-	db 108 ; pokedex id
+	db DEX_LICKITUNG ; pokedex id
 	db 90 ; base hp
 	db 55 ; base attack
 	db 75 ; base defense
@@ -25226,12 +25975,19 @@ LickitungBaseStats: ; 0x38f92
 
 	db 0 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$38fa6,$38fad - $38fa6
+	; learnset
+	db %10110101
+	db %1111111
+	db %10001111
+	db %11000111
+	db %10100010
+	db %1000
+	db %110110
+
 	db 0 ; padding
 
 KoffingBaseStats: ; 0x38fae
-	db 109 ; pokedex id
+	db DEX_KOFFING ; pokedex id
 	db 40 ; base hp
 	db 65 ; base attack
 	db 95 ; base defense
@@ -25256,12 +26012,19 @@ KoffingBaseStats: ; 0x38fae
 
 	db 0 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$38fc2,$38fc9 - $38fc2
+	; learnset
+	db %100000
+	db %0
+	db %10001000
+	db %11000001
+	db %101010
+	db %1001000
+	db %10
+
 	db 0 ; padding
 
 WeezingBaseStats: ; 0x38fca
-	db 110 ; pokedex id
+	db DEX_WEEZING ; pokedex id
 	db 65 ; base hp
 	db 90 ; base attack
 	db 120 ; base defense
@@ -25286,12 +26049,19 @@ WeezingBaseStats: ; 0x38fca
 
 	db 0 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$38fde,$38fe5 - $38fde
+	; learnset
+	db %100000
+	db %1000000
+	db %10001000
+	db %11000001
+	db %101010
+	db %1001000
+	db %10
+
 	db 0 ; padding
 
 RhyhornBaseStats: ; 0x38fe6
-	db 111 ; pokedex id
+	db DEX_RHYHORN ; pokedex id
 	db 80 ; base hp
 	db 85 ; base attack
 	db 95 ; base defense
@@ -25316,12 +26086,19 @@ RhyhornBaseStats: ; 0x38fe6
 
 	db 5 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$38ffa,$39001 - $38ffa
+	; learnset
+	db %11100000
+	db %11
+	db %10001000
+	db %11001111
+	db %10100010
+	db %10001000
+	db %100010
+
 	db 0 ; padding
 
 RhydonBaseStats: ; 0x39002
-	db 112 ; pokedex id
+	db DEX_RHYDON ; pokedex id
 	db 105 ; base hp
 	db 130 ; base attack
 	db 120 ; base defense
@@ -25346,12 +26123,19 @@ RhydonBaseStats: ; 0x39002
 
 	db 5 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$39016,$3901d - $39016
+	; learnset
+	db %11110001
+	db %11111111
+	db %10001111
+	db %11001111
+	db %10100010
+	db %10001000
+	db %110010
+
 	db 0 ; padding
 
 ChanseyBaseStats: ; 0x3901e
-	db 113 ; pokedex id
+	db DEX_CHANSEY ; pokedex id
 	db 250 ; base hp
 	db 5 ; base attack
 	db 5 ; base defense
@@ -25376,12 +26160,19 @@ ChanseyBaseStats: ; 0x3901e
 
 	db 4 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$39032,$39039 - $39032
+	; learnset
+	db %10110001
+	db %1111111
+	db %10101111
+	db %11110001
+	db %10110111
+	db %111001
+	db %1100011
+
 	db 0 ; padding
 
 TangelaBaseStats: ; 0x3903a
-	db 114 ; pokedex id
+	db DEX_TANGELA ; pokedex id
 	db 65 ; base hp
 	db 55 ; base attack
 	db 115 ; base defense
@@ -25406,12 +26197,19 @@ TangelaBaseStats: ; 0x3903a
 
 	db 0 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$3904e,$39055 - $3904e
+	; learnset
+	db %10100100
+	db %1000011
+	db %111000
+	db %11000000
+	db %10000010
+	db %1000
+	db %110
+
 	db 0 ; padding
 
 KangaskhanBaseStats: ; 0x39056
-	db 115 ; pokedex id
+	db DEX_KANGASKHAN ; pokedex id
 	db 105 ; base hp
 	db 95 ; base attack
 	db 80 ; base defense
@@ -25436,12 +26234,19 @@ KangaskhanBaseStats: ; 0x39056
 
 	db 0 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$3906a,$39071 - $3906a
+	; learnset
+	db %10110001
+	db %1111111
+	db %10001111
+	db %11000111
+	db %10100010
+	db %10001000
+	db %110010
+
 	db 0 ; padding
 
 HorseaBaseStats: ; 0x39072
-	db 116 ; pokedex id
+	db DEX_HORSEA ; pokedex id
 	db 30 ; base hp
 	db 40 ; base attack
 	db 70 ; base defense
@@ -25466,12 +26271,19 @@ HorseaBaseStats: ; 0x39072
 
 	db 0 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$39086,$3908d - $39086
+	; learnset
+	db %100000
+	db %111111
+	db %1000
+	db %11000000
+	db %11000010
+	db %1000
+	db %10010
+
 	db 0 ; padding
 
 SeadraBaseStats: ; 0x3908e
-	db 117 ; pokedex id
+	db DEX_SEADRA ; pokedex id
 	db 55 ; base hp
 	db 65 ; base attack
 	db 95 ; base defense
@@ -25496,12 +26308,19 @@ SeadraBaseStats: ; 0x3908e
 
 	db 0 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$390a2,$390a9 - $390a2
+	; learnset
+	db %100000
+	db %1111111
+	db %1000
+	db %11000000
+	db %11000010
+	db %1000
+	db %10010
+
 	db 0 ; padding
 
 GoldeenBaseStats: ; 0x390aa
-	db 118 ; pokedex id
+	db DEX_GOLDEEN ; pokedex id
 	db 45 ; base hp
 	db 67 ; base attack
 	db 60 ; base defense
@@ -25526,12 +26345,19 @@ GoldeenBaseStats: ; 0x390aa
 
 	db 0 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$390be,$390c5 - $390be
+	; learnset
+	db %1100000
+	db %111111
+	db %1000
+	db %11000000
+	db %11000010
+	db %1000
+	db %10010
+
 	db 0 ; padding
 
 SeakingBaseStats: ; 0x390c6
-	db 119 ; pokedex id
+	db DEX_SEAKING ; pokedex id
 	db 80 ; base hp
 	db 92 ; base attack
 	db 65 ; base defense
@@ -25556,12 +26382,19 @@ SeakingBaseStats: ; 0x390c6
 
 	db 0 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$390da,$390e1 - $390da
+	; learnset
+	db %1100000
+	db %1111111
+	db %1000
+	db %11000000
+	db %11000010
+	db %1000
+	db %10010
+
 	db 0 ; padding
 
 StaryuBaseStats: ; 0x390e2
-	db 120 ; pokedex id
+	db DEX_STARYU ; pokedex id
 	db 30 ; base hp
 	db 45 ; base attack
 	db 55 ; base defense
@@ -25586,12 +26419,19 @@ StaryuBaseStats: ; 0x390e2
 
 	db 5 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$390f6,$390fd - $390f6
+	; learnset
+	db %100000
+	db %111111
+	db %10001000
+	db %11110001
+	db %11000011
+	db %111000
+	db %1010011
+
 	db 0 ; padding
 
 StarmieBaseStats: ; 0x390fe
-	db 121 ; pokedex id
+	db DEX_STARMIE ; pokedex id
 	db 60 ; base hp
 	db 75 ; base attack
 	db 85 ; base defense
@@ -25616,12 +26456,19 @@ StarmieBaseStats: ; 0x390fe
 
 	db 5 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$39112,$39119 - $39112
+	; learnset
+	db %100000
+	db %1111111
+	db %10001000
+	db %11110001
+	db %11000011
+	db %111000
+	db %1010011
+
 	db 0 ; padding
 
 MrMimeBaseStats: ; 0x3911a
-	db 122 ; pokedex id
+	db DEX_MR_MIME ; pokedex id
 	db 40 ; base hp
 	db 45 ; base attack
 	db 65 ; base defense
@@ -25646,12 +26493,19 @@ MrMimeBaseStats: ; 0x3911a
 
 	db 0 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$3912e,$39135 - $3912e
+	; learnset
+	db %10110001
+	db %1000011
+	db %10101111
+	db %11110001
+	db %10000111
+	db %111000
+	db %1000010
+
 	db 0 ; padding
 
 ScytherBaseStats: ; 0x39136
-	db 123 ; pokedex id
+	db DEX_SCYTHER ; pokedex id
 	db 70 ; base hp
 	db 110 ; base attack
 	db 80 ; base defense
@@ -25676,12 +26530,19 @@ ScytherBaseStats: ; 0x39136
 
 	db 0 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$3914a,$39151 - $3914a
+	; learnset
+	db %100100
+	db %1000011
+	db %1000
+	db %11000000
+	db %11000010
+	db %1000
+	db %110
+
 	db 0 ; padding
 
 JynxBaseStats: ; 0x39152
-	db 124 ; pokedex id
+	db DEX_JYNX ; pokedex id
 	db 65 ; base hp
 	db 50 ; base attack
 	db 35 ; base defense
@@ -25706,12 +26567,19 @@ JynxBaseStats: ; 0x39152
 
 	db 0 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$39166,$3916d - $39166
+	; learnset
+	db %10110001
+	db %1111111
+	db %1111
+	db %11110000
+	db %10000111
+	db %101000
+	db %10
+
 	db 0 ; padding
 
 ElectabuzzBaseStats: ; 0x3916e
-	db 125 ; pokedex id
+	db DEX_ELECTABUZZ ; pokedex id
 	db 65 ; base hp
 	db 83 ; base attack
 	db 57 ; base defense
@@ -25736,12 +26604,19 @@ ElectabuzzBaseStats: ; 0x3916e
 
 	db 0 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$39182,$39189 - $39182
+	; learnset
+	db %10110001
+	db %1000011
+	db %10001111
+	db %11110001
+	db %11000111
+	db %111000
+	db %1100010
+
 	db 0 ; padding
 
 MagmarBaseStats: ; 0x3918a
-	db 126 ; pokedex id
+	db DEX_MAGMAR ; pokedex id
 	db 65 ; base hp
 	db 95 ; base attack
 	db 57 ; base defense
@@ -25766,12 +26641,19 @@ MagmarBaseStats: ; 0x3918a
 
 	db 0 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$3919e,$391a5 - $3919e
+	; learnset
+	db %10110001
+	db %1000011
+	db %1111
+	db %11110000
+	db %10100110
+	db %101000
+	db %100010
+
 	db 0 ; padding
 
 PinsirBaseStats: ; 0x391a6
-	db 127 ; pokedex id
+	db DEX_PINSIR ; pokedex id
 	db 65 ; base hp
 	db 125 ; base attack
 	db 100 ; base defense
@@ -25796,12 +26678,19 @@ PinsirBaseStats: ; 0x391a6
 
 	db 5 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$391ba,$391c1 - $391ba
+	; learnset
+	db %10100100
+	db %1000011
+	db %1101
+	db %11000000
+	db %10
+	db %1000
+	db %100110
+
 	db 0 ; padding
 
 TaurosBaseStats: ; 0x391c2
-	db 128 ; pokedex id
+	db DEX_TAUROS ; pokedex id
 	db 75 ; base hp
 	db 100 ; base attack
 	db 95 ; base defense
@@ -25826,12 +26715,19 @@ TaurosBaseStats: ; 0x391c2
 
 	db 5 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$391d6,$391dd - $391d6
+	; learnset
+	db %11100000
+	db %1110011
+	db %10001000
+	db %11000111
+	db %10100010
+	db %1000
+	db %100010
+
 	db 0 ; padding
 
 MagikarpBaseStats: ; 0x391de
-	db 129 ; pokedex id
+	db DEX_MAGIKARP ; pokedex id
 	db 20 ; base hp
 	db 10 ; base attack
 	db 55 ; base defense
@@ -25856,12 +26752,19 @@ MagikarpBaseStats: ; 0x391de
 
 	db 5 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$391f2,$391f9 - $391f2
+	; learnset
+	db %0
+	db %0
+	db %0
+	db %0
+	db %0
+	db %0
+	db %0
+
 	db 0 ; padding
 
 GyaradosBaseStats: ; 0x391fa
-	db 130 ; pokedex id
+	db DEX_GYARADOS ; pokedex id
 	db 95 ; base hp
 	db 125 ; base attack
 	db 79 ; base defense
@@ -25886,12 +26789,19 @@ GyaradosBaseStats: ; 0x391fa
 
 	db 5 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$3920e,$39215 - $3920e
+	; learnset
+	db %10100000
+	db %1111111
+	db %11001000
+	db %11000001
+	db %10100011
+	db %1000
+	db %110010
+
 	db 0 ; padding
 
 LaprasBaseStats: ; 0x39216
-	db 131 ; pokedex id
+	db DEX_LAPRAS ; pokedex id
 	db 130 ; base hp
 	db 85 ; base attack
 	db 80 ; base defense
@@ -25916,12 +26826,19 @@ LaprasBaseStats: ; 0x39216
 
 	db 5 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$3922a,$39231 - $3922a
+	; learnset
+	db %11100000
+	db %1111111
+	db %11101000
+	db %11010001
+	db %10000011
+	db %101000
+	db %110010
+
 	db 0 ; padding
 
 DittoBaseStats: ; 0x39232
-	db 132 ; pokedex id
+	db DEX_DITTO ; pokedex id
 	db 48 ; base hp
 	db 48 ; base attack
 	db 48 ; base defense
@@ -25946,12 +26863,19 @@ DittoBaseStats: ; 0x39232
 
 	db 0 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$39246,$3924d - $39246
+	; learnset
+	db %0
+	db %0
+	db %0
+	db %0
+	db %0
+	db %0
+	db %0
+
 	db 0 ; padding
 
 EeveeBaseStats: ; 0x3924e
-	db 133 ; pokedex id
+	db DEX_EEVEE ; pokedex id
 	db 55 ; base hp
 	db 55 ; base attack
 	db 50 ; base defense
@@ -25976,12 +26900,19 @@ EeveeBaseStats: ; 0x3924e
 
 	db 0 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$39262,$39269 - $39262
+	; learnset
+	db %10100000
+	db %11
+	db %1000
+	db %11000000
+	db %11000011
+	db %1000
+	db %10
+
 	db 0 ; padding
 
 VaporeonBaseStats: ; 0x3926a
-	db 134 ; pokedex id
+	db DEX_VAPOREON ; pokedex id
 	db 130 ; base hp
 	db 65 ; base attack
 	db 60 ; base defense
@@ -26006,12 +26937,19 @@ VaporeonBaseStats: ; 0x3926a
 
 	db 0 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$3927e,$39285 - $3927e
+	; learnset
+	db %10100000
+	db %1111111
+	db %1000
+	db %11000000
+	db %11000011
+	db %1000
+	db %10010
+
 	db 0 ; padding
 
 JolteonBaseStats: ; 0x39286
-	db 135 ; pokedex id
+	db DEX_JOLTEON ; pokedex id
 	db 65 ; base hp
 	db 65 ; base attack
 	db 60 ; base defense
@@ -26036,12 +26974,19 @@ JolteonBaseStats: ; 0x39286
 
 	db 0 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$3929a,$392a1 - $3929a
+	; learnset
+	db %10100000
+	db %1000011
+	db %10001000
+	db %11000001
+	db %11000011
+	db %11000
+	db %1000010
+
 	db 0 ; padding
 
 FlareonBaseStats: ; 0x392a2
-	db 136 ; pokedex id
+	db DEX_FLAREON ; pokedex id
 	db 65 ; base hp
 	db 130 ; base attack
 	db 60 ; base defense
@@ -26066,12 +27011,19 @@ FlareonBaseStats: ; 0x392a2
 
 	db 0 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$392b6,$392bd - $392b6
+	; learnset
+	db %10100000
+	db %1000011
+	db %1000
+	db %11000000
+	db %11100011
+	db %1000
+	db %10
+
 	db 0 ; padding
 
 PorygonBaseStats: ; 0x392be
-	db 137 ; pokedex id
+	db DEX_PORYGON ; pokedex id
 	db 65 ; base hp
 	db 60 ; base attack
 	db 70 ; base defense
@@ -26096,12 +27048,19 @@ PorygonBaseStats: ; 0x392be
 
 	db 0 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$392d2,$392d9 - $392d2
+	; learnset
+	db %100000
+	db %1110011
+	db %10001000
+	db %11110001
+	db %11000011
+	db %111000
+	db %1000011
+
 	db 0 ; padding
 
 OmanyteBaseStats: ; 0x392da
-	db 138 ; pokedex id
+	db DEX_OMANYTE ; pokedex id
 	db 35 ; base hp
 	db 40 ; base attack
 	db 100 ; base defense
@@ -26126,12 +27085,19 @@ OmanyteBaseStats: ; 0x392da
 
 	db 0 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$392ee,$392f5 - $392ee
+	; learnset
+	db %10100000
+	db %111111
+	db %1000
+	db %11000000
+	db %11
+	db %1000
+	db %10010
+
 	db 0 ; padding
 
 OmastarBaseStats: ; 0x392f6
-	db 139 ; pokedex id
+	db DEX_OMASTAR ; pokedex id
 	db 70 ; base hp
 	db 60 ; base attack
 	db 125 ; base defense
@@ -26156,12 +27122,19 @@ OmastarBaseStats: ; 0x392f6
 
 	db 0 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$3930a,$39311 - $3930a
+	; learnset
+	db %11100000
+	db %1111111
+	db %1101
+	db %11000000
+	db %10000011
+	db %1000
+	db %10010
+
 	db 0 ; padding
 
 KabutoBaseStats: ; 0x39312
-	db 140 ; pokedex id
+	db DEX_KABUTO ; pokedex id
 	db 30 ; base hp
 	db 80 ; base attack
 	db 90 ; base defense
@@ -26186,12 +27159,19 @@ KabutoBaseStats: ; 0x39312
 
 	db 0 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$39326,$3932d - $39326
+	; learnset
+	db %10100000
+	db %111111
+	db %1000
+	db %11000000
+	db %11
+	db %1000
+	db %10010
+
 	db 0 ; padding
 
 KabutopsBaseStats: ; 0x3932e
-	db 141 ; pokedex id
+	db DEX_KABUTOPS ; pokedex id
 	db 60 ; base hp
 	db 115 ; base attack
 	db 105 ; base defense
@@ -26216,12 +27196,19 @@ KabutopsBaseStats: ; 0x3932e
 
 	db 0 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$39342,$39349 - $39342
+	; learnset
+	db %10110110
+	db %1111111
+	db %1101
+	db %11000000
+	db %10000011
+	db %1000
+	db %10010
+
 	db 0 ; padding
 
 AerodactylBaseStats: ; 0x3934a
-	db 142 ; pokedex id
+	db DEX_AERODACTYL ; pokedex id
 	db 80 ; base hp
 	db 105 ; base attack
 	db 65 ; base defense
@@ -26246,12 +27233,19 @@ AerodactylBaseStats: ; 0x3934a
 
 	db 5 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$3935e,$39365 - $3935e
+	; learnset
+	db %101010
+	db %1000011
+	db %1001000
+	db %11000000
+	db %1100011
+	db %1100
+	db %1010
+
 	db 0 ; padding
 
 SnorlaxBaseStats: ; 0x39366
-	db 143 ; pokedex id
+	db DEX_SNORLAX ; pokedex id
 	db 160 ; base hp
 	db 110 ; base attack
 	db 65 ; base defense
@@ -26276,12 +27270,19 @@ SnorlaxBaseStats: ; 0x39366
 
 	db 5 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$3937a,$39381 - $3937a
+	; learnset
+	db %10110001
+	db %11111111
+	db %10101111
+	db %11010111
+	db %10101111
+	db %10101000
+	db %110010
+
 	db 0 ; padding
 
 ArticunoBaseStats: ; 0x39382
-	db 144 ; pokedex id
+	db DEX_ARTICUNO ; pokedex id
 	db 90 ; base hp
 	db 85 ; base attack
 	db 100 ; base defense
@@ -26306,12 +27307,19 @@ ArticunoBaseStats: ; 0x39382
 
 	db 5 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$39396,$3939d - $39396
+	; learnset
+	db %101010
+	db %1111111
+	db %1000
+	db %11000000
+	db %1000011
+	db %1100
+	db %1010
+
 	db 0 ; padding
 
 ZapdosBaseStats: ; 0x3939e
-	db 145 ; pokedex id
+	db DEX_ZAPDOS ; pokedex id
 	db 90 ; base hp
 	db 90 ; base attack
 	db 85 ; base defense
@@ -26336,12 +27344,19 @@ ZapdosBaseStats: ; 0x3939e
 
 	db 5 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$393b2,$393b9 - $393b2
+	; learnset
+	db %101010
+	db %1000011
+	db %10001000
+	db %11000001
+	db %1000011
+	db %11100
+	db %1001010
+
 	db 0 ; padding
 
 MoltresBaseStats: ; 0x393ba
-	db 146 ; pokedex id
+	db DEX_MOLTRES ; pokedex id
 	db 90 ; base hp
 	db 100 ; base attack
 	db 90 ; base defense
@@ -26366,12 +27381,19 @@ MoltresBaseStats: ; 0x393ba
 
 	db 5 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$393ce,$393d5 - $393ce
+	; learnset
+	db %101010
+	db %1000011
+	db %1000
+	db %11000000
+	db %1100011
+	db %1100
+	db %1010
+
 	db 0 ; padding
 
 DratiniBaseStats: ; 0x393d6
-	db 147 ; pokedex id
+	db DEX_DRATINI ; pokedex id
 	db 41 ; base hp
 	db 64 ; base attack
 	db 45 ; base defense
@@ -26396,12 +27418,19 @@ DratiniBaseStats: ; 0x393d6
 
 	db 5 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$393ea,$393f1 - $393ea
+	; learnset
+	db %10100000
+	db %111111
+	db %11001000
+	db %11000001
+	db %11100011
+	db %11000
+	db %10010
+
 	db 0 ; padding
 
 DragonairBaseStats: ; 0x393f2
-	db 148 ; pokedex id
+	db DEX_DRAGONAIR ; pokedex id
 	db 61 ; base hp
 	db 84 ; base attack
 	db 65 ; base defense
@@ -26426,12 +27455,19 @@ DragonairBaseStats: ; 0x393f2
 
 	db 5 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$39406,$3940d - $39406
+	; learnset
+	db %11100000
+	db %111111
+	db %11001000
+	db %11000001
+	db %11100011
+	db %11000
+	db %10010
+
 	db 0 ; padding
 
 DragoniteBaseStats: ; 0x3940e
-	db 149 ; pokedex id
+	db DEX_DRAGONITE ; pokedex id
 	db 91 ; base hp
 	db 134 ; base attack
 	db 95 ; base defense
@@ -26456,12 +27492,19 @@ DragoniteBaseStats: ; 0x3940e
 
 	db 5 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$39422,$39429 - $39422
+	; learnset
+	db %11100010
+	db %1111111
+	db %11001000
+	db %11000001
+	db %11100011
+	db %11000
+	db %110010
+
 	db 0 ; padding
 
 MewtwoBaseStats: ; 0x3942a
-	db 150 ; pokedex id
+	db DEX_MEWTWO ; pokedex id
 	db 106 ; base hp
 	db 110 ; base attack
 	db 90 ; base defense
@@ -26486,12 +27529,18 @@ MewtwoBaseStats: ; 0x3942a
 
 	db 5 ; growth rate
 	
-	; include learnset directly
-	INCBIN "baserom.gbc",$3943e,$39445 - $3943e
+	; learnset
+	db %10110001
+	db %11111111
+	db %10101111
+	db %11110001
+	db %10101111
+	db %111000
+	db %1100011
+
 	db 0 ; padding
 
-; XXX MewBaseStats
-INCBIN "baserom.gbc",$39446,$39884 - $39446
+INCBIN "baserom.gbc",$39446,$43e
 
 ReadMove: ; 5884
 	push hl

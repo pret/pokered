@@ -221,7 +221,7 @@ def reset_incbins():
     isolate_incbins()
     process_incbins()
 
-def apply_diff(diff, try_fixing=True):
+def apply_diff(diff, try_fixing=True, do_compile=True):
     print "... Applying diff."
 
     #write the diff to a file
@@ -237,13 +237,14 @@ def apply_diff(diff, try_fixing=True):
     os.system("rm temp.patch")
 
     #confirm it's working
-    try:
-        subprocess.check_call("cd ../; make clean; LC_CTYPE=C make", shell=True)
-        return True
-    except Exception, exc:
-        if try_fixing:
-            os.system("mv ../main1.asm ../main.asm")
-        return False
+    if do_compile:
+        try:
+            subprocess.check_call("cd ../; make clean; LC_CTYPE=C make", shell=True)
+            return True
+        except Exception, exc:
+            if try_fixing:
+                os.system("mv ../main1.asm ../main.asm")
+            return False
 
 def index(seq, f):
     """return the index of the first item in seq

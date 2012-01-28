@@ -747,7 +747,7 @@ def base_data_pretty_printer(id):
     incbin_end_address = base_address + 27
 
     output = mon_name.title() + ("BaseStats: ; 0x%.x" % (base_address)) + "\n"
-    output += spacing + "db " + str(id+1) + " ; pokedex id\n"
+    output += spacing + "db DEX_" + mon_name.upper() + " ; pokedex id\n"
     output += spacing + ("db " + str(base_hp)) + " ; base hp\n"
     output += spacing + "db " + str(base_attack) + " ; base attack\n"
     output += spacing + "db " + str(base_defense) + " ; base defense\n"
@@ -766,8 +766,17 @@ def base_data_pretty_printer(id):
     output += spacing + "db " + attack3 + "\n"
     output += spacing + "db " + attack4 + "\n\n"
     output += spacing + "db " + str(growth_rate) + " ; growth rate\n"
-    output += spacing + "\n" + spacing + "; include learnset directly\n"
-    output += spacing + ("INCBIN \"baserom.gbc\",$%.x,$%.x - $%.x\n" % (incbin_start_address, incbin_end_address, incbin_start_address))
+    output += spacing + "\n" + spacing + "; learnset\n"
+    
+    #learnset crap
+    output += spacing + "db %" + bin(ord(rom[base_address + 20]))[2:] + "\n"
+    output += spacing + "db %" + bin(ord(rom[base_address + 21]))[2:] + "\n"
+    output += spacing + "db %" + bin(ord(rom[base_address + 22]))[2:] + "\n"
+    output += spacing + "db %" + bin(ord(rom[base_address + 23]))[2:] + "\n"
+    output += spacing + "db %" + bin(ord(rom[base_address + 24]))[2:] + "\n"
+    output += spacing + "db %" + bin(ord(rom[base_address + 25]))[2:] + "\n"
+    output += spacing + "db %" + bin(ord(rom[base_address + 26]))[2:] + "\n\n"
+
     output += spacing + "db 0 ; padding\n"
 
     return output
@@ -804,10 +813,10 @@ def insert_base_stats(id):
 
     diff = generate_diff_insert(line_number, newlines)
     print diff
-    apply_diff(diff, try_fixing=False)
+    apply_diff(diff, try_fixing=False, do_compile=False)
 
 def insert_all_base_stats():
-    for id in range(0, 152):
+    for id in range(0, 151):
         #if id < 62: continue #skip
         insert_base_stats(id)
         
