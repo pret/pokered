@@ -13638,8 +13638,6 @@ UnnamedText_fc45: ; 0xfc45
 	db $50
 ; 0xfc45 + 5 bytes
 
-INCBIN "baserom.gbc",$fc4a,$3b6
-
 SECTION "bank4",DATA,BANK[$4]
 
 INCBIN "baserom.gbc",$10000,$12e7f - $10000
