@@ -41616,8 +41616,6 @@ SafariZoneSecretHouseObject: ; 0x4a365 (size=26)
 SafariZoneSecretHouseBlocks: ; 0x4a37f 16
 	INCBIN "maps/safarizonesecrethouse.blk"
 
-INCBIN "baserom.gbc",$4a38f,$1c71
-
 SECTION "bank13",DATA,BANK[$13]
 
 YoungsterPic:
