@@ -31318,7 +31318,8 @@ UnnamedText_3bbdc: ; 0x3bbdc
 	db $50
 ; 0x3bbdc + 5 bytes
 
-INCBIN "baserom.gbc",$3bbe1,$41f
+Unnamed_3bbe1: ; 0x3bbe1
+	db $6, $f, $c3, $d6, $35
 
 SECTION "bankF",DATA,BANK[$F]
 
