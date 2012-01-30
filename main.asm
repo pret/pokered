@@ -13640,7 +13640,62 @@ UnnamedText_fc45: ; 0xfc45
 
 SECTION "bank4",DATA,BANK[$4]
 
-INCBIN "baserom.gbc",$10000,$12e7f - $10000
+OakAideSprite: ; 0x10000
+	INCBIN "gfx/sprites/oak_aide.2bpp" ; was $10000
+RockerSprite: ; 0x10180
+	INCBIN "gfx/sprites/rocker.2bpp" ; was $10180
+SwimmerSprite: ; 0x10300
+	INCBIN "gfx/sprites/swimmer.2bpp" ; was $10300
+WhitePlayerSprite: ; 0x10480
+	INCBIN "gfx/sprites/white_player.2bpp" ; was $10480
+GymHelperSprite: ; 0x10540
+	INCBIN "gfx/sprites/gym_helper.2bpp" ; was $10540
+OldPersonSprite: ; 0x10600
+	INCBIN "gfx/sprites/old_person.2bpp" ; was $10600
+MartGuySprite: ; 0x106c0
+	INCBIN "gfx/sprites/mart_guy.2bpp" ; was $106c0
+FisherSprite: ; 0x10780
+	INCBIN "gfx/sprites/fisher.2bpp" ; was $10780
+OldMediumWomanSprite: ; 0x10840
+	INCBIN "gfx/sprites/old_medium_woman.2bpp" ; was $10840
+NurseSprite: ; 0x10900
+	INCBIN "gfx/sprites/nurse.2bpp" ; was $10900
+CableClubWomanSprite: ; 0x109c0
+	INCBIN "gfx/sprites/cable_club_woman.2bpp" ; was $109c0
+MrMasterballSprite: ; 0x10a80
+	INCBIN "gfx/sprites/mr_masterball.2bpp" ; was $10a80
+LaprasGiverSprite: ; 0x10b40
+	INCBIN "gfx/sprites/lapras_giver.2bpp" ; was $10b40
+WardenSprite: ; 0x10c00
+	INCBIN "gfx/sprites/warden.2bpp" ; was $10c00
+SsCaptainSprite: ; 0x10cc0
+	INCBIN "gfx/sprites/ss_captain.2bpp" ; was $10cc0
+Fisher2Sprite: ; 0x10d80
+	INCBIN "gfx/sprites/fisher2.2bpp" ; was $10d80
+BlackbeltSprite: ; 0x10f00
+	INCBIN "gfx/sprites/blackbelt.2bpp" ; was $10f00
+GuardSprite: ; 0x11080
+	INCBIN "gfx/sprites/guard.2bpp" ; was $11080
+BallSprite: ; 0x11140
+	INCBIN "gfx/sprites/ball.2bpp" ; was $11140
+OmanyteSprite: ; 0x11180
+	INCBIN "gfx/sprites/omanyte.2bpp" ; was $11180
+BoulderSprite: ; 0x111c0
+	INCBIN "gfx/sprites/boulder.2bpp" ; was $111c0
+PaperSheetSprite: ; 0x11200
+	INCBIN "gfx/sprites/paper_sheet.2bpp" ; was $11200
+BookMapDexSprite: ; 0x11240
+	INCBIN "gfx/sprites/book_map_dex.2bpp" ; was $11240
+ClipboardSprite: ; 0x11280
+	INCBIN "gfx/sprites/clipboard.2bpp" ; was $11280
+SnorlaxSprite: ; 0x112c0
+	INCBIN "gfx/sprites/snorlax.2bpp" ; was $112c0
+OldAmberSprite: ; 0x11300
+	INCBIN "gfx/sprites/old_amber.2bpp" ; was $11300
+LyingOldManSprite: ; 0x11340
+	INCBIN "gfx/sprites/lying_old_man.2bpp" ; was $11340
+
+INCBIN "baserom.gbc",$11380,$12e7f - $11380
 
 UnnamedText_12e7f: ; 0x12e7f
 	TX_FAR _UnnamedText_12e7f
@@ -13871,7 +13926,452 @@ GenRandom_: ; 7A8F
 
 SECTION "bank5",DATA,BANK[$5]
 
-INCBIN "baserom.gbc",$14000,$17e1d - $14000
+INCBIN "baserom.gbc",$14000,$14180 - $14000
+
+RedSprite: ; 0x14180
+	INCBIN "gfx/sprites/red.2bpp" ; was $14180
+BlueSprite: ; 0x14300
+	INCBIN "gfx/sprites/blue.2bpp" ; was $14300
+OakSprite: ; 0x14480
+	INCBIN "gfx/sprites/oak.2bpp" ; was $14480
+BugCatcherSprite: ; 0x14600
+	INCBIN "gfx/sprites/bug_catcher.2bpp" ; was $14600
+SlowbroSprite: ; 0x14780
+	INCBIN "gfx/sprites/slowbro.2bpp" ; was $14780
+LassSprite: ; 0x14900
+	INCBIN "gfx/sprites/lass.2bpp" ; was $14900
+BlackHairBoy1Sprite: ; 0x14a80
+	INCBIN "gfx/sprites/black_hair_boy_1.2bpp" ; was $14a80
+LittleGirlSprite: ; 0x14c00
+	INCBIN "gfx/sprites/little_girl.2bpp" ; was $14c00
+BirdSprite: ; 0x14d80
+	INCBIN "gfx/sprites/bird.2bpp" ; was $14d80
+FatBaldGuySprite: ; 0x14f00
+	INCBIN "gfx/sprites/fat_bald_guy.2bpp" ; was $14f00
+GamblerSprite: ; 0x15080
+	INCBIN "gfx/sprites/gambler.2bpp" ; was $15080
+BlackHairBoy2Sprite: ; 0x15200
+	INCBIN "gfx/sprites/black_hair_boy_2.2bpp" ; was $15200
+GirlSprite: ; 0x15380
+	INCBIN "gfx/sprites/girl.2bpp" ; was $15380
+HikerSprite: ; 0x15500
+	INCBIN "gfx/sprites/hiker.2bpp" ; was $15500
+FoulardWomanSprite: ; 0x15680
+	INCBIN "gfx/sprites/foulard_woman.2bpp" ; was $15680
+GentlemanSprite: ; 0x15800
+	INCBIN "gfx/sprites/gentleman.2bpp" ; was $15800
+DaisySprite: ; 0x15980
+	INCBIN "gfx/sprites/daisy.2bpp" ; was $15980
+BikerSprite: ; 0x15b00
+	INCBIN "gfx/sprites/biker.2bpp" ; was $15b00
+SailorSprite: ; 0x15c80
+	INCBIN "gfx/sprites/sailor.2bpp" ; was $15c80
+CookSprite: ; 0x15e00
+	INCBIN "gfx/sprites/cook.2bpp" ; was $15e00
+BikeShopGuySprite: ; 0x15f80
+	INCBIN "gfx/sprites/bike_shop_guy.2bpp" ; was $15f80
+MrFujiSprite: ; 0x16040
+	INCBIN "gfx/sprites/mr_fuji.2bpp" ; was $16040
+GiovanniSprite: ; 0x161c0
+	INCBIN "gfx/sprites/giovanni.2bpp" ; was $161c0
+RocketSprite: ; 0x16340
+	INCBIN "gfx/sprites/rocket.2bpp" ; was $16340
+MediumSprite: ; 0x164c0
+	INCBIN "gfx/sprites/medium.2bpp" ; was $164c0
+WaiterSprite: ; 0x16640
+	INCBIN "gfx/sprites/waiter.2bpp" ; was $16640
+ErikaSprite: ; 0x167c0
+	INCBIN "gfx/sprites/erika.2bpp" ; was $167c0
+MomGeishaSprite: ; 0x16940
+	INCBIN "gfx/sprites/mom_geisha.2bpp" ; was $16940
+BrunetteGirlSprite: ; 0x16ac0
+	INCBIN "gfx/sprites/brunette_girl.2bpp" ; was $16ac0
+LanceSprite: ; 0x16c40
+	INCBIN "gfx/sprites/lance.2bpp" ; was $16c40
+MomSprite: ; 0x16dc0
+	INCBIN "gfx/sprites/mom.2bpp" ; was $16dc0
+BaldingGuySprite: ; 0x16e80
+	INCBIN "gfx/sprites/balding_guy.2bpp" ; was $16e80
+YoungBoySprite: ; 0x16f40
+	INCBIN "gfx/sprites/young_boy.2bpp" ; was $16f40
+GameboyKidSprite: ; 0x17000
+	INCBIN "gfx/sprites/gameboy_kid.2bpp" ; was $17000
+ClefairySprite: ; 0x170c0
+	INCBIN "gfx/sprites/clefairy.2bpp" ; was $170c0
+AgathaSprite: ; 0x17240
+	INCBIN "gfx/sprites/agatha.2bpp" ; was $17240
+BrunoSprite: ; 0x173c0
+	INCBIN "gfx/sprites/bruno.2bpp" ; was $173c0
+LoreleiSprite: ; 0x17540
+	INCBIN "gfx/sprites/lorelei.2bpp" ; was $17540
+SeelSprite: ; 0x176c0
+	INCBIN "gfx/sprites/seel.2bpp" ; was $176c0
+
+INCBIN "baserom.gbc",$17840,$17b27 - $17840
+
+SpriteSheetPointerTable: ; 0x17b27
+	; SPRITE_RED
+	dw RedSprite
+	db $c0 ; byte count
+	db BANK(RedSprite)
+
+	; SPRITE_BLUE
+	dw BlueSprite
+	db $c0 ; byte count
+	db BANK(BlueSprite)
+
+	; SPRITE_OAK
+	dw OakSprite
+	db $c0 ; byte count
+	db BANK(OakSprite)
+
+	; SPRITE_BUG_CATCHER
+	dw BugCatcherSprite
+	db $c0 ; byte count
+	db BANK(BugCatcherSprite)
+
+	; SPRITE_SLOWBRO
+	dw SlowbroSprite
+	db $c0 ; byte count
+	db BANK(SlowbroSprite)
+
+	; SPRITE_LASS
+	dw LassSprite
+	db $c0 ; byte count
+	db BANK(LassSprite)
+
+	; SPRITE_BLACK_HAIR_BOY_1
+	dw BlackHairBoy1Sprite
+	db $c0 ; byte count
+	db BANK(BlackHairBoy1Sprite)
+
+	; SPRITE_LITTLE_GIRL
+	dw LittleGirlSprite
+	db $c0 ; byte count
+	db BANK(LittleGirlSprite)
+
+	; SPRITE_BIRD
+	dw BirdSprite
+	db $c0 ; byte count
+	db BANK(BirdSprite)
+
+	; SPRITE_FAT_BALD_GUY
+	dw FatBaldGuySprite
+	db $c0 ; byte count
+	db BANK(FatBaldGuySprite)
+
+	; SPRITE_GAMBLER
+	dw GamblerSprite
+	db $c0 ; byte count
+	db BANK(GamblerSprite)
+
+	; SPRITE_BLACK_HAIR_BOY_2
+	dw BlackHairBoy2Sprite
+	db $c0 ; byte count
+	db BANK(BlackHairBoy2Sprite)
+
+	; SPRITE_GIRL
+	dw GirlSprite
+	db $c0 ; byte count
+	db BANK(GirlSprite)
+
+	; SPRITE_HIKER
+	dw HikerSprite
+	db $c0 ; byte count
+	db BANK(HikerSprite)
+
+	; SPRITE_FOULARD_WOMAN
+	dw FoulardWomanSprite
+	db $c0 ; byte count
+	db BANK(FoulardWomanSprite)
+
+	; SPRITE_GENTLEMAN
+	dw GentlemanSprite
+	db $c0 ; byte count
+	db BANK(GentlemanSprite)
+
+	; SPRITE_DAISY
+	dw DaisySprite
+	db $c0 ; byte count
+	db BANK(DaisySprite)
+
+	; SPRITE_BIKER
+	dw BikerSprite
+	db $c0 ; byte count
+	db BANK(BikerSprite)
+
+	; SPRITE_SAILOR
+	dw SailorSprite
+	db $c0 ; byte count
+	db BANK(SailorSprite)
+
+	; SPRITE_COOK
+	dw CookSprite
+	db $c0 ; byte count
+	db BANK(CookSprite)
+
+	; SPRITE_BIKE_SHOP_GUY
+	dw BikeShopGuySprite
+	db $c0 ; byte count
+	db BANK(BikeShopGuySprite)
+
+	; SPRITE_MR_FUJI
+	dw MrFujiSprite
+	db $c0 ; byte count
+	db BANK(MrFujiSprite)
+
+	; SPRITE_GIOVANNI
+	dw GiovanniSprite
+	db $c0 ; byte count
+	db BANK(GiovanniSprite)
+
+	; SPRITE_ROCKET
+	dw RocketSprite
+	db $c0 ; byte count
+	db BANK(RocketSprite)
+
+	; SPRITE_MEDIUM
+	dw MediumSprite
+	db $c0 ; byte count
+	db BANK(MediumSprite)
+
+	; SPRITE_WAITER
+	dw WaiterSprite
+	db $c0 ; byte count
+	db BANK(WaiterSprite)
+
+	; SPRITE_ERIKA
+	dw ErikaSprite
+	db $c0 ; byte count
+	db BANK(ErikaSprite)
+
+	; SPRITE_MOM_GEISHA
+	dw MomGeishaSprite
+	db $c0 ; byte count
+	db BANK(MomGeishaSprite)
+
+	; SPRITE_BRUNETTE_GIRL
+	dw BrunetteGirlSprite
+	db $c0 ; byte count
+	db BANK(BrunetteGirlSprite)
+
+	; SPRITE_LANCE
+	dw LanceSprite
+	db $c0 ; byte count
+	db BANK(LanceSprite)
+
+	; SPRITE_OAK_SCIENTIST_AIDE
+	dw OakAideSprite
+	db $c0 ; byte count
+	db BANK(OakAideSprite)
+
+	; SPRITE_OAK_AIDE
+	dw OakAideSprite
+	db $c0 ; byte count
+	db BANK(OakAideSprite)
+
+	; SPRITE_ROCKER
+	dw RockerSprite
+	db $c0 ; byte count
+	db BANK(RockerSprite)
+
+	; SPRITE_SWIMMER
+	dw SwimmerSprite
+	db $c0 ; byte count
+	db BANK(SwimmerSprite)
+
+	; SPRITE_WHITE_PLAYER
+	dw WhitePlayerSprite
+	db $c0 ; byte count
+	db BANK(WhitePlayerSprite)
+
+	; SPRITE_GYM_HELPER
+	dw GymHelperSprite
+	db $c0 ; byte count
+	db BANK(GymHelperSprite)
+
+	; SPRITE_OLD_PERSON
+	dw OldPersonSprite
+	db $c0 ; byte count
+	db BANK(OldPersonSprite)
+
+	; SPRITE_MART_GUY
+	dw MartGuySprite
+	db $c0 ; byte count
+	db BANK(MartGuySprite)
+
+	; SPRITE_FISHER
+	dw FisherSprite
+	db $c0 ; byte count
+	db BANK(FisherSprite)
+
+	; SPRITE_OLD_MEDIUM_WOMAN
+	dw OldMediumWomanSprite
+	db $c0 ; byte count
+	db BANK(OldMediumWomanSprite)
+
+	; SPRITE_NURSE
+	dw NurseSprite
+	db $c0 ; byte count
+	db BANK(NurseSprite)
+
+	; SPRITE_CABLE_CLUB_WOMAN
+	dw CableClubWomanSprite
+	db $c0 ; byte count
+	db BANK(CableClubWomanSprite)
+
+	; SPRITE_MR_MASTERBALL
+	dw MrMasterballSprite
+	db $c0 ; byte count
+	db BANK(MrMasterballSprite)
+
+	; SPRITE_LAPRAS_GIVER
+	dw LaprasGiverSprite
+	db $c0 ; byte count
+	db BANK(LaprasGiverSprite)
+
+	; SPRITE_WARDEN
+	dw WardenSprite
+	db $c0 ; byte count
+	db BANK(WardenSprite)
+
+	; SPRITE_SS_CAPTAIN
+	dw SsCaptainSprite
+	db $c0 ; byte count
+	db BANK(SsCaptainSprite)
+
+	; SPRITE_FISHER2
+	dw Fisher2Sprite
+	db $c0 ; byte count
+	db BANK(Fisher2Sprite)
+
+	; SPRITE_BLACKBELT
+	dw BlackbeltSprite
+	db $c0 ; byte count
+	db BANK(BlackbeltSprite)
+
+	; SPRITE_GUARD
+	dw GuardSprite
+	db $c0 ; byte count
+	db BANK(GuardSprite)
+
+	; $32
+	dw GuardSprite
+	db $c0 ; byte count
+	db BANK(GuardSprite)
+
+	; SPRITE_MOM
+	dw MomSprite
+	db $c0 ; byte count
+	db BANK(MomSprite)
+
+	; SPRITE_BALDING_GUY
+	dw BaldingGuySprite
+	db $c0 ; byte count
+	db BANK(BaldingGuySprite)
+
+	; SPRITE_YOUNG_BOY
+	dw YoungBoySprite
+	db $c0 ; byte count
+	db BANK(YoungBoySprite)
+
+	; SPRITE_GAMEBOY_KID
+	dw GameboyKidSprite
+	db $c0 ; byte count
+	db BANK(GameboyKidSprite)
+
+	; SPRITE_GAMEBOY_KID_COPY
+	dw GameboyKidSprite
+	db $c0 ; byte count
+	db BANK(GameboyKidSprite)
+
+	; SPRITE_CLEFAIRY
+	dw ClefairySprite
+	db $c0 ; byte count
+	db BANK(ClefairySprite)
+
+	; SPRITE_AGATHA
+	dw AgathaSprite
+	db $c0 ; byte count
+	db BANK(AgathaSprite)
+
+	; SPRITE_BRUNO
+	dw BrunoSprite
+	db $c0 ; byte count
+	db BANK(BrunoSprite)
+
+	; SPRITE_LORELEI
+	dw LoreleiSprite
+	db $c0 ; byte count
+	db BANK(LoreleiSprite)
+
+	; SPRITE_SEEL
+	dw SeelSprite
+	db $c0 ; byte count
+	db BANK(SeelSprite)
+
+	; SPRITE_BALL
+	dw BallSprite
+	db $40 ; byte count
+	db BANK(BallSprite)
+
+	; SPRITE_OMANYTE
+	dw OmanyteSprite
+	db $40 ; byte count
+	db BANK(OmanyteSprite)
+
+	; SPRITE_BOULDER
+	dw BoulderSprite
+	db $40 ; byte count
+	db BANK(BoulderSprite)
+
+	; SPRITE_PAPER_SHEET
+	dw PaperSheetSprite
+	db $40 ; byte count
+	db BANK(PaperSheetSprite)
+
+	; SPRITE_BOOK_MAP_DEX
+	dw BookMapDexSprite
+	db $40 ; byte count
+	db BANK(BookMapDexSprite)
+
+	; SPRITE_CLIPBOARD
+	dw ClipboardSprite
+	db $40 ; byte count
+	db BANK(ClipboardSprite)
+
+	; SPRITE_SNORLAX
+	dw SnorlaxSprite
+	db $40 ; byte count
+	db BANK(SnorlaxSprite)
+
+	; SPRITE_OLD_AMBER_COPY
+	dw OldAmberSprite
+	db $40 ; byte count
+	db BANK(OldAmberSprite)
+
+	; SPRITE_OLD_AMBER
+	dw OldAmberSprite
+	db $40 ; byte count
+	db BANK(OldAmberSprite)
+
+	; SPRITE_LYING_OLD_MAN_UNUSED_1
+	dw LyingOldManSprite
+	db $40 ; byte count
+	db BANK(LyingOldManSprite)
+
+	; SPRITE_LYING_OLD_MAN_UNUSED_2
+	dw LyingOldManSprite
+	db $40 ; byte count
+	db BANK(LyingOldManSprite)
+
+	; SPRITE_LYING_OLD_MAN
+	dw LyingOldManSprite
+	db $40 ; byte count
+	db BANK(LyingOldManSprite)
+; 0x17c47
+
+INCBIN "baserom.gbc",$17c47,$17e1d - $17c47
 
 UnnamedText_17e1d: ; 0x17e1d
 	TX_FAR _UnnamedText_17e1d
