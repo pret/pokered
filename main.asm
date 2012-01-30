@@ -7259,7 +7259,7 @@ Unknown_7078: ; 0x7078
 ; 0x7092
 
 Unknown_7092: ; 0x7092
-INCBIN "baserom.gbc",$7092,4
+	db $df, $e0, $e1, $ff
 
 ; function that performs initialization for DisplayTextID
 DisplayTextIDInit: ; 7096
@@ -13311,7 +13311,8 @@ UnnamedText_e471: ; 0xe471
 	db $50
 ; 0xe471 + 5 bytes
 
-INCBIN "baserom.gbc",$e476,$3
+; 0xe476 XXX
+db $c3, $81, $65
 
 ItemUseTMHM: ; 03:6479
 	INCBIN "baserom.gbc",$E479,$E581 - $E479
@@ -14642,7 +14643,8 @@ PewterCity_h: ; 0x18554 to 0x18576 (34 bytes) (bank=6) (id=2)
 
 	dw PewterCityObject ; objects
 
-INCBIN "baserom.gbc",$18576,$18577 - $18576
+; 0x18576
+db $0
 
 PewterCityObject: ; 0x18577 (size=111)
 	db $a ; border tile
@@ -15563,7 +15565,15 @@ CeruleanCityScript: ; 0x19480
 	jp $3d97
 ; 0x1948c
 
-INCBIN "baserom.gbc",$1948c,$1949d - $1948c
+CeruleanCity_Unknown1948c: ; 0x1948c
+	xor a
+	ld [$cd6b], a
+	ld [$d60f], a
+	ld a, $5
+	ld [$cc4d], a
+	ld a, $11
+	jp Predef
+; 0x1949d
 
 CeruleanCityScripts: ; 0x1949d
 	dw CeruleanCityScript0, CeruleanCityScript1, CeruleanCityScript2, CeruleanCityScript3
@@ -19081,7 +19091,11 @@ ViridianMartScript0: ; 0x1d49b
 	ret
 ; 0x1d4bb
 
-INCBIN "baserom.gbc",$1d4bb,$1d4c0 - $1d4bb
+; XXX
+UnnamedText_1d4bb: ; 0x1d4bb
+	db $20
+	TX_RAM $0240
+	db $ff
 
 ViridianMartScript1: ; 0x1d4c0
 	ld a, [$cd38]
@@ -19193,7 +19207,8 @@ ViridianHouse_h: ; 0x1d57d to 0x1d589 (12 bytes) (bank=7) (id=44)
 
 	dw ViridianHouseObject ; objects
 
-INCBIN "baserom.gbc",$1d589,$1d58a - $1d589
+; 0x1d589
+db $0
 
 ViridianHouseScript: ; 0x1d58a
 	jp $3c3c
@@ -20060,7 +20075,7 @@ VermilionDockScript: ; 0x1db52
 INCBIN "baserom.gbc",$1db9b,$1dcbf - $1db9b
 
 VermilionDockTexts: ; 0x1dcbf
-INCBIN "baserom.gbc",$1dcbf,$1dcc1 - $1dcbf
+	db $c1, $5c
 
 UnnamedText_1dcc1: ; 0x1dcc1
 	TX_FAR _UnnamedText_1dcc1
@@ -20545,15 +20560,13 @@ Route6GateScript: ; 0x1e03d
 ; 0x1e04a
 
 Route6GateScripts: ; 0x1e04a
-	dw Route6GateScript0
-
-INCBIN "baserom.gbc",$1e04c,$2
+	dw Route6GateScript0, Route6GateScript1
 
 Route6GateScript0: ; 0x1e04e
 	ld a, [$d728]
 	bit 6, a
 	ret nz
-	ld hl, $608c
+	ld hl, Unknown_1e08c
 	call $34bf
 	ret nc
 	ld a, $1
@@ -20569,7 +20582,7 @@ Route6GateScript0: ; 0x1e04e
 	ld a, $2
 	ld [$ff00+$8c], a
 	call $2920
-	call $60a1
+	call Unknown_1e0a1
 	ld a, $1
 	ld [$d636], a
 	ret
@@ -20581,7 +20594,36 @@ Route6GateScript0: ; 0x1e04e
 	jp $2920
 ; 0x1e08c
 
-INCBIN "baserom.gbc",$1e08c,$2c
+Unknown_1e08c: ; 0x1e08c
+	ld [bc], a
+	inc bc
+	ld [bc], a
+	inc b
+	rst $38
+
+Route6GateScript1: ; 0x1e091
+	ld a, [$cd38]
+	and a
+	ret nz
+	call Delay3
+	xor a
+	ld [$cd6b], a
+	ld [$d636], a
+	ret
+; 0x1e0a1
+
+Unknown_1e0a1: ; 0x1e0a1
+	ld hl, $d730
+	set 7, [hl]
+	ld a, $80
+	ld [$ccd3], a
+	ld a, $1
+	ld [$cd38], a
+	xor a
+	ld [$c206], a
+	ld [$cd3b], a
+	ret
+; 0x1e0b8
 
 Route6GateTexts: ; 0x1e0b8
 	dw Route6GateText1, Route6GateText2, Route6GateText3
@@ -21091,12 +21133,10 @@ Route22GateScript: ; 0x1e683
 ; 0x1e69e
 
 Route22GateScripts: ; 0x1e69e
-	dw Route22GateScript0, Route22GateScript1
-
-INCBIN "baserom.gbc",$1e6a2,$2
+	dw Route22GateScript0, Route22GateScript1, Route22GateScript2
 
 Route22GateScript0: ; 0x1e6a4
-	ld hl, $66b5
+	ld hl, Route22GateScript3
 	call $34bf
 	ret nc
 	xor a
@@ -21106,7 +21146,20 @@ Route22GateScript0: ; 0x1e6a4
 	jp $2920
 ; 0x1e6b5
 
-INCBIN "baserom.gbc",$1e6b5,$1e6cd - $1e6b5
+Route22GateScript3: ; 0x1e6b5
+	ld [bc], a
+	inc b
+	ld [bc], a
+	dec b
+	rst $38
+	ld a, $1
+	ld [$cd38], a
+	ld a, $80
+	ld [$ccd3], a
+	ld [$c109], a
+	ld [$cd6b], a
+	jp $3486
+; 0x1e6cd
 
 Route22GateScript1: ; 0x1e6cd
 	ld a, [$cd38]
@@ -21117,6 +21170,7 @@ Route22GateScript1: ; 0x1e6cd
 	call Delay3
 	ld a, $0
 	ld [$d60e], a
+Route22GateScript2: ; 0x1e6de
 	ret
 ; 0x1e6df
 
@@ -38295,9 +38349,7 @@ SeafoamIslands4Script_Unknown465f6: ; 0x465f6
 INCBIN "baserom.gbc",$465f6,$465fb - $465f6
 
 SeafoamIslands4Scripts: ; 0x465fb
-	dw SeafoamIslands4Script0, SeafoamIslands4Script1
-
-INCBIN "baserom.gbc",$465ff,$4
+	dw SeafoamIslands4Script0, SeafoamIslands4Script1, SeafoamIslands4Script2, SeafoamIslands4Script3
 
 SeafoamIslands4Script0: ; 0x46603
 	ld a, [$d880]
@@ -38335,7 +38387,17 @@ SeafoamIslands4Script1: ; 0x46639
 	ret
 ; 0x46644
 
-INCBIN "baserom.gbc",$46644,$56
+SeafoamIslands4Script2: ; 0x46644
+INCBIN "baserom.gbc",$46644,$4668f - $46644
+
+SeafoamIslands4Script3: ; 0x4668f
+	ld a, [$cd38]
+	and a
+	ret nz
+	ld a, $0
+	ld [$d666], a
+	ret
+; 0x4669a
 
 SeafoamIslands4Texts: ; 0x4669a
 	dw SeafoamIslands4Text1, SeafoamIslands4Text2, SeafoamIslands4Text3, SeafoamIslands4Text4, SeafoamIslands4Text5, SeafoamIslands4Text6
@@ -39718,16 +39780,20 @@ Unknown_48bcf: ; 0x48bcf
 INCBIN "baserom.gbc",$48bcf,$48c12 - $48bcf
 
 CeladonGameCornerScripts: ; 0x48c12
-	dw CeladonGameCornerScript0, CeladonGameCornerScript1
-
-INCBIN "baserom.gbc",$48c16,$2
+	dw CeladonGameCornerScript0, CeladonGameCornerScript1, CeladonGameCornerScript2
 
 CeladonGameCornerScript0: ; 0x48c18
 	ret
 ; 0x48c19
 
 CeladonGameCornerScript1: ; 0x48c19
-INCBIN "baserom.gbc",$48c19,$71
+INCBIN "baserom.gbc",$48c19,$48c5a - $48c19
+; 0x48c5a
+
+INCBIN "baserom.gbc",$48c5a,$48c69 - $48c5a
+
+CeladonGameCornerScript2: ; 0x48c69
+INCBIN "baserom.gbc",$48c69,$48c8a - $48c69
 
 CeladonGameCornerTexts: ; 0x48c8a
 	dw CeladonGameCornerText1, CeladonGameCornerText2, CeladonGameCornerText3, CeladonGameCornerText4, CeladonGameCornerText5, CeladonGameCornerText6, CeladonGameCornerText7, CeladonGameCornerText8, CeladonGameCornerText9, CeladonGameCornerText10, CeladonGameCornerText11, CeladonGameCornerText12, CeladonGameCornerText13
@@ -43553,9 +43619,7 @@ Route23Script: ; 0x511da
 INCBIN "baserom.gbc",$511e9,$51213 - $511e9
 
 Route23Scripts: ; 0x51213
-	dw Route23Script0
-
-INCBIN "baserom.gbc",$51215,$4
+	dw Route23Script0, Route23Script1, Route23Script2
 
 Route23Script0: ; 0x51219
 	ld hl, $5255
@@ -43595,7 +43659,17 @@ Route23Script0: ; 0x51219
 	ret
 ; 0x51255
 
-INCBIN "baserom.gbc",$51255,$a2
+INCBIN "baserom.gbc",$51255,$512ec - $51255
+
+Route23Script1: ; 0x512ec
+	ld a, [$cd38]
+	and a
+	ret nz
+Route23Script2: ; 0x512f1
+	ld a, $0
+	ld [$d667], a
+	ret
+; 0x512f7
 
 Route23Texts: ; 0x512f7
 	dw Route23Text1, Route23Text2, Route23Text3, Route23Text4, Route23Text5, Route23Text6, Route23Text7, Route23Text8
@@ -52618,9 +52692,10 @@ HallofFameRoomScript: ; 0x5a49e
 INCBIN "baserom.gbc",$5a4aa,$5a4b2 - $5a4aa
 
 HallofFameRoomScripts: ; 0x5a4b2
-	dw HallofFameRoomScript0, HallofFameRoomScript1, HallofFameRoomScript2
+	dw HallofFameRoomScript0, HallofFameRoomScript1, HallofFameRoomScript2, HallofFameRoomScript3
 
-INCBIN "baserom.gbc",$5a4b8,$3
+HallofFameRoomScript3: ; 0x5a4ba
+	db $c9
 
 HallofFameRoomScript2: ; 0x5a4bb
 	call Delay3
@@ -52670,7 +52745,7 @@ HallofFameRoomScript0: ; 0x5a50d
 	ld a, $ff
 	ld [$cd6b], a
 	ld hl, $ccd3
-	ld de, $6528
+	ld de, HallofFameRoom_Unknown5a528
 	call $350c
 	dec a
 	ld [$cd38], a
@@ -52680,7 +52755,8 @@ HallofFameRoomScript0: ; 0x5a50d
 	ret
 ; 0x5a528
 
-INCBIN "baserom.gbc",$5a528,$5a52b - $5a528
+HallofFameRoom_Unknown5a528: ; 0x5a528
+	db $40, $5, $ff
 
 HallofFameRoomScript1: ; 0x5a52b
 	ld a, [$cd38]
@@ -57643,9 +57719,8 @@ SSAnne4Script: ; 0x6162e
 	jp $3c3c
 ; 0x61631
 
-SSAnne4Texts:
-
-INCBIN "baserom.gbc",$61631,$1
+SSAnne4Texts: ; 0x61631
+	db $50
 
 SSAnne4Object: ; 0x61632 (size=52)
 	db $c ; border tile

@@ -65,6 +65,9 @@ def parse_text_script(text_pointer, text_id, map_id, txfar=False):
     offset = text_pointer
     commands = {}
     command_counter = 0
+
+    if extract_maps.rom == None:
+        extract_maps.load_rom()
     
     end = False
     while not end:
