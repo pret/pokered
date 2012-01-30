@@ -416,6 +416,24 @@ def write_all_labels(all_labels):
     fh.write(json.dumps(all_labels))
     fh.close()
 
+def analyze_intervals():
+    """find the largest baserom.gbc intervals"""
+    global asm
+    global processed_incbins
+    if asm == None:
+        load_asm()
+    if processed_incbins == {}:
+        isolate_incbins()
+        process_incbins()
+    
+    results = []
+    ordered_keys = sorted(processed_incbins, key=lambda entry: processed_incbins[entry]["interval"])
+    ordered_keys.reverse()
+    for key in ordered_keys:
+        results.append(processed_incbins[key])
+
+    return results
+
 if __name__ == "__main__":
     #load map headers
     load_rom()
