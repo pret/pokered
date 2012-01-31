@@ -22509,8 +22509,14 @@ UnnamedText_3769d: ; 0x3769d
 	db $50
 ; 0x3769d + 5 bytes
 
-INCBIN "baserom.gbc",$376a2,$44f
+INCBIN "baserom.gbc",$376a2,$378f5 - $376a2
 
+SlotMachineMap: ; 0x378f5
+INCBIN "gfx/tilemaps/slotmachine.map"
+
+INCBIN "baserom.gbc",$379e5,$37af1 - $379e5
+
+; 0x37af1
 IF _RED
 	INCBIN "gfx/red/slotmachine1.2bpp"
 ENDC
