@@ -63774,50 +63774,212 @@ INCBIN "baserom.gbc",$76857,$76880 - $76857
 
 SECTION "bank1E",DATA,BANK[$1E]
 
-INCBIN "baserom.gbc",$78000,$F1
+; Draws a "frame block". Frame blocks are blocks of tiles that are put
+; together to form frames in battle animations.
+DrawFrameBlock: ; 4000
+	ld l,c
+	ld h,b
+	ld a,[hli]
+	ld [W_NUMFBTILES],a
+	ld a,[W_FBDESTADDR + 1]
+	ld e,a
+	ld a,[W_FBDESTADDR]
+	ld d,a
+	xor a
+	ld [W_FBTILECOUNTER],a ; loop counter
+.loop\@
+	ld a,[W_FBTILECOUNTER]
+	inc a
+	ld [W_FBTILECOUNTER],a
+	ld a,[W_SUBANIMTRANSFORM]
+	dec a
+	jr z,.flipHorizontalAndVertical\@   ; 1
+	dec a
+	jp z,.flipHorizontalTranslateDown\@ ; 2
+	dec a
+	jr z,.flipBaseCoords\@              ; 3
+.noTransformation\@
+	ld a,[W_BASECOORDY]
+	add [hl]
+	ld [de],a ; store Y
+	inc hl
+	inc de
+	ld a,[W_BASECOORDX]
+	jr .finishCopying\@
+.flipBaseCoords\@
+	ld a,[W_BASECOORDY]
+	ld b,a
+	ld a,136
+	sub b ; flip Y base coordinate
+	add [hl] ; Y offset
+	ld [de],a ; store Y
+	inc hl
+	inc de
+	ld a,[W_BASECOORDX]
+	ld b,a
+	ld a,168
+	sub b ; flip X base coordinate
+.finishCopying\@ ; finish copying values to OAM (when [W_SUBANIMTRANSFORM] not 1 or 2)
+	add [hl] ; X offset
+	ld [de],a ; store X
+	inc hl
+	inc de
+	ld a,[hli]
+	add a,$31 ; base tile ID for battle animations
+	ld [de],a ; store tile ID
+	inc de
+	ld a,[hli]
+	ld [de],a ; store flags
+	inc de
+	jp .nextTile\@
+.flipHorizontalAndVertical\@
+	ld a,[W_BASECOORDY]
+	add [hl] ; Y offset
+	ld b,a
+	ld a,136
+	sub b ; flip Y coordinate
+	ld [de],a ; store Y
+	inc hl
+	inc de
+	ld a,[W_BASECOORDX]
+	add [hl] ; X offset
+	ld b,a
+	ld a,168
+	sub b ; flip X coordinate
+	ld [de],a ; store X
+	inc hl
+	inc de
+	ld a,[hli]
+	add a,$31 ; base tile ID for battle animations
+	ld [de],a ; store tile ID
+	inc de
+; toggle horizontal and vertical flip
+	ld a,[hli] ; flags
+	and a
+	ld b,OAM_VFLIP | OAM_HFLIP
+	jr z,.storeFlags1\@
+	cp a,OAM_HFLIP
+	ld b,OAM_VFLIP
+	jr z,.storeFlags1\@
+	cp a,OAM_VFLIP
+	ld b,OAM_HFLIP
+	jr z,.storeFlags1\@
+	ld b,0
+.storeFlags1\@
+	ld a,b
+	ld [de],a
+	inc de
+	jp .nextTile\@
+.flipHorizontalTranslateDown\@
+	ld a,[W_BASECOORDY]
+	add [hl]
+	add a,40 ; translate Y coordinate downwards
+	ld [de],a ; store Y
+	inc hl
+	inc de
+	ld a,[W_BASECOORDX]
+	add [hl]
+	ld b,a
+	ld a,168
+	sub b ; flip X coordinate
+	ld [de],a ; store X
+	inc hl
+	inc de
+	ld a,[hli]
+	add a,$31 ; base tile ID for battle animations
+	ld [de],a ; store tile ID
+	inc de
+	ld a,[hli]
+	bit 5,a ; is horizontal flip enabled?
+	jr nz,.disableHorizontalFlip\@
+.enableHorizontalFlip\@
+	set 5,a
+	jr .storeFlags2\@
+.disableHorizontalFlip\@
+	res 5,a
+.storeFlags2\@
+	ld [de],a
+	inc de
+.nextTile\@
+	ld a,[W_FBTILECOUNTER]
+	ld c,a
+	ld a,[W_NUMFBTILES]
+	cp c
+	jp nz,.loop\@ ; go back up if there are more tiles to draw
+.afterDrawingTiles\@
+	ld a,[W_FBMODE]
+	cp a,2
+	jr z,.advanceFrameBlockDestAddr\@; skip delay and don't clean OAM buffer
+	ld a,[W_SUBANIMFRAMEDELAY]
+	ld c,a
+	call DelayFrames
+	ld a,[W_FBMODE]
+	cp a,3
+	jr z,.advanceFrameBlockDestAddr\@ ; skip cleaning OAM buffer
+	cp a,4
+	jr z,.done\@ ; skip cleaning OAM buffer and don't advance the frame block destination address
+	ld a,[W_ANIMATIONID]
+	cp a,GROWL
+	jr z,.resetFrameBlockDestAddr\@
+	call AnimationCleanOAM
+.resetFrameBlockDestAddr\@
+	ld hl,$C300 ; OAM buffer
+	ld a,l
+	ld [W_FBDESTADDR + 1],a
+	ld a,h
+	ld [W_FBDESTADDR],a ; set destination address to beginning of OAM buffer
+	ret
+.advanceFrameBlockDestAddr\@
+	ld a,e
+	ld [W_FBDESTADDR + 1],a
+	ld a,d
+	ld [W_FBDESTADDR],a
+.done\@
+	ret
 
 PlayAnimation: ; 40F1
 	xor a
 	ld [$FF8B],a
-	ld [$D08B],a
-	ld a,[$D07C] ; get animation number
+	ld [W_SUBANIMTRANSFORM],a
+	ld a,[W_ANIMATIONID] ; get animation number
 	dec a
 	ld l,a
 	ld h,0
 	add hl,hl
-	ld de,$607D
+	ld de,$607D ; animation command stream pointers
 	add hl,de
 	ld a,[hli]
 	ld h,[hl]
 	ld l,a
-.next7\@
+.animationLoop\@
 	ld a,[hli]
 	cp a,$FF
 	jr z,.AnimationOver\@
-	cp a,$C0 ; is this animation for a monster onscreen?
-	jr c,.next2\@
+	cp a,$C0 ; is this subanimation or a special effect?
+	jr c,.playSubanimation\@
+.doSpecialEffect\@
 	ld c,a
-	ld de,$50DA
-.next4\@
+	ld de,SpecialEffectPointers
+.searchSpecialEffectTableLoop\@
 	ld a,[de]
 	cp c
-	jr z,.next3\@
+	jr z,.foundMatch\@
 	inc de
 	inc de
 	inc de
-	jr .next4\@
-.next3\@
+	jr .searchSpecialEffectTableLoop\@
+.foundMatch\@
 	ld a,[hli]
-	cp a,$FF
-	jr z,.next5\@
-	ld [$CF07],a
+	cp a,$FF ; is there a sound to play?
+	jr z,.skipPlayingSound\@
+	ld [$CF07],a ; store sound
 	push hl
 	push de
 	call $586F
 	call $23B1
 	pop de
 	pop hl
-.next5\@
+.skipPlayingSound\@
 	push hl
 	inc de
 	ld a,[de]
@@ -63825,33 +63987,33 @@ PlayAnimation: ; 40F1
 	inc de
 	ld a,[de]
 	ld h,a
-	ld de,.next6\@
+	ld de,.nextAnimationCommand\@
 	push de
-	jp [hl]
-.next2\@
+	jp [hl] ; jump to special effect function
+.playSubanimation\@
 	ld c,a
-	and a,$3F
-	ld [$D086],a
+	and a,63
+	ld [W_SUBANIMFRAMEDELAY],a
 	xor a
 	sla c
 	rla
 	sla c
 	rla
-	ld [$D09F],a
-	ld a,[hli]
-	ld [$CF07],a
-	ld a,[hli]
+	ld [$D09F],a ; tile select
+	ld a,[hli] ; sound
+	ld [$CF07],a ; store sound
+	ld a,[hli] ; subanimation ID
 	ld c,l
 	ld b,h
 	ld l,a
 	ld h,0
 	add hl,hl
-	ld de,$676D
+	ld de,$676D ; subanimation pointer table
 	add hl,de
 	ld a,l
-	ld [$D094],a
+	ld [W_SUBANIMADDRPTR],a
 	ld a,h
-	ld [$D095],a
+	ld [W_SUBANIMADDRPTR + 1],a
 	ld l,c
 	ld h,b
 	push hl
@@ -63859,18 +64021,126 @@ PlayAnimation: ; 40F1
 	push af
 	ld a,[$CC79]
 	ld [rOBP0],a
-	call $41D2
-	call $417C
-	call RealPlayAnimation
+	call LoadAnimationTileset
+	call LoadSubanimation
+	call PlaySubanimation
 	pop af
 	ld [rOBP0],a
-.next6\@
+.nextAnimationCommand\@
 	pop hl
-	jr .next7\@
+	jr .animationLoop\@
 .AnimationOver\@ ; 417B
 	ret
 
-INCBIN "baserom.gbc",$7817C,$78BDE - $7817C
+LoadSubanimation: ; 417C
+	ld a,[W_SUBANIMADDRPTR + 1]
+	ld h,a
+	ld a,[W_SUBANIMADDRPTR]
+	ld l,a
+	ld a,[hli]
+	ld e,a
+	ld a,[hl]
+	ld d,a ; de = address of subanimation
+	ld a,[de]
+	ld b,a
+	and a,31
+	ld [W_SUBANIMSIZE],a ; number of frame blocks
+	ld a,b
+	and a,%11100000
+	cp a,5 << 5 ; is subanimation type 5?
+	jr nz,.isNotType5\@
+.isType5\@
+	call GetSubanimationTransform2
+	jr .saveTransformation\@
+.isNotType5\@
+	call GetSubanimationTransform1
+.saveTransformation\@
+; place the upper 3 bits of a into bits 0-2 of a before storing
+	srl a
+	swap a
+	ld [W_SUBANIMTRANSFORM],a
+	cp a,4 ; is the animation reversed?
+	ld hl,0
+	jr nz,.storeSubentryAddr\@
+; if the animation is reversed, then place the initial subentry address at the end of the list of subentries
+	ld a,[W_SUBANIMSIZE]
+	dec a
+	ld bc,3
+.loop\@
+	add hl,bc
+	dec a
+	jr nz,.loop\@
+.storeSubentryAddr\@
+	inc de
+	add hl,de
+	ld a,l
+	ld [W_SUBANIMSUBENTRYADDR],a
+	ld a,h
+	ld [W_SUBANIMSUBENTRYADDR + 1],a
+	ret
+
+; called if the subanimation type is not 5
+; sets the transform to 0 (i.e. no transform) if it's the player's turn
+; sets the transform to the subanimation type if it's the enemy's turn
+GetSubanimationTransform1: ; 41C2
+	ld b,a
+	ld a,[H_WHOSETURN]
+	and a
+	ld a,b
+	ret nz
+	xor a
+	ret
+
+; called if the subanimation type is 5
+; sets the transform to 2 (i.e. horizontal and vertical flip) if it's the player's turn
+; sets the transform to 0 (i.e. no transform) if it's the enemy's turn
+GetSubanimationTransform2: ; 41CA
+	ld a,[H_WHOSETURN]
+	and a
+	ld a,2 << 5
+	ret z
+	xor a
+	ret
+
+; loads tile patterns for battle animations
+LoadAnimationTileset: ; 41D2
+	ld a,[$D09F] ; tileset select
+	add a
+	add a
+	ld hl,AnimationTilesetPointers
+	ld e,a
+	ld d,0
+	add hl,de
+	ld a,[hli]
+	ld [$D07D],a ; number of tiles
+	ld a,[hli]
+	ld e,a
+	ld a,[hl]
+	ld d,a ; de = address of tileset
+	ld hl,$8310 ; destination address in VRAM
+	ld b,$1E ; ROM bank
+	ld a,[$D07D]
+	ld c,a ; number of tiles
+	jp $1848 ; load tileset
+
+AnimationTilesetPointers: ; 41F2
+db 79 ; number of tiles
+dw AnimationTileset1
+db $FF
+
+db 79 ; number of tiles
+dw AnimationTileset2
+db $FF
+
+db 64 ; number of tiles
+dw AnimationTileset1
+db $FF
+
+AnimationTileset1: ; 41FE
+INCBIN "baserom.gbc",$781FE,79 * 16
+
+AnimationTileset2: ; 46EE
+INCBIN "baserom.gbc",$786EE,79 * 16
 
 IF _RED
 	INCBIN "gfx/red/slotmachine2.2bpp"
@@ -63886,7 +64156,7 @@ MoveAnimation: ; 4D5E
 	push af
 	call $3748
 	call $4E23
-	ld a,[$D07C]
+	ld a,[W_ANIMATIONID]
 	and a
 	jr z,.AnimationFinished\@
 
@@ -63932,7 +64202,7 @@ ShareMoveAnimations: ; 4DA6
 
 	; opponent’s turn
 
-	ld a,[$D07C]
+	ld a,[W_ANIMATIONID]
 
 	cp a,AMNESIA
 	ld b,CONF_ANIM
@@ -63944,7 +64214,7 @@ ShareMoveAnimations: ; 4DA6
 
 .Replace\@
 	ld a,b
-	ld [$D07C],a
+	ld [W_ANIMATIONID],a
 	ret
 
 Function4DBD: ; 4DBD
@@ -63967,24 +64237,25 @@ Pointer4DCF: ; 4DCF
 
 INCBIN "baserom.gbc",$78DDB,$78E53-$78DDB
 
-RealPlayAnimation: ; 4E53
-	ld a,[$CF07] ; get animation # − 1
+PlaySubanimation: ; 4E53
+	ld a,[W_ANIMSOUNDID]
 	cp a,$FF
-	jr z,.Next4E60
+	jr z,.skipPlayingSound\@
 	call $586F
 	call $23B1 ; play sound effect
-.Next4E60
-	ld hl,$C300
+.skipPlayingSound\@
+	ld hl,$C300 ; base address of OAM buffer
 	ld a,l
-	ld [$D09D],a
+	ld [W_FBDESTADDR + 1],a
 	ld a,h
-	ld [$D09C],a
-	ld a,[$D097]
+	ld [W_FBDESTADDR],a
+	ld a,[W_SUBANIMSUBENTRYADDR + 1]
 	ld h,a
-	ld a,[$D096]
+	ld a,[W_SUBANIMSUBENTRYADDR]
 	ld l,a
+.loop\@
 	push hl
-	ld c,[hl]
+	ld c,[hl] ; frame block ID
 	ld b,0
 	ld hl,PointerTable6F74
 	add hl,bc
@@ -63996,43 +64267,240 @@ RealPlayAnimation: ; 4E53
 	pop hl
 	inc hl
 	push hl
-	ld e,[hl]
+	ld e,[hl] ; base coordinate ID
 	ld d,0
-	ld hl,$7C85
+	ld hl,$7C85 ; base coordinate table
 	add hl,de
 	add hl,de
 	ld a,[hli]
-	ld [$D082],a
+	ld [W_BASECOORDY],a
 	ld a,[hl]
-	ld [$D081],a
+	ld [W_BASECOORDX],a
 	pop hl
 	inc hl
-	ld a,[hl]
-	ld [$D09E],a
-	call $4000
-	call $4ED7
-	ld a,[$D087]
+	ld a,[hl] ; frame block mode
+	ld [W_FBMODE],a
+	call DrawFrameBlock
+	call $4ED7 ; run animation-specific function (if there is one)
+	ld a,[W_SUBANIMSIZE]
 	dec a
-	ld [$D087],a
+	ld [W_SUBANIMSIZE],a
 	ret z
-	ld a,[$D097]
+	ld a,[W_SUBANIMSUBENTRYADDR + 1]
 	ld h,a
-	ld a,[$D096]
+	ld a,[W_SUBANIMSUBENTRYADDR]
 	ld l,a
-	ld a,[$D08B]
-	cp a,4
+	ld a,[W_SUBANIMTRANSFORM]
+	cp a,4 ; is the animation reversed?
 	ld bc,3
-	jr nz,.Next4EBC
-	ld bc,$FFFD
-.Next4EBC
+	jr nz,.nextSubanimationSubentry\@
+	ld bc,-3
+.nextSubanimationSubentry\@
 	add hl,bc
 	ld a,h
-	ld [$D097],a
+	ld [W_SUBANIMSUBENTRYADDR + 1],a
 	ld a,l
-	ld [$D096],a
-	jp $4E73
+	ld [W_SUBANIMSUBENTRYADDR],a
+	jp .loop\@
 
-INCBIN "baserom.gbc",$78EC8,$7986F - $78EC8
+AnimationCleanOAM: ; 4EC8
+	push hl
+	push de
+	push bc
+	push af
+	call DelayFrame
+	call CleanLCD_OAM
+	pop af
+	pop bc
+	pop de
+	pop hl
+	ret
+
+; this runs after each frame block is drawn in a subanimation
+; it runs a particular special effect based on the animation ID
+DoSpecialEffectByAnimationId: ; 4ED7
+	push hl
+	push de
+	push bc
+	ld a,[W_ANIMATIONID]
+	ld hl,AnimationIdSpecialEffects
+	ld de,3
+	call IsInArray
+	jr nc,.done\@
+	inc hl
+	ld a,[hli]
+	ld h,[hl]
+	ld l,a
+	ld de,.done\@
+	push de
+	jp [hl]
+.done\@
+	pop bc
+	pop de
+	pop hl
+	ret
+
+; Format: Animation ID (1 byte), Address (2 bytes)
+AnimationIdSpecialEffects: ; 4EF5
+	db MEGA_PUNCH
+	dw $51BE
+
+	db GUILLOTINE
+	dw $51BE
+
+	db MEGA_KICK
+	dw $51BE
+
+	db HEADBUTT
+	dw $51BE
+
+	db TAIL_WHIP
+	dw $50D0
+
+	db GROWL
+	dw $50BC
+
+	db DISABLE
+	dw $51BE
+
+	db BLIZZARD
+	dw $5016
+
+	db BUBBLEBEAM
+	dw $51BE
+
+	db HYPER_BEAM
+	dw $5000
+
+	db THUNDERBOLT
+	dw $4FF7
+
+	db REFLECT
+	dw $51BE
+
+	db SELFDESTRUCT
+	dw $5009
+
+	db SPORE
+	dw $51BE
+
+	db EXPLOSION
+	dw $5009
+
+	db ROCK_SLIDE
+	dw $4FD9
+
+	db $AA
+	dw $5041
+
+	db $AB
+	dw $504C
+
+	db $AC
+	dw $507C
+
+	db TOSS_ANIM
+	dw $4F3E
+
+	db $C2
+	dw $4F96
+
+	db POOF_ANIM
+	dw $4FCE
+
+	db GREATTOSS_ANIM
+	dw $4F3E
+
+	db ULTRATOSS_ANIM
+	dw $4F3E
+
+	db $FF ; terminator
+
+INCBIN "baserom.gbc",$78F3E,$790DA - $78F3E
+
+; Format: Special Effect ID (1 byte), Address (2 bytes)
+SpecialEffectPointers: ; 50DA
+	db $FE
+	dw $51BE
+	db $FD
+	dw $51D6
+	db $FC
+	dw $51EA
+	db $FB
+	dw $520E
+	db $FA
+	dw $5215
+	db $F9
+	dw $51DB
+	db $F8
+	dw $5165
+	db $F7
+	dw $527A
+	db $F6
+	dw $5297
+	db $F5
+	dw $5389
+	db $F4
+	dw $52AF
+	db $F3
+	dw $536F
+	db $F2
+	dw $53F9
+	db $F1
+	dw $5415
+	db $F0
+	dw $51F4
+	db $EF
+	dw $5801
+	db $EE
+	dw $54A1
+	db $ED
+	dw $54F9
+	db $EC
+	dw $5566
+	db $EB
+	dw $577A
+	db $EA
+	dw $559F
+	db $E9
+	dw $55C9
+	db $E8
+	dw $5787
+	db $E7
+	dw $5C74
+	db $E6
+	dw $5C8A
+	db $E5
+	dw $5645
+	db $E4
+	dw $5D77
+	db $E3
+	dw $5D77
+	db $E2
+	dw $5424
+	db $E1
+	dw $5150
+	db $E0
+	dw $5398
+	db $DF
+	dw $57D8
+	db $DE
+	dw $5369
+	db $DD
+	dw $539E
+	db $DC
+	dw $53AB
+	db $DB
+	dw $52B9
+	db $DA
+	dw $53B1
+	db $D9
+	dw $56E0
+	db $D8
+	dw $5666
+	db $FF
+
+INCBIN "baserom.gbc",$79150,$7986F - $79150
 
 Func586F: ; 0x7986F 586F
 	ld hl,MoveSoundTable
@@ -64075,7 +64543,7 @@ Func586F: ; 0x7986F 586F
 	ret
 IsCryMove: ; 0x798ad
 ; set carry if the move animation involves playing a monster cry
-	ld a,[$D07C]
+	ld a,[W_ANIMATIONID]
 	cp a,GROWL
 	jr z,.CryMove
 	cp a,ROAR
@@ -64288,7 +64756,7 @@ TossBallAnimation: ; 5E16
 .done\@
 	ld a,b
 .PlayNextAnimation\@
-	ld [$D07C],a
+	ld [W_ANIMATIONID],a
 	push bc
 	push hl
 	call PlayAnimation
@@ -64305,12 +64773,12 @@ TossBallAnimation: ; 5E16
 
 .BlockBall\@ ; 5E55
 	ld a,$C1
-	ld [$D07C],a
+	ld [W_ANIMATIONID],a
 	call PlayAnimation
 	ld a,$95
 	call $23B1 ; play sound effect
 	ld a,BLOCKBALL_ANIM
-	ld [$D07C],a
+	ld [W_ANIMATIONID],a
 	jp PlayAnimation
 
 INCBIN "baserom.gbc",$79E6A,$7AF74 - $79E6A

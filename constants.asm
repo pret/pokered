@@ -156,6 +156,8 @@ W_ENEMYMONEVASIONMOD  EQU $CD33
 
 W_WHICHTRADE EQU $CD3D ; which entry from TradeMons to select
 
+W_ANIMSOUNDID EQU $CF07 ; sound ID during battle animations
+
 W_WHICHPOKEMON EQU $CF92 ; which pokemon you selected
 
 W_WALKCOUNTER EQU $CFC5 ; walk animation counter
@@ -268,6 +270,39 @@ W_ENEMYTOXICCOUNTER EQU $D071
 W_ENEMYDISABLEDMOVE EQU $D072
 
 W_NUMHITS EQU $D074 ; number of hits in attacks like Doubleslap, etc.
+
+W_ANIMATIONID EQU $D07C ; ID number of the current battle animation
+
+; base coordinates of frame block
+W_BASECOORDX EQU $D081
+W_BASECOORDY EQU $D082
+
+W_FBTILECOUNTER EQU $D084 ; counts how many tiles of the current frame block have been drawn
+
+W_SUBANIMFRAMEDELAY EQU $D086 ; duration of each frame of the current subanimation in terms of screen refreshes
+
+W_SUBANIMSIZE EQU $D087 ; number of frame blocks in the current subanimation
+
+W_NUMFBTILES EQU $D089 ; number of tiles in current battle animation frame block
+
+W_SUBANIMTRANSFORM EQU $D08B ; controls what transformations are applied to the subanimation
+; 01: flip horizontally and vertically
+; 02: flip horizontally and translate downwards 40 pixels
+; 03: translate base coordinates of frame blocks, but don't change their internal coordinates or flip their tiles
+; 04: reverse the subanimation
+
+W_SUBANIMADDRPTR EQU $D094 ; the address _of the address_ of the current subanimation entry (2 bytes)
+
+W_SUBANIMSUBENTRYADDR EQU $D096 ; the address of the current subentry of the current subanimation (2 bytes)
+
+W_FBDESTADDR EQU $D09C ; current destination address in OAM for frame blocks (2 bytes, big endian)
+
+W_FBMODE EQU $D09E ; controls how the frame blocks are put together to form frames
+; specifically, after finishing drawing the frame block, the frame block's mode determines what happens
+; 00: clean OAM buffer and delay
+; 02: move onto the next frame block with no delay and no cleaning OAM buffer
+; 03: delay, but don't clean OAM buffer
+; 04: delay, without cleaning OAM buffer, and do not advance [W_FBDESTADDR], so that the next frame block will overwrite this one
 
 W_DAMAGE EQU $D0D7
 
@@ -833,6 +868,9 @@ rWY EQU $FF4A
 rWX EQU $FF4B
 rIE EQU $FFFF
 
+; OAM attribute flags
+OAM_HFLIP EQU %00100000 ; horizontal flip
+OAM_VFLIP EQU %01000000 ; vertical flip
 
 ; pokemon name constants
 RHYDON     EQU $01
