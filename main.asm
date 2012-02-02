@@ -12952,8 +12952,8 @@ ItemUseBall: ; 03:5687
 .BallSuccess2\@	;$5805
 	ld c,20
 	call DelayFrames
-	ld a,$c1
-	ld [$d07c],a
+	ld a,TOSS_ANIM
+	ld [W_ANIMATIONID],a
 	xor a
 	ld [$fff3],a
 	ld [$cc5b],a
@@ -63972,7 +63972,7 @@ PlayAnimation: ; 40F1
 	ld a,[hli]
 	cp a,$FF ; is there a sound to play?
 	jr z,.skipPlayingSound\@
-	ld [$CF07],a ; store sound
+	ld [W_ANIMSOUNDID],a ; store sound
 	push hl
 	push de
 	call $586F
@@ -64001,7 +64001,7 @@ PlayAnimation: ; 40F1
 	rla
 	ld [$D09F],a ; tile select
 	ld a,[hli] ; sound
-	ld [$CF07],a ; store sound
+	ld [W_ANIMSOUNDID],a ; store sound
 	ld a,[hli] ; subanimation ID
 	ld c,l
 	ld b,h
@@ -64044,7 +64044,7 @@ LoadSubanimation: ; 417C
 	ld a,[de]
 	ld b,a
 	and a,31
-	ld [W_SUBANIMSIZE],a ; number of frame blocks
+	ld [W_SUBANIMCOUNTER],a ; number of frame blocks
 	ld a,b
 	and a,%11100000
 	cp a,5 << 5 ; is subanimation type 5?
@@ -64063,7 +64063,7 @@ LoadSubanimation: ; 417C
 	ld hl,0
 	jr nz,.storeSubentryAddr\@
 ; if the animation is reversed, then place the initial subentry address at the end of the list of subentries
-	ld a,[W_SUBANIMSIZE]
+	ld a,[W_SUBANIMCOUNTER]
 	dec a
 	ld bc,3
 .loop\@
@@ -64282,9 +64282,9 @@ PlaySubanimation: ; 4E53
 	ld [W_FBMODE],a
 	call DrawFrameBlock
 	call $4ED7 ; run animation-specific function (if there is one)
-	ld a,[W_SUBANIMSIZE]
+	ld a,[W_SUBANIMCOUNTER]
 	dec a
-	ld [W_SUBANIMSIZE],a
+	ld [W_SUBANIMCOUNTER],a
 	ret z
 	ld a,[W_SUBANIMSUBENTRYADDR + 1]
 	ld h,a
@@ -64343,85 +64343,350 @@ DoSpecialEffectByAnimationId: ; 4ED7
 ; Format: Animation ID (1 byte), Address (2 bytes)
 AnimationIdSpecialEffects: ; 4EF5
 	db MEGA_PUNCH
-	dw $51BE
+	dw AnimationFlashScreen
 
 	db GUILLOTINE
-	dw $51BE
+	dw AnimationFlashScreen
 
 	db MEGA_KICK
-	dw $51BE
+	dw AnimationFlashScreen
 
 	db HEADBUTT
-	dw $51BE
+	dw AnimationFlashScreen
 
 	db TAIL_WHIP
-	dw $50D0
+	dw Func50D0
 
 	db GROWL
-	dw $50BC
+	dw DoGrowlSpecialEffects
 
 	db DISABLE
-	dw $51BE
+	dw AnimationFlashScreen
 
 	db BLIZZARD
-	dw $5016
+	dw DoBlizzardSpecialEffects
 
 	db BUBBLEBEAM
-	dw $51BE
+	dw AnimationFlashScreen
 
 	db HYPER_BEAM
-	dw $5000
+	dw FlashScreenEveryFourFrameBlocks
 
 	db THUNDERBOLT
-	dw $4FF7
+	dw FlashScreenEveryEightFrameBlocks
 
 	db REFLECT
-	dw $51BE
+	dw AnimationFlashScreen
 
 	db SELFDESTRUCT
-	dw $5009
+	dw DoExplodeSpecialEffects
 
 	db SPORE
-	dw $51BE
+	dw AnimationFlashScreen
 
 	db EXPLOSION
-	dw $5009
+	dw DoExplodeSpecialEffects
 
 	db ROCK_SLIDE
-	dw $4FD9
+	dw DoRockSlideSpecialEffects
 
 	db $AA
-	dw $5041
+	dw Func5041
 
 	db $AB
-	dw $504C
+	dw Func504C
 
 	db $AC
-	dw $507C
+	dw Func507C
 
 	db TOSS_ANIM
-	dw $4F3E
+	dw DoBallTossSpecialEffects
 
-	db $C2
-	dw $4F96
+	db SHAKE_ANIM
+	dw DoBallShakeSpecialEffects
 
 	db POOF_ANIM
-	dw $4FCE
+	dw DoPoofSpecialEffects
 
 	db GREATTOSS_ANIM
-	dw $4F3E
+	dw DoBallTossSpecialEffects
 
 	db ULTRATOSS_ANIM
-	dw $4F3E
+	dw DoBallTossSpecialEffects
 
 	db $FF ; terminator
 
-INCBIN "baserom.gbc",$78F3E,$790DA - $78F3E
+DoBallTossSpecialEffects: ; 4F3E
+	ld a,[$CF91]
+	cp a,3 ; is it a Master Ball or Ultra Ball?
+	jr nc,.skipFlashingEffect\@
+.flashingEffect\@ ; do a flashing effect if it's Master Ball or Ultra Ball
+	ld a,[rOBP0]
+	xor a,%00111100 ; complement colors 1 and 2
+	ld [rOBP0],a
+.skipFlashingEffect\@
+	ld a,[W_SUBANIMCOUNTER]
+	cp a,11 ; is it the beginning of the subanimation?
+	jr nz,.skipPlayingSound\@
+; if it is the beginning of the subanimation, play a sound
+	ld a,$91
+	call $23b1 ; play sound
+.skipPlayingSound\@
+	ld a,[W_ISINBATTLE]
+	cp a,02 ; is it a trainer battle?
+	jr z,.isTrainerBattle\@
+	ld a,[$d11e]
+	cp a,$10 ; is the enemy pokemon the Ghost Marowak?
+	ret nz
+; if the enemy pokemon is the Ghost Marowak, make it dodge during the last 3 frames
+	ld a,[W_SUBANIMCOUNTER]
+	cp a,3
+	jr z,.moveGhostMarowakLeft\@
+	cp a,2
+	jr z,.moveGhostMarowakLeft\@
+	cp a,1
+	ret nz
+.moveGhostMarowakLeft\@
+	FuncCoord 17,0
+	ld hl,Coord
+	ld de,20
+	ld bc,$0707 ; 7 rows and 7 columns
+.loop\@
+	push hl
+	push bc
+	call $5862 ; move row of tiles left
+	pop bc
+	pop hl
+	add hl,de
+	dec b
+	jr nz,.loop\@
+	ld a,%00001000
+	ld [$ff10],a ; Channel 1 sweep register
+	ret
+.isTrainerBattle\@ ; if it's a trainer battle, shorten the animation by one frame
+	ld a,[W_SUBANIMCOUNTER]
+	cp a,3
+	ret nz
+	dec a
+	ld [W_SUBANIMCOUNTER],a
+	ret
+
+DoBallShakeSpecialEffects: ; 4F96
+	ld a,[W_SUBANIMCOUNTER]
+	cp a,4 ; is it the beginning of a shake?
+	jr nz,.skipPlayingSound\@
+; if it is the beginning of a shake, play a sound and wait 2/3 of a second
+	ld a,$8c
+	call $23b1 ; play sound
+	ld c,40
+	call DelayFrames
+.skipPlayingSound\@
+	ld a,[W_SUBANIMCOUNTER]
+	dec a
+	ret nz
+; if it's the end of the ball shaking subanimation, check if more shakes are left and restart the subanimation
+	ld a,[$cd3d] ; number of shakes
+	dec a ; decrement number of shakes
+	ld [$cd3d],a
+	ret z
+; if there are shakes left, restart the subanimation
+	ld a,[W_SUBANIMSUBENTRYADDR]
+	ld l,a
+	ld a,[W_SUBANIMSUBENTRYADDR + 1]
+	ld h,a
+	ld de,-(4 * 3) ; 4 subentries and 3 bytes per subentry
+	add hl,de
+	ld a,l
+	ld [W_SUBANIMSUBENTRYADDR],a
+	ld a,h
+	ld [W_SUBANIMSUBENTRYADDR + 1],a
+	ld a,5 ; number of subentries in the ball shaking subanimation plus one
+	ld [W_SUBANIMCOUNTER],a
+	ret
+
+; plays a sound after the second frame of the poof animation
+DoPoofSpecialEffects: ; 4FCE
+	ld a,[W_SUBANIMCOUNTER]
+	cp a,5
+	ret nz
+	ld a,$93
+	jp $23b1
+
+DoRockSlideSpecialEffects: ; 4FD9
+	ld a,[W_SUBANIMCOUNTER]
+	cp a,12
+	ret nc
+	cp a,8
+	jr nc,.shakeScreen\@
+	cp a,1
+	jp z,AnimationFlashScreen ; if it's the end of the subanimation, flash the screen
+	ret
+; if the subaninmation counter is between 8 and 11, shake the screen horizontally and vertically
+.shakeScreen\@
+	ld b,1
+	ld a,$24
+	call Predef ; shake horizontally
+	ld b,1
+	ld a,$21
+	jp Predef ; shake vertically
+
+FlashScreenEveryEightFrameBlocks: ; 4FF7
+	ld a,[W_SUBANIMCOUNTER]
+	and a,7 ; is the subanimation counter exactly 8?
+	call z,AnimationFlashScreen ; if so, flash the screen
+	ret
+
+; flashes the screen if the subanimation counter is divisible by 4
+FlashScreenEveryFourFrameBlocks: ; 5000
+	ld a,[W_SUBANIMCOUNTER]
+	and a,3
+	call z,AnimationFlashScreen
+	ret
+
+; used for Explosion and Selfdestruct
+DoExplodeSpecialEffects: ; 5009
+	ld a,[W_SUBANIMCOUNTER]
+	cp a,1 ; is it the end of the subanimation?
+	jr nz,FlashScreenEveryFourFrameBlocks
+; if it's the end of the subanimation, make the attacking pokemon disappear
+	ld hl,$C405
+	jp $5801 ; make pokemon disappear
+
+; flashes the screen when subanimation counter is 1 modulo 4
+DoBlizzardSpecialEffects: ; 5016
+	ld a,[W_SUBANIMCOUNTER]
+	cp a,13
+	jp z,AnimationFlashScreen
+	cp a,9
+	jp z,AnimationFlashScreen
+	cp a,5
+	jp z,AnimationFlashScreen
+	cp a,1
+	jp z,AnimationFlashScreen
+	ret
+
+; flashes the screen at 3 points in the subanimation
+; XXX is this unused?
+Func502E: ; 502E
+	ld a,[W_SUBANIMCOUNTER]
+	cp a,14
+	jp z,AnimationFlashScreen
+	cp a,9
+	jp z,AnimationFlashScreen
+	cp a,2
+	jp z,AnimationFlashScreen
+	ret
+
+; function to make the pokemon disappear at the beginning of the animation
+; XXX probably a trade-related animation
+Func5041:
+	ld a,[W_SUBANIMCOUNTER]
+	cp a,6
+	ret nz
+	ld a,$2F
+	jp $580C ; make pokemon disappear
+
+; function to make a shaking pokeball jump up at the end of the animation
+; XXX probably a trade-related animation
+Func504C:
+	ld a,[W_SUBANIMCOUNTER]
+	cp a,1
+	ret nz
+; if it's the end of the animation, make the ball jump up
+	ld de,BallMoveDistances1
+.loop\@
+	ld hl,$c300 ; OAM buffer
+	ld bc,4
+.innerLoop\@
+	ld a,[de]
+	cp a,$ff
+	jr z,.done\@
+	add [hl] ; add to Y value of OAM entry
+	ld [hl],a
+	add hl,bc
+	ld a,l
+	cp a,4 * 4 ; there are 4 entries, each 4 bytes
+	jr nz,.innerLoop\@
+	inc de
+	push bc
+	call Delay3
+	pop bc
+	jr .loop\@
+.done\@
+	call AnimationCleanOAM
+	ld a,$98
+	jp $23B1 ; play sound
+
+BallMoveDistances1: ; 5078
+db -12,-12,-8
+db $ff ; terminator
+
+; function to make the pokeball jump up
+; XXX probably a trade-related animation
+Func507C ; 507C
+	ld de,BallMoveDistances2
+.loop\@
+	ld hl,$c300 ; OAM buffer
+	ld bc,4
+.innerLoop\@
+	ld a,[de]
+	cp a,$ff
+	jp z,ClearScreen
+	add [hl]
+	ld [hl],a
+	add hl,bc
+	ld a,l
+	cp a,4 * 4 ; there are 4 entries, each 4 bytes
+	jr nz,.innerLoop\@
+	inc de
+	push de
+	ld a,[de]
+	cp a,12
+	jr z,.playSound\@
+	cp a,$ff
+	jr nz,.skipPlayingSound\@
+.playSound\@ ; play sound if next move distance is 12 or this is the last one
+	ld a,$ae
+	call $23b1
+.skipPlayingSound\@
+	push bc
+	ld c,5
+	call DelayFrames
+	pop bc
+	ld a,[$ffae] ; background scroll X
+	sub a,8 ; scroll to the left
+	ld [$ffae],a
+	pop de
+	jr .loop\@
+
+BallMoveDistances2: ; 50B3
+db 11,12,-12,-7,7,12,-8,8
+db $ff ; terminator
+
+; this function copies the current musical note graphic
+; so that there are two musical notes flying towards the defending pokemon
+DoGrowlSpecialEffects: ; 50BC
+	ld hl,$c300 ; OAM buffer
+	ld de,$c310
+	ld bc,$10
+	call CopyData ; copy the musical note graphic
+	ld a,[W_SUBANIMCOUNTER]
+	dec a
+	call z,AnimationCleanOAM ; clean up at the end of the subanimation
+	ret
+
+; this is associated with Tail Whip, but Tail Whip doesn't use any subanimations
+; XXX why is this here?
+Func50D0: ; 50D0
+	ld a,1
+	ld [W_SUBANIMCOUNTER],a
+	ld c,20
+	jp DelayFrames
 
 ; Format: Special Effect ID (1 byte), Address (2 bytes)
 SpecialEffectPointers: ; 50DA
 	db $FE
-	dw $51BE
+	dw AnimationFlashScreen
 	db $FD
 	dw $51D6
 	db $FC
@@ -64433,7 +64698,7 @@ SpecialEffectPointers: ; 50DA
 	db $F9
 	dw $51DB
 	db $F8
-	dw $5165
+	dw AnimationFlashScreenLong
 	db $F7
 	dw $527A
 	db $F6
@@ -64479,7 +64744,7 @@ SpecialEffectPointers: ; 50DA
 	db $E2
 	dw $5424
 	db $E1
-	dw $5150
+	dw AnimationDelay10
 	db $E0
 	dw $5398
 	db $DF
@@ -64500,7 +64765,114 @@ SpecialEffectPointers: ; 50DA
 	dw $5666
 	db $FF
 
-INCBIN "baserom.gbc",$79150,$7986F - $79150
+AnimationDelay10: ; 5150
+	ld c,10
+	jp DelayFrames
+
+; calls a function with the turn flipped from player to enemy or vice versa
+; input - hl - address of function to call
+CallWithTurnFlipped: ; 5155
+	ld a,[H_WHOSETURN]
+	push af
+	xor a,1
+	ld [H_WHOSETURN],a
+	ld de,.returnAddress\@
+	push de
+	jp [hl]
+.returnAddress\@
+	pop af
+	ld [H_WHOSETURN],a
+	ret 
+
+; flashes the screen for an extended period (48 frames)
+AnimationFlashScreenLong: ; 5165
+	ld a,3 ; cycle through the palettes 3 times
+	ld [$D08A],a
+	ld a,[$cf1b] ; running on SGB?
+	and a
+	ld hl,FlashScreenLongMonochrome
+	jr z,.loop\@
+	ld hl,FlashScreenLongSGB
+.loop\@
+	push hl
+.innerLoop\@
+	ld a,[hli]
+	cp a,$01 ; is it the end of the palettes?
+	jr z,.endOfPalettes\@
+	ld [rBGP],a
+	call FlashScreenLongDelay
+	jr .innerLoop\@
+.endOfPalettes\@
+	ld a,[$D08A]
+	dec a
+	ld [$D08A],a
+	pop hl
+	jr nz,.loop\@
+	ret 
+
+; BG palettes
+FlashScreenLongMonochrome: ; 518E
+db %11111001 ; 3, 3, 2, 1
+db %11111110 ; 3, 3, 3, 2
+db %11111111 ; 3, 3, 3, 3
+db %11111110 ; 3, 3, 3, 2
+db %11111001 ; 3, 3, 2, 1
+db %11100100 ; 3, 2, 1, 0
+db %10010000 ; 2, 1, 0, 0
+db %01000000 ; 1, 0, 0, 0
+db %00000000 ; 0, 0, 0, 0
+db %01000000 ; 1, 0, 0, 0
+db %10010000 ; 2, 1, 0, 0
+db %11100100 ; 3, 2, 1, 0
+db $01 ; terminator
+
+; BG palettes
+FlashScreenLongSGB: ; 519B
+db %11111000 ; 3, 3, 2, 0
+db %11111100 ; 3, 3, 3, 0
+db %11111111 ; 3, 3, 3, 3
+db %11111100 ; 3, 3, 3, 0
+db %11111000 ; 3, 3, 2, 0
+db %11100100 ; 3, 2, 1, 0
+db %10010000 ; 2, 1, 0, 0
+db %01000000 ; 1, 0, 0, 0
+db %00000000 ; 0, 0, 0, 0
+db %01000000 ; 1, 0, 0, 0
+db %10010000 ; 2, 1, 0, 0
+db %11100100 ; 3, 2, 1, 0
+db $01 ; terminator
+
+; causes a delay of 2 frames for the first cycle
+; causes a delay of 1 frame for the second and third cycles
+FlashScreenLongDelay: ; 51A8
+	ld a,[$D08A]
+	cp a,4 ; never true since [$D08A] starts at 3
+	ld c,4
+	jr z,.delayFrames\@
+	cp a,3
+	ld c,2
+	jr z,.delayFrames\@
+	cp a,2 ; nothing is done with this
+	ld c,1
+.delayFrames\@
+	jp DelayFrames
+
+AnimationFlashScreen: ; 51BE
+	ld a,[rBGP]
+	push af ; save initial palette
+	ld a,%00011011 ; 0, 1, 2, 3 (inverted colors)
+	ld [rBGP],a
+	ld c,2
+	call DelayFrames
+	xor a ; white out background
+	ld [rBGP],a
+	ld c,2
+	call DelayFrames
+	pop af
+	ld [rBGP],a ; restore initial palette
+	ret
+
+INCBIN "baserom.gbc",$791D6,$7986F - $791D6
 
 Func586F: ; 0x7986F 586F
 	ld hl,MoveSoundTable

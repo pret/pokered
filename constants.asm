@@ -281,7 +281,7 @@ W_FBTILECOUNTER EQU $D084 ; counts how many tiles of the current frame block hav
 
 W_SUBANIMFRAMEDELAY EQU $D086 ; duration of each frame of the current subanimation in terms of screen refreshes
 
-W_SUBANIMSIZE EQU $D087 ; number of frame blocks in the current subanimation
+W_SUBANIMCOUNTER EQU $D087 ; counts the number of subentries left in the current subanimation
 
 W_NUMFBTILES EQU $D089 ; number of tiles in current battle animation frame block
 
@@ -1618,6 +1618,7 @@ SHOWPIC_ANIM EQU $A6 ; redraw monster pic
 SLP_ANIM     EQU $BD ; sleeping monster
 CONF_ANIM    EQU $BF ; confused monster
 TOSS_ANIM    EQU $C1 ; toss Poké Ball
+SHAKE_ANIM   EQU $C2 ; shaking Poké Ball when catching monster
 POOF_ANIM    EQU $C3 ; puff of smoke
 BLOCKBALL_ANIM EQU $C4 ; trainer knocks away Poké Ball
 GREATTOSS_ANIM EQU $C5 ; toss Great Ball
