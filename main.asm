@@ -7674,7 +7674,285 @@ UnnamedText_72d2: ; 0x72d2
 	db $50
 ; 0x72d2 + 5 bytes
 
-INCBIN "baserom.gbc",$72d7,$4b6
+INCBIN "baserom.gbc",$72d7,$72ea - $72d7
+
+; function to draw various text boxes
+; INPUT:
+; [$D125] = text box ID
+DisplayTextBoxID_: ; 72EA
+	ld a,[$d125] ; a = text box ID
+	cp a,$14
+	jp z,$7559
+	ld c,a
+	ld hl,TextBoxFunctionTable
+	ld de,3
+	call SearchTextBoxTable
+	jr c,.functionTableMatch\@
+	ld hl,TextBoxCoordTable
+	ld de,5
+	call SearchTextBoxTable
+	jr c,.coordTableMatch\@
+	ld hl,TextBoxTextAndCoordTable
+	ld de,9
+	call SearchTextBoxTable
+	jr c,.textAndCoordTableMatch\@
+.done\@
+	ret
+.functionTableMatch\@
+	ld a,[hli]
+	ld h,[hl]
+	ld l,a ; hl = address of function
+	ld de,.done\@
+	push de
+	jp [hl] ; jump to the function
+.coordTableMatch\@
+	call GetTextBoxIDCoords
+	call GetAddressOfScreenCoords
+	call TextBoxBorder
+	ret
+.textAndCoordTableMatch\@
+	call GetTextBoxIDCoords
+	push hl
+	call GetAddressOfScreenCoords
+	call TextBoxBorder
+	pop hl
+	call GetTextBoxIDText
+	ld a,[$d730]
+	push af
+	ld a,[$d730]
+	set 6,a ; no pauses between printing each letter
+	ld [$d730],a
+	call PlaceString
+	pop af
+	ld [$d730],a
+	call $2429 ; move sprites
+	ret
+
+; function to search a table terminated with $ff for a byte matching c in increments of de
+; sets carry flag if a match is found and clears carry flag if not
+SearchTextBoxTable: ; 734C
+	dec de
+.loop\@
+	ld a,[hli]
+	cp a,$ff
+	jr z,.notFound\@
+	cp c
+	jr z,.found\@
+	add hl,de
+	jr .loop\@
+.found\@
+	scf
+.notFound\@
+	ret
+
+; function to load coordinates from the TextBoxCoordTable or the TextBoxTextAndCoordTable
+; INPUT:
+; hl = address of coordinates
+; OUTPUT:
+; b = height
+; c = width
+; d = row of upper left corner
+; e = column of upper left corner
+GetTextBoxIDCoords: ; 735A
+	ld a,[hli] ; column of upper left corner
+	ld e,a
+	ld a,[hli] ; row of upper left corner
+	ld d,a
+	ld a,[hli] ; column of lower right corner
+	sub e
+	dec a
+	ld c,a     ; c = width
+	ld a,[hli] ; row of lower right corner
+	sub d
+	dec a
+	ld b,a     ; b = height
+	ret
+
+; function to load a text address and text coordinates from the TextBoxTextAndCoordTable
+GetTextBoxIDText: ; 7367
+	ld a,[hli]
+	ld e,a
+	ld a,[hli]
+	ld d,a ; de = address of text
+	push de ; save text address
+	ld a,[hli]
+	ld e,a ; column of upper left corner of text
+	ld a,[hl]
+	ld d,a ; row of upper left corner of text
+	call GetAddressOfScreenCoords
+	pop de ; restore text address
+	ret
+
+; function to point hl to the screen coordinates
+; INPUT:
+; d = row
+; e = column
+; OUTPUT:
+; hl = address of upper left corner of text box
+GetAddressOfScreenCoords: ; 7375
+	push bc
+	ld hl,$c3a0
+	ld bc,20
+.loop\@ ; loop to add d rows to the base address
+	ld a,d
+	and a
+	jr z,.addedRows\@
+	add hl,bc
+	dec d
+	jr .loop\@
+.addedRows\@
+	pop bc
+	add hl,de
+	ret
+
+; Format:
+; 00: text box ID
+; 01-02: function address
+TextBoxFunctionTable: ; 7387
+	db $13
+	dw $74ba
+
+	db $15
+	dw $74ea
+
+	db $04
+	dw $76e1
+
+	db $ff ; terminator
+
+; Format:
+; 00: text box ID
+; 01: column of upper left corner
+; 02: row of upper left corner
+; 03: column of lower right corner
+; 04: row of lower right corner
+TextBoxCoordTable: ; 7391
+	db $01,  0, 12, 19, 17
+	db $03,  0,  0, 19, 14
+	db $07,  0,  0, 11,  6
+	db $0d,  4,  2, 19, 12
+	db $10,  7,  0, 19, 17
+	db $11,  6,  4, 14, 13
+	db $ff ; terminator
+
+; Format:
+; 00: text box ID
+; 01: column of upper left corner
+; 02: row of upper left corner
+; 03: column of lower right corner
+; 04: row of lower right corner
+; 05-06: address of text
+; 07: column of beginning of text
+; 08: row of beginning of text
+; table of window positions and corresponding text [key, start column, start row, end column, end row, text pointer [2 bytes], text column, text row]
+TextBoxTextAndCoordTable: ; 73B0
+	db $05 ; text box ID
+	db 0,0,14,17   ; text box coordinates
+	dw JapaneseMochimonoText
+	db 3,0   ; text coordinates
+
+	db $06 ; text box ID
+	db 13,10,19,14 ; text box coordinates
+	dw UseTossText
+	db 15,11 ; text coordinates
+
+	db $08 ; text box ID
+	db 0,0,7,5     ; text box coordinates
+	dw JapaneseSaveMessageText
+	db 2,2   ; text coordinates
+
+	db $09 ; text box ID
+	db 0,6,5,10    ; text box coordinates
+	dw JapaneseSpeedOptionsText
+	db 2,7   ; text coordinates
+
+	db $0b ; text box ID
+	db 8,12,19,17  ; text box coordinates
+	dw BattleMenuText
+	db 10,14 ; text coordinates
+
+	db $1b ; text box ID
+	db 0,12,19,17  ; text box coordinates
+	dw SafariZoneBattleMenuText
+	db 2,14  ; text coordinates
+
+	db $0c ; text box ID
+	db 11,11,19,17 ; text box coordinates
+	dw SwitchStatsCancelText
+	db 13,12 ; text coordinates
+
+	db $0e ; text box ID
+	db 0,0,10,6    ; text box coordinates
+	dw BuySellQuitText
+	db 2,1   ; text coordinates
+
+	db $0f ; text box ID
+	db 11,0,19,2   ; text box coordinates
+	dw MoneyText
+	db 13,0  ; text coordinates
+
+	db $12 ; text box ID
+	db 7,6,11,10   ; text box coordinates
+	dw JapaneseAhText
+	db 8,8   ; text coordinates
+
+	db $1a ; text box ID
+	db 11,8,19,17  ; text box coordinates
+	dw JapanesePokedexMenu
+	db 12,10 ; text coordinates
+
+; note that there is no terminator
+
+BuySellQuitText: ; 7413
+	db "BUY",$4E
+	db "SELL",$4E
+	db "QUIT@@"
+
+UseTossText: ; 7422
+	db "USE",$4E
+	db "TOSS@"
+
+JapaneseSaveMessageText: ; 742B
+	db "きろく",$4E
+	db "メッセージ@"
+
+JapaneseSpeedOptionsText: ; 7435
+	db "はやい",$4E
+	db "おそい@"
+
+MoneyText: ; 743D
+	db "MONEY@"
+
+JapaneseMochimonoText: ; 7443
+	db "もちもの@"
+
+JapaneseMainMenuText: ; 7448
+	db "つづきから",$4E
+	db "さいしょから@"
+
+BattleMenuText: ; 7455
+	db "FIGHT ",$E1,$E2,$4E
+	db "ITEM  RUN@"
+
+SafariZoneBattleMenuText: ; 7468
+	db "BALL",$F1,"       BAIT",$4E
+	db "THROW ROCK  RUN@"
+
+SwitchStatsCancelText: ; 7489
+	db "SWITCH",$4E
+	db "STATS",$4E
+	db "CANCEL@"
+
+JapaneseAhText: ; 749D
+	db "アッ!@"
+
+JapanesePokedexMenu: ; 74A1
+	db "データをみる",$4E
+	db "なきごえ",$4E
+	db "ぶんぷをみる",$4E
+	db "キャンセル@"
+
+INCBIN "baserom.gbc",$74ba,$778d - $74ba
 
 FieldMoveNames: ; 778D
 	db "CUT@"
