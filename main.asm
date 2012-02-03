@@ -5060,7 +5060,72 @@ DisplayStartMenu: ; 2ACD
 	call $36a0 ; transfer tile pattern data for text windows into VRAM
 	jp CloseTextDisplay
 
-INCBIN "baserom.gbc",$2b7f,$2f9e - $2b7f
+; function to count how many bits are set in a string of bytes
+; INPUT:
+; hl = address of string of bytes
+; b = length of string of bytes
+; OUTPUT:
+; [$D11E] = number of set bits
+CountSetBits: ; 2B7F
+	ld c,0
+.loop\@
+	ld a,[hli]
+	ld e,a
+	ld d,8
+.innerLoop\@ ; count how many bits are set in the current byte
+	srl e
+	ld a,0
+	adc c
+	ld c,a
+	dec d
+	jr nz,.innerLoop\@
+	dec b
+	jr nz,.loop\@
+	ld a,c
+	ld [$d11e],a ; store number of set bits
+	ret
+
+INCBIN "baserom.gbc",$2B96,$2BBB - $2B96
+
+; function to remove an item (in varying quantities) from the player's bag or PC box
+; INPUT:
+; HL = address of inventory (either W_NUMBAGITEMS or W_NUMBOXITEMS)
+; [$CF92] = index (within the inventory) of the item to remove
+; [$CF96] = quantity to remove
+RemoveItemFromInventory: ; 2BBB
+	ld a,[$ffb8]
+	push af
+	ld a,BANK(RemoveItemFromInventory_)
+	ld [$ffb8],a
+	ld [$2000],a
+	call RemoveItemFromInventory_
+	pop af
+	ld [$ffb8],a
+	ld [$2000],a
+	ret
+
+; function to add an item (in varying quantities) to the player's bag or PC box
+; INPUT:
+; HL = address of inventory (either W_NUMBAGITEMS or W_NUMBOXITEMS)
+; [$CF91] = item ID
+; [$CF96] = item quantity
+; sets carry flag if successful, unsets carry flag if unsuccessful
+AddItemToInventory: ; 2BCF
+	push bc
+	ld a,[$ffb8]
+	push af
+	ld a,BANK(AddItemToInventory_)
+	ld [$ffb8],a
+	ld [$2000],a
+	call AddItemToInventory_
+	pop bc
+	ld a,b
+	ld [$ffb8],a
+	ld [$2000],a
+	pop bc
+	ret
+
+INCBIN "baserom.gbc",$2be6,$2f9e - $2be6
 
 GetMonName: ; 2F9E
 	push hl
@@ -5171,7 +5236,42 @@ TechnicalPrefix: ; 303c
 HiddenPrefix: ; 303e
 	db "HM"
 
-INCBIN "baserom.gbc",$3040,$31cc - $3040
+; sets carry if item is HM, clears carry if item is not HM
+; Input: a = item ID
+IsItemHM: ; 3040
+	cp a,HM_01
+	jr c,.notHM\@
+	cp a,TM_01
+	ret
+.notHM\@
+	and a
+	ret
+
+; sets carry if move is an HM, clears carry if move is not an HM
+; Input: a = move ID
+IsMoveHM: ; 3049
+	ld hl,HMMoves
+	ld de,1
+	jp IsInArray
+
+HMMoves: ; 3052
+	db CUT,FLY,SURF,STRENGTH,FLASH
+	db $ff ; terminator
+
+GetMoveName: ; 3058
+	push hl
+	ld a,MOVE_NAME
+	ld [$d0b6],a
+	ld a,[$d11e]
+	ld [$d0b5],a
+	ld a,BANK(MoveNames)
+	ld [$d0b7],a
+	call GetName
+	ld de,$cd6d ; pointer to where move name is stored in RAM
+	pop hl
+	ret
+
+INCBIN "baserom.gbc",$3071,$31cc - $3071
 
 LoadTrainerHeader: ; 0x31cc
 	call $3157
@@ -7057,60 +7157,49 @@ ENDC
 
 INCBIN "baserom.gbc",$6b21,$6e0c - $6b21
 
-UnnamedText_6e0c: ; 0x6e0c
-	TX_FAR _UnnamedText_6e0c
+PokemartBuyingGreetingText: ; 0x6e0c
+	TX_FAR _PokemartBuyingGreetingText
 	db $50
-; 0x6e0c + 5 bytes
 
-UnnamedText_6e11: ; 0x6e11
-	TX_FAR _UnnamedText_6e11
+PokemartTellBuyPrice: ; 0x6e11
+	TX_FAR _PokemartTellBuyPrice
 	db $50
-; 0x6e11 + 5 bytes
 
-UnnamedText_6e16: ; 0x6e16
-	TX_FAR _UnnamedText_6e16
+PokemartBoughtItemText: ; 0x6e16
+	TX_FAR _PokemartBoughtItemText
 	db $50
-; 0x6e16 + 5 bytes
 
-UnnamedText_6e1b: ; 0x6e1b
-	TX_FAR _UnnamedText_6e1b
+PokemartNotEnoughMoneyText: ; 0x6e1b
+	TX_FAR _PokemartNotEnoughMoneyText
 	db $50
-; 0x6e1b + 5 bytes
 
-UnnamedText_6e20: ; 0x6e20
-	TX_FAR _UnnamedText_6e20
+PokemartItemBagFullText: ; 0x6e20
+	TX_FAR _PokemartItemBagFullText
 	db $50
-; 0x6e20 + 5 bytes
 
-UnnamedText_6e25: ; 0x6e25
-	TX_FAR _UnnamedText_6e25
+PokemonSellingGreetingText: ; 0x6e25
+	TX_FAR _PokemonSellingGreetingText
 	db $50
-; 0x6e25 + 5 bytes
 
-UnnamedText_6e2a: ; 0x6e2a
-	TX_FAR _UnnamedText_6e2a
+PokemartTellSellPrice: ; 0x6e2a
+	TX_FAR _PokemartTellSellPrice
 	db $50
-; 0x6e2a + 5 bytes
 
-UnnamedText_6e2f: ; 0x6e2f
-	TX_FAR _UnnamedText_6e2f
+PokemartItemBagEmptyText: ; 0x6e2f
+	TX_FAR _PokemartItemBagEmptyText
 	db $50
-; 0x6e2f + 5 bytes
 
-UnnamedText_6e34: ; 0x6e34
-	TX_FAR _UnnamedText_6e34
+PokemartUnsellableItemText: ; 0x6e34
+	TX_FAR _PokemartUnsellableItemText
 	db $50
-; 0x6e34 + 5 bytes
 
-UnnamedText_6e39: ; 0x6e39
-	TX_FAR _UnnamedText_6e39
+PokemartThankYouText: ; 0x6e39
+	TX_FAR _PokemartThankYouText
 	db $50
-; 0x6e39 + 5 bytes
 
-UnnamedText_6e3e: ; 0x6e3e
-	TX_FAR _UnnamedText_6e3e
+PokemartAnythingElseText: ; 0x6e3e
+	TX_FAR _PokemartAnythingElseText
 	db $50
-; 0x6e3e + 5 bytes
 
 INCBIN "baserom.gbc",$6e43,$6fb4 - $6e43
 
@@ -8785,7 +8874,157 @@ UnnamedText_cdff: ; 0xcdff
 	db $50
 ; 0xcdff + 5 bytes
 
-INCBIN "baserom.gbc",$ce04,$b4
+
+; function to add an item (in varying quantities) to the player's bag or PC box
+; INPUT:
+; hl = address of inventory (either W_NUMBAGITEMS or W_NUMBOXITEMS)
+; [$CF91] = item ID
+; [$CF96] = item quantity
+; sets carry flag if successful, unsets carry flag if unsuccessful
+AddItemToInventory_: ; 4E04
+	ld a,[$cf96] ; a = item quantity
+	push af
+	push bc
+	push de
+	push hl
+	push hl
+	ld d,50 ; PC box can hold 50 items
+	ld a,W_NUMBAGITEMS & $FF
+	cp l
+	jr nz,.checkIfInventoryFull\@
+	ld a,W_NUMBAGITEMS >> 8
+	cp h
+	jr nz,.checkIfInventoryFull\@
+; if the destination is the bag
+	ld d,20 ; bag can hold 20 items
+.checkIfInventoryFull\@
+	ld a,[hl]
+	sub d
+	ld d,a
+	ld a,[hli]
+	and a
+	jr z,.addNewItem\@
+.loop\@
+	ld a,[hli]
+	ld b,a ; b = ID of current item in table
+	ld a,[$cf91] ; a = ID of item being added
+	cp b ; does the current item in the table match the item being added?
+	jp z,.increaseItemQuantity\@ ; if so, increase the item's quantity
+	inc hl
+	ld a,[hl]
+	cp a,$ff ; is it the end of the table?
+	jr nz,.loop\@
+.addNewItem\@ ; add an item not yet in the inventory
+	pop hl
+	ld a,d
+	and a ; is there room for a new item slot?
+	jr z,.done\@
+; if there is room
+	inc [hl] ; increment the number of items in the inventory
+	ld a,[hl] ; the number of items will be the index of the new item
+	add a
+	dec a
+	ld c,a
+	ld b,0
+	add hl,bc ; hl = address to store the item
+	ld a,[$cf91]
+	ld [hli],a ; store item ID
+	ld a,[$cf96]
+	ld [hli],a ; store item quantity
+	ld [hl],$ff ; store terminator
+	jp .success\@
+.increaseItemQuantity\@ ; increase the quantity of an item already in the inventory
+	ld a,[$cf96]
+	ld b,a ; b = quantity to add
+	ld a,[hl] ; a = existing item quantity
+	add b ; a = new item quantity
+	cp a,100
+	jp c,.storeNewQuantity\@ ; if the new quantity is less than 100, store it
+; if the new quantity is greater than or equal to 100,
+; try to max out the current slot and add the rest in a new slot
+	sub a,99
+	ld [$cf96],a ; a = amount left over (to put in the new slot)
+	ld a,d
+	and a ; is there room for a new item slot?
+	jr z,.increaseItemQuantityFailed\@
+; if so, store 99 in the current slot and store the rest in a new slot
+	ld a,99
+	ld [hli],a
+	jp .loop\@
+.increaseItemQuantityFailed\@
+	pop hl
+	and a
+	jr .done\@
+.storeNewQuantity\@
+	ld [hl],a
+	pop hl
+.success\@
+	scf
+.done\@
+	pop hl
+	pop de
+	pop bc
+	pop bc
+	ld a,b
+	ld [$cf96],a ; restore the initial value from when the function was called
+	ret
+
+; function to remove an item (in varying quantities) from the player's bag or PC box
+; INPUT:
+; hl = address of inventory (either W_NUMBAGITEMS or W_NUMBOXITEMS)
+; [$CF92] = index (within the inventory) of the item to remove
+; [$CF96] = quantity to remove
+RemoveItemFromInventory_: ; 4E74
+	push hl
+	inc hl
+	ld a,[$cf92] ; index (within the inventory) of the item being removed
+	sla a
+	add l
+	ld l,a
+	jr nc,.noCarry\@
+	inc h
+.noCarry\@
+	inc hl
+	ld a,[$cf96] ; quantity being removed
+	ld e,a
+	ld a,[hl] ; a = current quantity
+	sub e
+	ld [hld],a ; store new quantity
+	ld [$cf97],a
+	and a
+	jr nz,.skipMovingUpSlots\@
+; if the remaining quantity is 0,
+; remove the emptied item slot and move up all the following item slots
+.moveSlotsUp\@
+	ld e,l
+	ld d,h
+	inc de
+	inc de ; de = address of the slot following the emptied one
+.loop\@ ; loop to move up the following slots
+	ld a,[de]
+	inc de
+	ld [hli],a
+	cp a,$ff
+	jr nz,.loop\@
+; update menu info
+	xor a
+	ld [$cc36],a
+	ld [W_CURMENUITEMID],a
+	ld [$cc2c],a
+	ld [$d07e],a
+	pop hl
+	ld a,[hl] ; a = number of items in inventory
+	dec a ; decrement the number of items
+	ld [hl],a ; store new number of items
+	ld [$d12a],a
+	cp a,2
+	jr c,.done\@
+	ld [W_MAXMENUITEMID],a
+	jr .done\@
+.skipMovingUpSlots\@
+	pop hl
+.done\@
+	ret
 
 ; wild pokemon data: from 4EB8 to 55C7
 
@@ -78844,11 +79083,11 @@ _RepelWoreOffText: ; 0xa25ef
 	db "wore off.", $57
 ; 0xa25ef + 25 bytes
 
-_UnnamedText_6e0c: ; 0xa2608
+_PokemartBuyingGreetingText: ; 0xa2608
 	db $0, "Take your time.", $57
 ; 0xa2608 + 17 bytes
 
-_UnnamedText_6e11: ; 0xa2619
+_PokemartTellBuyPrice: ; 0xa2619
 	TX_RAM $cf4b
 	db $0, "?", $4f
 	db "That will be", $55
@@ -78857,48 +79096,48 @@ _UnnamedText_6e11: ; 0xa2619
 	db $0, ". OK?", $57
 ; 0xa2639
 
-_UnnamedText_6e16: ; 0xa2639
+_PokemartBoughtItemText: ; 0xa2639
 	db $0, "Here you are!", $4f
 	db "Thank you!", $58
 ; 0xa2639 + 26 bytes
 
-_UnnamedText_6e1b: ; 0xa2653
+_PokemartNotEnoughMoneyText: ; 0xa2653
 	db $0, "You don't have", $4f
 	db "enough money.", $58
 ; 0xa2653 + 29 bytes
 
-_UnnamedText_6e20: ; 0xa2670
+_PokemartItemBagFullText: ; 0xa2670
 	db $0, "You can't carry", $4f
 	db "any more items.", $58
 ; 0xa2670 + 32 bytes
 
-_UnnamedText_6e25: ; 0xa2690
+_PokemonSellingGreetingText: ; 0xa2690
 	db $0, "What would you", $4f
 	db "like to sell?", $57
 ; 0xa2690 + 30 bytes
 
-_UnnamedText_6e2a: ; 0xa26ae
+_PokemartTellSellPrice: ; 0xa26ae
 	db $0, "I can pay you", $4f
 	db $f0, "@"
 	db $2, $9f, $ff, $c3 ; XXX
 	db $0, " for that.", $57
 ; 0xa26cf
 
-_UnnamedText_6e2f: ; 0xa26cf
+_PokemartItemBagEmptyText: ; 0xa26cf
 	db $0, "You don't have", $4f
 	db "anything to sell.", $58
 ; 0xa26cf + 33 bytes
 
-_UnnamedText_6e34: ; 0xa26f0
+_PokemartUnsellableItemText: ; 0xa26f0
 	db $0, "I can't put a", $4f
 	db "price on that.", $58
 ; 0xa26f0 + 29 bytes
 
-_UnnamedText_6e39: ; 0xa270d
+_PokemartThankYouText: ; 0xa270d
 	db $0, "Thank you!", $57
 ; 0xa270d + 12 bytes
 
-_UnnamedText_6e3e: ; 0xa2719
+_PokemartAnythingElseText: ; 0xa2719
 	db $0, "Is there anything", $4f
 	db "else I can do?", $57
 ; 0xa2719 + 34 bytes
