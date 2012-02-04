@@ -1307,7 +1307,7 @@ LoadTilesetTilePatternData: ; 9E8
 	ld de,$9000
 	ld bc,$0600
 	ld a,[$d52b]
-	jp $17f7
+	jp FarCopyData2
 
 ; this loads the current maps complete tile map (which references blocks, not individual tiles) to C6E8
 ; it can also load partial tile maps of connected maps into a border of length 3 around the current map
@@ -2454,7 +2454,7 @@ LoadPlayerSpriteGraphicsCommon: ; 0x1063
 	push de
 	push hl
 	ld bc,$050c
-	call $1848
+	call CopyVideoData
 	pop hl
 	pop de
 	ld a,$c0
@@ -2465,7 +2465,7 @@ LoadPlayerSpriteGraphicsCommon: ; 0x1063
 .noCarry\@
 	set 3,h
 	ld bc,$050c
-	jp $1848
+	jp CopyVideoData
 
 ; function to load data from the map header
 LoadMapHeader: ; 107C
@@ -2938,7 +2938,177 @@ Tset17_Coll: ; 0x17f0
 	INCBIN "gfx/tilesets/17.tilecoll"
 ;Tile Collision ends 0x17f7
 
-INCBIN "baserom.gbc",$17F7,$190F-$17F7
+; does the same thing as FarCopyData at 009D
+; only difference is that it uses [$ff8b] instead of [$cee9] for a temp value
+; copy bc bytes of data from a:hl to de
+FarCopyData2: ; 17F7
+	ld [$ff8b],a
+	ld a,[$ffb8]
+	push af
+	ld a,[$ff8b]
+	ld [$ffb8],a
+	ld [$2000],a
+	call CopyData
+	pop af
+	ld [$ffb8],a
+	ld [$2000],a
+	ret
+
+; does a far copy but the source is de and the destination is hl
+; copy bc bytes of data from a:de to hl
+FarCopyData3: ; 180D
+	ld [$ff8b],a
+	ld a,[$ffb8]
+	push af
+	ld a,[$ff8b]
+	ld [$ffb8],a
+	ld [$2000],a
+	push hl
+	push de
+	push de
+	ld d,h
+	ld e,l
+	pop hl
+	call CopyData
+	pop de
+	pop hl
+	pop af
+	ld [$ffb8],a
+	ld [$2000],a
+	ret
+
+; copies each source byte to the destination twice (next to each other)
+; copy bc source bytes from a:hl to de
+FarCopyDataDouble: ; 182B
+	ld [$ff8b],a
+	ld a,[$ffb8]
+	push af
+	ld a,[$ff8b]
+	ld [$ffb8],a
+	ld [$2000],a
+.loop\@
+	ld a,[hli]
+	ld [de],a
+	inc de
+	ld [de],a
+	inc de
+	dec bc
+	ld a,c
+	or b
+	jr nz,.loop\@
+	pop af
+	ld [$ffb8],a
+	ld [$2000],a
+	ret
+
+; copy (c * 16) bytes from b:de to hl during V-blank
+; transfers up to 128 bytes per V-blank
+CopyVideoData: ; 1848
+	ld a,[H_AUTOBGTRANSFERENABLED] ; save auto-transfer enabled flag
+	push af
+	xor a
+	ld [H_AUTOBGTRANSFERENABLED],a ; disable auto-transfer while copying
+	ld a,[$ffb8]
+	ld [$ff8b],a
+	ld a,b
+	ld [$ffb8],a
+	ld [$2000],a
+	ld a,e
+	ld [H_VBCOPYSRC],a
+	ld a,d
+	ld [H_VBCOPYSRC + 1],a
+	ld a,l
+	ld [H_VBCOPYDEST],a
+	ld a,h
+	ld [H_VBCOPYDEST + 1],a
+.loop\@
+	ld a,c
+	cp a,8 ; are there more than 128 bytes left to copy?
+	jr nc,.copyMaxSize\@ ; only copy up to 128 bytes at a time
+.copyRemainder\@
+	ld [H_VBCOPYSIZE],a
+	call DelayFrame ; wait for V-blank handler to perform the copy
+	ld a,[$ff8b]
+	ld [$ffb8],a
+	ld [$2000],a
+	pop af
+	ld [H_AUTOBGTRANSFERENABLED],a ; restore original auto-transfer enabled flag
+	ret
+.copyMaxSize\@
+	ld a,8 ; 128 bytes
+	ld [H_VBCOPYSIZE],a
+	call DelayFrame ; wait for V-blank handler to perform the copy
+	ld a,c
+	sub a,8
+	ld c,a
+	jr .loop\@
+
+; copy (c * 8) source bytes from b:de to hl during V-blank
+; copies each source byte to the destination twice (next to each other)
+; transfers up to 64 source bytes per V-blank
+CopyVideoDataDouble: ; 1886
+	ld a,[H_AUTOBGTRANSFERENABLED] ; save auto-transfer enabled flag
+	push af
+	xor a
+	ld [H_AUTOBGTRANSFERENABLED],a ; disable auto-transfer while copying
+	ld a,[$ffb8]
+	ld [$ff8b],a
+	ld a,b
+	ld [$ffb8],a
+	ld [$2000],a
+	ld a,e
+	ld [H_VBCOPYDOUBLESRC],a
+	ld a,d
+	ld [H_VBCOPYDOUBLESRC + 1],a
+	ld a,l
+	ld [H_VBCOPYDOUBLEDEST],a
+	ld a,h
+	ld [H_VBCOPYDOUBLEDEST + 1],a
+.loop\@
+	ld a,c
+	cp a,8 ; are there more than 64 source bytes left to copy?
+	jr nc,.copyMaxSize\@ ; only copy up to 64 source bytes at a time
+.copyRemainder\@
+	ld [H_VBCOPYDOUBLESIZE],a
+	call DelayFrame ; wait for V-blank handler to perform the copy
+	ld a,[$ff8b]
+	ld [$ffb8],a
+	ld [$2000],a
+	pop af
+	ld [H_AUTOBGTRANSFERENABLED],a ; restore original auto-transfer enabled flag
+	ret
+.copyMaxSize\@
+	ld a,8 ; 64 source bytes
+	ld [H_VBCOPYDOUBLESIZE],a
+	call DelayFrame ; wait for V-blank handler to perform the copy
+	ld a,c
+	sub a,8
+	ld c,a
+	jr .loop\@
+
+; clears an area of the screen
+; INPUT:
+; hl = address of upper left corner of the area
+; b = height
+; c = width
+ClearScreenArea: ; 18C4
+	ld   a,$7F ; blank tile
+	ld   de,20 ; screen width
+.loop\@
+	push hl
+	push bc
+.innerLoop\@
+	ld [hli],a
+	dec c
+	jr nz,.innerLoop\@
+	pop bc
+	pop hl
+	add hl,de
+	dec b
+	jr nz,.loop\@
+	ret
+
+INCBIN "baserom.gbc",$18D6,$190F - $18D6
 
 ClearScreen: ; 190F
 ; clears all tiles in the tilemap,
@@ -3251,7 +3421,7 @@ Char51: ; 0x1ab4
 	call $3898
 	ld hl,$C4A5
 	ld bc,$0412
-	call $18C4
+	call ClearScreenArea
 	ld c,$14
 	call DelayFrames
 	pop de
@@ -3266,7 +3436,7 @@ Char49: ; 0x1ad5
 	call $3898
 	ld hl,$C469
 	ld bc,$0712
-	call $18C4
+	call ClearScreenArea
 	ld c,$14
 	call DelayFrames
 	pop de
@@ -3934,7 +4104,7 @@ VBlankCopyBgMap: ; 1DE1
 	ld [H_VBCOPYBGSRC],a ; disable transfer so it doesn't continue next V-blank
 	jr TransferBgRows
 
-; This function copies ([H_VBCOPYDOUBLESIZE] * 4) source bytes
+; This function copies ([H_VBCOPYDOUBLESIZE] * 8) source bytes
 ; from H_VBCOPYDOUBLESRC to H_VBCOPYDOUBLEDEST.
 ; It copies each source byte to the destination twice (next to each other).
 ; The function updates the source and destination addresses, so the transfer
@@ -4016,7 +4186,7 @@ VBlankCopyDouble: ; 1E02
 	ld sp,hl ; restore stack pointer
 	ret
 
-; Copies ([H_VBCOPYSIZE] * 8) bytes from H_VBCOPYSRC to H_VBCOPYDEST.
+; Copies ([H_VBCOPYSIZE] * 16) bytes from H_VBCOPYSRC to H_VBCOPYDEST.
 ; The function updates the source and destination addresses, so the transfer
 ; can be continued easily by repeatingly calling this function.
 VBlankCopy: ; 1E5E
@@ -5271,7 +5441,25 @@ GetMoveName: ; 3058
 	pop hl
 	ret
 
-INCBIN "baserom.gbc",$3071,$31cc - $3071
+INCBIN "baserom.gbc",$3071,$30E8 - $3071
+
+; function to draw various text boxes
+; INPUT:
+; [$D125] = text box ID
+DisplayTextBoxID: ; 30E8
+	ld a,[$ffb8]
+	push af
+	ld a,BANK(DisplayTextBoxID_)
+	ld [$ffb8],a
+	ld [$2000],a
+	call DisplayTextBoxID_
+	pop bc
+	ld a,b
+	ld [$ffb8],a
+	ld [$2000],a
+	ret
+
+INCBIN "baserom.gbc",$30FD,$31cc - $30FD
 
 LoadTrainerHeader: ; 0x31cc
 	call $3157
@@ -5464,7 +5652,60 @@ MoveSprite: ; 363A
 	ld [$CD3A],a
 	ret
 
-INCBIN "baserom.gbc",$366B,$3739 - $366B
+INCBIN "baserom.gbc",$366B,$3680 - $366B
+
+; copies the tile patterns for letters and numbers into VRAM
+LoadFontTilePatterns: ; 3680
+	ld a,[rLCDC]
+	bit 7,a ; is the LCD enabled?
+	jr nz,.lcdEnabled\@
+.lcdDisabled\@
+	ld hl,$5a80
+	ld de,$8800
+	ld bc,$0400
+	ld a,$04
+	jp FarCopyDataDouble ; if LCD is off, transfer all at once
+.lcdEnabled\@
+	ld de,$5a80
+	ld hl,$8800
+	ld bc,$0480
+	jp CopyVideoDataDouble ; if LCD is on, transfer during V-blank
+
+; copies the text box tile patterns into VRAM
+LoadTextBoxTilePatterns: ; 36A0
+	ld a,[rLCDC]
+	bit 7,a ; is the LCD enabled?
+	jr nz,.lcdEnabled\@
+.lcdDisabled\@
+	ld hl,$6288
+	ld de,$9600
+	ld bc,$0200
+	ld a,$04
+	jp FarCopyData2 ; if LCD is off, transfer all at once
+.lcdEnabled\@
+	ld de,$6288
+	ld hl,$9600
+	ld bc,$0420
+	jp CopyVideoData ; if LCD is on, transfer during V-blank
+
+; copies HP bar and status display tile patterns into VRAM
+LoadHpBarAndStatusTilePatterns: ; 36C0
+	ld a,[rLCDC]
+	bit 7,a ; is the LCD enabled?
+	jr nz,.lcdEnabled\@
+.lcdDisabled\@
+	ld hl,$5ea0
+	ld de,$9620
+	ld bc,$01e0
+	ld a,$04
+	jp FarCopyData2 ; if LCD is off, transfer all at once
+.lcdEnabled\@
+	ld de,$5ea0
+	ld hl,$9620
+	ld bc,$041e
+	jp CopyVideoData ; if LCD is on, transfer during V-blank
+
+INCBIN "baserom.gbc",$36E0,$3739 - $36E0
 
 DelayFrames: ; 3739
 ; wait n frames, where n is the value in c
@@ -6101,7 +6342,7 @@ PrintText: ; 3C49
 	push hl
 	ld a,1
 	ld [$D125],a
-	call $30E8
+	call DisplayTextBoxID
 	call $2429
 	call Delay3
 	pop hl
@@ -6666,8 +6907,8 @@ MainMenu: ; 0x5af2
 	res 6,[hl]
 	call ClearScreen
 	call $3DED
-	call $36A0 ; load some graphics in VRAM
-	call $3680 ; load fonts in VRAM
+	call LoadTextBoxTilePatterns
+	call LoadFontTilePatterns
 	ld hl,$D730
 	set 6,[hl]
 	ld a,[$D088]
@@ -6800,7 +7041,7 @@ OakSpeech: ; 6115
 	ld a,$EF    ; song #
 	call $23A1  ; plays music
 	call ClearScreen
-	call $36A0
+	call LoadTextBoxTilePatterns
 	call $60CA
 	ld a,$18
 	call Predef
@@ -6877,7 +7118,7 @@ Function61BC: ; 0x61bc
 	ld de,$4180
 	ld hl,$8000
 	ld bc,$050C
-	call $1848
+	call CopyVideoData
 	ld de,$6FE8
 	ld bc,$0400
 	call IntroPredef3B
@@ -6905,8 +7146,8 @@ Function61BC: ; 0x61bc
 	ld hl,$C40A
 	ld b,7
 	ld c,7
-	call $18C4
-	call $36A0
+	call ClearScreenArea
+	call LoadTextBoxTilePatterns
 	ld a,1
 	ld [$CFCB],a
 	ld c,$32
@@ -7425,7 +7666,7 @@ DisplayTextIDInit: ; 7096
 	call $18d6 ; transfer background in WRAM to VRAM
 	xor a
 	ld [$ffb0],a ; put the window on the screen
-	call $3680 ; transfer tile pattern data for text into VRAM
+	call LoadFontTilePatterns
 	ld a,$01
 	ld [H_AUTOBGTRANSFERENABLED],a ; enable continuous WRAM to VRAM transfer each V-blank
 	ret
@@ -32611,7 +32852,7 @@ EnemySendOut: ; 490E
 	ld bc,$0801
 	ld a,$14
 	ld [$D125],a
-	call $30E8
+	call DisplayTextBoxID
 	ld a,[$CC26]
 	and a
 	jr nz,.next4\@
@@ -32644,7 +32885,7 @@ EnemySendOut: ; 490E
 	call $0082
 	ld hl,$C3A0
 	ld bc,$040B
-	call $18C4
+	call ClearScreenArea
 	ld b,1
 	call $3DEF
 	call $3DDC
@@ -64638,7 +64879,7 @@ LoadAnimationTileset: ; 41D2
 	ld b,$1E ; ROM bank
 	ld a,[$D07D]
 	ld c,a ; number of tiles
-	jp $1848 ; load tileset
+	jp CopyVideoData ; load tileset
 
 AnimationTilesetPointers: ; 41F2
 db 79 ; number of tiles

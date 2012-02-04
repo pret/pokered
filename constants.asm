@@ -814,7 +814,7 @@ H_VBCOPYBGDEST EQU $FFC3 ; 2 bytes
 ; number of rows for VBlankCopyBgMap to copy
 H_VBCOPYBGNUMROWS EQU $FFC5
 
-; size of VBlankCopy transfer in 8-byte units
+; size of VBlankCopy transfer in 16-byte units
 H_VBCOPYSIZE EQU $FFC6
 
 ; source address for VBlankCopy function
@@ -823,7 +823,7 @@ H_VBCOPYSRC EQU $FFC7
 ; destination address for VBlankCopy function
 H_VBCOPYDEST EQU $FFC9
 
-; size of source data for VBlankCopyDouble in 4-byte units
+; size of source data for VBlankCopyDouble in 8-byte units
 H_VBCOPYDOUBLESIZE EQU $FFCB
 
 ; source address for VBlankCopyDouble function
