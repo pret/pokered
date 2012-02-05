@@ -780,6 +780,12 @@ H_DIVISOR      EQU $FF99 ; 1 byte
 H_QUOTIENT     EQU $FF95 ; 4 bytes, big endian order
 H_REMAINDER    EQU $FF99 ; 1 byte
 
+; used to convert numbers to decimal
+H_PASTLEADINGZEROES EQU $FF95 ; flag to indicate that a nonzero digit has been printed
+H_NUMTOPRINT        EQU $FF96 ; 3 bytes, big endian order
+H_POWEROFTEN        EQU $FF99 ; 3 bytes, big endian order
+H_SAVEDNUMTOPRINT   EQU $FF9C ; 3 bytes, big endian order (to back out of a subtraction)
+
 ; is automatic background transfer during V-blank enabled?
 ; if nonzero, yes
 ; if zero, no

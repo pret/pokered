@@ -2846,7 +2846,85 @@ SwitchToMapRomBank: ; 12BC
 	pop hl
 	ret
 
-INCBIN "baserom.gbc",$12DA,$1627 - $12DA
+INCBIN "baserom.gbc",$12DA,$15CD - $12DA
+
+; function to print a BCD (Binary-coded decimal) number
+; de = address of BCD number
+; hl = destination address
+; c = flags and length
+; bit 7: if set, do not print leading zeroes
+;        if unset, print leading zeroes
+; bit 6: if set, left-align the string (do not pad empty digits with spaces)
+;        if unset, right-align the string
+; bit 5: if set, print currency symbol at the beginning of the string
+;        if unset, do not print the currency symbol
+; bits 0-4: length of BCD number in bytes
+; Note that bits 5 and 7 are modified during execution. The above reflects
+; their meaning at the beginning of the functions's execution.
+PrintBCDNumber: ; 15CD
+	ld b,c ; save flags in b
+	res 7,c
+	res 6,c
+	res 5,c ; c now holds the length
+	bit 5,b
+	jr z,.loop\@
+	bit 7,b
+	jr nz,.loop\@
+	ld [hl],$f0 ; currency symbol
+	inc hl
+.loop\@
+	ld a,[de]
+	swap a
+	call PrintBCDDigit ; print upper digit
+	ld a,[de]
+	call PrintBCDDigit ; print lower digit
+	inc de
+	dec c
+	jr nz,.loop\@
+	bit 7,b ; were any non-zero digits printed?
+	jr z,.done\@ ; if so, we are done
+.numberEqualsZero\@ ; if every digit of the BCD number is zero
+	bit 6,b ; left or right alignment?
+	jr nz,.skipRightAlignmentAdjustment\@
+	dec hl ; if the string is right-aligned, it needs to be moved back one space
+.skipRightAlignmentAdjustment\@
+	bit 5,b
+	jr z,.skipCurrencySymbol\@
+	ld [hl],$f0 ; currency symbol
+	inc hl
+.skipCurrencySymbol\@
+	ld [hl],"0"
+	call PrintLetterDelay
+	inc hl
+.done\@
+	ret
+
+PrintBCDDigit: ; 1604
+	and a,%00001111
+	and a
+	jr z,.zeroDigit\@
+.nonzeroDigit\@
+	bit 7,b ; have any non-space characters been printed?
+	jr z,.outputDigit\@
+; if bit 7 is set, then no numbers have been printed yet
+	bit 5,b ; print the currency symbol?
+	jr z,.skipCurrencySymbol\@
+	ld [hl],$f0 ; currency symbol
+	inc hl
+	res 5,b
+.skipCurrencySymbol\@
+	res 7,b ; unset 7 to indicate that a nonzero digit has been reached
+.outputDigit\@
+	add a,"0"
+	ld [hli],a
+	jp PrintLetterDelay
+.zeroDigit\@
+	bit 7,b ; either printing leading zeroes or already reached a nonzero digit?
+	jr z,.outputDigit\@ ; if so, print a zero digit
+	bit 6,b ; left or right alignment?
+	ret nz
+	inc hl ; if right-aligned, "print" a space by advancing the pointer
+	ret
 
 ;XXX what does this do
 ;XXX what points to this
@@ -3376,7 +3454,7 @@ Char55: ; 0x1a7c
 	ld b,h
 	ld c,l
 	ld hl,Char55Text
-	call $1B40
+	call TextCommandProcessor
 	ld h,b
 	ld l,c
 	pop de
@@ -3602,7 +3680,7 @@ TextCommand02: ; 1BA5
 	ld h,b
 	ld l,c
 	ld c,a
-	call $15cd
+	call PrintBCDNumber
 	ld b,h
 	ld c,l
 	pop hl
@@ -3690,7 +3768,7 @@ TextCommand09: ; 1BFF
 	swap a
 	set 6,a
 	ld b,a
-	call $3c5f
+	call PrintNumber
 	ld b,h
 	ld c,l
 	pop hl
@@ -6348,136 +6426,265 @@ PrintText: ; 3C49
 	pop hl
 	FuncCoord 1,14
 	ld bc,Coord ;$C4B9
-	jp $1B40
+	jp TextCommandProcessor
 
-Func3C5F: ; 3C5F
+; converts a big-endian binary number into decimal and prints it
+; INPUT:
+; b = flags and number of bytes
+; bit 7: if set, do not print leading zeroes
+;        if unset, print leading zeroes
+; bit 6: if set, left-align the string (do not pad empty digits with spaces)
+;        if unset, right-align the string
+; bits 4-5: unused
+; bits 0-3: number of bytes (only 1 - 3 bytes supported)
+; c = number of decimal digits
+; de = address of the number (big-endian)
+PrintNumber: ; 3C5F
 	push bc
 	xor a
-	ld [$FF95],a
-	ld [$FF96],a
-	ld [$FF97],a
+	ld [H_PASTLEADINGZEROES],a
+	ld [H_NUMTOPRINT],a
+	ld [H_NUMTOPRINT + 1],a
 	ld a,b
-	and $F
-	cp 1
-	jr z,.next\@
-	cp 2
-	jr z,.next2\@
+	and a,%00001111
+	cp a,1
+	jr z,.oneByte\@
+	cp a,2
+	jr z,.twoBytes\@
+.threeBytes\@
 	ld a,[de]
-	ld [$FF96],a
+	ld [H_NUMTOPRINT],a
 	inc de
 	ld a,[de]
-	ld [$FF97],a
+	ld [H_NUMTOPRINT + 1],a
 	inc de
 	ld a,[de]
-	ld [$FF98],a
-	jr .next3\@
-
-.next2\@
+	ld [H_NUMTOPRINT + 2],a
+	jr .checkNumDigits\@
+.twoBytes\@
 	ld a,[de]
-	ld [$FF97],a
+	ld [H_NUMTOPRINT + 1],a
 	inc de
 	ld a,[de]
-	ld [$FF98],a
-	jr .next3\@
-
-.next\@
+	ld [H_NUMTOPRINT + 2],a
+	jr .checkNumDigits\@
+.oneByte\@
 	ld a,[de]
-	ld [$FF98],a
-
-.next3\@
+	ld [H_NUMTOPRINT + 2],a
+.checkNumDigits\@
 	push de
 	ld d,b
 	ld a,c
 	ld b,a
 	xor a
 	ld c,a
-	ld a,b
-	cp 2
-	jr z,.next4\@
-	cp 3
-	jr z,.next5\@
-	cp 4
-	jr z,.next6\@
-	cp 5
-	jr z,.next7\@
-	cp 6
-	jr z,.next8\@
-	ld a,$F
-	ld [$FF99],a
-	ld a,$42
-	ld [$FF9A],a
-	ld a,$40
-	ld [$FF9B],a
-	call $3D25
-	call $3D89
-.next8\@
-	ld a,1
-	ld [$FF99],a
-	ld a,$86
-	ld [$FF9A],a
-	ld a,$A0
-	ld [$FF9B],a
-	call $3D25
-	call $3D89
-.next7\@
+	ld a,b ; a = number of decimal digits
+	cp a,2
+	jr z,.tensPlace\@
+	cp a,3
+	jr z,.hundredsPlace\@
+	cp a,4
+	jr z,.thousandsPlace\@
+	cp a,5
+	jr z,.tenThousandsPlace\@
+	cp a,6
+	jr z,.hundredThousandsPlace\@
+.millionsPlace\@
+	ld a,1000000 >> 16
+	ld [H_POWEROFTEN],a
+	ld a,(1000000 >> 8) & $FF
+	ld [H_POWEROFTEN + 1],a
+	ld a,1000000 & $FF
+	ld [H_POWEROFTEN + 2],a
+	call PrintNumber_PrintDigit
+	call PrintNumber_AdvancePointer
+.hundredThousandsPlace\@
+	ld a,100000 >> 16
+	ld [H_POWEROFTEN],a
+	ld a,(100000 >> 8) & $FF
+	ld [H_POWEROFTEN + 1],a
+	ld a,100000 & $FF
+	ld [H_POWEROFTEN + 2],a
+	call PrintNumber_PrintDigit
+	call PrintNumber_AdvancePointer
+.tenThousandsPlace\@
 	xor a
-	ld [$FF99],a
-	ld a,$27
-	ld [$FF9A],a
-	ld a,$10
-	ld [$FF9B],a
-	call $3D25
-	call $3D89
-.next6\@
+	ld [H_POWEROFTEN],a
+	ld a,10000 >> 8
+	ld [H_POWEROFTEN + 1],a
+	ld a,10000 & $FF
+	ld [H_POWEROFTEN + 2],a
+	call PrintNumber_PrintDigit
+	call PrintNumber_AdvancePointer
+.thousandsPlace\@
 	xor a
-	ld [$FF99],a
-	ld a,3
-	ld [$FF9A],a
-	ld a,$E8
-	ld [$FF9B],a
-	call $3D25
-	call $3D89
-.next5\@
+	ld [H_POWEROFTEN],a
+	ld a,1000 >> 8
+	ld [H_POWEROFTEN + 1],a
+	ld a,1000 & $FF
+	ld [H_POWEROFTEN + 2],a
+	call PrintNumber_PrintDigit
+	call PrintNumber_AdvancePointer
+.hundredsPlace\@
 	xor a
-	ld [$FF99],a
+	ld [H_POWEROFTEN],a
 	xor a
-	ld [$FF9A],a
-	ld a,$64
-	ld [$FF9B],a
-	call $3D25
-	call $3D89
-.next4\@
-	ld c,0
-	ld a,[$FF98]
-.next10\@
-	cp $A
-	jr c,.next9\@
-	sub $A
+	ld [H_POWEROFTEN + 1],a
+	ld a,100
+	ld [H_POWEROFTEN + 2],a
+	call PrintNumber_PrintDigit
+	call PrintNumber_AdvancePointer
+.tensPlace\@
+	ld c,00
+	ld a,[H_NUMTOPRINT + 2]
+.loop\@
+	cp a,10
+	jr c,.underflow\@
+	sub a,10
 	inc c
-	jr .next10\@
-.next9\@
+	jr .loop\@
+.underflow\@
 	ld b,a
-	ld a,[$FF95]
+	ld a,[H_PASTLEADINGZEROES]
 	or c
-	ld [$FF95],a
-	jr nz,.next11\@
-	call $3D83
-	jr .next12\@
-.next11\@
-	ld a,$F6
-	add a,c
+	ld [H_PASTLEADINGZEROES],a
+	jr nz,.pastLeadingZeroes\@
+	call PrintNumber_PrintLeadingZero
+	jr .advancePointer\@
+.pastLeadingZeroes\@
+	ld a,"0"
+	add c
 	ld [hl],a
-.next12\@
-	call $3D89
-	ld a,$F6
-	add a,b
+.advancePointer\@
+	call PrintNumber_AdvancePointer
+.onesPlace\@
+	ld a,"0"
+	add b
 	ld [hli],a
 	pop de
 	dec de
 	pop bc
 	ret
 
-INCBIN "baserom.gbc",$3D25,$3DAB - $3D25
+; prints a decimal digit
+; This works by repeatedely subtracting a power of ten until the number becomes negative.
+; The number of subtractions it took in order to make the number negative is the digit for the current number place.
+; The last value that the number had before becoming negative is kept as the new value of the number.
+; A more succinct description is that the number is divided by a power of ten
+; and the quotient becomes the digit while the remainder is stored as the new value of the number.
+PrintNumber_PrintDigit: ; 3D25
+	ld c,0 ; counts number of loop iterations to determine the decimal digit
+.loop\@
+	ld a,[H_POWEROFTEN]
+	ld b,a
+	ld a,[H_NUMTOPRINT]
+	ld [H_SAVEDNUMTOPRINT],a
+	cp b
+	jr c,.underflow0\@
+	sub b
+	ld [H_NUMTOPRINT],a
+	ld a,[H_POWEROFTEN + 1]
+	ld b,a
+	ld a,[H_NUMTOPRINT + 1]
+	ld [H_SAVEDNUMTOPRINT + 1],a
+	cp b
+	jr nc,.noBorrowForByte1\@
+.byte1BorrowFromByte0\@
+	ld a,[H_NUMTOPRINT]
+	or a,0
+	jr z,.underflow1\@
+	dec a
+	ld [H_NUMTOPRINT],a
+	ld a,[H_NUMTOPRINT + 1]
+.noBorrowForByte1\@
+	sub b
+	ld [H_NUMTOPRINT + 1],a
+	ld a,[H_POWEROFTEN + 2]
+	ld b,a
+	ld a,[H_NUMTOPRINT + 2]
+	ld [H_SAVEDNUMTOPRINT + 2],a
+	cp b
+	jr nc,.noBorrowForByte2\@
+.byte2BorrowFromByte1\@
+	ld a,[H_NUMTOPRINT + 1]
+	and a
+	jr nz,.finishByte2BorrowFromByte1\@
+.byte2BorrowFromByte0\@
+	ld a,[H_NUMTOPRINT]
+	and a
+	jr z,.underflow2\@
+	dec a
+	ld [H_NUMTOPRINT],a
+	xor a
+.finishByte2BorrowFromByte1\@
+	dec a
+	ld [H_NUMTOPRINT + 1],a
+	ld a,[H_NUMTOPRINT + 2]
+.noBorrowForByte2\@
+	sub b
+	ld [H_NUMTOPRINT + 2],a
+	inc c
+	jr .loop\@
+.underflow2\@
+	ld a,[H_SAVEDNUMTOPRINT + 1]
+	ld [H_NUMTOPRINT + 1],a
+.underflow1\@
+	ld a,[H_SAVEDNUMTOPRINT]
+	ld [H_NUMTOPRINT],a
+.underflow0\@
+	ld a,[H_PASTLEADINGZEROES]
+	or c
+	jr z,PrintNumber_PrintLeadingZero
+	ld a,"0"
+	add c
+	ld [hl],a
+	ld [H_PASTLEADINGZEROES],a
+	ret
+
+; prints a leading zero unless they are turned off in the flags
+PrintNumber_PrintLeadingZero: ; 3D83
+	bit 7,d ; print leading zeroes?
+	ret z
+	ld [hl],"0"
+	ret
+
+; increments the pointer unless leading zeroes are not being printed,
+; the number is left-aligned, and no nonzero digits have been printed yet
+PrintNumber_AdvancePointer: ; 3D89
+	bit 7,d ; print leading zeroes?
+	jr nz,.incrementPointer\@
+	bit 6,d ; left alignment or right alignment?
+	jr z,.incrementPointer\@
+	ld a,[H_PASTLEADINGZEROES]
+	and a
+	ret z
+.incrementPointer\@
+	inc hl
+	ret
+
+; calls a function from a table of function pointers
+; INPUT:
+; a = index within table
+; hl = address of function pointer table
+CallFunctionInTable: ; 3D97
+	push hl
+	push de
+	push bc
+	add a
+	ld d,0
+	ld e,a
+	add hl,de
+	ld a,[hli]
+	ld h,[hl]
+	ld l,a
+	ld de,.returnAddress\@
+	push de
+	jp [hl]
+.returnAddress\@
+	pop bc
+	pop de
+	pop hl
+	ret
 
 IsInArray: ; 3DAB
 ; searches an array at hl for the value in a.
@@ -36322,7 +36529,7 @@ ENDC
 	ld hl,$C3A9
 	ld de,$D11E
 	ld bc,$8103
-	call $3C5F
+	call PrintNumber
 	FuncCoord 5,2
 	ld hl,Coord
 	ld de,$CF4B
@@ -36334,7 +36541,7 @@ ENDC
 	ld hl,$C420
 	ld de,$CD4C
 	ld bc,$8205
-	jp $3C5F
+	jp PrintNumber
 
 	FuncCoord 5,10
 	ld hl,Coord
@@ -36347,7 +36554,7 @@ ENDC
 	ld hl,$C471
 	ld de,$D11E
 	ld bc,$8103
-	call $3C5F
+	call PrintNumber
 	FuncCoord 5,12
 	ld hl,Coord
 	ld de,$CD6D
@@ -36359,7 +36566,7 @@ ENDC
 	ld hl,$C4E8
 	ld de,$CD59
 	ld bc,$8205
-	jp $3C5F
+	jp PrintNumber
 
 OTString67E5: ; 67E5
 	db "──",$74,$F2,$4E
@@ -46263,17 +46470,17 @@ GetPrizeMenuId: ; 14:678E
 	ld c,(1 << 7 | 2)
 ; Function $15CD displays BCD value (same routine
 ; used by text-command $02)
-	call $15CD ; Print_BCD
+	call PrintBCDNumber ; Print_BCD
 	ld de,$D143
 	FuncCoord 13,7
 	ld hl,Coord
 	ld c,(%1 << 7 | 2)
-	call $15CD
+	call PrintBCDNumber
 	ld de,$D145
 	FuncCoord 13,9
 	ld hl,Coord
 	ld c,(1 << 7 | 2)
-	jp $15CD
+	jp PrintBCDNumber
 
 PrizeDifferentMenuPtrs: ; 14:6843
 	dw PrizeMenuMon1Entries
@@ -46364,7 +46571,7 @@ PrintPrizePrice: ; 14:687A
 	ld hl,Coord
 	ld de,W_PLAYERCOINS1
 	ld c,%10000010
-	call $15CD
+	call PrintBCDNumber
 	ret
 
 .CoinText\@ ; 14:68A5
