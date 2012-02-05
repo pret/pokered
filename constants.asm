@@ -160,6 +160,8 @@ W_ANIMSOUNDID EQU $CF07 ; sound ID during battle animations
 
 W_WHICHPOKEMON EQU $CF92 ; which pokemon you selected
 
+W_LISTMENUID EQU $CF94 ; ID used by DisplayListMenuID
+
 W_WALKCOUNTER EQU $CFC5 ; walk animation counter
 
 W_ENEMYMOVENUM      EQU $CFCC
@@ -877,6 +879,13 @@ rIE EQU $FFFF
 ; OAM attribute flags
 OAM_HFLIP EQU %00100000 ; horizontal flip
 OAM_VFLIP EQU %01000000 ; vertical flip
+
+; list menu ID's
+PCPOKEMONLISTMENU  EQU $00 ; PC pokemon withdraw/deposit lists
+MOVESLISTMENU      EQU $01 ; XXX where is this used?
+PRICEDITEMLISTMENU EQU $02 ; Pokemart buy menu / Pokemart buy/sell choose quantity menu
+ITEMLISTMENU       EQU $03 ; Start menu Item menu / Pokemart sell menu
+FLOORLISTMENU      EQU $04 ; floor list in elevators
 
 ; pokemon name constants
 RHYDON     EQU $01

@@ -2846,7 +2846,26 @@ SwitchToMapRomBank: ; 12BC
 	pop hl
 	ret
 
-INCBIN "baserom.gbc",$12DA,$15CD - $12DA
+INCBIN "baserom.gbc",$12DA,$15B4 - $12DA
+
+; copy party pokemon's name to $CD6D
+GetPartyMonName2: ; 15B4
+	ld a,[$cf92] ; index within party
+	ld hl,W_PARTYMON1NAME
+
+; this is called more often
+GetPartyMonName: ; 15BA
+	push hl
+	push bc
+	call $3a7d ; add 11 to hl, a times
+	ld de,$cd6d
+	push de
+	ld bc,11
+	call CopyData
+	pop de
+	pop bc
+	pop hl
+	ret
 
 ; function to print a BCD (Binary-coded decimal) number
 ; de = address of BCD number
@@ -5373,7 +5392,540 @@ AddItemToInventory: ; 2BCF
 	pop bc
 	ret
 
-INCBIN "baserom.gbc",$2be6,$2f9e - $2be6
+; INPUT:
+; [W_LISTMENUID] = list menu ID
+; [$cf8b] = address of the list (2 bytes)
+DisplayListMenuID: ; 2BE6
+	xor a
+	ld [H_AUTOBGTRANSFERENABLED],a ; disable auto-transfer
+	ld a,1
+	ld [$ffb7],a ; joypad state update flag
+	ld a,[W_BATTLETYPE]
+	and a ; is it the Old Man battle?
+	jr nz,.specialBattleType\@
+	ld a,$01
+	jr .bankswitch\@
+.specialBattleType\@ ; Old Man battle
+	ld a,$0f
+.bankswitch\@
+	call BankswitchHome
+	ld hl,$d730
+	set 6,[hl] ; turn off letter printing delay
+	xor a
+	ld [$cc35],a
+	ld [$d12a],a
+	ld a,[$cf8b]
+	ld l,a
+	ld a,[$cf8c]
+	ld h,a ; hl = address of the list
+	ld a,[hl]
+	ld [$d12a],a ; [$d12a] = number of list entries
+	ld a,$0d ; list menu text box ID
+	ld [$d125],a
+	call DisplayTextBoxID ; draw the menu text box
+	call $2429 ; move sprites
+	FuncCoord 4,2 ; coordinates of upper left corner of menu text box
+	ld hl,Coord
+	ld de,$090e ; height and width of menu text box
+	ld a,[W_LISTMENUID]
+	and a ; is it a PC pokemon list?
+	jr nz,.skipMovingSprites\@
+	call $2429 ; move sprites
+.skipMovingSprites\@
+	ld a,1 ; max menu item ID is 1 if the list has less than 2 entries
+	ld [$cc37],a
+	ld a,[$d12a]
+	cp a,2 ; does the list have less than 2 entries?
+	jr c,.setMenuVariables\@
+	ld a,2 ; max menu item ID is 2 if the list has at least 2 entries
+.setMenuVariables\@
+	ld [W_MAXMENUITEMID],a
+	ld a,4
+	ld [W_TOPMENUITEMY],a
+	ld a,5
+	ld [W_TOPMENUITEMX],a
+	ld a,%00000111 ; A button, B button, Select button
+	ld [W_MENUWATCHEDKEYS],a
+	ld c,10
+	call DelayFrames
+
+DisplayListMenuIDLoop: ; 2C53
+	xor a
+	ld [H_AUTOBGTRANSFERENABLED],a ; disable transfer
+	call PrintListMenuEntries
+	ld a,1
+	ld [H_AUTOBGTRANSFERENABLED],a ; enable transfer
+	call Delay3
+	ld a,[W_BATTLETYPE]
+	and a ; is it the Old Man battle?
+	jr z,.notOldManBattle\@
+.oldManBattle\@
+	ld a,$ed ; right arrow menu cursor
+	FuncCoord 5,4
+	ld [Coord],a ; place menu cursor in front of first menu entry
+	ld c,80
+	call DelayFrames
+	xor a
+	ld [W_CURMENUITEMID],a
+	ld hl,Coord
+	ld a,l
+	ld [W_MENUCURSORLOCATION],a
+	ld a,h
+	ld [W_MENUCURSORLOCATION + 1],a
+	jr .buttonAPressed\@
+.notOldManBattle\@
+	call LoadGBPal
+	call HandleMenuInput
+	push af
+	call PlaceMenuCursor
+	pop af
+	bit 0,a ; was the A button pressed?
+	jp z,.checkOtherKeys\@
+.buttonAPressed\@
+	ld a,[W_CURMENUITEMID]
+	call PlaceUnfilledArrowMenuCursor
+	ld a,$01
+	ld [$d12e],a
+	ld [$d12d],a
+	xor a
+	ld [$cc37],a
+	ld a,[W_CURMENUITEMID]
+	ld c,a
+	ld a,[$cc36] ; index of top (visible) menu item within the list
+	add c
+	ld c,a
+	ld a,[$d12a] ; number of list entries
+	and a ; is the list empty?
+	jp z,ExitListMenu ; if so, exit the menu
+	dec a
+	cp c ; did the player select Cancel?
+	jp c,ExitListMenu ; if so, exit the menu
+	ld a,c
+	ld [$cf92],a
+	ld a,[W_LISTMENUID]
+	cp a,ITEMLISTMENU
+	jr nz,.skipMultiplying\@
+; if it's an item menu
+	sla c ; item entries are 2 bytes long, so multiply by 2
+.skipMultiplying\@
+	ld a,[$cf8b]
+	ld l,a
+	ld a,[$cf8c]
+	ld h,a
+	inc hl ; hl = beginning of list entries
+	ld b,0
+	add hl,bc
+	ld a,[hl]
+	ld [$cf91],a
+	ld a,[W_LISTMENUID]
+	and a ; is it a PC pokemon list?
+	jr z,.pokemonList\@
+	push hl
+	call $37df
+	pop hl
+	ld a,[W_LISTMENUID]
+	cp a,ITEMLISTMENU
+	jr nz,.skipGettingQuantity\@
+; if it's an item menu
+	inc hl
+	ld a,[hl] ; a = item quantity
+	ld [$cf97],a
+.skipGettingQuantity\@
+	ld a,[$cf91]
+	ld [$d0b5],a
+	ld a,$01
+	ld [$d0b7],a
+	call GetName
+	jr .storeChosenEntry\@
+.pokemonList\@
+	ld hl,W_NUMINPARTY
+	ld a,[$cf8b]
+	cp l ; is it a list of party pokemon or box pokemon?
+	ld hl,W_PARTYMON1NAME
+	jr z,.getPokemonName\@
+	ld hl,$de06 ; box pokemon names
+.getPokemonName\@
+	ld a,[$cf92]
+	call GetPartyMonName
+.storeChosenEntry\@ ; store the menu entry that the player chose and return
+	ld de,$cd6d
+	call $3826 ; copy name to $cf4b
+	ld a,$01
+	ld [$d12e],a
+	ld a,[W_CURMENUITEMID]
+	ld [$d12d],a
+	xor a
+	ld [$ffb7],a ; joypad state update flag
+	ld hl,$d730
+	res 6,[hl] ; turn on letter printing delay
+	jp BankswitchBack
+.checkOtherKeys\@ ; check B, SELECT, Up, and Down keys
+	bit 1,a ; was the B button pressed?
+	jp nz,ExitListMenu ; if so, exit the menu
+	bit 2,a ; was the select button pressed?
+	jp nz,$6b44 ; if so, allow the player to swap menu entries
+	ld b,a
+	bit 7,b ; was Down pressed?
+	ld hl,$cc36 ; index of top (visible) menu item within the list
+	jr z,.upPressed\@
+.downPressed\@
+	ld a,[hl]
+	add a,3
+	ld b,a
+	ld a,[$d12a] ; number of list entries
+	cp b ; will going down scroll past the Cancel button?
+	jp c,DisplayListMenuIDLoop
+	inc [hl] ; if not, go down
+	jp DisplayListMenuIDLoop
+.upPressed\@
+	ld a,[hl]
+	and a
+	jp z,DisplayListMenuIDLoop
+	dec [hl]
+	jp DisplayListMenuIDLoop
+
+DisplayChooseQuantityMenu: ; 2D57
+; text box dimensions/coordinates for just quantity
+	FuncCoord 15,9
+	ld hl,Coord
+	ld b,1 ; height
+	ld c,3 ; width
+	ld a,[W_LISTMENUID]
+	cp a,PRICEDITEMLISTMENU
+	jr nz,.drawTextBox\@
+; text box dimensions/coordinates for quantity and price
+	FuncCoord 7,9
+	ld hl,Coord
+	ld b,1  ; height
+	ld c,11 ; width
+.drawTextBox\@
+	call TextBoxBorder
+	FuncCoord 16,10
+	ld hl,Coord
+	ld a,[W_LISTMENUID]
+	cp a,PRICEDITEMLISTMENU
+	jr nz,.printInitialQuantity\@
+	FuncCoord 8,10
+	ld hl,Coord
+.printInitialQuantity\@
+	ld de,InitialQuantityText
+	call PlaceString
+	xor a
+	ld [$cf96],a ; initialize current quantity to 0
+	jp .incrementQuantity\@
+.waitForKeyPressLoop\@
+	call GetJoypadStateLowSensitivity
+	ld a,[$ffb3] ; newly pressed buttons
+	bit 0,a ; was the A button pressed?
+	jp nz,.buttonAPressed\@
+	bit 1,a ; was the B button pressed?
+	jp nz,.buttonBPressed\@
+	bit 6,a ; was Up pressed?
+	jr nz,.incrementQuantity\@
+	bit 7,a ; was Down pressed?
+	jr nz,.decrementQuantity\@
+	jr .waitForKeyPressLoop\@
+.incrementQuantity\@
+	ld a,[$cf97] ; max quantity
+	inc a
+	ld b,a
+	ld hl,$cf96 ; current quantity
+	inc [hl]
+	ld a,[hl]
+	cp b
+	jr nz,.handleNewQuantity\@
+; wrap to 1 if the player goes above the max quantity
+	ld a,1
+	ld [hl],a
+	jr .handleNewQuantity\@
+.decrementQuantity\@
+	ld hl,$cf96 ; current quantity
+	dec [hl]
+	jr nz,.handleNewQuantity\@
+; wrap to the max quantity if the player goes below 1
+	ld a,[$cf97] ; max quantity
+	ld [hl],a
+.handleNewQuantity\@
+	FuncCoord 17,10
+	ld hl,Coord
+	ld a,[W_LISTMENUID]
+	cp a,PRICEDITEMLISTMENU
+	jr nz,.printQuantity\@
+.printPrice\@
+	ld c,$03
+	ld a,[$cf96]
+	ld b,a
+	ld hl,$ff9f ; total price
+; initialize total price to 0
+	xor a
+	ld [hli],a
+	ld [hli],a
+	ld [hl],a
+.addLoop\@ ; loop to multiply the individual price by the quantity to get the total price
+	ld de,$ffa1
+	ld hl,$ff8d
+	push bc
+	ld a,$0b
+	call Predef ; add the individual price to the current sum
+	pop bc
+	dec b
+	jr nz,.addLoop\@
+	ld a,[$ff8e]
+	and a ; should the price be halved (for selling items)?
+	jr z,.skipHalvingPrice\@
+	xor a
+	ld [$ffa2],a
+	ld [$ffa3],a
+	ld a,$02
+	ld [$ffa4],a
+	ld a,$0d
+	call Predef ; halves the price
+; store the halved price
+	ld a,[$ffa2]
+	ld [$ff9f],a
+	ld a,[$ffa3]
+	ld [$ffa0],a
+	ld a,[$ffa4]
+	ld [$ffa1],a
+.skipHalvingPrice\@
+	FuncCoord 12,10
+	ld hl,Coord
+	ld de,SpacesBetweenQuantityAndPriceText
+	call PlaceString
+	ld de,$ff9f ; total price
+	ld c,$a3
+	call PrintBCDNumber
+	FuncCoord 9,10
+	ld hl,Coord
+.printQuantity\@
+	ld de,$cf96 ; current quantity
+	ld bc,$8102 ; print leading zeroes, 1 byte, 2 digits
+	call PrintNumber
+	jp .waitForKeyPressLoop\@
+.buttonAPressed\@ ; the player chose to make the transaction
+	xor a
+	ld [$cc35],a
+	ret
+.buttonBPressed\@ ; the player chose to cancel the transaction
+	xor a
+	ld [$cc35],a
+	ld a,$ff
+	ret
+
+InitialQuantityText: ; 2E30
+	db $f1,"01@"
+
+SpacesBetweenQuantityAndPriceText: ; 2E34
+	db "      @"
+
+ExitListMenu: ; 2E3B
+	ld a,[W_CURMENUITEMID]
+	ld [$d12d],a
+	ld a,$02
+	ld [$d12e],a
+	ld [$cc37],a
+	xor a
+	ld [$ffb7],a
+	ld hl,$d730
+	res 6,[hl]
+	call BankswitchBack
+	xor a
+	ld [$cc35],a
+	scf
+	ret
+
+PrintListMenuEntries: ; 2E5A
+	ld hl,$c3e1
+	ld b,$09
+	ld c,$0e
+	call ClearScreenArea
+	ld a,[$cf8b]
+	ld e,a
+	ld a,[$cf8c]
+	ld d,a
+	inc de ; de = beginning of list entries
+	ld a,[$cc36] ; index of top (visible) menu item within the list
+	ld c,a
+	ld a,[W_LISTMENUID]
+	cp a,ITEMLISTMENU
+	ld a,c
+	jr nz,.skipMultiplying\@
+; if it's an item menu
+; item entries are 2 bytes long, so multiply by 2
+	sla a
+	sla c
+.skipMultiplying\@
+	add e
+	ld e,a
+	jr nc,.noCarry\@
+	inc d
+.noCarry\@
+	FuncCoord 6,4 ; coordinates of first list entry name
+	ld hl,Coord
+	ld b,4 ; print 4 names
+.loop\@
+	ld a,b
+	ld [$cf92],a
+	ld a,[de]
+	ld [$d11e],a
+	cp a,$ff
+	jp z,.printCancelMenuItem\@
+	push bc
+	push de
+	push hl
+	push hl
+	push de
+	ld a,[W_LISTMENUID]
+	and a
+	jr z,.pokemonPCMenu\@
+	cp a,$01
+	jr z,.movesMenu\@
+.itemMenu\@
+	call GetItemName
+	jr .placeNameString\@
+.pokemonPCMenu\@
+	push hl
+	ld hl,W_NUMINPARTY
+	ld a,[$cf8b]
+	cp l ; is it a list of party pokemon or box pokemon?
+	ld hl,W_PARTYMON1NAME
+	jr z,.getPokemonName\@
+	ld hl,$de06 ; box pokemon names
+.getPokemonName\@
+	ld a,[$cf92]
+	ld b,a
+	ld a,4
+	sub b
+	ld b,a
+	ld a,[$cc36] ; index of top (visible) menu item within the list
+	add b
+	call GetPartyMonName
+	pop hl
+	jr .placeNameString\@
+.movesMenu\@
+	call GetMoveName
+.placeNameString\@
+	call PlaceString
+	pop de
+	pop hl
+	ld a,[$cf93]
+	and a ; should prices be printed?
+	jr z,.skipPrintingItemPrice\@
+.printItemPrice\@
+	push hl
+	ld a,[de]
+	ld de,$4608
+	ld [$cf91],a
+	call $37df ; get price
+	pop hl
+	ld bc,20 + 5 ; 1 row down and 5 columns right
+	add hl,bc
+	ld c,$a3 ; no leading zeroes, right-aligned, print currency symbol, 3 bytes
+	call PrintBCDNumber
+.skipPrintingItemPrice\@
+	ld a,[W_LISTMENUID]
+	and a
+	jr nz,.skipPrintingPokemonLevel\@
+.printPokemonLevel\@
+	ld a,[$d11e]
+	push af
+	push hl
+	ld hl,W_NUMINPARTY
+	ld a,[$cf8b]
+	cp l ; is it a list of party pokemon or box pokemon?
+	ld a,$00
+	jr z,.next\@
+	ld a,$02
+.next\@
+	ld [$cc49],a
+	ld hl,$cf92
+	ld a,[hl]
+	ld b,a
+	ld a,$04
+	sub b
+	ld b,a
+	ld a,[$cc36]
+	add b
+	ld [hl],a
+	call $1372 ; load pokemon info
+	ld a,[$cc49]
+	and a ; is it a list of party pokemon or box pokemon?
+	jr z,.skipCopyingLevel\@
+.copyLevel\@
+	ld a,[$cf9b]
+	ld [$cfb9],a
+.skipCopyingLevel\@
+	pop hl
+	ld bc,$001c
+	add hl,bc
+	call $150b ; print level
+	pop af
+	ld [$d11e],a
+.skipPrintingPokemonLevel\@
+	pop hl
+	pop de
+	inc de
+	ld a,[W_LISTMENUID]
+	cp a,ITEMLISTMENU
+	jr nz,.nextListEntry\@
+.printItemQuantity\@
+	ld a,[$d11e]
+	ld [$cf91],a
+	call $30d9 ; check if item is unsellable
+	ld a,[$d124]
+	and a ; is the item unsellable?
+	jr nz,.skipPrintingItemQuantity\@ ; if so, don't print the quantity
+	push hl
+	ld bc,20 + 8 ; 1 row down and 8 columns right
+	add hl,bc
+	ld a,$f1
+	ldi [hl],a
+	ld a,[$d11e]
+	push af
+	ld a,[de]
+	ld [$cf97],a
+	push de
+	ld de,$d11e
+	ld [de],a
+	ld bc,$0102
+	call PrintNumber
+	pop de
+	pop af
+	ld [$d11e],a
+	pop hl
+.skipPrintingItemQuantity\@
+	inc de
+	pop bc
+	inc c
+	push bc
+	inc c
+	ld a,[$cc35]
+	and a
+	jr z,.nextListEntry\@
+	sla a
+	cp c
+	jr nz,.nextListEntry\@
+	dec hl
+	ld a,$ec ; unfilled right arrow menu cursor
+	ld [hli],a
+.nextListEntry\@
+	ld bc,2 * 20 ; 2 rows
+	add hl,bc
+	pop bc
+	inc c
+	dec b
+	jp nz,.loop\@
+	ld bc,-8
+	add hl,bc
+	ld a,$ee ; down arrow
+	ld [hl],a
+	ret
+.printCancelMenuItem\@
+	ld de,ListMenuCancelText
+	jp PlaceString
+
+ListMenuCancelText: ; 2F97
+	db "CANCEL@"
 
 GetMonName: ; 2F9E
 	push hl
