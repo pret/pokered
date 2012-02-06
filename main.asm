@@ -5150,7 +5150,7 @@ DisplayPokemartDialogue: ; 2A2E
 	call PrintText
 	pop hl
 	inc hl
-	call LoadPokemartInventory
+	call LoadItemList
 	ld a,$02
 	ld [$cf94],a ; selects between subtypes of menus
 	ld a,[$ffb8]
@@ -5168,7 +5168,7 @@ PokemartGreetingText: ; 0x2a55
 	TX_FAR _PokemartGreetingText
 	db $50
 
-LoadPokemartInventory: ; 2A5A
+LoadItemList: ; 2A5A
 	ld a,$01
 	ld [$cfcb],a
 	ld a,h
@@ -63119,13 +63119,13 @@ CeruleanHouse3Text1: ; 0x74e15
 	ld hl, UnnamedText_74e77
 	call PrintText
 	xor a
-	ld [$cc26], a
+	ld [W_CURMENUITEMID], a
 	ld [W_LISTSCROLLOFFSET], a
 .asm_74e23
 	ld hl, UnnamedText_74e7c
 	call PrintText
 	ld hl, UnnamedText_74e6d
-	call $2a5a
+	call LoadItemList
 	ld hl, $cf7b
 	ld a, l
 	ld [$cf8b], a
@@ -63134,9 +63134,9 @@ CeruleanHouse3Text1: ; 0x74e15
 	xor a
 	ld [$cf93], a
 	ld [$cc35], a
-	ld a, $4
-	ld [$cf94], a
-	call $2be6
+	ld a, SPECIALLISTMENU
+	ld [W_LISTMENUID], a
+	call DisplayListMenuID
 	jr c, .asm_74e60 ; 0x74e49 $15
 	ld hl, $4e86
 	ld a, [$cf91]
