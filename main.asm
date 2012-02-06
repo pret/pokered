@@ -5158,7 +5158,7 @@ DisplayPokemartDialogue: ; 2A2E
 	ld a,$01
 	ld [$ffb8],a
 	ld [$2000],a
-	call $6c20
+	call DisplayPokemartDialogue_
 	pop af
 	ld [$ffb8],a
 	ld [$2000],a
@@ -5352,7 +5352,26 @@ CountSetBits: ; 2B7F
 	ld [$d11e],a ; store number of set bits
 	ret
 
-INCBIN "baserom.gbc",$2B96,$2BBB - $2B96
+; subtracts the amount the player paid from their money
+; sets carry flag if there is enough money and unsets carry flag if not
+SubtractAmountPaidFromMoney: ; 2B96
+	ld b,BANK(SubtractAmountPaidFromMoney_)
+	ld hl,SubtractAmountPaidFromMoney_
+	jp Bankswitch
+
+; adds the amount the player sold to their money
+AddAmountSoldToMoney: ; 2B9E
+	ld de,W_PLAYERMONEY1
+	ld hl,$ffa1 ; total price of items
+	ld c,3 ; length of money in bytes
+	ld a,$0b
+	call Predef ; add total price to money
+	ld a,$13
+	ld [$d125],a
+	call DisplayTextBoxID ; redraw money text box
+	ld a,$b2
+	call $3740 ; play sound
+	jp $3748 ; wait until sound is done playing
 
 ; function to remove an item (in varying quantities) from the player's bag or PC box
 ; INPUT:
@@ -5412,7 +5431,7 @@ DisplayListMenuID: ; 2BE6
 	ld hl,$d730
 	set 6,[hl] ; turn off letter printing delay
 	xor a
-	ld [$cc35],a
+	ld [$cc35],a ; 0 means no item is currently being swapped
 	ld [$d12a],a
 	ld a,[$cf8b]
 	ld l,a
@@ -5563,7 +5582,7 @@ DisplayListMenuIDLoop: ; 2C53
 	bit 1,a ; was the B button pressed?
 	jp nz,ExitListMenu ; if so, exit the menu
 	bit 2,a ; was the select button pressed?
-	jp nz,$6b44 ; if so, allow the player to swap menu entries
+	jp nz,HandleItemListSwapping ; if so, allow the player to swap menu entries
 	ld b,a
 	bit 7,b ; was Down pressed?
 	ld hl,$cc36 ; index of top (visible) menu item within the list
@@ -5704,11 +5723,11 @@ DisplayChooseQuantityMenu: ; 2D57
 	jp .waitForKeyPressLoop\@
 .buttonAPressed\@ ; the player chose to make the transaction
 	xor a
-	ld [$cc35],a
+	ld [$cc35],a ; 0 means no item is currently being swapped
 	ret
 .buttonBPressed\@ ; the player chose to cancel the transaction
 	xor a
-	ld [$cc35],a
+	ld [$cc35],a ; 0 means no item is currently being swapped
 	ld a,$ff
 	ret
 
@@ -5730,7 +5749,7 @@ ExitListMenu: ; 2E3B
 	res 6,[hl]
 	call BankswitchBack
 	xor a
-	ld [$cc35],a
+	ld [$cc35],a ; 0 means no item is currently being swapped
 	scf
 	ret
 
@@ -5899,14 +5918,14 @@ PrintListMenuEntries: ; 2E5A
 	inc c
 	push bc
 	inc c
-	ld a,[$cc35]
-	and a
+	ld a,[$cc35] ; ID of item chosen for swapping (counts from 1)
+	and a ; is an item being swapped?
 	jr z,.nextListEntry\@
 	sla a
-	cp c
+	cp c ; is it this item?
 	jr nz,.nextListEntry\@
 	dec hl
-	ld a,$ec ; unfilled right arrow menu cursor
+	ld a,$ec ; unfilled right arrow menu cursor to indicate an item being swapped
 	ld [hli],a
 .nextListEntry\@
 	ld bc,2 * 20 ; 2 rows
@@ -8155,7 +8174,391 @@ DefaultNamesRivalList:
 	db "NEW NAME@RED@ASH@JACK@@"
 ENDC
 
-INCBIN "baserom.gbc",$6b21,$6e0c - $6b21
+; subtracts the amount the player paid from their money
+; sets carry flag if there is enough money and unsets carry flag if not
+SubtractAmountPaidFromMoney_: ; 6B21
+	ld de,W_PLAYERMONEY3
+	ld hl,$ff9f ; total price of items
+	ld c,3 ; length of money in bytes
+	call StringCmp
+	ret c
+	ld de,W_PLAYERMONEY1
+	ld hl,$ffa1 ; total price of items
+	ld c,3 ; length of money in bytes
+	ld a,$0c
+	call Predef ; subtract total price from money
+	ld a,$13
+	ld [$d125],a
+	call DisplayTextBoxID ; redraw money text box
+	and a
+	ret
+
+HandleItemListSwapping: ; 6B44
+	ld a,[W_LISTMENUID]
+	cp a,ITEMLISTMENU
+	jp nz,DisplayListMenuIDLoop ; only rearrange item list menus
+	push hl
+	ld hl,$cf8b
+	ld a,[hli]
+	ld h,[hl]
+	ld l,a
+	inc hl ; hl = beginning of list entries
+	ld a,[W_CURMENUITEMID]
+	ld b,a
+	ld a,[$cc36] ; index of top (visible) menu item within the list
+	add b
+	add a
+	ld c,a
+	ld b,0
+	add hl,bc ; hl = address of currently selected item entry
+	ld a,[hl]
+	pop hl
+	inc a
+	jp z,DisplayListMenuIDLoop ; ignore attempts to swap the Cancel menu item
+	ld a,[$cc35] ; ID of item chosen for swapping (counts from 1)
+	and a ; has the first item to swap already been chosen?
+	jr nz,.swapItems\@
+; if not, set the currently selected item as the first item
+	ld a,[W_CURMENUITEMID]
+	inc a
+	ld b,a
+	ld a,[$cc36] ; index of top (visible) menu item within the list
+	add b
+	ld [$cc35],a ; ID of item chosen for swapping (counts from 1)
+	ld c,20
+	call DelayFrames
+	jp DisplayListMenuIDLoop
+.swapItems\@
+	ld a,[W_CURMENUITEMID]
+	inc a
+	ld b,a
+	ld a,[$cc36] ; index of top (visible) menu item within the list
+	add b
+	ld b,a
+	ld a,[$cc35] ; ID of item chosen for swapping (counts from 1)
+	cp b ; is the currently selected item the same as the first item to swap?
+	jp z,DisplayListMenuIDLoop ; ignore attempts to swap an item with itself
+	dec a
+	ld [$cc35],a ; ID of item chosen for swapping (counts from 1)
+	ld c,20
+	call DelayFrames
+	push hl
+	push de
+	ld hl,$cf8b
+	ld a,[hli]
+	ld h,[hl]
+	ld l,a
+	inc hl ; hl = beginning of list entries
+	ld d,h
+	ld e,l ; de = beginning of list entries
+	ld a,[W_CURMENUITEMID]
+	ld b,a
+	ld a,[$cc36] ; index of top (visible) menu item within the list
+	add b
+	add a
+	ld c,a
+	ld b,0
+	add hl,bc ; hl = address of currently selected item entry
+	ld a,[$cc35] ; ID of item chosen for swapping (counts from 1)
+	add a
+	add e
+	ld e,a
+	jr nc,.noCarry\@
+	inc d
+.noCarry\@ ; de = address of first item to swap
+	ld a,[de]
+	ld b,a
+	ld a,[hli]
+	cp b
+	jr z,.swapSameItemType\@
+.swapDifferentItems\@
+	ld [$ff95],a ; [$ff95] = second item ID
+	ld a,[hld]
+	ld [$ff96],a ; [$ff96] = second item quantity
+	ld a,[de]
+	ld [hli],a ; put first item ID in second item slot
+	inc de
+	ld a,[de]
+	ld [hl],a ; put first item quantity in second item slot
+	ld a,[$ff96]
+	ld [de],a ; put second item quantity in first item slot
+	dec de
+	ld a,[$ff95]
+	ld [de],a ; put second item ID in first item slot
+	xor a
+	ld [$cc35],a ; 0 means no item is currently being swapped
+	pop de
+	pop hl
+	jp DisplayListMenuIDLoop
+.swapSameItemType\@
+	inc de
+	ld a,[hl]
+	ld b,a
+	ld a,[de]
+	add b ; a = sum of both item quantities
+	cp a,100 ; is the sum too big for one item slot?
+	jr c,.combineItemSlots\@
+; swap enough items from the first slot to max out the second slot if they can't be combined
+	sub a,99
+	ld [de],a
+	ld a,99
+	ld [hl],a
+	jr .done\@
+.combineItemSlots\@
+	ld [hl],a ; put the sum in the second item slot
+	ld hl,$cf8b
+	ld a,[hli]
+	ld h,[hl]
+	ld l,a
+	dec [hl] ; decrease the number of items
+	ld a,[hl]
+	ld [$d12a],a ; update number of items variable
+	cp a,1
+	jr nz,.skipSettingMaxMenuItemID\@
+	ld [W_MAXMENUITEMID],a ; if the number of items is only one now, update the max menu item ID
+.skipSettingMaxMenuItemID\@
+	dec de
+	ld h,d
+	ld l,e
+	inc hl
+	inc hl ; hl = address of item after first item to swap
+.moveItemsUpLoop\@ ; erase the first item slot and move up all the following item slots to fill the gap
+	ld a,[hli]
+	ld [de],a
+	inc de
+	inc a ; reached the $ff terminator?
+	jr z,.afterMovingItemsUp\@
+	ld a,[hli]
+	ld [de],a
+	inc de
+	jr .moveItemsUpLoop\@
+.afterMovingItemsUp\@
+	xor a
+	ld [$cc36],a ; 0 means no item is currently being swapped
+	ld [W_CURMENUITEMID],a
+.done\@
+	xor a
+	ld [$cc35],a ; 0 means no item is currently being swapped
+	pop de
+	pop hl
+	jp DisplayListMenuIDLoop
+
+DisplayPokemartDialogue_: ; 6C20
+	ld a,[$cc36]
+	ld [$d07e],a
+	call $2429 ; move sprites
+	xor a
+	ld [$cf0a],a ; flag that is set if something is sold or bought
+.loop\@
+	xor a
+	ld [$cc36],a
+	ld [W_CURMENUITEMID],a
+	ld [$cc2f],a
+	inc a
+	ld [$cf93],a
+	ld a,$13
+	ld [$d125],a
+	call DisplayTextBoxID ; draw money text box
+	ld a,$15
+	ld [$d125],a
+	call DisplayTextBoxID ; do buy/sell/quit menu
+	ld hl,$d128 ; pointer to this pokemart's inventory
+	ld a,[hli]
+	ld l,[hl]
+	ld h,a ; hl = address of inventory
+	ld a,[$d12e]
+	cp a,$02
+	jp z,.done\@
+	ld a,[$d12d] ; ID of the chosen menu item
+	and a ; buying?
+	jp z,.buyMenu\@
+	dec a ; selling?
+	jp z,.sellMenu\@
+	dec a ; quitting?
+	jp z,.done\@
+.sellMenu\@
+	xor a
+	ld [$cf93],a
+	ld a,$02
+	ld [$d11b],a
+	ld hl,$5bd5
+	ld b,$0e
+	call Bankswitch
+	ld a,[W_NUMBAGITEMS]
+	and a
+	jp z,.bagEmpty\@
+	ld hl,PokemonSellingGreetingText
+	call PrintText
+	call $3719 ; save screen
+.sellMenuLoop\@
+	call $3725 ; restore saved screen
+	ld a,$13
+	ld [$d125],a
+	call DisplayTextBoxID ; draw money text box
+	ld hl,W_NUMBAGITEMS
+	ld a,l
+	ld [$cf8b],a
+	ld a,h
+	ld [$cf8c],a
+	xor a
+	ld [$cf93],a
+	ld [W_CURMENUITEMID],a
+	ld a,ITEMLISTMENU
+	ld [W_LISTMENUID],a
+	call DisplayListMenuID
+	jp c,.returnToMainPokemartMenu\@ ; if the player closed the menu
+.confirmItemSale\@ ; if the player is trying to sell a specific item
+	call $30d9 ; check if item is unsellable
+	ld a,[$d124]
+	and a
+	jr nz,.unsellableItem\@
+	ld a,[$cf91]
+	call IsItemHM
+	jr c,.unsellableItem\@
+	ld a,PRICEDITEMLISTMENU
+	ld [W_LISTMENUID],a
+	ld [$ff8e],a ; halve prices when selling
+	call DisplayChooseQuantityMenu
+	inc a
+	jr z,.sellMenuLoop\@ ; if the player closed the choose quantity menu with the B button
+	ld hl,PokemartTellSellPrice
+	ld bc,$0e01
+	call PrintText
+	FuncCoord 14,7
+	ld hl,Coord
+	ld bc,$080f
+	ld a,$14
+	ld [$d125],a
+	call DisplayTextBoxID ; yes/no menu
+	ld a,[$d12e]
+	cp a,$02
+	jr z,.sellMenuLoop\@ ; if the player pressed the B button
+	ld a,[$d12d] ; ID of the chosen menu item
+	dec a
+	jr z,.sellMenuLoop\@ ; if the player chose No
+.sellItem\@
+	ld a,[$cf0a] ; flag that is set if something is sold or bought
+	and a
+	jr nz,.skipSettingFlag1\@
+	inc a
+	ld [$cf0a],a
+.skipSettingFlag1\@
+	call AddAmountSoldToMoney
+	ld hl,W_NUMBAGITEMS
+	call RemoveItemFromInventory
+	jp .sellMenuLoop\@
+.unsellableItem\@
+	ld hl,PokemartUnsellableItemText
+	call PrintText
+	jp .returnToMainPokemartMenu\@
+.bagEmpty\@
+	ld hl,PokemartItemBagEmptyText
+	call PrintText
+	call $3719 ; save screen
+	jp .returnToMainPokemartMenu\@
+.buyMenu\@
+	ld a,$01
+	ld [$cf93],a
+	ld a,$03
+	ld [$d11b],a
+	ld hl,$5bd5
+	ld b,$0e
+	call Bankswitch
+	ld hl,PokemartBuyingGreetingText
+	call PrintText
+	call $3719 ; save screen
+.buyMenuLoop\@
+	call $3725 ; restore saved screen
+	ld a,$13
+	ld [$d125],a
+	call DisplayTextBoxID ; draw money text box
+	ld hl,$cf7b
+	ld a,l
+	ld [$cf8b],a
+	ld a,h
+	ld [$cf8c],a
+	xor a
+	ld [W_CURMENUITEMID],a
+	inc a
+	ld [$cf93],a
+	inc a ; a = 2 (PRICEDITEMLISTMENU)
+	ld [W_LISTMENUID],a
+	call DisplayListMenuID
+	jr c,.returnToMainPokemartMenu\@ ; if the player closed the menu
+	ld a,$63
+	ld [$cf97],a
+	xor a
+	ld [$ff8e],a
+	call DisplayChooseQuantityMenu
+	inc a
+	jr z,.buyMenuLoop\@ ; if the player closed the choose quantity menu with the B button
+	ld a,[$cf91] ; item ID
+	ld [$d11e],a ; store item ID for GetItemName
+	call GetItemName
+	call $3826 ; copy name to $cf4b
+	ld hl,PokemartTellBuyPrice
+	call PrintText
+	FuncCoord 14,7
+	ld hl,Coord
+	ld bc,$080f
+	ld a,$14
+	ld [$d125],a
+	call DisplayTextBoxID ; yes/no menu
+	ld a,[$d12e]
+	cp a,$02
+	jp z,.buyMenuLoop\@ ; if the player pressed the B button
+	ld a,[$d12d] ; ID of the chosen menu item
+	dec a
+	jr z,.buyMenuLoop\@ ; if the player chose No
+.buyItem\@
+	call .isThereEnoughMoney\@
+	jr c,.notEnoughMoney\@
+	ld hl,W_NUMBAGITEMS
+	call AddItemToInventory
+	jr nc,.bagFull\@
+	call SubtractAmountPaidFromMoney
+	ld a,[$cf0a] ; flag that is set if something is sold or bought
+	and a
+	jr nz,.skipSettingFlag2\@
+	ld a,$01
+	ld [$cf0a],a
+.skipSettingFlag2\@
+	ld a,$b2
+	call $3740 ; play sound
+	call $3748 ; wait until sound is done playing
+	ld hl,PokemartBoughtItemText
+	call PrintText
+	jp .buyMenuLoop\@
+.returnToMainPokemartMenu\@
+	call $3725 ; restore save screen
+	ld a,$13
+	ld [$d125],a
+	call DisplayTextBoxID ; draw money text box
+	ld hl,PokemartAnythingElseText
+	call PrintText
+	jp .loop\@
+.isThereEnoughMoney\@
+	ld de,W_PLAYERMONEY3
+	ld hl,$ff9f ; item price
+	ld c,3 ; length of money in bytes
+	jp StringCmp
+.notEnoughMoney\@
+	ld hl,PokemartNotEnoughMoneyText
+	call PrintText
+	jr .returnToMainPokemartMenu\@
+.bagFull\@
+	ld hl,PokemartItemBagFullText
+	call PrintText
+	jr .returnToMainPokemartMenu\@
+.done\@
+	ld hl,PokemartThankYouText
+	call PrintText
+	ld a,$01
+	ld [$cfcb],a
+	call $2429 ; move sprites
+	ld a,[$d07e]
+	ld [$cc36],a
+	ret
 
 PokemartBuyingGreetingText: ; 0x6e0c
 	TX_FAR _PokemartBuyingGreetingText
