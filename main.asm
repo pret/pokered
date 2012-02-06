@@ -5195,7 +5195,7 @@ DisplayPokemonCenterDialogue: ; 2A72
 	ld a,$01
 	ld [$ffb8],a
 	ld [$2000],a
-	call $6fe6
+	call DisplayPokemonCenterDialogue_
 	pop af
 	ld [$ffb8],a
 	ld [$2000],a
@@ -8649,34 +8649,34 @@ UnnamedText_6fe1: ; 0x6fe1
 	db $50
 ; 0x6fe1 + 5 bytes
 
-Unnamed_6fe6: ; 0x6fe6
-	call $3719
-	ld hl, $705d
+DisplayPokemonCenterDialogue_: ; 0x6fe6
+	call $3719 ; save screen
+	ld hl, PokemonCenterWelcomeText
 	call PrintText
 	ld hl, $d72e
 	bit 2, [hl]
 	set 1, [hl]
 	set 2, [hl]
-	jr nz, .asm_7000 ; 0x6ff8 $6
-	ld hl, $7062
+	jr nz, .skipShallWeHealYourPokemon
+	ld hl, ShallWeHealYourPokemonText
 	call PrintText
-.asm_7000
-	call $360a
-	ld a, [$cc26]
+.skipShallWeHealYourPokemon
+	call $360a ; yes/no menu
+	ld a, [W_CURMENUITEMID]
 	and a
-	jr nz, .asm_7051 ; 0x7007 $48
+	jr nz, .declinedHealing\@ ; if the player chose No
 	call $7078
-	call $3725
-	ld hl, $7068
+	call $3725 ; restore screen
+	ld hl, NeedYourPokemonText
 	call PrintText
 	ld a, $18
-	ld [$c112], a
+	ld [$c112], a ; make the nurse turn to face the machine
 	call Delay3
 	ld a, $7
-	call Predef
+	call Predef ; HealParty
 	ld b, $1c
 	ld hl, $4433
-	call Bankswitch
+	call Bankswitch ; do the healing machine animation
 	xor a
 	ld [$cfc7], a
 	ld a, [$c0f0]
@@ -8685,55 +8685,46 @@ Unnamed_6fe6: ; 0x6fe6
 	ld [$cfca], a
 	ld [$c0ee], a
 	call $23b1
-	ld hl, $706d
+	ld hl, PokemonFightingFitText
 	call PrintText
 	ld a, $14
-	ld [$c112], a
+	ld [$c112], a ; make the nurse bow
 	ld c, a
 	call DelayFrames
-	jr .asm_7054 ; 0x704f $3
-.asm_7051
-	call $3725
-.asm_7054
-	ld hl, $7072
+	jr .done\@
+.declinedHealing\@
+	call $3725 ; restore screen
+.done\@
+	ld hl, PokemonCenterFarewellText
 	call PrintText
-	jp $2429
-; 0x705d
+	jp $2429 ; move sprites
 
-UnnamedText_705d: ; 0x705d
-	TX_FAR _UnnamedText_705d
+PokemonCenterWelcomeText: ; 0x705d
+	TX_FAR _PokemonCenterWelcomeText
 	db $50
-; 0x705d + 5 bytes
 
-; 0x7062
-db $a
-
-UnnamedText_7063: ; 0x7063
-	TX_FAR _UnnamedText_7063
+ShallWeHealYourPokemonText: ; 0x7062
+	db $a
+	TX_FAR _ShallWeHealYourPokemonText
 	db $50
-; 0x7063 + 5 bytes
 
-UnnamedText_7068: ; 0x7068
-	TX_FAR _UnnamedText_7068
+NeedYourPokemonText: ; 0x7068
+	TX_FAR _NeedYourPokemonText
 	db $50
-; 0x7068 + 5 bytes
 
-UnnamedText_706d: ; 0x706d
-	TX_FAR _UnnamedText_706d
+PokemonFightingFitText: ; 0x706d
+	TX_FAR _PokemonFightingFitText
 	db $50
-; 0x706d + 5 bytes
 
-db $a
-
-UnnamedText_7073: ; 0x7073
-	TX_FAR _UnnamedText_7073
+PokemonCenterFarewellText: ; 0x7073
+	db $a
+	TX_FAR _PokemonCenterFarewellText
 	db $50
-; 0x7078
 
 Unknown_7078: ; 0x7078
 	push hl
-	ld hl, $7092
-	ld a, [$d35e]
+	ld hl, SafariZoneRestHouses
+	ld a, [W_CURMAP]
 	ld b, a
 .asm_7080
 	ld a, [hli]
@@ -8750,8 +8741,11 @@ Unknown_7078: ; 0x7078
 	ret
 ; 0x7092
 
-Unknown_7092: ; 0x7092
-	db $df, $e0, $e1, $ff
+SafariZoneRestHouses: ; 0x7092
+	db SAFARI_ZONE_REST_HOUSE_2
+	db SAFARI_ZONE_REST_HOUSE_3
+	db SAFARI_ZONE_REST_HOUSE_4
+	db $ff ; terminator
 
 ; function that performs initialization for DisplayTextID
 DisplayTextIDInit: ; 7096
@@ -80912,7 +80906,7 @@ _UnnamedText_6fe1: ; 0xa284d
 	db "can't be deleted!", $58
 ; 0xa284d + 32 bytes
 
-_UnnamedText_705d: ; 0xa286d
+_PokemonCenterWelcomeText: ; 0xa286d
 	db $0, "Welcome to our", $4f
 	db "#MON CENTER!", $51
 	db "We heal your", $4f
@@ -80920,23 +80914,23 @@ _UnnamedText_705d: ; 0xa286d
 	db "perfect health!", $58
 ; 0xa286d + 71 bytes
 
-_UnnamedText_7063: ; 0xa28b4
+_ShallWeHealYourPokemonText: ; 0xa28b4
 	db $0, "Shall we heal your", $4f
 	db "#MON?", $57
 ; 0xa28b4 + 26 bytes
 
-_UnnamedText_7068: ; 0xa28ce
+_NeedYourPokemonText: ; 0xa28ce
 	db $0, "OK. We'll need", $4f
 	db "your #MON.", $57
 ; 0xa28ce + 26 bytes
 
-_UnnamedText_706d: ; 0xa28e8
+_PokemonFightingFitText: ; 0xa28e8
 	db $0, "Thank you!", $4f
 	db "Your #MON are", $55
 	db "fighting fit!", $58
 ; 0xa28e8 + 40 bytes
 
-_UnnamedText_7073: ; 0xa2910
+_PokemonCenterFarewellText: ; 0xa2910
 	db $0, "We hope to see", $4f
 	db "you again!", $57
 ; 0xa2910 + 27 bytes
