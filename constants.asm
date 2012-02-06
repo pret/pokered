@@ -895,7 +895,7 @@ PCPOKEMONLISTMENU  EQU $00 ; PC pokemon withdraw/deposit lists
 MOVESLISTMENU      EQU $01 ; XXX where is this used?
 PRICEDITEMLISTMENU EQU $02 ; Pokemart buy menu / Pokemart buy/sell choose quantity menu
 ITEMLISTMENU       EQU $03 ; Start menu Item menu / Pokemart sell menu
-FLOORLISTMENU      EQU $04 ; floor list in elevators
+SPECIALLISTMENU    EQU $04 ; list of special "items" e.g. floor list in elevators / list of badges
 
 ; pokemon name constants
 RHYDON     EQU $01
