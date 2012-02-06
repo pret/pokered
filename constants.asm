@@ -98,6 +98,8 @@ W_TOPMENUITEMX EQU $CC25
 
 ; the id of the currently selected menu item
 ; the top item has id 0, the one below that has id 1, etc.
+; note that the "top item" means the top item currently visible on the screen
+; add this value to [W_LISTSCROLLOFFSET] to get the item's position within the list
 W_CURMENUITEMID EQU $CC26
 
 ; the tile that was behind the menu cursor's current location
@@ -117,6 +119,10 @@ W_PLAYERMONNUMBER EQU $CC2F
 
 ; the address of the menu cursor's current location within C3A0-C507
 W_MENUCURSORLOCATION EQU $CC30 ; 2 bytes
+
+; offset of the current top menu item from the beginning of the list
+; keeps track of what section of the list is on screen
+W_LISTSCROLLOFFSET EQU $CC36
 
 ; set to 1 if you can go from the bottom to the top or top to bottom of a menu
 ; set to 0 if you can't go past the top or bottom of the menu
@@ -329,6 +335,10 @@ W_PRIZE3 EQU $D13F
 W_PLAYERNAME EQU $D158 ; 11 characters, including null
 
 W_NUMINPARTY EQU $D163
+
+W_OWNEDPOKEMON EQU $D2F7 ; bit field, 19 bytes
+
+W_SEENPOKEMON EQU $D30A ; bit field, 19 bytes
 
 ;number of items in bag
 W_NUMBAGITEMS     EQU $D31D

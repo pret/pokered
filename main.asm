@@ -5510,7 +5510,7 @@ DisplayListMenuIDLoop: ; 2C53
 	ld [$cc37],a
 	ld a,[W_CURMENUITEMID]
 	ld c,a
-	ld a,[$cc36] ; index of top (visible) menu item within the list
+	ld a,[W_LISTSCROLLOFFSET]
 	add c
 	ld c,a
 	ld a,[$d12a] ; number of list entries
@@ -5585,7 +5585,7 @@ DisplayListMenuIDLoop: ; 2C53
 	jp nz,HandleItemListSwapping ; if so, allow the player to swap menu entries
 	ld b,a
 	bit 7,b ; was Down pressed?
-	ld hl,$cc36 ; index of top (visible) menu item within the list
+	ld hl,W_LISTSCROLLOFFSET
 	jr z,.upPressed\@
 .downPressed\@
 	ld a,[hl]
@@ -5763,7 +5763,7 @@ PrintListMenuEntries: ; 2E5A
 	ld a,[$cf8c]
 	ld d,a
 	inc de ; de = beginning of list entries
-	ld a,[$cc36] ; index of top (visible) menu item within the list
+	ld a,[W_LISTSCROLLOFFSET]
 	ld c,a
 	ld a,[W_LISTMENUID]
 	cp a,ITEMLISTMENU
@@ -5816,7 +5816,7 @@ PrintListMenuEntries: ; 2E5A
 	ld a,4
 	sub b
 	ld b,a
-	ld a,[$cc36] ; index of top (visible) menu item within the list
+	ld a,[W_LISTSCROLLOFFSET]
 	add b
 	call GetPartyMonName
 	pop hl
@@ -5863,7 +5863,7 @@ PrintListMenuEntries: ; 2E5A
 	ld a,$04
 	sub b
 	ld b,a
-	ld a,[$cc36]
+	ld a,[W_LISTSCROLLOFFSET]
 	add b
 	ld [hl],a
 	call $1372 ; load pokemon info
@@ -8205,7 +8205,7 @@ HandleItemListSwapping: ; 6B44
 	inc hl ; hl = beginning of list entries
 	ld a,[W_CURMENUITEMID]
 	ld b,a
-	ld a,[$cc36] ; index of top (visible) menu item within the list
+	ld a,[W_LISTSCROLLOFFSET]
 	add b
 	add a
 	ld c,a
@@ -8222,7 +8222,7 @@ HandleItemListSwapping: ; 6B44
 	ld a,[W_CURMENUITEMID]
 	inc a
 	ld b,a
-	ld a,[$cc36] ; index of top (visible) menu item within the list
+	ld a,[W_LISTSCROLLOFFSET] ; index of top (visible) menu item within the list
 	add b
 	ld [$cc35],a ; ID of item chosen for swapping (counts from 1)
 	ld c,20
@@ -8232,7 +8232,7 @@ HandleItemListSwapping: ; 6B44
 	ld a,[W_CURMENUITEMID]
 	inc a
 	ld b,a
-	ld a,[$cc36] ; index of top (visible) menu item within the list
+	ld a,[W_LISTSCROLLOFFSET]
 	add b
 	ld b,a
 	ld a,[$cc35] ; ID of item chosen for swapping (counts from 1)
@@ -8253,7 +8253,7 @@ HandleItemListSwapping: ; 6B44
 	ld e,l ; de = beginning of list entries
 	ld a,[W_CURMENUITEMID]
 	ld b,a
-	ld a,[$cc36] ; index of top (visible) menu item within the list
+	ld a,[W_LISTSCROLLOFFSET]
 	add b
 	add a
 	ld c,a
@@ -8334,7 +8334,7 @@ HandleItemListSwapping: ; 6B44
 	jr .moveItemsUpLoop\@
 .afterMovingItemsUp\@
 	xor a
-	ld [$cc36],a ; 0 means no item is currently being swapped
+	ld [W_LISTSCROLLOFFSET],a
 	ld [W_CURMENUITEMID],a
 .done\@
 	xor a
@@ -8344,14 +8344,14 @@ HandleItemListSwapping: ; 6B44
 	jp DisplayListMenuIDLoop
 
 DisplayPokemartDialogue_: ; 6C20
-	ld a,[$cc36]
+	ld a,[W_LISTSCROLLOFFSET]
 	ld [$d07e],a
 	call $2429 ; move sprites
 	xor a
 	ld [$cf0a],a ; flag that is set if something is sold or bought
 .loop\@
 	xor a
-	ld [$cc36],a
+	ld [W_LISTSCROLLOFFSET],a
 	ld [W_CURMENUITEMID],a
 	ld [$cc2f],a
 	inc a
@@ -8557,7 +8557,7 @@ DisplayPokemartDialogue_: ; 6C20
 	ld [$cfcb],a
 	call $2429 ; move sprites
 	ld a,[$d07e]
-	ld [$cc36],a
+	ld [W_LISTSCROLLOFFSET],a
 	ret
 
 PokemartBuyingGreetingText: ; 0x6e0c
@@ -10683,7 +10683,7 @@ RemoveItemFromInventory_: ; 4E74
 	jr nz,.loop\@
 ; update menu info
 	xor a
-	ld [$cc36],a
+	ld [W_LISTSCROLLOFFSET],a
 	ld [W_CURMENUITEMID],a
 	ld [$cc2c],a
 	ld [$d07e],a
@@ -37178,7 +37178,7 @@ MissingNoDexEntry:
 	db 100 ; 10.0 kg
 	db 0,"コメント さくせいちゅう@" ; コメント作成中 (Comment to be written)
 
-PokedexToIndex:
+PokedexToIndex: ; 4FF9
 	; converts the Pokédex number at $D11E to an index
 	push bc
 	push hl
@@ -37199,7 +37199,7 @@ PokedexToIndex:
 	pop bc
 	ret
 
-IndexToPokedex:
+IndexToPokedex: ; 5010
 	; converts the indexédex number at $D11E to a Pokédex number
 	push bc
 	push hl
@@ -63120,7 +63120,7 @@ CeruleanHouse3Text1: ; 0x74e15
 	call PrintText
 	xor a
 	ld [$cc26], a
-	ld [$cc36], a
+	ld [W_LISTSCROLLOFFSET], a
 .asm_74e23
 	ld hl, UnnamedText_74e7c
 	call PrintText
@@ -63152,7 +63152,7 @@ CeruleanHouse3Text1: ; 0x74e15
 	jr .asm_74e23 ; 0x74e5e $c3
 .asm_74e60
 	xor a
-	ld [$cc36], a
+	ld [W_LISTSCROLLOFFSET], a
 	ld hl, UnnamedText_74e81
 	call PrintText
 	jp TextScriptEnd
