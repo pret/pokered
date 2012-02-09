@@ -2846,7 +2846,443 @@ SwitchToMapRomBank: ; 12BC
 	pop hl
 	ret
 
-INCBIN "baserom.gbc",$12DA,$15B4 - $12DA
+INCBIN "baserom.gbc",$12DA,$12F8 - $12DA
+
+; this is used to check if the player wants to interrupt the opening sequence at several points
+; XXX is this used anywhere else?
+; INPUT:
+; c = number of frames to wait
+; sets carry if Up+Select+B, Start, or A is pressed within c frames
+; unsets carry otherwise
+CheckForUserInterruption: ; 12F8
+	call DelayFrame
+	push bc
+	call GetJoypadStateLowSensitivity
+	pop bc
+	ld a,[$ffb4] ; currently pressed buttons
+	cp a,%01000110 ; Up, Select button, B button
+	jr z,.setCarry\@ ; if all three keys are pressed
+	ld a,[$ffb5] ; either newly pressed buttons or currently pressed buttons at low sampling rate
+	and a,%00001001 ; Start button, A button
+	jr nz,.setCarry\@ ; if either key is pressed
+	dec c
+	jr nz,CheckForUserInterruption
+.unsetCarry\@
+	and a
+	ret
+.setCarry\@
+	scf
+	ret
+
+; function to load position data for destination warp when switching maps
+; INPUT:
+; a = ID of destination warp within destination map
+LoadDestinationWarpPosition: ; 1313
+	ld b,a
+	ld a,[$ffb8]
+	push af
+	ld a,[$cf12]
+	ld [$ffb8],a
+	ld [$2000],a
+	ld a,b
+	add a
+	add a
+	ld c,a
+	ld b,0
+	add hl,bc
+	ld bc,4
+	ld de,$d35f
+	call CopyData
+	pop af
+	ld [$ffb8],a
+	ld [$2000],a
+	ret
+
+; INPUT:
+; c: if nonzero, show at least a sliver of health
+; d = number of HP bar sections (normally 6)
+; e = health (in eighths of bar sections) (normally out of 48)
+DrawHPBar: ; 1336
+	push hl
+	push de
+	push bc
+	ld a,$71 ; left of HP bar tile 1
+	ld [hli],a
+	ld a,$62 ; left of HP bar tile 2
+	ld [hli],a
+	push hl
+	ld a,$63 ; empty bar section tile
+.drawEmptyBarLoop\@
+	ld [hli],a
+	dec d
+	jr nz,.drawEmptyBarLoop\@
+	ld a,[$cf94]
+	dec a ; what should the right of HP bar tile be?
+	ld a,$6d ; right of HP bar tile, in status screen and battles
+	jr z,.writeTile\@
+	dec a ; right of HP bar tile, in pokemon menu
+.writeTile\@
+	ld [hl],a
+	pop hl
+	ld a,e
+	and a ; is there enough health to show up on the HP bar?
+	jr nz,.loop\@ ; if so, draw the HP bar
+	ld a,c
+	and a ; should a sliver of health be shown no matter what?
+	jr z,.done\@
+	ld e,1 ; if so, fill one eighth of a bar section
+; loop to draw every full bar section
+.loop\@
+	ld a,e
+	sub a,8
+	jr c,.drawPartialBarSection\@
+	ld e,a
+	ld a,$6b ; filled bar section tile
+	ld [hli],a
+	ld a,e
+	and a
+	jr z,.done\@
+	jr .loop\@
+; draws a partial bar section at the end (if necessary)
+; there are 7 possible partial bar sections from 1/8 to 7/8 full
+.drawPartialBarSection\@
+	ld a,$63 ; empty bar section tile
+	add e ; add e to get the appropriate partial bar section tile
+	ld [hl],a ; write the tile
+.done\@
+	pop bc
+	pop de
+	pop hl
+	ret
+
+; loads pokemon data from one of multiple sources to $cf98
+; loads base stats to $d0b8
+; INPUT:
+; [$cf92] = index of pokemon within party/box
+; [$cc49] = source
+; 00: player's party
+; 01: enemy's party
+; 02: current box
+; 03: daycare
+; OUTPUT:
+; [$cf91] = pokemon ID
+; $cf98 = base address of pokemon data
+; $d0b8 = base address of base stats
+LoadMonData: ; 1372
+	ld hl,LoadMonData_
+	ld b,BANK(LoadMonData_)
+	jp Bankswitch
+
+INCBIN "baserom.gbc",$137A,$13D0 - $137A
+
+; plays the cry of a pokemon
+; INPUT:
+; a = pokemon ID
+PlayCry: ; 13D0
+	call GetCryData
+	call $23b1 ; play cry
+	jp $3748 ; wait for sound to be done playing
+
+; gets a pokemon's cry data
+; INPUT:
+; a = pokemon ID
+GetCryData: ; 13D9
+	dec a
+	ld c,a
+	ld b,0
+	ld hl,$5446
+	add hl,bc
+	add hl,bc
+	add hl,bc
+	ld a,$0e
+	call BankswitchHome
+	ld a,[hli]
+	ld b,a
+	ld a,[hli]
+	ld [$c0f1],a
+	ld a,[hl]
+	ld [$c0f2],a
+	call BankswitchBack
+	ld a,b ; a = cryID
+	ld c,$14 ; base sound ID for pokemon cries
+	rlca
+	add b ; a = cryID * 3
+	add c ; a = $14 + cryID * 3
+	ret
+
+DisplayPartyMenu: ; 13FC
+	ld a,[$ffd7]
+	push af
+	xor a
+	ld [$ffd7],a
+	call GBPalWhiteOutWithDelay3
+	call CleanLCD_OAM
+	call PartyMenuInit
+	call DrawPartyMenu
+	jp HandlePartyMenuInput
+
+GoBackToPartyMenu: ; 1411
+	ld a,[$ffd7]
+	push af
+	xor a
+	ld [$ffd7],a
+	call PartyMenuInit
+	call RedrawPartyMenu
+	jp HandlePartyMenuInput
+
+PartyMenuInit: ; 1420
+	ld a,$01
+	call BankswitchHome
+	call LoadHpBarAndStatusTilePatterns
+	ld hl,$d730
+	set 6,[hl] ; turn off letter printing delay
+	xor a
+	ld [$cc49],a
+	ld [$cc37],a
+	ld hl,W_TOPMENUITEMY
+	inc a
+	ld [hli],a ; top menu item Y
+	xor a
+	ld [hli],a ; top menu item X
+	ld a,[$cc2b]
+	push af
+	ld [hli],a ; current menu item ID
+	inc hl
+	ld a,[W_NUMINPARTY]
+	and a ; are there more than 0 pokemon in the party?
+	jr z,.storeMaxMenuItemID\@
+	dec a
+; if party is not empty, the max menu item ID is ([W_NUMINPARTY] - 1)
+; otherwise, it is 0
+.storeMaxMenuItemID\@
+	ld [hli],a ; max menu item ID
+	ld a,[$d11f]
+	and a
+	ld a,%00000011 ; A button and B button
+	jr z,.next\@
+	xor a
+	ld [$d11f],a
+	inc a
+.next\@
+	ld [hli],a ; menu watched keys
+	pop af
+	ld [hl],a ; old menu item ID
+	ret
+
+HandlePartyMenuInput: ; 145A
+	ld a,1
+	ld [$cc4a],a
+	ld a,$40
+	ld [$d09b],a
+	call HandleMenuInputPokemonSelection
+	call PlaceUnfilledArrowMenuCursor
+	ld b,a
+	xor a
+	ld [$d09b],a
+	ld a,[W_CURMENUITEMID]
+	ld [$cc2b],a
+	ld hl,$d730
+	res 6,[hl] ; turn on letter printing delay
+	ld a,[$cc35]
+	and a
+	jp nz,.swappingPokemon\@
+	pop af
+	ld [$ffd7],a
+	bit 1,b
+	jr nz,.noPokemonChosen\@
+	ld a,[W_NUMINPARTY]
+	and a
+	jr z,.noPokemonChosen\@
+	ld a,[W_CURMENUITEMID]
+	ld [$cf92],a
+	ld hl,W_PARTYMON1
+	ld b,0
+	ld c,a
+	add hl,bc
+	ld a,[hl]
+	ld [$cf91],a
+	ld [$cfd9],a
+	call BankswitchBack
+	and a
+	ret
+.noPokemonChosen\@
+	call BankswitchBack
+	scf
+	ret
+.swappingPokemon\@
+	bit 1,b ; was the B button pressed?
+	jr z,.handleSwap\@ ; if not, handle swapping the pokemon
+.cancelSwap\@ ; if the B button was pressed
+	ld b,BANK(ErasePartyMenuCursors)
+	ld hl,ErasePartyMenuCursors
+	call Bankswitch
+	xor a
+	ld [$cc35],a
+	ld [$d07d],a
+	call RedrawPartyMenu
+	jr HandlePartyMenuInput
+.handleSwap\@
+	ld a,[W_CURMENUITEMID]
+	ld [$cf92],a
+	ld b,$04
+	ld hl,$7613
+	call Bankswitch
+	jr HandlePartyMenuInput
+
+DrawPartyMenu: ; 14D4
+	ld hl,$6cd2
+	jr DrawPartyMenuCommon
+
+RedrawPartyMenu: ; 14D9
+	ld hl,$6ce3
+
+DrawPartyMenuCommon: ; 14DC
+	ld b,$04
+	jp Bankswitch
+
+; prints a pokemon's status condition
+; INPUT:
+; de = address of status condition
+; hl = destination address
+PrintStatusCondition: ; 14E1
+	push de
+	dec de
+	dec de ; de = address of current HP
+	ld a,[de]
+	ld b,a
+	dec de
+	ld a,[de]
+	or b ; is the pokemon's HP zero?
+	pop de
+	jr nz,.notFainted\@
+; if the pokemon's HP is 0, print "FNT"
+	ld a,"F"
+	ld [hli],a
+	ld a,"N"
+	ld [hli],a
+	ld [hl],"T"
+	and a
+	ret
+.notFainted\@
+	ld a,[$ffb8]
+	push af
+	ld a,$1d
+	ld [$ffb8],a
+	ld [$2000],a
+	call $47de ; print status condition
+	pop bc
+	ld a,b
+	ld [$ffb8],a
+	ld [$2000],a
+	ret
+
+; function to print pokemon level, leaving off the ":L" if the level is at least 100
+; INPUT:
+; hl = destination address
+; [$cfb9] = level
+PrintLevel: ; 150B
+	ld a,$6e ; ":L" tile ID
+	ld [hli],a
+	ld c,2 ; number of digits
+	ld a,[$cfb9] ; level
+	cp a,100
+	jr c,PrintLevelCommon
+; if level at least 100, write over the ":L" tile
+	dec hl
+	inc c ; increment number of digits to 3
+	jr PrintLevelCommon
+
+; prints the level without leaving off ":L" regardless of level
+; INPUT:
+; hl = destination address
+; [$cfb9] = level
+PrintLevelFull: ; 151B
+	ld a,$6e ; ":L" tile ID
+	ld [hli],a
+	ld c,3 ; number of digits
+	ld a,[$cfb9] ; level
+
+PrintLevelCommon: ; 1523
+	ld [$d11e],a
+	ld de,$d11e
+	ld b,$41 ; no leading zeroes, left-aligned, one byte
+	jp PrintNumber
+
+; XXX does anything call this?
+Unknown152E: ; 152E
+	ld hl,$d0dc
+	ld c,a
+	ld b,0
+	add hl,bc
+	ld a,[hl]
+	ret
+
+; copies the base stat data of a pokemon to $D0B8
+; INPUT:
+; [$D0B5] = pokemon ID
+GetBaseStats: ; 1537
+	ld a,[$ffb8]
+	push af
+	ld a,$0e
+	ld [$ffb8],a
+	ld [$2000],a
+	push bc
+	push de
+	push hl
+	ld a,[$d11e]
+	push af
+	ld a,[$d0b5]
+	ld [$d11e],a
+	ld de,FossilKabutopsPic
+	ld b,$66 ; size of Kabutops fossil and Ghost sprites
+	cp a,$b6 ; Kabutops fossil
+	jr z,.specialID\@
+	ld de,GhostPic
+	cp a,$b8 ; Ghost
+	jr z,.specialID\@
+	ld de,FossilAerodactylPic
+	ld b,$77 ; size of Aerodactyl fossil sprite
+	cp a,$b7 ; Aerodactyl fossil
+	jr z,.specialID\@
+	cp a,MEW
+	jr z,.mew\@
+	ld a,$3a
+	call Predef   ; convert pokemon ID in [$D11E] to pokedex number
+	ld a,[$d11e]
+	dec a
+	ld bc,28
+	ld hl,BulbasaurBaseStats
+	call AddNTimes
+	ld de,$d0b8
+	ld bc,28
+	call CopyData
+	jr .done\@
+.specialID\@
+	ld hl,$d0c2
+	ld [hl],b
+	inc hl
+	ld [hl],e
+	inc hl
+	ld [hl],d
+	jr .done\@
+.mew\@
+	ld hl,$425b
+	ld de,$d0b8
+	ld bc,28
+	ld a,$01
+	call FarCopyData
+.done\@
+	ld a,[$d0b5]
+	ld [$d0b8],a
+	pop af
+	ld [$d11e],a
+	pop hl
+	pop de
+	pop bc
+	pop af
+	ld [$ffb8],a
+	ld [$2000],a
+	ret
 
 ; copy party pokemon's name to $CD6D
 GetPartyMonName2: ; 15B4
@@ -7537,7 +7973,62 @@ IF _BLUE
 	db $61,$62,$63,$64,$65,$66,$67,$68,$50
 ENDC
 
-INCBIN "baserom.gbc",$45AA,$472B-$45AA
+NintenText: ; 45AA
+	db "NINTEN@"
+
+SonyText: ; 45B1
+	db "SONY@"
+
+; loads pokemon data from one of multiple sources to $cf98
+; loads base stats to $d0b8
+; INPUT:
+; [$cf92] = index of pokemon within party/box
+; [$cc49] = source
+; 00: player's party
+; 01: enemy's party
+; 02: current box
+; 03: daycare
+; OUTPUT:
+; [$cf91] = pokemon ID
+; $cf98 = base address of pokemon data
+; $d0b8 = base address of base stats
+LoadMonData_: ; 45B6
+	ld a,[$da5f] ; daycare pokemon ID
+	ld [$cf91],a
+	ld a,[$cc49]
+	cp a,$03
+	jr z,.getBaseStats\@
+	ld a,[$cf92]
+	ld e,a
+	ld hl,$5c37
+	ld b,$0e
+	call Bankswitch ; get pokemon ID
+.getBaseStats\@
+	ld a,[$cf91]
+	ld [$d0b5],a ; input for GetBaseStats
+	call GetBaseStats ; load base stats to $d0b8
+	ld hl,W_PARTYMON1DATA
+	ld bc,44
+	ld a,[$cc49]
+	cp a,$01
+	jr c,.getMonEntry\@
+	ld hl,$d8a4 ; enemy pokemon 1 data
+	jr z,.getMonEntry\@
+	cp a,$02
+	ld hl,$da96 ; box pokemon 1 data
+	ld bc,33
+	jr z,.getMonEntry\@
+	ld hl,$da5f ; daycare pokemon data
+	jr .copyMonData\@
+.getMonEntry\@ ; add the product of the index and the size of each entry
+	ld a,[$cf92]
+	call AddNTimes
+.copyMonData\@
+	ld de,$cf98
+	ld bc,44
+	jp CopyData
+
+INCBIN "baserom.gbc",$4608,$472B-$4608
 
 ItemNames: ; 472B
 	db "MASTER BALL@"
@@ -15628,74 +16119,331 @@ OldAmberSprite: ; 0x11300
 LyingOldManSprite: ; 0x11340
 	INCBIN "gfx/sprites/lying_old_man.2bpp" ; was $11340
 
-INCBIN "baserom.gbc",$11380,$12e7f - $11380
+INCBIN "baserom.gbc",$11380,$12cd2 - $11380
 
-UnnamedText_12e7f: ; 0x12e7f
-	TX_FAR _UnnamedText_12e7f
+; [$D07D] = menu type / message ID
+; if less than $F0, it is a menu type
+; menu types:
+; 00: normal pokemon menu (e.g. Start menu)
+; 01: use healing item on pokemon menu
+; 02: in-battle switch pokemon menu
+; 03: learn TM/HM menu
+; 04: swap pokemon positions menu
+; 05: use evolution stone on pokemon menu
+; otherwise, it is a message ID
+; f0: poison healed
+; f1: burn healed
+; f2: freeze healed
+; f3: sleep healed
+; f4: paralysis healed
+; f5: HP healed
+; f6: health returned
+; f7: revitalized
+; f8: leveled up
+DrawPartyMenu_: ; 6CD2
+	xor a
+	ld [H_AUTOBGTRANSFERENABLED],a
+	call ClearScreen
+	call $2429 ; move sprites
+	ld b,$1C
+	ld hl,$5791
+	call Bankswitch ; load pokemon icon graphics
+
+RedrawPartyMenu_: ; 6CE3
+	ld a,[$D07D]
+	cp a,$04
+	jp z,.printMessage\@
+	call ErasePartyMenuCursors
+	ld b,$1C
+	ld hl,$5FB6
+	call Bankswitch ; loads some data to $cf2e
+	FuncCoord 3,0
+	ld hl,Coord
+	ld de,W_PARTYMON1
+	xor a
+	ld c,a
+	ld [$FF8C],a ; loop counter
+	ld [$CF2D],a
+.loop\@
+	ld a,[de]
+	cp a,$FF ; reached the terminator?
+	jp z,.afterDrawingMonEntries\@
+	push bc
+	push de
+	push hl
+	ld a,c
+	push hl
+	ld hl,W_PARTYMON1NAME
+	call GetPartyMonName
+	pop hl
+	call PlaceString ; print the pokemon's name
+	ld b,$1C
+	ld hl,$5868
+	call Bankswitch ; place the appropriate pokemon icon
+	ld a,[$FF8C] ; loop counter
+	ld [$CF92],a
+	inc a
+	ld [$FF8C],a
+	call LoadMonData
+	pop hl
+	push hl
+	ld a,[$CC35]
+	and a ; is the player swapping pokemon positions?
+	jr z,.skipUnfilledRightArrow\@
+; if the player is swapping pokemon positions
+	dec a
+	ld b,a
+	ld a,[$CF92]
+	cp b ; is the player swapping the current pokemon in the list?
+	jr nz,.skipUnfilledRightArrow\@
+; the player is swapping the current pokemon in the list
+	dec hl
+	dec hl
+	dec hl
+	ld a,$EC ; unfilled right arrow menu cursor
+	ld [hli],a ; place the cursor
+	inc hl
+	inc hl
+.skipUnfilledRightArrow\@
+	ld a,[$D07D] ; menu type
+	cp a,$03
+	jr z,.teachMoveMenu\@
+	cp a,$05
+	jr z,.evolutionStoneMenu\@
+	push hl
+	ld bc,14 ; 14 columns to the right
+	add hl,bc
+	ld de,$CF9C
+	call PrintStatusCondition
+	pop hl
+	push hl
+	ld bc,20 + 1 ; down 1 row and right 1 column
+	ld a,[$FFF6]
+	set 0,a
+	ld [$FFF6],a
+	add hl,bc
+	ld a,$60
+	call Predef ; draw HP bar and prints current / max HP
+	ld a,[$FFF6]
+	res 0,a
+	ld [$FFF6],a
+	call $6EC7 ; color the HP bar (on SGB)
+	pop hl
+	jr .printLevel\@
+.teachMoveMenu\@
+	push hl
+	ld a,$43
+	call Predef ; check if the pokemon can learn the move
+	pop hl
+	ld de,.ableToLearnMoveText\@
+	ld a,c
+	and a
+	jr nz,.placeMoveLearnabilityString\@
+	ld de,.notAbleToLearnMoveText\@
+.placeMoveLearnabilityString\@
+	ld bc,20 + 9 ; down 1 row and right 9 columns
+	push hl
+	add hl,bc
+	call PlaceString
+	pop hl
+.printLevel\@
+	ld bc,10 ; move 10 columns to the right
+	add hl,bc
+	call PrintLevel
+	pop hl
+	pop de
+	inc de
+	ld bc,2 * 20
+	add hl,bc
+	pop bc
+	inc c
+	jp .loop\@
+.ableToLearnMoveText\@
+	db "ABLE@"
+.notAbleToLearnMoveText\@
+	db "NOT ABLE@"
+.evolutionStoneMenu\@
+	push hl
+	ld hl,EvosMovesPointerTable
+	ld b,0
+	ld a,[$CF98] ; pokemon ID
+	dec a
+	add a
+	rl b
+	ld c,a
+	add hl,bc
+	ld de,$CD6D
+	ld a,BANK(EvosMovesPointerTable)
+	ld bc,2
+	call FarCopyData
+	ld hl,$CD6D
+	ld a,[hli]
+	ld h,[hl]
+	ld l,a
+	ld de,$CD6D
+	ld a,BANK(EvosMovesPointerTable)
+	ld bc,13
+	call FarCopyData
+	ld hl,$CD6D
+	ld de,.notAbleToEvolveText\@
+; loop through the pokemon's evolution entries
+.checkEvolutionsLoop\@
+	ld a,[hli]
+	and a ; reached terminator?
+	jr z,.placeEvolutionStoneString\@ ; if so, place the "NOT ABLE" string
+	inc hl
+	inc hl
+	cp a,EV_ITEM
+	jr nz,.checkEvolutionsLoop\@
+; if it's a stone evolution entry
+	dec hl
+	dec hl
+	ld b,[hl]
+	ld a,[$D156] ; evolution stone item ID
+	inc hl
+	inc hl
+	inc hl
+	cp b ; does the player's stone match this evolution entry's stone?
+	jr nz,.checkEvolutionsLoop\@
+; if it does match
+	ld de,.ableToEvolveText\@
+.placeEvolutionStoneString\@
+	ld bc,20 + 9 ; down 1 row and right 9 columns
+	pop hl
+	push hl
+	add hl,bc
+	call PlaceString
+	pop hl
+	jr .printLevel\@
+.ableToEvolveText\@
+	db "ABLE@"
+.notAbleToEvolveText\@
+	db "NOT ABLE@"
+.afterDrawingMonEntries\@
+	ld b,$0A
+	call GoPAL_SET
+.printMessage\@
+	ld hl,$D730
+	ld a,[hl]
+	push af
+	push hl
+	set 6,[hl] ; turn off letter printing delay
+	ld a,[$D07D] ; message ID
+	cp a,$F0
+	jr nc,.printItemUseMessage\@
+	add a
+	ld hl,PartyMenuMessagePointers
+	ld b,0
+	ld c,a
+	add hl,bc
+	ld a,[hli]
+	ld h,[hl]
+	ld l,a
+	call PrintText
+.done\@
+	pop hl
+	pop af
+	ld [hl],a
+	ld a,1
+	ld [H_AUTOBGTRANSFERENABLED],a
+	call Delay3
+	jp GBPalNormal
+.printItemUseMessage\@
+	and a,$0F
+	ld hl,PartyMenuItemUseMessagePointers
+	add a
+	ld c,a
+	ld b,0
+	add hl,bc
+	ld a,[hli]
+	ld h,[hl]
+	ld l,a
+	push hl
+	ld a,[$CF06]
+	ld hl,W_PARTYMON1NAME
+	call GetPartyMonName
+	pop hl
+	call PrintText
+	jr .done\@
+
+PartyMenuItemUseMessagePointers: ; 6E61
+	dw AntidoteText
+	dw BurnHealText
+	dw IceHealText
+	dw AwakeningText
+	dw ParlyzHealText
+	dw PotionText
+	dw FullHealText
+	dw ReviveText
+	dw RareCandyText
+
+PartyMenuMessagePointers: ; 6E73
+	dw PartyMenuNormalText
+	dw PartyMenuItemUseText
+	dw PartyMenuBattleText
+	dw PartyMenuUseTMText
+	dw PartyMenuSwapMonText
+	dw PartyMenuItemUseText
+
+PartyMenuNormalText: ; 0x12e7f
+	TX_FAR _PartyMenuNormalText
 	db $50
-; 0x12e7f + 5 bytes
 
-UnnamedText_12e84: ; 0x12e84
-	TX_FAR _UnnamedText_12e84
+PartyMenuItemUseText: ; 0x12e84
+	TX_FAR _PartyMenuItemUseText
 	db $50
-; 0x12e84 + 5 bytes
 
-UnnamedText_12e89: ; 0x12e89
-	TX_FAR _UnnamedText_12e89
+PartyMenuBattleText: ; 0x12e89
+	TX_FAR _PartyMenuBattleText
 	db $50
-; 0x12e89 + 5 bytes
 
-UnnamedText_12e8e: ; 0x12e8e
-	TX_FAR _UnnamedText_12e8e
+PartyMenuUseTMText: ; 0x12e8e
+	TX_FAR _PartyMenuUseTMText
 	db $50
-; 0x12e8e + 5 bytes
 
-UnnamedText_12e93: ; 0x12e93
-	TX_FAR _UnnamedText_12e93
+PartyMenuSwapMonText: ; 0x12e93
+	TX_FAR _PartyMenuSwapMonText
 	db $50
-; 0x12e93 + 5 bytes
 
-UnnamedText_12e98: ; 0x12e98
-	TX_FAR _UnnamedText_12e98
+PotionText: ; 0x12e98
+	TX_FAR _PotionText
 	db $50
-; 0x12e98 + 5 bytes
 
-UnnamedText_12e9d: ; 0x12e9d
-	TX_FAR _UnnamedText_12e9d
+AntidoteText: ; 0x12e9d
+	TX_FAR _AntidoteText
 	db $50
-; 0x12e9d + 5 bytes
 
-UnnamedText_12ea2: ; 0x12ea2
-	TX_FAR _UnnamedText_12ea2
+ParlyzHealText: ; 0x12ea2
+	TX_FAR _ParlyzHealText
 	db $50
-; 0x12ea2 + 5 bytes
 
-UnnamedText_12ea7: ; 0x12ea7
-	TX_FAR _UnnamedText_12ea7
+BurnHealText: ; 0x12ea7
+	TX_FAR _BurnHealText
 	db $50
-; 0x12ea7 + 5 bytes
 
-UnnamedText_12eac: ; 0x12eac
-	TX_FAR _UnnamedText_12eac
+IceHealText: ; 0x12eac
+	TX_FAR _IceHealText
 	db $50
-; 0x12eac + 5 bytes
 
-UnnamedText_12eb1: ; 0x12eb1
-	TX_FAR _UnnamedText_12eb1
+AwakeningText: ; 0x12eb1
+	TX_FAR _AwakeningText
 	db $50
-; 0x12eb1 + 5 bytes
 
-UnnamedText_12eb6: ; 0x12eb6
-	TX_FAR _UnnamedText_12eb6
+FullHealText: ; 0x12eb6
+	TX_FAR _FullHealText
 	db $50
-; 0x12eb6 + 5 bytes
 
-UnnamedText_12ebb: ; 0x12ebb
-	TX_FAR _UnnamedText_12ebb
+ReviveText: ; 0x12ebb
+	TX_FAR _ReviveText
 	db $50
-; 0x12ebb + 5 bytes
 
-INCBIN "baserom.gbc",$12ec0,$1e
+RareCandyText: ; 0x12ec0
+	TX_FAR _RareCandyText
+	db $0B
+	db $06
+	db $50
+
+INCBIN "baserom.gbc",$12ec7,$6ede - $6ec7
 
 RedPicFront:
 	INCBIN "pic/trainer/red.pic"
@@ -15742,7 +16490,20 @@ UnnamedText_132e8: ; 0x132e8
 	db $50
 ; 0x132e8 + 5 bytes
 
-INCBIN "baserom.gbc",$132ed,$1342a - $132ed
+; writes a blank tile to all possible menu cursor positions on the party menu
+ErasePartyMenuCursors: ; 72ED
+	FuncCoord 0,1
+	ld hl,Coord
+	ld bc,2 * 20 ; menu cursor positions are 2 rows apart
+	ld a,6 ; 6 menu cursor positions
+.loop\@
+	ld [hl],$7f
+	add hl,bc
+	dec a
+	jr nz,.loop\@
+	ret
+
+INCBIN "baserom.gbc",$132fc,$1342a - $132fc
 
 UnnamedText_1342a: ; 0x1342a
 	TX_FAR _UnnamedText_1342a
@@ -72181,31 +72942,31 @@ _UnnamedText_1ca14: ; 0x89dad
 	db "you want? ", $57
 ; 0x89dad + 27 bytes
 
-_UnnamedText_12e7f: ; 0x89dc8
+_PartyMenuNormalText: ; 0x89dc8
 	db $0, "Choose a #MON.", $57
 ; 0x89dc8 + 16 bytes
 
-_UnnamedText_12e84: ; 0x89dd8
+_PartyMenuItemUseText: ; 0x89dd8
 	db $0, "Use item on which", $4f
 	db "#MON?", $57
 ; 0x89dd8 + 25 bytes
 
-_UnnamedText_12e89: ; 0x89df1
+_PartyMenuBattleText: ; 0x89df1
 	db $0, "Bring out which", $4f
 	db "#MON?", $57
 ; 0x89df1 + 23 bytes
 
-_UnnamedText_12e8e: ; 0x89e08
+_PartyMenuUseTMText: ; 0x89e08
 	db $0, "Use TM on which", $4f
 	db "#MON?", $57
 ; 0x89e08 + 23 bytes
 
-_UnnamedText_12e93: ; 0x89e1f
+_PartyMenuSwapMonText: ; 0x89e1f
 	db $0, "Move #MON", $4f
 	db "where?", $57
 ; 0x89e1f + 18 bytes
 
-_UnnamedText_12e98: ; 0x89e31
+_PotionText: ; 0x89e31
 	TX_RAM $cd6d
 	db $0, $4f
 	db "recovered by @"
@@ -72213,49 +72974,49 @@ _UnnamedText_12e98: ; 0x89e31
 	db $0, "!", $57
 ; 0x89e31 + 26 bytes
 
-_UnnamedText_12e9d: ; 0x89e4b
+_AntidoteText: ; 0x89e4b
 	TX_RAM $cd6d
 	db $0, " was", $4f
 	db "cured of poison!", $57
 ; 0x89e4b + 26 bytes
 
-_UnnamedText_12ea2: ; 0x89e65
+_ParlyzHealText: ; 0x89e65
 	TX_RAM $cd6d
 	db $0, "'s", $4f
 	db "rid of paralysis!", $57
 ; 0x89e65 + 24 bytes
 
-_UnnamedText_12ea7: ; 0x89e7d
+_BurnHealText: ; 0x89e7d
 	TX_RAM $cd6d
 	db $0, "'s", $4f
 	db "burn was healed!", $57
 ; 0x89e7d + 23 bytes
 
-_UnnamedText_12eac: ; 0x89e94
+_IceHealText: ; 0x89e94
 	TX_RAM $cd6d
 	db $0, " was", $4f
 	db "defrosted!", $57
 ; 0x89e94 + 20 bytes
 
-_UnnamedText_12eb1: ; 0x89ea8
+_AwakeningText: ; 0x89ea8
 	TX_RAM $cd6d
 	db $0, $4f
 	db "woke up!", $57
 ; 0x89ea8 + 14 bytes
 
-_UnnamedText_12eb6: ; 0x89eb6
+_FullHealText: ; 0x89eb6
 	TX_RAM $cd6d
 	db $0, "'s", $4f
 	db "health returned!", $57
 ; 0x89eb6 + 23 bytes
 
-_UnnamedText_12ebb: ; 0x89ecd
+_ReviveText: ; 0x89ecd
 	TX_RAM $cd6d
 	db $0, $4f
 	db "is revitalized!", $57
 ; 0x89ecd + 21 bytes
 
-LevelUpText: ; 0x89ee2
+_RareCandyText: ; 0x89ee2
 	TX_RAM $cd6d
 	db $0, " grew", $4f
 	db "to level @"
