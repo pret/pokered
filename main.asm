@@ -5681,6 +5681,8 @@ DisplayStartMenu: ; 2ACD
 	ld [$d11a],a
 	ld a,$8f ; Start menu sound
 	call $23b1
+
+RedisplayStartMenu: ; 2ADF
 	ld b,BANK(DrawStartMenu)
 	ld hl,DrawStartMenu
 	call Bankswitch
@@ -5743,17 +5745,17 @@ DisplayStartMenu: ; 2ACD
 	inc a ; adjust position to account for missing pokedex menu item
 .displayMenuItem\@
 	cp a,0
-	jp z,$7095 ; POKEDEX
+	jp z,$7095              ; POKEDEX
 	cp a,1
-	jp z,$70a9 ; POKEMON
+	jp z,DisplayPokemonMenu ; POKEMON
 	cp a,2
-	jp z,$7302 ; ITEM
+	jp z,$7302              ; ITEM
 	cp a,3
-	jp z,$7460 ; Trainer Info
+	jp z,$7460              ; Trainer Info
 	cp a,4
-	jp z,$75e3 ; SAVE / RESET
+	jp z,$75e3              ; SAVE / RESET
 	cp a,5
-	jp z,$75f6 ; OPTION
+	jp z,$75f6              ; OPTION
 ; EXIT falls through to here
 .closeMenu\@
 	call GetJoypadState
@@ -6971,8 +6973,7 @@ Multiply: ; 38AC
 ; INPUT
 ; FF95-FF98 = dividend
 ; FF99 = divisor
-; b = number of signficant bytes in the dividend (starting from FF95)
-; all bytes considered "not signifcant" will be treated as 0
+; b = number of bytes in the dividend (starting from FF95)
 ; OUTPUT
 ; FF95-FF98 = quotient
 ; FF99 = remainder
@@ -15268,7 +15269,7 @@ ItemUseBall: ; 03:5687
 	ld a,8
 .next7\@	;$574d
 	ld [H_DIVISOR],a
-	ld b,4		;number of significant bytes
+	ld b,4		; number of bytes in dividend
 	call Divide
 	ld hl,W_ENEMYMONCURHP
 	ld a,[hli]
@@ -16452,43 +16453,290 @@ ShrinkPic1:
 ShrinkPic2:
 	INCBIN "pic/trainer/shrink2.pic"
 
-INCBIN "baserom.gbc",$13074,$13228 - $13074
+INCBIN "baserom.gbc",$13074,$130A9 - $13074
 
-UnnamedText_13228: ; 0x13228
-	TX_FAR _UnnamedText_13228
+DisplayPokemonMenu: ; 70A9
+	ld a,[W_NUMINPARTY]
+	and a
+	jp z,RedisplayStartMenu
+	xor a
+	ld [$cc35],a
+	ld [$d07d],a
+	ld [$cfcb],a
+	call DisplayPartyMenu
+	jr .checkIfPokemonChosen\@
+.loop\@
+	xor a
+	ld [$cc35],a
+	ld [$d07d],a
+	call GoBackToPartyMenu
+.checkIfPokemonChosen\@
+	jr nc,.chosePokemon\@
+.exitMenu\@
+	call GBPalWhiteOutWithDelay3
+	call $3dbe
+	call LoadGBPal
+	jp RedisplayStartMenu
+.chosePokemon\@
+	call $3719 ; save screen
+	ld a,$04
+	ld [$d125],a
+	call DisplayTextBoxID ; display pokemon menu options
+	ld hl,$cd3d
+	ld bc,$020c ; max menu item ID, top menu item Y
+	ld e,5
+.adjustMenuVariablesLoop\@
+	dec e
+	jr z,.storeMenuVariables\@
+	ld a,[hli]
+	and a
+	jr z,.storeMenuVariables\@
+	inc b
+	dec c
+	dec c
+	jr .adjustMenuVariablesLoop\@
+.storeMenuVariables\@
+	ld hl,W_TOPMENUITEMY
+	ld a,c
+	ld [hli],a ; top menu item Y
+	ld a,[$fff7]
+	ld [hli],a ; top menu item X
+	xor a
+	ld [hli],a ; current menu item ID
+	inc hl
+	ld a,b
+	ld [hli],a ; max menu item ID
+	ld a,%00000011 ; A button, B button
+	ld [hli],a ; menu watched keys
+	xor a
+	ld [hl],a
+	call HandleMenuInput
+	push af
+	call $3725 ; restore saved screen
+	pop af
+	bit 1,a ; was the B button pressed?
+	jp nz,.loop\@
+; if the B button wasn't pressed
+	ld a,[W_MAXMENUITEMID]
+	ld b,a
+	ld a,[W_CURMENUITEMID] ; menu selection
+	cp b
+	jp z,.exitMenu\@ ; if the player chose Cancel
+	dec b
+	cp b
+	jr z,.choseSwitch\@
+	dec b
+	cp b
+	jp z,.choseStats\@
+	ld c,a
+	ld b,0
+	ld hl,$cd3d
+	add hl,bc
+	jp .choseOutOfBattleMove\@
+.choseSwitch\@
+	ld a,[W_NUMINPARTY]
+	cp a,2 ; is there more than one pokemon in the party?
+	jp c,DisplayPokemonMenu ; if not, no switching
+	call $7653
+	ld a,$04 ; swap pokemon positions menu
+	ld [$d07d],a
+	call GoBackToPartyMenu
+	jp .checkIfPokemonChosen\@
+.choseStats\@
+	call CleanLCD_OAM
+	xor a
+	ld [$cc49],a
+	ld a,$36
+	call Predef
+	ld a,$37
+	call Predef
+	call $3071
+	jp DisplayPokemonMenu
+.choseOutOfBattleMove\@
+	push hl
+	ld a,[$cf92]
+	ld hl,W_PARTYMON1NAME
+	call GetPartyMonName
+	pop hl
+	ld a,[hl]
+	dec a
+	add a
+	ld b,0
+	ld c,a
+	ld hl,.outOfBattleMovePointers\@
+	add hl,bc
+	ld a,[hli]
+	ld h,[hl]
+	ld l,a
+	ld a,[W_OBTAINEDBADGES] ; badges obtained
+	jp [hl]
+.outOfBattleMovePointers\@
+	dw .cut\@
+	dw .fly\@
+	dw .surf\@
+	dw .surf\@
+	dw .strength\@
+	dw .flash\@
+	dw .dig\@
+	dw .teleport\@
+	dw .softboiled\@
+.fly\@
+	bit 2,a ; does the player have the Thunder Badge?
+	jp z,.newBadgeRequired\@
+	call CheckIfInOutsideMap
+	jr z,.canFly\@
+	ld a,[$cf92]
+	ld hl,W_PARTYMON1NAME
+	call GetPartyMonName
+	ld hl,.cannotFlyHereText\@
+	call PrintText
+	jp .loop\@
+.canFly\@
+	call $30a9 ; allow player to pick fly destination on map
+	ld a,[$d732]
+	bit 3,a ; did the player decide to fly?
+	jp nz,.goBackToMap\@
+	call LoadFontTilePatterns
+	ld hl,$d72e
+	set 1,[hl]
+	jp DisplayPokemonMenu
+.cut\@
+	bit 1,a ; does the player have the Cascade Badge?
+	jp z,.newBadgeRequired\@
+	ld a,$3c
+	call Predef
+	ld a,[$cd6a]
+	and a
+	jp z,.loop\@
+	jp CloseTextDisplay
+.surf\@
+	bit 4,a ; does the player have the Soul Badge?
+	jp z,.newBadgeRequired\@
+	ld b,$03
+	ld hl,$4dc0
+	call Bankswitch
+	ld hl,$d728
+	bit 1,[hl]
+	res 1,[hl]
+	jp z,.loop\@
+	ld a,$07
+	ld [$cf91],a
+	ld [$d152],a
+	call $30bc
+	ld a,[$cd6a]
+	and a
+	jp z,.loop\@
+	call GBPalWhiteOutWithDelay3
+	jp .goBackToMap\@
+.strength\@
+	bit 3,a ; does the player have the Rainbow Badge?
+	jp z,.newBadgeRequired\@
+	ld a,$5b
+	call Predef
+	call GBPalWhiteOutWithDelay3
+	jp .goBackToMap\@
+.flash\@
+	bit 0,a ; does the player have the Boulder Badge?
+	jp z,.newBadgeRequired\@
+	xor a
+	ld [$d35d],a
+	ld hl,.flashLightsAreaText\@
+	call PrintText
+	call GBPalWhiteOutWithDelay3
+	jp .goBackToMap\@
+.flashLightsAreaText\@
+	TX_FAR _FlashLightsAreaText
 	db $50
-; 0x13228 + 5 bytes
-
-INCBIN "baserom.gbc",$1322d,$1327b - $1322d
-
-UnnamedText_1327b: ; 0x1327b
-	TX_FAR _UnnamedText_1327b
+.dig\@
+	ld a,$1d
+	ld [$cf91],a
+	ld [$d152],a
+	call $30bc
+	ld a,[$cd6a]
+	and a
+	jp z,.loop\@
+	call GBPalWhiteOutWithDelay3
+	jp .goBackToMap\@
+.teleport\@
+	call CheckIfInOutsideMap
+	jr z,.canTeleport\@
+	ld a,[$cf92]
+	ld hl,W_PARTYMON1NAME
+	call GetPartyMonName
+	ld hl,.cannotUseTeleportNowText\@
+	call PrintText
+	jp .loop\@
+.canTeleport\@
+	ld hl,.warpToLastPokemonCenterText\@
+	call PrintText
+	ld hl,$d732
+	set 3,[hl]
+	set 6,[hl]
+	ld hl,$d72e
+	set 1,[hl]
+	res 4,[hl]
+	ld c,60
+	call DelayFrames
+	call GBPalWhiteOutWithDelay3 ; zero all three palettes and wait 3 V-blanks
+	jp .goBackToMap\@
+.warpToLastPokemonCenterText\@
+	TX_FAR _WarpToLastPokemonCenterText
 	db $50
-; 0x1327b + 5 bytes
-
-UnnamedText_13280: ; 0x13280
-	TX_FAR _UnnamedText_13280
+.cannotUseTeleportNowText\@
+	TX_FAR _CannotUseTeleportNowText
 	db $50
-; 0x13280 + 5 bytes
-
-UnnamedText_13285: ; 0x13285
-	TX_FAR _UnnamedText_13285
+.cannotFlyHereText\@
+	TX_FAR _CannotFlyHereText
 	db $50
-; 0x13285 + 5 bytes
-
-INCBIN "baserom.gbc",$1328a,$132d4 - $1328a
-
-UnnamedText_132d4: ; 0x132d4
-	TX_FAR _UnnamedText_132d4
+.softboiled\@
+	ld hl,W_PARTYMON1_MAXHP
+	ld a,[$cf92]
+	ld bc,44
+	call AddNTimes
+	ld a,[hli]
+	ld [H_DIVIDEND],a
+	ld a,[hl]
+	ld [H_DIVIDEND + 1],a
+	ld a,5
+	ld [H_DIVISOR],a
+	ld b,2 ; number of bytes
+	call Divide
+	ld bc,-33
+	add hl,bc
+	ld a,[hld]
+	ld b,a
+	ld a,[H_QUOTIENT + 3]
+	sub b
+	ld b,[hl]
+	ld a,[H_QUOTIENT + 2]
+	sbc b
+	jp nc,.notHealthyEnough\@
+	ld a,[$cc2b]
+	push af
+	ld a,$14
+	ld [$cf91],a
+	ld [$d152],a
+	call $30bc
+	pop af
+	ld [$cc2b],a
+	jp .loop\@
+.notHealthyEnough\@ ; if current HP is less than 1/5 of max HP
+	ld hl,.notHealthyEnoughText\@
+	call PrintText
+	jp .loop\@
+.notHealthyEnoughText\@
+	TX_FAR _NotHealthyEnoughText
 	db $50
-; 0x132d4 + 5 bytes
-
-INCBIN "baserom.gbc",$132d9,$132e8 - $132d9
-
-UnnamedText_132e8: ; 0x132e8
-	TX_FAR _UnnamedText_132e8
+.goBackToMap\@
+	call $3dbe
+	jp CloseTextDisplay
+.newBadgeRequired\@
+	ld hl,.newBadgeRequiredText\@
+	call PrintText
+	jp .loop\@
+.newBadgeRequiredText\@
+	TX_FAR _NewBadgeRequiredText
 	db $50
-; 0x132e8 + 5 bytes
 
 ; writes a blank tile to all possible menu cursor positions on the party menu
 ErasePartyMenuCursors: ; 72ED
@@ -36483,7 +36731,7 @@ CalcHitChance: ; 6624
 	call Multiply
 	ld a,[hl]
 	ld [H_DIVISOR],a ; set divisor to the the denominator of the ratio (the dividend is the product of the previous multiplication)
-	ld b,$04 ; number of significant bytes in the dividend
+	ld b,$04 ; number of bytes in the dividend
 	call Divide
 	ld a,[H_QUOTIENT + 3]
 	ld b,a
@@ -82418,34 +82666,34 @@ _UnnamedText_cdff: ; 0xa4088
 	db "Forget SURFing!", $58
 ; 0xa4088 + 33 bytes
 
-_UnnamedText_13228: ; 0xa40a9
+_FlashLightsAreaText: ; 0xa40a9
 	db $0, "A blinding FLASH", $4f
 	db "lights the area!", $58
 ; 0xa40a9 + 35 bytes
 
-_UnnamedText_1327b: ; 0xa40cc
+_WarpToLastPokemonCenterText: ; 0xa40cc
 	db $0, "Warp to the last", $4f
 	db "#MON CENTER.", $57
 ; 0xa40cc + 31 bytes
 
-_UnnamedText_13280: ; 0xa40eb
+_CannotUseTeleportNowText: ; 0xa40eb
 	TX_RAM $cd6d
 	db $0, " can't", $4f
 	db "use TELEPORT now.", $58
 ; 0xa40eb + 28 bytes
 
-_UnnamedText_13285: ; 0xa4107
+_CannotFlyHereText: ; 0xa4107
 	TX_RAM $cd6d
 	db $0, " can't", $4f
 	db "FLY here.", $58
 ; 0xa4107 + 20 bytes
 
-_UnnamedText_132d4: ; 0xa411b
+_NotHealthyEnoughText: ; 0xa411b
 	db $0, "Not healthy", $4f
 	db "enough.", $58
 ; 0xa411b + 21 bytes
 
-_UnnamedText_132e8: ; 0xa4130
+_NewBadgeRequiredText: ; 0xa4130
 	db $0, "No! A new BADGE", $4f
 	db "is required.", $58
 ; 0xa4130 + 30 bytes
