@@ -5751,7 +5751,7 @@ RedisplayStartMenu: ; 2ADF
 	cp a,2
 	jp z,DisplayItemMenu    ; ITEM
 	cp a,3
-	jp z,$7460              ; Trainer Info
+	jp z,DisplayTrainerInfo ; Trainer Info
 	cp a,4
 	jp z,$75e3              ; SAVE / RESET
 	cp a,5
@@ -17159,7 +17159,208 @@ UsableItems_CloseMenu: ; 7459
 	db SUPER_ROD
 	db $ff
 
-INCBIN "baserom.gbc",$13460,$13773 - $13460
+DisplayTrainerInfo: ; 7460
+	call GBPalWhiteOut
+	call ClearScreen
+	call $2429 ; move sprites
+	ld a,[$ffd7]
+	push af
+	xor a
+	ld [$ffd7],a
+	call DrawTrainerInfo
+	ld a,$2e
+	call Predef ; draw badges
+	ld b,$0d
+	call GoPAL_SET
+	call GBPalNormal
+	call $3865 ; wait for button press
+	call GBPalWhiteOut
+	call LoadFontTilePatterns
+	call $3701 ; restore saved screen
+	call GoPAL_SET_CF1C
+	call ReloadMapData
+	call LoadGBPal
+	pop af
+	ld [$ffd7],a
+	jp RedisplayStartMenu
+
+; loads tile patterns and draws everything except for gym leader faces / badges
+DrawTrainerInfo: ; 749A
+	ld de,RedPicFront
+	ld bc,$0401
+	ld a,$3b
+	call Predef
+	call DisableLCD
+	FuncCoord 0,2
+	ld hl,Coord
+	ld a,$7f ; blank tile ID
+	call TrainerInfo_DrawVerticalLine
+	FuncCoord 1,2
+	ld hl,Coord
+	call TrainerInfo_DrawVerticalLine
+	ld hl,$9070
+	ld de,$9000
+	ld bc,$01c0
+	call CopyData
+	ld hl,$7b98 ; trainer info text box tile patterns
+	ld de,$9770
+	ld bc,$0080
+	push bc
+	call TrainerInfo_FarCopyData
+	ld hl,$7c28
+	ld de,$9600
+	ld bc,$0170
+	call TrainerInfo_FarCopyData
+	pop bc
+	ld hl,$7d98 ; badge number tile patterns
+	ld de,$8d80
+	call TrainerInfo_FarCopyData
+	ld hl,$6a9e ; gym leader face and badge tile patterns
+	ld de,$9200
+	ld bc,$0400
+	ld a,$03
+	call FarCopyData2
+	ld hl,$6288
+	ld de,$00d0
+	add hl,de ; hl = colon tile pattern
+	ld de,$8d60
+	ld bc,$0010
+	ld a,$04
+	push bc
+	call FarCopyData2
+	pop bc
+	ld hl,$7c18 ; background tile pattern
+	ld de,$8d70
+	call TrainerInfo_FarCopyData
+	call EnableLCD
+	ld hl,$cd3d
+	ld a,18 + 1
+	ld [hli],a
+	dec a
+	ld [hli],a
+	ld [hl],1
+	FuncCoord 0,0
+	ld hl,Coord
+	call TrainerInfo_DrawTextBox
+	ld hl,$cd3d
+	ld a,16 + 1
+	ld [hli],a
+	dec a
+	ld [hli],a
+	ld [hl],3
+	FuncCoord 1,10
+	ld hl,Coord
+	call TrainerInfo_DrawTextBox
+	FuncCoord 0,10
+	ld hl,Coord
+	ld a,$d7
+	call TrainerInfo_DrawVerticalLine
+	FuncCoord 19,10
+	ld hl,Coord
+	call TrainerInfo_DrawVerticalLine
+	FuncCoord 6,9
+	ld hl,Coord
+	ld de,TrainerInfo_BadgesText
+	call PlaceString
+	FuncCoord 2,2
+	ld hl,Coord
+	ld de,TrainerInfo_NameMoneyTimeText
+	call PlaceString
+	FuncCoord 7,2
+	ld hl,Coord
+	ld de,W_PLAYERNAME
+	call PlaceString
+	FuncCoord 8,4
+	ld hl,Coord
+	ld de,W_PLAYERMONEY3
+	ld c,$e3
+	call PrintBCDNumber
+	FuncCoord 9,6
+	ld hl,Coord
+	ld de,$da41 ; hours
+	ld bc,$4103
+	call PrintNumber
+	ld [hl],$d6 ; colon tile ID
+	inc hl
+	ld de,$da43 ; minutes
+	ld bc,$8102
+	jp PrintNumber
+
+TrainerInfo_FarCopyData: ; 757F
+	ld a,$0b
+	jp FarCopyData2
+
+TrainerInfo_NameMoneyTimeText: ; 7584
+	db "NAME/",$4E
+	db "MONEY/",$4E
+	db "TIME/@"
+
+; $76 is a circle tile
+TrainerInfo_BadgesText: ; 7597
+	db $76,"BADGES",$76,"@"
+
+; draws a text box on the trainer info screen
+; height is always 6
+; INPUT:
+; hl = destination address
+; [$cd3d] = width + 1
+; [$cd3e] = width
+; [$cd3f] = distance from the end of a text box row to the start of the next
+TrainerInfo_DrawTextBox: ; 75A0
+	ld a,$79 ; upper left corner tile ID
+	ld de,$7a7b ; top edge and upper right corner tile ID's
+	call TrainerInfo_DrawHorizontalEdge ; draw top edge
+	call TrainerInfo_NextTextBoxRow
+	ld a,[$cd3d] ; width of the text box plus one
+	ld e,a
+	ld d,0
+	ld c,6 ; height of the text box
+.loop\@
+	ld [hl],$7c ; left edge tile ID
+	add hl,de
+	ld [hl],$78 ; right edge tile ID
+	call TrainerInfo_NextTextBoxRow
+	dec c
+	jr nz,.loop\@
+	ld a,$7d ; lower left corner tile ID
+	ld de,$777e ; bottom edge and lower right corner tile ID's
+
+TrainerInfo_DrawHorizontalEdge: ; 75C3
+	ld [hli],a ; place left corner tile
+	ld a,[$cd3e] ; width of the text box
+	ld c,a
+	ld a,d
+.loop\@
+	ld [hli],a ; place edge tile
+	dec c
+	jr nz,.loop\@
+	ld a,e
+	ld [hl],a ; place right corner tile
+	ret
+
+TrainerInfo_NextTextBoxRow: ; 75D0
+	ld a,[$cd3f] ; distance to the start of the next row
+.loop\@
+	inc hl
+	dec a
+	jr nz,.loop\@
+	ret
+
+; draws a vertical line
+; INPUT:
+; hl = address of top tile in the line
+; a = tile ID
+TrainerInfo_DrawVerticalLine: ; 75D8
+	ld de,20
+	ld c,8
+.loop\@
+	ld [hl],a
+	add hl,de
+	dec c
+	jr nz,.loop\@
+	ret
+
+INCBIN "baserom.gbc",$135e3,$13773 - $135e3
 
 TechnicalMachines: ; 0x13773
 	db MEGA_PUNCH
