@@ -2777,7 +2777,7 @@ LoadMapData: ; 1241
 	ld [$d119],a
 	ld [$d11a],a
 	ld [$d3a8],a
-	call $36a0 ; transfer tile pattern data for text windows into VRAM
+	call LoadTextBoxTilePatterns
 	call LoadMapHeader
 	ld b,$05
 	ld hl,$785b
@@ -5736,7 +5736,7 @@ RedisplayStartMenu: ; 2ADF
 	ld [$cc2d],a ; save current menu item ID
 	ld a,b
 	and a,%00001010 ; was the Start button or B button pressed?
-	jp nz,.closeMenu\@
+	jp nz,CloseStartMenu
 	call $36f4 ; copy background from $C3A0 to $CD81
 	ld a,[$d74b]
 	bit 5,a ; does the player have the pokedex?
@@ -5749,20 +5749,21 @@ RedisplayStartMenu: ; 2ADF
 	cp a,1
 	jp z,DisplayPokemonMenu ; POKEMON
 	cp a,2
-	jp z,$7302              ; ITEM
+	jp z,DisplayItemMenu    ; ITEM
 	cp a,3
 	jp z,$7460              ; Trainer Info
 	cp a,4
 	jp z,$75e3              ; SAVE / RESET
 	cp a,5
 	jp z,$75f6              ; OPTION
+
 ; EXIT falls through to here
-.closeMenu\@
+CloseStartMenu: ; 2B70
 	call GetJoypadState
 	ld a,[$ffb3]
 	bit 0,a ; was A button newly pressed?
-	jr nz,.closeMenu\@
-	call $36a0 ; transfer tile pattern data for text windows into VRAM
+	jr nz,CloseStartMenu
+	call LoadTextBoxTilePatterns
 	jp CloseTextDisplay
 
 ; function to count how many bits are set in a string of bytes
@@ -6328,7 +6329,7 @@ PrintListMenuEntries: ; 2E5A
 .printItemQuantity\@
 	ld a,[$d11e]
 	ld [$cf91],a
-	call $30d9 ; check if item is unsellable
+	call IsKeyItem ; check if item is unsellable
 	ld a,[$d124]
 	and a ; is the item unsellable?
 	jr nz,.skipPrintingItemQuantity\@ ; if so, don't print the quantity
@@ -6528,7 +6529,103 @@ GetMoveName: ; 3058
 	pop hl
 	ret
 
-INCBIN "baserom.gbc",$3071,$30E8 - $3071
+; reloads text box tile patterns, current map view, and tileset tile patterns
+ReloadMapData: ; 3071
+	ld a,[$ffb8]
+	push af
+	ld a,[W_CURMAP]
+	call SwitchToMapRomBank
+	call DisableLCD
+	call LoadTextBoxTilePatterns
+	call LoadCurrentMapView
+	call LoadTilesetTilePatternData
+	call EnableLCD
+	pop af
+	ld [$ffb8],a
+	ld [$2000],a
+	ret
+
+; reloads tileset tile patterns
+ReloadTilesetTilePatterns: ; 3090
+	ld a,[$ffb8]
+	push af
+	ld a,[W_CURMAP]
+	call SwitchToMapRomBank
+	call DisableLCD
+	call LoadTilesetTilePatternData
+	call EnableLCD
+	pop af
+	ld [$ffb8],a
+	ld [$2000],a
+	ret
+
+; shows the town map and lets the player choose a destination to fly to
+ChooseFlyDestination: ; 30A9
+	ld hl,$d72e
+	res 4,[hl]
+	ld b,$1c
+	ld hl,$4f90
+	jp Bankswitch
+
+; causes the text box to close waithout waiting for a button press after displaying text
+DisableWaitingAfterTextDisplay: ; 30B6
+	ld a,$01
+	ld [$cc3c],a
+	ret
+
+; uses an item
+; UseItem is used with dummy items to perform certain other functions as well
+; INPUT:
+; [$cf91] = item ID
+; OUTPUT:
+; [$cd6a] = success
+; 00: unsucessful
+; 01: successful
+; 02: not able to be used right now, no extra menu displayed (only certain items use this)
+UseItem: ; 30BC
+	ld b,BANK(UseItem_)
+	ld hl,UseItem_
+	jp Bankswitch
+
+; confirms the item toss and then tosses the item
+; INPUT:
+; hl = address of inventory (either W_NUMBAGITEMS or W_NUMBOXITEMS)
+; [$cf91] = item ID
+; [$cf92] = index of item within inventory
+; [$cf96] = quantity to toss
+; OUTPUT:
+; clears carry flag if the item is tossed, sets carry flag if not
+TossItem: ; 30C4
+	ld a,[$ffb8]
+	push af
+	ld a,BANK(TossItem_)
+	ld [$ffb8],a
+	ld [$2000],a
+	call TossItem_
+	pop de
+	ld a,d
+	ld [$ffb8],a
+	ld [$2000],a
+	ret
+
+; checks if an item is a key item
+; INPUT:
+; [$cf91] = item ID
+; OUTPUT:
+; [$d124] = result
+; 00: item is not key item
+; 01: item is key item
+IsKeyItem: ; 30D9
+	push hl
+	push de
+	push bc
+	ld b,BANK(IsKeyItem_)
+	ld hl,IsKeyItem_
+	call Bankswitch
+	pop bc
+	pop de
+	pop hl
+	ret
 
 ; function to draw various text boxes
 ; INPUT:
@@ -8918,7 +9015,7 @@ DisplayPokemartDialogue_: ; 6C20
 	call DisplayListMenuID
 	jp c,.returnToMainPokemartMenu\@ ; if the player closed the menu
 .confirmItemSale\@ ; if the player is trying to sell a specific item
-	call $30d9 ; check if item is unsellable
+	call IsKeyItem ; check if item is unsellable
 	ld a,[$d124]
 	and a
 	jr nz,.unsellableItem\@
@@ -15056,7 +15153,7 @@ CaveMons:
 
 ENDC
 
-GetItemUse: ; $D5C7
+UseItem_: ; $D5C7
 	ld a,1
 	ld [$cd6a],a
 	ld a,[$cf91]	;contains item_ID
@@ -15762,24 +15859,130 @@ UnnamedText_e601: ; 0xe601
 	db $50
 ; 0xe601 + 5 bytes
 
-INCBIN "baserom.gbc",$e606,$e755 - $e606
+INCBIN "baserom.gbc",$e606,$e6f1 - $e606
 
-UnnamedText_e755: ; 0xe755
-	TX_FAR _UnnamedText_e755
+; confirms the item toss and then tosses the item
+; INPUT:
+; hl = address of inventory (either W_NUMBAGITEMS or W_NUMBOXITEMS)
+; [$cf91] = item ID
+; [$cf92] = index of item within inventory
+; [$cf96] = quantity to toss
+; OUTPUT:
+; clears carry flag if the item is tossed, sets carry flag if not
+TossItem_: ; 66F1
+	push hl
+	ld a,[$cf91]
+	call IsItemHM
+	pop hl
+	jr c,.tooImportantToToss\@
+	push hl
+	call IsKeyItem_
+	ld a,[$d124]
+	pop hl
+	and a
+	jr nz,.tooImportantToToss\@
+	push hl
+	ld a,[$cf91]
+	ld [$d11e],a
+	call GetItemName
+	call $3826 ; copy name to $cf4b
+	ld hl,IsItOKToTossItemText
+	call PrintText
+	FuncCoord 14,7
+	ld hl,Coord
+	ld bc,$080f
+	ld a,$14
+	ld [$d125],a
+	call DisplayTextBoxID ; yes/no menu
+	ld a,[$d12e]
+	cp a,2
+	pop hl
+	scf
+	ret z
+; if the player chose Yes
+	push hl
+	ld a,[$cf92]
+	call RemoveItemFromInventory
+	ld a,[$cf91]
+	ld [$d11e],a
+	call GetItemName
+	call $3826 ; copy name to $cf4b
+	ld hl,ThrewAwayItemText
+	call PrintText
+	pop hl
+	and a
+	ret
+.tooImportantToToss\@
+	push hl
+	ld hl,TooImportantToTossText
+	call PrintText
+	pop hl
+	scf
+	ret
+
+ThrewAwayItemText: ; 0xe755
+	TX_FAR _ThrewAwayItemText
 	db $50
-; 0xe755 + 5 bytes
 
-UnnamedText_e75a: ; 0xe75a
-	TX_FAR _UnnamedText_e75a
+IsItOKToTossItemText: ; 0xe75a
+	TX_FAR _IsItOKToTossItemText
 	db $50
-; 0xe75a + 5 bytes
 
-UnnamedText_e75f: ; 0xe75f
-	TX_FAR _UnnamedText_e75f
+TooImportantToTossText: ; 0xe75f
+	TX_FAR _TooImportantToTossText
 	db $50
-; 0xe75f + 5 bytes
 
-INCBIN "baserom.gbc",$e764,$e8ea - $e764
+; checks if an item is a key item
+; INPUT:
+; [$cf91] = item ID
+; OUTPUT:
+; [$d124] = result
+; 00: item is not key item
+; 01: item is key item
+IsKeyItem_: ; 6764
+	ld a,$01
+	ld [$d124],a
+	ld a,[$cf91]
+	cp a,HM_01 ; is the item an HM or TM?
+	jr nc,.checkIfItemIsHM\@
+; if the item is not an HM or TM
+	push af
+	ld hl,KeyItemBitfield
+	ld de,$cee9
+	ld bc,15 ; only 11 bytes are actually used
+	call CopyData
+	pop af
+	dec a
+	ld c,a
+	ld hl,$cee9
+	ld b,$02 ; test bit
+	ld a,$10
+	call Predef ; bitfield operation function
+	ld a,c
+	and a
+	ret nz
+.checkIfItemIsHM\@
+	ld a,[$cf91]
+	call IsItemHM
+	ret c
+	xor a
+	ld [$d124],a
+	ret
+
+KeyItemBitfield: ; 6799
+	db %11110000
+	db %00000001
+	db %11110000
+	db %01001111
+	db %00000000
+	db %10011111
+	db %00000000
+	db %11000000
+	db %11110000
+	db %00111011
+	db %00000000
+
+INCBIN "baserom.gbc",$e7a4,$68ea - $67a4
 
 ; 68EA 0xe8ea
 ReadSuperRodData:
@@ -16550,7 +16753,7 @@ DisplayPokemonMenu: ; 70A9
 	call Predef
 	ld a,$37
 	call Predef
-	call $3071
+	call ReloadMapData
 	jp DisplayPokemonMenu
 .choseOutOfBattleMove\@
 	push hl
@@ -16592,7 +16795,7 @@ DisplayPokemonMenu: ; 70A9
 	call PrintText
 	jp .loop\@
 .canFly\@
-	call $30a9 ; allow player to pick fly destination on map
+	call ChooseFlyDestination
 	ld a,[$d732]
 	bit 3,a ; did the player decide to fly?
 	jp nz,.goBackToMap\@
@@ -16619,10 +16822,10 @@ DisplayPokemonMenu: ; 70A9
 	bit 1,[hl]
 	res 1,[hl]
 	jp z,.loop\@
-	ld a,$07
+	ld a,SURFBOARD
 	ld [$cf91],a
 	ld [$d152],a
-	call $30bc
+	call UseItem
 	ld a,[$cd6a]
 	and a
 	jp z,.loop\@
@@ -16648,10 +16851,10 @@ DisplayPokemonMenu: ; 70A9
 	TX_FAR _FlashLightsAreaText
 	db $50
 .dig\@
-	ld a,$1d
+	ld a,ESCAPE_ROPE
 	ld [$cf91],a
 	ld [$d152],a
-	call $30bc
+	call UseItem
 	ld a,[$cd6a]
 	and a
 	jp z,.loop\@
@@ -16713,10 +16916,10 @@ DisplayPokemonMenu: ; 70A9
 	jp nc,.notHealthyEnough\@
 	ld a,[$cc2b]
 	push af
-	ld a,$14
+	ld a,POTION
 	ld [$cf91],a
 	ld [$d152],a
-	call $30bc
+	call UseItem
 	pop af
 	ld [$cc2b],a
 	jp .loop\@
@@ -16751,19 +16954,212 @@ ErasePartyMenuCursors: ; 72ED
 	jr nz,.loop\@
 	ret
 
-INCBIN "baserom.gbc",$132fc,$1342a - $132fc
+ItemMenuLoop: ; 72FC
+	call $3709 ; restore saved screen
+	call GoPAL_SET_CF1C
 
-UnnamedText_1342a: ; 0x1342a
-	TX_FAR _UnnamedText_1342a
+DisplayItemMenu: ; 7302
+	ld a,[W_ISLINKBATTLE]
+	dec a
+	jr nz,.notInLinkBattle\@
+	ld hl,CannotUseItemsHereText
+	call PrintText
+	jr .exitMenu\@
+.notInLinkBattle\@
+	ld bc,W_NUMBAGITEMS
+	ld hl,$cf8b
+	ld a,c
+	ld [hli],a
+	ld [hl],b ; store item bag pointer at $cf8b (for DisplayListMenuID)
+	xor a
+	ld [$cf93],a
+	ld a,ITEMLISTMENU
+	ld [W_LISTMENUID],a
+	ld a,[$cc2c]
+	ld [W_CURMENUITEMID],a
+	call DisplayListMenuID
+	ld a,[W_CURMENUITEMID]
+	ld [$cc2c],a
+	jr nc,.choseItem\@
+.exitMenu\@
+	call $3701 ; restore saved screen
+	call LoadTextBoxTilePatterns
+	call $2429 ; move sprites
+	jp RedisplayStartMenu
+.choseItem\@
+; erase menu cursor (blank each tile in front of an item name)
+	ld a,$7f ; blank space
+	FuncCoord 5,4
+	ld [Coord],a
+	FuncCoord 5,6
+	ld [Coord],a
+	FuncCoord 5,8
+	ld [Coord],a
+	FuncCoord 5,10
+	ld [Coord],a
+	call PlaceUnfilledArrowMenuCursor
+	xor a
+	ld [$cc35],a
+	ld a,[$cf91]
+	cp a,BICYCLE
+	jp z,.useOrTossItem\@
+.notBicycle1\@
+	ld a,$06 ; use/toss menu
+	ld [$d125],a
+	call DisplayTextBoxID
+	ld hl,W_TOPMENUITEMY
+	ld a,11
+	ld [hli],a ; top menu item Y
+	ld a,14
+	ld [hli],a ; top menu item X
+	xor a
+	ld [hli],a ; current menu item ID
+	inc hl
+	inc a ; a = 1
+	ld [hli],a ; max menu item ID
+	ld a,%00000011 ; A button, B button
+	ld [hli],a ; menu watched keys
+	xor a
+	ld [hl],a ; old menu item id
+	call HandleMenuInput
+	call PlaceUnfilledArrowMenuCursor
+	bit 1,a ; was the B button pressed?
+	jr z,.useOrTossItem\@
+	jp ItemMenuLoop
+.useOrTossItem\@ ; if the player made the choice to use or toss the item
+	ld a,[$cf91]
+	ld [$d11e],a
+	call GetItemName
+	call $3826 ; copy name to $cf4b
+	ld a,[$cf91]
+	cp a,BICYCLE
+	jr nz,.notBicycle2\@
+	ld a,[$d732]
+	bit 5,a
+	jr z,.useItem_closeMenu\@
+	ld hl,CannotGetOffHereText
+	call PrintText
+	jp ItemMenuLoop
+.notBicycle2\@
+	ld a,[W_CURMENUITEMID]
+	and a
+	jr nz,.tossItem\@
+.useItem\@
+	ld [$d152],a
+	ld a,[$cf91]
+	cp a,HM_01
+	jr nc,.useItem_partyMenu\@
+	ld hl,UsableItems_CloseMenu
+	ld de,1
+	call IsInArray
+	jr c,.useItem_closeMenu\@
+	ld a,[$cf91]
+	ld hl,UsableItems_PartyMenu
+	ld de,1
+	call IsInArray
+	jr c,.useItem_partyMenu\@
+	call UseItem
+	jp ItemMenuLoop
+.useItem_closeMenu\@
+	xor a
+	ld [$d152],a
+	call UseItem
+	ld a,[$cd6a]
+	and a
+	jp z,ItemMenuLoop
+	jp CloseStartMenu
+.useItem_partyMenu\@
+	ld a,[$cfcb]
+	push af
+	call UseItem
+	ld a,[$cd6a]
+	cp a,$02
+	jp z,.partyMenuNotDisplayed\@
+	call GBPalWhiteOutWithDelay3
+	call $3dbe
+	pop af
+	ld [$cfcb],a
+	jp DisplayItemMenu
+.partyMenuNotDisplayed\@
+	pop af
+	ld [$cfcb],a
+	jp ItemMenuLoop
+.tossItem\@
+	call IsKeyItem
+	ld a,[$d124]
+	and a
+	jr nz,.skipAskingQuantity\@
+	ld a,[$cf91]
+	call IsItemHM
+	jr c,.skipAskingQuantity\@
+	call DisplayChooseQuantityMenu
+	inc a
+	jr z,.tossZeroItems\@
+.skipAskingQuantity\@
+	ld hl,W_NUMBAGITEMS
+	call TossItem
+.tossZeroItems\@
+	jp ItemMenuLoop
+
+CannotUseItemsHereText: ; 742A
+	TX_FAR _CannotUseItemsHereText
 	db $50
-; 0x1342a + 5 bytes
 
-UnnamedText_1342f: ; 0x1342f
-	TX_FAR _UnnamedText_1342f
+CannotGetOffHereText: ; 742F
+	TX_FAR _CannotGetOffHereText
 	db $50
-; 0x1342f + 5 bytes
 
-INCBIN "baserom.gbc",$13434,$13773 - $13434
+; items which bring up the party menu when used
+UsableItems_PartyMenu: ; 7434
+	db MOON_STONE
+	db ANTIDOTE
+	db BURN_HEAL
+	db ICE_HEAL
+	db AWAKENING
+	db PARLYZ_HEAL
+	db FULL_RESTORE
+	db MAX_POTION
+	db HYPER_POTION
+	db SUPER_POTION
+	db POTION
+	db FIRE_STONE
+	db THUNDER_STONE
+	db WATER_STONE
+	db HP_UP
+	db PROTEIN
+	db IRON
+	db CARBOS
+	db CALCIUM
+	db RARE_CANDY
+	db LEAF_STONE
+	db FULL_HEAL
+	db REVIVE
+	db MAX_REVIVE
+	db FRESH_WATER
+	db SODA_POP
+	db LEMONADE
+	db X_ATTACK
+	db X_DEFEND
+	db X_SPEED
+	db X_SPECIAL
+	db PP_UP
+	db ETHER
+	db MAX_ETHER
+	db ELIXER
+	db MAX_ELIXER
+	db $ff
+
+; items which close the item menu when used
+UsableItems_CloseMenu: ; 7459
+	db ESCAPE_ROPE
+	db ITEMFINDER
+	db POKE_FLUTE
+	db OLD_ROD
+	db GOOD_ROD
+	db SUPER_ROD
+	db $ff
+
+INCBIN "baserom.gbc",$13460,$13773 - $13460
 
 TechnicalMachines: ; 0x13773
 	db MEGA_PUNCH
@@ -21547,7 +21943,7 @@ asm_1d157: ; 0x1d157
 	call Predef
 	ld hl, $d730
 	res 6, [hl]
-	call $3071
+	call ReloadMapData
 	ld c, $a
 	call $3739
 	ld a, [$cf13]
@@ -36989,7 +37385,7 @@ DisplayPokedexMenu_: ; 4000
 	ld [W_LISTSCROLLOFFSET],a
 	call GBPalWhiteOutWithDelay3
 	call GoPAL_SET_CF1C
-	jp $3071 ; reloads map data
+	jp ReloadMapData
 .goToSideMenu\@
 	call HandlePokedexSideMenu
 	dec b
@@ -42273,7 +42669,7 @@ MomHealPokemon: ; 0x4818a
 	ld hl, MomHealText1
 	call PrintText
 	call GBFadeOut2
-	call $3071
+	call ReloadMapData
 	ld a, 7
 	call Predef
 	ld a, $E8
@@ -43111,7 +43507,7 @@ CeladonGymText1: ; 0x48a11
 	bit 0, a
 	jr nz, .asm_3b22c ; 0x48a1b
 	call z, $4963
-	call $30b6
+	call DisableWaitingAfterTextDisplay
 	jr .asm_96252 ; 0x48a23
 .asm_3b22c ; 0x48a25
 	ld hl, UnnamedText_48a68
@@ -56896,7 +57292,7 @@ PewterGymText1: ; 0x5c44e
 	bit 6, a
 	jr nz, .asm_ff7d0 ; 0x5c458
 	call z, $43df
-	call $30b6
+	call DisableWaitingAfterTextDisplay
 	jr .asm_e0ffb ; 0x5c460
 .asm_ff7d0 ; 0x5c462
 	ld hl, UnnamedText_5c4a3
@@ -57266,7 +57662,7 @@ CeruleanGymText1: ; 0x5c771
 	bit 6, a
 	jr nz, .asm_37a1b ; 0x5c77b
 	call z, $470d
-	call $30b6
+	call DisableWaitingAfterTextDisplay
 	jr .asm_95b04 ; 0x5c783
 .asm_37a1b ; 0x5c785
 	ld hl, UnnamedText_5c7c3
@@ -57728,7 +58124,7 @@ VermilionGymText1: ; 0x5cb1d
 	bit 6, a
 	jr nz, .asm_41203 ; 0x5cb27
 	call z, $4aaa
-	call $30b6
+	call DisableWaitingAfterTextDisplay
 	jr .asm_23621 ; 0x5cb2f
 .asm_41203 ; 0x5cb31
 	ld hl, UnnamedText_5cb72
@@ -58447,7 +58843,7 @@ SaffronGymText1: ; 0x5d118
 	bit 0, a
 	jr nz, .asm_8d2f6 ; 0x5d122
 	call z, $5068
-	call $30b6
+	call DisableWaitingAfterTextDisplay
 	jr .asm_34c2c ; 0x5d12a
 .asm_8d2f6 ; 0x5d12c
 	ld hl, UnnamedText_5d16e
@@ -64362,7 +64758,7 @@ ViridianGymText1: ; 0x74a69
 	bit 0, a
 	jr nz, .asm_9fc95 ; 0x74a73
 	call z, $4995
-	call $30b6
+	call DisableWaitingAfterTextDisplay
 	jr .asm_6dff7 ; 0x74a7b
 .asm_9fc95 ; 0x74a7d
 	ld a, $1
@@ -65641,7 +66037,7 @@ FuchsiaGymText1: ; 0x75534
 	bit 0, a
 	jr nz, .asm_adc3b ; 0x7553e
 	call z, $5497
-	call $30b6
+	call DisableWaitingAfterTextDisplay
 	jr .asm_e84c6 ; 0x75546
 .asm_adc3b ; 0x75548
 	ld hl, UnnamedText_7558b
@@ -66088,7 +66484,7 @@ CinnabarGymText1: ; 0x758df
 	bit 0, a
 	jr nz, .asm_3012f ; 0x758e9 $9
 	call z, $5857
-	call $30b6
+	call DisableWaitingAfterTextDisplay
 	jp TextScriptEnd
 .asm_3012f ; 0x758f4
 	ld hl, UnnamedText_75920
@@ -82698,12 +83094,12 @@ _NewBadgeRequiredText: ; 0xa4130
 	db "is required.", $58
 ; 0xa4130 + 30 bytes
 
-_UnnamedText_1342a: ; 0xa414e
+_CannotUseItemsHereText: ; 0xa414e
 	db $0, "You can't use items", $4f
 	db "here.", $58
 ; 0xa414e + 26 bytes
 
-_UnnamedText_1342f: ; 0xa4168
+_CannotGetOffHereText: ; 0xa4168
 	db $0, "You can't get off", $4f
 	db "here.", $58
 ; 0xa4168 + 24 bytes
@@ -84016,7 +84412,7 @@ _UnnamedText_e601: ; 0xa8030
 	db $0, ".", $58
 ; 0xa803c
 
-_UnnamedText_e755: ; 0xa803c
+_ThrewAwayItemText: ; 0xa803c
 	db $0, "Threw away", $4f
 	db "@"
 ; 0xa803c + 13 bytes
@@ -84026,7 +84422,7 @@ UnnamedText_a8049: ; 0xa8049
 	db $0, ".", $58
 ; 0xa804f
 
-_UnnamedText_e75a: ; 0xa804f
+_IsItOKToTossItemText: ; 0xa804f
 	db $0, "Is it OK to toss", $4f
 	db "@"
 ; 0xa804f + 19 bytes
@@ -84036,7 +84432,7 @@ UnnamedText_a8062: ; 0xa8062
 	db $0, "?", $58
 ; 0xa8068
 
-_UnnamedText_e75f: ; 0xa8068
+_TooImportantToTossText: ; 0xa8068
 	db $0, "That's too impor-", $4f
 	db "tant to toss!", $58
 ; 0xa8068 + 32 bytes
