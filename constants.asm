@@ -600,6 +600,18 @@ W_PARTYMON6NAME EQU $D2EC
 
 W_RIVALNAME  EQU $D34A ; 11 characters, including null
 
+W_OPTIONS EQU $D355
+; bit 7 = battle animation
+; 0: On
+; 1: Off
+; bit 6 = battle style
+; 0: Shift
+; 1: Set
+; bits 0-3 = text speed (number of frames to delay after printing a letter)
+; 1: Fast
+; 3: Medium
+; 5: Slow
+
 W_OBTAINEDBADGES EQU $D356
 
 W_PLAYERIDHI EQU $D359

@@ -5745,17 +5745,17 @@ RedisplayStartMenu: ; 2ADF
 	inc a ; adjust position to account for missing pokedex menu item
 .displayMenuItem\@
 	cp a,0
-	jp z,$7095              ; POKEDEX
+	jp z,StartMenu_Pokedex
 	cp a,1
-	jp z,DisplayPokemonMenu ; POKEMON
+	jp z,StartMenu_Pokemon
 	cp a,2
-	jp z,DisplayItemMenu    ; ITEM
+	jp z,StartMenu_Item
 	cp a,3
-	jp z,DisplayTrainerInfo ; Trainer Info
+	jp z,StartMenu_TrainerInfo
 	cp a,4
-	jp z,$75e3              ; SAVE / RESET
+	jp z,StartMenu_SaveReset
 	cp a,5
-	jp z,$75f6              ; OPTION
+	jp z,StartMenu_Option
 
 ; EXIT falls through to here
 CloseStartMenu: ; 2B70
@@ -8416,7 +8416,275 @@ UnnamedText_5d4d: ; 0x5d4d
 	db $50
 ; 0x5d4d + 5 bytes
 
-INCBIN "baserom.gbc",$5d52,$3c3
+INCBIN "baserom.gbc",$5d52,$5e8a - $5d52
+
+DisplayOptionMenu: ; 5E8A
+	FuncCoord 0,0
+	ld hl,Coord
+	ld b,3
+	ld c,18
+	call TextBoxBorder
+	FuncCoord 0,5
+	ld hl,Coord
+	ld b,3
+	ld c,18
+	call TextBoxBorder
+	FuncCoord 0,10
+	ld hl,Coord
+	ld b,3
+	ld c,18
+	call TextBoxBorder
+	FuncCoord 1,1
+	ld hl,Coord
+	ld de,TextSpeedOptionText
+	call PlaceString
+	FuncCoord 1,6
+	ld hl,Coord
+	ld de,BattleAnimationOptionText
+	call PlaceString
+	FuncCoord 1,11
+	ld hl,Coord
+	ld de,BattleStyleOptionText
+	call PlaceString
+	FuncCoord 2,16
+	ld hl,Coord
+	ld de,OptionMenuCancelText
+	call PlaceString
+	xor a
+	ld [W_CURMENUITEMID],a
+	ld [W_OLDMENUITEMID],a
+	inc a
+	ld [$d358],a
+	ld [$cd40],a
+	ld a,3 ; text speed cursor Y coordinate
+	ld [W_TOPMENUITEMY],a
+	call SetCursorPositionsFromOptions
+	ld a,[$cd3d] ; text speed cursor X coordinate
+	ld [W_TOPMENUITEMX],a
+	ld a,$01
+	ld [H_AUTOBGTRANSFERENABLED],a ; enable auto background transfer
+	call Delay3
+.loop\@
+	call PlaceMenuCursor
+	call SetOptionsFromCursorPositions
+.getJoypadStateLoop\@
+	call GetJoypadStateLowSensitivity
+	ld a,[$ffb5]
+	ld b,a
+	and a,%11111011 ; any key besides select pressed?
+	jr z,.getJoypadStateLoop\@
+	bit 1,b ; B button pressed?
+	jr nz,.exitMenu\@
+	bit 3,b ; Start button pressed?
+	jr nz,.exitMenu\@
+	bit 0,b ; A button pressed?
+	jr z,.checkDirectionKeys\@
+	ld a,[W_TOPMENUITEMY]
+	cp a,16 ; is the cursor on Cancel?
+	jr nz,.loop\@
+.exitMenu\@
+	ld a,$90
+	call $23b1 ; play sound
+	ret
+.eraseOldMenuCursor\@
+	ld [W_TOPMENUITEMX],a
+	call EraseMenuCursor
+	jp .loop\@
+.checkDirectionKeys\@
+	ld a,[W_TOPMENUITEMY]
+	bit 7,b ; Down pressed?
+	jr nz,.downPressed\@
+	bit 6,b ; Up pressed?
+	jr nz,.upPressed\@
+	cp a,8 ; cursor in Battle Animation section?
+	jr z,.cursorInBattleAnimation\@
+	cp a,13 ; cursor in Battle Style section?
+	jr z,.cursorInBattleStyle\@
+	cp a,16 ; cursor on Cancel?
+	jr z,.loop\@
+.cursorInTextSpeed\@
+	bit 5,b ; Left pressed?
+	jp nz,.pressedLeftInTextSpeed\@
+	jp .pressedRightInTextSpeed\@
+.downPressed\@
+	cp a,16
+	ld b,-13
+	ld hl,$cd3d
+	jr z,.updateMenuVariables\@
+	ld b,5
+	cp a,3
+	inc hl
+	jr z,.updateMenuVariables\@
+	cp a,8
+	inc hl
+	jr z,.updateMenuVariables\@
+	ld b,3
+	inc hl
+	jr .updateMenuVariables\@
+.upPressed\@
+	cp a,8
+	ld b,-5
+	ld hl,$cd3d
+	jr z,.updateMenuVariables\@
+	cp a,13
+	inc hl
+	jr z,.updateMenuVariables\@
+	cp a,16
+	ld b,-3
+	inc hl
+	jr z,.updateMenuVariables\@
+	ld b,13
+	inc hl
+.updateMenuVariables\@
+	add b
+	ld [W_TOPMENUITEMY],a
+	ld a,[hl]
+	ld [W_TOPMENUITEMX],a
+	call PlaceUnfilledArrowMenuCursor
+	jp .loop\@
+.cursorInBattleAnimation\@
+	ld a,[$cd3e] ; battle animation cursor X coordinate
+	xor a,$0b ; toggle between 1 and 10
+	ld [$cd3e],a
+	jp .eraseOldMenuCursor\@
+.cursorInBattleStyle\@
+	ld a,[$cd3f] ; battle style cursor X coordinate
+	xor a,$0b ; toggle between 1 and 10
+	ld [$cd3f],a
+	jp .eraseOldMenuCursor\@
+.pressedLeftInTextSpeed\@
+	ld a,[$cd3d] ; text speed cursor X coordinate
+	cp a,1
+	jr z,.updateTextSpeedXCoord\@
+	cp a,7
+	jr nz,.fromSlowToMedium\@
+	sub a,6
+	jr .updateTextSpeedXCoord\@
+.fromSlowToMedium\@
+	sub a,7
+	jr .updateTextSpeedXCoord\@
+.pressedRightInTextSpeed\@
+	ld a,[$cd3d] ; text speed cursor X coordinate
+	cp a,14
+	jr z,.updateTextSpeedXCoord\@
+	cp a,7
+	jr nz,.fromFastToMedium\@
+	add a,7
+	jr .updateTextSpeedXCoord\@
+.fromFastToMedium\@
+	add a,6
+.updateTextSpeedXCoord\@
+	ld [$cd3d],a ; text speed cursor X coordinate
+	jp .eraseOldMenuCursor\@
+
+TextSpeedOptionText: ; 5FC0
+	db "TEXT SPEED",$4E
+	db " FAST  MEDIUM SLOW@"
+
+BattleAnimationOptionText: ; 5FDE
+	db "BATTLE ANIMATION",$4E
+	db " ON       OFF@"
+
+BattleStyleOptionText: ; 5FFD
+	db "BATTLE STYLE",$4E
+	db " SHIFT    SET@"
+
+OptionMenuCancelText: ; 6018
+	db "CANCEL@"
+
+; sets the options variable according to the current placement of the menu cursors in the options menu
+SetOptionsFromCursorPositions: ; 601F
+	ld hl,TextSpeedOptionData
+	ld a,[$cd3d] ; text speed cursor X coordinate
+	ld c,a
+.loop\@
+	ld a,[hli]
+	cp c
+	jr z,.textSpeedMatchFound\@
+	inc hl
+	jr .loop\@
+.textSpeedMatchFound\@
+	ld a,[hl]
+	ld d,a
+	ld a,[$cd3e] ; battle animation cursor X coordinate
+	dec a
+	jr z,.battleAnimationOn\@
+.battleAnimationOff\@
+	set 7,d
+	jr .checkBattleStyle\@
+.battleAnimationOn\@
+	res 7,d
+.checkBattleStyle\@
+	ld a,[$cd3f] ; battle style cursor X coordinate
+	dec a
+	jr z,.battleStyleShift\@
+.battleStyleSet\@
+	set 6,d
+	jr .storeOptions\@
+.battleStyleShift\@
+	res 6,d
+.storeOptions\@
+	ld a,d
+	ld [W_OPTIONS],a
+	ret
+
+; reads the options variable and places menu cursors in the correct positions within the options menu
+SetCursorPositionsFromOptions: ; 604C
+	ld hl,TextSpeedOptionData + 1
+	ld a,[W_OPTIONS]
+	ld c,a
+	and a,$3f
+	push bc
+	ld de,2
+	call IsInArray
+	pop bc
+	dec hl
+	ld a,[hl]
+	ld [$cd3d],a ; text speed cursor X coordinate
+	FuncCoord 0,3
+	ld hl,Coord
+	call .placeUnfilledRightArrow\@
+	sla c
+	ld a,1 ; On
+	jr nc,.storeBattleAnimationCursorX\@
+	ld a,10 ; Off
+.storeBattleAnimationCursorX\@
+	ld [$cd3e],a ; battle animation cursor X coordinate
+	FuncCoord 0,8
+	ld hl,Coord
+	call .placeUnfilledRightArrow\@
+	sla c
+	ld a,1
+	jr nc,.storeBattleStyleCursorX\@
+	ld a,10
+.storeBattleStyleCursorX\@
+	ld [$cd3f],a ; battle style cursor X coordinate
+	FuncCoord 0,13
+	ld hl,Coord
+	call .placeUnfilledRightArrow\@
+; cursor in front of Cancel
+	FuncCoord 0,16
+	ld hl,Coord
+	ld a,1
+.placeUnfilledRightArrow\@
+	ld e,a
+	ld d,0
+	add hl,de
+	ld [hl],$ec ; unfilled right arrow menu cursor
+	ret
+
+; table that indicates how the 3 text speed options affect frame delays
+; Format:
+; 00: X coordinate of menu cursor
+; 01: delay after printing a letter (in frames)
+TextSpeedOptionData: ; 6096
+	db 14,5 ; Slow
+	db  7,3 ; Medium
+	db  1,1 ; Fast
+	db 7 ; default X coordinate (Medium)
+	db $ff ; terminator
+
+INCBIN "baserom.gbc",$609e,$6115-$609e
 
 OakSpeech: ; 6115
 	ld a,$FF
@@ -16656,9 +16924,18 @@ ShrinkPic1:
 ShrinkPic2:
 	INCBIN "pic/trainer/shrink2.pic"
 
-INCBIN "baserom.gbc",$13074,$130A9 - $13074
+INCBIN "baserom.gbc",$13074,$13095 - $13074
 
-DisplayPokemonMenu: ; 70A9
+StartMenu_Pokedex: ; 7095
+	ld a,$29
+	call Predef
+	call $3701 ; restore saved screen
+	call Delay3
+	call LoadGBPal
+	call $2429
+	jp RedisplayStartMenu
+
+StartMenu_Pokemon: ; 70A9
 	ld a,[W_NUMINPARTY]
 	and a
 	jp z,RedisplayStartMenu
@@ -16739,7 +17016,7 @@ DisplayPokemonMenu: ; 70A9
 .choseSwitch\@
 	ld a,[W_NUMINPARTY]
 	cp a,2 ; is there more than one pokemon in the party?
-	jp c,DisplayPokemonMenu ; if not, no switching
+	jp c,StartMenu_Pokemon ; if not, no switching
 	call $7653
 	ld a,$04 ; swap pokemon positions menu
 	ld [$d07d],a
@@ -16754,7 +17031,7 @@ DisplayPokemonMenu: ; 70A9
 	ld a,$37
 	call Predef
 	call ReloadMapData
-	jp DisplayPokemonMenu
+	jp StartMenu_Pokemon
 .choseOutOfBattleMove\@
 	push hl
 	ld a,[$cf92]
@@ -16802,7 +17079,7 @@ DisplayPokemonMenu: ; 70A9
 	call LoadFontTilePatterns
 	ld hl,$d72e
 	set 1,[hl]
-	jp DisplayPokemonMenu
+	jp StartMenu_Pokemon
 .cut\@
 	bit 1,a ; does the player have the Cascade Badge?
 	jp z,.newBadgeRequired\@
@@ -16958,7 +17235,7 @@ ItemMenuLoop: ; 72FC
 	call $3709 ; restore saved screen
 	call GoPAL_SET_CF1C
 
-DisplayItemMenu: ; 7302
+StartMenu_Item: ; 7302
 	ld a,[W_ISLINKBATTLE]
 	dec a
 	jr nz,.notInLinkBattle\@
@@ -17079,7 +17356,7 @@ DisplayItemMenu: ; 7302
 	call $3dbe
 	pop af
 	ld [$cfcb],a
-	jp DisplayItemMenu
+	jp StartMenu_Item
 .partyMenuNotDisplayed\@
 	pop af
 	ld [$cfcb],a
@@ -17159,7 +17436,7 @@ UsableItems_CloseMenu: ; 7459
 	db SUPER_ROD
 	db $ff
 
-DisplayTrainerInfo: ; 7460
+StartMenu_TrainerInfo: ; 7460
 	call GBPalWhiteOut
 	call ClearScreen
 	call $2429 ; move sprites
@@ -17360,7 +17637,29 @@ TrainerInfo_DrawVerticalLine: ; 75D8
 	jr nz,.loop\@
 	ret
 
-INCBIN "baserom.gbc",$135e3,$13773 - $135e3
+StartMenu_SaveReset: ; 75E3
+	ld a,[$d72e]
+	bit 6,a ; is the player using the link feature?
+	jp nz,InitGame
+	ld a,$3f
+	call Predef ; save the game
+	call $3701 ; restore saved screen
+	jp HoldTextDisplayOpen
+
+StartMenu_Option: ; 75F6
+	xor a
+	ld [H_AUTOBGTRANSFERENABLED],a
+	call ClearScreen
+	call $2429
+	ld hl,DisplayOptionMenu
+	ld b,BANK(DisplayOptionMenu)
+	call Bankswitch
+	call $3701 ; restore saved screen
+	call LoadTextBoxTilePatterns
+	call $2429
+	jp RedisplayStartMenu
+
+INCBIN "baserom.gbc",$13613,$7773 - $7613
 
 TechnicalMachines: ; 0x13773
 	db MEGA_PUNCH
