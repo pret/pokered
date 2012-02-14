@@ -1985,8 +1985,11 @@ ITEM EQU $80
 TRAINER EQU $40
 
 ; status ailments (masks)
-FRZ		EQU %00100000
-SLP		EQU %00000111
+SLP     EQU %00000111
+PSN     EQU %00001000
+BRN     EQU %00010000
+FRZ     EQU %00100000
+PAR     EQU %01000000
 
 SPRITE_RED                       EQU $01
 SPRITE_BLUE                      EQU $02
