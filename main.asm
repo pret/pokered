@@ -6305,7 +6305,7 @@ PrintListMenuEntries: ; 2E5A
 	ld a,[W_LISTSCROLLOFFSET]
 	add b
 	ld [hl],a
-	call $1372 ; load pokemon info
+	call LoadMonData ; load pokemon info
 	ld a,[$cc49]
 	and a ; is it a list of party pokemon or box pokemon?
 	jr z,.skipCopyingLevel\@
