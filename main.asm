@@ -73492,7 +73492,7 @@ UnnamedText_89451: ; 0x89451
 	db $0, "The 2nd electric", $4f
 	db "lock opened!", $51
 	db "The motorized door", $4f
-	db "opened!@@
+	db "opened!@@"
 ; 0x89451 + 59 bytes = 0x8948c
 
 UnnamedText_8948c: ; 0x8948c
@@ -73827,7 +73827,7 @@ UnnamedText_89a4d: ; 0x89a4d
 
 UnnamedText_89a56: ; 0x89a56
 	db $0, "instead,", $55
-	db "@@
+	db "@@"
 ; 0x89a56 + 12 bytes = 0x89a62
 
 UnnamedText_89a62: ; 0x89a62

@@ -163,6 +163,9 @@ char["│"] = "$7C"
 char["└"] = "$7D"
 char["┘"] = "$7E"
 
+char["{"] = ""
+char["}"] = ""
+
 char["№"] = "$74"
 
 char[" "] = "$7F"
@@ -297,7 +300,7 @@ else {
 
 		print char[c]
 		if (length(f))
-			print ","
+			print ", "
 	}
 }
 
