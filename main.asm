@@ -16495,20 +16495,20 @@ ItemUseMedicine: ; 5ABB
 	ld a,[$cf91]
 	sub a,HP_UP - 1
 	ld c,a
-.vitaminNameLoop\@ ; loop to get the address of the name of the vitamin
+.statNameLoop\@ ; loop to get the address of the name of the stat the vitamin increases
 	dec c
-	jr z,.next34\@
-.vitaminNameInnerLoop\@
+	jr z,.gotStatName\@
+.statNameInnerLoop\@
 	ld a,[hli]
 	ld b,a
 	ld a,$50
 	cp b
-	jr nz,.vitaminNameInnerLoop\@
-	jr .vitaminNameLoop\@
-.next34\@
+	jr nz,.statNameInnerLoop\@
+	jr .statNameLoop\@
+.gotStatName\@
 	ld de,$cf4b
 	ld bc,10
-	call CopyData ; copy the vitamin's name to $cf4b
+	call CopyData ; copy the stat's name to $cf4b
 	ld a,$8e
 	call $23b1 ; play sound
 	ld hl,VitaminStatRoseText
