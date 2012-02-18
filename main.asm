@@ -15448,61 +15448,61 @@ ItemUsePtrTable: ; $D5E1
 	dw $59B4            ;ItemUseSurfBoard (UNUSED, glitchy!)
 	dw ItemUseBall      ;$5687 Safariball
 	dw ItemUsePokedex   ;$DA56 pokedex
-	dw $5A5B            ; MOON_STONE
-	dw $5ABB            ; ANTIDOTE
-	dw $5ABB            ; BURN_HEAL
-	dw $5ABB            ; ICE_HEAL
-	dw $5ABB            ; AWAKENING
-	dw $5ABB            ; PARLYZ_HEAL
-	dw $5ABB            ; FULL_RESTORE
-	dw $5ABB            ; MAX_POTION
-	dw $5ABB            ; HYPER_POTION
-	dw $5ABB            ; SUPER_POTION
-	dw $5ABB            ; POTION
+	dw ItemUseEvoStone  ; MOON_STONE
+	dw ItemUseMedicine  ; ANTIDOTE
+	dw ItemUseMedicine  ; BURN_HEAL
+	dw ItemUseMedicine  ; ICE_HEAL
+	dw ItemUseMedicine  ; AWAKENING
+	dw ItemUseMedicine  ; PARLYZ_HEAL
+	dw ItemUseMedicine  ; FULL_RESTORE
+	dw ItemUseMedicine  ; MAX_POTION
+	dw ItemUseMedicine  ; HYPER_POTION
+	dw ItemUseMedicine  ; SUPER_POTION
+	dw ItemUseMedicine  ; POTION
 	dw $5F52            ; BOULDERBADGE
 	dw $5F67            ; CASCADEBADGE
-	dw $6476            ; THUNDERBADGE
-	dw $6476            ; RAINBOWBADGE
-	dw $6476            ; SOULBADGE
-	dw $6476            ; MARSHBADGE
-	dw $6476            ; VOLCANOBADGE
-	dw $6476            ; EARTHBADGE
+	dw UnusableItem     ; THUNDERBADGE
+	dw UnusableItem     ; RAINBOWBADGE
+	dw UnusableItem     ; SOULBADGE
+	dw UnusableItem     ; MARSHBADGE
+	dw UnusableItem     ; VOLCANOBADGE
+	dw UnusableItem     ; EARTHBADGE
 	dw $5FAF            ; ESCAPE_ROPE
 	dw $6003            ; REPEL
-	dw $6476            ; OLD_AMBER
-	dw $5A5B            ; FIRE_STONE
-	dw $5A5B            ; THUNDER_STONE
-	dw $5A5B            ; WATER_STONE
-	dw $5AB4            ; HP_UP
-	dw $5AB4            ; PROTEIN
-	dw $5AB4            ; IRON
-	dw $5AB4            ; CARBOS
-	dw $5AB4            ; CALCIUM
-	dw $5AB4            ; RARE_CANDY
-	dw $6476            ; DOME_FOSSIL
-	dw $6476            ; HELIX_FOSSIL
-	dw $6476            ; SECRET_KEY
-	dw $6476
-	dw $6476            ; BIKE_VOUCHER
+	dw UnusableItem     ; OLD_AMBER
+	dw ItemUseEvoStone  ; FIRE_STONE
+	dw ItemUseEvoStone  ; THUNDER_STONE
+	dw ItemUseEvoStone  ; WATER_STONE
+	dw ItemUseVitamin   ; HP_UP
+	dw ItemUseVitamin   ; PROTEIN
+	dw ItemUseVitamin   ; IRON
+	dw ItemUseVitamin   ; CARBOS
+	dw ItemUseVitamin   ; CALCIUM
+	dw ItemUseVitamin   ; RARE_CANDY
+	dw UnusableItem     ; DOME_FOSSIL
+	dw UnusableItem     ; HELIX_FOSSIL
+	dw UnusableItem     ; SECRET_KEY
+	dw UnusableItem
+	dw UnusableItem     ; BIKE_VOUCHER
 	dw $6013            ; X_ACCURACY
-	dw $5A5B            ; LEAF_STONE
+	dw ItemUseEvoStone  ; LEAF_STONE
 	dw $6022            ; CARD_KEY
-	dw $6476            ; NUGGET
-	dw $6476            ; ??? PP_UP
+	dw UnusableItem     ; NUGGET
+	dw UnusableItem     ; ??? PP_UP
 	dw $60CD            ; POKE_DOLL
-	dw $5ABB            ; FULL_HEAL
-	dw $5ABB            ; REVIVE
-	dw $5ABB            ; MAX_REVIVE
+	dw ItemUseMedicine  ; FULL_HEAL
+	dw ItemUseMedicine  ; REVIVE
+	dw ItemUseMedicine  ; MAX_REVIVE
 	dw $60DC            ; GUARD_SPEC_
 	dw $60EB            ; SUPER_REPL
 	dw $60F0            ; MAX_REPEL
 	dw $60F5            ; DIRE_HIT
-	dw $6476            ; COIN
-	dw $5ABB            ; FRESH_WATER
-	dw $5ABB            ; SODA_POP
-	dw $5ABB            ; LEMONADE
-	dw $6476            ; S_S__TICKET
-	dw $6476            ; GOLD_TEETH
+	dw UnusableItem     ; COIN
+	dw ItemUseMedicine  ; FRESH_WATER
+	dw ItemUseMedicine  ; SODA_POP
+	dw ItemUseMedicine  ; LEMONADE
+	dw UnusableItem     ; S_S__TICKET
+	dw UnusableItem     ; GOLD_TEETH
 	dw $6104            ; X_ATTACK
 	dw $6104            ; X_DEFEND
 	dw $6104            ; X_SPEED
@@ -15510,25 +15510,25 @@ ItemUsePtrTable: ; $D5E1
 	dw $623A            ; COIN_CASE
 	dw $62DE            ; OAKS_PARCEL
 	dw $62E1            ; ITEMFINDER
-	dw $6476            ; SILPH_SCOPE
+	dw UnusableItem     ; SILPH_SCOPE
 	dw $6140            ; POKE_FLUTE
-	dw $6476            ; LIFT_KEY
-	dw $6476            ; EXP__ALL
+	dw UnusableItem     ; LIFT_KEY
+	dw UnusableItem     ; EXP__ALL
 	dw OldRodCode       ; OLD_ROD
 	dw GoodRodCode 		; GOOD_ROD $6259
 	dw SuperRodCode     ; SUPER_ROD $6283
-	dw $6317            ; PP_UP (see other?)
-	dw $631E            ; ETHER
-	dw $631E            ; MAX_ETHER
-	dw $631E            ; ELIXER
-	dw $631E            ; MAX_ELIXER
+	dw ItemUsePPUp      ; PP_UP (see other?)
+	dw ItemUsePPRestore ; ETHER
+	dw ItemUsePPRestore ; MAX_ETHER
+	dw ItemUsePPRestore ; ELIXER
+	dw ItemUsePPRestore ; MAX_ELIXER
 
 ItemUseBall: ; 03:5687
 	ld a,[W_ISINBATTLE]
 	and a
 	jp z,ItemUseNotTime ; not in battle
 	dec a
-	jp nz,$658b ; in trainer battle
+	jp nz,ThrowBallAtTrainerMon
 	ld a,[W_BATTLETYPE]
 	dec a
 	jr z,.UseBall\@
@@ -15537,7 +15537,7 @@ ItemUseBall: ; 03:5687
 	jr nz,.UseBall\@
 	ld a,[W_NUMINBOX]	;is Box full?
 	cp a,20
-	jp z,$65b1
+	jp z,BoxFullCannotThrowBall
 .UseBall\@	;$56a7
 ;ok, you can use a ball
 	xor a
@@ -15949,29 +15949,704 @@ ItemUsePokedex: ; 0xda56 5A56
 	jp $3e6d
 ; 0xda5b
 
-INCBIN "baserom.gbc",$da5b,$df24 - $da5b
+ItemUseEvoStone: ; 5A5B
+	ld a,[W_ISINBATTLE]
+	and a
+	jp nz,ItemUseNotTime
+	ld a,[$cf92]
+	push af
+	ld a,[$cf91]
+	ld [$d156],a
+	push af
+	ld a,$05 ; evolution stone party menu
+	ld [$d07d],a
+	ld a,$ff
+	ld [$cfcb],a
+	call DisplayPartyMenu
+	pop bc
+	jr c,.canceledItemUse\@
+	ld a,b
+	ld [$cf91],a
+	ld a,$01
+	ld [$ccd4],a
+	ld a,$8e
+	call $3740 ; play sound
+	call $3748 ; wait for sound to end
+	ld hl,$6d0e
+	ld b,$0e
+	call Bankswitch ; try to evolve pokemon
+	ld a,[$d121]
+	and a
+	jr z,.noEffect\@
+	pop af
+	ld [$cf92],a
+	ld hl,W_NUMBAGITEMS
+	ld a,1 ; remove 1 stone
+	ld [$cf96],a
+	jp RemoveItemFromInventory
+.noEffect\@
+	call ItemUseNoEffect
+.canceledItemUse\@
+	xor a
+	ld [$cd6a],a
+	pop af
+	ret
 
-UnnamedText_df24: ; 0xdf24
-	TX_FAR _UnnamedText_df24
+ItemUseVitamin: ; 5AB4
+	ld a,[W_ISINBATTLE]
+	and a
+	jp nz,ItemUseNotTime
+
+ItemUseMedicine: ; 5ABB
+	ld a,[W_NUMINPARTY]
+	and a
+	jp z,.emptyParty\@
+	ld a,[$cf92]
+	push af
+	ld a,[$cf91]
+	push af
+	ld a,$01
+	ld [$d07d],a ; item use party menu
+	ld a,$ff
+	ld [$cfcb],a
+	ld a,[$d152]
+	and a ; using Softboiled?
+	jr z,.notUsingSoftboiled\@
+; if using softboiled
+	call GoBackToPartyMenu
+	jr .getPartyMonDataAddress\@
+.emptyParty\@
+	ld hl,.emptyPartyText\@
+	xor a
+	ld [$cd6a],a ; item use failed
+	jp PrintText
+.emptyPartyText\@
+	db $0,"You don't have",$4F
+	db "any #MON!",$58
+.notUsingSoftboiled\@
+	call DisplayPartyMenu
+.getPartyMonDataAddress\@
+	jp c,.canceledItemUse\@
+	ld hl,W_PARTYMON1DATA
+	ld bc,44
+	ld a,[$cf92]
+	call AddNTimes
+	ld a,[$cf92]
+	ld [$cf06],a
+	ld d,a
+	ld a,[$cf91]
+	ld e,a
+	ld [$d0b5],a
+	pop af
+	ld [$cf91],a
+	pop af
+	ld [$cf92],a
+	ld a,[$d152]
+	and a ; using Softboiled?
+	jr z,.checkItemType\@
+; if using softboiled
+	ld a,[$cf92]
+	cp d ; is the pokemon trying to use softboiled on itself?
+	jr z,ItemUseMedicine ; if so, force another choice
+.checkItemType\@
+	ld a,[$cf91]
+	cp a,REVIVE
+	jr nc,.healHP\@ ; if it's a Revive or Max Revive
+	cp a,FULL_HEAL
+	jr z,.cureStatusAilment\@ ; if it's a Full Heal
+	cp a,HP_UP
+	jp nc,.useVitamin\@ ; if it's a vitamin or Rare Candy
+	cp a,FULL_RESTORE
+	jr nc,.healHP\@ ; if it's a Full Restore or one of the potions
+; fall through if it's one of the status-specifc healing items
+.cureStatusAilment\@
+	ld bc,4
+	add hl,bc ; hl now points to status
+	ld a,[$cf91]
+	ld bc,$f008
+	cp a,ANTIDOTE
+	jr z,.checkMonStatus\@
+	ld bc,$f110
+	cp a,BURN_HEAL
+	jr z,.checkMonStatus\@
+	ld bc,$f220
+	cp a,ICE_HEAL
+	jr z,.checkMonStatus\@
+	ld bc,$f307
+	cp a,AWAKENING
+	jr z,.checkMonStatus\@
+	ld bc,$f440
+	cp a,PARLYZ_HEAL
+	jr z,.checkMonStatus\@
+	ld bc,$f6ff ; Full Heal
+.checkMonStatus\@
+	ld a,[hl] ; pokemon's status
+	and c ; does the pokemon have a status ailment the item can cure?
+	jp z,.healingItemNoEffect\@
+; if the pokemon has a status the item can heal
+	xor a
+	ld [hl],a ; remove the status ailment in the party data
+	ld a,b
+	ld [$d07d],a ; the message to display for the item used
+	ld a,[W_PLAYERMONNUMBER]
+	cp d ; is pokemon the item was used on active in battle?
+	jp nz,.doneHealing\@
+; if it is active in battle
+	xor a
+	ld [W_PLAYERMONSTATUS],a ; remove the status ailment in the in-battle pokemon data
+	push hl
+	ld hl,W_PLAYERBATTSTATUS3
+	res 0,[hl] ; heal Toxic status
+	pop hl
+	ld bc,30
+	add hl,bc ; hl now points to party stats
+	ld de,W_PLAYERMONMAXHP
+	ld bc,10
+	call CopyData ; copy party stats to in-battle stat data
+	ld a,$28
+	call Predef
+	jp .doneHealing\@
+.healHP\@
+	inc hl ; hl = address of current HP
+	ld a,[hli]
+	ld b,a
+	ld [$ceec],a
+	ld a,[hl]
+	ld c,a
+	ld [$ceeb],a ; current HP stored at $ceeb (2 bytes, big-endian)
+	or b
+	jr nz,.notFainted\@
+.fainted\@
+	ld a,[$cf91]
+	cp a,REVIVE
+	jr z,.updateInBattleFaintedData\@
+	cp a,MAX_REVIVE
+	jr z,.updateInBattleFaintedData\@
+	jp .healingItemNoEffect\@
+.updateInBattleFaintedData\@
+	ld a,[W_ISINBATTLE]
+	and a
+	jr z,.compareCurrentHPToMaxHP\@
+	push hl
+	push de
+	push bc
+	ld a,[$cf06]
+	ld c,a
+	ld hl,$ccf5
+	ld b,$02
+	ld a,$10
+	call Predef
+	ld a,c
+	and a
+	jr z,.next\@
+	ld a,[$cf06]
+	ld c,a
+	ld hl,$d058
+	ld b,$01
+	ld a,$10
+	call Predef
+.next\@
+	pop bc
+	pop de
+	pop hl
+	jr .compareCurrentHPToMaxHP\@
+.notFainted\@
+	ld a,[$cf91]
+	cp a,REVIVE
+	jp z,.healingItemNoEffect\@
+	cp a,MAX_REVIVE
+	jp z,.healingItemNoEffect\@
+.compareCurrentHPToMaxHP\@
+	push hl
+	push bc
+	ld bc,32
+	add hl,bc ; hl now points to max HP
+	pop bc
+	ld a,[hli]
+	cp b
+	jr nz,.skipComparingLSB\@ ; no need to compare the LSB's if the MSB's don't match
+	ld a,[hl]
+	cp c
+.skipComparingLSB\@
+	pop hl
+	jr nz,.notFullHP\@
+.fullHP\@ ; if the pokemon's current HP equals its max HP
+	ld a,[$cf91]
+	cp a,FULL_RESTORE
+	jp nz,.healingItemNoEffect\@
+	inc hl
+	inc hl
+	ld a,[hld] ; status ailment
+	and a ; does the pokemon have a status ailment?
+	jp z,.healingItemNoEffect\@
+	ld a,FULL_HEAL
+	ld [$cf91],a
+	dec hl
+	dec hl
+	dec hl
+	jp .cureStatusAilment\@
+.notFullHP\@ ; if the pokemon's current HP doesn't equal its max HP
+	xor a
+	ld [$d083],a
+	ld [$c02a],a
+	push hl
+	push de
+	ld bc,32
+	add hl,bc ; hl now points to max HP
+	ld a,[hli]
+	ld [$ceea],a
+	ld a,[hl]
+	ld [$cee9],a ; max HP stored at $cee9 (2 bytes, big-endian)
+	ld a,[$d152]
+	and a ; using Softboiled?
+	jp z,.notUsingSoftboiled2\@
+; if using softboiled
+	ld hl,$cee9
+	ld a,[hli]
+	push af
+	ld a,[hli]
+	push af
+	ld a,[hli]
+	push af
+	ld a,[hl]
+	push af
+	ld hl,W_PARTYMON1_MAXHP
+	ld a,[$cf92]
+	ld bc,44
+	call AddNTimes
+	ld a,[hli]
+	ld [$ceea],a
+	ld [H_DIVIDEND],a
+	ld a,[hl]
+	ld [$cee9],a
+	ld [H_DIVIDEND + 1],a
+	ld a,5
+	ld [H_DIVISOR],a
+	ld b,2 ; number of bytes
+	call Divide ; get 1/5 of max HP of pokemon that used Softboiled
+	ld bc,-33
+	add hl,bc ; hl now points to LSB of current HP of pokemon that used Softboiled
+; subtract 1/5 of max HP from current HP of pokemon that used Softboiled
+	ld a,[H_QUOTIENT + 3]
+	push af
+	ld b,a
+	ld a,[hl]
+	ld [$ceeb],a
+	sub b
+	ld [hld],a
+	ld [$ceed],a
+	ld a,[H_QUOTIENT + 2]
+	ld b,a
+	ld a,[hl]
+	ld [$ceec],a
+	sbc b
+	ld [hl],a
+	ld [$ceee],a
+	ld hl,$c3b8
+	ld a,[$cf92]
+	ld bc,2 * 20
+	call AddNTimes ; calculate coordinates of HP bar of pokemon that used Softboiled
+	ld a,$8d
+	call $3740 ; play sound
+	ld a,[$fff6]
+	set 0,a
+	ld [$fff6],a
+	ld a,$02
+	ld [$cf94],a
+	ld a,$48
+	call Predef ; animate HP bar decrease of pokemon that used Softboiled
+	ld a,[$fff6]
+	res 0,a
+	ld [$fff6],a
+	pop af
+	ld b,a ; store heal amount (1/5 of max HP)
+	ld hl,$ceec
+	pop af
+	ld [hld],a
+	pop af
+	ld [hld],a
+	pop af
+	ld [hld],a
+	pop af
+	ld [hl],a
+	jr .addHealAmount\@
+.notUsingSoftboiled2\@
+	ld a,[$cf91]
+	cp a,SODA_POP
+	ld b,60 ; Soda Pop heal amount
+	jr z,.addHealAmount\@
+	ld b,80 ; Lemonade heal amount
+	jr nc,.addHealAmount\@
+	cp a,FRESH_WATER
+	ld b,50 ; Fresh Water heal amount
+	jr z,.addHealAmount\@
+	cp a,SUPER_POTION
+	ld b,200 ; Hyper Potion heal amount
+	jr c,.addHealAmount\@
+	ld b,50 ; Super Potion heal amount
+	jr z,.addHealAmount\@
+	ld b,20 ; Potion heal amount
+.addHealAmount\@
+	pop de
+	pop hl
+	ld a,[hl]
+	add b
+	ld [hld],a
+	ld [$ceed],a
+	ld a,[hl]
+	ld [$ceee],a
+	jr nc,.noCarry\@
+	inc [hl]
+	ld a,[hl]
+	ld [$ceee],a
+.noCarry\@
+	push de
+	inc hl
+	ld d,h
+	ld e,l ; de now points to current HP
+	ld hl,33
+	add hl,de ; hl now points to max HP
+	ld a,[$cf91]
+	cp a,REVIVE
+	jr z,.setCurrentHPToHalfMaxHP\@
+	ld a,[hld]
+	ld b,a
+	ld a,[de]
+	sub b
+	dec de
+	ld b,[hl]
+	ld a,[de]
+	sbc b
+	jr nc,.setCurrentHPToMaxHp\@ ; if current HP exceeds max HP after healing
+	ld a,[$cf91]
+	cp a,HYPER_POTION
+	jr c,.setCurrentHPToMaxHp\@ ; if using a Full Restore or Max Potion
+	cp a,MAX_REVIVE
+	jr z,.setCurrentHPToMaxHp\@ ; if using a Max Revive
+	jr .updateInBattleData\@
+.setCurrentHPToHalfMaxHP\@
+	dec hl
+	dec de
+	ld a,[hli]
+	srl a
+	ld [de],a
+	ld [$ceee],a
+	ld a,[hl]
+	rr a
+	inc de
+	ld [de],a
+	ld [$ceed],a
+	dec de
+	jr .doneHealingPartyHP\@
+.setCurrentHPToMaxHp\@
+	ld a,[hli]
+	ld [de],a
+	ld [$ceee],a
+	inc de
+	ld a,[hl]
+	ld [de],a
+	ld [$ceed],a
+	dec de
+.doneHealingPartyHP\@ ; done updating the pokemon's current HP in the party data structure
+	ld a,[$cf91]
+	cp a,FULL_RESTORE
+	jr nz,.updateInBattleData\@
+	ld bc,-31
+	add hl,bc
+	xor a
+	ld [hl],a ; remove the status ailment in the party data
+.updateInBattleData\@
+	ld h,d
+	ld l,e
+	pop de
+	ld a,[W_PLAYERMONNUMBER]
+	cp d ; is pokemon the item was used on active in battle?
+	jr nz,.calculateHPBarCoords\@
+; copy party HP to in-battle HP
+	ld a,[hli]
+	ld [W_PLAYERMONCURHP],a
+	ld a,[hld]
+	ld [W_PLAYERMONCURHP + 1],a
+	ld a,[$cf91]
+	cp a,FULL_RESTORE
+	jr nz,.calculateHPBarCoords\@
+	xor a
+	ld [W_PLAYERMONSTATUS],a ; remove the status ailment in the in-battle pokemon data
+.calculateHPBarCoords\@
+	ld hl,$c390
+	ld bc,2 * 20
+	inc d
+.calculateHPBarCoordsLoop\@
+	add hl,bc
+	dec d
+	jr nz,.calculateHPBarCoordsLoop\@
+	jr .doneHealing\@
+.healingItemNoEffect\@
+	call ItemUseNoEffect
+	jp .done\@
+.doneHealing\@
+	ld a,[$d152]
+	and a ; using Softboiled?
+	jr nz,.skipRemovingItem\@ ; no item to remove if using Softboiled
+	push hl
+	call RemoveUsedItem
+	pop hl
+.skipRemovingItem\@
+	ld a,[$cf91]
+	cp a,FULL_RESTORE
+	jr c,.playStatusAilmentCuringSound\@
+	cp a,FULL_HEAL
+	jr z,.playStatusAilmentCuringSound\@
+	ld a,$8d ; HP healing sound
+	call $3740 ; play sound
+	ld a,[$fff6]
+	set 0,a
+	ld [$fff6],a
+	ld a,$02
+	ld [$cf94],a
+	ld a,$48
+	call Predef ; animate the HP bar lengthening
+	ld a,[$fff6]
+	res 0,a
+	ld [$fff6],a
+	ld a,$f7 ; revived message
+	ld [$d07d],a
+	ld a,[$cf91]
+	cp a,REVIVE
+	jr z,.showHealingItemMessage\@
+	cp a,MAX_REVIVE
+	jr z,.showHealingItemMessage\@
+	ld a,$f5 ; standard HP healed message
+	ld [$d07d],a
+	jr .showHealingItemMessage\@
+.playStatusAilmentCuringSound\@
+	ld a,$8e ; status ailment curing sound
+	call $3740 ; play sound
+.showHealingItemMessage\@
+	xor a
+	ld [H_AUTOBGTRANSFERENABLED],a
+	call ClearScreen
+	dec a
+	ld [$cfcb],a
+	call RedrawPartyMenu ; redraws the party menu and displays the message
+	ld a,1
+	ld [H_AUTOBGTRANSFERENABLED],a
+	ld c,50
+	call DelayFrames
+	call $3865 ; wait for a button press
+	jr .done\@
+.canceledItemUse\@
+	xor a
+	ld [$cd6a],a ; item use failed
+	pop af
+	pop af
+.done\@
+	ld a,[$d152]
+	and a ; using Softboiled?
+	ret nz ; if so, return
+	call GBPalWhiteOut
+	call z,GoPAL_SET_CF1C
+	ld a,[W_ISINBATTLE]
+	and a
+	ret nz
+	jp $3071 ; restore saved screen
+.useVitamin\@
+	push hl
+	ld a,[hl]
+	ld [$d0b5],a
+	ld [$d11e],a
+	ld bc,33
+	add hl,bc ; hl now points to level
+	ld a,[hl] ; a = level
+	ld [$d127],a ; store level
+	call GetBaseStats
+	push de
+	ld a,d
+	ld hl,W_PARTYMON1NAME
+	call GetPartyMonName
+	pop de
+	pop hl
+	ld a,[$cf91]
+	cp a,RARE_CANDY
+	jp z,.useRareCandy\@
+	push hl
+	sub a,HP_UP
+	add a
+	ld bc,17
+	add hl,bc
+	add l
+	ld l,a
+	jr nc,.noCarry2\@
+	inc h
+.noCarry2\@
+	ld a,10
+	ld b,a
+	ld a,[hl] ; a = MSB of stat experience of the appropriate stat
+	cp a,100 ; is there already at least 25600 (256 * 100) stat experience?
+	jr nc,.vitaminNoEffect\@ ; if so, vitamins can't add any more
+	add b ; add 2560 (256 * 10) stat experience
+	jr nc,.noCarry3\@ ; a carry should be impossible here, so this will always jump
+	ld a,255
+.noCarry3\@
+	ld [hl],a
+	pop hl
+	call .recalculateStats\@
+	ld hl,VitaminText
+	ld a,[$cf91]
+	sub a,HP_UP - 1
+	ld c,a
+.vitaminNameLoop\@ ; loop to get the address of the name of the vitamin
+	dec c
+	jr z,.next34\@
+.vitaminNameInnerLoop\@
+	ld a,[hli]
+	ld b,a
+	ld a,$50
+	cp b
+	jr nz,.vitaminNameInnerLoop\@
+	jr .vitaminNameLoop\@
+.next34\@
+	ld de,$cf4b
+	ld bc,10
+	call CopyData ; copy the vitamin's name to $cf4b
+	ld a,$8e
+	call $23b1 ; play sound
+	ld hl,VitaminStatRoseText
+	call PrintText
+	jp RemoveUsedItem
+.vitaminNoEffect\@
+	pop hl
+	ld hl,VitaminNoEffectText
+	call PrintText
+	jp GBPalWhiteOut
+.recalculateStats\@
+	ld bc,34
+	add hl,bc
+	ld d,h
+	ld e,l ; de now points to stats
+	ld bc,-18
+	add hl,bc ; hl now points to byte 3 of experience
+	ld b,1
+	jp $3936 ; recalculate stats
+.useRareCandy\@
+	push hl
+	ld bc,33
+	add hl,bc ; hl now points to level
+	ld a,[hl] ; a = level
+	cp a,100
+	jr z,.vitaminNoEffect\@ ; can't raise level above 100
+	inc a
+	ld [hl],a ; store incremented level
+	ld [$d127],a
+	push hl
+	push de
+	ld d,a
+	ld hl,$4f6a
+	ld b,$16
+	call Bankswitch ; calculate experience for next level and store it at $ff96
+	pop de
+	pop hl
+	ld bc,-19
+	add hl,bc ; hl now points to experience
+; update experience to minimum for new level
+	ld a,[$ff96]
+	ld [hli],a
+	ld a,[$ff97]
+	ld [hli],a
+	ld a,[$ff98]
+	ld [hl],a
+	pop hl
+	ld a,[$cf92]
+	push af
+	ld a,[$cf91]
+	push af
+	push de
+	push hl
+	ld bc,34
+	add hl,bc ; hl now points to MSB of max HP
+	ld a,[hli]
+	ld b,a
+	ld c,[hl]
+	pop hl
+	push bc
+	push hl
+	call .recalculateStats\@
+	pop hl
+	ld bc,35 ; hl now points to LSB of max HP
+	add hl,bc
+	pop bc
+	ld a,[hld]
+	sub c
+	ld c,a
+	ld a,[hl]
+	sbc b
+	ld b,a ; bc = the amount of max HP gained from leveling up
+; add the amount gained to the current HP
+	ld de,-32
+	add hl,de ; hl now points to MSB of current HP
+	ld a,[hl]
+	add c
+	ld [hld],a
+	ld a,[hl]
+	adc b
+	ld [hl],a
+	ld a,$f8 ; level up message
+	ld [$d07d],a
+	call RedrawPartyMenu
+	pop de
+	ld a,d
+	ld [$cf92],a
+	ld a,e
+	ld [$d11e],a
+	xor a
+	ld [$cc49],a ; load from player's party
+	call LoadMonData
+	ld d,$01
+	ld hl,$6ae4
+	ld b,$04
+	call Bankswitch ; display new stats text box
+	call $3865 ; wait for button press
+	xor a
+	ld [$cc49],a
+	ld a,$1a
+	call Predef ; learn level up move, if any
+	xor a
+	ld [$ccd4],a
+	ld hl,$6d0e
+	ld b,$0e
+	call Bankswitch ; evolve pokemon, if appropriate
+	ld a,$01
+	ld [$cfcb],a
+	pop af
+	ld [$cf91],a
+	pop af
+	ld [$cf92],a
+	jp RemoveUsedItem
+
+VitaminStatRoseText: ; 5F24
+	TX_FAR _VitaminStatRoseText
 	db $50
-; 0xdf24 + 5 bytes
 
-UnnamedText_df29: ; 0xdf29
-	TX_FAR _UnnamedText_df29
+VitaminNoEffectText: ; 5F29
+	TX_FAR _VitaminNoEffectText
 	db $50
-; 0xdf29 + 5 bytes
 
-INCBIN "baserom.gbc",$df2e,$dfa5 - $df2e
+VitaminText: ; 5F2E
+	db "HEALTH@"
+	db "ATTACK@"
+	db "DEFENSE@"
+	db "SPEED@"
+	db "SPECIAL@"
 
-UnnamedText_dfa5: ; 0xdfa5
-	TX_FAR _UnnamedText_dfa5
+INCBIN "baserom.gbc",$df52,$dfa5 - $df52
+
+ThrewBaitText: ; 0xdfa5
+	TX_FAR _ThrewBaitText
 	db $50
-; 0xdfa5 + 5 bytes
 
-UnnamedText_dfaa: ; 0xdfaa
-	TX_FAR _UnnamedText_dfaa
+ThrewRockText: ; 0xdfaa
+	TX_FAR _ThrewRockText
 	db $50
-; 0xdfaa + 5 bytes
 
 INCBIN "baserom.gbc",$dfaf,$e20b - $dfaf
 
@@ -16073,61 +16748,609 @@ UnnamedText_e312: ; 0xe312
 	db $50
 ; 0xe312 + 5 bytes
 
-INCBIN "baserom.gbc",$e317,$e45d - $e317
+ItemUsePPUp: ; 6317
+	ld a,[W_ISINBATTLE]
+	and a
+	jp nz,ItemUseNotTime
 
-UnnamedText_e45d: ; 0xe45d
-	TX_FAR _UnnamedText_e45d
+ItemUsePPRestore: ; 631E
+	ld a,[$cf92]
+	push af
+	ld a,[$cf91]
+	ld [$cd3d],a
+.chooseMon\@
+	xor a
+	ld [$cfcb],a
+	ld a,$01 ; item use party menu
+	ld [$d07d],a
+	call DisplayPartyMenu
+	jr nc,.chooseMove\@
+	jp .itemNotUsed\@
+.chooseMove\@
+	ld a,[$cd3d]
+	cp a,ELIXER
+	jp nc,.useElixir\@ ; if Elixir or Max Elixir
+	ld a,$02
+	ld [$ccdb],a
+	ld hl,RaisePPWhichTechniqueText
+	ld a,[$cd3d]
+	cp a,ETHER ; is it a PP Up?
+	jr c,.printWhichTechniqueMessage\@ ; if so, print the raise PP message
+	ld hl,RestorePPWhichTechniqueText ; otherwise, print the restore PP message
+.printWhichTechniqueMessage\@
+	call PrintText
+	xor a
+	ld [$cc2e],a
+	ld hl,$5219
+	ld b,$0f
+	call Bankswitch ; move selection menu
+	ld a,0
+	ld [$cc2e],a
+	jr nz,.chooseMon\@
+	ld hl,W_PARTYMON1_MOVE1
+	ld bc,44
+	call GetSelectedMoveOffset
+	push hl
+	ld a,[hl]
+	ld [$d11e],a
+	call GetMoveName
+	call $3826 ; copy name to $cf4b
+	pop hl
+	ld a,[$cd3d]
+	cp a,ETHER
+	jr nc,.useEther\@ ; if Ether or Max Ether
+.usePPUp\@
+	ld bc,21
+	add hl,bc
+	ld a,[hl] ; move PP
+	cp a,3 << 6 ; have 3 PP Ups already been used?
+	jr c,.PPNotMaxedOut\@
+	ld hl,PPMaxedOutText
+	call PrintText
+	jr .chooseMove\@
+.PPNotMaxedOut\@
+	ld a,[hl]
+	add a,1 << 6 ; increase PP Up count by 1
+	ld [hl],a
+	ld a,1 ; 1 PP Up used
+	ld [$d11e],a
+	call RestoreBonusPP ; add the bonus PP to current PP
+	ld hl,PPIncreasedText
+	call PrintText
+.done\@
+	pop af
+	ld [$cf92],a
+	call GBPalWhiteOut
+	call GoPAL_SET_CF1C
+	jp RemoveUsedItem
+.afterRestoringPP\@ ; after using a (Max) Ether/Elixir
+	ld a,[$cf92]
+	ld b,a
+	ld a,[W_PLAYERMONNUMBER]
+	cp b ; is the pokemon whose PP was restored active in battle?
+	jr nz,.skipUpdatingInBattleData\@
+	ld hl,W_PARTYMON1_MOVE1PP
+	ld bc,44
+	call AddNTimes
+	ld de,W_PLAYERMONPP
+	ld bc,4
+	call CopyData ; copy party data to in-battle data
+.skipUpdatingInBattleData\@
+	ld a,$8e
+	call $23b1
+	ld hl,PPRestoredText
+	call PrintText
+	jr .done\@
+.useEther\@
+	call .restorePP\@
+	jr nz,.afterRestoringPP\@
+	jp .noEffect\@
+; unsets zero flag if PP was restored, sets zero flag if not
+; however, this is bugged for Max Ethers and Max Elixirs (see below)
+.restorePP\@
+	xor a
+	ld [$cc49],a ; party pokemon
+	call GetMaxPP
+	ld hl,W_PARTYMON1_MOVE1
+	ld bc,44
+	call GetSelectedMoveOffset
+	ld bc,21
+	add hl,bc ; hl now points to move's PP
+	ld a,[$d11e]
+	ld b,a ; b = max PP
+	ld a,[$cd3d]
+	cp a,MAX_ETHER
+	jr z,.fullyRestorePP\@
+	ld a,[hl] ; move PP
+	and a,%00111111 ; lower 6 bit bits store current PP
+	cp b ; does current PP equal max PP?
+	ret z ; if so, return
+	add a,10 ; increase current PP by 10
+; b holds the max PP amount and b will hold the new PP amount.
+; So, if the new amount meets or exceeds the max amount,
+; cap the amount to the max amount by leaving b unchanged.
+; Otherwise, store the new amount in b.
+	cp b ; does the new amount meet or exceed the maximum?
+	jr nc,.storeNewAmount\@
+	ld b,a
+.storeNewAmount\@
+	ld a,[hl] ; move PP
+	and a,%11000000 ; PP Up counter bits
+	add b
+	ld [hl],a
+	ret
+.fullyRestorePP\@
+	ld a,[hl] ; move PP
+; Note that this code has a bug. It doesn't mask out the upper two bits, which
+; are used to count how many PP Ups have been used on the move. So, Max Ethers
+; and Max Elixirs will not be detected as having no effect on a move with full
+; PP if the move has had any PP Ups used on it.
+	cp b ; does current PP equal max PP?
+	ret z
+	jr .storeNewAmount\@
+.useElixir\@
+; decrement the item ID so that ELIXER becomes ETHER and MAX_ELIXER becomes MAX_ETHER
+	ld hl,$cd3d
+	dec [hl]
+	dec [hl]
+	xor a
+	ld hl,W_CURMENUITEMID
+	ld [hli],a
+	ld [hl],a ; zero the counter for number of moves that had their PP restored
+	ld b,4
+; loop through each move and restore PP
+.elixirLoop\@
+	push bc
+	ld hl,W_PARTYMON1_MOVE1
+	ld bc,44
+	call GetSelectedMoveOffset
+	ld a,[hl]
+	and a ; does the current slot have a move?
+	jr z,.nextMove\@
+	call .restorePP\@
+	jr z,.nextMove\@
+; if some PP was restored
+	ld hl,$cc27 ; counter for number of moves that had their PP restored
+	inc [hl]
+.nextMove\@
+	ld hl,W_CURMENUITEMID
+	inc [hl]
+	pop bc
+	dec b
+	jr nz,.elixirLoop\@
+	ld a,[$cc27]
+	and a ; did any moves have their PP restored?
+	jp nz,.afterRestoringPP\@
+.noEffect\@
+	call ItemUseNoEffect
+.itemNotUsed\@
+	call GBPalWhiteOut
+	call GoPAL_SET_CF1C
+	pop af
+	xor a
+	ld [$cd6a],a ; item use failed
+	ret
+
+RaisePPWhichTechniqueText: ; 645D
+	TX_FAR _RaisePPWhichTechniqueText
 	db $50
-; 0xe45d + 5 bytes
 
-UnnamedText_e462: ; 0xe462
-	TX_FAR _UnnamedText_e462
+RestorePPWhichTechniqueText: ; 6462
+	TX_FAR _RestorePPWhichTechniqueText
 	db $50
-; 0xe462 + 5 bytes
 
-UnnamedText_e467: ; 0xe467
-	TX_FAR _UnnamedText_e467
+PPMaxedOutText: ; 6467
+	TX_FAR _PPMaxedOutText
 	db $50
-; 0xe467 + 5 bytes
 
-UnnamedText_e46c: ; 0xe46c
-	TX_FAR _UnnamedText_e46c
+PPIncreasedText: ; 646C
+	TX_FAR _PPIncreasedText
 	db $50
-; 0xe46c + 5 bytes
 
-UnnamedText_e471: ; 0xe471
-	TX_FAR _UnnamedText_e471
+PPRestoredText: ; 6471
+	TX_FAR _PPRestoredText
 	db $50
-; 0xe471 + 5 bytes
 
-; 0xe476 XXX
-db $c3, $81, $65
+; for items that can't be used from the Item menu
+UnusableItem: ; 6476
+	jp ItemUseNotTime
 
-ItemUseTMHM: ; 03:6479
-	INCBIN "baserom.gbc",$E479,$E581 - $E479
-ItemUseNotTime: ; 03:6581
-	INCBIN "baserom.gbc",$E581,$E5E8 - $E581
-ItemUseText00: ; 03:65e8
+ItemUseTMHM: ; 6479
+	ld a,[W_ISINBATTLE]
+	and a
+	jp nz,ItemUseNotTime
+	ld a,[$cf91]
+	sub a,TM_01
+	push af
+	jr nc,.skipAdding\@
+	add a,55 ; if item is an HM, add 55
+.skipAdding\@
+	inc a
+	ld [$d11e],a
+	ld a,$44
+	call Predef ; get move ID from TM/HM ID
+	ld a,[$d11e]
+	ld [$d0e0],a
+	call GetMoveName
+	call $3826 ; copy name to $cf4b
+	pop af
+	ld hl,BootedUpTMText
+	jr nc,.printBootedUpMachineText\@
+	ld hl,BootedUpHMText
+.printBootedUpMachineText\@
+	call PrintText
+	ld hl,TeachMachineMoveText
+	call PrintText
+	FuncCoord 14,7
+	ld hl,Coord
+	ld bc,$080f
+	ld a,$14
+	ld [$d125],a
+	call DisplayTextBoxID ; yes/no menu
+	ld a,[W_CURMENUITEMID]
+	and a
+	jr z,.useMachine\@
+	ld a,2
+	ld [$cd6a],a ; item not used
+	ret
+.useMachine\@
+	ld a,[$cf92]
+	push af
+	ld a,[$cf91]
+	push af
+.chooseMon\@
+	ld hl,$cf4b
+	ld de,$d036
+	ld bc,14
+	call CopyData
+	ld a,$ff
+	ld [$cfcb],a
+	ld a,$03 ; teach TM/HM party menu
+	ld [$d07d],a
+	call DisplayPartyMenu
+	push af
+	ld hl,$d036
+	ld de,$cf4b
+	ld bc,14
+	call CopyData
+	pop af
+	jr nc,.checkIfAbleToLearnMove\@
+; if the player canceled teaching the move
+	pop af
+	pop af
+	call GBPalWhiteOutWithDelay3
+	call CleanLCD_OAM
+	call GoPAL_SET_CF1C
+	jp $3725 ; restore saved screen
+.checkIfAbleToLearnMove\@
+	ld a,$43
+	call Predef ; check if the pokemon can learn the move
+	push bc
+	ld a,[$cf92]
+	ld hl,W_PARTYMON1NAME
+	call GetPartyMonName
+	pop bc
+	ld a,c
+	and a ; can the pokemon learn the move?
+	jr nz,.checkIfAlreadyLearnedMove\@
+; if the pokemon can't learn the move
+	ld a,$a5
+	call $3740 ; play sound
+	ld hl,MonCannotLearnMachineMoveText
+	call PrintText
+	jr .chooseMon\@
+.checkIfAlreadyLearnedMove\@
+	ld hl,$7e18
+	ld b,$0b
+	call Bankswitch ; check if the pokemon already knows the move
+	jr c,.chooseMon\@
+	ld a,$1b
+	call Predef ; teach move
+	pop af
+	ld [$cf91],a
+	pop af
+	ld [$cf92],a
+	ld a,b
+	and a
+	ret z
+	ld a,[$cf91]
+	call IsItemHM
+	ret c
+	jp RemoveUsedItem
+
+BootedUpTMText: ; 654F
+	TX_FAR _BootedUpTMText
+	db $50
+
+BootedUpHMText: ; 6554
+	TX_FAR _BootedUpHMText
+	db $50
+
+TeachMachineMoveText: ; 6559
+	TX_FAR _TeachMachineMoveText
+	db $50
+
+MonCannotLearnMachineMoveText: ; 655E
+	TX_FAR _MonCannotLearnMachineMoveText
+	db $50
+
+PrintItemUseTextAndRemoveItem: ; 6563
+	ld hl,ItemUseText00
+	call PrintText
+	ld a,$8e
+	call $23b1 ; play sound
+	call $3865 ; wait for button press
+
+RemoveUsedItem: ; 6571
+	ld hl,W_NUMBAGITEMS
+	ld a,1 ; one item
+	ld [$cf96],a ; store quantity
+	jp RemoveItemFromInventory
+
+ItemUseNoEffect: ; 657C
+	ld hl,ItemUseNoEffectText
+	jr ItemUseFailed
+
+ItemUseNotTime: ; 6581
+	ld hl,ItemUseNotTimeText
+	jr ItemUseFailed
+
+ItemUseNotYoursToUse: ; 6586
+	ld hl,ItemUseNotYoursToUseText
+	jr ItemUseFailed
+
+ThrowBallAtTrainerMon: ; 658B
+	call GoPAL_SET_CF1C
+	call $3725 ; restore saved screen
+	call Delay3
+	ld a,TOSS_ANIM
+	ld [W_ANIMATIONID],a
+	ld a,$08
+	call Predef ; do animation
+	ld hl,ThrowBallAtTrainerMonText1
+	call PrintText
+	ld hl,ThrowBallAtTrainerMonText2
+	call PrintText
+	jr RemoveUsedItem
+
+NoCyclingAllowedHere: ; 65AC
+	ld hl,NoCyclingAllowedHereText
+	jr ItemUseFailed
+
+BoxFullCannotThrowBall: ; 65B1
+	ld hl,BoxFullCannotThrowBallText
+	jr ItemUseFailed
+
+SurfingAttemptFailed: ; 65B6
+	ld hl,NoSurfingHereText
+
+ItemUseFailed: ; 65B9
+	xor a
+	ld [$cd6a],a ; item use failed
+	jp PrintText
+
+ItemUseNotTimeText: ; 65C0
+	TX_FAR _ItemUseNotTimeText
+	db $50
+
+ItemUseNotYoursToUseText: ; 65C5
+	TX_FAR _ItemUseNotYoursToUseText
+	db $50
+
+ItemUseNoEffectText: ; 65CA
+	TX_FAR _ItemUseNoEffectText
+	db $50
+
+ThrowBallAtTrainerMonText1: ; 65CF
+	TX_FAR _ThrowBallAtTrainerMonText1
+	db $50
+
+ThrowBallAtTrainerMonText2: ; 65D4
+	TX_FAR _ThrowBallAtTrainerMonText2
+	db $50
+
+NoCyclingAllowedHereText: ; 65D9
+	TX_FAR _NoCyclingAllowedHereText
+	db $50
+
+NoSurfingHereText: ; 65DE
+	TX_FAR _NoSurfingHereText
+	db $50
+
+BoxFullCannotThrowBallText: ; 65E3
+	TX_FAR _BoxFullCannotThrowBallText
+	db $50
+
+ItemUseText00: ; 65E8
 	TX_FAR _ItemUseText001
 	db $05
 	TX_FAR _ItemUseText002
-	db "@"
-
-INCBIN "baserom.gbc",$e5f2,$e5f7 - $e5f2
-
-UnnamedText_e5f7: ; 0xe5f7
-	TX_FAR _UnnamedText_e5f7
 	db $50
-; 0xe5f7 + 5 bytes
 
-INCBIN "baserom.gbc",$e5fc,$e601 - $e5fc
-
-UnnamedText_e601: ; 0xe601
-	TX_FAR _UnnamedText_e601
+GotOnBicycleText: ; 65F2
+	TX_FAR _GotOnBicycleText1
+	db $05
+	TX_FAR _GotOnBicycleText2
 	db $50
-; 0xe601 + 5 bytes
 
-INCBIN "baserom.gbc",$e606,$e6f1 - $e606
+GotOffBicycleText: ; 65FC
+	TX_FAR _GotOffBicycleText1
+	db $05
+	TX_FAR _GotOffBicycleText2
+	db $50
+
+; restores bonus PP (from PP Ups) when healing at a pokemon center
+; also, when a PP Up is used, it increases the current PP by one PP Up bonus
+; INPUT:
+; [$cf92] = index of pokemon in party
+; [$d11e] = mode
+; 0: Pokemon Center healing
+; 1: using a PP Up
+; [CURMENUITEMID] = index of move (when using a PP Up)
+RestoreBonusPP: ; 6606
+	ld hl,W_PARTYMON1_MOVE1
+	ld bc,44
+	ld a,[$cf92]
+	call AddNTimes
+	push hl
+	ld de,$cd78 - 1
+	ld a,$5e
+	call Predef ; loads the normal max PP of each of the pokemon's moves to $cd78
+	pop hl
+	ld c,21
+	ld b,0
+	add hl,bc ; hl now points to move 1 PP
+	ld de,$cd78
+	ld b,0 ; initialize move counter to zero
+; loop through the pokemon's moves
+.loop\@
+	inc b
+	ld a,b
+	cp a,5 ; reached the end of the pokemon's moves?
+	ret z ; if so, return
+	ld a,[$d11e]
+	dec a ; using a PP Up?
+	jr nz,.skipMenuItemIDCheck\@
+; if using a PP Up, check if this is the move it's being used on
+	ld a,[W_CURMENUITEMID]
+	inc a
+	cp b
+	jr nz,.nextMove\@
+.skipMenuItemIDCheck\@
+	ld a,[hl]
+	and a,%11000000 ; have any PP Ups been used?
+	call nz,AddBonusPP ; if so, add bonus PP
+.nextMove\@
+	inc hl
+	inc de
+	jr .loop\@
+
+; adds bonus PP from PP Ups to current PP
+; 1/5 of normal max PP (capped at 7) is added for each PP Up
+; INPUT:
+; [de] = normal max PP
+; [hl] = move PP
+; [$d11e] = max number of times to add bonus
+; set to 1 when using a PP Up, set to 255 otherwise
+AddBonusPP: ; 6642
+	push bc
+	ld a,[de] ; normal max PP of move
+	ld [H_DIVIDEND + 3],a
+	xor a
+	ld [H_DIVIDEND],a
+	ld [H_DIVIDEND + 1],a
+	ld [H_DIVIDEND + 2],a
+	ld a,5
+	ld [H_DIVISOR],a
+	ld b,4
+	call Divide
+	ld a,[hl] ; move PP
+	ld b,a
+	swap a
+	and a,%00001111
+	srl a
+	srl a
+	ld c,a ; c = number of PP Ups used
+.loop\@
+	ld a,[H_QUOTIENT + 3]
+	cp a,8 ; is the amount greater than or equal to 8?
+	jr c,.addAmount\@
+	ld a,7 ; cap the amount at 7
+.addAmount\@
+	add b
+	ld b,a
+	ld a,[$d11e]
+	dec a
+	jr z,.done\@
+	dec c
+	jr nz,.loop\@
+.done\@
+	ld [hl],b
+	pop bc
+	ret
+
+; gets max PP of a pokemon's move (including PP from PP Ups)
+; INPUT:
+; [$cf92] = index of pokemon within party/box
+; [$cc49] = pokemon source
+; 00: player's party
+; 01: enemy's party
+; 02: current box
+; 03: daycare
+; 04: player's in-battle pokemon
+; [W_CURMENUITEMID] = move index
+; OUTPUT:
+; [$d11e] = max PP
+GetMaxPP: ; 6677
+	ld a,[$cc49]
+	and a
+	ld hl,W_PARTYMON1_MOVE1
+	ld bc,44
+	jr z,.sourceWithMultipleMon\@
+	ld hl,$d8ac ; enemy party
+	dec a
+	jr z,.sourceWithMultipleMon\@
+	ld hl,$da9e ; current box
+	ld bc,33
+	dec a
+	jr z,.sourceWithMultipleMon\@
+	ld hl,$da67 ; daycare
+	dec a
+	jr z,.sourceWithOneMon\@
+	ld hl,$d01c ; player's in-battle pokemon
+.sourceWithOneMon\@
+	call GetSelectedMoveOffset2
+	jr .next\@
+.sourceWithMultipleMon\@
+	call GetSelectedMoveOffset
+.next\@
+	ld a,[hl]
+	dec a
+	push hl
+	ld hl,Moves
+	ld bc,6
+	call AddNTimes
+	ld de,$cd6d
+	ld a,BANK(Moves)
+	call FarCopyData
+	ld de,$cd72
+	ld a,[de]
+	ld b,a ; b = normal max PP
+	pop hl
+	push bc
+	ld bc,21 ; PP offset if not player's in-battle pokemon data
+	ld a,[$cc49]
+	cp a,4 ; player's in-battle pokemon?
+	jr nz,.addPPOffset\@
+	ld bc,17 ; PP offset if player's in-battle pokemon data
+.addPPOffset\@
+	add hl,bc
+	ld a,[hl] ; a = current PP
+	and a,%11000000 ; get PP Up count
+	pop bc
+	or b ; place normal max PP in 6 lower bits of a
+	ld h,d
+	ld l,e
+	inc hl ; hl = $cd73
+	ld [hl],a
+	xor a
+	ld [$d11e],a ; no limit on PP Up amount
+	call AddBonusPP ; add bonus PP from PP Ups
+	ld a,[hl]
+	and a,%00111111 ; mask out the PP Up count
+	ld [$d11e],a ; store max PP
+	ret
+
+GetSelectedMoveOffset: ; 66E3
+	ld a,[$cf92]
+	call AddNTimes
+
+GetSelectedMoveOffset2: ; 66E9
+	ld a,[W_CURMENUITEMID]
+	ld c,a
+	ld b,0
+	add hl,bc
+	ret
 
 ; confirms the item toss and then tosses the item
 ; INPUT:
@@ -84695,50 +85918,38 @@ _ItemUseBallText08:
 
 _ItemUseBallText06:
 	db 0,"New #DEX data",$4F
-	db "will be added for",$55,"@",1
-	dw $CFDA
+	db "will be added for",$55,"@"
+	TX_RAM $cfda
 	db 0,"!@@"
 
 _UnnamedText_da4c: ; 0xa685e
 	db $0, $52, " got on", $4f
 	db "@"
-; 0xa685e + 11 bytes
-
-UnnamedText_a6869: ; 0xa6869
 	TX_RAM $cd6d
 	db $0, "!", $58
-; 0xa686f
 
 _UnnamedText_da51: ; 0xa686f
 	db $0, "There's no place", $4f
 	db "to get off!", $58
-; 0xa686f + 29 bytes
 
-_UnnamedText_df24: ; 0xa688c
+_VitaminStatRoseText: ; 0xa688c
 	TX_RAM $cd6d
 	db $0, "'s", $4f
 	db "@"
-; 0xa688c + 7 bytes
-
-UnnamedText_a6893: ; 0xa6893
 	TX_RAM $cf4b
 	db $0, " rose.", $58
-; 0xa689e
 
-_UnnamedText_df29: ; 0xa689e
+_VitaminNoEffectText: ; 0xa689e
 	db $0, "It won't have any", $4f
 	db "effect.", $58
-; 0xa689e + 26 bytes
 
-_UnnamedText_dfa5: ; 0xa68b8
+_ThrewBaitText: ; 0xa68b8
 	db $0, $52, " threw", $4f
 	db "some BAIT.", $57
-; 0xa68b8 + 20 bytes
 
-_UnnamedText_dfaa: ; 0xa68cc
+_ThrewRockText: ; 0xa68cc
 	db $0, $52, " threw a", $4f
 	db "ROCK.", $57
-; 0xa68cc + 17 bytes
 
 _UnnamedText_e20b: ; 0xa68dd
 	db $0, "Played the #", $4f
@@ -84777,41 +85988,39 @@ _UnnamedText_e312: ; 0xa6981
 	db "isn't responding.", $58
 ; 0xa6981 + 35 bytes
 
-_UnnamedText_e45d: ; 0xa69a4
+_RaisePPWhichTechniqueText: ; 0xa69a4
 	db $0, "Raise PP of which", $4f
 	db "technique?", $57
 ; 0xa69a4 + 30 bytes
 
-_UnnamedText_e462: ; 0xa69c2
+_RestorePPWhichTechniqueText: ; 0xa69c2
 	db $0, "Restore PP of", $4f
 	db "which technique?", $57
 ; 0xa69c2 + 32 bytes
 
-_UnnamedText_e467: ; 0xa69e2
+_PPMaxedOutText: ; 0xa69e2
 	TX_RAM $cf4b
 	db $0, "'s PP", $4f
 	db "is maxed out.", $58
 ; 0xa69e2 + 23 bytes
 
-_UnnamedText_e46c: ; 0xa69f9
+_PPIncreasedText: ; 0xa69f9
 	TX_RAM $cf4b
 	db $0, "'s PP", $4f
 	db "increased.", $58
 ; 0xa69f9 + 20 bytes
 
-_UnnamedText_e471: ; 0xa6a0d
+_PPRestoredText: ; 0xa6a0d
 	db $0, "PP was restored.", $58
 ; 0xa6a0d + 18 bytes
 
-UnnamedText_a6a1f: ; 0xa6a1f
+_BootedUpTMText: ; 0xa6a1f
 	db $0, "Booted up a TM!", $58
-; 0xa6a30
 
-UnnamedText_a6a30: ; 0xa6a30
+_BootedUpHMText: ; 0xa6a30
 	db $0, "Booted up an HM!", $58
-; 0xa6a42
 
-UnnamedText_a6a42: ; 0xa6a42
+_TeachMachineMoveText: ; 0xa6a42
 	db $0, "It contained", $4f
 	db "@"
 	TX_RAM $cf4b
@@ -84820,9 +86029,8 @@ UnnamedText_a6a42: ; 0xa6a42
 	TX_RAM $cf4b
 	db $0, $4f
 	db "to a #MON?", $57
-; 0xa6a6e
 
-UnnamedText_a6a6e: ; 0xa6a6e
+_MonCannotLearnMachineMoveText: ; 0xa6a6e
 	TX_RAM $cd6d
 	db $0, " is not", $4f
 	db "compatible with", $55
@@ -84831,57 +86039,43 @@ UnnamedText_a6a6e: ; 0xa6a6e
 	db $0, ".", $51
 	db "It can't learn", $4f
 	db "@"
-; 0xa6a8b + 21 bytes = 0xa6aa0
-
-UnnamedText_a6aa0: ; 0xa6aa0
 	TX_RAM $cf4b
 	db $0, ".", $58
-; 0xa6aa0 + 6 bytes = 0xa6aa6
 
-UnnamedText_a6aa6: ; 0xa6aa6
+_ItemUseNotTimeText: ; 0xa6aa6
 	db $0, "OAK: ", $52, "!", $4f
 	db "This isn't the", $55
 	db "time to use that! ", $58
-; 0xa6aa6 + 42 bytes = 0xa6ad0
 
-UnnamedText_a6ad0: ; 0xa6ad0
+_ItemUseNotYoursToUseText: ; 0xa6ad0
 	db $0, "This isn't yours", $4f
 	db "to use!", $58
-; 0xa6ad0 + 25 bytes = 0xa6ae9
 
-UnnamedText_a6ae9: ; 0xa6ae9
+_ItemUseNoEffectText: ; 0xa6ae9
 	db $0, "It won't have any", $4f
 	db "effect.", $58
 ; 0xa6ae9 + 26 bytes = 0xa6b03
 
-UnnamedText_a6b03: ; 0xa6b03
+_ThrowBallAtTrainerMonText1: ; 0xa6b03
 	db $0, "The trainer", $4f
 	db "blocked the BALL!", $58
-; 0xa6b03 + 31 bytes = 0xa6b22
 
-UnnamedText_a6b22: ; 0xa6b22
+_ThrowBallAtTrainerMonText2: ; 0xa6b22
 	db $0, "Don't be a thief!", $58
-; 0xa6b22 + 18 bytes = 0xa6b34
 
-UnnamedText_a6b34: ; 0xa6b34
+_NoCyclingAllowedHereText: ; 0xa6b34
 	db $0, "No cycling", $4e, "allowed here.", $58
-; 0xa6b34 + 26 bytes = 0xa6b4e
 
-UnnamedText_a6b4e: ; 0xa6b4e
+_NoSurfingHereText: ; 0xa6b4e
 	db $0, "No SURFing on", $4f
 	db "@"
-; 0xa6b4e + 16 bytes = 0xa6b5e
-
-UnnamedText_a6b5e: ; 0xa6b5e
 	TX_RAM $cd6d
 	db $0, " here!", $58
-; 0xa6b5e + 11 bytes = 0xa6b69
 
-UnnamedText_a6b69: ; 0xa6b69
+_BoxFullCannotThrowBallText: ; 0xa6b69
 	db $0, "The #MON BOX", $4f
 	db "is full! Can't", $55
 	db "use that item!", $58
-; 0xa6b69 + 43 bytes = 0xa6b94
 
 SECTION "bank2A",DATA,BANK[$2A]
 
@@ -84891,62 +86085,46 @@ _ItemUseText001:
 _ItemUseText002: ; 0xa8009
 	TX_RAM $cf4b
 	db $0, "!", $57
-; 0xa800e
 
-UnnamedText_a800f: ; 0xa800f
+_GotOnBicycleText1: ; 0xa800f
 	db $0, $52, " got on the@@"
-; 0xa801e
 
-_UnnamedText_e5f7: ; 0xa801e
+_GotOnBicycleText2: ; 0xa801e
 	TX_RAM $cf4b
 	db $0, "!", $58
-; 0xa801e + 6 bytes
 
-UnnamedText_a8024: ; 0xa8024
+_GotOffBicycleText1: ; 0xa8024
 	db $0, $52, " got off@@"
-; 0xa8030
 
-_UnnamedText_e601: ; 0xa8030
+_GotOffBicycleText2: ; 0xa8030
 	db $0, "the @"
 	TX_RAM $cf4b
 	db $0, ".", $58
-; 0xa803c
 
 _ThrewAwayItemText: ; 0xa803c
 	db $0, "Threw away", $4f
 	db "@"
-; 0xa803c + 13 bytes
 
 UnnamedText_a8049: ; 0xa8049
 	TX_RAM $cd6d
 	db $0, ".", $58
-; 0xa804f
 
 _IsItOKToTossItemText: ; 0xa804f
 	db $0, "Is it OK to toss", $4f
 	db "@"
-; 0xa804f + 19 bytes
-
-UnnamedText_a8062: ; 0xa8062
 	TX_RAM $cf4b
 	db $0, "?", $58
-; 0xa8068
 
 _TooImportantToTossText: ; 0xa8068
 	db $0, "That's too impor-", $4f
 	db "tant to toss!", $58
-; 0xa8068 + 32 bytes
 
 _UnnamedText_2fe3b: ; 0xa8088
 	TX_RAM $cd6d
 	db $0, " knows", $4f
 	db "@"
-; 0xa8088 + 12 bytes
-
-UnnamedText_a8094: ; 0xa8094
 	TX_RAM $cf4b
 	db $0, "!", $58
-; 0xa809a
 
 _UnnamedText_71d88: ; 0xa809a
 	db $0, "Okay, connect the", $4f
@@ -84956,28 +86134,21 @@ _UnnamedText_71d88: ; 0xa809a
 _UnnamedText_71d8d: ; 0xa80bc
 	db $0, $52, " traded", $4f
 	db "@"
-
-UnnamedText_a80c7: ; 0xa80c7
 	TX_RAM $cd13
 	db $0, " for", $55
 	db "@"
 	TX_RAM $cd1e
 	db $0, "!@@"
-; 0xa80d8
 
 _UnnamedText_71d94: ; 0xa80d8
 	db $0, "I'm looking for", $4f
 	db "@"
-; 0xa80d8 + 17 bytes
-
-UnnamedText_a80e9: ; 0xa80e9
 	TX_RAM $cd13
 	db $0, "! Wanna", $51
 	db "trade one for", $4f
 	db "@"
 	TX_RAM $cd1e
 	db $0, "? ", $57
-; 0xa810b
 
 _UnnamedText_71d99: ; 0xa810b
 	db $0, "Awww!", $4f
@@ -85003,26 +86174,18 @@ _UnnamedText_71da3: ; 0xa8155
 _UnnamedText_71da8: ; 0xa8162
 	db $0, "Isn't my old", $4f
 	db "@"
-; 0xa8162 + 14 bytes
-
-UnnamedText_a8170: ; 0xa8170
 	TX_RAM $cd1e
 	db $0, " great?", $57
-; 0xa8170
 
 _UnnamedText_71dad: ; 0xa817c
 	db $0, "Hello there! Do", $4f
 	db "you want to trade", $51
 	db "your @"
-; 0xa817c + 41 bytes
-
-UnnamedText_a81a5: ; 0xa81a5
 	TX_RAM $cd13
 	db $0, $4f
 	db "for @"
 	TX_RAM $cd1e
 	db $0, "?", $57
-; 0xa81b5
 
 _UnnamedText_71db2: ; 0xa81b5
 	db $0, "Well, if you", $4f
@@ -85090,11 +86253,11 @@ _UnnamedText_71dda: ; 0xa82c9
 ; 0xa82f8
 
 ; XXX
-db $0, $93, $a7, $a4, $b1, $a4, $7f, $a8, $b2, $ad, $be, $4f
-db $a0, $ad, $b8, $b3, $a7, $a8, $ad, $a6, $7f, $b3, $ae, $7f, $82, $94, $93, $e7, $58
-db $1, $6d, $cd
-db $0, $7f, $a7, $a0, $a2, $aa, $a4, $a3, $4f
-db $a0, $b6, $a0, $b8, $7f, $b6, $a8, $b3, $a7, $7f, $82, $94, $93, $e7, $58
+	db $0, "There isn't", $4f
+	db "anything to CUT!", $58
+	TX_RAM $cd6d
+	db $0, " hacked", $4f
+	db "away with CUT!", $58
 
 SECTION "bank2B",DATA,BANK[$2B]
 
