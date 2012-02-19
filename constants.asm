@@ -1654,6 +1654,7 @@ SUBSTITUTE   EQU $A4
 STRUGGLE     EQU $A5
 ; these do double duty as animation identifiers
 SHOWPIC_ANIM EQU $A6 ; redraw monster pic
+XSTATITEM_ANIM EQU $AE ; use X Attack/Defense/Speed/Special
 SLP_ANIM     EQU $BD ; sleeping monster
 CONF_ANIM    EQU $BF ; confused monster
 TOSS_ANIM    EQU $C1 ; toss Poké Ball
@@ -1663,6 +1664,8 @@ BLOCKBALL_ANIM EQU $C4 ; trainer knocks away Poké Ball
 GREATTOSS_ANIM EQU $C5 ; toss Great Ball
 ULTRATOSS_ANIM EQU $C6 ; toss Ultra Ball or Master Ball
 HIDEPIC_ANIM EQU $C8 ; monster disappears
+ROCK_ANIM EQU $C9 ; throw rock
+BAIT_ANIM EQU $CA ; throw bait
 
 ; super game boy palettes
 PAL_ROUTE     EQU $00

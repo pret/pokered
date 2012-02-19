@@ -1729,6 +1729,8 @@ CheckForJumpingAndTilePairCollisions: ; C2A
 ; if not jumping
 	ld a,[$c45c] ; tile the player is on
 	ld [$cf0e],a
+
+CheckForTilePairCollisions: ; C4A
 	ld a,[$cfc6] ; tile in front of the player
 	ld c,a
 .tilePairCollisionLoop\@
@@ -6729,7 +6731,46 @@ IsItemInBag: ; 3493
 	and a
 	ret
 
-INCBIN "baserom.gbc",$349B,$3541 - $349B
+INCBIN "baserom.gbc",$349B,$34BF - $349B
+
+; tests if the player's coordinates are in a specified array
+; INPUT:
+; hl = address of array
+; OUTPUT:
+; [$cd3d] = if there is match, the matching array index
+; sets carry if the coordinates are in the array, clears carry if not
+ArePlayerCoordsInArray: ; 34BF
+	ld a,[W_YCOORD]
+	ld b,a
+	ld a,[W_XCOORD]
+	ld c,a
+	xor a
+	ld [$cd3d],a
+.loop\@
+	ld a,[hli]
+	cp a,$ff ; reached terminator?
+	jr z,.notInArray\@
+	push hl
+	ld hl,$cd3d
+	inc [hl]
+	pop hl
+.compareYCoord\@
+	cp b
+	jr z,.compareXCoord\@
+	inc hl
+	jr .loop\@
+.compareXCoord\@
+	ld a,[hli]
+	cp c
+	jr nz,.loop\@
+.inArray\@
+	scf
+	ret
+.notInArray\@
+	and a
+	ret
+
+INCBIN "baserom.gbc",$34E4,$3541-$34E4
 
 Function3541: ; 3541
 ; XXX what do these three functions do
@@ -15439,89 +15480,89 @@ UseItem_: ; $D5C7
 	jp [hl]
 
 ItemUsePtrTable: ; $D5E1
-	dw ItemUseBall      ;$5687 masterball
-	dw ItemUseBall      ;$5687 ultraball
-	dw ItemUseBall      ;$5687 greatball
-	dw ItemUseBall      ;$5687 pokeball
-	dw ItemUseTownMap   ;$5968 TownMap
-	dw $5977            ;ItemUseBicycle
-	dw $59B4            ;ItemUseSurfBoard (UNUSED, glitchy!)
-	dw ItemUseBall      ;$5687 Safariball
-	dw ItemUsePokedex   ;$DA56 pokedex
-	dw ItemUseEvoStone  ; MOON_STONE
-	dw ItemUseMedicine  ; ANTIDOTE
-	dw ItemUseMedicine  ; BURN_HEAL
-	dw ItemUseMedicine  ; ICE_HEAL
-	dw ItemUseMedicine  ; AWAKENING
-	dw ItemUseMedicine  ; PARLYZ_HEAL
-	dw ItemUseMedicine  ; FULL_RESTORE
-	dw ItemUseMedicine  ; MAX_POTION
-	dw ItemUseMedicine  ; HYPER_POTION
-	dw ItemUseMedicine  ; SUPER_POTION
-	dw ItemUseMedicine  ; POTION
-	dw $5F52            ; BOULDERBADGE
-	dw $5F67            ; CASCADEBADGE
-	dw UnusableItem     ; THUNDERBADGE
-	dw UnusableItem     ; RAINBOWBADGE
-	dw UnusableItem     ; SOULBADGE
-	dw UnusableItem     ; MARSHBADGE
-	dw UnusableItem     ; VOLCANOBADGE
-	dw UnusableItem     ; EARTHBADGE
-	dw $5FAF            ; ESCAPE_ROPE
-	dw $6003            ; REPEL
-	dw UnusableItem     ; OLD_AMBER
-	dw ItemUseEvoStone  ; FIRE_STONE
-	dw ItemUseEvoStone  ; THUNDER_STONE
-	dw ItemUseEvoStone  ; WATER_STONE
-	dw ItemUseVitamin   ; HP_UP
-	dw ItemUseVitamin   ; PROTEIN
-	dw ItemUseVitamin   ; IRON
-	dw ItemUseVitamin   ; CARBOS
-	dw ItemUseVitamin   ; CALCIUM
-	dw ItemUseVitamin   ; RARE_CANDY
-	dw UnusableItem     ; DOME_FOSSIL
-	dw UnusableItem     ; HELIX_FOSSIL
-	dw UnusableItem     ; SECRET_KEY
+	dw ItemUseBall       ; MASTER_BALL
+	dw ItemUseBall       ; ULTRA_BALL
+	dw ItemUseBall       ; GREAT_BALL
+	dw ItemUseBall       ; POKE_BALL
+	dw ItemUseTownMap    ; TOWN_MAP
+	dw ItemUseBicycle    ; BICYCLE
+	dw ItemUseSurfboard  ; out-of-battle Surf effect
+	dw ItemUseBall       ; SAFARI_BALL
+	dw ItemUsePokedex    ; POKEDEX
+	dw ItemUseEvoStone   ; MOON_STONE
+	dw ItemUseMedicine   ; ANTIDOTE
+	dw ItemUseMedicine   ; BURN_HEAL
+	dw ItemUseMedicine   ; ICE_HEAL
+	dw ItemUseMedicine   ; AWAKENING
+	dw ItemUseMedicine   ; PARLYZ_HEAL
+	dw ItemUseMedicine   ; FULL_RESTORE
+	dw ItemUseMedicine   ; MAX_POTION
+	dw ItemUseMedicine   ; HYPER_POTION
+	dw ItemUseMedicine   ; SUPER_POTION
+	dw ItemUseMedicine   ; POTION
+	dw ItemUseBait       ; BOULDERBADGE
+	dw ItemUseRock       ; CASCADEBADGE
+	dw UnusableItem      ; THUNDERBADGE
+	dw UnusableItem      ; RAINBOWBADGE
+	dw UnusableItem      ; SOULBADGE
+	dw UnusableItem      ; MARSHBADGE
+	dw UnusableItem      ; VOLCANOBADGE
+	dw UnusableItem      ; EARTHBADGE
+	dw ItemUseEscapeRope ; ESCAPE_ROPE
+	dw ItemUseRepel      ; REPEL
+	dw UnusableItem      ; OLD_AMBER
+	dw ItemUseEvoStone   ; FIRE_STONE
+	dw ItemUseEvoStone   ; THUNDER_STONE
+	dw ItemUseEvoStone   ; WATER_STONE
+	dw ItemUseVitamin    ; HP_UP
+	dw ItemUseVitamin    ; PROTEIN
+	dw ItemUseVitamin    ; IRON
+	dw ItemUseVitamin    ; CARBOS
+	dw ItemUseVitamin    ; CALCIUM
+	dw ItemUseVitamin    ; RARE_CANDY
+	dw UnusableItem      ; DOME_FOSSIL
+	dw UnusableItem      ; HELIX_FOSSIL
+	dw UnusableItem      ; SECRET_KEY
 	dw UnusableItem
-	dw UnusableItem     ; BIKE_VOUCHER
-	dw $6013            ; X_ACCURACY
-	dw ItemUseEvoStone  ; LEAF_STONE
-	dw $6022            ; CARD_KEY
-	dw UnusableItem     ; NUGGET
-	dw UnusableItem     ; ??? PP_UP
-	dw $60CD            ; POKE_DOLL
-	dw ItemUseMedicine  ; FULL_HEAL
-	dw ItemUseMedicine  ; REVIVE
-	dw ItemUseMedicine  ; MAX_REVIVE
-	dw $60DC            ; GUARD_SPEC_
-	dw $60EB            ; SUPER_REPL
-	dw $60F0            ; MAX_REPEL
-	dw $60F5            ; DIRE_HIT
-	dw UnusableItem     ; COIN
-	dw ItemUseMedicine  ; FRESH_WATER
-	dw ItemUseMedicine  ; SODA_POP
-	dw ItemUseMedicine  ; LEMONADE
-	dw UnusableItem     ; S_S__TICKET
-	dw UnusableItem     ; GOLD_TEETH
-	dw $6104            ; X_ATTACK
-	dw $6104            ; X_DEFEND
-	dw $6104            ; X_SPEED
-	dw $6104            ; X_SPECIAL
-	dw $623A            ; COIN_CASE
-	dw $62DE            ; OAKS_PARCEL
-	dw $62E1            ; ITEMFINDER
-	dw UnusableItem     ; SILPH_SCOPE
-	dw $6140            ; POKE_FLUTE
-	dw UnusableItem     ; LIFT_KEY
-	dw UnusableItem     ; EXP__ALL
-	dw OldRodCode       ; OLD_ROD
-	dw GoodRodCode 		; GOOD_ROD $6259
-	dw SuperRodCode     ; SUPER_ROD $6283
-	dw ItemUsePPUp      ; PP_UP (see other?)
-	dw ItemUsePPRestore ; ETHER
-	dw ItemUsePPRestore ; MAX_ETHER
-	dw ItemUsePPRestore ; ELIXER
-	dw ItemUsePPRestore ; MAX_ELIXER
+	dw UnusableItem      ; BIKE_VOUCHER
+	dw ItemUseXAccuracy  ; X_ACCURACY
+	dw ItemUseEvoStone   ; LEAF_STONE
+	dw ItemUseCardKey    ; CARD_KEY
+	dw UnusableItem      ; NUGGET
+	dw UnusableItem      ; ??? PP_UP
+	dw ItemUsePokedoll   ; POKE_DOLL
+	dw ItemUseMedicine   ; FULL_HEAL
+	dw ItemUseMedicine   ; REVIVE
+	dw ItemUseMedicine   ; MAX_REVIVE
+	dw ItemUseGuardSpec  ; GUARD_SPEC_
+	dw ItemUseSuperRepel ; SUPER_REPL
+	dw ItemUseMaxRepel   ; MAX_REPEL
+	dw ItemUseDireHit    ; DIRE_HIT
+	dw UnusableItem      ; COIN
+	dw ItemUseMedicine   ; FRESH_WATER
+	dw ItemUseMedicine   ; SODA_POP
+	dw ItemUseMedicine   ; LEMONADE
+	dw UnusableItem      ; S_S__TICKET
+	dw UnusableItem      ; GOLD_TEETH
+	dw ItemUseXStat      ; X_ATTACK
+	dw ItemUseXStat      ; X_DEFEND
+	dw ItemUseXStat      ; X_SPEED
+	dw ItemUseXStat      ; X_SPECIAL
+	dw ItemUseCoinCase   ; COIN_CASE
+	dw ItemUseOaksParcel ; OAKS_PARCEL
+	dw ItemUseItemfinder ; ITEMFINDER
+	dw UnusableItem      ; SILPH_SCOPE
+	dw ItemUsePokeflute  ; POKE_FLUTE
+	dw UnusableItem      ; LIFT_KEY
+	dw UnusableItem      ; EXP__ALL
+	dw OldRodCode        ; OLD_ROD
+	dw GoodRodCode       ; GOOD_ROD
+	dw SuperRodCode      ; SUPER_ROD
+	dw ItemUsePPUp       ; PP_UP (real one)
+	dw ItemUsePPRestore  ; ETHER
+	dw ItemUsePPRestore  ; MAX_ETHER
+	dw ItemUsePPRestore  ; ELIXER
+	dw ItemUsePPRestore  ; MAX_ELIXER
 
 ItemUseBall: ; 03:5687
 	ld a,[W_ISINBATTLE]
@@ -15927,27 +15968,135 @@ ItemUseBallText06:
 	db $13,$06
 	db "@"
 
-ItemUseTownMap: ; 03:5968
-	ld a,[W_ISINBATTLE]	;in-battle or outside
+ItemUseTownMap: ; 5968
+	ld a,[W_ISINBATTLE]
 	and a
-	jp nz,ItemUseNotTime	;OAK: "this isn't the time..."
+	jp nz,ItemUseNotTime
+	ld b,$1c
+	ld hl,$4e3e
+	jp Bankswitch ; display Town Map
 
-INCBIN "baserom.gbc",$d96f,$da4c - $d96f
+ItemUseBicycle: ; 5977
+	ld a,[W_ISINBATTLE]
+	and a
+	jp nz,ItemUseNotTime
+	ld a,[$d700]
+	ld [$d11a],a
+	cp a,2 ; is the player surfing?
+	jp z,ItemUseNotTime
+	dec a ; is player already bicycling?
+	jr nz,.tryToGetOnBike\@
+.getOffBike\@
+	call ItemUseReloadOverworldData
+	xor a
+	ld [$d700],a ; change player state to walking
+	call $2307 ; play walking music
+	ld hl,GotOffBicycleText
+	jr .printText\@
+.tryToGetOnBike\@
+	call IsBikeRidingAllowed
+	jp nc,NoCyclingAllowedHere
+	call ItemUseReloadOverworldData
+	xor a ; no keys pressed
+	ld [$ffb4],a ; current joypad state
+	inc a
+	ld [$d700],a ; change player state to bicycling
+	ld hl,GotOnBicycleText
+	call $2307 ; play bike riding music
+.printText\@
+	jp PrintText
 
-UnnamedText_da4c: ; 0xda4c
-	TX_FAR _UnnamedText_da4c
+; used for Surf out-of-battle effect
+ItemUseSurfboard: ; 59B4
+	ld a,[$d700]
+	ld [$d11a],a
+	cp a,2 ; is the player already surfing?
+	jr z,.tryToStopSurfing\@
+.tryToSurf\@
+	call IsNextTileShoreOrWater
+	jp c,SurfingAttemptFailed
+	ld hl,TilePairCollisionsWater
+	call CheckForTilePairCollisions
+	jp c,SurfingAttemptFailed
+.surf\@
+	call .makePlayerMoveForward\@
+	ld hl,$d730
+	set 7,[hl]
+	ld a,2
+	ld [$d700],a ; change player state to surfing
+	call $2307 ; play surfing music
+	ld hl,SurfingGotOnText
+	jp PrintText
+.tryToStopSurfing\@
+	xor a
+	ld [$ff8c],a
+	ld d,16 ; talking range in pixels (normal range)
+	call IsSpriteInFrontOfPlayer2
+	res 7,[hl]
+	ld a,[$ff8c]
+	and a ; is there a sprite in the way?
+	jr nz,.cannotStopSurfing\@
+	ld hl,TilePairCollisionsWater
+	call CheckForTilePairCollisions
+	jr c,.cannotStopSurfing\@
+	ld hl,$d530 ; pointer to list of passable tiles
+	ld a,[hli]
+	ld h,[hl]
+	ld l,a ; hl now points to passable tiles
+	ld a,[$cfc6] ; tile in front of the player
+	ld b,a
+.passableTileLoop\@
+	ld a,[hli]
+	cp b
+	jr z,.stopSurfing\@
+	cp a,$ff
+	jr nz,.passableTileLoop\@
+.cannotStopSurfing\@
+	ld hl,SurfingNoPlaceToGetOffText
+	jp PrintText
+.stopSurfing\@
+	call .makePlayerMoveForward\@
+	ld hl,$d730
+	set 7,[hl]
+	xor a
+	ld [$d700],a ; change player state to walking
+	dec a
+	ld [$cd6b],a
+	call $2307 ; play walking music
+	jp LoadWalkingPlayerSpriteGraphics
+; uses a simulated button press to make the player move forward
+.makePlayerMoveForward\@
+	ld a,[$d52a] ; direction the player is going
+	bit 3,a
+	ld b,%01000000 ; Up key
+	jr nz,.storeSimulatedButtonPress\@
+	bit 2,a
+	ld b,%10000000 ; Down key
+	jr nz,.storeSimulatedButtonPress\@
+	bit 1,a
+	ld b,%00100000 ; Left key
+	jr nz,.storeSimulatedButtonPress\@
+	ld b,%00010000 ; Right key
+.storeSimulatedButtonPress\@
+	ld a,b
+	ld [$ccd3],a ; base address of simulated button presses
+	xor a
+	ld [$cd39],a
+	inc a
+	ld [$cd38],a ; index of current simulated button press
+	ret
+
+SurfingGotOnText: ; 5A4C
+	TX_FAR _SurfingGotOnText
 	db $50
-; 0xda4c + 5 bytes
 
-UnnamedText_da51: ; 0xda51
-	TX_FAR _UnnamedText_da51
+SurfingNoPlaceToGetOffText: ; 5A51
+	TX_FAR _SurfingNoPlaceToGetOffText
 	db $50
-; 0xda51 + 5 bytes
 
-ItemUsePokedex: ; 0xda56 5A56
-	ld a, $29
-	jp $3e6d
-; 0xda5b
+ItemUsePokedex: ; 5A56
+	ld a,$29
+	jp Predef
 
 ItemUseEvoStone: ; 5A5B
 	ld a,[W_ISINBATTLE]
@@ -16638,44 +16787,462 @@ VitaminText: ; 5F2E
 	db "SPEED@"
 	db "SPECIAL@"
 
-INCBIN "baserom.gbc",$df52,$dfa5 - $df52
+ItemUseBait: ; 5F52
+	ld hl,ThrewBaitText
+	call PrintText
+	ld hl,$d007 ; catch rate
+	srl [hl] ; halve catch rate
+	ld a,BAIT_ANIM
+	ld hl,$cce9 ; bait factor
+	ld de,$cce8 ; escape factor
+	jr BaitRockCommon
 
-ThrewBaitText: ; 0xdfa5
+ItemUseRock: ; 5F67
+	ld hl,ThrewRockText
+	call PrintText
+	ld hl,$d007 ; catch rate
+	ld a,[hl]
+	add a ; double catch rate
+	jr nc,.noCarry\@
+	ld a,$ff
+.noCarry\@
+	ld [hl],a
+	ld a,ROCK_ANIM
+	ld hl,$cce8 ; escape factor
+	ld de,$cce9 ; bait factor
+
+BaitRockCommon: ; 5F7F
+	ld [W_ANIMATIONID],a
+	xor a
+	ld [$cc5b],a
+	ld [H_WHOSETURN],a
+	ld [de],a ; zero escape factor (for bait), zero bait factor (for rock)
+.randomLoop\@ ; loop until a random number less than 5 is generated
+	call GenRandom
+	and a,7
+	cp a,5
+	jr nc,.randomLoop\@
+	inc a ; increment the random number, giving a range from 1 to 5 inclusive
+	ld b,a
+	ld a,[hl]
+	add b ; increase bait factor (for bait), increase escape factor (for rock)
+	jr nc,.noCarry\@
+	ld a,$ff
+.noCarry\@
+	ld [hl],a
+	ld a,$08
+	call Predef ; do animation
+	ld c,70
+	jp DelayFrames
+
+ThrewBaitText: ; 5FA5
 	TX_FAR _ThrewBaitText
 	db $50
 
-ThrewRockText: ; 0xdfaa
+ThrewRockText: ; 5FAA
 	TX_FAR _ThrewRockText
 	db $50
 
-INCBIN "baserom.gbc",$dfaf,$e20b - $dfaf
+; also used for Dig out-of-battle effect
+ItemUseEscapeRope: ; 5FAF
+	ld a,[W_ISINBATTLE]
+	and a
+	jr nz,.notUsable\@
+	ld a,[W_CURMAP]
+	cp a,AGATHAS_ROOM
+	jr z,.notUsable\@
+	ld a,[W_CURMAPTILESET]
+	ld b,a
+	ld hl,EscapeRopeTilesets
+.loop\@
+	ld a,[hli]
+	cp a,$ff
+	jr z,.notUsable\@
+	cp b
+	jr nz,.loop\@
+	ld hl,$d732
+	set 3,[hl]
+	set 6,[hl]
+	ld hl,$d72e
+	res 4,[hl]
+	ld hl,$d790
+	res 7,[hl] ; unset Safari Zone bit
+	xor a
+	ld [$da47],a
+	ld [$d61f],a
+	inc a
+	ld [$d078],a
+	ld [$cd6a],a ; item used
+	ld a,[$d152]
+	and a ; using Dig?
+	ret nz ; if so, return
+	call ItemUseReloadOverworldData
+	ld c,30
+	call DelayFrames
+	jp RemoveUsedItem
+.notUsable\@
+	jp ItemUseNotTime
 
-UnnamedText_e20b: ; 0xe20b
-	TX_FAR _UnnamedText_e20b
+EscapeRopeTilesets: ; 5FFD
+	db $03,$0f,$11,$16,$10
+	db $ff ; terminator
+
+ItemUseRepel: ; 6003
+	ld b,100
+
+ItemUseRepelCommon: ; 6005
+	ld a,[W_ISINBATTLE]
+	and a
+	jp nz,ItemUseNotTime
+	ld a,b
+	ld [$d0db],a
+	jp PrintItemUseTextAndRemoveItem
+
+; handles X Accuracy item
+ItemUseXAccuracy: ; 6013
+	ld a,[W_ISINBATTLE]
+	and a
+	jp z,ItemUseNotTime
+	ld hl,W_PLAYERBATTSTATUS2
+	set 0,[hl] ; X Accuracy bit
+	jp PrintItemUseTextAndRemoveItem
+
+; This function is bugged and never works. It always jumps to ItemUseNotTime.
+; The Card Key is handled in a different way.
+ItemUseCardKey: ; 6022
+	xor a
+	ld [$d71f],a
+	call $4586
+	ld a,[$4586]
+	cp a,$18
+	jr nz,.next0\@
+	ld hl,CardKeyTable1
+	jr .next1\@
+.next0\@
+	cp a,$24
+	jr nz,.next2\@
+	ld hl,CardKeyTable2
+	jr .next1\@
+.next2\@
+	cp a,$5e
+	jp nz,ItemUseNotTime
+	ld hl,CardKeyTable3
+.next1\@
+	ld a,[W_CURMAP]
+	ld b,a
+.loop\@
+	ld a,[hli]
+	cp a,$ff
+	jp z,ItemUseNotTime
+	cp b
+	jr nz,.nextEntry1\@
+	ld a,[hli]
+	cp d
+	jr nz,.nextEntry2\@
+	ld a,[hli]
+	cp e
+	jr nz,.nextEntry3\@
+	ld a,[hl]
+	ld [$d71f],a
+	jr .done\@
+.nextEntry1\@
+	inc hl
+.nextEntry2\@
+	inc hl
+.nextEntry3\@
+	inc hl
+	jr .loop\@
+.done\@
+	ld hl,ItemUseText00
+	call PrintText
+	ld hl,$d728
+	set 7,[hl]
+	ret
+
+; These tables are probably supposed to be door locations in Silph Co.,
+; but they are unused.
+; The reason there are 3 tables is unknown.
+
+; Format:
+; 00: Map ID
+; 01: Y
+; 02: X
+; 03: ID?
+
+CardKeyTable1: ; 6072
+	db  SILPH_CO_2F,$04,$04,$00
+	db  SILPH_CO_2F,$04,$05,$01
+	db  SILPH_CO_4F,$0C,$04,$02
+	db  SILPH_CO_4F,$0C,$05,$03
+	db  SILPH_CO_7F,$06,$0A,$04
+	db  SILPH_CO_7F,$06,$0B,$05
+	db  SILPH_CO_9F,$04,$12,$06
+	db  SILPH_CO_9F,$04,$13,$07
+	db SILPH_CO_10F,$08,$0A,$08
+	db SILPH_CO_10F,$08,$0B,$09
+	db $ff
+
+CardKeyTable2: ; 609B
+	db SILPH_CO_3F,$08,$09,$0A
+	db SILPH_CO_3F,$09,$09,$0B
+	db SILPH_CO_5F,$04,$07,$0C
+	db SILPH_CO_5F,$05,$07,$0D
+	db SILPH_CO_6F,$0C,$05,$0E
+	db SILPH_CO_6F,$0D,$05,$0F
+	db SILPH_CO_8F,$08,$07,$10
+	db SILPH_CO_8F,$09,$07,$11
+	db SILPH_CO_9F,$08,$03,$12
+	db SILPH_CO_9F,$09,$03,$13
+	db $ff
+
+CardKeyTable3: ; 60C4
+	db SILPH_CO_11F,$08,$09,$14
+	db SILPH_CO_11F,$09,$09,$15
+	db $ff
+
+ItemUsePokedoll: ; 60CD
+	ld a,[W_ISINBATTLE]
+	dec a
+	jp nz,ItemUseNotTime
+	ld a,$01
+	ld [$d078],a
+	jp PrintItemUseTextAndRemoveItem
+
+ItemUseGuardSpec: ; 60DC
+	ld a,[W_ISINBATTLE]
+	and a
+	jp z,ItemUseNotTime
+	ld hl,W_PLAYERBATTSTATUS2
+	set 1,[hl] ; Mist bit
+	jp PrintItemUseTextAndRemoveItem
+
+ItemUseSuperRepel: ; 60EB
+	ld b,200
+	jp ItemUseRepelCommon
+
+ItemUseMaxRepel: ; 60F0
+	ld b,250
+	jp ItemUseRepelCommon
+
+ItemUseDireHit: ; 60F5
+	ld a,[W_ISINBATTLE]
+	and a
+	jp z,ItemUseNotTime
+	ld hl,W_PLAYERBATTSTATUS2
+	set 2,[hl] ; Focus Energy bit
+	jp PrintItemUseTextAndRemoveItem
+
+ItemUseXStat: ; 6104
+	ld a,[W_ISINBATTLE]
+	and a
+	jr nz,.inBattle\@
+	call ItemUseNotTime
+	ld a,2
+	ld [$cd6a],a ; item not used
+	ret
+.inBattle\@
+	ld hl,W_PLAYERMOVENUM
+	ld a,[hli]
+	push af ; save [W_PLAYERMOVENUM]
+	ld a,[hl]
+	push af ; save [W_PLAYERMOVEEFFECT]
+	push hl
+	ld a,[$cf91]
+	sub a,X_ATTACK - ATTACK_UP1_EFFECT
+	ld [hl],a ; store player move effect
+	call PrintItemUseTextAndRemoveItem
+	ld a,XSTATITEM_ANIM ; X stat item animation ID
+	ld [W_PLAYERMOVENUM],a
+	call $3725 ; restore saved screen
+	call Delay3
+	xor a
+	ld [H_WHOSETURN],a ; set turn to player's turn
+	ld b,$0f
+	ld hl,$7428
+	call Bankswitch ; do stat increase move
+	pop hl
+	pop af
+	ld [hld],a ; restore [W_PLAYERMOVEEFFECT]
+	pop af
+	ld [hl],a ; restore [W_PLAYERMOVENUM]
+	ret
+
+ItemUsePokeflute: ; 6140
+	ld a,[W_ISINBATTLE]
+	and a
+	jr nz,.inBattle\@
+; if not in battle
+	call ItemUseReloadOverworldData
+	ld a,[W_CURMAP]
+	cp a,ROUTE_12
+	jr nz,.notRoute12\@
+	ld a,[$d7d8]
+	bit 7,a ; has the player beaten Route 12 Snorlax yet?
+	jr nz,.noSnorlaxToWakeUp\@
+; if the player hasn't beaten Route 12 Snorlax
+	ld hl,Route12SnorlaxFluteCoords
+	call ArePlayerCoordsInArray
+	jr nc,.noSnorlaxToWakeUp\@
+	ld hl,PlayedFluteHadEffectText
+	call PrintText
+	ld hl,$d7d8
+	set 6,[hl] ; trigger Snorlax fight (handled by map script)
+	ret
+.notRoute12\@
+	cp a,ROUTE_16
+	jr nz,.noSnorlaxToWakeUp\@
+	ld a,[$d7e0]
+	bit 1,a ; has the player beaten Route 16 Snorlax yet?
+	jr nz,.noSnorlaxToWakeUp\@
+; if the player hasn't beaten Route 16 Snorlax
+	ld hl,Route16SnorlaxFluteCoords
+	call ArePlayerCoordsInArray
+	jr nc,.noSnorlaxToWakeUp\@
+	ld hl,PlayedFluteHadEffectText
+	call PrintText
+	ld hl,$d7e0
+	set 0,[hl] ; trigger Snorlax fight (handled by map script)
+	ret
+.noSnorlaxToWakeUp\@
+	ld hl,PlayedFluteNoEffectText
+	jp PrintText
+.inBattle\@
+	xor a
+	ld [$cd3d],a ; initialize variable that indicates if any pokemon were woken up to zero
+	ld b,~SLP
+	ld hl,W_PARTYMON1_STATUS
+	call WakeUpEntireParty
+	ld a,[W_ISINBATTLE]
+	dec a ; is it a trainer battle?
+	jr z,.skipWakingUpEnemyParty\@
+; if it's a trainer battle
+	ld hl,$d8a8 ; enemy party pokemon 1 status
+	call WakeUpEntireParty
+.skipWakingUpEnemyParty\@
+	ld hl,W_PLAYERMONSTATUS
+	ld a,[hl]
+	and b ; remove Sleep status
+	ld [hl],a
+	ld hl,W_ENEMYMONSTATUS
+	ld a,[hl]
+	and b ; remove Sleep status
+	ld [hl],a
+	call $3701 ; restore saved screen
+	ld a,[$cd3d]
+	and a ; were any pokemon asleep before playing the flute?
+	ld hl,PlayedFluteNoEffectText
+	jp z,PrintText ; if no pokemon were asleep
+; if some pokemon were asleep
+	ld hl,PlayedFluteHadEffectText
+	call PrintText
+	ld a,[$d083]
+	and a,$80
+	jr nz,.skipMusic\@
+	call $3748 ; wait for sound to end
+	ld b,$08
+	ld hl,$6306
+	call Bankswitch ; play in-battle pokeflute music
+.musicWaitLoop\@ ; wait for music to finish playing
+	ld a,[$c02c]
+	and a ; music off?
+	jr nz,.musicWaitLoop\@
+.skipMusic\@
+	ld hl,FluteWokeUpText
+	jp PrintText
+
+; wakes up all party pokemon
+; INPUT:
+; hl must point to status of first pokemon in party (player's or enemy's)
+; b must equal ~SLP
+; [$cd3d] should be initialized to 0
+; OUTPUT:
+; [$cd3d]: set to 1 if any pokemon were asleep
+WakeUpEntireParty: ; 61E5
+	ld de,44
+	ld c,6
+.loop\@
+	ld a,[hl]
+	push af
+	and a,SLP ; is pokemon asleep?
+	jr z,.notAsleep\@
+	ld a,1
+	ld [$cd3d],a ; indicate that a pokemon had to be woken up
+.notAsleep\@
+	pop af
+	and b ; remove Sleep status
+	ld [hl],a
+	add hl,de
+	dec c
+	jr nz,.loop\@
+	ret
+
+; Format:
+; 00: Y
+; 01: X
+Route12SnorlaxFluteCoords: ; 61FD
+	db 62,9  ; one space West of Snorlax
+	db 61,10 ; one space North of Snorlax
+	db 63,10 ; one space South of Snorlax
+	db 62,11 ; one space East of Snorlax
+	db $ff ; terminator
+
+; Format:
+; 00: Y
+; 01: X
+Route16SnorlaxFluteCoords: ; 6206
+	db 10,27 ; one space East of Snorlax
+	db 10,25 ; one space West of Snorlax
+	db $ff ; terminator
+
+PlayedFluteNoEffectText: ; 620B
+	TX_FAR _PlayedFluteNoEffectText
 	db $50
-; 0xe20b + 5 bytes
 
-UnnamedText_e210: ; 0xe210
-	TX_FAR _UnnamedText_e210
+FluteWokeUpText: ; 6210
+	TX_FAR _FluteWokeUpText
 	db $50
-; 0xe210 + 5 bytes
 
-INCBIN "baserom.gbc",$e215,$e247 - $e215
+PlayedFluteHadEffectText: ; 6215
+	TX_FAR _PlayedFluteHadEffectText
+	db $06
+	db $08
+	ld a,[W_ISINBATTLE]
+	and a
+	jr nz,.done\@
+; play out-of-battle pokeflute music
+	ld a,$ff
+	call $23b1 ; turn off music
+	ld a,$b8
+	ld c,$02
+	call $23a1 ; play music
+.musicWaitLoop\@ ; wait for music to finish playing
+	ld a,[$c028]
+	cp a,$b8
+	jr z,.musicWaitLoop\@ 
+	call $2307 ; start playing normal music again
+.done\@
+	jp $24d7 ; end text
 
-UnnamedText_e247: ; 0xe247
-	TX_FAR _UnnamedText_e247
+ItemUseCoinCase: ; 623A
+	ld a,[W_ISINBATTLE]
+	and a
+	jp nz,ItemUseNotTime
+	ld hl,CoinCaseNumCoinsText
+	jp PrintText
+
+CoinCaseNumCoinsText: ; 6247
+	TX_FAR _CoinCaseNumCoinsText
 	db $50
-; 0xe247 + 5 bytes
 
 OldRodCode: ; 0xe24c
-	call $62b4 ; probably sets carry if not in battle or not by water
+	call FishingInit
 	jp c, ItemUseNotTime
 	ld bc, (5 << 8) | MAGIKARP
 	ld a, $1 ; set bite
 	jr RodResponse ; 0xe257 $34
 
 GoodRodCode: ; 6259 0xe259
-	call $62B4 ; probably sets carry if not in battle or not by water
+	call FishingInit
 	jp c,ItemUseNotTime
 .RandomLoop
 	call GenRandom
@@ -16705,7 +17272,7 @@ GoodRodMons:
 	db 10,POLIWAG
 
 SuperRodCode: ; $6283 0xe283
-	call $62B4 ; probably sets carry if in battle or not by water
+	call FishingInit
 	jp c, ItemUseNotTime
 	call ReadSuperRodData ; 0xe8ea
 	ld a, e
@@ -16736,17 +17303,65 @@ RodResponse:
 	ld [hl], a
 	ret
 
-INCBIN "baserom.gbc",$e2b4,$e30d - $e2b4
+; checks if fishing is possible and if so, runs initialization code common to all rods
+; unsets carry if fishing is possible, sets carry if not
+FishingInit: ; 62B4
+	ld a,[W_ISINBATTLE]
+	and a
+	jr z,.notInBattle\@
+	scf ; can't fish during battle
+	ret
+.notInBattle\@
+	call IsNextTileShoreOrWater
+	ret c
+	ld a,[$d700]
+	cp a,2 ; Surfing?
+	jr z,.surfing\@
+	call ItemUseReloadOverworldData
+	ld hl,ItemUseText00
+	call PrintText
+	ld a,$8e
+	call $23b1 ; play sound
+	ld c,80
+	call DelayFrames
+	and a
+	ret
+.surfing\@
+	scf ; can't fish when surfing
+	ret
 
-UnnamedText_e30d: ; 0xe30d
-	TX_FAR _UnnamedText_e30d
-	db $50
-; 0xe30d + 5 bytes
+ItemUseOaksParcel: ; 62DE
+	jp ItemUseNotYoursToUse
 
-UnnamedText_e312: ; 0xe312
-	TX_FAR _UnnamedText_e312
+ItemUseItemfinder: ; 62E1
+	ld a,[W_ISINBATTLE]
+	and a
+	jp nz,ItemUseNotTime
+	call ItemUseReloadOverworldData
+	ld b,$1d
+	ld hl,$481f
+	call Bankswitch ; check for hidden items
+	ld hl,ItemfinderFoundNothingText
+	jr nc,.printText\@ ; if no hidden items
+	ld c,4
+.loop\@
+	ld a,$9e
+	call $3740 ; play sound
+	ld a,$b2
+	call $3740 ; play sound
+	dec c
+	jr nz,.loop\@
+	ld hl,ItemfinderFoundItemText
+.printText\@
+	jp PrintText
+
+ItemfinderFoundItemText: ; 630D
+	TX_FAR _ItemfinderFoundItemText
 	db $50
-; 0xe312 + 5 bytes
+
+ItemfinderFoundNothingText: ; 6312
+	TX_FAR _ItemfinderFoundNothingText
+	db $50
 
 ItemUsePPUp: ; 6317
 	ld a,[W_ISINBATTLE]
@@ -17473,7 +18088,39 @@ KeyItemBitfield: ; 6799
 	db %00111011
 	db %00000000
 
-INCBIN "baserom.gbc",$e7a4,$68ea - $67a4
+INCBIN "baserom.gbc",$e7a4,$68b8 - $67a4
+
+; checks if the tile in front of the player is a shore or water tile
+; used for surfing and fishing
+; unsets carry if it is, sets carry if not
+IsNextTileShoreOrWater: ; 68B8
+	ld a,[W_CURMAPTILESET]
+	ld hl,WaterTilesets
+	ld de,1
+	call IsInArray
+	jr nc,.notShoreOrWater\@
+	ld a,[W_CURMAPTILESET]
+	cp a,$0e ; Vermilion Dock tileset
+	ld a,[$cfc6] ; tile in front of player
+	jr z,.skipShoreTiles\@ ; if it's the Vermilion Dock tileset
+	cp a,$48 ; eastern shore tile in Safari Zone
+	jr z,.shoreOrWater\@
+	cp a,$32 ; usual eastern shore tile
+	jr z,.shoreOrWater\@
+.skipShoreTiles\@
+	cp a,$14 ; water tile
+	jr z,.shoreOrWater\@
+.notShoreOrWater\@
+	scf
+	ret
+.shoreOrWater\@
+	and a
+	ret
+
+; tilesets with water
+WaterTilesets: ; 68E0
+	db $00,$03,$05,$07,$0d,$0e,$11,$16,$17
+	db $ff ; terminator
 
 ; 68EA 0xe8ea
 ReadSuperRodData:
@@ -17624,7 +18271,13 @@ FishingGroup10:
 	db 15,GOLDEEN
 	db 15,MAGIKARP
 
-INCBIN "baserom.gbc",$E9C5,$ef7d - $E9C5
+; reloads map view and processes sprite data
+; for items that cause the overworld to be displayed
+ItemUseReloadOverworldData: ; 69C5
+	call LoadCurrentMapView
+	jp $2429
+
+INCBIN "baserom.gbc",$E9CB,$ef7d - $E9CB
 
 _UnnamedText_ef7d: ; 0xef7d
 	db $17, $f8, $42, $2a
@@ -17700,20 +18353,20 @@ HealParty:
 	ld e, l
 	pop hl
 	jr .HealPokemon\@ ; Next Pokémon
-.DoneHealing\@ ; This calls $6606 for each Pokémon in party -- no idea why
+.DoneHealing\@
 	xor a
 	ld [$cf92], a
 	ld [$d11e], a
 	ld a, [W_NUMINPARTY]
 	ld b, a
-.asm_f711
+.restoreBonusPPLoop\@ ; loop to restore bonus PP from PP Ups
 	push bc
-	call $6606
+	call RestoreBonusPP
 	pop bc
 	ld hl, $cf92
 	inc [hl]
 	dec b
-	jr nz, .asm_f711 ; 0xf71b $f4
+	jr nz,.restoreBonusPPLoop\@
 	ret
 
 INCBIN "baserom.gbc",$f71e,$fbd9 - $f71e
@@ -84838,16 +85491,12 @@ _UnnamedText_4fe3f: ; 0xa418f
 	db $0, "There's no more", $4f
 	db "room for #MON!", $55
 	db "@"
-; 0xa418f + 32 bytes
-
-UnnamedText_a41af: ; 0xa41af
 	TX_RAM $de06
 	db $0, " was", $55
 	db "sent to #MON", $55
 	db "BOX @"
 	TX_RAM $cf4b
 	db $0, " on PC!", $57
-; 0xa41ca + 12 bytes = 0xa41d6
 
 _UnnamedText_4fe44: ; 0xa41d6
 	db $0, "There's no more", $4f
@@ -85922,13 +86571,13 @@ _ItemUseBallText06:
 	TX_RAM $cfda
 	db 0,"!@@"
 
-_UnnamedText_da4c: ; 0xa685e
+_SurfingGotOnText: ; 0xa685e
 	db $0, $52, " got on", $4f
 	db "@"
 	TX_RAM $cd6d
 	db $0, "!", $58
 
-_UnnamedText_da51: ; 0xa686f
+_SurfingNoPlaceToGetOffText: ; 0xa686f
 	db $0, "There's no place", $4f
 	db "to get off!", $58
 
@@ -85951,68 +86600,55 @@ _ThrewRockText: ; 0xa68cc
 	db $0, $52, " threw a", $4f
 	db "ROCK.", $57
 
-_UnnamedText_e20b: ; 0xa68dd
+_PlayedFluteNoEffectText: ; 0xa68dd
 	db $0, "Played the #", $4f
 	db "FLUTE.", $51
 	db "Now, that's a", $4f
 	db "catchy tune!", $58
-; 0xa68dd + 47 bytes
 
-_UnnamedText_e210: ; 0xa690c
+_FluteWokeUpText: ; 0xa690c
 	db $0, "All sleeping", $4f
 	db "#MON woke up.", $58
-; 0xa690c + 28 bytes
 
-UnnamedText_a6928: ; 0xa6928
+_PlayedFluteHadEffectText: ; 0xa6928
 	db $0, $52, " played the", $4f
 	db "# FLUTE.@@"
-; 0xa6940
 
-_UnnamedText_e247: ; 0xa6940
+_CoinCaseNumCoinsText: ; 0xa6940
 	db $0, "Coins", $4f
 	db "@"
-; 0xa6940 + 8 bytes
-	db $2, $a4, $d5, $c2
-; 0xa694c
+	db $2, $a4, $d5, $c2 ; print BCD number
 	db $0, " ", $58
-; 0xa694f
 
-_UnnamedText_e30d: ; 0xa694f
+_ItemfinderFoundItemText: ; 0xa694f
 	db $0, "Yes! ITEMFINDER", $4f
 	db "indicates there's", $55
 	db "an item nearby.", $58
-; 0xa694f + 50 bytes
 
-_UnnamedText_e312: ; 0xa6981
+_ItemfinderFoundNothingText: ; 0xa6981
 	db $0, "Nope! ITEMFINDER", $4f
 	db "isn't responding.", $58
-; 0xa6981 + 35 bytes
 
 _RaisePPWhichTechniqueText: ; 0xa69a4
 	db $0, "Raise PP of which", $4f
 	db "technique?", $57
-; 0xa69a4 + 30 bytes
 
 _RestorePPWhichTechniqueText: ; 0xa69c2
 	db $0, "Restore PP of", $4f
 	db "which technique?", $57
-; 0xa69c2 + 32 bytes
 
 _PPMaxedOutText: ; 0xa69e2
 	TX_RAM $cf4b
 	db $0, "'s PP", $4f
 	db "is maxed out.", $58
-; 0xa69e2 + 23 bytes
 
 _PPIncreasedText: ; 0xa69f9
 	TX_RAM $cf4b
 	db $0, "'s PP", $4f
 	db "increased.", $58
-; 0xa69f9 + 20 bytes
 
 _PPRestoredText: ; 0xa6a0d
 	db $0, "PP was restored.", $58
-; 0xa6a0d + 18 bytes
 
 _BootedUpTMText: ; 0xa6a1f
 	db $0, "Booted up a TM!", $58
