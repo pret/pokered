@@ -1115,9 +1115,11 @@ CheckMapConnections: ; 7BA
 	call LoadMapHeader
 	call $2312 ; music
 	ld b,$09
-	call $3def ; SGB palette
-	ld b,$05
-	ld hl,$785b ; load tile pattern data for sprites
+	call GoPAL_SET
+; Since the sprite set shouldn't change, this will just update VRAM slots at
+; $C2XE without loading any tile patterns.
+	ld b,BANK(InitMapSprites)
+	ld hl,InitMapSprites
 	call Bankswitch
 	call LoadTileBlockMap
 	jp OverworldLoopLessDelay
@@ -2781,8 +2783,8 @@ LoadMapData: ; 1241
 	ld [$d3a8],a
 	call LoadTextBoxTilePatterns
 	call LoadMapHeader
-	ld b,$05
-	ld hl,$785b
+	ld b,BANK(InitMapSprites)
+	ld hl,InitMapSprites
 	call Bankswitch ; load tile pattern data for sprites
 	call LoadTileBlockMap
 	call LoadTilesetTilePatternData
@@ -2811,7 +2813,7 @@ LoadMapData: ; 1241
 	ld [$cfcb],a
 	call EnableLCD
 	ld b,$09
-	call $3def ; handle SGB palette
+	call GoPAL_SET
 	call LoadPlayerSpriteGraphics
 	ld a,[$d732]
 	and a,$18 ; did the player fly or teleport in?
@@ -4967,7 +4969,7 @@ InitGame: ; 1F54
 	call Predef ; display the copyrights, GameFreak logo, and battle animation
 	call DisableLCD
 	call ZeroVram
-	call $3ddc
+	call GBPalNormal
 	call CleanLCD_OAM
 	ld a,%11100011
 	ld [rLCDC],a ; enable LCD
@@ -5567,10 +5569,10 @@ CloseTextDisplay: ; 29E8
 	add hl,de
 	dec c
 	jr nz,.restoreSpriteFacingDirectionLoop\@
-	ld a,$05
+	ld a,BANK(InitMapSprites)
 	ld [$ffb8],a
 	ld [$2000],a
-	call $785b ; reload sprite tile pattern data (since it was partially overwritten by text tile patterns)
+	call InitMapSprites ; reload sprite tile pattern data (since it was partially overwritten by text tile patterns)
 	ld hl,$cfc4
 	res 0,[hl]
 	ld a,[$d732]
@@ -19721,7 +19723,647 @@ LoreleiSprite: ; 0x17540
 SeelSprite: ; 0x176c0
 	INCBIN "gfx/sprites/seel.2bpp" ; was $176c0
 
-INCBIN "baserom.gbc",$17840,$17b27 - $17840
+; Loads tile patterns for tiles used in the pokedex.
+LoadPokedexTilePatterns: ; 7840
+	call LoadHpBarAndStatusTilePatterns
+	ld de,$6488
+	ld hl,$9600
+	ld bc,$0412
+	call CopyVideoData
+	ld de,$697e
+	ld hl,$9720
+	ld bc,$0e01
+	jp CopyVideoData
+
+; Loads tile patterns for map's sprites.
+; For outside maps, it loads one of several fixed sets of sprites.
+; For inside maps, it loads each sprite picture ID used in the map header.
+; This is also called after displaying text because loading
+; text tile patterns overwrites half of the sprite tile pattern data.
+; Note on notation:
+; $C1X* and $C2X* are used to denote $C100-$C1FF and $C200-$C2FF sprite slot
+; fields, respectively, within loops. The X is the loop index.
+; If there is an inner loop, Y is the inner loop index, i.e. $C1Y* and $C2Y*
+; denote fields of the sprite slots interated over in the inner loop.
+InitMapSprites: ; 785B
+	call InitOutsideMapSprites
+	ret c ; return if the map is an outside map (already handled by above call)
+; if the map is an inside map (i.e. mapID >= $25)
+	ld hl,$c100
+	ld de,$c20d
+; Loop to copy picture ID's from $C1X0 to $C2XD for LoadMapSpriteTilePatterns.
+.copyPictureIDLoop\@
+	ld a,[hl] ; $C1X0 (picture ID)
+	ld [de],a ; $C2XD
+	ld a,$10
+	add e
+	ld e,a
+	ld a,$10
+	add l
+	ld l,a
+	jr nz,.copyPictureIDLoop\@
+
+; This is used for both inside and outside maps, since it is called by
+; InitOutsideMapSprites.
+; Loads tile pattern data for sprites into VRAM.
+LoadMapSpriteTilePatterns: ; 7871
+	ld a,[W_NUMSPRITES]
+	and a ; are there any sprites?
+	jr nz,.spritesExist\@
+	ret
+.spritesExist\@
+	ld c,a ; c = [W_NUMSPRITES]
+	ld b,$10 ; number of sprite slots
+	ld hl,$c20d
+	xor a
+	ld [$ff8e],a ; 4-tile sprite counter
+.copyPictureIDLoop\@ ; loop to copy picture ID from $C2XD to $C2XE
+	ld a,[hli] ; $C2XD (sprite picture ID)
+	ld [hld],a ; $C2XE
+	ld a,l
+	add a,$10
+	ld l,a
+	dec b
+	jr nz,.copyPictureIDLoop\@
+	ld hl,$c21e
+.loadTilePatternLoop\@
+	ld de,$c21d
+; Check if the current picture ID has already had its tile patterns loaded.
+; This done by looping through the previous sprite slots and seeing if any of
+; their picture ID's match that of the current sprite slot.
+.checkIfAlreadyLoadedLoop\@
+	ld a,e
+	and a,$f0
+	ld b,a ; b = offset of the $c200 sprite slot being checked against
+	ld a,l
+	and a,$f0 ; a = offset of current $c200 sprite slot
+	cp b ; done checking all previous sprite slots?
+	jr z,.notAlreadyLoaded\@
+	ld a,[de] ; picture ID of the $c200 sprite slot being checked against
+	cp [hl] ; do the picture ID's match?
+	jp z,.alreadyLoaded\@
+	ld a,e
+	add a,$10
+	ld e,a
+	jr .checkIfAlreadyLoadedLoop\@
+.notAlreadyLoaded\@
+	ld de,$c20e
+	ld b,$01
+; loop to find the highest tile pattern VRAM slot (among the first 10 slots) used by a previous sprite slot
+; this is done in order to find the first free VRAM slot available
+.findNextVRAMSlotLoop\@
+	ld a,e
+	add a,$10
+	ld e,a
+	ld a,l
+	cp e ; reached current slot?
+	jr z,.foundNextVRAMSlot\@
+	ld a,[de] ; $C2YE (VRAM slot)
+	cp a,11 ; is it one of the first 10 slots?
+	jr nc,.findNextVRAMSlotLoop\@
+	cp b ; compare the slot being checked to the current max
+	jr c,.findNextVRAMSlotLoop\@ ; if the slot being checked is less than the current max
+; if the slot being checked is greater than or equal to the current max
+	ld b,a ; store new max VRAM slot
+	jr .findNextVRAMSlotLoop\@
+.foundNextVRAMSlot\@
+	inc b ; increment previous max value to get next VRAM tile pattern slot
+	ld a,b ; a = next VRAM tile pattern slot
+	push af
+	ld a,[hl] ; $C2XE (sprite picture ID)
+	ld b,a ; b = current sprite picture ID
+	cp a,SPRITE_BALL ; is it a 4-tile sprite?
+	jr c,.notFourTileSprite\@
+	pop af
+	ld a,[$ff8e] ; 4-tile sprite counter
+	add a,11
+	jr .storeVRAMSlot\@
+.notFourTileSprite\@
+	pop af
+.storeVRAMSlot\@
+	ld [hl],a ; store VRAM slot at $C2XE
+	ld [$ff8d],a ; used to determine if it's 4-tile sprite later
+	ld a,b ; a = current sprite picture ID
+	dec a
+	add a
+	add a
+	push bc
+	push hl
+	ld hl,SpriteSheetPointerTable
+	jr nc,.noCarry\@
+	inc h
+.noCarry\@
+	add l
+	ld l,a
+	jr nc,.noCarry2\@
+	inc h
+.noCarry2\@
+	push hl
+	call ReadSpriteSheetData
+	push af
+	push de
+	push bc
+	ld hl,$8000 ; VRAM base address
+	ld bc,$c0 ; number of bytes per VRAM slot
+	ld a,[$ff8d]
+	cp a,11 ; is it a 4-tile sprite?
+	jr nc,.fourTileSpriteVRAMAddr\@
+	ld d,a
+	dec d
+; Equivalent to multiplying $C0 (number of bytes in 12 tiles) times the VRAM
+; slot and adding the result to $8000 (the VRAM base address).
+.calculateVRAMAddrLoop\@
+	add hl,bc
+	dec d
+	jr nz,.calculateVRAMAddrLoop\@
+	jr .loadStillTilePattern\@
+.fourTileSpriteVRAMAddr\@
+	ld hl,$87c0 ; address for second 4-tile sprite
+	ld a,[$ff8e] ; 4-tile sprite counter
+	and a ; is it the first 4-tile sprite?
+	jr nz,.loadStillTilePattern\@
+; if it's the first 4-tile sprite
+	ld hl,$8780 ; address for first 4-tile sprite
+	inc a
+	ld [$ff8e],a ; 4-tile sprite counter
+.loadStillTilePattern\@
+	pop bc
+	pop de
+	pop af
+	push hl
+	push hl
+	ld h,d
+	ld l,e
+	pop de
+	ld b,a
+	ld a,[$cfc4]
+	bit 0,a ; reloading upper half of tile patterns after displaying text?
+	jr nz,.skipFirstLoad\@ ; if so, skip loading data into the lower half
+	ld a,b
+	ld b,0
+	call FarCopyData2 ; load tile pattern data for sprite when standing still
+.skipFirstLoad\@
+	pop de
+	pop hl
+	ld a,[$ff8d]
+	cp a,11 ; is it a 4-tile sprite?
+	jr nc,.skipSecondLoad\@ ; if so, there is no second block
+	push de
+	call ReadSpriteSheetData
+	push af
+	ld a,$c0
+	add e
+	ld e,a
+	jr nc,.noCarry3\@
+	inc d
+.noCarry3\@
+	ld a,[$cfc4]
+	bit 0,a ; reloading upper half of tile patterns after displaying text?
+	jr nz,.loadWhileLCDOn\@
+	pop af
+	pop hl
+	set 3,h ; add $800 to hl
+	push hl
+	ld h,d
+	ld l,e
+	pop de
+	call FarCopyData2 ; load tile pattern data for sprite when walking
+	jr .skipSecondLoad\@
+; When reloading the upper half of tile patterns after diplaying text, the LCD
+; will be on, so CopyVideoData (which writes to VRAM only during V-blank) must
+; be used instead of FarCopyData2.
+.loadWhileLCDOn\@
+	pop af
+	pop hl
+	set 3,h ; add $800 to hl
+	ld b,a
+	swap c
+	call CopyVideoData ; load tile pattern data for sprite when walking
+.skipSecondLoad\@
+	pop hl
+	pop bc
+	jr .nextSpriteSlot\@
+.alreadyLoaded\@ ; if the current picture ID has already had its tile patterns loaded
+	inc de
+	ld a,[de] ; a = VRAM slot for the current picture ID (from $C2YE)
+	ld [hl],a ; store VRAM slot in current $c200 sprite slot (at $C2XE)
+.nextSpriteSlot\@
+	ld a,l
+	add a,$10
+	ld l,a
+	dec c
+	jp nz,.loadTilePatternLoop\@
+	ld hl,$c20d
+	ld b,$10
+; the pictures ID's stored at $C2XD are no longer needed, so zero them
+.zeroStoredPictureIDLoop\@
+	xor a
+	ld [hl],a ; $C2XD
+	ld a,$10
+	add l
+	ld l,a
+	dec b
+	jr nz,.zeroStoredPictureIDLoop\@
+	ret
+
+; reads data from SpriteSheetPointerTable
+; INPUT:
+; hl = address of sprite sheet entry
+; OUTPUT:
+; de = pointer to sprite sheet
+; bc = length in bytes
+; a = ROM bank
+ReadSpriteSheetData: ; 7971
+	ld a,[hli]
+	ld e,a
+	ld a,[hli]
+	ld d,a
+	ld a,[hli]
+	ld c,a
+	xor a
+	ld b,a
+	ld a,[hli]
+	ret
+
+; Loads sprite set for outside maps (cities and routes) and sets VRAM slots.
+; sets carry if the map is a city or route, unsets carry if not
+InitOutsideMapSprites: ; 797B
+	ld a,[W_CURMAP]
+	cp a,$25 ; is the map a city or a route (map ID less than $25)?
+	ret nc ; if not, return
+	ld hl,MapSpriteSets
+	add l
+	ld l,a
+	jr nc,.noCarry\@
+	inc h
+.noCarry\@
+	ld a,[hl] ; a = spriteSetID
+	cp a,$f0 ; does the map have 2 sprite sets?
+	call nc,GetSplitMapSpriteSetID ; if so, choose the appropriate one
+	ld b,a ; b = spriteSetID
+	ld a,[$cfc4]
+	bit 0,a ; reloading upper half of tile patterns after displaying text?
+	jr nz,.loadSpriteSet\@ ; if so, forcibly reload the sprite set
+	ld a,[W_SPRITESETID]
+	cp b ; has the sprite set ID changed?
+	jr z,.skipLoadingSpriteSet\@ ; if not, don't load it again
+.loadSpriteSet\@
+	ld a,b
+	ld [W_SPRITESETID],a
+	dec a
+	ld b,a
+	sla a
+	ld c,a
+	sla a
+	sla a
+	add c
+	add b ; a = (spriteSetID - 1) * 11
+	ld de,SpriteSets
+; add a to de to get offset of sprite set
+	add e
+	ld e,a
+	jr nc,.noCarry2\@
+	inc d
+.noCarry2\@
+	ld hl,$c20d
+	ld a,SPRITE_RED
+	ld [hl],a
+	ld bc,W_SPRITESET
+; Load the sprite set into RAM.
+; This loop also fills $C2XD (sprite picture ID) where X is from $0 to $A
+; with picture ID's. This is done so that LoadMapSpriteTilePatterns will
+; load tile patterns for all sprite pictures in the sprite set.
+.loadSpriteSetLoop\@
+	ld a,$10
+	add l
+	ld l,a
+	ld a,[de] ; sprite picture ID from sprite set
+	ld [hl],a ; $C2XD (sprite picture ID)
+	ld [bc],a
+	inc de
+	inc bc
+	ld a,l
+	cp a,$bd ; reached 11th sprite slot?
+	jr nz,.loadSpriteSetLoop\@
+	ld b,4 ; 4 remaining sprite slots
+.zeroRemainingSlotsLoop\@ ; loop to zero the picture ID's of the remaining sprite slots
+	ld a,$10
+	add l
+	ld l,a
+	xor a
+	ld [hl],a ; $C2XD (sprite picture ID)
+	dec b
+	jr nz,.zeroRemainingSlotsLoop\@
+	ld a,[W_NUMSPRITES]
+	push af ; save number of sprites
+	ld a,11 ; 11 sprites in sprite set
+	ld [W_NUMSPRITES],a
+	call LoadMapSpriteTilePatterns
+	pop af
+	ld [W_NUMSPRITES],a ; restore number of sprites
+	ld hl,$c21e
+	ld b,$0f
+; The VRAM tile pattern slots that LoadMapSpriteTilePatterns set are in the
+; order of the map's sprite set, not the order of the actual sprites loaded
+; for the current map. So, they are not needed and are zeroed by this loop.
+.zeroVRAMSlotsLoop\@
+	xor a
+	ld [hl],a ; $C2XE (VRAM slot)
+	ld a,$10
+	add l
+	ld l,a
+	dec b
+	jr nz,.zeroVRAMSlotsLoop\@
+.skipLoadingSpriteSet\@
+	ld hl,$c110
+; This loop stores the correct VRAM tile pattern slots according the sprite
+; data from the map's header. Since the VRAM tile pattern slots are filled in
+; the order of the sprite set, in order to find the VRAM tile pattern slot
+; for a sprite slot, the picture ID for the sprite is looked up within the
+; sprite set. The index of the picture ID within the sprite set plus one
+; (since the Red sprite always has the first VRAM tile pattern slot) is the
+; VRAM tile pattern slot.
+.storeVRAMSlotsLoop\@
+	ld c,0
+	ld a,[hl] ; $C1X0 (picture ID) (zero if sprite slot is not used)
+	and a ; is the sprite slot used?
+	jr z,.skipGettingPictureIndex\@ ; if the sprite slot is not used
+	ld b,a ; b = picture ID
+	ld de,W_SPRITESET
+; Loop to find the index of the sprite's picture ID within the sprite set.
+.getPictureIndexLoop\@
+	inc c
+	ld a,[de]
+	inc de
+	cp b ; does the picture ID match?
+	jr nz,.getPictureIndexLoop\@
+	inc c
+.skipGettingPictureIndex\@
+	push hl
+	inc h
+	ld a,$0e
+	add l
+	ld l,a
+	ld a,c ; a = VRAM slot (zero if sprite slot is not used)
+	ld [hl],a ; $C2XE (VRAM slot)
+	pop hl
+	ld a,$10
+	add l
+	ld l,a
+	and a
+	jr nz,.storeVRAMSlotsLoop\@
+	scf
+	ret
+
+; Chooses the correct sprite set ID depending on the player's position within
+; the map for maps with two sprite sets.
+GetSplitMapSpriteSetID: ; 7A1A
+	cp a,$f8
+	jr z,.route20\@
+	ld hl,SplitMapSpriteSets
+	and a,$0f
+	dec a
+	sla a
+	sla a
+	add l
+	ld l,a
+	jr nc,.noCarry\@
+	inc h
+.noCarry\@
+	ld a,[hli] ; determines whether the map is split East/West or North/South
+	cp a,$01
+	ld a,[hli] ; position of dividing line
+	ld b,a
+	jr z,.eastWestDivide\@
+.northSouthDivide\@
+	ld a,[W_YCOORD]
+	jr .compareCoord\@
+.eastWestDivide\@
+	ld a,[W_XCOORD]
+.compareCoord\@
+	cp b
+	jr c,.loadSpriteSetID\@
+; if in the East side or South side
+	inc hl
+.loadSpriteSetID\@
+	ld a,[hl]
+	ret
+; Uses sprite set $01 for West side and $0A for East side.
+; Route 20 is a special case because the two map sections have a more complex
+; shape instead of the map simply being split horizontally or vertically.
+.route20\@
+	ld hl,W_XCOORD
+	ld a,[hl]
+	cp a,$2b
+	ld a,$01
+	ret c
+	ld a,[hl]
+	cp a,$3e
+	ld a,$0a
+	ret nc
+	ld a,[hl]
+	cp a,$37
+	ld b,$08
+	jr nc,.next\@
+	ld b,$0d
+.next\@
+	ld a,[W_YCOORD]
+	cp b
+	ld a,$0a
+	ret c
+	ld a,$01
+	ret
+
+MapSpriteSets: ; 7A64
+	db $01 ; PALLET_TOWN
+	db $01 ; VIRIDIAN_CITY
+	db $02 ; PEWTER_CITY
+	db $02 ; CERULEAN_CITY
+	db $03 ; LAVENDER_TOWN
+	db $04 ; VERMILION_CITY
+	db $05 ; CELADON_CITY
+	db $0a ; FUCHSIA_CITY
+	db $01 ; CINNABAR_ISLAND
+	db $06 ; INDIGO_PLATEAU
+	db $07 ; SAFFRON_CITY
+	db $01 ; unused map ID
+	db $01 ; ROUTE_1
+	db $f1 ; ROUTE_2
+	db $02 ; ROUTE_3
+	db $02 ; ROUTE_4
+	db $f9 ; ROUTE_5
+	db $fa ; ROUTE_6
+	db $fb ; ROUTE_7
+	db $fc ; ROUTE_8
+	db $02 ; ROUTE_9
+	db $f2 ; ROUTE_10
+	db $f3 ; ROUTE_11
+	db $f4 ; ROUTE_12
+	db $08 ; ROUTE_13
+	db $08 ; ROUTE_14
+	db $f5 ; ROUTE_15
+	db $f6 ; ROUTE_16
+	db $09 ; ROUTE_17
+	db $f7 ; ROUTE_18
+	db $0a ; ROUTE_19
+	db $f8 ; ROUTE_20
+	db $01 ; ROUTE_21
+	db $01 ; ROUTE_22
+	db $06 ; ROUTE_23
+	db $02 ; ROUTE_24
+	db $02 ; ROUTE_25
+
+; Format:
+; 00: determines whether the map is split East/West or North/South
+; $01 = East/West divide
+; $02 = North/South divide
+; 01: coordinate of dividing line
+; 02: sprite set ID if in the West or North side
+; 03: sprite set ID if in the East or South side
+SplitMapSpriteSets: ; 7A89
+	db $02,$25,$02,$01 ; $f1
+	db $02,$32,$02,$03 ; $f2
+	db $01,$39,$04,$08 ; $f3
+	db $02,$15,$03,$08 ; $f4
+	db $01,$08,$0A,$08 ; $f5
+	db $01,$18,$09,$05 ; $f6
+	db $01,$22,$09,$0A ; $f7
+	db $01,$35,$01,$0A ; $f8
+	db $02,$21,$02,$07 ; $f9
+	db $02,$02,$07,$04 ; $fa
+	db $01,$11,$05,$07 ; $fb
+	db $01,$03,$07,$03 ; $fc
+
+SpriteSets: ; 7AB9
+; sprite set $01
+	db SPRITE_BLUE
+	db SPRITE_BUG_CATCHER
+	db SPRITE_GIRL
+	db SPRITE_FISHER2
+	db SPRITE_BLACK_HAIR_BOY_1
+	db SPRITE_GAMBLER
+	db SPRITE_SEEL
+	db SPRITE_OAK
+	db SPRITE_SWIMMER
+	db SPRITE_BALL
+	db SPRITE_LYING_OLD_MAN
+
+; sprite set $02
+	db SPRITE_BUG_CATCHER
+	db SPRITE_ROCKET
+	db SPRITE_BLACK_HAIR_BOY_2
+	db SPRITE_HIKER
+	db SPRITE_SLOWBRO
+	db SPRITE_BLUE
+	db SPRITE_GUARD
+	db SPRITE_LASS
+	db SPRITE_BLACK_HAIR_BOY_1
+	db SPRITE_BALL
+	db SPRITE_LYING_OLD_MAN_UNUSED_2
+
+; sprite set $03
+	db SPRITE_LITTLE_GIRL
+	db SPRITE_GIRL
+	db SPRITE_BLACK_HAIR_BOY_2
+	db SPRITE_HIKER
+	db SPRITE_GAMBLER
+	db SPRITE_SLOWBRO
+	db SPRITE_LASS
+	db SPRITE_BLACK_HAIR_BOY_1
+	db SPRITE_GUARD
+	db SPRITE_BALL
+	db SPRITE_LYING_OLD_MAN_UNUSED_2
+
+; sprite set $04
+	db SPRITE_FOULARD_WOMAN
+	db SPRITE_BLACK_HAIR_BOY_2
+	db SPRITE_BUG_CATCHER
+	db SPRITE_GAMBLER
+	db SPRITE_SLOWBRO
+	db SPRITE_GUARD
+	db SPRITE_SAILOR
+	db SPRITE_LASS
+	db SPRITE_BLACK_HAIR_BOY_1
+	db SPRITE_BALL
+	db SPRITE_LYING_OLD_MAN_UNUSED_2
+
+; sprite set $05
+	db SPRITE_LITTLE_GIRL
+	db SPRITE_YOUNG_BOY
+	db SPRITE_GIRL
+	db SPRITE_FISHER2
+	db SPRITE_FAT_BALD_GUY
+	db SPRITE_OLD_PERSON
+	db SPRITE_SLOWBRO
+	db SPRITE_GUARD
+	db SPRITE_ROCKET
+	db SPRITE_BALL
+	db SPRITE_SNORLAX
+
+; sprite set $06
+	db SPRITE_BUG_CATCHER
+	db SPRITE_GYM_HELPER
+	db SPRITE_SLOWBRO
+	db SPRITE_BLUE
+	db SPRITE_LASS
+	db SPRITE_BLACK_HAIR_BOY_1
+	db SPRITE_SWIMMER
+	db SPRITE_GUARD
+	db SPRITE_GAMBLER
+	db SPRITE_BALL
+	db SPRITE_LYING_OLD_MAN_UNUSED_2
+
+; sprite set $07
+	db SPRITE_ROCKET
+	db SPRITE_OAK_AIDE
+	db SPRITE_LAPRAS_GIVER
+	db SPRITE_ERIKA
+	db SPRITE_GENTLEMAN
+	db SPRITE_BIRD
+	db SPRITE_ROCKER
+	db SPRITE_BLACK_HAIR_BOY_1
+	db SPRITE_SLOWBRO
+	db SPRITE_BALL
+	db SPRITE_LYING_OLD_MAN_UNUSED_2
+
+; sprite set $08
+	db SPRITE_BIKER
+	db SPRITE_BLACK_HAIR_BOY_2
+	db SPRITE_FAT_BALD_GUY
+	db SPRITE_LASS
+	db SPRITE_BLACK_HAIR_BOY_1
+	db SPRITE_FOULARD_WOMAN
+	db SPRITE_FISHER2
+	db SPRITE_ROCKER
+	db SPRITE_SLOWBRO
+	db SPRITE_BALL
+	db SPRITE_SNORLAX
+
+; sprite set $09
+	db SPRITE_BIKER
+	db SPRITE_BLACK_HAIR_BOY_1
+	db SPRITE_LAPRAS_GIVER
+	db SPRITE_FISHER2
+	db SPRITE_ROCKER
+	db SPRITE_HIKER
+	db SPRITE_GAMBLER
+	db SPRITE_FAT_BALD_GUY
+	db SPRITE_BLACK_HAIR_BOY_2
+	db SPRITE_BALL
+	db SPRITE_SNORLAX
+
+; sprite set $0a
+	db SPRITE_BIRD
+	db SPRITE_BLACK_HAIR_BOY_1
+	db SPRITE_CLEFAIRY
+	db SPRITE_FISHER2
+	db SPRITE_GAMBLER
+	db SPRITE_SLOWBRO
+	db SPRITE_SEEL
+	db SPRITE_SWIMMER
+	db SPRITE_BUG_CATCHER
+	db SPRITE_BALL
+	db SPRITE_OMANYTE
 
 SpriteSheetPointerTable: ; 0x17b27
 	; SPRITE_RED
@@ -37842,8 +38484,8 @@ EnemySendOut: ; 490E
 	ld bc,$040B
 	call ClearScreenArea
 	ld b,1
-	call $3DEF
-	call $3DDC
+	call GoPAL_SET
+	call GBPalNormal
 	ld hl,TrainerSentOutText
 	call PrintText
 	ld a,[$CFD8]
@@ -39731,9 +40373,9 @@ DisplayPokedexMenu_: ; 4000
 .setUpGraphics\@
 	ld b,$08
 	call GoPAL_SET
-	ld hl,$7840
-	ld b,$05
-	call Bankswitch ; load pokedex tile data
+	ld hl,LoadPokedexTilePatterns
+	ld b,BANK(LoadPokedexTilePatterns)
+	call Bankswitch
 .doPokemonListMenu\@
 	ld hl,W_TOPMENUITEMY
 	ld a,3

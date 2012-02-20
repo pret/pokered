@@ -637,6 +637,10 @@ W_MAPCONN2PTR EQU $D37C
 W_MAPCONN3PTR EQU $D387
 W_MAPCONN4PTR EQU $D392
 
+W_SPRITESET EQU $D39D ; sprite set for the current map (11 sprite picture ID's)
+W_SPRITESETID EQU $D3A8 ; sprite set ID for the current map
+
+W_NUMSPRITES EQU $D4E1 ; number of sprites on the current map
 W_PEOPLEMOVEPERMISSIONS EQU $D4E4
 
 ; coins are in decimal
