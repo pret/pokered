@@ -17111,7 +17111,7 @@ ItemUsePokeflute: ; 6140
 .inBattle\@
 	xor a
 	ld [$cd3d],a ; initialize variable that indicates if any pokemon were woken up to zero
-	ld b,~SLP
+	ld b,~SLP & $FF
 	ld hl,W_PARTYMON1_STATUS
 	call WakeUpEntireParty
 	ld a,[W_ISINBATTLE]
