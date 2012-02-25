@@ -18475,16 +18475,16 @@ INCBIN "baserom.gbc",$11380,$12953 - $11380
 StatusScreen: ; 0x12953
     call LoadMonData
     ld a, [$cc49]
-    cp $2
-    jr c, .asm_12971 ; 0x1295b $14
+    cp $2 ; 2 means we're in a PC box
+    jr c, .DontRecalculate ; 0x1295b $14
     ld a, [$cf9b]
     ld [$cfb9], a
     ld [$d127], a
     ld hl, $cfa8
     ld de, $cfba
     ld b, $1
-    call $3936
-.asm_12971
+    call $3936 ; Recalculate stats
+.DontRecalculate
     ld hl, $d72c
     set 1, [hl]
     ld a, $33
@@ -18496,103 +18496,111 @@ StatusScreen: ; 0x12953
     ld de, $6080 ; source
     ld hl, $96d0 ; dest
     ld bc, $0403 ; bank bytes/8
-    call CopyVideoDataDouble
+    call CopyVideoDataDouble ; ·│ :L and halfarrow line end
     ld de, $6098
     ld hl, $9780
     ld bc, $0401
-    call CopyVideoDataDouble
+    call CopyVideoDataDouble ; │
     ld de, $60b0
     ld hl, $9760
     ld bc, $0402
-    call CopyVideoDataDouble
-    ld de, $6adc
+    call CopyVideoDataDouble ; ─┘
+    ld de, PTile
     ld hl, $9720
-    ld bc, $0401
-    call CopyVideoDataDouble
+    ld bc,(BANK(PTile) << 8 | $01)
+    call CopyVideoDataDouble ; P (for PP), inline
     ld a, [$ff00+$d7]
     push af
     xor a
     ld [$ff00+$d7], a
-    ld hl, $c3c7
+    FuncCoord 19,1
+    ld hl, Coord
     ld bc, $060a
-    call $6ac7
+    call DrawLineBox ; Draws the box around name, HP and status
     ld de, $fffa
     add hl, de
-    ld [hl], $f2
+    ld [hl], $f2 ; . after No ("." is a different one)
     dec hl
-    ld [hl], $74
-    ld hl, $c467
+    ld [hl], $74 ; No
+    FuncCoord 19,9
+    ld hl, Coord
     ld bc, $0806
-    call $6ac7
+    call DrawLineBox ; Draws the box around types, ID No. and OT
     FuncCoord 10,9
     ld hl, Coord
     ld de, Type1Text
     call PlaceString ; "TYPE1/"
-    ld hl, $c3e7
+    FuncCoord 11,3
+    ld hl, Coord
     ld a, $5f
-    call Predef
+    call Predef ; Draws HP bar
     ld hl, $cf25
     call $3df9
     ld b, $3
-    call $3def ; SGB palette
-    ld hl, $c428
+    call GoPAL_SET ; SGB palette
+    FuncCoord 16,6
+    ld hl, Coord
     ld de, $cf9c
-    call $14e1
-    jr nz, .PassOK\@ ; 0x129fc $9
+    call PrintStatusCondition
+    jr nz, .StatusWritten\@ ; 0x129fc $9
     FuncCoord 16,6
     ld hl, Coord
     ld de, OKText
     call PlaceString ; "OK"
-.PassOK\@
+.StatusWritten\@
     FuncCoord 9,6
     ld hl, Coord
     ld de, StatusText
     call PlaceString ; "STATUS/"
-    ld hl, $c3d6
-    call $150b
+    FuncCoord 14,2
+    ld hl, Coord
+    call PrintLevel ; Pokémon level
     ld a, [$d0b8]
     ld [$d11e], a
     ld [$d0b5], a
     ld a, $3a
     call Predef
-    ld hl, $c42f
+    FuncCoord 3,7
+    ld hl, Coord
     ld de, $d11e
-    ld bc, $8103
-    call PrintNumber
-    ld hl, $c473
+    ld bc, $8103 ; Zero-padded, 3
+    call PrintNumber ; Pokémon no.
+    FuncCoord 11,10
+    ld hl, Coord
     ld a, $4b
-    call Predef
+    call Predef ; Prints the type (?)
     ld hl, $6a9d
-    call .LoadString
+    call .unk_12a7e
     ld d, h
     ld e, l
     FuncCoord 9,1
     ld hl, Coord
     call PlaceString ; Pokémon name
     ld hl, $6a95
-    call .LoadString
+    call .unk_12a7e
     ld d, h
     ld e, l
     FuncCoord 12,16
     ld hl, Coord
     call PlaceString ; OT
-    ld hl, $c4c4
-    ld de, $cfa4 ; source
-    ld bc, $8205
-    call PrintNumber
+    FuncCoord 12,14
+    ld hl, Coord
+    ld de, $cfa4
+    ld bc, $8205 ; 5
+    call PrintNumber ; ID Number
     ld d, $0
-    call $6ae4
+    call PrintStatsBox
     call Delay3
     call GBPalNormal
     ld hl, $c3a1
     call $1384 ; draw Pokémon picture
     ld a, [$cf91]
     call $13d0 ; play Pokémon cry
-    call $3865 ; wait for button?
+    call $3865 ; wait for button
     pop af
     ld [$ff00+$d7], a
     ret
-.LoadString ; 0x12a7e
+.unk_12a7e ; 0x12a7e ; I don't know what this does, iterates over pointers?
 	ld a, [$cc49]
 	add a
 	ld c, a
@@ -18608,7 +18616,7 @@ StatusScreen: ; 0x12953
 	jp $3a7d
 ; 0x12a95
 
-INCBIN "baserom.gbc",$12a95,$12aa5 - $12a95
+INCBIN "baserom.gbc",$12a95,$12aa5 - $12a95 ; This is some pointers..
 
 Type1Text: ; 0x12aa5
     db "TYPE1/", $4e
@@ -18628,9 +18636,80 @@ StatusText:
 OKText: ; 0x12ac4
     db "OK@"
 
-INCBIN "baserom.gbc",$12ac7,$12b57 - $12ac7
+; Draws a line starting from hl high b and wide c
+DrawLineBox ; 0x12ac7
+	ld de, $0014 ; New line
+.PrintVerticalLine
+	ld [hl], $78 ; │
+	add hl, de
+	dec b
+	jr nz, .PrintVerticalLine ; 0x12ace $fa
+	ld [hl], $77 ; ┘
+	dec hl
+.PrintHorizLine
+	ld [hl], $76 ; ─
+	dec hl
+	dec c
+	jr nz, .PrintHorizLine ; 0x12ad7 $fa
+	ld [hl], $6f ; ← (halfarrow ending)
+	ret
 
-StatusScreen2:
+PTile: ; This is a single 1bpp "P" tile
+INCBIN "baserom.gbc",$12adc,$12ae4 - $12adc
+
+PrintStatsBox: ; 12ae4
+	ld a, d
+	and a ; a is 0 from the status screen
+	jr nz, .DifferentBox ; 0x12ae6 $12
+	FuncCoord 0,8
+	ld hl, Coord
+	ld b, $8
+	ld c, $8
+	call TextBoxBorder ; Draws the box
+	FuncCoord 1,9 ; Start printing stats from here
+	ld hl, Coord
+	ld bc, $0019 ; Number offset
+	jr .PrintStats ; 0x12af8 $10
+.DifferentBox
+    FuncCoord 9,2
+	ld hl, Coord
+	ld b, $8
+	ld c, $9
+	call TextBoxBorder
+	ld hl, $c3e7
+	ld bc, $0018
+.PrintStats
+	push bc
+	push hl
+	ld de, StatsText
+	call PlaceString
+	pop hl
+	pop bc
+	add hl, bc
+	ld de, $cfbc
+	ld bc, $0203 ; three digits
+	call PrintStat
+	ld de, $cfbe
+	call PrintStat
+	ld de, $cfc0
+	call PrintStat
+	ld de, $cfc2
+	jp PrintNumber
+PrintStat
+	push hl
+	call PrintNumber
+	pop hl
+	ld de, $0028
+	add hl, de
+	ret
+
+StatsText:
+    db "ATTACK", $4e
+    db "DEFENSE", $4e
+    db "SPEED", $4e
+    db "SPECIAL", $50
+
+StatusScreen2: ; 12b57
 	ld a, [$ff00+$d7]
 	push af
 	xor a
@@ -49887,7 +49966,7 @@ PredefPointers: ; 7E79
 	dbw $01,$4DE1
 	dbw $09,$7D98
 	dbw $03,$7473
-	dbw $04,$68EF
+	dbw $04,$68EF ; 5F draw HP bar
 	dbw $04,$68F6
 	dbw $07,$49C6
 	dbw $16,$5035
