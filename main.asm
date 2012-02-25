@@ -18472,7 +18472,7 @@ LyingOldManSprite: ; 0x11340
 INCBIN "baserom.gbc",$11380,$12953 - $11380
 
 ; Predef 0x37
-StatusScreenInit: ; 0x12953
+StatusScreen: ; 0x12953
     call LoadMonData
     ld a, [$cc49]
     cp $2
@@ -18563,14 +18563,14 @@ StatusScreenInit: ; 0x12953
     ld a, $4b
     call Predef
     ld hl, $6a9d
-    call $6a7e
+    call .LoadString
     ld d, h
     ld e, l
     FuncCoord 9,1
     ld hl, Coord
     call PlaceString ; Pokémon name
     ld hl, $6a95
-    call $6a7e
+    call .LoadString
     ld d, h
     ld e, l
     FuncCoord 12,16
@@ -18592,9 +18592,23 @@ StatusScreenInit: ; 0x12953
     pop af
     ld [$ff00+$d7], a
     ret
-; 0x12a7e
+.LoadString ; 0x12a7e
+	ld a, [$cc49]
+	add a
+	ld c, a
+	ld b, $0
+	add hl, bc
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	ld a, [$cc49]
+	cp $3
+	ret z
+	ld a, [W_WHICHPOKEMON]
+	jp $3a7d
+; 0x12a95
 
-INCBIN "baserom.gbc",$12a7e,$12aa5 - $12a7e
+INCBIN "baserom.gbc",$12a95,$12aa5 - $12a95
 
 Type1Text: ; 0x12aa5
     db "TYPE1/", $4e
@@ -18614,7 +18628,200 @@ StatusText:
 OKText: ; 0x12ac4
     db "OK@"
 
-INCBIN "baserom.gbc",$12ac7,$12cd2 - $12ac7
+INCBIN "baserom.gbc",$12ac7,$12b57 - $12ac7
+
+StatusScreen2:
+	ld a, [$ff00+$d7]
+	push af
+	xor a
+	ld [$ff00+$d7], a
+	ld [$ff00+$ba], a
+	ld bc, $0005
+	ld hl, $d0dc
+	call $36e0
+	ld hl, $cfa0
+	ld de, $d0dc
+	ld bc, $0004
+	call CopyData
+	ld hl, $5b87
+	ld b, $e
+	call Bankswitch
+	FuncCoord 9,2
+	ld hl, Coord
+	ld bc, $050a
+	call ClearScreenArea ; Clear under name
+	ld hl, $c3ef
+	ld [hl], $78
+	FuncCoord 0,8
+	ld hl, Coord
+	ld b, $8
+	ld c, $12
+	call TextBoxBorder ; Draw move container
+	FuncCoord 2,9
+	ld hl, Coord
+	ld de, $d0e1
+	call PlaceString ; Print moves
+	ld a, [$cd6c]
+	inc a
+	ld c, a
+	ld a, $4
+	sub c
+	ld b, a ; Number of moves ?
+	FuncCoord 11,10
+	ld hl, Coord
+	ld de, $0028
+	ld a, $72
+	call $6ccb ; Print "PP"
+	ld a, b
+	and a
+	jr z, .InitPP ; 0x12bb3 $6
+	ld c, a
+	ld a, $e3
+	call $6ccb ; Fill the rest with --
+.InitPP ; 12bbb
+	ld hl, $cfa0
+	FuncCoord 14,10
+	ld de, Coord
+	ld b, $0
+.PrintPP ; 12bc3
+	ld a, [hli]
+	and a
+	jr z, .PPDone ; 0x12bc5 $4a
+	push bc
+	push hl
+	push de
+	ld hl, W_CURMENUITEMID
+	ld a, [hl]
+	push af
+	ld a, b
+	ld [hl], a
+	push hl
+	ld hl, $6677
+	ld b, $3
+	call Bankswitch
+	pop hl
+	pop af
+	ld [hl], a
+	pop de
+	pop hl
+	push hl
+	ld bc, $0014
+	add hl, bc
+	ld a, [hl]
+	and $3f
+	ld [$cd71], a
+	ld h, d
+	ld l, e
+	push hl
+	ld de, $cd71
+	ld bc, $0102
+	call PrintNumber
+	ld a, "/"
+	ld [hli], a
+	ld de, $d11e
+	ld bc, $0102
+	call PrintNumber
+	pop hl
+	ld de, $0028
+	add hl, de
+	ld d, h
+	ld e, l
+	pop hl
+	pop bc
+	inc b
+	ld a, b
+	cp $4
+	jr nz, .PrintPP ; 0x12c0f $b2
+.PPDone
+    FuncCoord 9,3
+	ld hl, Coord
+	ld de, EXPPointsText
+	call PlaceString
+	ld a, [$cfb9] ; level
+	push af
+	cp $64
+	jr z, .Level100 ; 0x12c20 $4
+	inc a
+	ld [$cfb9], a ; Increase temporarily if not 100
+.Level100
+    FuncCoord 14,6
+	ld hl, Coord
+	ld [hl], $70 ; 1-tile "to"
+	inc hl
+	inc hl
+	call PrintLevel
+	pop af
+	ld [$cfb9], a
+	ld de, $cfa6
+	FuncCoord 12,4
+	ld hl, Coord
+	ld bc, $0307
+	call PrintNumber ; exp
+	call .asm_12c86
+	ld de, $cfa6
+	FuncCoord 7,6
+	ld hl, Coord
+	ld bc, $0307
+	call PrintNumber
+	FuncCoord 9,0
+	ld hl, Coord
+	call $6cc3
+	FuncCoord 9,1
+	ld hl, Coord
+	call $6cc3
+	ld a, [$d0b8]
+	ld [$d11e], a
+	call GetMonName
+	FuncCoord 9,1
+	ld hl, Coord
+	call PlaceString
+	ld a, $1
+	ld [$ff00+$ba], a
+	call Delay3
+	call $3865 ; wait for button
+	pop af
+	ld [$ff00+$d7], a
+	ld hl, $d72c
+	res 1, [hl]
+	ld a, $77
+	ld [$ff00+$24], a
+	call GBPalWhiteOut
+	jp ClearScreen
+.asm_12c86 ; This does some magic with lvl/exp?
+	ld a, [$cfb9] ; Load level
+	cp $64
+	jr z, .asm_12ca7 ; 0x12c8b $1a ; If 100
+	inc a
+	ld d, a
+	ld hl, $4f6a
+	ld b, $16
+	call Bankswitch
+	ld hl, $cfa8
+	ld a, [$ff00+$98]
+	sub [hl]
+	ld [hld], a
+	ld a, [$ff00+$97]
+	sbc [hl]
+	ld [hld], a
+	ld a, [$ff00+$96]
+	sbc [hl]
+	ld [hld], a
+	ret
+.asm_12ca7
+	ld hl, $cfa6
+	xor a
+	ld [hli], a
+	ld [hli], a
+	ld [hl], a
+	ret
+
+EXPPointsText:
+    db "EXP POINTS", $4e
+    
+LevelUpText:
+    db "LEVEL UP", $50
+
+INCBIN "baserom.gbc",$12cc3,$12cd2 - $12cc3
 
 ; [$D07D] = menu type / message ID
 ; if less than $F0, it is a menu type
@@ -49639,8 +49846,8 @@ PredefPointers: ; 7E79
 	dbw $1E,$5869
 	dbw $1C,$4B5D
 	dbw $03,$4586
-	dbw $04,$6953
-	dbw $04,$6B57
+	dbw BANK(StatusScreen),StatusScreen ; 37 0x12953
+	dbw BANK(StatusScreen2),StatusScreen2 ; 38
 	dbw $10,$50E2
 	dbw $15,$690F
 	dbw $10,$5010
