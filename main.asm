@@ -18469,7 +18469,152 @@ OldAmberSprite: ; 0x11300
 LyingOldManSprite: ; 0x11340
 	INCBIN "gfx/sprites/lying_old_man.2bpp" ; was $11340
 
-INCBIN "baserom.gbc",$11380,$12cd2 - $11380
+INCBIN "baserom.gbc",$11380,$12953 - $11380
+
+; Predef 0x37
+StatusScreenInit: ; 0x12953
+    call LoadMonData
+    ld a, [$cc49]
+    cp $2
+    jr c, .asm_12971 ; 0x1295b $14
+    ld a, [$cf9b]
+    ld [$cfb9], a
+    ld [$d127], a
+    ld hl, $cfa8
+    ld de, $cfba
+    ld b, $1
+    call $3936
+.asm_12971
+    ld hl, $d72c
+    set 1, [hl]
+    ld a, $33
+    ld [$ff00+$24], a ; Reduce the volume
+    call GBPalWhiteOutWithDelay3
+    call ClearScreen
+    call $2429 ; move sprites (?)
+    call LoadHpBarAndStatusTilePatterns
+    ld de, $6080 ; source
+    ld hl, $96d0 ; dest
+    ld bc, $0403 ; bank bytes/8
+    call CopyVideoDataDouble
+    ld de, $6098
+    ld hl, $9780
+    ld bc, $0401
+    call CopyVideoDataDouble
+    ld de, $60b0
+    ld hl, $9760
+    ld bc, $0402
+    call CopyVideoDataDouble
+    ld de, $6adc
+    ld hl, $9720
+    ld bc, $0401
+    call CopyVideoDataDouble
+    ld a, [$ff00+$d7]
+    push af
+    xor a
+    ld [$ff00+$d7], a
+    ld hl, $c3c7
+    ld bc, $060a
+    call $6ac7
+    ld de, $fffa
+    add hl, de
+    ld [hl], $f2
+    dec hl
+    ld [hl], $74
+    ld hl, $c467
+    ld bc, $0806
+    call $6ac7
+    FuncCoord 10,9
+    ld hl, Coord
+    ld de, Type1Text
+    call PlaceString ; "TYPE1/"
+    ld hl, $c3e7
+    ld a, $5f
+    call Predef
+    ld hl, $cf25
+    call $3df9
+    ld b, $3
+    call $3def ; SGB palette
+    ld hl, $c428
+    ld de, $cf9c
+    call $14e1
+    jr nz, .PassOK\@ ; 0x129fc $9
+    FuncCoord 16,6
+    ld hl, Coord
+    ld de, OKText
+    call PlaceString ; "OK"
+.PassOK\@
+    FuncCoord 9,6
+    ld hl, Coord
+    ld de, StatusText
+    call PlaceString ; "STATUS/"
+    ld hl, $c3d6
+    call $150b
+    ld a, [$d0b8]
+    ld [$d11e], a
+    ld [$d0b5], a
+    ld a, $3a
+    call Predef
+    ld hl, $c42f
+    ld de, $d11e
+    ld bc, $8103
+    call PrintNumber
+    ld hl, $c473
+    ld a, $4b
+    call Predef
+    ld hl, $6a9d
+    call $6a7e
+    ld d, h
+    ld e, l
+    FuncCoord 9,1
+    ld hl, Coord
+    call PlaceString ; Pokémon name
+    ld hl, $6a95
+    call $6a7e
+    ld d, h
+    ld e, l
+    FuncCoord 12,16
+    ld hl, Coord
+    call PlaceString ; OT
+    ld hl, $c4c4
+    ld de, $cfa4 ; source
+    ld bc, $8205
+    call PrintNumber
+    ld d, $0
+    call $6ae4
+    call Delay3
+    call GBPalNormal
+    ld hl, $c3a1
+    call $1384 ; draw Pokémon picture
+    ld a, [$cf91]
+    call $13d0 ; play Pokémon cry
+    call $3865 ; wait for button?
+    pop af
+    ld [$ff00+$d7], a
+    ret
+; 0x12a7e
+
+INCBIN "baserom.gbc",$12a7e,$12aa5 - $12a7e
+
+Type1Text: ; 0x12aa5
+    db "TYPE1/", $4e
+
+Type2Text: ; 
+    db "TYPE2/", $4e
+
+IDNoText:
+    db $73, $74, "/", $4e
+
+OTText:
+    db "OT/", $4e, "@"
+
+StatusText:
+    db "STATUS/@"
+
+OKText: ; 0x12ac4
+    db "OK@"
+
+INCBIN "baserom.gbc",$12ac7,$12cd2 - $12ac7
 
 ; [$D07D] = menu type / message ID
 ; if less than $F0, it is a menu type
