@@ -14,3 +14,5 @@ Then copy the Pokémon ROM to this directory as "baserom.gbc".
 Then run "make" in your shell.
 
 This will output a file named "pokered.gbc".
+
+nucleus.kafuka.org #skeetendo

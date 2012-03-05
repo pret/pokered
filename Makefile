@@ -1,6 +1,3 @@
-#gawk sort order
-export LC_CTYPE=C
-
 .SUFFIXES: .asm .tx .o .gbc
 
 TEXTFILES =	text/oakspeech.tx text/pokedex.tx text/mapRedsHouse1F.tx \
@@ -18,7 +15,7 @@ redrle: extras/redrle.c
 	${CC} -o $@ $>
 
 .asm.tx:
-	awk -f textpre.awk < $< > $@
+	python textpre.py  < $< > $@
 
 pokered.gbc: pokered.o
 	rgblink -o $@ $<
