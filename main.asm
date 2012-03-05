@@ -5258,66 +5258,25 @@ TextScriptEnd: ; 24D7 24d7
 
 UnnamedText_24db: ; 0x24db
 	TX_FAR _UnnamedText_24db
-	db $50
+	db "@"
 ; 0x24db + 5 bytes
 
 UnnamedText_24e0: ; 0x24e0
 	TX_FAR _UnnamedText_24e0
-	db $50
+	db "@"
 ; 0x24e0 + 5 bytes
 
-VictoryRoad3Text10:
-VictoryRoad3Text9:
-VictoryRoad3Text8:
-VictoryRoad3Text7:
-VictoryRoad2Text13:
-VictoryRoad2Text12:
-VictoryRoad2Text11:
-SeafoamIslands1Text2:
-SeafoamIslands1Text1:
-SeafoamIslands5Text2:
-SeafoamIslands5Text1:
-SeafoamIslands4Text6:
-SeafoamIslands4Text5:
-SeafoamIslands4Text4:
-SeafoamIslands4Text3:
-SeafoamIslands4Text2:
-SeafoamIslands4Text1:
-SeafoamIslands3Text2:
-SeafoamIslands3Text1:
-SeafoamIslands2Text2:
-SeafoamIslands2Text1:
-FuchsiaHouse2Text3:
-VictoryRoad1Text7:
-VictoryRoad1Text6:
-VictoryRoad1Text5: ; 0x24e5
-	TX_FAR _VictoryRoad1Text5
-	db $50
+BoulderText: ; 0x24e5
+	TX_FAR _BoulderText
+	db "@"
 
-SaffronCityText19:
-CinnabarIslandText4:
-FuchsiaCityText14:
-VermilionCityText9:
-LavenderTownText6:
-CeruleanCityText14:
-PewterCityText8:
-ViridianCityText11: ; 0x24ea
-	TX_FAR _ViridianCityText11
-	db $50
+MartSignText: ; 0x24ea
+	TX_FAR _MartSignText
+	db "@"
 
-PewterCityText9:
-CeruleanCityText15:
-LavenderTownText7:
-VermilionCityText10:
-CeladonCityText12:
-FuchsiaCityText15:
-CinnabarIslandText5:
-SaffronCityText23:
-Route4Text4:
-Route10Text8:
-ViridianCityText12: ; 0x24ef
-	TX_FAR _ViridianCityText12
-	db $50
+PokeCenterSignText: ; 0x24ef
+	TX_FAR _PokeCenterSignText
+	db "@"
 
 Route2Text1:
 Route4Text3:
@@ -21246,7 +21205,7 @@ CeladonCityObject: ; 0x18022 (size=189)
 	db $9 ; signs
 	db $f, $1b, $a ; CeladonCityText10
 	db $f, $13, $b ; CeladonCityText11
-	db $9, $2a, $c ; CeladonCityText12
+	db $9, $2a, $c ; PokeCenterSignText
 	db $1d, $d, $d ; CeladonCityText13
 	db $9, $15, $e ; CeladonCityText14
 	db $d, $c, $f ; CeladonCityText15
@@ -21380,8 +21339,8 @@ ViridianCityObject: ; 0x18384 (size=104)
 	db $11, $11, $8 ; ViridianCityText8
 	db $1, $13, $9 ; ViridianCityText9
 	db $1d, $15, $a ; ViridianCityText10
-	db $13, $1e, $b ; ViridianCityText11
-	db $19, $18, $c ; ViridianCityText12
+	db $13, $1e, $b ; MartSignText
+	db $19, $18, $c ; PokeCenterSignText
 	db $7, $1b, $d ; ViridianCityText13
 
 	db $7 ; people
@@ -21447,8 +21406,8 @@ PewterCityObject: ; 0x18577 (size=111)
 	db $7 ; signs
 	db $1d, $13, $6 ; PewterCityText6
 	db $13, $21, $7 ; PewterCityText7
-	db $11, $18, $8 ; PewterCityText8
-	db $19, $e, $9 ; PewterCityText9
+	db $11, $18, $8 ; MartSignText
+	db $19, $e, $9 ; PokeCenterSignText
 	db $9, $f, $a ; PewterCityText10
 	db $11, $b, $b ; PewterCityText11
 	db $17, $19, $c ; PewterCityText12
@@ -21530,8 +21489,8 @@ CeruleanCityObject: ; 0x18786 (size=170)
 	db $6 ; signs
 	db $13, $17, $c ; CeruleanCityText12
 	db $1d, $11, $d ; CeruleanCityText13
-	db $19, $1a, $e ; CeruleanCityText14
-	db $11, $14, $f ; CeruleanCityText15
+	db $19, $1a, $e ; MartSignText
+	db $11, $14, $f ; PokeCenterSignText
 	db $19, $b, $10 ; CeruleanCityText16
 	db $15, $1b, $11 ; CeruleanCityText17
 
@@ -21606,8 +21565,8 @@ VermilionCityObject: ; 0x189ba (size=133)
 	db $7 ; signs
 	db $3, $1b, $7 ; VermilionCityText7
 	db $d, $25, $8 ; VermilionCityText8
-	db $d, $18, $9 ; VermilionCityText9
-	db $3, $c, $a ; VermilionCityText10
+	db $d, $18, $9 ; MartSignText
+	db $3, $c, $a ; PokeCenterSignText
 	db $d, $7, $b ; VermilionCityText11
 	db $13, $7, $c ; VermilionCityText12
 	db $f, $1d, $d ; VermilionCityText13
@@ -21685,8 +21644,8 @@ FuchsiaCityObject: ; 0x18bd4 (size=178)
 	db $17, $f, $b ; FuchsiaCityText11
 	db $f, $19, $c ; FuchsiaCityText12
 	db $5, $11, $d ; FuchsiaCityText13
-	db $d, $6, $e ; FuchsiaCityText14
-	db $1b, $14, $f ; FuchsiaCityText15
+	db $d, $6, $e ; MartSignText
+	db $1b, $14, $f ; PokeCenterSignText
 	db $1d, $1b, $10 ; FuchsiaCityText16
 	db $f, $15, $11 ; FuchsiaCityText17
 	db $1d, $5, $12 ; FuchsiaCityText18
@@ -21968,7 +21927,7 @@ ViridianCityScript0: ; 0x19005
 INCBIN "baserom.gbc",$1900b,$d9
 
 ViridianCityTexts: ; 0x190e4
-	dw ViridianCityText1, ViridianCityText2, ViridianCityText3, ViridianCityText4, ViridianCityText5, ViridianCityText6, ViridianCityText7, ViridianCityText8, ViridianCityText9, ViridianCityText10, ViridianCityText11, ViridianCityText12, ViridianCityText13, ViridianCityText14, ViridianCityText15
+	dw ViridianCityText1, ViridianCityText2, ViridianCityText3, ViridianCityText4, ViridianCityText5, ViridianCityText6, ViridianCityText7, ViridianCityText8, ViridianCityText9, ViridianCityText10, MartSignText, PokeCenterSignText, ViridianCityText13, ViridianCityText14, ViridianCityText15
 
 ViridianCityText1: ; 0x19102
 	TX_FAR _ViridianCityText1
@@ -22199,7 +22158,7 @@ PewterCityScript0: ; 0x19251
 INCBIN "baserom.gbc",$1925e,$12d
 
 PewterCityTexts: ; 0x1938b
-	dw PewterCityText1, PewterCityText2, PewterCityText3, PewterCityText4, PewterCityText5, PewterCityText6, PewterCityText7, PewterCityText8, PewterCityText9, PewterCityText10, PewterCityText11, PewterCityText12, PewterCityText13, PewterCityText14
+	dw PewterCityText1, PewterCityText2, PewterCityText3, PewterCityText4, PewterCityText5, PewterCityText6, PewterCityText7, MartSignText, PokeCenterSignText, PewterCityText10, PewterCityText11, PewterCityText12, PewterCityText13, PewterCityText14
 
 PewterCityText1: ; 0x193a7
 	TX_FAR _PewterCityText1
@@ -22532,7 +22491,7 @@ CeruleanCityScript3: ; 0x19610
 ; 0x1962d
 
 CeruleanCityTexts: ; 0x1962d
-	dw CeruleanCityText1, CeruleanCityText2, CeruleanCityText3, CeruleanCityText4, CeruleanCityText5, CeruleanCityText6, CeruleanCityText7, CeruleanCityText8, CeruleanCityText9, CeruleanCityText10, CeruleanCityText11, CeruleanCityText12, CeruleanCityText13, CeruleanCityText14, CeruleanCityText15, CeruleanCityText16, CeruleanCityText17
+	dw CeruleanCityText1, CeruleanCityText2, CeruleanCityText3, CeruleanCityText4, CeruleanCityText5, CeruleanCityText6, CeruleanCityText7, CeruleanCityText8, CeruleanCityText9, CeruleanCityText10, CeruleanCityText11, CeruleanCityText12, CeruleanCityText13, MartSignText, PokeCenterSignText, CeruleanCityText16, CeruleanCityText17
 
 CeruleanCityText1: ; 0x1964f
 	db $08 ; asm
@@ -22831,7 +22790,7 @@ VermilionCityScript1: ; 0x1985f
 ; 0x1986f
 
 VermilionCityTexts: ; 0x1986f
-	dw VermilionCityText1, VermilionCityText2, VermilionCityText3, VermilionCityText4, VermilionCityText5, VermilionCityText6, VermilionCityText7, VermilionCityText8, VermilionCityText9, VermilionCityText10, VermilionCityText11, VermilionCityText12, VermilionCityText13
+	dw VermilionCityText1, VermilionCityText2, VermilionCityText3, VermilionCityText4, VermilionCityText5, VermilionCityText6, VermilionCityText7, VermilionCityText8, MartSignText, PokeCenterSignText, VermilionCityText11, VermilionCityText12, VermilionCityText13
 
 VermilionCityText1: ; 0x19889
 	TX_FAR _VermilionCityText1
@@ -22979,7 +22938,7 @@ CeladonCityScript: ; 0x19956
 ; 0x19966
 
 CeladonCityTexts: ; 0x19966
-	dw CeladonCityText1, CeladonCityText2, CeladonCityText3, CeladonCityText4, CeladonCityText5, CeladonCityText6, CeladonCityText7, CeladonCityText8, CeladonCityText9, CeladonCityText10, CeladonCityText11, CeladonCityText12, CeladonCityText13, CeladonCityText14, CeladonCityText15, CeladonCityText16, CeladonCityText17, CeladonCityText18
+	dw CeladonCityText1, CeladonCityText2, CeladonCityText3, CeladonCityText4, CeladonCityText5, CeladonCityText6, CeladonCityText7, CeladonCityText8, CeladonCityText9, CeladonCityText10, CeladonCityText11, PokeCenterSignText, CeladonCityText13, CeladonCityText14, CeladonCityText15, CeladonCityText16, CeladonCityText17, CeladonCityText18
 
 CeladonCityText1: ; 0x1998a
 	TX_FAR _CeladonCityText1
@@ -23098,7 +23057,7 @@ FuchsiaCityScript: ; 0x19a2b
 ; 0x19a2e
 
 FuchsiaCityTexts: ; 0x19a2e
-	dw FuchsiaCityText1, FuchsiaCityText2, FuchsiaCityText3, FuchsiaCityText4, FuchsiaCityText5, FuchsiaCityText6, FuchsiaCityText7, FuchsiaCityText8, FuchsiaCityText9, FuchsiaCityText10, FuchsiaCityText11, FuchsiaCityText12, FuchsiaCityText13, FuchsiaCityText14, FuchsiaCityText15, FuchsiaCityText16, FuchsiaCityText17, FuchsiaCityText18, FuchsiaCityText19, FuchsiaCityText20, FuchsiaCityText21, FuchsiaCityText22, FuchsiaCityText23, FuchsiaCityText24
+	dw FuchsiaCityText1, FuchsiaCityText2, FuchsiaCityText3, FuchsiaCityText4, FuchsiaCityText5, FuchsiaCityText6, FuchsiaCityText7, FuchsiaCityText8, FuchsiaCityText9, FuchsiaCityText10, FuchsiaCityText11, FuchsiaCityText12, FuchsiaCityText13, MartSignText, PokeCenterSignText, FuchsiaCityText16, FuchsiaCityText17, FuchsiaCityText18, FuchsiaCityText19, FuchsiaCityText20, FuchsiaCityText21, FuchsiaCityText22, FuchsiaCityText23, FuchsiaCityText24
 
 FuchsiaCityText1: ; 0x19a5e
 	TX_FAR _FuchsiaCityText1
@@ -24163,8 +24122,8 @@ CinnabarIslandObject: ; 0x1c022 (size=71)
 
 	db $5 ; signs
 	db $5, $9, $3 ; CinnabarIslandText3
-	db $b, $10, $4 ; CinnabarIslandText4
-	db $b, $c, $5 ; CinnabarIslandText5
+	db $b, $10, $4 ; MartSignText
+	db $b, $c, $5 ; PokeCenterSignText
 	db $b, $9, $6 ; CinnabarIslandText6
 	db $3, $d, $7 ; CinnabarIslandText7
 
@@ -24519,7 +24478,7 @@ CinnabarIslandScript1: ; 0x1ca73
 ; 0x1ca81
 
 CinnabarIslandTexts: ; 0x1ca81
-	dw CinnabarIslandText1, CinnabarIslandText2, CinnabarIslandText3, CinnabarIslandText4, CinnabarIslandText5, CinnabarIslandText6, CinnabarIslandText7, CinnabarIslandText8
+	dw CinnabarIslandText1, CinnabarIslandText2, CinnabarIslandText3, MartSignText, PokeCenterSignText, CinnabarIslandText6, CinnabarIslandText7, CinnabarIslandText8
 
 CinnabarIslandText8: ; 0x1ca91
 	TX_FAR _CinnabarIslandText8
@@ -43082,8 +43041,8 @@ LavenderTownObject: ; 0x4402d (size=88)
 	db $6 ; signs
 	db $9, $b, $4 ; LavenderTownText4
 	db $3, $9, $5 ; LavenderTownText5
-	db $d, $10, $6 ; LavenderTownText6
-	db $5, $4, $7 ; LavenderTownText7
+	db $d, $10, $6 ; MartSignText
+	db $5, $4, $7 ; PokeCenterSignText
 	db $9, $5, $8 ; LavenderTownText8
 	db $7, $11, $9 ; LavenderTownText9
 
@@ -43114,7 +43073,7 @@ LavenderTownScript: ; 0x4410b
 ; 0x4410e
 
 LavenderTownTexts: ; 0x4410e
-	dw LavenderTownText1, LavenderTownText2, LavenderTownText3, LavenderTownText4, LavenderTownText5, LavenderTownText6, LavenderTownText7, LavenderTownText8, LavenderTownText9
+	dw LavenderTownText1, LavenderTownText2, LavenderTownText3, LavenderTownText4, LavenderTownText5, MartSignText, PokeCenterSignText, LavenderTownText8, LavenderTownText9
 
 LavenderTownText1: ; 0x44120
 	db $08 ; asm
@@ -43737,7 +43696,7 @@ SeafoamIslands1Script_Unknown44846: ; 0x44846
 INCBIN "baserom.gbc",$44846,$5
 
 SeafoamIslands1Texts: ; 0x4484b
-	dw SeafoamIslands1Text1, SeafoamIslands1Text2
+	dw BoulderText, BoulderText
 
 SeafoamIslands1Object: ; 0x4484f (size=72)
 	db $7d ; border tile
@@ -43832,7 +43791,7 @@ VictoryRoad3Script_Unknown44996: ; 0x44996
 INCBIN "baserom.gbc",$44996,$8e
 
 VictoryRoad3Texts: ; 0x44a24
-	dw VictoryRoad3Text1, VictoryRoad3Text2, VictoryRoad3Text3, VictoryRoad3Text4, VictoryRoad3Text5, VictoryRoad3Text6, VictoryRoad3Text7, VictoryRoad3Text8, VictoryRoad3Text9, VictoryRoad3Text10
+	dw VictoryRoad3Text1, VictoryRoad3Text2, VictoryRoad3Text3, VictoryRoad3Text4, VictoryRoad3Text5, VictoryRoad3Text6, BoulderText, BoulderText, BoulderText, BoulderText
 
 VictoryRoad3TrainerHeaders:
 VictoryRoad3TrainerHeader0: ; 0x44a38
@@ -45601,7 +45560,7 @@ SeafoamIslands2Script_Unknown4636d: ; 0x4636d
 INCBIN "baserom.gbc",$4636d,$5
 
 SeafoamIslands2Texts: ; 0x46372
-	dw SeafoamIslands2Text1, SeafoamIslands2Text2
+	dw BoulderText, BoulderText
 
 SeafoamIslands2Object: ; 0x46376 (size=72)
 	db $7d ; border tile
@@ -45686,7 +45645,7 @@ SeafoamIslands3Script_Unknown464a9: ; 0x464a9
 INCBIN "baserom.gbc",$464a9,$5
 
 SeafoamIslands3Texts: ; 0x464ae
-	dw SeafoamIslands3Text1, SeafoamIslands3Text2
+	dw BoulderText, BoulderText
 
 SeafoamIslands3Object: ; 0x464b2 (size=72)
 	db $7d ; border tile
@@ -45830,7 +45789,7 @@ SeafoamIslands4Script3: ; 0x4668f
 ; 0x4669a
 
 SeafoamIslands4Texts: ; 0x4669a
-	dw SeafoamIslands4Text1, SeafoamIslands4Text2, SeafoamIslands4Text3, SeafoamIslands4Text4, SeafoamIslands4Text5, SeafoamIslands4Text6
+	dw BoulderText, BoulderText, BoulderText, BoulderText, BoulderText, BoulderText
 
 SeafoamIslands4Object: ; 0x466a6 (size=96)
 	db $7d ; border tile
@@ -45933,7 +45892,7 @@ SeafoamIslands5Script1: ; 0x46807
 INCBIN "baserom.gbc",$46816,$66
 
 SeafoamIslands5Texts: ; 0x4687c
-	dw SeafoamIslands5Text1, SeafoamIslands5Text2, SeafoamIslands5Text3, SeafoamIslands5Text4, SeafoamIslands5Text5
+	dw BoulderText, BoulderText, SeafoamIslands5Text3, SeafoamIslands5Text4, SeafoamIslands5Text5
 
 SeafoamIslands5TrainerHeaders:
 SeafoamIslands5TrainerHeader0: ; 0x46886
@@ -50321,11 +50280,11 @@ SaffronCityObject: ; 0x509dc (size=188)
 	db $5, $11, $10 ; SaffronCityText16
 	db $5, $1b, $11 ; SaffronCityText17
 	db $5, $23, $12 ; SaffronCityText18
-	db $b, $1a, $13 ; SaffronCityText19
+	db $b, $1a, $13 ; MartSignText
 	db $13, $27, $14 ; SaffronCityText20
 	db $15, $5, $15 ; SaffronCityText21
 	db $15, $f, $16 ; SaffronCityText22
-	db $1d, $a, $17 ; SaffronCityText23
+	db $1d, $a, $17 ; PokeCenterSignText
 	db $1d, $1b, $18 ; SaffronCityText24
 	db $13, $1, $19 ; SaffronCityText25
 
@@ -50364,7 +50323,7 @@ SaffronCityScript: ; 0x50c00
 ; 0x50c03
 
 SaffronCityTexts: ; 0x50c03
-	dw SaffronCityText1, SaffronCityText2, SaffronCityText3, SaffronCityText4, SaffronCityText5, SaffronCityText6, SaffronCityText7, SaffronCityText8, SaffronCityText9, SaffronCityText10, SaffronCityText11, SaffronCityText12, SaffronCityText13, SaffronCityText14, SaffronCityText15, SaffronCityText16, SaffronCityText17, SaffronCityText18, SaffronCityText19, SaffronCityText20, SaffronCityText21, SaffronCityText22, SaffronCityText23, SaffronCityText24, SaffronCityText25
+	dw SaffronCityText1, SaffronCityText2, SaffronCityText3, SaffronCityText4, SaffronCityText5, SaffronCityText6, SaffronCityText7, SaffronCityText8, SaffronCityText9, SaffronCityText10, SaffronCityText11, SaffronCityText12, SaffronCityText13, SaffronCityText14, SaffronCityText15, SaffronCityText16, SaffronCityText17, SaffronCityText18, MartSignText, SaffronCityText20, SaffronCityText21, SaffronCityText22, PokeCenterSignText, SaffronCityText24, SaffronCityText25
 
 SaffronCityText1: ; 0x50c35
 	TX_FAR _SaffronCityText1
@@ -51772,7 +51731,7 @@ VictoryRoad2Script_Unknown517c4: ; 0x517c4
 INCBIN "baserom.gbc",$517c4,$57
 
 VictoryRoad2Texts: ; 0x5181b
-	dw VictoryRoad2Text1, VictoryRoad2Text2, VictoryRoad2Text3, VictoryRoad2Text4, VictoryRoad2Text5, VictoryRoad2Text6, VictoryRoad2Text7, VictoryRoad2Text8, VictoryRoad2Text9, VictoryRoad2Text10, VictoryRoad2Text11, VictoryRoad2Text12, VictoryRoad2Text13
+	dw VictoryRoad2Text1, VictoryRoad2Text2, VictoryRoad2Text3, VictoryRoad2Text4, VictoryRoad2Text5, VictoryRoad2Text6, VictoryRoad2Text7, VictoryRoad2Text8, VictoryRoad2Text9, VictoryRoad2Text10, BoulderText, BoulderText, BoulderText
 
 VictoryRoad2TrainerHeaders:
 VictoryRoad2TrainerHeader0: ; 0x51835
@@ -53389,7 +53348,7 @@ Route4Object: ; 0x543b2 (size=58)
 	db $5, $18, $7, MT_MOON_2
 
 	db $3 ; signs
-	db $5, $c, $4 ; Route4Text4
+	db $5, $c, $4 ; PokeCenterSignText
 	db $7, $11, $5 ; Route4Text5
 	db $7, $1b, $6 ; Route4Text6
 
@@ -54077,7 +54036,7 @@ Unknown_5566b: ; 0x5566b
 INCBIN "baserom.gbc",$5566b,$6
 
 Route4Texts: ; 0x55671
-	dw Route4Text1, Route4Text2, Route4Text3, Route4Text4, Route4Text5, Route4Text6
+	dw Route4Text1, Route4Text2, Route4Text3, PokeCenterSignText, Route4Text5, Route4Text6
 
 Route4TrainerHeaders:
 Route4TrainerHeader0: ; 0x5567d
@@ -56906,7 +56865,7 @@ Route10Object: ; 0x582f6 (size=96)
 
 	db $4 ; signs
 	db $13, $7, $7 ; Route10Text7
-	db $13, $c, $8 ; Route10Text8
+	db $13, $c, $8 ; PokeCenterSignText
 	db $37, $9, $9 ; Route10Text9
 	db $29, $5, $a ; Route10Text10
 
@@ -57832,7 +57791,7 @@ Route10_Unknown59349: ; 0x59349
 INCBIN "baserom.gbc",$59349,$6
 
 Route10Texts: ; 0x5934f
-	dw Route10Text1, Route10Text2, Route10Text3, Route10Text4, Route10Text5, Route10Text6, Route10Text7, Route10Text8, Route10Text9, Route10Text10
+	dw Route10Text1, Route10Text2, Route10Text3, Route10Text4, Route10Text5, Route10Text6, Route10Text7, PokeCenterSignText, Route10Text9, Route10Text10
 
 Route10TrainerHeaders:
 Route10TrainerHeader0: ; 0x59363
@@ -63277,7 +63236,7 @@ VictoryRoad1Script: ; 0x5da0a
 INCBIN "baserom.gbc",$5da27,$38
 
 VictoryRoad1Texts: ; 0x5da5f
-	dw VictoryRoad1Text1, VictoryRoad1Text2, VictoryRoad1Text3, VictoryRoad1Text4, VictoryRoad1Text5, VictoryRoad1Text6, VictoryRoad1Text7
+	dw VictoryRoad1Text1, VictoryRoad1Text2, VictoryRoad1Text3, VictoryRoad1Text4, BoulderText, BoulderText, BoulderText
 
 VictoryRoad1TrainerHeaders:
 VictoryRoad1TrainerHeader0: ; 0x5da6d
@@ -68913,7 +68872,7 @@ FuchsiaHouse2Script: ; 0x750b5
 ; 0x750b8
 
 FuchsiaHouse2Texts: ; 0x750b8
-	dw FuchsiaHouse2Text1, FuchsiaHouse2Text2, FuchsiaHouse2Text3, FuchsiaHouse2Text4, FuchsiaHouse2Text5
+	dw FuchsiaHouse2Text1, FuchsiaHouse2Text2, BoulderText, FuchsiaHouse2Text4, FuchsiaHouse2Text5
 
 FuchsiaHouse2Text1: ; 0x750c2
 	db $08 ; asm
@@ -72754,47 +72713,16 @@ _UnnamedText_24e0: ; 0x80096
 	db "somewhere!", $57
 ; 0x80096 + 27 bytes
 
-_VictoryRoad3Text10:
-_VictoryRoad3Text9:
-_VictoryRoad3Text8:
-_VictoryRoad3Text7:
-_VictoryRoad2Text13:
-_VictoryRoad2Text12:
-_VictoryRoad2Text11:
-_SeafoamIslands1Text2:
-_SeafoamIslands1Text1:
-_SeafoamIslands5Text2:
-_SeafoamIslands5Text1:
-_SeafoamIslands4Text6:
-_SeafoamIslands4Text5:
-_SeafoamIslands4Text4:
-_SeafoamIslands4Text3:
-_SeafoamIslands4Text2:
-_SeafoamIslands4Text1:
-_SeafoamIslands3Text2:
-_SeafoamIslands3Text1:
-_SeafoamIslands2Text2:
-_SeafoamIslands2Text1:
-_FuchsiaHouse2Text3:
-_VictoryRoad1Text7:
-_VictoryRoad1Text6:
-_VictoryRoad1Text5: ; 0x800b1
+_BoulderText: ; 0x800b1
 	db $0, "This requires", $4f
 	db "STRENGTH to move!", $57
 
-_SaffronCityText19:
-_CinnabarIslandText4:
-_FuchsiaCityText14:
-_VermilionCityText9:
-_LavenderTownText6:
-_CeruleanCityText14:
-_PewterCityText8:
-_ViridianCityText11: ; 0x800d2
+_MartSignText: ; 0x800d2
 	db $0, "All your item", $4f
 	db "needs fulfilled!", $55
 	db "#MON MART", $57
 
-_ViridianCityText12: ; 0x800fc
+_PokeCenterSignText: ; 0x800fc
 	db $0, "Heal Your #MON!", $4f
 	db "#MON CENTER", $57
 
