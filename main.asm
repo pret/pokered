@@ -68718,9 +68718,9 @@ Unnamed_74f9e: ; 0x74f9e
 	db "SODA POP",$4E
 	db "LEMONADE",$4E
 	db "CANCEL@"
-	db $F0,"200",$4E
-	db $F0,"300",$4E
-	db $F0,"350",$4E,"@"
+	db "¥200",$4E
+	db "¥300",$4E
+	db "¥350",$4E,"@"
 
 UnnamedText_74fd3: ; 0x74fd3
 	TX_FAR _UnnamedText_74fd3
