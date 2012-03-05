@@ -6134,7 +6134,7 @@ DisplayChooseQuantityMenu: ; 2D57
 	ret
 
 InitialQuantityText: ; 2E30
-	db $f1,"01@"
+	db "×01@"
 
 SpacesBetweenQuantityAndPriceText: ; 2E34
 	db "      @"
@@ -6299,7 +6299,7 @@ PrintListMenuEntries: ; 2E5A
 	push hl
 	ld bc,20 + 8 ; 1 row down and 8 columns right
 	add hl,bc
-	ld a,$f1
+	ld a,"×"
 	ldi [hl],a
 	ld a,[$d11e]
 	push af
