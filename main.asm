@@ -3329,7 +3329,7 @@ PrintBCDNumber: ; 15CD
 	jr z,.loop\@
 	bit 7,b
 	jr nz,.loop\@
-	ld [hl],$f0 ; currency symbol
+	ld [hl],"¥"
 	inc hl
 .loop\@
 	ld a,[de]
@@ -3368,7 +3368,7 @@ PrintBCDDigit: ; 1604
 ; if bit 7 is set, then no numbers have been printed yet
 	bit 5,b ; print the currency symbol?
 	jr z,.skipCurrencySymbol\@
-	ld [hl],$f0 ; currency symbol
+	ld [hl],"¥"
 	inc hl
 	res 5,b
 .skipCurrencySymbol\@
@@ -76495,7 +76495,7 @@ _UnnamedText_3c63e: ; 0x896c7
 ; 0x896c7 + 22 bytes = 0x896dd
 
 _UnnamedText_3c6e4: ; 0x896dd
-	db $0, $52, " got ", $f0, "@"
+	db $0, $52, " got ¥@"
 	;XXX $2
 	db $2, $79, $d0, $c3
 	db $0, $4f
@@ -76949,7 +76949,7 @@ SafariZoneAngryText: ; 0x89d6a
 ; $2, pointer, byte
 _UnnamedText_1386b: ; 0x89d80
 	db $0, $52, " picked up", $4f
-	db $f0, "@"
+	db "¥@"
 	db $2, $e5, $cc, $c3
 	db $0, "!", $58
 
@@ -77411,7 +77411,7 @@ _UnnamedText_4935c: ; 0x8a976
 	db "just for you!", $51
 	db "I'll let you have", $4f
 	db "a swell MAGIKARP", $55
-	db "for just ", $f0, "500!", $55
+	db "for just ¥500!", $55
 	db "What do you say?", $57
 ; 0x8a976 + 118 bytes
 
@@ -77518,7 +77518,7 @@ UnknownText_8ac67: ; 0x8ac67
 ; 0x8ac67 + 22 bytes
 
 _UnnamedText_56428: ; 0x8ac7d
-	db $0, "You owe me ", $f0, "@"
+	db $0, "You owe me ¥@"
 ; 0x8ac7d + 14 bytes
 
 ;XXX
@@ -77587,7 +77587,7 @@ _UnnamedText_5644f: ; 0x8c090
 
 _UnnamedText_56454: ; 0x8c0ad
 	db $0, "Hey, you don't", $4f
-	db "have enough ", $f0, "!", $57
+	db "have enough ¥!", $57
 ; 0x8c0ad + 30 bytes
 
 _UndergroundTunnelEntranceRoute6Text1: ; 0x8c0cb
@@ -77648,7 +77648,7 @@ _RockTunnelPokecenterText1: ; 0x8c2c0
 
 _RockTunnelPokecenterText3: ; 0x8c316
 	db $0, "I sold a useless", $4f
-	db "NUGGET for ", $f0, "5000!", $57
+	db "NUGGET for ¥5000!", $57
 
 _UnnamedText_44588: ; 0x8c33a
 	db $0, "This tunnel goes", $4f
@@ -82202,14 +82202,14 @@ _UnnamedText_5c21a: ; 0x9652c
 ; 0x9652c + 13 bytes
 
 _UnnamedText_5c21f: ; 0x96539
-	db $0, "It's ", $f0, "50 for a", $4f
+	db $0, "It's ¥50 for a", $4f
 	db "child's ticket.", $51
 	db "Would you like to", $4f
 	db "come in?", $57
 ; 0x96539 + 57 bytes
 
 _UnnamedText_5c224: ; 0x96572
-	db $0, "Right, ", $f0, "50!", $4f
+	db $0, "Right, ¥50!", $4f
 	db "Thank you!", $57
 ; 0x96572 + 24 bytes
 
@@ -82510,7 +82510,7 @@ _UnnamedText_74cc6: ; 0x985ac
 	db "this really weird", $55
 	db "fish #MON!", $51
 	db "It's totally weak", $4f
-	db "and it cost ", $f0, "500!", $57
+	db "and it cost ¥500!", $57
 ; 0x985ac + 96 bytes
 
 _UnnamedText_74cd5: ; 0x9860c
@@ -83379,7 +83379,7 @@ _UnnamedText_5c958: ; 0x9a1e3
 	db "in the mountains.", $51
 	db "I thought it was", $4f
 	db "useless, but it", $55
-	db "sold for ", $f0, "5000!", $57
+	db "sold for ¥5000!", $57
 ; 0x9a1e3 + 85 bytes
 
 _LavenderHouse2Text1: ; 0x9a238
@@ -84448,7 +84448,7 @@ _UnnamedText_48d22: ; 0x9d91a
 	db "GAME CORNER!", $51
 	db "Do you need some", $4f
 	db "game coins?", $51
-	db "It's ", $f0, "1000 for 50", $4f
+	db "It's ¥1000 for 50", $4f
 	db "coins. Would you", $55
 	db "like some?", $57
 ; 0x9d91a + 106 bytes
@@ -84867,7 +84867,7 @@ _SafariZoneEntranceText1: ; 0x9e6c7
 	db "SAFARI ZONE!", $57
 
 UnnamedText_9e6e4: ; 0x9e6e4
-	db $0, "For just ", $f0, "500,", $4f
+	db $0, "For just ¥500,", $4f
 	db "you can catch all", $55
 	db "the #MON you", $55
 	db "want in the park!", $51
@@ -84876,7 +84876,7 @@ UnnamedText_9e6e4: ; 0x9e6e4
 ; 0x9e747
 
 UnnamedText_9e747: ; 0x9e747
-	db $0, "That'll be ", $f0, "500", $4f
+	db $0, "That'll be ¥500", $4f
 	db "please!", $51
 	db "We only use a", $4f
 	db "special # BALL", $55
@@ -86204,7 +86204,7 @@ _PokemartTellBuyPrice: ; 0xa2619
 	TX_RAM $cf4b
 	db $0, "?", $4f
 	db "That will be", $55
-	db $f0, "@"
+	db "¥@"
 	db $2, $9f, $ff, $c3
 	db $0, ". OK?", $57
 ; 0xa2639
@@ -86231,7 +86231,7 @@ _PokemonSellingGreetingText: ; 0xa2690
 
 _PokemartTellSellPrice: ; 0xa26ae
 	db $0, "I can pay you", $4f
-	db $f0, "@"
+	db "¥@"
 	db $2, $9f, $ff, $c3 ; XXX
 	db $0, " for that.", $57
 ; 0xa26cf
