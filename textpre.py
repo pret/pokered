@@ -3,259 +3,260 @@
 
 import sys
 
-chars = {}
-chars["ガ"] = "$05"
-chars["ギ"] = "$06"
-chars["グ"] = "$07"
-chars["ゲ"] = "$08"
-chars["ゴ"] = "$09"
-chars["ザ"] = "$0A"
-chars["ジ"] = "$0B"
-chars["ズ"] = "$0C"
-chars["ゼ"] = "$0D"
-chars["ゾ"] = "$0E"
-chars["ダ"] = "$0F"
-chars["ヂ"] = "$10"
-chars["ヅ"] = "$11"
-chars["デ"] = "$12"
-chars["ド"] = "$13"
-chars["バ"] = "$19"
-chars["ビ"] = "$1A"
-chars["ブ"] = "$1B"
-chars["ボ"] = "$1C"
-chars["が"] = "$26"
-chars["ぎ"] = "$27"
-chars["ぐ"] = "$28"
-chars["げ"] = "$29"
-chars["ご"] = "$2A"
-chars["ざ"] = "$2B"
-chars["じ"] = "$2C"
-chars["ず"] = "$2D"
-chars["ぜ"] = "$2E"
-chars["ぞ"] = "$2F"
-chars["だ"] = "$30"
-chars["ぢ"] = "$31"
-chars["づ"] = "$32"
-chars["で"] = "$33"
-chars["ど"] = "$34"
-chars["ば"] = "$3A"
-chars["び"] = "$3B"
-chars["ぶ"] = "$3C"
-chars["べ"] = "$3D"
-chars["ぼ"] = "$3E"
-chars["パ"] = "$40"
-chars["ピ"] = "$41"
-chars["プ"] = "$42"
-chars["ポ"] = "$43"
-chars["ぱ"] = "$44"
-chars["ぴ"] = "$45"
-chars["ぷ"] = "$46"
-chars["ぺ"] = "$47"
-chars["ぽ"] = "$48"
-chars["ア"] = "$80"
-chars["イ"] = "$81"
-chars["ウ"] = "$82"
-chars["エ"] = "$83"
-chars["ォ"] = "$84"
-chars["カ"] = "$85"
-chars["キ"] = "$86"
-chars["ク"] = "$87"
-chars["ケ"] = "$88"
-chars["コ"] = "$89"
-chars["サ"] = "$8A"
-chars["シ"] = "$8B"
-chars["ス"] = "$8C"
-chars["セ"] = "$8D"
-chars["ソ"] = "$8E"
-chars["タ"] = "$8F"
-chars["チ"] = "$90"
-chars["ツ"] = "$91"
-chars["テ"] = "$92"
-chars["ト"] = "$93"
-chars["ナ"] = "$94"
-chars["ニ"] = "$95"
-chars["ヌ"] = "$96"
-chars["ネ"] = "$97"
-chars["ノ"] = "$98"
-chars["ハ"] = "$99"
-chars["ヒ"] = "$9A"
-chars["フ"] = "$9B"
-chars["ホ"] = "$9C"
-chars["マ"] = "$9D"
-chars["ミ"] = "$9E"
-chars["ム"] = "$9F"
-chars["メ"] = "$A0"
-chars["モ"] = "$A1"
-chars["ヤ"] = "$A2"
-chars["ユ"] = "$A3"
-chars["ヨ"] = "$A4"
-chars["ラ"] = "$A5"
-chars["ル"] = "$A6"
-chars["レ"] = "$A7"
-chars["ロ"] = "$A8"
-chars["ワ"] = "$A9"
-chars["ヲ"] = "$AA"
-chars["ン"] = "$AB"
-chars["ッ"] = "$AC"
-chars["ャ"] = "$AD"
-chars["ュ"] = "$AE"
-chars["ョ"] = "$AF"
-chars["ィ"] = "$B0"
-chars["あ"] = "$B1"
-chars["い"] = "$B2"
-chars["う"] = "$B3"
-chars["え"] = "$B4"
-chars["お"] = "$B5"
-chars["か"] = "$B6"
-chars["き"] = "$B7"
-chars["く"] = "$B8"
-chars["け"] = "$B9"
-chars["こ"] = "$BA"
-chars["さ"] = "$BB"
-chars["し"] = "$BC"
-chars["す"] = "$BD"
-chars["せ"] = "$BE"
-chars["そ"] = "$BF"
-chars["た"] = "$C0"
-chars["ち"] = "$C1"
-chars["つ"] = "$C2"
-chars["て"] = "$C3"
-chars["と"] = "$C4"
-chars["な"] = "$C5"
-chars["に"] = "$C6"
-chars["ぬ"] = "$C7"
-chars["ね"] = "$C8"
-chars["の"] = "$C9"
-chars["は"] = "$CA"
-chars["ひ"] = "$CB"
-chars["ふ"] = "$CC"
-chars["へ"] = "$CD"
-chars["ほ"] = "$CE"
-chars["ま"] = "$CF"
-chars["み"] = "$D0"
-chars["む"] = "$D1"
-chars["め"] = "$D2"
-chars["も"] = "$D3"
-chars["や"] = "$D4"
-chars["ゆ"] = "$D5"
-chars["よ"] = "$D6"
-chars["ら"] = "$D7"
-chars["り"] = "$D8"
-chars["る"] = "$D9"
-chars["れ"] = "$DA"
-chars["ろ"] = "$DB"
-chars["わ"] = "$DC"
-chars["を"] = "$DD"
-chars["ん"] = "$DE"
-chars["っ"] = "$DF"
-chars["ゃ"] = "$E0"
-chars["ゅ"] = "$E1"
-chars["ょ"] = "$E2"
-chars["ー"] = "$E3"
+chars = {
+"ガ": 0x05,
+"ギ": 0x06,
+"グ": 0x07,
+"ゲ": 0x08,
+"ゴ": 0x09,
+"ザ": 0x0A,
+"ジ": 0x0B,
+"ズ": 0x0C,
+"ゼ": 0x0D,
+"ゾ": 0x0E,
+"ダ": 0x0F,
+"ヂ": 0x10,
+"ヅ": 0x11,
+"デ": 0x12,
+"ド": 0x13,
+"バ": 0x19,
+"ビ": 0x1A,
+"ブ": 0x1B,
+"ボ": 0x1C,
+"が": 0x26,
+"ぎ": 0x27,
+"ぐ": 0x28,
+"げ": 0x29,
+"ご": 0x2A,
+"ざ": 0x2B,
+"じ": 0x2C,
+"ず": 0x2D,
+"ぜ": 0x2E,
+"ぞ": 0x2F,
+"だ": 0x30,
+"ぢ": 0x31,
+"づ": 0x32,
+"で": 0x33,
+"ど": 0x34,
+"ば": 0x3A,
+"び": 0x3B,
+"ぶ": 0x3C,
+"べ": 0x3D,
+"ぼ": 0x3E,
+"パ": 0x40,
+"ピ": 0x41,
+"プ": 0x42,
+"ポ": 0x43,
+"ぱ": 0x44,
+"ぴ": 0x45,
+"ぷ": 0x46,
+"ぺ": 0x47,
+"ぽ": 0x48,
+"ア": 0x80,
+"イ": 0x81,
+"ウ": 0x82,
+"エ": 0x83,
+"ォ": 0x84,
+"カ": 0x85,
+"キ": 0x86,
+"ク": 0x87,
+"ケ": 0x88,
+"コ": 0x89,
+"サ": 0x8A,
+"シ": 0x8B,
+"ス": 0x8C,
+"セ": 0x8D,
+"ソ": 0x8E,
+"タ": 0x8F,
+"チ": 0x90,
+"ツ": 0x91,
+"テ": 0x92,
+"ト": 0x93,
+"ナ": 0x94,
+"ニ": 0x95,
+"ヌ": 0x96,
+"ネ": 0x97,
+"ノ": 0x98,
+"ハ": 0x99,
+"ヒ": 0x9A,
+"フ": 0x9B,
+"ホ": 0x9C,
+"マ": 0x9D,
+"ミ": 0x9E,
+"ム": 0x9F,
+"メ": 0xA0,
+"モ": 0xA1,
+"ヤ": 0xA2,
+"ユ": 0xA3,
+"ヨ": 0xA4,
+"ラ": 0xA5,
+"ル": 0xA6,
+"レ": 0xA7,
+"ロ": 0xA8,
+"ワ": 0xA9,
+"ヲ": 0xAA,
+"ン": 0xAB,
+"ッ": 0xAC,
+"ャ": 0xAD,
+"ュ": 0xAE,
+"ョ": 0xAF,
+"ィ": 0xB0,
+"あ": 0xB1,
+"い": 0xB2,
+"う": 0xB3,
+"え": 0xB4,
+"お": 0xB5,
+"か": 0xB6,
+"き": 0xB7,
+"く": 0xB8,
+"け": 0xB9,
+"こ": 0xBA,
+"さ": 0xBB,
+"し": 0xBC,
+"す": 0xBD,
+"せ": 0xBE,
+"そ": 0xBF,
+"た": 0xC0,
+"ち": 0xC1,
+"つ": 0xC2,
+"て": 0xC3,
+"と": 0xC4,
+"な": 0xC5,
+"に": 0xC6,
+"ぬ": 0xC7,
+"ね": 0xC8,
+"の": 0xC9,
+"は": 0xCA,
+"ひ": 0xCB,
+"ふ": 0xCC,
+"へ": 0xCD,
+"ほ": 0xCE,
+"ま": 0xCF,
+"み": 0xD0,
+"む": 0xD1,
+"め": 0xD2,
+"も": 0xD3,
+"や": 0xD4,
+"ゆ": 0xD5,
+"よ": 0xD6,
+"ら": 0xD7,
+"り": 0xD8,
+"る": 0xD9,
+"れ": 0xDA,
+"ろ": 0xDB,
+"わ": 0xDC,
+"を": 0xDD,
+"ん": 0xDE,
+"っ": 0xDF,
+"ゃ": 0xE0,
+"ゅ": 0xE1,
+"ょ": 0xE2,
+"ー": 0xE3,
 
 
-chars["@"] = "$50"
-chars["#"] = "$54"
-chars["…"] = "$75"
+"@": 0x50,
+"#": 0x54,
+"…": 0x75,
 
-# textbox borders
-chars["┌"] = "$79"
-chars["─"] = "$7A"
-chars["┐"] = "$7B"
-chars["│"] = "$7C"
-chars["└"] = "$7D"
-chars["┘"] = "$7E"
+"┌": 0x79,
+"─": 0x7A,
+"┐": 0x7B,
+"│": 0x7C,
+"└": 0x7D,
+"┘": 0x7E,
 
-chars["№"] = "$74"
+"№": 0x74,
 
-chars[" "] = "$7F"
-chars["A"] = "$80"
-chars["B"] = "$81"
-chars["C"] = "$82"
-chars["D"] = "$83"
-chars["E"] = "$84"
-chars["F"] = "$85"
-chars["G"] = "$86"
-chars["H"] = "$87"
-chars["I"] = "$88"
-chars["J"] = "$89"
-chars["K"] = "$8A"
-chars["L"] = "$8B"
-chars["M"] = "$8C"
-chars["N"] = "$8D"
-chars["O"] = "$8E"
-chars["P"] = "$8F"
-chars["Q"] = "$90"
-chars["R"] = "$91"
-chars["S"] = "$92"
-chars["T"] = "$93"
-chars["U"] = "$94"
-chars["V"] = "$95"
-chars["W"] = "$96"
-chars["X"] = "$97"
-chars["Y"] = "$98"
-chars["Z"] = "$99"
-chars["("] = "$9A"
-chars[")"] = "$9B"
-chars[":"] = "$9C"
-chars[";"] = "$9D"
-chars["["] = "$9E"
-chars["]"] = "$9F"
-chars["a"] = "$A0"
-chars["b"] = "$A1"
-chars["c"] = "$A2"
-chars["d"] = "$A3"
-chars["e"] = "$A4"
-chars["f"] = "$A5"
-chars["g"] = "$A6"
-chars["h"] = "$A7"
-chars["i"] = "$A8"
-chars["j"] = "$A9"
-chars["k"] = "$AA"
-chars["l"] = "$AB"
-chars["m"] = "$AC"
-chars["n"] = "$AD"
-chars["o"] = "$AE"
-chars["p"] = "$AF"
-chars["q"] = "$B0"
-chars["r"] = "$B1"
-chars["s"] = "$B2"
-chars["t"] = "$B3"
-chars["u"] = "$B4"
-chars["v"] = "$B5"
-chars["w"] = "$B6"
-chars["x"] = "$B7"
-chars["y"] = "$B8"
-chars["z"] = "$B9"
-chars["é"] = "$BA"
-chars["'d"] = "$BB"
-chars["'l"] = "$BC"
-chars["'s"] = "$BD"
-chars["'t"] = "$BE"
-chars["'v"] = "$BF"
-chars["'"] = "$E0"
-chars["-"] = "$E3"
-chars["'r"] = "$E4"
-chars["'m"] = "$E5"
-chars["?"] = "$E6"
-chars["!"] = "$E7"
-chars["."] = "$E8"
-chars["♂"] = "$EF"
-chars["¥"] = "$F0"
-chars["×"] = "$F1"
-chars["/"] = "$F3"
-chars[","] = "$F4"
-chars["♀"] = "$F5"
-chars["0"] = "$F6"
-chars["1"] = "$F7"
-chars["2"] = "$F8"
-chars["3"] = "$F9"
-chars["4"] = "$FA"
-chars["5"] = "$FB"
-chars["6"] = "$FC"
-chars["7"] = "$FD"
-chars["8"] = "$FE"
-chars["9"] = "$FF"
+" ": 0x7F,
+"A": 0x80,
+"B": 0x81,
+"C": 0x82,
+"D": 0x83,
+"E": 0x84,
+"F": 0x85,
+"G": 0x86,
+"H": 0x87,
+"I": 0x88,
+"J": 0x89,
+"K": 0x8A,
+"L": 0x8B,
+"M": 0x8C,
+"N": 0x8D,
+"O": 0x8E,
+"P": 0x8F,
+"Q": 0x90,
+"R": 0x91,
+"S": 0x92,
+"T": 0x93,
+"U": 0x94,
+"V": 0x95,
+"W": 0x96,
+"X": 0x97,
+"Y": 0x98,
+"Z": 0x99,
+"(": 0x9A,
+")": 0x9B,
+":": 0x9C,
+";": 0x9D,
+"[": 0x9E,
+"]": 0x9F,
+"a": 0xA0,
+"b": 0xA1,
+"c": 0xA2,
+"d": 0xA3,
+"e": 0xA4,
+"f": 0xA5,
+"g": 0xA6,
+"h": 0xA7,
+"i": 0xA8,
+"j": 0xA9,
+"k": 0xAA,
+"l": 0xAB,
+"m": 0xAC,
+"n": 0xAD,
+"o": 0xAE,
+"p": 0xAF,
+"q": 0xB0,
+"r": 0xB1,
+"s": 0xB2,
+"t": 0xB3,
+"u": 0xB4,
+"v": 0xB5,
+"w": 0xB6,
+"x": 0xB7,
+"y": 0xB8,
+"z": 0xB9,
+"é": 0xBA,
+"'d": 0xBB,
+"'l": 0xBC,
+"'s": 0xBD,
+"'t": 0xBE,
+"'v": 0xBF,
+"'": 0xE0,
+"-": 0xE3,
+"'r": 0xE4,
+"'m": 0xE5,
+"?": 0xE6,
+"!": 0xE7,
+".": 0xE8,
+"♂": 0xEF,
+"¥": 0xF0,
+"×": 0xF1,
+"/": 0xF3,
+",": 0xF4,
+"♀": 0xF5,
+"0": 0xF6,
+"1": 0xF7,
+"2": 0xF8,
+"3": 0xF9,
+"4": 0xFA,
+"5": 0xFB,
+"6": 0xFC,
+"7": 0xFD,
+"8": 0xFE,
+"9": 0xFF
+
+}
 
 for l in sys.stdin:
 
@@ -323,7 +324,7 @@ for l in sys.stdin:
                         char = char + token[0]
                         token = token[1:]
 
-                sys.stdout.write(chars[char])
+                sys.stdout.write("${0:02X}".format(chars[char]))
 
                 if len(token):
                     sys.stdout.write(", ")
