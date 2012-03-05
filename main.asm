@@ -66539,7 +66539,46 @@ SilphCo11Object: ; 0x62380 (size=72)
 SilphCo11Blocks: ; 0x623c8 81
 	INCBIN "maps/silphco11.blk"
 
-INCBIN "baserom.gbc",$62419,$62453 - $62419
+GymStatues: ; 0x62419
+; if in a gym and have the corresponding badge, a = $D and jp $3EF5
+; if in a gym and don’t have the corresponding badge, a = $C and jp $3EF5
+; else ret 
+	call $3c3c
+	ld a, [$c109]
+	cp $4
+	ret nz
+	ld hl, .BadgeFlags
+	ld a, [W_CURMAP]
+	ld b, a
+.asm_62429
+	ld a, [hli]
+	cp $ff
+	ret z
+	cp b
+	jr z, .asm_62433 ; 0x6242e $3
+	inc hl
+	jr .asm_62429 ; 0x62431 $f6
+.asm_62433
+	ld b, [hl]
+	ld a, [$d72a]
+	and b
+	cp b
+	ld a, $d
+	jr z, .asm_6243f ; 0x6243b $2
+	ld a, $c
+.asm_6243f
+	jp $3ef5
+
+.BadgeFlags:
+	db PEWTER_GYM,   %00000001
+	db CERULEAN_GYM, %00000010
+	db VERMILION_GYM,%00000100
+	db CELADON_GYM,  %00001000
+	db FUCHSIA_GYM,  %00010000
+	db SAFFRON_GYM,  %00100000
+	db CINNABAR_GYM, %01000000
+	db VIRIDIAN_GYM, %10000000
+	db $ff
 
 UnnamedText_62453: ; 0x62453
 	TX_FAR _UnnamedText_62453
