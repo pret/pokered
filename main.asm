@@ -5141,7 +5141,7 @@ IncGradGBPalTable_01: ; 210D
 	db %11111111 ;BG Pal
 	db %11111111 ;OBJ Pal 1
 	db %11111111 ;OBJ Pal 2
-                     ;and so on...
+	             ;and so on...
 	db %11111110
 	db %11111110
 	db %11111000
@@ -18432,133 +18432,133 @@ INCBIN "baserom.gbc",$11380,$12953 - $11380
 
 ; Predef 0x37
 StatusScreen: ; 0x12953
-    call LoadMonData
-    ld a, [$cc49]
-    cp $2 ; 2 means we're in a PC box
-    jr c, .DontRecalculate ; 0x1295b $14
-    ld a, [$cf9b]
-    ld [$cfb9], a
-    ld [$d127], a
-    ld hl, $cfa8
-    ld de, $cfba
-    ld b, $1
-    call $3936 ; Recalculate stats
+	call LoadMonData
+	ld a, [$cc49]
+	cp $2 ; 2 means we're in a PC box
+	jr c, .DontRecalculate ; 0x1295b $14
+	ld a, [$cf9b]
+	ld [$cfb9], a
+	ld [$d127], a
+	ld hl, $cfa8
+	ld de, $cfba
+	ld b, $1
+	call $3936 ; Recalculate stats
 .DontRecalculate
-    ld hl, $d72c
-    set 1, [hl]
-    ld a, $33
-    ld [$ff00+$24], a ; Reduce the volume
-    call GBPalWhiteOutWithDelay3
-    call ClearScreen
-    call $2429 ; move sprites (?)
-    call LoadHpBarAndStatusTilePatterns
-    ld de, $6080 ; source
-    ld hl, $96d0 ; dest
-    ld bc, $0403 ; bank bytes/8
-    call CopyVideoDataDouble ; ·│ :L and halfarrow line end
-    ld de, $6098
-    ld hl, $9780
-    ld bc, $0401
-    call CopyVideoDataDouble ; │
-    ld de, $60b0
-    ld hl, $9760
-    ld bc, $0402
-    call CopyVideoDataDouble ; ─┘
-    ld de, PTile
-    ld hl, $9720
-    ld bc,(BANK(PTile) << 8 | $01)
-    call CopyVideoDataDouble ; P (for PP), inline
-    ld a, [$ff00+$d7]
-    push af
-    xor a
-    ld [$ff00+$d7], a
-    FuncCoord 19,1
-    ld hl, Coord
-    ld bc, $060a
-    call DrawLineBox ; Draws the box around name, HP and status
-    ld de, $fffa
-    add hl, de
-    ld [hl], $f2 ; . after No ("." is a different one)
-    dec hl
-    ld [hl], $74 ; No
-    FuncCoord 19,9
-    ld hl, Coord
-    ld bc, $0806
-    call DrawLineBox ; Draws the box around types, ID No. and OT
-    FuncCoord 10,9
-    ld hl, Coord
-    ld de, Type1Text
-    call PlaceString ; "TYPE1/"
-    FuncCoord 11,3
-    ld hl, Coord
-    ld a, $5f
-    call Predef ; Draws HP bar
-    ld hl, $cf25
-    call $3df9
-    ld b, $3
-    call GoPAL_SET ; SGB palette
-    FuncCoord 16,6
-    ld hl, Coord
-    ld de, $cf9c
-    call PrintStatusCondition
-    jr nz, .StatusWritten\@ ; 0x129fc $9
-    FuncCoord 16,6
-    ld hl, Coord
-    ld de, OKText
-    call PlaceString ; "OK"
+	ld hl, $d72c
+	set 1, [hl]
+	ld a, $33
+	ld [$ff00+$24], a ; Reduce the volume
+	call GBPalWhiteOutWithDelay3
+	call ClearScreen
+	call $2429 ; move sprites (?)
+	call LoadHpBarAndStatusTilePatterns
+	ld de, $6080 ; source
+	ld hl, $96d0 ; dest
+	ld bc, $0403 ; bank bytes/8
+	call CopyVideoDataDouble ; ·│ :L and halfarrow line end
+	ld de, $6098
+	ld hl, $9780
+	ld bc, $0401
+	call CopyVideoDataDouble ; │
+	ld de, $60b0
+	ld hl, $9760
+	ld bc, $0402
+	call CopyVideoDataDouble ; ─┘
+	ld de, PTile
+	ld hl, $9720
+	ld bc,(BANK(PTile) << 8 | $01)
+	call CopyVideoDataDouble ; P (for PP), inline
+	ld a, [$ff00+$d7]
+	push af
+	xor a
+	ld [$ff00+$d7], a
+	FuncCoord 19,1
+	ld hl, Coord
+	ld bc, $060a
+	call DrawLineBox ; Draws the box around name, HP and status
+	ld de, $fffa
+	add hl, de
+	ld [hl], $f2 ; . after No ("." is a different one)
+	dec hl
+	ld [hl], $74 ; No
+	FuncCoord 19,9
+	ld hl, Coord
+	ld bc, $0806
+	call DrawLineBox ; Draws the box around types, ID No. and OT
+	FuncCoord 10,9
+	ld hl, Coord
+	ld de, Type1Text
+	call PlaceString ; "TYPE1/"
+	FuncCoord 11,3
+	ld hl, Coord
+	ld a, $5f
+	call Predef ; Draws HP bar
+	ld hl, $cf25
+	call $3df9
+	ld b, $3
+	call GoPAL_SET ; SGB palette
+	FuncCoord 16,6
+	ld hl, Coord
+	ld de, $cf9c
+	call PrintStatusCondition
+	jr nz, .StatusWritten\@ ; 0x129fc $9
+	FuncCoord 16,6
+	ld hl, Coord
+	ld de, OKText
+	call PlaceString ; "OK"
 .StatusWritten\@
-    FuncCoord 9,6
-    ld hl, Coord
-    ld de, StatusText
-    call PlaceString ; "STATUS/"
-    FuncCoord 14,2
-    ld hl, Coord
-    call PrintLevel ; Pokémon level
-    ld a, [$d0b8]
-    ld [$d11e], a
-    ld [$d0b5], a
-    ld a, $3a
-    call Predef
-    FuncCoord 3,7
-    ld hl, Coord
-    ld de, $d11e
-    ld bc, $8103 ; Zero-padded, 3
-    call PrintNumber ; Pokémon no.
-    FuncCoord 11,10
-    ld hl, Coord
-    ld a, $4b
-    call Predef ; Prints the type (?)
-    ld hl, $6a9d
-    call .unk_12a7e
-    ld d, h
-    ld e, l
-    FuncCoord 9,1
-    ld hl, Coord
-    call PlaceString ; Pokémon name
-    ld hl, $6a95
-    call .unk_12a7e
-    ld d, h
-    ld e, l
-    FuncCoord 12,16
-    ld hl, Coord
-    call PlaceString ; OT
-    FuncCoord 12,14
-    ld hl, Coord
-    ld de, $cfa4
-    ld bc, $8205 ; 5
-    call PrintNumber ; ID Number
-    ld d, $0
-    call PrintStatsBox
-    call Delay3
-    call GBPalNormal
-    ld hl, $c3a1
-    call $1384 ; draw Pokémon picture
-    ld a, [$cf91]
-    call $13d0 ; play Pokémon cry
-    call $3865 ; wait for button
-    pop af
-    ld [$ff00+$d7], a
-    ret
+	FuncCoord 9,6
+	ld hl, Coord
+	ld de, StatusText
+	call PlaceString ; "STATUS/"
+	FuncCoord 14,2
+	ld hl, Coord
+	call PrintLevel ; Pokémon level
+	ld a, [$d0b8]
+	ld [$d11e], a
+	ld [$d0b5], a
+	ld a, $3a
+	call Predef
+	FuncCoord 3,7
+	ld hl, Coord
+	ld de, $d11e
+	ld bc, $8103 ; Zero-padded, 3
+	call PrintNumber ; Pokémon no.
+	FuncCoord 11,10
+	ld hl, Coord
+	ld a, $4b
+	call Predef ; Prints the type (?)
+	ld hl, $6a9d
+	call .unk_12a7e
+	ld d, h
+	ld e, l
+	FuncCoord 9,1
+	ld hl, Coord
+	call PlaceString ; Pokémon name
+	ld hl, $6a95
+	call .unk_12a7e
+	ld d, h
+	ld e, l
+	FuncCoord 12,16
+	ld hl, Coord
+	call PlaceString ; OT
+	FuncCoord 12,14
+	ld hl, Coord
+	ld de, $cfa4
+	ld bc, $8205 ; 5
+	call PrintNumber ; ID Number
+	ld d, $0
+	call PrintStatsBox
+	call Delay3
+	call GBPalNormal
+	ld hl, $c3a1
+	call $1384 ; draw Pokémon picture
+	ld a, [$cf91]
+	call $13d0 ; play Pokémon cry
+	call $3865 ; wait for button
+	pop af
+	ld [$ff00+$d7], a
+	ret
 .unk_12a7e ; 0x12a7e ; I don't know what this does, iterates over pointers?
 	ld a, [$cc49]
 	add a
@@ -18578,22 +18578,22 @@ StatusScreen: ; 0x12953
 INCBIN "baserom.gbc",$12a95,$12aa5 - $12a95 ; This is some pointers..
 
 Type1Text: ; 0x12aa5
-    db "TYPE1/", $4e
+	db "TYPE1/", $4e
 
 Type2Text: ; 
-    db "TYPE2/", $4e
+	db "TYPE2/", $4e
 
 IDNoText:
-    db $73, $74, "/", $4e
+	db $73, $74, "/", $4e
 
 OTText:
-    db "OT/", $4e, "@"
+	db "OT/", $4e, "@"
 
 StatusText:
-    db "STATUS/@"
+	db "STATUS/@"
 
 OKText: ; 0x12ac4
-    db "OK@"
+	db "OK@"
 
 ; Draws a line starting from hl high b and wide c
 DrawLineBox ; 0x12ac7
@@ -18630,7 +18630,7 @@ PrintStatsBox: ; 12ae4
 	ld bc, $0019 ; Number offset
 	jr .PrintStats ; 0x12af8 $10
 .DifferentBox
-    FuncCoord 9,2
+	FuncCoord 9,2
 	ld hl, Coord
 	ld b, $8
 	ld c, $9
@@ -18663,10 +18663,10 @@ PrintStat
 	ret
 
 StatsText:
-    db "ATTACK", $4e
-    db "DEFENSE", $4e
-    db "SPEED", $4e
-    db "SPECIAL", $50
+	db "ATTACK", $4e
+	db "DEFENSE", $4e
+	db "SPEED", $4e
+	db "SPECIAL", $50
 
 StatusScreen2: ; 12b57
 	ld a, [$ff00+$d7]
@@ -18771,7 +18771,7 @@ StatusScreen2: ; 12b57
 	cp $4
 	jr nz, .PrintPP ; 0x12c0f $b2
 .PPDone
-    FuncCoord 9,3
+	FuncCoord 9,3
 	ld hl, Coord
 	ld de, EXPPointsText
 	call PlaceString
@@ -18782,7 +18782,7 @@ StatusScreen2: ; 12b57
 	inc a
 	ld [$cfb9], a ; Increase temporarily if not 100
 .Level100
-    FuncCoord 14,6
+	FuncCoord 14,6
 	ld hl, Coord
 	ld [hl], $70 ; 1-tile "to"
 	inc hl
@@ -18854,10 +18854,10 @@ StatusScreen2: ; 12b57
 	ret
 
 EXPPointsText:
-    db "EXP POINTS", $4e
-    
+	db "EXP POINTS", $4e
+
 LevelUpText:
-    db "LEVEL UP", $50
+	db "LEVEL UP", $50
 
 INCBIN "baserom.gbc",$12cc3,$12cd2 - $12cc3
 
@@ -66731,10 +66731,10 @@ DecrementPP: ; 0x68000
 	ld a, [de]
 	cp a, STRUGGLE
 	ret z                ; if the pokemon is using "struggle", there's nothing to do
-                         ; we don't decrement PP for "struggle"
+	                     ; we don't decrement PP for "struggle"
 	ld hl, W_PLAYERBATTSTATUS1
 	ld a, [hli]          ; load the W_PLAYERBATTSTATUS1 pokemon status flags and increment hl to load the
-                         ; W_PLAYERBATTSTATUS2 status flags later
+	                     ; W_PLAYERBATTSTATUS2 status flags later
 	and a, 7             ; check to see if bits 0, 1, or 2 are set
 	ret nz               ; if any of these statuses are true, don't decrement PP
 	bit 6, [hl]          ; check 6th bit status flag on W_PLAYERBATTSTATUS2
@@ -66745,14 +66745,14 @@ DecrementPP: ; 0x68000
 	ld a, [$D064]        ; load pokemon status bits?
 	bit 3, a             ; XXX transform status?
 	ret nz               ; If it is, return.  Pokemon Red stores the "current pokemon's" PP
-                         ; separately from the "Pokemon in your party's" PP.  This is
-                         ; duplication -- in all cases *other* than Pokemon with Transform.
-                         ; Normally, this means we have to go on and make the same     
-                         ; modification to the "party's pokemon" PP that we made to the
-                         ; "current pokemon's" PP.  But, if we're dealing with a Transformed
-                         ; Pokemon, it has separate PP for the move set that it copied from
-                         ; its opponent, which is *not* the same as its real PP as part of your
-                         ; party.  So we return, and don't do that part.
+	                     ; separately from the "Pokemon in your party's" PP.  This is
+	                     ; duplication -- in all cases *other* than Pokemon with Transform.
+	                     ; Normally, this means we have to go on and make the same     
+	                     ; modification to the "party's pokemon" PP that we made to the
+	                     ; "current pokemon's" PP.  But, if we're dealing with a Transformed
+	                     ; Pokemon, it has separate PP for the move set that it copied from
+	                     ; its opponent, which is *not* the same as its real PP as part of your
+	                     ; party.  So we return, and don't do that part.
 
 	ld hl, $D188         ; PP of first move (in party)
 	ld a, [$CC2F]        ; which mon in party is active
@@ -66763,7 +66763,7 @@ DecrementPP: ; 0x68000
 	ld c, a
 	ld b, 0
 	add hl ,bc           ; calculate the address in memory of the PP we need to decrement
-                         ; based on the move chosen.
+	                     ; based on the move chosen.
 	dec [hl]             ; Decrement PP
 	ret
 ; 0x6802f
@@ -68066,9 +68066,11 @@ TheEndGfx: ; 473E
 INCBIN "baserom.gbc",$747de,$74872 - $747de
 
 Unnamed_ASM_74872: ; 0x74872
-                    ; code similar to this appears in a lot of banks; this particular
-	call $20EF		; one is called after you beat the Rocket that gives you TM28 DIG
-	ld a, $07		; the screen then fades out, he disappears, and fades back in
+; code similar to this appears in a lot of banks; this particular
+; one is called after you beat the Rocket that gives you TM28 DIG.
+; the screen then fades out, he disappears, and fades back in
+	call $20EF
+	ld a, $07
 	ld [$CC4D], a
 	ld a, $15
 	call $3E6D
