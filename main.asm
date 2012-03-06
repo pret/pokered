@@ -6846,15 +6846,15 @@ LoadFontTilePatterns: ; 3680
 	bit 7,a ; is the LCD enabled?
 	jr nz,.lcdEnabled\@
 .lcdDisabled\@
-	ld hl,$5a80
+	ld hl,FontGraphics
 	ld de,$8800
-	ld bc,$0400
+	ld bc,(BANK(FontGraphics) << 8 | $00)
 	ld a,$04
 	jp FarCopyDataDouble ; if LCD is off, transfer all at once
 .lcdEnabled\@
-	ld de,$5a80
+	ld de,FontGraphics
 	ld hl,$8800
-	ld bc,$0480
+	ld bc,(BANK(FontGraphics) << 8 | $80)
 	jp CopyVideoDataDouble ; if LCD is on, transfer during V-blank
 
 ; copies the text box tile patterns into VRAM
@@ -6863,15 +6863,15 @@ LoadTextBoxTilePatterns: ; 36A0
 	bit 7,a ; is the LCD enabled?
 	jr nz,.lcdEnabled\@
 .lcdDisabled\@
-	ld hl,$6288
+	ld hl,TextBoxGraphics
 	ld de,$9600
 	ld bc,$0200
-	ld a,$04
+	ld a,BANK(TextBoxGraphics)
 	jp FarCopyData2 ; if LCD is off, transfer all at once
 .lcdEnabled\@
-	ld de,$6288
+	ld de,TextBoxGraphics
 	ld hl,$9600
-	ld bc,$0420
+	ld bc,(BANK(TextBoxGraphics) << 8 | $20)
 	jp CopyVideoData ; if LCD is on, transfer during V-blank
 
 ; copies HP bar and status display tile patterns into VRAM
@@ -6880,15 +6880,15 @@ LoadHpBarAndStatusTilePatterns: ; 36C0
 	bit 7,a ; is the LCD enabled?
 	jr nz,.lcdEnabled\@
 .lcdDisabled\@
-	ld hl,$5ea0
+	ld hl,HpBarAndStatusGraphics
 	ld de,$9620
 	ld bc,$01e0
-	ld a,$04
+	ld a,BANK(HpBarAndStatusGraphics)
 	jp FarCopyData2 ; if LCD is off, transfer all at once
 .lcdEnabled\@
-	ld de,$5ea0
+	ld de,HpBarAndStatusGraphics
 	ld hl,$9620
-	ld bc,$041e
+	ld bc,(BANK(HpBarAndStatusGraphics) << 8 | $1e)
 	jp CopyVideoData ; if LCD is on, transfer during V-blank
 
 INCBIN "baserom.gbc",$36E0,$3739 - $36E0
@@ -18427,8 +18427,23 @@ OldAmberSprite: ; 0x11300
 	INCBIN "gfx/sprites/old_amber.2bpp" ; was $11300
 LyingOldManSprite: ; 0x11340
 	INCBIN "gfx/sprites/lying_old_man.2bpp" ; was $11340
+	
+PokemonLogoGraphics: ; 0x11380
+	INCBIN "gfx/pokemon_logo.2bpp"
+FontGraphics: ; 0x11a80
+	INCBIN "gfx/font.1bpp"
 
-INCBIN "baserom.gbc",$11380,$12953 - $11380
+INCBIN "baserom.gbc",$11e80,$11ea0 - $11e80
+
+HpBarAndStatusGraphics: ; 0x11ea0
+	INCBIN "gfx/hp_bar_and_status.2bpp"
+
+INCBIN "baserom.gbc",$12080,$12288 - $12080 ; FIXME
+
+TextBoxGraphics: ; 0x12288
+    INCBIN "gfx/text_box.2bpp"
+
+INCBIN "baserom.gbc",$12488,$12953 - $12488
 
 ; Predef 0x37
 StatusScreen: ; 0x12953
@@ -18614,7 +18629,7 @@ DrawLineBox ; 0x12ac7
 	ret
 
 PTile: ; This is a single 1bpp "P" tile
-INCBIN "baserom.gbc",$12adc,$12ae4 - $12adc
+	INCBIN "gfx/p_tile.1bpp"
 
 PrintStatsBox: ; 12ae4
 	ld a, d
