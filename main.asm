@@ -9549,8 +9549,7 @@ DisplayPokemonCenterDialogue_: ; 0x6fe6
 	ld a, $18
 	ld [$c112], a ; make the nurse turn to face the machine
 	call Delay3
-	ld a, $7
-	call Predef ; HealParty
+	PREDEF HealPartyPredef
 	ld b, $1c
 	ld hl, $4433
 	call Bankswitch ; do the healing machine animation
@@ -18506,8 +18505,7 @@ StatusScreen: ; 0x12953
 	call PlaceString ; "TYPE1/"
 	FuncCoord 11,3
 	ld hl, Coord
-	ld a, $5f
-	call Predef ; Draws HP bar
+	PREDEF DrawHPBarPredef ; predef $5f
 	ld hl, $cf25
 	call $3df9
 	ld b, $3
@@ -40588,8 +40586,7 @@ INCBIN "baserom.gbc",$3e88c,$67b
 PlayMoveAnimation: ; 6F07
 	ld [$D07C],a
 	call Delay3
-	ld a,8
-	jp Predef
+	PREDEF_JUMP MoveAnimationPredef ; predef 8
 
 INCBIN "baserom.gbc",$3ef12,$3f245 - $3ef12
 
@@ -46183,8 +46180,7 @@ MomHealPokemon: ; 0x4818a
 	call PrintText
 	call GBFadeOut2
 	call ReloadMapData
-	ld a, 7
-	call Predef
+	PREDEF HealPartyPredef
 	ld a, $E8
 	ld [$C0EE], a
 	call $23B1 ; play sound?
@@ -49942,7 +49938,9 @@ PredefPointers: ; 7E79
 	dbw $0F,$7103
 	dbw $1E,$5ABA
 	dbw $03,$7132
+HealPartyPredef:
 	dbw BANK(HealParty),HealParty
+MoveAnimationPredef:
 	dbw BANK(MoveAnimation),MoveAnimation; 08 play move animation
 	dbw $03,$771E
 	dbw $03,$771E
@@ -49989,11 +49987,14 @@ PredefPointers: ; 7E79
 	dbw $1E,$5869
 	dbw $1C,$4B5D
 	dbw $03,$4586
+StatusScreenPredef:
 	dbw BANK(StatusScreen),StatusScreen ; 37 0x12953
+StatusSceren2Predef:
 	dbw BANK(StatusScreen2),StatusScreen2 ; 38
 	dbw $10,$50E2
 	dbw $15,$690F
 	dbw $10,$5010
+Predef3BPredef:
 	dbw BANK(Predef3B),Predef3B; 3B display pic?
 	dbw $03,$6F54
 	dbw $10,$42D1
@@ -50019,6 +50020,7 @@ PredefPointers: ; 7E79
 	dbw $1C,$76BD
 	dbw $1C,$75E8
 	dbw $1C,$77E2
+Predef54Predef:
 	dbw BANK(Predef54),Predef54 ; 54 initiate trade
 	dbw $1D,$405C
 	dbw $11,$4169
@@ -50030,6 +50032,7 @@ PredefPointers: ; 7E79
 	dbw $01,$4DE1
 	dbw $09,$7D98
 	dbw $03,$7473
+DrawHPBarPredef:
 	dbw $04,$68EF ; 5F draw HP bar
 	dbw $04,$68F6
 	dbw $07,$49C6

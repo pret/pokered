@@ -87,6 +87,17 @@ TX_RAM: MACRO
 	dw \1
 	ENDM
 
+; Predef macro.
+PREDEF: MACRO
+	ld a, (\1 - PredefPointers) / 3
+	call Predef
+	ENDM
+	
+PREDEF_JUMP: MACRO
+	ld a, (\1 - PredefPointers) / 3
+	jp Predef
+	ENDM
+
 ; wram locations
 
 ; the tiles of the row or column to be redrawn by RedrawExposedScreenEdge
