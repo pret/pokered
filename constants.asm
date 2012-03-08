@@ -50,6 +50,11 @@ TSETHEAD: MACRO
 	dw \1,\2,\3
 	db \4,\5,\6,\7,\8
 	ENDM
+	
+; macro for two nibbles
+dn: MACRO
+	db (\1 << 4 | \2)
+	ENDM
 
 ; macro for putting a byte then a word
 dbw: MACRO
@@ -2009,6 +2014,19 @@ BRN     EQU %00010000
 FRZ     EQU %00100000
 PAR     EQU %01000000
 
+; pokemon's overworld sprites
+SPRITE_MON			EQU $0
+SPRITE_BALL_M		EQU $1
+SPRITE_HELIX		EQU $2
+SPRITE_FAIRY		EQU $3
+SPRITE_BIRD_M		EQU $4
+SPRITE_WATER		EQU $5
+SPRITE_BUG			EQU $6
+SPRITE_GRASS		EQU $7
+SPRITE_SNAKE		EQU $8
+SPRITE_QUADRUPED 	EQU $9
+
+; overworld sprites
 SPRITE_RED                       EQU $01
 SPRITE_BLUE                      EQU $02
 SPRITE_OAK                       EQU $03
