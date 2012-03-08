@@ -68173,7 +68173,7 @@ Func40CB: ; 40CB
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED],a
 	call $3719
-	call $4183
+	call Unknown_74183
 
 	; display the next monster from CreditsMons
 	ld hl,$CD3E
@@ -68189,27 +68189,27 @@ Func40CB: ; 40CB
 	call $1537
 	call $1389
 	ld hl,$980C
-	call $4164
+	call Unknown_74164
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED],a
 	call $3725
 	ld hl,$9800
-	call $4164
+	call Unknown_74164
 	ld a,$A7
 	ld [$FF4B],a
 	ld hl,$9C00
-	call $4164
-	call $4183
+	call Unknown_74164
+	call Unknown_74183
 	ld a,$FC
 	ld [$FF47],a
 	ld bc,7
 .next\@
-	call $4140
+	call Unknown_74140
 	dec c
 	jr nz,.next\@
 	ld c,$14
 .next2\@
-	call $4140
+	call Unknown_74140
 	ld a,[$FF4B]
 	sub 8
 	ld [$FF4B],a
@@ -68238,7 +68238,14 @@ CreditsMons: ; 4131
 	db NIDOKING
 	db PARASECT
 
-INCBIN "baserom.gbc",$74140,$2C3 - $140
+Unknown_74140:
+INCBIN "baserom.gbc",$74140,$164 - $140
+
+Unknown_74164:
+INCBIN "baserom.gbc",$74164,$183 - $164
+
+Unknown_74183:
+INCBIN "baserom.gbc",$74183,$2C3 - $183
 
 CreditsTextPointers: ; 42C3
 
@@ -68480,7 +68487,7 @@ ViridianGymScript: ; 0x748a3
 	call $317f
 	call $3c3c
 	ld hl, ViridianGymTrainerHeaders
-	ld de, $48e1
+	ld de, Unknown_748e1
 	ld a, [$d5fb]
 	call $3160
 	ld [$d5fb], a
@@ -68492,7 +68499,13 @@ Gym8CityName:
 Gym8LeaderName:
 	db "GIOVANNI@"
 
-INCBIN "baserom.gbc",$748D6,$116
+INCBIN "baserom.gbc",$748D6,$748E1 - $748D6
+
+Unknown_748e1:
+INCBIN "baserom.gbc",$748E1,$74995 - $748E1
+
+Unknown_74995:
+INCBIN "baserom.gbc",$74995,$749EC - $74995
 
 ViridianGymTexts: ; 0x749ec
 	dw ViridianGymText1, ViridianGymText2, ViridianGymText3, ViridianGymText4, ViridianGymText5, ViridianGymText6, ViridianGymText7, ViridianGymText8, ViridianGymText9, ViridianGymText10, ViridianGymText11, ViridianGymText12, ViridianGymText13, ViridianGymText14
@@ -68587,7 +68600,7 @@ ViridianGymText1: ; 0x74a69
 	jr z, .asm_6de66 ; 0x74a6f
 	bit 0, a
 	jr nz, .asm_9fc95 ; 0x74a73
-	call z, $4995
+	call z, Unknown_74995
 	call DisableWaitingAfterTextDisplay
 	jr .asm_6dff7 ; 0x74a7b
 .asm_9fc95 ; 0x74a7d
@@ -69029,7 +69042,7 @@ CeruleanHouse3Text1: ; 0x74e15
 	ld [W_LISTMENUID], a
 	call DisplayListMenuID
 	jr c, .asm_74e60 ; 0x74e49 $15
-	ld hl, $4e86
+	ld hl, Unknown_74e86
 	ld a, [$cf91]
 	sub $15
 	add a
@@ -69067,6 +69080,7 @@ UnnamedText_74e81: ; 0x74e81
 	db $50
 ; 0x74e81 + 5 bytes
 
+Unknown_74e86:
 INCBIN "baserom.gbc",$74e86,$74e96 - $74e86
 
 UnnamedText_74e96: ; 0x74e96
@@ -69457,7 +69471,7 @@ SafariZoneEntranceScripts: ; 0x751d9
 	dw SafariZoneEntranceScript0, SafariZoneEntranceScript1, SafariZoneEntranceScript2, SafariZoneEntranceScript3, SafariZoneEntranceScript4, SafariZoneEntranceScript5, SafariZoneEntranceScript6
 
 SafariZoneEntranceScript0: ; 0x751e7
-	ld hl, $5221
+	ld hl, Unknown_75221
 	call $34bf
 	ret nc
 	ld a, $3
@@ -69478,7 +69492,7 @@ SafariZoneEntranceScript0: ; 0x751e7
 .asm_7520f
 	ld a, $10
 	ld c, $1
-	call $52a3
+	call Unknown_752a3
 	ld a, $f0
 	ld [$cd6b], a
 	ld a, $1
@@ -69490,7 +69504,7 @@ Unknown_75221: ; 0x75221
 db $2, $3, $2, $4, $ff
 
 SafariZoneEntranceScript1: ; 0x75226
-	call $52b4
+	call Unknown_752b4
 	ret nz
 SafariZoneEntranceScript2: ; 0x7522a
 	xor a
@@ -69506,7 +69520,7 @@ SafariZoneEntranceScript2: ; 0x7522a
 ; 0x75240
 
 SafariZoneEntranceScript3: ; 0x75240
-	call $52b4
+	call Unknown_752b4
 	ret nz
 	xor a
 	ld [$cd6b], a
@@ -69533,7 +69547,7 @@ SafariZoneEntranceScript5: ; 0x7524e
 	ld [$da47], a
 	ld a, $80
 	ld c, $3
-	call $52a3
+	call Unknown_752a3
 	ld a, $4
 	ld [$d61f], a
 	jr .asm_75286 ; 0x7527d $7
@@ -69546,7 +69560,7 @@ SafariZoneEntranceScript5: ; 0x7524e
 ; 0x75287
 
 SafariZoneEntranceScript4: ; 0x75287
-	call $52b4
+	call Unknown_752b4
 	ret nz
 	xor a
 	ld [$cd6b], a
@@ -69556,7 +69570,7 @@ SafariZoneEntranceScript4: ; 0x75287
 ; 0x75295
 
 SafariZoneEntranceScript6: ; 0x75295
-	call $52b4
+	call Unknown_752b4
 	ret nz
 	call Delay3
 	ld a, [$cf0d]
@@ -69565,7 +69579,10 @@ SafariZoneEntranceScript6: ; 0x75295
 ; 0x752a3
 
 Unknown_752a3: ; 0x752a3
-INCBIN "baserom.gbc",$752a3,$752b9 - $752a3
+INCBIN "baserom.gbc",$752a3,$752b4 - $752a3
+
+Unknown_752b4:
+INCBIN "baserom.gbc",$752b4,$752b9 - $752b4
 
 SafariZoneEntranceTexts: ; 0x752b9
 	dw SafariZoneEntranceText1, SafariZoneEntranceText2, SafariZoneEntranceText3, SafariZoneEntranceText4, SafariZoneEntranceText5, SafariZoneEntranceText6
@@ -69585,7 +69602,7 @@ SafariZoneEntranceText4: ; 0x752ca
 	call $35ec
 	ld a, [$cc26]
 	and a
-	jp nz, $5346
+	jp nz, $5346 ;Unknown_75346
 	xor a
 	ld [$ff00+$9f], a
 	ld a, $5
@@ -69622,19 +69639,20 @@ SafariZoneEntranceText4: ; 0x752ca
 	ld [$d70e], a
 	ld a, $40
 	ld c, $3
-	call $52a3
+	call Unknown_752a3
 	ld hl, $d790
 	set 7, [hl]
 	res 6, [hl]
 	ld a, $3
 	ld [$d61f], a
 	jr .asm_75358 ; 0x75344 $12
+;Unknown_75346:
 	ld hl, UnnamedText_75365
 	call PrintText
 .asm_7534c
 	ld a, $80
 	ld c, $1
-	call $52a3
+	call Unknown_752a3
 	ld a, $4
 	ld [$d61f], a
 .asm_75358
@@ -69673,7 +69691,7 @@ SafariZoneEntranceText5: ; 0x7536f
 	ld [$c109], a
 	ld a, $80
 	ld c, $3
-	call $52a3
+	call Unknown_752a3
 	ld hl, $d790
 	res 6, [hl]
 	res 7, [hl]
@@ -69687,7 +69705,7 @@ SafariZoneEntranceText5: ; 0x7536f
 	ld [$c109], a
 	ld a, $40
 	ld c, $1
-	call $52a3
+	call Unknown_752a3
 	ld a, $5
 	ld [$cf0d], a
 .asm_753b3
@@ -69776,7 +69794,7 @@ FuchsiaGymScript: ; 0x7543d
 	call FuchsiaGymScript_Unknown75453
 	call $3c3c
 	ld hl, FuchsiaGymTrainerHeaders
-	ld de, $5482
+	ld de, Unknown_75482
 	ld a, [$d65b]
 	call $3160
 	ld [$d65b], a
@@ -69791,7 +69809,13 @@ Gym5CityName: ; 0x75465
 Gym5LeaderName: ; 0x75472
 	db "KOGA@"
 
-INCBIN "baserom.gbc",$75477,$5E
+INCBIN "baserom.gbc",$75477,$75482-$75477
+
+Unknown_75482:
+INCBIN "baserom.gbc",$75482,$75497-$75482
+
+Unknown_75497:
+INCBIN "baserom.gbc",$75497,$754D5-$75497
 
 FuchsiaGymTexts: ; 0x754d5
 	dw FuchsiaGymText1, FuchsiaGymText2, FuchsiaGymText3, FuchsiaGymText4, FuchsiaGymText5, FuchsiaGymText6, FuchsiaGymText7, FuchsiaGymText8, FuchsiaGymText9, FuchsiaGymText10, FuchsiaGymText11
@@ -69866,7 +69890,7 @@ FuchsiaGymText1: ; 0x75534
 	jr z, .asm_181b6 ; 0x7553a
 	bit 0, a
 	jr nz, .asm_adc3b ; 0x7553e
-	call z, $5497
+	call z, Unknown_75497
 	call DisableWaitingAfterTextDisplay
 	jr .asm_e84c6 ; 0x75546
 .asm_adc3b ; 0x75548
@@ -70175,7 +70199,11 @@ Gym7CityName: ; 0x7577B
 Gym7LeaderName: ; 0x7578b
 	db "BLAINE@"
 
-INCBIN "baserom.gbc",$75792,$757a6 - $75792
+Unknown_75792:
+INCBIN "baserom.gbc",$75792,$757a0 - $75792
+
+Unknown_757a0:
+INCBIN "baserom.gbc",$757a0,$757a6 - $757a0
 
 CinnabarGymScripts: ; 0x757a6
 	dw CinnabarGymScript0, CinnabarGymScript1, CinnabarGymScript2, CinnabarGymScript3
@@ -70189,10 +70217,10 @@ CinnabarGymScript0: ; 0x757ae
 	jr nz, .asm_757c3 ; 0x757b7 $a
 	ld a, $4
 	ld [$d528], a
-	ld de, $57d7
+	ld de, Unknown_757d7
 	jr .asm_757cb ; 0x757c1 $8
 .asm_757c3
-	ld de, $57da
+	ld de, Unknown_757da
 	ld a, $1
 	ld [$d528], a
 .asm_757cb
@@ -70203,7 +70231,11 @@ CinnabarGymScript0: ; 0x757ae
 	ret
 ; 0x757d7
 
-INCBIN "baserom.gbc",$757d7,$757dc - $757d7
+Unknown_757d7:
+INCBIN "baserom.gbc",$757d7,$757da - $757d7
+
+Unknown_757da:
+INCBIN "baserom.gbc",$757da,$757dc - $757da
 
 CinnabarGymScript1: ; 0x757dc
 	ld a, [$d730]
@@ -70217,18 +70249,19 @@ CinnabarGymScript1: ; 0x757dc
 	jp $2920
 ; 0x757f1
 
+Unknown_757f1:
 INCBIN "baserom.gbc",$757f1,$757f6 - $757f1
 
 CinnabarGymScript2: ; 0x757f6
 	ld a, [$d057]
 	cp $ff
-	jp z, $5792
+	jp z, Unknown_75792
 	ld a, [$cc55]
 	ld [$ff00+$db], a
 	ld c, a
 	ld b, $2
 	ld hl, $d79a
-	call $57f1
+	call Unknown_757f1
 	ld a, c
 	and a
 	jr nz, .asm_7581b ; 0x7580e $b
@@ -70242,13 +70275,13 @@ CinnabarGymScript2: ; 0x757f6
 	ld c, a
 	ld b, $1
 	ld hl, $d79a
-	call $57f1
+	call Unknown_757f1
 	ld a, [$cc55]
 	sub $2
 	ld c, a
 	ld b, $1
 	ld hl, $d79c
-	call $57f1
+	call Unknown_757f1
 	call $3ead
 	xor a
 	ld [$cd6b], a
@@ -70262,9 +70295,10 @@ CinnabarGymScript2: ; 0x757f6
 CinnabarGymScript3: ; 0x7584a
 	ld a, [$d057]
 	cp $ff
-	jp z, $5792
+	jp z, Unknown_75792
 	ld a, $f0
 	ld [$cd6b], a
+Unknown_75857:
 	ld a, $a
 	ld [$ff00+$8c], a
 	call $2920
@@ -70295,7 +70329,7 @@ CinnabarGymScript3: ; 0x7584a
 	set 0, [hl]
 	ld hl, $d126
 	set 5, [hl]
-	jp $5792
+	jp Unknown_75792
 ; 0x7589f
 
 CinnabarGymTexts: ; 0x7589f
@@ -70304,7 +70338,10 @@ CinnabarGymTexts: ; 0x7589f
 ;CinnabarGymText 11: ; 0x7592a
 ;CinnabarGymText 12: ; 0x75934
 
-INCBIN "baserom.gbc",$758b1,$2e
+INCBIN "baserom.gbc",$758b1,$758b7 - $758b1
+
+Unknown_758b7:
+INCBIN "baserom.gbc",$758b7,$758df - $758b7
 
 CinnabarGymText1: ; 0x758df
 	db $8
@@ -70313,7 +70350,7 @@ CinnabarGymText1: ; 0x758df
 	jr z, .asm_d9332 ; 0x758e5 $16
 	bit 0, a
 	jr nz, .asm_3012f ; 0x758e9 $9
-	call z, $5857
+	call z, Unknown_75857
 	call DisableWaitingAfterTextDisplay
 	jp TextScriptEnd
 .asm_3012f ; 0x758f4
@@ -70328,7 +70365,7 @@ CinnabarGymText1: ; 0x758df
 	call $3354
 	ld a, $7
 	ld [$d05c], a
-	jp $58b7
+	jp Unknown_758b7
 ; 0x75914
 
 UnnamedText_75914: ; 0x75914
@@ -70366,7 +70403,7 @@ TM38NoRoomText: ; 0x75934
 
 CinnabarGymText2: ; 0x75939
 	db $08 ; asm
-	call $57a0
+	call Unknown_757a0
 	ld a, [$d79a]
 	bit 2, a
 	jr nz, .asm_46bb4 ; 0x75942
@@ -70375,7 +70412,7 @@ CinnabarGymText2: ; 0x75939
 	ld hl, UnnamedText_75964
 	ld de, UnnamedText_75964 ; $5964 XXX
 	call $3354
-	jp $58b7
+	jp Unknown_758b7
 .asm_46bb4 ; 0x75956
 	ld hl, UnnamedText_75969
 	call PrintText
@@ -70398,7 +70435,7 @@ UnnamedText_75969: ; 0x75969
 
 CinnabarGymText3: ; 0x7596e
 	db $08 ; asm
-	call $57a0
+	call Unknown_757a0
 	ld a, [$d79a]
 	bit 3, a
 	jr nz, .asm_4b406 ; 0x75977
@@ -70407,7 +70444,7 @@ CinnabarGymText3: ; 0x7596e
 	ld hl, UnnamedText_75999
 	ld de, UnnamedText_75999 ; $5999 XXX
 	call $3354
-	jp $58b7
+	jp Unknown_758b7
 .asm_4b406 ; 0x7598b
 	ld hl, UnnamedText_7599e
 	call PrintText
@@ -70430,7 +70467,7 @@ UnnamedText_7599e: ; 0x7599e
 
 CinnabarGymText4: ; 0x759a3
 	db $08 ; asm
-	call $57a0
+	call Unknown_757a0
 	ld a, [$d79a]
 	bit 4, a
 	jr nz, .asm_c0673 ; 0x759ac
@@ -70439,7 +70476,7 @@ CinnabarGymText4: ; 0x759a3
 	ld hl, UnnamedText_759ce
 	ld de, UnnamedText_759ce ; $59ce XXX
 	call $3354
-	jp $58b7
+	jp Unknown_758b7
 .asm_c0673 ; 0x759c0
 	ld hl, UnnamedText_759d3
 	call PrintText
@@ -70462,7 +70499,7 @@ UnnamedText_759d3: ; 0x759d3
 
 CinnabarGymText5: ; 0x759d8
 	db $08 ; asm
-	call $57a0
+	call Unknown_757a0
 	ld a, [$d79a]
 	bit 5, a
 	jr nz, .asm_5cfd7 ; 0x759e1
@@ -70471,7 +70508,7 @@ CinnabarGymText5: ; 0x759d8
 	ld hl, UnnamedText_75a03
 	ld de, UnnamedText_75a03 ; $5a03 XXX
 	call $3354
-	jp $58b7
+	jp Unknown_758b7
 .asm_5cfd7 ; 0x759f5
 	ld hl, UnnamedText_75a08
 	call PrintText
@@ -70494,7 +70531,7 @@ UnnamedText_75a08: ; 0x75a08
 
 CinnabarGymText6: ; 0x75a0d
 	db $08 ; asm
-	call $57a0
+	call Unknown_757a0
 	ld a, [$d79a]
 	bit 6, a
 	jr nz, .asm_776b4 ; 0x75a16
@@ -70503,7 +70540,7 @@ CinnabarGymText6: ; 0x75a0d
 	ld hl, UnnamedText_75a38
 	ld de, UnnamedText_75a38
 	call $3354
-	jp $58b7
+	jp Unknown_758b7
 .asm_776b4 ; 0x75a2a
 	ld hl, UnnamedText_75a3d
 	call PrintText
@@ -70526,7 +70563,7 @@ UnnamedText_75a3d: ; 0x75a3d
 
 CinnabarGymText7: ; 0x75a42
 	db $08 ; asm
-	call $57a0
+	call Unknown_757a0
 	ld a, [$d79a]
 	bit 7, a
 	jr nz, .asm_2f755 ; 0x75a4b
@@ -70535,9 +70572,9 @@ CinnabarGymText7: ; 0x75a42
 	ld hl, UnnamedText_75a6d
 	ld de, UnnamedText_75a6d
 	call $3354
-	jp $58b7
+	jp Unknown_758b7
 .asm_2f755 ; 0x75a5f
-	ld hl, $5a72
+	ld hl, UnnamedText_75a72
 	call PrintText
 	jp TextScriptEnd
 
@@ -70558,7 +70595,7 @@ UnnamedText_75a72: ; 0x75a72
 
 CinnabarGymText8: ; 0x75a77
 	db $08 ; asm
-	call $57a0
+	call Unknown_757a0
 	ld a, [$d79b]
 	bit 0, a
 	jr nz, .asm_d87be ; 0x75a80
@@ -70567,7 +70604,7 @@ CinnabarGymText8: ; 0x75a77
 	ld hl, UnnamedText_75aa2
 	ld de, UnnamedText_75aa2 ; $5aa2 XXX
 	call $3354
-	jp $58b7
+	jp Unknown_758b7
 .asm_d87be ; 0x75a94
 	ld hl, UnnamedText_75aa7
 	call PrintText
@@ -70869,7 +70906,8 @@ Lab4Script: ; 0x75d31
 Lab4Texts: ; 0x75d34
 	dw Lab4Text1, Lab4Text2
 
-INCBIN "baserom.gbc",$75d34 + 4,$38 -4
+Unknown_75d38:
+INCBIN "baserom.gbc",$75d38,$34
 
 Lab4Text1: ; 0x75d6c
 	db $8
@@ -70878,7 +70916,7 @@ Lab4Text1: ; 0x75d6c
 	jr nz, .asm_75d96 ; 0x75d72 $22
 	ld hl, UnnamedText_75dc6
 	call PrintText
-	call $5d38
+	call Unknown_75d38
 	ld a, [$cd37]
 	and a
 	jr z, .asm_75d8d ; 0x75d81 $a
@@ -70898,7 +70936,7 @@ Lab4Text1: ; 0x75d6c
 	call PrintText
 	jr .asm_75d93 ; 0x75da0 $f1
 .asm_75da2
-	call $5de8
+	call Unknown_75de8
 	ld hl, UnnamedText_75dd5
 	call PrintText
 	ld hl, $d7a3
@@ -70943,7 +70981,7 @@ Lab4Text2: ; 0x75dda
 	call Predef
 	jp TextScriptEnd
 
-; 0x75de8
+Unknown_75de8 ; 0x75de8
 ; XXX todo
 ;db $6, $18, $21, $eb, $50
 ;db $c3, $d6, $35
@@ -71142,7 +71180,7 @@ GaryScript1: ; 0x75f48
 	ld a, $ff
 	ld [$cd6b], a
 	ld hl, $ccd3
-	ld de, $5f63
+	ld de, Unknown_75f63
 	call $350c
 	dec a
 	ld [$cd38], a
@@ -71152,6 +71190,7 @@ GaryScript1: ; 0x75f48
 	ret
 ; 0x75f63
 
+Unknown_75f63:
 INCBIN "baserom.gbc",$75f63,$75f6a - $75f63
 
 GaryScript2: ; 0x75f6a 5F6A
@@ -71300,7 +71339,7 @@ LoreleiScript: ; 0x7617b
 	call LoreleiScript_Unknown76191
 	call $3c3c
 	ld hl, LoreleiTrainerHeaders
-	ld de, $61bb
+	ld de, Unknown_761bb
 	ld a, [$d64d]
 	call $3160
 	ld [$d64d], a
@@ -71308,7 +71347,10 @@ LoreleiScript: ; 0x7617b
 ; 0x76191
 
 LoreleiScript_Unknown76191: ; 0x76191
-INCBIN "baserom.gbc",$76191,$c0
+INCBIN "baserom.gbc",$76191,$761bb-$76191
+
+Unknown_761bb:
+INCBIN "baserom.gbc",$761bb,$76251-$761bb
 
 LoreleiTexts: ; 0x76251
 	dw LoreleiText1, LoreleiText2
@@ -71387,7 +71429,7 @@ BrunoScript: ; 0x762d6
 	call BrunoScript_Unknown762ec
 	call $3c3c
 	ld hl, BrunoTrainerHeaders
-	ld de, $6312
+	ld de, Unknown_76312
 	ld a, [$d64e]
 	call $3160
 	ld [$d64e], a
@@ -71395,7 +71437,10 @@ BrunoScript: ; 0x762d6
 ; 0x762ec
 
 BrunoScript_Unknown762ec: ; 0x762ec
-INCBIN "baserom.gbc",$762ec,$bc
+INCBIN "baserom.gbc",$762ec,$76312-$762ec
+
+Unknown_76312:
+INCBIN "baserom.gbc",$76312,$763a8-$76312
 
 BrunoTexts: ; 0x763a8
 	dw BrunoText1, BrunoText2
@@ -71474,7 +71519,7 @@ AgathaScript: ; 0x7642d
 	call AgathaScript_Unknown76443
 	call $3c3c
 	ld hl, AgathaTrainerHeaders
-	ld de, $6469
+	ld de, Unknown_76469
 	ld a, [$d64f]
 	call $3160
 	ld [$d64f], a
@@ -71482,7 +71527,10 @@ AgathaScript: ; 0x7642d
 ; 0x76443
 
 AgathaScript_Unknown76443: ; 0x76443
-INCBIN "baserom.gbc",$76443,$c2
+INCBIN "baserom.gbc",$76443,$76469-$76443
+
+Unknown_76469:
+INCBIN "baserom.gbc",$76469,$76505-$76469
 
 AgathaTexts: ; 0x76505
 	dw AgathaText1, AgathaText2
