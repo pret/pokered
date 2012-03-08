@@ -3170,10 +3170,10 @@ PrintStatusCondition: ; 14E1
 .notFainted\@
 	ld a,[$ffb8]
 	push af
-	ld a,$1d
+	ld a,BANK(Unknown_747de)
 	ld [$ffb8],a
 	ld [$2000],a
-	call $47de ; print status condition
+	call Unknown_747de ; print status condition
 	pop bc
 	ld a,b
 	ld [$ffb8],a
@@ -17298,8 +17298,8 @@ ItemUseItemfinder: ; 62E1
 	and a
 	jp nz,ItemUseNotTime
 	call ItemUseReloadOverworldData
-	ld b,$1d
-	ld hl,$481f
+	ld b,BANK(Unknown_7481f)
+	ld hl,Unknown_7481f
 	call Bankswitch ; check for hidden items
 	ld hl,ItemfinderFoundNothingText
 	jr nc,.printText\@ ; if no hidden items
@@ -68451,7 +68451,11 @@ CredPAAD:
 TheEndGfx: ; 473E
 	INCBIN "gfx/theend.2bpp"
 
-INCBIN "baserom.gbc",$747de,$74872 - $747de
+Unknown_747de:
+INCBIN "baserom.gbc",$747de,$7481f - $747de
+
+Unknown_7481f:
+INCBIN "baserom.gbc",$7481f,$74872 - $7481f
 
 Unnamed_ASM_74872: ; 0x74872
 ; code similar to this appears in a lot of banks; this particular
