@@ -15,7 +15,7 @@ redrle: extras/redrle.c
 	${CC} -o $@ $>
 
 .asm.tx:
-	python textpre.py  < $< > $@
+	python textpre.py < $< > $@
 
 pokered.gbc: pokered.o
 	rgblink -o $@ $<
