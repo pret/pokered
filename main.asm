@@ -46653,15 +46653,15 @@ RockTunnelPokecenterHiddenObjects:
 	dbw $18,$6516
 	db $FF
 ViridianForestHiddenObjects:
-	db $12,$01,$14 ; XXX, y, x
+	db $12,$01,POTION
 	dbw $1d,$6688
-	db $2a,$10,$0b ; XXX, y, x
+	db $2a,$10,ANTIDOTE
 	dbw $1d,$6688
 	db $FF
 MtMoon3HiddenObjects:
-	db $0c,$12,$0a ; XXX, y, x
+	db $0c,$12,MOON_STONE
 	dbw $1d,$6688
-	db $09,$21,$50 ; XXX, y, x
+	db $09,$21,ETHER
 	dbw $1d,$6688
 	db $FF
 IndigoPlateauHiddenObjects:
@@ -46671,13 +46671,13 @@ IndigoPlateauHiddenObjects:
 	dbw $14,$6a2f
 	db $FF
 Route25HiddenObjects:
-	db $03,$26,$50 ; XXX, y, x
+	db $03,$26,ETHER
 	dbw $1d,$6688
-	db $01,$0a,$52 ; XXX, y, x
+	db $01,$0a,ELIXER
 	dbw $1d,$6688
 	db $FF
 Route9HiddenObjects:
-	db $07,$0e,$50 ; XXX, y, x
+	db $07,$0e,ETHER
 	dbw $1d,$6688
 	db $FF
 SSAnne6HiddenObjects:
@@ -46685,29 +46685,29 @@ SSAnne6HiddenObjects:
 	dbw $17,$5def
 	db $07,$0d,$00 ; XXX, y, x
 	dbw $17,$5def
-	db $09,$0d,$03 ; XXX, y, x
+	db $09,$0d,GREAT_BALL
 	dbw $1d,$6688
 	db $FF
 SSAnne10HiddenObjects:
-	db $01,$03,$12 ; XXX, y, x
+	db $01,$03,HYPER_POTION
 	dbw $1d,$6688
 	db $FF
 Route10HiddenObjects:
-	db $11,$09,$13 ; XXX, y, x
+	db $11,$09,SUPER_POTION
 	dbw $1d,$6688
-	db $35,$10,$51 ; XXX, y, x
+	db $35,$10,MAX_ETHER
 	dbw $1d,$6688
 	db $FF
 RocketHideout1HiddenObjects:
-	db $0f,$15,$4f ; XXX, y, x
+	db $0f,$15,PP_UP
 	dbw $1d,$6688
 	db $FF
 RocketHideout3HiddenObjects:
-	db $11,$1b,$31 ; XXX, y, x
+	db $11,$1b,NUGGET
 	dbw $1d,$6688
 	db $FF
 RocketHideout4HiddenObjects:
-	db $01,$19,$13 ; XXX, y, x
+	db $01,$19,SUPER_POTION
 	dbw $1d,$6688
 	db $FF
 SaffronPokecenterHiddenObjects:
@@ -46717,59 +46717,59 @@ SaffronPokecenterHiddenObjects:
 	dbw $18,$6516
 	db $FF
 PokemonTower5HiddenObjects:
-	db $0c,$04,$52 ; XXX, y, x
+	db $0c,$04,ELIXER
 	dbw $1d,$6688
 	db $FF
 Route13HiddenObjects:
-	db $0e,$01,$4f ; XXX, y, x
+	db $0e,$01,PP_UP
 	dbw $1d,$6688
-	db $0d,$10,$27 ; XXX, y, x
+	db $0d,$10,CALCIUM
 	dbw $1d,$6688
 	db $FF
 SafarizoneentranceHiddenObjects:
-	db $01,$0a,$31 ; XXX, y, x
+	db $01,$0a,NUGGET
 	dbw $1d,$6688
 	db $FF
 SafariZoneWestHiddenObjects:
-	db $05,$06,$35 ; XXX, y, x
+	db $05,$06,REVIVE
 	dbw $1d,$6688
 	db $FF
 SilphCo5FHiddenObjects:
-	db $03,$0c,$52 ; XXX, y, x
+	db $03,$0c,ELIXER
 	dbw $1d,$6688
 	db $FF
 SilphCo9FHiddenObjects:
-	db $0f,$02,$11 ; XXX, y, x
+	db $0f,$02,MAX_POTION
 	dbw $1d,$6688
 	db $FF
 CopycatsHouse2FHiddenObjects:
-	db $01,$01,$31 ; XXX, y, x
+	db $01,$01,NUGGET
 	dbw $1d,$6688
 	db $FF
 UnknownDungeon1HiddenObjects:
-	db $0b,$0e,$28 ; XXX, y, x
+	db $0b,$0e,RARE_CANDY
 	dbw $1d,$6688
 	db $FF
 UnknownDungeon3HiddenObjects:
-	db $03,$1b,$02 ; XXX, y, x
+	db $03,$1b,ULTRA_BALL
 	dbw $1d,$6688
 	db $FF
 PowerPlantHiddenObjects:
-	db $10,$11,$53 ; XXX, y, x
+	db $10,$11,MAX_ELIXER
 	dbw $1d,$6688
-	db $01,$0c,$4f ; XXX, y, x
+	db $01,$0c,PP_UP
 	dbw $1d,$6688
 	db $FF
 SeafoamIslands3HiddenObjects:
-	db $0f,$0f,$31 ; XXX, y, x
+	db $0f,$0f,NUGGET
 	dbw $1d,$6688
 	db $FF
 SeafoamIslands5HiddenObjects:
-	db $11,$19,$02 ; XXX, y, x
+	db $11,$19,ULTRA_BALL
 	dbw $1d,$6688
 	db $FF
 Mansion1HiddenObjects:
-	db $10,$08,$0a ; XXX, y, x
+	db $10,$08,MOON_STONE
 	dbw $1d,$6688
 	db $05,$02,$04 ; XXX, y, x
 	dbw $11,$4316
@@ -46779,13 +46779,13 @@ Mansion2HiddenObjects:
 	dbw $14,$6037
 	db $FF
 Mansion3HiddenObjects:
-	db $09,$01,$36 ; XXX, y, x
+	db $09,$01,MAX_REVIVE
 	dbw $1d,$6688
 	db $05,$0a,$04 ; XXX, y, x
 	dbw $14,$627a
 	db $FF
 Mansion4HiddenObjects:
-	db $09,$01,$28 ; XXX, y, x
+	db $09,$01,RARE_CANDY
 	dbw $1d,$6688
 	db $03,$14,$04 ; XXX, y, x
 	dbw $14,$6420
@@ -46793,21 +46793,21 @@ Mansion4HiddenObjects:
 	dbw $14,$6420
 	db $FF
 Route23HiddenObjects:
-	db $2c,$09,$10 ; XXX, y, x
+	db $2c,$09,FULL_RESTORE
 	dbw $1d,$6688
-	db $46,$13,$02 ; XXX, y, x
+	db $46,$13,ULTRA_BALL
 	dbw $1d,$6688
-	db $5a,$08,$51 ; XXX, y, x
+	db $5a,$08,MAX_ETHER
 	dbw $1d,$6688
 	db $FF
 VictoryRoad2HiddenObjects:
-	db $02,$05,$02 ; XXX, y, x
+	db $02,$05,ULTRA_BALL
 	dbw $1d,$6688
-	db $07,$1a,$10 ; XXX, y, x
+	db $07,$1a,FULL_RESTORE
 	dbw $1d,$6688
 	db $FF
 Unused6FHiddenObjects:
-	db $0b,$0e,$53 ; XXX, y, x
+	db $0b,$0e,MAX_ELIXER
 	dbw $1d,$6688
 	db $FF
 BillsHouseHiddenObjects:
@@ -46815,7 +46815,7 @@ BillsHouseHiddenObjects:
 	dbw $07,$6b6e
 	db $FF
 ViridianCityHiddenObjects:
-	db $04,$0e,$14 ; XXX, y, x
+	db $04,$0e,POTION
 	dbw $1d,$6688
 	db $FF
 SafariZoneRestHouse2HiddenObjects:
@@ -46891,11 +46891,11 @@ BikeShopHiddenObjects:
 	dbw $07,$694b
 	db $FF
 Route11HiddenObjects:
-	db $05,$30,$1d ; XXX, y, x
+	db $05,$30,ESCAPE_ROPE
 	dbw $1d,$6688
 	db $FF
 Route12HiddenObjects:
-	db $3f,$02,$12 ; XXX, y, x
+	db $3f,$02,HYPER_POTION
 	dbw $1d,$6688
 	db $FF
 SilphCo11FHiddenObjects:
@@ -46903,47 +46903,47 @@ SilphCo11FHiddenObjects:
 	dbw $18,$6516
 	db $FF
 Route17HiddenObjects:
-	db $0e,$0f,$28 ; XXX, y, x
+	db $0e,$0f,RARE_CANDY
 	dbw $1d,$6688
-	db $2d,$08,$10 ; XXX, y, x
+	db $2d,$08,FULL_RESTORE
 	dbw $1d,$6688
-	db $48,$11,$4f ; XXX, y, x
+	db $48,$11,PP_UP
 	dbw $1d,$6688
-	db $5b,$04,$36 ; XXX, y, x
+	db $5b,$04,MAX_REVIVE
 	dbw $1d,$6688
-	db $79,$08,$53 ; XXX, y, x
+	db $79,$08,MAX_ELIXER
 	dbw $1d,$6688
 	db $FF
 UndergroundPathNsHiddenObjects:
-	db $04,$03,$10 ; XXX, y, x
+	db $04,$03,FULL_RESTORE
 	dbw $1d,$6688
-	db $22,$04,$44 ; XXX, y, x
+	db $22,$04,X_SPECIAL
 	dbw $1d,$6688
 	db $FF
 UndergroundPathWeHiddenObjects:
-	db $02,$0c,$31 ; XXX, y, x
+	db $02,$0c,NUGGET
 	dbw $1d,$6688
-	db $05,$15,$52 ; XXX, y, x
+	db $05,$15,ELIXER
 	dbw $1d,$6688
 	db $FF
 CeladonCityHiddenObjects:
-	db $0f,$30,$4f ; XXX, y, x
+	db $0f,$30,PP_UP
 	dbw $1d,$6688
 	db $FF
 SeafoamIslands4HiddenObjects:
-	db $10,$09,$53 ; XXX, y, x
+	db $10,$09,MAX_ELIXER
 	dbw $1d,$6688
 	db $FF
 VermilionCityHiddenObjects:
-	db $0b,$0e,$51 ; XXX, y, x
+	db $0b,$0e,MAX_ETHER
 	dbw $1d,$6688
 	db $FF
 CeruleanCityHiddenObjects:
-	db $08,$0f,$28 ; XXX, y, x
+	db $08,$0f,RARE_CANDY
 	dbw $1d,$6688
 	db $FF
 Route4HiddenObjects:
-	db $03,$28,$03 ; XXX, y, x
+	db $03,$28,GREAT_BALL
 	dbw $1d,$6688
 	db $FF
 
