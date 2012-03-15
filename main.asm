@@ -3227,7 +3227,7 @@ Unknown152E: ; 152E
 GetBaseStats: ; 1537
 	ld a,[$ffb8]
 	push af
-	ld a,$0e
+	ld a,BANK(BulbasaurBaseStats)
 	ld [$ffb8],a
 	ld [$2000],a
 	push bc
@@ -3270,10 +3270,10 @@ GetBaseStats: ; 1537
 	ld [hl],d
 	jr .done\@
 .mew\@
-	ld hl,$425b
+	ld hl,MewBaseStats
 	ld de,$d0b8
 	ld bc,28
-	ld a,$01
+	ld a,BANK(MewBaseStats)
 	call FarCopyData
 .done\@
 	ld a,[$d0b5]
@@ -8714,7 +8714,7 @@ OakSpeech: ; 6115
 	ld a,[$D732]
 	bit 1,a ; XXX when is bit 1 set?
 	jp nz,Function61BC ; easter egg: skip the intro
-	ld de,$615F
+	ld de,ProfOakPic
 	ld bc,$1300
 	call IntroPredef3B   ; displays Oak pic?
 	call FadeInIntroPic
@@ -8733,7 +8733,7 @@ OakSpeech: ; 6115
 	call PrintText      ; Prints text box
 	call GBFadeOut2
 	call ClearScreen
-	ld de,$6EDE
+	ld de,RedPicFront
 	ld bc,$0400     ; affects the position of the player pic
 	call IntroPredef3B      ; displays player pic?
 	call MovePicLeft
@@ -8742,7 +8742,7 @@ OakSpeech: ; 6115
 	call $695D ; brings up NewName/Red/etc menu
 	call GBFadeOut2
 	call ClearScreen
-	ld de,$6049
+	ld de,Rival1Pic
 	ld bc,$1300
 	call IntroPredef3B ; displays rival pic
 	call FadeInIntroPic
@@ -8752,7 +8752,7 @@ OakSpeech: ; 6115
 Function61BC: ; 0x61bc
 	call GBFadeOut2
 	call ClearScreen
-	ld de,$6EDE
+	ld de,RedPicFront
 	ld bc,$0400
 	call IntroPredef3B
 	call GBFadeIn2
@@ -8774,12 +8774,12 @@ Function61BC: ; 0x61bc
 	ld hl,$8000
 	ld bc,$050C
 	call CopyVideoData
-	ld de,$6FE8
+	ld de,ShrinkPic1
 	ld bc,$0400
 	call IntroPredef3B
 	ld c,4
 	call DelayFrames
-	ld de,$7042
+	ld de,ShrinkPic2
 	ld bc,$0400
 	call IntroPredef3B
 	call $28A6
