@@ -1,8 +1,7 @@
-#!/usr/bin/python2.7
 #author: Bryan Bishop <kanzure@gmail.com>
 #date: 2012-01-03
 #purpose: map which addresses are left
-#note: using python2.7 because of subprocess
+#note: use python2.7 because of subprocess
 import sys, os
 from copy import copy, deepcopy
 import subprocess

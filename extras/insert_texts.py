@@ -1,4 +1,3 @@
-#!/usr/bin/python2.7
 #author: Bryan Bishop <kanzure@gmail.com>
 #date: 2012-01-07, 2012-01-17, 2012-01-27
 #insert TX_FAR targets into pokered.asm

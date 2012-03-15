@@ -1,4 +1,3 @@
-#!/usr/bin/python
 #author: Bryan Bishop <kanzure@gmail.com>
 #date: 2011-01-04
 #purpose: insert labels into map headers

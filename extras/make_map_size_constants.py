@@ -1,4 +1,3 @@
-#!/usr/bin/python
 #author: Bryan Bishop <kanzure@gmail.com>
 #date: 2012-01-15
 #dump map height/width constants

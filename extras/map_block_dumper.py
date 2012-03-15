@@ -1,8 +1,7 @@
-#!/usr/bin/python2.7
 #author: Bryan Bishop <kanzure@gmail.com>
 #date: 2012-01-03
 #purpose: extract .blk files from baserom.gbc
-#note: using python2.7 because of subprocess in analyze_incbins
+#note: use python2.7 because of subprocess in analyze_incbins
 import extract_maps #rom, assert_rom, load_rom, calculate_pointer, load_map_pointers, read_all_map_headers, map_headers
 from pretty_map_headers import map_name_cleaner
 from analyze_incbins import asm, offset_to_pointer, find_incbin_to_replace_for, split_incbin_line_into_three, generate_diff_insert, load_asm, isolate_incbins, process_incbins

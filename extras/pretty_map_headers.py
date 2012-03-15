@@ -1,4 +1,3 @@
-#!/usr/bin/python
 # -*- coding: utf-8 -*-
 #author: Bryan Bishop <kanzure@gmail.com>
 #date: 2012-01-02

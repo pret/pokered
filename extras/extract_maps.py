@@ -1,4 +1,3 @@
-#!/usr/bin/python
 #author: Bryan Bishop <kanzure@gmail.com>
 #date: 2012-01-02
 #url: http://hax.iimarck.us/files/rbheaders.txt

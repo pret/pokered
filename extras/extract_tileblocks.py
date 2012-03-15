@@ -1,4 +1,3 @@
-#!/usr/bin/python
 #author: Bryan Bishop <kanzure@gmail.com>
 #date: 2012-01-14
 #split out blocksets into binary data files

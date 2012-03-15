@@ -1,4 +1,3 @@
-#!/usr/bin/python2.7
 #author: Bryan Bishop <kanzure@gmail.com>
 #date: 2012-01-05
 #insert object data into pokered.asm
