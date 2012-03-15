@@ -46394,9 +46394,9 @@ ViridianSchoolHiddenObjects:
 	db $FF
 ViridianGymHiddenObjects:
 	db $0f,$0f,$04 ; XXX, y, x
-	dbw $18,$6419
+	dbw BANK(GymStatues),GymStatues
 	db $0f,$12,$04 ; XXX, y, x
-	dbw $18,$6419
+	dbw BANK(GymStatues),GymStatues
 	db $FF
 Museum1FHiddenObjects:
 	db $03,$02,$04 ; XXX, y, x
@@ -46406,9 +46406,9 @@ Museum1FHiddenObjects:
 	db $FF
 PewterGymHiddenObjects:
 	db $0a,$03,$04 ; XXX, y, x
-	dbw $18,$6419
+	dbw BANK(GymStatues),GymStatues
 	db $0a,$06,$04 ; XXX, y, x
-	dbw $18,$6419
+	dbw BANK(GymStatues),GymStatues
 	db $FF
 PewterMartHiddenObjects:
 	db $FF
@@ -46426,9 +46426,9 @@ CeruleanPokecenterHiddenObjects:
 	db $FF
 CeruleanGymHiddenObjects:
 	db $0b,$03,$04 ; XXX, y, x
-	dbw $18,$6419
+	dbw BANK(GymStatues),GymStatues
 	db $0b,$06,$04 ; XXX, y, x
-	dbw $18,$6419
+	dbw BANK(GymStatues),GymStatues
 	db $FF
 CeruleanMartHiddenObjects:
 	db $FF
@@ -46446,9 +46446,9 @@ VermilionPokecenterHiddenObjects:
 	db $FF
 VermilionGymHiddenObjects:
 	db $0e,$03,$04 ; XXX, y, x
-	dbw $18,$6419
+	dbw BANK(GymStatues),GymStatues
 	db $0e,$06,$04 ; XXX, y, x
-	dbw $18,$6419
+	dbw BANK(GymStatues),GymStatues
 	db $01,$06,$00 ; XXX, y, x
 	dbw $17,$5def
 	db $07,$01,$00 ; XXX, y, x
@@ -46494,9 +46494,9 @@ CeladonPokecenterHiddenObjects:
 	db $FF
 CeladonGymHiddenObjects:
 	db $0f,$03,$04 ; XXX, y, x
-	dbw $18,$6419
+	dbw BANK(GymStatues),GymStatues
 	db $0f,$06,$04 ; XXX, y, x
-	dbw $18,$6419
+	dbw BANK(GymStatues),GymStatues
 	db $FF
 GameCornerHiddenObjects:
 	db $0f,$12,$d0 ; XXX, y, x
@@ -46610,13 +46610,13 @@ FuchsiaPokecenterHiddenObjects:
 	db $FF
 FuchsiaGymHiddenObjects:
 	db $0f,$03,$04 ; XXX, y, x
-	dbw $18,$6419
+	dbw BANK(GymStatues),GymStatues
 	db $0f,$06,$04 ; XXX, y, x
-	dbw $18,$6419
+	dbw BANK(GymStatues),GymStatues
 	db $FF
 CinnabarGymHiddenObjects:
 	db $0d,$11,$04 ; XXX, y, x
-	dbw $18,$6419
+	dbw BANK(GymStatues),GymStatues
 	db $07,$0f,$01 ; XXX, y, x
 	dbw $07,$6a17
 	db $01,$0a,$12 ; XXX, y, x
@@ -46638,7 +46638,7 @@ CinnabarPokecenterHiddenObjects:
 	db $FF
 SaffronGymHiddenObjects:
 	db $0f,$09,$04 ; XXX, y, x
-	dbw $18,$6419
+	dbw BANK(GymStatues),GymStatues
 	db $FF
 MtMoonPokecenterHiddenObjects:
 	db $04,$00,$08 ; XXX, y, x
