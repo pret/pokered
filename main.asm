@@ -46300,7 +46300,7 @@ HiddenObjectPointers: ; 0x46a96
 	dw SaffronPokecenterHiddenObjects
 	dw PokemonTower5HiddenObjects
 	dw Route13HiddenObjects
-	dw SafarizoneentranceHiddenObjects
+	dw SafariZoneEntranceHiddenObjects
 	dw SafariZoneWestHiddenObjects
 	dw SilphCo5FHiddenObjects
 	dw SilphCo9FHiddenObjects
@@ -46323,7 +46323,7 @@ HiddenObjectPointers: ; 0x46a96
 	dw UnusedB9HiddenObjects
 	dw LavenderHouse1HiddenObjects
 	dw CeladonMansion5HiddenObjects
-	dw FightingdojoHiddenObjects
+	dw FightingDojoHiddenObjects
 	dw Route10HiddenObjects
 	dw IndigoPlateauLobbyHiddenObjects
 	dw CinnabarLab4HiddenObjects
@@ -46726,7 +46726,7 @@ Route13HiddenObjects:
 	db $0d,$10,CALCIUM
 	dbw $1d,$6688
 	db $FF
-SafarizoneentranceHiddenObjects:
+SafariZoneEntranceHiddenObjects:
 	db $01,$0a,NUGGET
 	dbw $1d,$6688
 	db $FF
@@ -46856,7 +46856,7 @@ CeladonMansion5HiddenObjects:
 	db $04,$03,$35 ; XXX, y, x
 	dbw $14,$6996
 	db $FF
-FightingdojoHiddenObjects:
+FightingDojoHiddenObjects:
 	db $09,$03,$04 ; XXX, y, x
 	dbw $14,$6a22
 	db $09,$06,$04 ; XXX, y, x
