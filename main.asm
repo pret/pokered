@@ -46166,7 +46166,7 @@ SeafoamIslands5Blocks: ; 0x468fa 135
 
 INCBIN "baserom.gbc",$46981,$46a40-$46981
 
-HiddenObjectMaps:
+HiddenObjectMaps: ; 0x46a40
 	db REDS_HOUSE_2F
 	db BLUES_HOUSE
 	db OAKS_LAB
@@ -46254,7 +46254,700 @@ HiddenObjectMaps:
 	db ROUTE_4
 	db $FF
 
-INCBIN "baserom.gbc",$46a96,$48000-$46a96
+HiddenObjectPointers: ; 0x46a96
+; each of these pointers is for the corresponding map in HiddenObjectMaps
+	dw RedsHouse2FHiddenObjects
+	dw BluesHouseHiddenObjects
+	dw OaksLabHiddenObjects
+	dw ViridianPokecenterHiddenObjects
+	dw ViridianMartHiddenObjects
+	dw ViridianSchoolHiddenObjects
+	dw ViridianGymHiddenObjects
+	dw Museum1FHiddenObjects
+	dw PewterGymHiddenObjects
+	dw PewterMartHiddenObjects
+	dw PewterPokecenterHiddenObjects
+	dw CeruleanPokecenterHiddenObjects
+	dw CeruleanGymHiddenObjects
+	dw CeruleanMartHiddenObjects
+	dw LavenderPokecenterHiddenObjects
+	dw VermilionPokecenterHiddenObjects
+	dw VermilionGymHiddenObjects
+	dw CeladonMansion2HiddenObjects
+	dw CeladonPokecenterHiddenObjects
+	dw CeladonGymHiddenObjects
+	dw GameCornerHiddenObjects
+	dw CeladonHotelHiddenObjects
+	dw FuchsiaPokecenterHiddenObjects
+	dw FuchsiaGymHiddenObjects
+	dw CinnabarGymHiddenObjects
+	dw CinnabarPokecenterHiddenObjects
+	dw SaffronGymHiddenObjects
+	dw MtMoonPokecenterHiddenObjects
+	dw RockTunnelPokecenterHiddenObjects
+	dw BattleCenterHiddenObjects
+	dw TradeCenterHiddenObjects
+	dw ViridianForestHiddenObjects
+	dw MtMoon3HiddenObjects
+	dw IndigoPlateauHiddenObjects
+	dw Route25HiddenObjects
+	dw Route9HiddenObjects
+	dw SSAnne6HiddenObjects
+	dw SSAnne10HiddenObjects
+	dw RocketHideout1HiddenObjects
+	dw RocketHideout3HiddenObjects
+	dw RocketHideout4HiddenObjects
+	dw SaffronPokecenterHiddenObjects
+	dw PokemonTower5HiddenObjects
+	dw Route13HiddenObjects
+	dw SafarizoneentranceHiddenObjects
+	dw SafariZoneWestHiddenObjects
+	dw SilphCo5FHiddenObjects
+	dw SilphCo9FHiddenObjects
+	dw CopycatsHouse2FHiddenObjects
+	dw UnknownDungeon1HiddenObjects
+	dw UnknownDungeon3HiddenObjects
+	dw PowerPlantHiddenObjects
+	dw SeafoamIslands3HiddenObjects
+	dw SeafoamIslands5HiddenObjects
+	dw Mansion1HiddenObjects
+	dw Mansion3HiddenObjects
+	dw Route23HiddenObjects
+	dw VictoryRoad2HiddenObjects
+	dw Unused6FHiddenObjects
+	dw BillsHouseHiddenObjects
+	dw ViridianCityHiddenObjects
+	dw SafariZoneRestHouse2HiddenObjects
+	dw SafariZoneRestHouse3HiddenObjects
+	dw SafariZoneRestHouse4HiddenObjects
+	dw UnusedB9HiddenObjects
+	dw LavenderHouse1HiddenObjects
+	dw CeladonMansion5HiddenObjects
+	dw FightingdojoHiddenObjects
+	dw Route10HiddenObjects
+	dw IndigoPlateauLobbyHiddenObjects
+	dw CinnabarLab4HiddenObjects
+	dw BikeShopHiddenObjects
+	dw Route11HiddenObjects
+	dw Route12HiddenObjects
+	dw Mansion2HiddenObjects
+	dw Mansion4HiddenObjects
+	dw SilphCo11FHiddenObjects
+	dw Route17HiddenObjects
+	dw UndergroundPathNsHiddenObjects
+	dw UndergroundPathWeHiddenObjects
+	dw CeladonCityHiddenObjects
+	dw SeafoamIslands4HiddenObjects
+	dw VermilionCityHiddenObjects
+	dw CeruleanCityHiddenObjects
+	dw Route4HiddenObjects
+
+BattleCenterHiddenObjects:
+	db $04,$05,$d0 ; XXX, y, x
+	dbw $08,$5845
+	db $04,$04,$d0 ; XXX, y, x
+	dbw $08,$5825
+	db $FF
+TradeCenterHiddenObjects:
+	db $04,$05,$d0 ; XXX, y, x
+	dbw $08,$5845
+	db $04,$04,$d0 ; XXX, y, x
+	dbw $08,$5825
+	db $FF
+RedsHouse2FHiddenObjects:
+	db $01,$00,$04 ; XXX, y, x
+	dbw $17,$5b86
+	db $05,$03,$d0 ; XXX, y, x
+	dbw $17,$5b79
+	db $FF
+BluesHouseHiddenObjects:
+	db $01,$00,$04 ; XXX, y, x
+	dbw $18,$6509
+	db $01,$01,$04 ; XXX, y, x
+	dbw $18,$6509
+	db $01,$07,$04 ; XXX, y, x
+	dbw $18,$6509
+	db $FF
+OaksLabHiddenObjects:
+	db $00,$04,$04 ; XXX, y, x
+	dbw $07,$6958
+	db $00,$05,$04 ; XXX, y, x
+	dbw $07,$6965
+	db $01,$00,$04 ; XXX, y, x
+	dbw $07,$6caf
+	db $01,$01,$04 ; XXX, y, x
+	dbw $07,$6caf
+	db $FF
+ViridianPokecenterHiddenObjects:
+	db $04,$00,$08 ; XXX, y, x
+	dbw $18,$645d
+	db $03,$0d,$04 ; XXX, y, x
+	dbw $18,$6516
+	db $FF
+ViridianMartHiddenObjects:
+	db $FF
+ViridianSchoolHiddenObjects:
+	db $04,$03,$20 ; XXX, y, x
+	dbw $14,$6996
+	db $00,$03,$21 ; XXX, y, x
+	dbw $17,$5c1a
+	db $FF
+ViridianGymHiddenObjects:
+	db $0f,$0f,$04 ; XXX, y, x
+	dbw $18,$6419
+	db $0f,$12,$04 ; XXX, y, x
+	dbw $18,$6419
+	db $FF
+Museum1FHiddenObjects:
+	db $03,$02,$04 ; XXX, y, x
+	dbw $17,$5bad
+	db $06,$02,$04 ; XXX, y, x
+	dbw $17,$5bc3
+	db $FF
+PewterGymHiddenObjects:
+	db $0a,$03,$04 ; XXX, y, x
+	dbw $18,$6419
+	db $0a,$06,$04 ; XXX, y, x
+	dbw $18,$6419
+	db $FF
+PewterMartHiddenObjects:
+	db $FF
+PewterPokecenterHiddenObjects:
+	db $04,$00,$08 ; XXX, y, x
+	dbw $18,$645d
+	db $03,$0d,$04 ; XXX, y, x
+	dbw $18,$6516
+	db $FF
+CeruleanPokecenterHiddenObjects:
+	db $04,$00,$08 ; XXX, y, x
+	dbw $18,$645d
+	db $03,$0d,$04 ; XXX, y, x
+	dbw $18,$6516
+	db $FF
+CeruleanGymHiddenObjects:
+	db $0b,$03,$04 ; XXX, y, x
+	dbw $18,$6419
+	db $0b,$06,$04 ; XXX, y, x
+	dbw $18,$6419
+	db $FF
+CeruleanMartHiddenObjects:
+	db $FF
+LavenderPokecenterHiddenObjects:
+	db $04,$00,$08 ; XXX, y, x
+	dbw $18,$645d
+	db $03,$0d,$04 ; XXX, y, x
+	dbw $18,$6516
+	db $FF
+VermilionPokecenterHiddenObjects:
+	db $03,$0d,$04 ; XXX, y, x
+	dbw $18,$6516
+	db $04,$00,$04 ; XXX, y, x
+	dbw $18,$645d
+	db $FF
+VermilionGymHiddenObjects:
+	db $0e,$03,$04 ; XXX, y, x
+	dbw $18,$6419
+	db $0e,$06,$04 ; XXX, y, x
+	dbw $18,$6419
+	db $01,$06,$00 ; XXX, y, x
+	dbw $17,$5def
+	db $07,$01,$00 ; XXX, y, x
+	dbw $17,$5dfc
+	db $09,$01,$01 ; XXX, y, x
+	dbw $17,$5dfc
+	db $0b,$01,$02 ; XXX, y, x
+	dbw $17,$5dfc
+	db $07,$03,$03 ; XXX, y, x
+	dbw $17,$5dfc
+	db $09,$03,$04 ; XXX, y, x
+	dbw $17,$5dfc
+	db $0b,$03,$05 ; XXX, y, x
+	dbw $17,$5dfc
+	db $07,$05,$06 ; XXX, y, x
+	dbw $17,$5dfc
+	db $09,$05,$07 ; XXX, y, x
+	dbw $17,$5dfc
+	db $0b,$05,$08 ; XXX, y, x
+	dbw $17,$5dfc
+	db $07,$07,$09 ; XXX, y, x
+	dbw $17,$5dfc
+	db $09,$07,$0a ; XXX, y, x
+	dbw $17,$5dfc
+	db $0b,$07,$0b ; XXX, y, x
+	dbw $17,$5dfc
+	db $07,$09,$0c ; XXX, y, x
+	dbw $17,$5dfc
+	db $09,$09,$0d ; XXX, y, x
+	dbw $17,$5dfc
+	db $0b,$09,$0e ; XXX, y, x
+	dbw $17,$5dfc
+	db $FF
+CeladonMansion2HiddenObjects:
+	db $05,$00,$04 ; XXX, y, x
+	dbw $18,$6516
+	db $FF
+CeladonPokecenterHiddenObjects:
+	db $04,$00,$08 ; XXX, y, x
+	dbw $18,$645d
+	db $03,$0d,$04 ; XXX, y, x
+	dbw $18,$6516
+	db $FF
+CeladonGymHiddenObjects:
+	db $0f,$03,$04 ; XXX, y, x
+	dbw $18,$6419
+	db $0f,$06,$04 ; XXX, y, x
+	dbw $18,$6419
+	db $FF
+GameCornerHiddenObjects:
+	db $0f,$12,$d0 ; XXX, y, x
+	dbw $0d,$7e2d
+	db $0e,$12,$d0 ; XXX, y, x
+	dbw $0d,$7e2d
+	db $0d,$12,$d0 ; XXX, y, x
+	dbw $0d,$7e2d
+	db $0c,$12,$d0 ; XXX, y, x
+	dbw $0d,$7e2d
+	db $0b,$12,$d0 ; XXX, y, x
+	dbw $0d,$7e2d
+	db $0a,$12,$ff ; XXX, y, x
+	dbw $0d,$7e2d
+	db $0a,$0d,$d0 ; XXX, y, x
+	dbw $0d,$7e2d
+	db $0b,$0d,$d0 ; XXX, y, x
+	dbw $0d,$7e2d
+	db $0c,$0d,$fe ; XXX, y, x
+	dbw $0d,$7e2d
+	db $0d,$0d,$d0 ; XXX, y, x
+	dbw $0d,$7e2d
+	db $0e,$0d,$d0 ; XXX, y, x
+	dbw $0d,$7e2d
+	db $0f,$0d,$d0 ; XXX, y, x
+	dbw $0d,$7e2d
+	db $0f,$0c,$d0 ; XXX, y, x
+	dbw $0d,$7e2d
+	db $0e,$0c,$d0 ; XXX, y, x
+	dbw $0d,$7e2d
+	db $0d,$0c,$d0 ; XXX, y, x
+	dbw $0d,$7e2d
+	db $0c,$0c,$d0 ; XXX, y, x
+	dbw $0d,$7e2d
+	db $0b,$0c,$d0 ; XXX, y, x
+	dbw $0d,$7e2d
+	db $0a,$0c,$d0 ; XXX, y, x
+	dbw $0d,$7e2d
+	db $0a,$07,$d0 ; XXX, y, x
+	dbw $0d,$7e2d
+	db $0b,$07,$d0 ; XXX, y, x
+	dbw $0d,$7e2d
+	db $0c,$07,$d0 ; XXX, y, x
+	dbw $0d,$7e2d
+	db $0d,$07,$d0 ; XXX, y, x
+	dbw $0d,$7e2d
+	db $0e,$07,$d0 ; XXX, y, x
+	dbw $0d,$7e2d
+	db $0f,$07,$d0 ; XXX, y, x
+	dbw $0d,$7e2d
+	db $0f,$06,$d0 ; XXX, y, x
+	dbw $0d,$7e2d
+	db $0e,$06,$d0 ; XXX, y, x
+	dbw $0d,$7e2d
+	db $0d,$06,$d0 ; XXX, y, x
+	dbw $0d,$7e2d
+	db $0c,$06,$fd ; XXX, y, x
+	dbw $0d,$7e2d
+	db $0b,$06,$d0 ; XXX, y, x
+	dbw $0d,$7e2d
+	db $0a,$06,$d0 ; XXX, y, x
+	dbw $0d,$7e2d
+	db $0a,$01,$d0 ; XXX, y, x
+	dbw $0d,$7e2d
+	db $0b,$01,$d0 ; XXX, y, x
+	dbw $0d,$7e2d
+	db $0c,$01,$d0 ; XXX, y, x
+	dbw $0d,$7e2d
+	db $0d,$01,$d0 ; XXX, y, x
+	dbw $0d,$7e2d
+	db $0e,$01,$d0 ; XXX, y, x
+	dbw $0d,$7e2d
+	db $0f,$01,$d0 ; XXX, y, x
+	dbw $0d,$7e2d
+	db $08,$00,$45 ; XXX, y, x
+	dbw $1d,$6799
+	db $10,$01,$45 ; XXX, y, x
+	dbw $1d,$6799
+	db $0b,$03,$4f ; XXX, y, x
+	dbw $1d,$6799
+	db $0e,$03,$45 ; XXX, y, x
+	dbw $1d,$6799
+	db $0c,$04,$45 ; XXX, y, x
+	dbw $1d,$6799
+	db $0c,$09,$4f ; XXX, y, x
+	dbw $1d,$6799
+	db $0f,$09,$45 ; XXX, y, x
+	dbw $1d,$6799
+	db $0e,$10,$45 ; XXX, y, x
+	dbw $1d,$6799
+	db $10,$0a,$45 ; XXX, y, x
+	dbw $1d,$6799
+	db $07,$0b,$63 ; XXX, y, x
+	dbw $1d,$6799
+	db $08,$0f,$9f ; XXX, y, x
+	dbw $1d,$6799
+	db $0f,$0c,$45 ; XXX, y, x
+	dbw $1d,$6799
+	db $FF
+CeladonHotelHiddenObjects:
+	db $03,$0d,$04 ; XXX, y, x
+	dbw $18,$6516
+	db $04,$00,$08 ; XXX, y, x
+	dbw $18,$645d
+	db $FF
+FuchsiaPokecenterHiddenObjects:
+	db $03,$0d,$04 ; XXX, y, x
+	dbw $18,$6516
+	db $04,$00,$04 ; XXX, y, x
+	dbw $18,$645d
+	db $FF
+FuchsiaGymHiddenObjects:
+	db $0f,$03,$04 ; XXX, y, x
+	dbw $18,$6419
+	db $0f,$06,$04 ; XXX, y, x
+	dbw $18,$6419
+	db $FF
+CinnabarGymHiddenObjects:
+	db $0d,$11,$04 ; XXX, y, x
+	dbw $18,$6419
+	db $07,$0f,$01 ; XXX, y, x
+	dbw $07,$6a17
+	db $01,$0a,$12 ; XXX, y, x
+	dbw $07,$6a17
+	db $07,$09,$13 ; XXX, y, x
+	dbw $07,$6a17
+	db $0d,$09,$14 ; XXX, y, x
+	dbw $07,$6a17
+	db $0d,$01,$05 ; XXX, y, x
+	dbw $07,$6a17
+	db $07,$01,$16 ; XXX, y, x
+	dbw $07,$6a17
+	db $FF
+CinnabarPokecenterHiddenObjects:
+	db $04,$00,$04 ; XXX, y, x
+	dbw $18,$645d
+	db $03,$0d,$04 ; XXX, y, x
+	dbw $18,$6516
+	db $FF
+SaffronGymHiddenObjects:
+	db $0f,$09,$04 ; XXX, y, x
+	dbw $18,$6419
+	db $FF
+MtMoonPokecenterHiddenObjects:
+	db $04,$00,$08 ; XXX, y, x
+	dbw $18,$645d
+	db $03,$0d,$04 ; XXX, y, x
+	dbw $18,$6516
+	db $FF
+RockTunnelPokecenterHiddenObjects:
+	db $04,$00,$08 ; XXX, y, x
+	dbw $18,$645d
+	db $03,$0d,$04 ; XXX, y, x
+	dbw $18,$6516
+	db $FF
+ViridianForestHiddenObjects:
+	db $12,$01,$14 ; XXX, y, x
+	dbw $1d,$6688
+	db $2a,$10,$0b ; XXX, y, x
+	dbw $1d,$6688
+	db $FF
+MtMoon3HiddenObjects:
+	db $0c,$12,$0a ; XXX, y, x
+	dbw $1d,$6688
+	db $09,$21,$50 ; XXX, y, x
+	dbw $1d,$6688
+	db $FF
+IndigoPlateauHiddenObjects:
+	db $0d,$08,$ff ; XXX, y, x
+	dbw $14,$6a2f
+	db $0d,$0b,$00 ; XXX, y, x
+	dbw $14,$6a2f
+	db $FF
+Route25HiddenObjects:
+	db $03,$26,$50 ; XXX, y, x
+	dbw $1d,$6688
+	db $01,$0a,$52 ; XXX, y, x
+	dbw $1d,$6688
+	db $FF
+Route9HiddenObjects:
+	db $07,$0e,$50 ; XXX, y, x
+	dbw $1d,$6688
+	db $FF
+SSAnne6HiddenObjects:
+	db $05,$0d,$00 ; XXX, y, x
+	dbw $17,$5def
+	db $07,$0d,$00 ; XXX, y, x
+	dbw $17,$5def
+	db $09,$0d,$03 ; XXX, y, x
+	dbw $1d,$6688
+	db $FF
+SSAnne10HiddenObjects:
+	db $01,$03,$12 ; XXX, y, x
+	dbw $1d,$6688
+	db $FF
+Route10HiddenObjects:
+	db $11,$09,$13 ; XXX, y, x
+	dbw $1d,$6688
+	db $35,$10,$51 ; XXX, y, x
+	dbw $1d,$6688
+	db $FF
+RocketHideout1HiddenObjects:
+	db $0f,$15,$4f ; XXX, y, x
+	dbw $1d,$6688
+	db $FF
+RocketHideout3HiddenObjects:
+	db $11,$1b,$31 ; XXX, y, x
+	dbw $1d,$6688
+	db $FF
+RocketHideout4HiddenObjects:
+	db $01,$19,$13 ; XXX, y, x
+	dbw $1d,$6688
+	db $FF
+SaffronPokecenterHiddenObjects:
+	db $04,$00,$04 ; XXX, y, x
+	dbw $18,$645d
+	db $03,$0d,$04 ; XXX, y, x
+	dbw $18,$6516
+	db $FF
+PokemonTower5HiddenObjects:
+	db $0c,$04,$52 ; XXX, y, x
+	dbw $1d,$6688
+	db $FF
+Route13HiddenObjects:
+	db $0e,$01,$4f ; XXX, y, x
+	dbw $1d,$6688
+	db $0d,$10,$27 ; XXX, y, x
+	dbw $1d,$6688
+	db $FF
+SafarizoneentranceHiddenObjects:
+	db $01,$0a,$31 ; XXX, y, x
+	dbw $1d,$6688
+	db $FF
+SafariZoneWestHiddenObjects:
+	db $05,$06,$35 ; XXX, y, x
+	dbw $1d,$6688
+	db $FF
+SilphCo5FHiddenObjects:
+	db $03,$0c,$52 ; XXX, y, x
+	dbw $1d,$6688
+	db $FF
+SilphCo9FHiddenObjects:
+	db $0f,$02,$11 ; XXX, y, x
+	dbw $1d,$6688
+	db $FF
+CopycatsHouse2FHiddenObjects:
+	db $01,$01,$31 ; XXX, y, x
+	dbw $1d,$6688
+	db $FF
+UnknownDungeon1HiddenObjects:
+	db $0b,$0e,$28 ; XXX, y, x
+	dbw $1d,$6688
+	db $FF
+UnknownDungeon3HiddenObjects:
+	db $03,$1b,$02 ; XXX, y, x
+	dbw $1d,$6688
+	db $FF
+PowerPlantHiddenObjects:
+	db $10,$11,$53 ; XXX, y, x
+	dbw $1d,$6688
+	db $01,$0c,$4f ; XXX, y, x
+	dbw $1d,$6688
+	db $FF
+SeafoamIslands3HiddenObjects:
+	db $0f,$0f,$31 ; XXX, y, x
+	dbw $1d,$6688
+	db $FF
+SeafoamIslands5HiddenObjects:
+	db $11,$19,$02 ; XXX, y, x
+	dbw $1d,$6688
+	db $FF
+Mansion1HiddenObjects:
+	db $10,$08,$0a ; XXX, y, x
+	dbw $1d,$6688
+	db $05,$02,$04 ; XXX, y, x
+	dbw $11,$4316
+	db $FF
+Mansion2HiddenObjects:
+	db $0b,$02,$04 ; XXX, y, x
+	dbw $14,$6037
+	db $FF
+Mansion3HiddenObjects:
+	db $09,$01,$36 ; XXX, y, x
+	dbw $1d,$6688
+	db $05,$0a,$04 ; XXX, y, x
+	dbw $14,$627a
+	db $FF
+Mansion4HiddenObjects:
+	db $09,$01,$28 ; XXX, y, x
+	dbw $1d,$6688
+	db $03,$14,$04 ; XXX, y, x
+	dbw $14,$6420
+	db $19,$12,$04 ; XXX, y, x
+	dbw $14,$6420
+	db $FF
+Route23HiddenObjects:
+	db $2c,$09,$10 ; XXX, y, x
+	dbw $1d,$6688
+	db $46,$13,$02 ; XXX, y, x
+	dbw $1d,$6688
+	db $5a,$08,$51 ; XXX, y, x
+	dbw $1d,$6688
+	db $FF
+VictoryRoad2HiddenObjects:
+	db $02,$05,$02 ; XXX, y, x
+	dbw $1d,$6688
+	db $07,$1a,$10 ; XXX, y, x
+	dbw $1d,$6688
+	db $FF
+Unused6FHiddenObjects:
+	db $0b,$0e,$53 ; XXX, y, x
+	dbw $1d,$6688
+	db $FF
+BillsHouseHiddenObjects:
+	db $04,$01,$04 ; XXX, y, x
+	dbw $07,$6b6e
+	db $FF
+ViridianCityHiddenObjects:
+	db $04,$0e,$14 ; XXX, y, x
+	dbw $1d,$6688
+	db $FF
+SafariZoneRestHouse2HiddenObjects:
+	db $04,$00,$08 ; XXX, y, x
+	dbw $18,$645d
+	db $03,$0d,$04 ; XXX, y, x
+	dbw $18,$6516
+	db $FF
+SafariZoneRestHouse3HiddenObjects:
+	db $04,$00,$08 ; XXX, y, x
+	dbw $18,$645d
+	db $03,$0d,$04 ; XXX, y, x
+	dbw $18,$6516
+	db $FF
+SafariZoneRestHouse4HiddenObjects:
+	db $04,$00,$08 ; XXX, y, x
+	dbw $18,$645d
+	db $03,$0d,$04 ; XXX, y, x
+	dbw $18,$6516
+	db $FF
+UnusedB9HiddenObjects:
+	db $02,$01,$04 ; XXX, y, x
+	dbw $17,$5b8f
+	db $FF
+LavenderHouse1HiddenObjects:
+	db $01,$00,$00 ; XXX, y, x
+	dbw $07,$6b60
+	db $01,$01,$00 ; XXX, y, x
+	dbw $07,$6b60
+	db $01,$07,$00 ; XXX, y, x
+	dbw $07,$6b60
+	db $FF
+CeladonMansion5HiddenObjects:
+	db $00,$03,$34 ; XXX, y, x
+	dbw $17,$5c1a
+	db $00,$04,$34 ; XXX, y, x
+	dbw $17,$5c1a
+	db $04,$03,$35 ; XXX, y, x
+	dbw $14,$6996
+	db $FF
+FightingdojoHiddenObjects:
+	db $09,$03,$04 ; XXX, y, x
+	dbw $14,$6a22
+	db $09,$06,$04 ; XXX, y, x
+	dbw $14,$6a22
+	db $00,$04,$04 ; XXX, y, x
+	dbw $14,$6a08
+	db $00,$05,$04 ; XXX, y, x
+	dbw $14,$6a15
+	db $FF
+IndigoPlateauLobbyHiddenObjects:
+	db $07,$0f,$04 ; XXX, y, x
+	dbw $18,$6516
+	db $FF
+CinnabarLab4HiddenObjects:
+	db $04,$00,$04 ; XXX, y, x
+	dbw $18,$6516
+	db $04,$02,$04 ; XXX, y, x
+	dbw $18,$6516
+	db $FF
+BikeShopHiddenObjects:
+	db $00,$01,$d0 ; XXX, y, x
+	dbw $07,$694b
+	db $01,$02,$d0 ; XXX, y, x
+	dbw $07,$694b
+	db $02,$01,$d0 ; XXX, y, x
+	dbw $07,$694b
+	db $02,$03,$d0 ; XXX, y, x
+	dbw $07,$694b
+	db $04,$00,$d0 ; XXX, y, x
+	dbw $07,$694b
+	db $05,$01,$d0 ; XXX, y, x
+	dbw $07,$694b
+	db $FF
+Route11HiddenObjects:
+	db $05,$30,$1d ; XXX, y, x
+	dbw $1d,$6688
+	db $FF
+Route12HiddenObjects:
+	db $3f,$02,$12 ; XXX, y, x
+	dbw $1d,$6688
+	db $FF
+SilphCo11FHiddenObjects:
+	db $0c,$0a,$04 ; XXX, y, x
+	dbw $18,$6516
+	db $FF
+Route17HiddenObjects:
+	db $0e,$0f,$28 ; XXX, y, x
+	dbw $1d,$6688
+	db $2d,$08,$10 ; XXX, y, x
+	dbw $1d,$6688
+	db $48,$11,$4f ; XXX, y, x
+	dbw $1d,$6688
+	db $5b,$04,$36 ; XXX, y, x
+	dbw $1d,$6688
+	db $79,$08,$53 ; XXX, y, x
+	dbw $1d,$6688
+	db $FF
+UndergroundPathNsHiddenObjects:
+	db $04,$03,$10 ; XXX, y, x
+	dbw $1d,$6688
+	db $22,$04,$44 ; XXX, y, x
+	dbw $1d,$6688
+	db $FF
+UndergroundPathWeHiddenObjects:
+	db $02,$0c,$31 ; XXX, y, x
+	dbw $1d,$6688
+	db $05,$15,$52 ; XXX, y, x
+	dbw $1d,$6688
+	db $FF
+CeladonCityHiddenObjects:
+	db $0f,$30,$4f ; XXX, y, x
+	dbw $1d,$6688
+	db $FF
+SeafoamIslands4HiddenObjects:
+	db $10,$09,$53 ; XXX, y, x
+	dbw $1d,$6688
+	db $FF
+VermilionCityHiddenObjects:
+	db $0b,$0e,$51 ; XXX, y, x
+	dbw $1d,$6688
+	db $FF
+CeruleanCityHiddenObjects:
+	db $08,$0f,$28 ; XXX, y, x
+	dbw $1d,$6688
+	db $FF
+Route4HiddenObjects:
+	db $03,$28,$03 ; XXX, y, x
+	dbw $1d,$6688
+	db $FF
+
+INCBIN "baserom.gbc",$470ab,$48000-$470ab
 
 SECTION "bank12",DATA,BANK[$12]
 
