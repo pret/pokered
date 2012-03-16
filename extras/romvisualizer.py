@@ -10,6 +10,7 @@ def take_snapshot_image(changeset_number):
     print "reverting main.asm to r" + str(changeset_number)
 
     #revert the file (it used to be common.asm)
+    os.system("rm ../main.asm; rm ../common.asm; rm ../pokered.asm")
     os.system("hg revert ../main.asm -r" + str(changeset_number))
     os.system("hg revert ../common.asm -r" + str(changeset_number))
     os.system("hg revert ../pokered.asm -r" + str(changeset_number))
