@@ -33,8 +33,8 @@ for incbin_key in analyze_incbins.processed_incbins:
     end = incbin["end"]
 
     for pos in range(start, end+1):
-        widthx = pos % width
-        heighty = floor(pos / height)
+        widthx = int(pos % width)
+        heighty = int(floor(pos / height))
         im.putpixel((widthx, heighty), 1)
 
 im.save("test.png")

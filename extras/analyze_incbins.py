@@ -27,9 +27,23 @@ def offset_to_pointer(offset):
     return int(offset) % 0x4000 + 0x4000
 
 def load_asm(filename="../main.asm"):
-    "loads the asm source code into memory"
+    """loads the asm source code into memory
+    this also detects if the revision of the repository
+    is using main.asm, common.asm or pokered.asm, which is
+    useful when generating images in romvisualizer.py"""
     global asm
-    asm = open(filename, "r").read().split("\n")
+    defaults = ["../main.asm", "../common.asm", "../pokered.asm"]
+    if filename in defaults:
+        if os.path.exists("../main.asm"):
+            asm = open("../main.asm", "r").read().split("\n")
+        elif os.path.exists("../common.asm"):
+            asm = open("../common.asm", "r").read().split("\n")
+        elif os.path.exists("../pokered.asm"):
+            asm = open("../pokered.asm", "r").read().split("\n")
+        else:
+            raise "this shouldn't happen"
+    else:
+        asm = open(filename, "r").read().split("\n")
     return asm
 
 def isolate_incbins():
