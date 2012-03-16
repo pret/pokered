@@ -368,7 +368,7 @@ MapHeaderPointers: ; $01AE
 	dw SaffronPokecenter_h
 	dw SaffronHouse2_h
 	dw Route15Gate_h
-	dw $563e
+	dw Route15GateUpstairs_h
 	dw Route16GateMap_h
 	dw Route16GateUpstairs_h
 	dw Route16House_h
@@ -10731,7 +10731,7 @@ MapHeaderBanks: ; 423D
 	db BANK(SaffronPokecenter_h)
 	db BANK(SaffronHouse2_h)
 	db BANK(Route15Gate_h)
-	db $12
+	db BANK(Route15GateUpstairs_h)
 	db BANK(Route16GateMap_h)
 	db BANK(Route16GateUpstairs_h)
 	db BANK(Route16House_h)
@@ -47015,6 +47015,7 @@ Route11GateBlocks: ; 40c7 20
 Route18GateHeaderBlocks:
 Route16GateUpstairsBlocks:
 Route12GateUpstairsBlocks:
+Route15GateUpstairsBlocks:
 Route11GateUpstairsBlocks: ; 40db 16
 	INCBIN "maps/route11gateupstairs.blk"
 
@@ -49366,7 +49367,7 @@ Route12GateUpstairsObject: ; 0x495de (size=24)
 
 Route15Gate_h: ; 0x495f6 to 0x49602 (12 bytes) (id=184)
 	db $0c ; tileset
-	db ROUTE_15_GATE_HEIGHT, ROUTE_15_GATE_WIDTH ; dimensions (y, x)
+	db ROUTE_15_GATE_1F_HEIGHT, ROUTE_15_GATE_1F_WIDTH ; dimensions (y, x)
 	dw Route15GateBlocks, Route15GateTexts, Route15GateScript ; blocks, texts, scripts
 	db $00 ; connections
 
@@ -49391,7 +49392,7 @@ Route15GateObject: ; 0x4960c (size=50)
 	db $5, $0, $1, $ff
 	db $4, $7, $2, $ff
 	db $5, $7, $3, $ff
-	db $8, $6, $0, $b9
+	db $8, $6, $0, ROUTE_15_GATE_2F
 
 	db $0 ; signs
 
@@ -49405,21 +49406,80 @@ Route15GateObject: ; 0x4960c (size=50)
 	EVENT_DISP $4, $5, $7
 	EVENT_DISP $4, $8, $6
 
-INCBIN "baserom.gbc",$4963e,$4968c - $4963e
+Route15GateUpstairs_h: ; 0x4963e
+	db $0c ; tileset
+	db ROUTE_15_GATE_2F_HEIGHT, ROUTE_15_GATE_2F_WIDTH ; dimensions (y, x)
+	dw Route15GateUpstairsBlocks, Route15GateUpstairsTexts, Route15GateUpstairsScript ; blocks, texts, scripts
+	;dw 40db, 564d, 564a ; blocks, texts, scripts
+	db $00 ; connections
+	dw Route15GateUpstairsObject ; objects
+
+Route15GateUpstairsScript: ; 0x4964a
+	jp $3c3f
+
+Route15GateUpstairsTexts: ; 0x4964d
+	dw Route15GateUpstairsText1
+	dw Route15GateUpstairsText2
+
+Route15GateUpstairsText1: ; 0x49651
+	db $8
+	ld a, [$d7dd]
+	bit 0, a
+	jr nz, .asm_49683 ; 0x49657 $2a
+	ld a, $32
+	ld [$ff00+$db], a
+	ld a, $4b
+	ld [$ff00+$dc], a
+	ld [$d11e], a
+	call GetItemName
+	ld hl, $cd6d
+	ld de, $cc5b
+	ld bc, $000d
+	call CopyData
+	ld a, $62
+	call Predef
+	ld a, [$ff00+$db]
+	cp $1
+	jr nz, .asm_49689 ; 0x4967c $b
+	ld hl, $d7dd
+	set 0, [hl]
+.asm_49683
+	ld hl, UnnamedText_4968c
+	call PrintText
+.asm_49689
+	jp $24d7
+; 0x4968c
 
 UnnamedText_4968c: ; 0x4968c
 	TX_FAR _UnnamedText_4968c
 	db $50
 ; 0x4968c + 5 bytes
 
-INCBIN "baserom.gbc",$49691,$49698 - $49691
+Route15GateUpstairsText2:
+	db $8
+	ld hl, UnnamedText_49698
+	jp Unnamed_55c9
+; 0x49698
 
 UnnamedText_49698: ; 0x49698
 	TX_FAR _UnnamedText_49698
 	db $50
 ; 0x49698 + 5 bytes
 
-INCBIN "baserom.gbc",$4969d,$15
+Route15GateUpstairsObject: ; 0x4969d
+	db $a ; border tile
+
+	db $1 ; warps
+	db $7, $7, $4, ROUTE_15_GATE_1F
+
+	db $1 ; signs
+	db $2, $6, $2 ; Route15GateUpstairsText2
+
+	db $1 ; people
+	db SPRITE_OAK_AIDE, $2 + 4, $4 + 4, $ff, $d0, $1
+
+	; warp-to
+	EVENT_DISP $4, $7, $7 ; ROUTE_15_GATE_1F
 
 Route16GateMap_h: ; 0x496b2 to 0x496be (12 bytes) (id=186)
 	db $0c ; tileset
@@ -58038,10 +58098,10 @@ Route15Object: ; 0x5894e (size=126)
 	db $43 ; border tile
 
 	db $4 ; warps
-	db $8, $7, $0, ROUTE_15_GATE
-	db $9, $7, $1, ROUTE_15_GATE
-	db $8, $e, $2, ROUTE_15_GATE
-	db $9, $e, $3, ROUTE_15_GATE
+	db $8, $7, $0, ROUTE_15_GATE_1F
+	db $9, $7, $1, ROUTE_15_GATE_1F
+	db $8, $e, $2, ROUTE_15_GATE_1F
+	db $9, $e, $3, ROUTE_15_GATE_1F
 
 	db $1 ; signs
 	db $9, $27, $c ; Route15Text12
@@ -58060,10 +58120,10 @@ Route15Object: ; 0x5894e (size=126)
 	db SPRITE_BALL, $5 + 4, $12 + 4, $ff, $ff, $8b, TM_20 ; item
 
 	; warp-to
-	EVENT_DISP $1e, $8, $7 ; ROUTE_15_GATE
-	EVENT_DISP $1e, $9, $7 ; ROUTE_15_GATE
-	EVENT_DISP $1e, $8, $e ; ROUTE_15_GATE
-	EVENT_DISP $1e, $9, $e ; ROUTE_15_GATE
+	EVENT_DISP $1e, $8, $7 ; ROUTE_15_GATE_1F
+	EVENT_DISP $1e, $9, $7 ; ROUTE_15_GATE_1F
+	EVENT_DISP $1e, $8, $e ; ROUTE_15_GATE_1F
+	EVENT_DISP $1e, $9, $e ; ROUTE_15_GATE_1F
 
 Route15Blocks: ; 0x589cc 270
 	INCBIN "maps/route15.blk"
