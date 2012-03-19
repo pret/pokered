@@ -72365,12 +72365,115 @@ UnnamedText_76683: ; 0x76683
 ; 0x76683 + 5 bytes
 
 HiddenItems: ; 0x76688
-INCBIN "baserom.gbc",$76688,$76794 - $76688
+	ld hl, HiddenItemCoords
+	call Label76857
+	ld [$cd41], a
+	ld hl, $d6f0
+	ld a, [$cd41]
+	ld c, a
+	ld b, $2
+	ld a, $10
+	call Predef
+	ld a, c
+	and a
+	ret nz
+	call $3c3c
+	ld a, $1
+	ld [$cc3c], a
+	ld a, [$cd3d] ; item ID
+	ld [$d11e], a
+	call GetItemName
+	ld a, $24
+	jp $3ef5
 
-UnnamedText_76794: ; 0x76794
+HiddenItemCoords: ; 0x766b8
+; map ID, then coords
+	db VIRIDIAN_FOREST,$12,$01
+	db VIRIDIAN_FOREST,$2a,$10
+	db MT_MOON_3,$0c,$12
+	db ROUTE_25,$03,$26
+	db ROUTE_9,$07,$0e
+	db SS_ANNE_6,$09,$0d
+	db SS_ANNE_10,$01,$03
+	db ROUTE_10,$11,$09
+	db ROUTE_10,$35,$10
+	db ROCKET_HIDEOUT_1,$0f,$15
+	db ROCKET_HIDEOUT_3,$11,$1b
+	db ROCKET_HIDEOUT_4,$01,$19
+	db POKEMONTOWER_5,$0c,$04
+	db ROUTE_13,$0e,$01
+	db ROUTE_13,$0d,$10
+	db MANSION_4,$09,$01
+	db SAFARIZONEENTRANCE,$01,$0a
+	db SAFARI_ZONE_WEST,$05,$06
+	db SILPH_CO_5F,$03,$0c
+	db SILPH_CO_9F,$0f,$02
+	db COPYCATS_HOUSE_2F,$01,$01
+	db UNKNOWN_DUNGEON_1,$0b,$0e
+	db UNKNOWN_DUNGEON_3,$03,$1b
+	db POWER_PLANT,$10,$11
+	db POWER_PLANT,$01,$0c
+	db SEAFOAM_ISLANDS_3,$0f,$0f
+	db SEAFOAM_ISLANDS_5,$11,$19
+	db MANSION_1,$10,$08
+	db MANSION_3,$09,$01
+	db ROUTE_23,$2c,$09
+	db ROUTE_23,$46,$13
+	db ROUTE_23,$5a,$08
+	db VICTORY_ROAD_2,$02,$05
+	db VICTORY_ROAD_2,$07,$1a
+	db $6f,$0b,$0e
+	db VIRIDIAN_CITY,$04,$0e
+	db ROUTE_11,$05,$30
+	db ROUTE_12,$3f,$02
+	db ROUTE_17,$0e,$0f
+	db ROUTE_17,$2d,$08
+	db ROUTE_17,$48,$11
+	db ROUTE_17,$5b,$04
+	db ROUTE_17,$79,$08
+	db UNDERGROUND_PATH_NS,$04,$03
+	db UNDERGROUND_PATH_NS,$22,$04
+	db UNDERGROUND_PATH_WE,$02,$0c
+	db UNDERGROUND_PATH_WE,$05,$15
+	db CELADON_CITY,$0f,$30
+	db ROUTE_25,$01,$0a
+	db MT_MOON_3,$09,$21
+	db SEAFOAM_ISLANDS_4,$10,$09
+	db VERMILION_CITY,$0b,$0e
+	db CERULEAN_CITY,$08,$0f
+	db ROUTE_4,$03,$28
+	db $ff
+
+FoundHiddenItemText: ; 0x7675b
+; XXX where is the pointer to this?
+	TX_FAR UnnamedText_894d0
+	db $8
+	ld a, [$cd3d] ; item ID
+	ld b, a
+	ld c, 1 ; quantity
+	call GiveItem
+	jr nc, .bagfull ; 0x76769 $19
+	ld hl, $d6f0
+	ld a, [$cd41]
+	ld c, a
+	ld b, $1
+	ld a, $10
+	call Predef
+	ld a, $89
+	call $3740 ; play sound
+	call $3748 ; wait for sound to finish playing
+	jp TextScriptEnd
+.bagfull
+	call $3865 ; wait for button press
+	xor a
+	ld [$cc3c], a
+	ld hl, HiddenItemBagFullText
+	call PrintText
+	jp TextScriptEnd
+
+HiddenItemBagFullText: ; 0x76794
 	TX_FAR _UnnamedText_76794
 	db $50
-; 0x76794 + 5 bytes
 
 HiddenCoins: ; 0x76799
 INCBIN "baserom.gbc",$76799,$76852 - $76799
@@ -72378,11 +72481,35 @@ INCBIN "baserom.gbc",$76799,$76852 - $76799
 UnnamedText_76852: ; 0x76852
 	TX_FAR _UnnamedText_76852
 	db $50
-; 0x76852 + 5 bytes
 
-INCBIN "baserom.gbc",$76857,$76880 - $76857
-
-;I'm pretty sure that the rest of the bank is assembly and thus doesn't use any of the 0s, but I've included some to be sure
+Label76857: ; 0x76857
+	ld a, [$cd40]
+	ld d, a
+	ld a, [$cd41]
+	ld e, a
+	ld a, [W_CURMAP]
+	ld b, a
+	ld c, $ff
+.loop
+	inc c
+	ld a, [hli]
+	cp $ff ; end of the list?
+	ret z  ; if so, we're done here
+	cp b
+	jr nz, .asm_76877 ; 0x7686b $a
+	ld a, [hli]
+	cp d
+	jr nz, .asm_76878 ; 0x7686f $7
+	ld a, [hli]
+	cp e
+	jr nz, .loop
+	ld a, c
+	ret
+.asm_76877
+	inc hl
+.asm_76878
+	inc hl
+	jr .loop
 
 SECTION "bank1E",DATA,BANK[$1E]
 
