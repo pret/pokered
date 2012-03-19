@@ -46571,29 +46571,29 @@ GameCornerHiddenObjects:
 	dbw $0d,$7e2d
 	db $0f,$01,$d0 ; XXX, y, x
 	dbw $0d,$7e2d
-	db $08,$00,$45 ; XXX, y, x
+	db $08,$00,COIN+10
 	dbw BANK(HiddenCoins),HiddenCoins
-	db $10,$01,$45 ; XXX, y, x
+	db $10,$01,COIN+10
 	dbw BANK(HiddenCoins),HiddenCoins
-	db $0b,$03,$4f ; XXX, y, x
+	db $0b,$03,COIN+20
 	dbw BANK(HiddenCoins),HiddenCoins
-	db $0e,$03,$45 ; XXX, y, x
+	db $0e,$03,COIN+10
 	dbw BANK(HiddenCoins),HiddenCoins
-	db $0c,$04,$45 ; XXX, y, x
+	db $0c,$04,COIN+10
 	dbw BANK(HiddenCoins),HiddenCoins
-	db $0c,$09,$4f ; XXX, y, x
+	db $0c,$09,COIN+20
 	dbw BANK(HiddenCoins),HiddenCoins
-	db $0f,$09,$45 ; XXX, y, x
+	db $0f,$09,COIN+10
 	dbw BANK(HiddenCoins),HiddenCoins
-	db $0e,$10,$45 ; XXX, y, x
+	db $0e,$10,COIN+10
 	dbw BANK(HiddenCoins),HiddenCoins
-	db $10,$0a,$45 ; XXX, y, x
+	db $10,$0a,COIN+10
 	dbw BANK(HiddenCoins),HiddenCoins
-	db $07,$0b,$63 ; XXX, y, x
+	db $07,$0b,COIN+40
 	dbw BANK(HiddenCoins),HiddenCoins
-	db $08,$0f,$9f ; XXX, y, x
+	db $08,$0f,COIN+100
 	dbw BANK(HiddenCoins),HiddenCoins
-	db $0f,$0c,$45 ; XXX, y, x
+	db $0f,$0c,COIN+10
 	dbw BANK(HiddenCoins),HiddenCoins
 	db $FF
 CeladonHotelHiddenObjects:
@@ -72476,10 +72476,101 @@ HiddenItemBagFullText: ; 0x76794
 	db $50
 
 HiddenCoins: ; 0x76799
-INCBIN "baserom.gbc",$76799,$76852 - $76799
+	ld b, COIN_CASE
+	ld a, $1c
+	call Predef
+	ld a, b
+	and a
+	ret z
+	ld hl, HiddenCoinCoords
+	call Label76857
+	ld [$cd41], a
+	ld hl, $d6fe
+	ld a, [$cd41]
+	ld c, a
+	ld b, $2
+	ld a, $10
+	call Predef
+	ld a, c
+	and a
+	ret nz
+	xor a
+	ld [$ff00+$9f], a
+	ld [$ff00+$a0], a
+	ld [$ff00+$a1], a
+	ld a, [$cd3d]
+	sub COIN
+	cp 10
+	jr z, .bcd10
+	cp 20
+	jr z, .bcd20
+	cp 40
+	jr z, .bcd20
+	jr .bcd100
+.bcd10
+	ld a, $10
+	ld [$ff00+$a1], a
+	jr .bcddone
+.bcd20
+	ld a, $20
+	ld [$ff00+$a1], a
+	jr .bcddone
+.bcd40 ; due to a typo, this is never used
+	ld a, $40
+	ld [$ff00+$a1], a
+	jr .bcddone
+.bcd100
+	ld a, $1
+	ld [$ff00+$a0], a
+.bcddone
+	ld de, $d5a5
+	ld hl, $ffa1
+	ld c, $2
+	ld a, $b
+	call Predef
+	ld hl, $d6fe
+	ld a, [$cd41]
+	ld c, a
+	ld b, $1
+	ld a, $10
+	call Predef
+	call $3c3c
+	ld a, [W_PLAYERCOINS1]
+	cp $99
+	jr nz, .RoomInCoinCase
+	ld a, [W_PLAYERCOINS2]
+	cp $99
+	jr nz, .RoomInCoinCase
+	ld a, $2c
+	jr .done
+.RoomInCoinCase
+	ld a, $2b
+.done
+	jp $3ef5
 
-UnnamedText_76852: ; 0x76852
-	TX_FAR _UnnamedText_76852
+HiddenCoinCoords: ; 0x76822
+	db GAME_CORNER,$08,$00
+	db GAME_CORNER,$10,$01
+	db GAME_CORNER,$0b,$03
+	db GAME_CORNER,$0e,$03
+	db GAME_CORNER,$0c,$04
+	db GAME_CORNER,$0c,$09
+	db GAME_CORNER,$0f,$09
+	db GAME_CORNER,$0e,$10
+	db GAME_CORNER,$10,$0a
+	db GAME_CORNER,$07,$0b
+	db GAME_CORNER,$08,$0f
+	db GAME_CORNER,$0f,$0c
+	db $ff
+
+FoundHiddenCoinsText: ; 0x76847
+	TX_FAR _FoundHiddenCoinsText
+	db $10,"@"
+
+DroppedHiddenCoinsText: ; 0x7684d
+	TX_FAR _FoundHiddenCoins2Text
+	db $10
+	TX_FAR _DroppedHiddenCoinsText
 	db $50
 
 Label76857: ; 0x76857
@@ -77748,21 +77839,21 @@ _UnnamedText_76794: ; 0x894e1
 	db "other items!", $57
 ; 0x894e1 + 42 bytes
 
-UnnamedText_8950b: ; 0x8950b
+_FoundHiddenCoinsText: ; 0x8950b
 	db $0, $52, " found", $4f
 	db "@"
 	db $2, $a0, $ff, $c2 ; XXX $2
 	db $0, " coins!@@"
 ; 0x89523
 
-UnnamedText_89523: ; 0x89523
+_FoundHiddenCoins2Text: ; 0x89523
 	db $0, $52, " found", $4f
 	db "@"
 	db $2, $a0, $ff, $c2 ; XXX $2 probably coins
 	db $0, " coins!@@"
 ; 0x8953a
 
-_UnnamedText_76852: ; 0x8953b
+_DroppedHiddenCoinsText: ; 0x8953b
 	db $0, $51
 	db "Oops! Dropped", $4f
 	db "some coins!", $57

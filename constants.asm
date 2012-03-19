@@ -660,7 +660,6 @@ W_NUMSPRITES EQU $D4E1 ; number of sprites on the current map
 W_PEOPLEMOVEPERMISSIONS EQU $D4E4
 
 ; coins are in decimal
-W_PLAYERCOINS EQU $D5A4 ; two bytes
 W_PLAYERCOINS1 EQU $D5A4
 W_PLAYERCOINS2 EQU $D5A5
 
