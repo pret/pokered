@@ -40993,7 +40993,7 @@ UnnamedText_3f2e4: ; 0x3f2e4
 
 INCBIN "baserom.gbc",$3f2e9,$3f30c - $3f2e9
 
-FreezeBurnParalyzeEffect:
+FreezeBurnParalyzeEffect: ;0x3f30c
 	xor a
 	ld [$cc5b], a
 	call $7b79			;test bit 4 of d063/d068 flags [target has substitute flag]
@@ -41053,7 +41053,7 @@ FreezeBurnParalyzeEffect:
 	call $7bb9	;animation
 	ld hl, UnnamedText_3f3dd
 	jp PrintText
-opponentAttacker:
+opponentAttacker:	;0x3f382
 	ld a, [W_PLAYERMONSTATUS]	;this appears to the same as above with addresses swapped for opponent
 	and a
 	jp nz, CheckDefrost
@@ -41108,7 +41108,7 @@ UnnamedText_3f3dd: ; 0x3f3dd
 	db $50
 ; 0x3f3dd + 5 bytes
 
-CheckDefrost:
+CheckDefrost:	;0x3f3e2
 	and a, FRZ			;are they frozen?
 	ret z				;return if so
 						;not frozen
@@ -41273,7 +41273,19 @@ UnnamedText_3fb74: ; 0x3fb74
 	db $50
 ; 0x3fb74 + 5 bytes
 
-INCBIN "baserom.gbc",$3fb79,$3fbc8 - $3fb79
+CheckTargetSubstitute:	;0x3fb79
+	push hl
+	ld hl, $d068
+	ld a, [$ff00+$f3]	;whose turn?
+	and a
+	jr z, .next1\@
+	ld hl, $d063
+.next1\@
+	bit 4, [hl]			;test bit 4 in d063/d068 flags
+	pop hl
+	ret
+
+INCBIN "baserom.gbc",$3fb89,$3fbc8 - $3fb89
 
 SECTION "bank10",DATA,BANK[$10]
 
