@@ -40947,7 +40947,27 @@ PlayMoveAnimation: ; 6F07
 	call Delay3
 	PREDEF_JUMP MoveAnimationPredef ; predef 8
 
-INCBIN "baserom.gbc",$3ef12,$3f245 - $3ef12
+INCBIN "baserom.gbc",$3ef12,$3f138 - $3ef12
+
+JumpMoveEffect: ;$3f138
+	ld a, [$ff00+$f3]	;whose turn?
+	and a
+	ld a, [W_PLAYERMOVEEFFECT]
+	jr z, .next1\@
+	ld a, [W_ENEMYMOVEEFFECT]
+.next1\@
+	dec a				;subtract 1, there is no special effect for 00
+	add a				;x2, 16bit pointers
+	ld hl, $7150		;pointer table at 7150
+	ld b, 0
+	ld c, a
+	add hl, bc
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	jp [hl]				;jump to special effect handler
+
+INCBIN "baserom.gbc",$3f150,$3f245 - $3f150
 
 UnnamedText_3f245: ; 0x3f245
 	TX_FAR _UnnamedText_3f245
