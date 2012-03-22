@@ -21130,7 +21130,73 @@ SpriteSheetPointerTable: ; 0x17b27
 	db BANK(LyingOldManSprite)
 ; 0x17c47
 
-INCBIN "baserom.gbc",$17c47,$17e1d - $17c47
+INCBIN "baserom.gbc",$17c47,$17dad - $17c47
+
+SubstituteEffectHandler: ;0x17DAD
+	ld c, 50
+	call DelayFrames		
+	ld hl, W_PLAYERMONMAXHP		
+	ld de, W_PLAYERSUBSITUTEHP
+	ld bc, W_PLAYERBATTSTATUS2
+	ld a, [$ff00+$f3]			;whose turn?
+	and a
+	jr z, .notEnemy
+	ld hl, W_ENEMYMONMAXHP
+	ld de, W_ENEMYSUBSITUTEHP
+	ld bc, W_ENEMYBATTSTATUS2
+.notEnemy
+	ld a, [bc]							;load flags
+	bit 4, a							;user already has substitute?
+	jr nz, .alreadyHasSubstitute		;skip this code if so
+										;user doesn't have a substitute [yet]
+	push bc
+	ld a, [hli]		;load max hp
+	ld b, [hl]
+	srl a			;max hp / 4, [quarter health to remove from user]
+	rr b
+	srl a
+	rr b
+	push de
+	ld de, $fff2	;subtract 8 to point to [current hp] instead of [max hp]
+	add hl, de		;HL -= 8
+	pop de
+	ld a, b
+	ld [de], a		;save copy of HP to subtract in ccd7/ccd8 [how much HP substitute has]
+	ld a, [hld]		;load current hp
+	sub b			;subtract [max hp / 4]
+	ld d, a			;save low byte result in D
+	ld a, [hl]
+	sbc a, 0		;borrow from high byte if needed
+	pop bc
+	jr c, .notEnoughHP	;underflow means user would be left with negative health
+						;bug: note since it only brances on carry, it will possibly leave user with 0HP
+.userHasZeroOrMoreHP
+	ldi [hl], a		;store high byte HP
+	ld [hl], d		;store low byte HP
+	ld h, b
+	ld l, c
+	set 4, [hl]			;set bit 4 of flags, user now has substitute
+	ld a, [$d355]		;load options
+	bit 7, a			;battle animation is enabled?
+	ld hl, $7ba8		;animation enabled: 0F:7BA8
+	ld b, $0f
+	jr z, .animationEnabled
+	ld hl, $56e0		;animation disabled: 1E:56E0
+	ld b, $1e
+.animationEnabled
+	call Bankswitch					;jump to routine depending on animation setting
+	ld hl, UnnamedText_17e1d		;"it created a substitute"
+	call PrintText
+	ld hl, $4d5a
+	ld b, $0f
+	jp Bankswitch
+.alreadyHasSubstitute
+	ld hl, UnnamedText_17e22		;"____ has a substitute"
+	jr .printText
+.notEnoughHP
+	ld hl, UnnamedText_17e27		;"too weak to make substitute"
+.printText
+	jp PrintText
 
 UnnamedText_17e1d: ; 0x17e1d
 	TX_FAR _UnnamedText_17e1d
@@ -22090,7 +22156,7 @@ ViridianCityText7: ; 0x191df
 	ld hl, UnnamedText_1920a
 	call PrintText
 	ld c, $2
-	call $3739
+	call DelayFrames
 	call $35ec
 	ld a, [$cc26]
 	and a
@@ -22796,7 +22862,7 @@ VermilionCityScript1: ; 0x1985f
 	and a
 	ret nz
 	ld c, $a
-	call $3739
+	call DelayFrames
 	ld a, $0
 	ld [$d62a], a
 	ret
@@ -25000,7 +25066,7 @@ OaksLabScript12: ; 0x1ce03
 
 OaksLabScript13: ; 0x1ce32
 	ld c, $14
-	call $3739
+	call DelayFrames
 	ld a, $10
 	ld [$ff00+$8c], a
 	call $2920
@@ -25366,7 +25432,7 @@ asm_1d157: ; 0x1d157
 	res 6, [hl]
 	call ReloadMapData
 	ld c, $a
-	call $3739
+	call DelayFrames
 	ld a, [$cf13]
 	cp $2
 	jr z, OaksLabLookAtCharmander
@@ -39242,7 +39308,7 @@ INCBIN "baserom.gbc",$3d435,$274
 	jr .next4\@
 .next3\@
 	ld c,$1E
-	call $3739
+	call DelayFrames
 	ld a,[W_PLAYERMOVEEFFECT]
 	cp a,$2B
 	jr z,.next5\@
@@ -61514,7 +61580,7 @@ HallofFameRoomScript2: ; 0x5a4bb
 	ld b, $5
 .asm_5a4ff
 	ld c, $78
-	call $3739
+	call DelayFrames
 	dec b
 	jr nz, .asm_5a4ff ; 0x5a505 $f8
 	call $3865
@@ -62279,7 +62345,7 @@ PewterPokecenterText3: ; 0x5c59b
 	ld a, $ff
 	call $23b1
 	ld c, $20
-	call $3739
+	call DelayFrames
 	ld hl, $4608
 	ld de, $cd3f
 	ld bc, $0004
@@ -62308,14 +62374,14 @@ PewterPokecenterText3: ; 0x5c59b
 	ld [$cd42], a
 	pop hl
 	ld c, $18
-	call $3739
+	call DelayFrames
 	ld a, [$c026]
 	ld b, a
 	ld a, [$c027]
 	or b
 	jr nz, .asm_5c5d1 ; 0x5c5f6 $d9
 	ld c, $30
-	call $3739
+	call DelayFrames
 	call $2307
 	jp TextScriptEnd
 ; 0x5c603
@@ -72081,7 +72147,7 @@ Unknown_75de8 ; 0x75de8
 ;db $c3, $d6, $35
 	ld b, $18
 	ld hl, $50eb
-	jp $35d6
+	jp Bankswitch
 ; 0x75df0
 
 Lab4Object: ; 0x75df0 (size=32)
