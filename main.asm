@@ -39769,7 +39769,7 @@ UnnamedText_3ddca: ; 0x3ddca
 
 CalculateDamage:	; 0x3ddcf
 	xor a
-	ld hl, $d0d7		;D0D7-D0D8: damage to eventually inflict, intitialise to zero
+	ld hl, $d0d7		;damage to eventually inflict, intitialise to zero
 	ldi [hl], a
 	ld [hl], a
 	ld hl, W_PLAYERMOVEPOWER
@@ -39781,11 +39781,11 @@ CalculateDamage:	; 0x3ddcf
 	cp a, $14 			;types >= $14 are all special
 	jr nc, .specialAttack
 .physicalAttack
-	ld hl, W_ENEMYMONDEFENSE		;CFF8: opponent defense
+	ld hl, W_ENEMYMONDEFENSE		;opponent defense
 	ld a, [hli]						;*BC = opponent defense used later
 	ld b, a
 	ld c, [hl]
-	ld a, [W_ENEMYBATTSTATUS3]		;test for reflect?
+	ld a, [W_ENEMYBATTSTATUS3]		;test for reflect
 	bit 2, a
 	jr z, .next\@
 .doubleDefense
@@ -39810,11 +39810,11 @@ CalculateDamage:	; 0x3ddcf
 	pop bc
 	jr .next3\@
 .specialAttack
-	ld hl, W_ENEMYMONSPECIAL		;CFFC: opponent special
+	ld hl, W_ENEMYMONSPECIAL		;opponent special
 	ld a, [hli]						;*BC = opponent special defense used later
 	ld b, a
 	ld c, [hl]
-	ld a, [W_ENEMYBATTSTATUS3]		;test for lightscreen?
+	ld a, [W_ENEMYBATTSTATUS3]		;test for lightscreen
 	bit 1, a
 	jr z, .next2\@
 .doubleSpecialDefense
@@ -39822,7 +39822,7 @@ CalculateDamage:	; 0x3ddcf
 	rl b
 .next2\@
 	ld hl, $d02b
-	ld a, [$d05e]	;D05E[?] decides skip
+	ld a, [$d05e]	;XXX
 	and a
 	jr z, .next3\@		;skip portion of code that pulls up inactive pokemon
 .loadOtherPoke
@@ -39833,13 +39833,13 @@ CalculateDamage:	; 0x3ddcf
 	ld a, [$ff00+$98]
 	ld c, a
 	push bc
-	ld hl, $d195					;HL base = D195 [where other monster data is stored]
-	ld a, [W_PLAYERMONNUMBER]		;multiplier = [CC2F] [desired slot #?]
-	ld bc, $002c					;mulitiplicand = 002C [bytes per monster]
-	call AddNTimes					;HL = D195 + $002C * slot
+	ld hl, $d195
+	ld a, [W_PLAYERMONNUMBER]
+	ld bc, $002c
+	call AddNTimes					
 	pop bc
 .next3\@
-	ld a, [hli]		;HL: D025 when this was taken
+	ld a, [hli]		;HL: when this was taken
 	ld l, [hl]
 	ld h, a			;*HL = attacker attack
 	or b			;is either attack or defense high byte nonzero?
