@@ -39202,7 +39202,7 @@ INCBIN "baserom.gbc",$3d435,$274
 	call $6093
 	jr z,.next11\@
 	call CalculateDamage
-	call $5F65
+	call MoreCalculateDamage
 	jp z,$574B
 	call $63A5
 	call $6687
@@ -39769,7 +39769,7 @@ UnnamedText_3ddca: ; 0x3ddca
 
 CalculateDamage:	; 0x3ddcf
 	xor a
-	ld hl, $d0d7		;damage to eventually inflict, intitialise to zero
+	ld hl, W_DAMAGE		;damage to eventually inflict, intitialise to zero
 	ldi [hl], a
 	ld [hl], a
 	ld hl, W_PLAYERMOVEPOWER
@@ -39869,7 +39869,71 @@ CalculateDamage:	; 0x3ddcf
 	and a
 	ret
 
-INCBIN "baserom.gbc",$3de75,$3e04f - $3de75
+INCBIN "baserom.gbc",$3de75,$3df65 - $3de75
+
+MoreCalculateDamage:	;$3df65
+	ld a, [$ff00+$f3]	;FFF3 decides which address to use
+	and a
+	ld a, [W_PLAYERMOVEEFFECT]
+	jr z, .next\@
+	ld a, [$cfcd]
+.next\@
+	cp a, 7				;effect to halve opponent defense [suicide moves]
+	jr nz, .next2\@
+.halveDefense
+	srl c				;explosion and selfdestruct will halve the defense...
+	jr nz, .next2\@
+	inc c				;...with a minimum value of 1 [it is used as a divisor later on]
+.next2\@
+	cp a, $1d
+	jr z, .next3\@
+	cp a, $1e
+	jr z, .next3\@
+	cp a, $26		;OHKO?
+	jp z, $6016
+	ld a, d			;if attack base power zero then do nothing
+	and a
+	ret z
+.next3\@
+	xor a
+	ld hl, $ff95	;multiplication address
+	ldi [hl], a		;init to zero
+	ldi [hl], a
+	ld [hl], a
+	ld a, e
+	add a			;A = level *2
+	jr nc, .noCarry
+.carry
+	push af
+	ld a, 1			;add carry for level if needed
+	ld [hl], a		;level high byte [previously zero]
+	pop af
+.noCarry
+	inc hl
+	ldi [hl], a		;level low byte
+	ld a, 5			;[divisor] = 5
+	ldd [hl], a
+	push bc
+	ld b, 4
+	call Divide		;divide level by 5
+	pop bc
+	inc [hl]		;+2 [?]
+	inc [hl]
+	inc hl			;8bit multiplier
+	ld [hl], d
+	call Multiply		;*multiply by attack base power
+	ld [hl], b
+	call Multiply		;*multiply by attacker attack stat
+	ld [hl], c
+	ld b, 4
+	call Divide		;*divide by defender defense stat
+	ld [hl], $32		
+	ld b, 4
+	call Divide		;divide above result by 50
+	ld hl, W_DAMAGE	;[stuff below I never got to, was only interested in stuff above]
+
+INCBIN "baserom.gbc",$3dfc0,$3e04f - $3dfc0
+
 
 ; azure heights claims "the fastest pokémon (who are,not coincidentally,
 ; among the most popular) tend to CH about 20 to 25% of the time."
