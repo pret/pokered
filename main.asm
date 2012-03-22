@@ -39201,7 +39201,7 @@ INCBIN "baserom.gbc",$3d435,$274
 	call $6023
 	call $6093
 	jr z,.next11\@
-	call $5DCF
+	call CalculateDamage
 	call $5F65
 	jp z,$574B
 	call $63A5
@@ -39767,7 +39767,109 @@ UnnamedText_3ddca: ; 0x3ddca
 	db $50
 ; 0x3ddca + 5 bytes
 
-INCBIN "baserom.gbc",$3ddcf,$3e04f - $3ddcf
+CalculateDamage:	; 0x3ddcf
+	xor a
+	ld hl, $d0d7		;D0D7-D0D8: damage to eventually inflict, intitialise to zero
+	ldi [hl], a
+	ld [hl], a
+	ld hl, W_PLAYERMOVEPOWER
+	ld a, [hli]			;*read attack base power
+	and a
+	ld d, a				;*D = attack base, used later
+	ret z				;return if attack is zero
+	ld a, [hl]			;*test attacking type
+	cp a, $14 			;types >= $14 are all special
+	jr nc, .specialAttack
+.physicalAttack
+	ld hl, W_ENEMYMONDEFENSE		;CFF8: opponent defense
+	ld a, [hli]						;*BC = opponent defense used later
+	ld b, a
+	ld c, [hl]
+	ld a, [W_ENEMYBATTSTATUS3]		;test for reflect?
+	bit 2, a
+	jr z, .next\@
+.doubleDefense
+	sla c		;x2 defense if bit2 of D069 is set
+	rl b
+.next\@
+	ld hl, $d025		;attack pointer
+	ld a, [$d05e]
+	and a
+	jr z, .next3\@
+	ld c, 3
+	call $5f1c
+	ld a, [$ff00+$97]
+	ld b, a
+	ld a, [$ff00+$98]
+	ld c, a
+	push bc
+	ld hl, $d18f
+	ld a, [W_PLAYERMONNUMBER]
+	ld bc, $002c
+	call AddNTimes
+	pop bc
+	jr .next3\@
+.specialAttack
+	ld hl, W_ENEMYMONSPECIAL		;CFFC: opponent special
+	ld a, [hli]						;*BC = opponent special defense used later
+	ld b, a
+	ld c, [hl]
+	ld a, [W_ENEMYBATTSTATUS3]		;test for lightscreen?
+	bit 1, a
+	jr z, .next2\@
+.doubleSpecialDefense
+	sla c			;x2 special defense if bit1 of D069 set
+	rl b
+.next2\@
+	ld hl, $d02b
+	ld a, [$d05e]	;D05E[?] decides skip
+	and a
+	jr z, .next3\@		;skip portion of code that pulls up inactive pokemon
+.loadOtherPoke
+	ld c, 5
+	call $5f1c
+	ld a, [$ff00+$97]
+	ld b, a
+	ld a, [$ff00+$98]
+	ld c, a
+	push bc
+	ld hl, $d195					;HL base = D195 [where other monster data is stored]
+	ld a, [W_PLAYERMONNUMBER]		;multiplier = [CC2F] [desired slot #?]
+	ld bc, $002c					;mulitiplicand = 002C [bytes per monster]
+	call AddNTimes					;HL = D195 + $002C * slot
+	pop bc
+.next3\@
+	ld a, [hli]		;HL: D025 when this was taken
+	ld l, [hl]
+	ld h, a			;*HL = attacker attack
+	or b			;is either attack or defense high byte nonzero?
+	jr z, .next4\@
+	srl b				;[defense] BC /= 4 [this is just so it fits into a single byte, 10bits max]
+	rr c
+	srl b
+	rr c
+	srl h				;[attack] HL /= 4 [to apply equal scaling]
+	rr l
+	srl h
+	rr l
+	ld a, l
+	or h
+	jr nz, .next4\@		;is HL result zero?
+	inc l				;minimum HL = 1
+.next4\@
+	ld b, l				;*B = attack [possibly scaled] [C contains defense]
+	ld a, [$d022]		;*E = level
+	ld e, a
+	ld a, [$d05e]		;critical hit?
+	and a
+	jr z, .next5\@
+	sla e			;double level if it was a critical hit
+.next5\@
+	ld a, 1			;return Z = 0
+	and a
+	ret
+
+INCBIN "baserom.gbc",$3de75,$3e04f - $3de75
 
 ; azure heights claims "the fastest pokémon (who are,not coincidentally,
 ; among the most popular) tend to CH about 20 to 25% of the time."
