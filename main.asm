@@ -40991,7 +40991,112 @@ UnnamedText_3f2e4: ; 0x3f2e4
 	db $50
 ; 0x3f2e4 + 5 bytes
 
-INCBIN "baserom.gbc",$3f2e9,$3f3d8 - $3f2e9
+INCBIN "baserom.gbc",$3f2e9,$3f30c - $3f2e9
+
+FreezeBurnParalyzeEffect:
+	xor a
+	ld [$cc5b], a
+	call $7b79			;test bit 4 of d063/d068 flags [target has substitute flag]
+	ret nz				;return if they have a substitute, can't effect them
+	ld a, [$ff00+$f3]	;whose turn?
+	and a
+	jp nz, opponentAttacker
+	ld a, [W_ENEMYMONSTATUS]
+	and a
+	jp nz, CheckDefrost
+					;opponent has no existing status
+	ld a, [W_PLAYERMOVETYPE]
+	ld b, a
+	ld a, [W_ENEMYMONTYPE1]
+	cp b
+	ret z			;return if they match [can't freeze an ice type etc.]
+	ld a, [W_ENEMYMONTYPE2]
+	cp b
+	ret z			;return..
+	ld a, [W_PLAYERMOVEEFFECT]
+	cp a, 7			;10% status effects are 04, 05, 06 so 07 will set carry for those
+	ld b, $1a		;[1A-1]/100 or [26-1]/256 = 9.8%~ chance
+	jr c, .next1\@	;branch ahead if this is a 10% chance effect..
+	ld b, $4d		;..or use [4D-1]/100 or [76-1]/256 = 29.7%~ chance
+	sub a, $1e		;subtract $1E to map to equivalent 10% chance effects
+.next1\@
+	push af		;push effect...
+	call $6e9b	;get random 8bit value for probability test
+	cp b		;success?
+	pop bc		;...pop effect into C
+	ret nc		;do nothing if random value is >= 1A or 4D [no status applied]
+				;the test passed
+	ld a, b		;what type of effect is this?
+	cp a, BURN_SIDE_EFFECT1
+	jr z, .burn
+	cp a, FREEZE_SIDE_EFFECT
+	jr z, .freeze
+	ld a, PAR
+	ld [W_ENEMYMONSTATUS], a
+	call $6d27	;quarter speed of affected monster
+	ld a, $a9
+	call $7bb9	;animation
+	jp $7b6e	;print paralysis text
+.burn
+	ld a, BRN
+	ld [W_ENEMYMONSTATUS], a
+	call $6d64
+	ld a, $a9
+	call $7bb9	;animation
+	ld hl, UnnamedText_3f3d8
+	jp PrintText
+.freeze
+	call $79cf	;resets bit 5 of the D063/D068 flags
+	ld a, FRZ
+	ld [W_ENEMYMONSTATUS], a
+	ld a, $a9
+	call $7bb9	;animation
+	ld hl, UnnamedText_3f3dd
+	jp PrintText
+opponentAttacker:
+	ld a, [W_PLAYERMONSTATUS]	;this appears to the same as above with addresses swapped for opponent
+	and a
+	jp nz, CheckDefrost
+	ld a, [W_ENEMYMOVETYPE]
+	ld b, a
+	ld a, [W_PLAYERMONTYPE1]
+	cp b
+	ret z
+	ld a, [W_PLAYERMONTYPE2]
+	cp b
+	ret z
+	ld a, [W_ENEMYMOVEEFFECT]
+	cp a, 7
+	ld b, $1a
+	jr c, .next1\@
+	ld b, $4d
+	sub a, $1e
+.next1\@
+	push af
+	call $6e9b
+	cp b
+	pop bc
+	ret nc
+	ld a, b
+	cp a, BURN_SIDE_EFFECT1
+	jr z, .burn
+	cp a, FREEZE_SIDE_EFFECT
+	jr z, .freeze
+	ld a, PAR
+	ld [W_PLAYERMONSTATUS], a
+	call $6d27
+	jp $7b6e
+.burn
+	ld a, BRN
+	ld [W_PLAYERMONSTATUS], a
+	call $6d64
+	ld hl, UnnamedText_3f3d8
+	jp PrintText
+.freeze
+	ld a, FRZ
+	ld [W_PLAYERMONSTATUS], a
+	ld hl, UnnamedText_3f3dd
+	jp PrintText
 
 UnnamedText_3f3d8: ; 0x3f3d8
 	TX_FAR _UnnamedText_3f3d8
@@ -41003,7 +41108,41 @@ UnnamedText_3f3dd: ; 0x3f3dd
 	db $50
 ; 0x3f3dd + 5 bytes
 
-INCBIN "baserom.gbc",$3f3e2,$3f423 - $3f3e2
+CheckDefrost:
+	and a, FRZ			;are they frozen?
+	ret z				;return if so
+						;not frozen
+	ld a, [$ff00+$f3]	;whose turn?
+	and a
+	jr nz, .opponent
+	;player [attacker]
+	ld a, [W_PLAYERMOVETYPE]
+	sub a, FIRE
+	ret nz		;return if it isn't fire
+				;type is fire
+	ld [W_ENEMYMONSTATUS], a		;set opponent status to 00 ["defrost" a frozen monster]
+	ld hl, $d8a8					;status of first opponent monster in their roster
+	ld a, [W_ENEMYMONNUMBER]
+	ld bc, $002c		;$2C bytes per roster entry
+	call AddNTimes
+	xor a
+	ld [hl], a			;clear status in roster
+	ld hl, UnnamedText_3f423
+	jr .common
+.opponent
+	ld a, [W_ENEMYMOVETYPE]		;same as above with addresses swapped
+	sub a, $14
+	ret nz
+	ld [W_PLAYERMONSTATUS], a
+	ld hl, $d16f
+	ld a, [W_PLAYERMONNUMBER]
+	ld bc, $002c
+	call AddNTimes
+	xor a
+	ld [hl], a
+	ld hl, UnnamedText_3f423
+.common
+	jp PrintText
 
 UnnamedText_3f423: ; 0x3f423
 	TX_FAR _UnnamedText_3f423
