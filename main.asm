@@ -21132,69 +21132,69 @@ SpriteSheetPointerTable: ; 0x17b27
 
 INCBIN "baserom.gbc",$17c47,$17dad - $17c47
 
-SubstituteEffectHandler: ;0x17DAD
+SubstituteEffectHandler:  ;0x17DAD
 	ld c, 50
 	call DelayFrames		
 	ld hl, W_PLAYERMONMAXHP		
 	ld de, W_PLAYERSUBSITUTEHP
 	ld bc, W_PLAYERBATTSTATUS2
-	ld a, [$ff00+$f3]			;whose turn?
+	ld a, [$ff00+$f3]  ;whose turn?
 	and a
 	jr z, .notEnemy
 	ld hl, W_ENEMYMONMAXHP
 	ld de, W_ENEMYSUBSITUTEHP
 	ld bc, W_ENEMYBATTSTATUS2
 .notEnemy
-	ld a, [bc]							;load flags
-	bit 4, a							;user already has substitute?
-	jr nz, .alreadyHasSubstitute		;skip this code if so
-										;user doesn't have a substitute [yet]
+	ld a, [bc]                    ;load flags
+	bit 4, a                      ;user already has substitute?
+	jr nz, .alreadyHasSubstitute  ;skip this code if so
+	                              ;user doesn't have a substitute [yet]
 	push bc
-	ld a, [hli]		;load max hp
+	ld a, [hli]  ;load max hp
 	ld b, [hl]
-	srl a			;max hp / 4, [quarter health to remove from user]
+	srl a        ;max hp / 4, [quarter health to remove from user]
 	rr b
 	srl a
 	rr b
 	push de
-	ld de, $fff2	;subtract 8 to point to [current hp] instead of [max hp]
-	add hl, de		;HL -= 8
+	ld de, $fff2  ;subtract 8 to point to [current hp] instead of [max hp]
+	add hl, de    ;HL -= 8
 	pop de
 	ld a, b
-	ld [de], a		;save copy of HP to subtract in ccd7/ccd8 [how much HP substitute has]
-	ld a, [hld]		;load current hp
-	sub b			;subtract [max hp / 4]
-	ld d, a			;save low byte result in D
+	ld [de], a    ;save copy of HP to subtract in ccd7/ccd8 [how much HP substitute has]
+	ld a, [hld]   ;load current hp
+	sub b         ;subtract [max hp / 4]
+	ld d, a       ;save low byte result in D
 	ld a, [hl]
-	sbc a, 0		;borrow from high byte if needed
+	sbc a, 0      ;borrow from high byte if needed
 	pop bc
-	jr c, .notEnoughHP	;underflow means user would be left with negative health
-						;bug: note since it only brances on carry, it will possibly leave user with 0HP
+	jr c, .notEnoughHP  ;underflow means user would be left with negative health
+                        ;bug: note since it only brances on carry, it will possibly leave user with 0HP
 .userHasZeroOrMoreHP
-	ldi [hl], a		;store high byte HP
-	ld [hl], d		;store low byte HP
+	ldi [hl], a  ;store high byte HP
+	ld [hl], d   ;store low byte HP
 	ld h, b
 	ld l, c
-	set 4, [hl]			;set bit 4 of flags, user now has substitute
-	ld a, [$d355]		;load options
-	bit 7, a			;battle animation is enabled?
-	ld hl, $7ba8		;animation enabled: 0F:7BA8
+	set 4, [hl]    ;set bit 4 of flags, user now has substitute
+	ld a, [$d355]  ;load options
+	bit 7, a       ;battle animation is enabled?
+	ld hl, $7ba8   ;animation enabled: 0F:7BA8
 	ld b, $0f
 	jr z, .animationEnabled
-	ld hl, $56e0		;animation disabled: 1E:56E0
+	ld hl, $56e0   ;animation disabled: 1E:56E0
 	ld b, $1e
 .animationEnabled
-	call Bankswitch					;jump to routine depending on animation setting
-	ld hl, UnnamedText_17e1d		;"it created a substitute"
+	call Bankswitch           ;jump to routine depending on animation setting
+	ld hl, UnnamedText_17e1d  ;"it created a substitute"
 	call PrintText
 	ld hl, $4d5a
 	ld b, $0f
 	jp Bankswitch
 .alreadyHasSubstitute
-	ld hl, UnnamedText_17e22		;"x has a substitute"
+	ld hl, UnnamedText_17e22  ;"x has a substitute"
 	jr .printText
 .notEnoughHP
-	ld hl, UnnamedText_17e27		;"too weak to make substitute"
+	ld hl, UnnamedText_17e27  ;"too weak to make substitute"
 .printText
 	jp PrintText
 
@@ -39833,32 +39833,32 @@ UnnamedText_3ddca: ; 0x3ddca
 	db $50
 ; 0x3ddca + 5 bytes
 
-CalculateDamage:	; 0x3ddcf
+CalculateDamage: ; 0x3ddcf
 	xor a
-	ld hl, W_DAMAGE		;damage to eventually inflict, intitialise to zero
+	ld hl, W_DAMAGE ;damage to eventually inflict, intitialise to zero
 	ldi [hl], a
 	ld [hl], a
 	ld hl, W_PLAYERMOVEPOWER
-	ld a, [hli]			;*read attack base power
+	ld a, [hli]     ;*read attack base power
 	and a
-	ld d, a				;*D = attack base, used later
-	ret z				;return if attack is zero
-	ld a, [hl]			;*test attacking type
-	cp a, $14 			;types >= $14 are all special
+	ld d, a         ;*D = attack base, used later
+	ret z           ;return if attack is zero
+	ld a, [hl]      ;*test attacking type
+	cp a, $14       ;types >= $14 are all special
 	jr nc, .specialAttack
 .physicalAttack
-	ld hl, W_ENEMYMONDEFENSE		;opponent defense
-	ld a, [hli]						;*BC = opponent defense used later
+	ld hl, W_ENEMYMONDEFENSE    ;opponent defense
+	ld a, [hli]                 ;*BC = opponent defense used later
 	ld b, a
 	ld c, [hl]
-	ld a, [W_ENEMYBATTSTATUS3]		;test for reflect
+	ld a, [W_ENEMYBATTSTATUS3]  ;test for reflect
 	bit 2, a
 	jr z, .next\@
 .doubleDefense
-	sla c		;x2 defense if bit2 of D069 is set
+	sla c  ;x2 defense if bit2 of D069 is set
 	rl b
 .next\@
-	ld hl, $d025		;attack pointer
+	ld hl, $d025  ;attack pointer
 	ld a, [$d05e]
 	and a
 	jr z, .next3\@
@@ -39876,21 +39876,21 @@ CalculateDamage:	; 0x3ddcf
 	pop bc
 	jr .next3\@
 .specialAttack
-	ld hl, W_ENEMYMONSPECIAL		;opponent special
-	ld a, [hli]						;*BC = opponent special defense used later
+	ld hl, W_ENEMYMONSPECIAL    ;opponent special
+	ld a, [hli]                 ;*BC = opponent special defense used later
 	ld b, a
 	ld c, [hl]
-	ld a, [W_ENEMYBATTSTATUS3]		;test for lightscreen
+	ld a, [W_ENEMYBATTSTATUS3]  ;test for lightscreen
 	bit 1, a
 	jr z, .next2\@
 .doubleSpecialDefense
-	sla c			;x2 special defense if bit1 of D069 set
+	sla c           ;x2 special defense if bit1 of D069 set
 	rl b
 .next2\@
 	ld hl, $d02b
-	ld a, [$d05e]	;XXX
+	ld a, [$d05e]   ;XXX
 	and a
-	jr z, .next3\@		;skip portion of code that pulls up inactive pokemon
+	jr z, .next3\@  ;skip portion of code that pulls up inactive pokemon
 .loadOtherPoke
 	ld c, 5
 	call $5f1c
@@ -39905,98 +39905,98 @@ CalculateDamage:	; 0x3ddcf
 	call AddNTimes					
 	pop bc
 .next3\@
-	ld a, [hli]		;HL: when this was taken
+	ld a, [hli]  ;HL: when this was taken
 	ld l, [hl]
-	ld h, a			;*HL = attacker attack
-	or b			;is either attack or defense high byte nonzero?
+	ld h, a      ;*HL = attacker attack
+	or b         ;is either attack or defense high byte nonzero?
 	jr z, .next4\@
-	srl b				;[defense] BC /= 4 [this is just so it fits into a single byte, 10bits max]
+	srl b  ;[defense] BC /= 4 [this is just so it fits into a single byte, 10bits max]
 	rr c
 	srl b
 	rr c
-	srl h				;[attack] HL /= 4 [to apply equal scaling]
+	srl h  ;[attack] HL /= 4 [to apply equal scaling]
 	rr l
 	srl h
 	rr l
 	ld a, l
 	or h
-	jr nz, .next4\@		;is HL result zero?
-	inc l				;minimum HL = 1
+	jr nz, .next4\@  ;is HL result zero?
+	inc l            ;minimum HL = 1
 .next4\@
-	ld b, l				;*B = attack [possibly scaled] [C contains defense]
-	ld a, [$d022]		;*E = level
+	ld b, l        ;*B = attack [possibly scaled] [C contains defense]
+	ld a, [$d022]  ;*E = level
 	ld e, a
-	ld a, [$d05e]		;critical hit?
+	ld a, [$d05e]  ;critical hit?
 	and a
 	jr z, .next5\@
-	sla e			;double level if it was a critical hit
+	sla e    ;double level if it was a critical hit
 .next5\@
-	ld a, 1			;return Z = 0
+	ld a, 1  ;return Z = 0
 	and a
 	ret
 
 INCBIN "baserom.gbc",$3de75,$3df65 - $3de75
 
-MoreCalculateDamage:	;$3df65
-	ld a, [$ff00+$f3]	;FFF3 decides which address to use
+MoreCalculateDamage:   ;$3df65
+	ld a, [$ff00+$f3]  ;FFF3 decides which address to use
 	and a
 	ld a, [W_PLAYERMOVEEFFECT]
 	jr z, .next\@
 	ld a, [$cfcd]
 .next\@
-	cp a, 7				;effect to halve opponent defense [suicide moves]
+	cp a, 7  ;effect to halve opponent defense [suicide moves]
 	jr nz, .next2\@
 .halveDefense
-	srl c				;explosion and selfdestruct will halve the defense...
+	srl c  ;explosion and selfdestruct will halve the defense...
 	jr nz, .next2\@
-	inc c				;...with a minimum value of 1 [it is used as a divisor later on]
+	inc c  ;...with a minimum value of 1 [it is used as a divisor later on]
 .next2\@
 	cp a, $1d
 	jr z, .next3\@
 	cp a, $1e
 	jr z, .next3\@
-	cp a, $26		;OHKO?
+	cp a, $26    ;OHKO?
 	jp z, $6016
-	ld a, d			;if attack base power zero then do nothing
+	ld a, d      ;if attack base power zero then do nothing
 	and a
 	ret z
 .next3\@
 	xor a
-	ld hl, $ff95	;multiplication address
-	ldi [hl], a		;init to zero
+	ld hl, $ff95  ;multiplication address
+	ldi [hl], a   ;init to zero
 	ldi [hl], a
 	ld [hl], a
 	ld a, e
-	add a			;A = level *2
+	add a         ;A = level *2
 	jr nc, .noCarry
 .carry
 	push af
-	ld a, 1			;add carry for level if needed
-	ld [hl], a		;level high byte [previously zero]
+	ld a, 1     ;add carry for level if needed
+	ld [hl], a  ;level high byte [previously zero]
 	pop af
 .noCarry
 	inc hl
-	ldi [hl], a		;level low byte
-	ld a, 5			;[divisor] = 5
+	ldi [hl], a  ;level low byte
+	ld a, 5      ;[divisor] = 5
 	ldd [hl], a
 	push bc
 	ld b, 4
-	call Divide		;divide level by 5
+	call Divide  ;divide level by 5
 	pop bc
-	inc [hl]		;+2 [?]
+	inc [hl]  ;+2 [?]
 	inc [hl]
-	inc hl			;8bit multiplier
+	inc hl    ;8bit multiplier
 	ld [hl], d
-	call Multiply		;*multiply by attack base power
+	call Multiply  ;*multiply by attack base power
 	ld [hl], b
-	call Multiply		;*multiply by attacker attack stat
+	call Multiply  ;*multiply by attacker attack stat
 	ld [hl], c
 	ld b, 4
-	call Divide		;*divide by defender defense stat
+	call Divide    ;*divide by defender defense stat
 	ld [hl], $32		
 	ld b, 4
-	call Divide		;divide above result by 50
-	ld hl, W_DAMAGE	;[stuff below I never got to, was only interested in stuff above]
+	call Divide      ;divide above result by 50
+	ld hl, W_DAMAGE  ;[stuff below I never got to, was only interested in stuff above]
 
 INCBIN "baserom.gbc",$3dfc0,$3e04f - $3dfc0
 
@@ -41015,23 +41015,23 @@ PlayMoveAnimation: ; 6F07
 
 INCBIN "baserom.gbc",$3ef12,$3f138 - $3ef12
 
-JumpMoveEffect: ;$3f138
-	ld a, [$ff00+$f3]	;whose turn?
+JumpMoveEffect:  ;$3f138
+	ld a, [$ff00+$f3]  ;whose turn?
 	and a
 	ld a, [W_PLAYERMOVEEFFECT]
 	jr z, .next1\@
 	ld a, [W_ENEMYMOVEEFFECT]
 .next1\@
-	dec a				;subtract 1, there is no special effect for 00
-	add a				;x2, 16bit pointers
-	ld hl, $7150		;pointer table at 7150
+	dec a         ;subtract 1, there is no special effect for 00
+	add a         ;x2, 16bit pointers
+	ld hl, $7150  ;pointer table at 7150
 	ld b, 0
 	ld c, a
 	add hl, bc
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	jp [hl]				;jump to special effect handler
+	jp [hl]       ;jump to special effect handler
 
 INCBIN "baserom.gbc",$3f150,$3f245 - $3f150
 
@@ -41062,65 +41062,65 @@ INCBIN "baserom.gbc",$3f2e9,$3f30c - $3f2e9
 FreezeBurnParalyzeEffect: ;0x3f30c
 	xor a
 	ld [$cc5b], a
-	call $7b79			;test bit 4 of d063/d068 flags [target has substitute flag]
-	ret nz				;return if they have a substitute, can't effect them
-	ld a, [$ff00+$f3]	;whose turn?
+	call $7b79         ;test bit 4 of d063/d068 flags [target has substitute flag]
+	ret nz             ;return if they have a substitute, can't effect them
+	ld a, [$ff00+$f3]  ;whose turn?
 	and a
 	jp nz, opponentAttacker
 	ld a, [W_ENEMYMONSTATUS]
 	and a
 	jp nz, CheckDefrost
-					;opponent has no existing status
+	;opponent has no existing status
 	ld a, [W_PLAYERMOVETYPE]
 	ld b, a
 	ld a, [W_ENEMYMONTYPE1]
 	cp b
-	ret z			;return if they match [can't freeze an ice type etc.]
+	ret z  ;return if they match [can't freeze an ice type etc.]
 	ld a, [W_ENEMYMONTYPE2]
 	cp b
-	ret z			;return..
+	ret z  ;return..
 	ld a, [W_PLAYERMOVEEFFECT]
-	cp a, 7			;10% status effects are 04, 05, 06 so 07 will set carry for those
-	ld b, $1a		;[1A-1]/100 or [26-1]/256 = 9.8%~ chance
-	jr c, .next1\@	;branch ahead if this is a 10% chance effect..
-	ld b, $4d		;..or use [4D-1]/100 or [76-1]/256 = 29.7%~ chance
-	sub a, $1e		;subtract $1E to map to equivalent 10% chance effects
+	cp a, 7         ;10% status effects are 04, 05, 06 so 07 will set carry for those
+	ld b, $1a       ;[1A-1]/100 or [26-1]/256 = 9.8%~ chance
+	jr c, .next1\@  ;branch ahead if this is a 10% chance effect..
+	ld b, $4d       ;..or use [4D-1]/100 or [76-1]/256 = 29.7%~ chance
+	sub a, $1e      ;subtract $1E to map to equivalent 10% chance effects
 .next1\@
-	push af		;push effect...
-	call $6e9b	;get random 8bit value for probability test
-	cp b		;success?
-	pop bc		;...pop effect into C
-	ret nc		;do nothing if random value is >= 1A or 4D [no status applied]
-				;the test passed
-	ld a, b		;what type of effect is this?
+	push af     ;push effect...
+	call $6e9b  ;get random 8bit value for probability test
+	cp b        ;success?
+	pop bc      ;...pop effect into C
+	ret nc      ;do nothing if random value is >= 1A or 4D [no status applied]
+	            ;the test passed
+	ld a, b     ;what type of effect is this?
 	cp a, BURN_SIDE_EFFECT1
 	jr z, .burn
 	cp a, FREEZE_SIDE_EFFECT
 	jr z, .freeze
 	ld a, PAR
 	ld [W_ENEMYMONSTATUS], a
-	call $6d27	;quarter speed of affected monster
+	call $6d27  ;quarter speed of affected monster
 	ld a, $a9
-	call $7bb9	;animation
-	jp $7b6e	;print paralysis text
+	call $7bb9  ;animation
+	jp $7b6e    ;print paralysis text
 .burn
 	ld a, BRN
 	ld [W_ENEMYMONSTATUS], a
 	call $6d64
 	ld a, $a9
-	call $7bb9	;animation
+	call $7bb9  ;animation
 	ld hl, UnnamedText_3f3d8
 	jp PrintText
 .freeze
-	call $79cf	;resets bit 5 of the D063/D068 flags
+	call $79cf  ;resets bit 5 of the D063/D068 flags
 	ld a, FRZ
 	ld [W_ENEMYMONSTATUS], a
 	ld a, $a9
-	call $7bb9	;animation
+	call $7bb9  ;animation
 	ld hl, UnnamedText_3f3dd
 	jp PrintText
-opponentAttacker:	;0x3f382
-	ld a, [W_PLAYERMONSTATUS]	;this appears to the same as above with addresses swapped for opponent
+opponentAttacker:  ;0x3f382
+	ld a, [W_PLAYERMONSTATUS]  ;this appears to the same as above with addresses swapped for opponent
 	and a
 	jp nz, CheckDefrost
 	ld a, [W_ENEMYMOVETYPE]
@@ -41339,15 +41339,15 @@ UnnamedText_3fb74: ; 0x3fb74
 	db $50
 ; 0x3fb74 + 5 bytes
 
-CheckTargetSubstitute:	;0x3fb79
+CheckTargetSubstitute:  ;0x3fb79
 	push hl
 	ld hl, $d068
-	ld a, [$ff00+$f3]	;whose turn?
+	ld a, [$ff00+$f3]   ;whose turn?
 	and a
 	jr z, .next1\@
 	ld hl, $d063
 .next1\@
-	bit 4, [hl]			;test bit 4 in d063/d068 flags
+	bit 4, [hl]         ;test bit 4 in d063/d068 flags
 	pop hl
 	ret
 
