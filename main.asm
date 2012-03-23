@@ -21191,7 +21191,7 @@ SubstituteEffectHandler: ;0x17DAD
 	ld b, $0f
 	jp Bankswitch
 .alreadyHasSubstitute
-	ld hl, UnnamedText_17e22		;"____ has a substitute"
+	ld hl, UnnamedText_17e22		;"x has a substitute"
 	jr .printText
 .notEnoughHP
 	ld hl, UnnamedText_17e27		;"too weak to make substitute"
