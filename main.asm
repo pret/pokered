@@ -21213,7 +21213,116 @@ UnnamedText_17e27: ; 0x17e27
 	db $50
 ; 0x17e27 + 5 bytes
 
-INCBIN "baserom.gbc",$17e2c,$17f23 - $17e2c
+ActivatePC:     ;0x17e2c
+	call $36F4  ;XXX: copy background from $C3A0 to $CD81
+	ld a, $99
+	call $23B1  ;XXX: play sound or stop music
+	ld hl, UnnamedText_17f23  ;player turned on PC
+	call PrintText
+	call $3748  ;XXX: wait for sound to be done
+	ld hl, $CD60
+	set 3, [hl]
+	call $3701  ;XXX: restore saved screen
+	call Delay3
+PCMainMenu:
+	ld b, 8
+	ld hl, $53C8
+	call Bankswitch
+	ld hl, $CD60
+	set 5, [hl]
+	call HandleMenuInput
+	bit 1, a              ;if player pressed B
+	jp nz, LogOff
+	ld a, [W_MAXMENUITEMID]
+	cp a, 2
+	jr nz, .next\@ ;if not 2 menu items (not counting log off) (2 occurs before you get the pokedex)
+	ld a, [W_CURMENUITEMID]
+	and a
+	jp z, BillsPC    ;if current menu item id is 0, it's bills pc
+	cp a, 1
+	jr z, .playersPC ;if current menu item id is 1, it's players pc
+	jp LogOff        ;otherwise, it's 2, and you're logging off
+.next\@
+	cp a, 3
+	jr nz, .next2\@ ;if not 3 menu items (not counting log off) (3 occurs after you get the pokedex, before you beat the pokemon league)
+	ld a, [W_CURMENUITEMID]
+	and a
+	jp z, BillsPC    ;if current menu item id is 0, it's bills pc
+	cp a, 1
+	jr z, .playersPC ;if current menu item id is 1, it's players pc
+	cp a, 2
+	jp z, OaksPC     ;if current menu item id is 2, it's oaks pc
+	jp LogOff        ;otherwise, it's 3, and you're logging off
+.next2\@
+	ld a, [W_CURMENUITEMID]
+	and a
+	jp z, BillsPC    ;if current menu item id is 0, it's bills pc
+	cp a, 1
+	jr z, .playersPC ;if current menu item id is 1, it's players pc
+	cp a, 2
+	jp z, OaksPC     ;if current menu item id is 2, it's oaks pc
+	cp a, 3
+	jp z, PKMNLeague ;if current menu item id is 3, it's pkmnleague
+	jp LogOff        ;otherwise, it's 4, and you're logging off
+.playersPC
+	ld hl, $CD60
+	res 5, [hl]
+	set 3, [hl]
+	ld a, $9B
+	call $23B1  ;XXX: play sound or stop music
+	call $3748  ;XXX: wait for sound to be done
+	ld hl, UnnamedText_17f32  ;accessed players pc
+	call PrintText
+	ld b, 1
+	ld hl, $78E6
+	call Bankswitch
+	jr ReloadMainMenu
+OaksPC:
+	ld a, $9B
+	call $23B1  ;XXX: play sound or stop music
+	call $3748  ;XXX: wait for sound to be done
+	ld b, 7
+	ld hl, $6915
+	call Bankswitch
+	jr ReloadMainMenu
+PKMNLeague:
+	ld a, $9B
+	call $23B1  ;XXX: play sound or stop music
+	call $3748  ;XXX: wait for sound to be done
+	ld b, BANK(Unknown_7657e)
+	ld hl, Unknown_7657e
+	call Bankswitch
+	jr ReloadMainMenu
+BillsPC:
+	ld a, $9B
+	call $23B1    ;XXX: play sound or stop music
+	call $3748    ;XXX: wait for sound to be done
+	ld a, [$D7F1] ;has to do with having met Bill
+	bit 0, a
+	jr nz, .billsPC ;if you've met bill, use that bill's instead of someone's
+	ld hl, UnnamedText_17f2d ;accessed someone's pc
+	jr .printText
+.billsPC
+	ld hl, UnnamedText_17f28 ;accessed bill's pc
+.printText
+	call PrintText
+	ld b, 8
+	ld hl, $54C2
+	call Bankswitch
+ReloadMainMenu:
+	xor a
+	ld [$CC3C], a
+	call ReloadMapData
+	call $2429  ;XXX: moves sprites
+	jp PCMainMenu
+LogOff:
+	ld a, $9A
+	call $23B1  ;XXX: play sound or stop music
+	call $3748  ;XXX: wait for sound to be done
+	ld hl, $CD60
+	res 3, [hl]
+	res 5, [hl]
+	ret
 
 UnnamedText_17f23: ; 0x17f23
 	TX_FAR _UnnamedText_17f23
@@ -72757,6 +72866,7 @@ AgathaObject: ; 0x76534 (size=44)
 AgathaBlocks: ; 0x76560 30
 	INCBIN "maps/agatha.blk"
 
+Unknown_7657e: ;0x7657e (has to do with the hall of fame on the PC)
 INCBIN "baserom.gbc",$7657e,$76670 - $7657e
 
 HallOfFameNoText: ; 0x76670
