@@ -44909,8 +44909,91 @@ RocketHideout2Script: ; 0x44e27
 	ret
 ; 0x44e3a
 
-RocketHideout2_Unknown44e3a: ; 0x44ea
-INCBIN "baserom.gbc",$44e3a,$28d
+RocketHideout2_Unknown44e3a: ; 0x44e3a
+INCBIN "baserom.gbc",$44e3a,$45023-$44e3a
+
+; 0x45023 XXX: it looks to me this is probably data for copying tiles into memory, maybe to mix and match a few tilesets, but I don't really know for sure
+	dw $5087 ;address from within tileset graphics
+	db 1     ;number of tiles to copy?
+	db $11   ;bank of tileset graphics
+	dw $9200 ;where to load in VRAM
+	
+	dw $5097
+	db 1
+	db $11
+	dw $9210
+	
+	dw $50A7
+	db 1
+	db $11
+	dw $9300
+	
+	dw $50B7
+	db 1
+	db $11
+	dw $9310
+	
+	dw Tset16_GFX + $200
+	db 1
+	db $1A
+	dw $9200
+	
+	dw Tset16_GFX + $210
+	db 1
+	db $1A
+	dw $9210
+	
+	dw Tset16_GFX + $300
+	db 1
+	db $1A
+	dw $9300
+	
+	dw Tset16_GFX + $310
+	db 1
+	db $1A
+	dw $9310
+	
+	dw $5097
+	db 1
+	db $11
+	dw $93C0
+	
+	dw $50B7
+	db 1
+	db $11
+	dw $93D0
+	
+	dw $5087
+	db 1
+	db $11
+	dw $94C0
+	
+	dw $50A7
+	db 1
+	db $11
+	dw $94D0
+	
+	dw Tset05_GFX + $3C0
+	db 1
+	db $1A
+	dw $93C0
+	
+	dw Tset05_GFX + $3D0
+	db 1
+	db $1A
+	dw $93D0
+	
+	dw Tset05_GFX + $4C0
+	db 1
+	db $1A
+	dw $94C0
+	
+	dw Tset05_GFX + $4D0
+	db 1
+	db $1A
+	dw $94D0
+
+INCBIN "baserom.gbc",$45083,$450c7-$45083
 
 RocketHideout2Texts: ; 0x450c7
 	dw RocketHideout2Text1, RocketHideout2Text2, RocketHideout2Text3, RocketHideout2Text4, RocketHideout2Text5
