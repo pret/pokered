@@ -7923,7 +7923,75 @@ Predef: ; 3E6D
 	ld [$2000],a
 	ret
 
-INCBIN "baserom.gbc",$3E94,$4000 - $3E94
+INCBIN "baserom.gbc",$3E94,$3F22 - $3E94
+
+; 0x3F22
+dw $66ee
+dw $66f8
+dw $5b8e
+dw $5b81
+dw $6960
+dw $697e
+dw $6983
+dw $6cbd
+dw $5bbe
+dw $5ba8
+dw $5bd4
+dw $6453
+dw $6458
+dw $6511
+dw $64a3
+dw $64a8
+dw $64ad
+dw $64b2
+dw $64d0
+dw $64d5
+dw $6502
+dw $64da
+dw $64df
+dw $64e4
+dw $64b7
+dw $64bc
+dw $64c1
+dw $64c6
+dw $64cb
+dw $6508
+dw $6529
+dw $69aa
+dw $5ced
+dw $5865
+dw $5878
+dw FoundHiddenItemText
+dw HiddenItemBagFullText
+dw $5df7
+dw $6a3d
+dw $7e79
+dw $7e7e
+dw $7e83
+dw FoundHiddenCoinsText
+dw DroppedHiddenCoinsText
+dw $6bdd
+dw $6be2
+dw $6c05
+dw $6b69
+dw $6a25
+dw $7f37
+dw $7f32
+dw $5c29
+dw $69a4
+dw $6a2a
+dw $6a10
+dw $6a1d
+dw $6953
+dw $7bbf
+dw $5ec8
+dw $5edb
+dw $5eef
+dw $5f02
+dw $7c12
+dw $7be8
+dw $7c0d
+dw $7c45
 
 SECTION "bank1",DATA,BANK[$1]
 
