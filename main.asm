@@ -74777,7 +74777,146 @@ INCBIN "baserom.gbc",$7B068,$7C000 - $7B068
 
 SECTION "bank1F",DATA,BANK[$1F]
 
-INCBIN "baserom.gbc",$7C000,$4000
+INCBIN "baserom.gbc",$7C000,$7C45E-$7C000
+
+IF _RED
+UnknSong_md_7c45e: ;0x7C45E
+	mus_duty duty50
+		mus_note noteD, note4_16
+
+	db $f4
+
+		mus_note noteC, note16
+		mus_note noteC, note2
+		mus_note noteD, note4
+
+	mus_octave oct3
+		mus_note noteG#, note16
+		mus_note noteC, note4_8_16
+		mus_note noteD, note4
+
+	mus_octave oct3
+		mus_note noteRst, note16
+
+		mus_note noteC, note4_8_16
+		mus_note noteD, note4
+
+	mus_octave oct3
+		mus_note noteC, note16
+		mus_note noteC, note2
+		mus_note noteD, note8_16
+
+	mus_octave oct3
+		mus_note noteA#, note16
+		mus_note noteC, note2
+
+	mus_end
+UnknSong_md_7c475: ;0x7C475
+	mus_duty duty50
+		mus_note noteD, note4_16
+		mus_note noteC, note2_16
+		mus_note noteC, note16
+		mus_note noteC, note16
+		mus_note noteD, note4
+
+	db $d4
+
+		mus_note noteC, note8
+		mus_note noteC, note2
+		mus_note noteD, note4
+		mus_note noteRst, note4_16
+
+		mus_note noteG#, note8
+		mus_note noteC, note4_8_16
+		mus_note noteD, note4
+		mus_note noteRst, note4_16
+
+		mus_note noteRst, note8
+
+		mus_note noteC, note4_8_16
+		mus_note noteD, note4
+		mus_note noteRst, note4_16
+
+		mus_note noteC, note8
+		mus_note noteC, note2
+		mus_note noteD, note8_16
+		mus_note noteRst, note4_16
+
+		mus_note noteA#, note8
+		mus_note noteC, note2
+
+	mus_end
+ENDC
+IF _BLUE
+UnknSong_md_7c45e: ;0x7C45E
+	mus_duty duty50
+		mus_note noteD, note4
+
+	mus_octave oct3
+		mus_note noteC, note16
+		mus_note noteC, note4_8_16
+		mus_note noteD, note4
+
+	mus_octave oct3
+		mus_note noteG#, note16
+		mus_note noteC, note4_8_16
+		mus_note noteD, note4
+
+	mus_octave oct3
+		mus_note noteRst, note16
+
+		mus_note noteC, note4_8_16
+		mus_note noteD, note4
+
+	mus_octave oct3
+		mus_note noteC, note16
+		mus_note noteC, note2
+		mus_note noteD, note1
+
+	db $f2
+
+	mus_octave oct7
+		mus_note noteC, note2
+
+	mus_end
+UnknSong_md_7c475: ; 0x7C475
+	mus_duty duty50
+		mus_note noteD, note4
+		mus_note noteC, note2_16
+		mus_note noteC, note16
+		mus_note noteC, note16
+		mus_note noteD, note4
+		mus_note noteRst, note4_16
+
+		mus_note noteC, note8
+		mus_note noteC, note4_8_16
+		mus_note noteD, note4
+		mus_note noteRst, note4_16
+
+		mus_note noteG#, note8
+		mus_note noteC, note4_8_16
+		mus_note noteD, note4
+		mus_note noteRst, note4_16
+
+		mus_note noteRst, note8
+
+		mus_note noteC, note4_8_16
+		mus_note noteD, note4
+		mus_note noteRst, note4_16
+
+		mus_note noteC, note8
+		mus_note noteC, note2
+		mus_note noteD, note1
+
+	db $d2
+
+	mus_octave oct6
+		mus_note noteC, note2
+
+	mus_end
+ENDC
+
+INCBIN "baserom.gbc",$7C490,$80000-$7C490
 
 SECTION "bank20",DATA,BANK[$20]
 
