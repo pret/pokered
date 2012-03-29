@@ -71619,7 +71619,22 @@ CinnabarGymScript: ; 0x7574a
 ; 0x75759
 
 CinnabarGymScript_Unknown75759: ; 0x75759
-INCBIN "baserom.gbc",$75759,$7577B - $75759
+	ld hl, $D126
+	bit 6, [hl]
+	res 6, [hl]
+	push hl
+	call nz, CinnabarGymScript_Unknown75772
+	pop hl
+	bit 5, [hl]
+	res 5, [hl]
+	call nz, $3EAD
+	ld hl, $D79B
+	res 7, [hl]
+	ret
+CinnabarGymScript_Unknown75772: ; 0x75772
+	ld hl, Gym7CityName
+	ld de, Gym7LeaderName
+	jp $317F
 
 Gym7CityName: ; 0x7577B
 	db "CINNABAR ISLAND@"
