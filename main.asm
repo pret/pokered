@@ -71222,7 +71222,14 @@ FuchsiaGymScript: ; 0x7543d
 ; 0x75453
 
 FuchsiaGymScript_Unknown75453: ; 0x75453
-INCBIN "baserom.gbc",$75453,$12
+	ld hl, $D126
+	bit 6, [hl]
+	res 6, [hl]
+	ret z
+	ld hl, Gym5CityName
+	ld de, Gym5LeaderName
+	call $317F
+	ret
 
 Gym5CityName: ; 0x75465
 	db "FUCHSIA CITY@"
