@@ -8361,7 +8361,7 @@ MainMenu: ; 0x5af2
 	ld hl,$D72E
 	res 6,[hl]
 	call ClearScreen
-	call $3DED
+	call GoPAL_SET_CF1C
 	call LoadTextBoxTilePatterns
 	call LoadFontTilePatterns
 	ld hl,$D730
@@ -8443,7 +8443,7 @@ MainMenu: ; 0x5af2
 	jp nz,.next0\@
 	jr .next6\@
 .next5\@
-	call $3DD4
+	call GBPalWhiteOutWithDelay3
 	call ClearScreen
 	ld a,4
 	ld [$D52A],a
@@ -26895,7 +26895,7 @@ NameRaterText1: ; 0x1da56
 	ld [$cc35], a
 	call $13fc
 	push af
-	call $3dd4
+	call GBPalWhiteOutWithDelay3
 	call $3dbe
 	call $20ba
 	pop af
@@ -58036,7 +58036,7 @@ DayCareMText1: ; 0x56254
 	ld [$cc35], a
 	call $13fc
 	push af
-	call $3dd4
+	call GBPalWhiteOutWithDelay3
 	call $3dbe
 	call $20ba
 	pop af
@@ -73017,8 +73017,119 @@ AgathaObject: ; 0x76534 (size=44)
 AgathaBlocks: ; 0x76560 30
 	INCBIN "maps/agatha.blk"
 
-Unknown_7657e: ;0x7657e (has to do with the hall of fame on the PC)
-INCBIN "baserom.gbc",$7657e,$76670 - $7657e
+Unknown_7657e: ; XXX: make better (has to do with the hall of fame on the PC) ; 0x7657e
+	ld hl, UnnamedText_76683
+	call PrintText
+	ld hl, $D730
+	set 6, [hl]
+	push hl
+	ld a, [$CFCB]
+	push af
+	ld a, [$FF00+$D7]
+	push af
+	xor a
+	ld [$FF00+$D7], a
+	ld [$D0AA], a
+	ld [$CFCB], a
+	ld [$CD41], a
+	ld [$CD42], a
+	ld a, [$D5A2]
+	ld b, a
+	cp a, $33
+	jr c, .first
+	ld b, $32
+	sub b
+	ld [$CD42], a
+.first
+	ld hl, $CD42
+	inc [hl]
+	push bc
+	ld a, [$CD41]
+	ld [$CD3D], a
+	ld b, $1C
+	ld hl, $7B3F
+	call Bankswitch
+	call Unknown_765e5
+	pop bc
+	jr c, .second
+	ld hl, $CD41
+	inc [hl]
+	ld a, [hl]
+	cp b
+	jr nz, .first
+.second
+	pop af
+	ld [$FF00+$D7], a
+	pop af
+	ld [$CFCB], a
+	pop hl
+	res 6, [hl]
+	call GBPalWhiteOutWithDelay3
+	call ClearScreen
+	call GoPAL_SET_CF1C
+	jp GBPalNormal
+Unknown_765e5: ; 0x765e5
+	ld c, 6
+.third
+	push bc
+	call Unknown_76610
+	call $3865
+	ld a, [$FF00+$B4]
+	bit 1, a
+	jr nz, .fifth
+	ld hl, $CC6B
+	ld de, $CC5B
+	ld bc, $0050
+	call CopyData
+	pop bc
+	ld a, [$CC5B]
+	cp a, $FF
+	jr z, .fourth
+	dec c
+	jr nz, .third
+.fourth
+	and a
+	ret 
+.fifth
+	pop bc
+	scf 
+	ret 
+Unknown_76610: ; 0x76610
+	call GBPalWhiteOutWithDelay3
+	call ClearScreen
+	ld hl, $CC5B
+	ld a, [hli]
+	ld [$CD3D], a
+	ld [$CF91], a
+	ld [$D0B5], a
+	ld [$CFD9], a
+	ld [$CF1D], a
+	ld a, [hli]
+	ld [$CD3F], a
+	ld de, $CD6D
+	ld bc, $000B
+	call CopyData
+	ld b, $0B
+	ld c, 0
+	call GoPAL_SET
+	ld hl, $C410
+	call GetBaseStats
+	call $1389
+	call GBPalNormal
+	ld hl, $C4A4
+	ld b, 2
+	ld c, $12
+	call TextBoxBorder
+	ld hl, $C4CD
+	ld de, HallOfFameNoText
+	call PlaceString
+	ld hl, $C4DC
+	ld de, $CD42
+	ld bc, $0103
+	call PrintNumber
+	ld b, $1C
+	ld hl, $42F0
+	jp Bankswitch
 
 HallOfFameNoText: ; 0x76670
 	db "HALL OF FAME No   @"
