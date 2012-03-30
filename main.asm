@@ -69877,20 +69877,20 @@ Unnamed_ASM_74872: ; 0x74872
 ; code similar to this appears in a lot of banks; this particular
 ; one is called after you beat the Rocket that gives you TM28 DIG.
 ; the screen then fades out, he disappears, and fades back in
-	call $20EF
+	call GBFadeIn1
 	ld a, $07
 	ld [$CC4D], a
 	ld a, $15
-	call $3E6D
+	call Predef
 	ld a, $09
 	ld [$CC4D], a
 	ld a, $11
-	call $3E6D
+	call Predef
 	ld a, $06
 	ld [$CC4D], a
 	ld a, $11
 	call Predef
-	call $20D1
+	call GBFadeOut1
 	ret
 
 ViridianGym_h: ; 0x74897 to 0x748a3 (12 bytes) (id=45)
