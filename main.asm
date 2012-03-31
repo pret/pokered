@@ -470,8 +470,8 @@ EnterMap: ; 3A6
 	call Bankswitch ; display fly/teleport in graphical effect
 	call $2429 ; move sprites
 .didNotFlyOrTeleportIn\@
-	ld b,$03
-	ld hl,$438b
+	ld b,BANK(CheckForceBikeOrSurf)
+	ld hl,CheckForceBikeOrSurf
 	call Bankswitch ; handle currents in SF islands and forced bike riding in cycling road
 	ld hl,$d72d
 	res 5,[hl]
@@ -2849,8 +2849,17 @@ SwitchToMapRomBank: ; 12BC
 	pop bc
 	pop hl
 	ret
+	
+INCBIN "baserom.gbc",$12DA,$12ED-$12DA
 
-INCBIN "baserom.gbc",$12DA,$12F8 - $12DA
+;appears to be called twice inside function $C38B
+;if $d700,$d11a == $1 then biking
+;if $d700,$d11a == $2 then surfing
+ForceBikeOrSurf: ; 12ED
+	ld b,5 ;graphics bank 5
+	ld hl,LoadPlayerSpriteGraphics ;load player sprite graphics
+	call Bankswitch ;loads bank 5 and then calls LoadPlayerSpriteGraphics
+	jp $2307 ;update map/player state?
 
 ; this is used to check if the player wants to interrupt the opening sequence at several points
 ; XXX is this used anywhere else?
@@ -10795,7 +10804,75 @@ MapHeaderBanks: ; 423D
 	db BANK(Bruno_h)
 	db BANK(Agatha_h)
 
-INCBIN "baserom.gbc",$C335,$C766-$C335
+INCBIN "baserom.gbc",$C335,$C38B-$C335
+
+CheckForceBikeOrSurf: ; C38B
+	ld hl, $D732
+	bit 5, [hl]
+	ret nz
+	ld hl, ForcedBikeSurfMaps
+	ld a, [W_YCOORD]
+	ld b, a
+	ld a, [W_XCOORD]
+	ld c, a
+	ld a, [W_CURMAP]
+	ld d, a
+.loop\0
+	ld a, [hli]
+	cp $ff
+	ret z ;if we reach FF then it's not part of the list
+	cp d ;compare to current map
+	jr nz, .incorrectMap\0
+	ld a, [hli]
+	cp b ;compare y-coord
+	jr nz, .incorrectY\0
+	ld a, [hli]
+	cp c ;compare x-coord
+	jr nz, .loop\0 ; incorrect x-coord, check next item
+	ld a, [W_CURMAP]
+	cp SEAFOAM_ISLANDS_4
+	ld a, $2
+	ld [$d666], a
+	jr z, .forceSurfing\0
+	ld a, [$d35e]
+	cp SEAFOAM_ISLANDS_5
+	ld a, $2
+	ld [$d668], a
+	jr z, .forceSurfing\0
+	;force bike riding
+	ld hl, $d732
+	set 5, [hl]
+	ld a, $1
+	ld [$d700], a
+	ld [$d11a], a
+	jp ForceBikeOrSurf
+.incorrectMap\0
+	inc hl
+.incorrectY\0
+	inc hl
+	jr .loop\0
+.forceSurfing\0
+	ld a, $2
+	ld [$d700], a
+	ld [$d11a], a
+	jp ForceBikeOrSurf
+; 0xc3e6
+
+ForcedBikeSurfMaps: ;C3e6
+; map id, y, x
+db ROUTE_16,$0A,$11 
+db ROUTE_16,$0B,$11
+db ROUTE_18,$08,$21
+db ROUTE_18,$09,$21
+db SEAFOAM_ISLANDS_4,$07,$12 
+db SEAFOAM_ISLANDS_4,$07,$13 
+db SEAFOAM_ISLANDS_5,$0E,$04 
+db SEAFOAM_ISLANDS_5,$0E,$05
+db $FF ;end
+; 0xc3ff
+
+INCBIN "baserom.gbc",$C3FF,$C766-$C3FF
+
 	ld hl, TilesetsHeadPtr
 
 INCBIN "baserom.gbc",$C769,$C7BE-$C769

@@ -604,7 +604,8 @@ def output_bank_opcodes(original_offset, max_byte_count=0x4000):
     bank_id = 0
     if original_offset > 0x8000:
         bank_id = original_offset / 0x4000
-    print "bank id is: " + str(bank_id)
+    #print "bank id is: " + str(bank_id)
+    print "Function{0:x}:".format(original_offset);
 
     last_hl_address = None #for when we're scanning the main map script
     last_a_address = None
