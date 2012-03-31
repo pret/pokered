@@ -10810,35 +10810,35 @@ CheckForceBikeOrSurf: ; C38B
 	ld hl, $D732
 	bit 5, [hl]
 	ret nz
-	ld hl, ForcedBikeSurfMaps
+	ld hl, ForcedBikeOrSurfMaps
 	ld a, [W_YCOORD]
 	ld b, a
 	ld a, [W_XCOORD]
 	ld c, a
 	ld a, [W_CURMAP]
 	ld d, a
-.loop\0
+.loop\@
 	ld a, [hli]
 	cp $ff
 	ret z ;if we reach FF then it's not part of the list
 	cp d ;compare to current map
-	jr nz, .incorrectMap\0
+	jr nz, .incorrectMap\@
 	ld a, [hli]
 	cp b ;compare y-coord
-	jr nz, .incorrectY\0
+	jr nz, .incorrectY\@
 	ld a, [hli]
 	cp c ;compare x-coord
-	jr nz, .loop\0 ; incorrect x-coord, check next item
+	jr nz, .loop\@ ; incorrect x-coord, check next item
 	ld a, [W_CURMAP]
 	cp SEAFOAM_ISLANDS_4
 	ld a, $2
 	ld [$d666], a
-	jr z, .forceSurfing\0
+	jr z, .forceSurfing\@
 	ld a, [$d35e]
 	cp SEAFOAM_ISLANDS_5
 	ld a, $2
 	ld [$d668], a
-	jr z, .forceSurfing\0
+	jr z, .forceSurfing\@
 	;force bike riding
 	ld hl, $d732
 	set 5, [hl]
@@ -10846,19 +10846,19 @@ CheckForceBikeOrSurf: ; C38B
 	ld [$d700], a
 	ld [$d11a], a
 	jp ForceBikeOrSurf
-.incorrectMap\0
+.incorrectMap\@
 	inc hl
-.incorrectY\0
+.incorrectY\@
 	inc hl
-	jr .loop\0
-.forceSurfing\0
+	jr .loop\@
+.forceSurfing\@
 	ld a, $2
 	ld [$d700], a
 	ld [$d11a], a
 	jp ForceBikeOrSurf
 ; 0xc3e6
 
-ForcedBikeSurfMaps: ;C3e6
+ForcedBikeOrSurfMaps: ;C3e6
 ; map id, y, x
 db ROUTE_16,$0A,$11 
 db ROUTE_16,$0B,$11
