@@ -6900,7 +6900,22 @@ LoadHpBarAndStatusTilePatterns: ; 36C0
 	ld bc,(BANK(HpBarAndStatusGraphics) << 8 | $1e)
 	jp CopyVideoData ; if LCD is on, transfer during V-blank
 
-INCBIN "baserom.gbc",$36E0,$3739 - $36E0
+;Fills memory range with the specified byte.
+;input registers a = fill_byte, bc = length, hl = address
+FillMemory: ;36E0
+	push de
+	ld d, a
+.loop\@
+	ld a, d
+	ldi [hl], a
+	dec bc
+	ld a, b
+	or c
+	jr nz, .loop\@ 
+	pop de
+	ret
+
+INCBIN "baserom.gbc",$36EB,$3739 - $36EB
 
 DelayFrames: ; 3739
 ; wait n frames, where n is the value in c
@@ -7932,7 +7947,24 @@ Predef: ; 3E6D
 	ld [$2000],a
 	ret
 
-INCBIN "baserom.gbc",$3E94,$4000 - $3E94
+;loads hl from cc4f, de from cc51, and bc from cc53
+Load16BitRegisters: ;3e94
+	ld a, [$cc4f]
+	ld h, a
+	ld a, [$cc50]
+	ld l, a
+	ld a, [$cc51]
+	ld d, a
+	ld a, [$cc52]
+	ld e, a
+	ld a, [$cc53]
+	ld b, a
+	ld a, [$cc54]
+	ld c, a
+	ret
+; 0x3ead
+
+INCBIN "baserom.gbc",$3EAD,$4000 - $3EAD
 
 SECTION "bank1",DATA,BANK[$1]
 
