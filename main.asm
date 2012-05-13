@@ -470,8 +470,8 @@ EnterMap: ; 3A6
 	call Bankswitch ; display fly/teleport in graphical effect
 	call $2429 ; move sprites
 .didNotFlyOrTeleportIn\@
-	ld b,$03
-	ld hl,$438b
+	ld b,BANK(CheckForceBikeOrSurf)
+	ld hl,CheckForceBikeOrSurf
 	call Bankswitch ; handle currents in SF islands and forced bike riding in cycling road
 	ld hl,$d72d
 	res 5,[hl]
@@ -2849,8 +2849,17 @@ SwitchToMapRomBank: ; 12BC
 	pop bc
 	pop hl
 	ret
+	
+INCBIN "baserom.gbc",$12DA,$12ED-$12DA
 
-INCBIN "baserom.gbc",$12DA,$12F8 - $12DA
+;appears to be called twice inside function $C38B
+;if $d700,$d11a == $1 then biking
+;if $d700,$d11a == $2 then surfing
+ForceBikeOrSurf: ; 12ED
+	ld b,5 ;graphics bank 5
+	ld hl,LoadPlayerSpriteGraphics ;load player sprite graphics
+	call Bankswitch ;loads bank 5 and then calls LoadPlayerSpriteGraphics
+	jp $2307 ;update map/player state?
 
 ; this is used to check if the player wants to interrupt the opening sequence at several points
 ; XXX is this used anywhere else?
@@ -6891,7 +6900,22 @@ LoadHpBarAndStatusTilePatterns: ; 36C0
 	ld bc,(BANK(HpBarAndStatusGraphics) << 8 | $1e)
 	jp CopyVideoData ; if LCD is on, transfer during V-blank
 
-INCBIN "baserom.gbc",$36E0,$3739 - $36E0
+;Fills memory range with the specified byte.
+;input registers a = fill_byte, bc = length, hl = address
+FillMemory: ;36E0
+	push de
+	ld d, a
+.loop\@
+	ld a, d
+	ldi [hl], a
+	dec bc
+	ld a, b
+	or c
+	jr nz, .loop\@ 
+	pop de
+	ret
+
+INCBIN "baserom.gbc",$36EB,$3739 - $36EB
 
 DelayFrames: ; 3739
 ; wait n frames, where n is the value in c
@@ -7923,75 +7947,93 @@ Predef: ; 3E6D
 	ld [$2000],a
 	ret
 
-INCBIN "baserom.gbc",$3E94,$3F22 - $3E94
+;loads hl from cc4f, de from cc51, and bc from cc53
+
+Load16BitRegisters: ;3e94
+	ld a, [$cc4f]
+	ld h, a
+	ld a, [$cc50]
+	ld l, a
+	ld a, [$cc51]
+	ld d, a
+	ld a, [$cc52]
+	ld e, a
+	ld a, [$cc53]
+	ld b, a
+	ld a, [$cc54]
+	ld c, a
+	ret
+; 0x3ead
+
+INCBIN "baserom.gbc",$3EAD,$3F22 - $3EAD
 
 ; 0x3F22
-dw $66ee
-dw $66f8
-dw $5b8e
-dw $5b81
-dw $6960
-dw $697e
-dw $6983
-dw $6cbd
-dw $5bbe
-dw $5ba8
-dw $5bd4
-dw $6453
-dw $6458
-dw $6511
-dw $64a3
-dw $64a8
-dw $64ad
-dw $64b2
-dw $64d0
-dw $64d5
-dw $6502
-dw $64da
-dw $64df
-dw $64e4
-dw $64b7
-dw $64bc
-dw $64c1
-dw $64c6
-dw $64cb
-dw $6508
-dw $6529
-dw $69aa
-dw $5ced
-dw $5865
-dw $5878
-dw FoundHiddenItemText
-dw HiddenItemBagFullText
-dw $5df7
-dw $6a3d
-dw $7e79
-dw $7e7e
-dw $7e83
-dw FoundHiddenCoinsText
-dw DroppedHiddenCoinsText
-dw $6bdd
-dw $6be2
-dw $6c05
-dw $6b69
-dw $6a25
-dw $7f37
-dw $7f32
-dw $5c29
-dw $69a4
-dw $6a2a
-dw $6a10
-dw $6a1d
-dw $6953
-dw $7bbf
-dw $5ec8
-dw $5edb
-dw $5eef
-dw $5f02
-dw $7c12
-dw $7be8
-dw $7c0d
-dw $7c45
+	dw $66ee
+	dw $66f8
+	dw $5b8e
+	dw $5b81
+	dw $6960
+	dw $697e
+	dw $6983
+	dw $6cbd
+	dw $5bbe
+	dw $5ba8
+	dw $5bd4
+	dw $6453
+	dw $6458
+	dw $6511
+	dw $64a3
+	dw $64a8
+	dw $64ad
+	dw $64b2
+	dw $64d0
+	dw $64d5
+	dw $6502
+	dw $64da
+	dw $64df
+	dw $64e4
+	dw $64b7
+	dw $64bc
+	dw $64c1
+	dw $64c6
+	dw $64cb
+	dw $6508
+	dw $6529
+	dw $69aa
+	dw $5ced
+	dw $5865
+	dw $5878
+	dw FoundHiddenItemText
+	dw HiddenItemBagFullText
+	dw $5df7
+	dw $6a3d
+	dw $7e79
+	dw $7e7e
+	dw $7e83
+	dw FoundHiddenCoinsText
+	dw DroppedHiddenCoinsText
+	dw $6bdd
+	dw $6be2
+	dw $6c05
+	dw $6b69
+	dw $6a25
+	dw $7f37
+	dw $7f32
+	dw $5c29
+	dw $69a4
+	dw $6a2a
+	dw $6a10
+	dw $6a1d
+	dw $6953
+	dw $7bbf
+	dw $5ec8
+	dw $5edb
+	dw $5eef
+	dw $5f02
+	dw $7c12
+	dw $7be8
+	dw $7c0d
+	dw $7c45
 
 SECTION "bank1",DATA,BANK[$1]
 
@@ -10863,7 +10905,75 @@ MapHeaderBanks: ; 423D
 	db BANK(Bruno_h)
 	db BANK(Agatha_h)
 
-INCBIN "baserom.gbc",$C335,$C766-$C335
+INCBIN "baserom.gbc",$C335,$C38B-$C335
+
+CheckForceBikeOrSurf: ; C38B
+	ld hl, $D732
+	bit 5, [hl]
+	ret nz
+	ld hl, ForcedBikeOrSurfMaps
+	ld a, [W_YCOORD]
+	ld b, a
+	ld a, [W_XCOORD]
+	ld c, a
+	ld a, [W_CURMAP]
+	ld d, a
+.loop\@
+	ld a, [hli]
+	cp $ff
+	ret z ;if we reach FF then it's not part of the list
+	cp d ;compare to current map
+	jr nz, .incorrectMap\@
+	ld a, [hli]
+	cp b ;compare y-coord
+	jr nz, .incorrectY\@
+	ld a, [hli]
+	cp c ;compare x-coord
+	jr nz, .loop\@ ; incorrect x-coord, check next item
+	ld a, [W_CURMAP]
+	cp SEAFOAM_ISLANDS_4
+	ld a, $2
+	ld [$d666], a
+	jr z, .forceSurfing\@
+	ld a, [$d35e]
+	cp SEAFOAM_ISLANDS_5
+	ld a, $2
+	ld [$d668], a
+	jr z, .forceSurfing\@
+	;force bike riding
+	ld hl, $d732
+	set 5, [hl]
+	ld a, $1
+	ld [$d700], a
+	ld [$d11a], a
+	jp ForceBikeOrSurf
+.incorrectMap\@
+	inc hl
+.incorrectY\@
+	inc hl
+	jr .loop\@
+.forceSurfing\@
+	ld a, $2
+	ld [$d700], a
+	ld [$d11a], a
+	jp ForceBikeOrSurf
+; 0xc3e6
+
+ForcedBikeOrSurfMaps: ;C3e6
+; map id, y, x
+db ROUTE_16,$0A,$11 
+db ROUTE_16,$0B,$11
+db ROUTE_18,$08,$21
+db ROUTE_18,$09,$21
+db SEAFOAM_ISLANDS_4,$07,$12 
+db SEAFOAM_ISLANDS_4,$07,$13 
+db SEAFOAM_ISLANDS_5,$0E,$04 
+db SEAFOAM_ISLANDS_5,$0E,$05
+db $FF ;end
+; 0xc3ff
+
+INCBIN "baserom.gbc",$C3FF,$C766-$C3FF
+
 	ld hl, TilesetsHeadPtr
 
 INCBIN "baserom.gbc",$C769,$C7BE-$C769
