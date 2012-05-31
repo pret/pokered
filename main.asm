@@ -3358,7 +3358,7 @@ PrintBCDNumber: ; 15CD
 .skipRightAlignmentAdjustment\@
 	bit 5,b
 	jr z,.skipCurrencySymbol\@
-	ld [hl],$f0 ; currency symbol
+	ld [hl],"¥"
 	inc hl
 .skipCurrencySymbol\@
 	ld [hl],"0"
