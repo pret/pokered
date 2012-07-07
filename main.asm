@@ -4187,7 +4187,7 @@ TextCommand06: ; 1BCC
 	push bc
 	call $3898 ; blink arrow and wait for A or B to be pressed
 	pop bc
-	ld a,$7f ; blank space
+	ld a," "
 	ld [$c4f2],a ; overwrite down arrow with blank space
 	pop hl
 	jp NextTextCommand
@@ -4196,7 +4196,7 @@ TextCommand06: ; 1BCC
 ; 07
 ; (no arguments)
 TextCommand07: ; 1BE7
-	ld a,$7f ; blank space
+	ld a," "
 	ld [$c4f2],a ; place blank space in lower right corner of dialogue text box
 	call $1b18 ; scroll up text
 	call $1b18
@@ -4411,7 +4411,7 @@ GetRowColAddressBgMap: ; 1CDD
 ; clears a VRAM background map with blank space tiles
 ; INPUT: h - high byte of background tile map address in VRAM
 ClearBgMap: ; 1CF0
-	ld a,$7f ; blank space
+	ld a," "
 	jr .next\@
 	ld a,l ; XXX does anything call this?
 .next\@
@@ -5890,7 +5890,7 @@ DisplayListMenuIDLoop: ; 2C53
 	and a ; is it the Old Man battle?
 	jr z,.notOldManBattle\@
 .oldManBattle\@
-	ld a,$ed ; right arrow menu cursor
+	ld a,"▶"
 	FuncCoord 5,4
 	ld [Coord],a ; place menu cursor in front of first menu entry
 	ld c,80
@@ -7417,7 +7417,7 @@ PlaceMenuCursor: ; 3B7C
 	jr nz,.oldMenuItemLoop\@
 .checkForArrow1\@
 	ld a,[hl]
-	cp a,$ed ; was an arrow next to the previously selected menu item?
+	cp a,"▶" ; was an arrow next to the previously selected menu item?
 	jr nz,.skipClearingArrow\@
 .clearArrow\@
 	ld a,[W_TILEBEHINDCURSOR]
@@ -7443,11 +7443,11 @@ PlaceMenuCursor: ; 3B7C
 	jr nz,.currentMenuItemLoop\@
 .checkForArrow2\@
 	ld a,[hl]
-	cp a,$ed ; has the right arrow already been placed?
+	cp a,"▶" ; has the right arrow already been placed?
 	jr z,.skipSavingTile\@ ; if so, don't lose the saved tile
 	ld [W_TILEBEHINDCURSOR],a ; save tile before overwriting with right arrow
 .skipSavingTile\@
-	ld a,$ed ; place right arrow
+	ld a,"▶" ; place right arrow
 	ld [hl],a
 	ld a,l
 	ld [W_MENUCURSORLOCATION],a
@@ -7477,7 +7477,7 @@ EraseMenuCursor: ; 3BF9
 	ld l,a
 	ld a,[W_MENUCURSORLOCATION + 1]
 	ld h,a
-	ld [hl],$7f ; blank space
+	ld [hl]," "
 	ret
 
 ; This toggles a blinking down arrow at hl on and off after a delay has passed.
@@ -7503,7 +7503,7 @@ HandleDownArrowBlinkTiming: ; 3C04
 	dec a
 	ld [H_DOWNARROWBLINKCNT2],a
 	ret nz
-	ld a,$7f ; blank space
+	ld a," "
 	ld [hl],a
 	ld a,$ff
 	ld [H_DOWNARROWBLINKCNT1],a
@@ -19684,7 +19684,7 @@ ErasePartyMenuCursors: ; 72ED
 	ld bc,2 * 20 ; menu cursor positions are 2 rows apart
 	ld a,6 ; 6 menu cursor positions
 .loop\@
-	ld [hl],$7f
+	ld [hl]," "
 	add hl,bc
 	dec a
 	jr nz,.loop\@
@@ -19724,7 +19724,7 @@ StartMenu_Item: ; 7302
 	jp RedisplayStartMenu
 .choseItem\@
 ; erase menu cursor (blank each tile in front of an item name)
-	ld a,$7f ; blank space
+	ld a," "
 	FuncCoord 5,4
 	ld [Coord],a
 	FuncCoord 5,6
@@ -19929,7 +19929,7 @@ DrawTrainerInfo: ; 749A
 	call DisableLCD
 	FuncCoord 0,2
 	ld hl,Coord
-	ld a,$7f ; blank tile ID
+	ld a," "
 	call TrainerInfo_DrawVerticalLine
 	FuncCoord 1,2
 	ld hl,Coord
@@ -42199,7 +42199,7 @@ HandlePokedexListMenu: ; 4111
 	ld hl,W_OWNEDPOKEMON
 	call IsPokemonBitSet
 	pop hl
-	ld a,$7f ; blank tile
+	ld a," "
 	jr z,.writeTile\@
 	ld a,$72 ; pokeball tile
 .writeTile\@
