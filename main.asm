@@ -23259,7 +23259,7 @@ VermilionCityText4: ; 0x1991d
 VermilionCityText5: ; 0x19922
 	TX_FAR _VermilionCityText5
 	db $08 ; asm
-	ld a, $6a
+	ld a, MACHOP
 	call $13d0
 	call $3748
 	ld hl, $5933
@@ -23374,7 +23374,7 @@ CeladonCityText6: ; 0x199e7
 CeladonCityText7: ; 0x199ec
 	TX_FAR _CeladonCityText7
 	db $08 ; asm
-	ld a, $6f
+	ld a, POLIWRATH
 	call $13d0
 	jp TextScriptEnd
 
@@ -26391,7 +26391,7 @@ PewterHouse1Texts: ; 0x1d5f6
 PewterHouse1Text1: ; 0x1d5fc
 	TX_FAR _PewterHouse1Text1
 	db $08 ; asm
-	ld a, $3
+	ld a, NIDORAN_M
 	call $13d0
 	call $3748
 	jp TextScriptEnd
@@ -26828,14 +26828,14 @@ UnnamedText_1d8f9: ; 0x1d8f9
 LavenderHouse1Text3: ; 0x1d8fe
 	TX_FAR _LavenderHouse1Text3
 	db $8
-	ld a, $2f
+	ld a, PSYDUCK
 	call $13d0
 	jp TextScriptEnd
 
 LavenderHouse1Text4: ; 0x1d90b
 	TX_FAR _LavenderHouse1Text4
 	db $8
-	ld a, $a7
+	ld a, NIDORINO
 	call $13d0
 	jp TextScriptEnd
 ; 0x1d918
@@ -26931,7 +26931,7 @@ LavenderHouse2Texts: ; 0x1d9b2
 LavenderHouse2Text1: ; 0x1d9b6
 	TX_FAR _LavenderHouse2Text1
 	db $8
-	ld a, $11
+	ld a, CUBONE
 	call $13d0
 	jp TextScriptEnd
 ; 0x1d9c3
@@ -27106,7 +27106,7 @@ VermilionHouse1Text1: ; 0x1db06
 VermilionHouse1Text2: ; 0x1db0b
 	TX_FAR _VermilionHouse1Text2
 	db $08 ; asm
-	ld a, $24
+	ld a, PIDGEY
 	call $13d0
 	call $3748
 	jp TextScriptEnd
@@ -27325,7 +27325,7 @@ SaffronHouse1Text1: ; 0x1dde8
 SaffronHouse1Text2: ; 0x1dded
 	TX_FAR _SaffronHouse1Text2
 	db $8
-	ld a, $24
+	ld a, PIDGEY
 	call $13d0
 	jp TextScriptEnd
 ; 0x1ddfa
@@ -28052,7 +28052,7 @@ UnnamedText_1e3aa: ; 0x1e3aa
 UnnamedText_1e3af: ; 0x1e3af
 	TX_FAR _UnnamedText_1e3af ; 0x8c5ea
 	db $8
-	ld a, $4b
+	ld a, ZAPDOS
 	call $13d0
 	call $3748
 	jp TextScriptEnd
@@ -28069,15 +28069,15 @@ PowerPlantObject: ; 0x1e3bf (size=135)
 	db $0 ; signs
 
 	db $e ; people
-	db SPRITE_BALL, $14 + 4, $9 + 4, $ff, $ff, $41, VOLTORB, $28 ; trainer
-	db SPRITE_BALL, $12 + 4, $20 + 4, $ff, $ff, $42, VOLTORB, $28 ; trainer
-	db SPRITE_BALL, $19 + 4, $15 + 4, $ff, $ff, $43, VOLTORB, $28 ; trainer
-	db SPRITE_BALL, $12 + 4, $19 + 4, $ff, $ff, $44, ELECTRODE, $2b ; trainer
-	db SPRITE_BALL, $22 + 4, $17 + 4, $ff, $ff, $45, VOLTORB, $28 ; trainer
-	db SPRITE_BALL, $1c + 4, $1a + 4, $ff, $ff, $46, VOLTORB, $28 ; trainer
-	db SPRITE_BALL, $e + 4, $15 + 4, $ff, $ff, $47, ELECTRODE, $2b ; trainer
-	db SPRITE_BALL, $20 + 4, $25 + 4, $ff, $ff, $48, VOLTORB, $28 ; trainer
-	db SPRITE_BIRD, $9 + 4, $4 + 4, $ff, $d1, $49, ZAPDOS, $32 ; trainer
+	db SPRITE_BALL, $14 + 4, $9 + 4, $ff, $ff, $41, VOLTORB, 40 ; trainer
+	db SPRITE_BALL, $12 + 4, $20 + 4, $ff, $ff, $42, VOLTORB, 40 ; trainer
+	db SPRITE_BALL, $19 + 4, $15 + 4, $ff, $ff, $43, VOLTORB, 40 ; trainer
+	db SPRITE_BALL, $12 + 4, $19 + 4, $ff, $ff, $44, ELECTRODE, 43 ; trainer
+	db SPRITE_BALL, $22 + 4, $17 + 4, $ff, $ff, $45, VOLTORB, 40 ; trainer
+	db SPRITE_BALL, $1c + 4, $1a + 4, $ff, $ff, $46, VOLTORB, 40 ; trainer
+	db SPRITE_BALL, $e + 4, $15 + 4, $ff, $ff, $47, ELECTRODE, 43 ; trainer
+	db SPRITE_BALL, $20 + 4, $25 + 4, $ff, $ff, $48, VOLTORB, 40 ; trainer
+	db SPRITE_BIRD, $9 + 4, $4 + 4, $ff, $d1, $49, ZAPDOS, 50 ; trainer
 	db SPRITE_BALL, $19 + 4, $7 + 4, $ff, $ff, $8a, CARBOS ; item
 	db SPRITE_BALL, $3 + 4, $1c + 4, $ff, $ff, $8b, HP_UP ; item
 	db SPRITE_BALL, $3 + 4, $22 + 4, $ff, $ff, $8c, RARE_CANDY ; item
@@ -46448,7 +46448,7 @@ UnknownDungeon3Text1: ; 0x45f1c
 UnknownDungeon3MewtwoText: ; 0x45f26
 	TX_FAR _UnknownDungeon3MewtwoText ; 0x85c72
 	db $8
-	ld a, $83
+	ld a, MEWTWO
 	call $13d0
 	call $3748
 	jp TextScriptEnd
@@ -46463,7 +46463,7 @@ UnknownDungeon3Object: ; 0x45f36 (size=34)
 	db $0 ; signs
 
 	db $3 ; people
-	db SPRITE_SLOWBRO, $d + 4, $1b + 4, $ff, $d0, $41, MEWTWO, $46 ; trainer
+	db SPRITE_SLOWBRO, $d + 4, $1b + 4, $ff, $d0, $41, MEWTWO, 70 ; trainer
 	db SPRITE_BALL, $9 + 4, $10 + 4, $ff, $ff, $82, ULTRA_BALL ; item
 	db SPRITE_BALL, $1 + 4, $12 + 4, $ff, $ff, $83, MAX_REVIVE ; item
 
@@ -47189,7 +47189,7 @@ SeafoamIslands5Text3: ; 0x46893
 SeafoamIslands5BattleText2: ; 0x468a2
 	TX_FAR _SeafoamIslands5BattleText2 ; 0x88075
 	db $8
-	ld a, $4a
+	ld a, ARTICUNO
 	call $13d0
 	call $3748
 	jp TextScriptEnd
@@ -47219,7 +47219,7 @@ SeafoamIslands5Object: ; 0x468bc (size=62)
 	db $3 ; people
 	db SPRITE_BOULDER, $f + 4, $4 + 4, $ff, $ff, $1 ; person
 	db SPRITE_BOULDER, $f + 4, $5 + 4, $ff, $ff, $2 ; person
-	db SPRITE_BIRD, $1 + 4, $6 + 4, $ff, $d0, $43, ARTICUNO, $32 ; trainer
+	db SPRITE_BIRD, $1 + 4, $6 + 4, $ff, $d0, $43, ARTICUNO, 50 ; trainer
 
 	; warp-to
 	EVENT_DISP $f, $11, $14 ; SEAFOAM_ISLANDS_4
@@ -53955,7 +53955,7 @@ VictoryRoad2Text6: ; 0x518b0
 VictoryRoad2BattleText6: ; 0x518ba
 	TX_FAR _VictoryRoad2BattleText6 ; 0x8d06e
 	db $8
-	ld a, $49
+	ld a, MOLTRES
 	call $13d0
 	call $3748
 	jp TextScriptEnd
@@ -54056,7 +54056,7 @@ VictoryRoad2Object: ; 0x51915 (size=154)
 	db SPRITE_BLACK_HAIR_BOY_1, $8 + 4, $13 + 4, $ff, $d0, $43, TAMER + $C8, $5 ; trainer
 	db SPRITE_BLACK_HAIR_BOY_2, $2 + 4, $4 + 4, $ff, $d0, $44, POKEMANIAC + $C8, $6 ; trainer
 	db SPRITE_BLACK_HAIR_BOY_2, $3 + 4, $1a + 4, $ff, $d2, $45, JUGGLER + $C8, $5 ; trainer
-	db SPRITE_BIRD, $5 + 4, $b + 4, $ff, $d1, $46, MOLTRES, $32 ; trainer
+	db SPRITE_BIRD, $5 + 4, $b + 4, $ff, $d1, $46, MOLTRES, 50 ; trainer
 	db SPRITE_BALL, $5 + 4, $1b + 4, $ff, $ff, $87, TM_17 ; item
 	db SPRITE_BALL, $9 + 4, $12 + 4, $ff, $ff, $88, FULL_HEAL ; item
 	db SPRITE_BALL, $b + 4, $9 + 4, $ff, $ff, $89, TM_05 ; item
@@ -61453,7 +61453,7 @@ FanClubText3: ; 0x59bee
 	db $8
 	ld hl, UnnamedText_59c00
 	call PrintText
-	ld a, $54
+	ld a, PIKACHU
 	call $13d0
 	call $3748
 	jp TextScriptEnd
@@ -66385,7 +66385,7 @@ PokemonTower6Text7: ; 0x60c02
 	db $8
 	ld hl, UnnamedText_60c1f
 	call PrintText
-	ld a, $91
+	ld a, MAROWAK
 	call $13d0
 	call $3748
 	ld c, $1e
@@ -67701,7 +67701,7 @@ SSAnne8Text4: ; 0x619f4
 SSAnne8Text8: ; 0x619fe
 	TX_FAR _SSAnne8Text8
 	db $08 ; asm
-	ld a, $65
+	ld a, WIGGLYTUFF
 	call $13d0
 	jp TextScriptEnd
 
@@ -68232,7 +68232,7 @@ SSAnne10Text6: ; 0x61dff
 SSAnne10Text8: ; 0x61e09
 	TX_FAR _SSAnne10Text8
 	db $8 ; 0x61e0d
-	ld a, $29
+	ld a, MACHOKE
 	call $13d0
 	jp TextScriptEnd
 
@@ -72971,7 +72971,7 @@ CopycatsHouseF1Text2: ; 0x75ed1
 CopycatsHouseF1Text3: ; 0x75ed6
 	TX_FAR _CopycatsHouseF1Text3
 	db $8
-	ld a, $28
+	ld a, CHANSEY
 	call $13d0
 	jp TextScriptEnd
 
