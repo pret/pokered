@@ -22509,12 +22509,12 @@ PewterCityScript: ; 0x19237
 
 PewterCityScripts: ; 0x19243
 	dw PewterCityScript0
-	dw PewterCityScript1 ; 5280
-	dw PewterCityScript2 ; 52d3
-	dw PewterCityScript3 ; 52e9
-	dw PewterCityScript4 ; 5305
-	dw PewterCityScript5 ; 5359
-	dw PewterCityScript6 ; 536f
+	dw PewterCityScript1
+	dw PewterCityScript2
+	dw PewterCityScript3
+	dw PewterCityScript4
+	dw PewterCityScript5
+	dw PewterCityScript6
 
 PewterCityScript0: ; 0x19251
 	xor a
