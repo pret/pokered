@@ -6709,7 +6709,7 @@ INCBIN "baserom.gbc",$349B,$34BF - $349B
 ; OUTPUT:
 ; [$cd3d] = if there is match, the matching array index
 ; sets carry if the coordinates are in the array, clears carry if not
-ArePlayerCoordsInArray: ; 34BF
+ArePlayerCoordsInArray: ; 34bf
 	ld a,[W_YCOORD]
 	ld b,a
 	ld a,[W_XCOORD]
@@ -22517,11 +22517,31 @@ PewterCityScript0: ; 0x19251
 	ld [$d619], a
 	ld hl, $d754
 	res 0, [hl]
-	call $525e
+	call Function1925e
 	ret
 ; 0x1925e
 
-INCBIN "baserom.gbc",$1925e,$12d
+Function1925e: ; 0x1925e
+	ld a, [$d755]
+	bit 7, a
+	ret nz
+	ld hl, $5277
+	call ArePlayerCoordsInArray
+	ret nc
+	ld a, $f0
+	ld [$cd6b], a
+	ld a, $5
+	ld [$ff00+$8c], a
+	jp $2920
+
+Data19277: ; 0x19277
+	db $11,$23
+	db $11,$24
+	db $12,$25
+	db $13,$25
+	db $ff
+
+INCBIN "baserom.gbc",$19280,$1938b-$19280
 
 PewterCityTexts: ; 0x1938b
 	dw PewterCityText1, PewterCityText2, PewterCityText3, PewterCityText4, PewterCityText5, PewterCityText6, PewterCityText7, MartSignText, PokeCenterSignText, PewterCityText10, PewterCityText11, PewterCityText12, PewterCityText13, PewterCityText14
@@ -22696,7 +22716,7 @@ CeruleanCityScript0: ; 0x194c8
 	bit 7, a
 	jr nz, .asm_194f7 ; 0x194cd $28
 	ld hl, $554f
-	call $34bf
+	call ArePlayerCoordsInArray
 	jr nc, .asm_194f7 ; 0x194d5 $20
 	ld a, [$cd3d]
 	cp $1
@@ -22718,7 +22738,7 @@ CeruleanCityScript0: ; 0x194c8
 	bit 0, a
 	ret nz
 	ld hl, $5554
-	call $34bf
+	call ArePlayerCoordsInArray
 	ret nc
 	ld a, [$d700]
 	and a
@@ -23114,7 +23134,7 @@ VermilionCityScript0: ; 0x197e6
 	and a
 	ret nz
 	ld hl, $5823
-	call $34bf
+	call ArePlayerCoordsInArray
 	ret nc
 	xor a
 	ld [$ff00+$b4], a
@@ -23195,7 +23215,7 @@ VermilionCityText3: ; 0x198b1
 	cp $c
 	jr z, .asm_07af3 ; 0x198be
 	ld hl, $58ff
-	call $34bf
+	call ArePlayerCoordsInArray
 	jr nc, .asm_57b73 ; 0x198c6
 .asm_07af3 ; 0x198c8
 	ld hl, SSAnneWelcomeText4
@@ -27541,7 +27561,7 @@ Route5GateScript0: ; 0x1df50
 	bit 6, a
 	ret nz
 	ld hl, $5f8f
-	call $34bf
+	call ArePlayerCoordsInArray
 	ret nc
 	ld a, $2
 	ld [$d528], a
@@ -27678,7 +27698,7 @@ Route6GateScript0: ; 0x1e04e
 	bit 6, a
 	ret nz
 	ld hl, Unknown_1e08c
-	call $34bf
+	call ArePlayerCoordsInArray
 	ret nc
 	ld a, $1
 	ld [$d528], a
@@ -27788,7 +27808,7 @@ Route7GateScript0: ; 0x1e128
 	bit 6, a
 	ret nz
 	ld hl, $6167
-	call $34bf
+	call ArePlayerCoordsInArray
 	ret nc
 	ld a, $8
 	ld [$d528], a
@@ -27869,7 +27889,7 @@ Route8GateScript0: ; 0x1e1ee
 	bit 6, a
 	ret nz
 	ld hl, $622c
-	call $34bf
+	call ArePlayerCoordsInArray
 	ret nc
 	ld a, $2
 	ld [$d528], a
@@ -28248,7 +28268,7 @@ Route22GateScripts: ; 0x1e69e
 
 Route22GateScript0: ; 0x1e6a4
 	ld hl, Route22GateScript3
-	call $34bf
+	call ArePlayerCoordsInArray
 	ret nc
 	xor a
 	ld [$ff00+$b4], a
@@ -47124,7 +47144,7 @@ SeafoamIslands5Script0: ; 0x467c7
 	cp $3
 	ret z
 	ld hl, $67fe
-	call $34bf
+	call ArePlayerCoordsInArray
 	ret nc
 	ld a, [$cd3d]
 	cp $3
@@ -50573,7 +50593,7 @@ Route16GateMapScript0: ; 0x496d7
 	call $5755
 	ret nz
 	ld hl, $5714
-	call $34bf
+	call ArePlayerCoordsInArray
 	ret nc
 	ld a, $3
 	ld [$ff00+$8c], a
@@ -50774,7 +50794,7 @@ Route18GateScript0: ; 0x4988f
 	call $5755
 	ret nz
 	ld hl, $58cc
-	call $34bf
+	call ArePlayerCoordsInArray
 	ret nc
 	ld a, $2
 	ld [$ff00+$8c], a
@@ -51223,7 +51243,7 @@ MtMoon3Script: ; 0x49d0b
 	bit 1, a
 	ret z
 	ld hl, $5d37
-	call $34bf
+	call ArePlayerCoordsInArray
 	jr nc, .asm_49d31 ; 0x49d29 $6
 	ld hl, $d72e
 	set 4, [hl]
@@ -52891,7 +52911,7 @@ Route22Script0: ; 0x50f00
 	bit 7, a
 	ret z
 	ld hl, $4f2d
-	call $34bf
+	call ArePlayerCoordsInArray
 	ret nc
 	ld a, [$cd3d]
 	ld [$cf0d], a
@@ -65661,7 +65681,7 @@ PokemonTower2Script0: ; 0x6050f
 	bit 7, a
 	ret nz
 	ld hl, $455e
-	call $34bf
+	call ArePlayerCoordsInArray
 	ret nc
 	ld a, $ff
 	ld [$c0ee], a
@@ -67015,7 +67035,7 @@ SSAnne2Script4: ; 0x613bd
 
 SSAnne2Script0: ; 0x613be
 	ld hl, $5411
-	call $34bf
+	call ArePlayerCoordsInArray
 	ret nc
 	ld a, $ff
 	ld [$c0ee], a
@@ -71295,7 +71315,7 @@ SafariZoneEntranceScripts: ; 0x751d9
 
 SafariZoneEntranceScript0: ; 0x751e7
 	ld hl, Unknown_75221
-	call $34bf
+	call ArePlayerCoordsInArray
 	ret nc
 	ld a, $3
 	ld [$ff00+$8c], a
