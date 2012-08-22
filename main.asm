@@ -552,7 +552,7 @@ OverworldLoopLessDelay: ; 402
 	jr nz,.checkForOpponent\@
 	ld a,[$c45c]
 	ld [$cf0e],a
-	call $2920 ; display either the start menu or the NPC/sign text
+	call DisplayTextID ; display either the start menu or the NPC/sign text
 	ld a,[$cc47]
 	and a
 	jr z,.checkForOpponent\@
@@ -6812,7 +6812,7 @@ Bankswitch: ; 35D6
 
 INCBIN "baserom.gbc",$35EC,$363A - $35EC
 
-MoveSprite: ; 363A
+MoveSprite: ; 363a
 ; move the sprite [$FF8C] with the movement pointed to by de
 ; actually only copies the movement data to $CC5B for later
 	call Function3541
@@ -7916,7 +7916,7 @@ GenRandom: ; 3E5C
 	pop hl
 	ret
 
-Predef: ; 3E6D
+Predef: ; 0x3e6d
 ; runs a predefined ASM command, where the command ID is read from $D0B7
 ; $3E6D grabs the ath pointer from PredefPointers and executes it
 
@@ -8995,12 +8995,12 @@ IntroPredef3B: ; 62A4
 	xor a
 	ld [$FFE1],a
 	ld a,1
-	jp $3E6D
+	jp Predef
 
 Function62CE: ; 62CE XXX called by 4B2 948 989 5BF9 5D15
 	call $62FF
 	ld a,$19
-	call $3E6D
+	call Predef
 	ld hl,$D732
 	bit 2,[hl]
 	res 2,[hl]
@@ -22098,7 +22098,7 @@ PalletTownScript2:
 	ld [$CF0D],a
 	ld a,1
 	ld [$FF8C],a
-	call $2920
+	call DisplayTextID
 	ld a,$FF
 	ld [$CD6B],a
 	ld a,0
@@ -22155,7 +22155,7 @@ PalletTownScript4:
 	ld [$CD6B],a
 	ld a,1
 	ld [$FF8C],a
-	call $2920
+	call DisplayTextID
 	ld a,$FF
 	ld [$CD6B],a
 	ld a,1
@@ -22509,8 +22509,12 @@ PewterCityScript: ; 0x19237
 
 PewterCityScripts: ; 0x19243
 	dw PewterCityScript0
-
-INCBIN "baserom.gbc",$19245,$c
+	dw PewterCityScript1 ; 5280
+	dw PewterCityScript2 ; 52d3
+	dw PewterCityScript3 ; 52e9
+	dw PewterCityScript4 ; 5305
+	dw PewterCityScript5 ; 5359
+	dw PewterCityScript6 ; 536f
 
 PewterCityScript0: ; 0x19251
 	xor a
@@ -22525,23 +22529,154 @@ Function1925e: ; 0x1925e
 	ld a, [$d755]
 	bit 7, a
 	ret nz
-	ld hl, $5277
+	ld hl, CoordsData19277
 	call ArePlayerCoordsInArray
 	ret nc
 	ld a, $f0
 	ld [$cd6b], a
 	ld a, $5
 	ld [$ff00+$8c], a
-	jp $2920
+	jp DisplayTextID
 
-Data19277: ; 0x19277
+CoordsData19277: ; 0x19277
 	db $11,$23
 	db $11,$24
 	db $12,$25
 	db $13,$25
 	db $ff
 
-INCBIN "baserom.gbc",$19280,$1938b-$19280
+PewterCityScript1: ; 0x19280
+	ld a, [$cc57]
+	and a
+	ret nz
+	ld a, $3
+	ld [$ff00+$8c], a
+	ld a, $4
+	ld [$ff00+$8d], a
+	call $34a6
+	ld a, $34
+	ld [$ff00+$8d], a
+	call $34b9
+	call $2307
+	ld hl, $cd60
+	set 4, [hl]
+	ld a, $d
+	ld [$ff00+$8c], a
+	call DisplayTextID
+	ld a, $3c
+	ld [$ff00+$eb], a
+	ld a, $30
+	ld [$ff00+$ec], a
+	ld a, $c
+	ld [$ff00+$ed], a
+	ld a, $11
+	ld [$ff00+$ee], a
+	ld a, $3
+	ld [$cf13], a
+	call $32f9
+	ld a, $3
+	ld [$ff00+$8c], a
+	ld de, $52ce
+	call MoveSprite
+	ld a, $2
+	ld [$d5f7], a
+	ret
+; 0x192ce
+
+MovementData192ce: ; 0x192ce
+	db 0,0,0,0,$ff
+
+PewterCityScript2: ; 0x192d3
+	ld a, [$d730]
+	bit 0, a
+	ret nz
+	ld a, $3
+	ld [$cc4d], a
+	ld a, $11
+	call Predef
+	ld a, $3
+	ld [$d5f7], a
+	ret
+
+PewterCityScript3: ; 0x192e9
+	ld a, $3
+	ld [$cf13], a
+	call $32fe
+	ld a, $3
+	ld [$cc4d], a
+	ld a, $15
+	call Predef
+	xor a
+	ld [$cd6b], a
+	ld a, $0
+	ld [$d5f7], a
+	ret
+
+PewterCityScript4: ; 0x19305
+	ld a, [$cc57]
+	and a
+	ret nz
+	ld a, $5
+	ld [$ff00+$8c], a
+	ld a, $8
+	ld [$ff00+$8d], a
+	call $34a6
+	ld a, $18
+	ld [$ff00+$8d], a
+	call $34b9
+	call $2307
+	ld hl, $cd60
+	set 4, [hl]
+	ld a, $e
+	ld [$ff00+$8c], a
+	call DisplayTextID
+	ld a, $3c
+	ld [$ff00+$eb], a
+	ld a, $40
+	ld [$ff00+$ec], a
+	ld a, $16
+	ld [$ff00+$ed], a
+	ld a, $10
+	ld [$ff00+$ee], a
+	ld a, $5
+	ld [$cf13], a
+	call $32f9
+	ld a, $5
+	ld [$ff00+$8c], a
+	ld de, MovementData19353
+	call MoveSprite
+	ld a, $5
+	ld [$d5f7], a
+	ret
+
+MovementData19353: ; 0x19353
+	db $c0,$c0,$c0,$c0,$c0,$ff
+
+PewterCityScript5: ; 0x19359
+	ld a, [$d730]
+	bit 0, a
+	ret nz
+	ld a, $4
+	ld [$cc4d], a
+	ld a, $11
+	call Predef
+	ld a, $6
+	ld [$d5f7], a
+	ret
+
+PewterCityScript6: ; 0x1936f
+	ld a, $5
+	ld [$cf13], a
+	call $32fe
+	ld a, $4
+	ld [$cc4d], a
+	ld a, $15
+	call Predef
+	xor a
+	ld [$cd6b], a
+	ld a, $0
+	ld [$d5f7], a
+	ret
 
 PewterCityTexts: ; 0x1938b
 	dw PewterCityText1, PewterCityText2, PewterCityText3, PewterCityText4, PewterCityText5, PewterCityText6, PewterCityText7, MartSignText, PokeCenterSignText, PewterCityText10, PewterCityText11, PewterCityText12, PewterCityText13, PewterCityText14
@@ -22732,7 +22867,7 @@ CeruleanCityScript0: ; 0x194c8
 	call Delay3
 	ld a, $2
 	ld [$ff00+$8c], a
-	jp $2920
+	jp DisplayTextID
 .asm_194f7
 	ld a, [$d75a]
 	bit 0, a
@@ -22771,7 +22906,7 @@ CeruleanCityScript0: ; 0x194c8
 	ld de, $5559
 	ld a, $1
 	ld [$ff00+$8c], a
-	call $363a
+	call MoveSprite
 	ld a, $1
 	ld [$d60f], a
 	ret
@@ -22787,7 +22922,7 @@ CeruleanCityScript1: ; 0x19567
 	ld [$cd6b], a
 	ld a, $1
 	ld [$ff00+$8c], a
-	call $2920
+	call DisplayTextID
 	ld hl, $d72d
 	set 6, [hl]
 	set 7, [hl]
@@ -22832,7 +22967,7 @@ CeruleanCityScript2: ; 0x195b1
 	set 0, [hl]
 	ld a, $1
 	ld [$ff00+$8c], a
-	call $2920
+	call DisplayTextID
 	ld a, $ff
 	ld [$c0ee], a
 	call $23b1
@@ -22852,7 +22987,7 @@ CeruleanCityScript2: ; 0x195b1
 .asm_195f3
 	ld a, $1
 	ld [$ff00+$8c], a
-	call $363a
+	call MoveSprite
 	ld a, $3
 	ld [$d60f], a
 	ret
@@ -23141,7 +23276,7 @@ VermilionCityScript0: ; 0x197e6
 	ld [$cf0d], a
 	ld a, $3
 	ld [$ff00+$8c], a
-	call $2920
+	call DisplayTextID
 	ld a, [$d803]
 	bit 2, a
 	jr nz, .asm_19810 ; 0x19804 $a
@@ -24837,7 +24972,7 @@ CinnabarIslandScript0: ; 0x1ca38
 	ld [$d528], a
 	ld a, $8
 	ld [$ff00+$8c], a
-	call $2920
+	call DisplayTextID
 	xor a
 	ld [$ff00+$b4], a
 	ld a, $1
@@ -25075,19 +25210,19 @@ OaksLabScript5: ; 0x1cbfd
 	ld [$cd6b], a
 	ld a, $11
 	ld [$ff00+$8c], a
-	call $2920
+	call DisplayTextID
 	call Delay3
 	ld a, $12
 	ld [$ff00+$8c], a
-	call $2920
+	call DisplayTextID
 	call Delay3
 	ld a, $13
 	ld [$ff00+$8c], a
-	call $2920
+	call DisplayTextID
 	call Delay3
 	ld a, $14
 	ld [$ff00+$8c], a
-	call $2920
+	call DisplayTextID
 	ld hl, $d74b
 	set 1, [hl]
 	xor a
@@ -25115,7 +25250,7 @@ OaksLabScript6: ; 0x1cc36
 	call $2429
 	ld a, $c
 	ld [$ff00+$8c], a
-	call $2920
+	call DisplayTextID
 	ld a, $1
 	ld [$cd38], a
 	ld a, $40
@@ -25226,7 +25361,7 @@ OaksLabScript9: ; 0x1cd00
 	call $34a6 ; face object
 	ld a, $d
 	ld [$ff00+$8c], a
-	call $2920
+	call DisplayTextID
 	ld a, [$cd3e]
 	cp $2
 	jr nz, .asm_1cd28 ; 0x1cd22 $4
@@ -25256,7 +25391,7 @@ OaksLabScript9: ; 0x1cd00
 	call $34a6 ; face object
 	ld a, $e
 	ld [$ff00+$8c], a
-	call $2920
+	call DisplayTextID
 	ld hl, $d74b
 	set 2, [hl]
 	xor a
@@ -25283,7 +25418,7 @@ OaksLabScript10: ; 0x1cd6d
 	call $23a1 ; play music
 	ld a, $f
 	ld [$ff00+$8c], a
-	call $2920
+	call DisplayTextID
 	ld a, $1
 	ld [$ff00+$9b], a
 	ld a, $1
@@ -25376,7 +25511,7 @@ OaksLabScript13: ; 0x1ce32
 	call DelayFrames
 	ld a, $10
 	ld [$ff00+$8c], a
-	call $2920
+	call DisplayTextID
 	ld b, $2
 	ld hl, $5b47
 	call Bankswitch
@@ -25452,7 +25587,7 @@ OaksLabScript15: ; 0x1ceb0
 	call Bankswitch
 	ld a, $15
 	ld [$ff00+$8c], a
-	call $2920
+	call DisplayTextID
 	call $502b
 	ld a, $2a
 	ld [$cc4d], a
@@ -25500,21 +25635,21 @@ OaksLabScript16: ; 0x1cf12
 	call Function1CEFD
 	ld a, $16
 	ld [$ff00+$8c], a
-	call $2920
+	call DisplayTextID
 	call DelayFrame
 	call Function1CEFD
 	ld a, $17
 	ld [$ff00+$8c], a
-	call $2920
+	call DisplayTextID
 	call DelayFrame
 	call Function1CEFD
 	ld a, $18
 	ld [$ff00+$8c], a
-	call $2920
+	call DisplayTextID
 	call DelayFrame
 	ld a, $19
 	ld [$ff00+$8c], a
-	call $2920
+	call DisplayTextID
 	call Delay3
 	ld a, $2f
 	ld [$cc4d], a
@@ -25527,7 +25662,7 @@ OaksLabScript16: ; 0x1cf12
 	call Function1CEFD
 	ld a, $1a
 	ld [$ff00+$8c], a
-	call $2920
+	call DisplayTextID
 	ld a, $1
 	ld [$ff00+$8c], a
 	ld a, $c
@@ -25536,7 +25671,7 @@ OaksLabScript16: ; 0x1cf12
 	call Delay3
 	ld a, $1b
 	ld [$ff00+$8c], a
-	call $2920
+	call DisplayTextID
 	ld hl, $d74b
 	set 5, [hl]
 	ld hl, $d74e
@@ -26210,7 +26345,7 @@ ViridianMartScript0: ; 0x1d49b
 	call $2429
 	ld a, $4
 	ld [$ff00+$8c], a
-	call $2920
+	call DisplayTextID
 	ld hl, $ccd3
 	ld de, $54bb
 	call $350c
@@ -26235,7 +26370,7 @@ ViridianMartScript1: ; 0x1d4c0
 	call Delay3
 	ld a, $5
 	ld [$ff00+$8c], a
-	call $2920
+	call DisplayTextID
 	ld bc, $4601
 	call GiveItem
 	ld hl, $d74e
@@ -27575,7 +27710,7 @@ Route5GateScript0: ; 0x1df50
 	jr nz, .asm_1df82 ; 0x1df70 $10
 	ld a, $2
 	ld [$ff00+$8c], a
-	call $2920
+	call DisplayTextID
 	call $5f43
 	ld a, $1
 	ld [$d662], a
@@ -27583,7 +27718,7 @@ Route5GateScript0: ; 0x1df50
 .asm_1df82
 	ld a, $3
 	ld [$ff00+$8c], a
-	call $2920
+	call DisplayTextID
 	ld hl, $d728
 	set 6, [hl]
 	ret
@@ -27712,7 +27847,7 @@ Route6GateScript0: ; 0x1e04e
 	jr nz, .asm_1e080 ; 0x1e06e $10
 	ld a, $2
 	ld [$ff00+$8c], a
-	call $2920
+	call DisplayTextID
 	call Unknown_1e0a1
 	ld a, $1
 	ld [$d636], a
@@ -27722,7 +27857,7 @@ Route6GateScript0: ; 0x1e04e
 	set 6, [hl]
 	ld a, $3
 	ld [$ff00+$8c], a
-	jp $2920
+	jp DisplayTextID
 ; 0x1e08c
 
 Unknown_1e08c: ; 0x1e08c
@@ -27822,7 +27957,7 @@ Route7GateScript0: ; 0x1e128
 	jr nz, .asm_1e15a ; 0x1e148 $10
 	ld a, $2
 	ld [$ff00+$8c], a
-	call $2920
+	call DisplayTextID
 	call $6111
 	ld a, $1
 	ld [$d663], a
@@ -27830,7 +27965,7 @@ Route7GateScript0: ; 0x1e128
 .asm_1e15a
 	ld a, $3
 	ld [$ff00+$8c], a
-	call $2920
+	call DisplayTextID
 	ld hl, $d728
 	set 6, [hl]
 	ret
@@ -27903,7 +28038,7 @@ Route8GateScript0: ; 0x1e1ee
 	jr nz, .asm_1e220 ; 0x1e20e $10
 	ld a, $2
 	ld [$ff00+$8c], a
-	call $2920
+	call DisplayTextID
 	call $61d7
 	ld a, $1
 	ld [$d637], a
@@ -27913,7 +28048,7 @@ Route8GateScript0: ; 0x1e1ee
 	set 6, [hl]
 	ld a, $3
 	ld [$ff00+$8c], a
-	jp $2920
+	jp DisplayTextID
 ; 0x1e22c
 
 INCBIN "baserom.gbc",$1e22c,$15
@@ -28274,7 +28409,7 @@ Route22GateScript0: ; 0x1e6a4
 	ld [$ff00+$b4], a
 	ld a, $1
 	ld [$ff00+$8c], a
-	jp $2920
+	jp DisplayTextID
 ; 0x1e6b5
 
 Route22GateScript3: ; 0x1e6b5
@@ -44892,7 +45027,7 @@ SeafoamIslands1Script: ; 0x447e9
 	ld a, [$d07a]
 	ld [$cc4d], a
 	ld a, $15
-	jp $3e6d
+	jp Predef
 .asm_4483b
 	ld a, $9f
 	ld [$d71d], a
@@ -46839,7 +46974,7 @@ SeafoamIslands2Script: ; 0x46315
 	ld a, [$d07a]
 	ld [$cc4d], a
 	ld a, $15
-	jp $3e6d
+	jp Predef
 .asm_46362
 	ld a, $a0
 	ld [$d71d], a
@@ -46924,7 +47059,7 @@ SeafoamIslands3Script: ; 0x46451
 	ld a, [$d07a]
 	ld [$cc4d], a
 	ld a, $15
-	jp $3e6d
+	jp Predef
 .asm_4649e
 	ld a, $a1
 	ld [$d71d], a
@@ -50597,7 +50732,7 @@ Route16GateMapScript0: ; 0x496d7
 	ret nc
 	ld a, $3
 	ld [$ff00+$8c], a
-	call $2920
+	call DisplayTextID
 	xor a
 	ld [$ff00+$b4], a
 	ld a, [$cd3d]
@@ -50798,7 +50933,7 @@ Route18GateScript0: ; 0x4988f
 	ret nc
 	ld a, $2
 	ld [$ff00+$8c], a
-	call $2920
+	call DisplayTextID
 	xor a
 	ld [$ff00+$b4], a
 	ld a, [$cd3d]
@@ -52979,7 +53114,7 @@ Route22Script1: ; 0x50f62
 	ld [$cd6b], a
 	ld a, $1
 	ld [$ff00+$8c], a
-	call $2920
+	call DisplayTextID
 	ld hl, $d72d
 	set 6, [hl]
 	set 7, [hl]
@@ -53019,7 +53154,7 @@ Route22Script2: ; 0x50fb5
 	set 5, [hl]
 	ld a, $1
 	ld [$ff00+$8c], a
-	call $2920
+	call DisplayTextID
 	ld a, $ff
 	ld [$c0ee], a
 	call $23b1
@@ -53182,7 +53317,7 @@ Route23Script0: ; 0x51219
 	and a
 	ret nz
 	call $525d
-	call $2920
+	call DisplayTextID
 	xor a
 	ld [$ff00+$b4], a
 	ret
@@ -62306,7 +62441,7 @@ HallofFameRoomScript1: ; 0x5a52b
 	ld [$d528], a
 	ld a, $1
 	ld [$ff00+$8c], a
-	call $2920
+	call DisplayTextID
 	ld a, $ff
 	ld [$cd6b], a
 	ld a, $8
@@ -62462,7 +62597,7 @@ MuseumF1Script0: ; 0x5c10d
 	ld [$ff00+$b4], a
 	ld a, $1
 	ld [$ff00+$8c], a
-	jp $2920
+	jp DisplayTextID
 ; 0x5c12a
 
 MuseumF1Script1: ; 0x5c12a
@@ -64769,7 +64904,7 @@ SilphCo1Script: ; 0x5d44e
 	ld a, $4c
 	ld [$cc4d], a
 	ld a, $15
-	jp $3e6d
+	jp Predef
 ; 0x5d469
 
 SilphCo1Texts: ; 0x5d469
@@ -65709,7 +65844,7 @@ PokemonTower2Script0: ; 0x6050f
 	call $34a6
 	ld a, $1
 	ld [$ff00+$8c], a
-	call $2920
+	call DisplayTextID
 	xor a
 	ld [$ff00+$b4], a
 	ld [$ff00+$b3], a
@@ -65728,7 +65863,7 @@ PokemonTower2Script1: ; 0x60563
 	set 7, [hl]
 	ld a, $1
 	ld [$ff00+$8c], a
-	call $2920
+	call DisplayTextID
 	ld de, $45b2
 	ld a, [$d764]
 	bit 6, a
@@ -65737,7 +65872,7 @@ PokemonTower2Script1: ; 0x60563
 .asm_60589
 	ld a, $1
 	ld [$ff00+$8c], a
-	call $363a
+	call MoveSprite
 	ld a, $ff
 	ld [$c0ee], a
 	call $23b1
@@ -67065,7 +67200,7 @@ SSAnne2Script0: ; 0x613be
 .asm_61400
 	ld de, $540d
 .asm_61403
-	call $363a
+	call MoveSprite
 	ld a, $1
 	ld [$d665], a
 	ret
@@ -67082,7 +67217,7 @@ SSAnne2Script1: ; 0x61430
 	ld [$cd6b], a
 	ld a, $2
 	ld [$ff00+$8c], a
-	call $2920
+	call DisplayTextID
 	call Delay3
 	ld a, $f2
 	ld [$d059], a
@@ -67118,7 +67253,7 @@ SSAnne2Script2: ; 0x6146d
 	ld [$cd6b], a
 	ld a, $3
 	ld [$ff00+$8c], a
-	call $2920
+	call DisplayTextID
 	ld a, $2
 	ld [$ff00+$8c], a
 	call $3541
@@ -67132,7 +67267,7 @@ SSAnne2Script2: ; 0x6146d
 .asm_6149a
 	ld a, $2
 	ld [$ff00+$8c], a
-	call $363a
+	call MoveSprite
 	ld a, $ff
 	ld [$c0ee], a
 	call $23b1
@@ -71356,7 +71491,7 @@ SafariZoneEntranceScript2: ; 0x7522a
 	call $2429
 	ld a, $4
 	ld [$ff00+$8c], a
-	call $2920
+	call DisplayTextID
 	ld a, $ff
 	ld [$cd6b], a
 	ret
@@ -71385,7 +71520,7 @@ SafariZoneEntranceScript5: ; 0x7524e
 	ld [$cd6b], a
 	ld a, $6
 	ld [$ff00+$8c], a
-	call $2920
+	call DisplayTextID
 	xor a
 	ld [$da47], a
 	ld a, $80
@@ -71397,7 +71532,7 @@ SafariZoneEntranceScript5: ; 0x7524e
 .asm_7527f
 	ld a, $5
 	ld [$ff00+$8c], a
-	call $2920
+	call DisplayTextID
 .asm_75286
 	ret
 ; 0x75287
@@ -72089,7 +72224,7 @@ CinnabarGymScript0: ; 0x757ae
 	ld a, $1
 	ld [$d528], a
 .asm_757cb
-	call $363a
+	call MoveSprite
 	ld a, $1
 	ld [$d65e], a
 	ld [$da39], a
@@ -72111,7 +72246,7 @@ CinnabarGymScript1: ; 0x757dc
 	ld a, [$da38]
 	ld [$cc55], a
 	ld [$ff00+$8c], a
-	jp $2920
+	jp DisplayTextID
 ; 0x757f1
 
 Unknown_757f1:
@@ -72166,7 +72301,7 @@ CinnabarGymScript3: ; 0x7584a
 Unknown_75857:
 	ld a, $a
 	ld [$ff00+$8c], a
-	call $2920
+	call DisplayTextID
 	ld hl, $d79a
 	set 1, [hl]
 	ld bc, $ee01
@@ -72174,14 +72309,14 @@ Unknown_75857:
 	jr nc, .asm_75879 ; 0x75869 $e
 	ld a, $b
 	ld [$ff00+$8c], a
-	call $2920
+	call DisplayTextID
 	ld hl, $d79a
 	set 0, [hl]
 	jr .asm_75880 ; 0x75877 $7
 .asm_75879
 	ld a, $c
 	ld [$ff00+$8c], a
-	call $2920
+	call DisplayTextID
 .asm_75880
 	ld hl, $d356
 	set 6, [hl]
@@ -73069,7 +73204,7 @@ GaryScript2: ; 0x75f6a 5F6A
 	res 7, [hl]
 	ld a, $1
 	ld [$ff00+$8c], a
-	call $2920
+	call DisplayTextID
 	call Delay3
 	ld hl, $d72d
 	set 6, [hl]
