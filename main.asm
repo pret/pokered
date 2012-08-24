@@ -1225,7 +1225,7 @@ StopMusic: ; 951
 
 HandleFlyOrTeleportAway: ; 965
 	call $2429 ; move sprites
-	call $3dd7
+	call Delay3
 	xor a
 	ld [$cf0b],a
 	ld [$d700],a
@@ -7845,7 +7845,7 @@ INCBIN "baserom.gbc",$3DBE,$3DD4 - $3DBE
 GBPalWhiteOutWithDelay3: ; 3DD4
 	call GBPalWhiteOut
 
-Delay3: ; 3DD7
+Delay3: ; 0x3dd7
 ; call Delay with a parameter of 3
 	ld c,3
 	jp DelayFrames
@@ -22282,15 +22282,126 @@ ViridianCityScript: ; 0x18ff1
 
 ViridianCityScripts: ; 0x18ffd
 	dw ViridianCityScript0
-
-INCBIN "baserom.gbc",$18fff,$6
+	dw ViridianCityScript1
+	dw ViridianCityScript2
+	dw ViridianCityScript3 ; 50c1
 
 ViridianCityScript0: ; 0x19005
-	call $500b
-	jp $503d
-; 0x1900b
+	call Function1900b
+	jp Function1903d
 
-INCBIN "baserom.gbc",$1900b,$d9
+Function1900b: ; 0x1900b
+	ld a, [$d74c]
+	bit 0, a
+	ret nz
+	ld a, [W_OBTAINEDBADGES]
+	cp %01111111
+	jr nz, .asm_1901e ; 0x19016 $6
+	ld hl, $d74c
+	set 0, [hl]
+	ret
+.asm_1901e
+	ld a, [W_YCOORD]
+	cp $8
+	ret nz
+	ld a, [W_XCOORD]
+	cp $20
+	ret nz
+	ld a, $e
+	ld [$ff00+$8c], a
+	call DisplayTextID
+	xor a
+	ld [$ff00+$b4], a
+	call Function190cf
+	ld a, $3
+	ld [$d5f4], a
+	ret
+
+Function1903d: ; 0x1903d
+	ld a, [$d74b]
+	bit 5, a
+	ret nz
+	ld a, [W_YCOORD]
+	cp $9
+	ret nz
+	ld a, [W_XCOORD]
+	cp $13
+	ret nz
+	ld a, $5
+	ld [$ff00+$8c], a
+	call DisplayTextID
+	xor a
+	ld [$ff00+$b4], a
+	call Function190cf
+	ld a, $3
+	ld [$d5f4], a
+	ret
+
+ViridianCityScript1: ; 0x19062
+	ld a, [$c134]
+	ld [$ff00+$eb], a
+	ld a, [$c136]
+	ld [$ff00+$ec], a
+	ld a, [$c234]
+	ld [$ff00+$ed], a
+	ld a, [$c235]
+	ld [$ff00+$ee], a
+	xor a
+	ld [W_LISTSCROLLOFFSET], a
+
+	; set up battle for Old Man
+	ld a, $1
+	ld [W_BATTLETYPE], a
+	ld a, 5
+	ld [W_CURENEMYLVL], a
+	ld a, WEEDLE
+	ld [W_CUROPPONENT], a
+	ld a, $2
+	ld [$d5f4], a ; XXX what is this
+	ret
+
+ViridianCityScript2: ; 0x1908f
+	ld a, [$ff00+$eb]
+	ld [$c134], a
+	ld a, [$ff00+$ec]
+	ld [$c136], a
+	ld a, [$ff00+$ed]
+	ld [$c234], a
+	ld a, [$ff00+$ee]
+	ld [$c235], a
+	call $2429
+	call Delay3
+	xor a
+	ld [$cd6b], a
+	ld a, $f
+	ld [$ff00+$8c], a
+	call DisplayTextID
+	xor a
+	ld [W_BATTLETYPE], a
+	ld [$cd6b], a
+	ld a, $0
+	ld [$d5f4], a
+	ret
+
+ViridianCityScript3: ; 0x190c1
+	ld a, [$cd38]
+	and a
+	ret nz
+	call Delay3
+	ld a, 0
+	ld [$d5f4], a
+	ret
+
+Function190cf: ; 0x190cf
+	call $3486
+	ld a, $1
+	ld [$cd38], a
+	ld a, $80
+	ld [$ccd3], a
+	xor a
+	ld [$c109], a
+	ld [$cd6b], a
+	ret
 
 ViridianCityTexts: ; 0x190e4
 	dw ViridianCityText1, ViridianCityText2, ViridianCityText3, ViridianCityText4, ViridianCityText5, ViridianCityText6, ViridianCityText7, ViridianCityText8, ViridianCityText9, ViridianCityText10, MartSignText, PokeCenterSignText, ViridianCityText13, ViridianCityText14, ViridianCityText15
