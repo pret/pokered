@@ -7533,20 +7533,20 @@ HandleDownArrowBlinkTiming: ; 3C04
 ; text boxes by DisplayTextID. Both functions cause DisplayTextID to wait
 ; for a button press after displaying text (unless [$cc47] is set).
 
-EnableAutoTextBoxDrawing: ; 3C3C
+EnableAutoTextBoxDrawing: ; 0x3c3c
 	xor a
 	jr AutoTextBoxDrawingCommon
 
-DisableAutoTextBoxDrawing: ; 3C3F
+DisableAutoTextBoxDrawing: ; 0x3c3f
 	ld a,$01
 
-AutoTextBoxDrawingCommon: ; 3C41
+AutoTextBoxDrawingCommon: ; 0x3c41
 	ld [$cf0c],a ; control text box drawing
 	xor a
 	ld [$cc3c],a ; make DisplayTextID wait for button press
 	ret
 
-PrintText: ; 3C49
+PrintText: ; 0x3c49
 ; given a pointer in hl, print the text there
 	push hl
 	ld a,1
@@ -7570,7 +7570,7 @@ PrintText: ; 3C49
 ; bits 0-3: number of bytes (only 1 - 3 bytes supported)
 ; c = number of decimal digits
 ; de = address of the number (big-endian)
-PrintNumber: ; 3C5F
+PrintNumber: ; 0x3c5f
 	push bc
 	xor a
 	ld [H_PASTLEADINGZEROES],a
@@ -22057,7 +22057,7 @@ PalletTownScript:
 	ld hl,$D747
 	set 6,[hl]
 .next\@
-	call $3C3C
+	call EnableAutoTextBoxDrawing
 	ld hl,PalletTownScriptPointers
 	ld a,[$D5F1]
 	jp $3D97
@@ -22274,7 +22274,7 @@ PalletTownText7: ; 0x18fec sign by Blue’s house
 	db "@"
 
 ViridianCityScript: ; 0x18ff1
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld hl, ViridianCityScripts
 	ld a, [$d5f4]
 	jp $3d97
@@ -22612,7 +22612,7 @@ ViridianCityText14: ; 0x19232
 ; 0x19232 + 5 bytes
 
 PewterCityScript: ; 0x19237
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld hl, PewterCityScripts
 	ld a, [$d5f7]
 	jp $3d97
@@ -22936,7 +22936,7 @@ PewterCityText12: ; 0x1947b
 	db $50
 
 CeruleanCityScript: ; 0x19480
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld hl, CeruleanCityScripts
 	ld a, [$d60f]
 	jp $3d97
@@ -23370,7 +23370,7 @@ CeruleanCityText17: ; 0x1979c
 	db $50
 
 VermilionCityScript: ; 0x197a1
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld hl, $d126
 	bit 6, [hl]
 	res 6, [hl]
@@ -23628,7 +23628,7 @@ VermilionCityText13: ; 0x19951
 	db $50
 
 CeladonCityScript: ; 0x19956
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld hl, $d77e
 	res 0, [hl]
 	res 7, [hl]
@@ -23753,7 +23753,7 @@ CeladonCityText18: ; 0x19a26
 	db $50
 
 FuchsiaCityScript: ; 0x19a2b
-	jp $3c3c
+	jp EnableAutoTextBoxDrawing
 ; 0x19a2e
 
 FuchsiaCityTexts: ; 0x19a2e
@@ -23917,7 +23917,7 @@ BluesHouse_h: ; 0x19b2f id=39
 	dw BluesHouseObject
 
 BluesHouseScript: ; 0x19b3b
-	call $3C3C
+	call EnableAutoTextBoxDrawing
 	ld hl,BluesHouseScriptPointers
 	ld a,[$D5F3]
 	jp $3D97
@@ -24037,7 +24037,7 @@ VermilionHouse3_h: ; 0x19c06 to 0x19c12 (12 bytes) (bank=6) (id=196)
 	dw VermilionHouse3Object ; objects
 
 VermilionHouse3Script: ; 0x19c12
-	jp $3c3c
+	jp EnableAutoTextBoxDrawing
 ; 0x19c15
 
 VermilionHouse3Texts: ; 0x19c15
@@ -24080,7 +24080,7 @@ IndigoPlateauLobby_h: ; 0x19c4f to 0x19c5b (12 bytes) (bank=6) (id=174)
 
 IndigoPlateauLobbyScript: ; 0x19c5b
 	call $22fa
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld hl, $d126
 	bit 6, [hl]
 	res 6, [hl]
@@ -24154,7 +24154,7 @@ SilphCo4_h: ; 0x19cff to 0x19d0b (12 bytes) (bank=6) (id=209)
 
 SilphCo4Script: ; 0x19d0b
 	call SilphCo4Script_Unknown19d21
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld hl, SilphCo4TrainerHeaders
 	ld de, $5d9a
 	ld a, [$d645]
@@ -24327,7 +24327,7 @@ SilphCo5_h: ; 0x19f2b to 0x19f37 (12 bytes) (bank=6) (id=210)
 
 SilphCo5Script: ; 0x19f37
 	call Unnamed_19f4d
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld hl, SilphCo5TrainerHeaders
 	ld de, $5fb6
 	ld a, [$d646]
@@ -24547,7 +24547,7 @@ SilphCo6_h: ; 0x1a19d to 0x1a1a9 (12 bytes) (bank=6) (id=211)
 
 SilphCo6Script: ; 0x1a1a9
 	call Unnamed_1a1bf
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld hl, SilphCo6TrainerHeaders
 	ld de, $61f0
 	ld a, [$d647]
@@ -25122,7 +25122,7 @@ UnnamedText_1ca14: ; 0x1ca14
 ; 0x1ca14 + 5 bytes
 
 CinnabarIslandScript: ; 0x1ca19
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld hl, $d126
 	set 5, [hl]
 	ld hl, $d796
@@ -25206,7 +25206,7 @@ CinnabarIslandText7: ; 0x1caaa
 	db $50
 
 Route1Script: ; 0x1caaf
-	jp $3c3c
+	jp EnableAutoTextBoxDrawing
 ; 0x1cab2
 
 Route1Texts: ; 0x1cab2
@@ -25757,7 +25757,7 @@ OaksLabScript14: ; 0x1ce6d
 OaksLabScript15: ; 0x1ceb0
 	xor a
 	ld [$ff00+$b4], a
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld a, $ff
 	ld [$c0ee], a
 	call $23b1
@@ -25807,7 +25807,7 @@ OaksLabScript16: ; 0x1cf12
 	ld a, [$d730]
 	bit 0, a
 	ret nz
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	call $2307
 	ld a, $fc
 	ld [$cd6b], a
@@ -26511,7 +26511,7 @@ ViridianMart_h: ; 0x1d462 to 0x1d46e (12 bytes) (bank=7) (id=42)
 
 ViridianMartScript: ; 0x1d46e
 	call ViridianMartScript_Unknown1d47d
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld hl, $5495
 	ld a, [$d60d]
 	jp $3d97
@@ -26613,7 +26613,7 @@ School_h: ; 0x1d540 to 0x1d54c (12 bytes) (bank=7) (id=43)
 	dw SchoolObject ; objects
 
 SchoolScript: ; 0x1d54c
-	jp $3c3c
+	jp EnableAutoTextBoxDrawing
 ; 0x1d54f
 
 SchoolTexts: ; 0x1d54f
@@ -26656,7 +26656,7 @@ ViridianHouse_h: ; 0x1d57d to 0x1d589 (12 bytes) (bank=7) (id=44)
 db $0
 
 ViridianHouseScript: ; 0x1d58a
-	jp $3c3c
+	jp EnableAutoTextBoxDrawing
 ; 0x1d58d
 
 ViridianHouseTexts: ; 0x1d58d
@@ -26716,7 +26716,7 @@ PewterHouse1_h: ; 0x1d5e7 to 0x1d5f3 (12 bytes) (bank=7) (id=55)
 	dw PewterHouse1Object ; objects
 
 PewterHouse1Script: ; 0x1d5f3
-	jp $3c3c
+	jp EnableAutoTextBoxDrawing
 ; 0x1d5f6
 
 PewterHouse1Texts: ; 0x1d5f6
@@ -26765,7 +26765,7 @@ PewterHouse2_h: ; 0x1d63c to 0x1d648 (12 bytes) (bank=7) (id=57)
 	dw PewterHouse2Object ; objects
 
 PewterHouse2Script: ; 0x1d648
-	jp $3c3c
+	jp EnableAutoTextBoxDrawing
 ; 0x1d64b
 
 PewterHouse2Texts: ; 0x1d64b
@@ -26805,7 +26805,7 @@ CeruleanHouseTrashed_h: ; 0x1d679 to 0x1d685 (12 bytes) (bank=7) (id=62)
 	dw CeruleanHouseTrashedObject ; objects
 
 CeruleanHouseTrashedScript: ; 0x1d685
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ret
 ; 0x1d689
 
@@ -26875,7 +26875,7 @@ CeruleanHouse2_h: ; 0x1d6ea to 0x1d6f6 (12 bytes) (bank=7) (id=63)
 	dw CeruleanHouse2Object ; objects
 
 CeruleanHouse2Script: ; 0x1d6f6
-	jp $3c3c
+	jp EnableAutoTextBoxDrawing
 ; 0x1d6f9
 
 CeruleanHouse2Texts: ; 0x1d6f9
@@ -26919,7 +26919,7 @@ BikeShop_h: ; 0x1d730 to 0x1d73c (12 bytes) (bank=7) (id=66)
 	dw BikeShopObject ; objects
 
 BikeShopScript: ; 0x1d73c
-	jp $3c3c
+	jp EnableAutoTextBoxDrawing
 ; 0x1d73f
 
 BikeShopTexts: ; 0x1d73f
@@ -27104,7 +27104,7 @@ LavenderHouse1_h: ; 0x1d89c to 0x1d8a8 (12 bytes) (bank=7) (id=149)
 	dw LavenderHouse1Object ; objects
 
 LavenderHouse1Script: ; 0x1d8a8
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ret
 ; 0x1d8ac
 
@@ -27255,7 +27255,7 @@ LavenderHouse2_h: ; 0x1d9a2 to 0x1d9ae (12 bytes) (bank=7) (id=151)
 	dw LavenderHouse2Object ; objects
 
 LavenderHouse2Script: ; 0x1d9ae
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ret
 ; 0x1d9b2
 
@@ -27320,7 +27320,7 @@ NameRater_h: ; 0x1da06 to 0x1da12 (12 bytes) (bank=7) (id=229)
 	dw NameRaterObject ; objects
 
 NameRaterScript: ; 0x1da12
-	jp $3c3c
+	jp EnableAutoTextBoxDrawing
 ; 0x1da15
 
 INCBIN "baserom.gbc",$1da15,$41
@@ -27426,7 +27426,7 @@ VermilionHouse1_h: ; 0x1daf0 to 0x1dafc (12 bytes) (bank=7) (id=93)
 	dw VermilionHouse1Object ; objects
 
 VermilionHouse1Script: ; 0x1dafc
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ret
 ; 0x1db00
 
@@ -27478,7 +27478,7 @@ VermilionDock_h: ; 0x1db46 to 0x1db52 (12 bytes) (bank=7) (id=94)
 	dw VermilionDockObject ; objects
 
 VermilionDockScript: ; 0x1db52
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld hl, $d803
 	bit 4, [hl]
 	jr nz, .asm_1db8d ; 0x1db5a $31
@@ -27554,7 +27554,7 @@ CeladonMansion5_h: ; 0x1dd2e to 0x1dd3a (12 bytes) (bank=7) (id=132)
 	dw CeladonMansion5Object ; objects
 
 CeladonMansion5Script: ; 0x1dd3a
-	jp $3c3c
+	jp EnableAutoTextBoxDrawing
 ; 0x1dd3d
 
 CeladonMansion5Texts: ; 0x1dd3d
@@ -27602,7 +27602,7 @@ FuchsiaMart_h: ; 0x1dd7c to 0x1dd88 (12 bytes) (bank=7) (id=152)
 	dw FuchsiaMartObject ; objects
 
 FuchsiaMartScript: ; 0x1dd88
-	jp $3c3c
+	jp EnableAutoTextBoxDrawing
 ; 0x1dd8b
 
 FuchsiaMartTexts: ; 0x1dd8b
@@ -27646,7 +27646,7 @@ SaffronHouse1_h: ; 0x1ddd1 to 0x1dddd (12 bytes) (bank=7) (id=179)
 	dw SaffronHouse1Object ; objects
 
 SaffronHouse1Script: ; 0x1dddd
-	jp $3c3c
+	jp EnableAutoTextBoxDrawing
 ; 0x1dde0
 
 SaffronHouse1Texts: ; 0x1dde0
@@ -27700,7 +27700,7 @@ SaffronHouse2_h: ; 0x1de30 to 0x1de3c (12 bytes) (bank=7) (id=183)
 	dw SaffronHouse2Object ; objects
 
 SaffronHouse2Script: ; 0x1de3c
-	jp $3c3c
+	jp EnableAutoTextBoxDrawing
 ; 0x1de3f
 
 SaffronHouse2Texts: ; 0x1de3f
@@ -27778,7 +27778,7 @@ DiglettsCaveRoute2_h: ; 0x1dea4 to 0x1deb0 (12 bytes) (bank=7) (id=46)
 DiglettsCaveRoute2Script: ; 0x1deb0
 	ld a, $d
 	ld [$d365], a
-	jp $3c3c
+	jp EnableAutoTextBoxDrawing
 ; 0x1deb8
 
 DiglettsCaveRoute2Texts: ; 0x1deb8
@@ -27815,7 +27815,7 @@ Route2House_h: ; 0x1dee1 to 0x1deed (12 bytes) (bank=7) (id=48)
 	dw Route2HouseObject ; objects
 
 Route2HouseScript: ; 0x1deed
-	jp $3c3c
+	jp EnableAutoTextBoxDrawing
 ; 0x1def0
 
 Route2HouseTexts: ; 0x1def0
@@ -27859,7 +27859,7 @@ Route5Gate_h: ; 0x1df27 to 0x1df33 (12 bytes) (bank=7) (id=70)
 	dw Route5GateObject ; objects
 
 Route5GateScript: ; 0x1df33
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld a, [$d662]
 	ld hl, Route5GateScripts
 	jp $3d97
@@ -28015,7 +28015,7 @@ Route6Gate_h: ; 0x1e031 to 0x1e03d (12 bytes) (bank=7) (id=73)
 	dw Route6GateObject ; objects
 
 Route6GateScript: ; 0x1e03d
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld hl, Route6GateScripts
 	ld a, [$d636]
 	call $3d97
@@ -28123,7 +28123,7 @@ Route7Gate_h: ; 0x1e0f4 to 0x1e100 (12 bytes) (bank=7) (id=76)
 	dw Route7GateObject ; objects
 
 Route7GateScript: ; 0x1e100
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld a, [$d663]
 	ld hl, Route7GateScripts
 	call $3d97
@@ -28230,7 +28230,7 @@ Route8Gate_h: ; 0x1e1bb to 0x1e1c7 (12 bytes) (bank=7) (id=79)
 	dw Route8GateObject ; objects
 
 Route8GateScript: ; 0x1e1c7
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld hl, Route8GateScripts
 	ld a, [$d637]
 	jp $3d97
@@ -28336,7 +28336,7 @@ UndergroundPathEntranceRoute8_h: ; 0x1e27d to 0x1e289 (12 bytes) (bank=7) (id=80
 UndergroundPathEntranceRoute8Script: ; 0x1e289
 	ld a, $13
 	ld [$d365], a
-	jp $3c3c
+	jp EnableAutoTextBoxDrawing
 ; 0x1e291
 
 UndergroundPathEntranceRoute8Texts: ; 0x1e291
@@ -28375,7 +28375,7 @@ PowerPlant_h: ; 0x1e2ba to 0x1e2c6 (12 bytes) (bank=7) (id=83)
 	dw PowerPlantObject ; objects
 
 PowerPlantScript: ; 0x1e2c6
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld hl, $62fb
 	ld de, PowerPlantScript_Unknown1e2d9
 	ld a, [$d663]
@@ -28502,7 +28502,7 @@ DiglettsCaveEntranceRoute11_h: ; 0x1e5ae to 0x1e5ba (12 bytes) (bank=7) (id=85)
 	dw DiglettsCaveEntranceRoute11Object ; objects
 
 DiglettsCaveEntranceRoute11Script: ; 0x1e5ba
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld a, $16
 	ld [$d365], a
 	ret
@@ -28544,7 +28544,7 @@ Route16House_h: ; 0x1e5ec to 0x1e5f8 (12 bytes) (bank=7) (id=188)
 	dw Route16HouseObject ; objects
 
 Route16HouseScript: ; 0x1e5f8
-	jp $3c3c
+	jp EnableAutoTextBoxDrawing
 ; 0x1e5fb
 
 Route16HouseTexts: ; 0x1e5fb
@@ -28630,7 +28630,7 @@ Route22Gate_h: ; 0x1e677 to 0x1e683 (12 bytes) (bank=7) (id=193)
 	dw Route22GateObject ; objects
 
 Route22GateScript: ; 0x1e683
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld hl, Route22GateScripts
 	ld a, [$d60e]
 	call $3d97
@@ -28760,7 +28760,7 @@ BillsHouse_h: ; 0x1e75e to 0x1e76a (12 bytes) (bank=7) (id=88)
 	dw BillsHouseObject ; objects
 
 BillsHouseScript: ; 0x1e76a
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld a, [$d661]
 	ld hl, BillsHouseScripts
 	jp $3d97
@@ -44750,7 +44750,7 @@ SafariZoneRestHouse1Blocks: ; 0x440fb 16
 	INCBIN "maps/safarizoneresthouse1.blk"
 
 LavenderTownScript: ; 0x4410b
-	jp $3c3c
+	jp EnableAutoTextBoxDrawing
 ; 0x4410e
 
 LavenderTownTexts: ; 0x4410e
@@ -44908,7 +44908,7 @@ ViridianPokecenter_h: ; 0x44251 to 0x4425d (12 bytes) (bank=11) (id=41)
 
 ViridianPokeCenterScript: ; 0x4425d
 	call $22fa
-	jp $3c3c
+	jp EnableAutoTextBoxDrawing
 ; 0x44263
 
 ViridianPokecenterTexts: ; 0x44263
@@ -44959,7 +44959,7 @@ Mansion1_h: ; 0x442a3 to 0x442af (12 bytes) (bank=11) (id=165)
 
 Mansion1Script:
 	call Mansion1Subscript1
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld hl, Mansion1TrainerHeaders
 	ld de, $4326
 	ld a, [$d63a]
@@ -45120,7 +45120,7 @@ RockTunnel1_h: ; 0x444d0 to 0x444dc (12 bytes) (bank=11) (id=82)
 	dw RockTunnel1Object ; objects
 
 RockTunnel1Script: ; 0x444dc
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld hl, Unnamed_44505 ; $4505
 	ld de, Unnamed_444ef ; $44ef
 	ld a, [$d621]
@@ -45331,14 +45331,14 @@ SeafoamIslands1_h: ; 0x447dd to 0x447e9 (12 bytes) (bank=11) (id=192)
 	dw SeafoamIslands1Object ; objects
 
 SeafoamIslands1Script: ; 0x447e9
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld hl, $d7e7
 	set 0, [hl]
 	ld hl, $cd60
 	bit 7, [hl]
 	res 7, [hl]
 	jr z, .asm_4483b ; 0x447f8 $41
-	ld hl, SeafoamIslands1Script_Unknown44846
+	ld hl, Data44846
 	call $34e4
 	ret nc
 	ld hl, $d7e8
@@ -45369,12 +45369,14 @@ SeafoamIslands1Script: ; 0x447e9
 .asm_4483b
 	ld a, $9f
 	ld [$d71d], a
-	ld hl, SeafoamIslands1Script_Unknown44846
+	ld hl, Data44846
 	jp $6981
 ; 0x44846
 
-SeafoamIslands1Script_Unknown44846: ; 0x44846
-INCBIN "baserom.gbc",$44846,$5
+Data44846: ; 0x44846
+	db $06,$11
+	db $06,$18
+	db $ff
 
 SeafoamIslands1Texts: ; 0x4484b
 	dw BoulderText, BoulderText
@@ -45420,7 +45422,7 @@ SSAnne3_h: ; 0x44926 to 0x44932 (12 bytes) (bank=11) (id=97)
 	dw SSAnne3Object ; objects
 
 SSAnne3Script: ; 0x44932
-	jp $3c3c
+	jp EnableAutoTextBoxDrawing
 ; 0x44935
 
 SSAnne3Texts: ; 0x44935
@@ -45459,7 +45461,7 @@ VictoryRoad3_h: ; 0x44974 to 0x44980 (12 bytes) (bank=11) (id=198)
 
 VictoryRoad3Script: ; 0x44980
 	call VictoryRoad3Script_Unknown44996
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld hl, VictoryRoad3TrainerHeaders
 	ld de, $49b1
 	ld a, [$d640]
@@ -45643,7 +45645,7 @@ RocketHideout1_h: ; 0x44bbe to 0x44bca (12 bytes) (bank=11) (id=199)
 
 RocketHideout1Script: ; 0x44bca
 	call Unknown_44be0
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld hl, RocketHideout1TrainerHeaders
 	ld de, $4c0e
 	ld a, [$d631]
@@ -45864,7 +45866,7 @@ RocketHideout2_h: ; 0x44e1b to 0x44e27 (12 bytes) (bank=11) (id=200)
 	dw RocketHideout2Object ; objects
 
 RocketHideout2Script: ; 0x44e27
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld hl, RocketHideout2TrainerHeaders
 	ld de, RocketHideout2_Unknown44e3a
 	ld a, [$d632]
@@ -46034,7 +46036,7 @@ RocketHideout3_h: ; 0x45219 to 0x45225 (12 bytes) (bank=11) (id=201)
 	dw RocketHideout3Object ; objects
 
 RocketHideout3Script: ; 0x45225
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld hl, RocketHideout3TrainerHeaders
 	ld de, RocketHideout3Script_Unknown45238
 	ld a, [$d633]
@@ -46149,7 +46151,7 @@ RocketHideout4_h: ; 0x45451 to 0x4545d (12 bytes) (bank=11) (id=202)
 
 RocketHideout4Script: ; 0x4545d
 	call Unnamed_45473
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld hl, RocketHideout4TrainerHeader0
 	ld de, $54ae
 	ld a, [$d634]
@@ -46492,7 +46494,7 @@ SafariZoneEast_h: ; 0x4585f to 0x4586b (12 bytes) (bank=11) (id=217)
 	dw SafariZoneEastObject ; objects
 
 SafariZoneEastScript: ; 0x4586b
-	jp $3c3c
+	jp EnableAutoTextBoxDrawing
 ; 0x4586e
 
 SafariZoneEastTexts: ; 0x4586e
@@ -46550,7 +46552,7 @@ SafariZoneNorth_h: ; 0x4599f to 0x459ab (12 bytes) (bank=11) (id=218)
 	dw SafariZoneNorthObject ; objects
 
 SafariZoneNorthScript: ; 0x459ab
-	jp $3c3c
+	jp EnableAutoTextBoxDrawing
 ; 0x459ae
 
 SafariZoneNorthTexts: ; 0x459ae
@@ -46624,7 +46626,7 @@ SafariZoneCenter_h: ; 0x45ba6 to 0x45bb2 (12 bytes) (bank=11) (id=220)
 	dw SafariZoneCenterObject ; objects
 
 SafariZoneCenterScript: ; 0x45bb2
-	jp $3c3c
+	jp EnableAutoTextBoxDrawing
 ; 0x45bb5
 
 SafariZoneCenterTexts: ; 0x45bb5
@@ -46682,7 +46684,7 @@ SafariZoneRestHouse1_h: ; 0x45ce1 to 0x45ced (12 bytes) (bank=11) (id=221)
 	dw SafariZoneRestHouse1Object ; objects
 
 SafariZoneRestHouse1Script: ; 0x45ced
-	jp $3c3c
+	jp EnableAutoTextBoxDrawing
 ; 0x45cf0
 
 SafariZoneRestHouse1Texts: ; 0x45cf0
@@ -46722,7 +46724,7 @@ SafariZoneRestHouse2_h: ; 0x45d1e to 0x45d2a (12 bytes) (bank=11) (id=223)
 	dw SafariZoneRestHouse2Object ; objects
 
 SafariZoneRestHouse2Script: ; 0x45d2a
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ret
 ; 0x45d2e
 
@@ -46768,7 +46770,7 @@ SafariZoneRestHouse3_h: ; 0x45d69 to 0x45d75 (12 bytes) (bank=11) (id=224)
 	dw SafariZoneRestHouse3Object ; objects
 
 SafariZoneRestHouse3Script: ; 0x45d75
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ret
 ; 0x45d79
 
@@ -46814,7 +46816,7 @@ SafariZoneRestHouse4_h: ; 0x45db4 to 0x45dc0 (12 bytes) (bank=11) (id=225)
 	dw SafariZoneRestHouse4Object ; objects
 
 SafariZoneRestHouse4Script: ; 0x45dc0
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ret
 ; 0x45dc4
 
@@ -46860,7 +46862,7 @@ UnknownDungeon2_h: ; 0x45dff to 0x45e0b (12 bytes) (bank=11) (id=226)
 	dw UnknownDungeon2Object ; objects
 
 UnknownDungeon2Script: ; 0x45e0b
-	jp $3c3c
+	jp EnableAutoTextBoxDrawing
 ; 0x45e0e
 
 UnknownDungeon2Texts: ; 0x45e0e
@@ -46904,7 +46906,7 @@ UnknownDungeon3_h: ; 0x45ee4 to 0x45ef0 (12 bytes) (bank=11) (id=227)
 	dw UnknownDungeon3Object ; objects
 
 UnknownDungeon3Script: ; 0x45ef0
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld hl, UnknownDungeon3TrainerHeaders
 	ld de, UnknownDungeon3Script_Unknown45f03
 	ld a, [$d650]
@@ -46975,7 +46977,7 @@ RockTunnel2_h: ; 0x45fdf to 0x45feb (12 bytes) (bank=11) (id=232)
 	dw RockTunnel2Object ; objects
 
 RockTunnel2Script: ; 0x45feb
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld hl, RockTunnel2TrainerHeaders
 	ld de, RockTunnel2Script_Unknown45ffe
 	ld a, [$d620]
@@ -47280,7 +47282,7 @@ SeafoamIslands2_h: ; 0x46309 to 0x46315 (12 bytes) (bank=11) (id=159)
 	dw SeafoamIslands2Object ; objects
 
 SeafoamIslands2Script: ; 0x46315
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld hl, $cd60
 	bit 7, [hl]
 	res 7, [hl]
@@ -47365,7 +47367,7 @@ SeafoamIslands3_h: ; 0x46445 to 0x46451 (12 bytes) (bank=11) (id=160)
 	dw SeafoamIslands3Object ; objects
 
 SeafoamIslands3Script: ; 0x46451
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld hl, $cd60
 	bit 7, [hl]
 	res 7, [hl]
@@ -47450,12 +47452,12 @@ SeafoamIslands4_h: ; 0x46581 to 0x4658d (12 bytes) (bank=11) (id=161)
 	dw SeafoamIslands4Object ; objects
 
 SeafoamIslands4Script: ; 0x4658d
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld hl, $cd60
 	bit 7, [hl]
 	res 7, [hl]
 	jr z, .asm_465dc ; 0x46597 $43
-	ld hl, SeafoamIslands4Script_Unknown465f6
+	ld hl, Data465f6
 	call $34e4
 	ret nc
 	ld hl, $d881
@@ -47487,7 +47489,7 @@ SeafoamIslands4Script: ; 0x4658d
 .asm_465dc
 	ld a, $a2
 	ld [$d71d], a
-	ld hl, SeafoamIslands4Script_Unknown465f6
+	ld hl, Data465f6
 	call $6981
 	ld a, [$d732]
 	bit 4, a
@@ -47498,7 +47500,7 @@ SeafoamIslands4Script: ; 0x4658d
 	jp $3d97
 ; 0x465f6
 
-SeafoamIslands4Script_Unknown465f6: ; 0x465f6
+Data465f6: ; 0x465f6
 INCBIN "baserom.gbc",$465f6,$465fb - $465f6
 
 SeafoamIslands4Scripts: ; 0x465fb
@@ -47598,7 +47600,7 @@ SeafoamIslands5_h: ; 0x4678d to 0x46799 (12 bytes) (bank=11) (id=162)
 	dw SeafoamIslands5Object ; objects
 
 SeafoamIslands5Script: ; 0x46799
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld a, [$d668]
 	ld hl, SeafoamIslands5Scripts
 	jp $3d97
@@ -48581,7 +48583,7 @@ Route11GateUpstairsBlocks: ; 40db 16
 INCBIN "baserom.gbc",$480eb,$48152 - $480eb
 
 Route7Script: ; 0x48152
-	jp $3c3c
+	jp EnableAutoTextBoxDrawing
 ; 0x48155
 
 ; XXX
@@ -48599,7 +48601,7 @@ RedsHouse1F_h: ; 415C
 	dw RedsHouse1FObject
 
 RedsHouse1FScript: ; 4168
-	jp $3C3C
+	jp EnableAutoTextBoxDrawing
 
 RedsHouse1FTexts: ; 416B
 	dw RedsHouse1FText1,RedsHouse1FText2
@@ -48704,7 +48706,7 @@ CeladonMart3_h: ; 0x48219 to 0x48225 (12 bytes) (bank=12) (id=124)
 	dw CeladonMart3Object ; objects
 
 CeladonMart3Script: ; 0x48225
-	jp $3c3c
+	jp EnableAutoTextBoxDrawing
 ; 0x48228
 
 CeladonMart3Texts: ; 0x48228
@@ -48848,7 +48850,7 @@ CeladonMart4_h: ; 0x4834a to 0x48356 (12 bytes) (bank=12) (id=125)
 	dw CeladonMart4Object ; objects
 
 CeladonMart4Script: ; 0x48356
-	jp $3c3c
+	jp EnableAutoTextBoxDrawing
 ; 0x48359
 
 CeladonMart4Texts: ; 0x48359
@@ -48899,7 +48901,7 @@ CeladonMartRoof_h: ; 0x483c9 to 0x483d5 (12 bytes) (bank=12) (id=126)
 	dw CeladonMartRoofObject ; objects
 
 CeladonMartRoofScript: ; 0x483d5
-	jp $3c3c
+	jp EnableAutoTextBoxDrawing
 ; 0x483d8
 
 INCBIN "baserom.gbc",$483d8,$484ee - $483d8
@@ -49047,7 +49049,7 @@ CeladonMansion1_h: ; 0x48688 to 0x48694 (12 bytes) (bank=12) (id=128)
 	dw CeladonMansion1Object ; objects
 
 CeladonMansion1Script: ; 0x48694
-	jp $3c3c
+	jp EnableAutoTextBoxDrawing
 ; 0x48697
 
 CeladonMansion1Texts: ; 0x48697
@@ -49124,7 +49126,7 @@ CeladonMansion2_h: ; 0x4872e to 0x4873a (12 bytes) (bank=12) (id=129)
 	dw CeladonMansion2Object ; objects
 
 CeladonMansion2Script: ; 0x4873a
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ret
 ; 0x4873e
 
@@ -49167,7 +49169,7 @@ CeladonMansion3_h: ; 0x48784 to 0x48790 (12 bytes) (bank=12) (id=130)
 	dw CeladonMansion3Object ; objects
 
 CeladonMansion3Script: ; 0x48790
-	jp $3c3c
+	jp EnableAutoTextBoxDrawing
 ; 0x48793
 
 CeladonMansion3Texts: ; 0x48793
@@ -49273,7 +49275,7 @@ CeladonMansion4_h: ; 0x4885f to 0x4886b (12 bytes) (bank=12) (id=131)
 	dw CeladonMansion4Object ; objects
 
 CeladonMansion4Script: ; 0x4886b
-	jp $3c3c
+	jp EnableAutoTextBoxDrawing
 ; 0x4886e
 
 CeladonMansion4Texts: ; 0x4886e
@@ -49314,7 +49316,7 @@ CeladonPokecenter_h: ; 0x488ac to 0x488b8 (12 bytes) (bank=12) (id=133)
 
 CeladonPokecenterScript: ; 0x488b8
 	call $22fa
-	jp $3c3c
+	jp EnableAutoTextBoxDrawing
 ; 0x488be
 
 CeladonPokecenterTexts:
@@ -49366,7 +49368,7 @@ CeladonGymScript: ; 0x4890a
 	bit 6, [hl]
 	res 6, [hl]
 	call nz, CeladonGymScript_Unknown48927
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld hl, CeladonGymTrainerHeaders
 	ld de, $494e
 	ld a, [$d5ff]
@@ -49706,7 +49708,7 @@ CeladonGameCorner_h: ; 0x48bb1 to 0x48bbd (12 bytes) (bank=12) (id=135)
 CeladonGameCornerScript: ; 0x48bbd
 	call Unknown_48bcf
 	call $4bec
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld hl, CeladonGameCornerScripts
 	ld a, [$d65f]
 	jp $3d97
@@ -50152,7 +50154,7 @@ CeladonMart5_h: ; 0x4905d to 0x49069 (12 bytes) (bank=12) (id=136)
 	dw CeladonMart5Object ; objects
 
 CeladonMart5Script: ; 0x49069
-	jp $3c3c
+	jp EnableAutoTextBoxDrawing
 ; 0x4906c
 
 CeladonMart5Texts: ; 0x4906c
@@ -50204,7 +50206,7 @@ CeladonPrizeRoom_h: ; 0x490e4 to 0x490f0 (12 bytes) (bank=12) (id=137)
 	dw CeladonPrizeRoomObject ; objects
 
 CeladonPrizeRoomScript: ; 0x490f0
-	jp $3c3c
+	jp EnableAutoTextBoxDrawing
 ; 0x490f3
 
 CeladonPrizeRoomTexts:
@@ -50253,7 +50255,7 @@ CeladonDiner_h: ; 0x49145 to 0x49151 (12 bytes) (bank=12) (id=138)
 	dw CeladonDinerObject ; objects
 
 CeladonDinerScript: ; 0x49151
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ret
 ; 0x49155
 
@@ -50353,7 +50355,7 @@ CeladonHouse_h: ; 0x49202 to 0x4920e (12 bytes) (bank=12) (id=139)
 	dw CeladonHouseObject ; objects
 
 CeladonHouseScript: ; 0x4920e
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ret
 ; 0x49212
 
@@ -50402,7 +50404,7 @@ CeladonHotel_h: ; 0x4925d to 0x49269 (12 bytes) (bank=12) (id=140)
 	dw CeladonHotelObject ; objects
 
 CeladonHotelScript: ; 0x49269
-	jp $3c3c
+	jp EnableAutoTextBoxDrawing
 ; 0x4926c
 
 CeladonHotelTexts: ; 0x4926c
@@ -50451,7 +50453,7 @@ MtMoonPokecenter_h: ; 0x492c3 to 0x492cf (12 bytes) (bank=12) (id=68)
 
 MtMoonPokecenterScript: ; 0x492cf
 	call $22fa
-	jp $3c3c
+	jp EnableAutoTextBoxDrawing
 ; 0x492d5
 
 MtMoonPokecenterTexts:
@@ -50578,7 +50580,7 @@ RockTunnelPokecenter_h: ; 0x493ae to 0x493ba (12 bytes) (id=81)
 
 RockTunnelPokecenterScript: ; 0x493ba
 	call $22fa
-	jp $3c3c
+	jp EnableAutoTextBoxDrawing
 ; 0x493c0
 
 RockTunnelPokecenterTexts:
@@ -50626,7 +50628,7 @@ Route11Gate_h: ; 0x49400 to 0x4940c (12 bytes) (id=84)
 	dw Route11GateObject ; objects
 
 Route11GateScript: ; 0x4940c
-	jp $3c3c
+	jp EnableAutoTextBoxDrawing
 ; 0x4940f
 
 Route11GateTexts: ; 0x4940f
@@ -50667,7 +50669,7 @@ Route11GateUpstairs_h: ; 0x49448 to 0x49454 (12 bytes) (id=86)
 	dw Route11GateUpstairsObject ; objects
 
 Route11GateUpstairsScript: ; 0x49454
-	jp $3c3f
+	jp DisableAutoTextBoxDrawing
 ; 0x49457
 
 Route11GateUpstairsTexts:
@@ -50778,7 +50780,7 @@ Route12Gate_h: ; 0x494f8 to 0x49504 (12 bytes) (id=87)
 	dw Route12GateObject ; objects
 
 Route12GateScript: ; 0x49504
-	jp $3c3c
+	jp EnableAutoTextBoxDrawing
 ; 0x49507
 
 Route12GateTexts: ; 0x49507
@@ -50822,7 +50824,7 @@ Route12GateUpstairs_h: ; 0x49554 to 0x49560 (12 bytes) (id=195)
 	dw Route12GateUpstairsObject ; objects
 
 Route12GateUpstairsScript: ; 0x49560
-	jp $3c3f
+	jp DisableAutoTextBoxDrawing
 ; 0x49563
 
 Route12GateUpstairsTexts: ; 0x49563
@@ -50933,7 +50935,7 @@ Route15Gate_h: ; 0x495f6 to 0x49602 (12 bytes) (id=184)
 	dw Route15GateObject ; objects
 
 Route15GateScript: ; 0x49602
-	jp $3c3c
+	jp EnableAutoTextBoxDrawing
 ; 0x49605
 
 Route15GateTexts: ; 0x49605
@@ -50974,7 +50976,7 @@ Route15GateUpstairs_h: ; 0x4963e
 	dw Route15GateUpstairsObject ; objects
 
 Route15GateUpstairsScript: ; 0x4964a
-	jp $3c3f
+	jp DisableAutoTextBoxDrawing
 
 Route15GateUpstairsTexts: ; 0x4964d
 	dw Route15GateUpstairsText1
@@ -51051,7 +51053,7 @@ Route16GateMap_h: ; 0x496b2 to 0x496be (12 bytes) (id=186)
 Route16GateMapScript: ; 0x496be
 	ld hl, $d732
 	res 5, [hl]
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld a, [$d660]
 	ld hl, Route16GateMapScripts
 	jp $3d97
@@ -51174,7 +51176,7 @@ Route16GateUpstairs_h: ; 0x497ff to 0x4980b (12 bytes) (id=187)
 	dw Route16GateUpstairsObject ; objects
 
 Route16GateUpstairsScript: ; 0x4980b
-	jp $3c3f
+	jp DisableAutoTextBoxDrawing
 ; 0x4980e
 
 Route16GateUpstairsTexts: ; 0x4980e
@@ -51252,7 +51254,7 @@ Route18Gate_h: ; 0x4986a to 0x49876 (12 bytes) (id=190)
 Route18GateScript: ; 0x49876
 	ld hl, $d732
 	res 5, [hl]
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld a, [$d669]
 	ld hl, Route18GateScripts
 	jp $3d97
@@ -51359,7 +51361,7 @@ Route18GateHeader_h: ; 0x49969 to 0x49975 (12 bytes) (id=191)
 	dw Route18GateHeaderObject ; objects
 
 Route18GateHeaderScript: ; 0x49975
-	jp $3c3f
+	jp DisableAutoTextBoxDrawing
 ; 0x49978
 
 Route18GateHeaderTexts: ; 0x49978
@@ -51420,7 +51422,7 @@ MtMoon1_h: ; 0x499bc to 0x499c8 (12 bytes) (id=59)
 	dw MtMoon1Object ; objects
 
 MtMoon1Script: ; 0x499c8
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld hl, MtMoon1TrainerHeader0
 	ld de, Unknown_59db
 	ld a, [$d606]
@@ -51706,7 +51708,7 @@ MtMoon3_h: ; 0x49cff to 0x49d0b (12 bytes) (id=61)
 	dw MtMoon3Object ; objects
 
 MtMoon3Script: ; 0x49d0b
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld hl, $5e48
 	ld de, $5d63
 	ld a, [$d607]
@@ -52038,7 +52040,7 @@ SafariZoneWest_h: ; 0x4a1a9 to 0x4a1b5 (12 bytes) (id=219)
 	dw SafariZoneWestObject ; objects
 
 SafariZoneWestScript: ; 0x4a1b5
-	jp $3c3c
+	jp EnableAutoTextBoxDrawing
 ; 0x4a1b8
 
 SafariZoneWestTexts: ; 0x4a1b8
@@ -52107,7 +52109,7 @@ SafariZoneSecretHouse_h: ; 0x4a30b to 0x4a317 (12 bytes) (id=222)
 	dw SafariZoneSecretHouseObject ; objects
 
 SafariZoneSecretHouseScript: ; 0x4a317
-	jp $3c3c
+	jp EnableAutoTextBoxDrawing
 ; 0x4a31a
 
 SafariZoneSecretHouseTexts: ; 0x4a31a
@@ -52280,7 +52282,7 @@ BattleCenterM_h: ; 0x4fd04 to 0x4fd10 (12 bytes) (id=239)
 	dw BattleCenterMObject ; objects
 
 BattleCenterMScript: ; 0x4fd10
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld a, [$ff00+$aa]
 	cp $2
 	ld a, $8
@@ -52932,7 +52934,7 @@ SaffronCityBlocks: ; 0x50a98 360
 	INCBIN "maps/saffroncity.blk"
 
 SaffronCityScript: ; 0x50c00
-	jp $3c3c
+	jp EnableAutoTextBoxDrawing
 ; 0x50c03
 
 SaffronCityTexts: ; 0x50c03
@@ -53035,7 +53037,7 @@ Route20Script: ; 0x50ca9
 	bit 0, [hl]
 	res 0, [hl]
 	call nz, $4cc6
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld hl, $4d3a
 	ld de, $4d1c
 	ld a, [$d628]
@@ -53368,7 +53370,7 @@ Route20Text11: ; 0x50ead
 	db $50
 
 Route22Script: ; 0x50eb2
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld hl, Route22Scripts
 	ld a, [$d60a]
 	jp $3d97
@@ -53612,7 +53614,7 @@ Route22Text3: ; 0x511d5
 
 Route23Script: ; 0x511da
 	call $51e9
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld hl, Route23Scripts
 	ld a, [$d667]
 	jp $3d97
@@ -53731,7 +53733,7 @@ Route23Text8: ; 0x513a8
 	db $50
 
 Route24Script: ; 0x513ad
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld hl, Route24TrainerHeaders
 	ld de, $53cb
 	ld a, [$d602]
@@ -54013,7 +54015,7 @@ Route24AfterBattleText6: ; 0x515c6
 
 Route25Script: ; 0x515cb
 	call Unknown_515e1
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld hl, Route25TrainerHeaders
 	ld de, $5622
 	ld a, [$d603]
@@ -54331,7 +54333,7 @@ VictoryRoad2Script: ; 0x5179d
 	bit 5, [hl]
 	res 5, [hl]
 	call nz, $57c9
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld hl, VictoryRoad2TrainerHeaders
 	ld de, $57eb
 	ld a, [$d63f]
@@ -54579,7 +54581,7 @@ MtMoon2_h: ; 0x51a36 to 0x51a42 (12 bytes) (id=60)
 	dw MtMoon2Object ; objects
 
 MtMoon2Script: ; 0x51a42
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ret
 ; 0x51a46
 
@@ -54631,7 +54633,7 @@ SilphCo7_h: ; 0x51b55 to 0x51b61 (12 bytes) (id=212)
 
 SilphCo7Script: ; 0x51b61
 	call SilphCo7Script_Unknown51b77
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld hl, SilphCo7TrainerHeaders
 	ld de, $5c17
 	ld a, [$d648]
@@ -54709,7 +54711,7 @@ SilphCo7Text1: ; 0x51d8e
 	ld a, [$ccd3]
 	and a
 	call z, $3865
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld hl, UnnamedText_51dd8
 	call PrintText
 	ld hl, $d72e
@@ -54976,7 +54978,7 @@ Mansion2_h: ; 0x51fcc to 0x51fd8 (12 bytes) (id=214)
 
 Mansion2Script:
 	call Mansion2Script_Unknown51fee
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld hl, Mansion2TrainerHeaders
 	ld de, $6047
 	ld a, [$d63c]
@@ -55114,7 +55116,7 @@ Mansion3_h: ; 0x521e2 to 0x521ee (12 bytes) (id=215)
 
 Mansion3Script:
 	call Unnamed_52204
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld hl, Mansion3TrainerHeader0
 	ld de, $6235
 	ld a, [$d63d]
@@ -55233,7 +55235,7 @@ Mansion4_h: ; 0x523ad to 0x523b9 (12 bytes) (id=216)
 
 Mansion4Script: ; 0x523b9
 	call Unknown_523cf
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld hl, Mansion4TrainerHeader0
 	ld de, $6430
 	ld a, [$d63e]
@@ -56346,7 +56348,7 @@ UnnamedText_554d8: ; 0x554d8
 INCBIN "baserom.gbc",$554dd,$554e3 - $554dd
 
 Route2Script: ; 0x554e3
-	jp $3c3c
+	jp EnableAutoTextBoxDrawing
 ; 0x554e6
 
 Route2Texts:
@@ -56361,7 +56363,7 @@ Route2Text4: ; 0x554f3
 	db $50
 
 Route3Script: ; 0x554f8
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld hl, Route3TrainerHeader0
 	ld de, Unknown_5550b
 	ld a, [$d5f8]
@@ -56636,7 +56638,7 @@ Route3Text10: ; 0x55653
 	db $50
 
 Route4Script: ; 0x55658
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld hl, Route4TrainerHeaders
 	ld de, Unknown_5566b
 	ld a, [$d5f9]
@@ -56698,7 +56700,7 @@ Route4Text6: ; 0x556ad
 	db $50
 
 Route5Script: ; 0x556b2
-	jp $3c3c
+	jp EnableAutoTextBoxDrawing
 ; 0x556b5
 
 Route5Texts: ; 0x556b5
@@ -56709,7 +56711,7 @@ Route5Text1: ; 0x556b7
 	db $50
 
 Route9Script: ; 0x556bc
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld hl, Route9TrainerHeaders
 	ld de, Unknown_556cf
 	ld a, [$d604]
@@ -57005,7 +57007,7 @@ Route9Text11: ; 0x55819
 	db $50
 
 Route13Script: ; 0x5581e
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld hl, Route13TrainerHeaders
 	ld de, Route13Script_Unknown55831
 	ld a, [$d61a]
@@ -57346,7 +57348,7 @@ Route13Text13: ; 0x559ce
 	db $50
 
 Route14Script: ; 0x559d3
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld hl, Route14TrainerHeaders
 	ld de, Unknown_559e6
 	ld a, [$d61b]
@@ -57679,7 +57681,7 @@ Route14Text11: ; 0x55b75
 	db $50
 
 Route17Script: ; 0x55b7a
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld hl, Route17TrainerHeaders
 	ld de, Route17_Unknown55b8d
 	ld a, [$d61c]
@@ -58032,7 +58034,7 @@ Route17Text16: ; 0x55d3f
 	db $50
 
 Route19Script: ; 0x55d44
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld hl, Route19TrainerHeaders
 	ld de, Route19_Unknown55d57
 	ld a, [$d61d]
@@ -58365,7 +58367,7 @@ Route19Text11: ; 0x55ee6
 	db $50
 
 Route21Script: ; 0x55eeb
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld hl, Route21TrainerHeaders
 	ld de, Route21_Unknown55efe
 	ld a, [$d61e]
@@ -58671,7 +58673,7 @@ VermilionHouse2_h: ; 0x56064 to 0x56070 (12 bytes) (id=163)
 	dw VermilionHouse2Object ; objects
 
 VermilionHouse2Script: ; 0x56070
-	jp $3c3c
+	jp EnableAutoTextBoxDrawing
 ; 0x56073
 
 VermilionHouse2Texts: ; 0x56073
@@ -58759,7 +58761,7 @@ CeladonMart2_h: ; 0x560e9 to 0x560f5 (12 bytes) (id=123)
 	dw CeladonMart2Object ; objects
 
 CeladonMart2Script: ; 0x560f5
-	jp $3c3c
+	jp EnableAutoTextBoxDrawing
 ; 0x560f8
 
 CeladonMart2Texts: ; 0x560f8
@@ -58811,7 +58813,7 @@ FuchsiaHouse3_h: ; 0x56170 to 0x5617c (12 bytes) (id=164)
 	dw FuchsiaHouse3Object ; objects
 
 FuchsiaHouse3Script: ; 0x5617c
-	jp $3c3c
+	jp EnableAutoTextBoxDrawing
 ; 0x5617f
 
 FuchsiaHouse3Texts: ; 0x5617f
@@ -58901,7 +58903,7 @@ DayCareM_h: ; 0x56243 to 0x5624f (12 bytes) (id=72)
 	dw DayCareMObject ; objects
 
 DayCareMScript: ; 0x5624f
-	jp $3c3c
+	jp EnableAutoTextBoxDrawing
 ; 0x56252
 
 DayCareMTexts: ; 0x56252
@@ -59069,7 +59071,7 @@ Route12House_h: ; 0x56473 to 0x5647f (12 bytes) (id=189)
 	dw Route12HouseObject ; objects
 
 Route12HouseScript: ; 0x5647f
-	jp $3c3c
+	jp EnableAutoTextBoxDrawing
 ; 0x56482
 
 Route12HouseTexts: ; 0x56482
@@ -59158,7 +59160,7 @@ SilphCo8_h: ; 0x564f8 to 0x56504 (12 bytes) (id=213)
 
 SilphCo8Script: ; 0x56504
 	call SilphCo8_Unknown5651a
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld hl, SilphCo8TrainerHeader0
 	ld de, $6577
 	ld a, [$d649]
@@ -59883,7 +59885,7 @@ UnnamedText_590ab: ; 0x590ab
 ; 0x590ab + 5 bytes
 
 Route6Script: ; 0x590b0
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld hl, Route6TrainerHeaders
 	ld de, Route6_Unknown590c3
 	ld a, [$d600]
@@ -60088,7 +60090,7 @@ Route6Text7: ; 0x591b1
 	db $50
 
 Route8Script: ; 0x591b6
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld hl, Route8TrainerHeaders
 	ld de, Route8_Unknown591c9
 	ld a, [$d601]
@@ -60391,7 +60393,7 @@ Route8Text10: ; 0x59331
 	db $50
 
 Route10Script: ; 0x59336
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld hl, Route10TrainerHeaders
 	ld de, Route10_Unknown59349
 	ld a, [$d605]
@@ -60605,7 +60607,7 @@ Route10Text10: ; 0x59447
 	db $50
 
 Route11Script: ; 0x5944c
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld hl, Route11TrainerHeaders
 	ld de, Route11_Unknown5945f
 	ld a, [$d623]
@@ -60939,7 +60941,7 @@ Route11Text11: ; 0x595ee
 	db $50
 
 Route12Script: ; 0x595f3
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld hl, Route12TrainerHeaders
 	ld de, $5611
 	ld a, [$d624]
@@ -61198,7 +61200,7 @@ Route12Text12: ; 0x597a9
 	db $50
 
 Route15Script: ; 0x597ae
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld hl, Route15TrainerHeaders
 	ld de, Route15_Unknown597c1
 	ld a, [$d625]
@@ -61524,7 +61526,7 @@ Route15Text12: ; 0x5992e
 	db $50
 
 Route16Script: ; 0x59933
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld hl, Route16TrainerHeaders
 	ld de, $5951
 	ld a, [$d626]
@@ -61750,7 +61752,7 @@ Route16Text9: ; 0x59ac2
 	db $50
 
 Route18Script: ; 0x59ac7
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld hl, Route18TrainerHeaders
 	ld de, Route18_Unknown59ada
 	ld a, [$d627]
@@ -61878,7 +61880,7 @@ FanClub_h: ; 0x59b64 to 0x59b70 (12 bytes) (id=90)
 	dw FanClubObject ; objects
 
 FanClubScript: ; 0x59b70
-	jp $3c3c
+	jp EnableAutoTextBoxDrawing
 ; 0x59b73
 
 INCBIN "baserom.gbc",$59b73,$11
@@ -62085,7 +62087,7 @@ SilphCo2_h: ; 0x59ce5 to 0x59cf1 (12 bytes) (id=207)
 
 SilphCo2Script: ; 0x59cf1
 	call SilphCo2_Unknown59d07
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld hl, SilphCo2TrainerHeaders
 	ld de, $5d80
 	ld a, [$d643]
@@ -62311,7 +62313,7 @@ SilphCo3_h: ; 0x59f4f to 0x59f5b (12 bytes) (id=208)
 
 SilphCo3Script: ; 0x59f5b
 	call SilphCo3Script_Unknown59f71
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld hl, SilphCo3TrainerHeaders
 	ld de, $5fbe
 	ld a, [$d644]
@@ -62460,7 +62462,7 @@ SilphCo10_h: ; 0x5a12d to 0x5a139 (12 bytes) (id=234)
 
 SilphCo10Script: ; 0x5a139
 	call SilphCo10Script_Unknown5a14f
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld hl, SilphCo10TrainerHeaders
 	ld de, $6180
 	ld a, [$d658]
@@ -62603,7 +62605,7 @@ Lance_h: ; 0x5a2a2 to 0x5a2ae (12 bytes) (id=113)
 
 LanceScript: ; 0x5a2ae
 	call LanceScript_Unknown5a2c4
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld hl, LanceTrainerHeaders
 	ld de, $62fa
 	ld a, [$d653]
@@ -62685,7 +62687,7 @@ HallofFameRoom_h: ; 0x5a492 to 0x5a49e (12 bytes) (id=118)
 	dw HallofFameRoomObject ; objects
 
 HallofFameRoomScript: ; 0x5a49e
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld hl, HallofFameRoomScripts
 	ld a, [$d64b]
 	jp $3d97
@@ -62861,7 +62863,7 @@ RedsHouse2F_h:
 	dw RedsHouse2FObject
 
 RedsHouse2FScript:
-	call $3C3C
+	call EnableAutoTextBoxDrawing
 	ld hl,RedsHouse2FScriptPointers
 	ld a,[$D60C]
 	jp $3D97
@@ -63210,7 +63212,7 @@ MuseumF2_h: ; 0x5c30b to 0x5c317 (12 bytes) (id=53)
 	dw MuseumF2Object ; objects
 
 MuseumF2Script: ; 0x5c317
-	jp $3c3c
+	jp EnableAutoTextBoxDrawing
 ; 0x5c31a
 
 MuseumF2Texts: ; 0x5c31a
@@ -63277,7 +63279,7 @@ PewterGymScript: ; 0x5c387
 	bit 6, [hl]
 	res 6, [hl]
 	call nz, PewterGymScript_Unknown5c3a4
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld hl, PewterGymTrainerHeaders
 	ld de, $43ca
 	ld a, [$d5fc]
@@ -63479,7 +63481,7 @@ PewterPokecenter_h: ; 0x5c57b to 0x5c587 (12 bytes) (id=58)
 
 PewterPokecenterScript: ; 0x5c587
 	call $22fa
-	jp $3c3c
+	jp EnableAutoTextBoxDrawing
 ; 0x5c58d
 
 PewterPokecenterTexts: ; 0x5c58d
@@ -63582,7 +63584,7 @@ CeruleanPokecenter_h: ; 0x5c639 to 0x5c645 (12 bytes) (id=64)
 
 CeruleanPokecenterScript: ; 0x5c645
 	call $22fa
-	jp $3c3c
+	jp EnableAutoTextBoxDrawing
 ; 0x5c64b
 
 CeruleanPokecenterTexts:
@@ -63637,7 +63639,7 @@ CeruleanGymScript: ; 0x5c6b3
 	bit 6, [hl]
 	res 6, [hl]
 	call nz, CeruleanGymScript_Unknown5c6d0
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld hl, CeruleanGymTrainerHeaders
 	ld de, $46f8
 	ld a, [$d5fd]
@@ -63839,7 +63841,7 @@ CeruleanMart_h: ; 0x5c889 to 0x5c895 (12 bytes) (id=67)
 	dw CeruleanMartObject ; objects
 
 CeruleanMartScript: ; 0x5c895
-	jp $3c3c
+	jp EnableAutoTextBoxDrawing
 ; 0x5c898
 
 CeruleanMartTexts: ; 0x5c898
@@ -63881,7 +63883,7 @@ LavenderPokecenter_h: ; 0x5c8ce to 0x5c8da (12 bytes) (id=141)
 
 LavenderPokecenterScript: ; 0x5c8da
 	call $22fa
-	jp $3c3c
+	jp EnableAutoTextBoxDrawing
 ; 0x5c8e0
 
 LavenderPokecenterTexts:
@@ -63929,7 +63931,7 @@ LavenderMart_h: ; 0x5c920 to 0x5c92c (12 bytes) (id=150)
 	dw LavenderMartObject ; objects
 
 LavenderMartScript: ; 0x5c92c
-	jp $3c3c
+	jp EnableAutoTextBoxDrawing
 ; 0x5c92f
 
 LavenderMartTexts: ; 0x5c92f
@@ -63991,7 +63993,7 @@ VermilionPokecenter_h: ; 0x5c983 to 0x5c98f (12 bytes) (id=89)
 
 VermilionPokecenterScript: ; 0x5c98f
 	call $22fa
-	jp $3c3c
+	jp EnableAutoTextBoxDrawing
 ; 0x5c995
 
 VermilionPokecenterTexts:
@@ -64039,7 +64041,7 @@ VermilionMart_h: ; 0x5c9d5 to 0x5c9e1 (12 bytes) (id=91)
 	dw VermilionMartObject ; objects
 
 VermilionMartScript: ; 0x5c9e1
-	jp $3c3c
+	jp EnableAutoTextBoxDrawing
 ; 0x5c9e4
 
 VermilionMartTexts: ; 0x5c9e4
@@ -64089,7 +64091,7 @@ VermilionGymScript: ; 0x5ca26
 	bit 6, [hl]
 	res 6, [hl]
 	call nz, $4a6d
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld hl, VermilionGymTrainerHeader0
 	ld de, $4a95
 	ld a, [$d5fe]
@@ -64323,7 +64325,7 @@ CopycatsHouseF2_h: ; 0x5cc65 to 0x5cc71 (12 bytes) (id=176)
 	dw CopycatsHouseF2Object ; objects
 
 CopycatsHouseF2Script: ; 0x5cc71
-	jp $3c3c
+	jp EnableAutoTextBoxDrawing
 ; 0x5cc74
 
 CopycatsHouseF2Texts: ; 0x5cc74
@@ -64458,7 +64460,7 @@ FightingDojo_h: ; 0x5cd51 to 0x5cd5d (12 bytes) (id=177)
 	dw FightingDojoObject ; objects
 
 FightingDojoScript: ; 0x5cd5d
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld hl, FightingDojoTrainerHeaders
 	ld de, $4d7b
 	ld a, [$d642]
@@ -64769,7 +64771,7 @@ SaffronGymScript: ; 0x5d00d
 	bit 6, [hl]
 	res 6, [hl]
 	call nz, .extra
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld hl, $50c3
 	ld de, $5053
 	ld a, [$d65c]
@@ -65190,7 +65192,7 @@ SaffronMart_h: ; 0x5d3fd to 0x5d409 (12 bytes) (id=180)
 	dw SaffronMartObject ; objects
 
 SaffronMartScript: ; 0x5d409
-	jp $3c3c
+	jp EnableAutoTextBoxDrawing
 ; 0x5d40c
 
 SaffronMartTexts: ; 0x5d40c
@@ -65231,7 +65233,7 @@ SilphCo1_h: ; 0x5d442 to 0x5d44e (12 bytes) (id=181)
 	dw SilphCo1Object ; objects
 
 SilphCo1Script: ; 0x5d44e
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld a, [$d838]
 	bit 7, a
 	ret z
@@ -65287,7 +65289,7 @@ SaffronPokecenter_h: ; 0x5d529 to 0x5d535 (12 bytes) (id=182)
 
 SaffronPokecenterScript: ; 0x5d535
 	call $22fa
-	jp $3c3c
+	jp EnableAutoTextBoxDrawing
 ; 0x5d53b
 
 SaffronPokecenterTexts:
@@ -65335,7 +65337,7 @@ ViridianForestexit_h: ; 0x5d57b to 0x5d587 (12 bytes) (id=47)
 	dw ViridianForestexitObject ; objects
 
 ViridianForestexitScript: ; 0x5d587
-	jp $3c3c
+	jp EnableAutoTextBoxDrawing
 ; 0x5d58a
 
 ViridianForestexitTexts: ; 0x5d58a
@@ -65379,7 +65381,7 @@ Route2Gate_h: ; 0x5d5c8 to 0x5d5d4 (12 bytes) (id=49)
 	dw Route2GateObject ; objects
 
 Route2GateScript: ; 0x5d5d4
-	jp $3c3c
+	jp EnableAutoTextBoxDrawing
 ; 0x5d5d7
 
 Route2GateTexts: ; 0x5d5d7
@@ -65452,7 +65454,7 @@ ViridianForestEntrance_h: ; 0x5d650 to 0x5d65c (12 bytes) (id=50)
 	dw ViridianForestEntranceObject ; objects
 
 ViridianForestEntranceScript: ; 0x5d65c
-	jp $3c3c
+	jp EnableAutoTextBoxDrawing
 ; 0x5d65f
 
 ViridianForestEntranceTexts: ; 0x5d65f
@@ -65545,7 +65547,7 @@ UndergroundTunnelEntranceRoute6_h: ; 0x5d6e3 to 0x5d6ef (12 bytes) (id=74)
 UndergroundTunnelEntranceRoute6Script: ; 0x5d6ef
 	ld a, $11
 	ld [$d365], a
-	jp $3c3c
+	jp EnableAutoTextBoxDrawing
 ; 0x5d6f7
 
 UndergroundTunnelEntranceRoute6Texts: ; 0x5d6f7
@@ -65586,7 +65588,7 @@ UndergroundPathEntranceRoute7_h: ; 0x5d720 to 0x5d72c (12 bytes) (id=77)
 UndergroundPathEntranceRoute7Script: ; 0x5d72c
 	ld a, $12
 	ld [$d365], a
-	jp $3c3c
+	jp EnableAutoTextBoxDrawing
 ; 0x5d734
 
 UndergroundPathEntranceRoute7Texts: ; 0x5d734
@@ -65649,7 +65651,7 @@ SilphCo9_h: ; 0x5d7af to 0x5d7bb (12 bytes) (id=233)
 
 SilphCo9Script: ; 0x5d7bb
 	call SilphCo9Script_Unknown5d7d1
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld hl, SilphCo9TrainerHeaders
 	ld de, $5885
 	ld a, [$d64a]
@@ -65837,7 +65839,7 @@ VictoryRoad1Script: ; 0x5da0a
 	bit 5, [hl]
 	res 5, [hl]
 	call nz, .next
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld hl, VictoryRoad1TrainerHeaders
 	ld de, $5a3a
 	ld a, [$d651]
@@ -66078,7 +66080,7 @@ PokemonTower1_h: ; 0x60420 to 0x6042c (12 bytes) (id=142)
 	dw PokemonTower1Object ; objects
 
 PokemonTower1Script: ; 0x6042c
-	jp $3c3c
+	jp EnableAutoTextBoxDrawing
 ; 0x6042f
 
 PokemonTower1Texts: ; 0x6042f
@@ -66138,7 +66140,7 @@ PokemonTower2_h: ; 0x604e6 to 0x604f2 (12 bytes) (id=143)
 	dw PokemonTower2Object ; objects
 
 PokemonTower2Script: ; 0x604f2
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld hl, PokemonTower2Scripts
 	ld a, [$d62b]
 	jp $3d97
@@ -66340,7 +66342,7 @@ PokemonTower3_h: ; 0x606c0 to 0x606cc (12 bytes) (id=144)
 	dw PokemonTower3Object ; objects
 
 PokemonTower3Script: ; 0x606cc
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld hl, PokemonTower3TrainerHeaders
 	ld de, Unknown_606df
 	ld a, [$d62c]
@@ -66481,7 +66483,7 @@ PokemonTower4_h: ; 0x607ea to 0x607f6 (12 bytes) (id=145)
 	dw PokemonTower4Object ; objects
 
 PokemonTower4Script: ; 0x607f6
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld hl, PokemonTower4TrainerHeaders
 	ld de, PokemonTower4Script_Unknown60809
 	ld a, [$d62d]
@@ -66625,7 +66627,7 @@ PokemonTower5_h: ; 0x60926 to 0x60932 (12 bytes) (id=146)
 	dw PokemonTower5Object ; objects
 
 PokemonTower5Script: ; 0x60932
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld hl, PokemonTower5TrainerHeaders
 	ld de, PokemonTower5Script_Unknown60945
 	ld a, [$d62e]
@@ -66809,7 +66811,7 @@ PokemonTower6_h: ; 0x60ae3 to 0x60aef (12 bytes) (id=147)
 	dw PokemonTower6Object ; objects
 
 PokemonTower6Script: ; 0x60aef
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld hl, PokemonTower6TrainerHeaders
 	ld de, $4b0d
 	ld a, [$d62f]
@@ -66982,7 +66984,7 @@ PokemonTower7_h: ; 0x60cf9 to 0x60d05 (12 bytes) (id=148)
 	dw PokemonTower7Object ; objects
 
 PokemonTower7Script: ; 0x60d05
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld hl, PokemonTower7TrainerHeaders
 	ld de, $4d23
 	ld a, [$d630]
@@ -67151,7 +67153,7 @@ CeladonMart1_h: ; 0x60f7a to 0x60f86 (12 bytes) (id=122)
 	dw CeladonMart1Object ; objects
 
 CeladonMart1Script: ; 0x60f86
-	jp $3c3c
+	jp EnableAutoTextBoxDrawing
 ; 0x60f89
 
 CeladonMart1Texts: ; 0x60f89
@@ -67231,7 +67233,7 @@ ViridianForest_h: ; 0x61101 to 0x6110d (12 bytes) (id=51)
 	dw ViridianForestObject ; objects
 
 ViridianForestScript: ; 0x6110d
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld hl, ViridianForestTrainerHeaders
 	ld de, ViridianForestScript_Unknown61120
 	ld a, [$d618]
@@ -67429,7 +67431,7 @@ SSAnne1_h: ; 0x61259 to 0x61265 (12 bytes) (id=95)
 	dw SSAnne1Object ; objects
 
 SSAnne1Script: ; 0x61265
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ret
 ; 0x61269
 
@@ -67491,7 +67493,7 @@ SSAnne2_h: ; 0x61393 to 0x6139f (12 bytes) (id=96)
 	dw SSAnne2Object ; objects
 
 SSAnne2Script: ; 0x6139f
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld hl, SSAnne2Scripts
 	ld a, [$d665]
 	jp $3d97
@@ -67718,7 +67720,7 @@ SSAnne4_h: ; 0x61622 to 0x6162e (12 bytes) (id=98)
 	dw SSAnne4Object ; objects
 
 SSAnne4Script: ; 0x6162e
-	jp $3c3c
+	jp EnableAutoTextBoxDrawing
 ; 0x61631
 
 SSAnne4Texts: ; 0x61631
@@ -67759,7 +67761,7 @@ SSAnne5_h: ; 0x616a2 to 0x616ae (12 bytes) (id=99)
 	dw SSAnne5Object ; objects
 
 SSAnne5Script: ; 0x616ae
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld hl, $56d1
 	ld de, SSAnne5Script_Unknown616c1
 	ld a, [$d617]
@@ -67883,7 +67885,7 @@ SSAnne6_h: ; 0x617a7 to 0x617b3 (12 bytes) (id=100)
 	dw SSAnne6Object ; objects
 
 SSAnne6Script: ; 0x617b3
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ret
 ; 0x617b7
 
@@ -67987,7 +67989,7 @@ SSAnne7_h: ; 0x61889 to 0x61895 (12 bytes) (id=101)
 
 SSAnne7Script: ; 0x61895
 	call SSAnne7Script_Unknown6189b
-	jp $3c3c
+	jp EnableAutoTextBoxDrawing
 ; 0x6189b
 
 SSAnne7Script_Unknown6189b: ; 0x6189b
@@ -68109,7 +68111,7 @@ SSAnne8_h: ; 0x6196a to 0x61976 (12 bytes) (id=102)
 	dw SSAnne8Object ; objects
 
 SSAnne8Script: ; 0x61976
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld hl, SSAnne8TrainerHeaders
 	ld de, SSAnne8Script_Unknown61989
 	ld a, [$d608]
@@ -68608,7 +68610,7 @@ SSAnne10_h: ; 0x61d49 to 0x61d55 (12 bytes) (id=104)
 	dw SSAnne10Object ; objects
 
 SSAnne10Script: ; 0x61d55
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld hl, SSAnne10TrainerHeaders
 	ld de, SSAnne10Script_Unknown61d68
 	ld a, [$d629]
@@ -68874,7 +68876,7 @@ UndergroundPathNS_h: ; 0x61f1a to 0x61f26 (12 bytes) (id=119)
 	dw UndergroundPathNSObject ; objects
 
 UndergroundPathNSScript: ; 0x61f26
-	jp $3c3c
+	jp EnableAutoTextBoxDrawing
 ; 0x61f29
 
 UndergroundPathNSTexts:
@@ -68904,7 +68906,7 @@ UndergroundPathWE_h: ; 0x61f3e to 0x61f4a (12 bytes) (id=121)
 	dw UndergroundPathWEObject ; objects
 
 UndergroundPathWEScript: ; 0x61f4a
-	jp $3c3c
+	jp EnableAutoTextBoxDrawing
 ; 0x61f4d
 
 UndergroundPathWETexts:
@@ -68934,7 +68936,7 @@ DiglettsCave_h: ; 0x61f62 to 0x61f6e (12 bytes) (id=197)
 	dw DiglettsCaveObject ; objects
 
 DiglettsCaveScript: ; 0x61f6e
-	jp $3c3c
+	jp EnableAutoTextBoxDrawing
 ; 0x61f71
 
 DiglettsCaveTexts:
@@ -68968,7 +68970,7 @@ SilphCo11_h: ; 0x620ee to 0x620fa (12 bytes) (id=235)
 
 SilphCo11Script: ; 0x620fa
 	call SilphCo11Script_Unknown62110
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld hl, SilphCo11TrainerHeaders
 	ld de, $61cf
 	ld a, [$d659]
@@ -69156,7 +69158,7 @@ GymStatues: ; 0x62419
 ; if in a gym and have the corresponding badge, a = $D and jp $3EF5
 ; if in a gym and don’t have the corresponding badge, a = $C and jp $3EF5
 ; else ret 
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld a, [$c109]
 	cp $4
 	ret nz
@@ -70801,7 +70803,7 @@ ViridianGymScript: ; 0x748a3
 	ld hl, Gym8CityName
 	ld de, Gym8LeaderName
 	call $317f
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld hl, ViridianGymTrainerHeaders
 	ld de, Unknown_748e1
 	ld a, [$d5fb]
@@ -71216,7 +71218,7 @@ PewterMart_h: ; 0x74ca1 to 0x74cad (12 bytes) (id=56)
 	dw PewterMartObject ; objects
 
 PewterMartScript: ; 0x74cad
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld a, $1
 	ld [$cf0c], a
 	ret
@@ -71274,7 +71276,7 @@ UnknownDungeon1_h: ; 0x74d00 to 0x74d0c (12 bytes) (id=228)
 	dw UnknownDungeon1Object ; objects
 
 UnknownDungeon1Script: ; 0x74d0c
-	jp $3c3c
+	jp EnableAutoTextBoxDrawing
 ; 0x74d0f
 
 UnknownDungeon1Texts: ; 0x74d0f
@@ -71525,7 +71527,7 @@ FuchsiaHouse1_h: ; 0x7500c to 0x75018 (12 bytes) (id=153)
 	dw FuchsiaHouse1Object ; objects
 
 FuchsiaHouse1Script: ; 0x75018
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ret
 ; 0x7501c
 
@@ -71572,7 +71574,7 @@ FuchsiaPokecenter_h: ; 0x75057 to 0x75063 (12 bytes) (id=154)
 
 FuchsiaPokecenterScript: ; 0x75063
 	call $22fa
-	jp $3c3c
+	jp EnableAutoTextBoxDrawing
 ; 0x75069
 
 FuchsiaPokecenterTexts:
@@ -71620,7 +71622,7 @@ FuchsiaHouse2_h: ; 0x750a9 to 0x750b5 (12 bytes) (id=155)
 	dw FuchsiaHouse2Object ; objects
 
 FuchsiaHouse2Script: ; 0x750b5
-	jp $3c3c
+	jp EnableAutoTextBoxDrawing
 ; 0x750b8
 
 FuchsiaHouse2Texts: ; 0x750b8
@@ -71777,7 +71779,7 @@ SafariZoneEntrance_h: ; 0x751c1 to 0x751cd (12 bytes) (id=156)
 	dw SafariZoneEntranceObject ; objects
 
 SafariZoneEntranceScript: ; 0x751cd
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld hl, SafariZoneEntranceScripts
 	ld a, [$d61f]
 	jp $3d97
@@ -72108,7 +72110,7 @@ FuchsiaGym_h: ; 0x75431 to 0x7543d (12 bytes) (id=157)
 
 FuchsiaGymScript: ; 0x7543d
 	call FuchsiaGymScript_Unknown75453
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld hl, FuchsiaGymTrainerHeaders
 	ld de, Unknown_75482
 	ld a, [$d65b]
@@ -72458,7 +72460,7 @@ FuchsiaMeetingRoom_h: ; 0x756d7 to 0x756e3 (12 bytes) (id=158)
 	dw FuchsiaMeetingRoomObject ; objects
 
 FuchsiaMeetingRoomScript: ; 0x756e3
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ret
 ; 0x756e7
 
@@ -72508,7 +72510,7 @@ CinnabarGym_h: ; 0x7573e to 0x7574a (12 bytes) (id=166)
 
 CinnabarGymScript: ; 0x7574a
 	call CinnabarGymScript_Unknown75759
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld hl, CinnabarGymScripts
 	ld a, [$d65e]
 	jp $3d97
@@ -73022,7 +73024,7 @@ Lab1_h: ; 0x75b80 to 0x75b8c (12 bytes) (id=167)
 	dw Lab1Object ; objects
 
 Lab1Script: ; 0x75b8c
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ret
 ; 0x75b90
 
@@ -73087,7 +73089,7 @@ Lab2_h: ; 0x75c15 to 0x75c21 (12 bytes) (id=168)
 	dw Lab2Object ; objects
 
 Lab2Script: ; 0x75c21
-	jp $3c3c
+	jp EnableAutoTextBoxDrawing
 ; 0x75c24
 
 Lab2Texts: ; 0x75c24
@@ -73142,7 +73144,7 @@ Lab3_h: ; 0x75c7b to 0x75c87 (12 bytes) (id=169)
 	dw Lab3Object ; objects
 
 Lab3Script: ; 0x75c87
-	jp $3c3c
+	jp EnableAutoTextBoxDrawing
 ; 0x75c8a
 
 Lab3Texts: ; 0x75c8a
@@ -73238,7 +73240,7 @@ Lab4_h: ; 0x75d25 to 0x75d31 (12 bytes) (id=170)
 	dw Lab4Object ; objects
 
 Lab4Script: ; 0x75d31
-	jp $3c3c
+	jp EnableAutoTextBoxDrawing
 ; 0x75d34
 
 Lab4Texts: ; 0x75d34
@@ -73358,7 +73360,7 @@ CinnabarPokecenter_h: ; 0x75e20 to 0x75e2c (12 bytes) (id=171)
 
 CinnabarPokecenterScript: ; 0x75e2c
 	call $22fa
-	jp $3c3c
+	jp EnableAutoTextBoxDrawing
 ; 0x75e32
 
 CinnabarPokecenterTexts: ; 0x75e32
@@ -73406,7 +73408,7 @@ CinnabarMart_h: ; 0x75e72 to 0x75e7e (12 bytes) (id=172)
 	dw CinnabarMartObject ; objects
 
 CinnabarMartScript: ; 0x75e7e
-	jp $3c3c
+	jp EnableAutoTextBoxDrawing
 ; 0x75e81
 
 CinnabarMartTexts: ; 0x75e81
@@ -73447,7 +73449,7 @@ CopycatsHouseF1_h: ; 0x75eb7 to 0x75ec3 (12 bytes) (id=175)
 	dw CopycatsHouseF1Object ; objects
 
 CopycatsHouseF1Script: ; 0x75ec3
-	jp $3c3c
+	jp EnableAutoTextBoxDrawing
 ; 0x75ec6
 
 CopycatsHouseF1Texts: ; 0x75ec6
@@ -73497,7 +73499,7 @@ Gary_h: ;0x75f11
 	dw GaryObject
 
 GaryScript: ; 0x75f1d
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld hl, GaryScripts
 	ld a, [$d64c]
 	jp $3d97
@@ -73675,7 +73677,7 @@ Lorelei_h: ; 0x7616f to 0x7617b (12 bytes) (id=245)
 
 LoreleiScript: ; 0x7617b
 	call LoreleiScript_Unknown76191
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld hl, LoreleiTrainerHeaders
 	ld de, Unknown_761bb
 	ld a, [$d64d]
@@ -73765,7 +73767,7 @@ Bruno_h: ; 0x762ca to 0x762d6 (12 bytes) (id=246)
 
 BrunoScript: ; 0x762d6
 	call BrunoScript_Unknown762ec
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld hl, BrunoTrainerHeaders
 	ld de, Unknown_76312
 	ld a, [$d64e]
@@ -73855,7 +73857,7 @@ Agatha_h: ; 0x76421 to 0x7642d (12 bytes) (id=247)
 
 AgathaScript: ; 0x7642d
 	call AgathaScript_Unknown76443
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld hl, AgathaTrainerHeaders
 	ld de, Unknown_76469
 	ld a, [$d64f]
@@ -74070,7 +74072,7 @@ HiddenItems: ; 0x76688
 	ld a, c
 	and a
 	ret nz
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld a, $1
 	ld [$cc3c], a
 	ld a, [$cd3d] ; item ID
@@ -74227,7 +74229,7 @@ HiddenCoins: ; 0x76799
 	ld b, $1
 	ld a, $10
 	call Predef
-	call $3c3c
+	call EnableAutoTextBoxDrawing
 	ld a, [W_PLAYERCOINS1]
 	cp $99
 	jr nz, .RoomInCoinCase
