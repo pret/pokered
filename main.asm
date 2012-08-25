@@ -28132,14 +28132,25 @@ Route7GateScript: ; 0x1e100
 
 Route7GateScripts: ; 0x1e10d
 	dw Route7GateScript0
+	dw Route7GateScript1
 
-INCBIN "baserom.gbc",$1e10f,$19
+Function1e111: ; 0x1e111
+	ld hl, $d730
+	set 7, [hl]
+	ld a, $20
+	ld [$ccd3], a
+	ld a, $1
+	ld [$cd38], a
+	xor a
+	ld [$c206], a
+	ld [$cd3b], a
+	ret
 
 Route7GateScript0: ; 0x1e128
 	ld a, [$d728]
 	bit 6, a
 	ret nz
-	ld hl, $6167
+	ld hl, Coords1e167
 	call ArePlayerCoordsInArray
 	ret nc
 	ld a, $8
@@ -28155,7 +28166,7 @@ Route7GateScript0: ; 0x1e128
 	ld a, $2
 	ld [$ff00+$8c], a
 	call DisplayTextID
-	call $6111
+	call Function1e111
 	ld a, $1
 	ld [$d663], a
 	ret
@@ -28166,9 +28177,23 @@ Route7GateScript0: ; 0x1e128
 	ld hl, $d728
 	set 6, [hl]
 	ret
-; 0x1e167
 
-INCBIN "baserom.gbc",$1e167,$18
+
+Coords1e167: ; 0x1e167
+	db 3,3
+	db 4,3
+	db $ff
+
+Route7GateScript1: ; 0x1e16c
+	ld a, [$cd38]
+	and a
+	ret nz
+	call Delay3
+	xor a
+	ld [$cd6b], a
+	ld [$d663], a
+	ld [$da39], a
+	ret
 
 Route7GateTexts: ; 0x1e17f
 	dw Route7GateText1, Route7GateText2, Route7GateText3
