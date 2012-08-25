@@ -28768,14 +28768,106 @@ BillsHouseScript: ; 0x1e76a
 
 BillsHouseScripts: ; 0x1e776
 	dw BillsHouseScript0
-
-INCBIN "baserom.gbc",$1e778,$a
+	dw BillsHouseScript1
+	dw BillsHouseScript2
+	dw BillsHouseScript3
+	dw BillsHouseScript4
+	dw BillsHouseScript5
 
 BillsHouseScript0: ; 0x1e782
 	ret
-; 0x1e783
 
-INCBIN "baserom.gbc",$1e783,$b1
+BillsHouseScript1: ; 0x1e783
+	ld a, [$c109]
+	and a
+	ld de, MovementData1e79c
+	jr nz, .asm_1e78f ; 0x1e78a $3
+	ld de, MovementData1e7a0
+.asm_1e78f
+	ld a, $1
+	ld [$ff00+$8c], a
+	call MoveSprite
+	ld a, $2
+	ld [$d661], a
+	ret
+
+MovementData1e79c: ; 0x1e79c
+	db $40,$40,$40,$ff
+
+MovementData1e7a0: ; 0x1e7a0
+	db $c0,$40,$40,$80,$40,$ff
+
+BillsHouseScript2: ; 0x1e7a6
+	ld a, [$d730]
+	bit 0, a
+	ret nz
+	ld a, $61
+	ld [$cc4d], a
+	ld a, $11
+	call Predef
+	ld hl, $d7f2
+	set 6, [hl]
+	xor a
+	ld [$cd6b], a
+	ld a, $3
+	ld [$d661], a
+	ret
+
+BillsHouseScript3: ; 0x1e7c5
+	ld a, [$d7f2]
+	bit 3, a
+	ret z
+	ld a, $f0
+	ld [$cd6b], a
+	ld a, $2
+	ld [$cf13], a
+	ld a, $c
+	ld [$ff00+$eb], a
+	ld a, $40
+	ld [$ff00+$ec], a
+	ld a, $6
+	ld [$ff00+$ed], a
+	ld a, $5
+	ld [$ff00+$ee], a
+	call $32f9
+	ld a, $62
+	ld [$cc4d], a
+	ld a, $15
+	call Predef
+	ld c, $8
+	call DelayFrames
+	ld a, $2
+	ld [$ff00+$8c], a
+	ld de, MovementData1e807
+	call MoveSprite
+	ld a, $4
+	ld [$d661], a
+	ret
+
+MovementData1e807: ; 0x1e807
+	db $00,$c0,$c0,$c0,$00,$ff
+
+BillsHouseScript4: ; 0x1e80d
+	ld a, [$d730]
+	bit 0, a
+	ret nz
+	xor a
+	ld [$cd6b], a
+	ld hl, $d7f2
+	set 5, [hl]
+	ld hl, $d7f1
+	set 0, [hl]
+	ld a, $0
+	ld [$d661], a
+	ret
+
+BillsHouseScript5: ; 0x1e827
+	ld a, $4
+	ld [$ff00+$8c], a
+	call DisplayTextID
+	ld a, $0
+	ld [$d661], a
+	ret
 
 BillsHouseTexts: ; 0x1e834
 	dw BillsHouseText1, BillsHouseText2, BillsHouseText3, BillsHouseText4
