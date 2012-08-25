@@ -6709,7 +6709,7 @@ INCBIN "baserom.gbc",$349B,$34BF - $349B
 ; OUTPUT:
 ; [$cd3d] = if there is match, the matching array index
 ; sets carry if the coordinates are in the array, clears carry if not
-ArePlayerCoordsInArray: ; 34bf
+ArePlayerCoordsInArray: ; 0x34bf
 	ld a,[W_YCOORD]
 	ld b,a
 	ld a,[W_XCOORD]
@@ -7902,7 +7902,7 @@ GivePokemon: ; 0x3e48
 	ld hl, $7da5
 	jp Bankswitch
 
-GenRandom: ; 3E5C
+GenRandom: ; 0x3e5c
 ; store a random 8-bit value in a
 	push hl
 	push de
@@ -23375,7 +23375,7 @@ VermilionCityScript: ; 0x197a1
 	bit 6, [hl]
 	res 6, [hl]
 	push hl
-	call nz, $57cb
+	call nz, Function197cb
 	pop hl
 	bit 5, [hl]
 	res 5, [hl]
@@ -23386,18 +23386,35 @@ VermilionCityScript: ; 0x197a1
 ; 0x197c0
 
 VermilionCityScript_Unknown197c0: ; 0x197c0
-INCBIN "baserom.gbc",$197c0,$197dc - $197c0
+	call GenRandom
+	ld a, [$ff00+$d4]
+	and $e
+	ld [$d743], a
+	ret
+
+Function197cb: ; 0x197cb
+	ld hl, $d803
+	bit 2, [hl]
+	ret z
+	bit 3, [hl]
+	set 3, [hl]
+	ret nz
+	ld a, $2
+	ld [$d62a], a
+	ret
 
 VermilionCityScripts: ; 0x197dc
-	dw VermilionCityScript0, VermilionCityScript1
-
-INCBIN "baserom.gbc",$197e0,$6
+	dw VermilionCityScript0
+	dw VermilionCityScript1
+	dw VermilionCityScript2
+	dw VermilionCityScript3
+	dw VermilionCityScript4
 
 VermilionCityScript0: ; 0x197e6
 	ld a, [$c109]
 	and a
 	ret nz
-	ld hl, $5823
+	ld hl, Coords19823
 	call ArePlayerCoordsInArray
 	ret nc
 	xor a
@@ -23424,9 +23441,42 @@ VermilionCityScript0: ; 0x197e6
 	ld a, $1
 	ld [$d62a], a
 	ret
-; 0x19823
 
-INCBIN "baserom.gbc",$19823,$1985f - $19823
+Coords19823: ; 0x19823
+	db $1e,$12
+	db $ff
+
+VermilionCityScript4: ; 0x19826
+	ld hl, Coords19823
+	call ArePlayerCoordsInArray
+	ret c
+	ld a, $0
+	ld [$d62a], a
+	ret
+
+VermilionCityScript2: ; 0x19833
+	ld a, $ff
+	ld [$cd6b], a
+	ld a, $40
+	ld [$ccd3], a
+	ld [$ccd4], a
+	ld a, $2
+	ld [$cd38], a
+	call $3486
+	ld a, $3
+	ld [$d62a], a
+	ret
+
+VermilionCityScript3: ; 0x1984e
+	ld a, [$cd38]
+	and a
+	ret nz
+	xor a
+	ld [$cd6b], a
+	ld [$ff00+$b4], a
+	ld a, $0
+	ld [$d62a], a
+	ret
 
 VermilionCityScript1: ; 0x1985f
 	ld a, [$cd38]
