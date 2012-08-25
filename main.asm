@@ -28238,14 +28238,25 @@ Route8GateScript: ; 0x1e1c7
 
 Route8GateScripts: ; 0x1e1d3
 	dw Route8GateScript0
+	dw Route8GateScript1
 
-INCBIN "baserom.gbc",$1e1d5,$19
+Function1e1d7: ; 0x1e1d7
+	ld hl, $d730
+	set 7, [hl]
+	ld a, $10
+	ld [$ccd3], a
+	ld a, $1
+	ld [$cd38], a
+	xor a
+	ld [$c206], a
+	ld [$cd3b], a
+	ret
 
 Route8GateScript0: ; 0x1e1ee
 	ld a, [$d728]
 	bit 6, a
 	ret nz
-	ld hl, $622c
+	ld hl, Coords1e22c
 	call ArePlayerCoordsInArray
 	ret nc
 	ld a, $2
@@ -28261,7 +28272,7 @@ Route8GateScript0: ; 0x1e1ee
 	ld a, $2
 	ld [$ff00+$8c], a
 	call DisplayTextID
-	call $61d7
+	call Function1e1d7
 	ld a, $1
 	ld [$d637], a
 	ret
@@ -28273,7 +28284,20 @@ Route8GateScript0: ; 0x1e1ee
 	jp DisplayTextID
 ; 0x1e22c
 
-INCBIN "baserom.gbc",$1e22c,$15
+Coords1e22c: ; 0x1e22c
+	db 3,2
+	db 4,2
+	db $ff
+
+Route8GateScript1: ; 0x1e231
+	ld a, [$cd38]
+	and a
+	ret nz
+	call Delay3
+	xor a
+	ld [$cd6b], a
+	ld [$d637], a
+	ret
 
 Route8GateTexts: ; 0x1e241
 	dw Route8GateText1, Route8GateText2, Route8GateText3
