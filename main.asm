@@ -22284,7 +22284,7 @@ ViridianCityScripts: ; 0x18ffd
 	dw ViridianCityScript0
 	dw ViridianCityScript1
 	dw ViridianCityScript2
-	dw ViridianCityScript3 ; 50c1
+	dw ViridianCityScript3
 
 ViridianCityScript0: ; 0x19005
 	call Function1900b
@@ -22953,9 +22953,27 @@ CeruleanCity_Unknown1948c: ; 0x1948c
 ; 0x1949d
 
 CeruleanCityScripts: ; 0x1949d
-	dw CeruleanCityScript0, CeruleanCityScript1, CeruleanCityScript2, CeruleanCityScript3
+	dw CeruleanCityScript0
+	dw CeruleanCityScript1
+	dw CeruleanCityScript2
+	dw CeruleanCityScript3
+	dw CeruleanCityScript4
 
-INCBIN "baserom.gbc",$194a5,$23
+CeruleanCityScript4: ; 0x194a7
+	ld a, [W_ISINBATTLE]
+	cp $ff
+	jp z, CeruleanCity_Unknown1948c
+	ld a, $f0
+	ld [$cd6b], a
+	ld hl, $d75b
+	set 7, [hl]
+	ld a, $2
+	ld [$ff00+$8c], a
+	call DisplayTextID
+	xor a
+	ld [$cd6b], a
+	ld [$d60f], a
+	ret
 
 CeruleanCityScript0: ; 0x194c8
 	ld a, [$d75b]
