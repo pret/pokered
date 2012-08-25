@@ -27867,14 +27867,20 @@ Route5GateScript: ; 0x1df33
 
 Route5GateScripts: ; 0x1df3f
 	dw Route5GateScript0
+	dw Route5GateScript1
 
-INCBIN "baserom.gbc",$1df41,$f
+Function1df43: ; 0x1df43
+	ld a, $40
+	ld [$ccd3], a
+	ld a, $1
+	ld [$cd38], a
+	jp $3486
 
 Route5GateScript0: ; 0x1df50
 	ld a, [$d728]
 	bit 6, a
 	ret nz
-	ld hl, $5f8f
+	ld hl, Coords1df8f
 	call ArePlayerCoordsInArray
 	ret nc
 	ld a, $2
@@ -27890,7 +27896,7 @@ Route5GateScript0: ; 0x1df50
 	ld a, $2
 	ld [$ff00+$8c], a
 	call DisplayTextID
-	call $5f43
+	call Function1df43
 	ld a, $1
 	ld [$d662], a
 	ret
@@ -27901,9 +27907,21 @@ Route5GateScript0: ; 0x1df50
 	ld hl, $d728
 	set 6, [hl]
 	ret
-; 0x1df8f
 
-INCBIN "baserom.gbc",$1df8f,$15
+Coords1df8f: ; 0x1df8f
+	db 3,3
+	db 3,4
+	db $ff
+
+Route5GateScript1: ; 0x1df94
+	ld a, [$cd38]
+	and a
+	ret nz
+	call Delay3
+	xor a
+	ld [$cd6b], a
+	ld [$d662], a
+	ret
 
 Route5GateTexts: ; 0x1dfa4
 	dw Route5GateText1, Route5GateText2, Route5GateText3
