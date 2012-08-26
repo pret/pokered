@@ -6820,7 +6820,7 @@ BankswitchBack: ; 35CD
 	ld [$2000],a
 	ret
 
-Bankswitch: ; 35D6
+Bankswitch: ; 0x35d6
 ; self-contained bankswitch, use this when not in the home bank
 ; switches to the bank in b
 	ld a,[$FFB8]
@@ -23133,7 +23133,7 @@ CeruleanCityScript2: ; 0x195b1
 	call Bankswitch
 	ld a, $1
 	ld [$ff00+$8c], a
-	call $3541
+	call Function3541
 	ld a, [$d362]
 	cp $14
 	jr nz, .asm_195f0 ; 0x195e9 $5
@@ -26554,7 +26554,7 @@ ViridianMartScript0: ; 0x1d49b
 	ld [$ff00+$8c], a
 	call DisplayTextID
 	ld hl, $ccd3
-	ld de, $54bb
+	ld de, RLEMovement1d4bb
 	call $350c
 	dec a
 	ld [$cd38], a
@@ -26562,10 +26562,8 @@ ViridianMartScript0: ; 0x1d49b
 	ld a, $1
 	ld [$d60d], a
 	ret
-; 0x1d4bb
 
-; XXX
-UnnamedText_1d4bb: ; 0x1d4bb
+RLEMovement1d4bb: ; 0x1d4bb
 	db $20
 	TX_RAM $0240
 	db $ff
@@ -47552,7 +47550,7 @@ SeafoamIslands4Script0: ; 0x46603
 	cp $f
 	ret nz
 	ld hl, $ccd3
-	ld de, SeafoamIslands4Script0_Unknown46632
+	ld de, RLEMovement46632
 	call $350c
 	dec a
 	ld [$cd38], a
@@ -47564,8 +47562,11 @@ SeafoamIslands4Script0: ; 0x46603
 	ret
 ; 0x46632
 
-SeafoamIslands4Script0_Unknown46632: ; 0x46632
-INCBIN "baserom.gbc",$46632,$46639 - $46632
+RLEMovement46632: ; 0x46632
+	db $80,6
+	db $10,5
+	db $80,3
+	db $ff
 
 SeafoamIslands4Script1: ; 0x46639
 	ld a, [$cd38]
@@ -62783,7 +62784,7 @@ HallofFameRoomScript0: ; 0x5a50d
 	ld a, $ff
 	ld [$cd6b], a
 	ld hl, $ccd3
-	ld de, HallofFameRoom_Unknown5a528
+	ld de, RLEMovement5a528
 	call $350c
 	dec a
 	ld [$cd38], a
@@ -62793,8 +62794,9 @@ HallofFameRoomScript0: ; 0x5a50d
 	ret
 ; 0x5a528
 
-HallofFameRoom_Unknown5a528: ; 0x5a528
-	db $40, $5, $ff
+RLEMovement5a528: ; 0x5a528
+	db $40,$5
+	db $ff
 
 HallofFameRoomScript1: ; 0x5a52b
 	ld a, [$cd38]
@@ -62804,7 +62806,7 @@ HallofFameRoomScript1: ; 0x5a52b
 	ld [$d528], a
 	ld a, $1
 	ld [$ff00+$8c], a
-	call $3541
+	call Function3541
 	ld a, $8
 	ld [$ff00+$8d], a
 	call $34a6
@@ -67561,7 +67563,7 @@ SSAnne2Script0: ; 0x613be
 	call Delay3
 	ld a, $2
 	ld [$ff00+$8c], a
-	call $3541
+	call Function3541
 	xor a
 	ld [$ff00+$b4], a
 	ld a, $f0
@@ -67630,7 +67632,7 @@ SSAnne2Script2: ; 0x6146d
 	call DisplayTextID
 	ld a, $2
 	ld [$ff00+$8c], a
-	call $3541
+	call Function3541
 	ld a, [$d362]
 	cp $25
 	jr nz, .asm_61497 ; 0x61490 $5
@@ -73537,14 +73539,25 @@ GaryScript: ; 0x75f1d
 	ld hl, GaryScripts
 	ld a, [$d64c]
 	jp $3d97
-; 0x75f29
 
-INCBIN "baserom.gbc",$75f29,$75f31 - $75f29
+Function75f29: ; 0x75f29
+	xor a
+	ld [$cd6b], a
+	ld [$d64c], a
+	ret
 
 GaryScripts: ; 0x75f31
-	dw GaryScript0, GaryScript1, GaryScript2
-
-INCBIN "baserom.gbc",$75f33 + 4,$14 - 4
+	dw GaryScript0
+	dw GaryScript1
+	dw GaryScript2
+	dw GaryScript3
+	dw GaryScript4
+	dw GaryScript5
+	dw GaryScript6
+	dw GaryScript7
+	dw GaryScript8
+	dw GaryScript9
+	dw GaryScript10 ; 60b9
 
 GaryScript0: ; 0x75f47
 	ret
@@ -73554,7 +73567,7 @@ GaryScript1: ; 0x75f48
 	ld a, $ff
 	ld [$cd6b], a
 	ld hl, $ccd3
-	ld de, Unknown_75f63
+	ld de, RLEMovement75f63
 	call $350c
 	dec a
 	ld [$cd38], a
@@ -73562,10 +73575,12 @@ GaryScript1: ; 0x75f48
 	ld a, $2
 	ld [$d64c], a
 	ret
-; 0x75f63
 
-Unknown_75f63:
-INCBIN "baserom.gbc",$75f63,$75f6a - $75f63
+RLEMovement75f63: ; 0x75f63
+	db $40,1
+	db $10,1
+	db $40,3
+	db $ff
 
 GaryScript2: ; 0x75f6a 5F6A
 	ld a, [$cd38]
@@ -73610,9 +73625,154 @@ GaryScript2: ; 0x75f6a 5F6A
 	ld a, $3
 	ld [$d64c], a
 	ret
-; 0x75fbb
 
-INCBIN "baserom.gbc",$75fbb,$760d6 - $75fbb
+GaryScript3: ; 0x75fbb
+	ld a, [W_ISINBATTLE]
+	cp $ff
+	jp z, Function75f29
+	call $2429 ; move sprites
+	ld hl, $d867
+	set 1, [hl]
+	ld a, $f0
+	ld [$cd6b], a
+	ld a, $1
+	ld [$ff00+$8c], a
+	call Function760c8
+	ld a, $1
+	ld [$ff00+$8c], a
+	call Function3541
+	ld a, $4
+	ld [$d64c], a
+	ret
+
+GaryScript4: ; 0x75fe4
+	ld b, $2
+	ld hl, $5b81
+	call Bankswitch
+	ld a, $2
+	ld [$ff00+$8c], a
+	call Function760c8
+	ld a, $2
+	ld [$ff00+$8c], a
+	call Function3541
+	ld de, Movement76014
+	ld a, $2
+	ld [$ff00+$8c], a
+	call $363a
+	ld a, $d6
+	ld [$cc4d], a
+	ld a, $15
+	call $3e6d
+	ld a, $5
+	ld [$d64c], a
+	ret
+
+Movement76014: ; 0x76014
+	db $40,$40,$40,$40,$40,$ff
+
+GaryScript5: ; 0x7601a
+	ld a, [$d730]
+	bit 0, a
+	ret nz
+	ld a, $2
+	ld [$d528], a
+	ld a, $1
+	ld [$ff00+$8c], a
+	ld a, $8
+	ld [$ff00+$8d], a
+	call $34a6
+	ld a, $2
+	ld [$ff00+$8c], a
+	xor a
+	ld [$ff00+$8d], a
+	call $34a6 ; face object
+	ld a, $3
+	ld [$ff00+$8c], a
+	call Function760c8
+	ld a, $6
+	ld [$d64c], a
+	ret
+
+GaryScript6: ; 0x76047
+	ld a, $2
+	ld [$ff00+$8c], a
+	ld a, $c
+	ld [$ff00+$8d], a
+	call $34a6 ; face object
+	ld a, $4
+	ld [$ff00+$8c], a
+	call Function760c8
+	ld a, $7
+	ld [$d64c], a
+	ret
+
+GaryScript7: ; 0x7605f
+	ld a, $2
+	ld [$ff00+$8c], a
+	xor a
+	ld [$ff00+$8d], a
+	call $34a6 ; face object
+	ld a, $5
+	ld [$ff00+$8c], a
+	call Function760c8
+	ld de, Movement76080
+	ld a, $2
+	ld [$ff00+$8c], a
+	call MoveSprite
+	ld a, $8
+	ld [$d64c], a
+	ret
+
+Movement76080: ; 0x76080
+	db $40,$40,$ff
+
+GaryScript8: ; 0x76083
+	ld a, [$d730]
+	bit 0, a
+	ret nz
+	ld a, $d6
+	ld [$cc4d], a
+	ld a, $11
+	call Predef
+	ld a, $9
+	ld [$d64c], a
+	ret
+
+GaryScript9: ; 0x76099
+	ld a, $ff
+	ld [$cd6b], a
+	ld hl, $ccd3
+	ld de, RLEMovement760b4
+	call $350c
+	dec a
+	ld [$cd38], a
+	call $3486
+	ld a, $a
+	ld [$d64c], a
+	ret
+
+RLEMovement760b4; 0x760b4
+	db $40,4
+	db $20,1
+	db $ff
+
+GaryScript10: ; 0x760b9
+	ld a, [$cd38]
+	and a
+	ret nz
+	xor a
+	ld [$cd6b], a
+	ld a, $0
+	ld [$d64c], a
+	ret
+
+Function760c8; 0x760c8
+	ld a, $f0
+	ld [$cd6b], a
+	call DisplayTextID
+	ld a, $ff
+	ld [$cd6b], a
+	ret
 
 GaryTexts: ; 0x760d6
 	dw GaryText1, GaryText2, GaryText3, GaryText4, GaryText5
