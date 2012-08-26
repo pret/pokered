@@ -6714,6 +6714,9 @@ ArePlayerCoordsInArray: ; 0x34bf
 	ld b,a
 	ld a,[W_XCOORD]
 	ld c,a
+	; fallthrough
+
+CheckCoords: ; 0x34c7
 	xor a
 	ld [$cd3d],a
 .loop\@
@@ -6740,7 +6743,32 @@ ArePlayerCoordsInArray: ; 0x34bf
 	and a
 	ret
 
-INCBIN "baserom.gbc",$34E4,$3541-$34E4
+; tests if a boulder's coordinates are in a specified array
+; INPUT:
+; hl = address of array
+; ff8c = which boulder to check? XXX
+; OUTPUT:
+; [$cd3d] = if there is match, the matching array index
+; sets carry if the coordinates are in the array, clears carry if not
+CheckBoulderCoords: ; 0x34e4
+	push hl
+	ld hl, $c204
+	ld a, [$ff00+$8c]
+	swap a
+	ld d, $0
+	ld e, a
+	add hl, de
+	ld a, [hli]
+	sub $4 ; because sprite coordinates are offset by 4
+	ld b, a
+	ld a, [hl]
+	sub $4 ; because sprite coordinates are offset by 4
+	ld c, a
+	pop hl
+	jp CheckCoords
+; 0x34fc
+
+INCBIN "baserom.gbc",$34fc,$3541-$34fc
 
 Function3541: ; 3541
 ; XXX what do these three functions do
@@ -45338,8 +45366,8 @@ SeafoamIslands1Script: ; 0x447e9
 	bit 7, [hl]
 	res 7, [hl]
 	jr z, .asm_4483b ; 0x447f8 $41
-	ld hl, Data44846
-	call $34e4
+	ld hl, Seafoam1HolesCoords
+	call CheckBoulderCoords
 	ret nc
 	ld hl, $d7e8
 	ld a, [$cd3d]
@@ -45369,11 +45397,11 @@ SeafoamIslands1Script: ; 0x447e9
 .asm_4483b
 	ld a, $9f
 	ld [$d71d], a
-	ld hl, Data44846
+	ld hl, Seafoam1HolesCoords
 	jp $6981
 ; 0x44846
 
-Data44846: ; 0x44846
+Seafoam1HolesCoords: ; 0x44846
 	db $06,$11
 	db $06,$18
 	db $ff
@@ -47287,8 +47315,8 @@ SeafoamIslands2Script: ; 0x46315
 	bit 7, [hl]
 	res 7, [hl]
 	jr z, .asm_46362 ; 0x4631f $41
-	ld hl, SeafoamIslands2Script_Unknown4636d
-	call $34e4
+	ld hl, Seafoam2HolesCoords
+	call CheckBoulderCoords
 	ret nc
 	ld hl, $d87f
 	ld a, [$cd3d]
@@ -47318,12 +47346,14 @@ SeafoamIslands2Script: ; 0x46315
 .asm_46362
 	ld a, $a0
 	ld [$d71d], a
-	ld hl, SeafoamIslands2Script_Unknown4636d
+	ld hl, Seafoam2HolesCoords
 	jp $6981
 ; 0x4636d
 
-SeafoamIslands2Script_Unknown4636d: ; 0x4636d
-INCBIN "baserom.gbc",$4636d,$5
+Seafoam2HolesCoords: ; 0x4636d
+	db $06,$12
+	db $06,$17
+	db $ff
 
 SeafoamIslands2Texts: ; 0x46372
 	dw BoulderText, BoulderText
@@ -47372,8 +47402,8 @@ SeafoamIslands3Script: ; 0x46451
 	bit 7, [hl]
 	res 7, [hl]
 	jr z, .asm_4649e ; 0x4645b $41
-	ld hl, SeafoamIslands3Script_Unknown464a9
-	call $34e4
+	ld hl, Seafoam3HolesCoords
+	call CheckBoulderCoords
 	ret nc
 	ld hl, $d880
 	ld a, [$cd3d]
@@ -47403,12 +47433,14 @@ SeafoamIslands3Script: ; 0x46451
 .asm_4649e
 	ld a, $a1
 	ld [$d71d], a
-	ld hl, SeafoamIslands3Script_Unknown464a9
+	ld hl, Seafoam3HolesCoords
 	jp $6981
 ; 0x464a9
 
-SeafoamIslands3Script_Unknown464a9: ; 0x464a9
-INCBIN "baserom.gbc",$464a9,$5
+Seafoam3HolesCoords: ; 0x464a9
+	db $06,$13
+	db $06,$16
+	db $ff
 
 SeafoamIslands3Texts: ; 0x464ae
 	dw BoulderText, BoulderText
@@ -47457,8 +47489,8 @@ SeafoamIslands4Script: ; 0x4658d
 	bit 7, [hl]
 	res 7, [hl]
 	jr z, .asm_465dc ; 0x46597 $43
-	ld hl, Data465f6
-	call $34e4
+	ld hl, Seafoam4HolesCoords
+	call CheckBoulderCoords
 	ret nc
 	ld hl, $d881
 	ld a, [$cd3d]
@@ -47489,7 +47521,7 @@ SeafoamIslands4Script: ; 0x4658d
 .asm_465dc
 	ld a, $a2
 	ld [$d71d], a
-	ld hl, Data465f6
+	ld hl, Seafoam4HolesCoords
 	call $6981
 	ld a, [$d732]
 	bit 4, a
@@ -47500,8 +47532,10 @@ SeafoamIslands4Script: ; 0x4658d
 	jp $3d97
 ; 0x465f6
 
-Data465f6: ; 0x465f6
-INCBIN "baserom.gbc",$465f6,$465fb - $465f6
+Seafoam4HolesCoords: ; 0x465f6
+	db $10,$03
+	db $10,$06
+	db $ff
 
 SeafoamIslands4Scripts: ; 0x465fb
 	dw SeafoamIslands4Script0, SeafoamIslands4Script1, SeafoamIslands4Script2, SeafoamIslands4Script3
