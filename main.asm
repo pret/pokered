@@ -44844,14 +44844,102 @@ LavenderTownText9: ; 0x44164
 	TX_FAR _LavenderTownText9
 	db $50
 
-INCBIN "baserom.gbc",$44169,$441cc - $44169
+DisplayDexRating: ; 0x44169
+	ld hl, W_SEENPOKEMON
+	ld b, $13
+	call CountSetBits
+	ld a, [$D11E] ; result of CountSetBits (seen count)
+	ld [$FFDB], a
+	ld hl, W_OWNEDPOKEMON
+	ld b, $13
+	call CountSetBits
+	ld a, [$D11E] ; result of CountSetBits (own count)
+	ld [$FFDC], a
+	ld hl, DexRatingsTable
+.findRating
+	ld a, [hli]
+	ld b, a
+	ld a, [$FFDC] ; number of pokemon owned
+	cp b
+	jr c, .foundRating
+	inc hl
+	inc hl
+	jr .findRating
+.foundRating
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a ; load text pointer into hl
+	ld a, [$D747]
+	bit 3, a
+	res 3, a
+	ld [$D747], a
+	jr nz, .label3
+	push hl
+	ld hl, UnnamedText_441cc
+	call PrintText
+	pop hl
+	call PrintText
+	ld b, $1F
+	ld hl, $513B
+	call Bankswitch
+	jp $3865 ; wait for button press
+.label3
+	ld de, $CC5B
+	ld a, [$FFDB]
+	ld [de], a
+	inc de
+	ld a, [$FFDC]
+	ld [de], a
+	inc de
+.label4
+	ld a, [hli]
+	cp a, $50
+	jr z, .label5
+	ld [de], a
+	inc de
+	jr .label4
+.label5
+	ld [de], a
+	ret
 
 UnnamedText_441cc: ; 0x441cc
 	TX_FAR _UnnamedText_441cc
 	db $50
 ; 0x441cc + 5 bytes
 
-INCBIN "baserom.gbc",$441d1,$44201 - $441d1
+DexRatingsTable:
+	db 10
+	dw UnnamedText_44201
+	db 20
+	dw UnnamedText_44206
+	db 30
+	dw UnnamedText_4420b
+	db 40
+	dw UnnamedText_44210
+	db 50
+	dw UnnamedText_44215
+	db 60
+	dw UnnamedText_4421a
+	db 70
+	dw UnnamedText_4421f
+	db 80
+	dw UnnamedText_44224
+	db 90
+	dw UnnamedText_44229
+	db 100
+	dw UnnamedText_4422e
+	db 110
+	dw UnnamedText_44233
+	db 120
+	dw UnnamedText_44238
+	db 130
+	dw UnnamedText_4423d
+	db 140
+	dw UnnamedText_44242
+	db 150
+	dw UnnamedText_44247
+	db 152
+	dw UnnamedText_4424c
 
 UnnamedText_44201: ; 0x44201
 	TX_FAR _UnnamedText_44201
