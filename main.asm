@@ -29812,7 +29812,16 @@ BeedrillPicBack:
 FossilKabutopsPic:
 	INCBIN "pic/bmon/fossilkabutops.pic"
 
-INCBIN "baserom.gbc",$2fb7b,$2fb8e - $2fb7b
+DisplayEffectiveness:
+	ld a, [$D05B]
+	and a, $7F
+	cp a, $0A
+	ret z
+	ld hl, UnnamedText_2fb8e	; It's super effective!
+	jr nc, .done\@
+	ld hl, UnnamedText_2fb93	; It's not very effective...
+.done\@
+	jp $3C49
 
 UnnamedText_2fb8e: ; 0x2fb8e
 	TX_FAR _UnnamedText_2fb8e
