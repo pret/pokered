@@ -70075,7 +70075,40 @@ UnnamedText_71dda: ; 0x71dda
 	db $50
 ; 0x71dda + 5 bytes
 
-INCBIN "baserom.gbc",$71ddf,$7e9
+INCBIN "baserom.gbc",$71DDF,$71E12-$71DDF
+
+	ld a, [W_PLAYERBATTSTATUS3]
+	ld hl, $D014                ; player Pokemon ID
+	call DeterminePaletteID
+	ld b, a
+	ld a, [W_ENEMYBATTSTATUS3]
+	ld hl, $CFD8                ; enemy Pokemon ID
+	call DeterminePaletteID
+
+INCBIN "baserom.gbc",$71E25,$71F97-$71E25
+
+DeterminePaletteID:
+	bit 3, a                 ; bit 3 of battle status 3 (unused?)
+	ld a, PAL_GREYMON
+	ret nz
+	ld a, [hl]
+	ld [$D11E], a
+	and a
+	jr z, .idZero
+	push bc
+	ld a, $3A
+	call Predef               ; turn Pokemon ID number into Pokedex number
+	pop bc
+	ld a, [$D11E]
+.idZero
+	ld e, a
+	ld d, $00
+	ld hl, MonsterPalettes   ; not just for Pokemon, Trainers use it too
+	add hl, de
+	ld a, [hl]
+	ret
+
+INCBIN "baserom.gbc",$71FB6,$725C8-$71FB6
 
 MonsterPalettes: ; 65C8
 	db PAL_MEWMON    ; MISSINGNO
