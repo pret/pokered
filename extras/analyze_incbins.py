@@ -7,6 +7,7 @@ from copy import copy, deepcopy
 import subprocess
 import json
 from extract_maps import rom, assert_rom, load_rom, calculate_pointer, load_map_pointers, read_all_map_headers, map_headers
+from pokered_dir import pokered_dir
 
 try:
     from pretty_map_headers import map_header_pretty_printer, map_name_cleaner
@@ -26,24 +27,17 @@ def offset_to_pointer(offset):
     if type(offset) == str: offset = int(offset, base)
     return int(offset) % 0x4000 + 0x4000
 
-def load_asm(filename="../main.asm"):
+def load_asm(filename=os.path.join(pokered_dir, "main.asm")):
     """loads the asm source code into memory
     this also detects if the revision of the repository
     is using main.asm, common.asm or pokered.asm, which is
     useful when generating images in romvisualizer.py"""
     global asm
-    defaults = ["../main.asm", "../common.asm", "../pokered.asm"]
+    defaults = [os.path.join(pokered_dir, f) for f in ["main.asm", "common.asm", "pokered.asm"]]
     if filename in defaults:
-        if os.path.exists("../main.asm"):
-            asm = open("../main.asm", "r").read().split("\n")
-        elif os.path.exists("../common.asm"):
-            asm = open("../common.asm", "r").read().split("\n")
-        elif os.path.exists("../pokered.asm"):
-            asm = open("../pokered.asm", "r").read().split("\n")
-        else:
-            raise "this shouldn't happen"
-    else:
         asm = open(filename, "r").read().split("\n")
+    else:
+        raise Exception("this shouldn't happen")
     return asm
 
 def isolate_incbins():
@@ -168,7 +162,9 @@ def generate_diff_insert(line_number, newline):
     newfile_fh.close()
 
     try:
-        diffcontent = subprocess.check_output("diff -u ../main.asm " + newfile_filename, shell=True)
+        diffcontent = subprocess.check_output(
+                "diff -u {0} {1}".format(os.path.join(pokered_dir, "main.asm"), newfile_filename),
+                shell=True)
     except AttributeError, exc:
         raise exc
     except Exception, exc:
@@ -208,7 +204,7 @@ def insert_map_header_asm(map_id):
     fh.close()
 
     #apply the patch
-    os.system("patch ../main.asm temp.patch")
+    os.system("patch {0} temp.patch".format(os.path.join(pokered_dir, "main.asm")))
     
     #remove the patch
     os.system("rm temp.patch")
@@ -243,8 +239,12 @@ def apply_diff(diff, try_fixing=True, do_compile=True):
     fh.close()
 
     #apply the patch
-    os.system("cp ../main.asm ../main1.asm")
-    os.system("patch ../main.asm temp.patch")
+    os.system("cp {0} {1}".format(
+        os.path.join(pokered_dir, "main.asm"),
+        os.path.join(pokered_dir, "main1.asm")))
+    os.system("patch {0} {1}".format(
+        os.path.join(pokered_dir, "main.asm"),
+        "temp.patch"))
 
     #remove the patch
     os.system("rm temp.patch")
@@ -252,11 +252,13 @@ def apply_diff(diff, try_fixing=True, do_compile=True):
     #confirm it's working
     if do_compile:
         try:
-            subprocess.check_call("cd ../; make clean; LC_CTYPE=C make", shell=True)
+            subprocess.check_call("cd {0}; make clean; LC_CTYPE=C make".format(pokered_dir), shell=True)
             return True
         except Exception, exc:
             if try_fixing:
-                os.system("mv ../main1.asm ../main.asm")
+                os.system("mv {0} {1}".format(
+                    os.path.join(pokered_dir, "main1.asm"),
+                    os.path.join(pokered_dir, "main.asm")))
             return False
 
 def index(seq, f):
