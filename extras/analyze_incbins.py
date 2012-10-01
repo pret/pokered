@@ -33,12 +33,30 @@ def load_asm(filename=os.path.join(pokered_dir, "main.asm")):
     is using main.asm, common.asm or pokered.asm, which is
     useful when generating images in romvisualizer.py"""
     global asm
+    # chronological order is important
     defaults = [os.path.join(pokered_dir, f) for f in ["main.asm", "common.asm", "pokered.asm"]]
     if filename in defaults:
-        asm = open(filename, "r").read().split("\n")
-    else:
-        raise Exception("this shouldn't happen")
+        if not load_asm_if_one_exists_in(defaults):
+            raise Exception("This shouldn't happen")
+    elif os.path.exists(filename):
+        asm = get_all_lines_from_file(filename)
+    if asm is None:
+        raise Exception("file doesn't exists (did you mean one among: {0}?)".format(", ".join(defaults)))
     return asm
+
+def load_asm_if_one_exists_in(*args):
+    global asm
+    for f in args:
+        if os.path.exists(f):
+            asm = get_all_lines_from_file(f)
+            return True
+    return False
+
+def get_all_lines_from_file(filename):
+    try:
+        return open(filename, "r").read().split("\n")
+    except IOError as e:
+        raise(e)
 
 def isolate_incbins():
     "find each incbin line"
