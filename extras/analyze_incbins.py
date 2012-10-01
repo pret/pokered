@@ -44,9 +44,9 @@ def load_asm(filename=os.path.join(pokered_dir, "main.asm")):
         raise Exception("file doesn't exists (did you mean one among: {0}?)".format(", ".join(defaults)))
     return asm
 
-def load_asm_if_one_exists_in(*args):
+def load_asm_if_one_exists_in(defaults):
     global asm
-    for f in args:
+    for f in defaults:
         if os.path.exists(f):
             asm = get_all_lines_from_file(f)
             return True
