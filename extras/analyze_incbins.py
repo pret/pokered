@@ -409,6 +409,9 @@ def scan_for_predefined_labels():
     bank_intervals = {}
     all_labels = []
 
+    if asm is None:
+        load_asm()
+
     #figure out line numbers for each bank
     for bank_id in range(0x2d):
         abbreviation = ("%.x" % (bank_id)).upper()
