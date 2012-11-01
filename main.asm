@@ -39,10 +39,10 @@ DisableLCD: ; $0061
 	ld b,a
 	res 0,a
 	ld [$ffff],a
-.jr0
+.waitVBlank
 	ld a,[$ff44]
 	cp a,$91
-	jr nz,.jr0
+	jr nz,.waitVBlank
 	ld a,[$ff40]
 	and a,$7f	; res 7,a
 	ld [$ff40],a
@@ -60,10 +60,10 @@ CleanLCD_OAM: ; $0082
 	xor a
 	ld hl,$c300
 	ld b,$a0
-.jr0
+.loop
 	ld [hli],a
 	dec b
-	jr nz,.jr0
+	jr nz,.loop
 	ret
 
 ResetLCD_OAM: ; $008d
@@ -71,11 +71,11 @@ ResetLCD_OAM: ; $008d
 	ld hl,$c300
 	ld de,$0004
 	ld b,$28
-.jr0
+.loop
 	ld [hl],a
 	add hl,de
 	dec b
-	jr nz,.jr0
+	jr nz,.loop
 	ret
 
 FarCopyData: ; 009D
@@ -2849,7 +2849,7 @@ SwitchToMapRomBank: ; 12BC
 	pop bc
 	pop hl
 	ret
-	
+
 INCBIN "baserom.gbc",$12DA,$12ED-$12DA
 
 ;appears to be called twice inside function $C38B
