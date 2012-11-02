@@ -18646,7 +18646,7 @@ HpBarAndStatusGraphics: ; 0x11ea0
 INCBIN "baserom.gbc",$12080,$12288 - $12080 ; FIXME
 
 TextBoxGraphics: ; 0x12288
-    INCBIN "gfx/text_box.2bpp"
+	INCBIN "gfx/text_box.2bpp"
 
 INCBIN "baserom.gbc",$12488,$12953 - $12488
 
@@ -70200,86 +70200,86 @@ INCBIN "baserom.gbc",$71FB6,$71FEB-$71FB6
 
 SendSGBPacket: ;$5feb
 ;check number of packets
-    ld a,[hl]
-    and a,$07
-    ret z
+	ld a,[hl]
+	and a,$07
+	ret z
 ; store number of packets in B
-    ld b,a
+	ld b,a
 .loop2\@
 ; save B for later use
-    push bc
+	push bc
 ; load a non-zero value in $fff9 to disable the routine that checks actual
 ; joypad input (said routine, located at $15f, does nothing if $fff9 is not
 ; zero)
-    ld a,$01
-    ld [$fff9],a
+	ld a,$01
+	ld [$fff9],a
 ; send RESET signal (P14=LOW, P15=LOW)
-    xor a
-    ld [$ff00],a
+	xor a
+	ld [$ff00],a
 ; set P14=HIGH, P15=HIGH
-    ld a,$30
-    ld [$ff00],a
+	ld a,$30
+	ld [$ff00],a
 ;load length of packets (16 bytes)
-    ld b,$10
+	ld b,$10
 .nextByte\@
 ;set bit counter (8 bits per byte)
-    ld e,$08
+	ld e,$08
 ; get next byte in the packet
-    ld a,[hli]
-    ld d,a
+	ld a,[hli]
+	ld d,a
 .nextBit0\@
-    bit 0,d
+	bit 0,d
 ; if 0th bit is not zero set P14=HIGH,P15=LOW (send bit 1)
-    ld a,$10
-    jr nz,.next0\@
+	ld a,$10
+	jr nz,.next0\@
 ; else (if 0th bit is zero) set P14=LOW,P15=HIGH (send bit 0)
-    ld a,$20
+	ld a,$20
 .next0\@
-    ld [$ff00],a
+	ld [$ff00],a
 ; must set P14=HIGH,P15=HIGH between each "pulse"
-    ld a,$30
-    ld [$ff00],a
+	ld a,$30
+	ld [$ff00],a
 ; rotation will put next bit in 0th position (so  we can always use command
 ; "bit 0,d" to fetch the bit that has to be sent)
-    rr d
+	rr d
 ; decrease bit counter so we know when we have sent all 8 bits of current byte
-    dec e
-    jr nz,.nextBit0\@
-    dec b
-    jr nz,.nextByte\@
+	dec e
+	jr nz,.nextBit0\@
+	dec b
+	jr nz,.nextByte\@
 ; send bit 1 as a "stop bit" (end of parameter data)
-    ld a,$20
-    ld [$ff00],a
+	ld a,$20
+	ld [$ff00],a
 ; set P14=HIGH,P15=HIGH
-    ld a,$30
-    ld [$ff00],a
-    xor a
-    ld [$fff9],a
+	ld a,$30
+	ld [$ff00],a
+	xor a
+	ld [$fff9],a
 ; wait for about 70000 cycles
-    call Wait7000
+	call Wait7000
 ; restore (previously pushed) number of packets
-    pop bc
-    dec b
+	pop bc
+	dec b
 ; return if there are no more packets
-    ret z
+	ret z
 ; else send 16 more bytes
-    jr .loop2\@
+	jr .loop2\@
 
 INCBIN "baserom.gbc",$7202B,$7214A-$7202B
 
 Wait7000: ;$614a
 ; each loop takes about 10 cycles so this routine actually loops through 70000
 ; cycles.
-    ld de,$1b58    ; = 7000
+	ld de,$1b58    ; = 7000
 .loop\@
-    nop
-    nop
-    nop
-    dec de
-    ld a,d
-    or e
-    jr nz,.loop\@
-    ret
+	nop
+	nop
+	nop
+	dec de
+	ld a,d
+	or e
+	jr nz,.loop\@
+	ret
 
 INCBIN "baserom.gbc",$72156,$725C8-$72156
 
