@@ -18,12 +18,12 @@ redrle: extras/redrle.c
 	python textpre.py < $< > $@
 
 pokered.gbc: pokered.o
-	rgblink -o $@ $<
+	rgblink -o $@ $*.o
 	rgbfix -jsv -k 01 -l 0x33 -m 0x13 -p 0 -r 03 -t "POKEMON RED" $@
 	cmp baserom.gbc $@
 	
 pokeblue.gbc: pokeblue.o
-	rgblink -o $@ $<
+	rgblink -o $@ $*.o
 	rgbfix -jsv -k 01 -l 0x33 -m 0x13 -p 0 -r 03 -t "POKEMON BLUE" $@
 
 clean:
