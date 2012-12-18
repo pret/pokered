@@ -42145,7 +42145,40 @@ UnnamedText_3e887: ; 0x3e887
 	db $50
 ; 0x3e887 + 5 bytes
 
-INCBIN "baserom.gbc",$3e88c,$67b
+INCBIN "baserom.gbc",$3e88c,$3eabe-$3e88c
+
+GetCurrentMove: ; $3eabe (f:6abe)
+	ld a, [H_WHOSETURN]
+	and a
+	jp z, .player
+	ld de, W_ENEMYMOVENUM
+	ld a, [W_ENEMYSELECTEDMOVE]
+	jr .selected ; 0x3eaca $10
+.player
+	ld de, W_PLAYERMOVENUM
+	ld a, [$d733]
+	bit 0, a
+	ld a, [$ccd9]
+	jr nz, .selected ; 0x3ead7 $3
+	ld a, [W_PLAYERSELECTEDMOVE]
+.selected
+	ld [$d0b5], a
+	dec a
+	ld hl, Moves
+	ld bc, $0006
+	call AddNTimes
+	ld a, BANK(Moves)
+	call FarCopyData
+	ld a, $2c
+	ld [$d0b7], a
+	ld a, $2
+	ld [$d0b6], a ; list type 2 = move name
+	call GetName
+	ld de, $cd6d
+	jp $3826 ; copy name
+; 0x3eb01
+
+INCBIN "baserom.gbc",$3eb01,$3ef07-$3eb01
 
 PlayMoveAnimation: ; 6F07
 	ld [$D07C],a
