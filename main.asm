@@ -18450,7 +18450,38 @@ _UnnamedText_ef7d: ; 0xef7d
 	db $50
 ; 0xef7d + 5 bytes
 
-INCBIN "baserom.gbc",$ef82,$f6a5 - $ef82
+INCBIN "baserom.gbc",$ef82,$f473 - $ef82
+
+LoadMovePPs: ; 0xf473
+	call Load16BitRegisters
+	ld b, $4
+.pploop
+	ld a, [hli]
+	and a
+	jr z, .empty ; 0xf47a $1b
+	dec a
+	push hl
+	push de
+	push bc
+	ld hl, Moves
+	ld bc, $0006
+	call AddNTimes
+	ld de, $cd6d
+	ld a, BANK(Moves)
+	call FarCopyData
+	pop bc
+	pop de
+	pop hl
+	ld a, [$cd72] ; sixth move byte = pp
+.empty
+	inc de
+	ld [de], a
+	dec b
+	jr nz, .pploop ; there are still moves to read
+	ret
+; 0xf49d
+
+INCBIN "baserom.gbc",$f49d,$f6a5 - $f49d
 
 HealParty:
 	ld hl, W_PARTYMON1
@@ -52670,7 +52701,8 @@ Predef54Predef:
 	dbw $03,$4D99
 	dbw $01,$4DE1
 	dbw $09,$7D98
-	dbw $03,$7473
+LoadMovePPsPredef:
+	dbw BANK(LoadMovePPs),LoadMovePPs ; 5E
 DrawHPBarPredef:
 	dbw $04,$68EF ; 5F draw HP bar
 	dbw $04,$68F6
