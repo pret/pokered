@@ -40344,12 +40344,274 @@ UnnamedText_3cba1: ; 0x3cba1
 	db $50
 ; 0x3cba1 + 5 bytes
 
-INCBIN "baserom.gbc",$3cba6,$3d0c5 - $3cba6
+INCBIN "baserom.gbc",$3cba6,$3ceb3 - $3cba6
 
-UnnamedText_3d0c5: ; 0x3d0c5
-	TX_FAR _UnnamedText_3d0c5
+InitBattleMenu: ; 0x3ceb3 F:4EB3
+	call $3725 ; restore saved screen
+	ld a, [W_BATTLETYPE]
+	and a
+	jr nz, .nonstandardbattle ; 0x3ceba $9
+	call $4d5a ; redraw names and HP bars?
+	call $6e94
+	call $3719 ; save screen
+.nonstandardbattle
+	ld a, [W_BATTLETYPE]
+	cp $2 ; safari
+	ld a, $b ; safari menu id
+	jr nz, .menuselected ; 0x3cecc $2
+	ld a, $1b ; regular menu id
+.menuselected
+	ld [$d125], a
+	call DisplayTextBoxID
+	ld a, [$d05a]
+	dec a
+	jp nz, RegularBattleMenu ; regular battle
+	; the following happens for the old man tutorial
+	ld hl, W_PLAYERNAME
+	ld de, W_GRASSRATE
+	ld bc, $000b
+	call CopyData ; temporary save the player name in unused space,
+	              ; which is supposed to get overwritten when entering a map
+	              ; with wild pokémon.  due to an oversight, the data may not
+	              ; get overwritten (cinnabar) and the infamous missingno.
+	              ; glitch can show up.
+	ld hl, OldManName
+	ld de, W_PLAYERNAME
+	ld bc, $000b
+	call CopyData
+	; the following probably sets the keystrokes
+	ld hl, $c4c1
+	ld [hl], $ed
+	ld c, $50
+	call DelayFrames
+	ld [hl], $7f
+	ld hl, $c4e9
+	ld [hl], $ed
+	ld c, $32
+	call DelayFrames
+	ld [hl], $ec
+	ld a, $2
+	jp $4fe8
+
+OldManName: ; 0x3cf12
+    db "OLD MAN@"
+
+RegularBattleMenu: ; 0x3cf1a
+	ld a, [$cc2d]
+	ld [W_CURMENUITEMID], a
+	ld [W_OLDMENUITEMID], a
+	sub $2
+	jr c, .leftcolumn ; 0x3cf25 $8
+	ld [W_CURMENUITEMID], a
+	ld [W_OLDMENUITEMID], a
+	jr .rightcolumn ; 0x3cf2d $3f
+.leftcolumn
+	ld a, [W_BATTLETYPE]
+	cp $2
+	ld a, $7f
+	jr z, .safaribattle ; 0x3cf36 $a
+	ld [$c4c7], a
+	ld [$c4ef], a
+	ld b, $9
+	jr .notsafari ; 0x3cf40 $14
+.safaribattle ; 3cf42
+	ld [$c4c5], a
+	ld [$c4ed], a
+	FuncCoord 7,14
+	ld hl, Coord
+	ld de, W_NUMSAFARIBALLS
+	ld bc, $0102
+	call PrintNumber
+	ld b, $1
+.notsafari ; 3cf56
+	ld hl, W_TOPMENUITEMY
+	ld a, $e
+	ld [hli], a
+	ld a, b
+	ld [hli], a
+	inc hl
+	inc hl
+	ld a, $1
+	ld [hli], a
+	ld [hl], $11
+	call HandleMenuInput
+	bit 4, a
+	jr nz, .rightcolumn ; 0x3cf6a $2
+	jr .selection ; 0x3cf6c $46
+.rightcolumn ;3cf6e
+	ld a, [W_BATTLETYPE]
+	cp $2
+	ld a, $7f
+	jr z, .safarirightcolumn ; 0x3cf75 $a
+	ld [$c4c1], a
+	ld [$c4e9], a
+	ld b, $f
+	jr .notsafarirightcolumn ; 0x3cf7f $14
+.safarirightcolumn ; 3cf81
+	ld [$c4b9], a
+	ld [$c4e1], a
+	FuncCoord 7,14
+	ld hl, Coord
+	ld de, W_NUMSAFARIBALLS
+	ld bc, $0102
+	call PrintNumber ; redraw
+	ld b, $d
+.notsafarirightcolumn
+	ld hl, W_TOPMENUITEMY
+	ld a, $e
+	ld [hli], a
+	ld a, b
+	ld [hli], a
+	inc hl
+	inc hl
+	ld a, $1
+	ld [hli], a
+	ld a, $21
+	ld [hli], a
+	call HandleMenuInput
+	bit 5, a
+	jr nz, .leftcolumn ; 0x3cfaa $83
+	ld a, [W_CURMENUITEMID]
+	add $2 ; if we're in the right column, the actual id is +2
+	ld [W_CURMENUITEMID], a
+.selection ; 3cfb4
+	call PlaceUnfilledArrowMenuCursor
+	ld a, [W_BATTLETYPE]
+	cp $2
+	ld a, [W_CURMENUITEMID]
+	ld [$cc2d], a
+	jr z, .asm_3cfd0 ; 0x3cfc2 $c
+	cp $1
+	jr nz, .asm_3cfcb ; 0x3cfc6 $3
+	inc a
+	jr .asm_3cfd0 ; 0x3cfc9 $5
+.asm_3cfcb
+	cp $2 ; what
+	jr nz, .asm_3cfd0 ; 0x3cfcd $1
+	dec a
+.asm_3cfd0
+	and a
+	jr nz, .asm_3cfe8 ; 0x3cfd1 $15
+	; first option was selected...
+	ld a, [W_BATTLETYPE]
+	cp $2
+	jr z, .safari1
+	xor a
+	ld [$d120], a
+	jp $3725 ; restore saved screen and return???
+.safari1 ; safari first option??
+	ld a, $8
+	ld [$cf91], a
+	jr .asm_3d05f ; 0x3cfe6 $77
+.asm_3cfe8
+	cp $2
+	jp nz, $50ca
+	ld a, [W_ISLINKBATTLE]
+	cp $4
+	jr nz, .asm_3cffd ; 0x3cff2 $9
+	ld hl, ItemsCantBeUsedHere
+	call PrintText
+	jp $4eb3
+.asm_3cffd ; bag?
+	call $36f4 ; copy bg?
+	ld a, [W_BATTLETYPE]
+	cp $2
+	jr nz, .asm_3d00e ; 0x3d005 $7
+	ld a, $15
+	ld [$cf91], a
+	jr .asm_3d05f ; 0x3d00c $51
+.asm_3d00e
+	call $3725
+	ld a, [W_BATTLETYPE]
+	and a
+	jr nz, .asm_3d01a ; 0x3d015 $3
+	call $4d5a
+.asm_3d01a
+	ld a, [W_BATTLETYPE]
+	dec a
+	jr nz, .asm_3d031 ; 0x3d01e $11
+	ld hl, .list
+	ld a, l
+	ld [$cf8b], a
+	ld a, h
+	ld [$cf8c], a
+	jr .asm_3d03c ; 0x3d02b $f
+.list
+	db $01, $04, $32, $ff
+.asm_3d031
+	ld hl, W_NUMBAGITEMS
+	ld a, l
+	ld [$cf8b], a
+	ld a, h
+	ld [$cf8c], a
+.asm_3d03c
+	xor a
+	ld [$cf93], a
+	ld a, $3
+	ld [$cf94], a
+	ld a, [$cc2c]
+	ld [W_CURMENUITEMID], a
+	call DisplayListMenuID
+	ld a, [$cc26]
+	ld [$cc2c], a
+	ld a, $0
+	ld [$cc37], a
+	ld [$cc35], a
+	jp c, $4eb3
+.asm_3d05f
+	ld a, [$cf91]
+	ld [$d11e], a
+	call GetItemName
+	call $3826 ; copy name
+	xor a
+	ld [$d152], a
+	call UseItem
+	call $6e5b
+	call CleanLCD_OAM
+	xor a
+	ld [W_CURMENUITEMID], a
+	ld a, [W_BATTLETYPE]
+	cp $2 ; safari
+	jr z, .asm_3d09c ; 0x3d081 $19
+	ld a, [$cd6a]
+	and a
+	jp z, $500e
+	ld a, [W_PLAYERBATTSTATUS1]
+	bit 5, a
+	jr z, .asm_3d09c ; 0x3d08f $b
+	ld hl, $d06a
+	dec [hl]
+	jr nz, .asm_3d09c ; 0x3d095 $5
+	ld hl, W_PLAYERBATTSTATUS1
+	res 5, [hl]
+.asm_3d09c
+	ld a, [$d11c]
+	and a
+	jr nz, .asm_3d0b7 ; 0x3d0a0 $15
+	ld a, [W_BATTLETYPE]
+	cp $2
+	jr z, .asm_3d0b2 ; 0x3d0a7 $9
+	call $3725
+	call $4d5a ; redraw name and hp bar?
+	call Delay3
+.asm_3d0b2
+	call GBPalNormal
+	and a
+	ret
+.asm_3d0b7
+	call GBPalNormal
+	xor a
+	ld [$d11c], a
+	ld a, $2
+	ld [$cf0b], a
+	scf
+	ret
+; 0x3d0c5
+
+ItemsCantBeUsedHere: ; 0x3d0c5
+	TX_FAR ItemsCantBeUsedHere_ ; 0x89831
 	db $50
-; 0x3d0c5 + 5 bytes
+; 0x3d0c5 + 5 bytes = 0x3d0ca
 
 INCBIN "baserom.gbc",$3d0ca,$3d1f5 - $3d0ca
 
@@ -80330,7 +80592,7 @@ _UnnamedText_3cba1: ; 0x8981f
 	db $0, "Got away safely!", $58
 ; 0x8981f + 18 bytes
 
-_UnnamedText_3d0c5: ; 0x89831
+ItemsCantBeUsedHere_: ; 0x89831
 	db $0, "Items can't be", $4f
 	db "used here.", $58
 ; 0x89831 + 26 bytes
