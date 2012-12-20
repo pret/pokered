@@ -40097,15 +40097,52 @@ UnnamedText_3c63e: ; 0x3c63e
 	db $50
 ; 0x3c63e + 5 bytes
 
-INCBIN "baserom.gbc",$3c643,$3c6e4 - $3c643
+INCBIN "baserom.gbc",$3c643,$3c696 - $3c643
 
-UnnamedText_3c6e4: ; 0x3c6e4
-	TX_FAR _UnnamedText_3c6e4
+TrainerBattleVictory: ; 3c696 F:4696
+	call $4643
+	ld b, $fc
+	ld a, [W_GYMLEADERNO] 
+	and a
+	jr nz, .notgymleader ; 0x3c69f $2
+	ld b, $f6 ; gym leader win music
+.notgymleader ; 3c6a3
+	ld a, [W_TRAINERCLASS]
+	cp SONY3 ; final battle against rival
+	jr nz, .notrival ; 0x3c6a8 $7
+	ld b, $fc ; final rival battle win music
+	ld hl, $d733
+	set 1, [hl]
+.notrival
+	ld a, [W_ISLINKBATTLE]
+	cp $4
+	ld a, b
+	call nz, $46ee
+	ld hl, TrainerDefeatedText
+	call PrintText
+	ld a, [W_ISLINKBATTLE]
+	cp $4
+	ret z
+	call $6d12
+	ld c, $28
+	call DelayFrames
+	call $3381
+	ld hl, MoneyForWinningText
+	call PrintText
+	ld de, W_PLAYERMONEY1 
+	ld hl, $d07b
+	ld c, $3
+	ld a, $b
+	jp Predef
+; 0x3c6e4
+
+MoneyForWinningText: ; 0x3c6e4
+	TX_FAR MoneyForWinningText_
 	db $50
 ; 0x3c6e4 + 5 bytes
 
-UnnamedText_3c6e9: ; 0x3c6e9
-	TX_FAR _UnnamedText_3c6e9
+TrainerDefeatedText: ; 0x3c6e9
+	TX_FAR TrainerDefeatedText_
 	db $50
 ; 0x3c6e9 + 5 bytes
 
@@ -80511,7 +80548,7 @@ _UnnamedText_3c63e: ; 0x896c7
 	db "fainted!", $58
 ; 0x896c7 + 22 bytes = 0x896dd
 
-_UnnamedText_3c6e4: ; 0x896dd
+MoneyForWinningText_: ; 0x896dd
 	db $0, $52, " got ¥@"
 	;XXX $2
 	db $2, $79, $d0, $c3
@@ -80519,7 +80556,7 @@ _UnnamedText_3c6e4: ; 0x896dd
 	db "for winning!", $58
 ; 0x896f9
 
-_UnnamedText_3c6e9: ; 0x896f9
+TrainerDefeatedText_: ; 0x896f9
 	db $0, $52, " defeated", $4f
 	db "@"
 	TX_RAM $d04a ; 0x89706
