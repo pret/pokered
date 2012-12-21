@@ -26696,19 +26696,19 @@ ViridianMartScript: ; 0x1d46e
 ; 0x1d47d
 
 ViridianMartScript_Unknown1d47d: ; 0x1d47d
-        ld a, [$d74e]
-        bit 0, a
-        jr nz, .asm_1d489 ; 0x1d482 $5
-        ld hl, $54e0
-        jr .asm_1d48c ; 0x1d487 $3
+	ld a, [$d74e]
+	bit 0, a
+	jr nz, .asm_1d489 ; 0x1d482 $5
+	ld hl, $54e0
+	jr .asm_1d48c ; 0x1d487 $3
 .asm_1d489
-        ld hl, $54ea
+	ld hl, $54ea
 .asm_1d48c
-        ld a, l
-        ld [$d36c], a
-        ld a, h
-        ld [$d36d], a
-        ret
+	ld a, l
+	ld [$d36c], a
+	ld a, h
+	ld [$d36d], a
+	ret
 
 ViridianMartScriptPointers:
 	dw ViridianMartScript0
@@ -27180,11 +27180,11 @@ BikeShopText1: ; 0x1d745
 	call $1922
 	call $2429
 	ld hl, $c3ca
-	ld de, $57f8
-	call $1955
+	ld de, BikeShopMenuText
+	call PlaceString
 	ld hl, $c3e4
-	ld de, $5807
-	call $1955
+	ld de, BikeShopMenuPrice
+	call PlaceString
 	ld hl, UnnamedText_1d815
 	call PrintText
 	call $3abe
@@ -27203,7 +27203,12 @@ BikeShopText1: ; 0x1d745
 .asm_99ef2 ; 0x1d7f5
 	jp TextScriptEnd
 
-INCBIN "baserom.gbc",$1d7f8,$1d810 - $1d7f8
+BikeShopMenuText:
+	db "BICYCLE", $4e
+	db "CANCEL@"
+
+BikeShopMenuPrice:
+	db "¥1000000@"
 
 UnnamedText_1d810: ; 0x1d810
 	TX_FAR _UnnamedText_1d810
@@ -27516,7 +27521,7 @@ LavenderHouse2Object: ; 0x1d9e6 (size=32)
 NameRater_h: ; 0x1da06 to 0x1da12 (12 bytes) (bank=7) (id=229)
 	db $08 ; tileset
 	db NAME_RATERS_HOUSE_HEIGHT, NAME_RATERS_HOUSE_WIDTH ; dimensions (y, x)
-	dw NameRaterBlocks, $5a54, NameRaterScript ; blocks, texts, scripts
+	dw NameRaterBlocks, NameRaterTexts, NameRaterScript ; blocks, texts, scripts
 	db $00 ; connections
 
 	dw NameRaterObject ; objects
@@ -27525,13 +27530,50 @@ NameRaterScript: ; 0x1da12
 	jp EnableAutoTextBoxDrawing
 ; 0x1da15
 
-INCBIN "baserom.gbc",$1da15,$41
+Unknown_1da15:
+	call PrintText
+	call $35ec
+	ld a, [$cc26]
+	and a
+	ret
+
+Unknown_1da20:
+	ld hl, $d273
+	ld bc, $000b
+	ld a, [$cf92]
+	call AddNTimes
+	ld de, $d158
+	ld c, $b
+	call .asm_1da47
+	jr c, .asm_1da52 ; 0x1da34 $1c
+	ld hl, $d177
+	ld bc, $002c
+	ld a, [$cf92]
+	call AddNTimes
+	ld de, $d359
+	ld c, $2
+.asm_1da47
+	ld a, [de]
+	cp [hl]
+	jr nz, .asm_1da52 ; 0x1da49 $7
+	inc hl
+	inc de
+	dec c
+	jr nz, .asm_1da47 ; 0x1da4e $f7
+	and a
+	ret
+.asm_1da52
+	scf
+	ret
+
+NameRaterTexts:
+	dw NameRaterText1
 
 NameRaterText1: ; 0x1da56
 	db $8
 	call $36f4
 	ld hl, UnnamedText_1dab3
-	call $5a15
+	call Unknown_1da15
 	jr nz, .asm_1daae ; 0x1da60 $4c
 	ld hl, UnnamedText_1dab8
 	call PrintText
@@ -27547,7 +27589,7 @@ NameRaterText1: ; 0x1da56
 	pop af
 	jr c, .asm_1daae ; 0x1da80 $2c
 	call $15b4
-	call $5a20
+	call Unknown_1da20
 	ld hl, UnnamedText_1dad1
 	jr c, .asm_1daa8 ; 0x1da8b $1b
 	ld hl, UnnamedText_1dabd
