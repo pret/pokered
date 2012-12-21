@@ -22904,7 +22904,7 @@ CeruleanCityScript0: ; 0x194c8
 	ld a, [$d75b]
 	bit 7, a
 	jr nz, .asm_194f7 ; 0x194cd $28
-	ld hl, $554f
+	ld hl, CeruleanCityCoords1
 	call ArePlayerCoordsInArray
 	jr nc, .asm_194f7 ; 0x194d5 $20
 	ld a, [$cd3d]
@@ -22926,7 +22926,7 @@ CeruleanCityScript0: ; 0x194c8
 	ld a, [$d75a]
 	bit 0, a
 	ret nz
-	ld hl, $5554
+	ld hl, CeruleanCityCoords2
 	call ArePlayerCoordsInArray
 	ret nc
 	ld a, [$d700]
@@ -22957,7 +22957,7 @@ CeruleanCityScript0: ; 0x194c8
 	ld [$cc4d], a
 	ld a, $15
 	call Predef
-	ld de, $5559
+	ld de, CeruleanCityMovement1
 	ld a, $1
 	ld [$ff00+$8c], a
 	call MoveSprite
@@ -22966,7 +22966,25 @@ CeruleanCityScript0: ; 0x194c8
 	ret
 ; 0x1954f
 
-INCBIN "baserom.gbc",$1954f,$19567 - $1954f
+CeruleanCityCoords1:
+	db $07,$1e
+	db $09,$1e
+	db $ff
+
+CeruleanCityCoords2:
+	db $06,$14
+	db $06,$15
+	db $ff
+
+CeruleanCityMovement1:
+	db 0,0,0,$ff
+
+CeruleanCityFunction1955d:
+	ld a,1
+	ld [$ff8c],a
+	xor a
+	ld [$ff8d],a
+	jp $34a6 ; face object
 
 CeruleanCityScript1: ; 0x19567
 	ld a, [$d730]
@@ -23004,7 +23022,7 @@ CeruleanCityScript1: ; 0x19567
 
 	xor a
 	ld [$ff00+$b4], a
-	call $555d
+	call CeruleanCityFunction1955d
 	ld a, $2
 	ld [$d60f], a
 	ret
@@ -23034,10 +23052,10 @@ CeruleanCityScript2: ; 0x195b1
 	ld a, [$d362]
 	cp $14
 	jr nz, .asm_195f0 ; 0x195e9 $5
-	ld de, $5608
+	ld de, CeruleanCityMovement4
 	jr .asm_195f3 ; 0x195ee $3
 .asm_195f0
-	ld de, $5600
+	ld de, CeruleanCityMovement3
 .asm_195f3
 	ld a, $1
 	ld [$ff00+$8c], a
@@ -23045,9 +23063,12 @@ CeruleanCityScript2: ; 0x195b1
 	ld a, $3
 	ld [$d60f], a
 	ret
-; 0x19600
 
-INCBIN "baserom.gbc",$19600,$19610 - $19600
+CeruleanCityMovement3:
+	db $80, $00, $00, $00, $00, $00, $00, $ff
+
+CeruleanCityMovement4:
+	db $c0, $00, $00, $00, $00, $00, $00, $ff
 
 CeruleanCityScript3: ; 0x19610
 	ld a, [$d730]
@@ -23453,7 +23474,7 @@ VermilionCityText3: ; 0x198b1
 	ld a, [$c109]
 	cp $c
 	jr z, .asm_07af3 ; 0x198be
-	ld hl, $58ff
+	ld hl, VermilionCityCoords1
 	call ArePlayerCoordsInArray
 	jr nc, .asm_57b73 ; 0x198c6
 .asm_07af3 ; 0x198c8
@@ -23484,7 +23505,10 @@ VermilionCityText3: ; 0x198b1
 .asm_79bd1 ; 0x198fc
 	jp TextScriptEnd
 
-INCBIN "baserom.gbc",$198ff,$19904 - $198ff
+VermilionCityCoords1:
+	db $1d,$13
+	db $1f,$13
+	db $ff
 
 SSAnneWelcomeText4: ; 0x19904
 	TX_FAR _SSAnneWelcomeText4
