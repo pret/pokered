@@ -24634,7 +24634,7 @@ SilphCo6Script: ; 0x1a1a9
 	call Unnamed_1a1bf
 	call EnableAutoTextBoxDrawing
 	ld hl, SilphCo6TrainerHeaders
-	ld de, $61f0
+	ld de, SilphCo6ScriptPointers
 	ld a, [$d647]
 	call $3160
 	ld [$d647], a
@@ -24642,7 +24642,38 @@ SilphCo6Script: ; 0x1a1a9
 ; 0x1a1bf
 
 Unnamed_1a1bf: ; 0x1a1bf
-INCBIN "baserom.gbc",$1a1bf,$37
+        ld hl, $d126
+        bit 5, [hl]
+        res 5, [hl]
+        ret z
+        ld hl, SilphCo6Coords1
+        call $5d5d
+        call Unknown_1a1e6
+        ld a, [$d82e]
+        bit 7, a
+        ret nz
+        ld a, $5f
+        ld [$d09f], a
+        ld bc, $0602
+        ld a, $17
+        jp Predef
+
+SilphCo6Coords1:
+	db $06, $02
+	db $ff
+
+Unknown_1a1e6:
+        ld a, [$ff00+$e0]
+        and a
+        ret z
+        ld hl, $d82e
+        set 7, [hl]
+        ret
+
+SilphCo6ScriptPointers:
+	dw $3219
+	dw $324c
+	dw $3275
 
 SilphCo6Texts: ; 0x1a1f6
 	dw SilphCo6Text1, SilphCo6Text2, SilphCo6Text3, SilphCo6Text4, SilphCo6Text5, SilphCo6Text6, SilphCo6Text7, SilphCo6Text8, Predef5CText, Predef5CText
