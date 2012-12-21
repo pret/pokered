@@ -25394,7 +25394,7 @@ OaksLab_h: ; 0x1cb02 to 0x1cb0e (12 bytes) (bank=7) (id=40)
 OaksLabScript: ; 0x1cb0e
 	ld a, [$d74b]
 	bit 6, a
-	call nz, $5076
+	call nz, Unknown_1d076
 	ld a, $1
 	ld [$cf0c], a
 	xor a
@@ -25891,7 +25891,7 @@ OaksLabScript15: ; 0x1ceb0
 	ld a, $15
 	ld [$ff00+$8c], a
 	call DisplayTextID
-	call $502b
+	call Unknown_1d02b
 	ld a, $2a
 	ld [$cc4d], a
 	ld a, $15
@@ -26060,10 +26060,55 @@ Function1D00A: ; 0x1d00a
 	ld a, $1
 	ld [$cf96], a
 	jp $2bbb
-; 0x1d02b
 
+Unknown_1d02b:
+	ld a, $7c
+	ld [$ff00+$eb], a
+	ld a, $8
+	ld [$ff00+$ee], a
+	ld a, [$d361]
+	cp $3
+	jr nz, .asm_1d045 ; 0x1d038 $b
+	ld a, $4
+	ld [$cd37], a
+	ld a, $30
+	ld b, $b
+	jr .asm_1d068 ; 0x1d043 $23
+.asm_1d045
+	cp $1
+	jr nz, .asm_1d054 ; 0x1d047 $b
+	ld a, $2
+	ld [$cd37], a
+	ld a, $30
+	ld b, $9
+	jr .asm_1d068 ; 0x1d052 $14
+.asm_1d054
+	ld a, $3
+	ld [$cd37], a
+	ld b, $a
+	ld a, [$d362]
+	cp $4
+	jr nz, .asm_1d066 ; 0x1d060 $4
+	ld a, $40
+	jr .asm_1d068 ; 0x1d064 $2
+.asm_1d066
+	ld a, $20
+.asm_1d068
+	ld [$ff00+$ec], a
+	ld a, b
+	ld [$ff00+$ed], a
+	ld a, $1
+	ld [$cf13], a
+	call $32f9
+	ret
 
-INCBIN "baserom.gbc",$1d02b,$1d082-$1d02b
+Unknown_1d076:
+	ld hl, $50b8
+	ld a, l
+	ld [$d36c], a
+	ld a, h
+	ld [$d36d], a
+	ret
 
 OaksLabTexts: ; 0x1d082
 	dw OaksLabText1, OaksLabText2, OaksLabText3, OaksLabText4, OaksLabText5, OaksLabText6, OaksLabText7, OaksLabText8, OaksLabText9, OaksLabText10, OaksLabText11, OaksLabText12, OaksLabText13, OaksLabText14, OaksLabText15, OaksLabText16, OaksLabText17, OaksLabText18, OaksLabText19, OaksLabText20, OaksLabText21, OaksLabText22, OaksLabText23, OaksLabText24, OaksLabText25, OaksLabText26, OaksLabText27, OaksLabText28, OaksLabText29, OaksLabText30, OaksLabText31, OaksLabText32, OaksLabText33, OaksLabText34, OaksLabText35, OaksLabText36, OaksLabText37, OaksLabText38
@@ -26143,7 +26188,7 @@ asm_1d133: ; 0x1d133
 	ld [$cf13], a
 	ld a, [$d74b]
 	bit 2, a
-	jp nz, $522d
+	jp nz, Unknown_1d22d
 	bit 1, a
 	jr nz, asm_1d157 ; 0x1d147 $e
 	ld hl, OaksLabText39
@@ -26270,7 +26315,16 @@ OaksLabReceivedMonText: ; 0x1d227
 	db $11, $50
 ; 0x1d22d
 
-INCBIN "baserom.gbc",$1d22d,$1d243 - $1d22d
+Unknown_1d22d:
+	ld a, $5
+	ld [$ff00+$8c], a
+	ld a, $9
+	ld [$ff00+$8b], a
+	call $34fc
+	ld [hl], $0
+	ld hl, $5243
+	call PrintText
+	jp TextScriptEnd
 
 OaksLabLastMonText: ; 0x1d243
 	TX_FAR _OaksLabLastMonText
@@ -26636,13 +26690,30 @@ ViridianMart_h: ; 0x1d462 to 0x1d46e (12 bytes) (bank=7) (id=42)
 ViridianMartScript: ; 0x1d46e
 	call ViridianMartScript_Unknown1d47d
 	call EnableAutoTextBoxDrawing
-	ld hl, $5495
+	ld hl, ViridianMartScriptPointers
 	ld a, [$d60d]
 	jp $3d97
 ; 0x1d47d
 
 ViridianMartScript_Unknown1d47d: ; 0x1d47d
-INCBIN "baserom.gbc",$1d47d,$1e
+        ld a, [$d74e]
+        bit 0, a
+        jr nz, .asm_1d489 ; 0x1d482 $5
+        ld hl, $54e0
+        jr .asm_1d48c ; 0x1d487 $3
+.asm_1d489
+        ld hl, $54ea
+.asm_1d48c
+        ld a, l
+        ld [$d36c], a
+        ld a, h
+        ld [$d36d], a
+        ret
+
+ViridianMartScriptPointers:
+	dw ViridianMartScript0
+	dw ViridianMartScript1
+	dw ViridianMartScript2
 
 ViridianMartScript0: ; 0x1d49b
 	call $2429
@@ -26678,6 +26749,8 @@ ViridianMartScript1: ; 0x1d4c0
 	set 1, [hl]
 	ld a, $2
 	ld [$d60d], a
+	; fallthrough
+ViridianMartScript2:
 	ret
 ; 0x1d4e0
 
