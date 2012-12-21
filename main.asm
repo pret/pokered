@@ -17552,7 +17552,7 @@ ItemUsePPRestore: ; 631E
 	cp a,ELIXER
 	jp nc,.useElixir ; if Elixir or Max Elixir
 	ld a,$02
-	ld [$ccdb],a
+	ld [W_MOVEMENUTYPE],a
 	ld hl,RaisePPWhichTechniqueText
 	ld a,[$cd3d]
 	cp a,ETHER ; is it a PP Up?
@@ -17562,8 +17562,8 @@ ItemUsePPRestore: ; 631E
 	call PrintText
 	xor a
 	ld [$cc2e],a
-	ld hl,$5219
-	ld b,$0f
+	ld hl,MoveSelectionMenu
+	ld b,BANK(MoveSelectionMenu)
 	call Bankswitch ; move selection menu
 	ld a,0
 	ld [$cc2e],a
@@ -40657,19 +40657,240 @@ UnnamedText_3d1f5: ; 0x3d1f5
 	db $50
 ; 0x3d1f5 + 5 bytes
 
-INCBIN "baserom.gbc",$3d1fa,$3d3ae - $3d1fa
+INCBIN "baserom.gbc",$3d1fa,$3D219 - $3d1fa
 
-UnnamedText_3d3ae: ; 0x3d3ae
-	TX_FAR _UnnamedText_3d3ae
+MoveSelectionMenu: ; 3D219 F:5219
+	ld a, [W_MOVEMENUTYPE] ; menu type
+	dec a
+	jr z, .mimicmenu ; 0x3d21d $56
+	dec a
+	jr z, .relearnmenu ; 0x3d220 $6f
+	jr .regularmenu ; 0x3d222 $25
+.loadmoves ; 3d222 , called
+	ld de, $d0dc
+	ld bc, $0004
+	call CopyData
+	ld hl, $5b87
+	ld b, $e
+	call Bankswitch
+	ret
+.writemoves ; 5236 , called
+	ld de, $d0e1
+	ld a, [$ff00+$f6]
+	set 2, a
+	ld [$ff00+$f6], a
+	call PlaceString
+	ld a, [$ff00+$f6]
+	res 2, a
+	ld [$ff00+$f6], a
+	ret
+.regularmenu ; 3D249
+	call $53f5
+	ret z
+	ld hl, $d01c ; W_PLAYERMON?
+	call .loadmoves
+	FuncCoord 4, 12 ; $c494
+	ld hl, Coord
+	ld b, $4
+	ld c, $e
+	di
+	call TextBoxBorder
+	FuncCoord 4, 12 ; $c494
+	ld hl, Coord
+	ld [hl], $7a
+	FuncCoord 10, 12 ; $c49a
+	ld hl, Coord
+	ld [hl], $7e
+	ei
+	FuncCoord 6, 13 ; $c4aa
+	ld hl, Coord
+	call .writemoves
+	ld b, $5
+	ld a, $c
+	jr .menuset ; 0x3d273 $3f
+.mimicmenu
+	ld hl, $cfed
+	call .loadmoves
+	FuncCoord 0, 7 ; $c42c
+	ld hl, Coord
+	ld b, $4
+	ld c, $e
+	call TextBoxBorder
+	ld hl, $c442
+	call .writemoves
+	ld b, $1
+	ld a, $7
+	jr .menuset ; 0x3d28f $23
+.relearnmenu
+	ld a, [W_WHICHPOKEMON]
+	ld hl, $d173
+	ld bc, $002c
+	call AddNTimes
+	call .loadmoves
+	FuncCoord 4, 7 ; $c430
+	ld hl, Coord
+	ld b, $4
+	ld c, $e
+	call TextBoxBorder
+	FuncCoord 6, 8 ; $c446
+	ld hl, Coord
+	call .writemoves
+	ld b, $5
+	ld a, $7
+.menuset
+	ld hl, W_TOPMENUITEMY
+	ld [hli], a
+	ld a, b
+	ld [hli], a ; W_TOPMENUITEMX
+	ld a, [W_MOVEMENUTYPE]
+	cp $1
+	jr z, .selectedmoveknown ; 0x3d2bf $8
+	ld a, $1
+	jr nc, .selectedmoveknown ; 0x3d2c3 $4
+	ld a, [W_PLAYERMOVELISTINDEX]
+	inc a
+.selectedmoveknown
+	ld [hli], a ; W_CURMENUITEMID
+	inc hl ; W_TILEBEHINDCURSOR untouched
+	ld a, [$cd6c]
+	inc a
+	inc a
+	ld [hli], a ; W_MAXMENUITEMID
+	ld a, [W_MOVEMENUTYPE]
+	dec a
+	ld b, $c1 ; can't use B
+	jr z, .matchedkeyspicked ; 0x3d2d7 $17
+	dec a
+	ld b, $c3
+	jr z, .matchedkeyspicked ; 0x3d2dc $12
+	ld a, [W_ISLINKBATTLE]
+	cp $4
+	jr z, .matchedkeyspicked ; 0x3d2e3 $b
+	ld a, [$d733]
+	bit 0, a
+	ld b, $c7
+	jr z, .matchedkeyspicked ; 0x3d2ec $2
+	ld b, $ff
+.matchedkeyspicked
+	ld a, b
+	ld [hli], a ; W_MENUWATCHEDKEYS
+	ld a, [W_MOVEMENUTYPE]
+	cp $1
+	jr z, .movelistindex1 ; 0x3d2f7 $4
+	ld a, [W_PLAYERMOVELISTINDEX]
+	inc a
+.movelistindex1
+	ld [hl], a ; W_OLDMENUITEMID
+	ld a, [W_MOVEMENUTYPE]
+	and a
+	jr z, .battleselect ; 0x3d302 $e
+	dec a
+	jr nz, .select ; 0x3d305 $27
+	FuncCoord 1, 14 ; $c4b9
+	ld hl, Coord
+	ld de, WhichTechniqueString
+	call PlaceString
+	jr .select ; 0x3d310 $1c
+.battleselect
+	ld a, [$d733]
+	bit 0, a
+	jr nz, .select ; 0x3d317 $15
+	call $54b6
+	ld a, [$cc35]
+	and a
+	jr z, .select ; 0x3d320 $c
+	ld hl, $c4a9
+	dec a
+	ld bc, $0014
+	call AddNTimes
+	ld [hl], $ec
+.select ; 3d32e
+	ld hl, $fff6
+	set 1, [hl]
+	call HandleMenuInput
+	ld hl, $fff6
+	res 1, [hl]
+	bit 6, a
+	jp nz, $53c9 ; up
+	bit 7, a
+	jp nz, $53dd ; down
+	bit 2, a
+	jp nz, $5435 ; select
+	bit 1, a ; B, but it was reset above?
+	push af
+	xor a
+	ld [$cc35], a
+	ld a, [W_CURMENUITEMID]
+	dec a
+	ld [W_CURMENUITEMID], a
+	ld b, a
+	ld a, [W_MOVEMENUTYPE]
+	dec a ; if not mimic
+	jr nz, .nob ; 0x3d35d $2
+	pop af
+	ret
+.nob; 3d361
+	dec a
+	ld a, b
+	ld [W_PLAYERMOVELISTINDEX], a
+	jr nz, .moveselected ; 0x3d366 $2
+	pop af
+	ret
+.moveselected ; 3d36a
+	pop af
+	ret nz
+	ld hl, W_PLAYERMONPP
+	ld a, [W_CURMENUITEMID]
+	ld c, a
+	ld b, $0
+	add hl, bc
+	ld a, [hl]
+	and $3f
+	jr z, .nopp ; 0x3d379 $27
+	ld a, [W_PLAYERDISABLEDMOVE]
+	swap a
+	and $f
+	dec a
+	cp c
+	jr z, .disabled ; 0x3d384 $17
+	ld a, [W_PLAYERBATTSTATUS3]
+	bit 3, a ; transformed
+	jr nz, .dummy ; game freak derp
+.dummy ; 3d38d
+	ld a, [W_CURMENUITEMID]
+	ld hl, $d01c
+	ld c, a
+	ld b, $0
+	add hl, bc
+	ld a, [hl]
+	ld [W_PLAYERSELECTEDMOVE], a
+	xor a
+	ret
+.disabled ; 
+	ld hl, MoveDisabledText
+	jr .print ; 0x3d3a0 $3
+.nopp ; 
+	ld hl, MoveNoPPText
+.print ; 3d3a5
+	call PrintText
+	call $3725
+	jp MoveSelectionMenu
+
+MoveNoPPText: ; 0x3d3ae
+	TX_FAR MoveNoPPText_
 	db $50
 ; 0x3d3ae + 5 bytes
 
-UnnamedText_3d3b3: ; 0x3d3b3
-	TX_FAR _UnnamedText_3d3b3
+MoveDisabledText: ; 0x3d3b3
+	TX_FAR MoveDisabledText_
 	db $50
 ; 0x3d3b3 + 5 bytes
 
-INCBIN "baserom.gbc",$3d3b8,$3d430 - $3d3b8
+WhichTechniqueString: ; 3d3b8
+    db "WHICH TECHNIQUE?@"
+; 3d3c9
+
+INCBIN "baserom.gbc",$3d3c9,$3d430 - $3d3c9
 
 UnnamedText_3d430: ; 0x3d430
 	TX_FAR _UnnamedText_3d430
@@ -80640,12 +80861,12 @@ _UnnamedText_3d1f5: ; 0x8984b
 	db "already out!", $58
 ; 0x8984b + 21 bytes
 
-_UnnamedText_3d3ae: ; 0x89860
+MoveNoPPText_: ; 0x89860
 	db $0, "No PP left for", $4f
 	db "this move!", $58
 ; 0x89860 + 27 bytes
 
-_UnnamedText_3d3b3: ; 0x8987b
+MoveDisabledText_: ; 0x8987b
 	db $0, "The move is", $4f
 	db "disabled!", $58
 ; 0x8987b + 23 bytes
