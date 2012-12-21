@@ -5287,111 +5287,8 @@ PokeCenterSignText: ; 0x24ef
 	TX_FAR _PokeCenterSignText
 	db "@"
 
-Route2Text1:
-Route4Text3:
-Route9Text10:
-Route12Text9:
-Route12Text10:
-Route15Text11:
-Route24Text8:
-Route25Text10:
-ViridianGymText11:
-ViridianForestText5:
-ViridianForestText6:
-ViridianForestText7:
-MtMoon1Text8:
-MtMoon1Text9:
-MtMoon1Text10:
-MtMoon1Text11:
-MtMoon1Text12:
-MtMoon1Text13:
-MtMoon3Text8:
-MtMoon3Text9:
-PowerPlantText10:
-PowerPlantText11:
-PowerPlantText12:
-PowerPlantText13:
-PowerPlantText14:
-SSAnne8Text10:
-SSAnne9Text6:
-SSAnne9Text9:
-SSAnne10Text9:
-SSAnne10Text10:
-SSAnne10Text11:
-VictoryRoad1Text3:
-VictoryRoad1Text4:
-PokemonTower3Text4:
-PokemonTower4Text4:
-PokemonTower4Text5:
-PokemonTower4Text6:
-PokemonTower5Text6:
-PokemonTower6Text4:
-PokemonTower6Text5:
-FuchsiaHouse2Text2:
-VictoryRoad2Text7:
-VictoryRoad2Text8:
-VictoryRoad2Text9:
-VictoryRoad2Text10:
-VictoryRoad3Text5:
-VictoryRoad3Text6:
-RocketHideout1Text6:
-RocketHideout1Text7:
-RocketHideout2Text2:
-RocketHideout2Text3:
-RocketHideout2Text4:
-RocketHideout2Text5:
-RocketHideout3Text3:
-RocketHideout3Text4:
-RocketHideout4Text5:
-RocketHideout4Text6:
-RocketHideout4Text7:
-RocketHideout4Text8:
-RocketHideout4Text9:
-SilphCo3Text4:
-SilphCo4Text5:
-SilphCo4Text6:
-SilphCo4Text7:
-SilphCo5Text6:
-SilphCo5Text7:
-SilphCo5Text8:
-SilphCo6Text9:
-SilphCo6Text10:
-SilphCo7Text10:
-SilphCo7Text11:
-SilphCo7Text12:
-Mansion1Text2:
-Mansion1Text3:
-Mansion2Text2:
-Mansion3Text3:
-Mansion3Text4:
-Mansion4Text3:
-Mansion4Text4:
-Mansion4Text5:
-Mansion4Text6:
-Mansion4Text8:
-SafariZoneEastText1:
-SafariZoneEastText2:
-SafariZoneEastText3:
-SafariZoneEastText4:
-SafariZoneNorthText1:
-SafariZoneNorthText2:
-SafariZoneWestText1:
-SafariZoneWestText2:
-SafariZoneWestText3:
-SafariZoneWestText4:
-SafariZoneCenterText1:
-UnknownDungeon2Text1:
-UnknownDungeon2Text2:
-UnknownDungeon2Text3:
-UnknownDungeon3Text2:
-UnknownDungeon3Text3:
-UnknownDungeon1Text1:
-UnknownDungeon1Text2:
-UnknownDungeon1Text3:
-SilphCo10Text4:
-SilphCo10Text5:
-SilphCo10Text6:
-Route2Text2: ; 24f4 0x424f4
+Predef5CText: ; 0x24f4
+; XXX better label (what does predef $5C do?)
 	db $08 ; asm
 	ld a, $5c
 	call Predef
@@ -24272,7 +24169,7 @@ SilphCo4ScriptPtrTable:
 	dw $3219, $324c, $3275
 
 SilphCo4Texts: ; 0x19da0
-	dw SilphCo4Text1, SilphCo4Text2, SilphCo4Text3, SilphCo4Text4, SilphCo4Text5, SilphCo4Text6, SilphCo4Text7
+	dw SilphCo4Text1, SilphCo4Text2, SilphCo4Text3, SilphCo4Text4, Predef5CText, Predef5CText, Predef5CText
 
 SilphCo4TrainerHeaders:
 SilphCo4TrainerHeader0: ; 0x19dae
@@ -24445,7 +24342,7 @@ Unnamed_19f4d: ; 0x19f4d
 INCBIN "baserom.gbc",$19f4d,$6f
 
 SilphCo5Texts: ; 0x19fbc
-	dw SilphCo5Text1, SilphCo5Text2, SilphCo5Text3, SilphCo5Text4, SilphCo5Text5, SilphCo5Text6, SilphCo5Text7, SilphCo5Text8, SilphCo5Text9, SilphCo5Text10, SilphCo5Text11
+	dw SilphCo5Text1, SilphCo5Text2, SilphCo5Text3, SilphCo5Text4, SilphCo5Text5, Predef5CText, Predef5CText, Predef5CText, SilphCo5Text9, SilphCo5Text10, SilphCo5Text11
 
 SilphCo5TrainerHeaders:
 Silphco5TrainerHeader0: ; 0x19fd2
@@ -24665,7 +24562,7 @@ Unnamed_1a1bf: ; 0x1a1bf
 INCBIN "baserom.gbc",$1a1bf,$37
 
 SilphCo6Texts: ; 0x1a1f6
-	dw SilphCo6Text1, SilphCo6Text2, SilphCo6Text3, SilphCo6Text4, SilphCo6Text5, SilphCo6Text6, SilphCo6Text7, SilphCo6Text8, SilphCo6Text9, SilphCo6Text10
+	dw SilphCo6Text1, SilphCo6Text2, SilphCo6Text3, SilphCo6Text4, SilphCo6Text5, SilphCo6Text6, SilphCo6Text7, SilphCo6Text8, Predef5CText, Predef5CText
 
 SilphCo6TrainerHeaders:
 SilphCo6TrainerHeader0: ; 0x1a20a
@@ -28491,7 +28388,7 @@ PowerPlantScript_Unknown1e2d9: ; 0x1e2d9
 INCBIN "baserom.gbc",$1e2d9,$6
 
 PowerPlantTexts: ; 0x1e2df
-	dw PowerPlantText1, PowerPlantText2, PowerPlantText3, PowerPlantText4, PowerPlantText5, PowerPlantText6, PowerPlantText7, PowerPlantText8, PowerPlantText9, PowerPlantText10, PowerPlantText11, PowerPlantText12, PowerPlantText13, PowerPlantText14
+	dw PowerPlantText1, PowerPlantText2, PowerPlantText3, PowerPlantText4, PowerPlantText5, PowerPlantText6, PowerPlantText7, PowerPlantText8, PowerPlantText9, Predef5CText, Predef5CText, Predef5CText, Predef5CText, Predef5CText
 
 INCBIN "baserom.gbc",$1e2fb,$6d
 
@@ -45198,7 +45095,7 @@ Mansion1Subscript1: ; 0x442c5
 INCBIN "baserom.gbc",$44304,$4432c - $44304
 
 Mansion1Texts: ; 0x4432c
-	dw Mansion1Text1, Mansion1Text2, Mansion1Text3, Mansion1Text4
+	dw Mansion1Text1, Predef5CText, Predef5CText, Mansion1Text4
 
 Mansion1TrainerHeaders:
 Mansion1TrainerHeader0: ; 0x44334
@@ -45674,7 +45571,7 @@ VictoryRoad3Script_Unknown44996: ; 0x44996
 INCBIN "baserom.gbc",$44996,$8e
 
 VictoryRoad3Texts: ; 0x44a24
-	dw VictoryRoad3Text1, VictoryRoad3Text2, VictoryRoad3Text3, VictoryRoad3Text4, VictoryRoad3Text5, VictoryRoad3Text6, BoulderText, BoulderText, BoulderText, BoulderText
+	dw VictoryRoad3Text1, VictoryRoad3Text2, VictoryRoad3Text3, VictoryRoad3Text4, Predef5CText, Predef5CText, BoulderText, BoulderText, BoulderText, BoulderText
 
 VictoryRoad3TrainerHeaders:
 VictoryRoad3TrainerHeader0: ; 0x44a38
@@ -45858,7 +45755,7 @@ Unknown_44be0: ; 0x44be0
 INCBIN "baserom.gbc",$44be0,$34
 
 RocketHideout1Texts: ; 0x44c14
-	dw RocketHideout1Text1, RocketHideout1Text2, RocketHideout1Text3, RocketHideout1Text4, RocketHideout1Text5, RocketHideout1Text6, RocketHideout1Text7
+	dw RocketHideout1Text1, RocketHideout1Text2, RocketHideout1Text3, RocketHideout1Text4, RocketHideout1Text5, Predef5CText, Predef5CText
 
 RocketHideout1TrainerHeaders:
 RocketHideout1TrainerHeader0: ; 0x44c22
@@ -46162,7 +46059,7 @@ INCBIN "baserom.gbc",$44e3a,$45023-$44e3a
 INCBIN "baserom.gbc",$45083,$450c7-$45083
 
 RocketHideout2Texts: ; 0x450c7
-	dw RocketHideout2Text1, RocketHideout2Text2, RocketHideout2Text3, RocketHideout2Text4, RocketHideout2Text5
+	dw RocketHideout2Text1, Predef5CText, Predef5CText, Predef5CText, Predef5CText
 
 RocketHideout2TrainerHeaders:
 RocketHideout2TrainerHeader0: ; 0x450d1
@@ -46249,7 +46146,7 @@ RocketHideout3Script_Unknown45238: ; 0x45238
 INCBIN "baserom.gbc",$45238,$c2
 
 RocketHideout3Texts: ; 0x452fa
-	dw RocketHideout3Text1, RocketHideout3Text2, RocketHideout3Text3, RocketHideout3Text4
+	dw RocketHideout3Text1, RocketHideout3Text2, Predef5CText, Predef5CText
 
 RocketHideout3TrainerHeaders:
 RocketHideout3TrainerHeader0: ; 0x45302
@@ -46364,7 +46261,7 @@ Unnamed_45473: ; 0x45473
 INCBIN "baserom.gbc",$45473,$8e
 
 RocketHideout4Texts: ; 0x45501
-	dw RocketHideout4Text1, RocketHideout4Text2, RocketHideout4Text3, RocketHideout4Text4, RocketHideout4Text5, RocketHideout4Text6, RocketHideout4Text7, RocketHideout4Text8, RocketHideout4Text9, RocketHideout4Text10
+	dw RocketHideout4Text1, RocketHideout4Text2, RocketHideout4Text3, RocketHideout4Text4, Predef5CText, Predef5CText, Predef5CText, Predef5CText, Predef5CText, RocketHideout4Text10
 
 RocketHideout4TrainerHeaders:
 RocketHideout4TrainerHeader0: ; 0x45515
@@ -46698,7 +46595,7 @@ SafariZoneEastScript: ; 0x4586b
 ; 0x4586e
 
 SafariZoneEastTexts: ; 0x4586e
-	dw SafariZoneEastText1, SafariZoneEastText2, SafariZoneEastText3, SafariZoneEastText4, SafariZoneEastText5, SafariZoneEastText6, SafariZoneEastText7
+	dw Predef5CText, Predef5CText, Predef5CText, Predef5CText, SafariZoneEastText5, SafariZoneEastText6, SafariZoneEastText7
 
 SafariZoneEastText5: ; 0x4587c
 	TX_FAR _SafariZoneEastText5
@@ -46756,7 +46653,7 @@ SafariZoneNorthScript: ; 0x459ab
 ; 0x459ae
 
 SafariZoneNorthTexts: ; 0x459ae
-	dw SafariZoneNorthText1, SafariZoneNorthText2, SafariZoneNorthText3, SafariZoneNorthText4, SafariZoneNorthText5, SafariZoneNorthText6, SafariZoneNorthText7
+	dw Predef5CText, Predef5CText, SafariZoneNorthText3, SafariZoneNorthText4, SafariZoneNorthText5, SafariZoneNorthText6, SafariZoneNorthText7
 
 SafariZoneNorthText3: ; 0x459bc
 	TX_FAR _SafariZoneNorthText3
@@ -46830,7 +46727,7 @@ SafariZoneCenterScript: ; 0x45bb2
 ; 0x45bb5
 
 SafariZoneCenterTexts: ; 0x45bb5
-	dw SafariZoneCenterText1, SafariZoneCenterText2, SafariZoneCenterText3
+	dw Predef5CText, SafariZoneCenterText2, SafariZoneCenterText3
 
 SafariZoneCenterText2: ; 0x45bbb
 	TX_FAR _SafariZoneCenterText2
@@ -47066,7 +46963,7 @@ UnknownDungeon2Script: ; 0x45e0b
 ; 0x45e0e
 
 UnknownDungeon2Texts: ; 0x45e0e
-	dw UnknownDungeon2Text1, UnknownDungeon2Text2, UnknownDungeon2Text3
+	dw Predef5CText, Predef5CText, Predef5CText
 
 UnknownDungeon2Object: ; 0x45e14 (size=73)
 	db $7d ; border tile
@@ -47119,7 +47016,7 @@ UnknownDungeon3Script_Unknown45f03: ; 0x45f03
 INCBIN "baserom.gbc",$45f03,$6
 
 UnknownDungeon3Texts: ; 0x45f09
-	dw UnknownDungeon3Text1, UnknownDungeon3Text2, UnknownDungeon3Text3
+	dw UnknownDungeon3Text1, Predef5CText, Predef5CText
 
 UnknownDungeon3TrainerHeaders:
 UnknownDungeon3TrainerHeader0: ; 0x45f0f
@@ -51644,7 +51541,7 @@ Unknown_59db: ; 0x59db
 INCBIN "baserom.gbc",$499db,$6
 
 MtMoon1Texts: ; 0x499e1
-	dw MtMoon1Text1, MtMoon1Text2, MtMoon1Text3, MtMoon1Text4, MtMoon1Text5, MtMoon1Text6, MtMoon1Text7, MtMoon1Text8, MtMoon1Text9, MtMoon1Text10, MtMoon1Text11, MtMoon1Text12, MtMoon1Text13, MtMoon1Text14
+	dw MtMoon1Text1, MtMoon1Text2, MtMoon1Text3, MtMoon1Text4, MtMoon1Text5, MtMoon1Text6, MtMoon1Text7, Predef5CText, Predef5CText, Predef5CText, Predef5CText, Predef5CText, Predef5CText, MtMoon1Text14
 
 MtMoon1TrainerHeaders:
 MtMoon1TrainerHeader0: ; 0x499fd
@@ -51941,7 +51838,7 @@ MtMoon3Script: ; 0x49d0b
 INCBIN "baserom.gbc",$49d37,$fd
 
 MtMoon3Texts: ; 0x49e34
-	dw MtMoon3Text1, MtMoon3Text2, MtMoon3Text3, MtMoon3Text4, MtMoon3Text5, MtMoon3Text6, MtMoon3Text7, MtMoon3Text8, MtMoon3Text9, Unnamed_49f99
+	dw MtMoon3Text1, MtMoon3Text2, MtMoon3Text3, MtMoon3Text4, MtMoon3Text5, MtMoon3Text6, MtMoon3Text7, Predef5CText, Predef5CText, Unnamed_49f99
 
 MtMoon3TrainerHeaders:
 MtMoon3TrainerHeader0: ; 0x49e48
@@ -52253,7 +52150,7 @@ SafariZoneWestScript: ; 0x4a1b5
 ; 0x4a1b8
 
 SafariZoneWestTexts: ; 0x4a1b8
-	dw SafariZoneWestText1, SafariZoneWestText2, SafariZoneWestText3, SafariZoneWestText4, SafariZoneWestText5, SafariZoneWestText6, SafariZoneWestText7, SafariZoneWestText8
+	dw Predef5CText, Predef5CText, Predef5CText, Predef5CText, SafariZoneWestText5, SafariZoneWestText6, SafariZoneWestText7, SafariZoneWestText8
 
 SafariZoneWestText5: ; 0x4a1c8
 	TX_FAR _SafariZoneWestText5
@@ -53954,7 +53851,7 @@ Route24Script: ; 0x513ad
 INCBIN "baserom.gbc",$513c0,$8b
 
 Route24Texts: ; 0x5144b
-	dw Route24Text1, Route24Text2, Route24Text3, Route24Text4, Route24Text5, Route24Text6, Route24Text7, Route24Text8
+	dw Route24Text1, Route24Text2, Route24Text3, Route24Text4, Route24Text5, Route24Text6, Route24Text7, Predef5CText
 
 Route24TrainerHeaders:
 Route24TrainerHeader0: ; 0x5145b
@@ -54237,7 +54134,7 @@ Unknown_515e1: ; 0x515e1
 INCBIN "baserom.gbc",$515e1,$47
 
 Route25Texts: ; 0x51628
-	dw Route25Text1, Route25Text2, Route25Text3, Route25Text4, Route25Text5, Route25Text6, Route25Text7, Route25Text8, Route25Text9, Route25Text10, Route25Text11
+	dw Route25Text1, Route25Text2, Route25Text3, Route25Text4, Route25Text5, Route25Text6, Route25Text7, Route25Text8, Route25Text9, Predef5CText, Route25Text11
 
 Route25TrainerHeaders:
 Route25TrainerHeader0: ; 0x5163e
@@ -54555,7 +54452,7 @@ VictoryRoad2Script_Unknown517c4: ; 0x517c4
 INCBIN "baserom.gbc",$517c4,$57
 
 VictoryRoad2Texts: ; 0x5181b
-	dw VictoryRoad2Text1, VictoryRoad2Text2, VictoryRoad2Text3, VictoryRoad2Text4, VictoryRoad2Text5, VictoryRoad2Text6, VictoryRoad2Text7, VictoryRoad2Text8, VictoryRoad2Text9, VictoryRoad2Text10, BoulderText, BoulderText, BoulderText
+	dw VictoryRoad2Text1, VictoryRoad2Text2, VictoryRoad2Text3, VictoryRoad2Text4, VictoryRoad2Text5, VictoryRoad2Text6, Predef5CText, Predef5CText, Predef5CText, Predef5CText, BoulderText, BoulderText, BoulderText
 
 VictoryRoad2TrainerHeaders:
 VictoryRoad2TrainerHeader0: ; 0x51835
@@ -54855,7 +54752,7 @@ SilphCo7Script_Unknown51b77: ; 0x5177
 INCBIN "baserom.gbc",$51b77,$1c8
 
 SilphCo7Texts: ; 0x51d3f
-	dw SilphCo7Text1, SilphCo7Text2, SilphCo7Text3, SilphCo7Text4, SilphCo7Text5, SilphCo7Text6, SilphCo7Text7, SilphCo7Text8, SilphCo7Text9, SilphCo7Text10, SilphCo7Text11, SilphCo7Text12, SilphCo7Text13, SilphCo7Text14, SilphCo7Text15
+	dw SilphCo7Text1, SilphCo7Text2, SilphCo7Text3, SilphCo7Text4, SilphCo7Text5, SilphCo7Text6, SilphCo7Text7, SilphCo7Text8, SilphCo7Text9, Predef5CText, Predef5CText, Predef5CText, SilphCo7Text13, SilphCo7Text14, SilphCo7Text15
 
 SilphCo7TrainerHeaders:
 SilphCo7TrainerHeader0: ; 0x51d5d
@@ -55200,7 +55097,7 @@ Mansion2Script_Unknown51fee: ; 0x51fee
 INCBIN "baserom.gbc",$51fee,$5204d - $51fee
 
 Mansion2Texts: ; 0x5204d
-	dw Mansion2Text1, Mansion2Text2, Mansion2Text3, Mansion2Text4, Mansion2Text5
+	dw Mansion2Text1, Predef5CText, Mansion2Text3, Mansion2Text4, Mansion2Text5
 
 Mansion2TrainerHeaders:
 Mansion2TrainerHeader0: ; 0x52057
@@ -55338,7 +55235,7 @@ Unnamed_52204: ; 0x52204
 INCBIN "baserom.gbc",$52204,$5228a - $52204
 
 Mansion3Texts: ; 0x5228a
-	dw Mansion3Text1, Mansion3Text2, Mansion3Text3, Mansion3Text4, Mansion3Text5, Mansion3Text6
+	dw Mansion3Text1, Mansion3Text2, Predef5CText, Predef5CText, Mansion3Text5, Mansion3Text6
 
 Mansion3TrainerHeaders:
 Mansion3TrainerHeader0: ; 0x52296
@@ -56561,7 +56458,7 @@ Route2Script: ; 0x554e3
 ; 0x554e6
 
 Route2Texts:
-	dw Route2Text1, Route2Text2, Route2Text3, Route2Text4
+	dw Predef5CText, Predef5CText, Route2Text3, Route2Text4
 
 Route2Text3: ; 0x554ee
 	TX_FAR _Route2Text3
@@ -56860,7 +56757,7 @@ Unknown_5566b: ; 0x5566b
 INCBIN "baserom.gbc",$5566b,$6
 
 Route4Texts: ; 0x55671
-	dw Route4Text1, Route4Text2, Route4Text3, PokeCenterSignText, Route4Text5, Route4Text6
+	dw Route4Text1, Route4Text2, Predef5CText, PokeCenterSignText, Route4Text5, Route4Text6
 
 Route4TrainerHeaders:
 Route4TrainerHeader0: ; 0x5567d
@@ -56933,7 +56830,7 @@ Unknown_556cf: ; 0x556cf
 INCBIN "baserom.gbc",$556cf,$6
 
 Route9Texts: ; 0x556d5
-	dw Route9Text1, Route9Text2, Route9Text3, Route9Text4, Route9Text5, Route9Text6, Route9Text7, Route9Text8, Route9Text9, Route9Text10, Route9Text11
+	dw Route9Text1, Route9Text2, Route9Text3, Route9Text4, Route9Text5, Route9Text6, Route9Text7, Route9Text8, Route9Text9, Predef5CText, Route9Text11
 
 Route9TrainerHeaders:
 Route9TrainerHeader0: ; 0x556eb
@@ -61162,7 +61059,7 @@ Route12Script: ; 0x595f3
 INCBIN "baserom.gbc",$59606,$6f
 
 Route12Texts: ; 0x59675
-	dw Route12Text1, Route12Text2, Route12Text3, Route12Text4, Route12Text5, Route12Text6, Route12Text7, Route12Text8, Route12Text9, Route12Text10, Route12Text11, Route12Text12, Route12Text13, Route12Text14
+	dw Route12Text1, Route12Text2, Route12Text3, Route12Text4, Route12Text5, Route12Text6, Route12Text7, Route12Text8, Predef5CText, Predef5CText, Route12Text11, Route12Text12, Route12Text13, Route12Text14
 
 Route12TrainerHeaders:
 Route12TrainerHeader0: ; 0x59691
@@ -61422,7 +61319,7 @@ Route15_Unknown597c1: ; 0x597c1
 INCBIN "baserom.gbc",$597c1,$6
 
 Route15Texts: ; 0x597c7
-	dw Route15Text1, Route15Text2, Route15Text3, Route15Text4, Route15Text5, Route15Text6, Route15Text7, Route15Text8, Route15Text9, Route15Text10, Route15Text11, Route15Text12
+	dw Route15Text1, Route15Text2, Route15Text3, Route15Text4, Route15Text5, Route15Text6, Route15Text7, Route15Text8, Route15Text9, Route15Text10, Predef5CText, Route15Text12
 
 Route15TrainerHeaders:
 Route15TrainerHeader0: ; 0x597df
@@ -62535,7 +62432,7 @@ SilphCo3Script_Unknown59f71: ; 0x59f71
 INCBIN "baserom.gbc",$59f71,$53
 
 SilphCo3Texts: ; 0x59fc4
-	dw SilphCo3Text1, SilphCo3Text2, SilphCo3Text3, SilphCo3Text4
+	dw SilphCo3Text1, SilphCo3Text2, SilphCo3Text3, Predef5CText
 
 SilphCo3TrainerHeaders:
 SilphCo3TrainerHeader0: ; 0x59fcc
@@ -62684,7 +62581,7 @@ SilphCo10Script_Unknown5a14f: ; 0x5a14f
 INCBIN "baserom.gbc",$5a14f,$37
 
 SilphCo10Texts: ; 0x5a186
-	dw SilphCo10Text1, SilphCo10Text2, SilphCo10Text3, SilphCo10Text4, SilphCo10Text5, SilphCo10Text6
+	dw SilphCo10Text1, SilphCo10Text2, SilphCo10Text3, Predef5CText, Predef5CText, Predef5CText
 
 SilphCo10TrainerHeaders:
 SilphCo10TrainerHeader0: ; 0x5a192
@@ -66061,7 +65958,7 @@ VictoryRoad1Script: ; 0x5da0a
 INCBIN "baserom.gbc",$5da27,$38
 
 VictoryRoad1Texts: ; 0x5da5f
-	dw VictoryRoad1Text1, VictoryRoad1Text2, VictoryRoad1Text3, VictoryRoad1Text4, BoulderText, BoulderText, BoulderText
+	dw VictoryRoad1Text1, VictoryRoad1Text2, Predef5CText, Predef5CText, BoulderText, BoulderText, BoulderText
 
 VictoryRoad1TrainerHeaders:
 VictoryRoad1TrainerHeader0: ; 0x5da6d
@@ -66565,7 +66462,7 @@ Unknown_606df: ; 0x606df
 INCBIN "baserom.gbc",$606df,$6
 
 PokemonTower3Texts: ; 0x606e5
-	dw PokemonTower3Text1, PokemonTower3Text2, PokemonTower3Text3, PokemonTower3Text4
+	dw PokemonTower3Text1, PokemonTower3Text2, PokemonTower3Text3, Predef5CText
 
 PokemonTower3TrainerHeaders:
 PokemonTower3TrainerHeader0: ; 0x606ed
@@ -66706,7 +66603,7 @@ PokemonTower4Script_Unknown60809: ; 0x60809
 INCBIN "baserom.gbc",$60809,$6
 
 PokemonTower4Texts: ; 0x6080f
-	dw PokemonTower4Text1, PokemonTower4Text2, PokemonTower4Text3, PokemonTower4Text4, PokemonTower4Text5, PokemonTower4Text6
+	dw PokemonTower4Text1, PokemonTower4Text2, PokemonTower4Text3, Predef5CText, Predef5CText, Predef5CText
 
 PokemonTower4TrainerHeaders:
 PokemonTower4TrainerHeader0: ; 0x6081b
@@ -66850,7 +66747,7 @@ PokemonTower5Script_Unknown60945: ; 0x60945
 INCBIN "baserom.gbc",$60945,$56
 
 PokemonTower5Texts: ; 0x6099b
-	dw PokemonTower5Text1, PokemonTower5Text2, PokemonTower5Text3, PokemonTower5Text4, PokemonTower5Text5, PokemonTower5Text6, PokemonTower5Text7
+	dw PokemonTower5Text1, PokemonTower5Text2, PokemonTower5Text3, PokemonTower5Text4, PokemonTower5Text5, Predef5CText, PokemonTower5Text7
 
 PokemonTower5TrainerHeaders:
 PokemonTower5TrainerHeader0: ; 0x609a9
@@ -67033,7 +66930,7 @@ PokemonTower6Script: ; 0x60aef
 INCBIN "baserom.gbc",$60b02,$af
 
 PokemonTower6Texts: ; 0x60bb1
-	dw PokemonTower6Text1, PokemonTower6Text2, PokemonTower6Text3, PokemonTower6Text4, PokemonTower6Text5, PokemonTower6Text6, PokemonTower6Text7
+	dw PokemonTower6Text1, PokemonTower6Text2, PokemonTower6Text3, Predef5CText, Predef5CText, PokemonTower6Text6, PokemonTower6Text7
 
 PokemonTower6TrainerHeaders:
 PokemonTower6TrainerHeader0: ; 0x60bbf
@@ -67456,7 +67353,7 @@ ViridianForestScript_Unknown61120: ; 0x61120
 INCBIN "baserom.gbc",$61120,$6
 
 ViridianForestTexts: ; 0x61126
-	dw ViridianForestText1, ViridianForestText2, ViridianForestText3, ViridianForestText4, ViridianForestText5, ViridianForestText6, ViridianForestText7, ViridianForestText8, ViridianForestText9, ViridianForestText10, ViridianForestText11, ViridianForestText12, ViridianForestText13, ViridianForestText14
+	dw ViridianForestText1, ViridianForestText2, ViridianForestText3, ViridianForestText4, Predef5CText, Predef5CText, Predef5CText, ViridianForestText8, ViridianForestText9, ViridianForestText10, ViridianForestText11, ViridianForestText12, ViridianForestText13, ViridianForestText14
 
 ViridianForestTrainerHeaders:
 ViridianForestTrainerHeader0: ; 0x61142
@@ -68334,7 +68231,7 @@ SSAnne8Script_Unknown61989: ; 0x61989
 INCBIN "baserom.gbc",$61989,$6
 
 SSAnne8Texts: ; 0x6198f
-	dw SSAnne8Text1, SSAnne8Text2, SSAnne8Text3, SSAnne8Text4, SSAnne8Text5, SSAnne8Text6, SSAnne8Text7, SSAnne8Text8, SSAnne8Text9, SSAnne8Text10, SSAnne8Text11
+	dw SSAnne8Text1, SSAnne8Text2, SSAnne8Text3, SSAnne8Text4, SSAnne8Text5, SSAnne8Text6, SSAnne8Text7, SSAnne8Text8, SSAnne8Text9, Predef5CText, SSAnne8Text11
 
 SSAnne8TrainerHeaders:
 SSAnne8TrainerHeader0: ; 0x619a5
@@ -68552,7 +68449,7 @@ SSAnne9Script_Unknown61b64: ; 0x61b64
 INCBIN "baserom.gbc",$61b64,$6
 
 SSAnne9Texts: ; 0x61b6a
-	dw SSAnne9Text1, SSAnne9Text2, SSAnne9Text3, SSAnne9Text4, SSAnne9Text5, SSAnne9Text6, SSAnne9Text7, SSAnne9Text8, SSAnne9Text9, SSAnne9Text10, SSAnne9Text11, SSAnne9Text12, SSAnne9Text13
+	dw SSAnne9Text1, SSAnne9Text2, SSAnne9Text3, SSAnne9Text4, SSAnne9Text5, Predef5CText, SSAnne9Text7, SSAnne9Text8, Predef5CText, SSAnne9Text10, SSAnne9Text11, SSAnne9Text12, SSAnne9Text13
 
 SSAnne9TrainerHeaders:
 SSAnne9TrainerHeader0: ; 0x61b84
@@ -68833,7 +68730,7 @@ SSAnne10Script_Unknown61d68: ; 0x61d68
 INCBIN "baserom.gbc",$61d68,$6
 
 SSAnne10Texts: ; 0x61d6e
-	dw SSAnne10Text1, SSAnne10Text2, SSAnne10Text3, SSAnne10Text4, SSAnne10Text5, SSAnne10Text6, SSAnne10Text7, SSAnne10Text8, SSAnne10Text9, SSAnne10Text10, SSAnne10Text11
+	dw SSAnne10Text1, SSAnne10Text2, SSAnne10Text3, SSAnne10Text4, SSAnne10Text5, SSAnne10Text6, SSAnne10Text7, SSAnne10Text8, Predef5CText, Predef5CText, Predef5CText
 
 SSAnne10TrainerHeaders:
 SSAnne10TrainerHeader0: ; 0x61d84
@@ -71154,7 +71051,7 @@ Unknown_74995:
 INCBIN "baserom.gbc",$74995,$749EC - $74995
 
 ViridianGymTexts: ; 0x749ec
-	dw ViridianGymText1, ViridianGymText2, ViridianGymText3, ViridianGymText4, ViridianGymText5, ViridianGymText6, ViridianGymText7, ViridianGymText8, ViridianGymText9, ViridianGymText10, ViridianGymText11, ViridianGymText12, ViridianGymText13, ViridianGymText14
+	dw ViridianGymText1, ViridianGymText2, ViridianGymText3, ViridianGymText4, ViridianGymText5, ViridianGymText6, ViridianGymText7, ViridianGymText8, ViridianGymText9, ViridianGymText10, Predef5CText, ViridianGymText12, ViridianGymText13, ViridianGymText14
 
 ViridianGymTrainerHeaders:
 ViridianGymTrainerHeader0: ; 0x74a08
@@ -71608,7 +71505,7 @@ UnknownDungeon1Script: ; 0x74d0c
 ; 0x74d0f
 
 UnknownDungeon1Texts: ; 0x74d0f
-	dw UnknownDungeon1Text1, UnknownDungeon1Text2, UnknownDungeon1Text3
+	dw Predef5CText, Predef5CText, Predef5CText
 
 UnknownDungeon1Object: ; 0x74d15 (size=97)
 	db $7d ; border tile
@@ -71954,7 +71851,7 @@ FuchsiaHouse2Script: ; 0x750b5
 ; 0x750b8
 
 FuchsiaHouse2Texts: ; 0x750b8
-	dw FuchsiaHouse2Text1, FuchsiaHouse2Text2, BoulderText, FuchsiaHouse2Text4, FuchsiaHouse2Text5
+	dw FuchsiaHouse2Text1, Predef5CText, BoulderText, FuchsiaHouse2Text4, FuchsiaHouse2Text5
 
 FuchsiaHouse2Text1: ; 0x750c2
 	db $08 ; asm
