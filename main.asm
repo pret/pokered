@@ -24138,8 +24138,6 @@ IndigoPlateauLobbyText2: ; 0x19c8b
 	TX_FAR _IndigoPlateauLobbyText1
 	db $50
 
-INCBIN "baserom.gbc",$19c8f,$19c8f - $19c8f
-
 IndigoPlateauLobbyText3: ; 0x19c8f
 	TX_FAR _IndigoPlateauLobbyText3
 	db $50
@@ -24184,7 +24182,7 @@ SilphCo4Script: ; 0x19d0b
 	call SilphCo4Script_Unknown19d21
 	call EnableAutoTextBoxDrawing
 	ld hl, SilphCo4TrainerHeaders
-	ld de, $5d9a
+	ld de, SilphCo4ScriptPtrTable
 	ld a, [$d645]
 	call $3160
 	ld [$d645], a
@@ -24192,7 +24190,86 @@ SilphCo4Script: ; 0x19d0b
 ; 0x19d21
 
 SilphCo4Script_Unknown19d21: ; 0x19d21
-INCBIN "baserom.gbc",$19d21,$7f
+	ld hl, $d126
+	bit 5, [hl]
+	res 5, [hl]
+	ret z
+	ld hl, SilphCo4Data19d58
+	call SilphCo4Function19d5d
+	call SilphCo4Function19d89
+	ld a, [$d82a]
+	bit 0, a
+	jr nz, .asm_19d48
+	push af
+	ld a, $54
+	ld [$d09f], a
+	ld bc, $0602
+	ld a, $17
+	call Predef
+	pop af
+.asm_19d48
+	bit 1, a
+	ret nz
+	ld a, $54
+	ld [$d09f], a
+	ld bc, $0406
+	ld a, $17
+	jp Predef
+
+SilphCo4Data19d58: ; 0x19d58
+	db $06, $02, $04, $06, $ff
+
+SilphCo4Function19d5d: ; 0x19d5d
+	push hl
+	ld hl, $d73f
+	ld a, [hli]
+	ld b, a
+	ld a, [hl]
+	ld c, a
+	xor a
+	ld [$ff00+$e0], a
+	pop hl
+.asm_19d69
+	ld a, [hli]
+	cp $ff
+	jr z, .asm_19d85 ; 0x19d6c $17
+	push hl
+	ld hl, $ffe0
+	inc [hl]
+	pop hl
+	cp b
+	jr z, .asm_19d7a ; 0x19d75 $3
+	inc hl
+	jr .asm_19d69 ; 0x19d78 $ef
+.asm_19d7a
+	ld a, [hli]
+	cp c
+	jr nz, .asm_19d69 ; 0x19d7c $eb
+	ld hl, $d73f
+	xor a
+	ld [hli], a
+	ld [hl], a
+	ret
+.asm_19d85
+	xor a
+	ld [$ff00+$e0], a
+	ret
+
+SilphCo4Function19d89: ; 0x19d89
+	ld hl, $d82a
+	ld a, [$ff00+$e0]
+	and a
+	ret z
+	cp $1
+	jr nz, .asm_19d97 ; 0x19d92 $3
+	set 0, [hl]
+	ret
+.asm_19d97
+	set 1, [hl]
+	ret
+
+SilphCo4ScriptPtrTable:
+	dw $3219, $324c, $3275
 
 SilphCo4Texts: ; 0x19da0
 	dw SilphCo4Text1, SilphCo4Text2, SilphCo4Text3, SilphCo4Text4, SilphCo4Text5, SilphCo4Text6, SilphCo4Text7
@@ -73877,7 +73954,7 @@ GaryScript4: ; 0x75fe4
 	ld a, $d6
 	ld [$cc4d], a
 	ld a, $15
-	call $3e6d
+	call Predef
 	ld a, $5
 	ld [$d64c], a
 	ret
