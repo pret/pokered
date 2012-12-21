@@ -5183,12 +5183,12 @@ DecGradGBPalTable_02: ; 0x2121
 
 INCBIN "baserom.gbc",$2125,$2442 - $2125
 
-; XXX where is the pointer to this data?
-MartInventories: ; 2442
-	; first byte $FE, next byte # of items, last byte $FF
+; mart inventories are below
+; they are texts
+; first byte $FE, next byte # of items, last byte $FF
 
 ; Viridian
-ViridianMartText4: ; 2442 XXX confirm
+ViridianMartText6: ; 2442
 	db $FE,4,POKE_BALL,ANTIDOTE,PARLYZ_HEAL,BURN_HEAL,$FF
 
 ; Pewter
@@ -26755,20 +26755,27 @@ ViridianMartScript2:
 ; 0x1d4e0
 
 ViridianMartTexts: ; 0x1d4e0
-	dw ViridianMartText1, ViridianMartText2, ViridianMartText3 ;, ViridianMartText4
-
-INCBIN "baserom.gbc",$1d4e6,$a
+	dw ViridianMartText1
+	dw ViridianMartText2
+	dw ViridianMartText3
+	dw ViridianMartText4
+	dw ViridianMartText5
+	dw ViridianMartText6
+	dw ViridianMartText2
+	dw ViridianMartText3
 
 ViridianMartText1: ; 0x1d4f0
 	TX_FAR _ViridianMartText1
 	db $50
 
-UnnamedText_1d4f5: ; 0x1d4f5
-	TX_FAR _UnnamedText_1d4f5
+ViridianMartText4: ; 0x1d4f5
+	TX_FAR _ViridianMartText4
 	db $50
-; 0x1d4f5 + 5 bytes
 
-INCBIN "baserom.gbc",$1d4fa,$6
+ViridianMartText5:
+	TX_FAR ViridianMartParcelQuestText
+	db $11
+	db $50
 
 ViridianMartText2: ; 0x1d500
 	TX_FAR _ViridianMartText2
@@ -85774,7 +85781,7 @@ _ViridianMartText1: ; 0x95c36
 	db $0, "Okay! Say hi to", $4f
 	db "PROF.OAK for me!", $57
 
-_UnnamedText_1d4f5: ; 0x95c58
+_ViridianMartText4: ; 0x95c58
 	db $0, "Hey! You came from", $4f
 	db "PALLET TOWN?", $57
 ; 0x95c58 + 33 bytes
