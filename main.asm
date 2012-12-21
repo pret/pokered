@@ -24712,7 +24712,15 @@ SilphCo6TrainerHeader3: ; 0x1a222
 db $ff
 
 Unnamed_622f: ; 0x1a22f
-INCBIN "baserom.gbc",$1a22f,$1a23d - $1a22f
+	ld a, [$d838]
+	bit 7, a
+	jr nz, .asm_1a238 ; 0x1a234 $2
+	jr .asm_1a23a ; 0x1a236 $2
+.asm_1a238
+	ld h, d
+	ld l, e
+.asm_1a23a
+	jp PrintText
 
 SilphCo6Text1: ; 0x1a23d
 	db $08 ; asm
