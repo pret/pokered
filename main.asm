@@ -24355,7 +24355,7 @@ SilphCo5Script: ; 0x19f37
 	call Unnamed_19f4d
 	call EnableAutoTextBoxDrawing
 	ld hl, SilphCo5TrainerHeaders
-	ld de, $5fb6
+	ld de, SilphCo5ScriptPointers
 	ld a, [$d646]
 	call $3160
 	ld [$d646], a
@@ -24363,7 +24363,66 @@ SilphCo5Script: ; 0x19f37
 ; 0x19f4d
 
 Unnamed_19f4d: ; 0x19f4d
-INCBIN "baserom.gbc",$19f4d,$6f
+	ld hl, $d126
+	bit 5, [hl]
+	res 5, [hl]
+	ret z
+	ld hl, SilphCo5Coords
+	call $5d5d
+	call $5f9e
+	ld a, [$d82c]
+	bit 0, a
+	jr nz, .asm_19f74 ; 0x19f63 $f
+	push af
+	ld a, $5f
+	ld [$d09f], a
+	ld bc, $0203
+	ld a, $17
+	call Predef
+	pop af
+.asm_19f74
+	bit 1, a
+	jr nz, .asm_19f87 ; 0x19f76 $f
+	push af
+	ld a, $5f
+	ld [$d09f], a
+	ld bc, $0603
+	ld a, $17
+	call Predef
+	pop af
+.asm_19f87
+	bit 2, a
+	ret nz
+	ld a, $5f
+	ld [$d09f], a
+	ld bc, $0507
+	ld a, $17
+	jp Predef
+; 0x19f97
+
+SilphCo5Coords: ; coords?
+	db $02, $03, $06, $03, $05, $07, $ff
+
+SilphCo5Function19f9e:
+	ld hl, $d82c
+	ld a, [$ff00+$e0]
+	and a
+	ret z
+	cp $1
+	jr nz, .asm_19fac ; 0x19fa7 $3
+	set 0, [hl]
+	ret
+.asm_19fac
+	cp $2
+	jr nz, .asm_19fb3 ; 0x19fae $3
+	set 1, [hl]
+	ret
+.asm_19fb3
+	set 2, [hl]
+	ret
+
+SilphCo5ScriptPointers:
+	dw $3219, $324c, $3275
 
 SilphCo5Texts: ; 0x19fbc
 	dw SilphCo5Text1, SilphCo5Text2, SilphCo5Text3, SilphCo5Text4, SilphCo5Text5, Predef5CText, Predef5CText, Predef5CText, SilphCo5Text9, SilphCo5Text10, SilphCo5Text11
