@@ -27693,8 +27693,6 @@ VermilionHouse1Text3: ; 0x1db1b
 	TX_FAR _VermilionHouse1Text3
 	db $50
 
-INCBIN "baserom.gbc", $1db1b + 5, $1db20 - ($1db1b + 5)
-
 VermilionHouse1Object: ; 0x1db20 (size=38)
 	db $a ; border tile
 
@@ -27732,7 +27730,7 @@ VermilionDockScript: ; 0x1db52
 	cp $1
 	ret nz
 	bit 2, [hl]
-	jp z, $5b9b
+	jp z, VermilionDock_1db9b
 	set 4, [hl]
 	call Delay3
 	ld hl, $d730
@@ -27761,7 +27759,169 @@ VermilionDockScript: ; 0x1db52
 	ret
 ; 0x1db9b
 
-INCBIN "baserom.gbc",$1db9b,$1dcbf - $1db9b
+VermilionDock_1db9b:
+	set 2, [hl]
+	ld a, $ff
+	ld [$cd6b], a
+	ld [$c0ee], a
+	call $23b1
+	ld c, $1f
+	ld a, $d6
+	call $23a1
+	ld b, $1e
+	ld hl, $5fc0
+	call Bankswitch
+	xor a
+	ld [$c102], a
+	ld c, $78
+	call DelayFrames
+	ld b, $9c
+	call $18d6
+	ld hl, $c468
+	ld bc, $0078
+	ld a, $14
+	call $36e0
+	ld a, $1
+	ld [$ff00+$ba], a
+	call Delay3
+	xor a
+	ld [$ff00+$ba], a
+	ld [$cd3d], a
+	ld [$ff00+$49], a
+	ld a, $58
+	ld [$cd3e], a
+	ld hl, $d526
+	ld c, [hl]
+	inc hl
+	ld b, [hl]
+	push bc
+	push hl
+	ld a, $a9
+	call $3740
+	ld a, $ff
+	ld [$cfcb], a
+	ld d, $0
+	ld e, $8
+.asm_1dbfa
+	ld hl, $0002
+	add hl, bc
+	ld a, l
+	ld [$d526], a
+	ld a, h
+	ld [$d527], a
+	push hl
+	push de
+	call $0ed3
+	call VermilionDock_1dc59
+	pop de
+	ld b, $10
+.asm_1dc11
+	call VermilionDock_1dc42
+	ld c, $8
+.asm_1dc16
+	call VermilionDock_1dc7c
+	dec c
+	jr nz, .asm_1dc16 ; 0x1dc1a $fa
+	inc d
+	dec b
+	jr nz, .asm_1dc11 ; 0x1dc1e $f1
+	pop bc
+	dec e
+	jr nz, .asm_1dbfa ; 0x1dc22 $d6
+	xor a
+	ld [$ff00+$4a], a
+	ld [$ff00+$b0], a
+	call VermilionDock_1dc94
+	ld a, $90
+	ld [$ff00+$b0], a
+	ld a, $1
+	ld [$cfcb], a
+	pop hl
+	pop bc
+	ld [hl], b
+	dec hl
+	ld [hl], c
+	call $0997
+	ld hl, $d3ae
+	dec [hl]
+	ret
+
+VermilionDock_1dc42:
+	push bc
+	push de
+	ld hl, $c311
+	ld a, [$cd3d]
+	swap a
+	ld c, a
+	ld de, $0004
+.asm_1dc50
+	inc [hl]
+	inc [hl]
+	add hl, de
+	dec c
+	jr nz, .asm_1dc50 ; 0x1dc54 $fa
+	pop de
+	pop bc
+	ret
+
+VermilionDock_1dc59:
+	ld a, [$cd3e]
+	sub $10
+	ld [$cd3e], a
+	ld c, a
+	ld b, $64
+	ld a, [$cd3d]
+	inc a
+	ld [$cd3d], a
+	ld a, $1
+	ld de, VermilionDockOAMBlock
+	call WriteOAMBlock
+	ret
+
+VermilionDockOAMBlock:
+	db $fc, $10
+	db $fd, $10
+	db $fe, $10
+	db $ff, $10
+
+VermilionDock_1dc7c:
+	ld h, d
+	ld l, $50
+	call $5c86
+	ld h, $0
+	ld l, $80
+.asm_1dc86
+	ld a, [$ff00+$44]
+	cp l
+	jr nz, .asm_1dc86 ; 0x1dc89 $fb
+	ld a, h
+	ld [$ff00+$43], a
+.asm_1dc8e
+	ld a, [$ff00+$44]
+	cp h
+	jr z, .asm_1dc8e ; 0x1dc91 $fb
+	ret
+
+VermilionDock_1dc94:
+	ld hl, $cc5b
+	ld bc, $00b4
+	ld a, $14
+	call $36e0
+	ld hl, $9940
+	ld de, $cc5b
+	ld bc, $000c
+	call CopyVideoData
+	ld hl, $c754
+	ld a, $d
+	ld [hli], a
+	ld [hli], a
+	ld [hli], a
+	ld [hl], a
+	ld a, $a9
+	call $23b1
+	ld c, $78
+	call DelayFrames
+	ret
 
 VermilionDockTexts: ; 0x1dcbf
 	db $c1, $5c
