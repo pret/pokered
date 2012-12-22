@@ -24103,7 +24103,7 @@ SilphCo4Script: ; 0x19d0b
 	call SilphCo4Script_Unknown19d21
 	call EnableAutoTextBoxDrawing
 	ld hl, SilphCo4TrainerHeaders
-	ld de, SilphCo4ScriptPtrTable
+	ld de, SilphCo4ScriptPointers
 	ld a, [$d645]
 	call $3160
 	ld [$d645], a
@@ -24189,7 +24189,7 @@ SilphCo4Function19d89: ; 0x19d89
 	set 1, [hl]
 	ret
 
-SilphCo4ScriptPtrTable:
+SilphCo4ScriptPointers:
 	dw $3219, $324c, $3275
 
 SilphCo4Texts: ; 0x19da0
@@ -28780,21 +28780,105 @@ PowerPlant_h: ; 0x1e2ba to 0x1e2c6 (12 bytes) (bank=7) (id=83)
 
 PowerPlantScript: ; 0x1e2c6
 	call EnableAutoTextBoxDrawing
-	ld hl, $62fb
-	ld de, PowerPlantScript_Unknown1e2d9
+	ld hl, PowerPlantTrainerHeaders
+	ld de, PowerPlantScriptPointers
 	ld a, [$d663]
 	call $3160
 	ld [$d663], a
 	ret
 ; 0x1e2d9
 
-PowerPlantScript_Unknown1e2d9: ; 0x1e2d9
-INCBIN "baserom.gbc",$1e2d9,$6
+PowerPlantScriptPointers: ; 0x1e2d9
+	dw $3219
+	dw $324c
+	dw $3275
 
 PowerPlantTexts: ; 0x1e2df
 	dw PowerPlantText1, PowerPlantText2, PowerPlantText3, PowerPlantText4, PowerPlantText5, PowerPlantText6, PowerPlantText7, PowerPlantText8, PowerPlantText9, Predef5CText, Predef5CText, Predef5CText, Predef5CText, Predef5CText
 
-INCBIN "baserom.gbc",$1e2fb,$6d
+PowerPlantTrainerHeaders:
+PowerPlantTrainerHeader0:
+	db 1 ; flag's bit
+	db 0 ; view range
+	dw $d7d3 ; flag's byte
+	dw VoltorbBattleText ; TextBeforeBattle
+	dw VoltorbBattleText ; TextAfterBattle
+	dw VoltorbBattleText ; TextEndBattle
+	dw VoltorbBattleText ; TextEndBattle
+
+PowerPlantTrainerHeader1:
+	db 2 ; flag's bit
+	db 0 ; view range
+	dw $d7d3 ; flag's byte
+	dw VoltorbBattleText ; TextBeforeBattle
+	dw VoltorbBattleText ; TextAfterBattle
+	dw VoltorbBattleText ; TextEndBattle
+	dw VoltorbBattleText ; TextEndBattle
+
+PowerPlantTrainerHeader2:
+	db 3 ; flag's bit
+	db 0 ; view range
+	dw $d7d3 ; flag's byte
+	dw VoltorbBattleText ; TextBeforeBattle
+	dw VoltorbBattleText ; TextAfterBattle
+	dw VoltorbBattleText ; TextEndBattle
+	dw VoltorbBattleText ; TextEndBattle
+
+PowerPlantTrainerHeader3:
+	db 4 ; flag's bit
+	db 0 ; view range
+	dw $d7d3 ; flag's byte
+	dw VoltorbBattleText ; TextBeforeBattle
+	dw VoltorbBattleText ; TextAfterBattle
+	dw VoltorbBattleText ; TextEndBattle
+	dw VoltorbBattleText ; TextEndBattle
+
+PowerPlantTrainerHeader4:
+	db 5 ; flag's bit
+	db 0 ; view range
+	dw $d7d3 ; flag's byte
+	dw VoltorbBattleText ; TextBeforeBattle
+	dw VoltorbBattleText ; TextAfterBattle
+	dw VoltorbBattleText ; TextEndBattle
+	dw VoltorbBattleText ; TextEndBattle
+
+PowerPlantTrainerHeader5:
+	db 6 ; flag's bit
+	db 0 ; view range
+	dw $d7d3 ; flag's byte
+	dw VoltorbBattleText ; TextBeforeBattle
+	dw VoltorbBattleText ; TextAfterBattle
+	dw VoltorbBattleText ; TextEndBattle
+	dw VoltorbBattleText ; TextEndBattle
+
+PowerPlantTrainerHeader6:
+	db 7 ; flag's bit
+	db 0 ; view range
+	dw $d7d3 ; flag's byte
+	dw VoltorbBattleText ; TextBeforeBattle
+	dw VoltorbBattleText ; TextAfterBattle
+	dw VoltorbBattleText ; TextEndBattle
+	dw VoltorbBattleText ; TextEndBattle
+
+PowerPlantTrainerHeader7:
+	db 8 ; flag's bit
+	db 0 ; view range
+	dw $d7d3 ; flag's byte
+	dw VoltorbBattleText ; TextBeforeBattle
+	dw VoltorbBattleText ; TextAfterBattle
+	dw VoltorbBattleText ; TextEndBattle
+	dw VoltorbBattleText ; TextEndBattle
+
+PowerPlantTrainerHeader8:
+	db 9 ; flag's bit
+	db 0 ; view range
+	dw $d7d3 ; flag's byte
+	dw ZapdosBattleText ; TextBeforeBattle
+	dw ZapdosBattleText ; TextAfterBattle
+	dw ZapdosBattleText ; TextEndBattle
+	dw ZapdosBattleText ; TextEndBattle
+
+	db $ff
 
 asm_234cc:
 	call $31cc
@@ -28849,13 +28933,13 @@ PowerPlantText9: ; 0x1e3a4
 	jr asm_234cc ; 0x1e3a8 $be
 ; 0x1e3aa
 
-UnnamedText_1e3aa: ; 0x1e3aa
-	TX_FAR _UnnamedText_1e3aa ; 0x8c5e2
+VoltorbBattleText: ; 0x1e3aa
+	TX_FAR _VoltorbBattleText ; 0x8c5e2
 	db $50
 ; 0x1e3af
 
-UnnamedText_1e3af: ; 0x1e3af
-	TX_FAR _UnnamedText_1e3af ; 0x8c5ea
+ZapdosBattleText: ; 0x1e3af
+	TX_FAR _ZapdosBattleText ; 0x8c5ea
 	db $8
 	ld a, ZAPDOS
 	call $13d0
@@ -81833,11 +81917,11 @@ _RockTunnel1Text8: ; 0x8c5b7
 	db "CERULEAN CITY -", $55
 	db "LAVENDER TOWN", $57
 
-_UnnamedText_1e3aa: ; 0x8c5e2
+_VoltorbBattleText: ; 0x8c5e2
 	db $0, "Bzzzt!", $57
 ; 0x8c5e2 + 8 bytes
 
-_UnnamedText_1e3af: ; 0x8c5ea
+_ZapdosBattleText: ; 0x8c5ea
 	db $0, "Gyaoo!@@"
 ; 0x8c5ea + 9 bytes
 
