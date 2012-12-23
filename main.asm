@@ -21487,7 +21487,7 @@ CeladonCityObject: ; 0x18022 (size=189)
 	db $9, $29, $0, CELADON_POKECENTER
 	db $1b, $c, $0, CELADON_GYM
 	db $13, $1c, $0, GAME_CORNER
-	db $13, $27, $0, CELADON_MART_5
+	db $13, $27, $0, CELADON_MART_5 ; beta warp! no longer used
 	db $13, $21, $0, CELADONPRIZE_ROOM
 	db $1b, $1f, $0, CELADON_DINER
 	db $1b, $23, $0, CELADON_HOUSE
