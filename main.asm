@@ -5183,12 +5183,12 @@ DecGradGBPalTable_02: ; 0x2121
 
 INCBIN "baserom.gbc",$2125,$2442 - $2125
 
-; XXX where is the pointer to this data?
-MartInventories: ; 2442
-	; first byte $FE, next byte # of items, last byte $FF
+; mart inventories are below
+; they are texts
+; first byte $FE, next byte # of items, last byte $FF
 
 ; Viridian
-ViridianMartText4: ; 2442 XXX confirm
+ViridianMartText6: ; 2442
 	db $FE,4,POKE_BALL,ANTIDOTE,PARLYZ_HEAL,BURN_HEAL,$FF
 
 ; Pewter
@@ -5287,111 +5287,8 @@ PokeCenterSignText: ; 0x24ef
 	TX_FAR _PokeCenterSignText
 	db "@"
 
-Route2Text1:
-Route4Text3:
-Route9Text10:
-Route12Text9:
-Route12Text10:
-Route15Text11:
-Route24Text8:
-Route25Text10:
-ViridianGymText11:
-ViridianForestText5:
-ViridianForestText6:
-ViridianForestText7:
-MtMoon1Text8:
-MtMoon1Text9:
-MtMoon1Text10:
-MtMoon1Text11:
-MtMoon1Text12:
-MtMoon1Text13:
-MtMoon3Text8:
-MtMoon3Text9:
-PowerPlantText10:
-PowerPlantText11:
-PowerPlantText12:
-PowerPlantText13:
-PowerPlantText14:
-SSAnne8Text10:
-SSAnne9Text6:
-SSAnne9Text9:
-SSAnne10Text9:
-SSAnne10Text10:
-SSAnne10Text11:
-VictoryRoad1Text3:
-VictoryRoad1Text4:
-PokemonTower3Text4:
-PokemonTower4Text4:
-PokemonTower4Text5:
-PokemonTower4Text6:
-PokemonTower5Text6:
-PokemonTower6Text4:
-PokemonTower6Text5:
-FuchsiaHouse2Text2:
-VictoryRoad2Text7:
-VictoryRoad2Text8:
-VictoryRoad2Text9:
-VictoryRoad2Text10:
-VictoryRoad3Text5:
-VictoryRoad3Text6:
-RocketHideout1Text6:
-RocketHideout1Text7:
-RocketHideout2Text2:
-RocketHideout2Text3:
-RocketHideout2Text4:
-RocketHideout2Text5:
-RocketHideout3Text3:
-RocketHideout3Text4:
-RocketHideout4Text5:
-RocketHideout4Text6:
-RocketHideout4Text7:
-RocketHideout4Text8:
-RocketHideout4Text9:
-SilphCo3Text4:
-SilphCo4Text5:
-SilphCo4Text6:
-SilphCo4Text7:
-SilphCo5Text6:
-SilphCo5Text7:
-SilphCo5Text8:
-SilphCo6Text9:
-SilphCo6Text10:
-SilphCo7Text10:
-SilphCo7Text11:
-SilphCo7Text12:
-Mansion1Text2:
-Mansion1Text3:
-Mansion2Text2:
-Mansion3Text3:
-Mansion3Text4:
-Mansion4Text3:
-Mansion4Text4:
-Mansion4Text5:
-Mansion4Text6:
-Mansion4Text8:
-SafariZoneEastText1:
-SafariZoneEastText2:
-SafariZoneEastText3:
-SafariZoneEastText4:
-SafariZoneNorthText1:
-SafariZoneNorthText2:
-SafariZoneWestText1:
-SafariZoneWestText2:
-SafariZoneWestText3:
-SafariZoneWestText4:
-SafariZoneCenterText1:
-UnknownDungeon2Text1:
-UnknownDungeon2Text2:
-UnknownDungeon2Text3:
-UnknownDungeon3Text2:
-UnknownDungeon3Text3:
-UnknownDungeon1Text1:
-UnknownDungeon1Text2:
-UnknownDungeon1Text3:
-SilphCo10Text4:
-SilphCo10Text5:
-SilphCo10Text6:
-Route2Text2: ; 24f4 0x424f4
+Predef5CText: ; 0x24f4
+; XXX better label (what does predef $5C do?)
 	db $08 ; asm
 	ld a, $5c
 	call Predef
@@ -21621,7 +21518,7 @@ CeladonCityObject: ; 0x18022 (size=189)
 	db $9, $29, $0, CELADON_POKECENTER
 	db $1b, $c, $0, CELADON_GYM
 	db $13, $1c, $0, GAME_CORNER
-	db $13, $27, $0, CELADON_MART_5
+	db $13, $27, $0, CELADON_MART_5 ; beta warp! no longer used
 	db $13, $21, $0, CELADONPRIZE_ROOM
 	db $1b, $1f, $0, CELADON_DINER
 	db $1b, $23, $0, CELADON_HOUSE
@@ -23038,7 +22935,7 @@ CeruleanCityScript0: ; 0x194c8
 	ld a, [$d75b]
 	bit 7, a
 	jr nz, .asm_194f7 ; 0x194cd $28
-	ld hl, $554f
+	ld hl, CeruleanCityCoords1
 	call ArePlayerCoordsInArray
 	jr nc, .asm_194f7 ; 0x194d5 $20
 	ld a, [$cd3d]
@@ -23060,7 +22957,7 @@ CeruleanCityScript0: ; 0x194c8
 	ld a, [$d75a]
 	bit 0, a
 	ret nz
-	ld hl, $5554
+	ld hl, CeruleanCityCoords2
 	call ArePlayerCoordsInArray
 	ret nc
 	ld a, [$d700]
@@ -23091,7 +22988,7 @@ CeruleanCityScript0: ; 0x194c8
 	ld [$cc4d], a
 	ld a, $15
 	call Predef
-	ld de, $5559
+	ld de, CeruleanCityMovement1
 	ld a, $1
 	ld [$ff00+$8c], a
 	call MoveSprite
@@ -23100,7 +22997,25 @@ CeruleanCityScript0: ; 0x194c8
 	ret
 ; 0x1954f
 
-INCBIN "baserom.gbc",$1954f,$19567 - $1954f
+CeruleanCityCoords1:
+	db $07,$1e
+	db $09,$1e
+	db $ff
+
+CeruleanCityCoords2:
+	db $06,$14
+	db $06,$15
+	db $ff
+
+CeruleanCityMovement1:
+	db 0,0,0,$ff
+
+CeruleanCityFunction1955d:
+	ld a,1
+	ld [$ff8c],a
+	xor a
+	ld [$ff8d],a
+	jp $34a6 ; face object
 
 CeruleanCityScript1: ; 0x19567
 	ld a, [$d730]
@@ -23138,7 +23053,7 @@ CeruleanCityScript1: ; 0x19567
 
 	xor a
 	ld [$ff00+$b4], a
-	call $555d
+	call CeruleanCityFunction1955d
 	ld a, $2
 	ld [$d60f], a
 	ret
@@ -23168,10 +23083,10 @@ CeruleanCityScript2: ; 0x195b1
 	ld a, [$d362]
 	cp $14
 	jr nz, .asm_195f0 ; 0x195e9 $5
-	ld de, $5608
+	ld de, CeruleanCityMovement4
 	jr .asm_195f3 ; 0x195ee $3
 .asm_195f0
-	ld de, $5600
+	ld de, CeruleanCityMovement3
 .asm_195f3
 	ld a, $1
 	ld [$ff00+$8c], a
@@ -23179,9 +23094,12 @@ CeruleanCityScript2: ; 0x195b1
 	ld a, $3
 	ld [$d60f], a
 	ret
-; 0x19600
 
-INCBIN "baserom.gbc",$19600,$19610 - $19600
+CeruleanCityMovement3:
+	db $80, $00, $00, $00, $00, $00, $00, $ff
+
+CeruleanCityMovement4:
+	db $c0, $00, $00, $00, $00, $00, $00, $ff
 
 CeruleanCityScript3: ; 0x19610
 	ld a, [$d730]
@@ -23587,7 +23505,7 @@ VermilionCityText3: ; 0x198b1
 	ld a, [$c109]
 	cp $c
 	jr z, .asm_07af3 ; 0x198be
-	ld hl, $58ff
+	ld hl, VermilionCityCoords1
 	call ArePlayerCoordsInArray
 	jr nc, .asm_57b73 ; 0x198c6
 .asm_07af3 ; 0x198c8
@@ -23618,7 +23536,10 @@ VermilionCityText3: ; 0x198b1
 .asm_79bd1 ; 0x198fc
 	jp TextScriptEnd
 
-INCBIN "baserom.gbc",$198ff,$19904 - $198ff
+VermilionCityCoords1:
+	db $1d,$13
+	db $1f,$13
+	db $ff
 
 SSAnneWelcomeText4: ; 0x19904
 	TX_FAR _SSAnneWelcomeText4
@@ -24169,8 +24090,6 @@ IndigoPlateauLobbyText2: ; 0x19c8b
 	TX_FAR _IndigoPlateauLobbyText1
 	db $50
 
-INCBIN "baserom.gbc",$19c8f,$19c8f - $19c8f
-
 IndigoPlateauLobbyText3: ; 0x19c8f
 	TX_FAR _IndigoPlateauLobbyText3
 	db $50
@@ -24215,7 +24134,7 @@ SilphCo4Script: ; 0x19d0b
 	call SilphCo4Script_Unknown19d21
 	call EnableAutoTextBoxDrawing
 	ld hl, SilphCo4TrainerHeaders
-	ld de, $5d9a
+	ld de, SilphCo4ScriptPointers
 	ld a, [$d645]
 	call $3160
 	ld [$d645], a
@@ -24223,10 +24142,89 @@ SilphCo4Script: ; 0x19d0b
 ; 0x19d21
 
 SilphCo4Script_Unknown19d21: ; 0x19d21
-INCBIN "baserom.gbc",$19d21,$7f
+	ld hl, $d126
+	bit 5, [hl]
+	res 5, [hl]
+	ret z
+	ld hl, SilphCo4Data19d58
+	call SilphCo4Function19d5d
+	call SilphCo4Function19d89
+	ld a, [$d82a]
+	bit 0, a
+	jr nz, .asm_19d48
+	push af
+	ld a, $54
+	ld [$d09f], a
+	ld bc, $0602
+	ld a, $17
+	call Predef
+	pop af
+.asm_19d48
+	bit 1, a
+	ret nz
+	ld a, $54
+	ld [$d09f], a
+	ld bc, $0406
+	ld a, $17
+	jp Predef
+
+SilphCo4Data19d58: ; 0x19d58
+	db $06, $02, $04, $06, $ff
+
+SilphCo4Function19d5d: ; 0x19d5d
+	push hl
+	ld hl, $d73f
+	ld a, [hli]
+	ld b, a
+	ld a, [hl]
+	ld c, a
+	xor a
+	ld [$ff00+$e0], a
+	pop hl
+.asm_19d69
+	ld a, [hli]
+	cp $ff
+	jr z, .asm_19d85 ; 0x19d6c $17
+	push hl
+	ld hl, $ffe0
+	inc [hl]
+	pop hl
+	cp b
+	jr z, .asm_19d7a ; 0x19d75 $3
+	inc hl
+	jr .asm_19d69 ; 0x19d78 $ef
+.asm_19d7a
+	ld a, [hli]
+	cp c
+	jr nz, .asm_19d69 ; 0x19d7c $eb
+	ld hl, $d73f
+	xor a
+	ld [hli], a
+	ld [hl], a
+	ret
+.asm_19d85
+	xor a
+	ld [$ff00+$e0], a
+	ret
+
+SilphCo4Function19d89: ; 0x19d89
+	ld hl, $d82a
+	ld a, [$ff00+$e0]
+	and a
+	ret z
+	cp $1
+	jr nz, .asm_19d97 ; 0x19d92 $3
+	set 0, [hl]
+	ret
+.asm_19d97
+	set 1, [hl]
+	ret
+
+SilphCo4ScriptPointers:
+	dw $3219, $324c, $3275
 
 SilphCo4Texts: ; 0x19da0
-	dw SilphCo4Text1, SilphCo4Text2, SilphCo4Text3, SilphCo4Text4, SilphCo4Text5, SilphCo4Text6, SilphCo4Text7
+	dw SilphCo4Text1, SilphCo4Text2, SilphCo4Text3, SilphCo4Text4, Predef5CText, Predef5CText, Predef5CText
 
 SilphCo4TrainerHeaders:
 SilphCo4TrainerHeader0: ; 0x19dae
@@ -24265,7 +24263,7 @@ SilphCo4Text1: ; 0x19dd3
 	db $08 ; asm
 	ld hl, $5de0
 	ld de, $5de5
-	call $622f
+	call Unnamed_622f
 	jp TextScriptEnd
 
 UnnamedText_19de0: ; 0x19de0
@@ -24388,7 +24386,7 @@ SilphCo5Script: ; 0x19f37
 	call Unnamed_19f4d
 	call EnableAutoTextBoxDrawing
 	ld hl, SilphCo5TrainerHeaders
-	ld de, $5fb6
+	ld de, SilphCo5ScriptPointers
 	ld a, [$d646]
 	call $3160
 	ld [$d646], a
@@ -24396,10 +24394,69 @@ SilphCo5Script: ; 0x19f37
 ; 0x19f4d
 
 Unnamed_19f4d: ; 0x19f4d
-INCBIN "baserom.gbc",$19f4d,$6f
+	ld hl, $d126
+	bit 5, [hl]
+	res 5, [hl]
+	ret z
+	ld hl, SilphCo5Coords
+	call $5d5d
+	call $5f9e
+	ld a, [$d82c]
+	bit 0, a
+	jr nz, .asm_19f74 ; 0x19f63 $f
+	push af
+	ld a, $5f
+	ld [$d09f], a
+	ld bc, $0203
+	ld a, $17
+	call Predef
+	pop af
+.asm_19f74
+	bit 1, a
+	jr nz, .asm_19f87 ; 0x19f76 $f
+	push af
+	ld a, $5f
+	ld [$d09f], a
+	ld bc, $0603
+	ld a, $17
+	call Predef
+	pop af
+.asm_19f87
+	bit 2, a
+	ret nz
+	ld a, $5f
+	ld [$d09f], a
+	ld bc, $0507
+	ld a, $17
+	jp Predef
+; 0x19f97
+
+SilphCo5Coords: ; coords?
+	db $02, $03, $06, $03, $05, $07, $ff
+
+SilphCo5Function19f9e:
+	ld hl, $d82c
+	ld a, [$ff00+$e0]
+	and a
+	ret z
+	cp $1
+	jr nz, .asm_19fac ; 0x19fa7 $3
+	set 0, [hl]
+	ret
+.asm_19fac
+	cp $2
+	jr nz, .asm_19fb3 ; 0x19fae $3
+	set 1, [hl]
+	ret
+.asm_19fb3
+	set 2, [hl]
+	ret
+
+SilphCo5ScriptPointers:
+	dw $3219, $324c, $3275
 
 SilphCo5Texts: ; 0x19fbc
-	dw SilphCo5Text1, SilphCo5Text2, SilphCo5Text3, SilphCo5Text4, SilphCo5Text5, SilphCo5Text6, SilphCo5Text7, SilphCo5Text8, SilphCo5Text9, SilphCo5Text10, SilphCo5Text11
+	dw SilphCo5Text1, SilphCo5Text2, SilphCo5Text3, SilphCo5Text4, SilphCo5Text5, Predef5CText, Predef5CText, Predef5CText, SilphCo5Text9, SilphCo5Text10, SilphCo5Text11
 
 SilphCo5TrainerHeaders:
 Silphco5TrainerHeader0: ; 0x19fd2
@@ -24448,7 +24505,7 @@ SilphCo5Text1: ; 0x1a003
 	db $08 ; asm
 	ld hl, $6010
 	ld de, $6015
-	call $622f
+	call Unnamed_622f
 	jp TextScriptEnd
 
 UnnamedText_1a010: ; 0x1a010
@@ -24608,7 +24665,7 @@ SilphCo6Script: ; 0x1a1a9
 	call Unnamed_1a1bf
 	call EnableAutoTextBoxDrawing
 	ld hl, SilphCo6TrainerHeaders
-	ld de, $61f0
+	ld de, SilphCo6ScriptPointers
 	ld a, [$d647]
 	call $3160
 	ld [$d647], a
@@ -24616,10 +24673,41 @@ SilphCo6Script: ; 0x1a1a9
 ; 0x1a1bf
 
 Unnamed_1a1bf: ; 0x1a1bf
-INCBIN "baserom.gbc",$1a1bf,$37
+	ld hl, $d126
+	bit 5, [hl]
+	res 5, [hl]
+	ret z
+	ld hl, SilphCo6Coords1
+	call $5d5d
+	call Unknown_1a1e6
+	ld a, [$d82e]
+	bit 7, a
+	ret nz
+	ld a, $5f
+	ld [$d09f], a
+	ld bc, $0602
+	ld a, $17
+	jp Predef
+
+SilphCo6Coords1:
+	db $06, $02
+	db $ff
+
+Unknown_1a1e6:
+	ld a, [$ff00+$e0]
+	and a
+	ret z
+	ld hl, $d82e
+	set 7, [hl]
+	ret
+
+SilphCo6ScriptPointers:
+	dw $3219
+	dw $324c
+	dw $3275
 
 SilphCo6Texts: ; 0x1a1f6
-	dw SilphCo6Text1, SilphCo6Text2, SilphCo6Text3, SilphCo6Text4, SilphCo6Text5, SilphCo6Text6, SilphCo6Text7, SilphCo6Text8, SilphCo6Text9, SilphCo6Text10
+	dw SilphCo6Text1, SilphCo6Text2, SilphCo6Text3, SilphCo6Text4, SilphCo6Text5, SilphCo6Text6, SilphCo6Text7, SilphCo6Text8, Predef5CText, Predef5CText
 
 SilphCo6TrainerHeaders:
 SilphCo6TrainerHeader0: ; 0x1a20a
@@ -24655,7 +24743,15 @@ SilphCo6TrainerHeader3: ; 0x1a222
 db $ff
 
 Unnamed_622f: ; 0x1a22f
-INCBIN "baserom.gbc",$1a22f,$1a23d - $1a22f
+	ld a, [$d838]
+	bit 7, a
+	jr nz, .asm_1a238 ; 0x1a234 $2
+	jr .asm_1a23a ; 0x1a236 $2
+.asm_1a238
+	ld h, d
+	ld l, e
+.asm_1a23a
+	jp PrintText
 
 SilphCo6Text1: ; 0x1a23d
 	db $08 ; asm
@@ -25329,7 +25425,7 @@ OaksLab_h: ; 0x1cb02 to 0x1cb0e (12 bytes) (bank=7) (id=40)
 OaksLabScript: ; 0x1cb0e
 	ld a, [$d74b]
 	bit 6, a
-	call nz, $5076
+	call nz, Unknown_1d076
 	ld a, $1
 	ld [$cf0c], a
 	xor a
@@ -25826,7 +25922,7 @@ OaksLabScript15: ; 0x1ceb0
 	ld a, $15
 	ld [$ff00+$8c], a
 	call DisplayTextID
-	call $502b
+	call Unknown_1d02b
 	ld a, $2a
 	ld [$cc4d], a
 	ld a, $15
@@ -25995,10 +26091,55 @@ Function1D00A: ; 0x1d00a
 	ld a, $1
 	ld [$cf96], a
 	jp $2bbb
-; 0x1d02b
 
+Unknown_1d02b:
+	ld a, $7c
+	ld [$ff00+$eb], a
+	ld a, $8
+	ld [$ff00+$ee], a
+	ld a, [$d361]
+	cp $3
+	jr nz, .asm_1d045 ; 0x1d038 $b
+	ld a, $4
+	ld [$cd37], a
+	ld a, $30
+	ld b, $b
+	jr .asm_1d068 ; 0x1d043 $23
+.asm_1d045
+	cp $1
+	jr nz, .asm_1d054 ; 0x1d047 $b
+	ld a, $2
+	ld [$cd37], a
+	ld a, $30
+	ld b, $9
+	jr .asm_1d068 ; 0x1d052 $14
+.asm_1d054
+	ld a, $3
+	ld [$cd37], a
+	ld b, $a
+	ld a, [$d362]
+	cp $4
+	jr nz, .asm_1d066 ; 0x1d060 $4
+	ld a, $40
+	jr .asm_1d068 ; 0x1d064 $2
+.asm_1d066
+	ld a, $20
+.asm_1d068
+	ld [$ff00+$ec], a
+	ld a, b
+	ld [$ff00+$ed], a
+	ld a, $1
+	ld [$cf13], a
+	call $32f9
+	ret
 
-INCBIN "baserom.gbc",$1d02b,$1d082-$1d02b
+Unknown_1d076:
+	ld hl, $50b8
+	ld a, l
+	ld [$d36c], a
+	ld a, h
+	ld [$d36d], a
+	ret
 
 OaksLabTexts: ; 0x1d082
 	dw OaksLabText1, OaksLabText2, OaksLabText3, OaksLabText4, OaksLabText5, OaksLabText6, OaksLabText7, OaksLabText8, OaksLabText9, OaksLabText10, OaksLabText11, OaksLabText12, OaksLabText13, OaksLabText14, OaksLabText15, OaksLabText16, OaksLabText17, OaksLabText18, OaksLabText19, OaksLabText20, OaksLabText21, OaksLabText22, OaksLabText23, OaksLabText24, OaksLabText25, OaksLabText26, OaksLabText27, OaksLabText28, OaksLabText29, OaksLabText30, OaksLabText31, OaksLabText32, OaksLabText33, OaksLabText34, OaksLabText35, OaksLabText36, OaksLabText37, OaksLabText38
@@ -26078,7 +26219,7 @@ asm_1d133: ; 0x1d133
 	ld [$cf13], a
 	ld a, [$d74b]
 	bit 2, a
-	jp nz, $522d
+	jp nz, Unknown_1d22d
 	bit 1, a
 	jr nz, asm_1d157 ; 0x1d147 $e
 	ld hl, OaksLabText39
@@ -26205,7 +26346,16 @@ OaksLabReceivedMonText: ; 0x1d227
 	db $11, $50
 ; 0x1d22d
 
-INCBIN "baserom.gbc",$1d22d,$1d243 - $1d22d
+Unknown_1d22d:
+	ld a, $5
+	ld [$ff00+$8c], a
+	ld a, $9
+	ld [$ff00+$8b], a
+	call $34fc
+	ld [hl], $0
+	ld hl, $5243
+	call PrintText
+	jp TextScriptEnd
 
 OaksLabLastMonText: ; 0x1d243
 	TX_FAR _OaksLabLastMonText
@@ -26571,13 +26721,30 @@ ViridianMart_h: ; 0x1d462 to 0x1d46e (12 bytes) (bank=7) (id=42)
 ViridianMartScript: ; 0x1d46e
 	call ViridianMartScript_Unknown1d47d
 	call EnableAutoTextBoxDrawing
-	ld hl, $5495
+	ld hl, ViridianMartScriptPointers
 	ld a, [$d60d]
 	jp $3d97
 ; 0x1d47d
 
 ViridianMartScript_Unknown1d47d: ; 0x1d47d
-INCBIN "baserom.gbc",$1d47d,$1e
+	ld a, [$d74e]
+	bit 0, a
+	jr nz, .asm_1d489 ; 0x1d482 $5
+	ld hl, $54e0
+	jr .asm_1d48c ; 0x1d487 $3
+.asm_1d489
+	ld hl, $54ea
+.asm_1d48c
+	ld a, l
+	ld [$d36c], a
+	ld a, h
+	ld [$d36d], a
+	ret
+
+ViridianMartScriptPointers:
+	dw ViridianMartScript0
+	dw ViridianMartScript1
+	dw ViridianMartScript2
 
 ViridianMartScript0: ; 0x1d49b
 	call $2429
@@ -26613,24 +26780,33 @@ ViridianMartScript1: ; 0x1d4c0
 	set 1, [hl]
 	ld a, $2
 	ld [$d60d], a
+	; fallthrough
+ViridianMartScript2:
 	ret
 ; 0x1d4e0
 
 ViridianMartTexts: ; 0x1d4e0
-	dw ViridianMartText1, ViridianMartText2, ViridianMartText3 ;, ViridianMartText4
-
-INCBIN "baserom.gbc",$1d4e6,$a
+	dw ViridianMartText1
+	dw ViridianMartText2
+	dw ViridianMartText3
+	dw ViridianMartText4
+	dw ViridianMartText5
+	dw ViridianMartText6
+	dw ViridianMartText2
+	dw ViridianMartText3
 
 ViridianMartText1: ; 0x1d4f0
 	TX_FAR _ViridianMartText1
 	db $50
 
-UnnamedText_1d4f5: ; 0x1d4f5
-	TX_FAR _UnnamedText_1d4f5
+ViridianMartText4: ; 0x1d4f5
+	TX_FAR _ViridianMartText4
 	db $50
-; 0x1d4f5 + 5 bytes
 
-INCBIN "baserom.gbc",$1d4fa,$6
+ViridianMartText5:
+	TX_FAR ViridianMartParcelQuestText
+	db $11
+	db $50
 
 ViridianMartText2: ; 0x1d500
 	TX_FAR _ViridianMartText2
@@ -27035,11 +27211,11 @@ BikeShopText1: ; 0x1d745
 	call $1922
 	call $2429
 	ld hl, $c3ca
-	ld de, $57f8
-	call $1955
+	ld de, BikeShopMenuText
+	call PlaceString
 	ld hl, $c3e4
-	ld de, $5807
-	call $1955
+	ld de, BikeShopMenuPrice
+	call PlaceString
 	ld hl, UnnamedText_1d815
 	call PrintText
 	call $3abe
@@ -27058,7 +27234,12 @@ BikeShopText1: ; 0x1d745
 .asm_99ef2 ; 0x1d7f5
 	jp TextScriptEnd
 
-INCBIN "baserom.gbc",$1d7f8,$1d810 - $1d7f8
+BikeShopMenuText:
+	db "BICYCLE", $4e
+	db "CANCEL@"
+
+BikeShopMenuPrice:
+	db "¥1000000@"
 
 UnnamedText_1d810: ; 0x1d810
 	TX_FAR _UnnamedText_1d810
@@ -27371,7 +27552,7 @@ LavenderHouse2Object: ; 0x1d9e6 (size=32)
 NameRater_h: ; 0x1da06 to 0x1da12 (12 bytes) (bank=7) (id=229)
 	db $08 ; tileset
 	db NAME_RATERS_HOUSE_HEIGHT, NAME_RATERS_HOUSE_WIDTH ; dimensions (y, x)
-	dw NameRaterBlocks, $5a54, NameRaterScript ; blocks, texts, scripts
+	dw NameRaterBlocks, NameRaterTexts, NameRaterScript ; blocks, texts, scripts
 	db $00 ; connections
 
 	dw NameRaterObject ; objects
@@ -27380,13 +27561,50 @@ NameRaterScript: ; 0x1da12
 	jp EnableAutoTextBoxDrawing
 ; 0x1da15
 
-INCBIN "baserom.gbc",$1da15,$41
+Unknown_1da15:
+	call PrintText
+	call $35ec
+	ld a, [$cc26]
+	and a
+	ret
+
+Unknown_1da20:
+	ld hl, $d273
+	ld bc, $000b
+	ld a, [$cf92]
+	call AddNTimes
+	ld de, $d158
+	ld c, $b
+	call .asm_1da47
+	jr c, .asm_1da52 ; 0x1da34 $1c
+	ld hl, $d177
+	ld bc, $002c
+	ld a, [$cf92]
+	call AddNTimes
+	ld de, $d359
+	ld c, $2
+.asm_1da47
+	ld a, [de]
+	cp [hl]
+	jr nz, .asm_1da52 ; 0x1da49 $7
+	inc hl
+	inc de
+	dec c
+	jr nz, .asm_1da47 ; 0x1da4e $f7
+	and a
+	ret
+.asm_1da52
+	scf
+	ret
+
+NameRaterTexts:
+	dw NameRaterText1
 
 NameRaterText1: ; 0x1da56
 	db $8
 	call $36f4
 	ld hl, UnnamedText_1dab3
-	call $5a15
+	call Unknown_1da15
 	jr nz, .asm_1daae ; 0x1da60 $4c
 	ld hl, UnnamedText_1dab8
 	call PrintText
@@ -27402,7 +27620,7 @@ NameRaterText1: ; 0x1da56
 	pop af
 	jr c, .asm_1daae ; 0x1da80 $2c
 	call $15b4
-	call $5a20
+	call Unknown_1da20
 	ld hl, UnnamedText_1dad1
 	jr c, .asm_1daa8 ; 0x1da8b $1b
 	ld hl, UnnamedText_1dabd
@@ -27506,8 +27724,6 @@ VermilionHouse1Text3: ; 0x1db1b
 	TX_FAR _VermilionHouse1Text3
 	db $50
 
-INCBIN "baserom.gbc", $1db1b + 5, $1db20 - ($1db1b + 5)
-
 VermilionHouse1Object: ; 0x1db20 (size=38)
 	db $a ; border tile
 
@@ -27545,7 +27761,7 @@ VermilionDockScript: ; 0x1db52
 	cp $1
 	ret nz
 	bit 2, [hl]
-	jp z, $5b9b
+	jp z, VermilionDock_1db9b
 	set 4, [hl]
 	call Delay3
 	ld hl, $d730
@@ -27574,7 +27790,169 @@ VermilionDockScript: ; 0x1db52
 	ret
 ; 0x1db9b
 
-INCBIN "baserom.gbc",$1db9b,$1dcbf - $1db9b
+VermilionDock_1db9b:
+	set 2, [hl]
+	ld a, $ff
+	ld [$cd6b], a
+	ld [$c0ee], a
+	call $23b1
+	ld c, $1f
+	ld a, $d6
+	call $23a1
+	ld b, $1e
+	ld hl, $5fc0
+	call Bankswitch
+	xor a
+	ld [$c102], a
+	ld c, $78
+	call DelayFrames
+	ld b, $9c
+	call $18d6
+	ld hl, $c468
+	ld bc, $0078
+	ld a, $14
+	call $36e0
+	ld a, $1
+	ld [$ff00+$ba], a
+	call Delay3
+	xor a
+	ld [$ff00+$ba], a
+	ld [$cd3d], a
+	ld [$ff00+$49], a
+	ld a, $58
+	ld [$cd3e], a
+	ld hl, $d526
+	ld c, [hl]
+	inc hl
+	ld b, [hl]
+	push bc
+	push hl
+	ld a, $a9
+	call $3740
+	ld a, $ff
+	ld [$cfcb], a
+	ld d, $0
+	ld e, $8
+.asm_1dbfa
+	ld hl, $0002
+	add hl, bc
+	ld a, l
+	ld [$d526], a
+	ld a, h
+	ld [$d527], a
+	push hl
+	push de
+	call $0ed3
+	call VermilionDock_1dc59
+	pop de
+	ld b, $10
+.asm_1dc11
+	call VermilionDock_1dc42
+	ld c, $8
+.asm_1dc16
+	call VermilionDock_1dc7c
+	dec c
+	jr nz, .asm_1dc16 ; 0x1dc1a $fa
+	inc d
+	dec b
+	jr nz, .asm_1dc11 ; 0x1dc1e $f1
+	pop bc
+	dec e
+	jr nz, .asm_1dbfa ; 0x1dc22 $d6
+	xor a
+	ld [$ff00+$4a], a
+	ld [$ff00+$b0], a
+	call VermilionDock_1dc94
+	ld a, $90
+	ld [$ff00+$b0], a
+	ld a, $1
+	ld [$cfcb], a
+	pop hl
+	pop bc
+	ld [hl], b
+	dec hl
+	ld [hl], c
+	call $0997
+	ld hl, $d3ae
+	dec [hl]
+	ret
+
+VermilionDock_1dc42:
+	push bc
+	push de
+	ld hl, $c311
+	ld a, [$cd3d]
+	swap a
+	ld c, a
+	ld de, $0004
+.asm_1dc50
+	inc [hl]
+	inc [hl]
+	add hl, de
+	dec c
+	jr nz, .asm_1dc50 ; 0x1dc54 $fa
+	pop de
+	pop bc
+	ret
+
+VermilionDock_1dc59:
+	ld a, [$cd3e]
+	sub $10
+	ld [$cd3e], a
+	ld c, a
+	ld b, $64
+	ld a, [$cd3d]
+	inc a
+	ld [$cd3d], a
+	ld a, $1
+	ld de, VermilionDockOAMBlock
+	call WriteOAMBlock
+	ret
+
+VermilionDockOAMBlock:
+	db $fc, $10
+	db $fd, $10
+	db $fe, $10
+	db $ff, $10
+
+VermilionDock_1dc7c:
+	ld h, d
+	ld l, $50
+	call $5c86
+	ld h, $0
+	ld l, $80
+.asm_1dc86
+	ld a, [$ff00+$44]
+	cp l
+	jr nz, .asm_1dc86 ; 0x1dc89 $fb
+	ld a, h
+	ld [$ff00+$43], a
+.asm_1dc8e
+	ld a, [$ff00+$44]
+	cp h
+	jr z, .asm_1dc8e ; 0x1dc91 $fb
+	ret
+
+VermilionDock_1dc94:
+	ld hl, $cc5b
+	ld bc, $00b4
+	ld a, $14
+	call $36e0
+	ld hl, $9940
+	ld de, $cc5b
+	ld bc, $000c
+	call CopyVideoData
+	ld hl, $c754
+	ld a, $d
+	ld [hli], a
+	ld [hli], a
+	ld [hli], a
+	ld [hl], a
+	ld a, $a9
+	call $23b1
+	ld c, $78
+	call DelayFrames
+	ret
 
 VermilionDockTexts: ; 0x1dcbf
 	db $c1, $5c
@@ -28433,21 +28811,105 @@ PowerPlant_h: ; 0x1e2ba to 0x1e2c6 (12 bytes) (bank=7) (id=83)
 
 PowerPlantScript: ; 0x1e2c6
 	call EnableAutoTextBoxDrawing
-	ld hl, $62fb
-	ld de, PowerPlantScript_Unknown1e2d9
+	ld hl, PowerPlantTrainerHeaders
+	ld de, PowerPlantScriptPointers
 	ld a, [$d663]
 	call $3160
 	ld [$d663], a
 	ret
 ; 0x1e2d9
 
-PowerPlantScript_Unknown1e2d9: ; 0x1e2d9
-INCBIN "baserom.gbc",$1e2d9,$6
+PowerPlantScriptPointers: ; 0x1e2d9
+	dw $3219
+	dw $324c
+	dw $3275
 
 PowerPlantTexts: ; 0x1e2df
-	dw PowerPlantText1, PowerPlantText2, PowerPlantText3, PowerPlantText4, PowerPlantText5, PowerPlantText6, PowerPlantText7, PowerPlantText8, PowerPlantText9, PowerPlantText10, PowerPlantText11, PowerPlantText12, PowerPlantText13, PowerPlantText14
+	dw PowerPlantText1, PowerPlantText2, PowerPlantText3, PowerPlantText4, PowerPlantText5, PowerPlantText6, PowerPlantText7, PowerPlantText8, PowerPlantText9, Predef5CText, Predef5CText, Predef5CText, Predef5CText, Predef5CText
 
-INCBIN "baserom.gbc",$1e2fb,$6d
+PowerPlantTrainerHeaders:
+PowerPlantTrainerHeader0:
+	db 1 ; flag's bit
+	db 0 ; view range
+	dw $d7d3 ; flag's byte
+	dw VoltorbBattleText ; TextBeforeBattle
+	dw VoltorbBattleText ; TextAfterBattle
+	dw VoltorbBattleText ; TextEndBattle
+	dw VoltorbBattleText ; TextEndBattle
+
+PowerPlantTrainerHeader1:
+	db 2 ; flag's bit
+	db 0 ; view range
+	dw $d7d3 ; flag's byte
+	dw VoltorbBattleText ; TextBeforeBattle
+	dw VoltorbBattleText ; TextAfterBattle
+	dw VoltorbBattleText ; TextEndBattle
+	dw VoltorbBattleText ; TextEndBattle
+
+PowerPlantTrainerHeader2:
+	db 3 ; flag's bit
+	db 0 ; view range
+	dw $d7d3 ; flag's byte
+	dw VoltorbBattleText ; TextBeforeBattle
+	dw VoltorbBattleText ; TextAfterBattle
+	dw VoltorbBattleText ; TextEndBattle
+	dw VoltorbBattleText ; TextEndBattle
+
+PowerPlantTrainerHeader3:
+	db 4 ; flag's bit
+	db 0 ; view range
+	dw $d7d3 ; flag's byte
+	dw VoltorbBattleText ; TextBeforeBattle
+	dw VoltorbBattleText ; TextAfterBattle
+	dw VoltorbBattleText ; TextEndBattle
+	dw VoltorbBattleText ; TextEndBattle
+
+PowerPlantTrainerHeader4:
+	db 5 ; flag's bit
+	db 0 ; view range
+	dw $d7d3 ; flag's byte
+	dw VoltorbBattleText ; TextBeforeBattle
+	dw VoltorbBattleText ; TextAfterBattle
+	dw VoltorbBattleText ; TextEndBattle
+	dw VoltorbBattleText ; TextEndBattle
+
+PowerPlantTrainerHeader5:
+	db 6 ; flag's bit
+	db 0 ; view range
+	dw $d7d3 ; flag's byte
+	dw VoltorbBattleText ; TextBeforeBattle
+	dw VoltorbBattleText ; TextAfterBattle
+	dw VoltorbBattleText ; TextEndBattle
+	dw VoltorbBattleText ; TextEndBattle
+
+PowerPlantTrainerHeader6:
+	db 7 ; flag's bit
+	db 0 ; view range
+	dw $d7d3 ; flag's byte
+	dw VoltorbBattleText ; TextBeforeBattle
+	dw VoltorbBattleText ; TextAfterBattle
+	dw VoltorbBattleText ; TextEndBattle
+	dw VoltorbBattleText ; TextEndBattle
+
+PowerPlantTrainerHeader7:
+	db 8 ; flag's bit
+	db 0 ; view range
+	dw $d7d3 ; flag's byte
+	dw VoltorbBattleText ; TextBeforeBattle
+	dw VoltorbBattleText ; TextAfterBattle
+	dw VoltorbBattleText ; TextEndBattle
+	dw VoltorbBattleText ; TextEndBattle
+
+PowerPlantTrainerHeader8:
+	db 9 ; flag's bit
+	db 0 ; view range
+	dw $d7d3 ; flag's byte
+	dw ZapdosBattleText ; TextBeforeBattle
+	dw ZapdosBattleText ; TextAfterBattle
+	dw ZapdosBattleText ; TextEndBattle
+	dw ZapdosBattleText ; TextEndBattle
+
+	db $ff
 
 asm_234cc:
 	call $31cc
@@ -28502,13 +28964,13 @@ PowerPlantText9: ; 0x1e3a4
 	jr asm_234cc ; 0x1e3a8 $be
 ; 0x1e3aa
 
-UnnamedText_1e3aa: ; 0x1e3aa
-	TX_FAR _UnnamedText_1e3aa ; 0x8c5e2
+VoltorbBattleText: ; 0x1e3aa
+	TX_FAR _VoltorbBattleText ; 0x8c5e2
 	db $50
 ; 0x1e3af
 
-UnnamedText_1e3af: ; 0x1e3af
-	TX_FAR _UnnamedText_1e3af ; 0x8c5ea
+ZapdosBattleText: ; 0x1e3af
+	TX_FAR _ZapdosBattleText ; 0x8c5ea
 	db $8
 	ld a, ZAPDOS
 	call $13d0
@@ -45705,7 +46167,7 @@ Mansion1Subscript1: ; 0x442c5
 INCBIN "baserom.gbc",$44304,$4432c - $44304
 
 Mansion1Texts: ; 0x4432c
-	dw Mansion1Text1, Mansion1Text2, Mansion1Text3, Mansion1Text4
+	dw Mansion1Text1, Predef5CText, Predef5CText, Mansion1Text4
 
 Mansion1TrainerHeaders:
 Mansion1TrainerHeader0: ; 0x44334
@@ -46181,7 +46643,7 @@ VictoryRoad3Script_Unknown44996: ; 0x44996
 INCBIN "baserom.gbc",$44996,$8e
 
 VictoryRoad3Texts: ; 0x44a24
-	dw VictoryRoad3Text1, VictoryRoad3Text2, VictoryRoad3Text3, VictoryRoad3Text4, VictoryRoad3Text5, VictoryRoad3Text6, BoulderText, BoulderText, BoulderText, BoulderText
+	dw VictoryRoad3Text1, VictoryRoad3Text2, VictoryRoad3Text3, VictoryRoad3Text4, Predef5CText, Predef5CText, BoulderText, BoulderText, BoulderText, BoulderText
 
 VictoryRoad3TrainerHeaders:
 VictoryRoad3TrainerHeader0: ; 0x44a38
@@ -46365,7 +46827,7 @@ Unknown_44be0: ; 0x44be0
 INCBIN "baserom.gbc",$44be0,$34
 
 RocketHideout1Texts: ; 0x44c14
-	dw RocketHideout1Text1, RocketHideout1Text2, RocketHideout1Text3, RocketHideout1Text4, RocketHideout1Text5, RocketHideout1Text6, RocketHideout1Text7
+	dw RocketHideout1Text1, RocketHideout1Text2, RocketHideout1Text3, RocketHideout1Text4, RocketHideout1Text5, Predef5CText, Predef5CText
 
 RocketHideout1TrainerHeaders:
 RocketHideout1TrainerHeader0: ; 0x44c22
@@ -46669,7 +47131,7 @@ INCBIN "baserom.gbc",$44e3a,$45023-$44e3a
 INCBIN "baserom.gbc",$45083,$450c7-$45083
 
 RocketHideout2Texts: ; 0x450c7
-	dw RocketHideout2Text1, RocketHideout2Text2, RocketHideout2Text3, RocketHideout2Text4, RocketHideout2Text5
+	dw RocketHideout2Text1, Predef5CText, Predef5CText, Predef5CText, Predef5CText
 
 RocketHideout2TrainerHeaders:
 RocketHideout2TrainerHeader0: ; 0x450d1
@@ -46756,7 +47218,7 @@ RocketHideout3Script_Unknown45238: ; 0x45238
 INCBIN "baserom.gbc",$45238,$c2
 
 RocketHideout3Texts: ; 0x452fa
-	dw RocketHideout3Text1, RocketHideout3Text2, RocketHideout3Text3, RocketHideout3Text4
+	dw RocketHideout3Text1, RocketHideout3Text2, Predef5CText, Predef5CText
 
 RocketHideout3TrainerHeaders:
 RocketHideout3TrainerHeader0: ; 0x45302
@@ -46871,7 +47333,7 @@ Unnamed_45473: ; 0x45473
 INCBIN "baserom.gbc",$45473,$8e
 
 RocketHideout4Texts: ; 0x45501
-	dw RocketHideout4Text1, RocketHideout4Text2, RocketHideout4Text3, RocketHideout4Text4, RocketHideout4Text5, RocketHideout4Text6, RocketHideout4Text7, RocketHideout4Text8, RocketHideout4Text9, RocketHideout4Text10
+	dw RocketHideout4Text1, RocketHideout4Text2, RocketHideout4Text3, RocketHideout4Text4, Predef5CText, Predef5CText, Predef5CText, Predef5CText, Predef5CText, RocketHideout4Text10
 
 RocketHideout4TrainerHeaders:
 RocketHideout4TrainerHeader0: ; 0x45515
@@ -47205,7 +47667,7 @@ SafariZoneEastScript: ; 0x4586b
 ; 0x4586e
 
 SafariZoneEastTexts: ; 0x4586e
-	dw SafariZoneEastText1, SafariZoneEastText2, SafariZoneEastText3, SafariZoneEastText4, SafariZoneEastText5, SafariZoneEastText6, SafariZoneEastText7
+	dw Predef5CText, Predef5CText, Predef5CText, Predef5CText, SafariZoneEastText5, SafariZoneEastText6, SafariZoneEastText7
 
 SafariZoneEastText5: ; 0x4587c
 	TX_FAR _SafariZoneEastText5
@@ -47263,7 +47725,7 @@ SafariZoneNorthScript: ; 0x459ab
 ; 0x459ae
 
 SafariZoneNorthTexts: ; 0x459ae
-	dw SafariZoneNorthText1, SafariZoneNorthText2, SafariZoneNorthText3, SafariZoneNorthText4, SafariZoneNorthText5, SafariZoneNorthText6, SafariZoneNorthText7
+	dw Predef5CText, Predef5CText, SafariZoneNorthText3, SafariZoneNorthText4, SafariZoneNorthText5, SafariZoneNorthText6, SafariZoneNorthText7
 
 SafariZoneNorthText3: ; 0x459bc
 	TX_FAR _SafariZoneNorthText3
@@ -47337,7 +47799,7 @@ SafariZoneCenterScript: ; 0x45bb2
 ; 0x45bb5
 
 SafariZoneCenterTexts: ; 0x45bb5
-	dw SafariZoneCenterText1, SafariZoneCenterText2, SafariZoneCenterText3
+	dw Predef5CText, SafariZoneCenterText2, SafariZoneCenterText3
 
 SafariZoneCenterText2: ; 0x45bbb
 	TX_FAR _SafariZoneCenterText2
@@ -47573,7 +48035,7 @@ UnknownDungeon2Script: ; 0x45e0b
 ; 0x45e0e
 
 UnknownDungeon2Texts: ; 0x45e0e
-	dw UnknownDungeon2Text1, UnknownDungeon2Text2, UnknownDungeon2Text3
+	dw Predef5CText, Predef5CText, Predef5CText
 
 UnknownDungeon2Object: ; 0x45e14 (size=73)
 	db $7d ; border tile
@@ -47626,7 +48088,7 @@ UnknownDungeon3Script_Unknown45f03: ; 0x45f03
 INCBIN "baserom.gbc",$45f03,$6
 
 UnknownDungeon3Texts: ; 0x45f09
-	dw UnknownDungeon3Text1, UnknownDungeon3Text2, UnknownDungeon3Text3
+	dw UnknownDungeon3Text1, Predef5CText, Predef5CText
 
 UnknownDungeon3TrainerHeaders:
 UnknownDungeon3TrainerHeader0: ; 0x45f0f
@@ -52151,7 +52613,7 @@ Unknown_59db: ; 0x59db
 INCBIN "baserom.gbc",$499db,$6
 
 MtMoon1Texts: ; 0x499e1
-	dw MtMoon1Text1, MtMoon1Text2, MtMoon1Text3, MtMoon1Text4, MtMoon1Text5, MtMoon1Text6, MtMoon1Text7, MtMoon1Text8, MtMoon1Text9, MtMoon1Text10, MtMoon1Text11, MtMoon1Text12, MtMoon1Text13, MtMoon1Text14
+	dw MtMoon1Text1, MtMoon1Text2, MtMoon1Text3, MtMoon1Text4, MtMoon1Text5, MtMoon1Text6, MtMoon1Text7, Predef5CText, Predef5CText, Predef5CText, Predef5CText, Predef5CText, Predef5CText, MtMoon1Text14
 
 MtMoon1TrainerHeaders:
 MtMoon1TrainerHeader0: ; 0x499fd
@@ -52448,7 +52910,7 @@ MtMoon3Script: ; 0x49d0b
 INCBIN "baserom.gbc",$49d37,$fd
 
 MtMoon3Texts: ; 0x49e34
-	dw MtMoon3Text1, MtMoon3Text2, MtMoon3Text3, MtMoon3Text4, MtMoon3Text5, MtMoon3Text6, MtMoon3Text7, MtMoon3Text8, MtMoon3Text9, Unnamed_49f99
+	dw MtMoon3Text1, MtMoon3Text2, MtMoon3Text3, MtMoon3Text4, MtMoon3Text5, MtMoon3Text6, MtMoon3Text7, Predef5CText, Predef5CText, Unnamed_49f99
 
 MtMoon3TrainerHeaders:
 MtMoon3TrainerHeader0: ; 0x49e48
@@ -52760,7 +53222,7 @@ SafariZoneWestScript: ; 0x4a1b5
 ; 0x4a1b8
 
 SafariZoneWestTexts: ; 0x4a1b8
-	dw SafariZoneWestText1, SafariZoneWestText2, SafariZoneWestText3, SafariZoneWestText4, SafariZoneWestText5, SafariZoneWestText6, SafariZoneWestText7, SafariZoneWestText8
+	dw Predef5CText, Predef5CText, Predef5CText, Predef5CText, SafariZoneWestText5, SafariZoneWestText6, SafariZoneWestText7, SafariZoneWestText8
 
 SafariZoneWestText5: ; 0x4a1c8
 	TX_FAR _SafariZoneWestText5
@@ -54462,7 +54924,7 @@ Route24Script: ; 0x513ad
 INCBIN "baserom.gbc",$513c0,$8b
 
 Route24Texts: ; 0x5144b
-	dw Route24Text1, Route24Text2, Route24Text3, Route24Text4, Route24Text5, Route24Text6, Route24Text7, Route24Text8
+	dw Route24Text1, Route24Text2, Route24Text3, Route24Text4, Route24Text5, Route24Text6, Route24Text7, Predef5CText
 
 Route24TrainerHeaders:
 Route24TrainerHeader0: ; 0x5145b
@@ -54745,7 +55207,7 @@ Unknown_515e1: ; 0x515e1
 INCBIN "baserom.gbc",$515e1,$47
 
 Route25Texts: ; 0x51628
-	dw Route25Text1, Route25Text2, Route25Text3, Route25Text4, Route25Text5, Route25Text6, Route25Text7, Route25Text8, Route25Text9, Route25Text10, Route25Text11
+	dw Route25Text1, Route25Text2, Route25Text3, Route25Text4, Route25Text5, Route25Text6, Route25Text7, Route25Text8, Route25Text9, Predef5CText, Route25Text11
 
 Route25TrainerHeaders:
 Route25TrainerHeader0: ; 0x5163e
@@ -55063,7 +55525,7 @@ VictoryRoad2Script_Unknown517c4: ; 0x517c4
 INCBIN "baserom.gbc",$517c4,$57
 
 VictoryRoad2Texts: ; 0x5181b
-	dw VictoryRoad2Text1, VictoryRoad2Text2, VictoryRoad2Text3, VictoryRoad2Text4, VictoryRoad2Text5, VictoryRoad2Text6, VictoryRoad2Text7, VictoryRoad2Text8, VictoryRoad2Text9, VictoryRoad2Text10, BoulderText, BoulderText, BoulderText
+	dw VictoryRoad2Text1, VictoryRoad2Text2, VictoryRoad2Text3, VictoryRoad2Text4, VictoryRoad2Text5, VictoryRoad2Text6, Predef5CText, Predef5CText, Predef5CText, Predef5CText, BoulderText, BoulderText, BoulderText
 
 VictoryRoad2TrainerHeaders:
 VictoryRoad2TrainerHeader0: ; 0x51835
@@ -55363,7 +55825,7 @@ SilphCo7Script_Unknown51b77: ; 0x5177
 INCBIN "baserom.gbc",$51b77,$1c8
 
 SilphCo7Texts: ; 0x51d3f
-	dw SilphCo7Text1, SilphCo7Text2, SilphCo7Text3, SilphCo7Text4, SilphCo7Text5, SilphCo7Text6, SilphCo7Text7, SilphCo7Text8, SilphCo7Text9, SilphCo7Text10, SilphCo7Text11, SilphCo7Text12, SilphCo7Text13, SilphCo7Text14, SilphCo7Text15
+	dw SilphCo7Text1, SilphCo7Text2, SilphCo7Text3, SilphCo7Text4, SilphCo7Text5, SilphCo7Text6, SilphCo7Text7, SilphCo7Text8, SilphCo7Text9, Predef5CText, Predef5CText, Predef5CText, SilphCo7Text13, SilphCo7Text14, SilphCo7Text15
 
 SilphCo7TrainerHeaders:
 SilphCo7TrainerHeader0: ; 0x51d5d
@@ -55708,7 +56170,7 @@ Mansion2Script_Unknown51fee: ; 0x51fee
 INCBIN "baserom.gbc",$51fee,$5204d - $51fee
 
 Mansion2Texts: ; 0x5204d
-	dw Mansion2Text1, Mansion2Text2, Mansion2Text3, Mansion2Text4, Mansion2Text5
+	dw Mansion2Text1, Predef5CText, Mansion2Text3, Mansion2Text4, Mansion2Text5
 
 Mansion2TrainerHeaders:
 Mansion2TrainerHeader0: ; 0x52057
@@ -55846,7 +56308,7 @@ Unnamed_52204: ; 0x52204
 INCBIN "baserom.gbc",$52204,$5228a - $52204
 
 Mansion3Texts: ; 0x5228a
-	dw Mansion3Text1, Mansion3Text2, Mansion3Text3, Mansion3Text4, Mansion3Text5, Mansion3Text6
+	dw Mansion3Text1, Mansion3Text2, Predef5CText, Predef5CText, Mansion3Text5, Mansion3Text6
 
 Mansion3TrainerHeaders:
 Mansion3TrainerHeader0: ; 0x52296
@@ -57069,7 +57531,7 @@ Route2Script: ; 0x554e3
 ; 0x554e6
 
 Route2Texts:
-	dw Route2Text1, Route2Text2, Route2Text3, Route2Text4
+	dw Predef5CText, Predef5CText, Route2Text3, Route2Text4
 
 Route2Text3: ; 0x554ee
 	TX_FAR _Route2Text3
@@ -57368,7 +57830,7 @@ Unknown_5566b: ; 0x5566b
 INCBIN "baserom.gbc",$5566b,$6
 
 Route4Texts: ; 0x55671
-	dw Route4Text1, Route4Text2, Route4Text3, PokeCenterSignText, Route4Text5, Route4Text6
+	dw Route4Text1, Route4Text2, Predef5CText, PokeCenterSignText, Route4Text5, Route4Text6
 
 Route4TrainerHeaders:
 Route4TrainerHeader0: ; 0x5567d
@@ -57441,7 +57903,7 @@ Unknown_556cf: ; 0x556cf
 INCBIN "baserom.gbc",$556cf,$6
 
 Route9Texts: ; 0x556d5
-	dw Route9Text1, Route9Text2, Route9Text3, Route9Text4, Route9Text5, Route9Text6, Route9Text7, Route9Text8, Route9Text9, Route9Text10, Route9Text11
+	dw Route9Text1, Route9Text2, Route9Text3, Route9Text4, Route9Text5, Route9Text6, Route9Text7, Route9Text8, Route9Text9, Predef5CText, Route9Text11
 
 Route9TrainerHeaders:
 Route9TrainerHeader0: ; 0x556eb
@@ -61670,7 +62132,7 @@ Route12Script: ; 0x595f3
 INCBIN "baserom.gbc",$59606,$6f
 
 Route12Texts: ; 0x59675
-	dw Route12Text1, Route12Text2, Route12Text3, Route12Text4, Route12Text5, Route12Text6, Route12Text7, Route12Text8, Route12Text9, Route12Text10, Route12Text11, Route12Text12, Route12Text13, Route12Text14
+	dw Route12Text1, Route12Text2, Route12Text3, Route12Text4, Route12Text5, Route12Text6, Route12Text7, Route12Text8, Predef5CText, Predef5CText, Route12Text11, Route12Text12, Route12Text13, Route12Text14
 
 Route12TrainerHeaders:
 Route12TrainerHeader0: ; 0x59691
@@ -61930,7 +62392,7 @@ Route15_Unknown597c1: ; 0x597c1
 INCBIN "baserom.gbc",$597c1,$6
 
 Route15Texts: ; 0x597c7
-	dw Route15Text1, Route15Text2, Route15Text3, Route15Text4, Route15Text5, Route15Text6, Route15Text7, Route15Text8, Route15Text9, Route15Text10, Route15Text11, Route15Text12
+	dw Route15Text1, Route15Text2, Route15Text3, Route15Text4, Route15Text5, Route15Text6, Route15Text7, Route15Text8, Route15Text9, Route15Text10, Predef5CText, Route15Text12
 
 Route15TrainerHeaders:
 Route15TrainerHeader0: ; 0x597df
@@ -63043,7 +63505,7 @@ SilphCo3Script_Unknown59f71: ; 0x59f71
 INCBIN "baserom.gbc",$59f71,$53
 
 SilphCo3Texts: ; 0x59fc4
-	dw SilphCo3Text1, SilphCo3Text2, SilphCo3Text3, SilphCo3Text4
+	dw SilphCo3Text1, SilphCo3Text2, SilphCo3Text3, Predef5CText
 
 SilphCo3TrainerHeaders:
 SilphCo3TrainerHeader0: ; 0x59fcc
@@ -63192,7 +63654,7 @@ SilphCo10Script_Unknown5a14f: ; 0x5a14f
 INCBIN "baserom.gbc",$5a14f,$37
 
 SilphCo10Texts: ; 0x5a186
-	dw SilphCo10Text1, SilphCo10Text2, SilphCo10Text3, SilphCo10Text4, SilphCo10Text5, SilphCo10Text6
+	dw SilphCo10Text1, SilphCo10Text2, SilphCo10Text3, Predef5CText, Predef5CText, Predef5CText
 
 SilphCo10TrainerHeaders:
 SilphCo10TrainerHeader0: ; 0x5a192
@@ -66569,7 +67031,7 @@ VictoryRoad1Script: ; 0x5da0a
 INCBIN "baserom.gbc",$5da27,$38
 
 VictoryRoad1Texts: ; 0x5da5f
-	dw VictoryRoad1Text1, VictoryRoad1Text2, VictoryRoad1Text3, VictoryRoad1Text4, BoulderText, BoulderText, BoulderText
+	dw VictoryRoad1Text1, VictoryRoad1Text2, Predef5CText, Predef5CText, BoulderText, BoulderText, BoulderText
 
 VictoryRoad1TrainerHeaders:
 VictoryRoad1TrainerHeader0: ; 0x5da6d
@@ -67073,7 +67535,7 @@ Unknown_606df: ; 0x606df
 INCBIN "baserom.gbc",$606df,$6
 
 PokemonTower3Texts: ; 0x606e5
-	dw PokemonTower3Text1, PokemonTower3Text2, PokemonTower3Text3, PokemonTower3Text4
+	dw PokemonTower3Text1, PokemonTower3Text2, PokemonTower3Text3, Predef5CText
 
 PokemonTower3TrainerHeaders:
 PokemonTower3TrainerHeader0: ; 0x606ed
@@ -67214,7 +67676,7 @@ PokemonTower4Script_Unknown60809: ; 0x60809
 INCBIN "baserom.gbc",$60809,$6
 
 PokemonTower4Texts: ; 0x6080f
-	dw PokemonTower4Text1, PokemonTower4Text2, PokemonTower4Text3, PokemonTower4Text4, PokemonTower4Text5, PokemonTower4Text6
+	dw PokemonTower4Text1, PokemonTower4Text2, PokemonTower4Text3, Predef5CText, Predef5CText, Predef5CText
 
 PokemonTower4TrainerHeaders:
 PokemonTower4TrainerHeader0: ; 0x6081b
@@ -67358,7 +67820,7 @@ PokemonTower5Script_Unknown60945: ; 0x60945
 INCBIN "baserom.gbc",$60945,$56
 
 PokemonTower5Texts: ; 0x6099b
-	dw PokemonTower5Text1, PokemonTower5Text2, PokemonTower5Text3, PokemonTower5Text4, PokemonTower5Text5, PokemonTower5Text6, PokemonTower5Text7
+	dw PokemonTower5Text1, PokemonTower5Text2, PokemonTower5Text3, PokemonTower5Text4, PokemonTower5Text5, Predef5CText, PokemonTower5Text7
 
 PokemonTower5TrainerHeaders:
 PokemonTower5TrainerHeader0: ; 0x609a9
@@ -67541,7 +68003,7 @@ PokemonTower6Script: ; 0x60aef
 INCBIN "baserom.gbc",$60b02,$af
 
 PokemonTower6Texts: ; 0x60bb1
-	dw PokemonTower6Text1, PokemonTower6Text2, PokemonTower6Text3, PokemonTower6Text4, PokemonTower6Text5, PokemonTower6Text6, PokemonTower6Text7
+	dw PokemonTower6Text1, PokemonTower6Text2, PokemonTower6Text3, Predef5CText, Predef5CText, PokemonTower6Text6, PokemonTower6Text7
 
 PokemonTower6TrainerHeaders:
 PokemonTower6TrainerHeader0: ; 0x60bbf
@@ -67964,7 +68426,7 @@ ViridianForestScript_Unknown61120: ; 0x61120
 INCBIN "baserom.gbc",$61120,$6
 
 ViridianForestTexts: ; 0x61126
-	dw ViridianForestText1, ViridianForestText2, ViridianForestText3, ViridianForestText4, ViridianForestText5, ViridianForestText6, ViridianForestText7, ViridianForestText8, ViridianForestText9, ViridianForestText10, ViridianForestText11, ViridianForestText12, ViridianForestText13, ViridianForestText14
+	dw ViridianForestText1, ViridianForestText2, ViridianForestText3, ViridianForestText4, Predef5CText, Predef5CText, Predef5CText, ViridianForestText8, ViridianForestText9, ViridianForestText10, ViridianForestText11, ViridianForestText12, ViridianForestText13, ViridianForestText14
 
 ViridianForestTrainerHeaders:
 ViridianForestTrainerHeader0: ; 0x61142
@@ -68842,7 +69304,7 @@ SSAnne8Script_Unknown61989: ; 0x61989
 INCBIN "baserom.gbc",$61989,$6
 
 SSAnne8Texts: ; 0x6198f
-	dw SSAnne8Text1, SSAnne8Text2, SSAnne8Text3, SSAnne8Text4, SSAnne8Text5, SSAnne8Text6, SSAnne8Text7, SSAnne8Text8, SSAnne8Text9, SSAnne8Text10, SSAnne8Text11
+	dw SSAnne8Text1, SSAnne8Text2, SSAnne8Text3, SSAnne8Text4, SSAnne8Text5, SSAnne8Text6, SSAnne8Text7, SSAnne8Text8, SSAnne8Text9, Predef5CText, SSAnne8Text11
 
 SSAnne8TrainerHeaders:
 SSAnne8TrainerHeader0: ; 0x619a5
@@ -69060,7 +69522,7 @@ SSAnne9Script_Unknown61b64: ; 0x61b64
 INCBIN "baserom.gbc",$61b64,$6
 
 SSAnne9Texts: ; 0x61b6a
-	dw SSAnne9Text1, SSAnne9Text2, SSAnne9Text3, SSAnne9Text4, SSAnne9Text5, SSAnne9Text6, SSAnne9Text7, SSAnne9Text8, SSAnne9Text9, SSAnne9Text10, SSAnne9Text11, SSAnne9Text12, SSAnne9Text13
+	dw SSAnne9Text1, SSAnne9Text2, SSAnne9Text3, SSAnne9Text4, SSAnne9Text5, Predef5CText, SSAnne9Text7, SSAnne9Text8, Predef5CText, SSAnne9Text10, SSAnne9Text11, SSAnne9Text12, SSAnne9Text13
 
 SSAnne9TrainerHeaders:
 SSAnne9TrainerHeader0: ; 0x61b84
@@ -69341,7 +69803,7 @@ SSAnne10Script_Unknown61d68: ; 0x61d68
 INCBIN "baserom.gbc",$61d68,$6
 
 SSAnne10Texts: ; 0x61d6e
-	dw SSAnne10Text1, SSAnne10Text2, SSAnne10Text3, SSAnne10Text4, SSAnne10Text5, SSAnne10Text6, SSAnne10Text7, SSAnne10Text8, SSAnne10Text9, SSAnne10Text10, SSAnne10Text11
+	dw SSAnne10Text1, SSAnne10Text2, SSAnne10Text3, SSAnne10Text4, SSAnne10Text5, SSAnne10Text6, SSAnne10Text7, SSAnne10Text8, Predef5CText, Predef5CText, Predef5CText
 
 SSAnne10TrainerHeaders:
 SSAnne10TrainerHeader0: ; 0x61d84
@@ -71662,7 +72124,7 @@ Unknown_74995:
 INCBIN "baserom.gbc",$74995,$749EC - $74995
 
 ViridianGymTexts: ; 0x749ec
-	dw ViridianGymText1, ViridianGymText2, ViridianGymText3, ViridianGymText4, ViridianGymText5, ViridianGymText6, ViridianGymText7, ViridianGymText8, ViridianGymText9, ViridianGymText10, ViridianGymText11, ViridianGymText12, ViridianGymText13, ViridianGymText14
+	dw ViridianGymText1, ViridianGymText2, ViridianGymText3, ViridianGymText4, ViridianGymText5, ViridianGymText6, ViridianGymText7, ViridianGymText8, ViridianGymText9, ViridianGymText10, Predef5CText, ViridianGymText12, ViridianGymText13, ViridianGymText14
 
 ViridianGymTrainerHeaders:
 ViridianGymTrainerHeader0: ; 0x74a08
@@ -72116,7 +72578,7 @@ UnknownDungeon1Script: ; 0x74d0c
 ; 0x74d0f
 
 UnknownDungeon1Texts: ; 0x74d0f
-	dw UnknownDungeon1Text1, UnknownDungeon1Text2, UnknownDungeon1Text3
+	dw Predef5CText, Predef5CText, Predef5CText
 
 UnknownDungeon1Object: ; 0x74d15 (size=97)
 	db $7d ; border tile
@@ -72462,7 +72924,7 @@ FuchsiaHouse2Script: ; 0x750b5
 ; 0x750b8
 
 FuchsiaHouse2Texts: ; 0x750b8
-	dw FuchsiaHouse2Text1, FuchsiaHouse2Text2, BoulderText, FuchsiaHouse2Text4, FuchsiaHouse2Text5
+	dw FuchsiaHouse2Text1, Predef5CText, BoulderText, FuchsiaHouse2Text4, FuchsiaHouse2Text5
 
 FuchsiaHouse2Text1: ; 0x750c2
 	db $08 ; asm
@@ -74462,7 +74924,7 @@ GaryScript4: ; 0x75fe4
 	ld a, $d6
 	ld [$cc4d], a
 	ld a, $15
-	call $3e6d
+	call Predef
 	ld a, $5
 	ld [$d64c], a
 	ret
@@ -82040,11 +82502,11 @@ _RockTunnel1Text8: ; 0x8c5b7
 	db "CERULEAN CITY -", $55
 	db "LAVENDER TOWN", $57
 
-_UnnamedText_1e3aa: ; 0x8c5e2
+_VoltorbBattleText: ; 0x8c5e2
 	db $0, "Bzzzt!", $57
 ; 0x8c5e2 + 8 bytes
 
-_UnnamedText_1e3af: ; 0x8c5ea
+_ZapdosBattleText: ; 0x8c5ea
 	db $0, "Gyaoo!@@"
 ; 0x8c5ea + 9 bytes
 
@@ -86190,7 +86652,7 @@ _ViridianMartText1: ; 0x95c36
 	db $0, "Okay! Say hi to", $4f
 	db "PROF.OAK for me!", $57
 
-_UnnamedText_1d4f5: ; 0x95c58
+_ViridianMartText4: ; 0x95c58
 	db $0, "Hey! You came from", $4f
 	db "PALLET TOWN?", $57
 ; 0x95c58 + 33 bytes
