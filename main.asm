@@ -71720,31 +71720,301 @@ IF _BLUE
 	INCBIN "gfx/blue/sgbborder.2bpp"
 ENDC
 
-INCBIN "baserom.gbc",$735e8,$7361e - $735e8
+LoadSAV: ; 735E8 $75e8
+;(if carry -> write
+;"the file data is destroyed")
+    call ClearScreen        ;$190f
+    call LoadFontTilePatterns
+    call LoadTextBoxTilePatterns
+    call LoadSAVCheckSum
+    jr c, .badsum
+    call LoadSAVCheckSum1
+    jr c, .badsum
+    call LoadSAVCheckSum2
+    jr c, .badsum
+    ld a,$02                ;Good Checksum
+    jr .goodsum             ;$761a
+.badsum        ;$7604
+    ld hl,$d730
+    push hl
+    set 6,[hl]
+    ld hl, FileDataDestroyedText
+    call PrintText
+    ld c,$64
+    call DelayFrames
+    pop hl
+    res 6,[hl]
+    ld a,$01                ;Bad Checksum
+.goodsum        ;$761a
+    ld [$d088],a            ;Checksum flag
+    ret
 
-UnnamedText_7361e: ; 0x7361e
-	TX_FAR _UnnamedText_7361e
+FileDataDestroyedText: ; 0x7361e
+	TX_FAR FileDataDestroyedText_
 	db $50
 ; 0x7361e + 5 bytes
+        
+LoadSAVCheckSum: ;$7623
+;load SRAM in RAM and check Checksum
+    ld a,$0a
+    ld [$0000],a
+    ld a,$01
+    ld [$6000],a
+    ld [$4000],a
+    ld hl,$a598   ;Hiro name loc.in SRAM
+    ld bc,$0f8b     ;but here checks the full SAV
+    call SAVCheckSum
+    ld c,a
+    ld a,[$b523]  ;SAV's Checksum
+    cp c
+    jp z,.next0\@
+    ld hl,$a598
+    ld bc,$0f8b
+    call SAVCheckSum
+    ld c,a
+    ld a,[$b523]  ;SAV's Checksum
+    cp c
+    jp nz,SAVBadCheckSum
+.next0\@        ;$7652
+    ld hl,$a598
+    ld de,$d158
+    ld bc,$000b
+    call CopyData
+    ld hl,$a5a3
+    ld de,$d2f7
+    ld bc,$0789
+    call CopyData
+    ld hl,$d367
+    set 7,[hl]
+    ld hl,$ad2c
+    ld de,$c100
+    ld bc,$0200
+    call CopyData
+    ld a,[$b522]
+    ld [$ffd7],a
+    ld hl,$b0c0
+    ld de,$da80
+    ld bc,$0462
+    call CopyData
+    and a
+    jp SAVGoodCheckSum
+LoadSAVCheckSum1: ;$7690
+    ld a,$0a
+    ld [$0000],a
+    ld a,$01
+    ld [$6000],a
+    ld [$4000],a
+    ld hl,$a598   ;Hiro name loc.in SRAM
+    ld bc,$0f8b     ;but here checks the full SAV
+    call SAVCheckSum
+    ld c,a
+    ld a,[$b523]  ;SAV's Checksum
+    cp c
+    jr nz,SAVBadCheckSum
+    ld hl,$b0c0
+    ld de,$da80
+    ld bc,$0462
+    call CopyData
+    and a
+    jp SAVGoodCheckSum
+LoadSAVCheckSum2: ;$76bd
+    ld a,$0a
+    ld [$0000],a
+    ld a,$01
+    ld [$6000],a
+    ld [$4000],a
+    ld hl,$a598   ;Hiro name loc.in SRAM
+    ld bc,$0f8b     ;but here checks the full SAV
+    call SAVCheckSum
+    ld c,a
+    ld a,[$b523]  ;SAV's Checksum
+    cp c
+    jp nz,SAVBadCheckSum
+    ld hl,$af2c
+    ld de,$d163
+    ld bc,$0194
+    call CopyData
+    ld hl,$a5a3
+    ld de,$d2f7
+    ld bc,$0026
+    call CopyData
+    and a
+    jp SAVGoodCheckSum
+SAVBadCheckSum: ;$76f7
+    scf
+SAVGoodCheckSum: ;$76f8
+    ld a,$00
+    ld [$6000],a
+    ld [$0000],a
+    ret
 
-INCBIN "baserom.gbc",$73623,$7377d - $73623
+    call LoadSAVCheckSum
+    call LoadSAVCheckSum1
+    jp LoadSAVCheckSum2
 
-UnnamedText_7377d: ; 0x7377d
-	TX_FAR _UnnamedText_7377d
+SaveSAV: ;$770a
+    ld b,1
+    ld hl,$5def ; LoadGameMenuInGame
+    call Bankswitch
+    ld hl,WouldYouLikeToSaveText
+    call SaveSAVConfirm
+    and a   ;|0 = Yes|1 = No|
+    ret nz
+    ld a,[$d088]
+    dec a
+    jr z,.save
+    call SAVCheckRandomID
+    jr z,.save
+    ld hl,OlderFileWillBeEreasedText
+    call SaveSAVConfirm
+    and a
+    ret nz
+.save        ;$772d
+    call SaveSAVtoSRAM      ;$7848
+    FuncCoord 1,13
+    ld hl,Coord
+    ld bc,$0412
+    call $18c4      ;clear area 4x12 starting at 13,1
+    FuncCoord 1,14
+    ld hl,Coord
+    ld de,NowSavingString
+    call $1955
+    ld c,$78
+    call DelayFrames
+    ld hl,GameSavedText
+    call PrintText
+    ld a,$b6        ;sound for saved game?
+    call $3740      ;sound-related
+    call $3748      ;sound-related
+    ld c,$1e
+    jp DelayFrames
+
+NowSavingString:
+    db "Now saving...@"
+
+SaveSAVConfirm:
+;$7768
+    call PrintText
+    FuncCoord 0, 7
+    ld hl,Coord
+    ld bc,$0801     ;arrow's coordinates |b = Y|c = X|
+    ld a,$14        ;one line shifting ($28 = 2 lines)
+    ld [$d125],a
+    call DisplayTextBoxID      ;handle Yes/No KeyPress
+    ld a,[$cc26]
+    ret
+
+WouldYouLikeToSaveText: ; 0x7377d
+	TX_FAR WouldYouLikeToSaveText_
 	db $50
 ; 0x7377d + 5 bytes
 
-UnnamedText_73782: ; 0x73782
-	TX_FAR _UnnamedText_73782
+GameSavedText: ; 0x73782
+	TX_FAR GameSavedText_
 	db $50
 ; 0x73782 + 5 bytes
 
-UnnamedText_73787: ; 0x73787
-	TX_FAR _UnnamedText_73787
+OlderFileWillBeEreasedText: ; 0x73787
+	TX_FAR OlderFileWillBeEreasedText_
 	db $50
 ; 0x73787 + 5 bytes
 
-INCBIN "baserom.gbc",$7378c,$73909 - $7378c
+SaveSAVtoSRAM0: ;$778c
+    ld a,$0a
+    ld [$0000],a
+    ld a,$01
+    ld [$6000],a
+    ld [$4000],a
+    ld hl,$d158     ;player name
+    ld de,$a598
+    ld bc,$000b
+    call CopyData
+    ld hl,$d2f7     ;pokedex and much more..
+    ld de,$a5a3
+    ld bc,$0789
+    call CopyData
+    ld hl,$c100     ;OAM?
+    ld de,$ad2c
+    ld bc,$0200
+    call CopyData
+    ld hl,$da80
+    ld de,$b0c0
+    ld bc,$0462
+    call CopyData
+    ld a,[$ffd7]
+    ld [$b522],a
+    ld hl,$a598
+    ld bc,$0f8b
+    call SAVCheckSum
+    ld [$b523],a
+    xor a
+    ld [$6000],a
+    ld [$0000],a
+    ret
+SaveSAVtoSRAM1: ;$77e2
+;stored pokemon
+    ld a,$0a
+    ld [$0000],a
+    ld a,$01
+    ld [$6000],a
+    ld [$4000],a
+    ld hl,$da80
+    ld de,$b0c0
+    ld bc,$0462
+    call CopyData
+    ld hl,$a598
+    ld bc,$0f8b
+    call SAVCheckSum
+    ld [$b523],a
+    xor a
+    ld [$6000],a
+    ld [$0000],a
+    ret
+SaveSAVtoSRAM2: ;$780f
+    ld a,$0a
+    ld [$0000],a
+    ld a,$01
+    ld [$6000],a
+    ld [$4000],a
+    ld hl,$d163
+    ld de,$af2c
+    ld bc,$0194
+    call CopyData
+    ld hl,$d2f7     ;pokedex only
+    ld de,$a5a3
+    ld bc,$0026
+    call CopyData
+    ld hl,$a598
+    ld bc,$0f8b
+    call SAVCheckSum
+    ld [$b523],a
+    xor a
+    ld [$6000],a
+    ld [$0000],a
+    ret
+SaveSAVtoSRAM: ;$7848
+    ld a,$02
+    ld [$d088],a
+    call SaveSAVtoSRAM0     ;$778c
+    call SaveSAVtoSRAM1     ;$77e2
+    jp SaveSAVtoSRAM2       ;$780f
+
+SAVCheckSum: ;$7856
+;Check Sum (result[1 byte] is complemented)
+    ld d,$00
+.loop         ;$7858
+    ld a,[hli]
+    add d
+    ld d,a
+    dec bc
+    ld a,b
+    or c
+    jr nz,.loop
+    ld a,d
+    cpl
+    ret
+
+INCBIN "baserom.gbc",$73863,$73909 - $73863
 
 UnnamedText_73909: ; 0x73909
 	TX_FAR _UnnamedText_73909
@@ -71758,7 +72028,113 @@ UnnamedText_739d4: ; 0x739d4
 	db $50
 ; 0x739d4 + 5 bytes
 
-INCBIN "baserom.gbc",$739d9,452
+INCBIN "baserom.gbc",$739d9,$73ad1-$739d9
+
+SAVCheckRandomID: ;$7ad1
+;checks if Sav file is the same
+;by checking player's name 1st
+;letter ($a598) and the two random
+;numbers generated at game beginning
+;(which are stored at $d359-d35a)
+    ld a,$0a
+    ld [$0000],a
+    ld a,$01
+    ld [$6000],a
+    ld [$4000],a
+    ld a,[$a598]
+    and a
+    jr z,.next0\@
+    ld hl,$a598
+    ld bc,$0f8b
+    call SAVCheckSum
+    ld c,a
+    ld a,[$b523]
+    cp c
+    jr nz,.next0\@
+    ld hl,$a605
+    ld a,[hli]
+    ld h,[hl]
+    ld l,a
+    ld a,[$d359]
+    cp l
+    jr nz,.next0\@
+    ld a,[$d35a]
+    cp h
+.next0\@        ;$7b04
+    ld a,$00
+    ld [$6000],a
+    ld [$0000],a
+    ret
+
+Func_7b0d: ;$7b0d
+    ld a,[$d5a2]
+    dec a
+    cp a,$32
+    jr nc,.next0\@
+    ld hl,$a598
+    ld bc,$0060
+    call AddNTimes
+    ld e,l
+    ld d,h
+    ld hl,$cc5b
+    ld bc,$0060
+    jr CopyToSRAM0
+.next0\@        ;$7b28
+    ld hl,$a5f8
+    ld de,$a598
+    ld bc,$1260
+    call CopyToSRAM0
+    ld hl,$cc5b
+    ld de,$b7f8
+    ld bc,$0060
+    jr CopyToSRAM0
+
+Func_7b3f: ;$7b3f
+    ld hl,$a598
+    ld bc,$0060
+    ld a,[$cd3d]
+    call AddNTimes
+    ld de,$cc5b
+    ld bc,$0060
+CopyToSRAM0: ;$7b51
+    ld a,$0a
+    ld [$0000],a
+    ld a,$01
+    ld [$6000],a
+    xor a
+    ld [$4000],a
+    call CopyData
+    xor a
+    ld [$6000],a
+    ld [$0000],a
+    ret
+
+Func_7b6a: ;$7b6a
+    ld a,$0a
+    ld [$0000],a
+    ld a,$01
+    ld [$6000],a
+    xor a
+    call PadSRAM_FF
+    ld a,$01
+    call PadSRAM_FF
+    ld a,$02
+    call PadSRAM_FF
+    ld a,$03
+    call PadSRAM_FF
+    xor a
+    ld [$6000],a
+    ld [$0000],a
+    ret
+
+PadSRAM_FF: ;7b8f
+    ld [$4000],a
+    ld hl,$A000
+    ld bc,$2000
+    ld a,$FF
+    jp $36E0
+
+;$7b9c = END OF BANK
 
 SECTION "bank1D",DATA,BANK[$1D]
 
@@ -85822,22 +86198,22 @@ _Route25Text11: ; 0x945d3
 	db $0, "SEA COTTAGE", $4f
 	db "BILL lives here!", $57
 
-_UnnamedText_7361e: ; 0x945f1
+FileDataDestroyedText_: ; 0x945f1
 	db $0, "The file data is", $4f
 	db "destroyed!", $58
 ; 0x945f1 + 29 bytes
 
-_UnnamedText_7377d: ; 0x9460e
+WouldYouLikeToSaveText_: ; 0x9460e
 	db $0, "Would you like to", $4f
 	db "SAVE the game?", $57
 ; 0x9460e + 34 bytes
 
-_UnnamedText_73782: ; 0x94630
+GameSavedText_: ; 0x94630
 	db $0, $52, " saved", $4f
 	db "the game!", $57
 ; 0x94630 + 19 bytes
 
-_UnnamedText_73787: ; 0x94643
+OlderFileWillBeEreasedText_: ; 0x94643
 	db $0, "The older file", $4f
 	db "will be erased to", $55
 	db "save. Okay?", $57
