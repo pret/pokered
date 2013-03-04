@@ -36556,7 +36556,265 @@ CryData:
 	db $25, $44, $20; Weepinbell
 	db $25, $66, $CC; Victreebel
 
-INCBIN "baserom.gbc",$39680,$39884 - $39680
+INCBIN "baserom.gbc",$39680,$39719 - $39680
+
+; creates a set of moves that may be used and returns its address in hl
+; unused slots are filled with 0, all used slots may be chosen with equal probability
+AIEnemyTrainerChooseMoves: ; 5719 0x39719
+	ld a, $a
+	ld hl, $cee9  ; init temporary move selection array. Only the moves with the lowest numbers are chosen in the end
+	ld [hli], a   ; move 1
+	ld [hli], a   ; move 2
+	ld [hli], a   ; move 3
+	ld [hl], a    ; move 4
+	ld a, [W_ENEMYDISABLEDMOVE] ; forbid disabled move (if any)
+	swap a
+	and $f
+	jr z, .noMoveDisabled
+	ld hl, $cee9
+	dec a
+	ld c, a
+	ld b, $0
+	add hl, bc    ; advance pointer to forbidden move
+	ld [hl], $50  ; forbid (highly discourage) disabled move
+.noMoveDisabled
+	ld hl, TrainerClassMoveChoiceModifications ; 589B
+	ld a, [W_TRAINERCLASS]
+	ld b, a
+.loopTrainerClasses
+	dec b
+	jr z, .readTrainerClassData
+.loopTrainerClassData
+	ld a, [hli]
+	and a
+	jr nz, .loopTrainerClassData
+	jr .loopTrainerClasses
+.readTrainerClassData
+	ld a, [hl]
+	and a
+	jp z, .useOriginalMoveSet
+	push hl
+.nextMoveChoiceModification
+	pop hl
+	ld a, [hli]
+	and a
+	jr z, .loopFindMinimumEntries
+	push hl
+	ld hl, AIMoveChoiceModificationFunctionPointers ; $57a3
+	dec a
+	add a
+	ld c, a
+	ld b, $0
+	add hl, bc    ; skip to pointer
+	ld a, [hli]   ; read pointer into hl
+	ld h, [hl]
+	ld l, a
+	ld de, .nextMoveChoiceModification  ; set return address
+	push de
+	jp [hl]       ; execute modification function
+.loopFindMinimumEntries ; all entries will be decremented sequentially until one of them is zero
+	ld hl, $cee9  ; temp move selection array
+	ld de, $cfed  ; enemy moves
+	ld c, $4
+.loopDecrementEntries
+	ld a, [de]
+	inc de
+	and a
+	jr z, .loopFindMinimumEntries
+	dec [hl]
+	jr z, .minimumEntriesFound
+	inc hl
+	dec c
+	jr z, .loopFindMinimumEntries
+	jr .loopDecrementEntries
+.minimumEntriesFound
+	ld a, c
+.loopUndoPartialIteration ; undo last (partial) loop iteration
+	inc [hl]
+	dec hl
+	inc a
+	cp $5
+	jr nz, .loopUndoPartialIteration
+	ld hl, $cee9  ; temp move selection array
+	ld de, $cfed  ; enemy moves
+	ld c, $4
+.filterMinimalEntries ; all minimal entries now have value 1. All other slots will be disabled (move set to 0)
+	ld a, [de]
+	and a
+	jr nz, .moveExisting ; 0x3978a $1
+	ld [hl], a
+.moveExisting
+	ld a, [hl]
+	dec a
+	jr z, .slotWithMinimalValue
+	xor a
+	ld [hli], a     ; disable move slot
+	jr .next
+.slotWithMinimalValue
+	ld a, [de]
+	ld [hli], a     ; enable move slot
+.next
+	inc de
+	dec c
+	jr nz, .filterMinimalEntries
+	ld hl, $cee9    ; use created temporary array as move set
+	ret
+.useOriginalMoveSet
+	ld hl, $cfed    ; use original move set
+	ret
+
+AIMoveChoiceModificationFunctionPointers: ; 57a3
+dw AIMoveChoiceModification1
+dw AIMoveChoiceModification2
+dw AIMoveChoiceModification3
+dw AIMoveChoiceModification4 ; unused, does nothing
+
+; discourages moves that cause no damage but only a status ailment if player's mon already has one
+AIMoveChoiceModification1: ; 57ab
+	ld a, [W_PLAYERMONSTATUS]
+	and a
+	ret z       ; return if no status ailment on player's mon
+	ld hl, $cee8  ; temp move selection array (-1 byte offest)
+	ld de, $cfed  ; enemy moves
+	ld b, $5
+.nextMove
+	dec b
+	ret z         ; processed all 4 moves
+	inc hl
+	ld a, [de]
+	and a
+	ret z         ; no more moves in move set
+	inc de
+	call ReadMove
+	ld a, [W_ENEMYMOVEPOWER]
+	and a
+	jr nz, .nextMove
+	ld a, [W_ENEMYMOVEEFFECT]
+	push hl
+	push de
+	push bc
+	ld hl, StatusAilmentMoveEffects
+	ld de, $0001
+	call IsInArray
+	pop bc
+	pop de
+	pop hl
+	jr nc, .nextMove
+	ld a, [hl]
+	add $5       ; discourage move
+	ld [hl], a
+	jr .nextMove
+
+StatusAilmentMoveEffects ; 57e2
+db $01 ; some sleep effect?
+db SLEEP_EFFECT
+db POISON_EFFECT
+db PARALYZE_EFFECT
+db $FF
+
+; slightly encourage moves with specific effects
+AIMoveChoiceModification2: ; 57e7
+	ld a, [$ccd5]
+	cp $1
+	ret nz
+	ld hl, $cee8  ; temp move selection array (-1 byte offest)
+	ld de, $cfed  ; enemy moves
+	ld b, $5
+.nextMove
+	dec b
+	ret z         ; processed all 4 moves
+	inc hl
+	ld a, [de]
+	and a
+	ret z         ; no more moves in move set
+	inc de
+	call ReadMove
+	ld a, [W_ENEMYMOVEEFFECT]
+	cp ATTACK_UP1_EFFECT
+	jr c, .nextMove
+	cp BIDE_EFFECT
+	jr c, .preferMove
+	cp ATTACK_UP2_EFFECT
+	jr c, .nextMove
+	cp POISON_EFFECT
+	jr c, .preferMove
+	jr .nextMove
+.preferMove
+	dec [hl]       ; slighly encourage this move
+	jr .nextMove
+
+; encourages moves that are effective against the player's mon
+AIMoveChoiceModification3: ; 5817
+	ld hl, $cee8  ; temp move selection array (-1 byte offest)
+	ld de, $cfed  ; enemy moves
+	ld b, $5
+.nextMove
+	dec b
+	ret z         ; processed all 4 moves
+	inc hl
+	ld a, [de]
+	and a
+	ret z         ; no more moves in move set
+	inc de
+	call ReadMove
+	push hl
+	push bc
+	push de
+	ld hl, AIGetTypeEffectiveness
+	ld b, BANK(AIGetTypeEffectiveness)
+	call Bankswitch
+	pop de
+	pop bc
+	pop hl
+	ld a, [$d11e]
+	cp $10
+	jr z, .nextMove
+	jr c, .notEffectiveMove
+	dec [hl]       ; slighly encourage this move
+	jr .nextMove
+.notEffectiveMove  ; discourages non-effective moves if better moves are available
+	push hl
+	push de
+	push bc
+	ld a, [W_ENEMYMOVETYPE]
+	ld d, a
+	ld hl, $cfed  ; enemy moves
+	ld b, $5
+	ld c, $0
+.loopMoves
+	dec b
+	jr z, .done
+	ld a, [hli]
+	and a
+	jr z, .done
+	call ReadMove
+	ld a, [W_ENEMYMOVEEFFECT]
+	cp SUPER_FANG_EFFECT
+	jr z, .betterMoveFound      ; Super Fang is considered to be a better move
+	cp SPECIAL_DAMAGE_EFFECT
+	jr z, .betterMoveFound      ; any special damage moves are considered to be better moves
+	cp FLY_EFFECT
+	jr z, .betterMoveFound      ; Fly is considered to be a better move
+	ld a, [W_ENEMYMOVETYPE]
+	cp d
+	jr z, .loopMoves
+	ld a, [W_ENEMYMOVEPOWER]
+	and a
+	jr nz, .betterMoveFound      ; damaging moves of a different type are considered to be better moves
+	jr .loopMoves
+.betterMoveFound
+	ld c, a
+.done
+	ld a, c
+	pop bc
+	pop de
+	pop hl
+	and a
+	jr z, .nextMove
+	inc [hl]       ; slighly discourage this move
+	jr .nextMove
+AIMoveChoiceModification4: ; 5883
+	ret
 
 ReadMove: ; 5884
 	push hl
@@ -36573,9 +36831,61 @@ ReadMove: ; 5884
 	pop hl
 	ret
 
+; move choice modifiaction methods that are applied for each trainer class
+; 0 is sentinel value
+TrainerClassMoveChoiceModifications: ; 589B
+db 0      ; YOUNGSTER
+db 1,0    ; BUG CATCHER
+db 1,0    ; LASS
+db 1,3,0  ; SAILOR
+db 1,0    ; JR__TRAINER_M
+db 1,0    ; JR__TRAINER_F
+db 1,2,3,0; POKEMANIAC
+db 1,2,0  ; SUPER_NERD
+db 1,0    ; HIKER
+db 1,0    ; BIKER
+db 1,3,0  ; BURGLAR
+db 1,0    ; ENGINEER
+db 1,2,0  ; JUGGLER_X
+db 1,3,0  ; FISHER
+db 1,3,0  ; SWIMMER
+db 0      ; CUE_BALL
+db 1,0    ; GAMBLER
+db 1,3,0  ; BEAUTY
+db 1,2,0  ; PSYCHIC_TR
+db 1,3,0  ; ROCKER
+db 1,0    ; JUGGLER
+db 1,0    ; TAMER
+db 1,0    ; BIRD_KEEPER
+db 1,0    ; BLACKBELT
+db 1,0    ; SONY1
+db 1,3,0  ; PROF_OAK
+db 1,2,0  ; CHIEF
+db 1,2,0  ; SCIENTIST
+db 1,3,0  ; GIOVANNI
+db 1,0    ; ROCKET
+db 1,3,0  ; COOLTRAINER_M
+db 1,3,0  ; COOLTRAINER_F
+db 1,0    ; BRUNO
+db 1,0    ; BROCK
+db 1,3,0  ; MISTY
+db 1,3,0  ; LT__SURGE
+db 1,3,0  ; ERIKA
+db 1,3,0  ; KOGA
+db 1,3,0  ; BLAINE
+db 1,3,0  ; SABRINA
+db 1,2,0  ; GENTLEMAN
+db 1,3,0  ; SONY2
+db 1,3,0  ; SONY3
+db 1,2,3,0; LORELEI
+db 1,0    ; CHANNELER
+db 1,0    ; AGATHA
+db 1,3,0  ; LANCE
+
+
 ; trainer data: from 5C53 to 652E
 
-INCBIN "baserom.gbc",$3989B,$39914 - $3989B
+; INCBIN "baserom.gbc",$3989e,$39914 - $3989e
 
 ; trainer pic pointers and base money.
 dw YoungsterPic
@@ -40808,7 +41118,99 @@ UnnamedText_3d430: ; 0x3d430
 	db $50
 ; 0x3d430 + 5 bytes
 
-INCBIN "baserom.gbc",$3d435,$274
+INCBIN "baserom.gbc",$3d435,$3d564 - $3d435
+
+SelectEnemyMove: ; 5564 0x3d564
+	ld a, [W_ISLINKBATTLE]
+	sub $4
+	jr nz, .noLinkBattle
+	call $3719
+	call $5605
+	call $3725
+	ld a, [$cc3e]
+	cp $e
+	jp z, $5601
+	cp $d
+	jr z, .unableToMove
+	cp $4
+	ret nc
+	ld [$cce2], a
+	ld c, a
+	ld hl, $cfed
+	ld b, $0
+	add hl, bc
+	ld a, [hl]
+	jr .done
+.noLinkBattle
+	ld a, [W_ENEMYBATTSTATUS2]
+	and $60     ; need to recharge or using rage
+	ret nz
+	ld hl, W_ENEMYBATTSTATUS1
+	ld a, [hl]
+	and $12     ; using multi-turn move or bide
+	ret nz
+	ld a, [W_ENEMYMONSTATUS]
+	and SLP | FRZ ; sleeping or frozen
+	ret nz
+	ld a, [W_ENEMYBATTSTATUS1]
+	and $21      ; using fly/dig or thrash/petal dance
+	ret nz
+	ld a, [W_PLAYERBATTSTATUS1]
+	bit 5, a    ; caught in player's multi-turn move (e.g. wrap)
+	jr z, .notCaughtInWrap
+.unableToMove
+	ld a, $ff
+	jr .done
+.notCaughtInWrap
+	ld hl, $cfee ; 2nd enemy move
+	ld a, [hld]
+	and a
+	jr nz, .atLeastTwoMovesAvailable
+	ld a, [W_ENEMYDISABLEDMOVE]
+	and a
+	ld a, STRUGGLE ; struggle if the only move is disabled
+	jr nz, .done
+.atLeastTwoMovesAvailable
+	ld a, [W_ISINBATTLE]
+	dec a
+	jr z, .chooseRandomMove ; wild encounter
+	ld hl, AIEnemyTrainerChooseMoves
+	ld b, BANK(AIEnemyTrainerChooseMoves)
+	call Bankswitch
+.chooseRandomMove
+	push hl
+	call GenRandomInBattle ; get random
+	ld b, $1
+	cp $3f ; select move 1 in [0,3e] (63/256 chance)
+	jr c, .moveChosen
+	inc hl
+	inc b
+	cp $7f ; select move 1 in [3f,7e] (64/256 chance)
+	jr c, .moveChosen
+	inc hl
+	inc b
+	cp $be ; select move 1 in [7f,bd] (63/256 chance)
+	jr c, .moveChosen
+	inc hl
+	inc b ; select move 4 in [be,ff] (66/256 chance)
+.moveChosen
+	ld a, b
+	dec a
+	ld [W_ENEMYMOVELISTINDEX], a
+	ld a, [W_ENEMYDISABLEDMOVE]
+	swap a
+	and $f
+	cp b
+	ld a, [hl]
+	pop hl
+	jr z, .chooseRandomMove ; move disabled, try again
+	and a
+	jr z, .chooseRandomMove ; move non-existant, try again
+.done
+	ld [W_ENEMYSELECTEDMOVE], a
+	ret
+
+INCBIN "baserom.gbc",$3d601,$3d6a9 - $3d601
 
 ; in-battle stuff
 	ld hl,W_PLAYERBATTSTATUS1
@@ -41114,7 +41516,7 @@ HyperBeamCheck: ; 58C2
 	ld [$CC5B],a
 	ld a,CONF_ANIM - 1
 	call $6F07
-	call $6E9B
+	call GenRandomInBattle
 	cp a,$80
 	jr c,.next3
 	ld hl,W_PLAYERBATTSTATUS1
@@ -41137,7 +41539,7 @@ HyperBeamCheck: ; 58C2
 	ld hl,W_PLAYERMONSTATUS
 	bit 6,[hl]
 	jr z,.next7 ; 5975
-	call $6E9B ; random number?
+	call GenRandomInBattle ; random number
 	cp a,$3F
 	jr nc,.next7
 	ld hl,FullyParalyzedText
@@ -41225,7 +41627,7 @@ HyperBeamCheck: ; 58C2
 	ld hl,W_PLAYERBATTSTATUS1
 	res 1,[hl]
 	set 7,[hl]
-	call $6E9B ; random number?
+	call GenRandomInBattle ; random number
 	and a,3
 	inc a
 	inc a
@@ -41607,7 +42009,7 @@ CriticalHitProbability: ; 0x3e04f
 	jr nc, .SkipHighCritical
 	ld b, $ff
 .SkipHighCritical
-	call $6e9b                   ; probably generates a random value, in "a"
+	call GenRandomInBattle       ; generates a random value, in "a"
 	rlc a
 	rlc a
 	rlc a
@@ -41738,7 +42140,7 @@ ApplyDamageToEnemyPokemon: ; 60DF
 	ld b,a ; b = level * 1.5
 ; loop until a random number in the range [1, b) is found
 .loop
-	call $6e9b ; random number
+	call GenRandomInBattle ; random number
 	and a
 	jr z,.loop
 	cp b
@@ -41859,7 +42261,7 @@ ApplyDamageToPlayerPokemon: ; 61A0
 ; this differs from the range when the player attacks, which is [1, b)
 ; it's possible for the enemy to do 0 damage with Psywave, but the player always does at least 1 damage
 .loop
-	call $6e9b ; random number
+	call GenRandomInBattle ; random number
 	cp b
 	jr nc,.loop
 	ld b,a
@@ -42094,7 +42496,7 @@ MetronomePickMove: ; 6348
 	ld hl,W_ENEMYSELECTEDMOVE
 ; loop to pick a random number in the range [1, $a5) to be the move used by Metronome
 .pickMoveLoop
-	call $6e9b ; random number
+	call GenRandomInBattle ; random number
 	and a
 	jr z,.pickMoveLoop
 	cp a,$a5 ; max normal move number + 1 (this is Struggle's move number)
@@ -42477,7 +42879,7 @@ MoveHitTest: ; 656B
 .doAccuracyCheck
 ; if the random number generated is greater than or equal to the scaled accuracy, the move misses
 ; note that this means that even the highest accuracy is still just a 255/256 chance, not 100%
-	call $6e9b ; random number
+	call GenRandomInBattle ; random number
 	cp b
 	jr nc,.moveMissed
 	ret
@@ -42576,7 +42978,52 @@ UnnamedText_3e887: ; 0x3e887
 	db $50
 ; 0x3e887 + 5 bytes
 
-INCBIN "baserom.gbc",$3e88c,$67b
+INCBIN "baserom.gbc",$3e88c,$3ee9b - $3e88c
+
+; generates a random number unless in link battle
+; stores random number in A
+GenRandomInBattle: ; 6e9b
+	ld a, [W_ISLINKBATTLE]
+	cp $4
+	jp nz, GenRandom
+	push hl
+	push bc
+	ld a, [$ccde]
+	ld c, a
+	ld b, $0
+	ld hl, $d148
+	add hl, bc
+	inc a
+	ld [$ccde], a
+	cp $9
+	ld a, [hl]
+	pop bc
+	pop hl
+	ret c
+	push hl
+	push bc
+	push af
+	xor a
+	ld [$ccde], a
+	ld hl, $d148
+	ld b, $9
+.asm_3eec5
+	ld a, [hl]
+	ld c, a
+	add a
+	add a
+	add c
+	inc a
+	ld [hli], a
+	dec b
+	jr nz, .asm_3eec5 ; 0x3eecd $f6
+	pop af
+	pop bc
+	pop hl
+	ret
+; 0x3eed3
+
+INCBIN "baserom.gbc",$3eed3,$3ef07 - $3eed3
 
 PlayMoveAnimation: ; 6F07
 	ld [$D07C],a
@@ -42657,7 +43104,7 @@ FreezeBurnParalyzeEffect: ;0x3f30c
 	sub a, $1e      ;subtract $1E to map to equivalent 10% chance effects
 .next1
 	push af     ;push effect...
-	call $6e9b  ;get random 8bit value for probability test
+	call GenRandomInBattle  ;get random 8bit value for probability test
 	cp b        ;success?
 	pop bc      ;...pop effect into C
 	ret nc      ;do nothing if random value is >= 1A or 4D [no status applied]
@@ -42709,7 +43156,7 @@ opponentAttacker:  ;0x3f382
 	sub a, $1e
 .next1
 	push af
-	call $6e9b
+	call GenRandomInBattle
 	cp b
 	pop bc
 	ret nc
