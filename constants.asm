@@ -1435,6 +1435,7 @@ TM_50         EQU $FA
 ; {stat}_(UP|DOWN)(1|2) means that the move raises the user's (or lowers the target's) corresponding stat modifier by 1 (or 2) stages
 ; {status condition}_side_effect means that the move has a side chance of causing that condition
 ; {status condition}_effect means that the move causes the status condition every time it hits the target
+NO_ADDITIONAL_EFFECT       EQU $00
 POISON_SIDE_EFFECT1        EQU $02
 DRAIN_HP_EFFECT            EQU $03
 BURN_SIDE_EFFECT1          EQU $04

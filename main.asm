@@ -1729,6 +1729,7 @@ CheckForJumpingAndTilePairCollisions: ; C2A
 	bit 6,a ; is the player jumping?
 	ret nz
 ; if not jumping
+Func_c44:
 	ld a,[$c45c] ; tile the player is on
 	ld [$cf0e],a
 
@@ -2850,8 +2851,22 @@ SwitchToMapRomBank: ; 12BC
 	pop hl
 	ret
 
-INCBIN "baserom.gbc",$12DA,$12ED-$12DA
+; known jump sources: 7af (0:7af)
+Func_12da: ; 12da (0:12da)
+	ld a, $1e
+	ld [$d13a], a
+	ld hl, $d730
+	ld a, [hl]
+	or $26
+	ld [hl], a
+	ret
 
+; known jump sources: 3c9 (0:3c9)
+Func_12e7: ; 12e7 (0:12e7)
+	ld hl, $d728
+	res 0, [hl]
+	ret
+; 12ed (0:12ed)
 ;appears to be called twice inside function $C38B
 ;if $d700,$d11a == $1 then biking
 ;if $d700,$d11a == $2 then surfing
@@ -2986,8 +3001,55 @@ LoadMonData: ; 1372
 	ld b,BANK(LoadMonData_)
 	jp Bankswitch
 
-INCBIN "baserom.gbc",$137A,$13D0 - $137A
+INCBIN "baserom.gbc",$137a,$1384 - $137a
 
+; known jump sources: 617a (1:617a), 12a6e (4:6a6e), 403b0 (10:43b0), 415c0 (10:55c0), 7bebf (1e:7ebf)
+Func_1384: ; 1384 (0:1384)
+	ld a, $1
+	ld [$d0aa], a
+
+; known jump sources: 4530 (1:4530), 702a3 (1c:42a3), 740ec (1d:40ec), 76643 (1d:6643), 797ab (1e:57ab)
+Func_1389: ; 1389 (0:1389)
+	push hl
+	ld a, [$d11e]
+	push af
+	ld a, [$cf91]
+	ld [$d11e], a
+	ld a, $3a
+	call Predef ; indirect jump to IndexToPokedex (41010 (10:5010))
+	ld hl, $d11e
+	ld a, [hl]
+	pop bc
+	ld [hl], b
+	and a
+	pop hl
+	jr z, .asm_13a7
+	cp $98
+	jr c, .asm_13ad
+.asm_13a7
+	ld a, $1
+	ld [$cf91], a
+	ret
+.asm_13ad
+	push hl
+	ld de, $9000
+	call Func_1665
+	pop hl
+	ld a, [$FF00+$b8]
+	push af
+	ld a, $f
+	ld [$FF00+$b8], a
+	ld [$2000], a
+	xor a
+	ld [$FF00+$e1], a
+	call asm_3f0d0
+	xor a
+	ld [$d0aa], a
+	pop af
+	ld [$FF00+$b8], a
+	ld [$2000], a
+	ret
+; 13d0 (0:13d0)
 ; plays the cry of a pokemon
 ; INPUT:
 ; a = pokemon ID
@@ -3167,7 +3229,7 @@ PrintStatusCondition: ; 14E1
 	ld a,[de]
 	or b ; is the pokemon's HP zero?
 	pop de
-	jr nz,.notFainted
+	jr nz,PrintStatusConditionNotFainted
 ; if the pokemon's HP is 0, print "FNT"
 	ld a,"F"
 	ld [hli],a
@@ -3176,7 +3238,7 @@ PrintStatusCondition: ; 14E1
 	ld [hl],"T"
 	and a
 	ret
-.notFainted
+PrintStatusConditionNotFainted ; 14f6
 	ld a,[$ffb8]
 	push af
 	ld a,BANK(Unknown_747de)
@@ -3442,8 +3504,149 @@ Unknown_1633: ; 0x1633
 .GotBank
 	jp $24FD
 
-INCBIN "baserom.gbc",$1665,$172F - $1665
+; known jump sources: 13b1 (0:13b1), 3ca4f (f:4a4f), 3d17d (f:517d), 3efce (f:6fce), 3efda (f:6fda), 5dbfd (17:5bfd)
+Func_1665: ; 1665 (0:1665)
+	push de
+	ld hl, $b
+	call Unknown_1627
+	ld hl, $d0c2
+	ld a, [hli]
+	ld c, a
+	pop de
 
+; known jump sources: 3f066 (f:7066)
+Func_1672: ; 1672 (0:1672)
+	push de
+	and $f
+	ld [H_DOWNARROWBLINKCNT1], a ; $FF00+$8b
+	ld b, a
+	ld a, $7
+	sub b
+	inc a
+	srl a
+	ld b, a
+	add a
+	add a
+	add a
+	sub b
+	ld [$FF00+$8d], a
+	ld a, c
+	swap a
+	and $f
+	ld b, a
+	add a
+	add a
+	add a
+	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	ld a, $7
+	sub b
+	ld b, a
+	ld a, [$FF00+$8d]
+	add b
+	add a
+	add a
+	add a
+	ld [$FF00+$8d], a
+	xor a
+	ld [$4000], a
+	ld hl, $a000
+	call Func_16df
+	ld de, $a188
+	ld hl, $a000
+	call Func_16c2
+	ld hl, $a188
+	call Func_16df
+	ld de, $a310
+	ld hl, $a188
+	call Func_16c2
+	pop de
+	jp Func_16ea
+
+; known jump sources: 16ac (0:16ac), 16bb (0:16bb)
+Func_16c2: ; 16c2 (0:16c2)
+	ld a, [$FF00+$8d]
+	ld b, $0
+	ld c, a
+	add hl, bc
+	ld a, [H_DOWNARROWBLINKCNT1] ; $FF00+$8b
+.asm_16ca
+	push af
+	push hl
+	ld a, [H_DOWNARROWBLINKCNT2] ; $FF00+$8c
+	ld c, a
+.asm_16cf
+	ld a, [de]
+	inc de
+	ld [hli], a
+	dec c
+	jr nz, .asm_16cf
+	pop hl
+	ld bc, $38
+	add hl, bc
+	pop af
+	dec a
+	jr nz, .asm_16ca
+	ret
+
+; known jump sources: 16a3 (0:16a3), 16b2 (0:16b2)
+Func_16df: ; 16df (0:16df)
+	ld bc, $188
+.asm_16e2
+	xor a
+	ld [hli], a
+	dec bc
+	ld a, b
+	or c
+	jr nz, .asm_16e2
+	ret
+
+; known jump sources: 16bf (0:16bf), 62b8 (1:62b8), 3ecd8 (f:6cd8), 3f121 (f:7121), 70355 (1c:4355), 70368 (1c:4368)
+Func_16ea: ; 16ea (0:16ea)
+	xor a
+	ld [$4000], a
+	push de
+	ld hl, $a497
+	ld de, $a30f
+	ld bc, $a187
+	ld a, $c4
+	ld [H_DOWNARROWBLINKCNT1], a ; $FF00+$8b
+.asm_16fc
+	ld a, [de]
+	dec de
+	ld [hld], a
+	ld a, [bc]
+	dec bc
+	ld [hld], a
+	ld a, [de]
+	dec de
+	ld [hld], a
+	ld a, [bc]
+	dec bc
+	ld [hld], a
+	ld a, [H_DOWNARROWBLINKCNT1] ; $FF00+$8b
+	dec a
+	ld [H_DOWNARROWBLINKCNT1], a ; $FF00+$8b
+	jr nz, .asm_16fc
+	ld a, [$d0aa]
+	and a
+	jr z, .asm_1723
+	ld bc, $310
+	ld hl, $a188
+.asm_171b
+	swap [hl]
+	inc hl
+	dec bc
+	ld a, b
+	or c
+	jr nz, .asm_171b
+.asm_1723
+	pop hl
+	ld de, $a188
+	ld c, $31
+	ld a, [$FF00+$b8]
+	ld b, a
+	jp CopyVideoData
+; 172f (0:172f)
 Tset0B_Coll: ; 0x172F
 	INCBIN "gfx/tilesets/0b.tilecoll"
 Tset00_Coll: ; 0x1735
@@ -3654,8 +3857,37 @@ ClearScreenArea: ; 18C4
 	jr nz,.loop
 	ret
 
-INCBIN "baserom.gbc",$18D6,$190F - $18D6
+; known jump sources: 70fd (1:70fd), 1dbc2 (7:5bc2), 41265 (10:5265), 4129d (10:529d), 41324 (10:5324)
+Func_18d6: ; 18d6 (0:18d6)
+	ld c, $6
+	ld hl, $0
+	ld de, $c3a0
+	call Func_18fc
+	call DelayFrame
+	ld hl, $600
+	ld de, $c418
+	call Func_18fc
+	call DelayFrame
+	ld hl, $c00
+	ld de, $c490
+	call Func_18fc
+	jp DelayFrame
 
+; known jump sources: 18de (0:18de), 18ea (0:18ea), 18f6 (0:18f6)
+Func_18fc: ; 18fc (0:18fc)
+	ld a, d
+	ld [$FF00+$c2], a
+	call GetRowColAddressBgMap
+	ld a, l
+	ld [H_VBCOPYBGDEST], a ; $FF00+$c3
+	ld a, h
+	ld [$FF00+$c4], a
+	ld a, c
+	ld [H_VBCOPYBGNUMROWS], a ; $FF00+$c5
+	ld a, e
+	ld [H_VBCOPYBGSRC], a ; $FF00+$c1
+	ret
+; 190f (0:190f)
 ClearScreen: ; 190F
 ; clears all tiles in the tilemap,
 ; then wait three frames
@@ -4887,8 +5119,13 @@ INCBIN "baserom.gbc",$1f29,16
 FlowerTilePattern3: ; 1F39
 INCBIN "baserom.gbc",$1f39,16
 
-INCBIN "baserom.gbc",$1F49,$1F54 - $1F49
-
+; known jump sources: c047 (3:4047)
+Func_1f49: ; 1f49 (0:1f49)
+	call Func_200e
+	call GBPalWhiteOut
+	ld c, $20
+	call DelayFrames
+; 1f54 (0:1f54)
 ; initialization code
 ; explanation for %11100011 (value stored in rLCDC)
 ; * LCD enabled
@@ -4991,8 +5228,18 @@ ZeroVram: ; 2004
 	xor a
 	jp $36e0
 
-INCBIN "baserom.gbc",$200E,$2024 - $200E
-
+; known jump sources: 962 (0:962), 1f49 (0:1f49), 1fd0 (0:1fd0)
+Func_200e: ; 200e (0:200e)
+	ld a, $2
+	ld [$c0ef], a
+	ld [$c0f0], a
+	xor a
+	ld [$cfc7], a
+	ld [$c0ee], a
+	ld [$cfca], a
+	dec a
+	jp Func_23b1
+; 2024 (0:2024)
 VBlankHandler: ; 2024
 	push af
 	push bc
@@ -5181,8 +5428,521 @@ DecGradGBPalTable_02: ; 0x2121
 	db %00000000
 	db %00000000
 
-INCBIN "baserom.gbc",$2125,$2442 - $2125
+; known jump sources: 58 (0:58)
+Func_2125: ; 2125 (0:2125)
+	push af
+	push bc
+	push de
+	push hl
+	ld a, [$FF00+$aa]
+	inc a
+	jr z, .asm_2142
+	ld a, [$FF00+$1]
+	ld [$FF00+$ad], a
+	ld a, [$FF00+$ac]
+	ld [$FF00+$1], a
+	ld a, [$FF00+$aa]
+	cp $2
+	jr z, .asm_2162
+	ld a, $80
+	ld [$FF00+$2], a
+	jr .asm_2162
+.asm_2142
+	ld a, [$FF00+$1]
+	ld [$FF00+$ad], a
+	ld [$FF00+$aa], a
+	cp $2
+	jr z, .asm_215f
+	xor a
+	ld [$FF00+$1], a
+	ld a, $3
+	ld [rDIV], a ; $FF00+$4
+.asm_2153
+	ld a, [rDIV] ; $FF00+$4
+	bit 7, a
+	jr nz, .asm_2153
+	ld a, $80
+	ld [$FF00+$2], a
+	jr .asm_2162
+.asm_215f
+	xor a
+	ld [$FF00+$1], a
+.asm_2162
+	ld a, $1
+	ld [$FF00+$a9], a
+	ld a, $fe
+	ld [$FF00+$ac], a
+	pop hl
+	pop de
+	pop bc
+	pop af
+	reti
 
+; known jump sources: 53e2 (1:53e2), 53f1 (1:53f1), 5400 (1:5400)
+Func_216f: ; 216f (0:216f)
+	ld a, $1
+	ld [$FF00+$ab], a
+.asm_2173
+	ld a, [hl]
+	ld [$FF00+$ac], a
+	call Func_219a
+	push bc
+	ld b, a
+	inc hl
+	ld a, $30
+.asm_217e
+	dec a
+	jr nz, .asm_217e
+	ld a, [$FF00+$ab]
+	and a
+	ld a, b
+	pop bc
+	jr z, .asm_2192
+	dec hl
+	cp $fd
+	jr nz, .asm_2173
+	xor a
+	ld [$FF00+$ab], a
+	jr .asm_2173
+.asm_2192
+	ld [de], a
+	inc de
+	dec bc
+	ld a, b
+	or c
+	jr nz, .asm_2173
+	ret
+
+; known jump sources: 2176 (0:2176), 222e (0:222e), 2259 (0:2259)
+Func_219a: ; 219a (0:219a)
+	xor a
+	ld [$FF00+$a9], a
+	ld a, [$FF00+$aa]
+	cp $2
+	jr nz, .asm_21a7
+	ld a, $81
+	ld [$FF00+$2], a
+.asm_21a7
+	ld a, [$FF00+$a9]
+	and a
+	jr nz, .asm_21f1
+	ld a, [$FF00+$aa]
+	cp $1
+	jr nz, .asm_21cc
+	call Func_2237
+	jr z, .asm_21cc
+	call Func_2231
+	push hl
+	ld hl, $cc48
+	inc [hl]
+	jr nz, .asm_21c3
+	dec hl
+	inc [hl]
+.asm_21c3
+	pop hl
+	call Func_2237
+	jr nz, .asm_21a7
+	jp Func_223f
+.asm_21cc
+	ld a, [rIE] ; $FF00+$ff
+	and $f
+	cp $8
+	jr nz, .asm_21a7
+	ld a, [W_NUMHITS] ; $d074
+	dec a
+	ld [W_NUMHITS], a ; $d074
+	jr nz, .asm_21a7
+	ld a, [$d075]
+	dec a
+	ld [$d075], a
+	jr nz, .asm_21a7
+	ld a, [$FF00+$aa]
+	cp $1
+	jr z, .asm_21f1
+	ld a, $ff
+.asm_21ee
+	dec a
+	jr nz, .asm_21ee
+.asm_21f1
+	xor a
+	ld [$FF00+$a9], a
+	ld a, [rIE] ; $FF00+$ff
+	and $f
+	sub $8
+	jr nz, .asm_2204
+	ld [W_NUMHITS], a ; $d074
+	ld a, $50
+	ld [$d075], a
+.asm_2204
+	ld a, [$FF00+$ad]
+	cp $fe
+	ret nz
+	call Func_2237
+	jr z, .asm_221f
+	push hl
+	ld hl, $cc48
+	ld a, [hl]
+	dec a
+	ld [hld], a
+	inc a
+	jr nz, .asm_2219
+	dec [hl]
+.asm_2219
+	pop hl
+	call Func_2237
+	jr z, Func_223f
+.asm_221f
+	ld a, [rIE] ; $FF00+$ff
+	and $f
+	cp $8
+	ld a, $fe
+	ret z
+	ld a, [hl]
+	ld [$FF00+$ac], a
+	call DelayFrame
+	jp Func_219a
+
+; known jump sources: 21b7 (0:21b7)
+Func_2231: ; 2231 (0:2231)
+	ld a, $f
+.asm_2233
+	dec a
+	jr nz, .asm_2233
+	ret
+
+; known jump sources: 21b2 (0:21b2), 21c4 (0:21c4), 2209 (0:2209), 221a (0:221a), 228a (0:228a)
+Func_2237: ; 2237 (0:2237)
+	push hl
+	ld hl, $cc47
+	ld a, [hli]
+	or [hl]
+	pop hl
+	ret
+
+; known jump sources: 21c9 (0:21c9), 221d (0:221d), 229c (0:229c)
+Func_223f: ; 223f (0:223f)
+	dec a
+	ld [$cc47], a
+	ld [$cc48], a
+	ret
+
+; known jump sources: 5c66 (1:5c66)
+Func_2247: ; 2247 (0:2247)
+	ld hl, $cc42
+	ld de, $cc3d
+	ld c, $2
+	ld a, $1
+	ld [$FF00+$ab], a
+.asm_2253
+	call DelayFrame
+	ld a, [hl]
+	ld [$FF00+$ac], a
+	call Func_219a
+	ld b, a
+	inc hl
+	ld a, [$FF00+$ab]
+	and a
+	ld a, $0
+	ld [$FF00+$ab], a
+	jr nz, .asm_2253
+	ld a, b
+	ld [de], a
+	inc de
+	dec c
+	jr nz, .asm_2253
+	ret
+
+INCBIN "baserom.gbc",$226e,$227f - $226e
+
+; known jump sources: 53b5 (1:53b5), 7263 (1:7263)
+Func_227f: ; 227f (0:227f)
+	ld a, $ff
+	ld [$cc3e], a
+.asm_2284
+	call Func_22c3
+	call DelayFrame
+	call Func_2237
+	jr z, .asm_22a0
+	push hl
+	ld hl, $cc48
+	dec [hl]
+	jr nz, .asm_229f
+	dec hl
+	dec [hl]
+	jr nz, .asm_229f
+	pop hl
+	xor a
+	jp Func_223f
+.asm_229f
+	pop hl
+.asm_22a0
+	ld a, [$cc3e]
+	inc a
+	jr z, .asm_2284
+	ld b, $a
+.asm_22a8
+	call DelayFrame
+	call Func_22c3
+	dec b
+	jr nz, .asm_22a8
+	ld b, $a
+.asm_22b3
+	call DelayFrame
+	call Func_22ed
+	dec b
+	jr nz, .asm_22b3
+	ld a, [$cc3e]
+	ld [$cc3d], a
+	ret
+
+; known jump sources: 2284 (0:2284), 22ab (0:22ab), 3d63b (f:563b), 3d64c (f:564c)
+Func_22c3: ; 22c3 (0:22c3)
+	call asm_22d7
+	ld a, [$cc42]
+	add $60
+	ld [$FF00+$ac], a
+	ld a, [$FF00+$aa]
+	cp $2
+	jr nz, asm_22d7
+	ld a, $81
+	ld [$FF00+$2], a
+asm_22d7: ; 22d7 (0:22d7)
+	ld a, [$FF00+$ad]
+	ld [$cc3d], a
+	and $f0
+	cp $60
+	ret nz
+	xor a
+	ld [$FF00+$ad], a
+	ld a, [$cc3d]
+	and $f
+	ld [$cc3e], a
+	ret
+
+; known jump sources: 22b6 (0:22b6), 721a (1:721a), 7220 (1:7220), 7276 (1:7276), 3d657 (f:5657)
+Func_22ed: ; 22ed (0:22ed)
+	xor a
+	ld [$FF00+$ac], a
+	ld a, [$FF00+$aa]
+	cp $2
+	ret nz
+	ld a, $81
+	ld [$FF00+$2], a
+	ret
+
+; known jump sources: 19c5b (6:5c5b), 4425d (11:425d), 488b8 (12:48b8), 492cf (12:52cf), 493ba (12:53ba), 5c587 (17:4587), 5c645 (17:4645), 5c8da (17:48da), 5c98f (17:498f), 5d535 (17:5535), 75063 (1d:5063), 75e2c (1d:5e2c)
+Func_22fa: ; 22fa (0:22fa)
+	ld a, $2
+	ld [$FF00+$1], a
+	xor a
+	ld [$FF00+$ad], a
+	ld a, $80
+	ld [$FF00+$2], a
+	ret
+
+INCBIN "baserom.gbc",$2306,$2307 - $2306
+
+; known jump sources: 100d (0:100d), 12f5 (0:12f5), d993 (3:5993), d9ae (3:59ae), d9da (3:59da), da22 (3:5a22), e234 (3:6234), 17daa (5:7daa), 19624 (6:5624), 1cbf4 (7:4bf4), 1ce82 (7:4e82), 1cf1b (7:4f1b), 1cfda (7:4fda), 1ebc9 (7:6bc9), 3aef3 (e:6ef3), 51165 (14:5165), 51d35 (14:5d35), 605cf (18:45cf), 614d2 (18:54d2), 61917 (18:5917), 70558 (1c:4558), 7bf61 (1e:7f61), 7d15f (1f:515f)
+Func_2307: ; 2307 (0:2307)
+	call Func_3748
+	xor a
+	ld c, a
+	ld d, a
+	ld [$cfca], a
+	jr asm_2324
+
+; known jump sources: 8b0 (0:8b0), 94b (0:94b), 12b2 (0:12b2)
+Func_2312: ; 2312 (0:2312)
+	ld c, $a
+	ld d, $0
+	ld a, [$d72e]
+	bit 5, a
+	jr z, asm_2324
+	xor a
+	ld [$cfca], a
+	ld c, $8
+	ld d, c
+asm_2324: ; 2324 (0:2324)
+	ld a, [$d700]
+	and a
+	jr z, .asm_2343
+	cp $2
+	jr z, .asm_2332
+	ld a, $d2
+	jr .asm_2334
+.asm_2332
+	ld a, $d6
+.asm_2334
+	ld b, a
+	ld a, d
+	and a
+	ld a, $1f
+	jr nz, .asm_233e
+	ld [$c0ef], a
+.asm_233e
+	ld [$c0f0], a
+	jr .asm_234c
+.asm_2343
+	ld a, [$d35b]
+	ld b, a
+	call Func_2385
+	jr c, .asm_2351
+.asm_234c
+	ld a, [$cfca]
+	cp b
+	ret z
+.asm_2351
+	ld a, c
+	ld [$cfc7], a
+	ld a, b
+	ld [$cfca], a
+	ld [$c0ee], a
+	jp Func_23b1
+
+; known jump sources: 12af (0:12af)
+Func_235f: ; 235f (0:235f)
+	ld a, [$c0ef]
+	ld b, a
+	cp $2
+	jr nz, .asm_236c
+	ld hl, $5103
+	jr .asm_2378
+.asm_236c
+	cp $8
+	jr nz, .asm_2375
+	ld hl, $5879
+	jr .asm_2378
+.asm_2375
+	ld hl, $5177
+.asm_2378
+	ld c, $6
+.asm_237a
+	push bc
+	push hl
+	call Bankswitch
+	pop hl
+	pop bc
+	dec c
+	jr nz, .asm_237a
+	ret
+
+; known jump sources: 2347 (0:2347)
+Func_2385: ; 2385 (0:2385)
+	ld a, [$d35c]
+	ld e, a
+	ld a, [$c0ef]
+	cp e
+	jr nz, .asm_2394
+	ld [$c0f0], a
+	and a
+	ret
+.asm_2394
+	ld a, c
+	and a
+	ld a, e
+	jr nz, .asm_239c
+	ld [$c0ef], a
+.asm_239c
+	ld [$c0f0], a
+	scf
+	ret
+
+; known jump sources: 550a (1:550a), 611f (1:611f), 9100 (2:5100), 9b4b (2:5b4b), 9b69 (2:5b69), 9b97 (2:5b97), e22a (3:622a), 18e9f (6:4e9f), 19516 (6:5516), 1cd86 (7:4d86), 1dbac (7:5bac), 1e9bf (7:69bf), 3c6fa (f:46fa), 50f52 (14:4f52), 51c4d (14:5c4d), 60528 (18:4528), 613d1 (18:53d1), 701f3 (1c:41f3), 740a8 (1d:40a8), 7be53 (1e:7e53), 7bf3c (1e:7f3c), 7bf54 (1e:7f54), 7d15c (1f:515c)
+Func_23a1: ; 23a1 (0:23a1)
+	ld b, a
+	ld [$c0ee], a
+	xor a
+	ld [$cfc7], a
+	ld a, c
+	ld [$c0ef], a
+	ld [$c0f0], a
+	ld a, b
+
+; known jump sources: 8d6 (0:8d6), 959 (0:959), c09 (0:c09), ffe (0:ffe), 13d3 (0:13d3), 1c4e (0:1c4e), 2021 (0:2021), 235c (0:235c), 2910 (0:2910), 291d (0:291d), 2adc (0:2adc), 33ff (0:33ff), 3431 (0:3431), 3745 (0:3745), 38a4 (0:38a4), 3b64 (0:3b64), 43d1 (1:43d1), 43fe (1:43fe), 4434 (1:4434), 5409 (1:5409), 54cc (1:54cc), 5aac (1:5aac), 5f14 (1:5f14), 6117 (1:6117), 61df (1:61df), 6228 (1:6228), 66f2 (1:66f2), 703d (1:703d), 75fe (1:75fe), 7903 (1:7903), 7976 (1:7976), 7a03 (1:7a03), 7a80 (1:7a80), 90d1 (2:50d1), c730 (3:4730), de5e (3:5e5e), e223 (3:6223), e2d2 (3:62d2), e3d3 (3:63d3), e56b (3:656b), efe5 (3:6fe5), f2a4 (3:72a4), f2da (3:72da), 13650 (4:7650), 17e31 (5:7e31), 17eaa (5:7eaa), 17ec2 (5:7ec2), 17ed4 (5:7ed4), 17ee6 (5:7ee6), 17f15 (5:7f15), 18e97 (6:4e97), 1950f (6:550f), 195d2 (6:55d2), 1a6cb (6:66cb), 1cebb (7:4ebb), 1cfb9 (7:4fb9), 1dba5 (7:5ba5), 1dcb6 (7:5cb6), 1e9b8 (7:69b8), 1eabd (7:6abd), 1eafc (7:6afc), 1eb9c (7:6b9c), 1eba9 (7:6ba9), 1ebb6 (7:6bb6), 1ebc3 (7:6bc3), 1ebed (7:6bed), 1ebf7 (7:6bf7), 214df (8:54df), 21594 (8:5594), 3c5cb (f:45cb), 40103 (10:4103), 412c3 (10:52c3), 41313 (10:5313), 416cb (10:56cb), 416da (10:56da), 416eb (10:56eb), 416f6 (10:56f6), 4170c (10:570c), 41722 (10:5722), 4172d (10:572d), 41754 (10:5754), 41763 (10:5763), 41785 (10:5785), 418dd (10:58dd), 50f4b (14:4f4b), 51067 (14:5067), 5106f (14:506f), 5111d (14:511d), 51c46 (14:5c46), 51cf6 (14:5cf6), 520a9 (14:60a9), 526d9 (14:66d9), 58e34 (16:4e34), 5a338 (16:6338), 5ca7a (17:4a7a), 5ded2 (17:5ed2), 5def9 (17:5ef9), 5df0c (17:5f0c), 60521 (18:4521), 60595 (18:4595), 613ca (18:53ca), 614a6 (18:54a6), 61900 (18:5900), 6190d (18:590d), 70049 (1c:4049), 70461 (1c:4461), 70473 (1c:4473), 7048d (1c:448d), 7049a (1c:449a), 7052a (1c:452a), 7053c (1c:453c), 7057a (1c:457a), 705ca (1c:45ca), 70623 (1c:4623), 70740 (1c:4740), 70ed7 (1c:4ed7), 71019 (1c:5019), 71028 (1c:5028), 74908 (1d:4908), 74f6b (1d:4f6b), 75815 (1d:5815), 78129 (1e:4129), 78e5d (1e:4e5d), 78f54 (1e:4f54), 78f9f (1e:4f9f), 78fd6 (1e:4fd6), 79075 (1e:5075), 790a0 (1e:50a0), 79e5f (1e:5e5f), 79e93 (1e:5e93), 7bdff (1e:7dff), 7be08 (1e:7e08), 7be89 (1e:7e89), 7bf26 (1e:7f26), 7bf4d (1e:7f4d)
+Func_23b1: ; 23b1 (0:23b1)
+	push hl
+	push de
+	push bc
+	ld b, a
+	ld a, [$c0ee]
+	and a
+	jr z, .asm_23c8
+	xor a
+	ld [$c02a], a
+	ld [$c02b], a
+	ld [$c02c], a
+	ld [$c02d], a
+.asm_23c8
+	ld a, [$cfc7]
+	and a
+	jr z, .asm_23e3
+	ld a, [$c0ee]
+	and a
+	jr z, .asm_2425
+	xor a
+	ld [$c0ee], a
+	ld a, [$cfca]
+	cp $ff
+	jr nz, .asm_2414
+	xor a
+	ld [$cfc7], a
+.asm_23e3
+	xor a
+	ld [$c0ee], a
+	ld a, [$FF00+$b8]
+	ld [$FF00+$b9], a
+	ld a, [$c0ef]
+	ld [$FF00+$b8], a
+	ld [$2000], a
+	cp $2
+	jr nz, .asm_23fd
+	ld a, b
+	call $5876
+	jr .asm_240b
+.asm_23fd
+	cp $8
+	jr nz, .asm_2407
+	ld a, b
+	call $6035
+	jr .asm_240b
+.asm_2407
+	ld a, b
+	call $58ea
+.asm_240b
+	ld a, [$FF00+$b9]
+	ld [$FF00+$b8], a
+	ld [$2000], a
+	jr .asm_2425
+.asm_2414
+	ld a, b
+	ld [$cfca], a
+	ld a, [$cfc7]
+	ld [$cfc8], a
+	ld [$cfc9], a
+	ld a, b
+	ld [$cfc7], a
+.asm_2425
+	pop bc
+	pop de
+	pop hl
+	ret
+
+; known jump sources: 3e1 (0:3e1), 3f1 (0:3f1), 482 (0:482), 4d2 (0:4d2), 584 (0:584), 5c4 (0:5c4), 965 (0:965), 2a2b (0:2a2b), 2aef (0:2aef), 2c1c (0:2c1c), 2c2b (0:2c2b), 3c52 (0:3c52), 3e2b (0:3e2b), 531f (1:531f), 5b64 (1:5b64), 5c2c (1:5c2c), 65a2 (1:65a2), 6a87 (1:6a87), 6c26 (1:6c26), 6e02 (1:6e02), 705a (1:705a), 70d5 (1:70d5), 7348 (1:7348), 75bc (1:75bc), 766d (1:766d), 76ff (1:76ff), 7733 (1:7733), 7924 (1:7924), e9c8 (3:69c8), efec (3:6fec), f1d4 (3:71d4), f1e3 (3:71e3), 12980 (4:6980), 12cd8 (4:6cd8), 130a3 (4:70a3), 13339 (4:7339), 13466 (4:7466), 135fc (4:75fc), 1360d (4:760d), 17cac (5:7cac), 17f0d (5:7f0d), 1cbec (7:4bec), 1cc50 (7:4c50), 1ce0d (7:4e0d), 1d49b (7:549b), 1d7bc (7:57bc), 213fd (8:53fd), 40006 (10:4006), 402d7 (10:42d7), 48448 (12:4448), 49da2 (12:5da2), 5142a (14:542a), 59653 (16:5653), 59983 (16:5983), 59997 (16:5997), 5c1ed (17:41ed), 5dbee (17:5bee), 60b5b (18:4b5b), 6103c (18:503c), 62255 (18:6255), 704b4 (1c:44b4), 7089b (1c:489b), 710a1 (1c:50a1), 711be (1c:51be), 738ba (1c:78ba), 74a95 (1d:4a95), 74f18 (1d:4f18), 75230 (1d:5230), 7525e (1d:525e), 75fc3 (1d:5fc3), 7bf5e (1e:7f5e)
+Func_2429: ; 2429 (0:2429)
+	ld a, [$cfcb]
+	dec a
+	ret nz
+	ld a, [$FF00+$b8]
+	push af
+	ld a, $1
+	ld [$FF00+$b8], a
+	ld [$2000], a
+	call Func_4c34
+	pop af
+	ld [$FF00+$b8], a
+	ld [$2000], a
+	ret
+; 2442 (0:2442)
 ; mart inventories are below
 ; they are texts
 ; first byte $FE, next byte # of items, last byte $FF
@@ -5294,8 +6054,606 @@ Predef5CText: ; 0x24f4
 	call Predef
 	jp TextScriptEnd
 
-INCBIN "baserom.gbc",$24fd,$2920 - $24fd
+; known jump sources: 1662 (0:1662), 36f1 (0:36f1)
+Func_24fd: ; 24fd (0:24fd)
+	ld b, a
+	ld a, [$FF00+$b8]
+	push af
+	ld a, b
+	ld [$FF00+$b8], a
+	ld [$2000], a
+	ld a, $a
+	ld [$0], a
+	xor a
+	ld [$4000], a
+	call Func_251a
+	pop af
+	ld [$FF00+$b8], a
+	ld [$2000], a
+	ret
 
+; known jump sources: 2510 (0:2510)
+Func_251a: ; 251a (0:251a)
+	ld hl, $a188
+	ld c, $10
+	ld b, $3
+	xor a
+	call FillMemory
+	ld a, $1
+	ld [$d0a6], a
+	ld a, $3
+	ld [$d0a7], a
+	xor a
+	ld [$d0a1], a
+	ld [$d0a2], a
+	ld [$d0a8], a
+	call Func_268b
+	ld b, a
+	and $f
+	add a
+	add a
+	add a
+	ld [$d0a4], a
+	ld a, b
+	swap a
+	and $f
+	add a
+	add a
+	add a
+	ld [$d0a3], a
+	call Func_2670
+	ld [$d0a8], a
+
+; known jump sources: 2643 (0:2643)
+Func_2556: ; 2556 (0:2556)
+	ld hl, $a188
+	ld a, [$d0a8]
+	bit 0, a
+	jr z, .asm_2563
+	ld hl, $a310
+.asm_2563
+	call Func_2897
+	ld a, [$d0a8]
+	bit 1, a
+	jr z, .asm_257a
+	call Func_2670
+	and a
+	jr z, .asm_2577
+	call Func_2670
+	inc a
+.asm_2577
+	ld [$d0a9], a
+.asm_257a
+	call Func_2670
+	and a
+	jr z, .asm_2595
+.asm_2580
+	call Func_2670
+	ld c, a
+	call Func_2670
+	sla c
+	or c
+	and a
+	jr z, .asm_2595
+	call Func_2649
+	call Func_25d8
+	jr .asm_2580
+.asm_2595
+	ld c, $0
+.asm_2597
+	call Func_2670
+	and a
+	jr z, .asm_25a0
+	inc c
+	jr .asm_2597
+.asm_25a0
+	ld a, c
+	add a
+	ld hl, $269f
+	add l
+	ld l, a
+	jr nc, .asm_25aa
+	inc h
+.asm_25aa
+	ld a, [hli]
+	ld e, a
+	ld d, [hl]
+	push de
+	inc c
+	ld e, $0
+	ld d, e
+.asm_25b2
+	call Func_2670
+	or e
+	ld e, a
+	dec c
+	jr z, .asm_25c0
+	sla e
+	rl d
+	jr .asm_25b2
+.asm_25c0
+	pop hl
+	add hl, de
+	ld e, l
+	ld d, h
+.asm_25c4
+	ld b, e
+	xor a
+	call Func_2649
+	ld e, b
+	call Func_25d8
+	dec de
+	ld a, d
+	and a
+	jr nz, .asm_25d4
+	ld a, e
+	and a
+.asm_25d4
+	jr nz, .asm_25c4
+	jr .asm_2580
+
+; known jump sources: 2590 (0:2590), 25ca (0:25ca)
+Func_25d8: ; 25d8 (0:25d8)
+	ld a, [$d0a4]
+	ld b, a
+	ld a, [$d0a2]
+	inc a
+	cp b
+	jr z, .asm_25f6
+	ld [$d0a2], a
+	ld a, [$d0ad]
+	inc a
+	ld [$d0ad], a
+	ret nz
+	ld a, [$d0ae]
+	inc a
+	ld [$d0ae], a
+	ret
+.asm_25f6
+	xor a
+	ld [$d0a2], a
+	ld a, [$d0a7]
+	and a
+	jr z, .asm_2610
+	dec a
+	ld [$d0a7], a
+	ld hl, $d0af
+	ld a, [hli]
+	ld [$d0ad], a
+	ld a, [hl]
+	ld [$d0ae], a
+	ret
+.asm_2610
+	ld a, $3
+	ld [$d0a7], a
+	ld a, [$d0a1]
+	add $8
+	ld [$d0a1], a
+	ld b, a
+	ld a, [$d0a3]
+	cp b
+	jr z, .asm_2630
+	ld a, [$d0ad]
+	ld l, a
+	ld a, [$d0ae]
+	ld h, a
+	inc hl
+	jp Func_2897
+.asm_2630
+	pop hl
+	xor a
+	ld [$d0a1], a
+	ld a, [$d0a8]
+	bit 1, a
+	jr nz, .asm_2646
+	xor $1
+	set 1, a
+	ld [$d0a8], a
+	jp Func_2556
+.asm_2646
+	jp Func_26bf
+
+; known jump sources: 258d (0:258d), 25c6 (0:25c6)
+Func_2649: ; 2649 (0:2649)
+	ld e, a
+	ld a, [$d0a7]
+	and a
+	jr z, .asm_2664
+	cp $2
+	jr c, .asm_265c
+	jr z, .asm_2662
+	rrc e
+	rrc e
+	jr .asm_2664
+.asm_265c
+	sla e
+	sla e
+	jr .asm_2664
+.asm_2662
+	swap e
+.asm_2664
+	ld a, [$d0ad]
+	ld l, a
+	ld a, [$d0ae]
+	ld h, a
+	ld a, [hl]
+	or e
+	ld [hl], a
+	ret
+
+; known jump sources: 2550 (0:2550), 256d (0:256d), 2573 (0:2573), 257a (0:257a), 2580 (0:2580), 2584 (0:2584), 2597 (0:2597), 25b2 (0:25b2)
+Func_2670: ; 2670 (0:2670)
+	ld a, [$d0a6]
+	dec a
+	jr nz, .asm_267e
+	call Func_268b
+	ld [$d0a5], a
+	ld a, $8
+.asm_267e
+	ld [$d0a6], a
+	ld a, [$d0a5]
+	rlca
+	ld [$d0a5], a
+	and $1
+	ret
+
+; known jump sources: 2539 (0:2539), 2676 (0:2676)
+Func_268b: ; 268b (0:268b)
+	ld a, [$d0ab]
+	ld l, a
+	ld a, [$d0ac]
+	ld h, a
+	ld a, [hli]
+	ld b, a
+	ld a, l
+	ld [$d0ab], a
+	ld a, h
+	ld [$d0ac], a
+	ld a, b
+	ret
+
+INCBIN "baserom.gbc",$269f,$26bf - $269f
+
+; known jump sources: 2646 (0:2646)
+Func_26bf: ; 26bf (0:26bf)
+	ld a, [$d0a9]
+	cp $2
+	jp z, Func_2877
+	and a
+	jp nz, Func_27c7
+	ld hl, $a188
+	call Func_26d4
+	ld hl, $a310
+
+; known jump sources: 26ce (0:26ce), 27d9 (0:27d9), 288a (0:288a)
+Func_26d4: ; 26d4 (0:26d4)
+	xor a
+	ld [$d0a1], a
+	ld [$d0a2], a
+	call Func_2897
+	ld a, [$d0aa]
+	and a
+	jr z, .asm_26ec
+	ld hl, $27b7
+	ld de, $27bf
+	jr .asm_26f2
+.asm_26ec
+	ld hl, $27a7
+	ld de, $27af
+.asm_26f2
+	ld a, l
+	ld [$d0b1], a
+	ld a, h
+	ld [$d0b2], a
+	ld a, e
+	ld [$d0b3], a
+	ld a, d
+	ld [$d0b4], a
+	ld e, $0
+.asm_2704
+	ld a, [$d0ad]
+	ld l, a
+	ld a, [$d0ae]
+	ld h, a
+	ld a, [hl]
+	ld b, a
+	swap a
+	and $f
+	call Func_276d
+	swap a
+	ld d, a
+	ld a, b
+	and $f
+	call Func_276d
+	or d
+	ld b, a
+	ld a, [$d0ad]
+	ld l, a
+	ld a, [$d0ae]
+	ld h, a
+	ld a, b
+	ld [hl], a
+	ld a, [$d0a4]
+	add l
+	jr nc, .asm_2731
+	inc h
+.asm_2731
+	ld [$d0ad], a
+	ld a, h
+	ld [$d0ae], a
+	ld a, [$d0a1]
+	add $8
+	ld [$d0a1], a
+	ld b, a
+	ld a, [$d0a3]
+	cp b
+	jr nz, .asm_2704
+	xor a
+	ld e, a
+	ld [$d0a1], a
+	ld a, [$d0a2]
+	inc a
+	ld [$d0a2], a
+	ld b, a
+	ld a, [$d0a4]
+	cp b
+	jr z, .asm_2768
+	ld a, [$d0af]
+	ld l, a
+	ld a, [$d0b0]
+	ld h, a
+	inc hl
+	call Func_2897
+	jr .asm_2704
+.asm_2768
+	xor a
+	ld [$d0a2], a
+	ret
+
+; known jump sources: 2712 (0:2712), 271b (0:271b)
+Func_276d: ; 276d (0:276d)
+	srl a
+	ld c, $0
+	jr nc, .asm_2775
+	ld c, $1
+.asm_2775
+	ld l, a
+	ld a, [$d0aa]
+	and a
+	jr z, .asm_2780
+	bit 3, e
+	jr .asm_2782
+.asm_2780
+	bit 0, e
+.asm_2782
+	ld e, l
+	jr nz, .asm_278e
+	ld a, [$d0b1]
+	ld l, a
+	ld a, [$d0b2]
+	jr .asm_2795
+.asm_278e
+	ld a, [$d0b3]
+	ld l, a
+	ld a, [$d0b4]
+.asm_2795
+	ld h, a
+	ld a, e
+	add l
+	ld l, a
+	jr nc, .asm_279c
+	inc h
+.asm_279c
+	ld a, [hl]
+	bit 0, c
+	jr nz, .asm_27a3
+	swap a
+.asm_27a3
+	and $f
+	ld e, a
+	ret
+
+INCBIN "baserom.gbc",$27a7,$27c7 - $27a7
+
+; known jump sources: 26c8 (0:26c8), 2894 (0:2894)
+Func_27c7: ; 27c7 (0:27c7)
+	xor a
+	ld [$d0a1], a
+	ld [$d0a2], a
+	call Func_2841
+	ld a, [$d0ad]
+	ld l, a
+	ld a, [$d0ae]
+	ld h, a
+	call Func_26d4
+	call Func_2841
+	ld a, [$d0ad]
+	ld l, a
+	ld a, [$d0ae]
+	ld h, a
+	ld a, [$d0af]
+	ld e, a
+	ld a, [$d0b0]
+	ld d, a
+.asm_27ef
+	ld a, [$d0aa]
+	and a
+	jr z, .asm_280b
+	push de
+	ld a, [de]
+	ld b, a
+	swap a
+	and $f
+	call Func_2837
+	swap a
+	ld c, a
+	ld a, b
+	and $f
+	call Func_2837
+	or c
+	pop de
+	ld [de], a
+.asm_280b
+	ld a, [hli]
+	ld b, a
+	ld a, [de]
+	xor b
+	ld [de], a
+	inc de
+	ld a, [$d0a2]
+	inc a
+	ld [$d0a2], a
+	ld b, a
+	ld a, [$d0a4]
+	cp b
+	jr nz, .asm_27ef
+	xor a
+	ld [$d0a2], a
+	ld a, [$d0a1]
+	add $8
+	ld [$d0a1], a
+	ld b, a
+	ld a, [$d0a3]
+	cp b
+	jr nz, .asm_27ef
+	xor a
+	ld [$d0a1], a
+	ret
+
+; known jump sources: 27fc (0:27fc), 2805 (0:2805)
+Func_2837: ; 2837 (0:2837)
+	ld de, $2867
+	add e
+	ld e, a
+	jr nc, .asm_283f
+	inc d
+.asm_283f
+	ld a, [de]
+	ret
+
+; known jump sources: 27ce (0:27ce), 27dc (0:27dc), 2877 (0:2877), 288d (0:288d)
+Func_2841: ; 2841 (0:2841)
+	ld a, [$d0a8]
+	bit 0, a
+	jr nz, .asm_2850
+	ld de, $a188
+	ld hl, $a310
+	jr .asm_2856
+.asm_2850
+	ld de, $a310
+	ld hl, $a188
+.asm_2856
+	ld a, l
+	ld [$d0ad], a
+	ld a, h
+	ld [$d0ae], a
+	ld a, e
+	ld [$d0af], a
+	ld a, d
+	ld [$d0b0], a
+	ret
+
+INCBIN "baserom.gbc",$2867,$2877 - $2867
+
+; known jump sources: 26c4 (0:26c4)
+Func_2877: ; 2877 (0:2877)
+	call Func_2841
+	ld a, [$d0aa]
+	push af
+	xor a
+	ld [$d0aa], a
+	ld a, [$d0af]
+	ld l, a
+	ld a, [$d0b0]
+	ld h, a
+	call Func_26d4
+	call Func_2841
+	pop af
+	ld [$d0aa], a
+	jp Func_27c7
+
+; known jump sources: 2563 (0:2563), 262d (0:262d), 26db (0:26db), 2763 (0:2763)
+Func_2897: ; 2897 (0:2897)
+	ld a, l
+	ld [$d0ad], a
+	ld [$d0af], a
+	ld a, h
+	ld [$d0ae], a
+	ld [$d0b0], a
+	ret
+
+; known jump sources: 5d6e (1:5d6e), 6210 (1:6210)
+Func_28a6: ; 28a6 (0:28a6)
+	ld hl, $c100
+	call Func_28c4
+	ld hl, $c200
+	call Func_28c4
+	ld a, $1
+	ld [$c100], a
+	ld [$c20e], a
+	ld hl, $c104
+	ld [hl], $3c
+	inc hl
+	inc hl
+	ld [hl], $40
+	ret
+
+; known jump sources: 28a9 (0:28a9), 28af (0:28af)
+Func_28c4: ; 28c4 (0:28c4)
+	ld bc, $10
+	xor a
+	jp FillMemory
+
+; known jump sources: 2071 (0:2071)
+Func_28cb: ; 28cb (0:28cb)
+	ld a, [$cfc7]
+	and a
+	jr nz, .asm_28dc
+	ld a, [$d72c]
+	bit 1, a
+	ret nz
+	ld a, $77
+	ld [$FF00+$24], a
+	ret
+.asm_28dc
+	ld a, [$cfc9]
+	and a
+	jr z, .asm_28e7
+	dec a
+	ld [$cfc9], a
+	ret
+.asm_28e7
+	ld a, [$cfc8]
+	ld [$cfc9], a
+	ld a, [$FF00+$24]
+	and a
+	jr z, .asm_2903
+	ld b, a
+	and $f
+	dec a
+	ld c, a
+	ld a, b
+	and $f0
+	swap a
+	dec a
+	swap a
+	or c
+	ld [$FF00+$24], a
+	ret
+.asm_2903
+	ld a, [$cfc7]
+	ld b, a
+	xor a
+	ld [$cfc7], a
+	ld a, $ff
+	ld [$c0ee], a
+	call Func_23b1
+	ld a, [$c0f0]
+	ld [$c0ef], a
+	ld a, b
+	ld [$c0ee], a
+	jp Func_23b1
+; 2920 (0:2920)
 ; this function is used to display sign messages, sprite dialog, etc.
 ; INPUT: [$ff8c] = sprite ID or text ID
 DisplayTextID: ; 2920
@@ -6512,8 +7870,146 @@ DisplayTextBoxID: ; 30E8
 	ld [$2000],a
 	ret
 
-INCBIN "baserom.gbc",$30FD,$31cc - $30FD
+; known jump sources: 466 (0:466), 68a (0:68a)
+Func_30fd: ; 30fd (0:30fd)
+	ld a, [$cc57]
+	and a
+	ret nz
+	ld a, [$d736]
+	bit 1, a
+	ret nz
+	ld a, [$d730]
+	and $80
+	ret
 
+; known jump sources: 1038 (0:1038)
+Func_310e: ; 310e (0:310e)
+	ld hl, $d736
+	bit 0, [hl]
+	res 0, [hl]
+	jr nz, .asm_3146
+	ld a, [$cc57]
+	and a
+	ret z
+	dec a
+	add a
+	ld d, $0
+	ld e, a
+	ld hl, $3140
+	add hl, de
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	ld a, [$FF00+$b8]
+	push af
+	ld a, [$cc58]
+	ld [$FF00+$b8], a
+	ld [$2000], a
+	ld a, [$cf10]
+	call CallFunctionInTable
+	pop af
+	ld [$FF00+$b8], a
+	ld [$2000], a
+	ret
+
+INCBIN "baserom.gbc",$3140,$3146 - $3140
+.asm_3146
+	ld b, BANK(Func_1a3e0)
+	ld hl, Func_1a3e0
+	jp Bankswitch ; indirect jump to Func_1a3e0 (1a3e0 (6:63e0))
+
+; known jump sources: 1a50d (6:650d)
+Func_314e: ; 314e (0:314e)
+	ld b, BANK(Func_1a41d)
+	ld hl, Func_1a41d
+	jp Bankswitch ; indirect jump to Func_1a41d (1a41d (6:641d))
+
+INCBIN "baserom.gbc",$3156,$3157 - $3156
+
+; known jump sources: 3162 (0:3162), 31cc (0:31cc), 330c (0:330c)
+Func_3157: ; 3157 (0:3157)
+	ld a, h
+	ld [$da30], a
+	ld a, l
+	ld [$da31], a
+	ret
+
+; known jump sources: 19f46 (6:5f46), 1a1b8 (6:61b8), 442be (11:42be), 444e8 (11:44e8), 4498f (11:498f), 45efc (11:5efc), 45ff7 (11:5ff7), 48920 (12:4920), 499d4 (12:59d4), 49d17 (12:5d17), 50cbf (14:4cbf), 513b9 (14:53b9), 515da (14:55da), 517bd (14:57bd), 51b70 (14:5b70), 51fe7 (14:5fe7), 521fd (14:61fd), 523c8 (14:63c8), 55504 (15:5504), 55664 (15:5664), 556c8 (15:56c8), 5582a (15:582a), 559df (15:59df), 55b86 (15:5b86), 55d50 (15:5d50), 55ef7 (15:5ef7), 56513 (15:6513), 590bc (16:50bc), 591c2 (16:51c2), 59342 (16:5342), 59458 (16:5458), 595ff (16:55ff), 597ba (16:57ba), 5993f (16:593f), 59ad3 (16:5ad3), 59f6a (16:5f6a), 5a148 (16:6148), 5a2bd (16:62bd), 5c39d (17:439d), 5c6c9 (17:46c9), 5ca45 (17:4a45), 5d023 (17:5023), 5d7ca (17:57ca), 5da20 (17:5a20), 606d8 (18:46d8), 60802 (18:4802), 6093e (18:493e), 60afb (18:4afb), 60d11 (18:4d11), 61119 (18:5119), 62109 (18:6109), 748b8 (1d:48b8), 7544c (1d:544c), 7618a (1d:618a), 762e5 (1d:62e5), 7643c (1d:643c)
+Func_3160: ; 3160 (0:3160)
+	push af
+	push de
+	call Func_3157
+	pop hl
+	pop af
+	push hl
+	ld hl, $d733
+	bit 4, [hl]
+	res 4, [hl]
+	jr z, .asm_3174
+	ld a, [$da39]
+.asm_3174
+	pop hl
+	ld [$da39], a
+	call CallFunctionInTable
+	ld a, [$da39]
+	ret
+
+; known jump sources: 4892d (12:492d), 5c3aa (17:43aa), 5c6d6 (17:46d6), 5ca52 (17:4a52), 5d030 (17:5030), 748a9 (1d:48a9), 75461 (1d:5461), 75778 (1d:5778)
+Func_317f: ; 317f (0:317f)
+	push de
+	ld de, $cf5f
+	ld bc, $11
+	call CopyData
+	pop hl
+	ld de, $cf70
+	ld bc, $b
+	jp CopyData
+
+; known jump sources: 31d0 (0:31d0), 31d5 (0:31d5), 31e7 (0:31e7), 31ef (0:31ef), 31f7 (0:31f7), 31fd (0:31fd), 3290 (0:3290), 3307 (0:3307), 331b (0:331b), 332f (0:332f)
+Func_3193: ; 3193 (0:3193)
+	push de
+	push af
+	ld d, $0
+	ld e, a
+	ld hl, $da30
+	ld a, [hli]
+	ld l, [hl]
+	ld h, a
+	add hl, de
+	pop af
+	and a
+	jr nz, .asm_31a9
+	ld a, [hl]
+	ld [$cc55], a
+	jr .asm_31c5
+.asm_31a9
+	cp $2
+	jr z, .asm_31c2
+	cp $4
+	jr z, .asm_31c2
+	cp $6
+	jr z, .asm_31c2
+	cp $8
+	jr z, .asm_31c2
+	cp $a
+	jr nz, .asm_31c5
+	ld a, [hli]
+	ld d, [hl]
+	ld e, a
+	jr .asm_31c5
+.asm_31c2
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+.asm_31c5
+	pop de
+	ret
+
+; known jump sources: 31de (0:31de), 3299 (0:3299), 3324 (0:3324)
+Func_31c7: ; 31c7 (0:31c7)
+	ld a, $10
+	jp Predef ; indirect jump to Func_f666 (f666 (3:7666))
+; 31cc (0:31cc)
 LoadTrainerHeader: ; 0x31cc
 	call $3157
 	xor a
@@ -6550,6 +8046,7 @@ LoadTrainerHeader: ; 0x31cc
 	ld hl, $da39
 	inc [hl]
 	jp $325d
+Func_3219:
 	call $3306
 	ld a, [$cf13]
 	cp $ff
@@ -6575,18 +8072,351 @@ LoadTrainerHeader: ; 0x31cc
 	inc [hl]
 	ret
 
-INCBIN "baserom.gbc",$324c,$3474 - $324c
+	ld a, [$d730]
+	and $1
+	ret nz
+	ld [$cd6b], a
+	ld a, [$cf13]
+	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	call DisplayTextID
 
+; known jump sources: 3216 (0:3216)
+Func_325d: ; 325d (0:325d)
+	xor a
+	ld [$cd6b], a
+	call Func_32d7
+	ld hl, $d72d
+	set 6, [hl]
+	set 7, [hl]
+	ld hl, $d72e
+	set 1, [hl]
+	ld hl, $da39
+	inc [hl]
+	ret
+
+; known jump sources: 5a349 (16:6349), 60d3a (18:4d3a), 7623f (1d:623f), 76396 (1d:6396), 764ed (1d:64ed)
+Func_3275: ; 3275 (0:3275)
+	ld hl, $d126
+	set 5, [hl]
+	set 6, [hl]
+	ld hl, $d72d
+	res 7, [hl]
+	ld hl, $cd60
+	res 0, [hl]
+	ld a, [W_ISINBATTLE] ; $d057
+	cp $ff
+	jp z, Func_32c1
+	ld a, $2
+	call Func_3193
+	ld a, [$cc55]
+	ld c, a
+	ld b, $1
+	call Func_31c7
+	ld a, [$d713]
+	cp $c8
+	jr nc, .asm_32b9
+	ld hl, $d5ce
+	ld de, $2
+	ld a, [$cf13]
+	call IsInArray
+	inc hl
+	ld a, [hl]
+	ld [$cc4d], a
+	ld a, $11
+	call Predef ; indirect jump to Func_f1d7 (f1d7 (3:71d7))
+.asm_32b9
+	ld hl, $d730
+	bit 4, [hl]
+	res 4, [hl]
+	ret nz
+
+; known jump sources: 328b (0:328b)
+Func_32c1: ; 32c1 (0:32c1)
+	xor a
+	ld [$cd6b], a
+	ld [$FF00+$b4], a
+	ld [$FF00+$b3], a
+	ld [$FF00+$b2], a
+	ld [$da39], a
+	ret
+
+; known jump sources: 3244 (0:3244)
+Func_32cf: ; 32cf (0:32cf)
+	ld b, BANK(Func_56881)
+	ld hl, Func_56881
+	jp Bankswitch ; indirect jump to Func_56881 (56881 (15:6881))
+
+; known jump sources: 3261 (0:3261), 196a2 (6:56a2), 48a4b (12:4a4b), 49eab (12:5eab), 514e8 (14:54e8), 5c488 (17:4488), 5c7ab (17:47ab), 5cb57 (17:4b57), 5d152 (17:5152), 622ab (18:62ab), 74abe (1d:4abe), 7556e (1d:556e), 758bf (1d:58bf)
+Func_32d7: ; 32d7 (0:32d7)
+	ld a, [$cd2d]
+	ld [W_CUROPPONENT], a ; $d059
+	ld [$d713], a
+	cp $c8
+	ld a, [W_ENEMYMONATTACKMOD] ; $cd2e
+	jr c, .asm_32eb
+	ld [W_TRAINERNO], a ; $d05d
+	ret
+.asm_32eb
+	ld [W_CURENEMYLVL], a ; $d127
+	ret
+
+; known jump sources: 1cde1 (7:4de1)
+Func_32ef: ; 32ef (0:32ef)
+	ld hl, Func_567f9
+	jr asm_3301
+
+INCBIN "baserom.gbc",$32f4,$32f9 - $32f4
+
+; known jump sources: 1ce15 (7:4e15), 1d072 (7:5072), 1e7e5 (7:67e5)
+Func_32f9: ; 32f9 (0:32f9)
+	ld hl, $683d
+	jr asm_3301
+
+INCBIN "baserom.gbc",$32fe,$3301 - $32fe
+asm_3301: ; 3301 (0:3301)
+	ld b, BANK(Func_567f9)
+	jp Bankswitch ; indirect jump to Func_567f9 (567f9 (15:67f9))
+
+; known jump sources: 3219 (0:3219)
+Func_3306: ; 3306 (0:3306)
+	xor a
+	call Func_3193
+	ld d, h
+	ld e, l
+.asm_330c
+	call Func_3157
+	ld a, [de]
+	ld [$cf13], a
+	ld [$cc55], a
+	cp $ff
+	ret z
+	ld a, $2
+	call Func_3193
+	ld b, $2
+	ld a, [$cc55]
+	ld c, a
+	call Func_31c7
+	ld a, c
+	and a
+	jr nz, .asm_334c
+	push hl
+	push de
+	push hl
+	xor a
+	call Func_3193
+	inc hl
+	ld a, [hl]
+	pop hl
+	ld [$cd3e], a
+	ld a, [$cf13]
+	swap a
+	ld [W_WHICHTRADE], a ; $cd3d
+	ld a, $39
+	call Predef ; indirect jump to Func_5690f (5690f (15:690f))
+	pop de
+	pop hl
+	ld a, [W_WHICHTRADE] ; $cd3d
+	and a
+	ret nz
+.asm_334c
+	ld hl, $c
+	add hl, de
+	ld d, h
+	ld e, l
+	jr .asm_330c
+
+; known jump sources: 3201 (0:3201), 19585 (6:5585), 19697 (6:5697), 1cdea (7:4dea), 48a40 (12:4a40), 49ea0 (12:5ea0), 510c5 (14:50c5), 514dd (14:54dd), 51ca3 (14:5ca3), 5c47d (17:447d), 5c7a0 (17:47a0), 5cb4c (17:4b4c), 5d147 (17:5147), 60602 (18:4602), 614fa (18:54fa), 622a0 (18:62a0), 74ab3 (1d:4ab3), 75563 (1d:5563), 75909 (1d:5909), 75985 (1d:5985), 75f92 (1d:5f92)
+Func_3354: ; 3354 (0:3354)
+	ld a, [$FF00+$b8]
+	ld [$d092], a
+	ld a, h
+	ld [$d08c], a
+	ld a, l
+	ld [$d08d], a
+	ld a, d
+	ld [$d08e], a
+	ld a, e
+	ld [$d08f], a
+	ret
+
+; known jump sources: 320f (0:320f), 1969f (6:569f), 48a48 (12:4a48), 49ea8 (12:5ea8), 514e5 (14:54e5), 56983 (15:6983), 5c485 (17:4485), 5c7a8 (17:47a8), 5cb54 (17:4b54), 5d14f (17:514f), 622a8 (18:62a8), 74abb (1d:4abb), 7556b (1d:556b), 758bc (1d:58bc)
+Func_336a: ; 336a (0:336a)
+	ld hl, $d504
+	ld d, $0
+	ld a, [$cf13]
+	dec a
+	add a
+	ld e, a
+	add hl, de
+	ld a, [hli]
+	ld [$cd2d], a
+	ld a, [hl]
+	ld [W_ENEMYMONATTACKMOD], a ; $cd2e
+	jp Func_33e8
+
+; known jump sources: 3c6ce (f:46ce)
+Func_3381: ; 3381 (0:3381)
+	push hl
+	ld hl, $d72d
+	bit 7, [hl]
+	res 7, [hl]
+	pop hl
+	ret z
+	ld a, [$FF00+$b8]
+	push af
+	ld a, [$d092]
+	ld [$FF00+$b8], a
+	ld [$2000], a
+	push hl
+	ld b, BANK(SaveTrainerName)
+	ld hl, SaveTrainerName
+	call Bankswitch ; indirect jump to SaveTrainerName (27e4a (9:7e4a))
+	ld hl, $33cf
+	call PrintText
+	pop hl
+	pop af
+	ld [$FF00+$b8], a
+	ld [$2000], a
+	ld b, BANK(Func_1a5e7)
+	ld hl, Func_1a5e7
+	call Bankswitch ; indirect jump to Func_1a5e7 (1a5e7 (6:65e7))
+	jp Func_3748
+
+; known jump sources: 33d4 (0:33d4)
+Func_33b7: ; 33b7 (0:33b7)
+	ld a, [$cf0b]
+	and a
+	jr nz, .asm_33c6
+	ld a, [$d08c]
+	ld h, a
+	ld a, [$d08d]
+	ld l, a
+	ret
+.asm_33c6
+	ld a, [$d08e]
+	ld h, a
+	ld a, [$d08f]
+	ld l, a
+	ret
+
+INCBIN "baserom.gbc",$33cf,$33d4 - $33cf
+	call Func_33b7
+	call TextCommandProcessor
+	jp TextScriptEnd
+
+INCBIN "baserom.gbc",$33dd,$33e8 - $33dd
+
+; known jump sources: 337e (0:337e)
+Func_33e8: ; 33e8 (0:33e8)
+	ld a, [$cd2d]
+	cp $e1
+	ret z
+	cp $f2
+	ret z
+	cp $f3
+	ret z
+	ld a, [W_LONEATTACKNO] ; $d05c
+	and a
+	ret nz
+	xor a
+	ld [$cfc7], a
+	ld a, $ff
+	call Func_23b1
+	ld a, $1f
+	ld [$c0ef], a
+	ld [$c0f0], a
+	ld a, [$cd2d]
+	ld b, a
+	ld hl, $3439
+.asm_3411
+	ld a, [hli]
+	cp $ff
+	jr z, .asm_341d
+	cp b
+	jr nz, .asm_3411
+	ld a, $f6
+	jr .asm_342e
+.asm_341d
+	ld hl, $3434
+.asm_3420
+	ld a, [hli]
+	cp $ff
+	jr z, .asm_342c
+	cp b
+	jr nz, .asm_3420
+	ld a, $f9
+	jr .asm_342e
+.asm_342c
+	ld a, $fc
+.asm_342e
+	ld [$c0ee], a
+	jp Func_23b1
+
+INCBIN "baserom.gbc",$3434,$3442 - $3434
+
+; known jump sources: 345e (0:345e), 748f6 (1d:48f6)
+Func_3442: ; 3442 (0:3442)
+	ld a, [hli]
+	cp $ff
+	ret z
+	cp b
+	jr nz, .asm_345b
+	ld a, [hli]
+	cp c
+	jr nz, .asm_345c
+	ld a, [hli]
+	ld d, [hl]
+	ld e, a
+	ld hl, $ccd3
+	call Func_350c
+	dec a
+	ld [$cd38], a
+	ret
+.asm_345b
+	inc hl
+.asm_345c
+	inc hl
+	inc hl
+	jr Func_3442
+
+; known jump sources: 299f (0:299f)
+Func_3460: ; 3460 (0:3460)
+	call Func_36f4
+	ld b, BANK(Func_78e6)
+	ld hl, Func_78e6
+	jr asm_3479
+
+; known jump sources: 29a4 (0:29a4)
+Func_346a: ; 346a (0:346a)
+	call Func_36f4
+	ld b, $8
+	ld hl, $54c2
+	jr asm_3479
+; 3474 (0:3474)
 FuncTX_F7: ; 3474
 ; XXX find a better name for this function
 ; special_F7
 	ld b,BANK(CeladonPrizeMenu)
 	ld hl,CeladonPrizeMenu
+asm_3479:
 	call Bankswitch
 	jp $29DF        ; continue to main text-engine function
 
-INCBIN "baserom.gbc",$347F,$3493 - $347F
+; known jump sources: 29a9 (0:29a9)
+Func_347f: ; 347f (0:347f)
+	ld b, $5
+	ld hl, $7e2c
+	jr asm_3479
 
+; known jump sources: 190cf (6:50cf), 1981a (6:581a), 19845 (6:5845), 1a402 (6:6402), 1a6b7 (6:66b7), 1ca63 (7:4a63), 1cbb2 (7:4bb2), 1cc64 (7:4c64), 1d4b2 (7:54b2), 1e6ca (7:66ca), 49705 (12:5705), 498bd (12:58bd), 512e9 (14:52e9), 51402 (14:5402), 5a36d (16:636d), 5a51f (16:651f), 5c1ea (17:41ea), 748fe (1d:48fe), 752b1 (1d:52b1), 75f5a (1d:5f5a), 760ab (1d:60ab), 761d6 (1d:61d6), 76217 (1d:6217), 7632d (1d:632d), 7636e (1d:636e), 76484 (1d:6484), 764c5 (1d:64c5)
+Func_3486: ; 3486 (0:3486)
+	xor a
+	ld [$cd3b], a
+	ld [$c206], a
+	ld hl, $d730
+	set 7, [hl]
+	ret
+; 3493 (0:3493)
 IsItemInBag: ; 3493
 ; given an item_id in b
 ; set zero flag if item isn't in player's bag
@@ -6598,7 +8428,24 @@ IsItemInBag: ; 3493
 	and a
 	ret
 
-INCBIN "baserom.gbc",$349B,$34BF - $349B
+INCBIN "baserom.gbc",$349b,$34a6 - $349b
+
+; known jump sources: 18eda (6:4eda), 19564 (6:5564), 1cbbc (7:4bbc), 1cbc6 (7:4bc6), 1cbe9 (7:4be9), 1cc43 (7:4c43), 1cc4d (7:4c4d), 1cd13 (7:4d13), 1cd54 (7:4d54), 1cd7a (7:4d7a), 1ce1f (7:4e1f), 1cf05 (7:4f05), 1cf0f (7:4f0f), 1cf7a (7:4f7a), 50ef8 (14:4ef8), 510aa (14:50aa), 51104 (14:5104), 51ce7 (14:5ce7), 5a540 (16:6540), 6054e (18:454e), 6142d (18:542d), 62224 (18:6224), 7602d (1d:602d), 76037 (1d:6037), 7604f (1d:604f), 76066 (1d:6066)
+Func_34a6: ; 34a6 (0:34a6)
+	call Func_34ae
+	ld c, $6
+	jp DelayFrames
+
+; known jump sources: 34a6 (0:34a6)
+Func_34ae: ; 34ae (0:34ae)
+	ld a, $9
+	ld [H_DOWNARROWBLINKCNT1], a ; $FF00+$8b
+	call Func_34fc
+	ld a, [$FF00+$8d]
+	ld [hl], a
+	ret
+
+INCBIN "baserom.gbc",$34b9,$34bf - $34b9
 
 ; tests if the player's coordinates are in a specified array
 ; INPUT:
@@ -6665,7 +8512,51 @@ CheckBoulderCoords: ; 0x34e4
 	jp CheckCoords
 ; 0x34fc
 
-INCBIN "baserom.gbc",$34fc,$3541-$34fc
+; known jump sources: 34b2 (0:34b2), 1ccd8 (7:4cd8), 1d15f (7:515f), 1d16c (7:516c), 1d235 (7:5235)
+Func_34fc: ; 34fc (0:34fc)
+	ld h, $c1
+	jr asm_3502
+
+; known jump sources: 19530 (6:5530)
+Func_3500: ; 3500 (0:3500)
+	ld h, $c2
+asm_3502: ; 3502 (0:3502)
+	ld a, [H_DOWNARROWBLINKCNT1] ; $FF00+$8b
+	ld b, a
+	ld a, [H_DOWNARROWBLINKCNT2] ; $FF00+$8c
+	swap a
+	add b
+	ld l, a
+	ret
+
+; known jump sources: 3453 (0:3453), 1a4bc (6:64bc), 1a4c9 (6:64c9), 1cbab (7:4bab), 1d4ab (7:54ab), 5a366 (16:6366), 5a518 (16:6518), 75f53 (1d:5f53), 760a4 (1d:60a4)
+Func_350c: ; 350c (0:350c)
+	xor a
+	ld [$ccd2], a
+.asm_3510
+	ld a, [de]
+	cp $ff
+	jr z, .asm_352b
+	ld [H_DOWNARROWBLINKCNT1], a ; $FF00+$8b
+	inc de
+	ld a, [de]
+	ld b, $0
+	ld c, a
+	ld a, [$ccd2]
+	add c
+	ld [$ccd2], a
+	ld a, [H_DOWNARROWBLINKCNT1] ; $FF00+$8b
+	call FillMemory
+	inc de
+	jr .asm_3510
+.asm_352b
+	ld a, $ff
+	ld [hl], a
+	ld a, [$ccd2]
+	inc a
+	ret
+
+INCBIN "baserom.gbc",$3533,$3541 - $3533
 
 Function3541: ; 3541
 ; XXX what do these three functions do
@@ -6697,7 +8588,54 @@ Function3558: ; 3558
 	pop de
 	ret
 
-INCBIN "baserom.gbc",$3566,$35BC - $3566
+; known jump sources: 3ef5b (f:6f5b)
+Func_3566: ; 3566 (0:3566)
+	call Func_359e
+	ld a, [W_ISLINKBATTLE] ; $d12b
+	and a
+	jr nz, .asm_3594
+	ld a, $e
+	call BankswitchHome
+	ld a, [W_TRAINERCLASS] ; $d031
+	dec a
+	ld hl, $5914
+	ld bc, $5
+	call AddNTimes
+	ld de, $d033
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hli]
+	ld [de], a
+	ld de, $d046
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hli]
+	ld [de], a
+	jp BankswitchBack
+.asm_3594
+	ld hl, $d033
+	ld de, $6ede
+	ld [hl], e
+	inc hl
+	ld [hl], d
+	ret
+
+; known jump sources: 3566 (0:3566)
+Func_359e: ; 359e (0:359e)
+	ld b, BANK(Func_13a58)
+	ld hl, Func_13a58
+	jp Bankswitch ; indirect jump to Func_13a58 (13a58 (4:7a58))
+
+; known jump sources: 40ce (1:40ce), 5c196 (17:4196), 74f49 (1d:4f49), 752ec (1d:52ec)
+Func_35a6: ; 35a6 (0:35a6)
+	ld de, W_PLAYERMONEY3 ; $d347
+	ld hl, $ff9f
+	ld c, $3
+	jp StringCmp
+
+INCBIN "baserom.gbc",$35b1,$35bc - $35b1
 
 BankswitchHome: ; 35BC
 ; switches to bank # in a
@@ -6735,12 +8673,52 @@ Bankswitch: ; 0x35d6
 	ld [$2000],a
 	ret
 
-INCBIN "baserom.gbc",$35EC,$363A - $35EC
+; known jump sources: 7232 (1:7232), 1d1bb (7:51bb), 1da18 (7:5a18), 1e844 (7:6844), 1e924 (7:6924), 1ea92 (7:6a92), 21691 (8:5691), 48581 (12:4581), 49f35 (12:5f35), 5208e (14:608e), 56083 (15:6083), 59c28 (16:5c28), 5c184 (17:4184), 5c1ff (17:41ff), 6107d (18:507d), 71b44 (1c:5b44), 738a7 (1c:78a7), 750de (1d:50de), 752d7 (1d:52d7), 75374 (1d:5374)
+Func_35ec: ; 35ec (0:35ec)
+	call Func_3719
+	call Func_35ff
+	jr asm_3628
 
+INCBIN "baserom.gbc",$35f4,$35ff - $35f4
+
+; known jump sources: 35ef (0:35ef)
+Func_35ff: ; 35ff (0:35ff)
+	xor a
+	ld [$d12c], a
+	ld hl, $c43a
+	ld bc, $80f
+	ret
+
+; known jump sources: 7000 (1:7000)
+Func_360a: ; 360a (0:360a)
+	call Func_3719
+	ld a, $6
+	ld [$d12c], a
+	ld hl, $c423
+	ld bc, $80c
+	jr asm_3628
+
+INCBIN "baserom.gbc",$361a,$3628 - $361a
+asm_3628: ; 3628 (0:3628)
+	ld a, $14
+	ld [$d125], a
+	call DisplayTextBoxID
+	jp Func_3725
+
+; known jump sources: f8cd (3:78cd), f8df (3:78df), f943 (3:7943), f96e (3:796e), 568a2 (15:68a2), 568b6 (15:68b6), 568cc (15:68cc), 568e2 (15:68e2), 56954 (15:6954), 56967 (15:6967)
+Func_3633: ; 3633 (0:3633)
+	sub b
+	ret nc
+	cpl
+	add $1
+	scf
+	ret
+; 363a (0:363a)
 MoveSprite: ; 363a
 ; move the sprite [$FF8C] with the movement pointed to by de
 ; actually only copies the movement data to $CC5B for later
 	call Function3541
+Func_363d:
 	push hl
 	push bc
 	call Function354E
@@ -6772,8 +8750,27 @@ MoveSprite: ; 363a
 	ld [$CD3A],a
 	ret
 
-INCBIN "baserom.gbc",$366B,$3680 - $366B
-
+; known jump sources: f964 (3:7964), f98d (3:798d)
+Func_366b: ; 366b (0:366b)
+	push hl
+	ld hl, $ffe7
+	xor a
+	ld [hld], a
+	ld a, [hld]
+	and a
+	jr z, .asm_367e
+	ld a, [hli]
+.asm_3676
+	sub [hl]
+	jr c, .asm_367e
+	inc hl
+	inc [hl]
+	dec hl
+	jr .asm_3676
+.asm_367e
+	pop hl
+	ret
+; 3680 (0:3680)
 ; copies the tile patterns for letters and numbers into VRAM
 LoadFontTilePatterns: ; 3680
 	ld a,[rLCDC]
@@ -6840,8 +8837,58 @@ FillMemory: ;36E0
 	pop de
 	ret
 
-INCBIN "baserom.gbc",$36EB,$3739 - $36EB
+; known jump sources: 62a6 (1:62a6), 3eca0 (f:6ca0), 3f05d (f:705d), 70343 (1c:4343), 7035d (1c:435d)
+Func_36eb: ; 36eb (0:36eb)
+	ld hl, $d0ab
+	ld [hl], e
+	inc hl
+	ld [hl], d
+	jp Func_24fd
 
+; known jump sources: 2b44 (0:2b44), 3460 (0:3460), 346a (0:346a), 438f (1:438f), efae (3:6fae), 17e2c (5:7e2c), 1da57 (7:5a57), 1e915 (7:6915), 213cb (8:53cb), 3cffd (f:4ffd), 3d0ce (f:50ce), 71ad9 (1c:5ad9)
+Func_36f4: ; 36f4 (0:36f4)
+	ld hl, $c3a0
+	ld de, $cd81
+	ld bc, $168
+	call CopyData
+	ret
+
+; known jump sources: 3dc9 (0:3dc9), 4392 (1:4392), 43ac (1:43ac), 4423 (1:4423), 7917 (1:7917), 7981 (1:7981), e1b4 (3:61b4), efbd (3:6fbd), 1309a (4:709a), 13333 (4:7333), 13488 (4:7488), 13607 (4:7607), 17e42 (5:7e42), 1e938 (7:6938), 2159f (8:559f), 3d0f9 (f:50f9), 71cab (1c:5cab)
+Func_3701: ; 3701 (0:3701)
+	call Func_3709
+	ld a, $1
+	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ret
+
+; known jump sources: 3701 (0:3701), 132fc (4:72fc), 214fa (8:54fa)
+Func_3709: ; 3709 (0:3709)
+	xor a
+	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld hl, $cd81
+	ld de, $c3a0
+	ld bc, $168
+	call CopyData
+	ret
+
+; known jump sources: 35ec (0:35ec), 360a (0:360a), 43a5 (1:43a5), 5c19 (1:5c19), 64eb (1:64eb), 6c86 (1:6c86), 6d18 (1:6d18), 6d36 (1:6d36), 6e43 (1:6e43), 6fe6 (1:6fe6), 78f0 (1:78f0), 130d7 (4:70d7), 217a3 (8:57a3), 3c14c (f:414c), 3c1dc (f:41dc), 3c246 (f:4246), 3c5fa (f:45fa), 3c79e (f:479e), 3c955 (f:4955), 3ca73 (f:4a73), 3cb57 (f:4b57), 3cb65 (f:4b65), 3cb92 (f:4b92), 3ccf7 (f:4cf7), 3cec2 (f:4ec2), 3d1eb (f:51eb), 3d56b (f:556b), 3effc (f:6ffc), 553f4 (15:53f4), 5dbe3 (17:5be3), 740ce (1d:40ce)
+Func_3719: ; 3719 (0:3719)
+	ld hl, $c3a0
+	ld de, $c508
+	ld bc, $168
+	jp CopyData
+
+; known jump sources: 3630 (0:3630), 42a0 (1:42a0), 43f4 (1:43f4), 5cdd (1:5cdd), 653e (1:653e), 6c89 (1:6c89), 6d39 (1:6d39), 6dc8 (1:6dc8), 6f82 (1:6f82), 700c (1:700c), 7051 (1:7051), d6be (3:56be), e129 (3:6129), e507 (3:6507), e58e (3:658e), 1310c (4:710c), 217bd (8:57bd), 3c157 (f:4157), 3c171 (f:4171), 3c1d1 (f:41d1), 3c1fa (f:41fa), 3c202 (f:4202), 3c29d (f:429d), 3c684 (f:4684), 3c825 (f:4825), 3ca23 (f:4a23), 3cae9 (f:4ae9), 3cb74 (f:4b74), 3ceb3 (f:4eb3), 3cfde (f:4fde), 3d00e (f:500e), 3d0a9 (f:50a9), 3d0e0 (f:50e0), 3d1b1 (f:51b1), 3d1fa (f:51fa), 3d3a8 (f:53a8), 3d571 (f:5571), 3f011 (f:7011), 55411 (15:5411), 5dc0f (17:5c0f), 740f8 (1d:40f8)
+Func_3725: ; 3725 (0:3725)
+	xor a
+	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld hl, $c508
+	ld de, $c3a0
+	ld bc, $168
+	call CopyData
+	ld a, $1
+	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ret
+; 3739 (0:3739)
 DelayFrames: ; 3739
 ; wait n frames, where n is the value in c
 	call DelayFrame
@@ -6849,8 +8896,32 @@ DelayFrames: ; 3739
 	jr nz,DelayFrames
 	ret
 
-INCBIN "baserom.gbc",$3740,$375D - $3740
+; known jump sources: 2bb5 (0:2bb5), 6db9 (1:6db9), 6fd0 (1:6fd0), 724d (1:724d), dc9d (3:5c9d), dd91 (3:5d91), ddc3 (3:5dc3), e520 (3:6520), 1dbee (7:5bee), 215e0 (8:55e0), 21655 (8:5655), 22308 (8:6308), 3a69d (e:669d), 3ae24 (e:6e24), 3c21b (f:421b), 3c5bf (f:45bf), 3c6f4 (f:46f4), 3cb86 (f:4b86), 5c1d2 (17:41d2), 73902 (1c:7902), 740a1 (1d:40a1), 7677b (1d:677b), 7d14f (1f:514f)
+Func_3740: ; 3740 (0:3740)
+	push af
+	call Func_3748
+	pop af
+	jp Func_23b1
 
+; known jump sources: 13d6 (0:13d6), 1c51 (0:1c51), 2307 (0:2307), 2bb8 (0:2bb8), 33b4 (0:33b4), 3741 (0:3741), 442c (1:442c), 445f (1:445f), 6dbc (1:6dbc), 7248 (1:7248), 7979 (1:7979), 79fe (1:79fe), 7a06 (1:7a06), 7a7b (1:7a7b), 7a83 (1:7a83), e1ce (3:61ce), 1364b (4:764b), 13847 (4:7847), 17e3a (5:7e3a), 17ead (5:7ead), 17ec5 (5:7ec5), 17ed7 (5:7ed7), 17ee9 (5:7ee9), 17f18 (5:7f18), 1eab8 (7:6ab8), 1eac0 (7:6ac0), 1eaf7 (7:6af7), 1eaff (7:6aff), 1eb9f (7:6b9f), 1ebac (7:6bac), 1ebb9 (7:6bb9), 1ebc6 (7:6bc6), 1ebfa (7:6bfa), 21597 (8:5597), 215f2 (8:55f2), 21667 (8:5667), 216a1 (8:56a1), 3ae27 (e:6e27), 3c5ce (f:45ce), 3c760 (f:4760), 3cb8f (f:4b8f), 45f30 (11:5f30), 58e37 (16:4e37), 5c1d5 (17:41d5), 5decd (17:5ecd), 5ded5 (17:5ed5), 5def4 (17:5ef4), 5defc (17:5efc), 5df07 (17:5f07), 5df0f (17:5f0f), 60c0e (18:4c0e), 73905 (1c:7905), 75810 (1d:5810), 75818 (1d:5818), 7677e (1d:677e), 78d62 (1e:4d62), 78d90 (1e:4d90), 79e6a (1e:5e6a), 7be4c (1e:7e4c)
+Func_3748: ; 3748 (0:3748)
+	ld a, [$d083]
+	and $80
+	ret nz
+	push hl
+.asm_374f
+	ld hl, $c02a
+	xor a
+	or [hl]
+	inc hl
+	or [hl]
+	inc hl
+	inc hl
+	or [hl]
+	jr nz, .asm_374f
+	pop hl
+	ret
+; 375d (0:375d)
 NamePointers: ; 375D
 	dw MonsterNames
 	dw MoveNames
@@ -6941,8 +9012,61 @@ GetName: ; 376B
 	ld [$2000],a
 	ret
 
-INCBIN "baserom.gbc",$37df,$3831 - $37df
+; known jump sources: 2cdc (0:2cdc), 2ee0 (0:2ee0)
+Func_37df: ; 37df (0:37df)
+	ld a, [$FF00+$b8]
+	push af
+	ld a, [W_LISTMENUID] ; $cf94
+	cp $1
+	ld a, $1
+	jr nz, .asm_37ed
+	ld a, $f
+.asm_37ed
+	ld [$FF00+$b8], a
+	ld [$2000], a
+	ld hl, $cf8f
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	ld a, [$cf91]
+	cp $c4
+	jr nc, .asm_3812
+	ld bc, $3
+.asm_3802
+	add hl, bc
+	dec a
+	jr nz, .asm_3802
+	dec hl
+	ld a, [hld]
+	ld [$FF00+$8d], a
+	ld a, [hld]
+	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	ld a, [hl]
+	ld [H_DOWNARROWBLINKCNT1], a ; $FF00+$8b
+	jr .asm_381c
+.asm_3812
+	ld a, $1e
+	ld [$FF00+$b8], a
+	ld [$2000], a
+	call Func_7bf86
+.asm_381c
+	ld de, H_DOWNARROWBLINKCNT1 ; $ff8b
+	pop af
+	ld [$FF00+$b8], a
+	ld [$2000], a
+	ret
 
+; known jump sources: 2d14 (0:2d14), 3e43 (0:3e43), 6d77 (1:6d77), e37a (3:637a), e49c (3:649c), e710 (3:6710), e73f (3:673f), 1338d (4:738d), 3adcc (e:6dcc), 3afa9 (e:6fa9), 3d068 (f:5068), 3da2a (f:5a2a), 3e341 (f:6341), 3e728 (f:6728), 3eaab (f:6aab), 3eafe (f:6afe), 610f4 (18:50f4)
+Func_3826: ; 3826 (0:3826)
+	ld hl, $cf4b
+.asm_3829
+	ld a, [de]
+	inc de
+	ld [hli], a
+	cp $50
+	jr nz, .asm_3829
+	ret
+; 3831 (0:3831)
 ; this function is used when lower button sensitivity is wanted (e.g. menus)
 ; OUTPUT: [$ffb5] = pressed buttons in usual format
 ; there are two flags that control its functionality, [$ffb6] and [$ffb7]
@@ -6997,8 +9121,50 @@ GetJoypadStateLowSensitivity: ; 3831
 	ld [H_FRAMECOUNTER],a
 	ret
 
-INCBIN "baserom.gbc",$3865,$38AC - $3865
+; known jump sources: 29dc (0:29dc), 389f (0:389f), dddc (3:5ddc), defc (3:5efc), e56e (3:656e), 12a77 (4:6a77), 12c71 (4:6c71), 1347f (4:747f), 441b3 (11:41b3), 5540e (15:540e), 5a507 (16:6507), 5dc0c (17:5c0c), 70f7f (1c:4f7f), 765eb (1d:65eb), 76784 (1d:6784)
+Func_3865: ; 3865 (0:3865)
+	ld a, [H_DOWNARROWBLINKCNT1] ; $FF00+$8b
+	push af
+	ld a, [H_DOWNARROWBLINKCNT2] ; $FF00+$8c
+	push af
+	xor a
+	ld [H_DOWNARROWBLINKCNT1], a ; $FF00+$8b
+	ld a, $6
+	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+.asm_3872
+	push hl
+	ld a, [$d09b]
+	and a
+	jr z, .asm_387c
+	call $56c6
+.asm_387c
+	ld hl, $c4f2
+	call HandleDownArrowBlinkTiming
+	pop hl
+	call GetJoypadStateLowSensitivity
+	ld a, $2d
+	call Predef ; indirect jump to Func_5a5f (5a5f (1:5a5f))
+	ld a, [$FF00+$b5]
+	and $3
+	jr z, .asm_3872
+	pop af
+	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	pop af
+	ld [H_DOWNARROWBLINKCNT1], a ; $FF00+$8b
+	ret
 
+; known jump sources: 1aa5 (0:1aa5), 1abd (0:1abd), 1ade (0:1ade), 1b01 (0:1b01), 1bda (0:1bda), 1c9b (0:1c9b)
+Func_3898: ; 3898 (0:3898)
+	ld a, [W_ISLINKBATTLE] ; $d12b
+	cp $4
+	jr z, .asm_38a7
+	call Func_3865
+	ld a, $90
+	jp Func_23b1
+.asm_38a7
+	ld c, $41
+	jp DelayFrames
+; 38ac (0:38ac)
 ; function to do multiplication
 ; all values are big endian
 ; INPUT
@@ -7125,8 +9291,229 @@ AddPokemonToParty: ; 0x3927
 	pop hl
 	ret
 
-INCBIN "baserom.gbc",$3936,$3A87 - $3936
+; known jump sources: de80 (3:5e80), f46e (3:746e), f661 (3:7661), 1296e (4:696e), 3ae69 (e:6e69), 3eb46 (f:6b46), 55382 (15:5382)
+Func_3936: ; 3936 (0:3936)
+	ld c, $0
+.asm_3938
+	inc c
+	call Func_394a
+	ld a, [$FF00+$97]
+	ld [de], a
+	inc de
+	ld a, [$FF00+$98]
+	ld [de], a
+	inc de
+	ld a, c
+	cp $5
+	jr nz, .asm_3938
+	ret
 
+; known jump sources: 3939 (0:3939), f3c4 (3:73c4), 3df60 (f:5f60)
+Func_394a: ; 394a (0:394a)
+	push hl
+	push de
+	push bc
+	ld a, b
+	ld d, a
+	push hl
+	ld hl, $d0b8
+	ld b, $0
+	add hl, bc
+	ld a, [hl]
+	ld e, a
+	pop hl
+	push hl
+	sla c
+	ld a, d
+	and a
+	jr z, .asm_397f
+	add hl, bc
+.asm_3961
+	xor a
+	ld [H_NUMTOPRINT], a ; $FF00+$96 (aliases: H_MULTIPLICAND)
+	ld [$FF00+$97], a
+	inc b
+	ld a, b
+	cp $ff
+	jr z, .asm_397f
+	ld [$FF00+$98], a
+	ld [H_REMAINDER], a ; $FF00+$99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
+	call Multiply
+	ld a, [hld]
+	ld d, a
+	ld a, [$FF00+$98]
+	sub d
+	ld a, [hli]
+	ld d, a
+	ld a, [$FF00+$97]
+	sbc d
+	jr c, .asm_3961
+.asm_397f
+	srl c
+	pop hl
+	push bc
+	ld bc, $b
+	add hl, bc
+	pop bc
+	ld a, c
+	cp $2
+	jr z, .asm_39bf
+	cp $3
+	jr z, .asm_39c6
+	cp $4
+	jr z, .asm_39cb
+	cp $5
+	jr z, .asm_39d3
+	push bc
+	ld a, [hl]
+	swap a
+	and $1
+	sla a
+	sla a
+	sla a
+	ld b, a
+	ld a, [hli]
+	and $1
+	sla a
+	sla a
+	add b
+	ld b, a
+	ld a, [hl]
+	swap a
+	and $1
+	sla a
+	add b
+	ld b, a
+	ld a, [hl]
+	and $1
+	add b
+	pop bc
+	jr .asm_39d7
+.asm_39bf
+	ld a, [hl]
+	swap a
+	and $f
+	jr .asm_39d7
+.asm_39c6
+	ld a, [hl]
+	and $f
+	jr .asm_39d7
+.asm_39cb
+	inc hl
+	ld a, [hl]
+	swap a
+	and $f
+	jr .asm_39d7
+.asm_39d3
+	inc hl
+	ld a, [hl]
+	and $f
+.asm_39d7
+	ld d, $0
+	add e
+	ld e, a
+	jr nc, .asm_39de
+	inc d
+.asm_39de
+	sla e
+	rl d
+	srl b
+	srl b
+	ld a, b
+	add e
+	jr nc, .asm_39eb
+	inc d
+.asm_39eb
+	ld [$FF00+$98], a
+	ld a, d
+	ld [$FF00+$97], a
+	xor a
+	ld [H_NUMTOPRINT], a ; $FF00+$96 (aliases: H_MULTIPLICAND)
+	ld a, [W_CURENEMYLVL] ; $d127
+	ld [H_REMAINDER], a ; $FF00+$99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
+	call Multiply
+	ld a, [H_NUMTOPRINT] ; $FF00+$96 (aliases: H_MULTIPLICAND)
+	ld [H_DIVIDEND], a ; $FF00+$95 (aliases: H_PRODUCT, H_PASTLEADINGZEROES, H_QUOTIENT)
+	ld a, [$FF00+$97]
+	ld [H_NUMTOPRINT], a ; $FF00+$96 (aliases: H_MULTIPLICAND)
+	ld a, [$FF00+$98]
+	ld [$FF00+$97], a
+	ld a, $64
+	ld [H_REMAINDER], a ; $FF00+$99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
+	ld a, $3
+	ld b, a
+	call Divide
+	ld a, c
+	cp $1
+	ld a, $5
+	jr nz, .asm_3a2a
+	ld a, [W_CURENEMYLVL] ; $d127
+	ld b, a
+	ld a, [$FF00+$98]
+	add b
+	ld [$FF00+$98], a
+	jr nc, .asm_3a28
+	ld a, [$FF00+$97]
+	inc a
+	ld [$FF00+$97], a
+.asm_3a28
+	ld a, $a
+.asm_3a2a
+	ld b, a
+	ld a, [$FF00+$98]
+	add b
+	ld [$FF00+$98], a
+	jr nc, .asm_3a37
+	ld a, [$FF00+$97]
+	inc a
+	ld [$FF00+$97], a
+.asm_3a37
+	ld a, [$FF00+$97]
+	cp $4
+	jr nc, .asm_3a47
+	cp $3
+	jr c, .asm_3a4f
+	ld a, [$FF00+$98]
+	cp $e8
+	jr c, .asm_3a4f
+.asm_3a47
+	ld a, $3
+	ld [$FF00+$97], a
+	ld a, $e7
+	ld [$FF00+$98], a
+.asm_3a4f
+	pop bc
+	pop de
+	pop hl
+	ret
+
+INCBIN "baserom.gbc",$3a53,$3a68 - $3a53
+
+; known jump sources: 215e8 (8:55e8), 2165c (8:565c)
+Func_3a68: ; 3a68 (0:3a68)
+	ld a, [$FF00+$b8]
+	push af
+	ld a, $3
+	ld [$FF00+$b8], a
+	ld [$2000], a
+	call Func_f51e
+	pop bc
+	ld a, b
+	ld [$FF00+$b8], a
+	ld [$2000], a
+	ret
+
+; known jump sources: 15bc (0:15bc), 7b9a (1:7b9a), f318 (3:7318), f332 (3:7332), f5ce (3:75ce), f5e9 (3:75e9), f60c (3:760c), f627 (3:7627), 12a92 (4:6a92), 136d8 (4:76d8), 136eb (4:76eb), 13706 (4:7706), 13719 (4:7719), 3cbe9 (f:4be9), 3cc56 (f:4c56)
+Func_3a7d: ; 3a7d (0:3a7d)
+	and a
+	ret z
+	ld bc, $b
+.asm_3a82
+	add hl, bc
+	dec a
+	jr nz, .asm_3a82
+	ret
+; 3a87 (0:3a87)
 AddNTimes: ; 3A87
 ; add bc to hl a times
 	and a
@@ -7480,6 +9867,7 @@ PrintText: ; 0x3c49
 	call $2429
 	call Delay3
 	pop hl
+Func_3c59:
 	FuncCoord 1,14
 	ld bc,Coord ;$C4B9
 	jp TextCommandProcessor
@@ -7764,8 +10152,17 @@ IsInArray: ; 3DAB
 	scf
 	ret
 
-INCBIN "baserom.gbc",$3DBE,$3DD4 - $3DBE
-
+; known jump sources: 656e (1:656e), ef9e (3:6f9e), 130ce (4:70ce), 132d9 (4:72d9), 133f9 (4:73f9), 1da79 (7:5a79), 71ca5 (1c:5ca5)
+Func_3dbe: ; 3dbe (0:3dbe)
+	call CleanLCD_OAM
+	ld a, $1
+	ld [$cfcb], a
+	call Func_3e08
+	call Func_3701
+	call LoadTextBoxTilePatterns
+	call GoPAL_SET_CF1C
+	jr Delay3
+; 3dd4 (0:3dd4)
 ; calls GBPalWhiteOut and then Delay3
 GBPalWhiteOutWithDelay3: ; 3DD4
 	call GBPalWhiteOut
@@ -7800,8 +10197,41 @@ GoPAL_SET: 	; 3def
 	ld a,$45
 	jp Predef
 
-INCBIN "baserom.gbc",$3df9,$3e2e - $3df9
+; known jump sources: 129eb (4:69eb), 12ed1 (4:6ed1), 3ce91 (f:4e91)
+Func_3df9: ; 3df9 (0:3df9)
+	ld a, e
+	cp $1b
+	ld d, $0
+	jr nc, .asm_3e06
+	cp $a
+	inc d
+	jr nc, .asm_3e06
+	inc d
+.asm_3e06
+	ld [hl], d
+	ret
 
+; known jump sources: 3dc6 (0:3dc6), 653b (1:653b)
+Func_3e08: ; 3e08 (0:3e08)
+	ld hl, $cfc4
+	ld a, [hl]
+	push af
+	res 0, [hl]
+	push hl
+	xor a
+	ld [W_SPRITESETID], a ; $d3a8
+	call DisableLCD
+	ld b, BANK(InitMapSprites)
+	ld hl, InitMapSprites
+	call Bankswitch ; indirect jump to InitMapSprites (1785b (5:785b))
+	call EnableLCD
+	pop hl
+	pop af
+	ld [hl], a
+	call LoadPlayerSpriteGraphics
+	call LoadFontTilePatterns
+	jp Func_2429
+; 3e2e (0:3e2e)
 GiveItem: ; 0x3e2e
 	ld a, b
 	ld [$d11e], a
@@ -7890,8 +10320,80 @@ Load16BitRegisters: ;3e94
 	ret
 ; 0x3ead
 
-INCBIN "baserom.gbc",$3EAD,$3F22 - $3EAD
+; known jump sources: 75769 (1d:5769), 75837 (1d:5837)
+Func_3ead: ; 3ead (0:3ead)
+	ld b, BANK(Func_1eb0a)
+	ld hl, Func_1eb0a
+	jp Bankswitch ; indirect jump to Func_1eb0a (1eb0a (7:6b0a))
 
+; known jump sources: 46b (0:46b)
+Func_3eb5: ; 3eb5 (0:3eb5)
+	ld a, [$FF00+$b8]
+	push af
+	ld a, [$FF00+$b4]
+	bit 0, a
+	jr z, .asm_3eea
+	ld a, $11
+	ld [$2000], a
+	ld [$FF00+$b8], a
+	call Func_469a0
+	ld a, [$FF00+$ee]
+	and a
+	jr nz, .asm_3edd
+	ld a, [$cd3e]
+	ld [$2000], a
+	ld [$FF00+$b8], a
+	ld de, $3eda
+	push de
+	jp [hl]
+	xor a
+	jr .asm_3eec
+.asm_3edd
+	ld b, BANK(Func_fb50)
+	ld hl, Func_fb50
+	call Bankswitch ; indirect jump to Func_fb50 (fb50 (3:7b50))
+	ld a, [$FF00+$db]
+	and a
+	jr z, .asm_3eec
+.asm_3eea
+	ld a, $ff
+.asm_3eec
+	ld [$FF00+$eb], a
+	pop af
+	ld [$2000], a
+	ld [$FF00+$b8], a
+	ret
+
+; known jump sources: fb74 (3:7b74), 1ea22 (7:6a22), 1eb88 (7:6b88), 1eb92 (7:6b92), 1ebd9 (7:6bd9), 526ab (14:66ab), 526e0 (14:66e0), 5dbba (17:5bba), 5dbd0 (17:5bd0), 5de0e (17:5e0e), 5de7a (17:5e7a), 62526 (18:6526), 766b5 (1d:66b5)
+Func_3ef5: ; 3ef5 (0:3ef5)
+	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	ld hl, $3f22
+	call Func_3f0f
+	ld hl, $cf11
+	set 0, [hl]
+	call DisplayTextID
+
+; known jump sources: 738f4 (1c:78f4)
+Func_3f05: ; 3f05 (0:3f05)
+	ld hl, W_MAPTEXTPTR ; $d36c
+	ld a, [$FF00+$ec]
+	ld [hli], a
+	ld a, [$FF00+$ed]
+	ld [hl], a
+	ret
+
+; known jump sources: 3efa (0:3efa), 738fd (1c:78fd)
+Func_3f0f: ; 3f0f (0:3f0f)
+	ld a, [W_MAPTEXTPTR] ; $d36c
+	ld [$FF00+$ec], a
+	ld a, [$d36d]
+	ld [$FF00+$ed], a
+	ld a, l
+	ld [W_MAPTEXTPTR], a ; $d36c
+	ld a, h
+	ld [$d36d], a
+	ret
+; 3f22 (0:3f22)
 ; 0x3F22
 	dw $66ee
 	dw $66f8
@@ -7962,8 +10464,53 @@ INCBIN "baserom.gbc",$3EAD,$3F22 - $3EAD
 
 SECTION "bank1",DATA,BANK[$1]
 
-INCBIN "baserom.gbc",$4000,$112
+INCBIN "baserom.gbc",$4000,$40b0 - $4000
 
+; known jump sources: 945 (0:945)
+Func_40b0: ; 40b0 (1:40b0)
+	xor a
+	ld [$cf0b], a
+	ld [$d700], a
+	ld [W_ISINBATTLE], a ; $d057
+	ld [$d35d], a
+	ld [$cf10], a
+	ld [$FF00+$b4], a
+	ld [$cc57], a
+	ld [$cd60], a
+	ld [$FF00+$9f], a
+	ld [$FF00+$a0], a
+	ld [$FF00+$a1], a
+	call Func_35a6
+	jr c, .asm_40ff
+	ld a, [W_PLAYERMONEY3] ; $d347
+	ld [$FF00+$9f], a
+	ld a, [W_PLAYERMONEY2] ; $d348
+	ld [$FF00+$a0], a
+	ld a, [W_PLAYERMONEY1] ; $d349
+	ld [$FF00+$a1], a
+	xor a
+	ld [$FF00+$a2], a
+	ld [$FF00+$a3], a
+	ld a, $2
+	ld [$FF00+$a4], a
+	ld a, $d
+	call Predef ; indirect jump to Func_f71e (f71e (3:771e))
+	ld a, [$FF00+$a2]
+	ld [W_PLAYERMONEY3], a ; $d347
+	ld a, [$FF00+$a3]
+	ld [W_PLAYERMONEY2], a ; $d348
+	ld a, [$FF00+$a4]
+	ld [W_PLAYERMONEY1], a ; $d349
+.asm_40ff
+	ld hl, $d732
+	set 2, [hl]
+	res 3, [hl]
+	set 6, [hl]
+	ld a, $ff
+	ld [$cd6b], a
+	ld a, $7
+	jp Predef ; indirect jump to HealParty (f6a5 (3:76a5))
+; 4112 (1:4112)
 MewPicFront: ; 0x4112
 	INCBIN "pic/bmon/mew.pic"
 MewPicBack: ; 0x4205
@@ -8006,8 +10553,36 @@ MewBaseStats: ; 0x425b
 	db %11111111
 	db %11111111 ; usually spacing
 
-INCBIN "baserom.gbc",$4277,$30
-
+; known jump sources: 3c17f (f:417f)
+Func_4277: ; 4277 (1:4277)
+	ld hl, $cce9
+	ld a, [hl]
+	and a
+	jr z, .asm_4284
+	dec [hl]
+	ld hl, $42a7
+	jr .asm_429f
+.asm_4284
+	dec hl
+	ld a, [hl]
+	and a
+	ret z
+	dec [hl]
+	ld hl, $42ac
+	jr nz, .asm_429f
+	push hl
+	ld a, [$cfe5]
+	ld [$d0b5], a
+	call GetBaseStats
+	ld a, [$d0c0]
+	ld [$d007], a
+	pop hl
+.asm_429f
+	push hl
+	call Func_3725
+	pop hl
+	jp PrintText
+; 42a7 (1:42a7)
 UnnamedText_42a7: ; 0x42a7
 	TX_FAR SafariZoneEatingText
 	db $50
@@ -8018,8 +10593,64 @@ UnnamedText_42ac: ; 0x42ac
 	db $50
 ; 0x42ac + 5 bytes
 
-INCBIN "baserom.gbc",$42b1,$84
+; known jump sources: 42bd (1:42bd), 42c6 (1:42c6)
+Func_42b1: ; 42b1 (1:42b1)
+	ld bc, $b
+	jp CopyData
+	ld hl, $45aa
+	ld de, W_PLAYERNAME ; $d158
+	call Func_42b1
+	ld hl, $45b1
+	ld de, W_RIVALNAME ; $d34a
+	call Func_42b1
+	xor a
+	ld [$FF00+$b0], a
+	ld [$d358], a
+	ld hl, $d732
+	ld [hli], a
+	ld [hli], a
+	ld [hl], a
+	ld a, $1f
+	ld [$c0ef], a
+	ld [$c0f0], a
 
+; known jump sources: 5526 (1:5526), 5b89 (1:5b89)
+Func_42dd: ; 42dd (1:42dd)
+	call GBPalWhiteOut
+	ld a, $1
+	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	xor a
+	ld [$FF00+$d7], a
+	ld [$FF00+$ae], a
+	ld a, $40
+	ld [$FF00+$af], a
+	ld a, $90
+	ld [$FF00+$b0], a
+	call ClearScreen
+	call DisableLCD
+	call LoadFontTilePatterns
+	ld hl, $60c8
+	ld de, $9410
+	ld bc, $50
+	ld a, $4
+	call FarCopyData2
+	ld hl, $61f8
+	ld de, $9460
+	ld bc, $90
+	ld a, $4
+	call FarCopyData2
+	ld hl, $5380
+	ld de, $8800
+	ld bc, $600
+	ld a, $4
+	call FarCopyData2
+	ld hl, $5980
+	ld de, $9310
+	ld bc, $100
+	ld a, $4
+	call FarCopyData2
+	ld hl, $402f
+; 4335 (1:4335)
 ; 0x4335
 IF _RED
 	ld de,$9600 ; where to put redgreenversion.2bpp in the VRAM
@@ -8030,8 +10661,54 @@ IF _BLUE
 	ld bc,$40 ; how big that file is
 ENDC
 
-INCBIN "baserom.gbc",$433B,$4398-$433B
+	ld a, $1a
+	call FarCopyDataDouble
+	call Func_4519
+	ld hl, $c3b6
+	ld a, $80
+	ld de, $14
+	ld c, $6
+.asm_434d
+	ld b, $10
+	push hl
+.asm_4350
+	ld [hli], a
+	inc a
+	dec b
+	jr nz, .asm_4350
+	pop hl
+	add hl, de
+	dec c
+	jr nz, .asm_434d
+	ld hl, $c42e
+	ld a, $31
+	ld b, $10
+.asm_4361
+	ld [hli], a
+	inc a
+	dec b
+	jr nz, .asm_4361
+	call Func_44dd
+	ld hl, $c328
+	ld a, $74
+	ld [hl], a
+	ld hl, $c4f6
+	ld de, $437f
+	ld b, $10
+.asm_4377
+	ld a, [de]
+	ld [hli], a
+	inc de
+	dec b
+	jr nz, .asm_4377
+	jr .asm_438f
 
+INCBIN "baserom.gbc",$437f,$438f - $437f
+.asm_438f
+	call Func_36f4
+	call Func_3701
+	call EnableLCD
+; 4398 (1:4398)
 IF _RED
 	ld a,CHARMANDER ; which Pokemon to show first on the title screen
 ENDC
@@ -8039,7 +10716,247 @@ IF _BLUE
 	ld a,SQUIRTLE ; which Pokemon to show first on the title screen
 ENDC
 
-INCBIN "baserom.gbc",$439A,$4588-$439A
+	ld [W_WHICHTRADE], a ; $cd3d
+	call Func_4524
+	ld a, $9b
+	call Func_4533
+	call Func_3719
+	ld a, $40
+	ld [$FF00+$b0], a
+	call Func_3701
+	ld a, $98
+	call Func_4533
+	ld b, $6
+	call GoPAL_SET
+	call GBPalNormal
+	ld a, $e4
+	ld [rOBP0], a ; $FF00+$48
+	ld bc, $ffaf
+	ld hl, $43db
+.asm_43c6
+	ld a, [hli]
+	and a
+	jr z, .asm_43f4
+	ld d, a
+	cp $fd
+	jr nz, .asm_43d4
+	ld a, $bc
+	call Func_23b1
+.asm_43d4
+	ld a, [hli]
+	ld e, a
+	call .asm_43ea
+	jr .asm_43c6
+
+INCBIN "baserom.gbc",$43db,$43ea - $43db
+.asm_43ea
+	call DelayFrame
+	ld a, [bc]
+	add d
+	ld [bc], a
+	dec e
+	jr nz, .asm_43ea
+	ret
+.asm_43f4
+	call Func_3725
+	ld c, $24
+	call DelayFrames
+	ld a, $bd
+	call Func_23b1
+	call Func_4598
+	ld a, $90
+	ld [$FF00+$b0], a
+	ld d, $90
+.asm_440a
+	ld h, d
+	ld l, $40
+	call Func_44cf
+	ld h, $0
+	ld l, $50
+	call Func_44cf
+	ld a, d
+	add $4
+	ld d, a
+	and a
+	jr nz, .asm_440a
+	ld a, $9c
+	call Func_4533
+	call Func_3701
+	call Func_4598
+	call Delay3
+	call Func_3748
+	ld a, $c3
+	ld [$c0ee], a
+	call Func_23b1
+	xor a
+	ld [$cc5b], a
+.asm_443b
+	ld c, $c8
+	call CheckForUserInterruption
+	jr c, .asm_4459
+	call Func_44c1
+	ld c, $1
+	call CheckForUserInterruption
+	jr c, .asm_4459
+	ld b, BANK(Func_372ac)
+	ld hl, Func_372ac
+	call Bankswitch ; indirect jump to Func_372ac (372ac (d:72ac))
+	call Func_4496
+	jr .asm_443b
+.asm_4459
+	ld a, [W_WHICHTRADE] ; $cd3d
+	call PlayCry
+	call Func_3748
+	call GBPalWhiteOutWithDelay3
+	call CleanLCD_OAM
+	xor a
+	ld [$FF00+$b0], a
+	inc a
+	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	call ClearScreen
+	ld a, $98
+	call Func_4533
+	ld a, $9c
+	call Func_4533
+	call Delay3
+	call LoadGBPal
+	ld a, [$FF00+$b4]
+	ld b, a
+	and $46
+	cp $46
+	jp z, Func_448e
+	jp MainMenu
+
+; known jump sources: 4488 (1:4488)
+Func_448e: ; 448e (1:448e)
+	ld b, BANK(Func_1c98a)
+	ld hl, Func_1c98a
+	jp Bankswitch ; indirect jump to Func_1c98a (1c98a (7:498a))
+
+; known jump sources: 4454 (1:4454)
+Func_4496: ; 4496 (1:4496)
+	ld a, $98
+	call Func_4533
+.asm_449b
+	call GenRandom
+	and $f
+	ld c, a
+	ld b, $0
+	ld hl, $4588
+	add hl, bc
+	ld a, [hl]
+	ld hl, W_WHICHTRADE ; $cd3d
+	cp [hl]
+	jr z, .asm_449b
+	ld [hl], a
+	call Func_4524
+	ld a, $90
+	ld [$FF00+$b0], a
+	ld d, $1
+	ld b, BANK(Func_37258)
+	ld hl, Func_37258
+	call Bankswitch ; indirect jump to Func_37258 (37258 (d:7258))
+	ret
+
+; known jump sources: 4442 (1:4442)
+Func_44c1: ; 44c1 (1:44c1)
+	ld d, $0
+	ld b, BANK(Func_37258)
+	ld hl, Func_37258
+	call Bankswitch ; indirect jump to Func_37258 (37258 (d:7258))
+	xor a
+	ld [$FF00+$b0], a
+	ret
+
+; known jump sources: 440d (1:440d), 4414 (1:4414), 44d2 (1:44d2)
+Func_44cf: ; 44cf (1:44cf)
+	ld a, [$FF00+$44]
+	cp l
+	jr nz, Func_44cf
+	ld a, h
+	ld [rSCX], a ; $FF00+$43
+.asm_44d7
+	ld a, [$FF00+$44]
+	cp h
+	jr z, .asm_44d7
+	ret
+
+; known jump sources: 4366 (1:4366)
+Func_44dd: ; 44dd (1:44dd)
+	ld hl, $66a8
+	ld de, $8000
+	ld bc, $230
+	ld a, $4
+	call FarCopyData2
+	call CleanLCD_OAM
+	xor a
+	ld [W_WHICHTRADE], a ; $cd3d
+	ld hl, $c300
+	ld de, $605a
+	ld b, $7
+.asm_44fa
+	push de
+	ld c, $5
+.asm_44fd
+	ld a, d
+	ld [hli], a
+	ld a, e
+	ld [hli], a
+	add $8
+	ld e, a
+	ld a, [W_WHICHTRADE] ; $cd3d
+	ld [hli], a
+	inc a
+	ld [W_WHICHTRADE], a ; $cd3d
+	inc hl
+	dec c
+	jr nz, .asm_44fd
+	pop de
+	ld a, $8
+	add d
+	ld d, a
+	dec b
+	jr nz, .asm_44fa
+	ret
+
+; known jump sources: 4340 (1:4340)
+Func_4519: ; 4519 (1:4519)
+	ld hl, $9800
+	ld bc, $800
+	ld a, $7f
+	jp FillMemory
+
+; known jump sources: 439d (1:439d), 44af (1:44af)
+Func_4524: ; 4524 (1:4524)
+	ld [$cf91], a
+	ld [$d0b5], a
+	ld hl, $c46d
+	call GetBaseStats
+	jp Func_1389
+
+; known jump sources: 43a2 (1:43a2), 43b1 (1:43b1), 4420 (1:4420), 4473 (1:4473), 4478 (1:4478), 4498 (1:4498)
+Func_4533: ; 4533 (1:4533)
+	ld [$FF00+$bd], a
+	jp Delay3
+
+; known jump sources: 41894 (10:5894)
+Func_4538: ; 4538 (1:4538)
+	xor a
+	ld [$FF00+$b0], a
+	call ClearScreen
+	call LoadTextBoxTilePatterns
+
+; known jump sources: 741fa (1d:41fa)
+Func_4541: ; 4541 (1:4541)
+	ld de, $60c8
+	ld hl, $9600
+	ld bc, $41c
+	call CopyVideoData
+	ld hl, $c42e
+	ld de, $4556
+	jp PlaceString
+
+INCBIN "baserom.gbc",$4556,$4588 - $4556
 
 TitleMons: ; 4588
 ; mons on the title screen are randomly chosen from here
@@ -8098,8 +11015,12 @@ IF _BLUE
 	db RAICHU
 ENDC
 
-INCBIN "baserom.gbc",$4598,$45A1-$4598
-
+; known jump sources: 4401 (1:4401), 4426 (1:4426)
+Func_4598: ; 4598 (1:4598)
+	ld hl, $c447
+	ld de, $45a1
+	jp PlaceString
+; 45a1 (1:45a1)
 ; xxx Version tilemap on the title screen
 IF _RED
 	db $60,$61,$7F,$65,$66,$67,$68,$69,$50
@@ -8284,22 +11205,1776 @@ UnusedNames: ; 4A92
 	db "プチマスター@"
 	db "マスター@"
 
-INCBIN "baserom.gbc",$4b09,$4e2c - $4b09
+INCBIN "baserom.gbc",$4b09,$4b0f - $4b09
+
+; known jump sources: 205b (0:205b)
+Func_4b0f: ; 4b0f (1:4b0f)
+	ld a, [$cfcb]
+	dec a
+	jr z, .asm_4b1e
+	cp $ff
+	ret nz
+	ld [$cfcb], a
+	jp ResetLCD_OAM
+.asm_4b1e
+	xor a
+	ld [$FF00+$90], a
+
+; known jump sources: 4bb3 (1:4bb3)
+Func_4b21: ; 4b21 (1:4b21)
+	ld [$FF00+$8f], a
+	ld d, $c1
+	ld a, [$FF00+$8f]
+	ld e, a
+	ld a, [de]
+	and a
+	jp z, .asm_4bad
+	inc e
+	inc e
+	ld a, [de]
+	ld [$d5cd], a
+	cp $ff
+	jr nz, .asm_4b3c
+	call Func_4bd1
+	jr .asm_4bad
+.asm_4b3c
+	cp $a0
+	jr c, .asm_4b46
+	and $f
+	add $10
+	jr .asm_4b48
+.asm_4b46
+	and $f
+.asm_4b48
+	ld l, a
+	push de
+	inc d
+	ld a, e
+	add $5
+	ld e, a
+	ld a, [de]
+	and $80
+	ld [$FF00+$94], a
+	pop de
+	ld h, $0
+	ld bc, $4000
+	add hl, hl
+	add hl, hl
+	add hl, bc
+	ld a, [hli]
+	ld c, a
+	ld a, [hli]
+	ld b, a
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	call Func_4bd1
+	ld a, [$FF00+$90]
+	ld e, a
+	ld d, $c3
+.asm_4b6c
+	ld a, [$FF00+$92]
+	add $10
+	add [hl]
+	ld [de], a
+	inc hl
+	ld a, [$FF00+$91]
+	add $8
+	add [hl]
+	inc e
+	ld [de], a
+	inc e
+	ld a, [bc]
+	inc bc
+	push bc
+	ld b, a
+	ld a, [$d5cd]
+	swap a
+	and $f
+	cp $b
+	jr nz, .asm_4b8e
+	ld a, $7c
+	jr .asm_4b96
+.asm_4b8e
+	sla a
+	sla a
+	ld c, a
+	sla a
+	add c
+.asm_4b96
+	add b
+	pop bc
+	ld [de], a
+	inc hl
+	inc e
+	ld a, [hl]
+	bit 1, a
+	jr z, .asm_4ba3
+	ld a, [$FF00+$94]
+	or [hl]
+.asm_4ba3
+	inc hl
+	ld [de], a
+	inc e
+	bit 0, a
+	jr z, .asm_4b6c
+	ld a, e
+	ld [$FF00+$90], a
+.asm_4bad
+	ld a, [$FF00+$8f]
+	add $10
+	cp $0
+	jp nz, Func_4b21
+	ld a, [$FF00+$90]
+	ld l, a
+	ld h, $c3
+	ld de, $4
+	ld b, $a0
+	ld a, [$d736]
+	bit 6, a
+	ld a, $a0
+	jr z, .asm_4bcb
+	ld a, $90
+.asm_4bcb
+	cp l
+	ret z
+	ld [hl], b
+	add hl, de
+	jr .asm_4bcb
+
+; known jump sources: 4b37 (1:4b37), 4b64 (1:4b64)
+Func_4bd1: ; 4bd1 (1:4bd1)
+	inc e
+	inc e
+	ld a, [de]
+	ld [$FF00+$92], a
+	inc e
+	inc e
+	ld a, [de]
+	ld [$FF00+$91], a
+	ld a, $4
+	add e
+	ld e, a
+	ld a, [$FF00+$92]
+	add $4
+	and $f0
+	ld [de], a
+	inc e
+	ld a, [$FF00+$91]
+	and $f0
+	ld [de], a
+	ret
+
+; known jump sources: 1f9e (0:1f9e)
+Func_4bed: ; 4bed (1:4bed)
+	ld c, $80
+	ld b, $a
+	ld hl, $4bfb
+.asm_4bf4
+	ld a, [hli]
+	ld [$ff00+c], a
+	inc c
+	dec b
+	jr nz, .asm_4bf4
+	ret
+
+INCBIN "baserom.gbc",$4bfb,$4c05 - $4bfb
+
+; known jump sources: 3d638 (f:5638)
+Func_4c05: ; 4c05 (1:4c05)
+	ld hl, $c46b
+	ld b, $1
+	ld c, $b
+	ld a, [W_ISINBATTLE] ; $d057
+	and a
+	jr z, .asm_4c17
+	call TextBoxBorder
+	jr .asm_4c1a
+.asm_4c17
+	call Func_5ab3
+.asm_4c1a
+	ld hl, $c480
+	ld de, $4c28
+	call PlaceString
+	ld c, $32
+	jp DelayFrames
+
+INCBIN "baserom.gbc",$4c28,$4c34 - $4c28
+
+; known jump sources: 2438 (0:2438)
+Func_4c34: ; 4c34 (1:4c34)
+	ld h, $c1
+	inc h
+	ld a, $e
+.asm_4c39
+	ld l, a
+	sub $e
+	ld c, a
+	ld [$FF00+$da], a
+	ld a, [hl]
+	and a
+	jr z, .asm_4c4c
+	push hl
+	push de
+	push bc
+	call Func_4c54
+	pop bc
+	pop de
+	pop hl
+.asm_4c4c
+	ld a, l
+	add $10
+	cp $e
+	jr nz, .asm_4c39
+	ret
+
+; known jump sources: 4c46 (1:4c46)
+Func_4c54: ; 4c54 (1:4c54)
+	cp $1
+	jp nz, Func_4c5c
+	jp Func_4e31
+
+; known jump sources: 4c56 (1:4c56)
+Func_4c5c: ; 4c5c (1:4c5c)
+	dec a
+	swap a
+	ld [$FF00+$93], a
+	ld a, [$cf17]
+	ld b, a
+	ld a, [$FF00+$da]
+	cp b
+	jr nz, .asm_4c6d
+	jp Func_5236
+.asm_4c6d
+	jp Func_4ed1
+
+; known jump sources: 4e50 (1:4e50), 51af (1:51af)
+Func_4c70: ; 4c70 (1:4c70)
+	nop
+	ld h, $c1
+	ld a, [$FF00+$da]
+	add $0
+	ld l, a
+	ld a, [hl]
+	and a
+	ret z
+	ld a, l
+	add $3
+	ld l, a
+	ld a, [hli]
+	call Func_4d72
+	ld a, [hli]
+	add $4
+	add b
+	and $f0
+	or c
+	ld [$FF00+$90], a
+	ld a, [hli]
+	call Func_4d72
+	ld a, [hl]
+	add b
+	and $f0
+	or c
+	ld [$FF00+$91], a
+	ld a, l
+	add $7
+	ld l, a
+	xor a
+	ld [hld], a
+	ld [hld], a
+	ld a, [$FF00+$91]
+	ld [hld], a
+	ld a, [$FF00+$90]
+	ld [hl], a
+	xor a
+
+; known jump sources: 4d6e (1:4d6e)
+Func_4ca5: ; 4ca5 (1:4ca5)
+	ld [$FF00+$8f], a
+	swap a
+	ld e, a
+	ld a, [$FF00+$da]
+	cp e
+	jp z, .asm_4d69
+	ld d, h
+	ld a, [de]
+	and a
+	jp z, .asm_4d69
+	inc e
+	inc e
+	ld a, [de]
+	inc a
+	jp z, .asm_4d69
+	ld a, [$FF00+$da]
+	add $a
+	ld l, a
+	inc e
+	ld a, [de]
+	call Func_4d72
+	inc e
+	ld a, [de]
+	add $4
+	add b
+	and $f0
+	or c
+	sub [hl]
+	jr nc, .asm_4cd4
+	cpl
+	inc a
+.asm_4cd4
+	ld [$FF00+$90], a
+	push af
+	rl c
+	pop af
+	ccf
+	rl c
+	ld b, $7
+	ld a, [hl]
+	and $f
+	jr z, .asm_4ce6
+	ld b, $9
+.asm_4ce6
+	ld a, [$FF00+$90]
+	sub b
+	ld [$FF00+$92], a
+	ld a, b
+	ld [$FF00+$90], a
+	jr c, .asm_4d01
+	ld b, $7
+	dec e
+	ld a, [de]
+	inc e
+	and a
+	jr z, .asm_4cfa
+	ld b, $9
+.asm_4cfa
+	ld a, [$FF00+$92]
+	sub b
+	jr z, .asm_4d01
+	jr nc, .asm_4d69
+.asm_4d01
+	inc e
+	inc l
+	ld a, [de]
+	push bc
+	call Func_4d72
+	inc e
+	ld a, [de]
+	add b
+	and $f0
+	or c
+	pop bc
+	sub [hl]
+	jr nc, .asm_4d14
+	cpl
+	inc a
+.asm_4d14
+	ld [$FF00+$91], a
+	push af
+	rl c
+	pop af
+	ccf
+	rl c
+	ld b, $7
+	ld a, [hl]
+	and $f
+	jr z, .asm_4d26
+	ld b, $9
+.asm_4d26
+	ld a, [$FF00+$91]
+	sub b
+	ld [$FF00+$92], a
+	ld a, b
+	ld [$FF00+$91], a
+	jr c, .asm_4d41
+	ld b, $7
+	dec e
+	ld a, [de]
+	inc e
+	and a
+	jr z, .asm_4d3a
+	ld b, $9
+.asm_4d3a
+	ld a, [$FF00+$92]
+	sub b
+	jr z, .asm_4d41
+	jr nc, .asm_4d69
+.asm_4d41
+	ld a, [$FF00+$91]
+	ld b, a
+	ld a, [$FF00+$90]
+	inc l
+	cp b
+	jr c, .asm_4d4e
+	ld b, $c
+	jr .asm_4d50
+.asm_4d4e
+	ld b, $3
+.asm_4d50
+	ld a, c
+	and b
+	or [hl]
+	ld [hl], a
+	ld a, c
+	inc l
+	inc l
+	ld a, [$FF00+$8f]
+	ld de, $4d85
+	add a
+	add e
+	ld e, a
+	jr nc, .asm_4d62
+	inc d
+.asm_4d62
+	ld a, [de]
+	or [hl]
+	ld [hli], a
+	inc de
+	ld a, [de]
+	or [hl]
+	ld [hl], a
+.asm_4d69
+	ld a, [$FF00+$8f]
+	inc a
+	cp $10
+	jp nz, Func_4ca5
+	ret
+
+; known jump sources: 4c80 (1:4c80), 4c8d (1:4c8d), 4cc4 (1:4cc4), 4d05 (1:4d05)
+Func_4d72: ; 4d72 (1:4d72)
+	and a
+	ld b, $0
+	ld c, $0
+	jr z, .asm_4d84
+	ld c, $9
+	cp $ff
+	jr z, .asm_4d83
+	ld c, $7
+	ld a, $0
+.asm_4d83
+	ld b, a
+.asm_4d84
+	ret
+
+INCBIN "baserom.gbc",$4d85,$4de1 - $4d85
+
+; known jump sources: 24f7 (0:24f7)
+Func_4de1: ; 4de1 (1:4de1)
+	call EnableAutoTextBoxDrawing
+	ld a, [H_DOWNARROWBLINKCNT2] ; $FF00+$8c
+	ld b, a
+	ld hl, $d5ce
+.asm_4dea
+	ld a, [hli]
+	cp $ff
+	ret z
+	cp b
+	jr z, .asm_4df4
+	inc hl
+	jr .asm_4dea
+.asm_4df4
+	ld a, [hl]
+	ld [$FF00+$db], a
+	ld hl, $d504
+	ld a, [H_DOWNARROWBLINKCNT2] ; $FF00+$8c
+	dec a
+	add a
+	ld d, $0
+	ld e, a
+	add hl, de
+	ld a, [hl]
+	ld b, a
+	ld c, $1
+	call GiveItem
+	jr nc, .asm_4e1f
+	ld a, [$FF00+$db]
+	ld [$cc4d], a
+	ld a, $11
+	call Predef ; indirect jump to Func_f1d7 (f1d7 (3:71d7))
+	ld a, $1
+	ld [$cc3c], a
+	ld hl, $4e26
+	jr .asm_4e22
+.asm_4e1f
+	ld hl, $4e2c
+.asm_4e22
+	call PrintText
+	ret
+
+INCBIN "baserom.gbc",$4e26,$4e2c - $4e26
 
 UnnamedText_4e2c: ; 0x4e2c
 	TX_FAR _UnnamedText_4e2c
 	db $50
 ; 0x4e2c + 5 bytes
 
-INCBIN "baserom.gbc",$4e31,$5a24 - $4e31
+; known jump sources: 4c59 (1:4c59)
+Func_4e31: ; 4e31 (1:4e31)
+	ld a, [$c200]
+	and a
+	jr z, .asm_4e41
+	cp $ff
+	jr z, .asm_4e4a
+	dec a
+	ld [$c200], a
+	jr .asm_4e4a
+.asm_4e41
+	ld a, [$c45c]
+	ld [$FF00+$93], a
+	cp $60
+	jr c, .asm_4e50
+.asm_4e4a
+	ld a, $ff
+	ld [$c102], a
+	ret
+.asm_4e50
+	call Func_4c70
+	ld h, $c1
+	ld a, [W_WALKCOUNTER] ; $cfc5
+	and a
+	jr nz, .asm_4e90
+	ld a, [$d528]
+	bit 2, a
+	jr z, .asm_4e65
+	xor a
+	jr .asm_4e86
+.asm_4e65
+	bit 3, a
+	jr z, .asm_4e6d
+	ld a, $4
+	jr .asm_4e86
+.asm_4e6d
+	bit 1, a
+	jr z, .asm_4e75
+	ld a, $8
+	jr .asm_4e86
+.asm_4e75
+	bit 0, a
+	jr z, .asm_4e7d
+	ld a, $c
+	jr .asm_4e86
+.asm_4e7d
+	xor a
+	ld [$c107], a
+	ld [$c108], a
+	jr .asm_4eab
+.asm_4e86
+	ld [$c109], a
+	ld a, [$cfc4]
+	bit 0, a
+	jr nz, .asm_4e7d
+.asm_4e90
+	ld a, [$d736]
+	bit 7, a
+	jr nz, .asm_4eb6
+	ld a, [$FF00+$da]
+	add $7
+	ld l, a
+	ld a, [hl]
+	inc a
+	ld [hl], a
+	cp $4
+	jr nz, .asm_4eab
+	xor a
+	ld [hl], a
+	inc hl
+	ld a, [hl]
+	inc a
+	and $3
+	ld [hl], a
+.asm_4eab
+	ld a, [$c108]
+	ld b, a
+	ld a, [$c109]
+	add b
+	ld [$c102], a
+.asm_4eb6
+	ld a, [$FF00+$93]
+	ld c, a
+	ld a, [$d535]
+	cp c
+	ld a, $0
+	jr nz, .asm_4ec3
+	ld a, $80
+.asm_4ec3
+	ld [$c207], a
+	ret
+
+INCBIN "baserom.gbc",$4ec7,$4ed1 - $4ec7
+
+; known jump sources: 4c6d (1:4c6d)
+Func_4ed1: ; 4ed1 (1:4ed1)
+	ld a, [$FF00+$da]
+	swap a
+	dec a
+	add a
+	ld hl, W_PEOPLEMOVEPERMISSIONS ; $d4e4
+	add l
+	ld l, a
+	ld a, [hl]
+	ld [$cf14], a
+	ld h, $c1
+	ld a, [$FF00+$da]
+	ld l, a
+	inc l
+	ld a, [hl]
+	and a
+	jp z, Func_50ad
+	call Func_50dc
+	ret c
+	ld h, $c1
+	ld a, [$FF00+$da]
+	ld l, a
+	inc l
+	ld a, [hl]
+	bit 7, a
+	jp nz, Func_507f
+	ld b, a
+	ld a, [$cfc4]
+	bit 0, a
+	jp nz, asm_5073
+	ld a, b
+	cp $2
+	jp z, Func_5057
+	cp $3
+	jp z, Func_4ffe
+	ld a, [W_WALKCOUNTER] ; $cfc5
+	and a
+	ret nz
+	call Func_50bd
+	ld h, $c2
+	ld a, [$FF00+$da]
+	add $6
+	ld l, a
+	ld a, [hl]
+	inc a
+	jr z, .asm_4f59
+	inc a
+	jr z, .asm_4f59
+	dec a
+	ld [hl], a
+	dec a
+	push hl
+	ld hl, $cf0f
+	dec [hl]
+	pop hl
+	ld de, $cc5b
+	call Func_522f
+	cp $e0
+	jp z, Func_4fc8
+	cp $ff
+	jr nz, .asm_4f4b
+	ld [hl], a
+	ld hl, $d730
+	res 0, [hl]
+	xor a
+	ld [$cd38], a
+	ld [$cd3a], a
+	ret
+.asm_4f4b
+	cp $fe
+	jr nz, .asm_4f5f
+	ld [hl], $1
+	ld de, $cc5b
+	call Func_522f
+	jr .asm_4f5f
+.asm_4f59
+	call Func_5207
+	call GenRandom
+.asm_4f5f
+	ld b, a
+	ld a, [$cf14]
+	cp $d0
+	jr z, .asm_4f7f
+	cp $d1
+	jr z, .asm_4f96
+	cp $d2
+	jr z, .asm_4fad
+	cp $d3
+	jr z, .asm_4fbe
+	ld a, b
+	cp $40
+	jr nc, .asm_4f8b
+	ld a, [$cf14]
+	cp $2
+	jr z, .asm_4fad
+.asm_4f7f
+	ld de, $28
+	add hl, de
+	ld de, $100
+	ld bc, $400
+	jr asm_4fcb
+.asm_4f8b
+	cp $80
+	jr nc, .asm_4fa2
+	ld a, [$cf14]
+	cp $2
+	jr z, .asm_4fbe
+.asm_4f96
+	ld de, $ffd8
+	add hl, de
+	ld de, rJOYP ; $ff00
+	ld bc, $804
+	jr asm_4fcb
+.asm_4fa2
+	cp $c0
+	jr nc, .asm_4fb7
+	ld a, [$cf14]
+	cp $1
+	jr z, .asm_4f96
+.asm_4fad
+	dec hl
+	dec hl
+	ld de, $ff
+	ld bc, $208
+	jr asm_4fcb
+.asm_4fb7
+	ld a, [$cf14]
+	cp $1
+	jr z, .asm_4f7f
+.asm_4fbe
+	inc hl
+	inc hl
+	ld de, $1
+	ld bc, $10c
+	jr asm_4fcb
+
+; known jump sources: 4f36 (1:4f36)
+Func_4fc8: ; 4fc8 (1:4fc8)
+	ld de, $0
+asm_4fcb: ; 4fcb (1:4fcb)
+	push hl
+	ld h, $c1
+	ld a, [$FF00+$da]
+	add $9
+	ld l, a
+	ld [hl], c
+	ld a, [$FF00+$da]
+	add $3
+	ld l, a
+	ld [hl], d
+	inc l
+	inc l
+	ld [hl], e
+	pop hl
+	push de
+	ld c, [hl]
+	call Func_516e
+	pop de
+	ret c
+	ld h, $c2
+	ld a, [$FF00+$da]
+	add $4
+	ld l, a
+	ld a, [hl]
+	add d
+	ld [hli], a
+	ld a, [hl]
+	add e
+	ld [hl], a
+	ld a, [$FF00+$da]
+	ld l, a
+	ld [hl], $10
+	dec h
+	inc l
+	ld [hl], $3
+	jp Func_5157
+
+; known jump sources: 4f0c (1:4f0c)
+Func_4ffe: ; 4ffe (1:4ffe)
+	ld a, [$FF00+$da]
+	add $7
+	ld l, a
+	ld a, [hl]
+	inc a
+	ld [hl], a
+	cp $4
+	jr nz, .asm_5012
+	xor a
+	ld [hl], a
+	inc l
+	ld a, [hl]
+	inc a
+	and $3
+	ld [hl], a
+.asm_5012
+	ld a, [$FF00+$da]
+	add $3
+	ld l, a
+	ld a, [hli]
+	ld b, a
+	ld a, [hl]
+	add b
+	ld [hli], a
+	ld a, [hli]
+	ld b, a
+	ld a, [hl]
+	add b
+	ld [hl], a
+	ld a, [$FF00+$da]
+	ld l, a
+	inc h
+	ld a, [hl]
+	dec a
+	ld [hl], a
+	ret nz
+	ld a, $6
+	add l
+	ld l, a
+	ld a, [hl]
+	cp $fe
+	jr nc, .asm_503a
+	ld a, [$FF00+$da]
+	inc a
+	ld l, a
+	dec h
+	ld [hl], $1
+	ret
+.asm_503a
+	call GenRandom
+	ld a, [$FF00+$da]
+	add $8
+	ld l, a
+	ld a, [H_RAND1] ; $FF00+$d3
+	and $7f
+	ld [hl], a
+	dec h
+	ld a, [$FF00+$da]
+	inc a
+	ld l, a
+	ld [hl], $2
+	inc l
+	inc l
+	xor a
+	ld b, [hl]
+	ld [hli], a
+	inc l
+	ld c, [hl]
+	ld [hl], a
+	ret
+
+; known jump sources: 4f07 (1:4f07)
+Func_5057: ; 5057 (1:5057)
+	ld h, $c2
+	ld a, [$FF00+$da]
+	add $6
+	ld l, a
+	ld a, [hl]
+	inc l
+	inc l
+	cp $fe
+	jr nc, .asm_5069
+	ld [hl], $0
+	jr .asm_506c
+.asm_5069
+	dec [hl]
+	jr nz, asm_5073
+.asm_506c
+	dec h
+	ld a, [$FF00+$da]
+	inc a
+	ld l, a
+	ld [hl], $1
+asm_5073: ; 5073 (1:5073)
+	ld h, $c1
+	ld a, [$FF00+$da]
+	add $8
+	ld l, a
+	ld [hl], $0
+	jp Func_5157
+
+; known jump sources: 4ef8 (1:4ef8)
+Func_507f: ; 507f (1:507f)
+	ld a, [$d72d]
+	bit 5, a
+	jr nz, asm_5073
+	res 7, [hl]
+	ld a, [$d52a]
+	bit 3, a
+	jr z, .asm_5093
+	ld c, $0
+	jr .asm_50a5
+.asm_5093
+	bit 2, a
+	jr z, .asm_509b
+	ld c, $4
+	jr .asm_50a5
+.asm_509b
+	bit 1, a
+	jr z, .asm_50a3
+	ld c, $c
+	jr .asm_50a5
+.asm_50a3
+	ld c, $8
+.asm_50a5
+	ld a, [$FF00+$da]
+	add $9
+	ld l, a
+	ld [hl], c
+	jr asm_5073
+
+; known jump sources: 4ee8 (1:4ee8)
+Func_50ad: ; 50ad (1:50ad)
+	ld [hl], $1
+	inc l
+	ld [hl], $ff
+	inc h
+	ld a, [$FF00+$da]
+	add $2
+	ld l, a
+	ld a, $8
+	ld [hli], a
+	ld [hl], a
+	ret
+
+; known jump sources: 4f14 (1:4f14)
+Func_50bd: ; 50bd (1:50bd)
+	ld h, $c2
+	ld a, [$FF00+$da]
+	add $4
+	ld l, a
+	ld a, [W_YCOORD] ; $d361
+	ld b, a
+	ld a, [hl]
+	sub b
+	swap a
+	sub $4
+	dec h
+	ld [hli], a
+	inc h
+	ld a, [W_XCOORD] ; $d362
+	ld b, a
+	ld a, [hli]
+	sub b
+	swap a
+	dec h
+	ld [hl], a
+	ret
+
+; known jump sources: 4eeb (1:4eeb)
+Func_50dc: ; 50dc (1:50dc)
+	ld a, $12
+	call Predef ; indirect jump to Func_f1a6 (f1a6 (3:71a6))
+	ld a, [$FF00+$e5]
+	and a
+	jp nz, .asm_512e
+	ld h, $c2
+	ld a, [$FF00+$da]
+	add $6
+	ld l, a
+	ld a, [hl]
+	cp $fe
+	jr c, .asm_5115
+	ld a, [$FF00+$da]
+	add $4
+	ld l, a
+	ld b, [hl]
+	ld a, [W_YCOORD] ; $d361
+	cp b
+	jr z, .asm_5106
+	jr nc, .asm_512e
+	add $8
+	cp b
+	jr c, .asm_512e
+.asm_5106
+	inc l
+	ld b, [hl]
+	ld a, [W_XCOORD] ; $d362
+	cp b
+	jr z, .asm_5115
+	jr nc, .asm_512e
+	add $9
+	cp b
+	jr c, .asm_512e
+.asm_5115
+	call Func_5207
+	ld d, $60
+	ld a, [hli]
+	cp d
+	jr nc, .asm_512e
+	ld a, [hld]
+	cp d
+	jr nc, .asm_512e
+	ld bc, $ffec
+	add hl, bc
+	ld a, [hli]
+	cp d
+	jr nc, .asm_512e
+	ld a, [hl]
+	cp d
+	jr c, .asm_513a
+.asm_512e
+	ld h, $c1
+	ld a, [$FF00+$da]
+	add $2
+	ld l, a
+	ld [hl], $ff
+	scf
+	jr .asm_5156
+.asm_513a
+	ld c, a
+	ld a, [W_WALKCOUNTER] ; $cfc5
+	and a
+	jr nz, .asm_5156
+	call Func_5157
+	inc h
+	ld a, [$FF00+$da]
+	add $7
+	ld l, a
+	ld a, [$d535]
+	cp c
+	ld a, $0
+	jr nz, .asm_5154
+	ld a, $80
+.asm_5154
+	ld [hl], a
+	and a
+.asm_5156
+	ret
+
+; known jump sources: 4ffb (1:4ffb), 507c (1:507c), 5141 (1:5141)
+Func_5157: ; 5157 (1:5157)
+	ld h, $c1
+	ld a, [$FF00+$da]
+	add $8
+	ld l, a
+	ld a, [hli]
+	ld b, a
+	ld a, [hl]
+	add b
+	ld b, a
+	ld a, [$FF00+$93]
+	add b
+	ld b, a
+	ld a, [$FF00+$da]
+	add $2
+	ld l, a
+	ld [hl], b
+	ret
+
+; known jump sources: 4fe0 (1:4fe0)
+Func_516e: ; 516e (1:516e)
+	ld h, $c2
+	ld a, [$FF00+$da]
+	add $6
+	ld l, a
+	ld a, [hl]
+	cp $fe
+	jr nc, .asm_517c
+	and a
+	ret
+.asm_517c
+	ld a, [$d530]
+	ld l, a
+	ld a, [$d531]
+	ld h, a
+.asm_5184
+	ld a, [hli]
+	cp $ff
+	jr z, .asm_51e9
+	cp c
+	jr nz, .asm_5184
+	ld h, $c2
+	ld a, [$FF00+$da]
+	add $6
+	ld l, a
+	ld a, [hl]
+	inc a
+	jr z, .asm_51e9
+	ld h, $c1
+	ld a, [$FF00+$da]
+	add $4
+	ld l, a
+	ld a, [hli]
+	add $4
+	add d
+	cp $80
+	jr nc, .asm_51e9
+	inc l
+	ld a, [hl]
+	add e
+	cp $90
+	jr nc, .asm_51e9
+	push de
+	push bc
+	call Func_4c70
+	pop bc
+	pop de
+	ld h, $c1
+	ld a, [$FF00+$da]
+	add $c
+	ld l, a
+	ld a, [hl]
+	and b
+	jr nz, .asm_51e9
+	ld h, $c2
+	ld a, [$FF00+$da]
+	add $2
+	ld l, a
+	ld a, [hli]
+	bit 7, d
+	jr nz, .asm_51d2
+	add d
+	cp $5
+	jr c, .asm_51e9
+	jr .asm_51d6
+.asm_51d2
+	sub $1
+	jr c, .asm_51e9
+.asm_51d6
+	ld d, a
+	ld a, [hl]
+	bit 7, e
+	jr nz, .asm_51e1
+	add e
+	cp $5
+	jr .asm_51e5
+.asm_51e1
+	sub $1
+	jr c, .asm_51e9
+.asm_51e5
+	ld [hld], a
+	ld [hl], d
+	and a
+	ret
+.asm_51e9
+	ld h, $c1
+	ld a, [$FF00+$da]
+	inc a
+	ld l, a
+	ld [hl], $2
+	inc l
+	inc l
+	xor a
+	ld [hli], a
+	inc l
+	ld [hl], a
+	inc h
+	ld a, [$FF00+$da]
+	add $8
+	ld l, a
+	call GenRandom
+	ld a, [H_RAND1] ; $FF00+$d3
+	and $7f
+	ld [hl], a
+	scf
+	ret
+
+; known jump sources: 4f59 (1:4f59), 5115 (1:5115)
+Func_5207: ; 5207 (1:5207)
+	ld h, $c1
+	ld a, [$FF00+$da]
+	add $4
+	ld l, a
+	ld a, [hli]
+	add $4
+	and $f0
+	srl a
+	ld c, a
+	ld b, $0
+	inc l
+	ld a, [hl]
+	srl a
+	srl a
+	srl a
+	add $14
+	ld d, $0
+	ld e, a
+	ld hl, $c3a0
+	add hl, bc
+	add hl, bc
+	add hl, bc
+	add hl, bc
+	add hl, bc
+	add hl, de
+	ret
+
+; known jump sources: 4f31 (1:4f31), 4f54 (1:4f54)
+Func_522f: ; 522f (1:522f)
+	add e
+	ld e, a
+	jr nc, .asm_5234
+	inc d
+.asm_5234
+	ld a, [de]
+	ret
+
+; known jump sources: 4c6a (1:4c6a)
+Func_5236: ; 5236 (1:5236)
+	ld a, [$d730]
+	bit 7, a
+	ret z
+	ld hl, $d72e
+	bit 7, [hl]
+	set 7, [hl]
+	jp z, Func_52a6
+	ld hl, $cc97
+	ld a, [$cd37]
+	add l
+	ld l, a
+	jr nc, .asm_5251
+	inc h
+.asm_5251
+	ld a, [hl]
+	cp $40
+	jr nz, .asm_525f
+	call Func_52b2
+	ld c, $4
+	ld a, $fe
+	jr .asm_5289
+.asm_525f
+	cp $0
+	jr nz, .asm_526c
+	call Func_52b2
+	ld c, $0
+	ld a, $2
+	jr .asm_5289
+.asm_526c
+	cp $80
+	jr nz, .asm_5279
+	call Func_52b7
+	ld c, $8
+	ld a, $fe
+	jr .asm_5289
+.asm_5279
+	cp $c0
+	jr nz, .asm_5286
+	call Func_52b7
+	ld c, $c
+	ld a, $2
+	jr .asm_5289
+.asm_5286
+	cp $ff
+	ret
+.asm_5289
+	ld b, a
+	ld a, [hl]
+	add b
+	ld [hl], a
+	ld a, [$FF00+$da]
+	add $9
+	ld l, a
+	ld a, c
+	ld [hl], a
+	call Func_52c3
+	ld hl, $cf18
+	dec [hl]
+	ret nz
+	ld a, $8
+	ld [$cf18], a
+	ld hl, $cd37
+	inc [hl]
+	ret
+
+; known jump sources: 5243 (1:5243)
+Func_52a6: ; 52a6 (1:52a6)
+	xor a
+	ld [$cd37], a
+	ld a, $8
+	ld [$cf18], a
+	jp Func_52c3
+
+; known jump sources: 5256 (1:5256), 5263 (1:5263)
+Func_52b2: ; 52b2 (1:52b2)
+	ld a, $4
+	ld b, a
+	jr asm_52ba
+
+; known jump sources: 5270 (1:5270), 527d (1:527d)
+Func_52b7: ; 52b7 (1:52b7)
+	ld a, $6
+	ld b, a
+asm_52ba: ; 52ba (1:52ba)
+	ld hl, $c100
+	ld a, [$FF00+$da]
+	add l
+	add b
+	ld l, a
+	ret
+
+; known jump sources: 5294 (1:5294), 52af (1:52af)
+Func_52c3: ; 52c3 (1:52c3)
+	ld hl, $c200
+	ld a, [$FF00+$da]
+	add $e
+	ld l, a
+	ld a, [hl]
+	dec a
+	swap a
+	ld b, a
+	ld hl, $c100
+	ld a, [$FF00+$da]
+	add $9
+	ld l, a
+	ld a, [hl]
+	cp $0
+	jr z, .asm_52ea
+	cp $4
+	jr z, .asm_52ea
+	cp $8
+	jr z, .asm_52ea
+	cp $c
+	jr z, .asm_52ea
+	ret
+.asm_52ea
+	add b
+	ld b, a
+	ld [$FF00+$e9], a
+	call Func_5301
+	ld hl, $c100
+	ld a, [$FF00+$da]
+	add $2
+	ld l, a
+	ld a, [$FF00+$e9]
+	ld b, a
+	ld a, [$FF00+$ea]
+	add b
+	ld [hl], a
+	ret
+
+; known jump sources: 52ee (1:52ee)
+Func_5301: ; 5301 (1:5301)
+	ld a, [$FF00+$da]
+	add $7
+	ld l, a
+	ld a, [hl]
+	inc a
+	ld [hl], a
+	cp $4
+	ret nz
+	xor a
+	ld [hl], a
+	inc l
+	ld a, [hl]
+	inc a
+	and $3
+	ld [hl], a
+	ld [$FF00+$ea], a
+	ret
+
+; known jump sources: 5a75 (1:5a75)
+Func_5317: ; 5317 (1:5317)
+	ld c, $50
+	call DelayFrames
+	call ClearScreen
+	call Func_2429
+	call LoadFontTilePatterns
+	call LoadHpBarAndStatusTilePatterns
+	call Func_5ae6
+	ld hl, $c443
+	ld b, $2
+	ld c, $c
+	call Func_5ab3
+	ld hl, $c46c
+	ld de, $550f
+	call PlaceString
+	ld hl, W_NUMHITS ; $d074
+	xor a
+	ld [hli], a
+	ld [hl], $50
+	ld hl, $d152
+	ld a, $fd
+	ld b, $6
+.asm_534c
+	ld [hli], a
+	dec b
+	jr nz, .asm_534c
+	ld hl, $d141
+	ld a, $fd
+	ld b, $7
+.asm_5357
+	ld [hli], a
+	dec b
+	jr nz, .asm_5357
+	ld b, $a
+.asm_535d
+	call GenRandom
+	cp $fd
+	jr nc, .asm_535d
+	ld [hli], a
+	dec b
+	jr nz, .asm_535d
+	ld hl, $c508
+	ld a, $fd
+	ld [hli], a
+	ld [hli], a
+	ld [hli], a
+	ld b, $c8
+	xor a
+.asm_5373
+	ld [hli], a
+	dec b
+	jr nz, .asm_5373
+	ld hl, W_GRASSRATE ; $d887
+	ld bc, $1a9
+.asm_537d
+	xor a
+	ld [hli], a
+	dec bc
+	ld a, b
+	or c
+	jr nz, .asm_537d
+	ld hl, W_PARTYMONEND ; $d16a
+	ld de, $c512
+	ld bc, $0
+.asm_538d
+	inc c
+	ld a, c
+	cp $fd
+	jr z, .asm_53a9
+	ld a, b
+	dec a
+	jr nz, .asm_539c
+	ld a, c
+	cp $d
+	jr z, .asm_53b2
+.asm_539c
+	inc hl
+	ld a, [hl]
+	cp $fe
+	jr nz, .asm_538d
+	ld a, c
+	ld [de], a
+	inc de
+	ld [hl], $ff
+	jr .asm_538d
+.asm_53a9
+	ld a, $ff
+	ld [de], a
+	inc de
+	ld bc, $100
+	jr .asm_538d
+.asm_53b2
+	ld a, $ff
+	ld [de], a
+	call Func_227f
+	ld a, [$FF00+$aa]
+	cp $2
+	jr nz, .asm_53d2
+	call Delay3
+	xor a
+	ld [$FF00+$ac], a
+	ld a, $81
+	ld [$FF00+$2], a
+	call DelayFrame
+	xor a
+	ld [$FF00+$ac], a
+	ld a, $81
+	ld [$FF00+$2], a
+.asm_53d2
+	call Delay3
+	ld a, $8
+	ld [rIE], a ; $FF00+$ff
+	ld hl, $d141
+	ld de, $cd81
+	ld bc, $11
+	call Func_216f
+	ld a, $fe
+	ld [de], a
+	ld hl, $d152
+	ld de, $d893
+	ld bc, $1a8
+	call Func_216f
+	ld a, $fe
+	ld [de], a
+	ld hl, $c508
+	ld de, $c5d0
+	ld bc, $c8
+	call Func_216f
+	ld a, $d
+	ld [rIE], a ; $FF00+$ff
+	ld a, $ff
+	call Func_23b1
+	ld a, [$FF00+$aa]
+	cp $2
+	jr z, .asm_5431
+	ld hl, $cd81
+.asm_5415
+	ld a, [hli]
+	and a
+	jr z, .asm_5415
+	cp $fd
+	jr z, .asm_5415
+	cp $fe
+	jr z, .asm_5415
+	dec hl
+	ld de, $d148
+	ld c, $a
+.asm_5427
+	ld a, [hli]
+	cp $fe
+	jr z, .asm_5427
+	ld [de], a
+	inc de
+	dec c
+	jr nz, .asm_5427
+.asm_5431
+	ld hl, $d896
+.asm_5434
+	ld a, [hli]
+	and a
+	jr z, .asm_5434
+	cp $fd
+	jr z, .asm_5434
+	cp $fe
+	jr z, .asm_5434
+	dec hl
+	ld de, W_GRASSRATE ; $d887
+	ld c, $b
+.asm_5446
+	ld a, [hli]
+	cp $fe
+	jr z, .asm_5446
+	ld [de], a
+	inc de
+	dec c
+	jr nz, .asm_5446
+	ld de, W_ENEMYMONCOUNT ; $d89c
+	ld bc, $194
+.asm_5456
+	ld a, [hli]
+	cp $fe
+	jr z, .asm_5456
+	ld [de], a
+	inc de
+	dec bc
+	ld a, b
+	or c
+	jr nz, .asm_5456
+	ld de, $c508
+	ld hl, W_PARTYMON1_NUM ; $d16b (aliases: W_PARTYMON1DATA)
+	ld c, $2
+.asm_546a
+	ld a, [de]
+	inc de
+	and a
+	jr z, .asm_546a
+	cp $fd
+	jr z, .asm_546a
+	cp $fe
+	jr z, .asm_546a
+	cp $ff
+	jr z, .asm_5489
+	push hl
+	push bc
+	ld b, $0
+	dec a
+	ld c, a
+	add hl, bc
+	ld a, $fe
+	ld [hl], a
+	pop bc
+	pop hl
+	jr .asm_546a
+.asm_5489
+	ld hl, W_PARTYMON6_MOVE4PP ; $d267
+	dec c
+	jr nz, .asm_546a
+	ld de, $c5d0
+	ld hl, W_WATERRATE ; $d8a4
+	ld c, $2
+.asm_5497
+	ld a, [de]
+	inc de
+	and a
+	jr z, .asm_5497
+	cp $fd
+	jr z, .asm_5497
+	cp $fe
+	jr z, .asm_5497
+	cp $ff
+	jr z, .asm_54b6
+	push hl
+	push bc
+	ld b, $0
+	dec a
+	ld c, a
+	add hl, bc
+	ld a, $fe
+	ld [hl], a
+	pop bc
+	pop hl
+	jr .asm_5497
+.asm_54b6
+	ld hl, $d9a0
+	dec c
+	jr nz, .asm_5497
+	ld a, $ac
+	ld [$cf8d], a
+	ld a, $d9
+	ld [$cf8e], a
+	xor a
+	ld [$cc38], a
+	ld a, $ff
+	call Func_23b1
+	ld a, [$FF00+$aa]
+	cp $2
+	ld c, $42
+	call z, DelayFrames
+	ld a, [W_ISLINKBATTLE] ; $d12b
+	cp $3
+	ld a, $32
+	ld [W_ISLINKBATTLE], a ; $d12b
+	jr nz, .asm_5506
+	ld a, $4
+	ld [W_ISLINKBATTLE], a ; $d12b
+	ld a, $e1
+	ld [W_CUROPPONENT], a ; $d059
+	call ClearScreen
+	call Delay3
+	ld hl, W_OPTIONS ; $d355
+	res 7, [hl]
+	ld a, $2c
+	call Predef ; indirect jump to Func_3ef18 (3ef18 (f:6f18))
+	ld a, $7
+	call Predef ; indirect jump to HealParty (f6a5 (3:76a5))
+	jp Func_577d
+.asm_5506
+	ld c, $1f
+	ld a, $d9
+	call Func_23a1
+	jr .asm_551c
+
+INCBIN "baserom.gbc",$550f,$551c - $550f
+.asm_551c
+	ld hl, $5a5b
+	ld b, $0
+	ld a, [$cc38]
+	cp $ff
+	jp z, Func_42dd
+	add a
+	ld c, a
+	add hl, bc
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	jp [hl]
+
+INCBIN "baserom.gbc",$5530,$577d - $5530
+
+; known jump sources: 5503 (1:5503)
+Func_577d: ; 577d (1:577d)
+	call GBPalWhiteOutWithDelay3
+	ld hl, $cfc4
+	ld a, [hl]
+	push af
+	push hl
+	res 0, [hl]
+	xor a
+	ld [$d72d], a
+	dec a
+	ld [$d42f], a
+	call LoadMapData
+	ld b, BANK(Func_c335)
+	ld hl, Func_c335
+	call Bankswitch ; indirect jump to Func_c335 (c335 (3:4335))
+	pop hl
+	pop af
+	ld [hl], a
+	call GBFadeIn2
+	ret
+
+INCBIN "baserom.gbc",$57a2,$5a24 - $57a2
 
 SSAnne8AfterBattleText2: ; 0x5a24
 	TX_FAR _SSAnne8AfterBattleText2
 	db $50
 ; 0x5a24 + 5 bytes
 
-INCBIN "baserom.gbc",$5a29,$c9
+INCBIN "baserom.gbc",$5a29,$5a5f - $5a29
 
+; known jump sources: 3888 (0:3888)
+Func_5a5f: ; 5a5f (1:5a5f)
+	ld a, [W_ISLINKBATTLE] ; $d12b
+	cp $2
+	jr z, .asm_5a75
+	cp $3
+	jr z, .asm_5a75
+	cp $5
+	ret nz
+	ld a, $4d
+	call Predef ; indirect jump to Func_5aaf (5aaf (1:5aaf))
+	jp InitGame
+.asm_5a75
+	call Func_5317
+	ld hl, $7670
+	ld a, h
+	ld [$d52f], a
+	ld a, l
+	ld [$d52e], a
+	ld a, $1b
+	ld [$d52b], a
+	ld hl, $17d1
+	ld a, h
+	ld [$d531], a
+	ld a, l
+	ld [$d530], a
+	xor a
+	ld [W_GRASSRATE], a ; $d887
+	inc a
+	ld [W_ISLINKBATTLE], a ; $d12b
+	ld [$FF00+$b5], a
+	ld a, $a
+	ld [$cfc7], a
+	ld a, $2
+	ld [$c0f0], a
+	ld a, $ca
+	ld [$c0ee], a
+	jp Func_23b1
+
+; known jump sources: 5a6f (1:5a6f)
+Func_5aaf: ; 5aaf (1:5aaf)
+	ret
+
+INCBIN "baserom.gbc",$5ab0,$5ab3 - $5ab0
+
+; known jump sources: 4c17 (1:4c17), 5332 (1:5332), 75b4 (1:75b4)
+Func_5ab3: ; 5ab3 (1:5ab3)
+	push hl
+	ld a, $78
+	ld [hli], a
+	inc a
+	call Func_5ae0
+	inc a
+	ld [hl], a
+	pop hl
+	ld de, $14
+	add hl, de
+.asm_5ac2
+	push hl
+	ld a, $7b
+	ld [hli], a
+	ld a, $7f
+	call Func_5ae0
+	ld [hl], $77
+	pop hl
+	ld de, $14
+	add hl, de
+	dec b
+	jr nz, .asm_5ac2
+	ld a, $7c
+	ld [hli], a
+	ld a, $76
+	call Func_5ae0
+	ld [hl], $7d
+	ret
+
+; known jump sources: 5ab8 (1:5ab8), 5ac8 (1:5ac8), 5ada (1:5ada)
+Func_5ae0: ; 5ae0 (1:5ae0)
+	ld d, c
+.asm_5ae1
+	ld [hli], a
+	dec d
+	jr nz, .asm_5ae1
+	ret
+
+; known jump sources: 5328 (1:5328)
+Func_5ae6: ; 5ae6 (1:5ae6)
+	ld de, $7b98
+	ld hl, $9760
+	ld bc, $b09
+	jp CopyVideoData
+; 5af2 (1:5af2)
 MainMenu: ; 0x5af2
 ; Check save file
 	call Func_5bff
@@ -8436,8 +13111,163 @@ Func_5bff: ; 0x5bff
 	ret
 ; 0x5c0a
 
-INCBIN "baserom.gbc",$5c0a,$5d43 - $5c0a
-
+; known jump sources: 72b0 (1:72b0)
+Func_5c0a: ; 5c0a (1:5c0a)
+	xor a
+	ld [$d358], a
+	ld hl, $d72e
+	set 6, [hl]
+	ld hl, $6b20
+	call PrintText
+	call Func_3719
+	ld hl, $5d43
+	call PrintText
+	ld hl, $c409
+	ld b, $6
+	ld c, $d
+	call TextBoxBorder
+	call Func_2429
+	ld hl, $c433
+	ld de, $5d97
+	call PlaceString
+	xor a
+	ld [$cd37], a
+	ld [$d72d], a
+	ld hl, W_TOPMENUITEMY ; $cc24
+	ld a, $7
+	ld [hli], a
+	ld a, $6
+	ld [hli], a
+	xor a
+	ld [hli], a
+	inc hl
+	ld a, $2
+	ld [hli], a
+	inc a
+	ld [hli], a
+	xor a
+	ld [hl], a
+.asm_5c52
+	call HandleMenuInput
+	and $3
+	add a
+	add a
+	ld b, a
+	ld a, [W_CURMENUITEMID] ; $cc26
+	add b
+	add $d0
+	ld [$cc42], a
+	ld [$cc43], a
+.asm_5c66
+	call Func_2247
+	ld a, [$cc3d]
+	ld b, a
+	and $f0
+	cp $d0
+	jr z, .asm_5c7d
+	ld a, [$cc3e]
+	ld b, a
+	and $f0
+	cp $d0
+	jr nz, .asm_5c66
+.asm_5c7d
+	ld a, b
+	and $c
+	jr nz, .asm_5c8b
+	ld a, [$cc42]
+	and $c
+	jr z, .asm_5c52
+	jr .asm_5ca1
+.asm_5c8b
+	ld a, [$cc42]
+	and $c
+	jr z, .asm_5c98
+	ld a, [$FF00+$aa]
+	cp $2
+	jr z, .asm_5ca1
+.asm_5c98
+	ld a, b
+	ld [$cc42], a
+	and $3
+	ld [W_CURMENUITEMID], a ; $cc26
+.asm_5ca1
+	ld a, [$FF00+$aa]
+	cp $2
+	jr nz, .asm_5cb1
+	call DelayFrame
+	call DelayFrame
+	ld a, $81
+	ld [$FF00+$2], a
+.asm_5cb1
+	ld b, $7f
+	ld c, $7f
+	ld d, $ec
+	ld a, [$cc42]
+	and $8
+	jr nz, .asm_5ccc
+	ld a, [W_CURMENUITEMID] ; $cc26
+	cp $2
+	jr z, .asm_5ccc
+	ld c, d
+	ld d, b
+	dec a
+	jr z, .asm_5ccc
+	ld b, c
+	ld c, d
+.asm_5ccc
+	ld a, b
+	ld [$c432], a
+	ld a, c
+	ld [$c45a], a
+	ld a, d
+	ld [$c482], a
+	ld c, $28
+	call DelayFrames
+	call Func_3725
+	ld a, [$cc42]
+	and $8
+	jr nz, .asm_5d2d
+	ld a, [W_CURMENUITEMID] ; $cc26
+	cp $2
+	jr z, .asm_5d2d
+	xor a
+	ld [$d700], a
+	ld a, [W_CURMENUITEMID] ; $cc26
+	and a
+	ld a, $f0
+	jr nz, .asm_5cfc
+	ld a, $ef
+.asm_5cfc
+	ld [$d72d], a
+	ld hl, $5d48
+	call PrintText
+	ld c, $32
+	call DelayFrames
+	ld hl, $d732
+	res 1, [hl]
+	ld a, [W_ANIMATIONID] ; $d07c
+	ld [$d71a], a
+	call Function62CE
+	ld c, $14
+	call DelayFrames
+	xor a
+	ld [W_MENUJOYPADPOLLCOUNT], a ; $cc34
+	ld [$cc42], a
+	inc a
+	ld [W_ISLINKBATTLE], a ; $d12b
+	ld [$cc47], a
+	jr Func_5d5f
+.asm_5d2d
+	xor a
+	ld [W_MENUJOYPADPOLLCOUNT], a ; $cc34
+	call Delay3
+	call Func_72d7
+	ld hl, $5d4d
+	call PrintText
+	ld hl, $d72e
+	res 6, [hl]
+	ret
+; 5d43 (1:5d43)
 UnnamedText_5d43: ; 0x5d43
 	TX_FAR _UnnamedText_5d43
 	db $50
@@ -8453,7 +13283,94 @@ UnnamedText_5d4d: ; 0x5d4d
 	db $50
 ; 0x5d4d + 5 bytes
 
-INCBIN "baserom.gbc",$5d52,$5e8a - $5d52
+; known jump sources: 5ba4 (1:5ba4)
+Func_5d52: ; 5d52 (1:5d52)
+	ld hl, $d732
+	res 1, [hl]
+	call OakSpeech
+	ld c, $14
+	call DelayFrames
+
+; known jump sources: 5be5 (1:5be5), 5bed (1:5bed), 5bfc (1:5bfc), 5d2b (1:5d2b)
+Func_5d5f: ; 5d5f (1:5d5f)
+	xor a
+	ld [$FF00+$b3], a
+	ld [$FF00+$b4], a
+	ld [$FF00+$b5], a
+	ld [$d72d], a
+	ld hl, $d732
+	set 0, [hl]
+	call Func_28a6
+	ld c, $14
+	call DelayFrames
+	ld a, [$cc47]
+	and a
+	ret nz
+	jp EnterMap
+
+INCBIN "baserom.gbc",$5d7e,$5db5 - $5d7e
+
+; known jump sources: 5bb2 (1:5bb2)
+Func_5db5: ; 5db5 (1:5db5)
+	xor a
+	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld hl, $c430
+	ld b, $8
+	ld c, $e
+	call TextBoxBorder
+	ld hl, $c459
+	ld de, $5e6a
+	call PlaceString
+	ld hl, $c460
+	ld de, W_PLAYERNAME ; $d158
+	call PlaceString
+	ld hl, $c48d
+	call Func_5e2f
+	ld hl, $c4b4
+	call Func_5e42
+	ld hl, $c4d9
+	call Func_5e55
+	ld a, $1
+	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld c, $1e
+	jp DelayFrames
+
+INCBIN "baserom.gbc",$5def,$5e2f - $5def
+
+; known jump sources: 5dd7 (1:5dd7)
+Func_5e2f: ; 5e2f (1:5e2f)
+	push hl
+	ld hl, W_OBTAINEDBADGES ; $d356
+	ld b, $1
+	call CountSetBits
+	pop hl
+	ld de, $d11e
+	ld bc, $102
+	jp PrintNumber
+
+; known jump sources: 5ddd (1:5ddd)
+Func_5e42: ; 5e42 (1:5e42)
+	push hl
+	ld hl, W_OWNEDPOKEMON ; $d2f7
+	ld b, $13
+	call CountSetBits
+	pop hl
+	ld de, $d11e
+	ld bc, $103
+	jp PrintNumber
+
+; known jump sources: 5de3 (1:5de3)
+Func_5e55: ; 5e55 (1:5e55)
+	ld de, $da41
+	ld bc, $103
+	call PrintNumber
+	ld [hl], $6d
+	inc hl
+	ld de, $da43
+	ld bc, $8102
+	jp PrintNumber
+
+INCBIN "baserom.gbc",$5e6a,$5e8a - $5e6a
 
 DisplayOptionMenu: ; 5E8A
 	FuncCoord 0,0
@@ -8721,8 +13638,67 @@ TextSpeedOptionData: ; 6096
 	db 7 ; default X coordinate (Medium)
 	db $ff ; terminator
 
-INCBIN "baserom.gbc",$609e,$6115-$609e
+; known jump sources: 5afd (1:5afd)
+Func_609e: ; 609e (1:609e)
+	ld a, $a
+	ld [$0], a
+	ld a, $1
+	ld [$6000], a
+	ld [$4000], a
+	ld b, $b
+	ld hl, $a598
+.asm_60b0
+	ld a, [hli]
+	cp $50
+	jr z, .asm_60c1
+	dec b
+	jr nz, .asm_60b0
+	xor a
+	ld [$0], a
+	ld [$6000], a
+	and a
+	ret
+.asm_60c1
+	xor a
+	ld [$0], a
+	ld [$6000], a
+	scf
+	ret
 
+; known jump sources: 6128 (1:6128)
+Func_60ca: ; 60ca (1:60ca)
+	ld a, [$d358]
+	push af
+	ld a, [W_OPTIONS] ; $d355
+	push af
+	ld a, [$d732]
+	push af
+	ld hl, W_PLAYERNAME ; $d158
+	ld bc, $d8a
+	xor a
+	call FillMemory
+	ld hl, $c100
+	ld bc, $200
+	xor a
+	call FillMemory
+	pop af
+	ld [$d732], a
+	pop af
+	ld [W_OPTIONS], a ; $d355
+	pop af
+	ld [$d358], a
+	ld a, [$d08a]
+	and a
+	call z, Func_5bff
+	ld hl, $45aa
+	ld de, W_PLAYERNAME ; $d158
+	ld bc, $b
+	call CopyData
+	ld hl, $45b1
+	ld de, W_RIVALNAME ; $d34a
+	ld bc, $b
+	jp CopyData
+; 6115 (1:6115)
 OakSpeech: ; 6115
 	ld a,$FF
 	call $23B1 ; stop music
@@ -8951,7 +13927,124 @@ Function62CE: ; 62CE XXX called by 4B2 948 989 5BF9 5D15
 	ld [$D365],a
 	ret
 
-INCBIN "baserom.gbc",$62FF,$6420-$62FF
+; known jump sources: 62ce (1:62ce)
+Func_62ff: ; 62ff (1:62ff)
+	ld a, [$d72d]
+	cp $ef
+	jr nz, .asm_6314
+	ld hl, $6428
+	ld a, [$FF00+$aa]
+	cp $2
+	jr z, .asm_6334
+	ld hl, $6430
+	jr .asm_6334
+.asm_6314
+	cp $f0
+	jr nz, .asm_6326
+	ld hl, $6438
+	ld a, [$FF00+$aa]
+	cp $2
+	jr z, .asm_6334
+	ld hl, $6440
+	jr .asm_6334
+.asm_6326
+	ld a, [$d732]
+	bit 1, a
+	jr nz, .asm_6346
+	bit 2, a
+	jr nz, .asm_6346
+	ld hl, $6420
+.asm_6334
+	ld de, W_CURMAP ; $d35e
+	ld c, $7
+.asm_6339
+	ld a, [hli]
+	ld [de], a
+	inc de
+	dec c
+	jr nz, .asm_6339
+	ld a, [hli]
+	ld [W_CURMAPTILESET], a ; $d367
+	xor a
+	jr .asm_63b3
+.asm_6346
+	ld a, [$d365]
+	ld hl, $d732
+	bit 4, [hl]
+	jr nz, .asm_635b
+	bit 6, [hl]
+	res 6, [hl]
+	jr z, .asm_638e
+	ld a, [$d719]
+	jr .asm_6391
+.asm_635b
+	ld hl, $d72d
+	res 4, [hl]
+	ld a, [$d71d]
+	ld b, a
+	ld [W_CURMAP], a ; $d35e
+	ld a, [$d71e]
+	ld c, a
+	ld hl, $63bf
+	ld de, $0
+	ld a, $6
+	ld [$d12f], a
+.asm_6376
+	ld a, [hli]
+	cp b
+	jr z, .asm_637d
+	inc hl
+	jr .asm_6381
+.asm_637d
+	ld a, [hli]
+	cp c
+	jr z, .asm_6388
+.asm_6381
+	ld a, [$d12f]
+	add e
+	ld e, a
+	jr .asm_6376
+.asm_6388
+	ld hl, $63d8
+	add hl, de
+	jr .asm_63a4
+.asm_638e
+	ld a, [$d71a]
+.asm_6391
+	ld b, a
+	ld [W_CURMAP], a ; $d35e
+	ld hl, $6448
+.asm_6398
+	ld a, [hli]
+	inc hl
+	cp b
+	jr z, .asm_63a1
+	inc hl
+	inc hl
+	jr .asm_6398
+.asm_63a1
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+.asm_63a4
+	ld de, $d35f
+	ld c, $6
+.asm_63a9
+	ld a, [hli]
+	ld [de], a
+	inc de
+	dec c
+	jr nz, .asm_63a9
+	xor a
+	ld [W_CURMAPTILESET], a ; $d367
+.asm_63b3
+	ld [$d4e2], a
+	ld [$d4e3], a
+	ld a, $ff
+	ld [$d42f], a
+	ret
+
+INCBIN "baserom.gbc",$63bf,$6420 - $63bf
 
 FirstMapSpec: ; 0x6420
 	db REDS_HOUSE_2F ; RedsHouse2F
@@ -9023,15 +14116,511 @@ Map0fFlyWarp: ; 0x64be
 Map15FlyWarp: ; 0x64c4
 	FLYWARP_DATA 10,20,11
 
-INCBIN "baserom.gbc",$64ca,$6557 - $64ca
+INCBIN "baserom.gbc",$64ca,$64ea - $64ca
 
+; known jump sources: 62e8 (1:62e8)
+Func_64ea: ; 64ea (1:64ea)
+	ret
+
+; known jump sources: e834 (3:6834), f33c (3:733c)
+Func_64eb: ; 64eb (1:64eb)
+	call Func_3719
+	call Load16BitRegisters
+	push hl
+	ld a, [W_ISINBATTLE] ; $d057
+	dec a
+	ld hl, $c3a0
+	ld b, $4
+	ld c, $b
+	call z, ClearScreenArea
+	ld a, [$cf91]
+	ld [$d11e], a
+	call GetMonName
+	ld hl, $6557
+	call PrintText
+	ld hl, $c43a
+	ld bc, $80f
+	ld a, $14
+	ld [$d125], a
+	call DisplayTextBoxID
+	pop hl
+	ld a, [W_CURMENUITEMID] ; $cc26
+	and a
+	jr nz, .asm_654c
+	ld a, [$cfcb]
+	push af
+	xor a
+	ld [$cfcb], a
+	push hl
+	ld a, $2
+	ld [$d07d], a
+	call Func_6596
+	ld a, [W_ISINBATTLE] ; $d057
+	and a
+	jr nz, .asm_653e
+	call Func_3e08
+.asm_653e
+	call Func_3725
+	pop hl
+	pop af
+	ld [$cfcb], a
+	ld a, [$cf4b]
+	cp $50
+	ret nz
+.asm_654c
+	ld d, h
+	ld e, l
+	ld hl, $cd6d
+	ld bc, $b
+	jp CopyData
+; 6557 (1:6557)
 UnnamedText_6557: ; 0x6557
 	TX_FAR _UnnamedText_6557
 	db $50
 ; 0x6557 + 5 bytes
 
-INCBIN "baserom.gbc",$655c,$699f - $655c
+; known jump sources: 1daa0 (7:5aa0)
+Func_655c: ; 655c (1:655c)
+	ld hl, $cee9
+	xor a
+	ld [$cfcb], a
+	ld a, $2
+	ld [$d07d], a
+	call Func_6596
+	call GBPalWhiteOutWithDelay3
+	call Func_3dbe
+	call LoadGBPal
+	ld a, [$cf4b]
+	cp $50
+	jr z, .asm_6594
+	ld hl, W_PARTYMON1NAME ; $d2b5
+	ld bc, $b
+	ld a, [W_WHICHPOKEMON] ; $cf92
+	call AddNTimes
+	ld e, l
+	ld d, h
+	ld hl, $cee9
+	ld bc, $b
+	call CopyData
+	and a
+	ret
+.asm_6594
+	scf
+	ret
 
+; known jump sources: 6532 (1:6532), 6568 (1:6568), 6981 (1:6981), 69c9 (1:69c9)
+Func_6596: ; 6596 (1:6596)
+	push hl
+	ld hl, $d730
+	set 6, [hl]
+	call GBPalWhiteOutWithDelay3
+	call ClearScreen
+	call Func_2429
+	ld b, $8
+	call GoPAL_SET
+	call LoadHpBarAndStatusTilePatterns
+	call Func_675b
+	ld b, BANK(Func_7176c)
+	ld hl, Func_7176c
+	call Bankswitch ; indirect jump to Func_7176c (7176c (1c:576c))
+	ld hl, $c3f0
+	ld b, $9
+	ld c, $12
+	call TextBoxBorder
+	call Func_68f8
+	ld a, $3
+	ld [W_TOPMENUITEMY], a ; $cc24
+	ld a, $1
+	ld [W_TOPMENUITEMX], a ; $cc25
+	ld [W_OLDMENUITEMID], a ; $cc2a
+	ld [W_CURMENUITEMID], a ; $cc26
+	ld a, $ff
+	ld [W_MENUWATCHEDKEYS], a ; $cc29
+	ld a, $7
+	ld [W_MAXMENUITEMID], a ; $cc28
+	ld a, $50
+	ld [$cf4b], a
+	xor a
+	ld hl, $ceea
+	ld [hli], a
+	ld [hli], a
+	ld [W_SUBANIMTRANSFORM], a ; $d08b
+	call Func_676f
+	call GBPalNormal
+	ld a, [$ceea]
+	and a
+	jr nz, .asm_662d
+	call Func_680e
+	call PlaceMenuCursor
+.asm_65ff
+	ld a, [W_CURMENUITEMID] ; $cc26
+	push af
+	ld b, BANK(Func_716f7)
+	ld hl, Func_716f7
+	call Bankswitch ; indirect jump to Func_716f7 (716f7 (1c:56f7))
+	pop af
+	ld [W_CURMENUITEMID], a ; $cc26
+	call GetJoypadStateLowSensitivity
+	ld a, [$FF00+$b3]
+	and a
+	jr z, .asm_65ff
+	ld hl, $665e
+.asm_661a
+	sla a
+	jr c, .asm_6624
+	inc hl
+	inc hl
+	inc hl
+	inc hl
+	jr .asm_661a
+.asm_6624
+	ld a, [hli]
+	ld e, a
+	ld a, [hli]
+	ld d, a
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	push de
+	jp [hl]
+.asm_662d
+	pop de
+	ld hl, $cf4b
+	ld bc, $b
+	call CopyData
+	call GBPalWhiteOutWithDelay3
+	call ClearScreen
+	call CleanLCD_OAM
+	call GoPAL_SET_CF1C
+	call GBPalNormal
+	xor a
+	ld [W_SUBANIMTRANSFORM], a ; $d08b
+	ld hl, $d730
+	res 6, [hl]
+	ld a, [W_ISINBATTLE] ; $d057
+	and a
+	jp z, LoadTextBoxTilePatterns
+	ld hl, Func_3ee5b
+	ld b, BANK(Func_3ee5b)
+	jp Bankswitch ; indirect jump to Func_3ee5b (3ee5b (f:6e5b))
+
+INCBIN "baserom.gbc",$665e,$667e - $665e
+.asm_667e
+	pop de
+	ld de, $65ed
+	push de
+	ld a, [$ceeb]
+	xor $1
+	ld [$ceeb], a
+	ret
+.asm_668c
+	ld a, $1
+	ld [$ceea], a
+	ret
+	ld a, [W_CURMENUITEMID] ; $cc26
+	cp $5
+	jr nz, .asm_66a0
+	ld a, [W_TOPMENUITEMX] ; $cc25
+	cp $11
+	jr z, .asm_668c
+.asm_66a0
+	ld a, [W_CURMENUITEMID] ; $cc26
+	cp $6
+	jr nz, .asm_66ae
+	ld a, [W_TOPMENUITEMX] ; $cc25
+	cp $1
+	jr z, .asm_667e
+.asm_66ae
+	ld hl, W_MENUCURSORLOCATION ; $cc30
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	inc hl
+	ld a, [hl]
+	ld [$ceed], a
+	call Func_68eb
+	ld a, [$ceed]
+	cp $e5
+	ld de, $6885
+	jr z, .asm_66e3
+	cp $e4
+	ld de, $68d6
+	jr z, .asm_66e3
+	ld a, [$d07d]
+	cp $2
+	jr nc, .asm_66db
+	ld a, [$cee9]
+	cp $7
+	jr .asm_66e0
+.asm_66db
+	ld a, [$cee9]
+	cp $a
+.asm_66e0
+	jr c, .asm_66ea
+	ret
+.asm_66e3
+	push hl
+	call Func_6871
+	pop hl
+	ret nc
+	dec hl
+.asm_66ea
+	ld a, [$ceed]
+	ld [hli], a
+	ld [hl], $50
+	ld a, $90
+	call Func_23b1
+	ret
+	ld a, [$cee9]
+	and a
+	ret z
+	call Func_68eb
+	dec hl
+	ld [hl], $50
+	ret
+	ld a, [W_CURMENUITEMID] ; $cc26
+	cp $6
+	ret z
+	ld a, [W_TOPMENUITEMX] ; $cc25
+	cp $11
+	jp z, Func_6714
+	inc a
+	inc a
+	jr asm_6755
+
+; known jump sources: 670d (1:670d)
+Func_6714: ; 6714 (1:6714)
+	ld a, $1
+	jr asm_6755
+	ld a, [W_CURMENUITEMID] ; $cc26
+	cp $6
+	ret z
+	ld a, [W_TOPMENUITEMX] ; $cc25
+	dec a
+	jp z, Func_6728
+	dec a
+	jr asm_6755
+
+; known jump sources: 6722 (1:6722)
+Func_6728: ; 6728 (1:6728)
+	ld a, $11
+	jr asm_6755
+	ld a, [W_CURMENUITEMID] ; $cc26
+	dec a
+	ld [W_CURMENUITEMID], a ; $cc26
+	and a
+	ret nz
+	ld a, $6
+	ld [W_CURMENUITEMID], a ; $cc26
+	ld a, $1
+	jr asm_6755
+	ld a, [W_CURMENUITEMID] ; $cc26
+	inc a
+	ld [W_CURMENUITEMID], a ; $cc26
+	cp $7
+	jr nz, .asm_6750
+	ld a, $1
+	ld [W_CURMENUITEMID], a ; $cc26
+	jr asm_6755
+.asm_6750
+	cp $6
+	ret nz
+	ld a, $1
+asm_6755: ; 6755 (1:6755)
+	ld [W_TOPMENUITEMX], a ; $cc25
+	jp EraseMenuCursor
+
+; known jump sources: 65ad (1:65ad)
+Func_675b: ; 675b (1:675b)
+	ld de, $6767
+	ld hl, $8f00
+	ld bc, $1
+	jp CopyVideoDataDouble
+
+INCBIN "baserom.gbc",$6767,$676f - $6767
+
+; known jump sources: 65ed (1:65ed)
+Func_676f: ; 676f (1:676f)
+	xor a
+	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld a, [$ceeb]
+	and a
+	ld de, $679e
+	jr nz, .asm_677e
+	ld de, $67d6
+.asm_677e
+	ld hl, $c406
+	ld bc, $509
+.asm_6784
+	push bc
+.asm_6785
+	ld a, [de]
+	ld [hli], a
+	inc hl
+	inc de
+	dec c
+	jr nz, .asm_6785
+	ld bc, $16
+	add hl, bc
+	pop bc
+	dec b
+	jr nz, .asm_6784
+	call PlaceString
+	ld a, $1
+	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	jp Delay3
+
+INCBIN "baserom.gbc",$679e,$680e - $679e
+
+; known jump sources: 65f9 (1:65f9)
+Func_680e: ; 680e (1:680e)
+	call Func_68eb
+	ld a, c
+	ld [$cee9], a
+	ld hl, $c3d2
+	ld bc, $10a
+	call ClearScreenArea
+	ld hl, $c3d2
+	ld de, $cf4b
+	call PlaceString
+	ld hl, $c3e6
+	ld a, [$d07d]
+	cp $2
+	jr nc, .asm_6835
+	ld b, $7
+	jr .asm_6837
+.asm_6835
+	ld b, $a
+.asm_6837
+	ld a, $76
+.asm_6839
+	ld [hli], a
+	dec b
+	jr nz, .asm_6839
+	ld a, [$d07d]
+	cp $2
+	ld a, [$cee9]
+	jr nc, .asm_684b
+	cp $7
+	jr .asm_684d
+.asm_684b
+	cp $a
+.asm_684d
+	jr nz, .asm_6867
+	call EraseMenuCursor
+	ld a, $11
+	ld [W_TOPMENUITEMX], a ; $cc25
+	ld a, $5
+	ld [W_CURMENUITEMID], a ; $cc26
+	ld a, [$d07d]
+	cp $2
+	ld a, $9
+	jr nc, .asm_6867
+	ld a, $6
+.asm_6867
+	ld c, a
+	ld b, $0
+	ld hl, $c3e6
+	add hl, bc
+	ld [hl], $77
+	ret
+
+; known jump sources: 66e4 (1:66e4)
+Func_6871: ; 6871 (1:6871)
+	push de
+	call Func_68eb
+	dec hl
+	ld a, [hl]
+	pop hl
+	ld de, $2
+	call IsInArray
+	ret nc
+	inc hl
+	ld a, [hl]
+	ld [$ceed], a
+	ret
+
+INCBIN "baserom.gbc",$6885,$68eb - $6885
+
+; known jump sources: 66b9 (1:66b9), 66fb (1:66fb), 680e (1:680e), 6872 (1:6872)
+Func_68eb: ; 68eb (1:68eb)
+	ld hl, $cf4b
+	ld c, $0
+.asm_68f0
+	ld a, [hl]
+	cp $50
+	ret z
+	inc hl
+	inc c
+	jr .asm_68f0
+
+; known jump sources: 65c2 (1:65c2)
+Func_68f8: ; 68f8 (1:68f8)
+	ld hl, $c3b4
+	ld a, [$d07d]
+	ld de, $693f
+	and a
+	jr z, .asm_6934
+	ld de, $6945
+	dec a
+	jr z, .asm_6934
+	ld a, [$cf91]
+	ld [$cd5d], a
+	push af
+	ld b, BANK(Func_71882)
+	ld hl, Func_71882
+	call Bankswitch ; indirect jump to Func_71882 (71882 (1c:5882))
+	pop af
+	ld [$d11e], a
+	call GetMonName
+	ld hl, $c3b8
+	call PlaceString
+	ld hl, $1
+	add hl, bc
+	ld [hl], $c9
+	ld hl, $c3dd
+	ld de, $6953
+	jr .asm_693c
+.asm_6934
+	call PlaceString
+	ld l, c
+	ld h, b
+	ld de, $694d
+.asm_693c
+	jp PlaceString
+
+INCBIN "baserom.gbc",$693f,$695d - $693f
+
+; known jump sources: 619e (1:619e)
+Func_695d: ; 695d (1:695d)
+	call Unnamed_6a12
+	ld de, $6aa8
+	call Func_6a6c
+	ld a, [W_CURMENUITEMID] ; $cc26
+	and a
+	jr z, .asm_697a
+	ld hl, $6af2
+	call Func_6ad6
+	ld de, W_PLAYERNAME ; $d158
+	call Func_69ec
+	jr .asm_6999
+.asm_697a
+	ld hl, W_PLAYERNAME ; $d158
+	xor a
+	ld [$d07d], a
+	call Func_6596
+	ld a, [$cf4b]
+	cp $50
+	jr z, .asm_697a
+	call ClearScreen
+	call Delay3
+	ld de, $6ede
+	ld b, $4
+	call IntroPredef3B
+.asm_6999
+	ld hl, $699f
+	jp PrintText
+; 699f (1:699f)
 UnnamedText_699f: ; 0x699f
 	TX_FAR _UnnamedText_699f
 	db $50
@@ -9042,21 +14631,156 @@ UnnamedText_699f: ; 0x699f
 	ld de, DefaultNamesRival
 ; 0x69aa
 
-INCBIN "baserom.gbc",$69AA,$69B3 - $69AA
-
+	call Func_6a6c
+	ld a, [W_CURMENUITEMID] ; $cc26
+	and a
+	jr z, .asm_69c1
+; 69b3 (1:69b3)
 ld hl, DefaultNamesRivalList
 
-INCBIN "baserom.gbc",$69b6,$69e7 - $69b6
-
+	call Func_6ad6
+	ld de, W_RIVALNAME ; $d34a
+	call Func_69ec
+	jr .asm_69e1
+.asm_69c1
+	ld hl, W_RIVALNAME ; $d34a
+	ld a, $1
+	ld [$d07d], a
+	call Func_6596
+	ld a, [$cf4b]
+	cp $50
+	jr z, .asm_69c1
+	call ClearScreen
+	call Delay3
+	ld de, $6049
+	ld b, $13
+	call IntroPredef3B
+.asm_69e1
+	ld hl, $69e7
+	jp PrintText
+; 69e7 (1:69e7)
 UnnamedText_69e7: ; 0x69e7
 	TX_FAR _UnnamedText_69e7
 	db $50
 ; 0x69e7 + 5 bytes
 
-INCBIN "baserom.gbc",$69ec,$6a12 - $69ec
-
+; known jump sources: 6975 (1:6975), 69bc (1:69bc)
+Func_69ec: ; 69ec (1:69ec)
+	push de
+	ld hl, $c3a0
+	ld bc, $c0b
+	call ClearScreenArea
+	ld c, $a
+	call DelayFrames
+	pop de
+	ld hl, $cd6d
+	ld bc, $b
+	call CopyData
+	call Delay3
+	ld hl, $c3fc
+	ld de, $67d
+	ld a, $ff
+	jr asm_6a19
+; 6a12 (1:6a12)
 Unnamed_6a12: ; 0x6a12
-INCBIN "baserom.gbc",$6a12,$6aa8 - $6a12
+	ld hl, $c3f5
+	ld de, $67d
+	xor a
+asm_6a19: ; 6a19 (1:6a19)
+	push hl
+	push de
+	push bc
+	ld [$FF00+$8d], a
+	ld a, d
+	ld [H_DOWNARROWBLINKCNT1], a ; $FF00+$8b
+	ld a, e
+	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	ld c, a
+	ld a, [$FF00+$8d]
+	and a
+	jr nz, .asm_6a2d
+	ld d, $0
+	add hl, de
+.asm_6a2d
+	ld d, h
+	ld e, l
+.asm_6a2f
+	xor a
+	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld a, [$FF00+$8d]
+	and a
+	jr nz, .asm_6a3c
+	ld a, [hli]
+	ld [hld], a
+	dec hl
+	jr .asm_6a3f
+.asm_6a3c
+	ld a, [hld]
+	ld [hli], a
+	inc hl
+.asm_6a3f
+	dec c
+	jr nz, .asm_6a2f
+	ld a, [$FF00+$8d]
+	and a
+	jr z, .asm_6a4a
+	xor a
+	dec hl
+	ld [hl], a
+.asm_6a4a
+	ld a, $1
+	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	call Delay3
+	ld a, [H_DOWNARROWBLINKCNT2] ; $FF00+$8c
+	ld c, a
+	ld h, d
+	ld l, e
+	ld a, [$FF00+$8d]
+	and a
+	jr nz, .asm_6a5e
+	inc hl
+	jr .asm_6a5f
+.asm_6a5e
+	dec hl
+.asm_6a5f
+	ld d, h
+	ld e, l
+	ld a, [H_DOWNARROWBLINKCNT1] ; $FF00+$8b
+	dec a
+	ld [H_DOWNARROWBLINKCNT1], a ; $FF00+$8b
+	jr nz, .asm_6a2f
+	pop bc
+	pop de
+	pop hl
+	ret
+
+; known jump sources: 6963 (1:6963), 69aa (1:69aa)
+Func_6a6c: ; 6a6c (1:6a6c)
+	push de
+	ld hl, $c3a0
+	ld b, $a
+	ld c, $9
+	call TextBoxBorder
+	ld hl, $c3a3
+	ld de, $6aa3
+	call PlaceString
+	pop de
+	ld hl, $c3ca
+	call PlaceString
+	call Func_2429
+	xor a
+	ld [W_CURMENUITEMID], a ; $cc26
+	ld [W_OLDMENUITEMID], a ; $cc2a
+	inc a
+	ld [W_TOPMENUITEMX], a ; $cc25
+	ld [W_MENUWATCHEDKEYS], a ; $cc29
+	inc a
+	ld [W_TOPMENUITEMY], a ; $cc24
+	inc a
+	ld [W_MAXMENUITEMID], a ; $cc28
+	jp HandleMenuInput
+
+INCBIN "baserom.gbc",$6aa3,$6aa8 - $6aa3
 
 IF _RED
 DefaultNamesPlayer: ; 0x6aa8 22
@@ -9071,8 +14795,29 @@ DefaultNamesRival:
 	db "NEW NAME",$4E,"RED",$4E,"ASH",$4E,"JACK@"
 ENDC
 
-INCBIN "baserom.gbc",$6AD6,$6AF2 - $6AD6
-
+; known jump sources: 696f (1:696f), 69b6 (1:69b6)
+Func_6ad6: ; 6ad6 (1:6ad6)
+	ld b, a
+	ld c, $0
+.asm_6ad9
+	ld d, h
+	ld e, l
+.asm_6adb
+	ld a, [hli]
+	cp $50
+	jr nz, .asm_6adb
+	ld a, b
+	cp c
+	jr z, .asm_6ae7
+	inc c
+	jr .asm_6ad9
+.asm_6ae7
+	ld h, d
+	ld l, e
+	ld de, $cd6d
+	ld bc, $14
+	jp CopyData
+; 6af2 (1:6af2)
 IF _RED
 DefaultNamesPlayerList: ; 0x6AF2 22
 	db "NEW NAME@RED@ASH@JACK@"
@@ -9516,7 +15261,199 @@ PokemartAnythingElseText: ; 0x6e3e
 	TX_FAR _PokemartAnythingElseText
 	db $50
 
-INCBIN "baserom.gbc",$6e43,$6fb4 - $6e43
+; known jump sources: e537 (3:6537), 3afae (e:6fae)
+Func_6e43: ; 6e43 (1:6e43)
+	call Func_3719
+	ld a, [W_WHICHPOKEMON] ; $cf92
+	ld hl, W_PARTYMON1NAME ; $d2b5
+	call GetPartyMonName
+	ld hl, $cd6d
+	ld de, $d036
+	ld bc, $b
+	call CopyData
+
+; known jump sources: 6ef2 (1:6ef2)
+Func_6e5b: ; 6e5b (1:6e5b)
+	ld hl, W_PARTYMON1_MOVE1 ; $d173
+	ld bc, $2c
+	ld a, [W_WHICHPOKEMON] ; $cf92
+	call AddNTimes
+	ld d, h
+	ld e, l
+	ld b, $4
+.asm_6e6b
+	ld a, [hl]
+	and a
+	jr z, .asm_6e8b
+	inc hl
+	dec b
+	jr nz, .asm_6e6b
+	push de
+	call Func_6f07
+	pop de
+	jp c, Func_6eda
+	push hl
+	push de
+	ld [$d11e], a
+	call GetMoveName
+	ld hl, $6fc8
+	call PrintText
+	pop de
+	pop hl
+.asm_6e8b
+	ld a, [$d0e0]
+	ld [hl], a
+	ld bc, $15
+	add hl, bc
+	push hl
+	push de
+	dec a
+	ld hl, $4000
+	ld bc, $6
+	call AddNTimes
+	ld de, $cee9
+	ld a, $e
+	call FarCopyData
+	ld a, [$ceee]
+	pop de
+	pop hl
+	ld [hl], a
+	ld a, [W_ISINBATTLE] ; $d057
+	and a
+	jp z, Func_6efe
+	ld a, [W_WHICHPOKEMON] ; $cf92
+	ld b, a
+	ld a, [W_PLAYERMONNUMBER] ; $cc2f
+	cp b
+	jp nz, Func_6efe
+	ld h, d
+	ld l, e
+	ld de, $d01c
+	ld bc, $4
+	call CopyData
+	ld bc, $11
+	add hl, bc
+	ld de, W_PLAYERMONPP ; $d02d
+	ld bc, $4
+	call CopyData
+	jp Func_6efe
+
+; known jump sources: 6e78 (1:6e78)
+Func_6eda: ; 6eda (1:6eda)
+	ld hl, $6fb9
+	call PrintText
+	ld hl, $c43a
+	ld bc, $80f
+	ld a, $14
+	ld [$d125], a
+	call DisplayTextBoxID
+	ld a, [W_CURMENUITEMID] ; $cc26
+	and a
+	jp nz, Func_6e5b
+	ld hl, $6fbe
+	call PrintText
+	ld b, $0
+	ret
+
+; known jump sources: 6eb1 (1:6eb1), 6ebc (1:6ebc), 6ed7 (1:6ed7)
+Func_6efe: ; 6efe (1:6efe)
+	ld hl, $6fad
+	call PrintText
+	ld b, $1
+	ret
+
+; known jump sources: 6e74 (1:6e74)
+Func_6f07: ; 6f07 (1:6f07)
+	push hl
+	ld hl, $6fc3
+	call PrintText
+	ld hl, $c43a
+	ld bc, $80f
+	ld a, $14
+	ld [$d125], a
+	call DisplayTextBoxID
+	pop hl
+	ld a, [W_CURMENUITEMID] ; $cc26
+	rra
+	ret c
+	ld bc, $fffc
+	add hl, bc
+	push hl
+	ld de, $d0dc
+	ld bc, $4
+	call CopyData
+	ld hl, Func_39b87
+	ld b, BANK(Func_39b87)
+	call Bankswitch ; indirect jump to Func_39b87 (39b87 (e:5b87))
+	pop hl
+.asm_6f39
+	push hl
+	ld hl, $6fb4
+	call PrintText
+	ld hl, $c430
+	ld b, $4
+	ld c, $e
+	call TextBoxBorder
+	ld hl, $c446
+	ld de, $d0e1
+	ld a, [$FF00+$f6]
+	set 2, a
+	ld [$FF00+$f6], a
+	call PlaceString
+	ld a, [$FF00+$f6]
+	res 2, a
+	ld [$FF00+$f6], a
+	ld hl, W_TOPMENUITEMY ; $cc24
+	ld a, $8
+	ld [hli], a
+	ld a, $5
+	ld [hli], a
+	xor a
+	ld [hli], a
+	inc hl
+	ld a, [$cd6c]
+	ld [hli], a
+	ld a, $3
+	ld [hli], a
+	ld [hl], $0
+	ld hl, $fff6
+	set 1, [hl]
+	call HandleMenuInput
+	ld hl, $fff6
+	res 1, [hl]
+	push af
+	call Func_3725
+	pop af
+	pop hl
+	bit 1, a
+	jr nz, .asm_6fab
+	push hl
+	ld a, [W_CURMENUITEMID] ; $cc26
+	ld c, a
+	ld b, $0
+	add hl, bc
+	ld a, [hl]
+	push af
+	push bc
+	call IsMoveHM
+	pop bc
+	pop de
+	ld a, d
+	jr c, .asm_6fa2
+	pop hl
+	add hl, bc
+	and a
+	ret
+.asm_6fa2
+	ld hl, $6fe1
+	call PrintText
+	pop hl
+	jr .asm_6f39
+.asm_6fab
+	scf
+	ret
+
+INCBIN "baserom.gbc",$6fad,$6fb4 - $6fad
 
 UnnamedText_6fb4: ; 0x6fb4
 	TX_FAR _UnnamedText_6fb4
@@ -9982,8 +15919,19 @@ UnnamedText_72d2: ; 0x72d2
 	db $50
 ; 0x72d2 + 5 bytes
 
-INCBIN "baserom.gbc",$72d7,$72ea - $72d7
-
+; known jump sources: 5d34 (1:5d34), 727c (1:727c), 728f (1:728f)
+Func_72d7: ; 72d7 (1:72d7)
+	call Delay3
+	ld a, $ff
+	ld [$FF00+$aa], a
+	ld a, $2
+	ld [$FF00+$1], a
+	xor a
+	ld [$FF00+$ad], a
+	ld a, $80
+	ld [$FF00+$2], a
+	ret
+; 72ea (1:72ea)
 ; function to draw various text boxes
 ; INPUT:
 ; [$D125] = text box ID
@@ -10260,8 +16208,344 @@ JapanesePokedexMenu: ; 74A1
 	db "ぶんぷをみる",$4E
 	db "キャンセル@"
 
-INCBIN "baserom.gbc",$74ba,$778d - $74ba
+	ld hl, $d730
+	set 6, [hl]
+	ld a, $f
+	ld [$d125], a
+	call DisplayTextBoxID
+	ld hl, $c3c1
+	ld b, $1
+	ld c, $6
+	call ClearScreenArea
+	ld hl, $c3c0
+	ld de, W_PLAYERMONEY3 ; $d347
+	ld c, $a3
+	call PrintBCDNumber
+	ld hl, $d730
+	res 6, [hl]
+	ret
 
+INCBIN "baserom.gbc",$74e2,$74ea - $74e2
+	ld a, [$d730]
+	set 6, a
+	ld [$d730], a
+	xor a
+	ld [$d12d], a
+	ld a, $e
+	ld [$d125], a
+	call DisplayTextBoxID
+	ld a, $3
+	ld [W_MENUWATCHEDKEYS], a ; $cc29
+	ld a, $2
+	ld [W_MAXMENUITEMID], a ; $cc28
+	ld a, $1
+	ld [W_TOPMENUITEMY], a ; $cc24
+	ld a, $1
+	ld [W_TOPMENUITEMX], a ; $cc25
+	xor a
+	ld [W_CURMENUITEMID], a ; $cc26
+	ld [W_OLDMENUITEMID], a ; $cc2a
+	ld [$cc37], a
+	ld a, [$d730]
+	res 6, a
+	ld [$d730], a
+	call HandleMenuInput
+	call PlaceUnfilledArrowMenuCursor
+	bit 0, a
+	jr nz, .asm_7539
+	bit 1, a
+	jr z, .asm_7539
+	ld a, $2
+	ld [$d12e], a
+	jr .asm_754c
+.asm_7539
+	ld a, $1
+	ld [$d12e], a
+	ld a, [W_CURMENUITEMID] ; $cc26
+	ld [$d12d], a
+	ld b, a
+	ld a, [W_MAXMENUITEMID] ; $cc28
+	cp b
+	jr z, .asm_754c
+	ret
+.asm_754c
+	ld a, $2
+	ld [$d12e], a
+	ld a, [W_CURMENUITEMID] ; $cc26
+	ld [$d12d], a
+	scf
+	ret
+
+; known jump sources: 72ef (1:72ef)
+Func_7559: ; 7559 (1:7559)
+	push hl
+	ld a, [$d730]
+	set 6, a
+	ld [$d730], a
+	xor a
+	ld [$d12d], a
+	ld [$d12e], a
+	ld a, $3
+	ld [W_MENUWATCHEDKEYS], a ; $cc29
+	ld a, $1
+	ld [W_MAXMENUITEMID], a ; $cc28
+	ld a, b
+	ld [W_TOPMENUITEMY], a ; $cc24
+	ld a, c
+	ld [W_TOPMENUITEMX], a ; $cc25
+	xor a
+	ld [W_OLDMENUITEMID], a ; $cc2a
+	ld [$cc37], a
+	push hl
+	ld hl, $d12c
+	bit 7, [hl]
+	res 7, [hl]
+	jr z, .asm_758d
+	inc a
+.asm_758d
+	ld [W_CURMENUITEMID], a ; $cc26
+	pop hl
+	push hl
+	push hl
+	call Func_763e
+	ld a, [$d12c]
+	ld hl, $7671
+	ld e, a
+	ld d, $0
+	ld a, $5
+.asm_75a1
+	add hl, de
+	dec a
+	jr nz, .asm_75a1
+	ld a, [hli]
+	ld c, a
+	ld a, [hli]
+	ld b, a
+	ld e, l
+	ld d, h
+	pop hl
+	push de
+	ld a, [$d12c]
+	cp $5
+	jr nz, .asm_75b9
+	call Func_5ab3
+	jr .asm_75bc
+.asm_75b9
+	call TextBoxBorder
+.asm_75bc
+	call Func_2429
+	pop hl
+	ld a, [hli]
+	and a
+	ld bc, $16
+	jr z, .asm_75ca
+	ld bc, $2a
+.asm_75ca
+	ld a, [hli]
+	ld e, a
+	ld a, [hli]
+	ld d, a
+	pop hl
+	add hl, bc
+	call PlaceString
+	ld hl, $d730
+	res 6, [hl]
+	ld a, [$d12c]
+	cp $7
+	jr nz, .asm_7603
+	xor a
+	ld [$d12c], a
+	ld a, [$cd60]
+	push af
+	push hl
+	ld hl, $cd60
+	bit 5, [hl]
+	set 5, [hl]
+	pop hl
+.asm_75f0
+	call HandleMenuInput
+	bit 1, a
+	jr nz, .asm_75f0
+	pop af
+	pop hl
+	ld [$cd60], a
+	ld a, $90
+	call Func_23b1
+	jr .asm_760f
+.asm_7603
+	xor a
+	ld [$d12c], a
+	call HandleMenuInput
+	pop hl
+	bit 1, a
+	jr nz, .asm_7627
+.asm_760f
+	ld a, [W_CURMENUITEMID] ; $cc26
+	ld [$d12d], a
+	and a
+	jr nz, .asm_7627
+	ld a, $1
+	ld [$d12e], a
+	ld c, $f
+	call DelayFrames
+	call Func_7656
+	and a
+	ret
+.asm_7627
+	ld a, $1
+	ld [W_CURMENUITEMID], a ; $cc26
+	ld [$d12d], a
+	ld a, $2
+	ld [$d12e], a
+	ld c, $f
+	call DelayFrames
+	call Func_7656
+	scf
+	ret
+
+; known jump sources: 7593 (1:7593)
+Func_763e: ; 763e (1:763e)
+	ld de, $cee9
+	ld bc, $506
+.asm_7644
+	ld a, [hli]
+	ld [de], a
+	inc de
+	dec c
+	jr nz, .asm_7644
+	push bc
+	ld bc, $e
+	add hl, bc
+	pop bc
+	ld c, $6
+	dec b
+	jr nz, .asm_7644
+	ret
+
+; known jump sources: 7622 (1:7622), 7639 (1:7639)
+Func_7656: ; 7656 (1:7656)
+	ld de, $cee9
+	ld bc, $506
+.asm_765c
+	ld a, [de]
+	inc de
+	ld [hli], a
+	dec c
+	jr nz, .asm_765c
+	push bc
+	ld bc, $e
+	add hl, bc
+	pop bc
+	ld c, $6
+	dec b
+	jr nz, .asm_765c
+	call Func_2429
+	ret
+
+INCBIN "baserom.gbc",$7671,$76e1 - $7671
+	xor a
+	ld hl, W_WHICHTRADE ; $cd3d
+	ld [hli], a
+	ld [hli], a
+	ld [hli], a
+	ld [hli], a
+	ld [hli], a
+	ld [hl], $c
+	call Func_77d6
+	ld a, [$cd41]
+	and a
+	jr nz, .asm_770f
+	ld hl, $c487
+	ld b, $5
+	ld c, $7
+	call TextBoxBorder
+	call Func_2429
+	ld a, $c
+	ld [$FF00+$f7], a
+	ld hl, $c49d
+	ld de, $77c2
+	jp PlaceString
+.asm_770f
+	push af
+	ld hl, $c47c
+	ld a, [$cd42]
+	dec a
+	ld e, a
+	ld d, $0
+	add hl, de
+	ld b, $5
+	ld a, $12
+	sub e
+	ld c, a
+	pop af
+	ld de, $ffd8
+.asm_7725
+	add hl, de
+	inc b
+	inc b
+	dec a
+	jr nz, .asm_7725
+	ld de, $ffec
+	add hl, de
+	inc b
+	call TextBoxBorder
+	call Func_2429
+	ld hl, $c490
+	ld a, [$cd42]
+	inc a
+	ld e, a
+	ld d, $0
+	add hl, de
+	ld de, $ffd8
+	ld a, [$cd41]
+.asm_7747
+	add hl, de
+	dec a
+	jr nz, .asm_7747
+	xor a
+	ld [$cd41], a
+	ld de, W_WHICHTRADE ; $cd3d
+.asm_7752
+	push hl
+	ld hl, $778d
+	ld a, [de]
+	and a
+	jr z, .asm_7776
+	inc de
+	ld b, a
+.asm_775c
+	dec b
+	jr z, .asm_7766
+.asm_775f
+	ld a, [hli]
+	cp $50
+	jr nz, .asm_775f
+	jr .asm_775c
+.asm_7766
+	ld b, h
+	ld c, l
+	pop hl
+	push de
+	ld d, b
+	ld e, c
+	call PlaceString
+	ld bc, $28
+	add hl, bc
+	pop de
+	jr .asm_7752
+.asm_7776
+	pop hl
+	ld a, [$cd42]
+	ld [$FF00+$f7], a
+	ld hl, $c490
+	ld a, [$cd42]
+	inc a
+	ld e, a
+	ld d, $0
+	add hl, de
+	ld de, $77c2
+	jp PlaceString
+; 778d (1:778d)
 FieldMoveNames: ; 778D
 	db "CUT@"
 	db "FLY@"
@@ -10278,8 +16562,161 @@ PokemonMenuEntries: ; 77C2
 	db "SWITCH",$4E
 	db "CANCEL@"
 
-INCBIN "baserom.gbc",$77d6,$78dc - $77d6
+; known jump sources: 76ec (1:76ec)
+Func_77d6: ; 77d6 (1:77d6)
+	ld a, [W_WHICHPOKEMON] ; $cf92
+	ld hl, W_PARTYMON1_MOVE1 ; $d173
+	ld bc, $2c
+	call AddNTimes
+	ld d, h
+	ld e, l
+	ld c, $5
+	ld hl, W_WHICHTRADE ; $cd3d
+.asm_77e9
+	push hl
+.asm_77ea
+	dec c
+	jr z, .asm_7821
+	ld a, [de]
+	and a
+	jr z, .asm_7821
+	ld b, a
+	inc de
+	ld hl, $7823
+.asm_77f6
+	ld a, [hli]
+	cp $ff
+	jr z, .asm_77ea
+	cp b
+	jr z, .asm_7802
+	inc hl
+	inc hl
+	jr .asm_77f6
+.asm_7802
+	ld a, b
+	ld [$cd43], a
+	ld a, [hli]
+	ld b, [hl]
+	pop hl
+	ld [hli], a
+	ld a, [$cd41]
+	inc a
+	ld [$cd41], a
+	ld a, [$cd42]
+	cp b
+	jr c, .asm_781b
+	ld a, b
+	ld [$cd42], a
+.asm_781b
+	ld a, [$cd43]
+	ld b, a
+	jr .asm_77e9
+.asm_7821
+	pop hl
+	ret
 
+INCBIN "baserom.gbc",$7823,$783f - $7823
+
+; known jump sources: 3f2ee (f:72ee)
+Func_783f: ; 783f (1:783f)
+	ld hl, W_DAMAGE ; $d0d7
+	ld a, [hl]
+	srl a
+	ld [hli], a
+	ld a, [hl]
+	rr a
+	ld [hld], a
+	or [hl]
+	jr nz, .asm_784f
+	inc hl
+	inc [hl]
+.asm_784f
+	ld hl, W_PLAYERMONCURHP ; $d015
+	ld de, W_PLAYERMONMAXHP ; $d023
+	ld a, [H_WHOSETURN] ; $FF00+$f3
+	and a
+	jp z, Func_7861
+	ld hl, W_ENEMYMONCURHP ; $cfe6
+	ld de, W_ENEMYMONMAXHP ; $cff4
+
+; known jump sources: 7858 (1:7858)
+Func_7861: ; 7861 (1:7861)
+	ld bc, $ceec
+	ld a, [hli]
+	ld [bc], a
+	ld a, [hl]
+	dec bc
+	ld [bc], a
+	ld a, [de]
+	dec bc
+	ld [bc], a
+	inc de
+	ld a, [de]
+	dec bc
+	ld [bc], a
+	ld a, [$d0d8]
+	ld b, [hl]
+	add b
+	ld [hld], a
+	ld [$ceed], a
+	ld a, [W_DAMAGE] ; $d0d7
+	ld b, [hl]
+	adc b
+	ld [hli], a
+	ld [$ceee], a
+	jr c, .asm_7890
+	ld a, [hld]
+	ld b, a
+	ld a, [de]
+	dec de
+	sub b
+	ld a, [hli]
+	ld b, a
+	ld a, [de]
+	inc de
+	sbc b
+	jr nc, .asm_789c
+.asm_7890
+	ld a, [de]
+	ld [hld], a
+	ld [$ceed], a
+	dec de
+	ld a, [de]
+	ld [hli], a
+	ld [$ceee], a
+	inc de
+.asm_789c
+	ld a, [H_WHOSETURN] ; $FF00+$f3
+	and a
+	ld hl, $c45e
+	ld a, $1
+	jr z, .asm_78aa
+	ld hl, $c3ca
+	xor a
+.asm_78aa
+	ld [W_LISTMENUID], a ; $cf94
+	ld a, $48
+	call Predef ; indirect jump to Func_fa1d (fa1d (3:7a1d))
+	ld a, $0
+	call Predef ; indirect jump to Func_3cd60 (3cd60 (f:4d60))
+	ld a, $49
+	call Predef ; indirect jump to Func_3cdec (3cdec (f:4dec))
+	ld hl, Func_3cd43
+	ld b, BANK(Func_3cd43)
+	call Bankswitch ; indirect jump to Func_3cd43 (3cd43 (f:4d43))
+	ld hl, $78dc
+	ld a, [H_WHOSETURN] ; $FF00+$f3
+	and a
+	ld a, [W_PLAYERMOVEEFFECT] ; $cfd3
+	jr z, .asm_78d2
+	ld a, [W_ENEMYMOVEEFFECT] ; $cfcd
+.asm_78d2
+	cp $8
+	jr nz, .asm_78d9
+	ld hl, $78e1
+.asm_78d9
+	jp PrintText
+; 78dc (1:78dc)
 UnnamedText_78dc: ; 0x78dc
 	TX_FAR _UnnamedText_78dc
 	db $50
@@ -10290,8 +16727,255 @@ UnnamedText_78e1: ; 0x78e1
 	db $50
 ; 0x78e1 + 5 bytes
 
-INCBIN "baserom.gbc",$78e6,$20f
+; known jump sources: 3479 (0:3479), 17ebb (5:7ebb)
+Func_78e6: ; 78e6 (1:78e6)
+	ld hl, $d730
+	set 6, [hl]
+	ld a, $4
+	ld [$d0b6], a
+	call Func_3719
+	xor a
+	ld [$cc2c], a
+	ld [$ccd3], a
+	ld a, [$cd60]
+	bit 3, a
+	jr nz, Func_790c
+	ld a, $99
+	call Func_23b1
+	ld hl, $7b22
+	call PrintText
 
+; known jump sources: 78ff (1:78ff), 79a8 (1:79a8), 79c8 (1:79c8), 7a25 (1:7a25), 7a45 (1:7a45), 7aa2 (1:7aa2), 7ac4 (1:7ac4)
+Func_790c: ; 790c (1:790c)
+	ld a, [$ccd3]
+	ld [W_CURMENUITEMID], a ; $cc26
+	ld hl, $cd60
+	set 5, [hl]
+	call Func_3701
+	ld hl, $c3a0
+	ld b, $8
+	ld c, $e
+	call TextBoxBorder
+	call Func_2429
+	ld hl, $c3ca
+	ld de, $7af5
+	call PlaceString
+	ld hl, W_TOPMENUITEMY ; $cc24
+	ld a, $2
+	ld [hli], a
+	dec a
+	ld [hli], a
+	inc hl
+	inc hl
+	ld a, $3
+	ld [hli], a
+	ld a, $3
+	ld [hli], a
+	xor a
+	ld [hl], a
+	ld hl, W_LISTSCROLLOFFSET ; $cc36
+	ld [hli], a
+	ld [hl], a
+	ld [W_PLAYERMONNUMBER], a ; $cc2f
+	ld hl, $7b27
+	call PrintText
+	call HandleMenuInput
+	bit 1, a
+	jp nz, Func_796d
+	call PlaceUnfilledArrowMenuCursor
+	ld a, [W_CURMENUITEMID] ; $cc26
+	ld [$ccd3], a
+	and a
+	jp z, Func_7a12
+	dec a
+	jp z, Func_7995
+	dec a
+	jp z, Func_7a8f
+
+; known jump sources: 7955 (1:7955)
+Func_796d: ; 796d (1:796d)
+	ld a, [$cd60]
+	bit 3, a
+	jr nz, .asm_797c
+	ld a, $9a
+	call Func_23b1
+	call Func_3748
+.asm_797c
+	ld hl, $cd60
+	res 5, [hl]
+	call Func_3701
+	xor a
+	ld [W_LISTSCROLLOFFSET], a ; $cc36
+	ld [$cc2c], a
+	ld hl, $d730
+	res 6, [hl]
+	xor a
+	ld [$cc3c], a
+	ret
+
+; known jump sources: 7966 (1:7966)
+Func_7995: ; 7995 (1:7995)
+	xor a
+	ld [W_CURMENUITEMID], a ; $cc26
+	ld [W_LISTSCROLLOFFSET], a ; $cc36
+	ld a, [W_NUMBAGITEMS] ; $d31d
+	and a
+	jr nz, Func_79ab
+	ld hl, $7b3b
+	call PrintText
+	jp Func_790c
+
+; known jump sources: 79a0 (1:79a0), 79e4 (1:79e4), 79f5 (1:79f5), 7a0f (1:7a0f)
+Func_79ab: ; 79ab (1:79ab)
+	ld hl, $7b2c
+	call PrintText
+	ld hl, W_NUMBAGITEMS ; $d31d
+	ld a, l
+	ld [$cf8b], a
+	ld a, h
+	ld [$cf8c], a
+	xor a
+	ld [$cf93], a
+	ld a, $3
+	ld [W_LISTMENUID], a ; $cf94
+	call DisplayListMenuID
+	jp c, Func_790c
+	call IsKeyItem
+	ld a, $1
+	ld [$cf96], a
+	ld a, [$d124]
+	and a
+	jr nz, .asm_79e7
+	ld hl, $7b31
+	call PrintText
+	call DisplayChooseQuantityMenu
+	cp $ff
+	jp z, Func_79ab
+.asm_79e7
+	ld hl, W_NUMBOXITEMS ; $d53a
+	call AddItemToInventory
+	jr c, .asm_79f8
+	ld hl, $7b40
+	call PrintText
+	jp Func_79ab
+.asm_79f8
+	ld hl, W_NUMBAGITEMS ; $d31d
+	call RemoveItemFromInventory
+	call Func_3748
+	ld a, $ab
+	call Func_23b1
+	call Func_3748
+	ld hl, $7b36
+	call PrintText
+	jp Func_79ab
+
+; known jump sources: 7962 (1:7962)
+Func_7a12: ; 7a12 (1:7a12)
+	xor a
+	ld [W_CURMENUITEMID], a ; $cc26
+	ld [W_LISTSCROLLOFFSET], a ; $cc36
+	ld a, [W_NUMBOXITEMS] ; $d53a
+	and a
+	jr nz, Func_7a28
+	ld hl, $7b54
+	call PrintText
+	jp Func_790c
+
+; known jump sources: 7a1d (1:7a1d), 7a61 (1:7a61), 7a72 (1:7a72), 7a8c (1:7a8c)
+Func_7a28: ; 7a28 (1:7a28)
+	ld hl, $7b45
+	call PrintText
+	ld hl, W_NUMBOXITEMS ; $d53a
+	ld a, l
+	ld [$cf8b], a
+	ld a, h
+	ld [$cf8c], a
+	xor a
+	ld [$cf93], a
+	ld a, $3
+	ld [W_LISTMENUID], a ; $cf94
+	call DisplayListMenuID
+	jp c, Func_790c
+	call IsKeyItem
+	ld a, $1
+	ld [$cf96], a
+	ld a, [$d124]
+	and a
+	jr nz, .asm_7a64
+	ld hl, $7b4a
+	call PrintText
+	call DisplayChooseQuantityMenu
+	cp $ff
+	jp z, Func_7a28
+.asm_7a64
+	ld hl, W_NUMBAGITEMS ; $d31d
+	call AddItemToInventory
+	jr c, .asm_7a75
+	ld hl, $7b59
+	call PrintText
+	jp Func_7a28
+.asm_7a75
+	ld hl, W_NUMBOXITEMS ; $d53a
+	call RemoveItemFromInventory
+	call Func_3748
+	ld a, $ab
+	call Func_23b1
+	call Func_3748
+	ld hl, $7b4f
+	call PrintText
+	jp Func_7a28
+
+; known jump sources: 796a (1:796a)
+Func_7a8f: ; 7a8f (1:7a8f)
+	xor a
+	ld [W_CURMENUITEMID], a ; $cc26
+	ld [W_LISTSCROLLOFFSET], a ; $cc36
+	ld a, [W_NUMBOXITEMS] ; $d53a
+	and a
+	jr nz, Func_7aa5
+	ld hl, $7b54
+	call PrintText
+	jp Func_790c
+
+; known jump sources: 7a9a (1:7a9a), 7aec (1:7aec), 7af2 (1:7af2)
+Func_7aa5: ; 7aa5 (1:7aa5)
+	ld hl, $7b5e
+	call PrintText
+	ld hl, W_NUMBOXITEMS ; $d53a
+	ld a, l
+	ld [$cf8b], a
+	ld a, h
+	ld [$cf8c], a
+	xor a
+	ld [$cf93], a
+	ld a, $3
+	ld [W_LISTMENUID], a ; $cf94
+	push hl
+	call DisplayListMenuID
+	pop hl
+	jp c, Func_790c
+	push hl
+	call IsKeyItem
+	pop hl
+	ld a, $1
+	ld [$cf96], a
+	ld a, [$d124]
+	and a
+	jr nz, .asm_7aef
+	ld a, [$cf91]
+	call IsItemHM
+	jr c, .asm_7aef
+	push hl
+	ld hl, $7b63
+	call PrintText
+	call DisplayChooseQuantityMenu
+	pop hl
+	cp $ff
+	jp z, Func_7aa5
+.asm_7aef
+	call TossItem
+	jp Func_7aa5
+; 7af5 (1:7af5)
 PlayersPCMenuEntries: ; 7AF5
 	db "WITHDRAW ITEM",$4E
 	db "DEPOSIT ITEM",$4E
@@ -10368,7 +17052,104 @@ UnnamedText_7b63: ; 0x7b63
 	db $50
 ; 0x7b63 + 5 bytes
 
-INCBIN "baserom.gbc",$7b68,$e1
+; known jump sources: 3924 (0:3924)
+Func_7b68: ; 7b68 (1:7b68)
+	ld hl, W_NUMINPARTY ; $d163
+	ld a, [$cf95]
+	and a
+	jr z, .asm_7b74
+	ld hl, W_NUMINBOX ; $da80
+.asm_7b74
+	ld a, [hl]
+	dec a
+	ld [hli], a
+	ld a, [W_WHICHPOKEMON] ; $cf92
+	ld c, a
+	ld b, $0
+	add hl, bc
+	ld e, l
+	ld d, h
+	inc de
+.asm_7b81
+	ld a, [de]
+	inc de
+	ld [hli], a
+	inc a
+	jr nz, .asm_7b81
+	ld hl, W_PARTYMON1OT ; $d273
+	ld d, $5
+	ld a, [$cf95]
+	and a
+	jr z, .asm_7b97
+	ld hl, $dd2a
+	ld d, $13
+.asm_7b97
+	ld a, [W_WHICHPOKEMON] ; $cf92
+	call Func_3a7d
+	ld a, [W_WHICHPOKEMON] ; $cf92
+	cp d
+	jr nz, .asm_7ba6
+	ld [hl], $ff
+	ret
+.asm_7ba6
+	ld d, h
+	ld e, l
+	ld bc, $b
+	add hl, bc
+	ld bc, W_PARTYMON1NAME ; $d2b5
+	ld a, [$cf95]
+	and a
+	jr z, .asm_7bb8
+	ld bc, $de06
+.asm_7bb8
+	call CopyDataUntil
+	ld hl, W_PARTYMON1_NUM ; $d16b (aliases: W_PARTYMON1DATA)
+	ld bc, $2c
+	ld a, [$cf95]
+	and a
+	jr z, .asm_7bcd
+	ld hl, $da96
+	ld bc, $21
+.asm_7bcd
+	ld a, [W_WHICHPOKEMON] ; $cf92
+	call AddNTimes
+	ld d, h
+	ld e, l
+	ld a, [$cf95]
+	and a
+	jr z, .asm_7be4
+	ld bc, $21
+	add hl, bc
+	ld bc, $dd2a
+	jr .asm_7beb
+.asm_7be4
+	ld bc, $2c
+	add hl, bc
+	ld bc, W_PARTYMON1OT ; $d273
+.asm_7beb
+	call CopyDataUntil
+	ld hl, W_PARTYMON1NAME ; $d2b5
+	ld a, [$cf95]
+	and a
+	jr z, .asm_7bfa
+	ld hl, $de06
+.asm_7bfa
+	ld bc, $b
+	ld a, [W_WHICHPOKEMON] ; $cf92
+	call AddNTimes
+	ld d, h
+	ld e, l
+	ld bc, $b
+	add hl, bc
+	ld bc, W_OWNEDPOKEMON ; $d2f7
+	ld a, [$cf95]
+	and a
+	jr z, .asm_7c15
+	ld bc, $dee2
+.asm_7c15
+	jp CopyDataUntil
+
+INCBIN "baserom.gbc",$7c18,$7c49 - $7c18
 
 SECTION "bank2",DATA,BANK[$2]
 
@@ -10577,7 +17358,60 @@ INCLUDE "music.asm"
 	
 SECTION "bank3",DATA,BANK[$3]
 
-INCBIN "baserom.gbc",$C000,$C23D - $C000
+; known jump sources: 1a4 (0:1a4)
+Func_c000: ; c000 (3:4000)
+	ld a, [$FF00+$f8]
+	cp $f
+	jp z, Func_c03c
+	ld b, a
+	ld a, [$FF00+$b1]
+	ld e, a
+	xor b
+	ld d, a
+	and e
+	ld [$FF00+$b2], a
+	ld a, d
+	and b
+	ld [$FF00+$b3], a
+	ld a, b
+	ld [$FF00+$b1], a
+	ld a, [$d730]
+	bit 5, a
+	jr nz, Func_c034
+	ld a, [$FF00+$b1]
+	ld [$FF00+$b4], a
+	ld a, [$cd6b]
+	and a
+	ret z
+	cpl
+	ld b, a
+	ld a, [$FF00+$b4]
+	and b
+	ld [$FF00+$b4], a
+	ld a, [$FF00+$b3]
+	and b
+	ld [$FF00+$b3], a
+	ret
+
+; known jump sources: c01c (3:401c), f2c3 (3:72c3)
+Func_c034: ; c034 (3:4034)
+	xor a
+	ld [$FF00+$b4], a
+	ld [$FF00+$b3], a
+	ld [$FF00+$b2], a
+	ret
+
+; known jump sources: c004 (3:4004)
+Func_c03c: ; c03c (3:403c)
+	call DelayFrame
+	ld a, $30
+	ld [rJOYP], a ; $FF00+$0
+	ld hl, $ff8a
+	dec [hl]
+	jp z, Func_1f49
+	jp GetJoypadState
+
+INCBIN "baserom.gbc",$c04d,$c23d - $c04d
 
 ; see also MapHeaderPointers
 MapHeaderBanks: ; 423D
@@ -10830,8 +17664,61 @@ MapHeaderBanks: ; 423D
 	db BANK(Bruno_h)
 	db BANK(Agatha_h)
 
-INCBIN "baserom.gbc",$C335,$C38B-$C335
+; known jump sources: 3b3 (0:3b3), 5798 (1:5798)
+Func_c335: ; c335 (3:4335)
+	ld a, $90
+	ld [$FF00+$b0], a
+	ld [rWY], a ; $FF00+$4a
+	xor a
+	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld [$d13b], a
+	ld [W_LONEATTACKNO], a ; $d05c
+	ld [$FF00+$b3], a
+	ld [$FF00+$b2], a
+	ld [$FF00+$b4], a
+	ld [$cd6a], a
+	ld [$d5a3], a
+	ld hl, $d73f
+	ld [hli], a
+	ld [hl], a
+	ld hl, W_WHICHTRADE ; $cd3d
+	ld bc, $1e
+	call FillMemory
+	ret
 
+; known jump sources: 924 (0:924)
+Func_c35f: ; c35f (3:435f)
+	ld a, [$d3ae]
+	and a
+	ret z
+	ld c, a
+	ld hl, $d3af
+.asm_c368
+	ld a, [W_YCOORD] ; $d361
+	cp [hl]
+	jr nz, .asm_c383
+	inc hl
+	ld a, [W_XCOORD] ; $d362
+	cp [hl]
+	jr nz, .asm_c384
+	inc hl
+	ld a, [hli]
+	ld [$d42f], a
+	ld a, [hl]
+	ld [H_DOWNARROWBLINKCNT1], a ; $FF00+$8b
+	ld hl, $d736
+	set 2, [hl]
+	ret
+.asm_c383
+	inc hl
+.asm_c384
+	inc hl
+	inc hl
+	inc hl
+	dec c
+	jr nz, .asm_c368
+	ret
+; c38b (3:438b)
 CheckForceBikeOrSurf: ; C38B
 	ld hl, $D732
 	bit 5, [hl]
@@ -10897,11 +17784,521 @@ db SEAFOAM_ISLANDS_5,$0E,$05
 db $FF ;end
 ; 0xc3ff
 
-INCBIN "baserom.gbc",$C3FF,$C766-$C3FF
+; known jump sources: 91c (0:91c)
+Func_c3ff: ; c3ff (3:43ff)
+	push hl
+	push de
+	push bc
+	ld a, [$c109]
+	srl a
+	ld c, a
+	ld b, $0
+	ld hl, $4422
+	add hl, bc
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	ld a, [W_YCOORD] ; $d361
+	ld b, a
+	ld a, [W_XCOORD] ; $d362
+	ld c, a
+	ld de, $441e
+	push de
+	jp [hl]
+	pop bc
+	pop de
+	pop hl
+	ret
 
+INCBIN "baserom.gbc",$c422,$c42a - $c422
+	ld a, [W_CURMAPHEIGHT] ; $d368
+	add a
+	dec a
+	cp b
+	jr z, .asm_c44c
+	jr .asm_c44a
+	ld a, b
+	and a
+	jr z, .asm_c44c
+	jr .asm_c44a
+	ld a, c
+	and a
+	jr z, .asm_c44c
+	jr .asm_c44a
+	ld a, [W_CURMAPWIDTH] ; $d369
+	add a
+	dec a
+	cp c
+	jr z, .asm_c44c
+	jr .asm_c44a
+.asm_c44a
+	and a
+	ret
+.asm_c44c
+	scf
+	ret
+	push hl
+	push de
+	push bc
+	call Func_c589
+	ld a, [W_CURMAP] ; $d35e
+	cp $63
+	jr z, .asm_c490
+	ld a, [$c109]
+	srl a
+	ld c, a
+	ld b, $0
+	ld hl, $4477
+	add hl, bc
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	ld a, [$cfc6]
+	ld de, $1
+	call IsInArray
+.asm_c473
+	pop bc
+	pop de
+	pop hl
+	ret
+
+INCBIN "baserom.gbc",$c477,$c490 - $c477
+.asm_c490
+	ld a, [$cfc6]
+	cp $15
+	jr nz, .asm_c49a
+	scf
+	jr .asm_c473
+.asm_c49a
+	and a
+	jr .asm_c473
+
+; known jump sources: 6e0 (0:6e0), 1387f (4:787f)
+Func_c49d: ; c49d (3:449d)
+	push hl
+	push de
+	push bc
+	ld b, BANK(Func_1a609)
+	ld hl, Func_1a609
+	call Bankswitch ; indirect jump to Func_1a609 (1a609 (6:6609))
+	jr c, .asm_c4c8
+	ld a, [W_CURMAPTILESET] ; $d367
+	add a
+	ld c, a
+	ld b, $0
+	ld hl, $44cc
+	add hl, bc
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	ld de, $1
+	ld a, [$c45c]
+	call IsInArray
+	jr nc, .asm_c4c8
+	ld hl, $d736
+	res 2, [hl]
+.asm_c4c8
+	pop bc
+	pop de
+	pop hl
+	ret
+
+INCBIN "baserom.gbc",$c4cc,$c52f - $c4cc
+
+; known jump sources: 2aec (0:2aec)
+Func_c52f: ; c52f (3:452f)
+	ld a, [W_CURMAP] ; $d35e
+	cp $d9
+	ret c
+	cp $e2
+	ret nc
+	ld hl, $c3a0
+	ld b, $3
+	ld c, $7
+	call TextBoxBorder
+	ld hl, $c3b5
+	ld de, W_SAFARITIMER1 ; $d70d
+	ld bc, $203
+	call PrintNumber
+	ld hl, $c3b8
+	ld de, $4579
+	call PlaceString
+	ld hl, $c3dd
+	ld de, $457e
+	call PlaceString
+	ld a, [W_NUMSAFARIBALLS] ; $da47
+	cp $a
+	jr nc, .asm_c56d
+	ld hl, $c3e1
+	ld a, $7f
+	ld [hl], a
+.asm_c56d
+	ld hl, $c3e2
+	ld de, W_NUMSAFARIBALLS ; $da47
+	ld bc, $102
+	jp PrintNumber
+
+INCBIN "baserom.gbc",$c579,$c586 - $c579
+
+; known jump sources: 47f (0:47f), b2e (0:b2e), b5a (0:b5a), c12 (0:c12), c2d (0:c2d), fd3 (0:fd3), 1a67f (6:667f), 52683 (14:6683)
+Func_c586: ; c586 (3:4586)
+	call Load16BitRegisters
+
+; known jump sources: c451 (3:4451)
+Func_c589: ; c589 (3:4589)
+	ld a, [W_YCOORD] ; $d361
+	ld d, a
+	ld a, [W_XCOORD] ; $d362
+	ld e, a
+	ld a, [$c109]
+	and a
+	jr nz, .asm_c59d
+	ld a, [$c484]
+	inc d
+	jr .asm_c5b9
+.asm_c59d
+	cp $4
+	jr nz, .asm_c5a7
+	ld a, [$c434]
+	dec d
+	jr .asm_c5b9
+.asm_c5a7
+	cp $8
+	jr nz, .asm_c5b1
+	ld a, [$c45a]
+	dec e
+	jr .asm_c5b9
+.asm_c5b1
+	cp $c
+	jr nz, .asm_c5b9
+	ld a, [$c45e]
+	inc e
+.asm_c5b9
+	ld c, a
+	ld [$cfc6], a
+	ret
+
+; known jump sources: c60b (3:460b)
+Func_c5be: ; c5be (3:45be)
+	xor a
+	ld [$FF00+$db], a
+	ld hl, W_YCOORD ; $d361
+	ld a, [hli]
+	ld d, a
+	ld e, [hl]
+	ld a, [$c109]
+	and a
+	jr nz, .asm_c5d8
+	ld hl, $ffdb
+	set 0, [hl]
+	ld a, [$c4ac]
+	inc d
+	jr .asm_c603
+.asm_c5d8
+	cp $4
+	jr nz, .asm_c5e7
+	ld hl, $ffdb
+	set 1, [hl]
+	ld a, [$c40c]
+	dec d
+	jr .asm_c603
+.asm_c5e7
+	cp $8
+	jr nz, .asm_c5f6
+	ld hl, $ffdb
+	set 2, [hl]
+	ld a, [$c458]
+	dec e
+	jr .asm_c603
+.asm_c5f6
+	cp $c
+	jr nz, .asm_c603
+	ld hl, $ffdb
+	set 3, [hl]
+	ld a, [$c460]
+	inc e
+.asm_c603
+	ld c, a
+	ld [$d71c], a
+	ld [$cfc6], a
+	ret
+
+; known jump sources: f265 (3:7265)
+Func_c60b: ; c60b (3:460b)
+	call Func_c5be
+	ld hl, $d530
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+.asm_c614
+	ld a, [hli]
+	cp $ff
+	jr z, .asm_c632
+	cp c
+	jr nz, .asm_c614
+	ld hl, $c7e
+	call Func_c44
+	ld a, $ff
+	jr c, .asm_c632
+	ld a, [$d71c]
+	cp $15
+	ld a, $ff
+	jr z, .asm_c632
+	call Func_c636
+.asm_c632
+	ld [$d71c], a
+	ret
+
+; known jump sources: c62f (3:462f)
+Func_c636: ; c636 (3:4636)
+	ld a, [$d718]
+	dec a
+	swap a
+	ld d, $0
+	ld e, a
+	ld hl, $c214
+	add hl, de
+	ld a, [hli]
+	ld [$FF00+$dc], a
+	ld a, [hl]
+	ld [$FF00+$dd], a
+	ld a, [W_NUMSPRITES] ; $d4e1
+	ld c, a
+	ld de, $f
+	ld hl, $c214
+	ld a, [$FF00+$db]
+	and $3
+	jr z, .asm_c678
+.asm_c659
+	inc hl
+	ld a, [$FF00+$dd]
+	cp [hl]
+	jr nz, .asm_c672
+	dec hl
+	ld a, [hli]
+	ld b, a
+	ld a, [$FF00+$db]
+	rrca
+	jr c, .asm_c66c
+	ld a, [$FF00+$dc]
+	dec a
+	jr .asm_c66f
+.asm_c66c
+	ld a, [$FF00+$dc]
+	inc a
+.asm_c66f
+	cp b
+	jr z, .asm_c697
+.asm_c672
+	dec c
+	jr z, .asm_c69a
+	add hl, de
+	jr .asm_c659
+.asm_c678
+	ld a, [hli]
+	ld b, a
+	ld a, [$FF00+$dc]
+	cp b
+	jr nz, .asm_c691
+	ld b, [hl]
+	ld a, [$FF00+$db]
+	bit 2, a
+	jr nz, .asm_c68b
+	ld a, [$FF00+$dd]
+	inc a
+	jr .asm_c68e
+.asm_c68b
+	ld a, [$FF00+$dd]
+	dec a
+.asm_c68e
+	cp b
+	jr z, .asm_c697
+.asm_c691
+	dec c
+	jr z, .asm_c69a
+	add hl, de
+	jr .asm_c678
+.asm_c697
+	ld a, $ff
+	ret
+.asm_c69a
+	xor a
+	ret
+
+; known jump sources: 622 (0:622)
+Func_c69c: ; c69c (3:469c)
+	ld a, [$d730]
+	add a
+	jp c, .asm_c74f
+	ld a, [W_NUMINPARTY] ; $d163
+	and a
+	jp z, .asm_c74f
+	call Func_c8de
+	ld a, [$d13b]
+	and $3
+	jp nz, .asm_c74f
+	ld [W_WHICHPOKEMON], a ; $cf92
+	ld hl, W_PARTYMON1_STATUS ; $d16f
+	ld de, W_PARTYMON1 ; $d164
+.asm_c6be
+	ld a, [hl]
+	and $8
+	jr z, .asm_c6fd
+	dec hl
+	dec hl
+	ld a, [hld]
+	ld b, a
+	ld a, [hli]
+	or b
+	jr z, .asm_c6fb
+	ld a, [hl]
+	dec a
+	ld [hld], a
+	inc a
+	jr nz, .asm_c6d5
+	dec [hl]
+	inc hl
+	jr .asm_c6fb
+.asm_c6d5
+	ld a, [hli]
+	or [hl]
+	jr nz, .asm_c6fb
+	push hl
+	inc hl
+	inc hl
+	ld [hl], a
+	ld a, [de]
+	ld [$d11e], a
+	push de
+	ld a, [W_WHICHPOKEMON] ; $cf92
+	ld hl, W_PARTYMON1NAME ; $d2b5
+	call GetPartyMonName
+	xor a
+	ld [$cd6b], a
+	call EnableAutoTextBoxDrawing
+	ld a, $d0
+	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	call DisplayTextID
+	pop de
+	pop hl
+.asm_c6fb
+	inc hl
+	inc hl
+.asm_c6fd
+	inc de
+	ld a, [de]
+	inc a
+	jr z, .asm_c70e
+	ld bc, $2c
+	add hl, bc
+	push hl
+	ld hl, W_WHICHPOKEMON ; $cf92
+	inc [hl]
+	pop hl
+	jr .asm_c6be
+.asm_c70e
+	ld hl, W_PARTYMON1_STATUS ; $d16f
+	ld a, [W_NUMINPARTY] ; $d163
+	ld d, a
+	ld e, $0
+.asm_c717
+	ld a, [hl]
+	and $8
+	or e
+	ld e, a
+	ld bc, $2c
+	add hl, bc
+	dec d
+	jr nz, .asm_c717
+	ld a, e
+	and a
+	jr z, .asm_c733
+	ld b, $2
+	ld a, $1f
+	call Predef ; indirect jump to Func_480eb (480eb (12:40eb))
+	ld a, $97
+	call Func_23b1
+.asm_c733
+	ld a, $14
+	call Predef ; indirect jump to Func_3ca83 (3ca83 (f:4a83))
+	ld a, d
+	and a
+	jr nz, .asm_c74f
+	call EnableAutoTextBoxDrawing
+	ld a, $d1
+	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	call DisplayTextID
+	ld hl, $d72e
+	set 5, [hl]
+	ld a, $ff
+	jr .asm_c750
+.asm_c74f
+	xor a
+.asm_c750
+	ld [$d12d], a
+	ret
+
+; known jump sources: 11fa (0:11fa), 62d3 (1:62d3)
+Func_c754: ; c754 (3:4754)
+	call Load16BitRegisters
+	push hl
+	ld d, $0
+	ld a, [W_CURMAPTILESET] ; $d367
+	add a
+	add a
+	ld b, a
+	add a
+	add b
+	jr nc, .asm_c765
+	inc d
+.asm_c765
+	ld e, a
+; c766 (3:4766)
 	ld hl, TilesetsHeadPtr
 
-INCBIN "baserom.gbc",$C769,$C7BE-$C769
+	add hl, de
+	ld de, $d52b
+	ld c, $b
+.asm_c76f
+	ld a, [hli]
+	ld [de], a
+	inc de
+	dec c
+	jr nz, .asm_c76f
+	ld a, [hl]
+	ld [$FF00+$d7], a
+	xor a
+	ld [$FF00+$d8], a
+	pop hl
+	ld a, [W_CURMAPTILESET] ; $d367
+	push hl
+	push de
+	ld hl, $47b2
+	ld de, $1
+	call IsInArray
+	pop de
+	pop hl
+	jr c, .asm_c797
+	ld a, [W_CURMAPTILESET] ; $d367
+	ld b, a
+	ld a, [H_DOWNARROWBLINKCNT1] ; $FF00+$8b
+	cp b
+	jr z, .asm_c7b1
+.asm_c797
+	ld a, [$d42f]
+	cp $ff
+	jr z, .asm_c7b1
+	call LoadDestinationWarpPosition
+	ld a, [W_YCOORD] ; $d361
+	and $1
+	ld [W_YBLOCKCOORD], a ; $d363
+	ld a, [W_XCOORD] ; $d362
+	and $1
+	ld [W_XBLOCKCOORD], a ; $d364
+.asm_c7b1
+	ret
+
+INCBIN "baserom.gbc",$c7b2,$c7be - $c7b2
 
 TilesetsHeadPtr: ; 0xC7BE
 	TSETHEAD Tset00_Block,Tset00_GFX,Tset00_Coll,$FF,$FF,$FF,$52,2
@@ -10930,8 +18327,26 @@ TilesetsHeadPtr: ; 0xC7BE
 	TSETHEAD Tset17_Block,Tset17_GFX,Tset17_Coll,$FF,$FF,$FF,$45,1
 ; 0xC8DE
 
-INCBIN "baserom.gbc",$C8DE,$C8F5-$C8DE
-
+; known jump sources: c6aa (3:46aa)
+Func_c8de: ; c8de (3:48de)
+	ld a, [$da48]
+	and a
+	ret z
+	ld hl, $da6f
+	inc [hl]
+	ret nz
+	dec hl
+	inc [hl]
+	ret nz
+	dec hl
+	inc [hl]
+	ld a, [hl]
+	cp $50
+	ret c
+	ld a, $50
+	ld [hl], a
+	ret
+; c8f5 (3:48f5)
 ; data for default hidden/shown
 ; objects for each map ($00-$F8)
 
@@ -11509,14 +18924,56 @@ MapHSA2:
 
 	db $FF
 
-INCBIN "baserom.gbc",$cd97,$cdbb - $cd97
+INCBIN "baserom.gbc",$cd97,$cd99 - $cd97
 
+; known jump sources: 1320a (4:720a)
+Func_cd99: ; cd99 (3:4d99)
+	ld hl, $d728
+	set 0, [hl]
+	ld hl, $4daa
+	call PrintText
+	ld hl, $4dbb
+	jp PrintText
+
+INCBIN "baserom.gbc",$cdaa,$cdaf - $cdaa
+	ld a, [$cf91]
+	call PlayCry
+	call Delay3
+	jp TextScriptEnd
+; cdbb (3:4dbb)
 UnnamedText_cdbb: ; 0xcdbb
 	TX_FAR _UnnamedText_cdbb
 	db $50
 ; 0xcdbb + 5 bytes
 
-INCBIN "baserom.gbc",$cdc0,$cdfa - $cdc0
+; known jump sources: 131de (4:71de)
+Func_cdc0: ; cdc0 (3:4dc0)
+	ld hl, $d728
+	set 1, [hl]
+	ld a, [$d732]
+	bit 5, a
+	jr nz, .asm_cdec
+	ld a, [W_CURMAP] ; $d35e
+	cp $a2
+	ret nz
+	ld a, [$d881]
+	and $3
+	cp $3
+	ret z
+	ld hl, $4df7
+	call ArePlayerCoordsInArray
+	ret nc
+	ld hl, $d728
+	res 1, [hl]
+	ld hl, $4dfa
+	jp PrintText
+.asm_cdec
+	ld hl, $d728
+	res 1, [hl]
+	ld hl, $4dff
+	jp PrintText
+
+INCBIN "baserom.gbc",$cdf7,$cdfa - $cdf7
 
 UnnamedText_cdfa: ; 0xcdfa
 	TX_FAR _UnnamedText_cdfa
@@ -18151,8 +25608,176 @@ KeyItemBitfield: ; 6799
 	db %00111011
 	db %00000000
 
-INCBIN "baserom.gbc",$e7a4,$68b8 - $67a4
-
+; known jump sources: d90a (3:590a), 4fdd4 (13:7dd4)
+Func_e7a4: ; e7a4 (3:67a4)
+	ld de, W_NUMINBOX ; $da80
+	ld a, [de]
+	inc a
+	ld [de], a
+	ld a, [$cf91]
+	ld [$d0b5], a
+	ld c, a
+.asm_e7b1
+	inc de
+	ld a, [de]
+	ld b, a
+	ld a, c
+	ld c, b
+	ld [de], a
+	cp $ff
+	jr nz, .asm_e7b1
+	call GetBaseStats
+	ld hl, $dd2a
+	ld bc, $b
+	ld a, [W_NUMINBOX] ; $da80
+	dec a
+	jr z, .asm_e7ee
+	dec a
+	call AddNTimes
+	push hl
+	ld bc, $b
+	add hl, bc
+	ld d, h
+	ld e, l
+	pop hl
+	ld a, [W_NUMINBOX] ; $da80
+	dec a
+	ld b, a
+.asm_e7db
+	push bc
+	push hl
+	ld bc, $b
+	call CopyData
+	pop hl
+	ld d, h
+	ld e, l
+	ld bc, $fff5
+	add hl, bc
+	pop bc
+	dec b
+	jr nz, .asm_e7db
+.asm_e7ee
+	ld hl, W_PLAYERNAME ; $d158
+	ld de, $dd2a
+	ld bc, $b
+	call CopyData
+	ld a, [W_NUMINBOX] ; $da80
+	dec a
+	jr z, .asm_e82a
+	ld hl, $de06
+	ld bc, $b
+	dec a
+	call AddNTimes
+	push hl
+	ld bc, $b
+	add hl, bc
+	ld d, h
+	ld e, l
+	pop hl
+	ld a, [W_NUMINBOX] ; $da80
+	dec a
+	ld b, a
+.asm_e817
+	push bc
+	push hl
+	ld bc, $b
+	call CopyData
+	pop hl
+	ld d, h
+	ld e, l
+	ld bc, $fff5
+	add hl, bc
+	pop bc
+	dec b
+	jr nz, .asm_e817
+.asm_e82a
+	ld hl, $de06
+	ld a, $2
+	ld [$d07d], a
+	ld a, $4e
+	call Predef ; indirect jump to Func_64eb (64eb (1:64eb))
+	ld a, [W_NUMINBOX] ; $da80
+	dec a
+	jr z, .asm_e867
+	ld hl, $da96
+	ld bc, $21
+	dec a
+	call AddNTimes
+	push hl
+	ld bc, $21
+	add hl, bc
+	ld d, h
+	ld e, l
+	pop hl
+	ld a, [W_NUMINBOX] ; $da80
+	dec a
+	ld b, a
+.asm_e854
+	push bc
+	push hl
+	ld bc, $21
+	call CopyData
+	pop hl
+	ld d, h
+	ld e, l
+	ld bc, $ffdf
+	add hl, bc
+	pop bc
+	dec b
+	jr nz, .asm_e854
+.asm_e867
+	ld a, [W_ENEMYMONLEVEL] ; $cff3
+	ld [W_ENEMYMONNUMBER], a ; $cfe8
+	ld hl, $cfe5
+	ld de, $da96
+	ld bc, $c
+	call CopyData
+	ld hl, W_PLAYERIDHI ; $d359
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hl]
+	ld [de], a
+	inc de
+	push de
+	ld a, [W_CURENEMYLVL] ; $d127
+	ld d, a
+	ld hl, Func_58f6a
+	ld b, BANK(Func_58f6a)
+	call Bankswitch ; indirect jump to Func_58f6a (58f6a (16:4f6a))
+	pop de
+	ld a, [H_NUMTOPRINT] ; $FF00+$96 (aliases: H_MULTIPLICAND)
+	ld [de], a
+	inc de
+	ld a, [$FF00+$97]
+	ld [de], a
+	inc de
+	ld a, [$FF00+$98]
+	ld [de], a
+	inc de
+	xor a
+	ld b, $a
+.asm_e89f
+	ld [de], a
+	inc de
+	dec b
+	jr nz, .asm_e89f
+	ld hl, $cff1
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hli]
+	ld [de], a
+	ld hl, W_ENEMYMONPP ; $cffe
+	ld b, $4
+.asm_e8b1
+	ld a, [hli]
+	inc de
+	ld [de], a
+	dec b
+	jr nz, .asm_e8b1
+	ret
+; e8b8 (3:68b8)
 ; checks if the tile in front of the player is a shore or water tile
 ; used for surfing and fishing
 ; unsets carry if it is, sets carry if not
@@ -18340,15 +25965,1319 @@ ItemUseReloadOverworldData: ; 69C5
 	call LoadCurrentMapView
 	jp $2429
 
-INCBIN "baserom.gbc",$E9CB,$ef7d - $E9CB
+; known jump sources: 711f4 (1c:51f4)
+Func_e9cb: ; e9cb (3:69cb)
+	ld hl, $4eeb
+	ld de, $cee9
+	ld c, $0
+.asm_e9d3
+	inc hl
+	ld a, [hld]
+	inc a
+	jr z, .asm_e9ec
+	push hl
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	ld a, [hli]
+	and a
+	call nz, Func_e9f0
+	ld a, [hli]
+	and a
+	call nz, Func_e9f0
+	pop hl
+	inc hl
+	inc hl
+	inc c
+	jr .asm_e9d3
+.asm_e9ec
+	ld a, $ff
+	ld [de], a
+	ret
 
+; known jump sources: e9de (3:69de), e9e3 (3:69e3)
+Func_e9f0: ; e9f0 (3:69f0)
+	inc hl
+	ld b, $a
+.asm_e9f3
+	ld a, [$d11e]
+	cp [hl]
+	jr nz, .asm_e9fc
+	ld a, c
+	ld [de], a
+	inc de
+.asm_e9fc
+	inc hl
+	inc hl
+	dec b
+	jr nz, .asm_e9f3
+	dec hl
+	ret
+
+; known jump sources: 13474 (4:7474)
+Func_ea03: ; ea03 (3:6a03)
+	ld de, $cd3f
+	ld hl, $6a96
+	ld bc, $8
+	call CopyData
+	ld hl, $cd49
+	ld bc, $8
+	xor a
+	call FillMemory
+	ld de, $cd49
+	ld hl, $cd3f
+	ld a, [W_OBTAINEDBADGES] ; $d356
+	ld b, a
+	ld c, $8
+.asm_ea25
+	srl b
+	jr nc, .asm_ea30
+	ld a, [hl]
+	add $4
+	ld [hl], a
+	ld a, $1
+	ld [de], a
+.asm_ea30
+	inc hl
+	inc de
+	dec c
+	jr nz, .asm_ea25
+	ld hl, W_WHICHTRADE ; $cd3d
+	ld a, $d8
+	ld [hli], a
+	ld [hl], $60
+	ld hl, $c47e
+	ld de, $cd49
+	call Func_ea4c
+	ld hl, $c4ba
+	ld de, $cd4d
+
+; known jump sources: ea43 (3:6a43)
+Func_ea4c: ; ea4c (3:6a4c)
+	ld c, $4
+.asm_ea4e
+	push de
+	push hl
+	ld a, [W_WHICHTRADE] ; $cd3d
+	ld [hli], a
+	inc a
+	ld [W_WHICHTRADE], a ; $cd3d
+	ld a, [de]
+	and a
+	ld a, [$cd3e]
+	jr nz, .asm_ea64
+	call Func_ea91
+	jr .asm_ea67
+.asm_ea64
+	inc a
+	inc a
+	inc hl
+.asm_ea67
+	ld [$cd3e], a
+	ld de, $13
+	add hl, de
+	ld a, [$cd3f]
+	call Func_ea91
+	add hl, de
+	call Func_ea91
+	push bc
+	ld hl, $cd40
+	ld de, $cd3f
+	ld bc, $8
+	call CopyData
+	pop bc
+	pop hl
+	ld de, $4
+	add hl, de
+	pop de
+	inc de
+	dec c
+	jr nz, .asm_ea4e
+	ret
+
+; known jump sources: ea5f (3:6a5f), ea71 (3:6a71), ea75 (3:6a75)
+Func_ea91: ; ea91 (3:6a91)
+	ld [hli], a
+	inc a
+	ld [hl], a
+	inc a
+	ret
+
+INCBIN "baserom.gbc",$ea96,$ee9e - $ea96
+
+; known jump sources: 19f70 (6:5f70), 19f83 (6:5f83), 19f94 (6:5f94), 1a1e0 (6:61e0), 1eb3e (7:6b3e), 44312 (11:4312), 449ae (11:49ae), 517e7 (14:57e7), 51b9a (14:5b9a), 51bad (14:5bad), 51bbe (14:5bbe), 52034 (14:6034), 526cf (14:66cf), 5653b (15:653b), 59f94 (16:5f94), 59fa5 (16:5fa5), 5a170 (16:6170), 5a2f2 (16:62f2), 5ca87 (17:4a87), 5d7f4 (17:57f4), 5d807 (17:5807), 5d81a (17:581a), 5d82b (17:582b), 5da37 (17:5a37), 62131 (18:6131), 761b3 (1d:61b3), 7630a (1d:630a), 76461 (1d:6461)
+Func_ee9e: ; ee9e (3:6e9e)
+	call Load16BitRegisters
+	ld hl, $c6e8
+	ld a, [W_CURMAPWIDTH] ; $d369
+	add $6
+	ld e, a
+	ld d, $0
+	add hl, de
+	add hl, de
+	add hl, de
+	ld e, $3
+	add hl, de
+	ld e, a
+	ld a, b
+	and a
+	jr z, .asm_eebb
+.asm_eeb7
+	add hl, de
+	dec b
+	jr nz, .asm_eeb7
+.asm_eebb
+	add hl, bc
+	ld a, [$d09f]
+	ld [hl], a
+	ld a, [$d35f]
+	ld c, a
+	ld a, [$d360]
+	ld b, a
+	call Func_ef4e
+	ret c
+	push hl
+	ld l, e
+	ld h, $0
+	ld e, $6
+	ld d, h
+	add hl, hl
+	add hl, hl
+	add hl, de
+	add hl, bc
+	pop bc
+	call Func_ef4e
+	ret c
+
+; known jump sources: efd3 (3:6fd3), efef (3:6fef), 71c95 (1c:5c95)
+Func_eedc: ; eedc (3:6edc)
+	ld a, [W_ISINBATTLE] ; $d057
+	inc a
+	ret z
+	ld a, [H_AUTOBGTRANSFERENABLED] ; $FF00+$ba
+	push af
+	ld a, [$FF00+$d7]
+	push af
+	xor a
+	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld [$FF00+$d7], a
+	call LoadCurrentMapView
+	call GoPAL_SET_CF1C
+	ld hl, $d526
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	ld de, $ffc0
+	add hl, de
+	ld a, h
+	and $3
+	or $98
+	ld a, l
+	ld [$cee9], a
+	ld a, h
+	ld [$ceea], a
+	ld a, $2
+	ld [$FF00+$be], a
+	ld c, $9
+.asm_ef0f
+	push bc
+	push hl
+	push hl
+	ld hl, $c378
+	ld de, $14
+	ld a, [$FF00+$be]
+.asm_ef1a
+	add hl, de
+	dec a
+	jr nz, .asm_ef1a
+	call ScheduleRowRedrawHelper
+	pop hl
+	ld de, $20
+	ld a, [$FF00+$be]
+	ld c, a
+.asm_ef28
+	add hl, de
+	ld a, h
+	and $3
+	or $98
+	dec c
+	jr nz, .asm_ef28
+	ld [$FF00+$d2], a
+	ld a, l
+	ld [H_SCREENEDGEREDRAWADDR], a ; $FF00+$d1
+	ld a, $2
+	ld [H_SCREENEDGEREDRAW], a ; $FF00+$d0
+	call DelayFrame
+	ld hl, $ffbe
+	inc [hl]
+	inc [hl]
+	pop hl
+	pop bc
+	dec c
+	jr nz, .asm_ef0f
+	pop af
+	ld [$FF00+$d7], a
+	pop af
+	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ret
+
+; known jump sources: eec8 (3:6ec8), eed8 (3:6ed8)
+Func_ef4e: ; ef4e (3:6f4e)
+	ld a, h
+	sub b
+	ret nz
+	ld a, l
+	sub c
+	ret
+
+; known jump sources: 131c7 (4:71c7)
+Func_ef54: ; ef54 (3:6f54)
+	xor a
+	ld [$cd6a], a
+	ld a, [W_CURMAPTILESET] ; $d367
+	and a
+	jr z, .asm_ef6b
+	cp $7
+	jr nz, .asm_ef77
+	ld a, [$cfc6]
+	cp $50
+	jr nz, .asm_ef77
+	jr asm_ef82
+.asm_ef6b
+	dec a
+	ld a, [$cfc6]
+	cp $3d
+	jr z, asm_ef82
+	cp $52
+	jr z, asm_ef82
+.asm_ef77
+	ld hl, $6f7d
+	jp PrintText
+; ef7d (3:6f7d)
 _UnnamedText_ef7d: ; 0xef7d
 	db $17, $f8, $42, $2a
 	db $50
 ; 0xef7d + 5 bytes
 
-INCBIN "baserom.gbc",$ef82,$f6a5 - $ef82
+asm_ef82: ; ef82 (3:6f82)
+	ld [$cd4d], a
+	ld a, $1
+	ld [$cd6a], a
+	ld a, [W_WHICHPOKEMON] ; $cf92
+	ld hl, W_PARTYMON1NAME ; $d2b5
+	call GetPartyMonName
+	ld hl, $d730
+	set 6, [hl]
+	call GBPalWhiteOutWithDelay3
+	call CleanLCD_OAM
+	call Func_3dbe
+	ld a, $90
+	ld [$FF00+$b0], a
+	call Delay3
+	call LoadGBPal
+	call LoadCurrentMapView
+	call Func_36f4
+	call Delay3
+	xor a
+	ld [$FF00+$b0], a
+	ld hl, $6ff2
+	call PrintText
+	call Func_3701
+	ld hl, $d730
+	res 6, [hl]
+	ld a, $ff
+	ld [$cfcb], a
+	call Func_eff7
+	ld de, $7100
+	call Func_f09f
+	call Func_eedc
+	ld b, BANK(Func_79e96)
+	ld hl, Func_79e96
+	call Bankswitch ; indirect jump to Func_79e96 (79e96 (1e:5e96))
+	ld a, $1
+	ld [$cfcb], a
+	ld a, $ac
+	call Func_23b1
+	ld a, $90
+	ld [$FF00+$b0], a
+	call Func_2429
+	jp Func_eedc
 
+INCBIN "baserom.gbc",$eff2,$eff7 - $eff2
+
+; known jump sources: efca (3:6fca)
+Func_eff7: ; eff7 (3:6ff7)
+	xor a
+	ld [$cd50], a
+	ld a, $e4
+	ld [rOBP1], a ; $FF00+$49
+	ld a, [$cd4d]
+	cp $52
+	jr z, .asm_f020
+	ld de, $42d0
+	ld hl, $8fc0
+	ld bc, $1902
+	call CopyVideoData
+	ld de, $43d0
+	ld hl, $8fe0
+	ld bc, $1902
+	call CopyVideoData
+	jr asm_f055
+.asm_f020
+	ld hl, $8fc0
+	call Func_f04c
+	ld hl, $8fd0
+	call Func_f04c
+	ld hl, $8fe0
+	call Func_f04c
+	ld hl, $8ff0
+	call Func_f04c
+	call asm_f055
+	ld hl, $c393
+	ld de, $4
+	ld a, $30
+	ld c, e
+.asm_f044
+	ld [hl], a
+	add hl, de
+	xor $60
+	dec c
+	jr nz, .asm_f044
+	ret
+
+; known jump sources: f023 (3:7023), f029 (3:7029), f02f (3:702f), f035 (3:7035)
+Func_f04c: ; f04c (3:704c)
+	ld de, $474e
+	ld bc, $1e01
+	jp CopyVideoData
+asm_f055: ; f055 (3:7055)
+	call Func_f068
+	ld a, $9
+	ld de, $7060
+	jp WriteOAMBlock
+
+INCBIN "baserom.gbc",$f060,$f068 - $f060
+
+; known jump sources: f055 (3:7055)
+Func_f068: ; f068 (3:7068)
+	ld hl, $c104
+	ld a, [hli]
+	ld b, a
+	inc hl
+	ld a, [hli]
+	ld c, a
+	inc hl
+	inc hl
+	ld a, [hl]
+	srl a
+	ld e, a
+	ld d, $0
+	ld a, [$cd50]
+	and a
+	ld hl, $708f
+	jr z, .asm_f084
+	ld hl, $7097
+.asm_f084
+	add hl, de
+	ld e, [hl]
+	inc hl
+	ld d, [hl]
+	ld a, b
+	add d
+	ld b, a
+	ld a, c
+	add e
+	ld c, a
+	ret
+
+INCBIN "baserom.gbc",$f08f,$f09f - $f08f
+
+; known jump sources: efd0 (3:6fd0)
+Func_f09f: ; f09f (3:709f)
+	push de
+	ld a, [W_CURMAPWIDTH] ; $d369
+	add $6
+	ld c, a
+	ld b, $0
+	ld d, $0
+	ld hl, $d35f
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	add hl, bc
+	ld a, [$c109]
+	and a
+	jr z, .asm_f0c7
+	cp $4
+	jr z, .asm_f0cf
+	cp $8
+	jr z, .asm_f0d7
+	ld a, [W_XBLOCKCOORD] ; $d364
+	and a
+	jr z, .asm_f0e0
+	jr .asm_f0ec
+.asm_f0c7
+	ld a, [W_YBLOCKCOORD] ; $d363
+	and a
+	jr z, .asm_f0e0
+	jr .asm_f0df
+.asm_f0cf
+	ld a, [W_YBLOCKCOORD] ; $d363
+	and a
+	jr z, .asm_f0e1
+	jr .asm_f0e0
+.asm_f0d7
+	ld a, [W_XBLOCKCOORD] ; $d364
+	and a
+	jr z, .asm_f0e6
+	jr .asm_f0e0
+.asm_f0df
+	add hl, bc
+.asm_f0e0
+	add hl, bc
+.asm_f0e1
+	ld e, $2
+	add hl, de
+	jr .asm_f0f0
+.asm_f0e6
+	ld e, $1
+	add hl, bc
+	add hl, de
+	jr .asm_f0f0
+.asm_f0ec
+	ld e, $3
+	add hl, bc
+	add hl, de
+.asm_f0f0
+	pop de
+	ld a, [hl]
+	ld c, a
+.asm_f0f3
+	ld a, [de]
+	inc de
+	inc de
+	cp $ff
+	ret z
+	cp c
+	jr nz, .asm_f0f3
+	dec de
+	ld a, [de]
+	ld [hl], a
+	ret
+
+INCBIN "baserom.gbc",$f100,$f113 - $f100
+
+; known jump sources: 1081 (0:1081)
+Func_f113: ; f113 (3:7113)
+	ld a, [W_CURMAP] ; $d35e
+	cp $c
+	jr nc, .asm_f125
+	ld c, a
+	ld b, $1
+	ld hl, $d70b
+	ld a, $10
+	call Predef ; indirect jump to Func_f666 (f666 (3:7666))
+.asm_f125
+	ld hl, $48f5
+	ld a, [W_CURMAP] ; $d35e
+	ld b, $0
+	ld c, a
+	add hl, bc
+	add hl, bc
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	push hl
+	ld de, $4aea
+	ld a, l
+	sub e
+	jr nc, .asm_f13c
+	dec h
+.asm_f13c
+	ld l, a
+	ld a, h
+	sub d
+	ld h, a
+	ld a, h
+	ld [H_DIVIDEND], a ; $FF00+$95 (aliases: H_PRODUCT, H_PASTLEADINGZEROES, H_QUOTIENT)
+	ld a, l
+	ld [H_NUMTOPRINT], a ; $FF00+$96 (aliases: H_MULTIPLICAND)
+	xor a
+	ld [$FF00+$97], a
+	ld [$FF00+$98], a
+	ld a, $3
+	ld [H_REMAINDER], a ; $FF00+$99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
+	ld b, $2
+	call Divide
+	ld a, [W_CURMAP] ; $d35e
+	ld b, a
+	ld a, [$FF00+$98]
+	ld c, a
+	ld de, $d5ce
+	pop hl
+.asm_f15f
+	ld a, [hli]
+	cp $ff
+	jr z, .asm_f171
+	cp b
+	jr nz, .asm_f171
+	ld a, [hli]
+	inc hl
+	ld [de], a
+	inc de
+	ld a, c
+	inc c
+	ld [de], a
+	inc de
+	jr .asm_f15f
+.asm_f171
+	ld a, $ff
+	ld [de], a
+	ret
+
+; known jump sources: f89d (3:789d)
+Func_f175: ; f175 (3:7175)
+	ld hl, $d5a6
+	ld bc, $20
+	xor a
+	call FillMemory
+	ld hl, $4aea
+	xor a
+	ld [$d048], a
+.asm_f186
+	ld a, [hli]
+	cp $ff
+	ret z
+	push hl
+	inc hl
+	ld a, [hl]
+	cp $11
+	jr nz, .asm_f19d
+	ld hl, $d5a6
+	ld a, [$d048]
+	ld c, a
+	ld b, $1
+	call Func_f1e6
+.asm_f19d
+	ld hl, $d048
+	inc [hl]
+	pop hl
+	inc hl
+	inc hl
+	jr .asm_f186
+
+; known jump sources: 50de (1:50de)
+Func_f1a6: ; f1a6 (3:71a6)
+	ld a, [$FF00+$da]
+	swap a
+	ld b, a
+	ld hl, $d5ce
+.asm_f1ae
+	ld a, [hli]
+	cp $ff
+	jr z, .asm_f1c4
+	cp b
+	ld a, [hli]
+	jr nz, .asm_f1ae
+	ld c, a
+	ld b, $2
+	ld hl, $d5a6
+	call Func_f1e6
+	ld a, c
+	and a
+	jr nz, .asm_f1c5
+.asm_f1c4
+	xor a
+.asm_f1c5
+	ld [$FF00+$e5], a
+	ret
+
+; known jump sources: 18ec9 (6:4ec9), 18f79 (6:4f79), 1953c (6:553c), 1cb60 (7:4b60), 1cb99 (7:4b99), 1ced7 (7:4ed7), 1cfa2 (7:4fa2), 1cff7 (7:4ff7), 1e7ef (7:67ef), 1e89c (7:689c), 44838 (11:4838), 449f6 (11:49f6), 4635f (11:635f), 50d11 (14:4d11), 51206 (14:5206), 515fc (14:55fc), 5161f (14:561f), 5d466 (17:5466), 60ea2 (18:4ea2), 60eb6 (18:4eb6), 613e0 (18:53e0), 6218e (18:618e), 7487c (1d:487c), 749df (1d:49df), 7600b (1d:600b)
+Func_f1c8: ; f1c8 (3:71c8)
+	ld hl, $d5a6
+	ld a, [$cc4d]
+	ld c, a
+	ld b, $0
+	call Func_f1e6
+	jp Func_2429
+
+; known jump sources: 32b6 (0:32b6), 4e12 (1:4e12), 18f6f (6:4f6f), 1949a (6:549a), 1961d (6:561d), 19b89 (6:5b89), 1a500 (6:6500), 1cb8f (7:4b8f), 1cd37 (7:4d37), 1ce7b (7:4e7b), 1cf5b (7:4f5b), 1cf65 (7:4f65), 1cf98 (7:4f98), 1cfe4 (7:4fe4), 1d1ea (7:51ea), 1e7b3 (7:67b3), 1e8a6 (7:68a6), 4482d (11:482d), 449ec (11:49ec), 46354 (11:6354), 49e24 (12:5e24), 49f51 (12:5f51), 50d19 (14:4d19), 51162 (14:5162), 51210 (14:5210), 5160b (14:560b), 51615 (14:5615), 51d32 (14:5d32), 59640 (16:5640), 59980 (16:5980), 5a561 (16:6561), 5c278 (17:4278), 5c419 (17:4419), 5c423 (17:4423), 605c8 (18:45c8), 60d6d (18:4d6d), 60d92 (18:4d92), 60eac (18:4eac), 614cf (18:54cf), 6217b (18:617b), 74886 (1d:4886), 74890 (1d:4890), 74a92 (1d:4a92), 76090 (1d:6090)
+Func_f1d7: ; f1d7 (3:71d7)
+	ld hl, $d5a6
+	ld a, [$cc4d]
+	ld c, a
+	ld b, $1
+	call Func_f1e6
+	jp Func_2429
+
+; known jump sources: f19a (3:719a), f1bd (3:71bd), f1d1 (3:71d1), f1e0 (3:71e0)
+Func_f1e6: ; f1e6 (3:71e6)
+	push hl
+	push de
+	push bc
+	ld a, c
+	ld d, a
+	and $7
+	ld e, a
+	ld a, d
+	srl a
+	srl a
+	srl a
+	add l
+	ld l, a
+	jr nc, .asm_f1fa
+	inc h
+.asm_f1fa
+	inc e
+	ld d, $1
+.asm_f1fd
+	dec e
+	jr z, .asm_f204
+	sla d
+	jr .asm_f1fd
+.asm_f204
+	ld a, b
+	and a
+	jr z, .asm_f213
+	cp $2
+	jr z, .asm_f21c
+	ld a, [hl]
+	ld b, a
+	ld a, d
+	or b
+	ld [hl], a
+	jr .asm_f220
+.asm_f213
+	ld a, [hl]
+	ld b, a
+	ld a, d
+	xor $ff
+	and b
+	ld [hl], a
+	jr .asm_f220
+.asm_f21c
+	ld a, [hl]
+	ld b, a
+	ld a, d
+	and b
+.asm_f220
+	pop bc
+	pop de
+	pop hl
+	ld c, a
+	ret
+
+; known jump sources: 1023 (0:1023)
+Func_f225: ; f225 (3:7225)
+	ld a, [$d728]
+	bit 0, a
+	ret z
+	ld a, [$cd60]
+	bit 1, a
+	ret nz
+	xor a
+	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	call IsSpriteInFrontOfPlayer
+	ld a, [H_DOWNARROWBLINKCNT2] ; $FF00+$8c
+	ld [$d718], a
+	and a
+	jp z, Func_f2dd
+	ld hl, $c101
+	ld d, $0
+	ld a, [H_DOWNARROWBLINKCNT2] ; $FF00+$8c
+	swap a
+	ld e, a
+	add hl, de
+	res 7, [hl]
+	call Function3558
+	ld a, [hl]
+	cp $10
+	jp nz, Func_f2dd
+	ld hl, $cd60
+	bit 6, [hl]
+	set 6, [hl]
+	ret z
+	ld a, [$FF00+$b4]
+	and $f0
+	ret z
+	ld a, $5a
+	call Predef ; indirect jump to Func_c60b (c60b (3:460b))
+	ld a, [$d71c]
+	and a
+	jp nz, Func_f2dd
+	ld a, [$FF00+$b4]
+	ld b, a
+	ld a, [$c109]
+	cp $4
+	jr z, .asm_f289
+	cp $8
+	jr z, .asm_f291
+	cp $c
+	jr z, .asm_f299
+	bit 7, b
+	ret z
+	ld de, $72af
+	jr .asm_f29f
+.asm_f289
+	bit 6, b
+	ret z
+	ld de, $72ad
+	jr .asm_f29f
+.asm_f291
+	bit 5, b
+	ret z
+	ld de, $72b1
+	jr .asm_f29f
+.asm_f299
+	bit 4, b
+	ret z
+	ld de, $72b3
+.asm_f29f
+	call MoveSprite
+	ld a, $a8
+	call Func_23b1
+	ld hl, $cd60
+	set 1, [hl]
+	ret
+
+INCBIN "baserom.gbc",$f2ad,$f2b5 - $f2ad
+
+; known jump sources: 1032 (0:1032)
+Func_f2b5: ; f2b5 (3:72b5)
+	ld a, [$d730]
+	bit 0, a
+	ret nz
+	ld hl, Func_79f54
+	ld b, BANK(Func_79f54)
+	call Bankswitch ; indirect jump to Func_79f54 (79f54 (1e:5f54))
+	call Func_c034
+	ld [$cd6b], a
+	call Func_f2dd
+	set 7, [hl]
+	ld a, [$d718]
+	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	call Function3558
+	ld [hl], $10
+	ld a, $ac
+	jp Func_23b1
+
+; known jump sources: f23d (3:723d), f253 (3:7253), f26c (3:726c), f2c9 (3:72c9)
+Func_f2dd: ; f2dd (3:72dd)
+	ld hl, $cd60
+	res 1, [hl]
+	res 6, [hl]
+	ret
+
+; known jump sources: 392f (0:392f)
+Func_f2e5: ; f2e5 (3:72e5)
+	ld de, W_NUMINPARTY ; $d163
+	ld a, [$cc49]
+	and $f
+	jr z, .asm_f2f2
+	ld de, W_ENEMYMONCOUNT ; $d89c
+.asm_f2f2
+	ld a, [de]
+	inc a
+	cp $7
+	ret nc
+	ld [de], a
+	ld a, [de]
+	ld [$FF00+$e4], a
+	add e
+	ld e, a
+	jr nc, .asm_f300
+	inc d
+.asm_f300
+	ld a, [$cf91]
+	ld [de], a
+	inc de
+	ld a, $ff
+	ld [de], a
+	ld hl, W_PARTYMON1OT ; $d273
+	ld a, [$cc49]
+	and $f
+	jr z, .asm_f315
+	ld hl, $d9ac
+.asm_f315
+	ld a, [$FF00+$e4]
+	dec a
+	call Func_3a7d
+	ld d, h
+	ld e, l
+	ld hl, W_PLAYERNAME ; $d158
+	ld bc, $b
+	call CopyData
+	ld a, [$cc49]
+	and a
+	jr nz, .asm_f33f
+	ld hl, W_PARTYMON1NAME ; $d2b5
+	ld a, [$FF00+$e4]
+	dec a
+	call Func_3a7d
+	ld a, $2
+	ld [$d07d], a
+	ld a, $4e
+	call Predef ; indirect jump to Func_64eb (64eb (1:64eb))
+.asm_f33f
+	ld hl, W_PARTYMON1_NUM ; $d16b (aliases: W_PARTYMON1DATA)
+	ld a, [$cc49]
+	and $f
+	jr z, .asm_f34c
+	ld hl, W_WATERRATE ; $d8a4
+.asm_f34c
+	ld a, [$FF00+$e4]
+	dec a
+	ld bc, $2c
+	call AddNTimes
+	ld e, l
+	ld d, h
+	push hl
+	ld a, [$cf91]
+	ld [$d0b5], a
+	call GetBaseStats
+	ld hl, $d0b8
+	ld a, [hli]
+	ld [de], a
+	inc de
+	pop hl
+	push hl
+	ld a, [$cc49]
+	and $f
+	ld a, $98
+	ld b, $88
+	jr nz, .asm_f3b3
+	ld a, [$cf91]
+	ld [$d11e], a
+	push de
+	ld a, $3a
+	call Predef ; indirect jump to IndexToPokedex (41010 (10:5010))
+	pop de
+	ld a, [$d11e]
+	dec a
+	ld c, a
+	ld b, $2
+	ld hl, W_OWNEDPOKEMON ; $d2f7
+	call Func_f669
+	ld a, c
+	ld [$d153], a
+	ld a, [$d11e]
+	dec a
+	ld c, a
+	ld b, $1
+	push bc
+	call Func_f669
+	pop bc
+	ld hl, W_SEENPOKEMON ; $d30a
+	call Func_f669
+	pop hl
+	push hl
+	ld a, [W_ISINBATTLE] ; $d057
+	and a
+	jr nz, .asm_f3d6
+	call GenRandom
+	ld b, a
+	call GenRandom
+.asm_f3b3
+	push bc
+	ld bc, $1b
+	add hl, bc
+	pop bc
+	ld [hli], a
+	ld [hl], b
+	ld bc, $fff4
+	add hl, bc
+	ld a, $1
+	ld c, a
+	xor a
+	ld b, a
+	call Func_394a
+	ld a, [$FF00+$97]
+	ld [de], a
+	inc de
+	ld a, [$FF00+$98]
+	ld [de], a
+	inc de
+	xor a
+	ld [de], a
+	inc de
+	ld [de], a
+	inc de
+	jr .asm_f3f4
+.asm_f3d6
+	ld bc, $1b
+	add hl, bc
+	ld a, [$cff1]
+	ld [hli], a
+	ld a, [$cff2]
+	ld [hl], a
+	ld a, [W_ENEMYMONCURHP] ; $cfe6
+	ld [de], a
+	inc de
+	ld a, [$cfe7]
+	ld [de], a
+	inc de
+	xor a
+	ld [de], a
+	inc de
+	ld a, [W_ENEMYMONSTATUS] ; $cfe9
+	ld [de], a
+	inc de
+.asm_f3f4
+	ld hl, $d0be
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hli]
+	ld [de], a
+	ld hl, $d0c7
+	ld a, [hli]
+	inc de
+	push de
+	ld [de], a
+	ld a, [hli]
+	inc de
+	ld [de], a
+	ld a, [hli]
+	inc de
+	ld [de], a
+	ld a, [hli]
+	inc de
+	ld [de], a
+	push de
+	dec de
+	dec de
+	dec de
+	xor a
+	ld [$cee9], a
+	ld a, $3e
+	call Predef ; indirect jump to Func_3afb8 (3afb8 (e:6fb8))
+	pop de
+	ld a, [W_PLAYERIDHI] ; $d359
+	inc de
+	ld [de], a
+	ld a, [W_PLAYERIDLO] ; $d35a
+	inc de
+	ld [de], a
+	push de
+	ld a, [W_CURENEMYLVL] ; $d127
+	ld d, a
+	ld hl, Func_58f6a
+	ld b, BANK(Func_58f6a)
+	call Bankswitch ; indirect jump to Func_58f6a (58f6a (16:4f6a))
+	pop de
+	inc de
+	ld a, [H_NUMTOPRINT] ; $FF00+$96 (aliases: H_MULTIPLICAND)
+	ld [de], a
+	inc de
+	ld a, [$FF00+$97]
+	ld [de], a
+	inc de
+	ld a, [$FF00+$98]
+	ld [de], a
+	xor a
+	ld b, $a
+.asm_f444
+	inc de
+	ld [de], a
+	dec b
+	jr nz, .asm_f444
+	inc de
+	inc de
+	pop hl
+	call Func_f476
+	inc de
+	ld a, [W_CURENEMYLVL] ; $d127
+	ld [de], a
+	inc de
+	ld a, [W_ISINBATTLE] ; $d057
+	dec a
+	jr nz, .asm_f467
+	ld hl, W_ENEMYMONMAXHP ; $cff4
+	ld bc, $a
+	call CopyData
+	pop hl
+	jr .asm_f471
+.asm_f467
+	pop hl
+	ld bc, $10
+	add hl, bc
+	ld b, $0
+	call Func_3936
+.asm_f471
+	scf
+	ret
+
+; known jump sources: e618 (3:6618), 3ebd2 (f:6bd2)
+Func_f473: ; f473 (3:7473)
+	call Load16BitRegisters
+
+; known jump sources: f44c (3:744c)
+Func_f476: ; f476 (3:7476)
+	ld b, $4
+.asm_f478
+	ld a, [hli]
+	and a
+	jr z, .asm_f497
+	dec a
+	push hl
+	push de
+	push bc
+	ld hl, $4000
+	ld bc, $6
+	call AddNTimes
+	ld de, $cd6d
+	ld a, $e
+	call FarCopyData
+	pop bc
+	pop de
+	pop hl
+	ld a, [$cd72]
+.asm_f497
+	inc de
+	ld [de], a
+	dec b
+	jr nz, .asm_f478
+	ret
+
+INCBIN "baserom.gbc",$f49d,$f51e - $f49d
+
+; known jump sources: 3a72 (0:3a72)
+Func_f51e: ; f51e (3:751e)
+	ld a, [$cf95]
+	and a
+	jr z, .asm_f539
+	cp $2
+	jr z, .asm_f539
+	cp $3
+	ld hl, $da5f
+	jr z, .asm_f575
+	ld hl, W_NUMINBOX ; $da80
+	ld a, [hl]
+	cp $14
+	jr nz, .asm_f543
+	jr .asm_f541
+.asm_f539
+	ld hl, W_NUMINPARTY ; $d163
+	ld a, [hl]
+	cp $6
+	jr nz, .asm_f543
+.asm_f541
+	scf
+	ret
+.asm_f543
+	inc a
+	ld [hl], a
+	ld c, a
+	ld b, $0
+	add hl, bc
+	ld a, [$cf95]
+	cp $2
+	ld a, [$da5f]
+	jr z, .asm_f556
+	ld a, [$cf91]
+.asm_f556
+	ld [hli], a
+	ld [hl], $ff
+	ld a, [$cf95]
+	dec a
+	ld hl, W_PARTYMON1_NUM ; $d16b (aliases: W_PARTYMON1DATA)
+	ld bc, $2c
+	ld a, [W_NUMINPARTY] ; $d163
+	jr nz, .asm_f571
+	ld hl, $da96
+	ld bc, $21
+	ld a, [W_NUMINBOX] ; $da80
+.asm_f571
+	dec a
+	call AddNTimes
+.asm_f575
+	push hl
+	ld e, l
+	ld d, h
+	ld a, [$cf95]
+	and a
+	ld hl, $da96
+	ld bc, $21
+	jr z, .asm_f591
+	cp $2
+	ld hl, $da5f
+	jr z, .asm_f597
+	ld hl, W_PARTYMON1_NUM ; $d16b (aliases: W_PARTYMON1DATA)
+	ld bc, $2c
+.asm_f591
+	ld a, [W_WHICHPOKEMON] ; $cf92
+	call AddNTimes
+.asm_f597
+	push hl
+	push de
+	ld bc, $21
+	call CopyData
+	pop de
+	pop hl
+	ld a, [$cf95]
+	and a
+	jr z, .asm_f5b4
+	cp $2
+	jr z, .asm_f5b4
+	ld bc, $21
+	add hl, bc
+	ld a, [hl]
+	inc de
+	inc de
+	inc de
+	ld [de], a
+.asm_f5b4
+	ld a, [$cf95]
+	cp $3
+	ld de, $da54
+	jr z, .asm_f5d3
+	dec a
+	ld hl, W_PARTYMON1OT ; $d273
+	ld a, [W_NUMINPARTY] ; $d163
+	jr nz, .asm_f5cd
+	ld hl, $dd2a
+	ld a, [W_NUMINBOX] ; $da80
+.asm_f5cd
+	dec a
+	call Func_3a7d
+	ld d, h
+	ld e, l
+.asm_f5d3
+	ld hl, $dd2a
+	ld a, [$cf95]
+	and a
+	jr z, .asm_f5e6
+	ld hl, $da54
+	cp $2
+	jr z, .asm_f5ec
+	ld hl, W_PARTYMON1OT ; $d273
+.asm_f5e6
+	ld a, [W_WHICHPOKEMON] ; $cf92
+	call Func_3a7d
+.asm_f5ec
+	ld bc, $b
+	call CopyData
+	ld a, [$cf95]
+	cp $3
+	ld de, $da49
+	jr z, .asm_f611
+	dec a
+	ld hl, W_PARTYMON1NAME ; $d2b5
+	ld a, [W_NUMINPARTY] ; $d163
+	jr nz, .asm_f60b
+	ld hl, $de06
+	ld a, [W_NUMINBOX] ; $da80
+.asm_f60b
+	dec a
+	call Func_3a7d
+	ld d, h
+	ld e, l
+.asm_f611
+	ld hl, $de06
+	ld a, [$cf95]
+	and a
+	jr z, .asm_f624
+	ld hl, $da49
+	cp $2
+	jr z, .asm_f62a
+	ld hl, W_PARTYMON1NAME ; $d2b5
+.asm_f624
+	ld a, [W_WHICHPOKEMON] ; $cf92
+	call Func_3a7d
+.asm_f62a
+	ld bc, $b
+	call CopyData
+	pop hl
+	ld a, [$cf95]
+	cp $1
+	jr z, .asm_f664
+	cp $3
+	jr z, .asm_f664
+	push hl
+	srl a
+	add $2
+	ld [$cc49], a
+	call LoadMonData
+	ld b, BANK(Func_58f43)
+	ld hl, Func_58f43
+	call Bankswitch ; indirect jump to Func_58f43 (58f43 (16:4f43))
+	ld a, d
+	ld [W_CURENEMYLVL], a ; $d127
+	pop hl
+	ld bc, $21
+	add hl, bc
+	ld [hli], a
+	ld d, h
+	ld e, l
+	ld bc, $ffee
+	add hl, bc
+	ld b, $1
+	call Func_3936
+.asm_f664
+	and a
+	ret
+
+; known jump sources: 31c9 (0:31c9), d8cb (3:58cb), d8d9 (3:58d9), dbd9 (3:5bd9), dbeb (3:5beb), e787 (3:6787), f122 (3:7122), 13760 (4:7760), 1ea8f (7:6a8f), 1ead5 (7:6ad5), 3b059 (e:7059), 3c1eb (f:41eb), 3c1f4 (f:41f4), 3c74c (f:474c), 3c810 (f:4810), 3c819 (f:4819), 3c91c (f:491c), 3c927 (f:4927), 3d1d9 (f:51d9), 3d1e2 (f:51e2), 3ec17 (f:6c17), 402cb (10:42cb), 4fe29 (13:7e29), 51245 (14:5245), 51358 (14:5358), 5137f (14:537f), 55271 (15:5271), 5542e (15:542e), 5545e (15:545e), 55469 (15:5469), 71b2c (1c:5b2c), 71c43 (1c:5c43), 757f3 (1d:57f3), 7669c (1d:669c), 76776 (1d:6776)
+Func_f666: ; f666 (3:7666)
+	call Load16BitRegisters
+
+; known jump sources: f38b (3:738b), f39a (3:739a), f3a1 (3:73a1)
+Func_f669: ; f669 (3:7669)
+	push hl
+	push de
+	push bc
+	ld a, c
+	ld d, a
+	and $7
+	ld e, a
+	ld a, d
+	srl a
+	srl a
+	srl a
+	add l
+	ld l, a
+	jr nc, .asm_f67d
+	inc h
+.asm_f67d
+	inc e
+	ld d, $1
+.asm_f680
+	dec e
+	jr z, .asm_f687
+	sla d
+	jr .asm_f680
+.asm_f687
+	ld a, b
+	and a
+	jr z, .asm_f695
+	cp $2
+	jr z, .asm_f69d
+	ld b, [hl]
+	ld a, d
+	or b
+	ld [hl], a
+	jr .asm_f6a0
+.asm_f695
+	ld b, [hl]
+	ld a, d
+	xor $ff
+	and b
+	ld [hl], a
+	jr .asm_f6a0
+.asm_f69d
+	ld b, [hl]
+	ld a, d
+	and b
+.asm_f6a0
+	pop bc
+	pop de
+	pop hl
+	ld c, a
+	ret
+; f6a5 (3:76a5)
 HealParty:
 	ld hl, W_PARTYMON1
 	ld de, W_PARTYMON1_HP
@@ -18432,7 +27361,738 @@ HealParty:
 	jr nz,.restoreBonusPPLoop
 	ret
 
-INCBIN "baserom.gbc",$f71e,$fbd9 - $f71e
+; known jump sources: 2df5 (0:2df5), 40ed (1:40ed)
+Func_f71e: ; f71e (3:771e)
+	call Load16BitRegisters
+	xor a
+	ld [$FF00+$a5], a
+	ld [$FF00+$a6], a
+	ld [$FF00+$a7], a
+	ld d, $1
+.asm_f72a
+	ld a, [$FF00+$a2]
+	and $f0
+	jr nz, .asm_f75b
+	inc d
+	ld a, [$FF00+$a2]
+	swap a
+	and $f0
+	ld b, a
+	ld a, [$FF00+$a3]
+	swap a
+	ld [$FF00+$a3], a
+	and $f
+	or b
+	ld [$FF00+$a2], a
+	ld a, [$FF00+$a3]
+	and $f0
+	ld b, a
+	ld a, [$FF00+$a4]
+	swap a
+	ld [$FF00+$a4], a
+	and $f
+	or b
+	ld [$FF00+$a3], a
+	ld a, [$FF00+$a4]
+	and $f0
+	ld [$FF00+$a4], a
+	jr .asm_f72a
+.asm_f75b
+	push de
+	push de
+	call Func_f800
+	pop de
+	ld a, b
+	swap a
+	and $f0
+	ld [$FF00+$a5], a
+	dec d
+	jr z, .asm_f7bc
+	push de
+	call Func_f7d7
+	call Func_f800
+	pop de
+	ld a, [$FF00+$a5]
+	or b
+	ld [$FF00+$a5], a
+	dec d
+	jr z, .asm_f7bc
+	push de
+	call Func_f7d7
+	call Func_f800
+	pop de
+	ld a, b
+	swap a
+	and $f0
+	ld [$FF00+$a6], a
+	dec d
+	jr z, .asm_f7bc
+	push de
+	call Func_f7d7
+	call Func_f800
+	pop de
+	ld a, [$FF00+$a6]
+	or b
+	ld [$FF00+$a6], a
+	dec d
+	jr z, .asm_f7bc
+	push de
+	call Func_f7d7
+	call Func_f800
+	pop de
+	ld a, b
+	swap a
+	and $f0
+	ld [$FF00+$a7], a
+	dec d
+	jr z, .asm_f7bc
+	push de
+	call Func_f7d7
+	call Func_f800
+	pop de
+	ld a, [$FF00+$a7]
+	or b
+	ld [$FF00+$a7], a
+.asm_f7bc
+	ld a, [$FF00+$a5]
+	ld [$FF00+$a2], a
+	ld a, [$FF00+$a6]
+	ld [$FF00+$a3], a
+	ld a, [$FF00+$a7]
+	ld [$FF00+$a4], a
+	pop de
+	ld a, $6
+	sub d
+	and a
+	ret z
+.asm_f7ce
+	push af
+	call Func_f7d7
+	pop af
+	dec a
+	jr nz, .asm_f7ce
+	ret
+
+; known jump sources: f76c (3:776c), f77c (3:777c), f78e (3:778e), f79e (3:779e), f7b0 (3:77b0), f7cf (3:77cf)
+Func_f7d7: ; f7d7 (3:77d7)
+	ld a, [$FF00+$a4]
+	swap a
+	and $f
+	ld b, a
+	ld a, [$FF00+$a3]
+	swap a
+	ld [$FF00+$a3], a
+	and $f0
+	or b
+	ld [$FF00+$a4], a
+	ld a, [$FF00+$a3]
+	and $f
+	ld b, a
+	ld a, [$FF00+$a2]
+	swap a
+	ld [$FF00+$a2], a
+	and $f0
+	or b
+	ld [$FF00+$a3], a
+	ld a, [$FF00+$a2]
+	and $f
+	ld [$FF00+$a2], a
+	ret
+
+; known jump sources: f75d (3:775d), f76f (3:776f), f77f (3:777f), f791 (3:7791), f7a1 (3:77a1), f7b3 (3:77b3)
+Func_f800: ; f800 (3:7800)
+	ld bc, $3
+.asm_f803
+	ld de, $ff9f
+	ld hl, $ffa2
+	push bc
+	call StringCmp
+	pop bc
+	ret c
+	inc b
+	ld de, $ffa1
+	ld hl, $ffa4
+	push bc
+	call Func_f839
+	pop bc
+	jr .asm_f803
+
+; known jump sources: 2ba8 (0:2ba8), 2dde (0:2dde), 13801 (4:7801), 39d18 (e:5d18), 3c6e1 (f:46e1)
+Func_f81d: ; f81d (3:781d)
+	call Load16BitRegisters
+	and a
+	ld b, c
+.asm_f822
+	ld a, [de]
+	adc [hl]
+	daa
+	ld [de], a
+	dec de
+	dec hl
+	dec c
+	jr nz, .asm_f822
+	jr nc, .asm_f835
+	ld a, $99
+	inc de
+.asm_f830
+	ld [de], a
+	inc de
+	dec b
+	jr nz, .asm_f830
+.asm_f835
+	ret
+
+; known jump sources: 6b37 (1:6b37), 5c1c5 (17:41c5), 74f82 (1d:4f82), 75311 (1d:5311)
+Func_f836: ; f836 (3:7836)
+	call Load16BitRegisters
+
+; known jump sources: f817 (3:7817)
+Func_f839: ; f839 (3:7839)
+	and a
+	ld b, c
+.asm_f83b
+	ld a, [de]
+	sbc [hl]
+	daa
+	ld [de], a
+	dec de
+	dec hl
+	dec c
+	jr nz, .asm_f83b
+	jr nc, .asm_f84f
+	ld a, $0
+	inc de
+.asm_f849
+	ld [de], a
+	inc de
+	dec b
+	jr nz, .asm_f849
+	scf
+.asm_f84f
+	ret
+
+; known jump sources: 612d (1:612d)
+Func_f850: ; f850 (3:7850)
+	call GenRandom
+	ld a, [H_RAND2] ; $FF00+$d4
+	ld [W_PLAYERIDHI], a ; $d359
+	call GenRandom
+	ld a, [H_RAND1] ; $FF00+$d3
+	ld [W_PLAYERIDLO], a ; $d35a
+	ld a, $ff
+	ld [$d71b], a
+	ld hl, W_NUMINPARTY ; $d163
+	call Func_f8a0
+	ld hl, W_NUMINBOX ; $da80
+	call Func_f8a0
+	ld hl, W_NUMBAGITEMS ; $d31d
+	call Func_f8a0
+	ld hl, W_NUMBOXITEMS ; $d53a
+	call Func_f8a0
+	ld hl, W_PLAYERMONEY2 ; $d348
+	ld a, $30
+	ld [hld], a
+	xor a
+	ld [hli], a
+	inc hl
+	ld [hl], a
+	ld [$cc49], a
+	ld hl, W_OBTAINEDBADGES ; $d356
+	ld [hli], a
+	ld [hl], a
+	ld hl, W_PLAYERCOINS1 ; $d5a4
+	ld [hli], a
+	ld [hl], a
+	ld hl, W_OAKSLABCURSCRIPT ; $d5f0
+	ld bc, $c8
+	call FillMemory
+	jp Func_f175
+
+; known jump sources: f868 (3:7868), f86e (3:786e), f874 (3:7874), f87a (3:787a)
+Func_f8a0: ; f8a0 (3:78a0)
+	xor a
+	ld [hli], a
+	dec a
+	ld [hl], a
+	ret
+
+; known jump sources: 3495 (0:3495), 1980a (6:580a), 198da (6:58da), 483ee (12:43ee), 75d4e (1d:5d4e)
+Func_f8a5: ; f8a5 (3:78a5)
+	call Load16BitRegisters
+	ld hl, W_NUMBAGITEMS ; $d31d
+.asm_f8ab
+	inc hl
+	ld a, [hli]
+	cp $ff
+	jr z, .asm_f8b7
+	cp b
+	jr nz, .asm_f8ab
+	ld a, [hl]
+	ld b, a
+	ret
+.asm_f8b7
+	ld b, $0
+	ret
+
+; known jump sources: 18efa (6:4efa), 1cda6 (7:4da6)
+Func_f8ba: ; f8ba (3:78ba)
+	xor a
+	ld hl, $ff97
+	ld [hli], a
+	ld [hli], a
+	ld [hli], a
+	ld [hl], a
+	ld hl, $cc97
+	ld de, $0
+
+; known jump sources: f923 (3:7923)
+Func_f8c8: ; f8c8 (3:78c8)
+	ld a, [H_REMAINDER] ; $FF00+$99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
+	ld b, a
+	ld a, [H_DIVIDEND] ; $FF00+$95 (aliases: H_PRODUCT, H_PASTLEADINGZEROES, H_QUOTIENT)
+	call Func_3633
+	ld d, a
+	and a
+	jr nz, .asm_f8da
+	ld a, [$FF00+$98]
+	set 0, a
+	ld [$FF00+$98], a
+.asm_f8da
+	ld a, [$FF00+$9a]
+	ld b, a
+	ld a, [H_NUMTOPRINT] ; $FF00+$96 (aliases: H_MULTIPLICAND)
+	call Func_3633
+	ld e, a
+	and a
+	jr nz, .asm_f8ec
+	ld a, [$FF00+$98]
+	set 1, a
+	ld [$FF00+$98], a
+.asm_f8ec
+	ld a, [$FF00+$98]
+	cp $3
+	jr z, .asm_f926
+	ld a, e
+	cp d
+	jr c, .asm_f90a
+	ld a, [$FF00+$9d]
+	bit 1, a
+	jr nz, .asm_f900
+	ld d, $c0
+	jr .asm_f902
+.asm_f900
+	ld d, $80
+.asm_f902
+	ld a, [$FF00+$9a]
+	add $1
+	ld [$FF00+$9a], a
+	jr .asm_f91c
+.asm_f90a
+	ld a, [$FF00+$9d]
+	bit 0, a
+	jr nz, .asm_f914
+	ld d, $0
+	jr .asm_f916
+.asm_f914
+	ld d, $40
+.asm_f916
+	ld a, [H_REMAINDER] ; $FF00+$99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
+	add $1
+	ld [H_REMAINDER], a ; $FF00+$99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
+.asm_f91c
+	ld a, d
+	ld [hli], a
+	ld a, [$FF00+$97]
+	inc a
+	ld [$FF00+$97], a
+	jp Func_f8c8
+.asm_f926
+	ld [hl], $ff
+	ret
+
+; known jump sources: 18ef1 (6:4ef1), 1cd9c (7:4d9c)
+Func_f929: ; f929 (3:7929)
+	xor a
+	ld [$FF00+$9d], a
+	ld a, [$c104]
+	ld d, a
+	ld a, [$c106]
+	ld e, a
+	ld hl, $c100
+	ld a, [H_DIVIDEND] ; $FF00+$95 (aliases: H_PRODUCT, H_PASTLEADINGZEROES, H_QUOTIENT)
+	add l
+	add $4
+	ld l, a
+	jr nc, .asm_f940
+	inc h
+.asm_f940
+	ld a, d
+	ld b, a
+	ld a, [hli]
+	call Func_3633
+	jr nc, .asm_f953
+	push hl
+	ld hl, $ff9d
+	bit 0, [hl]
+	set 0, [hl]
+	pop hl
+	jr .asm_f95c
+.asm_f953
+	push hl
+	ld hl, $ff9d
+	bit 0, [hl]
+	res 0, [hl]
+	pop hl
+.asm_f95c
+	push hl
+	ld hl, $ffe5
+	ld [hli], a
+	ld a, $10
+	ld [hli], a
+	call Func_366b
+	ld a, [hl]
+	ld [H_DIVIDEND], a ; $FF00+$95 (aliases: H_PRODUCT, H_PASTLEADINGZEROES, H_QUOTIENT)
+	pop hl
+	inc hl
+	ld b, e
+	ld a, [hl]
+	call Func_3633
+	jr nc, .asm_f97e
+	push hl
+	ld hl, $ff9d
+	bit 1, [hl]
+	set 1, [hl]
+	pop hl
+	jr .asm_f987
+.asm_f97e
+	push hl
+	ld hl, $ff9d
+	bit 1, [hl]
+	res 1, [hl]
+	pop hl
+.asm_f987
+	ld [$FF00+$e5], a
+	ld a, $10
+	ld [$FF00+$e6], a
+	call Func_366b
+	ld a, [$FF00+$e7]
+	ld [H_NUMTOPRINT], a ; $FF00+$96 (aliases: H_MULTIPLICAND)
+	ld a, [$FF00+$9b]
+	and a
+	ret z
+	ld a, [$FF00+$9d]
+	cpl
+	and $3
+	ld [$FF00+$9d], a
+	ret
+
+INCBIN "baserom.gbc",$f9a0,$f9dc - $f9a0
+
+; known jump sources: 1291d (4:691d)
+Func_f9dc: ; f9dc (3:79dc)
+	call Load16BitRegisters
+
+; known jump sources: fb41 (3:7b41), fb48 (3:7b48)
+Func_f9df: ; f9df (3:79df)
+	push hl
+	xor a
+	ld hl, H_NUMTOPRINT ; $ff96 (aliases: H_MULTIPLICAND)
+	ld [hli], a
+	ld a, b
+	ld [hli], a
+	ld a, c
+	ld [hli], a
+	ld [hl], $30
+	call Multiply
+	ld a, d
+	and a
+	jr z, .asm_fa0c
+	srl d
+	rr e
+	srl d
+	rr e
+	ld a, [$FF00+$97]
+	ld b, a
+	ld a, [$FF00+$98]
+	srl b
+	rr a
+	srl b
+	rr a
+	ld [$FF00+$98], a
+	ld a, b
+	ld [$FF00+$97], a
+.asm_fa0c
+	ld a, e
+	ld [H_REMAINDER], a ; $FF00+$99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
+	ld b, $4
+	call Divide
+	ld a, [$FF00+$98]
+	ld e, a
+	pop hl
+	and a
+	ret nz
+	ld e, $1
+	ret
+
+; known jump sources: 78af (1:78af), dcad (3:5cad), dda1 (3:5da1), 13995 (4:7995), 3a724 (e:6724), 3ba88 (e:7a88), 3c50a (f:450a), 3e19a (f:619a), 3e258 (f:6258)
+Func_fa1d: ; fa1d (3:7a1d)
+	push hl
+	ld hl, $ceeb
+	ld a, [hli]
+	ld c, a
+	ld a, [hli]
+	ld b, a
+	ld a, [hli]
+	ld e, a
+	ld d, [hl]
+	pop hl
+	push de
+	push bc
+	call Func_fad7
+	ld a, e
+	ld [$cefe], a
+	ld a, d
+	ld [$cefd], a
+	pop bc
+	pop de
+	call Func_fad1
+	ret z
+	ld a, $ff
+	jr c, .asm_fa42
+	ld a, $1
+.asm_fa42
+	ld [$ceef], a
+	call Load16BitRegisters
+	ld a, [$ceed]
+	ld e, a
+	ld a, [$ceee]
+	ld d, a
+.asm_fa50
+	push de
+	ld a, [$ceeb]
+	ld c, a
+	ld a, [$ceec]
+	ld b, a
+	call Func_fad1
+	jr z, .asm_fa96
+	jr nc, .asm_fa70
+	dec bc
+	ld a, c
+	ld [$ceed], a
+	ld a, b
+	ld [$ceee], a
+	call Func_fb30
+	ld a, e
+	sub d
+	jr .asm_fa7e
+.asm_fa70
+	inc bc
+	ld a, c
+	ld [$ceed], a
+	ld a, b
+	ld [$ceee], a
+	call Func_fb30
+	ld a, d
+	sub e
+.asm_fa7e
+	call Func_faf5
+	and a
+	jr z, .asm_fa87
+	call Func_fab1
+.asm_fa87
+	ld a, [$ceed]
+	ld [$ceeb], a
+	ld a, [$ceee]
+	ld [$ceec], a
+	pop de
+	jr .asm_fa50
+.asm_fa96
+	pop de
+	ld a, e
+	ld [$ceeb], a
+	ld a, d
+	ld [$ceec], a
+	or e
+	jr z, .asm_faa6
+	call Func_fb30
+	ld d, e
+.asm_faa6
+	call Func_faf5
+	ld a, $1
+	call Func_fab1
+	jp Delay3
+
+; known jump sources: fa84 (3:7a84), faab (3:7aab)
+Func_fab1: ; fab1 (3:7ab1)
+	push hl
+.asm_fab2
+	push af
+	push de
+	ld d, $6
+	call DrawHPBar
+	ld c, $2
+	call DelayFrames
+	pop de
+	ld a, [$ceef]
+	add e
+	cp $31
+	jr nc, .asm_face
+	ld e, a
+	pop af
+	dec a
+	jr nz, .asm_fab2
+	pop hl
+	ret
+.asm_face
+	pop af
+	pop hl
+	ret
+
+; known jump sources: fa38 (3:7a38), fa59 (3:7a59)
+Func_fad1: ; fad1 (3:7ad1)
+	ld a, d
+	sub b
+	ret nz
+	ld a, e
+	sub c
+	ret
+
+; known jump sources: fa2b (3:7a2b)
+Func_fad7: ; fad7 (3:7ad7)
+	ld a, d
+	sub b
+	jr c, .asm_fae4
+	jr z, .asm_faeb
+.asm_fadd
+	ld a, e
+	sub c
+	ld e, a
+	ld a, d
+	sbc b
+	ld d, a
+	ret
+.asm_fae4
+	ld a, c
+	sub e
+	ld e, a
+	ld a, b
+	sbc d
+	ld d, a
+	ret
+.asm_faeb
+	ld a, e
+	sub c
+	jr c, .asm_fae4
+	jr nz, .asm_fadd
+	ld de, $0
+	ret
+
+; known jump sources: fa7e (3:7a7e), faa6 (3:7aa6)
+Func_faf5: ; faf5 (3:7af5)
+	push af
+	push de
+	ld a, [W_LISTMENUID] ; $cf94
+	and a
+	jr z, .asm_fb2d
+	ld a, [$ceeb]
+	ld [$cef1], a
+	ld a, [$ceec]
+	ld [$cef0], a
+	push hl
+	ld a, [$FF00+$f6]
+	bit 0, a
+	jr z, .asm_fb15
+	ld de, $9
+	jr .asm_fb18
+.asm_fb15
+	ld de, $15
+.asm_fb18
+	add hl, de
+	push hl
+	ld a, $7f
+	ld [hli], a
+	ld [hli], a
+	ld [hli], a
+	pop hl
+	ld de, $cef0
+	ld bc, $203
+	call PrintNumber
+	call DelayFrame
+	pop hl
+.asm_fb2d
+	pop de
+	pop af
+	ret
+
+; known jump sources: fa69 (3:7a69), fa79 (3:7a79), faa2 (3:7aa2)
+Func_fb30: ; fb30 (3:7b30)
+	push hl
+	ld hl, $cee9
+	ld a, [hli]
+	ld e, a
+	ld a, [hli]
+	ld d, a
+	ld a, [hli]
+	ld c, a
+	ld a, [hli]
+	ld b, a
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	push hl
+	push de
+	call Func_f9df
+	ld a, e
+	pop de
+	pop bc
+	push af
+	call Func_f9df
+	pop af
+	ld d, e
+	ld e, a
+	pop hl
+	ret
+
+; known jump sources: 3ee2 (0:3ee2)
+Func_fb50: ; fb50 (3:7b50)
+	ld a, [$c109]
+	cp $4
+	jr nz, .asm_fb7f
+	ld a, [W_CURMAPTILESET] ; $d367
+	ld b, a
+	ld a, [$c434]
+	ld c, a
+	ld hl, $7b8b
+.asm_fb62
+	ld a, [hli]
+	cp $ff
+	jr z, .asm_fb7f
+	cp b
+	jr nz, .asm_fb7b
+	ld a, [hli]
+	cp c
+	jr nz, .asm_fb7c
+	ld a, [hl]
+	push af
+	call EnableAutoTextBoxDrawing
+	pop af
+	call Func_3ef5
+	xor a
+	ld [$FF00+$db], a
+	ret
+.asm_fb7b
+	inc hl
+.asm_fb7c
+	inc hl
+	jr .asm_fb62
+.asm_fb7f
+	ld a, $ff
+	ld [$FF00+$db], a
+	ld b, BANK(Func_52673)
+	ld hl, Func_52673
+	jp Bankswitch ; indirect jump to Func_52673 (52673 (14:6673))
+
+INCBIN "baserom.gbc",$fb8b,$fbd9 - $fb8b
 
 UnnamedText_fbd9: ; 0xfbd9
 	TX_FAR _UnnamedText_fbd9
@@ -18545,8 +28205,92 @@ INCBIN "baserom.gbc",$12080,$12288 - $12080 ; FIXME
 TextBoxGraphics: ; 0x12288
 	INCBIN "gfx/text_box.2bpp"
 
-INCBIN "baserom.gbc",$12488,$12953 - $12488
+INCBIN "baserom.gbc",$12488,$128d8 - $12488
 
+; known jump sources: 1388d (4:788d)
+Func_128d8: ; 128d8 (4:68d8)
+	ld a, [W_YCOORD] ; $d361
+	ld b, a
+	ld a, [W_CURMAPHEIGHT] ; $d368
+	call Func_128ea
+	ret z
+	ld a, [W_XCOORD] ; $d362
+	ld b, a
+	ld a, [W_CURMAPWIDTH] ; $d369
+
+; known jump sources: 128df (4:68df)
+Func_128ea: ; 128ea (4:68ea)
+	add a
+	cp b
+	ret z
+	inc b
+	ret
+
+; known jump sources: 129e5 (4:69e5), 3cdb9 (f:4db9)
+Func_128ef: ; 128ef (4:68ef)
+	call Load16BitRegisters
+	ld a, $1
+	jr asm_128fb
+
+; known jump sources: 12d67 (4:6d67)
+Func_128f6: ; 128f6 (4:68f6)
+	call Load16BitRegisters
+	ld a, $2
+asm_128fb: ; 128fb (4:68fb)
+	ld [W_LISTMENUID], a ; $cf94
+	push hl
+	ld a, [$cf99]
+	ld b, a
+	ld a, [$cf9a]
+	ld c, a
+	or b
+	jr nz, .asm_12913
+	xor a
+	ld c, a
+	ld e, a
+	ld a, $6
+	ld d, a
+	jp Func_12924
+.asm_12913
+	ld a, [$cfba]
+	ld d, a
+	ld a, [$cfbb]
+	ld e, a
+	ld a, $26
+	call Predef ; indirect jump to Func_f9dc (f9dc (3:79dc))
+	ld a, $6
+	ld d, a
+	ld c, a
+
+; known jump sources: 12910 (4:6910)
+Func_12924: ; 12924 (4:6924)
+	pop hl
+	push de
+	push hl
+	push hl
+	call DrawHPBar
+	pop hl
+	ld a, [$FF00+$f6]
+	bit 0, a
+	jr z, .asm_12937
+	ld bc, $9
+	jr .asm_1293a
+.asm_12937
+	ld bc, $15
+.asm_1293a
+	add hl, bc
+	ld de, $cf99
+	ld bc, $203
+	call PrintNumber
+	ld a, $f3
+	ld [hli], a
+	ld de, $cfba
+	ld bc, $203
+	call PrintNumber
+	pop hl
+	pop de
+	ret
+; 12953 (4:6953)
 ; Predef 0x37
 StatusScreen: ; 0x12953
 	call LoadMonData
@@ -18975,8 +28719,21 @@ EXPPointsText:
 LevelUpText:
 	db "LEVEL UP", $50
 
-INCBIN "baserom.gbc",$12cc3,$12cd2 - $12cc3
+; known jump sources: 12c52 (4:6c52), 12c58 (4:6c58)
+Func_12cc3: ; 12cc3 (4:6cc3)
+	ld bc, $a
+	ld a, $7f
+	jp FillMemory
 
+; known jump sources: 12bae (4:6bae), 12bb8 (4:6bb8), 12ccf (4:6ccf)
+Func_12ccb: ; 12ccb (4:6ccb)
+	ld [hli], a
+	ld [hld], a
+	add hl, de
+	dec c
+	jr nz, Func_12ccb
+	ret
+; 12cd2 (4:6cd2)
 ; [$D07D] = menu type / message ID
 ; if less than $F0, it is a menu type
 ; menu types:
@@ -19299,8 +29056,20 @@ RareCandyText: ; 0x12ec0
 	db $06
 	db $50
 
-INCBIN "baserom.gbc",$12ec7,$6ede - $6ec7
-
+; known jump sources: 12d70 (4:6d70)
+Func_12ec7: ; 12ec7 (4:6ec7)
+	ld hl, $cf1f
+	ld a, [$cf2d]
+	ld c, a
+	ld b, $0
+	add hl, bc
+	call Func_3df9
+	ld b, $fc
+	call GoPAL_SET
+	ld hl, $cf2d
+	inc [hl]
+	ret
+; 12ede (4:6ede)
 RedPicFront:
 	INCBIN "pic/trainer/red.pic"
 ShrinkPic1:
@@ -19308,8 +29077,33 @@ ShrinkPic1:
 ShrinkPic2:
 	INCBIN "pic/trainer/shrink2.pic"
 
-INCBIN "baserom.gbc",$13074,$13095 - $13074
-
+; known jump sources: 2976 (0:2976)
+Func_13074: ; 13074 (4:7074)
+	ld h, $c2
+	ld a, [$FF00+$da]
+	add $8
+	ld l, a
+	ld a, $7f
+	ld [hl], a
+	dec h
+	ld a, [$FF00+$da]
+	add $9
+	ld l, a
+	ld a, [hld]
+	ld b, a
+	xor a
+	ld [hld], a
+	ld [hl], a
+	ld a, [$FF00+$da]
+	add $2
+	ld l, a
+	ld a, [hl]
+	or b
+	ld [hld], a
+	ld a, $2
+	ld [hl], a
+	ret
+; 13095 (4:7095)
 StartMenu_Pokedex: ; 7095
 	ld a,$29
 	call Predef
@@ -20043,8 +29837,191 @@ StartMenu_Option: ; 75F6
 	call $2429
 	jp RedisplayStartMenu
 
-INCBIN "baserom.gbc",$13613,$7773 - $7613
+; known jump sources: 14cf (0:14cf)
+Func_13613: ; 13613 (4:7613)
+	call Func_13653
+	ld a, [W_WHICHTRADE] ; $cd3d
+	call Func_13625
+	ld a, [W_CURMENUITEMID] ; $cc26
+	call Func_13625
+	jp RedrawPartyMenu_
 
+; known jump sources: 13619 (4:7619), 1361f (4:761f)
+Func_13625: ; 13625 (4:7625)
+	push af
+	ld hl, $c3a0
+	ld bc, $28
+	call AddNTimes
+	ld c, $28
+	ld a, $7f
+.asm_13633
+	ld [hli], a
+	dec c
+	jr nz, .asm_13633
+	pop af
+	ld hl, $c300
+	ld bc, $10
+	call AddNTimes
+	ld de, $4
+	ld c, e
+.asm_13645
+	ld [hl], $a0
+	add hl, de
+	dec c
+	jr nz, .asm_13645
+	call Func_3748
+	ld a, $ae
+	jp Func_23b1
+
+; known jump sources: 1313b (4:713b), 13613 (4:7613)
+Func_13653: ; 13653 (4:7653)
+	ld a, [$cc35]
+	and a
+	jr nz, .asm_13661
+	ld a, [W_WHICHPOKEMON] ; $cf92
+	inc a
+	ld [$cc35], a
+	ret
+.asm_13661
+	xor a
+	ld [$d07d], a
+	ld a, [$cc35]
+	dec a
+	ld b, a
+	ld a, [W_CURMENUITEMID] ; $cc26
+	ld [W_WHICHTRADE], a ; $cd3d
+	cp b
+	jr nz, .asm_1367b
+	xor a
+	ld [$cc35], a
+	ld [$d07d], a
+	ret
+.asm_1367b
+	ld a, b
+	ld [$cc35], a
+	push hl
+	push de
+	ld hl, W_PARTYMON1 ; $d164
+	ld d, h
+	ld e, l
+	ld a, [W_CURMENUITEMID] ; $cc26
+	add l
+	ld l, a
+	jr nc, .asm_1368e
+	inc h
+.asm_1368e
+	ld a, [$cc35]
+	add e
+	ld e, a
+	jr nc, .asm_13696
+	inc d
+.asm_13696
+	ld a, [hl]
+	ld [H_DIVIDEND], a ; $FF00+$95 (aliases: H_PRODUCT, H_PASTLEADINGZEROES, H_QUOTIENT)
+	ld a, [de]
+	ld [hl], a
+	ld a, [H_DIVIDEND] ; $FF00+$95 (aliases: H_PRODUCT, H_PASTLEADINGZEROES, H_QUOTIENT)
+	ld [de], a
+	ld hl, W_PARTYMON1_NUM ; $d16b (aliases: W_PARTYMON1DATA)
+	ld bc, $2c
+	ld a, [W_CURMENUITEMID] ; $cc26
+	call AddNTimes
+	push hl
+	ld de, $cc97
+	ld bc, $2c
+	call CopyData
+	ld hl, W_PARTYMON1_NUM ; $d16b (aliases: W_PARTYMON1DATA)
+	ld bc, $2c
+	ld a, [$cc35]
+	call AddNTimes
+	pop de
+	push hl
+	ld bc, $2c
+	call CopyData
+	pop de
+	ld hl, $cc97
+	ld bc, $2c
+	call CopyData
+	ld hl, W_PARTYMON1OT ; $d273
+	ld a, [W_CURMENUITEMID] ; $cc26
+	call Func_3a7d
+	push hl
+	ld de, $cc97
+	ld bc, $b
+	call CopyData
+	ld hl, W_PARTYMON1OT ; $d273
+	ld a, [$cc35]
+	call Func_3a7d
+	pop de
+	push hl
+	ld bc, $b
+	call CopyData
+	pop de
+	ld hl, $cc97
+	ld bc, $b
+	call CopyData
+	ld hl, W_PARTYMON1NAME ; $d2b5
+	ld a, [W_CURMENUITEMID] ; $cc26
+	call Func_3a7d
+	push hl
+	ld de, $cc97
+	ld bc, $b
+	call CopyData
+	ld hl, W_PARTYMON1NAME ; $d2b5
+	ld a, [$cc35]
+	call Func_3a7d
+	pop de
+	push hl
+	ld bc, $b
+	call CopyData
+	pop de
+	ld hl, $cc97
+	ld bc, $b
+	call CopyData
+	ld a, [$cc35]
+	ld [W_WHICHTRADE], a ; $cd3d
+	xor a
+	ld [$cc35], a
+	ld [$d07d], a
+	pop de
+	pop hl
+	ret
+
+; known jump sources: e50c (3:650c), 12d79 (4:6d79)
+Func_1373e: ; 1373e (4:773e)
+	ld a, [$cf91]
+	ld [$d0b5], a
+	call GetBaseStats
+	ld hl, $d0cc
+	push hl
+	ld a, [$d0e0]
+	ld b, a
+	ld c, $0
+	ld hl, $7773
+.asm_13754
+	ld a, [hli]
+	cp b
+	jr z, .asm_1375b
+	inc c
+	jr .asm_13754
+.asm_1375b
+	pop hl
+	ld b, $2
+	ld a, $10
+	jp Predef ; indirect jump to Func_f666 (f666 (3:7666))
+
+; known jump sources: e490 (3:6490)
+Func_13763: ; 13763 (4:7763)
+	ld a, [$d11e]
+	dec a
+	ld hl, $7773
+	ld b, $0
+	ld c, a
+	add hl, bc
+	ld a, [hl]
+	ld [$d11e], a
+	ret
+; 13773 (4:7773)
 TechnicalMachines: ; 0x13773
 	db MEGA_PUNCH
 	db RAZOR_WIND
@@ -20102,15 +30079,260 @@ TechnicalMachines: ; 0x13773
 	db STRENGTH
 	db FLASH
 
-INCBIN "baserom.gbc",$137aa,$1386b - $137aa
+; known jump sources: 3f038 (f:7038)
+Func_137aa: ; 137aa (4:77aa)
+	ld a, [W_ISLINKBATTLE] ; $d12b
+	cp $4
+	jr nz, .asm_137eb
+	ld a, [W_ENEMYMONNUMBER] ; $cfe8
+	ld hl, $d8a8
+	ld bc, $2c
+	call AddNTimes
+	ld a, [W_ENEMYMONSTATUS] ; $cfe9
+	ld [hl], a
+	call ClearScreen
+	ld hl, Func_372d6
+	ld b, BANK(Func_372d6)
+	call Bankswitch ; indirect jump to Func_372d6 (372d6 (d:72d6))
+	ld a, [$cf0b]
+	cp $1
+	ld de, $7853
+	jr c, .asm_137de
+	ld de, $785b
+	jr z, .asm_137de
+	ld de, $7864
+.asm_137de
+	ld hl, $c446
+	call PlaceString
+	ld c, $c8
+	call DelayFrames
+	jr .asm_1380a
+.asm_137eb
+	ld a, [$cf0b]
+	and a
+	jr nz, .asm_13813
+	ld hl, $cce5
+	ld a, [hli]
+	or [hl]
+	inc hl
+	or [hl]
+	jr z, .asm_1380a
+	ld de, W_PLAYERMONEY1 ; $d349
+	ld c, $3
+	ld a, $b
+	call Predef ; indirect jump to Func_f81d (f81d (3:781d))
+	ld hl, $786b
+	call PrintText
+.asm_1380a
+	xor a
+	ld [$ccd4], a
+	ld a, $2a
+	call Predef ; indirect jump to Func_3ad1c (3ad1c (e:6d1c))
+.asm_13813
+	xor a
+	ld [$d083], a
+	ld [$c02a], a
+	ld [W_ISINBATTLE], a ; $d057
+	ld [W_BATTLETYPE], a ; $d05a
+	ld [W_MOVEMISSED], a ; $d05f
+	ld [W_CUROPPONENT], a ; $d059
+	ld [$d11f], a
+	ld [$d120], a
+	ld [$d078], a
+	ld hl, $cc2b
+	ld [hli], a
+	ld [hli], a
+	ld [hli], a
+	ld [hl], a
+	ld [W_LISTSCROLLOFFSET], a ; $cc36
+	ld hl, $d060
+	ld b, $18
+.asm_1383e
+	ld [hli], a
+	dec b
+	jr nz, .asm_1383e
+	ld hl, $d72c
+	set 0, [hl]
+	call Func_3748
+	call GBPalWhiteOut
+	ld a, $ff
+	ld [$d42f], a
+	ret
+
+INCBIN "baserom.gbc",$13853,$1386b - $13853
 
 UnnamedText_1386b: ; 0x1386b
 	TX_FAR _UnnamedText_1386b
 	db $50
 ; 0x1386b + 5 bytes
 
-INCBIN "baserom.gbc",$13870,$1399e - $13870
+; known jump sources: 3ef39 (f:6f39)
+Func_13870: ; 13870 (4:7870)
+	ld a, [$cc57]
+	and a
+	ret nz
+	ld a, [$d736]
+	and a
+	ret nz
+	ld hl, Func_c49d
+	ld b, BANK(Func_c49d)
+	call Bankswitch ; indirect jump to Func_c49d (c49d (3:449d))
+	jr nc, .asm_13888
+.asm_13884
+	ld a, $1
+	and a
+	ret
+.asm_13888
+	ld hl, Func_128d8
+	ld b, BANK(Func_128d8)
+	call Bankswitch ; indirect jump to Func_128d8 (128d8 (4:68d8))
+	jr z, .asm_13884
+	ld a, [$d0db]
+	and a
+	jr z, .asm_1389e
+	dec a
+	jr z, .asm_13905
+	ld [$d0db], a
+.asm_1389e
+	ld hl, $c45d
+	ld c, [hl]
+	ld a, [$d535]
+	cp c
+	ld a, [W_GRASSRATE] ; $d887
+	jr z, .asm_138c4
+	ld a, $14
+	cp c
+	ld a, [W_WATERRATE] ; $d8a4
+	jr z, .asm_138c4
+	ld a, [W_CURMAP] ; $d35e
+	cp $25
+	jr c, .asm_13912
+	ld a, [W_CURMAPTILESET] ; $d367
+	cp $3
+	jr z, .asm_13912
+	ld a, [W_GRASSRATE] ; $d887
+.asm_138c4
+	ld b, a
+	ld a, [H_RAND1] ; $FF00+$d3
+	cp b
+	jr nc, .asm_13912
+	ld a, [H_RAND2] ; $FF00+$d4
+	ld b, a
+	ld hl, $7918
+.asm_138d0
+	ld a, [hli]
+	cp b
+	jr nc, .asm_138d7
+	inc hl
+	jr .asm_138d0
+.asm_138d7
+	ld c, [hl]
+	ld hl, W_GRASSMONS ; $d888
+	ld a, [$c45c]
+	cp $14
+	jr nz, .asm_138e5
+	ld hl, W_WATERMONS ; $d8a5 (aliases: W_ENEMYMON1HP)
+.asm_138e5
+	ld b, $0
+	add hl, bc
+	ld a, [hli]
+	ld [W_CURENEMYLVL], a ; $d127
+	ld a, [hl]
+	ld [$cf91], a
+	ld [$cfd8], a
+	ld a, [$d0db]
+	and a
+	jr z, .asm_13916
+	ld a, [W_PARTYMON1_LEVEL] ; $d18c
+	ld b, a
+	ld a, [W_CURENEMYLVL] ; $d127
+	cp b
+	jr c, .asm_13912
+	jr .asm_13916
+.asm_13905
+	ld [$d0db], a
+	ld a, $d2
+	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	call EnableAutoTextBoxDrawing
+	call DisplayTextID
+.asm_13912
+	ld a, $1
+	and a
+	ret
+.asm_13916
+	xor a
+	ret
 
+INCBIN "baserom.gbc",$13918,$1392c - $13918
+
+; known jump sources: 3f956 (f:7956)
+Func_1392c: ; 1392c (4:792c)
+	ld a, [H_WHOSETURN] ; $FF00+$f3
+	and a
+	ld a, [W_PLAYERMOVENUM] ; $cfd2
+	ld hl, W_PLAYERMONMAXHP ; $d023
+	jr z, .asm_1393d
+	ld a, [W_ENEMYMOVENUM] ; $cfcc
+	ld hl, W_ENEMYMONMAXHP ; $cff4
+.asm_1393d
+	ld d, a
+	ld a, [W_DAMAGE] ; $d0d7
+	ld b, a
+	ld a, [$d0d8]
+	ld c, a
+	srl b
+	rr c
+	ld a, d
+	cp $a5
+	jr z, .asm_13953
+	srl b
+	rr c
+.asm_13953
+	ld a, b
+	or c
+	jr nz, .asm_13958
+	inc c
+.asm_13958
+	ld a, [hli]
+	ld [$ceea], a
+	ld a, [hl]
+	ld [$cee9], a
+	push bc
+	ld bc, $fff2
+	add hl, bc
+	pop bc
+	ld a, [hl]
+	ld [$ceeb], a
+	sub c
+	ld [hld], a
+	ld [$ceed], a
+	ld a, [hl]
+	ld [$ceec], a
+	sbc b
+	ld [hl], a
+	ld [$ceee], a
+	jr nc, .asm_13982
+	xor a
+	ld [hli], a
+	ld [hl], a
+	ld hl, $ceed
+	ld [hli], a
+	ld [hl], a
+.asm_13982
+	ld hl, $c45e
+	ld a, [H_WHOSETURN] ; $FF00+$f3
+	and a
+	ld a, $1
+	jr z, .asm_13990
+	ld hl, $c3ca
+	xor a
+.asm_13990
+	ld [W_LISTMENUID], a ; $cf94
+	ld a, $48
+	call Predef ; indirect jump to Func_fa1d (fa1d (3:7a1d))
+	ld hl, $799e
+	jp PrintText
+; 1399e (4:799e)
 UnnamedText_1399e: ; 0x1399e
 	TX_FAR _UnnamedText_1399e
 	db $50
@@ -20130,8 +30352,32 @@ UnnamedText_13a53: ; 0x13a53
 	db $50
 ; 0x13a53 + 5 bytes
 
-INCBIN "baserom.gbc",$13a58,$37
-
+; known jump sources: 35a3 (0:35a3)
+Func_13a58: ; 13a58 (4:7a58)
+	ld hl, W_GRASSRATE ; $d887
+	ld a, [W_ISLINKBATTLE] ; $d12b
+	and a
+	jr nz, .asm_13a86
+	ld hl, W_RIVALNAME ; $d34a
+	ld a, [W_TRAINERCLASS] ; $d031
+	cp $19
+	jr z, .asm_13a86
+	cp $2a
+	jr z, .asm_13a86
+	cp $2b
+	jr z, .asm_13a86
+	ld [$d0b5], a
+	ld a, $7
+	ld [$d0b6], a
+	ld a, $e
+	ld [$d0b7], a
+	call GetName
+	ld hl, $cd6d
+.asm_13a86
+	ld de, $d04a
+	ld bc, $d
+	jp CopyData
+; 13a8f (4:7a8f)
 GenRandom_: ; 7A8F
 ; generate a random 16-bit integer and store it at $FFD3,$FFD4
 	ld a,[rDIV]
@@ -21233,8 +31479,91 @@ SpriteSheetPointerTable: ; 0x17b27
 	db BANK(LyingOldManSprite)
 ; 0x17c47
 
-INCBIN "baserom.gbc",$17c47,$17dad - $17c47
+; known jump sources: 3239 (0:3239), 18fc3 (6:4fc3), 50f3d (14:4f3d), 51059 (14:5059), 70824 (1c:4824)
+Func_17c47: ; 17c47 (5:7c47)
+	ld a, [$cd50]
+	ld c, a
+	ld b, $0
+	ld hl, $7caf
+	add hl, bc
+	add hl, bc
+	ld e, [hl]
+	inc hl
+	ld d, [hl]
+	ld hl, $8f80
+	ld bc, $504
+	call CopyVideoData
+	ld a, [$cfcb]
+	push af
+	ld a, $ff
+	ld [$cfcb], a
+	ld a, [$d736]
+	bit 6, a
+	ld hl, $c38f
+	ld de, $c39f
+	jr z, .asm_17c7a
+	ld hl, $c37f
+	ld de, $c38f
+.asm_17c7a
+	ld bc, $90
+.asm_17c7d
+	ld a, [hl]
+	ld [de], a
+	dec hl
+	dec de
+	dec bc
+	ld a, c
+	or b
+	jr nz, .asm_17c7d
+	ld hl, $c104
+	ld a, [$cd4f]
+	swap a
+	ld c, a
+	ld b, $0
+	add hl, bc
+	ld a, [hli]
+	ld b, a
+	inc hl
+	ld a, [hl]
+	add $8
+	ld c, a
+	ld de, $7cb5
+	xor a
+	call WriteOAMBlock
+	ld c, $3c
+	call DelayFrames
+	pop af
+	ld [$cfcb], a
+	call DelayFrame
+	jp Func_2429
 
+INCBIN "baserom.gbc",$17caf,$17d7d - $17caf
+
+; known jump sources: 71c87 (1c:5c87)
+Func_17d7d: ; 17d7d (5:7d7d)
+	ld a, [W_PLAYERMONACCURACYMOD] ; $cd1e
+	cp $86
+	jr z, .asm_17d8d
+	cp $92
+	ret nz
+	ld a, [W_PLAYERMONEVASIONMOD] ; $cd1f
+	cp $8f
+	ret nz
+.asm_17d8d
+	ld a, [W_NUMINPARTY] ; $d163
+	dec a
+	ld [W_WHICHPOKEMON], a ; $cf92
+	ld a, $1
+	ld [$ccd4], a
+	ld a, $32
+	ld [W_ISLINKBATTLE], a ; $d12b
+	ld hl, Func_3ad0e
+	ld b, BANK(Func_3ad0e)
+	call Bankswitch ; indirect jump to Func_3ad0e (3ad0e (e:6d0e))
+	xor a
+	ld [W_ISLINKBATTLE], a ; $d12b
+	jp Func_2307
+; 17dad (5:7dad)
 SubstituteEffectHandler:  ;0x17DAD
 	ld c, 50
 	call DelayFrames		
@@ -21447,8 +31776,32 @@ UnnamedText_17f32: ; 0x17f32
 	db $50
 ; 0x17f32 + 5 bytes
 
-INCBIN "baserom.gbc",$17f37,40
-
+; known jump sources: 1d774 (7:5774), 484eb (12:44eb), 5a5b4 (16:65b4), 61096 (18:5096), 75101 (1d:5101)
+Func_17f37: ; 17f37 (5:7f37)
+	ld hl, W_BAGITEM01 ; $d31e
+	ld a, [$FF00+$db]
+	ld b, a
+	xor a
+	ld [$FF00+$dc], a
+.asm_17f40
+	ld a, [hli]
+	cp $ff
+	ret z
+	cp b
+	jr z, .asm_17f4f
+	inc hl
+	ld a, [$FF00+$dc]
+	inc a
+	ld [$FF00+$dc], a
+	jr .asm_17f40
+.asm_17f4f
+	ld a, $1
+	ld [$cf96], a
+	ld a, [$FF00+$dc]
+	ld [W_WHICHPOKEMON], a ; $cf92
+	ld hl, W_NUMBAGITEMS ; $d31d
+	jp RemoveItemFromInventory
+; 17f5f (5:7f5f)
 SECTION "bank6",DATA,BANK[$6]
 
 CeladonCity_h: ; 0x18000
@@ -21973,8 +32326,70 @@ FuchsiaCityObject: ; 0x18bd4 (size=178)
 FuchsiaCityBlocks: ; 0x18c86 360
 	INCBIN "maps/fuchsiacity.blk"
 
-INCBIN "baserom.gbc",$18dee,$6d
+; known jump sources: 2099 (0:2099)
+Func_18dee: ; 18dee (6:4dee)
+	call Func_18e36
+	ld a, [$d732]
+	bit 0, a
+	ret z
+	ld a, [W_PLAYTIMEMINUTES] ; $da42
+	and a
+	ret nz
+	ld a, [W_PLAYTIMEFRAMES] ; $da45
+	inc a
+	ld [W_PLAYTIMEFRAMES], a ; $da45
+	cp $3c
+	ret nz
+	xor a
+	ld [W_PLAYTIMEFRAMES], a ; $da45
+	ld a, [W_PLAYTIMESECONDS] ; $da44
+	inc a
+	ld [W_PLAYTIMESECONDS], a ; $da44
+	cp $3c
+	ret nz
+	xor a
+	ld [W_PLAYTIMESECONDS], a ; $da44
+	ld a, [$da43]
+	inc a
+	ld [$da43], a
+	cp $3c
+	ret nz
+	xor a
+	ld [$da43], a
+	ld a, [$da41]
+	inc a
+	ld [$da41], a
+	cp $ff
+	ret nz
+	ld a, $ff
+	ld [W_PLAYTIMEMINUTES], a ; $da42
+	ret
 
+; known jump sources: 18dee (6:4dee)
+Func_18e36: ; 18e36 (6:4e36)
+	ld a, [$d13a]
+	and a
+	jr nz, .asm_18e40
+	ld a, $ff
+	jr .asm_18e41
+.asm_18e40
+	dec a
+.asm_18e41
+	ld [$d13a], a
+	and a
+	ret nz
+	ld a, [$d730]
+	res 1, a
+	res 2, a
+	bit 5, a
+	res 5, a
+	ld [$d730], a
+	ret z
+	xor a
+	ld [$FF00+$b3], a
+	ld [$FF00+$b4], a
+	ret
+; 18e5b (6:4e5b)
 PalletTownScript:
 	ld a,[$D74B]
 	bit 4,a
@@ -24904,7 +35319,246 @@ SilphCo6Object: ; 0x1a2fb (size=112)
 SilphCo6Blocks: ; 0x1a36b 117
 	INCBIN "maps/silphco6.blk"
 
-INCBIN "baserom.gbc",$1a3e0,6376
+; known jump sources: 314b (0:314b)
+Func_1a3e0: ; 1a3e0 (6:63e0)
+	ld hl, $d730
+	res 1, [hl]
+	call Func_1a609
+	jr nc, .asm_1a406
+	ld a, $fc
+	ld [$cd6b], a
+	ld hl, $d736
+	set 1, [hl]
+	ld a, $1
+	ld [$cd38], a
+	ld a, $80
+	ld [$ccd3], a
+	xor a
+	ld [$c102], a
+	call Func_3486
+	ret
+.asm_1a406
+	xor a
+	ld [$cd3a], a
+	ld [$cd38], a
+	ld [$ccd3], a
+	ld hl, $d736
+	res 0, [hl]
+	res 1, [hl]
+	ld hl, $d730
+	res 7, [hl]
+	ret
+
+; known jump sources: 3153 (0:3153)
+Func_1a41d: ; 1a41d (6:641d)
+	ld hl, $d730
+	res 7, [hl]
+	ld hl, $d72e
+	res 7, [hl]
+	ld hl, $d736
+	res 0, [hl]
+	res 1, [hl]
+	xor a
+	ld [$cf17], a
+	ld [$cc57], a
+	ld [$cf10], a
+	ld [$cd3a], a
+	ld [$cd38], a
+	ld [$ccd3], a
+	ret
+
+INCBIN "baserom.gbc",$1a442,$1a44c - $1a442
+	ld a, [W_XCOORD] ; $d362
+	sub $a
+	ld [$cca1], a
+	jr z, .asm_1a475
+	ld b, $0
+	ld c, a
+	ld hl, $cc97
+	ld a, $80
+	call FillMemory
+	ld [hl], $ff
+	ld a, [$cf13]
+	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	ld de, $cc97
+	call MoveSprite
+	ld a, $1
+	ld [$cf10], a
+	jr .asm_1a47a
+.asm_1a475
+	ld a, $3
+	ld [$cf10], a
+.asm_1a47a
+	ld hl, $d733
+	set 1, [hl]
+	ld a, $fc
+	ld [$cd6b], a
+	ret
+
+INCBIN "baserom.gbc",$1a485,$1a4a6 - $1a485
+	xor a
+	ld [$cd3b], a
+	ld a, [$cf13]
+	swap a
+	ld [$cf17], a
+	xor a
+	ld [$c206], a
+	ld hl, $ccd3
+	ld de, $64e9
+	call Func_350c
+	dec a
+	ld [$cd38], a
+	ld hl, $cc97
+	ld de, $64dc
+	call Func_350c
+	ld hl, $d72e
+	res 7, [hl]
+	ld hl, $d730
+	set 7, [hl]
+	ld a, $4
+	ld [$cf10], a
+	ret
+
+INCBIN "baserom.gbc",$1a4dc,$1a4f4 - $1a4dc
+	ld a, [$cd38]
+	and a
+	ret nz
+	ld a, $0
+	ld [$cc4d], a
+	ld a, $11
+	call Predef ; indirect jump to Func_f1d7 (f1d7 (3:71d7))
+	ld hl, $d730
+	res 7, [hl]
+	ld hl, $d72e
+	res 7, [hl]
+	jp Func_314e
+
+INCBIN "baserom.gbc",$1a510,$1a5e7 - $1a510
+
+; known jump sources: 33b1 (0:33b1)
+Func_1a5e7: ; 1a5e7 (6:65e7)
+	ld a, [W_CURMAP] ; $d35e
+	cp $94
+	ret z
+	ld hl, $6605
+	ld a, [$cd2d]
+	ld b, a
+.asm_1a5f4
+	ld a, [hli]
+	cp $ff
+	jr z, .asm_1a5fd
+	cp b
+	ret z
+	jr .asm_1a5f4
+.asm_1a5fd
+	ld a, [$cf13]
+	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	jp Function3541
+
+INCBIN "baserom.gbc",$1a605,$1a609 - $1a605
+
+; known jump sources: c4a5 (3:44a5), 1a3e5 (6:63e5)
+Func_1a609: ; 1a609 (6:6609)
+	push de
+	ld hl, $662c
+	ld a, [W_CURMAPTILESET] ; $d367
+	ld de, $3
+	call IsInArray
+	pop de
+	jr nc, .asm_1a62a
+	inc hl
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	ld a, [$c45c]
+	ld b, a
+.asm_1a621
+	ld a, [hli]
+	and a
+	jr z, .asm_1a62a
+	cp b
+	jr nz, .asm_1a621
+	scf
+	ret
+.asm_1a62a
+	and a
+	ret
+
+INCBIN "baserom.gbc",$1a62c,$1a672 - $1a62c
+
+; known jump sources: c37 (0:c37)
+Func_1a672: ; 1a672 (6:6672)
+	ld a, [$d736]
+	bit 6, a
+	ret nz
+	ld a, [W_CURMAPTILESET] ; $d367
+	and a
+	ret nz
+	ld a, $35
+	call Predef ; indirect jump to Func_c586 (c586 (3:4586))
+	ld a, [$c109]
+	ld b, a
+	ld a, [$c45c]
+	ld c, a
+	ld a, [$cfc6]
+	ld d, a
+	ld hl, $66cf
+.asm_1a691
+	ld a, [hli]
+	cp $ff
+	ret z
+	cp b
+	jr nz, .asm_1a6a4
+	ld a, [hli]
+	cp c
+	jr nz, .asm_1a6a5
+	ld a, [hli]
+	cp d
+	jr nz, .asm_1a6a6
+	ld a, [hl]
+	ld e, a
+	jr .asm_1a6a9
+.asm_1a6a4
+	inc hl
+.asm_1a6a5
+	inc hl
+.asm_1a6a6
+	inc hl
+	jr .asm_1a691
+.asm_1a6a9
+	ld a, [$FF00+$b4]
+	and e
+	ret z
+	ld a, $ff
+	ld [$cd6b], a
+	ld hl, $d736
+	set 6, [hl]
+	call Func_3486
+	ld a, e
+	ld [$ccd3], a
+	ld [$ccd4], a
+	ld a, $2
+	ld [$cd38], a
+	call Func_1a6f0
+	ld a, $a2
+	call Func_23b1
+	ret
+
+INCBIN "baserom.gbc",$1a6cf,$1a6f0 - $1a6cf
+
+; known jump sources: 1a6c6 (6:66c6)
+Func_1a6f0: ; 1a6f0 (6:66f0)
+	ld hl, $8ff0
+	ld de, $6708
+	ld bc, $601
+	call CopyVideoDataDouble
+	ld a, $9
+	ld bc, $5448
+	ld de, $6710
+	call WriteOAMBlock
+	ret
+
+INCBIN "baserom.gbc",$1a708,$1bcc8 - $1a708
 
 SECTION "bank7",DATA,BANK[$7]
 
@@ -25231,15 +35885,81 @@ MonsterNames: ; 421E
 	db "WEEPINBELL"
 	db "VICTREEBEL"
 
-INCBIN "baserom.gbc",$1c98a,$1c9c1 - $1c98a
-
+; known jump sources: 4493 (1:4493)
+Func_1c98a: ; 1c98a (7:498a)
+	call ClearScreen
+	call GoPAL_SET_CF1C
+	call LoadFontTilePatterns
+	call LoadTextBoxTilePatterns
+	ld hl, $49c1
+	call PrintText
+	ld hl, $c43a
+	ld bc, $80f
+	ld a, $7
+	ld [$d12c], a
+	ld a, $14
+	ld [$d125], a
+	call DisplayTextBoxID
+	ld a, [W_CURMENUITEMID] ; $cc26
+	and a
+	jp z, InitGame
+	ld b, BANK(Func_73b6a)
+	ld hl, Func_73b6a
+	call Bankswitch ; indirect jump to Func_73b6a (73b6a (1c:7b6a))
+	jp InitGame
+; 1c9c1 (7:49c1)
 UnnamedText_1c9c1: ; 0x1c9c1
 	TX_FAR _UnnamedText_1c9c1
 	db $50
 ; 0x1c9c1 + 5 bytes
 
-INCBIN "baserom.gbc",$1c9c6,$1ca14 - $1c9c6
+; known jump sources: 4583e (11:583e)
+Func_1c9c6: ; 1c9c6 (7:49c6)
+	ld hl, $4a14
+	call PrintText
+	ld hl, $cf7b
+	ld a, l
+	ld [$cf8b], a
+	ld a, h
+	ld [$cf8c], a
+	ld a, [W_LISTSCROLLOFFSET] ; $cc36
+	push af
+	xor a
+	ld [W_CURMENUITEMID], a ; $cc26
+	ld [W_LISTSCROLLOFFSET], a ; $cc36
+	ld [$cf93], a
+	ld a, $4
+	ld [W_LISTMENUID], a ; $cf94
+	call DisplayListMenuID
+	pop bc
+	ld a, b
+	ld [W_LISTSCROLLOFFSET], a ; $cc36
+	ret c
+	ld hl, $d126
+	set 7, [hl]
+	ld hl, $cc5b
+	ld a, [W_WHICHPOKEMON] ; $cf92
+	add a
+	ld d, $0
+	ld e, a
+	add hl, de
+	ld a, [hli]
+	ld b, a
+	ld a, [hl]
+	ld c, a
+	ld hl, $d3af
+	call Func_1ca0d
 
+; known jump sources: 1ca0a (7:4a0a)
+Func_1ca0d: ; 1ca0d (7:4a0d)
+	inc hl
+	inc hl
+	ld a, b
+	ld [hli], a
+	ld a, c
+	ld [hli], a
+	ret
+; 1ca14 (7:4a14)
 UnnamedText_1ca14: ; 0x1ca14
 	TX_FAR _UnnamedText_1ca14
 	db $50
@@ -29483,8 +40203,24 @@ BillsHouseObject: ; 0x1e8df (size=38)
 BillsHouseBlocks: ; 0x1e905
 	INCBIN "maps/billshouse.blk"
 
-INCBIN "baserom.gbc",$1e915,$1e93b - $1e915
-
+; known jump sources: 17ecd (5:7ecd)
+Func_1e915: ; 1e915 (7:6915)
+	call Func_36f4
+	ld hl, $6946
+	call PrintText
+	ld hl, $693b
+	call PrintText
+	call Func_35ec
+	ld a, [W_CURMENUITEMID] ; $cc26
+	and a
+	jr nz, .asm_1e932
+	ld a, $56
+	call Predef ; indirect jump to DisplayDexRating (44169 (11:4169))
+.asm_1e932
+	ld hl, $6940
+	call PrintText
+	jp Func_3701
+; 1e93b (7:693b)
 UnnamedText_1e93b: ; 0x1e93b
 	TX_FAR _UnnamedText_1e93b
 	db $50
@@ -29523,8 +40259,81 @@ UnnamedText_1e983: ; 0x1e983
 	db $50
 ; 0x1e983 + 5 bytes
 
-INCBIN "baserom.gbc",$1e988,$1ea0d - $1e988
+; known jump sources: 41f (0:41f)
+Func_1e988: ; 1e988 (7:6988)
+	ld hl, $d790
+	bit 7, [hl]
+	jr z, asm_1e9ab
+	ld a, [W_NUMSAFARIBALLS] ; $da47
+	and a
+	jr z, asm_1e9b0
+	jr asm_1e9ab
 
+; known jump sources: 60f (0:60f)
+Func_1e997: ; 1e997 (7:6997)
+	ld a, [W_SAFARITIMER1] ; $d70d
+	ld b, a
+	ld a, [W_SAFARITIMER2] ; $d70e
+	ld c, a
+	or b
+	jr z, asm_1e9b0
+	dec bc
+	ld a, b
+	ld [W_SAFARITIMER1], a ; $d70d
+	ld a, c
+	ld [W_SAFARITIMER2], a ; $d70e
+asm_1e9ab: ; 1e9ab (7:69ab)
+	xor a
+	ld [$da46], a
+	ret
+asm_1e9b0: ; 1e9b0 (7:69b0)
+	call EnableAutoTextBoxDrawing
+	xor a
+	ld [$cfc7], a
+	dec a
+	call Func_23b1
+	ld c, $2
+	ld a, $b9
+	call Func_23a1
+.asm_1e9c2
+	ld a, [$c02a]
+	cp $b9
+	jr nz, .asm_1e9c2
+	ld a, $d3
+	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	call DisplayTextID
+	xor a
+	ld [$d528], a
+	ld a, $9c
+	ld [H_DOWNARROWBLINKCNT1], a ; $FF00+$8b
+	ld a, $3
+	ld [$d42f], a
+	ld a, $5
+	ld [$d61f], a
+	ld hl, $d790
+	set 6, [hl]
+	ld a, $1
+	ld [$da46], a
+	ret
+
+; known jump sources: 2a95 (0:2a95)
+Func_1e9ed: ; 1e9ed (7:69ed)
+	xor a
+	ld [$cd6b], a
+	ld hl, $69f7
+	jp PrintText
+
+INCBIN "baserom.gbc",$1e9f7,$1e9f8 - $1e9f7
+	ld a, [W_NUMSAFARIBALLS] ; $da47
+	and a
+	jr z, .asm_1ea04
+	ld hl, $6a0d
+	call PrintText
+.asm_1ea04
+	ld hl, $6a12
+	call PrintText
+	jp TextScriptEnd
+; 1ea0d (7:6a0d)
 UnnamedText_1ea0d: ; 0x1ea0d
 	TX_FAR _UnnamedText_1ea0d
 	db $50
@@ -29535,8 +40344,42 @@ UnnamedText_1ea12: ; 0x1ea12
 	db $50
 ; 0x1ea12 + 5 bytes
 
-INCBIN "baserom.gbc",$1ea17,$1ea5b - $1ea17
+	ld a, [$c109]
+	cp $4
+	ret nz
+	call EnableAutoTextBoxDrawing
+	ld a, $31
+	jp Func_3ef5
 
+INCBIN "baserom.gbc",$1ea25,$1ea26 - $1ea25
+	xor a
+	ld [$da38], a
+	ld a, [W_WHICHTRADE] ; $cd3d
+	push af
+	and $f
+	ld [$FF00+$db], a
+	pop af
+	and $f0
+	swap a
+	ld [$FF00+$dc], a
+	ld hl, $6a5b
+	call PrintText
+	ld a, [$FF00+$db]
+	dec a
+	add a
+	ld d, $0
+	ld e, a
+	ld hl, $6a60
+	add hl, de
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	call PrintText
+	ld a, $1
+	ld [$cc3c], a
+	call Func_1ea92
+	jp TextScriptEnd
+; 1ea5b (7:6a5b)
 UnnamedText_1ea5b: ; 0x1ea5b
 	TX_FAR _UnnamedText_1ea5b
 	db $50
@@ -29574,28 +40417,190 @@ UnnamedText_1ea85: ; 0x1ea85
 	db $50
 ; 0x1ea85 + 5 bytes
 
-INCBIN "baserom.gbc",$1ea8a,$1eb05 - $1ea8a
+; known jump sources: 1eab2 (7:6ab2), 1eaef (7:6aef), 1eb2a (7:6b2a)
+Func_1ea8a: ; 1ea8a (7:6a8a)
+	ld hl, $d79c
+	ld a, $10
+	jp Predef ; indirect jump to Func_f666 (f666 (3:7666))
 
+; known jump sources: 1ea55 (7:6a55)
+Func_1ea92: ; 1ea92 (7:6a92)
+	call Func_35ec
+	ld a, [$FF00+$dc]
+	ld c, a
+	ld a, [W_CURMENUITEMID] ; $cc26
+	cp c
+	jr nz, .asm_1eab8
+	ld hl, $d126
+	set 5, [hl]
+	ld a, [$FF00+$db]
+	ld [$FF00+$e0], a
+	ld hl, $6ae3
+	call PrintText
+	ld a, [$FF00+$e0]
+	ld c, a
+	ld b, $1
+	call Func_1ea8a
+	jp Func_1eb0a
+.asm_1eab8
+	call Func_3748
+	ld a, $a5
+	call Func_23b1
+	call Func_3748
+	ld hl, $6b05
+	call PrintText
+	ld a, [$FF00+$db]
+	add $2
+	ld c, a
+	ld b, $2
+	ld hl, $d79a
+	ld a, $10
+	call Predef ; indirect jump to Func_f666 (f666 (3:7666))
+	ld a, c
+	and a
+	ret nz
+	ld a, [$FF00+$db]
+	add $2
+	ld [$da38], a
+	ret
+
+INCBIN "baserom.gbc",$1eae3,$1eaea - $1eae3
+	ld a, [$FF00+$e0]
+	ld c, a
+	ld b, $2
+	call Func_1ea8a
+	ld a, c
+	and a
+	jp nz, TextScriptEnd
+	call Func_3748
+	ld a, $ad
+	call Func_23b1
+	call Func_3748
+	jp TextScriptEnd
+; 1eb05 (7:6b05)
 UnnamedText_1eb05: ; 0x1eb05
 	TX_FAR _UnnamedText_1eb05
 	db $50
 ; 0x1eb05 + 5 bytes
 
-INCBIN "baserom.gbc",$1eb0a,$1eb69 - $1eb0a
+; known jump sources: 3eb2 (0:3eb2), 1eab5 (7:6ab5)
+Func_1eb0a: ; 1eb0a (7:6b0a)
+	ld a, $6
+	ld [$FF00+$db], a
+.asm_1eb0e
+	ld a, [$FF00+$db]
+	dec a
+	add a
+	add a
+	ld d, $0
+	ld e, a
+	ld hl, $6b48
+	add hl, de
+	ld a, [hli]
+	ld b, [hl]
+	ld c, a
+	inc hl
+	ld a, [hl]
+	ld [$d12f], a
+	push bc
+	ld a, [$FF00+$db]
+	ld [$FF00+$e0], a
+	ld c, a
+	ld b, $2
+	call Func_1ea8a
+	ld a, c
+	and a
+	jr nz, .asm_1eb36
+	ld a, [$d12f]
+	jr .asm_1eb38
+.asm_1eb36
+	ld a, $e
+.asm_1eb38
+	pop bc
+	ld [$d09f], a
+	ld a, $17
+	call Predef ; indirect jump to Func_ee9e (ee9e (3:6e9e))
+	ld hl, $ffdb
+	dec [hl]
+	jr nz, .asm_1eb0e
+	ret
+
+INCBIN "baserom.gbc",$1eb48,$1eb69 - $1eb48
 
 UnnamedText_1eb69: ; 0x1eb69
 	TX_FAR _UnnamedText_1eb69
 	db $50
 ; 0x1eb69 + 5 bytes
 
-INCBIN "baserom.gbc",$1eb6e,$1ebdd - $1eb6e
-
+	call EnableAutoTextBoxDrawing
+	ld a, [$c109]
+	cp $4
+	ret nz
+	ld a, [$d7f2]
+	bit 7, a
+	jr nz, .asm_1ebd2
+	bit 3, a
+	jr nz, .asm_1eb86
+	bit 6, a
+	jr nz, .asm_1eb8b
+.asm_1eb86
+	ld a, $2d
+	jp Func_3ef5
+.asm_1eb8b
+	ld a, $1
+	ld [$cc3c], a
+	ld a, $2e
+	call Func_3ef5
+	ld c, $20
+	call DelayFrames
+	ld a, $8c
+	call Func_23b1
+	call Func_3748
+	ld c, $50
+	call DelayFrames
+	ld a, $9c
+	call Func_23b1
+	call Func_3748
+	ld c, $30
+	call DelayFrames
+	ld a, $8c
+	call Func_23b1
+	call Func_3748
+	ld c, $20
+	call DelayFrames
+	ld a, $86
+	call Func_23b1
+	call Func_3748
+	call Func_2307
+	ld hl, $d7f2
+	set 3, [hl]
+	ret
+.asm_1ebd2
+	ld a, $1
+	ld [$cc3c], a
+	ld a, $2f
+	call Func_3ef5
+	ret
+; 1ebdd (7:6bdd)
 UnnamedText_1ebdd: ; 0x1ebdd
 	TX_FAR _UnnamedText_1ebdd
 	db $50
 ; 0x1ebdd + 5 bytes
 
-INCBIN "baserom.gbc",$1ebe2,$1ec7f - $1ebe2
+INCBIN "baserom.gbc",$1ebe2,$1ebe8 - $1ebe2
+	ld a, $ff
+	ld [$c0ee], a
+	call Func_23b1
+	ld c, $10
+	call DelayFrames
+	ld a, $9d
+	call Func_23b1
+	call Func_3748
+	ld c, $3c
+	call DelayFrames
+	jp TextScriptEnd
+
+INCBIN "baserom.gbc",$1ec05,$1ec7f - $1ec05
 
 UnnamedText_1ec7f: ; 0x1ec7f
 	TX_FAR _UnnamedText_1ec7f
@@ -29618,7 +40623,479 @@ UnnamedText_1ecbd: ; 0x1ecbd
 
 SECTION "bank8",DATA,BANK[$8]
 
-INCBIN "baserom.gbc",$20000,$217e9 - $20000
+INCBIN "baserom.gbc",$20000,$2136e - $20000
+	ld a, [$d083]
+	cp $ff
+	jr z, .asm_2139b
+	bit 7, a
+	ret z
+	and $7f
+	jr nz, .asm_21383
+	call Func_213a7
+	ld a, $1e
+	jr .asm_21395
+.asm_21383
+	cp $14
+	jr nz, .asm_2138a
+	call Func_213ac
+.asm_2138a
+	ld a, $86
+	ld [$c02a], a
+	ld a, [$d083]
+	and $7f
+	dec a
+.asm_21395
+	set 7, a
+	ld [$d083], a
+	ret
+.asm_2139b
+	xor a
+	ld [$d083], a
+	ld [$c02a], a
+	ld de, $53c4
+	jr asm_213af
+
+; known jump sources: 2137c (8:537c)
+Func_213a7: ; 213a7 (8:53a7)
+	ld de, $53bc
+	jr asm_213af
+
+; known jump sources: 21387 (8:5387)
+Func_213ac: ; 213ac (8:53ac)
+	ld de, $53c0
+asm_213af: ; 213af (8:53af)
+	ld hl, $ff10
+	ld c, $5
+	xor a
+.asm_213b5
+	ld [hli], a
+	ld a, [de]
+	inc de
+	dec c
+	jr nz, .asm_213b5
+	ret
+
+INCBIN "baserom.gbc",$213bc,$213c8 - $213bc
+
+; known jump sources: 17e4d (5:7e4d)
+Func_213c8: ; 213c8 (8:53c8)
+	xor a
+	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	call Func_36f4
+	ld a, [$d5a2]
+	and a
+	jr nz, .asm_213f3
+	ld a, [$d74b]
+	bit 5, a
+	jr z, .asm_213ea
+	ld a, [$d5a2]
+	and a
+	jr nz, .asm_213f3
+	ld hl, $c3a0
+	ld b, $8
+	ld c, $e
+	jr .asm_213fa
+.asm_213ea
+	ld hl, $c3a0
+	ld b, $6
+	ld c, $e
+	jr .asm_213fa
+.asm_213f3
+	ld hl, $c3a0
+	ld b, $a
+	ld c, $e
+.asm_213fa
+	call TextBoxBorder
+	call Func_2429
+	ld a, $3
+	ld [W_MAXMENUITEMID], a ; $cc28
+	ld a, [$d7f1]
+	bit 0, a
+	jr nz, .asm_21414
+	ld hl, $c3ca
+	ld de, $548b
+	jr .asm_2141a
+.asm_21414
+	ld hl, $c3ca
+	ld de, $5497
+.asm_2141a
+	call PlaceString
+	ld hl, $c3f2
+	ld de, W_PLAYERNAME ; $d158
+	call PlaceString
+	ld l, c
+	ld h, b
+	ld de, $54a0
+	call PlaceString
+	ld a, [$d74b]
+	bit 5, a
+	jr z, .asm_21462
+	ld hl, $c41a
+	ld de, $54a5
+	call PlaceString
+	ld a, [$d5a2]
+	and a
+	jr z, .asm_2145a
+	ld a, $4
+	ld [W_MAXMENUITEMID], a ; $cc28
+	ld hl, $c442
+	ld de, $54b2
+	call PlaceString
+	ld hl, $c46a
+	ld de, $54ba
+	jr .asm_2146d
+.asm_2145a
+	ld hl, $c442
+	ld de, $54ba
+	jr .asm_2146d
+.asm_21462
+	ld a, $2
+	ld [W_MAXMENUITEMID], a ; $cc28
+	ld hl, $c41a
+	ld de, $54ba
+.asm_2146d
+	call PlaceString
+	ld a, $3
+	ld [W_MENUWATCHEDKEYS], a ; $cc29
+	ld a, $2
+	ld [W_TOPMENUITEMY], a ; $cc24
+	ld a, $1
+	ld [W_TOPMENUITEMX], a ; $cc25
+	xor a
+	ld [W_CURMENUITEMID], a ; $cc26
+	ld [W_OLDMENUITEMID], a ; $cc2a
+	ld a, $1
+	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ret
+
+INCBIN "baserom.gbc",$2148b,$214c2 - $2148b
+
+; known jump sources: 17f03 (5:7f03)
+Func_214c2: ; 214c2 (8:54c2)
+	ld hl, $d730
+	set 6, [hl]
+	xor a
+	ld [$ccd3], a
+	inc a
+	ld [$d0b6], a
+	call LoadHpBarAndStatusTilePatterns
+	ld a, [W_LISTSCROLLOFFSET] ; $cc36
+	push af
+	ld a, [$cd60]
+	bit 3, a
+	jr nz, Func_214e8
+	ld a, $99
+	call Func_23b1
+	ld hl, $57e9
+	call PrintText
+
+; known jump sources: 214db (8:54db), 215b8 (8:55b8), 215c8 (8:55c8), 215d1 (8:55d1), 215d7 (8:55d7), 21615 (8:5615), 21624 (8:5624), 21634 (8:5634), 2163d (8:563d), 21643 (8:5643), 21670 (8:5670), 2167f (8:567f), 21688 (8:5688), 216b0 (8:56b0), 216bb (8:56bb)
+Func_214e8: ; 214e8 (8:54e8)
+	ld a, [$ccd3]
+	ld [W_CURMENUITEMID], a ; $cc26
+	ld hl, $9780
+	ld de, $697e
+	ld bc, $e01
+	call CopyVideoData
+	call Func_3709
+	ld hl, $c3a0
+	ld b, $a
+	ld c, $c
+	call TextBoxBorder
+	ld hl, $c3ca
+	ld de, $56e1
+	call PlaceString
+	ld hl, W_TOPMENUITEMY ; $cc24
+	ld a, $2
+	ld [hli], a
+	dec a
+	ld [hli], a
+	inc hl
+	inc hl
+	ld a, $4
+	ld [hli], a
+	ld a, $3
+	ld [hli], a
+	xor a
+	ld [hli], a
+	ld [hli], a
+	ld hl, W_LISTSCROLLOFFSET ; $cc36
+	ld [hli], a
+	ld [hl], a
+	ld [W_PLAYERMONNUMBER], a ; $cc2f
+	ld hl, $57ee
+	call PrintText
+	ld hl, $c4c1
+	ld b, $2
+	ld c, $9
+	call TextBoxBorder
+	ld a, [$d5a0]
+	and $7f
+	cp $9
+	jr c, .asm_2154f
+	sub $9
+	ld hl, $c4f1
+	ld [hl], $f7
+	add $f6
+	jr .asm_21551
+.asm_2154f
+	add $f7
+.asm_21551
+	ld [$c4f2], a
+	ld hl, $c4ea
+	ld de, $5713
+	call PlaceString
+	ld a, $1
+	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	call Delay3
+	call HandleMenuInput
+	bit 1, a
+	jp nz, Func_21588
+	call PlaceUnfilledArrowMenuCursor
+	ld a, [W_CURMENUITEMID] ; $cc26
+	ld [$ccd3], a
+	and a
+	jp z, Func_21618
+	cp $1
+	jp z, Func_215ac
+	cp $2
+	jp z, Func_21673
+	cp $3
+	jp z, Func_216b3
+
+; known jump sources: 21569 (8:5569)
+Func_21588: ; 21588 (8:5588)
+	ld a, [$cd60]
+	bit 3, a
+	jr nz, .asm_2159a
+	call LoadTextBoxTilePatterns
+	ld a, $9a
+	call Func_23b1
+	call Func_3748
+.asm_2159a
+	ld hl, $cd60
+	res 5, [hl]
+	call Func_3701
+	pop af
+	ld [W_LISTSCROLLOFFSET], a ; $cc36
+	ld hl, $d730
+	res 6, [hl]
+	ret
+
+; known jump sources: 2157b (8:557b)
+Func_215ac: ; 215ac (8:55ac)
+	ld a, [W_NUMINPARTY] ; $d163
+	dec a
+	jr nz, .asm_215bb
+	ld hl, $57fd
+	call PrintText
+	jp Func_214e8
+.asm_215bb
+	ld a, [W_NUMINBOX] ; $da80
+	cp $14
+	jr nz, .asm_215cb
+	ld hl, $5802
+	call PrintText
+	jp Func_214e8
+.asm_215cb
+	ld hl, W_NUMINPARTY ; $d163
+	call Func_216be
+	jp c, Func_214e8
+	call Func_2174b
+	jp nc, Func_214e8
+	ld a, [$cf91]
+	call GetCryData
+	call Func_3740
+	ld a, $1
+	ld [$cf95], a
+	call Func_3a68
+	xor a
+	ld [$cf95], a
+	call RemovePokemon
+	call Func_3748
+	ld hl, W_WHICHTRADE ; $cd3d
+	ld a, [$d5a0]
+	and $7f
+	cp $9
+	jr c, .asm_2160a
+	sub $9
+	ld [hl], $f7
+	inc hl
+	add $f6
+	jr .asm_2160c
+.asm_2160a
+	add $f7
+.asm_2160c
+	ld [hli], a
+	ld [hl], $50
+	ld hl, $57f8
+	call PrintText
+	jp Func_214e8
+
+; known jump sources: 21576 (8:5576)
+Func_21618: ; 21618 (8:5618)
+	ld a, [W_NUMINBOX] ; $da80
+	and a
+	jr nz, .asm_21627
+	ld hl, $580c
+	call PrintText
+	jp Func_214e8
+.asm_21627
+	ld a, [W_NUMINPARTY] ; $d163
+	cp $6
+	jr nz, .asm_21637
+	ld hl, $5811
+	call PrintText
+	jp Func_214e8
+.asm_21637
+	ld hl, W_NUMINBOX ; $da80
+	call Func_216be
+	jp c, Func_214e8
+	call Func_2174b
+	jp nc, Func_214e8
+	ld a, [W_WHICHPOKEMON] ; $cf92
+	ld hl, $de06
+	call GetPartyMonName
+	ld a, [$cf91]
+	call GetCryData
+	call Func_3740
+	xor a
+	ld [$cf95], a
+	call Func_3a68
+	ld a, $1
+	ld [$cf95], a
+	call RemovePokemon
+	call Func_3748
+	ld hl, $5807
+	call PrintText
+	jp Func_214e8
+
+; known jump sources: 21580 (8:5580)
+Func_21673: ; 21673 (8:5673)
+	ld a, [W_NUMINBOX] ; $da80
+	and a
+	jr nz, .asm_21682
+	ld hl, $580c
+	call PrintText
+	jp Func_214e8
+.asm_21682
+	ld hl, W_NUMINBOX ; $da80
+	call Func_216be
+	jp c, Func_214e8
+	ld hl, $581b
+	call PrintText
+	call Func_35ec
+	ld a, [W_CURMENUITEMID] ; $cc26
+	and a
+	jr nz, .asm_21682
+	inc a
+	ld [$cf95], a
+	call RemovePokemon
+	call Func_3748
+	ld a, [$cf91]
+	call PlayCry
+	ld hl, $5820
+	call PrintText
+	jp Func_214e8
+
+; known jump sources: 21585 (8:5585)
+Func_216b3: ; 216b3 (8:56b3)
+	ld b, BANK(Func_738a1)
+	ld hl, Func_738a1
+	call Bankswitch ; indirect jump to Func_738a1 (738a1 (1c:78a1))
+	jp Func_214e8
+
+; known jump sources: 215ce (8:55ce), 2163a (8:563a), 21685 (8:5685)
+Func_216be: ; 216be (8:56be)
+	ld a, l
+	ld [$cf8b], a
+	ld a, h
+	ld [$cf8c], a
+	xor a
+	ld [$cf93], a
+	ld [W_LISTMENUID], a ; $cf94
+	inc a
+	ld [$d0b6], a
+	ld a, [$cc2b]
+	ld [W_CURMENUITEMID], a ; $cc26
+	call DisplayListMenuID
+	ld a, [W_CURMENUITEMID] ; $cc26
+	ld [$cc2b], a
+	ret
+
+INCBIN "baserom.gbc",$216e1,$2174b - $216e1
+
+; known jump sources: 215d4 (8:55d4), 21640 (8:5640)
+Func_2174b: ; 2174b (8:574b)
+	ld hl, $c471
+	ld b, $6
+	ld c, $9
+	call TextBoxBorder
+	ld a, [$ccd3]
+	and a
+	ld de, $57cb
+	jr nz, .asm_21761
+	ld de, $57d3
+.asm_21761
+	ld hl, $c49b
+	call PlaceString
+	ld hl, $c4c3
+	ld de, $57dc
+	call PlaceString
+	ld hl, W_TOPMENUITEMY ; $cc24
+	ld a, $c
+	ld [hli], a
+	ld a, $a
+	ld [hli], a
+	xor a
+	ld [hli], a
+	inc hl
+	ld a, $2
+	ld [hli], a
+	ld a, $3
+	ld [hli], a
+	xor a
+	ld [hl], a
+	ld hl, W_LISTSCROLLOFFSET ; $cc36
+	ld [hli], a
+	ld [hl], a
+	ld [W_PLAYERMONNUMBER], a ; $cc2f
+	ld [$cc2b], a
+.asm_2178f
+	call HandleMenuInput
+	bit 1, a
+	jr nz, .asm_2179f
+	ld a, [W_CURMENUITEMID] ; $cc26
+	and a
+	jr z, .asm_217a1
+	dec a
+	jr z, .asm_217a3
+.asm_2179f
+	and a
+	ret
+.asm_217a1
+	scf
+	ret
+.asm_217a3
+	call Func_3719
+	ld a, [$ccd3]
+	and a
+	ld a, $0
+	jr nz, .asm_217b0
+	ld a, $2
+.asm_217b0
+	ld [$cc49], a
+	ld a, $36
+	call Predef ; indirect jump to StatusScreen (12953 (4:6953))
+	ld a, $37
+	call Predef ; indirect jump to StatusScreen2 (12b57 (4:6b57))
+	call Func_3725
+	call ReloadTilesetTilePatterns
+	call GoPAL_SET_CF1C
+	call LoadGBPal
+	jr .asm_2178f
+
+INCBIN "baserom.gbc",$217cb,$217e9 - $217cb
 
 UnnamedText_217e9: ; 0x217e9
 	TX_FAR _UnnamedText_217e9
@@ -29687,7 +41164,1717 @@ UnnamedText_21865: ; 0x21865
 	db $50
 ; 0x21865 + 5 bytes
 
-INCBIN "baserom.gbc",$2186a,$23f52 - $2186a
+INCBIN "baserom.gbc",$2186a,$21879 - $2186a
+	ld c, $0
+.asm_2187b
+	ld b, $0
+	ld hl, $c026
+	add hl, bc
+	ld a, [hl]
+	and a
+	jr z, .asm_218a7
+	ld a, c
+	cp $4
+	jr nc, .asm_218a4
+	ld a, [$c002]
+	and a
+	jr z, .asm_218a4
+	bit 7, a
+	jr nz, .asm_218a7
+	set 7, a
+	ld [$c002], a
+	xor a
+	ld [$FF00+$25], a
+	ld [$FF00+$1a], a
+	ld a, $80
+	ld [$FF00+$1a], a
+	jr .asm_218a7
+.asm_218a4
+	call Func_218ae
+.asm_218a7
+	ld a, c
+	inc c
+	cp $7
+	jr nz, .asm_2187b
+	ret
+
+; known jump sources: 218a4 (8:58a4)
+Func_218ae: ; 218ae (8:58ae)
+	ld b, $0
+	ld hl, $c0b6
+	add hl, bc
+	ld a, [hl]
+	cp $1
+	jp z, Func_21946
+	dec a
+	ld [hl], a
+	ld a, c
+	cp $4
+	jr nc, .asm_218ca
+	ld hl, $c02a
+	add hl, bc
+	ld a, [hl]
+	and a
+	jr z, .asm_218ca
+	ret
+.asm_218ca
+	ld hl, $c02e
+	add hl, bc
+	bit 6, [hl]
+	jr z, .asm_218d5
+	call Func_21fcc
+.asm_218d5
+	ld b, $0
+	ld hl, $c036
+	add hl, bc
+	bit 0, [hl]
+	jr nz, .asm_218e7
+	ld hl, $c02e
+	add hl, bc
+	bit 2, [hl]
+	jr nz, .asm_218fb
+.asm_218e7
+	ld hl, $c02e
+	add hl, bc
+	bit 4, [hl]
+	jr z, .asm_218f2
+	jp Func_21eb8
+.asm_218f2
+	ld hl, $c04e
+	add hl, bc
+	ld a, [hl]
+	and a
+	jr z, .asm_218fc
+	dec [hl]
+.asm_218fb
+	ret
+.asm_218fc
+	ld hl, $c056
+	add hl, bc
+	ld a, [hl]
+	and a
+	jr nz, .asm_21905
+	ret
+.asm_21905
+	ld d, a
+	ld hl, $c05e
+	add hl, bc
+	ld a, [hl]
+	and $f
+	and a
+	jr z, .asm_21912
+	dec [hl]
+	ret
+.asm_21912
+	ld a, [hl]
+	swap [hl]
+	or [hl]
+	ld [hl], a
+	ld hl, $c066
+	add hl, bc
+	ld e, [hl]
+	ld hl, $c02e
+	add hl, bc
+	bit 3, [hl]
+	jr z, .asm_21932
+	res 3, [hl]
+	ld a, d
+	and $f
+	ld d, a
+	ld a, e
+	sub d
+	jr nc, .asm_21930
+	ld a, $0
+.asm_21930
+	jr .asm_2193e
+.asm_21932
+	set 3, [hl]
+	ld a, d
+	and $f0
+	swap a
+	add e
+	jr nc, .asm_2193e
+	ld a, $ff
+.asm_2193e
+	ld d, a
+	ld b, $3
+	call Func_21ff7
+	ld [hl], d
+	ret
+
+; known jump sources: 218b7 (8:58b7)
+Func_21946: ; 21946 (8:5946)
+	ld hl, $c06e
+	add hl, bc
+	ld a, [hl]
+	ld hl, $c04e
+	add hl, bc
+	ld [hl], a
+	ld hl, $c02e
+	add hl, bc
+	res 4, [hl]
+	res 5, [hl]
+	ld a, c
+	cp $4
+	jr nz, .asm_21963
+	ld a, [$d083]
+	bit 7, a
+	ret nz
+.asm_21963
+	call Func_21967
+	ret
+
+; known jump sources: 21963 (8:5963), 219bd (8:59bd), 21a27 (8:5a27), 21a49 (8:5a49), 21a62 (8:5a62), 21aa1 (8:5aa1), 21ab3 (8:5ab3), 21aeb (8:5aeb), 21b38 (8:5b38), 21b78 (8:5b78), 21b85 (8:5b85), 21ba4 (8:5ba4), 21bc2 (8:5bc2), 21bce (8:5bce), 21bdd (8:5bdd), 21bf0 (8:5bf0), 21c59 (8:5c59)
+Func_21967: ; 21967 (8:5967)
+	call Func_21fe4
+	ld d, a
+	cp $ff
+	jp nz, Func_219f5
+	ld b, $0
+	ld hl, $c02e
+	add hl, bc
+	bit 1, [hl]
+	jr nz, .asm_219a5
+	ld a, c
+	cp $3
+	jr nc, .asm_21981
+	jr .asm_219c0
+.asm_21981
+	res 2, [hl]
+	ld hl, $c036
+	add hl, bc
+	res 0, [hl]
+	cp $6
+	jr nz, .asm_21995
+	ld a, $0
+	ld [$FF00+$1a], a
+	ld a, $80
+	ld [$FF00+$1a], a
+.asm_21995
+	jr nz, .asm_219a3
+	ld a, [$c003]
+	and a
+	jr z, .asm_219a3
+	xor a
+	ld [$c003], a
+	jr .asm_219c0
+.asm_219a3
+	jr .asm_219c9
+.asm_219a5
+	res 1, [hl]
+	ld d, $0
+	ld a, c
+	add a
+	ld e, a
+	ld hl, $c006
+	add hl, de
+	push hl
+	ld hl, $c016
+	add hl, de
+	ld e, l
+	ld d, h
+	pop hl
+	ld a, [de]
+	ld [hli], a
+	inc de
+	ld a, [de]
+	ld [hl], a
+	jp Func_21967
+.asm_219c0
+	ld hl, $62de
+	add hl, bc
+	ld a, [$FF00+$25]
+	and [hl]
+	ld [$FF00+$25], a
+.asm_219c9
+	ld a, [$c02a]
+	cp $14
+	jr nc, .asm_219d2
+	jr .asm_219ef
+.asm_219d2
+	ld a, [$c02a]
+	cp $86
+	jr z, .asm_219ef
+	jr c, .asm_219dd
+	jr .asm_219ef
+.asm_219dd
+	ld a, c
+	cp $4
+	jr z, .asm_219e6
+	call Func_21e6d
+	ret c
+.asm_219e6
+	ld a, [$c005]
+	ld [$FF00+$24], a
+	xor a
+	ld [$c005], a
+.asm_219ef
+	ld hl, $c026
+	add hl, bc
+	ld [hl], b
+	ret
+
+; known jump sources: 2196d (8:596d)
+Func_219f5: ; 219f5 (8:59f5)
+	cp $fd
+	jp nz, Func_21a2a
+	call Func_21fe4
+	push af
+	call Func_21fe4
+	ld d, a
+	pop af
+	ld e, a
+	push de
+	ld d, $0
+	ld a, c
+	add a
+	ld e, a
+	ld hl, $c006
+	add hl, de
+	push hl
+	ld hl, $c016
+	add hl, de
+	ld e, l
+	ld d, h
+	pop hl
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hld]
+	ld [de], a
+	pop de
+	ld [hl], e
+	inc hl
+	ld [hl], d
+	ld b, $0
+	ld hl, $c02e
+	add hl, bc
+	set 1, [hl]
+	jp Func_21967
+
+; known jump sources: 219f7 (8:59f7)
+Func_21a2a: ; 21a2a (8:5a2a)
+	cp $fe
+	jp nz, Func_21a65
+	call Func_21fe4
+	ld e, a
+	and a
+	jr z, .asm_21a4e
+	ld b, $0
+	ld hl, $c0be
+	add hl, bc
+	ld a, [hl]
+	cp e
+	jr nz, .asm_21a4c
+	ld a, $1
+	ld [hl], a
+	call Func_21fe4
+	call Func_21fe4
+	jp Func_21967
+.asm_21a4c
+	inc a
+	ld [hl], a
+.asm_21a4e
+	call Func_21fe4
+	push af
+	call Func_21fe4
+	ld b, a
+	ld d, $0
+	ld a, c
+	add a
+	ld e, a
+	ld hl, $c006
+	add hl, de
+	pop af
+	ld [hli], a
+	ld [hl], b
+	jp Func_21967
+
+; known jump sources: 21a2c (8:5a2c)
+Func_21a65: ; 21a65 (8:5a65)
+	and $f0
+	cp $d0
+	jp nz, Func_21aa4
+	ld a, d
+	and $f
+	ld b, $0
+	ld hl, $c0c6
+	add hl, bc
+	ld [hl], a
+	ld a, c
+	cp $3
+	jr z, .asm_21aa1
+	call Func_21fe4
+	ld d, a
+	ld a, c
+	cp $2
+	jr z, .asm_21a8d
+	cp $6
+	jr nz, .asm_21a9a
+	ld hl, $c0e7
+	jr .asm_21a90
+.asm_21a8d
+	ld hl, $c0e6
+.asm_21a90
+	ld a, d
+	and $f
+	ld [hl], a
+	ld a, d
+	and $30
+	sla a
+	ld d, a
+.asm_21a9a
+	ld b, $0
+	ld hl, $c0de
+	add hl, bc
+	ld [hl], d
+.asm_21aa1
+	jp Func_21967
+
+; known jump sources: 21a69 (8:5a69)
+Func_21aa4: ; 21aa4 (8:5aa4)
+	ld a, d
+	cp $e8
+	jr nz, .asm_21ab6
+	ld b, $0
+	ld hl, $c02e
+	add hl, bc
+	ld a, [hl]
+	xor $1
+	ld [hl], a
+	jp Func_21967
+.asm_21ab6
+	cp $ea
+	jr nz, .asm_21aee
+	call Func_21fe4
+	ld b, $0
+	ld hl, $c04e
+	add hl, bc
+	ld [hl], a
+	ld hl, $c06e
+	add hl, bc
+	ld [hl], a
+	call Func_21fe4
+	ld d, a
+	and $f0
+	swap a
+	ld b, $0
+	ld hl, $c056
+	add hl, bc
+	srl a
+	ld e, a
+	adc b
+	swap a
+	or e
+	ld [hl], a
+	ld a, d
+	and $f
+	ld d, a
+	ld hl, $c05e
+	add hl, bc
+	swap a
+	or d
+	ld [hl], a
+	jp Func_21967
+.asm_21aee
+	cp $eb
+	jr nz, .asm_21b26
+	call Func_21fe4
+	ld b, $0
+	ld hl, $c076
+	add hl, bc
+	ld [hl], a
+	call Func_21fe4
+	ld d, a
+	and $f0
+	swap a
+	ld b, a
+	ld a, d
+	and $f
+	call Func_22017
+	ld b, $0
+	ld hl, $c0a6
+	add hl, bc
+	ld [hl], d
+	ld hl, $c0ae
+	add hl, bc
+	ld [hl], e
+	ld b, $0
+	ld hl, $c02e
+	add hl, bc
+	set 4, [hl]
+	call Func_21fe4
+	ld d, a
+	jp Func_21c8b
+.asm_21b26
+	cp $ec
+	jr nz, .asm_21b3b
+	call Func_21fe4
+	rrca
+	rrca
+	and $c0
+	ld b, $0
+	ld hl, $c03e
+	add hl, bc
+	ld [hl], a
+	jp Func_21967
+.asm_21b3b
+	cp $ed
+	jr nz, .asm_21b7b
+	ld a, c
+	cp $4
+	jr nc, .asm_21b5f
+	call Func_21fe4
+	ld [$c0e8], a
+	call Func_21fe4
+	ld [$c0e9], a
+	xor a
+	ld [$c0ce], a
+	ld [$c0cf], a
+	ld [$c0d0], a
+	ld [$c0d1], a
+	jr .asm_21b78
+.asm_21b5f
+	call Func_21fe4
+	ld [$c0ea], a
+	call Func_21fe4
+	ld [$c0eb], a
+	xor a
+	ld [$c0d2], a
+	ld [$c0d3], a
+	ld [$c0d4], a
+	ld [$c0d5], a
+.asm_21b78
+	jp Func_21967
+.asm_21b7b
+	cp $ee
+	jr nz, .asm_21b88
+	call Func_21fe4
+	ld [$c004], a
+	jp Func_21967
+.asm_21b88
+	cp $ef
+	jr nz, .asm_21ba7
+	call Func_21fe4
+	push bc
+	call Func_22035
+	pop bc
+	ld a, [$c003]
+	and a
+	jr nz, .asm_21ba4
+	ld a, [$c02d]
+	ld [$c003], a
+	xor a
+	ld [$c02d], a
+.asm_21ba4
+	jp Func_21967
+.asm_21ba7
+	cp $fc
+	jr nz, .asm_21bc5
+	call Func_21fe4
+	ld b, $0
+	ld hl, $c046
+	add hl, bc
+	ld [hl], a
+	and $c0
+	ld hl, $c03e
+	add hl, bc
+	ld [hl], a
+	ld hl, $c02e
+	add hl, bc
+	set 6, [hl]
+	jp Func_21967
+.asm_21bc5
+	cp $f0
+	jr nz, .asm_21bd1
+	call Func_21fe4
+	ld [$FF00+$24], a
+	jp Func_21967
+.asm_21bd1
+	cp $f8
+	jr nz, .asm_21be0
+	ld b, $0
+	ld hl, $c036
+	add hl, bc
+	set 0, [hl]
+	jp Func_21967
+.asm_21be0
+	and $f0
+	cp $e0
+	jr nz, .asm_21bf3
+	ld hl, $c0d6
+	ld b, $0
+	add hl, bc
+	ld a, d
+	and $f
+	ld [hl], a
+	jp Func_21967
+.asm_21bf3
+	cp $20
+	jr nz, .asm_21c40
+	ld a, c
+	cp $3
+	jr c, .asm_21c40
+	ld b, $0
+	ld hl, $c036
+	add hl, bc
+	bit 0, [hl]
+	jr nz, .asm_21c40
+	call Func_21c8b
+	ld d, a
+	ld b, $0
+	ld hl, $c03e
+	add hl, bc
+	ld a, [hl]
+	or d
+	ld d, a
+	ld b, $1
+	call Func_21ff7
+	ld [hl], d
+	call Func_21fe4
+	ld d, a
+	ld b, $2
+	call Func_21ff7
+	ld [hl], d
+	call Func_21fe4
+	ld e, a
+	ld a, c
+	cp $7
+	ld a, $0
+	jr z, .asm_21c33
+	push de
+	call Func_21fe4
+	pop de
+.asm_21c33
+	ld d, a
+	push de
+	call Func_21daa
+	call Func_21d79
+	pop de
+	call Func_21dcc
+	ret
+.asm_21c40
+	ld a, c
+	cp $4
+	jr c, .asm_21c5c
+	ld a, d
+	cp $10
+	jr nz, .asm_21c5c
+	ld b, $0
+	ld hl, $c036
+	add hl, bc
+	bit 0, [hl]
+	jr nz, .asm_21c5c
+	call Func_21fe4
+	ld [$FF00+$10], a
+	jp Func_21967
+.asm_21c5c
+	ld a, c
+	cp $3
+	jr nz, Func_21c8b
+	ld a, d
+	and $f0
+	cp $b0
+	jr z, .asm_21c76
+	jr nc, Func_21c8b
+	swap a
+	ld b, a
+	ld a, d
+	and $f
+	ld d, a
+	ld a, b
+	push de
+	push bc
+	jr .asm_21c7e
+.asm_21c76
+	ld a, d
+	and $f
+	push af
+	push bc
+	call Func_21fe4
+.asm_21c7e
+	ld d, a
+	ld a, [$c003]
+	and a
+	jr nz, .asm_21c89
+	ld a, d
+	call Func_22035
+.asm_21c89
+	pop bc
+	pop de
+
+; known jump sources: 21b23 (8:5b23), 21c06 (8:5c06), 21c5f (8:5c5f), 21c68 (8:5c68)
+Func_21c8b: ; 21c8b (8:5c8b)
+	ld a, d
+	push af
+	and $f
+	inc a
+	ld b, $0
+	ld e, a
+	ld d, b
+	ld hl, $c0c6
+	add hl, bc
+	ld a, [hl]
+	ld l, b
+	call Func_22006
+	ld a, c
+	cp $4
+	jr nc, .asm_21cac
+	ld a, [$c0e8]
+	ld d, a
+	ld a, [$c0e9]
+	ld e, a
+	jr .asm_21cbf
+.asm_21cac
+	ld d, $1
+	ld e, $0
+	cp $7
+	jr z, .asm_21cbf
+	call Func_21e2f
+	ld a, [$c0ea]
+	ld d, a
+	ld a, [$c0eb]
+	ld e, a
+.asm_21cbf
+	ld a, l
+	ld b, $0
+	ld hl, $c0ce
+	add hl, bc
+	ld l, [hl]
+	call Func_22006
+	ld e, l
+	ld d, h
+	ld hl, $c0ce
+	add hl, bc
+	ld [hl], e
+	ld a, d
+	ld hl, $c0b6
+	add hl, bc
+	ld [hl], a
+	ld hl, $c036
+	add hl, bc
+	bit 0, [hl]
+	jr nz, .asm_21ce9
+	ld hl, $c02e
+	add hl, bc
+	bit 2, [hl]
+	jr z, .asm_21ce9
+	pop hl
+	ret
+.asm_21ce9
+	pop af
+	and $f0
+	cp $c0
+	jr nz, .asm_21d20
+	ld a, c
+	cp $4
+	jr nc, .asm_21cfd
+	ld hl, $c02a
+	add hl, bc
+	ld a, [hl]
+	and a
+	jr nz, .asm_21d1f
+.asm_21cfd
+	ld a, c
+	cp $2
+	jr z, .asm_21d06
+	cp $6
+	jr nz, .asm_21d13
+.asm_21d06
+	ld b, $0
+	ld hl, $62de
+	add hl, bc
+	ld a, [$FF00+$25]
+	and [hl]
+	ld [$FF00+$25], a
+	jr .asm_21d1f
+.asm_21d13
+	ld b, $2
+	call Func_21ff7
+	ld a, $8
+	ld [hli], a
+	inc hl
+	ld a, $80
+	ld [hl], a
+.asm_21d1f
+	ret
+.asm_21d20
+	swap a
+	ld b, $0
+	ld hl, $c0d6
+	add hl, bc
+	ld b, [hl]
+	call Func_22017
+	ld b, $0
+	ld hl, $c02e
+	add hl, bc
+	bit 4, [hl]
+	jr z, .asm_21d39
+	call Func_21f4e
+.asm_21d39
+	push de
+	ld a, c
+	cp $4
+	jr nc, .asm_21d4e
+	ld hl, $c02a
+	ld d, $0
+	ld e, a
+	add hl, de
+	ld a, [hl]
+	and a
+	jr nz, .asm_21d4c
+	jr .asm_21d4e
+.asm_21d4c
+	pop de
+	ret
+.asm_21d4e
+	ld b, $0
+	ld hl, $c0de
+	add hl, bc
+	ld d, [hl]
+	ld b, $2
+	call Func_21ff7
+	ld [hl], d
+	call Func_21daa
+	call Func_21d79
+	pop de
+	ld b, $0
+	ld hl, $c02e
+	add hl, bc
+	bit 0, [hl]
+	jr z, .asm_21d70
+	inc e
+	jr nc, .asm_21d70
+	inc d
+.asm_21d70
+	ld hl, $c066
+	add hl, bc
+	ld [hl], e
+	call Func_21dcc
+	ret
+
+; known jump sources: 21c38 (8:5c38), 21d5e (8:5d5e)
+Func_21d79: ; 21d79 (8:5d79)
+	ld b, $0
+	ld hl, $62e6
+	add hl, bc
+	ld a, [$FF00+$25]
+	or [hl]
+	ld d, a
+	ld a, c
+	cp $7
+	jr z, .asm_21d94
+	cp $4
+	jr nc, .asm_21da6
+	ld hl, $c02a
+	add hl, bc
+	ld a, [hl]
+	and a
+	jr nz, .asm_21da6
+.asm_21d94
+	ld a, [$c004]
+	ld hl, $62e6
+	add hl, bc
+	and [hl]
+	ld d, a
+	ld a, [$FF00+$25]
+	ld hl, $62de
+	add hl, bc
+	and [hl]
+	or d
+	ld d, a
+.asm_21da6
+	ld a, d
+	ld [$FF00+$25], a
+	ret
+
+; known jump sources: 21c35 (8:5c35), 21d5b (8:5d5b)
+Func_21daa: ; 21daa (8:5daa)
+	ld b, $0
+	ld hl, $c0b6
+	add hl, bc
+	ld d, [hl]
+	ld a, c
+	cp $2
+	jr z, .asm_21dc5
+	cp $6
+	jr z, .asm_21dc5
+	ld a, d
+	and $3f
+	ld d, a
+	ld hl, $c03e
+	add hl, bc
+	ld a, [hl]
+	or d
+	ld d, a
+.asm_21dc5
+	ld b, $1
+	call Func_21ff7
+	ld [hl], d
+	ret
+
+; known jump sources: 21c3c (8:5c3c), 21d75 (8:5d75)
+Func_21dcc: ; 21dcc (8:5dcc)
+	ld a, c
+	cp $2
+	jr z, .asm_21dd5
+	cp $6
+	jr nz, .asm_21e02
+.asm_21dd5
+	push de
+	ld de, $c0e6
+	cp $2
+	jr z, .asm_21de0
+	ld de, $c0e7
+.asm_21de0
+	ld a, [de]
+	add a
+	ld d, $0
+	ld e, a
+	ld hl, $4361
+	add hl, de
+	ld e, [hl]
+	inc hl
+	ld d, [hl]
+	ld hl, $ff30
+	ld b, $f
+	ld a, $0
+	ld [$FF00+$1a], a
+.asm_21df5
+	ld a, [de]
+	inc de
+	ld [hli], a
+	ld a, b
+	dec b
+	and a
+	jr nz, .asm_21df5
+	ld a, $80
+	ld [$FF00+$1a], a
+	pop de
+.asm_21e02
+	ld a, d
+	or $80
+	and $c7
+	ld d, a
+	ld b, $3
+	call Func_21ff7
+	ld [hl], e
+	inc hl
+	ld [hl], d
+	ld a, c
+	cp $4
+	jr c, .asm_21e18
+	call Func_21e56
+.asm_21e18
+	ret
+
+INCBIN "baserom.gbc",$21e19,$21e2f - $21e19
+
+; known jump sources: 21cb4 (8:5cb4)
+Func_21e2f: ; 21e2f (8:5e2f)
+	call Func_21e8b
+	jr c, .asm_21e39
+	call Func_21e9f
+	jr nc, .asm_21e4c
+.asm_21e39
+	ld d, $0
+	ld a, [$c0f2]
+	add $80
+	jr nc, .asm_21e43
+	inc d
+.asm_21e43
+	ld [$c0eb], a
+	ld a, d
+	ld [$c0ea], a
+	jr .asm_21e55
+.asm_21e4c
+	xor a
+	ld [$c0eb], a
+	ld a, $1
+	ld [$c0ea], a
+.asm_21e55
+	ret
+
+; known jump sources: 21e15 (8:5e15)
+Func_21e56: ; 21e56 (8:5e56)
+	call Func_21e8b
+	jr c, .asm_21e60
+	call Func_21e9f
+	jr nc, .asm_21e6c
+.asm_21e60
+	ld a, [$c0f1]
+	add e
+	jr nc, .asm_21e67
+	inc d
+.asm_21e67
+	dec hl
+	ld e, a
+	ld [hl], e
+	inc hl
+	ld [hl], d
+.asm_21e6c
+	ret
+
+; known jump sources: 219e2 (8:59e2)
+Func_21e6d: ; 21e6d (8:5e6d)
+	call Func_21e8b
+	jr nc, .asm_21e88
+	ld hl, $c006
+	ld e, c
+	ld d, $0
+	sla e
+	rl d
+	add hl, de
+	ld a, [hl]
+	sub $1
+	ld [hl], a
+	inc hl
+	ld a, [hl]
+	sbc $0
+	ld [hl], a
+	scf
+	ret
+.asm_21e88
+	scf
+	ccf
+	ret
+
+; known jump sources: 21e2f (8:5e2f), 21e56 (8:5e56), 21e6d (8:5e6d)
+Func_21e8b: ; 21e8b (8:5e8b)
+	ld a, [$c02a]
+	cp $14
+	jr nc, .asm_21e94
+	jr .asm_21e9a
+.asm_21e94
+	cp $86
+	jr z, .asm_21e9a
+	jr c, .asm_21e9d
+.asm_21e9a
+	scf
+	ccf
+	ret
+.asm_21e9d
+	scf
+	ret
+
+; known jump sources: 21e34 (8:5e34), 21e5b (8:5e5b)
+Func_21e9f: ; 21e9f (8:5e9f)
+	ld a, [$c02d]
+	ld b, a
+	ld a, [$c02a]
+	or b
+	cp $9d
+	jr nc, .asm_21ead
+	jr .asm_21eb3
+.asm_21ead
+	cp $ea
+	jr z, .asm_21eb3
+	jr c, .asm_21eb6
+.asm_21eb3
+	scf
+	ccf
+	ret
+.asm_21eb6
+	scf
+	ret
+
+; known jump sources: 218ef (8:58ef)
+Func_21eb8: ; 21eb8 (8:5eb8)
+	ld hl, $c02e
+	add hl, bc
+	bit 5, [hl]
+	jp nz, Func_21eff
+	ld hl, $c09e
+	add hl, bc
+	ld e, [hl]
+	ld hl, $c096
+	add hl, bc
+	ld d, [hl]
+	ld hl, $c07e
+	add hl, bc
+	ld l, [hl]
+	ld h, b
+	add hl, de
+	ld d, h
+	ld e, l
+	ld hl, $c08e
+	add hl, bc
+	push hl
+	ld hl, $c086
+	add hl, bc
+	ld a, [hl]
+	pop hl
+	add [hl]
+	ld [hl], a
+	ld a, $0
+	adc e
+	ld e, a
+	ld a, $0
+	adc d
+	ld d, a
+	ld hl, $c0a6
+	add hl, bc
+	ld a, [hl]
+	cp d
+	jp c, Func_21f45
+	jr nz, asm_21f32
+	ld hl, $c0ae
+	add hl, bc
+	ld a, [hl]
+	cp e
+	jp c, Func_21f45
+	jr asm_21f32
+
+; known jump sources: 21ebe (8:5ebe)
+Func_21eff: ; 21eff (8:5eff)
+	ld hl, $c09e
+	add hl, bc
+	ld a, [hl]
+	ld hl, $c096
+	add hl, bc
+	ld d, [hl]
+	ld hl, $c07e
+	add hl, bc
+	ld e, [hl]
+	sub e
+	ld e, a
+	ld a, d
+	sbc b
+	ld d, a
+	ld hl, $c086
+	add hl, bc
+	ld a, [hl]
+	add a
+	ld [hl], a
+	ld a, e
+	sbc b
+	ld e, a
+	ld a, d
+	sbc b
+	ld d, a
+	ld hl, $c0a6
+	add hl, bc
+	ld a, d
+	cp [hl]
+	jr c, Func_21f45
+	jr nz, asm_21f32
+	ld hl, $c0ae
+	add hl, bc
+	ld a, e
+	cp [hl]
+	jr c, Func_21f45
+asm_21f32: ; 21f32 (8:5f32)
+	ld hl, $c09e
+	add hl, bc
+	ld [hl], e
+	ld hl, $c096
+	add hl, bc
+	ld [hl], d
+	ld b, $3
+	call Func_21ff7
+	ld a, e
+	ld [hli], a
+	ld [hl], d
+	ret
+
+; known jump sources: 21eef (8:5eef), 21efa (8:5efa), 21f26 (8:5f26), 21f30 (8:5f30)
+Func_21f45: ; 21f45 (8:5f45)
+	ld hl, $c02e
+	add hl, bc
+	res 4, [hl]
+	res 5, [hl]
+	ret
+
+; known jump sources: 21d36 (8:5d36)
+Func_21f4e: ; 21f4e (8:5f4e)
+	ld hl, $c096
+	add hl, bc
+	ld [hl], d
+	ld hl, $c09e
+	add hl, bc
+	ld [hl], e
+	ld hl, $c0b6
+	add hl, bc
+	ld a, [hl]
+	ld hl, $c076
+	add hl, bc
+	sub [hl]
+	jr nc, .asm_21f66
+	ld a, $1
+.asm_21f66
+	ld [hl], a
+	ld hl, $c0ae
+	add hl, bc
+	ld a, e
+	sub [hl]
+	ld e, a
+	ld a, d
+	sbc b
+	ld hl, $c0a6
+	add hl, bc
+	sub [hl]
+	jr c, .asm_21f82
+	ld d, a
+	ld b, $0
+	ld hl, $c02e
+	add hl, bc
+	set 5, [hl]
+	jr .asm_21fa5
+.asm_21f82
+	ld hl, $c096
+	add hl, bc
+	ld d, [hl]
+	ld hl, $c09e
+	add hl, bc
+	ld e, [hl]
+	ld hl, $c0ae
+	add hl, bc
+	ld a, [hl]
+	sub e
+	ld e, a
+	ld a, d
+	sbc b
+	ld d, a
+	ld hl, $c0a6
+	add hl, bc
+	ld a, [hl]
+	sub d
+	ld d, a
+	ld b, $0
+	ld hl, $c02e
+	add hl, bc
+	res 5, [hl]
+.asm_21fa5
+	ld hl, $c076
+	add hl, bc
+.asm_21fa9
+	inc b
+	ld a, e
+	sub [hl]
+	ld e, a
+	jr nc, .asm_21fa9
+	ld a, d
+	and a
+	jr z, .asm_21fb7
+	dec a
+	ld d, a
+	jr .asm_21fa9
+.asm_21fb7
+	ld a, e
+	add [hl]
+	ld d, b
+	ld b, $0
+	ld hl, $c07e
+	add hl, bc
+	ld [hl], d
+	ld hl, $c086
+	add hl, bc
+	ld [hl], a
+	ld hl, $c08e
+	add hl, bc
+	ld [hl], a
+	ret
+
+; known jump sources: 218d2 (8:58d2)
+Func_21fcc: ; 21fcc (8:5fcc)
+	ld b, $0
+	ld hl, $c046
+	add hl, bc
+	ld a, [hl]
+	rlca
+	rlca
+	ld [hl], a
+	and $c0
+	ld d, a
+	ld b, $1
+	call Func_21ff7
+	ld a, [hl]
+	and $3f
+	or d
+	ld [hl], a
+	ret
+
+; known jump sources: 21967 (8:5967), 219fa (8:59fa), 219fe (8:59fe), 21a2f (8:5a2f), 21a43 (8:5a43), 21a46 (8:5a46), 21a4e (8:5a4e), 21a52 (8:5a52), 21a7b (8:5a7b), 21aba (8:5aba), 21ac9 (8:5ac9), 21af2 (8:5af2), 21afc (8:5afc), 21b1f (8:5b1f), 21b2a (8:5b2a), 21b44 (8:5b44), 21b4a (8:5b4a), 21b5f (8:5b5f), 21b65 (8:5b65), 21b7f (8:5b7f), 21b8c (8:5b8c), 21bab (8:5bab), 21bc9 (8:5bc9), 21c19 (8:5c19), 21c23 (8:5c23), 21c2f (8:5c2f), 21c54 (8:5c54), 21c7b (8:5c7b)
+Func_21fe4: ; 21fe4 (8:5fe4)
+	ld d, $0
+	ld a, c
+	add a
+	ld e, a
+	ld hl, $c006
+	add hl, de
+	ld a, [hli]
+	ld e, a
+	ld a, [hld]
+	ld d, a
+	ld a, [de]
+	inc de
+	ld [hl], e
+	inc hl
+	ld [hl], d
+	ret
+
+; known jump sources: 21941 (8:5941), 21c15 (8:5c15), 21c1f (8:5c1f), 21d15 (8:5d15), 21d57 (8:5d57), 21dc7 (8:5dc7), 21e0a (8:5e0a), 21f3e (8:5f3e), 21fdb (8:5fdb)
+Func_21ff7: ; 21ff7 (8:5ff7)
+	ld a, c
+	ld hl, $62d6
+	add l
+	jr nc, .asm_21fff
+	inc h
+.asm_21fff
+	ld l, a
+	ld a, [hl]
+	add b
+	ld l, a
+	ld h, $ff
+	ret
+
+; known jump sources: 21c9a (8:5c9a), 21cc7 (8:5cc7)
+Func_22006: ; 22006 (8:6006)
+	ld h, $0
+.asm_22008
+	srl a
+	jr nc, .asm_2200d
+	add hl, de
+.asm_2200d
+	sla e
+	rl d
+	and a
+	jr z, .asm_22016
+	jr .asm_22008
+.asm_22016
+	ret
+
+; known jump sources: 21b08 (8:5b08), 21d29 (8:5d29)
+Func_22017: ; 22017 (8:6017)
+	ld h, $0
+	ld l, a
+	add hl, hl
+	ld d, h
+	ld e, l
+	ld hl, $62ee
+	add hl, de
+	ld e, [hl]
+	inc hl
+	ld d, [hl]
+	ld a, b
+.asm_22025
+	cp $7
+	jr z, .asm_22030
+	sra d
+	rr e
+	inc a
+	jr .asm_22025
+.asm_22030
+	ld a, $8
+	add d
+	ld d, a
+	ret
+
+; known jump sources: 21b90 (8:5b90), 21c86 (8:5c86)
+Func_22035: ; 22035 (8:6035)
+	ld [$c001], a
+	cp $ff
+	jp z, Func_221f3
+	cp $e9
+	jp z, Func_2210d
+	jp c, Func_2210d
+	cp $fe
+	jr z, .asm_2204c
+	jp nc, Func_2210d
+.asm_2204c
+	xor a
+	ld [$c000], a
+	ld [$c003], a
+	ld [$c0e9], a
+	ld [$c0e6], a
+	ld [$c0e7], a
+	ld d, $8
+	ld hl, $c016
+	call Func_22248
+	ld hl, $c006
+	call Func_22248
+	ld d, $4
+	ld hl, $c026
+	call Func_22248
+	ld hl, $c02e
+	call Func_22248
+	ld hl, $c03e
+	call Func_22248
+	ld hl, $c046
+	call Func_22248
+	ld hl, $c04e
+	call Func_22248
+	ld hl, $c056
+	call Func_22248
+	ld hl, $c05e
+	call Func_22248
+	ld hl, $c066
+	call Func_22248
+	ld hl, $c06e
+	call Func_22248
+	ld hl, $c036
+	call Func_22248
+	ld hl, $c076
+	call Func_22248
+	ld hl, $c07e
+	call Func_22248
+	ld hl, $c086
+	call Func_22248
+	ld hl, $c08e
+	call Func_22248
+	ld hl, $c096
+	call Func_22248
+	ld hl, $c09e
+	call Func_22248
+	ld hl, $c0a6
+	call Func_22248
+	ld hl, $c0ae
+	call Func_22248
+	ld a, $1
+	ld hl, $c0be
+	call Func_22248
+	ld hl, $c0b6
+	call Func_22248
+	ld hl, $c0c6
+	call Func_22248
+	ld [$c0e8], a
+	ld a, $ff
+	ld [$c004], a
+	xor a
+	ld [$FF00+$24], a
+	ld a, $8
+	ld [$FF00+$10], a
+	ld a, $0
+	ld [$FF00+$25], a
+	xor a
+	ld [$FF00+$1a], a
+	ld a, $80
+	ld [$FF00+$1a], a
+	ld a, $77
+	ld [$FF00+$24], a
+	jp Func_2224e
+
+; known jump sources: 2203f (8:603f), 22042 (8:6042), 22049 (8:6049)
+Func_2210d: ; 2210d (8:610d)
+	ld l, a
+	ld e, a
+	ld h, $0
+	ld d, h
+	add hl, hl
+	add hl, de
+	ld de, $4000
+	add hl, de
+	ld a, h
+	ld [$c0ec], a
+	ld a, l
+	ld [$c0ed], a
+	ld a, [hl]
+	and $c0
+	rlca
+	rlca
+	ld c, a
+
+; known jump sources: 221f0 (8:61f0)
+Func_22126: ; 22126 (8:6126)
+	ld d, c
+	ld a, c
+	add a
+	add c
+	ld c, a
+	ld b, $0
+	ld a, [$c0ec]
+	ld h, a
+	ld a, [$c0ed]
+	ld l, a
+	add hl, bc
+	ld c, d
+	ld a, [hl]
+	and $f
+	ld e, a
+	ld d, $0
+	ld hl, $c026
+	add hl, de
+	ld a, [hl]
+	and a
+	jr z, .asm_22162
+	ld a, e
+	cp $7
+	jr nz, .asm_22159
+	ld a, [$c001]
+	cp $14
+	jr nc, .asm_22152
+	ret
+.asm_22152
+	ld a, [hl]
+	cp $14
+	jr z, .asm_22162
+	jr c, .asm_22162
+.asm_22159
+	ld a, [$c001]
+	cp [hl]
+	jr z, .asm_22162
+	jr c, .asm_22162
+	ret
+.asm_22162
+	xor a
+	push de
+	ld h, d
+	ld l, e
+	add hl, hl
+	ld d, h
+	ld e, l
+	ld hl, $c016
+	add hl, de
+	ld [hli], a
+	ld [hl], a
+	ld hl, $c006
+	add hl, de
+	ld [hli], a
+	ld [hl], a
+	pop de
+	ld hl, $c026
+	add hl, de
+	ld [hl], a
+	ld hl, $c02e
+	add hl, de
+	ld [hl], a
+	ld hl, $c03e
+	add hl, de
+	ld [hl], a
+	ld hl, $c046
+	add hl, de
+	ld [hl], a
+	ld hl, $c04e
+	add hl, de
+	ld [hl], a
+	ld hl, $c056
+	add hl, de
+	ld [hl], a
+	ld hl, $c05e
+	add hl, de
+	ld [hl], a
+	ld hl, $c066
+	add hl, de
+	ld [hl], a
+	ld hl, $c06e
+	add hl, de
+	ld [hl], a
+	ld hl, $c076
+	add hl, de
+	ld [hl], a
+	ld hl, $c07e
+	add hl, de
+	ld [hl], a
+	ld hl, $c086
+	add hl, de
+	ld [hl], a
+	ld hl, $c08e
+	add hl, de
+	ld [hl], a
+	ld hl, $c096
+	add hl, de
+	ld [hl], a
+	ld hl, $c09e
+	add hl, de
+	ld [hl], a
+	ld hl, $c0a6
+	add hl, de
+	ld [hl], a
+	ld hl, $c0ae
+	add hl, de
+	ld [hl], a
+	ld hl, $c036
+	add hl, de
+	ld [hl], a
+	ld a, $1
+	ld hl, $c0be
+	add hl, de
+	ld [hl], a
+	ld hl, $c0b6
+	add hl, de
+	ld [hl], a
+	ld hl, $c0c6
+	add hl, de
+	ld [hl], a
+	ld a, e
+	cp $4
+	jr nz, .asm_221ea
+	ld a, $8
+	ld [$FF00+$10], a
+.asm_221ea
+	ld a, c
+	and a
+	jp z, Func_2224e
+	dec c
+	jp Func_22126
+
+; known jump sources: 2203a (8:603a)
+Func_221f3: ; 221f3 (8:61f3)
+	ld a, $80
+	ld [$FF00+$26], a
+	ld [$FF00+$1a], a
+	xor a
+	ld [$FF00+$25], a
+	ld [$FF00+$1c], a
+	ld a, $8
+	ld [$FF00+$10], a
+	ld [$FF00+$12], a
+	ld [$FF00+$17], a
+	ld [$FF00+$21], a
+	ld a, $40
+	ld [$FF00+$14], a
+	ld [$FF00+$19], a
+	ld [$FF00+$23], a
+	ld a, $77
+	ld [$FF00+$24], a
+	xor a
+	ld [$c000], a
+	ld [$c003], a
+	ld [$c002], a
+	ld [$c0e9], a
+	ld [$c0eb], a
+	ld [$c0e6], a
+	ld [$c0e7], a
+	ld d, $a0
+	ld hl, $c006
+	call Func_22248
+	ld a, $1
+	ld d, $18
+	ld hl, $c0b6
+	call Func_22248
+	ld [$c0e8], a
+	ld [$c0ea], a
+	ld a, $ff
+	ld [$c004], a
+	ret
+
+; known jump sources: 22061 (8:6061), 22067 (8:6067), 2206f (8:606f), 22075 (8:6075), 2207b (8:607b), 22081 (8:6081), 22087 (8:6087), 2208d (8:608d), 22093 (8:6093), 22099 (8:6099), 2209f (8:609f), 220a5 (8:60a5), 220ab (8:60ab), 220b1 (8:60b1), 220b7 (8:60b7), 220bd (8:60bd), 220c3 (8:60c3), 220c9 (8:60c9), 220cf (8:60cf), 220d5 (8:60d5), 220dd (8:60dd), 220e3 (8:60e3), 220e9 (8:60e9), 2222f (8:622f), 22239 (8:6239)
+Func_22248: ; 22248 (8:6248)
+	ld b, d
+.asm_22249
+	ld [hli], a
+	dec b
+	jr nz, .asm_22249
+	ret
+
+; known jump sources: 2210a (8:610a), 221ec (8:61ec)
+Func_2224e: ; 2224e (8:624e)
+	ld a, [$c001]
+	ld l, a
+	ld e, a
+	ld h, $0
+	ld d, h
+	add hl, hl
+	add hl, de
+	ld de, $4000
+	add hl, de
+	ld e, l
+	ld d, h
+	ld hl, $c006
+	ld a, [de]
+	ld b, a
+	rlca
+	rlca
+	and $3
+	ld c, a
+	ld a, b
+	and $f
+	ld b, c
+	inc b
+	inc de
+	ld c, $0
+.asm_22270
+	cp c
+	jr z, .asm_22278
+	inc c
+	inc hl
+	inc hl
+	jr .asm_22270
+.asm_22278
+	push hl
+	push bc
+	push af
+	ld b, $0
+	ld c, a
+	ld hl, $c026
+	add hl, bc
+	ld a, [$c001]
+	ld [hl], a
+	pop af
+	cp $3
+	jr c, .asm_22291
+	ld hl, $c02e
+	add hl, bc
+	set 2, [hl]
+.asm_22291
+	pop bc
+	pop hl
+	ld a, [de]
+	ld [hli], a
+	inc de
+	ld a, [de]
+	ld [hli], a
+	inc de
+	inc c
+	dec b
+	ld a, b
+	and a
+	ld a, [de]
+	inc de
+	jr nz, .asm_22270
+	ld a, [$c001]
+	cp $14
+	jr nc, .asm_222aa
+	jr .asm_222d4
+.asm_222aa
+	ld a, [$c001]
+	cp $86
+	jr z, .asm_222d4
+	jr c, .asm_222b5
+	jr .asm_222d4
+.asm_222b5
+	ld hl, $c02a
+	ld [hli], a
+	ld [hli], a
+	ld [hli], a
+	ld [hl], a
+	ld hl, $c012
+	ld de, $62d5
+	ld [hl], e
+	inc hl
+	ld [hl], d
+	ld a, [$c005]
+	and a
+	jr nz, .asm_222d4
+	ld a, [$FF00+$24]
+	ld [$c005], a
+	ld a, $77
+	ld [$FF00+$24], a
+.asm_222d4
+	ret
+
+INCBIN "baserom.gbc",$222d5,$22306 - $222d5
+
+; known jump sources: e1d6 (3:61d6)
+Func_22306: ; 22306 (8:6306)
+	ld a, $9a
+	call Func_3740
+	ld hl, $c00e
+	ld de, $6322
+	call Func_2231d
+	ld de, $6325
+	call Func_2231d
+	ld de, $449b
+
+; known jump sources: 22311 (8:6311), 22317 (8:6317)
+Func_2231d: ; 2231d (8:631d)
+	ld a, e
+	ld [hli], a
+	ld a, d
+	ld [hli], a
+	ret
+
+INCBIN "baserom.gbc",$22322,$23f52 - $22322
 
 SECTION "bank9",DATA,BANK[$9]
 
@@ -29808,8 +42995,52 @@ TangelaPicFront: ; 0x27b39
 TangelaPicBack: ; 0x27ce7
 	INCBIN "pic/monback/tangelab.pic"
 
-INCBIN "baserom.gbc",$27d6b,$27DAE - $27d6b
+; known jump sources: 12a35 (4:6a35), 70320 (1c:4320)
+Func_27d6b: ; 27d6b (9:7d6b)
+	call Load16BitRegisters
+	push hl
+	call GetBaseStats
+	pop hl
+	push hl
+	ld a, [$d0be]
+	call Func_27d89
+	ld a, [$d0be]
+	ld b, a
+	ld a, [$d0bf]
+	cp b
+	pop hl
+	jr z, asm_27d8c
+	ld bc, $28
+	add hl, bc
 
+; known jump sources: 27d77 (9:7d77)
+Func_27d89: ; 27d89 (9:7d89)
+	push hl
+	jr asm_27d9f
+asm_27d8c: ; 27d8c (9:7d8c)
+	ld a, $7f
+	ld bc, $13
+	add hl, bc
+	ld bc, $6
+	jp FillMemory
+
+; known jump sources: 3d54b (f:554b)
+Func_27d98: ; 27d98 (9:7d98)
+	call Load16BitRegisters
+	push hl
+	ld a, [W_PLAYERMOVETYPE] ; $cfd5
+asm_27d9f: ; 27d9f (9:7d9f)
+	add a
+	ld hl, $7dae
+	ld e, a
+	ld d, $0
+	add hl, de
+	ld a, [hli]
+	ld e, a
+	ld d, [hl]
+	pop hl
+	jp PlaceString
+; 27dae (9:7dae)
 TypeNamePointers: ; 7DAE
 	dw Type00Name
 	dw Type01Name
@@ -29985,7 +43216,30 @@ CooltrainerMName:
 CooltrainerFName:
 	db "COOLTRAINER♀@"
 
-INCBIN "baserom.gbc",$27f86,$27fb3 - $27f86
+; known jump sources: 3f94e (f:794e)
+Func_27f86: ; 27f86 (9:7f86)
+	ld hl, W_PLAYERBATTSTATUS2 ; $d063
+	ld a, [H_WHOSETURN] ; $FF00+$f3
+	and a
+	jr z, .asm_27f91
+	ld hl, W_ENEMYBATTSTATUS2 ; $d068
+.asm_27f91
+	bit 2, [hl]
+	jr nz, .asm_27fa5
+	set 2, [hl]
+	ld hl, Func_3fba8
+	ld b, BANK(Func_3fba8)
+	call Bankswitch ; indirect jump to Func_3fba8 (3fba8 (f:7ba8))
+	ld hl, $7fb2
+	jp PrintText
+.asm_27fa5
+	ld c, $32
+	call DelayFrames
+	ld hl, Func_3fb53
+	ld b, BANK(Func_3fb53)
+	jp Bankswitch ; indirect jump to Func_3fb53 (3fb53 (f:7b53))
+
+INCBIN "baserom.gbc",$27fb2,$27fb3 - $27fb2
 
 UnnamedText_27fb3: ; 0x27fb3
 	TX_FAR _UnnamedText_27fb3
@@ -30122,8 +43376,43 @@ MoltresPicFront:
 MoltresPicBack:
 	INCBIN "pic/monback/moltresb.pic"
 
-INCBIN "baserom.gbc",$2bea9,$2bef2 - $2bea9
-
+; known jump sources: 3fa81 (f:7a81)
+Func_2bea9: ; 2bea9 (a:7ea9)
+	ld hl, MoveHitTest
+	ld b, BANK(MoveHitTest)
+	call Bankswitch ; indirect jump to MoveHitTest (3e56b (f:656b))
+	ld a, [W_MOVEMISSED] ; $d05f
+	and a
+	jr nz, .asm_2bee7
+	ld hl, W_ENEMYBATTSTATUS2 ; $d068
+	ld de, W_ENEMYMONTYPE1 ; $cfea (aliases: W_ENEMYMONTYPES)
+	ld a, [H_WHOSETURN] ; $FF00+$f3
+	and a
+	jr z, .asm_2bec8
+	ld hl, W_PLAYERBATTSTATUS2 ; $d063
+	ld de, W_PLAYERMONTYPE1 ; $d019 (aliases: W_PLAYERMONTYPES)
+.asm_2bec8
+	ld a, [de]
+	cp $16
+	jr z, .asm_2bee7
+	inc de
+	ld a, [de]
+	cp $16
+	jr z, .asm_2bee7
+	bit 7, [hl]
+	jr nz, .asm_2bee7
+	set 7, [hl]
+	ld hl, Func_3fba8
+	ld b, BANK(Func_3fba8)
+	call Bankswitch ; indirect jump to Func_3fba8 (3fba8 (f:7ba8))
+	ld hl, $7ef2
+	jp PrintText
+.asm_2bee7
+	ld c, $32
+	call DelayFrames
+	ld hl, $7ef7
+	jp PrintText
+; 2bef2 (a:7ef2)
 UnnamedText_2bef2: ; 0x2bef2
 	TX_FAR _UnnamedText_2bef2
 	db $50
@@ -30295,14 +43584,114 @@ UnnamedText_2fb93: ; 0x2fb93
 	db $50
 ; 0x2fb93 + 5 bytes
 
-INCBIN "baserom.gbc",$2fb98,$2fe3b - $2fb98
+INCBIN "baserom.gbc",$2fb98,$2fe18 - $2fb98
 
+; known jump sources: e530 (3:6530)
+Func_2fe18: ; 2fe18 (b:7e18)
+	ld a, [W_WHICHPOKEMON] ; $cf92
+	ld hl, W_PARTYMON1_MOVE1 ; $d173
+	ld bc, $2c
+	call AddNTimes
+	ld a, [$d0e0]
+	ld b, a
+	ld c, $4
+.asm_2fe2a
+	ld a, [hli]
+	cp b
+	jr z, .asm_2fe33
+	dec c
+	jr nz, .asm_2fe2a
+	and a
+	ret
+.asm_2fe33
+	ld hl, $7e3b
+	call PrintText
+	scf
+	ret
+; 2fe3b (b:7e3b)
 UnnamedText_2fe3b: ; 0x2fe3b
 	TX_FAR _UnnamedText_2fe3b
 	db $50
 ; 0x2fe3b + 5 bytes
 
-INCBIN "baserom.gbc",$2fe40,$2ff04 - $2fe40
+; known jump sources: 3eca5 (f:6ca5), 3f11b (f:711b), 70362 (1c:4362)
+Func_2fe40: ; 2fe40 (b:7e40)
+	ld de, $a203
+	ld hl, $a187
+	call Func_2fe7d
+	call Func_2fe55
+	ld de, $a38b
+	ld hl, $a30f
+	call Func_2fe7d
+
+; known jump sources: 2fe49 (b:7e49)
+Func_2fe55: ; 2fe55 (b:7e55)
+	ld b, $3
+.asm_2fe57
+	ld c, $1c
+.asm_2fe59
+	push bc
+	ld a, [de]
+	ld bc, H_VBCOPYDEST ; $ffc9
+	call Func_2fe97
+	ld a, [de]
+	dec de
+	swap a
+	ld bc, $37
+	call Func_2fe97
+	pop bc
+	dec c
+	jr nz, .asm_2fe59
+	dec de
+	dec de
+	dec de
+	dec de
+	ld a, b
+	ld bc, $ffc8
+	add hl, bc
+	ld b, a
+	dec b
+	jr nz, .asm_2fe57
+	ret
+
+; known jump sources: 2fe46 (b:7e46), 2fe52 (b:7e52)
+Func_2fe7d: ; 2fe7d (b:7e7d)
+	ld a, $1c
+	ld [H_DOWNARROWBLINKCNT1], a ; $FF00+$8b
+	ld bc, rIE ; $ffff
+.asm_2fe84
+	ld a, [de]
+	dec de
+	swap a
+	call Func_2fe97
+	ld a, [H_DOWNARROWBLINKCNT1] ; $FF00+$8b
+	dec a
+	ld [H_DOWNARROWBLINKCNT1], a ; $FF00+$8b
+	jr nz, .asm_2fe84
+	dec de
+	dec de
+	dec de
+	dec de
+	ret
+
+; known jump sources: 2fe5e (b:7e5e), 2fe68 (b:7e68), 2fe88 (b:7e88)
+Func_2fe97: ; 2fe97 (b:7e97)
+	push hl
+	and $f
+	ld hl, $7ea8
+	add l
+	ld l, a
+	jr nc, .asm_2fea2
+	inc h
+.asm_2fea2
+	ld a, [hl]
+	pop hl
+	ld [hld], a
+	ld [hl], a
+	add hl, bc
+	ret
+
+INCBIN "baserom.gbc",$2fea8,$2ff04 - $2fea8
 
 UnnamedText_2ff04: ; 0x2ff04
 	TX_FAR _UnnamedText_2ff04
@@ -30450,8 +43839,44 @@ UnnamedText_33f52: ; 0x33f52
 	db $50
 ; 0x33f52 + 5 bytes
 
-INCBIN "baserom.gbc",$33f57,$39
-
+; known jump sources: 3f889 (f:7889)
+Func_33f57: ; 33f57 (c:7f57)
+	ld hl, W_DAMAGE ; $d0d7
+	xor a
+	ld [hli], a
+	ld [hl], a
+	dec a
+	ld [$d05e], a
+	ld hl, $d02a
+	ld de, $cffb
+	ld a, [H_WHOSETURN] ; $FF00+$f3
+	and a
+	jr z, .asm_33f72
+	ld hl, $cffb
+	ld de, $d02a
+.asm_33f72
+	ld a, [de]
+	dec de
+	ld b, a
+	ld a, [hld]
+	sub b
+	ld a, [de]
+	ld b, a
+	ld a, [hl]
+	sbc b
+	jr c, .asm_33f8a
+	ld hl, W_DAMAGE ; $d0d7
+	ld a, $ff
+	ld [hli], a
+	ld [hl], a
+	ld a, $2
+	ld [$d05e], a
+	ret
+.asm_33f8a
+	ld a, $1
+	ld [W_MOVEMISSED], a ; $d05f
+	ret
+; 33f90 (c:7f90)
 SECTION "bankD",DATA,BANK[$D]
 BulbasaurPicFront:
 	INCBIN "pic/bmon/bulbasaur.pic"
@@ -30562,7 +43987,123 @@ VictreebelPicFront:
 VictreebelPicBack:
 	INCBIN "pic/monback/victreebelb.pic"
 
-INCBIN "baserom.gbc",$37244,$37390 - $37244
+INCBIN "baserom.gbc",$37244,$37258 - $37244
+
+; known jump sources: 44bd (1:44bd), 44c8 (1:44c8)
+Func_37258: ; 37258 (d:7258)
+	ld a, d
+	ld bc, $7247
+	ld d, $88
+	ld e, $0
+	and a
+	jr nz, Func_3726a
+	ld bc, $724f
+	ld d, $0
+	ld e, $0
+
+; known jump sources: 37261 (d:7261), 37290 (d:7290), 372c1 (d:72c1)
+Func_3726a: ; 3726a (d:726a)
+	ld a, [bc]
+	and a
+	ret z
+	inc bc
+	push bc
+	ld b, a
+	and $f
+	ld c, a
+	ld a, b
+	and $f0
+	swap a
+	ld b, a
+.asm_37279
+	ld h, d
+	ld l, $48
+	call Func_37292
+	ld h, $0
+	ld l, $88
+	call Func_37292
+	ld a, d
+	add b
+	ld d, a
+	call Func_372c4
+	dec c
+	jr nz, .asm_37279
+	pop bc
+	jr Func_3726a
+
+; known jump sources: 3727c (d:727c), 37283 (d:7283), 37295 (d:7295)
+Func_37292: ; 37292 (d:7292)
+	ld a, [$FF00+$44]
+	cp l
+	jr nz, Func_37292
+	ld a, h
+	ld [rSCX], a ; $FF00+$43
+.asm_3729a
+	ld a, [$FF00+$44]
+	cp h
+	jr z, .asm_3729a
+	ret
+
+INCBIN "baserom.gbc",$372a0,$372ac - $372a0
+
+; known jump sources: 4451 (1:4451)
+Func_372ac: ; 372ac (d:72ac)
+	ld a, [W_WHICHTRADE] ; $cd3d
+	cp $b0
+	jr z, .asm_372ba
+	cp $b1
+	jr z, .asm_372ba
+	cp $99
+	ret nz
+.asm_372ba
+	ld e, $1
+	ld bc, $7244
+	ld d, $0
+	jp Func_3726a
+
+; known jump sources: 37289 (d:7289)
+Func_372c4: ; 372c4 (d:72c4)
+	push de
+	push hl
+	xor a
+	ld d, a
+	ld hl, $72a0
+	add hl, de
+	ld a, [hl]
+	pop hl
+	pop de
+	and a
+	ret z
+	ld [$c328], a
+	inc e
+	ret
+
+; known jump sources: 137c9 (4:77c9), 3ec42 (f:6c42)
+Func_372d6: ; 372d6 (d:72d6)
+	call LoadTextBoxTilePatterns
+	ld hl, $c3f3
+	ld b, $7
+	ld c, $c
+	call TextBoxBorder
+	ld hl, $c408
+	ld de, W_PLAYERNAME ; $d158
+	call PlaceString
+	ld hl, $c46c
+	ld de, W_GRASSRATE ; $d887
+	call PlaceString
+	ld hl, $c449
+	ld a, $69
+	ld [hli], a
+	ld [hl], $6a
+	xor a
+	ld [$cfcb], a
+	ld hl, Func_3a948
+	ld b, BANK(Func_3a948)
+	call Bankswitch ; indirect jump to Func_3a948 (3a948 (e:6948))
+	ld c, $96
+	jp DelayFrames
+
+INCBIN "baserom.gbc",$3730e,$37390 - $3730e
 
 UnnamedText_37390: ; 0x37390
 	TX_FAR _UnnamedText_37390
@@ -30625,7 +44166,155 @@ IF _BLUE
 	INCBIN "gfx/blue/slotmachine1.2bpp"
 ENDC
 
-INCBIN "baserom.gbc",$37ca1,$37e79 - $37ca1
+INCBIN "baserom.gbc",$37ca1,$37d41 - $37ca1
+
+; known jump sources: 38b3 (0:38b3)
+Func_37d41: ; 37d41 (d:7d41)
+	ld a, $8
+	ld b, a
+	xor a
+	ld [H_DIVIDEND], a ; $FF00+$95 (aliases: H_PRODUCT, H_PASTLEADINGZEROES, H_QUOTIENT)
+	ld [$FF00+$9b], a
+	ld [H_SAVEDNUMTOPRINT], a ; $FF00+$9c
+	ld [$FF00+$9d], a
+	ld [$FF00+$9e], a
+.asm_37d4f
+	ld a, [H_REMAINDER] ; $FF00+$99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
+	srl a
+	ld [H_REMAINDER], a ; $FF00+$99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
+	jr nc, .asm_37d77
+	ld a, [$FF00+$9e]
+	ld c, a
+	ld a, [$FF00+$98]
+	add c
+	ld [$FF00+$9e], a
+	ld a, [$FF00+$9d]
+	ld c, a
+	ld a, [$FF00+$97]
+	adc c
+	ld [$FF00+$9d], a
+	ld a, [H_SAVEDNUMTOPRINT] ; $FF00+$9c
+	ld c, a
+	ld a, [H_NUMTOPRINT] ; $FF00+$96 (aliases: H_MULTIPLICAND)
+	adc c
+	ld [H_SAVEDNUMTOPRINT], a ; $FF00+$9c
+	ld a, [$FF00+$9b]
+	ld c, a
+	ld a, [H_DIVIDEND] ; $FF00+$95 (aliases: H_PRODUCT, H_PASTLEADINGZEROES, H_QUOTIENT)
+	adc c
+	ld [$FF00+$9b], a
+.asm_37d77
+	dec b
+	jr z, .asm_37d94
+	ld a, [$FF00+$98]
+	sla a
+	ld [$FF00+$98], a
+	ld a, [$FF00+$97]
+	rl a
+	ld [$FF00+$97], a
+	ld a, [H_NUMTOPRINT] ; $FF00+$96 (aliases: H_MULTIPLICAND)
+	rl a
+	ld [H_NUMTOPRINT], a ; $FF00+$96 (aliases: H_MULTIPLICAND)
+	ld a, [H_DIVIDEND] ; $FF00+$95 (aliases: H_PRODUCT, H_PASTLEADINGZEROES, H_QUOTIENT)
+	rl a
+	ld [H_DIVIDEND], a ; $FF00+$95 (aliases: H_PRODUCT, H_PASTLEADINGZEROES, H_QUOTIENT)
+	jr .asm_37d4f
+.asm_37d94
+	ld a, [$FF00+$9e]
+	ld [$FF00+$98], a
+	ld a, [$FF00+$9d]
+	ld [$FF00+$97], a
+	ld a, [H_SAVEDNUMTOPRINT] ; $FF00+$9c
+	ld [H_NUMTOPRINT], a ; $FF00+$96 (aliases: H_MULTIPLICAND)
+	ld a, [$FF00+$9b]
+	ld [H_DIVIDEND], a ; $FF00+$95 (aliases: H_PRODUCT, H_PASTLEADINGZEROES, H_QUOTIENT)
+	ret
+
+; known jump sources: 38c6 (0:38c6)
+Func_37da5: ; 37da5 (d:7da5)
+	xor a
+	ld [$FF00+$9a], a
+	ld [$FF00+$9b], a
+	ld [H_SAVEDNUMTOPRINT], a ; $FF00+$9c
+	ld [$FF00+$9d], a
+	ld [$FF00+$9e], a
+	ld a, $9
+	ld e, a
+.asm_37db3
+	ld a, [$FF00+$9a]
+	ld c, a
+	ld a, [H_NUMTOPRINT] ; $FF00+$96 (aliases: H_MULTIPLICAND)
+	sub c
+	ld d, a
+	ld a, [H_REMAINDER] ; $FF00+$99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
+	ld c, a
+	ld a, [H_DIVIDEND] ; $FF00+$95 (aliases: H_PRODUCT, H_PASTLEADINGZEROES, H_QUOTIENT)
+	sbc c
+	jr c, .asm_37dce
+	ld [H_DIVIDEND], a ; $FF00+$95 (aliases: H_PRODUCT, H_PASTLEADINGZEROES, H_QUOTIENT)
+	ld a, d
+	ld [H_NUMTOPRINT], a ; $FF00+$96 (aliases: H_MULTIPLICAND)
+	ld a, [$FF00+$9e]
+	inc a
+	ld [$FF00+$9e], a
+	jr .asm_37db3
+.asm_37dce
+	ld a, b
+	cp $1
+	jr z, .asm_37e18
+	ld a, [$FF00+$9e]
+	sla a
+	ld [$FF00+$9e], a
+	ld a, [$FF00+$9d]
+	rl a
+	ld [$FF00+$9d], a
+	ld a, [H_SAVEDNUMTOPRINT] ; $FF00+$9c
+	rl a
+	ld [H_SAVEDNUMTOPRINT], a ; $FF00+$9c
+	ld a, [$FF00+$9b]
+	rl a
+	ld [$FF00+$9b], a
+	dec e
+	jr nz, .asm_37e04
+	ld a, $8
+	ld e, a
+	ld a, [$FF00+$9a]
+	ld [H_REMAINDER], a ; $FF00+$99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
+	xor a
+	ld [$FF00+$9a], a
+	ld a, [H_NUMTOPRINT] ; $FF00+$96 (aliases: H_MULTIPLICAND)
+	ld [H_DIVIDEND], a ; $FF00+$95 (aliases: H_PRODUCT, H_PASTLEADINGZEROES, H_QUOTIENT)
+	ld a, [$FF00+$97]
+	ld [H_NUMTOPRINT], a ; $FF00+$96 (aliases: H_MULTIPLICAND)
+	ld a, [$FF00+$98]
+	ld [$FF00+$97], a
+.asm_37e04
+	ld a, e
+	cp $1
+	jr nz, .asm_37e0a
+	dec b
+.asm_37e0a
+	ld a, [H_REMAINDER] ; $FF00+$99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
+	srl a
+	ld [H_REMAINDER], a ; $FF00+$99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
+	ld a, [$FF00+$9a]
+	rr a
+	ld [$FF00+$9a], a
+	jr .asm_37db3
+.asm_37e18
+	ld a, [H_NUMTOPRINT] ; $FF00+$96 (aliases: H_MULTIPLICAND)
+	ld [H_REMAINDER], a ; $FF00+$99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
+	ld a, [$FF00+$9e]
+	ld [$FF00+$98], a
+	ld a, [$FF00+$9d]
+	ld [$FF00+$97], a
+	ld a, [H_SAVEDNUMTOPRINT] ; $FF00+$9c
+	ld [H_NUMTOPRINT], a ; $FF00+$96 (aliases: H_MULTIPLICAND)
+	ld a, [$FF00+$9b]
+	ld [H_DIVIDEND], a ; $FF00+$95 (aliases: H_PRODUCT, H_PASTLEADINGZEROES, H_QUOTIENT)
+	ret
+
+INCBIN "baserom.gbc",$37e2d,$37e79 - $37e2d
 
 UnnamedText_37e79: ; 0x37e79
 	TX_FAR _UnnamedText_37e79
@@ -30647,171 +44336,172 @@ SECTION "bankE",DATA,BANK[$E]
 Moves: ; 4000
 ; characteristics of each move
 ; animation, effect, power, type, accuracy, PP
-db POUND       ,$00,$28,NORMAL,$FF,35
-db KARATE_CHOP ,$00,$32,NORMAL,$FF,25
-db DOUBLESLAP  ,$1D,$0F,NORMAL,$D8,10
-db COMET_PUNCH ,$1D,$12,NORMAL,$D8,15
-db MEGA_PUNCH  ,$00,$50,NORMAL,$D8,20
-db PAY_DAY     ,$10,$28,NORMAL,$FF,20
-db FIRE_PUNCH  ,$04,$4B,FIRE,$FF,15
-db ICE_PUNCH   ,$05,$4B,ICE,$FF,15
-db THUNDERPUNCH,$06,$4B,ELECTRIC,$FF,15
-db SCRATCH     ,$00,$28,NORMAL,$FF,35
-db VICEGRIP    ,$00,$37,NORMAL,$FF,30
-db GUILLOTINE  ,$26,$01,NORMAL,$4C,5
-db RAZOR_WIND  ,$27,$50,NORMAL,$BF,10
-db SWORDS_DANCE,$32,$00,NORMAL,$FF,30
-db CUT         ,$00,$32,NORMAL,$F2,30
-db GUST        ,$00,$28,NORMAL,$FF,35
-db WING_ATTACK ,$00,$23,FLYING,$FF,35
-db WHIRLWIND   ,$1C,$00,NORMAL,$D8,20
-db FLY         ,$2B,$46,FLYING,$F2,15
-db BIND        ,$2A,$0F,NORMAL,$BF,20
-db SLAM        ,$00,$50,NORMAL,$BF,20
-db VINE_WHIP   ,$00,$23,GRASS,$FF,10
-db STOMP       ,$25,$41,NORMAL,$FF,20
-db DOUBLE_KICK ,$2C,$1E,FIGHTING,$FF,30
-db MEGA_KICK   ,$00,$78,NORMAL,$BF,5
-db JUMP_KICK   ,$2D,$46,FIGHTING,$F2,25
-db ROLLING_KICK,$25,$3C,FIGHTING,$D8,15
-db SAND_ATTACK ,$16,$00,NORMAL,$FF,15
-db HEADBUTT    ,$25,$46,NORMAL,$FF,15
-db HORN_ATTACK ,$00,$41,NORMAL,$FF,25
-db FURY_ATTACK ,$1D,$0F,NORMAL,$D8,20
-db HORN_DRILL  ,$26,$01,NORMAL,$4C,5
-db TACKLE      ,$00,$23,NORMAL,$F2,35
-db BODY_SLAM   ,$24,$55,NORMAL,$FF,15
-db WRAP        ,$2A,$0F,NORMAL,$D8,20
-db TAKE_DOWN   ,$30,$5A,NORMAL,$D8,20
-db THRASH      ,$1B,$5A,NORMAL,$FF,20
-db DOUBLE_EDGE ,$30,$64,NORMAL,$FF,15
-db TAIL_WHIP   ,$13,$00,NORMAL,$FF,30
-db POISON_STING,$02,$0F,POISON,$FF,35
-db TWINEEDLE   ,$4D,$19,BUG,$FF,20
-db PIN_MISSILE ,$1D,$0E,BUG,$D8,20
-db LEER        ,$13,$00,NORMAL,$FF,30
-db BITE        ,$1F,$3C,NORMAL,$FF,25
-db GROWL       ,$12,$00,NORMAL,$FF,40
-db ROAR        ,$1C,$00,NORMAL,$FF,20
-db SING        ,$20,$00,NORMAL,$8C,15
-db SUPERSONIC  ,$31,$00,NORMAL,$8C,20
-db SONICBOOM   ,$29,$01,NORMAL,$E5,20
-db DISABLE     ,$56,$00,NORMAL,$8C,20
-db ACID        ,$45,$28,POISON,$FF,30
-db EMBER       ,$04,$28,FIRE,$FF,25
-db FLAMETHROWER,$04,$5F,FIRE,$FF,15
-db MIST        ,$2E,$00,ICE,$FF,30
-db WATER_GUN   ,$00,$28,WATER,$FF,25
-db HYDRO_PUMP  ,$00,$78,WATER,$CC,5
-db SURF        ,$00,$5F,WATER,$FF,15
-db ICE_BEAM    ,$05,$5F,ICE,$FF,10
-db BLIZZARD    ,$05,$78,ICE,$E5,5
-db PSYBEAM     ,$4C,$41,PSYCHIC,$FF,20
-db BUBBLEBEAM  ,$46,$41,WATER,$FF,20
-db AURORA_BEAM ,$44,$41,ICE,$FF,20
-db HYPER_BEAM  ,$50,$96,NORMAL,$E5,5
-db PECK        ,$00,$23,FLYING,$FF,35
-db DRILL_PECK  ,$00,$50,FLYING,$FF,20
-db SUBMISSION  ,$30,$50,FIGHTING,$CC,25
-db LOW_KICK    ,$25,$32,FIGHTING,$E5,20
-db COUNTER     ,$00,$01,FIGHTING,$FF,20
-db SEISMIC_TOSS,$29,$01,FIGHTING,$FF,20
-db STRENGTH    ,$00,$50,NORMAL,$FF,15
-db ABSORB      ,$03,$14,GRASS,$FF,20
-db MEGA_DRAIN  ,$03,$28,GRASS,$FF,10
-db LEECH_SEED  ,$54,$00,GRASS,$E5,10
-db GROWTH      ,$0D,$00,NORMAL,$FF,40
-db RAZOR_LEAF  ,$00,$37,GRASS,$F2,25
-db SOLARBEAM   ,$27,$78,GRASS,$FF,10
-db POISONPOWDER,$42,$00,POISON,$BF,35
-db STUN_SPORE  ,$43,$00,GRASS,$BF,30
-db SLEEP_POWDER,$20,$00,GRASS,$BF,15
-db PETAL_DANCE ,$1B,$46,GRASS,$FF,20
-db STRING_SHOT ,$14,$00,BUG,$F2,40
-db DRAGON_RAGE ,$29,$01,DRAGON,$FF,10
-db FIRE_SPIN   ,$2A,$0F,FIRE,$B2,15
-db THUNDERSHOCK,$06,$28,ELECTRIC,$FF,30
-db THUNDERBOLT ,$06,$5F,ELECTRIC,$FF,15
-db THUNDER_WAVE,$43,$00,ELECTRIC,$FF,20
-db THUNDER     ,$06,$78,ELECTRIC,$B2,10
-db ROCK_THROW  ,$00,$32,ROCK,$A5,15
-db EARTHQUAKE  ,$00,$64,GROUND,$FF,10
-db FISSURE     ,$26,$01,GROUND,$4C,5
-db DIG         ,$27,$64,GROUND,$FF,10
-db TOXIC       ,$42,$00,POISON,$D8,10
-db CONFUSION   ,$4C,$32,PSYCHIC,$FF,25
-db PSYCHIC_M   ,$47,$5A,PSYCHIC,$FF,10
-db HYPNOSIS    ,$20,$00,PSYCHIC,$99,20
-db MEDITATE    ,$0A,$00,PSYCHIC,$FF,40
-db AGILITY     ,$34,$00,PSYCHIC,$FF,30
-db QUICK_ATTACK,$00,$28,NORMAL,$FF,30
-db RAGE        ,$51,$14,NORMAL,$FF,20
-db TELEPORT    ,$1C,$00,PSYCHIC,$FF,20
-db NIGHT_SHADE ,$29,$00,GHOST,$FF,15
-db MIMIC       ,$52,$00,NORMAL,$FF,10
-db SCREECH     ,$3B,$00,NORMAL,$D8,40
-db DOUBLE_TEAM ,$0F,$00,NORMAL,$FF,15
-db RECOVER     ,$38,$00,NORMAL,$FF,20
-db HARDEN      ,$0B,$00,NORMAL,$FF,30
-db MINIMIZE    ,$0F,$00,NORMAL,$FF,20
-db SMOKESCREEN ,$16,$00,NORMAL,$FF,20
-db CONFUSE_RAY ,$31,$00,GHOST,$FF,10
-db WITHDRAW    ,$0B,$00,WATER,$FF,40
-db DEFENSE_CURL,$0B,$00,NORMAL,$FF,40
-db BARRIER     ,$33,$00,PSYCHIC,$FF,30
-db LIGHT_SCREEN,$40,$00,PSYCHIC,$FF,30
-db HAZE        ,$19,$00,ICE,$FF,30
-db REFLECT     ,$41,$00,PSYCHIC,$FF,20
-db FOCUS_ENERGY,$2F,$00,NORMAL,$FF,30
-db BIDE        ,$1A,$00,NORMAL,$FF,10
-db METRONOME   ,$53,$00,NORMAL,$FF,10
-db MIRROR_MOVE ,$09,$00,FLYING,$FF,20
-db SELFDESTRUCT,$07,$82,NORMAL,$FF,5
-db EGG_BOMB    ,$00,$64,NORMAL,$BF,10
-db LICK        ,$24,$14,GHOST,$FF,30
-db SMOG        ,$21,$14,POISON,$B2,20
-db SLUDGE      ,$21,$41,POISON,$FF,20
-db BONE_CLUB   ,$1F,$41,GROUND,$D8,20
-db FIRE_BLAST  ,$22,$78,FIRE,$D8,5
-db WATERFALL   ,$00,$50,WATER,$FF,15
-db CLAMP       ,$2A,$23,WATER,$BF,10
-db SWIFT       ,$11,$3C,NORMAL,$FF,20
-db SKULL_BASH  ,$27,$64,NORMAL,$FF,15
-db SPIKE_CANNON,$1D,$14,NORMAL,$FF,15
-db CONSTRICT   ,$46,$0A,NORMAL,$FF,35
-db AMNESIA     ,$35,$00,PSYCHIC,$FF,20
-db KINESIS     ,$16,$00,PSYCHIC,$CC,15
-db SOFTBOILED  ,$38,$00,NORMAL,$FF,10
-db HI_JUMP_KICK,$2D,$55,FIGHTING,$E5,20
-db GLARE       ,$43,$00,NORMAL,$BF,30
-db DREAM_EATER ,$08,$64,PSYCHIC,$FF,15
-db POISON_GAS  ,$42,$00,POISON,$8C,40
-db BARRAGE     ,$1D,$0F,NORMAL,$D8,20
-db LEECH_LIFE  ,$03,$14,BUG,$FF,15
-db LOVELY_KISS ,$20,$00,NORMAL,$BF,10
-db SKY_ATTACK  ,$27,$8C,FLYING,$E5,5
-db TRANSFORM   ,$39,$00,NORMAL,$FF,10
-db BUBBLE      ,$46,$14,WATER,$FF,30
-db DIZZY_PUNCH ,$00,$46,NORMAL,$FF,10
-db SPORE       ,$20,$00,GRASS,$FF,15
-db FLASH       ,$16,$00,NORMAL,$B2,20
-db PSYWAVE     ,$29,$01,PSYCHIC,$CC,15
-db SPLASH      ,$55,$00,NORMAL,$FF,40
-db ACID_ARMOR  ,$33,$00,POISON,$FF,40
-db CRABHAMMER  ,$00,$5A,WATER,$D8,10
-db EXPLOSION   ,$07,$AA,NORMAL,$FF,5
-db FURY_SWIPES ,$1D,$12,NORMAL,$CC,15
-db BONEMERANG  ,$2C,$32,GROUND,$E5,10
-db REST        ,$38,$00,PSYCHIC,$FF,10
-db ROCK_SLIDE  ,$00,$4B,ROCK,$E5,10
-db HYPER_FANG  ,$1F,$50,NORMAL,$E5,15
-db SHARPEN     ,$0A,$00,NORMAL,$FF,30
-db CONVERSION  ,$18,$00,NORMAL,$FF,30
-db TRI_ATTACK  ,$00,$50,NORMAL,$FF,10
-db SUPER_FANG  ,$28,$01,NORMAL,$E5,10
-db SLASH       ,$00,$46,NORMAL,$FF,20
-db SUBSTITUTE  ,$4F,$00,NORMAL,$FF,10
-db STRUGGLE    ,$30,$32,NORMAL,$FF,10
+db POUND       ,NO_ADDITIONAL_EFFECT      ,$28,NORMAL,  $FF,35
+db KARATE_CHOP ,NO_ADDITIONAL_EFFECT      ,$32,NORMAL,  $FF,25
+db DOUBLESLAP  ,TWO_TO_FIVE_ATTACKS_EFFECT,$0F,NORMAL,  $D8,10
+db COMET_PUNCH ,TWO_TO_FIVE_ATTACKS_EFFECT,$12,NORMAL,  $D8,15
+db MEGA_PUNCH  ,NO_ADDITIONAL_EFFECT      ,$50,NORMAL,  $D8,20
+db PAY_DAY     ,PAY_DAY_EFFECT            ,$28,NORMAL,  $FF,20
+db FIRE_PUNCH  ,BURN_SIDE_EFFECT1         ,$4B,FIRE,    $FF,15
+db ICE_PUNCH   ,FREEZE_SIDE_EFFECT        ,$4B,ICE,     $FF,15
+db THUNDERPUNCH,PARALYZE_SIDE_EFFECT1     ,$4B,ELECTRIC,$FF,15
+db SCRATCH     ,NO_ADDITIONAL_EFFECT      ,$28,NORMAL,  $FF,35
+db VICEGRIP    ,NO_ADDITIONAL_EFFECT      ,$37,NORMAL,  $FF,30
+db GUILLOTINE  ,OHKO_EFFECT               ,$01,NORMAL,  $4C,5
+db RAZOR_WIND  ,CHARGE_EFFECT             ,$50,NORMAL,  $BF,10
+db SWORDS_DANCE,ATTACK_UP2_EFFECT         ,$00,NORMAL,  $FF,30
+db CUT         ,NO_ADDITIONAL_EFFECT      ,$32,NORMAL,  $F2,30
+db GUST        ,NO_ADDITIONAL_EFFECT      ,$28,NORMAL,  $FF,35
+db WING_ATTACK ,NO_ADDITIONAL_EFFECT      ,$23,FLYING,  $FF,35
+db WHIRLWIND   ,SWITCH_AND_TELEPORT_EFFECT,$00,NORMAL,  $D8,20
+db FLY         ,FLY_EFFECT                ,$46,FLYING,  $F2,15
+db BIND        ,TRAPPING_EFFECT           ,$0F,NORMAL,  $BF,20
+db SLAM        ,NO_ADDITIONAL_EFFECT      ,$50,NORMAL,  $BF,20
+db VINE_WHIP   ,NO_ADDITIONAL_EFFECT      ,$23,GRASS,   $FF,10
+db STOMP       ,FLINCH_SIDE_EFFECT2       ,$41,NORMAL,  $FF,20
+db DOUBLE_KICK ,ATTACK_TWICE_EFFECT       ,$1E,FIGHTING,$FF,30
+db MEGA_KICK   ,NO_ADDITIONAL_EFFECT      ,$78,NORMAL,  $BF,5
+db JUMP_KICK   ,JUMP_KICK_EFFECT          ,$46,FIGHTING,$F2,25
+db ROLLING_KICK,FLINCH_SIDE_EFFECT2       ,$3C,FIGHTING,$D8,15
+db SAND_ATTACK ,ACCURACY_DOWN1_EFFECT     ,$00,NORMAL,  $FF,15
+db HEADBUTT    ,FLINCH_SIDE_EFFECT2       ,$46,NORMAL,  $FF,15
+db HORN_ATTACK ,NO_ADDITIONAL_EFFECT      ,$41,NORMAL,  $FF,25
+db FURY_ATTACK ,TWO_TO_FIVE_ATTACKS_EFFECT,$0F,NORMAL,  $D8,20
+db HORN_DRILL  ,OHKO_EFFECT               ,$01,NORMAL,  $4C,5
+db TACKLE      ,NO_ADDITIONAL_EFFECT      ,$23,NORMAL,  $F2,35
+db BODY_SLAM   ,PARALYZE_SIDE_EFFECT2     ,$55,NORMAL,  $FF,15
+db WRAP        ,TRAPPING_EFFECT           ,$0F,NORMAL,  $D8,20
+db TAKE_DOWN   ,RECOIL_EFFECT             ,$5A,NORMAL,  $D8,20
+db THRASH      ,THRASH_PETAL_DANCE_EFFECT ,$5A,NORMAL,  $FF,20
+db DOUBLE_EDGE ,RECOIL_EFFECT             ,$64,NORMAL,  $FF,15
+db TAIL_WHIP   ,DEFENSE_DOWN1_EFFECT      ,$00,NORMAL,  $FF,30
+db POISON_STING,POISON_SIDE_EFFECT1       ,$0F,POISON,  $FF,35
+db TWINEEDLE   ,TWINEEDLE_EFFECT          ,$19,BUG,     $FF,20
+db PIN_MISSILE ,TWO_TO_FIVE_ATTACKS_EFFECT,$0E,BUG,     $D8,20
+db LEER        ,DEFENSE_DOWN1_EFFECT      ,$00,NORMAL,  $FF,30
+db BITE        ,FLINCH_SIDE_EFFECT1       ,$3C,NORMAL,  $FF,25
+db GROWL       ,ATTACK_DOWN1_EFFECT       ,$00,NORMAL,  $FF,40
+db ROAR        ,SWITCH_AND_TELEPORT_EFFECT,$00,NORMAL,  $FF,20
+db SING        ,SLEEP_EFFECT              ,$00,NORMAL,  $8C,15
+db SUPERSONIC  ,CONFUSION_EFFECT          ,$00,NORMAL,  $8C,20
+db SONICBOOM   ,SPECIAL_DAMAGE_EFFECT     ,$01,NORMAL,  $E5,20
+db DISABLE     ,DISABLE_EFFECT            ,$00,NORMAL,  $8C,20
+db ACID        ,DEFENSE_DOWN_SIDE_EFFECT  ,$28,POISON,  $FF,30
+db EMBER       ,BURN_SIDE_EFFECT1         ,$28,FIRE,    $FF,25
+db FLAMETHROWER,BURN_SIDE_EFFECT1         ,$5F,FIRE,    $FF,15
+db MIST        ,MIST_EFFECT               ,$00,ICE,     $FF,30
+db WATER_GUN   ,NO_ADDITIONAL_EFFECT      ,$28,WATER,   $FF,25
+db HYDRO_PUMP  ,NO_ADDITIONAL_EFFECT      ,$78,WATER,   $CC,5
+db SURF        ,NO_ADDITIONAL_EFFECT      ,$5F,WATER,   $FF,15
+db ICE_BEAM    ,FREEZE_SIDE_EFFECT        ,$5F,ICE,     $FF,10
+db BLIZZARD    ,FREEZE_SIDE_EFFECT        ,$78,ICE,     $E5,5
+db PSYBEAM     ,CONFUSION_SIDE_EFFECT     ,$41,PSYCHIC, $FF,20
+db BUBBLEBEAM  ,SPEED_DOWN_SIDE_EFFECT    ,$41,WATER,   $FF,20
+db AURORA_BEAM ,ATTACK_DOWN_SIDE_EFFECT   ,$41,ICE,     $FF,20
+db HYPER_BEAM  ,HYPER_BEAM_EFFECT         ,$96,NORMAL,  $E5,5
+db PECK        ,NO_ADDITIONAL_EFFECT      ,$23,FLYING,  $FF,35
+db DRILL_PECK  ,NO_ADDITIONAL_EFFECT      ,$50,FLYING,  $FF,20
+db SUBMISSION  ,RECOIL_EFFECT             ,$50,FIGHTING,$CC,25
+db LOW_KICK    ,FLINCH_SIDE_EFFECT2       ,$32,FIGHTING,$E5,20
+db COUNTER     ,NO_ADDITIONAL_EFFECT      ,$01,FIGHTING,$FF,20
+db SEISMIC_TOSS,SPECIAL_DAMAGE_EFFECT     ,$01,FIGHTING,$FF,20
+db STRENGTH    ,NO_ADDITIONAL_EFFECT      ,$50,NORMAL,  $FF,15
+db ABSORB      ,DRAIN_HP_EFFECT           ,$14,GRASS,   $FF,20
+db MEGA_DRAIN  ,DRAIN_HP_EFFECT           ,$28,GRASS,   $FF,10
+db LEECH_SEED  ,LEECH_SEED_EFFECT         ,$00,GRASS,   $E5,10
+db GROWTH      ,SPECIAL_UP1_EFFECT        ,$00,NORMAL,  $FF,40
+db RAZOR_LEAF  ,NO_ADDITIONAL_EFFECT      ,$37,GRASS,   $F2,25
+db SOLARBEAM   ,CHARGE_EFFECT             ,$78,GRASS,   $FF,10
+db POISONPOWDER,POISON_EFFECT             ,$00,POISON,  $BF,35
+db STUN_SPORE  ,PARALYZE_EFFECT           ,$00,GRASS,   $BF,30
+db SLEEP_POWDER,SLEEP_EFFECT              ,$00,GRASS,   $BF,15
+db PETAL_DANCE ,THRASH_PETAL_DANCE_EFFECT ,$46,GRASS,   $FF,20
+db STRING_SHOT ,SPEED_DOWN1_EFFECT        ,$00,BUG,     $F2,40
+db DRAGON_RAGE ,SPECIAL_DAMAGE_EFFECT     ,$01,DRAGON,  $FF,10
+db FIRE_SPIN   ,TRAPPING_EFFECT           ,$0F,FIRE,    $B2,15
+db THUNDERSHOCK,PARALYZE_SIDE_EFFECT1     ,$28,ELECTRIC,$FF,30
+db THUNDERBOLT ,PARALYZE_SIDE_EFFECT1     ,$5F,ELECTRIC,$FF,15
+db THUNDER_WAVE,PARALYZE_EFFECT           ,$00,ELECTRIC,$FF,20
+db THUNDER     ,PARALYZE_SIDE_EFFECT1     ,$78,ELECTRIC,$B2,10
+db ROCK_THROW  ,NO_ADDITIONAL_EFFECT      ,$32,ROCK,    $A5,15
+db EARTHQUAKE  ,NO_ADDITIONAL_EFFECT      ,$64,GROUND,  $FF,10
+db FISSURE     ,OHKO_EFFECT               ,$01,GROUND,  $4C,5
+db DIG         ,CHARGE_EFFECT             ,$64,GROUND,  $FF,10
+db TOXIC       ,POISON_EFFECT             ,$00,POISON,  $D8,10
+db CONFUSION   ,CONFUSION_SIDE_EFFECT     ,$32,PSYCHIC, $FF,25
+db PSYCHIC_M   ,SPECIAL_DOWN_SIDE_EFFECT  ,$5A,PSYCHIC, $FF,10
+db HYPNOSIS    ,SLEEP_EFFECT              ,$00,PSYCHIC, $99,20
+db MEDITATE    ,ATTACK_UP1_EFFECT         ,$00,PSYCHIC, $FF,40
+db AGILITY     ,SPEED_UP2_EFFECT          ,$00,PSYCHIC, $FF,30
+db QUICK_ATTACK,NO_ADDITIONAL_EFFECT      ,$28,NORMAL,  $FF,30
+db RAGE        ,RAGE_EFFECT               ,$14,NORMAL,  $FF,20
+db TELEPORT    ,SWITCH_AND_TELEPORT_EFFECT,$00,PSYCHIC, $FF,20
+db NIGHT_SHADE ,SPECIAL_DAMAGE_EFFECT     ,$00,GHOST,   $FF,15
+db MIMIC       ,MIMIC_EFFECT              ,$00,NORMAL,  $FF,10
+db SCREECH     ,DEFENSE_DOWN2_EFFECT      ,$00,NORMAL,  $D8,40
+db DOUBLE_TEAM ,EVASION_UP1_EFFECT        ,$00,NORMAL,  $FF,15
+db RECOVER     ,HEAL_EFFECT               ,$00,NORMAL,  $FF,20
+db HARDEN      ,DEFENSE_UP1_EFFECT        ,$00,NORMAL,  $FF,30
+db MINIMIZE    ,EVASION_UP1_EFFECT        ,$00,NORMAL,  $FF,20
+db SMOKESCREEN ,ACCURACY_DOWN1_EFFECT     ,$00,NORMAL,  $FF,20
+db CONFUSE_RAY ,CONFUSION_EFFECT          ,$00,GHOST,   $FF,10
+db WITHDRAW    ,DEFENSE_UP1_EFFECT        ,$00,WATER,   $FF,40
+db DEFENSE_CURL,DEFENSE_UP1_EFFECT        ,$00,NORMAL,  $FF,40
+db BARRIER     ,DEFENSE_UP2_EFFECT        ,$00,PSYCHIC, $FF,30
+db LIGHT_SCREEN,LIGHT_SCREEN_EFFECT       ,$00,PSYCHIC, $FF,30
+db HAZE        ,HAZE_EFFECT               ,$00,ICE,     $FF,30
+db REFLECT     ,REFLECT_EFFECT            ,$00,PSYCHIC, $FF,20
+db FOCUS_ENERGY,FOCUS_ENERGY_EFFECT       ,$00,NORMAL,  $FF,30
+db BIDE        ,BIDE_EFFECT               ,$00,NORMAL,  $FF,10
+db METRONOME   ,METRONOME_EFFECT          ,$00,NORMAL,  $FF,10
+db MIRROR_MOVE ,MIRROR_MOVE_EFFECT        ,$00,FLYING,  $FF,20
+db SELFDESTRUCT,EXPLODE_EFFECT            ,$82,NORMAL,  $FF,5
+db EGG_BOMB    ,NO_ADDITIONAL_EFFECT      ,$64,NORMAL,  $BF,10
+db LICK        ,PARALYZE_SIDE_EFFECT2     ,$14,GHOST,   $FF,30
+db SMOG        ,POISON_SIDE_EFFECT2       ,$14,POISON,  $B2,20
+db SLUDGE      ,POISON_SIDE_EFFECT2       ,$41,POISON,  $FF,20
+db BONE_CLUB   ,FLINCH_SIDE_EFFECT1       ,$41,GROUND,  $D8,20
+db FIRE_BLAST  ,BURN_SIDE_EFFECT2         ,$78,FIRE,    $D8,5
+db WATERFALL   ,NO_ADDITIONAL_EFFECT      ,$50,WATER,   $FF,15
+db CLAMP       ,TRAPPING_EFFECT           ,$23,WATER,   $BF,10
+db SWIFT       ,SWIFT_EFFECT              ,$3C,NORMAL,  $FF,20
+db SKULL_BASH  ,CHARGE_EFFECT             ,$64,NORMAL,  $FF,15
+db SPIKE_CANNON,TWO_TO_FIVE_ATTACKS_EFFECT,$14,NORMAL,  $FF,15
+db CONSTRICT   ,SPEED_DOWN_SIDE_EFFECT    ,$0A,NORMAL,  $FF,35
+db AMNESIA     ,SPECIAL_UP2_EFFECT        ,$00,PSYCHIC, $FF,20
+db KINESIS     ,ACCURACY_DOWN1_EFFECT     ,$00,PSYCHIC, $CC,15
+db SOFTBOILED  ,HEAL_EFFECT               ,$00,NORMAL,  $FF,10
+db HI_JUMP_KICK,JUMP_KICK_EFFECT          ,$55,FIGHTING,$E5,20
+db GLARE       ,PARALYZE_EFFECT           ,$00,NORMAL,  $BF,30
+db DREAM_EATER ,DREAM_EATER_EFFECT        ,$64,PSYCHIC, $FF,15
+db POISON_GAS  ,POISON_EFFECT             ,$00,POISON,  $8C,40
+db BARRAGE     ,TWO_TO_FIVE_ATTACKS_EFFECT,$0F,NORMAL,  $D8,20
+db LEECH_LIFE  ,DRAIN_HP_EFFECT           ,$14,BUG,     $FF,15
+db LOVELY_KISS ,SLEEP_EFFECT              ,$00,NORMAL,  $BF,10
+db SKY_ATTACK  ,CHARGE_EFFECT             ,$8C,FLYING,  $E5,5
+db TRANSFORM   ,TRANSFORM_EFFECT          ,$00,NORMAL,  $FF,10
+db BUBBLE      ,SPEED_DOWN_SIDE_EFFECT    ,$14,WATER,   $FF,30
+db DIZZY_PUNCH ,NO_ADDITIONAL_EFFECT      ,$46,NORMAL,  $FF,10
+db SPORE       ,SLEEP_EFFECT              ,$00,GRASS,   $FF,15
+db FLASH       ,ACCURACY_DOWN1_EFFECT     ,$00,NORMAL,  $B2,20
+db PSYWAVE     ,SPECIAL_DAMAGE_EFFECT     ,$01,PSYCHIC, $CC,15
+db SPLASH      ,SPLASH_EFFECT             ,$00,NORMAL,  $FF,40
+db ACID_ARMOR  ,DEFENSE_UP2_EFFECT        ,$00,POISON,  $FF,40
+db CRABHAMMER  ,NO_ADDITIONAL_EFFECT      ,$5A,WATER,   $D8,10
+db EXPLOSION   ,EXPLODE_EFFECT            ,$AA,NORMAL,  $FF,5
+db FURY_SWIPES ,TWO_TO_FIVE_ATTACKS_EFFECT,$12,NORMAL,  $CC,15
+db BONEMERANG  ,ATTACK_TWICE_EFFECT       ,$32,GROUND,  $E5,10
+db REST        ,HEAL_EFFECT               ,$00,PSYCHIC, $FF,10
+db ROCK_SLIDE  ,NO_ADDITIONAL_EFFECT      ,$4B,ROCK,    $E5,10
+db HYPER_FANG  ,FLINCH_SIDE_EFFECT1       ,$50,NORMAL,  $E5,15
+db SHARPEN     ,ATTACK_UP1_EFFECT         ,$00,NORMAL,  $FF,30
+db CONVERSION  ,CONVERSION_EFFECT         ,$00,NORMAL,  $FF,30
+db TRI_ATTACK  ,NO_ADDITIONAL_EFFECT      ,$50,NORMAL,  $FF,10
+db SUPER_FANG  ,SUPER_FANG_EFFECT         ,$01,NORMAL,  $E5,10
+db SLASH       ,NO_ADDITIONAL_EFFECT      ,$46,NORMAL,  $FF,20
+db SUBSTITUTE  ,SUBSTITUTE_EFFECT         ,$00,NORMAL,  $FF,10
+db STRUGGLE    ,RECOIL_EFFECT             ,$32,NORMAL,  $FF,10
+
 
 BulbasaurBaseStats: ; 0x383de
 	db DEX_BULBASAUR ; pokedex id
@@ -36556,8 +50246,123 @@ CryData:
 	db $25, $44, $20; Weepinbell
 	db $25, $66, $CC; Victreebel
 
-INCBIN "baserom.gbc",$39680,$39719 - $39680
+; known jump sources: 3ed07 (f:6d07)
+Func_39680: ; 39680 (e:5680)
+	ld a, [H_WHOSETURN] ; $FF00+$f3
+	and a
+	ld a, [$d060]
+	ld hl, $d026
+	jr z, .asm_39691
+	ld a, [$d065]
+	ld hl, $cff7
+.asm_39691
+	ld c, $4
+	ld b, a
+.asm_39694
+	srl b
+	call c, Func_3969f
+	inc hl
+	inc hl
+	dec c
+	ret z
+	jr .asm_39694
 
+; known jump sources: 39696 (e:5696)
+Func_3969f: ; 3969f (e:569f)
+	ld a, [hl]
+	add a
+	ld [hld], a
+	ld a, [hl]
+	rl a
+	ld [hli], a
+	ret
+
+; known jump sources: 3ed0f (f:6d0f)
+Func_396a7: ; 396a7 (e:56a7)
+	ld a, [H_WHOSETURN] ; $FF00+$f3
+	and a
+	ld a, [$d061]
+	ld hl, $d025
+	jr z, .asm_396b8
+	ld a, [$d066]
+	ld hl, $cff6
+.asm_396b8
+	ld c, $4
+	ld b, a
+.asm_396bb
+	srl b
+	call c, Func_396c6
+	inc hl
+	inc hl
+	dec c
+	ret z
+	jr .asm_396bb
+
+; known jump sources: 396bd (e:56bd)
+Func_396c6: ; 396c6 (e:56c6)
+	ld a, [hl]
+	srl a
+	ld [hli], a
+	rr [hl]
+	or [hl]
+	jr nz, .asm_396d1
+	ld [hl], $1
+.asm_396d1
+	dec hl
+	ret
+
+; known jump sources: 3ed17 (f:6d17)
+Func_396d3: ; 396d3 (e:56d3)
+	xor a
+	ld [$cfd8], a
+	ld b, $1
+	call GoPAL_SET
+	ld hl, Func_3f04b
+	ld b, BANK(Func_3f04b)
+	call Bankswitch ; indirect jump to Func_3f04b (3f04b (f:704b))
+	ld hl, $c3b3
+	ld c, $0
+.asm_396e9
+	inc c
+	ld a, c
+	cp $7
+	ret z
+	ld d, $0
+	push bc
+	push hl
+.asm_396f2
+	call Func_39707
+	inc hl
+	ld a, $7
+	add d
+	ld d, a
+	dec c
+	jr nz, .asm_396f2
+	ld c, $4
+	call DelayFrames
+	pop hl
+	pop bc
+	dec hl
+	jr .asm_396e9
+
+; known jump sources: 396f2 (e:56f2)
+Func_39707: ; 39707 (e:5707)
+	push hl
+	push de
+	push bc
+	ld e, $7
+.asm_3970c
+	ld [hl], d
+	ld bc, $14
+	add hl, bc
+	inc d
+	dec e
+	jr nz, .asm_3970c
+	pop bc
+	pop de
+	pop hl
+	ret
+; 39719 (e:5719)
 ; creates a set of moves that may be used and returns its address in hl
 ; unused slots are filled with 0, all used slots may be chosen with equal probability
 AIEnemyTrainerChooseMoves: ; 5719 0x39719
@@ -37078,8 +50883,129 @@ TrainerNames: ; 59FF
 	db "AGATHA@"
 	db "LANCE@"
 
-INCBIN "baserom.gbc",$39B87,$39C53 - $39B87
+; known jump sources: 6f35 (1:6f35), 12b79 (4:6b79), 3d232 (f:5232)
+Func_39b87: ; 39b87 (e:5b87)
+	ld hl, $d0dc
+	ld de, $d0e1
+	ld b, $0
+.asm_39b8f
+	ld a, [hli]
+	and a
+	jr z, .asm_39bc1
+	push hl
+	ld [$d0b5], a
+	ld a, $2c
+	ld [$d0b7], a
+	ld a, $2
+	ld [$d0b6], a
+	call GetName
+	ld hl, $cd6d
+.asm_39ba7
+	ld a, [hli]
+	cp $50
+	jr z, .asm_39bb0
+	ld [de], a
+	inc de
+	jr .asm_39ba7
+.asm_39bb0
+	ld a, b
+	ld [$cd6c], a
+	inc b
+	ld a, $4e
+	ld [de], a
+	inc de
+	pop hl
+	ld a, b
+	cp $4
+	jr z, .asm_39bd1
+	jr .asm_39b8f
+.asm_39bc1
+	ld a, $e3
+	ld [de], a
+	inc de
+	inc b
+	ld a, b
+	cp $4
+	jr z, .asm_39bd1
+	ld a, $4e
+	ld [de], a
+	inc de
+	jr .asm_39bc1
+.asm_39bd1
+	ld a, $50
+	ld [de], a
+	ret
 
+; known jump sources: 6c76 (1:6c76), 6d2d (1:6d2d)
+Func_39bd5: ; 39bd5 (e:5bd5)
+	ld a, [$d11b]
+	cp $1
+	jr nz, .asm_39be6
+	ld hl, W_ENEMYMONCOUNT ; $d89c
+	ld de, $d9ac
+	ld a, $6
+	jr .asm_39c18
+.asm_39be6
+	cp $4
+	jr nz, .asm_39bf4
+	ld hl, W_NUMINPARTY ; $d163
+	ld de, W_PARTYMON1OT ; $d273
+	ld a, $5
+	jr .asm_39c18
+.asm_39bf4
+	cp $5
+	jr nz, .asm_39c02
+	ld hl, $cf7b
+	ld de, $421e
+	ld a, $1
+	jr .asm_39c18
+.asm_39c02
+	cp $2
+	jr nz, .asm_39c10
+	ld hl, W_NUMBAGITEMS ; $d31d
+	ld de, $472b
+	ld a, $4
+	jr .asm_39c18
+.asm_39c10
+	ld hl, $cf7b
+	ld de, $472b
+	ld a, $4
+.asm_39c18
+	ld [$d0b6], a
+	ld a, l
+	ld [$cf8b], a
+	ld a, h
+	ld [$cf8c], a
+	ld a, e
+	ld [$cf8d], a
+	ld a, d
+	ld [$cf8e], a
+	ld bc, $4608
+	ld a, c
+	ld [$cf8f], a
+	ld a, b
+	ld [$cf90], a
+	ret
+
+; known jump sources: 45cc (1:45cc)
+Func_39c37: ; 39c37 (e:5c37)
+	ld hl, W_PARTYMON1 ; $d164
+	ld a, [$cc49]
+	and a
+	jr z, .asm_39c4b
+	dec a
+	jr z, .asm_39c48
+	ld hl, $da81
+	jr .asm_39c4b
+.asm_39c48
+	ld hl, $d89d
+.asm_39c4b
+	ld d, $0
+	add hl, de
+	ld a, [hl]
+	ld [$cf91], a
+	ret
+; 39c53 (e:5c53)
 ReadTrainer: ; 5C53
 
 ; don't change any moves in a link battle
@@ -38539,8 +52465,501 @@ AIBattleUseItemText: ; 0x3a844
 	TX_FAR _AIBattleUseItemText
 	db "@"
 
-INCBIN "baserom.gbc",$3a849,$3af3e - $3a849
+; known jump sources: 58dcf (16:4dcf)
+Func_3a849: ; 3a849 (e:6849)
+	call Func_3a85d
+	call Func_3a869
+	ld a, [W_ISINBATTLE] ; $d057
+	dec a
+	ret z
+	jp Func_3a887
 
+; known jump sources: 3c671 (f:4671)
+Func_3a857: ; 3a857 (e:6857)
+	call Func_3a85d
+	jp Func_3a887
+
+; known jump sources: 3a849 (e:6849), 3a857 (e:6857), 3a948 (e:6948)
+Func_3a85d: ; 3a85d (e:685d)
+	ld de, $697e
+	ld hl, $8310
+	ld bc, $e04
+	jp CopyVideoData
+
+; known jump sources: 3a84c (e:684c)
+Func_3a869: ; 3a869 (e:6869)
+	call Func_3a902
+	ld hl, W_PARTYMON1_NUM ; $d16b (aliases: W_PARTYMON1DATA)
+	ld de, W_NUMINPARTY ; $d163
+	call Func_3a8a6
+	ld a, $60
+	ld hl, W_BASECOORDX ; $d081
+	ld [hli], a
+	ld [hl], a
+	ld a, $8
+	ld [$cd3e], a
+	ld hl, $c300
+	jp Func_3a8e1
+
+; known jump sources: 3a854 (e:6854), 3a85a (e:685a)
+Func_3a887: ; 3a887 (e:6887)
+	call Func_3a919
+	ld hl, W_WATERRATE ; $d8a4
+	ld de, W_ENEMYMONCOUNT ; $d89c
+	call Func_3a8a6
+	ld hl, W_BASECOORDX ; $d081
+	ld a, $48
+	ld [hli], a
+	ld [hl], $20
+	ld a, $f8
+	ld [$cd3e], a
+	ld hl, $c318
+	jp Func_3a8e1
+
+; known jump sources: 3a872 (e:6872), 3a890 (e:6890), 3a951 (e:6951), 3a96d (e:696d)
+Func_3a8a6: ; 3a8a6 (e:68a6)
+	ld a, [de]
+	push af
+	ld de, $cee9
+	ld c, $6
+	ld a, $34
+.asm_3a8af
+	ld [de], a
+	inc de
+	dec c
+	jr nz, .asm_3a8af
+	pop af
+	ld de, $cee9
+.asm_3a8b8
+	push af
+	call Func_3a8c2
+	inc de
+	pop af
+	dec a
+	jr nz, .asm_3a8b8
+	ret
+
+; known jump sources: 3a8b9 (e:68b9)
+Func_3a8c2: ; 3a8c2 (e:68c2)
+	inc hl
+	ld a, [hli]
+	and a
+	jr nz, .asm_3a8cd
+	ld a, [hl]
+	and a
+	ld b, $33
+	jr z, .asm_3a8d8
+.asm_3a8cd
+	inc hl
+	inc hl
+	ld a, [hl]
+	and a
+	ld b, $32
+	jr nz, .asm_3a8da
+	dec b
+	jr .asm_3a8da
+.asm_3a8d8
+	inc hl
+	inc hl
+.asm_3a8da
+	ld a, b
+	ld [de], a
+	ld bc, $28
+	add hl, bc
+	ret
+
+; known jump sources: 3a884 (e:6884), 3a8a3 (e:68a3), 3a964 (e:6964), 3a97b (e:697b)
+Func_3a8e1: ; 3a8e1 (e:68e1)
+	ld de, $cee9
+	ld c, $6
+.asm_3a8e6
+	ld a, [W_BASECOORDY] ; $d082
+	ld [hli], a
+	ld a, [W_BASECOORDX] ; $d081
+	ld [hli], a
+	ld a, [de]
+	ld [hli], a
+	xor a
+	ld [hli], a
+	ld a, [W_BASECOORDX] ; $d081
+	ld b, a
+	ld a, [$cd3e]
+	add b
+	ld [W_BASECOORDX], a ; $d081
+	inc de
+	dec c
+	jr nz, .asm_3a8e6
+	ret
+
+; known jump sources: 3a869 (e:6869), 3cd71 (f:4d71)
+Func_3a902: ; 3a902 (e:6902)
+	ld hl, $6916
+	ld de, $cd3f
+	ld bc, $3
+	call CopyData
+	ld hl, $c47a
+	ld de, rIE ; $ffff
+	jr asm_3a930
+
+INCBIN "baserom.gbc",$3a916,$3a919 - $3a916
+
+; known jump sources: 3a887 (e:6887), 3cdfd (f:4dfd)
+Func_3a919: ; 3a919 (e:6919)
+	ld hl, $692d
+	ld de, $cd3f
+	ld bc, $3
+	call CopyData
+	ld hl, $c3c9
+	ld de, $1
+	jr asm_3a930
+
+INCBIN "baserom.gbc",$3a92d,$3a930 - $3a92d
+asm_3a930: ; 3a930 (e:6930)
+	ld [hl], $73
+	ld bc, $14
+	add hl, bc
+	ld a, [$cd40]
+	ld [hl], a
+	ld a, $8
+.asm_3a93c
+	add hl, de
+	ld [hl], $76
+	dec a
+	jr nz, .asm_3a93c
+	add hl, de
+	ld a, [$cd41]
+	ld [hl], a
+	ret
+
+; known jump sources: 37306 (d:7306)
+Func_3a948: ; 3a948 (e:6948)
+	call Func_3a85d
+	ld hl, W_PARTYMON1_NUM ; $d16b (aliases: W_PARTYMON1DATA)
+	ld de, W_NUMINPARTY ; $d163
+	call Func_3a8a6
+	ld hl, W_BASECOORDX ; $d081
+	ld a, $50
+	ld [hli], a
+	ld [hl], $40
+	ld a, $8
+	ld [$cd3e], a
+	ld hl, $c300
+	call Func_3a8e1
+	ld hl, W_WATERRATE ; $d8a4
+	ld de, W_ENEMYMONCOUNT ; $d89c
+	call Func_3a8a6
+	ld hl, W_BASECOORDX ; $d081
+	ld a, $50
+	ld [hli], a
+	ld [hl], $68
+	ld hl, $c318
+	jp Func_3a8e1
+
+INCBIN "baserom.gbc",$3a97e,$3ad0e - $3a97e
+
+; known jump sources: df11 (3:5f11), 17da3 (5:7da3)
+Func_3ad0e: ; 3ad0e (e:6d0e)
+	ld hl, $ccd3
+	xor a
+	ld [hl], a
+	ld a, [W_WHICHPOKEMON] ; $cf92
+	ld c, a
+	ld b, $1
+	call Func_3b057
+
+; known jump sources: 13810 (4:7810)
+Func_3ad1c: ; 3ad1c (e:6d1c)
+	ld a, [$FF00+$d7]
+	push af
+	xor a
+	ld [$d121], a
+	dec a
+	ld [W_WHICHPOKEMON], a ; $cf92
+	push hl
+	push bc
+	push de
+	ld hl, W_NUMINPARTY ; $d163
+	push hl
+asm_3ad2e: ; 3ad2e (e:6d2e)
+	ld hl, W_WHICHPOKEMON ; $cf92
+	inc [hl]
+	pop hl
+	inc hl
+	ld a, [hl]
+	cp $ff
+	jp z, Func_3aede
+	ld [$cee9], a
+	push hl
+	ld a, [W_WHICHPOKEMON] ; $cf92
+	ld c, a
+	ld hl, $ccd3
+	ld b, $2
+	call Func_3b057
+	ld a, c
+	and a
+	jp z, asm_3ad2e
+	ld a, [$cee9]
+	dec a
+	ld b, $0
+	ld hl, $705c
+	add a
+	rl b
+	ld c, a
+	add hl, bc
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	push hl
+	ld a, [$cf91]
+	push af
+	xor a
+	ld [$cc49], a
+	call LoadMonData
+	pop af
+	ld [$cf91], a
+	pop hl
+
+; known jump sources: 3aedb (e:6edb)
+Func_3ad71: ; 3ad71 (e:6d71)
+	ld a, [hli]
+	and a
+	jr z, asm_3ad2e
+	ld b, a
+	cp $3
+	jr z, .asm_3ad91
+	ld a, [W_ISLINKBATTLE] ; $d12b
+	cp $32
+	jr z, asm_3ad2e
+	ld a, b
+	cp $2
+	jr z, .asm_3ada4
+	ld a, [$ccd4]
+	and a
+	jr nz, asm_3ad2e
+	ld a, b
+	cp $1
+	jr z, .asm_3adad
+.asm_3ad91
+	ld a, [W_ISLINKBATTLE] ; $d12b
+	cp $32
+	jp nz, Func_3aed9
+	ld a, [hli]
+	ld b, a
+	ld a, [$cfb9]
+	cp b
+	jp c, asm_3ad2e
+	jr .asm_3adb6
+.asm_3ada4
+	ld a, [hli]
+	ld b, a
+	ld a, [$cf91]
+	cp b
+	jp nz, Func_3aed9
+.asm_3adad
+	ld a, [hli]
+	ld b, a
+	ld a, [$cfb9]
+	cp b
+	jp c, Func_3aeda
+.asm_3adb6
+	ld [W_CURENEMYLVL], a ; $d127
+	ld a, $1
+	ld [$d121], a
+	push hl
+	ld a, [hl]
+	ld [$ceea], a
+	ld a, [W_WHICHPOKEMON] ; $cf92
+	ld hl, W_PARTYMON1NAME ; $d2b5
+	call GetPartyMonName
+	call Func_3826
+	ld hl, $6f4d
+	call PrintText
+	ld c, $32
+	call DelayFrames
+	xor a
+	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld hl, $c3a0
+	ld bc, $c14
+	call ClearScreenArea
+	ld a, $1
+	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld a, $ff
+	ld [$cfcb], a
+	call CleanLCD_OAM
+	ld hl, Func_7bde9
+	ld b, BANK(Func_7bde9)
+	call Bankswitch ; indirect jump to Func_7bde9 (7bde9 (1e:7de9))
+	jp c, Func_3af2e
+	ld hl, $6f3e
+	call PrintText
+	pop hl
+	ld a, [hl]
+	ld [$d0b5], a
+	ld [$cf98], a
+	ld [$ceea], a
+	ld a, $1
+	ld [$d0b6], a
+	ld a, $e
+	ld [$d0b7], a
+	call GetName
+	push hl
+	ld hl, $6f43
+	call Func_3c59
+	ld a, $89
+	call Func_3740
+	call Func_3748
+	ld c, $28
+	call DelayFrames
+	call ClearScreen
+	call Func_3aef7
+	ld a, [$d11e]
+	push af
+	ld a, [$d0b5]
+	ld [$d11e], a
+	ld a, $3a
+	call Predef ; indirect jump to IndexToPokedex (41010 (10:5010))
+	ld a, [$d11e]
+	dec a
+	ld hl, $43de
+	ld bc, $1c
+	call AddNTimes
+	ld de, $d0b8
+	call CopyData
+	ld a, [$d0b5]
+	ld [$d0b8], a
+	pop af
+	ld [$d11e], a
+	ld hl, $cfa8
+	ld de, $cfba
+	ld b, $1
+	call Func_3936
+	ld a, [W_WHICHPOKEMON] ; $cf92
+	ld hl, W_PARTYMON1_NUM ; $d16b (aliases: W_PARTYMON1DATA)
+	ld bc, $2c
+	call AddNTimes
+	ld e, l
+	ld d, h
+	push hl
+	push bc
+	ld bc, $22
+	add hl, bc
+	ld a, [hli]
+	ld b, a
+	ld c, [hl]
+	ld hl, $cfbb
+	ld a, [hld]
+	sub c
+	ld c, a
+	ld a, [hl]
+	sbc b
+	ld b, a
+	ld hl, $cf9a
+	ld a, [hl]
+	add c
+	ld [hld], a
+	ld a, [hl]
+	adc b
+	ld [hl], a
+	dec hl
+	pop bc
+	call CopyData
+	ld a, [$d0b5]
+	ld [$d11e], a
+	xor a
+	ld [$cc49], a
+	call Func_3af5b
+	pop hl
+	ld a, $42
+	call Predef ; indirect jump to Func_5db5e (5db5e (17:5b5e))
+	ld a, [W_ISINBATTLE] ; $d057
+	and a
+	call z, Func_3af52
+	ld a, $3a
+	call Predef ; indirect jump to IndexToPokedex (41010 (10:5010))
+	ld a, [$d11e]
+	dec a
+	ld c, a
+	ld b, $1
+	ld hl, W_OWNEDPOKEMON ; $d2f7
+	push bc
+	call Func_3b057
+	pop bc
+	ld hl, W_SEENPOKEMON ; $d30a
+	call Func_3b057
+	pop de
+	pop hl
+	ld a, [$cf98]
+	ld [hl], a
+	push hl
+	ld l, e
+	ld h, d
+	jr Func_3aeda
+
+; known jump sources: 3ad96 (e:6d96), 3adaa (e:6daa)
+Func_3aed9: ; 3aed9 (e:6ed9)
+	inc hl
+
+; known jump sources: 3adb3 (e:6db3), 3aed7 (e:6ed7)
+Func_3aeda: ; 3aeda (e:6eda)
+	inc hl
+	jp Func_3ad71
+
+; known jump sources: 3ad37 (e:6d37)
+Func_3aede: ; 3aede (e:6ede)
+	pop de
+	pop bc
+	pop hl
+	pop af
+	ld [$FF00+$d7], a
+	ld a, [W_ISLINKBATTLE] ; $d12b
+	cp $32
+	ret z
+	ld a, [W_ISINBATTLE] ; $d057
+	and a
+	ret nz
+	ld a, [$d121]
+	and a
+	call nz, Func_2307
+	ret
+
+; known jump sources: 3ae32 (e:6e32)
+Func_3aef7: ; 3aef7 (e:6ef7)
+	ld a, [$d0b5]
+	push af
+	ld a, [$d0b8]
+	ld [$d0b5], a
+	call GetName
+	pop af
+	ld [$d0b5], a
+	ld hl, $cd6d
+	ld de, $cf4b
+.asm_3af0e
+	ld a, [de]
+	inc de
+	cp [hl]
+	inc hl
+	ret nz
+	cp $50
+	jr nz, .asm_3af0e
+	ld a, [W_WHICHPOKEMON] ; $cf92
+	ld bc, $b
+	ld hl, W_PARTYMON1NAME ; $d2b5
+	call AddNTimes
+	push hl
+	call GetName
+	ld hl, $cd6d
+	pop de
+	jp CopyData
+
+; known jump sources: 3adfa (e:6dfa)
+Func_3af2e: ; 3af2e (e:6f2e)
+	ld hl, $6f48
+	call PrintText
+	call ClearScreen
+	pop hl
+	call Func_3af52
+	jp asm_3ad2e
+; 3af3e (e:6f3e)
 UnnamedText_3af3e: ; 0x3af3e
 	TX_FAR _UnnamedText_3af3e
 	db $50
@@ -38561,8 +52980,194 @@ UnnamedText_3af4d: ; 0x3af4d
 	db $50
 ; 0x3af4d + 5 bytes
 
-INCBIN "baserom.gbc",$3af52,$10a
+; known jump sources: 3aeb1 (e:6eb1), 3af38 (e:6f38)
+Func_3af52: ; 3af52 (e:6f52)
+	ld a, [W_ISLINKBATTLE] ; $d12b
+	cp $32
+	ret z
+	jp ReloadTilesetTilePatterns
 
+; known jump sources: df05 (3:5f05), 3aea4 (e:6ea4), 55420 (15:5420)
+Func_3af5b: ; 3af5b (e:6f5b)
+	ld hl, $705c
+	ld a, [$d11e]
+	ld [$cf91], a
+	dec a
+	ld bc, $0
+	ld hl, $705c
+	add a
+	rl b
+	ld c, a
+	add hl, bc
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+.asm_3af73
+	ld a, [hli]
+	and a
+	jr nz, .asm_3af73
+.asm_3af77
+	ld a, [hli]
+	and a
+	jr z, .asm_3afb1
+	ld b, a
+	ld a, [W_CURENEMYLVL] ; $d127
+	cp b
+	ld a, [hli]
+	jr nz, .asm_3af77
+	ld d, a
+	ld a, [$cc49]
+	and a
+	jr nz, .asm_3af96
+	ld hl, W_PARTYMON1_MOVE1 ; $d173
+	ld a, [W_WHICHPOKEMON] ; $cf92
+	ld bc, $2c
+	call AddNTimes
+.asm_3af96
+	ld b, $4
+.asm_3af98
+	ld a, [hli]
+	cp d
+	jr z, .asm_3afb1
+	dec b
+	jr nz, .asm_3af98
+	ld a, d
+	ld [$d0e0], a
+	ld [$d11e], a
+	call GetMoveName
+	call Func_3826
+	ld a, $1b
+	call Predef ; indirect jump to Func_6e43 (6e43 (1:6e43))
+.asm_3afb1
+	ld a, [$cf91]
+	ld [$d11e], a
+	ret
+
+; known jump sources: f419 (3:7419), 3ebc7 (f:6bc7)
+Func_3afb8: ; 3afb8 (e:6fb8)
+	call Load16BitRegisters
+	push hl
+	push de
+	push bc
+	ld hl, $705c
+	ld b, $0
+	ld a, [$cf91]
+	dec a
+	add a
+	rl b
+	ld c, a
+	add hl, bc
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+.asm_3afcf
+	ld a, [hli]
+	and a
+	jr nz, .asm_3afcf
+	jr .asm_3afd7
+.asm_3afd5
+	pop de
+.asm_3afd6
+	inc hl
+.asm_3afd7
+	ld a, [hli]
+	and a
+	jp z, Func_3b04a
+	ld b, a
+	ld a, [W_CURENEMYLVL] ; $d127
+	cp b
+	jp c, Func_3b04a
+	ld a, [$cee9]
+	and a
+	jr z, .asm_3aff0
+	ld a, [W_WHICHTRADE] ; $cd3d
+	cp b
+	jr nc, .asm_3afd6
+.asm_3aff0
+	push de
+	ld c, $4
+.asm_3aff3
+	ld a, [de]
+	inc de
+	cp [hl]
+	jr z, .asm_3afd5
+	dec c
+	jr nz, .asm_3aff3
+	pop de
+	push de
+	ld c, $4
+.asm_3afff
+	ld a, [de]
+	and a
+	jr z, .asm_3b021
+	inc de
+	dec c
+	jr nz, .asm_3afff
+	pop de
+	push de
+	push hl
+	ld h, d
+	ld l, e
+	call Func_3b04e
+	ld a, [$cee9]
+	and a
+	jr z, .asm_3b020
+	push de
+	ld bc, $12
+	add hl, bc
+	ld d, h
+	ld e, l
+	call Func_3b04e
+	pop de
+.asm_3b020
+	pop hl
+.asm_3b021
+	ld a, [hl]
+	ld [de], a
+	ld a, [$cee9]
+	and a
+	jr z, .asm_3afd5
+	push hl
+	ld a, [hl]
+	ld hl, $15
+	add hl, de
+	push hl
+	dec a
+	ld hl, $4000
+	ld bc, $6
+	call AddNTimes
+	ld de, $cee9
+	ld a, $e
+	call FarCopyData
+	ld a, [$ceee]
+	pop hl
+	ld [hl], a
+	pop hl
+	jr .asm_3afd5
+
+; known jump sources: 3afd9 (e:6fd9), 3afe1 (e:6fe1)
+Func_3b04a: ; 3b04a (e:704a)
+	pop bc
+	pop de
+	pop hl
+	ret
+
+; known jump sources: 3b00c (e:700c), 3b01c (e:701c)
+Func_3b04e: ; 3b04e (e:704e)
+	ld c, $3
+.asm_3b050
+	inc de
+	ld a, [de]
+	ld [hli], a
+	dec c
+	jr nz, .asm_3b050
+	ret
+
+; known jump sources: 3ad19 (e:6d19), 3ad47 (e:6d47), 3aec4 (e:6ec4), 3aecb (e:6ecb)
+Func_3b057: ; 3b057 (e:7057)
+	ld a, $10
+	jp Predef ; indirect jump to Func_f666 (f666 (3:7666))
+; 3b05c (e:705c)
 EvosMovesPointerTable: ; 705C
 	dw Mon112_EvosMoves
 	dw Mon115_EvosMoves
@@ -40735,8 +55340,115 @@ Mon071_EvosMoves:
 	db 18,SLEEP_POWDER
 	db 0
 
-INCBIN "baserom.gbc",$3b9ec,$3baa2 - $3b9ec
+; known jump sources: 3fb2b (f:7b2b)
+Func_3b9ec: ; 3b9ec (e:79ec)
+	ld a, [H_WHOSETURN] ; $FF00+$f3
+	and a
+	ld de, W_PLAYERMONCURHP ; $d015
+	ld hl, W_PLAYERMONMAXHP ; $d023
+	ld a, [W_PLAYERMOVENUM] ; $cfd2
+	jr z, .asm_3ba03
+	ld de, W_ENEMYMONCURHP ; $cfe6
+	ld hl, W_ENEMYMONMAXHP ; $cff4
+	ld a, [W_ENEMYMOVENUM] ; $cfcc
+.asm_3ba03
+	ld b, a
+	ld a, [de]
+	cp [hl]
+	inc de
+	inc hl
+	ld a, [de]
+	sbc [hl]
+	jp z, Func_3ba97
+	ld a, b
+	cp $9c
+	jr nz, .asm_3ba37
+	push hl
+	push de
+	push af
+	ld c, $32
+	call DelayFrames
+	ld hl, W_PLAYERMONSTATUS ; $d018
+	ld a, [H_WHOSETURN] ; $FF00+$f3
+	and a
+	jr z, .asm_3ba25
+	ld hl, W_ENEMYMONSTATUS ; $cfe9
+.asm_3ba25
+	ld a, [hl]
+	and a
+	ld [hl], $2
+	ld hl, $7aa2
+	jr z, .asm_3ba31
+	ld hl, $7aa7
+.asm_3ba31
+	call PrintText
+	pop af
+	pop de
+	pop hl
+.asm_3ba37
+	ld a, [hld]
+	ld [$cee9], a
+	ld c, a
+	ld a, [hl]
+	ld [$ceea], a
+	ld b, a
+	jr z, .asm_3ba47
+	srl b
+	rr c
+.asm_3ba47
+	ld a, [de]
+	ld [$ceeb], a
+	add c
+	ld [de], a
+	ld [$ceed], a
+	dec de
+	ld a, [de]
+	ld [$ceec], a
+	adc b
+	ld [de], a
+	ld [$ceee], a
+	inc hl
+	inc de
+	ld a, [de]
+	dec de
+	sub [hl]
+	dec hl
+	ld a, [de]
+	sbc [hl]
+	jr c, .asm_3ba6f
+	ld a, [hli]
+	ld [de], a
+	ld [$ceee], a
+	inc de
+	ld a, [hl]
+	ld [de], a
+	ld [$ceed], a
+.asm_3ba6f
+	ld hl, $7ba8
+	call Unnamed_3bbe1
+	ld a, [H_WHOSETURN] ; $FF00+$f3
+	and a
+	ld hl, $c45e
+	ld a, $1
+	jr z, .asm_3ba83
+	ld hl, $c3ca
+	xor a
+.asm_3ba83
+	ld [W_LISTMENUID], a ; $cf94
+	ld a, $48
+	call Predef ; indirect jump to Func_fa1d (fa1d (3:7a1d))
+	ld hl, $4d5a
+	call Unnamed_3bbe1
+	ld hl, $7aac
+	jp PrintText
 
+; known jump sources: 3ba0a (e:7a0a)
+Func_3ba97: ; 3ba97 (e:7a97)
+	ld c, $32
+	call DelayFrames
+	ld hl, Func_3fb53
+	jp Unnamed_3bbe1
+; 3baa2 (e:7aa2)
 UnnamedText_3baa2: ; 0x3baa2
 	TX_FAR _UnnamedText_3baa2
 	db $50
@@ -40752,15 +55464,184 @@ UnnamedText_3baac: ; 0x3baac
 	db $50
 ; 0x3baac + 5 bytes
 
-INCBIN "baserom.gbc",$3bab1,$3bb92 - $3bab1
+; known jump sources: 3fb33 (f:7b33)
+Func_3bab1: ; 3bab1 (e:7ab1)
+	ld hl, $d014
+	ld de, $cfe5
+	ld bc, W_ENEMYBATTSTATUS3 ; $d069
+	ld a, [W_ENEMYBATTSTATUS1] ; $d067
+	ld a, [H_WHOSETURN] ; $FF00+$f3
+	and a
+	jr nz, .asm_3bad1
+	ld hl, $cfe5
+	ld de, $d014
+	ld bc, W_PLAYERBATTSTATUS3 ; $d064
+	ld [W_PLAYERMOVELISTINDEX], a ; $cc2e
+	ld a, [W_PLAYERBATTSTATUS1] ; $d062
+.asm_3bad1
+	bit 6, a
+	jp nz, Func_3bb8c
+	push hl
+	push de
+	push bc
+	ld hl, W_PLAYERBATTSTATUS2 ; $d063
+	ld a, [H_WHOSETURN] ; $FF00+$f3
+	and a
+	jr z, .asm_3bae4
+	ld hl, W_ENEMYBATTSTATUS2 ; $d068
+.asm_3bae4
+	bit 4, [hl]
+	push af
+	ld hl, $5747
+	ld b, $1e
+	call nz, Bankswitch
+	ld a, [W_OPTIONS] ; $d355
+	add a
+	ld hl, $7ba8
+	ld b, $f
+	jr nc, .asm_3baff
+	ld hl, $5787
+	ld b, $1e
+.asm_3baff
+	call Bankswitch
+	ld hl, $5771
+	ld b, $1e
+	pop af
+	call nz, Bankswitch
+	pop bc
+	ld a, [bc]
+	set 3, a
+	ld [bc], a
+	pop de
+	pop hl
+	push hl
+	ld a, [hl]
+	ld [de], a
+	ld bc, $5
+	add hl, bc
+	inc de
+	inc de
+	inc de
+	inc de
+	inc de
+	inc bc
+	inc bc
+	call CopyData
+	ld a, [H_WHOSETURN] ; $FF00+$f3
+	and a
+	jr z, .asm_3bb32
+	ld a, [de]
+	ld [$cceb], a
+	inc de
+	ld a, [de]
+	ld [$ccec], a
+	dec de
+.asm_3bb32
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hli]
+	ld [de], a
+	inc de
+	inc hl
+	inc hl
+	inc hl
+	inc de
+	inc de
+	inc de
+	ld bc, $8
+	call CopyData
+	ld bc, $ffef
+	add hl, bc
+	ld b, $4
+.asm_3bb4a
+	ld a, [hli]
+	and a
+	jr z, .asm_3bb57
+	ld a, $5
+	ld [de], a
+	inc de
+	dec b
+	jr nz, .asm_3bb4a
+	jr .asm_3bb5d
+.asm_3bb57
+	xor a
+	ld [de], a
+	inc de
+	dec b
+	jr nz, .asm_3bb57
+.asm_3bb5d
+	pop hl
+	ld a, [hl]
+	ld [$d11e], a
+	call GetMonName
+	ld hl, $cd26
+	ld de, $cd12
+	call Func_3bb7d
+	ld hl, W_ENEMYMONATTACKMOD ; $cd2e
+	ld de, W_PLAYERMONATTACKMOD ; $cd1a
+	call Func_3bb7d
+	ld hl, $7b92
+	jp PrintText
 
+; known jump sources: 3bb6b (e:7b6b), 3bb74 (e:7b74)
+Func_3bb7d: ; 3bb7d (e:7b7d)
+	ld a, [H_WHOSETURN] ; $FF00+$f3
+	and a
+	jr z, .asm_3bb86
+	push hl
+	ld h, d
+	ld l, e
+	pop de
+.asm_3bb86
+	ld bc, $8
+	jp CopyData
+
+; known jump sources: 3bad3 (e:7ad3)
+Func_3bb8c: ; 3bb8c (e:7b8c)
+	ld hl, $7b53
+	jp Unnamed_3bbe1
+; 3bb92 (e:7b92)
 UnnamedText_3bb92: ; 0x3bb92
 	TX_FAR _UnnamedText_3bb92
 	db $50
 ; 0x3bb92 + 5 bytes
 
-INCBIN "baserom.gbc",$3bb97,$3bbd7 - $3bb97
-
+; known jump sources: 3fb3b (f:7b3b)
+Func_3bb97: ; 3bb97 (e:7b97)
+	ld hl, W_PLAYERBATTSTATUS3 ; $d064
+	ld de, W_PLAYERMOVEEFFECT ; $cfd3
+	ld a, [H_WHOSETURN] ; $FF00+$f3
+	and a
+	jr z, .asm_3bba8
+	ld hl, W_ENEMYBATTSTATUS3 ; $d069
+	ld de, W_ENEMYMOVEEFFECT ; $cfcd
+.asm_3bba8
+	ld a, [de]
+	cp $40
+	jr nz, .asm_3bbb8
+	bit 1, [hl]
+	jr nz, .asm_3bbcc
+	set 1, [hl]
+	ld hl, $7bd7
+	jr .asm_3bbc1
+.asm_3bbb8
+	bit 2, [hl]
+	jr nz, .asm_3bbcc
+	set 2, [hl]
+	ld hl, $7bdc
+.asm_3bbc1
+	push hl
+	ld hl, $7ba8
+	call Unnamed_3bbe1
+	pop hl
+	jp PrintText
+.asm_3bbcc
+	ld c, $32
+	call DelayFrames
+	ld hl, $7b53
+	jp Unnamed_3bbe1
+; 3bbd7 (e:7bd7)
 UnnamedText_3bbd7: ; 0x3bbd7
 	TX_FAR _UnnamedText_3bbd7
 	db $50
@@ -40795,15 +55676,269 @@ EffectsArray5B: ; 4049
 ; moves that prevent the player from switching moves?
 	db $1B,$2A,$FF
 
-INCBIN "baserom.gbc",$3c04c,$3c1a8 - $3c04c
+; known jump sources: 3eff0 (f:6ff0)
+Func_3c04c: ; 3c04c (f:404c)
+	call Func_3ec92
+	ld a, $1
+	ld [$d125], a
+	call DisplayTextBoxID
+	ld hl, $c405
+	ld bc, $307
+	call ClearScreenArea
+	call DisableLCD
+	call LoadFontTilePatterns
+	call Func_3ee58
+	ld hl, $9800
+	ld bc, $400
+.asm_3c06f
+	ld a, $7f
+	ld [hli], a
+	dec bc
+	ld a, b
+	or c
+	jr nz, .asm_3c06f
+	ld hl, $c3a0
+	ld de, $9800
+	ld b, $12
+.asm_3c07f
+	ld c, $14
+.asm_3c081
+	ld a, [hli]
+	ld [de], a
+	inc e
+	dec c
+	jr nz, .asm_3c081
+	ld a, $c
+	add e
+	ld e, a
+	jr nc, .asm_3c08e
+	inc d
+.asm_3c08e
+	dec b
+	jr nz, .asm_3c07f
+	call EnableLCD
+	ld a, $90
+	ld [$FF00+$b0], a
+	ld [rWY], a ; $FF00+$4a
+	xor a
+	ld [$FF00+$d7], a
+	ld [$FF00+$af], a
+	dec a
+	ld [$cfcb], a
+	call Delay3
+	xor a
+	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld b, $70
+	ld c, $90
+	ld a, c
+	ld [$FF00+$ae], a
+	call DelayFrame
+	ld a, $e4
+	ld [rBGP], a ; $FF00+$47
+	ld [rOBP0], a ; $FF00+$48
+	ld [rOBP1], a ; $FF00+$49
+.asm_3c0bb
+	ld h, b
+	ld l, $40
+	call Func_3c110
+	inc b
+	inc b
+	ld h, $0
+	ld l, $60
+	call Func_3c110
+	call Func_3c0ff
+	ld a, c
+	ld [$FF00+$ae], a
+	dec c
+	dec c
+	jr nz, .asm_3c0bb
+	ld a, $1
+	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld a, $31
+	ld [$FF00+$e1], a
+	ld hl, $c405
+	ld a, $1
+	call Predef ; indirect jump to Func_3f0c6 (3f0c6 (f:70c6))
+	xor a
+	ld [$FF00+$b0], a
+	ld [rWY], a ; $FF00+$4a
+	inc a
+	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	call Delay3
+	ld b, $1
+	call GoPAL_SET
+	call ResetLCD_OAM
+	ld hl, Func_58d99
+	ld b, BANK(Func_58d99)
+	jp Bankswitch ; indirect jump to Func_58d99 (58d99 (16:4d99))
 
+; known jump sources: 3c0ca (f:40ca)
+Func_3c0ff: ; 3c0ff (f:40ff)
+	push bc
+	ld hl, $c301
+	ld c, $15
+	ld de, $4
+.asm_3c108
+	dec [hl]
+	dec [hl]
+	add hl, de
+	dec c
+	jr nz, .asm_3c108
+	pop bc
+	ret
+
+; known jump sources: 3c0be (f:40be), 3c0c7 (f:40c7), 3c113 (f:4113)
+Func_3c110: ; 3c110 (f:4110)
+	ld a, [$FF00+$44]
+	cp l
+	jr nz, Func_3c110
+	ld a, h
+	ld [rSCX], a ; $FF00+$43
+.asm_3c118
+	ld a, [$FF00+$44]
+	cp h
+	jr z, .asm_3c118
+	ret
+
+; known jump sources: 3f030 (f:7030)
+Func_3c11e: ; 3c11e (f:411e)
+	xor a
+	ld [$d058], a
+	ld [$ccf5], a
+	ld [$cd6a], a
+	inc a
+	ld [$d11d], a
+	ld hl, W_WATERMONS ; $d8a5 (aliases: W_ENEMYMON1HP)
+	ld bc, $2b
+	ld d, $3
+.asm_3c134
+	inc d
+	ld a, [hli]
+	or [hl]
+	jr nz, .asm_3c13c
+	add hl, bc
+	jr .asm_3c134
+.asm_3c13c
+	ld a, d
+	ld [$cc3e], a
+	ld a, [W_ISINBATTLE] ; $d057
+	dec a
+	call nz, Func_3c92a
+	ld c, $28
+	call DelayFrames
+	call Func_3719
+.asm_3c14f
+	call Func_3ca83
+	ld a, d
+	and a
+	jp z, Func_3c837
+	call Func_3725
+	ld a, [W_BATTLETYPE] ; $d05a
+	and a
+	jp z, Func_3c1ad
+.asm_3c161
+	call Func_3ceb3
+	ret c
+	ld a, [$cd6a]
+	and a
+	jr z, .asm_3c161
+	ld a, [W_NUMSAFARIBALLS] ; $da47
+	and a
+	jr nz, .asm_3c17a
+	call Func_3725
+	ld hl, $41a8
+	jp PrintText
+.asm_3c17a
+	ld hl, Func_4277
+	ld b, BANK(Func_4277)
+	call Bankswitch ; indirect jump to Func_4277 (4277 (1:4277))
+	ld a, [$cffb]
+	add a
+	ld b, a
+	jp c, asm_3c202
+	ld a, [$cce9]
+	and a
+	jr z, .asm_3c194
+	srl b
+	srl b
+.asm_3c194
+	ld a, [$cce8]
+	and a
+	jr z, .asm_3c1a0
+	sla b
+	jr nc, .asm_3c1a0
+	ld b, $ff
+.asm_3c1a0
+	call GenRandom
+	cp b
+	jr nc, .asm_3c14f
+	jr asm_3c202
+; 3c1a8 (f:41a8)
 UnnamedText_3c1a8: ; 0x3c1a8
 	TX_FAR _UnnamedText_3c1a8
 	db $50
 ; 0x3c1a8 + 5 bytes
 
-INCBIN "baserom.gbc",$3c1ad,$3c229 - $3c1ad
-
+; known jump sources: 3c15e (f:415e)
+Func_3c1ad: ; 3c1ad (f:41ad)
+	xor a
+	ld [W_WHICHPOKEMON], a ; $cf92
+.asm_3c1b1
+	call Func_3ca97
+	jr nz, .asm_3c1bc
+	ld hl, W_WHICHPOKEMON ; $cf92
+	inc [hl]
+	jr .asm_3c1b1
+.asm_3c1bc
+	ld a, [W_WHICHPOKEMON] ; $cf92
+	ld [W_PLAYERMONNUMBER], a ; $cc2f
+	inc a
+	ld hl, W_NUMINPARTY ; $d163
+	ld c, a
+	ld b, $0
+	add hl, bc
+	ld a, [hl]
+	ld [$cf91], a
+	ld [$cfd9], a
+	call Func_3725
+	ld hl, $c405
+	ld a, $9
+	call Func_3c8df
+	call Func_3719
+	ld a, [W_WHICHPOKEMON] ; $cf92
+	ld c, a
+	ld b, $1
+	push bc
+	ld hl, $d058
+	ld a, $10
+	call Predef ; indirect jump to Func_f666 (f666 (3:7666))
+	ld hl, $ccf5
+	pop bc
+	ld a, $10
+	call Predef ; indirect jump to Func_f666 (f666 (3:7666))
+	call Func_3cba6
+	call Func_3725
+	call Func_3cc91
+	jr MainInBattleLoop
+asm_3c202: ; 3c202 (f:4202)
+	call Func_3725
+	ld a, [W_ISLINKBATTLE] ; $d12b
+	cp $4
+	ld hl, $4229
+	jr nz, .asm_3c216
+	xor a
+	ld [$cf0b], a
+	ld hl, $422e
+.asm_3c216
+	call PrintText
+	ld a, $97
+	call Func_3740
+	xor a
+	ld [H_WHOSETURN], a ; $FF00+$f3
+	ld hl, Func_792b9
+	ld b, BANK(Func_792b9)
+	jp Bankswitch ; indirect jump to Func_792b9 (792b9 (1e:52b9))
+; 3c229 (f:4229)
 UnnamedText_3c229: ; 0x3c229
 	TX_FAR _UnnamedText_3c229
 	db $50
@@ -40814,8 +55949,262 @@ UnnamedText_3c22e: ; 0x3c22e
 	db $50
 ; 0x3c22e + 5 bytes
 
-INCBIN "baserom.gbc",$3c233,$3c42e - $3c233
 
+MainInBattleLoop: ; 4233
+	call $4d43
+	ld hl, $d015
+	ld a, [hli]
+	or [hl]
+	jp z, $4700
+	ld hl, $cfe6
+	ld a, [hli]
+	or [hl]
+	jp z, $4525
+	call $3719
+	xor a
+	ld [$d11d], a
+	ld a, [$d063]
+	and $60
+	jr nz, .asm_3c2a6 ; 0x3c252 $52
+	ld hl, $d067
+	res 3, [hl]
+	ld hl, $d062
+	res 3, [hl]
+	ld a, [hl]
+	and $12
+	jr nz, .asm_3c2a6 ; 0x3c261 $43
+	call $4eb3 ; show battle menu
+	ret c
+	ld a, [$d078]
+	and a
+	ret nz
+	ld a, [$d018]
+	and $27
+	jr nz, .asm_3c2a6 ; 0x3c271 $33
+	ld a, [$d062]
+	and $21
+	jr nz, .asm_3c2a6 ; 0x3c278 $2c
+	ld a, [$d067]
+	bit 5, a
+	jr z, .asm_3c288 ; 0x3c27f $7
+	ld a, $ff
+	ld [$ccdc], a
+	jr .asm_3c2a6 ; 0x3c286 $1e
+.asm_3c288
+	ld a, [$cd6a]
+	and a
+	jr nz, .asm_3c2a6 ; 0x3c28c $18
+	ld [$ccdb], a
+	inc a
+	ld [$d07c], a
+	xor a
+	ld [$cc35], a
+	call $5219
+	push af
+	call $3725
+	call $4d5a
+	pop af
+	jr nz, MainInBattleLoop
+.asm_3c2a6
+	call SelectEnemyMove
+	ld a, [W_ISLINKBATTLE]
+	cp $4
+	jr nz, .noLinkBattle
+	ld a, [$cc3e]
+	cp $f
+	jp z, $4202
+	cp $e
+	jr z, .noLinkBattle
+	cp $d
+	jr z, .noLinkBattle
+	sub $4
+	jr c, .noLinkBattle
+	ld a, [$d062]
+	bit 5, a
+	jr z, .asm_3c2dd ; 0x3c2c9 $12
+	ld a, [$cc2e]
+	ld hl, $d01c
+	ld c, a
+	ld b, $0
+	add hl, bc
+	ld a, [hl]
+	cp $76
+	jr nz, .asm_3c2dd ; 0x3c2d8 $3
+	ld [W_PLAYERSELECTEDMOVE], a
+.asm_3c2dd
+	ld hl, Function674B
+	ld b, BANK(Function674B)
+	call Bankswitch
+.noLinkBattle
+	ld a, [W_PLAYERSELECTEDMOVE]
+	cp QUICK_ATTACK
+	jr nz, .playerDidNotUseQuickAttack
+	ld a, [W_ENEMYSELECTEDMOVE]
+	cp QUICK_ATTACK
+	jr z, .compareSpeed  ; both used Quick Attack
+	jp .playerMovesFirst ; player used Quick Attack
+.playerDidNotUseQuickAttack
+	ld a, [W_ENEMYSELECTEDMOVE]
+	cp QUICK_ATTACK
+	jr z, .enemyMovesFirst
+	ld a, [W_PLAYERSELECTEDMOVE]
+	cp COUNTER
+	jr nz, .playerDidNotUseCounter
+	ld a, [W_ENEMYSELECTEDMOVE]
+	cp COUNTER
+	jr z, .compareSpeed ; both used Counter
+	jr .enemyMovesFirst ; player used Counter
+.playerDidNotUseCounter
+	ld a, [W_ENEMYSELECTEDMOVE]
+	cp COUNTER
+	jr z, .playerMovesFirst
+.compareSpeed
+	ld de, $d029 ; player speed value
+	ld hl, $cffa ; enemy speed value
+	ld c, $2
+	call StringCmp ; compare speed values
+	jr z, .speedEqual
+	jr nc, .playerMovesFirst
+	jr .enemyMovesFirst
+.speedEqual
+	ld a, [$ff00+$aa]
+	cp $2
+	jr z, .invertOutcome
+	call GenRandomInBattle
+	cp $80
+	jr c, .playerMovesFirst
+	jr .enemyMovesFirst
+.invertOutcome
+	call GenRandomInBattle
+	cp $80
+	jr c, .enemyMovesFirst
+	jr .playerMovesFirst
+.enemyMovesFirst
+	ld a, $1
+	ld [H_WHOSETURN], a
+	ld hl, TrainerAI
+	ld b, BANK(TrainerAI)
+	call Bankswitch
+	jr c, .AIActionUsedEnemyFirst
+	call $66bc ; execute enemy move
+	ld a, [$d078]
+	and a
+	ret nz
+	ld a, b
+	and a
+	jp z, $4700
+.AIActionUsedEnemyFirst
+	call $43bd
+	jp z, $4525
+	call $4d5a
+	call $565e ; execute player move
+	ld a, [$d078]
+	and a
+	ret nz
+	ld a, b
+	and a
+	jp z, $4525
+	call $43bd
+	jp z, $4700
+	call $4d5a
+	call $450f
+	jp MainInBattleLoop
+.playerMovesFirst
+	call $565e ; execute player move
+	ld a, [$d078]
+	and a
+	ret nz
+	ld a, b
+	and a
+	jp z, $4525
+	call $43bd
+	jp z, $4700
+	call $4d5a
+	ld a, $1
+	ld [H_WHOSETURN], a
+	ld hl, TrainerAI
+	ld b, BANK(TrainerAI)
+	call Bankswitch
+	jr c, .AIActionUsedPlayerFirst
+	call $66bc ; execute enemy move
+	ld a, [$d078]
+	and a
+	ret nz
+	ld a, b
+	and a
+	jp z, $4700
+.AIActionUsedPlayerFirst
+	call $43bd
+	jp z, $4525
+	call $4d5a
+	call $450f
+	jp MainInBattleLoop
+
+; known jump sources: 3c358 (f:4358), 3c36e (f:436e), 3c38a (f:438a), 3c3ae (f:43ae)
+Func_3c3bd: ; 3c3bd (f:43bd)
+	ld hl, W_PLAYERMONCURHP ; $d015
+	ld de, W_PLAYERMONSTATUS ; $d018
+	ld a, [H_WHOSETURN] ; $FF00+$f3
+	and a
+	jr z, .asm_3c3ce
+	ld hl, W_ENEMYMONCURHP ; $cfe6
+	ld de, W_ENEMYMONSTATUS ; $cfe9
+.asm_3c3ce
+	ld a, [de]
+	and $18
+	jr z, .asm_3c3ef
+	push hl
+	ld hl, $442e
+	ld a, [de]
+	and $10
+	jr z, .asm_3c3df
+	ld hl, $4433
+.asm_3c3df
+	call PrintText
+	xor a
+	ld [$cc5b], a
+	ld a, $ba
+	call PlayMoveAnimation
+	pop hl
+	call Func_3c43d
+.asm_3c3ef
+	ld de, W_PLAYERBATTSTATUS2 ; $d063
+	ld a, [H_WHOSETURN] ; $FF00+$f3
+	and a
+	jr z, .asm_3c3fa
+	ld de, W_ENEMYBATTSTATUS2 ; $d068
+.asm_3c3fa
+	ld a, [de]
+	add a
+	jr nc, .asm_3c421
+	push hl
+	ld a, [H_WHOSETURN] ; $FF00+$f3
+	push af
+	xor $1
+	ld [H_WHOSETURN], a ; $FF00+$f3
+	xor a
+	ld [$cc5b], a
+	ld a, $47
+	call PlayMoveAnimation
+	pop af
+	ld [H_WHOSETURN], a ; $FF00+$f3
+	pop hl
+	call Func_3c43d
+	call Func_3c4a3
+	push hl
+	ld hl, $4438
+	call PrintText
+	pop hl
+.asm_3c421
+	ld a, [hli]
+	or [hl]
+	ret nz
+	call Func_3cd5a
+	ld c, $14
+	call DelayFrames
+	xor a
+	ret
+; 3c42e (f:442e)
 UnnamedText_3c42e: ; 0x3c42e
 	TX_FAR _UnnamedText_3c42e
 	db $50
@@ -40831,15 +56220,394 @@ UnnamedText_3c438: ; 0x3c438
 	db $50
 ; 0x3c438 + 5 bytes
 
-INCBIN "baserom.gbc",$3c43d,$3c63e - $3c43d
+; known jump sources: 3c3ec (f:43ec), 3c413 (f:4413)
+Func_3c43d: ; 3c43d (f:443d)
+	push hl
+	push hl
+	ld bc, $e
+	add hl, bc
+	ld a, [hli]
+	ld [$ceea], a
+	ld b, a
+	ld a, [hl]
+	ld [$cee9], a
+	ld c, a
+	srl b
+	rr c
+	srl b
+	rr c
+	srl c
+	srl c
+	ld a, c
+	and a
+	jr nz, .asm_3c45e
+	inc c
+.asm_3c45e
+	ld hl, W_PLAYERBATTSTATUS3 ; $d064
+	ld de, W_PLAYERTOXICCOUNTER ; $d06c
+	ld a, [H_WHOSETURN] ; $FF00+$f3
+	and a
+	jr z, .asm_3c46f
+	ld hl, W_ENEMYBATTSTATUS3 ; $d069
+	ld de, W_ENEMYTOXICCOUNTER ; $d071
+.asm_3c46f
+	bit 0, [hl]
+	jr z, .asm_3c47f
+	ld a, [de]
+	inc a
+	ld [de], a
+	ld hl, $0
+.asm_3c479
+	add hl, bc
+	dec a
+	jr nz, .asm_3c479
+	ld b, h
+	ld c, l
+.asm_3c47f
+	pop hl
+	inc hl
+	ld a, [hl]
+	ld [$ceeb], a
+	sub c
+	ld [hld], a
+	ld [$ceed], a
+	ld a, [hl]
+	ld [$ceec], a
+	sbc b
+	ld [hl], a
+	ld [$ceee], a
+	jr nc, .asm_3c49e
+	xor a
+	ld [hli], a
+	ld [hl], a
+	ld [$ceed], a
+	ld [$ceee], a
+.asm_3c49e
+	call Func_3c4f6
+	pop hl
+	ret
 
+; known jump sources: 3c416 (f:4416)
+Func_3c4a3: ; 3c4a3 (f:44a3)
+	push hl
+	ld hl, W_ENEMYMONMAXHP ; $cff4
+	ld a, [H_WHOSETURN] ; $FF00+$f3
+	and a
+	jr z, .asm_3c4af
+	ld hl, W_PLAYERMONMAXHP ; $d023
+.asm_3c4af
+	ld a, [hli]
+	ld [$ceea], a
+	ld a, [hl]
+	ld [$cee9], a
+	ld de, $fff2
+	add hl, de
+	ld a, [hl]
+	ld [$ceeb], a
+	add c
+	ld [hld], a
+	ld [$ceed], a
+	ld a, [hl]
+	ld [$ceec], a
+	adc b
+	ld [hli], a
+	ld [$ceee], a
+	ld a, [$cee9]
+	ld c, a
+	ld a, [hld]
+	sub c
+	ld a, [$ceea]
+	ld b, a
+	ld a, [hl]
+	sbc b
+	jr c, .asm_3c4e5
+	ld a, b
+	ld [hli], a
+	ld [$ceee], a
+	ld a, c
+	ld [hl], a
+	ld [$ceed], a
+.asm_3c4e5
+	ld a, [H_WHOSETURN] ; $FF00+$f3
+	xor $1
+	ld [H_WHOSETURN], a ; $FF00+$f3
+	call Func_3c4f6
+	ld a, [H_WHOSETURN] ; $FF00+$f3
+	xor $1
+	ld [H_WHOSETURN], a ; $FF00+$f3
+	pop hl
+	ret
+
+; known jump sources: 3c49e (f:449e), 3c4eb (f:44eb)
+Func_3c4f6: ; 3c4f6 (f:44f6)
+	ld hl, $c45e
+	ld a, [H_WHOSETURN] ; $FF00+$f3
+	and a
+	ld a, $1
+	jr z, .asm_3c504
+	ld hl, $c3ca
+	xor a
+.asm_3c504
+	push bc
+	ld [W_LISTMENUID], a ; $cf94
+	ld a, $48
+	call Predef ; indirect jump to Func_fa1d (fa1d (3:7a1d))
+	pop bc
+	ret
+
+; known jump sources: 3c377 (f:4377), 3c3b7 (f:43b7)
+Func_3c50f: ; 3c50f (f:450f)
+	ld a, [$d06a]
+	and a
+	jr nz, .asm_3c51a
+	ld hl, W_PLAYERBATTSTATUS1 ; $d062
+	res 5, [hl]
+.asm_3c51a
+	ld a, [$d06f]
+	and a
+	ret nz
+	ld hl, W_ENEMYBATTSTATUS1 ; $d067
+	res 5, [hl]
+	ret
+
+; known jump sources: 3c243 (f:4243), 3c35b (f:435b), 3c36b (f:436b), 3c387 (f:4387), 3c3b1 (f:43b1)
+Func_3c525: ; 3c525 (f:4525)
+	xor a
+	ld [$ccf0], a
+	call Func_3c567
+	call Func_3ca83
+	ld a, d
+	and a
+	jp z, Func_3c837
+	ld hl, W_PLAYERMONCURHP ; $d015
+	ld a, [hli]
+	or [hl]
+	call nz, Func_3cd60
+	ld a, [W_ISINBATTLE] ; $d057
+	dec a
+	ret z
+	call Func_3c64f
+	jp z, Func_3c696
+	ld hl, W_PLAYERMONCURHP ; $d015
+	ld a, [hli]
+	or [hl]
+	jr nz, .asm_3c555
+	call Func_3c79b
+	ret c
+	call Func_3c7d8
+.asm_3c555
+	ld a, $1
+	ld [$cd6a], a
+	call Func_3c664
+	jp z, asm_3c202
+	xor a
+	ld [$cd6a], a
+	jp MainInBattleLoop
+
+; known jump sources: 3c529 (f:4529), 3c717 (f:4717)
+Func_3c567: ; 3c567 (f:4567)
+	call Func_3cd43
+	ld a, [W_ISINBATTLE] ; $d057
+	dec a
+	jr z, .asm_3c57f
+	ld a, [W_ENEMYMONNUMBER] ; $cfe8
+	ld hl, W_WATERMONS ; $d8a5 (aliases: W_ENEMYMON1HP)
+	ld bc, $2c
+	call AddNTimes
+	xor a
+	ld [hli], a
+	ld [hl], a
+.asm_3c57f
+	ld hl, W_PLAYERBATTSTATUS1 ; $d062
+	res 2, [hl]
+	xor a
+	ld [W_NUMHITS], a ; $d074
+	ld hl, $d065
+	ld [hli], a
+	ld [hli], a
+	ld [hli], a
+	ld [hli], a
+	ld [hl], a
+	ld [W_ENEMYDISABLEDMOVE], a ; $d072
+	ld [$ccef], a
+	ld [$ccf3], a
+	ld hl, $ccf1
+	ld [hli], a
+	ld [hl], a
+	ld hl, $c410
+	ld de, $c424
+	call Func_3c893
+	ld hl, $c3a0
+	ld bc, $40b
+	call ClearScreenArea
+	ld a, [W_ISINBATTLE] ; $d057
+	dec a
+	jr z, .asm_3c5d3
+	xor a
+	ld [$c0f1], a
+	ld [$c0f2], a
+	ld a, $9e
+	call Func_3740
+.asm_3c5c2
+	ld a, [$c02a]
+	cp $9e
+	jr z, .asm_3c5c2
+	ld a, $95
+	call Func_23b1
+	call Func_3748
+	jr .asm_3c5db
+.asm_3c5d3
+	call Func_3c643
+	ld a, $f9
+	call Func_3c6ee
+.asm_3c5db
+	ld hl, W_PLAYERMONCURHP ; $d015
+	ld a, [hli]
+	or [hl]
+	jr nz, .asm_3c5eb
+	ld a, [$ccf0]
+	and a
+	jr nz, .asm_3c5eb
+	call Func_3c741
+.asm_3c5eb
+	call Func_3ca83
+	ld a, d
+	and a
+	ret z
+	ld hl, $463e
+	call PrintText
+	call Func_3ee94
+	call Func_3719
+	xor a
+	ld [$cf0b], a
+	ld b, $4b
+	call IsItemInBag
+	push af
+	jr z, .asm_3c614
+	ld hl, $d002
+	ld b, $7
+.asm_3c60e
+	srl [hl]
+	inc hl
+	dec b
+	jr nz, .asm_3c60e
+.asm_3c614
+	xor a
+	ld [$cc5b], a
+	ld hl, Func_5524f
+	ld b, BANK(Func_5524f)
+	call Bankswitch ; indirect jump to Func_5524f (5524f (15:524f))
+	pop af
+	ret z
+	ld a, $1
+	ld [$cc5b], a
+	ld a, [W_NUMINPARTY] ; $d163
+	ld b, $0
+.asm_3c62c
+	scf
+	rl b
+	dec a
+	jr nz, .asm_3c62c
+	ld a, b
+	ld [$d058], a
+	ld hl, Func_5524f
+	ld b, BANK(Func_5524f)
+	jp Bankswitch ; indirect jump to Func_5524f (5524f (15:524f))
+; 3c63e (f:463e)
 UnnamedText_3c63e: ; 0x3c63e
 	TX_FAR _UnnamedText_3c63e
 	db $50
 ; 0x3c63e + 5 bytes
 
-INCBIN "baserom.gbc",$3c643,$3c6e4 - $3c643
+; known jump sources: 3c5d3 (f:45d3), 3c696 (f:4696)
+Func_3c643: ; 3c643 (f:4643)
+	xor a
+	ld [$d083], a
+	ld [$c02a], a
+	inc a
+	ld [$ccf6], a
+	ret
 
+; known jump sources: 3c541 (f:4541), 3c71f (f:471f)
+Func_3c64f: ; 3c64f (f:464f)
+	ld a, [W_ENEMYMONCOUNT] ; $d89c
+	ld b, a
+	xor a
+	ld hl, W_WATERMONS ; $d8a5 (aliases: W_ENEMYMON1HP)
+	ld de, $2c
+.asm_3c65a
+	or [hl]
+	inc hl
+	or [hl]
+	dec hl
+	add hl, de
+	dec b
+	jr nz, .asm_3c65a
+	and a
+	ret
+
+; known jump sources: 3c55a (f:455a), 3c734 (f:4734)
+Func_3c664: ; 3c664 (f:4664)
+	ld hl, $cf1e
+	ld e, $30
+	call Func_3ce90
+	ld hl, Func_3a857
+	ld b, BANK(Func_3a857)
+	call Bankswitch ; indirect jump to Func_3a857 (3a857 (e:6857))
+	ld a, [W_ISLINKBATTLE] ; $d12b
+	cp $4
+	jr nz, .asm_3c687
+	call Func_3d605
+	ld a, [$cc3e]
+	cp $f
+	ret z
+	call Func_3725
+.asm_3c687
+	call EnemySendOut
+	xor a
+	ld [W_ENEMYMOVENUM], a ; $cfcc
+	ld [$cd6a], a
+	ld [$ccd5], a
+	inc a
+	ret
+
+; known jump sources: 3c544 (f:4544), 3c722 (f:4722)
+Func_3c696: ; 3c696 (f:4696)
+	call Func_3c643
+	ld b, $fc
+	ld a, [W_LONEATTACKNO] ; $d05c
+	and a
+	jr nz, .asm_3c6a3
+	ld b, $f6
+.asm_3c6a3
+	ld a, [W_TRAINERCLASS] ; $d031
+	cp $2b
+	jr nz, .asm_3c6b1
+	ld b, $fc
+	ld hl, $d733
+	set 1, [hl]
+.asm_3c6b1
+	ld a, [W_ISLINKBATTLE] ; $d12b
+	cp $4
+	ld a, b
+	call nz, Func_3c6ee
+	ld hl, $46e9
+	call PrintText
+	ld a, [W_ISLINKBATTLE] ; $d12b
+	cp $4
+	ret z
+	call Func_3ed12
+	ld c, $28
+	call DelayFrames
+	call Func_3381
+	ld hl, $46e4
+	call PrintText
+	ld de, W_PLAYERMONEY1 ; $d349
+	ld hl, $d07b
+	ld c, $3
+	ld a, $b
+	jp Predef ; indirect jump to Func_f81d (f81d (3:781d))
+; 3c6e4 (f:46e4)
 UnnamedText_3c6e4: ; 0x3c6e4
 	TX_FAR _UnnamedText_3c6e4
 	db $50
@@ -40850,22 +56618,209 @@ UnnamedText_3c6e9: ; 0x3c6e9
 	db $50
 ; 0x3c6e9 + 5 bytes
 
-INCBIN "baserom.gbc",$3c6ee,$3c796 - $3c6ee
+; known jump sources: 3c5d8 (f:45d8), 3c6b7 (f:46b7)
+Func_3c6ee: ; 3c6ee (f:46ee)
+	push af
+	ld a, $ff
+	ld [$c0ee], a
+	call Func_3740
+	ld c, $8
+	pop af
+	call Func_23a1
+	jp Delay3
 
+; known jump sources: 3c23b (f:423b), 3c355 (f:4355), 3c371 (f:4371), 3c38d (f:438d), 3c3ab (f:43ab)
+Func_3c700: ; 3c700 (f:4700)
+	ld a, $1
+	ld [$ccf0], a
+	call Func_3c741
+	call Func_3ca83
+	ld a, d
+	and a
+	jp z, Func_3c837
+	ld hl, W_ENEMYMONCURHP ; $cfe6
+	ld a, [hli]
+	or [hl]
+	jr nz, .asm_3c725
+	call Func_3c567
+	ld a, [W_ISINBATTLE] ; $d057
+	dec a
+	ret z
+	call Func_3c64f
+	jp z, Func_3c696
+.asm_3c725
+	call Func_3c79b
+	ret c
+	call Func_3c7d8
+	jp nz, MainInBattleLoop
+	ld a, $1
+	ld [$cd6a], a
+	call Func_3c664
+	jp z, asm_3c202
+	xor a
+	ld [$cd6a], a
+	jp MainInBattleLoop
+
+; known jump sources: 3c5e8 (f:45e8), 3c705 (f:4705)
+Func_3c741: ; 3c741 (f:4741)
+	ld a, [W_PLAYERMONNUMBER] ; $cc2f
+	ld c, a
+	ld hl, $d058
+	ld b, $0
+	ld a, $10
+	call Predef ; indirect jump to Func_f666 (f666 (3:7666))
+	ld hl, W_ENEMYBATTSTATUS1 ; $d067
+	res 2, [hl]
+	ld a, [$d083]
+	bit 7, a
+	jr z, .asm_3c763
+	ld a, $ff
+	ld [$d083], a
+	call Func_3748
+.asm_3c763
+	ld hl, $cd05
+	ld [hli], a
+	ld [hl], a
+	ld [W_PLAYERMONSTATUS], a ; $d018
+	call Func_3cd43
+	ld hl, $c435
+	ld bc, $50b
+	call ClearScreenArea
+	ld hl, $c469
+	ld de, $c47d
+	call Func_3c893
+	ld a, $1
+	ld [$cf0b], a
+	ld a, [$ccf0]
+	and a
+	ret z
+	ld a, [$d014]
+	call PlayCry
+	ld hl, $4796
+	jp PrintText
+; 3c796 (f:4796)
 UnnamedText_3c796: ; 0x3c796
 	TX_FAR _UnnamedText_3c796
 	db $50
 ; 0x3c796 + 5 bytes
 
-INCBIN "baserom.gbc",$3c79b,$3c7d3 - $3c79b
-
+; known jump sources: 3c54e (f:454e), 3c725 (f:4725)
+Func_3c79b: ; 3c79b (f:479b)
+	call Func_3ee94
+	call Func_3719
+	ld a, [W_ISINBATTLE] ; $d057
+	and a
+	dec a
+	ret nz
+	ld hl, $47d3
+	call PrintText
+.asm_3c7ad
+	ld hl, $c461
+	ld bc, $a0e
+	ld a, $14
+	ld [$d125], a
+	call DisplayTextBoxID
+	ld a, [$d12e]
+	cp $2
+	jr z, .asm_3c7c4
+	and a
+	ret
+.asm_3c7c4
+	ld a, [W_CURMENUITEMID] ; $cc26
+	and a
+	jr z, .asm_3c7ad
+	ld hl, W_PARTYMON1_SPEED ; $d193
+	ld de, $cffa
+	jp Func_3cab9
+; 3c7d3 (f:47d3)
 UnnamedText_3c7d3: ; 0x3c7d3
 	TX_FAR _UnnamedText_3c7d3
 	db $50
 ; 0x3c7d3 + 5 bytes
 
-INCBIN "baserom.gbc",$3c7d8,$3c884 - $3c7d8
+; known jump sources: 3c552 (f:4552), 3c729 (f:4729)
+Func_3c7d8: ; 3c7d8 (f:47d8)
+	ld a, $2
+	ld [$d07d], a
+	call DisplayPartyMenu
+.asm_3c7e0
+	jr nc, .asm_3c7e7
+.asm_3c7e2
+	call GoBackToPartyMenu
+	jr .asm_3c7e0
+.asm_3c7e7
+	call Func_3ca97
+	jr z, .asm_3c7e2
+	ld a, [W_ISLINKBATTLE] ; $d12b
+	cp $4
+	jr nz, .asm_3c7fa
+	inc a
+	ld [$cd6a], a
+	call Func_3d605
+.asm_3c7fa
+	xor a
+	ld [$cd6a], a
+	call CleanLCD_OAM
+	ld a, [W_WHICHPOKEMON] ; $cf92
+	ld [W_PLAYERMONNUMBER], a ; $cc2f
+	ld c, a
+	ld hl, $d058
+	ld b, $1
+	push bc
+	ld a, $10
+	call Predef ; indirect jump to Func_f666 (f666 (3:7666))
+	pop bc
+	ld hl, $ccf5
+	ld a, $10
+	call Predef ; indirect jump to Func_f666 (f666 (3:7666))
+	call Func_3cba6
+	call GBPalWhiteOut
+	call Func_3ee5b
+	call Func_3725
+	call GoPAL_SET_CF1C
+	call GBPalNormal
+	call Func_3cc91
+	ld hl, W_ENEMYMONCURHP ; $cfe6
+	ld a, [hli]
+	or [hl]
+	ret
 
+; known jump sources: 3c154 (f:4154), 3c531 (f:4531), 3c70d (f:470d)
+Func_3c837: ; 3c837 (f:4837)
+	ld a, [W_ISLINKBATTLE] ; $d12b
+	cp $4
+	jr z, .asm_3c862
+	ld a, [W_CUROPPONENT] ; $d059
+	cp $e1
+	jr nz, .asm_3c862
+	ld hl, $c3a0
+	ld bc, $815
+	call ClearScreenArea
+	call Func_3ed12
+	ld c, $28
+	call DelayFrames
+	ld hl, $4884
+	call PrintText
+	ld a, [W_CURMAP] ; $d35e
+	cp $28
+	ret z
+.asm_3c862
+	ld b, $0
+	call GoPAL_SET
+	ld hl, $4889
+	ld a, [W_ISLINKBATTLE] ; $d12b
+	cp $4
+	jr nz, .asm_3c874
+	ld hl, $488e
+.asm_3c874
+	call PrintText
+	ld a, [$d732]
+	res 5, a
+	ld [$d732], a
+	call ClearScreen
+	scf
+	ret
+; 3c884 (f:4884)
 UnnamedText_3c884: ; 0x3c884
 	TX_FAR _UnnamedText_3c884
 	db $50
@@ -40881,8 +56836,95 @@ UnnamedText_3c88e: ; 0x3c88e
 	db $50
 ; 0x3c88e + 5 bytes
 
-INCBIN "baserom.gbc",$3c893,$7b
+; known jump sources: 3c5a4 (f:45a4), 3c77d (f:477d)
+Func_3c893: ; 3c893 (f:4893)
+	ld a, [$d730]
+	push af
+	set 6, a
+	ld [$d730], a
+	ld b, $7
+.asm_3c89e
+	push bc
+	push de
+	push hl
+	ld b, $6
+.asm_3c8a3
+	push bc
+	push hl
+	push de
+	ld bc, $7
+	call CopyData
+	pop de
+	pop hl
+	ld bc, $ffec
+	add hl, bc
+	push hl
+	ld h, d
+	ld l, e
+	add hl, bc
+	ld d, h
+	ld e, l
+	pop hl
+	pop bc
+	dec b
+	jr nz, .asm_3c8a3
+	ld bc, $14
+	add hl, bc
+	ld de, $48d7
+	call PlaceString
+	ld c, $2
+	call DelayFrames
+	pop hl
+	pop de
+	pop bc
+	dec b
+	jr nz, .asm_3c89e
+	pop af
+	ld [$d730], a
+	ret
 
+INCBIN "baserom.gbc",$3c8d7,$3c8df - $3c8d7
+
+; known jump sources: 3c1d9 (f:41d9), 3c94f (f:494f)
+Func_3c8df: ; 3c8df (f:48df)
+	ld [H_DOWNARROWBLINKCNT1], a ; $FF00+$8b
+	ld c, a
+.asm_3c8e2
+	push bc
+	push hl
+	ld b, $7
+.asm_3c8e6
+	push hl
+	ld a, [H_DOWNARROWBLINKCNT1] ; $FF00+$8b
+	ld c, a
+.asm_3c8ea
+	ld a, [H_DOWNARROWBLINKCNT1] ; $FF00+$8b
+	cp $8
+	jr z, .asm_3c8f5
+	ld a, [hld]
+	ld [hli], a
+	inc hl
+	jr .asm_3c8f8
+.asm_3c8f5
+	ld a, [hli]
+	ld [hld], a
+	dec hl
+.asm_3c8f8
+	dec c
+	jr nz, .asm_3c8ea
+	pop hl
+	ld de, $14
+	add hl, de
+	dec b
+	jr nz, .asm_3c8e6
+	ld c, $2
+	call DelayFrames
+	pop hl
+	pop bc
+	dec c
+	jr nz, .asm_3c8e2
+	ret
+; 3c90e (f:490e)
 ; XXX this needs cleaning up. it's what runs when a juggler switches pokemon
 EnemySendOut: ; 490E
 	ld hl,$D058
@@ -40900,6 +56942,7 @@ EnemySendOut: ; 490E
 	pop bc
 	ld a,$10
 	call Predef
+Func_3c92a:
 	xor a
 	ld hl,$D065
 	ld [hli],a
@@ -41061,15 +57104,159 @@ TrainerSentOutText: ; 0x3ca7e
 	TX_FAR _TrainerSentOutText
 	db "@"
 
-INCBIN "baserom.gbc",$3ca83,$3cab4 - $3ca83
+; known jump sources: 669 (0:669), c735 (3:4735), 3c14f (f:414f), 3c52c (f:452c), 3c5eb (f:45eb), 3c708 (f:4708)
+Func_3ca83: ; 3ca83 (f:4a83)
+	ld a, [W_NUMINPARTY] ; $d163
+	ld e, a
+	xor a
+	ld hl, W_PARTYMON1_HP ; $d16c
+	ld bc, $2b
+.asm_3ca8e
+	or [hl]
+	inc hl
+	or [hl]
+	add hl, bc
+	dec e
+	jr nz, .asm_3ca8e
+	ld d, a
+	ret
 
+; known jump sources: 3c1b1 (f:41b1), 3c7e7 (f:47e7), 3ca14 (f:4a14), 3d19d (f:519d)
+Func_3ca97: ; 3ca97 (f:4a97)
+	ld a, [W_WHICHPOKEMON] ; $cf92
+	ld hl, W_PARTYMON1_HP ; $d16c
+	ld bc, $2c
+	call AddNTimes
+	ld a, [hli]
+	or [hl]
+	ret nz
+	ld a, [$d11d]
+	and a
+	jr nz, .asm_3cab2
+	ld hl, $4ab4
+	call PrintText
+.asm_3cab2
+	xor a
+	ret
+; 3cab4 (f:4ab4)
 UnnamedText_3cab4: ; 0x3cab4
 	TX_FAR _UnnamedText_3cab4
 	db $50
 ; 0x3cab4 + 5 bytes
 
-INCBIN "baserom.gbc",$3cab9,$3cb97 - $3cab9
-
+; known jump sources: 3c7d0 (f:47d0), 3d208 (f:5208)
+Func_3cab9: ; 3cab9 (f:4ab9)
+	call Function583A
+	jp z, .asm_3cb5c
+	ld a, [W_BATTLETYPE] ; $d05a
+	cp $2
+	jp z, .asm_3cb5c
+	ld a, [W_ISLINKBATTLE] ; $d12b
+	cp $4
+	jp z, .asm_3cb5c
+	ld a, [W_ISINBATTLE] ; $d057
+	dec a
+	jr nz, .asm_3cb4c
+	ld a, [$d120]
+	inc a
+	ld [$d120], a
+	ld a, [hli]
+	ld [$FF00+$97], a
+	ld a, [hl]
+	ld [$FF00+$98], a
+	ld a, [de]
+	ld [$FF00+$8d], a
+	inc de
+	ld a, [de]
+	ld [$FF00+$8e], a
+	call Func_3725
+	ld de, $ff97
+	ld hl, $ff8d
+	ld c, $2
+	call StringCmp
+	jr nc, .asm_3cb5c
+	xor a
+	ld [H_NUMTOPRINT], a ; $FF00+$96 (aliases: H_MULTIPLICAND)
+	ld a, $20
+	ld [H_REMAINDER], a ; $FF00+$99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
+	call Multiply
+	ld a, [$FF00+$97]
+	ld [H_DIVIDEND], a ; $FF00+$95 (aliases: H_PRODUCT, H_PASTLEADINGZEROES, H_QUOTIENT)
+	ld a, [$FF00+$98]
+	ld [H_NUMTOPRINT], a ; $FF00+$96 (aliases: H_MULTIPLICAND)
+	ld a, [$FF00+$8d]
+	ld b, a
+	ld a, [$FF00+$8e]
+	srl b
+	rr a
+	srl b
+	rr a
+	and a
+	jr z, .asm_3cb5c
+	ld [H_REMAINDER], a ; $FF00+$99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
+	ld b, $2
+	call Divide
+	ld a, [$FF00+$97]
+	and a
+	jr nz, .asm_3cb5c
+	ld a, [$d120]
+	ld c, a
+.asm_3cb2b
+	dec c
+	jr z, .asm_3cb39
+	ld b, $1e
+	ld a, [$FF00+$98]
+	add b
+	ld [$FF00+$98], a
+	jr c, .asm_3cb5c
+	jr .asm_3cb2b
+.asm_3cb39
+	call GenRandomInBattle
+	ld b, a
+	ld a, [$FF00+$98]
+	cp b
+	jr nc, .asm_3cb5c
+	ld a, $1
+	ld [$cd6a], a
+	ld hl, $4b97
+	jr .asm_3cb4f
+.asm_3cb4c
+	ld hl, $4b9c
+.asm_3cb4f
+	call PrintText
+	ld a, $1
+	ld [$d11f], a
+	call Func_3719
+	and a
+	ret
+.asm_3cb5c
+	ld a, [W_ISLINKBATTLE] ; $d12b
+	cp $4
+	ld a, $2
+	jr nz, .asm_3cb81
+	call Func_3719
+	xor a
+	ld [$cd6a], a
+	ld a, $f
+	ld [W_PLAYERMOVELISTINDEX], a ; $cc2e
+	call Func_3d605
+	call Func_3725
+	ld a, [$cc3e]
+	cp $f
+	ld a, $2
+	jr z, .asm_3cb81
+	dec a
+.asm_3cb81
+	ld [$cf0b], a
+	ld a, $97
+	call Func_3740
+	ld hl, $4ba1
+	call PrintText
+	call Func_3748
+	call Func_3719
+	scf
+	ret
+; 3cb97 (f:4b97)
 UnnamedText_3cb97: ; 0x3cb97
 	TX_FAR _UnnamedText_3cb97
 	db $50
@@ -41085,22 +57272,1037 @@ UnnamedText_3cba1: ; 0x3cba1
 	db $50
 ; 0x3cba1 + 5 bytes
 
-INCBIN "baserom.gbc",$3cba6,$3d0c5 - $3cba6
+; known jump sources: 3c1f7 (f:41f7), 3c81c (f:481c), 3d1e5 (f:51e5)
+Func_3cba6: ; 3cba6 (f:4ba6)
+	ld a, [W_WHICHPOKEMON] ; $cf92
+	ld bc, $2c
+	ld hl, W_PARTYMON1_NUM ; $d16b (aliases: W_PARTYMON1DATA)
+	call AddNTimes
+	ld de, $d014
+	ld bc, $c
+	call CopyData
+	ld bc, $f
+	add hl, bc
+	ld de, $d020
+	ld bc, $2
+	call CopyData
+	ld de, W_PLAYERMONPP ; $d02d
+	ld bc, $4
+	call CopyData
+	ld de, W_PLAYERMONLEVEL ; $d022
+	ld bc, $b
+	call CopyData
+	ld a, [$cfd9]
+	ld [$d0b5], a
+	call GetBaseStats
+	ld hl, W_PARTYMON1NAME ; $d2b5
+	ld a, [W_PLAYERMONNUMBER] ; $cc2f
+	call Func_3a7d
+	ld de, $d009
+	ld bc, $b
+	call CopyData
+	ld hl, W_PLAYERMONLEVEL ; $d022
+	ld de, $cd0f
+	ld bc, $b
+	call CopyData
+	call Func_3ed1a
+	call Func_3ee19
+	ld a, $7
+	ld b, $8
+	ld hl, W_PLAYERMONATTACKMOD ; $cd1a
+.asm_3cc0e
+	ld [hli], a
+	dec b
+	jr nz, .asm_3cc0e
+	ret
 
+; known jump sources: 3eb06 (f:6b06)
+Func_3cc13: ; 3cc13 (f:4c13)
+	ld a, [W_WHICHPOKEMON] ; $cf92
+	ld bc, $2c
+	ld hl, W_WATERRATE ; $d8a4
+	call AddNTimes
+	ld de, $cfe5
+	ld bc, $c
+	call CopyData
+	ld bc, $f
+	add hl, bc
+	ld de, $cff1
+	ld bc, $2
+	call CopyData
+	ld de, W_ENEMYMONPP ; $cffe
+	ld bc, $4
+	call CopyData
+	ld de, W_ENEMYMONLEVEL ; $cff3
+	ld bc, $b
+	call CopyData
+	ld a, [$cfe5]
+	ld [$d0b5], a
+	call GetBaseStats
+	ld hl, $d9ee
+	ld a, [W_WHICHPOKEMON] ; $cf92
+	call Func_3a7d
+	ld de, $cfda
+	ld bc, $b
+	call CopyData
+	ld hl, W_ENEMYMONLEVEL ; $cff3
+	ld de, $cd23
+	ld bc, $b
+	call CopyData
+	call Func_3ed1e
+	ld hl, $d0b9
+	ld de, $d002
+	ld b, $5
+.asm_3cc79
+	ld a, [hli]
+	ld [de], a
+	inc de
+	dec b
+	jr nz, .asm_3cc79
+	ld a, $7
+	ld b, $8
+	ld hl, W_ENEMYMONATTACKMOD ; $cd2e
+.asm_3cc86
+	ld [hli], a
+	dec b
+	jr nz, .asm_3cc86
+	ld a, [W_WHICHPOKEMON] ; $cf92
+	ld [W_ENEMYMONNUMBER], a ; $cfe8
+	ret
+
+; known jump sources: 3c1fd (f:41fd), 3c82e (f:482e), 3d1e8 (f:51e8)
+Func_3cc91: ; 3cc91 (f:4c91)
+	ld hl, Func_58e59
+	ld b, BANK(Func_58e59)
+	call Bankswitch ; indirect jump to Func_58e59 (58e59 (16:4e59))
+	ld hl, W_ENEMYMONCURHP ; $cfe6
+	ld a, [hli]
+	or [hl]
+	jp z, Func_3cca4
+	call Func_3cdec
+
+; known jump sources: 3cc9e (f:4c9e)
+Func_3cca4: ; 3cca4 (f:4ca4)
+	call Func_3cd60
+	ld a, $4
+	call Predef ; indirect jump to Func_3f103 (3f103 (f:7103))
+	xor a
+	ld [$FF00+$e1], a
+	ld hl, $cc2d
+	ld [hli], a
+	ld [hl], a
+	ld [$cc5b], a
+	ld [$d05b], a
+	ld [W_PLAYERMOVENUM], a ; $cfd2
+	ld hl, $ccf1
+	ld [hli], a
+	ld [hl], a
+	ld hl, $d060
+	ld [hli], a
+	ld [hli], a
+	ld [hli], a
+	ld [hli], a
+	ld [hl], a
+	ld [W_PLAYERDISABLEDMOVE], a ; $d06d
+	ld [$ccee], a
+	ld [$ccf7], a
+	ld b, $1
+	call GoPAL_SET
+	ld hl, W_ENEMYBATTSTATUS1 ; $d067
+	res 5, [hl]
+	ld a, $1
+	ld [H_WHOSETURN], a ; $FF00+$f3
+	ld a, $c3
+	call PlayMoveAnimation
+	ld hl, $c480
+	ld a, $2
+	call Predef ; indirect jump to Func_3f073 (3f073 (f:7073))
+	ld a, [$cf91]
+	call PlayCry
+	call Func_3ee94
+	jp Func_3719
+
+; known jump sources: 3d1c7 (f:51c7)
+Func_3ccfa: ; 3ccfa (f:4cfa)
+	ld hl, $c405
+	ld bc, $707
+	call ClearScreenArea
+	ld hl, $c42f
+	ld bc, $505
+	xor a
+	ld [$cd6c], a
+	ld [H_DOWNARROWBLINKCNT1], a ; $FF00+$8b
+	ld a, $5
+	call Predef ; indirect jump to Func_79aba (79aba (1e:5aba))
+	ld c, $4
+	call DelayFrames
+	call Func_3cd3a
+	ld hl, $c458
+	ld bc, $303
+	ld a, $1
+	ld [$cd6c], a
+	xor a
+	ld [H_DOWNARROWBLINKCNT1], a ; $FF00+$8b
+	ld a, $5
+	call Predef ; indirect jump to Func_79aba (79aba (1e:5aba))
+	call Delay3
+	call Func_3cd3a
+	ld a, $4c
+	ld [$c481], a
+
+; known jump sources: 3cd19 (f:4d19), 3cd32 (f:4d32)
+Func_3cd3a: ; 3cd3a (f:4d3a)
+	ld hl, $c405
+	ld bc, $707
+	jp ClearScreenArea
+
+; known jump sources: 78c1 (1:78c1), 3c233 (f:4233), 3c567 (f:4567), 3c76b (f:476b), 3f76e (f:776e), 3f7c1 (f:77c1)
+Func_3cd43: ; 3cd43 (f:4d43)
+	ld a, [W_PLAYERMONNUMBER] ; $cc2f
+	ld hl, W_PARTYMON1_HP ; $d16c
+	ld bc, $2c
+	call AddNTimes
+	ld d, h
+	ld e, l
+	ld hl, W_PLAYERMONCURHP ; $d015
+	ld bc, $4
+	jp CopyData
+
+; known jump sources: 3c2a0 (f:42a0), 3c35e (f:435e), 3c374 (f:4374), 3c390 (f:4390), 3c3b4 (f:43b4), 3c424 (f:4424), 3cebc (f:4ebc), 3d017 (f:5017), 3d0ac (f:50ac), 3e19d (f:619d), 3e25b (f:625b), 3e2a9 (f:62a9)
+Func_3cd5a: ; 3cd5a (f:4d5a)
+	call Func_3cd60
+	jp Func_3cdec
+
+; known jump sources: 78b4 (1:78b4), 3c539 (f:4539), 3cca4 (f:4ca4), 3cd5a (f:4d5a), 3d739 (f:5739), 3daec (f:5aec), 553e9 (15:53e9)
+Func_3cd60: ; 3cd60 (f:4d60)
+	xor a
+	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld hl, $c435
+	ld bc, $50b
+	call ClearScreenArea
+	ld hl, Func_3a902
+	ld b, BANK(Func_3a902)
+	call Bankswitch ; indirect jump to Func_3a902 (3a902 (e:6902))
+	ld hl, $c466
+	ld [hl], $73
+	ld de, $d009
+	ld hl, $c436
+	call Func_3ce9c
+	call PlaceString
+	ld hl, $d014
+	ld de, $cf98
+	ld bc, $c
+	call CopyData
+	ld hl, W_PLAYERMONLEVEL ; $d022
+	ld de, $cfb9
+	ld bc, $b
+	call CopyData
+	ld hl, $c44e
+	push hl
+	inc hl
+	ld de, $cf9c
+	call PrintStatusConditionNotFainted
+	pop hl
+	jr nz, .asm_3cdae
+	call PrintLevel
+.asm_3cdae
+	ld a, [$cf98]
+	ld [$cf91], a
+	ld hl, $c45e
+	ld a, $5f
+	call Predef ; indirect jump to Func_128ef (128ef (4:68ef))
+	ld a, $1
+	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld hl, $cf1d
+	call Func_3ce90
+	ld hl, W_PLAYERMONCURHP ; $d015
+	ld a, [hli]
+	or [hl]
+	jr z, .asm_3cdd9
+	ld a, [$ccf6]
+	and a
+	ret nz
+	ld a, [$cf1d]
+	cp $2
+	jr z, .asm_3cde6
+.asm_3cdd9
+	ld hl, $d083
+	bit 7, [hl]
+	ld [hl], $0
+	ret z
+	xor a
+	ld [$c02a], a
+	ret
+.asm_3cde6
+	ld hl, $d083
+	set 7, [hl]
+	ret
+
+; known jump sources: 78b9 (1:78b9), 3ca64 (f:4a64), 3cca1 (f:4ca1), 3cd5d (f:4d5d), 3e7bf (f:67bf), 3f02d (f:702d)
+Func_3cdec: ; 3cdec (f:4dec)
+	xor a
+	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld hl, $c3a0
+	ld bc, $40c
+	call ClearScreenArea
+	ld hl, Func_3a919
+	ld b, BANK(Func_3a919)
+	call Bankswitch ; indirect jump to Func_3a919 (3a919 (e:6919))
+	ld de, $cfda
+	ld hl, $c3a1
+	call Func_3ce9c
+	call PlaceString
+	ld hl, $c3b8
+	push hl
+	inc hl
+	ld de, W_ENEMYMONSTATUS ; $cfe9
+	call PrintStatusConditionNotFainted
+	pop hl
+	jr nz, .asm_3ce23
+	ld a, [W_ENEMYMONLEVEL] ; $cff3
+	ld [$cfb9], a
+	call PrintLevel
+.asm_3ce23
+	ld hl, W_ENEMYMONCURHP ; $cfe6
+	ld a, [hli]
+	ld [$FF00+$97], a
+	ld a, [hld]
+	ld [$FF00+$98], a
+	or [hl]
+	jr nz, .asm_3ce36
+	ld c, a
+	ld e, a
+	ld d, $6
+	jp Func_3ce7f
+.asm_3ce36
+	xor a
+	ld [H_NUMTOPRINT], a ; $FF00+$96 (aliases: H_MULTIPLICAND)
+	ld a, $30
+	ld [H_REMAINDER], a ; $FF00+$99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
+	call Multiply
+	ld hl, W_ENEMYMONMAXHP ; $cff4
+	ld a, [hli]
+	ld b, a
+	ld a, [hl]
+	ld [H_REMAINDER], a ; $FF00+$99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
+	ld a, b
+	and a
+	jr z, .asm_3ce6a
+	ld a, [H_REMAINDER] ; $FF00+$99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
+	srl b
+	rr a
+	srl b
+	rr a
+	ld [H_REMAINDER], a ; $FF00+$99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
+	ld a, [$FF00+$97]
+	ld b, a
+	srl b
+	ld a, [$FF00+$98]
+	rr a
+	srl b
+	rr a
+	ld [$FF00+$98], a
+	ld a, b
+	ld [$FF00+$97], a
+.asm_3ce6a
+	ld a, [$FF00+$97]
+	ld [H_DIVIDEND], a ; $FF00+$95 (aliases: H_PRODUCT, H_PASTLEADINGZEROES, H_QUOTIENT)
+	ld a, [$FF00+$98]
+	ld [H_NUMTOPRINT], a ; $FF00+$96 (aliases: H_MULTIPLICAND)
+	ld a, $2
+	ld b, a
+	call Divide
+	ld a, [$FF00+$98]
+	ld e, a
+	ld a, $6
+	ld d, a
+	ld c, a
+
+; known jump sources: 3ce33 (f:4e33)
+Func_3ce7f: ; 3ce7f (f:4e7f)
+	xor a
+	ld [W_LISTMENUID], a ; $cf94
+	ld hl, $c3ca
+	call DrawHPBar
+	ld a, $1
+	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld hl, $cf1e
+
+; known jump sources: 3c669 (f:4669), 3cdc3 (f:4dc3)
+Func_3ce90: ; 3ce90 (f:4e90)
+	ld b, [hl]
+	call Func_3df9
+	ld a, [hl]
+	cp b
+	ret z
+	ld b, $1
+	jp GoPAL_SET
+
+; known jump sources: 3cd7f (f:4d7f), 3ce06 (f:4e06)
+Func_3ce9c: ; 3ce9c (f:4e9c)
+	push de
+	inc hl
+	inc hl
+	ld b, $2
+.asm_3cea1
+	inc de
+	ld a, [de]
+	cp $50
+	jr z, .asm_3ceb1
+	inc de
+	ld a, [de]
+	cp $50
+	jr z, .asm_3ceb1
+	dec hl
+	dec b
+	jr nz, .asm_3cea1
+.asm_3ceb1
+	pop de
+	ret
+
+; known jump sources: 3c161 (f:4161), 3c263 (f:4263), 3cffa (f:4ffa), 3d05c (f:505c), 3d102 (f:5102), 3d216 (f:5216)
+Func_3ceb3: ; 3ceb3 (f:4eb3)
+	call Func_3725
+	ld a, [W_BATTLETYPE] ; $d05a
+	and a
+	jr nz, .asm_3cec5
+	call Func_3cd5a
+	call Func_3ee94
+	call Func_3719
+.asm_3cec5
+	ld a, [W_BATTLETYPE] ; $d05a
+	cp $2
+	ld a, $b
+	jr nz, .asm_3ced0
+	ld a, $1b
+.asm_3ced0
+	ld [$d125], a
+	call DisplayTextBoxID
+	ld a, [W_BATTLETYPE] ; $d05a
+	dec a
+	jp nz, Func_3cf1a
+	ld hl, W_PLAYERNAME ; $d158
+	ld de, W_GRASSRATE ; $d887
+	ld bc, $b
+	call CopyData
+	ld hl, $4f12
+	ld de, W_PLAYERNAME ; $d158
+	ld bc, $b
+	call CopyData
+	ld hl, $c4c1
+	ld [hl], $ed
+	ld c, $50
+	call DelayFrames
+	ld [hl], $7f
+	ld hl, $c4e9
+	ld [hl], $ed
+	ld c, $32
+	call DelayFrames
+	ld [hl], $ec
+	ld a, $2
+	jp Func_3cfe8
+
+INCBIN "baserom.gbc",$3cf12,$3cf1a - $3cf12
+
+; known jump sources: 3ceda (f:4eda)
+Func_3cf1a: ; 3cf1a (f:4f1a)
+	ld a, [$cc2d]
+	ld [W_CURMENUITEMID], a ; $cc26
+	ld [W_OLDMENUITEMID], a ; $cc2a
+	sub $2
+	jr c, .asm_3cf2f
+	ld [W_CURMENUITEMID], a ; $cc26
+	ld [W_OLDMENUITEMID], a ; $cc2a
+	jr .asm_3cf6e
+.asm_3cf2f
+	ld a, [W_BATTLETYPE] ; $d05a
+	cp $2
+	ld a, $7f
+	jr z, .asm_3cf42
+	ld [$c4c7], a
+	ld [$c4ef], a
+	ld b, $9
+	jr .asm_3cf56
+.asm_3cf42
+	ld [$c4c5], a
+	ld [$c4ed], a
+	ld hl, $c4bf
+	ld de, W_NUMSAFARIBALLS ; $da47
+	ld bc, $102
+	call PrintNumber
+	ld b, $1
+.asm_3cf56
+	ld hl, W_TOPMENUITEMY ; $cc24
+	ld a, $e
+	ld [hli], a
+	ld a, b
+	ld [hli], a
+	inc hl
+	inc hl
+	ld a, $1
+	ld [hli], a
+	ld [hl], $11
+	call HandleMenuInput
+	bit 4, a
+	jr nz, .asm_3cf6e
+	jr .asm_3cfb4
+.asm_3cf6e
+	ld a, [W_BATTLETYPE] ; $d05a
+	cp $2
+	ld a, $7f
+	jr z, .asm_3cf81
+	ld [$c4c1], a
+	ld [$c4e9], a
+	ld b, $f
+	jr .asm_3cf95
+.asm_3cf81
+	ld [$c4b9], a
+	ld [$c4e1], a
+	ld hl, $c4bf
+	ld de, W_NUMSAFARIBALLS ; $da47
+	ld bc, $102
+	call PrintNumber
+	ld b, $d
+.asm_3cf95
+	ld hl, W_TOPMENUITEMY ; $cc24
+	ld a, $e
+	ld [hli], a
+	ld a, b
+	ld [hli], a
+	inc hl
+	inc hl
+	ld a, $1
+	ld [hli], a
+	ld a, $21
+	ld [hli], a
+	call HandleMenuInput
+	bit 5, a
+	jr nz, .asm_3cf2f
+	ld a, [W_CURMENUITEMID] ; $cc26
+	add $2
+	ld [W_CURMENUITEMID], a ; $cc26
+.asm_3cfb4
+	call PlaceUnfilledArrowMenuCursor
+	ld a, [W_BATTLETYPE] ; $d05a
+	cp $2
+	ld a, [W_CURMENUITEMID] ; $cc26
+	ld [$cc2d], a
+	jr z, .asm_3cfd0
+	cp $1
+	jr nz, .asm_3cfcb
+	inc a
+	jr .asm_3cfd0
+.asm_3cfcb
+	cp $2
+	jr nz, .asm_3cfd0
+	dec a
+.asm_3cfd0
+	and a
+	jr nz, Func_3cfe8
+	ld a, [W_BATTLETYPE] ; $d05a
+	cp $2
+	jr z, .asm_3cfe1
+	xor a
+	ld [$d120], a
+	jp Func_3725
+.asm_3cfe1
+	ld a, $8
+	ld [$cf91], a
+	jr asm_3d05f
+
+; known jump sources: 3cf0f (f:4f0f), 3cfd1 (f:4fd1)
+Func_3cfe8: ; 3cfe8 (f:4fe8)
+	cp $2
+	jp nz, Func_3d0ca
+	ld a, [W_ISLINKBATTLE] ; $d12b
+	cp $4
+	jr nz, .asm_3cffd
+	ld hl, $50c5
+	call PrintText
+	jp Func_3ceb3
+.asm_3cffd
+	call Func_36f4
+	ld a, [W_BATTLETYPE] ; $d05a
+	cp $2
+	jr nz, asm_3d00e
+	ld a, $15
+	ld [$cf91], a
+	jr asm_3d05f
+asm_3d00e: ; 3d00e (f:500e)
+	call Func_3725
+	ld a, [W_BATTLETYPE] ; $d05a
+	and a
+	jr nz, .asm_3d01a
+	call Func_3cd5a
+.asm_3d01a
+	ld a, [W_BATTLETYPE] ; $d05a
+	dec a
+	jr nz, .asm_3d031
+	ld hl, $502d
+	ld a, l
+	ld [$cf8b], a
+	ld a, h
+	ld [$cf8c], a
+	jr .asm_3d03c
+
+INCBIN "baserom.gbc",$3d02d,$3d031 - $3d02d
+.asm_3d031
+	ld hl, W_NUMBAGITEMS ; $d31d
+	ld a, l
+	ld [$cf8b], a
+	ld a, h
+	ld [$cf8c], a
+.asm_3d03c
+	xor a
+	ld [$cf93], a
+	ld a, $3
+	ld [W_LISTMENUID], a ; $cf94
+	ld a, [$cc2c]
+	ld [W_CURMENUITEMID], a ; $cc26
+	call DisplayListMenuID
+	ld a, [W_CURMENUITEMID] ; $cc26
+	ld [$cc2c], a
+	ld a, $0
+	ld [$cc37], a
+	ld [$cc35], a
+	jp c, Func_3ceb3
+asm_3d05f: ; 3d05f (f:505f)
+	ld a, [$cf91]
+	ld [$d11e], a
+	call GetItemName
+	call Func_3826
+	xor a
+	ld [$d152], a
+	call UseItem
+	call Func_3ee5b
+	call CleanLCD_OAM
+	xor a
+	ld [W_CURMENUITEMID], a ; $cc26
+	ld a, [W_BATTLETYPE] ; $d05a
+	cp $2
+	jr z, .asm_3d09c
+	ld a, [$cd6a]
+	and a
+	jp z, asm_3d00e
+	ld a, [W_PLAYERBATTSTATUS1] ; $d062
+	bit 5, a
+	jr z, .asm_3d09c
+	ld hl, $d06a
+	dec [hl]
+	jr nz, .asm_3d09c
+	ld hl, W_PLAYERBATTSTATUS1 ; $d062
+	res 5, [hl]
+.asm_3d09c
+	ld a, [$d11c]
+	and a
+	jr nz, .asm_3d0b7
+	ld a, [W_BATTLETYPE] ; $d05a
+	cp $2
+	jr z, .asm_3d0b2
+	call Func_3725
+	call Func_3cd5a
+	call Delay3
+.asm_3d0b2
+	call GBPalNormal
+	and a
+	ret
+.asm_3d0b7
+	call GBPalNormal
+	xor a
+	ld [$d11c], a
+	ld a, $2
+	ld [$cf0b], a
+	scf
+	ret
+; 3d0c5 (f:50c5)
 UnnamedText_3d0c5: ; 0x3d0c5
 	TX_FAR _UnnamedText_3d0c5
 	db $50
 ; 0x3d0c5 + 5 bytes
 
-INCBIN "baserom.gbc",$3d0ca,$3d1f5 - $3d0ca
+; known jump sources: 3cfea (f:4fea)
+Func_3d0ca: ; 3d0ca (f:50ca)
+	dec a
+	jp nz, Func_3d1fa
+	call Func_36f4
+	ld a, [W_BATTLETYPE] ; $d05a
+	cp $2
+	jr nz, Func_3d0e0
+	ld a, $16
+	ld [$cf91], a
+	jp asm_3d05f
 
+; known jump sources: 3d0d6 (f:50d6), 3d187 (f:5187)
+Func_3d0e0: ; 3d0e0 (f:50e0)
+	call Func_3725
+	xor a
+	ld [$d07d], a
+	ld [$cc35], a
+	call DisplayPartyMenu
+asm_3d0ed: ; 3d0ed (f:50ed)
+	jp nc, Func_3d119
+asm_3d0f0: ; 3d0f0 (f:50f0)
+	call CleanLCD_OAM
+	call GBPalWhiteOut
+	call Func_3ee5b
+	call Func_3701
+	call GoPAL_SET_CF1C
+	call GBPalNormal
+	jp Func_3ceb3
+
+; known jump sources: 3d138 (f:5138), 3d19a (f:519a), 3d1a0 (f:51a0)
+Func_3d105: ; 3d105 (f:5105)
+	ld hl, $c487
+	ld bc, $81
+	ld a, $7f
+	call FillMemory
+	xor a
+	ld [$d07d], a
+	call GoBackToPartyMenu
+	jr asm_3d0ed
+
+; known jump sources: 3d0ed (f:50ed)
+Func_3d119: ; 3d119 (f:5119)
+	ld a, $c
+	ld [$d125], a
+	call DisplayTextBoxID
+	ld hl, W_TOPMENUITEMY ; $cc24
+	ld a, $c
+	ld [hli], a
+	ld [hli], a
+	xor a
+	ld [hli], a
+	inc hl
+	ld a, $2
+	ld [hli], a
+	ld a, $3
+	ld [hli], a
+	xor a
+	ld [hl], a
+	call HandleMenuInput
+	bit 1, a
+	jr nz, Func_3d105
+	call PlaceUnfilledArrowMenuCursor
+	ld a, [W_CURMENUITEMID] ; $cc26
+	cp $2
+	jr z, asm_3d0f0
+	and a
+	jr z, .asm_3d18a
+	xor a
+	ld [$cc49], a
+	ld hl, W_PARTYMON1_NUM ; $d16b (aliases: W_PARTYMON1DATA)
+	call CleanLCD_OAM
+	ld a, $36
+	call Predef ; indirect jump to StatusScreen (12953 (4:6953))
+	ld a, $37
+	call Predef ; indirect jump to StatusScreen2 (12b57 (4:6b57))
+	ld a, [W_ENEMYBATTSTATUS2] ; $d068
+	bit 4, a
+	ld hl, $56e0
+	jr nz, .asm_3d182
+	ld a, [$ccf3]
+	and a
+	ld hl, $559f
+	jr nz, .asm_3d182
+	ld a, [$cfe5]
+	ld [$cf91], a
+	ld [$d0b5], a
+	call GetBaseStats
+	ld de, $9000
+	call Func_1665
+	jr .asm_3d187
+.asm_3d182
+	ld b, $1e
+	call Bankswitch
+.asm_3d187
+	jp Func_3d0e0
+.asm_3d18a
+	ld a, [W_PLAYERMONNUMBER] ; $cc2f
+	ld d, a
+	ld a, [W_WHICHPOKEMON] ; $cf92
+	cp d
+	jr nz, .asm_3d19d
+	ld hl, $51f5
+	call PrintText
+	jp Func_3d105
+.asm_3d19d
+	call Func_3ca97
+	jp z, Func_3d105
+	ld a, $1
+	ld [$cd6a], a
+	call GBPalWhiteOut
+	call CleanLCD_OAM
+	call Func_3ee5b
+	call Func_3725
+	call GoPAL_SET_CF1C
+	call GBPalNormal
+
+; known jump sources: 3ca76 (f:4a76)
+Func_3d1ba: ; 3d1ba (f:51ba)
+	ld hl, Func_58ed1
+	ld b, BANK(Func_58ed1)
+	call Bankswitch ; indirect jump to Func_58ed1 (58ed1 (16:4ed1))
+	ld c, $32
+	call DelayFrames
+	call Func_3ccfa
+	ld a, [W_WHICHPOKEMON] ; $cf92
+	ld [W_PLAYERMONNUMBER], a ; $cc2f
+	ld c, a
+	ld b, $1
+	push bc
+	ld hl, $d058
+	ld a, $10
+	call Predef ; indirect jump to Func_f666 (f666 (3:7666))
+	pop bc
+	ld hl, $ccf5
+	ld a, $10
+	call Predef ; indirect jump to Func_f666 (f666 (3:7666))
+	call Func_3cba6
+	call Func_3cc91
+	call Func_3719
+	ld a, $2
+	ld [W_CURMENUITEMID], a ; $cc26
+	and a
+	ret
+; 3d1f5 (f:51f5)
 UnnamedText_3d1f5: ; 0x3d1f5
 	TX_FAR _UnnamedText_3d1f5
 	db $50
 ; 0x3d1f5 + 5 bytes
 
-INCBIN "baserom.gbc",$3d1fa,$3d3ae - $3d1fa
+; known jump sources: 3d0cb (f:50cb)
+Func_3d1fa: ; 3d1fa (f:51fa)
+	call Func_3725
+	ld a, $3
+	ld [W_CURMENUITEMID], a ; $cc26
+	ld hl, $d029
+	ld de, $cffa
+	call Func_3cab9
+	ld a, $0
+	ld [$d11f], a
+	ret c
+	ld a, [$cd6a]
+	and a
+	ret nz
+	jp Func_3ceb3
 
+; known jump sources: e35f (3:635f), 3c299 (f:4299), 3d3ab (f:53ab), 3d490 (f:5490), 3d4b3 (f:54b3)
+Func_3d219: ; 3d219 (f:5219)
+	ld a, [$ccdb]
+	dec a
+	jr z, asm_3d275
+	dec a
+	jr z, asm_3d291
+	jr asm_3d249
+
+; known jump sources: 3d250 (f:5250), 3d278 (f:5278), 3d29d (f:529d)
+Func_3d224: ; 3d224 (f:5224)
+	ld de, $d0dc
+	ld bc, $4
+	call CopyData
+	ld hl, Func_39b87
+	ld b, BANK(Func_39b87)
+	call Bankswitch ; indirect jump to Func_39b87 (39b87 (e:5b87))
+	ret
+
+; known jump sources: 3d26c (f:526c), 3d288 (f:5288), 3d2ad (f:52ad)
+Func_3d236: ; 3d236 (f:5236)
+	ld de, $d0e1
+	ld a, [$FF00+$f6]
+	set 2, a
+	ld [$FF00+$f6], a
+	call PlaceString
+	ld a, [$FF00+$f6]
+	res 2, a
+	ld [$FF00+$f6], a
+	ret
+asm_3d249: ; 3d249 (f:5249)
+	call Func_3d3f5
+	ret z
+	ld hl, $d01c
+	call Func_3d224
+	ld hl, $c494
+	ld b, $4
+	ld c, $e
+	di
+	call TextBoxBorder
+	ld hl, $c494
+	ld [hl], $7a
+	ld hl, $c49a
+	ld [hl], $7e
+	ei
+	ld hl, $c4aa
+	call Func_3d236
+	ld b, $5
+	ld a, $c
+	jr asm_3d2b4
+asm_3d275: ; 3d275 (f:5275)
+	ld hl, $cfed
+	call Func_3d224
+	ld hl, $c42c
+	ld b, $4
+	ld c, $e
+	call TextBoxBorder
+	ld hl, $c442
+	call Func_3d236
+	ld b, $1
+	ld a, $7
+	jr asm_3d2b4
+asm_3d291: ; 3d291 (f:5291)
+	ld a, [W_WHICHPOKEMON] ; $cf92
+	ld hl, W_PARTYMON1_MOVE1 ; $d173
+	ld bc, $2c
+	call AddNTimes
+	call Func_3d224
+	ld hl, $c430
+	ld b, $4
+	ld c, $e
+	call TextBoxBorder
+	ld hl, $c446
+	call Func_3d236
+	ld b, $5
+	ld a, $7
+asm_3d2b4: ; 3d2b4 (f:52b4)
+	ld hl, W_TOPMENUITEMY ; $cc24
+	ld [hli], a
+	ld a, b
+	ld [hli], a
+	ld a, [$ccdb]
+	cp $1
+	jr z, .asm_3d2c9
+	ld a, $1
+	jr nc, .asm_3d2c9
+	ld a, [W_PLAYERMOVELISTINDEX] ; $cc2e
+	inc a
+.asm_3d2c9
+	ld [hli], a
+	inc hl
+	ld a, [$cd6c]
+	inc a
+	inc a
+	ld [hli], a
+	ld a, [$ccdb]
+	dec a
+	ld b, $c1
+	jr z, .asm_3d2f0
+	dec a
+	ld b, $c3
+	jr z, .asm_3d2f0
+	ld a, [W_ISLINKBATTLE] ; $d12b
+	cp $4
+	jr z, .asm_3d2f0
+	ld a, [$d733]
+	bit 0, a
+	ld b, $c7
+	jr z, .asm_3d2f0
+	ld b, $ff
+.asm_3d2f0
+	ld a, b
+	ld [hli], a
+	ld a, [$ccdb]
+	cp $1
+	jr z, .asm_3d2fd
+	ld a, [W_PLAYERMOVELISTINDEX] ; $cc2e
+	inc a
+.asm_3d2fd
+	ld [hl], a
+
+; known jump sources: 3d3cd (f:53cd), 3d3da (f:53da), 3d3e7 (f:53e7), 3d3f2 (f:53f2)
+Func_3d2fe: ; 3d2fe (f:52fe)
+	ld a, [$ccdb]
+	and a
+	jr z, .asm_3d312
+	dec a
+	jr nz, .asm_3d32e
+	ld hl, $c4b9
+	ld de, $53b8
+	call PlaceString
+	jr .asm_3d32e
+.asm_3d312
+	ld a, [$d733]
+	bit 0, a
+	jr nz, .asm_3d32e
+	call Func_3d4b6
+	ld a, [$cc35]
+	and a
+	jr z, .asm_3d32e
+	ld hl, $c4a9
+	dec a
+	ld bc, $14
+	call AddNTimes
+	ld [hl], $ec
+.asm_3d32e
+	ld hl, $fff6
+	set 1, [hl]
+	call HandleMenuInput
+	ld hl, $fff6
+	res 1, [hl]
+	bit 6, a
+	jp nz, Func_3d3c9
+	bit 7, a
+	jp nz, Func_3d3dd
+	bit 2, a
+	jp nz, Func_3d435
+	bit 1, a
+	push af
+	xor a
+	ld [$cc35], a
+	ld a, [W_CURMENUITEMID] ; $cc26
+	dec a
+	ld [W_CURMENUITEMID], a ; $cc26
+	ld b, a
+	ld a, [$ccdb]
+	dec a
+	jr nz, .asm_3d361
+	pop af
+	ret
+.asm_3d361
+	dec a
+	ld a, b
+	ld [W_PLAYERMOVELISTINDEX], a ; $cc2e
+	jr nz, .asm_3d36a
+	pop af
+	ret
+.asm_3d36a
+	pop af
+	ret nz
+	ld hl, W_PLAYERMONPP ; $d02d
+	ld a, [W_CURMENUITEMID] ; $cc26
+	ld c, a
+	ld b, $0
+	add hl, bc
+	ld a, [hl]
+	and $3f
+	jr z, .asm_3d3a2
+	ld a, [W_PLAYERDISABLEDMOVE] ; $d06d
+	swap a
+	and $f
+	dec a
+	cp c
+	jr z, .asm_3d39d
+	ld a, [W_PLAYERBATTSTATUS3] ; $d064
+	bit 3, a
+	jr nz, .asm_3d38d
+.asm_3d38d
+	ld a, [W_CURMENUITEMID] ; $cc26
+	ld hl, $d01c
+	ld c, a
+	ld b, $0
+	add hl, bc
+	ld a, [hl]
+	ld [W_PLAYERSELECTEDMOVE], a ; $ccdc
+	xor a
+	ret
+.asm_3d39d
+	ld hl, $53b3
+	jr .asm_3d3a5
+.asm_3d3a2
+	ld hl, $53ae
+.asm_3d3a5
+	call PrintText
+	call Func_3725
+	jp Func_3d219
+; 3d3ae (f:53ae)
 UnnamedText_3d3ae: ; 0x3d3ae
 	TX_FAR _UnnamedText_3d3ae
 	db $50
@@ -41111,14 +58313,233 @@ UnnamedText_3d3b3: ; 0x3d3b3
 	db $50
 ; 0x3d3b3 + 5 bytes
 
-INCBIN "baserom.gbc",$3d3b8,$3d430 - $3d3b8
+INCBIN "baserom.gbc",$3d3b8,$3d3c9 - $3d3b8
 
+; known jump sources: 3d33d (f:533d)
+Func_3d3c9: ; 3d3c9 (f:53c9)
+	ld a, [W_CURMENUITEMID] ; $cc26
+	and a
+	jp nz, Func_3d2fe
+	call EraseMenuCursor
+	ld a, [$cd6c]
+	inc a
+	ld [W_CURMENUITEMID], a ; $cc26
+	jp Func_3d2fe
+
+; known jump sources: 3d342 (f:5342)
+Func_3d3dd: ; 3d3dd (f:53dd)
+	ld a, [W_CURMENUITEMID] ; $cc26
+	ld b, a
+	ld a, [$cd6c]
+	inc a
+	inc a
+	cp b
+	jp nz, Func_3d2fe
+	call EraseMenuCursor
+	ld a, $1
+	ld [W_CURMENUITEMID], a ; $cc26
+	jp Func_3d2fe
+
+; known jump sources: 3d249 (f:5249)
+Func_3d3f5: ; 3d3f5 (f:53f5)
+	ld a, $a5
+	ld [W_PLAYERSELECTEDMOVE], a ; $ccdc
+	ld a, [W_PLAYERDISABLEDMOVE] ; $d06d
+	and a
+	ld hl, W_PLAYERMONPP ; $d02d
+	jr nz, .asm_3d40e
+	ld a, [hli]
+	or [hl]
+	inc hl
+	or [hl]
+	inc hl
+	or [hl]
+	and $3f
+	ret nz
+	jr .asm_3d423
+.asm_3d40e
+	swap a
+	and $f
+	ld b, a
+	ld d, $5
+	xor a
+.asm_3d416
+	dec d
+	jr z, .asm_3d421
+	ld c, [hl]
+	inc hl
+	dec b
+	jr z, .asm_3d416
+	or c
+	jr .asm_3d416
+.asm_3d421
+	and a
+	ret nz
+.asm_3d423
+	ld hl, $5430
+	call PrintText
+	ld c, $3c
+	call DelayFrames
+	xor a
+	ret
+; 3d430 (f:5430)
 UnnamedText_3d430: ; 0x3d430
 	TX_FAR _UnnamedText_3d430
 	db $50
 ; 0x3d430 + 5 bytes
 
-INCBIN "baserom.gbc",$3d435,$3d564 - $3d435
+; known jump sources: 3d347 (f:5347)
+Func_3d435: ; 3d435 (f:5435)
+	ld a, [$cc35]
+	and a
+	jr z, asm_3d4ad
+	ld hl, $d01c
+	call Func_3d493
+	ld hl, W_PLAYERMONPP ; $d02d
+	call Func_3d493
+	ld hl, W_PLAYERDISABLEDMOVE ; $d06d
+	ld a, [hl]
+	swap a
+	and $f
+	ld b, a
+	ld a, [W_CURMENUITEMID] ; $cc26
+	cp b
+	jr nz, .asm_3d463
+	ld a, [hl]
+	and $f
+	ld b, a
+	ld a, [$cc35]
+	swap a
+	add b
+	ld [hl], a
+	jr .asm_3d474
+.asm_3d463
+	ld a, [$cc35]
+	cp b
+	jr nz, .asm_3d474
+	ld a, [hl]
+	and $f
+	ld b, a
+	ld a, [W_CURMENUITEMID] ; $cc26
+	swap a
+	add b
+	ld [hl], a
+.asm_3d474
+	ld hl, W_PARTYMON1_MOVE1 ; $d173
+	ld a, [W_PLAYERMONNUMBER] ; $cc2f
+	ld bc, $2c
+	call AddNTimes
+	push hl
+	call Func_3d493
+	pop hl
+	ld bc, $15
+	add hl, bc
+	call Func_3d493
+	xor a
+	ld [$cc35], a
+	jp Func_3d219
+
+; known jump sources: 3d43e (f:543e), 3d444 (f:5444), 3d481 (f:5481), 3d489 (f:5489)
+Func_3d493: ; 3d493 (f:5493)
+	push hl
+	ld a, [$cc35]
+	dec a
+	ld c, a
+	ld b, $0
+	add hl, bc
+	ld d, h
+	ld e, l
+	pop hl
+	ld a, [W_CURMENUITEMID] ; $cc26
+	dec a
+	ld c, a
+	ld b, $0
+	add hl, bc
+	ld a, [de]
+	ld b, [hl]
+	ld [hl], a
+	ld a, b
+	ld [de], a
+	ret
+asm_3d4ad: ; 3d4ad (f:54ad)
+	ld a, [W_CURMENUITEMID] ; $cc26
+	ld [$cc35], a
+	jp Func_3d219
+
+; known jump sources: 3d319 (f:5319)
+Func_3d4b6: ; 3d4b6 (f:54b6)
+	xor a
+	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld hl, $c440
+	ld b, $3
+	ld c, $9
+	call TextBoxBorder
+	ld a, [W_PLAYERDISABLEDMOVE] ; $d06d
+	and a
+	jr z, .asm_3d4df
+	swap a
+	and $f
+	ld b, a
+	ld a, [W_CURMENUITEMID] ; $cc26
+	cp b
+	jr nz, .asm_3d4df
+	ld hl, $c469
+	ld de, $5555
+	call PlaceString
+	jr .asm_3d54e
+.asm_3d4df
+	ld hl, W_CURMENUITEMID ; $cc26
+	dec [hl]
+	xor a
+	ld [H_WHOSETURN], a ; $FF00+$f3
+	ld hl, $d01c
+	ld a, [W_CURMENUITEMID] ; $cc26
+	ld c, a
+	ld b, $0
+	add hl, bc
+	ld a, [hl]
+	ld [W_PLAYERSELECTEDMOVE], a ; $ccdc
+	ld a, [W_PLAYERMONNUMBER] ; $cc2f
+	ld [W_WHICHPOKEMON], a ; $cf92
+	ld a, $4
+	ld [$cc49], a
+	ld hl, GetMaxPP
+	ld b, BANK(GetMaxPP)
+	call Bankswitch ; indirect jump to GetMaxPP (e677 (3:6677))
+	ld hl, W_CURMENUITEMID ; $cc26
+	ld c, [hl]
+	inc [hl]
+	ld b, $0
+	ld hl, W_PLAYERMONPP ; $d02d
+	add hl, bc
+	ld a, [hl]
+	and $3f
+	ld [$cd6d], a
+	ld hl, $c455
+	ld de, $555f
+	call PlaceString
+	ld hl, $c483
+	ld [hl], $f3
+	ld hl, $c459
+	ld [hl], $f3
+	ld hl, $c481
+	ld de, $cd6d
+	ld bc, $102
+	call PrintNumber
+	ld hl, $c484
+	ld de, $d11e
+	ld bc, $102
+	call PrintNumber
+	call Func_3eabe
+	ld hl, $c46a
+	ld a, $5d
+	call Predef ; indirect jump to Func_27d98 (27d98 (9:7d98))
+.asm_3d54e
+	ld a, $1
+	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	jp Delay3
+
+INCBIN "baserom.gbc",$3d555,$3d564 - $3d555
 
 SelectEnemyMove: ; 5564 0x3d564
 	ld a, [W_ISLINKBATTLE]
@@ -41129,7 +58550,7 @@ SelectEnemyMove: ; 5564 0x3d564
 	call $3725
 	ld a, [$cc3e]
 	cp $e
-	jp z, $5601
+	jp z, .asm_3d601
 	cp $d
 	jr z, .unableToMove
 	cp $4
@@ -41209,13 +58630,104 @@ SelectEnemyMove: ; 5564 0x3d564
 .done
 	ld [W_ENEMYSELECTEDMOVE], a
 	ret
+.asm_3d601
+	ld a, $a5
+	jr .done
 
-INCBIN "baserom.gbc",$3d601,$3d6a9 - $3d601
+; known jump sources: 3c67b (f:467b), 3c7f7 (f:47f7), 3cb71 (f:4b71), 3d56e (f:556e)
+Func_3d605: ; 3d605 (f:5605)
+	ld a, $ff
+	ld [$cc3e], a
+	ld a, [W_PLAYERMOVELISTINDEX] ; $cc2e
+	cp $f
+	jr z, .asm_3d630
+	ld a, [$cd6a]
+	and a
+	jr nz, .asm_3d629
+	ld a, [W_PLAYERSELECTEDMOVE] ; $ccdc
+	cp $a5
+	ld b, $e
+	jr z, .asm_3d62f
+	dec b
+	inc a
+	jr z, .asm_3d62f
+	ld a, [W_PLAYERMOVELISTINDEX] ; $cc2e
+	jr .asm_3d630
+.asm_3d629
+	ld a, [W_WHICHPOKEMON] ; $cf92
+	add $4
+	ld b, a
+.asm_3d62f
+	ld a, b
+.asm_3d630
+	ld [$cc42], a
+	ld hl, Func_4c05
+	ld b, BANK(Func_4c05)
+	call Bankswitch ; indirect jump to Func_4c05 (4c05 (1:4c05))
+.asm_3d63b
+	call Func_22c3
+	call DelayFrame
+	ld a, [$cc3e]
+	inc a
+	jr z, .asm_3d63b
+	ld b, $a
+.asm_3d649
+	call DelayFrame
+	call Func_22c3
+	dec b
+	jr nz, .asm_3d649
+	ld b, $a
+.asm_3d654
+	call DelayFrame
+	call Func_22ed
+	dec b
+	jr nz, .asm_3d654
+	ret
 
+; known jump sources: 3c361 (f:4361), 3c37d (f:437d)
+Func_3d65e: ; 3d65e (f:565e)
+	xor a
+	ld [H_WHOSETURN], a ; $FF00+$f3
+	ld a, [W_PLAYERSELECTEDMOVE] ; $ccdc
+	inc a
+	jp z, Function580A
+	xor a
+	ld [W_MOVEMISSED], a ; $d05f
+	ld [$cced], a
+	ld [$ccf4], a
+	ld a, $a
+	ld [$d05b], a
+	ld a, [$cd6a]
+	and a
+	jp nz, Function580A
+	call Function5811
+	jp z, Function580A
+	call Function5854
+	jr nz, .asm_3d68a
+	jp [hl]
+.asm_3d68a
+	call Func_3eabe
+	ld hl, W_PLAYERBATTSTATUS1 ; $d062
+	bit 4, [hl]
+	jr nz, asm_3d6a9
+	call Func_3dc88
+	jp z, Function580A
+
+; known jump sources: 3d777 (f:5777), 3d781 (f:5781)
+Func_3d69a: ; 3d69a (f:569a)
+	ld a, [W_PLAYERMOVEEFFECT] ; $cfd3
+	cp $27
+	jp z, Func_3f132
+	cp $2b
+	jp z, Func_3f132
+	jr asm_3d6b0
+; 3d6a9 (f:56a9)
 ; in-battle stuff
+asm_3d6a9:
 	ld hl,W_PLAYERBATTSTATUS1
 	res 4,[hl]
 	res 6,[hl]
+asm_3d6b0:
 	call $5AF5
 	ld hl,DecrementPP
 	ld de,$CCDC ; pointer to the move just used
@@ -41646,8 +59158,31 @@ HyperBeamCheck: ; 58C2
 	jp nz,$5A37
 	jp $5A37
 
-INCBIN "baserom.gbc",$3DA1A,$3DA3D - $3DA1A
+; known jump sources: 3da01 (f:5a01)
+Func_3da1a: ; 3da1a (f:5a1a)
+	ld a, [W_PLAYERBATTSTATUS2] ; $d063
+	bit 6, a
+	jp z, Func_3da39
+	ld a, $63
+	ld [$d11e], a
+	call GetMoveName
+	call Func_3826
+	xor a
+	ld [W_PLAYERMOVEEFFECT], a ; $cfd3
+	ld hl, $56b0
+	jp Func_3da37
 
+; known jump sources: 3d881 (f:5881), 3d895 (f:5895), 3d8a9 (f:58a9), 3d8bf (f:58bf), 3d8d4 (f:58d4), 3d93b (f:593b), 3d972 (f:5972), 3d998 (f:5998), 3d9cd (f:59cd), 3d9e6 (f:59e6), 3d9fc (f:59fc), 3da14 (f:5a14), 3da17 (f:5a17), 3da34 (f:5a34)
+Func_3da37: ; 3da37 (f:5a37)
+	xor a
+	ret
+
+; known jump sources: 3da1f (f:5a1f)
+Func_3da39: ; 3da39 (f:5a39)
+	ld a, $1
+	and a
+	ret
+; 3da3d (f:5a3d)
 FastAsleepText:
 	TX_FAR _FastAsleepText
 	db "@"
@@ -41708,14 +59243,133 @@ CantMoveText:
 	TX_FAR _CantMoveText
 	db "@"
 
-INCBIN "baserom.gbc",$3da88,$3daa8 - $3da88
-
+; known jump sources: 3d935 (f:5935), 3e9b6 (f:69b6)
+Func_3da88: ; 3da88 (f:5a88)
+	ld hl, W_PLAYERSELECTEDMOVE ; $ccdc
+	ld de, W_PLAYERBATTSTATUS1 ; $d062
+	ld a, [H_WHOSETURN] ; $FF00+$f3
+	and a
+	jr z, .asm_3da97
+	inc hl
+	ld de, W_ENEMYBATTSTATUS1 ; $d067
+.asm_3da97
+	ld a, [de]
+	res 4, a
+	ld [de], a
+	ld a, [hl]
+	ld [$d11e], a
+	call GetMoveName
+	ld hl, $5aa8
+	jp PrintText
+; 3daa8 (f:5aa8)
 UnnamedText_3daa8: ; 0x3daa8
 	TX_FAR _UnnamedText_3daa8
 	db $50
 ; 0x3daa8 + 5 bytes
 
-INCBIN "baserom.gbc",$3daad,$3db6c - $3daad
+; known jump sources: 3d924 (f:5924), 3dd08 (f:5d08)
+Func_3daad: ; 3daad (f:5aad)
+	ld hl, $5a65
+	call PrintText
+	ld hl, W_ENEMYMONDEFENSE ; $cff8
+	ld a, [hli]
+	push af
+	ld a, [hld]
+	push af
+	ld a, [$d027]
+	ld [hli], a
+	ld a, [$d028]
+	ld [hl], a
+	ld hl, W_PLAYERMOVEEFFECT ; $cfd3
+	push hl
+	ld a, [hl]
+	push af
+	xor a
+	ld [hli], a
+	ld [$d05e], a
+	ld a, $28
+	ld [hli], a
+	xor a
+	ld [hl], a
+	call CalculateDamage
+	call MoreCalculateDamage
+	pop af
+	pop hl
+	ld [hl], a
+	ld hl, $cff9
+	pop af
+	ld [hld], a
+	pop af
+	ld [hl], a
+	xor a
+	ld [$cc5b], a
+	inc a
+	ld [H_WHOSETURN], a ; $FF00+$f3
+	call PlayMoveAnimation
+	call Func_3cd60
+	xor a
+	ld [H_WHOSETURN], a ; $FF00+$f3
+	jp ApplyDamageToPlayerPokemon
+
+; known jump sources: 3d6b0 (f:56b0), 3e72f (f:672f)
+Func_3daf5: ; 3daf5 (f:5af5)
+	ld hl, $5afb
+	jp PrintText
+
+INCBIN "baserom.gbc",$3dafb,$3db00 - $3dafb
+	ld a, [H_WHOSETURN] ; $FF00+$f3
+	and a
+	ld a, [W_PLAYERMOVENUM] ; $cfd2
+	ld hl, $ccf1
+	jr z, .asm_3db11
+	ld a, [W_ENEMYMOVENUM] ; $cfcc
+	ld hl, $ccf2
+.asm_3db11
+	ld [hl], a
+	ld [$d11e], a
+	call Func_3db85
+	ld a, [$cced]
+	and a
+	ld hl, $5b34
+	ret nz
+	ld a, [$d11e]
+	cp $3
+	ld hl, $5b34
+	ret c
+	ld hl, $5b2d
+	ret
+
+INCBIN "baserom.gbc",$3db2d,$3db32 - $3db2d
+	jr .asm_3db39
+
+INCBIN "baserom.gbc",$3db34,$3db39 - $3db34
+.asm_3db39
+	ld a, [$cced]
+	and a
+	jr z, .asm_3db48
+	ld hl, $5b43
+	ret
+
+INCBIN "baserom.gbc",$3db43,$3db48 - $3db43
+.asm_3db48
+	ld hl, $5b4c
+	ret
+
+INCBIN "baserom.gbc",$3db4c,$3db51 - $3db4c
+	ld hl, $5b62
+	ld a, [$d11e]
+	add a
+	push bc
+	ld b, $0
+	ld c, a
+	add hl, bc
+	pop bc
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	ret
+
+INCBIN "baserom.gbc",$3db62,$3db6c - $3db62
 
 UnnamedText_3db6c: ; 0x3db6c
 	TX_FAR _UnnamedText_3db6c
@@ -41742,8 +59396,86 @@ UnnamedText_3db80: ; 0x3db80
 	db $50
 ; 0x3db80 + 5 bytes
 
-INCBIN "baserom.gbc",$3db85,$3dc42 - $3db85
+; known jump sources: 3db15 (f:5b15)
+Func_3db85: ; 3db85 (f:5b85)
+	push bc
+	ld a, [$d11e]
+	ld c, a
+	ld b, $0
+	ld hl, $5ba3
+.asm_3db8f
+	ld a, [hli]
+	cp $ff
+	jr z, .asm_3db9d
+	cp c
+	jr z, .asm_3db9d
+	and a
+	jr nz, .asm_3db8f
+	inc b
+	jr .asm_3db8f
+.asm_3db9d
+	ld a, b
+	ld [$d11e], a
+	pop bc
+	ret
 
+INCBIN "baserom.gbc",$3dba3,$3dbe2 - $3dba3
+
+; known jump sources: 3d799 (f:5799), 3e81e (f:681e)
+Func_3dbe2: ; 3dbe2 (f:5be2)
+	ld de, W_PLAYERMOVEEFFECT ; $cfd3
+	ld a, [H_WHOSETURN] ; $FF00+$f3
+	and a
+	jr z, .asm_3dbed
+	ld de, W_ENEMYMOVEEFFECT ; $cfcd
+.asm_3dbed
+	ld hl, $5c57
+	ld a, [$d05b]
+	and $7f
+	jr z, .asm_3dc04
+	ld hl, $5c42
+	ld a, [$d05e]
+	cp $ff
+	jr nz, .asm_3dc04
+	ld hl, $5c4c
+.asm_3dc04
+	push de
+	call PrintText
+	xor a
+	ld [$d05e], a
+	pop de
+	ld a, [de]
+	cp $2d
+	ret nz
+	ld hl, W_DAMAGE ; $d0d7
+	ld a, [hli]
+	ld b, [hl]
+	srl a
+	rr b
+	srl a
+	rr b
+	srl a
+	rr b
+	ld [hl], b
+	dec hl
+	ld [hli], a
+	or b
+	jr nz, .asm_3dc2a
+	inc a
+	ld [hl], a
+.asm_3dc2a
+	ld hl, $5c47
+	call PrintText
+	ld b, $4
+	ld a, $24
+	call Predef ; indirect jump to Func_48125 (48125 (12:4125))
+	ld a, [H_WHOSETURN] ; $FF00+$f3
+	and a
+	jr nz, .asm_3dc3f
+	jp ApplyDamageToPlayerPokemon
+.asm_3dc3f
+	jp ApplyDamageToEnemyPokemon
+; 3dc42 (f:5c42)
 UnnamedText_3dc42: ; 0x3dc42
 	TX_FAR _UnnamedText_3dc42
 	db $50
@@ -41759,14 +59491,38 @@ UnnamedText_3dc4c: ; 0x3dc4c
 	db $50
 ; 0x3dc4c + 5 bytes
 
-INCBIN "baserom.gbc",$3dc51,$3dc57 - $3dc51
-
+; known jump sources: 52670 (14:6670)
+Func_3dc51: ; 3dc51 (f:5c51)
+	ld hl, $5c57
+	jp PrintText
+; 3dc57 (f:5c57)
 UnnamedText_3dc57: ; 0x3dc57
 	TX_FAR _UnnamedText_3dc57
 	db $50
 ; 0x3dc57 + 5 bytes
 
-INCBIN "baserom.gbc",$3dc5c,$3dc7e - $3dc5c
+; known jump sources: 3d7a9 (f:57a9), 3e82e (f:682e)
+Func_3dc5c: ; 3dc5c (f:5c5c)
+	ld a, [$d05e]
+	and a
+	jr z, .asm_3dc75
+	dec a
+	add a
+	ld hl, $5c7a
+	ld b, $0
+	ld c, a
+	add hl, bc
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	call PrintText
+	xor a
+	ld [$d05e], a
+.asm_3dc75
+	ld c, $14
+	jp DelayFrames
+
+INCBIN "baserom.gbc",$3dc7a,$3dc7e - $3dc7a
 
 UnnamedText_3dc7e: ; 0x3dc7e
 	TX_FAR _UnnamedText_3dc7e
@@ -41778,8 +59534,186 @@ UnnamedText_3dc83: ; 0x3dc83
 	db $50
 ; 0x3dc83 + 5 bytes
 
-INCBIN "baserom.gbc",$3dc88,$3ddb6 - $3dc88
+; known jump sources: 3d694 (f:5694)
+Func_3dc88: ; 3dc88 (f:5c88)
+	xor a
+	ld [$cced], a
+	ld a, [W_ISLINKBATTLE] ; $d12b
+	cp $4
+	jr nz, .asm_3dc97
+	ld a, $1
+	and a
+	ret
+.asm_3dc97
+	ld hl, W_PARTYMON1_OTID ; $d177
+	ld bc, $2c
+	ld a, [W_PLAYERMONNUMBER] ; $cc2f
+	call AddNTimes
+	ld a, [W_PLAYERIDHI] ; $d359
+	cp [hl]
+	jr nz, .asm_3dcb1
+	inc hl
+	ld a, [W_PLAYERIDLO] ; $d35a
+	cp [hl]
+	jp z, Func_3ddb0
+.asm_3dcb1
+	ld hl, W_OBTAINEDBADGES ; $d356
+	bit 7, [hl]
+	ld a, $65
+	jr nz, .asm_3dcce
+	bit 5, [hl]
+	ld a, $46
+	jr nz, .asm_3dcce
+	bit 3, [hl]
+	ld a, $32
+	jr nz, .asm_3dcce
+	bit 1, [hl]
+	ld a, $1e
+	jr nz, .asm_3dcce
+	ld a, $a
+.asm_3dcce
+	ld b, a
+	ld c, a
+	ld a, [W_PLAYERMONLEVEL] ; $d022
+	ld d, a
+	add b
+	ld b, a
+	jr nc, .asm_3dcda
+	ld b, $ff
+.asm_3dcda
+	ld a, c
+	cp d
+	jp nc, Func_3ddb0
+.asm_3dcdf
+	call GenRandomInBattle
+	swap a
+	cp b
+	jr nc, .asm_3dcdf
+	cp c
+	jp c, Func_3ddb0
+.asm_3dceb
+	call GenRandomInBattle
+	cp b
+	jr nc, .asm_3dceb
+	cp c
+	jr c, .asm_3dd3f
+	ld a, d
+	sub c
+	ld b, a
+	call GenRandomInBattle
+	swap a
+	sub b
+	jr c, .asm_3dd0e
+	cp b
+	jr nc, .asm_3dd20
+	ld hl, $5dc0
+	call PrintText
+	call Func_3daad
+	jp Func_3ddb4
+.asm_3dd0e
+	call GenRandomInBattle
+	add a
+	swap a
+	and $7
+	jr z, .asm_3dd0e
+	ld [W_PLAYERMONSTATUS], a ; $d018
+	ld hl, $5dbb
+	jr .asm_3dd3a
+.asm_3dd20
+	call GenRandomInBattle
+	and $3
+	ld hl, $5db6
+	and a
+	jr z, .asm_3dd3a
+	ld hl, $5dc0
+	dec a
+	jr z, .asm_3dd3a
+	ld hl, $5dc5
+	dec a
+	jr z, .asm_3dd3a
+	ld hl, $5dca
+.asm_3dd3a
+	call PrintText
+	jr Func_3ddb4
+.asm_3dd3f
+	ld a, [$d01d]
+	and a
+	jr z, .asm_3dd20
+	ld a, [$ccee]
+	and a
+	jr nz, .asm_3dd20
+	ld a, [W_PLAYERSELECTEDMOVE] ; $ccdc
+	cp $a5
+	jr z, .asm_3dd20
+	ld hl, W_PLAYERMONPP ; $d02d
+	push hl
+	ld a, [hli]
+	and $3f
+	ld b, a
+	ld a, [hli]
+	and $3f
+	add b
+	ld b, a
+	ld a, [hli]
+	and $3f
+	add b
+	ld b, a
+	ld a, [hl]
+	and $3f
+	add b
+	pop hl
+	push af
+	ld a, [W_CURMENUITEMID] ; $cc26
+	ld c, a
+	ld b, $0
+	add hl, bc
+	ld a, [hl]
+	and $3f
+	ld b, a
+	pop af
+	cp b
+	jr z, .asm_3dd20
+	ld a, $1
+	ld [$cced], a
+	ld a, [W_MAXMENUITEMID] ; $cc28
+	ld b, a
+	ld a, [W_CURMENUITEMID] ; $cc26
+	ld c, a
+.asm_3dd86
+	call GenRandomInBattle
+	and $3
+	cp b
+	jr nc, .asm_3dd86
+	cp c
+	jr z, .asm_3dd86
+	ld [W_CURMENUITEMID], a ; $cc26
+	ld hl, W_PLAYERMONPP ; $d02d
+	ld e, a
+	ld d, $0
+	add hl, de
+	ld a, [hl]
+	and a
+	jr z, .asm_3dd86
+	ld a, [W_CURMENUITEMID] ; $cc26
+	ld c, a
+	ld b, $0
+	ld hl, $d01c
+	add hl, bc
+	ld a, [hl]
+	ld [W_PLAYERSELECTEDMOVE], a ; $ccdc
+	call Func_3eabe
 
+; known jump sources: 3dcae (f:5cae), 3dcdc (f:5cdc), 3dce8 (f:5ce8)
+Func_3ddb0: ; 3ddb0 (f:5db0)
+	ld a, $1
+	and a
+	ret
+
+; known jump sources: 3dd0b (f:5d0b), 3dd3d (f:5d3d)
+Func_3ddb4: ; 3ddb4 (f:5db4)
+	xor a
+	ret
+; 3ddb6 (f:5db6)
 UnnamedText_3ddb6: ; 0x3ddb6
 	TX_FAR _UnnamedText_3ddb6
 	db $50
@@ -41907,8 +59841,148 @@ CalculateDamage: ; 0x3ddcf
 	and a
 	ret
 
-INCBIN "baserom.gbc",$3de75,$3df65 - $3de75
+; known jump sources: 3e76d (f:676d), 3e986 (f:6986)
+Func_3de75: ; 3de75 (f:5e75)
+	ld hl, W_DAMAGE ; $d0d7
+	xor a
+	ld [hli], a
+	ld [hl], a
+	ld hl, W_ENEMYMOVEPOWER ; $cfce
+	ld a, [hli]
+	ld d, a
+	and a
+	ret z
+	ld a, [hl]
+	cp $14
+	jr nc, .asm_3debc
+	ld hl, $d027
+	ld a, [hli]
+	ld b, a
+	ld c, [hl]
+	ld a, [W_PLAYERBATTSTATUS3] ; $d064
+	bit 2, a
+	jr z, .asm_3de98
+	sla c
+	rl b
+.asm_3de98
+	ld hl, $cff6
+	ld a, [$d05e]
+	and a
+	jr z, .asm_3deef
+	ld hl, W_PARTYMON1_DEFENSE ; $d191
+	ld a, [W_PLAYERMONNUMBER] ; $cc2f
+	ld bc, $2c
+	call AddNTimes
+	ld a, [hli]
+	ld b, a
+	ld c, [hl]
+	push bc
+	ld c, $2
+	call Func_3df1c
+	ld hl, $ff97
+	pop bc
+	jr .asm_3deef
+.asm_3debc
+	ld hl, $d02b
+	ld a, [hli]
+	ld b, a
+	ld c, [hl]
+	ld a, [W_PLAYERBATTSTATUS3] ; $d064
+	bit 1, a
+	jr z, .asm_3decd
+	sla c
+	rl b
+.asm_3decd
+	ld hl, W_ENEMYMONSPECIAL ; $cffc
+	ld a, [$d05e]
+	and a
+	jr z, .asm_3deef
+	ld hl, W_PARTYMON1_SPECIAL ; $d195
+	ld a, [W_PLAYERMONNUMBER] ; $cc2f
+	ld bc, $2c
+	call AddNTimes
+	ld a, [hli]
+	ld b, a
+	ld c, [hl]
+	push bc
+	ld c, $5
+	call Func_3df1c
+	ld hl, $ff97
+	pop bc
+.asm_3deef
+	ld a, [hli]
+	ld l, [hl]
+	ld h, a
+	or b
+	jr z, .asm_3df0a
+	srl b
+	rr c
+	srl b
+	rr c
+	srl h
+	rr l
+	srl h
+	rr l
+	ld a, l
+	or h
+	jr nz, .asm_3df0a
+	inc l
+.asm_3df0a
+	ld b, l
+	ld a, [W_ENEMYMONLEVEL] ; $cff3
+	ld e, a
+	ld a, [$d05e]
+	and a
+	jr z, .asm_3df17
+	sla e
+.asm_3df17
+	ld a, $1
+	and a
+	and a
+	ret
 
+; known jump sources: 3ddfd (f:5dfd), 3de32 (f:5e32), 3deb3 (f:5eb3), 3dee8 (f:5ee8)
+Func_3df1c: ; 3df1c (f:5f1c)
+	push de
+	push bc
+	ld a, [W_ISLINKBATTLE] ; $d12b
+	cp $4
+	jr nz, .asm_3df40
+	ld hl, $d8c6
+	dec c
+	sla c
+	ld b, $0
+	add hl, bc
+	ld a, [W_ENEMYMONNUMBER] ; $cfe8
+	ld bc, $2c
+	call AddNTimes
+	ld a, [hli]
+	ld [$FF00+$97], a
+	ld a, [hl]
+	ld [$FF00+$98], a
+	pop bc
+	pop de
+	ret
+.asm_3df40
+	ld a, [W_ENEMYMONLEVEL] ; $cff3
+	ld [W_CURENEMYLVL], a ; $d127
+	ld a, [$cfe5]
+	ld [$d0b5], a
+	call GetBaseStats
+	ld hl, $cff1
+	ld de, $cfaf
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hl]
+	ld [de], a
+	pop bc
+	ld b, $0
+	ld hl, $cfa4
+	call Func_394a
+	pop de
+	ret
+; 3df65 (f:5f65)
 MoreCalculateDamage:   ;$3df65
 	ld a, [$ff00+$f3]  ;FFF3 decides which address to use
 	and a
@@ -41970,8 +60044,99 @@ MoreCalculateDamage:   ;$3df65
 	call Divide      ;divide above result by 50
 	ld hl, W_DAMAGE  ;[stuff below I never got to, was only interested in stuff above]
 
-INCBIN "baserom.gbc",$3dfc0,$3e04f - $3dfc0
+	ld b, [hl]
+	ld a, [$FF00+$98]
+	add b
+	ld [$FF00+$98], a
+	jr nc, .asm_3dfd0
+	ld a, [$FF00+$97]
+	inc a
+	ld [$FF00+$97], a
+	and a
+	jr z, .asm_3e004
+.asm_3dfd0
+	ld a, [H_DIVIDEND] ; $FF00+$95 (aliases: H_PRODUCT, H_PASTLEADINGZEROES, H_QUOTIENT)
+	ld b, a
+	ld a, [H_NUMTOPRINT] ; $FF00+$96 (aliases: H_MULTIPLICAND)
+	or a
+	jr nz, .asm_3e004
+	ld a, [$FF00+$97]
+	cp $3
+	jr c, .asm_3dfe8
+	cp $4
+	jr nc, .asm_3e004
+	ld a, [$FF00+$98]
+	cp $e6
+	jr nc, .asm_3e004
+.asm_3dfe8
+	inc hl
+	ld a, [$FF00+$98]
+	ld b, [hl]
+	add b
+	ld [hld], a
+	ld a, [$FF00+$97]
+	ld b, [hl]
+	adc b
+	ld [hl], a
+	jr c, .asm_3e004
+	ld a, [hl]
+	cp $3
+	jr c, .asm_3e00a
+	cp $4
+	jr nc, .asm_3e004
+	inc hl
+	ld a, [hld]
+	cp $e6
+	jr c, .asm_3e00a
+.asm_3e004
+	ld a, $3
+	ld [hli], a
+	ld a, $e5
+	ld [hld], a
+.asm_3e00a
+	inc hl
+	ld a, [hl]
+	add $2
+	ld [hld], a
+	jr nc, .asm_3e012
+	inc [hl]
+.asm_3e012
+	ld a, $1
+	and a
+	ret
 
+; known jump sources: 3df83 (f:5f83)
+Func_3e016: ; 3e016 (f:6016)
+	call Func_3f132
+	ld a, [W_MOVEMISSED] ; $d05f
+	dec a
+	ret
+
+INCBIN "baserom.gbc",$3e01e,$3e023 - $3e01e
+
+; known jump sources: 3d6eb (f:56eb), 3e762 (f:6762)
+Func_3e023: ; 3e023 (f:6023)
+	xor a
+	ld [$d05e], a
+	ld a, [H_WHOSETURN] ; $FF00+$f3
+	and a
+	ld a, [$cfe5]
+	jr nz, .asm_3e032
+	ld a, [$d014]
+.asm_3e032
+	ld [$d0b5], a
+	call GetBaseStats
+	ld a, [$d0bc]
+	ld b, a
+	srl b
+	ld a, [H_WHOSETURN] ; $FF00+$f3
+	and a
+	ld hl, W_PLAYERMOVEPOWER ; $cfd4
+	ld de, W_PLAYERBATTSTATUS2 ; $d063
+	jr z, CriticalHitProbability
+	ld hl, W_ENEMYMOVEPOWER ; $cfce
+	ld de, W_ENEMYBATTSTATUS2 ; $d068
+; 3e04f (f:604f)
 
 ; azure heights claims "the fastest pokémon (who are,not coincidentally,
 ; among the most popular) tend to CH about 20 to 25% of the time."
@@ -42087,18 +60252,18 @@ HandleCounterMove: ; 6093
 	xor a
 	ret
 
-ApplyDamageToEnemyPokemon: ; 60DF
+ApplyAttackToEnemyPokemon: ; 60DF
 	ld a,[W_PLAYERMOVEEFFECT]
 	cp a,OHKO_EFFECT
-	jr z,.applyDamage
+	jr z,ApplyDamageToEnemyPokemon
 	cp a,SUPER_FANG_EFFECT
 	jr z,.superFangEffect
 	cp a,SPECIAL_DAMAGE_EFFECT
 	jr z,.specialDamage
 	ld a,[W_PLAYERMOVEPOWER]
 	and a
-	jp z,.done
-	jr .applyDamage
+	jp z,ApplyAttackToEnemyPokemonDone
+	jr ApplyDamageToEnemyPokemon
 .superFangEffect
 ; set the damage to half the target's HP
 	ld hl,W_ENEMYMONCURHP
@@ -42112,11 +60277,11 @@ ApplyDamageToEnemyPokemon: ; 60DF
 	rr a
 	ld [de],a
 	or b
-	jr nz,.applyDamage
+	jr nz,ApplyDamageToEnemyPokemon
 ; make sure Super Fang's damage is always at least 1
 	ld a,$01
 	ld [de],a
-	jr .applyDamage
+	jr ApplyDamageToEnemyPokemon
 .specialDamage
 	ld hl,W_PLAYERMONLEVEL
 	ld a,[hl]
@@ -42152,13 +60317,14 @@ ApplyDamageToEnemyPokemon: ; 60DF
 	ld [hli],a
 	ld a,b
 	ld [hl],a
-.applyDamage
+
+ApplyDamageToEnemyPokemon:
 	ld hl,W_DAMAGE
 	ld a,[hli]
 	ld b,a
 	ld a,[hl]
 	or b
-	jr z,.done ; we're done if damage is 0
+	jr z,ApplyAttackToEnemyPokemonDone ; we're done if damage is 0
 	ld a,[W_ENEMYBATTSTATUS2]
 	bit 4,a ; does the enemy have a substitute?
 	jp nz,AttackSubstitute
@@ -42203,21 +60369,21 @@ ApplyDamageToEnemyPokemon: ; 60DF
 	ld [$cf94],a
 	ld a,$48
 	call Predef ; animate the HP bar shortening
-.done
+ApplyAttackToEnemyPokemonDone:
 	jp $4d5a ; redraw pokemon names and HP bars
 
-ApplyDamageToPlayerPokemon: ; 61A0
+ApplyAttackToPlayerPokemon: ; 61A0
 	ld a,[W_ENEMYMOVEEFFECT]
 	cp a,OHKO_EFFECT
-	jr z,.applyDamage
+	jr z,ApplyDamageToPlayerPokemon
 	cp a,SUPER_FANG_EFFECT
 	jr z,.superFangEffect
 	cp a,SPECIAL_DAMAGE_EFFECT
 	jr z,.specialDamage
 	ld a,[W_ENEMYMOVEPOWER]
 	and a
-	jp z,.done
-	jr .applyDamage
+	jp z,ApplyAttackToPlayerPokemonDone
+	jr ApplyDamageToPlayerPokemon
 .superFangEffect
 ; set the damage to half the target's HP
 	ld hl,W_PLAYERMONCURHP
@@ -42231,11 +60397,11 @@ ApplyDamageToPlayerPokemon: ; 61A0
 	rr a
 	ld [de],a
 	or b
-	jr nz,.applyDamage
+	jr nz,ApplyDamageToPlayerPokemon
 ; make sure Super Fang's damage is always at least 1
 	ld a,$01
 	ld [de],a
-	jr .applyDamage
+	jr ApplyDamageToPlayerPokemon
 .specialDamage
 	ld hl,W_ENEMYMONLEVEL
 	ld a,[hl]
@@ -42271,13 +60437,14 @@ ApplyDamageToPlayerPokemon: ; 61A0
 	ld [hli],a
 	ld a,b
 	ld [hl],a
-.applyDamage
+
+ApplyDamageToPlayerPokemon:
 	ld hl,W_DAMAGE
 	ld a,[hli]
 	ld b,a
 	ld a,[hl]
 	or b
-	jr z,.done ; we're done if damage is 0
+	jr z,ApplyAttackToPlayerPokemonDone ; we're done if damage is 0
 	ld a,[W_PLAYERBATTSTATUS2]
 	bit 4,a ; does the player have a substitute?
 	jp nz,AttackSubstitute
@@ -42321,7 +60488,7 @@ ApplyDamageToPlayerPokemon: ; 61A0
 	ld [$cf94],a
 	ld a,$48
 	call Predef ; animate the HP bar shortening
-.done
+ApplyAttackToPlayerPokemonDone
 	jp $4d5a ; redraw pokemon names and HP bars
 
 AttackSubstitute: ; 625E
@@ -42971,14 +61138,1147 @@ CalcHitChance: ; 6624
 	ld [hl],a ; store the hit chance in the move accuracy variable
 	ret
 
-INCBIN "baserom.gbc",$3e687,$3e887 - $3e687
+; known jump sources: 3d6ff (f:56ff), 3e77c (f:677c)
+Func_3e687: ; 3e687 (f:6687)
+	ld hl, W_DAMAGE ; $d0d7
+	ld a, [hli]
+	and a
+	jr nz, .asm_3e692
+	ld a, [hl]
+	cp $2
+	ret c
+.asm_3e692
+	xor a
+	ld [H_NUMTOPRINT], a ; $FF00+$96 (aliases: H_MULTIPLICAND)
+	dec hl
+	ld a, [hli]
+	ld [$FF00+$97], a
+	ld a, [hl]
+	ld [$FF00+$98], a
+.asm_3e69c
+	call GenRandomInBattle
+	rrca
+	cp $d9
+	jr c, .asm_3e69c
+	ld [H_REMAINDER], a ; $FF00+$99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
+	call Multiply
+	ld a, $ff
+	ld [H_REMAINDER], a ; $FF00+$99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
+	ld b, $4
+	call Divide
+	ld a, [$FF00+$97]
+	ld hl, W_DAMAGE ; $d0d7
+	ld [hli], a
+	ld a, [$FF00+$98]
+	ld [hl], a
+	ret
 
+; known jump sources: 3c34b (f:434b), 3c3a1 (f:43a1)
+Func_3e6bc: ; 3e6bc (f:66bc)
+	ld a, [W_ENEMYSELECTEDMOVE] ; $ccdd
+	inc a
+	jp z, Func_3e88c
+	call Function5811
+	jp z, Func_3e88c
+	ld a, [W_ISLINKBATTLE] ; $d12b
+	cp $4
+	jr nz, .asm_3e6dc
+	ld b, $1
+	ld a, [$cc3e]
+	cp $e
+	jr z, .asm_3e6dc
+	cp $4
+	ret nc
+.asm_3e6dc
+	ld hl, $ccd5
+	inc [hl]
+	xor a
+	ld [W_MOVEMISSED], a ; $d05f
+	ld [$ccf4], a
+	ld a, $a
+	ld [$d05b], a
+	call Func_3e88f
+	jr nz, .asm_3e6f2
+	jp [hl]
+.asm_3e6f2
+	ld hl, W_ENEMYBATTSTATUS1 ; $d067
+	bit 4, [hl]
+	jr nz, asm_3e70b
+	call Func_3eabe
+
+; known jump sources: 3e7fc (f:67fc), 3e806 (f:6806)
+Func_3e6fc: ; 3e6fc (f:66fc)
+	ld a, [W_ENEMYMOVEEFFECT] ; $cfcd
+	cp $27
+	jp z, Func_3f132
+	cp $2b
+	jp z, Func_3f132
+	jr asm_3e72b
+asm_3e70b: ; 3e70b (f:670b)
+	ld hl, W_ENEMYBATTSTATUS1 ; $d067
+	res 4, [hl]
+	res 6, [hl]
+	ld a, [W_ENEMYMOVENUM] ; $cfcc
+	ld [$d0b5], a
+	ld a, $2c
+	ld [$d0b7], a
+	ld a, $2
+	ld [$d0b6], a
+	call GetName
+	ld de, $cd6d
+	call Func_3826
+asm_3e72b: ; 3e72b (f:672b)
+	xor a
+	ld [$cced], a
+	call Func_3daf5
+	ld a, [W_ENEMYMOVEEFFECT] ; $cfcd
+	ld hl, $4000
+	ld de, $1
+	call IsInArray
+	jp c, Func_3f132
+	ld a, [W_ENEMYMOVEEFFECT] ; $cfcd
+	ld hl, $4049
+	ld de, $1
+	call IsInArray
+	call c, Func_3f132
+	call Func_3ec81
+	ld a, [W_ENEMYMOVEEFFECT] ; $cfcd
+	ld hl, $4011
+	ld de, $1
+	call IsInArray
+	jp c, Func_3e77f
+	call Func_3e023
+	call HandleCounterMove
+	jr z, asm_3e782
+	call Func_3ec81
+	call Func_3de75
+	call Func_3ec81
+	call MoreCalculateDamage
+	jp z, Func_3e7d1
+	call AdjustDamageForMoveType
+	call Func_3e687
+
+; known jump sources: 3e75f (f:675f)
+Func_3e77f: ; 3e77f (f:677f)
+	call MoveHitTest
+asm_3e782: ; 3e782 (f:6782)
+	ld a, [W_MOVEMISSED] ; $d05f
+	and a
+	jr z, .asm_3e791
+	ld a, [W_ENEMYMOVEEFFECT] ; $cfcd
+	cp $7
+	jr z, asm_3e7a0
+	jr Func_3e7d1
+.asm_3e791
+	call Func_3ec81
+
+; known jump sources: 3e864 (f:6864)
+Func_3e794: ; 3e794 (f:6794)
+	ld a, [W_ENEMYMOVEEFFECT] ; $cfcd
+	and a
+	ld a, $1
+	jr z, asm_3e7a4
+	ld a, $2
+	jr asm_3e7a4
+asm_3e7a0: ; 3e7a0 (f:67a0)
+	call Func_3ec81
+	xor a
+asm_3e7a4: ; 3e7a4 (f:67a4)
+	push af
+	ld a, [W_ENEMYBATTSTATUS2] ; $d068
+	bit 4, a
+	ld hl, $5747
+	ld b, $1e
+	call nz, Bankswitch
+	pop af
+	ld [$cc5b], a
+	ld a, [W_ENEMYMOVENUM] ; $cfcc
+	call PlayMoveAnimation
+	call Func_3eed3
+	call Func_3cdec
+	ld a, [W_ENEMYBATTSTATUS2] ; $d068
+	bit 4, a
+	ld hl, $5771
+	ld b, $1e
+	call nz, Bankswitch
+	jr asm_3e7ef
+
+; known jump sources: 3e776 (f:6776), 3e78f (f:678f)
+Func_3e7d1: ; 3e7d1 (f:67d1)
+	call Func_3ec81
+	ld c, $1e
+	call DelayFrames
+	ld a, [W_ENEMYMOVEEFFECT] ; $cfcd
+	cp $2b
+	jr z, .asm_3e7e6
+	cp $27
+	jr z, .asm_3e7e6
+	jr asm_3e7ef
+.asm_3e7e6
+	xor a
+	ld [$cc5b], a
+	ld a, $a7
+	call PlayMoveAnimation
+asm_3e7ef: ; 3e7ef (f:67ef)
+	ld a, [W_ENEMYMOVEEFFECT] ; $cfcd
+	cp $9
+	jr nz, .asm_3e7ff
+	call MirrorMoveCopyMove
+	jp z, Func_3e88c
+	jp Func_3e6fc
+.asm_3e7ff
+	cp $53
+	jr nz, .asm_3e809
+	call MetronomePickMove
+	jp Func_3e6fc
+.asm_3e809
+	ld a, [W_ENEMYMOVEEFFECT] ; $cfcd
+	ld hl, $4014
+	ld de, $1
+	call IsInArray
+	jp c, Func_3f132
+	ld a, [W_MOVEMISSED] ; $d05f
+	and a
+	jr z, .asm_3e82b
+	call Func_3dbe2
+	ld a, [W_ENEMYMOVEEFFECT] ; $cfcd
+	cp $7
+	jr z, .asm_3e83e
+	jp Func_3e88c
+.asm_3e82b
+	call ApplyAttackToPlayerPokemon
+	call Func_3dc5c
+	ld hl, DisplayEffectiveness
+	ld b, BANK(DisplayEffectiveness)
+	call Bankswitch ; indirect jump to DisplayEffectiveness (2fb7b (b:7b7b))
+	ld a, $1
+	ld [$ccf4], a
+.asm_3e83e
+	ld a, [W_ENEMYMOVEEFFECT] ; $cfcd
+	ld hl, $4030
+	ld de, $1
+	call IsInArray
+	call c, Func_3f132
+	ld hl, W_PLAYERMONCURHP ; $d015
+	ld a, [hli]
+	ld b, [hl]
+	or b
+	ret z
+	call HandleBuildingRage
+	ld hl, W_ENEMYBATTSTATUS1 ; $d067
+	bit 2, [hl]
+	jr z, .asm_3e873
+	push hl
+	ld hl, $d06f
+	dec [hl]
+	pop hl
+	jp nz, Func_3e794
+	res 2, [hl]
+	ld hl, $6887
+	call PrintText
+	xor a
+	ld [$cd05], a
+.asm_3e873
+	ld a, [W_ENEMYMOVEEFFECT] ; $cfcd
+	and a
+	jr z, Func_3e88c
+	ld hl, $403b
+	ld de, $1
+	call IsInArray
+	call nc, Func_3f132
+	jr Func_3e88c
+; 3e887 (f:6887)
 UnnamedText_3e887: ; 0x3e887
 	TX_FAR _UnnamedText_3e887
 	db $50
 ; 0x3e887 + 5 bytes
 
-INCBIN "baserom.gbc",$3e88c,$3ee9b - $3e88c
+; known jump sources: 3e6c0 (f:66c0), 3e6c6 (f:66c6), 3e7f9 (f:67f9), 3e828 (f:6828), 3e877 (f:6877), 3e885 (f:6885)
+Func_3e88c: ; 3e88c (f:688c)
+	ld b, $1
+	ret
+
+; known jump sources: 3e6ec (f:66ec)
+Func_3e88f: ; 3e88f (f:688f)
+	ld hl, W_ENEMYMONSTATUS ; $cfe9
+	ld a, [hl]
+	and $7
+	jr z, .asm_3e8bf
+	dec a
+	ld [W_ENEMYMONSTATUS], a ; $cfe9
+	and a
+	jr z, .asm_3e8af
+	ld hl, $5a3d
+	call PrintText
+	xor a
+	ld [$cc5b], a
+	ld a, $bd
+	call PlayMoveAnimation
+	jr .asm_3e8b5
+.asm_3e8af
+	ld hl, $5a42
+	call PrintText
+.asm_3e8b5
+	xor a
+	ld [$ccf2], a
+	ld hl, $688c
+	jp Func_3eab8
+.asm_3e8bf
+	bit 5, [hl]
+	jr z, .asm_3e8d3
+	ld hl, $5a47
+	call PrintText
+	xor a
+	ld [$ccf2], a
+	ld hl, $688c
+	jp Func_3eab8
+.asm_3e8d3
+	ld a, [W_PLAYERBATTSTATUS1] ; $d062
+	bit 5, a
+	jp z, Func_3e8e7
+	ld hl, $5a83
+	call PrintText
+	ld hl, $688c
+	jp Func_3eab8
+
+; known jump sources: 3e8d8 (f:68d8)
+Func_3e8e7: ; 3e8e7 (f:68e7)
+	ld hl, W_ENEMYBATTSTATUS1 ; $d067
+	bit 3, [hl]
+	jp z, Func_3e8fd
+	res 3, [hl]
+	ld hl, $5a51
+	call PrintText
+	ld hl, $688c
+	jp Func_3eab8
+
+; known jump sources: 3e8ec (f:68ec)
+Func_3e8fd: ; 3e8fd (f:68fd)
+	ld hl, W_ENEMYBATTSTATUS2 ; $d068
+	bit 5, [hl]
+	jr z, .asm_3e912
+	res 5, [hl]
+	ld hl, $5a56
+	call PrintText
+	ld hl, $688c
+	jp Func_3eab8
+.asm_3e912
+	ld hl, W_ENEMYDISABLEDMOVE ; $d072
+	ld a, [hl]
+	and a
+	jr z, .asm_3e929
+	dec a
+	ld [hl], a
+	and $f
+	jr nz, .asm_3e929
+	ld [hl], a
+	ld [$ccef], a
+	ld hl, $5a5b
+	call PrintText
+.asm_3e929
+	ld a, [W_ENEMYBATTSTATUS1] ; $d067
+	add a
+	jp nc, Func_3e9aa
+	ld hl, $d070
+	dec [hl]
+	jr nz, .asm_3e944
+	ld hl, W_ENEMYBATTSTATUS1 ; $d067
+	res 7, [hl]
+	ld hl, $5a6a
+	call PrintText
+	jp Func_3e9aa
+.asm_3e944
+	ld hl, $5a60
+	call PrintText
+	xor a
+	ld [$cc5b], a
+	ld a, $bf
+	call PlayMoveAnimation
+	call GenRandomInBattle
+	cp $80
+	jr c, Func_3e9aa
+	ld hl, W_ENEMYBATTSTATUS1 ; $d067
+	ld a, [hl]
+	and $80
+	ld [hl], a
+	ld hl, $5a65
+	call PrintText
+	ld hl, $d027
+	ld a, [hli]
+	push af
+	ld a, [hld]
+	push af
+	ld a, [W_ENEMYMONDEFENSE] ; $cff8
+	ld [hli], a
+	ld a, [$cff9]
+	ld [hl], a
+	ld hl, W_ENEMYMOVEEFFECT ; $cfcd
+	push hl
+	ld a, [hl]
+	push af
+	xor a
+	ld [hli], a
+	ld [$d05e], a
+	ld a, $28
+	ld [hli], a
+	xor a
+	ld [hl], a
+	call Func_3de75
+	call MoreCalculateDamage
+	pop af
+	pop hl
+	ld [hl], a
+	ld hl, $d028
+	pop af
+	ld [hld], a
+	pop af
+	ld [hl], a
+	xor a
+	ld [$cc5b], a
+	ld [H_WHOSETURN], a ; $FF00+$f3
+	ld a, $1
+	call PlayMoveAnimation
+	ld a, $1
+	ld [H_WHOSETURN], a ; $FF00+$f3
+	call ApplyDamageToEnemyPokemon
+	jr asm_3e9d3
+
+; known jump sources: 3e92d (f:692d), 3e941 (f:6941), 3e958 (f:6958)
+Func_3e9aa: ; 3e9aa (f:69aa)
+	ld a, [$ccef]
+	and a
+	jr z, .asm_3e9bf
+	ld hl, W_ENEMYSELECTEDMOVE ; $ccdd
+	cp [hl]
+	jr nz, .asm_3e9bf
+	call Func_3da88
+	ld hl, $688c
+	jp Func_3eab8
+.asm_3e9bf
+	ld hl, W_ENEMYMONSTATUS ; $cfe9
+	bit 6, [hl]
+	jr z, asm_3e9f6
+	call GenRandomInBattle
+	cp $3f
+	jr nc, asm_3e9f6
+	ld hl, $5a4c
+	call PrintText
+asm_3e9d3: ; 3e9d3 (f:69d3)
+	ld hl, W_ENEMYBATTSTATUS1 ; $d067
+	ld a, [hl]
+	and $cc
+	ld [hl], a
+	ld a, [W_ENEMYMOVEEFFECT] ; $cfcd
+	cp $2b
+	jr z, .asm_3e9e7
+	cp $27
+	jr z, .asm_3e9e7
+	jr .asm_3e9f0
+.asm_3e9e7
+	xor a
+	ld [$cc5b], a
+	ld a, $a7
+	call PlayMoveAnimation
+.asm_3e9f0
+	ld hl, $688c
+	jp Func_3eab8
+asm_3e9f6: ; 3e9f6 (f:69f6)
+	ld hl, W_ENEMYBATTSTATUS1 ; $d067
+	bit 0, [hl]
+	jr z, .asm_3ea54
+	xor a
+	ld [W_ENEMYMOVENUM], a ; $cfcc
+	ld hl, W_DAMAGE ; $d0d7
+	ld a, [hli]
+	ld b, a
+	ld c, [hl]
+	ld hl, $cd06
+	ld a, [hl]
+	add c
+	ld [hld], a
+	ld a, [hl]
+	adc b
+	ld [hl], a
+	ld hl, $d06f
+	dec [hl]
+	jr z, .asm_3ea1c
+	ld hl, $688c
+	jp Func_3eab8
+.asm_3ea1c
+	ld hl, W_ENEMYBATTSTATUS1 ; $d067
+	res 0, [hl]
+	ld hl, $5a74
+	call PrintText
+	ld a, $1
+	ld [W_ENEMYMOVEPOWER], a ; $cfce
+	ld hl, $cd06
+	ld a, [hld]
+	add a
+	ld b, a
+	ld [$d0d8], a
+	ld a, [hl]
+	rl a
+	ld [W_DAMAGE], a ; $d0d7
+	or b
+	jr nz, .asm_3ea43
+	ld a, $1
+	ld [W_MOVEMISSED], a ; $d05f
+.asm_3ea43
+	xor a
+	ld [hli], a
+	ld [hl], a
+	ld a, $75
+	ld [W_ENEMYMOVENUM], a ; $cfcc
+	call Func_3ec81
+	ld hl, $6782
+	jp Func_3eab8
+.asm_3ea54
+	bit 1, [hl]
+	jr z, .asm_3ea83
+	ld a, $25
+	ld [W_ENEMYMOVENUM], a ; $cfcc
+	ld hl, $5a79
+	call PrintText
+	ld hl, $d06f
+	dec [hl]
+	ld hl, $6750
+	jp nz, Func_3eab8
+	push hl
+	ld hl, W_ENEMYBATTSTATUS1 ; $d067
+	res 1, [hl]
+	set 7, [hl]
+	call GenRandomInBattle
+	and $3
+	inc a
+	inc a
+	ld [$d070], a
+	pop hl
+	jp Func_3eab8
+.asm_3ea83
+	bit 5, [hl]
+	jp z, Func_3ea9b
+	ld hl, $5a7e
+	call PrintText
+	ld hl, $d06f
+	dec [hl]
+	ld hl, $6794
+	jp nz, Func_3eab8
+	jp Func_3eab8
+
+; known jump sources: 3ea85 (f:6a85)
+Func_3ea9b: ; 3ea9b (f:6a9b)
+	ld a, [W_ENEMYBATTSTATUS2] ; $d068
+	bit 6, a
+	jp z, Func_3eaba
+	ld a, $63
+	ld [$d11e], a
+	call GetMoveName
+	call Func_3826
+	xor a
+	ld [W_ENEMYMOVEEFFECT], a ; $cfcd
+	ld hl, $672b
+	jp Func_3eab8
+
+; known jump sources: 3e8bc (f:68bc), 3e8d0 (f:68d0), 3e8e4 (f:68e4), 3e8fa (f:68fa), 3e90f (f:690f), 3e9bc (f:69bc), 3e9f3 (f:69f3), 3ea19 (f:6a19), 3ea51 (f:6a51), 3ea6a (f:6a6a), 3ea80 (f:6a80), 3ea95 (f:6a95), 3ea98 (f:6a98), 3eab5 (f:6ab5)
+Func_3eab8: ; 3eab8 (f:6ab8)
+	xor a
+	ret
+
+; known jump sources: 3eaa0 (f:6aa0)
+Func_3eaba: ; 3eaba (f:6aba)
+	ld a, $1
+	and a
+	ret
+
+; known jump sources: 3d543 (f:5543), 3d68a (f:568a), 3ddad (f:5dad), 3e6f9 (f:66f9)
+Func_3eabe: ; 3eabe (f:6abe)
+	ld a, [H_WHOSETURN] ; $FF00+$f3
+	and a
+	jp z, Func_3eacc
+	ld de, W_ENEMYMOVENUM ; $cfcc
+	ld a, [W_ENEMYSELECTEDMOVE] ; $ccdd
+	jr asm_3eadc
+
+; known jump sources: 3eac1 (f:6ac1)
+Func_3eacc: ; 3eacc (f:6acc)
+	ld de, W_PLAYERMOVENUM ; $cfd2
+	ld a, [$d733]
+	bit 0, a
+	ld a, [$ccd9]
+	jr nz, asm_3eadc
+	ld a, [W_PLAYERSELECTEDMOVE] ; $ccdc
+asm_3eadc: ; 3eadc (f:6adc)
+	ld [$d0b5], a
+	dec a
+	ld hl, $4000
+	ld bc, $6
+	call AddNTimes
+	ld a, $e
+	call FarCopyData
+	ld a, $2c
+	ld [$d0b7], a
+	ld a, $2
+	ld [$d0b6], a
+	call GetName
+	ld de, $cd6d
+	jp Func_3826
+
+; known jump sources: d893 (3:5893), 3c9aa (f:49aa), 3ef90 (f:6f90), 4fdc9 (13:7dc9), 58df0 (16:4df0), 58e18 (16:4e18)
+Func_3eb01: ; 3eb01 (f:6b01)
+	ld a, [W_ISLINKBATTLE] ; $d12b
+	cp $4
+	jp z, Func_3cc13
+	ld a, [$cfd8]
+	ld [$cfe5], a
+	ld [$d0b5], a
+	call GetBaseStats
+	ld a, [W_ENEMYBATTSTATUS3] ; $d069
+	bit 3, a
+	ld hl, $cceb
+	ld a, [hli]
+	ld b, [hl]
+	jr nz, .asm_3eb33
+	ld a, [W_ISINBATTLE] ; $d057
+	cp $2
+	ld a, $98
+	ld b, $88
+	jr z, .asm_3eb33
+	call GenRandomInBattle
+	ld b, a
+	call GenRandomInBattle
+.asm_3eb33
+	ld hl, $cff1
+	ld [hli], a
+	ld [hl], b
+	ld de, W_ENEMYMONLEVEL ; $cff3
+	ld a, [W_CURENEMYLVL] ; $d127
+	ld [de], a
+	inc de
+	ld b, $0
+	ld hl, W_ENEMYMONCURHP ; $cfe6
+	push hl
+	call Func_3936
+	pop hl
+	ld a, [W_ISINBATTLE] ; $d057
+	cp $2
+	jr z, .asm_3eb65
+	ld a, [W_ENEMYBATTSTATUS3] ; $d069
+	bit 3, a
+	jr nz, .asm_3eb86
+	ld a, [W_ENEMYMONMAXHP] ; $cff4
+	ld [hli], a
+	ld a, [$cff5]
+	ld [hli], a
+	xor a
+	inc hl
+	ld [hl], a
+	jr .asm_3eb86
+.asm_3eb65
+	ld hl, W_WATERMONS ; $d8a5 (aliases: W_ENEMYMON1HP)
+	ld a, [W_WHICHPOKEMON] ; $cf92
+	ld bc, $2c
+	call AddNTimes
+	ld a, [hli]
+	ld [W_ENEMYMONCURHP], a ; $cfe6
+	ld a, [hli]
+	ld [$cfe7], a
+	ld a, [W_WHICHPOKEMON] ; $cf92
+	ld [W_ENEMYMONNUMBER], a ; $cfe8
+	inc hl
+	ld a, [hl]
+	ld [W_ENEMYMONSTATUS], a ; $cfe9
+	jr .asm_3eb86
+.asm_3eb86
+	ld hl, $d0be
+	ld de, W_ENEMYMONTYPE1 ; $cfea (aliases: W_ENEMYMONTYPES)
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [W_ISINBATTLE] ; $d057
+	cp $2
+	jr nz, .asm_3ebb0
+	ld hl, $d8ac
+	ld a, [W_WHICHPOKEMON] ; $cf92
+	ld bc, $2c
+	call AddNTimes
+	ld bc, $4
+	call CopyData
+	jr .asm_3ebca
+.asm_3ebb0
+	ld hl, $d0c7
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hl]
+	ld [de], a
+	dec de
+	dec de
+	dec de
+	xor a
+	ld [$cee9], a
+	ld a, $3e
+	call Predef ; indirect jump to Func_3afb8 (3afb8 (e:6fb8))
+.asm_3ebca
+	ld hl, $cfed
+	ld de, $cffd
+	ld a, $5e
+	call Predef ; indirect jump to Func_f473 (f473 (3:7473))
+	ld hl, $d0b9
+	ld de, $d002
+	ld b, $5
+.asm_3ebdd
+	ld a, [hli]
+	ld [de], a
+	inc de
+	dec b
+	jr nz, .asm_3ebdd
+	ld hl, $d0c0
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hl]
+	ld [de], a
+	ld a, [$cfd8]
+	ld [$d11e], a
+	call GetMonName
+	ld hl, $cd6d
+	ld de, $cfda
+	ld bc, $b
+	call CopyData
+	ld a, [$cfd8]
+	ld [$d11e], a
+	ld a, $3a
+	call Predef ; indirect jump to IndexToPokedex (41010 (10:5010))
+	ld a, [$d11e]
+	dec a
+	ld c, a
+	ld b, $1
+	ld hl, W_SEENPOKEMON ; $d30a
+	ld a, $10
+	call Predef ; indirect jump to Func_f666 (f666 (3:7666))
+	ld hl, W_ENEMYMONLEVEL ; $cff3
+	ld de, $cd23
+	ld bc, $b
+	call CopyData
+	ld a, $7
+	ld b, $8
+	ld hl, W_ENEMYMONATTACKMOD ; $cd2e
+.asm_3ec2d
+	ld [hli], a
+	dec b
+	jr nz, .asm_3ec2d
+	ret
+
+; known jump sources: 3ef66 (f:6f66), 3ef93 (f:6f93)
+Func_3ec32: ; 3ec32 (f:6c32)
+	ld a, [W_ISLINKBATTLE] ; $d12b
+	cp $4
+	jr nz, .asm_3ec4d
+	xor a
+	ld [W_MENUJOYPADPOLLCOUNT], a ; $cc34
+	ld hl, Func_372d6
+	ld b, BANK(Func_372d6)
+	call Bankswitch ; indirect jump to Func_372d6 (372d6 (d:72d6))
+	ld a, $1
+	ld [$cfcb], a
+	call ClearScreen
+.asm_3ec4d
+	call DelayFrame
+	ld a, $30
+	call Predef ; indirect jump to Func_7096d (7096d (1c:496d))
+	ld hl, Func_3ee58
+	ld b, BANK(Func_3ee58)
+	call Bankswitch ; indirect jump to Func_3ee58 (3ee58 (f:6e58))
+	ld a, $1
+	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld a, $ff
+	ld [$cfcb], a
+	call CleanLCD_OAM
+	call ClearScreen
+	xor a
+	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld [$FF00+$b0], a
+	ld [rWY], a ; $FF00+$4a
+	ld [$FF00+$d7], a
+	ld hl, $d060
+	ld [hli], a
+	ld [hli], a
+	ld [hli], a
+	ld [hli], a
+	ld [hl], a
+	ld [W_PLAYERDISABLEDMOVE], a ; $d06d
+	ret
+
+; known jump sources: 3e750 (f:6750), 3e76a (f:676a), 3e770 (f:6770), 3e791 (f:6791), 3e7a0 (f:67a0), 3e7d1 (f:67d1), 3ea4b (f:6a4b)
+Func_3ec81: ; 3ec81 (f:6c81)
+	push bc
+	ld a, [W_PLAYERMONLEVEL] ; $d022
+	ld b, a
+	ld a, [W_ENEMYMONLEVEL] ; $cff3
+	ld [W_PLAYERMONLEVEL], a ; $d022
+	ld a, b
+	ld [W_ENEMYMONLEVEL], a ; $cff3
+	pop bc
+	ret
+
+; known jump sources: 3c04c (f:404c)
+Func_3ec92: ; 3ec92 (f:6c92)
+	ld a, [W_BATTLETYPE] ; $d05a
+	dec a
+	ld de, $7e0a
+	jr nz, .asm_3ec9e
+	ld de, $7e9a
+.asm_3ec9e
+	ld a, $c
+	call Func_36eb
+	ld a, $3
+	call Predef ; indirect jump to Func_2fe40 (2fe40 (b:7e40))
+	ld hl, $c300
+	xor a
+	ld [H_DOWNARROWBLINKCNT1], a ; $FF00+$8b
+	ld b, $7
+	ld e, $a0
+.asm_3ecb2
+	ld c, $3
+	ld d, $38
+.asm_3ecb6
+	ld [hl], d
+	inc hl
+	ld [hl], e
+	ld a, $8
+	add d
+	ld d, a
+	inc hl
+	ld a, [H_DOWNARROWBLINKCNT1] ; $FF00+$8b
+	ld [hli], a
+	inc a
+	ld [H_DOWNARROWBLINKCNT1], a ; $FF00+$8b
+	inc hl
+	dec c
+	jr nz, .asm_3ecb6
+	ld a, [H_DOWNARROWBLINKCNT1] ; $FF00+$8b
+	add $4
+	ld [H_DOWNARROWBLINKCNT1], a ; $FF00+$8b
+	ld a, $8
+	add e
+	ld e, a
+	dec b
+	jr nz, .asm_3ecb2
+	ld de, $9310
+	call Func_16ea
+	ld a, $a
+	ld [$0], a
+	xor a
+	ld [$4000], a
+	ld hl, $8000
+	ld de, $a188
+	ld a, [$FF00+$b8]
+	ld b, a
+	ld c, $31
+	call CopyVideoData
+	xor a
+	ld [$0], a
+	ld a, $31
+	ld [$FF00+$e1], a
+	ld hl, $c405
+	ld a, $1
+	jp Predef ; indirect jump to Func_3f0c6 (3f0c6 (f:70c6))
+
+; known jump sources: dba3 (3:5ba3)
+Func_3ed02: ; 3ed02 (f:6d02)
+	ld hl, Func_39680
+	ld b, BANK(Func_39680)
+	call Bankswitch ; indirect jump to Func_39680 (39680 (e:5680))
+	ld hl, Func_396a7
+	ld b, BANK(Func_396a7)
+	jp Bankswitch ; indirect jump to Func_396a7 (396a7 (e:56a7))
+
+; known jump sources: 3c6c6 (f:46c6), 3c84e (f:484e)
+Func_3ed12: ; 3ed12 (f:6d12)
+	ld hl, Func_396d3
+	ld b, BANK(Func_396d3)
+	jp Bankswitch ; indirect jump to Func_396d3 (396d3 (e:56d3))
+
+; known jump sources: 3cc01 (f:4c01), 553d9 (15:53d9)
+Func_3ed1a: ; 3ed1a (f:6d1a)
+	ld a, $1
+	jr asm_3ed1f
+
+; known jump sources: 3cc6e (f:4c6e)
+Func_3ed1e: ; 3ed1e (f:6d1e)
+	xor a
+asm_3ed1f: ; 3ed1f (f:6d1f)
+	ld [H_WHOSETURN], a ; $FF00+$f3
+	call Func_3ed27
+	jp Func_3ed64
+
+; known jump sources: 3ed21 (f:6d21), 3f351 (f:7351), 3f3b9 (f:73b9), 3f51a (f:751a), 3f647 (f:7647), 52641 (14:6641)
+Func_3ed27: ; 3ed27 (f:6d27)
+	ld a, [H_WHOSETURN] ; $FF00+$f3
+	and a
+	jr z, .asm_3ed48
+	ld a, [W_PLAYERMONSTATUS] ; $d018
+	and $40
+	ret z
+	ld hl, $d02a
+	ld a, [hld]
+	ld b, a
+	ld a, [hl]
+	srl a
+	rr b
+	srl a
+	rr b
+	ld [hli], a
+	or b
+	jr nz, .asm_3ed46
+	ld b, $1
+.asm_3ed46
+	ld [hl], b
+	ret
+.asm_3ed48
+	ld a, [W_ENEMYMONSTATUS] ; $cfe9
+	and $40
+	ret z
+	ld hl, $cffb
+	ld a, [hld]
+	ld b, a
+	ld a, [hl]
+	srl a
+	rr b
+	srl a
+	rr b
+	ld [hli], a
+	or b
+	jr nz, .asm_3ed62
+	ld b, $1
+.asm_3ed62
+	ld [hl], b
+	ret
+
+; known jump sources: 3ed24 (f:6d24), 3f361 (f:7361), 3f3c4 (f:73c4), 3f51d (f:751d), 3f64a (f:764a)
+Func_3ed64: ; 3ed64 (f:6d64)
+	ld a, [H_WHOSETURN] ; $FF00+$f3
+	and a
+	jr z, .asm_3ed81
+	ld a, [W_PLAYERMONSTATUS] ; $d018
+	and $10
+	ret z
+	ld hl, $d026
+	ld a, [hld]
+	ld b, a
+	ld a, [hl]
+	srl a
+	rr b
+	ld [hli], a
+	or b
+	jr nz, .asm_3ed7f
+	ld b, $1
+.asm_3ed7f
+	ld [hl], b
+	ret
+.asm_3ed81
+	ld a, [W_ENEMYMONSTATUS] ; $cfe9
+	and $10
+	ret z
+	ld hl, $cff7
+	ld a, [hld]
+	ld b, a
+	ld a, [hl]
+	srl a
+	rr b
+	ld [hli], a
+	or b
+	jr nz, .asm_3ed97
+	ld b, $1
+.asm_3ed97
+	ld [hl], b
+	ret
+
+; known jump sources: 553d1 (15:53d1)
+Func_3ed99: ; 3ed99 (f:6d99)
+	ld c, $0
+.asm_3ed9b
+	call Func_3eda5
+	inc c
+	ld a, c
+	cp $4
+	jr nz, .asm_3ed9b
+	ret
+
+; known jump sources: 3ed9b (f:6d9b)
+Func_3eda5: ; 3eda5 (f:6da5)
+	push bc
+	push bc
+	ld a, [$d11e]
+	and a
+	ld a, c
+	ld hl, $d025
+	ld de, $cd12
+	ld bc, W_PLAYERMONATTACKMOD ; $cd1a
+	jr z, .asm_3edc0
+	ld hl, $cff6
+	ld de, $cd26
+	ld bc, W_ENEMYMONATTACKMOD ; $cd2e
+.asm_3edc0
+	add c
+	ld c, a
+	jr nc, .asm_3edc5
+	inc b
+.asm_3edc5
+	ld a, [bc]
+	pop bc
+	ld b, a
+	push bc
+	sla c
+	ld b, $0
+	add hl, bc
+	ld a, c
+	add e
+	ld e, a
+	jr nc, .asm_3edd4
+	inc d
+.asm_3edd4
+	pop bc
+	push hl
+	ld hl, $76cb
+	dec b
+	sla b
+	ld c, b
+	ld b, $0
+	add hl, bc
+	xor a
+	ld [H_NUMTOPRINT], a ; $FF00+$96 (aliases: H_MULTIPLICAND)
+	ld a, [de]
+	ld [$FF00+$97], a
+	inc de
+	ld a, [de]
+	ld [$FF00+$98], a
+	ld a, [hli]
+	ld [H_REMAINDER], a ; $FF00+$99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
+	call Multiply
+	ld a, [hl]
+	ld [H_REMAINDER], a ; $FF00+$99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
+	ld b, $4
+	call Divide
+	pop hl
+	ld a, [$FF00+$98]
+	sub $e7
+	ld a, [$FF00+$97]
+	sbc $3
+	jp c, Func_3ee0c
+	ld a, $3
+	ld [$FF00+$97], a
+	ld a, $e7
+	ld [$FF00+$98], a
+
+; known jump sources: 3ee01 (f:6e01)
+Func_3ee0c: ; 3ee0c (f:6e0c)
+	ld a, [$FF00+$97]
+	ld [hli], a
+	ld b, a
+	ld a, [$FF00+$98]
+	ld [hl], a
+	or b
+	jr nz, .asm_3ee17
+	inc [hl]
+.asm_3ee17
+	pop bc
+	ret
+
+; known jump sources: 3cc04 (f:4c04), 3f511 (f:7511), 3f63e (f:763e), 553e1 (15:53e1)
+Func_3ee19: ; 3ee19 (f:6e19)
+	ld a, [W_ISLINKBATTLE] ; $d12b
+	cp $4
+	ret z
+	ld a, [W_OBTAINEDBADGES] ; $d356
+	ld b, a
+	ld hl, $d025
+	ld c, $4
+.asm_3ee28
+	srl b
+	call c, Func_3ee35
+	inc hl
+	inc hl
+	srl b
+	dec c
+	jr nz, .asm_3ee28
+	ret
+
+; known jump sources: 3ee2a (f:6e2a)
+Func_3ee35: ; 3ee35 (f:6e35)
+	ld a, [hli]
+	ld d, a
+	ld e, [hl]
+	srl d
+	rr e
+	srl d
+	rr e
+	srl d
+	rr e
+	ld a, [hl]
+	add e
+	ld [hld], a
+	ld a, [hl]
+	adc d
+	ld [hli], a
+	ld a, [hld]
+	sub $e7
+	ld a, [hl]
+	sbc $3
+	ret c
+	ld a, $3
+	ld [hli], a
+	ld a, $e7
+	ld [hld], a
+	ret
+
+; known jump sources: 3c066 (f:4066), 3ec5a (f:6c5a)
+Func_3ee58: ; 3ee58 (f:6e58)
+	call LoadHpBarAndStatusTilePatterns
+
+; known jump sources: 665b (1:665b), 3c822 (f:4822), 3ca20 (f:4a20), 3d072 (f:5072), 3d0f6 (f:50f6), 3d1ae (f:51ae)
+Func_3ee5b: ; 3ee5b (f:6e5b)
+	ld a, [rLCDC] ; $FF00+$40
+	add a
+	jr c, .asm_3ee7c
+	ld hl, $6080
+	ld de, $96d0
+	ld bc, $18
+	ld a, $4
+	call FarCopyDataDouble
+	ld hl, $6098
+	ld de, $9730
+	ld bc, $30
+	ld a, $4
+	jp FarCopyDataDouble
+.asm_3ee7c
+	ld de, $6080
+	ld hl, $96d0
+	ld bc, $403
+	call CopyVideoDataDouble
+	ld de, $6098
+	ld hl, $9730
+	ld bc, $406
+	jp CopyVideoDataDouble
+
+; known jump sources: 3c5f7 (f:45f7), 3c79b (f:479b), 3c952 (f:4952), 3ccf4 (f:4cf4), 3cebf (f:4ebf), 553f1 (15:53f1)
+Func_3ee94: ; 3ee94 (f:6e94)
+	ld hl, $6e9a
+	jp PrintText
+
+INCBIN "baserom.gbc",$3ee9a,$3ee9b - $3ee9a
 
 ; generates a random number unless in link battle
 ; stores random number in A
@@ -43023,15 +62323,342 @@ GenRandomInBattle: ; 6e9b
 	ret
 ; 0x3eed3
 
-INCBIN "baserom.gbc",$3eed3,$3ef07 - $3eed3
-
+; known jump sources: 3d736 (f:5736), 3e7bc (f:67bc)
+Func_3eed3: ; 3eed3 (f:6ed3)
+	ld a, [H_WHOSETURN] ; $FF00+$f3
+	and a
+	ld hl, W_ENEMYMONTYPE1 ; $cfea (aliases: W_ENEMYMONTYPES)
+	ld de, W_ENEMYBATTSTATUS1 ; $d067
+	ld a, [W_PLAYERMOVENUM] ; $cfd2
+	jr z, .asm_3eeea
+	ld hl, W_PLAYERMONTYPE1 ; $d019 (aliases: W_PLAYERMONTYPES)
+	ld de, W_ENEMYBATTSTATUS1 ; $d067
+	ld a, [W_ENEMYMOVENUM] ; $cfcc
+.asm_3eeea
+	cp $78
+	jr z, .asm_3eef1
+	cp $99
+	ret nz
+.asm_3eef1
+	ld a, [de]
+	bit 6, a
+	ret nz
+	ld a, [hli]
+	cp $8
+	ret z
+	ld a, [hl]
+	cp $8
+	ret z
+	ld a, [W_MOVEMISSED] ; $d05f
+	and a
+	ret nz
+	ld a, $5
+	ld [$cc5b], a
+; 3ef07 (f:6f07)
 PlayMoveAnimation: ; 6F07
 	ld [$D07C],a
 	call Delay3
 	PREDEF_JUMP MoveAnimationPredef ; predef 8
 
-INCBIN "baserom.gbc",$3ef12,$3f138 - $3ef12
+; known jump sources: 69b (0:69b)
+Func_3ef12: ; 3ef12 (f:6f12)
+	ld a, [W_CUROPPONENT] ; $d059
+	and a
+	jr z, asm_3ef23
 
+; known jump sources: 54fb (1:54fb)
+Func_3ef18: ; 3ef18 (f:6f18)
+	ld a, [W_CUROPPONENT] ; $d059
+	ld [$cf91], a
+	ld [$cfd8], a
+	jr asm_3ef3d
+asm_3ef23: ; 3ef23 (f:6f23)
+	ld a, [$d732]
+	bit 1, a
+	jr z, .asm_3ef2f
+	ld a, [$FF00+$b4]
+	bit 1, a
+	ret nz
+.asm_3ef2f
+	ld a, [$d13c]
+	and a
+	ret nz
+	ld hl, Func_13870
+	ld b, BANK(Func_13870)
+	call Bankswitch ; indirect jump to Func_13870 (13870 (4:7870))
+	ret nz
+asm_3ef3d: ; 3ef3d (f:6f3d)
+	ld a, [$d35d]
+	push af
+	ld hl, $d358
+	ld a, [hl]
+	push af
+	res 1, [hl]
+	ld hl, Func_525af
+	ld b, BANK(Func_525af)
+	call Bankswitch ; indirect jump to Func_525af (525af (14:65af))
+	ld a, [$cfd8]
+	sub $c8
+	jp c, Func_3ef8b
+	ld [W_TRAINERCLASS], a ; $d031
+	call Func_3566
+	ld hl, ReadTrainer
+	ld b, BANK(ReadTrainer)
+	call Bankswitch ; indirect jump to ReadTrainer (39c53 (e:5c53))
+	call Func_3ec32
+	call Func_3f04b
+	xor a
+	ld [$cfd8], a
+	ld [$FF00+$e1], a
+	dec a
+	ld [W_AICOUNT], a ; $ccdf
+	ld hl, $c3ac
+	ld a, $1
+	call Predef ; indirect jump to Func_3f0c6 (3f0c6 (f:70c6))
+	ld a, $ff
+	ld [W_ENEMYMONNUMBER], a ; $cfe8
+	ld a, $2
+	ld [W_ISINBATTLE], a ; $d057
+	jp Func_3efeb
+
+; known jump sources: 3ef55 (f:6f55)
+Func_3ef8b: ; 3ef8b (f:6f8b)
+	ld a, $1
+	ld [W_ISINBATTLE], a ; $d057
+	call Func_3eb01
+	call Func_3ec32
+	ld a, [W_CUROPPONENT] ; $d059
+	cp $91
+	jr z, .asm_3efa2
+	call Function583A
+	jr nz, .asm_3efd7
+.asm_3efa2
+	ld hl, $d0c2
+	ld a, $66
+	ld [hli], a
+	ld bc, $66b5
+	ld a, c
+	ld [hli], a
+	ld [hl], b
+	ld hl, $cfda
+	ld a, $86
+	ld [hli], a
+	ld a, $87
+	ld [hli], a
+	ld a, $8e
+	ld [hli], a
+	ld a, $92
+	ld [hli], a
+	ld a, $93
+	ld [hli], a
+	ld [hl], $50
+	ld a, [$cf91]
+	push af
+	ld a, $b8
+	ld [$cf91], a
+	ld de, $9000
+	call Func_1665
+	pop af
+	ld [$cf91], a
+	jr .asm_3efdd
+.asm_3efd7
+	ld de, $9000
+	call Func_1665
+.asm_3efdd
+	xor a
+	ld [W_TRAINERCLASS], a ; $d031
+	ld [$FF00+$e1], a
+	ld hl, $c3ac
+	ld a, $1
+	call Predef ; indirect jump to Func_3f0c6 (3f0c6 (f:70c6))
+
+; known jump sources: 3ef88 (f:6f88)
+Func_3efeb: ; 3efeb (f:6feb)
+	ld b, $0
+	call GoPAL_SET
+	call Func_3c04c
+	xor a
+	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld hl, $704a
+	call PrintText
+	call Func_3719
+	call ClearScreen
+	ld a, $98
+	ld [$FF00+$bd], a
+	ld a, $1
+	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	call Delay3
+	ld a, $9c
+	ld [$FF00+$bd], a
+	call Func_3725
+	ld hl, $c435
+	ld bc, $50a
+	call ClearScreenArea
+	ld hl, $c3a1
+	ld bc, $40a
+	call ClearScreenArea
+	call CleanLCD_OAM
+	ld a, [W_ISINBATTLE] ; $d057
+	dec a
+	call z, Func_3cdec
+	call Func_3c11e
+	ld hl, Func_137aa
+	ld b, BANK(Func_137aa)
+	call Bankswitch ; indirect jump to Func_137aa (137aa (4:77aa))
+	pop af
+	ld [$d358], a
+	pop af
+	ld [$d35d], a
+	ld a, [$d0d4]
+	ld [$FF00+$d7], a
+	scf
+	ret
+
+INCBIN "baserom.gbc",$3f04a,$3f04b - $3f04a
+
+; known jump sources: 396e1 (e:56e1), 3ef69 (f:6f69)
+Func_3f04b: ; 3f04b (f:704b)
+	ld a, [$d033]
+	ld e, a
+	ld a, [$d034]
+	ld d, a
+	ld a, [W_ISLINKBATTLE] ; $d12b
+	and a
+	ld a, $13
+	jr z, .asm_3f05d
+	ld a, $4
+.asm_3f05d
+	call Func_36eb
+	ld de, $9000
+	ld a, $77
+	ld c, a
+	jp Func_1672
+
+INCBIN "baserom.gbc",$3f069,$3f073 - $3f069
+
+; known jump sources: 3ca5b (f:4a5b), 3cceb (f:4ceb), 5dc09 (17:5c09)
+Func_3f073: ; 3f073 (f:7073)
+	ld a, [$cc4f]
+	ld h, a
+	ld a, [$cc50]
+	ld l, a
+	ld a, [$FF00+$e1]
+	ld [H_DOWNARROWBLINKCNT1], a ; $FF00+$8b
+	ld b, $4c
+	ld a, [W_ISINBATTLE] ; $d057
+	and a
+	jr z, .asm_3f0bc
+	add b
+	ld [hl], a
+	call Delay3
+	ld bc, $ffd7
+	add hl, bc
+	ld a, $1
+	ld [$cd6c], a
+	ld bc, $303
+	ld a, $5
+	call Predef ; indirect jump to Func_79aba (79aba (1e:5aba))
+	ld c, $4
+	call DelayFrames
+	ld bc, $ffd7
+	add hl, bc
+	xor a
+	ld [$cd6c], a
+	ld bc, $505
+	ld a, $5
+	call Predef ; indirect jump to Func_79aba (79aba (1e:5aba))
+	ld c, $5
+	call DelayFrames
+	ld bc, $ffd7
+	jr .asm_3f0bf
+.asm_3f0bc
+	ld bc, $ff85
+.asm_3f0bf
+	add hl, bc
+	ld a, [H_DOWNARROWBLINKCNT1] ; $FF00+$8b
+	add $31
+	jr asm_3f0d0
+
+; known jump sources: 62cb (1:62cb), 3c0e1 (f:40e1), 3ecff (f:6cff), 3ef7b (f:6f7b), 3efe8 (f:6fe8)
+Func_3f0c6: ; 3f0c6 (f:70c6)
+	ld a, [$cc4f]
+	ld h, a
+	ld a, [$cc50]
+	ld l, a
+	ld a, [$FF00+$e1]
+asm_3f0d0: ; 3f0d0 (f:70d0)
+	ld bc, $707
+	ld de, $14
+	push af
+	ld a, [$d0aa]
+	and a
+	jr nz, .asm_3f0ed
+	pop af
+.asm_3f0de
+	push bc
+	push hl
+.asm_3f0e0
+	ld [hl], a
+	add hl, de
+	inc a
+	dec c
+	jr nz, .asm_3f0e0
+	pop hl
+	inc hl
+	pop bc
+	dec b
+	jr nz, .asm_3f0de
+	ret
+.asm_3f0ed
+	push bc
+	ld b, $0
+	dec c
+	add hl, bc
+	pop bc
+	pop af
+.asm_3f0f4
+	push bc
+	push hl
+.asm_3f0f6
+	ld [hl], a
+	add hl, de
+	inc a
+	dec c
+	jr nz, .asm_3f0f6
+	pop hl
+	dec hl
+	pop bc
+	dec b
+	jr nz, .asm_3f0f4
+	ret
+
+; known jump sources: 3cca9 (f:4ca9), 702a8 (1c:42a8), 797c2 (1e:57c2)
+Func_3f103: ; 3f103 (f:7103)
+	ld a, [$cfd9]
+	ld [$cf91], a
+	ld hl, $c405
+	ld b, $7
+	ld c, $8
+	call ClearScreenArea
+	ld hl, $d
+	call Unknown_1627
+	ld a, $3
+	call Predef ; indirect jump to Func_2fe40 (2fe40 (b:7e40))
+	ld de, $9310
+	call Func_16ea
+	ld hl, $8000
+	ld de, $9310
+	ld c, $31
+	ld a, [$FF00+$b8]
+	ld b, a
+	jp CopyVideoData
+
+; known jump sources: 3d69f (f:569f), 3d6a4 (f:56a4), 3d6ca (f:56ca), 3d6d9 (f:56d9), 3d790 (f:5790), 3d7c5 (f:57c5), 3d7ff (f:57ff), 3e016 (f:6016), 3e701 (f:6701), 3e706 (f:6706), 3e73e (f:673e), 3e74d (f:674d), 3e815 (f:6815), 3e84a (f:684a), 3e882 (f:6882)
+Func_3f132: ; 3f132 (f:7132)
+	call JumpMoveEffect
+	ld b, $1
+	ret
+; 3f138 (f:7138)
 JumpMoveEffect:  ;$3f138
 	ld a, [$ff00+$f3]  ;whose turn?
 	and a
@@ -43050,8 +62677,49 @@ JumpMoveEffect:  ;$3f138
 	ld l, a
 	jp [hl]       ;jump to special effect handler
 
-INCBIN "baserom.gbc",$3f150,$3f245 - $3f150
+INCBIN "baserom.gbc",$3f150,$3f1fc - $3f150
+	ld de, W_ENEMYMONSTATUS ; $cfe9
+	ld bc, W_ENEMYBATTSTATUS2 ; $d068
+	ld a, [H_WHOSETURN] ; $FF00+$f3
+	and a
+	jp z, Func_3f20e
+	ld de, W_PLAYERMONSTATUS ; $d018
+	ld bc, W_PLAYERBATTSTATUS2 ; $d063
 
+; known jump sources: 3f205 (f:7205)
+Func_3f20e: ; 3f20e (f:720e)
+	ld a, [bc]
+	bit 5, a
+	res 5, a
+	ld [bc], a
+	jr nz, .asm_3f231
+	ld a, [de]
+	ld b, a
+	and $7
+	jr z, .asm_3f222
+	ld hl, $724a
+	jp PrintText
+.asm_3f222
+	ld a, b
+	and a
+	jr nz, .asm_3f242
+	push de
+	call MoveHitTest
+	pop de
+	ld a, [W_MOVEMISSED] ; $d05f
+	and a
+	jr nz, .asm_3f242
+.asm_3f231
+	call GenRandomInBattle
+	and $7
+	jr z, .asm_3f231
+	ld [de], a
+	call Func_3fb89
+	ld hl, $7245
+	jp PrintText
+.asm_3f242
+	jp Func_3fb5e
+; 3f245 (f:7245)
 UnnamedText_3f245: ; 0x3f245
 	TX_FAR _UnnamedText_3f245
 	db $50
@@ -43062,8 +62730,91 @@ UnnamedText_3f24a: ; 0x3f24a
 	db $50
 ; 0x3f24a + 5 bytes
 
-INCBIN "baserom.gbc",$3f24f,$3f2df - $3f24f
-
+	ld hl, W_ENEMYMONSTATUS ; $cfe9
+	ld de, W_PLAYERMOVEEFFECT ; $cfd3
+	ld a, [H_WHOSETURN] ; $FF00+$f3
+	and a
+	jr z, .asm_3f260
+	ld hl, W_PLAYERMONSTATUS ; $d018
+	ld de, W_ENEMYMOVEEFFECT ; $cfcd
+.asm_3f260
+	call CheckTargetSubstitute
+	jr nz, .asm_3f2d3
+	ld a, [hli]
+	ld b, a
+	and a
+	jr nz, .asm_3f2d3
+	ld a, [hli]
+	cp $3
+	jr z, .asm_3f2d3
+	ld a, [hld]
+	cp $3
+	jr z, .asm_3f2d3
+	ld a, [de]
+	cp $2
+	ld b, $34
+	jr z, .asm_3f290
+	cp $21
+	ld b, $67
+	jr z, .asm_3f290
+	push hl
+	push de
+	call MoveHitTest
+	pop de
+	pop hl
+	ld a, [W_MOVEMISSED] ; $d05f
+	and a
+	jr nz, .asm_3f2d7
+	jr .asm_3f295
+.asm_3f290
+	call GenRandomInBattle
+	cp b
+	ret nc
+.asm_3f295
+	dec hl
+	set 3, [hl]
+	push de
+	dec de
+	ld a, [H_WHOSETURN] ; $FF00+$f3
+	and a
+	ld b, $c7
+	ld hl, W_PLAYERBATTSTATUS3 ; $d064
+	ld a, [de]
+	ld de, W_PLAYERTOXICCOUNTER ; $d06c
+	jr nz, .asm_3f2b0
+	ld b, $a9
+	ld hl, W_ENEMYBATTSTATUS3 ; $d069
+	ld de, W_ENEMYTOXICCOUNTER ; $d071
+.asm_3f2b0
+	cp $5c
+	jr nz, .asm_3f2bd
+	set 0, [hl]
+	xor a
+	ld [de], a
+	ld hl, $72e4
+	jr .asm_3f2c0
+.asm_3f2bd
+	ld hl, $72df
+.asm_3f2c0
+	pop de
+	ld a, [de]
+	cp $42
+	jr z, .asm_3f2cd
+	ld a, b
+	call Func_3fb96
+	jp PrintText
+.asm_3f2cd
+	call Func_3fb89
+	jp PrintText
+.asm_3f2d3
+	ld a, [de]
+	cp $42
+	ret nz
+.asm_3f2d7
+	ld c, $32
+	call DelayFrames
+	jp Func_3fb5e
+; 3f2df (f:72df)
 UnnamedText_3f2df: ; 0x3f2df
 	TX_FAR _UnnamedText_3f2df
 	db $50
@@ -43074,8 +62825,27 @@ UnnamedText_3f2e4: ; 0x3f2e4
 	db $50
 ; 0x3f2e4 + 5 bytes
 
-INCBIN "baserom.gbc",$3f2e9,$3f30c - $3f2e9
-
+	ld hl, Func_783f
+	ld b, BANK(Func_783f)
+	jp Bankswitch ; indirect jump to Func_783f (783f (1:783f))
+	ld hl, W_PLAYERMONCURHP ; $d015
+	ld de, W_PLAYERBATTSTATUS2 ; $d063
+	ld a, [H_WHOSETURN] ; $FF00+$f3
+	and a
+	jr z, .asm_3f302
+	ld hl, W_ENEMYMONCURHP ; $cfe6
+	ld de, W_ENEMYBATTSTATUS2 ; $d068
+.asm_3f302
+	xor a
+	ld [hli], a
+	ld [hli], a
+	inc hl
+	ld [hl], a
+	ld a, [de]
+	res 7, a
+	ld [de], a
+	ret
+; 3f30c (f:730c)
 FreezeBurnParalyzeEffect: ;0x3f30c
 	xor a
 	ld [$cc5b], a
@@ -43232,22 +63002,521 @@ UnnamedText_3f423: ; 0x3f423
 	db $50
 ; 0x3f423 + 5 bytes
 
-INCBIN "baserom.gbc",$3f428,$3f547 - $3f428
+; known jump sources: e137 (3:6137), 3a821 (e:6821), 3e2e8 (f:62e8)
+Func_3f428: ; 3f428 (f:7428)
+	ld hl, W_PLAYERMONATTACKMOD ; $cd1a
+	ld de, W_PLAYERMOVEEFFECT ; $cfd3
+	ld a, [H_WHOSETURN] ; $FF00+$f3
+	and a
+	jr z, .asm_3f439
+	ld hl, W_ENEMYMONATTACKMOD ; $cd2e
+	ld de, W_ENEMYMOVEEFFECT ; $cfcd
+.asm_3f439
+	ld a, [de]
+	sub $a
+	cp $8
+	jr c, .asm_3f442
+	sub $28
+.asm_3f442
+	ld c, a
+	ld b, $0
+	add hl, bc
+	ld b, [hl]
+	inc b
+	ld a, $d
+	cp b
+	jp c, Func_3f522
+	ld a, [de]
+	cp $12
+	jr c, .asm_3f45a
+	inc b
+	ld a, $d
+	cp b
+	jr nc, .asm_3f45a
+	ld b, a
+.asm_3f45a
+	ld [hl], b
+	ld a, c
+	cp $4
+	jr nc, asm_3f4ca
+	push hl
+	ld hl, $d026
+	ld de, $cd12
+	ld a, [H_WHOSETURN] ; $FF00+$f3
+	and a
+	jr z, .asm_3f472
+	ld hl, $cff7
+	ld de, $cd26
+.asm_3f472
+	push bc
+	sla c
+	ld b, $0
+	add hl, bc
+	ld a, c
+	add e
+	ld e, a
+	jr nc, .asm_3f47e
+	inc d
+.asm_3f47e
+	pop bc
+	ld a, [hld]
+	sub $e7
+	jr nz, .asm_3f48a
+	ld a, [hl]
+	sbc $3
+	jp z, Func_3f520
+.asm_3f48a
+	push hl
+	push bc
+	ld hl, $76cb
+	dec b
+	sla b
+	ld c, b
+	ld b, $0
+	add hl, bc
+	pop bc
+	xor a
+	ld [H_NUMTOPRINT], a ; $FF00+$96 (aliases: H_MULTIPLICAND)
+	ld a, [de]
+	ld [$FF00+$97], a
+	inc de
+	ld a, [de]
+	ld [$FF00+$98], a
+	ld a, [hli]
+	ld [H_REMAINDER], a ; $FF00+$99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
+	call Multiply
+	ld a, [hl]
+	ld [H_REMAINDER], a ; $FF00+$99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
+	ld b, $4
+	call Divide
+	pop hl
+	ld a, [$FF00+$98]
+	sub $e7
+	ld a, [$FF00+$97]
+	sbc $3
+	jp c, Func_3f4c3
+	ld a, $3
+	ld [$FF00+$97], a
+	ld a, $e7
+	ld [$FF00+$98], a
+
+; known jump sources: 3f4b8 (f:74b8)
+Func_3f4c3: ; 3f4c3 (f:74c3)
+	ld a, [$FF00+$97]
+	ld [hli], a
+	ld a, [$FF00+$98]
+	ld [hl], a
+	pop hl
+asm_3f4ca: ; 3f4ca (f:74ca)
+	ld b, c
+	inc b
+	call Func_3f688
+	ld hl, W_PLAYERBATTSTATUS2 ; $d063
+	ld de, W_PLAYERMOVENUM ; $cfd2
+	ld bc, $ccf7
+	ld a, [H_WHOSETURN] ; $FF00+$f3
+	and a
+	jr z, .asm_3f4e6
+	ld hl, W_ENEMYBATTSTATUS2 ; $d068
+	ld de, W_ENEMYMOVENUM ; $cfcc
+	ld bc, $ccf3
+.asm_3f4e6
+	ld a, [de]
+	cp $6b
+	jr nz, .asm_3f4f9
+	bit 4, [hl]
+	push af
+	push bc
+	ld hl, $5747
+	ld b, $1e
+	push de
+	call nz, Bankswitch
+	pop de
+.asm_3f4f9
+	call Func_3fba8
+	ld a, [de]
+	cp $6b
+	jr nz, .asm_3f50e
+	pop bc
+	ld a, $1
+	ld [bc], a
+	ld hl, $5771
+	ld b, $1e
+	pop af
+	call nz, Bankswitch
+.asm_3f50e
+	ld a, [H_WHOSETURN] ; $FF00+$f3
+	and a
+	call z, Func_3ee19
+	ld hl, $7528
+	call PrintText
+	call Func_3ed27
+	jp Func_3ed64
+
+; known jump sources: 3f487 (f:7487)
+Func_3f520: ; 3f520 (f:7520)
+	pop hl
+	dec [hl]
+
+; known jump sources: 3f44b (f:744b)
+Func_3f522: ; 3f522 (f:7522)
+	ld hl, $7b3e
+	jp PrintText
+
+INCBIN "baserom.gbc",$3f528,$3f52d - $3f528
+	ld hl, $7542
+	ld a, [H_WHOSETURN] ; $FF00+$f3
+	and a
+	ld a, [W_PLAYERMOVEEFFECT] ; $cfd3
+	jr z, .asm_3f53b
+	ld a, [W_ENEMYMOVEEFFECT] ; $cfcd
+.asm_3f53b
+	cp $12
+	ret nc
+	ld hl, $7547
+	ret
+
+INCBIN "baserom.gbc",$3f542,$3f547 - $3f542
 
 UnnamedText_3f547: ; 0x3f547
 	TX_FAR _UnnamedText_3f547
 	db $50
 ; 0x3f547 + 5 bytes
 
-INCBIN "baserom.gbc",$3f54c,$3f683 - $3f54c
+	ld hl, W_ENEMYMONATTACKMOD ; $cd2e
+	ld de, W_PLAYERMOVEEFFECT ; $cfd3
+	ld bc, W_ENEMYBATTSTATUS1 ; $d067
+	ld a, [H_WHOSETURN] ; $FF00+$f3
+	and a
+	jr z, .asm_3f572
+	ld hl, W_PLAYERMONATTACKMOD ; $cd1a
+	ld de, W_ENEMYMOVEEFFECT ; $cfcd
+	ld bc, W_PLAYERBATTSTATUS1 ; $d062
+	ld a, [W_ISLINKBATTLE] ; $d12b
+	cp $4
+	jr z, .asm_3f572
+	call GenRandomInBattle
+	cp $40
+	jp c, Func_3f65a
+.asm_3f572
+	call CheckTargetSubstitute
+	jp nz, Func_3f65a
+	ld a, [de]
+	cp $44
+	jr c, .asm_3f58a
+	call GenRandomInBattle
+	cp $55
+	jp nc, Func_3f650
+	ld a, [de]
+	sub $44
+	jr .asm_3f5a9
+.asm_3f58a
+	push hl
+	push de
+	push bc
+	call MoveHitTest
+	pop bc
+	pop de
+	pop hl
+	ld a, [W_MOVEMISSED] ; $d05f
+	and a
+	jp nz, Func_3f65a
+	ld a, [bc]
+	bit 6, a
+	jp nz, Func_3f65a
+	ld a, [de]
+	sub $12
+	cp $8
+	jr c, .asm_3f5a9
+	sub $28
+.asm_3f5a9
+	ld c, a
+	ld b, $0
+	add hl, bc
+	ld b, [hl]
+	dec b
+	jp z, Func_3f650
+	ld a, [de]
+	cp $24
+	jr c, .asm_3f5bf
+	cp $44
+	jr nc, .asm_3f5bf
+	dec b
+	jr nz, .asm_3f5bf
+	inc b
+.asm_3f5bf
+	ld [hl], b
+	ld a, c
+	cp $4
+	jr nc, asm_3f62c
+	push hl
+	push de
+	ld hl, $cff7
+	ld de, $cd26
+	ld a, [H_WHOSETURN] ; $FF00+$f3
+	and a
+	jr z, .asm_3f5d8
+	ld hl, $d026
+	ld de, $cd12
+.asm_3f5d8
+	push bc
+	sla c
+	ld b, $0
+	add hl, bc
+	ld a, c
+	add e
+	ld e, a
+	jr nc, .asm_3f5e4
+	inc d
+.asm_3f5e4
+	pop bc
+	ld a, [hld]
+	sub $1
+	jr nz, .asm_3f5ef
+	ld a, [hl]
+	and a
+	jp z, Func_3f64d
+.asm_3f5ef
+	push hl
+	push bc
+	ld hl, $76cb
+	dec b
+	sla b
+	ld c, b
+	ld b, $0
+	add hl, bc
+	pop bc
+	xor a
+	ld [H_NUMTOPRINT], a ; $FF00+$96 (aliases: H_MULTIPLICAND)
+	ld a, [de]
+	ld [$FF00+$97], a
+	inc de
+	ld a, [de]
+	ld [$FF00+$98], a
+	ld a, [hli]
+	ld [H_REMAINDER], a ; $FF00+$99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
+	call Multiply
+	ld a, [hl]
+	ld [H_REMAINDER], a ; $FF00+$99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
+	ld b, $4
+	call Divide
+	pop hl
+	ld a, [$FF00+$98]
+	ld b, a
+	ld a, [$FF00+$97]
+	or b
+	jp nz, Func_3f624
+	ld [$FF00+$97], a
+	ld a, $1
+	ld [$FF00+$98], a
+
+; known jump sources: 3f61b (f:761b)
+Func_3f624: ; 3f624 (f:7624)
+	ld a, [$FF00+$97]
+	ld [hli], a
+	ld a, [$FF00+$98]
+	ld [hl], a
+	pop de
+	pop hl
+asm_3f62c: ; 3f62c (f:762c)
+	ld b, c
+	inc b
+	push de
+	call Func_3f688
+	pop de
+	ld a, [de]
+	cp $44
+	jr nc, .asm_3f63b
+	call Func_3fb89
+.asm_3f63b
+	ld a, [H_WHOSETURN] ; $FF00+$f3
+	and a
+	call nz, Func_3ee19
+	ld hl, $7661
+	call PrintText
+	call Func_3ed27
+	jp Func_3ed64
+
+; known jump sources: 3f5ec (f:75ec)
+Func_3f64d: ; 3f64d (f:764d)
+	pop de
+	pop hl
+	inc [hl]
+
+; known jump sources: 3f582 (f:7582), 3f5af (f:75af)
+Func_3f650: ; 3f650 (f:7650)
+	ld a, [de]
+	cp $44
+	ret nc
+	ld hl, $7b3e
+	jp PrintText
+
+; known jump sources: 3f56f (f:756f), 3f575 (f:7575), 3f597 (f:7597), 3f59d (f:759d)
+Func_3f65a: ; 3f65a (f:765a)
+	ld a, [de]
+	cp $44
+	ret nc
+	jp Func_3fb4e
+
+INCBIN "baserom.gbc",$3f661,$3f666 - $3f661
+	ld hl, $7683
+	ld a, [H_WHOSETURN] ; $FF00+$f3
+	and a
+	ld a, [W_PLAYERMOVEEFFECT] ; $cfd3
+	jr z, .asm_3f674
+	ld a, [W_ENEMYMOVEEFFECT] ; $cfcd
+.asm_3f674
+	cp $1a
+	ret c
+	cp $44
+	ret nc
+	ld hl, $767e
+	ret
+
+INCBIN "baserom.gbc",$3f67e,$3f683 - $3f67e
 
 UnnamedText_3f683: ; 0x3f683
 	TX_FAR _UnnamedText_3f683
 	db $50
 ; 0x3f683 + 5 bytes
 
-INCBIN "baserom.gbc",$3f688,$3f802 - $3f688
+; known jump sources: 3f4cc (f:74cc), 3f62f (f:762f)
+Func_3f688: ; 3f688 (f:7688)
+	ld hl, $769f
+	ld c, $50
+.asm_3f68d
+	dec b
+	jr z, .asm_3f696
+.asm_3f690
+	ld a, [hli]
+	cp c
+	jr z, .asm_3f68d
+	jr .asm_3f690
+.asm_3f696
+	ld de, $cf4b
+	ld bc, $a
+	jp CopyData
 
+INCBIN "baserom.gbc",$3f69f,$3f717 - $3f69f
+	ld hl, W_PLAYERBATTSTATUS1 ; $d062
+	ld de, $d06a
+	ld a, [H_WHOSETURN] ; $FF00+$f3
+	and a
+	jr z, .asm_3f728
+	ld hl, W_ENEMYBATTSTATUS1 ; $d067
+	ld de, $d06f
+.asm_3f728
+	set 1, [hl]
+	call GenRandomInBattle
+	and $1
+	inc a
+	inc a
+	ld [de], a
+	ld a, [H_WHOSETURN] ; $FF00+$f3
+	add $b0
+	jp Func_3fb96
+	ld a, [H_WHOSETURN] ; $FF00+$f3
+	and a
+	jr nz, .asm_3f791
+	ld a, [W_ISINBATTLE] ; $d057
+	dec a
+	jr nz, .asm_3f77e
+	ld a, [W_CURENEMYLVL] ; $d127
+	ld b, a
+	ld a, [W_PLAYERMONLEVEL] ; $d022
+	cp b
+	jr nc, .asm_3f76e
+	add b
+	ld c, a
+	inc c
+.asm_3f751
+	call GenRandomInBattle
+	cp c
+	jr nc, .asm_3f751
+	srl b
+	srl b
+	cp b
+	jr nc, .asm_3f76e
+	ld c, $32
+	call DelayFrames
+	ld a, [W_PLAYERMOVENUM] ; $cfd2
+	cp $64
+	jp nz, Func_3fb5e
+	jp Func_3fb53
+.asm_3f76e
+	call Func_3cd43
+	xor a
+	ld [$cc5b], a
+	inc a
+	ld [$d078], a
+	ld a, [W_PLAYERMOVENUM] ; $cfd2
+	jr .asm_3f7e4
+.asm_3f77e
+	ld c, $32
+	call DelayFrames
+	ld hl, $7b69
+	ld a, [W_PLAYERMOVENUM] ; $cfd2
+	cp $64
+	jp nz, PrintText
+	jp Func_3fb53
+.asm_3f791
+	ld a, [W_ISINBATTLE] ; $d057
+	dec a
+	jr nz, .asm_3f7d1
+	ld a, [W_PLAYERMONLEVEL] ; $d022
+	ld b, a
+	ld a, [W_CURENEMYLVL] ; $d127
+	cp b
+	jr nc, .asm_3f7c1
+	add b
+	ld c, a
+	inc c
+.asm_3f7a4
+	call GenRandomInBattle
+	cp c
+	jr nc, .asm_3f7a4
+	srl b
+	srl b
+	cp b
+	jr nc, .asm_3f7c1
+	ld c, $32
+	call DelayFrames
+	ld a, [W_ENEMYMOVENUM] ; $cfcc
+	cp $64
+	jp nz, Func_3fb5e
+	jp Func_3fb53
+.asm_3f7c1
+	call Func_3cd43
+	xor a
+	ld [$cc5b], a
+	inc a
+	ld [$d078], a
+	ld a, [W_ENEMYMOVENUM] ; $cfcc
+	jr .asm_3f7e4
+.asm_3f7d1
+	ld c, $32
+	call DelayFrames
+	ld hl, $7b69
+	ld a, [W_ENEMYMOVENUM] ; $cfcc
+	cp $64
+	jp nz, PrintText
+	jp Func_3fb4e
+.asm_3f7e4
+	push af
+	call Func_3fbb9
+	ld c, $14
+	call DelayFrames
+	pop af
+	ld hl, $7802
+	cp $64
+	jr z, .asm_3f7ff
+	ld hl, $7807
+	cp $2e
+	jr z, .asm_3f7ff
+	ld hl, $780c
+.asm_3f7ff
+	jp PrintText
+; 3f802 (f:7802)
 UnnamedText_3f802: ; 0x3f802
 	TX_FAR _UnnamedText_3f802
 	db $50
@@ -43263,8 +63532,128 @@ UnnamedText_3f80c: ; 0x3f80c
 	db $50
 ; 0x3f80c + 5 bytes
 
-INCBIN "baserom.gbc",$3f811,$3f8f9 - $3f811
+	ld hl, W_PLAYERBATTSTATUS1 ; $d062
+	ld de, $d06a
+	ld bc, W_NUMHITS ; $d074
+	ld a, [H_WHOSETURN] ; $FF00+$f3
+	and a
+	jr z, .asm_3f828
+	ld hl, W_ENEMYBATTSTATUS1 ; $d067
+	ld de, $d06f
+	ld bc, $cd05
+.asm_3f828
+	bit 2, [hl]
+	ret nz
+	set 2, [hl]
+	ld hl, W_PLAYERMOVEEFFECT ; $cfd3
+	ld a, [H_WHOSETURN] ; $FF00+$f3
+	and a
+	jr z, .asm_3f838
+	ld hl, W_ENEMYMOVEEFFECT ; $cfcd
+.asm_3f838
+	ld a, [hl]
+	cp $4d
+	jr z, .asm_3f856
+	cp $2c
+	ld a, $2
+	jr z, .asm_3f853
+	call GenRandomInBattle
+	and $3
+	cp $2
+	jr c, .asm_3f851
+	call GenRandomInBattle
+	and $3
+.asm_3f851
+	inc a
+	inc a
+.asm_3f853
+	ld [de], a
+	ld [bc], a
+	ret
+.asm_3f856
+	ld a, $2
+	ld [hl], a
+	jr .asm_3f853
+	call CheckTargetSubstitute
+	ret nz
+	ld hl, W_ENEMYBATTSTATUS1 ; $d067
+	ld de, W_PLAYERMOVEEFFECT ; $cfd3
+	ld a, [H_WHOSETURN] ; $FF00+$f3
+	and a
+	jr z, .asm_3f870
+	ld hl, W_PLAYERBATTSTATUS1 ; $d062
+	ld de, W_ENEMYMOVEEFFECT ; $cfcd
+.asm_3f870
+	ld a, [de]
+	cp $1f
+	ld b, $1a
+	jr z, .asm_3f879
+	ld b, $4d
+.asm_3f879
+	call GenRandomInBattle
+	cp b
+	ret nc
+	set 3, [hl]
+	call Func_3f9cf
+	ret
+	ld hl, Func_33f57
+	ld b, BANK(Func_33f57)
+	jp Bankswitch ; indirect jump to Func_33f57 (33f57 (c:7f57))
+	ld hl, W_PLAYERBATTSTATUS1 ; $d062
+	ld de, W_PLAYERMOVEEFFECT ; $cfd3
+	ld a, [H_WHOSETURN] ; $FF00+$f3
+	and a
+	ld b, $ae
+	jr z, .asm_3f8a1
+	ld hl, W_ENEMYBATTSTATUS1 ; $d067
+	ld de, W_ENEMYMOVEEFFECT ; $cfcd
+	ld b, $af
+.asm_3f8a1
+	set 4, [hl]
+	ld a, [de]
+	dec de
+	cp $2b
+	jr nz, .asm_3f8ad
+	set 6, [hl]
+	ld b, $64
+.asm_3f8ad
+	ld a, [de]
+	cp $5b
+	jr nz, .asm_3f8b6
+	set 6, [hl]
+	ld b, $c0
+.asm_3f8b6
+	xor a
+	ld [$cc5b], a
+	ld a, b
+	call Func_3fbb9
+	ld a, [de]
+	ld [W_WHICHTRADE], a ; $cd3d
+	ld hl, $78c8
+	jp PrintText
 
+INCBIN "baserom.gbc",$3f8c8,$3f8cd - $3f8c8
+	ld a, [W_WHICHTRADE] ; $cd3d
+	cp $d
+	ld hl, $78f9
+	jr z, .asm_3f8f8
+	cp $4c
+	ld hl, $78fe
+	jr z, .asm_3f8f8
+	cp $82
+	ld hl, $7903
+	jr z, .asm_3f8f8
+	cp $8f
+	ld hl, $7908
+	jr z, .asm_3f8f8
+	cp $13
+	ld hl, $790d
+	jr z, .asm_3f8f8
+	cp $5b
+	ld hl, $7912
+.asm_3f8f8
+	ret
+; 3f8f9 (f:78f9)
 UnnamedText_3f8f9: ; 0x3f8f9
 	TX_FAR _UnnamedText_3f8f9
 	db $50
@@ -43295,29 +63684,217 @@ UnnamedText_3f912: ; 0x3f912
 	db $50
 ; 0x3f912 + 5 bytes
 
-INCBIN "baserom.gbc",$3f917,$3f9a1 - $3f917
+	ld hl, W_PLAYERBATTSTATUS1 ; $d062
+	ld de, $d06a
+	ld a, [H_WHOSETURN] ; $FF00+$f3
+	and a
+	jr z, .asm_3f928
+	ld hl, W_ENEMYBATTSTATUS1 ; $d067
+	ld de, $d06f
+.asm_3f928
+	bit 5, [hl]
+	ret nz
+	call Func_3f9cf
+	set 5, [hl]
+	call GenRandomInBattle
+	and $3
+	cp $2
+	jr c, .asm_3f93e
+	call GenRandomInBattle
+	and $3
+.asm_3f93e
+	inc a
+	ld [de], a
+	ret
 
+INCBIN "baserom.gbc",$3f941,$3f949 - $3f941
+	ld hl, Func_27f86
+	ld b, BANK(Func_27f86)
+	jp Bankswitch ; indirect jump to Func_27f86 (27f86 (9:7f86))
+	ld hl, Func_1392c
+	ld b, BANK(Func_1392c)
+	jp Bankswitch ; indirect jump to Func_1392c (1392c (4:792c))
+	call GenRandomInBattle
+	cp $19
+	ret nc
+	jr .asm_3f96f
+	call CheckTargetSubstitute
+	jr nz, asm_3f9a6
+	call MoveHitTest
+	ld a, [W_MOVEMISSED] ; $d05f
+	and a
+	jr nz, asm_3f9a6
+.asm_3f96f
+	ld a, [H_WHOSETURN] ; $FF00+$f3
+	and a
+	ld hl, W_ENEMYBATTSTATUS1 ; $d067
+	ld bc, $d070
+	ld a, [W_PLAYERMOVEEFFECT] ; $cfd3
+	jr z, .asm_3f986
+	ld hl, W_PLAYERBATTSTATUS1 ; $d062
+	ld bc, $d06b
+	ld a, [W_ENEMYMOVEEFFECT] ; $cfcd
+.asm_3f986
+	bit 7, [hl]
+	jr nz, asm_3f9a6
+	set 7, [hl]
+	push af
+	call GenRandomInBattle
+	and $3
+	inc a
+	inc a
+	ld [bc], a
+	pop af
+	cp $4c
+	call nz, Func_3fb89
+	ld hl, $79a1
+	jp PrintText
+; 3f9a1 (f:79a1)
 UnnamedText_3f9a1: ; 0x3f9a1
 	TX_FAR _UnnamedText_3f9a1
 	db $50
 ; 0x3f9a1 + 5 bytes
 
-INCBIN "baserom.gbc",$3f9a6,$3fa77 - $3f9a6
+asm_3f9a6: ; 3f9a6 (f:79a6)
+	cp $4c
+	ret z
+	ld c, $32
+	call DelayFrames
+	jp Func_3fb4e
+	ld hl, Func_52601
+	ld b, BANK(Func_52601)
+	jp Bankswitch ; indirect jump to Func_52601 (52601 (14:6601))
+
+INCBIN "baserom.gbc",$3f9b9,$3f9c1 - $3f9b9
+	ld hl, W_PLAYERBATTSTATUS2 ; $d063
+	ld a, [H_WHOSETURN] ; $FF00+$f3
+	and a
+	jr z, .asm_3f9cc
+	ld hl, W_ENEMYBATTSTATUS2 ; $d068
+.asm_3f9cc
+	set 5, [hl]
+	ret
+
+; known jump sources: 3f36f (f:736f), 3f880 (f:7880), 3f92b (f:792b)
+Func_3f9cf: ; 3f9cf (f:79cf)
+	push hl
+	ld hl, W_ENEMYBATTSTATUS2 ; $d068
+	ld a, [H_WHOSETURN] ; $FF00+$f3
+	and a
+	jr z, .asm_3f9db
+	ld hl, W_PLAYERBATTSTATUS2 ; $d063
+.asm_3f9db
+	res 5, [hl]
+	pop hl
+	ret
+
+INCBIN "baserom.gbc",$3f9df,$3fa77 - $3f9df
 
 UnnamedText_3fa77: ; 0x3fa77
 	TX_FAR _UnnamedText_3fa77
 	db $50
 ; 0x3fa77 + 5 bytes
 
-INCBIN "baserom.gbc",$3fa7c,$3fb09 - $3fa7c
+	ld hl, Func_2bea9
+	ld b, BANK(Func_2bea9)
+	jp Bankswitch ; indirect jump to Func_2bea9 (2bea9 (a:7ea9))
 
+INCBIN "baserom.gbc",$3fa84,$3fa8a - $3fa84
+	call MoveHitTest
+	ld a, [W_MOVEMISSED] ; $d05f
+	and a
+	jr nz, .asm_3fb06
+	ld de, W_ENEMYDISABLEDMOVE ; $d072
+	ld hl, $cfed
+	ld a, [H_WHOSETURN] ; $FF00+$f3
+	and a
+	jr z, .asm_3faa4
+	ld de, W_PLAYERDISABLEDMOVE ; $d06d
+	ld hl, $d01c
+.asm_3faa4
+	ld a, [de]
+	and a
+	jr nz, .asm_3fb06
+.asm_3faa8
+	push hl
+	call GenRandomInBattle
+	and $3
+	ld c, a
+	ld b, $0
+	add hl, bc
+	ld a, [hl]
+	pop hl
+	and a
+	jr z, .asm_3faa8
+	ld [$d11e], a
+	push hl
+	ld a, [H_WHOSETURN] ; $FF00+$f3
+	and a
+	ld hl, W_PLAYERMONPP ; $d02d
+	jr nz, .asm_3facf
+	ld a, [W_ISLINKBATTLE] ; $d12b
+	cp $4
+	pop hl
+	jr nz, .asm_3fae1
+	push hl
+	ld hl, W_ENEMYMONPP ; $cffe
+.asm_3facf
+	push hl
+	ld a, [hli]
+	or [hl]
+	inc hl
+	or [hl]
+	inc hl
+	or [hl]
+	and $3f
+	pop hl
+	jr z, .asm_3fb05
+	add hl, bc
+	ld a, [hl]
+	pop hl
+	and a
+	jr z, .asm_3faa8
+.asm_3fae1
+	call GenRandomInBattle
+	and $7
+	inc a
+	inc c
+	swap c
+	add c
+	ld [de], a
+	call Func_3fb89
+	ld hl, $ccee
+	ld a, [H_WHOSETURN] ; $FF00+$f3
+	and a
+	jr nz, .asm_3faf8
+	inc hl
+.asm_3faf8
+	ld a, [$d11e]
+	ld [hl], a
+	call GetMoveName
+	ld hl, $7b09
+	jp PrintText
+.asm_3fb05
+	pop hl
+.asm_3fb06
+	jp Func_3fb53
+; 3fb09 (f:7b09)
 UnnamedText_3fb09: ; 0x3fb09
 	TX_FAR _UnnamedText_3fb09
 	db $50
 ; 0x3fb09 + 5 bytes
 
-INCBIN "baserom.gbc",$3fb0e,$3fb3e - $3fb0e
-
+INCBIN "baserom.gbc",$3fb0e,$3fb26 - $3fb0e
+	ld hl, Func_3b9ec
+	ld b, BANK(Func_3b9ec)
+	jp Bankswitch ; indirect jump to Func_3b9ec (3b9ec (e:79ec))
+	ld hl, Func_3bab1
+	ld b, BANK(Func_3bab1)
+	jp Bankswitch ; indirect jump to Func_3bab1 (3bab1 (e:7ab1))
+	ld hl, Func_3bb97
+	ld b, BANK(Func_3bb97)
+	jp Bankswitch ; indirect jump to Func_3bb97 (3bb97 (e:7b97))
+; 3fb3e (f:7b3e)
 UnnamedText_3fb3e: ; 0x3fb3e
 	TX_FAR _UnnamedText_3fb3e
 	db $50
@@ -43330,15 +63907,27 @@ UnnamedText_3fb49: ; 0x3fb49
 	db $50
 ; 0x3fb49 + 5 bytes
 
-INCBIN "baserom.gbc",$3fb4e,$3fb59 - $3fb4e
+; known jump sources: 3f65e (f:765e), 3f7e1 (f:77e1), 3f9ae (f:79ae)
+Func_3fb4e: ; 3fb4e (f:7b4e)
+	ld a, [$ccf4]
+	and a
+	ret nz
 
+; known jump sources: 27faf (9:7faf), 3bbe3 (e:7be3), 3f76b (f:776b), 3f78e (f:778e), 3f7be (f:77be), 3fb06 (f:7b06)
+Func_3fb53: ; 3fb53 (f:7b53)
+	ld hl, $7b59
+	jp PrintText
+; 3fb59 (f:7b59)
 UnnamedText_3fb59: ; 0x3fb59
 	TX_FAR _UnnamedText_3fb59
 	db $50
 ; 0x3fb59 + 5 bytes
 
-INCBIN "baserom.gbc",$3fb5e,$3fb64 - $3fb5e
-
+; known jump sources: 3f242 (f:7242), 3f2dc (f:72dc), 3f768 (f:7768), 3f7bb (f:77bb), 52663 (14:6663)
+Func_3fb5e: ; 3fb5e (f:7b5e)
+	ld hl, $7b64
+	jp PrintText
+; 3fb64 (f:7b64)
 UnnamedText_3fb64: ; 0x3fb64
 	TX_FAR _UnnamedText_3fb64
 	db $50
@@ -43349,8 +63938,11 @@ UnnamedText_3fb69: ; 0x3fb69
 	db $50
 ; 0x3fb69 + 5 bytes
 
-INCBIN "baserom.gbc",$3fb6e,$3fb74 - $3fb6e
-
+; known jump sources: 3f359 (f:7359), 3f3bc (f:73bc), 52656 (14:6656)
+Func_3fb6e: ; 3fb6e (f:7b6e)
+	ld hl, $7b74
+	jp PrintText
+; 3fb74 (f:7b74)
 UnnamedText_3fb74: ; 0x3fb74
 	TX_FAR _UnnamedText_3fb74
 	db $50
@@ -43368,8 +63960,58 @@ CheckTargetSubstitute:  ;0x3fb79
 	pop hl
 	ret
 
-INCBIN "baserom.gbc",$3fb89,$3fbc8 - $3fb89
+; known jump sources: 3f239 (f:7239), 3f2cd (f:72cd), 3f638 (f:7638), 3f998 (f:7998), 3faec (f:7aec)
+Func_3fb89: ; 3fb89 (f:7b89)
+	ld a, [H_WHOSETURN] ; $FF00+$f3
+	and a
+	ld a, [W_PLAYERMOVENUM] ; $cfd2
+	jr z, .asm_3fb94
+	ld a, [W_ENEMYMOVENUM] ; $cfcc
+.asm_3fb94
+	and a
+	ret z
 
+; known jump sources: 3f2c7 (f:72c7), 3f736 (f:7736)
+Func_3fb96: ; 3fb96 (f:7b96)
+	ld [W_ANIMATIONID], a ; $d07c
+	ld a, [H_WHOSETURN] ; $FF00+$f3
+	and a
+	ld a, $6
+	jr z, .asm_3fba2
+	ld a, $3
+.asm_3fba2
+	ld [$cc5b], a
+	jp Func_3fbbc
+
+; known jump sources: 27f9c (9:7f9c), 2bede (a:7ede), 3f4f9 (f:74f9), 5264e (14:664e)
+Func_3fba8: ; 3fba8 (f:7ba8)
+	xor a
+	ld [$cc5b], a
+	ld a, [H_WHOSETURN] ; $FF00+$f3
+	and a
+	ld a, [W_PLAYERMOVENUM] ; $cfd2
+	jr z, .asm_3fbb7
+	ld a, [W_ENEMYMOVENUM] ; $cfcc
+.asm_3fbb7
+	and a
+	ret z
+
+; known jump sources: 3f356 (f:7356), 3f366 (f:7366), 3f379 (f:7379), 3f7e5 (f:77e5), 3f8bb (f:78bb)
+Func_3fbb9: ; 3fbb9 (f:7bb9)
+	ld [W_ANIMATIONID], a ; $d07c
+
+; known jump sources: 3fba5 (f:7ba5)
+Func_3fbbc: ; 3fbbc (f:7bbc)
+	push hl
+	push de
+	push bc
+	ld a, $8
+	call Predef ; indirect jump to MoveAnimation (78d5e (1e:4d5e))
+	pop bc
+	pop de
+	pop hl
+	ret
+; 3fbc8 (f:7bc8)
 SECTION "bank10",DATA,BANK[$10]
 
 DisplayPokedexMenu_: ; 4000
@@ -45501,15 +66143,640 @@ PokedexOrder: ; 5024
 	db DEX_WEEPINBELL
 	db DEX_VICTREEBEL
 
-INCBIN "baserom.gbc",$410e2,$4160c - $410e2
+; known jump sources: 71c5c (1c:5c5c)
+Func_410e2: ; 410e2 (10:50e2)
+	ld a, [W_WHICHTRADE] ; $cd3d
+	ld [$cd5e], a
+	ld a, [$cd3e]
+	ld [$cd5f], a
+	ld de, $5138
+	jr .asm_41102
 
+INCBIN "baserom.gbc",$410f3,$41102 - $410f3
+.asm_41102
+	ld a, [W_OPTIONS] ; $d355
+	push af
+	ld a, [$FF00+$af]
+	push af
+	ld a, [$FF00+$ae]
+	push af
+	xor a
+	ld [W_OPTIONS], a ; $d355
+	ld [$FF00+$af], a
+	ld [$FF00+$ae], a
+	push de
+	pop de
+	ld a, [de]
+	cp $ff
+	jr z, .asm_4112d
+	inc de
+	push de
+	ld hl, $515f
+	add a
+	ld c, a
+	ld b, $0
+	add hl, bc
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	ld de, $5115
+	push de
+	jp [hl]
+.asm_4112d
+	pop af
+	ld [$FF00+$ae], a
+	pop af
+	ld [$FF00+$af], a
+	pop af
+	ld [W_OPTIONS], a ; $d355
+	ret
+
+INCBIN "baserom.gbc",$41138,$41181 - $41138
+
+; known jump sources: 41367 (10:5367)
+Func_41181: ; 41181 (10:5181)
+	ld c, $64
+	jp DelayFrames
+
+; known jump sources: 412be (10:52be), 4134b (10:534b), 41398 (10:5398), 413e3 (10:53e3)
+Func_41186: ; 41186 (10:5186)
+	ld a, $1
+	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	call Delay3
+	xor a
+	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ret
+
+; known jump sources: 41281 (10:5281), 41617 (10:5617), 41620 (10:5620), 41633 (10:5633), 4163c (10:563c), 41652 (10:5652)
+Func_41191: ; 41191 (10:5191)
+	ld c, $50
+	jp DelayFrames
+
+; known jump sources: 411a1 (10:51a1), 41298 (10:5298), 4142d (10:542d), 4145c (10:545c), 4149f (10:549f), 415f1 (10:55f1)
+Func_41196: ; 41196 (10:5196)
+	ld hl, $c3a0
+	ld bc, $168
+	ld a, $7f
+	jp FillMemory
+	call Func_41196
+	call DisableLCD
+	ld hl, $69be
+	ld de, $9310
+	ld bc, $310
+	ld a, $e
+	call FarCopyData2
+	ld hl, $6cce
+	ld de, $87c0
+	ld bc, $40
+	ld a, $e
+	call FarCopyData2
+	ld hl, $9800
+	ld bc, $800
+	ld a, $7f
+	call FillMemory
+	call CleanLCD_OAM
+	ld a, $ff
+	ld [$cfcb], a
+	ld hl, $d730
+	set 6, [hl]
+	ld a, [$cf1b]
+	and a
+	ld a, $e4
+	jr z, .asm_411e5
+	ld a, $f0
+.asm_411e5
+	ld [rOBP0], a ; $FF00+$48
+	call EnableLCD
+	xor a
+	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld a, [W_WHICHTRADE] ; $cd3d
+	ld [$d11e], a
+	call GetMonName
+	ld hl, $cd6d
+	ld de, $cf4b
+	ld bc, $b
+	call CopyData
+	ld a, [$cd3e]
+	ld [$d11e], a
+	jp GetMonName
+
+; known jump sources: 4141b (10:541b)
+Func_4120b: ; 4120b (10:520b)
+	ld a, $d0
+	ld [rOBP1], a ; $FF00+$49
+	ld b, BANK(Func_7176c)
+	ld hl, Func_7176c
+	jp Bankswitch ; indirect jump to Func_7176c (7176c (1c:576c))
+
+INCBIN "baserom.gbc",$41217,$4123b - $41217
+	xor a
+	call LoadGBPal
+	ld hl, $d730
+	res 6, [hl]
+	ret
+	ld a, $ab
+	ld [rLCDC], a ; $FF00+$40
+	ld a, $50
+	ld [$FF00+$b0], a
+	ld a, $86
+	ld [rWX], a ; $FF00+$4b
+	ld [$FF00+$ae], a
+	xor a
+	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld hl, $c3a4
+	ld b, $6
+	ld c, $a
+	call TextBoxBorder
+	call Func_42769
+	ld b, $98
+	call Func_18d6
+	call ClearScreen
+	ld a, [W_WHICHTRADE] ; $cd3d
+	call Func_415a4
+	ld a, $7e
+.asm_41273
+	push af
+	call DelayFrame
+	pop af
+	ld [rWX], a ; $FF00+$4b
+	ld [$FF00+$ae], a
+	dec a
+	dec a
+	and a
+	jr nz, .asm_41273
+	call Func_41191
+	ld a, $ad
+	call Func_41676
+	ld a, $aa
+	call Func_41676
+	ld a, [W_WHICHTRADE] ; $cd3d
+	call PlayCry
+	xor a
+	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ret
+	call Func_41196
+	ld b, $98
+	call Func_18d6
+	ld b, $8
+	call GoPAL_SET
+	ld hl, $9c8c
+	call Func_414ae
+	ld a, $a0
+	ld [$FF00+$ae], a
+	call DelayFrame
+	ld a, $8b
+	ld [rLCDC], a ; $FF00+$40
+	ld hl, $c3ce
+	ld b, $7
+	call Func_41842
+	call Func_41186
+	ld a, $8d
+	call Func_23b1
+	ld c, $14
+.asm_412c8
+	ld a, [$FF00+$ae]
+	add $4
+	ld [$FF00+$ae], a
+	dec c
+	jr nz, .asm_412c8
+	ret
+	ld a, $ab
+	call Func_41676
+	ld c, $a
+	call DelayFrames
+	ld a, $e4
+	ld [rOBP0], a ; $FF00+$48
+	xor a
+	ld [$d09f], a
+	ld bc, $2060
+.asm_412e7
+	push bc
+	xor a
+	ld de, $532e
+	call WriteOAMBlock
+	ld a, [$d09f]
+	xor $1
+	ld [$d09f], a
+	add $7e
+	ld hl, $c302
+	ld de, $4
+	ld c, e
+.asm_41300
+	ld [hl], a
+	add hl, de
+	dec c
+	jr nz, .asm_41300
+	call Delay3
+	pop bc
+	ld a, c
+	add $4
+	ld c, a
+	cp $a0
+	jr nc, .asm_41318
+	ld a, $8c
+	call Func_23b1
+	jr .asm_412e7
+.asm_41318
+	call CleanLCD_OAM
+	ld a, $1
+	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	call ClearScreen
+	ld b, $98
+	call Func_18d6
+	call Delay3
+	xor a
+	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ret
+
+INCBIN "baserom.gbc",$4132e,$41336 - $4132e
+	ld a, $ac
+	call Func_41676
+	call Func_415c8
+	ld hl, $c46c
+	ld b, $6
+	ld c, $a
+	call TextBoxBorder
+	call Func_427a7
+	call Func_41186
+	ld a, $1
+	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld a, [$cd3e]
+	call Func_415a4
+	ld a, $ad
+	call Func_41676
+	ld a, $1
+	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld a, [$cd3e]
+	call PlayCry
+	call Func_41181
+	ld hl, $c46c
+	ld bc, $80c
+	call ClearScreenArea
+	jp Func_4164c
+	call Func_41411
+	ld a, $1
+	ld [$d08a], a
+	ld a, $e4
+	ld [rOBP0], a ; $FF00+$48
+	ld a, $54
+	ld [W_BASECOORDX], a ; $d081
+	ld a, $1c
+	ld [W_BASECOORDY], a ; $d082
+	ld a, [$cd5e]
+	ld [$cd5d], a
+	call Func_41505
+	call Func_4142d
+	call Func_41186
+	call Func_4149f
+	ld hl, $9c8c
+	call Func_414ae
+	ld b, $6
+	call Func_414c5
+	ld a, $1
+	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	call Func_4149f
+	ld b, $4
+	call Func_414c5
+	call Func_4145c
+	ld b, $6
+	call Func_414c5
+	xor a
+	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	call Func_41525
+	jp CleanLCD_OAM
+	call Func_41411
+	xor a
+	ld [$d08a], a
+	ld a, $64
+	ld [W_BASECOORDX], a ; $d081
+	ld a, $44
+	ld [W_BASECOORDY], a ; $d082
+	ld a, [$cd5f]
+	ld [$cd5d], a
+	call Func_41505
+	call Func_4145c
+	call Func_41186
+	call Func_4149f
+	ld hl, $9c94
+	call Func_414ae
+	call Func_41525
+	ld b, $6
+	call Func_414c5
+	ld a, $1
+	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	call Func_4149f
+	ld b, $4
+	call Func_414c5
+	call Func_4142d
+	ld b, $6
+	call Func_414c5
+	xor a
+	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	jp CleanLCD_OAM
+
+; known jump sources: 41376 (10:5376), 413c6 (10:53c6)
+Func_41411: ; 41411 (10:5411)
+	ld a, $1
+	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	call ClearScreen
+	xor a
+	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	call Func_4120b
+	call DelayFrame
+	ld a, $ab
+	ld [rLCDC], a ; $FF00+$40
+	xor a
+	ld [$FF00+$ae], a
+	ld a, $90
+	ld [$FF00+$b0], a
+	ret
+
+; known jump sources: 41395 (10:5395), 41403 (10:5403)
+Func_4142d: ; 4142d (10:542d)
+	call Func_41196
+	ld hl, $c3fb
+	ld a, $5d
+	ld [hli], a
+	ld a, $5e
+	ld c, $8
+.asm_4143a
+	ld [hli], a
+	dec c
+	jr nz, .asm_4143a
+	ld hl, $c3e1
+	ld b, $6
+	call Func_41842
+	ld hl, $c494
+	ld b, $2
+	ld c, $7
+	call TextBoxBorder
+	ld hl, $c4bd
+	ld de, W_PLAYERNAME ; $d158
+	call PlaceString
+	jp DelayFrame
+
+; known jump sources: 413b5 (10:53b5), 413e0 (10:53e0)
+Func_4145c: ; 4145c (10:545c)
+	call Func_41196
+	ld hl, $c3f0
+	ld a, $5e
+	ld c, $e
+.asm_41466
+	ld [hli], a
+	dec c
+	jr nz, .asm_41466
+	ld a, $5f
+	ld [hl], a
+	ld de, $14
+	add hl, de
+	ld a, $61
+	ld [hl], a
+	add hl, de
+	ld [hl], a
+	add hl, de
+	ld [hl], a
+	add hl, de
+	ld [hl], a
+	add hl, de
+	ld a, $60
+	ld [hld], a
+	ld a, $5d
+	ld [hl], a
+	ld hl, $c447
+	ld b, $6
+	call Func_41842
+	ld hl, $c3a6
+	ld b, $2
+	ld c, $7
+	call TextBoxBorder
+	ld hl, $c3cf
+	ld de, W_GRASSRATE ; $d887
+	call PlaceString
+	jp DelayFrame
+
+; known jump sources: 4139b (10:539b), 413ad (10:53ad), 413e6 (10:53e6), 413fb (10:53fb)
+Func_4149f: ; 4149f (10:549f)
+	call Func_41196
+	ld hl, $c3f0
+	ld a, $5e
+	ld c, $14
+.asm_414a9
+	ld [hli], a
+	dec c
+	jr nz, .asm_414a9
+	ret
+
+; known jump sources: 412a8 (10:52a8), 413a1 (10:53a1), 413ec (10:53ec)
+Func_414ae: ; 414ae (10:54ae)
+	push hl
+	ld hl, $c3f0
+	call ScheduleRowRedrawHelper
+	pop hl
+	ld a, h
+	ld [$FF00+$d2], a
+	ld a, l
+	ld [H_SCREENEDGEREDRAWADDR], a ; $FF00+$d1
+	ld a, $2
+	ld [H_SCREENEDGEREDRAW], a ; $FF00+$d0
+	ld c, $a
+	jp DelayFrames
+
+; known jump sources: 413a6 (10:53a6), 413b2 (10:53b2), 413ba (10:53ba), 413f4 (10:53f4), 41400 (10:5400), 41408 (10:5408), 414e5 (10:54e5)
+Func_414c5: ; 414c5 (10:54c5)
+	ld a, [$d08a]
+	ld e, a
+	ld d, $8
+.asm_414cb
+	ld a, e
+	dec a
+	jr z, .asm_414d5
+	ld a, [$FF00+$ae]
+	sub $2
+	jr .asm_414d9
+.asm_414d5
+	ld a, [$FF00+$ae]
+	add $2
+.asm_414d9
+	ld [$FF00+$ae], a
+	call DelayFrame
+	dec d
+	jr nz, .asm_414cb
+	call Func_414e8
+	dec b
+	jr nz, Func_414c5
+	ret
+
+; known jump sources: 414e1 (10:54e1), 4154c (10:554c)
+Func_414e8: ; 414e8 (10:54e8)
+	push de
+	push bc
+	push hl
+	ld a, [rBGP] ; $FF00+$47
+	xor $3c
+	ld [rBGP], a ; $FF00+$47
+	ld hl, $c302
+	ld de, $4
+	ld c, $14
+.asm_414f9
+	ld a, [hl]
+	xor $40
+	ld [hl], a
+	add hl, de
+	dec c
+	jr nz, .asm_414f9
+	pop hl
+	pop bc
+	pop de
+	ret
+
+; known jump sources: 41392 (10:5392), 413dd (10:53dd)
+Func_41505: ; 41505 (10:5505)
+	ld b, BANK(Func_71882)
+	ld hl, Func_71882
+	call Bankswitch ; indirect jump to Func_71882 (71882 (1c:5882))
+	call Func_41558
+
+; known jump sources: 41549 (10:5549)
+Func_41510: ; 41510 (10:5510)
+	ld hl, $c300
+	ld c, $14
+.asm_41515
+	ld a, [W_BASECOORDY] ; $d082
+	add [hl]
+	ld [hli], a
+	ld a, [W_BASECOORDX] ; $d081
+	add [hl]
+	ld [hli], a
+	inc hl
+	inc hl
+	dec c
+	jr nz, .asm_41515
+	ret
+
+; known jump sources: 413c0 (10:53c0), 413ef (10:53ef)
+Func_41525: ; 41525 (10:5525)
+	ld a, [$d08a]
+	and a
+	jr z, .asm_41536
+	ld bc, $400
+	call .asm_4153f
+	ld bc, $a
+	jr .asm_4153f
+.asm_41536
+	ld bc, $f6
+	call .asm_4153f
+	ld bc, $fc00
+.asm_4153f
+	ld a, b
+	ld [W_BASECOORDX], a ; $d081
+	ld a, c
+	ld [W_BASECOORDY], a ; $d082
+	ld d, $4
+.asm_41549
+	call Func_41510
+	call Func_414e8
+	ld c, $8
+	call DelayFrames
+	dec d
+	jr nz, .asm_41549
+	ret
+
+; known jump sources: 4150d (10:550d)
+Func_41558: ; 41558 (10:5558)
+	ld hl, $5574
+	ld c, $4
+	xor a
+.asm_4155e
+	push bc
+	ld e, [hl]
+	inc hl
+	ld d, [hl]
+	inc hl
+	ld c, [hl]
+	inc hl
+	ld b, [hl]
+	inc hl
+	push hl
+	inc a
+	push af
+	call WriteOAMBlock
+	pop af
+	pop hl
+	pop bc
+	dec c
+	jr nz, .asm_4155e
+	ret
+
+INCBIN "baserom.gbc",$41574,$415a4 - $41574
+
+; known jump sources: 4126e (10:526e), 41355 (10:5355)
+Func_415a4: ; 415a4 (10:55a4)
+	ld [$cf91], a
+	ld [$d0b5], a
+	ld [$cf1d], a
+	ld b, $b
+	ld c, $0
+	call GoPAL_SET
+	ld a, [H_AUTOBGTRANSFERENABLED] ; $FF00+$ba
+	xor $1
+	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	call GetBaseStats
+	ld hl, $c3cf
+	call Func_1384
+	ld c, $a
+	jp DelayFrames
+
+; known jump sources: 4133b (10:533b)
+Func_415c8: ; 415c8 (10:55c8)
+	ld a, $1
+	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	call ClearScreen
+	ld a, $e3
+	ld [rLCDC], a ; $FF00+$40
+	ld a, $7
+	ld [rWX], a ; $FF00+$4b
+	xor a
+	ld [$FF00+$b0], a
+	ld a, $90
+	ld [$FF00+$ae], a
+	ret
+
+; known jump sources: 41609 (10:5609), 4163f (10:563f)
+Func_415df: ; 415df (10:55df)
+	ld c, $32
+	call DelayFrames
+.asm_415e4
+	call DelayFrame
+	ld a, [rWX] ; $FF00+$4b
+	inc a
+	inc a
+	ld [rWX], a ; $FF00+$4b
+	cp $a1
+	jr nz, .asm_415e4
+	call Func_41196
+	ld c, $a
+	call DelayFrames
+	ld a, $7
+	ld [rWX], a ; $FF00+$4b
+	ret
+	ld hl, $560c
+	call PrintText
+	ld c, $c8
+	call DelayFrames
+	jp Func_415df
+; 4160c (10:560c)
 UnnamedText_4160c: ; 0x4160c
 	TX_FAR _UnnamedText_4160c
 	db $50
 ; 0x4160c + 5 bytes
 
-INCBIN "baserom.gbc",$41611,$41623 - $41611
-
+	ld hl, $5623
+	call PrintText
+	call Func_41191
+	ld hl, $5628
+	call PrintText
+	jp Func_41191
+; 41623 (10:5623)
 UnnamedText_41623: ; 0x41623
 	TX_FAR _UnnamedText_41623
 	db $50
@@ -45520,8 +66787,14 @@ UnnamedText_41628: ; 0x41628
 	db $50
 ; 0x41628 + 5 bytes
 
-INCBIN "baserom.gbc",$4162d,$41642 - $4162d
-
+	ld hl, $5642
+	call PrintText
+	call Func_41191
+	ld hl, $5647
+	call PrintText
+	call Func_41191
+	jp Func_415df
+; 41642 (10:5642)
 UnnamedText_41642: ; 0x41642
 	TX_FAR _UnnamedText_41642
 	db $50
@@ -45532,8 +66805,12 @@ UnnamedText_41647: ; 0x41647
 	db $50
 ; 0x41647 + 5 bytes
 
-INCBIN "baserom.gbc",$4164c,$41655 - $4164c
-
+; known jump sources: 41373 (10:5373)
+Func_4164c: ; 4164c (10:564c)
+	ld hl, $5655
+	call PrintText
+	jp Func_41191
+; 41655 (10:5655)
 UnnamedText_41655: ; 0x41655
 	TX_FAR _UnnamedText_41655
 	db $50
@@ -45551,7 +66828,358 @@ UnnamedText_41671: ; 0x41671
 	db $50
 ; 0x41671 + 5 bytes
 
-INCBIN "baserom.gbc",$41676,$a63
+; known jump sources: 41286 (10:5286), 4128b (10:528b), 412d4 (10:52d4), 41338 (10:5338), 4135a (10:535a)
+Func_41676: ; 41676 (10:5676)
+	ld [W_ANIMATIONID], a ; $d07c
+	xor a
+	ld [$cc5b], a
+	ld a, $8
+	jp Predef ; indirect jump to MoveAnimation (78d5e (1e:4d5e))
+
+; known jump sources: 1fee (0:1fee)
+Func_41682: ; 41682 (10:5682)
+	xor a
+	ld [$FF00+$b4], a
+	inc a
+	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	call Func_4188a
+	call Func_4169d
+	call GBFadeOut2
+	xor a
+	ld [$FF00+$ae], a
+	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	call CleanLCD_OAM
+	call DelayFrame
+	ret
+
+; known jump sources: 4168b (10:568b)
+Func_4169d: ; 4169d (10:569d)
+	ld b, $7
+	call GoPAL_SET
+	ld a, $e4
+	ld [rBGP], a ; $FF00+$47
+	ld [rOBP0], a ; $FF00+$48
+	ld [rOBP1], a ; $FF00+$49
+	xor a
+	ld [$FF00+$ae], a
+	ld b, $3
+	call Func_4183f
+	ld a, $0
+	ld [W_BASECOORDX], a ; $d081
+	ld a, $50
+	ld [W_BASECOORDY], a ; $d082
+	ld bc, $606
+	call Func_417c7
+	ld de, $28ff
+	call Func_4180e
+	ret c
+	ld a, $b9
+	call Func_23b1
+	xor a
+	ld [$d09f], a
+	ld de, $5910
+	call Func_41793
+	ld a, $ba
+	call Func_23b1
+	ld de, $591b
+	call Func_41793
+	ld c, $a
+	call CheckForUserInterruption
+	ret c
+	ld a, $b9
+	call Func_23b1
+	ld de, $5910
+	call Func_41793
+	ld a, $ba
+	call Func_23b1
+	ld de, $591b
+	call Func_41793
+	ld c, $1e
+	call CheckForUserInterruption
+	ret c
+	ld b, $4
+	call Func_4183f
+	ld a, $bb
+	call Func_23b1
+	ld de, $401
+	call Func_4180e
+	ld c, $1e
+	call CheckForUserInterruption
+	ret c
+	ld b, $5
+	call Func_4183f
+	ld a, $bc
+	call Func_23b1
+	ld de, $800
+	call Func_4180e
+	ld a, $b9
+	call Func_23b1
+	ld a, $24
+	ld [$d09f], a
+	ld de, $5926
+	call Func_41793
+	ld c, $1e
+	call CheckForUserInterruption
+	ret c
+	ld de, $401
+	call Func_4180e
+	ld b, $3
+	call Func_4183f
+	ld c, $3c
+	call CheckForUserInterruption
+	ret c
+	ld a, $b9
+	call Func_23b1
+	xor a
+	ld [$d09f], a
+	ld de, $5931
+	call Func_41793
+	ld a, $ba
+	call Func_23b1
+	ld de, $593c
+	call Func_41793
+	ld c, $14
+	call CheckForUserInterruption
+	ret c
+	ld a, $24
+	ld [$d09f], a
+	ld de, $5947
+	call Func_41793
+	ld c, $1e
+	call CheckForUserInterruption
+	ret c
+	ld a, $b8
+	call Func_23b1
+	ld a, $48
+	ld [$d09f], a
+	ld de, $5950
+	jp Func_41793
+
+; known jump sources: 416d5 (10:56d5), 416e0 (10:56e0), 416f1 (10:56f1), 416fc (10:56fc), 41738 (10:5738), 4175e (10:575e), 41769 (10:5769), 4177a (10:577a), 41790 (10:5790), 417ac (10:57ac)
+Func_41793: ; 41793 (10:5793)
+	ld a, [de]
+	cp $50
+	ret z
+	ld [W_BASECOORDY], a ; $d082
+	inc de
+	ld a, [de]
+	ld [W_BASECOORDX], a ; $d081
+	push de
+	ld c, $24
+	call Func_417ae
+	ld c, $5
+	call DelayFrames
+	pop de
+	inc de
+	jr Func_41793
+
+; known jump sources: 417a2 (10:57a2), 41829 (10:5829)
+Func_417ae: ; 417ae (10:57ae)
+	ld hl, $c300
+	ld a, [$d09f]
+	ld d, a
+.asm_417b5
+	ld a, [W_BASECOORDY] ; $d082
+	add [hl]
+	ld [hli], a
+	ld a, [W_BASECOORDX] ; $d081
+	add [hl]
+	ld [hli], a
+	ld a, d
+	ld [hli], a
+	inc hl
+	inc d
+	dec c
+	jr nz, .asm_417b5
+	ret
+
+; known jump sources: 416bf (10:56bf)
+Func_417c7: ; 417c7 (10:57c7)
+	ld hl, $c300
+	ld d, $0
+.asm_417cc
+	push bc
+	ld a, [W_BASECOORDY] ; $d082
+	ld e, a
+.asm_417d1
+	ld a, e
+	add $8
+	ld e, a
+	ld [hli], a
+	ld a, [W_BASECOORDX] ; $d081
+	ld [hli], a
+	ld a, d
+	ld [hli], a
+	ld a, $80
+	ld [hli], a
+	inc d
+	dec c
+	jr nz, .asm_417d1
+	ld a, [W_BASECOORDX] ; $d081
+	add $8
+	ld [W_BASECOORDX], a ; $d081
+	pop bc
+	dec b
+	jr nz, .asm_417cc
+	ret
+
+; known jump sources: 418e9 (10:58e9)
+Func_417f0: ; 417f0 (10:57f0)
+	ld hl, $9c00
+	ld bc, $240
+	jr asm_417fe
+
+; known jump sources: 418e0 (10:58e0)
+Func_417f8: ; 417f8 (10:57f8)
+	ld hl, $c3f0
+	ld bc, $c8
+asm_417fe: ; 417fe (10:57fe)
+	ld [hl], $0
+	inc hl
+	dec bc
+	ld a, b
+	or c
+	jr nz, asm_417fe
+	ret
+
+; known jump sources: 418f1 (10:58f1), 418f9 (10:58f9), 41901 (10:5901), 41909 (10:5909)
+Func_41807: ; 41807 (10:5807)
+	ld a, $1
+.asm_41809
+	ld [hli], a
+	dec c
+	jr nz, .asm_41809
+	ret
+
+; known jump sources: 416c5 (10:56c5), 41712 (10:5712), 41728 (10:5728), 41744 (10:5744), 4183c (10:583c)
+Func_4180e: ; 4180e (10:580e)
+	ld a, e
+	cp $ff
+	jr z, .asm_4181d
+	cp $1
+	jr z, .asm_4182d
+	ld a, [$FF00+$ae]
+	dec a
+	dec a
+	jr .asm_41831
+.asm_4181d
+	push de
+	ld a, $2
+	ld [W_BASECOORDX], a ; $d081
+	xor a
+	ld [W_BASECOORDY], a ; $d082
+	ld c, $24
+	call Func_417ae
+	pop de
+.asm_4182d
+	ld a, [$FF00+$ae]
+	inc a
+	inc a
+.asm_41831
+	ld [$FF00+$ae], a
+	push de
+	ld c, $2
+	call CheckForUserInterruption
+	pop de
+	ret c
+	dec d
+	jr nz, Func_4180e
+	ret
+
+; known jump sources: 416af (10:56af), 41707 (10:5707), 4171d (10:571d), 41749 (10:5749)
+Func_4183f: ; 4183f (10:583f)
+	ld hl, $c439
+
+; known jump sources: 412bb (10:52bb), 41443 (10:5443), 41486 (10:5486)
+Func_41842: ; 41842 (10:5842)
+	ld c, $0
+	ld a, $31
+	jp Predef ; indirect jump to Func_79dda (79dda (1e:5dda))
+
+INCBIN "baserom.gbc",$41849,$41852 - $41849
+
+; known jump sources: 418ad (10:58ad)
+Func_41852: ; 41852 (10:5852)
+	ld hl, $5a99
+	ld de, $9000
+	ld bc, $600
+	ld a, $10
+	call FarCopyData2
+	ld hl, $5959
+	ld de, $9600
+	ld bc, $140
+	ld a, $10
+	call FarCopyData2
+	ld hl, $5959
+	ld de, $8800
+	ld bc, $140
+	ld a, $10
+	call FarCopyData2
+	ld hl, $6099
+	ld de, $8000
+	ld bc, $6c0
+	ld a, $10
+	jp FarCopyData2
+
+; known jump sources: 41688 (10:5688)
+Func_4188a: ; 4188a (10:588a)
+	ld b, $c
+	call GoPAL_SET
+	ld b, BANK(Func_4538)
+	ld hl, Func_4538
+	call Bankswitch ; indirect jump to Func_4538 (4538 (1:4538))
+	ld a, $e4
+	ld [rBGP], a ; $FF00+$47
+	ld c, $b4
+	call DelayFrames
+	call ClearScreen
+	call DisableLCD
+	xor a
+	ld [W_CUROPPONENT], a ; $d059
+	call Func_418e9
+	call Func_41852
+	call EnableLCD
+	ld hl, rLCDC ; $ff40
+	res 5, [hl]
+	set 3, [hl]
+	ld c, $40
+	call DelayFrames
+	ld b, BANK(Func_70044)
+	ld hl, Func_70044
+	call Bankswitch ; indirect jump to Func_70044 (70044 (1c:4044))
+	push af
+	pop af
+	jr c, .asm_418d0
+	ld c, $28
+	call DelayFrames
+.asm_418d0
+	ld a, $1f
+	ld [$c0ef], a
+	ld [$c0f0], a
+	ld a, $dc
+	ld [$c0ee], a
+	call Func_23b1
+	call Func_417f8
+	call CleanLCD_OAM
+	jp Delay3
+
+; known jump sources: 418aa (10:58aa)
+Func_418e9: ; 418e9 (10:58e9)
+	call Func_417f0
+	ld hl, $c3a0
+	ld c, $50
+	call Func_41807
+	ld hl, $c4b8
+	ld c, $50
+	call Func_41807
+	ld hl, $9c00
+	ld c, $80
+	call Func_41807
+	ld hl, $9dc0
+	ld c, $80
+	jp Func_41807
+
+INCBIN "baserom.gbc",$4190c,$420d9 - $4190c
 
 IF _RED
 	INCBIN "gfx/red/introfight.2bpp"
@@ -45561,6 +67189,7 @@ IF _BLUE
 ENDC
 
 ; XXX what do these do
+Func_42769:
 	FuncCoord 5,0
 	ld hl,Coord
 	ld de,OTString67E5
@@ -45586,6 +67215,7 @@ ENDC
 	ld bc,$8205
 	jp PrintNumber
 
+Func_427a7:
 	FuncCoord 5,10
 	ld hl,Coord
 	ld de,OTString67E5
@@ -46027,7 +67657,22 @@ Mansion1Subscript1: ; 0x442c5
 	jp $430b
 ; 0x44304
 
-INCBIN "baserom.gbc",$44304,$4432c - $44304
+; known jump sources: 442dd (11:42dd), 442e3 (11:42e3), 442e9 (11:42e9), 442ef (11:42ef)
+Func_44304: ; 44304 (11:4304)
+	ld a, $2d
+	ld [$d09f], a
+	jr asm_44310
+
+; known jump sources: 442d7 (11:42d7), 442f5 (11:42f5), 442fb (11:42fb), 44301 (11:4301)
+Func_4430b: ; 4430b (11:430b)
+	ld a, $e
+	ld [$d09f], a
+asm_44310: ; 44310 (11:4310)
+	ld a, $17
+	call Predef ; indirect jump to Func_ee9e (ee9e (3:6e9e))
+	ret
+
+INCBIN "baserom.gbc",$44316,$4432c - $44316
 
 Mansion1Texts: ; 0x4432c
 	dw Mansion1Text1, Predef5CText, Predef5CText, Mansion1Text4
@@ -46503,8 +68148,69 @@ VictoryRoad3Script: ; 0x44980
 ; 0x44996
 
 VictoryRoad3Script_Unknown44996: ; 0x44996
-INCBIN "baserom.gbc",$44996,$8e
+	ld hl, $d126
+	bit 5, [hl]
+	res 5, [hl]
+	ret z
+	ld hl, $d813
+	bit 0, [hl]
+	ret z
+	ld a, $1d
+	ld [$d09f], a
+	ld bc, $503
+	ld a, $17
+	jp Predef ; indirect jump to Func_ee9e (ee9e (3:6e9e))
 
+INCBIN "baserom.gbc",$449b1,$449b7 - $449b1
+	ld hl, $cd60
+	bit 7, [hl]
+	res 7, [hl]
+	jp z, .asm_449fe
+	ld hl, $49f9
+	call CheckBoulderCoords
+	jp nc, .asm_449fe
+	ld a, [W_WHICHTRADE] ; $cd3d
+	cp $1
+	jr nz, .asm_449dc
+	ld hl, $d126
+	set 5, [hl]
+	ld hl, $d813
+	set 0, [hl]
+	ret
+.asm_449dc
+	ld hl, $d813
+	bit 6, [hl]
+	set 6, [hl]
+	jr nz, .asm_449fe
+	ld a, $7a
+	ld [$cc4d], a
+	ld a, $11
+	call Predef ; indirect jump to Func_f1d7 (f1d7 (3:71d7))
+	ld a, $60
+	ld [$cc4d], a
+	ld a, $15
+	jp Predef ; indirect jump to Func_f1c8 (f1c8 (3:71c8))
+
+INCBIN "baserom.gbc",$449f9,$449fe - $449f9
+.asm_449fe
+	ld a, $c2
+	ld [$d71d], a
+	ld hl, $49f9
+	call Func_46981
+	ld a, [W_WHICHTRADE] ; $cd3d
+	cp $1
+	jr nz, .asm_44a1b
+	ld hl, $d72d
+	res 4, [hl]
+	ld hl, $d732
+	res 4, [hl]
+	ret
+.asm_44a1b
+	ld a, [$d72d]
+	bit 4, a
+	jp z, Func_3219
+	ret
+; 44a24 (11:4a24)
 VictoryRoad3Texts: ; 0x44a24
 	dw VictoryRoad3Text1, VictoryRoad3Text2, VictoryRoad3Text3, VictoryRoad3Text4, Predef5CText, Predef5CText, BoulderText, BoulderText, BoulderText, BoulderText
 
@@ -46908,8 +68614,60 @@ RocketHideout2Script: ; 0x44e27
 ; 0x44e3a
 
 RocketHideout2_Unknown44e3a: ; 0x44e3a
-INCBIN "baserom.gbc",$44e3a,$45023-$44e3a
+INCBIN "baserom.gbc",$44e3a,$44fd7 - $44e3a
 
+; known jump sources: 5c1 (0:5c1), 74985 (1d:4985)
+Func_44fd7: ; 44fd7 (11:4fd7)
+	ld a, [$c102]
+	srl a
+	srl a
+	ld hl, $5083
+	ld c, a
+	ld b, $0
+	add hl, bc
+	ld a, [hl]
+	ld [$c102], a
+	ld a, [W_CURMAPTILESET] ; $d367
+	cp $16
+	ld hl, $5023
+	jr z, .asm_44ff6
+	ld hl, $5053
+.asm_44ff6
+	ld a, [$cd38]
+	bit 0, a
+	jr nz, .asm_45001
+	ld de, $18
+	add hl, de
+.asm_45001
+	ld a, $4
+	ld bc, $0
+.asm_45006
+	push af
+	push hl
+	push bc
+	add hl, bc
+	ld a, [hli]
+	ld e, a
+	ld a, [hli]
+	ld d, a
+	ld a, [hli]
+	ld c, a
+	ld a, [hli]
+	ld b, a
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	call CopyVideoData
+	pop bc
+	ld a, $6
+	add c
+	ld c, a
+	pop hl
+	pop af
+	dec a
+	jr nz, .asm_45006
+	ret
+; 45023 (11:5023)
 ; 0x45023 XXX: it looks to me this is probably data for copying tiles into memory, maybe to mix and match a few tilesets, but I don't really know for sure
 	dw $5087 ;address from within tileset graphics
 	db 1     ;number of tiles to copy?
@@ -47485,8 +69243,43 @@ SilphCoElevatorScript: ; 0x457c0
 ; 0x457dc
 
 SilphCoElevatorScript_Unknown457dc: ; 0x457dc
-INCBIN "baserom.gbc",$457dc,$57
+	ld hl, $d3af
+	ld a, [$d73b]
+	ld b, a
+	ld a, [$d73c]
+	ld c, a
+	call Func_457ea
 
+; known jump sources: 457e7 (11:57e7)
+Func_457ea: ; 457ea (11:57ea)
+	inc hl
+	inc hl
+	ld a, b
+	ld [hli], a
+	ld a, c
+	ld [hli], a
+	ret
+
+; known jump sources: 45836 (11:5836)
+Func_457f1: ; 457f1 (11:57f1)
+	ld hl, $5804
+	call LoadItemList
+	ld hl, $5811
+	ld de, $cc5b
+	ld bc, $16
+	call CopyData
+	ret
+
+INCBIN "baserom.gbc",$45804,$45827 - $45804
+
+; known jump sources: 457d0 (11:57d0)
+Func_45827: ; 45827 (11:5827)
+	call Delay3
+	ld b, BANK(Func_7bf15)
+	ld hl, Func_7bf15
+	call Bankswitch ; indirect jump to Func_7bf15 (7bf15 (1e:7f15))
+	ret
+; 45833 (11:5833)
 SilphCoElevatorTexts: ; 0x45833
 	dw SilphCoElevatorText1
 
@@ -48766,8 +70559,137 @@ SeafoamIslands5Object: ; 0x468bc (size=62)
 SeafoamIslands5Blocks: ; 0x468fa 135
 	INCBIN "maps/seafoamislands5.blk"
 
-INCBIN "baserom.gbc",$46981,$46a40-$46981
+; known jump sources: 44843 (11:4843), 44a06 (11:4a06), 4636a (11:636a)
+Func_46981: ; 46981 (11:6981)
+	xor a
+	ld [$d71e], a
+	ld a, [$d72d]
+	bit 4, a
+	ret nz
+	call ArePlayerCoordsInArray
+	ret nc
+	ld a, [W_WHICHTRADE] ; $cd3d
+	ld [$d71e], a
+	ld hl, $d72d
+	set 4, [hl]
+	ld hl, $d732
+	set 4, [hl]
+	ret
 
+; known jump sources: 3ec5 (0:3ec5)
+Func_469a0: ; 469a0 (11:69a0)
+	ld hl, $ffeb
+	xor a
+	ld [hli], a
+	ld [hli], a
+	ld [hli], a
+	ld [hl], a
+	ld de, $0
+	ld hl, $6a40
+.asm_469ae
+	ld a, [hli]
+	ld b, a
+	cp $ff
+	jr z, .asm_469fc
+	ld a, [W_CURMAP] ; $d35e
+	cp b
+	jr z, .asm_469be
+	inc de
+	inc de
+	jr .asm_469ae
+.asm_469be
+	ld hl, $6a96
+	add hl, de
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	push hl
+	ld hl, W_WHICHTRADE ; $cd3d
+	xor a
+	ld [hli], a
+	ld [hli], a
+	ld [hl], a
+	pop hl
+.asm_469ce
+	ld a, [hli]
+	cp $ff
+	jr z, .asm_469fc
+	ld [$cd40], a
+	ld b, a
+	ld a, [hli]
+	ld [$cd41], a
+	ld c, a
+	call Func_46a01
+	ld a, [$FF00+$ea]
+	and a
+	jr z, .asm_469f0
+	inc hl
+	inc hl
+	inc hl
+	inc hl
+	push hl
+	ld hl, $cd3f
+	inc [hl]
+	pop hl
+	jr .asm_469ce
+.asm_469f0
+	ld a, [hli]
+	ld [W_WHICHTRADE], a ; $cd3d
+	ld a, [hli]
+	ld [$cd3e], a
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	ret
+.asm_469fc
+	ld a, $ff
+	ld [$FF00+$ee], a
+	ret
+
+; known jump sources: 469dc (11:69dc)
+Func_46a01: ; 46a01 (11:6a01)
+	ld a, [$c109]
+	cp $4
+	jr z, .asm_46a16
+	cp $8
+	jr z, .asm_46a25
+	cp $c
+	jr z, .asm_46a2b
+	ld a, [W_YCOORD] ; $d361
+	inc a
+	jr .asm_46a1a
+.asm_46a16
+	ld a, [W_YCOORD] ; $d361
+	dec a
+.asm_46a1a
+	cp b
+	jr nz, .asm_46a3b
+	ld a, [W_XCOORD] ; $d362
+	cp c
+	jr nz, .asm_46a3b
+	jr .asm_46a38
+.asm_46a25
+	ld a, [W_XCOORD] ; $d362
+	dec a
+	jr .asm_46a2f
+.asm_46a2b
+	ld a, [W_XCOORD] ; $d362
+	inc a
+.asm_46a2f
+	cp c
+	jr nz, .asm_46a3b
+	ld a, [W_YCOORD] ; $d361
+	cp b
+	jr nz, .asm_46a3b
+.asm_46a38
+	xor a
+	jr .asm_46a3d
+.asm_46a3b
+	ld a, $ff
+.asm_46a3d
+	ld [$FF00+$ea], a
+	ret
+; 46a40 (11:6a40)
 HiddenObjectMaps: ; 0x46a40
 	db REDS_HOUSE_2F
 	db BLUES_HOUSE
@@ -49621,8 +71543,76 @@ Route15GateUpstairsBlocks:
 Route11GateUpstairsBlocks: ; 40db 16
 	INCBIN "maps/route11gateupstairs.blk"
 
-INCBIN "baserom.gbc",$480eb,$48152 - $480eb
+; known jump sources: c72b (3:472b)
+Func_480eb: ; 480eb (12:40eb)
+	call Load16BitRegisters
+	ld a, [rBGP] ; $FF00+$47
+	or b
+	ld [rBGP], a ; $FF00+$47
+	ld c, $4
+	call DelayFrames
+	ld a, [rBGP] ; $FF00+$47
+	and $fc
+	ld [rBGP], a ; $FF00+$47
+	ret
 
+; known jump sources: 7920b (1e:520b)
+Func_480ff: ; 480ff (12:40ff)
+	call Load16BitRegisters
+	ld a, $1
+	ld [$d0a0], a
+	xor a
+.asm_48108
+	ld [H_NUMTOPRINT], a ; $FF00+$96 (aliases: H_MULTIPLICAND)
+	call Func_48119
+	call Func_48119
+	dec b
+	ld a, b
+	jr nz, .asm_48108
+	xor a
+	ld [$d0a0], a
+	ret
+
+; known jump sources: 4810a (12:410a), 4810d (12:410d)
+Func_48119: ; 48119 (12:4119)
+	ld a, [H_NUMTOPRINT] ; $FF00+$96 (aliases: H_MULTIPLICAND)
+	xor b
+	ld [H_NUMTOPRINT], a ; $FF00+$96 (aliases: H_MULTIPLICAND)
+	ld [rWY], a ; $FF00+$4a
+	ld c, $3
+	jp DelayFrames
+
+; known jump sources: 3dc34 (f:5c34), 79212 (1e:5212)
+Func_48125: ; 48125 (12:4125)
+	call Load16BitRegisters
+	xor a
+.asm_48129
+	ld [$FF00+$97], a
+	call Func_4813f
+	ld c, $1
+	call DelayFrames
+	call Func_4813f
+	dec b
+	ld a, b
+	jr nz, .asm_48129
+	ld a, $7
+	ld [rWX], a ; $FF00+$4b
+	ret
+
+; known jump sources: 4812b (12:412b), 48133 (12:4133)
+Func_4813f: ; 4813f (12:413f)
+	ld a, [$FF00+$97]
+	xor b
+	ld [$FF00+$97], a
+	bit 7, a
+	jr z, .asm_48149
+	xor a
+.asm_48149
+	add $7
+	ld [rWX], a ; $FF00+$4b
+	ld c, $4
+	jp DelayFrames
+; 48152 (12:4152)
 Route7Script: ; 0x48152
 	jp EnableAutoTextBoxDrawing
 ; 0x48155
@@ -49945,15 +71935,174 @@ CeladonMartRoofScript: ; 0x483d5
 	jp EnableAutoTextBoxDrawing
 ; 0x483d8
 
-INCBIN "baserom.gbc",$483d8,$484ee - $483d8
+; known jump sources: 4856d (12:456d)
+Func_483d8: ; 483d8 (12:43d8)
+	xor a
+	ld [$cd37], a
+	ld de, $cc5b
+	ld hl, $4408
+.asm_483e2
+	ld a, [hli]
+	and a
+	jr z, .asm_48404
+	push hl
+	push de
+	ld [$d11e], a
+	ld b, a
+	ld a, $1c
+	call Predef ; indirect jump to Func_f8a5 (f8a5 (3:78a5))
+	pop de
+	pop hl
+	ld a, b
+	and a
+	jr z, .asm_483e2
+	ld a, [$d11e]
+	ld [de], a
+	inc de
+	push hl
+	ld hl, $cd37
+	inc [hl]
+	pop hl
+	jr .asm_483e2
+.asm_48404
+	ld a, $ff
+	ld [de], a
+	ret
 
+INCBIN "baserom.gbc",$48408,$4840c - $48408
+
+; known jump sources: 4858a (12:458a)
+Func_4840c: ; 4840c (12:440c)
+	ld hl, $d730
+	set 6, [hl]
+	ld hl, $44ee
+	call PrintText
+	xor a
+	ld [W_CURMENUITEMID], a ; $cc26
+	ld a, $3
+	ld [W_MENUWATCHEDKEYS], a ; $cc29
+	ld a, [$cd37]
+	dec a
+	ld [W_MAXMENUITEMID], a ; $cc28
+	ld a, $2
+	ld [W_TOPMENUITEMY], a ; $cc24
+	ld a, $1
+	ld [W_TOPMENUITEMX], a ; $cc25
+	ld a, [$cd37]
+	dec a
+	ld bc, $2
+	ld hl, $3
+	call AddNTimes
+	dec l
+	ld b, l
+	ld c, $c
+	ld hl, $c3a0
+	call TextBoxBorder
+	call Func_2429
+	call Func_48532
+	ld hl, $d730
+	res 6, [hl]
+	call HandleMenuInput
+	bit 1, a
+	ret nz
+	ld hl, $cc5b
+	ld a, [W_CURMENUITEMID] ; $cc26
+	ld d, $0
+	ld e, a
+	add hl, de
+	ld a, [hl]
+	ld [$FF00+$db], a
+	cp $3c
+	jr z, .asm_484b6
+	cp $3d
+	jr z, .asm_48492
+	ld a, [$d778]
+	bit 6, a
+	jr nz, .asm_484e0
+	ld hl, $4515
+	call PrintText
+	call Func_484e6
+	ld bc, $f901
+	call GiveItem
+	jr nc, .asm_484da
+	ld hl, $451b
+	call PrintText
+	ld hl, $d778
+	set 6, [hl]
+	ret
+.asm_48492
+	ld a, [$d778]
+	bit 5, a
+	jr nz, .asm_484e0
+	ld hl, $4504
+	call PrintText
+	call Func_484e6
+	ld bc, $f801
+	call GiveItem
+	jr nc, .asm_484da
+	ld hl, $450a
+	call PrintText
+	ld hl, $d778
+	set 5, [hl]
+	ret
+.asm_484b6
+	ld a, [$d778]
+	bit 4, a
+	jr nz, .asm_484e0
+	ld hl, $44f3
+	call PrintText
+	call Func_484e6
+	ld bc, $d501
+	call GiveItem
+	jr nc, .asm_484da
+	ld hl, $44f9
+	call PrintText
+	ld hl, $d778
+	set 4, [hl]
+	ret
+.asm_484da
+	ld hl, $4526
+	jp PrintText
+.asm_484e0
+	ld hl, $452c
+	jp PrintText
+
+; known jump sources: 4847b (12:447b), 4849f (12:449f), 484c3 (12:44c3)
+Func_484e6: ; 484e6 (12:44e6)
+	ld b, BANK(Func_17f37)
+	ld hl, Func_17f37
+	jp Bankswitch ; indirect jump to Func_17f37 (17f37 (5:7f37))
+; 484ee (12:44ee)
 UnnamedText_484ee: ; 0x484ee
 	TX_FAR _UnnamedText_484ee
 	db $50
 ; 0x484ee + 5 bytes
 
-INCBIN "baserom.gbc",$484f3,$68
+INCBIN "baserom.gbc",$484f3,$48532 - $484f3
 
+; known jump sources: 4844b (12:444b)
+Func_48532: ; 48532 (12:4532)
+	ld hl, $cc5b
+	xor a
+	ld [$FF00+$db], a
+.asm_48538
+	ld a, [hli]
+	cp $ff
+	ret z
+	push hl
+	ld [$d11e], a
+	call GetItemName
+	ld hl, $c3ca
+	ld a, [$FF00+$db]
+	ld bc, $28
+	call AddNTimes
+	ld de, $cd6d
+	call PlaceString
+	ld hl, $ffdb
+	inc [hl]
+	pop hl
+	jr .asm_48538
+; 4855b (12:455b)
 CeladonMartRoofTexts: ; 0x4855b
 	dw CeladonMartRoofText1, CeladonMartRoofText2, CeladonMartRoofText5, CeladonMartRoofText5, CeladonMartRoofText5, CeladonMartRoofText6
 
@@ -50419,8 +72568,59 @@ CeladonGymScript: ; 0x4890a
 ; 0x48927
 
 CeladonGymScript_Unknown48927: ; 0x48927
-INCBIN "baserom.gbc",$48927,$7f
+	ld hl, $4930
+	ld de, $493d
+	jp Func_317f
 
+INCBIN "baserom.gbc",$48930,$48943 - $48930
+
+; known jump sources: 4895b (12:495b), 489a3 (12:49a3)
+Func_48943: ; 48943 (12:4943)
+	xor a
+	ld [$cd6b], a
+	ld [$d5ff], a
+	ld [$da39], a
+	ret
+
+INCBIN "baserom.gbc",$4894e,$48956 - $4894e
+	ld a, [W_ISINBATTLE] ; $d057
+	cp $ff
+	jp z, Func_48943
+	ld a, $f0
+	ld [$cd6b], a
+
+; known jump sources: 48a1d (12:4a1d)
+Func_48963: ; 48963 (12:4963)
+	ld a, $9
+	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	call DisplayTextID
+	ld hl, $d77c
+	set 1, [hl]
+	ld bc, $dd01
+	call GiveItem
+	jr nc, .asm_48985
+	ld a, $a
+	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	call DisplayTextID
+	ld hl, $d77c
+	set 0, [hl]
+	jr .asm_4898c
+.asm_48985
+	ld a, $b
+	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	call DisplayTextID
+.asm_4898c
+	ld hl, W_OBTAINEDBADGES ; $d356
+	set 3, [hl]
+	ld hl, $d72a
+	set 3, [hl]
+	ld a, [$d77c]
+	or $fc
+	ld [$d77c], a
+	ld hl, $d77d
+	set 0, [hl]
+	jp Func_48943
+; 489a6 (12:49a6)
 CeladonGymTexts: ; 0x489a6
 	dw CeladonGymText1, CeladonGymText2, CeladonGymText3, CeladonGymText4, CeladonGymText5, CeladonGymText6, CeladonGymText7, CeladonGymText8, CeladonGymText9, TM21Text, TM21NoRoomText
 
@@ -52137,8 +74337,13 @@ Route16GateMapScript0: ; 0x496d7
 	ret
 ; 0x49714
 
-INCBIN "baserom.gbc",$49714,$46
+INCBIN "baserom.gbc",$49714,$49755 - $49714
 
+; known jump sources: 496d7 (12:56d7), 4988f (12:588f)
+Func_49755: ; 49755 (12:5755)
+	ld b, $6
+	jp IsItemInBag
+; 4975a (12:575a)
 Route16GateMapTexts: ; 0x4975a
 	dw Route16GateMapText1, Route16GateMapText2, Route16GateMapText3
 
@@ -52770,8 +74975,102 @@ MtMoon3Script: ; 0x49d0b
 	ret
 ; 0x49d37
 
-INCBIN "baserom.gbc",$49d37,$fd
+INCBIN "baserom.gbc",$49d37,$49d58 - $49d37
 
+; known jump sources: 49d9f (12:5d9f)
+Func_49d58: ; 49d58 (12:5d58)
+	xor a
+	ld [$cd6b], a
+	ld [$d607], a
+	ld [$da39], a
+	ret
+
+INCBIN "baserom.gbc",$49d63,$49d6f - $49d63
+	ld a, [$d7f6]
+	bit 1, a
+	jp nz, Func_49d91
+	ld a, [W_YCOORD] ; $d361
+	cp $8
+	jp nz, Func_49d91
+	ld a, [W_XCOORD] ; $d362
+	cp $d
+	jp nz, Func_49d91
+	xor a
+	ld [$FF00+$b4], a
+	ld a, $1
+	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	jp DisplayTextID
+
+; known jump sources: 49d74 (12:5d74), 49d7c (12:5d7c), 49d84 (12:5d84)
+Func_49d91: ; 49d91 (12:5d91)
+	ld a, [$d7f6]
+	and $c0
+	jp z, Func_3219
+	ret
+	ld a, [W_ISINBATTLE] ; $d057
+	cp $ff
+	jp z, Func_49d58
+	call Func_2429
+	call Delay3
+	ld hl, $d7f6
+	set 1, [hl]
+	xor a
+	ld [$cd6b], a
+	ld a, $0
+	ld [$d607], a
+	ld [$da39], a
+	ret
+	ld a, $1
+	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	call Function3541
+	ld hl, $5dea
+	call ArePlayerCoordsInArray
+	jr c, .asm_49dd7
+	ld hl, $5df1
+	call ArePlayerCoordsInArray
+	jp nc, Func_3219
+	ld de, $5df9
+	jr .asm_49dda
+.asm_49dd7
+	ld de, $5df8
+.asm_49dda
+	ld a, $1
+	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	call MoveSprite
+	ld a, $5
+	ld [$d607], a
+	ld [$da39], a
+	ret
+
+INCBIN "baserom.gbc",$49dea,$49dfb - $49dea
+	ld a, [$d730]
+	bit 0, a
+	ret nz
+	ld a, $f0
+	ld [$cd6b], a
+	ld a, $1
+	ld [$cc3c], a
+	ld a, $a
+	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	call DisplayTextID
+	ld a, [$d7f6]
+	bit 6, a
+	jr z, .asm_49e1d
+	ld a, $6e
+	jr .asm_49e1f
+.asm_49e1d
+	ld a, $6d
+.asm_49e1f
+	ld [$cc4d], a
+	ld a, $11
+	call Predef ; indirect jump to Func_f1d7 (f1d7 (3:71d7))
+	xor a
+	ld [$cd6b], a
+	ld a, $0
+	ld [$d607], a
+	ld [$da39], a
+	ret
+; 49e34 (12:5e34)
 MtMoon3Texts: ; 0x49e34
 	dw MtMoon3Text1, MtMoon3Text2, MtMoon3Text3, MtMoon3Text4, MtMoon3Text5, MtMoon3Text6, MtMoon3Text7, Predef5CText, Predef5CText, Unnamed_49f99
 
@@ -53407,7 +75706,82 @@ TradeCenterMObject: ; 0x4fd87 (size=10)
 TradeCenterMBlocks: ; 0x4fd91 20
 	INCBIN "maps/tradecenterm.blk"
 
-INCBIN "baserom.gbc",$4fda5,$4fe3f - $4fda5
+; known jump sources: 3e59 (0:3e59)
+Func_4fda5: ; 4fda5 (13:7da5)
+	call EnableAutoTextBoxDrawing
+	xor a
+	ld [$ccd3], a
+	ld a, [W_NUMINPARTY] ; $d163
+	cp $6
+	jr c, .asm_4fe01
+	ld a, [W_NUMINBOX] ; $da80
+	cp $14
+	jr nc, .asm_4fdf9
+	xor a
+	ld [W_ENEMYBATTSTATUS3], a ; $d069
+	ld a, [$cf91]
+	ld [$cfd8], a
+	ld hl, Func_3eb01
+	ld b, BANK(Func_3eb01)
+	call Bankswitch ; indirect jump to Func_3eb01 (3eb01 (f:6b01))
+	call Func_4fe11
+	ld hl, Func_e7a4
+	ld b, BANK(Func_e7a4)
+	call Bankswitch ; indirect jump to Func_e7a4 (e7a4 (3:67a4))
+	ld hl, $cf4b
+	ld a, [$d5a0]
+	and $7f
+	cp $9
+	jr c, .asm_4fdec
+	sub $9
+	ld [hl], $f7
+	inc hl
+	add $f6
+	jr .asm_4fdee
+.asm_4fdec
+	add $f7
+.asm_4fdee
+	ld [hli], a
+	ld [hl], $50
+	ld hl, $7e3f
+	call PrintText
+	scf
+	ret
+.asm_4fdf9
+	ld hl, $7e44
+	call PrintText
+	and a
+	ret
+.asm_4fe01
+	call Func_4fe11
+	call AddPokemonToParty
+	ld a, $1
+	ld [$cc3c], a
+	ld [$ccd3], a
+	scf
+	ret
+
+; known jump sources: 4fdcc (13:7dcc), 4fe01 (13:7e01)
+Func_4fe11: ; 4fe11 (13:7e11)
+	ld a, [$cf91]
+	push af
+	ld [$d11e], a
+	ld a, $3a
+	call Predef ; indirect jump to IndexToPokedex (41010 (10:5010))
+	ld a, [$d11e]
+	dec a
+	ld c, a
+	ld hl, W_OWNEDPOKEMON ; $d2f7
+	ld b, $1
+	ld a, $10
+	call Predef ; indirect jump to Func_f666 (f666 (3:7666))
+	pop af
+	ld [$d11e], a
+	call GetMonName
+	ld hl, $7e39
+	jp PrintText
+
+INCBIN "baserom.gbc",$4fe39,$4fe3f - $4fe39
 
 UnnamedText_4fe3f: ; 0x4fe3f
 	TX_FAR _UnnamedText_4fe3f
@@ -54087,7 +76461,55 @@ Route20Script: ; 0x50ca9
 	ret
 ; 0x50cc6
 
-INCBIN "baserom.gbc",$50cc6,$5c
+; known jump sources: 50cb0 (14:4cb0)
+Func_50cc6: ; 50cc6 (14:4cc6)
+	ld a, [$d880]
+	and $3
+	cp $3
+	jr z, .asm_50cef
+	ld a, $d7
+	call Func_50d0c
+	ld a, $d8
+	call Func_50d0c
+	ld hl, $4ce8
+.asm_50cdc
+	ld a, [hli]
+	cp $ff
+	jr z, .asm_50cef
+	push hl
+	call Func_50d14
+	pop hl
+	jr .asm_50cdc
+
+INCBIN "baserom.gbc",$50ce8,$50cef - $50ce8
+.asm_50cef
+	ld a, [$d881]
+	and $3
+	cp $3
+	ret z
+	ld a, $dd
+	call Func_50d0c
+	ld a, $de
+	call Func_50d0c
+	ld a, $e1
+	call Func_50d14
+	ld a, $e2
+	call Func_50d14
+	ret
+
+; known jump sources: 50cd1 (14:4cd1), 50cd6 (14:4cd6), 50cf9 (14:4cf9), 50cfe (14:4cfe)
+Func_50d0c: ; 50d0c (14:4d0c)
+	ld [$cc4d], a
+	ld a, $15
+	jp Predef ; indirect jump to Func_f1c8 (f1c8 (3:71c8))
+
+; known jump sources: 50ce2 (14:4ce2), 50d03 (14:4d03), 50d08 (14:4d08)
+Func_50d14: ; 50d14 (14:4d14)
+	ld [$cc4d], a
+	ld a, $11
+	jp Predef ; indirect jump to Func_f1d7 (f1d7 (3:71d7))
+
+INCBIN "baserom.gbc",$50d1c,$50d22 - $50d1c
 
 Route20Texts: ; 0x50d22
 	dw Route20Text1, Route20Text2, Route20Text3, Route20Text4, Route20Text5, Route20Text6, Route20Text7, Route20Text8, Route20Text9, Route20Text10, Route20Text11, Route20Text12
@@ -54420,7 +76842,44 @@ Route22Script: ; 0x50eb2
 Route22Scripts: ; 0x50ebe
 	dw Route22Script0, Route22Script1, Route22Script2, Route22Script3
 
-INCBIN "baserom.gbc",$50ec6,$3a
+INCBIN "baserom.gbc",$50ec6,$50ece - $50ec6
+
+; known jump sources: 510e4 (14:50e4)
+Func_50ece: ; 50ece (14:4ece)
+	xor a
+	ld [$cd6b], a
+	ld [$d60a], a
+	ret
+
+; known jump sources: 510d0 (14:50d0)
+Func_50ed6: ; 50ed6 (14:4ed6)
+	ld a, [W_RIVALSTARTER] ; $d715
+	ld b, a
+.asm_50eda
+	ld a, [hli]
+	cp b
+	jr z, .asm_50ee1
+	inc hl
+	jr .asm_50eda
+.asm_50ee1
+	ld a, [hl]
+	ld [W_TRAINERNO], a ; $d05d
+	ret
+
+; known jump sources: 50f59 (14:4f59), 5107e (14:507e)
+Func_50ee6: ; 50ee6 (14:4ee6)
+	ld de, $4efb
+	ld a, [$cf0d]
+	cp $1
+	jr z, .asm_50ef1
+	inc de
+.asm_50ef1
+	call MoveSprite
+	ld a, $c
+	ld [$FF00+$8d], a
+	jp Func_34a6
+
+INCBIN "baserom.gbc",$50efb,$50f00 - $50efb
 
 Route22Script0: ; 0x50f00
 	ld a, [$d7eb]
@@ -54576,8 +77035,147 @@ Route22Script3: ; 0x5102a
 	ret
 ; 0x5104e
 
-INCBIN "baserom.gbc",$5104e,$127
+; known jump sources: 50f29 (14:4f29)
+Func_5104e: ; 5104e (14:504e)
+	ld a, $2
+	ld [$cd4f], a
+	xor a
+	ld [$cd50], a
+	ld a, $4c
+	call Predef ; indirect jump to Func_17c47 (17c47 (5:7c47))
+	ld a, [$d700]
+	and a
+	jr z, .asm_5106a
+	ld a, $ff
+	ld [$c0ee], a
+	call Func_23b1
+.asm_5106a
+	ld a, $ff
+	ld [$c0ee], a
+	call Func_23b1
+	ld b, BANK(Func_9b65)
+	ld hl, Func_9b65
+	call Bankswitch ; indirect jump to Func_9b65 (9b65 (2:5b65))
+	ld a, $2
+	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	call Func_50ee6
+	ld a, $4
+	ld [$d60a], a
+	ret
+	ld a, [$d730]
+	bit 0, a
+	ret nz
+	ld a, $2
+	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	ld a, [$cf0d]
+	cp $1
+	jr nz, .asm_510a1
+	ld a, $4
+	ld [$d528], a
+	ld a, $4
+	jr .asm_510a8
+.asm_510a1
+	ld a, $2
+	ld [$d528], a
+	ld a, $c
+.asm_510a8
+	ld [$FF00+$8d], a
+	call Func_34a6
+	xor a
+	ld [$cd6b], a
+	ld a, $2
+	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	call DisplayTextID
+	ld hl, $d72d
+	set 6, [hl]
+	set 7, [hl]
+	ld hl, $51cb
+	ld de, $51d0
+	call Func_3354
+	ld a, $f2
+	ld [W_CUROPPONENT], a ; $d059
+	ld hl, $50d9
+	call Func_50ed6
+	ld a, $5
+	ld [$d60a], a
+	ret
 
+INCBIN "baserom.gbc",$510d9,$510df - $510d9
+	ld a, [W_ISINBATTLE] ; $d057
+	cp $ff
+	jp z, Func_50ece
+	ld a, $2
+	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	ld a, [$cf0d]
+	cp $1
+	jr nz, .asm_510fb
+	ld a, $4
+	ld [$d528], a
+	ld a, $4
+	jr .asm_51102
+.asm_510fb
+	ld a, $2
+	ld [$d528], a
+	ld a, $c
+.asm_51102
+	ld [$FF00+$8d], a
+	call Func_34a6
+	ld a, $f0
+	ld [$cd6b], a
+	ld hl, $d7eb
+	set 6, [hl]
+	ld a, $2
+	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	call DisplayTextID
+	ld a, $ff
+	ld [$c0ee], a
+	call Func_23b1
+	ld b, BANK(Func_9b75)
+	ld hl, Func_9b75
+	call Bankswitch ; indirect jump to Func_9b75 (9b75 (2:5b75))
+	ld a, [$cf0d]
+	cp $1
+	jr nz, .asm_51134
+	call Func_5113d
+	jr .asm_51137
+.asm_51134
+	call Func_51142
+.asm_51137
+	ld a, $6
+	ld [$d60a], a
+	ret
+
+; known jump sources: 5112f (14:512f)
+Func_5113d: ; 5113d (14:513d)
+	ld de, $514c
+	jr asm_51145
+
+; known jump sources: 51134 (14:5134)
+Func_51142: ; 51142 (14:5142)
+	ld de, $514d
+asm_51145: ; 51145 (14:5145)
+	ld a, $2
+	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	jp MoveSprite
+
+INCBIN "baserom.gbc",$5114c,$51151 - $5114c
+	ld a, [$d730]
+	bit 0, a
+	ret nz
+	xor a
+	ld [$cd6b], a
+	ld a, $23
+	ld [$cc4d], a
+	ld a, $11
+	call Predef ; indirect jump to Func_f1d7 (f1d7 (3:71d7))
+	call Func_2307
+	ld hl, $d7eb
+	res 1, [hl]
+	res 7, [hl]
+	ld a, $7
+	ld [$d60a], a
+	ret
+; 51175 (14:5175)
 Route22Texts: ; 0x51175
 	dw Route22Text1, Route22Text2, Route22Text3
 
@@ -54661,8 +77259,27 @@ Route23Script: ; 0x511da
 	jp $3d97
 ; 0x511e9
 
-INCBIN "baserom.gbc",$511e9,$51213 - $511e9
-
+; known jump sources: 511da (14:51da)
+Func_511e9: ; 511e9 (14:51e9)
+	ld hl, $d126
+	bit 6, [hl]
+	res 6, [hl]
+	ret z
+	ld hl, $d7ee
+	res 0, [hl]
+	res 7, [hl]
+	ld hl, $d813
+	res 0, [hl]
+	res 6, [hl]
+	ld a, $7a
+	ld [$cc4d], a
+	ld a, $15
+	call Predef ; indirect jump to Func_f1c8 (f1c8 (3:71c8))
+	ld a, $60
+	ld [$cc4d], a
+	ld a, $11
+	jp Predef ; indirect jump to Func_f1d7 (f1d7 (3:71d7))
+; 51213 (14:5213)
 Route23Scripts: ; 0x51213
 	dw Route23Script0, Route23Script1, Route23Script2
 
@@ -54704,8 +77321,41 @@ Route23Script0: ; 0x51219
 	ret
 ; 0x51255
 
-INCBIN "baserom.gbc",$51255,$512ec - $51255
+INCBIN "baserom.gbc",$51255,$5125d - $51255
 
+; known jump sources: 5124b (14:524b), 51349 (14:5349)
+Func_5125d: ; 5125d (14:525d)
+	ld hl, $5276
+	ld a, [W_WHICHTRADE] ; $cd3d
+	ld c, a
+	ld b, $0
+	add hl, bc
+	add hl, bc
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	ld de, $cd6d
+.asm_5126e
+	ld a, [hli]
+	ld [de], a
+	inc de
+	cp $50
+	jr nz, .asm_5126e
+	ret
+
+INCBIN "baserom.gbc",$51276,$512d8 - $51276
+
+; known jump sources: 51365 (14:5365)
+Func_512d8: ; 512d8 (14:52d8)
+	ld a, $1
+	ld [$cd38], a
+	ld a, $80
+	ld [$ccd3], a
+	xor a
+	ld [$c109], a
+	ld [$cd6b], a
+	jp Func_3486
+; 512ec (14:52ec)
 Route23Script1: ; 0x512ec
 	ld a, [$cd38]
 	and a
@@ -54762,7 +77412,40 @@ Route23Text7: ; 0x5133d
 	jp TextScriptEnd
 ; 0x51346
 
-INCBIN "baserom.gbc",$51346,$513a3 - $51346
+; known jump sources: 5130a (14:530a), 51313 (14:5313), 5131c (14:531c), 51325 (14:5325), 5132e (14:532e), 51337 (14:5337), 51340 (14:5340)
+Func_51346: ; 51346 (14:5346)
+	ld [W_WHICHTRADE], a ; $cd3d
+	call Func_5125d
+	ld a, [W_WHICHTRADE] ; $cd3d
+	inc a
+	ld c, a
+	ld b, $2
+	ld hl, W_OBTAINEDBADGES ; $d356
+	ld a, $10
+	call Predef ; indirect jump to Func_f666 (f666 (3:7666))
+	ld a, c
+	and a
+	jr nz, .asm_5136e
+	ld hl, $538e
+	call PrintText
+	call Func_512d8
+	ld a, $1
+	ld [$d667], a
+	ret
+.asm_5136e
+	ld hl, $539e
+	call PrintText
+	ld a, [W_WHICHTRADE] ; $cd3d
+	ld c, a
+	ld b, $1
+	ld hl, $d7ed
+	ld a, $10
+	call Predef ; indirect jump to Func_f666 (f666 (3:7666))
+	ld a, $2
+	ld [$d667], a
+	ret
+
+INCBIN "baserom.gbc",$51388,$513a3 - $51388
 
 UnnamedText_513a3: ; 0x513a3
 	TX_FAR _UnnamedText_513a3
@@ -54783,8 +77466,59 @@ Route24Script: ; 0x513ad
 	ret
 ; 0x513c0
 
-INCBIN "baserom.gbc",$513c0,$8b
+; known jump sources: 51427 (14:5427)
+Func_513c0: ; 513c0 (14:53c0)
+	xor a
+	ld [$cd6b], a
+	ld [$d602], a
+	ld [$da39], a
+	ret
 
+INCBIN "baserom.gbc",$513cb,$513d5 - $513cb
+	ld a, [$d7ef]
+	bit 0, a
+	jp nz, Func_3219
+	ld hl, $540e
+	call ArePlayerCoordsInArray
+	jp nc, Func_3219
+	xor a
+	ld [$FF00+$b4], a
+	ld a, $1
+	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	call DisplayTextID
+	ld hl, $d7f0
+	bit 1, [hl]
+	res 1, [hl]
+	ret z
+	ld a, $80
+	ld [$ccd3], a
+	ld a, $1
+	ld [$cd38], a
+	call Func_3486
+	ld a, $4
+	ld [$d602], a
+	ld [$da39], a
+	ret
+
+INCBIN "baserom.gbc",$5140e,$51422 - $5140e
+	ld a, [W_ISINBATTLE] ; $d057
+	cp $ff
+	jp z, Func_513c0
+	call Func_2429
+	ld a, $f0
+	ld [$cd6b], a
+	ld hl, $d7ef
+	set 1, [hl]
+	ld a, $1
+	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	call DisplayTextID
+	xor a
+	ld [$cd6b], a
+	ld a, $0
+	ld [$d602], a
+	ld [$da39], a
+	ret
+; 5144b (14:544b)
 Route24Texts: ; 0x5144b
 	dw Route24Text1, Route24Text2, Route24Text3, Route24Text4, Route24Text5, Route24Text6, Route24Text7, Predef5CText
 
@@ -55066,7 +77800,38 @@ Route25Script: ; 0x515cb
 ; 0x515e1
 
 Unknown_515e1: ; 0x515e1
-INCBIN "baserom.gbc",$515e1,$47
+	ld hl, $d126
+	bit 6, [hl]
+	res 6, [hl]
+	ret z
+	ld hl, $d7f2
+	bit 7, [hl]
+	ret nz
+	bit 5, [hl]
+	jr nz, .asm_515ff
+	res 6, [hl]
+	ld a, $61
+	ld [$cc4d], a
+	ld a, $15
+	jp Predef ; indirect jump to Func_f1c8 (f1c8 (3:71c8))
+.asm_515ff
+	bit 4, [hl]
+	ret z
+	set 7, [hl]
+	ld a, $24
+	ld [$cc4d], a
+	ld a, $11
+	call Predef ; indirect jump to Func_f1d7 (f1d7 (3:71d7))
+	ld a, $62
+	ld [$cc4d], a
+	ld a, $11
+	call Predef ; indirect jump to Func_f1d7 (f1d7 (3:71d7))
+	ld a, $63
+	ld [$cc4d], a
+	ld a, $15
+	jp Predef ; indirect jump to Func_f1c8 (f1c8 (3:71c8))
+
+INCBIN "baserom.gbc",$51622,$51628 - $51622
 
 Route25Texts: ; 0x51628
 	dw Route25Text1, Route25Text2, Route25Text3, Route25Text4, Route25Text5, Route25Text6, Route25Text7, Route25Text8, Route25Text9, Predef5CText, Route25Text11
@@ -55384,7 +78149,54 @@ VictoryRoad2Script: ; 0x5179d
 ; 0x517c4
 
 VictoryRoad2Script_Unknown517c4: ; 0x517c4
-INCBIN "baserom.gbc",$517c4,$57
+	ld hl, $d869
+	res 7, [hl]
+
+; known jump sources: 517ae (14:57ae)
+Func_517c9: ; 517c9 (14:57c9)
+	ld a, [$d7ee]
+	bit 0, a
+	jr z, .asm_517da
+	push af
+	ld a, $15
+	ld bc, $403
+	call Func_517e2
+	pop af
+.asm_517da
+	bit 7, a
+	ret z
+	ld a, $1d
+	ld bc, $70b
+
+; known jump sources: 517d6 (14:57d6)
+Func_517e2: ; 517e2 (14:57e2)
+	ld [$d09f], a
+	ld a, $17
+	call Predef ; indirect jump to Func_ee9e (ee9e (3:6e9e))
+	ret
+
+INCBIN "baserom.gbc",$517eb,$517f1 - $517eb
+	ld hl, $5816
+	call CheckBoulderCoords
+	jp nc, Func_3219
+	ld hl, $d7ee
+	ld a, [W_WHICHTRADE] ; $cd3d
+	cp $2
+	jr z, .asm_5180b
+	bit 0, [hl]
+	set 0, [hl]
+	ret nz
+	jr .asm_51810
+.asm_5180b
+	bit 7, [hl]
+	set 7, [hl]
+	ret nz
+.asm_51810
+	ld hl, $d126
+	set 5, [hl]
+	ret
+
+INCBIN "baserom.gbc",$51816,$5181b - $51816
 
 VictoryRoad2Texts: ; 0x5181b
 	dw VictoryRoad2Text1, VictoryRoad2Text2, VictoryRoad2Text3, VictoryRoad2Text4, VictoryRoad2Text5, VictoryRoad2Text6, Predef5CText, Predef5CText, Predef5CText, Predef5CText, BoulderText, BoulderText, BoulderText
@@ -55684,8 +78496,231 @@ SilphCo7Script: ; 0x51b61
 ; 0x51b77
 
 SilphCo7Script_Unknown51b77: ; 0x5177
-INCBIN "baserom.gbc",$51b77,$1c8
+	ld hl, $d126
+	bit 5, [hl]
+	res 5, [hl]
+	ret z
+	ld hl, $5bc1
+	call Func_51bc8
+	call Func_51bf4
+	ld a, [$d830]
+	bit 4, a
+	jr nz, .asm_51b9e
+	push af
+	ld a, $54
+	ld [$d09f], a
+	ld bc, $305
+	ld a, $17
+	call Predef ; indirect jump to Func_ee9e (ee9e (3:6e9e))
+	pop af
+.asm_51b9e
+	bit 5, a
+	jr nz, .asm_51bb1
+	push af
+	ld a, $54
+	ld [$d09f], a
+	ld bc, $20a
+	ld a, $17
+	call Predef ; indirect jump to Func_ee9e (ee9e (3:6e9e))
+	pop af
+.asm_51bb1
+	bit 6, a
+	ret nz
+	ld a, $54
+	ld [$d09f], a
+	ld bc, $60a
+	ld a, $17
+	jp Predef ; indirect jump to Func_ee9e (ee9e (3:6e9e))
 
+INCBIN "baserom.gbc",$51bc1,$51bc8 - $51bc1
+
+; known jump sources: 51b82 (14:5b82)
+Func_51bc8: ; 51bc8 (14:5bc8)
+	push hl
+	ld hl, $d73f
+	ld a, [hli]
+	ld b, a
+	ld a, [hl]
+	ld c, a
+	xor a
+	ld [$FF00+$e0], a
+	pop hl
+.asm_51bd4
+	ld a, [hli]
+	cp $ff
+	jr z, .asm_51bf0
+	push hl
+	ld hl, $ffe0
+	inc [hl]
+	pop hl
+	cp b
+	jr z, .asm_51be5
+	inc hl
+	jr .asm_51bd4
+.asm_51be5
+	ld a, [hli]
+	cp c
+	jr nz, .asm_51bd4
+	ld hl, $d73f
+	xor a
+	ld [hli], a
+	ld [hl], a
+	ret
+.asm_51bf0
+	xor a
+	ld [$FF00+$e0], a
+	ret
+
+; known jump sources: 51b85 (14:5b85)
+Func_51bf4: ; 51bf4 (14:5bf4)
+	ld hl, $d830
+	ld a, [$FF00+$e0]
+	and a
+	ret z
+	cp $1
+	jr nz, .asm_51c02
+	set 4, [hl]
+	ret
+.asm_51c02
+	cp $2
+	jr nz, .asm_51c09
+	set 5, [hl]
+	ret
+.asm_51c09
+	set 6, [hl]
+	ret
+
+; known jump sources: 51ccd (14:5ccd)
+Func_51c0c: ; 51c0c (14:5c0c)
+	xor a
+	ld [$cd6b], a
+
+; known jump sources: 51c75 (14:5c75), 51cc5 (14:5cc5), 51d17 (14:5d17), 51d3c (14:5d3c)
+Func_51c10: ; 51c10 (14:5c10)
+	ld [$d648], a
+	ld [$da39], a
+	ret
+
+INCBIN "baserom.gbc",$51c17,$51c23 - $51c17
+	ld a, [$d82f]
+	bit 0, a
+	jp nz, Func_3219
+	ld hl, $5c78
+	call ArePlayerCoordsInArray
+	jp nc, Func_3219
+	xor a
+	ld [$FF00+$b4], a
+	ld a, $f0
+	ld [$cd6b], a
+	ld a, $4
+	ld [$d528], a
+	ld a, $ff
+	ld [$c0ee], a
+	call Func_23b1
+	ld c, $2
+	ld a, $de
+	call Func_23a1
+	ld a, $9
+	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	call DisplayTextID
+	ld a, $9
+	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	call Function3541
+	ld de, $5c7d
+	ld a, [W_WHICHTRADE] ; $cd3d
+	ld [$cf0d], a
+	cp $1
+	jr z, .asm_51c6c
+	inc de
+.asm_51c6c
+	ld a, $9
+	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	call MoveSprite
+	ld a, $3
+	jp Func_51c10
+
+INCBIN "baserom.gbc",$51c78,$51c82 - $51c78
+	ld a, [$d730]
+	bit 0, a
+	ret nz
+	xor a
+	ld [$cd6b], a
+	ld a, $d
+	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	call DisplayTextID
+	call Delay3
+	ld hl, $d72d
+	set 6, [hl]
+	set 7, [hl]
+	ld hl, $5ec8
+	ld de, $5ecd
+	call Func_3354
+	ld a, $f2
+	ld [W_CUROPPONENT], a ; $d059
+	ld a, [W_RIVALSTARTER] ; $d715
+	cp $b1
+	jr nz, .asm_51cb6
+	ld a, $7
+	jr .asm_51cc0
+.asm_51cb6
+	cp $99
+	jr nz, .asm_51cbe
+	ld a, $8
+	jr .asm_51cc0
+.asm_51cbe
+	ld a, $9
+.asm_51cc0
+	ld [W_TRAINERNO], a ; $d05d
+	ld a, $4
+	jp Func_51c10
+	ld a, [W_ISINBATTLE] ; $d057
+	cp $ff
+	jp z, Func_51c0c
+	ld a, $f0
+	ld [$cd6b], a
+	ld hl, $d82f
+	set 0, [hl]
+	ld a, $4
+	ld [$d528], a
+	ld a, $9
+	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	ld a, $4
+	ld [$FF00+$8d], a
+	call Func_34a6
+	ld a, $f
+	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	call DisplayTextID
+	ld a, $ff
+	ld [$c0ee], a
+	call Func_23b1
+	ld b, BANK(Func_9b47)
+	ld hl, Func_9b47
+	call Bankswitch ; indirect jump to Func_9b47 (9b47 (2:5b47))
+	ld de, $5d1d
+	ld a, [$cf0d]
+	cp $1
+	jr nz, .asm_51d0e
+	ld de, $5d1a
+.asm_51d0e
+	ld a, $9
+	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	call MoveSprite
+	ld a, $5
+	jp Func_51c10
+
+INCBIN "baserom.gbc",$51d1a,$51d25 - $51d1a
+	ld a, [$d730]
+	bit 0, a
+	ret nz
+	ld a, $a7
+	ld [$cc4d], a
+	ld a, $11
+	call Predef ; indirect jump to Func_f1d7 (f1d7 (3:71d7))
+	call Func_2307
+	xor a
+	ld [$cd6b], a
+	jp Func_51c10
+; 51d3f (14:5d3f)
 SilphCo7Texts: ; 0x51d3f
 	dw SilphCo7Text1, SilphCo7Text2, SilphCo7Text3, SilphCo7Text4, SilphCo7Text5, SilphCo7Text6, SilphCo7Text7, SilphCo7Text8, SilphCo7Text9, Predef5CText, Predef5CText, Predef5CText, SilphCo7Text13, SilphCo7Text14, SilphCo7Text15
 
@@ -56029,7 +79064,42 @@ Mansion2Script:
 ; 0x51fee
 
 Mansion2Script_Unknown51fee: ; 0x51fee
-INCBIN "baserom.gbc",$51fee,$5204d - $51fee
+	ld hl, $d126
+	bit 5, [hl]
+	res 5, [hl]
+	ret z
+	ld a, [$d796]
+	bit 0, a
+	jr nz, .asm_52016
+	ld a, $e
+	ld bc, $204
+	call Func_5202f
+	ld a, $54
+	ld bc, $409
+	call Func_5202f
+	ld a, $5f
+	ld bc, $b03
+	call Func_5202f
+	ret
+.asm_52016
+	ld a, $5f
+	ld bc, $204
+	call Func_5202f
+	ld a, $e
+	ld bc, $409
+	call Func_5202f
+	ld a, $e
+	ld bc, $b03
+	call Func_5202f
+	ret
+
+; known jump sources: 52002 (14:6002), 5200a (14:600a), 52012 (14:6012), 5201b (14:601b), 52023 (14:6023), 5202b (14:602b), 52218 (14:6218), 52220 (14:6220), 52229 (14:6229), 52231 (14:6231), 523e3 (14:63e3), 523eb (14:63eb), 523f3 (14:63f3), 523fb (14:63fb), 52404 (14:6404), 5240c (14:640c), 52414 (14:6414), 5241c (14:641c)
+Func_5202f: ; 5202f (14:602f)
+	ld [$d09f], a
+	ld a, $17
+	jp Predef ; indirect jump to Func_ee9e (ee9e (3:6e9e))
+
+INCBIN "baserom.gbc",$52037,$5204d - $52037
 
 Mansion2Texts: ; 0x5204d
 	dw Mansion2Text1, Predef5CText, Mansion2Text3, Mansion2Text4, Mansion2Text5
@@ -56167,8 +79237,70 @@ Mansion3Script:
 ; 0x52204
 
 Unnamed_52204: ; 0x52204
-INCBIN "baserom.gbc",$52204,$5228a - $52204
+	ld hl, $d126
+	bit 5, [hl]
+	res 5, [hl]
+	ret z
+	ld a, [$d796]
+	bit 0, a
+	jr nz, .asm_52224
+	ld a, $e
+	ld bc, $207
+	call Func_5202f
+	ld a, $5f
+	ld bc, $507
+	call Func_5202f
+	ret
+.asm_52224
+	ld a, $5f
+	ld bc, $207
+	call Func_5202f
+	ld a, $e
+	ld bc, $507
+	call Func_5202f
+	ret
 
+INCBIN "baserom.gbc",$52235,$5223b - $52235
+	ld hl, $6254
+	call Func_5225b
+	ld a, [$d71e]
+	and a
+	jp z, Func_3219
+	cp $3
+	ld a, $a5
+	jr nz, .asm_52250
+	ld a, $d6
+.asm_52250
+	ld [$d71d], a
+	ret
+
+INCBIN "baserom.gbc",$52254,$5225b - $52254
+
+; known jump sources: 5223e (14:623e)
+Func_5225b: ; 5225b (14:625b)
+	xor a
+	ld [$d71e], a
+	ld a, [$d72d]
+	bit 4, a
+	ret nz
+	call ArePlayerCoordsInArray
+	ret nc
+	ld a, [W_WHICHTRADE] ; $cd3d
+	ld [$d71e], a
+	ld hl, $d72d
+	set 4, [hl]
+	ld hl, $d732
+	set 4, [hl]
+	ret
+	ld a, [$c109]
+	cp $4
+	ret nz
+	xor a
+	ld [$FF00+$b4], a
+	ld a, $6
+	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	jp DisplayTextID
+; 5228a (14:628a)
 Mansion3Texts: ; 0x5228a
 	dw Mansion3Text1, Mansion3Text2, Predef5CText, Predef5CText, Mansion3Text5, Mansion3Text6
 
@@ -56286,7 +79418,50 @@ Mansion4Script: ; 0x523b9
 ; 0x523cf
 
 Unknown_523cf: ; 0x523cf
-INCBIN "baserom.gbc",$523cf,$52436 - $523cf
+	ld hl, $d126
+	bit 5, [hl]
+	res 5, [hl]
+	ret z
+	ld a, [$d796]
+	bit 0, a
+	jr nz, .asm_523ff
+	ld a, $e
+	ld bc, $80d
+	call Func_5202f
+	ld a, $e
+	ld bc, $b06
+	call Func_5202f
+	ld a, $5f
+	ld bc, $304
+	call Func_5202f
+	ld a, $54
+	ld bc, $808
+	call Func_5202f
+	ret
+.asm_523ff
+	ld a, $2d
+	ld bc, $80d
+	call Func_5202f
+	ld a, $5f
+	ld bc, $b06
+	call Func_5202f
+	ld a, $e
+	ld bc, $304
+	call Func_5202f
+	ld a, $e
+	ld bc, $808
+	call Func_5202f
+	ret
+	ld a, [$c109]
+	cp $4
+	ret nz
+	xor a
+	ld [$FF00+$b4], a
+	ld a, $9
+	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	jp DisplayTextID
+
+INCBIN "baserom.gbc",$52430,$52436 - $52430
 
 Mansion4Texts: ; 0x52436
 INCBIN "baserom.gbc",$52436,$52448 - $52436
@@ -56384,7 +79559,174 @@ Mansion4Object: ; 0x52498 (size=69)
 Mansion4Blocks:
 	INCBIN "maps/mansion4.blk"
 
-INCBIN "baserom.gbc",$525af,$526f3 - $525af
+; known jump sources: 3ef4d (f:6f4d)
+Func_525af: ; 525af (14:65af)
+	ld a, [$FF00+$d7]
+	ld [$d0d4], a
+	xor a
+	ld [$cd6a], a
+	ld [$cf0b], a
+	ld hl, $cc2b
+	ld [hli], a
+	ld [hli], a
+	ld [hli], a
+	ld [hl], a
+	ld [W_LISTSCROLLOFFSET], a ; $cc36
+	ld [$d05e], a
+	ld [$d014], a
+	ld [$d058], a
+	ld [W_PLAYERMONNUMBER], a ; $cc2f
+	ld [$d078], a
+	ld [$d35d], a
+	ld hl, $cf1d
+	ld [hli], a
+	ld [hl], a
+	ld hl, $ccd3
+	ld b, $3c
+.asm_525e1
+	ld [hli], a
+	dec b
+	jr nz, .asm_525e1
+	inc a
+	ld [$ccd9], a
+	ld a, [W_CURMAP] ; $d35e
+	cp $d9
+	jr c, .asm_525f9
+	cp $dd
+	jr nc, .asm_525f9
+	ld a, $2
+	ld [W_BATTLETYPE], a ; $d05a
+.asm_525f9
+	ld hl, UnknSong_md_90c6
+	ld b, BANK(UnknSong_md_90c6)
+	jp Bankswitch ; indirect jump to UnknSong_md_90c6 (90c6 (2:50c6))
+
+; known jump sources: 3f9b6 (f:79b6)
+Func_52601: ; 52601 (14:6601)
+	ld hl, W_ENEMYMONSTATUS ; $cfe9
+	ld de, W_PLAYERMOVETYPE ; $cfd5
+	ld a, [H_WHOSETURN] ; $FF00+$f3
+	and a
+	jp z, Func_52613
+	ld hl, W_PLAYERMONSTATUS ; $d018
+	ld de, W_ENEMYMOVETYPE ; $cfcf
+
+; known jump sources: 5260a (14:660a)
+Func_52613: ; 52613 (14:6613)
+	ld a, [hl]
+	and a
+	jr nz, .asm_52659
+	ld a, [de]
+	cp $17
+	jr nz, .asm_5262a
+	ld b, h
+	ld c, l
+	inc bc
+	ld a, [bc]
+	cp $4
+	jr z, .asm_52666
+	inc bc
+	ld a, [bc]
+	cp $4
+	jr z, .asm_52666
+.asm_5262a
+	push hl
+	ld hl, MoveHitTest
+	ld b, BANK(MoveHitTest)
+	call Bankswitch ; indirect jump to MoveHitTest (3e56b (f:656b))
+	pop hl
+	ld a, [W_MOVEMISSED] ; $d05f
+	and a
+	jr nz, .asm_52659
+	set 6, [hl]
+	ld hl, Func_3ed27
+	ld b, BANK(Func_3ed27)
+	call Bankswitch ; indirect jump to Func_3ed27 (3ed27 (f:6d27))
+	ld c, $1e
+	call DelayFrames
+	ld hl, Func_3fba8
+	ld b, BANK(Func_3fba8)
+	call Bankswitch ; indirect jump to Func_3fba8 (3fba8 (f:7ba8))
+	ld hl, Func_3fb6e
+	ld b, BANK(Func_3fb6e)
+	jp Bankswitch ; indirect jump to Func_3fb6e (3fb6e (f:7b6e))
+.asm_52659
+	ld c, $32
+	call DelayFrames
+	ld hl, Func_3fb5e
+	ld b, BANK(Func_3fb5e)
+	jp Bankswitch ; indirect jump to Func_3fb5e (3fb5e (f:7b5e))
+.asm_52666
+	ld c, $32
+	call DelayFrames
+	ld hl, Func_3dc51
+	ld b, BANK(Func_3dc51)
+	jp Bankswitch ; indirect jump to Func_3dc51 (3dc51 (f:5c51))
+
+; known jump sources: fb88 (3:7b88)
+Func_52673: ; 52673 (14:6673)
+	ld hl, $66e3
+	ld a, [W_CURMAP] ; $d35e
+	ld b, a
+.asm_5267a
+	ld a, [hli]
+	cp $ff
+	ret z
+	cp b
+	jr nz, .asm_5267a
+	ld a, $35
+	call Predef ; indirect jump to Func_c586 (c586 (3:4586))
+	ld a, [$cfc6]
+	cp $18
+	jr z, .asm_5269c
+	cp $24
+	jr z, .asm_5269c
+	ld b, a
+	ld a, [W_CURMAP] ; $d35e
+	cp $eb
+	ret nz
+	ld a, b
+	cp $5e
+	ret nz
+.asm_5269c
+	ld b, $30
+	call IsItemInBag
+	jr z, .asm_526dc
+	call Func_526fd
+	push de
+	ld a, $1
+	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	call Func_3ef5
+	pop de
+	srl d
+	ld a, d
+	ld b, a
+	ld [$d73f], a
+	srl e
+	ld a, e
+	ld c, a
+	ld [$d740], a
+	ld a, [W_CURMAP] ; $d35e
+	cp $eb
+	jr nz, .asm_526c8
+	ld a, $3
+	jr .asm_526ca
+.asm_526c8
+	ld a, $e
+.asm_526ca
+	ld [$d09f], a
+	ld a, $17
+	call Predef ; indirect jump to Func_ee9e (ee9e (3:6e9e))
+	ld hl, $d126
+	set 5, [hl]
+	ld a, $ad
+	jp Func_23b1
+.asm_526dc
+	ld a, $2
+	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	jp Func_3ef5
+
+INCBIN "baserom.gbc",$526e3,$526f3 - $526e3
 
 UnnamedText_526f3: ; 0x526f3
 	TX_FAR _UnnamedText_526f3
@@ -56396,8 +79738,31 @@ UnnamedText_526f8: ; 0x526f8
 	db $50
 ; 0x526f8 + 5 bytes
 
-INCBIN "baserom.gbc",$526fd,$1e
-
+; known jump sources: 526a3 (14:66a3)
+Func_526fd: ; 526fd (14:66fd)
+	ld a, [W_YCOORD] ; $d361
+	ld d, a
+	ld a, [W_XCOORD] ; $d362
+	ld e, a
+	ld a, [$c109]
+	and a
+	jr nz, .asm_5270d
+	inc d
+	ret
+.asm_5270d
+	cp $4
+	jr nz, .asm_52713
+	dec d
+	ret
+.asm_52713
+	cp $8
+	jr nz, .asm_52719
+	dec e
+	ret
+.asm_52719
+	inc e
+	ret
+; 5271b (14:671b)
 CeladonPrizeMenu: ; 0x5271b 14:671B
 	ld b,COIN_CASE
 	call IsItemInBag
@@ -57379,7 +80744,375 @@ DayCareMBlocks: ; 0x5522f 522F 16
 FuchsiaHouse3Blocks: ; 0x5523f 16
 	INCBIN "maps/fuchsiahouse3.blk"
 
-INCBIN "baserom.gbc",$5524f,$554d8 - $5524f
+; known jump sources: 3c61d (f:461d), 3c63b (f:463b)
+Func_5524f: ; 5524f (15:524f)
+	ld a, [W_ISLINKBATTLE] ; $d12b
+	cp $4
+	ret z
+	call Func_5546c
+	ld hl, W_PARTYMON1_NUM ; $d16b (aliases: W_PARTYMON1DATA)
+	xor a
+	ld [W_WHICHPOKEMON], a ; $cf92
+
+; known jump sources: 5544d (15:544d)
+Func_5525f: ; 5525f (15:525f)
+	inc hl
+	ld a, [hli]
+	or [hl]
+	jp z, Func_55436
+	push hl
+	ld hl, $d058
+	ld a, [W_WHICHPOKEMON] ; $cf92
+	ld c, a
+	ld b, $2
+	ld a, $10
+	call Predef ; indirect jump to Func_f666 (f666 (3:7666))
+	ld a, c
+	and a
+	pop hl
+	jp z, Func_55436
+	ld de, $10
+	add hl, de
+	ld d, h
+	ld e, l
+	ld hl, $d002
+	ld c, $5
+.asm_55285
+	ld a, [hli]
+	ld b, a
+	ld a, [de]
+	add b
+	ld [de], a
+	jr nc, .asm_5529a
+	dec de
+	ld a, [de]
+	inc a
+	jr z, .asm_55295
+	ld [de], a
+	inc de
+	jr .asm_5529a
+.asm_55295
+	ld a, $ff
+	ld [de], a
+	inc de
+	ld [de], a
+.asm_5529a
+	dec c
+	jr z, .asm_552a1
+	inc de
+	inc de
+	jr .asm_55285
+.asm_552a1
+	xor a
+	ld [H_NUMTOPRINT], a ; $FF00+$96 (aliases: H_MULTIPLICAND)
+	ld [$FF00+$97], a
+	ld a, [$d008]
+	ld [$FF00+$98], a
+	ld a, [W_ENEMYMONLEVEL] ; $cff3
+	ld [H_REMAINDER], a ; $FF00+$99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
+	call Multiply
+	ld a, $7
+	ld [H_REMAINDER], a ; $FF00+$99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
+	ld b, $4
+	call Divide
+	ld hl, $fff2
+	add hl, de
+	ld b, [hl]
+	inc hl
+	ld a, [W_PLAYERIDHI] ; $d359
+	cp b
+	jr nz, .asm_552d1
+	ld b, [hl]
+	ld a, [W_PLAYERIDLO] ; $d35a
+	cp b
+	ld a, $0
+	jr z, .asm_552d6
+.asm_552d1
+	call Func_5549f
+	ld a, $1
+.asm_552d6
+	ld [$cf4d], a
+	ld a, [W_ISINBATTLE] ; $d057
+	dec a
+	call nz, Func_5549f
+	inc hl
+	inc hl
+	inc hl
+	ld b, [hl]
+	ld a, [$FF00+$98]
+	ld [$cf4c], a
+	add b
+	ld [hld], a
+	ld b, [hl]
+	ld a, [$FF00+$97]
+	ld [$cf4b], a
+	adc b
+	ld [hl], a
+	jr nc, .asm_552f8
+	dec hl
+	inc [hl]
+	inc hl
+.asm_552f8
+	inc hl
+	push hl
+	ld a, [W_WHICHPOKEMON] ; $cf92
+	ld c, a
+	ld b, $0
+	ld hl, W_PARTYMON1 ; $d164
+	add hl, bc
+	ld a, [hl]
+	ld [$d0b5], a
+	call GetBaseStats
+	ld d, $64
+	ld hl, Func_58f6a
+	ld b, BANK(Func_58f6a)
+	call Bankswitch ; indirect jump to Func_58f6a (58f6a (16:4f6a))
+	ld a, [H_NUMTOPRINT] ; $FF00+$96 (aliases: H_MULTIPLICAND)
+	ld b, a
+	ld a, [$FF00+$97]
+	ld c, a
+	ld a, [$FF00+$98]
+	ld d, a
+	pop hl
+	ld a, [hld]
+	sub d
+	ld a, [hld]
+	sbc c
+	ld a, [hl]
+	sbc b
+	jr c, .asm_5532e
+	ld a, b
+	ld [hli], a
+	ld a, c
+	ld [hli], a
+	ld a, d
+	ld [hld], a
+	dec hl
+.asm_5532e
+	push hl
+	ld a, [W_WHICHPOKEMON] ; $cf92
+	ld hl, W_PARTYMON1NAME ; $d2b5
+	call GetPartyMonName
+	ld hl, $54b2
+	call PrintText
+	xor a
+	ld [$cc49], a
+	call LoadMonData
+	pop hl
+	ld bc, $13
+	add hl, bc
+	push hl
+	ld b, BANK(Func_58f43)
+	ld hl, Func_58f43
+	call Bankswitch ; indirect jump to Func_58f43 (58f43 (16:4f43))
+	pop hl
+	ld a, [hl]
+	cp d
+	jp z, Func_55436
+	ld a, [W_CURENEMYLVL] ; $d127
+	push af
+	push hl
+	ld a, d
+	ld [W_CURENEMYLVL], a ; $d127
+	ld [hl], a
+	ld bc, $ffdf
+	add hl, bc
+	ld a, [hl]
+	ld [$d0b5], a
+	ld [$d11e], a
+	call GetBaseStats
+	ld bc, $23
+	add hl, bc
+	push hl
+	ld a, [hld]
+	ld c, a
+	ld b, [hl]
+	push bc
+	ld d, h
+	ld e, l
+	ld bc, $ffee
+	add hl, bc
+	ld b, $1
+	call Func_3936
+	pop bc
+	pop hl
+	ld a, [hld]
+	sub c
+	ld c, a
+	ld a, [hl]
+	sbc b
+	ld b, a
+	ld de, $ffe0
+	add hl, de
+	ld a, [hl]
+	add c
+	ld [hld], a
+	ld a, [hl]
+	adc b
+	ld [hl], a
+	ld a, [W_PLAYERMONNUMBER] ; $cc2f
+	ld b, a
+	ld a, [W_WHICHPOKEMON] ; $cf92
+	cp b
+	jr nz, .asm_553f7
+	ld de, W_PLAYERMONCURHP ; $d015
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hl]
+	ld [de], a
+	ld bc, $1f
+	add hl, bc
+	push hl
+	ld de, W_PLAYERMONLEVEL ; $d022
+	ld bc, $b
+	call CopyData
+	pop hl
+	ld a, [W_PLAYERBATTSTATUS3] ; $d064
+	bit 3, a
+	jr nz, .asm_553c8
+	ld de, $cd0f
+	ld bc, $b
+	call CopyData
+.asm_553c8
+	xor a
+	ld [$d11e], a
+	ld hl, Func_3ed99
+	ld b, BANK(Func_3ed99)
+	call Bankswitch ; indirect jump to Func_3ed99 (3ed99 (f:6d99))
+	ld hl, Func_3ed1a
+	ld b, BANK(Func_3ed1a)
+	call Bankswitch ; indirect jump to Func_3ed1a (3ed1a (f:6d1a))
+	ld hl, Func_3ee19
+	ld b, BANK(Func_3ee19)
+	call Bankswitch ; indirect jump to Func_3ee19 (3ee19 (f:6e19))
+	ld hl, Func_3cd60
+	ld b, BANK(Func_3cd60)
+	call Bankswitch ; indirect jump to Func_3cd60 (3cd60 (f:4d60))
+	ld hl, Func_3ee94
+	ld b, BANK(Func_3ee94)
+	call Bankswitch ; indirect jump to Func_3ee94 (3ee94 (f:6e94))
+	call Func_3719
+.asm_553f7
+	ld hl, $54dd
+	call PrintText
+	xor a
+	ld [$cc49], a
+	call LoadMonData
+	ld d, $1
+	ld hl, PrintStatsBox
+	ld b, BANK(PrintStatsBox)
+	call Bankswitch ; indirect jump to PrintStatsBox (12ae4 (4:6ae4))
+	call Func_3865
+	call Func_3725
+	xor a
+	ld [$cc49], a
+	ld a, [$d0b5]
+	ld [$d11e], a
+	ld a, $1a
+	call Predef ; indirect jump to Func_3af5b (3af5b (e:6f5b))
+	ld hl, $ccd3
+	ld a, [W_WHICHPOKEMON] ; $cf92
+	ld c, a
+	ld b, $1
+	ld a, $10
+	call Predef ; indirect jump to Func_f666 (f666 (3:7666))
+	pop hl
+	pop af
+	ld [W_CURENEMYLVL], a ; $d127
+
+; known jump sources: 55262 (15:5262), 55277 (15:5277), 55356 (15:5356)
+Func_55436: ; 55436 (15:5436)
+	ld a, [W_NUMINPARTY] ; $d163
+	ld b, a
+	ld a, [W_WHICHPOKEMON] ; $cf92
+	inc a
+	cp b
+	jr z, .asm_55450
+	ld [W_WHICHPOKEMON], a ; $cf92
+	ld bc, $2c
+	ld hl, W_PARTYMON1_NUM ; $d16b (aliases: W_PARTYMON1DATA)
+	call AddNTimes
+	jp Func_5525f
+.asm_55450
+	ld hl, $d058
+	xor a
+	ld [hl], a
+	ld a, [W_PLAYERMONNUMBER] ; $cc2f
+	ld c, a
+	ld b, $1
+	push bc
+	ld a, $10
+	call Predef ; indirect jump to Func_f666 (f666 (3:7666))
+	ld hl, $ccf5
+	xor a
+	ld [hl], a
+	pop bc
+	ld a, $10
+	jp Predef ; indirect jump to Func_f666 (f666 (3:7666))
+
+; known jump sources: 55255 (15:5255)
+Func_5546c: ; 5546c (15:546c)
+	ld a, [$d058]
+	ld b, a
+	xor a
+	ld c, $8
+	ld d, $0
+.asm_55475
+	xor a
+	srl b
+	adc d
+	ld d, a
+	dec c
+	jr nz, .asm_55475
+	cp $2
+	ret c
+	ld [$d11e], a
+	ld hl, $d002
+	ld c, $7
+.asm_55488
+	xor a
+	ld [H_DIVIDEND], a ; $FF00+$95 (aliases: H_PRODUCT, H_PASTLEADINGZEROES, H_QUOTIENT)
+	ld a, [hl]
+	ld [H_NUMTOPRINT], a ; $FF00+$96 (aliases: H_MULTIPLICAND)
+	ld a, [$d11e]
+	ld [H_REMAINDER], a ; $FF00+$99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
+	ld b, $2
+	call Divide
+	ld a, [$FF00+$98]
+	ld [hli], a
+	dec c
+	jr nz, .asm_55488
+	ret
+
+; known jump sources: 552d1 (15:52d1), 552dd (15:52dd)
+Func_5549f: ; 5549f (15:549f)
+	ld a, [$FF00+$97]
+	ld b, a
+	ld a, [$FF00+$98]
+	ld c, a
+	srl b
+	rr c
+	add c
+	ld [$FF00+$98], a
+	ld a, [$FF00+$97]
+	adc b
+	ld [$FF00+$97], a
+	ret
+
+INCBIN "baserom.gbc",$554b2,$554b7 - $554b2
+	ld a, [$cc5b]
+	ld hl, $54cb
+	and a
+	ret nz
+	ld hl, $54d8
+	ld a, [$cf4d]
+	and a
+	ret z
+	ld hl, $54d4
+	ret
+
+INCBIN "baserom.gbc",$554cb,$554d8 - $554cb
 
 UnnamedText_554d8: ; 0x554d8
 	TX_FAR _UnnamedText_554d8 ; 0x89bee
@@ -60211,7 +83944,71 @@ SilphCo8Script: ; 0x56504
 ; 0x5651a
 
 SilphCo8_Unknown5651a: ; 0x5651a
-INCBIN "baserom.gbc",$5651a,$63
+	ld hl, $d126
+	bit 5, [hl]
+	res 5, [hl]
+	ret z
+	ld hl, $653e
+	call Func_56541
+	call Func_5656d
+	ld a, [$d832]
+	bit 0, a
+	ret nz
+	ld a, $5f
+	ld [$d09f], a
+	ld bc, $403
+	ld a, $17
+	jp Predef ; indirect jump to Func_ee9e (ee9e (3:6e9e))
+
+INCBIN "baserom.gbc",$5653e,$56541 - $5653e
+
+; known jump sources: 56525 (15:6525)
+Func_56541: ; 56541 (15:6541)
+	push hl
+	ld hl, $d73f
+	ld a, [hli]
+	ld b, a
+	ld a, [hl]
+	ld c, a
+	xor a
+	ld [$FF00+$e0], a
+	pop hl
+.asm_5654d
+	ld a, [hli]
+	cp $ff
+	jr z, .asm_56569
+	push hl
+	ld hl, $ffe0
+	inc [hl]
+	pop hl
+	cp b
+	jr z, .asm_5655e
+	inc hl
+	jr .asm_5654d
+.asm_5655e
+	ld a, [hli]
+	cp c
+	jr nz, .asm_5654d
+	ld hl, $d73f
+	xor a
+	ld [hli], a
+	ld [hl], a
+	ret
+.asm_56569
+	xor a
+	ld [$FF00+$e0], a
+	ret
+
+; known jump sources: 56528 (15:6528)
+Func_5656d: ; 5656d (15:656d)
+	ld a, [$FF00+$e0]
+	and a
+	ret z
+	ld hl, $d832
+	set 0, [hl]
+	ret
+
+INCBIN "baserom.gbc",$56577,$5657d - $56577
 
 SilphCo8Texts: ; 0x5657d
 	dw SilphCo8Text1, SilphCo8Text2, SilphCo8Text3, SilphCo8Text4
@@ -60365,8 +84162,323 @@ SilphCo8Object: ; 0x56613 (size=90)
 SilphCo8Blocks: ; 0x5666d 117
 	INCBIN "maps/silphco8.blk"
 
-INCBIN "baserom.gbc",$566e2,873
+INCBIN "baserom.gbc",$566e2,$567f9 - $566e2
 
+; known jump sources: 3303 (0:3303)
+Func_567f9: ; 567f9 (15:67f9)
+	ld hl, $c100
+	ld de, $4
+	ld a, [$cf13]
+	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	call Func_56903
+	ld a, [hli]
+	ld [$FF00+$eb], a
+	inc hl
+	ld a, [hl]
+	ld [$FF00+$ec], a
+	ld de, $fe
+	add hl, de
+	ld a, [hli]
+	ld [$FF00+$ed], a
+	ld a, [hl]
+	ld [$FF00+$ee], a
+	ret
+
+INCBIN "baserom.gbc",$56819,$5683d - $56819
+	ld hl, $c100
+	ld de, $4
+	ld a, [$cf13]
+	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	call Func_56903
+	ld a, [$FF00+$eb]
+	ld [hli], a
+	inc hl
+	ld a, [$FF00+$ec]
+	ld [hl], a
+	ld de, $fe
+	add hl, de
+	ld a, [$FF00+$ed]
+	ld [hli], a
+	ld a, [$FF00+$ee]
+	ld [hl], a
+	ret
+
+INCBIN "baserom.gbc",$5685d,$56881 - $5685d
+
+; known jump sources: 32d4 (0:32d4)
+Func_56881: ; 56881 (15:6881)
+	ld a, [$cf13]
+	swap a
+	ld [W_WHICHTRADE], a ; $cd3d
+	call Func_5698e
+	ld a, [$cd3f]
+	and a
+	jr z, .asm_5689c
+	cp $4
+	jr z, .asm_568b0
+	cp $8
+	jr z, .asm_568dc
+	jr .asm_568c6
+.asm_5689c
+	ld a, [$cd40]
+	ld b, a
+	ld a, $3c
+	call Func_3633
+	cp $10
+	ret z
+	swap a
+	dec a
+	ld c, a
+	xor a
+	ld b, a
+	jr .asm_568f0
+.asm_568b0
+	ld a, [$cd40]
+	ld b, a
+	ld a, $3c
+	call Func_3633
+	cp $10
+	ret z
+	swap a
+	dec a
+	ld c, a
+	ld b, $0
+	ld a, $40
+	jr .asm_568f0
+.asm_568c6
+	ld a, [$cd41]
+	ld b, a
+	ld a, $40
+	call Func_3633
+	cp $10
+	ret z
+	swap a
+	dec a
+	ld c, a
+	ld b, $0
+	ld a, $c0
+	jr .asm_568f0
+.asm_568dc
+	ld a, [$cd41]
+	ld b, a
+	ld a, $40
+	call Func_3633
+	cp $10
+	ret z
+	swap a
+	dec a
+	ld c, a
+	ld b, $0
+	ld a, $80
+.asm_568f0
+	ld hl, $cc97
+	ld de, $cc97
+	call FillMemory
+	ld [hl], $ff
+	ld a, [$cf13]
+	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	jp Func_363d
+
+; known jump sources: 56804 (15:6804), 56848 (15:6848)
+Func_56903: ; 56903 (15:6903)
+	push de
+	add hl, de
+	ld a, [H_DOWNARROWBLINKCNT2] ; $FF00+$8c
+	swap a
+	ld d, $0
+	ld e, a
+	add hl, de
+	pop de
+	ret
+
+; known jump sources: 3342 (0:3342)
+Func_5690f: ; 5690f (15:690f)
+	push hl
+	push de
+	ld a, [W_WHICHTRADE] ; $cd3d
+	add $2
+	ld d, $0
+	ld e, a
+	ld hl, $c100
+	add hl, de
+	ld a, [hl]
+	sub $ff
+	jr nz, .asm_56925
+	jp Func_56988
+.asm_56925
+	ld a, [W_WHICHTRADE] ; $cd3d
+	add $9
+	ld d, $0
+	ld e, a
+	ld hl, $c100
+	add hl, de
+	ld a, [hl]
+	ld [$cd3f], a
+	call Func_5698e
+	ld a, [$cd40]
+	ld b, a
+	ld a, $3c
+	cp b
+	jr z, .asm_5694e
+	ld a, [$cd41]
+	ld b, a
+	ld a, $40
+	cp b
+	jr z, .asm_56961
+	xor a
+	jp Func_56988
+.asm_5694e
+	ld a, [$cd41]
+	ld b, a
+	ld a, $40
+	call Func_3633
+	jr z, Func_56988
+	call Func_569af
+	jr c, .asm_56975
+	xor a
+	jr Func_56988
+.asm_56961
+	ld a, [$cd40]
+	ld b, a
+	ld a, $3c
+	call Func_3633
+	jr z, Func_56988
+	call Func_569af
+	jr c, .asm_56975
+	xor a
+	jp Func_56988
+.asm_56975
+	call Func_569e3
+	ld a, [W_WHICHTRADE] ; $cd3d
+	and a
+	jr z, Func_56988
+	ld hl, $cd60
+	set 0, [hl]
+	call Func_336a
+	ld a, $ff
+
+; known jump sources: 56922 (15:6922), 5694b (15:694b), 56957 (15:6957), 5695f (15:695f), 5696a (15:696a), 56972 (15:6972), 5697c (15:697c)
+Func_56988: ; 56988 (15:6988)
+	ld [W_WHICHTRADE], a ; $cd3d
+	pop de
+	pop hl
+	ret
+
+; known jump sources: 56889 (15:6889), 56935 (15:6935)
+Func_5698e: ; 5698e (15:698e)
+	ld a, [W_WHICHTRADE] ; $cd3d
+	add $4
+	ld d, $0
+	ld e, a
+	ld hl, $c100
+	add hl, de
+	ld a, [hl]
+	ld [$cd40], a
+	ld a, [W_WHICHTRADE] ; $cd3d
+	add $6
+	ld d, $0
+	ld e, a
+	ld hl, $c100
+	add hl, de
+	ld a, [hl]
+	ld [$cd41], a
+	ret
+
+; known jump sources: 56959 (15:6959), 5696c (15:696c)
+Func_569af: ; 569af (15:69af)
+	ld b, a
+	ld a, [$cd3e]
+	cp b
+	jr nc, .asm_569b8
+	jr .asm_569e1
+.asm_569b8
+	ld a, [$cd3f]
+	cp $0
+	jr z, .asm_569cd
+	cp $4
+	jr z, .asm_569cd
+	cp $8
+	jr z, .asm_569d7
+	cp $c
+	jr z, .asm_569d7
+	jr .asm_569e1
+.asm_569cd
+	ld a, [$cd41]
+	ld b, a
+	cp $40
+	jr z, .asm_569df
+	jr .asm_569e1
+.asm_569d7
+	ld a, [$cd40]
+	ld b, a
+	cp $3c
+	jr nz, .asm_569e1
+.asm_569df
+	scf
+	ret
+.asm_569e1
+	and a
+	ret
+
+; known jump sources: 56975 (15:6975)
+Func_569e3: ; 569e3 (15:69e3)
+	ld a, [W_CURMAP] ; $d35e
+	cp $53
+	jp z, .asm_56a42
+	ld a, [W_WHICHTRADE] ; $cd3d
+	add $4
+	ld d, $0
+	ld e, a
+	ld hl, $c100
+	add hl, de
+	ld a, [hl]
+	cp $fc
+	jr nz, .asm_569fe
+	ld a, $c
+.asm_569fe
+	ld [$cd40], a
+	ld a, [W_WHICHTRADE] ; $cd3d
+	add $6
+	ld d, $0
+	ld e, a
+	ld hl, $c100
+	add hl, de
+	ld a, [hl]
+	ld [$cd41], a
+	ld a, [$cd3f]
+	cp $0
+	jr nz, .asm_56a21
+	ld a, [$cd40]
+	cp $3c
+	jr c, .asm_56a42
+	jr .asm_56a46
+.asm_56a21
+	cp $4
+	jr nz, .asm_56a2e
+	ld a, [$cd40]
+	cp $3c
+	jr nc, .asm_56a42
+	jr .asm_56a46
+.asm_56a2e
+	cp $8
+	jr nz, .asm_56a3b
+	ld a, [$cd41]
+	cp $40
+	jr nc, .asm_56a42
+	jr .asm_56a46
+.asm_56a3b
+	ld a, [$cd41]
+	cp $40
+	jr nc, .asm_56a46
+.asm_56a42
+	ld a, $ff
+	jr .asm_56a47
+.asm_56a46
+	xor a
+.asm_56a47
+	ld [W_WHICHTRADE], a ; $cd3d
+	ret
+; 56a4b (15:6a4b)
 SECTION "bank16",DATA,BANK[$16]
 
 Route6_h: ; 0x58000 to 0x58022 (34 bytes) (id=17)
@@ -60850,8 +84962,90 @@ Route18Object: ; 0x58c5a (size=66)
 Route18Blocks: ; 0x58c9c 225
 	INCBIN "maps/route18.blk"
 
-INCBIN "baserom.gbc",$58d7d,$58e3b - $58d7d
+INCBIN "baserom.gbc",$58d7d,$58d99 - $58d7d
 
+; known jump sources: 3c0fc (f:40fc)
+Func_58d99: ; 58d99 (16:4d99)
+	ld a, [W_ISINBATTLE] ; $d057
+	dec a
+	jr nz, .asm_58dbe
+	ld a, [W_CURMAP] ; $d35e
+	cp $90
+	jr c, .asm_58daa
+	cp $95
+	jr c, .asm_58dd8
+.asm_58daa
+	ld a, [$cfd8]
+	call PlayCry
+	ld hl, $4e3b
+	ld a, [W_MOVEMISSED] ; $d05f
+	and a
+	jr z, .asm_58dbc
+	ld hl, $4e40
+.asm_58dbc
+	jr .asm_58dc9
+.asm_58dbe
+	call Func_58e29
+	ld c, $14
+	call DelayFrames
+	ld hl, $4e4a
+.asm_58dc9
+	push hl
+	ld hl, Func_3a849
+	ld b, BANK(Func_3a849)
+	call Bankswitch ; indirect jump to Func_3a849 (3a849 (e:6849))
+	pop hl
+	call PrintText
+	jr asm_58e3a
+.asm_58dd8
+	ld b, $48
+	call IsItemInBag
+	ld a, [$cfd8]
+	ld [$cf91], a
+	cp $91
+	jr z, .asm_58e03
+	ld a, b
+	and a
+	jr z, .asm_58df5
+	ld hl, Func_3eb01
+	ld b, BANK(Func_3eb01)
+	call Bankswitch ; indirect jump to Func_3eb01 (3eb01 (f:6b01))
+	jr .asm_58daa
+.asm_58df5
+	ld hl, $4e45
+	call PrintText
+	ld hl, $4e54
+	call PrintText
+	jr asm_58e3a
+.asm_58e03
+	ld a, b
+	and a
+	jr z, .asm_58df5
+	ld hl, $4e45
+	call PrintText
+	ld hl, $4e4f
+	call PrintText
+	ld hl, Func_3eb01
+	ld b, BANK(Func_3eb01)
+	call Bankswitch ; indirect jump to Func_3eb01 (3eb01 (f:6b01))
+	ld hl, Func_708ca
+	ld b, BANK(Func_708ca)
+	call Bankswitch ; indirect jump to Func_708ca (708ca (1c:48ca))
+	ld hl, $4e3b
+	call PrintText
+
+; known jump sources: 58dbe (16:4dbe)
+Func_58e29: ; 58e29 (16:4e29)
+	xor a
+	ld [$c0f1], a
+	ld a, $80
+	ld [$c0f2], a
+	ld a, $e9
+	call Func_23b1
+	jp Func_3748
+asm_58e3a: ; 58e3a (16:4e3a)
+	ret
+; 58e3b (16:4e3b)
 UnnamedText_58e3b: ; 0x58e3b
 	TX_FAR _UnnamedText_58e3b
 	db $50
@@ -60882,21 +85076,222 @@ UnnamedText_58e54: ; 0x58e54
 	db $50
 ; 0x58e54 + 5 bytes
 
-INCBIN "baserom.gbc",$58e59,$58ecc - $58e59
+; known jump sources: 3cc96 (f:4c96)
+Func_58e59: ; 58e59 (16:4e59)
+	ld hl, W_ENEMYMONCURHP ; $cfe6
+	ld a, [hli]
+	or [hl]
+	ld hl, $4eae
+	jr z, .asm_58eab
+	xor a
+	ld [H_NUMTOPRINT], a ; $FF00+$96 (aliases: H_MULTIPLICAND)
+	ld hl, W_ENEMYMONCURHP ; $cfe6
+	ld a, [hli]
+	ld [$cce3], a
+	ld [$FF00+$97], a
+	ld a, [hl]
+	ld [$cce4], a
+	ld [$FF00+$98], a
+	ld a, $19
+	ld [H_REMAINDER], a ; $FF00+$99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
+	call Multiply
+	ld hl, W_ENEMYMONMAXHP ; $cff4
+	ld a, [hli]
+	ld b, [hl]
+	srl a
+	rr b
+	srl a
+	rr b
+	ld a, b
+	ld b, $4
+	ld [H_REMAINDER], a ; $FF00+$99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
+	call Divide
+	ld a, [$FF00+$98]
+	ld hl, $4eae
+	cp $46
+	jr nc, .asm_58eab
+	ld hl, $4eb5
+	cp $28
+	jr nc, .asm_58eab
+	ld hl, $4ebc
+	cp $a
+	jr nc, .asm_58eab
+	ld hl, $4ec3
+.asm_58eab
+	jp PrintText
 
+INCBIN "baserom.gbc",$58eae,$58eb3 - $58eae
+	jr .asm_58ec8
+
+INCBIN "baserom.gbc",$58eb5,$58eba - $58eb5
+	jr .asm_58ec8
+
+INCBIN "baserom.gbc",$58ebc,$58ec8 - $58ebc
+.asm_58ec8
+	ld hl, $4ecc
+	ret
+; 58ecc (16:4ecc)
 UnnamedText_58ecc: ; 0x58ecc
 	TX_FAR _UnnamedText_58ecc
 	db $50
 ; 0x58ecc + 5 bytes
 
-INCBIN "baserom.gbc",$58ed1,$58f3e - $58ed1
+; known jump sources: 3d1bf (f:51bf)
+Func_58ed1: ; 58ed1 (16:4ed1)
+	ld hl, $4ed7
+	jp PrintText
+
+INCBIN "baserom.gbc",$58ed7,$58f3e - $58ed7
 
 UnnamedText_58f3e: ; 0x58f3e
 	TX_FAR _UnnamedText_58f3e
 	db $50
 ; 0x58f3e + 5 bytes
 
-INCBIN "baserom.gbc",$58f43,$59091 - $58f43
+; known jump sources: f64c (3:764c), 55350 (15:5350)
+Func_58f43: ; 58f43 (16:4f43)
+	ld a, [$cf98]
+	ld [$d0b5], a
+	call GetBaseStats
+	ld d, $1
+.asm_58f4e
+	inc d
+	call Func_58f6a
+	push hl
+	ld hl, $cfa8
+	ld a, [$FF00+$98]
+	ld c, a
+	ld a, [hld]
+	sub c
+	ld a, [$FF00+$97]
+	ld c, a
+	ld a, [hld]
+	sbc c
+	ld a, [H_NUMTOPRINT] ; $FF00+$96 (aliases: H_MULTIPLICAND)
+	ld c, a
+	ld a, [hl]
+	sbc c
+	pop hl
+	jr nc, .asm_58f4e
+	dec d
+	ret
+
+; known jump sources: de9a (3:5e9a), e88c (3:688c), f431 (3:7431), 12c94 (4:6c94), 55312 (15:5312), 58f4f (16:4f4f)
+Func_58f6a: ; 58f6a (16:4f6a)
+	ld a, [$d0cb]
+	add a
+	add a
+	ld c, a
+	ld b, $0
+	ld hl, $501d
+	add hl, bc
+	call Func_59010
+	ld a, d
+	ld [H_REMAINDER], a ; $FF00+$99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
+	call Multiply
+	ld a, [hl]
+	and $f0
+	swap a
+	ld [H_REMAINDER], a ; $FF00+$99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
+	call Multiply
+	ld a, [hli]
+	and $f
+	ld [H_REMAINDER], a ; $FF00+$99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
+	ld b, $4
+	call Divide
+	ld a, [H_NUMTOPRINT] ; $FF00+$96 (aliases: H_MULTIPLICAND)
+	push af
+	ld a, [$FF00+$97]
+	push af
+	ld a, [$FF00+$98]
+	push af
+	call Func_59010
+	ld a, [hl]
+	and $7f
+	ld [H_REMAINDER], a ; $FF00+$99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
+	call Multiply
+	ld a, [H_NUMTOPRINT] ; $FF00+$96 (aliases: H_MULTIPLICAND)
+	push af
+	ld a, [$FF00+$97]
+	push af
+	ld a, [$FF00+$98]
+	push af
+	ld a, [hli]
+	push af
+	xor a
+	ld [H_NUMTOPRINT], a ; $FF00+$96 (aliases: H_MULTIPLICAND)
+	ld [$FF00+$97], a
+	ld a, d
+	ld [$FF00+$98], a
+	ld a, [hli]
+	ld [H_REMAINDER], a ; $FF00+$99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
+	call Multiply
+	ld b, [hl]
+	ld a, [$FF00+$98]
+	sub b
+	ld [$FF00+$98], a
+	ld b, $0
+	ld a, [$FF00+$97]
+	sbc b
+	ld [$FF00+$97], a
+	ld a, [H_NUMTOPRINT] ; $FF00+$96 (aliases: H_MULTIPLICAND)
+	sbc b
+	ld [H_NUMTOPRINT], a ; $FF00+$96 (aliases: H_MULTIPLICAND)
+	pop af
+	and $80
+	jr nz, .asm_58feb
+	pop bc
+	ld a, [$FF00+$98]
+	add b
+	ld [$FF00+$98], a
+	pop bc
+	ld a, [$FF00+$97]
+	adc b
+	ld [$FF00+$97], a
+	pop bc
+	ld a, [H_NUMTOPRINT] ; $FF00+$96 (aliases: H_MULTIPLICAND)
+	adc b
+	ld [H_NUMTOPRINT], a ; $FF00+$96 (aliases: H_MULTIPLICAND)
+	jr .asm_58ffd
+.asm_58feb
+	pop bc
+	ld a, [$FF00+$98]
+	sub b
+	ld [$FF00+$98], a
+	pop bc
+	ld a, [$FF00+$97]
+	sbc b
+	ld [$FF00+$97], a
+	pop bc
+	ld a, [H_NUMTOPRINT] ; $FF00+$96 (aliases: H_MULTIPLICAND)
+	sbc b
+	ld [H_NUMTOPRINT], a ; $FF00+$96 (aliases: H_MULTIPLICAND)
+.asm_58ffd
+	pop bc
+	ld a, [$FF00+$98]
+	add b
+	ld [$FF00+$98], a
+	pop bc
+	ld a, [$FF00+$97]
+	adc b
+	ld [$FF00+$97], a
+	pop bc
+	ld a, [H_NUMTOPRINT] ; $FF00+$96 (aliases: H_MULTIPLICAND)
+	adc b
+	ld [H_NUMTOPRINT], a ; $FF00+$96 (aliases: H_MULTIPLICAND)
+	ret
+
+; known jump sources: 58f76 (16:4f76), 58f9c (16:4f9c)
+Func_59010: ; 59010 (16:5010)
+	xor a
+	ld [H_NUMTOPRINT], a ; $FF00+$96 (aliases: H_MULTIPLICAND)
+	ld [$FF00+$97], a
+	ld a, d
+	ld [$FF00+$98], a
+	ld [H_REMAINDER], a ; $FF00+$99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
+	jp Multiply
+
+INCBIN "baserom.gbc",$5901d,$59091 - $5901d
 
 UnnamedText_59091: ; 0x59091
 	TX_FAR _UnnamedText_59091
@@ -61991,8 +86386,54 @@ Route12Script: ; 0x595f3
 	ret
 ; 0x59606
 
-INCBIN "baserom.gbc",$59606,$6f
+.asm_59606
+	xor a
+	ld [$cd6b], a
+	ld [$d624], a
+	ld [$da39], a
+	ret
 
+INCBIN "baserom.gbc",$59611,$59619 - $59611
+	ld hl, $d7d8
+	bit 7, [hl]
+	jp nz, Func_3219
+	bit 6, [hl]
+	res 6, [hl]
+	jp z, Func_3219
+	ld a, $d
+	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	call DisplayTextID
+	ld a, $84
+	ld [W_CUROPPONENT], a ; $d059
+	ld a, $1e
+	ld [W_CURENEMYLVL], a ; $d127
+	ld a, $1d
+	ld [$cc4d], a
+	ld a, $11
+	call Predef ; indirect jump to Func_f1d7 (f1d7 (3:71d7))
+	ld a, $3
+	ld [$d624], a
+	ld [$da39], a
+	ret
+	ld a, [W_ISINBATTLE] ; $d057
+	cp $ff
+	jr z, .asm_59606
+	call Func_2429
+	ld a, [$cf0b]
+	cp $2
+	jr z, .asm_59664
+	ld a, $e
+	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	call DisplayTextID
+.asm_59664
+	ld hl, $d7d8
+	set 7, [hl]
+	call Delay3
+	ld a, $0
+	ld [$d624], a
+	ld [$da39], a
+	ret
+; 59675 (16:5675)
 Route12Texts: ; 0x59675
 	dw Route12Text1, Route12Text2, Route12Text3, Route12Text4, Route12Text5, Route12Text6, Route12Text7, Route12Text8, Predef5CText, Predef5CText, Route12Text11, Route12Text12, Route12Text13, Route12Text14
 
@@ -62576,8 +87017,56 @@ Route16Script: ; 0x59933
 	ret
 ; 0x59946
 
-INCBIN "baserom.gbc",$59946,$73
+; known jump sources: 59994 (16:5994)
+Func_59946: ; 59946 (16:5946)
+	xor a
+	ld [$cd6b], a
+	ld [$d626], a
+	ld [$da39], a
+	ret
 
+INCBIN "baserom.gbc",$59951,$59959 - $59951
+	ld hl, $d7e0
+	bit 1, [hl]
+	jp nz, Func_3219
+	bit 0, [hl]
+	res 0, [hl]
+	jp z, Func_3219
+	ld a, $a
+	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	call DisplayTextID
+	ld a, $84
+	ld [W_CUROPPONENT], a ; $d059
+	ld a, $1e
+	ld [W_CURENEMYLVL], a ; $d127
+	ld a, $21
+	ld [$cc4d], a
+	ld a, $11
+	call Predef ; indirect jump to Func_f1d7 (f1d7 (3:71d7))
+	call Func_2429
+	ld a, $3
+	ld [$d626], a
+	ld [$da39], a
+	ret
+	ld a, [W_ISINBATTLE] ; $d057
+	cp $ff
+	jp z, Func_59946
+	call Func_2429
+	ld a, [$cf0b]
+	cp $2
+	jr z, .asm_599a8
+	ld a, $b
+	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	call DisplayTextID
+.asm_599a8
+	ld hl, $d7e0
+	set 1, [hl]
+	call Delay3
+	ld a, $0
+	ld [$d626], a
+	ld [$da39], a
+	ret
+; 599b9 (16:59b9)
 Route16Texts: ; 0x599b9
 	dw Route16Text1, Route16Text2, Route16Text3, Route16Text4, Route16Text5, Route16Text6, Route16Text7, Route16Text8, Route16Text9, Route16Text10, Route16Text11
 
@@ -62924,8 +87413,17 @@ FanClubScript: ; 0x59b70
 	jp EnableAutoTextBoxDrawing
 ; 0x59b73
 
-INCBIN "baserom.gbc",$59b73,$11
-
+; known jump sources: 59c1d (16:5c1d)
+Func_59b73: ; 59b73 (16:5b73)
+	ld a, [$d771]
+	bit 1, a
+	ret nz
+	ld b, $6
+	call IsItemInBag
+	ret nz
+	ld b, $2d
+	jp IsItemInBag
+; 59b84 (16:5b84)
 FanClubTexts: ; 0x59b84
 	dw FanClubText1, FanClubText2, FanClubText3, FanClubText4, FanClubText5, FanClubText6, FanClubText7, FanClubText8
 
@@ -63138,7 +87636,46 @@ SilphCo2Script: ; 0x59cf1
 ; 0x59d07
 
 SilphCo2_Unknown59d07: ; 0x59d07
-INCBIN "baserom.gbc",$59d07,$7f
+INCBIN "baserom.gbc",$59d07,$59d43 - $59d07
+
+; known jump sources: 59f7c (16:5f7c), 5a15a (16:615a)
+Func_59d43: ; 59d43 (16:5d43)
+	push hl
+	ld hl, $d73f
+	ld a, [hli]
+	ld b, a
+	ld a, [hl]
+	ld c, a
+	xor a
+	ld [$FF00+$e0], a
+	pop hl
+.asm_59d4f
+	ld a, [hli]
+	cp $ff
+	jr z, .asm_59d6b
+	push hl
+	ld hl, $ffe0
+	inc [hl]
+	pop hl
+	cp b
+	jr z, .asm_59d60
+	inc hl
+	jr .asm_59d4f
+.asm_59d60
+	ld a, [hli]
+	cp c
+	jr nz, .asm_59d4f
+	ld hl, $d73f
+	xor a
+	ld [hli], a
+	ld [hl], a
+	ret
+.asm_59d6b
+	xor a
+	ld [$FF00+$e0], a
+	ret
+
+INCBIN "baserom.gbc",$59d6f,$59d86 - $59d6f
 
 SilphCo2Texts: ; 0x59d86
 	dw SilphCo2Text1, SilphCo2Text2, SilphCo2Text3, SilphCo2Text4, SilphCo2Text5
@@ -63364,7 +87901,49 @@ SilphCo3Script: ; 0x59f5b
 ; 0x59f71
 
 SilphCo3Script_Unknown59f71: ; 0x59f71
-INCBIN "baserom.gbc",$59f71,$53
+	ld hl, $d126
+	bit 5, [hl]
+	res 5, [hl]
+	ret z
+	ld hl, $5fa8
+	call Func_59d43
+	call Func_59fad
+	ld a, [$d828]
+	bit 0, a
+	jr nz, .asm_59f98
+	push af
+	ld a, $5f
+	ld [$d09f], a
+	ld bc, $404
+	ld a, $17
+	call Predef ; indirect jump to Func_ee9e (ee9e (3:6e9e))
+	pop af
+.asm_59f98
+	bit 1, a
+	ret nz
+	ld a, $5f
+	ld [$d09f], a
+	ld bc, $408
+	ld a, $17
+	jp Predef ; indirect jump to Func_ee9e (ee9e (3:6e9e))
+
+INCBIN "baserom.gbc",$59fa8,$59fad - $59fa8
+
+; known jump sources: 59f7f (16:5f7f)
+Func_59fad: ; 59fad (16:5fad)
+	ld hl, $d828
+	ld a, [$FF00+$e0]
+	and a
+	ret z
+	cp $1
+	jr nz, .asm_59fbb
+	set 0, [hl]
+	ret
+.asm_59fbb
+	set 1, [hl]
+	ret
+
+INCBIN "baserom.gbc",$59fbe,$59fc4 - $59fbe
 
 SilphCo3Texts: ; 0x59fc4
 	dw SilphCo3Text1, SilphCo3Text2, SilphCo3Text3, Predef5CText
@@ -63513,7 +88092,34 @@ SilphCo10Script: ; 0x5a139
 ; 0x5a14f
 
 SilphCo10Script_Unknown5a14f: ; 0x5a14f
-INCBIN "baserom.gbc",$5a14f,$37
+	ld hl, $d126
+	bit 5, [hl]
+	res 5, [hl]
+	ret z
+	ld hl, $6173
+	call Func_59d43
+	call Func_5a176
+	ld a, [$d836]
+	bit 0, a
+	ret nz
+	ld a, $54
+	ld [$d09f], a
+	ld bc, $405
+	ld a, $17
+	jp Predef ; indirect jump to Func_ee9e (ee9e (3:6e9e))
+
+INCBIN "baserom.gbc",$5a173,$5a176 - $5a173
+
+; known jump sources: 5a15d (16:615d)
+Func_5a176: ; 5a176 (16:6176)
+	ld a, [$FF00+$e0]
+	and a
+	ret z
+	ld hl, $d836
+	set 0, [hl]
+	ret
+
+INCBIN "baserom.gbc",$5a180,$5a186 - $5a180
 
 SilphCo10Texts: ; 0x5a186
 	dw SilphCo10Text1, SilphCo10Text2, SilphCo10Text3, Predef5CText, Predef5CText, Predef5CText
@@ -63656,8 +88262,103 @@ LanceScript: ; 0x5a2ae
 ; 0x5a2c4
 
 LanceScript_Unknown5a2c4: ; 0x5a2c4
-INCBIN "baserom.gbc",$5a2c4,$d1
+	ld hl, $d126
+	bit 5, [hl]
+	res 5, [hl]
+	ret z
+	ld a, [$d866]
+	bit 7, a
+	jr nz, .asm_5a2da
+	ld a, $31
+	ld b, $32
+	jp Func_5a2de
+.asm_5a2da
+	ld a, $72
+	ld b, $73
 
+; known jump sources: 5a2d7 (16:62d7)
+Func_5a2de: ; 5a2de (16:62de)
+	push bc
+	ld [$d09f], a
+	ld bc, $602
+	call Func_5a2f0
+	pop bc
+	ld a, b
+	ld [$d09f], a
+	ld bc, $603
+
+; known jump sources: 5a2e5 (16:62e5)
+Func_5a2f0: ; 5a2f0 (16:62f0)
+	ld a, $17
+	jp Predef ; indirect jump to Func_ee9e (ee9e (3:6e9e))
+
+; known jump sources: 5a351 (16:6351)
+Func_5a2f5: ; 5a2f5 (16:62f5)
+	xor a
+	ld [$d653], a
+	ret
+
+INCBIN "baserom.gbc",$5a2fa,$5a305 - $5a2fa
+	ld a, [$d866]
+	bit 6, a
+	ret nz
+	ld hl, $633e
+	call ArePlayerCoordsInArray
+	jp nc, Func_3219
+	xor a
+	ld [$FF00+$b4], a
+	ld a, [W_WHICHTRADE] ; $cd3d
+	cp $3
+	jr nc, .asm_5a325
+	ld a, $1
+	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	jp DisplayTextID
+.asm_5a325
+	cp $5
+	jr z, .asm_5a35b
+	ld hl, $d866
+	bit 7, [hl]
+	set 7, [hl]
+	ret nz
+	ld hl, $d126
+	set 5, [hl]
+	ld a, $ad
+	call Func_23b1
+	jp LanceScript_Unknown5a2c4
+
+INCBIN "baserom.gbc",$5a33e,$5a349 - $5a33e
+	call Func_3275
+	ld a, [W_ISINBATTLE] ; $d057
+	cp $ff
+	jp z, Func_5a2f5
+	ld a, $1
+	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	jp DisplayTextID
+.asm_5a35b
+	ld a, $ff
+	ld [$cd6b], a
+	ld hl, $ccd3
+	ld de, $6379
+	call Func_350c
+	dec a
+	ld [$cd38], a
+	call Func_3486
+	ld a, $3
+	ld [$d653], a
+	ld [$da39], a
+	ret
+
+INCBIN "baserom.gbc",$5a379,$5a382 - $5a379
+	ld a, [$cd38]
+	and a
+	ret nz
+	call Delay3
+	xor a
+	ld [$cd6b], a
+	ld [$d653], a
+	ld [$da39], a
+	ret
+; 5a395 (16:6395)
 LanceTexts: ; 0x5a395
 	dw LanceText1
 
@@ -63861,7 +88562,24 @@ HallofFameRoomObject: ; 0x5a571 (size=26)
 HallofFameRoomBlocks: ; 0x5a58b 20
 	INCBIN "maps/halloffameroom.blk"
 
-INCBIN "baserom.gbc",$5a59f,27
+; known jump sources: 1e142 (7:6142)
+Func_5a59f: ; 5a59f (16:659f)
+	ld hl, $65b7
+.asm_5a5a2
+	ld a, [hli]
+	ld [$FF00+$db], a
+	and a
+	ret z
+	push hl
+	ld b, a
+	call IsItemInBag
+	pop hl
+	jr z, .asm_5a5a2
+	ld b, BANK(Func_17f37)
+	ld hl, Func_17f37
+	jp Bankswitch ; indirect jump to Func_17f37 (17f37 (5:7f37))
+
+INCBIN "baserom.gbc",$5a5b7,$5a5ba - $5a5b7
 
 SECTION "bank17",DATA,BANK[$17]
 
@@ -63941,8 +88659,16 @@ RedsHouse2FObject: ; 0x5c0d0 ?
 	dw $C6EF + 4 + (4 + 6) * 0 + 3
 	db 1,7
 
-INCBIN "baserom.gbc",$5c0dc,$5c0eb - $5c0dc
-
+; known jump sources: 1d178 (7:5178)
+Func_5c0dc: ; 5c0dc (17:40dc)
+	ld a, $4b
+	ld [W_OWNEDPOKEMON], a ; $d2f7
+	ld a, $3d
+	call Predef ; indirect jump to ShowPokedexData (402d1 (10:42d1))
+	xor a
+	ld [W_OWNEDPOKEMON], a ; $d2f7
+	ret
+; 5c0eb (17:40eb)
 MuseumF1_h: ; 0x5c0eb to 0x5c0f7 (12 bytes) (id=52)
 	db $0a ; tileset
 	db MUSEUM_1F_HEIGHT, MUSEUM_1F_WIDTH ; dimensions (y, x)
@@ -64331,8 +89057,67 @@ PewterGymScript: ; 0x5c387
 ; 0x5c3a4
 
 PewterGymScript_Unknown5c3a4: ; 0x5c3a4
-INCBIN "baserom.gbc",$5c3a4,$91
+	ld hl, $43ad
+	ld de, $43b9
+	jp Func_317f
 
+INCBIN "baserom.gbc",$5c3ad,$5c3bf - $5c3ad
+
+; known jump sources: 5c3d7 (17:43d7), 5c432 (17:4432)
+Func_5c3bf: ; 5c3bf (17:43bf)
+	xor a
+	ld [$cd6b], a
+	ld [$d5fc], a
+	ld [$da39], a
+	ret
+
+INCBIN "baserom.gbc",$5c3ca,$5c3d2 - $5c3ca
+	ld a, [W_ISINBATTLE] ; $d057
+	cp $ff
+	jp z, Func_5c3bf
+	ld a, $f0
+	ld [$cd6b], a
+
+; known jump sources: 5c45a (17:445a)
+Func_5c3df: ; 5c3df (17:43df)
+	ld a, $4
+	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	call DisplayTextID
+	ld hl, $d755
+	set 7, [hl]
+	ld bc, $ea01
+	call GiveItem
+	jr nc, .asm_5c401
+	ld a, $5
+	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	call DisplayTextID
+	ld hl, $d755
+	set 6, [hl]
+	jr .asm_5c408
+.asm_5c401
+	ld a, $6
+	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	call DisplayTextID
+.asm_5c408
+	ld hl, W_OBTAINEDBADGES ; $d356
+	set 0, [hl]
+	ld hl, $d72a
+	set 0, [hl]
+	ld a, $4
+	ld [$cc4d], a
+	ld a, $11
+	call Predef ; indirect jump to Func_f1d7 (f1d7 (3:71d7))
+	ld a, $22
+	ld [$cc4d], a
+	ld a, $11
+	call Predef ; indirect jump to Func_f1d7 (f1d7 (3:71d7))
+	ld hl, $d7eb
+	res 0, [hl]
+	res 7, [hl]
+	ld hl, $d755
+	set 2, [hl]
+	jp Func_5c3bf
+; 5c435 (17:4435)
 PewterGymTexts: ; 0x5c435
 	dw PewterGymText1, PewterGymText2, PewterGymText3, PewterGymText4, PewterGymText5, PewterGymText6
 
@@ -64691,8 +89476,57 @@ CeruleanGymScript: ; 0x5c6b3
 ; 0x5c6d0
 
 CeruleanGymScript_Unknown5c6d0: ; 0x5c6d0
-INCBIN "baserom.gbc",$5c6d0,$7a
+	ld hl, $46d9
+	ld de, $46e7
+	jp Func_317f
 
+INCBIN "baserom.gbc",$5c6d9,$5c6ed - $5c6d9
+
+; known jump sources: 5c705 (17:4705), 5c747 (17:4747)
+Func_5c6ed: ; 5c6ed (17:46ed)
+	xor a
+	ld [$cd6b], a
+	ld [$d5fd], a
+	ld [$da39], a
+	ret
+
+INCBIN "baserom.gbc",$5c6f8,$5c700 - $5c6f8
+	ld a, [W_ISINBATTLE] ; $d057
+	cp $ff
+	jp z, Func_5c6ed
+	ld a, $f0
+	ld [$cd6b], a
+
+; known jump sources: 5c77d (17:477d)
+Func_5c70d: ; 5c70d (17:470d)
+	ld a, $5
+	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	call DisplayTextID
+	ld hl, $d75e
+	set 7, [hl]
+	ld bc, $d301
+	call GiveItem
+	jr nc, .asm_5c72f
+	ld a, $6
+	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	call DisplayTextID
+	ld hl, $d75e
+	set 6, [hl]
+	jr .asm_5c736
+.asm_5c72f
+	ld a, $7
+	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	call DisplayTextID
+.asm_5c736
+	ld hl, W_OBTAINEDBADGES ; $d356
+	set 1, [hl]
+	ld hl, $d72a
+	set 1, [hl]
+	ld hl, $d75e
+	set 2, [hl]
+	set 3, [hl]
+	jp Func_5c6ed
+; 5c74a (17:474a)
 CeruleanGymTexts: ; 0x5c74a
 	dw CeruleanGymText1, CeruleanGymText2, CeruleanGymText3, CeruleanGymText4, CeruleanGymText5, CeruleanGymText6, CeruleanGymText7
 
@@ -65143,8 +89977,74 @@ VermilionGymScript: ; 0x5ca26
 ; 0x5ca4c
 
 VermilionGymScript_Unknown5ca4c: ; 0x5ca4c
-INCBIN "baserom.gbc",$5ca4c,$9c
+	ld hl, $4a55
+	ld de, $4a64
+	jp Func_317f
 
+INCBIN "baserom.gbc",$5ca55,$5ca6d - $5ca55
+
+; known jump sources: 5ca36 (17:4a36)
+Func_5ca6d: ; 5ca6d (17:4a6d)
+	ld a, [$d773]
+	bit 0, a
+	jr nz, .asm_5ca78
+	ld a, $24
+	jr .asm_5ca7f
+.asm_5ca78
+	ld a, $ad
+	call Func_23b1
+	ld a, $5
+.asm_5ca7f
+	ld [$d09f], a
+	ld bc, $202
+	ld a, $17
+	jp Predef ; indirect jump to Func_ee9e (ee9e (3:6e9e))
+
+; known jump sources: 5caa2 (17:4aa2), 5cae5 (17:4ae5)
+Func_5ca8a: ; 5ca8a (17:4a8a)
+	xor a
+	ld [$cd6b], a
+	ld [$d5fe], a
+	ld [$da39], a
+	ret
+
+INCBIN "baserom.gbc",$5ca95,$5ca9d - $5ca95
+	ld a, [W_ISINBATTLE] ; $d057
+	cp $ff
+	jp z, Func_5ca8a
+	ld a, $f0
+	ld [$cd6b], a
+
+; known jump sources: 5cb29 (17:4b29)
+Func_5caaa: ; 5caaa (17:4aaa)
+	ld a, $6
+	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	call DisplayTextID
+	ld hl, $d773
+	set 7, [hl]
+	ld bc, $e001
+	call GiveItem
+	jr nc, .asm_5cacc
+	ld a, $7
+	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	call DisplayTextID
+	ld hl, $d773
+	set 6, [hl]
+	jr .asm_5cad3
+.asm_5cacc
+	ld a, $8
+	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	call DisplayTextID
+.asm_5cad3
+	ld hl, W_OBTAINEDBADGES ; $d356
+	set 2, [hl]
+	ld hl, $d72a
+	set 2, [hl]
+	ld a, [$d773]
+	or $1c
+	ld [$d773], a
+	jp Func_5ca8a
+; 5cae8 (17:4ae8)
 VermilionGymTexts: ; 0x5cae8
 	dw VermilionGymText1, VermilionGymText2, VermilionGymText3, VermilionGymText4, VermilionGymText5, VermilionGymText6, VermilionGymText7, VermilionGymText8
 
@@ -65822,8 +90722,59 @@ SaffronGymScript: ; 0x5d00d
 	ret
 ; 0x5d02a
 .extra
-INCBIN "baserom.gbc",$5d02a,$81
+	ld hl, $5033
+	ld de, $5040
+	jp Func_317f
 
+INCBIN "baserom.gbc",$5d033,$5d048 - $5d033
+
+; known jump sources: 5d060 (17:5060), 5d0a8 (17:50a8)
+Func_5d048: ; 5d048 (17:5048)
+	xor a
+	ld [$cd6b], a
+	ld [$d65c], a
+	ld [$da39], a
+	ret
+
+INCBIN "baserom.gbc",$5d053,$5d05b - $5d053
+	ld a, [W_ISINBATTLE] ; $d057
+	cp $ff
+	jp z, Func_5d048
+	ld a, $f0
+	ld [$cd6b], a
+
+; known jump sources: 5d124 (17:5124)
+Func_5d068: ; 5d068 (17:5068)
+	ld a, $a
+	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	call DisplayTextID
+	ld hl, $d7b3
+	set 1, [hl]
+	ld bc, $f601
+	call GiveItem
+	jr nc, .asm_5d08a
+	ld a, $b
+	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	call DisplayTextID
+	ld hl, $d7b3
+	set 0, [hl]
+	jr .asm_5d091
+.asm_5d08a
+	ld a, $c
+	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	call DisplayTextID
+.asm_5d091
+	ld hl, W_OBTAINEDBADGES ; $d356
+	set 5, [hl]
+	ld hl, $d72a
+	set 5, [hl]
+	ld a, [$d7b3]
+	or $fc
+	ld [$d7b3], a
+	ld hl, $d7b4
+	set 0, [hl]
+	jp Func_5d048
+; 5d0ab (17:50ab)
 SaffronGymTexts: ; 0x5d0ab
 	dw SaffronGymText1, SaffronGymText2, SaffronGymText3, SaffronGymText4, SaffronGymText5, SaffronGymText6, SaffronGymText7, SaffronGymText8, SaffronGymText9, SaffronGymText10, SaffronGymText11, SaffronGymText12
 
@@ -66703,7 +91654,118 @@ SilphCo9Script: ; 0x5d7bb
 ; 0x5d7d1
 
 SilphCo9Script_Unknown5d7d1: ; 0x5d7d1
-INCBIN "baserom.gbc",$5d7d1,$ba
+	ld hl, $d126
+	bit 5, [hl]
+	res 5, [hl]
+	ret z
+	ld hl, $582e
+	call Func_5d837
+	call Func_5d863
+	ld a, [$d834]
+	bit 0, a
+	jr nz, .asm_5d7f8
+	push af
+	ld a, $5f
+	ld [$d09f], a
+	ld bc, $401
+	ld a, $17
+	call Predef ; indirect jump to Func_ee9e (ee9e (3:6e9e))
+	pop af
+.asm_5d7f8
+	bit 1, a
+	jr nz, .asm_5d80b
+	push af
+	ld a, $54
+	ld [$d09f], a
+	ld bc, $209
+	ld a, $17
+	call Predef ; indirect jump to Func_ee9e (ee9e (3:6e9e))
+	pop af
+.asm_5d80b
+	bit 2, a
+	jr nz, .asm_5d81e
+	push af
+	ld a, $54
+	ld [$d09f], a
+	ld bc, $509
+	ld a, $17
+	call Predef ; indirect jump to Func_ee9e (ee9e (3:6e9e))
+	pop af
+.asm_5d81e
+	bit 3, a
+	ret nz
+	ld a, $5f
+	ld [$d09f], a
+	ld bc, $605
+	ld a, $17
+	jp Predef ; indirect jump to Func_ee9e (ee9e (3:6e9e))
+
+INCBIN "baserom.gbc",$5d82e,$5d837 - $5d82e
+
+; known jump sources: 5d7dc (17:57dc)
+Func_5d837: ; 5d837 (17:5837)
+	push hl
+	ld hl, $d73f
+	ld a, [hli]
+	ld b, a
+	ld a, [hl]
+	ld c, a
+	xor a
+	ld [$FF00+$e0], a
+	pop hl
+.asm_5d843
+	ld a, [hli]
+	cp $ff
+	jr z, .asm_5d85f
+	push hl
+	ld hl, $ffe0
+	inc [hl]
+	pop hl
+	cp b
+	jr z, .asm_5d854
+	inc hl
+	jr .asm_5d843
+.asm_5d854
+	ld a, [hli]
+	cp c
+	jr nz, .asm_5d843
+	ld hl, $d73f
+	xor a
+	ld [hli], a
+	ld [hl], a
+	ret
+.asm_5d85f
+	xor a
+	ld [$FF00+$e0], a
+	ret
+
+; known jump sources: 5d7df (17:57df)
+Func_5d863: ; 5d863 (17:5863)
+	ld hl, $d834
+	ld a, [$FF00+$e0]
+	and a
+	ret z
+	cp $1
+	jr nz, .asm_5d871
+	set 0, [hl]
+	ret
+.asm_5d871
+	cp $2
+	jr nz, .asm_5d878
+	set 1, [hl]
+	ret
+.asm_5d878
+	cp $3
+	jr nz, .asm_5d87f
+	set 2, [hl]
+	ret
+.asm_5d87f
+	cp $4
+	ret nz
+	set 3, [hl]
+	ret
+
+INCBIN "baserom.gbc",$5d885,$5d88b - $5d885
 
 SilphCo9Texts: ; 0x5d88b
 	dw SilphCo9Text1, SilphCo9Text2, SilphCo9Text3, SilphCo9Text4
@@ -66890,7 +91952,29 @@ VictoryRoad1Script: ; 0x5da0a
 	ret
 ; 0x5da27
 .next
-INCBIN "baserom.gbc",$5da27,$38
+	ld a, [$d869]
+	bit 7, a
+	ret z
+	ld a, $1d
+	ld [$d09f], a
+	ld bc, $604
+	ld a, $17
+	jp Predef ; indirect jump to Func_ee9e (ee9e (3:6e9e))
+
+INCBIN "baserom.gbc",$5da3a,$5da40 - $5da3a
+	ld a, [$d869]
+	bit 7, a
+	jp nz, Func_3219
+	ld hl, $5a5c
+	call CheckBoulderCoords
+	jp nc, Func_3219
+	ld hl, $d126
+	set 5, [hl]
+	ld hl, $d869
+	set 7, [hl]
+	ret
+
+INCBIN "baserom.gbc",$5da5c,$5da5f - $5da5c
 
 VictoryRoad1Texts: ; 0x5da5f
 	dw VictoryRoad1Text1, VictoryRoad1Text2, Predef5CText, Predef5CText, BoulderText, BoulderText, BoulderText
@@ -66987,7 +92071,23 @@ VictoryRoad1Object: ; 0x5dab8 (size=76)
 VictoryRoad1Blocks: ; 0x5db04 90
 	INCBIN "maps/victoryroad1.blk"
 
-INCBIN "baserom.gbc",$5db5e,$5db81 - $5db5e
+; known jump sources: 3aeaa (e:6eaa)
+Func_5db5e: ; 5db5e (17:5b5e)
+	call Load16BitRegisters
+	ld bc, $5
+	add hl, bc
+	ld a, [$d11e]
+	ld [$d0b5], a
+	push hl
+	call GetBaseStats
+	pop hl
+	ld a, [$d0be]
+	ld [hli], a
+	ld a, [$d0bf]
+	ld [hl], a
+	ret
+
+INCBIN "baserom.gbc",$5db79,$5db81 - $5db79
 
 UnnamedText_5db81: ; 0x5db81
 	TX_FAR _UnnamedText_5db81
@@ -67001,21 +92101,62 @@ UnnamedText_5dba8: ; 0x5dba8
 	db $50
 ; 0x5dba8 + 5 bytes
 
-INCBIN "baserom.gbc",$5dbad,$5dbbe - $5dbad
-
+	ld a, $b7
+	ld [$cf91], a
+	call Func_5dbd9
+	call EnableAutoTextBoxDrawing
+	ld a, $9
+	call Func_3ef5
+	ret
+; 5dbbe (17:5bbe)
 UnnamedText_5dbbe: ; 0x5dbbe
 	TX_FAR _UnnamedText_5dbbe
 	db $50
 ; 0x5dbbe + 5 bytes
 
-INCBIN "baserom.gbc",$5dbc3,$5dbd4 - $5dbc3
-
+	ld a, $b6
+	ld [$cf91], a
+	call Func_5dbd9
+	call EnableAutoTextBoxDrawing
+	ld a, $b
+	call Func_3ef5
+	ret
+; 5dbd4 (17:5bd4)
 UnnamedText_5dbd4: ; 0x5dbd4
 	TX_FAR _UnnamedText_5dbd4
 	db $50
 ; 0x5dbd4 + 5 bytes
 
-INCBIN "baserom.gbc",$5dbd9,$5dc9e - $5dbd9
+; known jump sources: 5dbb2 (17:5bb2), 5dbc8 (17:5bc8)
+Func_5dbd9: ; 5dbd9 (17:5bd9)
+	ld a, $1
+	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	call Delay3
+	xor a
+	ld [$FF00+$b0], a
+	call Func_3719
+	ld a, $11
+	ld [$d125], a
+	call DisplayTextBoxID
+	call Func_2429
+	ld a, [$cf91]
+	ld [$d0b5], a
+	call GetBaseStats
+	ld de, $8b10
+	call Func_1665
+	ld a, $80
+	ld [$FF00+$e1], a
+	ld hl, $c486
+	ld a, $2
+	call Predef ; indirect jump to Func_3f073 (3f073 (f:7073))
+	call Func_3865
+	call Func_3725
+	call Delay3
+	ld a, $90
+	ld [$FF00+$b0], a
+	ret
+
+INCBIN "baserom.gbc",$5dc1a,$5dc9e - $5dc1a
 
 UnnamedText_5dc9e: ; 0x5dc9e
 	TX_FAR _UnnamedText_5dc9e
@@ -67090,15 +92231,102 @@ UnnamedText_5ddf7: ; 0x5ddf7
 	db $50
 ; 0x5ddf7 + 5 bytes
 
-INCBIN "baserom.gbc",$5ddfc,$5dedb - $5ddfc
+	call EnableAutoTextBoxDrawing
+	ld a, [W_WHICHTRADE] ; $cd3d
+	ld [$cd5b], a
+	ld a, [$d773]
+	bit 0, a
+	jr z, .asm_5de11
+	ld a, $26
+	jp Func_3ef5
+.asm_5de11
+	bit 1, a
+	jr nz, .asm_5de53
+	ld a, [$d743]
+	ld b, a
+	ld a, [$cd5b]
+	cp b
+	jr z, .asm_5de23
+	ld a, $26
+	jr .asm_5de7a
+.asm_5de23
+	ld hl, $d773
+	set 1, [hl]
+	ld hl, $5e7d
+	ld a, [$cd5b]
+	ld b, a
+	add a
+	add a
+	add b
+	ld d, $0
+	ld e, a
+	add hl, de
+	ld a, [hli]
+	ld [$FF00+$db], a
+	push hl
+	call GenRandom
+	swap a
+	ld b, a
+	ld a, [$FF00+$db]
+	and b
+	dec a
+	pop hl
+	ld d, $0
+	ld e, a
+	add hl, de
+	ld a, [hl]
+	and $f
+	ld [$d744], a
+	ld a, $3b
+	jr .asm_5de7a
+.asm_5de53
+	ld a, [$d744]
+	ld b, a
+	ld a, [$cd5b]
+	cp b
+	jr z, .asm_5de6e
+	ld hl, $d773
+	res 1, [hl]
+	call GenRandom
+	and $e
+	ld [$d743], a
+	ld a, $3e
+	jr .asm_5de7a
+.asm_5de6e
+	ld hl, $d773
+	set 0, [hl]
+	ld hl, $d126
+	set 6, [hl]
+	ld a, $3d
+.asm_5de7a
+	jp Func_3ef5
 
+INCBIN "baserom.gbc",$5de7d,$5decd - $5de7d
+	call Func_3748
+	ld a, $9d
+	call Func_23b1
+	call Func_3748
+	jp TextScriptEnd
+; 5dedb (17:5edb)
 UnnamedText_5dedb: ; 0x5dedb
 	TX_FAR _UnnamedText_5dedb
 	db $50
 ; 0x5dedb + 5 bytes
 
-INCBIN "baserom.gbc",$5dee0,53
+INCBIN "baserom.gbc",$5dee0,$5def4 - $5dee0
+	call Func_3748
+	ld a, $ad
+	call Func_23b1
+	call Func_3748
+	jp TextScriptEnd
 
+INCBIN "baserom.gbc",$5df02,$5df07 - $5df02
+	call Func_3748
+	ld a, $a5
+	call Func_23b1
+	call Func_3748
+	jp TextScriptEnd
+; 5df15 (17:5f15)
 SECTION "bank18",DATA,BANK[$18]
 
 ViridianForestBlocks:
@@ -67188,8 +92416,14 @@ PokemonTower2Script: ; 0x604f2
 	jp $3d97
 ; 0x604fe
 
-INCBIN "baserom.gbc",$604fe,$60509 - $604fe
-
+; known jump sources: 60568 (18:4568)
+Func_604fe: ; 604fe (18:44fe)
+	xor a
+	ld [$cd6b], a
+	ld [$d62b], a
+	ld [$da39], a
+	ret
+; 60509 (18:4509)
 PokemonTower2Scripts: ; 0x60509
 	dw PokemonTower2Script0, PokemonTower2Script1, PokemonTower2Script2
 
@@ -67679,7 +92913,40 @@ PokemonTower5Script: ; 0x60932
 ; 0x60945
 
 PokemonTower5Script_Unknown60945: ; 0x60945
-INCBIN "baserom.gbc",$60945,$56
+INCBIN "baserom.gbc",$60945,$6094b - $60945
+	ld hl, $4992
+	call ArePlayerCoordsInArray
+	jr c, .asm_60960
+	ld hl, $d72e
+	res 4, [hl]
+	ld hl, $d767
+	res 7, [hl]
+	jp Func_3219
+.asm_60960
+	ld hl, $d767
+	bit 7, [hl]
+	set 7, [hl]
+	ret nz
+	xor a
+	ld [$FF00+$b4], a
+	ld a, $f0
+	ld [$cd6b], a
+	ld hl, $d72e
+	set 4, [hl]
+	ld a, $7
+	call Predef ; indirect jump to HealParty (f6a5 (3:76a5))
+	call GBFadeOut2
+	call Delay3
+	call Delay3
+	call GBFadeIn2
+	ld a, $7
+	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	call DisplayTextID
+	xor a
+	ld [$cd6b], a
+	ret
+
+INCBIN "baserom.gbc",$60992,$6099b - $60992
 
 PokemonTower5Texts: ; 0x6099b
 	dw PokemonTower5Text1, PokemonTower5Text2, PokemonTower5Text3, PokemonTower5Text4, PokemonTower5Text5, Predef5CText, PokemonTower5Text7
@@ -67862,7 +93129,77 @@ PokemonTower6Script: ; 0x60aef
 	ret
 ; 0x60b02
 
-INCBIN "baserom.gbc",$60b02,$af
+; known jump sources: 60b4d (18:4b4d)
+Func_60b02: ; 60b02 (18:4b02)
+	xor a
+	ld [$cd6b], a
+	ld [$d62f], a
+	ld [$da39], a
+	ret
+
+INCBIN "baserom.gbc",$60b0d,$60b17 - $60b0d
+	ld a, [$d768]
+	bit 7, a
+	jp nz, Func_3219
+	ld hl, $4b45
+	call ArePlayerCoordsInArray
+	jp nc, Func_3219
+	xor a
+	ld [$FF00+$b4], a
+	ld a, $6
+	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	call DisplayTextID
+	ld a, $91
+	ld [W_CUROPPONENT], a ; $d059
+	ld a, $1e
+	ld [W_CURENEMYLVL], a ; $d127
+	ld a, $4
+	ld [$d62f], a
+	ld [$da39], a
+	ret
+
+INCBIN "baserom.gbc",$60b45,$60b48 - $60b45
+	ld a, [W_ISINBATTLE] ; $d057
+	cp $ff
+	jp z, Func_60b02
+	ld a, $ff
+	ld [$cd6b], a
+	ld a, [$d72d]
+	bit 6, a
+	ret nz
+	call Func_2429
+	ld a, $f0
+	ld [$cd6b], a
+	ld a, [$cf0b]
+	and a
+	jr nz, .asm_60b82
+	ld hl, $d768
+	set 7, [hl]
+	ld a, $7
+	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	call DisplayTextID
+	xor a
+	ld [$cd6b], a
+	ld a, $0
+	ld [$d62f], a
+	ld [$da39], a
+	ret
+.asm_60b82
+	ld a, $1
+	ld [$cd38], a
+	ld a, $10
+	ld [$ccd3], a
+	xor a
+	ld [$c206], a
+	ld [$cd3b], a
+	ld hl, $d730
+	set 7, [hl]
+	ld a, $3
+	ld [$d62f], a
+	ld [$da39], a
+	ret
+
+INCBIN "baserom.gbc",$60ba1,$60bb1 - $60ba1
 
 PokemonTower6Texts: ; 0x60bb1
 	dw PokemonTower6Text1, PokemonTower6Text2, PokemonTower6Text3, Predef5CText, Predef5CText, PokemonTower6Text6, PokemonTower6Text7
@@ -68035,7 +93372,109 @@ PokemonTower7Script: ; 0x60d05
 	ret
 ; 0x60d18
 
-INCBIN "baserom.gbc",$60d18,$127
+; known jump sources: 60d37 (18:4d37)
+Func_60d18: ; 60d18 (18:4d18)
+	xor a
+	ld [$cd6b], a
+	ld [$d630], a
+	ld [$da39], a
+	ret
+
+INCBIN "baserom.gbc",$60d23,$60d2d - $60d23
+	ld hl, $cd60
+	res 0, [hl]
+	ld a, [W_ISINBATTLE] ; $d057
+	cp $ff
+	jp z, Func_60d18
+	call Func_3275
+	ld a, $f0
+	ld [$cd6b], a
+	ld a, [$cf13]
+	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	call DisplayTextID
+	call Func_60db6
+	ld a, $3
+	ld [$d630], a
+	ld [$da39], a
+	ret
+	ld a, [$d730]
+	bit 0, a
+	ret nz
+	ld hl, $d5ce
+	ld a, [$cf13]
+	ld b, a
+.asm_60d63
+	ld a, [hli]
+	cp b
+	ld a, [hli]
+	jr nz, .asm_60d63
+	ld [$cc4d], a
+	ld a, $11
+	call Predef ; indirect jump to Func_f1d7 (f1d7 (3:71d7))
+	xor a
+	ld [$cd6b], a
+	ld [$cf13], a
+	ld [$cc55], a
+	ld [$da38], a
+	ld a, $0
+	ld [$d630], a
+	ld [$da39], a
+	ret
+	ld a, $ff
+	ld [$cd6b], a
+	ld a, $43
+	ld [$cc4d], a
+	ld a, $11
+	call Predef ; indirect jump to Func_f1d7 (f1d7 (3:71d7))
+	ld a, $4
+	ld [$c109], a
+	ld a, $95
+	ld [H_DOWNARROWBLINKCNT1], a ; $FF00+$8b
+	ld a, $1
+	ld [$d42f], a
+	ld a, $4
+	ld [$d365], a
+	ld hl, $d72d
+	set 3, [hl]
+	ld a, $0
+	ld [$d630], a
+	ld [$da39], a
+	ret
+
+; known jump sources: 60d4a (18:4d4a)
+Func_60db6: ; 60db6 (18:4db6)
+	ld hl, $4de3
+	ld a, [$cf13]
+	dec a
+	swap a
+	ld d, $0
+	ld e, a
+	add hl, de
+	ld a, [W_YCOORD] ; $d361
+	ld b, a
+	ld a, [W_XCOORD] ; $d362
+	ld c, a
+.asm_60dcb
+	ld a, [hli]
+	cp b
+	jr nz, .asm_60dde
+	ld a, [hli]
+	cp c
+	jr nz, .asm_60ddf
+	ld a, [hli]
+	ld d, [hl]
+	ld e, a
+	ld a, [$cf13]
+	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	jp MoveSprite
+.asm_60dde
+	inc hl
+.asm_60ddf
+	inc hl
+	inc hl
+	jr .asm_60dcb
+
+INCBIN "baserom.gbc",$60de3,$60e3f - $60de3
 
 PokemonTower7Texts: ; 0x60e3f
 	dw PokemonTower7Text1, PokemonTower7Text2, PokemonTower7Text3, PokemonTower7Text4
@@ -68242,8 +93681,85 @@ CeladonMart1Object: ; 0x60f9e (size=64)
 CeladonMart1Blocks: ; 0x60fde 40
 	INCBIN "maps/celadonmart1.blk"
 
-INCBIN "baserom.gbc",$61006,$610ae - $61006
-
+; known jump sources: 75d88 (1d:5d88)
+Func_61006: ; 61006 (18:5006)
+	ld hl, $d730
+	set 6, [hl]
+	xor a
+	ld [W_CURMENUITEMID], a ; $cc26
+	ld a, $3
+	ld [W_MENUWATCHEDKEYS], a ; $cc29
+	ld a, [$cd37]
+	dec a
+	ld [W_MAXMENUITEMID], a ; $cc28
+	ld a, $2
+	ld [W_TOPMENUITEMY], a ; $cc24
+	ld a, $1
+	ld [W_TOPMENUITEMX], a ; $cc25
+	ld a, [$cd37]
+	dec a
+	ld bc, $2
+	ld hl, $3
+	call AddNTimes
+	dec l
+	ld b, l
+	ld c, $d
+	ld hl, $c3a0
+	call TextBoxBorder
+	call Func_2429
+	call Func_610c2
+	ld hl, $d730
+	res 6, [hl]
+	call HandleMenuInput
+	bit 1, a
+	jr nz, .asm_610a7
+	ld hl, $cc5b
+	ld a, [W_CURMENUITEMID] ; $cc26
+	ld d, $0
+	ld e, a
+	add hl, de
+	ld a, [hl]
+	ld [$FF00+$db], a
+	cp $29
+	jr z, .asm_6106b
+	cp $2a
+	jr z, .asm_61067
+	ld b, $ab
+	jr .asm_6106d
+.asm_61067
+	ld b, $62
+	jr .asm_6106d
+.asm_6106b
+	ld b, $5a
+.asm_6106d
+	ld [$d70f], a
+	ld a, b
+	ld [$d710], a
+	call Func_610eb
+	ld hl, $50ae
+	call PrintText
+	call Func_35ec
+	ld a, [W_CURMENUITEMID] ; $cc26
+	and a
+	jr nz, .asm_610a7
+	ld hl, $50b3
+	call PrintText
+	ld a, [$d70f]
+	ld [$FF00+$db], a
+	ld b, BANK(Func_17f37)
+	ld hl, Func_17f37
+	call Bankswitch ; indirect jump to Func_17f37 (17f37 (5:7f37))
+	ld hl, $50b8
+	call PrintText
+	ld hl, $d7a3
+	set 0, [hl]
+	set 1, [hl]
+	ret
+.asm_610a7
+	ld hl, $50bd
+	call PrintText
+	ret
+; 610ae (18:50ae)
 UnnamedText_610ae: ; 0x610ae
 	TX_FAR _UnnamedText_610ae
 	db $50
@@ -68264,8 +93780,40 @@ UnnamedText_610bd: ; 0x610bd
 	db $50
 ; 0x610bd + 5 bytes
 
-INCBIN "baserom.gbc",$610c2,$3f
+; known jump sources: 6103f (18:503f)
+Func_610c2: ; 610c2 (18:50c2)
+	ld hl, $cc5b
+	xor a
+	ld [$FF00+$db], a
+.asm_610c8
+	ld a, [hli]
+	cp $ff
+	ret z
+	push hl
+	ld [$d11e], a
+	call GetItemName
+	ld hl, $c3ca
+	ld a, [$FF00+$db]
+	ld bc, $28
+	call AddNTimes
+	ld de, $cd6d
+	call PlaceString
+	ld hl, $ffdb
+	inc [hl]
+	pop hl
+	jr .asm_610c8
 
+; known jump sources: 61074 (18:5074), 75ded (1d:5ded)
+Func_610eb: ; 610eb (18:50eb)
+	ld a, [$d710]
+	ld [$d11e], a
+	call GetMonName
+	call Func_3826
+	ld a, [$d70f]
+	ld [$d11e], a
+	call GetItemName
+	ret
+; 61101 (18:5101)
 ViridianForest_h: ; 0x61101 to 0x6110d (12 bytes) (id=51)
 	db $03 ; tileset
 	db VIRIDIAN_FOREST_HEIGHT, VIRIDIAN_FOREST_WIDTH ; dimensions (y, x)
@@ -68541,8 +94089,13 @@ SSAnne2Script: ; 0x6139f
 	jp $3d97
 ; 0x613ab
 
-INCBIN "baserom.gbc",$613ab,$613b3 - $613ab
-
+; known jump sources: 61472 (18:5472)
+Func_613ab: ; 613ab (18:53ab)
+	xor a
+	ld [$cd6b], a
+	ld [$d665], a
+	ret
+; 613b3 (18:53b3)
 SSAnne2Scripts: ; 0x613b3
 	dw SSAnne2Script0, SSAnne2Script1, SSAnne2Script2, SSAnne2Script3, SSAnne2Script4
 
@@ -68588,8 +94141,25 @@ SSAnne2Script0: ; 0x613be
 	ret
 ; 0x6140c
 
-INCBIN "baserom.gbc",$6140c,$61430 - $6140c
+INCBIN "baserom.gbc",$6140c,$61416 - $6140c
 
+; known jump sources: 61436 (18:5436), 61464 (18:5464), 61475 (18:5475)
+Func_61416: ; 61416 (18:5416)
+	ld a, [W_XCOORD] ; $d362
+	cp $25
+	jr nz, .asm_61426
+	ld a, $2
+	ld [$d528], a
+	ld a, $c
+	jr .asm_61427
+.asm_61426
+	xor a
+.asm_61427
+	ld [$FF00+$8d], a
+	ld a, $2
+	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	jp Func_34a6
+; 61430 (18:5430)
 SSAnne2Script1: ; 0x61430
 	ld a, [$d730]
 	bit 0, a
@@ -69035,8 +94605,13 @@ SSAnne7Script: ; 0x61895
 ; 0x6189b
 
 SSAnne7Script_Unknown6189b: ; 0x6189b
-INCBIN "baserom.gbc",$6189b,$c
-
+	ld a, [$d803]
+	bit 1, a
+	ret nz
+	ld hl, $d72d
+	set 5, [hl]
+	ret
+; 618a7 (18:58a7)
 SSAnne7Texts: ; 0x618a7
 	dw SSAnne7Text1, SSAnne7Text2, SSAnne7Text3
 
@@ -70022,8 +95597,207 @@ SilphCo11Script: ; 0x620fa
 ; 0x62110
 
 SilphCo11Script_Unknown62110: ; 0x62110
-INCBIN "baserom.gbc",$62110,$1a7
+	ld hl, $d126
+	bit 5, [hl]
+	res 5, [hl]
+	ret z
+	ld hl, $6134
+	call Func_62137
+	call Func_62163
+	ld a, [$d838]
+	bit 0, a
+	ret nz
+	ld a, $20
+	ld [$d09f], a
+	ld bc, $603
+	ld a, $17
+	jp Predef ; indirect jump to Func_ee9e (ee9e (3:6e9e))
 
+INCBIN "baserom.gbc",$62134,$62137 - $62134
+
+; known jump sources: 6211b (18:611b)
+Func_62137: ; 62137 (18:6137)
+	push hl
+	ld hl, $d73f
+	ld a, [hli]
+	ld b, a
+	ld a, [hl]
+	ld c, a
+	xor a
+	ld [$FF00+$e0], a
+	pop hl
+.asm_62143
+	ld a, [hli]
+	cp $ff
+	jr z, .asm_6215f
+	push hl
+	ld hl, $ffe0
+	inc [hl]
+	pop hl
+	cp b
+	jr z, .asm_62154
+	inc hl
+	jr .asm_62143
+.asm_62154
+	ld a, [hli]
+	cp c
+	jr nz, .asm_62143
+	ld hl, $d73f
+	xor a
+	ld [hli], a
+	ld [hl], a
+	ret
+.asm_6215f
+	xor a
+	ld [$FF00+$e0], a
+	ret
+
+; known jump sources: 6211e (18:611e)
+Func_62163: ; 62163 (18:6163)
+	ld a, [$FF00+$e0]
+	and a
+	ret z
+	ld hl, $d838
+	set 0, [hl]
+	ret
+
+; known jump sources: 62252 (18:6252)
+Func_6216d: ; 6216d (18:616d)
+	ld hl, $619b
+.asm_62170
+	ld a, [hli]
+	cp $ff
+	jr z, .asm_62181
+	push hl
+	ld [$cc4d], a
+	ld a, $11
+	call Predef ; indirect jump to Func_f1d7 (f1d7 (3:71d7))
+	pop hl
+	jr .asm_62170
+.asm_62181
+	ld hl, $6194
+.asm_62184
+	ld a, [hli]
+	cp $ff
+	ret z
+	push hl
+	ld [$cc4d], a
+	ld a, $15
+	call Predef ; indirect jump to Func_f1c8 (f1c8 (3:71c8))
+	pop hl
+	jr .asm_62184
+
+INCBIN "baserom.gbc",$62194,$621c4 - $62194
+
+; known jump sources: 6222c (18:622c)
+Func_621c4: ; 621c4 (18:61c4)
+	xor a
+	ld [$cd6b], a
+
+; known jump sources: 6220e (18:620e), 62267 (18:6267), 62290 (18:6290), 622b4 (18:62b4)
+Func_621c8: ; 621c8 (18:61c8)
+	ld [$d659], a
+	ld [$da39], a
+	ret
+
+INCBIN "baserom.gbc",$621cf,$621db - $621cf
+	ld a, [$d838]
+	bit 7, a
+	ret nz
+	ld hl, $6211
+	call ArePlayerCoordsInArray
+	jp nc, Func_3219
+	ld a, [W_WHICHTRADE] ; $cd3d
+	ld [$cf0d], a
+	xor a
+	ld [$FF00+$b4], a
+	ld a, $f0
+	ld [$cd6b], a
+	ld a, $3
+	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	call DisplayTextID
+	ld a, $3
+	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	call Function3541
+	ld de, $6216
+	call MoveSprite
+	ld a, $3
+	jp Func_621c8
+
+INCBIN "baserom.gbc",$62211,$6221a - $62211
+
+; known jump sources: 62240 (18:6240), 62288 (18:6288)
+Func_6221a: ; 6221a (18:621a)
+	ld [$d528], a
+	ld a, $3
+	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	ld a, b
+	ld [$FF00+$8d], a
+	jp Func_34a6
+	ld a, [W_ISINBATTLE] ; $d057
+	cp $ff
+	jp z, Func_621c4
+	ld a, [$cf0d]
+	cp $1
+	jr z, .asm_6223c
+	ld a, $2
+	ld b, $c
+	jr .asm_62240
+.asm_6223c
+	ld a, $8
+	ld b, $0
+.asm_62240
+	call Func_6221a
+	ld a, $f0
+	ld [$cd6b], a
+	ld a, $6
+	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	call DisplayTextID
+	call GBFadeIn1
+	call Func_6216d
+	call Func_2429
+	call Delay3
+	call GBFadeOut1
+	ld hl, $d838
+	set 7, [hl]
+	xor a
+	ld [$cd6b], a
+	jp Func_621c8
+	ld a, [$d730]
+	bit 0, a
+	ret nz
+	ld a, $3
+	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	call Function3541
+	ld a, [$cf0d]
+	cp $1
+	jr z, .asm_62284
+	ld a, $2
+	ld b, $c
+	jr .asm_62288
+.asm_62284
+	ld a, $8
+	ld b, $0
+.asm_62288
+	call Func_6221a
+	call Delay3
+	ld a, $4
+	jp Func_621c8
+	ld hl, $d72d
+	set 6, [hl]
+	set 7, [hl]
+	ld hl, $6330
+	ld de, $6330
+	call Func_3354
+	ld a, [H_DOWNARROWBLINKCNT2] ; $FF00+$8c
+	ld [$cf13], a
+	call Func_336a
+	call Func_32d7
+	xor a
+	ld [$cd6b], a
+	ld a, $5
+	jp Func_621c8
+; 622b7 (18:62b7)
 SilphCo11Texts: ; 0x622b7
 	dw SilphCo11Text1, SilphCo11Text2, SilphCo11Text3, SilphCo11Text4, SilphCo11Text5, SilphCo11Text6
 
@@ -70348,7 +96122,16 @@ UnnamedText_62511: ; 0x62511
 	db $50
 ; 0x62511 + 5 bytes
 
-INCBIN "baserom.gbc",$62516,20
+	ld a, [$c109]
+	cp $4
+	ret nz
+	call EnableAutoTextBoxDrawing
+	ld a, $1
+	ld [$cf0c], a
+	ld a, $1f
+	jp Func_3ef5
+
+INCBIN "baserom.gbc",$62529,$6252a - $62529
 
 SECTION "bank19",DATA,BANK[$19]
 
@@ -70489,7 +96272,427 @@ Tset0B_Block:
 
 SECTION "bank1C",DATA,BANK[$1C]
 
-INCBIN "baserom.gbc",$70000,$703fa - $70000
+; known jump sources: 70044 (1c:4044)
+Func_70000: ; 70000 (1c:4000)
+	ld a, $f9
+	ld [rOBP0], a ; $FF00+$48
+	ld a, $a4
+	ld [rOBP1], a ; $FF00+$49
+	ld de, $471e
+	ld hl, $8a00
+	ld bc, $1e01
+	call CopyVideoData
+	ld de, $481e
+	ld hl, $8a10
+	ld bc, $1e01
+	call CopyVideoData
+	ld de, $4190
+	ld hl, $8a20
+	ld bc, $1c01
+	call CopyVideoData
+	ld hl, $4140
+	ld de, $c360
+	ld bc, $40
+	call CopyData
+	ld hl, $4180
+	ld de, $c300
+	ld bc, $10
+	jp CopyData
+
+; known jump sources: 418c4 (10:58c4)
+Func_70044: ; 70044 (1c:4044)
+	call Func_70000
+	ld a, $c2
+	call Func_23b1
+	ld hl, $c300
+	ld bc, $a004
+.asm_70052
+	push hl
+	push bc
+.asm_70054
+	ld a, [hl]
+	add $4
+	ld [hli], a
+	ld a, [hl]
+	add $fc
+	ld [hli], a
+	inc hl
+	inc hl
+	dec c
+	jr nz, .asm_70054
+	ld c, $1
+	call CheckForUserInterruption
+	pop bc
+	pop hl
+	ret c
+	ld a, [hl]
+	cp $50
+	jr nz, .asm_70070
+	jr .asm_70052
+.asm_70070
+	cp b
+	jr nz, .asm_70052
+	ld hl, $c300
+	ld c, $4
+	ld de, $4
+.asm_7007b
+	ld [hl], $a0
+	add hl, de
+	dec c
+	jr nz, .asm_7007b
+	ld b, $3
+.asm_70083
+	ld hl, rOBP0 ; $ff48
+	rrc [hl]
+	rrc [hl]
+	ld c, $a
+	call CheckForUserInterruption
+	ret c
+	dec b
+	jr nz, .asm_70083
+	ld de, $c300
+	ld a, $18
+.asm_70098
+	push af
+	ld hl, $40ee
+	ld bc, $4
+	call CopyData
+	pop af
+	dec a
+	jr nz, .asm_70098
+	xor a
+	ld [W_WHICHTRADE], a ; $cd3d
+	ld hl, $40f2
+	ld c, $6
+.asm_700af
+	ld a, [hli]
+	ld e, a
+	ld a, [hli]
+	ld d, a
+	push bc
+	push hl
+	ld hl, $c350
+	ld c, $4
+.asm_700ba
+	ld a, [de]
+	cp $ff
+	jr z, .asm_700d5
+	ld [hli], a
+	inc de
+	ld a, [de]
+	ld [hli], a
+	inc de
+	inc hl
+	inc hl
+	dec c
+	jr nz, .asm_700ba
+	ld a, [W_WHICHTRADE] ; $cd3d
+	cp $18
+	jr z, .asm_700d5
+	add $6
+	ld [W_WHICHTRADE], a ; $cd3d
+.asm_700d5
+	call Func_7011f
+	push af
+	ld hl, $c310
+	ld de, $c300
+	ld bc, $50
+	call CopyData
+	pop af
+	pop hl
+	pop bc
+	ret c
+	dec c
+	jr nz, .asm_700af
+	and a
+	ret
+
+INCBIN "baserom.gbc",$700ee,$7011f - $700ee
+
+; known jump sources: 700d5 (1c:40d5)
+Func_7011f: ; 7011f (1c:411f)
+	ld b, $8
+.asm_70121
+	ld hl, $c35c
+	ld a, [W_WHICHTRADE] ; $cd3d
+	ld de, $fffc
+	ld c, a
+.asm_7012b
+	inc [hl]
+	add hl, de
+	dec c
+	jr nz, .asm_7012b
+	ld a, [rOBP1] ; $FF00+$49
+	xor $a0
+	ld [rOBP1], a ; $FF00+$49
+	ld c, $3
+	call CheckForUserInterruption
+	ret c
+	dec b
+	jr nz, .asm_70121
+	ret
+
+INCBIN "baserom.gbc",$70140,$701a0 - $70140
+
+; known jump sources: 74061 (1d:4061)
+Func_701a0: ; 701a0 (1c:41a0)
+	call Func_70423
+	call ClearScreen
+	ld c, $64
+	call DelayFrames
+	call LoadFontTilePatterns
+	call LoadTextBoxTilePatterns
+	call DisableLCD
+	ld hl, $9800
+	ld bc, $800
+	ld a, $7f
+	call FillMemory
+	call EnableLCD
+	ld hl, rLCDC ; $ff40
+	set 3, [hl]
+	xor a
+	ld hl, $cc5b
+	ld bc, $60
+	call FillMemory
+	xor a
+	ld [$cfcb], a
+	ld [$FF00+$d7], a
+	ld [$d0aa], a
+	ld [$d358], a
+	ld [$cd40], a
+	inc a
+	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld hl, $d5a2
+	ld a, [hl]
+	inc a
+	jr z, .asm_701eb
+	inc [hl]
+.asm_701eb
+	ld a, $90
+	ld [$FF00+$b0], a
+	ld c, $1f
+	ld a, $ca
+	call Func_23a1
+	ld hl, W_PARTYMON1 ; $d164
+	ld c, $ff
+.asm_701fb
+	ld a, [hli]
+	cp $ff
+	jr z, .asm_70241
+	inc c
+	push hl
+	push bc
+	ld [W_WHICHTRADE], a ; $cd3d
+	ld a, c
+	ld [$cd3e], a
+	ld hl, W_PARTYMON1_LEVEL ; $d18c
+	ld bc, $2c
+	call AddNTimes
+	ld a, [hl]
+	ld [$cd3f], a
+	call Func_70278
+	call Func_702e1
+	ld c, $50
+	call DelayFrames
+	ld hl, $c4a6
+	ld b, $3
+	ld c, $e
+	call TextBoxBorder
+	ld hl, $c4d0
+	ld de, $426b
+	call PlaceString
+	ld c, $b4
+	call DelayFrames
+	call GBFadeOut2
+	pop bc
+	pop hl
+	jr .asm_701fb
+.asm_70241
+	ld a, c
+	inc a
+	ld hl, $cc5b
+	ld bc, $10
+	call AddNTimes
+	ld [hl], $ff
+	call Func_73b0d
+	xor a
+	ld [W_WHICHTRADE], a ; $cd3d
+	inc a
+	ld [$cd40], a
+	call Func_70278
+	call Func_70377
+	call Func_70423
+	xor a
+	ld [$FF00+$b0], a
+	ld hl, rLCDC ; $ff40
+	res 3, [hl]
+	ret
+
+INCBIN "baserom.gbc",$7026b,$70278 - $7026b
+
+; known jump sources: 70217 (1c:4217), 70259 (1c:4259)
+Func_70278: ; 70278 (1c:4278)
+	call ClearScreen
+	ld a, $d0
+	ld [$FF00+$af], a
+	ld a, $c0
+	ld [$FF00+$ae], a
+	ld a, [W_WHICHTRADE] ; $cd3d
+	ld [$cf91], a
+	ld [$d0b5], a
+	ld [$cfd9], a
+	ld [$cf1d], a
+	ld a, [$cd40]
+	and a
+	jr z, .asm_7029d
+	call Func_7033e
+	jr .asm_702ab
+.asm_7029d
+	ld hl, $c410
+	call GetBaseStats
+	call Func_1389
+	ld a, $4
+	call Predef ; indirect jump to Func_3f103 (3f103 (f:7103))
+.asm_702ab
+	ld b, $b
+	ld c, $0
+	call GoPAL_SET
+	ld a, $e4
+	ld [rBGP], a ; $FF00+$47
+	ld c, $31
+	call Func_7036d
+	ld d, $a0
+	ld e, $4
+	ld a, [$cf1b]
+	and a
+	jr z, .asm_702c7
+	sla e
+.asm_702c7
+	call .asm_702d5
+	xor a
+	ld [$FF00+$af], a
+	ld c, a
+	call Func_7036d
+	ld d, $0
+	ld e, $fc
+.asm_702d5
+	call DelayFrame
+	ld a, [$FF00+$ae]
+	add e
+	ld [$FF00+$ae], a
+	cp d
+	jr nz, .asm_702d5
+	ret
+
+; known jump sources: 7021a (1c:421a)
+Func_702e1: ; 702e1 (1c:42e1)
+	ld a, [$cd3e]
+	ld hl, W_PARTYMON1NAME ; $d2b5
+	call GetPartyMonName
+	call Func_702f0
+	jp Func_70404
+
+; known jump sources: 702ea (1c:42ea), 7666d (1d:666d)
+Func_702f0: ; 702f0 (1c:42f0)
+	ld hl, $c3c8
+	ld b, $9
+	ld c, $a
+	call TextBoxBorder
+	ld hl, $c41a
+	ld de, $4329
+	call PlaceString
+	ld hl, $c3f1
+	ld de, $cd6d
+	call PlaceString
+	ld a, [$cd3f]
+	ld hl, $c434
+	call PrintLevelCommon
+	ld a, [W_WHICHTRADE] ; $cd3d
+	ld [$d0b5], a
+	ld hl, $c457
+	ld a, $4b
+	call Predef ; indirect jump to Func_27d6b (27d6b (9:7d6b))
+	ld a, [W_WHICHTRADE] ; $cd3d
+	jp PlayCry
+
+INCBIN "baserom.gbc",$70329,$7033e - $70329
+
+; known jump sources: 70298 (1c:4298)
+Func_7033e: ; 7033e (1c:433e)
+	ld de, $6ede
+	ld a, $4
+	call Func_36eb
+	ld hl, $a188
+	ld de, $a000
+	ld bc, $310
+	call CopyData
+	ld de, $9000
+	call Func_16ea
+	ld de, $7e0a
+	ld a, $c
+	call Func_36eb
+	ld a, $3
+	call Predef ; indirect jump to Func_2fe40 (2fe40 (b:7e40))
+	ld de, $9310
+	call Func_16ea
+	ld c, $1
+
+; known jump sources: 702b8 (1c:42b8), 702ce (1c:42ce)
+Func_7036d: ; 7036d (1c:436d)
+	ld b, $0
+	ld hl, $c410
+	ld a, $31
+	jp Predef ; indirect jump to Func_79dda (79dda (1e:5dda))
+
+; known jump sources: 7025c (1c:425c)
+Func_70377: ; 70377 (1c:4377)
+	ld hl, $d747
+	set 3, [hl]
+	ld a, $56
+	call Predef ; indirect jump to DisplayDexRating (44169 (11:4169))
+	ld hl, $c3f0
+	ld b, $6
+	ld c, $a
+	call TextBoxBorder
+	ld hl, $c3a5
+	ld b, $2
+	ld c, $9
+	call TextBoxBorder
+	ld hl, $c3cf
+	ld de, W_PLAYERNAME ; $d158
+	call PlaceString
+	ld hl, $c419
+	ld de, $43ea
+	call PlaceString
+	ld hl, $c431
+	ld de, $da41
+	ld bc, $103
+	call PrintNumber
+	ld [hl], $6d
+	inc hl
+	ld de, $da43
+	ld bc, $8102
+	call PrintNumber
+	ld hl, $c455
+	ld de, $43f4
+	call PlaceString
+	ld hl, $c46c
+	ld de, W_PLAYERMONEY3 ; $d347
+	ld c, $a3
+	call PrintBCDNumber
+	ld hl, $43fa
+	call Func_703e2
+	ld hl, $43ff
+	call Func_703e2
+	ld hl, $cc5d
+
+; known jump sources: 703d6 (1c:43d6), 703dc (1c:43dc)
+Func_703e2: ; 703e2 (1c:43e2)
+	call PrintText
+	ld c, $78
+	jp DelayFrames
+
+INCBIN "baserom.gbc",$703ea,$703fa - $703ea
 
 UnnamedText_703fa: ; 0x703fa
 	TX_FAR _UnnamedText_703fa
@@ -70501,8 +96704,530 @@ UnnamedText_703ff: ; 0x703ff
 	db $50
 ; 0x703ff + 5 bytes
 
-INCBIN "baserom.gbc",$70404,$70847 - $70404
+; known jump sources: 702ed (1c:42ed)
+Func_70404: ; 70404 (1c:4404)
+	ld hl, $cc5b
+	ld bc, $10
+	ld a, [$cd3e]
+	call AddNTimes
+	ld a, [W_WHICHTRADE] ; $cd3d
+	ld [hli], a
+	ld a, [$cd3f]
+	ld [hli], a
+	ld e, l
+	ld d, h
+	ld hl, $cd6d
+	ld bc, $b
+	jp CopyData
 
+; known jump sources: 701a0 (1c:41a0), 7025f (1c:425f)
+Func_70423: ; 70423 (1c:4423)
+	ld a, $a
+	ld [$cfc8], a
+	ld [$cfc9], a
+	ld a, $ff
+	ld [$cfc7], a
+	jp GBFadeOut2
+
+; known jump sources: 7027 (1:7027)
+Func_70433: ; 70433 (1c:4433)
+	ld de, $44b7
+	ld hl, $87c0
+	ld bc, $1c03
+	call CopyVideoData
+	ld hl, $cfcb
+	ld a, [hl]
+	push af
+	ld [hl], $ff
+	push hl
+	ld a, [rOBP1] ; $FF00+$49
+	push af
+	ld a, $e0
+	ld [rOBP1], a ; $FF00+$49
+	ld hl, $c384
+	ld de, $44d7
+	call Func_70503
+	ld a, $4
+	ld [$cfc7], a
+	ld a, $ff
+	ld [$c0ee], a
+	call Func_23b1
+.asm_70464
+	ld a, [$cfc7]
+	and a
+	jr nz, .asm_70464
+	ld a, [W_NUMINPARTY] ; $d163
+	ld b, a
+.asm_7046e
+	call Func_70503
+	ld a, $9e
+	call Func_23b1
+	ld c, $1e
+	call DelayFrames
+	dec b
+	jr nz, .asm_7046e
+	ld a, [$c0ef]
+	cp $1f
+	ld [$c0f0], a
+	jr nz, .asm_70495
+	ld a, $ff
+	ld [$c0ee], a
+	call Func_23b1
+	ld a, $2
+	ld [$c0ef], a
+.asm_70495
+	ld a, $e8
+	ld [$c0ee], a
+	call Func_23b1
+	ld d, $28
+	call Func_704f3
+.asm_704a2
+	ld a, [$c026]
+	cp $e8
+	jr z, .asm_704a2
+	ld c, $20
+	call DelayFrames
+	pop af
+	ld [rOBP1], a ; $FF00+$49
+	pop hl
+	pop af
+	ld [hl], a
+	jp Func_2429
+
+INCBIN "baserom.gbc",$704b7,$704f3 - $704b7
+
+; known jump sources: 7049f (1c:449f), 708f3 (1c:48f3)
+Func_704f3: ; 704f3 (1c:44f3)
+	ld b, $8
+.asm_704f5
+	ld a, [rOBP1] ; $FF00+$49
+	xor d
+	ld [rOBP1], a ; $FF00+$49
+	ld c, $a
+	call DelayFrames
+	dec b
+	jr nz, .asm_704f5
+	ret
+
+; known jump sources: 70454 (1c:4454), 7046e (1c:446e)
+Func_70503: ; 70503 (1c:4503)
+	ld a, [de]
+	inc de
+	ld [hli], a
+	ld a, [de]
+	inc de
+	ld [hli], a
+	ld a, [de]
+	inc de
+	ld [hli], a
+	ld a, [de]
+	inc de
+	ld [hli], a
+	ret
+
+; known jump sources: 3de (0:3de)
+Func_70510: ; 70510 (1c:4510)
+	call Func_706ef
+	ld a, $ec
+	ld [$c104], a
+	call Delay3
+	push hl
+	call GBFadeIn2
+	ld hl, $d733
+	bit 7, [hl]
+	res 7, [hl]
+	jr nz, .asm_70568
+	ld a, $a0
+	call Func_23b1
+	ld hl, $d732
+	bit 4, [hl]
+	res 4, [hl]
+	pop hl
+	jr nz, .asm_7055e
+	call Func_705aa
+	ld a, $a3
+	call Func_23b1
+	call Func_70787
+	ld a, b
+	and a
+	jr nz, .asm_7055b
+	ld hl, W_WHICHTRADE ; $cd3d
+	xor a
+	ld [hli], a
+	inc a
+	ld [hli], a
+	ld a, $8
+	ld [hli], a
+	ld [hl], $ff
+	ld hl, $cd48
+	call Func_70730
+.asm_70558
+	call Func_2307
+.asm_7055b
+	jp Func_70772
+.asm_7055e
+	ld c, $32
+	call DelayFrames
+	call Func_705aa
+	jr .asm_7055b
+.asm_70568
+	pop hl
+	ld de, $4d80
+	ld hl, $8000
+	ld bc, $50c
+	call CopyVideoData
+	call Func_706d7
+	ld a, $a4
+	call Func_23b1
+	ld hl, W_WHICHTRADE ; $cd3d
+	xor a
+	ld [hli], a
+	ld a, $c
+	ld [hli], a
+	ld [hl], $8
+	ld de, $4592
+	call Func_706ae
+	call LoadPlayerSpriteGraphics
+	jr .asm_70558
+
+INCBIN "baserom.gbc",$70592,$705aa - $70592
+
+; known jump sources: 70537 (1c:4537), 70563 (1c:4563)
+Func_705aa: ; 705aa (1c:45aa)
+	ld hl, W_WHICHTRADE ; $cd3d
+	ld a, $10
+	ld [hli], a
+	ld a, $3c
+	ld [hli], a
+	call Func_7077f
+	ld [hl], a
+	jp Func_70755
+
+; known jump sources: 994 (0:994)
+Func_705ba: ; 705ba (1c:45ba)
+	call Func_706ef
+	call Func_70787
+	ld a, b
+	and a
+	jr z, .asm_705ef
+	dec a
+	jp nz, Func_7067d
+.asm_705c8
+	ld a, $9f
+	call Func_23b1
+	ld hl, W_WHICHTRADE ; $cd3d
+	ld a, $f0
+	ld [hli], a
+	ld a, $ec
+	ld [hli], a
+	call Func_7077f
+	ld [hl], a
+	call Func_70755
+	call Func_70787
+	ld a, b
+	dec a
+	jr z, .asm_705e9
+	ld c, $a
+	call DelayFrames
+.asm_705e9
+	call GBFadeOut2
+	jp Func_70772
+.asm_705ef
+	ld a, $4
+	call StopMusic
+	ld a, [$d732]
+	bit 6, a
+	jr z, .asm_70610
+	ld hl, W_WHICHTRADE ; $cd3d
+	ld a, $10
+	ld [hli], a
+	ld a, $ff
+	ld [hli], a
+	xor a
+	ld [hli], a
+	ld [hl], $a1
+	ld hl, $cd48
+	call Func_70730
+	jr .asm_705c8
+.asm_70610
+	call Func_706d7
+	ld hl, W_WHICHTRADE ; $cd3d
+	ld a, $ff
+	ld [hli], a
+	ld a, $8
+	ld [hli], a
+	ld [hl], $c
+	call Func_706ae
+	ld a, $a4
+	call Func_23b1
+	ld hl, W_WHICHTRADE ; $cd3d
+	xor a
+	ld [hli], a
+	ld a, $c
+	ld [hli], a
+	ld [hl], $c
+	ld de, $464f
+	call Func_706ae
+	ld c, $28
+	call DelayFrames
+	ld hl, $cd3e
+	ld a, $b
+	ld [hli], a
+	ld [hl], $8
+	ld de, $4667
+	call Func_706ae
+	call GBFadeOut2
+	jp Func_70772
+
+INCBIN "baserom.gbc",$7064f,$7067d - $7064f
+
+; known jump sources: 705c5 (1c:45c5)
+Func_7067d: ; 7067d (1c:467d)
+	ld a, $ff
+	ld [$cfcb], a
+	ld a, [$c302]
+	ld [$c30a], a
+	ld a, [$c306]
+	ld [$c30e], a
+	ld a, $a0
+	ld [$c300], a
+	ld [$c304], a
+	ld c, $2
+	call DelayFrames
+	ld a, $a0
+	ld [$c308], a
+	ld [$c30c], a
+	call GBFadeOut2
+	ld a, $1
+	ld [$cfcb], a
+	jp Func_70772
+
+; known jump sources: 7058a (1c:458a), 7061e (1c:461e), 70633 (1c:4633), 70646 (1c:4646), 706d4 (1c:46d4)
+Func_706ae: ; 706ae (1c:46ae)
+	ld a, [$cd3f]
+	xor $1
+	ld [$cd3f], a
+	ld [$c102], a
+	call Delay3
+	ld a, [W_WHICHTRADE] ; $cd3d
+	cp $ff
+	jr z, .asm_706cd
+	ld hl, $c104
+	ld a, [de]
+	inc de
+	ld [hli], a
+	inc hl
+	ld a, [de]
+	inc de
+	ld [hl], a
+.asm_706cd
+	ld a, [$cd3e]
+	dec a
+	ld [$cd3e], a
+	jr nz, Func_706ae
+	ret
+
+; known jump sources: 70575 (1c:4575), 70610 (1c:4610)
+Func_706d7: ; 706d7 (1c:46d7)
+	ld de, $4d80
+	ld hl, $8000
+	ld bc, $50c
+	call CopyVideoData
+	ld de, $4e40
+	ld hl, $8800
+	ld bc, $50c
+	jp CopyVideoData
+
+; known jump sources: 70510 (1c:4510), 705ba (1c:45ba)
+Func_706ef: ; 706ef (1c:46ef)
+	ld a, [$c102]
+	ld [$cd50], a
+	ld a, [$c104]
+	ld [$cd4f], a
+	ld hl, $4713
+	ld de, $cd48
+	ld bc, $4
+	call CopyData
+	ld a, [$c102]
+	ld hl, $cd48
+.asm_7070d
+	cp [hl]
+	inc hl
+	jr nz, .asm_7070d
+	dec hl
+	ret
+
+INCBIN "baserom.gbc",$70713,$70717 - $70713
+
+; known jump sources: 70730 (1c:4730), 70755 (1c:4755)
+Func_70717: ; 70717 (1c:4717)
+	ld a, [hl]
+	ld [$c102], a
+	push hl
+	ld hl, $cd48
+	ld de, $cd47
+	ld bc, $4
+	call CopyData
+	ld a, [$cd47]
+	ld [$cd4b], a
+	pop hl
+	ret
+
+; known jump sources: 70555 (1c:4555), 7060b (1c:460b), 70753 (1c:4753)
+Func_70730: ; 70730 (1c:4730)
+	call Func_70717
+	ld a, [W_WHICHTRADE] ; $cd3d
+	ld c, a
+	and $3
+	jr nz, .asm_70743
+	ld a, [$cd40]
+	cp $ff
+	call nz, Func_23b1
+.asm_70743
+	ld a, [$cd3e]
+	add c
+	ld [W_WHICHTRADE], a ; $cd3d
+	ld c, a
+	ld a, [$cd3f]
+	cp c
+	ret z
+	call DelayFrames
+	jr Func_70730
+
+; known jump sources: 705b7 (1c:45b7), 705da (1c:45da), 70770 (1c:4770)
+Func_70755: ; 70755 (1c:4755)
+	call Func_70717
+	ld a, [W_WHICHTRADE] ; $cd3d
+	ld c, a
+	ld a, [$c104]
+	add c
+	ld [$c104], a
+	ld c, a
+	ld a, [$cd3e]
+	cp c
+	ret z
+	ld a, [$cd3f]
+	ld c, a
+	call DelayFrames
+	jr Func_70755
+
+; known jump sources: 7055b (1c:455b), 705ec (1c:45ec), 7064c (1c:464c), 706ab (1c:46ab)
+Func_70772: ; 70772 (1c:4772)
+	ld a, [$cd4f]
+	ld [$c104], a
+	ld a, [$cd50]
+	ld [$c102], a
+	ret
+
+; known jump sources: 705b3 (1c:45b3), 705d6 (1c:45d6)
+Func_7077f: ; 7077f (1c:477f)
+	ld a, [$cf1b]
+	xor $1
+	inc a
+	inc a
+	ret
+
+; known jump sources: 77e (0:77e), 7053f (1c:453f), 705bd (1c:45bd), 705dd (1c:45dd)
+Func_70787: ; 70787 (1c:4787)
+	ld b, $0
+	ld hl, $47a9
+	ld a, [W_CURMAPTILESET] ; $d367
+	ld c, a
+.asm_70790
+	ld a, [hli]
+	cp $ff
+	jr z, .asm_707a4
+	cp c
+	jr nz, .asm_7079e
+	ld a, [$c45c]
+	cp [hl]
+	jr z, .asm_707a2
+.asm_7079e
+	inc hl
+	inc hl
+	jr .asm_70790
+.asm_707a2
+	inc hl
+	ld b, [hl]
+.asm_707a4
+	ld a, b
+	ld [$cd5b], a
+	ret
+
+INCBIN "baserom.gbc",$707a9,$707b6 - $707a9
+
+; known jump sources: e2ad (3:62ad)
+Func_707b6: ; 707b6 (1c:47b6)
+	ld c, $a
+	call DelayFrames
+	ld hl, $d736
+	set 6, [hl]
+	ld de, $4180
+	ld hl, $8000
+	ld bc, $50c
+	call CopyVideoData
+	ld a, $4
+	ld hl, $4866
+	call Func_71771
+	ld a, [$c102]
+	ld c, a
+	ld b, $0
+	ld hl, $4856
+	add hl, bc
+	ld de, $c39c
+	ld bc, $4
+	call CopyData
+	ld c, $64
+	call DelayFrames
+	ld a, [W_WHICHTRADE] ; $cd3d
+	and a
+	ld hl, $4847
+	jr z, .asm_70836
+	cp $2
+	ld hl, $484c
+	jr z, .asm_70836
+	ld b, $a
+.asm_707fe
+	ld hl, $c104
+	call Func_70842
+	ld hl, $c39c
+	call Func_70842
+	call Delay3
+	dec b
+	jr nz, .asm_707fe
+	ld a, [$c102]
+	cp $4
+	jr nz, .asm_7081c
+	ld a, $a0
+	ld [$c39c], a
+.asm_7081c
+	ld hl, $cd4f
+	xor a
+	ld [hli], a
+	ld [hl], a
+	ld a, $4c
+	call Predef ; indirect jump to Func_17c47 (17c47 (5:7c47))
+	ld a, [$c102]
+	cp $4
+	jr nz, .asm_70833
+	ld a, $44
+	ld [$c39c], a
+.asm_70833
+	ld hl, $4851
+.asm_70836
+	call PrintText
+	ld hl, $d736
+	res 6, [hl]
+	call LoadFontTilePatterns
+	ret
+
+; known jump sources: 70801 (1c:4801), 70807 (1c:4807)
+Func_70842: ; 70842 (1c:4842)
+	ld a, [hl]
+	xor $1
+	ld [hl], a
+	ret
+; 70847 (1c:4847)
 UnnamedText_70847: ; 0x70847
 	TX_FAR _UnnamedText_70847
 	db $50
@@ -70518,14 +97243,1350 @@ UnnamedText_70851: ; 0x70851
 	db $50
 ; 0x70851 + 5 bytes
 
-INCBIN "baserom.gbc",$70856,$8aa
+INCBIN "baserom.gbc",$70856,$7087e - $70856
 
+; known jump sources: 3a3 (0:3a3)
+Func_7087e: ; 7087e (1c:487e)
+	ld a, [$d714]
+	ld c, a
+	inc a
+	cp $10
+	jr nc, .asm_70895
+	ld [$d714], a
+	ld b, $0
+	ld hl, $48ba
+	add hl, bc
+	ld a, [hl]
+	ld [$c104], a
+	ret
+.asm_70895
+	ld a, [W_WALKCOUNTER] ; $cfc5
+	cp $0
+	ret nz
+	call Func_2429
+	call Delay3
+	xor a
+	ld [$FF00+$b4], a
+	ld [$FF00+$b3], a
+	ld [$FF00+$b2], a
+	ld [$d714], a
+	ld hl, $d736
+	res 6, [hl]
+	ld hl, $d730
+	res 7, [hl]
+	xor a
+	ld [$cd6b], a
+	ret
+
+INCBIN "baserom.gbc",$708ba,$708ca - $708ba
+
+; known jump sources: 58e20 (16:4e20)
+Func_708ca: ; 708ca (1c:48ca)
+	ld a, $e4
+	ld [rOBP1], a ; $FF00+$49
+	call Func_7092a
+	ld hl, $c3ac
+	ld bc, $707
+	call ClearScreenArea
+	call Delay3
+	xor a
+	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld a, $91
+	ld [$cee9], a
+	ld a, $1
+	ld [H_WHOSETURN], a ; $FF00+$f3
+	ld hl, Func_79793
+	ld b, BANK(Func_79793)
+	call Bankswitch ; indirect jump to Func_79793 (79793 (1e:5793))
+	ld d, $80
+	call Func_704f3
+.asm_708f6
+	ld c, $a
+	call DelayFrames
+	ld a, [rOBP1] ; $FF00+$49
+	sla a
+	sla a
+	ld [rOBP1], a ; $FF00+$49
+	jr nz, .asm_708f6
+	call CleanLCD_OAM
+	call Func_7092a
+	ld b, $e4
+.asm_7090d
+	ld c, $a
+	call DelayFrames
+	ld a, [rOBP1] ; $FF00+$49
+	srl b
+	rra
+	srl b
+	rra
+	ld [rOBP1], a ; $FF00+$49
+	ld a, b
+	and a
+	jr nz, .asm_7090d
+	ld a, $1
+	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	call Delay3
+	jp CleanLCD_OAM
+
+; known jump sources: 708ce (1c:48ce), 70908 (1c:4908)
+Func_7092a: ; 7092a (1c:492a)
+	ld de, $9000
+	ld hl, $8000
+	ld bc, $31
+	call CopyVideoData
+	ld a, $10
+	ld [W_BASECOORDY], a ; $d082
+	ld a, $70
+	ld [W_BASECOORDX], a ; $d081
+	ld hl, $c300
+	ld bc, $606
+	ld d, $8
+.asm_70948
+	push bc
+	ld a, [W_BASECOORDY] ; $d082
+	ld e, a
+.asm_7094d
+	ld a, e
+	add $8
+	ld e, a
+	ld [hli], a
+	ld a, [W_BASECOORDX] ; $d081
+	ld [hli], a
+	ld a, d
+	ld [hli], a
+	ld a, $10
+	ld [hli], a
+	inc d
+	dec c
+	jr nz, .asm_7094d
+	inc d
+	ld a, [W_BASECOORDX] ; $d081
+	add $8
+	ld [W_BASECOORDX], a ; $d081
+	pop bc
+	dec b
+	jr nz, .asm_70948
+	ret
+
+; known jump sources: 3ec52 (f:6c52)
+Func_7096d: ; 7096d (1c:496d)
+	ld a, $1
+	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	call Delay3
+	xor a
+	ld [$FF00+$b0], a
+	dec a
+	ld [$cfcb], a
+	call DelayFrame
+	ld hl, $c102
+	ld a, [H_DOWNARROWBLINKCNT2] ; $FF00+$8c
+	ld c, a
+	ld b, $0
+	ld de, $10
+.asm_70989
+	ld a, [hl]
+	cp $ff
+	jr z, .asm_7098f
+	inc b
+.asm_7098f
+	add hl, de
+	dec c
+	jr nz, .asm_70989
+	ld hl, $c310
+	ld c, $9
+.asm_70998
+	ld a, b
+	swap a
+	cp l
+	jr z, .asm_709a9
+	push hl
+	push bc
+	ld bc, $10
+	xor a
+	call FillMemory
+	pop bc
+	pop hl
+.asm_709a9
+	ld de, $10
+	add hl, de
+	dec c
+	jr nz, .asm_70998
+	call Delay3
+	call Func_70a4d
+	ld bc, $0
+	ld a, [W_ISLINKBATTLE] ; $d12b
+	cp $4
+	jr z, .asm_709c9
+	call Func_709e2
+	call Func_709ef
+	call Func_70a19
+.asm_709c9
+	ld hl, $49d2
+	add hl, bc
+	add hl, bc
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	jp [hl]
+
+INCBIN "baserom.gbc",$709d2,$709e2 - $709d2
+
+; known jump sources: 709c0 (1c:49c0)
+Func_709e2: ; 709e2 (1c:49e2)
+	ld a, [W_CUROPPONENT] ; $d059
+	cp $c8
+	jr nc, .asm_709ec
+	res 0, c
+	ret
+.asm_709ec
+	set 0, c
+	ret
+
+; known jump sources: 709c3 (1c:49c3)
+Func_709ef: ; 709ef (1c:49ef)
+	ld hl, W_PARTYMON1_HP ; $d16c
+.asm_709f2
+	ld a, [hli]
+	or [hl]
+	jr nz, .asm_709fc
+	ld de, $2b
+	add hl, de
+	jr .asm_709f2
+.asm_709fc
+	ld de, $1f
+	add hl, de
+	ld a, [hl]
+	add $3
+	ld e, a
+	ld a, [W_CURENEMYLVL] ; $d127
+	sub e
+	jr nc, .asm_70a12
+	res 1, c
+	ld a, $1
+	ld [$cd47], a
+	ret
+.asm_70a12
+	set 1, c
+	xor a
+	ld [$cd47], a
+	ret
+
+; known jump sources: 709c6 (1c:49c6)
+Func_70a19: ; 70a19 (1c:4a19)
+	ld a, [W_CURMAP] ; $d35e
+	ld e, a
+	ld hl, $4a3f
+.asm_70a20
+	ld a, [hli]
+	cp $ff
+	jr z, .asm_70a2b
+	cp e
+	jr nz, .asm_70a20
+.asm_70a28
+	set 2, c
+	ret
+.asm_70a2b
+	ld hl, $4a44
+.asm_70a2e
+	ld a, [hli]
+	cp $ff
+	jr z, .asm_70a3c
+	ld d, a
+	ld a, [hli]
+	cp e
+	jr c, .asm_70a2e
+	ld a, e
+	cp d
+	jr nc, .asm_70a28
+.asm_70a3c
+	res 2, c
+	ret
+
+INCBIN "baserom.gbc",$70a3f,$70a4d - $70a3f
+
+; known jump sources: 709b3 (1c:49b3)
+Func_70a4d: ; 70a4d (1c:4a4d)
+	ld hl, $8ff0
+	ld de, $4a59
+	ld bc, $1c01
+	jp CopyVideoData
+
+INCBIN "baserom.gbc",$70a59,$70a69 - $70a59
+
+; known jump sources: 70a9f (1c:4a9f), 70bc2 (1c:4bc2), 70c0a (1c:4c0a), 70ca7 (1c:4ca7), 70cd5 (1c:4cd5), 70d4d (1c:4d4d)
+Func_70a69: ; 70a69 (1c:4a69)
+	ld a, $ff
+	ld [rBGP], a ; $FF00+$47
+	ld [rOBP0], a ; $FF00+$48
+	ld [rOBP1], a ; $FF00+$49
+	ret
+	ld a, [$cd47]
+	and a
+	jr z, .asm_70a7d
+	call Func_70aaa
+	jr .asm_70a9f
+.asm_70a7d
+	ld hl, $c472
+	ld a, $3
+	ld [$d09f], a
+	ld a, l
+	ld [$d09b], a
+	ld a, h
+	ld [$d09a], a
+	ld b, $78
+.asm_70a8f
+	ld c, $3
+.asm_70a91
+	push bc
+	call Func_70af9
+	pop bc
+	dec c
+	jr nz, .asm_70a91
+	call DelayFrame
+	dec b
+	jr nz, .asm_70a8f
+.asm_70a9f
+	call Func_70a69
+	xor a
+	ld [$d09b], a
+	ld [$d09a], a
+	ret
+
+; known jump sources: 70a78 (1c:4a78)
+Func_70aaa: ; 70aaa (1c:4aaa)
+	ld a, $7
+	ld [W_WHICHTRADE], a ; $cd3d
+	ld hl, $c3a0
+	ld c, $11
+	ld de, $14
+	call Func_70ae0
+	inc c
+	jr .asm_70ac3
+.asm_70abd
+	ld de, $14
+	call Func_70ae0
+.asm_70ac3
+	inc c
+	ld de, $1
+	call Func_70ae0
+	dec c
+	dec c
+	ld de, $ffec
+	call Func_70ae0
+	inc c
+	ld de, rIE ; $ffff
+	call Func_70ae0
+	dec c
+	dec c
+	ld a, c
+	and a
+	jr nz, .asm_70abd
+	ret
+
+; known jump sources: 70ab7 (1c:4ab7), 70ac0 (1c:4ac0), 70ac7 (1c:4ac7), 70acf (1c:4acf), 70ad6 (1c:4ad6)
+Func_70ae0: ; 70ae0 (1c:4ae0)
+	push bc
+.asm_70ae1
+	ld [hl], $ff
+	add hl, de
+	push bc
+	ld a, [W_WHICHTRADE] ; $cd3d
+	dec a
+	jr nz, .asm_70af0
+	call Func_70d19
+	ld a, $7
+.asm_70af0
+	ld [W_WHICHTRADE], a ; $cd3d
+	pop bc
+	dec c
+	jr nz, .asm_70ae1
+	pop bc
+	ret
+
+; known jump sources: 70a92 (1c:4a92)
+Func_70af9: ; 70af9 (1c:4af9)
+	ld bc, $ffec
+	ld de, $14
+	ld a, [$d09b]
+	ld l, a
+	ld a, [$d09a]
+	ld h, a
+	ld a, [$d09f]
+	cp $0
+	jr z, .asm_70b25
+	cp $1
+	jr z, .asm_70b2f
+	cp $2
+	jr z, .asm_70b39
+	cp $3
+	jr z, .asm_70b43
+.asm_70b1a
+	ld [hl], $ff
+.asm_70b1c
+	ld a, l
+	ld [$d09b], a
+	ld a, h
+	ld [$d09a], a
+	ret
+.asm_70b25
+	dec hl
+	ld a, [hl]
+	cp $ff
+	jr nz, .asm_70b4d
+	inc hl
+	add hl, bc
+	jr .asm_70b1a
+.asm_70b2f
+	add hl, de
+	ld a, [hl]
+	cp $ff
+	jr nz, .asm_70b4d
+	add hl, bc
+	dec hl
+	jr .asm_70b1a
+.asm_70b39
+	inc hl
+	ld a, [hl]
+	cp $ff
+	jr nz, .asm_70b4d
+	dec hl
+	add hl, de
+	jr .asm_70b1a
+.asm_70b43
+	add hl, bc
+	ld a, [hl]
+	cp $ff
+	jr nz, .asm_70b4d
+	add hl, de
+	inc hl
+	jr .asm_70b1a
+.asm_70b4d
+	ld [hl], $ff
+	ld a, [$d09f]
+	inc a
+	cp $4
+	jr nz, .asm_70b58
+	xor a
+.asm_70b58
+	ld [$d09f], a
+	jr .asm_70b1c
+
+; known jump sources: 70b6f (1c:4b6f), 70cff (1c:4cff)
+Func_70b5d: ; 70b5d (1c:4b5d)
+	ld hl, $4b72
+.asm_70b60
+	ld a, [hli]
+	cp $1
+	jr z, .asm_70b6e
+	ld [rBGP], a ; $FF00+$47
+	ld c, $2
+	call DelayFrames
+	jr .asm_70b60
+.asm_70b6e
+	dec b
+	jr nz, Func_70b5d
+	ret
+
+INCBIN "baserom.gbc",$70b72,$70b7f - $70b72
+	ld c, $9
+.asm_70b81
+	push bc
+	xor a
+	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld hl, $c42c
+	ld de, $c440
+	ld bc, $ffd8
+	call Func_70c12
+	ld hl, $c468
+	ld de, $c454
+	ld bc, $28
+	call Func_70c12
+	ld hl, $c3a8
+	ld de, $c3a9
+	ld bc, $fffe
+	call Func_70c3f
+	ld hl, $c3ab
+	ld de, $c3aa
+	ld bc, $2
+	call Func_70c3f
+	ld a, $1
+	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld c, $6
+	call DelayFrames
+	pop bc
+	dec c
+	jr nz, .asm_70b81
+	call Func_70a69
+	ld c, $a
+	jp DelayFrames
+	ld c, $9
+	xor a
+	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+.asm_70bcf
+	push bc
+	ld hl, $c4e0
+	ld de, $c4f4
+	ld bc, $ffd8
+	call Func_70c12
+	ld hl, $c3b4
+	ld de, $c3a0
+	ld bc, $28
+	call Func_70c12
+	ld hl, $c3b2
+	ld de, $c3b3
+	ld bc, $fffe
+	call Func_70c3f
+	ld hl, $c3a1
+	ld de, $c3a0
+	ld bc, $2
+	call Func_70c3f
+	call Func_70d19
+	call Delay3
+	pop bc
+	dec c
+	jr nz, .asm_70bcf
+	call Func_70a69
+	ld c, $a
+	jp DelayFrames
+
+; known jump sources: 70b8e (1c:4b8e), 70b9a (1c:4b9a), 70bd9 (1c:4bd9), 70be5 (1c:4be5)
+Func_70c12: ; 70c12 (1c:4c12)
+	ld a, c
+	ld [W_WHICHTRADE], a ; $cd3d
+	ld a, b
+	ld [$cd3e], a
+	ld c, $8
+.asm_70c1c
+	push bc
+	push hl
+	push de
+	ld bc, $14
+	call CopyData
+	pop hl
+	pop de
+	ld a, [W_WHICHTRADE] ; $cd3d
+	ld c, a
+	ld a, [$cd3e]
+	ld b, a
+	add hl, bc
+	pop bc
+	dec c
+	jr nz, .asm_70c1c
+	ld l, e
+	ld h, d
+	ld a, $ff
+	ld c, $14
+.asm_70c3a
+	ld [hli], a
+	dec c
+	jr nz, .asm_70c3a
+	ret
+
+; known jump sources: 70ba6 (1c:4ba6), 70bb2 (1c:4bb2), 70bf1 (1c:4bf1), 70bfd (1c:4bfd)
+Func_70c3f: ; 70c3f (1c:4c3f)
+	ld a, c
+	ld [W_WHICHTRADE], a ; $cd3d
+	ld a, b
+	ld [$cd3e], a
+	ld c, $9
+.asm_70c49
+	push bc
+	push hl
+	push de
+	ld c, $12
+.asm_70c4e
+	ld a, [hl]
+	ld [de], a
+	ld a, e
+	add $14
+	jr nc, .asm_70c56
+	inc d
+.asm_70c56
+	ld e, a
+	ld a, l
+	add $14
+	jr nc, .asm_70c5d
+	inc h
+.asm_70c5d
+	ld l, a
+	dec c
+	jr nz, .asm_70c4e
+	pop hl
+	pop de
+	ld a, [W_WHICHTRADE] ; $cd3d
+	ld c, a
+	ld a, [$cd3e]
+	ld b, a
+	add hl, bc
+	pop bc
+	dec c
+	jr nz, .asm_70c49
+	ld l, e
+	ld h, d
+	ld de, $14
+	ld c, $12
+.asm_70c77
+	ld [hl], $ff
+	add hl, de
+	dec c
+	jr nz, .asm_70c77
+	ret
+	ld c, $12
+	ld hl, $c3a0
+	ld de, $c4f5
+	xor a
+	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+.asm_70c89
+	push bc
+	push hl
+	push de
+	push de
+	call Func_70caa
+	pop hl
+	call Func_70caa
+	call Func_70d19
+	pop hl
+	ld bc, $ffec
+	add hl, bc
+	ld e, l
+	ld d, h
+	pop hl
+	ld bc, $14
+	add hl, bc
+	pop bc
+	dec c
+	jr nz, .asm_70c89
+	jp Func_70a69
+
+; known jump sources: 70c8d (1c:4c8d), 70c91 (1c:4c91)
+Func_70caa: ; 70caa (1c:4caa)
+	ld c, $a
+.asm_70cac
+	ld [hl], $ff
+	inc hl
+	inc hl
+	dec c
+	jr nz, .asm_70cac
+	ret
+	ld c, $14
+	ld hl, $c3a0
+	ld de, $c3c7
+	xor a
+	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+.asm_70cbf
+	push bc
+	push hl
+	push de
+	push de
+	call Func_70cd8
+	pop hl
+	call Func_70cd8
+	call Func_70d19
+	pop de
+	pop hl
+	pop bc
+	inc hl
+	dec de
+	dec c
+	jr nz, .asm_70cbf
+	jp Func_70a69
+
+; known jump sources: 70cc3 (1c:4cc3), 70cc7 (1c:4cc7)
+Func_70cd8: ; 70cd8 (1c:4cd8)
+	ld c, $9
+	ld de, $28
+.asm_70cdd
+	ld [hl], $ff
+	add hl, de
+	dec c
+	jr nz, .asm_70cdd
+	ret
+
+INCBIN "baserom.gbc",$70ce4,$70cfd - $70ce4
+
+; known jump sources: 70d24 (1c:4d24)
+Func_70cfd: ; 70cfd (1c:4cfd)
+	ld b, $3
+	call Func_70b5d
+	xor a
+	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ret
+
+INCBIN "baserom.gbc",$70d06,$70d19 - $70d06
+
+; known jump sources: 70aeb (1c:4aeb), 70c00 (1c:4c00), 70c94 (1c:4c94), 70cca (1c:4cca), 70d46 (1c:4d46)
+Func_70d19: ; 70d19 (1c:4d19)
+	ld a, $1
+	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	call Delay3
+	xor a
+	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ret
+	call Func_70cfd
+	ld c, $a
+	ld hl, $4d61
+	ld de, $4d93
+.asm_70d2f
+	push bc
+	push hl
+	push de
+	push de
+	xor a
+	call Func_70d50
+	pop hl
+	ld a, $1
+	call Func_70d50
+	pop hl
+	ld bc, $5
+	add hl, bc
+	ld e, l
+	ld d, h
+	pop hl
+	add hl, bc
+	call Func_70d19
+	pop bc
+	dec c
+	jr nz, .asm_70d2f
+	jp Func_70a69
+
+; known jump sources: 70d34 (1c:4d34), 70d3a (1c:4d3a)
+Func_70d50: ; 70d50 (1c:4d50)
+	ld [W_WHICHTRADE], a ; $cd3d
+	ld a, [hli]
+	ld [$cd3e], a
+	ld a, [hli]
+	ld e, a
+	ld a, [hli]
+	ld d, a
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	jp .asm_70dc5
+
+INCBIN "baserom.gbc",$70d61,$70dc5 - $70d61
+.asm_70dc5
+	push hl
+	ld a, [de]
+	ld c, a
+	inc de
+.asm_70dc9
+	ld [hl], $ff
+	ld a, [$cd3e]
+	and a
+	jr z, .asm_70dd4
+	inc hl
+	jr .asm_70dd5
+.asm_70dd4
+	dec hl
+.asm_70dd5
+	dec c
+	jr nz, .asm_70dc9
+	pop hl
+	ld a, [W_WHICHTRADE] ; $cd3d
+	and a
+	ld bc, $14
+	jr z, .asm_70de5
+	ld bc, $ffec
+.asm_70de5
+	add hl, bc
+	ld a, [de]
+	inc de
+	cp $ff
+	ret z
+	and a
+	jr z, .asm_70dc5
+	ld c, a
+.asm_70def
+	ld a, [$cd3e]
+	and a
+	jr z, .asm_70df8
+	dec hl
+	jr .asm_70df9
+.asm_70df8
+	inc hl
+.asm_70df9
+	dec c
+	jr nz, .asm_70def
+	jr .asm_70dc5
+
+INCBIN "baserom.gbc",$70dfe,$70e3e - $70dfe
+
+; known jump sources: d974 (3:5974)
+Func_70e3e: ; 70e3e (1c:4e3e)
+	call Func_7109b
+	ld hl, $cfcb
+	ld a, [hl]
+	push af
+	ld [hl], $ff
+	push hl
+	ld a, $1
+	ld [$FF00+$b7], a
+	ld a, [W_CURMAP] ; $d35e
+	push af
+	ld b, $0
+	call Func_711c4
+	ld hl, $c3a1
+	ld de, $cd6d
+	call PlaceString
+	ld hl, $c300
+	ld de, $c508
+	ld bc, $10
+	call CopyData
+	ld hl, $8040
+	ld de, $4f40
+	ld bc, $1c04
+	call CopyVideoDataDouble
+	xor a
+	ld [W_WHICHTRADE], a ; $cd3d
+	pop af
+	jr asm_70e92
+
+; known jump sources: 70efe (1c:4efe), 70f0e (1c:4f0e)
+Func_70e7e: ; 70e7e (1c:4e7e)
+	ld hl, $c3a0
+	ld bc, $114
+	call ClearScreenArea
+	ld hl, $4f11
+	ld a, [W_WHICHTRADE] ; $cd3d
+	ld c, a
+	ld b, $0
+	add hl, bc
+	ld a, [hl]
+asm_70e92: ; 70e92 (1c:4e92)
+	ld de, $cee9
+	call Func_712f1
+	ld a, [de]
+	push hl
+	call Func_71258
+	ld a, $4
+	ld [$cd5b], a
+	ld hl, $c310
+	call Func_71279
+	pop hl
+	ld de, $cd6d
+.asm_70eac
+	ld a, [hli]
+	ld [de], a
+	inc de
+	cp $50
+	jr nz, .asm_70eac
+	ld hl, $c3a1
+	ld de, $cd6d
+	call PlaceString
+	ld hl, $c310
+	ld de, $c518
+	ld bc, $10
+	call CopyData
+.asm_70ec8
+	call Func_716c6
+	call GetJoypadStateLowSensitivity
+	ld a, [$FF00+$b5]
+	ld b, a
+	and $c3
+	jr z, .asm_70ec8
+	ld a, $8c
+	call Func_23b1
+	bit 6, b
+	jr nz, .asm_70ef2
+	bit 7, b
+	jr nz, .asm_70f01
+	xor a
+	ld [$d09b], a
+	ld [$FF00+$b7], a
+	ld [W_SUBANIMTRANSFORM], a ; $d08b
+	call Func_711ab
+	pop hl
+	pop af
+	ld [hl], a
+	ret
+.asm_70ef2
+	ld a, [W_WHICHTRADE] ; $cd3d
+	inc a
+	cp $2f
+	jr nz, .asm_70efb
+	xor a
+.asm_70efb
+	ld [W_WHICHTRADE], a ; $cd3d
+	jp Func_70e7e
+.asm_70f01
+	ld a, [W_WHICHTRADE] ; $cd3d
+	dec a
+	cp $ff
+	jr nz, .asm_70f0b
+	ld a, $2e
+.asm_70f0b
+	ld [W_WHICHTRADE], a ; $cd3d
+	jp Func_70e7e
+
+INCBIN "baserom.gbc",$70f11,$70f60 - $70f11
+
+; known jump sources: 4010a (10:410a)
+Func_70f60: ; 70f60 (1c:4f60)
+	call Func_7109b
+	ld hl, $cfcb
+	ld a, [hl]
+	push af
+	ld [hl], $ff
+	push hl
+	call Func_711ef
+	call GetMonName
+	ld hl, $c3a1
+	call PlaceString
+	ld h, b
+	ld l, c
+	ld de, $4f89
+	call PlaceString
+	call Func_3865
+	call Func_711ab
+	pop hl
+	pop af
+	ld [hl], a
+	ret
+
+INCBIN "baserom.gbc",$70f89,$70f90 - $70f89
+
+; known jump sources: 30b3 (0:30b3)
+Func_70f90: ; 70f90 (1c:4f90)
+	call CleanLCD_OAM
+	call Func_7109b
+	call LoadPlayerSpriteGraphics
+	call LoadFontTilePatterns
+	ld de, $4d80
+	ld hl, $8040
+	ld bc, $50c
+	call CopyVideoData
+	ld de, $5093
+	ld hl, $8ed0
+	ld bc, $1c01
+	call CopyVideoDataDouble
+	call Func_71070
+	ld hl, $cfcb
+	ld a, [hl]
+	push af
+	ld [hl], $ff
+	push hl
+	ld hl, $c3a0
+	ld de, $506d
+	call PlaceString
+	ld a, [W_CURMAP] ; $d35e
+	ld b, $0
+	call Func_711c4
+	ld hl, $cd3e
+	ld de, $c3b2
+
+; known jump sources: 7104f (1c:504f), 71055 (1c:5055), 71065 (1c:5065)
+Func_70fd6: ; 70fd6 (1c:4fd6)
+	ld a, $7f
+	ld [de], a
+	push hl
+	push hl
+	ld hl, $c3a3
+	ld bc, $10f
+	call ClearScreenArea
+	pop hl
+	ld a, [hl]
+	ld b, $4
+	call Func_711c4
+	ld hl, $c3a3
+	ld de, $cd6d
+	call PlaceString
+	ld c, $f
+	call DelayFrames
+	ld hl, $c3b2
+	ld [hl], $ed
+	ld hl, $c3b3
+	ld [hl], $ee
+	pop hl
+.asm_71004
+	push hl
+	call DelayFrame
+	call GetJoypadStateLowSensitivity
+	ld a, [$FF00+$b5]
+	ld b, a
+	pop hl
+	and $c3
+	jr z, .asm_71004
+	bit 0, b
+	jr nz, .asm_71026
+	ld a, $8c
+	call Func_23b1
+	bit 6, b
+	jr nz, .asm_71042
+	bit 7, b
+	jr nz, .asm_71058
+	jr .asm_71037
+.asm_71026
+	ld a, $8e
+	call Func_23b1
+	ld a, [hl]
+	ld [$d71a], a
+	ld hl, $d732
+	set 3, [hl]
+	inc hl
+	set 7, [hl]
+.asm_71037
+	xor a
+	ld [$d09b], a
+	call GBPalWhiteOutWithDelay3
+	pop hl
+	pop af
+	ld [hl], a
+	ret
+.asm_71042
+	ld de, $c3b2
+	inc hl
+	ld a, [hl]
+	cp $ff
+	jr z, .asm_71052
+	cp $fe
+	jr z, .asm_71042
+	jp Func_70fd6
+.asm_71052
+	ld hl, $cd3e
+	jp Func_70fd6
+.asm_71058
+	ld de, $c3b3
+	dec hl
+	ld a, [hl]
+	cp $ff
+	jr z, .asm_71068
+	cp $fe
+	jr z, .asm_71058
+	jp Func_70fd6
+.asm_71068
+	ld hl, $cd49
+	jr .asm_71058
+
+INCBIN "baserom.gbc",$7106d,$71070 - $7106d
+
+; known jump sources: 70fb4 (1c:4fb4)
+Func_71070: ; 71070 (1c:5070)
+	ld hl, W_WHICHTRADE ; $cd3d
+	ld [hl], $ff
+	inc hl
+	ld a, [$d70b]
+	ld e, a
+	ld a, [$d70c]
+	ld d, a
+	ld bc, $b
+.asm_71081
+	srl d
+	rr e
+	ld a, $fe
+	jr nc, .asm_7108a
+	ld a, b
+.asm_7108a
+	ld [hl], a
+	inc hl
+	inc b
+	dec c
+	jr nz, .asm_71081
+	ld [hl], $ff
+	ret
+
+INCBIN "baserom.gbc",$71093,$7109b - $71093
+
+; known jump sources: 70e3e (1c:4e3e), 70f60 (1c:4f60), 70f93 (1c:4f93)
+Func_7109b: ; 7109b (1c:509b)
+	call GBPalWhiteOutWithDelay3
+	call ClearScreen
+	call Func_2429
+	ld hl, $c3a0
+	ld b, $12
+	ld c, $12
+	call TextBoxBorder
+	call DisableLCD
+	ld hl, $65a8
+	ld de, $9600
+	ld bc, $100
+	ld a, $4
+	call FarCopyData2
+	ld hl, $56be
+	ld de, $8040
+	ld bc, $8
+	ld a, $1c
+	call FarCopyDataDouble
+	ld hl, $c3a0
+	ld de, $5100
+.asm_710d3
+	ld a, [de]
+	and a
+	jr z, .asm_710e9
+	ld b, a
+	and $f
+	ld c, a
+	ld a, b
+	swap a
+	and $f
+	add $60
+.asm_710e2
+	ld [hli], a
+	dec c
+	jr nz, .asm_710e2
+	inc de
+	jr .asm_710d3
+.asm_710e9
+	call EnableLCD
+	ld b, $2
+	call GoPAL_SET
+	call Delay3
+	call GBPalNormal
+	xor a
+	ld [W_SUBANIMTRANSFORM], a ; $d08b
+	inc a
+	ld [$d09b], a
+	ret
+; 71100 (1c:5100)
 CompressedMap: ; 5100
 ; you can decompress this file with the redrle program in the extras/ dir
 	INCBIN "baserom.gbc",$71100,$711AB-$71100
 
-INCBIN "baserom.gbc",$711AB,$71313-$711AB
+; known jump sources: 70eeb (1c:4eeb), 70f82 (1c:4f82)
+Func_711ab: ; 711ab (1c:51ab)
+	xor a
+	ld [$d09b], a
+	call GBPalWhiteOut
+	call ClearScreen
+	call CleanLCD_OAM
+	call LoadPlayerSpriteGraphics
+	call LoadFontTilePatterns
+	call Func_2429
+	jp GoPAL_SET_CF1C
 
+; known jump sources: 70e53 (1c:4e53), 70fcd (1c:4fcd), 70fe8 (1c:4fe8), 7123b (1c:523b)
+Func_711c4: ; 711c4 (1c:51c4)
+	push af
+	ld a, b
+	ld [$cd5b], a
+	pop af
+	ld de, $cee9
+	call Func_712f1
+	ld a, [de]
+	push hl
+	call Func_71258
+	call Func_7126d
+	pop hl
+	ld de, $cd6d
+.asm_711dc
+	ld a, [hli]
+	ld [de], a
+	inc de
+	cp $50
+	jr nz, .asm_711dc
+	ld hl, $c300
+	ld de, $c508
+	ld bc, $a0
+	jp CopyData
+
+; known jump sources: 70f6b (1c:4f6b)
+Func_711ef: ; 711ef (1c:51ef)
+	ld b, BANK(Func_e9cb)
+	ld hl, Func_e9cb
+	call Bankswitch ; indirect jump to Func_e9cb (e9cb (3:69cb))
+	call Func_712d9
+	ld hl, $c300
+	ld de, $cee9
+.asm_71200
+	ld a, [de]
+	cp $ff
+	jr z, .asm_7121d
+	and a
+	jr z, .asm_7121a
+	push hl
+	call Func_712f1
+	pop hl
+	ld a, [de]
+	cp $19
+	jr z, .asm_7121a
+	call Func_71258
+	ld a, $4
+	ld [hli], a
+	xor a
+	ld [hli], a
+.asm_7121a
+	inc de
+	jr .asm_71200
+.asm_7121d
+	ld a, l
+	and a
+	jr nz, .asm_71236
+	ld hl, $c42d
+	ld b, $2
+	ld c, $f
+	call TextBoxBorder
+	ld hl, $c456
+	ld de, $524a
+	call PlaceString
+	jr .asm_7123e
+.asm_71236
+	ld a, [W_CURMAP] ; $d35e
+	ld b, $0
+	call Func_711c4
+.asm_7123e
+	ld hl, $c300
+	ld de, $c508
+	ld bc, $a0
+	jp CopyData
+
+INCBIN "baserom.gbc",$7124a,$71258 - $7124a
+
+; known jump sources: 70e9a (1c:4e9a), 711d2 (1c:51d2), 71212 (1c:5212)
+Func_71258: ; 71258 (1c:5258)
+	push af
+	and $f0
+	srl a
+	add $18
+	ld b, a
+	ld [hli], a
+	pop af
+	and $f
+	swap a
+	srl a
+	add $18
+	ld c, a
+	ld [hli], a
+	ret
+
+; known jump sources: 711d5 (1c:51d5)
+Func_7126d: ; 7126d (1c:526d)
+	ld a, [$cd5b]
+	and a
+	ld hl, $c390
+	jr z, Func_71279
+	ld hl, $c380
+
+; known jump sources: 70ea5 (1c:4ea5), 71274 (1c:5274)
+Func_71279: ; 71279 (1c:5279)
+	push hl
+	ld hl, $fcfc
+	add hl, bc
+	ld b, h
+	ld c, l
+	pop hl
+
+; known jump sources: 718da (1c:58da)
+Func_71281: ; 71281 (1c:5281)
+	ld de, $202
+.asm_71284
+	push de
+	push bc
+.asm_71286
+	ld a, b
+	ld [hli], a
+	ld a, c
+	ld [hli], a
+	ld a, [$cd5b]
+	ld [hli], a
+	inc a
+	ld [$cd5b], a
+	xor a
+	ld [hli], a
+	inc d
+	ld a, $8
+	add c
+	ld c, a
+	dec e
+	jr nz, .asm_71286
+	pop bc
+	pop de
+	ld a, $8
+	add b
+	ld b, a
+	dec d
+	jr nz, .asm_71284
+	ret
+
+; known jump sources: 718d5 (1c:58d5)
+Func_712a6: ; 712a6 (1c:52a6)
+	xor a
+	ld [$cd5c], a
+	ld de, $202
+.asm_712ad
+	push de
+	push bc
+.asm_712af
+	ld a, b
+	ld [hli], a
+	ld a, c
+	ld [hli], a
+	ld a, [$cd5b]
+	ld [hli], a
+	ld a, [$cd5c]
+	ld [hli], a
+	xor $20
+	ld [$cd5c], a
+	inc d
+	ld a, $8
+	add c
+	ld c, a
+	dec e
+	jr nz, .asm_712af
+	pop bc
+	pop de
+	push hl
+	ld hl, $cd5b
+	inc [hl]
+	inc [hl]
+	pop hl
+	ld a, $8
+	add b
+	ld b, a
+	dec d
+	jr nz, .asm_712ad
+	ret
+
+; known jump sources: 711f7 (1c:51f7)
+Func_712d9: ; 712d9 (1c:52d9)
+	ld de, $cee9
+.asm_712dc
+	ld a, [de]
+	inc de
+	cp $ff
+	ret z
+	ld c, a
+	ld l, e
+	ld h, d
+.asm_712e4
+	ld a, [hl]
+	cp $ff
+	jr z, .asm_712dc
+	cp c
+	jr nz, .asm_712ee
+	xor a
+	ld [hl], a
+.asm_712ee
+	inc hl
+	jr .asm_712e4
+
+; known jump sources: 70e95 (1c:4e95), 711cd (1c:51cd), 71209 (1c:5209)
+Func_712f1: ; 712f1 (1c:52f1)
+	cp $25
+	jr c, .asm_71304
+	ld bc, $4
+	ld hl, $5382
+.asm_712fb
+	cp [hl]
+	jr c, .asm_71301
+	add hl, bc
+	jr .asm_712fb
+.asm_71301
+	inc hl
+	jr .asm_7130d
+.asm_71304
+	ld hl, $5313
+	ld c, a
+	ld b, $0
+	add hl, bc
+	add hl, bc
+	add hl, bc
+.asm_7130d
+	ld a, [hli]
+	ld [de], a
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	ret
+; 71313 (1c:5313)
 ExternalMapEntries: ; 5313
 	EMAP $2,$B,PalletTownName
 	EMAP $2,$8,ViridianCityName
@@ -70736,8 +98797,263 @@ CeruleanCaveName:
 PowerPlantName:
 	db "POWER PLANT@"
 
-INCBIN "baserom.gbc",$716BE,$7190D-$716BE
+INCBIN "baserom.gbc",$716be,$716c6 - $716be
 
+; known jump sources: 70ec8 (1c:4ec8)
+Func_716c6: ; 716c6 (1c:56c6)
+	ld a, [W_SUBANIMTRANSFORM] ; $d08b
+	inc a
+	cp $19
+	jr z, .asm_716e1
+	cp $32
+	jr nz, .asm_716f1
+	ld hl, $c508
+	ld de, $c300
+	ld bc, $90
+	call CopyData
+	xor a
+	jr .asm_716f1
+.asm_716e1
+	ld hl, $c300
+	ld b, $24
+	ld de, $4
+.asm_716e9
+	ld [hl], $a0
+	add hl, de
+	dec b
+	jr nz, .asm_716e9
+	ld a, $19
+.asm_716f1
+	ld [W_SUBANIMTRANSFORM], a ; $d08b
+	jp DelayFrame
+
+; known jump sources: 6608 (1:6608)
+Func_716f7: ; 716f7 (1c:56f7)
+	xor a
+	ld [W_CURMENUITEMID], a ; $cc26
+	ld b, a
+	inc a
+	jr asm_7170a
+
+; known jump sources: 3ae5 (0:3ae5)
+Func_716ff: ; 716ff (1c:56ff)
+	ld hl, $cf1f
+	ld a, [W_CURMENUITEMID] ; $cc26
+	ld c, a
+	ld b, $0
+	add hl, bc
+	ld a, [hl]
+asm_7170a: ; 7170a (1c:570a)
+	ld c, a
+	ld hl, $5769
+	add hl, bc
+	ld a, [$cf1b]
+	xor $1
+	add [hl]
+	ld c, a
+	add a
+	ld b, a
+	ld a, [W_SUBANIMTRANSFORM] ; $d08b
+	and a
+	jr z, .asm_7172c
+	cp c
+	jr z, .asm_7173d
+.asm_71721
+	inc a
+	cp b
+	jr nz, .asm_71726
+	xor a
+.asm_71726
+	ld [W_SUBANIMTRANSFORM], a ; $d08b
+	jp DelayFrame
+.asm_7172c
+	push bc
+	ld hl, $cc5b
+	ld de, $c300
+	ld bc, $60
+	call CopyData
+	pop bc
+	xor a
+	jr .asm_71721
+.asm_7173d
+	push bc
+	ld hl, $c302
+	ld bc, $10
+	ld a, [W_CURMENUITEMID] ; $cc26
+	call AddNTimes
+	ld c, $40
+	ld a, [hl]
+	cp $4
+	jr z, .asm_71755
+	cp $8
+	jr nz, .asm_71759
+.asm_71755
+	dec hl
+	dec hl
+	ld c, $1
+.asm_71759
+	ld b, $4
+	ld de, $4
+.asm_7175e
+	ld a, [hl]
+	add c
+	ld [hl], a
+	add hl, de
+	dec b
+	jr nz, .asm_7175e
+	pop bc
+	ld a, c
+	jr .asm_71721
+
+INCBIN "baserom.gbc",$71769,$7176c - $71769
+
+; known jump sources: 65b5 (1:65b5), 41214 (10:5214)
+Func_7176c: ; 7176c (1c:576c)
+	ld hl, $57c0
+	ld a, $1c
+
+; known jump sources: 707d1 (1c:47d1)
+Func_71771: ; 71771 (1c:5771)
+	ld bc, $0
+.asm_71774
+	push af
+	push bc
+	push hl
+	add hl, bc
+	ld a, [hli]
+	ld e, a
+	ld a, [hli]
+	ld d, a
+	ld a, [hli]
+	ld c, a
+	ld a, [hli]
+	ld b, a
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	call CopyVideoData
+	pop hl
+	pop bc
+	ld a, $6
+	add c
+	ld c, a
+	pop af
+	dec a
+	jr nz, .asm_71774
+	ret
+
+; known jump sources: 12ce0 (4:6ce0)
+Func_71791: ; 71791 (1c:5791)
+	call DisableLCD
+	ld hl, $57c0
+	ld a, $1c
+	ld bc, $0
+.asm_7179c
+	push af
+	push bc
+	push hl
+	add hl, bc
+	ld a, [hli]
+	ld e, a
+	ld a, [hli]
+	ld d, a
+	push de
+	ld a, [hli]
+	ld c, a
+	swap c
+	ld b, $0
+	ld a, [hli]
+	ld e, [hl]
+	inc hl
+	ld d, [hl]
+	pop hl
+	call FarCopyData2
+	pop hl
+	pop bc
+	ld a, $6
+	add c
+	ld c, a
+	pop af
+	dec a
+	jr nz, .asm_7179c
+	jp EnableLCD
+
+INCBIN "baserom.gbc",$717c0,$71868 - $717c0
+
+; known jump sources: 12d1d (4:6d1d)
+Func_71868: ; 71868 (1c:5868)
+	push hl
+	push de
+	push bc
+	ld a, [H_DOWNARROWBLINKCNT2] ; $FF00+$8c
+	ld hl, W_PARTYMON1 ; $d164
+	ld e, a
+	ld d, $0
+	add hl, de
+	ld a, [hl]
+	call Func_718e9
+	ld [$cd5b], a
+	call asm_718c3
+	pop bc
+	pop de
+	pop hl
+	ret
+
+; known jump sources: 6916 (1:6916), 4150a (10:550a)
+Func_71882: ; 71882 (1c:5882)
+	xor a
+	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	ld a, [$cd5d]
+	call Func_718e9
+	ld [$cd5b], a
+	jr asm_718c3
+
+INCBIN "baserom.gbc",$71890,$718c3 - $71890
+asm_718c3: ; 718c3 (1c:58c3)
+	push af
+	ld c, $10
+	ld h, $c3
+	ld a, [H_DOWNARROWBLINKCNT2] ; $FF00+$8c
+	swap a
+	ld l, a
+	add $10
+	ld b, a
+	pop af
+	cp $8
+	jr z, .asm_718da
+	call Func_712a6
+	jr .asm_718dd
+.asm_718da
+	call Func_71281
+.asm_718dd
+	ld hl, $c300
+	ld de, $cc5b
+	ld bc, $60
+	jp CopyData
+
+; known jump sources: 71875 (1c:5875), 71888 (1c:5888)
+Func_718e9: ; 718e9 (1c:58e9)
+	ld [$d11e], a
+	ld a, $3a
+	call Predef ; indirect jump to IndexToPokedex (41010 (10:5010))
+	ld a, [$d11e]
+	ld c, a
+	dec a
+	srl a
+	ld hl, $590d
+	ld e, a
+	ld d, $0
+	add hl, de
+	ld a, [hl]
+	bit 0, c
+	jr nz, .asm_71906
+	swap a
+.asm_71906
+	and $f0
+	srl a
+	srl a
+	ret
+; 7190d (1c:590d)
 MonOverworldData:
 	dn SPRITE_GRASS, SPRITE_GRASS			;Bulbasaur/Ivysaur
 	dn SPRITE_GRASS, SPRITE_MON				;Venusaur/Charmander
@@ -70986,7 +99302,91 @@ Function71c07: ; 0x71c07
 	ld [$cd12],a
 	ret
 
-INCBIN "baserom.gbc",$71ca2,$71d88 - $71ca2
+; known jump sources: 71c13 (1c:5c13), 71c8d (1c:5c8d)
+Func_71ca2: ; 71ca2 (1c:5ca2)
+	call GBPalWhiteOutWithDelay3
+	call Func_3dbe
+	call ReloadTilesetTilePatterns
+	call Func_3701
+	call Delay3
+	call LoadGBPal
+	ld c, $a
+	call DelayFrames
+	ld b, BANK(LoadWildData)
+	ld hl, LoadWildData
+	jp Bankswitch ; indirect jump to LoadWildData (ceb8 (3:4eb8))
+
+; known jump sources: 71c57 (1c:5c57)
+Func_71cc1: ; 71cc1 (1c:5cc1)
+	ld hl, W_WHICHTRADE ; $cd3d
+	ld a, [$cd0f]
+	ld [hli], a
+	ld a, [$cd34]
+	ld [hl], a
+	ld hl, W_PARTYMON1OT ; $d273
+	ld bc, $b
+	ld a, [W_WHICHPOKEMON] ; $cf92
+	call AddNTimes
+	ld de, $cd41
+	ld bc, $b
+	call Func_71d11
+	ld hl, $5d59
+	ld de, $cd4e
+	call Func_71d11
+	ld de, W_GRASSRATE ; $d887
+	call Func_71d11
+	ld hl, W_PARTYMON1_OTID ; $d177
+	ld bc, $2c
+	ld a, [W_WHICHPOKEMON] ; $cf92
+	call AddNTimes
+	ld de, $cd4c
+	ld bc, $2
+	call Func_71d11
+	call GenRandom
+	ld hl, H_RAND1 ; $ffd3
+	ld de, $cd59
+	jp CopyData
+
+; known jump sources: 71cde (1c:5cde), 71ce7 (1c:5ce7), 71ced (1c:5ced), 71d02 (1c:5d02)
+Func_71d11: ; 71d11 (1c:5d11)
+	push hl
+	push bc
+	call CopyData
+	pop bc
+	pop hl
+	ret
+
+; known jump sources: 71c7f (1c:5c7f)
+Func_71d19: ; 71d19 (1c:5d19)
+	ld hl, W_PARTYMON1NAME ; $d2b5
+	ld bc, $b
+	call Func_71d4f
+	ld hl, $cd29
+	ld bc, $b
+	call CopyData
+	ld hl, W_PARTYMON1OT ; $d273
+	ld bc, $b
+	call Func_71d4f
+	ld hl, $5d59
+	ld bc, $b
+	call CopyData
+	ld hl, W_PARTYMON1_OTID ; $d177
+	ld bc, $2c
+	call Func_71d4f
+	ld hl, $cd59
+	ld bc, $2
+	jp CopyData
+
+; known jump sources: 71d1f (1c:5d1f), 71d31 (1c:5d31), 71d43 (1c:5d43)
+Func_71d4f: ; 71d4f (1c:5d4f)
+	ld a, [W_NUMINPARTY] ; $d163
+	dec a
+	call AddNTimes
+	ld e, l
+	ld d, h
+	ret
+
+INCBIN "baserom.gbc",$71d59,$71d88 - $71d59
 
 UnnamedText_71d88: ; 0x71d88
 	TX_FAR _UnnamedText_71d88
@@ -71072,8 +99472,35 @@ UnnamedText_71dda: ; 0x71dda
 	db $50
 ; 0x71dda + 5 bytes
 
-INCBIN "baserom.gbc",$71DDF,$71E12-$71DDF
-
+; known jump sources: 3df6 (0:3df6)
+Func_71ddf: ; 71ddf (1c:5ddf)
+	call Load16BitRegisters
+	ld a, b
+	cp $ff
+	jr nz, .asm_71dea
+	ld a, [$cf1c]
+.asm_71dea
+	cp $fc
+	jp z, Func_71fc2
+	ld l, a
+	ld h, $0
+	add hl, hl
+	ld de, $5f73
+	add hl, de
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	ld de, $6156
+	push de
+	jp [hl]
+	ld hl, $6448
+	ld de, $61b5
+	ret
+	ld hl, $6428
+	ld de, $cf2d
+	ld bc, $10
+	call CopyData
+; 71e12 (1c:5e12)
 	ld a, [W_PLAYERBATTSTATUS3]
 	ld hl, $D014                ; player Pokemon ID
 	call DeterminePaletteID
@@ -71082,13 +99509,185 @@ INCBIN "baserom.gbc",$71DDF,$71E12-$71DDF
 	ld hl, $CFD8                ; enemy Pokemon ID
 	call DeterminePaletteID
 
-INCBIN "baserom.gbc",$71E25,$71F97-$71E25
+	ld c, a
+	ld hl, $cf2e
+	ld a, [$cf1d]
+	add $1f
+	ld [hli], a
+	inc hl
+	ld a, [$cf1e]
+	add $1f
+	ld [hli], a
+	inc hl
+	ld a, b
+	ld [hli], a
+	inc hl
+	ld a, c
+	ld [hl], a
+	ld hl, $cf2d
+	ld de, $61b5
+	ld a, $1
+	ld [$cf1c], a
+	ret
+	ld hl, $6458
+	ld de, $619e
+	ret
+	ld hl, $6428
+	ld de, $cf2d
+	ld bc, $10
+	call CopyData
+	ld a, [$cf91]
+	cp $bf
+	jr c, .asm_71e64
+	ld a, $1
+.asm_71e64
+	call Func_71f9d
+	push af
+	ld hl, $cf2e
+	ld a, [$cf25]
+	add $1f
+	ld [hli], a
+	inc hl
+	pop af
+	ld [hl], a
+	ld hl, $cf2d
+	ld de, $61fa
+	ret
+	ld hl, $6438
+	ld de, $cf2e
+	ret
+	ld hl, $6468
+	ld de, $cf2d
+	ld bc, $10
+	call CopyData
+	ld a, [$cf91]
+	call Func_71f9d
+	ld hl, $cf30
+	ld [hl], a
+	ld hl, $cf2d
+	ld de, $6222
+	ret
+
+INCBIN "baserom.gbc",$71e9f,$71ea6 - $71e9f
+	ld hl, $6488
+	ld de, $628e
+	ret
+	ld hl, $64a8
+	ld de, $619e
+	ret
+	ld hl, $64b8
+	ld de, $62c1
+	ret
+	ld hl, $64c8
+	ld de, $63dd
+	ld a, $8
+	ld [$cf1c], a
+	ret
+	ld hl, $6428
+	ld de, $cf2d
+	ld bc, $10
+	call CopyData
+	ld a, [W_CURMAPTILESET] ; $d367
+	cp $f
+	jr z, .asm_71f0c
+	cp $11
+	jr z, .asm_71f10
+	ld a, [W_CURMAP] ; $d35e
+	cp $25
+	jr c, .asm_71ef8
+	cp $e2
+	jr c, .asm_71ef5
+	cp $e5
+	jr c, .asm_71f10
+	cp $f5
+	jr z, .asm_71f14
+	cp $f6
+	jr z, .asm_71f10
+.asm_71ef5
+	ld a, [$d365]
+.asm_71ef8
+	cp $b
+	jr c, .asm_71efe
+	ld a, $ff
+.asm_71efe
+	inc a
+	ld hl, $cf2e
+	ld [hld], a
+	ld de, $619e
+	ld a, $9
+	ld [$cf1c], a
+	ret
+.asm_71f0c
+	ld a, $18
+	jr .asm_71efe
+.asm_71f10
+	ld a, $22
+	jr .asm_71efe
+.asm_71f14
+	xor a
+	jr .asm_71efe
+	push bc
+	ld hl, $6428
+	ld de, $cf2d
+	ld bc, $10
+	call CopyData
+	pop bc
+	ld a, c
+	and a
+	ld a, $1e
+	jr nz, .asm_71f31
+	ld a, [$cf1d]
+	call Func_71f9d
+.asm_71f31
+	ld [$cf2e], a
+	ld hl, $cf2d
+	ld de, $619e
+	ret
+	ld hl, $6360
+	ld de, $cc5b
+	ld bc, $40
+	call CopyData
+	ld de, $5f8f
+	ld hl, $cc5d
+	ld a, [W_OBTAINEDBADGES] ; $d356
+	ld c, $8
+.asm_71f52
+	srl a
+	push af
+	jr c, .asm_71f62
+	push bc
+	ld a, [de]
+	ld c, a
+	xor a
+.asm_71f5b
+	ld [hli], a
+	dec c
+	jr nz, .asm_71f5b
+	pop bc
+	jr .asm_71f67
+.asm_71f62
+	ld a, [de]
+.asm_71f63
+	inc hl
+	dec a
+	jr nz, .asm_71f63
+.asm_71f67
+	pop af
+	inc de
+	dec c
+	jr nz, .asm_71f52
+	ld hl, $6498
+	ld de, $cc5b
+	ret
+
+INCBIN "baserom.gbc",$71f73,$71f97 - $71f73
 
 DeterminePaletteID:
 	bit 3, a                 ; bit 3 of battle status 3 (unused?)
 	ld a, PAL_GREYMON
 	ret nz
 	ld a, [hl]
+Func_71f9d:
 	ld [$D11E], a
 	and a
 	jr z, .idZero
@@ -71105,8 +99704,40 @@ DeterminePaletteID:
 	ld a, [hl]
 	ret
 
-INCBIN "baserom.gbc",$71FB6,$71FEB-$71FB6
+; known jump sources: 12cf3 (4:6cf3)
+Func_71fb6: ; 71fb6 (1c:5fb6)
+	ld hl, $62f4
+	ld de, $cf2e
+	ld bc, $30
+	jp CopyData
 
+; known jump sources: 71dec (1c:5dec)
+Func_71fc2: ; 71fc2 (1c:5fc2)
+	ld hl, $cf1f
+	ld a, [$cf2d]
+	ld e, a
+	ld d, $0
+	add hl, de
+	ld e, l
+	ld d, h
+	ld a, [de]
+	and a
+	ld e, $5
+	jr z, .asm_71fdb
+	dec a
+	ld e, $a
+	jr z, .asm_71fdb
+	ld e, $f
+.asm_71fdb
+	push de
+	ld hl, $cf37
+	ld bc, $6
+	ld a, [$cf2d]
+	call AddNTimes
+	pop de
+	ld [hl], e
+	ret
+; 71feb (1c:5feb)
 SendSGBPacket: ;$5feb
 ;check number of packets
 	ld a,[hl]
@@ -71174,8 +99805,159 @@ SendSGBPacket: ;$5feb
 ; else send 16 more bytes
 	jr .loop2\@
 
-INCBIN "baserom.gbc",$7202B,$7214A-$7202B
+; known jump sources: 1fd6 (0:1fd6)
+Func_7202b: ; 7202b (1c:602b)
+	xor a
+	ld [$cf1b], a
+	call Func_7209b
+	ret nc
+	ld a, $1
+	ld [$cf1b], a
+	ld a, [$cf1a]
+	and a
+	jr z, .asm_7203f
+	ret
+.asm_7203f
+	di
+	call Func_72075
+	ei
+	ld a, $1
+	ld [$cf2d], a
+	ld de, $6508
+	ld hl, $6fe8
+	call Func_7210b
+	xor a
+	ld [$cf2d], a
+	ld de, $6518
+	ld hl, $6788
+	call Func_7210b
+	xor a
+	ld [$cf2d], a
+	ld de, $64d8
+	ld hl, $6660
+	call Func_7210b
+	call ZeroVram
+	ld hl, $6538
+	jp SendSGBPacket
 
+; known jump sources: 72040 (1c:6040)
+Func_72075: ; 72075 (1c:6075)
+	ld hl, $6089
+	ld c, $9
+.asm_7207a
+	push bc
+	ld a, [hli]
+	push hl
+	ld h, [hl]
+	ld l, a
+	call SendSGBPacket
+	pop hl
+	inc hl
+	pop bc
+	dec c
+	jr nz, .asm_7207a
+	ret
+
+INCBIN "baserom.gbc",$72089,$7209b - $72089
+
+; known jump sources: 7202f (1c:602f)
+Func_7209b: ; 7209b (1c:609b)
+	ld hl, $64f8
+	di
+	call SendSGBPacket
+	ld a, $1
+	ld [$FF00+$f9], a
+	ei
+	call Wait7000
+	ld a, [rJOYP] ; $FF00+$0
+	and $3
+	cp $3
+	jr nz, .asm_720fd
+	ld a, $20
+	ld [rJOYP], a ; $FF00+$0
+	ld a, [rJOYP] ; $FF00+$0
+	ld a, [rJOYP] ; $FF00+$0
+	call Wait7000
+	call Wait7000
+	ld a, $30
+	ld [rJOYP], a ; $FF00+$0
+	call Wait7000
+	call Wait7000
+	ld a, $10
+	ld [rJOYP], a ; $FF00+$0
+	ld a, [rJOYP] ; $FF00+$0
+	ld a, [rJOYP] ; $FF00+$0
+	ld a, [rJOYP] ; $FF00+$0
+	ld a, [rJOYP] ; $FF00+$0
+	ld a, [rJOYP] ; $FF00+$0
+	ld a, [rJOYP] ; $FF00+$0
+	call Wait7000
+	call Wait7000
+	ld a, $30
+	ld [rJOYP], a ; $FF00+$0
+	ld a, [rJOYP] ; $FF00+$0
+	ld a, [rJOYP] ; $FF00+$0
+	ld a, [rJOYP] ; $FF00+$0
+	call Wait7000
+	call Wait7000
+	ld a, [rJOYP] ; $FF00+$0
+	and $3
+	cp $3
+	jr nz, .asm_720fd
+	call Func_72102
+	and a
+	ret
+.asm_720fd
+	call Func_72102
+	scf
+	ret
+
+; known jump sources: 720f8 (1c:60f8), 720fd (1c:60fd)
+Func_72102: ; 72102 (1c:6102)
+	ld hl, $64e8
+	call SendSGBPacket
+	jp Wait7000
+
+; known jump sources: 7204f (1c:604f), 7205c (1c:605c), 72069 (1c:6069)
+Func_7210b: ; 7210b (1c:610b)
+	di
+	push de
+	call DisableLCD
+	ld a, $e4
+	ld [rBGP], a ; $FF00+$47
+	ld de, $8800
+	ld a, [$cf2d]
+	and a
+	jr z, .asm_72122
+	call Func_72188
+	jr .asm_72128
+.asm_72122
+	ld bc, $1000
+	call CopyData
+.asm_72128
+	ld hl, $9800
+	ld de, $c
+	ld a, $80
+	ld c, $d
+.asm_72132
+	ld b, $14
+.asm_72134
+	ld [hli], a
+	inc a
+	dec b
+	jr nz, .asm_72134
+	add hl, de
+	dec c
+	jr nz, .asm_72132
+	ld a, $e3
+	ld [rLCDC], a ; $FF00+$40
+	pop hl
+	call SendSGBPacket
+	xor a
+	ld [rBGP], a ; $FF00+$47
+	ei
+	ret
+; 7214a (1c:614a)
 Wait7000: ;$614a
 ; each loop takes about 10 cycles so this routine actually loops through 70000
 ; cycles.
@@ -71190,7 +99972,70 @@ Wait7000: ;$614a
 	jr nz,.loop\@
 	ret
 
-INCBIN "baserom.gbc",$72156,$725C8-$72156
+	ld a, [$cf1a]
+	and a
+	jr z, .asm_72165
+	push de
+	call Func_7216d
+	pop hl
+	call Func_72187
+	ret
+.asm_72165
+	push de
+	call SendSGBPacket
+	pop hl
+	jp SendSGBPacket
+
+; known jump sources: 7215d (1c:615d)
+Func_7216d: ; 7216d (1c:616d)
+	ld a, $80
+	ld [$FF00+$68], a
+	inc hl
+	ld c, $20
+.asm_72174
+	ld a, [hli]
+	inc hl
+	add a
+	add a
+	add a
+	ld de, $6660
+	add e
+	jr nc, .asm_72180
+	inc d
+.asm_72180
+	ld a, [de]
+	ld [$FF00+$69], a
+	dec c
+	jr nz, .asm_72174
+	ret
+
+; known jump sources: 72161 (1c:6161)
+Func_72187: ; 72187 (1c:6187)
+	ret
+
+; known jump sources: 7211d (1c:611d)
+Func_72188: ; 72188 (1c:6188)
+	ld b, $80
+.asm_7218a
+	ld c, $10
+.asm_7218c
+	ld a, [hli]
+	ld [de], a
+	inc de
+	dec c
+	jr nz, .asm_7218c
+	ld c, $10
+	xor a
+.asm_72195
+	ld [de], a
+	inc de
+	dec c
+	jr nz, .asm_72195
+	dec b
+	jr nz, .asm_7218a
+	ret
+
+INCBIN "baserom.gbc",$7219e,$725c8 - $7219e
 
 MonsterPalettes: ; 65C8
 	db PAL_MEWMON    ; MISSINGNO
@@ -71582,14 +100427,144 @@ IF _BLUE
 	INCBIN "gfx/blue/sgbborder.2bpp"
 ENDC
 
-INCBIN "baserom.gbc",$735e8,$7361e - $735e8
-
+; known jump sources: 4a9 (0:4a9), 5b04 (1:5b04)
+Func_735e8: ; 735e8 (1c:75e8)
+	call ClearScreen
+	call LoadFontTilePatterns
+	call LoadTextBoxTilePatterns
+	call Func_73623
+	jr c, .asm_73604
+	call Func_73690
+	jr c, .asm_73604
+	call Func_736bd
+	jr c, .asm_73604
+	ld a, $2
+	jr .asm_7361a
+.asm_73604
+	ld hl, $d730
+	push hl
+	set 6, [hl]
+	ld hl, $761e
+	call PrintText
+	ld c, $64
+	call DelayFrames
+	pop hl
+	res 6, [hl]
+	ld a, $1
+.asm_7361a
+	ld [$d088], a
+	ret
+; 7361e (1c:761e)
 UnnamedText_7361e: ; 0x7361e
 	TX_FAR _UnnamedText_7361e
 	db $50
 ; 0x7361e + 5 bytes
 
-INCBIN "baserom.gbc",$73623,$7377d - $73623
+; known jump sources: 735f1 (1c:75f1)
+Func_73623: ; 73623 (1c:7623)
+	ld a, $a
+	ld [$0], a
+	ld a, $1
+	ld [$6000], a
+	ld [$4000], a
+	ld hl, $a598
+	ld bc, $f8b
+	call Func_73856
+	ld c, a
+	ld a, [$b523]
+	cp c
+	jp z, Func_73652
+	ld hl, $a598
+	ld bc, $f8b
+	call Func_73856
+	ld c, a
+	ld a, [$b523]
+	cp c
+	jp nz, Func_736f7
+
+; known jump sources: 7363e (1c:763e)
+Func_73652: ; 73652 (1c:7652)
+	ld hl, $a598
+	ld de, W_PLAYERNAME ; $d158
+	ld bc, $b
+	call CopyData
+	ld hl, $a5a3
+	ld de, W_OWNEDPOKEMON ; $d2f7
+	ld bc, $789
+	call CopyData
+	ld hl, W_CURMAPTILESET ; $d367
+	set 7, [hl]
+	ld hl, $ad2c
+	ld de, $c100
+	ld bc, $200
+	call CopyData
+	ld a, [$b522]
+	ld [$FF00+$d7], a
+	ld hl, $b0c0
+	ld de, W_NUMINBOX ; $da80
+	ld bc, $462
+	call CopyData
+	and a
+	jp Func_736f8
+
+; known jump sources: 735f6 (1c:75f6)
+Func_73690: ; 73690 (1c:7690)
+	ld a, $a
+	ld [$0], a
+	ld a, $1
+	ld [$6000], a
+	ld [$4000], a
+	ld hl, $a598
+	ld bc, $f8b
+	call Func_73856
+	ld c, a
+	ld a, [$b523]
+	cp c
+	jr nz, Func_736f7
+	ld hl, $b0c0
+	ld de, W_NUMINBOX ; $da80
+	ld bc, $462
+	call CopyData
+	and a
+	jp Func_736f8
+
+; known jump sources: 735fb (1c:75fb)
+Func_736bd: ; 736bd (1c:76bd)
+	ld a, $a
+	ld [$0], a
+	ld a, $1
+	ld [$6000], a
+	ld [$4000], a
+	ld hl, $a598
+	ld bc, $f8b
+	call Func_73856
+	ld c, a
+	ld a, [$b523]
+	cp c
+	jp nz, Func_736f7
+	ld hl, $af2c
+	ld de, W_NUMINPARTY ; $d163
+	ld bc, $194
+	call CopyData
+	ld hl, $a5a3
+	ld de, W_OWNEDPOKEMON ; $d2f7
+	ld bc, $26
+	call CopyData
+	and a
+	jp Func_736f8
+
+; known jump sources: 7364f (1c:764f), 736ab (1c:76ab), 736d8 (1c:76d8)
+Func_736f7: ; 736f7 (1c:76f7)
+	scf
+
+; known jump sources: 7368d (1c:768d), 736ba (1c:76ba), 736f4 (1c:76f4)
+Func_736f8: ; 736f8 (1c:76f8)
+	ld a, $0
+	ld [$6000], a
+	ld [$0], a
+	ret
+
+INCBIN "baserom.gbc",$73701,$7377d - $73701
 
 UnnamedText_7377d: ; 0x7377d
 	TX_FAR _UnnamedText_7377d
@@ -71606,22 +100581,467 @@ UnnamedText_73787: ; 0x73787
 	db $50
 ; 0x73787 + 5 bytes
 
-INCBIN "baserom.gbc",$7378c,$73909 - $7378c
+; known jump sources: 7384d (1c:784d)
+Func_7378c: ; 7378c (1c:778c)
+	ld a, $a
+	ld [$0], a
+	ld a, $1
+	ld [$6000], a
+	ld [$4000], a
+	ld hl, W_PLAYERNAME ; $d158
+	ld de, $a598
+	ld bc, $b
+	call CopyData
+	ld hl, W_OWNEDPOKEMON ; $d2f7
+	ld de, $a5a3
+	ld bc, $789
+	call CopyData
+	ld hl, $c100
+	ld de, $ad2c
+	ld bc, $200
+	call CopyData
+	ld hl, W_NUMINBOX ; $da80
+	ld de, $b0c0
+	ld bc, $462
+	call CopyData
+	ld a, [$FF00+$d7]
+	ld [$b522], a
+	ld hl, $a598
+	ld bc, $f8b
+	call Func_73856
+	ld [$b523], a
+	xor a
+	ld [$6000], a
+	ld [$0], a
+	ret
 
+; known jump sources: 73850 (1c:7850)
+Func_737e2: ; 737e2 (1c:77e2)
+	ld a, $a
+	ld [$0], a
+	ld a, $1
+	ld [$6000], a
+	ld [$4000], a
+	ld hl, W_NUMINBOX ; $da80
+	ld de, $b0c0
+	ld bc, $462
+	call CopyData
+	ld hl, $a598
+	ld bc, $f8b
+	call Func_73856
+	ld [$b523], a
+	xor a
+	ld [$6000], a
+	ld [$0], a
+	ret
+
+; known jump sources: 73853 (1c:7853)
+Func_7380f: ; 7380f (1c:780f)
+	ld a, $a
+	ld [$0], a
+	ld a, $1
+	ld [$6000], a
+	ld [$4000], a
+	ld hl, W_NUMINPARTY ; $d163
+	ld de, $af2c
+	ld bc, $194
+	call CopyData
+	ld hl, W_OWNEDPOKEMON ; $d2f7
+	ld de, $a5a3
+	ld bc, $26
+	call CopyData
+	ld hl, $a598
+	ld bc, $f8b
+	call Func_73856
+	ld [$b523], a
+	xor a
+	ld [$6000], a
+	ld [$0], a
+	ret
+
+; known jump sources: 7245 (1:7245), 5a4fa (16:64fa), 738f7 (1c:78f7)
+Func_73848: ; 73848 (1c:7848)
+	ld a, $2
+	ld [$d088], a
+	call Func_7378c
+	call Func_737e2
+	jp Func_7380f
+
+; known jump sources: 73636 (1c:7636), 73647 (1c:7647), 736a3 (1c:76a3), 736d0 (1c:76d0), 737d4 (1c:77d4), 73801 (1c:7801), 7383a (1c:783a), 73870 (1c:7870), 7392e (1c:792e), 73a75 (1c:7a75)
+Func_73856: ; 73856 (1c:7856)
+	ld d, $0
+.asm_73858
+	ld a, [hli]
+	add d
+	ld d, a
+	dec bc
+	ld a, b
+	or c
+	jr nz, .asm_73858
+	ld a, d
+	cpl
+	ret
+
+; known jump sources: 73934 (1c:7934), 73a7b (1c:7a7b)
+Func_73863: ; 73863 (1c:7863)
+	ld hl, $a000
+	ld de, $ba4d
+	ld b, $6
+.asm_7386b
+	push bc
+	push de
+	ld bc, $462
+	call Func_73856
+	pop de
+	ld [de], a
+	inc de
+	pop bc
+	dec b
+	jr nz, .asm_7386b
+	ret
+
+; known jump sources: 738cd (1c:78cd), 738e0 (1c:78e0)
+Func_7387b: ; 7387b (1c:787b)
+	ld hl, $7895
+	ld a, [$d5a0]
+	and $7f
+	cp $6
+	ld b, $2
+	jr c, .asm_7388c
+	inc b
+	sub $6
+.asm_7388c
+	ld e, a
+	ld d, $0
+	add hl, de
+	add hl, de
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	ret
+
+INCBIN "baserom.gbc",$73895,$738a1 - $73895
+
+; known jump sources: 216b8 (8:56b8)
+Func_738a1: ; 738a1 (1c:78a1)
+	ld hl, $7909
+	call PrintText
+	call Func_35ec
+	ld a, [W_CURMENUITEMID] ; $cc26
+	and a
+	ret nz
+	ld hl, $d5a0
+	bit 7, [hl]
+	call z, Func_73a29
+	call Func_7393f
+	call Func_2429
+	ld hl, $fff6
+	set 1, [hl]
+	call HandleMenuInput
+	ld hl, $fff6
+	res 1, [hl]
+	bit 1, a
+	ret nz
+	call Func_7387b
+	ld e, l
+	ld d, h
+	ld hl, W_NUMINBOX ; $da80
+	call Func_7390e
+	ld a, [W_CURMENUITEMID] ; $cc26
+	set 7, a
+	ld [$d5a0], a
+	call Func_7387b
+	ld de, W_NUMINBOX ; $da80
+	call Func_7390e
+	ld hl, W_MAPTEXTPTR ; $d36c
+	ld de, W_WHICHTRADE ; $cd3d
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hl]
+	ld [de], a
+	call Func_3f05
+	call Func_73848
+	ld hl, W_WHICHTRADE ; $cd3d
+	call Func_3f0f
+	ld a, $b6
+	call Func_3740
+	call Func_3748
+	ret
+; 73909 (1c:7909)
 UnnamedText_73909: ; 0x73909
 	TX_FAR _UnnamedText_73909
 	db $50
 ; 0x73909 + 5 bytes
 
-INCBIN "baserom.gbc",$7390e,$739d4 - $7390e
+; known jump sources: 738d5 (1c:78d5), 738e6 (1c:78e6)
+Func_7390e: ; 7390e (1c:790e)
+	push hl
+	ld a, $a
+	ld [$0], a
+	ld a, $1
+	ld [$6000], a
+	ld a, b
+	ld [$4000], a
+	ld bc, $462
+	call CopyData
+	pop hl
+	xor a
+	ld [hli], a
+	dec a
+	ld [hl], a
+	ld hl, $a000
+	ld bc, $1a4c
+	call Func_73856
+	ld [$ba4c], a
+	call Func_73863
+	xor a
+	ld [$6000], a
+	ld [$0], a
+	ret
 
+; known jump sources: 738b7 (1c:78b7)
+Func_7393f: ; 7393f (1c:793f)
+	xor a
+	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld a, $3
+	ld [W_MENUWATCHEDKEYS], a ; $cc29
+	ld a, $b
+	ld [W_MAXMENUITEMID], a ; $cc28
+	ld a, $1
+	ld [W_TOPMENUITEMY], a ; $cc24
+	ld a, $c
+	ld [W_TOPMENUITEMX], a ; $cc25
+	xor a
+	ld [$cc37], a
+	ld a, [$d5a0]
+	and $7f
+	ld [W_CURMENUITEMID], a ; $cc26
+	ld [W_OLDMENUITEMID], a ; $cc2a
+	ld hl, $c3a0
+	ld b, $2
+	ld c, $9
+	call TextBoxBorder
+	ld hl, $79d4
+	call PrintText
+	ld hl, $c3ab
+	ld b, $c
+	ld c, $7
+	call TextBoxBorder
+	ld hl, $fff6
+	set 2, [hl]
+	ld de, $79d9
+	ld hl, $c3c1
+	call PlaceString
+	ld hl, $fff6
+	res 2, [hl]
+	ld a, [$d5a0]
+	and $7f
+	cp $9
+	jr c, .asm_739a6
+	sub $9
+	ld hl, $c3d0
+	ld [hl], $f7
+	add $f6
+	jr .asm_739a8
+.asm_739a6
+	add $f7
+.asm_739a8
+	ld [$c3d1], a
+	ld hl, $c3c9
+	ld de, $7a21
+	call PlaceString
+	call Func_73a84
+	ld hl, $c3c6
+	ld de, W_WHICHTRADE ; $cd3d
+	ld bc, $14
+	ld a, $c
+.asm_739c2
+	push af
+	ld a, [de]
+	and a
+	jr z, .asm_739c9
+	ld [hl], $78
+.asm_739c9
+	add hl, bc
+	inc de
+	pop af
+	dec a
+	jr nz, .asm_739c2
+	ld a, $1
+	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ret
+; 739d4 (1c:79d4)
 UnnamedText_739d4: ; 0x739d4
 	TX_FAR _UnnamedText_739d4
 	db $50
 ; 0x739d4 + 5 bytes
 
-INCBIN "baserom.gbc",$739d9,452
+INCBIN "baserom.gbc",$739d9,$73a29 - $739d9
 
+; known jump sources: 738b4 (1c:78b4)
+Func_73a29: ; 73a29 (1c:7a29)
+	ld a, $a
+	ld [$0], a
+	ld a, $1
+	ld [$6000], a
+	ld a, $2
+	ld [$4000], a
+	call Func_73a4b
+	ld a, $3
+	ld [$4000], a
+	call Func_73a4b
+	xor a
+	ld [$6000], a
+	ld [$0], a
+	ret
+
+; known jump sources: 73a38 (1c:7a38), 73a40 (1c:7a40)
+Func_73a4b: ; 73a4b (1c:7a4b)
+	ld hl, $a000
+	call Func_73a7f
+	ld hl, $a462
+	call Func_73a7f
+	ld hl, $a8c4
+	call Func_73a7f
+	ld hl, $ad26
+	call Func_73a7f
+	ld hl, $b188
+	call Func_73a7f
+	ld hl, $b5ea
+	call Func_73a7f
+	ld hl, $a000
+	ld bc, $1a4c
+	call Func_73856
+	ld [$ba4c], a
+	call Func_73863
+	ret
+
+; known jump sources: 73a4e (1c:7a4e), 73a54 (1c:7a54), 73a5a (1c:7a5a), 73a60 (1c:7a60), 73a66 (1c:7a66), 73a6c (1c:7a6c)
+Func_73a7f: ; 73a7f (1c:7a7f)
+	xor a
+	ld [hli], a
+	dec a
+	ld [hl], a
+	ret
+
+; known jump sources: 739b4 (1c:79b4)
+Func_73a84: ; 73a84 (1c:7a84)
+	ld hl, W_WHICHTRADE ; $cd3d
+	push hl
+	ld a, $a
+	ld [$0], a
+	ld a, $1
+	ld [$6000], a
+	ld a, $2
+	ld [$4000], a
+	call Func_73ab8
+	ld a, $3
+	ld [$4000], a
+	call Func_73ab8
+	xor a
+	ld [$6000], a
+	ld [$0], a
+	pop hl
+	ld a, [$d5a0]
+	and $7f
+	ld c, a
+	ld b, $0
+	add hl, bc
+	ld a, [W_NUMINBOX] ; $da80
+	ld [hl], a
+	ret
+
+; known jump sources: 73a97 (1c:7a97), 73a9f (1c:7a9f)
+Func_73ab8: ; 73ab8 (1c:7ab8)
+	ld a, [$a000]
+	ld [hli], a
+	ld a, [$a462]
+	ld [hli], a
+	ld a, [$a8c4]
+	ld [hli], a
+	ld a, [$ad26]
+	ld [hli], a
+	ld a, [$b188]
+	ld [hli], a
+	ld a, [$b5ea]
+	ld [hli], a
+	ret
+
+INCBIN "baserom.gbc",$73ad1,$73b0d - $73ad1
+
+; known jump sources: 7024e (1c:424e)
+Func_73b0d: ; 73b0d (1c:7b0d)
+	ld a, [$d5a2]
+	dec a
+	cp $32
+	jr nc, .asm_73b28
+	ld hl, $a598
+	ld bc, $60
+	call AddNTimes
+	ld e, l
+	ld d, h
+	ld hl, $cc5b
+	ld bc, $60
+	jr asm_73b51
+.asm_73b28
+	ld hl, $a5f8
+	ld de, $a598
+	ld bc, $1260
+	call asm_73b51
+	ld hl, $cc5b
+	ld de, $b7f8
+	ld bc, $60
+	jr asm_73b51
+
+; known jump sources: 765be (1d:65be)
+Func_73b3f: ; 73b3f (1c:7b3f)
+	ld hl, $a598
+	ld bc, $60
+	ld a, [W_WHICHTRADE] ; $cd3d
+	call AddNTimes
+	ld de, $cc5b
+	ld bc, $60
+asm_73b51: ; 73b51 (1c:7b51)
+	ld a, $a
+	ld [$0], a
+	ld a, $1
+	ld [$6000], a
+	xor a
+	ld [$4000], a
+	call CopyData
+	xor a
+	ld [$6000], a
+	ld [$0], a
+	ret
+
+; known jump sources: 1c9bb (7:49bb)
+Func_73b6a: ; 73b6a (1c:7b6a)
+	ld a, $a
+	ld [$0], a
+	ld a, $1
+	ld [$6000], a
+	xor a
+	call Func_73b8f
+	ld a, $1
+	call Func_73b8f
+	ld a, $2
+	call Func_73b8f
+	ld a, $3
+	call Func_73b8f
+	xor a
+	ld [$6000], a
+	ld [$0], a
+	ret
+
+; known jump sources: 73b75 (1c:7b75), 73b7a (1c:7b7a), 73b7f (1c:7b7f), 73b84 (1c:7b84)
+Func_73b8f: ; 73b8f (1c:7b8f)
+	ld [$4000], a
+	ld hl, $a000
+	ld bc, $2000
+	ld a, $ff
+	jp FillMemory
+; 73b9d (1c:7b9d)
 SECTION "bank1D",DATA,BANK[$1D]
 
 CopycatsHouseF1Blocks: ; 0x74000
@@ -71641,8 +101061,57 @@ FuchsiaPokecenterBlocks: ; 0x74030 28
 CeruleanHouse3Blocks: ; 0x7404c 16
 	INCBIN "maps/ceruleanhouse3.blk"
 
-INCBIN "baserom.gbc",$7405c,$6f
+; known jump sources: 5a4c8 (16:64c8)
+Func_7405c: ; 7405c (1d:405c)
+	ld b, BANK(Func_701a0)
+	ld hl, Func_701a0
+	call Bankswitch ; indirect jump to Func_701a0 (701a0 (1c:41a0))
+	call ClearScreen
+	ld c, $64
+	call DelayFrames
+	call DisableLCD
+	ld hl, $8800
+	ld bc, $400
+	call Func_74171
+	ld hl, $9600
+	ld bc, $100
+	call Func_74171
+	ld hl, $97e0
+	ld bc, $10
+	ld a, $ff
+	call FillMemory
+	ld hl, $c3a0
+	call Func_7417b
+	ld hl, $c4b8
+	call Func_7417b
+	ld a, $c0
+	ld [rBGP], a ; $FF00+$47
+	call EnableLCD
+	ld a, $ff
+	call Func_3740
+	ld c, $1f
+	ld a, $c7
+	call Func_23a1
+	ld c, $80
+	call DelayFrames
+	xor a
+	ld [W_WHICHTRADE], a ; $cd3d
+	ld [$cd3e], a
+	jp Func_7418e
 
+; known jump sources: 741d5 (1d:41d5), 741e6 (1d:41e6), 74226 (1d:4226)
+Func_740ba: ; 740ba (1d:40ba)
+	ld hl, $4160
+	ld b, $4
+.asm_740bf
+	ld a, [hli]
+	ld [rBGP], a ; $FF00+$47
+	ld c, $5
+	call DelayFrames
+	dec b
+	jr nz, .asm_740bf
+	ret
+; 740cb (1d:40cb)
 Func40CB: ; 40CB
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED],a
@@ -71713,13 +101182,157 @@ CreditsMons: ; 4131
 	db PARASECT
 
 Unknown_74140:
-INCBIN "baserom.gbc",$74140,$164 - $140
+	ld h, b
+	ld l, $20
+	call Func_74152
+	ld h, $0
+	ld l, $70
+	call Func_74152
+	ld a, b
+	add $8
+	ld b, a
+	ret
+
+; known jump sources: 74143 (1d:4143), 7414a (1d:414a), 74155 (1d:4155)
+Func_74152: ; 74152 (1d:4152)
+	ld a, [$FF00+$44]
+	cp l
+	jr nz, Func_74152
+	ld a, h
+	ld [rSCX], a ; $FF00+$43
+.asm_7415a
+	ld a, [$FF00+$44]
+	cp h
+	jr z, .asm_7415a
+	ret
+
+INCBIN "baserom.gbc",$74160,$74164 - $74160
 
 Unknown_74164:
-INCBIN "baserom.gbc",$74164,$183 - $164
+	ld a, l
+	ld [H_AUTOBGTRANSFERDEST], a ; $FF00+$bc
+	ld a, h
+	ld [$FF00+$bd], a
+	ld a, $1
+	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	jp Delay3
 
+; known jump sources: 74075 (1d:4075), 7407e (1d:407e), 74178 (1d:4178)
+Func_74171: ; 74171 (1d:4171)
+	ld [hl], $0
+	inc hl
+	inc hl
+	dec bc
+	ld a, b
+	or c
+	jr nz, Func_74171
+	ret
+
+; known jump sources: 7408f (1d:408f), 74095 (1d:4095)
+Func_7417b: ; 7417b (1d:417b)
+	ld bc, $50
+	ld a, $7e
+	jp FillMemory
+; 74183 (1d:4183)
 Unknown_74183:
-INCBIN "baserom.gbc",$74183,$2C3 - $183
+	ld hl, $c3f0
+	ld bc, $c8
+	ld a, $7f
+	jp FillMemory
+
+; known jump sources: 740b7 (1d:40b7)
+Func_7418e: ; 7418e (1d:418e)
+	ld de, $4243
+	push de
+.asm_74192
+	pop de
+	ld hl, $c421
+	push hl
+	call Unknown_74183
+	pop hl
+.asm_7419b
+	ld a, [de]
+	inc de
+	push de
+	cp $ff
+	jr z, .asm_741d5
+	cp $fe
+	jr z, .asm_741dc
+	cp $fd
+	jr z, .asm_741e6
+	cp $fc
+	jr z, .asm_741ed
+	cp $fb
+	jr z, .asm_741f4
+	cp $fa
+	jr z, .asm_74201
+	push hl
+	push hl
+	ld hl, $42c3
+	add a
+	ld c, a
+	ld b, $0
+	add hl, bc
+	ld e, [hl]
+	inc hl
+	ld d, [hl]
+	ld a, [de]
+	inc de
+	ld c, a
+	ld b, $ff
+	pop hl
+	add hl, bc
+	call PlaceString
+	pop hl
+	ld bc, $28
+	add hl, bc
+	pop de
+	jr .asm_7419b
+.asm_741d5
+	call Func_740ba
+	ld c, $5a
+	jr .asm_741de
+.asm_741dc
+	ld c, $6e
+.asm_741de
+	call DelayFrames
+	call Func40CB
+	jr .asm_74192
+.asm_741e6
+	call Func_740ba
+	ld c, $78
+	jr .asm_741ef
+.asm_741ed
+	ld c, $8c
+.asm_741ef
+	call DelayFrames
+	jr .asm_74192
+.asm_741f4
+	push de
+	ld b, BANK(Func_4541)
+	ld hl, Func_4541
+	call Bankswitch ; indirect jump to Func_4541 (4541 (1:4541))
+	pop de
+	pop de
+	jr .asm_7419b
+.asm_74201
+	ld c, $10
+	call DelayFrames
+	call Unknown_74183
+	pop de
+	ld de, $473e
+	ld hl, $9600
+	ld bc, $1d0a
+	call CopyVideoData
+	ld hl, $c444
+	ld de, $4229
+	call PlaceString
+	ld hl, $c458
+	inc de
+	call PlaceString
+	jp Func_740ba
+
+INCBIN "baserom.gbc",$74229,$742c3 - $74229
 
 CreditsTextPointers: ; 42C3
 
@@ -71926,8 +101539,52 @@ TheEndGfx: ; 473E
 	INCBIN "gfx/theend.2bpp"
 
 Unknown_747de:
-INCBIN "baserom.gbc",$747de,$7481f - $747de
-
+	ld a, [de]
+	bit 3, a
+	jr nz, .asm_747fb
+	bit 4, a
+	jr nz, .asm_74804
+	bit 5, a
+	jr nz, .asm_7480d
+	bit 6, a
+	jr nz, .asm_74816
+	and $7
+	ret z
+	ld a, $92
+	ld [hli], a
+	ld a, $8b
+	ld [hli], a
+	ld [hl], $8f
+	ret
+.asm_747fb
+	ld a, $8f
+	ld [hli], a
+	ld a, $92
+	ld [hli], a
+	ld [hl], $8d
+	ret
+.asm_74804
+	ld a, $81
+	ld [hli], a
+	ld a, $91
+	ld [hli], a
+	ld [hl], $8d
+	ret
+.asm_7480d
+	ld a, $85
+	ld [hli], a
+	ld a, $91
+	ld [hli], a
+	ld [hl], $99
+	ret
+.asm_74816
+	ld a, $8f
+	ld [hli], a
+	ld a, $80
+	ld [hli], a
+	ld [hl], $91
+	ret
+; 7481f (1d:481f)
 Unknown_7481f:
 INCBIN "baserom.gbc",$7481f,$74872 - $7481f
 
@@ -71977,14 +101634,95 @@ Gym8CityName:
 Gym8LeaderName:
 	db "GIOVANNI@"
 
-INCBIN "baserom.gbc",$748D6,$748E1 - $748D6
-
+; known jump sources: 7498d (1d:498d), 749e9 (1d:49e9)
+Func_748d6: ; 748d6 (1d:48d6)
+	xor a
+	ld [$cd6b], a
+	ld [$d5fb], a
+	ld [$da39], a
+	ret
+; 748e1 (1d:48e1)
 Unknown_748e1:
-INCBIN "baserom.gbc",$748E1,$74995 - $748E1
+INCBIN "baserom.gbc",$748e1,$748eb - $748e1
+	ld a, [W_YCOORD] ; $d361
+	ld b, a
+	ld a, [W_XCOORD] ; $d362
+	ld c, a
+	ld hl, $4916
+	call Func_3442
+	cp $ff
+	jp z, Func_3219
+	call Func_3486
+	ld hl, $d736
+	set 7, [hl]
+	ld a, $a7
+	call Func_23b1
+	ld a, $ff
+	ld [$cd6b], a
+	ld a, $4
+	ld [$da39], a
+	ret
 
+INCBIN "baserom.gbc",$74916,$7496b - $74916
+	ld a, [$cd38]
+	and a
+	jr nz, .asm_74980
+	xor a
+	ld [$cd6b], a
+	ld hl, $d736
+	res 7, [hl]
+	ld a, $0
+	ld [$da39], a
+	ret
+.asm_74980
+	ld b, BANK(Func_44fd7)
+	ld hl, Func_44fd7
+	jp Bankswitch ; indirect jump to Func_44fd7 (44fd7 (11:4fd7))
+	ld a, [W_ISINBATTLE] ; $d057
+	cp $ff
+	jp z, Func_748d6
+	ld a, $f0
+	ld [$cd6b], a
+; 74995 (1d:4995)
 Unknown_74995:
-INCBIN "baserom.gbc",$74995,$749EC - $74995
-
+	ld a, $c
+	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	call DisplayTextID
+	ld hl, $d751
+	set 1, [hl]
+	ld bc, $e301
+	call GiveItem
+	jr nc, .asm_749b7
+	ld a, $d
+	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	call DisplayTextID
+	ld hl, $d751
+	set 0, [hl]
+	jr .asm_749be
+.asm_749b7
+	ld a, $e
+	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	call DisplayTextID
+.asm_749be
+	ld hl, W_OBTAINEDBADGES ; $d356
+	set 7, [hl]
+	ld hl, $d72a
+	set 7, [hl]
+	ld a, [$d751]
+	or $fc
+	ld [$d751], a
+	ld a, [$d752]
+	or $3
+	ld [$d752], a
+	ld a, $23
+	ld [$cc4d], a
+	ld a, $15
+	call Predef ; indirect jump to Func_f1c8 (f1c8 (3:71c8))
+	ld hl, $d7eb
+	set 1, [hl]
+	set 7, [hl]
+	jp Func_748d6
+; 749ec (1d:49ec)
 ViridianGymTexts: ; 0x749ec
 	dw ViridianGymText1, ViridianGymText2, ViridianGymText3, ViridianGymText4, ViridianGymText5, ViridianGymText6, ViridianGymText7, ViridianGymText8, ViridianGymText9, ViridianGymText10, Predef5CText, ViridianGymText12, ViridianGymText13, ViridianGymText14
 
@@ -72620,8 +102358,86 @@ CeruleanHouse3Object: ; 0x74ebe (size=34)
 	EVENT_DISP $4, $7, $3
 
 Unknown_74ee0:
-INCBIN "baserom.gbc",$74ee0,$B9
-
+	ld hl, $4f99
+	call PrintText
+	ld a, $13
+	ld [$d125], a
+	call DisplayTextBoxID
+	xor a
+	ld [W_CURMENUITEMID], a ; $cc26
+	ld [W_OLDMENUITEMID], a ; $cc2a
+	ld a, $3
+	ld [W_MENUWATCHEDKEYS], a ; $cc29
+	ld a, $3
+	ld [W_MAXMENUITEMID], a ; $cc28
+	ld a, $5
+	ld [W_TOPMENUITEMY], a ; $cc24
+	ld a, $1
+	ld [W_TOPMENUITEMX], a ; $cc25
+	ld hl, $d730
+	set 6, [hl]
+	ld hl, $c3dc
+	ld b, $8
+	ld c, $c
+	call TextBoxBorder
+	call Func_2429
+	ld hl, $c406
+	ld de, $4f9e
+	call PlaceString
+	ld hl, $c421
+	ld de, $4fc3
+	call PlaceString
+	ld hl, $d730
+	res 6, [hl]
+	call HandleMenuInput
+	bit 1, a
+	jr nz, .asm_74f93
+	ld a, [W_CURMENUITEMID] ; $cc26
+	cp $3
+	jr z, .asm_74f93
+	xor a
+	ld [$FF00+$9f], a
+	ld [$FF00+$a1], a
+	ld a, $2
+	ld [$FF00+$a0], a
+	call Func_35a6
+	jr nc, .asm_74f54
+	ld hl, $4fd3
+	jp PrintText
+.asm_74f54
+	call Unknown_74fe7
+	ld a, [$FF00+$db]
+	ld b, a
+	ld c, $1
+	call GiveItem
+	jr nc, .asm_74f8d
+	ld b, $3c
+.asm_74f63
+	ld c, $2
+	call DelayFrames
+	push bc
+	ld a, $a8
+	call Func_23b1
+	pop bc
+	dec b
+	jr nz, .asm_74f63
+	ld hl, $4fd8
+	call PrintText
+	ld hl, $ffde
+	ld de, W_PLAYERMONEY1 ; $d349
+	ld c, $3
+	ld a, $c
+	call Predef ; indirect jump to Func_f836 (f836 (3:7836))
+	ld a, $13
+	ld [$d125], a
+	jp DisplayTextBoxID
+.asm_74f8d
+	ld hl, $4fdd
+	jp PrintText
+.asm_74f93
+	ld hl, $4fe2
+	jp PrintText
+; 74f99 (1d:4f99)
 UnnamedText_74f99: ; 0x74f99
 	TX_FAR _UnnamedText_74f99
 	db $50
@@ -73057,11 +102873,20 @@ SafariZoneEntranceScript6: ; 0x75295
 ; 0x752a3
 
 Unknown_752a3: ; 0x752a3
-INCBIN "baserom.gbc",$752a3,$752b4 - $752a3
-
+	push af
+	ld b, $0
+	ld a, c
+	ld [$cd38], a
+	ld hl, $ccd3
+	pop af
+	call FillMemory
+	jp Func_3486
+; 752b4 (1d:52b4)
 Unknown_752b4:
-INCBIN "baserom.gbc",$752b4,$752b9 - $752b4
-
+	ld a, [$cd38]
+	and a
+	ret
+; 752b9 (1d:52b9)
 SafariZoneEntranceTexts: ; 0x752b9
 	dw SafariZoneEntranceText1, SafariZoneEntranceText2, SafariZoneEntranceText3, SafariZoneEntranceText4, SafariZoneEntranceText5, SafariZoneEntranceText6
 
@@ -73294,14 +103119,51 @@ Gym5CityName: ; 0x75465
 Gym5LeaderName: ; 0x75472
 	db "KOGA@"
 
-INCBIN "baserom.gbc",$75477,$75482-$75477
-
+; known jump sources: 7548f (1d:548f), 754d2 (1d:54d2)
+Func_75477: ; 75477 (1d:5477)
+	xor a
+	ld [$cd6b], a
+	ld [$d65b], a
+	ld [$da39], a
+	ret
+; 75482 (1d:5482)
 Unknown_75482:
-INCBIN "baserom.gbc",$75482,$75497-$75482
-
+INCBIN "baserom.gbc",$75482,$7548a - $75482
+	ld a, [W_ISINBATTLE] ; $d057
+	cp $ff
+	jp z, Func_75477
+	ld a, $f0
+	ld [$cd6b], a
+; 75497 (1d:5497)
 Unknown_75497:
-INCBIN "baserom.gbc",$75497,$754D5-$75497
-
+	ld a, $9
+	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	call DisplayTextID
+	ld hl, $d792
+	set 1, [hl]
+	ld bc, $ce01
+	call GiveItem
+	jr nc, .asm_754b9
+	ld a, $a
+	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	call DisplayTextID
+	ld hl, $d792
+	set 0, [hl]
+	jr .asm_754c0
+.asm_754b9
+	ld a, $b
+	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	call DisplayTextID
+.asm_754c0
+	ld hl, W_OBTAINEDBADGES ; $d356
+	set 4, [hl]
+	ld hl, $d72a
+	set 4, [hl]
+	ld a, [$d792]
+	or $fc
+	ld [$d792], a
+	jp Func_75477
+; 754d5 (1d:54d5)
 FuchsiaGymTexts: ; 0x754d5
 	dw FuchsiaGymText1, FuchsiaGymText2, FuchsiaGymText3, FuchsiaGymText4, FuchsiaGymText5, FuchsiaGymText6, FuchsiaGymText7, FuchsiaGymText8, FuchsiaGymText9, FuchsiaGymText10, FuchsiaGymText11
 
@@ -73700,11 +103562,18 @@ Gym7LeaderName: ; 0x7578b
 	db "BLAINE@"
 
 Unknown_75792:
-INCBIN "baserom.gbc",$75792,$757a0 - $75792
-
+	xor a
+	ld [$cd6b], a
+	ld [$d65e], a
+	ld [$da39], a
+	ld [$da38], a
+	ret
+; 757a0 (1d:57a0)
 Unknown_757a0:
-INCBIN "baserom.gbc",$757a0,$757a6 - $757a0
-
+	ld a, [H_DOWNARROWBLINKCNT2] ; $FF00+$8c
+	ld [$cc55], a
+	ret
+; 757a6 (1d:57a6)
 CinnabarGymScripts: ; 0x757a6
 	dw CinnabarGymScript0, CinnabarGymScript1, CinnabarGymScript2, CinnabarGymScript3
 
@@ -73750,8 +103619,9 @@ CinnabarGymScript1: ; 0x757dc
 ; 0x757f1
 
 Unknown_757f1:
-INCBIN "baserom.gbc",$757f1,$757f6 - $757f1
-
+	ld a, $10
+	jp Predef ; indirect jump to Func_f666 (f666 (3:7666))
+; 757f6 (1d:57f6)
 CinnabarGymScript2: ; 0x757f6
 	ld a, [$d057]
 	cp $ff
@@ -73841,8 +103711,25 @@ CinnabarGymTexts: ; 0x7589f
 INCBIN "baserom.gbc",$758b1,$758b7 - $758b1
 
 Unknown_758b7:
-INCBIN "baserom.gbc",$758b7,$758df - $758b7
-
+	ld a, [H_DOWNARROWBLINKCNT2] ; $FF00+$8c
+	ld [$cf13], a
+	call Func_336a
+	call Func_32d7
+	ld hl, $d72d
+	set 6, [hl]
+	set 7, [hl]
+	ld a, [$cf13]
+	cp $1
+	jr z, .asm_758d4
+	ld a, $2
+	jr .asm_758d6
+.asm_758d4
+	ld a, $3
+.asm_758d6
+	ld [$d65e], a
+	ld [$da39], a
+	jp TextScriptEnd
+; 758df (1d:58df)
 CinnabarGymText1: ; 0x758df
 	db $8
 	ld a, [$d79a]
@@ -74407,7 +104294,39 @@ Lab4Texts: ; 0x75d34
 	dw Lab4Text1, Lab4Text2
 
 Unknown_75d38:
-INCBIN "baserom.gbc",$75d38,$34
+	xor a
+	ld [$cd37], a
+	ld de, $cc5b
+	ld hl, $5d68
+.asm_75d42
+	ld a, [hli]
+	and a
+	jr z, .asm_75d64
+	push hl
+	push de
+	ld [$d11e], a
+	ld b, a
+	ld a, $1c
+	call Predef ; indirect jump to Func_f8a5 (f8a5 (3:78a5))
+	pop de
+	pop hl
+	ld a, b
+	and a
+	jr z, .asm_75d42
+	ld a, [$d11e]
+	ld [de], a
+	inc de
+	push hl
+	ld hl, $cd37
+	inc [hl]
+	pop hl
+	jr .asm_75d42
+.asm_75d64
+	ld a, $ff
+	ld [de], a
+	ret
+
+INCBIN "baserom.gbc",$75d68,$75d6c - $75d68
 
 Lab4Text1: ; 0x75d6c
 	db $8
@@ -75005,11 +104924,96 @@ LoreleiScript: ; 0x7617b
 ; 0x76191
 
 LoreleiScript_Unknown76191: ; 0x76191
-INCBIN "baserom.gbc",$76191,$761bb-$76191
+	ld hl, $d126
+	bit 5, [hl]
+	res 5, [hl]
+	ret z
+	ld hl, $d734
+	set 1, [hl]
+	ld a, [$d863]
+	bit 1, a
+	jr z, .asm_761a9
+	ld a, $5
+	jr .asm_761ab
+.asm_761a9
+	ld a, $24
+.asm_761ab
+	ld [$d09f], a
+	ld bc, $2
+	ld a, $17
+	jp Predef ; indirect jump to Func_ee9e (ee9e (3:6e9e))
 
+; known jump sources: 76247 (1d:6247)
+Func_761b6: ; 761b6 (1d:61b6)
+	xor a
+	ld [$d64d], a
+	ret
+; 761bb (1d:61bb)
 Unknown_761bb:
-INCBIN "baserom.gbc",$761bb,$76251-$761bb
+INCBIN "baserom.gbc",$761bb,$761c6 - $761bb
+.asm_761c6
+	ld hl, $ccd3
+	ld a, $40
+	ld [hli], a
+	ld [hli], a
+	ld [hli], a
+	ld [hli], a
+	ld [hli], a
+	ld [hl], a
+	ld a, $6
+	ld [$cd38], a
+	call Func_3486
+	ld a, $3
+	ld [$d64d], a
+	ld [$da39], a
+	ret
+	ld hl, $6223
+	call ArePlayerCoordsInArray
+	jp nc, Func_3219
+	xor a
+	ld [$FF00+$b3], a
+	ld [$FF00+$b4], a
+	ld [$ccd3], a
+	ld [$cd38], a
+	ld a, [W_WHICHTRADE] ; $cd3d
+	cp $3
+	jr c, .asm_76206
+	ld hl, $d863
+	bit 6, [hl]
+	set 6, [hl]
+	jr z, .asm_761c6
+.asm_76206
+	ld a, $2
+	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	call DisplayTextID
+	ld a, $40
+	ld [$ccd3], a
+	ld a, $1
+	ld [$cd38], a
+	call Func_3486
+	ld a, $3
+	ld [$d64d], a
+	ld [$da39], a
+	ret
 
+INCBIN "baserom.gbc",$76223,$7622c - $76223
+	ld a, [$cd38]
+	and a
+	ret nz
+	call Delay3
+	xor a
+	ld [$cd6b], a
+	ld [$d64d], a
+	ld [$da39], a
+	ret
+	call Func_3275
+	ld a, [W_ISINBATTLE] ; $d057
+	cp $ff
+	jp z, Func_761b6
+	ld a, $1
+	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	jp DisplayTextID
+; 76251 (1d:6251)
 LoreleiTexts: ; 0x76251
 	dw LoreleiText1, LoreleiText2
 
@@ -75095,11 +105099,96 @@ BrunoScript: ; 0x762d6
 ; 0x762ec
 
 BrunoScript_Unknown762ec: ; 0x762ec
-INCBIN "baserom.gbc",$762ec,$76312-$762ec
+	ld hl, $d126
+	bit 5, [hl]
+	res 5, [hl]
+	ret z
+	ld a, [$d864]
+	bit 1, a
+	jr z, .asm_76300
+	ld a, $5
+	jp Func_76302
+.asm_76300
+	ld a, $24
 
+; known jump sources: 762fd (1d:62fd)
+Func_76302: ; 76302 (1d:6302)
+	ld [$d09f], a
+	ld bc, $2
+	ld a, $17
+	jp Predef ; indirect jump to Func_ee9e (ee9e (3:6e9e))
+
+; known jump sources: 7639e (1d:639e)
+Func_7630d: ; 7630d (1d:630d)
+	xor a
+	ld [$d64e], a
+	ret
+; 76312 (1d:6312)
 Unknown_76312:
-INCBIN "baserom.gbc",$76312,$763a8-$76312
+INCBIN "baserom.gbc",$76312,$7631d - $76312
+.asm_7631d
+	ld hl, $ccd3
+	ld a, $40
+	ld [hli], a
+	ld [hli], a
+	ld [hli], a
+	ld [hli], a
+	ld [hli], a
+	ld [hl], a
+	ld a, $6
+	ld [$cd38], a
+	call Func_3486
+	ld a, $3
+	ld [$d64e], a
+	ld [$da39], a
+	ret
+	ld hl, $637a
+	call ArePlayerCoordsInArray
+	jp nc, Func_3219
+	xor a
+	ld [$FF00+$b3], a
+	ld [$FF00+$b4], a
+	ld [$ccd3], a
+	ld [$cd38], a
+	ld a, [W_WHICHTRADE] ; $cd3d
+	cp $3
+	jr c, .asm_7635d
+	ld hl, $d864
+	bit 6, [hl]
+	set 6, [hl]
+	jr z, .asm_7631d
+.asm_7635d
+	ld a, $2
+	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	call DisplayTextID
+	ld a, $40
+	ld [$ccd3], a
+	ld a, $1
+	ld [$cd38], a
+	call Func_3486
+	ld a, $3
+	ld [$d64e], a
+	ld [$da39], a
+	ret
 
+INCBIN "baserom.gbc",$7637a,$76383 - $7637a
+	ld a, [$cd38]
+	and a
+	ret nz
+	call Delay3
+	xor a
+	ld [$cd6b], a
+	ld [$d64e], a
+	ld [$da39], a
+	ret
+	call Func_3275
+	ld a, [W_ISINBATTLE] ; $d057
+	cp $ff
+	jp z, Func_7630d
+	ld a, $1
+	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	jp DisplayTextID
+; 763a8 (1d:63a8)
 BrunoTexts: ; 0x763a8
 	dw BrunoText1, BrunoText2
 
@@ -75185,11 +105274,99 @@ AgathaScript: ; 0x7642d
 ; 0x76443
 
 AgathaScript_Unknown76443: ; 0x76443
-INCBIN "baserom.gbc",$76443,$76469-$76443
+	ld hl, $d126
+	bit 5, [hl]
+	res 5, [hl]
+	ret z
+	ld a, [$d865]
+	bit 1, a
+	jr z, .asm_76457
+	ld a, $e
+	jp Func_76459
+.asm_76457
+	ld a, $3b
 
+; known jump sources: 76454 (1d:6454)
+Func_76459: ; 76459 (1d:6459)
+	ld [$d09f], a
+	ld bc, $2
+	ld a, $17
+	jp Predef ; indirect jump to Func_ee9e (ee9e (3:6e9e))
+
+; known jump sources: 764f5 (1d:64f5)
+Func_76464: ; 76464 (1d:6464)
+	xor a
+	ld [$d64f], a
+	ret
+; 76469 (1d:6469)
 Unknown_76469:
-INCBIN "baserom.gbc",$76469,$76505-$76469
+INCBIN "baserom.gbc",$76469,$76474 - $76469
+.asm_76474
+	ld hl, $ccd3
+	ld a, $40
+	ld [hli], a
+	ld [hli], a
+	ld [hli], a
+	ld [hli], a
+	ld [hli], a
+	ld [hl], a
+	ld a, $6
+	ld [$cd38], a
+	call Func_3486
+	ld a, $3
+	ld [$d64f], a
+	ld [$da39], a
+	ret
+	ld hl, $64d1
+	call ArePlayerCoordsInArray
+	jp nc, Func_3219
+	xor a
+	ld [$FF00+$b3], a
+	ld [$FF00+$b4], a
+	ld [$ccd3], a
+	ld [$cd38], a
+	ld a, [W_WHICHTRADE] ; $cd3d
+	cp $3
+	jr c, .asm_764b4
+	ld hl, $d865
+	bit 6, [hl]
+	set 6, [hl]
+	jr z, .asm_76474
+.asm_764b4
+	ld a, $2
+	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	call DisplayTextID
+	ld a, $40
+	ld [$ccd3], a
+	ld a, $1
+	ld [$cd38], a
+	call Func_3486
+	ld a, $3
+	ld [$d64f], a
+	ld [$da39], a
+	ret
 
+INCBIN "baserom.gbc",$764d1,$764da - $764d1
+	ld a, [$cd38]
+	and a
+	ret nz
+	call Delay3
+	xor a
+	ld [$cd6b], a
+	ld [$d64f], a
+	ld [$da39], a
+	ret
+	call Func_3275
+	ld a, [W_ISINBATTLE] ; $d057
+	cp $ff
+	jp z, Func_76464
+	ld a, $1
+	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	call DisplayTextID
+	ld a, $1
+	ld [$d64c], a
+	ret
+; 76505 (1d:6505)
 AgathaTexts: ; 0x76505
 	dw AgathaText1, AgathaText2
 
@@ -76078,8 +106255,74 @@ Function4DBD: ; 4DBD
 Pointer4DCF: ; 4DCF
 	dw $4DDB,$4DE3,$4DEB,$4DF0,$4DF6,$4DFE
 
-INCBIN "baserom.gbc",$78DDB,$78E53-$78DDB
+	call Func_79e6a
+	ld b, $8
+	jp Func_79209
+	call Func_79e6a
+	ld b, $8
+	jp Func_79210
+	ld bc, $602
+	jr .asm_78e01
+	call Func_79e6a
+	jp Func_79369
+	call Func_79e6a
+	ld b, $2
+	jp Func_79210
+	ld bc, $302
+.asm_78e01
+	push bc
+	push bc
+.asm_78e03
+	ld a, [rWX] ; $FF00+$4b
+	inc a
+	ld [rWX], a ; $FF00+$4b
+	ld c, $2
+	call DelayFrames
+	dec b
+	jr nz, .asm_78e03
+	pop bc
+.asm_78e11
+	ld a, [rWX] ; $FF00+$4b
+	dec a
+	ld [rWX], a ; $FF00+$4b
+	ld c, $2
+	call DelayFrames
+	dec b
+	jr nz, .asm_78e11
+	pop bc
+	dec c
+	jr nz, .asm_78e01
+	ret
 
+; known jump sources: 78d65 (1e:4d65)
+Func_78e23: ; 78e23 (1e:4e23)
+	ld a, [$cf1b]
+	and a
+	ld a, $e4
+	jr z, .asm_78e47
+	ld a, $f0
+	ld [$cc79], a
+	ld b, $e4
+	ld a, [W_ANIMATIONID] ; $d07c
+	cp $aa
+	jr c, .asm_78e3f
+	cp $ae
+	jr nc, .asm_78e3f
+	ld b, $f0
+.asm_78e3f
+	ld a, b
+	ld [rOBP0], a ; $FF00+$48
+	ld a, $6c
+	ld [rOBP1], a ; $FF00+$49
+	ret
+.asm_78e47
+	ld a, $e4
+	ld [$cc79], a
+	ld [rOBP0], a ; $FF00+$48
+	ld a, $6c
+	ld [rOBP1], a ; $FF00+$49
+	ret
+; 78e53 (1e:4e53)
 PlaySubanimation: ; 4E53
 	ld a,[W_ANIMSOUNDID]
 	cp a,$FF
@@ -76715,7 +106958,701 @@ AnimationFlashScreen: ; 51BE
 	ld [rBGP],a ; restore initial palette
 	ret
 
-INCBIN "baserom.gbc",$791D6,$7986F - $791D6
+	ld bc, $6f6f
+	jr .asm_791fc
+
+INCBIN "baserom.gbc",$791db,$791ea - $791db
+	ld bc, $e4e4
+	jr .asm_791fc
+
+INCBIN "baserom.gbc",$791ef,$791f4 - $791ef
+	ld bc, $9090
+	jr .asm_791fc
+
+INCBIN "baserom.gbc",$791f9,$791fc - $791f9
+.asm_791fc
+	ld a, [$cf1b]
+	and a
+	ld a, b
+	jr z, .asm_79204
+	ld a, c
+.asm_79204
+	ld [rBGP], a ; $FF00+$47
+	ret
+
+INCBIN "baserom.gbc",$79207,$79209 - $79207
+
+; known jump sources: 78de0 (1e:4de0)
+Func_79209: ; 79209 (1e:5209)
+	ld a, $21
+	jp Predef ; indirect jump to Func_480ff (480ff (12:40ff))
+	ld b, $8
+
+; known jump sources: 78de8 (1e:4de8), 78dfb (1e:4dfb)
+Func_79210: ; 79210 (1e:5210)
+	ld a, $24
+	jp Predef ; indirect jump to Func_48125 (48125 (12:4125))
+	xor a
+	ld [$d09f], a
+	call LoadAnimationTileset
+	ld d, $20
+	ld a, $f0
+	ld [W_BASECOORDX], a ; $d081
+	ld a, $71
+	ld [$d09f], a
+.asm_79228
+	ld a, $10
+	ld [W_BASECOORDY], a ; $d082
+	ld a, $0
+	ld [$d08a], a
+	call Func_79246
+	ld a, $18
+	ld [W_BASECOORDY], a ; $d082
+	ld a, $20
+	ld [$d08a], a
+	call Func_79246
+	dec d
+	jr nz, .asm_79228
+	ret
+
+; known jump sources: 79232 (1e:5232), 7923f (1e:523f)
+Func_79246: ; 79246 (1e:5246)
+	ld hl, $c300
+.asm_79249
+	ld a, [W_BASECOORDY] ; $d082
+	ld [hli], a
+	ld a, [W_BASECOORDX] ; $d081
+	add $1b
+	ld [W_BASECOORDX], a ; $d081
+	ld [hli], a
+	ld a, [$d09f]
+	ld [hli], a
+	xor a
+	ld [hli], a
+	ld a, [W_BASECOORDX] ; $d081
+	cp $90
+	jr c, .asm_79249
+	sub $a8
+	ld [W_BASECOORDX], a ; $d081
+	ld a, [W_BASECOORDY] ; $d082
+	add $10
+	ld [W_BASECOORDY], a ; $d082
+	cp $70
+	jr c, .asm_79249
+	call AnimationCleanOAM
+	jp DelayFrame
+
+INCBIN "baserom.gbc",$7927a,$79297 - $7927a
+
+; known jump sources: 7975d (1e:575d)
+Func_79297: ; 79297 (1e:5297)
+	xor a
+	call Func_79842
+.asm_7929b
+	call Func_79820
+	push bc
+	push de
+	call Func_79aae
+	call Delay3
+	call Func_79801
+	pop de
+	pop bc
+	dec b
+	jr nz, .asm_7929b
+	ret
+
+; known jump sources: 79762 (1e:5762)
+Func_792af: ; 792af (1e:52af)
+	ld e, $8
+	ld a, $3
+	ld [W_SUBANIMTRANSFORM], a ; $d08b
+	jp Func_795f8
+
+; known jump sources: 3c226 (f:4226)
+Func_792b9: ; 792b9 (1e:52b9)
+	ld hl, $52af
+	jp CallWithTurnFlipped
+
+INCBIN "baserom.gbc",$792bf,$79329 - $792bf
+
+; known jump sources: 7952a (1e:552a), 797fa (1e:57fa)
+Func_79329: ; 79329 (1e:5329)
+	ld a, e
+	add $8
+	ld e, a
+	ld [hli], a
+	ld a, [W_BASECOORDX] ; $d081
+	ld [hli], a
+	ld a, d
+	ld [hli], a
+	xor a
+	ld [hli], a
+	ret
+	ld l, e
+	ld h, d
+
+; known jump sources: 79eaa (1e:5eaa), 79eb7 (1e:5eb7), 79ef8 (1e:5ef8), 79f05 (1e:5f05), 79f12 (1e:5f12), 79f1f (1e:5f1f)
+Func_79339: ; 79339 (1e:5339)
+	ld de, $4
+.asm_7933c
+	ld a, [$d08a]
+	ld b, a
+	ld a, [hl]
+	add b
+	cp $a8
+	jr c, .asm_7934a
+	dec hl
+	ld a, $a0
+	ld [hli], a
+.asm_7934a
+	ld [hl], a
+	add hl, de
+	dec c
+	jr nz, .asm_7933c
+	ret
+	ld l, e
+	ld h, d
+
+; known jump sources: 79ee5 (1e:5ee5)
+Func_79352: ; 79352 (1e:5352)
+	ld de, $4
+.asm_79355
+	ld a, [$d08a]
+	ld b, a
+	ld a, [hl]
+	add b
+	cp $70
+	jr c, .asm_79363
+	dec hl
+	ld a, $a0
+	ld [hli], a
+.asm_79363
+	ld [hl], a
+	add hl, de
+	dec c
+	jr nz, .asm_79355
+	ret
+
+; known jump sources: 78df3 (1e:4df3)
+Func_79369: ; 79369 (1e:5369)
+	ld hl, $536f
+	jp CallWithTurnFlipped
+	push af
+	ld c, $6
+.asm_79372
+	push bc
+	call Func_79801
+	ld c, $5
+	call DelayFrames
+	call Func_7939e
+	ld c, $5
+	call DelayFrames
+	pop bc
+	dec c
+	jr nz, .asm_79372
+	pop af
+	ret
+
+; known jump sources: 7976b (1e:576b)
+Func_79389: ; 79389 (1e:5389)
+	ld a, [$d014]
+	ld [$ceea], a
+	ld a, [$cfe5]
+	ld [$cee9], a
+	jp Func_79793
+
+INCBIN "baserom.gbc",$79398,$7939e - $79398
+
+; known jump sources: 7937b (1e:537b), 79421 (1e:5421), 795c1 (1e:55c1), 7976e (1e:576e)
+Func_7939e: ; 7939e (1e:539e)
+	xor a
+	call Func_79842
+	call Func_79820
+	call Func_79aae
+	jp Delay3
+	ld hl, $539e
+	jp CallWithTurnFlipped
+
+INCBIN "baserom.gbc",$793b1,$793f9 - $793b1
+	call Func_79801
+	ld a, [H_WHOSETURN] ; $FF00+$f3
+	and a
+	ld hl, $c406
+	jr z, .asm_79407
+	ld hl, $c3ab
+.asm_79407
+	xor a
+	push hl
+	call Func_79842
+	pop hl
+	call Func_79aae
+	ld c, $3
+	jp DelayFrames
+	ld a, [H_WHOSETURN] ; $FF00+$f3
+	and a
+	ld a, $66
+	jr z, .asm_7941e
+	ld a, $b
+.asm_7941e
+	call Func_7980c
+	jp Func_7939e
+	ld a, [H_WHOSETURN] ; $FF00+$f3
+	and a
+	jr z, .asm_79435
+	ld a, $d8
+	ld [$d08a], a
+	ld a, $50
+	ld [W_SUBANIMTRANSFORM], a ; $d08b
+	jr .asm_7943c
+.asm_79435
+	xor a
+	ld [$d08a], a
+	ld [W_SUBANIMTRANSFORM], a ; $d08b
+.asm_7943c
+	ld d, $7a
+	ld c, $3
+	xor a
+	call Func_797e8
+	ld hl, $5476
+.asm_79447
+	push hl
+	ld c, $3
+	ld de, $c300
+.asm_7944d
+	ld a, [hl]
+	cp $ff
+	jr z, .asm_7946f
+	ld a, [$d08a]
+	add [hl]
+	ld [de], a
+	inc de
+	inc hl
+	ld a, [W_SUBANIMTRANSFORM] ; $d08b
+	add [hl]
+	ld [de], a
+	inc hl
+	inc de
+	inc de
+	inc de
+	dec c
+	jr nz, .asm_7944d
+	ld c, $5
+	call DelayFrames
+	pop hl
+	inc hl
+	inc hl
+	jr .asm_79447
+.asm_7946f
+	pop hl
+	call AnimationCleanOAM
+	jp AnimationFlashScreen
+
+INCBIN "baserom.gbc",$79476,$794a1 - $79476
+	ld c, $4
+.asm_794a3
+	push bc
+	ld a, [H_WHOSETURN] ; $FF00+$f3
+	and a
+	jr z, .asm_794b1
+	ld hl, $c3b0
+	ld de, $c3ae
+	jr .asm_794b7
+.asm_794b1
+	ld hl, $c409
+	ld de, $c407
+.asm_794b7
+	push de
+	xor a
+	ld [$d09f], a
+	call Func_794d4
+	pop hl
+	ld a, $1
+	ld [$d09f], a
+	call Func_794d4
+	pop bc
+	dec c
+	jr nz, .asm_794a3
+	call Func_79801
+	ld c, $2
+	jp DelayFrame
+
+; known jump sources: 794bc (1e:54bc), 794c5 (1e:54c5)
+Func_794d4: ; 794d4 (1e:54d4)
+	ld c, $7
+.asm_794d6
+	push bc
+	push hl
+	ld c, $3
+	ld a, [$d09f]
+	cp $0
+	jr nz, .asm_794e7
+	call asm_7985b
+	dec hl
+	jr .asm_794eb
+.asm_794e7
+	call Func_79862
+	inc hl
+.asm_794eb
+	ld [hl], $7f
+	pop hl
+	ld de, $14
+	add hl, de
+	pop bc
+	dec c
+	jr nz, .asm_794d6
+	jp Delay3
+	ld a, [H_WHOSETURN] ; $FF00+$f3
+	and a
+	jr z, .asm_79503
+	ld bc, $80
+	jr .asm_79506
+.asm_79503
+	ld bc, $3028
+.asm_79506
+	ld a, b
+	ld [W_BASECOORDY], a ; $d082
+	ld a, c
+	ld [W_BASECOORDX], a ; $d081
+	ld bc, $501
+	call Func_79517
+	jp AnimationCleanOAM
+
+; known jump sources: 79511 (1e:5511)
+Func_79517: ; 79517 (1e:5517)
+	push bc
+	xor a
+	ld [$d09f], a
+	call LoadAnimationTileset
+	pop bc
+	ld d, $7a
+	ld hl, $c300
+	push bc
+	ld a, [W_BASECOORDY] ; $d082
+	ld e, a
+.asm_7952a
+	call Func_79329
+	dec b
+	jr nz, .asm_7952a
+	call DelayFrame
+	pop bc
+	ld a, b
+	ld [$d08a], a
+.asm_79538
+	push bc
+	ld hl, $c300
+.asm_7953c
+	ld a, [W_BASECOORDY] ; $d082
+	add $8
+	ld e, a
+	ld a, [hl]
+	cp e
+	jr z, .asm_7954b
+	add $fc
+	ld [hl], a
+	jr .asm_79554
+.asm_7954b
+	ld [hl], $0
+	ld a, [$d08a]
+	dec a
+	ld [$d08a], a
+.asm_79554
+	ld de, $4
+	add hl, de
+	dec b
+	jr nz, .asm_7953c
+	call DelayFrames
+	pop bc
+	ld a, [$d08a]
+	and a
+	jr nz, .asm_79538
+	ret
+
+INCBIN "baserom.gbc",$79566,$7959f - $79566
+
+; known jump sources: 79768 (1e:5768)
+Func_7959f: ; 7959f (1e:559f)
+	ld hl, $c6e8
+	push hl
+	xor a
+	ld bc, $310
+	call FillMemory
+	pop hl
+	ld de, $194
+	add hl, de
+	ld de, $55c4
+	ld c, $5
+.asm_795b4
+	ld a, [de]
+	ld [hli], a
+	ld [hli], a
+	inc de
+	dec c
+	jr nz, .asm_795b4
+	call Func_79652
+	call Delay3
+	jp Func_7939e
+
+INCBIN "baserom.gbc",$795c4,$795f8 - $795c4
+
+; known jump sources: 792b6 (1e:52b6)
+Func_795f8: ; 795f8 (1e:55f8)
+	ld a, [H_WHOSETURN] ; $FF00+$f3
+	and a
+	jr z, .asm_79602
+	ld hl, $c3ac
+	jr .asm_79605
+.asm_79602
+	ld hl, $c404
+.asm_79605
+	ld d, $8
+.asm_79607
+	push hl
+	ld b, $7
+.asm_7960a
+	ld c, $8
+.asm_7960c
+	ld a, [H_WHOSETURN] ; $FF00+$f3
+	and a
+	jr z, .asm_79616
+	call Func_7963c
+	jr .asm_79619
+.asm_79616
+	call Func_79633
+.asm_79619
+	ld [hli], a
+	dec c
+	jr nz, .asm_7960c
+	push de
+	ld de, $c
+	add hl, de
+	pop de
+	dec b
+	jr nz, .asm_7960a
+	ld a, [W_SUBANIMTRANSFORM] ; $d08b
+	ld c, a
+	call DelayFrames
+	pop hl
+	dec d
+	dec e
+	jr nz, .asm_79607
+	ret
+
+; known jump sources: 79616 (1e:5616)
+Func_79633: ; 79633 (1e:5633)
+	ld a, [hl]
+	add $7
+	cp $61
+	ret c
+	ld a, $7f
+	ret
+
+; known jump sources: 79611 (1e:5611)
+Func_7963c: ; 7963c (1e:563c)
+	ld a, [hl]
+	sub $7
+	cp $30
+	ret c
+	ld a, $7f
+	ret
+
+INCBIN "baserom.gbc",$79645,$79652 - $79645
+
+; known jump sources: 795bb (1e:55bb)
+Func_79652: ; 79652 (1e:5652)
+	ld a, [H_WHOSETURN] ; $FF00+$f3
+	and a
+	ld hl, $9310
+	jr z, .asm_7965d
+	ld hl, $9000
+.asm_7965d
+	ld de, $c6e8
+	ld bc, $31
+	jp CopyVideoData
+
+INCBIN "baserom.gbc",$79666,$79747 - $79666
+
+; known jump sources: 3e295 (f:6295)
+Func_79747: ; 79747 (1e:5747)
+	ld a, [H_WHOSETURN] ; $FF00+$f3
+	and a
+	ld hl, $ccf7
+	ld a, [W_PLAYERBATTSTATUS2] ; $d063
+	jr z, .asm_79758
+	ld hl, $ccf3
+	ld a, [W_ENEMYBATTSTATUS2] ; $d068
+.asm_79758
+	push hl
+	bit 4, a
+	jr nz, .asm_79762
+	call Func_79297
+	jr .asm_79765
+.asm_79762
+	call Func_792af
+.asm_79765
+	pop hl
+	ld a, [hl]
+	and a
+	jp nz, Func_7959f
+	call Func_79389
+	jp Func_7939e
+
+INCBIN "baserom.gbc",$79771,$79787 - $79771
+	ld a, [$cfe5]
+	ld [$ceea], a
+	ld a, [$d014]
+	ld [$cee9], a
+
+; known jump sources: 708ee (1c:48ee), 79395 (1e:5395)
+Func_79793: ; 79793 (1e:5793)
+	ld a, [H_WHOSETURN] ; $FF00+$f3
+	and a
+	jr z, .asm_797b0
+	ld a, [$cee9]
+	ld [$cf91], a
+	ld [$d0b5], a
+	xor a
+	ld [$d0aa], a
+	call GetBaseStats
+	ld hl, $c3ac
+	call Func_1389
+	jr .asm_797d3
+.asm_797b0
+	ld a, [$cfd9]
+	push af
+	ld a, [$ceea]
+	ld [$cfd9], a
+	ld [$d0b5], a
+	call GetBaseStats
+	ld a, $4
+	call Predef ; indirect jump to Func_3f103 (3f103 (f:7103))
+	xor a
+	call Func_79842
+	call Func_79820
+	call Func_79aae
+	pop af
+	ld [$cfd9], a
+.asm_797d3
+	ld b, $1
+	jp GoPAL_SET
+	xor a
+	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld hl, $5801
+	call CallWithTurnFlipped
+	ld a, $1
+	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	jp Delay3
+
+; known jump sources: 79441 (1e:5441)
+Func_797e8: ; 797e8 (1e:57e8)
+	push bc
+	push de
+	ld [$d09f], a
+	call LoadAnimationTileset
+	pop de
+	pop bc
+	xor a
+	ld e, a
+	ld [W_BASECOORDX], a ; $d081
+	ld hl, $c300
+.asm_797fa
+	call Func_79329
+	dec c
+	jr nz, .asm_797fa
+	ret
+
+; known jump sources: 792a6 (1e:52a6), 79373 (1e:5373), 793f9 (1e:53f9), 794cc (1e:54cc)
+Func_79801: ; 79801 (1e:5801)
+	ld a, [H_WHOSETURN] ; $FF00+$f3
+	and a
+	jr z, .asm_7980a
+	ld a, $c
+	jr Func_7980c
+.asm_7980a
+	ld a, $65
+
+; known jump sources: 79049 (1e:5049), 7941e (1e:541e), 79808 (1e:5808)
+Func_7980c: ; 7980c (1e:580c)
+	push hl
+	push de
+	push bc
+	ld e, a
+	ld d, $0
+	ld hl, $c3a0
+	add hl, de
+	ld bc, $707
+	call ClearScreenArea
+	pop bc
+	pop de
+	pop hl
+	ret
+
+; known jump sources: 7929b (1e:529b), 793a2 (1e:53a2), 797c9 (1e:57c9)
+Func_79820: ; 79820 (1e:5820)
+	push de
+	ld a, [H_WHOSETURN] ; $FF00+$f3
+	and a
+	jr nz, .asm_7982a
+	ld a, $65
+	jr .asm_7982c
+.asm_7982a
+	ld a, $c
+.asm_7982c
+	ld hl, $c3a0
+	ld e, a
+	ld d, $0
+	add hl, de
+	ld a, $7
+	sub b
+	and a
+	jr z, .asm_79840
+	ld de, $14
+.asm_7983c
+	add hl, de
+	dec a
+	jr nz, .asm_7983c
+.asm_79840
+	pop de
+	ret
+
+; known jump sources: 79298 (1e:5298), 7939f (1e:539f), 79409 (1e:5409), 797c6 (1e:57c6), 79de2 (1e:5de2)
+Func_79842: ; 79842 (1e:5842)
+	ld hl, $5aea
+	ld e, a
+	ld d, $0
+	add hl, de
+	add hl, de
+	add hl, de
+	ld a, [hli]
+	ld e, a
+	ld a, [hli]
+	ld d, a
+	ld a, [hli]
+	ld b, a
+	and $f
+	ld c, a
+	ld a, b
+	swap a
+	and $f
+	ld b, a
+	ret
+asm_7985b: ; 7985b (1e:585b)
+	ld a, [hld]
+	ld [hli], a
+	inc hl
+	dec c
+	jr nz, asm_7985b
+	ret
+
+; known jump sources: 78f7d (1e:4f7d), 794e7 (1e:54e7), 79866 (1e:5866)
+Func_79862: ; 79862 (1e:5862)
+	ld a, [hli]
+	ld [hld], a
+	dec hl
+	dec c
+	jr nz, Func_79862
+	ret
+
+INCBIN "baserom.gbc",$79869,$7986f - $79869
 
 Func586F: ; 0x7986F 586F
 	ld hl,MoveSoundTable
@@ -76937,7 +107874,71 @@ MoveSoundTable: ; 0x798bc
 	db $a1,$00,$80
 	db $a1,$00,$80
 
-INCBIN "baserom.gbc",$79AAE,$79E16 - $79AAE
+; known jump sources: 792a0 (1e:52a0), 793a5 (1e:53a5), 7940d (1e:540d), 797cc (1e:57cc)
+Func_79aae: ; 79aae (1e:5aae)
+	ld a, [H_WHOSETURN] ; $FF00+$f3
+	and a
+	ld a, $31
+	jr z, .asm_79ab6
+	xor a
+.asm_79ab6
+	ld [H_DOWNARROWBLINKCNT1], a ; $FF00+$8b
+	jr asm_79acb
+
+; known jump sources: 3cd11 (f:4d11), 3cd2c (f:4d2c), 3f09a (f:709a), 3f0af (f:70af)
+Func_79aba: ; 79aba (1e:5aba)
+	call Load16BitRegisters
+	ld a, [$cd6c]
+	and a
+	jr nz, .asm_79ac8
+	ld de, $5b02
+	jr asm_79acb
+.asm_79ac8
+	ld de, $5b1b
+asm_79acb: ; 79acb (1e:5acb)
+	xor a
+	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+
+; known jump sources: 79de6 (1e:5de6)
+Func_79ace: ; 79ace (1e:5ace)
+	push hl
+.asm_79acf
+	push bc
+	push hl
+	ld a, [H_DOWNARROWBLINKCNT1] ; $FF00+$8b
+	ld b, a
+.asm_79ad4
+	ld a, [de]
+	add b
+	inc de
+	ld [hli], a
+	dec c
+	jr nz, .asm_79ad4
+	pop hl
+	ld bc, $14
+	add hl, bc
+	pop bc
+	dec b
+	jr nz, .asm_79acf
+	ld a, $1
+	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	pop hl
+	ret
+
+INCBIN "baserom.gbc",$79aea,$79dda - $79aea
+
+; known jump sources: 41846 (10:5846), 70374 (1c:4374)
+Func_79dda: ; 79dda (1e:5dda)
+	call Load16BitRegisters
+	ld a, c
+	ld [H_DOWNARROWBLINKCNT1], a ; $FF00+$8b
+	ld a, b
+	push hl
+	call Func_79842
+	pop hl
+	jp Func_79ace
+
+INCBIN "baserom.gbc",$79de9,$79e16 - $79de9
 
 TossBallAnimation: ; 5E16
 	ld a,[W_ISINBATTLE]
@@ -76996,7 +107997,205 @@ TossBallAnimation: ; 5E16
 	ld [W_ANIMATIONID],a
 	jp PlayAnimation
 
-INCBIN "baserom.gbc",$79E6A,$7AF74 - $79E6A
+; known jump sources: 78ddb (1e:4ddb), 78de3 (1e:4de3), 78df0 (1e:4df0), 78df6 (1e:4df6)
+Func_79e6a: ; 79e6a (1e:5e6a)
+	call Func_3748
+	ld a, [$d05b]
+	and $7f
+	ret z
+	cp $a
+	ld a, $20
+	ld b, $30
+	ld c, $a6
+	jr z, .asm_79e8b
+	ld a, $e0
+	ld b, $ff
+	ld c, $b0
+	jr nc, .asm_79e8b
+	ld a, $50
+	ld b, $1
+	ld c, $a7
+.asm_79e8b
+	ld [$c0f1], a
+	ld a, b
+	ld [$c0f2], a
+	ld a, c
+	jp Func_23b1
+
+; known jump sources: efdb (3:6fdb)
+Func_79e96: ; 79e96 (1e:5e96)
+	ld a, [$cd4d]
+	cp $52
+	jr z, .asm_79ec8
+	ld c, $8
+.asm_79e9f
+	push bc
+	ld hl, $c391
+	ld a, $1
+	ld [$d08a], a
+	ld c, $2
+	call Func_79339
+	ld hl, $c399
+	ld a, $ff
+	ld [$d08a], a
+	ld c, $2
+	call Func_79339
+	ld a, [rOBP1] ; $FF00+$49
+	xor $64
+	ld [rOBP1], a ; $FF00+$49
+	call DelayFrame
+	pop bc
+	dec c
+	jr nz, .asm_79e9f
+	ret
+.asm_79ec8
+	ld c, $2
+.asm_79eca
+	push bc
+	ld c, $8
+	call Func_79eed
+	call Func_79f30
+	ld c, $8
+	call Func_79eed
+	call Func_79f30
+	ld hl, $c390
+	ld a, $2
+	ld [$d08a], a
+	ld c, $4
+	call Func_79352
+	pop bc
+	dec c
+	jr nz, .asm_79eca
+	ret
+
+; known jump sources: 79ecd (1e:5ecd), 79ed5 (1e:5ed5), 79f2d (1e:5f2d)
+Func_79eed: ; 79eed (1e:5eed)
+	push bc
+	ld hl, $c391
+	ld a, $1
+	ld [$d08a], a
+	ld c, $1
+	call Func_79339
+	ld hl, $c395
+	ld a, $2
+	ld [$d08a], a
+	ld c, $1
+	call Func_79339
+	ld hl, $c399
+	ld a, $fe
+	ld [$d08a], a
+	ld c, $1
+	call Func_79339
+	ld hl, $c39d
+	ld a, $ff
+	ld [$d08a], a
+	ld c, $1
+	call Func_79339
+	ld a, [rOBP1] ; $FF00+$49
+	xor $64
+	ld [rOBP1], a ; $FF00+$49
+	call DelayFrame
+	pop bc
+	dec c
+	jr nz, Func_79eed
+	ret
+
+; known jump sources: 79ed0 (1e:5ed0), 79ed8 (1e:5ed8)
+Func_79f30: ; 79f30 (1e:5f30)
+	ld hl, $c390
+	ld de, $cee9
+	ld bc, $8
+	call CopyData
+	ld hl, $c398
+	ld de, $c390
+	ld bc, $8
+	call CopyData
+	ld hl, $cee9
+	ld de, $c398
+	ld bc, $8
+	jp CopyData
+
+; known jump sources: f2c0 (3:72c0)
+Func_79f54: ; 79f54 (1e:5f54)
+	ld a, $1
+	ld [$cd50], a
+	ld a, [$cfcb]
+	push af
+	ld a, $ff
+	ld [$cfcb], a
+	ld a, $e4
+	ld [rOBP1], a ; $FF00+$49
+	call Func_79fc0
+	ld b, BANK(asm_f055)
+	ld hl, asm_f055
+	call Bankswitch ; indirect jump to asm_f055 (f055 (3:7055))
+	ld c, $8
+.asm_79f73
+	push bc
+	call Func_79f92
+	ld bc, $5f7e
+	push bc
+	ld c, $4
+	jp [hl]
+	ld a, [rOBP1] ; $FF00+$49
+	xor $64
+	ld [rOBP1], a ; $FF00+$49
+	call Delay3
+	pop bc
+	dec c
+	jr nz, .asm_79f73
+	pop af
+	ld [$cfcb], a
+	jp LoadPlayerSpriteGraphics
+
+; known jump sources: 79f74 (1e:5f74)
+Func_79f92: ; 79f92 (1e:5f92)
+	ld a, [$c109]
+	ld hl, $5fb0
+	ld c, a
+	ld b, $0
+	add hl, bc
+	ld a, [hli]
+	ld [$d08a], a
+	ld a, [hli]
+	ld e, a
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	push hl
+	ld hl, $c390
+	ld d, $0
+	add hl, de
+	ld e, l
+	ld d, h
+	pop hl
+	ret
+
+INCBIN "baserom.gbc",$79fb0,$79fc0 - $79fb0
+
+; known jump sources: 1dbb4 (7:5bb4), 79f66 (1e:5f66)
+Func_79fc0: ; 79fc0 (1e:5fc0)
+	ld hl, $8fc0
+	ld c, $4
+.asm_79fc5
+	push bc
+	push hl
+	call Func_79fd4
+	pop hl
+	ld bc, $10
+	add hl, bc
+	pop bc
+	dec c
+	jr nz, .asm_79fc5
+	ret
+
+; known jump sources: 79fc7 (1e:5fc7)
+Func_79fd4: ; 79fd4 (1e:5fd4)
+	ld de, $5fdd
+	ld bc, $1e01
+	jp CopyVideoData
+
+INCBIN "baserom.gbc",$79fdd,$7af74 - $79fdd
 
 PointerTable6F74: ; 6F74
 	dw $7de7
@@ -77122,7 +108321,265 @@ PointerTable6F74: ; 6F74
 	dw $7c7b
 	dw $7c80
 
-INCBIN "baserom.gbc",$7B068,$7C000 - $7B068
+INCBIN "baserom.gbc",$7b068,$7bde9 - $7b068
+
+; known jump sources: 3adf7 (e:6df7)
+Func_7bde9: ; 7bde9 (1e:7de9)
+	push hl
+	push de
+	push bc
+	ld a, [$cf91]
+	push af
+	ld a, [$d0b5]
+	push af
+	xor a
+	ld [$d083], a
+	ld [$c02a], a
+	dec a
+	ld [$c0ee], a
+	call Func_23b1
+	ld a, $1
+	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld a, $8c
+	call Func_23b1
+	call Delay3
+	xor a
+	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld [$FF00+$d7], a
+	ld a, [$cee9]
+	ld [$cf1d], a
+	ld c, $0
+	call Func_7beb4
+	ld a, [$ceea]
+	ld [$cf91], a
+	ld [$d0b5], a
+	call Func_7beb9
+	ld de, $9000
+	ld hl, $9310
+	ld bc, $31
+	call CopyVideoData
+	ld a, [$cee9]
+	ld [$cf91], a
+	ld [$d0b5], a
+	call Func_7beb9
+	ld a, $1
+	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld a, [$cee9]
+	call PlayCry
+	call Func_3748
+	ld c, $2
+	ld a, $e5
+	call Func_23a1
+	ld c, $50
+	call DelayFrames
+	ld c, $1
+	call Func_7beb4
+	ld bc, $110
+.asm_7be63
+	push bc
+	call asm_7befa
+	jr c, .asm_7bea9
+	call asm_7bec2
+	pop bc
+	inc b
+	dec c
+	dec c
+	jr nz, .asm_7be63
+	xor a
+	ld [$ceec], a
+	ld a, $31
+	ld [$ceeb], a
+	call Func_7bed6
+	ld a, [$ceea]
+.asm_7be81
+	ld [$cf1d], a
+	ld a, $ff
+	ld [$c0ee], a
+	call Func_23b1
+	ld a, [$cf1d]
+	call PlayCry
+	ld c, $0
+	call Func_7beb4
+	pop af
+	ld [$d0b5], a
+	pop af
+	ld [$cf91], a
+	pop bc
+	pop de
+	pop hl
+	ld a, [$ceec]
+	and a
+	ret z
+	scf
+	ret
+.asm_7bea9
+	pop bc
+	ld a, $1
+	ld [$ceec], a
+	ld a, [$cee9]
+	jr .asm_7be81
+
+; known jump sources: 7be1b (1e:7e1b), 7be5d (1e:7e5d), 7be94 (1e:7e94)
+Func_7beb4: ; 7beb4 (1e:7eb4)
+	ld b, $b
+	jp GoPAL_SET
+
+; known jump sources: 7be27 (1e:7e27), 7be3f (1e:7e3f)
+Func_7beb9: ; 7beb9 (1e:7eb9)
+	call GetBaseStats
+	ld hl, $c3cf
+	jp Func_1384
+asm_7bec2: ; 7bec2 (1e:7ec2)
+	ld a, $31
+	ld [$ceeb], a
+	call Func_7bed6
+	ld a, $cf
+	ld [$ceeb], a
+	call Func_7bed6
+	dec b
+	jr nz, asm_7bec2
+	ret
+
+; known jump sources: 7be7b (1e:7e7b), 7bec7 (1e:7ec7), 7becf (1e:7ecf)
+Func_7bed6: ; 7bed6 (1e:7ed6)
+	push bc
+	xor a
+	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld hl, $c3cf
+	ld bc, $707
+	ld de, $d
+.asm_7bee3
+	push bc
+.asm_7bee4
+	ld a, [$ceeb]
+	add [hl]
+	ld [hli], a
+	dec c
+	jr nz, .asm_7bee4
+	pop bc
+	add hl, de
+	dec b
+	jr nz, .asm_7bee3
+	ld a, $1
+	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	call Delay3
+	pop bc
+	ret
+asm_7befa: ; 7befa (1e:7efa)
+	call DelayFrame
+	push bc
+	call GetJoypadStateLowSensitivity
+	ld a, [$FF00+$b5]
+	pop bc
+	and $2
+	jr nz, .asm_7bf0d
+.asm_7bf08
+	dec c
+	jr nz, asm_7befa
+	and a
+	ret
+.asm_7bf0d
+	ld a, [$ccd4]
+	and a
+	jr nz, .asm_7bf08
+	scf
+	ret
+
+; known jump sources: 4582f (11:582f)
+Func_7bf15: ; 7bf15 (1e:7f15)
+	ld de, $ffe0
+	call Func_7bf64
+	ld de, $240
+	call Func_7bf64
+	call Delay3
+	ld a, $ff
+	call Func_23b1
+	ld a, [$FF00+$af]
+	ld d, a
+	ld e, $1
+	ld b, $64
+.asm_7bf30
+	ld a, e
+	xor $fe
+	ld e, a
+	add d
+	ld [$FF00+$af], a
+	push bc
+	ld c, $2
+	ld a, $b4
+	call Func_23a1
+	pop bc
+	ld c, $2
+	call DelayFrames
+	dec b
+	jr nz, .asm_7bf30
+	ld a, d
+	ld [$FF00+$af], a
+	ld a, $ff
+	call Func_23b1
+	ld c, $2
+	ld a, $b9
+	call Func_23a1
+.asm_7bf57
+	ld a, [$c02a]
+	cp $b9
+	jr z, .asm_7bf57
+	call Func_2429
+	jp Func_2307
+
+; known jump sources: 7bf18 (1e:7f18), 7bf1e (1e:7f1e)
+Func_7bf64: ; 7bf64 (1e:7f64)
+	ld hl, $d527
+	ld a, [hld]
+	push af
+	ld a, [hl]
+	push af
+	push hl
+	push hl
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	add hl, de
+	ld a, h
+	and $3
+	or $98
+	ld d, a
+	ld a, l
+	pop hl
+	ld [hli], a
+	ld [hl], d
+	call ScheduleNorthRowRedraw
+	pop hl
+	pop af
+	ld [hli], a
+	pop af
+	ld [hl], a
+	jp Delay3
+
+; known jump sources: 3819 (0:3819)
+Func_7bf86: ; 7bf86 (1e:7f86)
+	ld a, [$cf91]
+	sub $c9
+	ret c
+	ld d, a
+	ld hl, $7fa7
+	srl a
+	ld c, a
+	ld b, $0
+	add hl, bc
+	ld a, [hl]
+	srl d
+	jr nc, .asm_7bf9d
+	swap a
+.asm_7bf9d
+	and $f0
+	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	xor a
+	ld [H_DOWNARROWBLINKCNT1], a ; $FF00+$8b
+	ld [$FF00+$8d], a
+	ret
+
+INCBIN "baserom.gbc",$7bfa7,$7c000 - $7bfa7
 
 SECTION "bank1F",DATA,BANK[$1F]
 
@@ -77265,7 +108722,1684 @@ UnknSong_md_7c475: ; 0x7C475
 	mus_end
 ENDC
 
-INCBIN "baserom.gbc",$7C490,$80000-$7C490
+INCBIN "baserom.gbc",$7c490,$7d13b - $7c490
+
+; known jump sources: 441b0 (11:41b0)
+Func_7d13b: ; 7d13b (1f:513b)
+	ld a, [$FF00+$dc]
+	ld c, $0
+	ld hl, $5170
+.asm_7d142
+	cp [hl]
+	jr c, .asm_7d149
+	inc c
+	inc hl
+	jr .asm_7d142
+.asm_7d149
+	push bc
+	ld a, $ff
+	ld [$c0ee], a
+	call Func_3740
+	pop bc
+	ld b, $0
+	ld hl, $5162
+	add hl, bc
+	add hl, bc
+	ld a, [hli]
+	ld c, [hl]
+	call Func_23a1
+	jp Func_2307
+
+INCBIN "baserom.gbc",$7d162,$7d177 - $7d162
+	ld c, $0
+.asm_7d179
+	ld b, $0
+	ld hl, $c026
+	add hl, bc
+	ld a, [hl]
+	and a
+	jr z, .asm_7d1a5
+	ld a, c
+	cp $4
+	jr nc, .asm_7d1a2
+	ld a, [$c002]
+	and a
+	jr z, .asm_7d1a2
+	bit 7, a
+	jr nz, .asm_7d1a5
+	set 7, a
+	ld [$c002], a
+	xor a
+	ld [$FF00+$25], a
+	ld [$FF00+$1a], a
+	ld a, $80
+	ld [$FF00+$1a], a
+	jr .asm_7d1a5
+.asm_7d1a2
+	call Func_7d1ac
+.asm_7d1a5
+	ld a, c
+	inc c
+	cp $7
+	jr nz, .asm_7d179
+	ret
+
+; known jump sources: 7d1a2 (1f:51a2)
+Func_7d1ac: ; 7d1ac (1f:51ac)
+	ld b, $0
+	ld hl, $c0b6
+	add hl, bc
+	ld a, [hl]
+	cp $1
+	jp z, Func_7d244
+	dec a
+	ld [hl], a
+	ld a, c
+	cp $4
+	jr nc, .asm_7d1c8
+	ld hl, $c02a
+	add hl, bc
+	ld a, [hl]
+	and a
+	jr z, .asm_7d1c8
+	ret
+.asm_7d1c8
+	ld hl, $c02e
+	add hl, bc
+	bit 6, [hl]
+	jr z, .asm_7d1d3
+	call Func_7d881
+.asm_7d1d3
+	ld b, $0
+	ld hl, $c036
+	add hl, bc
+	bit 0, [hl]
+	jr nz, .asm_7d1e5
+	ld hl, $c02e
+	add hl, bc
+	bit 2, [hl]
+	jr nz, .asm_7d1f9
+.asm_7d1e5
+	ld hl, $c02e
+	add hl, bc
+	bit 4, [hl]
+	jr z, .asm_7d1f0
+	jp Func_7d76d
+.asm_7d1f0
+	ld hl, $c04e
+	add hl, bc
+	ld a, [hl]
+	and a
+	jr z, .asm_7d1fa
+	dec [hl]
+.asm_7d1f9
+	ret
+.asm_7d1fa
+	ld hl, $c056
+	add hl, bc
+	ld a, [hl]
+	and a
+	jr nz, .asm_7d203
+	ret
+.asm_7d203
+	ld d, a
+	ld hl, $c05e
+	add hl, bc
+	ld a, [hl]
+	and $f
+	and a
+	jr z, .asm_7d210
+	dec [hl]
+	ret
+.asm_7d210
+	ld a, [hl]
+	swap [hl]
+	or [hl]
+	ld [hl], a
+	ld hl, $c066
+	add hl, bc
+	ld e, [hl]
+	ld hl, $c02e
+	add hl, bc
+	bit 3, [hl]
+	jr z, .asm_7d230
+	res 3, [hl]
+	ld a, d
+	and $f
+	ld d, a
+	ld a, e
+	sub d
+	jr nc, .asm_7d22e
+	ld a, $0
+.asm_7d22e
+	jr .asm_7d23c
+.asm_7d230
+	set 3, [hl]
+	ld a, d
+	and $f0
+	swap a
+	add e
+	jr nc, .asm_7d23c
+	ld a, $ff
+.asm_7d23c
+	ld d, a
+	ld b, $3
+	call Func_7d8ac
+	ld [hl], d
+	ret
+
+; known jump sources: 7d1b5 (1f:51b5)
+Func_7d244: ; 7d244 (1f:5244)
+	ld hl, $c06e
+	add hl, bc
+	ld a, [hl]
+	ld hl, $c04e
+	add hl, bc
+	ld [hl], a
+	ld hl, $c02e
+	add hl, bc
+	res 4, [hl]
+	res 5, [hl]
+	call Func_7d25a
+	ret
+
+; known jump sources: 7d256 (1f:5256), 7d2b0 (1f:52b0), 7d31a (1f:531a), 7d33c (1f:533c), 7d355 (1f:5355), 7d394 (1f:5394), 7d3a6 (1f:53a6), 7d3de (1f:53de), 7d42b (1f:542b), 7d46b (1f:546b), 7d478 (1f:5478), 7d497 (1f:5497), 7d4b5 (1f:54b5), 7d4c1 (1f:54c1), 7d4d0 (1f:54d0), 7d4e3 (1f:54e3), 7d54c (1f:554c)
+Func_7d25a: ; 7d25a (1f:525a)
+	call Func_7d899
+	ld d, a
+	cp $ff
+	jp nz, Func_7d2e8
+	ld b, $0
+	ld hl, $c02e
+	add hl, bc
+	bit 1, [hl]
+	jr nz, .asm_7d298
+	ld a, c
+	cp $3
+	jr nc, .asm_7d274
+	jr .asm_7d2b3
+.asm_7d274
+	res 2, [hl]
+	ld hl, $c036
+	add hl, bc
+	res 0, [hl]
+	cp $6
+	jr nz, .asm_7d288
+	ld a, $0
+	ld [$FF00+$1a], a
+	ld a, $80
+	ld [$FF00+$1a], a
+.asm_7d288
+	jr nz, .asm_7d296
+	ld a, [$c003]
+	and a
+	jr z, .asm_7d296
+	xor a
+	ld [$c003], a
+	jr .asm_7d2b3
+.asm_7d296
+	jr .asm_7d2bc
+.asm_7d298
+	res 1, [hl]
+	ld d, $0
+	ld a, c
+	add a
+	ld e, a
+	ld hl, $c006
+	add hl, de
+	push hl
+	ld hl, $c016
+	add hl, de
+	ld e, l
+	ld d, h
+	pop hl
+	ld a, [de]
+	ld [hli], a
+	inc de
+	ld a, [de]
+	ld [hl], a
+	jp Func_7d25a
+.asm_7d2b3
+	ld hl, $5b93
+	add hl, bc
+	ld a, [$FF00+$25]
+	and [hl]
+	ld [$FF00+$25], a
+.asm_7d2bc
+	ld a, [$c02a]
+	cp $14
+	jr nc, .asm_7d2c5
+	jr .asm_7d2e2
+.asm_7d2c5
+	ld a, [$c02a]
+	cp $86
+	jr z, .asm_7d2e2
+	jr c, .asm_7d2d0
+	jr .asm_7d2e2
+.asm_7d2d0
+	ld a, c
+	cp $4
+	jr z, .asm_7d2d9
+	call Func_7d73b
+	ret c
+.asm_7d2d9
+	ld a, [$c005]
+	ld [$FF00+$24], a
+	xor a
+	ld [$c005], a
+.asm_7d2e2
+	ld hl, $c026
+	add hl, bc
+	ld [hl], b
+	ret
+
+; known jump sources: 7d260 (1f:5260)
+Func_7d2e8: ; 7d2e8 (1f:52e8)
+	cp $fd
+	jp nz, Func_7d31d
+	call Func_7d899
+	push af
+	call Func_7d899
+	ld d, a
+	pop af
+	ld e, a
+	push de
+	ld d, $0
+	ld a, c
+	add a
+	ld e, a
+	ld hl, $c006
+	add hl, de
+	push hl
+	ld hl, $c016
+	add hl, de
+	ld e, l
+	ld d, h
+	pop hl
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hld]
+	ld [de], a
+	pop de
+	ld [hl], e
+	inc hl
+	ld [hl], d
+	ld b, $0
+	ld hl, $c02e
+	add hl, bc
+	set 1, [hl]
+	jp Func_7d25a
+
+; known jump sources: 7d2ea (1f:52ea)
+Func_7d31d: ; 7d31d (1f:531d)
+	cp $fe
+	jp nz, Func_7d358
+	call Func_7d899
+	ld e, a
+	and a
+	jr z, .asm_7d341
+	ld b, $0
+	ld hl, $c0be
+	add hl, bc
+	ld a, [hl]
+	cp e
+	jr nz, .asm_7d33f
+	ld a, $1
+	ld [hl], a
+	call Func_7d899
+	call Func_7d899
+	jp Func_7d25a
+.asm_7d33f
+	inc a
+	ld [hl], a
+.asm_7d341
+	call Func_7d899
+	push af
+	call Func_7d899
+	ld b, a
+	ld d, $0
+	ld a, c
+	add a
+	ld e, a
+	ld hl, $c006
+	add hl, de
+	pop af
+	ld [hli], a
+	ld [hl], b
+	jp Func_7d25a
+
+; known jump sources: 7d31f (1f:531f)
+Func_7d358: ; 7d358 (1f:5358)
+	and $f0
+	cp $d0
+	jp nz, Func_7d397
+	ld a, d
+	and $f
+	ld b, $0
+	ld hl, $c0c6
+	add hl, bc
+	ld [hl], a
+	ld a, c
+	cp $3
+	jr z, .asm_7d394
+	call Func_7d899
+	ld d, a
+	ld a, c
+	cp $2
+	jr z, .asm_7d380
+	cp $6
+	jr nz, .asm_7d38d
+	ld hl, $c0e7
+	jr .asm_7d383
+.asm_7d380
+	ld hl, $c0e6
+.asm_7d383
+	ld a, d
+	and $f
+	ld [hl], a
+	ld a, d
+	and $30
+	sla a
+	ld d, a
+.asm_7d38d
+	ld b, $0
+	ld hl, $c0de
+	add hl, bc
+	ld [hl], d
+.asm_7d394
+	jp Func_7d25a
+
+; known jump sources: 7d35c (1f:535c)
+Func_7d397: ; 7d397 (1f:5397)
+	ld a, d
+	cp $e8
+	jr nz, .asm_7d3a9
+	ld b, $0
+	ld hl, $c02e
+	add hl, bc
+	ld a, [hl]
+	xor $1
+	ld [hl], a
+	jp Func_7d25a
+.asm_7d3a9
+	cp $ea
+	jr nz, .asm_7d3e1
+	call Func_7d899
+	ld b, $0
+	ld hl, $c04e
+	add hl, bc
+	ld [hl], a
+	ld hl, $c06e
+	add hl, bc
+	ld [hl], a
+	call Func_7d899
+	ld d, a
+	and $f0
+	swap a
+	ld b, $0
+	ld hl, $c056
+	add hl, bc
+	srl a
+	ld e, a
+	adc b
+	swap a
+	or e
+	ld [hl], a
+	ld a, d
+	and $f
+	ld d, a
+	ld hl, $c05e
+	add hl, bc
+	swap a
+	or d
+	ld [hl], a
+	jp Func_7d25a
+.asm_7d3e1
+	cp $eb
+	jr nz, .asm_7d419
+	call Func_7d899
+	ld b, $0
+	ld hl, $c076
+	add hl, bc
+	ld [hl], a
+	call Func_7d899
+	ld d, a
+	and $f0
+	swap a
+	ld b, a
+	ld a, d
+	and $f
+	call Func_7d8cc
+	ld b, $0
+	ld hl, $c0a6
+	add hl, bc
+	ld [hl], d
+	ld hl, $c0ae
+	add hl, bc
+	ld [hl], e
+	ld b, $0
+	ld hl, $c02e
+	add hl, bc
+	set 4, [hl]
+	call Func_7d899
+	ld d, a
+	jp Func_7d57e
+.asm_7d419
+	cp $ec
+	jr nz, .asm_7d42e
+	call Func_7d899
+	rrca
+	rrca
+	and $c0
+	ld b, $0
+	ld hl, $c03e
+	add hl, bc
+	ld [hl], a
+	jp Func_7d25a
+.asm_7d42e
+	cp $ed
+	jr nz, .asm_7d46e
+	ld a, c
+	cp $4
+	jr nc, .asm_7d452
+	call Func_7d899
+	ld [$c0e8], a
+	call Func_7d899
+	ld [$c0e9], a
+	xor a
+	ld [$c0ce], a
+	ld [$c0cf], a
+	ld [$c0d0], a
+	ld [$c0d1], a
+	jr .asm_7d46b
+.asm_7d452
+	call Func_7d899
+	ld [$c0ea], a
+	call Func_7d899
+	ld [$c0eb], a
+	xor a
+	ld [$c0d2], a
+	ld [$c0d3], a
+	ld [$c0d4], a
+	ld [$c0d5], a
+.asm_7d46b
+	jp Func_7d25a
+.asm_7d46e
+	cp $ee
+	jr nz, .asm_7d47b
+	call Func_7d899
+	ld [$c004], a
+	jp Func_7d25a
+.asm_7d47b
+	cp $ef
+	jr nz, .asm_7d49a
+	call Func_7d899
+	push bc
+	call Func_7d8ea
+	pop bc
+	ld a, [$c003]
+	and a
+	jr nz, .asm_7d497
+	ld a, [$c02d]
+	ld [$c003], a
+	xor a
+	ld [$c02d], a
+.asm_7d497
+	jp Func_7d25a
+.asm_7d49a
+	cp $fc
+	jr nz, .asm_7d4b8
+	call Func_7d899
+	ld b, $0
+	ld hl, $c046
+	add hl, bc
+	ld [hl], a
+	and $c0
+	ld hl, $c03e
+	add hl, bc
+	ld [hl], a
+	ld hl, $c02e
+	add hl, bc
+	set 6, [hl]
+	jp Func_7d25a
+.asm_7d4b8
+	cp $f0
+	jr nz, .asm_7d4c4
+	call Func_7d899
+	ld [$FF00+$24], a
+	jp Func_7d25a
+.asm_7d4c4
+	cp $f8
+	jr nz, .asm_7d4d3
+	ld b, $0
+	ld hl, $c036
+	add hl, bc
+	set 0, [hl]
+	jp Func_7d25a
+.asm_7d4d3
+	and $f0
+	cp $e0
+	jr nz, .asm_7d4e6
+	ld hl, $c0d6
+	ld b, $0
+	add hl, bc
+	ld a, d
+	and $f
+	ld [hl], a
+	jp Func_7d25a
+.asm_7d4e6
+	cp $20
+	jr nz, .asm_7d533
+	ld a, c
+	cp $3
+	jr c, .asm_7d533
+	ld b, $0
+	ld hl, $c036
+	add hl, bc
+	bit 0, [hl]
+	jr nz, .asm_7d533
+	call Func_7d57e
+	ld d, a
+	ld b, $0
+	ld hl, $c03e
+	add hl, bc
+	ld a, [hl]
+	or d
+	ld d, a
+	ld b, $1
+	call Func_7d8ac
+	ld [hl], d
+	call Func_7d899
+	ld d, a
+	ld b, $2
+	call Func_7d8ac
+	ld [hl], d
+	call Func_7d899
+	ld e, a
+	ld a, c
+	cp $7
+	ld a, $0
+	jr z, .asm_7d526
+	push de
+	call Func_7d899
+	pop de
+.asm_7d526
+	ld d, a
+	push de
+	call Func_7d69d
+	call Func_7d66c
+	pop de
+	call Func_7d6bf
+	ret
+.asm_7d533
+	ld a, c
+	cp $4
+	jr c, .asm_7d54f
+	ld a, d
+	cp $10
+	jr nz, .asm_7d54f
+	ld b, $0
+	ld hl, $c036
+	add hl, bc
+	bit 0, [hl]
+	jr nz, .asm_7d54f
+	call Func_7d899
+	ld [$FF00+$10], a
+	jp Func_7d25a
+.asm_7d54f
+	ld a, c
+	cp $3
+	jr nz, Func_7d57e
+	ld a, d
+	and $f0
+	cp $b0
+	jr z, .asm_7d569
+	jr nc, Func_7d57e
+	swap a
+	ld b, a
+	ld a, d
+	and $f
+	ld d, a
+	ld a, b
+	push de
+	push bc
+	jr .asm_7d571
+.asm_7d569
+	ld a, d
+	and $f
+	push af
+	push bc
+	call Func_7d899
+.asm_7d571
+	ld d, a
+	ld a, [$c003]
+	and a
+	jr nz, .asm_7d57c
+	ld a, d
+	call Func_7d8ea
+.asm_7d57c
+	pop bc
+	pop de
+
+; known jump sources: 7d416 (1f:5416), 7d4f9 (1f:54f9), 7d552 (1f:5552), 7d55b (1f:555b)
+Func_7d57e: ; 7d57e (1f:557e)
+	ld a, d
+	push af
+	and $f
+	inc a
+	ld b, $0
+	ld e, a
+	ld d, b
+	ld hl, $c0c6
+	add hl, bc
+	ld a, [hl]
+	ld l, b
+	call Func_7d8bb
+	ld a, c
+	cp $4
+	jr nc, .asm_7d59f
+	ld a, [$c0e8]
+	ld d, a
+	ld a, [$c0e9]
+	ld e, a
+	jr .asm_7d5b2
+.asm_7d59f
+	ld d, $1
+	ld e, $0
+	cp $7
+	jr z, .asm_7d5b2
+	call Func_7d707
+	ld a, [$c0ea]
+	ld d, a
+	ld a, [$c0eb]
+	ld e, a
+.asm_7d5b2
+	ld a, l
+	ld b, $0
+	ld hl, $c0ce
+	add hl, bc
+	ld l, [hl]
+	call Func_7d8bb
+	ld e, l
+	ld d, h
+	ld hl, $c0ce
+	add hl, bc
+	ld [hl], e
+	ld a, d
+	ld hl, $c0b6
+	add hl, bc
+	ld [hl], a
+	ld hl, $c036
+	add hl, bc
+	bit 0, [hl]
+	jr nz, .asm_7d5dc
+	ld hl, $c02e
+	add hl, bc
+	bit 2, [hl]
+	jr z, .asm_7d5dc
+	pop hl
+	ret
+.asm_7d5dc
+	pop af
+	and $f0
+	cp $c0
+	jr nz, .asm_7d613
+	ld a, c
+	cp $4
+	jr nc, .asm_7d5f0
+	ld hl, $c02a
+	add hl, bc
+	ld a, [hl]
+	and a
+	jr nz, .asm_7d612
+.asm_7d5f0
+	ld a, c
+	cp $2
+	jr z, .asm_7d5f9
+	cp $6
+	jr nz, .asm_7d606
+.asm_7d5f9
+	ld b, $0
+	ld hl, $5b93
+	add hl, bc
+	ld a, [$FF00+$25]
+	and [hl]
+	ld [$FF00+$25], a
+	jr .asm_7d612
+.asm_7d606
+	ld b, $2
+	call Func_7d8ac
+	ld a, $8
+	ld [hli], a
+	inc hl
+	ld a, $80
+	ld [hl], a
+.asm_7d612
+	ret
+.asm_7d613
+	swap a
+	ld b, $0
+	ld hl, $c0d6
+	add hl, bc
+	ld b, [hl]
+	call Func_7d8cc
+	ld b, $0
+	ld hl, $c02e
+	add hl, bc
+	bit 4, [hl]
+	jr z, .asm_7d62c
+	call Func_7d803
+.asm_7d62c
+	push de
+	ld a, c
+	cp $4
+	jr nc, .asm_7d641
+	ld hl, $c02a
+	ld d, $0
+	ld e, a
+	add hl, de
+	ld a, [hl]
+	and a
+	jr nz, .asm_7d63f
+	jr .asm_7d641
+.asm_7d63f
+	pop de
+	ret
+.asm_7d641
+	ld b, $0
+	ld hl, $c0de
+	add hl, bc
+	ld d, [hl]
+	ld b, $2
+	call Func_7d8ac
+	ld [hl], d
+	call Func_7d69d
+	call Func_7d66c
+	pop de
+	ld b, $0
+	ld hl, $c02e
+	add hl, bc
+	bit 0, [hl]
+	jr z, .asm_7d663
+	inc e
+	jr nc, .asm_7d663
+	inc d
+.asm_7d663
+	ld hl, $c066
+	add hl, bc
+	ld [hl], e
+	call Func_7d6bf
+	ret
+
+; known jump sources: 7d52b (1f:552b), 7d651 (1f:5651)
+Func_7d66c: ; 7d66c (1f:566c)
+	ld b, $0
+	ld hl, $5b9b
+	add hl, bc
+	ld a, [$FF00+$25]
+	or [hl]
+	ld d, a
+	ld a, c
+	cp $7
+	jr z, .asm_7d687
+	cp $4
+	jr nc, .asm_7d699
+	ld hl, $c02a
+	add hl, bc
+	ld a, [hl]
+	and a
+	jr nz, .asm_7d699
+.asm_7d687
+	ld a, [$c004]
+	ld hl, $5b9b
+	add hl, bc
+	and [hl]
+	ld d, a
+	ld a, [$FF00+$25]
+	ld hl, $5b93
+	add hl, bc
+	and [hl]
+	or d
+	ld d, a
+.asm_7d699
+	ld a, d
+	ld [$FF00+$25], a
+	ret
+
+; known jump sources: 7d528 (1f:5528), 7d64e (1f:564e)
+Func_7d69d: ; 7d69d (1f:569d)
+	ld b, $0
+	ld hl, $c0b6
+	add hl, bc
+	ld d, [hl]
+	ld a, c
+	cp $2
+	jr z, .asm_7d6b8
+	cp $6
+	jr z, .asm_7d6b8
+	ld a, d
+	and $3f
+	ld d, a
+	ld hl, $c03e
+	add hl, bc
+	ld a, [hl]
+	or d
+	ld d, a
+.asm_7d6b8
+	ld b, $1
+	call Func_7d8ac
+	ld [hl], d
+	ret
+
+; known jump sources: 7d52f (1f:552f), 7d668 (1f:5668)
+Func_7d6bf: ; 7d6bf (1f:56bf)
+	ld a, c
+	cp $2
+	jr z, .asm_7d6c8
+	cp $6
+	jr nz, .asm_7d6f5
+.asm_7d6c8
+	push de
+	ld de, $c0e6
+	cp $2
+	jr z, .asm_7d6d3
+	ld de, $c0e7
+.asm_7d6d3
+	ld a, [de]
+	add a
+	ld d, $0
+	ld e, a
+	ld hl, $4361
+	add hl, de
+	ld e, [hl]
+	inc hl
+	ld d, [hl]
+	ld hl, $ff30
+	ld b, $f
+	ld a, $0
+	ld [$FF00+$1a], a
+.asm_7d6e8
+	ld a, [de]
+	inc de
+	ld [hli], a
+	ld a, b
+	dec b
+	and a
+	jr nz, .asm_7d6e8
+	ld a, $80
+	ld [$FF00+$1a], a
+	pop de
+.asm_7d6f5
+	ld a, d
+	or $80
+	and $c7
+	ld d, a
+	ld b, $3
+	call Func_7d8ac
+	ld [hl], e
+	inc hl
+	ld [hl], d
+	call Func_7d729
+	ret
+
+; known jump sources: 7d5a7 (1f:55a7)
+Func_7d707: ; 7d707 (1f:5707)
+	call Func_7d759
+	jr nc, .asm_7d71f
+	ld d, $0
+	ld a, [$c0f2]
+	add $80
+	jr nc, .asm_7d716
+	inc d
+.asm_7d716
+	ld [$c0eb], a
+	ld a, d
+	ld [$c0ea], a
+	jr .asm_7d728
+.asm_7d71f
+	xor a
+	ld [$c0eb], a
+	ld a, $1
+	ld [$c0ea], a
+.asm_7d728
+	ret
+
+; known jump sources: 7d703 (1f:5703)
+Func_7d729: ; 7d729 (1f:5729)
+	call Func_7d759
+	jr nc, .asm_7d73a
+	ld a, [$c0f1]
+	add e
+	jr nc, .asm_7d735
+	inc d
+.asm_7d735
+	dec hl
+	ld e, a
+	ld [hl], e
+	inc hl
+	ld [hl], d
+.asm_7d73a
+	ret
+
+; known jump sources: 7d2d5 (1f:52d5)
+Func_7d73b: ; 7d73b (1f:573b)
+	call Func_7d759
+	jr nc, .asm_7d756
+	ld hl, $c006
+	ld e, c
+	ld d, $0
+	sla e
+	rl d
+	add hl, de
+	ld a, [hl]
+	sub $1
+	ld [hl], a
+	inc hl
+	ld a, [hl]
+	sbc $0
+	ld [hl], a
+	scf
+	ret
+.asm_7d756
+	scf
+	ccf
+	ret
+
+; known jump sources: 7d707 (1f:5707), 7d729 (1f:5729), 7d73b (1f:573b)
+Func_7d759: ; 7d759 (1f:5759)
+	ld a, [$c02a]
+	cp $14
+	jr nc, .asm_7d762
+	jr .asm_7d768
+.asm_7d762
+	cp $86
+	jr z, .asm_7d768
+	jr c, .asm_7d76b
+.asm_7d768
+	scf
+	ccf
+	ret
+.asm_7d76b
+	scf
+	ret
+
+; known jump sources: 7d1ed (1f:51ed)
+Func_7d76d: ; 7d76d (1f:576d)
+	ld hl, $c02e
+	add hl, bc
+	bit 5, [hl]
+	jp nz, Func_7d7b4
+	ld hl, $c09e
+	add hl, bc
+	ld e, [hl]
+	ld hl, $c096
+	add hl, bc
+	ld d, [hl]
+	ld hl, $c07e
+	add hl, bc
+	ld l, [hl]
+	ld h, b
+	add hl, de
+	ld d, h
+	ld e, l
+	ld hl, $c08e
+	add hl, bc
+	push hl
+	ld hl, $c086
+	add hl, bc
+	ld a, [hl]
+	pop hl
+	add [hl]
+	ld [hl], a
+	ld a, $0
+	adc e
+	ld e, a
+	ld a, $0
+	adc d
+	ld d, a
+	ld hl, $c0a6
+	add hl, bc
+	ld a, [hl]
+	cp d
+	jp c, Func_7d7fa
+	jr nz, asm_7d7e7
+	ld hl, $c0ae
+	add hl, bc
+	ld a, [hl]
+	cp e
+	jp c, Func_7d7fa
+	jr asm_7d7e7
+
+; known jump sources: 7d773 (1f:5773)
+Func_7d7b4: ; 7d7b4 (1f:57b4)
+	ld hl, $c09e
+	add hl, bc
+	ld a, [hl]
+	ld hl, $c096
+	add hl, bc
+	ld d, [hl]
+	ld hl, $c07e
+	add hl, bc
+	ld e, [hl]
+	sub e
+	ld e, a
+	ld a, d
+	sbc b
+	ld d, a
+	ld hl, $c086
+	add hl, bc
+	ld a, [hl]
+	add a
+	ld [hl], a
+	ld a, e
+	sbc b
+	ld e, a
+	ld a, d
+	sbc b
+	ld d, a
+	ld hl, $c0a6
+	add hl, bc
+	ld a, d
+	cp [hl]
+	jr c, Func_7d7fa
+	jr nz, asm_7d7e7
+	ld hl, $c0ae
+	add hl, bc
+	ld a, e
+	cp [hl]
+	jr c, Func_7d7fa
+asm_7d7e7: ; 7d7e7 (1f:57e7)
+	ld hl, $c09e
+	add hl, bc
+	ld [hl], e
+	ld hl, $c096
+	add hl, bc
+	ld [hl], d
+	ld b, $3
+	call Func_7d8ac
+	ld a, e
+	ld [hli], a
+	ld [hl], d
+	ret
+
+; known jump sources: 7d7a4 (1f:57a4), 7d7af (1f:57af), 7d7db (1f:57db), 7d7e5 (1f:57e5)
+Func_7d7fa: ; 7d7fa (1f:57fa)
+	ld hl, $c02e
+	add hl, bc
+	res 4, [hl]
+	res 5, [hl]
+	ret
+
+; known jump sources: 7d629 (1f:5629)
+Func_7d803: ; 7d803 (1f:5803)
+	ld hl, $c096
+	add hl, bc
+	ld [hl], d
+	ld hl, $c09e
+	add hl, bc
+	ld [hl], e
+	ld hl, $c0b6
+	add hl, bc
+	ld a, [hl]
+	ld hl, $c076
+	add hl, bc
+	sub [hl]
+	jr nc, .asm_7d81b
+	ld a, $1
+.asm_7d81b
+	ld [hl], a
+	ld hl, $c0ae
+	add hl, bc
+	ld a, e
+	sub [hl]
+	ld e, a
+	ld a, d
+	sbc b
+	ld hl, $c0a6
+	add hl, bc
+	sub [hl]
+	jr c, .asm_7d837
+	ld d, a
+	ld b, $0
+	ld hl, $c02e
+	add hl, bc
+	set 5, [hl]
+	jr .asm_7d85a
+.asm_7d837
+	ld hl, $c096
+	add hl, bc
+	ld d, [hl]
+	ld hl, $c09e
+	add hl, bc
+	ld e, [hl]
+	ld hl, $c0ae
+	add hl, bc
+	ld a, [hl]
+	sub e
+	ld e, a
+	ld a, d
+	sbc b
+	ld d, a
+	ld hl, $c0a6
+	add hl, bc
+	ld a, [hl]
+	sub d
+	ld d, a
+	ld b, $0
+	ld hl, $c02e
+	add hl, bc
+	res 5, [hl]
+.asm_7d85a
+	ld hl, $c076
+	add hl, bc
+.asm_7d85e
+	inc b
+	ld a, e
+	sub [hl]
+	ld e, a
+	jr nc, .asm_7d85e
+	ld a, d
+	and a
+	jr z, .asm_7d86c
+	dec a
+	ld d, a
+	jr .asm_7d85e
+.asm_7d86c
+	ld a, e
+	add [hl]
+	ld d, b
+	ld b, $0
+	ld hl, $c07e
+	add hl, bc
+	ld [hl], d
+	ld hl, $c086
+	add hl, bc
+	ld [hl], a
+	ld hl, $c08e
+	add hl, bc
+	ld [hl], a
+	ret
+
+; known jump sources: 7d1d0 (1f:51d0)
+Func_7d881: ; 7d881 (1f:5881)
+	ld b, $0
+	ld hl, $c046
+	add hl, bc
+	ld a, [hl]
+	rlca
+	rlca
+	ld [hl], a
+	and $c0
+	ld d, a
+	ld b, $1
+	call Func_7d8ac
+	ld a, [hl]
+	and $3f
+	or d
+	ld [hl], a
+	ret
+
+; known jump sources: 7d25a (1f:525a), 7d2ed (1f:52ed), 7d2f1 (1f:52f1), 7d322 (1f:5322), 7d336 (1f:5336), 7d339 (1f:5339), 7d341 (1f:5341), 7d345 (1f:5345), 7d36e (1f:536e), 7d3ad (1f:53ad), 7d3bc (1f:53bc), 7d3e5 (1f:53e5), 7d3ef (1f:53ef), 7d412 (1f:5412), 7d41d (1f:541d), 7d437 (1f:5437), 7d43d (1f:543d), 7d452 (1f:5452), 7d458 (1f:5458), 7d472 (1f:5472), 7d47f (1f:547f), 7d49e (1f:549e), 7d4bc (1f:54bc), 7d50c (1f:550c), 7d516 (1f:5516), 7d522 (1f:5522), 7d547 (1f:5547), 7d56e (1f:556e)
+Func_7d899: ; 7d899 (1f:5899)
+	ld d, $0
+	ld a, c
+	add a
+	ld e, a
+	ld hl, $c006
+	add hl, de
+	ld a, [hli]
+	ld e, a
+	ld a, [hld]
+	ld d, a
+	ld a, [de]
+	inc de
+	ld [hl], e
+	inc hl
+	ld [hl], d
+	ret
+
+; known jump sources: 7d23f (1f:523f), 7d508 (1f:5508), 7d512 (1f:5512), 7d608 (1f:5608), 7d64a (1f:564a), 7d6ba (1f:56ba), 7d6fd (1f:56fd), 7d7f3 (1f:57f3), 7d890 (1f:5890)
+Func_7d8ac: ; 7d8ac (1f:58ac)
+	ld a, c
+	ld hl, $5b8b
+	add l
+	jr nc, .asm_7d8b4
+	inc h
+.asm_7d8b4
+	ld l, a
+	ld a, [hl]
+	add b
+	ld l, a
+	ld h, $ff
+	ret
+
+; known jump sources: 7d58d (1f:558d), 7d5ba (1f:55ba)
+Func_7d8bb: ; 7d8bb (1f:58bb)
+	ld h, $0
+.asm_7d8bd
+	srl a
+	jr nc, .asm_7d8c2
+	add hl, de
+.asm_7d8c2
+	sla e
+	rl d
+	and a
+	jr z, .asm_7d8cb
+	jr .asm_7d8bd
+.asm_7d8cb
+	ret
+
+; known jump sources: 7d3fb (1f:53fb), 7d61c (1f:561c)
+Func_7d8cc: ; 7d8cc (1f:58cc)
+	ld h, $0
+	ld l, a
+	add hl, hl
+	ld d, h
+	ld e, l
+	ld hl, $5ba3
+	add hl, de
+	ld e, [hl]
+	inc hl
+	ld d, [hl]
+	ld a, b
+.asm_7d8da
+	cp $7
+	jr z, .asm_7d8e5
+	sra d
+	rr e
+	inc a
+	jr .asm_7d8da
+.asm_7d8e5
+	ld a, $8
+	add d
+	ld d, a
+	ret
+
+; known jump sources: 7d483 (1f:5483), 7d579 (1f:5579)
+Func_7d8ea: ; 7d8ea (1f:58ea)
+	ld [$c001], a
+	cp $ff
+	jp z, Func_7daa8
+	cp $c2
+	jp z, Func_7d9c2
+	jp c, Func_7d9c2
+	cp $fe
+	jr z, .asm_7d901
+	jp nc, Func_7d9c2
+.asm_7d901
+	xor a
+	ld [$c000], a
+	ld [$c003], a
+	ld [$c0e9], a
+	ld [$c0e6], a
+	ld [$c0e7], a
+	ld d, $8
+	ld hl, $c016
+	call Func_7dafd
+	ld hl, $c006
+	call Func_7dafd
+	ld d, $4
+	ld hl, $c026
+	call Func_7dafd
+	ld hl, $c02e
+	call Func_7dafd
+	ld hl, $c03e
+	call Func_7dafd
+	ld hl, $c046
+	call Func_7dafd
+	ld hl, $c04e
+	call Func_7dafd
+	ld hl, $c056
+	call Func_7dafd
+	ld hl, $c05e
+	call Func_7dafd
+	ld hl, $c066
+	call Func_7dafd
+	ld hl, $c06e
+	call Func_7dafd
+	ld hl, $c036
+	call Func_7dafd
+	ld hl, $c076
+	call Func_7dafd
+	ld hl, $c07e
+	call Func_7dafd
+	ld hl, $c086
+	call Func_7dafd
+	ld hl, $c08e
+	call Func_7dafd
+	ld hl, $c096
+	call Func_7dafd
+	ld hl, $c09e
+	call Func_7dafd
+	ld hl, $c0a6
+	call Func_7dafd
+	ld hl, $c0ae
+	call Func_7dafd
+	ld a, $1
+	ld hl, $c0be
+	call Func_7dafd
+	ld hl, $c0b6
+	call Func_7dafd
+	ld hl, $c0c6
+	call Func_7dafd
+	ld [$c0e8], a
+	ld a, $ff
+	ld [$c004], a
+	xor a
+	ld [$FF00+$24], a
+	ld a, $8
+	ld [$FF00+$10], a
+	ld a, $0
+	ld [$FF00+$25], a
+	xor a
+	ld [$FF00+$1a], a
+	ld a, $80
+	ld [$FF00+$1a], a
+	ld a, $77
+	ld [$FF00+$24], a
+	jp Func_7db03
+
+; known jump sources: 7d8f4 (1f:58f4), 7d8f7 (1f:58f7), 7d8fe (1f:58fe)
+Func_7d9c2: ; 7d9c2 (1f:59c2)
+	ld l, a
+	ld e, a
+	ld h, $0
+	ld d, h
+	add hl, hl
+	add hl, de
+	ld de, $4000
+	add hl, de
+	ld a, h
+	ld [$c0ec], a
+	ld a, l
+	ld [$c0ed], a
+	ld a, [hl]
+	and $c0
+	rlca
+	rlca
+	ld c, a
+
+; known jump sources: 7daa5 (1f:5aa5)
+Func_7d9db: ; 7d9db (1f:59db)
+	ld d, c
+	ld a, c
+	add a
+	add c
+	ld c, a
+	ld b, $0
+	ld a, [$c0ec]
+	ld h, a
+	ld a, [$c0ed]
+	ld l, a
+	add hl, bc
+	ld c, d
+	ld a, [hl]
+	and $f
+	ld e, a
+	ld d, $0
+	ld hl, $c026
+	add hl, de
+	ld a, [hl]
+	and a
+	jr z, .asm_7da17
+	ld a, e
+	cp $7
+	jr nz, .asm_7da0e
+	ld a, [$c001]
+	cp $14
+	jr nc, .asm_7da07
+	ret
+.asm_7da07
+	ld a, [hl]
+	cp $14
+	jr z, .asm_7da17
+	jr c, .asm_7da17
+.asm_7da0e
+	ld a, [$c001]
+	cp [hl]
+	jr z, .asm_7da17
+	jr c, .asm_7da17
+	ret
+.asm_7da17
+	xor a
+	push de
+	ld h, d
+	ld l, e
+	add hl, hl
+	ld d, h
+	ld e, l
+	ld hl, $c016
+	add hl, de
+	ld [hli], a
+	ld [hl], a
+	ld hl, $c006
+	add hl, de
+	ld [hli], a
+	ld [hl], a
+	pop de
+	ld hl, $c026
+	add hl, de
+	ld [hl], a
+	ld hl, $c02e
+	add hl, de
+	ld [hl], a
+	ld hl, $c03e
+	add hl, de
+	ld [hl], a
+	ld hl, $c046
+	add hl, de
+	ld [hl], a
+	ld hl, $c04e
+	add hl, de
+	ld [hl], a
+	ld hl, $c056
+	add hl, de
+	ld [hl], a
+	ld hl, $c05e
+	add hl, de
+	ld [hl], a
+	ld hl, $c066
+	add hl, de
+	ld [hl], a
+	ld hl, $c06e
+	add hl, de
+	ld [hl], a
+	ld hl, $c076
+	add hl, de
+	ld [hl], a
+	ld hl, $c07e
+	add hl, de
+	ld [hl], a
+	ld hl, $c086
+	add hl, de
+	ld [hl], a
+	ld hl, $c08e
+	add hl, de
+	ld [hl], a
+	ld hl, $c096
+	add hl, de
+	ld [hl], a
+	ld hl, $c09e
+	add hl, de
+	ld [hl], a
+	ld hl, $c0a6
+	add hl, de
+	ld [hl], a
+	ld hl, $c0ae
+	add hl, de
+	ld [hl], a
+	ld hl, $c036
+	add hl, de
+	ld [hl], a
+	ld a, $1
+	ld hl, $c0be
+	add hl, de
+	ld [hl], a
+	ld hl, $c0b6
+	add hl, de
+	ld [hl], a
+	ld hl, $c0c6
+	add hl, de
+	ld [hl], a
+	ld a, e
+	cp $4
+	jr nz, .asm_7da9f
+	ld a, $8
+	ld [$FF00+$10], a
+.asm_7da9f
+	ld a, c
+	and a
+	jp z, Func_7db03
+	dec c
+	jp Func_7d9db
+
+; known jump sources: 7d8ef (1f:58ef)
+Func_7daa8: ; 7daa8 (1f:5aa8)
+	ld a, $80
+	ld [$FF00+$26], a
+	ld [$FF00+$1a], a
+	xor a
+	ld [$FF00+$25], a
+	ld [$FF00+$1c], a
+	ld a, $8
+	ld [$FF00+$10], a
+	ld [$FF00+$12], a
+	ld [$FF00+$17], a
+	ld [$FF00+$21], a
+	ld a, $40
+	ld [$FF00+$14], a
+	ld [$FF00+$19], a
+	ld [$FF00+$23], a
+	ld a, $77
+	ld [$FF00+$24], a
+	xor a
+	ld [$c000], a
+	ld [$c003], a
+	ld [$c002], a
+	ld [$c0e9], a
+	ld [$c0eb], a
+	ld [$c0e6], a
+	ld [$c0e7], a
+	ld d, $a0
+	ld hl, $c006
+	call Func_7dafd
+	ld a, $1
+	ld d, $18
+	ld hl, $c0b6
+	call Func_7dafd
+	ld [$c0e8], a
+	ld [$c0ea], a
+	ld a, $ff
+	ld [$c004], a
+	ret
+
+; known jump sources: 7d916 (1f:5916), 7d91c (1f:591c), 7d924 (1f:5924), 7d92a (1f:592a), 7d930 (1f:5930), 7d936 (1f:5936), 7d93c (1f:593c), 7d942 (1f:5942), 7d948 (1f:5948), 7d94e (1f:594e), 7d954 (1f:5954), 7d95a (1f:595a), 7d960 (1f:5960), 7d966 (1f:5966), 7d96c (1f:596c), 7d972 (1f:5972), 7d978 (1f:5978), 7d97e (1f:597e), 7d984 (1f:5984), 7d98a (1f:598a), 7d992 (1f:5992), 7d998 (1f:5998), 7d99e (1f:599e), 7dae4 (1f:5ae4), 7daee (1f:5aee)
+Func_7dafd: ; 7dafd (1f:5afd)
+	ld b, d
+.asm_7dafe
+	ld [hli], a
+	dec b
+	jr nz, .asm_7dafe
+	ret
+
+; known jump sources: 7d9bf (1f:59bf), 7daa1 (1f:5aa1)
+Func_7db03: ; 7db03 (1f:5b03)
+	ld a, [$c001]
+	ld l, a
+	ld e, a
+	ld h, $0
+	ld d, h
+	add hl, hl
+	add hl, de
+	ld de, $4000
+	add hl, de
+	ld e, l
+	ld d, h
+	ld hl, $c006
+	ld a, [de]
+	ld b, a
+	rlca
+	rlca
+	and $3
+	ld c, a
+	ld a, b
+	and $f
+	ld b, c
+	inc b
+	inc de
+	ld c, $0
+.asm_7db25
+	cp c
+	jr z, .asm_7db2d
+	inc c
+	inc hl
+	inc hl
+	jr .asm_7db25
+.asm_7db2d
+	push hl
+	push bc
+	push af
+	ld b, $0
+	ld c, a
+	ld hl, $c026
+	add hl, bc
+	ld a, [$c001]
+	ld [hl], a
+	pop af
+	cp $3
+	jr c, .asm_7db46
+	ld hl, $c02e
+	add hl, bc
+	set 2, [hl]
+.asm_7db46
+	pop bc
+	pop hl
+	ld a, [de]
+	ld [hli], a
+	inc de
+	ld a, [de]
+	ld [hli], a
+	inc de
+	inc c
+	dec b
+	ld a, b
+	and a
+	ld a, [de]
+	inc de
+	jr nz, .asm_7db25
+	ld a, [$c001]
+	cp $14
+	jr nc, .asm_7db5f
+	jr .asm_7db89
+.asm_7db5f
+	ld a, [$c001]
+	cp $86
+	jr z, .asm_7db89
+	jr c, .asm_7db6a
+	jr .asm_7db89
+.asm_7db6a
+	ld hl, $c02a
+	ld [hli], a
+	ld [hli], a
+	ld [hli], a
+	ld [hl], a
+	ld hl, $c012
+	ld de, $5b8a
+	ld [hl], e
+	inc hl
+	ld [hl], d
+	ld a, [$c005]
+	and a
+	jr nz, .asm_7db89
+	ld a, [$FF00+$24]
+	ld [$c005], a
+	ld a, $77
+	ld [$FF00+$24], a
+.asm_7db89
+	ret
+
+INCBIN "baserom.gbc",$7db8a,$80000 - $7db8a
 
 SECTION "bank20",DATA,BANK[$20]
 

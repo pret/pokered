@@ -7918,6 +7918,7 @@ UnknSong_md_9b17:
 	db $da
 	db $fb
 
+Func_9b47:
 		mus_note noteC, note2_4_8_16
 		mus_note noteC, note8_16; 9B48
 		mus_note noteD#, note2_4_8_16
@@ -7955,6 +7956,7 @@ UnknSong_md_9b17:
 		mus_note noteD, note8_16
 		mus_note noteRst, note2_8
 
+Func_9b65:
 		mus_note noteC, note2_4_8_16
 		mus_note noteC, note8_16; 9B66
 		mus_note noteD#, note2_4_8_16
@@ -7976,6 +7978,7 @@ UnknSong_md_9b17:
 
 		mus_note noteF#, note16
 		mus_note noteF, note2_4
+Func_9b75:
 		mus_note noteRst, note2_4_8; 9B75
 
 		mus_note noteE, note2
