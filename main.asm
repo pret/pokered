@@ -8072,6 +8072,7 @@ Func_3219:
 	inc [hl]
 	ret
 
+Func_324c:
 	ld a, [$d730]
 	and $1
 	ret nz
@@ -101320,7 +101321,7 @@ Func_7418e: ; 7418e (1d:418e)
 	call DelayFrames
 	call Unknown_74183
 	pop de
-	ld de, $473e
+	ld de, TheEndGfx
 	ld hl, $9600
 	ld bc, $1d0a
 	call CopyVideoData
@@ -101401,7 +101402,7 @@ CreditsTextPointers: ; 42C3
 	dw CredClub
 	dw CredPAAD
 
-CredVersion:
+CredVersion: ; this 1 byte difference makes all bank addresses offset by 1 in the blue version
 IF _RED
 	db "2RED VERSION STAFF@"
 ENDC
@@ -101535,7 +101536,7 @@ CredClub:
 CredPAAD:
 	db "5PAAD TESTING@"
 
-TheEndGfx: ; 473E
+TheEndGfx: ; 473E (473F on blue)
 	INCBIN "gfx/theend.2bpp"
 
 Unknown_747de:
@@ -101585,8 +101586,60 @@ Unknown_747de:
 	ld [hl], $91
 	ret
 ; 7481f (1d:481f)
+
 Unknown_7481f:
-INCBIN "baserom.gbc",$7481f,$74872 - $7481f
+	ld hl, HiddenItemCoords
+	ld b, $0
+.asm_74824
+	ld de, $0003
+	ld a, [$d35e]
+	call $3dad
+	ret nc
+	push bc
+	push hl
+	ld hl, $d6f0
+	ld c, b
+	ld b, $2
+	ld a, $10
+	call Predef
+	ld a, c
+	pop hl
+	pop bc
+	inc b
+	and a
+	inc hl
+	ld d, [hl]
+	inc hl
+	ld e, [hl]
+	inc hl
+	jr nz, .asm_74824 ; 0x74845 $dd
+	ld a, [$d361]
+	call Unknown_7486b
+	cp d
+	jr nc, .asm_74824 ; 0x7484e $d4
+	ld a, [$d361]
+	add $4
+	cp d
+	jr c, .asm_74824 ; 0x74856 $cc
+	ld a, [$d362]
+	call Unknown_7486b
+	cp e
+	jr nc, .asm_74824 ; 0x7485f $c3
+	ld a, [$d362]
+	add $5
+	cp e
+	jr c, .asm_74824 ; 0x74867 $bb
+	scf
+	ret
+; 0x7486b
+
+Unknown_7486b:
+	sub $5
+	cp $f0
+	ret c
+	xor a
+	ret
+; 0x74872
 
 Unnamed_ASM_74872: ; 0x74872
 ; code similar to this appears in a lot of banks; this particular
@@ -101642,13 +101695,21 @@ Func_748d6: ; 748d6 (1d:48d6)
 	ld [$da39], a
 	ret
 ; 748e1 (1d:48e1)
+
 Unknown_748e1:
-INCBIN "baserom.gbc",$748e1,$748eb - $748e1
+dw Func_748eb
+dw Func_324c
+dw Func_3275
+dw Func_74988
+dw Func_7496b
+
+
+Func_748eb: ; 748eb (1d:48eb)
 	ld a, [W_YCOORD] ; $d361
 	ld b, a
 	ld a, [W_XCOORD] ; $d362
 	ld c, a
-	ld hl, $4916
+	ld hl, Unknown_74916
 	call Func_3442
 	cp $ff
 	jp z, Func_3219
@@ -101663,7 +101724,83 @@ INCBIN "baserom.gbc",$748e1,$748eb - $748e1
 	ld [$da39], a
 	ret
 
-INCBIN "baserom.gbc",$74916,$7496b - $74916
+Unknown_74916:
+dw $130b
+dw Unknown_74947
+dw $1301
+dw Unknown_7494a
+dw $1202
+dw Unknown_7494d
+dw $0b02
+dw Unknown_74950
+dw $100a
+dw Unknown_74953
+dw $0406
+dw Unknown_74956
+dw $050d
+dw Unknown_74959
+dw $040e
+dw Unknown_7495c
+dw $000f
+dw Unknown_7495f
+dw $010f
+dw Unknown_74962
+dw $0d10
+dw Unknown_74965
+dw $0d11
+dw Unknown_74968
+db $FF
+
+Unknown_74947:
+db $40
+db $09
+db $FF
+Unknown_7494a:
+db $20
+db $08
+db $FF
+Unknown_7494d:
+db $80
+db $09
+db $FF
+Unknown_74950:
+db $10
+db $06
+db $FF
+Unknown_74953:
+db $80
+db $02
+db $FF
+Unknown_74956:
+db $80
+db $07
+db $FF
+Unknown_74959:
+db $10
+db $08
+db $FF
+Unknown_7495c:
+db $10
+db $09
+db $FF
+Unknown_7495f:
+db $40
+db $08
+db $FF
+Unknown_74962:
+db $40
+db $06
+db $FF
+Unknown_74965:
+db $20
+db $06
+db $FF
+Unknown_74968:
+db $20
+db $0C
+db $FF
+
+Func_7496b:
 	ld a, [$cd38]
 	and a
 	jr nz, .asm_74980
@@ -101678,6 +101815,9 @@ INCBIN "baserom.gbc",$74916,$7496b - $74916
 	ld b, BANK(Func_44fd7)
 	ld hl, Func_44fd7
 	jp Bankswitch ; indirect jump to Func_44fd7 (44fd7 (11:4fd7))
+; 74988
+
+Func_74988:
 	ld a, [W_ISINBATTLE] ; $d057
 	cp $ff
 	jp z, Func_748d6
@@ -102297,7 +102437,14 @@ UnnamedText_74e81: ; 0x74e81
 ; 0x74e81 + 5 bytes
 
 Unknown_74e86:
-INCBIN "baserom.gbc",$74e86,$74e96 - $74e86
+dw UnnamedText_74e96
+dw UnnamedText_74e9b
+dw UnnamedText_74ea0
+dw UnnamedText_74ea5
+dw UnnamedText_74eaa
+dw UnnamedText_74eaf
+dw UnnamedText_74eb4
+dw UnnamedText_74eb9
 
 UnnamedText_74e96: ; 0x74e96
 	TX_FAR _UnnamedText_74e96
@@ -102358,7 +102505,7 @@ CeruleanHouse3Object: ; 0x74ebe (size=34)
 	EVENT_DISP $4, $7, $3
 
 Unknown_74ee0:
-	ld hl, $4f99
+	ld hl, UnnamedText_74f99
 	call PrintText
 	ld a, $13
 	ld [$d125], a
@@ -102382,10 +102529,10 @@ Unknown_74ee0:
 	call TextBoxBorder
 	call Func_2429
 	ld hl, $c406
-	ld de, $4f9e
+	ld de, Unnamed_74f9e
 	call PlaceString
 	ld hl, $c421
-	ld de, $4fc3
+	ld de, Unnamed_74fc3
 	call PlaceString
 	ld hl, $d730
 	res 6, [hl]
@@ -102402,7 +102549,7 @@ Unknown_74ee0:
 	ld [$FF00+$a0], a
 	call Func_35a6
 	jr nc, .asm_74f54
-	ld hl, $4fd3
+	ld hl, UnnamedText_74fd3
 	jp PrintText
 .asm_74f54
 	call Unknown_74fe7
@@ -102421,7 +102568,7 @@ Unknown_74ee0:
 	pop bc
 	dec b
 	jr nz, .asm_74f63
-	ld hl, $4fd8
+	ld hl, UnnamedText_74fd8
 	call PrintText
 	ld hl, $ffde
 	ld de, W_PLAYERMONEY1 ; $d349
@@ -102432,10 +102579,10 @@ Unknown_74ee0:
 	ld [$d125], a
 	jp DisplayTextBoxID
 .asm_74f8d
-	ld hl, $4fdd
+	ld hl, UnnamedText_74fdd
 	jp PrintText
 .asm_74f93
-	ld hl, $4fe2
+	ld hl, UnnamedText_74fe2
 	jp PrintText
 ; 74f99 (1d:4f99)
 UnnamedText_74f99: ; 0x74f99
@@ -102448,6 +102595,7 @@ Unnamed_74f9e: ; 0x74f9e
 	db "SODA POP",$4E
 	db "LEMONADE",$4E
 	db "CANCEL@"
+Unnamed_74fc3: ; 0x74fc3
 	db "¥200",$4E
 	db "¥300",$4E
 	db "¥350",$4E,"@"
@@ -102905,7 +103053,7 @@ SafariZoneEntranceText4: ; 0x752ca
 	call $35ec
 	ld a, [$cc26]
 	and a
-	jp nz, $5346 ;Unknown_75346
+	jp nz, .asm_75346
 	xor a
 	ld [$ff00+$9f], a
 	ld a, $5
@@ -102949,7 +103097,7 @@ SafariZoneEntranceText4: ; 0x752ca
 	ld a, $3
 	ld [$d61f], a
 	jr .asm_75358 ; 0x75344 $12
-;Unknown_75346:
+.asm_75346
 	ld hl, UnnamedText_75365
 	call PrintText
 .asm_7534c
@@ -103127,8 +103275,15 @@ Func_75477: ; 75477 (1d:5477)
 	ld [$da39], a
 	ret
 ; 75482 (1d:5482)
+
 Unknown_75482:
-INCBIN "baserom.gbc",$75482,$7548a - $75482
+dw Func_3219
+dw Func_324c
+dw Func_3275
+dw Func_7548a
+; 7548a (1d:548a)
+
+Func_7548a:
 	ld a, [W_ISINBATTLE] ; $d057
 	cp $ff
 	jp z, Func_75477
@@ -103704,11 +103859,9 @@ Unknown_75857:
 
 CinnabarGymTexts: ; 0x7589f
 	dw CinnabarGymText1, CinnabarGymText2, CinnabarGymText3, CinnabarGymText4, CinnabarGymText5, CinnabarGymText6, CinnabarGymText7, CinnabarGymText8, CinnabarGymText9
-;CinnabarGymText 10: ; 0x75925
-;CinnabarGymText 11: ; 0x7592a
-;CinnabarGymText 12: ; 0x75934
-
-INCBIN "baserom.gbc",$758b1,$758b7 - $758b1
+dw UnnamedText_75925 ;CinnabarGymText 10: ; 0x75925
+dw ReceivedTM38Text  ;CinnabarGymText 11: ; 0x7592a
+dw TM38NoRoomText    ;CinnabarGymText 12: ; 0x75934
 
 Unknown_758b7:
 	ld a, [H_DOWNARROWBLINKCNT2] ; $FF00+$8c
@@ -104297,7 +104450,7 @@ Unknown_75d38:
 	xor a
 	ld [$cd37], a
 	ld de, $cc5b
-	ld hl, $5d68
+	ld hl, Unknown_75d68
 .asm_75d42
 	ld a, [hli]
 	and a
@@ -104326,6 +104479,7 @@ Unknown_75d38:
 	ld [de], a
 	ret
 
+Unknown_75d68:
 INCBIN "baserom.gbc",$75d68,$75d6c - $75d68
 
 Lab4Text1: ; 0x75d6c
@@ -104949,9 +105103,17 @@ Func_761b6: ; 761b6 (1d:61b6)
 	ld [$d64d], a
 	ret
 ; 761bb (1d:61bb)
+
 Unknown_761bb:
-INCBIN "baserom.gbc",$761bb,$761c6 - $761bb
-.asm_761c6
+dw Func_761e2
+dw Func_324c
+dw Func_7623f
+dw Func_7622c
+dw Func_761c5
+
+Func_761c5: ; 0x761c5
+	ret
+asm_761c6: ; 0x761c6
 	ld hl, $ccd3
 	ld a, $40
 	ld [hli], a
@@ -104967,7 +105129,8 @@ INCBIN "baserom.gbc",$761bb,$761c6 - $761bb
 	ld [$d64d], a
 	ld [$da39], a
 	ret
-	ld hl, $6223
+Func_761e2: ; 0x761e2
+	ld hl, Unknown_76223
 	call ArePlayerCoordsInArray
 	jp nc, Func_3219
 	xor a
@@ -104981,7 +105144,7 @@ INCBIN "baserom.gbc",$761bb,$761c6 - $761bb
 	ld hl, $d863
 	bit 6, [hl]
 	set 6, [hl]
-	jr z, .asm_761c6
+	jr z, asm_761c6
 .asm_76206
 	ld a, $2
 	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
@@ -104996,7 +105159,10 @@ INCBIN "baserom.gbc",$761bb,$761c6 - $761bb
 	ld [$da39], a
 	ret
 
+Unknown_76223: ; 0x76223
 INCBIN "baserom.gbc",$76223,$7622c - $76223
+
+Func_7622c: ; 0x7622c
 	ld a, [$cd38]
 	and a
 	ret nz
@@ -105006,6 +105172,7 @@ INCBIN "baserom.gbc",$76223,$7622c - $76223
 	ld [$d64d], a
 	ld [$da39], a
 	ret
+Func_7623f: ; 0x7623f
 	call Func_3275
 	ld a, [W_ISINBATTLE] ; $d057
 	cp $ff
@@ -105124,9 +105291,17 @@ Func_7630d: ; 7630d (1d:630d)
 	ld [$d64e], a
 	ret
 ; 76312 (1d:6312)
+
 Unknown_76312:
-INCBIN "baserom.gbc",$76312,$7631d - $76312
-.asm_7631d
+dw Func_76339
+dw Func_324c
+dw Func_76396
+dw Func_76383
+dw Func_7631c
+
+Func_7631c: ; 0x7631c
+	ret
+asm_7631d:
 	ld hl, $ccd3
 	ld a, $40
 	ld [hli], a
@@ -105142,7 +105317,9 @@ INCBIN "baserom.gbc",$76312,$7631d - $76312
 	ld [$d64e], a
 	ld [$da39], a
 	ret
-	ld hl, $637a
+
+Func_76339: ; 0x76339
+	ld hl, Unknown_7637a
 	call ArePlayerCoordsInArray
 	jp nc, Func_3219
 	xor a
@@ -105156,7 +105333,7 @@ INCBIN "baserom.gbc",$76312,$7631d - $76312
 	ld hl, $d864
 	bit 6, [hl]
 	set 6, [hl]
-	jr z, .asm_7631d
+	jr z, asm_7631d
 .asm_7635d
 	ld a, $2
 	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
@@ -105171,7 +105348,10 @@ INCBIN "baserom.gbc",$76312,$7631d - $76312
 	ld [$da39], a
 	ret
 
+Unknown_7637a: ; 0x7637a
 INCBIN "baserom.gbc",$7637a,$76383 - $7637a
+
+Func_76383: ; 0x76383
 	ld a, [$cd38]
 	and a
 	ret nz
@@ -105181,6 +105361,8 @@ INCBIN "baserom.gbc",$7637a,$76383 - $7637a
 	ld [$d64e], a
 	ld [$da39], a
 	ret
+
+Func_76396: ; 0x76396
 	call Func_3275
 	ld a, [W_ISINBATTLE] ; $d057
 	cp $ff
@@ -105299,9 +105481,17 @@ Func_76464: ; 76464 (1d:6464)
 	ld [$d64f], a
 	ret
 ; 76469 (1d:6469)
+
 Unknown_76469:
-INCBIN "baserom.gbc",$76469,$76474 - $76469
-.asm_76474
+dw Func_76490
+dw Func_324c
+dw Func_764ed
+dw Func_764da
+dw Func_76473
+
+Func_76473: ; 76473 (1d:6473)
+	ret
+asm_76474:
 	ld hl, $ccd3
 	ld a, $40
 	ld [hli], a
@@ -105317,7 +105507,9 @@ INCBIN "baserom.gbc",$76469,$76474 - $76469
 	ld [$d64f], a
 	ld [$da39], a
 	ret
-	ld hl, $64d1
+
+Func_76490: ; 76490 (1d:6490)
+	ld hl, Unknown_764d1
 	call ArePlayerCoordsInArray
 	jp nc, Func_3219
 	xor a
@@ -105331,7 +105523,7 @@ INCBIN "baserom.gbc",$76469,$76474 - $76469
 	ld hl, $d865
 	bit 6, [hl]
 	set 6, [hl]
-	jr z, .asm_76474
+	jr z, asm_76474
 .asm_764b4
 	ld a, $2
 	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
@@ -105346,7 +105538,10 @@ INCBIN "baserom.gbc",$76469,$76474 - $76469
 	ld [$da39], a
 	ret
 
+Unknown_764d1: ; 764d1 (1d:64d1)
 INCBIN "baserom.gbc",$764d1,$764da - $764d1
+
+Func_764da: ; 764da (1d:64da)
 	ld a, [$cd38]
 	and a
 	ret nz
@@ -105356,6 +105551,8 @@ INCBIN "baserom.gbc",$764d1,$764da - $764d1
 	ld [$d64f], a
 	ld [$da39], a
 	ret
+
+Func_764ed: ; 764ed (1d:64ed)
 	call Func_3275
 	ld a, [W_ISINBATTLE] ; $d057
 	cp $ff

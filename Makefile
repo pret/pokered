@@ -25,6 +25,7 @@ pokered.gbc: pokered.o
 pokeblue.gbc: pokeblue.o
 	rgblink -o $@ $*.o
 	rgbfix -jsv -k 01 -l 0x33 -m 0x13 -p 0 -r 03 -t "POKEMON BLUE" $@
+	cmp blue.gbc $@
 
 clean:
 	rm -f main.tx pokered.o pokered.gbc pokeblue.o pokeblue.gbc redrle ${TEXTFILES}

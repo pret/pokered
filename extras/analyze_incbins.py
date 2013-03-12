@@ -337,6 +337,12 @@ def get_labels_between(start_line_id, end_line_id, bank_id):
                         errors += "found \" to \" in partial on line " + str(line_id) + ", but don't know what to do (debug14)" + "\n"
                         errors += "line is: " + line + "\n"
                         continue
+                elif partial[4] == " " and partial[5] == "(":
+                    temp = partial[0:4]
+                    address = int(temp, 16)
+                elif partial[5] == " " and partial[6] == "(":
+                    temp = partial[0:5]
+                    address = int(temp, 16)
                 elif len(partial[4]) == 4 or partial[4] == " ": #then it's probably a local pointer
                     temp = partial[0:4]
                     local_pointer = "$" + temp
