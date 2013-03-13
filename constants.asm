@@ -200,6 +200,8 @@ W_PLAYERMOVETYPE     EQU $CFD5
 W_PLAYERMOVEACCURACY EQU $CFD6
 W_PLAYERMOVEMAXPP    EQU $CFD7
 
+W_ENEMYMONNAME  EQU $CFDA
+
 W_ENEMYMONCURHP EQU $CFE6 ; active opponent's hp (16 bits)
 W_ENEMYMONNUMBER EQU $CFE8 ; active opponent's position in team (0 to 5)
 W_ENEMYMONSTATUS EQU $CFE9 ; active opponent's status condition
@@ -330,10 +332,48 @@ W_FBMODE EQU $D09E ; controls how the frame blocks are put together to form fram
 ; 03: delay, but don't clean OAM buffer
 ; 04: delay, without cleaning OAM buffer, and do not advance [W_FBDESTADDR], so that the next frame block will overwrite this one
 
-W_DAMAGE EQU $D0D7
+; sprite data is written column by column, each byte contains 8 columns (one for ech bit)
+; for 2bpp sprites, pairs of two consecutive bytes (i.e. pairs of consecutive rows of sprite data)
+; contain the upper and lower bit of each of the 8 pixels, respectively
+SPRITEBUFFERSIZE   EQU $188 ; 7 * 7 (tiles) * 8 (bytes per tile)
+S_SPRITEBUFFER0    EQU $A000 + 0 * SPRITEBUFFERSIZE
+S_SPRITEBUFFER1    EQU $A000 + 1 * SPRITEBUFFERSIZE
+S_SPRITEBUFFER2    EQU $A000 + 2 * SPRITEBUFFERSIZE
+
+W_SPRITECURPOSX         EQU $D0A1
+W_SPRITECURPOSY         EQU $D0A2
+W_SPRITEWITDH           EQU $D0A3
+W_SPRITEHEIGHT          EQU $D0A4
+W_SPRITEINPUTCURBYTE    EQU $D0A5 ; current input byte
+W_SPRITEINPUTBITCOUNTER EQU $D0A6 ; bit offset of last read input bit
+
+; determines where in the output byte the two bits are placed. Each byte contains four columns (2bpp data)
+; 3 -> XX000000   1st column
+; 2 -> 00XX0000   2nd column
+; 1 -> 0000XX00   3rd column
+; 0 -> 000000XX   4th column
+W_SPRITEOUTPUTBITOFFSET EQU $D0A7
+
+; bit 0 determines used buffer (0 -> $a188, 1 -> $a310)
+; bit 1 loading last sprite chunk? (there are at most 2 chunks per load operation)
+W_SPRITELOADFLAGS       EQU $D0A8
+W_SPRITEUNPACKMODE      EQU $D0A9
+W_SPRITEFLIPPED         EQU $D0AA
+
+W_SPRITEINPUTPTR        EQU $D0AB ; pointer to next input byte
+W_SPRITEOUTPUTPTR       EQU $D0AD ; pointer to current output byte
+W_SPRITEOUTPUTPTRCACHED EQU $D0AF ; used to revert pointer for different bit offsets
+W_SPRITEDECODETABLE0PTR EQU $D0B1 ; pointer to differential decoding table (assuming initial value 0)
+W_SPRITEDECODETABLE1PTR EQU $D0B3 ; pointer to differential decoding table (assuming initial value 1)
+
+H_SPRITEWIDTH           EQU $FF8B ; in bytes
+H_SPRITEINTERLACECOUNTER EQU $FF8B
+H_SPRITEHEIGHT          EQU $FF8C ; in bytes
+H_SPRITEOFFSET          EQU $FF8D
 
 ; List type
 ; used in $D0B6
+W_LISTTYPE    EQU $D0B6
 MONSTER_NAME  EQU 1
 MOVE_NAME     EQU 2
 ; ???_NAME    EQU 3
@@ -341,6 +381,36 @@ ITEM_NAME     EQU 4
 PLAYEROT_NAME EQU 5
 ENEMYOT_NAME  EQU 6
 TRAINER_NAME  EQU 7
+
+W_MONHEADER       EQU $d0b8
+W_MONHDEXNUM      EQU $d0b8
+W_MONHBASESTATS   EQU $d0b9
+;W_MONHBASEHP      EQU $d0b9
+;W_MONHBASEATTACK  EQU $d0ba
+;W_MONHBASEDEFENSE EQU $d0bb
+W_MONHBASESPEED   EQU $d0bc
+;W_MONHBASESPECIAL EQU $d0bd
+W_MONHTYPES       EQU $d0be
+W_MONHTYPE1       EQU $d0be
+W_MONHTYPE2       EQU $d0bf
+W_MONHCATCHRATE   EQU $d0c0
+;W_MONHBASEXP      EQU $d0c1
+W_MONHSPRITEDIM   EQU $d0c2
+W_MONHFRONTSPRITE EQU $d0c3
+W_MONHBACKSPRITE  EQU $d0c5
+W_MONHMOVES       EQU $d0c7
+;W_MONHMOVE1       EQU $d0c7
+;W_MONHMOVE2       EQU $d0c8
+;W_MONHMOVE3       EQU $d0c9
+;W_MONHMOVE4       EQU $d0ca
+W_MONHGROWTHRATE  EQU $d0cb
+W_MONHLEARNSET    EQU $d0cc ; bit field, 7 bytes
+;W_MONHPADDING     EQU $d0d7
+
+
+
+W_DAMAGE EQU $D0D7
+
 
 W_CURENEMYLVL EQU $D127
 
@@ -833,6 +903,8 @@ H_NUMTOPRINT        EQU $FF96 ; 3 bytes, big endian order
 H_POWEROFTEN        EQU $FF99 ; 3 bytes, big endian order
 H_SAVEDNUMTOPRINT   EQU $FF9C ; 3 bytes, big endian order (to back out of a subtraction)
 
+H_LOADEDROMBANK     EQU $FFB8
+
 ; is automatic background transfer during V-blank enabled?
 ; if nonzero, yes
 ; if zero, no
@@ -1078,6 +1150,7 @@ SQUIRTLE   EQU $B1
 CHARMELEON EQU $B2
 WARTORTLE  EQU $B3
 CHARIZARD  EQU $B4
+MON_GHOST  EQU $B8
 ODDISH     EQU $B9
 GLOOM      EQU $BA
 VILEPLUME  EQU $BB

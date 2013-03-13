@@ -24,7 +24,7 @@ SECTION "vblank",HOME[$40]
 SECTION "lcdc",HOME[$48]
 	db $FF
 SECTION "timer",HOME[$50]
-	jp $2306
+	jp TimerHandler
 SECTION "serial",HOME[$58]
 	jp $2125
 SECTION "joypad",HOME[$60]
@@ -81,14 +81,14 @@ ResetLCD_OAM: ; $008d
 FarCopyData: ; 009D
 ; copy bc bytes of data from a:hl to de
 	ld [$CEE9],a ; save future bank # for later
-	ld a,[$FFB8] ; get current bank #
+	ld a,[H_LOADEDROMBANK] ; get current bank #
 	push af
 	ld a,[$CEE9] ; get future bank #, switch
-	ld [$FFB8],a
+	ld [H_LOADEDROMBANK],a
 	ld [$2000],a
 	call CopyData
 	pop af       ; okay, done, time to switch back
-	ld [$FFB8],a
+	ld [H_LOADEDROMBANK],a
 	ld [$2000],a
 	ret
 CopyData: ; 00B5
@@ -170,14 +170,14 @@ ReadJoypadRegister: ; 15F
 ; [$ffb3] = keys pressed since last time
 ; [$ffb4] = currently pressed keys
 GetJoypadState: ; 19A
-	ld a, [$ffb8]
+	ld a, [H_LOADEDROMBANK]
 	push af
 	ld a,$3
-	ld [$ffb8],a
+	ld [H_LOADEDROMBANK],a
 	ld [$2000],a
 	call $4000
 	pop af
-	ld [$ff00+$b8],a
+	ld [H_LOADEDROMBANK],a
 	ld [$2000],a
 	ret
 
@@ -1205,7 +1205,7 @@ HandleBlackOut: ; 931
 	ld hl,$d72e
 	res 5,[hl]
 	ld a,$01
-	ld [$ffb8],a
+	ld [H_LOADEDROMBANK],a
 	ld [$2000],a
 	call $40b0
 	call $62ce
@@ -1236,7 +1236,7 @@ HandleFlyOrTeleportAway: ; 965
 	res 5,[hl]
 	call DoFlyOrTeleportAwayGraphics
 	ld a,$01
-	ld [$ffb8],a
+	ld [H_LOADEDROMBANK],a
 	ld [$2000],a
 	call $62ce
 	jp $5d5f
@@ -1805,10 +1805,10 @@ db $FF;
 
 ; this builds a tile map from the tile block map based on the current X/Y coordinates of the player's character
 LoadCurrentMapView: ; CAA
-	ld a,[$ffb8]
+	ld a,[H_LOADEDROMBANK]
 	push af
 	ld a,[$d52b] ; tile data ROM bank
-	ld [$ffb8],a
+	ld [H_LOADEDROMBANK],a
 	ld [$2000],a ; switch to ROM bank that contains tile data
 	ld a,[$d35f] ; address of upper left corner of current map view
 	ld e,a
@@ -1890,7 +1890,7 @@ LoadCurrentMapView: ; CAA
 	dec b
 	jr nz,.rowLoop2
 	pop af
-	ld [$ffb8],a
+	ld [H_LOADEDROMBANK],a
 	ld [$2000],a ; restore previous ROM bank
 	ret
 
@@ -2738,10 +2738,10 @@ LoadMapHeader: ; 107C
 	ld a,[W_CURMAP]
 	ld c,a
 	ld b,$00
-	ld a,[$ffb8]
+	ld a,[H_LOADEDROMBANK]
 	push af
 	ld a,$03
-	ld [$ffb8],a
+	ld [H_LOADEDROMBANK],a
 	ld [$2000],a
 	ld hl,$404d
 	add hl,bc
@@ -2751,7 +2751,7 @@ LoadMapHeader: ; 107C
 	ld a,[hl]
 	ld [$d35c],a ; music 2
 	pop af
-	ld [$ffb8],a
+	ld [H_LOADEDROMBANK],a
 	ld [$2000],a
 	ret
 
@@ -2769,7 +2769,7 @@ CopyMapConnectionHeader: ; 1238
 
 ; function to load map data
 LoadMapData: ; 1241
-	ld a,[$ffb8]
+	ld a,[H_LOADEDROMBANK]
 	push af
 	call DisableLCD
 	ld a,$98
@@ -2826,7 +2826,7 @@ LoadMapData: ; 1241
 	call $2312 ; music related
 .restoreRomBank
 	pop af
-	ld [$ffb8],a
+	ld [H_LOADEDROMBANK],a
 	ld [$2000],a
 	ret
 
@@ -2845,7 +2845,7 @@ SwitchToMapRomBank: ; 12BC
 	ld [$ffe8],a ; save map ROM bank
 	call BankswitchBack
 	ld a,[$ffe8]
-	ld [$ffb8],a
+	ld [H_LOADEDROMBANK],a
 	ld [$2000],a ; switch to map ROM bank
 	pop bc
 	pop hl
@@ -2907,10 +2907,10 @@ CheckForUserInterruption: ; 12F8
 ; a = ID of destination warp within destination map
 LoadDestinationWarpPosition: ; 1313
 	ld b,a
-	ld a,[$ffb8]
+	ld a,[H_LOADEDROMBANK]
 	push af
 	ld a,[$cf12]
-	ld [$ffb8],a
+	ld [H_LOADEDROMBANK],a
 	ld [$2000],a
 	ld a,b
 	add a
@@ -2922,7 +2922,7 @@ LoadDestinationWarpPosition: ; 1313
 	ld de,$d35f
 	call CopyData
 	pop af
-	ld [$ffb8],a
+	ld [H_LOADEDROMBANK],a
 	ld [$2000],a
 	ret
 
@@ -3001,12 +3001,21 @@ LoadMonData: ; 1372
 	ld b,BANK(LoadMonData_)
 	jp Bankswitch
 
-INCBIN "baserom.gbc",$137a,$1384 - $137a
+; no known jump sources
+; writes c to $d0dc+b
+Func_137a: ; 137a (0:137a)
+	ld hl, $d0dc
+	ld e, b
+	ld d, $0
+	add hl, de
+	ld a, c
+	ld [hl], a
+	ret
 
 ; known jump sources: 617a (1:617a), 12a6e (4:6a6e), 403b0 (10:43b0), 415c0 (10:55c0), 7bebf (1e:7ebf)
 Func_1384: ; 1384 (0:1384)
 	ld a, $1
-	ld [$d0aa], a
+	ld [W_SPRITEFLIPPED], a
 
 ; known jump sources: 4530 (1:4530), 702a3 (1c:42a3), 740ec (1d:40ec), 76643 (1d:6643), 797ab (1e:57ab)
 Func_1389: ; 1389 (0:1389)
@@ -3033,20 +3042,20 @@ Func_1389: ; 1389 (0:1389)
 .asm_13ad
 	push hl
 	ld de, $9000
-	call Func_1665
+	call LoadMonFrontSprite
 	pop hl
-	ld a, [$FF00+$b8]
+	ld a, [H_LOADEDROMBANK]
 	push af
 	ld a, $f
-	ld [$FF00+$b8], a
+	ld [H_LOADEDROMBANK], a
 	ld [$2000], a
 	xor a
 	ld [$FF00+$e1], a
 	call asm_3f0d0
 	xor a
-	ld [$d0aa], a
+	ld [W_SPRITEFLIPPED], a
 	pop af
-	ld [$FF00+$b8], a
+	ld [H_LOADEDROMBANK], a
 	ld [$2000], a
 	ret
 ; 13d0 (0:13d0)
@@ -3239,15 +3248,15 @@ PrintStatusCondition: ; 14E1
 	and a
 	ret
 PrintStatusConditionNotFainted ; 14f6
-	ld a,[$ffb8]
+	ld a,[H_LOADEDROMBANK]
 	push af
 	ld a,BANK(Unknown_747de)
-	ld [$ffb8],a
+	ld [H_LOADEDROMBANK],a
 	ld [$2000],a
 	call Unknown_747de ; print status condition
 	pop bc
 	ld a,b
-	ld [$ffb8],a
+	ld [H_LOADEDROMBANK],a
 	ld [$2000],a
 	ret
 
@@ -3292,14 +3301,14 @@ Unknown152E: ; 152E
 	ld a,[hl]
 	ret
 
-; copies the base stat data of a pokemon to $D0B8
+; copies the base stat data of a pokemon to $D0B8 (W_MONHEADER)
 ; INPUT:
 ; [$D0B5] = pokemon ID
-GetBaseStats: ; 1537
-	ld a,[$ffb8]
+GetMonHeader: ; 1537
+	ld a,[H_LOADEDROMBANK]
 	push af
 	ld a,BANK(BulbasaurBaseStats)
-	ld [$ffb8],a
+	ld [H_LOADEDROMBANK],a
 	ld [$2000],a
 	push bc
 	push de
@@ -3328,21 +3337,21 @@ GetBaseStats: ; 1537
 	ld bc,28
 	ld hl,BulbasaurBaseStats
 	call AddNTimes
-	ld de,$d0b8
+	ld de,W_MONHEADER
 	ld bc,28
 	call CopyData
 	jr .done
 .specialID
-	ld hl,$d0c2
-	ld [hl],b
+	ld hl,W_MONHSPRITEDIM
+	ld [hl],b ; write sprite dimensions
 	inc hl
-	ld [hl],e
+	ld [hl],e ; write front sprite pointer
 	inc hl
 	ld [hl],d
 	jr .done
 .mew
 	ld hl,MewBaseStats
-	ld de,$d0b8
+	ld de,W_MONHEADER
 	ld bc,28
 	ld a,BANK(MewBaseStats)
 	call FarCopyData
@@ -3355,7 +3364,7 @@ GetBaseStats: ; 1537
 	pop de
 	pop bc
 	pop af
-	ld [$ffb8],a
+	ld [H_LOADEDROMBANK],a
 	ld [$2000],a
 	ret
 
@@ -3456,17 +3465,16 @@ PrintBCDDigit: ; 1604
 	inc hl ; if right-aligned, "print" a space by advancing the pointer
 	ret
 
-;XXX what does this do
-;XXX what points to this
-Unknown_1627: ; 0x1627
-	ld bc,$D0B8
+; uncompresses the front or back sprite of the specified mon
+; assumes the corresponding mon header is already loaded
+; hl contains offset to sprite pointer ($b for front or $d for back)
+UncompressMonSprite: ; 0x1627
+	ld bc,W_MONHEADER
 	add hl,bc
 	ld a,[hli]
-	ld [$D0AB],a
+	ld [W_SPRITEINPUTPTR],a    ; fetch sprite input pointer
 	ld a,[hl]
-	ld [$D0AC],a
-
-Unknown_1633: ; 0x1633
+	ld [W_SPRITEINPUTPTR+1],a
 ; define (by index number) the bank that a pokemon's image is in
 ; index = Mew, bank 1
 ; index = Kabutops fossil, bank $B
@@ -3502,151 +3510,163 @@ Unknown_1633: ; 0x1633
 	jr c,.GotBank
 	ld a,$0D
 .GotBank
-	jp $24FD
+	jp UncompressSpriteData
 
 ; known jump sources: 13b1 (0:13b1), 3ca4f (f:4a4f), 3d17d (f:517d), 3efce (f:6fce), 3efda (f:6fda), 5dbfd (17:5bfd)
-Func_1665: ; 1665 (0:1665)
+; de: destination location
+LoadMonFrontSprite: ; 1665 (0:1665)
 	push de
-	ld hl, $b
-	call Unknown_1627
-	ld hl, $d0c2
+	ld hl, W_MONHFRONTSPRITE - W_MONHEADER
+	call UncompressMonSprite
+	ld hl, W_MONHSPRITEDIM
 	ld a, [hli]
 	ld c, a
 	pop de
+	; fall through
 
 ; known jump sources: 3f066 (f:7066)
-Func_1672: ; 1672 (0:1672)
+; postprocesses uncompressed sprite chunks to a 2bpp sprite and loads it into video ram
+; calculates alignment parameters to place both sprite chunks in the center of the 7*7 tile sprite buffers
+; de: destination location
+; a,c:  sprite dimensions (in tiles of 8x8 each)
+LoadUncompressedSpriteData: ; 1672 (0:1672)
 	push de
 	and $f
-	ld [H_DOWNARROWBLINKCNT1], a ; $FF00+$8b
+	ld [H_SPRITEWIDTH], a ; each byte contains 8 pixels (in 1bpp), so tiles=bytes for width
 	ld b, a
 	ld a, $7
-	sub b
-	inc a
-	srl a
+	sub b      ; 7-w
+	inc a      ; 8-w
+	srl a      ; (8-w)/2     ; horizontal center (in tiles, rounded up)
 	ld b, a
 	add a
 	add a
 	add a
-	sub b
-	ld [$FF00+$8d], a
+	sub b      ; 7*((8-w)/2) ; skip for horizontal center (in tiles)
+	ld [H_SPRITEOFFSET], a
 	ld a, c
 	swap a
 	and $f
 	ld b, a
 	add a
 	add a
-	add a
-	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	add a     ; 8*tiles is height in bytes
+	ld [H_SPRITEHEIGHT], a ; $FF00+$8c
 	ld a, $7
-	sub b
+	sub b      ; 7-h         ; skip for vertical center (in tiles, relative to current column)
 	ld b, a
-	ld a, [$FF00+$8d]
-	add b
+	ld a, [H_SPRITEOFFSET]
+	add b     ; 7*((8-w)/2) + 7-h ; combined overall offset (in tiles)
 	add a
 	add a
-	add a
-	ld [$FF00+$8d], a
+	add a     ; 8*(7*((8-w)/2) + 7-h) ; combined overall offset (in bytes)
+	ld [H_SPRITEOFFSET], a
 	xor a
 	ld [$4000], a
-	ld hl, $a000
-	call Func_16df
-	ld de, $a188
-	ld hl, $a000
-	call Func_16c2
-	ld hl, $a188
-	call Func_16df
-	ld de, $a310
-	ld hl, $a188
-	call Func_16c2
+	ld hl, S_SPRITEBUFFER0
+	call ZeroSpriteBuffer   ; zero buffer 0
+	ld de, S_SPRITEBUFFER1
+	ld hl, S_SPRITEBUFFER0
+	call AlignSpriteDataCentered    ; copy and align buffer 1 to 0 (containing the MSB of the 2bpp sprite)
+	ld hl, S_SPRITEBUFFER1
+	call ZeroSpriteBuffer   ; zero buffer 1
+	ld de, S_SPRITEBUFFER2
+	ld hl, S_SPRITEBUFFER1
+	call AlignSpriteDataCentered    ; copy and align buffer 2 to 1 (containing the LSB of the 2bpp sprite)
 	pop de
-	jp Func_16ea
+	jp InterlaceMergeSpriteBuffers
 
 ; known jump sources: 16ac (0:16ac), 16bb (0:16bb)
-Func_16c2: ; 16c2 (0:16c2)
-	ld a, [$FF00+$8d]
+; copies and aligns the sprite data properly inside the sprite buffer
+; sprite buffers are 7*7 tiles in size, the loaded sprite is centered within this area
+AlignSpriteDataCentered: ; 16c2 (0:16c2)
+	ld a, [H_SPRITEOFFSET]
 	ld b, $0
 	ld c, a
 	add hl, bc
-	ld a, [H_DOWNARROWBLINKCNT1] ; $FF00+$8b
-.asm_16ca
+	ld a, [H_SPRITEWIDTH] ; $FF00+$8b
+.columnLoop
 	push af
 	push hl
-	ld a, [H_DOWNARROWBLINKCNT2] ; $FF00+$8c
+	ld a, [H_SPRITEHEIGHT] ; $FF00+$8c
 	ld c, a
-.asm_16cf
+.columnInnerLoop
 	ld a, [de]
 	inc de
 	ld [hli], a
 	dec c
-	jr nz, .asm_16cf
+	jr nz, .columnInnerLoop
 	pop hl
-	ld bc, $38
-	add hl, bc
+	ld bc, 7*8    ; 7 tiles
+	add hl, bc    ; advance one full column
 	pop af
 	dec a
-	jr nz, .asm_16ca
+	jr nz, .columnLoop
 	ret
 
-; known jump sources: 16a3 (0:16a3), 16b2 (0:16b2)
-Func_16df: ; 16df (0:16df)
-	ld bc, $188
-.asm_16e2
+; fills the sprite buffer (pointed to in hl) with zeros
+ZeroSpriteBuffer: ; 16df (0:16df)
+	ld bc, SPRITEBUFFERSIZE
+.nextByteLoop
 	xor a
 	ld [hli], a
 	dec bc
 	ld a, b
 	or c
-	jr nz, .asm_16e2
+	jr nz, .nextByteLoop
 	ret
 
 ; known jump sources: 16bf (0:16bf), 62b8 (1:62b8), 3ecd8 (f:6cd8), 3f121 (f:7121), 70355 (1c:4355), 70368 (1c:4368)
-Func_16ea: ; 16ea (0:16ea)
+; combines the (7*7 tiles, 1bpp) sprite chunks in buffer 0 and 1 into a 2bpp sprite located in buffer 1 through 2
+; in the resulting sprite, the rows of the two source sprites are interlaced
+; de: output address
+InterlaceMergeSpriteBuffers: ; 16ea (0:16ea)
 	xor a
 	ld [$4000], a
 	push de
-	ld hl, $a497
-	ld de, $a30f
-	ld bc, $a187
-	ld a, $c4
-	ld [H_DOWNARROWBLINKCNT1], a ; $FF00+$8b
-.asm_16fc
+	ld hl, S_SPRITEBUFFER2 + (SPRITEBUFFERSIZE - 1) ; destination: end of buffer 2
+	ld de, S_SPRITEBUFFER1 + (SPRITEBUFFERSIZE - 1) ; source 2: end of buffer 1
+	ld bc, S_SPRITEBUFFER0 + (SPRITEBUFFERSIZE - 1) ; source 1: end of buffer 0
+	ld a, SPRITEBUFFERSIZE/2 ; $c4
+	ld [H_SPRITEINTERLACECOUNTER], a ; $FF00+$8b
+.interlaceLoop
 	ld a, [de]
 	dec de
-	ld [hld], a
+	ld [hld], a   ; write byte of source 2
 	ld a, [bc]
 	dec bc
-	ld [hld], a
+	ld [hld], a   ; write byte of source 1
 	ld a, [de]
 	dec de
-	ld [hld], a
+	ld [hld], a   ; write byte of source 2
 	ld a, [bc]
 	dec bc
-	ld [hld], a
-	ld a, [H_DOWNARROWBLINKCNT1] ; $FF00+$8b
+	ld [hld], a   ; write byte of source 1
+	ld a, [H_SPRITEINTERLACECOUNTER] ; $FF00+$8b
 	dec a
-	ld [H_DOWNARROWBLINKCNT1], a ; $FF00+$8b
-	jr nz, .asm_16fc
-	ld a, [$d0aa]
+	ld [H_SPRITEINTERLACECOUNTER], a ; $FF00+$8b
+	jr nz, .interlaceLoop
+	ld a, [W_SPRITEFLIPPED]
 	and a
-	jr z, .asm_1723
-	ld bc, $310
-	ld hl, $a188
-.asm_171b
-	swap [hl]
+	jr z, .notFlipped
+	ld bc, 2*SPRITEBUFFERSIZE
+	ld hl, S_SPRITEBUFFER1
+.swapLoop
+	swap [hl]    ; if flipped swap nybbles in all bytes
 	inc hl
 	dec bc
 	ld a, b
 	or c
-	jr nz, .asm_171b
-.asm_1723
+	jr nz, .swapLoop
+.notFlipped
 	pop hl
-	ld de, $a188
-	ld c, $31
-	ld a, [$FF00+$b8]
+	ld de, S_SPRITEBUFFER1
+	ld c, (2*SPRITEBUFFERSIZE)/16 ; $31, number of 16 byte chunks to be copied
+	ld a, [H_LOADEDROMBANK]
 	ld b, a
 	jp CopyVideoData
 ; 172f (0:172f)
+
 Tset0B_Coll: ; 0x172F
 	INCBIN "gfx/tilesets/0b.tilecoll"
 Tset00_Coll: ; 0x1735
@@ -3692,14 +3712,14 @@ Tset17_Coll: ; 0x17f0
 ; copy bc bytes of data from a:hl to de
 FarCopyData2: ; 17F7
 	ld [$ff8b],a
-	ld a,[$ffb8]
+	ld a,[H_LOADEDROMBANK]
 	push af
 	ld a,[$ff8b]
-	ld [$ffb8],a
+	ld [H_LOADEDROMBANK],a
 	ld [$2000],a
 	call CopyData
 	pop af
-	ld [$ffb8],a
+	ld [H_LOADEDROMBANK],a
 	ld [$2000],a
 	ret
 
@@ -3707,10 +3727,10 @@ FarCopyData2: ; 17F7
 ; copy bc bytes of data from a:de to hl
 FarCopyData3: ; 180D
 	ld [$ff8b],a
-	ld a,[$ffb8]
+	ld a,[H_LOADEDROMBANK]
 	push af
 	ld a,[$ff8b]
-	ld [$ffb8],a
+	ld [H_LOADEDROMBANK],a
 	ld [$2000],a
 	push hl
 	push de
@@ -3722,7 +3742,7 @@ FarCopyData3: ; 180D
 	pop de
 	pop hl
 	pop af
-	ld [$ffb8],a
+	ld [H_LOADEDROMBANK],a
 	ld [$2000],a
 	ret
 
@@ -3730,10 +3750,10 @@ FarCopyData3: ; 180D
 ; copy bc source bytes from a:hl to de
 FarCopyDataDouble: ; 182B
 	ld [$ff8b],a
-	ld a,[$ffb8]
+	ld a,[H_LOADEDROMBANK]
 	push af
 	ld a,[$ff8b]
-	ld [$ffb8],a
+	ld [H_LOADEDROMBANK],a
 	ld [$2000],a
 .loop
 	ld a,[hli]
@@ -3746,7 +3766,7 @@ FarCopyDataDouble: ; 182B
 	or b
 	jr nz,.loop
 	pop af
-	ld [$ffb8],a
+	ld [H_LOADEDROMBANK],a
 	ld [$2000],a
 	ret
 
@@ -3757,10 +3777,10 @@ CopyVideoData: ; 1848
 	push af
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED],a ; disable auto-transfer while copying
-	ld a,[$ffb8]
+	ld a,[H_LOADEDROMBANK]
 	ld [$ff8b],a
 	ld a,b
-	ld [$ffb8],a
+	ld [H_LOADEDROMBANK],a
 	ld [$2000],a
 	ld a,e
 	ld [H_VBCOPYSRC],a
@@ -3778,7 +3798,7 @@ CopyVideoData: ; 1848
 	ld [H_VBCOPYSIZE],a
 	call DelayFrame ; wait for V-blank handler to perform the copy
 	ld a,[$ff8b]
-	ld [$ffb8],a
+	ld [H_LOADEDROMBANK],a
 	ld [$2000],a
 	pop af
 	ld [H_AUTOBGTRANSFERENABLED],a ; restore original auto-transfer enabled flag
@@ -3800,10 +3820,10 @@ CopyVideoDataDouble: ; 1886
 	push af
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED],a ; disable auto-transfer while copying
-	ld a,[$ffb8]
+	ld a,[H_LOADEDROMBANK]
 	ld [$ff8b],a
 	ld a,b
-	ld [$ffb8],a
+	ld [H_LOADEDROMBANK],a
 	ld [$2000],a
 	ld a,e
 	ld [H_VBCOPYDOUBLESRC],a
@@ -3821,7 +3841,7 @@ CopyVideoDataDouble: ; 1886
 	ld [H_VBCOPYDOUBLESIZE],a
 	call DelayFrame ; wait for V-blank handler to perform the copy
 	ld a,[$ff8b]
-	ld [$ffb8],a
+	ld [H_LOADEDROMBANK],a
 	ld [$2000],a
 	pop af
 	ld [H_AUTOBGTRANSFERENABLED],a ; restore original auto-transfer enabled flag
@@ -4122,7 +4142,7 @@ MonsterNameCharsCommon:
 
 	ld h,b
 	ld l,c
-	ld de,$CFDA ; enemy active monster name
+	ld de,W_ENEMYMONNAME ; enemy active monster name
 
 FinishDTE:
 	call PlaceString
@@ -4587,14 +4607,14 @@ TextCommand0D: ; 1C9A
 ; BB = bank
 TextCommand17: ; 1CA3
 	pop hl
-	ld a,[$ffb8]
+	ld a,[H_LOADEDROMBANK]
 	push af
 	ld a,[hli]
 	ld e,a
 	ld a,[hli]
 	ld d,a
 	ld a,[hli]
-	ld [$ffb8],a
+	ld [H_LOADEDROMBANK],a
 	ld [$2000],a
 	push hl
 	ld l,e
@@ -4602,7 +4622,7 @@ TextCommand17: ; 1CA3
 	call TextCommandProcessor
 	pop hl
 	pop af
-	ld [$ffb8],a
+	ld [H_LOADEDROMBANK],a
 	ld [$2000],a
 	jp NextTextCommand
 
@@ -5111,13 +5131,13 @@ UpdateMovingBgTiles: ; 1EBE
 	ret
 
 FlowerTilePattern1: ; 1F19
-INCBIN "baserom.gbc",$1f19,16
+INCBIN "gfx/tilesets/flower/flower1.2bpp"
 
 FlowerTilePattern2: ; 1F29
-INCBIN "baserom.gbc",$1f29,16
+INCBIN "gfx/tilesets/flower/flower2.2bpp"
 
 FlowerTilePattern3: ; 1F39
-INCBIN "baserom.gbc",$1f39,16
+INCBIN "gfx/tilesets/flower/flower3.2bpp"
 
 ; known jump sources: c047 (3:4047)
 Func_1f49: ; 1f49 (0:1f49)
@@ -5172,7 +5192,7 @@ InitGame: ; 1F54
 	call $36e0 ; zero HRAM
 	call CleanLCD_OAM ; this is unnecessary since it was already cleared above
 	ld a,$01
-	ld [$ffb8],a
+	ld [H_LOADEDROMBANK],a
 	ld [$2000],a
 	call $4bed ; copy DMA code to HRAM
 	xor a
@@ -5240,12 +5260,13 @@ Func_200e: ; 200e (0:200e)
 	dec a
 	jp Func_23b1
 ; 2024 (0:2024)
+
 VBlankHandler: ; 2024
 	push af
 	push bc
 	push de
 	push hl
-	ld a,[$ffb8] ; current ROM bank
+	ld a,[H_LOADEDROMBANK] ; current ROM bank
 	ld [$d122],a
 	ld a,[$ffae]
 	ld [rSCX],a
@@ -5265,7 +5286,7 @@ VBlankHandler: ; 2024
 	call UpdateMovingBgTiles
 	call $ff80 ; OAM DMA
 	ld a,$01
-	ld [$ffb8],a
+	ld [H_LOADEDROMBANK],a
 	ld [$2000],a
 	call $4b0f ; update OAM buffer with current sprite data
 	call GenRandom
@@ -5283,7 +5304,7 @@ VBlankHandler: ; 2024
 .handleMusic
 	call $28cb
 	ld a,[$c0ef] ; music ROM bank
-	ld [$ffb8],a
+	ld [H_LOADEDROMBANK],a
 	ld [$2000],a
 	cp a,$02
 	jr nz,.checkIfBank08
@@ -5307,7 +5328,7 @@ VBlankHandler: ; 2024
 	and a
 	call z,ReadJoypadRegister
 	ld a,[$d122]
-	ld [$ffb8],a
+	ld [H_LOADEDROMBANK],a
 	ld [$2000],a
 	pop hl
 	pop de
@@ -5652,7 +5673,14 @@ Func_2247: ; 2247 (0:2247)
 	jr nz, .asm_2253
 	ret
 
-INCBIN "baserom.gbc",$226e,$227f - $226e
+; no known jump sources (dead code?)
+Func_226e: ; 226e (0:226e)
+	call Func_3719
+	ld hl, $4c05
+	ld b, $1
+	call Bankswitch
+	call Func_227f
+	jp Func_3725
 
 ; known jump sources: 53b5 (1:53b5), 7263 (1:7263)
 Func_227f: ; 227f (0:227f)
@@ -5740,7 +5768,9 @@ Func_22fa: ; 22fa (0:22fa)
 	ld [$FF00+$2], a
 	ret
 
-INCBIN "baserom.gbc",$2306,$2307 - $2306
+; timer interrupt is apparently not invoked anyway
+TimerHandler: ; 0x2306
+	reti
 
 ; known jump sources: 100d (0:100d), 12f5 (0:12f5), d993 (3:5993), d9ae (3:59ae), d9da (3:59da), da22 (3:5a22), e234 (3:6234), 17daa (5:7daa), 19624 (6:5624), 1cbf4 (7:4bf4), 1ce82 (7:4e82), 1cf1b (7:4f1b), 1cfda (7:4fda), 1ebc9 (7:6bc9), 3aef3 (e:6ef3), 51165 (14:5165), 51d35 (14:5d35), 605cf (18:45cf), 614d2 (18:54d2), 61917 (18:5917), 70558 (1c:4558), 7bf61 (1e:7f61), 7d15f (1f:515f)
 Func_2307: ; 2307 (0:2307)
@@ -5889,10 +5919,10 @@ Func_23b1: ; 23b1 (0:23b1)
 .asm_23e3
 	xor a
 	ld [$c0ee], a
-	ld a, [$FF00+$b8]
+	ld a, [H_LOADEDROMBANK]
 	ld [$FF00+$b9], a
 	ld a, [$c0ef]
-	ld [$FF00+$b8], a
+	ld [H_LOADEDROMBANK], a
 	ld [$2000], a
 	cp $2
 	jr nz, .asm_23fd
@@ -5910,7 +5940,7 @@ Func_23b1: ; 23b1 (0:23b1)
 	call $58ea
 .asm_240b
 	ld a, [$FF00+$b9]
-	ld [$FF00+$b8], a
+	ld [H_LOADEDROMBANK], a
 	ld [$2000], a
 	jr .asm_2425
 .asm_2414
@@ -5932,14 +5962,14 @@ Func_2429: ; 2429 (0:2429)
 	ld a, [$cfcb]
 	dec a
 	ret nz
-	ld a, [$FF00+$b8]
+	ld a, [H_LOADEDROMBANK]
 	push af
 	ld a, $1
-	ld [$FF00+$b8], a
+	ld [H_LOADEDROMBANK], a
 	ld [$2000], a
 	call Func_4c34
 	pop af
-	ld [$FF00+$b8], a
+	ld [H_LOADEDROMBANK], a
 	ld [$2000], a
 	ret
 ; 2442 (0:2442)
@@ -6054,475 +6084,537 @@ Predef5CText: ; 0x24f4
 	call Predef
 	jp TextScriptEnd
 
-; known jump sources: 1662 (0:1662), 36f1 (0:36f1)
-Func_24fd: ; 24fd (0:24fd)
+; bankswitches and runs _UncompressSpriteData
+; bank is given in a, sprite input stream is pointed to in W_SPRITEINPUTPTR
+UncompressSpriteData: ; 24fd (0:24fd)
 	ld b, a
-	ld a, [$FF00+$b8]
+	ld a, [H_LOADEDROMBANK]
 	push af
 	ld a, b
-	ld [$FF00+$b8], a
+	ld [H_LOADEDROMBANK], a
 	ld [$2000], a
 	ld a, $a
 	ld [$0], a
 	xor a
 	ld [$4000], a
-	call Func_251a
+	call _UncompressSpriteData
 	pop af
-	ld [$FF00+$b8], a
+	ld [H_LOADEDROMBANK], a
 	ld [$2000], a
 	ret
 
-; known jump sources: 2510 (0:2510)
-Func_251a: ; 251a (0:251a)
-	ld hl, $a188
-	ld c, $10
-	ld b, $3
+; initializes necessary data to load a sprite and runs UncompressSpriteDataLoop
+_UncompressSpriteData: ; 251a (0:251a)
+	ld hl, S_SPRITEBUFFER1
+	ld c, (2*SPRITEBUFFERSIZE) % $100
+	ld b, (2*SPRITEBUFFERSIZE) / $100
 	xor a
-	call FillMemory
+	call FillMemory           ; clear sprite buffer 1 and 2
 	ld a, $1
-	ld [$d0a6], a
+	ld [W_SPRITEINPUTBITCOUNTER], a
 	ld a, $3
-	ld [$d0a7], a
+	ld [W_SPRITEOUTPUTBITOFFSET], a
 	xor a
-	ld [$d0a1], a
-	ld [$d0a2], a
-	ld [$d0a8], a
-	call Func_268b
+	ld [W_SPRITECURPOSX], a
+	ld [W_SPRITECURPOSY], a
+	ld [W_SPRITELOADFLAGS], a ; $d0a8
+	call ReadNextInputByte    ; first byte of input determines sprite width (high nybble) and height (low nybble) in tiles (8x8 pixels)
 	ld b, a
 	and $f
 	add a
 	add a
 	add a
-	ld [$d0a4], a
+	ld [W_SPRITEHEIGHT], a
 	ld a, b
 	swap a
 	and $f
 	add a
 	add a
 	add a
-	ld [$d0a3], a
-	call Func_2670
-	ld [$d0a8], a
+	ld [W_SPRITEWITDH], a
+	call ReadNextInputBit
+	ld [W_SPRITELOADFLAGS], a ; initialite bit1 to 0 and bit0 to the first input bit
+	                          ; this will load two chunks of data to S_SPRITEBUFFER1 and S_SPRITEBUFFER2
+	                          ; bit 0 decides in which one the first chunk is placed
+	; fall through
 
-; known jump sources: 2643 (0:2643)
-Func_2556: ; 2556 (0:2556)
-	ld hl, $a188
-	ld a, [$d0a8]
+; uncompresses a chunk from the sprite input data stream (pointed to at $d0da) into S_SPRITEBUFFER1 or S_SPRITEBUFFER2
+; each chunk is a 1bpp sprite. A 2bpp sprite consist of two chunks which are merged afterwards
+; note that this is an endless loop which is terminated during a call to MoveToNextBufferPosition by manipulating the stack
+UncompressSpriteDataLoop: ; 2556 (0:2556)
+	ld hl, S_SPRITEBUFFER1
+	ld a, [W_SPRITELOADFLAGS]  ; $d0a8
 	bit 0, a
-	jr z, .asm_2563
-	ld hl, $a310
-.asm_2563
-	call Func_2897
-	ld a, [$d0a8]
+	jr z, .useSpriteBuffer1    ; check which buffer to use
+	ld hl, S_SPRITEBUFFER2
+.useSpriteBuffer1
+	call StoreSpriteOutputPointer
+	ld a, [W_SPRITELOADFLAGS]  ; $d0a8
 	bit 1, a
-	jr z, .asm_257a
-	call Func_2670
+	jr z, .startDecompression  ; check if last iteration
+	call ReadNextInputBit      ; if last chunk, read 1-2 bit unpacking mode
 	and a
-	jr z, .asm_2577
-	call Func_2670
-	inc a
-.asm_2577
-	ld [$d0a9], a
-.asm_257a
-	call Func_2670
+	jr z, .unpackingMode0      ; 0   -> mode 0
+	call ReadNextInputBit      ; 1 0 -> mode 1
+	inc a                      ; 1 1 -> mode 2
+.unpackingMode0
+	ld [W_SPRITEUNPACKMODE], a
+.startDecompression
+	call ReadNextInputBit     
 	and a
-	jr z, .asm_2595
-.asm_2580
-	call Func_2670
+	jr z, .readRLEncodedZeros ; if first bit is 0, the input starts with zeroes, otherwise with (non-zero) input
+.readNextInput
+	call ReadNextInputBit
 	ld c, a
-	call Func_2670
+	call ReadNextInputBit
 	sla c
-	or c
+	or c                       ; read next two bits into c
 	and a
-	jr z, .asm_2595
-	call Func_2649
-	call Func_25d8
-	jr .asm_2580
-.asm_2595
-	ld c, $0
-.asm_2597
-	call Func_2670
+	jr z, .readRLEncodedZeros ; 00 -> RLEncoded zeroes following
+	call WriteSpriteBitsToBuffer  ; otherwise write input to output and repeat
+	call MoveToNextBufferPosition
+	jr .readNextInput
+.readRLEncodedZeros
+	ld c, $0                   ; number of zeroes it length encoded, the number
+.countConsecutiveOnesLoop      ; of consecutive ones determines the number of bits the number has
+	call ReadNextInputBit
 	and a
-	jr z, .asm_25a0
+	jr z, .countConsecutiveOnesFinished
 	inc c
-	jr .asm_2597
-.asm_25a0
+	jr .countConsecutiveOnesLoop
+.countConsecutiveOnesFinished
 	ld a, c
 	add a
-	ld hl, $269f
+	ld hl, LengthEncodingOffsetList
 	add l
 	ld l, a
-	jr nc, .asm_25aa
+	jr nc, .noCarry
 	inc h
-.asm_25aa
-	ld a, [hli]
-	ld e, a
-	ld d, [hl]
+.noCarry
+	ld a, [hli]                ; read offset that is added to the number later on
+	ld e, a                    ; adding an offset of 2^length - 1 makes every integer uniquely 
+	ld d, [hl]                 ; representable in the length encoding and saves bits
 	push de
 	inc c
 	ld e, $0
 	ld d, e
-.asm_25b2
-	call Func_2670
+.readNumberOfZerosLoop        ; reads the next c+1 bits of input
+	call ReadNextInputBit
 	or e
 	ld e, a
 	dec c
-	jr z, .asm_25c0
+	jr z, .readNumberOfZerosDone
 	sla e
 	rl d
-	jr .asm_25b2
-.asm_25c0
-	pop hl
+	jr .readNumberOfZerosLoop
+.readNumberOfZerosDone
+	pop hl                     ; add the offset
 	add hl, de
 	ld e, l
 	ld d, h
-.asm_25c4
+.writeZerosLoop
 	ld b, e
-	xor a
-	call Func_2649
+	xor a                      ; write 00 to buffer
+	call WriteSpriteBitsToBuffer
 	ld e, b
-	call Func_25d8
+	call MoveToNextBufferPosition
 	dec de
 	ld a, d
 	and a
-	jr nz, .asm_25d4
+	jr nz, .continueLoop
 	ld a, e
 	and a
-.asm_25d4
-	jr nz, .asm_25c4
-	jr .asm_2580
+.continueLoop
+	jr nz, .writeZerosLoop
+	jr .readNextInput
 
-; known jump sources: 2590 (0:2590), 25ca (0:25ca)
-Func_25d8: ; 25d8 (0:25d8)
-	ld a, [$d0a4]
+; moves output pointer to next position
+; also cancels the calling function if the all output is done (by removing the return pointer from stack)
+; and calls postprocessing functions according to the unpack mode
+MoveToNextBufferPosition: ; 25d8 (0:25d8)
+	ld a, [W_SPRITEHEIGHT]
 	ld b, a
-	ld a, [$d0a2]
+	ld a, [W_SPRITECURPOSY]
 	inc a
 	cp b
-	jr z, .asm_25f6
-	ld [$d0a2], a
-	ld a, [$d0ad]
+	jr z, .curColumnDone
+	ld [W_SPRITECURPOSY], a
+	ld a, [W_SPRITEOUTPUTPTR]
 	inc a
-	ld [$d0ad], a
+	ld [W_SPRITEOUTPUTPTR], a
 	ret nz
-	ld a, [$d0ae]
+	ld a, [W_SPRITEOUTPUTPTR+1]
 	inc a
-	ld [$d0ae], a
+	ld [W_SPRITEOUTPUTPTR+1], a
 	ret
-.asm_25f6
+.curColumnDone
 	xor a
-	ld [$d0a2], a
-	ld a, [$d0a7]
+	ld [W_SPRITECURPOSY], a
+	ld a, [W_SPRITEOUTPUTBITOFFSET]
 	and a
-	jr z, .asm_2610
+	jr z, .bitOffsetsDone
 	dec a
-	ld [$d0a7], a
-	ld hl, $d0af
+	ld [W_SPRITEOUTPUTBITOFFSET], a
+	ld hl, W_SPRITEOUTPUTPTRCACHED
 	ld a, [hli]
-	ld [$d0ad], a
+	ld [W_SPRITEOUTPUTPTR], a
 	ld a, [hl]
-	ld [$d0ae], a
+	ld [W_SPRITEOUTPUTPTR+1], a
 	ret
-.asm_2610
+.bitOffsetsDone
 	ld a, $3
-	ld [$d0a7], a
-	ld a, [$d0a1]
+	ld [W_SPRITEOUTPUTBITOFFSET], a
+	ld a, [W_SPRITECURPOSX]
 	add $8
-	ld [$d0a1], a
+	ld [W_SPRITECURPOSX], a
 	ld b, a
-	ld a, [$d0a3]
+	ld a, [W_SPRITEWITDH]
 	cp b
-	jr z, .asm_2630
-	ld a, [$d0ad]
+	jr z, .allColumnsDone
+	ld a, [W_SPRITEOUTPUTPTR]
 	ld l, a
-	ld a, [$d0ae]
+	ld a, [W_SPRITEOUTPUTPTR+1]
 	ld h, a
 	inc hl
-	jp Func_2897
-.asm_2630
+	jp StoreSpriteOutputPointer
+.allColumnsDone
 	pop hl
 	xor a
-	ld [$d0a1], a
-	ld a, [$d0a8]
+	ld [W_SPRITECURPOSX], a
+	ld a, [W_SPRITELOADFLAGS] ; $d0a8
 	bit 1, a
-	jr nz, .asm_2646
+	jr nz, .done            ; test if there is one more sprite to go
 	xor $1
 	set 1, a
-	ld [$d0a8], a
-	jp Func_2556
-.asm_2646
-	jp Func_26bf
+	ld [W_SPRITELOADFLAGS], a ; $d0a8
+	jp UncompressSpriteDataLoop
+.done
+	jp UnpackSprite
 
-; known jump sources: 258d (0:258d), 25c6 (0:25c6)
-Func_2649: ; 2649 (0:2649)
+; writes 2 bits (from a) to the output buffer (pointed to from W_SPRITEOUTPUTPTR)
+WriteSpriteBitsToBuffer: ; 2649 (0:2649)
 	ld e, a
-	ld a, [$d0a7]
+	ld a, [W_SPRITEOUTPUTBITOFFSET]
 	and a
-	jr z, .asm_2664
+	jr z, .offset0
 	cp $2
-	jr c, .asm_265c
-	jr z, .asm_2662
+	jr c, .offset1
+	jr z, .offset2
+	rrc e ; offset 3
 	rrc e
-	rrc e
-	jr .asm_2664
-.asm_265c
+	jr .offset0
+.offset1
 	sla e
 	sla e
-	jr .asm_2664
-.asm_2662
+	jr .offset0
+.offset2
 	swap e
-.asm_2664
-	ld a, [$d0ad]
+.offset0
+	ld a, [W_SPRITEOUTPUTPTR]
 	ld l, a
-	ld a, [$d0ae]
+	ld a, [W_SPRITEOUTPUTPTR+1]
 	ld h, a
 	ld a, [hl]
 	or e
 	ld [hl], a
 	ret
 
-; known jump sources: 2550 (0:2550), 256d (0:256d), 2573 (0:2573), 257a (0:257a), 2580 (0:2580), 2584 (0:2584), 2597 (0:2597), 25b2 (0:25b2)
-Func_2670: ; 2670 (0:2670)
-	ld a, [$d0a6]
+; reads next bit from input stream and returns it in a
+ReadNextInputBit: ; 2670 (0:2670)
+	ld a, [W_SPRITEINPUTBITCOUNTER]
 	dec a
-	jr nz, .asm_267e
-	call Func_268b
-	ld [$d0a5], a
+	jr nz, .curByteHasMoreBitsToRead
+	call ReadNextInputByte
+	ld [W_SPRITEINPUTCURBYTE], a
 	ld a, $8
-.asm_267e
-	ld [$d0a6], a
-	ld a, [$d0a5]
+.curByteHasMoreBitsToRead
+	ld [W_SPRITEINPUTBITCOUNTER], a
+	ld a, [W_SPRITEINPUTCURBYTE]
 	rlca
-	ld [$d0a5], a
+	ld [W_SPRITEINPUTCURBYTE], a
 	and $1
 	ret
 
-; known jump sources: 2539 (0:2539), 2676 (0:2676)
-Func_268b: ; 268b (0:268b)
-	ld a, [$d0ab]
+; reads next byte from input stream and returns it in a
+ReadNextInputByte: ; 268b (0:268b)
+	ld a, [W_SPRITEINPUTPTR]
 	ld l, a
-	ld a, [$d0ac]
+	ld a, [W_SPRITEINPUTPTR+1]
 	ld h, a
 	ld a, [hli]
 	ld b, a
 	ld a, l
-	ld [$d0ab], a
+	ld [W_SPRITEINPUTPTR], a
 	ld a, h
-	ld [$d0ac], a
+	ld [W_SPRITEINPUTPTR+1], a
 	ld a, b
 	ret
 
-INCBIN "baserom.gbc",$269f,$26bf - $269f
+; the nth item is 2^n - 1
+LengthEncodingOffsetList:
+	dw $0001
+	dw $0003
+	dw $0007
+	dw $000F
+	dw $001F
+	dw $003F
+	dw $007F
+	dw $00FF
+	dw $01FF
+	dw $03FF
+	dw $07FF
+	dw $0FFF
+	dw $1FFF
+	dw $3FFF
+	dw $7FFF
+	dw $FFFF
 
-; known jump sources: 2646 (0:2646)
-Func_26bf: ; 26bf (0:26bf)
-	ld a, [$d0a9]
+; unpacks the sprite data depending on the unpack mode
+UnpackSprite: ; 26bf (0:26bf)
+	ld a, [W_SPRITEUNPACKMODE]
 	cp $2
-	jp z, Func_2877
+	jp z, UnpackSpriteMode2
 	and a
-	jp nz, Func_27c7
-	ld hl, $a188
-	call Func_26d4
-	ld hl, $a310
+	jp nz, XorSpriteChunks
+	ld hl, S_SPRITEBUFFER1
+	call SpriteDifferentialDecode
+	ld hl, S_SPRITEBUFFER2
+	; fall through
 
-; known jump sources: 26ce (0:26ce), 27d9 (0:27d9), 288a (0:288a)
-Func_26d4: ; 26d4 (0:26d4)
+; decodes differential encoded sprite data
+; input bit value 0 preserves the current bit value and input bit value 1 toggles it (starting from initial value 0).
+SpriteDifferentialDecode: ; 26d4 (0:26d4)
 	xor a
-	ld [$d0a1], a
-	ld [$d0a2], a
-	call Func_2897
-	ld a, [$d0aa]
+	ld [W_SPRITECURPOSX], a
+	ld [W_SPRITECURPOSY], a
+	call StoreSpriteOutputPointer
+	ld a, [W_SPRITEFLIPPED]
 	and a
-	jr z, .asm_26ec
-	ld hl, $27b7
-	ld de, $27bf
-	jr .asm_26f2
-.asm_26ec
-	ld hl, $27a7
-	ld de, $27af
-.asm_26f2
+	jr z, .notFlipped
+	ld hl, DecodeNybble0TableFlipped
+	ld de, DecodeNybble1TableFlipped
+	jr .storeDecodeTablesPointers
+.notFlipped
+	ld hl, DecodeNybble0Table
+	ld de, DecodeNybble1Table
+.storeDecodeTablesPointers
 	ld a, l
-	ld [$d0b1], a
+	ld [W_SPRITEDECODETABLE0PTR], a
 	ld a, h
-	ld [$d0b2], a
+	ld [W_SPRITEDECODETABLE0PTR+1], a
 	ld a, e
-	ld [$d0b3], a
+	ld [W_SPRITEDECODETABLE1PTR], a
 	ld a, d
-	ld [$d0b4], a
-	ld e, $0
-.asm_2704
-	ld a, [$d0ad]
+	ld [W_SPRITEDECODETABLE1PTR+1], a
+	ld e, $0                          ; last decoded nybble, initialized to 0
+.decodeNextByteLoop
+	ld a, [W_SPRITEOUTPUTPTR]
 	ld l, a
-	ld a, [$d0ae]
+	ld a, [W_SPRITEOUTPUTPTR+1]
 	ld h, a
 	ld a, [hl]
 	ld b, a
 	swap a
 	and $f
-	call Func_276d
+	call DifferentialDecodeNybble     ; decode high nybble
 	swap a
 	ld d, a
 	ld a, b
 	and $f
-	call Func_276d
+	call DifferentialDecodeNybble     ; decode low nybble
 	or d
 	ld b, a
-	ld a, [$d0ad]
+	ld a, [W_SPRITEOUTPUTPTR]
 	ld l, a
-	ld a, [$d0ae]
+	ld a, [W_SPRITEOUTPUTPTR+1]
 	ld h, a
 	ld a, b
-	ld [hl], a
-	ld a, [$d0a4]
-	add l
-	jr nc, .asm_2731
+	ld [hl], a                        ; write back decoded data
+	ld a, [W_SPRITEHEIGHT]
+	add l                             ; move on to next column
+	jr nc, .noCarry
 	inc h
-.asm_2731
-	ld [$d0ad], a
+.noCarry
+	ld [W_SPRITEOUTPUTPTR], a
 	ld a, h
-	ld [$d0ae], a
-	ld a, [$d0a1]
+	ld [W_SPRITEOUTPUTPTR+1], a
+	ld a, [W_SPRITECURPOSX]
 	add $8
-	ld [$d0a1], a
+	ld [W_SPRITECURPOSX], a
 	ld b, a
-	ld a, [$d0a3]
+	ld a, [W_SPRITEWITDH]
 	cp b
-	jr nz, .asm_2704
+	jr nz, .decodeNextByteLoop        ; test if current row is done
 	xor a
 	ld e, a
-	ld [$d0a1], a
-	ld a, [$d0a2]
+	ld [W_SPRITECURPOSX], a
+	ld a, [W_SPRITECURPOSY]           ; move on to next row
 	inc a
-	ld [$d0a2], a
+	ld [W_SPRITECURPOSY], a
 	ld b, a
-	ld a, [$d0a4]
+	ld a, [W_SPRITEHEIGHT]
 	cp b
-	jr z, .asm_2768
-	ld a, [$d0af]
+	jr z, .done                       ; test if all rows finished
+	ld a, [W_SPRITEOUTPUTPTRCACHED]
 	ld l, a
-	ld a, [$d0b0]
+	ld a, [W_SPRITEOUTPUTPTRCACHED+1]
 	ld h, a
 	inc hl
-	call Func_2897
-	jr .asm_2704
-.asm_2768
+	call StoreSpriteOutputPointer
+	jr .decodeNextByteLoop
+.done
 	xor a
-	ld [$d0a2], a
+	ld [W_SPRITECURPOSY], a
 	ret
 
-; known jump sources: 2712 (0:2712), 271b (0:271b)
-Func_276d: ; 276d (0:276d)
-	srl a
+; decodes the nybble stored in a. Last decoded data is assumed to be in e (needed to determine if initial value is 0 or 1)
+DifferentialDecodeNybble: ; 276d (0:276d)
+	srl a               ; c=a%2, a/=2
 	ld c, $0
-	jr nc, .asm_2775
+	jr nc, .evenNumber
 	ld c, $1
-.asm_2775
+.evenNumber
 	ld l, a
-	ld a, [$d0aa]
+	ld a, [W_SPRITEFLIPPED]
 	and a
-	jr z, .asm_2780
-	bit 3, e
-	jr .asm_2782
-.asm_2780
-	bit 0, e
-.asm_2782
+	jr z, .notFlipped     ; determine if initial value is 0 or one
+	bit 3, e              ; if flipped, consider MSB of last data
+	jr .selectLookupTable
+.notFlipped
+	bit 0, e              ; else consider LSB
+.selectLookupTable
 	ld e, l
-	jr nz, .asm_278e
-	ld a, [$d0b1]
+	jr nz, .initialValue1 ; load the appropriate table
+	ld a, [W_SPRITEDECODETABLE0PTR]
 	ld l, a
-	ld a, [$d0b2]
-	jr .asm_2795
-.asm_278e
-	ld a, [$d0b3]
+	ld a, [W_SPRITEDECODETABLE0PTR+1]
+	jr .tableLookup
+.initialValue1
+	ld a, [W_SPRITEDECODETABLE1PTR]
 	ld l, a
-	ld a, [$d0b4]
-.asm_2795
+	ld a, [W_SPRITEDECODETABLE1PTR+1]
+.tableLookup
 	ld h, a
 	ld a, e
 	add l
 	ld l, a
-	jr nc, .asm_279c
+	jr nc, .noCarry
 	inc h
-.asm_279c
+.noCarry
 	ld a, [hl]
 	bit 0, c
-	jr nz, .asm_27a3
-	swap a
-.asm_27a3
+	jr nz, .selectLowNybble
+	swap a  ; select high nybble
+.selectLowNybble
 	and $f
-	ld e, a
+	ld e, a ; update last decoded data
 	ret
 
-INCBIN "baserom.gbc",$27a7,$27c7 - $27a7
+DecodeNybble0Table: ; 0x27a7
+	dn $0, $1
+	dn $3, $2
+	dn $7, $6
+	dn $4, $5
+	dn $f, $e
+	dn $c, $d
+	dn $8, $9
+	dn $b, $a
+DecodeNybble1Table: ; 0x27af
+	dn $f, $e
+	dn $c, $d
+	dn $8, $9
+	dn $b, $a
+	dn $0, $1
+	dn $3, $2
+	dn $7, $6
+	dn $4, $5
+DecodeNybble0TableFlipped: ; 0x27b7
+	dn $0, $8
+	dn $c, $4
+	dn $e, $6
+	dn $2, $a
+	dn $f, $7
+	dn $3, $b
+	dn $1, $9
+	dn $d, $5
+DecodeNybble1TableFlipped: ; 0x27bf
+	dn $f, $7
+	dn $3, $b
+	dn $1, $9
+	dn $d, $5
+	dn $0, $8
+	dn $c, $4
+	dn $e, $6
+	dn $2, $a
 
-; known jump sources: 26c8 (0:26c8), 2894 (0:2894)
-Func_27c7: ; 27c7 (0:27c7)
+; combines the two loaded chunks with xor (the chunk loaded second is the destination). The source chunk is differeintial decoded beforehand.
+XorSpriteChunks: ; 27c7 (0:27c7)
 	xor a
-	ld [$d0a1], a
-	ld [$d0a2], a
-	call Func_2841
-	ld a, [$d0ad]
+	ld [W_SPRITECURPOSX], a
+	ld [W_SPRITECURPOSY], a
+	call ResetSpriteBufferPointers
+	ld a, [W_SPRITEOUTPUTPTR]          ; points to buffer 1 or 2, depending on flags
 	ld l, a
-	ld a, [$d0ae]
+	ld a, [W_SPRITEOUTPUTPTR+1]
 	ld h, a
-	call Func_26d4
-	call Func_2841
-	ld a, [$d0ad]
+	call SpriteDifferentialDecode      ; decode buffer 1 or 2, depending on flags
+	call ResetSpriteBufferPointers
+	ld a, [W_SPRITEOUTPUTPTR]          ; source buffer, points to buffer 1 or 2, depending on flags
 	ld l, a
-	ld a, [$d0ae]
+	ld a, [W_SPRITEOUTPUTPTR+1]
 	ld h, a
-	ld a, [$d0af]
+	ld a, [W_SPRITEOUTPUTPTRCACHED]    ; destination buffer, points to buffer 2 or 1, depending on flags
 	ld e, a
-	ld a, [$d0b0]
+	ld a, [W_SPRITEOUTPUTPTRCACHED+1]
 	ld d, a
-.asm_27ef
-	ld a, [$d0aa]
+.xorChunksLoop
+	ld a, [W_SPRITEFLIPPED]
 	and a
-	jr z, .asm_280b
+	jr z, .notFlipped
 	push de
 	ld a, [de]
 	ld b, a
 	swap a
 	and $f
-	call Func_2837
+	call ReverseNybble                 ; if flipped reverse the nybbles in the destination buffer
 	swap a
 	ld c, a
 	ld a, b
 	and $f
-	call Func_2837
+	call ReverseNybble
 	or c
 	pop de
 	ld [de], a
-.asm_280b
+.notFlipped
 	ld a, [hli]
 	ld b, a
 	ld a, [de]
 	xor b
 	ld [de], a
 	inc de
-	ld a, [$d0a2]
+	ld a, [W_SPRITECURPOSY]
 	inc a
-	ld [$d0a2], a
+	ld [W_SPRITECURPOSY], a             ; go to next row
 	ld b, a
-	ld a, [$d0a4]
+	ld a, [W_SPRITEHEIGHT]
 	cp b
-	jr nz, .asm_27ef
+	jr nz, .xorChunksLoop               ; test if column finished
 	xor a
-	ld [$d0a2], a
-	ld a, [$d0a1]
+	ld [W_SPRITECURPOSY], a
+	ld a, [W_SPRITECURPOSX]
 	add $8
-	ld [$d0a1], a
+	ld [W_SPRITECURPOSX], a             ; go to next column
 	ld b, a
-	ld a, [$d0a3]
+	ld a, [W_SPRITEWITDH]
 	cp b
-	jr nz, .asm_27ef
+	jr nz, .xorChunksLoop               ; test if all columns finished
 	xor a
-	ld [$d0a1], a
+	ld [W_SPRITECURPOSX], a
 	ret
 
-; known jump sources: 27fc (0:27fc), 2805 (0:2805)
-Func_2837: ; 2837 (0:2837)
-	ld de, $2867
+; reverses the bits in the nybble given in register a
+ReverseNybble: ; 2837 (0:2837)
+	ld de, NybbleReverseTable
 	add e
 	ld e, a
 	jr nc, .asm_283f
@@ -6531,55 +6623,57 @@ Func_2837: ; 2837 (0:2837)
 	ld a, [de]
 	ret
 
-; known jump sources: 27ce (0:27ce), 27dc (0:27dc), 2877 (0:2877), 288d (0:288d)
-Func_2841: ; 2841 (0:2841)
-	ld a, [$d0a8]
+; resets sprite buffer pointers to buffer 1 and 2, depending on W_SPRITELOADFLAGS
+ResetSpriteBufferPointers: ; 2841 (0:2841)
+	ld a, [W_SPRITELOADFLAGS] ; $d0a8
 	bit 0, a
-	jr nz, .asm_2850
-	ld de, $a188
-	ld hl, $a310
-	jr .asm_2856
-.asm_2850
-	ld de, $a310
-	ld hl, $a188
-.asm_2856
+	jr nz, .buffer2Selected
+	ld de, S_SPRITEBUFFER1
+	ld hl, S_SPRITEBUFFER2
+	jr .storeBufferPointers
+.buffer2Selected
+	ld de, S_SPRITEBUFFER2
+	ld hl, S_SPRITEBUFFER1
+.storeBufferPointers
 	ld a, l
-	ld [$d0ad], a
+	ld [W_SPRITEOUTPUTPTR], a
 	ld a, h
-	ld [$d0ae], a
+	ld [W_SPRITEOUTPUTPTR+1], a
 	ld a, e
-	ld [$d0af], a
+	ld [W_SPRITEOUTPUTPTRCACHED], a
 	ld a, d
-	ld [$d0b0], a
+	ld [W_SPRITEOUTPUTPTRCACHED+1], a
 	ret
 
-INCBIN "baserom.gbc",$2867,$2877 - $2867
+; maps each nybble to its reverse
+NybbleReverseTable: ; 0x2867
+	db $0, $8, $4, $c, $2, $a, $6 ,$e, $1, $9, $5, $d, $3, $b, $7 ,$f
 
-; known jump sources: 26c4 (0:26c4)
-Func_2877: ; 2877 (0:2877)
-	call Func_2841
-	ld a, [$d0aa]
+; combines the two loaded chunks with xor (the chunk loaded second is the destination). Both chunks are differeintial decoded beforehand.
+UnpackSpriteMode2: ; 2877 (0:2877)
+	call ResetSpriteBufferPointers
+	ld a, [W_SPRITEFLIPPED]
 	push af
 	xor a
-	ld [$d0aa], a
-	ld a, [$d0af]
+	ld [W_SPRITEFLIPPED], a            ; temporarily clear flipped flag for decoding the destination chunk
+	ld a, [W_SPRITEOUTPUTPTRCACHED]
 	ld l, a
-	ld a, [$d0b0]
+	ld a, [W_SPRITEOUTPUTPTRCACHED+1]
 	ld h, a
-	call Func_26d4
-	call Func_2841
+	call SpriteDifferentialDecode
+	call ResetSpriteBufferPointers
 	pop af
-	ld [$d0aa], a
-	jp Func_27c7
+	ld [W_SPRITEFLIPPED], a
+	jp XorSpriteChunks
 
-; known jump sources: 2563 (0:2563), 262d (0:262d), 26db (0:26db), 2763 (0:2763)
-Func_2897: ; 2897 (0:2897)
+; stores hl into the output pointers
+StoreSpriteOutputPointer: ; 2897 (0:2897)
 	ld a, l
-	ld [$d0ad], a
-	ld [$d0af], a
+	ld [W_SPRITEOUTPUTPTR], a
+	ld [W_SPRITEOUTPUTPTRCACHED], a
 	ld a, h
-	ld [$d0ae], a
-	ld [$d0b0], a
+	ld [W_SPRITEOUTPUTPTR+1], a
+	ld [W_SPRITEOUTPUTPTRCACHED+1], a
 	ret
 
 ; known jump sources: 5d6e (1:5d6e), 6210 (1:6210)
@@ -6657,7 +6751,7 @@ Func_28cb: ; 28cb (0:28cb)
 ; this function is used to display sign messages, sprite dialog, etc.
 ; INPUT: [$ff8c] = sprite ID or text ID
 DisplayTextID: ; 2920
-	ld a,[$ffb8]
+	ld a,[H_LOADEDROMBANK]
 	push af
 	ld b,BANK(DisplayTextIDInit)
 	ld hl,DisplayTextIDInit ; initialization
@@ -6793,7 +6887,7 @@ CloseTextDisplay: ; 29E8
 	dec c
 	jr nz,.restoreSpriteFacingDirectionLoop
 	ld a,BANK(InitMapSprites)
-	ld [$ffb8],a
+	ld [H_LOADEDROMBANK],a
 	ld [$2000],a
 	call InitMapSprites ; reload sprite tile pattern data (since it was partially overwritten by text tile patterns)
 	ld hl,$cfc4
@@ -6803,7 +6897,7 @@ CloseTextDisplay: ; 29E8
 	call z,LoadPlayerSpriteGraphics
 	call LoadCurrentMapView
 	pop af
-	ld [$ffb8],a
+	ld [H_LOADEDROMBANK],a
 	ld [$2000],a
 	jp $2429 ; move sprites
 
@@ -6816,14 +6910,14 @@ DisplayPokemartDialogue: ; 2A2E
 	call LoadItemList
 	ld a,$02
 	ld [$cf94],a ; selects between subtypes of menus
-	ld a,[$ffb8]
+	ld a,[H_LOADEDROMBANK]
 	push af
 	ld a,$01
-	ld [$ffb8],a
+	ld [H_LOADEDROMBANK],a
 	ld [$2000],a
 	call DisplayPokemartDialogue_
 	pop af
-	ld [$ffb8],a
+	ld [H_LOADEDROMBANK],a
 	ld [$2000],a
 	jp AfterDisplayingTextID
 
@@ -6853,14 +6947,14 @@ DisplayPokemonCenterDialogue: ; 2A72
 	ld [$ff8c],a
 	ld [$ff8d],a
 	inc hl
-	ld a,[$ffb8]
+	ld a,[H_LOADEDROMBANK]
 	push af
 	ld a,$01
-	ld [$ffb8],a
+	ld [H_LOADEDROMBANK],a
 	ld [$2000],a
 	call DisplayPokemonCenterDialogue_
 	pop af
-	ld [$ffb8],a
+	ld [H_LOADEDROMBANK],a
 	ld [$2000],a
 	jp AfterDisplayingTextID
 
@@ -6902,7 +6996,7 @@ RepelWoreOffText: ; 0x2ac8
 
 DisplayStartMenu: ; 2ACD
 	ld a,$04
-	ld [$ffb8],a
+	ld [H_LOADEDROMBANK],a
 	ld [$2000],a ; ROM bank 4
 	ld a,[$d700] ; walking/biking/surfing
 	ld [$d11a],a
@@ -7045,14 +7139,14 @@ AddAmountSoldToMoney: ; 2B9E
 ; [$CF92] = index (within the inventory) of the item to remove
 ; [$CF96] = quantity to remove
 RemoveItemFromInventory: ; 2BBB
-	ld a,[$ffb8]
+	ld a,[H_LOADEDROMBANK]
 	push af
 	ld a,BANK(RemoveItemFromInventory_)
-	ld [$ffb8],a
+	ld [H_LOADEDROMBANK],a
 	ld [$2000],a
 	call RemoveItemFromInventory_
 	pop af
-	ld [$ffb8],a
+	ld [H_LOADEDROMBANK],a
 	ld [$2000],a
 	ret
 
@@ -7064,15 +7158,15 @@ RemoveItemFromInventory: ; 2BBB
 ; sets carry flag if successful, unsets carry flag if unsuccessful
 AddItemToInventory: ; 2BCF
 	push bc
-	ld a,[$ffb8]
+	ld a,[H_LOADEDROMBANK]
 	push af
 	ld a,BANK(AddItemToInventory_)
-	ld [$ffb8],a
+	ld [H_LOADEDROMBANK],a
 	ld [$2000],a
 	call AddItemToInventory_
 	pop bc
 	ld a,b
-	ld [$ffb8],a
+	ld [H_LOADEDROMBANK],a
 	ld [$2000],a
 	pop bc
 	ret
@@ -7614,10 +7708,10 @@ ListMenuCancelText: ; 2F97
 
 GetMonName: ; 2F9E
 	push hl
-	ld a,[$ffb8]
+	ld a,[H_LOADEDROMBANK]
 	push af
 	ld a,BANK(MonsterNames) ; 07
-	ld [$ffb8],a
+	ld [H_LOADEDROMBANK],a
 	ld [$2000],a
 	ld a,[$d11e]
 	dec a
@@ -7633,7 +7727,7 @@ GetMonName: ; 2F9E
 	ld [hl],$50
 	pop de
 	pop af
-	ld [$ffb8],a
+	ld [H_LOADEDROMBANK],a
 	ld [$2000],a
 	pop hl
 	ret
@@ -7649,7 +7743,7 @@ GetItemName: ; 2FCF
 
 	ld [$D0B5],a
 	ld a,ITEM_NAME
-	ld [$D0B6],a
+	ld [W_LISTTYPE],a
 	ld a,BANK(ItemNames)
 	ld [$D0B7],a
 	call GetName
@@ -7746,7 +7840,7 @@ HMMoves: ; 3052
 GetMoveName: ; 3058
 	push hl
 	ld a,MOVE_NAME
-	ld [$d0b6],a
+	ld [W_LISTTYPE],a
 	ld a,[$d11e]
 	ld [$d0b5],a
 	ld a,BANK(MoveNames)
@@ -7758,7 +7852,7 @@ GetMoveName: ; 3058
 
 ; reloads text box tile patterns, current map view, and tileset tile patterns
 ReloadMapData: ; 3071
-	ld a,[$ffb8]
+	ld a,[H_LOADEDROMBANK]
 	push af
 	ld a,[W_CURMAP]
 	call SwitchToMapRomBank
@@ -7768,13 +7862,13 @@ ReloadMapData: ; 3071
 	call LoadTilesetTilePatternData
 	call EnableLCD
 	pop af
-	ld [$ffb8],a
+	ld [H_LOADEDROMBANK],a
 	ld [$2000],a
 	ret
 
 ; reloads tileset tile patterns
 ReloadTilesetTilePatterns: ; 3090
-	ld a,[$ffb8]
+	ld a,[H_LOADEDROMBANK]
 	push af
 	ld a,[W_CURMAP]
 	call SwitchToMapRomBank
@@ -7782,7 +7876,7 @@ ReloadTilesetTilePatterns: ; 3090
 	call LoadTilesetTilePatternData
 	call EnableLCD
 	pop af
-	ld [$ffb8],a
+	ld [H_LOADEDROMBANK],a
 	ld [$2000],a
 	ret
 
@@ -7823,15 +7917,15 @@ UseItem: ; 30BC
 ; OUTPUT:
 ; clears carry flag if the item is tossed, sets carry flag if not
 TossItem: ; 30C4
-	ld a,[$ffb8]
+	ld a,[H_LOADEDROMBANK]
 	push af
 	ld a,BANK(TossItem_)
-	ld [$ffb8],a
+	ld [H_LOADEDROMBANK],a
 	ld [$2000],a
 	call TossItem_
 	pop de
 	ld a,d
-	ld [$ffb8],a
+	ld [H_LOADEDROMBANK],a
 	ld [$2000],a
 	ret
 
@@ -7858,15 +7952,15 @@ IsKeyItem: ; 30D9
 ; INPUT:
 ; [$D125] = text box ID
 DisplayTextBoxID: ; 30E8
-	ld a,[$ffb8]
+	ld a,[H_LOADEDROMBANK]
 	push af
 	ld a,BANK(DisplayTextBoxID_)
-	ld [$ffb8],a
+	ld [H_LOADEDROMBANK],a
 	ld [$2000],a
 	call DisplayTextBoxID_
 	pop bc
 	ld a,b
-	ld [$ffb8],a
+	ld [H_LOADEDROMBANK],a
 	ld [$2000],a
 	ret
 
@@ -7900,15 +7994,15 @@ Func_310e: ; 310e (0:310e)
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	ld a, [$FF00+$b8]
+	ld a, [H_LOADEDROMBANK]
 	push af
 	ld a, [$cc58]
-	ld [$FF00+$b8], a
+	ld [H_LOADEDROMBANK], a
 	ld [$2000], a
 	ld a, [$cf10]
 	call CallFunctionInTable
 	pop af
-	ld [$FF00+$b8], a
+	ld [H_LOADEDROMBANK], a
 	ld [$2000], a
 	ret
 
@@ -8008,7 +8102,7 @@ Func_3193: ; 3193 (0:3193)
 ; known jump sources: 31de (0:31de), 3299 (0:3299), 3324 (0:3324)
 Func_31c7: ; 31c7 (0:31c7)
 	ld a, $10
-	jp Predef ; indirect jump to Func_f666 (f666 (3:7666))
+	jp Predef ; indirect jump to HandleBitArray (f666 (3:7666))
 ; 31cc (0:31cc)
 LoadTrainerHeader: ; 0x31cc
 	call $3157
@@ -8228,7 +8322,7 @@ Func_3306: ; 3306 (0:3306)
 
 ; known jump sources: 3201 (0:3201), 19585 (6:5585), 19697 (6:5697), 1cdea (7:4dea), 48a40 (12:4a40), 49ea0 (12:5ea0), 510c5 (14:50c5), 514dd (14:54dd), 51ca3 (14:5ca3), 5c47d (17:447d), 5c7a0 (17:47a0), 5cb4c (17:4b4c), 5d147 (17:5147), 60602 (18:4602), 614fa (18:54fa), 622a0 (18:62a0), 74ab3 (1d:4ab3), 75563 (1d:5563), 75909 (1d:5909), 75985 (1d:5985), 75f92 (1d:5f92)
 Func_3354: ; 3354 (0:3354)
-	ld a, [$FF00+$b8]
+	ld a, [H_LOADEDROMBANK]
 	ld [$d092], a
 	ld a, h
 	ld [$d08c], a
@@ -8263,10 +8357,10 @@ Func_3381: ; 3381 (0:3381)
 	res 7, [hl]
 	pop hl
 	ret z
-	ld a, [$FF00+$b8]
+	ld a, [H_LOADEDROMBANK]
 	push af
 	ld a, [$d092]
-	ld [$FF00+$b8], a
+	ld [H_LOADEDROMBANK], a
 	ld [$2000], a
 	push hl
 	ld b, BANK(SaveTrainerName)
@@ -8276,7 +8370,7 @@ Func_3381: ; 3381 (0:3381)
 	call PrintText
 	pop hl
 	pop af
-	ld [$FF00+$b8], a
+	ld [H_LOADEDROMBANK], a
 	ld [$2000], a
 	ld b, BANK(Func_1a5e7)
 	ld hl, Func_1a5e7
@@ -8642,27 +8736,27 @@ BankswitchHome: ; 35BC
 ; switches to bank # in a
 ; Only use this when in the home bank!
 	ld [$CF09],a
-	ld a,[$FFB8]
+	ld a,[H_LOADEDROMBANK]
 	ld [$CF08],a
 	ld a,[$CF09]
-	ld [$FFB8],a
+	ld [H_LOADEDROMBANK],a
 	ld [$2000],a
 	ret
 
 BankswitchBack: ; 35CD
 ; returns from BankswitchHome
 	ld a,[$CF08]
-	ld [$FFB8],a
+	ld [H_LOADEDROMBANK],a
 	ld [$2000],a
 	ret
 
 Bankswitch: ; 0x35d6
 ; self-contained bankswitch, use this when not in the home bank
 ; switches to the bank in b
-	ld a,[$FFB8]
+	ld a,[H_LOADEDROMBANK]
 	push af
 	ld a,b
-	ld [$FFB8],a
+	ld [H_LOADEDROMBANK],a
 	ld [$2000],a
 	ld bc,.Return
 	push bc
@@ -8670,7 +8764,7 @@ Bankswitch: ; 0x35d6
 .Return
 	pop bc
 	ld a,b
-	ld [$FFB8],a
+	ld [H_LOADEDROMBANK],a
 	ld [$2000],a
 	ret
 
@@ -8839,12 +8933,13 @@ FillMemory: ;36E0
 	ret
 
 ; known jump sources: 62a6 (1:62a6), 3eca0 (f:6ca0), 3f05d (f:705d), 70343 (1c:4343), 7035d (1c:435d)
-Func_36eb: ; 36eb (0:36eb)
-	ld hl, $d0ab
+; loads sprite that de points to
+UncompressSpriteFromDE: ; 36eb (0:36eb)
+	ld hl, W_SPRITEINPUTPTR
 	ld [hl], e
 	inc hl
 	ld [hl], d
-	jp Func_24fd
+	jp UncompressSpriteData
 
 ; known jump sources: 2b44 (0:2b44), 3460 (0:3460), 346a (0:346a), 438f (1:438f), efae (3:6fae), 17e2c (5:7e2c), 1da57 (7:5a57), 1e915 (7:6915), 213cb (8:53cb), 3cffd (f:4ffd), 3d0ce (f:50ce), 71ad9 (1c:5ad9)
 Func_36f4: ; 36f4 (0:36f4)
@@ -8935,7 +9030,7 @@ NamePointers: ; 375D
 GetName: ; 376B
 ; arguments:
 ; [$D0B5] = which name
-; [$D0B6] = which list
+; [$D0B6] = which list (W_LISTTYPE)
 ; [$D0B7] = bank of list
 ;
 ; returns pointer to name in de
@@ -8943,12 +9038,12 @@ GetName: ; 376B
 	ld [$d11e],a
 	cp a,$C4        ;it's TM/HM
 	jp nc,GetMachineName
-	ld a,[$ffb8]
+	ld a,[H_LOADEDROMBANK]
 	push af
 	push hl
 	push bc
 	push de
-	ld a,[$d0b6]    ;List3759_entrySelector
+	ld a,[W_LISTTYPE]    ;List3759_entrySelector
 	dec a
 	jr nz,.otherEntries
 	;1 = MON_NAMES
@@ -8961,9 +9056,9 @@ GetName: ; 376B
 .otherEntries ; $378d
 	;2-7 = OTHER ENTRIES
 	ld a,[$d0b7]
-	ld [$ffb8],a
+	ld [H_LOADEDROMBANK],a
 	ld [$2000],a
-	ld a,[$d0b6]    ;VariousNames' entryID
+	ld a,[W_LISTTYPE]    ;VariousNames' entryID
 	dec a
 	add a
 	ld d,0
@@ -9009,13 +9104,13 @@ GetName: ; 376B
 	pop bc
 	pop hl
 	pop af
-	ld [$ffb8],a
+	ld [H_LOADEDROMBANK],a
 	ld [$2000],a
 	ret
 
 ; known jump sources: 2cdc (0:2cdc), 2ee0 (0:2ee0)
 Func_37df: ; 37df (0:37df)
-	ld a, [$FF00+$b8]
+	ld a, [H_LOADEDROMBANK]
 	push af
 	ld a, [W_LISTMENUID] ; $cf94
 	cp $1
@@ -9023,7 +9118,7 @@ Func_37df: ; 37df (0:37df)
 	jr nz, .asm_37ed
 	ld a, $f
 .asm_37ed
-	ld [$FF00+$b8], a
+	ld [H_LOADEDROMBANK], a
 	ld [$2000], a
 	ld hl, $cf8f
 	ld a, [hli]
@@ -9047,13 +9142,13 @@ Func_37df: ; 37df (0:37df)
 	jr .asm_381c
 .asm_3812
 	ld a, $1e
-	ld [$FF00+$b8], a
+	ld [H_LOADEDROMBANK], a
 	ld [$2000], a
 	call Func_7bf86
 .asm_381c
 	ld de, H_DOWNARROWBLINKCNT1 ; $ff8b
 	pop af
-	ld [$FF00+$b8], a
+	ld [H_LOADEDROMBANK], a
 	ld [$2000], a
 	ret
 
@@ -9196,14 +9291,14 @@ Divide: ; 38B9
 	push hl
 	push de
 	push bc
-	ld a,[$ffb8]
+	ld a,[H_LOADEDROMBANK]
 	push af
 	ld a,$0d
-	ld [$ffb8],a
+	ld [H_LOADEDROMBANK],a
 	ld [$2000],a
 	call $7da5
 	pop af
-	ld [$ffb8],a
+	ld [H_LOADEDROMBANK],a
 	ld [$2000],a
 	pop bc
 	pop de
@@ -9317,7 +9412,7 @@ Func_394a: ; 394a (0:394a)
 	ld a, b
 	ld d, a
 	push hl
-	ld hl, $d0b8
+	ld hl, W_MONHEADER
 	ld b, $0
 	add hl, bc
 	ld a, [hl]
@@ -9492,15 +9587,15 @@ INCBIN "baserom.gbc",$3a53,$3a68 - $3a53
 
 ; known jump sources: 215e8 (8:55e8), 2165c (8:565c)
 Func_3a68: ; 3a68 (0:3a68)
-	ld a, [$FF00+$b8]
+	ld a, [H_LOADEDROMBANK]
 	push af
 	ld a, $3
-	ld [$FF00+$b8], a
+	ld [H_LOADEDROMBANK], a
 	ld [$2000], a
 	call Func_f51e
 	pop bc
 	ld a, b
-	ld [$FF00+$b8], a
+	ld [H_LOADEDROMBANK], a
 	ld [$2000], a
 	ret
 
@@ -10278,20 +10373,20 @@ Predef: ; 0x3e6d
 
 	ld [$CC4E],a ; save the predef routine's ID for later
 
-	ld a,[$FFB8]
+	ld a,[H_LOADEDROMBANK]
 	ld [$CF12],a
 
 	; save bank and call 13:7E49
 	push af
 	ld a,BANK(GetPredefPointer)
-	ld [$FFB8],a
+	ld [H_LOADEDROMBANK],a
 	ld [$2000],a
 	call GetPredefPointer
 
 	; call the predef function
 	; ($D0B7 has the bank of the predef routine)
 	ld a,[$D0B7]
-	ld [$FFB8],a
+	ld [H_LOADEDROMBANK],a
 	ld [$2000],a
 	ld de,.Return
 	push de
@@ -10299,7 +10394,7 @@ Predef: ; 0x3e6d
 	; after the predefined function finishes it returns here
 .Return
 	pop af
-	ld [$FFB8],a
+	ld [H_LOADEDROMBANK],a
 	ld [$2000],a
 	ret
 
@@ -10329,21 +10424,21 @@ Func_3ead: ; 3ead (0:3ead)
 
 ; known jump sources: 46b (0:46b)
 Func_3eb5: ; 3eb5 (0:3eb5)
-	ld a, [$FF00+$b8]
+	ld a, [H_LOADEDROMBANK]
 	push af
 	ld a, [$FF00+$b4]
 	bit 0, a
 	jr z, .asm_3eea
 	ld a, $11
 	ld [$2000], a
-	ld [$FF00+$b8], a
+	ld [H_LOADEDROMBANK], a
 	call Func_469a0
 	ld a, [$FF00+$ee]
 	and a
 	jr nz, .asm_3edd
 	ld a, [$cd3e]
 	ld [$2000], a
-	ld [$FF00+$b8], a
+	ld [H_LOADEDROMBANK], a
 	ld de, $3eda
 	push de
 	jp [hl]
@@ -10362,7 +10457,7 @@ Func_3eb5: ; 3eb5 (0:3eb5)
 	ld [$FF00+$eb], a
 	pop af
 	ld [$2000], a
-	ld [$FF00+$b8], a
+	ld [H_LOADEDROMBANK], a
 	ret
 
 ; known jump sources: fb74 (3:7b74), 1ea22 (7:6a22), 1eb88 (7:6b88), 1eb92 (7:6b92), 1ebd9 (7:6bd9), 526ab (14:66ab), 526e0 (14:66e0), 5dbba (17:5bba), 5dbd0 (17:5bd0), 5de0e (17:5e0e), 5de7a (17:5e7a), 62526 (18:6526), 766b5 (1d:66b5)
@@ -10574,8 +10669,8 @@ Func_4277: ; 4277 (1:4277)
 	push hl
 	ld a, [$cfe5]
 	ld [$d0b5], a
-	call GetBaseStats
-	ld a, [$d0c0]
+	call GetMonHeader
+	ld a, [W_MONHCATCHRATE]
 	ld [$d007], a
 	pop hl
 .asm_429f
@@ -10932,7 +11027,7 @@ Func_4524: ; 4524 (1:4524)
 	ld [$cf91], a
 	ld [$d0b5], a
 	ld hl, $c46d
-	call GetBaseStats
+	call GetMonHeader
 	jp Func_1389
 
 ; known jump sources: 43a2 (1:43a2), 43b1 (1:43b1), 4420 (1:4420), 4473 (1:4473), 4478 (1:4478), 4498 (1:4498)
@@ -11054,16 +11149,16 @@ LoadMonData_: ; 45B6
 	ld [$cf91],a
 	ld a,[$cc49]
 	cp a,$03
-	jr z,.getBaseStats
+	jr z,.GetMonHeader
 	ld a,[$cf92]
 	ld e,a
 	ld hl,$5c37
 	ld b,$0e
 	call Bankswitch ; get pokemon ID
-.getBaseStats
+.GetMonHeader
 	ld a,[$cf91]
-	ld [$d0b5],a ; input for GetBaseStats
-	call GetBaseStats ; load base stats to $d0b8
+	ld [$d0b5],a ; input for GetMonHeader
+	call GetMonHeader ; load base stats to $d0b8
 	ld hl,W_PARTYMON1DATA
 	ld bc,44
 	ld a,[$cc49]
@@ -13773,12 +13868,12 @@ Function61BC: ; 0x61bc
 	jr nz,.next
 	ld hl,OakSpeechText3
 	call PrintText
-.next	ld a,[$FFB8]
+.next	ld a,[H_LOADEDROMBANK]
 	push af
 	ld a,$9C
 	call $23B1
 	pop af
-	ld [$FFB8],a
+	ld [H_LOADEDROMBANK],a
 	ld [$2000],a
 	ld c,4
 	call DelayFrames
@@ -13795,7 +13890,7 @@ Function61BC: ; 0x61bc
 	ld bc,$0400
 	call IntroPredef3B
 	call $28A6
-	ld a,[$FFB8]
+	ld a,[H_LOADEDROMBANK]
 	push af
 	ld a,2
 	ld [$C0EF],a
@@ -13806,7 +13901,7 @@ Function61BC: ; 0x61bc
 	ld [$C0EE],a
 	call $23B1 ; stop music
 	pop af
-	ld [$FFB8],a
+	ld [H_LOADEDROMBANK],a
 	ld [$2000],a
 	ld c,$14
 	call DelayFrames
@@ -13881,7 +13976,7 @@ IntroPredef3B: ; 62A4
 	push bc
 	ld a,b
 	call $36EB
-	ld hl,$A188
+	ld hl,S_SPRITEBUFFER1
 	ld de,$A000
 	ld bc,$0310
 	call CopyData
@@ -16732,8 +16827,8 @@ UnnamedText_78e1: ; 0x78e1
 Func_78e6: ; 78e6 (1:78e6)
 	ld hl, $d730
 	set 6, [hl]
-	ld a, $4
-	ld [$d0b6], a
+	ld a, ITEM_NAME
+	ld [W_LISTTYPE], a
 	call Func_3719
 	xor a
 	ld [$cc2c], a
@@ -24129,7 +24224,7 @@ ItemUseMedicine: ; 5ABB
 	add hl,bc ; hl now points to level
 	ld a,[hl] ; a = level
 	ld [$d127],a ; store level
-	call GetBaseStats
+	call GetMonHeader
 	push de
 	ld a,d
 	ld hl,W_PARTYMON1NAME
@@ -25627,7 +25722,7 @@ Func_e7a4: ; e7a4 (3:67a4)
 	ld [de], a
 	cp $ff
 	jr nz, .asm_e7b1
-	call GetBaseStats
+	call GetMonHeader
 	ld hl, $dd2a
 	ld bc, $b
 	ld a, [W_NUMINBOX] ; $da80
@@ -25743,9 +25838,9 @@ Func_e7a4: ; e7a4 (3:67a4)
 	push de
 	ld a, [W_CURENEMYLVL] ; $d127
 	ld d, a
-	ld hl, Func_58f6a
-	ld b, BANK(Func_58f6a)
-	call Bankswitch ; indirect jump to Func_58f6a (58f6a (16:4f6a))
+	ld hl, CalcExperience
+	ld b, BANK(CalcExperience)
+	call Bankswitch ; indirect jump to CalcExperience (58f6a (16:4f6a))
 	pop de
 	ld a, [H_NUMTOPRINT] ; $FF00+$96 (aliases: H_MULTIPLICAND)
 	ld [de], a
@@ -26477,7 +26572,7 @@ Func_f113: ; f113 (3:7113)
 	ld b, $1
 	ld hl, $d70b
 	ld a, $10
-	call Predef ; indirect jump to Func_f666 (f666 (3:7666))
+	call Predef ; indirect jump to HandleBitArray (f666 (3:7666))
 .asm_f125
 	ld hl, $48f5
 	ld a, [W_CURMAP] ; $d35e
@@ -26835,8 +26930,8 @@ Func_f2e5: ; f2e5 (3:72e5)
 	push hl
 	ld a, [$cf91]
 	ld [$d0b5], a
-	call GetBaseStats
-	ld hl, $d0b8
+	call GetMonHeader
+	ld hl, W_MONHEADER
 	ld a, [hli]
 	ld [de], a
 	inc de
@@ -26858,7 +26953,7 @@ Func_f2e5: ; f2e5 (3:72e5)
 	ld c, a
 	ld b, $2
 	ld hl, W_OWNEDPOKEMON ; $d2f7
-	call Func_f669
+	call _HandleBitArray
 	ld a, c
 	ld [$d153], a
 	ld a, [$d11e]
@@ -26866,10 +26961,10 @@ Func_f2e5: ; f2e5 (3:72e5)
 	ld c, a
 	ld b, $1
 	push bc
-	call Func_f669
+	call _HandleBitArray
 	pop bc
 	ld hl, W_SEENPOKEMON ; $d30a
-	call Func_f669
+	call _HandleBitArray
 	pop hl
 	push hl
 	ld a, [W_ISINBATTLE] ; $d057
@@ -26924,7 +27019,7 @@ Func_f2e5: ; f2e5 (3:72e5)
 	ld [de], a
 	inc de
 .asm_f3f4
-	ld hl, $d0be
+	ld hl, W_MONHTYPES
 	ld a, [hli]
 	ld [de], a
 	inc de
@@ -26933,7 +27028,7 @@ Func_f2e5: ; f2e5 (3:72e5)
 	inc de
 	ld a, [hli]
 	ld [de], a
-	ld hl, $d0c7
+	ld hl, W_MONHMOVES
 	ld a, [hli]
 	inc de
 	push de
@@ -26965,9 +27060,9 @@ Func_f2e5: ; f2e5 (3:72e5)
 	push de
 	ld a, [W_CURENEMYLVL] ; $d127
 	ld d, a
-	ld hl, Func_58f6a
-	ld b, BANK(Func_58f6a)
-	call Bankswitch ; indirect jump to Func_58f6a (58f6a (16:4f6a))
+	ld hl, CalcExperience
+	ld b, BANK(CalcExperience)
+	call Bankswitch ; indirect jump to CalcExperience (58f6a (16:4f6a))
 	pop de
 	inc de
 	ld a, [H_NUMTOPRINT] ; $FF00+$96 (aliases: H_MULTIPLICAND)
@@ -27221,64 +27316,71 @@ Func_f51e: ; f51e (3:751e)
 	and a
 	ret
 
-; known jump sources: 31c9 (0:31c9), d8cb (3:58cb), d8d9 (3:58d9), dbd9 (3:5bd9), dbeb (3:5beb), e787 (3:6787), f122 (3:7122), 13760 (4:7760), 1ea8f (7:6a8f), 1ead5 (7:6ad5), 3b059 (e:7059), 3c1eb (f:41eb), 3c1f4 (f:41f4), 3c74c (f:474c), 3c810 (f:4810), 3c819 (f:4819), 3c91c (f:491c), 3c927 (f:4927), 3d1d9 (f:51d9), 3d1e2 (f:51e2), 3ec17 (f:6c17), 402cb (10:42cb), 4fe29 (13:7e29), 51245 (14:5245), 51358 (14:5358), 5137f (14:537f), 55271 (15:5271), 5542e (15:542e), 5545e (15:545e), 55469 (15:5469), 71b2c (1c:5b2c), 71c43 (1c:5c43), 757f3 (1d:57f3), 7669c (1d:669c), 76776 (1d:6776)
-Func_f666: ; f666 (3:7666)
+; predef $10
+; executes operations on a field of bits
+; b = 0 -> reset bit
+; b = 1 -> set bit
+; b = 2 -> read bit (into c and z-flag)
+; hl: base address
+; c: bit index
+HandleBitArray: ; f666 (3:7666)
 	call Load16BitRegisters
 
 ; known jump sources: f38b (3:738b), f39a (3:739a), f3a1 (3:73a1)
-Func_f669: ; f669 (3:7669)
+_HandleBitArray: ; f669 (3:7669)
 	push hl
 	push de
 	push bc
 	ld a, c
 	ld d, a
 	and $7
-	ld e, a
+	ld e, a        ; store bit offset in e
 	ld a, d
 	srl a
 	srl a
-	srl a
+	srl a          ; calc byte offset
 	add l
 	ld l, a
-	jr nc, .asm_f67d
+	jr nc, .noCarry
 	inc h
-.asm_f67d
+.noCarry
 	inc e
 	ld d, $1
-.asm_f680
+.shiftLeftLoop     ; d = 1 << e, bitmask for the used bit
 	dec e
-	jr z, .asm_f687
+	jr z, .operationSelect
 	sla d
-	jr .asm_f680
-.asm_f687
+	jr .shiftLeftLoop
+.operationSelect
 	ld a, b
 	and a
-	jr z, .asm_f695
+	jr z, .resetBit
 	cp $2
-	jr z, .asm_f69d
-	ld b, [hl]
+	jr z, .readBit
+	ld b, [hl] ; set bit
 	ld a, d
 	or b
 	ld [hl], a
-	jr .asm_f6a0
-.asm_f695
+	jr .done
+.resetBit
 	ld b, [hl]
 	ld a, d
 	xor $ff
 	and b
 	ld [hl], a
-	jr .asm_f6a0
-.asm_f69d
+	jr .done
+.readBit
 	ld b, [hl]
 	ld a, d
 	and b
-.asm_f6a0
+.done
 	pop bc
 	pop de
 	pop hl
 	ld c, a
 	ret
 ; f6a5 (3:76a5)
+
 HealParty:
 	ld hl, W_PARTYMON1
 	ld de, W_PARTYMON1_HP
@@ -27362,6 +27464,10 @@ HealParty:
 	jr nz,.restoreBonusPPLoop
 	ret
 
+; predef $9
+; predef $a
+; predef $d
+; predef $e
 ; known jump sources: 2df5 (0:2df5), 40ed (1:40ed)
 Func_f71e: ; f71e (3:771e)
 	call Load16BitRegisters
@@ -29989,33 +30095,36 @@ Func_13653: ; 13653 (4:7653)
 	ret
 
 ; known jump sources: e50c (3:650c), 12d79 (4:6d79)
-Func_1373e: ; 1373e (4:773e)
+; tests if mon [$cf91] can learn move [$d0e0]
+TestMonMoveCompatibility: ; 1373e (4:773e)
 	ld a, [$cf91]
 	ld [$d0b5], a
-	call GetBaseStats
-	ld hl, $d0cc
+	call GetMonHeader
+	ld hl, W_MONHLEARNSET
 	push hl
 	ld a, [$d0e0]
 	ld b, a
 	ld c, $0
-	ld hl, $7773
-.asm_13754
+	ld hl, TechnicalMachines
+.findTMloop
 	ld a, [hli]
 	cp b
-	jr z, .asm_1375b
+	jr z, .TMfoundLoop
 	inc c
-	jr .asm_13754
-.asm_1375b
+	jr .findTMloop
+.TMfoundLoop
 	pop hl
-	ld b, $2
+	ld b, $2  ; read corresponding bit from TM compatibility array
 	ld a, $10
-	jp Predef ; indirect jump to Func_f666 (f666 (3:7666))
+	jp Predef ; indirect jump to HandleBitArray (f666 (3:7666))
 
 ; known jump sources: e490 (3:6490)
-Func_13763: ; 13763 (4:7763)
+; converts TM/HM number in $d11e into move number
+; HMs start at 51
+TMToMove: ; 13763 (4:7763)
 	ld a, [$d11e]
 	dec a
-	ld hl, $7773
+	ld hl, TechnicalMachines
 	ld b, $0
 	ld c, a
 	add hl, bc
@@ -30023,6 +30132,7 @@ Func_13763: ; 13763 (4:7763)
 	ld [$d11e], a
 	ret
 ; 13773 (4:7773)
+
 TechnicalMachines: ; 0x13773
 	db MEGA_PUNCH
 	db RAZOR_WIND
@@ -30368,8 +30478,8 @@ Func_13a58: ; 13a58 (4:7a58)
 	cp $2b
 	jr z, .asm_13a86
 	ld [$d0b5], a
-	ld a, $7
-	ld [$d0b6], a
+	ld a, TRAINER_NAME
+	ld [W_LISTTYPE], a
 	ld a, $e
 	ld [$d0b7], a
 	call GetName
@@ -32505,7 +32615,7 @@ PalletTownScript4:
 	ld [$CF10],a
 	ld a,1
 	ld [$CC57],a
-	ld a,[$FFB8]
+	ld a,[H_LOADEDROMBANK]
 	ld [$CC58],a
 
 	; trigger the next script
@@ -40422,7 +40532,7 @@ UnnamedText_1ea85: ; 0x1ea85
 Func_1ea8a: ; 1ea8a (7:6a8a)
 	ld hl, $d79c
 	ld a, $10
-	jp Predef ; indirect jump to Func_f666 (f666 (3:7666))
+	jp Predef ; indirect jump to HandleBitArray (f666 (3:7666))
 
 ; known jump sources: 1ea55 (7:6a55)
 Func_1ea92: ; 1ea92 (7:6a92)
@@ -40456,7 +40566,7 @@ Func_1ea92: ; 1ea92 (7:6a92)
 	ld b, $2
 	ld hl, $d79a
 	ld a, $10
-	call Predef ; indirect jump to Func_f666 (f666 (3:7666))
+	call Predef ; indirect jump to HandleBitArray (f666 (3:7666))
 	ld a, c
 	and a
 	ret nz
@@ -40777,8 +40887,8 @@ Func_214c2: ; 214c2 (8:54c2)
 	set 6, [hl]
 	xor a
 	ld [$ccd3], a
-	inc a
-	ld [$d0b6], a
+	inc a               ; MONSTER_NAME
+	ld [W_LISTTYPE], a
 	call LoadHpBarAndStatusTilePatterns
 	ld a, [W_LISTSCROLLOFFSET] ; $cc36
 	push af
@@ -41015,8 +41125,8 @@ Func_216be: ; 216be (8:56be)
 	xor a
 	ld [$cf93], a
 	ld [W_LISTMENUID], a ; $cf94
-	inc a
-	ld [$d0b6], a
+	inc a                ; MONSTER_NAME
+	ld [W_LISTTYPE], a
 	ld a, [$cc2b]
 	ld [W_CURMENUITEMID], a ; $cc26
 	call DisplayListMenuID
@@ -43000,14 +43110,14 @@ TangelaPicBack: ; 0x27ce7
 Func_27d6b: ; 27d6b (9:7d6b)
 	call Load16BitRegisters
 	push hl
-	call GetBaseStats
+	call GetMonHeader
 	pop hl
 	push hl
-	ld a, [$d0be]
+	ld a, [W_MONHTYPE1]
 	call Func_27d89
-	ld a, [$d0be]
+	ld a, [W_MONHTYPE1]
 	ld b, a
-	ld a, [$d0bf]
+	ld a, [W_MONHTYPE2]
 	cp b
 	pop hl
 	jr z, asm_27d8c
@@ -43616,83 +43726,137 @@ UnnamedText_2fe3b: ; 0x2fe3b
 ; 0x2fe3b + 5 bytes
 
 ; known jump sources: 3eca5 (f:6ca5), 3f11b (f:711b), 70362 (1c:4362)
-Func_2fe40: ; 2fe40 (b:7e40)
-	ld de, $a203
-	ld hl, $a187
-	call Func_2fe7d
-	call Func_2fe55
-	ld de, $a38b
-	ld hl, $a30f
-	call Func_2fe7d
+; scales both uncompressed sprite chunks by two in every dimension (creating 2x2 output pixels per input pixel)
+; assumes that input sprite chunks are 4x4 tiles, and the rightmost and bottommost 4 pixels will be ignored
+; resulting in a 7*7 tile output sprite chunk
+ScaleSpriteByTwo: ; 2fe40 (b:7e40)
+	ld de, S_SPRITEBUFFER1 + (4*4*8) - 5          ; last byte of input data, last 4 rows already skipped
+	ld hl, S_SPRITEBUFFER0 + SPRITEBUFFERSIZE - 1 ; end of destination buffer
+	call ScaleLastSpriteColumnByTwo               ; last tile column is special case
+	call ScaleFirstThreeSpriteColumnsByTwo        ; scale first 3 tile columns
+	ld de, S_SPRITEBUFFER2 + (4*4*8) - 5          ; last byte of input data, last 4 rows already skipped
+	ld hl, S_SPRITEBUFFER1 + SPRITEBUFFERSIZE - 1 ; end of destination buffer
+	call ScaleLastSpriteColumnByTwo               ; last tile column is special case
 
 ; known jump sources: 2fe49 (b:7e49)
-Func_2fe55: ; 2fe55 (b:7e55)
-	ld b, $3
-.asm_2fe57
-	ld c, $1c
-.asm_2fe59
+ScaleFirstThreeSpriteColumnsByTwo: ; 2fe55 (b:7e55)
+	ld b, $3 ; 3 tile columns
+.columnLoop
+	ld c, 4*8 - 4 ; $1c, 4 tiles minus 4 unused rows
+.columnInnerLoop
 	push bc
 	ld a, [de]
-	ld bc, H_VBCOPYDEST ; $ffc9
-	call Func_2fe97
+	ld bc, -(7*8)+1       ; $ffc9, scale lower nybble and seek to previous output column
+	call ScalePixelsByTwo
 	ld a, [de]
 	dec de
 	swap a
-	ld bc, $37
-	call Func_2fe97
+	ld bc, 7*8+1-2        ; $37, scale upper nybble and seek back to current output column and to the next 2 rows
+	call ScalePixelsByTwo
 	pop bc
 	dec c
-	jr nz, .asm_2fe59
+	jr nz, .columnInnerLoop
 	dec de
 	dec de
 	dec de
 	dec de
 	ld a, b
-	ld bc, $ffc8
+	ld bc, -7*8 ; $ffc8, skip one output column (which has already been written along with the current one)
 	add hl, bc
 	ld b, a
 	dec b
-	jr nz, .asm_2fe57
+	jr nz, .columnLoop
 	ret
 
 ; known jump sources: 2fe46 (b:7e46), 2fe52 (b:7e52)
-Func_2fe7d: ; 2fe7d (b:7e7d)
-	ld a, $1c
-	ld [H_DOWNARROWBLINKCNT1], a ; $FF00+$8b
-	ld bc, rIE ; $ffff
-.asm_2fe84
+ScaleLastSpriteColumnByTwo: ; 2fe7d (b:7e7d)
+	ld a, 4*8 - 4 ; $1c, 4 tiles minus 4 unused rows
+	ld [H_SPRITEINTERLACECOUNTER], a ; $FF00+$8b
+	ld bc, -1 ; $ffff
+.columnInnerLoop
 	ld a, [de]
 	dec de
-	swap a
-	call Func_2fe97
-	ld a, [H_DOWNARROWBLINKCNT1] ; $FF00+$8b
+	swap a                    ; only high nybble contains information
+	call ScalePixelsByTwo
+	ld a, [H_SPRITEINTERLACECOUNTER] ; $FF00+$8b
 	dec a
-	ld [H_DOWNARROWBLINKCNT1], a ; $FF00+$8b
-	jr nz, .asm_2fe84
-	dec de
+	ld [H_SPRITEINTERLACECOUNTER], a ; $FF00+$8b
+	jr nz, .columnInnerLoop
+	dec de                    ; skip last 4 rows of new column
 	dec de
 	dec de
 	dec de
 	ret
 
 ; known jump sources: 2fe5e (b:7e5e), 2fe68 (b:7e68), 2fe88 (b:7e88)
-Func_2fe97: ; 2fe97 (b:7e97)
+; scales the given 4 bits in a (4x1 pixels) to 2 output bytes (8x2 pixels)
+; hl: destination pointer
+; bc: destination pointer offset (added after the two bytes have been written)
+ScalePixelsByTwo: ; 2fe97 (b:7e97)
 	push hl
 	and $f
-	ld hl, $7ea8
+	ld hl, DuplicateBitsTable
 	add l
 	ld l, a
-	jr nc, .asm_2fea2
+	jr nc, .noCarry
 	inc h
-.asm_2fea2
+.noCarry
 	ld a, [hl]
 	pop hl
-	ld [hld], a
+	ld [hld], a  ; write output byte twice to make it 2 pixels high
 	ld [hl], a
-	add hl, bc
+	add hl, bc   ; add offset
 	ret
 
-INCBIN "baserom.gbc",$2fea8,$2ff04 - $2fea8
+; repeats each input bit twice
+DuplicateBitsTable: ; 0x2fea8
+db $00, $03, $0c, $0f
+db $30, $33, $3c, $3f
+db $c0, $c3, $cc, $cf
+db $f0, $f3, $fc, $ff
+
+; no known jump sources
+Func_2feb8 ; 0x2feb8
+	xor a
+	ld hl, $cd6d
+	ld [hli], a
+	ld a, [$ff00+$f3]
+	and a
+	ld a, [$d022]
+	jr z, .asm_2fec8 ; 0x2fec3 $3
+	ld a, [$cff3]
+.asm_2fec8
+	add a
+	ld [$ff00+$98], a
+	xor a
+	ld [$ff00+$95], a
+	ld [$ff00+$96], a
+	ld [$ff00+$97], a
+	ld a, $64
+	ld [$ff00+$99], a
+	ld b, $4
+	call Divide
+	ld a, [$ff00+$98]
+	ld [hli], a
+	ld a, [$ff00+$99]
+	ld [$ff00+$98], a
+	ld a, $a
+	ld [$ff00+$99], a
+	ld b, $4
+	call Divide
+	ld a, [$ff00+$98]
+	swap a
+	ld b, a
+	ld a, [$ff00+$99]
+	add b
+	ld [hl], a
+	ld de, $cce7
+	ld c, $3
+	ld a, $b
+	call Predef
+	ld hl, $7f04
+	jp PrintText
+; 0x2ff04
 
 UnnamedText_2ff04: ; 0x2ff04
 	TX_FAR _UnnamedText_2ff04
@@ -50897,8 +51061,8 @@ Func_39b87: ; 39b87 (e:5b87)
 	ld [$d0b5], a
 	ld a, $2c
 	ld [$d0b7], a
-	ld a, $2
-	ld [$d0b6], a
+	ld a, MOVE_NAME
+	ld [W_LISTTYPE], a
 	call GetName
 	ld hl, $cd6d
 .asm_39ba7
@@ -50970,9 +51134,9 @@ Func_39bd5: ; 39bd5 (e:5bd5)
 .asm_39c10
 	ld hl, $cf7b
 	ld de, $472b
-	ld a, $4
+	ld a, ITEM_NAME
 .asm_39c18
-	ld [$d0b6], a
+	ld [W_LISTTYPE], a
 	ld a, l
 	ld [$cf8b], a
 	ld a, h
@@ -52798,8 +52962,8 @@ Func_3ad71: ; 3ad71 (e:6d71)
 	ld [$d0b5], a
 	ld [$cf98], a
 	ld [$ceea], a
-	ld a, $1
-	ld [$d0b6], a
+	ld a, MONSTER_NAME
+	ld [W_LISTTYPE], a
 	ld a, $e
 	ld [$d0b7], a
 	call GetName
@@ -52824,7 +52988,7 @@ Func_3ad71: ; 3ad71 (e:6d71)
 	ld hl, $43de
 	ld bc, $1c
 	call AddNTimes
-	ld de, $d0b8
+	ld de, W_MONHEADER
 	call CopyData
 	ld a, [$d0b5]
 	ld [$d0b8], a
@@ -52871,7 +53035,7 @@ Func_3ad71: ; 3ad71 (e:6d71)
 	call Func_3af5b
 	pop hl
 	ld a, $42
-	call Predef ; indirect jump to Func_5db5e (5db5e (17:5b5e))
+	call Predef ; indirect jump to SetPartyMonTypes (5db5e (17:5b5e))
 	ld a, [W_ISINBATTLE] ; $d057
 	and a
 	call z, Func_3af52
@@ -53167,7 +53331,7 @@ Func_3b04e: ; 3b04e (e:704e)
 ; known jump sources: 3ad19 (e:6d19), 3ad47 (e:6d47), 3aec4 (e:6ec4), 3aecb (e:6ecb)
 Func_3b057: ; 3b057 (e:7057)
 	ld a, $10
-	jp Predef ; indirect jump to Func_f666 (f666 (3:7666))
+	jp Predef ; indirect jump to HandleBitArray (f666 (3:7666))
 ; 3b05c (e:705c)
 EvosMovesPointerTable: ; 705C
 	dw Mon112_EvosMoves
@@ -55912,11 +56076,11 @@ Func_3c1ad: ; 3c1ad (f:41ad)
 	push bc
 	ld hl, $d058
 	ld a, $10
-	call Predef ; indirect jump to Func_f666 (f666 (3:7666))
+	call Predef ; indirect jump to HandleBitArray (f666 (3:7666))
 	ld hl, $ccf5
 	pop bc
 	ld a, $10
-	call Predef ; indirect jump to Func_f666 (f666 (3:7666))
+	call Predef ; indirect jump to HandleBitArray (f666 (3:7666))
 	call Func_3cba6
 	call Func_3725
 	call Func_3cc91
@@ -56669,7 +56833,7 @@ Func_3c741: ; 3c741 (f:4741)
 	ld hl, $d058
 	ld b, $0
 	ld a, $10
-	call Predef ; indirect jump to Func_f666 (f666 (3:7666))
+	call Predef ; indirect jump to HandleBitArray (f666 (3:7666))
 	ld hl, W_ENEMYBATTSTATUS1 ; $d067
 	res 2, [hl]
 	ld a, [$d083]
@@ -56769,11 +56933,11 @@ Func_3c7d8: ; 3c7d8 (f:47d8)
 	ld b, $1
 	push bc
 	ld a, $10
-	call Predef ; indirect jump to Func_f666 (f666 (3:7666))
+	call Predef ; indirect jump to HandleBitArray (f666 (3:7666))
 	pop bc
 	ld hl, $ccf5
 	ld a, $10
-	call Predef ; indirect jump to Func_f666 (f666 (3:7666))
+	call Predef ; indirect jump to HandleBitArray (f666 (3:7666))
 	call Func_3cba6
 	call GBPalWhiteOut
 	call Func_3ee5b
@@ -57295,7 +57459,7 @@ Func_3cba6: ; 3cba6 (f:4ba6)
 	call CopyData
 	ld a, [$cfd9]
 	ld [$d0b5], a
-	call GetBaseStats
+	call GetMonHeader
 	ld hl, W_PARTYMON1NAME ; $d2b5
 	ld a, [W_PLAYERMONNUMBER] ; $cc2f
 	call Func_3a7d
@@ -57339,11 +57503,11 @@ Func_3cc13: ; 3cc13 (f:4c13)
 	call CopyData
 	ld a, [$cfe5]
 	ld [$d0b5], a
-	call GetBaseStats
+	call GetMonHeader
 	ld hl, $d9ee
 	ld a, [W_WHICHPOKEMON] ; $cf92
 	call Func_3a7d
-	ld de, $cfda
+	ld de, W_ENEMYMONNAME
 	ld bc, $b
 	call CopyData
 	ld hl, W_ENEMYMONLEVEL ; $cff3
@@ -57351,7 +57515,7 @@ Func_3cc13: ; 3cc13 (f:4c13)
 	ld bc, $b
 	call CopyData
 	call Func_3ed1e
-	ld hl, $d0b9
+	ld hl, W_MONHBASESTATS
 	ld de, $d002
 	ld b, $5
 .asm_3cc79
@@ -57386,7 +57550,7 @@ Func_3cc91: ; 3cc91 (f:4c91)
 Func_3cca4: ; 3cca4 (f:4ca4)
 	call Func_3cd60
 	ld a, $4
-	call Predef ; indirect jump to Func_3f103 (3f103 (f:7103))
+	call Predef ; indirect jump to LoadMonBackSprite (3f103 (f:7103))
 	xor a
 	ld [$FF00+$e1], a
 	ld hl, $cc2d
@@ -57549,7 +57713,7 @@ Func_3cdec: ; 3cdec (f:4dec)
 	ld hl, Func_3a919
 	ld b, BANK(Func_3a919)
 	call Bankswitch ; indirect jump to Func_3a919 (3a919 (e:6919))
-	ld de, $cfda
+	ld de, W_ENEMYMONNAME
 	ld hl, $c3a1
 	call Func_3ce9c
 	call PlaceString
@@ -58008,9 +58172,9 @@ Func_3d119: ; 3d119 (f:5119)
 	ld a, [$cfe5]
 	ld [$cf91], a
 	ld [$d0b5], a
-	call GetBaseStats
+	call GetMonHeader
 	ld de, $9000
-	call Func_1665
+	call LoadMonFrontSprite
 	jr .asm_3d187
 .asm_3d182
 	ld b, $1e
@@ -58053,11 +58217,11 @@ Func_3d1ba: ; 3d1ba (f:51ba)
 	push bc
 	ld hl, $d058
 	ld a, $10
-	call Predef ; indirect jump to Func_f666 (f666 (3:7666))
+	call Predef ; indirect jump to HandleBitArray (f666 (3:7666))
 	pop bc
 	ld hl, $ccf5
 	ld a, $10
-	call Predef ; indirect jump to Func_f666 (f666 (3:7666))
+	call Predef ; indirect jump to HandleBitArray (f666 (3:7666))
 	call Func_3cba6
 	call Func_3cc91
 	call Func_3719
@@ -58784,7 +58948,7 @@ asm_3d6b0:
 	ld a,[W_PLAYERMOVENUM]
 	call $6F07
 	call $6ED3
-	call $4D60
+	call Func_3cd60
 	ld a,[W_PLAYERBATTSTATUS2]
 	bit 4,a
 	ld hl,$5771
@@ -59969,7 +60133,7 @@ Func_3df1c: ; 3df1c (f:5f1c)
 	ld [W_CURENEMYLVL], a ; $d127
 	ld a, [$cfe5]
 	ld [$d0b5], a
-	call GetBaseStats
+	call GetMonHeader
 	ld hl, $cff1
 	ld de, $cfaf
 	ld a, [hli]
@@ -60115,8 +60279,10 @@ Func_3e016: ; 3e016 (f:6016)
 
 INCBIN "baserom.gbc",$3e01e,$3e023 - $3e01e
 
-; known jump sources: 3d6eb (f:56eb), 3e762 (f:6762)
-Func_3e023: ; 3e023 (f:6023)
+; determines if attack is a critical hit
+; azure heights claims "the fastest pokémon (who are,not coincidentally,
+; among the most popular) tend to CH about 20 to 25% of the time."
+CriticalHitTest: ; 3e023 (f:6023)
 	xor a
 	ld [$d05e], a
 	ld a, [H_WHOSETURN] ; $FF00+$f3
@@ -60126,37 +60292,34 @@ Func_3e023: ; 3e023 (f:6023)
 	ld a, [$d014]
 .asm_3e032
 	ld [$d0b5], a
-	call GetBaseStats
-	ld a, [$d0bc]
+	call GetMonHeader
+	ld a, [W_MONHBASESPEED]
 	ld b, a
-	srl b
+	srl b                        ; (effective (base speed/2))
 	ld a, [H_WHOSETURN] ; $FF00+$f3
 	and a
 	ld hl, W_PLAYERMOVEPOWER ; $cfd4
 	ld de, W_PLAYERBATTSTATUS2 ; $d063
-	jr z, CriticalHitProbability
+	jr z, .calcCriticalHitProbability
 	ld hl, W_ENEMYMOVEPOWER ; $cfce
 	ld de, W_ENEMYBATTSTATUS2 ; $d068
-; 3e04f (f:604f)
-
-; azure heights claims "the fastest pokémon (who are,not coincidentally,
-; among the most popular) tend to CH about 20 to 25% of the time."
-CriticalHitProbability: ; 0x3e04f
+.calcCriticalHitProbability      ; 0x3e04f
 	ld a, [hld]                  ; read base power from RAM
 	and a
 	ret z                        ; do nothing if zero
 	dec hl
 	ld c, [hl]                   ; read move id
 	ld a, [de]
-	bit 2, a
-	jr nz, .asm_3e061
-	sla b
-	jr nc, .asm_3e063
-	ld b, $ff
-	jr .asm_3e063
-.asm_3e061
+	bit 2, a                     ; test for focus energy
+	jr nz, .focusEnergyUsed      ; bug: using focus energy causes a shift to the right instead of left,
+	                             ; resulting in 1/4 the usual crit chance
+	sla b                        ; (effective (base speed/2)*2)
+	jr nc, .noFocusEnergyUsed
+	ld b, $ff                    ; cap at 255/256
+	jr .noFocusEnergyUsed
+.focusEnergyUsed
 	srl b
-.asm_3e063
+.noFocusEnergyUsed
 	ld hl, HighCriticalMoves      ; table of high critical hit moves
 .Loop
 	ld a, [hli]                  ; read move from move table
@@ -60164,14 +60327,14 @@ CriticalHitProbability: ; 0x3e04f
 	jr z, .HighCritical          ; if so, the move about to be used is a high critical hit ratio move 
 	inc a                        ; move on to the next move, FF terminates loop
 	jr nz, .Loop                 ; check the next move in HighCriticalMoves
-	srl b                        ; /2 for regular move (effective 1/512?)
+	srl b                        ; /2 for regular move (effective (base speed / 2))
 	jr .SkipHighCritical         ; continue as a normal move
 .HighCritical
 	sla b                        ; *2 for high critical hit moves
-	jr nc, .asm_3e077
-	ld b, $ff                    ; set to FF (max) on overflow
-.asm_3e077
-	sla b                        ; *4 for high critical move (effective 1/64?)
+	jr nc, .noCarry
+	ld b, $ff                    ; cap at 255/256
+.noCarry
+	sla b                        ; *4 for high critical move (effective (base speed/2)*8))
 	jr nc, .SkipHighCritical
 	ld b, $ff
 .SkipHighCritical
@@ -60179,7 +60342,7 @@ CriticalHitProbability: ; 0x3e04f
 	rlc a
 	rlc a
 	rlc a
-	cp b                         ; check a against $ff
+	cp b                         ; check a against calculated crit rate
 	ret nc                       ; no critical hit if no borrow
 	ld a, $1
 	ld [$d05e], a                ; set critical hit flag
@@ -61223,8 +61386,8 @@ asm_3e70b: ; 3e70b (f:670b)
 	ld [$d0b5], a
 	ld a, $2c
 	ld [$d0b7], a
-	ld a, $2
-	ld [$d0b6], a
+	ld a, MOVE_NAME
+	ld [W_LISTTYPE], a
 	call GetName
 	ld de, $cd6d
 	call Func_3826
@@ -61248,7 +61411,7 @@ asm_3e72b: ; 3e72b (f:672b)
 	ld de, $1
 	call IsInArray
 	jp c, Func_3e77f
-	call Func_3e023
+	call CriticalHitTest
 	call HandleCounterMove
 	jr z, asm_3e782
 	call Func_3ec81
@@ -61719,7 +61882,7 @@ asm_3eadc: ; 3eadc (f:6adc)
 	ld a, $2c
 	ld [$d0b7], a
 	ld a, $2
-	ld [$d0b6], a
+	ld [W_LISTTYPE], a
 	call GetName
 	ld de, $cd6d
 	jp Func_3826
@@ -61732,7 +61895,7 @@ Func_3eb01: ; 3eb01 (f:6b01)
 	ld a, [$cfd8]
 	ld [$cfe5], a
 	ld [$d0b5], a
-	call GetBaseStats
+	call GetMonHeader
 	ld a, [W_ENEMYBATTSTATUS3] ; $d069
 	bit 3, a
 	ld hl, $cceb
@@ -61768,14 +61931,14 @@ Func_3eb01: ; 3eb01 (f:6b01)
 	jr nz, .asm_3eb86
 	ld a, [W_ENEMYMONMAXHP] ; $cff4
 	ld [hli], a
-	ld a, [$cff5]
+	ld a, [W_ENEMYMONMAXHP+1]
 	ld [hli], a
 	xor a
 	inc hl
 	ld [hl], a
 	jr .asm_3eb86
 .asm_3eb65
-	ld hl, W_WATERMONS ; $d8a5 (aliases: W_ENEMYMON1HP)
+	ld hl, W_ENEMYMON1HP ; $d8a5 (aliases: W_WATERMONS)
 	ld a, [W_WHICHPOKEMON] ; $cf92
 	ld bc, $2c
 	call AddNTimes
@@ -61790,15 +61953,15 @@ Func_3eb01: ; 3eb01 (f:6b01)
 	ld [W_ENEMYMONSTATUS], a ; $cfe9
 	jr .asm_3eb86
 .asm_3eb86
-	ld hl, $d0be
-	ld de, W_ENEMYMONTYPE1 ; $cfea (aliases: W_ENEMYMONTYPES)
-	ld a, [hli]
+	ld hl, W_MONHTYPES
+	ld de, W_ENEMYMONTYPES ; $cfea
+	ld a, [hli]            ; copy type 1
 	ld [de], a
 	inc de
-	ld a, [hli]
+	ld a, [hli]            ; copy type 2
 	ld [de], a
 	inc de
-	ld a, [hli]
+	ld a, [hli]            ; copy catch rate
 	ld [de], a
 	inc de
 	ld a, [W_ISINBATTLE] ; $d057
@@ -61812,7 +61975,7 @@ Func_3eb01: ; 3eb01 (f:6b01)
 	call CopyData
 	jr .asm_3ebca
 .asm_3ebb0
-	ld hl, $d0c7
+	ld hl, W_MONHMOVES
 	ld a, [hli]
 	ld [de], a
 	inc de
@@ -61836,7 +61999,7 @@ Func_3eb01: ; 3eb01 (f:6b01)
 	ld de, $cffd
 	ld a, $5e
 	call Predef ; indirect jump to Func_f473 (f473 (3:7473))
-	ld hl, $d0b9
+	ld hl, W_MONHBASESTATS
 	ld de, $d002
 	ld b, $5
 .asm_3ebdd
@@ -61845,17 +62008,17 @@ Func_3eb01: ; 3eb01 (f:6b01)
 	inc de
 	dec b
 	jr nz, .asm_3ebdd
-	ld hl, $d0c0
+	ld hl, W_MONHCATCHRATE
 	ld a, [hli]
 	ld [de], a
 	inc de
-	ld a, [hl]
+	ld a, [hl]     ; base exp
 	ld [de], a
 	ld a, [$cfd8]
 	ld [$d11e], a
 	call GetMonName
 	ld hl, $cd6d
-	ld de, $cfda
+	ld de, W_ENEMYMONNAME
 	ld bc, $b
 	call CopyData
 	ld a, [$cfd8]
@@ -61868,7 +62031,7 @@ Func_3eb01: ; 3eb01 (f:6b01)
 	ld b, $1
 	ld hl, W_SEENPOKEMON ; $d30a
 	ld a, $10
-	call Predef ; indirect jump to Func_f666 (f666 (3:7666))
+	call Predef ; indirect jump to HandleBitArray (f666 (3:7666))
 	ld hl, W_ENEMYMONLEVEL ; $cff3
 	ld de, $cd23
 	ld bc, $b
@@ -61943,9 +62106,9 @@ Func_3ec92: ; 3ec92 (f:6c92)
 	ld de, $7e9a
 .asm_3ec9e
 	ld a, $c
-	call Func_36eb
+	call UncompressSpriteFromDE
 	ld a, $3
-	call Predef ; indirect jump to Func_2fe40 (2fe40 (b:7e40))
+	call Predef ; indirect jump to ScaleSpriteByTwo (2fe40 (b:7e40))
 	ld hl, $c300
 	xor a
 	ld [H_DOWNARROWBLINKCNT1], a ; $FF00+$8b
@@ -61978,14 +62141,14 @@ Func_3ec92: ; 3ec92 (f:6c92)
 	dec b
 	jr nz, .asm_3ecb2
 	ld de, $9310
-	call Func_16ea
+	call InterlaceMergeSpriteBuffers
 	ld a, $a
 	ld [$0], a
 	xor a
 	ld [$4000], a
 	ld hl, $8000
-	ld de, $a188
-	ld a, [$FF00+$b8]
+	ld de, S_SPRITEBUFFER1
+	ld a, [H_LOADEDROMBANK]
 	ld b, a
 	ld c, $31
 	call CopyVideoData
@@ -62429,43 +62592,43 @@ Func_3ef8b: ; 3ef8b (f:6f8b)
 	call Func_3eb01
 	call Func_3ec32
 	ld a, [W_CUROPPONENT] ; $d059
-	cp $91
-	jr z, .asm_3efa2
+	cp MAROWAK
+	jr z, .isGhost
 	call Function583A
-	jr nz, .asm_3efd7
-.asm_3efa2
-	ld hl, $d0c2
+	jr nz, .isNoGhost
+.isGhost
+	ld hl, W_MONHSPRITEDIM
 	ld a, $66
-	ld [hli], a
+	ld [hli], a   ; write sprite dimensions
 	ld bc, $66b5
 	ld a, c
-	ld [hli], a
+	ld [hli], a   ; write  front sprite pointer
 	ld [hl], b
-	ld hl, $cfda
-	ld a, $86
+	ld hl, W_ENEMYMONNAME  ; set name to "GHOST"
+	ld a, "G"
 	ld [hli], a
-	ld a, $87
+	ld a, "H"
 	ld [hli], a
-	ld a, $8e
+	ld a, "O"
 	ld [hli], a
-	ld a, $92
+	ld a, "S"
 	ld [hli], a
-	ld a, $93
+	ld a, "T"
 	ld [hli], a
 	ld [hl], $50
 	ld a, [$cf91]
 	push af
-	ld a, $b8
+	ld a, MON_GHOST
 	ld [$cf91], a
 	ld de, $9000
-	call Func_1665
+	call LoadMonFrontSprite ; load ghost sprite
 	pop af
 	ld [$cf91], a
-	jr .asm_3efdd
-.asm_3efd7
+	jr .spriteLoaded
+.isNoGhost
 	ld de, $9000
-	call Func_1665
-.asm_3efdd
+	call LoadMonFrontSprite ; load mon sprite
+.spriteLoaded
 	xor a
 	ld [W_TRAINERCLASS], a ; $d031
 	ld [$FF00+$e1], a
@@ -62480,7 +62643,7 @@ Func_3efeb: ; 3efeb (f:6feb)
 	call Func_3c04c
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
-	ld hl, $704a
+	ld hl, Unknown_3f04a
 	call PrintText
 	call Func_3719
 	call ClearScreen
@@ -62515,7 +62678,8 @@ Func_3efeb: ; 3efeb (f:6feb)
 	scf
 	ret
 
-INCBIN "baserom.gbc",$3f04a,$3f04b - $3f04a
+Unknown_3f04a:
+	db $50
 
 ; known jump sources: 396e1 (e:56e1), 3ef69 (f:6f69)
 Func_3f04b: ; 3f04b (f:704b)
@@ -62529,11 +62693,11 @@ Func_3f04b: ; 3f04b (f:704b)
 	jr z, .asm_3f05d
 	ld a, $4
 .asm_3f05d
-	call Func_36eb
+	call UncompressSpriteFromDE
 	ld de, $9000
 	ld a, $77
 	ld c, a
-	jp Func_1672
+	jp LoadUncompressedSpriteData
 
 INCBIN "baserom.gbc",$3f069,$3f073 - $3f069
 
@@ -62591,7 +62755,7 @@ asm_3f0d0: ; 3f0d0 (f:70d0)
 	ld bc, $707
 	ld de, $14
 	push af
-	ld a, [$d0aa]
+	ld a, [W_SPRITEFLIPPED]
 	and a
 	jr nz, .asm_3f0ed
 	pop af
@@ -62634,23 +62798,25 @@ asm_3f0d0: ; 3f0d0 (f:70d0)
 	ret
 
 ; known jump sources: 3cca9 (f:4ca9), 702a8 (1c:42a8), 797c2 (1e:57c2)
-Func_3f103: ; 3f103 (f:7103)
+; loads back sprite of mon to $8000
+; assumes the corresponding mon header is already loaded
+LoadMonBackSprite: ; 3f103 (f:7103)
 	ld a, [$cfd9]
 	ld [$cf91], a
 	ld hl, $c405
 	ld b, $7
 	ld c, $8
 	call ClearScreenArea
-	ld hl, $d
-	call Unknown_1627
+	ld hl,  W_MONHBACKSPRITE - W_MONHEADER
+	call UncompressMonSprite
 	ld a, $3
-	call Predef ; indirect jump to Func_2fe40 (2fe40 (b:7e40))
+	call Predef ; indirect jump to ScaleSpriteByTwo (2fe40 (b:7e40))
 	ld de, $9310
-	call Func_16ea
+	call InterlaceMergeSpriteBuffers ; combine the two buffers to a single 2bpp sprite
 	ld hl, $8000
 	ld de, $9310
-	ld c, $31
-	ld a, [$FF00+$b8]
+	ld c, (2*SPRITEBUFFERSIZE)/16 ; count of 16-byte chunks to be copied
+	ld a, [H_LOADEDROMBANK]
 	ld b, a
 	jp CopyVideoData
 
@@ -66721,7 +66887,7 @@ Func_415a4: ; 415a4 (10:55a4)
 	ld a, [H_AUTOBGTRANSFERENABLED] ; $FF00+$ba
 	xor $1
 	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
-	call GetBaseStats
+	call GetMonHeader
 	ld hl, $c3cf
 	call Func_1384
 	ld c, $a
@@ -75775,7 +75941,7 @@ Func_4fe11: ; 4fe11 (13:7e11)
 	ld hl, W_OWNEDPOKEMON ; $d2f7
 	ld b, $1
 	ld a, $10
-	call Predef ; indirect jump to Func_f666 (f666 (3:7666))
+	call Predef ; indirect jump to HandleBitArray (f666 (3:7666))
 	pop af
 	ld [$d11e], a
 	call GetMonName
@@ -75854,23 +76020,24 @@ GetPredefPointer: ; 7E49
 PredefPointers: ; 7E79
 ; these are pointers to ASM routines.
 ; they appear to be used in overworld map scripts.
-	dbw $0F,$4D60
-	dbw $0F,$70C6
-	dbw $0F,$7073
-	dbw $0B,$7E40
-	dbw $0F,$7103
-	dbw $1E,$5ABA
+	dbw BANK(Func_3cd60),Func_3cd60
+	dbw BANK(Func_3f0c6),Func_3f0c6
+	dbw BANK(Func_3f073),Func_3f073
+	dbw BANK(ScaleSpriteByTwo), ScaleSpriteByTwo
+	db BANK(LoadMonBackSprite) ; dbw macro gives an error for some reason
+	dw LoadMonBackSprite
+	dbw BANK(Func_79aba),Func_79aba
 	dbw $03,$7132
 HealPartyPredef:
 	dbw BANK(HealParty),HealParty
 MoveAnimationPredef:
 	dbw BANK(MoveAnimation),MoveAnimation; 08 play move animation
-	dbw $03,$771E
-	dbw $03,$771E
+	dbw BANK(Func_f71e),Func_f71e
+	dbw BANK(Func_f71e),Func_f71e
 	dbw $03,$781D
 	dbw $03,$7836
-	dbw $03,$771E
-	dbw $03,$771E
+	dbw BANK(Func_f71e),Func_f71e
+	dbw BANK(Func_f71e),Func_f71e
 	dbw $03,$7850
 	dbw $03,$7666
 	dbw $03,$71D7
@@ -77423,7 +77590,7 @@ Func_51346: ; 51346 (14:5346)
 	ld b, $2
 	ld hl, W_OBTAINEDBADGES ; $d356
 	ld a, $10
-	call Predef ; indirect jump to Func_f666 (f666 (3:7666))
+	call Predef ; indirect jump to HandleBitArray (f666 (3:7666))
 	ld a, c
 	and a
 	jr nz, .asm_5136e
@@ -77441,7 +77608,7 @@ Func_51346: ; 51346 (14:5346)
 	ld b, $1
 	ld hl, $d7ed
 	ld a, $10
-	call Predef ; indirect jump to Func_f666 (f666 (3:7666))
+	call Predef ; indirect jump to HandleBitArray (f666 (3:7666))
 	ld a, $2
 	ld [$d667], a
 	ret
@@ -78876,11 +79043,11 @@ SilphCo7Text4: ; 0x51e2d
 	jr nz, .asm_0f7ee ; 0x51e33
 	ld hl, UnnamedText_51e46
 	call PrintText
-	jr .asm_27a32 ; 0x51e3b
+	jr .selectLowNybble2 ; 0x51e3b
 .asm_0f7ee ; 0x51e3d
 	ld hl, UnnamedText_51e4b
 	call PrintText
-.asm_27a32 ; 0x51e43
+.selectLowNybble2 ; 0x51e43
 	jp TextScriptEnd
 
 UnnamedText_51e46: ; 0x51e46
@@ -80767,7 +80934,7 @@ Func_5525f: ; 5525f (15:525f)
 	ld c, a
 	ld b, $2
 	ld a, $10
-	call Predef ; indirect jump to Func_f666 (f666 (3:7666))
+	call Predef ; indirect jump to HandleBitArray (f666 (3:7666))
 	ld a, c
 	and a
 	pop hl
@@ -80863,11 +81030,11 @@ Func_5525f: ; 5525f (15:525f)
 	add hl, bc
 	ld a, [hl]
 	ld [$d0b5], a
-	call GetBaseStats
+	call GetMonHeader
 	ld d, $64
-	ld hl, Func_58f6a
-	ld b, BANK(Func_58f6a)
-	call Bankswitch ; indirect jump to Func_58f6a (58f6a (16:4f6a))
+	ld hl, CalcExperience
+	ld b, BANK(CalcExperience)
+	call Bankswitch ; indirect jump to CalcExperience (58f6a (16:4f6a))
 	ld a, [H_NUMTOPRINT] ; $FF00+$96 (aliases: H_MULTIPLICAND)
 	ld b, a
 	ld a, [$FF00+$97]
@@ -80921,7 +81088,7 @@ Func_5525f: ; 5525f (15:525f)
 	ld a, [hl]
 	ld [$d0b5], a
 	ld [$d11e], a
-	call GetBaseStats
+	call GetMonHeader
 	ld bc, $23
 	add hl, bc
 	push hl
@@ -81017,7 +81184,7 @@ Func_5525f: ; 5525f (15:525f)
 	ld c, a
 	ld b, $1
 	ld a, $10
-	call Predef ; indirect jump to Func_f666 (f666 (3:7666))
+	call Predef ; indirect jump to HandleBitArray (f666 (3:7666))
 	pop hl
 	pop af
 	ld [W_CURENEMYLVL], a ; $d127
@@ -81044,13 +81211,13 @@ Func_55436: ; 55436 (15:5436)
 	ld b, $1
 	push bc
 	ld a, $10
-	call Predef ; indirect jump to Func_f666 (f666 (3:7666))
+	call Predef ; indirect jump to HandleBitArray (f666 (3:7666))
 	ld hl, $ccf5
 	xor a
 	ld [hl], a
 	pop bc
 	ld a, $10
-	jp Predef ; indirect jump to Func_f666 (f666 (3:7666))
+	jp Predef ; indirect jump to HandleBitArray (f666 (3:7666))
 
 ; known jump sources: 55255 (15:5255)
 Func_5546c: ; 5546c (15:546c)
@@ -85153,11 +85320,11 @@ UnnamedText_58f3e: ; 0x58f3e
 Func_58f43: ; 58f43 (16:4f43)
 	ld a, [$cf98]
 	ld [$d0b5], a
-	call GetBaseStats
+	call GetMonHeader
 	ld d, $1
 .asm_58f4e
 	inc d
-	call Func_58f6a
+	call CalcExperience
 	push hl
 	ld hl, $cfa8
 	ld a, [$FF00+$98]
@@ -85178,121 +85345,183 @@ Func_58f43: ; 58f43 (16:4f43)
 	ret
 
 ; known jump sources: de9a (3:5e9a), e88c (3:688c), f431 (3:7431), 12c94 (4:6c94), 55312 (15:5312), 58f4f (16:4f4f)
-Func_58f6a: ; 58f6a (16:4f6a)
-	ld a, [$d0cb]
+; calculates the amount of experience needed for level d
+CalcExperience: ; 58f6a (16:4f6a)
+	ld a, [W_MONHGROWTHRATE]
 	add a
 	add a
 	ld c, a
 	ld b, $0
-	ld hl, $501d
+	ld hl, GrowthRateTable
 	add hl, bc
-	call Func_59010
+	call CalcDSquared
 	ld a, d
-	ld [H_REMAINDER], a ; $FF00+$99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
+	ld [H_MULTIPLIER], a ; $FF00+$99
 	call Multiply
 	ld a, [hl]
 	and $f0
 	swap a
-	ld [H_REMAINDER], a ; $FF00+$99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
+	ld [H_MULTIPLIER], a ; $FF00+$99
 	call Multiply
 	ld a, [hli]
 	and $f
-	ld [H_REMAINDER], a ; $FF00+$99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
+	ld [H_DIVISOR], a ; $FF00+$99
 	ld b, $4
 	call Divide
-	ld a, [H_NUMTOPRINT] ; $FF00+$96 (aliases: H_MULTIPLICAND)
+	ld a, [H_MULTIPLICAND] ; $FF00+$96 (aliases: H_NUMTOPRINT)
 	push af
-	ld a, [$FF00+$97]
+	ld a, [H_MULTIPLICAND+1]
 	push af
-	ld a, [$FF00+$98]
+	ld a, [H_MULTIPLICAND+2]
 	push af
-	call Func_59010
+	call CalcDSquared
 	ld a, [hl]
 	and $7f
-	ld [H_REMAINDER], a ; $FF00+$99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
+	ld [H_MULTIPLIER], a ; $FF00+$99
 	call Multiply
-	ld a, [H_NUMTOPRINT] ; $FF00+$96 (aliases: H_MULTIPLICAND)
+	ld a, [H_MULTIPLICAND] ; $FF00+$96 (aliases: H_NUMTOPRINT)
 	push af
-	ld a, [$FF00+$97]
+	ld a, [H_MULTIPLICAND+1]
 	push af
-	ld a, [$FF00+$98]
+	ld a, [H_MULTIPLICAND+2]
 	push af
 	ld a, [hli]
 	push af
 	xor a
-	ld [H_NUMTOPRINT], a ; $FF00+$96 (aliases: H_MULTIPLICAND)
-	ld [$FF00+$97], a
+	ld [H_MULTIPLICAND], a ; $FF00+$96
+	ld [H_MULTIPLICAND+1], a
 	ld a, d
-	ld [$FF00+$98], a
+	ld [H_MULTIPLICAND+2], a
 	ld a, [hli]
-	ld [H_REMAINDER], a ; $FF00+$99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
+	ld [H_MULTIPLIER], a
 	call Multiply
 	ld b, [hl]
-	ld a, [$FF00+$98]
+	ld a, [H_MULTIPLICAND+2]
 	sub b
-	ld [$FF00+$98], a
+	ld [H_MULTIPLICAND+2], a
 	ld b, $0
-	ld a, [$FF00+$97]
+	ld a, [H_MULTIPLICAND+1]
 	sbc b
-	ld [$FF00+$97], a
-	ld a, [H_NUMTOPRINT] ; $FF00+$96 (aliases: H_MULTIPLICAND)
+	ld [H_MULTIPLICAND+1], a
+	ld a, [H_MULTIPLICAND] ; $FF00+$96
 	sbc b
-	ld [H_NUMTOPRINT], a ; $FF00+$96 (aliases: H_MULTIPLICAND)
+	ld [H_MULTIPLICAND], a ; $FF00+$96
 	pop af
 	and $80
-	jr nz, .asm_58feb
+	jr nz, .subtractSquaredTerm ; check sign
 	pop bc
-	ld a, [$FF00+$98]
+	ld a, [H_MULTIPLICAND+2]
 	add b
-	ld [$FF00+$98], a
+	ld [H_MULTIPLICAND+2], a
 	pop bc
-	ld a, [$FF00+$97]
+	ld a, [H_MULTIPLICAND+1]
 	adc b
-	ld [$FF00+$97], a
+	ld [H_MULTIPLICAND+1], a
 	pop bc
-	ld a, [H_NUMTOPRINT] ; $FF00+$96 (aliases: H_MULTIPLICAND)
+	ld a, [H_MULTIPLICAND]
 	adc b
-	ld [H_NUMTOPRINT], a ; $FF00+$96 (aliases: H_MULTIPLICAND)
-	jr .asm_58ffd
-.asm_58feb
+	ld [H_MULTIPLICAND], a
+	jr .addCubedTerm
+.subtractSquaredTerm
 	pop bc
-	ld a, [$FF00+$98]
+	ld a, [H_MULTIPLICAND+2]
 	sub b
-	ld [$FF00+$98], a
+	ld [H_MULTIPLICAND+2], a
 	pop bc
-	ld a, [$FF00+$97]
+	ld a, [H_MULTIPLICAND+1]
 	sbc b
-	ld [$FF00+$97], a
+	ld [H_MULTIPLICAND+1], a
 	pop bc
-	ld a, [H_NUMTOPRINT] ; $FF00+$96 (aliases: H_MULTIPLICAND)
+	ld a, [H_MULTIPLICAND]
 	sbc b
-	ld [H_NUMTOPRINT], a ; $FF00+$96 (aliases: H_MULTIPLICAND)
-.asm_58ffd
+	ld [H_MULTIPLICAND], a
+.addCubedTerm
 	pop bc
-	ld a, [$FF00+$98]
+	ld a, [H_MULTIPLICAND+2]
 	add b
-	ld [$FF00+$98], a
+	ld [H_MULTIPLICAND+2], a
 	pop bc
-	ld a, [$FF00+$97]
+	ld a, [H_MULTIPLICAND+1]
 	adc b
-	ld [$FF00+$97], a
+	ld [H_MULTIPLICAND+1], a
 	pop bc
-	ld a, [H_NUMTOPRINT] ; $FF00+$96 (aliases: H_MULTIPLICAND)
+	ld a, [H_MULTIPLICAND]
 	adc b
-	ld [H_NUMTOPRINT], a ; $FF00+$96 (aliases: H_MULTIPLICAND)
+	ld [H_MULTIPLICAND], a
 	ret
 
 ; known jump sources: 58f76 (16:4f76), 58f9c (16:4f9c)
-Func_59010: ; 59010 (16:5010)
+; calculates d*d
+CalcDSquared: ; 59010 (16:5010)
 	xor a
-	ld [H_NUMTOPRINT], a ; $FF00+$96 (aliases: H_MULTIPLICAND)
-	ld [$FF00+$97], a
+	ld [H_MULTIPLICAND], a ; $FF00+$96 (aliases: H_NUMTOPRINT)
+	ld [H_MULTIPLICAND+1], a
 	ld a, d
-	ld [$FF00+$98], a
-	ld [H_REMAINDER], a ; $FF00+$99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
+	ld [H_MULTIPLICAND+2], a
+	ld [H_MULTIPLIER], a ; $FF00+$99 (aliases: H_DIVISOR, H_REMAINDER, H_POWEROFTEN)
 	jp Multiply
 
-INCBIN "baserom.gbc",$5901d,$59091 - $5901d
+; each entry has the following scheme:
+; %AAAABBBB %SCCCCCCC %DDDDDDDD %EEEEEEEE
+; resulting in 
+;  (a*n^3)/b + sign*c*n^2 + d*n - e
+; where sign = -1 <=> S=1
+GrowthRateTable: ; 0x5901d
+db $11,$00,$00,$00 ; medium fast      n^3
+db $34,$0A,$00,$1E ; (unused?)    3/4 n^3 + 10 n^2         - 30
+db $34,$14,$00,$46 ; (unused?)    3/4 n^3 + 20 n^2         - 70
+db $65,$8F,$64,$8C ; medium slow: 6/5 n^3 - 15 n^2 + 100 n - 140
+db $45,$00,$00,$00 ; fast:        4/5 n^3
+db $54,$00,$00,$00 ; slow:        5/4 n^3
+
+; no known jump sources
+Func_59035 ; 0x59035
+	ld hl, $5091
+	call PrintText
+	call Func_35ec
+	ld a, [$cc26]
+	and a
+	jr nz, .asm_59086 ; 0x59042 $42
+	ld hl, $d2f7
+	ld b, $13
+	call CountSetBits
+	ld a, [$d11e]
+	ld [$ff00+$dd], a
+	ld b, a
+	ld a, [$ff00+$db]
+	cp b
+	jr z, .asm_59059 ; 0x59055 $2
+	jr nc, .asm_5907c ; 0x59057 $23
+.asm_59059
+	ld hl, $50a0
+	call PrintText
+	ld a, [$ff00+$dc]
+	ld b, a
+	ld c, $1
+	call GiveItem
+	jr nc, .asm_59073 ; 0x59067 $a
+	ld hl, $50a5
+	call PrintText
+	ld a, $1
+	jr .asm_5908e ; 0x59071 $1b
+.asm_59073
+	ld hl, $50ab
+	call PrintText
+	xor a
+	jr .asm_5908e ; 0x5907a $12
+.asm_5907c
+	ld hl, $5096
+	call PrintText
+	ld a, $80
+	jr .asm_5908e ; 0x59084 $8
+.asm_59086
+	ld hl, $509b
+	call PrintText
+	ld a, $ff
+.asm_5908e
+	ld [$ff00+$db], a
+	ret
+; 0x59091
 
 UnnamedText_59091: ; 0x59091
 	TX_FAR _UnnamedText_59091
@@ -92073,18 +92302,19 @@ VictoryRoad1Blocks: ; 0x5db04 90
 	INCBIN "maps/victoryroad1.blk"
 
 ; known jump sources: 3aeaa (e:6eaa)
-Func_5db5e: ; 5db5e (17:5b5e)
+; updates the types of a party mon (pointed to in hl) to the ones of the mon specified in $d11e
+SetPartyMonTypes: ; 5db5e (17:5b5e)
 	call Load16BitRegisters
-	ld bc, $5
+	ld bc, W_PARTYMON1_TYPE1 - W_PARTYMON1DATA ; $5
 	add hl, bc
 	ld a, [$d11e]
 	ld [$d0b5], a
 	push hl
-	call GetBaseStats
+	call GetMonHeader
 	pop hl
-	ld a, [$d0be]
+	ld a, [W_MONHTYPE1]
 	ld [hli], a
-	ld a, [$d0bf]
+	ld a, [W_MONHTYPE2]
 	ld [hl], a
 	ret
 
@@ -92142,9 +92372,9 @@ Func_5dbd9: ; 5dbd9 (17:5bd9)
 	call Func_2429
 	ld a, [$cf91]
 	ld [$d0b5], a
-	call GetBaseStats
+	call GetMonHeader
 	ld de, $8b10
-	call Func_1665
+	call LoadMonFrontSprite
 	ld a, $80
 	ld [$FF00+$e1], a
 	ld hl, $c486
@@ -96458,7 +96688,7 @@ Func_701a0: ; 701a0 (1c:41a0)
 	xor a
 	ld [$cfcb], a
 	ld [$FF00+$d7], a
-	ld [$d0aa], a
+	ld [W_SPRITEFLIPPED], a
 	ld [$d358], a
 	ld [$cd40], a
 	inc a
@@ -96550,10 +96780,10 @@ Func_70278: ; 70278 (1c:4278)
 	jr .asm_702ab
 .asm_7029d
 	ld hl, $c410
-	call GetBaseStats
+	call GetMonHeader
 	call Func_1389
 	ld a, $4
-	call Predef ; indirect jump to Func_3f103 (3f103 (f:7103))
+	call Predef ; indirect jump to LoadMonBackSprite (3f103 (f:7103))
 .asm_702ab
 	ld b, $b
 	ld c, $0
@@ -96622,20 +96852,20 @@ INCBIN "baserom.gbc",$70329,$7033e - $70329
 Func_7033e: ; 7033e (1c:433e)
 	ld de, $6ede
 	ld a, $4
-	call Func_36eb
-	ld hl, $a188
+	call UncompressSpriteFromDE
+	ld hl, S_SPRITEBUFFER1
 	ld de, $a000
 	ld bc, $310
 	call CopyData
 	ld de, $9000
-	call Func_16ea
+	call InterlaceMergeSpriteBuffers
 	ld de, $7e0a
 	ld a, $c
-	call Func_36eb
+	call UncompressSpriteFromDE
 	ld a, $3
-	call Predef ; indirect jump to Func_2fe40 (2fe40 (b:7e40))
+	call Predef ; indirect jump to ScaleSpriteByTwo (2fe40 (b:7e40))
 	ld de, $9310
-	call Func_16ea
+	call InterlaceMergeSpriteBuffers
 	ld c, $1
 
 ; known jump sources: 702b8 (1c:42b8), 702ce (1c:42ce)
@@ -102756,7 +102986,7 @@ FuchsiaHouse2Text1: ; 0x750c2
 	db $08 ; asm
 	ld a, [$d78e]
 	bit 0, a
-	jr nz, .asm_58feb ; 0x750c8
+	jr nz, .subtract ; 0x750c8
 	ld b,GOLD_TEETH
 	call $3493
 	jr nz, .asm_3f30f ; 0x750cf
@@ -102795,7 +103025,7 @@ FuchsiaHouse2Text1: ; 0x750c2
 	ld hl, $d78e
 	set 0, [hl]
 	jr .asm_52039 ; 0x75122
-.asm_58feb ; 0x75124
+.subtract ; 0x75124
 	ld hl, HM04ExplanationText
 	call PrintText
 	jr .asm_52039 ; 0x7512a
@@ -103775,7 +104005,7 @@ CinnabarGymScript1: ; 0x757dc
 
 Unknown_757f1:
 	ld a, $10
-	jp Predef ; indirect jump to Func_f666 (f666 (3:7666))
+	jp Predef ; indirect jump to HandleBitArray (f666 (3:7666))
 ; 757f6 (1d:57f6)
 CinnabarGymScript2: ; 0x757f6
 	ld a, [$d057]
@@ -105641,7 +105871,7 @@ Unknown_7657e: ; XXX: make better (has to do with the hall of fame on the PC) ; 
 	push af
 	xor a
 	ld [$FF00+$D7], a
-	ld [$D0AA], a
+	ld [W_SPRITEFLIPPED], a
 	ld [$CFCB], a
 	ld [$CD41], a
 	ld [$CD42], a
@@ -105725,7 +105955,7 @@ Unknown_76610: ; 0x76610
 	ld c, 0
 	call GoPAL_SET
 	ld hl, $C410
-	call GetBaseStats
+	call GetMonHeader
 	call $1389
 	call GBPalNormal
 	ld hl, $C4A4
@@ -107708,8 +107938,8 @@ Func_79793: ; 79793 (1e:5793)
 	ld [$cf91], a
 	ld [$d0b5], a
 	xor a
-	ld [$d0aa], a
-	call GetBaseStats
+	ld [W_SPRITEFLIPPED], a
+	call GetMonHeader
 	ld hl, $c3ac
 	call Func_1389
 	jr .asm_797d3
@@ -107719,9 +107949,9 @@ Func_79793: ; 79793 (1e:5793)
 	ld a, [$ceea]
 	ld [$cfd9], a
 	ld [$d0b5], a
-	call GetBaseStats
+	call GetMonHeader
 	ld a, $4
-	call Predef ; indirect jump to Func_3f103 (3f103 (f:7103))
+	call Predef ; indirect jump to LoadMonBackSprite (3f103 (f:7103))
 	xor a
 	call Func_79842
 	call Func_79820
@@ -108623,7 +108853,7 @@ Func_7beb4: ; 7beb4 (1e:7eb4)
 
 ; known jump sources: 7be27 (1e:7e27), 7be3f (1e:7e3f)
 Func_7beb9: ; 7beb9 (1e:7eb9)
-	call GetBaseStats
+	call GetMonHeader
 	ld hl, $c3cf
 	jp Func_1384
 asm_7bec2: ; 7bec2 (1e:7ec2)
@@ -113603,7 +113833,7 @@ _AIBattleWithdrawText:
 	db 1
 	dw $D04A
 	db 0," with-",$4F,"drew @",1
-	dw $CFDA
+	dw W_ENEMYMONNAME
 	db 0,"!",$58
 _AIBattleUseItemText:
 	db 1
@@ -113611,7 +113841,7 @@ _AIBattleUseItemText:
 	db 0,$4F,"used @",1
 	dw $CD6D
 	db 0,$55,"on @",1
-	dw $CFDA
+	dw W_ENEMYMONNAME
 	db 0,"!",$58
 
 _UnnamedText_4160c: ; 0x880ef
@@ -114390,14 +114620,14 @@ _UnnamedText_3c1a8: ; 0x89639
 
 _UnnamedText_3c229: ; 0x89666
 	db $0, "Wild @"
-	TX_RAM $cfda
+	TX_RAM W_ENEMYMONNAME
 	db $0, $4f
 	db "ran!", $58
 ; 0x89666 + 17 bytes = 0x89677
 
 _UnnamedText_3c22e: ; 0x89677
 	db $0, "Enemy @"
-	TX_RAM $cfda
+	TX_RAM W_ENEMYMONNAME
 	db $0, $4f
 	db "ran!", $58
 ; 0x89677 + 18 bytes = 0x89689
@@ -114419,7 +114649,7 @@ _UnnamedText_3c438: ; 0x896b3
 
 _UnnamedText_3c63e: ; 0x896c7
 	db $0, "Enemy @"
-	TX_RAM $cfda
+	TX_RAM W_ENEMYMONNAME
 	db $0, $4f
 	db "fainted!", $58
 ; 0x896c7 + 22 bytes = 0x896dd
@@ -114473,7 +114703,7 @@ _TrainerAboutToUseText:
 	dw $D04A
 	db 0," is",$4F
 	db "about to use",$55,"@",1
-	dw $CFDA
+	dw W_ENEMYMONNAME
 	db 0,"!",$51
 	db "Will ",$52,$4F
 	db "change #MON?",$57
@@ -114483,7 +114713,7 @@ _TrainerSentOutText:
 	dw $D04A
 	db 0," sent",$4F
 	db "out @",1
-	dw $CFDA
+	dw W_ENEMYMONNAME
 	db 0,"!",$57
 
 _UnnamedText_3cab4: ; 0x897c9
@@ -114779,7 +115009,7 @@ UnnamedText_89c01: ; 0x89c01
 
 _UnnamedText_58e3b: ; 0x89c1d
 	db $0, "Wild @"
-	TX_RAM $cfda
+	TX_RAM W_ENEMYMONNAME
 	db $0, $4f
 	db "appeared!", $58
 ; 0x89c1d + 22 bytes
@@ -114787,13 +115017,13 @@ _UnnamedText_58e3b: ; 0x89c1d
 _UnnamedText_58e40: ; 0x89c33
 	db $0, "The hooked", $4f
 	db "@"
-	TX_RAM $cfda
+	TX_RAM W_ENEMYMONNAME
 	db $0, $55
 	db "attacked!", $58
 ; 0x89c33 + 28 bytes
 
 _UnnamedText_58e45: ; 0x89c4f
-	TX_RAM $cfda
+	TX_RAM W_ENEMYMONNAME
 	db $0, $4f
 	db "appeared!", $58
 ; 0x89c4f + 15 bytes
@@ -114862,14 +115092,14 @@ _UnnamedText_2fb93: ; 0x89d38
 
 SafariZoneEatingText: ; 0x89d53
 	db $0, "Wild @"
-	TX_RAM $cfda
+	TX_RAM W_ENEMYMONNAME
 	db $0, $4f
 	db "is eating!", $58
 ; 0x89d53 + 23 bytes
 
 SafariZoneAngryText: ; 0x89d6a
 	db $0, "Wild @"
-	TX_RAM $cfda
+	TX_RAM W_ENEMYMONNAME
 	db $0, $4f
 	db "is angry!", $58
 ; 0x89d6a + 22 bytes
@@ -125478,7 +125708,7 @@ _ItemUseBallText04:
 
 _ItemUseBallText05:
 	db 0,"All right!",$4F,"@",1
-	dw $CFDA
+	dw W_ENEMYMONNAME
 	db 0," was",$55
 	db "caught!@@"
 
@@ -125499,7 +125729,7 @@ _ItemUseBallText08:
 _ItemUseBallText06:
 	db 0,"New #DEX data",$4F
 	db "will be added for",$55,"@"
-	TX_RAM $cfda
+	TX_RAM W_ENEMYMONNAME
 	db 0,"!@@"
 
 _SurfingGotOnText: ; 0xa685e
