@@ -26,7 +26,7 @@ SECTION "lcdc",HOME[$48]
 SECTION "timer",HOME[$50]
 	jp TimerHandler
 SECTION "serial",HOME[$58]
-	jp $2125
+	jp SerialInterruptHandler
 SECTION "joypad",HOME[$60]
 	reti
 
@@ -175,7 +175,7 @@ GetJoypadState: ; 19A
 	ld a,$3
 	ld [H_LOADEDROMBANK],a
 	ld [$2000],a
-	call $4000
+	call Func_c000
 	pop af
 	ld [H_LOADEDROMBANK],a
 	ld [$2000],a
@@ -468,14 +468,14 @@ EnterMap: ; 3A6
 	ld b,$1c
 	ld hl,$4510
 	call Bankswitch ; display fly/teleport in graphical effect
-	call $2429 ; move sprites
+	call UpdateSprites ; move sprites
 .didNotFlyOrTeleportIn
 	ld b,BANK(CheckForceBikeOrSurf)
 	ld hl,CheckForceBikeOrSurf
 	call Bankswitch ; handle currents in SF islands and forced bike riding in cycling road
 	ld hl,$d72d
 	res 5,[hl]
-	call $2429 ; move sprites
+	call UpdateSprites ; move sprites
 	ld hl,$d126
 	set 5,[hl]
 	set 6,[hl]
@@ -531,9 +531,9 @@ OverworldLoopLessDelay: ; 402
 	ld a,[$d730]
 	bit 2,a
 	jp nz,.noDirectionButtonsPressed
-	call $30fd
+	call Func_30fd
 	jr nz,.checkForOpponent
-	call $3eb5 ; check for hidden items, PC's, etc.
+	call Func_3eb5 ; check for hidden items, PC's, etc.
 	ld a,[$ffeb]
 	and a
 	jp z,OverworldLoop
@@ -544,7 +544,7 @@ OverworldLoopLessDelay: ; 402
 .displayDialogue
 	ld a,$35
 	call Predef ; check what is in front of the player
-	call $2429 ; move sprites
+	call UpdateSprites ; move sprites
 	ld a,[$cd60]
 	bit 2,a
 	jr nz,.checkForOpponent
@@ -564,7 +564,7 @@ OverworldLoopLessDelay: ; 402
 	call Predef
 	ld a,[W_CURMAP]
 	ld [$d71a],a
-	call $62ce
+	call Function62CE
 	ld a,[W_CURMAP]
 	call SwitchToMapRomBank ; switch to the ROM bank of the current map
 	ld hl,$d367
@@ -579,7 +579,7 @@ OverworldLoopLessDelay: ; 402
 .noDirectionButtonsPressed
 	ld hl,$cd60
 	res 2,[hl]
-	call $2429 ; move sprites
+	call UpdateSprites ; move sprites
 	ld a,$01
 	ld [$cc4b],a
 	ld a,[$d528] ; the direction that was pressed last time
@@ -671,7 +671,7 @@ OverworldLoopLessDelay: ; 402
 .noDirectionChange
 	ld a,[$d52a] ; current direction
 	ld [$d528],a ; save direction
-	call $2429 ; move sprites
+	call UpdateSprites ; move sprites
 	ld a,[$d700]
 	cp a,$02 ; surfing
 	jr z,.surfing
@@ -703,7 +703,7 @@ OverworldLoopLessDelay: ; 402
 	ld hl,$4fd7
 	call Bankswitch ; spin while moving
 .noSpinning
-	call $2429 ; move sprites
+	call UpdateSprites ; move sprites
 .moveAhead2
 	ld hl,$cd60
 	res 2,[hl]
@@ -801,7 +801,7 @@ NewBattle: ; 683
 	ld a,[$d72d]
 	bit 4,a
 	jr nz,.noBattle
-	call $30fd
+	call Func_30fd
 	jr nz,.noBattle
 	ld a,[$d72e]
 	bit 4,a
@@ -978,7 +978,7 @@ WarpFound2: ; 73C
 .done
 	ld hl,$d736
 	set 0,[hl]
-	call $12da
+	call Func_12da
 	jp EnterMap
 
 ContinueCheckWarpsNoCollisionLoop: ; 7B5
@@ -1113,7 +1113,7 @@ CheckMapConnections: ; 7BA
 	ld [$d360],a
 .loadNewMap ; load the connected map that was entered
 	call LoadMapHeader
-	call $2312 ; music
+	call Func_2312 ; music
 	ld b,$09
 	call GoPAL_SET
 ; Since the sprite set shouldn't change, this will just update VRAM slots at
@@ -1136,7 +1136,7 @@ PlayMapChangeSound: ; 8c9
 .didNotGoThroughDoor
 	ld a,$b5
 .playSound
-	call $23b1
+	call PlaySound
 	ld a,[$d35d]
 	and a
 	ret nz
@@ -1207,24 +1207,24 @@ HandleBlackOut: ; 931
 	ld a,$01
 	ld [H_LOADEDROMBANK],a
 	ld [$2000],a
-	call $40b0
-	call $62ce
-	call $2312
-	jp $5d5f
+	call Func_40b0
+	call Function62CE
+	call Func_2312
+	jp Func_5d5f
 
 StopMusic: ; 951
 	ld [$cfc7],a
 	ld a,$ff
 	ld [$c0ee],a
-	call $23b1
+	call PlaySound
 .waitLoop
 	ld a,[$cfc7]
 	and a
 	jr nz,.waitLoop
-	jp $200e
+	jp Func_200e
 
 HandleFlyOrTeleportAway: ; 965
-	call $2429 ; move sprites
+	call UpdateSprites ; move sprites
 	call Delay3
 	xor a
 	ld [$cf0b],a
@@ -1238,8 +1238,8 @@ HandleFlyOrTeleportAway: ; 965
 	ld a,$01
 	ld [H_LOADEDROMBANK],a
 	ld [$2000],a
-	call $62ce
-	jp $5d5f
+	call Function62CE
+	jp Func_5d5f
 
 ; function that calls a function to do fly away or teleport away graphics
 DoFlyOrTeleportAwayGraphics: ; 98F
@@ -1678,7 +1678,7 @@ CollisionCheckOnLand: ; BD1
 	cp a,$b4 ; check if collision sound is already playing
 	jr z,.setCarry
 	ld a,$b4
-	call $23b1 ; play collision sound (if it's not already playing)
+	call PlaySound ; play collision sound (if it's not already playing)
 .setCarry
 	scf
 	ret
@@ -2390,7 +2390,7 @@ CollisionCheckOnWater: ; FB7
 	cp a,$b4 ; check if collision sound is already playing
 	jr z,.setCarry
 	ld a,$b4
-	call $23b1 ; play collision sound (if it's not already playing)
+	call PlaySound ; play collision sound (if it's not already playing)
 .setCarry
 	scf
 	jr .done
@@ -2402,7 +2402,7 @@ CollisionCheckOnWater: ; FB7
 	xor a
 	ld [$d700],a
 	call LoadPlayerSpriteGraphics
-	call $2307
+	call Func_2307
 	jr .noCollision
 .checkIfVermilionDockTileset
 	ld a,[W_CURMAPTILESET] ; tileset
@@ -2428,7 +2428,7 @@ RunMapScript: ; 101B
 	pop bc
 	pop de
 	pop hl
-	call $310e
+	call Func_310e
 	ld a,[W_CURMAP] ; current map number
 	call SwitchToMapRomBank ; change to the ROM bank the map's data is in
 	ld hl,W_MAPSCRIPTPTR
@@ -2660,7 +2660,7 @@ LoadMapHeader: ; 107C
 	push bc
 	push hl
 	ld b,$00
-	ld hl,$d4e4 ; base address of sprite entries
+	ld hl,W_MAPSPRITEDATA
 	add hl,bc
 	ld a,[$ff8d]
 	ld [hli],a ; store movement byte 2 in byte 0 of sprite entry
@@ -2683,7 +2683,7 @@ LoadMapHeader: ; 107C
 	ld a,[hli]
 	ld [$ff8e],a ; save trainer number (within class)
 	push hl
-	ld hl,$d504 ; base address of extra sprite info entries
+	ld hl,W_MAPSPRITEEXTRADATA
 	add hl,bc
 	ld a,[$ff8d]
 	ld [hli],a ; store trainer class in byte 0 of the entry
@@ -2695,7 +2695,7 @@ LoadMapHeader: ; 107C
 	ld a,[hli]
 	ld [$ff8d],a ; save item number
 	push hl
-	ld hl,$d504 ; base address of extra sprite info
+	ld hl,W_MAPSPRITEEXTRADATA
 	add hl,bc
 	ld a,[$ff8d]
 	ld [hli],a ; store item number in byte 0 of the entry
@@ -2705,7 +2705,7 @@ LoadMapHeader: ; 107C
 	jr .nextSprite
 .regularSprite
 	push hl
-	ld hl,$d504 ; base address of extra sprite info
+	ld hl,W_MAPSPRITEEXTRADATA
 	add hl,bc
 ; zero both bytes, since regular sprites don't use this extra space
 	xor a
@@ -2822,8 +2822,8 @@ LoadMapData: ; 1241
 	ld a,[$d733]
 	bit 1,a
 	jr nz,.restoreRomBank
-	call $235f ; music related
-	call $2312 ; music related
+	call Func_235f ; music related
+	call Func_2312 ; music related
 .restoreRomBank
 	pop af
 	ld [H_LOADEDROMBANK],a
@@ -2874,7 +2874,7 @@ ForceBikeOrSurf: ; 12ED
 	ld b,5 ;graphics bank 5
 	ld hl,LoadPlayerSpriteGraphics ;load player sprite graphics
 	call Bankswitch ;loads bank 5 and then calls LoadPlayerSpriteGraphics
-	jp $2307 ;update map/player state?
+	jp Func_2307 ;update map/player state?
 
 ; this is used to check if the player wants to interrupt the opening sequence at several points
 ; XXX is this used anywhere else?
@@ -3064,8 +3064,8 @@ Func_1389: ; 1389 (0:1389)
 ; a = pokemon ID
 PlayCry: ; 13D0
 	call GetCryData
-	call $23b1 ; play cry
-	jp $3748 ; wait for sound to be done playing
+	call PlaySound ; play cry
+	jp Func_3748 ; wait for sound to be done playing
 
 ; gets a pokemon's cry data
 ; INPUT:
@@ -3377,7 +3377,7 @@ GetPartyMonName2: ; 15B4
 GetPartyMonName: ; 15BA
 	push hl
 	push bc
-	call $3a7d ; add 11 to hl, a times
+	call SkipFixedLengthTextEntries ; add 11 to hl, a times
 	ld de,$cd6d
 	push de
 	ld bc,11
@@ -4050,7 +4050,7 @@ PlaceNextChar: ; 1956
 	cp $5A
 	jp z,Char5A
 	ld [hli],a
-	call $38D3
+	call PrintLetterDelay
 Next19E8: ; 0x19e8
 	inc de
 	jp PlaceNextChar
@@ -4200,7 +4200,7 @@ Char58: ; 0x1a95
 	ld [$C4F2],a
 Next1AA2: ; 0x1aa2
 	call ProtectedDelay3
-	call $3898
+	call Func_3898
 	ld a,$7F
 	ld [$C4F2],a
 	pop hl
@@ -4216,7 +4216,7 @@ Char51: ; 0x1ab4
 	ld a,$EE
 	ld [$C4F2],a
 	call ProtectedDelay3
-	call $3898
+	call Func_3898
 	ld hl,$C4A5
 	ld bc,$0412
 	call ClearScreenArea
@@ -4231,7 +4231,7 @@ Char49: ; 0x1ad5
 	ld a,$EE
 	ld [$C4F2],a
 	call ProtectedDelay3
-	call $3898
+	call Func_3898
 	ld hl,$C469
 	ld bc,$0712
 	call ClearScreenArea
@@ -4248,7 +4248,7 @@ Char4B: ; 0x1af8
 	ld [$C4F2],a
 	call ProtectedDelay3
 	push de
-	call $3898
+	call Func_3898
 	pop de
 	ld a,$7F
 	ld [$C4F2],a
@@ -4437,7 +4437,7 @@ TextCommand06: ; 1BCC
 	ld a,$ee ; down arrow
 	ld [$c4f2],a ; place down arrow in lower right corner of dialogue text box
 	push bc
-	call $3898 ; blink arrow and wait for A or B to be pressed
+	call Func_3898 ; blink arrow and wait for A or B to be pressed
 	pop bc
 	ld a," "
 	ld [$c4f2],a ; overwrite down arrow with blank space
@@ -4450,8 +4450,8 @@ TextCommand06: ; 1BCC
 TextCommand07: ; 1BE7
 	ld a," "
 	ld [$c4f2],a ; place blank space in lower right corner of dialogue text box
-	call $1b18 ; scroll up text
-	call $1b18
+	call Next1B18 ; scroll up text
+	call Next1B18
 	pop hl
 	ld bc,$c4e1 ; address of second line of dialogue text box
 	jp NextTextCommand
@@ -4535,15 +4535,15 @@ TextCommand0B: ; 1C31
 	cp a,$16
 	jr z,.pokemonCry
 	ld a,[hl]
-	call $23b1
-	call $3748
+	call PlaySound
+	call Func_3748
 	pop hl
 	pop bc
 	jp NextTextCommand
 .pokemonCry
 	push de
 	ld a,[hl]
-	call $13d0
+	call PlayCry
 	pop de
 	pop hl
 	pop bc
@@ -4596,7 +4596,7 @@ TextCommand0C: ; 1C78
 ; (no arguments)
 TextCommand0D: ; 1C9A
 	push bc
-	call $3898 ; wait for A or B to be pressed
+	call Func_3898 ; wait for A or B to be pressed
 	pop bc
 	pop hl
 	jp NextTextCommand
@@ -5189,12 +5189,12 @@ InitGame: ; 1F54
 	call ZeroVram
 	ld hl,$ff80
 	ld bc,$007f
-	call $36e0 ; zero HRAM
+	call FillMemory ; zero HRAM
 	call CleanLCD_OAM ; this is unnecessary since it was already cleared above
 	ld a,$01
 	ld [H_LOADEDROMBANK],a
 	ld [$2000],a
-	call $4bed ; copy DMA code to HRAM
+	call WriteDMACodeToHRAM ; copy DMA code to HRAM
 	xor a
 	ld [$ffd7],a
 	ld [$ff41],a
@@ -5218,7 +5218,7 @@ InitGame: ; 1F54
 	ld [rLCDC],a ; enabled LCD
 	ld a,$10
 	ld [$ff8a],a
-	call $200e
+	call Func_200e
 	ei
 	ld a,$40
 	call Predef ; SGB border
@@ -5239,14 +5239,14 @@ InitGame: ; 1F54
 	call CleanLCD_OAM
 	ld a,%11100011
 	ld [rLCDC],a ; enable LCD
-	jp $42b7
+	jp Func_42b7
 
 ; zeroes all VRAM
 ZeroVram: ; 2004
 	ld hl,$8000
 	ld bc,$2000
 	xor a
-	jp $36e0
+	jp FillMemory
 
 ; known jump sources: 962 (0:962), 1f49 (0:1f49), 1fd0 (0:1fd0)
 Func_200e: ; 200e (0:200e)
@@ -5258,7 +5258,7 @@ Func_200e: ; 200e (0:200e)
 	ld [$c0ee], a
 	ld [$cfca], a
 	dec a
-	jp Func_23b1
+	jp PlaySound
 ; 2024 (0:2024)
 
 VBlankHandler: ; 2024
@@ -5288,7 +5288,7 @@ VBlankHandler: ; 2024
 	ld a,$01
 	ld [H_LOADEDROMBANK],a
 	ld [$2000],a
-	call $4b0f ; update OAM buffer with current sprite data
+	call PrepareOAMData ; update OAM buffer with current sprite data
 	call GenRandom
 	ld a,[H_VBLANKOCCURRED]
 	and a
@@ -5302,24 +5302,24 @@ VBlankHandler: ; 2024
 	dec a
 	ld [H_FRAMECOUNTER],a
 .handleMusic
-	call $28cb
+	call Func_28cb
 	ld a,[$c0ef] ; music ROM bank
 	ld [H_LOADEDROMBANK],a
 	ld [$2000],a
 	cp a,$02
 	jr nz,.checkIfBank08
 .bank02
-	call $5103
+	call Func_9103
 	jr .afterMusic
 .checkIfBank08
 	cp a,$08
 	jr nz,.bank1F
 .bank08
-	call $536e
-	call $5879
+	call Func_2136e
+	call Func_21879
 	jr .afterMusic
 .bank1F
-	call $5177
+	call Func_7d177
 .afterMusic
 	ld b,$06
 	ld hl,$4dee
@@ -5450,7 +5450,7 @@ DecGradGBPalTable_02: ; 0x2121
 	db %00000000
 
 ; known jump sources: 58 (0:58)
-Func_2125: ; 2125 (0:2125)
+SerialInterruptHandler: ; 2125 (0:2125)
 	push af
 	push bc
 	push de
@@ -5827,23 +5827,25 @@ asm_2324: ; 2324 (0:2324)
 	ld a, b
 	ld [$cfca], a
 	ld [$c0ee], a
-	jp Func_23b1
+	jp PlaySound
 
 ; known jump sources: 12af (0:12af)
 Func_235f: ; 235f (0:235f)
 	ld a, [$c0ef]
 	ld b, a
 	cp $2
-	jr nz, .asm_236c
-	ld hl, $5103
+	jr nz, .checkForBank08
+.bank02
+	ld hl, Func_9103
 	jr .asm_2378
-.asm_236c
+.checkForBank08
 	cp $8
-	jr nz, .asm_2375
-	ld hl, $5879
+	jr nz, .bank1F
+.bank08
+	ld hl, Func_21879
 	jr .asm_2378
-.asm_2375
-	ld hl, $5177
+.bank1F
+	ld hl, Func_7d177
 .asm_2378
 	ld c, $6
 .asm_237a
@@ -5877,8 +5879,7 @@ Func_2385: ; 2385 (0:2385)
 	scf
 	ret
 
-; known jump sources: 550a (1:550a), 611f (1:611f), 9100 (2:5100), 9b4b (2:5b4b), 9b69 (2:5b69), 9b97 (2:5b97), e22a (3:622a), 18e9f (6:4e9f), 19516 (6:5516), 1cd86 (7:4d86), 1dbac (7:5bac), 1e9bf (7:69bf), 3c6fa (f:46fa), 50f52 (14:4f52), 51c4d (14:5c4d), 60528 (18:4528), 613d1 (18:53d1), 701f3 (1c:41f3), 740a8 (1d:40a8), 7be53 (1e:7e53), 7bf3c (1e:7f3c), 7bf54 (1e:7f54), 7d15c (1f:515c)
-Func_23a1: ; 23a1 (0:23a1)
+PlayMusic: ; 23a1 (0:23a1)
 	ld b, a
 	ld [$c0ee], a
 	xor a
@@ -5888,8 +5889,8 @@ Func_23a1: ; 23a1 (0:23a1)
 	ld [$c0f0], a
 	ld a, b
 
-; known jump sources: 8d6 (0:8d6), 959 (0:959), c09 (0:c09), ffe (0:ffe), 13d3 (0:13d3), 1c4e (0:1c4e), 2021 (0:2021), 235c (0:235c), 2910 (0:2910), 291d (0:291d), 2adc (0:2adc), 33ff (0:33ff), 3431 (0:3431), 3745 (0:3745), 38a4 (0:38a4), 3b64 (0:3b64), 43d1 (1:43d1), 43fe (1:43fe), 4434 (1:4434), 5409 (1:5409), 54cc (1:54cc), 5aac (1:5aac), 5f14 (1:5f14), 6117 (1:6117), 61df (1:61df), 6228 (1:6228), 66f2 (1:66f2), 703d (1:703d), 75fe (1:75fe), 7903 (1:7903), 7976 (1:7976), 7a03 (1:7a03), 7a80 (1:7a80), 90d1 (2:50d1), c730 (3:4730), de5e (3:5e5e), e223 (3:6223), e2d2 (3:62d2), e3d3 (3:63d3), e56b (3:656b), efe5 (3:6fe5), f2a4 (3:72a4), f2da (3:72da), 13650 (4:7650), 17e31 (5:7e31), 17eaa (5:7eaa), 17ec2 (5:7ec2), 17ed4 (5:7ed4), 17ee6 (5:7ee6), 17f15 (5:7f15), 18e97 (6:4e97), 1950f (6:550f), 195d2 (6:55d2), 1a6cb (6:66cb), 1cebb (7:4ebb), 1cfb9 (7:4fb9), 1dba5 (7:5ba5), 1dcb6 (7:5cb6), 1e9b8 (7:69b8), 1eabd (7:6abd), 1eafc (7:6afc), 1eb9c (7:6b9c), 1eba9 (7:6ba9), 1ebb6 (7:6bb6), 1ebc3 (7:6bc3), 1ebed (7:6bed), 1ebf7 (7:6bf7), 214df (8:54df), 21594 (8:5594), 3c5cb (f:45cb), 40103 (10:4103), 412c3 (10:52c3), 41313 (10:5313), 416cb (10:56cb), 416da (10:56da), 416eb (10:56eb), 416f6 (10:56f6), 4170c (10:570c), 41722 (10:5722), 4172d (10:572d), 41754 (10:5754), 41763 (10:5763), 41785 (10:5785), 418dd (10:58dd), 50f4b (14:4f4b), 51067 (14:5067), 5106f (14:506f), 5111d (14:511d), 51c46 (14:5c46), 51cf6 (14:5cf6), 520a9 (14:60a9), 526d9 (14:66d9), 58e34 (16:4e34), 5a338 (16:6338), 5ca7a (17:4a7a), 5ded2 (17:5ed2), 5def9 (17:5ef9), 5df0c (17:5f0c), 60521 (18:4521), 60595 (18:4595), 613ca (18:53ca), 614a6 (18:54a6), 61900 (18:5900), 6190d (18:590d), 70049 (1c:4049), 70461 (1c:4461), 70473 (1c:4473), 7048d (1c:448d), 7049a (1c:449a), 7052a (1c:452a), 7053c (1c:453c), 7057a (1c:457a), 705ca (1c:45ca), 70623 (1c:4623), 70740 (1c:4740), 70ed7 (1c:4ed7), 71019 (1c:5019), 71028 (1c:5028), 74908 (1d:4908), 74f6b (1d:4f6b), 75815 (1d:5815), 78129 (1e:4129), 78e5d (1e:4e5d), 78f54 (1e:4f54), 78f9f (1e:4f9f), 78fd6 (1e:4fd6), 79075 (1e:5075), 790a0 (1e:50a0), 79e5f (1e:5e5f), 79e93 (1e:5e93), 7bdff (1e:7dff), 7be08 (1e:7e08), 7be89 (1e:7e89), 7bf26 (1e:7f26), 7bf4d (1e:7f4d)
-Func_23b1: ; 23b1 (0:23b1)
+; plays music specified by a. If value is $ff, music is stopped
+PlaySound: ; 23b1 (0:23b1)
 	push hl
 	push de
 	push bc
@@ -5925,19 +5926,21 @@ Func_23b1: ; 23b1 (0:23b1)
 	ld [H_LOADEDROMBANK], a
 	ld [$2000], a
 	cp $2
-	jr nz, .asm_23fd
+	jr nz, .checkForBank08
+.bank02
 	ld a, b
-	call $5876
+	call Func_9876
 	jr .asm_240b
-.asm_23fd
+.checkForBank08
 	cp $8
-	jr nz, .asm_2407
+	jr nz, .bank1F
+.bank08
 	ld a, b
-	call $6035
+	call Func_22035
 	jr .asm_240b
-.asm_2407
+.bank1F
 	ld a, b
-	call $58ea
+	call Func_7d8ea
 .asm_240b
 	ld a, [$FF00+$b9]
 	ld [H_LOADEDROMBANK], a
@@ -5957,8 +5960,7 @@ Func_23b1: ; 23b1 (0:23b1)
 	pop hl
 	ret
 
-; known jump sources: 3e1 (0:3e1), 3f1 (0:3f1), 482 (0:482), 4d2 (0:4d2), 584 (0:584), 5c4 (0:5c4), 965 (0:965), 2a2b (0:2a2b), 2aef (0:2aef), 2c1c (0:2c1c), 2c2b (0:2c2b), 3c52 (0:3c52), 3e2b (0:3e2b), 531f (1:531f), 5b64 (1:5b64), 5c2c (1:5c2c), 65a2 (1:65a2), 6a87 (1:6a87), 6c26 (1:6c26), 6e02 (1:6e02), 705a (1:705a), 70d5 (1:70d5), 7348 (1:7348), 75bc (1:75bc), 766d (1:766d), 76ff (1:76ff), 7733 (1:7733), 7924 (1:7924), e9c8 (3:69c8), efec (3:6fec), f1d4 (3:71d4), f1e3 (3:71e3), 12980 (4:6980), 12cd8 (4:6cd8), 130a3 (4:70a3), 13339 (4:7339), 13466 (4:7466), 135fc (4:75fc), 1360d (4:760d), 17cac (5:7cac), 17f0d (5:7f0d), 1cbec (7:4bec), 1cc50 (7:4c50), 1ce0d (7:4e0d), 1d49b (7:549b), 1d7bc (7:57bc), 213fd (8:53fd), 40006 (10:4006), 402d7 (10:42d7), 48448 (12:4448), 49da2 (12:5da2), 5142a (14:542a), 59653 (16:5653), 59983 (16:5983), 59997 (16:5997), 5c1ed (17:41ed), 5dbee (17:5bee), 60b5b (18:4b5b), 6103c (18:503c), 62255 (18:6255), 704b4 (1c:44b4), 7089b (1c:489b), 710a1 (1c:50a1), 711be (1c:51be), 738ba (1c:78ba), 74a95 (1d:4a95), 74f18 (1d:4f18), 75230 (1d:5230), 7525e (1d:525e), 75fc3 (1d:5fc3), 7bf5e (1e:7f5e)
-Func_2429: ; 2429 (0:2429)
+UpdateSprites: ; 2429 (0:2429)
 	ld a, [$cfcb]
 	dec a
 	ret nz
@@ -5967,12 +5969,13 @@ Func_2429: ; 2429 (0:2429)
 	ld a, $1
 	ld [H_LOADEDROMBANK], a
 	ld [$2000], a
-	call Func_4c34
+	call _UpdateSprites
 	pop af
 	ld [H_LOADEDROMBANK], a
 	ld [$2000], a
 	ret
 ; 2442 (0:2442)
+
 ; mart inventories are below
 ; they are texts
 ; first byte $FE, next byte # of items, last byte $FF
@@ -6741,12 +6744,13 @@ Func_28cb: ; 28cb (0:28cb)
 	ld [$cfc7], a
 	ld a, $ff
 	ld [$c0ee], a
-	call Func_23b1
+	call PlaySound
 	ld a, [$c0f0]
 	ld [$c0ef], a
 	ld a, b
 	ld [$c0ee], a
-	jp Func_23b1
+	jp PlaySound
+
 ; 2920 (0:2920)
 ; this function is used to display sign messages, sprite dialog, etc.
 ; INPUT: [$ff8c] = sprite ID or text ID
@@ -6798,7 +6802,7 @@ DisplayTextID: ; 2920
 	call Bankswitch ; update the graphics of the sprite the player is talking to (to face the right direction)
 	pop bc
 	pop de
-	ld hl,$d4e4 ; NPC text entries
+	ld hl,W_MAPSPRITEDATA ; NPC text entries
 	ld a,[$ff8c]
 	dec a
 	add a
@@ -6826,11 +6830,11 @@ DisplayTextID: ; 2920
 	cp a,$ff   ; Pokemon Center NPC
 	jp z,DisplayPokemonCenterDialogue
 	cp a,$fc   ; Item Storage PC
-	jp z,$3460
+	jp z,FuncTX_ItemStoragePC
 	cp a,$fd   ; Bill's PC
-	jp z,$346a
+	jp z,FuncTX_BillsPC
 	cp a,$f9   ; Pokemon Center PC
-	jp z,$347f
+	jp z,FuncTX_PokemonCenterPC
 	cp a,$f5   ; Vending Machine
 	jr nz,.notVendingMachine
 	ld b,$1d
@@ -6839,7 +6843,7 @@ DisplayTextID: ; 2920
 	jr AfterDisplayingTextID
 .notVendingMachine
 	cp a,$f7   ; slot machine
-	jp z,$3474
+	jp z,FuncTX_SlotMachine
 	cp a,$f6   ; cable connection NPC in Pokemon Center
 	jr nz,.notSpecialCase
 	ld hl,$71c5
@@ -6847,7 +6851,7 @@ DisplayTextID: ; 2920
 	call Bankswitch
 	jr AfterDisplayingTextID
 .notSpecialCase
-	call $3c59 ; display the text
+	call Func_3c59 ; display the text
 	ld a,[$cc3c]
 	and a
 	jr nz,HoldTextDisplayOpen
@@ -6856,7 +6860,7 @@ AfterDisplayingTextID: ; 29D6
 	ld a,[$cc47]
 	and a
 	jr nz,HoldTextDisplayOpen
-	call $3865 ; wait for a button press after displaying all the text
+	call Func_3865 ; wait for a button press after displaying all the text
 
 ; loop to hold the dialogue box open as long as the player keeps holding down the A button
 HoldTextDisplayOpen: ; 29DF
@@ -6899,7 +6903,7 @@ CloseTextDisplay: ; 29E8
 	pop af
 	ld [H_LOADEDROMBANK],a
 	ld [$2000],a
-	jp $2429 ; move sprites
+	jp UpdateSprites ; move sprites
 
 DisplayPokemartDialogue: ; 2A2E
 	push hl
@@ -7001,7 +7005,7 @@ DisplayStartMenu: ; 2ACD
 	ld a,[$d700] ; walking/biking/surfing
 	ld [$d11a],a
 	ld a,$8f ; Start menu sound
-	call $23b1
+	call PlaySound
 
 RedisplayStartMenu: ; 2ADF
 	ld b,BANK(DrawStartMenu)
@@ -7010,7 +7014,7 @@ RedisplayStartMenu: ; 2ADF
 	ld b,$03
 	ld hl,$452f
 	call Bankswitch ; print Safari Zone info, if in Safari Zone
-	call $2429 ; move sprites
+	call UpdateSprites ; move sprites
 .loop
 	call HandleMenuInput
 	ld b,a
@@ -7058,7 +7062,7 @@ RedisplayStartMenu: ; 2ADF
 	ld a,b
 	and a,%00001010 ; was the Start button or B button pressed?
 	jp nz,CloseStartMenu
-	call $36f4 ; copy background from $C3A0 to $CD81
+	call Func_36f4 ; copy background from $C3A0 to $CD81
 	ld a,[$d74b]
 	bit 5,a ; does the player have the pokedex?
 	ld a,[W_CURMENUITEMID]
@@ -7130,8 +7134,8 @@ AddAmountSoldToMoney: ; 2B9E
 	ld [$d125],a
 	call DisplayTextBoxID ; redraw money text box
 	ld a,$b2
-	call $3740 ; play sound
-	jp $3748 ; wait until sound is done playing
+	call Func_3740 ; play sound
+	jp Func_3748 ; wait until sound is done playing
 
 ; function to remove an item (in varying quantities) from the player's bag or PC box
 ; INPUT:
@@ -7202,14 +7206,14 @@ DisplayListMenuID: ; 2BE6
 	ld a,$0d ; list menu text box ID
 	ld [$d125],a
 	call DisplayTextBoxID ; draw the menu text box
-	call $2429 ; move sprites
+	call UpdateSprites ; move sprites
 	FuncCoord 4,2 ; coordinates of upper left corner of menu text box
 	ld hl,Coord
 	ld de,$090e ; height and width of menu text box
 	ld a,[W_LISTMENUID]
 	and a ; is it a PC pokemon list?
 	jr nz,.skipMovingSprites
-	call $2429 ; move sprites
+	call UpdateSprites ; move sprites
 .skipMovingSprites
 	ld a,1 ; max menu item ID is 1 if the list has less than 2 entries
 	ld [$cc37],a
@@ -7300,7 +7304,7 @@ DisplayListMenuIDLoop: ; 2C53
 	and a ; is it a PC pokemon list?
 	jr z,.pokemonList
 	push hl
-	call $37df
+	call Func_37df
 	pop hl
 	ld a,[W_LISTMENUID]
 	cp a,ITEMLISTMENU
@@ -7328,7 +7332,7 @@ DisplayListMenuIDLoop: ; 2C53
 	call GetPartyMonName
 .storeChosenEntry ; store the menu entry that the player chose and return
 	ld de,$cd6d
-	call $3826 ; copy name to $cf4b
+	call CopyStringToCF4B ; copy name to $cf4b
 	ld a,$01
 	ld [$d12e],a
 	ld a,[W_CURMENUITEMID]
@@ -7595,7 +7599,7 @@ PrintListMenuEntries: ; 2E5A
 	ld a,[de]
 	ld de,$4608
 	ld [$cf91],a
-	call $37df ; get price
+	call Func_37df ; get price
 	pop hl
 	ld bc,20 + 5 ; 1 row down and 5 columns right
 	add hl,bc
@@ -7637,7 +7641,7 @@ PrintListMenuEntries: ; 2E5A
 	pop hl
 	ld bc,$001c
 	add hl,bc
-	call $150b ; print level
+	call PrintLevel ; print level
 	pop af
 	ld [$d11e],a
 .skipPrintingPokemonLevel
@@ -7989,7 +7993,7 @@ Func_310e: ; 310e (0:310e)
 	add a
 	ld d, $0
 	ld e, a
-	ld hl, $3140
+	ld hl, .unknown_3140
 	add hl, de
 	ld a, [hli]
 	ld h, [hl]
@@ -8005,8 +8009,10 @@ Func_310e: ; 310e (0:310e)
 	ld [H_LOADEDROMBANK], a
 	ld [$2000], a
 	ret
-
-INCBIN "baserom.gbc",$3140,$3146 - $3140
+.unknown_3140 ; 0x3140
+	dw Unknown_1a442
+	dw Unknown_1a510
+	dw Unknown_1a57d
 .asm_3146
 	ld b, BANK(Func_1a3e0)
 	ld hl, Func_1a3e0
@@ -8018,7 +8024,9 @@ Func_314e: ; 314e (0:314e)
 	ld hl, Func_1a41d
 	jp Bankswitch ; indirect jump to Func_1a41d (1a41d (6:641d))
 
-INCBIN "baserom.gbc",$3156,$3157 - $3156
+; no known jump sources
+Func_3156: ; 0x3156
+	ret
 
 ; known jump sources: 3162 (0:3162), 31cc (0:31cc), 330c (0:330c)
 Func_3157: ; 3157 (0:3157)
@@ -8105,43 +8113,44 @@ Func_31c7: ; 31c7 (0:31c7)
 	jp Predef ; indirect jump to HandleBitArray (f666 (3:7666))
 ; 31cc (0:31cc)
 LoadTrainerHeader: ; 0x31cc
-	call $3157
+	call Func_3157
 	xor a
-	call $3193
+	call Func_3193
 	ld a, $2
-	call $3193
+	call Func_3193
 	ld a, [$cc55]
 	ld c, a
 	ld b, $2
-	call $31c7
+	call Func_31c7
 	ld a, c
 	and a
 	jr z, .asm_c2964 ; 0x31e3 $8
 	ld a, $6
-	call $3193
+	call Func_3193
 	jp PrintText
 .asm_c2964 ; 0x31ed
 	ld a, $4
-	call $3193
+	call Func_3193
 	call PrintText
 	ld a, $a
-	call $3193
+	call Func_3193
 	push de
 	ld a, $8
-	call $3193
+	call Func_3193
 	pop de
-	call $3354
+	call Func_3354
 	ld hl, $d733
 	set 4, [hl]
 	ld hl, $cd60
 	bit 0, [hl]
 	ret nz
-	call $336a
+	call EngageMapTrainer
 	ld hl, $da39
 	inc [hl]
-	jp $325d
+	jp Func_325d
+
 Func_3219:
-	call $3306
+	call Func_3306
 	ld a, [$cf13]
 	cp $ff
 	jr nz, .asm_76c22 ; 0x3221 $8
@@ -8161,7 +8170,7 @@ Func_3219:
 	ld [$cd6b], a
 	xor a
 	ldh [$b4], a
-	call $32cf
+	call Func_32cf
 	ld hl, $da39
 	inc [hl]
 	ret
@@ -8210,15 +8219,15 @@ Func_3275: ; 3275 (0:3275)
 	ld a, [$d713]
 	cp $c8
 	jr nc, .asm_32b9
-	ld hl, $d5ce
+	ld hl, W_MISSABLEOBJECTLIST
 	ld de, $2
 	ld a, [$cf13]
-	call IsInArray
+	call IsInArray         ; search for sprite ID
 	inc hl
 	ld a, [hl]
-	ld [$cc4d], a
+	ld [$cc4d], a          ; loas corresponding missable object index and remove it
 	ld a, $11
-	call Predef ; indirect jump to Func_f1d7 (f1d7 (3:71d7))
+	call Predef ; indirect jump to RemoveMissableObject (f1d7 (3:71d7))
 .asm_32b9
 	ld hl, $d730
 	bit 4, [hl]
@@ -8260,17 +8269,20 @@ Func_32ef: ; 32ef (0:32ef)
 	ld hl, Func_567f9
 	jr asm_3301
 
-INCBIN "baserom.gbc",$32f4,$32f9 - $32f4
+Func_32f4: ; 32f9 (0:32f9)
+	ld hl, Func_56819
+	jr asm_3301 ; 0x32f7 $8
 
 ; known jump sources: 1ce15 (7:4e15), 1d072 (7:5072), 1e7e5 (7:67e5)
 Func_32f9: ; 32f9 (0:32f9)
-	ld hl, $683d
+	ld hl, Func_5683d
 	jr asm_3301
 
-INCBIN "baserom.gbc",$32fe,$3301 - $32fe
+Func_32fe: ; 0x32fe
+	ld hl, Func_5685d
 asm_3301: ; 3301 (0:3301)
-	ld b, BANK(Func_567f9)
-	jp Bankswitch ; indirect jump to Func_567f9 (567f9 (15:67f9))
+	ld b, $15
+	jp Bankswitch ; indirect jump to one of the four functions
 
 ; known jump sources: 3219 (0:3219)
 Func_3306: ; 3306 (0:3306)
@@ -8334,20 +8346,21 @@ Func_3354: ; 3354 (0:3354)
 	ld [$d08f], a
 	ret
 
-; known jump sources: 320f (0:320f), 1969f (6:569f), 48a48 (12:4a48), 49ea8 (12:5ea8), 514e5 (14:54e5), 56983 (15:6983), 5c485 (17:4485), 5c7a8 (17:47a8), 5cb54 (17:4b54), 5d14f (17:514f), 622a8 (18:62a8), 74abb (1d:4abb), 7556b (1d:556b), 758bc (1d:58bc)
-Func_336a: ; 336a (0:336a)
-	ld hl, $d504
+; loads data of some trainer on the current map and plays pre-battle music
+; [$cf13]: sprite ID of trainer who is engaged
+EngageMapTrainer: ; 336a (0:336a)
+	ld hl, W_MAPSPRITEEXTRADATA
 	ld d, $0
 	ld a, [$cf13]
 	dec a
 	add a
 	ld e, a
-	add hl, de
-	ld a, [hli]
+	add hl, de     ; seek to engaged trainer data
+	ld a, [hli]    ; load trainer class
 	ld [$cd2d], a
-	ld a, [hl]
+	ld a, [hl]     ; load trainer mon set
 	ld [W_ENEMYMONATTACKMOD], a ; $cd2e
-	jp Func_33e8
+	jp PlayTrainerMusic
 
 ; known jump sources: 3c6ce (f:46ce)
 Func_3381: ; 3381 (0:3381)
@@ -8366,7 +8379,7 @@ Func_3381: ; 3381 (0:3381)
 	ld b, BANK(SaveTrainerName)
 	ld hl, SaveTrainerName
 	call Bankswitch ; indirect jump to SaveTrainerName (27e4a (9:7e4a))
-	ld hl, $33cf
+	ld hl, UnnamedText_33cf
 	call PrintText
 	pop hl
 	pop af
@@ -8394,21 +8407,33 @@ Func_33b7: ; 33b7 (0:33b7)
 	ld l, a
 	ret
 
-INCBIN "baserom.gbc",$33cf,$33d4 - $33cf
+UnnamedText_33cf: ; 0x33cf
+	TX_FAR _UnnamedText_33cf
+	db $08
+
+Func_33d4: ; 0x33d4
 	call Func_33b7
 	call TextCommandProcessor
 	jp TextScriptEnd
 
-INCBIN "baserom.gbc",$33dd,$33e8 - $33dd
+; no known jump sources
+Func_33dd: ; 0x33dd
+	ld a, [$cd60]
+	bit 0, a
+	ret nz
+	call EngageMapTrainer
+	xor a
+	ret
+; 0x33e8
 
 ; known jump sources: 337e (0:337e)
-Func_33e8: ; 33e8 (0:33e8)
+PlayTrainerMusic: ; 33e8 (0:33e8)
 	ld a, [$cd2d]
-	cp $e1
+	cp $c8 + SONY1
 	ret z
-	cp $f2
+	cp $c8 + SONY2
 	ret z
-	cp $f3
+	cp $c8 + SONY3
 	ret z
 	ld a, [W_LONEATTACKNO] ; $d05c
 	and a
@@ -8416,38 +8441,54 @@ Func_33e8: ; 33e8 (0:33e8)
 	xor a
 	ld [$cfc7], a
 	ld a, $ff
-	call Func_23b1
+	call PlaySound      ; stop music
 	ld a, $1f
 	ld [$c0ef], a
 	ld [$c0f0], a
 	ld a, [$cd2d]
 	ld b, a
-	ld hl, $3439
-.asm_3411
+	ld hl, EvilTrainerList
+.evilTrainerListLoop
 	ld a, [hli]
 	cp $ff
-	jr z, .asm_341d
+	jr z, .noEvilTrainer
 	cp b
-	jr nz, .asm_3411
+	jr nz, .evilTrainerListLoop
 	ld a, $f6
-	jr .asm_342e
-.asm_341d
-	ld hl, $3434
-.asm_3420
+	jr .PlaySound
+.noEvilTrainer
+	ld hl, FemaleTrainerList
+.femaleTrainerListLoop
 	ld a, [hli]
 	cp $ff
-	jr z, .asm_342c
+	jr z, .maleTrainer
 	cp b
-	jr nz, .asm_3420
+	jr nz, .femaleTrainerListLoop
 	ld a, $f9
-	jr .asm_342e
-.asm_342c
+	jr .PlaySound
+.maleTrainer
 	ld a, $fc
-.asm_342e
+.PlaySound
 	ld [$c0ee], a
-	jp Func_23b1
+	jp PlaySound
 
-INCBIN "baserom.gbc",$3434,$3442 - $3434
+FemaleTrainerList: ; 0x3434
+db $c8+LASS
+db $c8+JR__TRAINER_F
+db $c8+BEAUTY
+db $c8+COOLTRAINER_F
+db $FF
+
+EvilTrainerList: ; 0x3439
+db $c8+JUGGLER_X
+db $c8+GAMBLER
+db $c8+ROCKER
+db $c8+JUGGLER
+db $c8+CHIEF
+db $c8+SCIENTIST
+db $c8+GIOVANNI
+db $c8+ROCKET
+db $FF
 
 ; known jump sources: 345e (0:345e), 748f6 (1d:48f6)
 Func_3442: ; 3442 (0:3442)
@@ -8463,7 +8504,7 @@ Func_3442: ; 3442 (0:3442)
 	ld d, [hl]
 	ld e, a
 	ld hl, $ccd3
-	call Func_350c
+	call DecodeRLEList
 	dec a
 	ld [$cd38], a
 	ret
@@ -8475,33 +8516,34 @@ Func_3442: ; 3442 (0:3442)
 	jr Func_3442
 
 ; known jump sources: 299f (0:299f)
-Func_3460: ; 3460 (0:3460)
+FuncTX_ItemStoragePC: ; 3460 (0:3460)
 	call Func_36f4
 	ld b, BANK(Func_78e6)
 	ld hl, Func_78e6
-	jr asm_3479
+	jr bankswitchAndContinue
 
 ; known jump sources: 29a4 (0:29a4)
-Func_346a: ; 346a (0:346a)
+FuncTX_BillsPC: ; 346a (0:346a)
 	call Func_36f4
 	ld b, $8
 	ld hl, $54c2
-	jr asm_3479
+	jr bankswitchAndContinue
 ; 3474 (0:3474)
-FuncTX_F7: ; 3474
+
+FuncTX_SlotMachine: ; 3474
 ; XXX find a better name for this function
 ; special_F7
 	ld b,BANK(CeladonPrizeMenu)
 	ld hl,CeladonPrizeMenu
-asm_3479:
+bankswitchAndContinue:
 	call Bankswitch
-	jp $29DF        ; continue to main text-engine function
+	jp HoldTextDisplayOpen        ; continue to main text-engine function
 
 ; known jump sources: 29a9 (0:29a9)
-Func_347f: ; 347f (0:347f)
+FuncTX_PokemonCenterPC: ; 347f (0:347f)
 	ld b, $5
 	ld hl, $7e2c
-	jr asm_3479
+	jr bankswitchAndContinue
 
 ; known jump sources: 190cf (6:50cf), 1981a (6:581a), 19845 (6:5845), 1a402 (6:6402), 1a6b7 (6:66b7), 1ca63 (7:4a63), 1cbb2 (7:4bb2), 1cc64 (7:4c64), 1d4b2 (7:54b2), 1e6ca (7:66ca), 49705 (12:5705), 498bd (12:58bd), 512e9 (14:52e9), 51402 (14:5402), 5a36d (16:636d), 5a51f (16:651f), 5c1ea (17:41ea), 748fe (1d:48fe), 752b1 (1d:52b1), 75f5a (1d:5f5a), 760ab (1d:60ab), 761d6 (1d:61d6), 76217 (1d:6217), 7632d (1d:632d), 7636e (1d:636e), 76484 (1d:6484), 764c5 (1d:64c5)
 Func_3486: ; 3486 (0:3486)
@@ -8512,6 +8554,7 @@ Func_3486: ; 3486 (0:3486)
 	set 7, [hl]
 	ret
 ; 3493 (0:3493)
+
 IsItemInBag: ; 3493
 ; given an item_id in b
 ; set zero flag if item isn't in player's bag
@@ -8523,7 +8566,12 @@ IsItemInBag: ; 3493
 	and a
 	ret
 
-INCBIN "baserom.gbc",$349b,$34a6 - $349b
+Func_349b: ; 0x349b
+	ld [$d11e], a
+	ld b, BANK(Func_7c18)
+	ld hl, Func_7c18
+	jp Bankswitch
+; 0x34a6
 
 ; known jump sources: 18eda (6:4eda), 19564 (6:5564), 1cbbc (7:4bbc), 1cbc6 (7:4bc6), 1cbe9 (7:4be9), 1cc43 (7:4c43), 1cc4d (7:4c4d), 1cd13 (7:4d13), 1cd54 (7:4d54), 1cd7a (7:4d7a), 1ce1f (7:4e1f), 1cf05 (7:4f05), 1cf0f (7:4f0f), 1cf7a (7:4f7a), 50ef8 (14:4ef8), 510aa (14:50aa), 51104 (14:5104), 51ce7 (14:5ce7), 5a540 (16:6540), 6054e (18:454e), 6142d (18:542d), 62224 (18:6224), 7602d (1d:602d), 76037 (1d:6037), 7604f (1d:604f), 76066 (1d:6066)
 Func_34a6: ; 34a6 (0:34a6)
@@ -8540,7 +8588,12 @@ Func_34ae: ; 34ae (0:34ae)
 	ld [hl], a
 	ret
 
-INCBIN "baserom.gbc",$34b9,$34bf - $34b9
+Func_34b9: ; 0x34b9
+	ld de, $fff9
+	add hl, de
+	ld [hl], a
+	ret
+; 0x34bf
 
 ; tests if the player's coordinates are in a specified array
 ; INPUT:
@@ -8625,45 +8678,61 @@ asm_3502: ; 3502 (0:3502)
 	ret
 
 ; known jump sources: 3453 (0:3453), 1a4bc (6:64bc), 1a4c9 (6:64c9), 1cbab (7:4bab), 1d4ab (7:54ab), 5a366 (16:6366), 5a518 (16:6518), 75f53 (1d:5f53), 760a4 (1d:60a4)
-Func_350c: ; 350c (0:350c)
+; decodes a $ff-terminated RLEncoded list
+; each entry is a pair of bytes <byte value> <repetitions>
+; the final $ff will be replicated in the output list and a contains the number of bytes written
+; de: input list
+; hl: output list
+DecodeRLEList: ; 350c (0:350c)
 	xor a
-	ld [$ccd2], a
-.asm_3510
+	ld [W_RLEBYTECOUNTER], a     ; count written bytes here
+.listLoop
 	ld a, [de]
 	cp $ff
-	jr z, .asm_352b
-	ld [H_DOWNARROWBLINKCNT1], a ; $FF00+$8b
+	jr z, .endOfList
+	ld [H_DOWNARROWBLINKCNT1], a ; store byte value to be written
 	inc de
 	ld a, [de]
 	ld b, $0
-	ld c, a
-	ld a, [$ccd2]
+	ld c, a                      ; number of bytes to be written
+	ld a, [W_RLEBYTECOUNTER]
 	add c
-	ld [$ccd2], a
+	ld [W_RLEBYTECOUNTER], a     ; update total number of written bytes
 	ld a, [H_DOWNARROWBLINKCNT1] ; $FF00+$8b
-	call FillMemory
+	call FillMemory              ; write a c-times to output
 	inc de
-	jr .asm_3510
-.asm_352b
+	jr .listLoop
+.endOfList
 	ld a, $ff
-	ld [hl], a
-	ld a, [$ccd2]
-	inc a
+	ld [hl], a                   ; write final $ff
+	ld a, [W_RLEBYTECOUNTER]
+	inc a                        ; include sentinel in counting
 	ret
 
-INCBIN "baserom.gbc",$3533,$3541 - $3533
-
-Function3541: ; 3541
-; XXX what do these three functions do
+; sets movement byte 1 for sprite [$FF8C] to $FE and byte 2 to [$FF8D]
+SetSpriteMovementBytesToFE: ; 3533
 	push hl
-	call Function354E
+	call GetSpriteMovementByte1Pointer
+	ld [hl], $fe
+	call GetSpriteMovementByte2Pointer
+	ld a, [$ff00+$8d]
+	ld [hl], a
+	pop hl
+	ret
+; 0x3541
+
+; sets both movement bytes for sprite [$FF8C] to $FF
+SetSpriteMovementBytesToFF: ; 3541
+	push hl
+	call GetSpriteMovementByte1Pointer
 	ld [hl],$FF
-	call Function3558
+	call GetSpriteMovementByte2Pointer
 	ld [hl],$FF ; prevent person from walking?
 	pop hl
 	ret
 
-Function354E: ; 354E
+; returns the sprite movement byte 1 pointer for sprite [$FF8C] in hl
+GetSpriteMovementByte1Pointer: ; 354E
 	ld h,$C2
 	ld a,[$FF8C] ; the sprite to move
 	swap a
@@ -8671,9 +8740,10 @@ Function354E: ; 354E
 	ld l,a
 	ret
 
-Function3558: ; 3558
+; returns the sprite movement byte 2 pointer for sprite [$FF8C] in hl
+GetSpriteMovementByte2Pointer: ; 3558
 	push de
-	ld hl,W_PEOPLEMOVEPERMISSIONS
+	ld hl,W_MAPSPRITEDATA
 	ld a,[$FF8C] ; the sprite to move
 	dec a
 	add a
@@ -8723,14 +8793,24 @@ Func_359e: ; 359e (0:359e)
 	ld hl, Func_13a58
 	jp Bankswitch ; indirect jump to Func_13a58 (13a58 (4:7a58))
 
-; known jump sources: 40ce (1:40ce), 5c196 (17:4196), 74f49 (1d:4f49), 752ec (1d:52ec)
-Func_35a6: ; 35a6 (0:35a6)
+; tests if player's money are at least as much as [$ff9f]
+; sets carry flag if not enough money
+; sets zero flag if amounts match exactly
+HasEnoughMoney: ; 35a6 (0:35a6)
 	ld de, W_PLAYERMONEY3 ; $d347
 	ld hl, $ff9f
 	ld c, $3
 	jp StringCmp
 
-INCBIN "baserom.gbc",$35b1,$35bc - $35b1
+; tests if player's game corner coins are at least as many as [$ffa0]
+; sets carry flag if not enough coins
+; sets zero flag if amounts match exactly
+HasEnoughCoins: ; 0x35b1
+	ld de, W_PLAYERCOINS1
+	ld hl, $ffa0
+	ld c, $2
+	jp StringCmp
+; 0x35bc
 
 BankswitchHome: ; 35BC
 ; switches to bank # in a
@@ -8774,7 +8854,13 @@ Func_35ec: ; 35ec (0:35ec)
 	call Func_35ff
 	jr asm_3628
 
-INCBIN "baserom.gbc",$35f4,$35ff - $35f4
+; no known jump sources
+Func_35f4: ; 35f4 (0:35f4)
+	ld a, $14
+	ld [$d125], a
+	call Func_35ff
+	jp DisplayTextBoxID
+; 0x35ff
 
 ; known jump sources: 35ef (0:35ef)
 Func_35ff: ; 35ff (0:35ff)
@@ -8793,7 +8879,13 @@ Func_360a: ; 360a (0:360a)
 	ld bc, $80c
 	jr asm_3628
 
-INCBIN "baserom.gbc",$361a,$3628 - $361a
+; no known jump sources
+Func_361a: ; 361a (0:361a)
+	call Func_3719
+	ld a, $3
+	ld [$d12c], a
+	ld hl, $c438
+	ld bc, $080d
 asm_3628: ; 3628 (0:3628)
 	ld a, $14
 	ld [$d125], a
@@ -8809,14 +8901,15 @@ Func_3633: ; 3633 (0:3633)
 	scf
 	ret
 ; 363a (0:363a)
+
 MoveSprite: ; 363a
 ; move the sprite [$FF8C] with the movement pointed to by de
 ; actually only copies the movement data to $CC5B for later
-	call Function3541
+	call SetSpriteMovementBytesToFF
 Func_363d:
 	push hl
 	push bc
-	call Function354E
+	call GetSpriteMovementByte1Pointer
 	xor a
 	ld [hl],a
 	ld hl,$CC5B
@@ -8997,7 +9090,7 @@ Func_3740: ; 3740 (0:3740)
 	push af
 	call Func_3748
 	pop af
-	jp Func_23b1
+	jp PlaySound
 
 ; known jump sources: 13d6 (0:13d6), 1c51 (0:1c51), 2307 (0:2307), 2bb8 (0:2bb8), 33b4 (0:33b4), 3741 (0:3741), 442c (1:442c), 445f (1:445f), 6dbc (1:6dbc), 7248 (1:7248), 7979 (1:7979), 79fe (1:79fe), 7a06 (1:7a06), 7a7b (1:7a7b), 7a83 (1:7a83), e1ce (3:61ce), 1364b (4:764b), 13847 (4:7847), 17e3a (5:7e3a), 17ead (5:7ead), 17ec5 (5:7ec5), 17ed7 (5:7ed7), 17ee9 (5:7ee9), 17f18 (5:7f18), 1eab8 (7:6ab8), 1eac0 (7:6ac0), 1eaf7 (7:6af7), 1eaff (7:6aff), 1eb9f (7:6b9f), 1ebac (7:6bac), 1ebb9 (7:6bb9), 1ebc6 (7:6bc6), 1ebfa (7:6bfa), 21597 (8:5597), 215f2 (8:55f2), 21667 (8:5667), 216a1 (8:56a1), 3ae27 (e:6e27), 3c5ce (f:45ce), 3c760 (f:4760), 3cb8f (f:4b8f), 45f30 (11:5f30), 58e37 (16:4e37), 5c1d5 (17:41d5), 5decd (17:5ecd), 5ded5 (17:5ed5), 5def4 (17:5ef4), 5defc (17:5efc), 5df07 (17:5f07), 5df0f (17:5f0f), 60c0e (18:4c0e), 73905 (1c:7905), 75810 (1d:5810), 75818 (1d:5818), 7677e (1d:677e), 78d62 (1e:4d62), 78d90 (1e:4d90), 79e6a (1e:5e6a), 7be4c (1e:7e4c)
 Func_3748: ; 3748 (0:3748)
@@ -9152,17 +9245,21 @@ Func_37df: ; 37df (0:37df)
 	ld [$2000], a
 	ret
 
-; known jump sources: 2d14 (0:2d14), 3e43 (0:3e43), 6d77 (1:6d77), e37a (3:637a), e49c (3:649c), e710 (3:6710), e73f (3:673f), 1338d (4:738d), 3adcc (e:6dcc), 3afa9 (e:6fa9), 3d068 (f:5068), 3da2a (f:5a2a), 3e341 (f:6341), 3e728 (f:6728), 3eaab (f:6aab), 3eafe (f:6afe), 610f4 (18:50f4)
-Func_3826: ; 3826 (0:3826)
+; copies a string from [de] to [$cf4b]
+CopyStringToCF4B: ; 3826 (0:3826)
 	ld hl, $cf4b
-.asm_3829
+	; fall through
+
+; copies a string from [de] to [hl]
+CopyString ; 3829 (0:3829)
 	ld a, [de]
 	inc de
 	ld [hli], a
 	cp $50
-	jr nz, .asm_3829
+	jr nz, CopyString
 	ret
 ; 3831 (0:3831)
+
 ; this function is used when lower button sensitivity is wanted (e.g. menus)
 ; OUTPUT: [$ffb5] = pressed buttons in usual format
 ; there are two flags that control its functionality, [$ffb6] and [$ffb7]
@@ -9232,7 +9329,7 @@ Func_3865: ; 3865 (0:3865)
 	ld a, [$d09b]
 	and a
 	jr z, .asm_387c
-	call $56c6
+	call Func_716c6
 .asm_387c
 	ld hl, $c4f2
 	call HandleDownArrowBlinkTiming
@@ -9256,7 +9353,7 @@ Func_3898: ; 3898 (0:3898)
 	jr z, .asm_38a7
 	call Func_3865
 	ld a, $90
-	jp Func_23b1
+	jp PlaySound
 .asm_38a7
 	ld c, $41
 	jp DelayFrames
@@ -9296,7 +9393,7 @@ Divide: ; 38B9
 	ld a,$0d
 	ld [H_LOADEDROMBANK],a
 	ld [$2000],a
-	call $7da5
+	call Func_37da5
 	pop af
 	ld [H_LOADEDROMBANK],a
 	ld [$2000],a
@@ -9583,13 +9680,26 @@ Func_394a: ; 394a (0:394a)
 	pop hl
 	ret
 
-INCBIN "baserom.gbc",$3a53,$3a68 - $3a53
+; no known jump sources
+AddEnemyMonToPlayerParty: ; 3a53 (0:3a53)
+	ld a, [H_LOADEDROMBANK]
+	push af
+	ld a, BANK(_AddEnemyMonToPlayerParty)
+	ld [H_LOADEDROMBANK], a
+	ld [$2000], a
+	call _AddEnemyMonToPlayerParty
+	pop bc
+	ld a, b
+	ld [H_LOADEDROMBANK], a
+	ld [$2000], a
+	ret
+; 0x3a68
 
 ; known jump sources: 215e8 (8:55e8), 2165c (8:565c)
 Func_3a68: ; 3a68 (0:3a68)
 	ld a, [H_LOADEDROMBANK]
 	push af
-	ld a, $3
+	ld a, BANK(Func_f51e)
 	ld [H_LOADEDROMBANK], a
 	ld [$2000], a
 	call Func_f51e
@@ -9599,17 +9709,19 @@ Func_3a68: ; 3a68 (0:3a68)
 	ld [$2000], a
 	ret
 
-; known jump sources: 15bc (0:15bc), 7b9a (1:7b9a), f318 (3:7318), f332 (3:7332), f5ce (3:75ce), f5e9 (3:75e9), f60c (3:760c), f627 (3:7627), 12a92 (4:6a92), 136d8 (4:76d8), 136eb (4:76eb), 13706 (4:7706), 13719 (4:7719), 3cbe9 (f:4be9), 3cc56 (f:4c56)
-Func_3a7d: ; 3a7d (0:3a7d)
+; skips a text entries, each of size $b (like trainer name, OT name, rival name, ...)
+; hl: base pointer, will be incremented by $b * a
+SkipFixedLengthTextEntries: ; 3a7d (0:3a7d)
 	and a
 	ret z
 	ld bc, $b
-.asm_3a82
+.skipLoop
 	add hl, bc
 	dec a
-	jr nz, .asm_3a82
+	jr nz, .skipLoop
 	ret
 ; 3a87 (0:3a87)
+
 AddNTimes: ; 3A87
 ; add bc to hl a times
 	and a
@@ -9704,7 +9816,7 @@ HandleMenuInputPokemonSelection: ; 3AC2
 	push hl
 	FuncCoord 18,11 ; coordinates of blinking down arrow in some menus
 	ld hl,Coord
-	call $3c04 ; blink down arrow (if any)
+	call HandleDownArrowBlinkTiming ; blink down arrow (if any)
 	pop hl
 	ld a,[W_MENUJOYPADPOLLCOUNT]
 	dec a
@@ -9774,7 +9886,7 @@ HandleMenuInputPokemonSelection: ; 3AC2
 	pop hl
 	jr nz,.skipPlayingSound
 	ld a,$90
-	call $23b1 ; play sound
+	call PlaySound ; play sound
 .skipPlayingSound
 	pop af
 	ld [H_DOWNARROWBLINKCNT2],a
@@ -9960,7 +10072,7 @@ PrintText: ; 0x3c49
 	ld a,1
 	ld [$D125],a
 	call DisplayTextBoxID
-	call $2429
+	call UpdateSprites
 	call Delay3
 	pop hl
 Func_3c59:
@@ -10226,11 +10338,14 @@ CallFunctionInTable: ; 3D97
 	pop hl
 	ret
 
-IsInArray: ; 3DAB
 ; searches an array at hl for the value in a.
 ; skips (de − 1) bytes between reads, so to check every byte, de should be 1.
 ; if found, returns count in b and sets carry.
+IsInArray: ; 3DAB
 	ld b,0
+	; fall through
+
+IsInArrayCummulativeCount: ; 0x3dad
 	ld c,a
 .loop
 	ld a,[hl]
@@ -10326,8 +10441,9 @@ Func_3e08: ; 3e08 (0:3e08)
 	ld [hl], a
 	call LoadPlayerSpriteGraphics
 	call LoadFontTilePatterns
-	jp Func_2429
+	jp UpdateSprites
 ; 3e2e (0:3e2e)
+
 GiveItem: ; 0x3e2e
 	ld a, b
 	ld [$d11e], a
@@ -10335,10 +10451,10 @@ GiveItem: ; 0x3e2e
 	ld a, c
 	ld [$cf96], a
 	ld hl,W_NUMBAGITEMS
-	call $2bcf
+	call AddItemToInventory
 	ret nc
 	call GetItemName ; $2fcf
-	call $3826
+	call CopyStringToCF4B
 	scf
 	ret
 
@@ -10560,7 +10676,63 @@ Func_3f0f: ; 3f0f (0:3f0f)
 
 SECTION "bank1",DATA,BANK[$1]
 
-INCBIN "baserom.gbc",$4000,$40b0 - $4000
+SpriteFacingAndAnimationTable: ; 0x4000
+dw SpriteFacingDownAndStanding, SpriteOAMParameters        ; facing down, walk animation frame 0
+dw SpriteFacingDownAndWalking, SpriteOAMParameters         ; facing down, walk animation frame 1
+dw SpriteFacingDownAndStanding, SpriteOAMParameters        ; facing down, walk animation frame 2
+dw SpriteFacingDownAndWalking, SpriteOAMParametersFlipped  ; facing down, walk animation frame 3
+dw SpriteFacingUpAndStanding, SpriteOAMParameters          ; facing up, walk animation frame 0
+dw SpriteFacingUpAndWalking, SpriteOAMParameters           ; facing up, walk animation frame 1
+dw SpriteFacingUpAndStanding, SpriteOAMParameters          ; facing up, walk animation frame 2
+dw SpriteFacingUpAndWalking, SpriteOAMParametersFlipped    ; facing up, walk animation frame 3
+dw SpriteFacingLeftAndStanding, SpriteOAMParameters        ; facing left, walk animation frame 0
+dw SpriteFacingLeftAndWalking, SpriteOAMParameters         ; facing left, walk animation frame 1
+dw SpriteFacingLeftAndStanding, SpriteOAMParameters        ; facing left, walk animation frame 2
+dw SpriteFacingLeftAndWalking, SpriteOAMParameters         ; facing left, walk animation frame 3
+dw SpriteFacingLeftAndStanding, SpriteOAMParametersFlipped ; facing right, walk animation frame 0
+dw SpriteFacingLeftAndWalking, SpriteOAMParametersFlipped  ; facing right, walk animation frame 1
+dw SpriteFacingLeftAndStanding, SpriteOAMParametersFlipped ; facing right, walk animation frame 2
+dw SpriteFacingLeftAndWalking, SpriteOAMParametersFlipped  ; facing right, walk animation frame 3
+dw SpriteFacingDownAndStanding, SpriteOAMParameters        ; ---
+dw SpriteFacingDownAndStanding, SpriteOAMParameters        ; This table is used for sprites $a and $b.
+dw SpriteFacingDownAndStanding, SpriteOAMParameters        ; All orientation and animation parameters
+dw SpriteFacingDownAndStanding, SpriteOAMParameters        ; lead to the same result. Used for immobile
+dw SpriteFacingDownAndStanding, SpriteOAMParameters        ; sprites like items on the ground
+dw SpriteFacingDownAndStanding, SpriteOAMParameters        ; ---
+dw SpriteFacingDownAndStanding, SpriteOAMParameters
+dw SpriteFacingDownAndStanding, SpriteOAMParameters
+dw SpriteFacingDownAndStanding, SpriteOAMParameters
+dw SpriteFacingDownAndStanding, SpriteOAMParameters
+dw SpriteFacingDownAndStanding, SpriteOAMParameters
+dw SpriteFacingDownAndStanding, SpriteOAMParameters
+dw SpriteFacingDownAndStanding, SpriteOAMParameters
+dw SpriteFacingDownAndStanding, SpriteOAMParameters
+dw SpriteFacingDownAndStanding, SpriteOAMParameters
+dw SpriteFacingDownAndStanding, SpriteOAMParameters
+
+SpriteFacingDownAndStanding: ; 0x4080
+	db $00,$01,$02,$03
+SpriteFacingDownAndWalking:
+	db $80,$81,$82,$83
+SpriteFacingUpAndStanding:
+	db $04,$05,$06,$07
+SpriteFacingUpAndWalking:
+	db $84,$85,$86,$87
+SpriteFacingLeftAndStanding:
+	db $08,$09,$0a,$0b
+SpriteFacingLeftAndWalking:
+	db $88,$89,$8a,$8b
+
+SpriteOAMParameters: ; 0x4098
+	db $00,$00, $00                                      ; top left
+	db $00,$08, $00                                      ; top right
+	db $08,$00, OAMFLAG_CANBEMASKED                      ; bottom left
+	db $08,$08, OAMFLAG_CANBEMASKED | OAMFLAG_ENDOFDATA  ; bottom right
+SpriteOAMParametersFlipped: ; 0x40a4
+	db $00,$08, OAMFLAG_VFLIPPED
+	db $00,$00, OAMFLAG_VFLIPPED
+	db $08,$08, OAMFLAG_VFLIPPED | OAMFLAG_CANBEMASKED
+	db $08,$00, OAMFLAG_VFLIPPED | OAMFLAG_CANBEMASKED | OAMFLAG_ENDOFDATA
 
 ; known jump sources: 945 (0:945)
 Func_40b0: ; 40b0 (1:40b0)
@@ -10576,7 +10748,7 @@ Func_40b0: ; 40b0 (1:40b0)
 	ld [$FF00+$9f], a
 	ld [$FF00+$a0], a
 	ld [$FF00+$a1], a
-	call Func_35a6
+	call HasEnoughMoney
 	jr c, .asm_40ff
 	ld a, [W_PLAYERMONEY3] ; $d347
 	ld [$FF00+$9f], a
@@ -10689,16 +10861,18 @@ UnnamedText_42ac: ; 0x42ac
 	db $50
 ; 0x42ac + 5 bytes
 
-; known jump sources: 42bd (1:42bd), 42c6 (1:42c6)
-Func_42b1: ; 42b1 (1:42b1)
+; copy text of fixed length $b (like player name, rival name, mon names, ...)
+CopyFixedLengthText: ; 42b1 (1:42b1)
 	ld bc, $b
 	jp CopyData
-	ld hl, $45aa
+
+Func_42b7: ; 42b7 (1:42b7)
+	ld hl, NintenText
 	ld de, W_PLAYERNAME ; $d158
-	call Func_42b1
-	ld hl, $45b1
+	call CopyFixedLengthText
+	ld hl, SonyText
 	ld de, W_RIVALNAME ; $d34a
-	call Func_42b1
+	call CopyFixedLengthText
 	xor a
 	ld [$FF00+$b0], a
 	ld [$d358], a
@@ -10837,7 +11011,7 @@ ENDC
 	cp $fd
 	jr nz, .asm_43d4
 	ld a, $bc
-	call Func_23b1
+	call PlaySound
 .asm_43d4
 	ld a, [hli]
 	ld e, a
@@ -10858,7 +11032,7 @@ INCBIN "baserom.gbc",$43db,$43ea - $43db
 	ld c, $24
 	call DelayFrames
 	ld a, $bd
-	call Func_23b1
+	call PlaySound
 	call Func_4598
 	ld a, $90
 	ld [$FF00+$b0], a
@@ -10883,7 +11057,7 @@ INCBIN "baserom.gbc",$43db,$43ea - $43db
 	call Func_3748
 	ld a, $c3
 	ld [$c0ee], a
-	call Func_23b1
+	call PlaySound
 	xor a
 	ld [$cc5b], a
 .asm_443b
@@ -11303,8 +11477,8 @@ UnusedNames: ; 4A92
 
 INCBIN "baserom.gbc",$4b09,$4b0f - $4b09
 
-; known jump sources: 205b (0:205b)
-Func_4b0f: ; 4b0f (1:4b0f)
+; calculates the OAM data for all currently visible sprites and writes it to $c300
+PrepareOAMData: ; 4b0f (1:4b0f)
 	ld a, [$cfcb]
 	dec a
 	jr z, .asm_4b1e
@@ -11315,32 +11489,30 @@ Func_4b0f: ; 4b0f (1:4b0f)
 .asm_4b1e
 	xor a
 	ld [$FF00+$90], a
-
-; known jump sources: 4bb3 (1:4bb3)
-Func_4b21: ; 4b21 (1:4b21)
+.asm_4b21
 	ld [$FF00+$8f], a
 	ld d, $c1
 	ld a, [$FF00+$8f]
 	ld e, a
-	ld a, [de]
+	ld a, [de]         ; c1x0
 	and a
 	jp z, .asm_4bad
 	inc e
 	inc e
-	ld a, [de]
+	ld a, [de]         ; c1x2 read combined orientation and animation info
 	ld [$d5cd], a
 	cp $ff
-	jr nz, .asm_4b3c
+	jr nz, .spriteVisible   ; $ff -> offscreen, don't draw
 	call Func_4bd1
 	jr .asm_4bad
-.asm_4b3c
+.spriteVisible
 	cp $a0
-	jr c, .asm_4b46
+	jr c, .considerOrientation ; if >= $a0, ignore the sprite orientation and animation (by using a different conversion table)
 	and $f
 	add $10
 	jr .asm_4b48
-.asm_4b46
-	and $f
+.considerOrientation
+	and $f                     ; the lower nybble contains orientation and animation info
 .asm_4b48
 	ld l, a
 	push de
@@ -11348,15 +11520,15 @@ Func_4b21: ; 4b21 (1:4b21)
 	ld a, e
 	add $5
 	ld e, a
-	ld a, [de]
+	ld a, [de]         ; c2x7
 	and $80
-	ld [$FF00+$94], a
+	ld [$FF00+$94], a          ; temp store bit 7 for later use in OAM flags (draws sprite behind background (used for grass))
 	pop de
 	ld h, $0
-	ld bc, $4000
+	ld bc, SpriteFacingAndAnimationTable
 	add hl, hl
 	add hl, hl
-	add hl, bc
+	add hl, bc                 ; skip to the table location determined by orientation and animation
 	ld a, [hli]
 	ld c, a
 	ld a, [hli]
@@ -11367,60 +11539,60 @@ Func_4b21: ; 4b21 (1:4b21)
 	call Func_4bd1
 	ld a, [$FF00+$90]
 	ld e, a
-	ld d, $c3
-.asm_4b6c
-	ld a, [$FF00+$92]
-	add $10
-	add [hl]
-	ld [de], a
+	ld d, $c3                ; $c300+x is buffer for OAM data
+.spriteTilesLoop             ; loops 4 times for the 4 tiles a sprite consists of
+	ld a, [$FF00+$92]        ; temp for sprite Y position
+	add $10                  ; Y=16 is top of screen (Y=0 is invisible)
+	add [hl]                 ; add Y offset from table
+	ld [de], a               ; write new sprite OAM Y position
 	inc hl
-	ld a, [$FF00+$91]
-	add $8
-	add [hl]
+	ld a, [$FF00+$91]        ; temp for sprite X position
+	add $8                   ; X=8 is left of screen (X=0 is invisible)
+	add [hl]                 ; add X offset from table
 	inc e
-	ld [de], a
+	ld [de], a               ; write new sprite OAM X position
 	inc e
-	ld a, [bc]
+	ld a, [bc]               ; read pattern number offset (accomodates orientation (offset 0,4 or 8) and animation (offset 0 or $80))
 	inc bc
 	push bc
 	ld b, a
-	ld a, [$d5cd]
-	swap a
+	ld a, [$d5cd]            ; temp copy of c1x2
+	swap a                   ; high nybble determines sprite used (0 is always player sprite, next are some npcs)
 	and $f
-	cp $b
-	jr nz, .asm_4b8e
-	ld a, $7c
-	jr .asm_4b96
-.asm_4b8e
+	cp $b                    ; sprites $a and $b have no orientation or animation and therefore only 4 tiles
+	jr nz, .calcTileOffset   ; (instead of 12), so tile b's offset is a special case
+	ld a, $7c                ; = $a * 12 + 4
+	jr .doneCalcTileOffset
+.calcTileOffset
 	sla a
 	sla a
 	ld c, a
 	sla a
-	add c
-.asm_4b96
-	add b
+	add c                    ; a *= 12 (each sprite consists of 12 tiles)
+.doneCalcTileOffset
+	add b                    ; add orientation and animation offset
 	pop bc
-	ld [de], a
+	ld [de], a               ; write OAM sprite pattern number
 	inc hl
 	inc e
 	ld a, [hl]
-	bit 1, a
-	jr z, .asm_4ba3
-	ld a, [$FF00+$94]
+	bit 1, a                 ; bit 1 is ignored for OAM, it's used here as an "always in foregroud" flag.
+	jr z, .alwaysInForeground
+	ld a, [$FF00+$94]        ; load bit 7 (set to $80 if sprite is in grass and should be drawn behind it)
 	or [hl]
-.asm_4ba3
+.alwaysInForeground
 	inc hl
-	ld [de], a
+	ld [de], a               ; write OAM sprite flags
 	inc e
-	bit 0, a
-	jr z, .asm_4b6c
+	bit 0, a                 ; test for OAMFLAG_ENDOFDATA
+	jr z, .spriteTilesLoop
 	ld a, e
 	ld [$FF00+$90], a
 .asm_4bad
 	ld a, [$FF00+$8f]
 	add $10
 	cp $0
-	jp nz, Func_4b21
+	jp nz, .asm_4b21
 	ld a, [$FF00+$90]
 	ld l, a
 	ld h, $c3
@@ -11429,24 +11601,24 @@ Func_4b21: ; 4b21 (1:4b21)
 	ld a, [$d736]
 	bit 6, a
 	ld a, $a0
-	jr z, .asm_4bcb
+	jr z, .clearUnusedOAMEntriesLoop
 	ld a, $90
-.asm_4bcb
+.clearUnusedOAMEntriesLoop
 	cp l
 	ret z
 	ld [hl], b
 	add hl, de
-	jr .asm_4bcb
+	jr .clearUnusedOAMEntriesLoop
 
 ; known jump sources: 4b37 (1:4b37), 4b64 (1:4b64)
 Func_4bd1: ; 4bd1 (1:4bd1)
 	inc e
 	inc e
-	ld a, [de]
+	ld a, [de]            ; c1x4
 	ld [$FF00+$92], a
 	inc e
 	inc e
-	ld a, [de]
+	ld a, [de]            ; c1x6
 	ld [$FF00+$91], a
 	ld a, $4
 	add e
@@ -11454,27 +11626,37 @@ Func_4bd1: ; 4bd1 (1:4bd1)
 	ld a, [$FF00+$92]
 	add $4
 	and $f0
-	ld [de], a
+	ld [de], a            ; c1xa (sprite Y pos (snapped to whole steps (?))
 	inc e
 	ld a, [$FF00+$91]
 	and $f0
-	ld [de], a
+	ld [de], a            ; c1xb (sprite X pos (snapped to whole steps (?))
 	ret
 
 ; known jump sources: 1f9e (0:1f9e)
-Func_4bed: ; 4bed (1:4bed)
+; copies DMA routine to HRAM. By GB specifications, all DMA needs to be done in HRAM (no other memory section is available during DMA)
+WriteDMACodeToHRAM: ; 4bed (1:4bed)
 	ld c, $80
 	ld b, $a
-	ld hl, $4bfb
-.asm_4bf4
+	ld hl, DMARoutine
+.copyLoop
 	ld a, [hli]
 	ld [$ff00+c], a
 	inc c
 	dec b
-	jr nz, .asm_4bf4
+	jr nz, .copyLoop
 	ret
 
-INCBIN "baserom.gbc",$4bfb,$4c05 - $4bfb
+; this routine is copied to HRAM and executed there on every VBlank
+DMARoutine: ; 0x4bfb
+	ld a, $c3
+	ld [$ff00+$46], a   ; start DMA
+	ld a, $28
+.waitLoop               ; wait for DMA to finish
+	dec a
+	jr nz, .waitLoop
+	ret
+; 0x4c05
 
 ; known jump sources: 3d638 (f:5638)
 Func_4c05: ; 4c05 (1:4c05)
@@ -11498,57 +11680,55 @@ Func_4c05: ; 4c05 (1:4c05)
 INCBIN "baserom.gbc",$4c28,$4c34 - $4c28
 
 ; known jump sources: 2438 (0:2438)
-Func_4c34: ; 4c34 (1:4c34)
+_UpdateSprites: ; 4c34 (1:4c34)
 	ld h, $c1
 	inc h
-	ld a, $e
-.asm_4c39
+	ld a, $e    ; $c20e
+.spriteLoop
 	ld l, a
 	sub $e
 	ld c, a
-	ld [$FF00+$da], a
+	ld [H_CURRENTSPRITEOFFSET], a
 	ld a, [hl]
 	and a
-	jr z, .asm_4c4c
+	jr z, .skipSprite   ; tests $c2Xe
 	push hl
 	push de
 	push bc
-	call Func_4c54
+	call .updateCurrentSprite
 	pop bc
 	pop de
 	pop hl
-.asm_4c4c
+.skipSprite
 	ld a, l
-	add $10
-	cp $e
-	jr nz, .asm_4c39
+	add $10             ; move to next sprite
+	cp $e               ; test for overflow (back at $0e)
+	jr nz, .spriteLoop
 	ret
-
-; known jump sources: 4c46 (1:4c46)
-Func_4c54: ; 4c54 (1:4c54)
+.updateCurrentSprite ; 4c54 (1:4c54)
 	cp $1
-	jp nz, Func_4c5c
-	jp Func_4e31
+	jp nz, UpdateNonPlayerSprite
+	jp UpdatePlayerSprite
 
 ; known jump sources: 4c56 (1:4c56)
-Func_4c5c: ; 4c5c (1:4c5c)
+UpdateNonPlayerSprite: ; 4c5c (1:4c5c)
 	dec a
 	swap a
-	ld [$FF00+$93], a
-	ld a, [$cf17]
+	ld [$FF00+$93], a  ; $10 * sprite#
+	ld a, [$cf17] ; some sprite offset?
 	ld b, a
-	ld a, [$FF00+$da]
+	ld a, [H_CURRENTSPRITEOFFSET]
 	cp b
-	jr nz, .asm_4c6d
+	jr nz, .unequal
 	jp Func_5236
-.asm_4c6d
+.unequal
 	jp Func_4ed1
 
 ; known jump sources: 4e50 (1:4e50), 51af (1:51af)
 Func_4c70: ; 4c70 (1:4c70)
 	nop
 	ld h, $c1
-	ld a, [$FF00+$da]
+	ld a, [H_CURRENTSPRITEOFFSET]
 	add $0
 	ld l, a
 	ld a, [hl]
@@ -11589,7 +11769,7 @@ Func_4ca5: ; 4ca5 (1:4ca5)
 	ld [$FF00+$8f], a
 	swap a
 	ld e, a
-	ld a, [$FF00+$da]
+	ld a, [H_CURRENTSPRITEOFFSET]
 	cp e
 	jp z, .asm_4d69
 	ld d, h
@@ -11601,7 +11781,7 @@ Func_4ca5: ; 4ca5 (1:4ca5)
 	ld a, [de]
 	inc a
 	jp z, .asm_4d69
-	ld a, [$FF00+$da]
+	ld a, [H_CURRENTSPRITEOFFSET]
 	add $a
 	ld l, a
 	inc e
@@ -11755,57 +11935,61 @@ Func_4d72: ; 4d72 (1:4d72)
 INCBIN "baserom.gbc",$4d85,$4de1 - $4d85
 
 ; known jump sources: 24f7 (0:24f7)
-Func_4de1: ; 4de1 (1:4de1)
+PickupItem: ; 4de1 (1:4de1)
 	call EnableAutoTextBoxDrawing
 	ld a, [H_DOWNARROWBLINKCNT2] ; $FF00+$8c
 	ld b, a
-	ld hl, $d5ce
-.asm_4dea
+	ld hl, W_MISSABLEOBJECTLIST
+.missableObjectsListLoop
 	ld a, [hli]
 	cp $ff
 	ret z
 	cp b
-	jr z, .asm_4df4
+	jr z, .isMissable
 	inc hl
-	jr .asm_4dea
-.asm_4df4
+	jr .missableObjectsListLoop
+.isMissable
 	ld a, [hl]
 	ld [$FF00+$db], a
-	ld hl, $d504
+	ld hl, W_MAPSPRITEEXTRADATA
 	ld a, [H_DOWNARROWBLINKCNT2] ; $FF00+$8c
 	dec a
 	add a
 	ld d, $0
 	ld e, a
-	add hl, de
-	ld a, [hl]
+	add hl, de        ; seek to item data of found item
+	ld a, [hl]        ; read Item type
 	ld b, a
-	ld c, $1
+	ld c, $1          ; quantity is 1
 	call GiveItem
-	jr nc, .asm_4e1f
+	jr nc, .noMoreSpace
 	ld a, [$FF00+$db]
 	ld [$cc4d], a
 	ld a, $11
-	call Predef ; indirect jump to Func_f1d7 (f1d7 (3:71d7))
+	call Predef ; indirect jump to RemoveMissableObject (f1d7 (3:71d7))
 	ld a, $1
 	ld [$cc3c], a
-	ld hl, $4e26
-	jr .asm_4e22
-.asm_4e1f
-	ld hl, $4e2c
-.asm_4e22
+	ld hl, FoundItemText
+	jr .printText
+.noMoreSpace
+	ld hl, NoMoreRoomForItemText
+.printText
 	call PrintText
 	ret
 
-INCBIN "baserom.gbc",$4e26,$4e2c - $4e26
+FoundItemText: ; 0x4e26
+	TX_FAR _FoundItemText
+	db $0B
+	db $50
+; 0x4e26 + 5 bytes
 
-UnnamedText_4e2c: ; 0x4e2c
-	TX_FAR _UnnamedText_4e2c
+NoMoreRoomForItemText: ; 0x4e2c
+	TX_FAR _NoMoreRoomForItemText
 	db $50
 ; 0x4e2c + 5 bytes
 
 ; known jump sources: 4c59 (1:4c59)
-Func_4e31: ; 4e31 (1:4e31)
+UpdatePlayerSprite: ; 4e31 (1:4e31)
 	ld a, [$c200]
 	and a
 	jr z, .asm_4e41
@@ -11863,7 +12047,7 @@ Func_4e31: ; 4e31 (1:4e31)
 	ld a, [$d736]
 	bit 7, a
 	jr nz, .asm_4eb6
-	ld a, [$FF00+$da]
+	ld a, [H_CURRENTSPRITEOFFSET]
 	add $7
 	ld l, a
 	ld a, [hl]
@@ -11887,7 +12071,7 @@ Func_4e31: ; 4e31 (1:4e31)
 .asm_4eb6
 	ld a, [$FF00+$93]
 	ld c, a
-	ld a, [$d535]
+	ld a, [W_GRASSTILE]
 	cp c
 	ld a, $0
 	jr nz, .asm_4ec3
@@ -11900,67 +12084,67 @@ INCBIN "baserom.gbc",$4ec7,$4ed1 - $4ec7
 
 ; known jump sources: 4c6d (1:4c6d)
 Func_4ed1: ; 4ed1 (1:4ed1)
-	ld a, [$FF00+$da]
+	ld a, [H_CURRENTSPRITEOFFSET]
 	swap a
 	dec a
 	add a
-	ld hl, W_PEOPLEMOVEPERMISSIONS ; $d4e4
+	ld hl, W_MAPSPRITEDATA ; $d4e4
 	add l
 	ld l, a
-	ld a, [hl]
-	ld [$cf14], a
+	ld a, [hl]        ; read movement byte 2
+	ld [W_CURSPRITEMOVEMENT2], a
 	ld h, $c1
-	ld a, [$FF00+$da]
+	ld a, [H_CURRENTSPRITEOFFSET]
 	ld l, a
 	inc l
-	ld a, [hl]
+	ld a, [hl]        ; c1x1
 	and a
-	jp z, Func_50ad
-	call Func_50dc
-	ret c
+	jp z, InitializeSpriteStatus
+	call CheckSpriteAvailability
+	ret c             ; if sprite is invisible, on tile >=$60, in grass or player is currently walking
 	ld h, $c1
-	ld a, [$FF00+$da]
+	ld a, [H_CURRENTSPRITEOFFSET]
 	ld l, a
 	inc l
-	ld a, [hl]
+	ld a, [hl]        ; c1x1
 	bit 7, a
-	jp nz, Func_507f
+	jp nz, InitializeSpriteFacingDirection  ; c1x1 >= $80
 	ld b, a
 	ld a, [$cfc4]
 	bit 0, a
-	jp nz, asm_5073
+	jp nz, notYetMoving
 	ld a, b
 	cp $2
-	jp z, Func_5057
+	jp z, UpdateSpriteMovementDelay  ; c1x1 == 2
 	cp $3
-	jp z, Func_4ffe
+	jp z, UpdateSpriteInWalkingAnimation  ; c1x1 == 3
 	ld a, [W_WALKCOUNTER] ; $cfc5
 	and a
-	ret nz
-	call Func_50bd
+	ret nz           ; don't do anything yet if player is currently moving (redundant, already tested in CheckSpriteAvailability)
+	call InitializeSpriteScreenPosition
 	ld h, $c2
-	ld a, [$FF00+$da]
+	ld a, [H_CURRENTSPRITEOFFSET]
 	add $6
 	ld l, a
-	ld a, [hl]
+	ld a, [hl]       ; c2x6: movement byte 1
 	inc a
-	jr z, .asm_4f59
+	jr z, .asm_4f59  ; value $FF
 	inc a
-	jr z, .asm_4f59
+	jr z, .asm_4f59  ; value $FE
 	dec a
-	ld [hl], a
+	ld [hl], a       ; (temporarily) increment movement byte 1
 	dec a
 	push hl
 	ld hl, $cf0f
-	dec [hl]
+	dec [hl]         ; decrement $cf0f
 	pop hl
 	ld de, $cc5b
-	call Func_522f
+	call LoadDEPlusA ; a = [$cc5b + movement byte 1]
 	cp $e0
-	jp z, Func_4fc8
+	jp z, ChangeFacingDirection
 	cp $ff
 	jr nz, .asm_4f4b
-	ld [hl], a
+	ld [hl], a       ; reset movement byte 1 to initial value
 	ld hl, $d730
 	res 0, [hl]
 	xor a
@@ -11970,510 +12154,533 @@ Func_4ed1: ; 4ed1 (1:4ed1)
 .asm_4f4b
 	cp $fe
 	jr nz, .asm_4f5f
-	ld [hl], $1
+	ld [hl], $1     ; set movement byte 1 to $1
 	ld de, $cc5b
-	call Func_522f
+	call LoadDEPlusA ; a = [$cc5b + $fe] (?)
 	jr .asm_4f5f
 .asm_4f59
-	call Func_5207
+	call getTileSpriteStandsOn
 	call GenRandom
 .asm_4f5f
 	ld b, a
-	ld a, [$cf14]
+	ld a, [W_CURSPRITEMOVEMENT2]
 	cp $d0
-	jr z, .asm_4f7f
+	jr z, .moveDown    ; movement byte 2 = $d0 forces down
 	cp $d1
-	jr z, .asm_4f96
+	jr z, .moveUp      ; movement byte 2 = $d1 forces up
 	cp $d2
-	jr z, .asm_4fad
+	jr z, .moveLeft    ; movement byte 2 = $d2 forces left
 	cp $d3
-	jr z, .asm_4fbe
+	jr z, .moveRight   ; movement byte 2 = $d3 forces right
 	ld a, b
-	cp $40
-	jr nc, .asm_4f8b
-	ld a, [$cf14]
+	cp $40             ; a < $40: down (or left)
+	jr nc, .notDown
+	ld a, [W_CURSPRITEMOVEMENT2]
 	cp $2
-	jr z, .asm_4fad
-.asm_4f7f
-	ld de, $28
-	add hl, de
+	jr z, .moveLeft    ; movement byte 2 = $2 only allows left or right
+.moveDown
+	ld de, 2*20
+	add hl, de         ; move tile pointer two rows down
 	ld de, $100
+
 	ld bc, $400
-	jr asm_4fcb
-.asm_4f8b
-	cp $80
-	jr nc, .asm_4fa2
-	ld a, [$cf14]
+	jr TryWalking
+.notDown
+	cp $80             ; $40 <= a < $80: up (or right)
+	jr nc, .notUp
+	ld a, [W_CURSPRITEMOVEMENT2]
 	cp $2
-	jr z, .asm_4fbe
-.asm_4f96
-	ld de, $ffd8
-	add hl, de
-	ld de, rJOYP ; $ff00
+	jr z, .moveRight   ; movement byte 2 = $2 only allows left or right
+.moveUp
+	ld de, -2*20 ; $ffd8
+	add hl, de         ; move tile pointer two rows up
+	ld de, $ff00
 	ld bc, $804
-	jr asm_4fcb
-.asm_4fa2
-	cp $c0
-	jr nc, .asm_4fb7
-	ld a, [$cf14]
+	jr TryWalking
+.notUp
+	cp $c0             ; $80 <= a < $c0: left (or up)
+	jr nc, .notLeft
+	ld a, [W_CURSPRITEMOVEMENT2]
 	cp $1
-	jr z, .asm_4f96
-.asm_4fad
+	jr z, .moveUp      ; movement byte 2 = $1 only allows up or down
+.moveLeft
 	dec hl
-	dec hl
+	dec hl             ; move tile pointer two columns left
 	ld de, $ff
 	ld bc, $208
-	jr asm_4fcb
-.asm_4fb7
-	ld a, [$cf14]
+	jr TryWalking
+.notLeft              ; $c0 <= a: right (or down)
+	ld a, [W_CURSPRITEMOVEMENT2]
 	cp $1
-	jr z, .asm_4f7f
-.asm_4fbe
+	jr z, .moveDown    ; movement byte 2 = $1 only allows up or down
+.moveRight
 	inc hl
-	inc hl
+	inc hl             ; move tile pointer two columns right
 	ld de, $1
 	ld bc, $10c
-	jr asm_4fcb
+	jr TryWalking
 
 ; known jump sources: 4f36 (1:4f36)
-Func_4fc8: ; 4fc8 (1:4fc8)
+; cahnges facing direction by zeroing the movement delta and calling TryWalking
+ChangeFacingDirection: ; 4fc8 (1:4fc8)
 	ld de, $0
-asm_4fcb: ; 4fcb (1:4fcb)
+	; fall through
+
+; b: direction (1,2,4 or 8)
+; c: new facing direction (0,4,8 or $c)
+; d: Y movement delta (-1, 0 or 1)
+; e: X movement delta (-1, 0 or 1)
+; hl: pointer to tile the sprite would wlak onto
+; set carry on failure, clears carry on success
+TryWalking: ; 4fcb (1:4fcb)
 	push hl
 	ld h, $c1
-	ld a, [$FF00+$da]
+	ld a, [H_CURRENTSPRITEOFFSET]
 	add $9
 	ld l, a
-	ld [hl], c
-	ld a, [$FF00+$da]
+	ld [hl], c          ; c1x9 (update facing direction)
+	ld a, [H_CURRENTSPRITEOFFSET]
 	add $3
 	ld l, a
-	ld [hl], d
+	ld [hl], d          ; c1x3 (update Y movement delta)
 	inc l
 	inc l
-	ld [hl], e
+	ld [hl], e          ; c1x5 (update X movement delta)
 	pop hl
 	push de
-	ld c, [hl]
-	call Func_516e
+	ld c, [hl]          ; read tile to walk onto
+	call CanWalkOntoTile
 	pop de
-	ret c
+	ret c               ; cannot walk there (reinitialization of delay values already done)
 	ld h, $c2
-	ld a, [$FF00+$da]
+	ld a, [H_CURRENTSPRITEOFFSET]
 	add $4
 	ld l, a
-	ld a, [hl]
+	ld a, [hl]          ; c2x4: Y position
 	add d
-	ld [hli], a
-	ld a, [hl]
+	ld [hli], a         ; update Y position
+	ld a, [hl]          ; c2x5: X position
 	add e
-	ld [hl], a
-	ld a, [$FF00+$da]
+	ld [hl], a          ; update X position
+	ld a, [H_CURRENTSPRITEOFFSET]
 	ld l, a
-	ld [hl], $10
+	ld [hl], $10        ; c2x0=16: walk animation counter
 	dec h
 	inc l
-	ld [hl], $3
-	jp Func_5157
+	ld [hl], $3         ; c1x1: set movement status to walking
+	jp UpdateSpriteImage
 
 ; known jump sources: 4f0c (1:4f0c)
-Func_4ffe: ; 4ffe (1:4ffe)
-	ld a, [$FF00+$da]
+; update the walking animation parameters for a sprite that is currently walking
+UpdateSpriteInWalkingAnimation: ; 4ffe (1:4ffe)
+	ld a, [H_CURRENTSPRITEOFFSET]
 	add $7
 	ld l, a
-	ld a, [hl]
+	ld a, [hl]                       ; c1x7 (counter until next walk animation frame)
 	inc a
-	ld [hl], a
+	ld [hl], a                       ; c1x7 += 1
 	cp $4
-	jr nz, .asm_5012
+	jr nz, .noNextAnimationFrame
 	xor a
-	ld [hl], a
+	ld [hl], a                       ; c1x7 = 0
 	inc l
-	ld a, [hl]
+	ld a, [hl]                       ; c1x8 (walk animation frame)
 	inc a
 	and $3
-	ld [hl], a
-.asm_5012
-	ld a, [$FF00+$da]
+	ld [hl], a                       ; advance to next animation frame every 4 ticks (16 ticks total for one step)
+.noNextAnimationFrame
+	ld a, [H_CURRENTSPRITEOFFSET]
 	add $3
 	ld l, a
-	ld a, [hli]
+	ld a, [hli]                      ; c1x3 (movement Y delta)
 	ld b, a
-	ld a, [hl]
+	ld a, [hl]                       ; c1x4 (screen Y position)
 	add b
-	ld [hli], a
-	ld a, [hli]
+	ld [hli], a                      ; update screen Y position
+	ld a, [hli]                      ; c1x5 (movement X delta)
 	ld b, a
-	ld a, [hl]
+	ld a, [hl]                       ; c1x6 (screen X position)
 	add b
-	ld [hl], a
-	ld a, [$FF00+$da]
+	ld [hl], a                       ; update screen X position
+	ld a, [H_CURRENTSPRITEOFFSET]
 	ld l, a
 	inc h
-	ld a, [hl]
+	ld a, [hl]                       ; c2x0 (walk animantion counter)
 	dec a
-	ld [hl], a
+	ld [hl], a                       ; update walk animantion counter
 	ret nz
-	ld a, $6
+	ld a, $6                         ; walking finished, update state
 	add l
 	ld l, a
-	ld a, [hl]
+	ld a, [hl]                       ; c2x6 (movement byte 1)
 	cp $fe
-	jr nc, .asm_503a
-	ld a, [$FF00+$da]
+	jr nc, .initNextMovementCounter  ; values $fe and $ff
+	ld a, [H_CURRENTSPRITEOFFSET]
 	inc a
 	ld l, a
 	dec h
-	ld [hl], $1
+	ld [hl], $1                      ; c1x1 = 1 (movement status ready)
 	ret
-.asm_503a
+.initNextMovementCounter
 	call GenRandom
-	ld a, [$FF00+$da]
+	ld a, [H_CURRENTSPRITEOFFSET]
 	add $8
 	ld l, a
 	ld a, [H_RAND1] ; $FF00+$d3
 	and $7f
-	ld [hl], a
-	dec h
-	ld a, [$FF00+$da]
+	ld [hl], a                       ; c2x8: set next movement delay to a random value in [0,$7f]
+	dec h                            ;       note that value 0 actually makes the delay $100 (bug?)
+	ld a, [H_CURRENTSPRITEOFFSET]
 	inc a
 	ld l, a
-	ld [hl], $2
+	ld [hl], $2                      ; c1x1 = 2 (movement status)
 	inc l
 	inc l
 	xor a
-	ld b, [hl]
-	ld [hli], a
+	ld b, [hl]                       ; c1x3 (movement Y delta)
+	ld [hli], a                      ; reset movement Y delta
 	inc l
-	ld c, [hl]
-	ld [hl], a
+	ld c, [hl]                       ; c1x5 (movement X delta)
+	ld [hl], a                       ; reset movement X delta
 	ret
 
 ; known jump sources: 4f07 (1:4f07)
-Func_5057: ; 5057 (1:5057)
+; update delay value (c2x8) for sprites in the delayed state (c1x1)
+UpdateSpriteMovementDelay: ; 5057 (1:5057)
 	ld h, $c2
-	ld a, [$FF00+$da]
+	ld a, [H_CURRENTSPRITEOFFSET]
 	add $6
 	ld l, a
-	ld a, [hl]
+	ld a, [hl]              ; c2x6: movement byte 1
 	inc l
 	inc l
 	cp $fe
-	jr nc, .asm_5069
+	jr nc, .tickMoveCounter ; values $fe or $ff
 	ld [hl], $0
-	jr .asm_506c
-.asm_5069
-	dec [hl]
-	jr nz, asm_5073
-.asm_506c
+	jr .moving
+.tickMoveCounter
+	dec [hl]                ; c2x8: frame counter until next movement
+	jr nz, notYetMoving
+.moving
 	dec h
-	ld a, [$FF00+$da]
+	ld a, [H_CURRENTSPRITEOFFSET]
 	inc a
 	ld l, a
-	ld [hl], $1
-asm_5073: ; 5073 (1:5073)
+	ld [hl], $1             ; c1x1 = 1 (mark as ready to move)
+notYetMoving: ; 5073 (1:5073)
 	ld h, $c1
-	ld a, [$FF00+$da]
+	ld a, [H_CURRENTSPRITEOFFSET]
 	add $8
 	ld l, a
-	ld [hl], $0
-	jp Func_5157
+	ld [hl], $0             ; c1x8 = 0 (walk animation frame)
+	jp UpdateSpriteImage
 
 ; known jump sources: 4ef8 (1:4ef8)
-Func_507f: ; 507f (1:507f)
+InitializeSpriteFacingDirection: ; 507f (1:507f)
 	ld a, [$d72d]
 	bit 5, a
-	jr nz, asm_5073
+	jr nz, notYetMoving
 	res 7, [hl]
 	ld a, [$d52a]
 	bit 3, a
-	jr z, .asm_5093
-	ld c, $0
-	jr .asm_50a5
-.asm_5093
+	jr z, .notFacingDown
+	ld c, $0                ; make sprite face down
+	jr .facingDirectionDetermined
+.notFacingDown
 	bit 2, a
-	jr z, .asm_509b
-	ld c, $4
-	jr .asm_50a5
-.asm_509b
+	jr z, .notFacingUp
+	ld c, $4                ; make sprite face up
+	jr .facingDirectionDetermined
+.notFacingUp
 	bit 1, a
-	jr z, .asm_50a3
-	ld c, $c
-	jr .asm_50a5
-.asm_50a3
-	ld c, $8
-.asm_50a5
-	ld a, [$FF00+$da]
+	jr z, .notFacingRight
+	ld c, $c                ; make sprite face right
+	jr .facingDirectionDetermined
+.notFacingRight
+	ld c, $8                ; make sprite face left
+.facingDirectionDetermined
+	ld a, [H_CURRENTSPRITEOFFSET]
 	add $9
 	ld l, a
-	ld [hl], c
-	jr asm_5073
+	ld [hl], c              ; c1x9: set facing direction
+	jr notYetMoving
 
 ; known jump sources: 4ee8 (1:4ee8)
-Func_50ad: ; 50ad (1:50ad)
-	ld [hl], $1
+InitializeSpriteStatus: ; 50ad (1:50ad)
+	ld [hl], $1   ; $c1x1: set movement status to ready
 	inc l
-	ld [hl], $ff
+	ld [hl], $ff  ; $c1x2: set sprite image to $ff (invisible/off screen)
 	inc h
-	ld a, [$FF00+$da]
+	ld a, [H_CURRENTSPRITEOFFSET]
 	add $2
 	ld l, a
 	ld a, $8
-	ld [hli], a
-	ld [hl], a
+	ld [hli], a   ; $c2x2: set Y displacement to 8
+	ld [hl], a    ; $c2x3: set X displacement to 8
 	ret
 
 ; known jump sources: 4f14 (1:4f14)
-Func_50bd: ; 50bd (1:50bd)
+; calculates the spprite's scrren position form its map position and the player position
+InitializeSpriteScreenPosition: ; 50bd (1:50bd)
 	ld h, $c2
-	ld a, [$FF00+$da]
+	ld a, [H_CURRENTSPRITEOFFSET]
 	add $4
 	ld l, a
 	ld a, [W_YCOORD] ; $d361
 	ld b, a
-	ld a, [hl]
-	sub b
-	swap a
-	sub $4
+	ld a, [hl]      ; c2x4 (Y position + 4)
+	sub b           ; relative to player position
+	swap a          ; * 16
+	sub $4          ; - 4
 	dec h
-	ld [hli], a
+	ld [hli], a     ; c1x4 (screen Y position)
 	inc h
 	ld a, [W_XCOORD] ; $d362
 	ld b, a
-	ld a, [hli]
-	sub b
-	swap a
+	ld a, [hli]     ; c2x6 (X position + 4)
+	sub b           ; relative to player position
+	swap a          ; * 16
 	dec h
-	ld [hl], a
+	ld [hl], a      ; c1x6 (screen X position)
 	ret
 
 ; known jump sources: 4eeb (1:4eeb)
-Func_50dc: ; 50dc (1:50dc)
+; tests if sprite is off screen or otherwise unable to do anything
+CheckSpriteAvailability: ; 50dc (1:50dc)
 	ld a, $12
-	call Predef ; indirect jump to Func_f1a6 (f1a6 (3:71a6))
+	call Predef ; indirect jump to IsMissableObjectHidden (f1a6 (3:71a6))
 	ld a, [$FF00+$e5]
 	and a
-	jp nz, .asm_512e
+	jp nz, .spriteInvisible
 	ld h, $c2
-	ld a, [$FF00+$da]
+	ld a, [H_CURRENTSPRITEOFFSET]
 	add $6
 	ld l, a
-	ld a, [hl]
+	ld a, [hl]      ; c2x6: movement byte 1
 	cp $fe
-	jr c, .asm_5115
-	ld a, [$FF00+$da]
+	jr c, .skipXVisibilityTest ; movement byte 1 < $fe
+	ld a, [H_CURRENTSPRITEOFFSET]
 	add $4
 	ld l, a
-	ld b, [hl]
+	ld b, [hl]      ; c2x4: Y pos (+4)
 	ld a, [W_YCOORD] ; $d361
 	cp b
-	jr z, .asm_5106
-	jr nc, .asm_512e
-	add $8
+	jr z, .skipYVisibilityTest
+	jr nc, .spriteInvisible ; above screen region
+	add $8                  ; screen is 9 tiles high
 	cp b
-	jr c, .asm_512e
-.asm_5106
+	jr c, .spriteInvisible  ; below screen region
+.skipYVisibilityTest
 	inc l
-	ld b, [hl]
+	ld b, [hl]      ; c2x5: X pos (+4)
 	ld a, [W_XCOORD] ; $d362
 	cp b
-	jr z, .asm_5115
-	jr nc, .asm_512e
-	add $9
+	jr z, .skipXVisibilityTest
+	jr nc, .spriteInvisible ; left of screen region
+	add $9                  ; screen is 10 tiles wide
 	cp b
-	jr c, .asm_512e
-.asm_5115
-	call Func_5207
+	jr c, .spriteInvisible  ; right of screen region
+.skipXVisibilityTest
+	call getTileSpriteStandsOn
 	ld d, $60
 	ld a, [hli]
 	cp d
-	jr nc, .asm_512e
+	jr nc, .spriteInvisible ; standing on tile with ID >=$60 (bottom left tile)
 	ld a, [hld]
 	cp d
-	jr nc, .asm_512e
-	ld bc, $ffec
-	add hl, bc
+	jr nc, .spriteInvisible ; standing on tile with ID >=$60 (bottom right tile)
+	ld bc, -20 ; $ffec
+	add hl, bc              ; go back one row of tiles
 	ld a, [hli]
 	cp d
-	jr nc, .asm_512e
+	jr nc, .spriteInvisible ; standing on tile with ID >=$60 (top left tile)
 	ld a, [hl]
 	cp d
-	jr c, .asm_513a
-.asm_512e
+	jr c, .spriteVisible    ; standing on tile with ID >=$60 (top right tile)
+.spriteInvisible
 	ld h, $c1
-	ld a, [$FF00+$da]
+	ld a, [H_CURRENTSPRITEOFFSET]
 	add $2
 	ld l, a
-	ld [hl], $ff
+	ld [hl], $ff       ; c1x2
 	scf
-	jr .asm_5156
-.asm_513a
+	jr .done
+.spriteVisible
 	ld c, a
 	ld a, [W_WALKCOUNTER] ; $cfc5
 	and a
-	jr nz, .asm_5156
-	call Func_5157
+	jr nz, .done           ; if player is currently walking, we're done
+	call UpdateSpriteImage
 	inc h
-	ld a, [$FF00+$da]
+	ld a, [H_CURRENTSPRITEOFFSET]
 	add $7
 	ld l, a
-	ld a, [$d535]
+	ld a, [W_GRASSTILE]
 	cp c
 	ld a, $0
-	jr nz, .asm_5154
+	jr nz, .notInGrass
 	ld a, $80
-.asm_5154
-	ld [hl], a
+.notInGrass
+	ld [hl], a       ; c2x7
 	and a
-.asm_5156
+.done
 	ret
 
 ; known jump sources: 4ffb (1:4ffb), 507c (1:507c), 5141 (1:5141)
-Func_5157: ; 5157 (1:5157)
+UpdateSpriteImage: ; 5157 (1:5157)
 	ld h, $c1
-	ld a, [$FF00+$da]
+	ld a, [H_CURRENTSPRITEOFFSET]
 	add $8
 	ld l, a
-	ld a, [hli]
+	ld a, [hli]        ; c1x8: walk animation frame
 	ld b, a
-	ld a, [hl]
+	ld a, [hl]         ; c1x9: facing direction
 	add b
 	ld b, a
-	ld a, [$FF00+$93]
+	ld a, [$FF00+$93]  ; current sprite offset
 	add b
 	ld b, a
-	ld a, [$FF00+$da]
+	ld a, [H_CURRENTSPRITEOFFSET]
 	add $2
 	ld l, a
-	ld [hl], b
+	ld [hl], b         ; c1x2: sprite to display
 	ret
 
 ; known jump sources: 4fe0 (1:4fe0)
-Func_516e: ; 516e (1:516e)
+; tests if sprite can walk the specified direction
+; b: direction (1,2,4 or 8)
+; c: ID of tile the sprite would walk onto
+; d: Y movement delta (-1, 0 or 1)
+; e: X movement delta (-1, 0 or 1)
+; set carry on failure, clears carry on success
+CanWalkOntoTile: ; 516e (1:516e)
 	ld h, $c2
-	ld a, [$FF00+$da]
+	ld a, [H_CURRENTSPRITEOFFSET]
 	add $6
 	ld l, a
-	ld a, [hl]
+	ld a, [hl]         ; c2x6 (movement byte 1)
 	cp $fe
-	jr nc, .asm_517c
+	jr nc, .canMove    ; values $fe and $ff
 	and a
 	ret
-.asm_517c
-	ld a, [$d530]
+.canMove
+	ld a, [W_TILESETCOLLISIONPTR]
 	ld l, a
-	ld a, [$d531]
+	ld a, [W_TILESETCOLLISIONPTR+1]
 	ld h, a
-.asm_5184
+.tilePassableLoop
 	ld a, [hli]
 	cp $ff
-	jr z, .asm_51e9
+	jr z, .impassable
 	cp c
-	jr nz, .asm_5184
+	jr nz, .tilePassableLoop
 	ld h, $c2
-	ld a, [$FF00+$da]
+	ld a, [H_CURRENTSPRITEOFFSET]
 	add $6
 	ld l, a
-	ld a, [hl]
+	ld a, [hl]         ; $c2x6 (movement byte 1)
 	inc a
-	jr z, .asm_51e9
+	jr z, .impassable  ; if $ff, no movement allowed (however, changing direction is)
 	ld h, $c1
-	ld a, [$FF00+$da]
+	ld a, [H_CURRENTSPRITEOFFSET]
 	add $4
 	ld l, a
-	ld a, [hli]
-	add $4
-	add d
-	cp $80
-	jr nc, .asm_51e9
+	ld a, [hli]        ; c1x4 (screen Y pos)
+	add $4             ; align to blocks (Y pos is always 4 pixels off)
+	add d              ; add Y delta
+	cp $80             ; if value is >$80, the destination is off screen (either $81 or $FF underflow)
+	jr nc, .impassable ; don't walk off screen
 	inc l
-	ld a, [hl]
-	add e
-	cp $90
-	jr nc, .asm_51e9
+	ld a, [hl]         ; c1x6 (screen X pos)
+	add e              ; add X delta
+	cp $90             ; if value is >$90, the destination is off screen (either $91 or $FF underflow)
+	jr nc, .impassable ; don't walk off screen
 	push de
 	push bc
 	call Func_4c70
 	pop bc
 	pop de
 	ld h, $c1
-	ld a, [$FF00+$da]
+	ld a, [H_CURRENTSPRITEOFFSET]
 	add $c
 	ld l, a
-	ld a, [hl]
-	and b
-	jr nz, .asm_51e9
+	ld a, [hl]         ; c1xc (forbidden directions flags(?))
+	and b              ; check against chosen direction (1,2,4 or 8)
+	jr nz, .impassable ; direction forbidden, don't go there
 	ld h, $c2
-	ld a, [$FF00+$da]
+	ld a, [H_CURRENTSPRITEOFFSET]
 	add $2
 	ld l, a
-	ld a, [hli]
-	bit 7, d
-	jr nz, .asm_51d2
+	ld a, [hli]        ; c2x2 (sprite Y displacement, initialized at $8, keep track of where a sprite did go)
+	bit 7, d           ; check if going upwards (d=$ff) 
+	jr nz, .upwards
 	add d
 	cp $5
-	jr c, .asm_51e9
-	jr .asm_51d6
-.asm_51d2
-	sub $1
-	jr c, .asm_51e9
-.asm_51d6
+	jr c, .impassable  ; if c2x2+d < 5, don't go ;bug: this tests probably were supposed to prevent sprites
+	jr .checkHorizontal                          ; from walking out too far, but this line makes sprites get stuck
+.upwards                                         ; whenever they walked upwards 5 steps
+	sub $1                                       ; on the other hand, the amount a sprite can walk out to the
+	jr c, .impassable  ; if d2x2 == 0, don't go  ; right of bottom is not limited (until the counter overflows)
+.checkHorizontal
 	ld d, a
-	ld a, [hl]
-	bit 7, e
-	jr nz, .asm_51e1
+	ld a, [hl]         ; c2x3 (sprite X displacement, initialized at $8, keep track of where a sprite did go)
+	bit 7, e           ; check if going left (e=$ff) 
+	jr nz, .left
 	add e
-	cp $5
-	jr .asm_51e5
-.asm_51e1
+	cp $5              ; compare, but no conditional jump like in the vertical check above (bug?)
+	jr .passable
+.left
 	sub $1
-	jr c, .asm_51e9
-.asm_51e5
-	ld [hld], a
-	ld [hl], d
-	and a
+	jr c, .impassable  ; if d2x3 == 0, don't go
+.passable
+	ld [hld], a        ; update c2x3
+	ld [hl], d         ; update c2x2
+	and a              ; clear carry (marking success)
 	ret
-.asm_51e9
+.impassable
 	ld h, $c1
-	ld a, [$FF00+$da]
+	ld a, [H_CURRENTSPRITEOFFSET]
 	inc a
 	ld l, a
-	ld [hl], $2
+	ld [hl], $2        ; c1x1 = 2 (set movement status to delayed)
 	inc l
 	inc l
 	xor a
-	ld [hli], a
+	ld [hli], a        ; c1x3 = 0 (clear Y movement delta)
 	inc l
-	ld [hl], a
+	ld [hl], a         ; c1x5 = 0 (clear X movement delta)
 	inc h
-	ld a, [$FF00+$da]
+	ld a, [H_CURRENTSPRITEOFFSET]
 	add $8
 	ld l, a
 	call GenRandom
 	ld a, [H_RAND1] ; $FF00+$d3
 	and $7f
-	ld [hl], a
-	scf
+	ld [hl], a         ; c2x8: set next movement delay to a random value in [0,$7f] (again with delay $100 if value is 0)
+	scf                ; set carry (marking failure to walk)
 	ret
 
 ; known jump sources: 4f59 (1:4f59), 5115 (1:5115)
-Func_5207: ; 5207 (1:5207)
+; calculates the tile pointer pointing to the tile the current sprite stancs on
+; this is always the lower left tile of the 2x2 tile blocks all sprites are snapped to
+; hl: output pointer
+getTileSpriteStandsOn: ; 5207 (1:5207)
 	ld h, $c1
-	ld a, [$FF00+$da]
+	ld a, [H_CURRENTSPRITEOFFSET]
 	add $4
 	ld l, a
-	ld a, [hli]
-	add $4
-	and $f0
-	srl a
+	ld a, [hli]     ; c1x4: screen Y position
+	add $4          ; align to 2*2 tile blocks (Y position is always off 4 pixels to the top)
+	and $f0         ; in case object is currently moving
+	srl a           ; screen Y tile * 4
 	ld c, a
 	ld b, $0
 	inc l
-	ld a, [hl]
+	ld a, [hl]      ; c1x6: screen Y position
 	srl a
 	srl a
-	srl a
-	add $14
+	srl a           ; screen X tile
+	add $14         ; screen X tile + 20
 	ld d, $0
 	ld e, a
 	ld hl, $c3a0
@@ -12482,16 +12689,16 @@ Func_5207: ; 5207 (1:5207)
 	add hl, bc
 	add hl, bc
 	add hl, bc
-	add hl, de
+	add hl, de     ; $c3a0 + 20*(screen Y tile + 1) + screen X tile
 	ret
 
-; known jump sources: 4f31 (1:4f31), 4f54 (1:4f54)
-Func_522f: ; 522f (1:522f)
+; loads [de+a] into a
+LoadDEPlusA: ; 522f (1:522f)
 	add e
 	ld e, a
-	jr nc, .asm_5234
+	jr nc, .noCarry
 	inc d
-.asm_5234
+.noCarry
 	ld a, [de]
 	ret
 
@@ -12547,7 +12754,7 @@ Func_5236: ; 5236 (1:5236)
 	ld a, [hl]
 	add b
 	ld [hl], a
-	ld a, [$FF00+$da]
+	ld a, [H_CURRENTSPRITEOFFSET]
 	add $9
 	ld l, a
 	ld a, c
@@ -12582,7 +12789,7 @@ Func_52b7: ; 52b7 (1:52b7)
 	ld b, a
 asm_52ba: ; 52ba (1:52ba)
 	ld hl, $c100
-	ld a, [$FF00+$da]
+	ld a, [H_CURRENTSPRITEOFFSET]
 	add l
 	add b
 	ld l, a
@@ -12591,7 +12798,7 @@ asm_52ba: ; 52ba (1:52ba)
 ; known jump sources: 5294 (1:5294), 52af (1:52af)
 Func_52c3: ; 52c3 (1:52c3)
 	ld hl, $c200
-	ld a, [$FF00+$da]
+	ld a, [H_CURRENTSPRITEOFFSET]
 	add $e
 	ld l, a
 	ld a, [hl]
@@ -12599,7 +12806,7 @@ Func_52c3: ; 52c3 (1:52c3)
 	swap a
 	ld b, a
 	ld hl, $c100
-	ld a, [$FF00+$da]
+	ld a, [H_CURRENTSPRITEOFFSET]
 	add $9
 	ld l, a
 	ld a, [hl]
@@ -12618,7 +12825,7 @@ Func_52c3: ; 52c3 (1:52c3)
 	ld [$FF00+$e9], a
 	call Func_5301
 	ld hl, $c100
-	ld a, [$FF00+$da]
+	ld a, [H_CURRENTSPRITEOFFSET]
 	add $2
 	ld l, a
 	ld a, [$FF00+$e9]
@@ -12630,7 +12837,7 @@ Func_52c3: ; 52c3 (1:52c3)
 
 ; known jump sources: 52ee (1:52ee)
 Func_5301: ; 5301 (1:5301)
-	ld a, [$FF00+$da]
+	ld a, [H_CURRENTSPRITEOFFSET]
 	add $7
 	ld l, a
 	ld a, [hl]
@@ -12653,7 +12860,7 @@ Func_5317: ; 5317 (1:5317)
 	ld c, $50
 	call DelayFrames
 	call ClearScreen
-	call Func_2429
+	call UpdateSprites
 	call LoadFontTilePatterns
 	call LoadHpBarAndStatusTilePatterns
 	call Func_5ae6
@@ -12780,7 +12987,7 @@ Func_5317: ; 5317 (1:5317)
 	ld a, $d
 	ld [rIE], a ; $FF00+$ff
 	ld a, $ff
-	call Func_23b1
+	call PlaySound
 	ld a, [$FF00+$aa]
 	cp $2
 	jr z, .asm_5431
@@ -12902,7 +13109,7 @@ Func_5317: ; 5317 (1:5317)
 	xor a
 	ld [$cc38], a
 	ld a, $ff
-	call Func_23b1
+	call PlaySound
 	ld a, [$FF00+$aa]
 	cp $2
 	ld c, $42
@@ -12928,7 +13135,7 @@ Func_5317: ; 5317 (1:5317)
 .asm_5506
 	ld c, $1f
 	ld a, $d9
-	call Func_23a1
+	call PlayMusic
 	jr .asm_551c
 
 INCBIN "baserom.gbc",$550f,$551c - $550f
@@ -13016,7 +13223,7 @@ Func_5a5f: ; 5a5f (1:5a5f)
 	ld [$c0f0], a
 	ld a, $ca
 	ld [$c0ee], a
-	jp Func_23b1
+	jp PlaySound
 
 ; known jump sources: 5a6f (1:5a6f)
 Func_5aaf: ; 5aaf (1:5aaf)
@@ -13078,7 +13285,7 @@ MainMenu: ; 0x5af2
 	ld [$D08A],a
 	inc a
 	ld [$D088],a
-	call $609E
+	call Func_609e
 	jr nc,.next0
 
 	; Predef 52 loads the save from SRAM to RAM
@@ -13130,7 +13337,7 @@ MainMenu: ; 0x5af2
 .next2
 	ld hl,$D730
 	res 6,[hl]
-	call $2429 ; OAM?
+	call UpdateSprites ; OAM?
 	xor a
 	ld [$CC26],a
 	ld [$CC2A],a
@@ -13143,7 +13350,7 @@ MainMenu: ; 0x5af2
 	ld [$CC29],a
 	ld a,[$D088]
 	ld [$CC28],a
-	call $3ABE
+	call HandleMenuInput
 	bit 1,a
 	jp nz,$42DD ; load title screen (gfx and arrangement)
 	ld c,20
@@ -13160,12 +13367,12 @@ MainMenu: ; 0x5af2
 	jr z,.next4 ; if press_A on Continue
 	cp a,1
 	jp z,$5D52 ; if press_A on NewGame
-	call $5E8A ; if press_a on Options
+	call DisplayOptionMenu ; if press_a on Options
 	ld a,1
 	ld [$D08A],a
 	jp .next0
 .next4
-	call $5DB5
+	call Func_5db5
 	ld hl,$D126
 	set 5,[hl]
 .next6
@@ -13189,16 +13396,16 @@ MainMenu: ; 0x5af2
 	call DelayFrames
 	ld a,[$D5A2]
 	and a
-	jp z,$5D5F
+	jp z,Func_5d5f
 	ld a,[W_CURMAP] ; map ID
 	cp a,HALL_OF_FAME
-	jp nz,$5D5F
+	jp nz,Func_5d5f
 	xor a
 	ld [$D71A],a
 	ld hl,$D732
 	set 2,[hl]
-	call $62CE
-	jp $5D5F
+	call Function62CE
+	jp Func_5d5f
 Func_5bff: ; 0x5bff
 	ld a,1
 	ld [$D358],a
@@ -13222,7 +13429,7 @@ Func_5c0a: ; 5c0a (1:5c0a)
 	ld b, $6
 	ld c, $d
 	call TextBoxBorder
-	call Func_2429
+	call UpdateSprites
 	ld hl, $c433
 	ld de, $5d97
 	call PlaceString
@@ -13534,7 +13741,7 @@ DisplayOptionMenu: ; 5E8A
 	jr nz,.loop
 .exitMenu
 	ld a,$90
-	call $23b1 ; play sound
+	call PlaySound ; play sound
 	ret
 .eraseOldMenuCursor
 	ld [W_TOPMENUITEMX],a
@@ -13795,24 +14002,25 @@ Func_60ca: ; 60ca (1:60ca)
 	ld bc, $b
 	jp CopyData
 ; 6115 (1:6115)
+
 OakSpeech: ; 6115
 	ld a,$FF
-	call $23B1 ; stop music
+	call PlaySound ; stop music
 	ld a,2     ; bank of song
 	ld c,a
 	ld a,$EF    ; song #
-	call $23A1  ; plays music
+	call PlayMusic  ; plays music
 	call ClearScreen
 	call LoadTextBoxTilePatterns
-	call $60CA
+	call Func_60ca
 	ld a,$18
-	call Predef
+	call Predef ; indirect jump to InitializePlayerData
 	ld hl,$D53A
-	ld a,$14
+	ld a,POTION
 	ld [$CF91],a
 	ld a,1
 	ld [$CF96],a
-	call $2BCF
+	call AddItemToInventory  ; give one potion
 	ld a,[$D07C]
 	ld [$D71A],a
 	call Function62CE
@@ -13832,9 +14040,9 @@ OakSpeech: ; 6115
 	ld a,NIDORINO
 	ld [$D0B5],a    ; pic displayed is stored at this location
 	ld [$CF91],a
-	call $1537      ; this is also related to the pic
+	call GetMonHeader      ; this is also related to the pic
 	ld hl,$C3F6     ; position on tilemap the pic is displayed
-	call $1384      ; displays pic?
+	call Func_1384      ; displays pic?
 	call MovePicLeft
 	ld hl,OakSpeechText2
 	call PrintText      ; Prints text box
@@ -13846,7 +14054,7 @@ OakSpeech: ; 6115
 	call MovePicLeft
 	ld hl,IntroducePlayerText
 	call PrintText
-	call $695D ; brings up NewName/Red/etc menu
+	call Func_695d ; brings up NewName/Red/etc menu
 	call GBFadeOut2
 	call ClearScreen
 	ld de,Rival1Pic
@@ -13855,7 +14063,7 @@ OakSpeech: ; 6115
 	call FadeInIntroPic
 	ld hl,IntroduceRivalText
 	call PrintText
-	call $69A4
+	call Func_69a4
 Function61BC: ; 0x61bc
 	call GBFadeOut2
 	call ClearScreen
@@ -13871,7 +14079,7 @@ Function61BC: ; 0x61bc
 .next	ld a,[H_LOADEDROMBANK]
 	push af
 	ld a,$9C
-	call $23B1
+	call PlaySound
 	pop af
 	ld [H_LOADEDROMBANK],a
 	ld [$2000],a
@@ -13889,7 +14097,7 @@ Function61BC: ; 0x61bc
 	ld de,ShrinkPic2
 	ld bc,$0400
 	call IntroPredef3B
-	call $28A6
+	call Func_28a6
 	ld a,[H_LOADEDROMBANK]
 	push af
 	ld a,2
@@ -13899,7 +14107,7 @@ Function61BC: ; 0x61bc
 	ld [$CFC7],a
 	ld a,$FF
 	ld [$C0EE],a
-	call $23B1 ; stop music
+	call PlaySound ; stop music
 	pop af
 	ld [H_LOADEDROMBANK],a
 	ld [$2000],a
@@ -13971,17 +14179,17 @@ MovePicLeft: ; 0x6288
 	jr .next
 
 Predef3B: ; 62A1
-	call $3E94
+	call Load16BitRegisters
 IntroPredef3B: ; 62A4
 	push bc
 	ld a,b
-	call $36EB
+	call UncompressSpriteFromDE
 	ld hl,S_SPRITEBUFFER1
 	ld de,$A000
 	ld bc,$0310
 	call CopyData
 	ld de,$9000
-	call $16EA
+	call InterlaceMergeSpriteBuffers
 	pop bc
 	ld a,c
 	and a
@@ -13995,7 +14203,7 @@ IntroPredef3B: ; 62A4
 	jp Predef
 
 Function62CE: ; 62CE XXX called by 4B2 948 989 5BF9 5D15
-	call $62FF
+	call Func_62ff
 	ld a,$19
 	call Predef
 	ld hl,$D732
@@ -14007,7 +14215,7 @@ Function62CE: ; 62CE XXX called by 4B2 948 989 5BF9 5D15
 .next
 	bit 1,[hl]
 	jr z,.next3
-	call $64EA
+	call Func_64ea
 .next3
 	ld a,0
 .next2
@@ -14311,7 +14519,7 @@ Func_6596: ; 6596 (1:6596)
 	set 6, [hl]
 	call GBPalWhiteOutWithDelay3
 	call ClearScreen
-	call Func_2429
+	call UpdateSprites
 	ld b, $8
 	call GoPAL_SET
 	call LoadHpBarAndStatusTilePatterns
@@ -14465,7 +14673,7 @@ INCBIN "baserom.gbc",$665e,$667e - $665e
 	ld [hli], a
 	ld [hl], $50
 	ld a, $90
-	call Func_23b1
+	call PlaySound
 	ret
 	ld a, [$cee9]
 	and a
@@ -14722,18 +14930,14 @@ UnnamedText_699f: ; 0x699f
 	db $50
 ; 0x699f + 5 bytes
 
-; 0x69a4
+Func_69a4: ; 0x69a4
 	call Unnamed_6a12 ; 0x69a4 call 0x6a12
 	ld de, DefaultNamesRival
-; 0x69aa
-
 	call Func_6a6c
 	ld a, [W_CURMENUITEMID] ; $cc26
 	and a
 	jr z, .asm_69c1
-; 69b3 (1:69b3)
-ld hl, DefaultNamesRivalList
-
+	ld hl, DefaultNamesRivalList
 	call Func_6ad6
 	ld de, W_RIVALNAME ; $d34a
 	call Func_69ec
@@ -14863,7 +15067,7 @@ Func_6a6c: ; 6a6c (1:6a6c)
 	pop de
 	ld hl, $c3ca
 	call PlaceString
-	call Func_2429
+	call UpdateSprites
 	xor a
 	ld [W_CURMENUITEMID], a ; $cc26
 	ld [W_OLDMENUITEMID], a ; $cc2a
@@ -15099,7 +15303,7 @@ HandleItemListSwapping: ; 6B44
 DisplayPokemartDialogue_: ; 6C20
 	ld a,[W_LISTSCROLLOFFSET]
 	ld [$d07e],a
-	call $2429 ; move sprites
+	call UpdateSprites ; move sprites
 	xor a
 	ld [$cf0a],a ; flag that is set if something is sold or bought
 .loop
@@ -15142,9 +15346,9 @@ DisplayPokemartDialogue_: ; 6C20
 	jp z,.bagEmpty
 	ld hl,PokemonSellingGreetingText
 	call PrintText
-	call $3719 ; save screen
+	call Func_3719 ; save screen
 .sellMenuLoop
-	call $3725 ; restore saved screen
+	call Func_3725 ; restore saved screen
 	ld a,$13
 	ld [$d125],a
 	call DisplayTextBoxID ; draw money text box
@@ -15207,7 +15411,7 @@ DisplayPokemartDialogue_: ; 6C20
 .bagEmpty
 	ld hl,PokemartItemBagEmptyText
 	call PrintText
-	call $3719 ; save screen
+	call Func_3719 ; save screen
 	jp .returnToMainPokemartMenu
 .buyMenu
 	ld a,$01
@@ -15219,9 +15423,9 @@ DisplayPokemartDialogue_: ; 6C20
 	call Bankswitch
 	ld hl,PokemartBuyingGreetingText
 	call PrintText
-	call $3719 ; save screen
+	call Func_3719 ; save screen
 .buyMenuLoop
-	call $3725 ; restore saved screen
+	call Func_3725 ; restore saved screen
 	ld a,$13
 	ld [$d125],a
 	call DisplayTextBoxID ; draw money text box
@@ -15248,7 +15452,7 @@ DisplayPokemartDialogue_: ; 6C20
 	ld a,[$cf91] ; item ID
 	ld [$d11e],a ; store item ID for GetItemName
 	call GetItemName
-	call $3826 ; copy name to $cf4b
+	call CopyStringToCF4B ; copy name to $cf4b
 	ld hl,PokemartTellBuyPrice
 	call PrintText
 	FuncCoord 14,7
@@ -15277,13 +15481,13 @@ DisplayPokemartDialogue_: ; 6C20
 	ld [$cf0a],a
 .skipSettingFlag2
 	ld a,$b2
-	call $3740 ; play sound
-	call $3748 ; wait until sound is done playing
+	call Func_3740 ; play sound
+	call Func_3748 ; wait until sound is done playing
 	ld hl,PokemartBoughtItemText
 	call PrintText
 	jp .buyMenuLoop
 .returnToMainPokemartMenu
-	call $3725 ; restore save screen
+	call Func_3725 ; restore save screen
 	ld a,$13
 	ld [$d125],a
 	call DisplayTextBoxID ; draw money text box
@@ -15308,7 +15512,7 @@ DisplayPokemartDialogue_: ; 6C20
 	call PrintText
 	ld a,$01
 	ld [$cfcb],a
-	call $2429 ; move sprites
+	call UpdateSprites ; move sprites
 	ld a,[$d07e]
 	ld [W_LISTSCROLLOFFSET],a
 	ret
@@ -15576,7 +15780,7 @@ UnnamedText_6fc8: ; 0x6fc8
 	db $a
 	db $8
 	ld a, $ae
-	call $3740
+	call Func_3740
 	ld hl, $6fd7
 	ret
 ; 0x6fd7
@@ -15595,7 +15799,7 @@ UnnamedText_6fe1: ; 0x6fe1
 ; 0x6fe1 + 5 bytes
 
 DisplayPokemonCenterDialogue_: ; 0x6fe6
-	call $3719 ; save screen
+	call Func_3719 ; save screen
 	ld hl, PokemonCenterWelcomeText
 	call PrintText
 	ld hl, $d72e
@@ -15606,12 +15810,12 @@ DisplayPokemonCenterDialogue_: ; 0x6fe6
 	ld hl, ShallWeHealYourPokemonText
 	call PrintText
 .skipShallWeHealYourPokemon
-	call $360a ; yes/no menu
+	call Func_360a ; yes/no menu
 	ld a, [W_CURMENUITEMID]
 	and a
 	jr nz, .declinedHealing ; if the player chose No
-	call $7078
-	call $3725 ; restore screen
+	call Unknown_7078
+	call Func_3725 ; restore screen
 	ld hl, NeedYourPokemonText
 	call PrintText
 	ld a, $18
@@ -15628,7 +15832,7 @@ DisplayPokemonCenterDialogue_: ; 0x6fe6
 	ld a, [$d35b]
 	ld [$cfca], a
 	ld [$c0ee], a
-	call $23b1
+	call PlaySound
 	ld hl, PokemonFightingFitText
 	call PrintText
 	ld a, $14
@@ -15637,11 +15841,11 @@ DisplayPokemonCenterDialogue_: ; 0x6fe6
 	call DelayFrames
 	jr .done
 .declinedHealing
-	call $3725 ; restore screen
+	call Func_3725 ; restore screen
 .done
 	ld hl, PokemonCenterFarewellText
 	call PrintText
-	jp $2429 ; move sprites
+	jp UpdateSprites ; move sprites
 
 PokemonCenterWelcomeText: ; 0x705d
 	TX_FAR _PokemonCenterWelcomeText
@@ -15730,7 +15934,7 @@ DisplayTextIDInit: ; 7096
 	bit 4,[hl]
 	res 4,[hl]
 	jr nz,.skipMovingSprites
-	call $2429 ; move sprites
+	call UpdateSprites ; move sprites
 .skipMovingSprites
 ; loop to copy C1X9 (direction the sprite is facing) to C2X9 for each sprite
 ; this is done because when you talk to an NPC, they turn to look your way
@@ -15763,7 +15967,7 @@ DisplayTextIDInit: ; 7096
 	dec c
 	jr nz,.spriteStandStillLoop
 	ld b,$9c ; window background address
-	call $18d6 ; transfer background in WRAM to VRAM
+	call Func_18d6 ; transfer background in WRAM to VRAM
 	xor a
 	ld [$ffb0],a ; put the window on the screen
 	call LoadFontTilePatterns
@@ -15868,12 +16072,12 @@ Unknown_71c5: ; 0x71c5
 	call PrintText
 	ld a, [$d74b]
 	bit 5, a
-	jp nz, $71e1
+	jp nz, Unknown_71e1
 	ld c, $3c
 	call DelayFrames
 	ld hl, $72d2
 	call PrintText
-	jp $7298
+	jp Func_7298
 ; 0x71e1
 
 Unknown_71e1: ; 0x71e1
@@ -15906,16 +16110,16 @@ Unknown_71e1: ; 0x71e1
 	call DelayFrame
 	jr .asm_71eb ; 0x7218 $d1
 .asm_721a
-	call $22ed
+	call Func_22ed
 	call DelayFrame
-	call $22ed
+	call Func_22ed
 	ld c, $32
 	call DelayFrames
 	ld hl, $72bd
 	call PrintText
 	xor a
 	ld [$cc34], a
-	call $35ec
+	call Func_35ec
 	ld a, $1
 	ld [$cc34], a
 	ld a, [$cc26]
@@ -15924,9 +16128,9 @@ Unknown_71e1: ; 0x71e1
 	ld hl, $7848
 	ld b, $1c
 	call Bankswitch
-	call $3748
+	call Func_3748
 	ld a, $b6
-	call $3740
+	call Func_3740
 	ld hl, $72c2
 	call PrintText
 	ld hl, $cc47
@@ -15936,33 +16140,35 @@ Unknown_71e1: ; 0x71e1
 	ld [hl], a
 	ld [$ff00+$a9], a
 	ld [$cc42], a
-	call $227f
+	call Func_227f
 	ld hl, $cc47
 	ld a, [hli]
 	inc a
-	jr nz, .asm_72a8 ; 0x726b $3b
+	jr nz, Func_72a8 ; 0x726b $3b
 	ld a, [hl]
 	inc a
-	jr nz, .asm_72a8 ; 0x726f $37
+	jr nz, Func_72a8 ; 0x726f $37
 	ld b, $a
 .asm_7273
 	call DelayFrame
-	call $22ed
+	call Func_22ed
 	dec b
 	jr nz, .asm_7273 ; 0x727a $f7
-	call $72d7
+	call Func_72d7
 	ld hl, $72c8
 	call PrintText
-	jr .asm_7298 ; 0x7285 $11
+	jr Func_7298 ; 0x7285 $11
 .asm_7287
 	ld hl, $72b3
 	call PrintText
-	jr .asm_7298 ; 0x728d $9
+	jr Func_7298 ; 0x728d $9
 .asm_728f
-	call $72d7
+	call Func_72d7
 	ld hl, $72cd
 	call PrintText
-.asm_7298
+	; fall through
+
+Func_7298: ; 0x7298
 	xor a
 	ld hl, $cc47
 	ld [hli], a
@@ -15972,7 +16178,8 @@ Unknown_71e1: ; 0x71e1
 	xor a
 	ld [$cc34], a
 	ret
-.asm_72a8
+
+Func_72a8: ; 0x72a8
 	xor a
 	ld [hld], a
 	ld [hl], a
@@ -16077,7 +16284,7 @@ DisplayTextBoxID_: ; 72EA
 	call PlaceString
 	pop af
 	ld [$d730],a
-	call $2429 ; move sprites
+	call UpdateSprites ; move sprites
 	ret
 
 ; function to search a table terminated with $ff for a byte matching c in increments of de
@@ -16429,7 +16636,7 @@ Func_7559: ; 7559 (1:7559)
 .asm_75b9
 	call TextBoxBorder
 .asm_75bc
-	call Func_2429
+	call UpdateSprites
 	pop hl
 	ld a, [hli]
 	and a
@@ -16466,7 +16673,7 @@ Func_7559: ; 7559 (1:7559)
 	pop hl
 	ld [$cd60], a
 	ld a, $90
-	call Func_23b1
+	call PlaySound
 	jr .asm_760f
 .asm_7603
 	xor a
@@ -16535,7 +16742,7 @@ Func_7656: ; 7656 (1:7656)
 	ld c, $6
 	dec b
 	jr nz, .asm_765c
-	call Func_2429
+	call UpdateSprites
 	ret
 
 INCBIN "baserom.gbc",$7671,$76e1 - $7671
@@ -16555,7 +16762,7 @@ INCBIN "baserom.gbc",$7671,$76e1 - $7671
 	ld b, $5
 	ld c, $7
 	call TextBoxBorder
-	call Func_2429
+	call UpdateSprites
 	ld a, $c
 	ld [$FF00+$f7], a
 	ld hl, $c49d
@@ -16585,7 +16792,7 @@ INCBIN "baserom.gbc",$7671,$76e1 - $7671
 	add hl, de
 	inc b
 	call TextBoxBorder
-	call Func_2429
+	call UpdateSprites
 	ld hl, $c490
 	ld a, [$cd42]
 	inc a
@@ -16837,7 +17044,7 @@ Func_78e6: ; 78e6 (1:78e6)
 	bit 3, a
 	jr nz, Func_790c
 	ld a, $99
-	call Func_23b1
+	call PlaySound
 	ld hl, $7b22
 	call PrintText
 
@@ -16852,7 +17059,7 @@ Func_790c: ; 790c (1:790c)
 	ld b, $8
 	ld c, $e
 	call TextBoxBorder
-	call Func_2429
+	call UpdateSprites
 	ld hl, $c3ca
 	ld de, $7af5
 	call PlaceString
@@ -16894,7 +17101,7 @@ Func_796d: ; 796d (1:796d)
 	bit 3, a
 	jr nz, .asm_797c
 	ld a, $9a
-	call Func_23b1
+	call PlaySound
 	call Func_3748
 .asm_797c
 	ld hl, $cd60
@@ -16959,7 +17166,7 @@ Func_79ab: ; 79ab (1:79ab)
 	call RemoveItemFromInventory
 	call Func_3748
 	ld a, $ab
-	call Func_23b1
+	call PlaySound
 	call Func_3748
 	ld hl, $7b36
 	call PrintText
@@ -17015,7 +17222,7 @@ Func_7a28: ; 7a28 (1:7a28)
 	call RemoveItemFromInventory
 	call Func_3748
 	ld a, $ab
-	call Func_23b1
+	call PlaySound
 	call Func_3748
 	ld hl, $7b4f
 	call PrintText
@@ -17181,7 +17388,7 @@ Func_7b68: ; 7b68 (1:7b68)
 	ld d, $13
 .asm_7b97
 	ld a, [W_WHICHPOKEMON] ; $cf92
-	call Func_3a7d
+	call SkipFixedLengthTextEntries
 	ld a, [W_WHICHPOKEMON] ; $cf92
 	cp d
 	jr nz, .asm_7ba6
@@ -17245,7 +17452,29 @@ Func_7b68: ; 7b68 (1:7b68)
 .asm_7c15
 	jp CopyDataUntil
 
-INCBIN "baserom.gbc",$7c18,$7c49 - $7c18
+Func_7c18: ; 0x7c18
+	ld hl, $d730
+	set 6, [hl]
+	ld a, $3d
+	call Predef
+	ld hl, $d730
+	res 6, [hl]
+	call ReloadMapData
+	ld c, $a
+	call DelayFrames
+	ld a, $3a
+	call Predef
+	ld a, [$d11e]
+	dec a
+	ld c, a
+	ld b, $1
+	ld hl, $d30a
+	ld a, $10
+	call Predef
+	ld a, $1
+	ld [$cc3c], a
+	ret
+; 0x7c49
 
 SECTION "bank2",DATA,BANK[$2]
 
@@ -18313,7 +18542,7 @@ Func_c69c: ; c69c (3:469c)
 	ld a, $1f
 	call Predef ; indirect jump to Func_480eb (480eb (12:40eb))
 	ld a, $97
-	call Func_23b1
+	call PlaySound
 .asm_c733
 	ld a, $14
 	call Predef ; indirect jump to Func_3ca83 (3ca83 (f:4a83))
@@ -18448,6 +18677,7 @@ Func_c8de: ; c8de (3:48de)
 
 ; Table of 2-Byte pointers, one pointer per map,
 ; goes up to Map_F7, ends with $FFFF.
+; points to table listing all missable object in the area
 MapHSPointers: ; 48F5
 	dw MapHS00
 	dw MapHS01
@@ -18707,7 +18937,7 @@ MapHSPointers: ; 48F5
 ; a) Map_ID = $FF
 ; b) Map_ID ≠ currentMapID
 ;
-; This Data is loaded into RAM at $D5CE-$D5F?.
+; This Data is loaded into RAM at $D5CE-$D5F?. (W_MISSABLEOBJECTLIST)
 
 ; These constants come from the bytes for Predef functions:
 Hide	equ $11
@@ -18715,7 +18945,7 @@ Show	equ $15
 
 MapHSXX:
 	db $FF,$FF,$FF
-MapHS00:
+MapHS00: ; 0xcaea
 	db PALLET_TOWN,$01,Hide
 MapHS01:
 	db VIRIDIAN_CITY,$05,Show
@@ -19018,9 +19248,7 @@ MapHSA2:
 	db SEAFOAM_ISLANDS_5,$02,Hide
 	db SEAFOAM_ISLANDS_5,$03,Show
 
-	db $FF
-
-INCBIN "baserom.gbc",$cd97,$cd99 - $cd97
+	db $FF,$01,Show
 
 ; known jump sources: 1320a (4:720a)
 Func_cd99: ; cd99 (3:4d99)
@@ -23210,7 +23438,7 @@ ItemUseBall: ; 03:5687
 	call GoPAL_SET_CF1C
 	ld a,$43
 	ld [$d11e],a
-	call $3725	;restore screenBuffer from Backup
+	call Func_3725	;restore screenBuffer from Backup
 	ld hl,ItemUseText00
 	call PrintText
 	ld hl,$583a
@@ -23519,7 +23747,7 @@ ItemUseBall: ; 03:5687
 	jr .End
 .sendToBox	;$5907
 	call CleanLCD_OAM
-	call $67a4
+	call Func_e7a4
 	ld hl,ItemUseBallText07
 	ld a,[$d7f1]
 	bit 0,a		;already met Bill?
@@ -23540,7 +23768,7 @@ ItemUseBall: ; 03:5687
 	ld hl,$d31d
 	inc a
 	ld [$cf96],a
-	jp $2bbb	;remove ITEM (XXX)
+	jp RemoveItemFromInventory	;remove ITEM (XXX)
 ItemUseBallText00:
 ;"It dodged the thrown ball!"
 ;"This pokemon can't be caught"
@@ -23606,7 +23834,7 @@ ItemUseBicycle: ; 5977
 	call ItemUseReloadOverworldData
 	xor a
 	ld [$d700],a ; change player state to walking
-	call $2307 ; play walking music
+	call Func_2307 ; play walking music
 	ld hl,GotOffBicycleText
 	jr .printText
 .tryToGetOnBike
@@ -23618,7 +23846,7 @@ ItemUseBicycle: ; 5977
 	inc a
 	ld [$d700],a ; change player state to bicycling
 	ld hl,GotOnBicycleText
-	call $2307 ; play bike riding music
+	call Func_2307 ; play bike riding music
 .printText
 	jp PrintText
 
@@ -23640,7 +23868,7 @@ ItemUseSurfboard: ; 59B4
 	set 7,[hl]
 	ld a,2
 	ld [$d700],a ; change player state to surfing
-	call $2307 ; play surfing music
+	call Func_2307 ; play surfing music
 	ld hl,SurfingGotOnText
 	jp PrintText
 .tryToStopSurfing
@@ -23678,7 +23906,7 @@ ItemUseSurfboard: ; 59B4
 	ld [$d700],a ; change player state to walking
 	dec a
 	ld [$cd6b],a
-	call $2307 ; play walking music
+	call Func_2307 ; play walking music
 	jp LoadWalkingPlayerSpriteGraphics
 ; uses a simulated button press to make the player move forward
 .makePlayerMoveForward
@@ -23735,8 +23963,8 @@ ItemUseEvoStone: ; 5A5B
 	ld a,$01
 	ld [$ccd4],a
 	ld a,$8e
-	call $3740 ; play sound
-	call $3748 ; wait for sound to end
+	call Func_3740 ; play sound
+	call Func_3748 ; wait for sound to end
 	ld hl,$6d0e
 	ld b,$0e
 	call Bankswitch ; try to evolve pokemon
@@ -24012,7 +24240,7 @@ ItemUseMedicine: ; 5ABB
 	ld bc,2 * 20
 	call AddNTimes ; calculate coordinates of HP bar of pokemon that used Softboiled
 	ld a,$8d
-	call $3740 ; play sound
+	call Func_3740 ; play sound
 	ld a,[$fff6]
 	set 0,a
 	ld [$fff6],a
@@ -24163,7 +24391,7 @@ ItemUseMedicine: ; 5ABB
 	cp a,FULL_HEAL
 	jr z,.playStatusAilmentCuringSound
 	ld a,$8d ; HP healing sound
-	call $3740 ; play sound
+	call Func_3740 ; play sound
 	ld a,[$fff6]
 	set 0,a
 	ld [$fff6],a
@@ -24186,7 +24414,7 @@ ItemUseMedicine: ; 5ABB
 	jr .showHealingItemMessage
 .playStatusAilmentCuringSound
 	ld a,$8e ; status ailment curing sound
-	call $3740 ; play sound
+	call Func_3740 ; play sound
 .showHealingItemMessage
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED],a
@@ -24198,7 +24426,7 @@ ItemUseMedicine: ; 5ABB
 	ld [H_AUTOBGTRANSFERENABLED],a
 	ld c,50
 	call DelayFrames
-	call $3865 ; wait for a button press
+	call Func_3865 ; wait for a button press
 	jr .done
 .canceledItemUse
 	xor a
@@ -24214,7 +24442,7 @@ ItemUseMedicine: ; 5ABB
 	ld a,[W_ISINBATTLE]
 	and a
 	ret nz
-	jp $3071 ; restore saved screen
+	jp ReloadMapData ; restore saved screen
 .useVitamin
 	push hl
 	ld a,[hl]
@@ -24275,7 +24503,7 @@ ItemUseMedicine: ; 5ABB
 	ld bc,10
 	call CopyData ; copy the stat's name to $cf4b
 	ld a,$8e
-	call $23b1 ; play sound
+	call PlaySound ; play sound
 	ld hl,VitaminStatRoseText
 	call PrintText
 	jp RemoveUsedItem
@@ -24292,7 +24520,7 @@ ItemUseMedicine: ; 5ABB
 	ld bc,-18
 	add hl,bc ; hl now points to byte 3 of experience
 	ld b,1
-	jp $3936 ; recalculate stats
+	jp Func_3936 ; recalculate stats
 .useRareCandy
 	push hl
 	ld bc,33
@@ -24370,7 +24598,7 @@ ItemUseMedicine: ; 5ABB
 	ld hl,$6ae4
 	ld b,$04
 	call Bankswitch ; display new stats text box
-	call $3865 ; wait for button press
+	call Func_3865 ; wait for button press
 	xor a
 	ld [$cc49],a
 	ld a,$1a
@@ -24528,7 +24756,7 @@ ItemUseXAccuracy: ; 6013
 ItemUseCardKey: ; 6022
 	xor a
 	ld [$d71f],a
-	call $4586
+	call Func_c586
 	ld a,[$4586]
 	cp a,$18
 	jr nz,.next0
@@ -24669,7 +24897,7 @@ ItemUseXStat: ; 6104
 	call PrintItemUseTextAndRemoveItem
 	ld a,XSTATITEM_ANIM ; X stat item animation ID
 	ld [W_PLAYERMOVENUM],a
-	call $3725 ; restore saved screen
+	call Func_3725 ; restore saved screen
 	call Delay3
 	xor a
 	ld [H_WHOSETURN],a ; set turn to player's turn
@@ -24743,7 +24971,7 @@ ItemUsePokeflute: ; 6140
 	ld a,[hl]
 	and b ; remove Sleep status
 	ld [hl],a
-	call $3701 ; restore saved screen
+	call Func_3701 ; restore saved screen
 	ld a,[$cd3d]
 	and a ; were any pokemon asleep before playing the flute?
 	ld hl,PlayedFluteNoEffectText
@@ -24754,7 +24982,7 @@ ItemUsePokeflute: ; 6140
 	ld a,[$d083]
 	and a,$80
 	jr nz,.skipMusic
-	call $3748 ; wait for sound to end
+	call Func_3748 ; wait for sound to end
 	ld b,$08
 	ld hl,$6306
 	call Bankswitch ; play in-battle pokeflute music
@@ -24827,17 +25055,17 @@ PlayedFluteHadEffectText: ; 6215
 	jr nz,.done
 ; play out-of-battle pokeflute music
 	ld a,$ff
-	call $23b1 ; turn off music
+	call PlaySound ; turn off music
 	ld a,$b8
 	ld c,$02
-	call $23a1 ; play music
+	call PlayMusic ; play music
 .musicWaitLoop ; wait for music to finish playing
 	ld a,[$c028]
 	cp a,$b8
 	jr z,.musicWaitLoop 
-	call $2307 ; start playing normal music again
+	call Func_2307 ; start playing normal music again
 .done
-	jp $24d7 ; end text
+	jp TextScriptEnd ; end text
 
 ItemUseCoinCase: ; 623A
 	ld a,[W_ISINBATTLE]
@@ -24937,7 +25165,7 @@ FishingInit: ; 62B4
 	ld hl,ItemUseText00
 	call PrintText
 	ld a,$8e
-	call $23b1 ; play sound
+	call PlaySound ; play sound
 	ld c,80
 	call DelayFrames
 	and a
@@ -24962,9 +25190,9 @@ ItemUseItemfinder: ; 62E1
 	ld c,4
 .loop
 	ld a,$9e
-	call $3740 ; play sound
+	call Func_3740 ; play sound
 	ld a,$b2
-	call $3740 ; play sound
+	call Func_3740 ; play sound
 	dec c
 	jr nz,.loop
 	ld hl,ItemfinderFoundItemText
@@ -25025,7 +25253,7 @@ ItemUsePPRestore: ; 631E
 	ld a,[hl]
 	ld [$d11e],a
 	call GetMoveName
-	call $3826 ; copy name to $cf4b
+	call CopyStringToCF4B ; copy name to $cf4b
 	pop hl
 	ld a,[$cd3d]
 	cp a,ETHER
@@ -25068,7 +25296,7 @@ ItemUsePPRestore: ; 631E
 	call CopyData ; copy party data to in-battle data
 .skipUpdatingInBattleData
 	ld a,$8e
-	call $23b1
+	call PlaySound
 	ld hl,PPRestoredText
 	call PrintText
 	jr .done
@@ -25203,7 +25431,7 @@ ItemUseTMHM: ; 6479
 	ld a,[$d11e]
 	ld [$d0e0],a
 	call GetMoveName
-	call $3826 ; copy name to $cf4b
+	call CopyStringToCF4B ; copy name to $cf4b
 	pop af
 	ld hl,BootedUpTMText
 	jr nc,.printBootedUpMachineText
@@ -25252,7 +25480,7 @@ ItemUseTMHM: ; 6479
 	call GBPalWhiteOutWithDelay3
 	call CleanLCD_OAM
 	call GoPAL_SET_CF1C
-	jp $3725 ; restore saved screen
+	jp Func_3725 ; restore saved screen
 .checkIfAbleToLearnMove
 	ld a,$43
 	call Predef ; check if the pokemon can learn the move
@@ -25266,7 +25494,7 @@ ItemUseTMHM: ; 6479
 	jr nz,.checkIfAlreadyLearnedMove
 ; if the pokemon can't learn the move
 	ld a,$a5
-	call $3740 ; play sound
+	call Func_3740 ; play sound
 	ld hl,MonCannotLearnMachineMoveText
 	call PrintText
 	jr .chooseMon
@@ -25309,8 +25537,8 @@ PrintItemUseTextAndRemoveItem: ; 6563
 	ld hl,ItemUseText00
 	call PrintText
 	ld a,$8e
-	call $23b1 ; play sound
-	call $3865 ; wait for button press
+	call PlaySound ; play sound
+	call Func_3865 ; wait for button press
 
 RemoveUsedItem: ; 6571
 	ld hl,W_NUMBAGITEMS
@@ -25332,7 +25560,7 @@ ItemUseNotYoursToUse: ; 6586
 
 ThrowBallAtTrainerMon: ; 658B
 	call GoPAL_SET_CF1C
-	call $3725 ; restore saved screen
+	call Func_3725 ; restore saved screen
 	call Delay3
 	ld a,TOSS_ANIM
 	ld [W_ANIMATIONID],a
@@ -25607,7 +25835,7 @@ TossItem_: ; 66F1
 	ld a,[$cf91]
 	ld [$d11e],a
 	call GetItemName
-	call $3826 ; copy name to $cf4b
+	call CopyStringToCF4B ; copy name to $cf4b
 	ld hl,IsItOKToTossItemText
 	call PrintText
 	FuncCoord 14,7
@@ -25628,7 +25856,7 @@ TossItem_: ; 66F1
 	ld a,[$cf91]
 	ld [$d11e],a
 	call GetItemName
-	call $3826 ; copy name to $cf4b
+	call CopyStringToCF4B ; copy name to $cf4b
 	ld hl,ThrewAwayItemText
 	call PrintText
 	pop hl
@@ -26059,7 +26287,7 @@ FishingGroup10:
 ; for items that cause the overworld to be displayed
 ItemUseReloadOverworldData: ; 69C5
 	call LoadCurrentMapView
-	jp $2429
+	jp UpdateSprites
 
 ; known jump sources: 711f4 (1c:51f4)
 Func_e9cb: ; e9cb (3:69cb)
@@ -26393,10 +26621,10 @@ asm_ef82: ; ef82 (3:6f82)
 	ld a, $1
 	ld [$cfcb], a
 	ld a, $ac
-	call Func_23b1
+	call PlaySound
 	ld a, $90
 	ld [$FF00+$b0], a
-	call Func_2429
+	call UpdateSprites
 	jp Func_eedc
 
 INCBIN "baserom.gbc",$eff2,$eff7 - $eff2
@@ -26566,25 +26794,25 @@ INCBIN "baserom.gbc",$f100,$f113 - $f100
 ; known jump sources: 1081 (0:1081)
 Func_f113: ; f113 (3:7113)
 	ld a, [W_CURMAP] ; $d35e
-	cp $c
-	jr nc, .asm_f125
+	cp ROUTE_1
+	jr nc, .notInTown
 	ld c, a
 	ld b, $1
-	ld hl, $d70b
+	ld hl, W_TOWNVISITEDFLAG   ; mark town as visited (for flying)
 	ld a, $10
 	call Predef ; indirect jump to HandleBitArray (f666 (3:7666))
-.asm_f125
-	ld hl, $48f5
+.notInTown
+	ld hl, MapHSPointers
 	ld a, [W_CURMAP] ; $d35e
 	ld b, $0
 	ld c, a
 	add hl, bc
 	add hl, bc
-	ld a, [hli]
+	ld a, [hli]                ; load missable objects pointer in hl
 	ld h, [hl]
 	ld l, a
 	push hl
-	ld de, $4aea
+	ld de, MapHS00             ; calculate difference between out pointer and the base pointer
 	ld a, l
 	sub e
 	jr nc, .asm_f13c
@@ -26595,168 +26823,179 @@ Func_f113: ; f113 (3:7113)
 	sub d
 	ld h, a
 	ld a, h
-	ld [H_DIVIDEND], a ; $FF00+$95 (aliases: H_PRODUCT, H_PASTLEADINGZEROES, H_QUOTIENT)
+	ld [H_DIVIDEND], a
 	ld a, l
-	ld [H_NUMTOPRINT], a ; $FF00+$96 (aliases: H_MULTIPLICAND)
+	ld [H_DIVIDEND+1], a
 	xor a
-	ld [$FF00+$97], a
-	ld [$FF00+$98], a
+	ld [H_DIVIDEND+2], a
+	ld [H_DIVIDEND+3], a
 	ld a, $3
-	ld [H_REMAINDER], a ; $FF00+$99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
+	ld [H_DIVISOR], a
 	ld b, $2
-	call Divide
+	call Divide                ; divide difference by 3, resulting in the global offset (number of missable items before ours)
 	ld a, [W_CURMAP] ; $d35e
 	ld b, a
-	ld a, [$FF00+$98]
-	ld c, a
-	ld de, $d5ce
+	ld a, [H_DIVIDEND+3]
+	ld c, a                    ; store global offset in c
+	ld de, W_MISSABLEOBJECTLIST
 	pop hl
-.asm_f15f
+.writeMissableObjectsListLoop
 	ld a, [hli]
 	cp $ff
-	jr z, .asm_f171
+	jr z, .done     ; end of list
 	cp b
-	jr nz, .asm_f171
+	jr nz, .done    ; not for current map anymore
 	ld a, [hli]
 	inc hl
-	ld [de], a
+	ld [de], a                 ; write (map-local) sprite ID
 	inc de
 	ld a, c
 	inc c
-	ld [de], a
+	ld [de], a                 ; write (global) missable object index
 	inc de
-	jr .asm_f15f
-.asm_f171
+	jr .writeMissableObjectsListLoop
+.done
 	ld a, $ff
-	ld [de], a
+	ld [de], a                 ; write sentinel
 	ret
 
 ; known jump sources: f89d (3:789d)
-Func_f175: ; f175 (3:7175)
-	ld hl, $d5a6
+InitializeMissableObjectsFlags: ; f175 (3:7175)
+	ld hl, W_MISSABLEOBJECTFLAGS
 	ld bc, $20
 	xor a
-	call FillMemory
-	ld hl, $4aea
+	call FillMemory ; clear missable objects flags
+	ld hl, MapHS00
 	xor a
 	ld [$d048], a
-.asm_f186
+.missableObjectsLoop
 	ld a, [hli]
-	cp $ff
+	cp $ff          ; end of list
 	ret z
 	push hl
 	inc hl
 	ld a, [hl]
-	cp $11
+	cp Hide
 	jr nz, .asm_f19d
-	ld hl, $d5a6
+	ld hl, W_MISSABLEOBJECTFLAGS
 	ld a, [$d048]
 	ld c, a
 	ld b, $1
-	call Func_f1e6
+	call HandleBitArray2 ; set flag iff Item is hidden
 .asm_f19d
 	ld hl, $d048
 	inc [hl]
 	pop hl
 	inc hl
 	inc hl
-	jr .asm_f186
+	jr .missableObjectsLoop
 
 ; known jump sources: 50de (1:50de)
-Func_f1a6: ; f1a6 (3:71a6)
-	ld a, [$FF00+$da]
+
+; tests if current sprite is a missable object that is hidden/has been removed
+IsMissableObjectHidden: ; f1a6 (3:71a6)
+	ld a, [H_CURRENTSPRITEOFFSET]
 	swap a
 	ld b, a
-	ld hl, $d5ce
-.asm_f1ae
+	ld hl, W_MISSABLEOBJECTLIST
+.loop
 	ld a, [hli]
 	cp $ff
-	jr z, .asm_f1c4
+	jr z, .notHidden ; not missable -> not hidden
 	cp b
 	ld a, [hli]
-	jr nz, .asm_f1ae
+	jr nz, .loop
 	ld c, a
 	ld b, $2
-	ld hl, $d5a6
-	call Func_f1e6
+	ld hl, W_MISSABLEOBJECTFLAGS
+	call HandleBitArray2
 	ld a, c
 	and a
-	jr nz, .asm_f1c5
-.asm_f1c4
+	jr nz, .hidden
+.notHidden
 	xor a
-.asm_f1c5
+.hidden
 	ld [$FF00+$e5], a
 	ret
 
-; known jump sources: 18ec9 (6:4ec9), 18f79 (6:4f79), 1953c (6:553c), 1cb60 (7:4b60), 1cb99 (7:4b99), 1ced7 (7:4ed7), 1cfa2 (7:4fa2), 1cff7 (7:4ff7), 1e7ef (7:67ef), 1e89c (7:689c), 44838 (11:4838), 449f6 (11:49f6), 4635f (11:635f), 50d11 (14:4d11), 51206 (14:5206), 515fc (14:55fc), 5161f (14:561f), 5d466 (17:5466), 60ea2 (18:4ea2), 60eb6 (18:4eb6), 613e0 (18:53e0), 6218e (18:618e), 7487c (1d:487c), 749df (1d:49df), 7600b (1d:600b)
-Func_f1c8: ; f1c8 (3:71c8)
-	ld hl, $d5a6
+; adds missable object (items, leg. pokemon, etc.) to the map
+; [$cc4d]: index of the missable object to be added (global index)
+AddMissableObject: ; f1c8 (3:71c8)
+	ld hl, W_MISSABLEOBJECTFLAGS
 	ld a, [$cc4d]
 	ld c, a
 	ld b, $0
-	call Func_f1e6
-	jp Func_2429
+	call HandleBitArray2   ; reset "removed" flag
+	jp UpdateSprites
 
-; known jump sources: 32b6 (0:32b6), 4e12 (1:4e12), 18f6f (6:4f6f), 1949a (6:549a), 1961d (6:561d), 19b89 (6:5b89), 1a500 (6:6500), 1cb8f (7:4b8f), 1cd37 (7:4d37), 1ce7b (7:4e7b), 1cf5b (7:4f5b), 1cf65 (7:4f65), 1cf98 (7:4f98), 1cfe4 (7:4fe4), 1d1ea (7:51ea), 1e7b3 (7:67b3), 1e8a6 (7:68a6), 4482d (11:482d), 449ec (11:49ec), 46354 (11:6354), 49e24 (12:5e24), 49f51 (12:5f51), 50d19 (14:4d19), 51162 (14:5162), 51210 (14:5210), 5160b (14:560b), 51615 (14:5615), 51d32 (14:5d32), 59640 (16:5640), 59980 (16:5980), 5a561 (16:6561), 5c278 (17:4278), 5c419 (17:4419), 5c423 (17:4423), 605c8 (18:45c8), 60d6d (18:4d6d), 60d92 (18:4d92), 60eac (18:4eac), 614cf (18:54cf), 6217b (18:617b), 74886 (1d:4886), 74890 (1d:4890), 74a92 (1d:4a92), 76090 (1d:6090)
-Func_f1d7: ; f1d7 (3:71d7)
-	ld hl, $d5a6
+; removes missable object (items, leg. pokemon, etc.) from the map
+; [$cc4d]: index of the missable object to be removed (global index)
+RemoveMissableObject: ; f1d7 (3:71d7)
+	ld hl, W_MISSABLEOBJECTFLAGS
 	ld a, [$cc4d]
 	ld c, a
 	ld b, $1
-	call Func_f1e6
-	jp Func_2429
+	call HandleBitArray2   ; set "removed" flag
+	jp UpdateSprites
 
 ; known jump sources: f19a (3:719a), f1bd (3:71bd), f1d1 (3:71d1), f1e0 (3:71e0)
-Func_f1e6: ; f1e6 (3:71e6)
+; functionally identical to _HandleBitArray, but with less optimized instructions
+; executes operations on a field of bits
+; b = 0 -> reset bit
+; b = 1 -> set bit
+; b = 2 -> read bit (into c and z-flag)
+; hl: base address
+; c: bit index
+HandleBitArray2: ; f1e6 (3:71e6)
 	push hl
 	push de
 	push bc
 	ld a, c
 	ld d, a
 	and $7
-	ld e, a
+	ld e, a        ; store bit offset in e
 	ld a, d
 	srl a
 	srl a
-	srl a
+	srl a          ; calc byte offset
 	add l
 	ld l, a
-	jr nc, .asm_f1fa
+	jr nc, .noCarry
 	inc h
-.asm_f1fa
+.noCarry
 	inc e
 	ld d, $1
-.asm_f1fd
+.shiftLeftLoop     ; d = 1 << e, bitmask for the used bit
 	dec e
-	jr z, .asm_f204
+	jr z, .operationSelect
 	sla d
-	jr .asm_f1fd
-.asm_f204
+	jr .shiftLeftLoop
+.operationSelect
 	ld a, b
 	and a
-	jr z, .asm_f213
+	jr z, .resetBit
 	cp $2
-	jr z, .asm_f21c
-	ld a, [hl]
+	jr z, .readBit
+	ld a, [hl] ; set bit
 	ld b, a
 	ld a, d
 	or b
 	ld [hl], a
-	jr .asm_f220
-.asm_f213
+	jr .done
+.resetBit
 	ld a, [hl]
 	ld b, a
 	ld a, d
 	xor $ff
 	and b
 	ld [hl], a
-	jr .asm_f220
-.asm_f21c
+	jr .done
+.readBit
 	ld a, [hl]
 	ld b, a
 	ld a, d
 	and b
-.asm_f220
+.done
 	pop bc
 	pop de
 	pop hl
@@ -26785,7 +27024,7 @@ Func_f225: ; f225 (3:7225)
 	ld e, a
 	add hl, de
 	res 7, [hl]
-	call Function3558
+	call GetSpriteMovementByte2Pointer
 	ld a, [hl]
 	cp $10
 	jp nz, Func_f2dd
@@ -26831,7 +27070,7 @@ Func_f225: ; f225 (3:7225)
 .asm_f29f
 	call MoveSprite
 	ld a, $a8
-	call Func_23b1
+	call PlaySound
 	ld hl, $cd60
 	set 1, [hl]
 	ret
@@ -26852,10 +27091,10 @@ Func_f2b5: ; f2b5 (3:72b5)
 	set 7, [hl]
 	ld a, [$d718]
 	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
-	call Function3558
+	call GetSpriteMovementByte2Pointer
 	ld [hl], $10
 	ld a, $ac
-	jp Func_23b1
+	jp PlaySound
 
 ; known jump sources: f23d (3:723d), f253 (3:7253), f26c (3:726c), f2c9 (3:72c9)
 Func_f2dd: ; f2dd (3:72dd)
@@ -26897,7 +27136,7 @@ Func_f2e5: ; f2e5 (3:72e5)
 .asm_f315
 	ld a, [$FF00+$e4]
 	dec a
-	call Func_3a7d
+	call SkipFixedLengthTextEntries
 	ld d, h
 	ld e, l
 	ld hl, W_PLAYERNAME ; $d158
@@ -26909,7 +27148,7 @@ Func_f2e5: ; f2e5 (3:72e5)
 	ld hl, W_PARTYMON1NAME ; $d2b5
 	ld a, [$FF00+$e4]
 	dec a
-	call Func_3a7d
+	call SkipFixedLengthTextEntries
 	ld a, $2
 	ld [$d07d], a
 	ld a, $4e
@@ -27138,7 +27377,70 @@ Func_f476: ; f476 (3:7476)
 	jr nz, .asm_f478
 	ret
 
-INCBIN "baserom.gbc",$f49d,$f51e - $f49d
+; adds enemy mon [$cf91] (at position [$cf92] in enemy list) to own party
+; no known uses in the game
+_AddEnemyMonToPlayerParty: ; 0xf49d (3:749d)
+	ld hl, W_NUMINPARTY
+	ld a, [hl]
+	cp $6
+	scf
+	ret z            ; party full, return failure
+	inc a
+	ld [hl], a       ; add 1 to party members
+	ld c, a
+	ld b, $0
+	add hl, bc
+	ld a, [$cf91]
+	ld [hli], a      ; add mon as last list entry
+	ld [hl], $ff     ; write new sentinel
+	ld hl, W_PARTYMON1DATA
+	ld a, [W_NUMINPARTY]
+	dec a
+	ld bc, W_PARTYMON2DATA - W_PARTYMON1DATA
+	call AddNTimes
+	ld e, l
+	ld d, h
+	ld hl, $cf98
+	call CopyData    ; write new mon's data (from $cf98)
+	ld hl, W_PARTYMON1OT
+	ld a, [W_NUMINPARTY]
+	dec a
+	call SkipFixedLengthTextEntries
+	ld d, h
+	ld e, l
+	ld hl, W_ENEMYMON1OT
+	ld a, [$cf92]
+	call SkipFixedLengthTextEntries
+	ld bc, $000b
+	call CopyData    ; write new mon's OT name (from an enemy mon)
+	ld hl, W_PARTYMON1NAME
+	ld a, [W_NUMINPARTY]
+	dec a
+	call SkipFixedLengthTextEntries
+	ld d, h
+	ld e, l
+	ld hl, W_ENEMYMON1NAME
+	ld a, [$cf92]
+	call SkipFixedLengthTextEntries
+	ld bc, $000b
+	call CopyData    ; write new mon's nickname (from an enemy mon)
+	ld a, [$cf91]
+	ld [$d11e], a
+	ld a, $3a
+	call Predef
+	ld a, [$d11e]
+	dec a
+	ld c, a
+	ld b, $1
+	ld hl, W_OWNEDPOKEMON
+	push bc
+	call _HandleBitArray ; add to owned pokemon
+	pop bc
+	ld hl, W_SEENPOKEMON
+	call _HandleBitArray ; add to seen pokemon
+	and a
+	ret                  ; return success
+; 0xf51e
 
 ; known jump sources: 3a72 (0:3a72)
 Func_f51e: ; f51e (3:751e)
@@ -27238,7 +27540,7 @@ Func_f51e: ; f51e (3:751e)
 	ld a, [W_NUMINBOX] ; $da80
 .asm_f5cd
 	dec a
-	call Func_3a7d
+	call SkipFixedLengthTextEntries
 	ld d, h
 	ld e, l
 .asm_f5d3
@@ -27252,7 +27554,7 @@ Func_f51e: ; f51e (3:751e)
 	ld hl, W_PARTYMON1OT ; $d273
 .asm_f5e6
 	ld a, [W_WHICHPOKEMON] ; $cf92
-	call Func_3a7d
+	call SkipFixedLengthTextEntries
 .asm_f5ec
 	ld bc, $b
 	call CopyData
@@ -27268,7 +27570,7 @@ Func_f51e: ; f51e (3:751e)
 	ld a, [W_NUMINBOX] ; $da80
 .asm_f60b
 	dec a
-	call Func_3a7d
+	call SkipFixedLengthTextEntries
 	ld d, h
 	ld e, l
 .asm_f611
@@ -27282,7 +27584,7 @@ Func_f51e: ; f51e (3:751e)
 	ld hl, W_PARTYMON1NAME ; $d2b5
 .asm_f624
 	ld a, [W_WHICHPOKEMON] ; $cf92
-	call Func_3a7d
+	call SkipFixedLengthTextEntries
 .asm_f62a
 	ld bc, $b
 	call CopyData
@@ -27679,44 +27981,44 @@ Func_f839: ; f839 (3:7839)
 	ret
 
 ; known jump sources: 612d (1:612d)
-Func_f850: ; f850 (3:7850)
+InitializePlayerData: ; f850 (3:7850)
 	call GenRandom
-	ld a, [H_RAND2] ; $FF00+$d4
-	ld [W_PLAYERIDHI], a ; $d359
+	ld a, [H_RAND2]
+	ld [W_PLAYERIDHI], a          ; set player trainer id
 	call GenRandom
-	ld a, [H_RAND1] ; $FF00+$d3
-	ld [W_PLAYERIDLO], a ; $d35a
+	ld a, [H_RAND1]
+	ld [W_PLAYERIDLO], a
 	ld a, $ff
-	ld [$d71b], a
+	ld [$d71b], a                 ; XXX what's this?
 	ld hl, W_NUMINPARTY ; $d163
-	call Func_f8a0
+	call InitializeEmptyList      ; no party mons
 	ld hl, W_NUMINBOX ; $da80
-	call Func_f8a0
+	call InitializeEmptyList      ; no boxed mons
 	ld hl, W_NUMBAGITEMS ; $d31d
-	call Func_f8a0
+	call InitializeEmptyList      ; no items
 	ld hl, W_NUMBOXITEMS ; $d53a
-	call Func_f8a0
+	call InitializeEmptyList      ; no boxed items
 	ld hl, W_PLAYERMONEY2 ; $d348
 	ld a, $30
-	ld [hld], a
+	ld [hld], a                   ; set money to 00 30 00 (3000)
 	xor a
 	ld [hli], a
 	inc hl
 	ld [hl], a
-	ld [$cc49], a
+	ld [$cc49], a                 ; XXX what's this?
 	ld hl, W_OBTAINEDBADGES ; $d356
-	ld [hli], a
-	ld [hl], a
+	ld [hli], a                   ; no badges obtained
+	ld [hl], a                    ; XXX what's this?
 	ld hl, W_PLAYERCOINS1 ; $d5a4
-	ld [hli], a
+	ld [hli], a                   ; no coins
 	ld [hl], a
-	ld hl, W_OAKSLABCURSCRIPT ; $d5f0
+	ld hl, W_GAMEPROGRESSFLAGS ; $d5f0
 	ld bc, $c8
-	call FillMemory
-	jp Func_f175
+	call FillMemory               ; clear all game progress flags
+	jp InitializeMissableObjectsFlags
 
-; known jump sources: f868 (3:7868), f86e (3:786e), f874 (3:7874), f87a (3:787a)
-Func_f8a0: ; f8a0 (3:78a0)
+; writes two bytes $00 $ff to hl
+InitializeEmptyList: ; f8a0 (3:78a0)
 	xor a
 	ld [hli], a
 	dec a
@@ -28410,7 +28712,7 @@ StatusScreen: ; 0x12953
 	ld hl, $cfa8
 	ld de, $cfba
 	ld b, $1
-	call $3936 ; Recalculate stats
+	call Func_3936 ; Recalculate stats
 .DontRecalculate
 	ld hl, $d72c
 	set 1, [hl]
@@ -28418,7 +28720,7 @@ StatusScreen: ; 0x12953
 	ld [$ff00+$24], a ; Reduce the volume
 	call GBPalWhiteOutWithDelay3
 	call ClearScreen
-	call $2429 ; move sprites (?)
+	call UpdateSprites ; move sprites (?)
 	call LoadHpBarAndStatusTilePatterns
 	ld de, $6080 ; source
 	ld hl, $96d0 ; dest
@@ -28461,7 +28763,7 @@ StatusScreen: ; 0x12953
 	ld hl, Coord
 	PREDEF DrawHPBarPredef ; predef $5f
 	ld hl, $cf25
-	call $3df9
+	call Func_3df9
 	ld b, $3
 	call GoPAL_SET ; SGB palette
 	FuncCoord 16,6
@@ -28519,10 +28821,10 @@ StatusScreen: ; 0x12953
 	call Delay3
 	call GBPalNormal
 	ld hl, $c3a1
-	call $1384 ; draw Pokémon picture
+	call Func_1384 ; draw Pokémon picture
 	ld a, [$cf91]
-	call $13d0 ; play Pokémon cry
-	call $3865 ; wait for button
+	call PlayCry ; play Pokémon cry
+	call Func_3865 ; wait for button
 	pop af
 	ld [$ff00+$d7], a
 	ret
@@ -28539,7 +28841,7 @@ StatusScreen: ; 0x12953
 	cp $3
 	ret z
 	ld a, [W_WHICHPOKEMON]
-	jp $3a7d
+	jp SkipFixedLengthTextEntries
 ; 0x12a95
 
 INCBIN "baserom.gbc",$12a95,$12aa5 - $12a95 ; This is some pointers..
@@ -28643,7 +28945,7 @@ StatusScreen2: ; 12b57
 	ld [$ff00+$ba], a
 	ld bc, $0005
 	ld hl, $d0dc
-	call $36e0
+	call FillMemory
 	ld hl, $cfa0
 	ld de, $d0dc
 	ld bc, $0004
@@ -28676,13 +28978,13 @@ StatusScreen2: ; 12b57
 	ld hl, Coord
 	ld de, $0028
 	ld a, $72
-	call $6ccb ; Print "PP"
+	call Func_12ccb ; Print "PP"
 	ld a, b
 	and a
 	jr z, .InitPP ; 0x12bb3 $6
 	ld c, a
 	ld a, $e3
-	call $6ccb ; Fill the rest with --
+	call Func_12ccb ; Fill the rest with --
 .InitPP ; 12bbb
 	ld hl, $cfa0
 	FuncCoord 14,10
@@ -28770,10 +29072,10 @@ StatusScreen2: ; 12b57
 	call PrintNumber
 	FuncCoord 9,0
 	ld hl, Coord
-	call $6cc3
+	call Func_12cc3
 	FuncCoord 9,1
 	ld hl, Coord
-	call $6cc3
+	call Func_12cc3
 	ld a, [$d0b8]
 	ld [$d11e], a
 	call GetMonName
@@ -28783,7 +29085,7 @@ StatusScreen2: ; 12b57
 	ld a, $1
 	ld [$ff00+$ba], a
 	call Delay3
-	call $3865 ; wait for button
+	call Func_3865 ; wait for button
 	pop af
 	ld [$ff00+$d7], a
 	ld hl, $d72c
@@ -28864,7 +29166,7 @@ DrawPartyMenu_: ; 6CD2
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED],a
 	call ClearScreen
-	call $2429 ; move sprites
+	call UpdateSprites ; move sprites
 	ld b,$1C
 	ld hl,$5791
 	call Bankswitch ; load pokemon icon graphics
@@ -28947,7 +29249,7 @@ RedrawPartyMenu_: ; 6CE3
 	ld a,[$FFF6]
 	res 0,a
 	ld [$FFF6],a
-	call $6EC7 ; color the HP bar (on SGB)
+	call Func_12ec7 ; color the HP bar (on SGB)
 	pop hl
 	jr .printLevel
 .teachMoveMenu
@@ -29187,13 +29489,13 @@ ShrinkPic2:
 ; known jump sources: 2976 (0:2976)
 Func_13074: ; 13074 (4:7074)
 	ld h, $c2
-	ld a, [$FF00+$da]
+	ld a, [H_CURRENTSPRITEOFFSET]
 	add $8
 	ld l, a
 	ld a, $7f
 	ld [hl], a
 	dec h
-	ld a, [$FF00+$da]
+	ld a, [H_CURRENTSPRITEOFFSET]
 	add $9
 	ld l, a
 	ld a, [hld]
@@ -29201,7 +29503,7 @@ Func_13074: ; 13074 (4:7074)
 	xor a
 	ld [hld], a
 	ld [hl], a
-	ld a, [$FF00+$da]
+	ld a, [H_CURRENTSPRITEOFFSET]
 	add $2
 	ld l, a
 	ld a, [hl]
@@ -29214,10 +29516,10 @@ Func_13074: ; 13074 (4:7074)
 StartMenu_Pokedex: ; 7095
 	ld a,$29
 	call Predef
-	call $3701 ; restore saved screen
+	call Func_3701 ; restore saved screen
 	call Delay3
 	call LoadGBPal
-	call $2429
+	call UpdateSprites
 	jp RedisplayStartMenu
 
 StartMenu_Pokemon: ; 70A9
@@ -29239,11 +29541,11 @@ StartMenu_Pokemon: ; 70A9
 	jr nc,.chosePokemon
 .exitMenu
 	call GBPalWhiteOutWithDelay3
-	call $3dbe
+	call Func_3dbe
 	call LoadGBPal
 	jp RedisplayStartMenu
 .chosePokemon
-	call $3719 ; save screen
+	call Func_3719 ; save screen
 	ld a,$04
 	ld [$d125],a
 	call DisplayTextBoxID ; display pokemon menu options
@@ -29277,7 +29579,7 @@ StartMenu_Pokemon: ; 70A9
 	ld [hl],a
 	call HandleMenuInput
 	push af
-	call $3725 ; restore saved screen
+	call Func_3725 ; restore saved screen
 	pop af
 	bit 1,a ; was the B button pressed?
 	jp nz,.loop
@@ -29302,7 +29604,7 @@ StartMenu_Pokemon: ; 70A9
 	ld a,[W_NUMINPARTY]
 	cp a,2 ; is there more than one pokemon in the party?
 	jp c,StartMenu_Pokemon ; if not, no switching
-	call $7653
+	call Func_13653
 	ld a,$04 ; swap pokemon positions menu
 	ld [$d07d],a
 	call GoBackToPartyMenu
@@ -29493,7 +29795,7 @@ StartMenu_Pokemon: ; 70A9
 	TX_FAR _NotHealthyEnoughText
 	db $50
 .goBackToMap
-	call $3dbe
+	call Func_3dbe
 	jp CloseTextDisplay
 .newBadgeRequired
 	ld hl,.newBadgeRequiredText
@@ -29517,7 +29819,7 @@ ErasePartyMenuCursors: ; 72ED
 	ret
 
 ItemMenuLoop: ; 72FC
-	call $3709 ; restore saved screen
+	call Func_3709 ; restore saved screen
 	call GoPAL_SET_CF1C
 
 StartMenu_Item: ; 7302
@@ -29544,9 +29846,9 @@ StartMenu_Item: ; 7302
 	ld [$cc2c],a
 	jr nc,.choseItem
 .exitMenu
-	call $3701 ; restore saved screen
+	call Func_3701 ; restore saved screen
 	call LoadTextBoxTilePatterns
-	call $2429 ; move sprites
+	call UpdateSprites ; move sprites
 	jp RedisplayStartMenu
 .choseItem
 ; erase menu cursor (blank each tile in front of an item name)
@@ -29592,7 +29894,7 @@ StartMenu_Item: ; 7302
 	ld a,[$cf91]
 	ld [$d11e],a
 	call GetItemName
-	call $3826 ; copy name to $cf4b
+	call CopyStringToCF4B ; copy name to $cf4b
 	ld a,[$cf91]
 	cp a,BICYCLE
 	jr nz,.notBicycle2
@@ -29638,7 +29940,7 @@ StartMenu_Item: ; 7302
 	cp a,$02
 	jp z,.partyMenuNotDisplayed
 	call GBPalWhiteOutWithDelay3
-	call $3dbe
+	call Func_3dbe
 	pop af
 	ld [$cfcb],a
 	jp StartMenu_Item
@@ -29724,7 +30026,7 @@ UsableItems_CloseMenu: ; 7459
 StartMenu_TrainerInfo: ; 7460
 	call GBPalWhiteOut
 	call ClearScreen
-	call $2429 ; move sprites
+	call UpdateSprites ; move sprites
 	ld a,[$ffd7]
 	push af
 	xor a
@@ -29735,10 +30037,10 @@ StartMenu_TrainerInfo: ; 7460
 	ld b,$0d
 	call GoPAL_SET
 	call GBPalNormal
-	call $3865 ; wait for button press
+	call Func_3865 ; wait for button press
 	call GBPalWhiteOut
 	call LoadFontTilePatterns
-	call $3701 ; restore saved screen
+	call Func_3701 ; restore saved screen
 	call GoPAL_SET_CF1C
 	call ReloadMapData
 	call LoadGBPal
@@ -29928,20 +30230,20 @@ StartMenu_SaveReset: ; 75E3
 	jp nz,InitGame
 	ld a,$3f
 	call Predef ; save the game
-	call $3701 ; restore saved screen
+	call Func_3701 ; restore saved screen
 	jp HoldTextDisplayOpen
 
 StartMenu_Option: ; 75F6
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED],a
 	call ClearScreen
-	call $2429
+	call UpdateSprites
 	ld hl,DisplayOptionMenu
 	ld b,BANK(DisplayOptionMenu)
 	call Bankswitch
-	call $3701 ; restore saved screen
+	call Func_3701 ; restore saved screen
 	call LoadTextBoxTilePatterns
-	call $2429
+	call UpdateSprites
 	jp RedisplayStartMenu
 
 ; known jump sources: 14cf (0:14cf)
@@ -29978,7 +30280,7 @@ Func_13625: ; 13625 (4:7625)
 	jr nz, .asm_13645
 	call Func_3748
 	ld a, $ae
-	jp Func_23b1
+	jp PlaySound
 
 ; known jump sources: 1313b (4:713b), 13613 (4:7613)
 Func_13653: ; 13653 (4:7653)
@@ -30051,14 +30353,14 @@ Func_13653: ; 13653 (4:7653)
 	call CopyData
 	ld hl, W_PARTYMON1OT ; $d273
 	ld a, [W_CURMENUITEMID] ; $cc26
-	call Func_3a7d
+	call SkipFixedLengthTextEntries
 	push hl
 	ld de, $cc97
 	ld bc, $b
 	call CopyData
 	ld hl, W_PARTYMON1OT ; $d273
 	ld a, [$cc35]
-	call Func_3a7d
+	call SkipFixedLengthTextEntries
 	pop de
 	push hl
 	ld bc, $b
@@ -30069,14 +30371,14 @@ Func_13653: ; 13653 (4:7653)
 	call CopyData
 	ld hl, W_PARTYMON1NAME ; $d2b5
 	ld a, [W_CURMENUITEMID] ; $cc26
-	call Func_3a7d
+	call SkipFixedLengthTextEntries
 	push hl
 	ld de, $cc97
 	ld bc, $b
 	call CopyData
 	ld hl, W_PARTYMON1NAME ; $d2b5
 	ld a, [$cc35]
-	call Func_3a7d
+	call SkipFixedLengthTextEntries
 	pop de
 	push hl
 	ld bc, $b
@@ -30307,7 +30609,7 @@ Func_13870: ; 13870 (4:7870)
 .asm_1389e
 	ld hl, $c45d
 	ld c, [hl]
-	ld a, [$d535]
+	ld a, [W_GRASSTILE]
 	cp c
 	ld a, [W_GRASSRATE] ; $d887
 	jr z, .asm_138c4
@@ -31646,7 +31948,7 @@ Func_17c47: ; 17c47 (5:7c47)
 	pop af
 	ld [$cfcb], a
 	call DelayFrame
-	jp Func_2429
+	jp UpdateSprites
 
 INCBIN "baserom.gbc",$17caf,$17d7d - $17caf
 
@@ -31757,15 +32059,15 @@ UnnamedText_17e27: ; 0x17e27
 ; 0x17e27 + 5 bytes
 
 ActivatePC:     ;0x17e2c
-	call $36F4  ;XXX: copy background from $C3A0 to $CD81
+	call Func_36f4  ;XXX: copy background from $C3A0 to $CD81
 	ld a, $99
-	call $23B1  ;XXX: play sound or stop music
+	call PlaySound  ;XXX: play sound or stop music
 	ld hl, UnnamedText_17f23  ;player turned on PC
 	call PrintText
-	call $3748  ;XXX: wait for sound to be done
+	call Func_3748  ;XXX: wait for sound to be done
 	ld hl, $CD60
 	set 3, [hl]
-	call $3701  ;XXX: restore saved screen
+	call Func_3701  ;XXX: restore saved screen
 	call Delay3
 PCMainMenu:
 	ld b, 8
@@ -31812,8 +32114,8 @@ PCMainMenu:
 	res 5, [hl]
 	set 3, [hl]
 	ld a, $9B
-	call $23B1  ;XXX: play sound or stop music
-	call $3748  ;XXX: wait for sound to be done
+	call PlaySound  ;XXX: play sound or stop music
+	call Func_3748  ;XXX: wait for sound to be done
 	ld hl, UnnamedText_17f32  ;accessed players pc
 	call PrintText
 	ld b, 1
@@ -31822,24 +32124,24 @@ PCMainMenu:
 	jr ReloadMainMenu
 OaksPC:
 	ld a, $9B
-	call $23B1  ;XXX: play sound or stop music
-	call $3748  ;XXX: wait for sound to be done
+	call PlaySound  ;XXX: play sound or stop music
+	call Func_3748  ;XXX: wait for sound to be done
 	ld b, 7
 	ld hl, $6915
 	call Bankswitch
 	jr ReloadMainMenu
 PKMNLeague:
 	ld a, $9B
-	call $23B1  ;XXX: play sound or stop music
-	call $3748  ;XXX: wait for sound to be done
+	call PlaySound  ;XXX: play sound or stop music
+	call Func_3748  ;XXX: wait for sound to be done
 	ld b, BANK(Unknown_7657e)
 	ld hl, Unknown_7657e
 	call Bankswitch
 	jr ReloadMainMenu
 BillsPC:
 	ld a, $9B
-	call $23B1    ;XXX: play sound or stop music
-	call $3748    ;XXX: wait for sound to be done
+	call PlaySound    ;XXX: play sound or stop music
+	call Func_3748    ;XXX: wait for sound to be done
 	ld a, [$D7F1] ;has to do with having met Bill
 	bit 0, a
 	jr nz, .billsPC ;if you've met bill, use that bill's instead of someone's
@@ -31856,12 +32158,12 @@ ReloadMainMenu:
 	xor a
 	ld [$CC3C], a
 	call ReloadMapData
-	call $2429  ;XXX: moves sprites
+	call UpdateSprites  ;XXX: moves sprites
 	jp PCMainMenu
 LogOff:
 	ld a, $9A
-	call $23B1  ;XXX: play sound or stop music
-	call $3748  ;XXX: wait for sound to be done
+	call PlaySound  ;XXX: play sound or stop music
+	call Func_3748  ;XXX: wait for sound to be done
 	ld hl, $CD60
 	res 3, [hl]
 	res 5, [hl]
@@ -31888,7 +32190,8 @@ UnnamedText_17f32: ; 0x17f32
 ; 0x17f32 + 5 bytes
 
 ; known jump sources: 1d774 (7:5774), 484eb (12:44eb), 5a5b4 (16:65b4), 61096 (18:5096), 75101 (1d:5101)
-Func_17f37: ; 17f37 (5:7f37)
+; removes one of the specified item ID [$FFdb] from bag (if existent)
+RemoveItemByID: ; 17f37 (5:7f37)
 	ld hl, W_BAGITEM01 ; $d31e
 	ld a, [$FF00+$db]
 	ld b, a
@@ -32511,7 +32814,7 @@ PalletTownScript:
 	call EnableAutoTextBoxDrawing
 	ld hl,PalletTownScriptPointers
 	ld a,[$D5F1]
-	jp $3D97
+	jp CallFunctionInTable
 ; 0x18e73
 
 PalletTownScriptPointers:
@@ -32529,11 +32832,11 @@ PalletTownScript1:
 	ld a,4
 	ld [$D528],a
 	ld a,$FF
-	call $23B1 ; stop music
+	call PlaySound ; stop music
 	ld a,2
 	ld c,a ; song bank
 	ld a,$DB ; “oak appears” music
-	call $23A1 ; plays music
+	call PlayMusic ; plays music
 	ld a,$FC
 	ld [$CD6B],a
 	ld hl,$D74B
@@ -32567,7 +32870,7 @@ PalletTownScript3:
 	ld [$FF8C],a
 	ld a,4
 	ld [$FF8D],a
-	call $34A6
+	call Func_34a6
 	call Delay3
 	ld a,1
 	ld [W_YCOORD],a
@@ -32728,7 +33031,7 @@ ViridianCityScript: ; 0x18ff1
 	call EnableAutoTextBoxDrawing
 	ld hl, ViridianCityScripts
 	ld a, [$d5f4]
-	jp $3d97
+	jp CallFunctionInTable
 ; 0x18ffd
 
 ViridianCityScripts: ; 0x18ffd
@@ -32820,7 +33123,7 @@ ViridianCityScript2: ; 0x1908f
 	ld [$c234], a
 	ld a, [$ff00+$ee]
 	ld [$c235], a
-	call $2429
+	call UpdateSprites
 	call Delay3
 	xor a
 	ld [$cd6b], a
@@ -32844,7 +33147,7 @@ ViridianCityScript3: ; 0x190c1
 	ret
 
 Function190cf: ; 0x190cf
-	call $3486
+	call Func_3486
 	ld a, $1
 	ld [$cd38], a
 	ld a, $80
@@ -32889,7 +33192,7 @@ ViridianCityText3: ; 0x1912c
 	db $08 ; asm
 	ld hl, UnnamedText_1914d
 	call PrintText
-	call $35ec
+	call Func_35ec
 	ld a, [$cc26]
 	and a
 	jr nz, .asm_6dfea ; 0x1913a
@@ -32945,7 +33248,7 @@ ViridianCityText5: ; 0x1917f
 	db $08 ; asm
 	ld hl, UnnamedText_19191
 	call PrintText
-	call $50cf
+	call Function190cf
 	ld a, $3
 	ld [$d5f4], a
 	jp TextScriptEnd
@@ -33006,7 +33309,7 @@ ViridianCityText7: ; 0x191df
 	call PrintText
 	ld c, $2
 	call DelayFrames
-	call $35ec
+	call Func_35ec
 	ld a, [$cc26]
 	and a
 	jr z, .asm_42f68 ; 0x191f2
@@ -33066,7 +33369,7 @@ PewterCityScript: ; 0x19237
 	call EnableAutoTextBoxDrawing
 	ld hl, PewterCityScripts
 	ld a, [$d5f7]
-	jp $3d97
+	jp CallFunctionInTable
 ; 0x19243
 
 PewterCityScripts: ; 0x19243
@@ -33115,11 +33418,11 @@ PewterCityScript1: ; 0x19280
 	ld [$ff00+$8c], a
 	ld a, $4
 	ld [$ff00+$8d], a
-	call $34a6
+	call Func_34a6
 	ld a, $34
 	ld [$ff00+$8d], a
-	call $34b9
-	call $2307
+	call Func_34b9
+	call Func_2307
 	ld hl, $cd60
 	set 4, [hl]
 	ld a, $d
@@ -33135,7 +33438,7 @@ PewterCityScript1: ; 0x19280
 	ld [$ff00+$ee], a
 	ld a, $3
 	ld [$cf13], a
-	call $32f9
+	call Func_32f9
 	ld a, $3
 	ld [$ff00+$8c], a
 	ld de, $52ce
@@ -33163,7 +33466,7 @@ PewterCityScript2: ; 0x192d3
 PewterCityScript3: ; 0x192e9
 	ld a, $3
 	ld [$cf13], a
-	call $32fe
+	call Func_32fe
 	ld a, $3
 	ld [$cc4d], a
 	ld a, $15
@@ -33182,11 +33485,11 @@ PewterCityScript4: ; 0x19305
 	ld [$ff00+$8c], a
 	ld a, $8
 	ld [$ff00+$8d], a
-	call $34a6
+	call Func_34a6
 	ld a, $18
 	ld [$ff00+$8d], a
-	call $34b9
-	call $2307
+	call Func_34b9
+	call Func_2307
 	ld hl, $cd60
 	set 4, [hl]
 	ld a, $e
@@ -33202,7 +33505,7 @@ PewterCityScript4: ; 0x19305
 	ld [$ff00+$ee], a
 	ld a, $5
 	ld [$cf13], a
-	call $32f9
+	call Func_32f9
 	ld a, $5
 	ld [$ff00+$8c], a
 	ld de, MovementData19353
@@ -33229,7 +33532,7 @@ PewterCityScript5: ; 0x19359
 PewterCityScript6: ; 0x1936f
 	ld a, $5
 	ld [$cf13], a
-	call $32fe
+	call Func_32fe
 	ld a, $4
 	ld [$cc4d], a
 	ld a, $15
@@ -33255,7 +33558,7 @@ PewterCityText3: ; 0x193b1
 	db $08 ; asm
 	ld hl, UnnamedText_193f1
 	call PrintText
-	call $35ec
+	call Func_35ec
 	ld a, [$cc26]
 	and a
 	jr nz, .asm_f46a9 ; 0x193bf
@@ -33275,7 +33578,7 @@ PewterCityText3: ; 0x193b1
 	ld [$cc58], a
 	ld a, $3
 	ld [$cf13], a
-	call $32f4
+	call Func_32f4
 	ld a, $1
 	ld [$d5f7], a
 .asm_ac429 ; 0x193ee
@@ -33307,7 +33610,7 @@ PewterCityText4: ; 0x19405
 	db $8
 	ld hl, UnnamedText_19427
 	call PrintText
-	call $35ec
+	call Func_35ec
 	ld a, [$cc26]
 	cp $0
 	jr nz, .asm_e4603
@@ -33349,7 +33652,7 @@ PewterCityText5: ; 0x19436
 	ld [$cc58], a
 	ld a, $5
 	ld [$cf13], a
-	call $32f4
+	call Func_32f4
 	ld a, $4
 	ld [$d5f7], a
 	jp TextScriptEnd
@@ -33390,7 +33693,7 @@ CeruleanCityScript: ; 0x19480
 	call EnableAutoTextBoxDrawing
 	ld hl, CeruleanCityScripts
 	ld a, [$d60f]
-	jp $3d97
+	jp CallFunctionInTable
 ; 0x1948c
 
 CeruleanCity_Unknown1948c: ; 0x1948c
@@ -33460,11 +33763,11 @@ CeruleanCityScript0: ; 0x194c8
 	jr z, .asm_19512 ; 0x19508 $8
 	ld a, $ff
 	ld [$c0ee], a
-	call $23b1
+	call PlaySound
 .asm_19512
 	ld c, $2
 	ld a, $de
-	call $23a1
+	call PlayMusic
 	xor a
 	ld [$ff00+$b4], a
 	ld a, $f0
@@ -33476,7 +33779,7 @@ CeruleanCityScript0: ; 0x194c8
 	ld [$ff00+$8c], a
 	ld a, $5
 	ld [$ff00+$8b], a
-	call $3500
+	call Func_3500
 	ld [hl], $19
 .asm_19535
 	ld a, $5
@@ -33510,7 +33813,7 @@ CeruleanCityFunction1955d:
 	ld [$ff8c],a
 	xor a
 	ld [$ff8d],a
-	jp $34a6 ; face object
+	jp Func_34a6 ; face object
 
 CeruleanCityScript1: ; 0x19567
 	ld a, [$d730]
@@ -33526,7 +33829,7 @@ CeruleanCityScript1: ; 0x19567
 	set 7, [hl]
 	ld hl, UnnamedText_1966d
 	ld de, UnnamedText_19672
-	call $3354
+	call Func_3354
 	ld a, $e1
 	ld [$d059], a
 
@@ -33557,8 +33860,8 @@ CeruleanCityScript1: ; 0x19567
 CeruleanCityScript2: ; 0x195b1
 	ld a, [$d057]
 	cp $ff
-	jp z, $548c
-	call $555d
+	jp z, CeruleanCity_Unknown1948c
+	call CeruleanCityFunction1955d
 	ld a, $f0
 	ld [$cd6b], a
 	ld hl, $d75a
@@ -33568,13 +33871,13 @@ CeruleanCityScript2: ; 0x195b1
 	call DisplayTextID
 	ld a, $ff
 	ld [$c0ee], a
-	call $23b1
+	call PlaySound
 	ld b, $2
 	ld hl, $5b47
 	call Bankswitch
 	ld a, $1
 	ld [$ff00+$8c], a
-	call Function3541
+	call SetSpriteMovementBytesToFF
 	ld a, [$d362]
 	cp $14
 	jr nz, .asm_195f0 ; 0x195e9 $5
@@ -33606,7 +33909,7 @@ CeruleanCityScript3: ; 0x19610
 	call Predef
 	xor a
 	ld [$cd6b], a
-	call $2307
+	call Func_2307
 	ld a, $0
 	ld [$d60f], a
 	ret
@@ -33663,11 +33966,11 @@ CeruleanCityText2: ; 0x1967c
 	set 7, [hl]
 	ld hl, UnnamedText_196ee
 	ld de, UnnamedText_196ee
-	call $3354
+	call Func_3354
 	ld a, [$ff00+$8c]
 	ld [$cf13], a
-	call $336a
-	call $32d7
+	call EngageMapTrainer
+	call Func_32d7
 	ld a, $4
 	ld [$d60f], a
 	jp TextScriptEnd
@@ -33854,7 +34157,7 @@ VermilionCityScript: ; 0x197a1
 	call nz, VermilionCityScript_Unknown197c0
 	ld hl, VermilionCityScripts
 	ld a, [$d62a]
-	jp $3d97
+	jp CallFunctionInTable
 ; 0x197c0
 
 VermilionCityScript_Unknown197c0: ; 0x197c0
@@ -33909,7 +34212,7 @@ VermilionCityScript0: ; 0x197e6
 	ld [$ccd3], a
 	ld a, $1
 	ld [$cd38], a
-	call $3486
+	call Func_3486
 	ld a, $1
 	ld [$d62a], a
 	ret
@@ -33934,7 +34237,7 @@ VermilionCityScript2: ; 0x19833
 	ld [$ccd4], a
 	ld a, $2
 	ld [$cd38], a
-	call $3486
+	call Func_3486
 	ld a, $3
 	ld [$d62a], a
 	ret
@@ -34069,8 +34372,8 @@ VermilionCityText5: ; 0x19922
 	TX_FAR _VermilionCityText5
 	db $08 ; asm
 	ld a, MACHOP
-	call $13d0
-	call $3748
+	call PlayCry
+	call Func_3748
 	ld hl, $5933
 	ret
 
@@ -34184,7 +34487,7 @@ CeladonCityText7: ; 0x199ec
 	TX_FAR _CeladonCityText7
 	db $08 ; asm
 	ld a, POLIWRATH
-	call $13d0
+	call PlayCry
 	jp TextScriptEnd
 
 CeladonCityText8: ; 0x199f9
@@ -34285,7 +34588,7 @@ FuchsiaCityText19: ; 0x19a90
 	ld hl, FuchsiaCityChanseyText
 	call PrintText
 	ld a, $28
-	call $349b
+	call Func_349b
 	jp TextScriptEnd
 
 FuchsiaCityChanseyText: ; 0x19a9f
@@ -34298,7 +34601,7 @@ FuchsiaCityText20: ; 0x19aa4
 	ld hl, FuchsiaCityVoltorbText
 	call PrintText
 	ld a, $6
-	call $349b
+	call Func_349b
 	jp TextScriptEnd
 
 FuchsiaCityVoltorbText: ; 0x19ab3
@@ -34311,7 +34614,7 @@ FuchsiaCityText21: ; 0x19ab8
 	ld hl, FuchsiaCityKangaskhanText
 	call PrintText
 	ld a, $2
-	call $349b
+	call Func_349b
 	jp TextScriptEnd
 
 FuchsiaCityKangaskhanText: ; 0x19ac7
@@ -34324,7 +34627,7 @@ FuchsiaCityText22: ; 0x19acc
 	ld hl, FuchsiaCitySlowpokeText
 	call PrintText
 	ld a, $25
-	call $349b
+	call Func_349b
 	jp TextScriptEnd
 
 FuchsiaCitySlowpokeText: ; 0x19adb
@@ -34337,7 +34640,7 @@ FuchsiaCityText23: ; 0x19ae0
 	ld hl, FuchsiaCityLaprasText
 	call PrintText
 	ld a, $13
-	call $349b
+	call Func_349b
 	jp TextScriptEnd
 
 FuchsiaCityLaprasText: ; 0x19aef
@@ -34365,7 +34668,7 @@ FuchsiaCityText24: ; 0x19af4
 	call PrintText
 	ld a, $5a
 .asm_81556 ; 0x19b1a
-	call $349b
+	call Func_349b
 .asm_4343f ; 0x19b1d
 	jp TextScriptEnd
 
@@ -34395,7 +34698,7 @@ BluesHouseScript: ; 0x19b3b
 	call EnableAutoTextBoxDrawing
 	ld hl,BluesHouseScriptPointers
 	ld a,[$D5F3]
-	jp $3D97
+	jp CallFunctionInTable
 
 BluesHouseScriptPointers: ; 0x19b47
 	dw BluesHouseScript1,BluesHouseScript2
@@ -34430,7 +34733,7 @@ BluesHouseText1: ; 5B5D 0x19B5D
 	ld hl,DaisyOfferMapText
 	call PrintText
 	ld bc,(TOWN_MAP << 8) | 1
-	call $3E2E
+	call GiveItem
 	jr nc,.BagFull
 	ld a,$29
 	ld [$CC4D],a
@@ -34554,7 +34857,7 @@ IndigoPlateauLobby_h: ; 0x19c4f to 0x19c5b (12 bytes) (bank=6) (id=174)
 	dw IndigoPlateauLobbyObject ; objects
 
 IndigoPlateauLobbyScript: ; 0x19c5b
-	call $22fa
+	call Func_22fa
 	call EnableAutoTextBoxDrawing
 	ld hl, $d126
 	bit 6, [hl]
@@ -34631,7 +34934,7 @@ SilphCo4Script: ; 0x19d0b
 	ld hl, SilphCo4TrainerHeaders
 	ld de, SilphCo4ScriptPointers
 	ld a, [$d645]
-	call $3160
+	call Func_3160
 	ld [$d645], a
 	ret
 ; 0x19d21
@@ -34883,7 +35186,7 @@ SilphCo5Script: ; 0x19f37
 	ld hl, SilphCo5TrainerHeaders
 	ld de, SilphCo5ScriptPointers
 	ld a, [$d646]
-	call $3160
+	call Func_3160
 	ld [$d646], a
 	ret
 ; 0x19f4d
@@ -34894,8 +35197,8 @@ Unnamed_19f4d: ; 0x19f4d
 	res 5, [hl]
 	ret z
 	ld hl, SilphCo5Coords
-	call $5d5d
-	call $5f9e
+	call SilphCo4Function19d5d
+	call SilphCo5Function19f9e
 	ld a, [$d82c]
 	bit 0, a
 	jr nz, .asm_19f74 ; 0x19f63 $f
@@ -35162,7 +35465,7 @@ SilphCo6Script: ; 0x1a1a9
 	ld hl, SilphCo6TrainerHeaders
 	ld de, SilphCo6ScriptPointers
 	ld a, [$d647]
-	call $3160
+	call Func_3160
 	ld [$d647], a
 	ret
 ; 0x1a1bf
@@ -35173,7 +35476,7 @@ Unnamed_1a1bf: ; 0x1a1bf
 	res 5, [hl]
 	ret z
 	ld hl, SilphCo6Coords1
-	call $5d5d
+	call SilphCo4Function19d5d
 	call Unknown_1a1e6
 	ld a, [$d82e]
 	bit 7, a
@@ -35478,7 +35781,14 @@ Func_1a41d: ; 1a41d (6:641d)
 	ld [$ccd3], a
 	ret
 
-INCBIN "baserom.gbc",$1a442,$1a44c - $1a442
+Unknown_1a442: ; 0x1a442
+	dw Func_1a44c
+	dw Func_1a485
+	dw Func_1a4a1
+	dw Func_1a4a6
+	dw Func_1a4f4
+
+Func_1a44c: ; 0x1a44c
 	ld a, [W_XCOORD] ; $d362
 	sub $a
 	ld [$cca1], a
@@ -35506,7 +35816,27 @@ INCBIN "baserom.gbc",$1a442,$1a44c - $1a442
 	ld [$cd6b], a
 	ret
 
-INCBIN "baserom.gbc",$1a485,$1a4a6 - $1a485
+Func_1a485: ; 0x1a485
+	ld a, [$d730]
+	bit 0, a
+	ret nz
+	ld a, [$cca1]
+	ld [$cd38], a
+	ld [$ff00+$95], a
+	ld a, $23
+	call Predef
+	call Func_3486
+	ld a, $2
+	ld [$cf10], a
+	ret
+; 0x1a4a1
+
+Func_1a4a1: ; 0x1a4a1
+	ld a, [$cd38]
+	and a
+	ret nz
+
+Func_1a4a6: ; 0x1a4a6
 	xor a
 	ld [$cd3b], a
 	ld a, [$cf13]
@@ -35515,13 +35845,13 @@ INCBIN "baserom.gbc",$1a485,$1a4a6 - $1a485
 	xor a
 	ld [$c206], a
 	ld hl, $ccd3
-	ld de, $64e9
-	call Func_350c
+	ld de, RLEList_1a4e9
+	call DecodeRLEList
 	dec a
 	ld [$cd38], a
 	ld hl, $cc97
-	ld de, $64dc
-	call Func_350c
+	ld de, RLEList_1a4dc
+	call DecodeRLEList
 	ld hl, $d72e
 	res 7, [hl]
 	ld hl, $d730
@@ -35530,21 +35860,150 @@ INCBIN "baserom.gbc",$1a485,$1a4a6 - $1a485
 	ld [$cf10], a
 	ret
 
-INCBIN "baserom.gbc",$1a4dc,$1a4f4 - $1a4dc
+RLEList_1a4dc: ; 0x1a4dc
+db $00, $05
+db $80, $01
+db $00, $05
+db $C0, $03
+db $40, $01
+db $E0, $01
+db $FF
+
+RLEList_1a4e9: ; 0x1a4e9
+db $40, $02
+db $10, $03
+db $80, $05
+db $20, $01
+db $80, $06
+db $FF
+
+Func_1a4f4: ; 0x1a4f4
 	ld a, [$cd38]
 	and a
 	ret nz
 	ld a, $0
 	ld [$cc4d], a
 	ld a, $11
-	call Predef ; indirect jump to Func_f1d7 (f1d7 (3:71d7))
+	call Predef ; indirect jump to RemoveMissableObject (f1d7 (3:71d7))
 	ld hl, $d730
 	res 7, [hl]
 	ld hl, $d72e
 	res 7, [hl]
 	jp Func_314e
 
-INCBIN "baserom.gbc",$1a510,$1a5e7 - $1a510
+Unknown_1a510: ; 0x1a510
+	dw Func_1a514
+	dw Func_1a56b
+
+Func_1a514: ; 0x1a514
+	ld a, $2
+	ld [$c0ef], a
+	ld [$c0f0], a
+	ld a, $e1
+	ld [$c0ee], a
+	call PlaySound
+	ld a, [$cf13]
+	swap a
+	ld [$cf17], a
+	call Func_3486
+	ld hl, $ccd3
+	ld de, RLEList_1a559
+	call DecodeRLEList
+	dec a
+	ld [$cd38], a
+	xor a
+	ld [$d12f], a
+	ld a, $4f
+	call Predef
+	ld hl, $cc97
+	ld de, RLEList_1a562
+	call DecodeRLEList
+	ld hl, $d72e
+	res 7, [hl]
+	ld a, $1
+	ld [$cf10], a
+	ret
+; 0x1a559
+
+RLEList_1a559: ; 0x1a559
+db $00, $01
+db $40, $03
+db $20, $0D
+db $40, $06
+db $FF
+
+RLEList_1a562: ; 0x1a562
+db $40, $06
+db $80, $0D
+db $40, $03
+db $80, $01
+db $FF
+
+Func_1a56b: ; 0x1a56b
+	ld a, [$cd38]
+	and a
+	ret nz
+	ld hl, $d730
+	res 7, [hl]
+	ld hl, $d72e
+	res 7, [hl]
+	jp Func_314e
+; 0x1a57d
+
+Unknown_1a57d: ; 0x1a57d
+	dw Func_1a581
+	dw Func_1a56b
+
+Func_1a581: ; 0x1a581
+	ld a, $2
+	ld [$c0ef], a
+	ld [$c0f0], a
+	ld a, $e1
+	ld [$c0ee], a
+	call PlaySound
+	ld a, [$cf13]
+	swap a
+	ld [$cf17], a
+	xor a
+	ld [$c206], a
+	ld hl, $ccd3
+	ld de, RLEList_1a5cd
+	call DecodeRLEList
+	dec a
+	ld [$cd38], a
+	ld a, $1
+	ld [$d12f], a
+	ld a, $4f
+	call Predef
+	ld hl, $cc97
+	ld de, RLEList_1a5da
+	call DecodeRLEList
+	ld hl, $d72e
+	res 7, [hl]
+	ld hl, $d730
+	set 7, [hl]
+	ld a, $1
+	ld [$cf10], a
+	ret
+; 0x1a5cd
+
+RLEList_1a5cd: ; 0x1a5cd
+db $00, $01
+db $10, $02
+db $80, $05
+db $20, $0B
+db $40, $05
+db $20, $0F
+db $FF
+
+RLEList_1a5da: ; 0x1a5da
+db $00, $02
+db $80, $0F
+db $40, $05
+db $80, $0B
+db $00, $05
+db $C0, $03
+db $FF
 
 ; known jump sources: 33b1 (0:33b1)
 Func_1a5e7: ; 1a5e7 (6:65e7)
@@ -35564,7 +36023,7 @@ Func_1a5e7: ; 1a5e7 (6:65e7)
 .asm_1a5fd
 	ld a, [$cf13]
 	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
-	jp Function3541
+	jp SetSpriteMovementBytesToFF
 
 INCBIN "baserom.gbc",$1a605,$1a609 - $1a605
 
@@ -35652,7 +36111,7 @@ Func_1a672: ; 1a672 (6:6672)
 	ld [$cd38], a
 	call Func_1a6f0
 	ld a, $a2
-	call Func_23b1
+	call PlaySound
 	ret
 
 INCBIN "baserom.gbc",$1a6cf,$1a6f0 - $1a6cf
@@ -36086,7 +36545,7 @@ CinnabarIslandScript: ; 0x1ca19
 	res 1, [hl]
 	ld hl, CinnabarIslandScripts
 	ld a, [$d639]
-	jp $3d97
+	jp CallFunctionInTable
 ; 0x1ca34
 
 CinnabarIslandScripts: ; 0x1ca34
@@ -36094,7 +36553,7 @@ CinnabarIslandScripts: ; 0x1ca34
 
 CinnabarIslandScript0: ; 0x1ca38
 	ld b, $2b
-	call $3493
+	call IsItemInBag
 	ret nz
 	ld a, [$d361]
 	cp $4
@@ -36113,7 +36572,7 @@ CinnabarIslandScript0: ; 0x1ca38
 	ld [$cd38], a
 	ld a, $80
 	ld [$ccd3], a
-	call $3486
+	call Func_3486
 	xor a
 	ld [$c109], a
 	ld [$cd6b], a
@@ -36232,7 +36691,7 @@ OaksLabScript: ; 0x1cb0e
 	ld [$cc3c], a
 	ld hl, OaksLabScripts
 	ld a, [W_OAKSLABCURSCRIPT]
-	jp $3d97
+	jp CallFunctionInTable
 ; 0x1cb28
 
 OaksLabScripts: ; 0x1cb28
@@ -36293,20 +36752,20 @@ OaksLabScript3: ; 0x1cba2
 	call Delay3
 	ld hl, $ccd3
 	ld de, PlayerEntryMovementRLE
-	call $350c
+	call DecodeRLEList
 	dec a
 	ld [$cd38], a
-	call $3486
+	call Func_3486
 	ld a, $1
 	ld [$ff00+$8c], a
 	xor a
 	ld [$ff00+$8d], a
-	call $34a6 ; face object
+	call Func_34a6 ; face object
 	ld a, $5
 	ld [$ff00+$8c], a
 	xor a
 	ld [$ff00+$8d], a
-	call $34a6 ; face object
+	call Func_34a6 ; face object
 
 	ld a, $4
 	ld [W_OAKSLABCURSCRIPT], a
@@ -36328,11 +36787,11 @@ OaksLabScript4: ; 0x1cbd2
 	ld [$ff00+$8c], a
 	ld a, $4
 	ld [$ff00+$8d], a
-	call $34a6 ; face object
-	call $2429
+	call Func_34a6 ; face object
+	call UpdateSprites
 	ld hl, $d733
 	res 1, [hl]
-	call $2307
+	call Func_2307
 
 	ld a, $5
 	ld [W_OAKSLABCURSCRIPT], a
@@ -36375,13 +36834,13 @@ OaksLabScript6: ; 0x1cc36
 	ld [$ff00+$8c], a
 	xor a
 	ld [$ff00+$8d], a
-	call $34a6 ; face object
+	call Func_34a6 ; face object
 	ld a, $1
 	ld [$ff00+$8c], a
 	xor a
 	ld [$ff00+$8d], a
-	call $34a6 ; face object
-	call $2429
+	call Func_34a6 ; face object
+	call UpdateSprites
 	ld a, $c
 	ld [$ff00+$8c], a
 	call DisplayTextID
@@ -36389,7 +36848,7 @@ OaksLabScript6: ; 0x1cc36
 	ld [$cd38], a
 	ld a, $40
 	ld [$ccd3], a
-	call $3486
+	call Func_3486
 	ld a, $8
 	ld [$d528], a
 
@@ -36452,7 +36911,7 @@ OaksLabScript8: ; 0x1cc80
 	ld [$ff00+$8c], a
 	ld a, $4
 	ld [$ff00+$8b], a
-	call $34fc
+	call Func_34fc
 	push hl
 	ld [hl], $4c
 	inc hl
@@ -36492,7 +36951,7 @@ OaksLabScript9: ; 0x1cd00
 	ld [$ff00+$8c], a
 	ld a, $4
 	ld [$ff00+$8d], a
-	call $34a6 ; face object
+	call Func_34a6 ; face object
 	ld a, $d
 	ld [$ff00+$8c], a
 	call DisplayTextID
@@ -36522,7 +36981,7 @@ OaksLabScript9: ; 0x1cd00
 	ld [$ff00+$8c], a
 	ld a, $4
 	ld [$ff00+$8d], a
-	call $34a6 ; face object
+	call Func_34a6 ; face object
 	ld a, $e
 	ld [$ff00+$8c], a
 	call DisplayTextID
@@ -36544,12 +37003,12 @@ OaksLabScript10: ; 0x1cd6d
 	ld [$ff00+$8c], a
 	xor a
 	ld [$ff00+$8d], a
-	call $34a6 ; face object
+	call Func_34a6 ; face object
 	ld a, $8
 	ld [$d528], a
 	ld c, $2
 	ld a, $de
-	call $23a1 ; play music
+	call PlayMusic ; play music
 	ld a, $f
 	ld [$ff00+$8c], a
 	call DisplayTextID
@@ -36599,10 +37058,10 @@ OaksLabScript11: ; 0x1cdb9
 	ld [W_TRAINERNO], a
 	ld a, $1
 	ld [$cf13], a
-	call $32ef
+	call Func_32ef
 	ld hl, UnnamedText_1d3be
 	ld de, UnnamedText_1d3c3
-	call $3354
+	call Func_3354
 	ld hl, $d72d
 	set 6, [hl]
 	set 7, [hl]
@@ -36621,15 +37080,15 @@ OaksLabScript12: ; 0x1ce03
 	ld [$cd6b], a
 	ld a, $8
 	ld [$d528], a
-	call $2429
+	call UpdateSprites
 	ld a, $1
 	ld [$cf13], a
-	call $32f9
+	call Func_32f9
 	ld a, $1
 	ld [$ff00+$8c], a
 	xor a
 	ld [$ff00+$8d], a
-	call $34a6 ; face object
+	call Func_34a6 ; face object
 	ld a, $7
 	call Predef
 	ld hl, $d74b
@@ -36682,7 +37141,7 @@ OaksLabScript14: ; 0x1ce6d
 	call Predef
 	xor a
 	ld [$cd6b], a
-	call $2307 ; reset to map music
+	call Func_2307 ; reset to map music
 	ld a, $12
 	ld [W_OAKSLABCURSCRIPT], a
 	jr .done ; 0x1ce8a $23
@@ -36715,7 +37174,7 @@ OaksLabScript15: ; 0x1ceb0
 	call EnableAutoTextBoxDrawing
 	ld a, $ff
 	ld [$c0ee], a
-	call $23b1
+	call PlaySound
 	ld b, $2
 	ld hl, $5b47
 	call Bankswitch
@@ -36733,7 +37192,7 @@ OaksLabScript15: ; 0x1ceb0
 	ld c, a
 	ld hl, $cc97
 	ld a, $40
-	call $36e0
+	call FillMemory
 	ld [hl], $ff
 	ld a, $1
 	ld [$ff00+$8c], a
@@ -36750,12 +37209,12 @@ Function1CEFD ; 0x1cefd
 	ld [$ff00+$8c], a
 	ld a, $4
 	ld [$ff00+$8d], a
-	call $34a6 ; face object
+	call Func_34a6 ; face object
 	ld a, $8
 	ld [$ff00+$8c], a
 	xor a
 	ld [$ff00+$8d], a
-	jp $34a6 ; face object
+	jp Func_34a6 ; face object
 ; 0x1cf12
 
 OaksLabScript16: ; 0x1cf12
@@ -36763,7 +37222,7 @@ OaksLabScript16: ; 0x1cf12
 	bit 0, a
 	ret nz
 	call EnableAutoTextBoxDrawing
-	call $2307
+	call Func_2307
 	ld a, $fc
 	ld [$cd6b], a
 	call Function1CEFD
@@ -36801,7 +37260,7 @@ OaksLabScript16: ; 0x1cf12
 	ld [$ff00+$8c], a
 	ld a, $c
 	ld [$ff00+$8d], a
-	call $34a6 ; face object
+	call Func_34a6 ; face object
 	call Delay3
 	ld a, $1b
 	ld [$ff00+$8c], a
@@ -36823,11 +37282,11 @@ OaksLabScript16: ; 0x1cf12
 	ld c, a
 	ld hl, $cc97
 	xor a
-	call $36e0
+	call FillMemory
 	ld [hl], $ff
 	ld a, $ff
 	ld [$c0ee], a
-	call $23b1
+	call PlaySound
 	ld b, $2
 	ld hl, $5b47
 	call Bankswitch
@@ -36845,7 +37304,7 @@ OaksLabScript17: ; 0x1cfd4
 	ld a, [$d730]
 	bit 0, a
 	ret nz
-	call $2307
+	call Func_2307
 	ld a, $2a
 	ld [$cc4d], a
 	ld a, $11
@@ -36890,7 +37349,7 @@ Function1D00A: ; 0x1d00a
 	ld [$cf92], a
 	ld a, $1
 	ld [$cf96], a
-	jp $2bbb
+	jp RemoveItemFromInventory
 
 Unknown_1d02b:
 	ld a, $7c
@@ -36930,7 +37389,7 @@ Unknown_1d02b:
 	ld [$ff00+$ed], a
 	ld a, $1
 	ld [$cf13], a
-	call $32f9
+	call Func_32f9
 	ret
 
 Unknown_1d076:
@@ -37036,14 +37495,14 @@ asm_1d157: ; 0x1d157
 	ld [$ff00+$8c], a
 	ld a, $9
 	ld [$ff00+$8b], a
-	call $34fc
+	call Func_34fc
 	ld [hl], $0
 	; manually fixed some disassembler issues around here
 	ld a, $1
 	ld [$FF8c], a
 	ld a, $9
 	ld [$ff00+$8b], a
-	call $34fc
+	call Func_34fc
 	ld [hl], $c
 	ld hl, $d730
 	set 6, [hl]
@@ -37089,7 +37548,7 @@ OaksLabMonChoiceMenu: ; 0x1d1b3
 	call PrintText
 	ld a, $1
 	ld [$cc3c], a
-	call $35ec ; yes/no menu
+	call Func_35ec ; yes/no menu
 	ld a, [$cc26]
 	and a
 	jr nz, OaksLabMonChoiceEnd
@@ -37151,7 +37610,7 @@ Unknown_1d22d:
 	ld [$ff00+$8c], a
 	ld a, $9
 	ld [$ff00+$8b], a
-	call $34fc
+	call Func_34fc
 	ld [hl], $0
 	ld hl, $5243
 	call PrintText
@@ -37170,7 +37629,7 @@ OaksLabText5: ; 0x1d248
 	jr nz, .asm_50e81 ; 0x1d24e
 	ld hl, $d2f7
 	ld b, $13
-	call $2b7f
+	call CountSetBits
 	ld a, [$d11e]
 	cp $2
 	jr c, .asm_b28b0 ; 0x1d25d
@@ -37184,10 +37643,10 @@ OaksLabText5: ; 0x1d248
 	ld [$cc3c], a
 	ld a, $56
 	call Predef
-	jp $52ed
+	jp .asm_0f042
 .asm_b28b0 ; 0x1d279
 	ld b,POKE_BALL
-	call $3493
+	call IsItemInBag
 	jr nz, .asm_17c30 ; 0x1d27e
 	ld a, [$d7eb]
 	bit 5, a
@@ -37209,7 +37668,7 @@ OaksLabText5: ; 0x1d248
 	jr .asm_0f042 ; 0x1d2a7
 .asm_76269 ; 0x1d2a9
 	ld b, OAKS_PARCEL
-	call $3493
+	call IsItemInBag
 	jr nz, .asm_a8fcf ; 0x1d2ae
 	ld hl, UnnamedText_1d2fa
 	call PrintText
@@ -37217,7 +37676,7 @@ OaksLabText5: ; 0x1d248
 .asm_a8fcf ; 0x1d2b8
 	ld hl, OaksLabDeliverParcelText
 	call PrintText
-	call $500a
+	call Function1D00A
 	ld a, $f
 	ld [W_OAKSLABCURSCRIPT], a
 	jr .asm_0f042 ; 0x1d2c6
@@ -37523,7 +37982,7 @@ ViridianMartScript: ; 0x1d46e
 	call EnableAutoTextBoxDrawing
 	ld hl, ViridianMartScriptPointers
 	ld a, [$d60d]
-	jp $3d97
+	jp CallFunctionInTable
 ; 0x1d47d
 
 ViridianMartScript_Unknown1d47d: ; 0x1d47d
@@ -37547,16 +38006,16 @@ ViridianMartScriptPointers:
 	dw ViridianMartScript2
 
 ViridianMartScript0: ; 0x1d49b
-	call $2429
+	call UpdateSprites
 	ld a, $4
 	ld [$ff00+$8c], a
 	call DisplayTextID
 	ld hl, $ccd3
 	ld de, RLEMovement1d4bb
-	call $350c
+	call DecodeRLEList
 	dec a
 	ld [$cd38], a
-	call $3486
+	call Func_3486
 	ld a, $1
 	ld [$d60d], a
 	ret
@@ -37708,8 +38167,8 @@ ViridianHouseText3: ; 0x1d59f
 	ld hl, UnnamedText_1d5b1
 	call PrintText
 	ld a, SPEAROW
-	call $13d0
-	call $3748
+	call PlayCry
+	call Func_3748
 	jp TextScriptEnd
 
 UnnamedText_1d5b1: ; 0x1d5b1
@@ -37759,8 +38218,8 @@ PewterHouse1Text1: ; 0x1d5fc
 	TX_FAR _PewterHouse1Text1
 	db $08 ; asm
 	ld a, NIDORAN_M
-	call $13d0
-	call $3748
+	call PlayCry
+	call Func_3748
 	jp TextScriptEnd
 
 PewterHouse1Text2: ; 0x1d60c
@@ -37965,20 +38424,20 @@ BikeShopText1: ; 0x1d745
 	jr z, .asm_260d4 ; 0x1d74b
 	ld hl, UnnamedText_1d82f
 	call PrintText
-	jp $57f5
+	jp .asm_99ef2
 .asm_260d4 ; 0x1d756
 	ld b, BIKE_VOUCHER
-	call $3493
+	call IsItemInBag
 	jr z, .asm_41190 ; 0x1d75b
 	ld hl, UnnamedText_1d81f
 	call PrintText
 	ld bc, (BICYCLE << 8) | 1
 	call GiveItem
 	jr nc, .asm_d0d90 ; 0x1d769
-	ld a, $2d
+	ld a, BIKE_VOUCHER
 	ldh [$db], a
-	ld b, $5 ; BANK(MyFunction)
-	ld hl, $7f37 ; MyFunction
+	ld b, BANK(RemoveItemByID)
+	ld hl, RemoveItemByID
 	call Bankswitch
 	ld hl, $d75f
 	set 0, [hl]
@@ -38008,8 +38467,8 @@ BikeShopText1: ; 0x1d745
 	ld hl, $c3a0
 	ld b, $4
 	ld c, $f
-	call $1922
-	call $2429
+	call TextBoxBorder
+	call UpdateSprites
 	ld hl, $c3ca
 	ld de, BikeShopMenuText
 	call PlaceString
@@ -38018,7 +38477,7 @@ BikeShopText1: ; 0x1d745
 	call PlaceString
 	ld hl, UnnamedText_1d815
 	call PrintText
-	call $3abe
+	call HandleMenuInput
 	bit 1, a
 	jr nz, .asm_b7579 ; 0x1d7dc
 	ld hl, $d730
@@ -38201,14 +38660,14 @@ LavenderHouse1Text3: ; 0x1d8fe
 	TX_FAR _LavenderHouse1Text3
 	db $8
 	ld a, PSYDUCK
-	call $13d0
+	call PlayCry
 	jp TextScriptEnd
 
 LavenderHouse1Text4: ; 0x1d90b
 	TX_FAR _LavenderHouse1Text4
 	db $8
 	ld a, NIDORINO
-	call $13d0
+	call PlayCry
 	jp TextScriptEnd
 ; 0x1d918
 
@@ -38304,7 +38763,7 @@ LavenderHouse2Text1: ; 0x1d9b6
 	TX_FAR _LavenderHouse2Text1
 	db $8
 	ld a, CUBONE
-	call $13d0
+	call PlayCry
 	jp TextScriptEnd
 ; 0x1d9c3
 
@@ -38363,7 +38822,7 @@ NameRaterScript: ; 0x1da12
 
 Unknown_1da15:
 	call PrintText
-	call $35ec
+	call Func_35ec
 	ld a, [$cc26]
 	and a
 	ret
@@ -38402,7 +38861,7 @@ NameRaterTexts:
 
 NameRaterText1: ; 0x1da56
 	db $8
-	call $36f4
+	call Func_36f4
 	ld hl, UnnamedText_1dab3
 	call Unknown_1da15
 	jr nz, .asm_1daae ; 0x1da60 $4c
@@ -38412,19 +38871,19 @@ NameRaterText1: ; 0x1da56
 	ld [$d07d], a
 	ld [$cfcb], a
 	ld [$cc35], a
-	call $13fc
+	call DisplayPartyMenu
 	push af
 	call GBPalWhiteOutWithDelay3
-	call $3dbe
-	call $20ba
+	call Func_3dbe
+	call LoadGBPal
 	pop af
 	jr c, .asm_1daae ; 0x1da80 $2c
-	call $15b4
+	call GetPartyMonName2
 	call Unknown_1da20
 	ld hl, UnnamedText_1dad1
 	jr c, .asm_1daa8 ; 0x1da8b $1b
 	ld hl, UnnamedText_1dabd
-	call $5a15
+	call Unknown_1da15
 	jr nz, .asm_1daae ; 0x1da93 $19
 	ld hl, UnnamedText_1dac2
 	call PrintText
@@ -38516,8 +38975,8 @@ VermilionHouse1Text2: ; 0x1db0b
 	TX_FAR _VermilionHouse1Text2
 	db $08 ; asm
 	ld a, PIDGEY
-	call $13d0
-	call $3748
+	call PlayCry
+	call Func_3748
 	jp TextScriptEnd
 
 VermilionHouse1Text3: ; 0x1db1b
@@ -38595,10 +39054,10 @@ VermilionDock_1db9b:
 	ld a, $ff
 	ld [$cd6b], a
 	ld [$c0ee], a
-	call $23b1
+	call PlaySound
 	ld c, $1f
 	ld a, $d6
-	call $23a1
+	call PlayMusic
 	ld b, $1e
 	ld hl, $5fc0
 	call Bankswitch
@@ -38607,11 +39066,11 @@ VermilionDock_1db9b:
 	ld c, $78
 	call DelayFrames
 	ld b, $9c
-	call $18d6
+	call Func_18d6
 	ld hl, $c468
 	ld bc, $0078
 	ld a, $14
-	call $36e0
+	call FillMemory
 	ld a, $1
 	ld [$ff00+$ba], a
 	call Delay3
@@ -38628,7 +39087,7 @@ VermilionDock_1db9b:
 	push bc
 	push hl
 	ld a, $a9
-	call $3740
+	call Func_3740
 	ld a, $ff
 	ld [$cfcb], a
 	ld d, $0
@@ -38642,7 +39101,7 @@ VermilionDock_1db9b:
 	ld [$d527], a
 	push hl
 	push de
-	call $0ed3
+	call ScheduleEastColumnRedraw
 	call VermilionDock_1dc59
 	pop de
 	ld b, $10
@@ -38672,7 +39131,7 @@ VermilionDock_1db9b:
 	ld [hl], b
 	dec hl
 	ld [hl], c
-	call $0997
+	call LoadPlayerSpriteGraphics
 	ld hl, $d3ae
 	dec [hl]
 	ret
@@ -38718,7 +39177,7 @@ VermilionDockOAMBlock:
 VermilionDock_1dc7c:
 	ld h, d
 	ld l, $50
-	call $5c86
+	call .asm_1dc86
 	ld h, $0
 	ld l, $80
 .asm_1dc86
@@ -38737,7 +39196,7 @@ VermilionDock_1dc94:
 	ld hl, $cc5b
 	ld bc, $00b4
 	ld a, $14
-	call $36e0
+	call FillMemory
 	ld hl, $9940
 	ld de, $cc5b
 	ld bc, $000c
@@ -38749,7 +39208,7 @@ VermilionDock_1dc94:
 	ld [hli], a
 	ld [hl], a
 	ld a, $a9
-	call $23b1
+	call PlaySound
 	ld c, $78
 	call DelayFrames
 	ret
@@ -38895,7 +39354,7 @@ SaffronHouse1Text2: ; 0x1dded
 	TX_FAR _SaffronHouse1Text2
 	db $8
 	ld a, PIDGEY
-	call $13d0
+	call PlayCry
 	jp TextScriptEnd
 ; 0x1ddfa
 
@@ -39097,7 +39556,7 @@ Route5GateScript: ; 0x1df33
 	call EnableAutoTextBoxDrawing
 	ld a, [$d662]
 	ld hl, Route5GateScripts
-	jp $3d97
+	jp CallFunctionInTable
 ; 0x1df3f
 
 Route5GateScripts: ; 0x1df3f
@@ -39109,7 +39568,7 @@ Function1df43: ; 0x1df43
 	ld [$ccd3], a
 	ld a, $1
 	ld [$cd38], a
-	jp $3486
+	jp Func_3486
 
 Route5GateScript0: ; 0x1df50
 	ld a, [$d728]
@@ -39122,8 +39581,8 @@ Route5GateScript0: ; 0x1df50
 	ld [$d528], a
 	xor a
 	ld [$ff00+$b4], a
-	ld b, $16
-	ld hl, $659f
+	ld b, BANK(RemoveGuardDrink)
+	ld hl, RemoveGuardDrink
 	call Bankswitch
 	ld a, [$ff00+$db]
 	and a
@@ -39169,15 +39628,15 @@ Route5GateText1: ; 0x1dfaa
 	ld a, [$d728]
 	bit 6, a
 	jr nz, .asm_88856 ; 0x1dfb0 $2c
-	ld b, $16
-	ld hl, $659f
+	ld b, BANK(RemoveGuardDrink)
+	ld hl, RemoveGuardDrink
 	call Bankswitch
 	ld a, [$ff00+$db]
 	and a
 	jr nz, .asm_768a2 ; 0x1dfbd $11
 	ld hl, UnnamedText_1dfe7
 	call PrintText
-	call $5f43
+	call Function1df43
 	ld a, $1
 	ld [$d662], a
 	jp TextScriptEnd
@@ -39253,7 +39712,7 @@ Route6GateScript: ; 0x1e03d
 	call EnableAutoTextBoxDrawing
 	ld hl, Route6GateScripts
 	ld a, [$d636]
-	call $3d97
+	call CallFunctionInTable
 	ret
 ; 0x1e04a
 
@@ -39271,8 +39730,8 @@ Route6GateScript0: ; 0x1e04e
 	ld [$d528], a
 	xor a
 	ld [$ff00+$b4], a
-	ld b, $16
-	ld hl, $659f
+	ld b, BANK(RemoveGuardDrink)
+	ld hl, RemoveGuardDrink
 	call Bankswitch
 	ld a, [$ff00+$db]
 	and a
@@ -39361,7 +39820,7 @@ Route7GateScript: ; 0x1e100
 	call EnableAutoTextBoxDrawing
 	ld a, [$d663]
 	ld hl, Route7GateScripts
-	call $3d97
+	call CallFunctionInTable
 	ret
 ; 0x1e10d
 
@@ -39392,8 +39851,8 @@ Route7GateScript0: ; 0x1e128
 	ld [$d528], a
 	xor a
 	ld [$ff00+$b4], a
-	ld b, $16
-	ld hl, $659f
+	ld b, BANK(RemoveGuardDrink)
+	ld hl, RemoveGuardDrink
 	call Bankswitch
 	ld a, [$ff00+$db]
 	and a
@@ -39468,7 +39927,7 @@ Route8GateScript: ; 0x1e1c7
 	call EnableAutoTextBoxDrawing
 	ld hl, Route8GateScripts
 	ld a, [$d637]
-	jp $3d97
+	jp CallFunctionInTable
 ; 0x1e1d3
 
 Route8GateScripts: ; 0x1e1d3
@@ -39498,8 +39957,8 @@ Route8GateScript0: ; 0x1e1ee
 	ld [$d528], a
 	xor a
 	ld [$ff00+$b4], a
-	ld b, $16
-	ld hl, $659f
+	ld b, BANK(RemoveGuardDrink)
+	ld hl, RemoveGuardDrink
 	call Bankswitch
 	ld a, [$ff00+$db]
 	and a
@@ -39614,7 +40073,7 @@ PowerPlantScript: ; 0x1e2c6
 	ld hl, PowerPlantTrainerHeaders
 	ld de, PowerPlantScriptPointers
 	ld a, [$d663]
-	call $3160
+	call Func_3160
 	ld [$d663], a
 	ret
 ; 0x1e2d9
@@ -39712,7 +40171,7 @@ PowerPlantTrainerHeader8:
 	db $ff
 
 asm_234cc:
-	call $31cc
+	call LoadTrainerHeader
 	ld a, [$da39]
 	ld [$d663], a
 	jp TextScriptEnd
@@ -39773,8 +40232,8 @@ ZapdosBattleText: ; 0x1e3af
 	TX_FAR _ZapdosBattleText ; 0x8c5ea
 	db $8
 	ld a, ZAPDOS
-	call $13d0
-	call $3748
+	call PlayCry
+	call Func_3748
 	jp TextScriptEnd
 ; 0x1e3bf
 
@@ -39914,8 +40373,8 @@ Route16HouseText2: ; 0x1e640
 	ld hl, UnnamedText_1e652
 	call PrintText
 	ld a, FEAROW
-	call $13d0
-	call $3748
+	call PlayCry
+	call Func_3748
 	jp TextScriptEnd
 
 UnnamedText_1e652: ; 0x1e652
@@ -39952,7 +40411,7 @@ Route22GateScript: ; 0x1e683
 	call EnableAutoTextBoxDrawing
 	ld hl, Route22GateScripts
 	ld a, [$d60e]
-	call $3d97
+	call CallFunctionInTable
 	ld a, [$d361]
 	cp $4
 	ld a, $22
@@ -39967,7 +40426,7 @@ Route22GateScripts: ; 0x1e69e
 	dw Route22GateScript0, Route22GateScript1, Route22GateScript2
 
 Route22GateScript0: ; 0x1e6a4
-	ld hl, Route22GateScript3
+	ld hl, Route22GateScriptCoords
 	call ArePlayerCoordsInArray
 	ret nc
 	xor a
@@ -39977,19 +40436,19 @@ Route22GateScript0: ; 0x1e6a4
 	jp DisplayTextID
 ; 0x1e6b5
 
-Route22GateScript3: ; 0x1e6b5
-	ld [bc], a
-	inc b
-	ld [bc], a
-	dec b
-	rst $38
+Route22GateScriptCoords: ; 0x1e6b5
+	db 2,4
+	db 2,5
+	db $ff
+
+Func_1e6ba: ; 0x1e6ba
 	ld a, $1
 	ld [$cd38], a
 	ld a, $80
 	ld [$ccd3], a
 	ld [$c109], a
 	ld [$cd6b], a
-	jp $3486
+	jp Func_3486
 ; 0x1e6cd
 
 Route22GateScript1: ; 0x1e6cd
@@ -40015,7 +40474,7 @@ Route22GateText1: ; 0x1e6e1
 	jr nz, .asm_8a809 ; 0x1e6e7 $d
 	ld hl, UnnamedText_1e704
 	call PrintText
-	call $66ba
+	call Func_1e6ba
 	ld a, $1
 	jr .asm_20f7e ; 0x1e6f4 $8
 .asm_8a809 ; 0x1e6f6
@@ -40031,8 +40490,8 @@ UnnamedText_1e704: ; 0x1e704
 	TX_FAR _UnnamedText_1e704 ; 0x8cfbb
 	db $8
 	ld a, $a5
-	call $3740
-	call $3748
+	call Func_3740
+	call Func_3748
 	ld hl, $6715
 	ret
 ; 0x1e715
@@ -40082,7 +40541,7 @@ BillsHouseScript: ; 0x1e76a
 	call EnableAutoTextBoxDrawing
 	ld a, [$d661]
 	ld hl, BillsHouseScripts
-	jp $3d97
+	jp CallFunctionInTable
 ; 0x1e776
 
 BillsHouseScripts: ; 0x1e776
@@ -40148,7 +40607,7 @@ BillsHouseScript3: ; 0x1e7c5
 	ld [$ff00+$ed], a
 	ld a, $5
 	ld [$ff00+$ee], a
-	call $32f9
+	call Func_32f9
 	ld a, $62
 	ld [$cc4d], a
 	ld a, $15
@@ -40198,7 +40657,7 @@ BillsHouseText1: ; 0x1e83d
 	db $8
 	ld hl, UnnamedText_1e865
 	call PrintText
-	call $35ec
+	call Func_35ec
 	ld a, [$cc26]
 	and a
 	jr nz, asm_6b196 ; 0x1e84b $d
@@ -40402,10 +40861,10 @@ asm_1e9b0: ; 1e9b0 (7:69b0)
 	xor a
 	ld [$cfc7], a
 	dec a
-	call Func_23b1
+	call PlaySound
 	ld c, $2
 	ld a, $b9
-	call Func_23a1
+	call PlayMusic
 .asm_1e9c2
 	ld a, [$c02a]
 	cp $b9
@@ -40556,7 +41015,7 @@ Func_1ea92: ; 1ea92 (7:6a92)
 .asm_1eab8
 	call Func_3748
 	ld a, $a5
-	call Func_23b1
+	call PlaySound
 	call Func_3748
 	ld hl, $6b05
 	call PrintText
@@ -40585,7 +41044,7 @@ INCBIN "baserom.gbc",$1eae3,$1eaea - $1eae3
 	jp nz, TextScriptEnd
 	call Func_3748
 	ld a, $ad
-	call Func_23b1
+	call PlaySound
 	call Func_3748
 	jp TextScriptEnd
 ; 1eb05 (7:6b05)
@@ -40665,22 +41124,22 @@ UnnamedText_1eb69: ; 0x1eb69
 	ld c, $20
 	call DelayFrames
 	ld a, $8c
-	call Func_23b1
+	call PlaySound
 	call Func_3748
 	ld c, $50
 	call DelayFrames
 	ld a, $9c
-	call Func_23b1
+	call PlaySound
 	call Func_3748
 	ld c, $30
 	call DelayFrames
 	ld a, $8c
-	call Func_23b1
+	call PlaySound
 	call Func_3748
 	ld c, $20
 	call DelayFrames
 	ld a, $86
-	call Func_23b1
+	call PlaySound
 	call Func_3748
 	call Func_2307
 	ld hl, $d7f2
@@ -40701,11 +41160,11 @@ UnnamedText_1ebdd: ; 0x1ebdd
 INCBIN "baserom.gbc",$1ebe2,$1ebe8 - $1ebe2
 	ld a, $ff
 	ld [$c0ee], a
-	call Func_23b1
+	call PlaySound
 	ld c, $10
 	call DelayFrames
 	ld a, $9d
-	call Func_23b1
+	call PlaySound
 	call Func_3748
 	ld c, $3c
 	call DelayFrames
@@ -40735,6 +41194,8 @@ UnnamedText_1ecbd: ; 0x1ecbd
 SECTION "bank8",DATA,BANK[$8]
 
 INCBIN "baserom.gbc",$20000,$2136e - $20000
+
+Func_2136e: ; 0x2136e
 	ld a, [$d083]
 	cp $ff
 	jr z, .asm_2139b
@@ -40817,7 +41278,7 @@ Func_213c8: ; 213c8 (8:53c8)
 	ld c, $e
 .asm_213fa
 	call TextBoxBorder
-	call Func_2429
+	call UpdateSprites
 	ld a, $3
 	ld [W_MAXMENUITEMID], a ; $cc28
 	ld a, [$d7f1]
@@ -40896,7 +41357,7 @@ Func_214c2: ; 214c2 (8:54c2)
 	bit 3, a
 	jr nz, Func_214e8
 	ld a, $99
-	call Func_23b1
+	call PlaySound
 	ld hl, $57e9
 	call PrintText
 
@@ -40981,7 +41442,7 @@ Func_21588: ; 21588 (8:5588)
 	jr nz, .asm_2159a
 	call LoadTextBoxTilePatterns
 	ld a, $9a
-	call Func_23b1
+	call PlaySound
 	call Func_3748
 .asm_2159a
 	ld hl, $cd60
@@ -41276,6 +41737,8 @@ UnnamedText_21865: ; 0x21865
 ; 0x21865 + 5 bytes
 
 INCBIN "baserom.gbc",$2186a,$21879 - $2186a
+
+Func_21879: ; 0x21879
 	ld c, $0
 .asm_2187b
 	ld b, $0
@@ -43683,7 +44146,7 @@ DisplayEffectiveness:
 	jr nc, .done
 	ld hl, UnnamedText_2fb93	; It's not very effective...
 .done
-	jp $3C49
+	jp PrintText
 
 UnnamedText_2fb8e: ; 0x2fb8e
 	TX_FAR _UnnamedText_2fb8e
@@ -52213,7 +52676,7 @@ TrainerAIPointers: ; 655C
 JugglerAI:
 	cp $40
 	ret nc
-	jp $672A
+	jp Function672A
 
 BlackbeltAI:
 	cp $20
@@ -52233,12 +52696,12 @@ CooltrainerMAI:
 CooltrainerFAI:
 	cp $40
 	ld a,$A
-	call $67CF
+	call Function67CF
 	jp c,AIUseHyperPotion
 	ld a,5
-	call $67CF
+	call Function67CF
 	ret nc
-	jp $672A
+	jp Function672A
 
 BrockAI:
 ; if his active monster has a status condition, use a full heal
@@ -52261,7 +52724,7 @@ ErikaAI:
 	cp $80
 	ret nc
 	ld a,$A
-	call $67CF
+	call Function67CF
 	ret nc
 	jp AIUseSuperPotion
 
@@ -52279,7 +52742,7 @@ SabrinaAI:
 	cp $40
 	ret nc
 	ld a,$A
-	call $67CF
+	call Function67CF
 	ret nc
 	jp AIUseHyperPotion
 
@@ -52287,7 +52750,7 @@ Sony2AI:
 	cp $20
 	ret nc
 	ld a,5
-	call $67CF
+	call Function67CF
 	ret nc
 	jp AIUsePotion
 
@@ -52295,7 +52758,7 @@ Sony3AI:
 	cp $20
 	ret nc
 	ld a,5
-	call $67CF
+	call Function67CF
 	ret nc
 	jp AIUseFullRestore
 
@@ -52303,7 +52766,7 @@ LoreleiAI:
 	cp $80
 	ret nc
 	ld a,5
-	call $67CF
+	call Function67CF
 	ret nc
 	jp AIUseSuperPotion
 
@@ -52318,7 +52781,7 @@ AgathaAI:
 	cp $80
 	ret nc
 	ld a,4
-	call $67CF
+	call Function67CF
 	ret nc
 	jp AIUseSuperPotion
 
@@ -52326,7 +52789,7 @@ LanceAI:
 	cp $80
 	ret nc
 	ld a,5
-	call $67CF
+	call Function67CF
 	ret nc
 	jp AIUseHyperPotion
 
@@ -52345,7 +52808,7 @@ DecrementAICount: ; 6695
 Function669B: ; 669B
 ; XXX what does this do
 	ld a,$8E
-	jp $3740
+	jp Func_3740
 
 AIUseFullRestore: ; 0x3a6a0
 	call AICureStatus
@@ -52505,7 +52968,7 @@ AIBattleWithdrawText: ; 0x3a781
 	db "@"
 
 AIUseFullHeal: ; 0x3a786
-	call $669B
+	call Function669B
 	call AICureStatus
 	ld a,FULL_HEAL
 	jp AIPrintItemUse
@@ -52524,21 +52987,21 @@ AICureStatus: ; 0x3a791
 	ret
 
 AIUseXAccuracy: ; 0x3a7a8 unused
-	call $669B
+	call Function669B
 	ld hl,$D068
 	set 0,[hl]
 	ld a,X_ACCURACY
 	jp AIPrintItemUse
 
 AIUseGuardSpec: ; 0x3a7b5
-	call $669B
+	call Function669B
 	ld hl,$D068
 	set 1,[hl]
 	ld a,GUARD_SPEC_
 	jp AIPrintItemUse
 
 AIUseDireHit: ; 0x3a7c2 unused
-	call $669B
+	call Function669B
 	ld hl,$D068
 	set 2,[hl]
 	ld a,DIRE_HIT
@@ -52936,7 +53399,7 @@ Func_3ad71: ; 3ad71 (e:6d71)
 	ld a, [W_WHICHPOKEMON] ; $cf92
 	ld hl, W_PARTYMON1NAME ; $d2b5
 	call GetPartyMonName
-	call Func_3826
+	call CopyStringToCF4B
 	ld hl, $6f4d
 	call PrintText
 	ld c, $32
@@ -53200,7 +53663,7 @@ Func_3af5b: ; 3af5b (e:6f5b)
 	ld [$d0e0], a
 	ld [$d11e], a
 	call GetMoveName
-	call Func_3826
+	call CopyStringToCF4B
 	ld a, $1b
 	call Predef ; indirect jump to Func_6e43 (6e43 (1:6e43))
 .asm_3afb1
@@ -56116,16 +56579,16 @@ UnnamedText_3c22e: ; 0x3c22e
 
 
 MainInBattleLoop: ; 4233
-	call $4d43
+	call Func_3cd43
 	ld hl, $d015
 	ld a, [hli]
 	or [hl]
-	jp z, $4700
+	jp z, Func_3c700
 	ld hl, $cfe6
 	ld a, [hli]
 	or [hl]
-	jp z, $4525
-	call $3719
+	jp z, Func_3c525
+	call Func_3719
 	xor a
 	ld [$d11d], a
 	ld a, [$d063]
@@ -56138,7 +56601,7 @@ MainInBattleLoop: ; 4233
 	ld a, [hl]
 	and $12
 	jr nz, .asm_3c2a6 ; 0x3c261 $43
-	call $4eb3 ; show battle menu
+	call Func_3ceb3 ; show battle menu
 	ret c
 	ld a, [$d078]
 	and a
@@ -56164,10 +56627,10 @@ MainInBattleLoop: ; 4233
 	ld [$d07c], a
 	xor a
 	ld [$cc35], a
-	call $5219
+	call Func_3d219
 	push af
-	call $3725
-	call $4d5a
+	call Func_3725
+	call Func_3cd5a
 	pop af
 	jr nz, MainInBattleLoop
 .asm_3c2a6
@@ -56177,7 +56640,7 @@ MainInBattleLoop: ; 4233
 	jr nz, .noLinkBattle
 	ld a, [$cc3e]
 	cp $f
-	jp z, $4202
+	jp z, asm_3c202
 	cp $e
 	jr z, .noLinkBattle
 	cp $d
@@ -56251,58 +56714,58 @@ MainInBattleLoop: ; 4233
 	ld b, BANK(TrainerAI)
 	call Bankswitch
 	jr c, .AIActionUsedEnemyFirst
-	call $66bc ; execute enemy move
+	call Func_3e6bc ; execute enemy move
 	ld a, [$d078]
 	and a
 	ret nz
 	ld a, b
 	and a
-	jp z, $4700
+	jp z, Func_3c700
 .AIActionUsedEnemyFirst
-	call $43bd
-	jp z, $4525
-	call $4d5a
-	call $565e ; execute player move
+	call Func_3c3bd
+	jp z, Func_3c525
+	call Func_3cd5a
+	call Func_3d65e ; execute player move
 	ld a, [$d078]
 	and a
 	ret nz
 	ld a, b
 	and a
-	jp z, $4525
-	call $43bd
-	jp z, $4700
-	call $4d5a
-	call $450f
+	jp z, Func_3c525
+	call Func_3c3bd
+	jp z, Func_3c700
+	call Func_3cd5a
+	call Func_3c50f
 	jp MainInBattleLoop
 .playerMovesFirst
-	call $565e ; execute player move
+	call Func_3d65e ; execute player move
 	ld a, [$d078]
 	and a
 	ret nz
 	ld a, b
 	and a
-	jp z, $4525
-	call $43bd
-	jp z, $4700
-	call $4d5a
+	jp z, Func_3c525
+	call Func_3c3bd
+	jp z, Func_3c700
+	call Func_3cd5a
 	ld a, $1
 	ld [H_WHOSETURN], a
 	ld hl, TrainerAI
 	ld b, BANK(TrainerAI)
 	call Bankswitch
 	jr c, .AIActionUsedPlayerFirst
-	call $66bc ; execute enemy move
+	call Func_3e6bc ; execute enemy move
 	ld a, [$d078]
 	and a
 	ret nz
 	ld a, b
 	and a
-	jp z, $4700
+	jp z, Func_3c700
 .AIActionUsedPlayerFirst
-	call $43bd
-	jp z, $4525
-	call $4d5a
-	call $450f
+	call Func_3c3bd
+	jp z, Func_3c525
+	call Func_3cd5a
+	call Func_3c50f
 	jp MainInBattleLoop
 
 ; known jump sources: 3c358 (f:4358), 3c36e (f:436e), 3c38a (f:438a), 3c3ae (f:43ae)
@@ -56618,7 +57081,7 @@ Func_3c567: ; 3c567 (f:4567)
 	cp $9e
 	jr z, .asm_3c5c2
 	ld a, $95
-	call Func_23b1
+	call PlaySound
 	call Func_3748
 	jr .asm_3c5db
 .asm_3c5d3
@@ -56791,7 +57254,7 @@ Func_3c6ee: ; 3c6ee (f:46ee)
 	call Func_3740
 	ld c, $8
 	pop af
-	call Func_23a1
+	call PlayMusic
 	jp Delay3
 
 ; known jump sources: 3c23b (f:423b), 3c355 (f:4355), 3c371 (f:4371), 3c38d (f:438d), 3c3ab (f:43ab)
@@ -57127,9 +57590,9 @@ Func_3c92a:
 	res 5,[hl]
 	ld hl,$C3B2
 	ld a,8
-	call $48DF
-	call $6E94
-	call $3719
+	call Func_3c8df
+	call Func_3ee94
+	call Func_3719
 	ld a,[$D12B]
 	cp 4
 	jr nz,.next
@@ -57173,7 +57636,7 @@ Func_3c92a:
 	ld a,[hl]
 	ld [$CFD8],a
 	ld [$CF91],a
-	call $6B01
+	call Func_3eb01
 	ld hl,$CFE6
 	ld a,[hli]
 	ld [$CCE3],a
@@ -57205,7 +57668,7 @@ Func_3c92a:
 	jr nz,.next4
 	ld a,2
 	ld [$D07D],a
-	call $13FC
+	call DisplayPartyMenu
 .next9
 	ld a,1
 	ld [$CC26],a
@@ -57217,19 +57680,19 @@ Func_3c92a:
 	ld hl,$51F5
 	call PrintText
 .next8
-	call $1411
+	call GoBackToPartyMenu
 	jr .next9
 .next6
-	call $4A97
+	call Func_3ca97
 	jr z,.next8
 	xor a
 	ld [$CC26],a
 .next7
-	call $3DE5
-	call $6E5B
-	call $3725
+	call GBPalWhiteOut
+	call Func_3ee5b
+	call Func_3725
 .next4
-	call $0082
+	call CleanLCD_OAM
 	ld hl,$C3A0
 	ld bc,$040B
 	call ClearScreenArea
@@ -57241,25 +57704,25 @@ Func_3c92a:
 	ld a,[$CFD8]
 	ld [$CF91],a
 	ld [$D0B5],a
-	call $1537
+	call GetMonHeader
 	ld de,$9000
-	call $1665
+	call LoadMonFrontSprite
 	ld a,$CF
 	ld [$FFE1],a
 	ld hl,$C427
 	ld a,2
 	call Predef
 	ld a,[$CFD8]
-	call $13D0
-	call $4DEC
+	call PlayCry
+	call Func_3cdec
 	ld a,[$CC26]
 	and a
 	ret nz
 	xor a
 	ld [$D058],a
 	ld [$CCF5],a
-	call $3719
-	jp $51BA
+	call Func_3719
+	jp Func_3d1ba
 
 TrainerAboutToUseText: ; 0x3ca79
 	TX_FAR _TrainerAboutToUseText
@@ -57462,7 +57925,7 @@ Func_3cba6: ; 3cba6 (f:4ba6)
 	call GetMonHeader
 	ld hl, W_PARTYMON1NAME ; $d2b5
 	ld a, [W_PLAYERMONNUMBER] ; $cc2f
-	call Func_3a7d
+	call SkipFixedLengthTextEntries
 	ld de, $d009
 	ld bc, $b
 	call CopyData
@@ -57506,7 +57969,7 @@ Func_3cc13: ; 3cc13 (f:4c13)
 	call GetMonHeader
 	ld hl, $d9ee
 	ld a, [W_WHICHPOKEMON] ; $cf92
-	call Func_3a7d
+	call SkipFixedLengthTextEntries
 	ld de, W_ENEMYMONNAME
 	ld bc, $b
 	call CopyData
@@ -58035,7 +58498,7 @@ asm_3d05f: ; 3d05f (f:505f)
 	ld a, [$cf91]
 	ld [$d11e], a
 	call GetItemName
-	call Func_3826
+	call CopyStringToCF4B
 	xor a
 	ld [$d152], a
 	call UseItem
@@ -58710,9 +59173,9 @@ SelectEnemyMove: ; 5564 0x3d564
 	ld a, [W_ISLINKBATTLE]
 	sub $4
 	jr nz, .noLinkBattle
-	call $3719
-	call $5605
-	call $3725
+	call Func_3719
+	call Func_3d605
+	call Func_3725
 	ld a, [$cc3e]
 	cp $e
 	jp z, .asm_3d601
@@ -58893,7 +59356,7 @@ asm_3d6a9:
 	res 4,[hl]
 	res 6,[hl]
 asm_3d6b0:
-	call $5AF5
+	call Func_3daf5
 	ld hl,DecrementPP
 	ld de,$CCDC ; pointer to the move just used
 	ld b,BANK(DecrementPP)
@@ -58913,15 +59376,15 @@ asm_3d6b0:
 	ld de,1
 	call IsInArray
 	jp c,$5702
-	call $6023
-	call $6093
+	call CriticalHitTest
+	call HandleCounterMove
 	jr z,.next11
 	call CalculateDamage
 	call MoreCalculateDamage
 	jp z,$574B
-	call $63A5
-	call $6687
-	call $656B
+	call AdjustDamageForMoveType
+	call Func_3e687
+	call MoveHitTest
 .next11
 	ld a,[W_MOVEMISSED]
 	and a
@@ -58946,8 +59409,8 @@ asm_3d6b0:
 	pop af
 	ld [$CC5B],a
 	ld a,[W_PLAYERMOVENUM]
-	call $6F07
-	call $6ED3
+	call PlayMoveAnimation
+	call Func_3eed3
 	call Func_3cd60
 	ld a,[W_PLAYERBATTSTATUS2]
 	bit 4,a
@@ -58968,21 +59431,21 @@ asm_3d6b0:
 	xor a
 	ld [$CC5B],a
 	ld a,$A7
-	call $6F07
+	call PlayMoveAnimation
 .next4
 	ld a,[W_PLAYERMOVEEFFECT]
 	cp a,9
 	jr nz,.next6 ; 577A
-	call $62FD
+	call MirrorMoveCopyMove
 	jp z,Function580A
 	xor a
 	ld [$CCED],a
-	jp $569A
+	jp Func_3d69a
 .next6
 	cp a,$53
 	jr nz,.next7 ; 5784
-	call $6348
-	jp $569A
+	call MetronomePickMove
+	jp Func_3d69a
 .next7
 	ld a,[W_PLAYERMOVEEFFECT]
 	ld hl,EffectsArray3
@@ -58992,14 +59455,14 @@ asm_3d6b0:
 	ld a,[W_MOVEMISSED]
 	and a
 	jr z,.next8 ; 57A6
-	call $5BE2
+	call Func_3dbe2
 	ld a,[W_PLAYERMOVEEFFECT]
 	cp a,7
 	jr z,.next9 ; 57B9
 	jp Function580A
 .next8
-	call $60DF
-	call $5C5C
+	call ApplyAttackToEnemyPokemon
+	call Func_3dc5c
 	ld hl,$7B7B ; MyFunction
 	ld b,$B ; BANK(MyFunction)
 	call Bankswitch
@@ -59016,7 +59479,7 @@ asm_3d6b0:
 	ld b,[hl]
 	or b
 	ret z
-	call $62B6
+	call HandleBuildingRage
 
 	ld hl,W_PLAYERBATTSTATUS1
 	bit 2,[hl]
@@ -59053,7 +59516,7 @@ Function580A: ; 0x3d80a 580A
 
 Function5811: ; 0x3d811 5811
 ; print the ghost battle messages
-	call $583A
+	call Function583A
 	ret nz
 	ld a,[H_WHOSETURN]
 	and a
@@ -59110,7 +59573,7 @@ Function5854: ; 5854
 	xor a
 	ld [$CC5B],a
 	ld a,SLP_ANIM - 1
-	call $6F07
+	call PlayMoveAnimation
 	ld hl,FastAsleepText
 	call PrintText
 	jr .sleepDone
@@ -59121,7 +59584,7 @@ Function5854: ; 5854
 	xor a
 	ld [$CCF1],a
 	ld hl,Function580A
-	jp $5A37
+	jp Func_3da37
 
 .FrozenCheck
 	bit 5,[hl] ; frozen?
@@ -59131,7 +59594,7 @@ Function5854: ; 5854
 	xor a
 	ld [$CCF1],a
 	ld hl,Function580A
-	jp $5A37
+	jp Func_3da37
 
 .HeldInPlaceCheck
 	ld a,[W_ENEMYBATTSTATUS1]
@@ -59140,7 +59603,7 @@ Function5854: ; 5854
 	ld hl,CantMoveText
 	call PrintText
 	ld hl,Function580A
-	jp $5A37
+	jp Func_3da37
 
 FlinchedCheck: ; 58AC
 	ld hl,W_PLAYERBATTSTATUS1
@@ -59150,7 +59613,7 @@ FlinchedCheck: ; 58AC
 	ld hl,FlinchedText
 	call PrintText
 	ld hl,Function580A
-	jp $5A37
+	jp Func_3da37
 
 HyperBeamCheck: ; 58C2
 	ld hl,W_PLAYERBATTSTATUS2
@@ -59160,7 +59623,7 @@ HyperBeamCheck: ; 58C2
 	ld hl,MustRechargeText
 	call PrintText
 	ld hl,$580A
-	jp $5A37
+	jp Func_3da37
 .next
 	ld hl,$D06D
 	ld a,[hl]
@@ -59192,7 +59655,7 @@ HyperBeamCheck: ; 58C2
 	xor a
 	ld [$CC5B],a
 	ld a,CONF_ANIM - 1
-	call $6F07
+	call PlayMoveAnimation
 	call GenRandomInBattle
 	cp a,$80
 	jr c,.next3
@@ -59200,7 +59663,7 @@ HyperBeamCheck: ; 58C2
 	ld a,[hl]
 	and a,$80
 	ld [hl],a
-	call $5AAD
+	call Func_3daad
 	jr .next5 ; 5952
 .next3
 	ld a,[$CCEE]
@@ -59209,9 +59672,9 @@ HyperBeamCheck: ; 58C2
 	ld hl,$CCDC
 	cp [hl]
 	jr nz,.ParalysisCheck
-	call $5A88
+	call Func_3da88
 	ld hl,$580A
-	jp $5A37
+	jp Func_3da37
 .ParalysisCheck
 	ld hl,W_PLAYERMONSTATUS
 	bit 6,[hl]
@@ -59236,10 +59699,10 @@ HyperBeamCheck: ; 58C2
 	xor a
 	ld [$CC5B],a
 	ld a,$A7
-	call $6F07
+	call PlayMoveAnimation
 .next9
 	ld hl,$580A
-	jp $5A37
+	jp Func_3da37
 .next7
 	ld hl,W_PLAYERBATTSTATUS1
 	bit 0,[hl]
@@ -59261,7 +59724,7 @@ HyperBeamCheck: ; 58C2
 	dec [hl]
 	jr z,.next11 ; 599B
 	ld hl,$580A
-	jp $5A37
+	jp Func_3da37
 .next11
 	ld hl,W_PLAYERBATTSTATUS1
 	res 0,[hl]
@@ -59288,7 +59751,7 @@ HyperBeamCheck: ; 58C2
 	ld a,$75
 	ld [W_PLAYERMOVENUM],a
 	ld hl,$5705
-	jp $5A37
+	jp Func_3da37
 .next10
 	bit 1,[hl]
 	jr z,.next13 ; 59FF
@@ -59310,7 +59773,7 @@ HyperBeamCheck: ; 58C2
 	inc a
 	ld [$D06B],a
 	pop hl
-	jp $5A37
+	jp Func_3da37
 .next13
 	bit 5,[hl]
 	jp z,$5A1A
@@ -59321,7 +59784,7 @@ HyperBeamCheck: ; 58C2
 	ld [$D06A],a
 	ld hl,$5714
 	jp nz,$5A37
-	jp $5A37
+	jp Func_3da37
 
 ; known jump sources: 3da01 (f:5a01)
 Func_3da1a: ; 3da1a (f:5a1a)
@@ -59331,7 +59794,7 @@ Func_3da1a: ; 3da1a (f:5a1a)
 	ld a, $63
 	ld [$d11e], a
 	call GetMoveName
-	call Func_3826
+	call CopyStringToCF4B
 	xor a
 	ld [W_PLAYERMOVEEFFECT], a ; $cfd3
 	ld hl, $56b0
@@ -59934,7 +60397,7 @@ CalculateDamage: ; 0x3ddcf
 	and a
 	jr z, .next3
 	ld c, 3
-	call $5f1c
+	call Func_3df1c
 	ld a, [$ff00+$97]
 	ld b, a
 	ld a, [$ff00+$98]
@@ -59964,7 +60427,7 @@ CalculateDamage: ; 0x3ddcf
 	jr z, .next3  ;skip portion of code that pulls up inactive pokemon
 .loadOtherPoke
 	ld c, 5
-	call $5f1c
+	call Func_3df1c
 	ld a, [$ff00+$97]
 	ld b, a
 	ld a, [$ff00+$98]
@@ -60167,7 +60630,7 @@ MoreCalculateDamage:   ;$3df65
 	cp a, $1e
 	jr z, .next3
 	cp a, $26    ;OHKO?
-	jp z, $6016
+	jp z, Func_3e016
 	ld a, d      ;if attack base power zero then do nothing
 	and a
 	ret z
@@ -60534,7 +60997,7 @@ ApplyDamageToEnemyPokemon:
 	ld a,$48
 	call Predef ; animate the HP bar shortening
 ApplyAttackToEnemyPokemonDone:
-	jp $4d5a ; redraw pokemon names and HP bars
+	jp Func_3cd5a ; redraw pokemon names and HP bars
 
 ApplyAttackToPlayerPokemon: ; 61A0
 	ld a,[W_ENEMYMOVEEFFECT]
@@ -60653,7 +61116,7 @@ ApplyDamageToPlayerPokemon:
 	ld a,$48
 	call Predef ; animate the HP bar shortening
 ApplyAttackToPlayerPokemonDone
-	jp $4d5a ; redraw pokemon names and HP bars
+	jp Func_3cd5a ; redraw pokemon names and HP bars
 
 AttackSubstitute: ; 625E
 	ld hl,SubstituteTookDamageText
@@ -60701,7 +61164,7 @@ AttackSubstitute: ; 625E
 .nullifyEffect
 	xor a
 	ld [hl],a ; zero the effect of the attacker's move
-	jp $4d5a ; redraw pokemon names and HP bars
+	jp Func_3cd5a ; redraw pokemon names and HP bars
 
 SubstituteTookDamageText: ; 0x3e2ac
 	TX_FAR _SubstituteTookDamageText
@@ -60745,7 +61208,7 @@ HandleBuildingRage: ; 62B6
 	push hl
 	ld hl,BuildingRageText
 	call PrintText
-	call $7428 ; stat modifier raising function
+	call Func_3f428 ; stat modifier raising function
 	pop hl
 	xor a
 	ldd [hl],a ; null move effect
@@ -60804,8 +61267,8 @@ ReloadMoveData: ; 6329
 	call FarCopyData ; copy the move's stats
 	call IncrementMovePP
 ; the follow two function calls are used to reload the move name
-	call $3058
-	call $3826
+	call GetMoveName
+	call CopyStringToCF4B
 	ld a,$01
 	and a
 	ret
@@ -61136,7 +61599,7 @@ MoveHitTest: ; 656B
 	ld a,[de]
 	cp a,SWIFT_EFFECT
 	ret z ; Swift never misses (interestingly, Azure Heights lists this is a myth, but it appears to be true)
-	call $7b79 ; substitute check (note that this overwrites a)
+	call CheckTargetSubstitute ; substitute check (note that this overwrites a)
 	jr z,.checkForDigOrFlyStatus
 ; this code is buggy. it's supposed to prevent HP draining moves from working on substitutes.
 ; since $7b79 overwrites a with either $00 or $01, it never works.
@@ -61390,7 +61853,7 @@ asm_3e70b: ; 3e70b (f:670b)
 	ld [W_LISTTYPE], a
 	call GetName
 	ld de, $cd6d
-	call Func_3826
+	call CopyStringToCF4B
 asm_3e72b: ; 3e72b (f:672b)
 	xor a
 	ld [$cced], a
@@ -61837,7 +62300,7 @@ Func_3ea9b: ; 3ea9b (f:6a9b)
 	ld a, $63
 	ld [$d11e], a
 	call GetMoveName
-	call Func_3826
+	call CopyStringToCF4B
 	xor a
 	ld [W_ENEMYMOVEEFFECT], a ; $cfcd
 	ld hl, $672b
@@ -61885,7 +62348,7 @@ asm_3eadc: ; 3eadc (f:6adc)
 	ld [W_LISTTYPE], a
 	call GetName
 	ld de, $cd6d
-	jp Func_3826
+	jp CopyStringToCF4B
 
 ; known jump sources: d893 (3:5893), 3c9aa (f:49aa), 3ef90 (f:6f90), 4fdc9 (13:7dc9), 58df0 (16:4df0), 58e18 (16:4e18)
 Func_3eb01: ; 3eb01 (f:6b01)
@@ -63016,7 +63479,7 @@ UnnamedText_3f2e4: ; 0x3f2e4
 FreezeBurnParalyzeEffect: ;0x3f30c
 	xor a
 	ld [$cc5b], a
-	call $7b79         ;test bit 4 of d063/d068 flags [target has substitute flag]
+	call CheckTargetSubstitute         ;test bit 4 of d063/d068 flags [target has substitute flag]
 	ret nz             ;return if they have a substitute, can't effect them
 	ld a, [$ff00+$f3]  ;whose turn?
 	and a
@@ -63053,24 +63516,24 @@ FreezeBurnParalyzeEffect: ;0x3f30c
 	jr z, .freeze
 	ld a, PAR
 	ld [W_ENEMYMONSTATUS], a
-	call $6d27  ;quarter speed of affected monster
+	call Func_3ed27  ;quarter speed of affected monster
 	ld a, $a9
-	call $7bb9  ;animation
-	jp $7b6e    ;print paralysis text
+	call Func_3fbb9  ;animation
+	jp Func_3fb6e    ;print paralysis text
 .burn
 	ld a, BRN
 	ld [W_ENEMYMONSTATUS], a
-	call $6d64
+	call Func_3ed64
 	ld a, $a9
-	call $7bb9  ;animation
+	call Func_3fbb9  ;animation
 	ld hl, UnnamedText_3f3d8
 	jp PrintText
 .freeze
-	call $79cf  ;resets bit 5 of the D063/D068 flags
+	call Func_3f9cf  ;resets bit 5 of the D063/D068 flags
 	ld a, FRZ
 	ld [W_ENEMYMONSTATUS], a
 	ld a, $a9
-	call $7bb9  ;animation
+	call Func_3fbb9  ;animation
 	ld hl, UnnamedText_3f3dd
 	jp PrintText
 opponentAttacker:  ;0x3f382
@@ -63104,12 +63567,12 @@ opponentAttacker:  ;0x3f382
 	jr z, .freeze
 	ld a, PAR
 	ld [W_PLAYERMONSTATUS], a
-	call $6d27
-	jp $7b6e
+	call Func_3ed27
+	jp Func_3fb6e
 .burn
 	ld a, BRN
 	ld [W_PLAYERMONSTATUS], a
-	call $6d64
+	call Func_3ed64
 	ld hl, UnnamedText_3f3d8
 	jp PrintText
 .freeze
@@ -64184,7 +64647,7 @@ SECTION "bank10",DATA,BANK[$10]
 DisplayPokedexMenu_: ; 4000
 	call GBPalWhiteOut
 	call ClearScreen
-	call $2429 ; move sprites
+	call UpdateSprites ; move sprites
 	ld a,[W_LISTSCROLLOFFSET]
 	push af
 	xor a
@@ -64326,8 +64789,8 @@ HandlePokedexSideMenu: ; 406D
 ; play pokemon cry
 .choseCry
 	ld a,[$d11e]
-	call $13d9 ; get cry data
-	call $23b1 ; play sound
+	call GetCryData ; get cry data
+	call PlaySound ; play sound
 	jr .handleMenuInput
 .choseArea
 	ld a,$4a
@@ -64587,7 +65050,7 @@ IsPokemonBitSet: ; 42C2
 ShowPokedexData: ; 42D1
 	call GBPalWhiteOutWithDelay3
 	call ClearScreen
-	call $2429
+	call UpdateSprites
 	ld hl,$7840
 	ld b,$05
 	call Bankswitch ; load pokedex tiles
@@ -64694,12 +65157,12 @@ ShowPokedexDataInternal: ; 42E2
 	push hl
 	call Delay3
 	call GBPalNormal
-	call $1537 ; load pokemon picture location
+	call GetMonHeader ; load pokemon picture location
 	FuncCoord 1,1
 	ld hl,Coord
-	call $1384 ; draw pokemon picture
+	call Func_1384 ; draw pokemon picture
 	ld a,[$cf91]
-	call $13d0 ; play pokemon cry
+	call PlayCry ; play pokemon cry
 	pop hl
 	pop de
 	pop bc
@@ -66498,7 +66961,7 @@ INCBIN "baserom.gbc",$41217,$4123b - $41217
 	call Func_41842
 	call Func_41186
 	ld a, $8d
-	call Func_23b1
+	call PlaySound
 	ld c, $14
 .asm_412c8
 	ld a, [$FF00+$ae]
@@ -66541,7 +67004,7 @@ INCBIN "baserom.gbc",$41217,$4123b - $41217
 	cp $a0
 	jr nc, .asm_41318
 	ld a, $8c
-	call Func_23b1
+	call PlaySound
 	jr .asm_412e7
 .asm_41318
 	call CleanLCD_OAM
@@ -67041,24 +67504,24 @@ Func_4169d: ; 4169d (10:569d)
 	call Func_4180e
 	ret c
 	ld a, $b9
-	call Func_23b1
+	call PlaySound
 	xor a
 	ld [$d09f], a
 	ld de, $5910
 	call Func_41793
 	ld a, $ba
-	call Func_23b1
+	call PlaySound
 	ld de, $591b
 	call Func_41793
 	ld c, $a
 	call CheckForUserInterruption
 	ret c
 	ld a, $b9
-	call Func_23b1
+	call PlaySound
 	ld de, $5910
 	call Func_41793
 	ld a, $ba
-	call Func_23b1
+	call PlaySound
 	ld de, $591b
 	call Func_41793
 	ld c, $1e
@@ -67067,7 +67530,7 @@ Func_4169d: ; 4169d (10:569d)
 	ld b, $4
 	call Func_4183f
 	ld a, $bb
-	call Func_23b1
+	call PlaySound
 	ld de, $401
 	call Func_4180e
 	ld c, $1e
@@ -67076,11 +67539,11 @@ Func_4169d: ; 4169d (10:569d)
 	ld b, $5
 	call Func_4183f
 	ld a, $bc
-	call Func_23b1
+	call PlaySound
 	ld de, $800
 	call Func_4180e
 	ld a, $b9
-	call Func_23b1
+	call PlaySound
 	ld a, $24
 	ld [$d09f], a
 	ld de, $5926
@@ -67096,13 +67559,13 @@ Func_4169d: ; 4169d (10:569d)
 	call CheckForUserInterruption
 	ret c
 	ld a, $b9
-	call Func_23b1
+	call PlaySound
 	xor a
 	ld [$d09f], a
 	ld de, $5931
 	call Func_41793
 	ld a, $ba
-	call Func_23b1
+	call PlaySound
 	ld de, $593c
 	call Func_41793
 	ld c, $14
@@ -67116,7 +67579,7 @@ Func_4169d: ; 4169d (10:569d)
 	call CheckForUserInterruption
 	ret c
 	ld a, $b8
-	call Func_23b1
+	call PlaySound
 	ld a, $48
 	ld [$d09f], a
 	ld de, $5950
@@ -67325,7 +67788,7 @@ Func_4188a: ; 4188a (10:588a)
 	ld [$c0f0], a
 	ld a, $dc
 	ld [$c0ee], a
-	call Func_23b1
+	call PlaySound
 	call Func_417f8
 	call CleanLCD_OAM
 	jp Delay3
@@ -67501,7 +67964,7 @@ LavenderTownText1: ; 0x44120
 	db $08 ; asm
 	ld hl, UnnamedText_4413c
 	call PrintText
-	call $35ec
+	call Func_35ec
 	ld a, [$cc26]
 	and a
 	ld hl, UnnamedText_44146
@@ -67588,7 +68051,7 @@ DisplayDexRating: ; 0x44169
 	ld b, $1F
 	ld hl, $513B
 	call Bankswitch
-	jp $3865 ; wait for button press
+	jp Func_3865 ; wait for button press
 .label3
 	ld de, $CC5B
 	ld a, [$FFDB]
@@ -67736,7 +68199,7 @@ ViridianPokecenter_h: ; 0x44251 to 0x4425d (12 bytes) (bank=11) (id=41)
 	dw ViridianPokecenterObject ; objects
 
 ViridianPokeCenterScript: ; 0x4425d
-	call $22fa
+	call Func_22fa
 	jp EnableAutoTextBoxDrawing
 ; 0x44263
 
@@ -67792,7 +68255,7 @@ Mansion1Script:
 	ld hl, Mansion1TrainerHeaders
 	ld de, $4326
 	ld a, [$d63a]
-	call $3160
+	call Func_3160
 	ld [$d63a], a
 	ret
 ; 0x442c5
@@ -67806,22 +68269,22 @@ Mansion1Subscript1: ; 0x442c5
 	bit 0, a
 	jr nz, .asm_442ec ; 0x442d2 $18
 	ld bc, $060c
-	call $430b
+	call Func_4430b
 	ld bc, $0308
-	call $4304
+	call Func_44304
 	ld bc, $080a
-	call $4304
+	call Func_44304
 	ld bc, $0d0d
-	jp $4304
+	jp Func_44304
 .asm_442ec
 	ld bc, $060c
-	call $4304
+	call Func_44304
 	ld bc, $0308
-	call $430b
+	call Func_4430b
 	ld bc, $080a
-	call $430b
+	call Func_4430b
 	ld bc, $0d0d
-	jp $430b
+	jp Func_4430b
 ; 0x44304
 
 ; known jump sources: 442dd (11:42dd), 442e3 (11:42e3), 442e9 (11:42e9), 442ef (11:42ef)
@@ -67882,7 +68345,7 @@ Mansion1Text4: ; 0x4435a
 	db $8
 	ld hl, UnnamedText_44395
 	call PrintText
-	call $35ec
+	call Func_35ec
 	ld a, [$cc26]
 	and a
 	jr nz, .asm_4438c ; 0x44368 $22
@@ -67893,7 +68356,7 @@ Mansion1Text4: ; 0x4435a
 	ld hl, UnnamedText_4439a
 	call PrintText
 	ld a, $ad
-	call $23b1
+	call PlaySound
 	ld hl, $d796
 	bit 0, [hl]
 	set 0, [hl]
@@ -67968,7 +68431,7 @@ RockTunnel1Script: ; 0x444dc
 	ld hl, Unnamed_44505 ; $4505
 	ld de, Unnamed_444ef ; $44ef
 	ld a, [$d621]
-	call $3160
+	call Func_3160
 	ld [$d621], a
 	ret
 ; 0x444ef
@@ -68016,7 +68479,7 @@ RockTunnel1Text7:
 	db $8
 	ld hl, $454d
 asm_0c916: ; 0x44582
-	call $31cc
+	call LoadTrainerHeader
 	jp TextScriptEnd
 
 UnnamedText_44588: ; 0x44588
@@ -68214,7 +68677,7 @@ SeafoamIslands1Script: ; 0x447e9
 	ld a, $9f
 	ld [$d71d], a
 	ld hl, Seafoam1HolesCoords
-	jp $6981
+	jp Func_46981
 ; 0x44846
 
 Seafoam1HolesCoords: ; 0x44846
@@ -68309,7 +68772,7 @@ VictoryRoad3Script: ; 0x44980
 	ld hl, VictoryRoad3TrainerHeaders
 	ld de, $49b1
 	ld a, [$d640]
-	call $3160
+	call Func_3160
 	ld [$d640], a
 	ret
 ; 0x44996
@@ -68352,11 +68815,11 @@ INCBIN "baserom.gbc",$449b1,$449b7 - $449b1
 	ld a, $7a
 	ld [$cc4d], a
 	ld a, $11
-	call Predef ; indirect jump to Func_f1d7 (f1d7 (3:71d7))
+	call Predef ; indirect jump to RemoveMissableObject (f1d7 (3:71d7))
 	ld a, $60
 	ld [$cc4d], a
 	ld a, $15
-	jp Predef ; indirect jump to Func_f1c8 (f1c8 (3:71c8))
+	jp Predef ; indirect jump to AddMissableObject (f1c8 (3:71c8))
 
 INCBIN "baserom.gbc",$449f9,$449fe - $449f9
 .asm_449fe
@@ -68554,7 +69017,7 @@ RocketHideout1Script: ; 0x44bca
 	ld hl, RocketHideout1TrainerHeaders
 	ld de, $4c0e
 	ld a, [$d631]
-	call $3160
+	call Func_3160
 	ld [$d631], a
 	ret
 ; 0x44be0
@@ -68775,7 +69238,7 @@ RocketHideout2Script: ; 0x44e27
 	ld hl, RocketHideout2TrainerHeaders
 	ld de, RocketHideout2_Unknown44e3a
 	ld a, [$d632]
-	call $3160
+	call Func_3160
 	ld [$d632], a
 	ret
 ; 0x44e3a
@@ -68997,7 +69460,7 @@ RocketHideout3Script: ; 0x45225
 	ld hl, RocketHideout3TrainerHeaders
 	ld de, RocketHideout3Script_Unknown45238
 	ld a, [$d633]
-	call $3160
+	call Func_3160
 	ld [$d633], a
 	ret
 ; 0x45238
@@ -69112,7 +69575,7 @@ RocketHideout4Script: ; 0x4545d
 	ld hl, RocketHideout4TrainerHeader0
 	ld de, $54ae
 	ld a, [$d634]
-	call $3160
+	call Func_3160
 	ld [$d634], a
 	ret
 ; 0x45473
@@ -69168,11 +69631,11 @@ RocketHideout4Text1: ; 0x4553a
 	set 7, [hl]
 	ld hl, UnnamedText_4557f
 	ld de, UnnamedText_4557f
-	call $3354
+	call Func_3354
 	ldh a, [$8c]
 	ld [$cf13], a
-	call $336a
-	call $32d7
+	call EngageMapTrainer
+	call Func_32d7
 	xor a
 	ldh [$b4], a
 	ld a, $3
@@ -69331,7 +69794,7 @@ RocketHideoutElevatorScript: ; 0x45710
 	pop hl
 	bit 7, [hl]
 	res 7, [hl]
-	call nz, $575f
+	call nz, Func_4575f
 	xor a
 	ld [$cf0c], a
 	inc a
@@ -69340,7 +69803,27 @@ RocketHideoutElevatorScript: ; 0x45710
 ; 0x4572c
 
 RocketHideoutElevatorScript_Unknown4572c: ; 0x4572c
-INCBIN "baserom.gbc",$4572c,$3f
+INCBIN "baserom.gbc",$4572c,$45741 - $4572c
+
+Func_45741: ; 0x45741
+	ld hl, $5754
+	call LoadItemList
+	ld hl, $5759
+	ld de, $cc5b
+	ld bc, $0006
+	call CopyData
+	ret
+; 0x45754
+
+INCBIN "baserom.gbc",$45754,$4575f - $45754
+
+Func_4575f: ; 0x4575f
+	call Delay3
+	ld b, BANK(Func_7bf15)
+	ld hl, Func_7bf15
+	call Bankswitch
+	ret
+; 0x4576b
 
 RocketHideoutElevatorTexts: ; 0x4576b
 	dw RocketHideoutElevatorText1
@@ -69348,9 +69831,9 @@ RocketHideoutElevatorTexts: ; 0x4576b
 RocketHideoutElevatorText1: ; 0x4576d
 	db $08 ; asm
 	ld b, LIFT_KEY
-	call $3493
+	call IsItemInBag
 	jr z, .asm_8d8f0 ; 0x45773
-	call $5741
+	call Func_45741
 	ld hl, $5759
 	ld a, $61
 	call Predef
@@ -69401,7 +69884,7 @@ SilphCoElevatorScript: ; 0x457c0
 	pop hl
 	bit 7, [hl]
 	res 7, [hl]
-	call nz, $5827
+	call nz, Func_45827
 	xor a
 	ld [$cf0c], a
 	inc a
@@ -69452,7 +69935,7 @@ SilphCoElevatorTexts: ; 0x45833
 
 SilphCoElevatorText1: ; 0x45835
 	db $08 ; asm
-	call $57f1
+	call Func_457f1
 	ld hl, $5811
 	ld a, $61
 	call Predef
@@ -69902,7 +70385,7 @@ UnknownDungeon3Script: ; 0x45ef0
 	ld hl, UnknownDungeon3TrainerHeaders
 	ld de, UnknownDungeon3Script_Unknown45f03
 	ld a, [$d650]
-	call $3160
+	call Func_3160
 	ld [$d650], a
 	ret
 ; 0x45f03
@@ -69936,8 +70419,8 @@ UnknownDungeon3MewtwoText: ; 0x45f26
 	TX_FAR _UnknownDungeon3MewtwoText ; 0x85c72
 	db $8
 	ld a, MEWTWO
-	call $13d0
-	call $3748
+	call PlayCry
+	call Func_3748
 	jp TextScriptEnd
 ; 0x45f36
 
@@ -69973,7 +70456,7 @@ RockTunnel2Script: ; 0x45feb
 	ld hl, RockTunnel2TrainerHeaders
 	ld de, RockTunnel2Script_Unknown45ffe
 	ld a, [$d620]
-	call $3160
+	call Func_3160
 	ld [$d620], a
 	ret
 ; 0x45ffe
@@ -70311,7 +70794,7 @@ SeafoamIslands2Script: ; 0x46315
 	ld a, $a0
 	ld [$d71d], a
 	ld hl, Seafoam2HolesCoords
-	jp $6981
+	jp Func_46981
 ; 0x4636d
 
 Seafoam2HolesCoords: ; 0x4636d
@@ -70398,7 +70881,7 @@ SeafoamIslands3Script: ; 0x46451
 	ld a, $a1
 	ld [$d71d], a
 	ld hl, Seafoam3HolesCoords
-	jp $6981
+	jp Func_46981
 ; 0x464a9
 
 Seafoam3HolesCoords: ; 0x464a9
@@ -70486,14 +70969,14 @@ SeafoamIslands4Script: ; 0x4658d
 	ld a, $a2
 	ld [$d71d], a
 	ld hl, Seafoam4HolesCoords
-	call $6981
+	call Func_46981
 	ld a, [$d732]
 	bit 4, a
 	ret nz
 .asm_465ed
 	ld hl, SeafoamIslands4Scripts
 	ld a, [$d666]
-	jp $3d97
+	jp CallFunctionInTable
 ; 0x465f6
 
 Seafoam4HolesCoords: ; 0x465f6
@@ -70517,10 +71000,10 @@ SeafoamIslands4Script0: ; 0x46603
 	ret nz
 	ld hl, $ccd3
 	ld de, RLEMovement46632
-	call $350c
+	call DecodeRLEList
 	dec a
 	ld [$cd38], a
-	call $3486
+	call Func_3486
 	ld hl, $d733
 	set 2, [hl]
 	ld a, $1
@@ -70604,7 +71087,7 @@ SeafoamIslands5Script: ; 0x46799
 	call EnableAutoTextBoxDrawing
 	ld a, [$d668]
 	ld hl, SeafoamIslands5Scripts
-	jp $3d97
+	jp CallFunctionInTable
 ; 0x467a5
 
 INCBIN "baserom.gbc",$467a5,$467ad - $467a5
@@ -70635,7 +71118,7 @@ SeafoamIslands5Script0: ; 0x467c7
 	ld [$cd38], a
 	ld a, $40
 	ld [$ccd3], a
-	call $3486
+	call Func_3486
 	ld hl, $d733
 	res 2, [hl]
 	ld a, $1
@@ -70686,8 +71169,8 @@ SeafoamIslands5BattleText2: ; 0x468a2
 	TX_FAR _SeafoamIslands5BattleText2 ; 0x88075
 	db $8
 	ld a, ARTICUNO
-	call $13d0
-	call $3748
+	call PlayCry
+	call Func_3748
 	jp TextScriptEnd
 ; 0x468b2
 
@@ -71829,14 +72312,14 @@ MomHealPokemon: ; 0x4818a
 	PREDEF HealPartyPredef
 	ld a, $E8
 	ld [$C0EE], a
-	call $23B1 ; play sound?
+	call PlaySound ; play sound?
 .next
 	ld a, [$C026]
 	cp $E8
 	jr z, .next
 	ld a, [$D35B]
 	ld [$C0EE], a
-	call $23B1
+	call PlaySound
 	call GBFadeIn2
 	ld hl, MomHealText2
 	jp PrintText
@@ -72165,7 +72648,7 @@ Func_4840c: ; 4840c (12:440c)
 	ld c, $c
 	ld hl, $c3a0
 	call TextBoxBorder
-	call Func_2429
+	call UpdateSprites
 	call Func_48532
 	ld hl, $d730
 	res 6, [hl]
@@ -72179,17 +72662,17 @@ Func_4840c: ; 4840c (12:440c)
 	add hl, de
 	ld a, [hl]
 	ld [$FF00+$db], a
-	cp $3c
+	cp FRESH_WATER
 	jr z, .asm_484b6
-	cp $3d
+	cp SODA_POP
 	jr z, .asm_48492
 	ld a, [$d778]
 	bit 6, a
 	jr nz, .asm_484e0
 	ld hl, $4515
 	call PrintText
-	call Func_484e6
-	ld bc, $f901
+	call RemoveItemByIDBank12
+	ld bc, $f901 ; 1x TM_49
 	call GiveItem
 	jr nc, .asm_484da
 	ld hl, $451b
@@ -72203,8 +72686,8 @@ Func_4840c: ; 4840c (12:440c)
 	jr nz, .asm_484e0
 	ld hl, $4504
 	call PrintText
-	call Func_484e6
-	ld bc, $f801
+	call RemoveItemByIDBank12
+	ld bc, $f801 ; 1x TM_48
 	call GiveItem
 	jr nc, .asm_484da
 	ld hl, $450a
@@ -72218,8 +72701,8 @@ Func_4840c: ; 4840c (12:440c)
 	jr nz, .asm_484e0
 	ld hl, $44f3
 	call PrintText
-	call Func_484e6
-	ld bc, $d501
+	call RemoveItemByIDBank12
+	ld bc, $d501 ; 1x TM_13
 	call GiveItem
 	jr nc, .asm_484da
 	ld hl, $44f9
@@ -72235,11 +72718,12 @@ Func_4840c: ; 4840c (12:440c)
 	jp PrintText
 
 ; known jump sources: 4847b (12:447b), 4849f (12:449f), 484c3 (12:44c3)
-Func_484e6: ; 484e6 (12:44e6)
-	ld b, BANK(Func_17f37)
-	ld hl, Func_17f37
-	jp Bankswitch ; indirect jump to Func_17f37 (17f37 (5:7f37))
+RemoveItemByIDBank12: ; 484e6 (12:44e6)
+	ld b, BANK(RemoveItemByID)
+	ld hl, RemoveItemByID
+	jp Bankswitch ; indirect jump to RemoveItemByID (17f37 (5:7f37))
 ; 484ee (12:44ee)
+
 UnnamedText_484ee: ; 0x484ee
 	TX_FAR _UnnamedText_484ee
 	db $50
@@ -72279,7 +72763,7 @@ CeladonMartRoofText1: ; 0x48567
 
 CeladonMartRoofText2: ; 0x4856c
 	db $08 ; asm
-	call $43d8
+	call Func_483d8
 	ld a, [$cd37]
 	and a
 	jr z, .asm_914b9 ; 0x48574
@@ -72287,11 +72771,11 @@ CeladonMartRoofText2: ; 0x4856c
 	ld [$cc3c], a
 	ld hl, CeladonMartRoofText4
 	call PrintText
-	call $35ec
+	call Func_35ec
 	ld a, [$cc26]
 	and a
 	jr nz, .asm_05aa4 ; 0x48588
-	call $440c
+	call Func_4840c
 	jr .asm_05aa4 ; 0x4858d
 .asm_914b9 ; 0x4858f
 	ld hl, CeladonMartRoofText3
@@ -72356,7 +72840,7 @@ CeladonMartElevatorScript: ; 0x48600
 	pop hl
 	bit 7, [hl]
 	res 7, [hl]
-	call nz, $4654
+	call nz, Func_48654
 	xor a
 	ld [$cf0c], a
 	inc a
@@ -72365,14 +72849,31 @@ CeladonMartElevatorScript: ; 0x48600
 ; 0x4861c
 
 CeladonMartElevatorScript_Unknown4861c: ; 0x4861c
-INCBIN "baserom.gbc",$4861c,$40
+INCBIN "baserom.gbc",$4861c,$48631 - $4861c
+
+Func_48631: ; 0x48631
+	ld hl, $4643
+	call LoadItemList
+	ld hl, $464a
+	ld de, $cc5b
+	ld bc, $000a
+	jp CopyData
+; 0x48643
+
+INCBIN "baserom.gbc",$48643,$48654 - $48643
+
+Func_48654: ; 0x48654
+	ld b, BANK(Func_7bf15)
+	ld hl, Func_7bf15
+	jp Bankswitch
+; 0x4865c
 
 CeladonMartElevatorTexts: ; 0x4865c
 	dw CeladonMartElevatorText1
 
 CeladonMartElevatorText1: ; 0x4865e
 	db $08 ; asm
-	call $4631
+	call Func_48631
 	ld hl, $464a
 	ld a, $61
 	call Predef
@@ -72411,9 +72912,10 @@ CeladonMansion1Script: ; 0x48694
 
 CeladonMansion1Texts: ; 0x48697
 	dw CeladonMansion1Text1, CeladonMansion1Text2, CeladonMansion1Text3, CeladonMansion1Text4, CeladonMansion1Text5
-
 ;0x486a1
-	call $13d0
+
+Func_486a1: ; 0x486a1
+	call PlayCry
 	jp TextScriptEnd
 ; 0x486a7
 
@@ -72421,7 +72923,7 @@ CeladonMansion1Text1: ; 0x486a7
 	TX_FAR _CeladonMansion1Text1
 	db $08 ; asm
 	ld a, $4d
-	jp $46a1
+	jp Func_486a1
 
 CeladonMansion1Text2: ; 0x486b1
 	TX_FAR _CeladonMansion1Text2
@@ -72431,14 +72933,14 @@ CeladonMansion1Text3: ; 0x486b6
 	TX_FAR _CeladonMansion1Text3
 	db $8
 	ld a, $4
-	jp $46a1
+	jp Func_486a1
 ; 0x486c0
 
 CeladonMansion1Text4: ; 0x486c0
 	TX_FAR _CeladonMansion1Text4
 	db $8
 	ld a, $f
-	jp $46a1
+	jp Func_486a1
 ; 0x486ca
 
 CeladonMansion1Text5: ; 0x486ca
@@ -72548,7 +73050,7 @@ CeladonMansion3Text4: ; 0x487b2
 	db $08 ; asm
 	ld hl, $d2f7
 	ld b, $13
-	call $2b7f
+	call CountSetBits
 	ld a, [$d11e]
 	cp $96
 	jr nc, .asm_f03d0 ; 0x487c0
@@ -72672,7 +73174,7 @@ CeladonPokecenter_h: ; 0x488ac to 0x488b8 (12 bytes) (bank=12) (id=133)
 	dw CeladonPokecenterObject ; objects
 
 CeladonPokecenterScript: ; 0x488b8
-	call $22fa
+	call Func_22fa
 	jp EnableAutoTextBoxDrawing
 ; 0x488be
 
@@ -72729,7 +73231,7 @@ CeladonGymScript: ; 0x4890a
 	ld hl, CeladonGymTrainerHeaders
 	ld de, $494e
 	ld a, [$d5ff]
-	call $3160
+	call Func_3160
 	ld [$d5ff], a
 	ret
 ; 0x48927
@@ -72871,7 +73373,7 @@ CeladonGymText1: ; 0x48a11
 	jr z, .asm_16064 ; 0x48a17
 	bit 0, a
 	jr nz, .asm_3b22c ; 0x48a1b
-	call z, $4963
+	call z, Func_48963
 	call DisableWaitingAfterTextDisplay
 	jr .asm_96252 ; 0x48a23
 .asm_3b22c ; 0x48a25
@@ -72886,11 +73388,11 @@ CeladonGymText1: ; 0x48a11
 	set 7, [hl]
 	ld hl, UnnamedText_48a63
 	ld de, UnnamedText_48a63
-	call $3354
+	call Func_3354
 	ldh a, [$8c]
 	ld [$cf13], a
-	call $336a
-	call $32d7
+	call EngageMapTrainer
+	call Func_32d7
 	ld a, $4
 	ld [$d05c], a
 	ld a, $3
@@ -73115,15 +73617,32 @@ CeladonGameCorner_h: ; 0x48bb1 to 0x48bbd (12 bytes) (bank=12) (id=135)
 
 CeladonGameCornerScript: ; 0x48bbd
 	call Unknown_48bcf
-	call $4bec
+	call Func_48bec
 	call EnableAutoTextBoxDrawing
 	ld hl, CeladonGameCornerScripts
 	ld a, [$d65f]
-	jp $3d97
+	jp CallFunctionInTable
 ; 0x48bcf
 
 Unknown_48bcf: ; 0x48bcf
-INCBIN "baserom.gbc",$48bcf,$48c12 - $48bcf
+INCBIN "baserom.gbc",$48bcf,$48bec - $48bcf
+
+Func_48bec: ; 0x48bec
+	ld hl, $d126
+	bit 5, [hl]
+	res 5, [hl]
+	ret z
+	ld a, [$d77e]
+	bit 1, a
+	ret nz
+	ld a, $2a
+	ld [$d09f], a
+	ld bc, $0208
+	ld a, $17
+	jp Predef
+; 0x48c07
+
+INCBIN "baserom.gbc",$48c07,$48c12 - $48c07
 
 CeladonGameCornerScripts: ; 0x48c12
 	dw CeladonGameCornerScript0, CeladonGameCornerScript1, CeladonGameCornerScript2
@@ -73150,24 +73669,24 @@ CeladonGameCornerText1: ; 0x48ca4
 
 CeladonGameCornerText2: ; 0x48ca9
 	db $08 ; asm
-	call $4f1e
+	call Func_48f1e
 	ld hl, UnnamedText_48d22
 	call PrintText
-	call $35ec
+	call Func_35ec
 	ld a, [$cc26]
 	and a
 	jr nz, .asm_c650b ; 0x48cba
 	ld b,COIN_CASE
-	call $3493
+	call IsItemInBag
 	jr z, .asm_ed086 ; 0x48cc1
-	call $4f95
+	call Has9990Coins
 	jr nc, .asm_31338 ; 0x48cc6
 	xor a
 	ldh [$9f], a
 	ldh [$a1], a
 	ld a, $10
 	ldh [$a0], a
-	call $35a6
+	call HasEnoughMoney
 	jr nc, .asm_b6ef0 ; 0x48cd4
 	ld hl, $4d31
 	jr .asm_e2afd ; 0x48cd9
@@ -73192,7 +73711,7 @@ CeladonGameCornerText2: ; 0x48ca9
 	ld c, $2
 	ld a, $b
 	call Predef
-	call $4f1e
+	call Func_48f1e
 	ld hl, UnnamedText_48d27
 	jr .asm_e2afd ; 0x48d0d
 .asm_c650b ; 0x48d0f
@@ -73253,9 +73772,9 @@ CeladonGameCornerText5: ; 0x48d4a
 	ld hl, UnnamedText_48d9c
 	call PrintText
 	ld b, COIN_CASE
-	call $3493
+	call IsItemInBag
 	jr z, .asm_5aef9 ; 0x48d5d
-	call $4f95
+	call Has9990Coins
 	jr nc, .asm_98546 ; 0x48d62
 	xor a
 	ldh [$9f], a
@@ -73341,9 +73860,9 @@ CeladonGameCornerText9: ; 0x48dd9
 	ld hl, UnnamedText_48e26
 	call PrintText
 	ld b, COIN_CASE
-	call $3493
+	call IsItemInBag
 	jr z, .asm_df794 ; 0x48dec
-	call $4f95
+	call Has9990Coins
 	jr nc, .asm_f17c3 ; 0x48df1
 	xor a
 	ldh [$9f], a
@@ -73399,9 +73918,9 @@ CeladonGameCornerText10: ; 0x48e3b
 	ld hl, $4e88
 	call PrintText
 	ld b,COIN_CASE
-	call $3493
+	call IsItemInBag
 	jr z, .asm_4fb0c ; 0x48e4e
-	call $4f95
+	call Has9990Coins
 	jr z, .asm_9505a ; 0x48e53
 	xor a
 	ldh [$9f], a
@@ -73458,11 +73977,11 @@ CeladonGameCornerText11: ; 0x48e9d
 	set 7, [hl]
 	ld hl, UnnamedText_48ed3
 	ld de, UnnamedText_48ed3
-	call $3354
+	call Func_3354
 	ldh a, [$8c]
 	ld [$cf13], a
-	call $336a
-	call $32d7
+	call EngageMapTrainer
+	call Func_32d7
 	xor a
 	ldh [$b4], a
 	ldh [$b3], a
@@ -73492,10 +74011,10 @@ CeladonGameCornerText12: ; 0x48edd
 	ld [$cc3c], a
 	ld hl, UnnamedText_48f09
 	call PrintText
-	call $3748
+	call Func_3748
 	ld a, $ad
-	call $23b1
-	call $3748
+	call PlaySound
+	call Func_3748
 	ld hl, $d77e
 	set 1, [hl]
 	ld a, $43
@@ -73509,8 +74028,8 @@ UnnamedText_48f09: ; 0x48f09
 	TX_FAR _UnnamedText_48f09 ; 0x9ddb0
 	db $8
 	ld a, $9d
-	call $23b1
-	call $3748
+	call PlaySound
+	call Func_3748
 	jp TextScriptEnd
 ; 0x48f19
 
@@ -73519,7 +74038,52 @@ UnnamedText_48f19: ; 0x48f19
 	db $50
 ; 0x48f19 + 5 bytes
 
-INCBIN "baserom.gbc",$48f1e,$82
+Func_48f1e: ; 0x48f1e
+	ld hl, $d730
+	set 6, [hl]
+	ld hl, $c3ab
+	ld b, $5
+	ld c, $7
+	call TextBoxBorder
+	call UpdateSprites
+	ld hl, $c3c0
+	ld b, $4
+	ld c, $7
+	call ClearScreenArea
+	ld hl, $c3d4
+	ld de, $4f7a
+	call PlaceString
+	ld hl, $c3e8
+	ld de, $4f85
+	call PlaceString
+	ld hl, $c3e8
+	ld de, $d347
+	ld c, $a3
+	call PrintBCDNumber
+	ld hl, $c3fc
+	ld de, $4f80
+	call PlaceString
+	ld hl, $c410
+	ld de, $4f8d
+	call PlaceString
+	ld hl, $c413
+	ld de, $d5a4
+	ld c, $82
+	call PrintBCDNumber
+	ld hl, $d730
+	res 6, [hl]
+	ret
+; 0x48f7a
+
+INCBIN "baserom.gbc",$48f7a,$48f95 - $48f7a
+
+Has9990Coins: ; 0x48f95
+	ld a, $99
+	ld [$ff00+$a0], a
+	ld a, $90
+	ld [$ff00+$a1], a
+	jp HasEnoughCoins
+; 0x48fa0
 
 CeladonGameCornerObject: ; 0x48fa0 (size=99)
 	db $f ; border tile
@@ -73860,7 +74424,7 @@ MtMoonPokecenter_h: ; 0x492c3 to 0x492cf (12 bytes) (bank=12) (id=68)
 	dw MtMoonPokecenterObject ; objects
 
 MtMoonPokecenterScript: ; 0x492cf
-	call $22fa
+	call Func_22fa
 	jp EnableAutoTextBoxDrawing
 ; 0x492d5
 
@@ -73887,8 +74451,8 @@ MtMoonPokecenterText4: ; 0x492ec
 	call PrintText
 	ld a, $13
 	ld [$d125], a
-	call $30e8
-	call $35ec
+	call DisplayTextBoxID
+	call Func_35ec
 	ld a, [$cc26]
 	and a
 	jp nz, .asm_4934e
@@ -73896,7 +74460,7 @@ MtMoonPokecenterText4: ; 0x492ec
 	ldh [$a1], a
 	ld a, $5
 	ldh [$a0], a
-	call $35a6
+	call HasEnoughMoney
 	jr nc, .asm_faa09 ; 0x49317
 	ld hl, UnnamedText_49366
 	jr .asm_49356 ; 0x4931c
@@ -73916,7 +74480,7 @@ MtMoonPokecenterText4: ; 0x492ec
 	call Predef
 	ld a, $13
 	ld [$d125], a
-	call $30e8
+	call DisplayTextBoxID
 	ld hl, $d7c6
 	set 7, [hl]
 	jr .asm_49359 ; 0x4934c
@@ -73987,7 +74551,7 @@ RockTunnelPokecenter_h: ; 0x493ae to 0x493ba (12 bytes) (id=81)
 	dw RockTunnelPokecenterObject ; objects
 
 RockTunnelPokecenterScript: ; 0x493ba
-	call $22fa
+	call Func_22fa
 	jp EnableAutoTextBoxDrawing
 ; 0x493c0
 
@@ -74102,7 +74666,7 @@ Route11GateUpstairsText2: ; 0x4946c
 	ld a, $47
 	ld [$ff00+$dc], a
 	ld [$d11e], a
-	call $2fcf
+	call GetItemName
 	ld h, d
 	ld l, e
 	ld de, $cc5b
@@ -74416,7 +74980,7 @@ Route15GateUpstairsText1: ; 0x49651
 	ld hl, UnnamedText_4968c
 	call PrintText
 .asm_49689
-	jp $24d7
+	jp TextScriptEnd
 ; 0x4968c
 
 UnnamedText_4968c: ; 0x4968c
@@ -74464,7 +75028,7 @@ Route16GateMapScript: ; 0x496be
 	call EnableAutoTextBoxDrawing
 	ld a, [$d660]
 	ld hl, Route16GateMapScripts
-	jp $3d97
+	jp CallFunctionInTable
 ; 0x496cf
 
 Route16GateMapScripts: ; 0x496cf
@@ -74473,7 +75037,7 @@ Route16GateMapScripts: ; 0x496cf
 INCBIN "baserom.gbc",$496d1,$6
 
 Route16GateMapScript0: ; 0x496d7
-	call $5755
+	call Func_49755
 	ret nz
 	ld hl, $5714
 	call ArePlayerCoordsInArray
@@ -74493,8 +75057,8 @@ Route16GateMapScript0: ; 0x496d7
 	ld c, a
 	ld a, $40
 	ld hl, $ccd3
-	call $36e0
-	call $3486
+	call FillMemory
+	call Func_3486
 	ld a, $1
 	ld [$d660], a
 	ret
@@ -74516,7 +75080,7 @@ Route16GateMapTexts: ; 0x4975a
 
 Route16GateMapText1: ; 0x49760
 	db $08 ; asm
-	call $5755
+	call Func_49755
 	jr z, .asm_0bdf3 ; 0x49764
 	ld hl, UnnamedText_4977c
 	call PrintText
@@ -74620,7 +75184,7 @@ UnnamedText_4982f: ; 0x4982f
 Route16GateUpstairsText3: ; 0x49834
 	db $8
 	ld hl, UnnamedText_4983b
-	jp $55c9
+	jp Unnamed_55c9
 ; 0x4983b
 
 UnnamedText_4983b: ; 0x4983b
@@ -74631,7 +75195,7 @@ UnnamedText_4983b: ; 0x4983b
 Route16GateUpstairsText4: ; 0x49840
 	db $8
 	ld hl, $5847
-	jp $55c9
+	jp Unnamed_55c9
 ; 0x49847
 
 UnnamedText_49847: ; 0x49847
@@ -74670,7 +75234,7 @@ Route18GateScript: ; 0x49876
 	call EnableAutoTextBoxDrawing
 	ld a, [$d669]
 	ld hl, Route18GateScripts
-	jp $3d97
+	jp CallFunctionInTable
 ; 0x49887
 
 Route18GateScripts: ; 0x49887
@@ -74679,7 +75243,7 @@ Route18GateScripts: ; 0x49887
 INCBIN "baserom.gbc",$49889,$6
 
 Route18GateScript0: ; 0x4988f
-	call $5755
+	call Func_49755
 	ret nz
 	ld hl, $58cc
 	call ArePlayerCoordsInArray
@@ -74699,8 +75263,8 @@ Route18GateScript0: ; 0x4988f
 	ld c, a
 	ld a, $40
 	ld hl, $ccd3
-	call $36e0
-	call $3486
+	call FillMemory
+	call Func_3486
 	ld a, $1
 	ld [$d669], a
 	ret
@@ -74717,7 +75281,7 @@ Route18GateTexts: ; 0x4990d
 
 Route18GateText1: ; 0x49911
 	db $08 ; asm
-	call $5755
+	call Func_49755
 	jr z, .asm_3c84d ; 0x49915
 	ld hl, UnnamedText_4992d
 	call PrintText
@@ -74791,7 +75355,7 @@ Route18GateHeaderText1: ; 0x4997e
 Route18GateHeaderText2: ; 0x4998c
 	db $8
 	ld hl, $5993
-	jp $55c9
+	jp Unnamed_55c9
 ; 0x49993
 
 UnnamedText_49993: ; 0x49993
@@ -74802,7 +75366,7 @@ UnnamedText_49993: ; 0x49993
 Route18GateHeaderText3: ; 0x49998
 	db $8
 	ld hl, $599f
-	jp $55c9
+	jp Unnamed_55c9
 ; 0x4999f
 
 UnnamedText_4999f: ; 0x4999f
@@ -74839,7 +75403,7 @@ MtMoon1Script: ; 0x499c8
 	ld hl, MtMoon1TrainerHeader0
 	ld de, Unknown_59db
 	ld a, [$d606]
-	call $3160
+	call Func_3160
 	ld [$d606], a
 	ret
 ; 0x499db
@@ -75125,7 +75689,7 @@ MtMoon3Script: ; 0x49d0b
 	ld hl, $5e48
 	ld de, $5d63
 	ld a, [$d607]
-	call $3160
+	call Func_3160
 	ld [$d607], a
 	ld a, [$d7f6]
 	bit 1, a
@@ -75177,7 +75741,7 @@ Func_49d91: ; 49d91 (12:5d91)
 	ld a, [W_ISINBATTLE] ; $d057
 	cp $ff
 	jp z, Func_49d58
-	call Func_2429
+	call UpdateSprites
 	call Delay3
 	ld hl, $d7f6
 	set 1, [hl]
@@ -75189,7 +75753,7 @@ Func_49d91: ; 49d91 (12:5d91)
 	ret
 	ld a, $1
 	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
-	call Function3541
+	call SetSpriteMovementBytesToFF
 	ld hl, $5dea
 	call ArePlayerCoordsInArray
 	jr c, .asm_49dd7
@@ -75230,7 +75794,7 @@ INCBIN "baserom.gbc",$49dea,$49dfb - $49dea
 .asm_49e1f
 	ld [$cc4d], a
 	ld a, $11
-	call Predef ; indirect jump to Func_f1d7 (f1d7 (3:71d7))
+	call Predef ; indirect jump to RemoveMissableObject (f1d7 (3:71d7))
 	xor a
 	ld [$cd6b], a
 	ld a, $0
@@ -75302,11 +75866,11 @@ MtMoon3Text1: ; 0x49e79
 	set 7, [hl]
 	ld hl, UnnamedText_49f8a
 	ld de, UnnamedText_49f8a
-	call $3354
+	call Func_3354
 	ldh a, [$8c]
 	ld [$cf13], a
-	call $336a
-	call $32d7
+	call EngageMapTrainer
+	call Func_32d7
 	ld a, $3
 	ld [$d607], a
 	ld [$da39], a
@@ -75347,14 +75911,14 @@ MtMoon3Text6: ; 0x49ee9
 	ld [$cc3c], a
 	ld hl, UnnamedText_49f24
 	call PrintText
-	call $35ec
+	call Func_35ec
 	ld a, [$cc26]
 	and a
 	jr nz, .asm_1fa5e ; 0x49efc
 	ld bc,(DOME_FOSSIL << 8) | 1
 	call GiveItem
-	jp nc, $5f76
-	call $5f69
+	jp nc, Unnamed_49f76
+	call Unnamed_49f69
 	ld a, $6d
 	ld [$cc4d], a
 	ld a, $11
@@ -75378,7 +75942,7 @@ MtMoon3Text7: ; 0x49f29
 	ld [$cc3c], a
 	ld hl, UnnamedText_49f64
 	call PrintText
-	call $35ec
+	call Func_35ec
 	ld a, [$cc26]
 	and a
 	jr nz, .asm_8e988 ; 0x49f3c
@@ -75799,7 +76363,7 @@ BattleCenterMScript: ; 0x4fd10
 	ld [$ff00+$8d], a
 	ld a, $1
 	ld [$ff00+$8c], a
-	call $34ae
+	call Func_34ae
 	ld hl, $d72d
 	bit 0, [hl]
 	set 0, [hl]
@@ -75850,7 +76414,7 @@ TradeCenterM_h: ; 0x4fd71 to 0x4fd7d (12 bytes) (id=240)
 	dw TradeCenterMObject ; objects
 
 TradeCenterMScript: ; 0x4fd7d
-	jp $7d10
+	jp BattleCenterMScript
 ; 0x4fd80
 
 TradeCenterMTexts: ; 0x4fd80
@@ -76038,7 +76602,8 @@ MoveAnimationPredef:
 	dbw $03,$7836
 	dbw BANK(Func_f71e),Func_f71e
 	dbw BANK(Func_f71e),Func_f71e
-	dbw $03,$7850
+	db BANK(InitializePlayerData)
+    dw InitializePlayerData
 	dbw $03,$7666
 	dbw $03,$71D7
 	dbw $03,$71A6
@@ -76047,7 +76612,8 @@ MoveAnimationPredef:
 	dbw $03,$71C8
 	dbw $03,$71C8
 	dbw $03,$6E9E
-	dbw $03,$7850
+	db BANK(InitializePlayerData)
+    dw InitializePlayerData
 	dbw $03,$4754
 	dbw $0E,$6F5B
 	dbw $01,$6E43
@@ -76619,12 +77185,12 @@ Route20Script: ; 0x50ca9
 	ld hl, $d7e7
 	bit 0, [hl]
 	res 0, [hl]
-	call nz, $4cc6
+	call nz, Func_50cc6
 	call EnableAutoTextBoxDrawing
 	ld hl, $4d3a
 	ld de, $4d1c
 	ld a, [$d628]
-	call $3160
+	call Func_3160
 	ld [$d628], a
 	ret
 ; 0x50cc6
@@ -76669,13 +77235,13 @@ INCBIN "baserom.gbc",$50ce8,$50cef - $50ce8
 Func_50d0c: ; 50d0c (14:4d0c)
 	ld [$cc4d], a
 	ld a, $15
-	jp Predef ; indirect jump to Func_f1c8 (f1c8 (3:71c8))
+	jp Predef ; indirect jump to AddMissableObject (f1c8 (3:71c8))
 
 ; known jump sources: 50ce2 (14:4ce2), 50d03 (14:4d03), 50d08 (14:4d08)
 Func_50d14: ; 50d14 (14:4d14)
 	ld [$cc4d], a
 	ld a, $11
-	jp Predef ; indirect jump to Func_f1d7 (f1d7 (3:71d7))
+	jp Predef ; indirect jump to RemoveMissableObject (f1d7 (3:71d7))
 
 INCBIN "baserom.gbc",$50d1c,$50d22 - $50d1c
 
@@ -77004,7 +77570,7 @@ Route22Script: ; 0x50eb2
 	call EnableAutoTextBoxDrawing
 	ld hl, Route22Scripts
 	ld a, [$d60a]
-	jp $3d97
+	jp CallFunctionInTable
 ; 0x50ebe
 
 Route22Scripts: ; 0x50ebe
@@ -77068,7 +77634,7 @@ Route22Script0: ; 0x50f00
 	bit 0, a
 	jr nz, .asm_50f32 ; 0x50f25 $b
 	bit 1, a
-	jp nz, $504e
+	jp nz, Func_5104e
 	ret
 	inc b
 	dec e
@@ -77087,14 +77653,14 @@ Route22Script0: ; 0x50f00
 	jr z, .asm_50f4e ; 0x50f44 $8
 	ld a, $ff
 	ld [$c0ee], a
-	call $23b1
+	call PlaySound
 .asm_50f4e
 	ld c, $2
 	ld a, $de
-	call $23a1
+	call PlayMusic
 	ld a, $1
 	ld [$ff00+$8c], a
-	call $4ee6
+	call Func_50ee6
 	ld a, $1
 	ld [$d60a], a
 	ret
@@ -77117,7 +77683,7 @@ Route22Script1: ; 0x50f62
 	ld [$ff00+$8d], a
 	ld a, $1
 	ld [$ff00+$8c], a
-	call $34a6
+	call Func_34a6
 	xor a
 	ld [$cd6b], a
 	ld a, $1
@@ -77128,11 +77694,11 @@ Route22Script1: ; 0x50f62
 	set 7, [hl]
 	ld hl, UnnamedText_511b7
 	ld de, UnnamedText_511bc
-	call $3354
+	call Func_3354
 	ld a, $e1
 	ld [$d059], a
 	ld hl, $4faf
-	call $4ed6
+	call Func_50ed6
 	ld a, $2
 	ld [$d60a], a
 	ret
@@ -77143,7 +77709,7 @@ INCBIN "baserom.gbc",$50faf,$50fb5 - $50faf
 Route22Script2: ; 0x50fb5
 	ld a, [$d057]
 	cp $ff
-	jp z, $4ece
+	jp z, Func_50ece
 	ld a, [$c109]
 	and a
 	jr nz, .asm_50fc7 ; 0x50fc1 $4
@@ -77155,7 +77721,7 @@ Route22Script2: ; 0x50fb5
 	ld [$ff00+$8d], a
 	ld a, $1
 	ld [$ff00+$8c], a
-	call $34a6
+	call Func_34a6
 	ld a, $f0
 	ld [$cd6b], a
 	ld hl, $d7eb
@@ -77165,24 +77731,36 @@ Route22Script2: ; 0x50fb5
 	call DisplayTextID
 	ld a, $ff
 	ld [$c0ee], a
-	call $23b1
+	call PlaySound
 	ld b, $2
 	ld hl, $5b47
 	call Bankswitch
 	ld a, [$cf0d]
 	cp $1
 	jr nz, .asm_50fff ; 0x50ff8 $5
-	call $5008
+	call Func_51008
 	jr .asm_51002 ; 0x50ffd $3
 .asm_50fff
-	call $500d
+	call Func_5100d
 .asm_51002
 	ld a, $3
 	ld [$d60a], a
 	ret
 ; 0x51008
 
-INCBIN "baserom.gbc",$51008,$5102a - $51008
+Func_51008: ; 0x51008
+	ld de, $5017
+	jr asm_51010
+
+Func_5100d: ; 0x5100d
+	ld de, $501f
+asm_51010
+	ld a, $1
+	ld [H_SPRITEHEIGHT], a
+	jp MoveSprite
+; 0x51017
+
+INCBIN "baserom.gbc",$51017,$5102a - $51017
 
 Route22Script3: ; 0x5102a
 	ld a, [$d730]
@@ -77194,7 +77772,7 @@ Route22Script3: ; 0x5102a
 	ld [$cc4d], a
 	ld a, $11
 	call Predef
-	call $2307
+	call Func_2307
 	ld hl, $d7eb
 	res 0, [hl]
 	res 7, [hl]
@@ -77213,14 +77791,14 @@ Func_5104e: ; 5104e (14:504e)
 	call Predef ; indirect jump to Func_17c47 (17c47 (5:7c47))
 	ld a, [$d700]
 	and a
-	jr z, .asm_5106a
+	jr z, .skipYVisibilityTesta
 	ld a, $ff
 	ld [$c0ee], a
-	call Func_23b1
-.asm_5106a
+	call PlaySound
+.skipYVisibilityTesta
 	ld a, $ff
 	ld [$c0ee], a
-	call Func_23b1
+	call PlaySound
 	ld b, BANK(Func_9b65)
 	ld hl, Func_9b65
 	call Bankswitch ; indirect jump to Func_9b65 (9b65 (2:5b65))
@@ -77297,7 +77875,7 @@ INCBIN "baserom.gbc",$510d9,$510df - $510d9
 	call DisplayTextID
 	ld a, $ff
 	ld [$c0ee], a
-	call Func_23b1
+	call PlaySound
 	ld b, BANK(Func_9b75)
 	ld hl, Func_9b75
 	call Bankswitch ; indirect jump to Func_9b75 (9b75 (2:5b75))
@@ -77335,7 +77913,7 @@ INCBIN "baserom.gbc",$5114c,$51151 - $5114c
 	ld a, $23
 	ld [$cc4d], a
 	ld a, $11
-	call Predef ; indirect jump to Func_f1d7 (f1d7 (3:71d7))
+	call Predef ; indirect jump to RemoveMissableObject (f1d7 (3:71d7))
 	call Func_2307
 	ld hl, $d7eb
 	res 1, [hl]
@@ -77420,11 +77998,11 @@ Route22Text3: ; 0x511d5
 	db $50
 
 Route23Script: ; 0x511da
-	call $51e9
+	call Func_511e9
 	call EnableAutoTextBoxDrawing
 	ld hl, Route23Scripts
 	ld a, [$d667]
-	jp $3d97
+	jp CallFunctionInTable
 ; 0x511e9
 
 ; known jump sources: 511da (14:51da)
@@ -77442,11 +78020,11 @@ Func_511e9: ; 511e9 (14:51e9)
 	ld a, $7a
 	ld [$cc4d], a
 	ld a, $15
-	call Predef ; indirect jump to Func_f1c8 (f1c8 (3:71c8))
+	call Predef ; indirect jump to AddMissableObject (f1c8 (3:71c8))
 	ld a, $60
 	ld [$cc4d], a
 	ld a, $11
-	jp Predef ; indirect jump to Func_f1d7 (f1d7 (3:71d7))
+	jp Predef ; indirect jump to RemoveMissableObject (f1d7 (3:71d7))
 ; 51213 (14:5213)
 Route23Scripts: ; 0x51213
 	dw Route23Script0, Route23Script1, Route23Script2
@@ -77482,7 +78060,7 @@ Route23Script0: ; 0x51219
 	ld a, c
 	and a
 	ret nz
-	call $525d
+	call Func_5125d
 	call DisplayTextID
 	xor a
 	ld [$ff00+$b4], a
@@ -77540,43 +78118,43 @@ Route23Texts: ; 0x512f7
 Route23Text1: ; 0x51307
 	db $08 ; asm
 	ld a, $6
-	call $5346
+	call Func_51346
 	jp TextScriptEnd
 
 Route23Text2: ; 0x51310
 	db $08 ; asm
 	ld a, $5
-	call $5346
+	call Func_51346
 	jp TextScriptEnd
 
 Route23Text3: ; 0x51319
 	db $08 ; asm
 	ld a, $4
-	call $5346
+	call Func_51346
 	jp TextScriptEnd
 
 Route23Text4: ; 0x51322
 	db $08 ; asm
 	ld a, $3
-	call $5346
+	call Func_51346
 	jp TextScriptEnd
 
 Route23Text5: ; 0x5132b
 	db $08 ; asm
 	ld a, $2
-	call $5346
+	call Func_51346
 	jp TextScriptEnd
 
 Route23Text6: ; 0x51334
 	db $08 ; asm
 	ld a, $1
-	call $5346
+	call Func_51346
 	jp TextScriptEnd
 
 Route23Text7: ; 0x5133d
 	db $8
 	ld a, $0
-	call $5346
+	call Func_51346
 	jp TextScriptEnd
 ; 0x51346
 
@@ -77629,7 +78207,7 @@ Route24Script: ; 0x513ad
 	ld hl, Route24TrainerHeaders
 	ld de, $53cb
 	ld a, [$d602]
-	call $3160
+	call Func_3160
 	ld [$d602], a
 	ret
 ; 0x513c0
@@ -77672,7 +78250,7 @@ INCBIN "baserom.gbc",$5140e,$51422 - $5140e
 	ld a, [W_ISINBATTLE] ; $d057
 	cp $ff
 	jp z, Func_513c0
-	call Func_2429
+	call UpdateSprites
 	ld a, $f0
 	ld [$cd6b], a
 	ld hl, $d7ef
@@ -77776,11 +78354,11 @@ Route24Text1: ; 0x514a4
 	set 7, [hl]
 	ld hl, UnnamedText_5152b
 	ld de, UnnamedText_5152b
-	call $3354
+	call Func_3354
 	ld a, [$ff00+$8c]
 	ld [$cf13], a
-	call $336a
-	call $32d7
+	call EngageMapTrainer
+	call Func_32d7
 	xor a
 	ld [$ff00+$b4], a
 	ld a, $3
@@ -77962,7 +78540,7 @@ Route25Script: ; 0x515cb
 	ld hl, Route25TrainerHeaders
 	ld de, $5622
 	ld a, [$d603]
-	call $3160
+	call Func_3160
 	ld [$d603], a
 	ret
 ; 0x515e1
@@ -77981,7 +78559,7 @@ Unknown_515e1: ; 0x515e1
 	ld a, $61
 	ld [$cc4d], a
 	ld a, $15
-	jp Predef ; indirect jump to Func_f1c8 (f1c8 (3:71c8))
+	jp Predef ; indirect jump to AddMissableObject (f1c8 (3:71c8))
 .asm_515ff
 	bit 4, [hl]
 	ret z
@@ -77989,15 +78567,15 @@ Unknown_515e1: ; 0x515e1
 	ld a, $24
 	ld [$cc4d], a
 	ld a, $11
-	call Predef ; indirect jump to Func_f1d7 (f1d7 (3:71d7))
+	call Predef ; indirect jump to RemoveMissableObject (f1d7 (3:71d7))
 	ld a, $62
 	ld [$cc4d], a
 	ld a, $11
-	call Predef ; indirect jump to Func_f1d7 (f1d7 (3:71d7))
+	call Predef ; indirect jump to RemoveMissableObject (f1d7 (3:71d7))
 	ld a, $63
 	ld [$cc4d], a
 	ld a, $15
-	jp Predef ; indirect jump to Func_f1c8 (f1c8 (3:71c8))
+	jp Predef ; indirect jump to AddMissableObject (f1c8 (3:71c8))
 
 INCBIN "baserom.gbc",$51622,$51628 - $51622
 
@@ -78306,12 +78884,12 @@ VictoryRoad2Script: ; 0x5179d
 	ld hl, $d126
 	bit 5, [hl]
 	res 5, [hl]
-	call nz, $57c9
+	call nz, Func_517c9
 	call EnableAutoTextBoxDrawing
 	ld hl, VictoryRoad2TrainerHeaders
 	ld de, $57eb
 	ld a, [$d63f]
-	call $3160
+	call Func_3160
 	ld [$d63f], a
 	ret
 ; 0x517c4
@@ -78472,8 +79050,8 @@ VictoryRoad2BattleText6: ; 0x518ba
 	TX_FAR _VictoryRoad2BattleText6 ; 0x8d06e
 	db $8
 	ld a, MOLTRES
-	call $13d0
-	call $3748
+	call PlayCry
+	call Func_3748
 	jp TextScriptEnd
 ; 0x518ca
 
@@ -78658,7 +79236,7 @@ SilphCo7Script: ; 0x51b61
 	ld hl, SilphCo7TrainerHeaders
 	ld de, $5c17
 	ld a, [$d648]
-	call $3160
+	call Func_3160
 	ld [$d648], a
 	ret
 ; 0x51b77
@@ -78784,16 +79362,16 @@ INCBIN "baserom.gbc",$51c17,$51c23 - $51c17
 	ld [$d528], a
 	ld a, $ff
 	ld [$c0ee], a
-	call Func_23b1
+	call PlaySound
 	ld c, $2
 	ld a, $de
-	call Func_23a1
+	call PlayMusic
 	ld a, $9
 	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
 	call DisplayTextID
 	ld a, $9
 	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
-	call Function3541
+	call SetSpriteMovementBytesToFF
 	ld de, $5c7d
 	ld a, [W_WHICHTRADE] ; $cd3d
 	ld [$cf0d], a
@@ -78860,7 +79438,7 @@ INCBIN "baserom.gbc",$51c78,$51c82 - $51c78
 	call DisplayTextID
 	ld a, $ff
 	ld [$c0ee], a
-	call Func_23b1
+	call PlaySound
 	ld b, BANK(Func_9b47)
 	ld hl, Func_9b47
 	call Bankswitch ; indirect jump to Func_9b47 (9b47 (2:5b47))
@@ -78883,7 +79461,7 @@ INCBIN "baserom.gbc",$51d1a,$51d25 - $51d1a
 	ld a, $a7
 	ld [$cc4d], a
 	ld a, $11
-	call Predef ; indirect jump to Func_f1d7 (f1d7 (3:71d7))
+	call Predef ; indirect jump to RemoveMissableObject (f1d7 (3:71d7))
 	call Func_2307
 	xor a
 	ld [$cd6b], a
@@ -78954,7 +79532,7 @@ SilphCo7Text1: ; 0x51d8e
 	jr nc, .asm_b3069 ; 0x51db1
 	ld a, [$ccd3]
 	and a
-	call z, $3865
+	call z, Func_3865
 	call EnableAutoTextBoxDrawing
 	ld hl, UnnamedText_51dd8
 	call PrintText
@@ -79226,7 +79804,7 @@ Mansion2Script:
 	ld hl, Mansion2TrainerHeaders
 	ld de, $6047
 	ld a, [$d63c]
-	call $3160
+	call Func_3160
 	ld [$d63c], a
 	ret
 ; 0x51fee
@@ -79319,7 +79897,7 @@ Mansion2Text5: ; 0x52087
 	db $8
 	ld hl, UnnamedText_520c2
 	call PrintText
-	call $35ec
+	call Func_35ec
 	ld a, [$cc26]
 	and a
 	jr nz, .asm_520b9 ; 0x52095 $22
@@ -79330,7 +79908,7 @@ Mansion2Text5: ; 0x52087
 	ld hl, UnnamedText_520c7
 	call PrintText
 	ld a, $ad
-	call $23b1
+	call PlaySound
 	ld hl, $d796
 	bit 0, [hl]
 	set 0, [hl]
@@ -79399,7 +79977,7 @@ Mansion3Script:
 	ld hl, Mansion3TrainerHeader0
 	ld de, $6235
 	ld a, [$d63d]
-	call $3160
+	call Func_3160
 	ld [$d63d], a
 	ret
 ; 0x52204
@@ -79580,7 +80158,7 @@ Mansion4Script: ; 0x523b9
 	ld hl, Mansion4TrainerHeader0
 	ld de, $6430
 	ld a, [$d63e]
-	call $3160
+	call Func_3160
 	ld [$d63e], a
 	ret
 ; 0x523cf
@@ -79765,9 +80343,9 @@ Func_525af: ; 525af (14:65af)
 	ld a, $2
 	ld [W_BATTLETYPE], a ; $d05a
 .asm_525f9
-	ld hl, UnknSong_md_90c6
-	ld b, BANK(UnknSong_md_90c6)
-	jp Bankswitch ; indirect jump to UnknSong_md_90c6 (90c6 (2:50c6))
+	ld hl, Func_90c6
+	ld b, BANK(Func_90c6)
+	jp Bankswitch ; indirect jump to Func_90c6 (90c6 (2:50c6))
 
 ; known jump sources: 3f9b6 (f:79b6)
 Func_52601: ; 52601 (14:6601)
@@ -79888,7 +80466,7 @@ Func_52673: ; 52673 (14:6673)
 	ld hl, $d126
 	set 5, [hl]
 	ld a, $ad
-	jp Func_23b1
+	jp PlaySound
 .asm_526dc
 	ld a, $2
 	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
@@ -79961,10 +80539,10 @@ CeladonPrizeMenu: ; 0x5271b 14:671B
 	ld c,$10
 	call TextBoxBorder
 	call GetPrizeMenuId ;678E
-	call $2429
+	call UpdateSprites
 	ld hl,WhichPrizeTextPtr
 	call PrintText
-	call $3ABE ; menu choice handler
+	call HandleMenuInput ; menu choice handler
 	bit 1,a ; keypress = B (Cancel)
 	jr nz,.NoChoice
 	ld a,[$CC26]
@@ -80013,7 +80591,7 @@ GetPrizeMenuId: ; 14:678E
 	inc hl
 	push hl
 	ld hl,W_PRIZE1
-	call $3829      ; XXX what does this do
+	call CopyString      ; XXX what does this do
 	pop hl
 	ld a,[hli]
 	ld h,[hl]
@@ -80165,7 +80743,7 @@ PrintPrizePrice: ; 14:687A
 	ld b,$01
 	ld c,$07
 	call TextBoxBorder
-	call $2429      ; XXX save OAM?
+	call UpdateSprites      ; XXX save OAM?
 	FuncCoord 12,0
 	ld hl,Coord
 	ld de,.CoinText
@@ -80221,12 +80799,12 @@ HandlePrizeChoice: ; 14:68C6
 .GivePrize ; 14:68E6
 	ld hl,SoYouWantPrizeTextPtr
 	call PrintText
-	call $35EC ; yes/no textbox
+	call Func_35ec ; yes/no textbox
 	ld a,[$CC26] ; yes/no answer (Y=0, N=1)
 	and a
 	jr nz,.PrintOhFineThen
 	call LoadCoinsToSubtract
-	call $35B1 ; subtract COINs from COIN_CASE
+	call HasEnoughCoins
 	jr c,.NotEnoughCoins
 	ld a,[$D12F]
 	cp a,$02
@@ -80235,7 +80813,7 @@ HandlePrizeChoice: ; 14:68C6
 	ld b,a
 	ld a,$01
 	ld c,a
-	call $3E2E ; GiveItem
+	call GiveItem ; GiveItem
 	jr nc,.BagIsFull
 	jr .SubtractCoins
 .GiveMon ; 14:6912
@@ -81309,7 +81887,7 @@ Route3Script: ; 0x554f8
 	ld hl, Route3TrainerHeader0
 	ld de, Unknown_5550b
 	ld a, [$d5f8]
-	call $3160
+	call Func_3160
 	ld [$d5f8], a
 	ret
 ; 0x5550b
@@ -81584,7 +82162,7 @@ Route4Script: ; 0x55658
 	ld hl, Route4TrainerHeaders
 	ld de, Unknown_5566b
 	ld a, [$d5f9]
-	call $3160
+	call Func_3160
 	ld [$d5f9], a
 	ret
 ; 0x5566b
@@ -81657,7 +82235,7 @@ Route9Script: ; 0x556bc
 	ld hl, Route9TrainerHeaders
 	ld de, Unknown_556cf
 	ld a, [$d604]
-	call $3160
+	call Func_3160
 	ld [$d604], a
 	ret
 ; 0x556cf
@@ -81953,7 +82531,7 @@ Route13Script: ; 0x5581e
 	ld hl, Route13TrainerHeaders
 	ld de, Route13Script_Unknown55831
 	ld a, [$d61a]
-	call $3160
+	call Func_3160
 	ld [$d61a], a
 	ret
 ; 0x55831
@@ -82294,7 +82872,7 @@ Route14Script: ; 0x559d3
 	ld hl, Route14TrainerHeaders
 	ld de, Unknown_559e6
 	ld a, [$d61b]
-	call $3160
+	call Func_3160
 	ld [$d61b], a
 	ret
 ; 0x559e6
@@ -82627,7 +83205,7 @@ Route17Script: ; 0x55b7a
 	ld hl, Route17TrainerHeaders
 	ld de, Route17_Unknown55b8d
 	ld a, [$d61c]
-	call $3160
+	call Func_3160
 	ld [$d61c], a
 	ret
 ; 0x55b8d
@@ -82980,7 +83558,7 @@ Route19Script: ; 0x55d44
 	ld hl, Route19TrainerHeaders
 	ld de, Route19_Unknown55d57
 	ld a, [$d61d]
-	call $3160
+	call Func_3160
 	ld [$d61d], a
 	ret
 ; 0x55d57
@@ -83313,7 +83891,7 @@ Route21Script: ; 0x55eeb
 	ld hl, Route21TrainerHeaders
 	ld de, Route21_Unknown55efe
 	ld a, [$d61e]
-	call $3160
+	call Func_3160
 	ld [$d61e], a
 	ret
 ; 0x55efe
@@ -83628,7 +84206,7 @@ VermilionHouse2Text1: ; 0x56075
 	jr nz, asm_03ef5 ; 0x5607b
 	ld hl, UnnamedText_560b1
 	call PrintText
-	call $35ec
+	call Func_35ec
 	ld a, [$cc26]
 	and a
 	jr nz, asm_eb1b7 ; 0x5608a
@@ -83768,7 +84346,7 @@ FuchsiaHouse3Text1: ; 0x56181
 	jr nz, asm_6084e ; 0x56187
 	ld hl, UnnamedText_561bd
 	call PrintText
-	call $35ec
+	call Func_35ec
 	ld a, [$cc26]
 	and a
 	jr nz, asm_3ace4 ; 0x56196
@@ -83853,13 +84431,13 @@ DayCareMTexts: ; 0x56252
 
 DayCareMText1: ; 0x56254
 	db $8
-	call $36f4
+	call Func_36f4
 	ld a, [$da48]
 	and a
 	jp nz, Unnamed_562e1
 	ld hl, UnnamedText_5640f
 	call PrintText
-	call $35ec
+	call Func_35ec
 	ld a, [$cc26]
 	and a
 	ld hl, UnnamedText_5643b
@@ -83874,11 +84452,11 @@ DayCareMText1: ; 0x56254
 	ld [$cfcb], a
 	ld [$d07d], a
 	ld [$cc35], a
-	call $13fc
+	call DisplayPartyMenu
 	push af
 	call GBPalWhiteOutWithDelay3
-	call $3dbe
-	call $20ba
+	call Func_3dbe
+	call LoadGBPal
 	pop af
 	ld hl, UnnamedText_56437
 	jp c, Unnamed_56409
@@ -83891,19 +84469,19 @@ DayCareMText1: ; 0x56254
 	ld [$cc2b], a
 	ld a, [$cf92]
 	ld hl, $d2b5
-	call $15ba
+	call GetPartyMonName
 	ld hl, UnnamedText_56419
 	call PrintText
 	ld a, $1
 	ld [$da48], a
 	ld a, $3
 	ld [$cf95], a
-	call $3a68
+	call Func_3a68
 	xor a
 	ld [$cf95], a
-	call $391f
+	call RemovePokemon
 	ld a, [$cf91]
-	call $13d0
+	call PlayCry
 	ld hl, UnnamedText_5641e
 	jp Unnamed_56409
 ; 0x562e1
@@ -84026,7 +84604,7 @@ Route12HouseText1: ; 0x56484
 	jr nz, asm_b4cad ; 0x5648a
 	ld hl, UnnamedText_564c0
 	call PrintText
-	call $35ec
+	call Func_35ec
 	ld a, [$cc26]
 	and a
 	jr nz, asm_a2d76 ; 0x56499
@@ -84106,7 +84684,7 @@ SilphCo8Script: ; 0x56504
 	ld hl, SilphCo8TrainerHeader0
 	ld de, $6577
 	ld a, [$d649]
-	call $3160
+	call Func_3160
 	ld [$d649], a
 	ret
 ; 0x5651a
@@ -84352,7 +84930,27 @@ Func_567f9: ; 567f9 (15:67f9)
 	ld [$FF00+$ee], a
 	ret
 
-INCBIN "baserom.gbc",$56819,$5683d - $56819
+Func_56819: ; 0x56819
+	ld hl, $c100
+	ld de, $0004
+	ld a, [$cf13]
+	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	call Func_56903
+	ld a, [hli]
+	ld [$d130], a
+	inc hl
+	ld a, [hl]
+	ld [$d131], a
+	ld de, $00fe
+	add hl, de
+	ld a, [hli]
+	ld [$d132], a
+	ld a, [hl]
+	ld [$d133], a
+	ret
+; 0x5683d
+
+Func_5683d: ; 0x5683d
 	ld hl, $c100
 	ld de, $4
 	ld a, [$cf13]
@@ -84371,7 +84969,25 @@ INCBIN "baserom.gbc",$56819,$5683d - $56819
 	ld [hl], a
 	ret
 
-INCBIN "baserom.gbc",$5685d,$56881 - $5685d
+Func_5685d: ; 0x5685d
+	ld hl, $c100
+	ld de, $0004
+	ld a, [$cf13]
+	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	call Func_56903
+	ld a, [$d130]
+	ld [hli], a
+	inc hl
+	ld a, [$d131]
+	ld [hl], a
+	ld de, $00fe
+	add hl, de
+	ld a, [$d132]
+	ld [hli], a
+	ld a, [$d133]
+	ld [hl], a
+	ret
+; 0x56881
 
 ; known jump sources: 32d4 (0:32d4)
 Func_56881: ; 56881 (15:6881)
@@ -84522,7 +85138,7 @@ Func_5690f: ; 5690f (15:690f)
 	jr z, Func_56988
 	ld hl, $cd60
 	set 0, [hl]
-	call Func_336a
+	call EngageMapTrainer
 	ld a, $ff
 
 ; known jump sources: 56922 (15:6922), 5694b (15:694b), 56957 (15:6957), 5695f (15:695f), 5696a (15:696a), 56972 (15:6972), 5697c (15:697c)
@@ -85209,7 +85825,7 @@ Func_58e29: ; 58e29 (16:4e29)
 	ld a, $80
 	ld [$c0f2], a
 	ld a, $e9
-	call Func_23b1
+	call PlaySound
 	jp Func_3748
 asm_58e3a: ; 58e3a (16:4e3a)
 	ret
@@ -85555,7 +86171,7 @@ Route6Script: ; 0x590b0
 	ld hl, Route6TrainerHeaders
 	ld de, Route6_Unknown590c3
 	ld a, [$d600]
-	call $3160
+	call Func_3160
 	ld [$d600], a
 	ret
 ; 0x590c3
@@ -85760,7 +86376,7 @@ Route8Script: ; 0x591b6
 	ld hl, Route8TrainerHeaders
 	ld de, Route8_Unknown591c9
 	ld a, [$d601]
-	call $3160
+	call Func_3160
 	ld [$d601], a
 	ret
 ; 0x591c9
@@ -86063,7 +86679,7 @@ Route10Script: ; 0x59336
 	ld hl, Route10TrainerHeaders
 	ld de, Route10_Unknown59349
 	ld a, [$d605]
-	call $3160
+	call Func_3160
 	ld [$d605], a
 	ret
 ; 0x59349
@@ -86277,7 +86893,7 @@ Route11Script: ; 0x5944c
 	ld hl, Route11TrainerHeaders
 	ld de, Route11_Unknown5945f
 	ld a, [$d623]
-	call $3160
+	call Func_3160
 	ld [$d623], a
 	ret
 ; 0x5945f
@@ -86611,7 +87227,7 @@ Route12Script: ; 0x595f3
 	ld hl, Route12TrainerHeaders
 	ld de, $5611
 	ld a, [$d624]
-	call $3160
+	call Func_3160
 	ld [$d624], a
 	ret
 ; 0x59606
@@ -86640,7 +87256,7 @@ INCBIN "baserom.gbc",$59611,$59619 - $59611
 	ld a, $1d
 	ld [$cc4d], a
 	ld a, $11
-	call Predef ; indirect jump to Func_f1d7 (f1d7 (3:71d7))
+	call Predef ; indirect jump to RemoveMissableObject (f1d7 (3:71d7))
 	ld a, $3
 	ld [$d624], a
 	ld [$da39], a
@@ -86648,7 +87264,7 @@ INCBIN "baserom.gbc",$59611,$59619 - $59611
 	ld a, [W_ISINBATTLE] ; $d057
 	cp $ff
 	jr z, .asm_59606
-	call Func_2429
+	call UpdateSprites
 	ld a, [$cf0b]
 	cp $2
 	jr z, .asm_59664
@@ -86916,7 +87532,7 @@ Route15Script: ; 0x597ae
 	ld hl, Route15TrainerHeaders
 	ld de, Route15_Unknown597c1
 	ld a, [$d625]
-	call $3160
+	call Func_3160
 	ld [$d625], a
 	ret
 ; 0x597c1
@@ -87242,7 +87858,7 @@ Route16Script: ; 0x59933
 	ld hl, Route16TrainerHeaders
 	ld de, $5951
 	ld a, [$d626]
-	call $3160
+	call Func_3160
 	ld [$d626], a
 	ret
 ; 0x59946
@@ -87272,8 +87888,8 @@ INCBIN "baserom.gbc",$59951,$59959 - $59951
 	ld a, $21
 	ld [$cc4d], a
 	ld a, $11
-	call Predef ; indirect jump to Func_f1d7 (f1d7 (3:71d7))
-	call Func_2429
+	call Predef ; indirect jump to RemoveMissableObject (f1d7 (3:71d7))
+	call UpdateSprites
 	ld a, $3
 	ld [$d626], a
 	ld [$da39], a
@@ -87281,7 +87897,7 @@ INCBIN "baserom.gbc",$59951,$59959 - $59951
 	ld a, [W_ISINBATTLE] ; $d057
 	cp $ff
 	jp z, Func_59946
-	call Func_2429
+	call UpdateSprites
 	ld a, [$cf0b]
 	cp $2
 	jr z, .asm_599a8
@@ -87516,7 +88132,7 @@ Route18Script: ; 0x59ac7
 	ld hl, Route18TrainerHeaders
 	ld de, Route18_Unknown59ada
 	ld a, [$d627]
-	call $3160
+	call Func_3160
 	ld [$d627], a
 	ret
 ; 0x59ada
@@ -87718,8 +88334,8 @@ FanClubText3: ; 0x59bee
 	ld hl, UnnamedText_59c00
 	call PrintText
 	ld a, PIKACHU
-	call $13d0
-	call $3748
+	call PlayCry
+	call Func_3748
 	jp TextScriptEnd
 ; 0x59c00
 
@@ -87733,8 +88349,8 @@ FanClubText4: ; 0x59c05
 	ld hl, UnnamedText_59c17
 	call PrintText
 	ld a, SEEL
-	call $13d0
-	call $3748
+	call PlayCry
+	call Func_3748
 	jp TextScriptEnd
 
 UnnamedText_59c17: ; 0x59c17
@@ -87744,11 +88360,11 @@ UnnamedText_59c17: ; 0x59c17
 
 FanClubText5: ; 0x59c1c
 	db $08 ; asm
-	call $5b73
+	call Func_59b73
 	jr nz, asm_38bb3 ; 0x59c20
 	ld hl, UnnamedText_59c65
 	call PrintText
-	call $35ec
+	call Func_35ec
 	ld a, [$cc26]
 	and a
 	jr nz, asm_2c8d7 ; 0x59c2f
@@ -87860,7 +88476,7 @@ SilphCo2Script: ; 0x59cf1
 	ld hl, SilphCo2TrainerHeaders
 	ld de, $5d80
 	ld a, [$d643]
-	call $3160
+	call Func_3160
 	ld [$d643], a
 	ret
 ; 0x59d07
@@ -88125,7 +88741,7 @@ SilphCo3Script: ; 0x59f5b
 	ld hl, SilphCo3TrainerHeaders
 	ld de, $5fbe
 	ld a, [$d644]
-	call $3160
+	call Func_3160
 	ld [$d644], a
 	ret
 ; 0x59f71
@@ -88316,7 +88932,7 @@ SilphCo10Script: ; 0x5a139
 	ld hl, SilphCo10TrainerHeaders
 	ld de, $6180
 	ld a, [$d658]
-	call $3160
+	call Func_3160
 	ld [$d658], a
 	ret
 ; 0x5a14f
@@ -88486,7 +89102,7 @@ LanceScript: ; 0x5a2ae
 	ld hl, LanceTrainerHeaders
 	ld de, $62fa
 	ld a, [$d653]
-	call $3160
+	call Func_3160
 	ld [$d653], a
 	ret
 ; 0x5a2c4
@@ -88553,7 +89169,7 @@ INCBIN "baserom.gbc",$5a2fa,$5a305 - $5a2fa
 	ld hl, $d126
 	set 5, [hl]
 	ld a, $ad
-	call Func_23b1
+	call PlaySound
 	jp LanceScript_Unknown5a2c4
 
 INCBIN "baserom.gbc",$5a33e,$5a349 - $5a33e
@@ -88568,8 +89184,8 @@ INCBIN "baserom.gbc",$5a33e,$5a349 - $5a33e
 	ld a, $ff
 	ld [$cd6b], a
 	ld hl, $ccd3
-	ld de, $6379
-	call Func_350c
+	ld de, RLEList_5a379
+	call DecodeRLEList
 	dec a
 	ld [$cd38], a
 	call Func_3486
@@ -88578,7 +89194,14 @@ INCBIN "baserom.gbc",$5a33e,$5a349 - $5a33e
 	ld [$da39], a
 	ret
 
-INCBIN "baserom.gbc",$5a379,$5a382 - $5a379
+RLEList_5a379: ; 0x5a379
+db $40, $0C
+db $20, $0C
+db $80, $07
+db $20, $06
+db $FF
+
+Func_5a382: ; 0x5a382
 	ld a, [$cd38]
 	and a
 	ret nz
@@ -88662,7 +89285,7 @@ HallofFameRoomScript: ; 0x5a49e
 	call EnableAutoTextBoxDrawing
 	ld hl, HallofFameRoomScripts
 	ld a, [$d64b]
-	jp $3d97
+	jp CallFunctionInTable
 ; 0x5a4aa
 
 INCBIN "baserom.gbc",$5a4aa,$5a4b2 - $5a4aa
@@ -88713,8 +89336,8 @@ HallofFameRoomScript2: ; 0x5a4bb
 	call DelayFrames
 	dec b
 	jr nz, .asm_5a4ff ; 0x5a505 $f8
-	call $3865
-	jp $1f54
+	call Func_3865
+	jp InitGame
 ; 0x5a50d
 
 HallofFameRoomScript0: ; 0x5a50d
@@ -88722,10 +89345,10 @@ HallofFameRoomScript0: ; 0x5a50d
 	ld [$cd6b], a
 	ld hl, $ccd3
 	ld de, RLEMovement5a528
-	call $350c
+	call DecodeRLEList
 	dec a
 	ld [$cd38], a
-	call $3486
+	call Func_3486
 	ld a, $1
 	ld [$d64b], a
 	ret
@@ -88743,10 +89366,10 @@ HallofFameRoomScript1: ; 0x5a52b
 	ld [$d528], a
 	ld a, $1
 	ld [$ff00+$8c], a
-	call Function3541
+	call SetSpriteMovementBytesToFF
 	ld a, $8
 	ld [$ff00+$8d], a
-	call $34a6
+	call Func_34a6
 	call Delay3
 	xor a
 	ld [$cd6b], a
@@ -88793,9 +89416,9 @@ HallofFameRoomBlocks: ; 0x5a58b 20
 	INCBIN "maps/halloffameroom.blk"
 
 ; known jump sources: 1e142 (7:6142)
-Func_5a59f: ; 5a59f (16:659f)
-	ld hl, $65b7
-.asm_5a5a2
+RemoveGuardDrink: ; 5a59f (16:659f)
+	ld hl, GuardDrinksList
+.drinkLoop
 	ld a, [hli]
 	ld [$FF00+$db], a
 	and a
@@ -88804,12 +89427,13 @@ Func_5a59f: ; 5a59f (16:659f)
 	ld b, a
 	call IsItemInBag
 	pop hl
-	jr z, .asm_5a5a2
-	ld b, BANK(Func_17f37)
-	ld hl, Func_17f37
-	jp Bankswitch ; indirect jump to Func_17f37 (17f37 (5:7f37))
+	jr z, .drinkLoop
+	ld b, BANK(RemoveItemByID)
+	ld hl, RemoveItemByID
+	jp Bankswitch ; indirect jump to RemoveItemByID (17f37 (5:7f37))
 
-INCBIN "baserom.gbc",$5a5b7,$5a5ba - $5a5b7
+GuardDrinksList: ; 0x5a5b7
+	db FRESH_WATER, SODA_POP, LEMONADE, $00
 
 SECTION "bank17",DATA,BANK[$17]
 
@@ -88856,7 +89480,7 @@ RedsHouse2FScript:
 	call EnableAutoTextBoxDrawing
 	ld hl,RedsHouse2FScriptPointers
 	ld a,[$D60C]
-	jp $3D97
+	jp CallFunctionInTable
 
 RedsHouse2FScriptPointers:
 	dw RedsHouse2FScript1,RedsHouse2FScript2
@@ -88914,7 +89538,7 @@ MuseumF1Script: ; 0x5c0f7
 	ld [$cc3c], a
 	ld hl, MuseumF1Scripts
 	ld a, [$d619]
-	jp $3d97
+	jp CallFunctionInTable
 ; 0x5c109
 
 MuseumF1Scripts: ; 0x5c109
@@ -88952,21 +89576,21 @@ MuseumF1Text1: ; 0x5c135
 	jr nz, asm_8774b ; 0x5c13b $a
 	ld a, [$d362]
 	cp $d
-	jp z, $41f9
+	jp z, Func_5c1f9
 	jr asm_b8709 ; 0x5c145 $1c
 asm_8774b: ; 0x5c147
 	cp $3
 	jr nz, asm_d49e7 ; 0x5c149 $8
 	ld a, [$d362]
 	cp $c
-	jp z, $41f9
+	jp z, Func_5c1f9
 asm_d49e7: ; 0x5c153
 	ld a, [$d754]
 	bit 0, a
 	jr nz, asm_31a16 ; 0x5c158 $10
 	ld hl, UnnamedText_5c23d
 	call PrintText
-	jp $4217
+	jp asm_d1145
 asm_b8709: ; 0x5c163
 	ld a, [$d754]
 	bit 0, a
@@ -88974,16 +89598,16 @@ asm_b8709: ; 0x5c163
 asm_31a16: ; 0x5c16a
 	ld hl, UnnamedText_5c242
 	call PrintText
-	jp $4217
+	jp asm_d1145
 asm_3ded4: ; 0x5c173
 	ld a, $13
 	ld [$d125], a
-	call $30e8
+	call DisplayTextBoxID
 	xor a
 	ld [$ff00+$b4], a
 	ld hl, UnnamedText_5c21f
 	call PrintText
-	call $35ec
+	call Func_35ec
 	ld a, [$cc26]
 	and a
 	jr nz, asm_de133 ; 0x5c18b $4d
@@ -88992,11 +89616,11 @@ asm_3ded4: ; 0x5c173
 	ld [$ff00+$a0], a
 	ld a, $50
 	ld [$ff00+$a1], a
-	call $35a6
+	call HasEnoughMoney
 	jr nc, asm_0f3e3 ; 0x5c199 $9
 	ld hl, UnnamedText_5c229
 	call PrintText
-	jp $41da
+	jp asm_de133
 asm_0f3e3: ; 0x5c1a4
 	ld hl, UnnamedText_5c224
 	call PrintText
@@ -89014,10 +89638,10 @@ asm_0f3e3: ; 0x5c1a4
 	call Predef
 	ld a, $13
 	ld [$d125], a
-	call $30e8
+	call DisplayTextBoxID
 	ld a, $b2
-	call $3740
-	call $3748
+	call Func_3740
+	call Func_3748
 	jr asm_0b094 ; 0x5c1d8 $18
 asm_de133: ; 0x5c1da
 	ld hl, $421a
@@ -89026,17 +89650,18 @@ asm_de133: ; 0x5c1da
 	ld [$cd38], a
 	ld a, $80
 	ld [$ccd3], a
-	call $3486
-	call $2429
+	call Func_3486
+	call UpdateSprites
 	jr asm_d1145 ; 0x5c1f0 $25
 asm_0b094: ; 0x5c1f2
 	ld a, $1
 	ld [$d619], a
 	jr asm_d1145 ; 0x5c1f7 $1e
-;XXX what calls this?
+
+Func_5c1f9: ; 0x5c1f9
 	ld hl, UnnamedText_5c22e
 	call PrintText
-	call $35ec
+	call Func_35ec
 	ld a, [$cc26]
 	cp $0
 	jr nz, asm_d1144
@@ -89281,7 +89906,7 @@ PewterGymScript: ; 0x5c387
 	ld hl, PewterGymTrainerHeaders
 	ld de, $43ca
 	ld a, [$d5fc]
-	call $3160
+	call Func_3160
 	ld [$d5fc], a
 	ret
 ; 0x5c3a4
@@ -89336,11 +89961,11 @@ Func_5c3df: ; 5c3df (17:43df)
 	ld a, $4
 	ld [$cc4d], a
 	ld a, $11
-	call Predef ; indirect jump to Func_f1d7 (f1d7 (3:71d7))
+	call Predef ; indirect jump to RemoveMissableObject (f1d7 (3:71d7))
 	ld a, $22
 	ld [$cc4d], a
 	ld a, $11
-	call Predef ; indirect jump to Func_f1d7 (f1d7 (3:71d7))
+	call Predef ; indirect jump to RemoveMissableObject (f1d7 (3:71d7))
 	ld hl, $d7eb
 	res 0, [hl]
 	res 7, [hl]
@@ -89371,7 +89996,7 @@ PewterGymText1: ; 0x5c44e
 	jr z, .asm_4a735 ; 0x5c454
 	bit 6, a
 	jr nz, .asm_ff7d0 ; 0x5c458
-	call z, $43df
+	call z, Func_5c3df
 	call DisableWaitingAfterTextDisplay
 	jr .asm_e0ffb ; 0x5c460
 .asm_ff7d0 ; 0x5c462
@@ -89386,11 +90011,11 @@ PewterGymText1: ; 0x5c44e
 	set 7, [hl]
 	ld hl, UnnamedText_5c4bc
 	ld de, UnnamedText_5c4bc
-	call $3354
+	call Func_3354
 	ldh a, [$8c]
 	ld [$cf13], a
-	call $336a
-	call $32d7
+	call EngageMapTrainer
+	call Func_32d7
 	ld a, $1
 	ld [$d05c], a
 	xor a
@@ -89462,7 +90087,7 @@ PewterGymText3: ; 0x5c4df
 	jr nz, .asm_71369 ; 0x5c4e5
 	ld hl, UnnamedText_5c515
 	call PrintText
-	call $35ec
+	call Func_35ec
 	ld a, [$cc26]
 	and a
 	jr nz, .asm_6123a ; 0x5c4f4
@@ -89537,7 +90162,7 @@ PewterPokecenter_h: ; 0x5c57b to 0x5c587 (12 bytes) (id=58)
 	dw PewterPokecenterObject ; objects
 
 PewterPokecenterScript: ; 0x5c587
-	call $22fa
+	call Func_22fa
 	jp EnableAutoTextBoxDrawing
 ; 0x5c58d
 
@@ -89558,7 +90183,7 @@ PewterPokecenterText3: ; 0x5c59b
 	ld hl, PewterPokecenterText5
 	call PrintText
 	ld a, $ff
-	call $23b1
+	call PlaySound
 	ld c, $20
 	call DelayFrames
 	ld hl, $4608
@@ -89575,7 +90200,7 @@ PewterPokecenterText3: ; 0x5c59b
 	push hl
 	ld c, $1f
 	ld a, $d0
-	call $23a1
+	call PlayMusic
 	pop hl
 .asm_5c5d1
 	ld a, [hl]
@@ -89597,7 +90222,7 @@ PewterPokecenterText3: ; 0x5c59b
 	jr nz, .asm_5c5d1 ; 0x5c5f6 $d9
 	ld c, $30
 	call DelayFrames
-	call $2307
+	call Func_2307
 	jp TextScriptEnd
 ; 0x5c603
 
@@ -89640,7 +90265,7 @@ CeruleanPokecenter_h: ; 0x5c639 to 0x5c645 (12 bytes) (id=64)
 	dw CeruleanPokecenterObject ; objects
 
 CeruleanPokecenterScript: ; 0x5c645
-	call $22fa
+	call Func_22fa
 	jp EnableAutoTextBoxDrawing
 ; 0x5c64b
 
@@ -89700,7 +90325,7 @@ CeruleanGymScript: ; 0x5c6b3
 	ld hl, CeruleanGymTrainerHeaders
 	ld de, $46f8
 	ld a, [$d5fd]
-	call $3160
+	call Func_3160
 	ld [$d5fd], a
 	ret
 ; 0x5c6d0
@@ -89790,7 +90415,7 @@ CeruleanGymText1: ; 0x5c771
 	jr z, .asm_10854 ; 0x5c777
 	bit 6, a
 	jr nz, .asm_37a1b ; 0x5c77b
-	call z, $470d
+	call z, Func_5c70d
 	call DisableWaitingAfterTextDisplay
 	jr .asm_95b04 ; 0x5c783
 .asm_37a1b ; 0x5c785
@@ -89805,11 +90430,11 @@ CeruleanGymText1: ; 0x5c771
 	set 7, [hl]
 	ld hl, UnnamedText_5c7d8
 	ld de, UnnamedText_5c7d8
-	call $3354
+	call Func_3354
 	ldh a, [$8c]
 	ld [$cf13], a
-	call $336a
-	call $32d7
+	call EngageMapTrainer
+	call Func_32d7
 	ld a, $2
 	ld [$d05c], a
 	xor a
@@ -89988,7 +90613,7 @@ LavenderPokecenter_h: ; 0x5c8ce to 0x5c8da (12 bytes) (id=141)
 	dw LavenderPokecenterObject ; objects
 
 LavenderPokecenterScript: ; 0x5c8da
-	call $22fa
+	call Func_22fa
 	jp EnableAutoTextBoxDrawing
 ; 0x5c8e0
 
@@ -90098,7 +90723,7 @@ VermilionPokecenter_h: ; 0x5c983 to 0x5c98f (12 bytes) (id=89)
 	dw VermilionPokecenterObject ; objects
 
 VermilionPokecenterScript: ; 0x5c98f
-	call $22fa
+	call Func_22fa
 	jp EnableAutoTextBoxDrawing
 ; 0x5c995
 
@@ -90196,12 +90821,12 @@ VermilionGymScript: ; 0x5ca26
 	pop hl
 	bit 6, [hl]
 	res 6, [hl]
-	call nz, $4a6d
+	call nz, Func_5ca6d
 	call EnableAutoTextBoxDrawing
 	ld hl, VermilionGymTrainerHeader0
 	ld de, $4a95
 	ld a, [$d5fe]
-	call $3160
+	call Func_3160
 	ld [$d5fe], a
 	ret
 ; 0x5ca4c
@@ -90222,7 +90847,7 @@ Func_5ca6d: ; 5ca6d (17:4a6d)
 	jr .asm_5ca7f
 .asm_5ca78
 	ld a, $ad
-	call Func_23b1
+	call PlaySound
 	ld a, $5
 .asm_5ca7f
 	ld [$d09f], a
@@ -90318,7 +90943,7 @@ VermilionGymText1: ; 0x5cb1d
 	jr z, .asm_7cc29 ; 0x5cb23
 	bit 6, a
 	jr nz, .asm_41203 ; 0x5cb27
-	call z, $4aaa
+	call z, Func_5caaa
 	call DisableWaitingAfterTextDisplay
 	jr .asm_23621 ; 0x5cb2f
 .asm_41203 ; 0x5cb31
@@ -90333,11 +90958,11 @@ VermilionGymText1: ; 0x5cb1d
 	set 7, [hl]
 	ld hl, ReceivedThunderbadgeText
 	ld de, ReceivedThunderbadgeText
-	call $3354
+	call Func_3354
 	ldh a, [$8c]
 	ld [$cf13], a
-	call $336a
-	call $32d7
+	call EngageMapTrainer
+	call Func_32d7
 	ld a, $3
 	ld [$d05c], a
 	xor a
@@ -90513,7 +91138,7 @@ CopycatsHouseF2Text1: ; 0x5cc82
 	ld hl, UnnamedText_5ccd4
 	call PrintText
 	ld b, POKE_DOLL
-	call $3493 ; probably check has item or take item
+	call IsItemInBag
 	jr z, .asm_62ecd ; 0x5cc9a
 	ld hl, TM31PreReceiveText
 	call PrintText
@@ -90524,8 +91149,8 @@ CopycatsHouseF2Text1: ; 0x5cc82
 	call PrintText
 	ld a, $33
 	ldh [$db], a
-	ld b, $5 ; BANK(MyFunction)
-	ld hl, $7f37 ; MyFunction
+	ld b, BANK(RemoveItemByID)
+	ld hl, RemoveItemByID
 	call Bankswitch
 	ld hl, $d7af
 	set 0, [hl]
@@ -90636,7 +91261,7 @@ FightingDojoScript: ; 0x5cd5d
 	ld hl, FightingDojoTrainerHeaders
 	ld de, $4d7b
 	ld a, [$d642]
-	call $3160
+	call Func_3160
 	ld [$d642], a
 	ret
 ; 0x5cd70
@@ -90703,11 +91328,11 @@ FightingDojoText1: ; 0x5ce44
 	set 7, [hl]
 	ld hl, UnnamedText_5ce93
 	ld de, UnnamedText_5ce93
-	call $3354
+	call Func_3354
 	ldh a, [$8c]
 	ld [$cf13], a
-	call $336a
-	call $32d7
+	call EngageMapTrainer
+	call Func_32d7
 	ld a, $3
 	ld [$d642], a
 	ld [$da39], a
@@ -90836,10 +91461,10 @@ FightingDojoText6: ; 0x5cf06
 	jr .asm_3a2c8 ; 0x5cf14
 .asm_f8e28 ; 0x5cf16
 	ld a, $2b
-	call $349b
+	call Func_349b
 	ld hl, UnnamedText_5cf49
 	call PrintText
-	call $35ec
+	call Func_35ec
 	ld a, [$cc26]
 	and a
 	jr nz, .asm_3a2c8 ; 0x5cf28
@@ -90873,10 +91498,10 @@ FightingDojoText7: ; 0x5cf4e
 	jr .asm_f1f47 ; 0x5cf5c
 .asm_170a9 ; 0x5cf5e
 	ld a, $2c
-	call $349b
+	call Func_349b
 	ld hl, UnnamedText_5cf91
 	call PrintText
-	call $35ec
+	call Func_35ec
 	ld a, [$cc26]
 	and a
 	jr nz, .asm_f1f47 ; 0x5cf70
@@ -90947,7 +91572,7 @@ SaffronGymScript: ; 0x5d00d
 	ld hl, $50c3
 	ld de, $5053
 	ld a, [$d65c]
-	call $3160
+	call Func_3160
 	ld [$d65c], a
 	ret
 ; 0x5d02a
@@ -91088,7 +91713,7 @@ SaffronGymText1: ; 0x5d118
 	jr z, .asm_e3544 ; 0x5d11e
 	bit 0, a
 	jr nz, .asm_8d2f6 ; 0x5d122
-	call z, $5068
+	call z, Func_5d068
 	call DisableWaitingAfterTextDisplay
 	jr .asm_34c2c ; 0x5d12a
 .asm_8d2f6 ; 0x5d12c
@@ -91103,11 +91728,11 @@ SaffronGymText1: ; 0x5d118
 	set 7, [hl]
 	ld hl, UnnamedText_5d167
 	ld de, UnnamedText_5d167
-	call $3354
+	call Func_3354
 	ldh a, [$8c]
 	ld [$cf13], a
-	call $336a
-	call $32d7
+	call EngageMapTrainer
+	call Func_32d7
 	ld a, $6
 	ld [$d05c], a
 	ld a, $3
@@ -91511,7 +92136,7 @@ SaffronPokecenter_h: ; 0x5d529 to 0x5d535 (12 bytes) (id=182)
 	dw SaffronPokecenterObject ; objects
 
 SaffronPokecenterScript: ; 0x5d535
-	call $22fa
+	call Func_22fa
 	jp EnableAutoTextBoxDrawing
 ; 0x5d53b
 
@@ -91878,7 +92503,7 @@ SilphCo9Script: ; 0x5d7bb
 	ld hl, SilphCo9TrainerHeaders
 	ld de, $5885
 	ld a, [$d64a]
-	call $3160
+	call Func_3160
 	ld [$d64a], a
 	ret
 ; 0x5d7d1
@@ -92042,9 +92667,9 @@ SilphCo9Text1: ; 0x5d8b8
 	call PrintText
 	ld a, $7
 	call Predef
-	call $20d8
+	call GBFadeOut2
 	call Delay3
-	call $20f6
+	call GBFadeIn2
 	ld hl, UnnamedText_5d8ea
 	call PrintText
 	jr .asm_b6e28 ; 0x5d8da
@@ -92177,7 +92802,7 @@ VictoryRoad1Script: ; 0x5da0a
 	ld hl, VictoryRoad1TrainerHeaders
 	ld de, $5a3a
 	ld a, [$d651]
-	call $3160
+	call Func_3160
 	ld [$d651], a
 	ret
 ; 0x5da27
@@ -92369,7 +92994,7 @@ Func_5dbd9: ; 5dbd9 (17:5bd9)
 	ld a, $11
 	ld [$d125], a
 	call DisplayTextBoxID
-	call Func_2429
+	call UpdateSprites
 	ld a, [$cf91]
 	ld [$d0b5], a
 	call GetMonHeader
@@ -92535,7 +93160,7 @@ UnnamedText_5ddf7: ; 0x5ddf7
 INCBIN "baserom.gbc",$5de7d,$5decd - $5de7d
 	call Func_3748
 	ld a, $9d
-	call Func_23b1
+	call PlaySound
 	call Func_3748
 	jp TextScriptEnd
 ; 5dedb (17:5edb)
@@ -92547,14 +93172,14 @@ UnnamedText_5dedb: ; 0x5dedb
 INCBIN "baserom.gbc",$5dee0,$5def4 - $5dee0
 	call Func_3748
 	ld a, $ad
-	call Func_23b1
+	call PlaySound
 	call Func_3748
 	jp TextScriptEnd
 
 INCBIN "baserom.gbc",$5df02,$5df07 - $5df02
 	call Func_3748
 	ld a, $a5
-	call Func_23b1
+	call PlaySound
 	call Func_3748
 	jp TextScriptEnd
 ; 5df15 (17:5f15)
@@ -92644,7 +93269,7 @@ PokemonTower2Script: ; 0x604f2
 	call EnableAutoTextBoxDrawing
 	ld hl, PokemonTower2Scripts
 	ld a, [$d62b]
-	jp $3d97
+	jp CallFunctionInTable
 ; 0x604fe
 
 ; known jump sources: 60568 (18:4568)
@@ -92667,10 +93292,10 @@ PokemonTower2Script0: ; 0x6050f
 	ret nc
 	ld a, $ff
 	ld [$c0ee], a
-	call $23b1
+	call PlaySound
 	ld c, $2
 	ld a, $de
-	call $23a1
+	call PlayMusic
 	ld hl, $d764
 	res 6, [hl]
 	ld a, [$cd3d]
@@ -92688,7 +93313,7 @@ PokemonTower2Script0: ; 0x6050f
 	ld [$ff00+$8c], a
 	ld a, b
 	ld [$ff00+$8d], a
-	call $34a6
+	call Func_34a6
 	ld a, $1
 	ld [$ff00+$8c], a
 	call DisplayTextID
@@ -92703,7 +93328,7 @@ INCBIN "baserom.gbc",$6055e,$60563 - $6055e
 PokemonTower2Script1: ; 0x60563
 	ld a, [$d057]
 	cp $ff
-	jp z, $44fe
+	jp z, Func_604fe
 	ld a, $f0
 	ld [$cd6b], a
 	ld hl, $d764
@@ -92722,7 +93347,7 @@ PokemonTower2Script1: ; 0x60563
 	call MoveSprite
 	ld a, $ff
 	ld [$c0ee], a
-	call $23b1
+	call PlaySound
 	ld b, $2
 	ld hl, $5b47
 	call Bankswitch
@@ -92744,7 +93369,7 @@ PokemonTower2Script2: ; 0x605bb
 	call Predef
 	xor a
 	ld [$cd6b], a
-	call $2307
+	call Func_2307
 	ld a, $0
 	ld [$d62b], a
 	ld [$da39], a
@@ -92770,7 +93395,7 @@ PokemonTower2Text1: ; 0x605df
 	set 7, [hl]
 	ld hl, UnnamedText_60632
 	ld de, UnnamedText_60637 ; XXX $4637
-	call $3354
+	call Func_3354
 	ld a, $f2
 	ld [$d059], a
 
@@ -92853,7 +93478,7 @@ PokemonTower3Script: ; 0x606cc
 	ld hl, PokemonTower3TrainerHeaders
 	ld de, Unknown_606df
 	ld a, [$d62c]
-	call $3160
+	call Func_3160
 	ld [$d62c], a
 	ret
 ; 0x606df
@@ -92994,7 +93619,7 @@ PokemonTower4Script: ; 0x607f6
 	ld hl, PokemonTower4TrainerHeaders
 	ld de, PokemonTower4Script_Unknown60809
 	ld a, [$d62d]
-	call $3160
+	call Func_3160
 	ld [$d62d], a
 	ret
 ; 0x60809
@@ -93138,7 +93763,7 @@ PokemonTower5Script: ; 0x60932
 	ld hl, PokemonTower5TrainerHeaders
 	ld de, PokemonTower5Script_Unknown60945
 	ld a, [$d62e]
-	call $3160
+	call Func_3160
 	ld [$d62e], a
 	ret
 ; 0x60945
@@ -93355,7 +93980,7 @@ PokemonTower6Script: ; 0x60aef
 	ld hl, PokemonTower6TrainerHeaders
 	ld de, $4b0d
 	ld a, [$d62f]
-	call $3160
+	call Func_3160
 	ld [$d62f], a
 	ret
 ; 0x60b02
@@ -93398,7 +94023,7 @@ INCBIN "baserom.gbc",$60b45,$60b48 - $60b45
 	ld a, [$d72d]
 	bit 6, a
 	ret nz
-	call Func_2429
+	call UpdateSprites
 	ld a, $f0
 	ld [$cd6b], a
 	ld a, [$cf0b]
@@ -93491,8 +94116,8 @@ PokemonTower6Text7: ; 0x60c02
 	ld hl, UnnamedText_60c1f
 	call PrintText
 	ld a, MAROWAK
-	call $13d0
-	call $3748
+	call PlayCry
+	call Func_3748
 	ld c, $1e
 	call DelayFrames
 	ld hl, UnnamedText_60c24
@@ -93598,7 +94223,7 @@ PokemonTower7Script: ; 0x60d05
 	ld hl, PokemonTower7TrainerHeaders
 	ld de, $4d23
 	ld a, [$d630]
-	call $3160
+	call Func_3160
 	ld [$d630], a
 	ret
 ; 0x60d18
@@ -93631,17 +94256,17 @@ INCBIN "baserom.gbc",$60d23,$60d2d - $60d23
 	ld a, [$d730]
 	bit 0, a
 	ret nz
-	ld hl, $d5ce
+	ld hl, W_MISSABLEOBJECTLIST
 	ld a, [$cf13]
 	ld b, a
-.asm_60d63
+.missableObjectsListLoop
 	ld a, [hli]
-	cp b
+	cp b            ; search for sprite ID in missing objects list
 	ld a, [hli]
-	jr nz, .asm_60d63
-	ld [$cc4d], a
+	jr nz, .missableObjectsListLoop
+	ld [$cc4d], a   ; remove missable object
 	ld a, $11
-	call Predef ; indirect jump to Func_f1d7 (f1d7 (3:71d7))
+	call Predef ; indirect jump to RemoveMissableObject (f1d7 (3:71d7))
 	xor a
 	ld [$cd6b], a
 	ld [$cf13], a
@@ -93656,7 +94281,7 @@ INCBIN "baserom.gbc",$60d23,$60d2d - $60d23
 	ld a, $43
 	ld [$cc4d], a
 	ld a, $11
-	call Predef ; indirect jump to Func_f1d7 (f1d7 (3:71d7))
+	call Predef ; indirect jump to RemoveMissableObject (f1d7 (3:71d7))
 	ld a, $4
 	ld [$c109], a
 	ld a, $95
@@ -93913,7 +94538,7 @@ CeladonMart1Blocks: ; 0x60fde 40
 	INCBIN "maps/celadonmart1.blk"
 
 ; known jump sources: 75d88 (1d:5d88)
-Func_61006: ; 61006 (18:5006)
+GiveFossilToCinnabarLab: ; 61006 (18:5006)
 	ld hl, $d730
 	set 6, [hl]
 	xor a
@@ -93937,7 +94562,7 @@ Func_61006: ; 61006 (18:5006)
 	ld c, $d
 	ld hl, $c3a0
 	call TextBoxBorder
-	call Func_2429
+	call UpdateSprites
 	call Func_610c2
 	ld hl, $d730
 	res 6, [hl]
@@ -93951,46 +94576,47 @@ Func_61006: ; 61006 (18:5006)
 	add hl, de
 	ld a, [hl]
 	ld [$FF00+$db], a
-	cp $29
-	jr z, .asm_6106b
-	cp $2a
-	jr z, .asm_61067
-	ld b, $ab
-	jr .asm_6106d
-.asm_61067
-	ld b, $62
-	jr .asm_6106d
-.asm_6106b
-	ld b, $5a
-.asm_6106d
-	ld [$d70f], a
+	cp DOME_FOSSIL
+	jr z, .choseDomeFossil
+	cp HELIX_FOSSIL
+	jr z, .choseHelixFossil
+	ld b, AERODACTYL
+	jr .fossilSelected
+.choseHelixFossil
+	ld b, OMANYTE
+	jr .fossilSelected
+.choseDomeFossil
+	ld b, KABUTO
+.fossilSelected
+	ld [W_FOSSILITEM], a
 	ld a, b
-	ld [$d710], a
-	call Func_610eb
-	ld hl, $50ae
+	ld [W_FOSSILMON], a
+	call LoadFossilItemAndMonName
+	ld hl, UnnamedText_610ae
 	call PrintText
 	call Func_35ec
 	ld a, [W_CURMENUITEMID] ; $cc26
 	and a
 	jr nz, .asm_610a7
-	ld hl, $50b3
+	ld hl, UnnamedText_610b3
 	call PrintText
-	ld a, [$d70f]
+	ld a, [W_FOSSILITEM]
 	ld [$FF00+$db], a
-	ld b, BANK(Func_17f37)
-	ld hl, Func_17f37
-	call Bankswitch ; indirect jump to Func_17f37 (17f37 (5:7f37))
-	ld hl, $50b8
+	ld b, BANK(RemoveItemByID)
+	ld hl, RemoveItemByID
+	call Bankswitch ; indirect jump to RemoveItemByID (17f37 (5:7f37))
+	ld hl, UnnamedText_610b8
 	call PrintText
 	ld hl, $d7a3
 	set 0, [hl]
 	set 1, [hl]
 	ret
 .asm_610a7
-	ld hl, $50bd
+	ld hl, UnnamedText_610bd
 	call PrintText
 	ret
 ; 610ae (18:50ae)
+
 UnnamedText_610ae: ; 0x610ae
 	TX_FAR _UnnamedText_610ae
 	db $50
@@ -94035,16 +94661,18 @@ Func_610c2: ; 610c2 (18:50c2)
 	jr .asm_610c8
 
 ; known jump sources: 61074 (18:5074), 75ded (1d:5ded)
-Func_610eb: ; 610eb (18:50eb)
-	ld a, [$d710]
+; loads the names of the fossil item and the resulting mon
+LoadFossilItemAndMonName: ; 610eb (18:50eb)
+	ld a, [W_FOSSILMON]
 	ld [$d11e], a
 	call GetMonName
-	call Func_3826
-	ld a, [$d70f]
+	call CopyStringToCF4B
+	ld a, [W_FOSSILITEM]
 	ld [$d11e], a
 	call GetItemName
 	ret
 ; 61101 (18:5101)
+
 ViridianForest_h: ; 0x61101 to 0x6110d (12 bytes) (id=51)
 	db $03 ; tileset
 	db VIRIDIAN_FOREST_HEIGHT, VIRIDIAN_FOREST_WIDTH ; dimensions (y, x)
@@ -94058,7 +94686,7 @@ ViridianForestScript: ; 0x6110d
 	ld hl, ViridianForestTrainerHeaders
 	ld de, ViridianForestScript_Unknown61120
 	ld a, [$d618]
-	call $3160
+	call Func_3160
 	ld [$d618], a
 	ret
 ; 0x61120
@@ -94317,7 +94945,7 @@ SSAnne2Script: ; 0x6139f
 	call EnableAutoTextBoxDrawing
 	ld hl, SSAnne2Scripts
 	ld a, [$d665]
-	jp $3d97
+	jp CallFunctionInTable
 ; 0x613ab
 
 ; known jump sources: 61472 (18:5472)
@@ -94340,10 +94968,10 @@ SSAnne2Script0: ; 0x613be
 	ret nc
 	ld a, $ff
 	ld [$c0ee], a
-	call $23b1
+	call PlaySound
 	ld c, $2
 	ld a, $de
-	call $23a1
+	call PlayMusic
 	ld a, [$cd3d]
 	ld [$ff00+$db], a
 	ld a, $71
@@ -94353,7 +94981,7 @@ SSAnne2Script0: ; 0x613be
 	call Delay3
 	ld a, $2
 	ld [$ff00+$8c], a
-	call Function3541
+	call SetSpriteMovementBytesToFF
 	xor a
 	ld [$ff00+$b4], a
 	ld a, $f0
@@ -94395,7 +95023,7 @@ SSAnne2Script1: ; 0x61430
 	ld a, [$d730]
 	bit 0, a
 	ret nz
-	call $5416
+	call Func_61416
 	xor a
 	ld [$cd6b], a
 	ld a, $2
@@ -94421,7 +95049,7 @@ SSAnne2Script1: ; 0x61430
 .done
 	ld [W_TRAINERNO], a
 
-	call $5416
+	call Func_61416
 	ld a, $2
 	ld [$d665], a
 	ret
@@ -94430,8 +95058,8 @@ SSAnne2Script1: ; 0x61430
 SSAnne2Script2: ; 0x6146d
 	ld a, [$d057]
 	cp $ff
-	jp z, $53ab
-	call $5416
+	jp z, Func_613ab
+	call Func_61416
 	ld a, $f0
 	ld [$cd6b], a
 	ld a, $3
@@ -94439,7 +95067,7 @@ SSAnne2Script2: ; 0x6146d
 	call DisplayTextID
 	ld a, $2
 	ld [$ff00+$8c], a
-	call Function3541
+	call SetSpriteMovementBytesToFF
 	ld a, [$d362]
 	cp $25
 	jr nz, .asm_61497 ; 0x61490 $5
@@ -94453,7 +95081,7 @@ SSAnne2Script2: ; 0x6146d
 	call MoveSprite
 	ld a, $ff
 	ld [$c0ee], a
-	call $23b1
+	call PlaySound
 	ld b, $2
 	ld hl, $5b47
 	call Bankswitch
@@ -94474,7 +95102,7 @@ SSAnne2Script3: ; 0x614be
 	ld [$cc4d], a
 	ld a, $11
 	call Predef
-	call $2307
+	call Func_2307
 	ld a, $4
 	ld [$d665], a
 	ret
@@ -94496,7 +95124,7 @@ SSAnne2Text2: ; 0x614e6
 	set 7, [hl]
 	ld hl, SSAnneRivalDefeatedText
 	ld de, SSAnneRivalWonText
-	call $3354
+	call Func_3354
 	jp TextScriptEnd
 ; 0x61500
 
@@ -94608,7 +95236,7 @@ SSAnne5Script: ; 0x616ae
 	ld hl, $56d1
 	ld de, SSAnne5Script_Unknown616c1
 	ld a, [$d617]
-	call $3160
+	call Func_3160
 	ld [$d617], a
 	ret
 ; 0x616c1
@@ -94884,18 +95512,18 @@ SSAnne7RubText: ; 0x618ec
 	jr nz, .asm_61908 ; 0x618f9 $d
 	ld a, $ff
 	ld [$c0ee], a
-	call $23b1
+	call PlaySound
 	ld a, $2
 	ld [$c0ef], a
 .asm_61908
 	ld a, $e8
 	ld [$c0ee], a
-	call $23b1
+	call PlaySound
 .asm_61910
 	ld a, [$c026]
 	cp $e8
 	jr z, .asm_61910 ; 0x61915 $f9
-	call $2307
+	call Func_2307
 	ld hl, $d803
 	set 1, [hl]
 	ld hl, $d72d
@@ -94963,7 +95591,7 @@ SSAnne8Script: ; 0x61976
 	ld hl, SSAnne8TrainerHeaders
 	ld de, SSAnne8Script_Unknown61989
 	ld a, [$d608]
-	call $3160
+	call Func_3160
 	ld [$d608], a
 	ret
 ; 0x61989
@@ -95045,7 +95673,7 @@ SSAnne8Text8: ; 0x619fe
 	TX_FAR _SSAnne8Text8
 	db $08 ; asm
 	ld a, WIGGLYTUFF
-	call $13d0
+	call PlayCry
 	jp TextScriptEnd
 
 SSAnne8BattleText1: ; 0x61a0b
@@ -95181,7 +95809,7 @@ SSAnne9Script: ; 0x61b4b
 	ld hl, SSAnne9TrainerHeaders
 	ld de, SSAnne9Script_Unknown61b64
 	ld a, [$d609]
-	call $3160
+	call Func_3160
 	ld [$d609], a
 	ret
 ; 0x61b64
@@ -95262,12 +95890,12 @@ SSAnne9Text4: ; 0x61bd3
 
 SSAnne9Text5: ; 0x61bdd
 	db $08 ; asm
-	call $3719
+	call Func_3719
 	ld hl, UnnamedText_61bf2
 	call PrintText
-	call $3725
+	call Func_3725
 	ld a, $84
-	call $349b
+	call Func_349b
 	jp TextScriptEnd
 
 UnnamedText_61bf2: ; 0x61bf2
@@ -95462,7 +96090,7 @@ SSAnne10Script: ; 0x61d55
 	ld hl, SSAnne10TrainerHeaders
 	ld de, SSAnne10Script_Unknown61d68
 	ld a, [$d629]
-	call $3160
+	call Func_3160
 	ld [$d629], a
 	ret
 ; 0x61d68
@@ -95576,7 +96204,7 @@ SSAnne10Text8: ; 0x61e09
 	TX_FAR _SSAnne10Text8
 	db $8 ; 0x61e0d
 	ld a, MACHOKE
-	call $13d0
+	call PlayCry
 	jp TextScriptEnd
 
 SSAnne10BattleText1: ; 0x61e16
@@ -95822,7 +96450,7 @@ SilphCo11Script: ; 0x620fa
 	ld hl, SilphCo11TrainerHeaders
 	ld de, $61cf
 	ld a, [$d659]
-	call $3160
+	call Func_3160
 	ld [$d659], a
 	ret
 ; 0x62110
@@ -95902,7 +96530,7 @@ Func_6216d: ; 6216d (18:616d)
 	push hl
 	ld [$cc4d], a
 	ld a, $11
-	call Predef ; indirect jump to Func_f1d7 (f1d7 (3:71d7))
+	call Predef ; indirect jump to RemoveMissableObject (f1d7 (3:71d7))
 	pop hl
 	jr .asm_62170
 .asm_62181
@@ -95914,7 +96542,7 @@ Func_6216d: ; 6216d (18:616d)
 	push hl
 	ld [$cc4d], a
 	ld a, $15
-	call Predef ; indirect jump to Func_f1c8 (f1c8 (3:71c8))
+	call Predef ; indirect jump to AddMissableObject (f1c8 (3:71c8))
 	pop hl
 	jr .asm_62184
 
@@ -95949,7 +96577,7 @@ INCBIN "baserom.gbc",$621cf,$621db - $621cf
 	call DisplayTextID
 	ld a, $3
 	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
-	call Function3541
+	call SetSpriteMovementBytesToFF
 	ld de, $6216
 	call MoveSprite
 	ld a, $3
@@ -95986,7 +96614,7 @@ Func_6221a: ; 6221a (18:621a)
 	call DisplayTextID
 	call GBFadeIn1
 	call Func_6216d
-	call Func_2429
+	call UpdateSprites
 	call Delay3
 	call GBFadeOut1
 	ld hl, $d838
@@ -95999,7 +96627,7 @@ Func_6221a: ; 6221a (18:621a)
 	ret nz
 	ld a, $3
 	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
-	call Function3541
+	call SetSpriteMovementBytesToFF
 	ld a, [$cf0d]
 	cp $1
 	jr z, .asm_62284
@@ -96022,7 +96650,7 @@ Func_6221a: ; 6221a (18:621a)
 	call Func_3354
 	ld a, [H_DOWNARROWBLINKCNT2] ; $FF00+$8c
 	ld [$cf13], a
-	call Func_336a
+	call EngageMapTrainer
 	call Func_32d7
 	xor a
 	ld [$cd6b], a
@@ -96165,7 +96793,7 @@ UnknownText_6236c: ; 0x6236c
 	ld hl, UnnamedText_6237b
 	call PrintText
 	ld a, $aa
-	call $349b
+	call Func_349b
 	jp TextScriptEnd
 ; 0x6237b
 
@@ -96202,8 +96830,8 @@ SilphCo11Blocks: ; 0x623c8 81
 	INCBIN "maps/silphco11.blk"
 
 GymStatues: ; 0x62419
-; if in a gym and have the corresponding badge, a = $D and jp $3EF5
-; if in a gym and don’t have the corresponding badge, a = $C and jp $3EF5
+; if in a gym and have the corresponding badge, a = $D and jp Func_3ef5
+; if in a gym and don’t have the corresponding badge, a = $C and jp Func_3ef5
 ; else ret 
 	call EnableAutoTextBoxDrawing
 	ld a, [$c109]
@@ -96229,7 +96857,7 @@ GymStatues: ; 0x62419
 	jr z, .asm_6243f ; 0x6243b $2
 	ld a, $c
 .asm_6243f
-	jp $3ef5
+	jp Func_3ef5
 
 .BadgeFlags:
 	db PEWTER_GYM,   %00000001
@@ -96534,7 +97162,7 @@ Func_70000: ; 70000 (1c:4000)
 Func_70044: ; 70044 (1c:4044)
 	call Func_70000
 	ld a, $c2
-	call Func_23b1
+	call PlaySound
 	ld hl, $c300
 	ld bc, $a004
 .asm_70052
@@ -96703,7 +97331,7 @@ Func_701a0: ; 701a0 (1c:41a0)
 	ld [$FF00+$b0], a
 	ld c, $1f
 	ld a, $ca
-	call Func_23a1
+	call PlayMusic
 	ld hl, W_PARTYMON1 ; $d164
 	ld c, $ff
 .asm_701fb
@@ -96982,7 +97610,7 @@ Func_70433: ; 70433 (1c:4433)
 	ld [$cfc7], a
 	ld a, $ff
 	ld [$c0ee], a
-	call Func_23b1
+	call PlaySound
 .asm_70464
 	ld a, [$cfc7]
 	and a
@@ -96992,7 +97620,7 @@ Func_70433: ; 70433 (1c:4433)
 .asm_7046e
 	call Func_70503
 	ld a, $9e
-	call Func_23b1
+	call PlaySound
 	ld c, $1e
 	call DelayFrames
 	dec b
@@ -97003,13 +97631,13 @@ Func_70433: ; 70433 (1c:4433)
 	jr nz, .asm_70495
 	ld a, $ff
 	ld [$c0ee], a
-	call Func_23b1
+	call PlaySound
 	ld a, $2
 	ld [$c0ef], a
 .asm_70495
 	ld a, $e8
 	ld [$c0ee], a
-	call Func_23b1
+	call PlaySound
 	ld d, $28
 	call Func_704f3
 .asm_704a2
@@ -97023,7 +97651,7 @@ Func_70433: ; 70433 (1c:4433)
 	pop hl
 	pop af
 	ld [hl], a
-	jp Func_2429
+	jp UpdateSprites
 
 INCBIN "baserom.gbc",$704b7,$704f3 - $704b7
 
@@ -97069,7 +97697,7 @@ Func_70510: ; 70510 (1c:4510)
 	res 7, [hl]
 	jr nz, .asm_70568
 	ld a, $a0
-	call Func_23b1
+	call PlaySound
 	ld hl, $d732
 	bit 4, [hl]
 	res 4, [hl]
@@ -97077,7 +97705,7 @@ Func_70510: ; 70510 (1c:4510)
 	jr nz, .asm_7055e
 	call Func_705aa
 	ld a, $a3
-	call Func_23b1
+	call PlaySound
 	call Func_70787
 	ld a, b
 	and a
@@ -97109,7 +97737,7 @@ Func_70510: ; 70510 (1c:4510)
 	call CopyVideoData
 	call Func_706d7
 	ld a, $a4
-	call Func_23b1
+	call PlaySound
 	ld hl, W_WHICHTRADE ; $cd3d
 	xor a
 	ld [hli], a
@@ -97145,7 +97773,7 @@ Func_705ba: ; 705ba (1c:45ba)
 	jp nz, Func_7067d
 .asm_705c8
 	ld a, $9f
-	call Func_23b1
+	call PlaySound
 	ld hl, W_WHICHTRADE ; $cd3d
 	ld a, $f0
 	ld [hli], a
@@ -97190,7 +97818,7 @@ Func_705ba: ; 705ba (1c:45ba)
 	ld [hl], $c
 	call Func_706ae
 	ld a, $a4
-	call Func_23b1
+	call PlaySound
 	ld hl, W_WHICHTRADE ; $cd3d
 	xor a
 	ld [hli], a
@@ -97313,7 +97941,7 @@ Func_70730: ; 70730 (1c:4730)
 	jr nz, .asm_70743
 	ld a, [$cd40]
 	cp $ff
-	call nz, Func_23b1
+	call nz, PlaySound
 .asm_70743
 	ld a, [$cd3e]
 	add c
@@ -97494,7 +98122,7 @@ Func_7087e: ; 7087e (1c:487e)
 	ld a, [W_WALKCOUNTER] ; $cfc5
 	cp $0
 	ret nz
-	call Func_2429
+	call UpdateSprites
 	call Delay3
 	xor a
 	ld [$FF00+$b4], a
@@ -98316,7 +98944,7 @@ asm_70e92: ; 70e92 (1c:4e92)
 	and $c3
 	jr z, .asm_70ec8
 	ld a, $8c
-	call Func_23b1
+	call PlaySound
 	bit 6, b
 	jr nz, .asm_70ef2
 	bit 7, b
@@ -98440,7 +99068,7 @@ Func_70fd6: ; 70fd6 (1c:4fd6)
 	bit 0, b
 	jr nz, .asm_71026
 	ld a, $8c
-	call Func_23b1
+	call PlaySound
 	bit 6, b
 	jr nz, .asm_71042
 	bit 7, b
@@ -98448,7 +99076,7 @@ Func_70fd6: ; 70fd6 (1c:4fd6)
 	jr .asm_71037
 .asm_71026
 	ld a, $8e
-	call Func_23b1
+	call PlaySound
 	ld a, [hl]
 	ld [$d71a], a
 	ld hl, $d732
@@ -98521,7 +99149,7 @@ INCBIN "baserom.gbc",$71093,$7109b - $71093
 Func_7109b: ; 7109b (1c:509b)
 	call GBPalWhiteOutWithDelay3
 	call ClearScreen
-	call Func_2429
+	call UpdateSprites
 	ld hl, $c3a0
 	ld b, $12
 	ld c, $12
@@ -98581,7 +99209,7 @@ Func_711ab: ; 711ab (1c:51ab)
 	call CleanLCD_OAM
 	call LoadPlayerSpriteGraphics
 	call LoadFontTilePatterns
-	call Func_2429
+	call UpdateSprites
 	jp GoPAL_SET_CF1C
 
 ; known jump sources: 70e53 (1c:4e53), 70fcd (1c:4fcd), 70fe8 (1c:4fe8), 7123b (1c:523b)
@@ -99367,7 +99995,7 @@ INCBIN "baserom.gbc",$71959,$71AD9-$71959
 
 Predef54: ; 0x71ad9
 ; trigger the trade offer/action specified by W_WHICHTRADE
-	call $36f4
+	call Func_36f4
 	ld hl,TradeMons
 	ld a,[W_WHICHTRADE]
 	ld b,a
@@ -99418,7 +100046,7 @@ Predef54: ; 0x71ad9
 	call .asm_99bca
 	ld a,$1
 	ld [$cd12],a
-	call $35ec
+	call Func_35ec
 	ld a,[$cc26]
 	and a
 	jr nz,.asm_99bca ; 0x71b4b $b
@@ -99468,9 +100096,9 @@ Function71c07: ; 0x71c07
 	ld [$d07d],a
 	dec a
 	ld [$cfcb],a
-	call $13fc
+	call DisplayPartyMenu
 	push af
-	call $5ca2
+	call Func_71ca2
 	pop af
 	ld a,$1
 	jp c,.asm_c4bc2
@@ -99498,8 +100126,8 @@ Function71c07: ; 0x71c07
 	push af
 	ld a,[$d127]
 	push af
-	call $36c0
-	call $5cc1
+	call LoadHpBarAndStatusTilePatterns
+	call Func_71cc1
 	ld a,$38
 	call Predef
 	pop af
@@ -99511,16 +100139,16 @@ Function71c07: ; 0x71c07
 	xor a
 	ld [$cc49],a
 	ld [$cf95],a
-	call $391f
+	call RemovePokemon
 	ld a,$80
 	ld [$cc49],a
 	call AddPokemonToParty
-	call $5d19
+	call Func_71d19
 	ld hl,$7d7d
 	ld b,$5
 	call Bankswitch
 	call ClearScreen
-	call $5ca2
+	call Func_71ca2
 	ld b,$3
 	ld hl,$6edc
 	call Bankswitch
@@ -100965,7 +101593,7 @@ Func_738a1: ; 738a1 (1c:78a1)
 	bit 7, [hl]
 	call z, Func_73a29
 	call Func_7393f
-	call Func_2429
+	call UpdateSprites
 	ld hl, $fff6
 	set 1, [hl]
 	call HandleMenuInput
@@ -101322,7 +101950,7 @@ Func_7405c: ; 7405c (1d:405c)
 	call Func_3740
 	ld c, $1f
 	ld a, $c7
-	call Func_23a1
+	call PlayMusic
 	ld c, $80
 	call DelayFrames
 	xor a
@@ -101346,7 +101974,7 @@ Func_740ba: ; 740ba (1d:40ba)
 Func40CB: ; 40CB
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED],a
-	call $3719
+	call Func_3719
 	call Unknown_74183
 
 	; display the next monster from CreditsMons
@@ -101360,13 +101988,13 @@ Func40CB: ; 40CB
 	ld [$CF91],a
 	ld [$D0B5],a
 	ld hl,$C420
-	call $1537
-	call $1389
+	call GetMonHeader
+	call Func_1389
 	ld hl,$980C
 	call Unknown_74164
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED],a
-	call $3725
+	call Func_3725
 	ld hl,$9800
 	call Unknown_74164
 	ld a,$A7
@@ -101823,7 +102451,7 @@ Unknown_7481f:
 .asm_74824
 	ld de, $0003
 	ld a, [$d35e]
-	call $3dad
+	call IsInArrayCummulativeCount
 	ret nc
 	push bc
 	push hl
@@ -101902,12 +102530,12 @@ ViridianGym_h: ; 0x74897 to 0x748a3 (12 bytes) (id=45)
 ViridianGymScript: ; 0x748a3
 	ld hl, Gym8CityName
 	ld de, Gym8LeaderName
-	call $317f
+	call Func_317f
 	call EnableAutoTextBoxDrawing
 	ld hl, ViridianGymTrainerHeaders
 	ld de, Unknown_748e1
 	ld a, [$d5fb]
-	call $3160
+	call Func_3160
 	ld [$d5fb], a
 	ret
 ; 0x748bf
@@ -101947,7 +102575,7 @@ Func_748eb: ; 748eb (1d:48eb)
 	ld hl, $d736
 	set 7, [hl]
 	ld a, $a7
-	call Func_23b1
+	call PlaySound
 	ld a, $ff
 	ld [$cd6b], a
 	ld a, $4
@@ -102087,7 +102715,7 @@ Unknown_74995:
 	ld a, $23
 	ld [$cc4d], a
 	ld a, $15
-	call Predef ; indirect jump to Func_f1c8 (f1c8 (3:71c8))
+	call Predef ; indirect jump to AddMissableObject (f1c8 (3:71c8))
 	ld hl, $d7eb
 	set 1, [hl]
 	set 7, [hl]
@@ -102194,14 +102822,14 @@ ViridianGymText1: ; 0x74a69
 	ld [$cc3c], a
 	ld hl, UnnamedText_74ad9
 	call PrintText
-	call $20ef
+	call GBFadeIn1
 	ld a, $32
 	ld [$cc4d], a
 	ld a, $11
 	call Predef
-	call $2429
+	call UpdateSprites
 	call Delay3
-	call $20d1
+	call GBFadeOut1
 	jr .asm_6dff7 ; 0x74a9e
 .asm_6de66 ; 0x74aa0
 	ld hl, UnnamedText_74ace
@@ -102211,11 +102839,11 @@ ViridianGymText1: ; 0x74a69
 	set 7, [hl]
 	ld hl, UnnamedText_74ad3
 	ld de, UnnamedText_74ad3
-	call $3354
+	call Func_3354
 	ldh a, [$8c]
 	ld [$cf13], a
-	call $336a
-	call $32d7
+	call EngageMapTrainer
+	call Func_32d7
 	ld a, $8
 	ld [$d05c], a
 	ld a, $3
@@ -102757,7 +103385,7 @@ Unknown_74ee0:
 	ld b, $8
 	ld c, $c
 	call TextBoxBorder
-	call Func_2429
+	call UpdateSprites
 	ld hl, $c406
 	ld de, Unnamed_74f9e
 	call PlaceString
@@ -102777,7 +103405,7 @@ Unknown_74ee0:
 	ld [$FF00+$a1], a
 	ld a, $2
 	ld [$FF00+$a0], a
-	call Func_35a6
+	call HasEnoughMoney
 	jr nc, .asm_74f54
 	ld hl, UnnamedText_74fd3
 	jp PrintText
@@ -102794,7 +103422,7 @@ Unknown_74ee0:
 	call DelayFrames
 	push bc
 	ld a, $a8
-	call Func_23b1
+	call PlaySound
 	pop bc
 	dec b
 	jr nz, .asm_74f63
@@ -102927,7 +103555,7 @@ FuchsiaPokecenter_h: ; 0x75057 to 0x75063 (12 bytes) (id=154)
 	dw FuchsiaPokecenterObject ; objects
 
 FuchsiaPokecenterScript: ; 0x75063
-	call $22fa
+	call Func_22fa
 	jp EnableAutoTextBoxDrawing
 ; 0x75069
 
@@ -102988,14 +103616,14 @@ FuchsiaHouse2Text1: ; 0x750c2
 	bit 0, a
 	jr nz, .subtract ; 0x750c8
 	ld b,GOLD_TEETH
-	call $3493
+	call IsItemInBag
 	jr nz, .asm_3f30f ; 0x750cf
 	ld a, [$d78e]
 	bit 1, a
 	jr nz, .asm_60cba ; 0x750d6
 	ld hl, WardenGibberishText1
 	call PrintText
-	call $35ec
+	call Func_35ec
 	ld a, [$cc26]
 	and a
 	ld hl, WardenGibberishText3
@@ -103009,8 +103637,8 @@ FuchsiaHouse2Text1: ; 0x750c2
 	call PrintText
 	ld a, $40
 	ldh [$db], a
-	ld b, $5 ; BANK(MyFunction)
-	ld hl, $7f37 ; MyFunction
+	ld b, BANK(RemoveItemByID)
+	ld hl, RemoveItemByID
 	call Bankswitch
 	ld hl, $d78e
 	set 1, [hl]
@@ -103136,7 +103764,7 @@ SafariZoneEntranceScript: ; 0x751cd
 	call EnableAutoTextBoxDrawing
 	ld hl, SafariZoneEntranceScripts
 	ld a, [$d61f]
-	jp $3d97
+	jp CallFunctionInTable
 ; 0x751d9
 
 SafariZoneEntranceScripts: ; 0x751d9
@@ -103182,7 +103810,7 @@ SafariZoneEntranceScript2: ; 0x7522a
 	xor a
 	ld [$ff00+$b4], a
 	ld [$cd6b], a
-	call $2429
+	call UpdateSprites
 	ld a, $4
 	ld [$ff00+$8c], a
 	call DisplayTextID
@@ -103209,7 +103837,7 @@ SafariZoneEntranceScript5: ; 0x7524e
 	res 6, [hl]
 	jr z, .asm_7527f ; 0x7525a $23
 	res 7, [hl]
-	call $2429
+	call UpdateSprites
 	ld a, $f0
 	ld [$cd6b], a
 	ld a, $6
@@ -103279,8 +103907,8 @@ SafariZoneEntranceText4: ; 0x752ca
 ; 0x752cf
 	ld a, $13
 	ld [$d125], a
-	call $30e8
-	call $35ec
+	call DisplayTextBoxID
+	call Func_35ec
 	ld a, [$cc26]
 	and a
 	jp nz, .asm_75346
@@ -103290,7 +103918,7 @@ SafariZoneEntranceText4: ; 0x752ca
 	ld [$ff00+$a0], a
 	ld a, $0
 	ld [$ff00+$a1], a
-	call $35a6
+	call HasEnoughMoney
 	jr nc, .asm_752f9 ; 0x752ef $8
 	ld hl, UnnamedText_7536a
 	call PrintText
@@ -103309,7 +103937,7 @@ SafariZoneEntranceText4: ; 0x752ca
 	call Predef
 	ld a, $13
 	ld [$d125], a
-	call $30e8
+	call DisplayTextBoxID
 	ld hl, UnnamedText_7535b
 	call PrintText
 	ld a, $1e
@@ -103362,7 +103990,7 @@ UnnamedText_7536a: ; 0x7536a
 SafariZoneEntranceText5: ; 0x7536f
 	TX_FAR UnnamedText_9e814 ; 0x9e814
 	db $8
-	call $35ec
+	call Func_35ec
 	ld a, [$cc26]
 	and a
 	jr nz, .asm_7539c ; 0x7537b $1f
@@ -103414,7 +104042,7 @@ SafariZoneEntranceText2: ; 0x753ca
 	db $08 ; asm
 	ld hl, UnnamedText_753e6
 	call PrintText
-	call $35ec
+	call Func_35ec
 	ld a, [$cc26]
 	and a
 	ld hl, UnnamedText_753f0
@@ -103477,7 +104105,7 @@ FuchsiaGymScript: ; 0x7543d
 	ld hl, FuchsiaGymTrainerHeaders
 	ld de, Unknown_75482
 	ld a, [$d65b]
-	call $3160
+	call Func_3160
 	ld [$d65b], a
 	ret
 ; 0x75453
@@ -103489,7 +104117,7 @@ FuchsiaGymScript_Unknown75453: ; 0x75453
 	ret z
 	ld hl, Gym5CityName
 	ld de, Gym5LeaderName
-	call $317F
+	call Func_317f
 	ret
 
 Gym5CityName: ; 0x75465
@@ -103637,11 +104265,11 @@ FuchsiaGymText1: ; 0x75534
 	set 7, [hl]
 	ld hl, UnnamedText_75586
 	ld de, UnnamedText_75586
-	call $3354
+	call Func_3354
 	ldh a, [$8c]
 	ld [$cf13], a
-	call $336a
-	call $32d7
+	call EngageMapTrainer
+	call Func_32d7
 	ld a, $5
 	ld [$d05c], a
 	xor a
@@ -103920,7 +104548,7 @@ CinnabarGymScript: ; 0x7574a
 	call EnableAutoTextBoxDrawing
 	ld hl, CinnabarGymScripts
 	ld a, [$d65e]
-	jp $3d97
+	jp CallFunctionInTable
 ; 0x75759
 
 CinnabarGymScript_Unknown75759: ; 0x75759
@@ -103932,14 +104560,14 @@ CinnabarGymScript_Unknown75759: ; 0x75759
 	pop hl
 	bit 5, [hl]
 	res 5, [hl]
-	call nz, $3EAD
+	call nz, Func_3ead
 	ld hl, $D79B
 	res 7, [hl]
 	ret
 CinnabarGymScript_Unknown75772: ; 0x75772
 	ld hl, Gym7CityName
 	ld de, Gym7LeaderName
-	jp $317F
+	jp Func_317f
 
 Gym7CityName: ; 0x7577B
 	db "CINNABAR ISLAND@"
@@ -104020,10 +104648,10 @@ CinnabarGymScript2: ; 0x757f6
 	ld a, c
 	and a
 	jr nz, .asm_7581b ; 0x7580e $b
-	call $3748
+	call Func_3748
 	ld a, $ad
-	call $23b1
-	call $3748
+	call PlaySound
+	call Func_3748
 .asm_7581b
 	ld a, [$cc55]
 	ld [$ff00+$db], a
@@ -104037,7 +104665,7 @@ CinnabarGymScript2: ; 0x757f6
 	ld b, $1
 	ld hl, $d79c
 	call Unknown_757f1
-	call $3ead
+	call Func_3ead
 	xor a
 	ld [$cd6b], a
 	ld [$da38], a
@@ -104096,7 +104724,7 @@ dw TM38NoRoomText    ;CinnabarGymText 12: ; 0x75934
 Unknown_758b7:
 	ld a, [H_DOWNARROWBLINKCNT2] ; $FF00+$8c
 	ld [$cf13], a
-	call Func_336a
+	call EngageMapTrainer
 	call Func_32d7
 	ld hl, $d72d
 	set 6, [hl]
@@ -104132,7 +104760,7 @@ CinnabarGymText1: ; 0x758df
 	call PrintText
 	ld hl, UnnamedText_75919
 	ld de, UnnamedText_75919 ; $5919 XXX
-	call $3354
+	call Func_3354
 	ld a, $7
 	ld [$d05c], a
 	jp Unknown_758b7
@@ -104181,7 +104809,7 @@ CinnabarGymText2: ; 0x75939
 	call PrintText
 	ld hl, UnnamedText_75964
 	ld de, UnnamedText_75964 ; $5964 XXX
-	call $3354
+	call Func_3354
 	jp Unknown_758b7
 .asm_46bb4 ; 0x75956
 	ld hl, UnnamedText_75969
@@ -104213,7 +104841,7 @@ CinnabarGymText3: ; 0x7596e
 	call PrintText
 	ld hl, UnnamedText_75999
 	ld de, UnnamedText_75999 ; $5999 XXX
-	call $3354
+	call Func_3354
 	jp Unknown_758b7
 .asm_4b406 ; 0x7598b
 	ld hl, UnnamedText_7599e
@@ -104245,7 +104873,7 @@ CinnabarGymText4: ; 0x759a3
 	call PrintText
 	ld hl, UnnamedText_759ce
 	ld de, UnnamedText_759ce ; $59ce XXX
-	call $3354
+	call Func_3354
 	jp Unknown_758b7
 .asm_c0673 ; 0x759c0
 	ld hl, UnnamedText_759d3
@@ -104277,7 +104905,7 @@ CinnabarGymText5: ; 0x759d8
 	call PrintText
 	ld hl, UnnamedText_75a03
 	ld de, UnnamedText_75a03 ; $5a03 XXX
-	call $3354
+	call Func_3354
 	jp Unknown_758b7
 .asm_5cfd7 ; 0x759f5
 	ld hl, UnnamedText_75a08
@@ -104309,7 +104937,7 @@ CinnabarGymText6: ; 0x75a0d
 	call PrintText
 	ld hl, UnnamedText_75a38
 	ld de, UnnamedText_75a38
-	call $3354
+	call Func_3354
 	jp Unknown_758b7
 .asm_776b4 ; 0x75a2a
 	ld hl, UnnamedText_75a3d
@@ -104341,7 +104969,7 @@ CinnabarGymText7: ; 0x75a42
 	call PrintText
 	ld hl, UnnamedText_75a6d
 	ld de, UnnamedText_75a6d
-	call $3354
+	call Func_3354
 	jp Unknown_758b7
 .asm_2f755 ; 0x75a5f
 	ld hl, UnnamedText_75a72
@@ -104373,7 +105001,7 @@ CinnabarGymText8: ; 0x75a77
 	call PrintText
 	ld hl, UnnamedText_75aa2
 	ld de, UnnamedText_75aa2 ; $5aa2 XXX
-	call $3354
+	call Func_3354
 	jp Unknown_758b7
 .asm_d87be ; 0x75a94
 	ld hl, UnnamedText_75aa7
@@ -104723,8 +105351,8 @@ Lab4Text1: ; 0x75d6c
 	ld a, [$cd37]
 	and a
 	jr z, .asm_75d8d ; 0x75d81 $a
-	ld b, $18
-	ld hl, $5006
+	ld b, BANK(GiveFossilToCinnabarLab)
+	ld hl, GiveFossilToCinnabarLab
 	call Bankswitch
 	jr .asm_75d93 ; 0x75d8b $6
 .asm_75d8d
@@ -104739,12 +105367,12 @@ Lab4Text1: ; 0x75d6c
 	call PrintText
 	jr .asm_75d93 ; 0x75da0 $f1
 .asm_75da2
-	call Unknown_75de8
+	call LoadFossilItemAndMonNameBank1D
 	ld hl, UnnamedText_75dd5
 	call PrintText
 	ld hl, $d7a3
 	set 2, [hl]
-	ld a, [$d710]
+	ld a, [W_FOSSILMON]
 	ld b, a
 	ld c, $1e
 	call GivePokemon
@@ -104784,12 +105412,9 @@ Lab4Text2: ; 0x75dda
 	call Predef
 	jp TextScriptEnd
 
-Unknown_75de8 ; 0x75de8
-; XXX todo
-;db $6, $18, $21, $eb, $50
-;db $c3, $d6, $35
-	ld b, $18
-	ld hl, $50eb
+LoadFossilItemAndMonNameBank1D: ; 0x75de8
+	ld b, BANK(LoadFossilItemAndMonName)
+	ld hl, LoadFossilItemAndMonName
 	jp Bankswitch
 ; 0x75df0
 
@@ -104822,7 +105447,7 @@ CinnabarPokecenter_h: ; 0x75e20 to 0x75e2c (12 bytes) (id=171)
 	dw CinnabarPokecenterObject ; objects
 
 CinnabarPokecenterScript: ; 0x75e2c
-	call $22fa
+	call Func_22fa
 	jp EnableAutoTextBoxDrawing
 ; 0x75e32
 
@@ -104930,7 +105555,7 @@ CopycatsHouseF1Text3: ; 0x75ed6
 	TX_FAR _CopycatsHouseF1Text3
 	db $8
 	ld a, CHANSEY
-	call $13d0
+	call PlayCry
 	jp TextScriptEnd
 
 CopycatsHouseF1Object: ; 0x75ee3 (size=46)
@@ -104965,7 +105590,7 @@ GaryScript: ; 0x75f1d
 	call EnableAutoTextBoxDrawing
 	ld hl, GaryScripts
 	ld a, [$d64c]
-	jp $3d97
+	jp CallFunctionInTable
 
 Function75f29: ; 0x75f29
 	xor a
@@ -104995,10 +105620,10 @@ GaryScript1: ; 0x75f48
 	ld [$cd6b], a
 	ld hl, $ccd3
 	ld de, RLEMovement75f63
-	call $350c
+	call DecodeRLEList
 	dec a
 	ld [$cd38], a
-	call $3486
+	call Func_3486
 	ld a, $2
 	ld [$d64c], a
 	ret
@@ -105027,7 +105652,7 @@ GaryScript2: ; 0x75f6a 5F6A
 	set 7, [hl]
 	ld hl, UnnamedText_760f9
 	ld de, UnnamedText_760fe
-	call $3354
+	call Func_3354
 	ld a, $f3
 	ld [$d059], a
 
@@ -105057,7 +105682,7 @@ GaryScript3: ; 0x75fbb
 	ld a, [W_ISINBATTLE]
 	cp $ff
 	jp z, Function75f29
-	call $2429 ; move sprites
+	call UpdateSprites ; move sprites
 	ld hl, $d867
 	set 1, [hl]
 	ld a, $f0
@@ -105067,7 +105692,7 @@ GaryScript3: ; 0x75fbb
 	call Function760c8
 	ld a, $1
 	ld [$ff00+$8c], a
-	call Function3541
+	call SetSpriteMovementBytesToFF
 	ld a, $4
 	ld [$d64c], a
 	ret
@@ -105081,11 +105706,11 @@ GaryScript4: ; 0x75fe4
 	call Function760c8
 	ld a, $2
 	ld [$ff00+$8c], a
-	call Function3541
+	call SetSpriteMovementBytesToFF
 	ld de, Movement76014
 	ld a, $2
 	ld [$ff00+$8c], a
-	call $363a
+	call MoveSprite
 	ld a, $d6
 	ld [$cc4d], a
 	ld a, $15
@@ -105107,12 +105732,12 @@ GaryScript5: ; 0x7601a
 	ld [$ff00+$8c], a
 	ld a, $8
 	ld [$ff00+$8d], a
-	call $34a6
+	call Func_34a6
 	ld a, $2
 	ld [$ff00+$8c], a
 	xor a
 	ld [$ff00+$8d], a
-	call $34a6 ; face object
+	call Func_34a6 ; face object
 	ld a, $3
 	ld [$ff00+$8c], a
 	call Function760c8
@@ -105125,7 +105750,7 @@ GaryScript6: ; 0x76047
 	ld [$ff00+$8c], a
 	ld a, $c
 	ld [$ff00+$8d], a
-	call $34a6 ; face object
+	call Func_34a6 ; face object
 	ld a, $4
 	ld [$ff00+$8c], a
 	call Function760c8
@@ -105138,7 +105763,7 @@ GaryScript7: ; 0x7605f
 	ld [$ff00+$8c], a
 	xor a
 	ld [$ff00+$8d], a
-	call $34a6 ; face object
+	call Func_34a6 ; face object
 	ld a, $5
 	ld [$ff00+$8c], a
 	call Function760c8
@@ -105170,10 +105795,10 @@ GaryScript9: ; 0x76099
 	ld [$cd6b], a
 	ld hl, $ccd3
 	ld de, RLEMovement760b4
-	call $350c
+	call DecodeRLEList
 	dec a
 	ld [$cd38], a
-	call $3486
+	call Func_3486
 	ld a, $a
 	ld [$d64c], a
 	ret
@@ -105302,7 +105927,7 @@ LoreleiScript: ; 0x7617b
 	ld hl, LoreleiTrainerHeaders
 	ld de, Unknown_761bb
 	ld a, [$d64d]
-	call $3160
+	call Func_3160
 	ld [$d64d], a
 	ret
 ; 0x76191
@@ -105490,7 +106115,7 @@ BrunoScript: ; 0x762d6
 	ld hl, BrunoTrainerHeaders
 	ld de, Unknown_76312
 	ld a, [$d64e]
-	call $3160
+	call Func_3160
 	ld [$d64e], a
 	ret
 ; 0x762ec
@@ -105680,7 +106305,7 @@ AgathaScript: ; 0x7642d
 	ld hl, AgathaTrainerHeaders
 	ld de, Unknown_76469
 	ld a, [$d64f]
-	call $3160
+	call Func_3160
 	ld [$d64f], a
 	ret
 ; 0x76443
@@ -105915,7 +106540,7 @@ Unknown_765e5: ; 0x765e5
 .third
 	push bc
 	call Unknown_76610
-	call $3865
+	call Func_3865
 	ld a, [$FF00+$B4]
 	bit 1, a
 	jr nz, .fifth
@@ -105956,7 +106581,7 @@ Unknown_76610: ; 0x76610
 	call GoPAL_SET
 	ld hl, $C410
 	call GetMonHeader
-	call $1389
+	call Func_1389
 	call GBPalNormal
 	ld hl, $C4A4
 	ld b, 2
@@ -106001,7 +106626,7 @@ HiddenItems: ; 0x76688
 	ld [$d11e], a
 	call GetItemName
 	ld a, $24
-	jp $3ef5
+	jp Func_3ef5
 
 HiddenItemCoords: ; 0x766b8
 ; map ID, then coords
@@ -106077,11 +106702,11 @@ FoundHiddenItemText: ; 0x7675b
 	ld a, $10
 	call Predef
 	ld a, $89
-	call $3740 ; play sound
-	call $3748 ; wait for sound to finish playing
+	call Func_3740 ; play sound
+	call Func_3748 ; wait for sound to finish playing
 	jp TextScriptEnd
 .bagfull
-	call $3865 ; wait for button press
+	call Func_3865 ; wait for button press
 	xor a
 	ld [$cc3c], a
 	ld hl, HiddenItemBagFullText
@@ -106163,7 +106788,7 @@ HiddenCoins: ; 0x76799
 .RoomInCoinCase
 	ld a, $2b
 .done
-	jp $3ef5
+	jp Func_3ef5
 
 HiddenCoinCoords: ; 0x76822
 	db GAME_CORNER,$08,$00
@@ -106422,8 +107047,8 @@ PlayAnimation: ; 40F1
 	ld [W_ANIMSOUNDID],a ; store sound
 	push hl
 	push de
-	call $586F
-	call $23B1
+	call Func586F
+	call PlaySound
 	pop de
 	pop hl
 .skipPlayingSound
@@ -106601,8 +107226,8 @@ MoveAnimation: ; 4D5E
 	push de
 	push bc
 	push af
-	call $3748
-	call $4E23
+	call Func_3748
+	call Func_78e23
 	ld a,[W_ANIMATIONID]
 	and a
 	jr z,.AnimationFinished
@@ -106626,9 +107251,9 @@ MoveAnimation: ; 4D5E
 	ld c,30
 	call DelayFrames
 .next4
-	call $4DBD ; reload pic and flash the pic in and out (to show damage)
+	call Function4DBD ; reload pic and flash the pic in and out (to show damage)
 .AnimationFinished
-	call $3748
+	call Func_3748
 	xor a
 	ld [$D096],a
 	ld [$D09B],a
@@ -106754,8 +107379,8 @@ PlaySubanimation: ; 4E53
 	ld a,[W_ANIMSOUNDID]
 	cp a,$FF
 	jr z,.skipPlayingSound
-	call $586F
-	call $23B1 ; play sound effect
+	call Func586F
+	call PlaySound ; play sound effect
 .skipPlayingSound
 	ld hl,$C300 ; base address of OAM buffer
 	ld a,l
@@ -106794,7 +107419,7 @@ PlaySubanimation: ; 4E53
 	ld a,[hl] ; frame block mode
 	ld [W_FBMODE],a
 	call DrawFrameBlock
-	call $4ED7 ; run animation-specific function (if there is one)
+	call DoSpecialEffectByAnimationId ; run animation-specific function (if there is one)
 	ld a,[W_SUBANIMCOUNTER]
 	dec a
 	ld [W_SUBANIMCOUNTER],a
@@ -106943,7 +107568,7 @@ DoBallTossSpecialEffects: ; 4F3E
 	jr nz,.skipPlayingSound
 ; if it is the beginning of the subanimation, play a sound
 	ld a,$91
-	call $23b1 ; play sound
+	call PlaySound ; play sound
 .skipPlayingSound
 	ld a,[W_ISINBATTLE]
 	cp a,02 ; is it a trainer battle?
@@ -106967,7 +107592,7 @@ DoBallTossSpecialEffects: ; 4F3E
 .loop
 	push hl
 	push bc
-	call $5862 ; move row of tiles left
+	call Func_79862 ; move row of tiles left
 	pop bc
 	pop hl
 	add hl,de
@@ -106990,7 +107615,7 @@ DoBallShakeSpecialEffects: ; 4F96
 	jr nz,.skipPlayingSound
 ; if it is the beginning of a shake, play a sound and wait 2/3 of a second
 	ld a,$8c
-	call $23b1 ; play sound
+	call PlaySound ; play sound
 	ld c,40
 	call DelayFrames
 .skipPlayingSound
@@ -107023,7 +107648,7 @@ DoPoofSpecialEffects: ; 4FCE
 	cp a,5
 	ret nz
 	ld a,$93
-	jp $23b1
+	jp PlaySound
 
 DoRockSlideSpecialEffects: ; 4FD9
 	ld a,[W_SUBANIMCOUNTER]
@@ -107063,7 +107688,7 @@ DoExplodeSpecialEffects: ; 5009
 	jr nz,FlashScreenEveryFourFrameBlocks
 ; if it's the end of the subanimation, make the attacking pokemon disappear
 	ld hl,$C405
-	jp $5801 ; make pokemon disappear
+	jp Func_79801 ; make pokemon disappear
 
 ; flashes the screen when subanimation counter is 1 modulo 4
 DoBlizzardSpecialEffects: ; 5016
@@ -107097,7 +107722,7 @@ Func5041:
 	cp a,6
 	ret nz
 	ld a,$2F
-	jp $580C ; make pokemon disappear
+	jp Func_7980c ; make pokemon disappear
 
 ; function to make a shaking pokeball jump up at the end of the animation
 ; XXX probably a trade-related animation
@@ -107128,7 +107753,7 @@ Func504C:
 .done
 	call AnimationCleanOAM
 	ld a,$98
-	jp $23B1 ; play sound
+	jp PlaySound ; play sound
 
 BallMoveDistances1: ; 5078
 db -12,-12,-8
@@ -107160,7 +107785,7 @@ Func507C ; 507C
 	jr nz,.skipPlayingSound
 .playSound ; play sound if next move distance is 12 or this is the last one
 	ld a,$ae
-	call $23b1
+	call PlaySound
 .skipPlayingSound
 	push bc
 	ld c,5
@@ -108101,7 +108726,7 @@ Func586F: ; 0x7986F 586F
 	ld a,[$CFE5]
 .Continue
 	push hl
-	call $13D9
+	call GetCryData
 	ld b,a
 	pop hl
 	ld a,[$C0F1]
@@ -108419,7 +109044,7 @@ TossBallAnimation: ; 5E16
 	ld [W_ANIMATIONID],a
 	call PlayAnimation
 	ld a,$95
-	call $23B1 ; play sound effect
+	call PlaySound ; play sound effect
 	ld a,BLOCKBALL_ANIM
 	ld [W_ANIMATIONID],a
 	jp PlayAnimation
@@ -108447,7 +109072,7 @@ Func_79e6a: ; 79e6a (1e:5e6a)
 	ld a, b
 	ld [$c0f2], a
 	ld a, c
-	jp Func_23b1
+	jp PlaySound
 
 ; known jump sources: efdb (3:6fdb)
 Func_79e96: ; 79e96 (1e:5e96)
@@ -108764,11 +109389,11 @@ Func_7bde9: ; 7bde9 (1e:7de9)
 	ld [$c02a], a
 	dec a
 	ld [$c0ee], a
-	call Func_23b1
+	call PlaySound
 	ld a, $1
 	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
 	ld a, $8c
-	call Func_23b1
+	call PlaySound
 	call Delay3
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
@@ -108796,7 +109421,7 @@ Func_7bde9: ; 7bde9 (1e:7de9)
 	call Func_3748
 	ld c, $2
 	ld a, $e5
-	call Func_23a1
+	call PlayMusic
 	ld c, $50
 	call DelayFrames
 	ld c, $1
@@ -108822,7 +109447,7 @@ Func_7bde9: ; 7bde9 (1e:7de9)
 	ld [$cf1d], a
 	ld a, $ff
 	ld [$c0ee], a
-	call Func_23b1
+	call PlaySound
 	ld a, [$cf1d]
 	call PlayCry
 	ld c, $0
@@ -108920,7 +109545,7 @@ Func_7bf15: ; 7bf15 (1e:7f15)
 	call Func_7bf64
 	call Delay3
 	ld a, $ff
-	call Func_23b1
+	call PlaySound
 	ld a, [$FF00+$af]
 	ld d, a
 	ld e, $1
@@ -108934,7 +109559,7 @@ Func_7bf15: ; 7bf15 (1e:7f15)
 	push bc
 	ld c, $2
 	ld a, $b4
-	call Func_23a1
+	call PlayMusic
 	pop bc
 	ld c, $2
 	call DelayFrames
@@ -108943,15 +109568,15 @@ Func_7bf15: ; 7bf15 (1e:7f15)
 	ld a, d
 	ld [$FF00+$af], a
 	ld a, $ff
-	call Func_23b1
+	call PlaySound
 	ld c, $2
 	ld a, $b9
-	call Func_23a1
+	call PlayMusic
 .asm_7bf57
 	ld a, [$c02a]
 	cp $b9
 	jr z, .asm_7bf57
-	call Func_2429
+	call UpdateSprites
 	jp Func_2307
 
 ; known jump sources: 7bf18 (1e:7f18), 7bf1e (1e:7f1e)
@@ -109174,10 +109799,12 @@ Func_7d13b: ; 7d13b (1f:513b)
 	add hl, bc
 	ld a, [hli]
 	ld c, [hl]
-	call Func_23a1
+	call PlayMusic
 	jp Func_2307
 
 INCBIN "baserom.gbc",$7d162,$7d177 - $7d162
+
+Func_7d177: ; 0x7d177
 	ld c, $0
 .asm_7d179
 	ld b, $0
@@ -110845,7 +111472,7 @@ _UnnamedText_526f8: ; 0x80029
 	db "CARD KEY!", $57
 ; 0x80029 + 28 bytes
 
-UnnamedText_80045: ; 0x80045
+_UnnamedText_33cf: ; 0x80045
 	TX_RAM $cd6d
 	db $0, ": @@"
 ; 0xa8004d
@@ -110886,14 +111513,14 @@ _PokeCenterSignText: ; 0x800fc
 	db $0, "Heal Your #MON!", $4f
 	db "#MON CENTER", $57
 
-UnnamedText_80119: ; 0x80119
+_FoundItemText: ; 0x80119
 	db $0, $52, " found", $4f
 	db "@"
 	TX_RAM $cf4b
 	db $0, "!@@"
 ; 0x8012a
 
-_UnnamedText_4e2c: ; 0x8012a
+_NoMoreRoomForItemText: ; 0x8012a
 	db $0, "No more room for", $4f
 	db "items!", $57
 ; 0x8012a + 25 bytes

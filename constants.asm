@@ -105,6 +105,48 @@ PREDEF_JUMP: MACRO
 
 ; wram locations
 
+; data for all sprites on the current map
+; holds info for 16 sprites with $10 bytes each
+; player sprite is always sprite 0
+; C1x0: picture ID (fixed, loaded at map init)
+; C1x1: movement status (0: uninitialized, 1: ready, 2: delayed, 3: moving)
+; C1x2: sprite image index (changed on update, $ff if off screen, includes facing direction, progress in walking animation and a sprite-specific offset)
+; C1x3: Y screen position delta (-1,0 or 1; added to c1x4 on each walking animation update)
+; C1x4: Y screen position (in pixels, always 4 pixels above grid which makes sprites appear to be in the center of a tile)
+; C1x5: X screen position delta (-1,0 or 1; added to c1x6 on each walking animation update)
+; C1x6: X screen position (in pixels, snaps to grid if not currently walking)
+; C1x7: intra-animation-frame counter (counting upwards to 4 until c1x8 is incremented)
+; C1x8: animation frame counter (increased every 4 updates, hold four states (totalling to 16 walking frames)
+; C1x9: facing direction (0: down, 4: up, 8: left, $c: right)
+; C1xA
+; C1xB
+; C1xC
+; C1xD
+; C1xE
+; C1xF
+W_SPRITESTATEDATA1 EQU $C100
+
+; more data for all sprites on the current map
+; holds info for 16 sprites with $10 bytes each
+; player sprite is always sprite 0
+; C2x0: walk animation counter (counting from $10 backwards when moving)
+; C2x1: 
+; C2x2: Y displacement (initialized at 8, supposed to keep moving sprites from moving too far, but bugged)
+; C2x3: X displacement (initialized at 8, supposed to keep moving sprites from moving too far, but bugged)
+; C2x4: Y position (in 2x2 tile grid steps, topmost 2x2 tile has value 4)
+; C2x5: X position (in 2x2 tile grid steps, leftmost 2x2 tile has value 4)
+; C2x6: movement byte 1 (determines whether a sprite can move, $ff:not moving, $fe:random movements, others unknown)
+; C2x7: (?) (set to $80 when in grass, else $0; may be used to draw grass above the sprite)
+; C2x8: delay until next movement (counted downwards, status (c1x1) is set to ready if reached 0)
+; C2x9
+; C2xA
+; C2xB
+; C2xC
+; C2xD
+; C2xE: sprite image base offset (in video ram, player always has value 1, used to compute c1x2)
+; C2xF
+W_SPRITESTATEDATA2 EQU $C200
+
 ; the tiles of the row or column to be redrawn by RedrawExposedScreenEdge
 W_SCREENEDGETILES EQU $CBFC
 
@@ -144,6 +186,8 @@ W_LISTSCROLLOFFSET EQU $CC36
 ; set to 0 if you can't go past the top or bottom of the menu
 W_MENUWRAPPINGENABLED EQU $CC4A
 
+W_RLEBYTECOUNTER      EQU $CCD2
+
 ; current HP of player and enemy substitutes
 W_PLAYERSUBSITUTEHP EQU $CCD7
 W_ENEMYSUBSITUTEHP EQU $CCD8
@@ -179,6 +223,9 @@ W_ENEMYMONEVASIONMOD  EQU $CD33
 W_WHICHTRADE EQU $CD3D ; which entry from TradeMons to select
 
 W_ANIMSOUNDID EQU $CF07 ; sound ID during battle animations
+
+; movement byte 2 of current sprite
+W_CURSPRITEMOVEMENT2 EQU $CF14
 
 W_WHICHPOKEMON EQU $CF92 ; which pokemon you selected
 
@@ -370,6 +417,11 @@ H_SPRITEWIDTH           EQU $FF8B ; in bytes
 H_SPRITEINTERLACECOUNTER EQU $FF8B
 H_SPRITEHEIGHT          EQU $FF8C ; in bytes
 H_SPRITEOFFSET          EQU $FF8D
+
+; OAM flags used by this game
+OAMFLAG_ENDOFDATA   EQU %00000001 ; pseudo OAM flag, only used by game logic
+OAMFLAG_CANBEMASKED EQU %00000010 ; pseudo OAM flag, only used by game logic
+OAMFLAG_VFLIPPED    EQU %00100000 ; OAM flag flips the sprite vertically. Used for making left facing sprites face right and to alternate between left and right foot animation when walking up or down
 
 ; List type
 ; used in $D0B6
@@ -729,7 +781,19 @@ W_SPRITESET EQU $D39D ; sprite set for the current map (11 sprite picture ID's)
 W_SPRITESETID EQU $D3A8 ; sprite set ID for the current map
 
 W_NUMSPRITES EQU $D4E1 ; number of sprites on the current map
-W_PEOPLEMOVEPERMISSIONS EQU $D4E4
+
+; two bytes per sprite (movement byte 2 , text ID)
+W_MAPSPRITEDATA EQU $D4e4
+
+; two bytes per sprite (trainer class/item ID , trainer set ID)
+W_MAPSPRITEEXTRADATA EQU $D504
+
+W_TILESETBANK             EQU $D52B
+W_TILESETBLOCKSPTR        EQU $D52C ; maps blocks (4x4 tiles) to it's tiles
+W_TILESETGFXPTR           EQU $D52E
+W_TILESETCOLLISIONPTR     EQU $D530 ; list of all walkable tiles
+W_TILESETTALKINGOVERTILES EQU $D532 ; 3 bytes
+W_GRASSTILE               EQU $D535
 
 ; coins are in decimal
 W_PLAYERCOINS1 EQU $D5A4
@@ -761,6 +825,21 @@ W_ENEMYMON4MOVE3 EQU $D932
 W_ENEMYMON5MOVE3 EQU $D95E
 
 W_ENEMYMON6MOVE3 EQU $D98A
+
+W_ENEMYMON1OT    EQU $D9AC
+W_ENEMYMON2OT    EQU $D9B7
+W_ENEMYMON3OT    EQU $D9C2
+W_ENEMYMON4OT    EQU $D9CD
+W_ENEMYMON5OT    EQU $D9D8
+W_ENEMYMON6OT    EQU $D9E3
+
+W_ENEMYMON1NAME  EQU $D9EE
+W_ENEMYMON2NAME  EQU $D9F9
+W_ENEMYMON3NAME  EQU $DA04
+W_ENEMYMON4NAME  EQU $DA0F
+W_ENEMYMON5NAME  EQU $DA1A
+W_ENEMYMON6NAME  EQU $DA25 ; to $da2f
+
 
 W_PLAYTIMEHOURS     EQU $DA40 ; two bytes
 W_PLAYTIMEMINUTES   EQU $DA42 ; two bytes
@@ -878,8 +957,23 @@ W_BOXITEM50       EQU $D59D
 W_BOXITEM50QTY    EQU $D59E
 ;box end of list $D59F
 
+W_MISSABLEOBJECTFLAGS EQU $D5A6 ; $20 bytes, bit array of missable objects. bit 1 = removed
+
+; each entry consists of 2 bytes
+; * the sprite ID (depending on the current map)
+; * the missable object index (global, used for W_MISSABLEOBJECTFLAGS)
+; terminated with $FF
+W_MISSABLEOBJECTLIST EQU $D5CE
+
+W_GAMEPROGRESSFLAGS EQU $D5F0 ; $c8 bytes
+
+W_TOWNVISITEDFLAG EQU $D70B ; 2 bytes bit array, 1 means visited
+
 W_SAFARITIMER1 EQU $D70D ; use 01 for maximum
 W_SAFARITIMER2 EQU $D70E ; use F4 for maximum
+
+W_FOSSILITEM   EQU $D70F ; item given to cinnabar lab
+W_FOSSILMON    EQU $D710 ; mon that will result from the item
 
 ; counters for blinking down arrow
 H_DOWNARROWBLINKCNT1 EQU $FF8B
@@ -977,6 +1071,8 @@ H_FRAMECOUNTER EQU $FFD5 ; decremented every V-blank (used for delays)
 ; So, by setting it to a nonzero value and waiting for it to become 0 again,
 ; you can detect that the V-blank handler has run since then.
 H_VBLANKOCCURRED EQU $FFD6
+
+H_CURRENTSPRITEOFFSET EQU $FFDA ; multiple of $10
 
 H_WHOSETURN EQU $FFF3 ; 0 on player’s turn, 1 on enemy’s turn
 
