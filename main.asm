@@ -437,8 +437,8 @@ MapHeaderPointers: ; $01AE
 ; down a ledge
 ; it also ends the jump when it's completed
 HandleMidJump: ; 39E
-	ld b,$1c
-	ld hl,$487e
+	ld b, BANK(Func_7087e)
+	ld hl, Func_7087e
 	jp Bankswitch
 
 ; this is jumped to immediately after loading a save / starting a new game / loading a new map
@@ -446,8 +446,8 @@ EnterMap: ; 3A6
 	ld a,$ff
 	ld [$cd6b],a
 	call LoadMapData ; load map data
-	ld b,$03
-	ld hl,$4335
+	ld b,BANK(Func_c335)
+	ld hl,Func_c335
 	call Bankswitch ; initialize some variables
 	ld hl,$d72c
 	bit 0,[hl]
@@ -465,8 +465,8 @@ EnterMap: ; 3A6
 	and a,$18
 	jr z,.didNotFlyOrTeleportIn
 	res 3,[hl]
-	ld b,$1c
-	ld hl,$4510
+	ld b,BANK(Func_70510)
+	ld hl,Func_70510
 	call Bankswitch ; display fly/teleport in graphical effect
 	call UpdateSprites ; move sprites
 .didNotFlyOrTeleportIn
@@ -494,8 +494,8 @@ OverworldLoopLessDelay: ; 402
 	and a
 	jp nz,.moveAhead ; if the player sprite has not yet completed the walking animation
 	call GetJoypadStateOverworld ; get joypad state (which is possibly simulated)
-	ld b,$07
-	ld hl,$6988
+	ld b, BANK(Func_1e988)
+	ld hl, Func_1e988
 	call Bankswitch
 	ld a,[$da46]
 	and a
@@ -699,8 +699,8 @@ OverworldLoopLessDelay: ; 402
 	ld a,[$d736]
 	bit 7,a
 	jr z,.noSpinning
-	ld b,$11
-	ld hl,$4fd7
+	ld b, BANK(Func_44fd7)
+	ld hl, Func_44fd7
 	call Bankswitch ; spin while moving
 .noSpinning
 	call UpdateSprites ; move sprites
@@ -738,8 +738,8 @@ OverworldLoopLessDelay: ; 402
 	ld a,[$d790]
 	bit 7,a ; in the safari zone?
 	jr z,.notSafariZone
-	ld b,$07
-	ld hl,$6997
+	ld b, BANK(Func_1e997)
+	ld hl, Func_1e997
 	call Bankswitch
 	ld a,[$da46]
 	and a
@@ -779,8 +779,8 @@ OverworldLoopLessDelay: ; 402
 	ld a,[W_CURMAP]
 	cp a,OAKS_LAB
 	jp z,.noFaintCheck
-	ld hl,$4a83
-	ld b,$0f
+	ld hl, Func_3ca83
+	ld b, BANK(Func_3ca83)
 	call Bankswitch ; check if all the player's pokemon fainted
 	ld a,d
 	and a
@@ -806,8 +806,8 @@ NewBattle: ; 683
 	ld a,[$d72e]
 	bit 4,a
 	jr nz,.noBattle
-	ld b,$0f
-	ld hl,$6f12
+	ld b, BANK(Func_3ef12)
+	ld hl, Func_3ef12
 	jp Bankswitch ; determines if a battle will occurr and runs the battle if so
 .noBattle
 	and a
@@ -852,8 +852,8 @@ CheckWarpsNoCollisionLoop: ; 6CC
 	push bc
 	ld hl,$d736
 	set 2,[hl]
-	ld b,$03
-	ld hl,$449d
+	ld b, BANK(Func_c49d)
+	ld hl, Func_c49d
 	call Bankswitch ; check if the player sprite is standing on a "door" tile
 	pop bc
 	pop hl
@@ -951,8 +951,8 @@ WarpFound2: ; 73C
 	jr z,.goBackOutside
 ; if not going back to the previous map
 	ld [W_CURMAP],a ; current map number
-	ld b,$1c
-	ld hl,$4787
+	ld b, BANK(Func_70787)
+	ld hl, Func_70787
 	call Bankswitch ; check if the warp was a Silph Co. teleporter
 	ld a,[$cd5b]
 	dec a
@@ -1179,17 +1179,17 @@ ExtraWarpCheck: ; 8E9
 	cp a,$17 ; Indigo Plateau tileset
 	jr z,.useFunction2
 .useFunction1
-	ld hl,$43ff
+	ld hl,Func_c3ff
 	jr .doBankswitch
 .useFunction2
-	ld hl,$444e
+	ld hl, Func_c44e
 .doBankswitch
-	ld b,$03
+	ld b, BANK(Func_c44e)
 	jp Bankswitch
 
 MapEntryAfterBattle: ; 91F
-	ld b,$03
-	ld hl,$435f
+	ld b, BANK(Func_c35f)
+	ld hl, Func_c35f
 	call Bankswitch ; function that appears to disable warp testing after collisions if the player is standing on a warp
 	ld a,[$d35d]
 	and a
@@ -1243,8 +1243,8 @@ HandleFlyOrTeleportAway: ; 965
 
 ; function that calls a function to do fly away or teleport away graphics
 DoFlyOrTeleportAwayGraphics: ; 98F
-	ld b,$1c
-	ld hl,$45ba
+	ld b, BANK(Func_705ba)
+	ld hl, Func_705ba
 	jp Bankswitch
 
 ; load sprite graphics based on whether the player is standing, biking, or surfing
@@ -1718,8 +1718,8 @@ CheckForJumpingAndTilePairCollisions: ; C2A
 	call Predef ; get the tile in front of the player
 	push de
 	push bc
-	ld b,$06
-	ld hl,$6672
+	ld b, BANK(Func_1a672)
+	ld hl, Func_1a672
 	call Bankswitch ; check if the player is trying to jump a ledge
 	pop bc
 	pop de
@@ -2415,14 +2415,14 @@ RunMapScript: ; 101B
 	push hl
 	push de
 	push bc
-	ld b,$03
-	ld hl,$7225
+	ld b, BANK(Func_f225)
+	ld hl, Func_f225
 	call Bankswitch ; check if the player is pushing a boulder
 	ld a,[$cd60]
 	bit 1,a ; is the player pushing a boulder?
 	jr z,.afterBoulderEffect
-	ld b,$03
-	ld hl,$72b5
+	ld b, BANK(Func_f2b5)
+	ld hl, Func_f2b5
 	call Bankswitch ; displays dust effect when pushing a boulder
 .afterBoulderEffect
 	pop bc
@@ -2474,8 +2474,8 @@ LoadPlayerSpriteGraphicsCommon: ; 0x1063
 
 ; function to load data from the map header
 LoadMapHeader: ; 107C
-	ld b,$03
-	ld hl,$7113
+	ld b, BANK(Func_f113)
+	ld hl, Func_f113
 	call Bankswitch
 	ld a,[W_CURMAPTILESET]
 	ld [$d119],a
@@ -2725,8 +2725,8 @@ LoadMapHeader: ; 107C
 .finishUp
 	ld a,$19
 	call Predef ; load tileset data
-	ld hl,$4eb8
-	ld b,$03
+	ld hl, LoadWildData
+	ld b, BANK(LoadWildData)
 	call Bankswitch ; load wild pokemon data
 	pop hl ; restore hl from before going to the warp/sign/sprite data (this value was saved for seemingly no purpose)
 	ld a,[W_CURMAPHEIGHT] ; map height in 4x4 tile blocks
@@ -3208,8 +3208,8 @@ HandlePartyMenuInput: ; 145A
 .handleSwap
 	ld a,[W_CURMENUITEMID]
 	ld [$cf92],a
-	ld b,$04
-	ld hl,$7613
+	ld b, BANK(Func_13613)
+	ld hl, Func_13613
 	call Bankswitch
 	jr HandlePartyMenuInput
 
@@ -3218,10 +3218,10 @@ DrawPartyMenu: ; 14D4
 	jr DrawPartyMenuCommon
 
 RedrawPartyMenu: ; 14D9
-	ld hl,$6ce3
+	ld hl, RedrawPartyMenu_
 
 DrawPartyMenuCommon: ; 14DC
-	ld b,$04
+	ld b, BANK(RedrawPartyMenu_)
 	jp Bankswitch
 
 ; prints a pokemon's status condition
@@ -5321,8 +5321,8 @@ VBlankHandler: ; 2024
 .bank1F
 	call Func_7d177
 .afterMusic
-	ld b,$06
-	ld hl,$4dee
+	ld b, BANK(Func_18dee)
+	ld hl, Func_18dee
 	call Bankswitch ; keep track of time played
 	ld a,[$fff9]
 	and a
@@ -5676,8 +5676,8 @@ Func_2247: ; 2247 (0:2247)
 ; no known jump sources (dead code?)
 Func_226e: ; 226e (0:226e)
 	call Func_3719
-	ld hl, $4c05
-	ld b, $1
+	ld hl, Func_4c05
+	ld b, BANK(Func_4c05)
 	call Bankswitch
 	call Func_227f
 	jp Func_3725
@@ -6797,8 +6797,8 @@ DisplayTextID: ; 2920
 	push hl
 	push de
 	push bc
-	ld b,$04
-	ld hl,$7074
+	ld b, BANK(Func_13074)
+	ld hl, Func_13074
 	call Bankswitch ; update the graphics of the sprite the player is talking to (to face the right direction)
 	pop bc
 	pop de
@@ -6837,7 +6837,7 @@ DisplayTextID: ; 2920
 	jp z,FuncTX_PokemonCenterPC
 	cp a,$f5   ; Vending Machine
 	jr nz,.notVendingMachine
-	ld b,$1d
+	ld b,BANK(Unknown_74ee0)
 	ld hl,Unknown_74ee0
 	call Bankswitch
 	jr AfterDisplayingTextID
@@ -6846,8 +6846,8 @@ DisplayTextID: ; 2920
 	jp z,FuncTX_SlotMachine
 	cp a,$f6   ; cable connection NPC in Pokemon Center
 	jr nz,.notSpecialCase
-	ld hl,$71c5
-	ld b,$01
+	ld hl, Unknown_71c5
+	ld b, BANK(Unknown_71c5)
 	call Bankswitch
 	jr AfterDisplayingTextID
 .notSpecialCase
@@ -6963,8 +6963,8 @@ DisplayPokemonCenterDialogue: ; 2A72
 	jp AfterDisplayingTextID
 
 DisplaySafariGameOverText: ; 2A90
-	ld hl,$69ed
-	ld b,$07
+	ld hl, Func_1e9ed
+	ld b, BANK(Func_1e9ed)
 	call Bankswitch
 	jp AfterDisplayingTextID
 
@@ -7011,8 +7011,8 @@ RedisplayStartMenu: ; 2ADF
 	ld b,BANK(DrawStartMenu)
 	ld hl,DrawStartMenu
 	call Bankswitch
-	ld b,$03
-	ld hl,$452f
+	ld b, BANK(Func_c52f)
+	ld hl, Func_c52f
 	call Bankswitch ; print Safari Zone info, if in Safari Zone
 	call UpdateSprites ; move sprites
 .loop
@@ -7888,8 +7888,8 @@ ReloadTilesetTilePatterns: ; 3090
 ChooseFlyDestination: ; 30A9
 	ld hl,$d72e
 	res 4,[hl]
-	ld b,$1c
-	ld hl,$4f90
+	ld b, BANK(Func_70f90)
+	ld hl, Func_70f90
 	jp Bankswitch
 
 ; causes the text box to close waithout waiting for a button press after displaying text
@@ -8525,8 +8525,8 @@ FuncTX_ItemStoragePC: ; 3460 (0:3460)
 ; known jump sources: 29a4 (0:29a4)
 FuncTX_BillsPC: ; 346a (0:346a)
 	call Func_36f4
-	ld b, $8
-	ld hl, $54c2
+	ld b, BANK(Func_214c2)
+	ld hl, Func_214c2
 	jr bankswitchAndContinue
 ; 3474 (0:3474)
 
@@ -8541,8 +8541,8 @@ bankswitchAndContinue:
 
 ; known jump sources: 29a9 (0:29a9)
 FuncTX_PokemonCenterPC: ; 347f (0:347f)
-	ld b, $5
-	ld hl, $7e2c
+	ld b, BANK(ActivatePC)
+	ld hl, ActivatePC
 	jr bankswitchAndContinue
 
 ; known jump sources: 190cf (6:50cf), 1981a (6:581a), 19845 (6:5845), 1a402 (6:6402), 1a6b7 (6:66b7), 1ca63 (7:4a63), 1cbb2 (7:4bb2), 1cc64 (7:4c64), 1d4b2 (7:54b2), 1e6ca (7:66ca), 49705 (12:5705), 498bd (12:58bd), 512e9 (14:52e9), 51402 (14:5402), 5a36d (16:636d), 5a51f (16:651f), 5c1ea (17:41ea), 748fe (1d:48fe), 752b1 (1d:52b1), 75f5a (1d:5f5a), 760ab (1d:60ab), 761d6 (1d:61d6), 76217 (1d:6217), 7632d (1d:632d), 7636e (1d:636e), 76484 (1d:6484), 764c5 (1d:64c5)
@@ -9368,8 +9368,8 @@ Func_3898: ; 3898 (0:3898)
 Multiply: ; 38AC
 	push hl
 	push bc
-	ld hl,$7d41
-	ld b,$0d
+	ld hl, Func_37d41
+	ld b, BANK(Func_37d41)
 	call Bankswitch
 	pop bc
 	pop hl
@@ -9468,16 +9468,16 @@ CopyDataUntil: ; 3913
 ; [$cf95] == 0 specifies the party.
 ; [$cf95] != 0 specifies the current box.
 RemovePokemon: ; 391F
-	ld hl,$7b68
-	ld b,$01
+	ld hl, Func_7b68
+	ld b, BANK(Func_7b68)
 	jp Bankswitch
 
 AddPokemonToParty: ; 0x3927
 	push hl
 	push de
 	push bc
-	ld b, $3 ; BANK(MyFunction)
-	ld hl, $72e5 ; MyFunction
+	ld b, BANK(Func_f2e5) ; BANK(MyFunction)
+	ld hl, Func_f2e5 ; MyFunction
 	call Bankswitch
 	pop bc
 	pop de
@@ -9804,8 +9804,8 @@ HandleMenuInputPokemonSelection: ; 3AC2
 	ld a,[$d09b]
 	and a ; is it a pokemon selection menu?
 	jr z,.getJoypadState
-	ld b,$1c
-	ld hl,$56ff ; shake mini sprite of selected pokemon
+	ld b, BANK(Func_716ff)
+	ld hl, Func_716ff ; shake mini sprite of selected pokemon
 	call Bankswitch
 .getJoypadState
 	pop hl
@@ -10465,8 +10465,8 @@ GivePokemon: ; 0x3e48
 	ld [$d127], a
 	xor a
 	ld [$cc49], a
-	ld b, $13
-	ld hl, $7da5
+	ld b, BANK(Func_4fda5)
+	ld hl, Func_4fda5
 	jp Bankswitch
 
 GenRandom: ; 0x3e5c
@@ -11326,8 +11326,8 @@ LoadMonData_: ; 45B6
 	jr z,.GetMonHeader
 	ld a,[$cf92]
 	ld e,a
-	ld hl,$5c37
-	ld b,$0e
+	ld hl, Func_39c37
+	ld b, BANK(Func_39c37)
 	call Bankswitch ; get pokemon ID
 .GetMonHeader
 	ld a,[$cf91]
@@ -15338,8 +15338,8 @@ DisplayPokemartDialogue_: ; 6C20
 	ld [$cf93],a
 	ld a,$02
 	ld [$d11b],a
-	ld hl,$5bd5
-	ld b,$0e
+	ld hl, Func_39bd5
+	ld b, BANK(Func_39bd5)
 	call Bankswitch
 	ld a,[W_NUMBAGITEMS]
 	and a
@@ -15418,8 +15418,8 @@ DisplayPokemartDialogue_: ; 6C20
 	ld [$cf93],a
 	ld a,$03
 	ld [$d11b],a
-	ld hl,$5bd5
-	ld b,$0e
+	ld hl, Func_39bd5
+	ld b, BANK(Func_39bd5)
 	call Bankswitch
 	ld hl,PokemartBuyingGreetingText
 	call PrintText
@@ -15822,8 +15822,8 @@ DisplayPokemonCenterDialogue_: ; 0x6fe6
 	ld [$c112], a ; make the nurse turn to face the machine
 	call Delay3
 	PREDEF HealPartyPredef
-	ld b, $1c
-	ld hl, $4433
+	ld b, BANK(Func_70433)
+	ld hl, Func_70433
 	call Bankswitch ; do the healing machine animation
 	xor a
 	ld [$cfc7], a
@@ -16125,8 +16125,8 @@ Unknown_71e1: ; 0x71e1
 	ld a, [$cc26]
 	and a
 	jr nz, .asm_728f ; 0x723e $4f
-	ld hl, $7848
-	ld b, $1c
+	ld hl, Func_73848
+	ld b, BANK(Func_73848)
 	call Bankswitch
 	call Func_3748
 	ld a, $b6
@@ -16183,8 +16183,8 @@ Func_72a8: ; 0x72a8
 	xor a
 	ld [hld], a
 	ld [hl], a
-	ld hl, $5c0a
-	ld b, $1
+	ld hl, Func_5c0a
+	ld b, BANK(Func_5c0a)
 	jp Bankswitch
 ; 0x72b3
 
@@ -18136,6 +18136,8 @@ Func_c3ff: ; c3ff (3:43ff)
 	ret
 
 INCBIN "baserom.gbc",$c422,$c42a - $c422
+
+Func_c422: ; 0xc422
 	ld a, [W_CURMAPHEIGHT] ; $d368
 	add a
 	dec a
@@ -18162,6 +18164,8 @@ INCBIN "baserom.gbc",$c422,$c42a - $c422
 .asm_c44c
 	scf
 	ret
+
+Func_c44e: ; 0xc44e
 	push hl
 	push de
 	push bc
@@ -23441,8 +23445,8 @@ ItemUseBall: ; 03:5687
 	call Func_3725	;restore screenBuffer from Backup
 	ld hl,ItemUseText00
 	call PrintText
-	ld hl,$583a
-	ld b,$0f
+	ld hl, Function583A
+	ld b, BANK(Function583A)
 	call Bankswitch
 	ld b,$10
 	jp z,$5801
@@ -23687,8 +23691,8 @@ ItemUseBall: ; 03:5687
 	ld [$cf91],a
 	ld a,[$cff3]
 	ld [$d127],a
-	ld hl,$6b01
-	ld b,$0f
+	ld hl, Func_3eb01
+	ld b, BANK(Func_3eb01)
 	call Bankswitch
 	pop af
 	ld [$cf91],a
@@ -23816,8 +23820,8 @@ ItemUseTownMap: ; 5968
 	ld a,[W_ISINBATTLE]
 	and a
 	jp nz,ItemUseNotTime
-	ld b,$1c
-	ld hl,$4e3e
+	ld b, BANK(Func_70e3e)
+	ld hl, Func_70e3e
 	jp Bankswitch ; display Town Map
 
 ItemUseBicycle: ; 5977
@@ -23965,8 +23969,8 @@ ItemUseEvoStone: ; 5A5B
 	ld a,$8e
 	call Func_3740 ; play sound
 	call Func_3748 ; wait for sound to end
-	ld hl,$6d0e
-	ld b,$0e
+	ld hl, Func_3ad0e
+	ld b, BANK(Func_3ad0e)
 	call Bankswitch ; try to evolve pokemon
 	ld a,[$d121]
 	and a
@@ -24534,8 +24538,8 @@ ItemUseMedicine: ; 5ABB
 	push hl
 	push de
 	ld d,a
-	ld hl,$4f6a
-	ld b,$16
+	ld hl, CalcExperience
+	ld b, BANK(CalcExperience)
 	call Bankswitch ; calculate experience for next level and store it at $ff96
 	pop de
 	pop hl
@@ -24595,8 +24599,8 @@ ItemUseMedicine: ; 5ABB
 	ld [$cc49],a ; load from player's party
 	call LoadMonData
 	ld d,$01
-	ld hl,$6ae4
-	ld b,$04
+	ld hl, PrintStatsBox
+	ld b, BANK(PrintStatsBox)
 	call Bankswitch ; display new stats text box
 	call Func_3865 ; wait for button press
 	xor a
@@ -24605,8 +24609,8 @@ ItemUseMedicine: ; 5ABB
 	call Predef ; learn level up move, if any
 	xor a
 	ld [$ccd4],a
-	ld hl,$6d0e
-	ld b,$0e
+	ld hl, Func_3ad0e
+	ld b, BANK(Func_3ad0e)
 	call Bankswitch ; evolve pokemon, if appropriate
 	ld a,$01
 	ld [$cfcb],a
@@ -24901,8 +24905,8 @@ ItemUseXStat: ; 6104
 	call Delay3
 	xor a
 	ld [H_WHOSETURN],a ; set turn to player's turn
-	ld b,$0f
-	ld hl,$7428
+	ld b, BANK(Func_3f428)
+	ld hl, Func_3f428
 	call Bankswitch ; do stat increase move
 	pop hl
 	pop af
@@ -24983,8 +24987,8 @@ ItemUsePokeflute: ; 6140
 	and a,$80
 	jr nz,.skipMusic
 	call Func_3748 ; wait for sound to end
-	ld b,$08
-	ld hl,$6306
+	ld b, BANK(Func_22306)
+	ld hl, Func_22306
 	call Bankswitch ; play in-battle pokeflute music
 .musicWaitLoop ; wait for music to finish playing
 	ld a,[$c02c]
@@ -25139,8 +25143,8 @@ RodResponse:
 	push af
 	push hl
 	ld [hl], 0
-	ld b, $1C
-	ld hl, $47B6
+	ld b, BANK(Func_707b6)
+	ld hl, Func_707b6
 	call Bankswitch
 	pop hl
 	pop af
@@ -25240,8 +25244,8 @@ ItemUsePPRestore: ; 631E
 	call PrintText
 	xor a
 	ld [$cc2e],a
-	ld hl,$5219
-	ld b,$0f
+	ld hl, Func_3d219
+	ld b, BANK(Func_3d219)
 	call Bankswitch ; move selection menu
 	ld a,0
 	ld [$cc2e],a
@@ -25499,8 +25503,8 @@ ItemUseTMHM: ; 6479
 	call PrintText
 	jr .chooseMon
 .checkIfAlreadyLearnedMove
-	ld hl,$7e18
-	ld b,$0b
+	ld hl, Func_2fe18
+	ld b, BANK(Func_2fe18)
 	call Bankswitch ; check if the pokemon already knows the move
 	jr c,.chooseMon
 	ld a,$1b
@@ -28950,8 +28954,8 @@ StatusScreen2: ; 12b57
 	ld de, $d0dc
 	ld bc, $0004
 	call CopyData
-	ld hl, $5b87
-	ld b, $e
+	ld hl, Func_39b87
+	ld b, BANK(Func_39b87)
 	call Bankswitch
 	FuncCoord 9,2
 	ld hl, Coord
@@ -29003,8 +29007,8 @@ StatusScreen2: ; 12b57
 	ld a, b
 	ld [hl], a
 	push hl
-	ld hl, $6677
-	ld b, $3
+	ld hl, GetMaxPP
+	ld b, BANK(GetMaxPP)
 	call Bankswitch
 	pop hl
 	pop af
@@ -29100,8 +29104,8 @@ StatusScreen2: ; 12b57
 	jr z, .asm_12ca7 ; 0x12c8b $1a ; If 100
 	inc a
 	ld d, a
-	ld hl, $4f6a
-	ld b, $16
+	ld hl, CalcExperience
+	ld b, BANK(CalcExperience)
 	call Bankswitch
 	ld hl, $cfa8
 	ld a, [$ff00+$98]
@@ -29167,8 +29171,8 @@ DrawPartyMenu_: ; 6CD2
 	ld [H_AUTOBGTRANSFERENABLED],a
 	call ClearScreen
 	call UpdateSprites ; move sprites
-	ld b,$1C
-	ld hl,$5791
+	ld b, BANK(Func_71791)
+	ld hl, Func_71791
 	call Bankswitch ; load pokemon icon graphics
 
 RedrawPartyMenu_: ; 6CE3
@@ -29176,8 +29180,8 @@ RedrawPartyMenu_: ; 6CE3
 	cp a,$04
 	jp z,.printMessage
 	call ErasePartyMenuCursors
-	ld b,$1C
-	ld hl,$5FB6
+	ld b, BANK(Func_71fb6)
+	ld hl, Func_71fb6
 	call Bankswitch ; loads some data to $cf2e
 	FuncCoord 3,0
 	ld hl,Coord
@@ -29199,8 +29203,8 @@ RedrawPartyMenu_: ; 6CE3
 	call GetPartyMonName
 	pop hl
 	call PlaceString ; print the pokemon's name
-	ld b,$1C
-	ld hl,$5868
+	ld b, BANK(Func_71868)
+	ld hl, Func_71868
 	call Bankswitch ; place the appropriate pokemon icon
 	ld a,[$FF8C] ; loop counter
 	ld [$CF92],a
@@ -29679,8 +29683,8 @@ StartMenu_Pokemon: ; 70A9
 .surf
 	bit 4,a ; does the player have the Soul Badge?
 	jp z,.newBadgeRequired
-	ld b,$03
-	ld hl,$4dc0
+	ld b, BANK(Func_cdc0)
+	ld hl, Func_cdc0
 	call Bankswitch
 	ld hl,$d728
 	bit 1,[hl]
@@ -32026,14 +32030,14 @@ SubstituteEffectHandler:  ;0x17DAD
 	ld hl, $7ba8   ;animation enabled: 0F:7BA8
 	ld b, $0f
 	jr z, .animationEnabled
-	ld hl, $56e0   ;animation disabled: 1E:56E0
-	ld b, $1e
+	ld hl, Func_796e0   ;animation disabled: 1E:56E0
+	ld b, BANK(Func_796e0)
 .animationEnabled
 	call Bankswitch           ;jump to routine depending on animation setting
 	ld hl, UnnamedText_17e1d  ;"it created a substitute"
 	call PrintText
-	ld hl, $4d5a
-	ld b, $0f
+	ld hl, Func_3cd5a
+	ld b, BANK(Func_3cd5a)
 	jp Bankswitch
 .alreadyHasSubstitute
 	ld hl, UnnamedText_17e22  ;"x has a substitute"
@@ -32070,8 +32074,8 @@ ActivatePC:     ;0x17e2c
 	call Func_3701  ;XXX: restore saved screen
 	call Delay3
 PCMainMenu:
-	ld b, 8
-	ld hl, $53C8
+	ld b, BANK(Func_213c8)
+	ld hl, Func_213c8
 	call Bankswitch
 	ld hl, $CD60
 	set 5, [hl]
@@ -32118,16 +32122,16 @@ PCMainMenu:
 	call Func_3748  ;XXX: wait for sound to be done
 	ld hl, UnnamedText_17f32  ;accessed players pc
 	call PrintText
-	ld b, 1
-	ld hl, $78E6
+	ld b, BANK(Func_78e6)
+	ld hl, Func_78e6
 	call Bankswitch
 	jr ReloadMainMenu
 OaksPC:
 	ld a, $9B
 	call PlaySound  ;XXX: play sound or stop music
 	call Func_3748  ;XXX: wait for sound to be done
-	ld b, 7
-	ld hl, $6915
+	ld b, BANK(Func_1e915)
+	ld hl, Func_1e915
 	call Bankswitch
 	jr ReloadMainMenu
 PKMNLeague:
@@ -32151,8 +32155,8 @@ BillsPC:
 	ld hl, UnnamedText_17f28 ;accessed bill's pc
 .printText
 	call PrintText
-	ld b, 8
-	ld hl, $54C2
+	ld b, BANK(Func_214c2)
+	ld hl, Func_214c2
 	call Bankswitch
 ReloadMainMenu:
 	xor a
@@ -33872,8 +33876,8 @@ CeruleanCityScript2: ; 0x195b1
 	ld a, $ff
 	ld [$c0ee], a
 	call PlaySound
-	ld b, $2
-	ld hl, $5b47
+	ld b, BANK(Func_9b47)
+	ld hl, Func_9b47
 	call Bankswitch
 	ld a, $1
 	ld [$ff00+$8c], a
@@ -37105,8 +37109,8 @@ OaksLabScript13: ; 0x1ce32
 	ld a, $10
 	ld [$ff00+$8c], a
 	call DisplayTextID
-	ld b, $2
-	ld hl, $5b47
+	ld b, BANK(Func_9b47)
+	ld hl, Func_9b47
 	call Bankswitch
 	ld a, $1
 	ld [$ff00+$8c], a
@@ -37175,8 +37179,8 @@ OaksLabScript15: ; 0x1ceb0
 	ld a, $ff
 	ld [$c0ee], a
 	call PlaySound
-	ld b, $2
-	ld hl, $5b47
+	ld b, BANK(Func_9b47)
+	ld hl, Func_9b47
 	call Bankswitch
 	ld a, $15
 	ld [$ff00+$8c], a
@@ -37287,8 +37291,8 @@ OaksLabScript16: ; 0x1cf12
 	ld a, $ff
 	ld [$c0ee], a
 	call PlaySound
-	ld b, $2
-	ld hl, $5b47
+	ld b, BANK(Func_9b47)
+	ld hl, Func_9b47
 	call Bankswitch
 	ld a, $1
 	ld [$ff00+$8c], a
@@ -38887,8 +38891,8 @@ NameRaterText1: ; 0x1da56
 	jr nz, .asm_1daae ; 0x1da93 $19
 	ld hl, UnnamedText_1dac2
 	call PrintText
-	ld b, $1
-	ld hl, $655c
+	ld b, BANK(Func_655c)
+	ld hl, Func_655c
 	call Bankswitch
 	jr c, .asm_1daae ; 0x1daa3 $9
 	ld hl, UnnamedText_1dac7
@@ -39058,8 +39062,8 @@ VermilionDock_1db9b:
 	ld c, $1f
 	ld a, $d6
 	call PlayMusic
-	ld b, $1e
-	ld hl, $5fc0
+	ld b, BANK(Func_79fc0)
+	ld hl, Func_79fc0
 	call Bankswitch
 	xor a
 	ld [$c102], a
@@ -41595,7 +41599,35 @@ Func_216be: ; 216be (8:56be)
 	ld [$cc2b], a
 	ret
 
-INCBIN "baserom.gbc",$216e1,$2174b - $216e1
+INCBIN "baserom.gbc",$216e1,$2171b - $216e1
+
+Func_2171b: ; 0x2171b
+	ld hl, $d173
+	ld bc, $002c
+	jr .asm_21729 ; 0x21721 $6
+	ld hl, $da9e
+	ld bc, $0021
+.asm_21729
+	ld a, [$cf92]
+	call AddNTimes
+	ld b, $4
+.asm_21731
+	ld a, [hli]
+	push hl
+	push bc
+	ld hl, $5745
+	ld de, $0001
+	call IsInArray
+	pop bc
+	pop hl
+	ret c
+	dec b
+	jr nz, .asm_21731 ; 0x21741 $ee
+	and a
+	ret
+; 0x21745
+
+INCBIN "baserom.gbc",$21745,$2174b - $21745
 
 ; known jump sources: 215d4 (8:55d4), 21640 (8:5640)
 Func_2174b: ; 2174b (8:574b)
@@ -53066,8 +53098,8 @@ AIIncreaseStat: ; 0x3a808
 	ld a,$AF
 	ld [hli],a
 	ld [hl],b
-	ld hl,$7428
-	ld b,$F
+	ld hl, Func_3f428
+	ld b, BANK(Func_3f428)
 	call Bankswitch
 	pop hl
 	pop af
@@ -56120,20 +56152,20 @@ Func_3bab1: ; 3bab1 (e:7ab1)
 .asm_3bae4
 	bit 4, [hl]
 	push af
-	ld hl, $5747
-	ld b, $1e
+	ld hl, Func_79747
+	ld b, BANK(Func_79747)
 	call nz, Bankswitch
 	ld a, [W_OPTIONS] ; $d355
 	add a
 	ld hl, $7ba8
 	ld b, $f
 	jr nc, .asm_3baff
-	ld hl, $5787
-	ld b, $1e
+	ld hl, Func_79787
+	ld b, BANK(Func_79787)
 .asm_3baff
 	call Bankswitch
-	ld hl, $5771
-	ld b, $1e
+	ld hl, Func_79771
+	ld b, BANK(Func_79771)
 	pop af
 	call nz, Bankswitch
 	pop bc
@@ -58626,11 +58658,11 @@ Func_3d119: ; 3d119 (f:5119)
 	call Predef ; indirect jump to StatusScreen2 (12b57 (4:6b57))
 	ld a, [W_ENEMYBATTSTATUS2] ; $d068
 	bit 4, a
-	ld hl, $56e0
+	ld hl, Func_796e0
 	jr nz, .asm_3d182
 	ld a, [$ccf3]
 	and a
-	ld hl, $559f
+	ld hl, Func_7959f
 	jr nz, .asm_3d182
 	ld a, [$cfe5]
 	ld [$cf91], a
@@ -59403,8 +59435,8 @@ asm_3d6b0:
 	push af
 	ld a,[W_PLAYERBATTSTATUS2]
 	bit 4,a
-	ld hl,$5747
-	ld b,$1E
+	ld hl,Func_79747
+	ld b,BANK(Func_79747)
 	call nz,Bankswitch
 	pop af
 	ld [$CC5B],a
@@ -59414,8 +59446,8 @@ asm_3d6b0:
 	call Func_3cd60
 	ld a,[W_PLAYERBATTSTATUS2]
 	bit 4,a
-	ld hl,$5771
-	ld b,$1E
+	ld hl,Func_79771
+	ld b,BANK(Func_79771)
 	call nz,Bankswitch
 	jr .next4
 .next3
@@ -59463,8 +59495,8 @@ asm_3d6b0:
 .next8
 	call ApplyAttackToEnemyPokemon
 	call Func_3dc5c
-	ld hl,$7B7B ; MyFunction
-	ld b,$B ; BANK(MyFunction)
+	ld hl, DisplayEffectiveness ; MyFunction
+	ld b, BANK(DisplayEffectiveness) ; BANK(MyFunction)
 	call Bankswitch
 	ld a,1
 	ld [$CCF4],a
@@ -61150,8 +61182,8 @@ AttackSubstitute: ; 625E
 	ld a,[H_WHOSETURN]
 	xor a,$01
 	ld [H_WHOSETURN],a
-	ld hl,$5747
-	ld b,$1e ; animate the substitute breaking
+	ld hl, Func_79747
+	ld b, BANK(Func_79747) ; animate the substitute breaking
 	call Bankswitch ; substitute
 ; flip the turn back to the way it was
 	ld a,[H_WHOSETURN]
@@ -61914,8 +61946,8 @@ asm_3e7a4: ; 3e7a4 (f:67a4)
 	push af
 	ld a, [W_ENEMYBATTSTATUS2] ; $d068
 	bit 4, a
-	ld hl, $5747
-	ld b, $1e
+	ld hl, Func_79747
+	ld b, BANK(Func_79747)
 	call nz, Bankswitch
 	pop af
 	ld [$cc5b], a
@@ -61925,8 +61957,8 @@ asm_3e7a4: ; 3e7a4 (f:67a4)
 	call Func_3cdec
 	ld a, [W_ENEMYBATTSTATUS2] ; $d068
 	bit 4, a
-	ld hl, $5771
-	ld b, $1e
+	ld hl, Func_79771
+	ld b, BANK(Func_79771)
 	call nz, Bankswitch
 	jr asm_3e7ef
 
@@ -63757,8 +63789,8 @@ asm_3f4ca: ; 3f4ca (f:74ca)
 	bit 4, [hl]
 	push af
 	push bc
-	ld hl, $5747
-	ld b, $1e
+	ld hl, Func_79747
+	ld b, BANK(Func_79747)
 	push de
 	call nz, Bankswitch
 	pop de
@@ -63770,8 +63802,8 @@ asm_3f4ca: ; 3f4ca (f:74ca)
 	pop bc
 	ld a, $1
 	ld [bc], a
-	ld hl, $5771
-	ld b, $1e
+	ld hl, Func_79771
+	ld b, BANK(Func_79771)
 	pop af
 	call nz, Bankswitch
 .asm_3f50e
@@ -65051,8 +65083,8 @@ ShowPokedexData: ; 42D1
 	call GBPalWhiteOutWithDelay3
 	call ClearScreen
 	call UpdateSprites
-	ld hl,$7840
-	ld b,$05
+	ld hl, LoadPokedexTilePatterns
+	ld b, BANK(LoadPokedexTilePatterns)
 	call Bankswitch ; load pokedex tiles
 
 ; function to display pokedex data from inside the pokedex
@@ -68048,8 +68080,8 @@ DisplayDexRating: ; 0x44169
 	call PrintText
 	pop hl
 	call PrintText
-	ld b, $1F
-	ld hl, $513B
+	ld b, BANK(Func_7d13b)
+	ld hl, Func_7d13b
 	call Bankswitch
 	jp Func_3865 ; wait for button press
 .label3
@@ -73071,8 +73103,8 @@ UnnamedText_487d5: ; 0x487d5
 	TX_FAR _UnnamedText_487d5 ; 0x9d0ad
 	db $6
 	db $8
-	ld hl, $66e2
-	ld b, $15
+	ld hl, Func_566e2
+	ld b, BANK(Func_566e2)
 	call Bankswitch
 	ld a, $1
 	ld [$cc3c], a
@@ -77732,8 +77764,8 @@ Route22Script2: ; 0x50fb5
 	ld a, $ff
 	ld [$c0ee], a
 	call PlaySound
-	ld b, $2
-	ld hl, $5b47
+	ld b, BANK(Func_9b47)
+	ld hl, Func_9b47
 	call Bankswitch
 	ld a, [$cf0d]
 	cp $1
@@ -84460,8 +84492,8 @@ DayCareMText1: ; 0x56254
 	pop af
 	ld hl, UnnamedText_56437
 	jp c, Unnamed_56409
-	ld hl, Route9TrainerHeader5
-	ld b, $8
+	ld hl, Func_2171b
+	ld b, BANK(Func_2171b)
 	call Bankswitch
 	ld hl, UnnamedText_5644a
 	jp c, Unnamed_56409
@@ -84908,7 +84940,90 @@ SilphCo8Object: ; 0x56613 (size=90)
 SilphCo8Blocks: ; 0x5666d 117
 	INCBIN "maps/silphco8.blk"
 
-INCBIN "baserom.gbc",$566e2,$567f9 - $566e2
+Func_566e2: ; 566e2 (15:66e2)
+	call Func_36f4
+	call GBPalWhiteOutWithDelay3
+	call ClearScreen
+	xor a
+	ld [$cfcb], a
+	ld hl, $d730
+	set 6, [hl]
+	call DisableLCD
+	ld hl, $7d88
+	ld de, $9700
+	ld bc, $0010
+	ld a, $b
+	call FarCopyData2
+	ld hl, $c3a0
+	ld bc, $1012
+	ld a, $27
+	call Predef
+	ld hl, $6784
+	ld c, $5
+.asm_56715
+	push bc
+	ld a, [hli]
+	ld e, a
+	ld a, [hli]
+	ld d, a
+	ld a, [hli]
+	push hl
+	ld h, [hl]
+	ld l, a
+	call PlaceString
+	pop hl
+	inc hl
+	pop bc
+	dec c
+	jr nz, .asm_56715 ; 0x56725 $ee
+	ld hl, $c3fa
+	ld de, $d158
+	call PlaceString
+	ld b, BANK(Func_44dd)
+	ld hl, Func_44dd
+	call Bankswitch
+	ld hl, $c301
+	ld bc, $8028
+.asm_5673e
+	ld a, [hl]
+	add $21
+	ld [hli], a
+	inc hl
+	ld a, b
+	ld [hli], a
+	inc hl
+	dec c
+	jr nz, .asm_5673e ; 0x56747 $f5
+	call EnableLCD
+	ld b, BANK(Func_5ae6)
+	ld hl, Func_5ae6
+	call Bankswitch
+	ld b, $8
+	call GoPAL_SET
+	call Delay3
+	call GBPalNormal
+	ld a, $90
+	ld [$ff00+$48], a
+	call Func_3865
+	ld hl, $d730
+	res 6, [hl]
+	call GBPalWhiteOutWithDelay3
+	call Func_3dbe
+	call Delay3
+	jp GBPalNormal
+; 0x56777
+
+Func_56777: ; 56777 (15:6777)
+	ld hl, $d158
+	ld bc, $ff00
+.asm_5677d
+	ld a, [hli]
+	cp $50
+	ret z
+	dec c
+	jr .asm_5677d ; 0x56782 $f9
+
+INCBIN "baserom.gbc",$56784,$567f9 - $56784
 
 ; known jump sources: 3303 (0:3303)
 Func_567f9: ; 567f9 (15:67f9)
@@ -89327,8 +89442,8 @@ HallofFameRoomScript2: ; 0x5a4bb
 	ld [$d64b], a
 	ld a, $0
 	ld [$d719], a
-	ld b, $1c
-	ld hl, $7848
+	ld b, BANK(Func_73848)
+	ld hl, Func_73848
 	call Bankswitch
 	ld b, $5
 .asm_5a4ff
@@ -93348,8 +93463,8 @@ PokemonTower2Script1: ; 0x60563
 	ld a, $ff
 	ld [$c0ee], a
 	call PlaySound
-	ld b, $2
-	ld hl, $5b47
+	ld b, BANK(Func_9b47)
+	ld hl, Func_9b47
 	call Bankswitch
 	ld a, $2
 	ld [$d62b], a
@@ -95082,8 +95197,8 @@ SSAnne2Script2: ; 0x6146d
 	ld a, $ff
 	ld [$c0ee], a
 	call PlaySound
-	ld b, $2
-	ld hl, $5b47
+	ld b, BANK(Func_9b47)
+	ld hl, Func_9b47
 	call Bankswitch
 	ld a, $3
 	ld [$d665], a
@@ -100144,13 +100259,13 @@ Function71c07: ; 0x71c07
 	ld [$cc49],a
 	call AddPokemonToParty
 	call Func_71d19
-	ld hl,$7d7d
-	ld b,$5
+	ld hl, Func_17d7d
+	ld b, BANK(Func_17d7d)
 	call Bankswitch
 	call ClearScreen
 	call Func_71ca2
-	ld b,$3
-	ld hl,$6edc
+	ld b, BANK(Func_eedc)
+	ld hl, Func_eedc
 	call Bankswitch
 	and a
 	ld a,$3
@@ -105698,8 +105813,8 @@ GaryScript3: ; 0x75fbb
 	ret
 
 GaryScript4: ; 0x75fe4
-	ld b, $2
-	ld hl, $5b81
+	ld b, BANK(Func_9b81)
+	ld hl, Func_9b81
 	call Bankswitch
 	ld a, $2
 	ld [$ff00+$8c], a
@@ -106513,8 +106628,8 @@ Unknown_7657e: ; XXX: make better (has to do with the hall of fame on the PC) ; 
 	push bc
 	ld a, [$CD41]
 	ld [$CD3D], a
-	ld b, $1C
-	ld hl, $7B3F
+	ld b, BANK(Func_73b3f)
+	ld hl, Func_73b3f
 	call Bankswitch
 	call Unknown_765e5
 	pop bc
@@ -106594,8 +106709,8 @@ Unknown_76610: ; 0x76610
 	ld de, $CD42
 	ld bc, $0103
 	call PrintNumber
-	ld b, $1C
-	ld hl, $42F0
+	ld b, BANK(Func_702f0)
+	ld hl, Func_702f0
 	jp Bankswitch
 
 HallOfFameNoText: ; 0x76670
@@ -108521,7 +108636,52 @@ Func_79652: ; 79652 (1e:5652)
 	ld bc, $31
 	jp CopyVideoData
 
-INCBIN "baserom.gbc",$79666,$79747 - $79666
+INCBIN "baserom.gbc",$79666,$796e0 - $79666
+
+Func_796e0: ; 0x796e0
+	ld hl, $c6e8
+	xor a
+	ld bc, $0310
+	call FillMemory
+	ld a, [$ff00+$f3]
+	and a
+	jr z, .asm_79715 ; 0x796ed $26
+	ld hl, $4780
+	ld de, $c808
+	call Func_7973f
+	ld hl, $4790
+	ld de, $c878
+	call Func_7973f
+	ld hl, $47a0
+	ld de, $c818
+	call Func_7973f
+	ld hl, $47b0
+	ld de, $c888
+	call Func_7973f
+	jr .asm_79739 ; 0x79713 $24
+.asm_79715
+	ld hl, $47c0
+	ld de, $c878
+	call Func_7973f
+	ld hl, $47d0
+	ld de, $c8e8
+	call Func_7973f
+	ld hl, $47e0
+	ld de, $c888
+	call Func_7973f
+	ld hl, $47f0
+	ld de, $c8f8
+	call Func_7973f
+.asm_79739
+	call Func_79652
+	jp Func_7939e
+; 0x7973f
+
+Func_7973f: ; 0x7973f
+	ld bc, $0010
+	ld a, $5
+	jp FarCopyData2
+; 0x79747
 
 ; known jump sources: 3e295 (f:6295)
 Func_79747: ; 79747 (1e:5747)
@@ -108548,7 +108708,24 @@ Func_79747: ; 79747 (1e:5747)
 	call Func_79389
 	jp Func_7939e
 
-INCBIN "baserom.gbc",$79771,$79787 - $79771
+Func_79771: ; 0x79771
+	call Func_792af
+	call Func_796e0
+	jp Func_7939e
+; 0x7977a
+
+Func_7977a: ; 0x7977a
+	ld c, $5
+.asm_7977c
+	push bc
+	call Func_79297
+	pop bc
+	dec c
+	jr nz, .asm_7977c ; 0x79782 $f8
+	jp Func_7939e
+; 0x79787
+
+Func_79787: ; 0x79787
 	ld a, [$cfe5]
 	ld [$ceea], a
 	ld a, [$d014]
