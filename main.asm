@@ -3324,14 +3324,14 @@ GetMonHeader: ; 1537 (0:1537)
 	ld [$d11e],a
 	ld de,FossilKabutopsPic
 	ld b,$66 ; size of Kabutops fossil and Ghost sprites
-	cp a,$b6 ; Kabutops fossil
+	cp a,FOSSIL_KABUTOPS ; Kabutops fossil
 	jr z,.specialID
 	ld de,GhostPic
-	cp a,$b8 ; Ghost
+	cp a,MON_GHOST ; Ghost
 	jr z,.specialID
 	ld de,FossilAerodactylPic
 	ld b,$77 ; size of Aerodactyl fossil sprite
-	cp a,$b7 ; Aerodactyl fossil
+	cp a,FOSSIL_AERODACTYL ; Aerodactyl fossil
 	jr z,.specialID
 	cp a,MEW
 	jr z,.mew
@@ -3490,30 +3490,30 @@ UncompressMonSprite: ; 1627 (0:1627)
 ; $99 ≤ index,       bank $D
 	ld a,[$CF91] ; XXX name for this ram location
 	ld b,a
-	cp $15
-	ld a,$01
+	cp MEW
+	ld a,BANK(MewPicFront)
 	jr z,.GotBank
 	ld a,b
-	cp $B6
-	ld a,$0B
+	cp FOSSIL_KABUTOPS
+	ld a,BANK(FossilKabutopsPic)
 	jr z,.GotBank
 	ld a,b
-	cp $1F
-	ld a,$09
+	cp TANGELA + 1
+	ld a,BANK(TangelaPicFront)
 	jr c,.GotBank
 	ld a,b
-	cp $4A
-	ld a,$0A
+	cp MOLTRES + 1
+	ld a,BANK(MoltresPicFront)
 	jr c,.GotBank
 	ld a,b
-	cp $74
-	ld a,$0B
+	cp BEEDRILL + 2
+	ld a,BANK(BeedrillPicFront)
 	jr c,.GotBank
 	ld a,b
-	cp $99
-	ld a,$0C
+	cp STARMIE + 1
+	ld a,BANK(StarmiePicFront)
 	jr c,.GotBank
-	ld a,$0D
+	ld a,BANK(VictreebelPicFront)
 .GotBank
 	jp UncompressSpriteData
 
