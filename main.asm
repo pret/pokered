@@ -16386,8 +16386,8 @@ Unknown_71e1: ; 71e1 (1:71e1)
 	ld a, [$cc26]
 	and a
 	jr nz, .asm_728f ; 0x723e $4f
-	ld hl, Func_73848
-	ld b, BANK(Func_73848)
+	ld hl, SaveSAVtoSRAM
+	ld b, BANK(SaveSAVtoSRAM)
 	call Bankswitch
 	call WaitForSoundToFinish
 	ld a, $b6
@@ -25570,7 +25570,7 @@ ItemUsePPRestore: ; e31e (3:631e)
 	cp a,ELIXER
 	jp nc,.useElixir ; if Elixir or Max Elixir
 	ld a,$02
-	ld [$ccdb],a
+	ld [W_MOVEMENUTYPE],a
 	ld hl,RaisePPWhichTechniqueText
 	ld a,[$cd3d]
 	cp a,ETHER ; is it a PP Up?
@@ -25580,8 +25580,8 @@ ItemUsePPRestore: ; e31e (3:631e)
 	call PrintText
 	xor a
 	ld [$cc2e],a
-	ld hl, Func_3d219
-	ld b, BANK(Func_3d219)
+	ld hl, MoveSelectionMenu
+	ld b, BANK(MoveSelectionMenu)
 	call Bankswitch ; move selection menu
 	ld a,0
 	ld [$cc2e],a
@@ -27709,16 +27709,16 @@ _AddPokemonToParty: ; f2e5 (3:72e5)
 	ret
 
 ; known jump sources: e618 (3:6618), 3ebd2 (f:6bd2)
-Func_f473: ; f473 (3:7473)
+LoadMovePPs: ; f473 (3:7473)
 	call Load16BitRegisters
-
+	; fallthrough
 ; known jump sources: f44c (3:744c)
 AddPokemonToParty_WriteMovePP: ; f476 (3:7476)
 	ld b, $4
-.movePPLoop
+.pploop
 	ld a, [hli]     ; read move ID
 	and a
-	jr z, .skipMove
+	jr z, .empty
 	dec a
 	push hl
 	push de
@@ -27732,12 +27732,12 @@ AddPokemonToParty_WriteMovePP: ; f476 (3:7476)
 	pop bc
 	pop de
 	pop hl
-	ld a, [$cd72]
-.skipMove
+	ld a, [$cd72] ; sixth move byte = pp
+.empty
 	inc de
 	ld [de], a
 	dec b
-	jr nz, .movePPLoop
+	jr nz, .pploop ; there are still moves to read
 	ret
 
 ; adds enemy mon [$cf91] (at position [$cf92] in enemy list) to own party
@@ -57056,7 +57056,7 @@ Func_3c11e: ; 3c11e (f:411e)
 	and a
 	jp z, Func_3c1ad
 .asm_3c161
-	call Func_3ceb3
+	call InitBattleMenu
 	ret c
 	ld a, [$cd6a]
 	and a
@@ -57193,7 +57193,7 @@ MainInBattleLoop: ; 3c233 (f:4233)
 	ld a, [hl]
 	and $12
 	jr nz, .asm_3c2a6 ; 0x3c261 $43
-	call Func_3ceb3 ; show battle menu
+	call InitBattleMenu ; show battle menu
 	ret c
 	ld a, [$d078]
 	and a
@@ -57219,7 +57219,7 @@ MainInBattleLoop: ; 3c233 (f:4233)
 	ld [$d07c], a
 	xor a
 	ld [$cc35], a
-	call Func_3d219
+	call MoveSelectionMenu
 	push af
 	call LoadScreenTilesFromBuffer1
 	call Func_3cd5a
@@ -57615,7 +57615,7 @@ Func_3c525: ; 3c525 (f:4525)
 	dec a
 	ret z
 	call Func_3c64f
-	jp z, Func_3c696
+	jp z, TrainerBattleVictory
 	ld hl, W_PLAYERMONCURHP ; $d015
 	ld a, [hli]
 	or [hl]
@@ -57802,26 +57802,26 @@ Func_3c664: ; 3c664 (f:4664)
 	ret
 
 ; known jump sources: 3c544 (f:4544), 3c722 (f:4722)
-Func_3c696: ; 3c696 (f:4696)
+TrainerBattleVictory: ; 3c696 (f:4696)
 	call Func_3c643
 	ld b, $fc
-	ld a, [W_LONEATTACKNO] ; $d05c
+	ld a, [W_GYMLEADERNO] ; $d05c
 	and a
-	jr nz, .asm_3c6a3
-	ld b, $f6
-.asm_3c6a3
+	jr nz, .notgymleader
+	ld b, $f6 ; gym leader win music
+.notgymleader
 	ld a, [W_TRAINERCLASS] ; $d031
-	cp $2b
-	jr nz, .asm_3c6b1
-	ld b, $fc
+	cp SONY3 ; final battle against rival
+	jr nz, .notrival
+	ld b, $fc ; final rival battle win music
 	ld hl, W_FLAGS_D733
 	set 1, [hl]
-.asm_3c6b1
+.notrival
 	ld a, [W_ISLINKBATTLE] ; $d12b
 	cp $4
 	ld a, b
 	call nz, Func_3c6ee
-	ld hl, UnnamedText_3c6e9 ; $46e9
+	ld hl, TrainerDefeatedText ; $46e9
 	call PrintText
 	ld a, [W_ISLINKBATTLE] ; $d12b
 	cp $4
@@ -57830,7 +57830,7 @@ Func_3c696: ; 3c696 (f:4696)
 	ld c, $28
 	call DelayFrames
 	call Func_3381
-	ld hl, UnnamedText_3c6e4 ; $46e4
+	ld hl, MoneyForWinningText ; $46e4
 	call PrintText
 	ld de, W_PLAYERMONEY1 ; $d349
 	ld hl, $d07b
@@ -57838,14 +57838,14 @@ Func_3c696: ; 3c696 (f:4696)
 	ld a, $b
 	jp Predef ; indirect jump to Func_f81d (f81d (3:781d))
 ; 3c6e4 (f:46e4)
-UnnamedText_3c6e4: ; 3c6e4 (f:46e4)
-	TX_FAR _UnnamedText_3c6e4
-	db $50
-; 0x3c6e4 + 5 bytes
 
-UnnamedText_3c6e9: ; 3c6e9 (f:46e9)
-	TX_FAR _UnnamedText_3c6e9
-	db $50
+MoneyForWinningText: ; 3c6e4 (f:46e4)
+	TX_FAR _MoneyForWinningText
+	db "@"
+
+TrainerDefeatedText: ; 3c6e9 (f:46e9)
+	TX_FAR _TrainerDefeatedText
+	db "@"
 ; 0x3c6e9 + 5 bytes
 
 ; known jump sources: 3c5d8 (f:45d8), 3c6b7 (f:46b7)
@@ -57877,7 +57877,7 @@ HandlePlayerMonFainted: ; 3c700 (f:4700)
 	dec a
 	ret z            ; if wild encounter, battle is over
 	call Func_3c64f
-	jp z, Func_3c696
+	jp z, TrainerBattleVictory
 .enemyMonNotFainted
 	call Func_3c79b
 	ret c
@@ -58920,74 +58920,81 @@ Func_3ce9c: ; 3ce9c (f:4e9c)
 	ret
 
 ; known jump sources: 3c161 (f:4161), 3c263 (f:4263), 3cffa (f:4ffa), 3d05c (f:505c), 3d102 (f:5102), 3d216 (f:5216)
-Func_3ceb3: ; 3ceb3 (f:4eb3)
-	call LoadScreenTilesFromBuffer1
+InitBattleMenu: ; 3ceb3 (f:4eb3)
+	call LoadScreenTilesFromBuffer1 ; restore saved screen
 	ld a, [W_BATTLETYPE] ; $d05a
 	and a
-	jr nz, .asm_3cec5
-	call Func_3cd5a
+	jr nz, .nonstandardbattle
+	call Func_3cd5a ; redraw names and HP bars?
 	call Func_3ee94
 	call SaveScreenTilesToBuffer1
-.asm_3cec5
+.nonstandardbattle
 	ld a, [W_BATTLETYPE] ; $d05a
-	cp $2
-	ld a, $b
-	jr nz, .asm_3ced0
-	ld a, $1b
-.asm_3ced0
+	cp $2 ; safari
+	ld a, $b ; safari menu id
+	jr nz, .menuselected
+	ld a, $1b ; regular menu id
+.menuselected
 	ld [$d125], a
 	call DisplayTextBoxID
 	ld a, [W_BATTLETYPE] ; $d05a
 	dec a
-	jp nz, Func_3cf1a
+	jp nz, RegularBattleMenu ; regular battle
+	; the following happens for the old man tutorial
 	ld hl, W_PLAYERNAME ; $d158
 	ld de, W_GRASSRATE ; $d887
 	ld bc, $b
-	call CopyData
-	ld hl, Unknown_3cf12 ; $4f12
+	call CopyData  ; temporarily save the player name in unused space,
+	               ; which is supposed to get overwritten when entering a
+	               ; map with wild pokémon. due to an oversight, the data
+	               ; may not get overwritten (cinnabar) and the infamous
+	               ; missingno. glitch can show up.
+
+
+	ld hl, OldManName ; $4f12
 	ld de, W_PLAYERNAME ; $d158
 	ld bc, $b
 	call CopyData
+	; the following simulates the keystrokes by drawing menus on screen
 	FuncCoord 9, 14 ; $c4c1
 	ld hl, Coord
-	ld [hl], $ed
+	ld [hl], "▶"
 	ld c, $50
 	call DelayFrames
 	ld [hl], $7f
 	FuncCoord 9, 16 ; $c4e9
 	ld hl, Coord
-	ld [hl], $ed
+	ld [hl], "▶"
 	ld c, $32
 	call DelayFrames
 	ld [hl], $ec
 	ld a, $2
 	jp Func_3cfe8
 
-Unknown_3cf12: ; 3cf12 (f:4f12)
-INCBIN "baserom.gbc",$3cf12,$3cf1a - $3cf12
+OldManName: ; 3cf12 (f:4f12)
+	db "OLD MAN@"
 
-; known jump sources: 3ceda (f:4eda)
-Func_3cf1a: ; 3cf1a (f:4f1a)
+RegularBattleMenu: ; 3cf1a (f:4f1a)
 	ld a, [$cc2d]
 	ld [W_CURMENUITEMID], a ; $cc26
 	ld [W_OLDMENUITEMID], a ; $cc2a
 	sub $2
-	jr c, .asm_3cf2f
+	jr c, .leftcolumn
 	ld [W_CURMENUITEMID], a ; $cc26
 	ld [W_OLDMENUITEMID], a ; $cc2a
-	jr .asm_3cf6e
-.asm_3cf2f
+	jr .rightcolumn
+.leftcolumn
 	ld a, [W_BATTLETYPE] ; $d05a
 	cp $2
-	ld a, $7f
-	jr z, .asm_3cf42
+	ld a, " "
+	jr z, .safaribattle
 	FuncCoord 15, 14 ; $c4c7
 	ld [Coord], a
 	FuncCoord 15, 16 ; $c4ef
 	ld [Coord], a
 	ld b, $9
-	jr .asm_3cf56
-.asm_3cf42
+	jr .notsafari
+.safaribattle
 	FuncCoord 13, 14 ; $c4c5
 	ld [Coord], a
 	FuncCoord 13, 16 ; $c4ed
@@ -58998,7 +59005,7 @@ Func_3cf1a: ; 3cf1a (f:4f1a)
 	ld bc, $102
 	call PrintNumber
 	ld b, $1
-.asm_3cf56
+.notsafari
 	ld hl, W_TOPMENUITEMY ; $cc24
 	ld a, $e
 	ld [hli], a
@@ -59011,20 +59018,20 @@ Func_3cf1a: ; 3cf1a (f:4f1a)
 	ld [hl], $11
 	call HandleMenuInput
 	bit 4, a
-	jr nz, .asm_3cf6e
-	jr .asm_3cfb4
-.asm_3cf6e
+	jr nz, .rightcolumn
+	jr .selection
+.rightcolumn
 	ld a, [W_BATTLETYPE] ; $d05a
 	cp $2
-	ld a, $7f
-	jr z, .asm_3cf81
+	ld a, " "
+	jr z, .safarirightcolumn
 	FuncCoord 9, 14 ; $c4c1
 	ld [Coord], a
 	FuncCoord 9, 16 ; $c4e9
 	ld [Coord], a
 	ld b, $f
-	jr .asm_3cf95
-.asm_3cf81
+	jr .notsafarirightcolumn
+.safarirightcolumn
 	FuncCoord 1, 14 ; $c4b9
 	ld [Coord], a
 	FuncCoord 1, 16 ; $c4e1
@@ -59035,7 +59042,7 @@ Func_3cf1a: ; 3cf1a (f:4f1a)
 	ld bc, $102
 	call PrintNumber
 	ld b, $d
-.asm_3cf95
+.notsafarirightcolumn
 	ld hl, W_TOPMENUITEMY ; $cc24
 	ld a, $e
 	ld [hli], a
@@ -59049,11 +59056,11 @@ Func_3cf1a: ; 3cf1a (f:4f1a)
 	ld [hli], a
 	call HandleMenuInput
 	bit 5, a
-	jr nz, .asm_3cf2f
+	jr nz, .leftcolumn
 	ld a, [W_CURMENUITEMID] ; $cc26
-	add $2
+	add $2 ; if we're in the right column, the actual id is +2
 	ld [W_CURMENUITEMID], a ; $cc26
-.asm_3cfb4
+.selection
 	call PlaceUnfilledArrowMenuCursor
 	ld a, [W_BATTLETYPE] ; $d05a
 	cp $2
@@ -59065,19 +59072,20 @@ Func_3cf1a: ; 3cf1a (f:4f1a)
 	inc a
 	jr .asm_3cfd0
 .asm_3cfcb
-	cp $2
+	cp $2 ; what
 	jr nz, .asm_3cfd0
 	dec a
 .asm_3cfd0
 	and a
 	jr nz, Func_3cfe8
+	; first option was selected...
 	ld a, [W_BATTLETYPE] ; $d05a
 	cp $2
-	jr z, .asm_3cfe1
+	jr z, .safari1
 	xor a
 	ld [$d120], a
-	jp LoadScreenTilesFromBuffer1
-.asm_3cfe1
+	jp LoadScreenTilesFromBuffer1 ; restore saved screen and return??
+.safari1 ; safari first option??
 	ld a, $8
 	ld [$cf91], a
 	jr asm_3d05f
@@ -59089,11 +59097,11 @@ Func_3cfe8: ; 3cfe8 (f:4fe8)
 	ld a, [W_ISLINKBATTLE] ; $d12b
 	cp $4
 	jr nz, .asm_3cffd
-	ld hl, UnnamedText_3d0c5 ; $50c5
+	ld hl, ItemsCantBeUsedHere
 	call PrintText
-	jp Func_3ceb3
-.asm_3cffd
-	call SaveScreenTilesToBuffer2
+	jp InitBattleMenu
+.asm_3cffd ; bag?
+	call SaveScreenTilesToBuffer2 ; copy bg?
 	ld a, [W_BATTLETYPE] ; $d05a
 	cp $2
 	jr nz, asm_3d00e
@@ -59110,15 +59118,15 @@ asm_3d00e: ; 3d00e (f:500e)
 	ld a, [W_BATTLETYPE] ; $d05a
 	dec a
 	jr nz, .asm_3d031
-	ld hl, .unknown_3d02d ; $502d
+	ld hl, .list
 	ld a, l
 	ld [$cf8b], a
 	ld a, h
 	ld [$cf8c], a
 	jr .asm_3d03c
 
-.unknown_3d02d: ; 3d02d (f:502d)
-INCBIN "baserom.gbc",$3d02d,$3d031 - $3d02d
+.list
+	db $01, $04, $32, $ff
 
 .asm_3d031
 	ld hl, W_NUMBAGITEMS ; $d31d
@@ -59139,12 +59147,12 @@ INCBIN "baserom.gbc",$3d02d,$3d031 - $3d02d
 	ld a, $0
 	ld [$cc37], a
 	ld [$cc35], a
-	jp c, Func_3ceb3
+	jp c, InitBattleMenu
 asm_3d05f: ; 3d05f (f:505f)
 	ld a, [$cf91]
 	ld [$d11e], a
 	call GetItemName
-	call CopyStringToCF4B
+	call CopyStringToCF4B ; copy name
 	xor a
 	ld [$d152], a
 	call UseItem
@@ -59174,7 +59182,7 @@ asm_3d05f: ; 3d05f (f:505f)
 	cp $2
 	jr z, .asm_3d0b2
 	call LoadScreenTilesFromBuffer1
-	call Func_3cd5a
+	call Func_3cd5a ; redraw name and hp bar?
 	call Delay3
 .asm_3d0b2
 	call GBPalNormal
@@ -59189,9 +59197,9 @@ asm_3d05f: ; 3d05f (f:505f)
 	scf
 	ret
 ; 3d0c5 (f:50c5)
-UnnamedText_3d0c5: ; 3d0c5 (f:50c5)
-	TX_FAR _UnnamedText_3d0c5
-	db $50
+ItemsCantBeUsedHere: ; 3d0c5 (f:50c5)
+	TX_FAR ItemsCantBeUsedHere_
+	db "@"
 ; 0x3d0c5 + 5 bytes
 
 ; known jump sources: 3cfea (f:4fea)
@@ -59222,7 +59230,7 @@ asm_3d0f0: ; 3d0f0 (f:50f0)
 	call LoadScreenTilesFromBuffer2
 	call GoPAL_SET_CF1C
 	call GBPalNormal
-	jp Func_3ceb3
+	jp InitBattleMenu
 
 ; known jump sources: 3d138 (f:5138), 3d19a (f:519a), 3d1a0 (f:51a0)
 Func_3d105: ; 3d105 (f:5105)
@@ -59359,19 +59367,19 @@ Func_3d1fa: ; 3d1fa (f:51fa)
 	ld a, [$cd6a]
 	and a
 	ret nz
-	jp Func_3ceb3
+	jp InitBattleMenu
 
 ; known jump sources: e35f (3:635f), 3c299 (f:4299), 3d3ab (f:53ab), 3d490 (f:5490), 3d4b3 (f:54b3)
-Func_3d219: ; 3d219 (f:5219)
-	ld a, [$ccdb]
+MoveSelectionMenu: ; 3d219 (f:5219)
+	ld a, [W_MOVEMENUTYPE]
 	dec a
-	jr z, asm_3d275
+	jr z, .mimicmenu
 	dec a
-	jr z, asm_3d291
-	jr asm_3d249
+	jr z, .relearnmenu
+	jr .regularmenu
 
 ; known jump sources: 3d250 (f:5250), 3d278 (f:5278), 3d29d (f:529d)
-Func_3d224: ; 3d224 (f:5224)
+.loadmoves
 	ld de, $d0dc
 	ld bc, $4
 	call CopyData
@@ -59381,7 +59389,7 @@ Func_3d224: ; 3d224 (f:5224)
 	ret
 
 ; known jump sources: 3d26c (f:526c), 3d288 (f:5288), 3d2ad (f:52ad)
-Func_3d236: ; 3d236 (f:5236)
+.writemoves
 	ld de, $d0e1
 	ld a, [$FF00+$f6]
 	set 2, a
@@ -59391,11 +59399,12 @@ Func_3d236: ; 3d236 (f:5236)
 	res 2, a
 	ld [$FF00+$f6], a
 	ret
-asm_3d249: ; 3d249 (f:5249)
+
+.regularmenu
 	call Func_3d3f5
 	ret z
 	ld hl, W_PLAYERMONMOVES
-	call Func_3d224
+	call .loadmoves
 	FuncCoord 4, 12 ; $c494
 	ld hl, Coord
 	ld b, $4
@@ -59411,13 +59420,13 @@ asm_3d249: ; 3d249 (f:5249)
 	ei
 	FuncCoord 6, 13 ; $c4aa
 	ld hl, Coord
-	call Func_3d236
+	call .writemoves
 	ld b, $5
 	ld a, $c
-	jr asm_3d2b4
-asm_3d275: ; 3d275 (f:5275)
+	jr .menuset
+.mimicmenu
 	ld hl, W_ENEMYMONMOVES
-	call Func_3d224
+	call .loadmoves
 	FuncCoord 0, 7 ; $c42c
 	ld hl, Coord
 	ld b, $4
@@ -59425,16 +59434,16 @@ asm_3d275: ; 3d275 (f:5275)
 	call TextBoxBorder
 	FuncCoord 2, 8 ; $c442
 	ld hl, Coord
-	call Func_3d236
+	call .writemoves
 	ld b, $1
 	ld a, $7
-	jr asm_3d2b4
-asm_3d291: ; 3d291 (f:5291)
+	jr .menuset
+.relearnmenu
 	ld a, [W_WHICHPOKEMON] ; $cf92
 	ld hl, W_PARTYMON1_MOVE1 ; $d173
 	ld bc, $2c
 	call AddNTimes
-	call Func_3d224
+	call .loadmoves
 	FuncCoord 4, 7 ; $c430
 	ld hl, Coord
 	ld b, $4
@@ -59442,93 +59451,93 @@ asm_3d291: ; 3d291 (f:5291)
 	call TextBoxBorder
 	FuncCoord 6, 8 ; $c446
 	ld hl, Coord
-	call Func_3d236
+	call .writemoves
 	ld b, $5
 	ld a, $7
-asm_3d2b4: ; 3d2b4 (f:52b4)
+.menuset
 	ld hl, W_TOPMENUITEMY ; $cc24
 	ld [hli], a
 	ld a, b
-	ld [hli], a
-	ld a, [$ccdb]
+	ld [hli], a ; W_TOPMENUITEMX
+	ld a, [W_MOVEMENUTYPE]
 	cp $1
-	jr z, .asm_3d2c9
+	jr z, .selectedmoveknown
 	ld a, $1
-	jr nc, .asm_3d2c9
+	jr nc, .selectedmoveknown
 	ld a, [W_PLAYERMOVELISTINDEX] ; $cc2e
 	inc a
-.asm_3d2c9
-	ld [hli], a
-	inc hl
+.selectedmoveknown
+	ld [hli], a ; W_CURMENUITEMID
+	inc hl ; W_TILEBEHINDCURSOR untouched
 	ld a, [$cd6c]
 	inc a
 	inc a
-	ld [hli], a
-	ld a, [$ccdb]
+	ld [hli], a ; W_MAXMENUITEMID
+	ld a, [W_MOVEMENUTYPE]
 	dec a
-	ld b, $c1
-	jr z, .asm_3d2f0
+	ld b, $c1 ; can't use B
+	jr z, .matchedkeyspicked
 	dec a
 	ld b, $c3
-	jr z, .asm_3d2f0
+	jr z, .matchedkeyspicked
 	ld a, [W_ISLINKBATTLE] ; $d12b
 	cp $4
-	jr z, .asm_3d2f0
+	jr z, .matchedkeyspicked
 	ld a, [W_FLAGS_D733]
 	bit 0, a
 	ld b, $c7
-	jr z, .asm_3d2f0
+	jr z, .matchedkeyspicked
 	ld b, $ff
-.asm_3d2f0
+.matchedkeyspicked
 	ld a, b
-	ld [hli], a
-	ld a, [$ccdb]
+	ld [hli], a ; W_MENUWATCHEDKEYS
+	ld a, [W_MOVEMENUTYPE]
 	cp $1
-	jr z, .asm_3d2fd
+	jr z, .movelistindex1
 	ld a, [W_PLAYERMOVELISTINDEX] ; $cc2e
 	inc a
-.asm_3d2fd
-	ld [hl], a
+.movelistindex1
+	ld [hl], a ; W_OLDMENUITEMID
 
 ; known jump sources: 3d3cd (f:53cd), 3d3da (f:53da), 3d3e7 (f:53e7), 3d3f2 (f:53f2)
 Func_3d2fe: ; 3d2fe (f:52fe)
-	ld a, [$ccdb]
+	ld a, [W_MOVEMENUTYPE]
 	and a
-	jr z, .asm_3d312
+	jr z, .battleselect
 	dec a
-	jr nz, .asm_3d32e
+	jr nz, .select
 	FuncCoord 1, 14 ; $c4b9
 	ld hl, Coord
-	ld de, Unknown_3d3b8 ; $53b8
+	ld de, WhichTechniqueString ; $53b8
 	call PlaceString
-	jr .asm_3d32e
-.asm_3d312
+	jr .select
+.battleselect
 	ld a, [W_FLAGS_D733]
 	bit 0, a
-	jr nz, .asm_3d32e
+	jr nz, .select
 	call Func_3d4b6
 	ld a, [$cc35]
 	and a
-	jr z, .asm_3d32e
+	jr z, .select
 	FuncCoord 5, 13 ; $c4a9
 	ld hl, Coord
 	dec a
 	ld bc, $14
 	call AddNTimes
 	ld [hl], $ec
-.asm_3d32e
+.select
 	ld hl, $fff6
 	set 1, [hl]
 	call HandleMenuInput
 	ld hl, $fff6
 	res 1, [hl]
 	bit 6, a
-	jp nz, Func_3d3c9
+	jp nz, Func_3d3c9 ; up
 	bit 7, a
-	jp nz, Func_3d3dd
+	jp nz, Func_3d3dd ; down
 	bit 2, a
-	jp nz, Func_3d435
-	bit 1, a
+	jp nz, Func_3d435 ; select
+	bit 1, a ; B, but was it reset above?
 	push af
 	xor a
 	ld [$cc35], a
@@ -59536,19 +59545,19 @@ Func_3d2fe: ; 3d2fe (f:52fe)
 	dec a
 	ld [W_CURMENUITEMID], a ; $cc26
 	ld b, a
-	ld a, [$ccdb]
-	dec a
-	jr nz, .asm_3d361
+	ld a, [W_MOVEMENUTYPE]
+	dec a ; if not mimic
+	jr nz, .nob
 	pop af
 	ret
-.asm_3d361
+.nob
 	dec a
 	ld a, b
 	ld [W_PLAYERMOVELISTINDEX], a ; $cc2e
-	jr nz, .asm_3d36a
+	jr nz, .moveselected
 	pop af
 	ret
-.asm_3d36a
+.moveselected
 	pop af
 	ret nz
 	ld hl, W_PLAYERMONPP ; $d02d
@@ -59558,17 +59567,17 @@ Func_3d2fe: ; 3d2fe (f:52fe)
 	add hl, bc
 	ld a, [hl]
 	and $3f
-	jr z, .asm_3d3a2
+	jr z, .nopp
 	ld a, [W_PLAYERDISABLEDMOVE] ; $d06d
 	swap a
 	and $f
 	dec a
 	cp c
-	jr z, .asm_3d39d
+	jr z, .disabled
 	ld a, [W_PLAYERBATTSTATUS3] ; $d064
-	bit 3, a
-	jr nz, .asm_3d38d
-.asm_3d38d
+	bit 3, a ; transformed
+	jr nz, .dummy ; game freak derp
+.dummy
 	ld a, [W_CURMENUITEMID] ; $cc26
 	ld hl, W_PLAYERMONMOVES
 	ld c, a
@@ -59578,28 +59587,26 @@ Func_3d2fe: ; 3d2fe (f:52fe)
 	ld [W_PLAYERSELECTEDMOVE], a ; $ccdc
 	xor a
 	ret
-.asm_3d39d
-	ld hl, UnnamedText_3d3b3 ; $53b3
-	jr .asm_3d3a5
-.asm_3d3a2
-	ld hl, UnnamedText_3d3ae ; $53ae
-.asm_3d3a5
+.disabled
+	ld hl, MoveDisabledText
+	jr .print
+.nopp
+	ld hl, MoveNoPPText
+.print
 	call PrintText
 	call LoadScreenTilesFromBuffer1
-	jp Func_3d219
-; 3d3ae (f:53ae)
-UnnamedText_3d3ae: ; 3d3ae (f:53ae)
-	TX_FAR _UnnamedText_3d3ae
-	db $50
-; 0x3d3ae + 5 bytes
+	jp MoveSelectionMenu
 
-UnnamedText_3d3b3: ; 3d3b3 (f:53b3)
-	TX_FAR _UnnamedText_3d3b3
-	db $50
-; 0x3d3b3 + 5 bytes
+MoveNoPPText: ; 3d3ae (f:53ae)
+	TX_FAR _MoveNoPPText
+	db "@"
 
-Unknown_3d3b8: ; 3d3b8 (f:53b8)
-INCBIN "baserom.gbc",$3d3b8,$3d3c9 - $3d3b8
+MoveDisabledText: ; 3d3b3 (f:53b3)
+	TX_FAR _MoveDisabledText
+	db "@"
+
+WhichTechniqueString: ; 3d3b8 (f:53b8)
+	db "WHICH TECHNIQUE?@"
 
 ; known jump sources: 3d33d (f:533d)
 Func_3d3c9: ; 3d3c9 (f:53c9)
@@ -59723,7 +59730,7 @@ Func_3d435: ; 3d435 (f:5435)
 	call Func_3d493
 	xor a
 	ld [$cc35], a
-	jp Func_3d219
+	jp MoveSelectionMenu
 
 ; known jump sources: 3d43e (f:543e), 3d444 (f:5444), 3d481 (f:5481), 3d489 (f:5489)
 Func_3d493: ; 3d493 (f:5493)
@@ -59750,7 +59757,7 @@ Func_3d493: ; 3d493 (f:5493)
 asm_3d4ad: ; 3d4ad (f:54ad)
 	ld a, [W_CURMENUITEMID] ; $cc26
 	ld [$cc35], a
-	jp Func_3d219
+	jp MoveSelectionMenu
 
 ; known jump sources: 3d319 (f:5319)
 Func_3d4b6: ; 3d4b6 (f:54b6)
@@ -59823,7 +59830,7 @@ Func_3d4b6: ; 3d4b6 (f:54b6)
 	ld de, $d11e
 	ld bc, $102
 	call PrintNumber
-	call Func_3eabe
+	call GetCurrentMove
 	FuncCoord 2, 10 ; $c46a
 	ld hl, Coord
 	ld a, $5d
@@ -60004,7 +60011,7 @@ Func_3d65e: ; 3d65e (f:565e)
 	jr nz, .asm_3d68a
 	jp [hl]
 .asm_3d68a
-	call Func_3eabe
+	call GetCurrentMove
 	ld hl, W_PLAYERBATTSTATUS1 ; $d062
 	bit 4, [hl]
 	jr nz, asm_3d6a9
@@ -61011,7 +61018,7 @@ Func_3dc88: ; 3dc88 (f:5c88)
 	add hl, bc
 	ld a, [hl]
 	ld [W_PLAYERSELECTEDMOVE], a ; $ccdc
-	call Func_3eabe
+	call GetCurrentMove
 
 ; known jump sources: 3dcae (f:5cae), 3dcdc (f:5cdc), 3dce8 (f:5ce8)
 Func_3ddb0: ; 3ddb0 (f:5db0)
@@ -62515,7 +62522,7 @@ Func_3e6bc: ; 3e6bc (f:66bc)
 	ld hl, W_ENEMYBATTSTATUS1 ; $d067
 	bit 4, [hl]
 	jr nz, asm_3e70b
-	call Func_3eabe
+	call GetCurrentMove
 
 ; known jump sources: 3e7fc (f:67fc), 3e806 (f:6806)
 Func_3e6fc: ; 3e6fc (f:66fc)
@@ -63003,23 +63010,21 @@ Func_3eaba: ; 3eaba (f:6aba)
 	ret
 
 ; known jump sources: 3d543 (f:5543), 3d68a (f:568a), 3ddad (f:5dad), 3e6f9 (f:66f9)
-Func_3eabe: ; 3eabe (f:6abe)
+GetCurrentMove: ; 3eabe (f:6abe)
 	ld a, [H_WHOSETURN] ; $FF00+$f3
 	and a
-	jp z, Func_3eacc
+	jp z, .player
 	ld de, W_ENEMYMOVENUM ; $cfcc
 	ld a, [W_ENEMYSELECTEDMOVE] ; $ccdd
-	jr asm_3eadc
-
-; known jump sources: 3eac1 (f:6ac1)
-Func_3eacc: ; 3eacc (f:6acc)
+	jr .selected
+.player
 	ld de, W_PLAYERMOVENUM ; $cfd2
 	ld a, [W_FLAGS_D733]
 	bit 0, a
 	ld a, [$ccd9]
-	jr nz, asm_3eadc
+	jr nz, .selected
 	ld a, [W_PLAYERSELECTEDMOVE] ; $ccdc
-asm_3eadc: ; 3eadc (f:6adc)
+.selected
 	ld [$d0b5], a
 	dec a
 	ld hl, Moves ; $4000
@@ -63030,7 +63035,7 @@ asm_3eadc: ; 3eadc (f:6adc)
 	ld a, $2c
 	ld [$d0b7], a
 	ld a, $2
-	ld [W_LISTTYPE], a
+	ld [W_LISTTYPE], a ; list type 2 = move name
 	call GetName
 	ld de, $cd6d
 	jp CopyStringToCF4B
@@ -63146,7 +63151,7 @@ Func_3eb01: ; 3eb01 (f:6b01)
 	ld hl, W_ENEMYMONMOVES
 	ld de, $cffd
 	ld a, $5e
-	call Predef ; indirect jump to Func_f473 (f473 (3:7473))
+	call Predef ; indirect jump to LoadMovePPs (f473 (3:7473))
 	ld hl, W_MONHBASESTATS
 	ld de, $d002
 	ld b, $5
@@ -77560,7 +77565,8 @@ Predef54Predef: ; 4ff75 (13:7f75)
 	dbw $03,$4D99
 	dbw $01,$4DE1
 	dbw $09,$7D98
-	dbw $03,$7473
+LoadMovePPsPredef:
+	dbw BANK(LoadMovePPs),LoadMovePPs
 DrawHPBarPredef: ; 4ff96 (13:7f96)
 	dbw $04,$68EF ; 5F draw HP bar
 	dbw $04,$68F6
@@ -90364,8 +90370,8 @@ HallofFameRoomScript2: ; 5a4bb (16:64bb)
 	ld [W_HALLOFFAMEROOMCURSCRIPT], a
 	ld a, $0
 	ld [$d719], a
-	ld b, BANK(Func_73848)
-	ld hl, Func_73848
+	ld b, BANK(SaveSAVtoSRAM)
+	ld hl, SaveSAVtoSRAM
 	call Bankswitch
 	ld b, $5
 .asm_5a4ff
@@ -102575,62 +102581,62 @@ IF _BLUE
 ENDC
 
 ; known jump sources: 4a9 (0:4a9), 5b04 (1:5b04)
-Func_735e8: ; 735e8 (1c:75e8)
+LoadSAV: ; 735e8 (1c:75e8)
+;(if carry -> write
+;"the file data is destroyed")
 	call ClearScreen
 	call LoadFontTilePatterns
 	call LoadTextBoxTilePatterns
-	call Func_73623
-	jr c, .asm_73604
-	call Func_73690
-	jr c, .asm_73604
-	call Func_736bd
-	jr c, .asm_73604
-	ld a, $2
-	jr .asm_7361a
-.asm_73604
+	call LoadSAVCheckSum
+	jr c, .badsum
+	call LoadSAVCheckSum1
+	jr c, .badsum
+	call LoadSAVCheckSum2
+	jr c, .badsum
+	ld a, $2 ; good checksum
+	jr .goodsum
+.badsum
 	ld hl, $d730
 	push hl
 	set 6, [hl]
-	ld hl, UnnamedText_7361e ; $761e
+	ld hl, FileDataDestroyedText ; $761e
 	call PrintText
 	ld c, $64
 	call DelayFrames
 	pop hl
 	res 6, [hl]
-	ld a, $1
-.asm_7361a
-	ld [$d088], a
+	ld a, $1 ; bad checksum
+.goodsum
+	ld [$d088], a ; checksum flag
 	ret
-; 7361e (1c:761e)
-UnnamedText_7361e: ; 7361e (1c:761e)
-	TX_FAR _UnnamedText_7361e
-	db $50
-; 0x7361e + 5 bytes
+
+FileDataDestroyedText: ; 7361e (1c:761e)
+	TX_FAR _FileDataDestroyedText
+	db "@"
 
 ; known jump sources: 735f1 (1c:75f1)
-Func_73623: ; 73623 (1c:7623)
+LoadSAVCheckSum: ; 73623 (1c:7623)
 	ld a, $a
 	ld [$0], a
 	ld a, $1
 	ld [$6000], a
 	ld [$4000], a
+	ld hl, $a598 ; hero name located in SRAM
+	ld bc, $f8b ; but here checks the full SAV
+	call SAVCheckSum
+	ld c, a
+	ld a, [$b523] ; SAV's checksum
+	cp c
+	jp z, .Func_73652
 	ld hl, $a598
 	ld bc, $f8b
-	call Func_73856
+	call SAVCheckSum
 	ld c, a
-	ld a, [$b523]
+	ld a, [$b523] ; SAV's checksum
 	cp c
-	jp z, Func_73652
-	ld hl, $a598
-	ld bc, $f8b
-	call Func_73856
-	ld c, a
-	ld a, [$b523]
-	cp c
-	jp nz, Func_736f7
+	jp nz, SAVBadCheckSum
 
-; known jump sources: 7363e (1c:763e)
-Func_73652: ; 73652 (1c:7652)
+.Func_73652 ; 73652 (1c:7652)
 	ld hl, $a598
 	ld de, W_PLAYERNAME ; $d158
 	ld bc, $b
@@ -102652,43 +102658,43 @@ Func_73652: ; 73652 (1c:7652)
 	ld bc, $462
 	call CopyData
 	and a
-	jp Func_736f8
+	jp SAVGoodChecksum
 
 ; known jump sources: 735f6 (1c:75f6)
-Func_73690: ; 73690 (1c:7690)
+LoadSAVCheckSum1: ; 73690 (1c:7690)
 	ld a, $a
 	ld [$0], a
 	ld a, $1
 	ld [$6000], a
 	ld [$4000], a
-	ld hl, $a598
-	ld bc, $f8b
-	call Func_73856
+	ld hl, $a598 ; hero name located in SRAM
+	ld bc, $f8b  ; but here checks the full SAV
+	call SAVCheckSum
 	ld c, a
-	ld a, [$b523]
+	ld a, [$b523] ; SAV's checksum
 	cp c
-	jr nz, Func_736f7
+	jr nz, SAVBadCheckSum
 	ld hl, $b0c0
 	ld de, W_NUMINBOX ; $da80
 	ld bc, $462
 	call CopyData
 	and a
-	jp Func_736f8
+	jp SAVGoodChecksum
 
 ; known jump sources: 735fb (1c:75fb)
-Func_736bd: ; 736bd (1c:76bd)
+LoadSAVCheckSum2: ; 736bd (1c:76bd)
 	ld a, $a
 	ld [$0], a
 	ld a, $1
 	ld [$6000], a
 	ld [$4000], a
-	ld hl, $a598
-	ld bc, $f8b
-	call Func_73856
+	ld hl, $a598 ; hero name located in SRAM
+	ld bc, $f8b  ; but here checks the full SAV
+	call SAVCheckSum
 	ld c, a
-	ld a, [$b523]
+	ld a, [$b523] ; SAV's checksum
 	cp c
-	jp nz, Func_736f7
+	jp nz, SAVBadCheckSum
 	ld hl, $af2c
 	ld de, W_NUMINPARTY ; $d163
 	ld bc, $194
@@ -102698,38 +102704,90 @@ Func_736bd: ; 736bd (1c:76bd)
 	ld bc, $26
 	call CopyData
 	and a
-	jp Func_736f8
+	jp SAVGoodChecksum
 
 ; known jump sources: 7364f (1c:764f), 736ab (1c:76ab), 736d8 (1c:76d8)
-Func_736f7: ; 736f7 (1c:76f7)
+SAVBadCheckSum: ; 736f7 (1c:76f7)
 	scf
 
 ; known jump sources: 7368d (1c:768d), 736ba (1c:76ba), 736f4 (1c:76f4)
-Func_736f8: ; 736f8 (1c:76f8)
+SAVGoodChecksum: ; 736f8 (1c:76f8)
 	ld a, $0
 	ld [$6000], a
 	ld [$0], a
 	ret
 
-INCBIN "baserom.gbc",$73701,$7377d - $73701
+Function_73701: ; 0x73701
+	call LoadSAVCheckSum
+	call LoadSAVCheckSum1
+	jp LoadSAVCheckSum2
 
-UnnamedText_7377d: ; 7377d (1c:777d)
-	TX_FAR _UnnamedText_7377d
-	db $50
-; 0x7377d + 5 bytes
+SaveSAV: ;$770a
+	ld b,1
+	ld hl,$5def ; LoadGameMenuInGame
+	call Bankswitch
+	ld hl,WouldYouLikeToSaveText
+	call SaveSAVConfirm
+	and a   ;|0 = Yes|1 = No|
+	ret nz
+	ld a,[$d088]
+	dec a
+	jr z,.save
+	call SAVCheckRandomID
+	jr z,.save
+	ld hl,OlderFileWillBeErasedText
+	call SaveSAVConfirm
+	and a
+	ret nz
+.save        ;$772d
+	call SaveSAVtoSRAM      ;$7848
+	FuncCoord 1,13
+	ld hl,Coord
+	ld bc,$0412
+	call $18c4      ;clear area 4x12 starting at 13,1
+	FuncCoord 1,14
+	ld hl,Coord
+	ld de,NowSavingString
+	call $1955
+	ld c,$78
+	call DelayFrames
+	ld hl,GameSavedText
+	call PrintText
+	ld a,$b6        ;sound for saved game?
+	call $3740      ;sound-related
+	call $3748      ;sound-related
+	ld c,$1e
+	jp DelayFrames
 
-UnnamedText_73782: ; 73782 (1c:7782)
-	TX_FAR _UnnamedText_73782
-	db $50
-; 0x73782 + 5 bytes
+NowSavingString:
+	db "Now saving...@"
 
-UnnamedText_73787: ; 73787 (1c:7787)
-	TX_FAR _UnnamedText_73787
-	db $50
-; 0x73787 + 5 bytes
+SaveSAVConfirm:
+;$7768
+	call PrintText
+	FuncCoord 0, 7
+	ld hl,Coord
+	ld bc,$0801     ;arrow's coordinates |b = Y|c = X|
+	ld a,$14        ;one line shifting ($28 = 2 lines)
+	ld [$d125],a
+	call DisplayTextBoxID      ;handle Yes/No KeyPress
+	ld a,[$cc26]
+	ret
+
+WouldYouLikeToSaveText: ; 0x7377d
+	TX_FAR _WouldYouLikeToSaveText
+	db "@"
+
+GameSavedText: ; 73782 (1c:7782)
+	TX_FAR _GameSavedText
+	db "@"
+
+OlderFileWillBeErasedText: ; 73787 (1c:7787)
+	TX_FAR _OlderFileWillBeErasedText
+	db "@"
 
 ; known jump sources: 7384d (1c:784d)
-Func_7378c: ; 7378c (1c:778c)
+SaveSAVtoSRAM0: ; 7378c (1c:778c)
 	ld a, $a
 	ld [$0], a
 	ld a, $1
@@ -102743,7 +102801,7 @@ Func_7378c: ; 7378c (1c:778c)
 	ld de, $a5a3
 	ld bc, $789
 	call CopyData
-	ld hl, $c100
+	ld hl, $c100 ; OAM?
 	ld de, $ad2c
 	ld bc, $200
 	call CopyData
@@ -102755,7 +102813,7 @@ Func_7378c: ; 7378c (1c:778c)
 	ld [$b522], a
 	ld hl, $a598
 	ld bc, $f8b
-	call Func_73856
+	call SAVCheckSum
 	ld [$b523], a
 	xor a
 	ld [$6000], a
@@ -102763,7 +102821,8 @@ Func_7378c: ; 7378c (1c:778c)
 	ret
 
 ; known jump sources: 73850 (1c:7850)
-Func_737e2: ; 737e2 (1c:77e2)
+SaveSAVtoSRAM1: ; 737e2 (1c:77e2)
+; stored pokémon
 	ld a, $a
 	ld [$0], a
 	ld a, $1
@@ -102775,7 +102834,7 @@ Func_737e2: ; 737e2 (1c:77e2)
 	call CopyData
 	ld hl, $a598
 	ld bc, $f8b
-	call Func_73856
+	call SAVCheckSum
 	ld [$b523], a
 	xor a
 	ld [$6000], a
@@ -102783,7 +102842,7 @@ Func_737e2: ; 737e2 (1c:77e2)
 	ret
 
 ; known jump sources: 73853 (1c:7853)
-Func_7380f: ; 7380f (1c:780f)
+SaveSAVtoSRAM2: ; 7380f (1c:780f)
 	ld a, $a
 	ld [$0], a
 	ld a, $1
@@ -102793,13 +102852,13 @@ Func_7380f: ; 7380f (1c:780f)
 	ld de, $af2c
 	ld bc, $194
 	call CopyData
-	ld hl, W_OWNEDPOKEMON ; $d2f7
+	ld hl, W_OWNEDPOKEMON ; pokédex only
 	ld de, $a5a3
 	ld bc, $26
 	call CopyData
 	ld hl, $a598
 	ld bc, $f8b
-	call Func_73856
+	call SAVCheckSum
 	ld [$b523], a
 	xor a
 	ld [$6000], a
@@ -102807,24 +102866,25 @@ Func_7380f: ; 7380f (1c:780f)
 	ret
 
 ; known jump sources: 7245 (1:7245), 5a4fa (16:64fa), 738f7 (1c:78f7)
-Func_73848: ; 73848 (1c:7848)
+SaveSAVtoSRAM: ; 73848 (1c:7848)
 	ld a, $2
 	ld [$d088], a
-	call Func_7378c
-	call Func_737e2
-	jp Func_7380f
+	call SaveSAVtoSRAM0
+	call SaveSAVtoSRAM1
+	jp SaveSAVtoSRAM2
 
 ; known jump sources: 73636 (1c:7636), 73647 (1c:7647), 736a3 (1c:76a3), 736d0 (1c:76d0), 737d4 (1c:77d4), 73801 (1c:7801), 7383a (1c:783a), 73870 (1c:7870), 7392e (1c:792e), 73a75 (1c:7a75)
-Func_73856: ; 73856 (1c:7856)
+SAVCheckSum: ; 73856 (1c:7856)
+;Check Sum (result[1 byte] is complemented)
 	ld d, $0
-.asm_73858
+.loop
 	ld a, [hli]
 	add d
 	ld d, a
 	dec bc
 	ld a, b
 	or c
-	jr nz, .asm_73858
+	jr nz, .loop
 	ld a, d
 	cpl
 	ret
@@ -102838,7 +102898,7 @@ Func_73863: ; 73863 (1c:7863)
 	push bc
 	push de
 	ld bc, $462
-	call Func_73856
+	call SAVCheckSum
 	pop de
 	ld [de], a
 	inc de
@@ -102909,7 +102969,7 @@ Func_738a1: ; 738a1 (1c:78a1)
 	ld a, [hl]
 	ld [de], a
 	call Func_3f05
-	call Func_73848
+	call SaveSAVtoSRAM
 	ld hl, W_WHICHTRADE ; $cd3d
 	call Func_3f0f
 	ld a, $b6
@@ -102940,7 +103000,7 @@ Func_7390e: ; 7390e (1c:790e)
 	ld [hl], a
 	ld hl, $a000
 	ld bc, $1a4c
-	call Func_73856
+	call SAVCheckSum
 	ld [$ba4c], a
 	call Func_73863
 	xor a
@@ -103070,7 +103130,7 @@ Func_73a4b: ; 73a4b (1c:7a4b)
 	call Func_73a7f
 	ld hl, $a000
 	ld bc, $1a4c
-	call Func_73856
+	call SAVCheckSum
 	ld [$ba4c], a
 	call Func_73863
 	ret
@@ -103126,7 +103186,39 @@ Func_73ab8: ; 73ab8 (1c:7ab8)
 	ld [hli], a
 	ret
 
-INCBIN "baserom.gbc",$73ad1,$73b0d - $73ad1
+SAVCheckRandomID: ;$7ad1
+;checks if Sav file is the same by checking player's name 1st letter ($a598)
+; and the two random numbers generated at game beginning
+;(which are stored at $d359-d35a)
+	ld a,$0a
+	ld [$0000],a
+	ld a,$01
+	ld [$6000],a
+	ld [$4000],a
+	ld a,[$a598]
+	and a
+	jr z,.next
+	ld hl,$a598
+	ld bc,$0f8b
+	call SAVCheckSum
+	ld c,a
+	ld a,[$b523]
+	cp c
+	jr nz,.next
+	ld hl,$a605
+	ld a,[hli]
+	ld h,[hl]
+	ld l,a
+	ld a,[$d359]
+	cp l
+	jr nz,.next
+	ld a,[$d35a]
+	cp h
+.next
+	ld a,$00
+	ld [$6000],a
+	ld [$0000],a
+	ret
 
 ; known jump sources: 7024e (1c:424e)
 Func_73b0d: ; 73b0d (1c:7b0d)
@@ -103141,16 +103233,16 @@ Func_73b0d: ; 73b0d (1c:7b0d)
 	ld d, h
 	ld hl, $cc5b
 	ld bc, $60
-	jr asm_73b51
+	jr CopyToSRAM0
 .asm_73b28
 	ld hl, $a5f8
 	ld de, $a598
 	ld bc, $1260
-	call asm_73b51
+	call CopyToSRAM0
 	ld hl, $cc5b
 	ld de, $b7f8
 	ld bc, $60
-	jr asm_73b51
+	jr CopyToSRAM0
 
 ; known jump sources: 765be (1d:65be)
 Func_73b3f: ; 73b3f (1c:7b3f)
@@ -103160,7 +103252,8 @@ Func_73b3f: ; 73b3f (1c:7b3f)
 	call AddNTimes
 	ld de, $cc5b
 	ld bc, $60
-asm_73b51: ; 73b51 (1c:7b51)
+	; fallthrough
+CopyToSRAM0: ; 73b51 (1c:7b51)
 	ld a, $a
 	ld [$0], a
 	ld a, $1
@@ -103180,26 +103273,27 @@ Func_73b6a: ; 73b6a (1c:7b6a)
 	ld a, $1
 	ld [$6000], a
 	xor a
-	call Func_73b8f
+	call PadSRAM_FF
 	ld a, $1
-	call Func_73b8f
+	call PadSRAM_FF
 	ld a, $2
-	call Func_73b8f
+	call PadSRAM_FF
 	ld a, $3
-	call Func_73b8f
+	call PadSRAM_FF
 	xor a
 	ld [$6000], a
 	ld [$0], a
 	ret
 
 ; known jump sources: 73b75 (1c:7b75), 73b7a (1c:7b7a), 73b7f (1c:7b7f), 73b84 (1c:7b84)
-Func_73b8f: ; 73b8f (1c:7b8f)
+PadSRAM_FF: ; 73b8f (1c:7b8f)
 	ld [$4000], a
 	ld hl, $a000
 	ld bc, $2000
 	ld a, $ff
 	jp FillMemory
-; 73b9d (1c:7b9d)
+
+
 SECTION "bank1D",DATA,BANK[$1D]
 
 CopycatsHouseF1Blocks: ; 74000 (1d:4000)
@@ -116719,7 +116813,7 @@ _UnnamedText_3c63e: ; 896c7 (22:56c7)
 	db "fainted!", $58
 ; 0x896c7 + 22 bytes = 0x896dd
 
-_UnnamedText_3c6e4: ; 896dd (22:56dd)
+_MoneyForWinningText: ; 896dd (22:56dd)
 	db $0, $52, " got ¥@"
 	;XXX $2
 	db $2, $79, $d0, $c3
@@ -116727,7 +116821,7 @@ _UnnamedText_3c6e4: ; 896dd (22:56dd)
 	db "for winning!", $58
 ; 0x896f9
 
-_UnnamedText_3c6e9: ; 896f9 (22:56f9)
+_TrainerDefeatedText: ; 896f9 (22:56f9)
 	db $0, $52, " defeated", $4f
 	db "@"
 	TX_RAM $d04a ; 0x89706
@@ -116800,7 +116894,7 @@ _UnnamedText_3cba1: ; 8981f (22:581f)
 	db $0, "Got away safely!", $58
 ; 0x8981f + 18 bytes
 
-_UnnamedText_3d0c5: ; 89831 (22:5831)
+ItemsCantBeUsedHere_: ; 89831 (22:5831)
 	db $0, "Items can't be", $4f
 	db "used here.", $58
 ; 0x89831 + 26 bytes
@@ -116811,12 +116905,12 @@ _UnnamedText_3d1f5: ; 8984b (22:584b)
 	db "already out!", $58
 ; 0x8984b + 21 bytes
 
-_UnnamedText_3d3ae: ; 89860 (22:5860)
+_MoveNoPPText: ; 89860 (22:5860)
 	db $0, "No PP left for", $4f
 	db "this move!", $58
 ; 0x89860 + 27 bytes
 
-_UnnamedText_3d3b3: ; 8987b (22:587b)
+_MoveDisabledText: ; 8987b (22:587b)
 	db $0, "The move is", $4f
 	db "disabled!", $58
 ; 0x8987b + 23 bytes
@@ -121310,22 +121404,22 @@ _Route25Text11: ; 945d3 (25:45d3)
 	db $0, "SEA COTTAGE", $4f
 	db "BILL lives here!", $57
 
-_UnnamedText_7361e: ; 945f1 (25:45f1)
+_FileDataDestroyedText: ; 945f1 (25:45f1)
 	db $0, "The file data is", $4f
 	db "destroyed!", $58
 ; 0x945f1 + 29 bytes
 
-_UnnamedText_7377d: ; 9460e (25:460e)
+_WouldYouLikeToSaveText: ; 9460e (25:460e)
 	db $0, "Would you like to", $4f
 	db "SAVE the game?", $57
 ; 0x9460e + 34 bytes
 
-_UnnamedText_73782: ; 94630 (25:4630)
+_GameSavedText: ; 94630 (25:4630)
 	db $0, $52, " saved", $4f
 	db "the game!", $57
 ; 0x94630 + 19 bytes
 
-_UnnamedText_73787: ; 94643 (25:4643)
+_OlderFileWillBeErasedText: ; 94643 (25:4643)
 	db $0, "The older file", $4f
 	db "will be erased to", $55
 	db "save. Okay?", $57

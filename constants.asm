@@ -203,6 +203,7 @@ W_RLEBYTECOUNTER      EQU $CCD2
 W_PLAYERSUBSITUTEHP EQU $CCD7
 W_ENEMYSUBSITUTEHP EQU $CCD8
 
+W_MOVEMENUTYPE       EQU $CCDB ; 0=regular, 1=mimic, 2=above message box (relearn, heal pp..)
 W_PLAYERSELECTEDMOVE EQU $CCDC
 W_ENEMYSELECTEDMOVE  EQU $CCDD
 
@@ -356,6 +357,7 @@ W_BATTLETYPE EQU $D05A ; in normal battle, this is 0
                        ; in safari battle, this is 2
 
 W_LONEATTACKNO EQU $D05C ; which entry in LoneAttacks to use
+W_GYMLEADERNO  EQU $D05C ; it's actually the same thing as ^
 W_TRAINERNO    EQU $D05D ; which instance of [youngster, lass, etc] is this?
 
 W_MOVEMISSED EQU $D05F
