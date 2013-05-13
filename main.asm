@@ -15306,7 +15306,7 @@ Func_6a6c: ; 6a6c (1:6a6c)
 	call TextBoxBorder
 	FuncCoord 3, 0 ; $c3a3
 	ld hl, Coord
-	ld de, Unknown_6aa3 ; $6aa3
+	ld de, .namestring ; $6aa3
 	call PlaceString
 	pop de
 	FuncCoord 2, 2 ; $c3ca
@@ -15325,8 +15325,8 @@ Func_6a6c: ; 6a6c (1:6a6c)
 	ld [W_MAXMENUITEMID], a ; $cc28
 	jp HandleMenuInput
 
-Unknown_6aa3: ; 6aa3 (1:6aa3)
-INCBIN "baserom.gbc",$6aa3,$6aa8 - $6aa3
+.namestring ; 6aa3 (1:6aa3)
+	db "NAME@"
 
 IF _RED
 DefaultNamesPlayer: ; 6aa8 (1:6aa8)
@@ -15907,7 +15907,7 @@ Func_6eda: ; 6eda (1:6eda)
 
 ; known jump sources: 6eb1 (1:6eb1), 6ebc (1:6ebc), 6ed7 (1:6ed7)
 Func_6efe: ; 6efe (1:6efe)
-	ld hl, Unknown_6fad ; $6fad
+	ld hl, UnnamedText_6fad ; $6fad
 	call PrintText
 	ld b, $1
 	ret
@@ -16006,8 +16006,9 @@ Func_6f07: ; 6f07 (1:6f07)
 	scf
 	ret
 
-Unknown_6fad: ; 6fad (1:6fad)
-INCBIN "baserom.gbc",$6fad,$6fb4 - $6fad
+UnnamedText_6fad: ; 6fb4 (1:6fb4)
+	TX_FAR UnnamedText_a273b
+	db $b,6,"@"
 
 UnnamedText_6fb4: ; 6fb4 (1:6fb4)
 	TX_FAR _UnnamedText_6fb4
@@ -16791,7 +16792,10 @@ JapanesePokedexMenu: ; 74a1 (1:74a1)
 	res 6, [hl]
 	ret
 
-INCBIN "baserom.gbc",$74e2,$74ea - $74e2
+CurrencyString_74e2: ; 0x74e2, 1:34e2
+	db "      ¥@"
+
+Function_74ea: ; 0x74ea, 1:34ea
 	ld a, [$d730]
 	set 6, a
 	ld [$d730], a
@@ -16875,14 +16879,14 @@ DisplayYesNoTextBox: ; 7559 (1:7559)
 	push hl
 	call Func_763e
 	ld a, [$d12c]
-	ld hl, Unknown_7671 ; $7671
+	ld hl, MenuStrings ; $7671
 	ld e, a
 	ld d, $0
 	ld a, $5
-.asm_75a1
+.loop
 	add hl, de
 	dec a
-	jr nz, .asm_75a1
+	jr nz, .loop
 	ld a, [hli]
 	ld c, a
 	ld a, [hli]
@@ -17008,8 +17012,40 @@ Func_7656: ; 7656 (1:7656)
 	call UpdateSprites
 	ret
 
-Unknown_7671: ; 7671 (1:7671)
-INCBIN "baserom.gbc",$7671,$76e1 - $7671
+MenuStrings: ; 7671 (1:7671)
+	db 4,3,0
+	dw .YesNoMenu
+	db 6,3,0
+	dw .NorthWestMenu
+	db 6,3,0
+	dw .SouthEastMenu
+	db 6,3,0
+	dw .YesNoMenu
+	db 6,3,0
+	dw .NorthEastMenu
+	db 7,3,0
+	dw .TradeCancelMenu
+	db 7,4,1
+	dw .HealCancelMenu
+	db 4,3,0
+	dw .NoYesMenu
+
+.NoYesMenu ; 0x7699, 1:3699
+	db "NO",$4E,"YES@"
+.YesNoMenu ; 0x76a0, 1:36a0
+	db "YES",$4E,"NO@"
+.NorthWestMenu ; 0x76a7, 1:36a7
+	db "NORTH",$4E,"WEST@"
+.SouthEastMenu ; 0x76b2, 1:36b2
+	db "SOUTH",$4E,"EAST@"
+.NorthEastMenu ; 0x76bd, 1:36bd
+	db "NORTH",$4E,"EAST@"
+.TradeCancelMenu ; 0x76c8, 1:36c8
+	db "TRADE",$4E,"CANCEL@"
+.HealCancelMenu ; 0x76d5, 1:36d5
+	db "HEAL",$4E,"CANCEL@"
+
+Function_76e1: ; 0x76e1, 1:36e1
 	xor a
 	ld hl, W_WHICHTRADE ; $cd3d
 	ld [hli], a
