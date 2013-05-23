@@ -73872,66 +73872,75 @@ CeladonMansion3Script: ; 48790 (12:4790)
 ; 0x48793
 
 CeladonMansion3Texts: ; 48793 (12:4793)
-	dw CeladonMansion3Text1, CeladonMansion3Text2, CeladonMansion3Text3, CeladonMansion3Text4, CeladonMansion3Text5, CeladonMansion3Text6, CeladonMansion3Text7, CeladonMansion3Text8
+	dw ProgrammerText
+	dw GraphicArtistText
+	dw WriterText
+	dw DirectorText
+	dw GameFreakPCText1
+	dw GameFreakPCText2
+	dw GameFreakPCText3
+	dw GameFreakSignText
 
-CeladonMansion3Text1: ; 487a3 (12:47a3)
-	TX_FAR _CeladonMansion3Text1
+ProgrammerText: ; 487a3 (12:47a3)
+	TX_FAR _ProgrammerText
 	db $50
 
-CeladonMansion3Text2: ; 487a8 (12:47a8)
-	TX_FAR _CeladonMansion3Text2
+GraphicArtistText: ; 487a8 (12:47a8)
+	TX_FAR _GraphicArtistText
 	db $50
 
-CeladonMansion3Text3: ; 487ad (12:47ad)
-	TX_FAR _CeladonMansion3Text3
+WriterText: ; 487ad (12:47ad)
+	TX_FAR _WriterText
 	db $50
 
-CeladonMansion3Text4: ; 487b2 (12:47b2)
+DirectorText: ; 487b2 (12:47b2)
 	db $08 ; asm
-	ld hl, $d2f7
-	ld b, $13
+
+	; check pokédex
+	ld hl, WPokedexOwned
+	ld b, WPokedexOwnedEnd-WPokedexOwned
 	call CountSetBits
 	ld a, [$d11e]
-	cp $96
-	jr nc, .asm_f03d0 ; 0x487c0
-	ld hl, UnnamedText_487d0
-	jr .asm_c13f0 ; 0x487c5
-.asm_f03d0 ; 0x487c7
-	ld hl, UnnamedText_487d5
-.asm_c13f0 ; 0x487ca
+	cp 150
+	jr nc, .CompletedDex
+	ld hl, .GameDesigner
+	jr .done
+.CompletedDex
+	ld hl, .CompletedDexText
+.done
 	call PrintText
 	jp TextScriptEnd
 
-UnnamedText_487d0: ; 487d0 (12:47d0)
-	TX_FAR _UnnamedText_487d0
-	db $50
+.GameDesigner ; 487d0 (12:47d0)
+	TX_FAR _GameDesignerText
+	db "@"
 ; 0x487d5
 
-UnnamedText_487d5: ; 487d5 (12:47d5)
-	TX_FAR _UnnamedText_487d5 ; 0x9d0ad
+.CompletedDexText
+	TX_FAR _CompletedDexText ; 0x9d0ad
 	db $6
-	db $8
-	ld hl, Func_566e2
-	ld b, BANK(Func_566e2)
+	db $8 ; asm
+	ld hl, DisplayDiploma
+	ld b, BANK(DisplayDiploma)
 	call Bankswitch
 	ld a, $1
 	ld [$cc3c], a
 	jp TextScriptEnd
 ; 0x487eb
 
-CeladonMansion3Text5: ; 487eb (12:47eb)
+GameFreakPCText1: ; 487eb (12:47eb)
 	TX_FAR _CeladonMansion3Text5
 	db $50
 
-CeladonMansion3Text6: ; 487f0 (12:47f0)
+GameFreakPCText2: ; 487f0 (12:47f0)
 	TX_FAR _CeladonMansion3Text6
 	db $50
 
-CeladonMansion3Text7: ; 487f5 (12:47f5)
+GameFreakPCText3: ; 487f5 (12:47f5)
 	TX_FAR _CeladonMansion3Text7
 	db $50
 
-CeladonMansion3Text8: ; 487fa (12:47fa)
+GameFreakSignText: ; 487fa (12:47fa)
 	TX_FAR _CeladonMansion3Text8
 	db $50
 
@@ -85840,7 +85849,7 @@ SilphCo8Object: ; 0x56613 (size=90)
 SilphCo8Blocks: ; 5666d (15:666d)
 	INCBIN "maps/silphco8.blk"
 
-Func_566e2: ; 566e2 (15:66e2)
+DisplayDiploma: ; 566e2 (15:66e2)
 	call SaveScreenTilesToBuffer2
 	call GBPalWhiteOutWithDelay3
 	call ClearScreen
@@ -124473,16 +124482,16 @@ _CeladonMansion2Text1: ; 9cf8b (27:4f8b)
 	db $0, "GAME FREAK", $4f
 	db "Meeting Room", $57
 
-_CeladonMansion3Text1: ; 9cfa4 (27:4fa4)
+_ProgrammerText: ; 9cfa4 (27:4fa4)
 	db $0, "Me? I'm the", $4f
 	db "programmer!", $57
 
-_CeladonMansion3Text2: ; 9cfbc (27:4fbc)
+_GraphicArtistText: ; 9cfbc (27:4fbc)
 	db $0, "I'm the graphic", $4f
 	db "artist!", $55
 	db "I drew you!", $57
 
-_CeladonMansion3Text3: ; 9cfe0 (27:4fe0)
+_WriterText: ; 9cfe0 (27:4fe0)
 	db $0, "I wrote the story!", $4f
 	db "Isn't ERIKA cute?", $51
 	db "I like MISTY a", $4f
@@ -124490,7 +124499,7 @@ _CeladonMansion3Text3: ; 9cfe0 (27:4fe0)
 	db "Oh, and SABRINA,", $4f
 	db "I like her!", $57
 
-_UnnamedText_487d0: ; 9d03a (27:503a)
+_GameDesignerText: ; 9d03a (27:503a)
 	db $0, "Is that right?", $51
 	db "I'm the game", $4f
 	db "designer!", $51
@@ -124501,7 +124510,7 @@ _UnnamedText_487d0: ; 9d03a (27:503a)
 	db "come tell me!", $57
 ; 0x9d03a + 115 bytes
 
-_UnnamedText_487d5: ; 9d0ad (27:50ad)
+_CompletedDexText: ; 9d0ad (27:50ad)
 	db $0, "Wow! Excellent!", $4f
 	db "You completed", $55
 	db "your #DEX!", $55
