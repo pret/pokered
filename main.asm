@@ -8610,7 +8610,7 @@ IsItemInBag: ; 3493 (0:3493)
 	and a
 	ret
 
-Func_349b: ; 349b (0:349b)
+DisplayPokedex: ; 349b (0:349b)
 	ld [$d11e], a
 	ld b, BANK(Func_7c18)
 	ld hl, Func_7c18
@@ -35007,8 +35007,8 @@ FuchsiaCityText19: ; 19a90 (6:5a90)
 	db $08 ; asm
 	ld hl, FuchsiaCityChanseyText
 	call PrintText
-	ld a, $28
-	call Func_349b
+	ld a, CHANSEY
+	call DisplayPokedex
 	jp TextScriptEnd
 
 FuchsiaCityChanseyText: ; 19a9f (6:5a9f)
@@ -35020,8 +35020,8 @@ FuchsiaCityText20: ; 19aa4 (6:5aa4)
 	db $08 ; asm
 	ld hl, FuchsiaCityVoltorbText
 	call PrintText
-	ld a, $6
-	call Func_349b
+	ld a, VOLTORB
+	call DisplayPokedex
 	jp TextScriptEnd
 
 FuchsiaCityVoltorbText: ; 19ab3 (6:5ab3)
@@ -35033,8 +35033,8 @@ FuchsiaCityText21: ; 19ab8 (6:5ab8)
 	db $08 ; asm
 	ld hl, FuchsiaCityKangaskhanText
 	call PrintText
-	ld a, $2
-	call Func_349b
+	ld a, KANGASKHAN
+	call DisplayPokedex
 	jp TextScriptEnd
 
 FuchsiaCityKangaskhanText: ; 19ac7 (6:5ac7)
@@ -35046,8 +35046,8 @@ FuchsiaCityText22: ; 19acc (6:5acc)
 	db $08 ; asm
 	ld hl, FuchsiaCitySlowpokeText
 	call PrintText
-	ld a, $25
-	call Func_349b
+	ld a, SLOWPOKE
+	call DisplayPokedex
 	jp TextScriptEnd
 
 FuchsiaCitySlowpokeText: ; 19adb (6:5adb)
@@ -35059,8 +35059,8 @@ FuchsiaCityText23: ; 19ae0 (6:5ae0)
 	db $08 ; asm
 	ld hl, FuchsiaCityLaprasText
 	call PrintText
-	ld a, $13
-	call Func_349b
+	ld a, LAPRAS
+	call DisplayPokedex
 	jp TextScriptEnd
 
 FuchsiaCityLaprasText: ; 19aef (6:5aef)
@@ -35086,9 +35086,9 @@ FuchsiaCityText24: ; 19af4 (6:5af4)
 .asm_667d5 ; 0x19b12
 	ld hl, FuchsiaCityKabutoText
 	call PrintText
-	ld a, $5a
+	ld a, KABUTOPS
 .asm_81556 ; 0x19b1a
-	call Func_349b
+	call DisplayPokedex
 .asm_4343f ; 0x19b1d
 	jp TextScriptEnd
 
@@ -92522,27 +92522,30 @@ FightingDojoAfterBattleText4: ; 5cf01 (17:4f01)
 ; 0x5cf01 + 5 bytes
 
 FightingDojoText6: ; 5cf06 (17:4f06)
+; Hitmonlee Poké Ball
 	db $08 ; asm
 	ld a, [$d7b1]
-	and $c0
-	jr z, .asm_f8e28 ; 0x5cf0c
-	ld hl, UnnamedText_5cf96
+	and %11000000
+	jr z, .GetMon
+	ld hl, OtherHitmonText
 	call PrintText
-	jr .asm_3a2c8 ; 0x5cf14
-.asm_f8e28 ; 0x5cf16
-	ld a, $2b
-	call Func_349b
-	ld hl, UnnamedText_5cf49
+	jr .done
+.GetMon
+	ld a, HITMONLEE
+	call DisplayPokedex
+	ld hl, WantHitmonleeText
 	call PrintText
 	call YesNoChoice
 	ld a, [$cc26]
 	and a
-	jr nz, .asm_3a2c8 ; 0x5cf28
+	jr nz, .done
 	ld a, [$cf91]
 	ld b, a
 	ld c, 30
 	call GivePokemon
-	jr nc, .asm_3a2c8 ; 0x5cf33
+	jr nc, .done
+
+	; once Poké Ball is taken, hide sprite
 	ld a, $4a
 	ld [$cc4d], a
 	ld a, $11
@@ -92550,26 +92553,27 @@ FightingDojoText6: ; 5cf06 (17:4f06)
 	ld hl, $d7b1
 	set 6, [hl]
 	set 0, [hl]
-.asm_3a2c8 ; 0x5cf46
+.done
 	jp TextScriptEnd
 
-UnnamedText_5cf49: ; 5cf49 (17:4f49)
-	TX_FAR _UnnamedText_5cf49
+WantHitmonleeText: ; 5cf49 (17:4f49)
+	TX_FAR _WantHitmonleeText
 	db $50
 ; 0x5cf49 + 5 bytes
 
 FightingDojoText7: ; 5cf4e (17:4f4e)
+; Hitmonchan Poké Ball
 	db $08 ; asm
 	ld a, [$d7b1]
-	and $c0
-	jr z, .asm_170a9 ; 0x5cf54
-	ld hl, UnnamedText_5cf96
+	and %11000000
+	jr z, .GetMon
+	ld hl, OtherHitmonText
 	call PrintText
-	jr .asm_f1f47 ; 0x5cf5c
-.asm_170a9 ; 0x5cf5e
-	ld a, $2c
-	call Func_349b
-	ld hl, UnnamedText_5cf91
+	jr .done
+.GetMon
+	ld a, HITMONCHAN
+	call DisplayPokedex
+	ld hl, WantHitmonchanText
 	call PrintText
 	call YesNoChoice
 	ld a, [$cc26]
@@ -92579,24 +92583,26 @@ FightingDojoText7: ; 5cf4e (17:4f4e)
 	ld b, a
 	ld c,30
 	call GivePokemon
-	jr nc, .asm_f1f47 ; 0x5cf7b
+	jr nc, .done
 	ld hl, $d7b1
 	set 7, [hl]
 	set 0, [hl]
+
+	; once Poké Ball is taken, hide sprite
 	ld a, $4b
 	ld [$cc4d], a
 	ld a, $11
 	call Predef
-.asm_f1f47 ; 0x5cf8e
+.done
 	jp TextScriptEnd
 
-UnnamedText_5cf91: ; 5cf91 (17:4f91)
-	TX_FAR _UnnamedText_5cf91
+WantHitmonchanText: ; 5cf91 (17:4f91)
+	TX_FAR _WantHitmonchanText
 	db $50
 ; 0x5cf91 + 5 bytes
 
-UnnamedText_5cf96: ; 5cf96 (17:4f96)
-	TX_FAR _UnnamedText_5cf96
+OtherHitmonText: ; 5cf96 (17:4f96)
+	TX_FAR _OtherHitmonText
 	db $50
 ; 0x5cf96 + 5 bytes
 
@@ -96997,8 +97003,8 @@ SSAnne9Text5: ; 61bdd (18:5bdd)
 	ld hl, UnnamedText_61bf2
 	call PrintText
 	call LoadScreenTilesFromBuffer1
-	ld a, $84
-	call Func_349b
+	ld a, SNORLAX
+	call DisplayPokedex
 	jp TextScriptEnd
 
 UnnamedText_61bf2: ; 61bf2 (18:5bf2)
@@ -97905,8 +97911,8 @@ UnknownText_6236c: ; 6236c (18:636c)
 	db $8
 	ld hl, UnnamedText_6237b
 	call PrintText
-	ld a, $aa
-	call Func_349b
+	ld a, AERODACTYL
+	call DisplayPokedex
 	jp TextScriptEnd
 ; 0x6237b
 
@@ -126187,19 +126193,19 @@ _FightingDojoAfterBattleText4: ; a1b1a (28:5b1a)
 	db "train here.", $57
 ; 0xa1b1a + 48 bytes
 
-_UnnamedText_5cf49: ; a1b4a (28:5b4a)
+_WantHitmonleeText: ; a1b4a (28:5b4a)
 	db $0, "You want the", $4f
 	db "hard kicking", $55
 	db "HITMONLEE?", $57
 ; 0xa1b4a + 38 bytes
 
-_UnnamedText_5cf91: ; a1b70 (28:5b70)
+_WantHitmonchanText: ; a1b70 (28:5b70)
 	db $0, "You want the", $4f
 	db "piston punching", $55
 	db "HITMONCHAN?", $57
 ; 0xa1b70 + 42 bytes
 
-_UnnamedText_5cf96: ; a1b9a (28:5b9a)
+_OtherHitmonText: ; a1b9a (28:5b9a)
 	db $0, "Better not get", $4f
 	db "greedy...", $57
 ; 0xa1b9a + 26 bytes
