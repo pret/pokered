@@ -26678,99 +26678,128 @@ Func_e9f0: ; e9f0 (3:69f0)
 	dec hl
 	ret
 
-; known jump sources: 13474 (4:7474)
-Func_ea03: ; ea03 (3:6a03)
+
+DrawBadges: ; ea03 (3:6a03)
+; Draw 4x2 gym leader faces, with the faces replaced by
+; badges if they are owned. Used in the player status screen.
+
+; In Japanese versions, names are displayed above faces.
+; Instead of removing relevant code, the name graphics were erased.
+
+; Tile ids for face/badge graphics.
 	ld de, $cd3f
-	ld hl, Unknown_ea96 ; $6a96
-	ld bc, $8
+	ld hl, .FaceBadgeTiles
+	ld bc, 8
 	call CopyData
+
+; Booleans for each badge.
 	ld hl, $cd49
-	ld bc, $8
+	ld bc, 8
 	xor a
 	call FillMemory
+
+; Alter these based on owned badges.
 	ld de, $cd49
 	ld hl, $cd3f
-	ld a, [W_OBTAINEDBADGES] ; $d356
+	ld a, [W_OBTAINEDBADGES]
 	ld b, a
-	ld c, $8
-.asm_ea25
+	ld c, 8
+.CheckBadge
 	srl b
-	jr nc, .asm_ea30
+	jr nc, .NextBadge
 	ld a, [hl]
-	add $4
+	add 4 ; Badge graphics are after each face
 	ld [hl], a
-	ld a, $1
+	ld a, 1
 	ld [de], a
-.asm_ea30
+.NextBadge
 	inc hl
 	inc de
 	dec c
-	jr nz, .asm_ea25
-	ld hl, W_WHICHTRADE ; $cd3d
-	ld a, $d8
+	jr nz, .CheckBadge
+
+; Draw two rows of badges.
+	ld hl, $cd3d
+	ld a, $d8 ; [1]
 	ld [hli], a
-	ld [hl], $60
-	FuncCoord 2, 11 ; $c47e
+	ld [hl], $60 ; First name
+
+	FuncCoord 2, 11
 	ld hl, Coord
 	ld de, $cd49
-	call Func_ea4c
-	FuncCoord 2, 14 ; $c4ba
-	ld hl, Coord
-	ld de, $cd4d
+	call .DrawBadgeRow
 
-; known jump sources: ea43 (3:6a43)
-Func_ea4c: ; ea4c (3:6a4c)
-	ld c, $4
-.asm_ea4e
+	FuncCoord 2, 14
+	ld hl, Coord
+	ld de, $cd49 + 4
+;	call .DrawBadgeRow
+;	ret
+; ea4c
+
+.DrawBadgeRow ; ea4c (3:6a4c)
+; Draw 4 badges.
+
+	ld c, 4
+.DrawBadge
 	push de
 	push hl
-	ld a, [W_WHICHTRADE] ; $cd3d
+
+; Badge no.
+	ld a, [$cd3d]
 	ld [hli], a
 	inc a
-	ld [W_WHICHTRADE], a ; $cd3d
+	ld [$cd3d], a
+
+; Names aren't printed if the badge is owned.
 	ld a, [de]
 	and a
 	ld a, [$cd3e]
-	jr nz, .asm_ea64
-	call Func_ea91
-	jr .asm_ea67
-.asm_ea64
+	jr nz, .SkipName
+	call .PlaceTiles
+	jr .PlaceBadge
+
+.SkipName
 	inc a
 	inc a
 	inc hl
-.asm_ea67
+
+.PlaceBadge
 	ld [$cd3e], a
-	ld de, $13
+	ld de, 20 - 1
 	add hl, de
 	ld a, [$cd3f]
-	call Func_ea91
+	call .PlaceTiles
 	add hl, de
-	call Func_ea91
+	call .PlaceTiles
+
+; Shift badge array back one byte.
 	push bc
-	ld hl, $cd40
+	ld hl, $cd3f + 1
 	ld de, $cd3f
-	ld bc, $8
+	ld bc, 8
 	call CopyData
 	pop bc
+
 	pop hl
-	ld de, $4
+	ld de, 4
 	add hl, de
+
 	pop de
 	inc de
 	dec c
-	jr nz, .asm_ea4e
+	jr nz, .DrawBadge
 	ret
 
-; known jump sources: ea5f (3:6a5f), ea71 (3:6a71), ea75 (3:6a75)
-Func_ea91: ; ea91 (3:6a91)
+.PlaceTiles
 	ld [hli], a
 	inc a
 	ld [hl], a
 	inc a
 	ret
 
-Unknown_ea96: ; ea96 (3:6a96)
-INCBIN "baserom.gbc",$ea96,$ea9e - $ea96
+.FaceBadgeTiles
+	db $20, $28, $30, $38, $40, $48, $50, $58
+; ea9e
 
 GymLeaderFaceAndBadgeTileGraphics: ; ea9e (3:6a9e)
 INCBIN "baserom.gbc",$ea9e,$ee9e - $ea9e
@@ -77522,7 +77551,7 @@ MoveAnimationPredef: ; 4fe91 (13:7e91)
 	dbw $1C,$778C
 	dbw $0F,$6F18
 	dbw $01,$5A5F
-	dbw $03,$6A03
+	dbw BANK(DrawBadges), DrawBadges
 	dbw $10,$50F3
 	dbw $1C,$496D
 	dbw $1E,$5DDA
