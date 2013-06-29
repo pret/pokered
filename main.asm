@@ -92578,7 +92578,7 @@ FightingDojoText7: ; 5cf4e (17:4f4e)
 	call YesNoChoice
 	ld a, [$cc26]
 	and a
-	jr nz, .asm_f1f47 ; 0x5cf70
+	jr nz, .done
 	ld a, [$cf91]
 	ld b, a
 	ld c,30
