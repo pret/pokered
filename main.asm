@@ -21440,8 +21440,8 @@ BillsPC:
 	ld hl, UnnamedText_17f28 ;accessed bill's pc
 .printText
 	call PrintText
-	ld b, 8
-	ld hl, $54C2
+	ld b, BANK(BillsPC_)
+	ld hl, BillsPC_
 	call Bankswitch
 ReloadMainMenu:
 	xor a
@@ -29649,65 +29649,225 @@ UnnamedText_1ecbd: ; 0x1ecbd
 
 SECTION "bank8",DATA,BANK[$8]
 
-INCBIN "baserom.gbc",$20000,$217e9 - $20000
+INCBIN "baserom.gbc",$20000,$214c2 - $20000
 
-UnnamedText_217e9: ; 0x217e9
-	TX_FAR _UnnamedText_217e9
+BillsPC_: ; 0x214c2
+	ld hl, $d730
+	set 6, [hl]
+	xor a
+	ld [$ccd3], a
+	inc a ; MONSTER_NAME
+	ld [$d0b6], a
+	call LoadHpBarAndStatusTilePatterns
+	ld a, [W_LISTSCROLLOFFSET]
+	push af
+	ld a, [$cd60]
+	bit 3, a
+	jr nz, BillsPCMenu ; 0x214db $b
+	ld a, $99
+	call $23b1
+	ld hl, SwitchOnText
+	call PrintText
+BillsPCMenu: ;.asm_214e8
+	ld a, [$ccd3]
+	ld [W_CURMENUITEMID], a
+	ld hl, $9780
+	ld de, $697e
+	ld bc, $0e01
+	call CopyVideoData
+	call $3709
+	ld hl, $c3a0
+	ld b, $a
+	ld c, $c
+	call TextBoxBorder
+	ld hl, $c3ca
+	ld de, $56e1 ; Probably menu text
+	call PlaceString
+	ld hl, $cc24
+	ld a, $2
+	ld [hli], a
+	dec a
+	ld [hli], a
+	inc hl
+	inc hl
+	ld a, $4
+	ld [hli], a
+	ld a, $3
+	ld [hli], a
+	xor a
+	ld [hli], a
+	ld [hli], a
+	ld hl, $cc36
+	ld [hli], a
+	ld [hl], a
+	ld [$cc2f], a
+	ld hl, WhatText
+	call PrintText
+	ld hl, $c4c1
+	ld b, $2
+	ld c, $9
+	call TextBoxBorder
+	ld a, [$d5a0]
+	and $7f
+	cp $9
+	jr c, .asm_2154f ; 0x21542 $b
+	sub $9
+	ld hl, $c4f1
+	ld [hl], $f7
+	add $f6
+	jr .asm_21551 ; 0x2154d $2
+.asm_2154f
+	add $f7
+.asm_21551
+	ld [$c4f2], a
+	ld hl, $c4ea
+	ld de, $5713
+	call PlaceString
+	ld a, $1
+	ld [$ff00+$ba], a
+	call Delay3
+	call HandleMenuInput
+	bit 1, a
+	jp nz, $5588 ; b button 
+	call PlaceUnfilledArrowMenuCursor
+	ld a, [W_CURMENUITEMID]
+	ld [$ccd3], a
+	and a
+	jp z, $5618 ; withdraw
+	cp $1
+	jp z, $55ac ; deposit
+	cp $2
+	jp z, $5673 ; release
+	cp $3
+	jp z, $56b3 ; change box
+	ld a, [$cd60]
+	bit 3, a
+	jr nz, .asm_2159a ; 0x2158d $b
+	call LoadTextBoxTilePatterns
+	ld a, $9a
+	call $23b1
+	call $3748
+.asm_2159a
+	ld hl, $cd60
+	res 5, [hl]
+	call $3701
+	pop af
+	ld [$cc36], a
+	ld hl, $d730
+	res 6, [hl]
+	ret
+; 0x215ac
+
+BillsPCDeposit: ; 0x215ac
+	ld a, [W_NUMINPARTY]
+	dec a
+	jr nz, .asm_215bb ; 0x215b0 $9
+	ld hl, CantDepositLastMonText
+	call PrintText
+	jp $54e8
+.asm_215bb
+	ld a, [$da80]
+	cp $14
+	jr nz, .asm_215cb ; 0x215c0 $9
+	ld hl, $5802
+	call PrintText
+	jp BillsPCMenu
+.asm_215cb
+	ld hl, $d163
+	call $56be
+	jp c, BillsPCMenu
+	call $574b
+	jp nc, BillsPCMenu
+	ld a, [$cf91]
+	call GetCryData
+	call $3740
+	ld a, $1
+	ld [$cf95], a
+	call $3a68
+	xor a
+	ld [$cf95], a
+	call RemovePokemon
+	call $3748
+	ld hl, $cd3d
+	ld a, [$d5a0]
+	and $7f
+	cp $9
+	jr c, .asm_2160a ; 0x215ff $9
+	sub $9
+	ld [hl], $f7
+	inc hl
+	add $f6
+	jr .asm_2160c ; 0x21608 $2
+.asm_2160a
+	add $f7
+.asm_2160c
+	ld [hli], a
+	ld [hl], $50
+	ld hl, $57f8
+	call PrintText
+	jp BillsPCMenu
+; 0x21618
+
+
+INCBIN "baserom.gbc",$21618,$217e9 - $21618
+
+SwitchOnText: ; 0x217e9
+	TX_FAR _SwitchOnText
 	db $50
 ; 0x217e9 + 5 bytes
 
-UnnamedText_217ee: ; 0x217ee
-	TX_FAR _UnnamedText_217ee
+WhatText: ; 0x217ee
+	TX_FAR _WhatText
 	db $50
 ; 0x217ee + 5 bytes
 
-UnnamedText_217f3: ; 0x217f3
-	TX_FAR _UnnamedText_217f3
+DepositWhichMonText: ; 0x217f3
+	TX_FAR _DepositWhichMonText
 	db $50
 ; 0x217f3 + 5 bytes
 
-UnnamedText_217f8: ; 0x217f8
-	TX_FAR _UnnamedText_217f8
+MonWasStoredText: ; 0x217f8
+	TX_FAR _MonWasStoredText
 	db $50
 ; 0x217f8 + 5 bytes
 
-UnnamedText_217fd: ; 0x217fd
-	TX_FAR _UnnamedText_217fd
+CantDepositLastMonText: ; 0x217fd
+	TX_FAR _CantDepositLastMonText
 	db $50
 ; 0x217fd + 5 bytes
 
-UnnamedText_21802: ; 0x21802
-	TX_FAR _UnnamedText_21802
+BoxFullText: ; 0x21802
+	TX_FAR _BoxFullText
 	db $50
 ; 0x21802 + 5 bytes
 
-UnnamedText_21807: ; 0x21807
-	TX_FAR _UnnamedText_21807
+MonIsTakenOutText: ; 0x21807
+	TX_FAR _MonIsTakenOutText
 	db $50
 ; 0x21807 + 5 bytes
 
-UnnamedText_2180c: ; 0x2180c
-	TX_FAR _UnnamedText_2180c
+NoMonText: ; 0x2180c
+	TX_FAR _NoMonText
 	db $50
 ; 0x2180c + 5 bytes
 
-UnnamedText_21811: ; 0x21811
-	TX_FAR _UnnamedText_21811
+CantTakeMonText: ; 0x21811
+	TX_FAR _CantTakeMonText
 	db $50
 ; 0x21811 + 5 bytes
 
-UnnamedText_21816: ; 0x21816
-	TX_FAR _UnnamedText_21816
+ReleaseWhichMonText: ; 0x21816
+	TX_FAR _ReleaseWhichMonText
 	db $50
 ; 0x21816 + 5 bytes
 
-UnnamedText_2181b: ; 0x2181b
-	TX_FAR _UnnamedText_2181b
+OnceReleasedText: ; 0x2181b
+	TX_FAR _OnceReleasedText
 	db $50
 ; 0x2181b + 5 bytes
 
-UnnamedText_21820: ; 0x21820
-	TX_FAR _UnnamedText_21820
+MonWasReleasedText: ; 0x21820
+	TX_FAR _MonWasReleasedText
 	db $50
 ; 0x21820 + 5 bytes
 
@@ -82260,20 +82420,20 @@ _UnnamedText_76683: ; 0x8a0f4
 	db "OF FAME List.", $58
 ; 0x8a0f4 + 61 bytes
 
-_UnnamedText_217e9: ; 0x8a131
+_SwitchOnText: ; 0x8a131
 	db $0, "Switch on!", $58
 ; 0x8a131 + 12 bytes
 
-_UnnamedText_217ee: ; 0x8a13d
+_WhatText: ; 0x8a13d
 	db $0, "What?", $57
 ; 0x8a13d + 7 bytes
 
-_UnnamedText_217f3: ; 0x8a144
+_DepositWhichMonText: ; 0x8a144
 	db $0, "Deposit which", $4f
 	db "#MON?", $57
 ; 0x8a144 + 21 bytes
 
-_UnnamedText_217f8: ; 0x8a159
+_MonWasStoredText: ; 0x8a159
 	TX_RAM $cf4b
 	db $0, " was", $4f
 	db "stored in Box @"
@@ -82281,17 +82441,17 @@ _UnnamedText_217f8: ; 0x8a159
 	db $0, ".", $58
 ; 30 bytes
 
-_UnnamedText_217fd: ; 0x8a177
+_CantDepositLastMonText: ; 0x8a177
 	db $0, "You can't deposit", $4f
 	db "the last #MON!", $58
 ; 0x8a177 + 33 bytes
 
-_UnnamedText_21802: ; 0x8a198
+_BoxFullText: ; 0x8a198
 	db $0, "Oops! This Box is", $4f
 	db "full of #MON.", $58
 ; 0x8a198 + 33 bytes
 
-_UnnamedText_21807: ; 0x8a1b9
+_MonIsTakenOutText: ; 0x8a1b9
 	TX_RAM $cf4b
 	db $0, " is", $4f
 	db "taken out.", $55
@@ -82302,35 +82462,35 @@ UnknownText_8a1d1: ; 0x8a1d1
 	db $0, ".", $58
 ; 0x8a1d1 + 6 bytes
 
-_UnnamedText_2180c: ; 0x8a1d7
+_NoMonText: ; 0x8a1d7
 	db $0, "What? There are", $4f
 	db "no #MON here!", $58
 ; 0x8a1d7 + 31 bytes
 
-_UnnamedText_21811: ; 0x8a1f6
+_CantTakeMonText: ; 0x8a1f6
 	db $0, "You can't take", $4f
 	db "any more #MON.", $51
 	db "Deposit #MON", $4f
 	db "first.", $58
 ; 0x8a1f6 + 50 bytes
 
-_UnnamedText_21816: ; 0x8a228
+_ReleaseWhichMonText: ; 0x8a228
 	db $0, "Release which", $4f
 	db "#MON?", $57
 ; 0x8a228 + 21 bytes
 
-_UnnamedText_2181b: ; 0x8a23d
+_OnceReleasedText: ; 0x8a23d
 	db $0, "Once released,", $4f
 	db "@"
 ; 0x8a23d + 17 bytes
 
-UnknownText_8a24e: ; 0x8a24e
+MonIsGoneForeverText: ; 0x8a24e
 	TX_RAM $cf4b
 	db $0, " is", $55
 	db "gone forever. OK?", $57
 ; 0x8a24e + 26 bytes
 
-_UnnamedText_21820: ; 0x8a268
+_MonWasReleasedText: ; 0x8a268
 	TX_RAM $cf4b
 	db $0, " was", $4f
 	db "released outside.", $55
