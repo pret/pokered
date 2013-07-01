@@ -35086,7 +35086,7 @@ FuchsiaCityText24: ; 19af4 (6:5af4)
 .asm_667d5 ; 0x19b12
 	ld hl, FuchsiaCityKabutoText
 	call PrintText
-	ld a, KABUTOPS
+	ld a, KABUTO
 .asm_81556 ; 0x19b1a
 	call DisplayPokedex
 .asm_4343f ; 0x19b1d
@@ -97911,7 +97911,7 @@ UnknownText_6236c: ; 6236c (18:636c)
 	db $8
 	ld hl, UnnamedText_6237b
 	call PrintText
-	ld a, AERODACTYL
+	ld a, PORYGON
 	call DisplayPokedex
 	jp TextScriptEnd
 ; 0x6237b
