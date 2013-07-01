@@ -10494,6 +10494,8 @@ Func_3e08: ; 3e08 (0:3e08)
 ; 3e2e (0:3e2e)
 
 GiveItem: ; 3e2e (0:3e2e)
+; Give player quantity c of item b, and copy item name to $cf4b.
+; Set carry on success. If no room in bag, reset carry.
 	ld a, b
 	ld [$d11e], a
 	ld [$cf91], a
@@ -12123,9 +12125,9 @@ PickupItem: ; 4de1 (1:4de1)
 	add hl, de        ; seek to item data of found item
 	ld a, [hl]        ; read Item type
 	ld b, a
-	ld c, $1          ; quantity is 1
+	ld c, 1          ; quantity is 1
 	call GiveItem
-	jr nc, .noMoreSpace
+	jr nc, .BagFull
 	ld a, [$FF00+$db]
 	ld [$cc4d], a
 	ld a, $11
@@ -12134,7 +12136,7 @@ PickupItem: ; 4de1 (1:4de1)
 	ld [$cc3c], a
 	ld hl, FoundItemText
 	jr .printText
-.noMoreSpace
+.BagFull
 	ld hl, NoMoreRoomForItemText
 .printText
 	call PrintText
@@ -33687,13 +33689,13 @@ ViridianCityText6: ; 19196 (6:5196)
 	call PrintText
 	ld bc, (TM_42 << 8) | 1
 	call GiveItem
-	jr nc, .asm_b655e ; 0x191aa
+	jr nc, .BagFull
 	ld hl, ReceivedTM42Text
 	call PrintText
 	ld hl, $d74c
 	set 1, [hl]
 	jr .asm_3c73c ; 0x191b7
-.asm_b655e ; 0x191b9
+.BagFull
 	ld hl, TM42NoRoomText
 	call PrintText
 	jr .asm_3c73c ; 0x191bf
@@ -34399,11 +34401,11 @@ CeruleanCityText2: ; 1967c (6:567c)
 	call PrintText
 	ld bc, $e401
 	call GiveItem
-	jr c, .asm_8bbbd ; 0x196b9 $8
+	jr c, .Success
 	ld hl, TM28NoRoomText
 	call PrintText
-	jr .asm_e4e6f ; 0x196c1 $13
-.asm_8bbbd ; 0x196c3
+	jr .Done
+.Success
 	ld a, $1
 	ld [$cc3c], a
 	ld hl, ReceivedTM28Text
@@ -34411,7 +34413,7 @@ CeruleanCityText2: ; 1967c (6:567c)
 	ld b, BANK(Unnamed_ASM_74872)
 	ld hl, Unnamed_ASM_74872
 	call Bankswitch
-.asm_e4e6f ; 0x196d6
+.Done
 	jp TextScriptEnd
 ; 0x196d9
 
@@ -34863,20 +34865,20 @@ CeladonCityText5: ; 1999e (6:599e)
 	call PrintText
 	ld bc, (TM_41 << 8) | 1
 	call GiveItem
-	jr c, .asm_890ec ; 0x199b2
+	jr c, .Success
 	ld hl, TM41NoRoomText
 	call PrintText
-	jr .asm_c765a ; 0x199ba
-.asm_890ec ; 0x199bc
+	jr .Done
+.Success
 	ld hl, ReceivedTM41Text
 	call PrintText
 	ld hl, $d777
 	set 0, [hl]
-	jr .asm_c765a ; 0x199c7
+	jr .Done
 .asm_7053f ; 0x199c9
 	ld hl, TM41ExplanationText
 	call PrintText
-.asm_c765a ; 0x199cf
+.Done
 	jp TextScriptEnd
 
 TM41PreText: ; 199d2 (6:59d2)
@@ -35154,7 +35156,7 @@ BluesHouseText1: ; 19b5d (6:5b5d)
 	call PrintText
 	ld bc,(TOWN_MAP << 8) | 1
 	call GiveItem
-	jr nc,.BagFull
+	jr nc, .BagFull
 	ld a,$29
 	ld [$CC4D],a
 	ld a,$11
@@ -37070,10 +37072,10 @@ Route1Text1: ; 1cab8 (7:4ab8)
 	call PrintText 
 	ld bc, (POTION << 8) | 1
 	call GiveItem
-	jr nc, .asm_a630e ; 0x1cace
+	jr nc, .BagFull
 	ld hl, Unknown_1cae8 ; $4ae8
 	jr .asm_46d43 ; 0x1cad3
-.asm_a630e ; 0x1cad5
+.BagFull
 	ld hl, UnnamedText_1caf3 ; $4af3
 	jr .asm_46d43 ; 0x1cad8
 .asm_02840 ; 0x1cada
@@ -38468,7 +38470,7 @@ ViridianMartScript1: ; 1d4c0 (7:54c0)
 	ld a, $5
 	ld [$ff00+$8c], a
 	call DisplayTextID
-	ld bc, (OAKS_PARCEL << 8) + 1 ; 1x OAKS_PARCEL
+	ld bc, (OAKS_PARCEL << 8) + 1
 	call GiveItem
 	ld hl, $d74e
 	set 1, [hl]
@@ -38859,7 +38861,7 @@ BikeShopText1: ; 1d745 (7:5745)
 	jr z, .asm_260d4 ; 0x1d74b
 	ld hl, UnnamedText_1d82f
 	call PrintText
-	jp .asm_99ef2
+	jp .Done
 .asm_260d4 ; 0x1d756
 	ld b, BIKE_VOUCHER
 	call IsItemInBag
@@ -38868,7 +38870,7 @@ BikeShopText1: ; 1d745 (7:5745)
 	call PrintText
 	ld bc, (BICYCLE << 8) | 1
 	call GiveItem
-	jr nc, .asm_d0d90 ; 0x1d769
+	jr nc, .BagFull
 	ld a, BIKE_VOUCHER
 	ldh [$db], a
 	ld b, BANK(RemoveItemByID)
@@ -38878,11 +38880,11 @@ BikeShopText1: ; 1d745 (7:5745)
 	set 0, [hl]
 	ld hl, UnnamedText_1d824
 	call PrintText
-	jr .asm_99ef2 ; 0x1d782
-.asm_d0d90 ; 0x1d784
+	jr .Done
+.BagFull
 	ld hl, UnnamedText_1d834
 	call PrintText
-	jr .asm_99ef2 ; 0x1d78a
+	jr .Done
 .asm_41190 ; 0x1d78c
 	ld hl, UnnamedText_1d810
 	call PrintText
@@ -38927,7 +38929,7 @@ BikeShopText1: ; 1d745 (7:5745)
 .asm_b7579 ; 0x1d7ef
 	ld hl, UnnamedText_1d82a
 	call PrintText
-.asm_99ef2 ; 0x1d7f5
+.Done
 	jp TextScriptEnd
 
 BikeShopMenuText: ; 1d7f8 (7:57f8)
@@ -39117,13 +39119,13 @@ LavenderHouse1Text5: ; 1d918 (7:5918)
 	call PrintText
 	ld bc, (POKE_FLUTE << 8) | 1
 	call GiveItem
-	jr nc, .asm_5ce36 ; 0x1d92c
+	jr nc, .BagFull
 	ld hl, ReceivedFluteText
 	call PrintText
 	ld hl, $d76c
 	set 0, [hl]
 	jr .asm_da749 ; 0x1d939
-.asm_5ce36 ; 0x1d93b
+.BagFull
 	ld hl, FluteNoRoomText
 	call PrintText
 	jr .asm_da749 ; 0x1d941
@@ -39847,13 +39849,13 @@ SaffronHouse2Text1: ; 1de41 (7:5e41)
 	call PrintText
 	ld bc,(TM_29 << 8) | 1
 	call GiveItem
-	jr nc, .asm_4b1da ; 0x1de55
+	jr nc, .BagFull
 	ld hl, ReceivedTM29Text
 	call PrintText
 	ld hl, $d7bd
 	set 0, [hl]
 	jr .asm_fe4e1 ; 0x1de62
-.asm_4b1da ; 0x1de64
+.BagFull
 	ld hl, TM29NoRoomText
 	call PrintText
 	jr .asm_fe4e1 ; 0x1de6a
@@ -40776,12 +40778,12 @@ Route16HouseText1: ; 1e5ff (7:65ff)
 	call PrintText
 	ld bc, (HM_02 << 8) | 1
 	call GiveItem
-	jr nc, .asm_d3ee3 ; 0x1e616
+	jr nc, .BagFull
 	ld hl, $d7e0
 	set 6, [hl]
 	ld hl, ReceivedHM02Text
 	jr .asm_13616 ; 0x1e620
-.asm_d3ee3 ; 0x1e622
+.BagFull
 	ld hl, HM02NoRoomText
 .asm_13616 ; 0x1e625
 	call PrintText
@@ -41136,7 +41138,7 @@ BillsHouseText2: ; 1e874 (7:6874)
 	call PrintText
 	ld bc, (S_S__TICKET << 8) | 1
 	call GiveItem
-	jr nc, .asm_18a67 ; 0x1e888
+	jr nc, .BagFull
 	ld hl, SSTicketReceivedText
 	call PrintText
 	ld hl, $d7f2
@@ -41153,7 +41155,7 @@ BillsHouseText2: ; 1e874 (7:6874)
 	ld hl, UnnamedText_1e8cb
 	call PrintText
 	jr .asm_bd408 ; 0x1e8af
-.asm_18a67 ; 0x1e8b1
+.BagFull
 	ld hl, SSTicketNoRoomText
 	call PrintText
 .asm_bd408 ; 0x1e8b7
@@ -73214,12 +73216,12 @@ CeladonMart3Text1: ; 4824a (12:424a)
 	call PrintText
 	ld bc, (TM_18 << 8) | 1
 	call GiveItem
-	jr nc, .asm_95f37 ; 0x4825e
+	jr nc, .BagFull
 	ld hl, $d778
 	set 7, [hl]
 	ld hl, ReceivedTM18Text
 	jr .asm_81359 ; 0x48268
-.asm_95f37 ; 0x4826a
+.BagFull
 	ld hl, TM18NoRoomText
 	jr .asm_81359 ; 0x4826d
 .asm_a5463 ; 0x4826f
@@ -73485,9 +73487,9 @@ Func_4840c: ; 4840c (12:440c)
 	ld hl, Unknown_48515 ; $4515
 	call PrintText
 	call RemoveItemByIDBank12
-	ld bc, $f901 ; 1x TM_49
+	ld bc, (TM_49 << 8) | 1
 	call GiveItem
-	jr nc, .asm_484da
+	jr nc, .BagFull
 	ld hl, Unknown_4851b ; $451b
 	call PrintText
 	ld hl, $d778
@@ -73500,9 +73502,9 @@ Func_4840c: ; 4840c (12:440c)
 	ld hl, Unknown_48504 ; $4504
 	call PrintText
 	call RemoveItemByIDBank12
-	ld bc, $f801 ; 1x TM_48
+	ld bc, (TM_48 << 8) | 1
 	call GiveItem
-	jr nc, .asm_484da
+	jr nc, .BagFull
 	ld hl, Unknown_4850a ; $450a
 	call PrintText
 	ld hl, $d778
@@ -73515,15 +73517,15 @@ Func_4840c: ; 4840c (12:440c)
 	ld hl, Unknown_484f3 ; $44f3
 	call PrintText
 	call RemoveItemByIDBank12
-	ld bc, $d501 ; 1x TM_13
+	ld bc, (TM_13 << 8) | 1
 	call GiveItem
-	jr nc, .asm_484da
+	jr nc, .BagFull
 	ld hl, Unknown_484f9 ; $44f9
 	call PrintText
 	ld hl, $d778
 	set 4, [hl]
 	ret
-.asm_484da
+.BagFull
 	ld hl, Unknown_48526 ; $4526
 	jp PrintText
 .asm_484e0
@@ -74119,16 +74121,16 @@ Func_48963: ; 48963 (12:4963)
 	call DisplayTextID
 	ld hl, $d77c
 	set 1, [hl]
-	ld bc, $dd01
+	ld bc, (TM_21 << 8) | 1
 	call GiveItem
-	jr nc, .asm_48985
+	jr nc, .BagFull
 	ld a, $a
 	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
 	call DisplayTextID
 	ld hl, $d77c
 	set 0, [hl]
 	jr .asm_4898c
-.asm_48985
+.BagFull
 	ld a, $b
 	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
 	call DisplayTextID
@@ -75131,13 +75133,13 @@ CeladonDinerText5: ; 49173 (12:5173)
 	call PrintText
 	ld bc, (COIN_CASE << 8) | 1
 	call GiveItem
-	jr nc, .asm_78e93 ; 0x49187
+	jr nc, .BagFull
 	ld hl, $d783
 	set 0, [hl]
 	ld hl, ReceivedCoinCaseText
 	call PrintText
 	jr .asm_68b61 ; 0x49194
-.asm_78e93 ; 0x49196
+.BagFull
 	ld hl, CoinCaseNoRoomText
 	call PrintText
 	jr .asm_68b61 ; 0x4919c
@@ -75683,13 +75685,13 @@ Route12GateUpstairsText1: ; 49569 (12:5569)
 	call PrintText
 	ld bc, (TM_39 << 8) | 1
 	call GiveItem
-	jr nc, .asm_4c2be ; 0x4957c
+	jr nc, .BagFull
 	ld hl, ReceivedTM39Text
 	call PrintText
 	ld hl, $d7d7
 	set 0, [hl]
 	jr .asm_4ba56 ; 0x49589
-.asm_4c2be ; 0x4958b
+.BagFull
 	ld hl, TM39NoRoomText
 	call PrintText
 	jr .asm_4ba56 ; 0x49591
@@ -77081,13 +77083,13 @@ SafariZoneSecretHouseText1: ; 4a31c (12:631c)
 	call PrintText
 	ld bc, (HM_03 << 8) | 1
 	call GiveItem
-	jr nc, .asm_a21d2 ; 0x4a330
+	jr nc, .BagFull
 	ld hl, ReceivedHM03Text
 	call PrintText
 	ld hl, $d857
 	set 0, [hl]
 	jr .asm_8f1fc ; 0x4a33d
-.asm_a21d2 ; 0x4a33f
+.BagFull
 	ld hl, HM03NoRoomText
 	call PrintText
 	jr .asm_8f1fc ; 0x4a345
@@ -79253,9 +79255,9 @@ Route24Text1: ; 514a4 (14:54a4)
 	jr nz, .asm_a03f5 ; 0x514af $48
 	ld hl, UnnamedText_51510
 	call PrintText
-	ld bc, $3101
+	ld bc, (NUGGET << 8) | 1
 	call GiveItem
-	jr nc, .asm_3a23d ; 0x514bd $43
+	jr nc, .BagFull
 	ld hl, $d7ef
 	set 0, [hl]
 	ld hl, UnnamedText_5151a
@@ -79282,7 +79284,7 @@ Route24Text1: ; 514a4 (14:54a4)
 	ld hl, UnnamedText_51530
 	call PrintText
 	jp TextScriptEnd
-.asm_3a23d ; 0x51502
+.BagFull
 	ld hl, UnnamedText_51521
 	call PrintText
 	ld hl, $d7f0
@@ -81744,10 +81746,10 @@ HandlePrizeChoice: ; 528c6 (14:68c6)
 	jr nz,.GiveMon
 	ld a,[$D11E]
 	ld b,a
-	ld a,$01
+	ld a,1
 	ld c,a
 	call GiveItem ; GiveItem
-	jr nc,.BagIsFull
+	jr nc,.BagFull
 	jr .SubtractCoins
 .GiveMon ; 14:6912
 	ld a,[$D11E]
@@ -81772,7 +81774,7 @@ HandlePrizeChoice: ; 528c6 (14:68c6)
 	ld a,$0C
 	call Predef ; subtract coins (BCD daa operations)
 	jp PrintPrizePrice
-.BagIsFull ; 14:693F
+.BagFull
 	ld hl,PrizeRoomBagIsFullTextPtr
 	jp PrintText
 .NotEnoughCoins ; 14:6945
@@ -85151,12 +85153,12 @@ VermilionHouse2Text1: ; 56075 (15:6075)
 	jr nz, asm_eb1b7 ; 0x5608a
 	ld bc, (OLD_ROD << 8) | 1
 	call GiveItem
-	jr nc, asm_fd67b ; 0x56092
+	jr nc, .BagFull
 	ld hl, $d728
 	set 3, [hl]
 	ld hl, UnnamedText_560b6
 	jr asm_5dd95 ; 0x5609c
-asm_fd67b ; 0x5609e
+.BagFull
 	ld hl, UnnamedText_560ca
 	jr asm_5dd95 ; 0x560a1
 asm_eb1b7 ; 0x560a3
@@ -85291,12 +85293,12 @@ FuchsiaHouse3Text1: ; 56181 (15:6181)
 	jr nz, asm_3ace4 ; 0x56196
 	ld bc, (GOOD_ROD << 8) | 1
 	call GiveItem
-	jr nc, asm_628ee ; 0x5619e
+	jr nc, .BagFull
 	ld hl, $d728
 	set 4, [hl]
 	ld hl, UnnamedText_561c2
 	jr asm_1b09c ; 0x561a8
-asm_628ee ; 0x561aa
+.BagFull
 	ld hl, UnnamedText_5621c
 	jr asm_1b09c ; 0x561ad
 asm_3ace4 ; 0x561af
@@ -85549,12 +85551,12 @@ Route12HouseText1: ; 56484 (15:6484)
 	jr nz, asm_a2d76 ; 0x56499
 	ld bc, (SUPER_ROD << 8) | 1
 	call GiveItem
-	jr nc, asm_e3b89 ; 0x564a1
+	jr nc, .BagFull
 	ld hl, $d728
 	set 5, [hl]
 	ld hl, UnnamedText_564c5
 	jr asm_df984 ; 0x564ab
-asm_e3b89 ; 0x564ad
+.BagFull
 	ld hl, UnnamedText_564d9
 	jr asm_df984 ; 0x564b0
 asm_a2d76 ; 0x564b2
@@ -87151,14 +87153,14 @@ Func_59035 ; 0x59035
 	call PrintText
 	ld a, [$ff00+$dc]
 	ld b, a
-	ld c, $1
+	ld c, 1
 	call GiveItem
-	jr nc, .asm_59073 ; 0x59067 $a
+	jr nc, .BagFull
 	ld hl, Unknown_590a5 ; $50a5
 	call PrintText
 	ld a, $1
 	jr .asm_5908e ; 0x59071 $1b
-.asm_59073
+.BagFull
 	ld hl, UnnamedText_590ab ; $50ab
 	call PrintText
 	xor a
@@ -89414,13 +89416,13 @@ FanClubText5: ; 59c1c (16:5c1c)
 	call PrintText
 	ld bc, (BIKE_VOUCHER << 8) | 1
 	call GiveItem
-	jr nc, asm_867d4 ; 0x59c3d
+	jr nc, .BagFull
 	ld hl, ReceivedBikeVoucherText
 	call PrintText
 	ld hl, $d771
 	set 1, [hl]
 	jr asm_d3c26 ; 0x59c4a
-asm_867d4 ; 0x59c4c
+.BagFull
 	ld hl, UnnamedText_59c83
 	call PrintText
 	jr asm_d3c26 ; 0x59c52
@@ -90792,7 +90794,7 @@ MuseumF1Text3: ; 5c256 (17:4256)
 	call PrintText
 	ld bc, (OLD_AMBER << 8) | 1
 	call GiveItem
-	jr nc, .asm_91ebf ; 0x5c26a
+	jr nc, .BagFull
 	ld hl, $d754
 	set 1, [hl]
 	ld a, $34
@@ -90801,7 +90803,7 @@ MuseumF1Text3: ; 5c256 (17:4256)
 	call Predef
 	ld hl, ReceivedOldAmberText
 	jr .asm_52e0f ; 0x5c27e
-.asm_91ebf ; 0x5c280
+.BagFull
 	ld hl, UnnamedText_5c29e
 	jr .asm_52e0f ; 0x5c283
 .asm_16599 ; 0x5c285
@@ -90997,16 +90999,16 @@ Func_5c3df: ; 5c3df (17:43df)
 	call DisplayTextID
 	ld hl, $d755
 	set 7, [hl]
-	ld bc, $ea01
+	ld bc, (TM_34 << 8) | 1
 	call GiveItem
-	jr nc, .asm_5c401
+	jr nc, .BagFull
 	ld a, $5
 	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
 	call DisplayTextID
 	ld hl, $d755
 	set 6, [hl]
 	jr .asm_5c408
-.asm_5c401
+.BagFull
 	ld a, $6
 	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
 	call DisplayTextID
@@ -91421,16 +91423,16 @@ Func_5c70d: ; 5c70d (17:470d)
 	call DisplayTextID
 	ld hl, $d75e
 	set 7, [hl]
-	ld bc, $d301
+	ld bc, (TM_11 << 8) | 1
 	call GiveItem
-	jr nc, .asm_5c72f
+	jr nc, .BagFull
 	ld a, $6
 	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
 	call DisplayTextID
 	ld hl, $d75e
 	set 6, [hl]
 	jr .asm_5c736
-.asm_5c72f
+.BagFull
 	ld a, $7
 	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
 	call DisplayTextID
@@ -91944,16 +91946,16 @@ Func_5caaa: ; 5caaa (17:4aaa)
 	call DisplayTextID
 	ld hl, $d773
 	set 7, [hl]
-	ld bc, $e001
+	ld bc, (TM_24 << 8) | 1
 	call GiveItem
-	jr nc, .asm_5cacc
+	jr nc, .BagFull
 	ld a, $7
 	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
 	call DisplayTextID
 	ld hl, $d773
 	set 6, [hl]
 	jr .asm_5cad3
-.asm_5cacc
+.BagFull
 	ld a, $8
 	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
 	call DisplayTextID
@@ -92211,7 +92213,7 @@ CopycatsHouseF2Text1: ; 5cc82 (17:4c82)
 	call PrintText
 	ld bc, (TM_31 << 8) | 1
 	call GiveItem
-	jr nc, .asm_16690 ; 0x5cca8
+	jr nc, .BagFull
 	ld hl, ReceivedTM31Text
 	call PrintText
 	ld a, $33
@@ -92222,7 +92224,7 @@ CopycatsHouseF2Text1: ; 5cc82 (17:4c82)
 	ld hl, $d7af
 	set 0, [hl]
 	jr .asm_62ecd ; 0x5ccc1
-.asm_16690 ; 0x5ccc3
+.BagFull
 	ld hl, TM31NoRoomText
 	call PrintText
 	jr .asm_62ecd ; 0x5ccc9
@@ -92686,16 +92688,16 @@ Func_5d068: ; 5d068 (17:5068)
 	call DisplayTextID
 	ld hl, $d7b3
 	set 1, [hl]
-	ld bc, $f601
+	ld bc, (TM_46 << 8) | 1
 	call GiveItem
-	jr nc, .asm_5d08a
+	jr nc, .BagFull
 	ld a, $b
 	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
 	call DisplayTextID
 	ld hl, $d7b3
 	set 0, [hl]
 	jr .asm_5d091
-.asm_5d08a
+.BagFull
 	ld a, $c
 	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
 	call DisplayTextID
@@ -96594,13 +96596,13 @@ SSAnne7Text1: ; 618ad (18:58ad)
 	call PrintText
 	ld bc, (HM_01 << 8) | 1
 	call GiveItem
-	jr nc, .asm_ccdcd ; 0x618c7
+	jr nc, .BagFull
 	ld hl, ReceivedHM01Text
 	call PrintText
 	ld hl, $d803
 	set 0, [hl]
 	jr .asm_0faf5 ; 0x618d4
-.asm_ccdcd ; 0x618d6
+.BagFull
 	ld hl, HM01NoRoomText
 	call PrintText
 	ld hl, $d72d
@@ -97811,13 +97813,13 @@ SilphCo11Text1: ; 622dc (18:62dc)
 	call PrintText
 	ld bc, (MASTER_BALL << 8) | 1
 	call GiveItem
-	jr nc, .asm_36088 ; 0x622f1
+	jr nc, .BagFull
 	ld hl, ReceivedSilphCoMasterBallText
 	call PrintText
 	ld hl, $d838
 	set 5, [hl]
 	jr .asm_fd405 ; 0x622fe
-.asm_36088 ; 0x62300
+.BagFull
 	ld hl, SilphCoMasterBallNoRoomText
 	call PrintText
 	jr .asm_fd405 ; 0x62306
@@ -104107,16 +104109,16 @@ Unknown_74995: ; 74995 (1d:4995)
 	call DisplayTextID
 	ld hl, $d751
 	set 1, [hl]
-	ld bc, $e301
+	ld bc, (TM_27 << 8) | 1
 	call GiveItem
-	jr nc, .asm_749b7
+	jr nc, .BagFull
 	ld a, $d
 	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
 	call DisplayTextID
 	ld hl, $d751
 	set 0, [hl]
 	jr .asm_749be
-.asm_749b7
+.BagFull
 	ld a, $e
 	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
 	call DisplayTextID
@@ -104835,9 +104837,9 @@ Unknown_74ee0: ; 74ee0 (1d:4ee0)
 	call Unknown_74fe7
 	ld a, [$FF00+$db]
 	ld b, a
-	ld c, $1
+	ld c, 1
 	call GiveItem
-	jr nc, .asm_74f8d
+	jr nc, .BagFull
 	ld b, $3c
 .asm_74f63
 	ld c, $2
@@ -104858,7 +104860,7 @@ Unknown_74ee0: ; 74ee0 (1d:4ee0)
 	ld a, $13
 	ld [$d125], a
 	jp DisplayTextBoxID
-.asm_74f8d
+.BagFull
 	ld hl, UnnamedText_74fdd
 	jp PrintText
 .asm_74f93
@@ -105069,7 +105071,7 @@ FuchsiaHouse2Text1: ; 750c2 (1d:50c2)
 	call PrintText
 	ld bc,(HM_04 << 8) | 1
 	call GiveItem
-	jr nc, .asm_53b90 ; 0x75115
+	jr nc, .BagFull
 	ld hl, ReceivedHM04Text
 	call PrintText
 	ld hl, $d78e
@@ -105079,7 +105081,7 @@ FuchsiaHouse2Text1: ; 750c2 (1d:50c2)
 	ld hl, HM04ExplanationText
 	call PrintText
 	jr .asm_52039 ; 0x7512a
-.asm_53b90 ; 0x7512c
+.BagFull
 	ld hl, HM04NoRoomText
 	call PrintText
 .asm_52039 ; 0x75132
@@ -105576,16 +105578,16 @@ Unknown_75497: ; 75497 (1d:5497)
 	call DisplayTextID
 	ld hl, $d792
 	set 1, [hl]
-	ld bc, $ce01
+	ld bc, (TM_06 << 8) | 1
 	call GiveItem
-	jr nc, .asm_754b9
+	jr nc, .BagFull
 	ld a, $a
 	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
 	call DisplayTextID
 	ld hl, $d792
 	set 0, [hl]
 	jr .asm_754c0
-.asm_754b9
+.BagFull
 	ld a, $b
 	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
 	call DisplayTextID
@@ -106109,16 +106111,16 @@ Unknown_75857: ; 75857 (1d:5857)
 	call DisplayTextID
 	ld hl, $d79a
 	set 1, [hl]
-	ld bc, $ee01
+	ld bc, (TM_38 << 8) | 1
 	call GiveItem
-	jr nc, .asm_75879 ; 0x75869 $e
+	jr nc, .BagFull
 	ld a, $b
 	ld [$ff00+$8c], a
 	call DisplayTextID
 	ld hl, $d79a
 	set 0, [hl]
 	jr .asm_75880 ; 0x75877 $7
-.asm_75879
+.BagFull
 	ld a, $c
 	ld [$ff00+$8c], a
 	call DisplayTextID
@@ -106639,13 +106641,13 @@ Lab3Text1: ; 75c94 (1d:5c94)
 	call PrintText
 	ld bc, (TM_35 << 8) | 1
 	call GiveItem
-	jr nc, .asm_6c187 ; 0x75ca8
+	jr nc, .BagFull
 	ld hl, ReceivedTM35Text
 	call PrintText
 	ld hl, $d7a1
 	set 7, [hl]
 	jr .asm_eb896 ; 0x75cb5
-.asm_6c187 ; 0x75cb7
+.BagFull
 	ld hl, TM35NoRoomText
 	call PrintText
 	jr .asm_eb896 ; 0x75cbd
@@ -108118,9 +108120,9 @@ FoundHiddenItemText: ; 7675b (1d:675b)
 	db $8
 	ld a, [$cd3d] ; item ID
 	ld b, a
-	ld c, 1 ; quantity
+	ld c, 1
 	call GiveItem
-	jr nc, .bagfull ; 0x76769 $19
+	jr nc, .BagFull
 	ld hl, $d6f0
 	ld a, [$cd41]
 	ld c, a
@@ -108131,7 +108133,7 @@ FoundHiddenItemText: ; 7675b (1d:675b)
 	call PlaySoundWaitForCurrent ; play sound
 	call WaitForSoundToFinish ; wait for sound to finish playing
 	jp TextScriptEnd
-.bagfull
+.BagFull
 	call WaitForTextScrollButtonPress ; wait for button press
 	xor a
 	ld [$cc3c], a
