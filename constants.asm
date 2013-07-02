@@ -179,6 +179,8 @@ W_ENEMYMONEVASIONMOD  EQU $CD33
 
 W_WHICHTRADE EQU $CD3D ; which entry from TradeMons to select
 
+W_BUFFER EQU $CEE9 ; used for temporary things
+
 W_ANIMSOUNDID EQU $CF07 ; sound ID during battle animations
 
 W_WHICHPOKEMON EQU $CF92 ; which pokemon you selected

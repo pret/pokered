@@ -38420,7 +38420,106 @@ AIBattleUseItemText: ; 0x3a844
 	TX_FAR _AIBattleUseItemText
 	db "@"
 
-INCBIN "baserom.gbc",$3a849,$3af3e - $3a849
+DrawAllPokeballs: ; 0x3a849
+	call LoadPartyPokeballGfx
+	call SetupOwnPartyPokeballs
+	ld a, [W_ISINBATTLE]
+	dec a
+	ret z ; return if wild pokémon
+	jp SetupEnemyPartyPokeballs
+
+DrawEnemyPokeballs: ; 0x3a857
+	call LoadPartyPokeballGfx
+	jp SetupEnemyPartyPokeballs
+
+LoadPartyPokeballGfx: ; 0x3a85d
+	ld de, $697e
+	ld hl, $8310
+	ld bc, $0e04
+	jp CopyVideoData
+
+SetupOwnPartyPokeballs: ; 0x3a869
+	call $6902
+	ld hl, W_PARTYMON1DATA
+	ld de, W_NUMINPARTY
+	call SetupPokeballs
+	ld a, $60
+	ld hl, $d081 ; W_BASECOORDX ?
+	ld [hli], a
+	ld [hl], a
+	ld a, $8 
+	ld [$cd3e], a
+	ld hl, $c300
+	jp $68e1
+
+SetupEnemyPartyPokeballs: ; 0x3a887
+	call $6919
+	ld hl, $d8a4
+	ld de, W_ENEMYMONCOUNT
+	call SetupPokeballs
+	ld hl, $d081
+	ld a, $48
+	ld [hli], a
+	ld [hl], $20
+	ld a, $f8
+	ld [$cd3e], a
+	ld hl, $c318
+	jp $68e1
+
+SetupPokeballs: ; 0x3a8a6
+    ; [de] = mons in party
+    ; [hl] = partymon1 data
+	ld a, [de]
+	push af
+	ld de, W_BUFFER
+	ld c, $6 ; max num of partymons
+	ld a, $34 ; empty pokeball
+.emptyloop
+	ld [de], a
+	inc de
+	dec c
+	jr nz, .emptyloop ; 0x3a8b2 $fb
+	pop af
+	ld de, W_BUFFER
+.monloop
+	push af
+	call PickPokeball
+	inc de
+	pop af
+	dec a
+	jr nz, .monloop ; 0x3a8bf $f7
+	ret
+
+PickPokeball: ; 0x3a8c2
+	inc hl
+	ld a, [hli]
+	and a
+	jr nz, .alive ; 0x3a8c5 $6
+	ld a, [hl]
+	and a
+	ld b, $33 ; crossed ball (fainted)
+	jr z, .done_fainted ; 0x3a8cb $b
+.alive
+	inc hl
+	inc hl
+	ld a, [hl] ; status
+	and a
+	ld b, $32 ; black ball (status)
+	jr nz, .done ; 0x3a8d3 $5
+	dec b ; regular ball
+	jr .done ; 0x3a8d6 $2
+.done_fainted
+	inc hl
+	inc hl
+.done
+	ld a, b
+	ld [de], a
+	ld bc, $0028 ; rest of mon struct
+	add hl, bc
+	ret
+; 0x3a8e1
+
+INCBIN "baserom.gbc",$3a8e1,$3af3e - $3a8e1
 
 UnnamedText_3af3e: ; 0x3af3e
 	TX_FAR _UnnamedText_3af3e
