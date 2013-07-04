@@ -40811,10 +40811,120 @@ UnnamedText_3c438: ; 0x3c438
 	db $50
 ; 0x3c438 + 5 bytes
 
-INCBIN "baserom.gbc",$3c43d,$3c63e - $3c43d
+INCBIN "baserom.gbc",$3c43d,$3c567 - $3c43d
 
-UnnamedText_3c63e: ; 0x3c63e
-	TX_FAR _UnnamedText_3c63e
+FaintEnemyPokemon ; 0x3c567
+	call $4d43 ; copy some data
+	ld a, [W_ISINBATTLE]
+	dec a
+	jr z, .wild ; 0x3c56e $f
+	ld a, [W_ENEMYMONNUMBER]
+	ld hl, $d8a5 ; W_ENEMYMONS?
+	ld bc, $002c ; mon struct len
+	call AddNTimes
+	xor a
+	ld [hli], a
+	ld [hl], a
+.wild
+	ld hl, W_PLAYERBATTSTATUS1
+	res 2, [hl]
+	xor a
+	ld [W_NUMHITS], a
+	ld hl, $d065 ; enemy statuses
+	ld [hli], a
+	ld [hli], a
+	ld [hli], a
+	ld [hli], a
+	ld [hl], a
+	ld [W_ENEMYDISABLEDMOVE], a
+	ld [$ccef], a
+	ld [$ccf3], a
+	ld hl, $ccf1
+	ld [hli], a
+	ld [hl], a
+	ld hl, $c410
+	ld de, $c424
+	call $4893
+	ld hl, $c3a0
+	ld bc, $040b
+	call ClearScreenArea
+	ld a, [W_ISINBATTLE]
+	dec a
+	jr z, .wild_win ; 0x3c5b4 $1d
+	xor a
+	ld [$c0f1], a
+	ld [$c0f2], a
+	ld a, $9e ; SFX_FALL?
+	call $3740
+.sfxwait
+	ld a, [$c02a]
+	cp $9e
+	jr z, .sfxwait ; 0x3c5c7 $f9
+	ld a, $95 ; SFX_DROP?
+	call $23b1
+	call $3748
+	jr .sfxplayed ; 0x3c5d1 $8
+.wild_win
+	call $4643
+	ld a, $f9 ; SONG_WIN
+	call $46ee
+.sfxplayed
+	ld hl, W_PLAYERMONCURHP
+	ld a, [hli]
+	or [hl]
+	jr nz, .playermonnotfaint ; 0x3c5e0 $9
+	ld a, [$ccf0]
+	and a
+	jr nz, .playermonnotfaint ; 0x3c5e6 $3
+	call $4741
+.playermonnotfaint ; .asm_3c5eb
+	call $4a83
+	ld a, d
+	and a
+	ret z
+	ld hl, EnemyMonFainted
+	call PrintText
+	call $6e94
+	call $3719
+	xor a
+	ld [$cf0b], a
+	ld b, EXP__ALL
+	call IsItemInBag
+	push af
+	jr z, .no_exp_all
+	ld hl, $d002
+	ld b, $7
+.exp_all_loop ; .asm_3c60e
+	srl [hl]
+	inc hl
+	dec b
+	jr nz, .exp_all_loop ; 0x3c612 $fa
+.no_exp_all ; .asm_3c614
+	xor a
+	ld [$cc5b], a
+	ld hl, $524f
+	ld b, $15
+	call Bankswitch
+	pop af
+	ret z
+	ld a, $1
+	ld [$cc5b], a
+	ld a, [W_NUMINPARTY]
+	ld b, $0
+.asm_3c62c
+	scf
+	rl b
+	dec a
+	jr nz, .asm_3c62c ; 0x3c630 $fa
+	ld a, b
+	ld [$d058], a
+	ld hl, $524f
+	ld b, $15
+	jp Bankswitch
+; 0x3c63e
+
+EnemyMonFainted: ; 0x3c63e
+	TX_FAR _EnemyMonFainted
 	db $50
 ; 0x3c63e + 5 bytes
 
@@ -81859,7 +81969,7 @@ _UnnamedText_3c438: ; 0x896b3
 	db $5a, "!", $58
 ; 0x896b3 + 20 bytes
 
-_UnnamedText_3c63e: ; 0x896c7
+_EnemyMonFainted: ; 0x896c7
 	db $0, "Enemy @"
 	TX_RAM $cfda
 	db $0, $4f
