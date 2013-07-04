@@ -9023,10 +9023,62 @@ Map0fFlyWarp: ; 0x64be
 Map15FlyWarp: ; 0x64c4
 	FLYWARP_DATA 10,20,11
 
-INCBIN "baserom.gbc",$64ca,$6557 - $64ca
+INCBIN "baserom.gbc",$64ca,$64eb - $64ca
 
-UnnamedText_6557: ; 0x6557
-	TX_FAR _UnnamedText_6557
+AskForMonNickname: ; 64eb
+	call $3719
+	call $3e94
+	push hl
+	ld a, [W_ISINBATTLE]
+	dec a
+	ld hl, $c3a0
+	ld b, $4
+	ld c, $b
+	call z, ClearScreenArea ; only if in wild battle
+	ld a, [$cf91]
+	ld [$d11e], a
+	call GetMonName
+	ld hl, DoYouWantToNicknameText
+	call PrintText
+	ld hl, $c43a
+	ld bc, $080f
+	ld a, $14
+	ld [$d125], a
+	call DisplayTextBoxID
+	pop hl
+	ld a, [W_CURMENUITEMID]
+	and a
+	jr nz, .asm_654c ; 0x6522 $28
+	ld a, [$cfcb]
+	push af
+	xor a
+	ld [$cfcb], a
+	push hl
+	ld a, $2
+	ld [$d07d], a
+	call $6596
+	ld a, [W_ISINBATTLE]
+	and a
+	jr nz, .asm_653e ; 0x6539 $3
+	call $3e08
+.asm_653e
+	call $3725
+	pop hl
+	pop af
+	ld [$cfcb], a
+	ld a, [$cf4b]
+	cp $50
+	ret nz
+.asm_654c
+	ld d, h
+	ld e, l
+	ld hl, $cd6d
+	ld bc, $000b
+	jp CopyData
+; 0x6557
+
+DoYouWantToNicknameText: ; 0x6557
+	TX_FAR _DoYouWantToNicknameText
 	db $50
 ; 0x6557 + 5 bytes
 
@@ -82778,7 +82830,7 @@ _UnnamedText_5d4d: ; 0x8a40d
 
 INCLUDE "text/oakspeech.tx"
 
-_UnnamedText_6557: ; 0x8a605
+_DoYouWantToNicknameText: ; 0x8a605
 	db $0, "Do you want to", $4f
 	db "give a nickname", $55
 	db "to @"
