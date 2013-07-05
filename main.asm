@@ -68225,66 +68225,73 @@ Func_41676: ; 41676 (10:5676)
 	jp Predef ; indirect jump to MoveAnimation (78d5e (1e:4d5e))
 
 ; known jump sources: 1fee (0:1fee)
-Func_41682: ; 41682 (10:5682)
+PlayIntro: ; 41682 (10:5682)
 	xor a
 	ld [H_CURRENTPRESSEDBUTTONS], a
 	inc a
-	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld [H_AUTOBGTRANSFERENABLED], a
 	call Func_4188a
-	call Func_4169d
+	call PlayIntroScene
 	call GBFadeOut2
 	xor a
 	ld [$FF00+$ae], a
-	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld [H_AUTOBGTRANSFERENABLED], a
 	call CleanLCD_OAM
 	call DelayFrame
 	ret
 
-; known jump sources: 4168b (10:568b)
-Func_4169d: ; 4169d (10:569d)
+PlayIntroScene: ; 4169d (10:569d)
 	ld b, $7
 	call GoPAL_SET
-	ld a, $e4
-	ld [rBGP], a ; $FF00+$47
-	ld [rOBP0], a ; $FF00+$48
-	ld [rOBP1], a ; $FF00+$49
+	ld a, %11100100
+	ld [rBGP], a
+	ld [rOBP0], a
+	ld [rOBP1], a
 	xor a
 	ld [$FF00+$ae], a
 	ld b, $3
 	call Func_4183f
-	ld a, $0
-	ld [W_BASECOORDX], a ; $d081
-	ld a, $50
-	ld [W_BASECOORDY], a ; $d082
+	ld a, 0
+	ld [W_BASECOORDX], a
+	ld a, 80
+	ld [W_BASECOORDY], a
 	ld bc, $606
 	call Func_417c7
 	ld de, $28ff
 	call Func_4180e
 	ret c
+
+; hip
 	ld a, $b9
 	call PlaySound
 	xor a
 	ld [$d09f], a
-	ld de, Unknown_41910 ; $5910
-	call Func_41793
+	ld de, Unknown_41910
+	call AnimateIntroNidorino
+; hop
 	ld a, $ba
 	call PlaySound
-	ld de, Unknown_4191b ; $591b
-	call Func_41793
+	ld de, Unknown_4191b
+	call AnimateIntroNidorino
 	ld c, $a
 	call CheckForUserInterruption
 	ret c
+
+; hip
 	ld a, $b9
 	call PlaySound
-	ld de, Unknown_41910 ; $5910
-	call Func_41793
+	ld de, Unknown_41910
+	call AnimateIntroNidorino
+; hop
 	ld a, $ba
 	call PlaySound
-	ld de, Unknown_4191b ; $591b
-	call Func_41793
+	ld de, Unknown_4191b
+	call AnimateIntroNidorino
 	ld c, $1e
 	call CheckForUserInterruption
 	ret c
+
+; raise
 	ld b, $4
 	call Func_4183f
 	ld a, $bb
@@ -68294,21 +68301,25 @@ Func_4169d: ; 4169d (10:569d)
 	ld c, $1e
 	call CheckForUserInterruption
 	ret c
+
+; slash
 	ld b, $5
 	call Func_4183f
 	ld a, $bc
 	call PlaySound
 	ld de, $800
 	call Func_4180e
+; hip
 	ld a, $b9
 	call PlaySound
 	ld a, $24
 	ld [$d09f], a
-	ld de, Unknown_41926 ; $5926
-	call Func_41793
+	ld de, Unknown_41926
+	call AnimateIntroNidorino
 	ld c, $1e
 	call CheckForUserInterruption
 	ret c
+
 	ld de, $401
 	call Func_4180e
 	ld b, $3
@@ -68316,35 +68327,40 @@ Func_4169d: ; 4169d (10:569d)
 	ld c, $3c
 	call CheckForUserInterruption
 	ret c
+
+; hip
 	ld a, $b9
 	call PlaySound
 	xor a
 	ld [$d09f], a
 	ld de, Unknown_41931 ; $5931
-	call Func_41793
+	call AnimateIntroNidorino
+; hop
 	ld a, $ba
 	call PlaySound
 	ld de, Unknown_4193c ; $593c
-	call Func_41793
+	call AnimateIntroNidorino
 	ld c, $14
 	call CheckForUserInterruption
 	ret c
+
 	ld a, $24
 	ld [$d09f], a
 	ld de, Unknown_41947 ; $5947
-	call Func_41793
+	call AnimateIntroNidorino
 	ld c, $1e
 	call CheckForUserInterruption
 	ret c
+
+; lunge
 	ld a, $b8
 	call PlaySound
 	ld a, $48
 	ld [$d09f], a
 	ld de, Unknown_41950 ; $5950
-	jp Func_41793
+	jp AnimateIntroNidorino
 
-; known jump sources: 416d5 (10:56d5), 416e0 (10:56e0), 416f1 (10:56f1), 416fc (10:56fc), 41738 (10:5738), 4175e (10:575e), 41769 (10:5769), 4177a (10:577a), 41790 (10:5790), 417ac (10:57ac)
-Func_41793: ; 41793 (10:5793)
+AnimateIntroNidorino: ; 41793 (10:5793)
 	ld a, [de]
 	cp $50
 	ret z
@@ -68355,11 +68371,11 @@ Func_41793: ; 41793 (10:5793)
 	push de
 	ld c, $24
 	call Func_417ae
-	ld c, $5
+	ld c, 5
 	call DelayFrames
 	pop de
 	inc de
-	jr Func_41793
+	jr AnimateIntroNidorino
 
 ; known jump sources: 417a2 (10:57a2), 41829 (10:5829)
 Func_417ae: ; 417ae (10:57ae)
