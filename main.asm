@@ -7338,7 +7338,7 @@ DisplayListMenuIDLoop: ; 2c53 (0:2c53)
 	and a ; is it a PC pokemon list?
 	jr z,.pokemonList
 	push hl
-	call Func_37df
+	call GetItemPrice
 	pop hl
 	ld a,[W_LISTMENUID]
 	cp a,ITEMLISTMENU
@@ -7634,7 +7634,7 @@ PrintListMenuEntries: ; 2e5a (0:2e5a)
 	ld a,[de]
 	ld de,ItemPrices
 	ld [$cf91],a
-	call Func_37df ; get price
+	call GetItemPrice ; get price
 	pop hl
 	ld bc,20 + 5 ; 1 row down and 5 columns right
 	add hl,bc
@@ -9246,7 +9246,7 @@ GetName: ; 376b (0:376b)
 	ret
 
 ; known jump sources: 2cdc (0:2cdc), 2ee0 (0:2ee0)
-Func_37df: ; 37df (0:37df)
+GetItemPrice: ; 37df (0:37df)
 	ld a, [H_LOADEDROMBANK]
 	push af
 	ld a, [W_LISTMENUID] ; $cf94
@@ -9262,7 +9262,7 @@ Func_37df: ; 37df (0:37df)
 	ld h, [hl]
 	ld l, a
 	ld a, [$cf91]
-	cp $c4
+	cp HM_01
 	jr nc, .asm_3812
 	ld bc, $3
 .asm_3802
@@ -9281,7 +9281,7 @@ Func_37df: ; 37df (0:37df)
 	ld a, $1e
 	ld [H_LOADEDROMBANK], a
 	ld [$2000], a
-	call Func_7bf86
+	call GetMachinePrice
 .asm_381c
 	ld de, H_DOWNARROWBLINKCNT1 ; $ff8b
 	pop af
@@ -111173,15 +111173,15 @@ Func_7bf64: ; 7bf64 (1e:7f64)
 	jp Delay3
 
 ; known jump sources: 3819 (0:3819)
-Func_7bf86: ; 7bf86 (1e:7f86)
+GetMachinePrice: ; 7bf86 (1e:7f86)
 	ld a, [$cf91]
-	sub $c9
+	sub TM_01
 	ret c
 	ld d, a
-	ld hl, Unknown_7bfa7 ; $7fa7
+	ld hl, TechnicalMachinePrices ; $7fa7
 	srl a
 	ld c, a
-	ld b, $0
+	ld b, 0
 	add hl, bc
 	ld a, [hl]
 	srl d
@@ -111195,8 +111195,15 @@ Func_7bf86: ; 7bf86 (1e:7f86)
 	ld [$FF00+$8d], a
 	ret
 
-Unknown_7bfa7: ; 7bfa7 (1e:7fa7)
-INCBIN "baserom.gbc",$7bfa7,$7c000 - $7bfa7
+TechnicalMachinePrices: ; 7bfa7 (1e:7fa7)
+; In thousands (nybbles).
+	db $32, $21, $34, $24, $34
+	db $21, $45, $55, $32, $32
+	db $55, $52, $54, $52, $41
+	db $21, $12, $42, $25, $24
+	db $22, $52, $24, $34, $42
+; 7bfc0
+
 
 SECTION "bank1F",DATA,BANK[$1F]
 
