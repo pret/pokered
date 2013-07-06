@@ -7338,7 +7338,7 @@ DisplayListMenuIDLoop: ; 2c53 (0:2c53)
 	and a ; is it a PC pokemon list?
 	jr z,.pokemonList
 	push hl
-	call Func_37df
+	call GetItemPrice
 	pop hl
 	ld a,[W_LISTMENUID]
 	cp a,ITEMLISTMENU
@@ -7634,7 +7634,7 @@ PrintListMenuEntries: ; 2e5a (0:2e5a)
 	ld a,[de]
 	ld de,ItemPrices
 	ld [$cf91],a
-	call Func_37df ; get price
+	call GetItemPrice ; get price
 	pop hl
 	ld bc,20 + 5 ; 1 row down and 5 columns right
 	add hl,bc
@@ -9246,7 +9246,7 @@ GetName: ; 376b (0:376b)
 	ret
 
 ; known jump sources: 2cdc (0:2cdc), 2ee0 (0:2ee0)
-Func_37df: ; 37df (0:37df)
+GetItemPrice: ; 37df (0:37df)
 	ld a, [H_LOADEDROMBANK]
 	push af
 	ld a, [W_LISTMENUID] ; $cf94
@@ -9262,7 +9262,7 @@ Func_37df: ; 37df (0:37df)
 	ld h, [hl]
 	ld l, a
 	ld a, [$cf91]
-	cp $c4
+	cp HM_01
 	jr nc, .asm_3812
 	ld bc, $3
 .asm_3802
@@ -9281,7 +9281,7 @@ Func_37df: ; 37df (0:37df)
 	ld a, $1e
 	ld [H_LOADEDROMBANK], a
 	ld [$2000], a
-	call Func_7bf86
+	call GetMachinePrice
 .asm_381c
 	ld de, H_DOWNARROWBLINKCNT1 ; $ff8b
 	pop af
@@ -26680,99 +26680,128 @@ Func_e9f0: ; e9f0 (3:69f0)
 	dec hl
 	ret
 
-; known jump sources: 13474 (4:7474)
-Func_ea03: ; ea03 (3:6a03)
+
+DrawBadges: ; ea03 (3:6a03)
+; Draw 4x2 gym leader faces, with the faces replaced by
+; badges if they are owned. Used in the player status screen.
+
+; In Japanese versions, names are displayed above faces.
+; Instead of removing relevant code, the name graphics were erased.
+
+; Tile ids for face/badge graphics.
 	ld de, $cd3f
-	ld hl, Unknown_ea96 ; $6a96
-	ld bc, $8
+	ld hl, .FaceBadgeTiles
+	ld bc, 8
 	call CopyData
+
+; Booleans for each badge.
 	ld hl, $cd49
-	ld bc, $8
+	ld bc, 8
 	xor a
 	call FillMemory
+
+; Alter these based on owned badges.
 	ld de, $cd49
 	ld hl, $cd3f
-	ld a, [W_OBTAINEDBADGES] ; $d356
+	ld a, [W_OBTAINEDBADGES]
 	ld b, a
-	ld c, $8
-.asm_ea25
+	ld c, 8
+.CheckBadge
 	srl b
-	jr nc, .asm_ea30
+	jr nc, .NextBadge
 	ld a, [hl]
-	add $4
+	add 4 ; Badge graphics are after each face
 	ld [hl], a
-	ld a, $1
+	ld a, 1
 	ld [de], a
-.asm_ea30
+.NextBadge
 	inc hl
 	inc de
 	dec c
-	jr nz, .asm_ea25
-	ld hl, W_WHICHTRADE ; $cd3d
-	ld a, $d8
+	jr nz, .CheckBadge
+
+; Draw two rows of badges.
+	ld hl, $cd3d
+	ld a, $d8 ; [1]
 	ld [hli], a
-	ld [hl], $60
-	FuncCoord 2, 11 ; $c47e
+	ld [hl], $60 ; First name
+
+	FuncCoord 2, 11
 	ld hl, Coord
 	ld de, $cd49
-	call Func_ea4c
-	FuncCoord 2, 14 ; $c4ba
-	ld hl, Coord
-	ld de, $cd4d
+	call .DrawBadgeRow
 
-; known jump sources: ea43 (3:6a43)
-Func_ea4c: ; ea4c (3:6a4c)
-	ld c, $4
-.asm_ea4e
+	FuncCoord 2, 14
+	ld hl, Coord
+	ld de, $cd49 + 4
+;	call .DrawBadgeRow
+;	ret
+; ea4c
+
+.DrawBadgeRow ; ea4c (3:6a4c)
+; Draw 4 badges.
+
+	ld c, 4
+.DrawBadge
 	push de
 	push hl
-	ld a, [W_WHICHTRADE] ; $cd3d
+
+; Badge no.
+	ld a, [$cd3d]
 	ld [hli], a
 	inc a
-	ld [W_WHICHTRADE], a ; $cd3d
+	ld [$cd3d], a
+
+; Names aren't printed if the badge is owned.
 	ld a, [de]
 	and a
 	ld a, [$cd3e]
-	jr nz, .asm_ea64
-	call Func_ea91
-	jr .asm_ea67
-.asm_ea64
+	jr nz, .SkipName
+	call .PlaceTiles
+	jr .PlaceBadge
+
+.SkipName
 	inc a
 	inc a
 	inc hl
-.asm_ea67
+
+.PlaceBadge
 	ld [$cd3e], a
-	ld de, $13
+	ld de, 20 - 1
 	add hl, de
 	ld a, [$cd3f]
-	call Func_ea91
+	call .PlaceTiles
 	add hl, de
-	call Func_ea91
+	call .PlaceTiles
+
+; Shift badge array back one byte.
 	push bc
-	ld hl, $cd40
+	ld hl, $cd3f + 1
 	ld de, $cd3f
-	ld bc, $8
+	ld bc, 8
 	call CopyData
 	pop bc
+
 	pop hl
-	ld de, $4
+	ld de, 4
 	add hl, de
+
 	pop de
 	inc de
 	dec c
-	jr nz, .asm_ea4e
+	jr nz, .DrawBadge
 	ret
 
-; known jump sources: ea5f (3:6a5f), ea71 (3:6a71), ea75 (3:6a75)
-Func_ea91: ; ea91 (3:6a91)
+.PlaceTiles
 	ld [hli], a
 	inc a
 	ld [hl], a
 	inc a
 	ret
 
-Unknown_ea96: ; ea96 (3:6a96)
-INCBIN "baserom.gbc",$ea96,$ea9e - $ea96
+.FaceBadgeTiles
+	db $20, $28, $30, $38, $40, $48, $50, $58
+; ea9e
 
 GymLeaderFaceAndBadgeTileGraphics: ; ea9e (3:6a9e)
 INCBIN "baserom.gbc",$ea9e,$ee9e - $ea9e
@@ -68198,66 +68227,73 @@ Func_41676: ; 41676 (10:5676)
 	jp Predef ; indirect jump to MoveAnimation (78d5e (1e:4d5e))
 
 ; known jump sources: 1fee (0:1fee)
-Func_41682: ; 41682 (10:5682)
+PlayIntro: ; 41682 (10:5682)
 	xor a
 	ld [H_CURRENTPRESSEDBUTTONS], a
 	inc a
-	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld [H_AUTOBGTRANSFERENABLED], a
 	call Func_4188a
-	call Func_4169d
+	call PlayIntroScene
 	call GBFadeOut2
 	xor a
 	ld [$FF00+$ae], a
-	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld [H_AUTOBGTRANSFERENABLED], a
 	call CleanLCD_OAM
 	call DelayFrame
 	ret
 
-; known jump sources: 4168b (10:568b)
-Func_4169d: ; 4169d (10:569d)
+PlayIntroScene: ; 4169d (10:569d)
 	ld b, $7
 	call GoPAL_SET
-	ld a, $e4
-	ld [rBGP], a ; $FF00+$47
-	ld [rOBP0], a ; $FF00+$48
-	ld [rOBP1], a ; $FF00+$49
+	ld a, %11100100
+	ld [rBGP], a
+	ld [rOBP0], a
+	ld [rOBP1], a
 	xor a
 	ld [$FF00+$ae], a
 	ld b, $3
 	call Func_4183f
-	ld a, $0
-	ld [W_BASECOORDX], a ; $d081
-	ld a, $50
-	ld [W_BASECOORDY], a ; $d082
+	ld a, 0
+	ld [W_BASECOORDX], a
+	ld a, 80
+	ld [W_BASECOORDY], a
 	ld bc, $606
 	call Func_417c7
 	ld de, $28ff
 	call Func_4180e
 	ret c
+
+; hip
 	ld a, $b9
 	call PlaySound
 	xor a
 	ld [$d09f], a
-	ld de, Unknown_41910 ; $5910
-	call Func_41793
+	ld de, Unknown_41910
+	call AnimateIntroNidorino
+; hop
 	ld a, $ba
 	call PlaySound
-	ld de, Unknown_4191b ; $591b
-	call Func_41793
+	ld de, Unknown_4191b
+	call AnimateIntroNidorino
 	ld c, $a
 	call CheckForUserInterruption
 	ret c
+
+; hip
 	ld a, $b9
 	call PlaySound
-	ld de, Unknown_41910 ; $5910
-	call Func_41793
+	ld de, Unknown_41910
+	call AnimateIntroNidorino
+; hop
 	ld a, $ba
 	call PlaySound
-	ld de, Unknown_4191b ; $591b
-	call Func_41793
+	ld de, Unknown_4191b
+	call AnimateIntroNidorino
 	ld c, $1e
 	call CheckForUserInterruption
 	ret c
+
+; raise
 	ld b, $4
 	call Func_4183f
 	ld a, $bb
@@ -68267,21 +68303,25 @@ Func_4169d: ; 4169d (10:569d)
 	ld c, $1e
 	call CheckForUserInterruption
 	ret c
+
+; slash
 	ld b, $5
 	call Func_4183f
 	ld a, $bc
 	call PlaySound
 	ld de, $800
 	call Func_4180e
+; hip
 	ld a, $b9
 	call PlaySound
 	ld a, $24
 	ld [$d09f], a
-	ld de, Unknown_41926 ; $5926
-	call Func_41793
+	ld de, Unknown_41926
+	call AnimateIntroNidorino
 	ld c, $1e
 	call CheckForUserInterruption
 	ret c
+
 	ld de, $401
 	call Func_4180e
 	ld b, $3
@@ -68289,35 +68329,40 @@ Func_4169d: ; 4169d (10:569d)
 	ld c, $3c
 	call CheckForUserInterruption
 	ret c
+
+; hip
 	ld a, $b9
 	call PlaySound
 	xor a
 	ld [$d09f], a
 	ld de, Unknown_41931 ; $5931
-	call Func_41793
+	call AnimateIntroNidorino
+; hop
 	ld a, $ba
 	call PlaySound
 	ld de, Unknown_4193c ; $593c
-	call Func_41793
+	call AnimateIntroNidorino
 	ld c, $14
 	call CheckForUserInterruption
 	ret c
+
 	ld a, $24
 	ld [$d09f], a
 	ld de, Unknown_41947 ; $5947
-	call Func_41793
+	call AnimateIntroNidorino
 	ld c, $1e
 	call CheckForUserInterruption
 	ret c
+
+; lunge
 	ld a, $b8
 	call PlaySound
 	ld a, $48
 	ld [$d09f], a
 	ld de, Unknown_41950 ; $5950
-	jp Func_41793
+	jp AnimateIntroNidorino
 
-; known jump sources: 416d5 (10:56d5), 416e0 (10:56e0), 416f1 (10:56f1), 416fc (10:56fc), 41738 (10:5738), 4175e (10:575e), 41769 (10:5769), 4177a (10:577a), 41790 (10:5790), 417ac (10:57ac)
-Func_41793: ; 41793 (10:5793)
+AnimateIntroNidorino: ; 41793 (10:5793)
 	ld a, [de]
 	cp $50
 	ret z
@@ -68328,11 +68373,11 @@ Func_41793: ; 41793 (10:5793)
 	push de
 	ld c, $24
 	call Func_417ae
-	ld c, $5
+	ld c, 5
 	call DelayFrames
 	pop de
 	inc de
-	jr Func_41793
+	jr AnimateIntroNidorino
 
 ; known jump sources: 417a2 (10:57a2), 41829 (10:5829)
 Func_417ae: ; 417ae (10:57ae)
@@ -77524,7 +77569,7 @@ MoveAnimationPredef: ; 4fe91 (13:7e91)
 	dbw $1C,$778C
 	dbw $0F,$6F18
 	dbw $01,$5A5F
-	dbw $03,$6A03
+	dbw BANK(DrawBadges), DrawBadges
 	dbw $10,$50F3
 	dbw $1C,$496D
 	dbw $1E,$5DDA
@@ -111136,15 +111181,15 @@ Func_7bf64: ; 7bf64 (1e:7f64)
 	jp Delay3
 
 ; known jump sources: 3819 (0:3819)
-Func_7bf86: ; 7bf86 (1e:7f86)
+GetMachinePrice: ; 7bf86 (1e:7f86)
 	ld a, [$cf91]
-	sub $c9
+	sub TM_01
 	ret c
 	ld d, a
-	ld hl, Unknown_7bfa7 ; $7fa7
+	ld hl, TechnicalMachinePrices ; $7fa7
 	srl a
 	ld c, a
-	ld b, $0
+	ld b, 0
 	add hl, bc
 	ld a, [hl]
 	srl d
@@ -111158,8 +111203,15 @@ Func_7bf86: ; 7bf86 (1e:7f86)
 	ld [$FF00+$8d], a
 	ret
 
-Unknown_7bfa7: ; 7bfa7 (1e:7fa7)
-INCBIN "baserom.gbc",$7bfa7,$7c000 - $7bfa7
+TechnicalMachinePrices: ; 7bfa7 (1e:7fa7)
+; In thousands (nybbles).
+	db $32, $21, $34, $24, $34
+	db $21, $45, $55, $32, $32
+	db $55, $52, $54, $52, $41
+	db $21, $12, $42, $25, $24
+	db $22, $52, $24, $34, $42
+; 7bfc0
+
 
 SECTION "bank1F",DATA,BANK[$1F]
 
