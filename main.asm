@@ -1,36 +1,36 @@
 INCLUDE "constants.asm"
 
 ; the rst vectors are unused
-SECTION "rst00",HOME[0]
+SECTION "rst00",ROM0[0]
 	db $FF
-SECTION "rst08",HOME[8]
+SECTION "rst08",ROM0[8]
 	db $FF
-SECTION "rst10",HOME[$10]
+SECTION "rst10",ROM0[$10]
 	db $FF
-SECTION "rst18",HOME[$18]
+SECTION "rst18",ROM0[$18]
 	db $FF
-SECTION "rst20",HOME[$20]
+SECTION "rst20",ROM0[$20]
 	db $FF
-SECTION "rst28",HOME[$28]
+SECTION "rst28",ROM0[$28]
 	db $FF
-SECTION "rst30",HOME[$30]
+SECTION "rst30",ROM0[$30]
 	db $FF
-SECTION "rst38",HOME[$38]
+SECTION "rst38",ROM0[$38]
 	db $FF
 
 ; interrupts
-SECTION "vblank",HOME[$40]
+SECTION "vblank",ROM0[$40]
 	jp VBlankHandler
-SECTION "lcdc",HOME[$48]
+SECTION "lcdc",ROM0[$48]
 	db $FF
-SECTION "timer",HOME[$50]
+SECTION "timer",ROM0[$50]
 	jp TimerHandler
-SECTION "serial",HOME[$58]
+SECTION "serial",ROM0[$58]
 	jp SerialInterruptHandler
-SECTION "joypad",HOME[$60]
+SECTION "joypad",ROM0[$60]
 	reti
 
-SECTION "bank0",HOME[$61]
+SECTION "bank0",ROM0[$61]
 
 DisableLCD: ; 0061 (0:0061)
 	xor a
@@ -102,11 +102,11 @@ CopyData: ; 00b5 (0:00b5)
 	jr nz,CopyData
 	ret
 
-SECTION "romheader",HOME[$100]
+SECTION "romheader",ROM0[$100]
 nop
 jp Start
 
-Section "start",HOME[$150]
+Section "start",ROM0[$150]
 Start: ; 0150 (0:0150)
 	cp $11 ; value that indicates Gameboy Color
 	jr z,.gbcDetected
@@ -10725,7 +10725,7 @@ Func_3f0f: ; 3f0f (0:3f0f)
 	dw $7c0d
 	dw $7c45
 
-SECTION "bank1",DATA,BANK[$1]
+SECTION "bank1",ROMX,BANK[$1]
 
 SpriteFacingAndAnimationTable: ; 4000 (1:4000)
 dw SpriteFacingDownAndStanding, SpriteOAMParameters        ; facing down, walk animation frame 0
@@ -17787,7 +17787,7 @@ Func_7c18: ; 7c18 (1:7c18)
 	ret
 ; 0x7c49
 
-SECTION "bank2",DATA,BANK[$2]
+SECTION "bank2",ROMX,BANK[$2]
 
 INCBIN "baserom.gbc",$8000,$822e - $8000
 
@@ -17992,7 +17992,7 @@ IndigoPlateau_mh: ; 0x82F1 - 0x82FC
 
 INCLUDE "music.asm"
 	
-SECTION "bank3",DATA,BANK[$3]
+SECTION "bank3",ROMX,BANK[$3]
 
 ; known jump sources: 1a4 (0:1a4)
 _GetJoypadState: ; c000 (3:4000)
@@ -28947,7 +28947,7 @@ UnnamedText_fc45: ; fc45 (3:7c45)
 	db $50
 ; 0xfc45 + 5 bytes
 
-SECTION "bank4",DATA,BANK[$4]
+SECTION "bank4",ROMX,BANK[$4]
 
 OakAideSprite: ; 10000 (4:4000)
 	INCBIN "gfx/sprites/oak_aide.2bpp" ; was $10000
@@ -31251,7 +31251,7 @@ GenRandom_: ; 13a8f (4:7a8f)
 	ld [H_RAND2],a
 	ret
 
-SECTION "bank5",DATA,BANK[$5]
+SECTION "bank5",ROMX,BANK[$5]
 
 RedCyclingSprite: ; 14000 (5:4000)
 INCBIN "baserom.gbc",$14000,$14180 - $14000
@@ -32667,7 +32667,7 @@ RemoveItemByID: ; 17f37 (5:7f37)
 	ld hl, W_NUMBAGITEMS ; $d31d
 	jp RemoveItemFromInventory
 ; 17f5f (5:7f5f)
-SECTION "bank6",DATA,BANK[$6]
+SECTION "bank6",ROMX,BANK[$6]
 
 CeladonCity_h: ; 18000 (6:4000)
 	db $00 ; tileset
@@ -36594,7 +36594,7 @@ INCBIN "baserom.gbc",$1a708,$1a710 - $1a708
 Unknown_1a710: ; 1a710 (6:6710)
 INCBIN "baserom.gbc",$1a710,$1bcc8 - $1a710
 
-SECTION "bank7",DATA,BANK[$7]
+SECTION "bank7",ROMX,BANK[$7]
 
 CinnabarIsland_h: ; 0x1c000 to 0x1c022 (34 bytes) (bank=7) (id=8)
 	db $00 ; tileset
@@ -41665,7 +41665,7 @@ UnnamedText_1ecbd: ; 1ecbd (7:6cbd)
 	db $50
 ; 0x1ecbd + 5 bytes
 
-SECTION "bank8",DATA,BANK[$8]
+SECTION "bank8",ROMX,BANK[$8]
 
 Unknown_20000: ; 20000 (8:4000)
 INCBIN "baserom.gbc",$20000,$20361 - $20000
@@ -44027,7 +44027,7 @@ INCBIN "baserom.gbc",$22322,$22325 - $22322
 Unknown_22325: ; 22325 (8:6325)
 INCBIN "baserom.gbc",$22325,$23f52 - $22325
 
-SECTION "bank9",DATA,BANK[$9]
+SECTION "bank9",ROMX,BANK[$9]
 
 RhydonPicFront: ; 24000 (9:4000)
 	INCBIN "pic/bmon/rhydon.pic"
@@ -44398,7 +44398,7 @@ UnnamedText_27fb3: ; 27fb3 (9:7fb3)
 	db $50
 ; 0x27fb3 + 5 bytes
 
-SECTION "bankA",DATA,BANK[$A]
+SECTION "bankA",ROMX,BANK[$A]
 GrowlithePicFront: ; 28000 (a:4000)
 	INCBIN "pic/bmon/growlithe.pic"
 GrowlithePicBack: ; 28101 (a:4101)
@@ -44575,7 +44575,7 @@ UnnamedText_2bef7: ; 2bef7 (a:7ef7)
 	db $50
 ; 0x2bef7 + 5 bytes
 
-SECTION "bankB",DATA,BANK[$B]
+SECTION "bankB",ROMX,BANK[$B]
 ArticunoPicFront: ; 2c000 (b:4000)
 	INCBIN "pic/bmon/articuno.pic"
 ArticunoPicBack: ; 2c238 (b:4238)
@@ -44924,7 +44924,7 @@ UnnamedText_2ff37: ; 2ff37 (b:7f37)
 	db $50
 ; 0x2ff37 + 5 bytes
 
-SECTION "bankC",DATA,BANK[$C]
+SECTION "bankC",ROMX,BANK[$C]
 DodrioPicFront: ; 30000 (c:4000)
 	INCBIN "pic/bmon/dodrio.pic"
 DodrioPicBack: ; 301a2 (c:41a2)
@@ -45091,7 +45091,7 @@ Func_33f57: ; 33f57 (c:7f57)
 	ld [W_MOVEMISSED], a ; $d05f
 	ret
 ; 33f90 (c:7f90)
-SECTION "bankD",DATA,BANK[$D]
+SECTION "bankD",ROMX,BANK[$D]
 BulbasaurPicFront: ; 34000 (d:4000)
 	INCBIN "pic/bmon/bulbasaur.pic"
 BulbasaurPicBack: ; 340e5 (d:40e5)
@@ -45557,7 +45557,7 @@ UnnamedText_37e83: ; 37e83 (d:7e83)
 	db $50
 ; 0x37e83 + 5 bytes
 
-SECTION "bankE",DATA,BANK[$E]
+SECTION "bankE",ROMX,BANK[$E]
 
 Moves: ; 38000 (e:4000)
 ; characteristics of each move
@@ -56903,7 +56903,7 @@ BankswitchEtoF: ; 3bbe1 (e:7be1)
 	jp Bankswitch
 ; 0x3bbe6
 
-SECTION "bankF",DATA,BANK[$F]
+SECTION "bankF",ROMX,BANK[$F]
 
 ; These are move effects (second value from the Moves table in bank $E).
 EffectsArray1: ; 3c000 (f:4000)
@@ -65380,7 +65380,7 @@ Func_3fbbc: ; 3fbbc (f:7bbc)
 	pop hl
 	ret
 ; 3fbc8 (f:7bc8)
-SECTION "bank10",DATA,BANK[$10]
+SECTION "bank10",ROMX,BANK[$10]
 
 DisplayPokedexMenu_: ; 40000 (10:4000)
 	call GBPalWhiteOut
@@ -68690,7 +68690,7 @@ OTString67E5: ; 427e5 (10:67e5)
 	db "OT/",$4E
 	db $73,"№",$F2,"@"
 
-SECTION "bank11",DATA,BANK[$11]
+SECTION "bank11",ROMX,BANK[$11]
 
 LavenderTown_h: ; 0x44000 to 0x4402d (45 bytes) (bank=11) (id=4)
 	db $00 ; tileset
@@ -72982,7 +72982,7 @@ Route4HiddenObjects: ; 470a4 (11:70a4)
 
 INCBIN "baserom.gbc",$470ab,$48000 - $470ab
 
-SECTION "bank12",DATA,BANK[$12]
+SECTION "bank12",ROMX,BANK[$12]
 
 Route7_h: ; 0x48000 to 0x48022 (34 bytes) (bank=12) (id=18)
 	db $00 ; tileset
@@ -77183,7 +77183,7 @@ SafariZoneSecretHouseObject: ; 0x4a365 (size=26)
 SafariZoneSecretHouseBlocks: ; 4a37f (12:637f)
 	INCBIN "maps/safarizonesecrethouse.blk"
 
-SECTION "bank13",DATA,BANK[$13]
+SECTION "bank13",ROMX,BANK[$13]
 
 YoungsterPic: ; 4c000 (13:4000)
 	INCBIN "pic/trainer/youngster.pic"
@@ -77629,7 +77629,7 @@ DrawHPBarPredef: ; 4ff96 (13:7f96)
 	dbw $07,$49C6
 	dbw $16,$5035
 
-SECTION "bank14",DATA,BANK[$14]
+SECTION "bank14",ROMX,BANK[$14]
 
 Route22_h: ; 0x50000 to 0x50022 (34 bytes) (id=33)
 	db $00 ; tileset
@@ -81949,7 +81949,7 @@ UnnamedText_52a3d: ; 52a3d (14:6a3d)
 	db $50
 ; 0x52a3d + 5 bytes
 
-SECTION "bank15",DATA,BANK[$15]
+SECTION "bank15",ROMX,BANK[$15]
 
 Route2_h: ; 54000 (15:4000)
 	db 00 ; Tileset
@@ -86337,7 +86337,7 @@ CheckPlayerIsInFrontOfSprite: ; 569e3 (15:69e3)
 	ret
 ; 56a4b (15:6a4b)
 
-SECTION "bank16",DATA,BANK[$16]
+SECTION "bank16",ROMX,BANK[$16]
 
 Route6_h: ; 0x58000 to 0x58022 (34 bytes) (id=17)
 	db $00 ; tileset
@@ -90534,7 +90534,7 @@ RemoveGuardDrink: ; 5a59f (16:659f)
 GuardDrinksList: ; 5a5b7 (16:65b7)
 	db FRESH_WATER, SODA_POP, LEMONADE, $00
 
-SECTION "bank17",DATA,BANK[$17]
+SECTION "bank17",ROMX,BANK[$17]
 
 SaffronMartBlocks: ; 5c000 (17:4000)
 LavenderMartBlocks: ; 5c000 (17:4000)
@@ -94317,7 +94317,7 @@ INCBIN "baserom.gbc",$5df02,$5df07 - $5df02
 	call WaitForSoundToFinish
 	jp TextScriptEnd
 ; 5df15 (17:5f15)
-SECTION "bank18",DATA,BANK[$18]
+SECTION "bank18",ROMX,BANK[$18]
 
 ViridianForestBlocks: ; 60000 (18:4000)
 	INCBIN "maps/viridianforest.blk"
@@ -98158,7 +98158,7 @@ UnnamedText_62511: ; 62511 (18:6511)
 
 INCBIN "baserom.gbc",$62529,$6252a - $62529
 
-SECTION "bank19",DATA,BANK[$19]
+SECTION "bank19",ROMX,BANK[$19]
 
 Tset00_GFX: ; 64000 (19:4000)
 	INCBIN "gfx/tilesets/00.2bpp"
@@ -98189,7 +98189,7 @@ Tset17_GFX: ; 676f0 (19:76f0)
 Tset17_Block: ; 67b50 (19:7b50)
 	INCBIN "gfx/blocksets/17.bst"
 
-SECTION "bank1A",DATA,BANK[$1A]
+SECTION "bank1A",ROMX,BANK[$1A]
 
 DecrementPP: ; 68000 (1a:4000)
 ; after using a move, decrement pp in battle and (if not transformed?) in party
@@ -98264,7 +98264,7 @@ Tset16_GFX: ; 6b1ff (1a:71ff)
 Tset16_Block: ; 6b7ff (1a:77ff)
 	INCBIN "gfx/blocksets/16.bst"
 
-SECTION "bank1B",DATA,BANK[$1B]
+SECTION "bank1B",ROMX,BANK[$1B]
 
 Tset0F_GFX: ; 6c000 (1b:4000)
 	INCBIN "gfx/tilesets/0f.2bpp"
@@ -98295,7 +98295,7 @@ Tset0B_GFX: ; 6fd60 (1b:7d60)
 Tset0B_Block: ; 6fef0 (1b:7ef0)
 	INCBIN "gfx/blocksets/0b.bst"
 
-SECTION "bank1C",DATA,BANK[$1C]
+SECTION "bank1C",ROMX,BANK[$1C]
 
 ; known jump sources: 70044 (1c:4044)
 Func_70000: ; 70000 (1c:4000)
@@ -103356,7 +103356,7 @@ PadSRAM_FF: ; 73b8f (1c:7b8f)
 	jp FillMemory
 
 
-SECTION "bank1D",DATA,BANK[$1D]
+SECTION "bank1D",ROMX,BANK[$1D]
 
 CopycatsHouseF1Blocks: ; 74000 (1d:4000)
 	INCBIN "maps/copycatshousef1.blk"
@@ -108317,7 +108317,7 @@ Label76857: ; 76857 (1d:6857)
 	inc hl
 	jr .loop
 
-SECTION "bank1E",DATA,BANK[$1E]
+SECTION "bank1E",ROMX,BANK[$1E]
 
 ; Draws a "frame block". Frame blocks are blocks of tiles that are put
 ; together to form frames in battle animations.
@@ -111213,7 +111213,7 @@ TechnicalMachinePrices: ; 7bfa7 (1e:7fa7)
 ; 7bfc0
 
 
-SECTION "bank1F",DATA,BANK[$1F]
+SECTION "bank1F",ROMX,BANK[$1F]
 
 Unknown_7c000: ; 7c000 (1f:4000)
 INCBIN "baserom.gbc",$7c000,$7c361 - $7c000
@@ -113056,7 +113056,7 @@ INCBIN "baserom.gbc",$7db9b,$7dba3 - $7db9b
 Unknown_7dba3: ; 7dba3 (1f:5ba3)
 INCBIN "baserom.gbc",$7dba3,$80000 - $7dba3
 
-SECTION "bank20",DATA,BANK[$20]
+SECTION "bank20",ROMX,BANK[$20]
 
 UnnamedText_80000: ; 80000 (20:4000)
 	db $0, "Bingo!@@"
@@ -114640,7 +114640,7 @@ _SilphCo5BattleText4: ; 82a81 (20:6a81)
 	db "children here?", $57
 ; 0x82a81 + 46 bytes
 
-SECTION "bank21",DATA,BANK[$21]
+SECTION "bank21",ROMX,BANK[$21]
 
 _SilphCo5EndBattleText4: ; 84000 (21:4000)
 	db $0, "Oh", $4f
@@ -116022,7 +116022,7 @@ _RockTunnel2EndBattleText8: ; 86c94 (21:6c94)
 	db "away!", $58
 ; 0x86c94 + 13 bytes
 
-SECTION "bank22",DATA,BANK[$22]
+SECTION "bank22",ROMX,BANK[$22]
 
 _RockTunnel2AfterBattleText8: ; 88000 (22:4000)
 	db $0, "I'll raise my", $4f
@@ -117941,7 +117941,7 @@ UnknownText_8acd6: ; 8acd6 (22:6cd6)
 	db "time with me.", $58
 ; 0x8acd6 + 35 bytes
 
-SECTION "bank23",DATA,BANK[$23]
+SECTION "bank23",ROMX,BANK[$23]
 
 _UnnamedText_56437: ; 8c000 (23:4000)
 	db $0, "All right then,", $4f
@@ -119529,7 +119529,7 @@ _Route11BattleText9: ; 8ebee (23:6bee)
 	db "live wires!", $57
 ; 0x8ebee + 27 bytes
 
-SECTION "bank24",DATA,BANK[$24]
+SECTION "bank24",ROMX,BANK[$24]
 
 _Route11EndBattleText9: ; 90000 (24:4000)
 	db $0, "Whoa!", $4f
@@ -121225,7 +121225,7 @@ _Route24BattleText1: ; 928e2 (24:68e2)
 	db "from the grass!", $57
 ; 0x928e2 + 33 bytes
 
-SECTION "bank25",DATA,BANK[$25]
+SECTION "bank25",ROMX,BANK[$25]
 
 _Route24EndBattleText1: ; 94000 (25:4000)
 	db $0, "I", $4f
@@ -122739,7 +122739,7 @@ _UnnamedText_5c49e: ; 9697a (25:697a)
 	db "me your best!", $57
 ; 0x9697a + 190 bytes
 
-SECTION "bank26",DATA,BANK[$26]
+SECTION "bank26",ROMX,BANK[$26]
 
 _UnnamedText_5c4a3: ; 98000 (26:4000)
 	db $0, "There are all", $4f
@@ -124034,7 +124034,7 @@ _UnnamedText_5cb6d: ; 9aaa5 (26:6aa5)
 	db "do to you!", $57
 ; 0x9aaa5 + 214 bytes
 
-SECTION "bank27",DATA,BANK[$27]
+SECTION "bank27",ROMX,BANK[$27]
 
 _UnnamedText_5cb72: ; 9c000 (27:4000)
 	db $0, "A little word of", $4f
@@ -125363,7 +125363,7 @@ _UnnamedText_75586: ; 9ea66 (27:6a66)
 	db "SOULBADGE!", $58
 ; 0x9ea66 + 62 bytes
 
-SECTION "bank28",DATA,BANK[$28]
+SECTION "bank28",ROMX,BANK[$28]
 
 _UnnamedText_7558b: ; a0000 (28:4000)
 	db $0, "When afflicted by", $4f
@@ -126793,7 +126793,7 @@ _UnnamedText_72c8: ; a29db (28:69db)
 	db "come again!", $57
 ; 0xa29db + 92 bytes
 
-SECTION "bank29",DATA,BANK[$29]
+SECTION "bank29",ROMX,BANK[$29]
 
 _UnnamedText_72cd: ; a4000 (29:4000)
 	db $0, "Please come again!", $57
@@ -128102,7 +128102,7 @@ _BoxFullCannotThrowBallText: ; a6b69 (29:6b69)
 	db "is full! Can't", $55
 	db "use that item!", $58
 
-SECTION "bank2A",DATA,BANK[$2A]
+SECTION "bank2A",ROMX,BANK[$2A]
 
 _ItemUseText001: ; a8000 (2a:4000)
 	db 0,$52," used@@"
@@ -128284,11 +128284,11 @@ _UnnamedText_71dda: ; a82c9 (2a:42c9)
 	db $0, " hacked", $4f
 	db "away with CUT!", $58
 
-SECTION "bank2B",DATA,BANK[$2B]
+SECTION "bank2B",ROMX,BANK[$2B]
 
 INCLUDE "text/pokedex.tx"
 
-SECTION "bank2C",DATA,BANK[$2C]
+SECTION "bank2C",ROMX,BANK[$2C]
 
 MoveNames: ; b0000 (2c:4000)
 	db "POUND@"
