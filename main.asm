@@ -26804,7 +26804,7 @@ DrawBadges: ; ea03 (3:6a03)
 ; ea9e
 
 GymLeaderFaceAndBadgeTileGraphics: ; ea9e (3:6a9e)
-INCBIN "gfx/GymLeaderFaceAndBadgeTileGraphics.2bpp"
+INCBIN "gfx/badges.2bpp"
 
 ; known jump sources: 19f70 (6:5f70), 19f83 (6:5f83), 19f94 (6:5f94), 1a1e0 (6:61e0), 1eb3e (7:6b3e), 44312 (11:4312), 449ae (11:49ae), 517e7 (14:57e7), 51b9a (14:5b9a), 51bad (14:5bad), 51bbe (14:5bbe), 52034 (14:6034), 526cf (14:66cf), 5653b (15:653b), 59f94 (16:5f94), 59fa5 (16:5fa5), 5a170 (16:6170), 5a2f2 (16:62f2), 5ca87 (17:4a87), 5d7f4 (17:57f4), 5d807 (17:5807), 5d81a (17:581a), 5d82b (17:582b), 5da37 (17:5a37), 62131 (18:6131), 761b3 (1d:61b3), 7630a (1d:630a), 76461 (1d:6461)
 Func_ee9e: ; ee9e (3:6e9e)
@@ -29014,14 +29014,14 @@ INCBIN "baserom.gbc",$11e80,$11ea0 - $11e80
 HpBarAndStatusGraphics: ; 11ea0 (4:5ea0)
 	INCBIN "gfx/hp_bar_and_status.2bpp"
 
-Unknown_12080: ; 12080 (4:6080)
-INCBIN "baserom.gbc",$12080,$12098 - $12080
+BattleHudTiles1: ; 12080 (4:6080)
+INCBIN "gfx/battle_hud1.1bpp"
 
-Unknown_12098: ; 12098 (4:6098)
-INCBIN "baserom.gbc",$12098,$120b0 - $12098
+BattleHudTiles2: ; 12098 (4:6098)
+INCBIN "gfx/battle_hud2.1bpp"
 
-Unknown_120b0: ; 120b0 (4:60b0)
-INCBIN "baserom.gbc",$120b0,$120c8 - $120b0
+BattleHudTiles3: ; 120b0 (4:60b0)
+INCBIN "gfx/battle_hud3.1bpp"
 
 NintendoCopyrightLogoGraphics: ; 120c8 (4:60c8)
 INCBIN "baserom.gbc",$120c8,$121f8 - $120c8
@@ -29147,17 +29147,17 @@ StatusScreen: ; 12953 (4:6953)
 	call ClearScreen
 	call UpdateSprites ; move sprites (?)
 	call LoadHpBarAndStatusTilePatterns
-	ld de, Unknown_12080  ; $6080 ; source
+	ld de, BattleHudTiles1  ; $6080 ; source
 	ld hl, $96d0 ; dest
-	ld bc, (BANK(Unknown_12080) << 8) + $03 ; bank bytes/8
+	ld bc, (BANK(BattleHudTiles1) << 8) + $03 ; bank bytes/8
 	call CopyVideoDataDouble ; ·│ :L and halfarrow line end
-	ld de, Unknown_12098 ; $6098
+	ld de, BattleHudTiles2 ; $6098
 	ld hl, $9780
-	ld bc, (BANK(Unknown_12098) << 8) + $01
+	ld bc, (BANK(BattleHudTiles2) << 8) + $01
 	call CopyVideoDataDouble ; │
-	ld de, Unknown_120b0 ; $60b0
+	ld de, BattleHudTiles3 ; $60b0
 	ld hl, $9760
-	ld bc, (BANK(Unknown_120b0) << 8) + $02
+	ld bc, (BANK(BattleHudTiles3) << 8) + $02
 	call CopyVideoDataDouble ; ─┘
 	ld de, PTile
 	ld hl, $9720
@@ -63602,24 +63602,24 @@ Func_3ee5b: ; 3ee5b (f:6e5b)
 	ld a, [rLCDC] ; $FF00+$40
 	add a
 	jr c, .asm_3ee7c
-	ld hl, Unknown_12080 ; $6080
+	ld hl, BattleHudTiles1 ; $6080
 	ld de, $96d0
 	ld bc, $18
-	ld a, BANK(Unknown_12080)
+	ld a, BANK(BattleHudTiles1)
 	call FarCopyDataDouble
-	ld hl, Unknown_12098 ; $6098
+	ld hl, BattleHudTiles2 ; $6098
 	ld de, $9730
 	ld bc, $30
-	ld a, BANK(Unknown_12098)
+	ld a, BANK(BattleHudTiles2)
 	jp FarCopyDataDouble
 .asm_3ee7c
-	ld de, Unknown_12080 ; $6080
+	ld de, BattleHudTiles1 ; $6080
 	ld hl, $96d0
-	ld bc, (BANK(Unknown_12080) << 8) + $03
+	ld bc, (BANK(BattleHudTiles1) << 8) + $03
 	call CopyVideoDataDouble
-	ld de, Unknown_12098 ; $6098
+	ld de, BattleHudTiles2 ; $6098
 	ld hl, $9730
-	ld bc, (BANK(Unknown_12098) << 8) + $06
+	ld bc, (BANK(BattleHudTiles2) << 8) + $06
 	jp CopyVideoDataDouble
 
 ; known jump sources: 3c5f7 (f:45f7), 3c79b (f:479b), 3c952 (f:4952), 3ccf4 (f:4cf4), 3cebf (f:4ebf), 553f1 (15:53f1)
