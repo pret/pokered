@@ -29036,7 +29036,7 @@ PokedexTileGraphics: ; 12488 (4:6488)
 INCBIN "baserom.gbc",$12488,$125a8 - $12488
 
 WorldMapTileGraphics: ; 125a8 (4:65a8)
-INCBIN "baserom.gbc",$125a8,$126a8 - $125a8
+INCBIN "gfx/town_map.2bpp"
 
 PlayerCharacterTitleGraphics: ; 126a8 (4:66a8)
 INCBIN "baserom.gbc",$126a8,$128d8 - $126a8
