@@ -26804,7 +26804,7 @@ DrawBadges: ; ea03 (3:6a03)
 ; ea9e
 
 GymLeaderFaceAndBadgeTileGraphics: ; ea9e (3:6a9e)
-INCBIN "baserom.gbc",$ea9e,$ee9e - $ea9e
+INCBIN "gfx/GymLeaderFaceAndBadgeTileGraphics.2bpp"
 
 ; known jump sources: 19f70 (6:5f70), 19f83 (6:5f83), 19f94 (6:5f94), 1a1e0 (6:61e0), 1eb3e (7:6b3e), 44312 (11:4312), 449ae (11:49ae), 517e7 (14:57e7), 51b9a (14:5b9a), 51bad (14:5bad), 51bbe (14:5bbe), 52034 (14:6034), 526cf (14:66cf), 5653b (15:653b), 59f94 (16:5f94), 59fa5 (16:5fa5), 5a170 (16:6170), 5a2f2 (16:62f2), 5ca87 (17:4a87), 5d7f4 (17:57f4), 5d807 (17:5807), 5d81a (17:581a), 5d82b (17:582b), 5da37 (17:5a37), 62131 (18:6131), 761b3 (1d:61b3), 7630a (1d:630a), 76461 (1d:6461)
 Func_ee9e: ; ee9e (3:6e9e)
