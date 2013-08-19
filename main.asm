@@ -29009,7 +29009,8 @@ PokemonLogoGraphics: ; 11380 (4:5380)
 FontGraphics: ; 11a80 (4:5a80)
 	INCBIN "gfx/font.1bpp"
 
-INCBIN "baserom.gbc",$11e80,$11ea0 - $11e80
+ABTiles: ; 11e80 (4:5e80)
+	INCBIN "gfx/AB.2bpp"
 
 HpBarAndStatusGraphics: ; 11ea0 (4:5ea0)
 	INCBIN "gfx/hp_bar_and_status.2bpp"
