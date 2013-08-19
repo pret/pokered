@@ -29040,7 +29040,7 @@ WorldMapTileGraphics: ; 125a8 (4:65a8)
 INCBIN "gfx/town_map.2bpp"
 
 PlayerCharacterTitleGraphics: ; 126a8 (4:66a8)
-INCBIN "baserom.gbc",$126a8,$128d8 - $126a8
+INCBIN "gfx/player_title.2bpp"
 
 ; known jump sources: 1388d (4:788d)
 Func_128d8: ; 128d8 (4:68d8)
