@@ -32387,7 +32387,7 @@ Func_17c47: ; 17c47 (5:7c47)
 	ld a, [hl]
 	add $8
 	ld c, a
-	ld de, Unknown_17cb5 ; $7cb5
+	ld de, EmotionBubbles ; $7cb5
 	xor a
 	call WriteOAMBlock
 	ld c, $3c
@@ -32400,8 +32400,8 @@ Func_17c47: ; 17c47 (5:7c47)
 Unknown_17caf: ; 17caf (5:7caf)
 INCBIN "baserom.gbc",$17caf,$17cb5 - $17caf
 
-Unknown_17cb5: ; 17cb5 (5:7cb5)
-INCBIN "baserom.gbc",$17cb5,$17d7d - $17cb5
+EmotionBubbles: ; 17cb5 (5:7cb5)
+INCBIN "gfx/emotion_bubbles.2bpp"
 
 ; known jump sources: 71c87 (1c:5c87)
 Func_17d7d: ; 17d7d (5:7d7d)
