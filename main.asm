@@ -29034,7 +29034,7 @@ TextBoxGraphics: ; 12288 (4:6288)
 	INCBIN "gfx/text_box.2bpp"
 
 PokedexTileGraphics: ; 12488 (4:6488)
-INCBIN "baserom.gbc",$12488,$125a8 - $12488
+INCBIN "gfx/pokedex.2bpp"
 
 WorldMapTileGraphics: ; 125a8 (4:65a8)
 INCBIN "gfx/town_map.2bpp"
