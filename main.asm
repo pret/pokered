@@ -29025,7 +29025,7 @@ BattleHudTiles3: ; 120b0 (4:60b0)
 INCBIN "gfx/battle_hud3.1bpp"
 
 NintendoCopyrightLogoGraphics: ; 120c8 (4:60c8)
-INCBIN "baserom.gbc",$120c8,$121f8 - $120c8
+INCBIN "gfx/copyright.2bpp"
 
 GamefreakLogoGraphics: ; 121f8 (4:61f8)
 INCBIN "baserom.gbc",$121f8,$12288 - $121f8
