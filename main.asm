@@ -29028,7 +29028,7 @@ NintendoCopyrightLogoGraphics: ; 120c8 (4:60c8)
 INCBIN "gfx/copyright.2bpp"
 
 GamefreakLogoGraphics: ; 121f8 (4:61f8)
-INCBIN "baserom.gbc",$121f8,$12288 - $121f8
+INCBIN "gfx/gamefreak.2bpp"
 
 TextBoxGraphics: ; 12288 (4:6288)
 	INCBIN "gfx/text_box.2bpp"
