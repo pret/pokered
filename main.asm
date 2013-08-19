@@ -31255,8 +31255,7 @@ GenRandom_: ; 13a8f (4:7a8f)
 SECTION "bank5",ROMX,BANK[$5]
 
 RedCyclingSprite: ; 14000 (5:4000)
-INCBIN "baserom.gbc",$14000,$14180 - $14000
-
+	INCBIN "gfx/sprites/cycling.2bpp" ; was $14000
 RedSprite: ; 14180 (5:4180)
 	INCBIN "gfx/sprites/red.2bpp" ; was $14180
 BlueSprite: ; 14300 (5:4300)
