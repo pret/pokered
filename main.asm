@@ -108682,7 +108682,7 @@ dw AnimationTileset1
 db $FF
 
 AnimationTileset1: ; 781fe (1e:41fe)
-INCBIN "baserom.gbc",$781fe,$786ee - $781fe
+INCBIN "gfx/attack_anim_1.2bpp"
 
 AnimationTileset2: ; 786ee (1e:46ee)
 INCBIN "baserom.gbc",$786ee,$78bde - $786ee
