@@ -108685,7 +108685,7 @@ AnimationTileset1: ; 781fe (1e:41fe)
 INCBIN "gfx/attack_anim_1.2bpp"
 
 AnimationTileset2: ; 786ee (1e:46ee)
-INCBIN "baserom.gbc",$786ee,$78bde - $786ee
+INCBIN "gfx/attack_anim_2.2bpp"
 
 IF _RED
 	INCBIN "gfx/red/slotmachine2.2bpp"
