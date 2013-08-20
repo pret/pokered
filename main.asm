@@ -53889,7 +53889,7 @@ Func_3a948: ; 3a948 (e:6948)
 
 ; four tiles: pokeball, black pokeball (status ailment), crossed out pokeball (faited) and pokeball slot (no mon)
 PokeballTileGraphics: ; 3a97e (e:697e)
-INCBIN "baserom.gbc",$3a97e,$3a9be - $3a97e
+INCBIN "gfx/pokeball.2bpp"
 
 ; tiles for gameboy and link cable graphics used for trading sequence animation
 TradingAnimationGraphics: ; 3a9be (e:69be)
