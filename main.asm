@@ -100138,8 +100138,8 @@ Func_70e3e: ; 70e3e (1c:4e3e)
 	ld bc, $10
 	call CopyData
 	ld hl, $8040
-	ld de, Unknown_70f40 ; $4f40
-	ld bc, (BANK(Unknown_70f40) << 8) + $04
+	ld de, TownMapCursor ; $4f40
+	ld bc, (BANK(TownMapCursor) << 8) + $04
 	call CopyVideoDataDouble
 	xor a
 	ld [W_WHICHTRADE], a ; $cd3d
@@ -100227,8 +100227,8 @@ asm_70e92: ; 70e92 (1c:4e92)
 Unknown_70f11: ; 70f11 (1c:4f11)
 INCBIN "baserom.gbc",$70f11,$70f40 - $70f11
 
-Unknown_70f40: ; 70f40 (1c:4f40)
-INCBIN "baserom.gbc",$70f40,$70f60 - $70f40
+TownMapCursor: ; 70f40 (1c:4f40)
+INCBIN "gfx/town_map_cursor.1bpp"
 
 ; known jump sources: 4010a (10:410a)
 Func_70f60: ; 70f60 (1c:4f60)
