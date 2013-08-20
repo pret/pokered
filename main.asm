@@ -44744,7 +44744,7 @@ BlankLeaderNames: ; 2fc28 (b:7c28)
 INCBIN "gfx/blank_leader_names.2bpp"
 
 BadgeNumbersTileGraphics: ; 2fd98 (b:7d98)
-INCBIN "baserom.gbc",$2fd98,$2fe18 - $2fd98
+INCBIN "gfx/badge_numbers.2bpp"
 
 ; known jump sources: e530 (3:6530)
 Func_2fe18: ; 2fe18 (b:7e18)
