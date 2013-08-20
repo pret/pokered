@@ -68508,10 +68508,10 @@ INCBIN "baserom.gbc",$41849,$41852 - $41849
 
 ; known jump sources: 418ad (10:58ad)
 Func_41852: ; 41852 (10:5852)
-	ld hl, Unknown_41a99 ; $5a99
+	ld hl, FightIntroBackMon ; $5a99
 	ld de, $9000
 	ld bc, $600
-	ld a, BANK(Unknown_41a99)
+	ld a, BANK(FightIntroBackMon)
 	call FarCopyData2
 	ld hl, GameFreakIntro ; $5959
 	ld de, $9600
@@ -68614,8 +68614,8 @@ INCBIN "baserom.gbc",$41950,$41959 - $41950
 GameFreakIntro: ; 41959 (10:5959)
 INCBIN "gfx/gamefreak_intro.2bpp"
 
-Unknown_41a99: ; 41a99 (10:5a99)
-INCBIN "baserom.gbc",$41a99,$42099 - $41a99
+FightIntroBackMon: ; 41a99 (10:5a99)
+INCBIN "gfx/intro_fight.2bpp"
 
 Unknown_42099: ; 42099 (10:6099)
 INCBIN "baserom.gbc",$42099,$420d9 - $42099
