@@ -44737,7 +44737,7 @@ UnnamedText_2fb93: ; 2fb93 (b:7b93)
 ; 0x2fb93 + 5 bytes
 
 TrainerInfoTextBoxTileGraphics: ; 2fb98 (b:7b98)
-INCBIN "baserom.gbc",$2fb98,$2fc28 - $2fb98
+INCBIN "gfx/trainer_info.2bpp"
 
 ; mostly empty, last tile contains circle
 UnknownGFX_2fc28: ; 2fc28 (b:7c28)
