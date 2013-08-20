@@ -68513,15 +68513,15 @@ Func_41852: ; 41852 (10:5852)
 	ld bc, $600
 	ld a, BANK(Unknown_41a99)
 	call FarCopyData2
-	ld hl, Unknown_41959 ; $5959
+	ld hl, GameFreakIntro ; $5959
 	ld de, $9600
 	ld bc, $140
-	ld a, BANK(Unknown_41959)
+	ld a, BANK(GameFreakIntro)
 	call FarCopyData2
-	ld hl, Unknown_41959 ; $5959
+	ld hl, GameFreakIntro ; $5959
 	ld de, $8800
 	ld bc, $140
-	ld a, BANK(Unknown_41959)
+	ld a, BANK(GameFreakIntro)
 	call FarCopyData2
 	ld hl, Unknown_42099 ; $6099
 	ld de, $8000
@@ -68611,8 +68611,8 @@ INCBIN "baserom.gbc",$41947,$41950 - $41947
 Unknown_41950: ; 41950 (10:5950)
 INCBIN "baserom.gbc",$41950,$41959 - $41950
 
-Unknown_41959: ; 41959 (10:5959)
-INCBIN "baserom.gbc",$41959,$41a99 - $41959
+GameFreakIntro: ; 41959 (10:5959)
+INCBIN "gfx/gamefreak_intro.2bpp"
 
 Unknown_41a99: ; 41a99 (10:5a99)
 INCBIN "baserom.gbc",$41a99,$42099 - $41a99
