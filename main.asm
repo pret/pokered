@@ -98788,9 +98788,9 @@ Func_70423: ; 70423 (1c:4423)
 
 ; known jump sources: 7027 (1:7027)
 Func_70433: ; 70433 (1c:4433)
-	ld de, Unknown_704b7 ; $44b7
+	ld de, PokeCenterHealBall ; $44b7
 	ld hl, $87c0
-	ld bc, (BANK(Unknown_704b7) << 8) + $03
+	ld bc, (BANK(PokeCenterHealBall) << 8) + $03
 	call CopyVideoData
 	ld hl, $cfcb
 	ld a, [hl]
@@ -98851,8 +98851,8 @@ Func_70433: ; 70433 (1c:4433)
 	ld [hl], a
 	jp UpdateSprites
 
-Unknown_704b7: ; 704b7 (1c:44b7)
-INCBIN "baserom.gbc",$704b7,$704d7 - $704b7
+PokeCenterHealBall: ; 704b7 (1c:44b7)
+INCBIN "gfx/pokecenter_ball.2bpp"
 
 Unknown_704d7: ; 704d7 (1c:44d7)
 INCBIN "baserom.gbc",$704d7,$704f3 - $704d7
