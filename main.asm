@@ -99587,12 +99587,12 @@ INCBIN "baserom.gbc",$70a44,$70a4d - $70a44
 ; known jump sources: 709b3 (1c:49b3)
 Func_70a4d: ; 70a4d (1c:4a4d)
 	ld hl, $8ff0
-	ld de, Unknown_70a59 ; $4a59
-	ld bc, (BANK(Unknown_70a59) << 8) + $01
+	ld de, BattleTransitionTile ; $4a59
+	ld bc, (BANK(BattleTransitionTile) << 8) + $01
 	jp CopyVideoData
 
-Unknown_70a59: ; 70a59 (1c:4a59)
-INCBIN "baserom.gbc",$70a59,$70a69 - $70a59
+BattleTransitionTile: ; 70a59 (1c:4a59)
+INCBIN "gfx/battle_transition.2bpp"
 
 ; known jump sources: 70a9f (1c:4a9f), 70bc2 (1c:4bc2), 70c0a (1c:4c0a), 70ca7 (1c:4ca7), 70cd5 (1c:4cd5), 70d4d (1c:4d4d)
 Func_70a69: ; 70a69 (1c:4a69)
