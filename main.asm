@@ -72981,8 +72981,6 @@ Route4HiddenObjects: ; 470a4 (11:70a4)
 	dbw BANK(HiddenItems),HiddenItems
 	db $FF
 
-INCBIN "baserom.gbc",$470ab,$48000 - $470ab
-
 SECTION "bank12",ROMX,BANK[$12]
 
 Route7_h: ; 0x48000 to 0x48022 (34 bytes) (bank=12) (id=18)
