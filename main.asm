@@ -68523,10 +68523,10 @@ Func_41852: ; 41852 (10:5852)
 	ld bc, $140
 	ld a, BANK(GameFreakIntro)
 	call FarCopyData2
-	ld hl, Unknown_42099 ; $6099
+	ld hl, FightIntroFrontMon ; $6099
 	ld de, $8000
 	ld bc, $6c0
-	ld a, BANK(Unknown_42099)
+	ld a, BANK(FightIntroFrontMon)
 	jp FarCopyData2
 
 ; known jump sources: 41688 (10:5688)
@@ -68617,8 +68617,7 @@ INCBIN "gfx/gamefreak_intro.2bpp"
 FightIntroBackMon: ; 41a99 (10:5a99)
 INCBIN "gfx/intro_fight.2bpp"
 
-Unknown_42099: ; 42099 (10:6099)
-INCBIN "baserom.gbc",$42099,$420d9 - $42099
+FightIntroFrontMon: ; 42099 (10:6099)
 
 IF _RED
 	INCBIN "gfx/red/introfight.2bpp"
