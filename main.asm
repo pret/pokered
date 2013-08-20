@@ -53897,7 +53897,7 @@ INCBIN "gfx/trade.2bpp"
 
 ; 4 tiles for actual wire transfer animation (pokeball wandering inside wire)
 TradingAnimationGraphics2: ; 3acce (e:6cce)
-INCBIN "baserom.gbc",$3acce,$3ad0e - $3acce
+INCBIN "gfx/trade2.2bpp"
 
 ; known jump sources: df11 (3:5f11), 17da3 (5:7da3)
 Func_3ad0e: ; 3ad0e (e:6d0e)
