@@ -100460,7 +100460,7 @@ Func_7109b: ; 7109b (1c:509b)
 ; 71100 (1c:5100)
 CompressedMap: ; 71100 (1c:5100)
 ; you can decompress this file with the redrle program in the extras/ dir
-	INCBIN "baserom.gbc",$71100,$711AB-$71100
+	INCBIN "gfx/town_map.rle"
 
 ; known jump sources: 70eeb (1c:4eeb), 70f82 (1c:4f82)
 Func_711ab: ; 711ab (1c:51ab)
