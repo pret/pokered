@@ -53893,7 +53893,7 @@ INCBIN "gfx/pokeball.2bpp"
 
 ; tiles for gameboy and link cable graphics used for trading sequence animation
 TradingAnimationGraphics: ; 3a9be (e:69be)
-INCBIN "baserom.gbc",$3a9be,$3acce - $3a9be
+INCBIN "gfx/trade.2bpp"
 
 ; 4 tiles for actual wire transfer animation (pokeball wandering inside wire)
 TradingAnimationGraphics2: ; 3acce (e:6cce)
