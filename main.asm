@@ -101259,7 +101259,8 @@ MonOverworldData: ; 7190d (1c:590d)
 	dn SPRITE_SNAKE, SPRITE_MON				;Dragonite/Mewtwo
 	dn SPRITE_MON, 0						;Mew/Padding
 
-INCBIN "baserom.gbc",$71959,$71ad9 - $71959
+MonOverworldSprites:
+	INCBIN "gfx/mon_ow_sprites.2bpp"
 
 Predef54: ; 71ad9 (1c:5ad9)
 ; trigger the trade offer/action specified by W_WHICHTRADE
