@@ -100267,9 +100267,9 @@ Func_70f90: ; 70f90 (1c:4f90)
 	ld hl, $8040
 	ld bc, (BANK(BirdSprite) << 8) + $0c
 	call CopyVideoData
-	ld de, Unknown_71093 ; $5093
+	ld de, TownMapUpArrow ; $5093
 	ld hl, $8ed0
-	ld bc, (BANK(Unknown_71093) << 8) + $01
+	ld bc, (BANK(TownMapUpArrow) << 8) + $01
 	call CopyVideoDataDouble
 	call Func_71070
 	ld hl, $cfcb
@@ -100404,8 +100404,8 @@ Func_71070: ; 71070 (1c:5070)
 	ld [hl], $ff
 	ret
 
-Unknown_71093: ; 71093 (1c:5093)
-INCBIN "baserom.gbc",$71093,$7109b - $71093
+TownMapUpArrow: ; 71093 (1c:5093)
+INCBIN "gfx/up_arrow.1bpp"
 
 ; known jump sources: 70e3e (1c:4e3e), 70f60 (1c:4f60), 70f93 (1c:4f93)
 Func_7109b: ; 7109b (1c:509b)
