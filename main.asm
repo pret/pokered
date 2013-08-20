@@ -70139,24 +70139,24 @@ Func_44fd7: ; 44fd7 (11:4fd7)
 
 Unknown_45023: ; 45023 (11:5023)
 ; 0x45023 XXX: it looks to me this is probably data for copying tiles into memory, maybe to mix and match a few tilesets, but I don't really know for sure
-	dw UnknownGFX_45087       ;address from within tileset graphics
+	dw SpinnerArrowAnimTiles       ;address from within tileset graphics
 	db 1                      ;number of tiles to copy?
-	db BANK(UnknownGFX_45087) ;bank of tileset graphics
+	db BANK(SpinnerArrowAnimTiles) ;bank of tileset graphics
 	dw $9200                  ;where to load in VRAM
 	
-	dw UnknownGFX_45087 + $10
+	dw SpinnerArrowAnimTiles + $10
 	db 1
-	db BANK(UnknownGFX_45087)
+	db BANK(SpinnerArrowAnimTiles)
 	dw $9210
 	
-	dw UnknownGFX_45087 + $20
+	dw SpinnerArrowAnimTiles + $20
 	db 1
-	db BANK(UnknownGFX_45087)
+	db BANK(SpinnerArrowAnimTiles)
 	dw $9300
 	
-	dw UnknownGFX_45087 + $30
+	dw SpinnerArrowAnimTiles + $30
 	db 1
-	db BANK(UnknownGFX_45087)
+	db BANK(SpinnerArrowAnimTiles)
 	dw $9310
 	
 	dw Tset16_GFX + $200
@@ -70180,24 +70180,24 @@ Unknown_45023: ; 45023 (11:5023)
 	dw $9310
 	
 Unknown_45053: ; 45053 (11:5053)
-	dw UnknownGFX_45087 + $10
+	dw SpinnerArrowAnimTiles + $10
 	db 1
-	db BANK(UnknownGFX_45087)
+	db BANK(SpinnerArrowAnimTiles)
 	dw $93C0
 	
-	dw UnknownGFX_45087 + $30
+	dw SpinnerArrowAnimTiles + $30
 	db 1
-	db BANK(UnknownGFX_45087)
+	db BANK(SpinnerArrowAnimTiles)
 	dw $93D0
 	
-	dw UnknownGFX_45087
+	dw SpinnerArrowAnimTiles
 	db 1
-	db BANK(UnknownGFX_45087)
+	db BANK(SpinnerArrowAnimTiles)
 	dw $94C0
 	
-	dw UnknownGFX_45087 + $20
+	dw SpinnerArrowAnimTiles + $20
 	db 1
-	db BANK(UnknownGFX_45087)
+	db BANK(SpinnerArrowAnimTiles)
 	dw $94D0
 	
 	dw Tset05_GFX + $3C0
@@ -70223,9 +70223,9 @@ Unknown_45053: ; 45053 (11:5053)
 Unknown_45083: ; 45083 (11:5083)
 INCBIN "baserom.gbc",$45083,$45087 - $45083
 
-; four tiles apparently forming a 2x2 diamond shaped pattern
-UnknownGFX_45087: ; 45087 (11:5087)
-INCBIN "baserom.gbc",$45087,$450c7 - $45087
+; these tiles are the animation for the tiles that push the player in dungeons like Rocket HQ
+SpinnerArrowAnimTiles: ; 45087 (11:5087)
+INCBIN "gfx/spinner_arrow.2bpp"
 
 RocketHideout2Texts: ; 450c7 (11:50c7)
 	dw RocketHideout2Text1, Predef5CText, Predef5CText, Predef5CText, Predef5CText
