@@ -30505,7 +30505,7 @@ DrawTrainerInfo: ; 1349a (4:749a)
 	ld bc,$0080
 	push bc
 	call TrainerInfo_FarCopyData
-	ld hl,UnknownGFX_2fc28 ; $7c28
+	ld hl,BlankLeaderNames ; $7c28
 	ld de,$9600
 	ld bc,$0170
 	call TrainerInfo_FarCopyData
@@ -44740,8 +44740,8 @@ TrainerInfoTextBoxTileGraphics: ; 2fb98 (b:7b98)
 INCBIN "gfx/trainer_info.2bpp"
 
 ; mostly empty, last tile contains circle
-UnknownGFX_2fc28: ; 2fc28 (b:7c28)
-INCBIN "baserom.gbc",$2fc28,$2fd98 - $2fc28
+BlankLeaderNames: ; 2fc28 (b:7c28)
+INCBIN "gfx/blank_leader_names.2bpp"
 
 BadgeNumbersTileGraphics: ; 2fd98 (b:7d98)
 INCBIN "baserom.gbc",$2fd98,$2fe18 - $2fd98
@@ -85905,10 +85905,10 @@ DisplayDiploma: ; 566e2 (15:66e2)
 	ld hl, $d730
 	set 6, [hl]
 	call DisableLCD
-	ld hl, UnknownGFX_2fc28 + $160 ; $7d88 ; circle tile
+	ld hl, BlankLeaderNames + $160 ; $7d88 ; circle tile
 	ld de, $9700
 	ld bc, $0010
-	ld a, BANK(UnknownGFX_2fc28)
+	ld a, BANK(BlankLeaderNames)
 	call FarCopyData2
 	ld hl, W_SCREENTILESBUFFER
 	ld bc, $1012
