@@ -12059,7 +12059,7 @@ Func_4ca5: ; 4ca5 (1:4ca5)
 	inc l
 	inc l
 	ld a, [$FF00+$8f]
-	ld de, Unknown_4d85 ; $4d85
+	ld de, DiagonalLines ; $4d85
 	add a
 	add e
 	ld e, a
@@ -12096,8 +12096,10 @@ Func_4d72: ; 4d72 (1:4d72)
 .asm_4d84
 	ret
 
-Unknown_4d85: ; 4d85 (1:4d85)
-INCBIN "baserom.gbc",$4d85,$4de1 - $4d85
+DiagonalLines: ; 4d85 (1:4d85)
+INCBIN "gfx/diagonal_lines.2bpp"
+
+INCBIN "baserom.gbc",$4da5,$4de1 - $4da5
 
 ; known jump sources: 24f7 (0:24f7)
 PickupItem: ; 4de1 (1:4de1)
