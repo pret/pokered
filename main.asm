@@ -36581,8 +36581,8 @@ INCBIN "baserom.gbc",$1a6cf,$1a6f0 - $1a6cf
 ; known jump sources: 1a6c6 (6:66c6)
 Func_1a6f0: ; 1a6f0 (6:66f0)
 	ld hl, $8ff0
-	ld de, Unknown_1a708 ; $6708
-	ld bc, (BANK(Unknown_1a708) << 8) + $01
+	ld de, LedgeHoppingShadow ; $6708
+	ld bc, (BANK(LedgeHoppingShadow) << 8) + $01
 	call CopyVideoDataDouble
 	ld a, $9
 	ld bc, $5448
@@ -36590,8 +36590,8 @@ Func_1a6f0: ; 1a6f0 (6:66f0)
 	call WriteOAMBlock
 	ret
 
-Unknown_1a708: ; 1a708 (6:6708)
-INCBIN "baserom.gbc",$1a708,$1a710 - $1a708
+LedgeHoppingShadow: ; 1a708 (6:6708)
+INCBIN "gfx/ledge_hopping_shadow.1bpp"
 
 Unknown_1a710: ; 1a710 (6:6710)
 INCBIN "baserom.gbc",$1a710,$1bcc8 - $1a710
