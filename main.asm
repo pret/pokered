@@ -98310,9 +98310,9 @@ Func_70000: ; 70000 (1c:4000)
 	ld hl, $8a10
 	ld bc, (BANK(AnimationTileset2) << 8) + $01
 	call CopyVideoData
-	ld de, Unknown_70190 ; $4190
+	ld de, FallingStar ; $4190
 	ld hl, $8a20
-	ld bc, (BANK(Unknown_70190) << 8) + $01
+	ld bc, (BANK(FallingStar) << 8) + $01
 	call CopyVideoData
 	ld hl, Unknown_70140 ; $4140
 	ld de, $c360
@@ -98466,8 +98466,8 @@ INCBIN "baserom.gbc",$70140,$70180 - $70140
 Unknown_70180: ; 70180 (1c:4180)
 INCBIN "baserom.gbc",$70180,$70190 - $70180
 
-Unknown_70190: ; 70190 (1c:4190)
-INCBIN "baserom.gbc",$70190,$701a0 - $70190
+FallingStar: ; 70190 (1c:4190)
+INCBIN "gfx/falling_star.2bpp"
 
 ; known jump sources: 74061 (1d:4061)
 Func_701a0: ; 701a0 (1c:41a0)
