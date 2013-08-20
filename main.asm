@@ -110800,12 +110800,12 @@ Func_79fc0: ; 79fc0 (1e:5fc0)
 
 ; known jump sources: 79fc7 (1e:5fc7)
 Func_79fd4: ; 79fd4 (1e:5fd4)
-	ld de, Unknown_79fdd ; $5fdd
-	ld bc, (BANK(Unknown_79fdd) << 8) + $01
+	ld de, RedFishingTiles ; $5fdd
+	ld bc, (BANK(RedFishingTiles) << 8) + $01
 	jp CopyVideoData
 
-Unknown_79fdd: ; 79fdd (1e:5fdd)
-INCBIN "baserom.gbc",$79fdd,$7a07d - $79fdd
+RedFishingTiles: ; 79fdd (1e:5fdd)
+INCBIN "gfx/red_fishing.2bpp"
 
 Unknown_7a07d: ; 7a07d (1e:607d)
 INCBIN "baserom.gbc",$7a07d,$7a76d - $7a07d
