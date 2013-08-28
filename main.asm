@@ -101819,8 +101819,8 @@ Unknown_71f8f: ; 71f8f (1c:5f8f)
 INCBIN "baserom.gbc",$71f8f,$71f97 - $71f8f
 
 DeterminePaletteID: ; 71f97 (1c:5f97)
-	bit 3, a                 ; bit 3 of battle status 3 (unused?)
-	ld a, PAL_GREYMON
+	bit 3, a                 ; bit 3 of battle status 3, set if current Pokemon is transformed
+	ld a, PAL_GREYMON        ; if yes, use Ditto's palette
 	ret nz
 	ld a, [hl]
 Func_71f9d: ; 71f9d (1c:5f9d)
