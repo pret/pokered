@@ -11017,7 +11017,7 @@ ENDC
 	ld [hl], a
 	FuncCoord 2, 17 ; $c4f6
 	ld hl, Coord
-	ld de, .unknown_437f ; $437f
+	ld de, .titlescreenTilemap ; $437f
 	ld b, $10
 .asm_4377
 	ld a, [de]
@@ -11027,8 +11027,8 @@ ENDC
 	jr nz, .asm_4377
 	jr .asm_438f
 
-.unknown_437f ; 437f (1:437f)
-INCBIN "baserom.gbc",$437f,$438f - $437f
+.titlescreenTilemap ; 437f (1:437f)
+db $41,$42,$43,$42,$44,$42,$45,$46,$47,$48,$49,$4A,$4B,$4C,$4D,$4E ; ©'95.'96.'98 GAME FREAK inc.
 
 .asm_438f
 	call SaveScreenTilesToBuffer2
