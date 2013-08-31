@@ -5,10 +5,10 @@ TEXTFILES =	text/oakspeech.tx text/pokedex.tx text/mapRedsHouse1F.tx \
 
 all: pokered.gbc
 
-pokered.o: pokered.asm main.tx constants.asm ${TEXTFILES}
-	rgbasm -o pokered.o pokered.asm
+pokered.o: pokered.tx main.tx constants.tx music.tx wram.tx ${TEXTFILES}
+	rgbasm -o pokered.o pokered.tx
 	
-pokeblue.o: pokeblue.asm main.tx constants.asm ${TEXTFILES}
+pokeblue.o: pokeblue.asm main.tx constants.tx ${TEXTFILES}
 	rgbasm -o pokeblue.o pokeblue.asm
 
 redrle: extras/redrle.c
