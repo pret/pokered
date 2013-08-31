@@ -106,7 +106,7 @@ SECTION "romheader",ROM0[$100]
 nop
 jp Start
 
-Section "start",ROM0[$150]
+SECTION "start",ROM0[$150]
 Start: ; 0150 (0:0150)
 	cp $11 ; value that indicates Gameboy Color
 	jr z,.gbcDetected
