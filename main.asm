@@ -104948,7 +104948,7 @@ UnnamedText_74fe2: ; 74fe2 (1d:4fe2)
 ; 0x74fe2 + 5 bytes
 
 Unknown_74fe7: ; 74fe7 (1d:4fe7)
-	ld hl, Unknown_75000
+	ld hl, VendingPrices
 	ld a, [$cc26]
 	add a
 	add a
@@ -104964,10 +104964,11 @@ Unknown_74fe7: ; 74fe7 (1d:4fe7)
 	ld a, [hl]
 	ld [$ff00+$de], a
 	ret
-; 0x75000
 
-Unknown_75000: ; 75000 (1d:5000)
-INCBIN "baserom.gbc",$75000,$7500c - $75000
+VendingPrices: ; 75000 (1d:5000)
+	db FRESH_WATER,$00,$02,$00
+	db SODA_POP,   $00,$03,$00
+	db LEMONADE,   $00,$03,$50
 
 FuchsiaHouse1_h: ; 0x7500c to 0x75018 (12 bytes) (id=153)
 	db $08 ; tileset
