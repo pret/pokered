@@ -13041,7 +13041,7 @@ Func_5317: ; 5317 (1:5317)
 	call Func_5ab3
 	FuncCoord 4, 10 ; $c46c
 	ld hl, Coord
-	ld de, .unknown_550f ; $550f
+	ld de, .pleaseWait ; $550f
 	call PlaceString
 	ld hl, W_NUMHITS ; $d074
 	xor a
@@ -13310,8 +13310,8 @@ Func_5317: ; 5317 (1:5317)
 	call PlayMusic
 	jr .asm_551c
 
-.unknown_550f: ; 550f (1:550f)
-INCBIN "baserom.gbc",$550f,$551c - $550f
+.pleaseWait: ; 550f (1:550f)
+	db "PLEASE WAIT!@"
 
 .asm_551c
 	ld hl, Unknown_5a5b ; $5a5b
