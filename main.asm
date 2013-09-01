@@ -11837,13 +11837,13 @@ Func_4c05: ; 4c05 (1:4c05)
 .asm_4c1a
 	FuncCoord 4, 11 ; $c480
 	ld hl, Coord
-	ld de, Unknown_4c28 ; $4c28
+	ld de, WaitingText ; $4c28
 	call PlaceString
 	ld c, $32
 	jp DelayFrames
 
-Unknown_4c28: ; 4c28 (1:4c28)
-INCBIN "baserom.gbc",$4c28,$4c34 - $4c28
+WaitingText: ; 4c28 (1:4c28)
+	db "Waiting...!@"
 
 ; known jump sources: 2438 (0:2438)
 _UpdateSprites: ; 4c34 (1:4c34)
