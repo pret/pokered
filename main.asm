@@ -13358,7 +13358,8 @@ SSAnne8AfterBattleText2: ; 5a24 (1:5a24)
 	db $50
 ; 0x5a24 + 5 bytes
 
-INCBIN "baserom.gbc",$5a29,$5a5b - $5a29
+	db "Trade completed!@"
+	db "Too bad! The trade",$4E,"was canceled!@"
 
 Unknown_5a5b: ; 5a5b (1:5a5b)
 INCBIN "baserom.gbc",$5a5b,$5a5f - $5a5b
