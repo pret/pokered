@@ -91612,15 +91612,15 @@ PewterGymScript: ; 5c387 (17:4387)
 ; 0x5c3a4
 
 PewterGymScript_Unknown5c3a4: ; 5c3a4 (17:43a4)
-	ld hl, Unknown_5c3ad ; $43ad
-	ld de, Unknown_5c3b9 ; $43b9
+	ld hl, PewterGymCity ; $43ad
+	ld de, PewterGymLeader ; $43b9
 	jp LoadGymLeaderAndCityName
 
-Unknown_5c3ad: ; 5c3ad (17:43ad)
-INCBIN "baserom.gbc",$5c3ad,$5c3b9 - $5c3ad
+PewterGymCity: ; 5c3ad (17:43ad)
+	db "PEWTER CITY@"
 
-Unknown_5c3b9: ; 5c3b9 (17:43b9)
-INCBIN "baserom.gbc",$5c3b9,$5c3bf - $5c3b9
+PewterGymLeader: ; 5c3b9 (17:43b9)
+	db "BROCK@"
 
 ; known jump sources: 5c3d7 (17:43d7), 5c432 (17:4432)
 Func_5c3bf: ; 5c3bf (17:43bf)
