@@ -42215,7 +42215,13 @@ UnnamedText_1ecaa: ; 1ecaa (7:6caa)
 	db $50
 ; 0x1ecaa + 5 bytes
 
-INCBIN "baserom.gbc",$1ecaf,$1ecbd - $1ecaf
+Unknown_1ecaf
+	ld a, [$c109]
+	cp $4
+	ret nz
+	call EnableAutoTextBoxDrawing
+	ld a, $8
+	jp Func_3ef5
 
 UnnamedText_1ecbd: ; 1ecbd (7:6cbd)
 	TX_FAR _UnnamedText_1ecbd
