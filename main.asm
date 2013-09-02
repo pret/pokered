@@ -66564,7 +66564,7 @@ HeightWeightText: ; 40448 (10:4448)
 	db "HT  ?",$60,"??",$61,$4E,"WT   ???lb@"
 
 ; XXX does anything point to this?
-Unknown4445D: ; 4045d (10:445d)
+Unknown_4045D: ; 4045d (10:445d)
 	db $54,$50
 
 ; horizontal line that divides the pokedex text description from the rest of the data
