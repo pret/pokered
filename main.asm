@@ -14049,7 +14049,7 @@ MainMenu: ; 5af2 (1:5af2)
 	call TextBoxBorder
 	FuncCoord 2,2
 	ld hl,Coord
-	ld de,Unknown_5d7e ; $5d7e
+	ld de,ContinueText ; $5d7e
 	call PlaceString
 	jr .next2
 .next1
@@ -14060,7 +14060,7 @@ MainMenu: ; 5af2 (1:5af2)
 	call TextBoxBorder
 	FuncCoord 2,2
 	ld hl,Coord
-	ld de,Unknown_5d87 ; $5d87
+	ld de,NewGameText ; $5d87
 	call PlaceString
 .next2
 	ld hl,$D730
@@ -14161,7 +14161,7 @@ Func_5c0a: ; 5c0a (1:5c0a)
 	call UpdateSprites
 	FuncCoord 7, 7 ; $c433
 	ld hl, Coord
-	ld de, Unknown_5d97 ; $5d97
+	ld de, TradeCenterText ; $5d97
 	call PlaceString
 	xor a
 	ld [$cd37], a
@@ -14344,14 +14344,14 @@ Func_5d5f: ; 5d5f (1:5d5f)
 	ret nz
 	jp EnterMap
 
-Unknown_5d7e: ; 5d7e (1:5d7e)
-INCBIN "baserom.gbc",$5d7e,$5d87 - $5d7e
+ContinueText: ; 5d7e (1:5d7e)
+	db "CONTINUE",$4e
 
-Unknown_5d87: ; 5d87 (1:5d87)
-INCBIN "baserom.gbc",$5d87,$5d97 - $5d87
+NewGameText: ; 5d87 (1:5d87)
+	db "NEW GAME",$4e,"OPTION@"
 
-Unknown_5d97: ; 5d97 (1:5d97)
-INCBIN "baserom.gbc",$5d97,$5db5 - $5d97
+TradeCenterText: ; 5d97 (1:5d97)
+	db "TRADE CENTER",$4e,"COLOSSEUM",$4e,"CANCEL@"
 
 ; known jump sources: 5bb2 (1:5bb2)
 Func_5db5: ; 5db5 (1:5db5)
