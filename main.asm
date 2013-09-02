@@ -42208,7 +42208,7 @@ UnnamedText_1ec7f: ; 1ec7f (7:6c7f)
 	db $50
 ; 0x1ec7f + 5 bytes
 
-INCBIN "baserom.gbc",$1ec84,$1ecaa - $1ec84
+	db "EEVEE",$4e,"FLAREON",$4e,"JOLTEON",$4e,"VAPOREON",$4e,"CANCEL@"
 
 UnnamedText_1ecaa: ; 1ecaa (7:6caa)
 	TX_FAR _UnnamedText_1ecaa
