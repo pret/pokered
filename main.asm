@@ -13314,7 +13314,7 @@ Func_5317: ; 5317 (1:5317)
 	db "PLEASE WAIT!@"
 
 Func_551c:
-	ld hl, PointerTable ; $5a5b
+	ld hl, PointerTable5a5b ; $5a5b
 	ld b, $0
 	ld a, [$cc38]
 	cp $ff
@@ -13908,7 +13908,7 @@ TradeCompleted:
 TradeCanceled:
 	db "Too bad! The trade",$4E,"was canceled!@"
 
-PointerTable: ; 5a5b (1:5a5b)
+PointerTable5a5b: ; 5a5b (1:5a5b)
 	dw Func_5530
 	dw Func_5849
 
@@ -94746,7 +94746,67 @@ Func_5dbd9: ; 5dbd9 (17:5bd9)
 	ld [$FF00+$b0], a
 	ret
 
-INCBIN "baserom.gbc",$5dc1a,$5dc9e - $5dc1a
+Unknown_5dc1a: ; 5dc1a (17:5c1a)
+	call EnableAutoTextBoxDrawing
+	ld a, $1
+	ld [$cc3c], a
+	ld a, [$cd3d]
+	call Func_3ef5
+	ret
+
+INCBIN "baserom.gbc",$5dc29,$5dc2a - $5dc29
+
+Unknown_5dc2a: ; 5dc2a (17:5c2a)
+	call SaveScreenTilesToBuffer1
+	ld hl, UnnamedText_5dc9e
+	call PrintText
+	xor a
+	ld [$d07c], a
+	ld [$cc26], a
+	ld [$cc2a], a
+	ld a, $3
+	ld [$cc29], a
+	ld a, $3
+	ld [$cc28], a
+	ld a, $2
+	ld [$cc24], a
+	ld a, $1
+	ld [$cc25], a
+.asm_5c51
+	ld hl, $d730
+	set 6, [hl]
+	ld hl, $c3a0
+	ld b, $8
+	ld c, $d
+	call TextBoxBorder
+	ld hl, $c3ca
+	ld de, HowToLinkText
+	call PlaceString
+	ld hl, UnnamedText_5dca3
+	call PrintText
+	call HandleMenuInput
+	bit 1, a
+	jr nz, .asm_5dc93 ; 0x5dc74 $1d
+	ld a, [$cc26]
+	cp $3
+	jr z, .asm_5dc93 ; 0x5dc7b $16
+	ld hl, $d730
+	res 6, [hl]
+	ld hl, PointerTable5cd8
+	add a
+	ld d, $0
+	ld e, a
+	add hl, de
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	call PrintText
+	jp .asm_5c51
+.asm_5dc93
+	ld hl, $d730
+	res 6, [hl]
+	call LoadScreenTilesFromBuffer1
+	jp TextScriptEnd
 
 UnnamedText_5dc9e: ; 5dc9e (17:5c9e)
 	TX_FAR _UnnamedText_5dc9e
@@ -94758,7 +94818,13 @@ UnnamedText_5dca3: ; 5dca3 (17:5ca3)
 	db $50
 ; 0x5dca3 + 5 bytes
 
-INCBIN "baserom.gbc",$5dca8,$5dcde - $5dca8
+HowToLinkText: ; 5dca8 (17:5ca8)
+	db "HOW TO LINK",$4e,"COLOSSEUM",$4e,"TRADE CENTER",$4e,"STOP READING@"
+
+PointerTable5cd8: ; 5dcd8 (17:5cd8)
+	dw UnnamedText_5dcde
+	dw UnnamedText_5dce3
+	dw UnnamedText_5dce8
 
 UnnamedText_5dcde: ; 5dcde (17:5cde)
 	TX_FAR _UnnamedText_5dcde
