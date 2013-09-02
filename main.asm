@@ -103785,7 +103785,7 @@ Func_7393f: ; 7393f (1c:793f)
 	call TextBoxBorder
 	ld hl, $fff6
 	set 2, [hl]
-	ld de, Unknown_739d9 ; $79d9
+	ld de, BoxNumbersText ; $79d9
 	FuncCoord 13, 1 ; $c3c1
 	ld hl, Coord
 	call PlaceString
@@ -103808,7 +103808,7 @@ Func_7393f: ; 7393f (1c:793f)
 	ld [Coord], a
 	FuncCoord 1, 2 ; $c3c9
 	ld hl, Coord
-	ld de, Unknown_73a21 ; $7a21
+	ld de, BoxNoText ; $7a21
 	call PlaceString
 	call Func_73a84
 	FuncCoord 18, 1 ; $c3c6
@@ -103837,11 +103837,22 @@ UnnamedText_739d4: ; 739d4 (1c:79d4)
 	db $50
 ; 0x739d4 + 5 bytes
 
-Unknown_739d9: ; 739d9 (1c:79d9)
-INCBIN "baserom.gbc",$739d9,$73a21 - $739d9
+BoxNumbersText: ; 739d9 (1c:79d9)
+	db "BOX 1",$4e
+	db "BOX 2",$4e
+	db "BOX 3",$4e
+	db "BOX 4",$4e
+	db "BOX 5",$4e
+	db "BOX 6",$4e
+	db "BOX 7",$4e
+	db "BOX 8",$4e
+	db "BOX 9",$4e
+	db "BOX10",$4e
+	db "BOX11",$4e
+	db "BOX12@"
 
-Unknown_73a21: ; 73a21 (1c:7a21)
-INCBIN "baserom.gbc",$73a21,$73a29 - $73a21
+BoxNoText: ; 73a21 (1c:7a21)
+	db "BOX No.@"
 
 ; known jump sources: 738b4 (1c:78b4)
 Func_73a29: ; 73a29 (1c:7a29)
