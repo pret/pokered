@@ -99396,7 +99396,7 @@ Func_70377: ; 70377 (1c:4377)
 	call PlaceString
 	FuncCoord 1, 6 ; $c419
 	ld hl, Coord
-	ld de, Unknown_703ea ; $43ea
+	ld de, HoFPlayTimeText ; $43ea
 	call PlaceString
 	FuncCoord 5, 7 ; $c431
 	ld hl, Coord
@@ -99410,7 +99410,7 @@ Func_70377: ; 70377 (1c:4377)
 	call PrintNumber
 	FuncCoord 1, 9 ; $c455
 	ld hl, Coord
-	ld de, Unknown_703f4 ; $43f4
+	ld de, HoFMoneyText ; $43f4
 	call PlaceString
 	FuncCoord 4, 10 ; $c46c
 	ld hl, Coord
@@ -99429,11 +99429,11 @@ Func_703e2: ; 703e2 (1c:43e2)
 	ld c, $78
 	jp DelayFrames
 
-Unknown_703ea: ; 703ea (1c:43ea)
-INCBIN "baserom.gbc",$703ea,$703f4 - $703ea
+HoFPlayTimeText: ; 703ea (1c:43ea)
+	db "PLAY TIME@"
 
-Unknown_703f4: ; 703f4 (1c:43f4)
-INCBIN "baserom.gbc",$703f4,$703fa - $703f4
+HoFMoneyText: ; 703f4 (1c:43f4)
+	db "MONEY@"
 
 UnnamedText_703fa: ; 703fa (1c:43fa)
 	TX_FAR _UnnamedText_703fa
