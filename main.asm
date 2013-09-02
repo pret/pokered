@@ -92542,15 +92542,15 @@ VermilionGymScript: ; 5ca26 (17:4a26)
 ; 0x5ca4c
 
 VermilionGymScript_Unknown5ca4c: ; 5ca4c (17:4a4c)
-	ld hl, Unknown_5ca55 ; $4a55
-	ld de, Unknown_5ca64 ; $4a64
+	ld hl, VermilionGymCity ; $4a55
+	ld de, VermilionGymLeader ; $4a64
 	jp LoadGymLeaderAndCityName
 
-Unknown_5ca55: ; 5ca55 (17:4a55)
-INCBIN "baserom.gbc",$5ca55,$5ca64 - $5ca55
+VermilionGymCity: ; 5ca55 (17:4a55)
+	db "VERMILION CITY@"
 
-Unknown_5ca64: ; 5ca64 (17:4a64)
-INCBIN "baserom.gbc",$5ca64,$5ca6d - $5ca64
+VermilionGymLeader: ; 5ca64 (17:4a64)
+	db "LT.SURGE@"
 
 ; known jump sources: 5ca36 (17:4a36)
 Func_5ca6d: ; 5ca6d (17:4a6d)
