@@ -15650,10 +15650,10 @@ Func_68f8: ; 68f8 (1:68f8)
 	FuncCoord 0, 1 ; $c3b4
 	ld hl, Coord
 	ld a, [$d07d]
-	ld de, Unknown_693f ; $693f
+	ld de, YourTextString ; $693f
 	and a
 	jr z, .asm_6934
-	ld de, Unknown_6945 ; $6945
+	ld de, RivalsTextString ; $6945
 	dec a
 	jr z, .asm_6934
 	ld a, [$cf91]
@@ -15673,27 +15673,27 @@ Func_68f8: ; 68f8 (1:68f8)
 	ld [hl], $c9
 	FuncCoord 1, 3 ; $c3dd
 	ld hl, Coord
-	ld de, Unknown_6953 ; $6953
+	ld de, NicknameTextString ; $6953
 	jr .asm_693c
 .asm_6934
 	call PlaceString
 	ld l, c
 	ld h, b
-	ld de, Unknown_694d ; $694d
+	ld de, NameTextString ; $694d
 .asm_693c
 	jp PlaceString
 
-Unknown_693f: ; 693f (1:693f)
-INCBIN "baserom.gbc",$693f,$6945 - $693f
+YourTextString: ; 693f (1:693f)
+	db "YOUR @"
 
-Unknown_6945: ; 6945 (1:6945)
-INCBIN "baserom.gbc",$6945,$694d - $6945
+RivalsTextString: ; 6945 (1:6945)
+	db "RIVAL's @"
 
-Unknown_694d: ; 694d (1:694d)
-INCBIN "baserom.gbc",$694d,$6953 - $694d
+NameTextString: ; 694d (1:694d)
+	db "NAME?@"
 
-Unknown_6953: ; 6953 (1:6953)
-INCBIN "baserom.gbc",$6953,$695d - $6953
+NicknameTextString: ; 6953 (1:6953)
+	db "NICKNAME?@"
 
 ; known jump sources: 619e (1:619e)
 Func_695d: ; 695d (1:695d)
