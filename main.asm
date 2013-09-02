@@ -101222,7 +101222,7 @@ Func_711ef: ; 711ef (1c:51ef)
 	call TextBoxBorder
 	FuncCoord 2, 9 ; $c456
 	ld hl, Coord
-	ld de, Unknown_7124a ; $524a
+	ld de, AreaUnknownText ; $524a
 	call PlaceString
 	jr .asm_7123e
 .asm_71236
@@ -101235,8 +101235,8 @@ Func_711ef: ; 711ef (1c:51ef)
 	ld bc, $a0
 	jp CopyData
 
-Unknown_7124a: ; 7124a (1c:524a)
-INCBIN "baserom.gbc",$7124a,$71258 - $7124a
+AreaUnknownText: ; 7124a (1c:524a)
+	db " AREA UNKNOWN@"
 
 ; known jump sources: 70e9a (1c:4e9a), 711d2 (1c:51d2), 71212 (1c:5212)
 Func_71258: ; 71258 (1c:5258)
