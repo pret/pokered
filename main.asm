@@ -42719,16 +42719,16 @@ Func_2174b: ; 2174b (8:574b)
 	call TextBoxBorder
 	ld a, [$ccd3]
 	and a
-	ld de, Unknown_217cb ; $57cb
+	ld de, DepositPCText ; $57cb
 	jr nz, .asm_21761
-	ld de, Unknown_217d3 ; $57d3
+	ld de, WithdrawPCText ; $57d3
 .asm_21761
 	FuncCoord 11, 12 ; $c49b
 	ld hl, Coord
 	call PlaceString
 	FuncCoord 11, 14 ; $c4c3
 	ld hl, Coord
-	ld de, Unknown_217dc ; $57dc
+	ld de, StatsCancelPCText ; $57dc
 	call PlaceString
 	ld hl, W_TOPMENUITEMY ; $cc24
 	ld a, $c
@@ -42783,14 +42783,14 @@ Func_2174b: ; 2174b (8:574b)
 	call LoadGBPal
 	jr .asm_2178f
 
-Unknown_217cb: ; 217cb (8:57cb)
-INCBIN "baserom.gbc",$217cb,$217d3 - $217cb
+DepositPCText: ; 217cb (8:57cb)
+	db "DEPOSIT@"
 
-Unknown_217d3: ; 217d3 (8:57d3)
-INCBIN "baserom.gbc",$217d3,$217dc - $217d3
+WithdrawPCText: ; 217d3 (8:57d3)
+	db "WITHDRAW@"
 
-Unknown_217dc: ; 217dc (8:57dc)
-INCBIN "baserom.gbc",$217dc,$217e9 - $217dc
+StatsCancelPCText: ; 217dc (8:57dc)
+	db "STATS",$4e,"CANCEL@"
 
 UnnamedText_217e9: ; 217e9 (8:57e9)
 	TX_FAR _UnnamedText_217e9
