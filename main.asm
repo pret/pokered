@@ -93301,15 +93301,15 @@ SaffronGymScript: ; 5d00d (17:500d)
 	ret
 ; 0x5d02a
 .extra
-	ld hl, Unknown_5d033 ; $5033
-	ld de, Unknown_5d040 ; $5040
+	ld hl, SaffronGymCity ; $5033
+	ld de, SaffronGymLeader ; $5040
 	jp LoadGymLeaderAndCityName
 
-Unknown_5d033: ; 5d033 (17:5033)
-INCBIN "baserom.gbc",$5d033,$5d040 - $5d033
+SaffronGymCity: ; 5d033 (17:5033)
+	db "SAFFRON CITY@"
 
-Unknown_5d040: ; 5d040 (17:5040)
-INCBIN "baserom.gbc",$5d040,$5d048 - $5d040
+SaffronGymLeader: ; 5d040 (17:5040)
+	db "SABRINA@"
 
 ; known jump sources: 5d060 (17:5060), 5d0a8 (17:50a8)
 Func_5d048: ; 5d048 (17:5048)
