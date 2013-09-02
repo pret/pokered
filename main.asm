@@ -13955,7 +13955,8 @@ Func_5a5f: ; 5a5f (1:5a5f)
 Func_5aaf: ; 5aaf (1:5aaf)
 	ret
 
-INCBIN "baserom.gbc",$5ab0,$5ab3 - $5ab0
+Unknown_5ab0:
+	call Load16BitRegisters
 
 ; known jump sources: 4c17 (1:4c17), 5332 (1:5332), 75b4 (1:75b4)
 Func_5ab3: ; 5ab3 (1:5ab3)
