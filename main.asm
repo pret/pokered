@@ -45933,7 +45933,10 @@ UnnamedText_37673: ; 37673 (d:7673)
 	db $50
 ; 0x37673 + 5 bytes
 
-INCBIN "baserom.gbc",$37678,$3769d - $37678
+INCBIN "baserom.gbc",$37678,$37690 - $37678
+
+SlotRewardValues:
+	db "300@100@8@15@"
 
 UnnamedText_3769d: ; 3769d (d:769d)
 	TX_FAR _UnnamedText_3769d
