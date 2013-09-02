@@ -13634,7 +13634,12 @@ CancelTextString:
 	db "CANCEL@"
 
 Func_57c7:
-INCBIN "baserom.gbc",$57c7,$57d6 - $57c7
+	ld a, [$cc3d]
+	ld hl, $c455
+	ld bc, $0014
+	call AddNTimes
+	ld [hl], $ec
+	ret
 
 Func_57d6:
 INCBIN "baserom.gbc",$57d6,$57f2 - $57d6
