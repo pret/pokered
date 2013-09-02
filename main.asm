@@ -11017,7 +11017,7 @@ ENDC
 	ld [hl], a
 	FuncCoord 2, 17 ; $c4f6
 	ld hl, Coord
-	ld de, .unknown_437f ; $437f
+	ld de, .titlescreenTilemap ; $437f
 	ld b, $10
 .asm_4377
 	ld a, [de]
@@ -11027,8 +11027,8 @@ ENDC
 	jr nz, .asm_4377
 	jr .asm_438f
 
-.unknown_437f ; 437f (1:437f)
-INCBIN "baserom.gbc",$437f,$438f - $437f
+.titlescreenTilemap ; 437f (1:437f)
+db $41,$42,$43,$42,$44,$42,$45,$46,$47,$48,$49,$4A,$4B,$4C,$4D,$4E ; ©'95.'96.'98 GAME FREAK inc.
 
 .asm_438f
 	call SaveScreenTilesToBuffer2
@@ -11283,11 +11283,13 @@ Func_4541: ; 4541 (1:4541)
 	call CopyVideoData
 	FuncCoord 2, 7 ; $c42e
 	ld hl, Coord
-	ld de, Unknown_4556 ; $4556
+	ld de, CopyrightTextString ; $4556
 	jp PlaceString
 
-Unknown_4556: ; 4556 (1:4556)
-INCBIN "baserom.gbc",$4556,$4588 - $4556
+CopyrightTextString: ; 4556 (1:4556)
+	db $60,$61,$62,$61,$63,$61,$64,$7F,$65,$66,$67,$68,$69,$6A,$4E             ; ©'95.'96.'98 Nintendo
+	db $60,$61,$62,$61,$63,$61,$64,$7F,$6B,$6C,$6D,$6E,$6F,$70,$71,$72,$4E     ; ©'95.'96.'98 Creatures inc.
+	db $60,$61,$62,$61,$63,$61,$64,$7F,$73,$74,$75,$76,$77,$78,$79,$7A,$7B,"@" ; ©'95.'96.'98 GAME FREAK inc.
 
 TitleMons: ; 4588 (1:4588)
 ; mons on the title screen are randomly chosen from here
@@ -11835,13 +11837,13 @@ Func_4c05: ; 4c05 (1:4c05)
 .asm_4c1a
 	FuncCoord 4, 11 ; $c480
 	ld hl, Coord
-	ld de, Unknown_4c28 ; $4c28
+	ld de, WaitingText ; $4c28
 	call PlaceString
 	ld c, $32
 	jp DelayFrames
 
-Unknown_4c28: ; 4c28 (1:4c28)
-INCBIN "baserom.gbc",$4c28,$4c34 - $4c28
+WaitingText: ; 4c28 (1:4c28)
+	db "Waiting...!@"
 
 ; known jump sources: 2438 (0:2438)
 _UpdateSprites: ; 4c34 (1:4c34)
@@ -13039,7 +13041,7 @@ Func_5317: ; 5317 (1:5317)
 	call Func_5ab3
 	FuncCoord 4, 10 ; $c46c
 	ld hl, Coord
-	ld de, .unknown_550f ; $550f
+	ld de, .pleaseWait ; $550f
 	call PlaceString
 	ld hl, W_NUMHITS ; $d074
 	xor a
@@ -13306,13 +13308,13 @@ Func_5317: ; 5317 (1:5317)
 	ld c, $1f
 	ld a, $d9
 	call PlayMusic
-	jr .asm_551c
+	jr Func_551c
 
-.unknown_550f: ; 550f (1:550f)
-INCBIN "baserom.gbc",$550f,$551c - $550f
+.pleaseWait: ; 550f (1:550f)
+	db "PLEASE WAIT!@"
 
-.asm_551c
-	ld hl, Unknown_5a5b ; $5a5b
+Func_551c:
+	ld hl, PointerTable5a5b ; $5a5b
 	ld b, $0
 	ld a, [$cc38]
 	cp $ff
@@ -13324,8 +13326,275 @@ INCBIN "baserom.gbc",$550f,$551c - $550f
 	ld h, [hl]
 	ld l, a
 	jp [hl]
-
-INCBIN "baserom.gbc",$5530,$577d - $5530
+	
+Func_5530
+	call ClearScreen
+	call Func_5ae6
+	call Func_57f2
+	call Func_57a2
+	xor a
+	ld hl, $cc3d
+	ld [hli], a
+	ld [hli], a
+	ld [hli], a
+	ld [hl], a
+	ld [$cc37], a
+	ld [$cc26], a
+	ld [$cc2a], a
+	ld [$cc34], a
+	inc a
+	ld [$cc42], a
+	jp .asm_55dc
+.asm_5557
+	xor a
+	ld [$cc37], a
+	inc a
+	ld [$cc49], a
+	ld a, $a1
+	ld [$cc29], a
+	ld a, [$d89c]
+	ld [$cc28], a
+	ld a, $9
+	ld [$cc24], a
+	ld a, $1
+	ld [$cc25], a
+.asm_5574
+	ld hl, $fff6
+	set 1, [hl]
+	call HandleMenuInput
+	ld hl, $fff6
+	res 1, [hl]
+	and a
+	jp z, .asm_565b
+	bit 0, a
+	jr z, .asm_55b0 ; 0x5587 $27
+	ld a, [$cc28]
+	ld c, a
+	ld a, [$cc26]
+	cp c
+	jr c, .asm_559a ; 0x5591 $7
+	ld a, [$cc28]
+	dec a
+	ld [$cc26], a
+.asm_559a
+	ld a, $1
+	ld [$d11b], a
+	ld hl, Func_39bd5
+	ld b, $e
+	call Bankswitch
+	ld hl, $d8a4
+	call Func_57d6
+	jp .asm_565b
+.asm_55b0
+	bit 5, a
+	jr z, .asm_55d4 ; 0x55b2 $20
+	xor a
+	ld [$cc49], a
+	ld a, [$cc30]
+	ld l, a
+	ld a, [$cc31]
+	ld h, a
+	ld a, [$cc27]
+	ld [hl], a
+	ld a, [$cc26]
+	ld b, a
+	ld a, [$d163]
+	dec a
+	cp b
+	jr nc, .asm_55dc ; 0x55cd $d
+	ld [$cc26], a
+	jr .asm_55dc ; 0x55d2 $8
+.asm_55d4
+	bit 7, a
+	jp z, .asm_565b
+	jp .asm_572f
+.asm_55dc
+	xor a
+	ld [$cc49], a
+	ld [$cc37], a
+	ld a, $91
+	ld [$cc29], a
+	ld a, [$d163]
+	ld [$cc28], a
+	ld a, $1
+	ld [$cc24], a
+	ld a, $1
+	ld [$cc25], a
+	ld hl, $c3b5
+	ld bc, $0601
+	call ClearScreenArea
+.asm_5601
+	ld hl, $fff6
+	set 1, [hl]
+	call HandleMenuInput
+	ld hl, $fff6
+	res 1, [hl]
+	and a
+	jr nz, .asm_5614 ; 0x560f $3
+	jp .asm_565b
+.asm_5614
+	bit 0, a
+	jr z, .asm_562e ; 0x5616 $16
+	jp .asm_5665
+	ld a, $4
+	ld [$d11b], a
+	ld hl, Func_39bd5
+	ld b, $e
+	call Bankswitch
+	call Func_57d6
+	jp .asm_565b
+.asm_562e
+	bit 4, a
+	jr z, .asm_5654 ; 0x5630 $22
+	ld a, $1
+	ld [$cc49], a
+	ld a, [$cc30]
+	ld l, a
+	ld a, [$cc31]
+	ld h, a
+	ld a, [$cc27]
+	ld [hl], a
+	ld a, [$cc26]
+	ld b, a
+	ld a, [$d89c]
+	dec a
+	cp b
+	jr nc, .asm_5651 ; 0x564c $3
+	ld [$cc26], a
+.asm_5651
+	jp .asm_5557
+.asm_5654
+	bit 7, a
+	jr z, .asm_565b ; 0x5656 $3
+	jp .asm_572f
+.asm_565b
+	ld a, [$cc49]
+	and a
+	jp z, .asm_5601
+	jp .asm_5574
+.asm_5665
+	call SaveScreenTilesToBuffer1
+	call PlaceUnfilledArrowMenuCursor
+	ld a, [$cc28]
+	ld c, a
+	ld a, [$cc26]
+	cp c
+	jr c, .asm_5679 ; 0x5673 $4
+	ld a, [$cc28]
+	dec a
+.asm_5679
+	push af
+	ld hl, $c4b8
+	ld b, $2
+	ld c, $12
+	call Func_5ab3
+	ld hl, $c4e2
+	ld de, .statsTrade
+	call PlaceString
+	xor a
+	ld [$cc26], a
+	ld [$cc2a], a
+	ld [$cc34], a
+	ld [$cc28], a
+	ld a, $10
+	ld [$cc24], a
+.asm_569f
+	ld a, $7f
+	ld [$c4eb], a
+	ld a, $13
+	ld [$cc29], a
+	ld a, $1
+	ld [$cc25], a
+	call HandleMenuInput
+	bit 4, a
+	jr nz, .asm_56c3 ; 0x56b3 $e
+	bit 1, a
+	jr z, .asm_56df ; 0x56b7 $26
+.asm_56b9
+	pop af
+	ld [$cc26], a
+	call LoadScreenTilesFromBuffer1
+	jp .asm_55dc
+.asm_56c3
+	ld a, $7f
+	ld [$c4e1], a
+	ld a, $23
+	ld [$cc29], a
+	ld a, $b
+	ld [$cc25], a
+	call HandleMenuInput
+	bit 5, a
+	jr nz, .asm_569f ; 0x56d7 $c6
+	bit 1, a
+	jr nz, .asm_56b9 ; 0x56db $dc
+	jr .asm_56f9 ; 0x56dd $1a
+.asm_56df
+	pop af
+	ld [$cc26], a
+	ld a, $4
+	ld [$d11b], a
+	ld hl, Func_39bd5
+	ld b, $e
+	call Bankswitch
+	call Func_57d6
+	call LoadScreenTilesFromBuffer1
+	jp .asm_55dc
+.asm_56f9
+	call PlaceUnfilledArrowMenuCursor
+	pop af
+	ld [$cc26], a
+	ld [$cd3d], a
+	ld [$cc42], a
+	call Func_226e
+	ld a, [$cc3d]
+	cp $f
+	jp z, Func_551c
+	ld [$cd3e], a
+	call Func_57c7
+	ld a, $1
+	ld [$cc38], a
+	jp Func_551c
+.statsTrade
+	db "STATS     TRADE@"
+.asm_572f
+	ld a, [$cc26]
+	ld b, a
+	ld a, [$cc28]
+	cp b
+	jp nz, .asm_565b
+	ld a, [$cc30]
+	ld l, a
+	ld a, [$cc31]
+	ld h, a
+	ld a, $7f
+	ld [hl], a
+.asm_5745
+	ld a, $ed
+	ld [$c4e1], a
+.asm_574a
+	call GetJoypadStateLowSensitivity
+	ld a, [$ff00+$b5]
+	and a
+	jr z, .asm_574a ; 0x5750 $f8
+	bit 0, a
+	jr nz, .asm_5769 ; 0x5754 $13
+	bit 6, a
+	jr z, .asm_574a ; 0x5758 $f0
+	ld a, $7f
+	ld [$c4e1], a
+	ld a, [$d163]
+	dec a
+	ld [$cc26], a
+	jp .asm_55dc
+.asm_5769
+	ld a, $ec
+	ld [$c4e1], a
+	ld a, $f
+	ld [$cc42], a
+	call Func_226e
+	ld a, [$cc3d]
+	cp $f
+	jr nz, .asm_5745 ; 0x577b $c8
 
 ; known jump sources: 5503 (1:5503)
 Func_577d: ; 577d (1:577d)
@@ -13349,17 +13618,299 @@ Func_577d: ; 577d (1:577d)
 	call GBFadeIn2
 	ret
 
-INCBIN "baserom.gbc",$57a2,$5a24 - $57a2
+Func_57a2:
+	ld hl, $c4d7
+	ld a, $7e
+	ld bc, $0031
+	call FillMemory
+	ld hl, $c4cc
+	ld b, $1
+	ld c, $9
+	call Func_5ab3
+	ld hl, $c4e2
+	ld de, CancelTextString
+	jp PlaceString
+	
+CancelTextString:
+	db "CANCEL@"
+
+Func_57c7:
+	ld a, [$cc3d]
+	ld hl, $c455
+	ld bc, $0014
+	call AddNTimes
+	ld [hl], $ec
+	ret
+
+Func_57d6:
+	ld a, [$cc26]
+	ld [$cf92], a
+	ld a, $36
+	call Predef
+	ld a, $37
+	call Predef
+	call GBPalNormal
+	call Func_5ae6
+	call Func_57f2
+	jp Func_57a2
+
+Func_57f2:
+	ld hl, $c3a0
+	ld b, $6
+	ld c, $12
+	call Func_5ab3
+	ld hl, $c440
+	ld b, $6
+	ld c, $12
+	call Func_5ab3
+	ld hl, $c3a5
+	ld de, $d158
+	call PlaceString
+	ld hl, $c445
+	ld de, $d887
+	call PlaceString
+	ld hl, $c3b6
+	ld de, $d164
+	call $5827
+	ld hl, $c456
+	ld de, $d89d
+	ld c, $0
+.asm_5829
+	ld a, [de]
+	cp $ff
+	ret z
+	ld [$d11e], a
+	push bc
+	push hl
+	push de
+	push hl
+	ld a, c
+	ld [$ff00+$95], a
+	call GetMonName
+	pop hl
+	call PlaceString
+	pop de
+	inc de
+	pop hl
+	ld bc, $0014
+	add hl, bc
+	pop bc
+	inc c
+	jr .asm_5829 ; 0x5847 $e0
+
+Func_5849:
+	ld c, $64
+	call DelayFrames
+	xor a
+	ld [$cc43], a
+	ld [$cc3e], a
+	ld [$cc37], a
+	ld [$cc34], a
+	ld hl, $c490
+	ld b, $4
+	ld c, $12
+	call Func_5ab3
+	ld a, [$cd3d]
+	ld hl, $d164
+	ld c, a
+	ld b, $0
+	add hl, bc
+	ld a, [hl]
+	ld [$d11e], a
+	call GetMonName
+	ld hl, $cd6d
+	ld de, $cd3f
+	ld bc, $000b
+	call CopyData
+	ld a, [$cd3e]
+	ld hl, $d89d
+	ld c, a
+	ld b, $0
+	add hl, bc
+	ld a, [hl]
+	ld [$d11e], a
+	call GetMonName
+	ld hl, SSAnne8AfterBattleText2
+	ld bc, $c4b9
+	call TextCommandProcessor
+	call SaveScreenTilesToBuffer1
+	ld hl, $c436
+	ld bc, $080b
+	ld a, $5
+	ld [$d12c], a
+	ld a, $14
+	ld [$d125], a
+	call DisplayTextBoxID
+	call LoadScreenTilesFromBuffer1
+	ld a, [$cc26]
+	and a
+	jr z, .asm_58d9 ; 0x58b9 $1e
+	ld a, $1
+	ld [$cc42], a
+	ld hl, $c490
+	ld b, $4
+	ld c, $12
+	call Func_5ab3
+	ld hl, $c4b9
+	ld de, TradeCanceled
+	call PlaceString
+	call Func_226e
+	jp Func_5a18
+.asm_58d9
+	ld a, $2
+	ld [$cc42], a
+	call Func_226e
+	ld a, [$cc3d]
+	dec a
+	jr nz, .asm_58fd ; 0x58e5 $16
+	ld hl, $c490
+	ld b, $4
+	ld c, $12
+	call Func_5ab3
+	ld hl, $c4b9
+	ld de, TradeCanceled
+	call PlaceString
+	jp Func_5a18
+.asm_58fd
+	ld a, [$cd3d]
+	ld hl, $d273
+	call SkipFixedLengthTextEntries
+	ld de, $cd41
+	ld bc, $000b
+	call CopyData
+	ld hl, $d16b
+	ld a, [$cd3d]
+	ld bc, $002c
+	call AddNTimes
+	ld bc, $000c
+	add hl, bc
+	ld a, [hli]
+	ld [$cd4c], a
+	ld a, [hl]
+	ld [$cd4d], a
+	ld a, [$cd3e]
+	ld hl, $d9ac
+	call SkipFixedLengthTextEntries
+	ld de, $cd4e
+	ld bc, $000b
+	call CopyData
+	ld hl, $d8a4
+	ld a, [$cd3e]
+	ld bc, $002c
+	call AddNTimes
+	ld bc, $000c
+	add hl, bc
+	ld a, [hli]
+	ld [$cd59], a
+	ld a, [hl]
+	ld [$cd5a], a
+	ld a, [$cd3d]
+	ld [$cf92], a
+	ld hl, $d164
+	ld b, $0
+	ld c, a
+	add hl, bc
+	ld a, [hl]
+	ld [$cd3d], a
+	xor a
+	ld [$cf95], a
+	call RemovePokemon
+	ld a, [$cd3e]
+	ld c, a
+	ld [$cf92], a
+	ld hl, $d89d
+	ld d, $0
+	ld e, a
+	add hl, de
+	ld a, [hl]
+	ld [$cf91], a
+	ld hl, $d8a4
+	ld a, c
+	ld bc, $002c
+	call AddNTimes
+	ld de, $cf98
+	ld bc, $002c
+	call CopyData
+	call AddEnemyMonToPlayerParty
+	ld a, [$d163]
+	dec a
+	ld [$cf92], a
+	ld a, $1
+	ld [$ccd4], a
+	ld a, [$cd3e]
+	ld hl, $d89d
+	ld b, $0
+	ld c, a
+	add hl, bc
+	ld a, [hl]
+	ld [$cd3e], a
+	ld a, $a
+	ld [$cfc7], a
+	ld a, $2
+	ld [$c0f0], a
+	ld a, $e5
+	ld [$c0ee], a
+	call PlaySound
+	ld c, $64
+	call DelayFrames
+	call ClearScreen
+	call LoadHpBarAndStatusTilePatterns
+	xor a
+	ld [$cc5b], a
+	ld a, [$ff00+$aa]
+	cp $1
+	jr z, .asm_59d9 ; 0x59d0 $7
+	ld a, $38
+	call Predef
+	jr .asm_59de ; 0x59d7 $5
+.asm_59d9
+	ld a, $2f
+	call Predef
+.asm_59de
+	ld hl, $6d0e
+	ld b, $e
+	call Bankswitch
+	call ClearScreen
+	call Func_5ae6
+	call Func_226e
+	ld c, $28
+	call DelayFrames
+	ld hl, $c490
+	ld b, $4
+	ld c, $12
+	call Func_5ab3
+	ld hl, $c4b9
+	ld de, TradeCompleted
+	call PlaceString
+	ld a, $50
+	call Predef
+	ld c, $32
+	call DelayFrames
+	xor a
+	ld [$cc38], a
+	jp $5345
+
+Func_5a18:
+	ld c, $64
+	call DelayFrames
+	xor a
+	ld [$cc38], a
+	jp $551c
 
 SSAnne8AfterBattleText2: ; 5a24 (1:5a24)
 	TX_FAR _SSAnne8AfterBattleText2
 	db $50
 ; 0x5a24 + 5 bytes
 
-INCBIN "baserom.gbc",$5a29,$5a5b - $5a29
+TradeCompleted:
+	db "Trade completed!@"
 
-Unknown_5a5b: ; 5a5b (1:5a5b)
-INCBIN "baserom.gbc",$5a5b,$5a5f - $5a5b
+TradeCanceled:
+	db "Too bad! The trade",$4E,"was canceled!@"
+
+PointerTable5a5b: ; 5a5b (1:5a5b)
+	dw Func_5530
+	dw Func_5849
 
 ; known jump sources: 3888 (0:3888)
 Func_5a5f: ; 5a5f (1:5a5f)
@@ -13404,7 +13955,8 @@ Func_5a5f: ; 5a5f (1:5a5f)
 Func_5aaf: ; 5aaf (1:5aaf)
 	ret
 
-INCBIN "baserom.gbc",$5ab0,$5ab3 - $5ab0
+Unknown_5ab0:
+	call Load16BitRegisters
 
 ; known jump sources: 4c17 (1:4c17), 5332 (1:5332), 75b4 (1:75b4)
 Func_5ab3: ; 5ab3 (1:5ab3)
@@ -13497,7 +14049,7 @@ MainMenu: ; 5af2 (1:5af2)
 	call TextBoxBorder
 	FuncCoord 2,2
 	ld hl,Coord
-	ld de,Unknown_5d7e ; $5d7e
+	ld de,ContinueText ; $5d7e
 	call PlaceString
 	jr .next2
 .next1
@@ -13508,7 +14060,7 @@ MainMenu: ; 5af2 (1:5af2)
 	call TextBoxBorder
 	FuncCoord 2,2
 	ld hl,Coord
-	ld de,Unknown_5d87 ; $5d87
+	ld de,NewGameText ; $5d87
 	call PlaceString
 .next2
 	ld hl,$D730
@@ -13609,7 +14161,7 @@ Func_5c0a: ; 5c0a (1:5c0a)
 	call UpdateSprites
 	FuncCoord 7, 7 ; $c433
 	ld hl, Coord
-	ld de, Unknown_5d97 ; $5d97
+	ld de, TradeCenterText ; $5d97
 	call PlaceString
 	xor a
 	ld [$cd37], a
@@ -13792,14 +14344,14 @@ Func_5d5f: ; 5d5f (1:5d5f)
 	ret nz
 	jp EnterMap
 
-Unknown_5d7e: ; 5d7e (1:5d7e)
-INCBIN "baserom.gbc",$5d7e,$5d87 - $5d7e
+ContinueText: ; 5d7e (1:5d7e)
+	db "CONTINUE",$4e
 
-Unknown_5d87: ; 5d87 (1:5d87)
-INCBIN "baserom.gbc",$5d87,$5d97 - $5d87
+NewGameText: ; 5d87 (1:5d87)
+	db "NEW GAME",$4e,"OPTION@"
 
-Unknown_5d97: ; 5d97 (1:5d97)
-INCBIN "baserom.gbc",$5d97,$5db5 - $5d97
+TradeCenterText: ; 5d97 (1:5d97)
+	db "TRADE CENTER",$4e,"COLOSSEUM",$4e,"CANCEL@"
 
 ; known jump sources: 5bb2 (1:5bb2)
 Func_5db5: ; 5db5 (1:5db5)
@@ -13812,7 +14364,7 @@ Func_5db5: ; 5db5 (1:5db5)
 	call TextBoxBorder
 	FuncCoord 5, 9 ; $c459
 	ld hl, Coord
-	ld de, Unknown_5e6a ; $5e6a
+	ld de, SaveScreenInfoText ; $5e6a
 	call PlaceString
 	FuncCoord 12, 9 ; $c460
 	ld hl, Coord
@@ -13867,8 +14419,11 @@ Func_5e55: ; 5e55 (1:5e55)
 	ld bc, $8102
 	jp PrintNumber
 
-Unknown_5e6a: ; 5e6a (1:5e6a)
-INCBIN "baserom.gbc",$5e6a,$5e8a - $5e6a
+SaveScreenInfoText: ; 5e6a (1:5e6a)
+	db "PLAYER",$4e
+	db "BADGES    ",$4e
+	db "#DEX    ",$4e
+	db "TIME@"
 
 DisplayOptionMenu: ; 5e8a (1:5e8a)
 	FuncCoord 0,0
@@ -14968,9 +15523,9 @@ Func_676f: ; 676f (1:676f)
 	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
 	ld a, [$ceeb]
 	and a
-	ld de, Unknown_679e ; $679e
+	ld de, LowerCaseAlphabet ; $679e
 	jr nz, .asm_677e
-	ld de, Unknown_67d6 ; $67d6
+	ld de, UpperCaseAlphabet ; $67d6
 .asm_677e
 	FuncCoord 2, 5 ; $c406
 	ld hl, Coord
@@ -14994,11 +15549,11 @@ Func_676f: ; 676f (1:676f)
 	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
 	jp Delay3
 
-Unknown_679e: ; 679e (1:679e)
-INCBIN "baserom.gbc",$679e,$67d6 - $679e
+LowerCaseAlphabet: ; 679e (1:679e)
+	db "abcdefghijklmnopqrstuvwxyz ×():;[]",$e1,$e2,"-?!♂♀/",$f2,",¥UPPER CASE@"
 
-Unknown_67d6: ; 67d6 (1:67d6)
-INCBIN "baserom.gbc",$67d6,$680e - $67d6
+UpperCaseAlphabet: ; 67d6 (1:67d6)
+	db "ABCDEFGHIJKLMNOPQRSTUVWXYZ ×():;[]",$e1,$e2,"-?!♂♀/",$f2,",¥lower case@"
 
 ; known jump sources: 65f9 (1:65f9)
 Func_680e: ; 680e (1:680e)
@@ -15095,10 +15650,10 @@ Func_68f8: ; 68f8 (1:68f8)
 	FuncCoord 0, 1 ; $c3b4
 	ld hl, Coord
 	ld a, [$d07d]
-	ld de, Unknown_693f ; $693f
+	ld de, YourTextString ; $693f
 	and a
 	jr z, .asm_6934
-	ld de, Unknown_6945 ; $6945
+	ld de, RivalsTextString ; $6945
 	dec a
 	jr z, .asm_6934
 	ld a, [$cf91]
@@ -15118,27 +15673,27 @@ Func_68f8: ; 68f8 (1:68f8)
 	ld [hl], $c9
 	FuncCoord 1, 3 ; $c3dd
 	ld hl, Coord
-	ld de, Unknown_6953 ; $6953
+	ld de, NicknameTextString ; $6953
 	jr .asm_693c
 .asm_6934
 	call PlaceString
 	ld l, c
 	ld h, b
-	ld de, Unknown_694d ; $694d
+	ld de, NameTextString ; $694d
 .asm_693c
 	jp PlaceString
 
-Unknown_693f: ; 693f (1:693f)
-INCBIN "baserom.gbc",$693f,$6945 - $693f
+YourTextString: ; 693f (1:693f)
+	db "YOUR @"
 
-Unknown_6945: ; 6945 (1:6945)
-INCBIN "baserom.gbc",$6945,$694d - $6945
+RivalsTextString: ; 6945 (1:6945)
+	db "RIVAL's @"
 
-Unknown_694d: ; 694d (1:694d)
-INCBIN "baserom.gbc",$694d,$6953 - $694d
+NameTextString: ; 694d (1:694d)
+	db "NAME?@"
 
-Unknown_6953: ; 6953 (1:6953)
-INCBIN "baserom.gbc",$6953,$695d - $6953
+NicknameTextString: ; 6953 (1:6953)
+	db "NICKNAME?@"
 
 ; known jump sources: 619e (1:619e)
 Func_695d: ; 695d (1:695d)
@@ -30945,11 +31500,11 @@ Func_137aa: ; 137aa (4:77aa)
 	call Bankswitch ; indirect jump to Func_372d6 (372d6 (d:72d6))
 	ld a, [$cf0b]
 	cp $1
-	ld de, Unknown_13853 ; $7853
+	ld de, YouWinText ; $7853
 	jr c, .asm_137de
-	ld de, Unknown_1385b ; $785b
+	ld de, YouLoseText ; $785b
 	jr z, .asm_137de
-	ld de, Unknown_13864 ; $7864
+	ld de, DrawText ; $7864
 .asm_137de
 	FuncCoord 6, 8 ; $c446
 	ld hl, Coord
@@ -31009,14 +31564,14 @@ Func_137aa: ; 137aa (4:77aa)
 	ld [$d42f], a
 	ret
 
-Unknown_13853: ; 13853 (4:7853)
-INCBIN "baserom.gbc",$13853,$1385b - $13853
+YouWinText: ; 13853 (4:7853)
+	db "YOU WIN@"
 
-Unknown_1385b: ; 1385b (4:785b)
-INCBIN "baserom.gbc",$1385b,$13864 - $1385b
+YouLoseText: ; 1385b (4:785b)
+	db "YOU LOSE@"
 
-Unknown_13864: ; 13864 (4:7864)
-INCBIN "baserom.gbc",$13864,$1386b - $13864
+DrawText: ; 13864 (4:7864)
+	db "  DRAW@"
 
 UnnamedText_1386b: ; 1386b (4:786b)
 	TX_FAR _UnnamedText_1386b
@@ -41653,14 +42208,20 @@ UnnamedText_1ec7f: ; 1ec7f (7:6c7f)
 	db $50
 ; 0x1ec7f + 5 bytes
 
-INCBIN "baserom.gbc",$1ec84,$1ecaa - $1ec84
+	db "EEVEE",$4e,"FLAREON",$4e,"JOLTEON",$4e,"VAPOREON",$4e,"CANCEL@"
 
 UnnamedText_1ecaa: ; 1ecaa (7:6caa)
 	TX_FAR _UnnamedText_1ecaa
 	db $50
 ; 0x1ecaa + 5 bytes
 
-INCBIN "baserom.gbc",$1ecaf,$1ecbd - $1ecaf
+Unknown_1ecaf
+	ld a, [$c109]
+	cp $4
+	ret nz
+	call EnableAutoTextBoxDrawing
+	ld a, $8
+	jp Func_3ef5
 
 UnnamedText_1ecbd: ; 1ecbd (7:6cbd)
 	TX_FAR _UnnamedText_1ecbd
@@ -41776,12 +42337,12 @@ Func_213c8: ; 213c8 (8:53c8)
 	jr nz, .asm_21414
 	FuncCoord 2, 2 ; $c3ca
 	ld hl, Coord
-	ld de, Unknown_2148b ; $548b
+	ld de, SomeonesPCText ; $548b
 	jr .asm_2141a
 .asm_21414
 	FuncCoord 2, 2 ; $c3ca
 	ld hl, Coord
-	ld de, Unknown_21497 ; $5497
+	ld de, BillsPCText ; $5497
 .asm_2141a
 	call PlaceString
 	FuncCoord 2, 4 ; $c3f2
@@ -41790,14 +42351,14 @@ Func_213c8: ; 213c8 (8:53c8)
 	call PlaceString
 	ld l, c
 	ld h, b
-	ld de, Unknown_214a0 ; $54a0
+	ld de, PlayersPCText ; $54a0
 	call PlaceString
 	ld a, [$d74b]
 	bit 5, a
 	jr z, .asm_21462
 	FuncCoord 2, 6 ; $c41a
 	ld hl, Coord
-	ld de, Unknown_214a5 ; $54a5
+	ld de, OaksPCText ; $54a5
 	call PlaceString
 	ld a, [$d5a2]
 	and a
@@ -41806,23 +42367,23 @@ Func_213c8: ; 213c8 (8:53c8)
 	ld [W_MAXMENUITEMID], a ; $cc28
 	FuncCoord 2, 8 ; $c442
 	ld hl, Coord
-	ld de, Unknown_214b2 ; $54b2
+	ld de, PKMNLeaguePCText ; $54b2
 	call PlaceString
 	FuncCoord 2, 10 ; $c46a
 	ld hl, Coord
-	ld de, Unknown_214ba ; $54ba
+	ld de, LogOffPCText ; $54ba
 	jr .asm_2146d
 .asm_2145a
 	FuncCoord 2, 8 ; $c442
 	ld hl, Coord
-	ld de, Unknown_214ba ; $54ba
+	ld de, LogOffPCText ; $54ba
 	jr .asm_2146d
 .asm_21462
 	ld a, $2
 	ld [W_MAXMENUITEMID], a ; $cc28
 	FuncCoord 2, 6 ; $c41a
 	ld hl, Coord
-	ld de, Unknown_214ba ; $54ba
+	ld de, LogOffPCText ; $54ba
 .asm_2146d
 	call PlaceString
 	ld a, $3
@@ -41838,23 +42399,23 @@ Func_213c8: ; 213c8 (8:53c8)
 	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
 	ret
 
-Unknown_2148b: ; 2148b (8:548b)
-INCBIN "baserom.gbc",$2148b,$21497 - $2148b
+SomeonesPCText: ; 2148b (8:548b)
+	db "SOMEONE's PC@"
 
-Unknown_21497: ; 21497 (8:5497)
-INCBIN "baserom.gbc",$21497,$214a0 - $21497
+BillsPCText: ; 21497 (8:5497)
+	db "BILL's PC@"
 
-Unknown_214a0: ; 214a0 (8:54a0)
-INCBIN "baserom.gbc",$214a0,$214a5 - $214a0
+PlayersPCText: ; 214a0 (8:54a0)
+	db "'s PC@"
 
-Unknown_214a5: ; 214a5 (8:54a5)
-INCBIN "baserom.gbc",$214a5,$214b2 - $214a5
+OaksPCText: ; 214a5 (8:54a5)
+	db "PROF.OAK's PC@"
 
-Unknown_214b2: ; 214b2 (8:54b2)
-INCBIN "baserom.gbc",$214b2,$214ba - $214b2
+PKMNLeaguePCText: ; 214b2 (8:54b2)
+	db $4a,"LEAGUE@"
 
-Unknown_214ba: ; 214ba (8:54ba)
-INCBIN "baserom.gbc",$214ba,$214c2 - $214ba
+LogOffPCText: ; 214ba (8:54ba)
+	db "LOG OFF@"
 
 ; known jump sources: 17f03 (5:7f03)
 Func_214c2: ; 214c2 (8:54c2)
@@ -41890,7 +42451,7 @@ Func_214e8: ; 214e8 (8:54e8)
 	call TextBoxBorder
 	FuncCoord 2, 2 ; $c3ca
 	ld hl, Coord
-	ld de, Unknown_216e1 ; $56e1
+	ld de, BillsPCMenuText ; $56e1
 	call PlaceString
 	ld hl, W_TOPMENUITEMY ; $cc24
 	ld a, $2
@@ -41934,7 +42495,7 @@ Func_214e8: ; 214e8 (8:54e8)
 	ld [Coord], a
 	FuncCoord 10, 16 ; $c4ea
 	ld hl, Coord
-	ld de, Unknown_21713 ; $5713
+	ld de, BoxNoPCText ; $5713
 	call PlaceString
 	ld a, $1
 	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
@@ -42114,11 +42675,11 @@ Func_216be: ; 216be (8:56be)
 	ld [$cc2b], a
 	ret
 
-Unknown_216e1: ; 216e1 (8:56e1)
-INCBIN "baserom.gbc",$216e1,$21713 - $216e1
+BillsPCMenuText: ; 216e1 (8:56e1)
+	db "WITHDRAW ",$4a,$4e,"DEPOSIT ",$4a,$4e,"RELEASE ",$4a,$4e,"CHANGE BOX",$4e,"SEE YA!@"
 
-Unknown_21713: ; 21713 (8:5713)
-INCBIN "baserom.gbc",$21713,$2171b - $21713
+BoxNoPCText: ; 21713 (8:5713)
+	db "BOX No.@"
 
 Func_2171b: ; 2171b (8:571b)
 	ld hl, $d173
@@ -42158,16 +42719,16 @@ Func_2174b: ; 2174b (8:574b)
 	call TextBoxBorder
 	ld a, [$ccd3]
 	and a
-	ld de, Unknown_217cb ; $57cb
+	ld de, DepositPCText ; $57cb
 	jr nz, .asm_21761
-	ld de, Unknown_217d3 ; $57d3
+	ld de, WithdrawPCText ; $57d3
 .asm_21761
 	FuncCoord 11, 12 ; $c49b
 	ld hl, Coord
 	call PlaceString
 	FuncCoord 11, 14 ; $c4c3
 	ld hl, Coord
-	ld de, Unknown_217dc ; $57dc
+	ld de, StatsCancelPCText ; $57dc
 	call PlaceString
 	ld hl, W_TOPMENUITEMY ; $cc24
 	ld a, $c
@@ -42222,14 +42783,14 @@ Func_2174b: ; 2174b (8:574b)
 	call LoadGBPal
 	jr .asm_2178f
 
-Unknown_217cb: ; 217cb (8:57cb)
-INCBIN "baserom.gbc",$217cb,$217d3 - $217cb
+DepositPCText: ; 217cb (8:57cb)
+	db "DEPOSIT@"
 
-Unknown_217d3: ; 217d3 (8:57d3)
-INCBIN "baserom.gbc",$217d3,$217dc - $217d3
+WithdrawPCText: ; 217d3 (8:57d3)
+	db "WITHDRAW@"
 
-Unknown_217dc: ; 217dc (8:57dc)
-INCBIN "baserom.gbc",$217dc,$217e9 - $217dc
+StatsCancelPCText: ; 217dc (8:57dc)
+	db "STATS",$4e,"CANCEL@"
 
 UnnamedText_217e9: ; 217e9 (8:57e9)
 	TX_FAR _UnnamedText_217e9
@@ -45372,7 +45933,10 @@ UnnamedText_37673: ; 37673 (d:7673)
 	db $50
 ; 0x37673 + 5 bytes
 
-INCBIN "baserom.gbc",$37678,$3769d - $37678
+INCBIN "baserom.gbc",$37678,$37690 - $37678
+
+SlotRewardValues:
+	db "300@100@8@15@"
 
 UnnamedText_3769d: ; 3769d (d:769d)
 	TX_FAR _UnnamedText_3769d
@@ -59812,7 +60376,7 @@ Func_3d4b6: ; 3d4b6 (f:54b6)
 	jr nz, .asm_3d4df
 	FuncCoord 1, 10 ; $c469
 	ld hl, Coord
-	ld de, Unknown_3d555 ; $5555
+	ld de, DisabledText ; $5555
 	call PlaceString
 	jr .asm_3d54e
 .asm_3d4df
@@ -59845,7 +60409,7 @@ Func_3d4b6: ; 3d4b6 (f:54b6)
 	ld [$cd6d], a
 	FuncCoord 1, 9 ; $c455
 	ld hl, Coord
-	ld de, Unknown_3d55f ; $555f
+	ld de, TypeText ; $555f
 	call PlaceString
 	FuncCoord 7, 11 ; $c483
 	ld hl, Coord
@@ -59873,11 +60437,11 @@ Func_3d4b6: ; 3d4b6 (f:54b6)
 	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
 	jp Delay3
 
-Unknown_3d555: ; 3d555 (f:5555)
-INCBIN "baserom.gbc",$3d555,$3d55f - $3d555
+DisabledText: ; 3d555 (f:5555)
+	db "disabled!@"
 
-Unknown_3d55f: ; 3d55f (f:555f)
-INCBIN "baserom.gbc",$3d55f,$3d564 - $3d55f
+TypeText: ; 3d55f (f:555f)
+	db "TYPE@"
 
 SelectEnemyMove: ; 3d564 (f:5564)
 	ld a, [W_ISLINKBATTLE]
@@ -64747,7 +65311,7 @@ UnnamedText_3f683: ; 3f683 (f:7683)
 
 ; known jump sources: 3f4cc (f:74cc), 3f62f (f:762f)
 Func_3f688: ; 3f688 (f:7688)
-	ld hl, Unknown_3f69f ; $769f
+	ld hl, StatsTextStrings ; $769f
 	ld c, $50
 .asm_3f68d
 	dec b
@@ -64762,8 +65326,13 @@ Func_3f688: ; 3f688 (f:7688)
 	ld bc, $a
 	jp CopyData
 
-Unknown_3f69f: ; 3f69f (f:769f)
-INCBIN "baserom.gbc",$3f69f,$3f6cb - $3f69f
+StatsTextStrings: ; 3f69f (f:769f)
+	db "ATTACK@"
+	db "DEFENSE@"
+	db "SPEED@"
+	db "SPECIAL@"
+	db "ACCURACY@"
+	db "EVADE@"
 
 Unknown_3f6cb: ; 3f6cb (f:76cb)
 INCBIN "baserom.gbc",$3f6cb,$3f717 - $3f6cb
@@ -65995,7 +66564,7 @@ HeightWeightText: ; 40448 (10:4448)
 	db "HT  ?",$60,"??",$61,$4E,"WT   ???lb@"
 
 ; XXX does anything point to this?
-Unknown4445D: ; 4045d (10:445d)
+Unknown_4045D: ; 4045d (10:445d)
 	db $54,$50
 
 ; horizontal line that divides the pokedex text description from the rest of the data
@@ -74132,15 +74701,15 @@ CeladonGymScript: ; 4890a (12:490a)
 ; 0x48927
 
 CeladonGymScript_Unknown48927: ; 48927 (12:4927)
-	ld hl, Unknown_48930 ; $4930
-	ld de, Unknown_4893d ; $493d
+	ld hl, Gym4CityName ; $4930
+	ld de, Gym4LeaderName ; $493d
 	jp LoadGymLeaderAndCityName
 
-Unknown_48930: ; 48930 (12:4930)
-INCBIN "baserom.gbc",$48930,$4893d - $48930
+Gym4CityName: ; 48930 (12:4930)
+	db "CELADON CITY@"
 
-Unknown_4893d: ; 4893d (12:493d)
-INCBIN "baserom.gbc",$4893d,$48943 - $4893d
+Gym4LeaderName: ; 4893d (12:493d)
+	db "ERIKA@"
 
 ; known jump sources: 4895b (12:495b), 489a3 (12:49a3)
 Func_48943: ; 48943 (12:4943)
@@ -74954,11 +75523,11 @@ Func_48f1e: ; 48f1e (12:4f1e)
 	call ClearScreenArea
 	FuncCoord 12, 2 ; $c3d4
 	ld hl, Coord
-	ld de, Unknown_48f7a ; $4f7a
+	ld de, GameCornerMoneyText ; $4f7a
 	call PlaceString
 	FuncCoord 12, 3 ; $c3e8
 	ld hl, Coord
-	ld de, Unknown_48f85 ; $4f85
+	ld de, GameCornerBlankText1 ; $4f85
 	call PlaceString
 	FuncCoord 12, 3 ; $c3e8
 	ld hl, Coord
@@ -74967,11 +75536,11 @@ Func_48f1e: ; 48f1e (12:4f1e)
 	call PrintBCDNumber
 	FuncCoord 12, 4 ; $c3fc
 	ld hl, Coord
-	ld de, Unknown_48f80 ; $4f80
+	ld de, GameCornerCoinText ; $4f80
 	call PlaceString
 	FuncCoord 12, 5 ; $c410
 	ld hl, Coord
-	ld de, Unknown_48f8d ; $4f8d
+	ld de, GameCornerBlankText2 ; $4f8d
 	call PlaceString
 	FuncCoord 15, 5 ; $c413
 	ld hl, Coord
@@ -74983,17 +75552,17 @@ Func_48f1e: ; 48f1e (12:4f1e)
 	ret
 ; 0x48f7a
 
-Unknown_48f7a: ; 48f7a (12:4f7a)
-INCBIN "baserom.gbc",$48f7a,$48f80 - $48f7a
+GameCornerMoneyText: ; 48f7a (12:4f7a)
+	db "MONEY@"
 
-Unknown_48f80: ; 48f80 (12:4f80)
-INCBIN "baserom.gbc",$48f80,$48f85 - $48f80
+GameCornerCoinText: ; 48f80 (12:4f80)
+	db "COIN@"
 
-Unknown_48f85: ; 48f85 (12:4f85)
-INCBIN "baserom.gbc",$48f85,$48f8d - $48f85
+GameCornerBlankText1: ; 48f85 (12:4f85)
+	db "       @"
 
-Unknown_48f8d: ; 48f8d (12:4f8d)
-INCBIN "baserom.gbc",$48f8d,$48f95 - $48f8d
+GameCornerBlankText2: ; 48f8d (12:4f8d)
+	db "       @"
 
 Has9990Coins: ; 48f95 (12:4f95)
 	ld a, $99
@@ -79040,7 +79609,16 @@ Func_5125d: ; 5125d (14:525d)
 	ret
 
 Unknown_51276: ; 51276 (14:5276)
-INCBIN "baserom.gbc",$51276,$512d8 - $51276
+INCBIN "baserom.gbc",$51276,$51284 - $51276
+
+BadgeList: ; 51284 (14:5284)
+	db "EARTHBADGE@"
+	db "VOLCANOBADGE@"
+	db "MARSHBADGE@"
+	db "SOULBADGE@"
+	db "RAINBOWBADGE@"
+	db "THUNDERBADGE@"
+	db "CASCADEBADGE@"
 
 ; known jump sources: 51365 (14:5365)
 Func_512d8: ; 512d8 (14:52d8)
@@ -85913,7 +86491,7 @@ DisplayDiploma: ; 566e2 (15:66e2)
 	ld bc, $1012
 	ld a, $27
 	call Predef
-	ld hl, Unknown_56784 ; $6784
+	ld hl, DiplomaTextPointersAndCoords ; $6784
 	ld c, $5
 .asm_56715
 	push bc
@@ -85979,8 +86557,32 @@ Func_56777: ; 56777 (15:6777)
 	dec c
 	jr .asm_5677d ; 0x56782 $f9
 
-Unknown_56784: ; 56784 (15:6784)
-INCBIN "baserom.gbc",$56784,$567f9 - $56784
+DiplomaTextPointersAndCoords: ; 56784 (15:6784)
+	dw DiplomaText
+	dw $c3cd
+	dw DiplomaPlayer
+	dw $c3f3
+	dw DiplomaEmptyText
+	dw $c3ff
+	dw DiplomaCongrats
+	dw $c41a
+	dw DiplomaGameFreak
+	dw $c4e9
+
+DiplomaText:
+	db $70,"Diploma",$70,"@"
+	
+DiplomaPlayer:
+	db "Player@"
+	
+DiplomaEmptyText:
+	db "@"
+	
+DiplomaCongrats:
+	db "Congrats! This",$4e,"diploma certifies",$4e,"that you have",$4e,"completed your",$4e,"#DEX.@"
+	
+DiplomaGameFreak:
+	db "GAME FREAK@"
 
 ; known jump sources: 3303 (0:3303)
 Func_567f9: ; 567f9 (15:67f9)
@@ -91010,15 +91612,15 @@ PewterGymScript: ; 5c387 (17:4387)
 ; 0x5c3a4
 
 PewterGymScript_Unknown5c3a4: ; 5c3a4 (17:43a4)
-	ld hl, Unknown_5c3ad ; $43ad
-	ld de, Unknown_5c3b9 ; $43b9
+	ld hl, Gym1CityName ; $43ad
+	ld de, Gym1LeaderName ; $43b9
 	jp LoadGymLeaderAndCityName
 
-Unknown_5c3ad: ; 5c3ad (17:43ad)
-INCBIN "baserom.gbc",$5c3ad,$5c3b9 - $5c3ad
+Gym1CityName: ; 5c3ad (17:43ad)
+	db "PEWTER CITY@"
 
-Unknown_5c3b9: ; 5c3b9 (17:43b9)
-INCBIN "baserom.gbc",$5c3b9,$5c3bf - $5c3b9
+Gym1LeaderName: ; 5c3b9 (17:43b9)
+	db "BROCK@"
 
 ; known jump sources: 5c3d7 (17:43d7), 5c432 (17:4432)
 Func_5c3bf: ; 5c3bf (17:43bf)
@@ -91434,15 +92036,15 @@ CeruleanGymScript: ; 5c6b3 (17:46b3)
 ; 0x5c6d0
 
 CeruleanGymScript_Unknown5c6d0: ; 5c6d0 (17:46d0)
-	ld hl, Unknown_5c6d9 ; $46d9
-	ld de, Unknown_5c6e7 ; $46e7
+	ld hl, Gym2CityName ; $46d9
+	ld de, Gym2LeaderName ; $46e7
 	jp LoadGymLeaderAndCityName
 
-Unknown_5c6d9: ; 5c6d9 (17:46d9)
-INCBIN "baserom.gbc",$5c6d9,$5c6e7 - $5c6d9
+Gym2CityName: ; 5c6d9 (17:46d9)
+	db "CERULEAN CITY@"
 
-Unknown_5c6e7: ; 5c6e7 (17:46e7)
-INCBIN "baserom.gbc",$5c6e7,$5c6ed - $5c6e7
+Gym2LeaderName: ; 5c6e7 (17:46e7)
+	db "MISTY@"
 
 ; known jump sources: 5c705 (17:4705), 5c747 (17:4747)
 Func_5c6ed: ; 5c6ed (17:46ed)
@@ -91940,15 +92542,15 @@ VermilionGymScript: ; 5ca26 (17:4a26)
 ; 0x5ca4c
 
 VermilionGymScript_Unknown5ca4c: ; 5ca4c (17:4a4c)
-	ld hl, Unknown_5ca55 ; $4a55
-	ld de, Unknown_5ca64 ; $4a64
+	ld hl, Gym3CityName ; $4a55
+	ld de, Gym3LeaderName ; $4a64
 	jp LoadGymLeaderAndCityName
 
-Unknown_5ca55: ; 5ca55 (17:4a55)
-INCBIN "baserom.gbc",$5ca55,$5ca64 - $5ca55
+Gym3CityName: ; 5ca55 (17:4a55)
+	db "VERMILION CITY@"
 
-Unknown_5ca64: ; 5ca64 (17:4a64)
-INCBIN "baserom.gbc",$5ca64,$5ca6d - $5ca64
+Gym3LeaderName: ; 5ca64 (17:4a64)
+	db "LT.SURGE@"
 
 ; known jump sources: 5ca36 (17:4a36)
 Func_5ca6d: ; 5ca6d (17:4a6d)
@@ -92699,15 +93301,15 @@ SaffronGymScript: ; 5d00d (17:500d)
 	ret
 ; 0x5d02a
 .extra
-	ld hl, Unknown_5d033 ; $5033
-	ld de, Unknown_5d040 ; $5040
+	ld hl, Gym6CityName ; $5033
+	ld de, Gym6LeaderName ; $5040
 	jp LoadGymLeaderAndCityName
 
-Unknown_5d033: ; 5d033 (17:5033)
-INCBIN "baserom.gbc",$5d033,$5d040 - $5d033
+Gym6CityName: ; 5d033 (17:5033)
+	db "SAFFRON CITY@"
 
-Unknown_5d040: ; 5d040 (17:5040)
-INCBIN "baserom.gbc",$5d040,$5d048 - $5d040
+Gym6LeaderName: ; 5d040 (17:5040)
+	db "SABRINA@"
 
 ; known jump sources: 5d060 (17:5060), 5d0a8 (17:50a8)
 Func_5d048: ; 5d048 (17:5048)
@@ -94144,7 +94746,67 @@ Func_5dbd9: ; 5dbd9 (17:5bd9)
 	ld [$FF00+$b0], a
 	ret
 
-INCBIN "baserom.gbc",$5dc1a,$5dc9e - $5dc1a
+Unknown_5dc1a: ; 5dc1a (17:5c1a)
+	call EnableAutoTextBoxDrawing
+	ld a, $1
+	ld [$cc3c], a
+	ld a, [$cd3d]
+	call Func_3ef5
+	ret
+
+INCBIN "baserom.gbc",$5dc29,$5dc2a - $5dc29
+
+Unknown_5dc2a: ; 5dc2a (17:5c2a)
+	call SaveScreenTilesToBuffer1
+	ld hl, UnnamedText_5dc9e
+	call PrintText
+	xor a
+	ld [$d07c], a
+	ld [$cc26], a
+	ld [$cc2a], a
+	ld a, $3
+	ld [$cc29], a
+	ld a, $3
+	ld [$cc28], a
+	ld a, $2
+	ld [$cc24], a
+	ld a, $1
+	ld [$cc25], a
+.asm_5c51
+	ld hl, $d730
+	set 6, [hl]
+	ld hl, $c3a0
+	ld b, $8
+	ld c, $d
+	call TextBoxBorder
+	ld hl, $c3ca
+	ld de, HowToLinkText
+	call PlaceString
+	ld hl, UnnamedText_5dca3
+	call PrintText
+	call HandleMenuInput
+	bit 1, a
+	jr nz, .asm_5dc93 ; 0x5dc74 $1d
+	ld a, [$cc26]
+	cp $3
+	jr z, .asm_5dc93 ; 0x5dc7b $16
+	ld hl, $d730
+	res 6, [hl]
+	ld hl, PointerTable5cd8
+	add a
+	ld d, $0
+	ld e, a
+	add hl, de
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	call PrintText
+	jp .asm_5c51
+.asm_5dc93
+	ld hl, $d730
+	res 6, [hl]
+	call LoadScreenTilesFromBuffer1
+	jp TextScriptEnd
 
 UnnamedText_5dc9e: ; 5dc9e (17:5c9e)
 	TX_FAR _UnnamedText_5dc9e
@@ -94156,7 +94818,13 @@ UnnamedText_5dca3: ; 5dca3 (17:5ca3)
 	db $50
 ; 0x5dca3 + 5 bytes
 
-INCBIN "baserom.gbc",$5dca8,$5dcde - $5dca8
+HowToLinkText: ; 5dca8 (17:5ca8)
+	db "HOW TO LINK",$4e,"COLOSSEUM",$4e,"TRADE CENTER",$4e,"STOP READING@"
+
+PointerTable5cd8: ; 5dcd8 (17:5cd8)
+	dw UnnamedText_5dcde
+	dw UnnamedText_5dce3
+	dw UnnamedText_5dce8
 
 UnnamedText_5dcde: ; 5dcde (17:5cde)
 	TX_FAR _UnnamedText_5dcde
@@ -94185,7 +94853,20 @@ UnnamedText_5dda7: ; 5dda7 (17:5da7)
 	db $50
 ; 0x5dda7 + 5 bytes
 
-INCBIN "baserom.gbc",$5ddac,$5ddd6 - $5ddac
+StatusAilmentText:
+	db " SLP",$4e
+	db " PSN",$4e
+	db " PAR@"
+	db " BRN",$4e
+	db " FRZ",$4e
+	db " QUIT@@"
+	
+PointerTable5dcc: ; 5ddcc (17:5ddc)
+	dw UnnamedText_5ddd6
+	dw UnnamedText_5dddb
+	dw UnnamedText_5dde0
+	dw UnnamedText_5dde5
+	dw UnnamedText_5ddea
 
 UnnamedText_5ddd6: ; 5ddd6 (17:5dd6)
 	TX_FAR _UnnamedText_5ddd6
@@ -94212,7 +94893,10 @@ UnnamedText_5ddea: ; 5ddea (17:5dea)
 	db $50
 ; 0x5ddea + 5 bytes
 
-INCBIN "baserom.gbc",$5ddef,$5ddf7 - $5ddef
+Unknown_5ddef: ; 5ddef (17:5def)
+	call EnableAutoTextBoxDrawing
+	ld a, $26
+	jp Func_3ef5
 
 UnnamedText_5ddf7: ; 5ddf7 (17:5df7)
 	TX_FAR _UnnamedText_5ddf7
@@ -98536,7 +99220,7 @@ Func_701a0: ; 701a0 (1c:41a0)
 	call TextBoxBorder
 	FuncCoord 4, 15 ; $c4d0
 	ld hl, Coord
-	ld de, Unknown_7026b ; $426b
+	ld de, HallOfFameText ; $426b
 	call PlaceString
 	ld c, $b4
 	call DelayFrames
@@ -98565,8 +99249,8 @@ Func_701a0: ; 701a0 (1c:41a0)
 	res 3, [hl]
 	ret
 
-Unknown_7026b: ; 7026b (1c:426b)
-INCBIN "baserom.gbc",$7026b,$70278 - $7026b
+HallOfFameText: ; 7026b (1c:426b)
+	db "HALL OF FAME@"
 
 ; known jump sources: 70217 (1c:4217), 70259 (1c:4259)
 Func_70278: ; 70278 (1c:4278)
@@ -98640,7 +99324,7 @@ Func_702f0: ; 702f0 (1c:42f0)
 	call TextBoxBorder
 	FuncCoord 2, 6 ; $c41a
 	ld hl, Coord
-	ld de, Unknown_70329 ; $4329
+	ld de, HoFMonInfoText ; $4329
 	call PlaceString
 	FuncCoord 1, 4 ; $c3f1
 	ld hl, Coord
@@ -98659,8 +99343,8 @@ Func_702f0: ; 702f0 (1c:42f0)
 	ld a, [W_WHICHTRADE] ; $cd3d
 	jp PlayCry
 
-Unknown_70329: ; 70329 (1c:4329)
-INCBIN "baserom.gbc",$70329,$7033e - $70329
+HoFMonInfoText: ; 70329 (1c:4329)
+	db "LEVEL/",$4e,"TYPE1/",$4e,"TYPE2/@"
 
 ; known jump sources: 70298 (1c:4298)
 Func_7033e: ; 7033e (1c:433e)
@@ -98712,7 +99396,7 @@ Func_70377: ; 70377 (1c:4377)
 	call PlaceString
 	FuncCoord 1, 6 ; $c419
 	ld hl, Coord
-	ld de, Unknown_703ea ; $43ea
+	ld de, HoFPlayTimeText ; $43ea
 	call PlaceString
 	FuncCoord 5, 7 ; $c431
 	ld hl, Coord
@@ -98726,7 +99410,7 @@ Func_70377: ; 70377 (1c:4377)
 	call PrintNumber
 	FuncCoord 1, 9 ; $c455
 	ld hl, Coord
-	ld de, Unknown_703f4 ; $43f4
+	ld de, HoFMoneyText ; $43f4
 	call PlaceString
 	FuncCoord 4, 10 ; $c46c
 	ld hl, Coord
@@ -98745,11 +99429,11 @@ Func_703e2: ; 703e2 (1c:43e2)
 	ld c, $78
 	jp DelayFrames
 
-Unknown_703ea: ; 703ea (1c:43ea)
-INCBIN "baserom.gbc",$703ea,$703f4 - $703ea
+HoFPlayTimeText: ; 703ea (1c:43ea)
+	db "PLAY TIME@"
 
-Unknown_703f4: ; 703f4 (1c:43f4)
-INCBIN "baserom.gbc",$703f4,$703fa - $703f4
+HoFMoneyText: ; 703f4 (1c:43f4)
+	db "MONEY@"
 
 UnnamedText_703fa: ; 703fa (1c:43fa)
 	TX_FAR _UnnamedText_703fa
@@ -100538,7 +101222,7 @@ Func_711ef: ; 711ef (1c:51ef)
 	call TextBoxBorder
 	FuncCoord 2, 9 ; $c456
 	ld hl, Coord
-	ld de, Unknown_7124a ; $524a
+	ld de, AreaUnknownText ; $524a
 	call PlaceString
 	jr .asm_7123e
 .asm_71236
@@ -100551,8 +101235,8 @@ Func_711ef: ; 711ef (1c:51ef)
 	ld bc, $a0
 	jp CopyData
 
-Unknown_7124a: ; 7124a (1c:524a)
-INCBIN "baserom.gbc",$7124a,$71258 - $7124a
+AreaUnknownText: ; 7124a (1c:524a)
+	db " AREA UNKNOWN@"
 
 ; known jump sources: 70e9a (1c:4e9a), 711d2 (1c:51d2), 71212 (1c:5212)
 Func_71258: ; 71258 (1c:5258)
@@ -103101,7 +103785,7 @@ Func_7393f: ; 7393f (1c:793f)
 	call TextBoxBorder
 	ld hl, $fff6
 	set 2, [hl]
-	ld de, Unknown_739d9 ; $79d9
+	ld de, BoxNames ; $79d9
 	FuncCoord 13, 1 ; $c3c1
 	ld hl, Coord
 	call PlaceString
@@ -103124,7 +103808,7 @@ Func_7393f: ; 7393f (1c:793f)
 	ld [Coord], a
 	FuncCoord 1, 2 ; $c3c9
 	ld hl, Coord
-	ld de, Unknown_73a21 ; $7a21
+	ld de, BoxNoText ; $7a21
 	call PlaceString
 	call Func_73a84
 	FuncCoord 18, 1 ; $c3c6
@@ -103153,11 +103837,22 @@ UnnamedText_739d4: ; 739d4 (1c:79d4)
 	db $50
 ; 0x739d4 + 5 bytes
 
-Unknown_739d9: ; 739d9 (1c:79d9)
-INCBIN "baserom.gbc",$739d9,$73a21 - $739d9
+BoxNames: ; 739d9 (1c:79d9)
+	db "BOX 1",$4e
+	db "BOX 2",$4e
+	db "BOX 3",$4e
+	db "BOX 4",$4e
+	db "BOX 5",$4e
+	db "BOX 6",$4e
+	db "BOX 7",$4e
+	db "BOX 8",$4e
+	db "BOX 9",$4e
+	db "BOX10",$4e
+	db "BOX11",$4e
+	db "BOX12@"
 
-Unknown_73a21: ; 73a21 (1c:7a21)
-INCBIN "baserom.gbc",$73a21,$73a29 - $73a21
+BoxNoText: ; 73a21 (1c:7a21)
+	db "BOX No.@"
 
 ; known jump sources: 738b4 (1c:78b4)
 Func_73a29: ; 73a29 (1c:7a29)
@@ -104948,7 +105643,7 @@ UnnamedText_74fe2: ; 74fe2 (1d:4fe2)
 ; 0x74fe2 + 5 bytes
 
 Unknown_74fe7: ; 74fe7 (1d:4fe7)
-	ld hl, Unknown_75000
+	ld hl, VendingPrices
 	ld a, [$cc26]
 	add a
 	add a
@@ -104964,10 +105659,11 @@ Unknown_74fe7: ; 74fe7 (1d:4fe7)
 	ld a, [hl]
 	ld [$ff00+$de], a
 	ret
-; 0x75000
 
-Unknown_75000: ; 75000 (1d:5000)
-INCBIN "baserom.gbc",$75000,$7500c - $75000
+VendingPrices: ; 75000 (1d:5000)
+	db FRESH_WATER,$00,$02,$00
+	db SODA_POP,   $00,$03,$00
+	db LEMONADE,   $00,$03,$50
 
 FuchsiaHouse1_h: ; 0x7500c to 0x75018 (12 bytes) (id=153)
 	db $08 ; tileset
