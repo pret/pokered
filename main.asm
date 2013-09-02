@@ -94853,7 +94853,20 @@ UnnamedText_5dda7: ; 5dda7 (17:5da7)
 	db $50
 ; 0x5dda7 + 5 bytes
 
-INCBIN "baserom.gbc",$5ddac,$5ddd6 - $5ddac
+StatusAilmentText:
+	db " SLP",$4e
+	db " PSN",$4e
+	db " PAR@"
+	db " BRN",$4e
+	db " FRZ",$4e
+	db " QUIT@@"
+	
+PointerTable5dcc: ; 5ddcc (17:5ddc)
+	dw UnnamedText_5ddd6
+	dw UnnamedText_5dddb
+	dw UnnamedText_5dde0
+	dw UnnamedText_5dde5
+	dw UnnamedText_5ddea
 
 UnnamedText_5ddd6: ; 5ddd6 (17:5dd6)
 	TX_FAR _UnnamedText_5ddd6
