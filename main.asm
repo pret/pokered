@@ -13308,13 +13308,13 @@ Func_5317: ; 5317 (1:5317)
 	ld c, $1f
 	ld a, $d9
 	call PlayMusic
-	jr .asm_551c
+	jr Func_551c
 
 .pleaseWait: ; 550f (1:550f)
 	db "PLEASE WAIT!@"
 
-.asm_551c
-	ld hl, Unknown_5a5b ; $5a5b
+Func_551c:
+	ld hl, PointerTable ; $5a5b
 	ld b, $0
 	ld a, [$cc38]
 	cp $ff
@@ -13326,7 +13326,8 @@ Func_5317: ; 5317 (1:5317)
 	ld h, [hl]
 	ld l, a
 	jp [hl]
-.asm_5530
+	
+Func_5530
 	call ClearScreen
 	call Func_5ae6
 	call Func_57f2
@@ -13547,12 +13548,12 @@ Func_5317: ; 5317 (1:5317)
 	call Func_226e
 	ld a, [$cc3d]
 	cp $f
-	jp z, .asm_551c
+	jp z, Func_551c
 	ld [$cd3e], a
 	call Func_57c7
 	ld a, $1
 	ld [$cc38], a
-	jp .asm_551c
+	jp Func_551c
 .statsTrade
 	db "STATS     TRADE@"
 .asm_572f
@@ -13696,6 +13697,8 @@ Func_57f2:
 	pop bc
 	inc c
 	jr .asm_5829 ; 0x5847 $e0
+
+Func_5849:
 	ld c, $64
 	call DelayFrames
 	xor a
@@ -13905,8 +13908,9 @@ TradeCompleted:
 TradeCanceled:
 	db "Too bad! The trade",$4E,"was canceled!@"
 
-Unknown_5a5b: ; 5a5b (1:5a5b)
-INCBIN "baserom.gbc",$5a5b,$5a5f - $5a5b
+PointerTable: ; 5a5b (1:5a5b)
+	dw Func_5530
+	dw Func_5849
 
 ; known jump sources: 3888 (0:3888)
 Func_5a5f: ; 5a5f (1:5a5f)
