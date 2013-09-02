@@ -13642,7 +13642,16 @@ Func_57c7:
 	ret
 
 Func_57d6:
-INCBIN "baserom.gbc",$57d6,$57f2 - $57d6
+	ld a, [$cc26]
+	ld [$cf92], a
+	ld a, $36
+	call Predef
+	ld a, $37
+	call Predef
+	call GBPalNormal
+	call Func_5ae6
+	call Func_57f2
+	jp Func_57a2
 
 Func_57f2:
 INCBIN "baserom.gbc",$57f2,$5a24 - $57f2
