@@ -79609,7 +79609,16 @@ Func_5125d: ; 5125d (14:525d)
 	ret
 
 Unknown_51276: ; 51276 (14:5276)
-INCBIN "baserom.gbc",$51276,$512d8 - $51276
+INCBIN "baserom.gbc",$51276,$51284 - $51276
+
+BadgeList: ; 51284 (14:5284)
+	db "EARTHBADGE@"
+	db "VOLCANOBADGE@"
+	db "MARSHBADGE@"
+	db "SOULBADGE@"
+	db "RAINBOWBADGE@"
+	db "THUNDERBADGE@"
+	db "CASCADEBADGE@"
 
 ; known jump sources: 51365 (14:5365)
 Func_512d8: ; 512d8 (14:52d8)
