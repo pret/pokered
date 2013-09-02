@@ -92036,15 +92036,15 @@ CeruleanGymScript: ; 5c6b3 (17:46b3)
 ; 0x5c6d0
 
 CeruleanGymScript_Unknown5c6d0: ; 5c6d0 (17:46d0)
-	ld hl, Unknown_5c6d9 ; $46d9
-	ld de, Unknown_5c6e7 ; $46e7
+	ld hl, CeruleanGymCity ; $46d9
+	ld de, CeruleanGymLeader ; $46e7
 	jp LoadGymLeaderAndCityName
 
-Unknown_5c6d9: ; 5c6d9 (17:46d9)
-INCBIN "baserom.gbc",$5c6d9,$5c6e7 - $5c6d9
+CeruleanGymCity: ; 5c6d9 (17:46d9)
+	db "CERULEAN CITY@"
 
-Unknown_5c6e7: ; 5c6e7 (17:46e7)
-INCBIN "baserom.gbc",$5c6e7,$5c6ed - $5c6e7
+CeruleanGymLeader: ; 5c6e7 (17:46e7)
+	db "MISTY@"
 
 ; known jump sources: 5c705 (17:4705), 5c747 (17:4747)
 Func_5c6ed: ; 5c6ed (17:46ed)
