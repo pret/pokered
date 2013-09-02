@@ -14364,7 +14364,7 @@ Func_5db5: ; 5db5 (1:5db5)
 	call TextBoxBorder
 	FuncCoord 5, 9 ; $c459
 	ld hl, Coord
-	ld de, PlayerInfoText ; $5e6a
+	ld de, SaveScreenInfoText ; $5e6a
 	call PlaceString
 	FuncCoord 12, 9 ; $c460
 	ld hl, Coord
@@ -14419,7 +14419,7 @@ Func_5e55: ; 5e55 (1:5e55)
 	ld bc, $8102
 	jp PrintNumber
 
-PlayerInfoText: ; 5e6a (1:5e6a)
+SaveScreenInfoText: ; 5e6a (1:5e6a)
 	db "PLAYER",$4e
 	db "BADGES    ",$4e
 	db "#DEX    ",$4e
@@ -31500,11 +31500,11 @@ Func_137aa: ; 137aa (4:77aa)
 	call Bankswitch ; indirect jump to Func_372d6 (372d6 (d:72d6))
 	ld a, [$cf0b]
 	cp $1
-	ld de, Unknown_13853 ; $7853
+	ld de, YouWinText ; $7853
 	jr c, .asm_137de
-	ld de, Unknown_1385b ; $785b
+	ld de, YouLoseText ; $785b
 	jr z, .asm_137de
-	ld de, Unknown_13864 ; $7864
+	ld de, DrawText ; $7864
 .asm_137de
 	FuncCoord 6, 8 ; $c446
 	ld hl, Coord
@@ -31564,14 +31564,14 @@ Func_137aa: ; 137aa (4:77aa)
 	ld [$d42f], a
 	ret
 
-Unknown_13853: ; 13853 (4:7853)
-INCBIN "baserom.gbc",$13853,$1385b - $13853
+YouWinText: ; 13853 (4:7853)
+	db "YOU WIN@"
 
-Unknown_1385b: ; 1385b (4:785b)
-INCBIN "baserom.gbc",$1385b,$13864 - $1385b
+YouLoseText: ; 1385b (4:785b)
+	db "YOU LOSE@"
 
-Unknown_13864: ; 13864 (4:7864)
-INCBIN "baserom.gbc",$13864,$1386b - $13864
+DrawText: ; 13864 (4:7864)
+	db "  DRAW@"
 
 UnnamedText_1386b: ; 1386b (4:786b)
 	TX_FAR _UnnamedText_1386b
