@@ -65311,7 +65311,7 @@ UnnamedText_3f683: ; 3f683 (f:7683)
 
 ; known jump sources: 3f4cc (f:74cc), 3f62f (f:762f)
 Func_3f688: ; 3f688 (f:7688)
-	ld hl, Unknown_3f69f ; $769f
+	ld hl, StatsTextStrings ; $769f
 	ld c, $50
 .asm_3f68d
 	dec b
@@ -65326,8 +65326,13 @@ Func_3f688: ; 3f688 (f:7688)
 	ld bc, $a
 	jp CopyData
 
-Unknown_3f69f: ; 3f69f (f:769f)
-INCBIN "baserom.gbc",$3f69f,$3f6cb - $3f69f
+StatsTextStrings: ; 3f69f (f:769f)
+	db "ATTACK@"
+	db "DEFENSE@"
+	db "SPEED@"
+	db "SPECIAL@"
+	db "ACCURACY@"
+	db "EVADE@"
 
 Unknown_3f6cb: ; 3f6cb (f:76cb)
 INCBIN "baserom.gbc",$3f6cb,$3f717 - $3f6cb
