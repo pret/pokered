@@ -13326,8 +13326,274 @@ Func_5317: ; 5317 (1:5317)
 	ld h, [hl]
 	ld l, a
 	jp [hl]
-
-INCBIN "baserom.gbc",$5530,$577d - $5530
+.asm_5530
+	call ClearScreen
+	call Func_5ae6
+	call Func_57f2
+	call Func_57a2
+	xor a
+	ld hl, $cc3d
+	ld [hli], a
+	ld [hli], a
+	ld [hli], a
+	ld [hl], a
+	ld [$cc37], a
+	ld [$cc26], a
+	ld [$cc2a], a
+	ld [$cc34], a
+	inc a
+	ld [$cc42], a
+	jp .asm_55dc
+.asm_5557
+	xor a
+	ld [$cc37], a
+	inc a
+	ld [$cc49], a
+	ld a, $a1
+	ld [$cc29], a
+	ld a, [$d89c]
+	ld [$cc28], a
+	ld a, $9
+	ld [$cc24], a
+	ld a, $1
+	ld [$cc25], a
+.asm_5574
+	ld hl, $fff6
+	set 1, [hl]
+	call HandleMenuInput
+	ld hl, $fff6
+	res 1, [hl]
+	and a
+	jp z, .asm_565b
+	bit 0, a
+	jr z, .asm_55b0 ; 0x5587 $27
+	ld a, [$cc28]
+	ld c, a
+	ld a, [$cc26]
+	cp c
+	jr c, .asm_559a ; 0x5591 $7
+	ld a, [$cc28]
+	dec a
+	ld [$cc26], a
+.asm_559a
+	ld a, $1
+	ld [$d11b], a
+	ld hl, Func_39bd5
+	ld b, $e
+	call Bankswitch
+	ld hl, $d8a4
+	call Func_57d6
+	jp .asm_565b
+.asm_55b0
+	bit 5, a
+	jr z, .asm_55d4 ; 0x55b2 $20
+	xor a
+	ld [$cc49], a
+	ld a, [$cc30]
+	ld l, a
+	ld a, [$cc31]
+	ld h, a
+	ld a, [$cc27]
+	ld [hl], a
+	ld a, [$cc26]
+	ld b, a
+	ld a, [$d163]
+	dec a
+	cp b
+	jr nc, .asm_55dc ; 0x55cd $d
+	ld [$cc26], a
+	jr .asm_55dc ; 0x55d2 $8
+.asm_55d4
+	bit 7, a
+	jp z, .asm_565b
+	jp .asm_572f
+.asm_55dc
+	xor a
+	ld [$cc49], a
+	ld [$cc37], a
+	ld a, $91
+	ld [$cc29], a
+	ld a, [$d163]
+	ld [$cc28], a
+	ld a, $1
+	ld [$cc24], a
+	ld a, $1
+	ld [$cc25], a
+	ld hl, $c3b5
+	ld bc, $0601
+	call ClearScreenArea
+.asm_5601
+	ld hl, $fff6
+	set 1, [hl]
+	call HandleMenuInput
+	ld hl, $fff6
+	res 1, [hl]
+	and a
+	jr nz, .asm_5614 ; 0x560f $3
+	jp .asm_565b
+.asm_5614
+	bit 0, a
+	jr z, .asm_562e ; 0x5616 $16
+	jp .asm_5665
+	ld a, $4
+	ld [$d11b], a
+	ld hl, Func_39bd5
+	ld b, $e
+	call Bankswitch
+	call Func_57d6
+	jp .asm_565b
+.asm_562e
+	bit 4, a
+	jr z, .asm_5654 ; 0x5630 $22
+	ld a, $1
+	ld [$cc49], a
+	ld a, [$cc30]
+	ld l, a
+	ld a, [$cc31]
+	ld h, a
+	ld a, [$cc27]
+	ld [hl], a
+	ld a, [$cc26]
+	ld b, a
+	ld a, [$d89c]
+	dec a
+	cp b
+	jr nc, .asm_5651 ; 0x564c $3
+	ld [$cc26], a
+.asm_5651
+	jp .asm_5557
+.asm_5654
+	bit 7, a
+	jr z, .asm_565b ; 0x5656 $3
+	jp .asm_572f
+.asm_565b
+	ld a, [$cc49]
+	and a
+	jp z, .asm_5601
+	jp .asm_5574
+.asm_5665
+	call SaveScreenTilesToBuffer1
+	call PlaceUnfilledArrowMenuCursor
+	ld a, [$cc28]
+	ld c, a
+	ld a, [$cc26]
+	cp c
+	jr c, .asm_5679 ; 0x5673 $4
+	ld a, [$cc28]
+	dec a
+.asm_5679
+	push af
+	ld hl, $c4b8
+	ld b, $2
+	ld c, $12
+	call Func_5ab3
+	ld hl, $c4e2
+	ld de, .statsTrade
+	call PlaceString
+	xor a
+	ld [$cc26], a
+	ld [$cc2a], a
+	ld [$cc34], a
+	ld [$cc28], a
+	ld a, $10
+	ld [$cc24], a
+.asm_569f
+	ld a, $7f
+	ld [$c4eb], a
+	ld a, $13
+	ld [$cc29], a
+	ld a, $1
+	ld [$cc25], a
+	call HandleMenuInput
+	bit 4, a
+	jr nz, .asm_56c3 ; 0x56b3 $e
+	bit 1, a
+	jr z, .asm_56df ; 0x56b7 $26
+.asm_56b9
+	pop af
+	ld [$cc26], a
+	call LoadScreenTilesFromBuffer1
+	jp .asm_55dc
+.asm_56c3
+	ld a, $7f
+	ld [$c4e1], a
+	ld a, $23
+	ld [$cc29], a
+	ld a, $b
+	ld [$cc25], a
+	call HandleMenuInput
+	bit 5, a
+	jr nz, .asm_569f ; 0x56d7 $c6
+	bit 1, a
+	jr nz, .asm_56b9 ; 0x56db $dc
+	jr .asm_56f9 ; 0x56dd $1a
+.asm_56df
+	pop af
+	ld [$cc26], a
+	ld a, $4
+	ld [$d11b], a
+	ld hl, Func_39bd5
+	ld b, $e
+	call Bankswitch
+	call Func_57d6
+	call LoadScreenTilesFromBuffer1
+	jp .asm_55dc
+.asm_56f9
+	call PlaceUnfilledArrowMenuCursor
+	pop af
+	ld [$cc26], a
+	ld [$cd3d], a
+	ld [$cc42], a
+	call Func_226e
+	ld a, [$cc3d]
+	cp $f
+	jp z, .asm_551c
+	ld [$cd3e], a
+	call Func_57c7
+	ld a, $1
+	ld [$cc38], a
+	jp .asm_551c
+.statsTrade
+	db "STATS     TRADE@"
+.asm_572f
+	ld a, [$cc26]
+	ld b, a
+	ld a, [$cc28]
+	cp b
+	jp nz, .asm_565b
+	ld a, [$cc30]
+	ld l, a
+	ld a, [$cc31]
+	ld h, a
+	ld a, $7f
+	ld [hl], a
+.asm_5745
+	ld a, $ed
+	ld [$c4e1], a
+.asm_574a
+	call GetJoypadStateLowSensitivity
+	ld a, [$ff00+$b5]
+	and a
+	jr z, .asm_574a ; 0x5750 $f8
+	bit 0, a
+	jr nz, .asm_5769 ; 0x5754 $13
+	bit 6, a
+	jr z, .asm_574a ; 0x5758 $f0
+	ld a, $7f
+	ld [$c4e1], a
+	ld a, [$d163]
+	dec a
+	ld [$cc26], a
+	jp .asm_55dc
+.asm_5769
+	ld a, $ec
+	ld [$c4e1], a
+	ld a, $f
+	ld [$cc42], a
+	call Func_226e
+	ld a, [$cc3d]
+	cp $f
+	jr nz, .asm_5745 ; 0x577b $c8
 
 ; known jump sources: 5503 (1:5503)
 Func_577d: ; 577d (1:577d)
@@ -13351,7 +13617,17 @@ Func_577d: ; 577d (1:577d)
 	call GBFadeIn2
 	ret
 
-INCBIN "baserom.gbc",$57a2,$5a24 - $57a2
+Func_57a2:
+INCBIN "baserom.gbc",$57a2,$57c7 - $57a2
+
+Func_57c7:
+INCBIN "baserom.gbc",$57c7,$57d6 - $57c7
+
+Func_57d6:
+INCBIN "baserom.gbc",$57d6,$57f2 - $57d6
+
+Func_57f2:
+INCBIN "baserom.gbc",$57f2,$5a24 - $57f2
 
 SSAnne8AfterBattleText2: ; 5a24 (1:5a24)
 	TX_FAR _SSAnne8AfterBattleText2
