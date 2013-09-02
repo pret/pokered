@@ -15523,9 +15523,9 @@ Func_676f: ; 676f (1:676f)
 	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
 	ld a, [$ceeb]
 	and a
-	ld de, Unknown_679e ; $679e
+	ld de, LowerCaseAlphabet ; $679e
 	jr nz, .asm_677e
-	ld de, Unknown_67d6 ; $67d6
+	ld de, UpperCaseAlphabet ; $67d6
 .asm_677e
 	FuncCoord 2, 5 ; $c406
 	ld hl, Coord
@@ -15549,11 +15549,11 @@ Func_676f: ; 676f (1:676f)
 	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
 	jp Delay3
 
-Unknown_679e: ; 679e (1:679e)
-INCBIN "baserom.gbc",$679e,$67d6 - $679e
+LowerCaseAlphabet: ; 679e (1:679e)
+	db "abcdefghijklmnopqrstuvwxyz ×():;[]",$e1,$e2,"-?!♂♀/",$f2,",¥UPPER CASE@"
 
-Unknown_67d6: ; 67d6 (1:67d6)
-INCBIN "baserom.gbc",$67d6,$680e - $67d6
+UpperCaseAlphabet: ; 67d6 (1:67d6)
+	db "ABCDEFGHIJKLMNOPQRSTUVWXYZ ×():;[]",$e1,$e2,"-?!♂♀/",$f2,",¥lower case@"
 
 ; known jump sources: 65f9 (1:65f9)
 Func_680e: ; 680e (1:680e)
