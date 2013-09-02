@@ -42337,12 +42337,12 @@ Func_213c8: ; 213c8 (8:53c8)
 	jr nz, .asm_21414
 	FuncCoord 2, 2 ; $c3ca
 	ld hl, Coord
-	ld de, Unknown_2148b ; $548b
+	ld de, SomeonesPCText ; $548b
 	jr .asm_2141a
 .asm_21414
 	FuncCoord 2, 2 ; $c3ca
 	ld hl, Coord
-	ld de, Unknown_21497 ; $5497
+	ld de, BillsPCText ; $5497
 .asm_2141a
 	call PlaceString
 	FuncCoord 2, 4 ; $c3f2
@@ -42351,14 +42351,14 @@ Func_213c8: ; 213c8 (8:53c8)
 	call PlaceString
 	ld l, c
 	ld h, b
-	ld de, Unknown_214a0 ; $54a0
+	ld de, PlayersPCText ; $54a0
 	call PlaceString
 	ld a, [$d74b]
 	bit 5, a
 	jr z, .asm_21462
 	FuncCoord 2, 6 ; $c41a
 	ld hl, Coord
-	ld de, Unknown_214a5 ; $54a5
+	ld de, OaksPCText ; $54a5
 	call PlaceString
 	ld a, [$d5a2]
 	and a
@@ -42367,23 +42367,23 @@ Func_213c8: ; 213c8 (8:53c8)
 	ld [W_MAXMENUITEMID], a ; $cc28
 	FuncCoord 2, 8 ; $c442
 	ld hl, Coord
-	ld de, Unknown_214b2 ; $54b2
+	ld de, PKMNLeaguePCText ; $54b2
 	call PlaceString
 	FuncCoord 2, 10 ; $c46a
 	ld hl, Coord
-	ld de, Unknown_214ba ; $54ba
+	ld de, LogOffPCText ; $54ba
 	jr .asm_2146d
 .asm_2145a
 	FuncCoord 2, 8 ; $c442
 	ld hl, Coord
-	ld de, Unknown_214ba ; $54ba
+	ld de, LogOffPCText ; $54ba
 	jr .asm_2146d
 .asm_21462
 	ld a, $2
 	ld [W_MAXMENUITEMID], a ; $cc28
 	FuncCoord 2, 6 ; $c41a
 	ld hl, Coord
-	ld de, Unknown_214ba ; $54ba
+	ld de, LogOffPCText ; $54ba
 .asm_2146d
 	call PlaceString
 	ld a, $3
@@ -42399,23 +42399,23 @@ Func_213c8: ; 213c8 (8:53c8)
 	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
 	ret
 
-Unknown_2148b: ; 2148b (8:548b)
-INCBIN "baserom.gbc",$2148b,$21497 - $2148b
+SomeonesPCText: ; 2148b (8:548b)
+	db "SOMEONE's PC@"
 
-Unknown_21497: ; 21497 (8:5497)
-INCBIN "baserom.gbc",$21497,$214a0 - $21497
+BillsPCText: ; 21497 (8:5497)
+	db "BILL's PC@"
 
-Unknown_214a0: ; 214a0 (8:54a0)
-INCBIN "baserom.gbc",$214a0,$214a5 - $214a0
+PlayersPCText: ; 214a0 (8:54a0)
+	db "'s PC@"
 
-Unknown_214a5: ; 214a5 (8:54a5)
-INCBIN "baserom.gbc",$214a5,$214b2 - $214a5
+OaksPCText: ; 214a5 (8:54a5)
+	db "PROF.OAK's PC@"
 
-Unknown_214b2: ; 214b2 (8:54b2)
-INCBIN "baserom.gbc",$214b2,$214ba - $214b2
+PKMNLeaguePCText: ; 214b2 (8:54b2)
+	db $4a,"LEAGUE@"
 
-Unknown_214ba: ; 214ba (8:54ba)
-INCBIN "baserom.gbc",$214ba,$214c2 - $214ba
+LogOffPCText: ; 214ba (8:54ba)
+	db "LOG OFF@"
 
 ; known jump sources: 17f03 (5:7f03)
 Func_214c2: ; 214c2 (8:54c2)
