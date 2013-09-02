@@ -13888,7 +13888,11 @@ Func_57f2:
 	jp $5345
 
 Func_5a18:
-INCBIN "baserom.gbc",$5a18,$5a24 - $5a18
+	ld c, $64
+	call DelayFrames
+	xor a
+	ld [$cc38], a
+	jp $551c
 
 SSAnne8AfterBattleText2: ; 5a24 (1:5a24)
 	TX_FAR _SSAnne8AfterBattleText2
