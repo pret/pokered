@@ -94893,7 +94893,10 @@ UnnamedText_5ddea: ; 5ddea (17:5dea)
 	db $50
 ; 0x5ddea + 5 bytes
 
-INCBIN "baserom.gbc",$5ddef,$5ddf7 - $5ddef
+Unknown_5ddef: ; 5ddef (17:5def)
+	call EnableAutoTextBoxDrawing
+	ld a, $26
+	jp Func_3ef5
 
 UnnamedText_5ddf7: ; 5ddf7 (17:5df7)
 	TX_FAR _UnnamedText_5ddf7
