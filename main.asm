@@ -13618,7 +13618,20 @@ Func_577d: ; 577d (1:577d)
 	ret
 
 Func_57a2:
-INCBIN "baserom.gbc",$57a2,$57c7 - $57a2
+	ld hl, $c4d7
+	ld a, $7e
+	ld bc, $0031
+	call FillMemory
+	ld hl, $c4cc
+	ld b, $1
+	ld c, $9
+	call Func_5ab3
+	ld hl, $c4e2
+	ld de, CancelTextString
+	jp PlaceString
+	
+CancelTextString:
+	db "CANCEL@"
 
 Func_57c7:
 INCBIN "baserom.gbc",$57c7,$57d6 - $57c7
