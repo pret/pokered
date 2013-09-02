@@ -74701,15 +74701,15 @@ CeladonGymScript: ; 4890a (12:490a)
 ; 0x48927
 
 CeladonGymScript_Unknown48927: ; 48927 (12:4927)
-	ld hl, Unknown_48930 ; $4930
-	ld de, Unknown_4893d ; $493d
+	ld hl, CeladonGymCity ; $4930
+	ld de, CeladonGymLeader ; $493d
 	jp LoadGymLeaderAndCityName
 
-Unknown_48930: ; 48930 (12:4930)
-INCBIN "baserom.gbc",$48930,$4893d - $48930
+CeladonGymCity: ; 48930 (12:4930)
+	db "CELADON CITY@"
 
-Unknown_4893d: ; 4893d (12:493d)
-INCBIN "baserom.gbc",$4893d,$48943 - $4893d
+CeladonGymLeader: ; 4893d (12:493d)
+	db "ERIKA@"
 
 ; known jump sources: 4895b (12:495b), 489a3 (12:49a3)
 Func_48943: ; 48943 (12:4943)
