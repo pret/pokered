@@ -42451,7 +42451,7 @@ Func_214e8: ; 214e8 (8:54e8)
 	call TextBoxBorder
 	FuncCoord 2, 2 ; $c3ca
 	ld hl, Coord
-	ld de, Unknown_216e1 ; $56e1
+	ld de, BillsPCMenuText ; $56e1
 	call PlaceString
 	ld hl, W_TOPMENUITEMY ; $cc24
 	ld a, $2
@@ -42675,8 +42675,8 @@ Func_216be: ; 216be (8:56be)
 	ld [$cc2b], a
 	ret
 
-Unknown_216e1: ; 216e1 (8:56e1)
-INCBIN "baserom.gbc",$216e1,$21713 - $216e1
+BillsPCMenuText: ; 216e1 (8:56e1)
+	db "WITHDRAW ",$4a,$4e,"DEPOSIT ",$4a,$4e,"RELEASE ",$4a,$4e,"CHANGE BOX",$4e,"SEE YA!@"
 
 Unknown_21713: ; 21713 (8:5713)
 INCBIN "baserom.gbc",$21713,$2171b - $21713
