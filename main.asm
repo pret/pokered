@@ -42495,7 +42495,7 @@ Func_214e8: ; 214e8 (8:54e8)
 	ld [Coord], a
 	FuncCoord 10, 16 ; $c4ea
 	ld hl, Coord
-	ld de, Unknown_21713 ; $5713
+	ld de, BoxNoPCText ; $5713
 	call PlaceString
 	ld a, $1
 	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
@@ -42678,8 +42678,8 @@ Func_216be: ; 216be (8:56be)
 BillsPCMenuText: ; 216e1 (8:56e1)
 	db "WITHDRAW ",$4a,$4e,"DEPOSIT ",$4a,$4e,"RELEASE ",$4a,$4e,"CHANGE BOX",$4e,"SEE YA!@"
 
-Unknown_21713: ; 21713 (8:5713)
-INCBIN "baserom.gbc",$21713,$2171b - $21713
+BoxNoPCText: ; 21713 (8:5713)
+	db "BOX No.@"
 
 Func_2171b: ; 2171b (8:571b)
 	ld hl, $d173
