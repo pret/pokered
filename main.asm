@@ -75523,11 +75523,11 @@ Func_48f1e: ; 48f1e (12:4f1e)
 	call ClearScreenArea
 	FuncCoord 12, 2 ; $c3d4
 	ld hl, Coord
-	ld de, Unknown_48f7a ; $4f7a
+	ld de, GameCornerMoneyText ; $4f7a
 	call PlaceString
 	FuncCoord 12, 3 ; $c3e8
 	ld hl, Coord
-	ld de, Unknown_48f85 ; $4f85
+	ld de, GameCornerBlankText1 ; $4f85
 	call PlaceString
 	FuncCoord 12, 3 ; $c3e8
 	ld hl, Coord
@@ -75536,11 +75536,11 @@ Func_48f1e: ; 48f1e (12:4f1e)
 	call PrintBCDNumber
 	FuncCoord 12, 4 ; $c3fc
 	ld hl, Coord
-	ld de, Unknown_48f80 ; $4f80
+	ld de, GameCornerCoinText ; $4f80
 	call PlaceString
 	FuncCoord 12, 5 ; $c410
 	ld hl, Coord
-	ld de, Unknown_48f8d ; $4f8d
+	ld de, GameCornerBlankText2 ; $4f8d
 	call PlaceString
 	FuncCoord 15, 5 ; $c413
 	ld hl, Coord
@@ -75552,17 +75552,17 @@ Func_48f1e: ; 48f1e (12:4f1e)
 	ret
 ; 0x48f7a
 
-Unknown_48f7a: ; 48f7a (12:4f7a)
-INCBIN "baserom.gbc",$48f7a,$48f80 - $48f7a
+GameCornerMoneyText: ; 48f7a (12:4f7a)
+	db "MONEY@"
 
-Unknown_48f80: ; 48f80 (12:4f80)
-INCBIN "baserom.gbc",$48f80,$48f85 - $48f80
+GameCornerCoinText: ; 48f80 (12:4f80)
+	db "COIN@"
 
-Unknown_48f85: ; 48f85 (12:4f85)
-INCBIN "baserom.gbc",$48f85,$48f8d - $48f85
+GameCornerBlankText1: ; 48f85 (12:4f85)
+	db "       @"
 
-Unknown_48f8d: ; 48f8d (12:4f8d)
-INCBIN "baserom.gbc",$48f8d,$48f95 - $48f8d
+GameCornerBlankText2: ; 48f8d (12:4f8d)
+	db "       @"
 
 Has9990Coins: ; 48f95 (12:4f95)
 	ld a, $99
