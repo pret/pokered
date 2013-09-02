@@ -86491,7 +86491,7 @@ DisplayDiploma: ; 566e2 (15:66e2)
 	ld bc, $1012
 	ld a, $27
 	call Predef
-	ld hl, Unknown_56784 ; $6784
+	ld hl, DiplomaTextPointersAndCoords ; $6784
 	ld c, $5
 .asm_56715
 	push bc
@@ -86557,8 +86557,32 @@ Func_56777: ; 56777 (15:6777)
 	dec c
 	jr .asm_5677d ; 0x56782 $f9
 
-Unknown_56784: ; 56784 (15:6784)
-INCBIN "baserom.gbc",$56784,$567f9 - $56784
+DiplomaTextPointersAndCoords: ; 56784 (15:6784)
+	dw DiplomaText
+	dw $c3cd
+	dw DiplomaPlayer
+	dw $c3f3
+	dw DiplomaEmptyText
+	dw $c3ff
+	dw DiplomaCongrats
+	dw $c41a
+	dw DiplomaGameFreak
+	dw $c4e9
+
+DiplomaText:
+	db $70,"Diploma",$70,"@"
+	
+DiplomaPlayer:
+	db "Player@"
+	
+DiplomaEmptyText:
+	db "@"
+	
+DiplomaCongrats:
+	db "Congrats! This",$4e,"diploma certifies",$4e,"that you have",$4e,"completed your",$4e,"#DEX.@"
+	
+DiplomaGameFreak:
+	db "GAME FREAK@"
 
 ; known jump sources: 3303 (0:3303)
 Func_567f9: ; 567f9 (15:67f9)
