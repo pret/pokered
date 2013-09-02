@@ -99220,7 +99220,7 @@ Func_701a0: ; 701a0 (1c:41a0)
 	call TextBoxBorder
 	FuncCoord 4, 15 ; $c4d0
 	ld hl, Coord
-	ld de, Unknown_7026b ; $426b
+	ld de, HallOfFameText ; $426b
 	call PlaceString
 	ld c, $b4
 	call DelayFrames
@@ -99249,8 +99249,8 @@ Func_701a0: ; 701a0 (1c:41a0)
 	res 3, [hl]
 	ret
 
-Unknown_7026b: ; 7026b (1c:426b)
-INCBIN "baserom.gbc",$7026b,$70278 - $7026b
+HallOfFameText: ; 7026b (1c:426b)
+	db "HALL OF FAME@"
 
 ; known jump sources: 70217 (1c:4217), 70259 (1c:4259)
 Func_70278: ; 70278 (1c:4278)
