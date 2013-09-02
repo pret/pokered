@@ -13654,14 +13654,251 @@ Func_57d6:
 	jp Func_57a2
 
 Func_57f2:
-INCBIN "baserom.gbc",$57f2,$5a24 - $57f2
+	ld hl, $c3a0
+	ld b, $6
+	ld c, $12
+	call Func_5ab3
+	ld hl, $c440
+	ld b, $6
+	ld c, $12
+	call Func_5ab3
+	ld hl, $c3a5
+	ld de, $d158
+	call PlaceString
+	ld hl, $c445
+	ld de, $d887
+	call PlaceString
+	ld hl, $c3b6
+	ld de, $d164
+	call $5827
+	ld hl, $c456
+	ld de, $d89d
+	ld c, $0
+.asm_5829
+	ld a, [de]
+	cp $ff
+	ret z
+	ld [$d11e], a
+	push bc
+	push hl
+	push de
+	push hl
+	ld a, c
+	ld [$ff00+$95], a
+	call GetMonName
+	pop hl
+	call PlaceString
+	pop de
+	inc de
+	pop hl
+	ld bc, $0014
+	add hl, bc
+	pop bc
+	inc c
+	jr .asm_5829 ; 0x5847 $e0
+	ld c, $64
+	call DelayFrames
+	xor a
+	ld [$cc43], a
+	ld [$cc3e], a
+	ld [$cc37], a
+	ld [$cc34], a
+	ld hl, $c490
+	ld b, $4
+	ld c, $12
+	call Func_5ab3
+	ld a, [$cd3d]
+	ld hl, $d164
+	ld c, a
+	ld b, $0
+	add hl, bc
+	ld a, [hl]
+	ld [$d11e], a
+	call GetMonName
+	ld hl, $cd6d
+	ld de, $cd3f
+	ld bc, $000b
+	call CopyData
+	ld a, [$cd3e]
+	ld hl, $d89d
+	ld c, a
+	ld b, $0
+	add hl, bc
+	ld a, [hl]
+	ld [$d11e], a
+	call GetMonName
+	ld hl, SSAnne8AfterBattleText2
+	ld bc, $c4b9
+	call TextCommandProcessor
+	call SaveScreenTilesToBuffer1
+	ld hl, $c436
+	ld bc, $080b
+	ld a, $5
+	ld [$d12c], a
+	ld a, $14
+	ld [$d125], a
+	call DisplayTextBoxID
+	call LoadScreenTilesFromBuffer1
+	ld a, [$cc26]
+	and a
+	jr z, .asm_58d9 ; 0x58b9 $1e
+	ld a, $1
+	ld [$cc42], a
+	ld hl, $c490
+	ld b, $4
+	ld c, $12
+	call Func_5ab3
+	ld hl, $c4b9
+	ld de, TradeCanceled
+	call PlaceString
+	call Func_226e
+	jp Func_5a18
+.asm_58d9
+	ld a, $2
+	ld [$cc42], a
+	call Func_226e
+	ld a, [$cc3d]
+	dec a
+	jr nz, .asm_58fd ; 0x58e5 $16
+	ld hl, $c490
+	ld b, $4
+	ld c, $12
+	call Func_5ab3
+	ld hl, $c4b9
+	ld de, TradeCanceled
+	call PlaceString
+	jp Func_5a18
+.asm_58fd
+	ld a, [$cd3d]
+	ld hl, $d273
+	call SkipFixedLengthTextEntries
+	ld de, $cd41
+	ld bc, $000b
+	call CopyData
+	ld hl, $d16b
+	ld a, [$cd3d]
+	ld bc, $002c
+	call AddNTimes
+	ld bc, $000c
+	add hl, bc
+	ld a, [hli]
+	ld [$cd4c], a
+	ld a, [hl]
+	ld [$cd4d], a
+	ld a, [$cd3e]
+	ld hl, $d9ac
+	call SkipFixedLengthTextEntries
+	ld de, $cd4e
+	ld bc, $000b
+	call CopyData
+	ld hl, $d8a4
+	ld a, [$cd3e]
+	ld bc, $002c
+	call AddNTimes
+	ld bc, $000c
+	add hl, bc
+	ld a, [hli]
+	ld [$cd59], a
+	ld a, [hl]
+	ld [$cd5a], a
+	ld a, [$cd3d]
+	ld [$cf92], a
+	ld hl, $d164
+	ld b, $0
+	ld c, a
+	add hl, bc
+	ld a, [hl]
+	ld [$cd3d], a
+	xor a
+	ld [$cf95], a
+	call RemovePokemon
+	ld a, [$cd3e]
+	ld c, a
+	ld [$cf92], a
+	ld hl, $d89d
+	ld d, $0
+	ld e, a
+	add hl, de
+	ld a, [hl]
+	ld [$cf91], a
+	ld hl, $d8a4
+	ld a, c
+	ld bc, $002c
+	call AddNTimes
+	ld de, $cf98
+	ld bc, $002c
+	call CopyData
+	call AddEnemyMonToPlayerParty
+	ld a, [$d163]
+	dec a
+	ld [$cf92], a
+	ld a, $1
+	ld [$ccd4], a
+	ld a, [$cd3e]
+	ld hl, $d89d
+	ld b, $0
+	ld c, a
+	add hl, bc
+	ld a, [hl]
+	ld [$cd3e], a
+	ld a, $a
+	ld [$cfc7], a
+	ld a, $2
+	ld [$c0f0], a
+	ld a, $e5
+	ld [$c0ee], a
+	call PlaySound
+	ld c, $64
+	call DelayFrames
+	call ClearScreen
+	call LoadHpBarAndStatusTilePatterns
+	xor a
+	ld [$cc5b], a
+	ld a, [$ff00+$aa]
+	cp $1
+	jr z, .asm_59d9 ; 0x59d0 $7
+	ld a, $38
+	call Predef
+	jr .asm_59de ; 0x59d7 $5
+.asm_59d9
+	ld a, $2f
+	call Predef
+.asm_59de
+	ld hl, $6d0e
+	ld b, $e
+	call Bankswitch
+	call ClearScreen
+	call Func_5ae6
+	call Func_226e
+	ld c, $28
+	call DelayFrames
+	ld hl, $c490
+	ld b, $4
+	ld c, $12
+	call Func_5ab3
+	ld hl, $c4b9
+	ld de, TradeCompleted
+	call PlaceString
+	ld a, $50
+	call Predef
+	ld c, $32
+	call DelayFrames
+	xor a
+	ld [$cc38], a
+	jp $5345
+
+Func_5a18:
+INCBIN "baserom.gbc",$5a18,$5a24 - $5a18
 
 SSAnne8AfterBattleText2: ; 5a24 (1:5a24)
 	TX_FAR _SSAnne8AfterBattleText2
 	db $50
 ; 0x5a24 + 5 bytes
 
+TradeCompleted:
 	db "Trade completed!@"
+
+TradeCanceled:
 	db "Too bad! The trade",$4E,"was canceled!@"
 
 Unknown_5a5b: ; 5a5b (1:5a5b)
