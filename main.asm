@@ -74701,14 +74701,14 @@ CeladonGymScript: ; 4890a (12:490a)
 ; 0x48927
 
 CeladonGymScript_Unknown48927: ; 48927 (12:4927)
-	ld hl, CeladonGymCity ; $4930
-	ld de, CeladonGymLeader ; $493d
+	ld hl, Gym4CityName ; $4930
+	ld de, Gym4LeaderName ; $493d
 	jp LoadGymLeaderAndCityName
 
-CeladonGymCity: ; 48930 (12:4930)
+Gym4CityName: ; 48930 (12:4930)
 	db "CELADON CITY@"
 
-CeladonGymLeader: ; 4893d (12:493d)
+Gym4LeaderName: ; 4893d (12:493d)
 	db "ERIKA@"
 
 ; known jump sources: 4895b (12:495b), 489a3 (12:49a3)
@@ -91612,14 +91612,14 @@ PewterGymScript: ; 5c387 (17:4387)
 ; 0x5c3a4
 
 PewterGymScript_Unknown5c3a4: ; 5c3a4 (17:43a4)
-	ld hl, PewterGymCity ; $43ad
-	ld de, PewterGymLeader ; $43b9
+	ld hl, Gym1CityName ; $43ad
+	ld de, Gym1LeaderName ; $43b9
 	jp LoadGymLeaderAndCityName
 
-PewterGymCity: ; 5c3ad (17:43ad)
+Gym1CityName: ; 5c3ad (17:43ad)
 	db "PEWTER CITY@"
 
-PewterGymLeader: ; 5c3b9 (17:43b9)
+Gym1LeaderName: ; 5c3b9 (17:43b9)
 	db "BROCK@"
 
 ; known jump sources: 5c3d7 (17:43d7), 5c432 (17:4432)
@@ -92036,14 +92036,14 @@ CeruleanGymScript: ; 5c6b3 (17:46b3)
 ; 0x5c6d0
 
 CeruleanGymScript_Unknown5c6d0: ; 5c6d0 (17:46d0)
-	ld hl, CeruleanGymCity ; $46d9
-	ld de, CeruleanGymLeader ; $46e7
+	ld hl, Gym2CityName ; $46d9
+	ld de, Gym2LeaderName ; $46e7
 	jp LoadGymLeaderAndCityName
 
-CeruleanGymCity: ; 5c6d9 (17:46d9)
+Gym2CityName: ; 5c6d9 (17:46d9)
 	db "CERULEAN CITY@"
 
-CeruleanGymLeader: ; 5c6e7 (17:46e7)
+Gym2LeaderName: ; 5c6e7 (17:46e7)
 	db "MISTY@"
 
 ; known jump sources: 5c705 (17:4705), 5c747 (17:4747)
@@ -92542,14 +92542,14 @@ VermilionGymScript: ; 5ca26 (17:4a26)
 ; 0x5ca4c
 
 VermilionGymScript_Unknown5ca4c: ; 5ca4c (17:4a4c)
-	ld hl, VermilionGymCity ; $4a55
-	ld de, VermilionGymLeader ; $4a64
+	ld hl, Gym3CityName ; $4a55
+	ld de, Gym3LeaderName ; $4a64
 	jp LoadGymLeaderAndCityName
 
-VermilionGymCity: ; 5ca55 (17:4a55)
+Gym3CityName: ; 5ca55 (17:4a55)
 	db "VERMILION CITY@"
 
-VermilionGymLeader: ; 5ca64 (17:4a64)
+Gym3LeaderName: ; 5ca64 (17:4a64)
 	db "LT.SURGE@"
 
 ; known jump sources: 5ca36 (17:4a36)
@@ -93301,14 +93301,14 @@ SaffronGymScript: ; 5d00d (17:500d)
 	ret
 ; 0x5d02a
 .extra
-	ld hl, SaffronGymCity ; $5033
-	ld de, SaffronGymLeader ; $5040
+	ld hl, Gym6CityName ; $5033
+	ld de, Gym6LeaderName ; $5040
 	jp LoadGymLeaderAndCityName
 
-SaffronGymCity: ; 5d033 (17:5033)
+Gym6CityName: ; 5d033 (17:5033)
 	db "SAFFRON CITY@"
 
-SaffronGymLeader: ; 5d040 (17:5040)
+Gym6LeaderName: ; 5d040 (17:5040)
 	db "SABRINA@"
 
 ; known jump sources: 5d060 (17:5060), 5d0a8 (17:50a8)
@@ -103785,7 +103785,7 @@ Func_7393f: ; 7393f (1c:793f)
 	call TextBoxBorder
 	ld hl, $fff6
 	set 2, [hl]
-	ld de, BoxNumbersText ; $79d9
+	ld de, BoxNames ; $79d9
 	FuncCoord 13, 1 ; $c3c1
 	ld hl, Coord
 	call PlaceString
@@ -103837,7 +103837,7 @@ UnnamedText_739d4: ; 739d4 (1c:79d4)
 	db $50
 ; 0x739d4 + 5 bytes
 
-BoxNumbersText: ; 739d9 (1c:79d9)
+BoxNames: ; 739d9 (1c:79d9)
 	db "BOX 1",$4e
 	db "BOX 2",$4e
 	db "BOX 3",$4e
