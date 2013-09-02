@@ -14364,7 +14364,7 @@ Func_5db5: ; 5db5 (1:5db5)
 	call TextBoxBorder
 	FuncCoord 5, 9 ; $c459
 	ld hl, Coord
-	ld de, Unknown_5e6a ; $5e6a
+	ld de, PlayerInfoText ; $5e6a
 	call PlaceString
 	FuncCoord 12, 9 ; $c460
 	ld hl, Coord
@@ -14419,8 +14419,11 @@ Func_5e55: ; 5e55 (1:5e55)
 	ld bc, $8102
 	jp PrintNumber
 
-Unknown_5e6a: ; 5e6a (1:5e6a)
-INCBIN "baserom.gbc",$5e6a,$5e8a - $5e6a
+PlayerInfoText: ; 5e6a (1:5e6a)
+	db "PLAYER",$4e
+	db "BADGES    ",$4e
+	db "#DEX    ",$4e
+	db "TIME@"
 
 DisplayOptionMenu: ; 5e8a (1:5e8a)
 	FuncCoord 0,0
