@@ -99324,7 +99324,7 @@ Func_702f0: ; 702f0 (1c:42f0)
 	call TextBoxBorder
 	FuncCoord 2, 6 ; $c41a
 	ld hl, Coord
-	ld de, Unknown_70329 ; $4329
+	ld de, HoFMonInfoText ; $4329
 	call PlaceString
 	FuncCoord 1, 4 ; $c3f1
 	ld hl, Coord
@@ -99343,8 +99343,8 @@ Func_702f0: ; 702f0 (1c:42f0)
 	ld a, [W_WHICHTRADE] ; $cd3d
 	jp PlayCry
 
-Unknown_70329: ; 70329 (1c:4329)
-INCBIN "baserom.gbc",$70329,$7033e - $70329
+HoFMonInfoText: ; 70329 (1c:4329)
+	db "LEVEL/",$4e,"TYPE1/",$4e,"TYPE2/@"
 
 ; known jump sources: 70298 (1c:4298)
 Func_7033e: ; 7033e (1c:433e)
