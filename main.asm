@@ -60376,7 +60376,7 @@ Func_3d4b6: ; 3d4b6 (f:54b6)
 	jr nz, .asm_3d4df
 	FuncCoord 1, 10 ; $c469
 	ld hl, Coord
-	ld de, Unknown_3d555 ; $5555
+	ld de, DisabledText ; $5555
 	call PlaceString
 	jr .asm_3d54e
 .asm_3d4df
@@ -60409,7 +60409,7 @@ Func_3d4b6: ; 3d4b6 (f:54b6)
 	ld [$cd6d], a
 	FuncCoord 1, 9 ; $c455
 	ld hl, Coord
-	ld de, Unknown_3d55f ; $555f
+	ld de, TypeText ; $555f
 	call PlaceString
 	FuncCoord 7, 11 ; $c483
 	ld hl, Coord
@@ -60437,11 +60437,11 @@ Func_3d4b6: ; 3d4b6 (f:54b6)
 	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
 	jp Delay3
 
-Unknown_3d555: ; 3d555 (f:5555)
-INCBIN "baserom.gbc",$3d555,$3d55f - $3d555
+DisabledText: ; 3d555 (f:5555)
+	db "disabled!@"
 
-Unknown_3d55f: ; 3d55f (f:555f)
-INCBIN "baserom.gbc",$3d55f,$3d564 - $3d55f
+TypeText: ; 3d55f (f:555f)
+	db "TYPE@"
 
 SelectEnemyMove: ; 3d564 (f:5564)
 	ld a, [W_ISLINKBATTLE]
