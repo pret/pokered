@@ -314,6 +314,11 @@ def get_labels_between(start_line_id, end_line_id, bank_id):
 
         if ": ; 0x" in line:
             temp = line.split(": ; 0x")[1]
+
+            # just read until the comma appears
+            if "," in line:
+                temp = temp.split(",")[0]
+
             if not " " in temp:
                 address = int("0x" + temp, 16)
             else:
