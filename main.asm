@@ -98998,11 +98998,11 @@ Func_70000: ; 70000 (1c:4000)
 	ld hl, $8a20
 	ld bc, (BANK(FallingStar) << 8) + $01
 	call CopyVideoData
-	ld hl, Unknown_70140 ; $4140
+	ld hl, GameFreakLogoOAMData ; $4140
 	ld de, $c360
 	ld bc, $40
 	call CopyData
-	ld hl, Unknown_70180 ; $4180
+	ld hl, GameFreakShootingStarOAMData ; $4180
 	ld de, W_OAMBUFFER
 	ld bc, $10
 	jp CopyData
@@ -99144,11 +99144,14 @@ Func_7011f: ; 7011f (1c:411f)
 	jr nz, .asm_70121
 	ret
 
-Unknown_70140: ; 70140 (1c:4140)
-INCBIN "baserom.gbc",$70140,$70180 - $70140
+GameFreakLogoOAMData: ; 70140 (1c:4140)
+	db $48,$50,$8D,$00,$48,$58,$8E,$00,$50,$50,$8F,$00,$50,$58,$90,$00
+	db $58,$50,$91,$00,$58,$58,$92,$00,$60,$30,$80,$00,$60,$38,$81,$00
+	db $60,$40,$82,$00,$60,$48,$83,$00,$60,$50,$93,$00,$60,$58,$84,$00
+	db $60,$60,$85,$00,$60,$68,$83,$00,$60,$70,$81,$00,$60,$78,$86,$00
 
-Unknown_70180: ; 70180 (1c:4180)
-INCBIN "baserom.gbc",$70180,$70190 - $70180
+GameFreakShootingStarOAMData: ; 70180 (1c:4180)
+	db $00,$A0,$A0,$10,$00,$A8,$A0,$30,$08,$A0,$A1,$10,$08,$A8,$A1,$30
 
 FallingStar: ; 70190 (1c:4190)
 INCBIN "gfx/falling_star.2bpp"
