@@ -19126,11 +19126,11 @@ Func_c52f: ; c52f (3:452f)
 	call PrintNumber
 	FuncCoord 4, 1 ; $c3b8
 	ld hl, Coord
-	ld de, Unknown_c579 ; $4579
+	ld de, SafariSteps ; $4579
 	call PlaceString
 	FuncCoord 1, 3 ; $c3dd
 	ld hl, Coord
-	ld de, Unknown_c57e ; $457e
+	ld de, SafariBallText ; $457e
 	call PlaceString
 	ld a, [W_NUMSAFARIBALLS] ; $da47
 	cp $a
@@ -19146,11 +19146,11 @@ Func_c52f: ; c52f (3:452f)
 	ld bc, $102
 	jp PrintNumber
 
-Unknown_c579: ; c579 (3:4579)
-INCBIN "baserom.gbc",$c579,$c57e - $c579
+SafariSteps: ; c579 (3:4579)
+	db "/500@"
 
-Unknown_c57e: ; c57e (3:457e)
-INCBIN "baserom.gbc",$c57e,$c586 - $c57e
+SafariBallText: ; c57e (3:457e)
+	db "BALL×× @"
 
 ; known jump sources: 47f (0:47f), b2e (0:b2e), b5a (0:b5a), c12 (0:c12), c2d (0:c2d), fd3 (0:fd3), 1a67f (6:667f), 52683 (14:6683)
 Func_c586: ; c586 (3:4586)
