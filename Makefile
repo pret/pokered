@@ -8,7 +8,7 @@ pokered.o: pokered.tx main.tx constants.tx music.tx wram.tx ${TEXTFILES:.asm=.tx
 	rgbasm -o pokered.o pokered.tx
 	
 pokeblue.o: pokeblue.tx main.tx constants.tx music.tx wram.tx ${TEXTFILES:.asm=.tx}
-	rgbasm -o pokeblue.o pokeblue.asm
+	rgbasm -o pokeblue.o pokeblue.tx
 
 redrle: extras/redtools/redrle.c
 	${CC} -o $@ $>
