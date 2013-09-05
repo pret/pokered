@@ -100932,7 +100932,7 @@ Func_70f60: ; 70f60 (1c:4f60)
 	call PlaceString
 	ld h, b
 	ld l, c
-	ld de, Unknown_70f89 ; $4f89
+	ld de, MonsNestText ; $4f89
 	call PlaceString
 	call WaitForTextScrollButtonPress
 	call Func_711ab
@@ -100941,8 +100941,8 @@ Func_70f60: ; 70f60 (1c:4f60)
 	ld [hl], a
 	ret
 
-Unknown_70f89: ; 70f89 (1c:4f89)
-INCBIN "baserom.gbc",$70f89,$70f90 - $70f89
+MonsNestText: ; 70f89 (1c:4f89)
+	db "'s NEST@"
 
 ; known jump sources: 30b3 (0:30b3)
 Func_70f90: ; 70f90 (1c:4f90)
