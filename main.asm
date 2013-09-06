@@ -104358,7 +104358,7 @@ Func_7418e: ; 7418e (1d:418e)
 	call CopyVideoData
 	FuncCoord 4, 8 ; $c444
 	ld hl, Coord
-	ld de, Unknown_74229 ; $4229
+	ld de, UnknownText_74229 ; $4229
 	call PlaceString
 	FuncCoord 4, 9 ; $c458
 	ld hl, Coord
@@ -104366,8 +104366,9 @@ Func_7418e: ; 7418e (1d:418e)
 	call PlaceString
 	jp Func_740ba
 
-Unknown_74229: ; 74229 (1d:4229)
-INCBIN "baserom.gbc",$74229,$74243 - $74229
+UnknownText_74229: ; 74229 (1d:4229)
+	db $60," ",$62," ",$64,"  ",$64," ",$66," ",$68,"@"
+	db $61," ",$63," ",$65,"  ",$65," ",$67," ",$69,"@"
 
 Unknown_74243: ; 74243 (1d:4243)
 INCBIN "baserom.gbc",$74243,$742c3 - $74243
