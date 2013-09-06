@@ -58705,7 +58705,7 @@ Func_3c893: ; 3c893 (f:4893)
 	jr nz, .asm_3c8a3
 	ld bc, $14
 	add hl, bc
-	ld de, Unknown_3c8d7 ; $48d7
+	ld de, SevenSpacesText ; $48d7
 	call PlaceString
 	ld c, $2
 	call DelayFrames
@@ -58718,8 +58718,8 @@ Func_3c893: ; 3c893 (f:4893)
 	ld [$d730], a
 	ret
 
-Unknown_3c8d7: ; 3c8d7 (f:48d7)
-INCBIN "baserom.gbc",$3c8d7,$3c8df - $3c8d7
+SevenSpacesText: ; 3c8d7 (f:48d7)
+	db "       @"
 
 ; known jump sources: 3c1d9 (f:41d9), 3c94f (f:494f)
 Func_3c8df: ; 3c8df (f:48df)
