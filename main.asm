@@ -51916,11 +51916,6 @@ db 1,0    ; CHANNELER
 db 1,0    ; AGATHA
 db 1,3,0  ; LANCE
 
-
-; trainer data: from 5C53 to 652E
-
-; INCBIN "baserom.gbc",$3989e,$39914 - $3989e
-
 ; trainer pic pointers and base money.
 dw YoungsterPic
 db 0,$15,0
