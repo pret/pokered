@@ -100980,7 +100980,7 @@ Func_70f90: ; 70f90 (1c:4f90)
 	ld [hl], $ff
 	push hl
 	ld hl, W_SCREENTILESBUFFER
-	ld de, Unknown_7106d ; $506d
+	ld de, ToText ; $506d
 	call PlaceString
 	ld a, [W_CURMAP] ; $d35e
 	ld b, $0
@@ -101078,8 +101078,8 @@ Func_70fd6: ; 70fd6 (1c:4fd6)
 	ld hl, $cd49
 	jr .asm_71058
 
-Unknown_7106d: ; 7106d (1c:506d)
-INCBIN "baserom.gbc",$7106d,$71070 - $7106d
+ToText: ; 7106d (1c:506d)
+	db "To@"
 
 ; known jump sources: 70fb4 (1c:4fb4)
 Func_71070: ; 71070 (1c:5070)
