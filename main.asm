@@ -58705,7 +58705,7 @@ Func_3c893: ; 3c893 (f:4893)
 	jr nz, .asm_3c8a3
 	ld bc, $14
 	add hl, bc
-	ld de, Unknown_3c8d7 ; $48d7
+	ld de, SevenSpacesText ; $48d7
 	call PlaceString
 	ld c, $2
 	call DelayFrames
@@ -58718,8 +58718,8 @@ Func_3c893: ; 3c893 (f:4893)
 	ld [$d730], a
 	ret
 
-Unknown_3c8d7: ; 3c8d7 (f:48d7)
-INCBIN "baserom.gbc",$3c8d7,$3c8df - $3c8d7
+SevenSpacesText: ; 3c8d7 (f:48d7)
+	db "       @"
 
 ; known jump sources: 3c1d9 (f:41d9), 3c94f (f:494f)
 Func_3c8df: ; 3c8df (f:48df)
@@ -99145,13 +99145,28 @@ Func_7011f: ; 7011f (1c:411f)
 	ret
 
 GameFreakLogoOAMData: ; 70140 (1c:4140)
-	db $48,$50,$8D,$00,$48,$58,$8E,$00,$50,$50,$8F,$00,$50,$58,$90,$00
-	db $58,$50,$91,$00,$58,$58,$92,$00,$60,$30,$80,$00,$60,$38,$81,$00
-	db $60,$40,$82,$00,$60,$48,$83,$00,$60,$50,$93,$00,$60,$58,$84,$00
-	db $60,$60,$85,$00,$60,$68,$83,$00,$60,$70,$81,$00,$60,$78,$86,$00
+	db $48,$50,$8D,$00
+	db $48,$58,$8E,$00
+	db $50,$50,$8F,$00
+	db $50,$58,$90,$00
+	db $58,$50,$91,$00
+	db $58,$58,$92,$00
+	db $60,$30,$80,$00
+	db $60,$38,$81,$00
+	db $60,$40,$82,$00
+	db $60,$48,$83,$00
+	db $60,$50,$93,$00
+	db $60,$58,$84,$00
+	db $60,$60,$85,$00
+	db $60,$68,$83,$00
+	db $60,$70,$81,$00
+	db $60,$78,$86,$00
 
 GameFreakShootingStarOAMData: ; 70180 (1c:4180)
-	db $00,$A0,$A0,$10,$00,$A8,$A0,$30,$08,$A0,$A1,$10,$08,$A8,$A1,$30
+	db $00,$A0,$A0,$10
+	db $00,$A8,$A0,$30
+	db $08,$A0,$A1,$10
+	db $08,$A8,$A1,$30
 
 FallingStar: ; 70190 (1c:4190)
 INCBIN "gfx/falling_star.2bpp"
@@ -100965,7 +100980,7 @@ Func_70f90: ; 70f90 (1c:4f90)
 	ld [hl], $ff
 	push hl
 	ld hl, W_SCREENTILESBUFFER
-	ld de, Unknown_7106d ; $506d
+	ld de, ToText ; $506d
 	call PlaceString
 	ld a, [W_CURMAP] ; $d35e
 	ld b, $0
@@ -101063,8 +101078,8 @@ Func_70fd6: ; 70fd6 (1c:4fd6)
 	ld hl, $cd49
 	jr .asm_71058
 
-Unknown_7106d: ; 7106d (1c:506d)
-INCBIN "baserom.gbc",$7106d,$71070 - $7106d
+ToText: ; 7106d (1c:506d)
+	db "To@"
 
 ; known jump sources: 70fb4 (1c:4fb4)
 Func_71070: ; 71070 (1c:5070)
@@ -102312,10 +102327,10 @@ Func_71ddf: ; 71ddf (1c:5ddf)
 	ld de, Func_72156 ; $6156
 	push de
 	jp [hl]
-	ld hl, Unknown_72448 ; $6448
+	ld hl, PalPacket_72448 ; $6448
 	ld de, Unknown_721b5 ; $61b5
 	ret
-	ld hl, Unknown_72428 ; $6428
+	ld hl, PalPacket_72428 ; $6428
 	ld de, $cf2d
 	ld bc, $10
 	call CopyData
@@ -102348,10 +102363,10 @@ Func_71ddf: ; 71ddf (1c:5ddf)
 	ld a, $1
 	ld [$cf1c], a
 	ret
-	ld hl, Unknown_72458 ; $6458
+	ld hl, PalPacket_72458 ; $6458
 	ld de, Unknown_7219e ; $619e
 	ret
-	ld hl, Unknown_72428 ; $6428
+	ld hl, PalPacket_72428 ; $6428
 	ld de, $cf2d
 	ld bc, $10
 	call CopyData
@@ -102372,10 +102387,10 @@ Func_71ddf: ; 71ddf (1c:5ddf)
 	ld hl, $cf2d
 	ld de, Unknown_721fa ; $61fa
 	ret
-	ld hl, Unknown_72438 ; $6438
+	ld hl, PalPacket_72438 ; $6438
 	ld de, $cf2e
 	ret
-	ld hl, Unknown_72468 ; $6468
+	ld hl, PalPacket_72468 ; $6468
 	ld de, $cf2d
 	ld bc, $10
 	call CopyData
@@ -102388,21 +102403,21 @@ Func_71ddf: ; 71ddf (1c:5ddf)
 	ret
 
 INCBIN "baserom.gbc",$71e9f,$71ea6 - $71e9f
-	ld hl, Unknown_72488 ; $6488
+	ld hl, PalPacket_72488 ; $6488
 	ld de, Unknown_7228e ; $628e
 	ret
-	ld hl, Unknown_724a8 ; $64a8
+	ld hl, PalPacket_724a8 ; $64a8
 	ld de, Unknown_7219e ; $619e
 	ret
-	ld hl, Unknown_724b8 ; $64b8
+	ld hl, PalPacket_724b8 ; $64b8
 	ld de, Unknown_722c1 ; $62c1
 	ret
-	ld hl, Unknown_724c8 ; $64c8
+	ld hl, PalPacket_724c8 ; $64c8
 	ld de, Unknown_723dd ; $63dd
 	ld a, $8
 	ld [$cf1c], a
 	ret
-	ld hl, Unknown_72428 ; $6428
+	ld hl, PalPacket_72428 ; $6428
 	ld de, $cf2d
 	ld bc, $10
 	call CopyData
@@ -102446,7 +102461,7 @@ INCBIN "baserom.gbc",$71e9f,$71ea6 - $71e9f
 	xor a
 	jr .asm_71efe
 	push bc
-	ld hl, Unknown_72428 ; $6428
+	ld hl, PalPacket_72428 ; $6428
 	ld de, $cf2d
 	ld bc, $10
 	call CopyData
@@ -102495,7 +102510,7 @@ INCBIN "baserom.gbc",$71e9f,$71ea6 - $71e9f
 	inc de
 	dec c
 	jr nz, .asm_71f52
-	ld hl, Unknown_72498 ; $6498
+	ld hl, PalPacket_72498 ; $6498
 	ld de, $cc5b
 	ret
 
@@ -102646,21 +102661,21 @@ Func_7202b: ; 7202b (1c:602b)
 	ei
 	ld a, $1
 	ld [$cf2d], a
-	ld de, Unknown_72508 ; $6508
+	ld de, PalPacket_72508 ; $6508
 	ld hl, SGBBorderGraphics ; $6fe8
 	call Func_7210b
 	xor a
 	ld [$cf2d], a
-	ld de, Unknown_72518 ; $6518
+	ld de, PalPacket_72518 ; $6518
 	ld hl, BorderPalettes ; $6788
 	call Func_7210b
 	xor a
 	ld [$cf2d], a
-	ld de, Unknown_724d8 ; $64d8
+	ld de, PalPacket_724d8 ; $64d8
 	ld hl, SuperPalettes ; $6660
 	call Func_7210b
 	call ZeroVram
-	ld hl, Unknown_72538 ; $6538
+	ld hl, PalPacket_72538 ; $6538
 	jp SendSGBPacket
 
 ; known jump sources: 72040 (1c:6040)
@@ -102686,7 +102701,7 @@ INCBIN "baserom.gbc",$72089,$7209b - $72089
 
 ; known jump sources: 7202f (1c:602f)
 Func_7209b: ; 7209b (1c:609b)
-	ld hl, Unknown_724f8 ; $64f8
+	ld hl, PalPacket_724f8 ; $64f8
 	di
 	call SendSGBPacket
 	ld a, $1
@@ -102738,7 +102753,7 @@ Func_7209b: ; 7209b (1c:609b)
 
 ; known jump sources: 720f8 (1c:60f8), 720fd (1c:60fd)
 Func_72102: ; 72102 (1c:6102)
-	ld hl, Unknown_724e8 ; $64e8
+	ld hl, PalPacket_724e8 ; $64e8
 	call SendSGBPacket
 	jp Wait7000
 
@@ -102887,53 +102902,61 @@ INCBIN "baserom.gbc",$72360,$723dd - $72360
 Unknown_723dd: ; 723dd (1c:63dd)
 INCBIN "baserom.gbc",$723dd,$72428 - $723dd
 
-Unknown_72428: ; 72428 (1c:6428)
-INCBIN "baserom.gbc",$72428,$72438 - $72428
+PalPacket_72428: ; 72428 (1c:6428)
+	db $51,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00 
 
-Unknown_72438: ; 72438 (1c:6438)
-INCBIN "baserom.gbc",$72438,$72448 - $72438
+PalPacket_72438: ; 72438 (1c:6438)
+	db $51,$10,$00,$1F,$00,$20,$00,$21,$00,$00,$00,$00,$00,$00,$00,$00
 
-Unknown_72448: ; 72448 (1c:6448)
-INCBIN "baserom.gbc",$72448,$72458 - $72448
+PalPacket_72448: ; 72448 (1c:6448)
+	db $51,$1E,$00,$1E,$00,$1E,$00,$1E,$00,$00,$00,$00,$00,$00,$00,$00
 
-Unknown_72458: ; 72458 (1c:6458)
-INCBIN "baserom.gbc",$72458,$72468 - $72458
+PalPacket_72458: ; 72458 (1c:6458)
+	db $51,$0C,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00
 
-Unknown_72468: ; 72468 (1c:6468)
-INCBIN "baserom.gbc",$72468,$72488 - $72468
+PalPacket_72468: ; 72468 (1c:6468)
+	db $51,$15,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00
+	
+PalPacket_72478: ; 72478 (1c:6478)
+	db $51,$1A,$00,$1B,$00,$1C,$00,$1D,$00,$00,$00,$00,$00,$00,$00,$00
 
-Unknown_72488: ; 72488 (1c:6488)
-INCBIN "baserom.gbc",$72488,$72498 - $72488
+PalPacket_72488: ; 72488 (1c:6488)
+	db $51,$0E,$00,$0D,$00,$10,$00,$14,$00,$00,$00,$00,$00,$00,$00,$00
 
-Unknown_72498: ; 72498 (1c:6498)
-INCBIN "baserom.gbc",$72498,$724a8 - $72498
+PalPacket_72498: ; 72498 (1c:6498)
+	db $51,$10,$00,$22,$00,$12,$00,$18,$00,$00,$00,$00,$00,$00,$00,$00
 
-Unknown_724a8: ; 724a8 (1c:64a8)
-INCBIN "baserom.gbc",$724a8,$724b8 - $724a8
+PalPacket_724a8: ; 724a8 (1c:64a8)
+	db $51,$10,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00
 
-Unknown_724b8: ; 724b8 (1c:64b8)
-INCBIN "baserom.gbc",$724b8,$724c8 - $724b8
+PalPacket_724b8: ; 724b8 (1c:64b8)
+	db $51,$14,$00,$1E,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00
 
-Unknown_724c8: ; 724c8 (1c:64c8)
-INCBIN "baserom.gbc",$724c8,$724d8 - $724c8
+PalPacket_724c8: ; 724c8 (1c:64c8)
+	db $51,$24,$00,$12,$00,$02,$00,$11,$00,$00,$00,$00,$00,$00,$00,$00
 
-Unknown_724d8: ; 724d8 (1c:64d8)
-INCBIN "baserom.gbc",$724d8,$724e8 - $724d8
+PalPacket_724d8: ; 724d8 (1c:64d8)
+	db $59,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00
 
-Unknown_724e8: ; 724e8 (1c:64e8)
-INCBIN "baserom.gbc",$724e8,$724f8 - $724e8
+PalPacket_724e8: ; 724e8 (1c:64e8)
+	db $89,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00
 
-Unknown_724f8: ; 724f8 (1c:64f8)
-INCBIN "baserom.gbc",$724f8,$72508 - $724f8
+PalPacket_724f8: ; 724f8 (1c:64f8)
+	db $89,$01,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00
 
-Unknown_72508: ; 72508 (1c:6508)
-INCBIN "baserom.gbc",$72508,$72518 - $72508
+PalPacket_72508: ; 72508 (1c:6508)
+	db $99,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00
 
-Unknown_72518: ; 72518 (1c:6518)
-INCBIN "baserom.gbc",$72518,$72538 - $72518
+PalPacket_72518: ; 72518 (1c:6518)
+	db $A1,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00
+	
+PalPacket_72528: ; 72528 (1c:6528)
+	db $B9,$01,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00
 
-Unknown_72538: ; 72538 (1c:6538)
-INCBIN "baserom.gbc",$72538,$725c8 - $72538
+PalPacket_72538: ; 72538 (1c:6538)
+	db $B9,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00
+
+INCBIN "baserom.gbc",$72548,$725c8 - $72548
 
 MonsterPalettes: ; 725c8 (1c:65c8)
 	db PAL_MEWMON    ; MISSINGNO
@@ -104343,7 +104366,7 @@ Func_7418e: ; 7418e (1d:418e)
 	call CopyVideoData
 	FuncCoord 4, 8 ; $c444
 	ld hl, Coord
-	ld de, Unknown_74229 ; $4229
+	ld de, UnknownText_74229 ; $4229
 	call PlaceString
 	FuncCoord 4, 9 ; $c458
 	ld hl, Coord
@@ -104351,8 +104374,9 @@ Func_7418e: ; 7418e (1d:418e)
 	call PlaceString
 	jp Func_740ba
 
-Unknown_74229: ; 74229 (1d:4229)
-INCBIN "baserom.gbc",$74229,$74243 - $74229
+UnknownText_74229: ; 74229 (1d:4229)
+	db $60," ",$62," ",$64,"  ",$64," ",$66," ",$68,"@"
+	db $61," ",$63," ",$65,"  ",$65," ",$67," ",$69,"@"
 
 Unknown_74243: ; 74243 (1d:4243)
 INCBIN "baserom.gbc",$74243,$742c3 - $74243
