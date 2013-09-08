@@ -45302,9 +45302,11 @@ UnnamedText_2fb93: ; 2fb93 (b:7b93)
 TrainerInfoTextBoxTileGraphics: ; 2fb98 (b:7b98)
 INCBIN "gfx/trainer_info.2bpp"
 
-; mostly empty, last tile contains circle
 BlankLeaderNames: ; 2fc28 (b:7c28)
 INCBIN "gfx/blank_leader_names.2bpp"
+
+CircleTile: ; 2fd88 (b:7d88)
+INCBIN "gfx/circle_tile.2bpp"
 
 BadgeNumbersTileGraphics: ; 2fd98 (b:7d98)
 INCBIN "gfx/badge_numbers.2bpp"
@@ -52479,11 +52481,6 @@ db 1,2,3,0; LORELEI
 db 1,0    ; CHANNELER
 db 1,0    ; AGATHA
 db 1,3,0  ; LANCE
-
-
-; trainer data: from 5C53 to 652E
-
-; INCBIN "baserom.gbc",$3989e,$39914 - $3989e
 
 ; trainer pic pointers and base money.
 dw YoungsterPic
@@ -86482,10 +86479,10 @@ DisplayDiploma: ; 566e2 (15:66e2)
 	ld hl, $d730
 	set 6, [hl]
 	call DisableLCD
-	ld hl, BlankLeaderNames + $160 ; $7d88 ; circle tile
+	ld hl, CircleTile ; $7d88
 	ld de, $9700
 	ld bc, $0010
-	ld a, BANK(BlankLeaderNames)
+	ld a, BANK(CircleTile)
 	call FarCopyData2
 	ld hl, W_SCREENTILESBUFFER
 	ld bc, $1012
