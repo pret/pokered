@@ -13314,7 +13314,7 @@ Func_5317: ; 5317 (1:5317)
 	db "PLEASE WAIT!@"
 
 Func_551c:
-	ld hl, PointerTable5a5b ; $5a5b
+	ld hl, PointerTable_5a5b ; $5a5b
 	ld b, $0
 	ld a, [$cc38]
 	cp $ff
@@ -13908,7 +13908,7 @@ TradeCompleted:
 TradeCanceled:
 	db "Too bad! The trade",$4E,"was canceled!@"
 
-PointerTable5a5b: ; 5a5b (1:5a5b)
+PointerTable_5a5b: ; 5a5b (1:5a5b)
 	dw Func_5530
 	dw Func_5849
 
@@ -41983,7 +41983,7 @@ INCBIN "baserom.gbc",$1ea25,$1ea26 - $1ea25
 	add a
 	ld d, $0
 	ld e, a
-	ld hl, Unknown_1ea60 ; $6a60
+	ld hl, PointerTable_1ea60 ; $6a60
 	add hl, de
 	ld a, [hli]
 	ld h, [hl]
@@ -41999,8 +41999,13 @@ UnnamedText_1ea5b: ; 1ea5b (7:6a5b)
 	db $50
 ; 0x1ea5b + 5 bytes
 
-Unknown_1ea60: ; 1ea60 (7:6a60)
-INCBIN "baserom.gbc",$1ea60,$1ea6c - $1ea60
+PointerTable_1ea60: ; 1ea60 (7:6a60)
+	dw UnnamedText_1ea6c
+	dw UnnamedText_1ea71
+	dw UnnamedText_1ea76
+	dw UnnamedText_1ea7b
+	dw UnnamedText_1ea80
+	dw UnnamedText_1ea85
 
 UnnamedText_1ea6c: ; 1ea6c (7:6a6c)
 	TX_FAR _UnnamedText_1ea6c
@@ -94808,7 +94813,7 @@ Unknown_5dc2a: ; 5dc2a (17:5c2a)
 	jr z, .asm_5dc93 ; 0x5dc7b $16
 	ld hl, $d730
 	res 6, [hl]
-	ld hl, PointerTable5cd8
+	ld hl, PointerTable_5dcd8
 	add a
 	ld d, $0
 	ld e, a
@@ -94837,7 +94842,7 @@ UnnamedText_5dca3: ; 5dca3 (17:5ca3)
 HowToLinkText: ; 5dca8 (17:5ca8)
 	db "HOW TO LINK",$4e,"COLOSSEUM",$4e,"TRADE CENTER",$4e,"STOP READING@"
 
-PointerTable5cd8: ; 5dcd8 (17:5cd8)
+PointerTable_5dcd8: ; 5dcd8 (17:5cd8)
 	dw UnnamedText_5dcde
 	dw UnnamedText_5dce3
 	dw UnnamedText_5dce8
@@ -94877,7 +94882,7 @@ StatusAilmentText:
 	db " FRZ",$4e
 	db " QUIT@@"
 	
-PointerTable5dcc: ; 5ddcc (17:5ddc)
+PointerTable_5ddcc: ; 5ddcc (17:5ddc)
 	dw UnnamedText_5ddd6
 	dw UnnamedText_5dddb
 	dw UnnamedText_5dde0
@@ -109653,7 +109658,7 @@ PlaySubanimation: ; 78e53 (1e:4e53)
 	push hl
 	ld c,[hl] ; frame block ID
 	ld b,0
-	ld hl,PointerTable6F74
+	ld hl,PointerTable_7af74
 	add hl,bc
 	add hl,bc
 	ld a,[hli]
@@ -111601,7 +111606,7 @@ INCBIN "baserom.gbc",$7a76d,$7af6f - $7a76d
 Unknown_7af6f: ; 7af6f (1e:6f6f)
 INCBIN "baserom.gbc",$7af6f,$7af74 - $7af6f
 
-PointerTable6F74: ; 7af74 (1e:6f74)
+PointerTable_7af74: ; 7af74 (1e:6f74)
 	dw $7de7
 	dw $7068
 	dw $708d
