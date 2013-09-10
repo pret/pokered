@@ -41832,21 +41832,35 @@ UnnamedText_1e946: ; 1e946 (7:6946)
 	db $50
 ; 0x1e946 + 5 bytes
 
-INCBIN "baserom.gbc",$1e94b,$1e953 - $1e94b
+	call EnableAutoTextBoxDrawing
+	ld a, $39
+	jp Func_3ef5
 
 UnnamedText_1e953: ; 1e953 (7:6953)
 	TX_FAR _UnnamedText_1e953
 	db $50
 ; 0x1e953 + 5 bytes
 
-INCBIN "baserom.gbc",$1e958,$1e960 - $1e958
+	call EnableAutoTextBoxDrawing
+	ld a, $05
+	jp Func_3ef5
 
 UnnamedText_1e960: ; 1e960 (7:6960)
 	TX_FAR _UnnamedText_1e960
 	db $50
 ; 0x1e960 + 5 bytes
 
-INCBIN "baserom.gbc",$1e965,$1e97e - $1e965
+	call EnableAutoTextBoxDrawing
+    ld hl, $d2f7
+    ld b, $13
+    call CountSetBits
+    ld a, [$d11e]
+    cp $2
+    ld a, $6
+    jr c, .asm_1e97b
+    ld a, $7
+.asm_1e97b
+    jp Func_3ef5
 
 UnnamedText_1e97e: ; 1e97e (7:697e)
 	TX_FAR _UnnamedText_1e97e
