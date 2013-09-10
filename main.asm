@@ -42118,7 +42118,7 @@ Func_1eb0a: ; 1eb0a (7:6b0a)
 	add a
 	ld d, $0
 	ld e, a
-	ld hl, Unknown_1eb48 ; $6b48
+	ld hl, CinnabarGymGateCoords ; $6b48
 	add hl, de
 	ld a, [hli]
 	ld b, [hl]
@@ -42149,8 +42149,20 @@ Func_1eb0a: ; 1eb0a (7:6b0a)
 	jr nz, .asm_1eb0e
 	ret
 
-Unknown_1eb48: ; 1eb48 (7:6b48)
-INCBIN "baserom.gbc",$1eb48,$1eb69 - $1eb48
+CinnabarGymGateCoords: ; 1eb48 (7:6b48)
+	; format: x-coord, y-coord, direction, buffer
+	; direction: $54 = horizontal gate, $5f = vertical gate
+	db $09,$03,$54,$00
+	db $06,$03,$54,$00
+	db $06,$06,$54,$00
+	db $03,$08,$5f,$00
+	db $02,$06,$54,$00
+	db $02,$03,$54,$00
+
+	call EnableAutoTextBoxDrawing
+    ld a, $30
+    call Func_3ef5
+    ret
 
 UnnamedText_1eb69: ; 1eb69 (7:6b69)
 	TX_FAR _UnnamedText_1eb69
