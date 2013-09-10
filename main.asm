@@ -100853,7 +100853,7 @@ Func_70e7e: ; 70e7e (1c:4e7e)
 	ld hl, W_SCREENTILESBUFFER
 	ld bc, $114
 	call ClearScreenArea
-	ld hl, Unknown_70f11 ; $4f11
+	ld hl, TownMapOrder ; $4f11
 	ld a, [W_WHICHTRADE] ; $cd3d
 	ld c, a
 	ld b, $0
@@ -100926,8 +100926,54 @@ asm_70e92: ; 70e92 (1c:4e92)
 	ld [W_WHICHTRADE], a ; $cd3d
 	jp Func_70e7e
 
-Unknown_70f11: ; 70f11 (1c:4f11)
-INCBIN "baserom.gbc",$70f11,$70f40 - $70f11
+TownMapOrder: ; 70f11 (1c:4f11)
+	db PALLET_TOWN
+	db ROUTE_1
+	db VIRIDIAN_CITY
+	db ROUTE_2
+	db VIRIDIAN_FOREST
+	db DIGLETTS_CAVE
+	db PEWTER_CITY
+	db ROUTE_3
+	db MT_MOON_1
+	db ROUTE_4
+	db CERULEAN_CITY
+	db ROUTE_24
+	db ROUTE_25
+	db BILLS_HOUSE
+	db ROUTE_5
+	db ROUTE_6
+	db VERMILION_CITY
+	db SS_ANNE_1
+	db ROUTE_9
+	db ROCK_TUNNEL_POKECENTER
+	db ROUTE_10
+	db LAVENDER_TOWN
+	db POKEMONTOWER_2
+	db ROUTE_8
+	db ROUTE_7
+	db CELADON_CITY
+	db SAFFRON_CITY
+	db ROUTE_11
+	db ROUTE_12
+	db ROUTE_13
+	db ROUTE_14
+	db ROUTE_15
+	db ROUTE_16
+	db ROUTE_17
+	db ROUTE_18
+	db FUCHSIA_CITY
+	db SAFARI_ZONE_EAST
+	db ROUTE_19
+	db SEAFOAM_ISLANDS_2
+	db ROUTE_20
+	db CINNABAR_ISLAND
+	db ROUTE_21
+	db ROUTE_22
+	db ROUTE_23
+	db VICTORY_ROAD_3
+	db INDIGO_PLATEAU
+	db POWER_PLANT
 
 TownMapCursor: ; 70f40 (1c:4f40)
 INCBIN "gfx/town_map_cursor.1bpp"
