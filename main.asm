@@ -42240,7 +42240,59 @@ UnnamedText_1ebe2: ; 1ebe2 (7:6be2
 	call DelayFrames
 	jp TextScriptEnd
 
-INCBIN "baserom.gbc",$1ec05,$1ec7f - $1ec05
+INCBIN "baserom.gbc",$1ec05,$1ec06 - $1ec05
+
+	call SaveScreenTilesToBuffer1
+	ld hl, $6c7f
+	call PrintText
+	xor a
+	ld [$d07c], a
+	ld [$cc26], a
+	ld [$cc2a], a
+	ld a, $3
+	ld [$cc29], a
+	ld a, $4
+	ld [$cc28], a
+	ld a, $2
+	ld [$cc24], a
+	ld a, $1
+	ld [$cc25], a
+.asm_1ec2d
+	ld hl, $d730
+	set 6, [hl]
+	ld hl, $c3a0
+	ld b, $a
+	ld c, $9
+	call TextBoxBorder
+	ld hl, $c3ca
+	ld de, $6c84
+	call PlaceString
+	ld hl, $6caa
+	call PrintText
+	call SaveScreenTilesToBuffer2
+	call HandleMenuInput
+	bit 1, a
+	jr nz, .asm_1ec74
+	ld a, [$cc26]
+	add $66
+	cp $66
+	jr z, .asm_1ec6c
+	cp $67
+	jr z, .asm_1ec6c
+	cp $68
+	jr z, .asm_1ec6c
+	cp $69
+	jr z, .asm_1ec6c
+	jr .asm_1ec74
+.asm_1ec6c
+	call DisplayPokedex
+	call LoadScreenTilesFromBuffer2
+	jr .asm_1ec2d
+.asm_1ec74
+	ld hl, $d730
+	res 6, [hl]
+	call LoadScreenTilesFromBuffer2
+	jp TextScriptEnd
 
 UnnamedText_1ec7f: ; 1ec7f (7:6c7f)
 	TX_FAR _UnnamedText_1ec7f
