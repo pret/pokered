@@ -41814,7 +41814,7 @@ Func_1e915: ; 1e915 (7:6915)
 	ld a, $56
 	call Predef ; indirect jump to DisplayDexRating (44169 (11:4169))
 .asm_1e932
-	ld hl, Unknown_1e940 ; $6940
+	ld hl, UnnamedText_1e940 ; $6940
 	call PrintText
 	jp LoadScreenTilesFromBuffer2
 ; 1e93b (7:693b)
@@ -41823,8 +41823,9 @@ UnnamedText_1e93b: ; 1e93b (7:693b)
 	db $50
 ; 0x1e93b + 5 bytes
 
-Unknown_1e940: ; 1e940 (7:6940)
-INCBIN "baserom.gbc",$1e940,$1e946 - $1e940
+UnnamedText_1e940: ; 1e940 (7:6940)
+	TX_FAR _UnnamedText_1e940
+	db $0d,$50
 
 UnnamedText_1e946: ; 1e946 (7:6946)
 	TX_FAR _UnnamedText_1e946
@@ -118425,7 +118426,7 @@ _UnnamedText_1e93b: ; 8a35d (22:635d)
 	db "#DEX rated?", $57
 ; 0x8a35d + 30 bytes
 
-UnknownText_8a37b: ; 8a37b (22:637b)
+_UnnamedText_1e940: ; 8a37b (22:637b)
 	db $0, "Closed link to", $4f
 	db "PROF.OAK's PC.@@"
 ; 0x8a37b + 31 bytes
