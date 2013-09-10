@@ -37149,7 +37149,7 @@ LedgeHoppingShadow: ; 1a708 (6:6708)
 INCBIN "gfx/ledge_hopping_shadow.1bpp"
 
 Unknown_1a710: ; 1a710 (6:6710)
-INCBIN "baserom.gbc",$1a710,$1bcc8 - $1a710
+INCBIN "baserom.gbc",$1a710,$1a718 - $1a710
 
 SECTION "bank7",ROMX,BANK[$7]
 
@@ -37659,7 +37659,7 @@ Route1Text1: ; 1cab8 (7:4ab8)
 	ld bc, (POTION << 8) | 1
 	call GiveItem
 	jr nc, .BagFull
-	ld hl, Unknown_1cae8 ; $4ae8
+	ld hl, UnnamedText_1cae8 ; $4ae8
 	jr .asm_46d43 ; 0x1cad3
 .BagFull
 	ld hl, UnnamedText_1caf3 ; $4af3
@@ -37675,8 +37675,9 @@ Route1ViridianMartSampleText: ; 1cae3 (7:4ae3)
 	db $50
 ; 0x1cae3 + 5 bytes
 
-Unknown_1cae8: ; 1cae8 (7:4ae8)
-INCBIN "baserom.gbc",$1cae8,$1caee - $1cae8
+UnnamedText_1cae8: ; 1cae8 (7:4ae8)
+	TX_FAR _UnnamedText_1cae8
+	db $0b,$50
 
 UnnamedText_1caee: ; 1caee (7:4aee)
 	TX_FAR _UnnamedText_1caee
@@ -119423,7 +119424,7 @@ _Route1ViridianMartSampleText: ; 8d5bf (23:55bf)
 	db "Here you go!", $58
 ; 0x8d5bf + 132 bytes
 
-UnknownText_8d643: ; 8d643 (23:5643)
+_UnnamedText_1cae8: ; 8d643 (23:5643)
 	db $0, $52, " got", $4f
 	db "@"
 ; 0x8d643 + 8 bytes
