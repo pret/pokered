@@ -42224,7 +42224,10 @@ UnnamedText_1ebdd: ; 1ebdd (7:6bdd)
 	db $50
 ; 0x1ebdd + 5 bytes
 
-INCBIN "baserom.gbc",$1ebe2,$1ebe8 - $1ebe2
+UnnamedText_1ebe2: ; 1ebe2 (7:6be2
+	TX_FAR _UnnamedText_1ebe2
+	db $06,$08
+	
 	ld a, $ff
 	ld [$c0ee], a
 	call PlaySound
@@ -117256,7 +117259,7 @@ _UnnamedText_1ebdd: ; 889cf (22:49cf)
 	db "PC monitor.", $57
 ; 0x889cf + 44 bytes
 
-UnnamedText_889fb: ; 889fb (22:49fb)
+_UnnamedText_1ebe2: ; 889fb (22:49fb)
 	db $0, $52, " initiated", $4f
 	db "TELEPORTER's Cell", $55
 	db "Separator!@@"
