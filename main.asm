@@ -42055,7 +42055,7 @@ Func_1ea92: ; 1ea92 (7:6a92)
 	set 5, [hl]
 	ld a, [$FF00+$db]
 	ld [$FF00+$e0], a
-	ld hl, Unknown_1eae3 ; $6ae3
+	ld hl, UnnamedText_1eae3 ; $6ae3
 	call PrintText
 	ld a, [$FF00+$e0]
 	ld c, a
@@ -42084,8 +42084,11 @@ Func_1ea92: ; 1ea92 (7:6a92)
 	ld [$da38], a
 	ret
 
-Unknown_1eae3: ; 1eae3 (7:6ae3)
-INCBIN "baserom.gbc",$1eae3,$1eaea - $1eae3
+UnnamedText_1eae3: ; 1eae3 (7:6ae3)
+	db $0b
+	TX_FAR _UnnamedText_1eae3
+	db $06,$08
+	
 	ld a, [$FF00+$e0]
 	ld c, a
 	ld b, $2
@@ -117219,7 +117222,7 @@ _UnnamedText_1ea85: ; 88949 (22:4949)
 	db "TOMBSTONER?", $57
 ; 0x88949 + 27 bytes
 
-UnnamedText_88964: ; 88964 (22:4964)
+_UnnamedText_1eae3: ; 88964 (22:4964)
 	db $0, "You're absolutely", $4f
 	db "correct!", $51
 	db "Go on through!@@"
