@@ -42786,7 +42786,7 @@ Func_2171b: ; 2171b (8:571b)
 	ld a, [hli]
 	push hl
 	push bc
-	ld hl, Unknown_21745 ; $5745
+	ld hl, HMMoveArray ; $5745
 	ld de, $0001
 	call IsInArray
 	pop bc
@@ -42798,8 +42798,13 @@ Func_2171b: ; 2171b (8:571b)
 	ret
 ; 0x21745
 
-Unknown_21745: ; 21745 (8:5745)
-INCBIN "baserom.gbc",$21745,$2174b - $21745
+HMMoveArray: ; 21745 (8:5745)
+	db CUT
+	db FLY
+	db SURF
+	db STRENGTH
+	db FLASH
+	db $ff
 
 ; known jump sources: 215d4 (8:55d4), 21640 (8:5640)
 Func_2174b: ; 2174b (8:574b)
