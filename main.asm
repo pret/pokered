@@ -45090,7 +45090,7 @@ Func_27f86: ; 27f86 (9:7f86)
 	ld hl, Func_3fba8
 	ld b, BANK(Func_3fba8)
 	call Bankswitch ; indirect jump to Func_3fba8 (3fba8 (f:7ba8))
-	ld hl, Unknown_27fb2 ; $7fb2
+	ld hl, UnnamedText_27fb3 ; $7fb2
 	jp PrintText
 .asm_27fa5
 	ld c, $32
@@ -45099,10 +45099,8 @@ Func_27f86: ; 27f86 (9:7f86)
 	ld b, BANK(Func_3fb53)
 	jp Bankswitch ; indirect jump to Func_3fb53 (3fb53 (f:7b53))
 
-Unknown_27fb2: ; 27fb2 (9:7fb2)
-INCBIN "baserom.gbc",$27fb2,$27fb3 - $27fb2
-
 UnnamedText_27fb3: ; 27fb3 (9:7fb3)
+	db $0a
 	TX_FAR _UnnamedText_27fb3
 	db $50
 ; 0x27fb3 + 5 bytes
