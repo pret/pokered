@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+import extras.pokemontools.preprocessor as preprocessor
+
 import sys
 
 chars = {
@@ -254,81 +256,11 @@ chars = {
 "6": 0xFC,
 "7": 0xFD,
 "8": 0xFE,
-"9": 0xFF
-
+"9": 0xFF,
 }
 
-for l in sys.stdin:
+preprocessor.chars = chars
 
-    # strip comments
-    line = l.partition(";")
-    i = 0
-    asm = ""
-    while i < len(line) and l[0] != ";":
-        asm = asm + line[i]
-        i = i + 1
-
-    # skip asm with no quotes
-    if "\"" not in asm:
-        sys.stdout.write(l)
-        continue
-
-    # split by quotes
-    asms = asm.split("\"")
-
-    # skip asm that actually does use ASCII in quotes
-    lowasm = asms[0].lower()
-    if "section" in lowasm \
-    or "include" in lowasm \
-    or "incbin" in lowasm:
-        sys.stdout.write(l)
-        continue
-
-    even = False
-    i = 0
-    for token in asms:
-        i = i + 1
-        if even:
-            # token is a string to convert to byte values
-
-            while len(token):
-                # read a single UTF-8 codepoint
-                char = token[0]
-                if ord(char) >= 0xFC:
-                    char = char + token[1:6]
-                    token = token[6:]
-                elif ord(char) >= 0xF8:
-                    char = char + token[1:5]
-                    token = token[5:]
-                elif ord(char) >= 0xF0:
-                    char = char + token[1:4]
-                    token = token[4:]
-                elif ord(char) >= 0xE0:
-                    char = char + token[1:3]
-                    token = token[3:]
-                elif ord(char) >= 0xC0:
-                    char = char + token[1:2]
-                    token = token[2:]
-                else:
-                    token = token[1:]
-
-                    # certain apostrophe-letter pairs are only a single byte
-                    if char == "'" and \
-                        (token[0] == "d" or \
-                         token[0] == "l" or \
-                         token[0] == "m" or \
-                         token[0] == "r" or \
-                         token[0] == "s" or \
-                         token[0] == "t" or \
-                         token[0] == "v"):
-                        char = char + token[0]
-                        token = token[1:]
-
-                sys.stdout.write("${0:02X}".format(chars[char]))
-
-                if len(token):
-                    sys.stdout.write(", ")
-
-        else:
-            sys.stdout.write(token)
-        even = not even
+macros = []
+macro_table = preprocessor.make_macro_table(macros)
+preprocessor.preprocess(macro_table)
