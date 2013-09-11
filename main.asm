@@ -42948,14 +42948,53 @@ UnnamedText_21820: ; 21820 (8:5820)
 	db $50
 ; 0x21820 + 5 bytes
 
-INCBIN "baserom.gbc",$21825,$21865 - $21825
+	ld a, [$ff00+$aa]
+	cp $1
+	ret z
+	ld a, [$c109]
+	cp $c
+	ret nz
+	ld a, [$d35e]
+	cp $ef
+	ld a, $2
+	jr z, .asm_2183a
+	inc a
+.asm_2183a
+	ld [$d12b], a
+	call EnableAutoTextBoxDrawing
+	ld a, $22
+	jp Func_3ef5
+
+	ld a, [$ff00+$aa]
+	cp $2
+	ret z
+	ld a, [$c109]
+	cp $8
+	ret nz
+	ld a, [$d35e]
+	cp $ef
+	ld a, $2
+	jr z, .asm_2185a
+	inc a
+.asm_2185a
+	ld [$d12b], a
+	call EnableAutoTextBoxDrawing
+	ld a, $22
+	jp Func_3ef5
 
 UnnamedText_21865: ; 21865 (8:5865)
 	TX_FAR _UnnamedText_21865
 	db $50
 ; 0x21865 + 5 bytes
 
-INCBIN "baserom.gbc",$2186a,$21879 - $2186a
+	ld a, [$c109]
+	cp $4
+	ret nz
+	call EnableAutoTextBoxDrawing
+	ld a, $23
+	jp Func_3ef5
+
+INCBIN "baserom.gbc",$21878,$21879 - $21878
 
 Func_21879: ; 21879 (8:5879)
 	ld c, $0
@@ -43861,7 +43900,18 @@ Func_21dcc: ; 21dcc (8:5dcc)
 .asm_21e18
 	ret
 
-INCBIN "baserom.gbc",$21e19,$21e2f - $21e19
+	ld a, c
+	cp $4
+	jr nz, .asm_21e2e ; 0x21e1c $10
+	ld a, [$d083]
+	bit 7, a
+	jr z, .asm_21e2e ; 0x21e23 $9
+	xor a
+	ld [$c0f1], a
+	ld a, $80
+	ld [$c0f2], a
+.asm_21e2e
+	ret
 
 ; known jump sources: 21cb4 (8:5cb4)
 Func_21e2f: ; 21e2f (8:5e2f)
