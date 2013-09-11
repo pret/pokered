@@ -45775,7 +45775,24 @@ RedPicBack: ; 33e0a (c:7e0a)
 OldManPic: ; 33e9a (c:7e9a)
 	INCBIN "pic/trainer/oldman.pic"
 
-INCBIN "baserom.gbc",$33f2b,$33f52 - $33f2b
+	ld hl, $d063
+	ld a, [$ff00+$f3]
+	and a
+	jr z, .asm_33f36
+	ld hl, $d068
+.asm_33f36
+	bit 1, [hl]
+	jr nz, .asm_33f4a
+	set 1, [hl]
+	ld hl, Func_3fba8
+	ld b, BANK(Func_3fba8)
+	call Bankswitch
+	ld hl, UnnamedText_33f52
+	jp PrintText
+.asm_33f4a
+	ld hl, Func_3fb53
+	ld b, BANK(Func_3fb53)
+	jp Bankswitch
 
 UnnamedText_33f52: ; 33f52 (c:7f52)
 	TX_FAR _UnnamedText_33f52
