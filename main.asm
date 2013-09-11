@@ -45619,7 +45619,29 @@ UnnamedText_2ff04: ; 2ff04 (b:7f04)
 	db $50
 ; 0x2ff04 + 5 bytes
 
-INCBIN "baserom.gbc",$2ff09,$2ff32 - $2ff09
+	ld a, [$c102]
+	and $8
+	jr z, .asm_2ff2e
+	ld b, $45
+	ld a, $1c
+	call Predef
+	ld a, b
+	and a
+	ld b, $33
+	jr z, .asm_2ff26
+	ld hl, $d5a4
+	ld a, [hli]
+	or [hl]
+	jr nz, .asm_2ff2e
+	ld b, $32
+.asm_2ff26
+	call EnableAutoTextBoxDrawing
+	ld a, b
+	call Func_3ef5
+	xor a
+.asm_2ff2e
+	ld [$cd3d], a
+	ret
 
 UnnamedText_2ff32: ; 2ff32 (b:7f32)
 	TX_FAR _UnnamedText_2ff32
