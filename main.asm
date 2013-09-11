@@ -42243,7 +42243,7 @@ UnnamedText_1ebe2: ; 1ebe2 (7:6be2
 INCBIN "baserom.gbc",$1ec05,$1ec06 - $1ec05
 
 	call SaveScreenTilesToBuffer1
-	ld hl, $6c7f
+	ld hl, UnnamedText_1ec7f
 	call PrintText
 	xor a
 	ld [$d07c], a
@@ -42265,9 +42265,9 @@ INCBIN "baserom.gbc",$1ec05,$1ec06 - $1ec05
 	ld c, $9
 	call TextBoxBorder
 	ld hl, $c3ca
-	ld de, $6c84
+	ld de, BillsMonListText
 	call PlaceString
-	ld hl, $6caa
+	ld hl, UnnamedText_1ecaa
 	call PrintText
 	call SaveScreenTilesToBuffer2
 	call HandleMenuInput
@@ -42299,6 +42299,7 @@ UnnamedText_1ec7f: ; 1ec7f (7:6c7f)
 	db $50
 ; 0x1ec7f + 5 bytes
 
+BillsMonListText: ; 1ec84 (7:6c84)
 	db "EEVEE",$4e,"FLAREON",$4e,"JOLTEON",$4e,"VAPOREON",$4e,"CANCEL@"
 
 UnnamedText_1ecaa: ; 1ecaa (7:6caa)
