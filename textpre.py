@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import extras.pokemontools.preprocessor as preprocessor
+import extras.pokemontools.configuration as configuration
 
 import sys
 
@@ -261,6 +262,6 @@ chars = {
 
 preprocessor.chars = chars
 
-macros = []
-macro_table = preprocessor.make_macro_table(macros)
-preprocessor.preprocess(macro_table)
+config = configuration.Config()
+processor = preprocessor.Preprocessor(config, [])
+processor.preprocess()
