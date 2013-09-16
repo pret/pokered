@@ -246,7 +246,7 @@ MapHeaderPointers: ; 01ae (0:01ae)
 	dw MtMoon2_h ;id=60
 	dw MtMoon3_h
 	dw CeruleanHouseTrashed_h
-	dw CeruleanHouse2_h
+	dw CeruleanHouse_h
 	dw CeruleanPokecenter_h
 	dw CeruleanGym_h
 	dw BikeShop_h
@@ -374,7 +374,7 @@ MapHeaderPointers: ; 01ae (0:01ae)
 	dw Route16House_h
 	dw Route12House_h
 	dw Route18Gate_h ;id=190
-	dw Route18GateHeader_h
+	dw Route18GateUpstairs_h
 	dw SeafoamIslands1_h
 	dw Route22Gate_h
 	dw VictoryRoad2_h
@@ -413,7 +413,7 @@ MapHeaderPointers: ; 01ae (0:01ae)
 	dw UnknownDungeon3_h
 	dw UnknownDungeon1_h
 	dw NameRater_h
-	dw CeruleanHouse3_h
+	dw CeruleanHouse2_h
 	dw Route16GateMap_h ; unused
 	dw RockTunnel2_h
 	dw SilphCo9_h
@@ -18116,7 +18116,7 @@ MapHeaderBanks: ; c23d (3:423d)
 	db BANK(MtMoon2_h)
 	db BANK(MtMoon3_h)
 	db BANK(CeruleanHouseTrashed_h)
-	db BANK(CeruleanHouse2_h)
+	db BANK(CeruleanHouse_h)
 	db BANK(CeruleanPokecenter_h)
 	db BANK(CeruleanGym_h)
 	db BANK(BikeShop_h)
@@ -18244,7 +18244,7 @@ MapHeaderBanks: ; c23d (3:423d)
 	db BANK(Route16House_h)
 	db BANK(Route12House_h)
 	db BANK(Route18Gate_h)
-	db BANK(Route18GateHeader_h)
+	db BANK(Route18GateUpstairs_h)
 	db BANK(SeafoamIslands1_h)
 	db BANK(Route22Gate_h)
 	db BANK(VictoryRoad2_h)
@@ -18283,7 +18283,7 @@ MapHeaderBanks: ; c23d (3:423d)
 	db BANK(UnknownDungeon3_h)
 	db BANK(UnknownDungeon1_h)
 	db BANK(NameRater_h)
-	db BANK(CeruleanHouse3_h)
+	db BANK(CeruleanHouse2_h)
 	db $01
 	db BANK(RockTunnel2_h)
 	db BANK(SilphCo9_h)
@@ -36712,7 +36712,7 @@ VermilionHouse1Blocks: ; 1c1de (7:41de)
 NameRaterBlocks: ; 1c1de (7:41de)
 LavenderHouse1Blocks: ; 1c1de (7:41de)
 LavenderHouse2Blocks: ; 1c1de (7:41de)
-CeruleanHouse2Blocks: ; 1c1de (7:41de)
+CeruleanHouseBlocks: ; 1c1de (7:41de)
 PewterHouse1Blocks: ; 1c1de (7:41de)
 PewterHouse2Blocks: ; 1c1de (7:41de)
 ViridianHouseBlocks: ; 0x1c1de 41DE size=16
@@ -38826,26 +38826,26 @@ CeruleanHouseTrashedObject: ; 0x1d6bf (size=43)
 	EVENT_DISP $4, $7, $3
 	EVENT_DISP $4, $0, $3
 
-CeruleanHouse2_h: ; 0x1d6ea to 0x1d6f6 (12 bytes) (bank=7) (id=63)
+CeruleanHouse_h: ; 0x1d6ea to 0x1d6f6 (12 bytes) (bank=7) (id=63)
 	db $08 ; tileset
 	db CERULEAN_HOUSE_HEIGHT, CERULEAN_HOUSE_WIDTH ; dimensions (y, x)
-	dw CeruleanHouse2Blocks, CeruleanHouse2Texts, CeruleanHouse2Script ; blocks, texts, scripts
+	dw CeruleanHouseBlocks, CeruleanHouseTexts, CeruleanHouseScript ; blocks, texts, scripts
 	db $00 ; connections
 
-	dw CeruleanHouse2Object ; objects
+	dw CeruleanHouseObject ; objects
 
-CeruleanHouse2Script: ; 1d6f6 (7:56f6)
+CeruleanHouseScript: ; 1d6f6 (7:56f6)
 	jp EnableAutoTextBoxDrawing
 ; 0x1d6f9
 
-CeruleanHouse2Texts: ; 1d6f9 (7:56f9)
-	dw CeruleanHouse2Text1, CeruleanHouse2Text2
+CeruleanHouseTexts: ; 1d6f9 (7:56f9)
+	dw CeruleanHouseText1, CeruleanHouseText2
 
-CeruleanHouse2Text1: ; 1d6fd (7:56fd)
-	TX_FAR _CeruleanHouse2Text1
+CeruleanHouseText1: ; 1d6fd (7:56fd)
+	TX_FAR _CeruleanHouseText1
 	db $50
 
-CeruleanHouse2Text2: ; 1d702 (7:5702)
+CeruleanHouseText2: ; 1d702 (7:5702)
 	db $08 ; asm
 	ld a, $6
 	ld [W_WHICHTRADE], a
@@ -38853,7 +38853,7 @@ CeruleanHouse2Text2: ; 1d702 (7:5702)
 	call Predef
 	jp TextScriptEnd
 
-CeruleanHouse2Object: ; 0x1d710 (size=32)
+CeruleanHouseObject: ; 0x1d710 (size=32)
 	db $a ; border tile
 
 	db $2 ; warps
@@ -73041,7 +73041,7 @@ Route15GateBlocks: ; 480c7 (12:40c7)
 Route11GateBlocks: ; 480c7 (12:40c7)
 	INCBIN "maps/route11gate.blk"
 
-Route18GateHeaderBlocks: ; 480db (12:40db)
+Route18GateUpstairsBlocks: ; 480db (12:40db)
 Route16GateUpstairsBlocks: ; 480db (12:40db)
 Route12GateUpstairsBlocks: ; 480db (12:40db)
 Route15GateUpstairsBlocks: ; 480db (12:40db)
@@ -73430,7 +73430,7 @@ CeladonMart4Blocks: ; 483a1 (12:43a1)
 
 CeladonMartRoof_h: ; 0x483c9 to 0x483d5 (12 bytes) (bank=12) (id=126)
 	db $12 ; tileset
-	db CELADON_MART_5_HEIGHT, CELADON_MART_5_WIDTH ; dimensions (y, x)
+	db CELADON_MART_ROOF_HEIGHT, CELADON_MART_ROOF_WIDTH ; dimensions (y, x)
 	dw CeladonMartRoofBlocks, CeladonMartRoofTexts, CeladonMartRoofScript ; blocks, texts, scripts
 	db $00 ; connections
 
@@ -73700,11 +73700,11 @@ CeladonMartRoofObject: ; 0x485a8 (size=36)
 	EVENT_DISP $a, $2, $f ; CELADON_MART_5
 
 CeladonMartRoofBlocks: ; 485cc (12:45cc)
-	INCBIN "maps/celadonmart5.blk"
+	INCBIN "maps/celadonmartroof.blk"
 
 CeladonMartElevator_h: ; 0x485f4 to 0x48600 (12 bytes) (bank=12) (id=127)
 	db $12 ; tileset
-	db CELADON_MART_6_HEIGHT, CELADON_MART_6_WIDTH ; dimensions (y, x)
+	db CELADON_MART_ELEVATOR_HEIGHT, CELADON_MART_ELEVATOR_WIDTH ; dimensions (y, x)
 	dw CeladonMartElevatorBlocks, CeladonMartElevatorTexts, CeladonMartElevatorScript ; blocks, texts, scripts
 	db $00 ; connections
 
@@ -73779,7 +73779,7 @@ CeladonMartElevatorObject: ; 0x4866d (size=23)
 	EVENT_DISP $2, $3, $2 ; CELADON_MART_1
 
 CeladonMartElevatorBlocks: ; 48684 (12:4684)
-	INCBIN "maps/celadonmart6.blk"
+	INCBIN "maps/celadonmartelevator.blk"
 
 CeladonMansion1_h: ; 0x48688 to 0x48694 (12 bytes) (bank=12) (id=128)
 	db $13 ; tileset
@@ -75034,7 +75034,7 @@ CeladonGameCornerBlocks: ; 49003 (12:5003)
 
 CeladonMart5_h: ; 0x4905d to 0x49069 (12 bytes) (bank=12) (id=136)
 	db $12 ; tileset
-	db CELADON_HOUSE_HEIGHT, CELADON_HOUSE_WIDTH ; dimensions (y, x)
+	db CELADON_MART_5_HEIGHT, CELADON_MART_5_WIDTH ; dimensions (y, x)
 	dw CeladonMart5Blocks, CeladonMart5Texts, CeladonMart5Script ; blocks, texts, scripts
 	db $00 ; connections
 
@@ -75082,7 +75082,7 @@ CeladonMart5Object: ; 0x49085 (size=55)
 	EVENT_DISP $a, $1, $1 ; CELADON_MART_ELEVATOR
 
 CeladonMart5Blocks: ; 490bc (12:50bc)
-	INCBIN "maps/celadonhouse.blk"
+	INCBIN "maps/celadonmart5.blk"
 
 CeladonPrizeRoom_h: ; 0x490e4 to 0x490f0 (12 bytes) (bank=12) (id=137)
 	db $12 ; tileset
@@ -75235,7 +75235,7 @@ CeladonDinerBlocks: ; 491ee (12:51ee)
 
 CeladonHouse_h: ; 0x49202 to 0x4920e (12 bytes) (bank=12) (id=139)
 	db $13 ; tileset
-	db CELADON_HOUSE_2_HEIGHT, CELADON_HOUSE_2_WIDTH ; dimensions (y, x)
+	db CELADON_HOUSE_HEIGHT, CELADON_HOUSE_WIDTH ; dimensions (y, x)
 	dw CeladonHouseBlocks, CeladonHouseTexts, CeladonHouseScript ; blocks, texts, scripts
 	db $00 ; connections
 
@@ -75280,7 +75280,7 @@ CeladonHouseObject: ; 0x49227 (size=38)
 	EVENT_DISP $4, $7, $3
 
 CeladonHouseBlocks: ; 4924d (12:524d)
-	INCBIN "maps/celadonhouse2.blk"
+	INCBIN "maps/celadonhouse.blk"
 
 CeladonHotel_h: ; 0x4925d to 0x49269 (12 bytes) (bank=12) (id=140)
 	db $06 ; tileset
@@ -76246,22 +76246,22 @@ Route18GateObject: ; 0x49937 (size=50)
 	EVENT_DISP $4, $5, $7
 	EVENT_DISP $4, $8, $6 ; ROUTE_18_GATE_2F
 
-Route18GateHeader_h: ; 0x49969 to 0x49975 (12 bytes) (id=191)
+Route18GateUpstairs_h: ; 0x49969 to 0x49975 (12 bytes) (id=191)
 	db $0c ; tileset
 	db ROUTE_18_GATE_2F_HEIGHT, ROUTE_18_GATE_2F_WIDTH ; dimensions (y, x)
-	dw Route18GateHeaderBlocks, Route18GateHeaderTexts, Route18GateHeaderScript ; blocks, texts, scripts
+	dw Route18GateUpstairsBlocks, Route18GateUpstairsTexts, Route18GateUpstairsScript ; blocks, texts, scripts
 	db $00 ; connections
 
-	dw Route18GateHeaderObject ; objects
+	dw Route18GateUpstairsObject ; objects
 
-Route18GateHeaderScript: ; 49975 (12:5975)
+Route18GateUpstairsScript: ; 49975 (12:5975)
 	jp DisableAutoTextBoxDrawing
 ; 0x49978
 
-Route18GateHeaderTexts: ; 49978 (12:5978)
-	dw Route18GateHeaderText1, Route18GateHeaderText2, Route18GateHeaderText3
+Route18GateUpstairsTexts: ; 49978 (12:5978)
+	dw Route18GateUpstairsText1, Route18GateUpstairsText2, Route18GateUpstairsText3
 
-Route18GateHeaderText1: ; 4997e (12:597e)
+Route18GateUpstairsText1: ; 4997e (12:597e)
 	db $08 ; asm
 	ld a, $5
 	ld [W_WHICHTRADE], a
@@ -76269,7 +76269,7 @@ Route18GateHeaderText1: ; 4997e (12:597e)
 	call Predef
 	jp TextScriptEnd
 
-Route18GateHeaderText2: ; 4998c (12:598c)
+Route18GateUpstairsText2: ; 4998c (12:598c)
 	db $8
 	ld hl, UnnamedText_49993 ; $5993
 	jp Unnamed_55c9
@@ -76280,7 +76280,7 @@ UnnamedText_49993: ; 49993 (12:5993)
 	db $50
 ; 0x49993 + 5 bytes
 
-Route18GateHeaderText3: ; 49998 (12:5998)
+Route18GateUpstairsText3: ; 49998 (12:5998)
 	db $8
 	ld hl, UnnamedText_4999f ; $599f
 	jp Unnamed_55c9
@@ -76291,15 +76291,15 @@ UnnamedText_4999f: ; 4999f (12:599f)
 	db $50
 ; 0x4999f + 5 bytes
 
-Route18GateHeaderObject: ; 0x499a4 (size=24)
+Route18GateUpstairsObject: ; 0x499a4 (size=24)
 	db $a ; border tile
 
 	db $1 ; warps
 	db $7, $7, $4, ROUTE_18_GATE_1F
 
 	db $2 ; signs
-	db $2, $1, $2 ; Route18GateHeaderText2
-	db $2, $6, $3 ; Route18GateHeaderText3
+	db $2, $1, $2 ; Route18GateUpstairsText2
+	db $2, $6, $3 ; Route18GateUpstairsText3
 
 	db $1 ; people
 	db SPRITE_BUG_CATCHER, $2 + 4, $4 + 4, $fe, $2, $1 ; person
@@ -103369,8 +103369,8 @@ CinnabarPokecenterBlocks: ; 74030 (1d:4030)
 FuchsiaPokecenterBlocks: ; 74030 (1d:4030)
 	INCBIN "maps/fuchsiapokecenter.blk"
 
-CeruleanHouse3Blocks: ; 7404c (1d:404c)
-	INCBIN "maps/ceruleanhouse3.blk"
+CeruleanHouse2Blocks: ; 7404c (1d:404c)
+	INCBIN "maps/ceruleanhouse2.blk"
 
 ; known jump sources: 5a4c8 (16:64c8)
 Func_7405c: ; 7405c (1d:405c)
@@ -104676,15 +104676,15 @@ UnknownDungeon1Object: ; 0x74d15 (size=97)
 UnknownDungeon1Blocks: ; 74d76 (1d:4d76)
 	INCBIN "maps/unknowndungeon1.blk"
 
-CeruleanHouse3_h: ; 0x74dfd to 0x74e09 (12 bytes) (id=230)
+CeruleanHouse2_h: ; 0x74dfd to 0x74e09 (12 bytes) (id=230)
 	db $0d ; tileset
-	db CERULEAN_HOUSE_3_HEIGHT, CERULEAN_HOUSE_3_WIDTH ; dimensions (y, x)
-	dw CeruleanHouse3Blocks, CeruleanHouse3Texts, CeruleanHouse3Script ; blocks, texts, scripts
+	db CERULEAN_HOUSE_2_HEIGHT, CERULEAN_HOUSE_2_WIDTH ; dimensions (y, x)
+	dw CeruleanHouse2Blocks, CeruleanHouse2Texts, CeruleanHouse2Script ; blocks, texts, scripts
 	db $00 ; connections
 
-	dw CeruleanHouse3Object ; objects
+	dw CeruleanHouse2Object ; objects
 
-CeruleanHouse3Script: ; 74e09 (1d:4e09)
+CeruleanHouse2Script: ; 74e09 (1d:4e09)
 	ld a, $1
 	ld [$cf0c], a
 	dec a
@@ -104692,10 +104692,10 @@ CeruleanHouse3Script: ; 74e09 (1d:4e09)
 	ret
 ; 0x74e13
 
-CeruleanHouse3Texts: ; 74e13 (1d:4e13)
-	dw CeruleanHouse3Text1
+CeruleanHouse2Texts: ; 74e13 (1d:4e13)
+	dw CeruleanHouse2Text1
 
-CeruleanHouse3Text1: ; 74e15 (1d:4e15)
+CeruleanHouse2Text1: ; 74e15 (1d:4e15)
 	db $8
 	ld hl, UnnamedText_74e77
 	call PrintText
@@ -104807,7 +104807,7 @@ UnnamedText_74eb9: ; 74eb9 (1d:4eb9)
 	db $50
 ; 0x74eb9 + 5 bytes
 
-CeruleanHouse3Object: ; 0x74ebe (size=34)
+CeruleanHouse2Object: ; 0x74ebe (size=34)
 	db $c ; border tile
 
 	db $3 ; warps
@@ -107565,7 +107565,7 @@ LoreleiObject: ; 0x76280 (size=44)
 	EVENT_DISP $5, $0, $5 ; BRUNOS_ROOM
 
 LoreleiBlocks: ; 762ac (1d:62ac)
-	INCBIN "maps/loreli.blk"
+	INCBIN "maps/lorelei.blk"
 
 Bruno_h: ; 0x762ca to 0x762d6 (12 bytes) (id=246)
 	db $07 ; tileset
@@ -122965,7 +122965,7 @@ _CeruleanHouseTrashedText3: ; 9886f (26:486f)
 	db $0, "TEAM ROCKET left", $4f
 	db "a way out!", $57
 
-_CeruleanHouse2Text1: ; 9888c (26:488c)
+_CeruleanHouseText1: ; 9888c (26:488c)
 	db $0, "My husband likes", $4f
 	db "trading #MON.", $51
 	db "If you are a", $4f
