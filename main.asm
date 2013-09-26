@@ -928,7 +928,7 @@ WarpFound2: ; 073c (0:073c)
 	ld [$d73b],a ; save ID of used warp
 	ld a,[W_CURMAP]
 	ld [$d73c],a
-	call CheckIfInOutsideMap ; check if the tileset number is 0 or the map is Route 12
+	call CheckIfInOutsideMap
 	jr nz,.indoorMaps
 ; this is for handling "outside" maps that can't have the 0xFF destination map
 	ld a,[W_CURMAP]
@@ -1144,13 +1144,12 @@ PlayMapChangeSound: ; 08c9 (0:08c9)
 	ret nz
 	jp GBFadeIn1
 
-; function to set the Z flag if the tileset number is 0 or the map is Route 12
-; strangely, Route 12 has tileset 0, so the check is redundant
 CheckIfInOutsideMap: ; 08e1 (0:08e1)
+; If the player is in an outside map (a town or route), set the z flag
 	ld a,[W_CURMAPTILESET]
-	and a
+	and a ; most towns/routes have tileset 0
 	ret z
-	cp a,ROUTE_12
+	cp a,$17 ; Route 23 / Indigo Plateau
 	ret
 
 ; this function is an extra check that sometimes has to pass in order to warp, beyond just standing on a warp
