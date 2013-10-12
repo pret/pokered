@@ -18346,209 +18346,1865 @@ Func_7c18: ; 7c18 (1:7c18)
 
 SECTION "bank2",ROMX,BANK[$2]
 
-INCBIN "baserom.gbc",$8000,$822e - $8000
+INCLUDE "music/headers/sfxheaders02.tx"
+INCLUDE "music/headers/musicheaders02.tx"
 
-;Music Headers
-;Pallet Town
-PalletTown_mh: ; 0x822E - 0x8236
-	db $80
-	dw PalletTown_md_1 ;Channel 1 ($A7C5 - $A85E)
-	db $01
-	dw PalletTown_md_2 ;Channel 2 ($A85f - $A8DD)
-	db $02
-	dw PalletTown_md_3 ;Channel 3 ($A8DE - $AA75)
+INCLUDE "music/sfx/sfx_02_01.tx"
+INCLUDE "music/sfx/sfx_02_02.tx"
+INCLUDE "music/sfx/sfx_02_03.tx"
+INCLUDE "music/sfx/sfx_02_04.tx"
+INCLUDE "music/sfx/sfx_02_05.tx"
+INCLUDE "music/sfx/sfx_02_06.tx"
+INCLUDE "music/sfx/sfx_02_07.tx"
+INCLUDE "music/sfx/sfx_02_08.tx"
+INCLUDE "music/sfx/sfx_02_09.tx"
+INCLUDE "music/sfx/sfx_02_0a.tx"
+INCLUDE "music/sfx/sfx_02_0b.tx"
+INCLUDE "music/sfx/sfx_02_0c.tx"
+INCLUDE "music/sfx/sfx_02_0d.tx"
+INCLUDE "music/sfx/sfx_02_0e.tx"
+INCLUDE "music/sfx/sfx_02_0f.tx"
+INCLUDE "music/sfx/sfx_02_10.tx"
+INCLUDE "music/sfx/sfx_02_11.tx"
+INCLUDE "music/sfx/sfx_02_12.tx"
+INCLUDE "music/sfx/sfx_02_13.tx"
 
-;Pokemon Center
-Pokecenter_mh: ; 0x8237 - 0x823F
-	db $80
-	dw Pokecenter_md_1 ;Channel 1 ($BE56 - $BEF8)
-	db $01
-	dw Pokecenter_md_2 ;Channel 2 ($BEF9 - $BF6F)
-	db $02
-	dw Pokecenter_md_3 ;Channel 3 ($BF70 - $BFFF)
+INCBIN "baserom.gbc",$8361,$83c3 - $8361
 
-;Gyms
-Gym_mh: ; 0x8240 - 0x8248
-	db $80
-	dw Gym_md_1 ;Channel 1 ($BCBB - $BD6A)
-	db $01
-	dw Gym_md_2 ;Channel 2 ($BD6B - $BDF9)
-	db $02
-	dw Gym_md_3 ;Channel 3 ($BDFA - $BE55)
+INCLUDE "music/sfx/sfx_02_3f.tx"
+INCLUDE "music/sfx/sfx_02_5e.tx"
+INCLUDE "music/sfx/sfx_02_56.tx"
+INCLUDE "music/sfx/sfx_02_57.tx"
+INCLUDE "music/sfx/sfx_02_58.tx"
+INCLUDE "music/sfx/sfx_02_3c.tx"
+INCLUDE "music/sfx/sfx_02_59.tx"
+INCLUDE "music/sfx/sfx_02_5a.tx"
+INCLUDE "music/sfx/sfx_02_5b.tx"
+INCLUDE "music/sfx/sfx_02_5c.tx"
+INCLUDE "music/sfx/sfx_02_40.tx"
+INCLUDE "music/sfx/sfx_02_5d.tx"
+INCLUDE "music/sfx/sfx_02_3d.tx"
+INCLUDE "music/sfx/sfx_02_43.tx"
+INCLUDE "music/sfx/sfx_02_3e.tx"
+INCLUDE "music/sfx/sfx_02_44.tx"
+INCLUDE "music/sfx/sfx_02_45.tx"
+INCLUDE "music/sfx/sfx_02_46.tx"
+INCLUDE "music/sfx/sfx_02_47.tx"
+INCLUDE "music/sfx/sfx_02_48.tx"
+INCLUDE "music/sfx/sfx_02_49.tx"
+INCLUDE "music/sfx/sfx_02_4a.tx"
+INCLUDE "music/sfx/sfx_02_4b.tx"
+INCLUDE "music/sfx/sfx_02_4c.tx"
+INCLUDE "music/sfx/sfx_02_4d.tx"
+INCLUDE "music/sfx/sfx_02_4e.tx"
+INCLUDE "music/sfx/sfx_02_4f.tx"
+INCLUDE "music/sfx/sfx_02_50.tx"
+INCLUDE "music/sfx/sfx_02_51.tx"
+INCLUDE "music/sfx/sfx_02_52.tx"
+INCLUDE "music/sfx/sfx_02_53.tx"
+INCLUDE "music/sfx/sfx_02_54.tx"
+INCLUDE "music/sfx/sfx_02_55.tx"
+INCLUDE "music/sfx/sfx_02_5f.tx"
 
-;Viridian City, Pewter City, Saffron City
-Cities1_mh: ; 0x8249 - 0x8254
-	db $C0
-	dw Cities1_md_1 ;Channel 1
-	db $01
-	dw Cities1_md_2 ;Channel 2
-	db $02
-	dw Cities1_md_3 ;Channel 3
-	db $03
-	dw Cities1_md_4 ;Channel 4
+INCBIN "baserom.gbc",$86e3,$872f - $86e3
 
-;Cerulean City, Fuchsia City
-Cities2_mh: ; 0x8255 - 0x825D
-	db $80
-	dw Cities2_md_1 ;Channel 1
-	db $01
-	dw Cities2_md_2 ;Channel 2
-	db $02
-	dw Cities2_md_3 ;Channel 3
+INCLUDE "music/sfx/sfx_02_1d.tx"
+INCLUDE "music/sfx/sfx_02_37.tx"
+INCLUDE "music/sfx/sfx_02_38.tx"
+INCLUDE "music/sfx/sfx_02_25.tx"
+INCLUDE "music/sfx/sfx_02_39.tx"
+INCLUDE "music/sfx/sfx_02_17.tx"
+INCLUDE "music/sfx/sfx_02_23.tx"
+INCLUDE "music/sfx/sfx_02_24.tx"
+INCLUDE "music/sfx/sfx_02_14.tx"
+INCLUDE "music/sfx/sfx_02_22.tx"
+INCLUDE "music/sfx/sfx_02_1a.tx"
+INCLUDE "music/sfx/sfx_02_1b.tx"
+INCLUDE "music/sfx/sfx_02_19.tx"
+INCLUDE "music/sfx/sfx_02_1f.tx"
+INCLUDE "music/sfx/sfx_02_20.tx"
+INCLUDE "music/sfx/sfx_02_16.tx"
+INCLUDE "music/sfx/sfx_02_21.tx"
+INCLUDE "music/sfx/sfx_02_15.tx"
+INCLUDE "music/sfx/sfx_02_1e.tx"
+INCLUDE "music/sfx/sfx_02_1c.tx"
+INCLUDE "music/sfx/sfx_02_18.tx"
+INCLUDE "music/sfx/sfx_02_2d.tx"
+INCLUDE "music/sfx/sfx_02_2a.tx"
+INCLUDE "music/sfx/sfx_02_2f.tx"
+INCLUDE "music/sfx/sfx_02_26.tx"
+INCLUDE "music/sfx/sfx_02_27.tx"
+INCLUDE "music/sfx/sfx_02_28.tx"
+INCLUDE "music/sfx/sfx_02_32.tx"
+INCLUDE "music/sfx/sfx_02_29.tx"
+INCLUDE "music/sfx/sfx_02_2b.tx"
+INCLUDE "music/sfx/sfx_02_30.tx"
+INCLUDE "music/sfx/sfx_02_2e.tx"
+INCLUDE "music/sfx/sfx_02_31.tx"
+INCLUDE "music/sfx/sfx_02_2c.tx"
+INCLUDE "music/sfx/sfx_02_33.tx"
+INCLUDE "music/sfx/sfx_02_34.tx"
+INCLUDE "music/sfx/sfx_02_35.tx"
+INCLUDE "music/sfx/sfx_02_36.tx"
 
-;Celadon City
-Celadon_mh: ; 0x825E - 0x8266
-	db $80
-	dw Celadon_md_1 ;Channel 1
-	db $01
-	dw Celadon_md_2 ;Channel 2
-	db $02
-	dw Celadon_md_3 ;Channel 3
+Func_90c6: ; 0x90c6
+	xor a
+	ld [$cfc7], a
+	ld [$d083], a
+	dec a
+	ld [$c0ee], a
+	call PlaySound
+	call DelayFrame
+	ld c, $8
+	ld a, [$d05c]
+	and a
+	jr z, .asm_90e3 ; 0x90dd $4
+	ld a, $ea
+	jr .asm_9100 ; 0x90e1 $1d
+.asm_90e3
+	ld a, [$d059]
+	cp $c8
+	jr c, .asm_90fe ; 0x90e8 $14
+	cp $f3
+	jr z, .asm_90fa ; 0x90ec $c
+	cp $f7
+	jr nz, .asm_90f6 ; 0x90f0 $4
+	ld a, $ea
+	jr .asm_9100 ; 0x90f4 $a
+.asm_90f6
+	ld a, $ed
+	jr .asm_9100 ; 0x90f8 $6
+.asm_90fa
+	ld a, $f3
+	jr .asm_9100 ; 0x90fc $2
+.asm_90fe
+	ld a, $f0
+.asm_9100
+	jp PlayMusic
+; 0x9103
 
-;Cinnabar Island
-Cinnabar_mh: ; 0x8267 - 0x826F
-	db $80
-	dw Cinnabar_md_1 ;Channel 1
-	db $01
-	dw Cinnabar_md_2 ;Channel 2
-	db $02
-	dw Cinnabar_md_3 ;Channel 3
+Func_9103: ; 0x9103
+	ld c, $0
+.asm_9105
+	ld b, $0
+	ld hl, $c026
+	add hl, bc
+	ld a, [hl]
+	and a
+	jr z, .asm_9131 ; 0x910d $22
+	ld a, c
+	cp $4
+	jr nc, .asm_912e ; 0x9112 $1a
+	ld a, [$c002]
+	and a
+	jr z, .asm_912e ; 0x9118 $14
+	bit 7, a
+	jr nz, .asm_9131 ; 0x911c $13
+	set 7, a
+	ld [$c002], a
+	xor a
+	ld [$ff00+$25], a
+	ld [$ff00+$1a], a
+	ld a, $80
+	ld [$ff00+$1a], a
+	jr .asm_9131 ; 0x912c $3
+.asm_912e
+	call Func_9138
+.asm_9131
+	ld a, c
+	inc c
+	cp $7
+	jr nz, .asm_9105 ; 0x9135 $ce
+	ret
+; 0x9138
 
-;Vermilion City
-Vermilion_mh: ; 0x8270 - 0x827B
-	db $C0
-	dw Vermilion_md_1 ;Channel 1
-	db $01
-	dw Vermilion_md_2 ;Channel 2
-	db $02
-	dw Vermilion_md_3 ;Channel 3
-	db $03
-	dw Vermilion_md_4 ;Channel 4
+Func_9138: ; 0x9138
+	ld b, $0
+	ld hl, $c0b6
+	add hl, bc
+	ld a, [hl]
+	cp $1
+	jp z, Func_91d0
+	dec a
+	ld [hl], a
+	ld a, c
+	cp $4
+	jr nc, .asm_9154 ; 0x9149 $9
+	ld hl, $c02a
+	add hl, bc
+	ld a, [hl]
+	and a
+	jr z, .asm_9154 ; 0x9151 $1
+	ret
+.asm_9154
+	ld hl, $c02e
+	add hl, bc
+	bit 6, [hl]
+	jr z, .asm_915f ; 0x915a $3
+	call Func_980d
+.asm_915f
+	ld b, $0
+	ld hl, $c036
+	add hl, bc
+	bit 0, [hl]
+	jr nz, .asm_9171 ; 0x9167 $8
+	ld hl, $c02e
+	add hl, bc
+	bit 2, [hl]
+	jr nz, .asm_9185 ; 0x916f $14
+.asm_9171
+	ld hl, $c02e
+	add hl, bc
+	bit 4, [hl]
+	jr z, .asm_917c ; 0x9177 $3
+	jp Func_96f9
+.asm_917c
+	ld hl, $c04e
+	add hl, bc
+	ld a, [hl]
+	and a
+	jr z, .asm_9186 ; 0x9182 $2
+	dec [hl]
+.asm_9185
+	ret
+.asm_9186
+	ld hl, $c056
+	add hl, bc
+	ld a, [hl]
+	and a
+	jr nz, .asm_918f ; 0x918c $1
+	ret
+.asm_918f
+	ld d, a
+	ld hl, $c05e
+	add hl, bc
+	ld a, [hl]
+	and $f
+	and a
+	jr z, .asm_919c ; 0x9198 $2
+	dec [hl]
+	ret
+.asm_919c
+	ld a, [hl]
+	swap [hl]
+	or [hl]
+	ld [hl], a
+	ld hl, $c066
+	add hl, bc
+	ld e, [hl]
+	ld hl, $c02e
+	add hl, bc
+	bit 3, [hl]
+	jr z, .asm_91bc ; 0x91ac $e
+	res 3, [hl]
+	ld a, d
+	and $f
+	ld d, a
+	ld a, e
+	sub d
+	jr nc, .asm_91ba ; 0x91b6 $2
+	ld a, $0
+.asm_91ba
+	jr .asm_91c8 ; 0x91ba $c
+.asm_91bc
+	set 3, [hl]
+	ld a, d
+	and $f0
+	swap a
+	add e
+	jr nc, .asm_91c8 ; 0x91c4 $2
+	ld a, $ff
+.asm_91c8
+	ld d, a
+	ld b, $3
+	call Func_9838
+	ld [hl], d
+	ret
+; 0x91d0
 
-;Lavender Town
-Lavender_mh: ; 0x827C - 0x8287
-	db $C0
-	dw Lavender_md_1 ;Channel 1
-	db $01
-	dw Lavender_md_2 ;Channel 2
-	db $02
-	dw Lavender_md_3 ;Channel 3
-	db $03
-	dw Lavender_md_4 ;Channel 4
+Func_91d0 ; 0x91d0
+	ld hl, $c06e
+	add hl, bc
+	ld a, [hl]
+	ld hl, $c04e
+	add hl, bc
+	ld [hl], a
+	ld hl, $c02e
+	add hl, bc
+	res 4, [hl]
+	res 5, [hl]
+	call Func_91e6
+	ret
+; 0x91e6
 
-;SS Anne
-SSAnne_mh: ; 0x8288 - 0x8290
-	db $80
-	dw SSAnne_md_1 ;Channel 1
-	db $01
-	dw SSAnne_md_2 ;Channel 2
-	db $02
-	dw SSAnne_md_3 ;Channel 3
+Func_91e6 ; 0x91e6
+	call Func_9825
+	ld d, a
+	cp $ff
+	jp nz, Func_9274
+	ld b, $0
+	ld hl, $c02e
+	add hl, bc
+	bit 1, [hl]
+	jr nz, .asm_9224 ; 0x91f7 $2b
+	ld a, c
+	cp $3
+	jr nc, .asm_9200 ; 0x91fc $2
+	jr .asm_923f ; 0x91fe $3f
+.asm_9200
+	res 2, [hl]
+	ld hl, $c036
+	add hl, bc
+	res 0, [hl]
+	cp $6
+	jr nz, .asm_9214 ; 0x920a $8
+	ld a, $0
+	ld [$ff00+$1a], a
+	ld a, $80
+	ld [$ff00+$1a], a
+.asm_9214
+	jr nz, .asm_9222 ; 0x9214 $c
+	ld a, [$c003]
+	and a
+	jr z, .asm_9222 ; 0x921a $6
+	xor a
+	ld [$c003], a
+	jr .asm_923f ; 0x9220 $1d
+.asm_9222
+	jr .asm_9248 ; 0x9222 $24
+.asm_9224
+	res 1, [hl]
+	ld d, $0
+	ld a, c
+	add a
+	ld e, a
+	ld hl, $c006
+	add hl, de
+	push hl
+	ld hl, $c016
+	add hl, de
+	ld e, l
+	ld d, h
+	pop hl
+	ld a, [de]
+	ld [hli], a
+	inc de
+	ld a, [de]
+	ld [hl], a
+	jp Func_91e6
+.asm_923f
+	ld hl, $5b1f
+	add hl, bc
+	ld a, [$ff00+$25]
+	and [hl]
+	ld [$ff00+$25], a
+.asm_9248
+	ld a, [$c02a]
+	cp $14
+	jr nc, .asm_9251 ; 0x924d $2
+	jr .asm_926e ; 0x924f $1d
+.asm_9251
+	ld a, [$c02a]
+	cp $86
+	jr z, .asm_926e ; 0x9256 $16
+	jr c, .asm_925c ; 0x9258 $2
+	jr .asm_926e ; 0x925a $12
+.asm_925c
+	ld a, c
+	cp $4
+	jr z, .asm_9265 ; 0x925f $4
+	call Func_96c7
+	ret c
+.asm_9265
+	ld a, [$c005]
+	ld [$ff00+$24], a
+	xor a
+	ld [$c005], a
+.asm_926e
+	ld hl, $c026
+	add hl, bc
+	ld [hl], b
+	ret
+; 0x9274
 
-;Meet Prof. Oak
-MeetProfOak_mh: ; 0x8291 - 0x8299
-	db $80
-	dw MeetProfOak_md_1 ;Channel 1
-	db $01
-	dw MeetProfOak_md_2 ;Channel 2
-	db $02
-	dw MeetProfOak_md_3 ;Channel 3
+Func_9274: ; 0x9274
+	cp $fd
+	jp nz, Func_92a9
+	call Func_9825
+	push af
+	call Func_9825
+	ld d, a
+	pop af
+	ld e, a
+	push de
+	ld d, $0
+	ld a, c
+	add a
+	ld e, a
+	ld hl, $c006
+	add hl, de
+	push hl
+	ld hl, $c016
+	add hl, de
+	ld e, l
+	ld d, h
+	pop hl
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hld]
+	ld [de], a
+	pop de
+	ld [hl], e
+	inc hl
+	ld [hl], d
+	ld b, $0
+	ld hl, $c02e
+	add hl, bc
+	set 1, [hl]
+	jp Func_91e6
+; 0x92a9
 
-;Meet Rival
-MeetRival_mh: ; 0x829A - 0x82A2
-	db $80
-	dw MeetRival_md_1 ;Channel 1
-	db $01
-	dw MeetRival_md_2 ;Channel 2
-	db $02
-	dw MeetRival_md_3 ;Channel 3
+Func_92a9: ; 0x92a9
+	cp $fe
+	jp nz, Func_92e4
+	call Func_9825
+	ld e, a
+	and a
+	jr z, .asm_92cd ; 0x92b3 $18
+	ld b, $0
+	ld hl, $c0be
+	add hl, bc
+	ld a, [hl]
+	cp e
+	jr nz, .asm_92cb ; 0x92bd $c
+	ld a, $1
+	ld [hl], a
+	call Func_9825
+	call Func_9825
+	jp Func_91e6
+.asm_92cb
+	inc a
+	ld [hl], a
+.asm_92cd
+	call Func_9825
+	push af
+	call Func_9825
+	ld b, a
+	ld d, $0
+	ld a, c
+	add a
+	ld e, a
+	ld hl, $c006
+	add hl, de
+	pop af
+	ld [hli], a
+	ld [hl], b
+	jp Func_91e6
+; 0x92e4
 
-;Guy walks you to museum
-MuseumGuy_mh: ; 0x82A3 - 0x82AE
-	db $C0
-	dw MuseumGuy_md_1 ;Channel 1
-	db $01
-	dw MuseumGuy_md_2 ;Channel 2
-	db $02
-	dw MuseumGuy_md_3 ;Channel 3
-	db $03
-	dw MuseumGuy_md_4 ;Channel 4
+Func_92e4: ; 0x92e4
+	and $f0
+	cp $d0
+	jp nz, Func_9323
+	ld a, d
+	and $f
+	ld b, $0
+	ld hl, $c0c6
+	add hl, bc
+	ld [hl], a
+	ld a, c
+	cp $3
+	jr z, .asm_9320 ; 0x92f8 $26
+	call Func_9825
+	ld d, a
+	ld a, c
+	cp $2
+	jr z, .asm_930c ; 0x9301 $9
+	cp $6
+	jr nz, .asm_9319 ; 0x9305 $12
+	ld hl, $c0e7
+	jr .asm_930f ; 0x930a $3
+.asm_930c
+	ld hl, $c0e6
+.asm_930f
+	ld a, d
+	and $f
+	ld [hl], a
+	ld a, d
+	and $30
+	sla a
+	ld d, a
+.asm_9319
+	ld b, $0
+	ld hl, $c0de
+	add hl, bc
+	ld [hl], d
+.asm_9320
+	jp Func_91e6
+; 0x9323
 
-;Safari Zone
-SafariZone_mh: ; 0x82AF - 0x82B7
-	db $80
-	dw SafariZone_md_1 ;Channel 1
-	db $01
-	dw SafariZone_md_2 ;Channel 2
-	db $02
-	dw SafariZone_md_3 ;Channel 3
+Func_9323: ; 0x9323
+	ld a, d
+	cp $e8
+	jr nz, .asm_9335 ; 0x9326 $d
+	ld b, $0
+	ld hl, $c02e
+	add hl, bc
+	ld a, [hl]
+	xor $1
+	ld [hl], a
+	jp Func_91e6
+.asm_9335
+	cp $ea
+	jr nz, .asm_936d ; 0x9337 $34
+	call Func_9825
+	ld b, $0
+	ld hl, $c04e
+	add hl, bc
+	ld [hl], a
+	ld hl, $c06e
+	add hl, bc
+	ld [hl], a
+	call Func_9825
+	ld d, a
+	and $f0
+	swap a
+	ld b, $0
+	ld hl, $c056
+	add hl, bc
+	srl a
+	ld e, a
+	adc b
+	swap a
+	or e
+	ld [hl], a
+	ld a, d
+	and $f
+	ld d, a
+	ld hl, $c05e
+	add hl, bc
+	swap a
+	or d
+	ld [hl], a
+	jp Func_91e6
+.asm_936d
+	cp $eb
+	jr nz, .asm_93a5 ; 0x936f $34
+	call Func_9825
+	ld b, $0
+	ld hl, $c076
+	add hl, bc
+	ld [hl], a
+	call Func_9825
+	ld d, a
+	and $f0
+	swap a
+	ld b, a
+	ld a, d
+	and $f
+	call Func_9858
+	ld b, $0
+	ld hl, $c0a6
+	add hl, bc
+	ld [hl], d
+	ld hl, $c0ae
+	add hl, bc
+	ld [hl], e
+	ld b, $0
+	ld hl, $c02e
+	add hl, bc
+	set 4, [hl]
+	call Func_9825
+	ld d, a
+	jp Func_950a
+.asm_93a5
+	cp $ec
+	jr nz, .asm_93ba ; 0x93a7 $11
+	call Func_9825
+	rrca
+	rrca
+	and $c0
+	ld b, $0
+	ld hl, $c03e
+	add hl, bc
+	ld [hl], a
+	jp Func_91e6
+.asm_93ba
+	cp $ed
+	jr nz, .asm_93fa ; 0x93bc $3c
+	ld a, c
+	cp $4
+	jr nc, .asm_93de ; 0x93c1 $1b
+	call Func_9825
+	ld [$c0e8], a
+	call Func_9825
+	ld [$c0e9], a
+	xor a
+	ld [$c0ce], a
+	ld [$c0cf], a
+	ld [$c0d0], a
+	ld [$c0d1], a
+	jr .asm_93f7 ; 0x93dc $19
+.asm_93de
+	call Func_9825
+	ld [$c0ea], a
+	call Func_9825
+	ld [$c0eb], a
+	xor a
+	ld [$c0d2], a
+	ld [$c0d3], a
+	ld [$c0d4], a
+	ld [$c0d5], a
+.asm_93f7
+	jp Func_91e6
+.asm_93fa
+	cp $ee
+	jr nz, .asm_9407 ; 0x93fc $9
+	call Func_9825
+	ld [$c004], a
+	jp Func_91e6
+.asm_9407
+	cp $ef
+	jr nz, .asm_9426 ; 0x9409 $1b
+	call Func_9825
+	push bc
+	call Func_9876
+	pop bc
+	ld a, [$c003]
+	and a
+	jr nz, .asm_9423 ; 0x9417 $a
+	ld a, [$c02d]
+	ld [$c003], a
+	xor a
+	ld [$c02d], a
+.asm_9423
+	jp Func_91e6
+.asm_9426
+	cp $fc
+	jr nz, .asm_9444 ; 0x9428 $1a
+	call Func_9825
+	ld b, $0
+	ld hl, $c046
+	add hl, bc
+	ld [hl], a
+	and $c0
+	ld hl, $c03e
+	add hl, bc
+	ld [hl], a
+	ld hl, $c02e
+	add hl, bc
+	set 6, [hl]
+	jp Func_91e6
+.asm_9444
+	cp $f0
+	jr nz, .asm_9450 ; 0x9446 $8
+	call Func_9825
+	ld [$ff00+$24], a
+	jp Func_91e6
+.asm_9450
+	cp $f8
+	jr nz, .asm_945f ; 0x9452 $b
+	ld b, $0
+	ld hl, $c036
+	add hl, bc
+	set 0, [hl]
+	jp Func_91e6
+.asm_945f
+	and $f0
+	cp $e0
+	jr nz, .asm_9472 ; 0x9463 $d
+	ld hl, $c0d6
+	ld b, $0
+	add hl, bc
+	ld a, d
+	and $f
+	ld [hl], a
+	jp Func_91e6
+.asm_9472
+	cp $20
+	jr nz, .asm_94bf ; 0x9474 $49
+	ld a, c
+	cp $3
+	jr c, .asm_94bf ; 0x9479 $44
+	ld b, $0
+	ld hl, $c036
+	add hl, bc
+	bit 0, [hl]
+	jr nz, .asm_94bf ; 0x9483 $3a
+	call Func_950a
+	ld d, a
+	ld b, $0
+	ld hl, $c03e
+	add hl, bc
+	ld a, [hl]
+	or d
+	ld d, a
+	ld b, $1
+	call Func_9838
+	ld [hl], d
+	call Func_9825
+	ld d, a
+	ld b, $2
+	call Func_9838
+	ld [hl], d
+	call Func_9825
+	ld e, a
+	ld a, c
+	cp $7
+	ld a, $0
+	jr z, .asm_94b2 ; 0x94ab $5
+	push de
+	call Func_9825
+	pop de
+.asm_94b2
+	ld d, a
+	push de
+	call Func_9629
+	call Func_95f8
+	pop de
+	call Func_964b
+	ret
+.asm_94bf
+	ld a, c
+	cp $4
+	jr c, .asm_94db ; 0x94c2 $17
+	ld a, d
+	cp $10
+	jr nz, .asm_94db ; 0x94c7 $12
+	ld b, $0
+	ld hl, $c036
+	add hl, bc
+	bit 0, [hl]
+	jr nz, .asm_94db ; 0x94d1 $8
+	call Func_9825
+	ld [$ff00+$10], a
+	jp Func_91e6
+.asm_94db
+	ld a, c
+	cp $3
+	jr nz, Func_950a ; 0x94de $2a
+	ld a, d
+	and $f0
+	cp $b0
+	jr z, .asm_94f5 ; 0x94e5 $e
+	jr nc, Func_950a ; 0x94e7 $21
+	swap a
+	ld b, a
+	ld a, d
+	and $f
+	ld d, a
+	ld a, b
+	push de
+	push bc
+	jr .asm_94fd ; 0x94f3 $8
+.asm_94f5
+	ld a, d
+	and $f
+	push af
+	push bc
+	call Func_9825
+.asm_94fd
+	ld d, a
+	ld a, [$c003]
+	and a
+	jr nz, .asm_9508 ; 0x9502 $4
+	ld a, d
+	call Func_9876
+.asm_9508
+	pop bc
+	pop de
 
-;Pokemon Get Healed
-PkmnHealed_mh: ; 0x82B8 - 0x82C0
-	db $80
-	dw PkmnHealed_md_1 ;Channel 1
-	db $01
-	dw PkmnHealed_md_2 ;Channel 2
-	db $02
-	dw PkmnHealed_md_3 ;Channel 3
+Func_950a: ; 0x950a
+	ld a, d
+	push af
+	and $f
+	inc a
+	ld b, $0
+	ld e, a
+	ld d, b
+	ld hl, $c0c6
+	add hl, bc
+	ld a, [hl]
+	ld l, b
+	call Func_9847
+	ld a, c
+	cp $4
+	jr nc, .asm_952b ; 0x951f $a
+	ld a, [$c0e8]
+	ld d, a
+	ld a, [$c0e9]
+	ld e, a
+	jr .asm_953e ; 0x9529 $13
+.asm_952b
+	ld d, $1
+	ld e, $0
+	cp $7
+	jr z, .asm_953e ; 0x9531 $b
+	call Func_9693
+	ld a, [$c0ea]
+	ld d, a
+	ld a, [$c0eb]
+	ld e, a
+.asm_953e
+	ld a, l
+	ld b, $0
+	ld hl, $c0ce
+	add hl, bc
+	ld l, [hl]
+	call Func_9847
+	ld e, l
+	ld d, h
+	ld hl, $c0ce
+	add hl, bc
+	ld [hl], e
+	ld a, d
+	ld hl, $c0b6
+	add hl, bc
+	ld [hl], a
+	ld hl, $c036
+	add hl, bc
+	bit 0, [hl]
+	jr nz, .asm_9568 ; 0x955c $a
+	ld hl, $c02e
+	add hl, bc
+	bit 2, [hl]
+	jr z, .asm_9568 ; 0x9564 $2
+	pop hl
+	ret
+.asm_9568
+	pop af
+	and $f0
+	cp $c0
+	jr nz, .asm_959f ; 0x956d $30
+	ld a, c
+	cp $4
+	jr nc, .asm_957c ; 0x9572 $8
+	ld hl, $c02a
+	add hl, bc
+	ld a, [hl]
+	and a
+	jr nz, .asm_959e ; 0x957a $22
+.asm_957c
+	ld a, c
+	cp $2
+	jr z, .asm_9585 ; 0x957f $4
+	cp $6
+	jr nz, .asm_9592 ; 0x9583 $d
+.asm_9585
+	ld b, $0
+	ld hl, $5b1f
+	add hl, bc
+	ld a, [$ff00+$25]
+	and [hl]
+	ld [$ff00+$25], a
+	jr .asm_959e ; 0x9590 $c
+.asm_9592
+	ld b, $2
+	call Func_9838
+	ld a, $8
+	ld [hli], a
+	inc hl
+	ld a, $80
+	ld [hl], a
+.asm_959e
+	ret
+.asm_959f
+	swap a
+	ld b, $0
+	ld hl, $c0d6
+	add hl, bc
+	ld b, [hl]
+	call Func_9858
+	ld b, $0
+	ld hl, $c02e
+	add hl, bc
+	bit 4, [hl]
+	jr z, .asm_95b8 ; 0x95b3 $3
+	call Func_978f
+.asm_95b8
+	push de
+	ld a, c
+	cp $4
+	jr nc, .asm_95cd ; 0x95bc $f
+	ld hl, $c02a
+	ld d, $0
+	ld e, a
+	add hl, de
+	ld a, [hl]
+	and a
+	jr nz, .asm_95cb ; 0x95c7 $2
+	jr .asm_95cd ; 0x95c9 $2
+.asm_95cb
+	pop de
+	ret
+.asm_95cd
+	ld b, $0
+	ld hl, $c0de
+	add hl, bc
+	ld d, [hl]
+	ld b, $2
+	call Func_9838
+	ld [hl], d
+	call Func_9629
+	call Func_95f8
+	pop de
+	ld b, $0
+	ld hl, $c02e
+	add hl, bc
+	bit 0, [hl]
+	jr z, .asm_95ef ; 0x95e9 $4
+	inc e
+	jr nc, .asm_95ef ; 0x95ec $1
+	inc d
+.asm_95ef
+	ld hl, $c066
+	add hl, bc
+	ld [hl], e
+	call Func_964b
+	ret
+; 0x95f8
 
-;Routes 1 and 2
-Routes1_mh: ; 0x82C1 - 0x82CC
-	db $C0
-	dw Routes1_md_1 ;Channel 1
-	db $01
-	dw Routes1_md_2 ;Channel 2
-	db $02
-	dw Routes1_md_3 ;Channel 3
-	db $03
-	dw Routes1_md_4 ;Channel 4
+Func_95f8: ; 0x95f8
+	ld b, $0
+	ld hl, $5b27
+	add hl, bc
+	ld a, [$ff00+$25]
+	or [hl]
+	ld d, a
+	ld a, c
+	cp $7
+	jr z, .asm_9613 ; 0x9605 $c
+	cp $4
+	jr nc, .asm_9625 ; 0x9609 $1a
+	ld hl, $c02a
+	add hl, bc
+	ld a, [hl]
+	and a
+	jr nz, .asm_9625 ; 0x9611 $12
+.asm_9613
+	ld a, [$c004]
+	ld hl, $5b27
+	add hl, bc
+	and [hl]
+	ld d, a
+	ld a, [$ff00+$25]
+	ld hl, $5b1f
+	add hl, bc
+	and [hl]
+	or d
+	ld d, a
+.asm_9625
+	ld a, d
+	ld [$ff00+$25], a
+	ret
+; 0x9629
 
-;Routes 24 and 25
-Routes2_mh: ; 0x82CD - 0x82D8
-	db $C0
-	dw Routes2_md_1 ;Channel 1
-	db $01
-	dw Routes2_md_2 ;Channel 2
-	db $02
-	dw Routes2_md_3 ;Channel 3
-	db $03
-	dw Routes2_md_4 ;Channel 4
+Func_9629: ; 0x9629
+	ld b, $0
+	ld hl, $c0b6
+	add hl, bc
+	ld d, [hl]
+	ld a, c
+	cp $2
+	jr z, .asm_9644 ; 0x9633 $f
+	cp $6
+	jr z, .asm_9644 ; 0x9637 $b
+	ld a, d
+	and $3f
+	ld d, a
+	ld hl, $c03e
+	add hl, bc
+	ld a, [hl]
+	or d
+	ld d, a
+.asm_9644
+	ld b, $1
+	call Func_9838
+	ld [hl], d
+	ret
+; 0x964b
 
-;Routes 3, 4, 5, 6, 7, 8, 9, 10, 16, 17, 18, 19, 20, 21, 22
-Routes3_mh: ; 0x82D9 - 0x82E4
-	db $C0
-	dw Routes3_md_1 ;Channel 1
-	db $01
-	dw Routes3_md_2 ;Channel 2
-	db $02
-	dw Routes3_md_3 ;Channel 3
-	db $03
-	dw Routes3_md_4 ;Channel 4
+Func_964b: ; 0x964b
+	ld a, c
+	cp $2
+	jr z, .asm_9654 ; 0x964e $4
+	cp $6
+	jr nz, .asm_9681 ; 0x9652 $2d
+.asm_9654
+	push de
+	ld de, $c0e6
+	cp $2
+	jr z, .asm_965f ; 0x965a $3
+	ld de, $c0e7
+.asm_965f
+	ld a, [de]
+	add a
+	ld d, $0
+	ld e, a
+	ld hl, $4361
+	add hl, de
+	ld e, [hl]
+	inc hl
+	ld d, [hl]
+	ld hl, $ff30
+	ld b, $f
+	ld a, $0
+	ld [$ff00+$1a], a
+.asm_9674
+	ld a, [de]
+	inc de
+	ld [hli], a
+	ld a, b
+	dec b
+	and a
+	jr nz, .asm_9674 ; 0x967a $f8
+	ld a, $80
+	ld [$ff00+$1a], a
+	pop de
+.asm_9681
+	ld a, d
+	or $80
+	and $c7
+	ld d, a
+	ld b, $3
+	call Func_9838
+	ld [hl], e
+	inc hl
+	ld [hl], d
+	call Func_96b5
+	ret
+; 0x9693
 
-;Routes 11, 12, 13, 14, 15
-Routes4_mh: ; 0x82E5 - 0x82F0
-	db $C0
-	dw Routes4_md_1 ;Channel 1
-	db $01
-	dw Routes4_md_2 ;Channel 2
-	db $02
-	dw Routes4_md_3 ;Channel 3
-	db $03
-	dw Routes4_md_4 ;Channel 4
+Func_9693: ; 0x9693
+	call Func_96e5
+	jr nc, .asm_96ab ; 0x9696 $13
+	ld d, $0
+	ld a, [$c0f2]
+	add $80
+	jr nc, .asm_96a2 ; 0x969f $1
+	inc d
+.asm_96a2
+	ld [$c0eb], a
+	ld a, d
+	ld [$c0ea], a
+	jr .asm_96b4 ; 0x96a9 $9
+.asm_96ab
+	xor a
+	ld [$c0eb], a
+	ld a, $1
+	ld [$c0ea], a
+.asm_96b4
+	ret
+; 0x96b5
 
-;Indigo Plateau
-IndigoPlateau_mh: ; 0x82F1 - 0x82FC
-	db $C0
-	dw IndigoPlateau_md_1 ;Channel 1
-	db $01
-	dw IndigoPlateau_md_2 ;Channel 2
-	db $02
-	dw IndigoPlateau_md_3 ;Channel 3
-	db $03
-	dw IndigoPlateau_md_4 ;Channel 4
+Func_96b5: ; 0x96b5
+	call Func_96e5
+	jr nc, .asm_96c6 ; 0x96b8 $c
+	ld a, [$c0f1]
+	add e
+	jr nc, .asm_96c1 ; 0x96be $1
+	inc d
+.asm_96c1
+	dec hl
+	ld e, a
+	ld [hl], e
+	inc hl
+	ld [hl], d
+.asm_96c6
+	ret
+; 0x96c7
 
-INCLUDE "music.asm"
-	
+Func_96c7: ; 0x96c7
+	call Func_96e5
+	jr nc, .asm_96e2 ; 0x96ca $16
+	ld hl, $c006
+	ld e, c
+	ld d, $0
+	sla e
+	rl d
+	add hl, de
+	ld a, [hl]
+	sub $1
+	ld [hl], a
+	inc hl
+	ld a, [hl]
+	sbc $0
+	ld [hl], a
+	scf
+	ret
+.asm_96e2
+	scf
+	ccf
+	ret
+; 0x96e5
+
+Func_96e5: ; 0x96e5
+	ld a, [$c02a]
+	cp $14
+	jr nc, .asm_96ee ; 0x96ea $2
+	jr .asm_96f4 ; 0x96ec $6
+.asm_96ee
+	cp $86
+	jr z, .asm_96f4 ; 0x96f0 $2
+	jr c, .asm_96f7 ; 0x96f2 $3
+.asm_96f4
+	scf
+	ccf
+	ret
+.asm_96f7
+	scf
+	ret
+; 0x96f9
+
+Func_96f9: ; 0x96f9
+	ld hl, $c02e
+	add hl, bc
+	bit 5, [hl]
+	jp nz, .asm_9740
+	ld hl, $c09e
+	add hl, bc
+	ld e, [hl]
+	ld hl, $c096
+	add hl, bc
+	ld d, [hl]
+	ld hl, $c07e
+	add hl, bc
+	ld l, [hl]
+	ld h, b
+	add hl, de
+	ld d, h
+	ld e, l
+	ld hl, $c08e
+	add hl, bc
+	push hl
+	ld hl, $c086
+	add hl, bc
+	ld a, [hl]
+	pop hl
+	add [hl]
+	ld [hl], a
+	ld a, $0
+	adc e
+	ld e, a
+	ld a, $0
+	adc d
+	ld d, a
+	ld hl, $c0a6
+	add hl, bc
+	ld a, [hl]
+	cp d
+	jp c, .asm_9786
+	jr nz, .asm_9773 ; 0x9733 $3e
+	ld hl, $c0ae
+	add hl, bc
+	ld a, [hl]
+	cp e
+	jp c, .asm_9786
+	jr .asm_9773 ; 0x973e $33
+.asm_9740
+	ld hl, $c09e
+	add hl, bc
+	ld a, [hl]
+	ld hl, $c096
+	add hl, bc
+	ld d, [hl]
+	ld hl, $c07e
+	add hl, bc
+	ld e, [hl]
+	sub e
+	ld e, a
+	ld a, d
+	sbc b
+	ld d, a
+	ld hl, $c086
+	add hl, bc
+	ld a, [hl]
+	add a
+	ld [hl], a
+	ld a, e
+	sbc b
+	ld e, a
+	ld a, d
+	sbc b
+	ld d, a
+	ld hl, $c0a6
+	add hl, bc
+	ld a, d
+	cp [hl]
+	jr c, .asm_9786 ; 0x9767 $1d
+	jr nz, .asm_9773 ; 0x9769 $8
+	ld hl, $c0ae
+	add hl, bc
+	ld a, e
+	cp [hl]
+	jr c, .asm_9786 ; 0x9771 $13
+.asm_9773
+	ld hl, $c09e
+	add hl, bc
+	ld [hl], e
+	ld hl, $c096
+	add hl, bc
+	ld [hl], d
+	ld b, $3
+	call Func_9838
+	ld a, e
+	ld [hli], a
+	ld [hl], d
+	ret
+.asm_9786
+	ld hl, $c02e
+	add hl, bc
+	res 4, [hl]
+	res 5, [hl]
+	ret
+; 0x978f
+
+Func_978f: ; 0x978f
+	ld hl, $c096
+	add hl, bc
+	ld [hl], d
+	ld hl, $c09e
+	add hl, bc
+	ld [hl], e
+	ld hl, $c0b6
+	add hl, bc
+	ld a, [hl]
+	ld hl, $c076
+	add hl, bc
+	sub [hl]
+	jr nc, .asm_97a7 ; 0x97a3 $2
+	ld a, $1
+.asm_97a7
+	ld [hl], a
+	ld hl, $c0ae
+	add hl, bc
+	ld a, e
+	sub [hl]
+	ld e, a
+	ld a, d
+	sbc b
+	ld hl, $c0a6
+	add hl, bc
+	sub [hl]
+	jr c, .asm_97c3 ; 0x97b6 $b
+	ld d, a
+	ld b, $0
+	ld hl, $c02e
+	add hl, bc
+	set 5, [hl]
+	jr .asm_97e6 ; 0x97c1 $23
+.asm_97c3
+	ld hl, $c096
+	add hl, bc
+	ld d, [hl]
+	ld hl, $c09e
+	add hl, bc
+	ld e, [hl]
+	ld hl, $c0ae
+	add hl, bc
+	ld a, [hl]
+	sub e
+	ld e, a
+	ld a, d
+	sbc b
+	ld d, a
+	ld hl, $c0a6
+	add hl, bc
+	ld a, [hl]
+	sub d
+	ld d, a
+	ld b, $0
+	ld hl, $c02e
+	add hl, bc
+	res 5, [hl]
+.asm_97e6
+	ld hl, $c076
+	add hl, bc
+.asm_97ea
+	inc b
+	ld a, e
+	sub [hl]
+	ld e, a
+	jr nc, .asm_97ea ; 0x97ee $fa
+	ld a, d
+	and a
+	jr z, .asm_97f8 ; 0x97f2 $4
+	dec a
+	ld d, a
+	jr .asm_97ea ; 0x97f6 $f2
+.asm_97f8
+	ld a, e
+	add [hl]
+	ld d, b
+	ld b, $0
+	ld hl, $c07e
+	add hl, bc
+	ld [hl], d
+	ld hl, $c086
+	add hl, bc
+	ld [hl], a
+	ld hl, $c08e
+	add hl, bc
+	ld [hl], a
+	ret
+; 0x980d
+
+Func_980d: ; 0x980d
+	ld b, $0
+	ld hl, $c046
+	add hl, bc
+	ld a, [hl]
+	rlca
+	rlca
+	ld [hl], a
+	and $c0
+	ld d, a
+	ld b, $1
+	call Func_9838
+	ld a, [hl]
+	and $3f
+	or d
+	ld [hl], a
+	ret
+; 0x9825
+
+Func_9825: ; 0x9825
+	ld d, $0
+	ld a, c
+	add a
+	ld e, a
+	ld hl, $c006
+	add hl, de
+	ld a, [hli]
+	ld e, a
+	ld a, [hld]
+	ld d, a
+	ld a, [de]
+	inc de
+	ld [hl], e
+	inc hl
+	ld [hl], d
+	ret
+; 0x9838
+
+Func_9838: ; 0x9838
+	ld a, c
+	ld hl, $5b17
+	add l
+	jr nc, .asm_9840 ; 0x983d $1
+	inc h
+.asm_9840
+	ld l, a
+	ld a, [hl]
+	add b
+	ld l, a
+	ld h, $ff
+	ret
+; 0x9847
+
+Func_9847: ; 0x9847
+	ld h, $0
+.asm_9849
+	srl a
+	jr nc, .asm_984e ; 0x984b $1
+	add hl, de
+.asm_984e
+	sla e
+	rl d
+	and a
+	jr z, .asm_9857 ; 0x9853 $2
+	jr .asm_9849 ; 0x9855 $f2
+.asm_9857
+	ret
+; 0x9858
+
+Func_9858: ; 0x9858
+	ld h, $0
+	ld l, a
+	add hl, hl
+	ld d, h
+	ld e, l
+	ld hl, $5b2f
+	add hl, de
+	ld e, [hl]
+	inc hl
+	ld d, [hl]
+	ld a, b
+.asm_9866
+	cp $7
+	jr z, .asm_9871 ; 0x9868 $7
+	sra d
+	rr e
+	inc a
+	jr .asm_9866 ; 0x986f $f5
+.asm_9871
+	ld a, $8
+	add d
+	ld d, a
+	ret
+; 0x9876
+
+Func_9876: ; 0x9876
+	ld [$c001], a
+	cp $ff
+	jp z, Func_9a34
+	cp $b9
+	jp z, Func_994e
+	jp c, Func_994e
+	cp $fe
+	jr z, .asm_988d ; 0x9888 $3
+	jp nc, Func_994e
+.asm_988d
+	xor a
+	ld [$c000], a
+	ld [$c003], a
+	ld [$c0e9], a
+	ld [$c0e6], a
+	ld [$c0e7], a
+	ld d, $8
+	ld hl, $c016
+	call Func_9a89
+	ld hl, $c006
+	call Func_9a89
+	ld d, $4
+	ld hl, $c026
+	call Func_9a89
+	ld hl, $c02e
+	call Func_9a89
+	ld hl, $c03e
+	call Func_9a89
+	ld hl, $c046
+	call Func_9a89
+	ld hl, $c04e
+	call Func_9a89
+	ld hl, $c056
+	call Func_9a89
+	ld hl, $c05e
+	call Func_9a89
+	ld hl, $c066
+	call Func_9a89
+	ld hl, $c06e
+	call Func_9a89
+	ld hl, $c036
+	call Func_9a89
+	ld hl, $c076
+	call Func_9a89
+	ld hl, $c07e
+	call Func_9a89
+	ld hl, $c086
+	call Func_9a89
+	ld hl, $c08e
+	call Func_9a89
+	ld hl, $c096
+	call Func_9a89
+	ld hl, $c09e
+	call Func_9a89
+	ld hl, $c0a6
+	call Func_9a89
+	ld hl, $c0ae
+	call Func_9a89
+	ld a, $1
+	ld hl, $c0be
+	call Func_9a89
+	ld hl, $c0b6
+	call Func_9a89
+	ld hl, $c0c6
+	call Func_9a89
+	ld [$c0e8], a
+	ld a, $ff
+	ld [$c004], a
+	xor a
+	ld [$ff00+$24], a
+	ld a, $8
+	ld [$ff00+$10], a
+	ld a, $0
+	ld [$ff00+$25], a
+	xor a
+	ld [$ff00+$1a], a
+	ld a, $80
+	ld [$ff00+$1a], a
+	ld a, $77
+	ld [$ff00+$24], a
+	jp Func_9a8f
+; 0x994e
+
+Func_994e: ; 0x994e
+	ld l, a
+	ld e, a
+	ld h, $0
+	ld d, h
+	add hl, hl
+	add hl, de
+	ld de, $4000
+	add hl, de
+	ld a, h
+	ld [$c0ec], a
+	ld a, l
+	ld [$c0ed], a
+	ld a, [hl]
+	and $c0
+	rlca
+	rlca
+	ld c, a
+.asm_9967
+	ld d, c
+	ld a, c
+	add a
+	add c
+	ld c, a
+	ld b, $0
+	ld a, [$c0ec]
+	ld h, a
+	ld a, [$c0ed]
+	ld l, a
+	add hl, bc
+	ld c, d
+	ld a, [hl]
+	and $f
+	ld e, a
+	ld d, $0
+	ld hl, $c026
+	add hl, de
+	ld a, [hl]
+	and a
+	jr z, .asm_99a3 ; 0x9984 $1d
+	ld a, e
+	cp $7
+	jr nz, .asm_999a ; 0x9989 $f
+	ld a, [$c001]
+	cp $14
+	jr nc, .asm_9993 ; 0x9990 $1
+	ret
+.asm_9993
+	ld a, [hl]
+	cp $14
+	jr z, .asm_99a3 ; 0x9996 $b
+	jr c, .asm_99a3 ; 0x9998 $9
+.asm_999a
+	ld a, [$c001]
+	cp [hl]
+	jr z, .asm_99a3 ; 0x999e $3
+	jr c, .asm_99a3 ; 0x99a0 $1
+	ret
+.asm_99a3
+	xor a
+	push de
+	ld h, d
+	ld l, e
+	add hl, hl
+	ld d, h
+	ld e, l
+	ld hl, $c016
+	add hl, de
+	ld [hli], a
+	ld [hl], a
+	ld hl, $c006
+	add hl, de
+	ld [hli], a
+	ld [hl], a
+	pop de
+	ld hl, $c026
+	add hl, de
+	ld [hl], a
+	ld hl, $c02e
+	add hl, de
+	ld [hl], a
+	ld hl, $c03e
+	add hl, de
+	ld [hl], a
+	ld hl, $c046
+	add hl, de
+	ld [hl], a
+	ld hl, $c04e
+	add hl, de
+	ld [hl], a
+	ld hl, $c056
+	add hl, de
+	ld [hl], a
+	ld hl, $c05e
+	add hl, de
+	ld [hl], a
+	ld hl, $c066
+	add hl, de
+	ld [hl], a
+	ld hl, $c06e
+	add hl, de
+	ld [hl], a
+	ld hl, $c076
+	add hl, de
+	ld [hl], a
+	ld hl, $c07e
+	add hl, de
+	ld [hl], a
+	ld hl, $c086
+	add hl, de
+	ld [hl], a
+	ld hl, $c08e
+	add hl, de
+	ld [hl], a
+	ld hl, $c096
+	add hl, de
+	ld [hl], a
+	ld hl, $c09e
+	add hl, de
+	ld [hl], a
+	ld hl, $c0a6
+	add hl, de
+	ld [hl], a
+	ld hl, $c0ae
+	add hl, de
+	ld [hl], a
+	ld hl, $c036
+	add hl, de
+	ld [hl], a
+	ld a, $1
+	ld hl, $c0be
+	add hl, de
+	ld [hl], a
+	ld hl, $c0b6
+	add hl, de
+	ld [hl], a
+	ld hl, $c0c6
+	add hl, de
+	ld [hl], a
+	ld a, e
+	cp $4
+	jr nz, .asm_9a2b ; 0x9a25 $4
+	ld a, $8
+	ld [$ff00+$10], a
+.asm_9a2b
+	ld a, c
+	and a
+	jp z, Func_9a8f
+	dec c
+	jp .asm_9967
+; 0x9a34
+
+Func_9a34: ; 0x9a34
+	ld a, $80
+	ld [$ff00+$26], a
+	ld [$ff00+$1a], a
+	xor a
+	ld [$ff00+$25], a
+	ld [$ff00+$1c], a
+	ld a, $8
+	ld [$ff00+$10], a
+	ld [$ff00+$12], a
+	ld [$ff00+$17], a
+	ld [$ff00+$21], a
+	ld a, $40
+	ld [$ff00+$14], a
+	ld [$ff00+$19], a
+	ld [$ff00+$23], a
+	ld a, $77
+	ld [$ff00+$24], a
+	xor a
+	ld [$c000], a
+	ld [$c003], a
+	ld [$c002], a
+	ld [$c0e9], a
+	ld [$c0eb], a
+	ld [$c0e6], a
+	ld [$c0e7], a
+	ld d, $a0
+	ld hl, $c006
+	call Func_9a89
+	ld a, $1
+	ld d, $18
+	ld hl, $c0b6
+	call Func_9a89
+	ld [$c0e8], a
+	ld [$c0ea], a
+	ld a, $ff
+	ld [$c004], a
+	ret
+; 0x9a89
+
+Func_9a89: ; 0x9a89
+	ld b, d
+.asm_9a8a
+	ld [hli], a
+	dec b
+	jr nz, .asm_9a8a ; 0x9a8c $fc
+	ret
+; 0x9a8f
+
+Func_9a8f: ; 0x9a8f
+	ld a, [$c001]
+	ld l, a
+	ld e, a
+	ld h, $0
+	ld d, h
+	add hl, hl
+	add hl, de
+	ld de, $4000
+	add hl, de
+	ld e, l
+	ld d, h
+	ld hl, $c006
+	ld a, [de]
+	ld b, a
+	rlca
+	rlca
+	and $3
+	ld c, a
+	ld a, b
+	and $f
+	ld b, c
+	inc b
+	inc de
+	ld c, $0
+.asm_9ab1
+	cp c
+	jr z, .asm_9ab9 ; 0x9ab2 $5
+	inc c
+	inc hl
+	inc hl
+	jr .asm_9ab1 ; 0x9ab7 $f8
+.asm_9ab9
+	push hl
+	push bc
+	push af
+	ld b, $0
+	ld c, a
+	ld hl, $c026
+	add hl, bc
+	ld a, [$c001]
+	ld [hl], a
+	pop af
+	cp $3
+	jr c, .asm_9ad2 ; 0x9aca $6
+	ld hl, $c02e
+	add hl, bc
+	set 2, [hl]
+.asm_9ad2
+	pop bc
+	pop hl
+	ld a, [de]
+	ld [hli], a
+	inc de
+	ld a, [de]
+	ld [hli], a
+	inc de
+	inc c
+	dec b
+	ld a, b
+	and a
+	ld a, [de]
+	inc de
+	jr nz, .asm_9ab1 ; 0x9ae0 $cf
+	ld a, [$c001]
+	cp $14
+	jr nc, .asm_9aeb ; 0x9ae7 $2
+	jr .asm_9b15 ; 0x9ae9 $2a
+.asm_9aeb
+	ld a, [$c001]
+	cp $86
+	jr z, .asm_9b15 ; 0x9af0 $23
+	jr c, .asm_9af6 ; 0x9af2 $2
+	jr .asm_9b15 ; 0x9af4 $1f
+.asm_9af6
+	ld hl, $c02a
+	ld [hli], a
+	ld [hli], a
+	ld [hli], a
+	ld [hl], a
+	ld hl, $c012
+	ld de, $5b16
+	ld [hl], e
+	inc hl
+	ld [hl], d
+	ld a, [$c005]
+	and a
+	jr nz, .asm_9b15 ; 0x9b0a $9
+	ld a, [$ff00+$24]
+	ld [$c005], a
+	ld a, $77
+	ld [$ff00+$24], a
+.asm_9b15
+	ret
+; 0x9b16
+
+INCBIN "baserom.gbc",$9b16,$9b47 - $9b16
+
+Func_9b47: ; 0x9b47
+	ld c, $2
+	ld a, $de
+	call PlayMusic
+	ld hl, $c006
+	ld de, $71a2
+	call Func_9b60
+	ld de, $721d
+	call Func_9b60
+	ld de, $72b5
+
+Func_9b60: ; 0x9b60
+	ld a, e
+	ld [hli], a
+	ld a, d
+	ld [hli], a
+	ret
+; 0x9b65
+
+Func_9b65: ; 0x9b65
+	ld c, $2
+	ld a, $de
+	call PlayMusic
+	ld hl, $c006
+	ld de, $7119
+	jp Func_9b60
+; 0x9b75
+
+Func_9b75: ; 0x9b75
+	call Func_9b47
+	ld hl, $c006
+	ld de, $719b
+	jp Func_9b60
+; 0x9b81
+
+Func_9b81: ; 0x9b81
+	ld a, $a
+	ld [$cfc8], a
+	ld [$cfc9], a
+	ld a, $ff
+	ld [$cfc7], a
+	ld c, $64
+	call DelayFrames
+	ld c, $2
+	ld a, $c3
+	call PlayMusic
+	ld hl, $c006
+	ld de, $6a6f
+	jp Func_9b60
+; 0x9ba3
+
+INCLUDE "music/pkmnhealed.tx"
+INCLUDE "music/routes1.tx"
+INCLUDE "music/routes2.tx"
+INCLUDE "music/routes3.tx"
+INCLUDE "music/routes4.tx"
+INCLUDE "music/indigoplateau.tx"
+INCLUDE "music/pallettown.tx"
+INCLUDE "music/unusedsong.tx"
+INCLUDE "music/cities1.tx"
+INCLUDE "music/sfx/sfx_02_3a.tx"
+INCLUDE "music/museumguy.tx"
+INCLUDE "music/meetprofoak.tx"
+INCLUDE "music/meetrival.tx"
+INCLUDE "music/sfx/sfx_02_41.tx"
+INCLUDE "music/sfx/sfx_02_3b.tx"
+INCLUDE "music/sfx/sfx_02_42.tx"
+INCLUDE "music/ssanne.tx"
+INCLUDE "music/cities2.tx"
+INCLUDE "music/celadon.tx"
+INCLUDE "music/cinnabar.tx"
+INCLUDE "music/vermilion.tx"
+INCLUDE "music/lavender.tx"
+INCLUDE "music/safarizone.tx"
+INCLUDE "music/gym.tx"
+INCLUDE "music/pokecenter.tx"
+
 SECTION "bank3",ROMX,BANK[$3]
 
 ; known jump sources: 1a4 (0:1a4)
@@ -42322,14 +43978,157 @@ UnnamedText_1ecbd: ; 1ecbd (7:6cbd)
 
 SECTION "bank8",ROMX,BANK[$8]
 
-Unknown_20000: ; 20000 (8:4000)
-INCBIN "baserom.gbc",$20000,$20361 - $20000
+INCLUDE "music/headers/sfxheaders08.tx"
+INCLUDE "music/headers/musicheaders08.tx"
+
+INCLUDE "music/sfx/sfx_08_01.tx"
+INCLUDE "music/sfx/sfx_08_02.tx"
+INCLUDE "music/sfx/sfx_08_03.tx"
+INCLUDE "music/sfx/sfx_08_04.tx"
+INCLUDE "music/sfx/sfx_08_05.tx"
+INCLUDE "music/sfx/sfx_08_06.tx"
+INCLUDE "music/sfx/sfx_08_07.tx"
+INCLUDE "music/sfx/sfx_08_08.tx"
+INCLUDE "music/sfx/sfx_08_09.tx"
+INCLUDE "music/sfx/sfx_08_0a.tx"
+INCLUDE "music/sfx/sfx_08_0b.tx"
+INCLUDE "music/sfx/sfx_08_0c.tx"
+INCLUDE "music/sfx/sfx_08_0d.tx"
+INCLUDE "music/sfx/sfx_08_0e.tx"
+INCLUDE "music/sfx/sfx_08_0f.tx"
+INCLUDE "music/sfx/sfx_08_10.tx"
+INCLUDE "music/sfx/sfx_08_11.tx"
+INCLUDE "music/sfx/sfx_08_12.tx"
+INCLUDE "music/sfx/sfx_08_13.tx"
 
 Unknown_20361: ; 20361 (8:4361)
-INCBIN "baserom.gbc",$20361,$2049b - $20361
+INCBIN "baserom.gbc",$20361,$203c3 - $20361
+
+INCLUDE "music/sfx/sfx_08_40.tx"
+INCLUDE "music/sfx/sfx_08_3f.tx"
+INCLUDE "music/sfx/sfx_08_3c.tx"
+INCLUDE "music/sfx/sfx_08_3d.tx"
+INCLUDE "music/sfx/sfx_08_3e.tx"
+INCLUDE "music/sfx/sfx_08_77.tx"
+INCLUDE "music/sfx/sfx_08_41.tx"
+INCLUDE "music/sfx/sfx_08_42.tx"
+INCLUDE "music/sfx/sfx_08_43.tx"
+INCLUDE "music/sfx/sfx_08_44.tx"
+INCLUDE "music/sfx/sfx_08_45.tx"
 
 Unknown_2049b: ; 2049b (8:449b)
-INCBIN "baserom.gbc",$2049b,$2136e - $2049b
+INCBIN "baserom.gbc",$2049b,$204aa - $2049b
+
+INCLUDE "music/sfx/sfx_08_47.tx"
+INCLUDE "music/sfx/sfx_08_48.tx"
+INCLUDE "music/sfx/sfx_08_49.tx"
+INCLUDE "music/sfx/sfx_08_4a.tx"
+INCLUDE "music/sfx/sfx_08_4b.tx"
+INCLUDE "music/sfx/sfx_08_4c.tx"
+
+INCBIN "baserom.gbc",$204d1,$204d6 - $204d1 ; unknown music
+
+INCLUDE "music/sfx/sfx_08_4d.tx"
+INCLUDE "music/sfx/sfx_08_4e.tx"
+INCLUDE "music/sfx/sfx_08_4f.tx"
+INCLUDE "music/sfx/sfx_08_50.tx"
+INCLUDE "music/sfx/sfx_08_51.tx"
+INCLUDE "music/sfx/sfx_08_52.tx"
+INCLUDE "music/sfx/sfx_08_53.tx"
+INCLUDE "music/sfx/sfx_08_54.tx"
+
+INCBIN "baserom.gbc",$20528,$20533 - $20528 ; unknown music
+
+INCLUDE "music/sfx/sfx_08_55.tx"
+INCLUDE "music/sfx/sfx_08_56.tx"
+INCLUDE "music/sfx/sfx_08_57.tx"
+INCLUDE "music/sfx/sfx_08_58.tx"
+
+INCBIN "baserom.gbc",$20565,$2056a - $20565 ; unknown music
+
+INCLUDE "music/sfx/sfx_08_59.tx"
+INCLUDE "music/sfx/sfx_08_5a.tx"
+INCLUDE "music/sfx/sfx_08_5b.tx"
+INCLUDE "music/sfx/sfx_08_5c.tx"
+INCLUDE "music/sfx/sfx_08_5d.tx"
+INCLUDE "music/sfx/sfx_08_5e.tx"
+INCLUDE "music/sfx/sfx_08_5f.tx"
+INCLUDE "music/sfx/sfx_08_60.tx"
+INCLUDE "music/sfx/sfx_08_61.tx"
+INCLUDE "music/sfx/sfx_08_62.tx"
+INCLUDE "music/sfx/sfx_08_63.tx"
+INCLUDE "music/sfx/sfx_08_64.tx"
+INCLUDE "music/sfx/sfx_08_65.tx"
+INCLUDE "music/sfx/sfx_08_66.tx"
+
+INCBIN "baserom.gbc",$20610,$20624 - $20610 ; unknown music
+
+INCLUDE "music/sfx/sfx_08_67.tx"
+INCLUDE "music/sfx/sfx_08_68.tx"
+INCLUDE "music/sfx/sfx_08_69.tx"
+INCLUDE "music/sfx/sfx_08_6a.tx"
+INCLUDE "music/sfx/sfx_08_6b.tx"
+INCLUDE "music/sfx/sfx_08_6c.tx"
+INCLUDE "music/sfx/sfx_08_6d.tx"
+INCLUDE "music/sfx/sfx_08_6e.tx"
+INCLUDE "music/sfx/sfx_08_6f.tx"
+
+INCBIN "baserom.gbc",$207f1,$207fa - $207f1 ; unknown music
+
+INCLUDE "music/sfx/sfx_08_70.tx"
+INCLUDE "music/sfx/sfx_08_71.tx"
+
+INCBIN "baserom.gbc",$20862,$20875 - $20862 ; unknown music
+
+INCLUDE "music/sfx/sfx_08_72.tx"
+INCLUDE "music/sfx/sfx_08_73.tx"
+INCLUDE "music/sfx/sfx_08_74.tx"
+
+INCBIN "baserom.gbc",$208d5,$208e0 - $208d5 ; unknown music
+
+INCLUDE "music/sfx/sfx_08_75.tx"
+INCLUDE "music/sfx/sfx_08_76.tx"
+
+INCBIN "baserom.gbc",$2098b,$209d7 - $2098b ; unknown music
+
+INCLUDE "music/sfx/sfx_08_1d.tx"
+INCLUDE "music/sfx/sfx_08_37.tx"
+INCLUDE "music/sfx/sfx_08_38.tx"
+INCLUDE "music/sfx/sfx_08_25.tx"
+INCLUDE "music/sfx/sfx_08_39.tx"
+INCLUDE "music/sfx/sfx_08_17.tx"
+INCLUDE "music/sfx/sfx_08_23.tx"
+INCLUDE "music/sfx/sfx_08_24.tx"
+INCLUDE "music/sfx/sfx_08_14.tx"
+INCLUDE "music/sfx/sfx_08_22.tx"
+INCLUDE "music/sfx/sfx_08_1a.tx"
+INCLUDE "music/sfx/sfx_08_1b.tx"
+INCLUDE "music/sfx/sfx_08_19.tx"
+INCLUDE "music/sfx/sfx_08_1f.tx"
+INCLUDE "music/sfx/sfx_08_20.tx"
+INCLUDE "music/sfx/sfx_08_16.tx"
+INCLUDE "music/sfx/sfx_08_21.tx"
+INCLUDE "music/sfx/sfx_08_15.tx"
+INCLUDE "music/sfx/sfx_08_1e.tx"
+INCLUDE "music/sfx/sfx_08_1c.tx"
+INCLUDE "music/sfx/sfx_08_18.tx"
+INCLUDE "music/sfx/sfx_08_2d.tx"
+INCLUDE "music/sfx/sfx_08_2a.tx"
+INCLUDE "music/sfx/sfx_08_2f.tx"
+INCLUDE "music/sfx/sfx_08_26.tx"
+INCLUDE "music/sfx/sfx_08_27.tx"
+INCLUDE "music/sfx/sfx_08_28.tx"
+INCLUDE "music/sfx/sfx_08_32.tx"
+INCLUDE "music/sfx/sfx_08_29.tx"
+INCLUDE "music/sfx/sfx_08_2b.tx"
+INCLUDE "music/sfx/sfx_08_30.tx"
+INCLUDE "music/sfx/sfx_08_2e.tx"
+INCLUDE "music/sfx/sfx_08_31.tx"
+INCLUDE "music/sfx/sfx_08_2c.tx"
+INCLUDE "music/sfx/sfx_08_33.tx"
+INCLUDE "music/sfx/sfx_08_34.tx"
+INCLUDE "music/sfx/sfx_08_35.tx"
+INCLUDE "music/sfx/sfx_08_36.tx"
 
 Func_2136e: ; 2136e (8:536e)
 	ld a, [$d083]
@@ -44406,7 +46205,7 @@ Func_2210d: ; 2210d (8:610d)
 	ld d, h
 	add hl, hl
 	add hl, de
-	ld de, Unknown_20000 ; $4000
+	ld de, SFX_Headers_08 ; $4000
 	add hl, de
 	ld a, h
 	ld [$c0ec], a
@@ -44610,7 +46409,7 @@ Func_2224e: ; 2224e (8:624e)
 	ld d, h
 	add hl, hl
 	add hl, de
-	ld de, Unknown_20000 ; $4000
+	ld de, SFX_Headers_08 ; $4000
 	add hl, de
 	ld e, l
 	ld d, h
@@ -44735,7 +46534,18 @@ Unknown_22322: ; 22322 (8:6322)
 INCBIN "baserom.gbc",$22322,$22325 - $22322
 
 Unknown_22325: ; 22325 (8:6325)
-INCBIN "baserom.gbc",$22325,$23f52 - $22325
+INCBIN "baserom.gbc",$22325,$22370 - $22325
+
+INCLUDE "music/gymleaderbattle.tx"
+INCLUDE "music/trainerbattle.tx"
+INCLUDE "music/wildbattle.tx"
+INCLUDE "music/finalbattle.tx"
+INCLUDE "music/sfx/sfx_08_3a.tx"
+INCLUDE "music/sfx/sfx_08_3b.tx"
+INCLUDE "music/sfx/sfx_08_46.tx"
+INCLUDE "music/defeatedtrainer.tx"
+INCLUDE "music/defeatedwildmon.tx"
+INCLUDE "music/defeatedgymleader.tx"
 
 SECTION "bank9",ROMX,BANK[$9]
 
@@ -112165,150 +113975,120 @@ TechnicalMachinePrices: ; 7bfa7 (1e:7fa7)
 
 SECTION "bank1F",ROMX,BANK[$1F]
 
-Unknown_7c000: ; 7c000 (1f:4000)
-INCBIN "baserom.gbc",$7c000,$7c361 - $7c000
+INCLUDE "music/headers/sfxheaders1f.tx"
+INCLUDE "music/headers/musicheaders1f.tx"
+
+INCLUDE "music/sfx/sfx_1f_01.tx"
+INCLUDE "music/sfx/sfx_1f_02.tx"
+INCLUDE "music/sfx/sfx_1f_03.tx"
+INCLUDE "music/sfx/sfx_1f_04.tx"
+INCLUDE "music/sfx/sfx_1f_05.tx"
+INCLUDE "music/sfx/sfx_1f_06.tx"
+INCLUDE "music/sfx/sfx_1f_07.tx"
+INCLUDE "music/sfx/sfx_1f_08.tx"
+INCLUDE "music/sfx/sfx_1f_09.tx"
+INCLUDE "music/sfx/sfx_1f_0a.tx"
+INCLUDE "music/sfx/sfx_1f_0b.tx"
+INCLUDE "music/sfx/sfx_1f_0c.tx"
+INCLUDE "music/sfx/sfx_1f_0d.tx"
+INCLUDE "music/sfx/sfx_1f_0e.tx"
+INCLUDE "music/sfx/sfx_1f_0f.tx"
+INCLUDE "music/sfx/sfx_1f_10.tx"
+INCLUDE "music/sfx/sfx_1f_11.tx"
+INCLUDE "music/sfx/sfx_1f_12.tx"
+INCLUDE "music/sfx/sfx_1f_13.tx"
 
 Unknown_7c361: ; 7c361 (1f:4361)
-INCBIN "baserom.gbc",$7c361,$7c45e - $7c361
+INCBIN "baserom.gbc",$7c361,$7c3c3 - $7c361
 
+INCLUDE "music/sfx/sfx_1f_3f.tx"
+INCLUDE "music/sfx/sfx_1f_56.tx"
+INCLUDE "music/sfx/sfx_1f_57.tx"
+INCLUDE "music/sfx/sfx_1f_58.tx"
+INCLUDE "music/sfx/sfx_1f_3c.tx"
+INCLUDE "music/sfx/sfx_1f_59.tx"
+INCLUDE "music/sfx/sfx_1f_5a.tx"
+INCLUDE "music/sfx/sfx_1f_5b.tx"
+INCLUDE "music/sfx/sfx_1f_5c.tx"
+INCLUDE "music/sfx/sfx_1f_40.tx"
 IF _RED
-UnknSong_md_7c45e: ; 7c45e (1f:445e)
-	mus_duty duty50
-		mus_note noteD, note4_16
-
-	db $f4
-
-		mus_note noteC, note16
-		mus_note noteC, note2
-		mus_note noteD, note4
-
-	mus_octave oct3
-		mus_note noteG#, note16
-		mus_note noteC, note4_8_16
-		mus_note noteD, note4
-
-	mus_octave oct3
-		mus_note noteRst, note16
-
-		mus_note noteC, note4_8_16
-		mus_note noteD, note4
-
-	mus_octave oct3
-		mus_note noteC, note16
-		mus_note noteC, note2
-		mus_note noteD, note8_16
-
-	mus_octave oct3
-		mus_note noteA#, note16
-		mus_note noteC, note2
-
-	mus_end
-UnknSong_md_7c475: ; 7c475 (1f:4475)
-	mus_duty duty50
-		mus_note noteD, note4_16
-		mus_note noteC, note2_16
-		mus_note noteC, note16
-		mus_note noteC, note16
-		mus_note noteD, note4
-
-	db $d4
-
-		mus_note noteC, note8
-		mus_note noteC, note2
-		mus_note noteD, note4
-		mus_note noteRst, note4_16
-
-		mus_note noteG#, note8
-		mus_note noteC, note4_8_16
-		mus_note noteD, note4
-		mus_note noteRst, note4_16
-
-		mus_note noteRst, note8
-
-		mus_note noteC, note4_8_16
-		mus_note noteD, note4
-		mus_note noteRst, note4_16
-
-		mus_note noteC, note8
-		mus_note noteC, note2
-		mus_note noteD, note8_16
-		mus_note noteRst, note4_16
-
-		mus_note noteA#, note8
-		mus_note noteC, note2
-
-	mus_end
+	INCLUDE "music/sfx/sfx_1f_5d.tx"
 ENDC
 IF _BLUE
-UnknSong_md_7c45e: ; 7c45e (1f:445e)
-	mus_duty duty50
-		mus_note noteD, note4
-
-	mus_octave oct3
-		mus_note noteC, note16
-		mus_note noteC, note4_8_16
-		mus_note noteD, note4
-
-	mus_octave oct3
-		mus_note noteG#, note16
-		mus_note noteC, note4_8_16
-		mus_note noteD, note4
-
-	mus_octave oct3
-		mus_note noteRst, note16
-
-		mus_note noteC, note4_8_16
-		mus_note noteD, note4
-
-	mus_octave oct3
-		mus_note noteC, note16
-		mus_note noteC, note2
-		mus_note noteD, note1
-
-	db $f2
-
-	mus_octave oct7
-		mus_note noteC, note2
-
-	mus_end
-UnknSong_md_7c475: ; 7c475 (1f:4475)
-	mus_duty duty50
-		mus_note noteD, note4
-		mus_note noteC, note2_16
-		mus_note noteC, note16
-		mus_note noteC, note16
-		mus_note noteD, note4
-		mus_note noteRst, note4_16
-
-		mus_note noteC, note8
-		mus_note noteC, note4_8_16
-		mus_note noteD, note4
-		mus_note noteRst, note4_16
-
-		mus_note noteG#, note8
-		mus_note noteC, note4_8_16
-		mus_note noteD, note4
-		mus_note noteRst, note4_16
-
-		mus_note noteRst, note8
-
-		mus_note noteC, note4_8_16
-		mus_note noteD, note4
-		mus_note noteRst, note4_16
-
-		mus_note noteC, note8
-		mus_note noteC, note2
-		mus_note noteD, note1
-
-	db $d2
-
-	mus_octave oct6
-		mus_note noteC, note2
-
-	mus_end
+	INCLUDE "music/blue/sfx_1f_5d.tx"
 ENDC
+INCLUDE "music/sfx/sfx_1f_3d.tx"
+INCLUDE "music/sfx/sfx_1f_43.tx"
+INCLUDE "music/sfx/sfx_1f_3e.tx"
+INCLUDE "music/sfx/sfx_1f_44.tx"
+INCLUDE "music/sfx/sfx_1f_45.tx"
+INCLUDE "music/sfx/sfx_1f_46.tx"
+INCLUDE "music/sfx/sfx_1f_47.tx"
+INCLUDE "music/sfx/sfx_1f_48.tx"
+INCLUDE "music/sfx/sfx_1f_49.tx"
+INCLUDE "music/sfx/sfx_1f_4a.tx"
+INCLUDE "music/sfx/sfx_1f_4b.tx"
+INCLUDE "music/sfx/sfx_1f_4c.tx"
+INCLUDE "music/sfx/sfx_1f_4d.tx"
+INCLUDE "music/sfx/sfx_1f_4e.tx"
+INCLUDE "music/sfx/sfx_1f_4f.tx"
+INCLUDE "music/sfx/sfx_1f_50.tx"
+INCLUDE "music/sfx/sfx_1f_51.tx"
+INCLUDE "music/sfx/sfx_1f_52.tx"
+INCLUDE "music/sfx/sfx_1f_53.tx"
+INCLUDE "music/sfx/sfx_1f_54.tx"
+INCLUDE "music/sfx/sfx_1f_55.tx"
+INCLUDE "music/sfx/sfx_1f_5e.tx"
+INCLUDE "music/sfx/sfx_1f_5f.tx"
+INCLUDE "music/sfx/sfx_1f_60.tx"
+INCLUDE "music/sfx/sfx_1f_61.tx"
+INCLUDE "music/sfx/sfx_1f_62.tx"
+INCLUDE "music/sfx/sfx_1f_63.tx"
+INCLUDE "music/sfx/sfx_1f_64.tx"
+INCLUDE "music/sfx/sfx_1f_65.tx"
+INCLUDE "music/sfx/sfx_1f_66.tx"
+INCLUDE "music/sfx/sfx_1f_67.tx"
 
-INCBIN "baserom.gbc",$7c490,$7d13b - $7c490
+INCBIN "baserom.gbc",$7c758,$7c7a4 - $7c758
+
+INCLUDE "music/sfx/sfx_1f_1d.tx"
+INCLUDE "music/sfx/sfx_1f_37.tx"
+INCLUDE "music/sfx/sfx_1f_38.tx"
+INCLUDE "music/sfx/sfx_1f_25.tx"
+INCLUDE "music/sfx/sfx_1f_39.tx"
+INCLUDE "music/sfx/sfx_1f_17.tx"
+INCLUDE "music/sfx/sfx_1f_23.tx"
+INCLUDE "music/sfx/sfx_1f_24.tx"
+INCLUDE "music/sfx/sfx_1f_14.tx"
+INCLUDE "music/sfx/sfx_1f_22.tx"
+INCLUDE "music/sfx/sfx_1f_1a.tx"
+INCLUDE "music/sfx/sfx_1f_1b.tx"
+INCLUDE "music/sfx/sfx_1f_19.tx"
+INCLUDE "music/sfx/sfx_1f_1f.tx"
+INCLUDE "music/sfx/sfx_1f_20.tx"
+INCLUDE "music/sfx/sfx_1f_16.tx"
+INCLUDE "music/sfx/sfx_1f_21.tx"
+INCLUDE "music/sfx/sfx_1f_15.tx"
+INCLUDE "music/sfx/sfx_1f_1e.tx"
+INCLUDE "music/sfx/sfx_1f_1c.tx"
+INCLUDE "music/sfx/sfx_1f_18.tx"
+INCLUDE "music/sfx/sfx_1f_2d.tx"
+INCLUDE "music/sfx/sfx_1f_2a.tx"
+INCLUDE "music/sfx/sfx_1f_2f.tx"
+INCLUDE "music/sfx/sfx_1f_26.tx"
+INCLUDE "music/sfx/sfx_1f_27.tx"
+INCLUDE "music/sfx/sfx_1f_28.tx"
+INCLUDE "music/sfx/sfx_1f_32.tx"
+INCLUDE "music/sfx/sfx_1f_29.tx"
+INCLUDE "music/sfx/sfx_1f_2b.tx"
+INCLUDE "music/sfx/sfx_1f_30.tx"
+INCLUDE "music/sfx/sfx_1f_2e.tx"
+INCLUDE "music/sfx/sfx_1f_31.tx"
+INCLUDE "music/sfx/sfx_1f_2c.tx"
+INCLUDE "music/sfx/sfx_1f_33.tx"
+INCLUDE "music/sfx/sfx_1f_34.tx"
+INCLUDE "music/sfx/sfx_1f_35.tx"
+INCLUDE "music/sfx/sfx_1f_36.tx"
 
 ; known jump sources: 441b0 (11:41b0)
 Func_7d13b: ; 7d13b (1f:513b)
@@ -113700,7 +115480,7 @@ Func_7d9c2: ; 7d9c2 (1f:59c2)
 	ld d, h
 	add hl, hl
 	add hl, de
-	ld de, Unknown_7c000 ; $4000
+	ld de, SFX_Headers_1f ; $4000
 	add hl, de
 	ld a, h
 	ld [$c0ec], a
@@ -113904,7 +115684,7 @@ Func_7db03: ; 7db03 (1f:5b03)
 	ld d, h
 	add hl, hl
 	add hl, de
-	ld de, Unknown_7c000 ; $4000
+	ld de, SFX_Headers_1f ; $4000
 	add hl, de
 	ld e, l
 	ld d, h
@@ -114004,7 +115784,30 @@ Unknown_7db9b: ; 7db9b (1f:5b9b)
 INCBIN "baserom.gbc",$7db9b,$7dba3 - $7db9b
 
 Unknown_7dba3: ; 7dba3 (1f:5ba3)
-INCBIN "baserom.gbc",$7dba3,$80000 - $7dba3
+INCBIN "baserom.gbc",$7dba3,$7dbbb - $7dba3
+
+INCLUDE "music/bikeriding.tx"
+INCLUDE "music/dungeon1.tx"
+INCLUDE "music/gamecorner.tx"
+INCLUDE "music/titlescreen.tx"
+INCLUDE "music/sfx/sfx_1f_3a.tx"
+INCLUDE "music/dungeon2.tx"
+INCLUDE "music/dungeon3.tx"
+INCLUDE "music/cinnabarmansion.tx"
+INCLUDE "music/sfx/sfx_1f_41.tx"
+INCLUDE "music/sfx/sfx_1f_3b.tx"
+INCLUDE "music/sfx/sfx_1f_42.tx"
+INCLUDE "music/oakslab.tx"
+INCLUDE "music/pokemontower.tx"
+INCLUDE "music/silphco.tx"
+INCLUDE "music/meeteviltrainer.tx"
+INCLUDE "music/meetfemaletrainer.tx"
+INCLUDE "music/meetmaletrainer.tx"
+INCLUDE "music/introbattle.tx"
+INCLUDE "music/surfing.tx"
+INCLUDE "music/jigglypuffsong.tx"
+INCLUDE "music/halloffame.tx"
+INCLUDE "music/credits.tx"
 
 SECTION "bank20",ROMX,BANK[$20]
 
