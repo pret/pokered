@@ -3367,146 +3367,193 @@ BRUNOS_ROOM_WIDTH  EQU $05
 AGATHAS_ROOM_HEIGHT EQU $06
 AGATHAS_ROOM_WIDTH  EQU $05
 
-;Sound Constants (Copied from pkms.asm with modifications)
-MUSIC		EQU 0
-SFX			EQU 4
-CH1			EQU 0
-CH2			EQU 1
-CH3			EQU 2
-CH4			EQU 3
+;1_channel	EQU $00
+;2_channels	EQU $40
+;3_channels	EQU $80
+;4_channels	EQU $C0
+
+CH0		EQU 0
+CH1		EQU 1
+CH2		EQU 2
+CH3		EQU 3
+CH4		EQU 4
+CH5		EQU 5
+CH6		EQU 6
+CH7		EQU 7
 
 ;Note Pitch
-noteC		EQU $0
-noteC#		EQU $1
-noteD		EQU $2
-noteD#		EQU $3
-noteE		EQU $4
-noteF		EQU $5
-noteF#		EQU $6
-noteG		EQU $7
-noteG#		EQU $8
-noteA		EQU $9
-noteA#		EQU $A
-noteB		EQU $B
-noteRst		EQU $C
+C_		EQU $0
+C#		EQU $1
+D_		EQU $2
+D#		EQU $3
+E_		EQU $4
+F_		EQU $5
+F#		EQU $6
+G_		EQU $7
+G#		EQU $8
+A_		EQU $9
+A#		EQU $A
+B_		EQU $B
 
-;Note Delay
-note16		EQU $0 ;1/16
-note8		EQU $1 ;1/8
-note8_16	EQU $2 ;1/8 + 1/16
-note4		EQU $3 ;1/4
-note4_16	EQU $4 ;1/4 + 1/16
-note4_8		EQU $5 ;1/4 + 1/8
-note4_8_16 	EQU $6 ;1/4 + 1/8 + 1/16
-note2		EQU $7 ;1/2
-note2_16	EQU $8 ;1/2 + 1/16
-note2_8		EQU $9 ;1/2 + 1/8
-note2_8_16	EQU $A ;1/2 + 1/8 + 1/16
-note2_4		EQU $B ;1/2 + 1/4
-note2_4_16 	EQU $C ;1/2 + 1/4 + 1/16
-note2_4_8	EQU $D ;1/2 + 1/4 + 1/8
-note2_4_8_16 EQU $E ;1/2 + 1/4 + 1/8 + 1/16
-note1		EQU $F ;1
+;drum instruments
+snare1		EQU $01
+snare2		EQU $02
+snare3		EQU $03
+snare4		EQU $04
+snare5		EQU $05
+triangle1	EQU $06
+triangle2	EQU $07
+snare6		EQU $08
+snare7		EQU $09
+snare8		EQU $0a
+snare9		EQU $0b
+cymbal1		EQU $0c
+cymbal2		EQU $0d
+cymbal3		EQU $0e
+mutedsnare1	EQU $0f
+triangle3	EQU $10
+mutedsnare2	EQU $11
+mutedsnare3	EQU $12
+mutedsnare4	EQU $13
 
-;Drum
-dNote		EQU $B0
-dRst		EQU $C0
-d5d3Spd		EQU $D4
-d4d3Spd		EQU $D8
-dNormSpd	EQU $DC
-d2Spd		EQU $D0
-
-; octaves
-oct0		EQU $E7
-oct1		EQU $E6
-oct2		EQU $E5
-oct3		EQU $E4
-oct4		EQU $E3
-oct5		EQU $E2
-oct6		EQU $E1
-oct7		EQU $E0
-
-;duty
-duty12_5	EQU $0
-duty25		EQU $1
-duty50		EQU $2
-duty75		EQU $3
-
-;Write a music note
-;format: mus_note pitch delay
-mus_note: MACRO
-	db ((\1 << 4) | \2)
+;format: note pitch, length (in 16ths)
+note: MACRO
+	db (\1 << 4) | (\2 - 1)
 ENDM
 
-;Write an octave note
-;format: mus_octave octave
-mus_octave: MACRO
-	db \1
+;format: dnote length (in 16ths), instrument
+dnote: MACRO
+	db $B0 | (\1 - 1)
+	db \2
 ENDM
 
-; set velocity/note fade (\1 is velocity, \2 is note length, both 0-15)
-; format: mus_vel vel, length
-mus_vel: MACRO
-	db $DC
-	db	((\1 << 4) | \2)
+;format: rest length (in 16ths)
+rest: MACRO
+	db $C0 | (\1 - 1)
 ENDM
 
-; stop sound
-; format: mus_end
-mus_end: MACRO
-	db $FF
+; format: notetype speed, volume, fade
+notetype: MACRO
+	db	$D0 | \1
+	db	(\2 << 4) | \3
 ENDM
 
-; ???
-; format: mus_E8
-mus_E8: MACRO
+dspeed: MACRO
+	db $D0 | \1
+ENDM
+
+octave: MACRO
+	db $E8 - \1
+ENDM
+
+unknownmusic0xe8: MACRO
 	db $E8
 ENDM
 
-; set modulation (\1 is delay, \2 is depth, \3 is rate)
-; format: mus_mod delay, depth, rate
-mus_mod: MACRO
-	db	$EA
-	db	\1
-	db	((\2 << 4) | \3)
+unknownmusic0xe9: MACRO
+	db $E9
 ENDM
 
-; set duty cycle (\1: 0 = 12.5%, 1 = 25%, 2 = 50%, 3 = 75%)
-; format: mus_duty duty
-mus_duty: MACRO
-	db	$EC
-	db	\1
+;format: vibrato delay, rate, depth
+vibrato: MACRO
+	db $EA
+	db \1
+	db (\2 << 4) | \3
 ENDM
 
-; set music tempo (\1 is divider, \2 is modifier)
-; format:	mus_tempo divider, modifier
-mus_tempo: MACRO
-	db	$ED
-	db	\1
-	db	\2
+pitchbend: MACRO
+	db $EB
+	db \1
+	db \2
 ENDM
 
-; set volume (\1 is volume)
-; format: mus_volume volume
-; (may actually be panning?)
-mus_volume: MACRO
-	db	$F0
-	db	\1
+duty: MACRO
+	db $EC
+	db \1
 ENDM
 
-; call \1
-; format: mus_call offset
-mus_call: MACRO
-	db	$FD
-	;dw	((\1 % $4000) + ((\1 >= $4000) * $4000))
-	dw \1
+tempo: MACRO
+	db $ED
+	db \1
+	db \2
 ENDM
 
-; jump \1 \2
-; format: mus_jump loop offset
-mus_jump: MACRO
-	db	$FE
-	db	\1
-	dw  \2
-	;dw	((\2 % $4000) + ((\2 >= $4000) * $4000))
+unknownmusic0xee: MACRO
+	db $EE
+	db \1
+ENDM
+
+unknownmusic0xef: MACRO
+	db $EF
+ENDM
+
+stereopanning: MACRO
+	db $F0
+	db \1
+ENDM
+
+unknownmusic0xf1: MACRO
+	db $F1
+ENDM
+
+unknownmusic0xf2: MACRO
+	db $F2
+ENDM
+
+unknownmusic0xf3: MACRO
+	db $F3
+ENDM
+
+unknownmusic0xf4: MACRO
+	db $F4
+ENDM
+
+unknownmusic0xf5: MACRO
+	db $F5
+ENDM
+
+unknownmusic0xf6: MACRO
+	db $F6
+ENDM
+
+unknownmusic0xf7: MACRO
+	db $F7
+ENDM
+
+unknownmusic0xf8: MACRO
+	db $F8
+ENDM
+
+unknownmusic0xf9: MACRO
+	db $F9
+ENDM
+
+unknownmusic0xfa: MACRO
+	db $FA
+ENDM
+
+unknownmusic0xfb: MACRO
+	db $FB
+ENDM
+
+dutycycle: MACRO
+	db $FC
+	db \1
+ENDM
+
+;format: callchannel address
+;callchannel: MACRO
+;	db $FD
+;	dw \1
+;ENDM
+
+;format: loopchannel count, address
+;loopchannel: MACRO
+;	db $FE
+;	db \1
+;	dw \2
+;ENDM
+
+endchannel: MACRO
+	db $FF
 ENDM
