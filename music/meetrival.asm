@@ -122,6 +122,8 @@ Music_MeetRival_branch_b140:
 Music_MeetRival_branch_b19b:
 	tempo 0, 100
 	loopchannel 0, Music_MeetRival_branch_b1a5
+
+Music_MeetRival_branch_b1a2:
 	tempo 0, 112
 
 Music_MeetRival_branch_b1a5:

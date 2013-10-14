@@ -20133,11 +20133,11 @@ Func_9b47: ; 0x9b47
 	ld a, $de
 	call PlayMusic
 	ld hl, $c006
-	ld de, $71a2
+	ld de, Music_MeetRival_branch_b1a2
 	call Func_9b60
-	ld de, $721d
+	ld de, Music_MeetRival_branch_b21d
 	call Func_9b60
-	ld de, $72b5
+	ld de, Music_MeetRival_branch_b2b5
 
 Func_9b60: ; 0x9b60
 	ld a, e
@@ -20152,14 +20152,14 @@ Func_9b65: ; 0x9b65
 	ld a, $de
 	call PlayMusic
 	ld hl, $c006
-	ld de, $7119
+	ld de, Music_MeetRival_branch_b119
 	jp Func_9b60
 ; 0x9b75
 
 Func_9b75: ; 0x9b75
 	call Func_9b47
 	ld hl, $c006
-	ld de, $719b
+	ld de, Music_MeetRival_branch_b19b
 	jp Func_9b60
 ; 0x9b81
 
@@ -20175,7 +20175,7 @@ Func_9b81: ; 0x9b81
 	ld a, $c3
 	call PlayMusic
 	ld hl, $c006
-	ld de, $6a6f
+	ld de, Music_Cities1_branch_aa6f
 	jp Func_9b60
 ; 0x9ba3
 
