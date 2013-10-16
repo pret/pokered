@@ -101351,10 +101351,10 @@ Func_7109b: ; 7109b (1c:509b)
 	ld bc, $100
 	ld a, BANK(WorldMapTileGraphics)
 	call FarCopyData2
-	ld hl, Unknown_716be ; $56be
+	ld hl, MonNestIcon ; $56be
 	ld de, $8040
 	ld bc, $8
-	ld a, BANK(Unknown_716be)
+	ld a, BANK(MonNestIcon)
 	call FarCopyDataDouble
 	ld hl, W_SCREENTILESBUFFER
 	ld de, CompressedMap ; $5100
@@ -101850,8 +101850,8 @@ CeruleanCaveName: ; 716a4 (1c:56a4)
 PowerPlantName: ; 716b2 (1c:56b2)
 	db "POWER PLANT@"
 
-Unknown_716be: ; 716be (1c:56be)
-INCBIN "baserom.gbc",$716be,$716c6 - $716be
+MonNestIcon: ; 716be (1c:56be)
+	INCBIN "gfx/mon_nest_icon.1bpp"
 
 ; known jump sources: 70ec8 (1c:4ec8)
 Func_716c6: ; 716c6 (1c:56c6)
