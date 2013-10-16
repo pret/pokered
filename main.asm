@@ -29674,7 +29674,7 @@ Func_12924: ; 12924 (4:6924)
 	ld de, $cf99
 	ld bc, $203
 	call PrintNumber
-	ld a, $f3
+	ld a, "/"
 	ld [hli], a
 	ld de, $cfba
 	ld bc, $203
@@ -29733,7 +29733,7 @@ StatusScreen: ; 12953 (4:6953)
 	add hl, de
 	ld [hl], $f2 ; . after No ("." is a different one)
 	dec hl
-	ld [hl], $74 ; No
+	ld [hl], "№"
 	FuncCoord 19,9
 	ld hl, Coord
 	ld bc, $0806
@@ -29841,7 +29841,7 @@ Type2Text: ; 12aac (4:6aac)
 	db "TYPE2/", $4e
 
 IDNoText: ; 12ab3 (4:6ab3)
-	db $73, $74, "/", $4e
+	db $73, "№", "/", $4e
 
 OTText: ; 12ab7 (4:6ab7)
 	db "OT/", $4e, "@"
@@ -29973,7 +29973,7 @@ StatusScreen2: ; 12b57 (4:6b57)
 	and a
 	jr z, .InitPP ; 0x12bb3 $6
 	ld c, a
-	ld a, $e3
+	ld a, "-"
 	call Func_12ccb ; Fill the rest with --
 .InitPP ; 12bbb
 	ld hl, $cfa0
@@ -52894,7 +52894,7 @@ Func_39b87: ; 39b87 (e:5b87)
 	jr z, .asm_39bd1
 	jr .asm_39b8f
 .asm_39bc1
-	ld a, $e3
+	ld a, "-"
 	ld [de], a
 	inc de
 	inc b
@@ -60594,10 +60594,10 @@ Func_3d4b6: ; 3d4b6 (f:54b6)
 	call PlaceString
 	FuncCoord 7, 11 ; $c483
 	ld hl, Coord
-	ld [hl], $f3
+	ld [hl], "/"
 	FuncCoord 5, 9 ; $c459
 	ld hl, Coord
-	ld [hl], $f3
+	ld [hl], "/"
 	FuncCoord 5, 11 ; $c481
 	ld hl, Coord
 	ld de, $cd6d
@@ -66627,7 +66627,7 @@ ShowPokedexDataInternal: ; 402e2 (10:42e2)
 	call IndexToPokedex
 	FuncCoord 2,8
 	ld hl,Coord
-	ld a,$74
+	ld a, "№"
 	ld [hli],a
 	ld a,$f2
 	ld [hli],a
