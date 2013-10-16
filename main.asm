@@ -3255,10 +3255,10 @@ PrintStatusCondition: ; 14e1 (0:14e1)
 PrintStatusConditionNotFainted ; 14f6
 	ld a,[H_LOADEDROMBANK]
 	push af
-	ld a,BANK(Unknown_747de)
+	ld a,BANK(PrintStatusAilment)
 	ld [H_LOADEDROMBANK],a
 	ld [$2000],a
-	call Unknown_747de ; print status condition
+	call PrintStatusAilment ; print status condition
 	pop bc
 	ld a,b
 	ld [H_LOADEDROMBANK],a
@@ -104812,51 +104812,51 @@ CredPAAD: ; 74730 (1d:4730)
 TheEndGfx: ; 7473e (1d:473e) ; 473E (473F on blue)
 	INCBIN "gfx/theend.2bpp"
 
-Unknown_747de: ; 747de (1d:47de)
+PrintStatusAilment: ; 747de (1d:47de)
 	ld a, [de]
 	bit 3, a
-	jr nz, .asm_747fb
+	jr nz, .psn
 	bit 4, a
-	jr nz, .asm_74804
+	jr nz, .brn
 	bit 5, a
-	jr nz, .asm_7480d
+	jr nz, .frz
 	bit 6, a
-	jr nz, .asm_74816
-	and $7
+	jr nz, .par
+	and $7 ; slp
 	ret z
-	ld a, $92
+	ld a, "S"
 	ld [hli], a
-	ld a, $8b
+	ld a, "L"
 	ld [hli], a
-	ld [hl], $8f
+	ld [hl], "P"
 	ret
-.asm_747fb
-	ld a, $8f
+.psn
+	ld a, "P"
 	ld [hli], a
-	ld a, $92
+	ld a, "S"
 	ld [hli], a
-	ld [hl], $8d
+	ld [hl], "N"
 	ret
-.asm_74804
-	ld a, $81
+.brn
+	ld a, "B"
 	ld [hli], a
-	ld a, $91
+	ld a, "R"
 	ld [hli], a
-	ld [hl], $8d
+	ld [hl], "N"
 	ret
-.asm_7480d
-	ld a, $85
+.frz
+	ld a, "F"
 	ld [hli], a
-	ld a, $91
+	ld a, "R"
 	ld [hli], a
-	ld [hl], $99
+	ld [hl], "Z"
 	ret
-.asm_74816
-	ld a, $8f
+.par
+	ld a, "P"
 	ld [hli], a
-	ld a, $80
+	ld a, "A"
 	ld [hli], a
-	ld [hl], $91
+	ld [hl], "R"
 	ret
 ; 7481f (1d:481f)
 
