@@ -4332,7 +4332,7 @@ TextCommandProcessor: ; 1b40 (0:1b40)
 
 NextTextCommand: ; 1b55 (0:1b55)
 	ld a,[hli]
-	cp a,$50 ; terminator
+	cp a, "@" ; terminator
 	jr nz,.doTextCommand
 	pop af
 	ld [$d358],a
@@ -6961,7 +6961,7 @@ DisplayPokemartDialogue: ; 2a2e (0:2a2e)
 
 PokemartGreetingText: ; 2a55 (0:2a55)
 	TX_FAR _PokemartGreetingText
-	db $50
+	db "@"
 
 LoadItemList: ; 2a5a (0:2a5a)
 	ld a,$01
@@ -7009,7 +7009,7 @@ DisplayPokemonFaintedText: ; 2a9b (0:2a9b)
 
 PokemonFaintedText: ; 2aa4 (0:2aa4)
 	TX_FAR _PokemonFaintedText
-	db $50
+	db "@"
 
 DisplayPlayerBlackedOutText: ; 2aa9 (0:2aa9)
 	ld hl,PlayerBlackedOutText
@@ -7021,7 +7021,7 @@ DisplayPlayerBlackedOutText: ; 2aa9 (0:2aa9)
 
 PlayerBlackedOutText: ; 2aba (0:2aba)
 	TX_FAR _PlayerBlackedOutText
-	db $50
+	db "@"
 
 DisplayRepelWoreOffText: ; 2abf (0:2abf)
 	ld hl,RepelWoreOffText
@@ -7030,7 +7030,7 @@ DisplayRepelWoreOffText: ; 2abf (0:2abf)
 
 RepelWoreOffText: ; 2ac8 (0:2ac8)
 	TX_FAR _RepelWoreOffText
-	db $50
+	db "@"
 
 DisplayStartMenu: ; 2acd (0:2acd)
 	ld a,$04
@@ -7763,7 +7763,7 @@ GetMonName: ; 2f9e (0:2f9e)
 	ld bc,10
 	call CopyData
 	ld hl,$cd77
-	ld [hl],$50
+	ld [hl], "@"
 	pop de
 	pop af
 	ld [H_LOADEDROMBANK],a
@@ -9221,7 +9221,7 @@ GetName: ; 376b (0:376b)
 	ld e,l
 .nextChar
 	ld a,[hli]
-	cp a,$50
+	cp a, "@"
 	jr nz,.nextChar
 	inc c           ;entry counter
 	ld a,b          ;wanted entry
@@ -9295,11 +9295,11 @@ CopyStringToCF4B: ; 3826 (0:3826)
 	; fall through
 
 ; copies a string from [de] to [hl]
-CopyString ; 3829 (0:3829)
+CopyString: ; 3829 (0:3829)
 	ld a, [de]
 	inc de
 	ld [hli], a
-	cp $50
+	cp "@"
 	jr nz, CopyString
 	ret
 ; 3831 (0:3831)
@@ -10904,12 +10904,12 @@ Func_4277: ; 4277 (1:4277)
 ; 42a7 (1:42a7)
 UnnamedText_42a7: ; 42a7 (1:42a7)
 	TX_FAR SafariZoneEatingText
-	db $50
+	db "@"
 ; 0x42a7 + 5 bytes
 
 UnnamedText_42ac: ; 42ac (1:42ac)
 	TX_FAR SafariZoneAngryText
-	db $50
+	db "@"
 ; 0x42ac + 5 bytes
 
 ; copy text of fixed length $b (like player name, rival name, mon names, ...)
@@ -11359,10 +11359,10 @@ PrintGameVersionOnTitleScreen: ; 4598 (1:4598)
 ; these point to special tiles specifically loaded for that purpose ad are no usual text
 VersionOnTitleScreenText: ; 45a1 (1:45a1)
 IF _RED
-	db $60,$61,$7F,$65,$66,$67,$68,$69,$50 ; "Red Version"
+	db $60,$61,$7F,$65,$66,$67,$68,$69,"@" ; "Red Version"
 ENDC
 IF _BLUE
-	db $61,$62,$63,$64,$65,$66,$67,$68,$50 ; "Blue Version"
+	db $61,$62,$63,$64,$65,$66,$67,$68,"@" ; "Blue Version"
 ENDC
 
 NintenText: ; 45aa (1:45aa)
@@ -12149,12 +12149,12 @@ PickupItem: ; 4de1 (1:4de1)
 FoundItemText: ; 4e26 (1:4e26)
 	TX_FAR _FoundItemText
 	db $0B
-	db $50
+	db "@"
 ; 0x4e26 + 5 bytes
 
 NoMoreRoomForItemText: ; 4e2c (1:4e2c)
 	TX_FAR _NoMoreRoomForItemText
-	db $50
+	db "@"
 ; 0x4e2c + 5 bytes
 
 ; known jump sources: 4c59 (1:4c59)
@@ -13899,7 +13899,7 @@ Func_5a18:
 
 SSAnne8AfterBattleText2: ; 5a24 (1:5a24)
 	TX_FAR _SSAnne8AfterBattleText2
-	db $50
+	db "@"
 ; 0x5a24 + 5 bytes
 
 TradeCompleted:
@@ -14306,17 +14306,17 @@ Func_5c0a: ; 5c0a (1:5c0a)
 ; 5d43 (1:5d43)
 UnnamedText_5d43: ; 5d43 (1:5d43)
 	TX_FAR _UnnamedText_5d43
-	db $50
+	db "@"
 ; 0x5d43 + 5 bytes
 
 UnnamedText_5d48: ; 5d48 (1:5d48)
 	TX_FAR _UnnamedText_5d48
-	db $50
+	db "@"
 ; 0x5d48 + 5 bytes
 
 UnnamedText_5d4d: ; 5d4d (1:5d4d)
 	TX_FAR _UnnamedText_5d4d
-	db $50
+	db "@"
 ; 0x5d4d + 5 bytes
 
 ; known jump sources: 5ba4 (1:5ba4)
@@ -15249,7 +15249,7 @@ Func_64eb: ; 64eb (1:64eb)
 ; 6557 (1:6557)
 UnnamedText_6557: ; 6557 (1:6557)
 	TX_FAR _UnnamedText_6557
-	db $50
+	db "@"
 ; 0x6557 + 5 bytes
 
 ; known jump sources: 1daa0 (7:5aa0)
@@ -15727,7 +15727,7 @@ Func_695d: ; 695d (1:695d)
 ; 699f (1:699f)
 UnnamedText_699f: ; 699f (1:699f)
 	TX_FAR _UnnamedText_699f
-	db $50
+	db "@"
 ; 0x699f + 5 bytes
 
 Func_69a4: ; 69a4 (1:69a4)
@@ -15761,7 +15761,7 @@ Func_69a4: ; 69a4 (1:69a4)
 ; 69e7 (1:69e7)
 UnnamedText_69e7: ; 69e7 (1:69e7)
 	TX_FAR _UnnamedText_69e7
-	db $50
+	db "@"
 ; 0x69e7 + 5 bytes
 
 ; known jump sources: 6975 (1:6975), 69bc (1:69bc)
@@ -16327,47 +16327,47 @@ DisplayPokemartDialogue_: ; 6c20 (1:6c20)
 
 PokemartBuyingGreetingText: ; 6e0c (1:6e0c)
 	TX_FAR _PokemartBuyingGreetingText
-	db $50
+	db "@"
 
 PokemartTellBuyPrice: ; 6e11 (1:6e11)
 	TX_FAR _PokemartTellBuyPrice
-	db $50
+	db "@"
 
 PokemartBoughtItemText: ; 6e16 (1:6e16)
 	TX_FAR _PokemartBoughtItemText
-	db $50
+	db "@"
 
 PokemartNotEnoughMoneyText: ; 6e1b (1:6e1b)
 	TX_FAR _PokemartNotEnoughMoneyText
-	db $50
+	db "@"
 
 PokemartItemBagFullText: ; 6e20 (1:6e20)
 	TX_FAR _PokemartItemBagFullText
-	db $50
+	db "@"
 
 PokemonSellingGreetingText: ; 6e25 (1:6e25)
 	TX_FAR _PokemonSellingGreetingText
-	db $50
+	db "@"
 
 PokemartTellSellPrice: ; 6e2a (1:6e2a)
 	TX_FAR _PokemartTellSellPrice
-	db $50
+	db "@"
 
 PokemartItemBagEmptyText: ; 6e2f (1:6e2f)
 	TX_FAR _PokemartItemBagEmptyText
-	db $50
+	db "@"
 
 PokemartUnsellableItemText: ; 6e34 (1:6e34)
 	TX_FAR _PokemartUnsellableItemText
-	db $50
+	db "@"
 
 PokemartThankYouText: ; 6e39 (1:6e39)
 	TX_FAR _PokemartThankYouText
-	db $50
+	db "@"
 
 PokemartAnythingElseText: ; 6e3e (1:6e3e)
 	TX_FAR _PokemartAnythingElseText
-	db $50
+	db "@"
 
 ; known jump sources: e537 (3:6537), 3afae (e:6fae)
 Func_6e43: ; 6e43 (1:6e43)
@@ -16571,22 +16571,22 @@ UnnamedText_6fad: ; 6fb4 (1:6fb4)
 
 UnnamedText_6fb4: ; 6fb4 (1:6fb4)
 	TX_FAR _UnnamedText_6fb4
-	db $50
+	db "@"
 ; 0x6fb4 + 5 bytes
 
 UnnamedText_6fb9: ; 6fb9 (1:6fb9)
 	TX_FAR _UnnamedText_6fb9
-	db $50
+	db "@"
 ; 0x6fb9 + 5 bytes
 
 UnnamedText_6fbe: ; 6fbe (1:6fbe)
 	TX_FAR _UnnamedText_6fbe
-	db $50
+	db "@"
 ; 0x6fbe + 5 bytes
 
 UnnamedText_6fc3: ; 6fc3 (1:6fc3)
 	TX_FAR _UnnamedText_6fc3
-	db $50
+	db "@"
 ; 0x6fc3 + 5 bytes
 
 UnnamedText_6fc8: ; 6fc8 (1:6fc8)
@@ -16604,12 +16604,12 @@ UnnamedText_6fd7: ; 6fd7 (1:6fd7)
 	db $a ; 0x6fdb
 UnnamedText_6fdc: ; 6fdc (1:6fdc)
 	TX_FAR _UnnamedText_6fdc
-	db $50
+	db "@"
 ; 0x6fe1
 
 UnnamedText_6fe1: ; 6fe1 (1:6fe1)
 	TX_FAR _UnnamedText_6fe1
-	db $50
+	db "@"
 ; 0x6fe1 + 5 bytes
 
 DisplayPokemonCenterDialogue_: ; 6fe6 (1:6fe6)
@@ -16663,25 +16663,25 @@ DisplayPokemonCenterDialogue_: ; 6fe6 (1:6fe6)
 
 PokemonCenterWelcomeText: ; 705d (1:705d)
 	TX_FAR _PokemonCenterWelcomeText
-	db $50
+	db "@"
 
 ShallWeHealYourPokemonText: ; 7062 (1:7062)
 	db $a
 	TX_FAR _ShallWeHealYourPokemonText
-	db $50
+	db "@"
 
 NeedYourPokemonText: ; 7068 (1:7068)
 	TX_FAR _NeedYourPokemonText
-	db $50
+	db "@"
 
 PokemonFightingFitText: ; 706d (1:706d)
 	TX_FAR _PokemonFightingFitText
-	db $50
+	db "@"
 
 PokemonCenterFarewellText: ; 7072 (1:7072)
 	db $a
 	TX_FAR _PokemonCenterFarewellText
-	db $50
+	db "@"
 
 Unknown_7078: ; 7078 (1:7078)
 	push hl
@@ -17010,36 +17010,36 @@ Func_72a8: ; 72a8 (1:72a8)
 
 UnnamedText_72b3: ; 72b3 (1:72b3)
 	TX_FAR _UnnamedText_72b3
-	db $50
+	db "@"
 ; 0x72b3 + 5 bytes
 
 UnnamedText_72b8: ; 72b8 (1:72b8)
 	TX_FAR _UnnamedText_72b8
-	db $50
+	db "@"
 ; 0x72b8 + 5 bytes
 
 UnnamedText_72bd: ; 72bd (1:72bd)
 	TX_FAR _UnnamedText_72bd
-	db $50
+	db "@"
 ; 0x72bd + 5 bytes
 
 UnnamedText_72c2: ; 72c2 (1:72c2)
 	TX_FAR UnnamedText_a29cc
-	db $a, $50
+	db $a, "@"
 
 UnnamedText_72c8: ; 72c8 (1:72c8)
 	TX_FAR _UnnamedText_72c8
-	db $50
+	db "@"
 ; 0x72c8 + 5 bytes
 
 UnnamedText_72cd: ; 72cd (1:72cd)
 	TX_FAR _UnnamedText_72cd
-	db $50
+	db "@"
 ; 0x72cd + 5 bytes
 
 UnnamedText_72d2: ; 72d2 (1:72d2)
 	TX_FAR _UnnamedText_72d2
-	db $50
+	db "@"
 ; 0x72d2 + 5 bytes
 
 ; known jump sources: 5d34 (1:5d34), 727c (1:727c), 728f (1:728f)
@@ -17315,7 +17315,7 @@ BattleMenuText: ; 7455 (1:7455)
 	db "ITEM  RUN@"
 
 SafariZoneBattleMenuText: ; 7468 (1:7468)
-	db "BALL",$F1,"       BAIT",$4E
+	db "BALL×       BAIT",$4E
 	db "THROW ROCK  RUN@"
 
 SwitchStatsCancelText: ; 7489 (1:7489)
@@ -17889,12 +17889,12 @@ Func_7861: ; 7861 (1:7861)
 ; 78dc (1:78dc)
 UnnamedText_78dc: ; 78dc (1:78dc)
 	TX_FAR _UnnamedText_78dc
-	db $50
+	db "@"
 ; 0x78dc + 5 bytes
 
 UnnamedText_78e1: ; 78e1 (1:78e1)
 	TX_FAR _UnnamedText_78e1
-	db $50
+	db "@"
 ; 0x78e1 + 5 bytes
 
 ; known jump sources: 3479 (0:3479), 17ebb (5:7ebb)
@@ -18155,72 +18155,72 @@ PlayersPCMenuEntries: ; 7af5 (1:7af5)
 
 UnnamedText_7b22: ; 7b22 (1:7b22)
 	TX_FAR _UnnamedText_7b22
-	db $50
+	db "@"
 ; 0x7b22 + 5 bytes
 
 UnnamedText_7b27: ; 7b27 (1:7b27)
 	TX_FAR _UnnamedText_7b27
-	db $50
+	db "@"
 ; 0x7b27 + 5 bytes
 
 UnnamedText_7b2c: ; 7b2c (1:7b2c)
 	TX_FAR _UnnamedText_7b2c
-	db $50
+	db "@"
 ; 0x7b2c + 5 bytes
 
 UnnamedText_7b31: ; 7b31 (1:7b31)
 	TX_FAR _UnnamedText_7b31
-	db $50
+	db "@"
 ; 0x7b31 + 5 bytes
 
 UnnamedText_7b36: ; 7b36 (1:7b36)
 	TX_FAR _UnnamedText_7b36
-	db $50
+	db "@"
 ; 0x7b36 + 5 bytes
 
 UnnamedText_7b3b: ; 7b3b (1:7b3b)
 	TX_FAR _UnnamedText_7b3b
-	db $50
+	db "@"
 ; 0x7b3b + 5 bytes
 
 UnnamedText_7b40: ; 7b40 (1:7b40)
 	TX_FAR _UnnamedText_7b40
-	db $50
+	db "@"
 ; 0x7b40 + 5 bytes
 
 UnnamedText_7b45: ; 7b45 (1:7b45)
 	TX_FAR _UnnamedText_7b45
-	db $50
+	db "@"
 ; 0x7b45 + 5 bytes
 
 UnnamedText_7b4a: ; 7b4a (1:7b4a)
 	TX_FAR _UnnamedText_7b4a
-	db $50
+	db "@"
 ; 0x7b4a + 5 bytes
 
 UnnamedText_7b4f: ; 7b4f (1:7b4f)
 	TX_FAR _UnnamedText_7b4f
-	db $50
+	db "@"
 ; 0x7b4f + 5 bytes
 
 UnnamedText_7b54: ; 7b54 (1:7b54)
 	TX_FAR _UnnamedText_7b54
-	db $50
+	db "@"
 ; 0x7b54 + 5 bytes
 
 UnnamedText_7b59: ; 7b59 (1:7b59)
 	TX_FAR _UnnamedText_7b59
-	db $50
+	db "@"
 ; 0x7b59 + 5 bytes
 
 UnnamedText_7b5e: ; 7b5e (1:7b5e)
 	TX_FAR _UnnamedText_7b5e
-	db $50
+	db "@"
 ; 0x7b5e + 5 bytes
 
 UnnamedText_7b63: ; 7b63 (1:7b63)
 	TX_FAR _UnnamedText_7b63
-	db $50
+	db "@"
 ; 0x7b63 + 5 bytes
 
 ; known jump sources: 3924 (0:3924)
@@ -20164,7 +20164,7 @@ INCBIN "baserom.gbc",$cdaa,$cdaf - $cdaa
 ; cdbb (3:4dbb)
 UnnamedText_cdbb: ; cdbb (3:4dbb)
 	TX_FAR _UnnamedText_cdbb
-	db $50
+	db "@"
 ; 0xcdbb + 5 bytes
 
 ; known jump sources: 131de (4:71de)
@@ -20199,12 +20199,12 @@ INCBIN "baserom.gbc",$cdf7,$cdfa - $cdf7
 
 UnnamedText_cdfa: ; cdfa (3:4dfa)
 	TX_FAR _UnnamedText_cdfa
-	db $50
+	db "@"
 ; 0xcdfa + 5 bytes
 
 UnnamedText_cdff: ; cdff (3:4dff)
 	TX_FAR _UnnamedText_cdff
-	db $50
+	db "@"
 ; 0xcdff + 5 bytes
 
 
@@ -24830,11 +24830,11 @@ ItemUseSurfboard: ; d9b4 (3:59b4)
 
 SurfingGotOnText: ; da4c (3:5a4c)
 	TX_FAR _SurfingGotOnText
-	db $50
+	db "@"
 
 SurfingNoPlaceToGetOffText: ; da51 (3:5a51)
 	TX_FAR _SurfingNoPlaceToGetOffText
-	db $50
+	db "@"
 
 ItemUsePokedex: ; da56 (3:5a56)
 	ld a,$29
@@ -25517,11 +25517,11 @@ ItemUseMedicine: ; dabb (3:5abb)
 
 VitaminStatRoseText: ; df24 (3:5f24)
 	TX_FAR _VitaminStatRoseText
-	db $50
+	db "@"
 
 VitaminNoEffectText: ; df29 (3:5f29)
 	TX_FAR _VitaminNoEffectText
-	db $50
+	db "@"
 
 VitaminText: ; df2e (3:5f2e)
 	db "HEALTH@"
@@ -25580,11 +25580,11 @@ BaitRockCommon: ; df7f (3:5f7f)
 
 ThrewBaitText: ; dfa5 (3:5fa5)
 	TX_FAR _ThrewBaitText
-	db $50
+	db "@"
 
 ThrewRockText: ; dfaa (3:5faa)
 	TX_FAR _ThrewRockText
-	db $50
+	db "@"
 
 ; also used for Dig out-of-battle effect
 ItemUseEscapeRope: ; dfaf (3:5faf)
@@ -25939,11 +25939,11 @@ Route16SnorlaxFluteCoords: ; e206 (3:6206)
 
 PlayedFluteNoEffectText: ; e20b (3:620b)
 	TX_FAR _PlayedFluteNoEffectText
-	db $50
+	db "@"
 
 FluteWokeUpText: ; e210 (3:6210)
 	TX_FAR _FluteWokeUpText
-	db $50
+	db "@"
 
 PlayedFluteHadEffectText: ; e215 (3:6215)
 	TX_FAR _PlayedFluteHadEffectText
@@ -25975,7 +25975,7 @@ ItemUseCoinCase: ; e23a (3:623a)
 
 CoinCaseNumCoinsText: ; e247 (3:6247)
 	TX_FAR _CoinCaseNumCoinsText
-	db $50
+	db "@"
 
 OldRodCode: ; e24c (3:624c)
 	call FishingInit
@@ -26100,11 +26100,11 @@ ItemUseItemfinder: ; e2e1 (3:62e1)
 
 ItemfinderFoundItemText: ; e30d (3:630d)
 	TX_FAR _ItemfinderFoundItemText
-	db $50
+	db "@"
 
 ItemfinderFoundNothingText: ; e312 (3:6312)
 	TX_FAR _ItemfinderFoundNothingText
-	db $50
+	db "@"
 
 ItemUsePPUp: ; e317 (3:6317)
 	ld a,[W_ISINBATTLE]
@@ -26291,23 +26291,23 @@ ItemUsePPRestore: ; e31e (3:631e)
 
 RaisePPWhichTechniqueText: ; e45d (3:645d)
 	TX_FAR _RaisePPWhichTechniqueText
-	db $50
+	db "@"
 
 RestorePPWhichTechniqueText: ; e462 (3:6462)
 	TX_FAR _RestorePPWhichTechniqueText
-	db $50
+	db "@"
 
 PPMaxedOutText: ; e467 (3:6467)
 	TX_FAR _PPMaxedOutText
-	db $50
+	db "@"
 
 PPIncreasedText: ; e46c (3:646c)
 	TX_FAR _PPIncreasedText
-	db $50
+	db "@"
 
 PPRestoredText: ; e471 (3:6471)
 	TX_FAR _PPRestoredText
-	db $50
+	db "@"
 
 ; for items that can't be used from the Item menu
 UnusableItem: ; e476 (3:6476)
@@ -26418,19 +26418,19 @@ ItemUseTMHM: ; e479 (3:6479)
 
 BootedUpTMText: ; e54f (3:654f)
 	TX_FAR _BootedUpTMText
-	db $50
+	db "@"
 
 BootedUpHMText: ; e554 (3:6554)
 	TX_FAR _BootedUpHMText
-	db $50
+	db "@"
 
 TeachMachineMoveText: ; e559 (3:6559)
 	TX_FAR _TeachMachineMoveText
-	db $50
+	db "@"
 
 MonCannotLearnMachineMoveText: ; e55e (3:655e)
 	TX_FAR _MonCannotLearnMachineMoveText
-	db $50
+	db "@"
 
 PrintItemUseTextAndRemoveItem: ; e563 (3:6563)
 	ld hl,ItemUseText00
@@ -26489,53 +26489,53 @@ ItemUseFailed: ; e5b9 (3:65b9)
 
 ItemUseNotTimeText: ; e5c0 (3:65c0)
 	TX_FAR _ItemUseNotTimeText
-	db $50
+	db "@"
 
 ItemUseNotYoursToUseText: ; e5c5 (3:65c5)
 	TX_FAR _ItemUseNotYoursToUseText
-	db $50
+	db "@"
 
 ItemUseNoEffectText: ; e5ca (3:65ca)
 	TX_FAR _ItemUseNoEffectText
-	db $50
+	db "@"
 
 ThrowBallAtTrainerMonText1: ; e5cf (3:65cf)
 	TX_FAR _ThrowBallAtTrainerMonText1
-	db $50
+	db "@"
 
 ThrowBallAtTrainerMonText2: ; e5d4 (3:65d4)
 	TX_FAR _ThrowBallAtTrainerMonText2
-	db $50
+	db "@"
 
 NoCyclingAllowedHereText: ; e5d9 (3:65d9)
 	TX_FAR _NoCyclingAllowedHereText
-	db $50
+	db "@"
 
 NoSurfingHereText: ; e5de (3:65de)
 	TX_FAR _NoSurfingHereText
-	db $50
+	db "@"
 
 BoxFullCannotThrowBallText: ; e5e3 (3:65e3)
 	TX_FAR _BoxFullCannotThrowBallText
-	db $50
+	db "@"
 
 ItemUseText00: ; e5e8 (3:65e8)
 	TX_FAR _ItemUseText001
 	db $05
 	TX_FAR _ItemUseText002
-	db $50
+	db "@"
 
 GotOnBicycleText: ; e5f2 (3:65f2)
 	TX_FAR _GotOnBicycleText1
 	db $05
 	TX_FAR _GotOnBicycleText2
-	db $50
+	db "@"
 
 GotOffBicycleText: ; e5fc (3:65fc)
 	TX_FAR _GotOffBicycleText1
 	db $05
 	TX_FAR _GotOffBicycleText2
-	db $50
+	db "@"
 
 ; restores bonus PP (from PP Ups) when healing at a pokemon center
 ; also, when a PP Up is used, it increases the current PP by one PP Up bonus
@@ -26771,15 +26771,15 @@ TossItem_: ; e6f1 (3:66f1)
 
 ThrewAwayItemText: ; e755 (3:6755)
 	TX_FAR _ThrewAwayItemText
-	db $50
+	db "@"
 
 IsItOKToTossItemText: ; e75a (3:675a)
 	TX_FAR _IsItOKToTossItemText
-	db $50
+	db "@"
 
 TooImportantToTossText: ; e75f (3:675f)
 	TX_FAR _TooImportantToTossText
-	db $50
+	db "@"
 
 ; checks if an item is a key item
 ; INPUT:
@@ -27509,12 +27509,12 @@ Func_ef54: ; ef54 (3:6f54)
 	cp $52
 	jr z, asm_ef82
 .asm_ef77
-	ld hl, _UnnamedText_ef7d ; $6f7d
+	ld hl, UnnamedText_ef7d ; $6f7d
 	jp PrintText
 ; ef7d (3:6f7d)
-_UnnamedText_ef7d: ; ef7d (3:6f7d)
-	db $17, $f8, $42, $2a
-	db $50
+UnnamedText_ef7d: ; ef7d (3:6f7d)
+	TX_FAR _UnnamedText_ef7d
+	db "@"
 ; 0xef7d + 5 bytes
 
 asm_ef82: ; ef82 (3:6f82)
@@ -29467,41 +29467,41 @@ INCBIN "baserom.gbc",$fb8b,$fbd9 - $fb8b
 
 UnnamedText_fbd9: ; fbd9 (3:7bd9)
 	TX_FAR _UnnamedText_fbd9
-	db $50
+	db "@"
 ; 0xfbd9 + 5 bytes
 
 UnnamedText_fbde: ; fbde (3:7bde)
 	TX_FAR _UnnamedText_fbde
-	db $50
+	db "@"
 ; 0xfbde + 5 bytes
 
 UnnamedText_fbe3: ; fbe3 (3:7be3)
 	TX_FAR _UnnamedText_fbe3
-	db $50
+	db "@"
 ; 0xfbe3 + 5 bytes
 
 INCBIN "baserom.gbc",$fbe8,$fc03 - $fbe8
 
 UnnamedText_fc03: ; fc03 (3:7c03)
 	TX_FAR _UnnamedText_fc03
-	db $50
+	db "@"
 ; 0xfc03 + 5 bytes
 
 UnnamedText_fc08: ; fc08 (3:7c08)
 	TX_FAR _UnnamedText_fc08
-	db $50
+	db "@"
 ; 0xfc08 + 5 bytes
 
 UnnamedText_fc0d: ; fc0d (3:7c0d)
 	TX_FAR _UnnamedText_fc0d
-	db $50
+	db "@"
 ; 0xfc0d + 5 bytes
 
 INCBIN "baserom.gbc",$fc12,$fc45 - $fc12
 
 UnnamedText_fc45: ; fc45 (3:7c45)
 	TX_FAR _UnnamedText_fc45
-	db $50
+	db "@"
 ; 0xfc45 + 5 bytes
 
 SECTION "bank4",ROMX,BANK[$4]
@@ -29924,7 +29924,7 @@ StatsText: ; 12b3a (4:6b3a)
 	db "ATTACK", $4e
 	db "DEFENSE", $4e
 	db "SPEED", $4e
-	db "SPECIAL", $50
+	db "SPECIAL@"
 
 StatusScreen2: ; 12b57 (4:6b57)
 	ld a, [$ff00+$d7]
@@ -30116,7 +30116,7 @@ EXPPointsText: ; 12caf (4:6caf)
 	db "EXP POINTS", $4e
 
 LevelUpText: ; 12cba (4:6cba)
-	db "LEVEL UP", $50
+	db "LEVEL UP@"
 
 ; known jump sources: 12c52 (4:6c52), 12c58 (4:6c58)
 Func_12cc3: ; 12cc3 (4:6cc3)
@@ -30399,61 +30399,61 @@ PartyMenuMessagePointers: ; 12e73 (4:6e73)
 
 PartyMenuNormalText: ; 12e7f (4:6e7f)
 	TX_FAR _PartyMenuNormalText
-	db $50
+	db "@"
 
 PartyMenuItemUseText: ; 12e84 (4:6e84)
 	TX_FAR _PartyMenuItemUseText
-	db $50
+	db "@"
 
 PartyMenuBattleText: ; 12e89 (4:6e89)
 	TX_FAR _PartyMenuBattleText
-	db $50
+	db "@"
 
 PartyMenuUseTMText: ; 12e8e (4:6e8e)
 	TX_FAR _PartyMenuUseTMText
-	db $50
+	db "@"
 
 PartyMenuSwapMonText: ; 12e93 (4:6e93)
 	TX_FAR _PartyMenuSwapMonText
-	db $50
+	db "@"
 
 PotionText: ; 12e98 (4:6e98)
 	TX_FAR _PotionText
-	db $50
+	db "@"
 
 AntidoteText: ; 12e9d (4:6e9d)
 	TX_FAR _AntidoteText
-	db $50
+	db "@"
 
 ParlyzHealText: ; 12ea2 (4:6ea2)
 	TX_FAR _ParlyzHealText
-	db $50
+	db "@"
 
 BurnHealText: ; 12ea7 (4:6ea7)
 	TX_FAR _BurnHealText
-	db $50
+	db "@"
 
 IceHealText: ; 12eac (4:6eac)
 	TX_FAR _IceHealText
-	db $50
+	db "@"
 
 AwakeningText: ; 12eb1 (4:6eb1)
 	TX_FAR _AwakeningText
-	db $50
+	db "@"
 
 FullHealText: ; 12eb6 (4:6eb6)
 	TX_FAR _FullHealText
-	db $50
+	db "@"
 
 ReviveText: ; 12ebb (4:6ebb)
 	TX_FAR _ReviveText
-	db $50
+	db "@"
 
 RareCandyText: ; 12ec0 (4:6ec0)
 	TX_FAR _RareCandyText
 	db $0B
 	db $06
-	db $50
+	db "@"
 
 ; known jump sources: 12d70 (4:6d70)
 Func_12ec7: ; 12ec7 (4:6ec7)
@@ -30704,7 +30704,7 @@ StartMenu_Pokemon: ; 130a9 (4:70a9)
 	jp .goBackToMap
 .flashLightsAreaText
 	TX_FAR _FlashLightsAreaText
-	db $50
+	db "@"
 .dig
 	ld a,ESCAPE_ROPE
 	ld [$cf91],a
@@ -30739,13 +30739,13 @@ StartMenu_Pokemon: ; 130a9 (4:70a9)
 	jp .goBackToMap
 .warpToLastPokemonCenterText
 	TX_FAR _WarpToLastPokemonCenterText
-	db $50
+	db "@"
 .cannotUseTeleportNowText
 	TX_FAR _CannotUseTeleportNowText
-	db $50
+	db "@"
 .cannotFlyHereText
 	TX_FAR _CannotFlyHereText
-	db $50
+	db "@"
 .softboiled
 	ld hl,W_PARTYMON1_MAXHP
 	ld a,[$cf92]
@@ -30784,7 +30784,7 @@ StartMenu_Pokemon: ; 130a9 (4:70a9)
 	jp .loop
 .notHealthyEnoughText
 	TX_FAR _NotHealthyEnoughText
-	db $50
+	db "@"
 .goBackToMap
 	call Func_3dbe
 	jp CloseTextDisplay
@@ -30794,7 +30794,7 @@ StartMenu_Pokemon: ; 130a9 (4:70a9)
 	jp .loop
 .newBadgeRequiredText
 	TX_FAR _NewBadgeRequiredText
-	db $50
+	db "@"
 
 ; writes a blank tile to all possible menu cursor positions on the party menu
 ErasePartyMenuCursors: ; 132ed (4:72ed)
@@ -30958,11 +30958,11 @@ StartMenu_Item: ; 13302 (4:7302)
 
 CannotUseItemsHereText: ; 1342a (4:742a)
 	TX_FAR _CannotUseItemsHereText
-	db $50
+	db "@"
 
 CannotGetOffHereText: ; 1342f (4:742f)
 	TX_FAR _CannotGetOffHereText
-	db $50
+	db "@"
 
 ; items which bring up the party menu when used
 UsableItems_PartyMenu: ; 13434 (4:7434)
@@ -31575,7 +31575,7 @@ DrawText: ; 13864 (4:7864)
 
 UnnamedText_1386b: ; 1386b (4:786b)
 	TX_FAR _UnnamedText_1386b
-	db $50
+	db "@"
 ; 0x1386b + 5 bytes
 
 ; known jump sources: 3ef39 (f:6f39)
@@ -31752,21 +31752,21 @@ Func_1392c: ; 1392c (4:792c)
 ; 1399e (4:799e)
 UnnamedText_1399e: ; 1399e (4:799e)
 	TX_FAR _UnnamedText_1399e
-	db $50
+	db "@"
 ; 0x1399e + 5 bytes
 
 INCBIN "baserom.gbc",$139a3,$139cd - $139a3
 
 UnnamedText_139cd: ; 139cd (4:79cd)
 	TX_FAR _UnnamedText_139cd
-	db $50
+	db "@"
 ; 0x139cd + 5 bytes
 
 INCBIN "baserom.gbc",$139d2,$13a53 - $139d2
 
 UnnamedText_13a53: ; 13a53 (4:7a53)
 	TX_FAR _UnnamedText_13a53
-	db $50
+	db "@"
 ; 0x13a53 + 5 bytes
 
 ; known jump sources: 35a3 (0:35a3)
@@ -33053,17 +33053,17 @@ SubstituteEffectHandler: ; 17dad (5:7dad)
 
 UnnamedText_17e1d: ; 17e1d (5:7e1d)
 	TX_FAR _UnnamedText_17e1d
-	db $50
+	db "@"
 ; 0x17e1d + 5 bytes
 
 UnnamedText_17e22: ; 17e22 (5:7e22)
 	TX_FAR _UnnamedText_17e22
-	db $50
+	db "@"
 ; 0x17e22 + 5 bytes
 
 UnnamedText_17e27: ; 17e27 (5:7e27)
 	TX_FAR _UnnamedText_17e27
-	db $50
+	db "@"
 ; 0x17e27 + 5 bytes
 
 ActivatePC: ; 17e2c (5:7e2c)
@@ -33179,22 +33179,22 @@ LogOff: ; 17f13 (5:7f13)
 
 UnnamedText_17f23: ; 17f23 (5:7f23)
 	TX_FAR _UnnamedText_17f23
-	db $50
+	db "@"
 ; 0x17f23 + 5 bytes
 
 UnnamedText_17f28: ; 17f28 (5:7f28)
 	TX_FAR _UnnamedText_17f28
-	db $50
+	db "@"
 ; 0x17f28 + 5 bytes
 
 UnnamedText_17f2d: ; 17f2d (5:7f2d)
 	TX_FAR _UnnamedText_17f2d
-	db $50
+	db "@"
 ; 0x17f2d + 5 bytes
 
 UnnamedText_17f32: ; 17f32 (5:7f32)
 	TX_FAR _UnnamedText_17f32
-	db $50
+	db "@"
 ; 0x17f32 + 5 bytes
 
 ; known jump sources: 1d774 (7:5774), 484eb (12:44eb), 5a5b4 (16:65b4), 61096 (18:5096), 75101 (1d:5101)
@@ -34170,7 +34170,7 @@ ViridianCityTexts: ; 190e4 (6:50e4)
 
 ViridianCityText1: ; 19102 (6:5102)
 	TX_FAR _ViridianCityText1
-	db $50
+	db "@"
 
 ViridianCityText2: ; 19107 (6:5107)
 	db $08 ; asm
@@ -34188,12 +34188,12 @@ ViridianCityText2: ; 19107 (6:5107)
 
 UnnamedText_19122: ; 19122 (6:5122)
 	TX_FAR _UnnamedText_19122
-	db $50
+	db "@"
 ; 0x19122 + 5 bytes
 
 UnnamedText_19127: ; 19127 (6:5127)
 	TX_FAR _UnnamedText_19127
-	db $50
+	db "@"
 ; 0x19127 + 5 bytes
 
 ViridianCityText3: ; 1912c (6:512c)
@@ -34215,17 +34215,17 @@ ViridianCityText3: ; 1912c (6:512c)
 
 UnnamedText_1914d: ; 1914d (6:514d)
 	TX_FAR _UnnamedText_1914d
-	db $50
+	db "@"
 ; 0x1914d + 5 bytes
 
 UnnamedText_19152: ; 19152 (6:5152)
 	TX_FAR _UnnamedText_19152
-	db $50
+	db "@"
 ; 0x19152 + 5 bytes
 
 UnnamedText_19157: ; 19157 (6:5157)
 	TX_FAR _UnnamedText_19157
-	db $50
+	db "@"
 ; 0x19157 + 5 bytes
 
 ViridianCityText4: ; 1915c (6:515c)
@@ -34244,12 +34244,12 @@ ViridianCityText4: ; 1915c (6:515c)
 
 UnnamedText_19175: ; 19175 (6:5175)
 	TX_FAR _UnnamedText_19175
-	db $50
+	db "@"
 ; 0x19175 + 5 bytes
 
 UnnamedText_1917a: ; 1917a (6:517a)
 	TX_FAR _UnnamedText_1917a
-	db $50
+	db "@"
 ; 0x1917a + 5 bytes
 
 ViridianCityText5: ; 1917f (6:517f)
@@ -34263,7 +34263,7 @@ ViridianCityText5: ; 1917f (6:517f)
 
 UnnamedText_19191: ; 19191 (6:5191)
 	TX_FAR _UnnamedText_19191
-	db $50
+	db "@"
 ; 0x19191 + 5 bytes
 
 ViridianCityText6: ; 19196 (6:5196)
@@ -34293,22 +34293,22 @@ ViridianCityText6: ; 19196 (6:5196)
 
 UnnamedText_191ca: ; 191ca (6:51ca)
 	TX_FAR _UnnamedText_191ca
-	db $50
+	db "@"
 ; 0x191ca + 5 bytes
 
 ReceivedTM42Text: ; 191cf (6:51cf)
 	TX_FAR _ReceivedTM42Text ; 0xa469a
-	db $10, $50
+	db $10, "@"
 ; 0x191cf + 6 bytes = 0x191d5
 
 TM42Explanation: ; 191d5 (6:51d5)
 	TX_FAR _TM42Explanation
-	db $50
+	db "@"
 ; 0x191d5 + 5 bytes
 
 TM42NoRoomText: ; 191da (6:51da)
 	TX_FAR _TM42NoRoomText
-	db $50
+	db "@"
 ; 0x191da + 5 bytes
 
 ViridianCityText7: ; 191df (6:51df)
@@ -34334,43 +34334,43 @@ ViridianCityText7: ; 191df (6:51df)
 
 UnnamedText_1920a: ; 1920a (6:520a)
 	TX_FAR _UnnamedText_1920a
-	db $50
+	db "@"
 ; 0x1920a + 5 bytes
 
 UnnamedText_1920f: ; 1920f (6:520f)
 	TX_FAR _UnnamedText_1920f
-	db $50
+	db "@"
 ; 0x1920f + 5 bytes
 
 UnnamedText_19214: ; 19214 (6:5214)
 	TX_FAR _UnnamedText_19214
-	db $50
+	db "@"
 ; 0x19214 + 5 bytes
 
 ViridianCityText15: ; 19219 (6:5219)
 	TX_FAR _UnnamedText_19219
-	db $50
+	db "@"
 ; 0x19219 + 5 bytes
 
 ViridianCityText8: ; 1921e (6:521e)
 	TX_FAR _ViridianCityText8
-	db $50
+	db "@"
 
 ViridianCityText9: ; 19223 (6:5223)
 	TX_FAR _ViridianCityText9
-	db $50
+	db "@"
 
 ViridianCityText10: ; 19228 (6:5228)
 	TX_FAR _ViridianCityText10
-	db $50
+	db "@"
 
 ViridianCityText13: ; 1922d (6:522d)
 	TX_FAR _ViridianCityText13
-	db $50
+	db "@"
 
 ViridianCityText14: ; 19232 (6:5232)
 	TX_FAR _ViridianCityText14
-	db $50
+	db "@"
 ; 0x19232 + 5 bytes
 
 PewterCityScript: ; 19237 (6:5237)
@@ -34556,11 +34556,11 @@ PewterCityTexts: ; 1938b (6:538b)
 
 PewterCityText1: ; 193a7 (6:53a7)
 	TX_FAR _PewterCityText1
-	db $50
+	db "@"
 
 PewterCityText2: ; 193ac (6:53ac)
 	TX_FAR _PewterCityText2
-	db $50
+	db "@"
 
 PewterCityText3: ; 193b1 (6:53b1)
 	db $08 ; asm
@@ -34594,24 +34594,24 @@ PewterCityText3: ; 193b1 (6:53b1)
 
 UnnamedText_193f1: ; 193f1 (6:53f1)
 	TX_FAR _UnnamedText_193f1
-	db $50
+	db "@"
 ; 0x193f1 + 5 bytes
 
 UnnamedText_193f6: ; 193f6 (6:53f6)
 	TX_FAR _UnnamedText_193f6
-	db $50
+	db "@"
 ; 0x193f6 + 5 bytes
 
 UnnamedText_193fb: ; 193fb (6:53fb)
 	TX_FAR _UnnamedText_193fb
-	db $50
+	db "@"
 ; 0x193fb + 5 bytes
 
 PewterCityText13: ; 19400 (6:5400)
 
 UnnamedText_19400: ; 19400 (6:5400)
 	TX_FAR _UnnamedText_19400
-	db $50
+	db "@"
 ; 0x19400 + 5 bytes
 
 PewterCityText4: ; 19405 (6:5405)
@@ -34634,17 +34634,17 @@ PewterCityText4: ; 19405 (6:5405)
 
 UnnamedText_19427: ; 19427 (6:5427)
 	TX_FAR _UnnamedText_19427
-	db $50
+	db "@"
 ; 0x19427 + 5 bytes
 
 UnnamedText_1942c: ; 1942c (6:542c)
 	TX_FAR _UnnamedText_1942c
-	db $50
+	db "@"
 ; 0x1942c + 5 bytes
 
 UnnamedText_19431: ; 19431 (6:5431)
 	TX_FAR _UnnamedText_19431
-	db $50
+	db "@"
 ; 0x19431 + 5 bytes
 
 PewterCityText5: ; 19436 (6:5436)
@@ -34667,35 +34667,35 @@ PewterCityText5: ; 19436 (6:5436)
 
 UnnamedText_1945d: ; 1945d (6:545d)
 	TX_FAR _UnnamedText_1945d
-	db $50
+	db "@"
 ; 0x1945d + 5 bytes
 
 PewterCityText14: ; 19462 (6:5462)
 
 UnnamedText_19462: ; 19462 (6:5462)
 	TX_FAR _UnnamedText_19462
-	db $50
+	db "@"
 ; 0x19462 + 5 bytes
 
 PewterCityText6: ; 19467 (6:5467)
 	TX_FAR _PewterCityText6
-	db $50
+	db "@"
 
 PewterCityText7: ; 1946c (6:546c)
 	TX_FAR _PewterCityText7
-	db $50
+	db "@"
 
 PewterCityText10: ; 19471 (6:5471)
 	TX_FAR _PewterCityText10
-	db $50
+	db "@"
 
 PewterCityText11: ; 19476 (6:5476)
 	TX_FAR _PewterCityText11
-	db $50
+	db "@"
 
 PewterCityText12: ; 1947b (6:547b)
 	TX_FAR _PewterCityText12
-	db $50
+	db "@"
 
 CeruleanCityScript: ; 19480 (6:5480)
 	call EnableAutoTextBoxDrawing
@@ -34944,22 +34944,22 @@ CeruleanCityText1: ; 1964f (6:564f)
 
 UnnamedText_19668: ; 19668 (6:5668)
 	TX_FAR _UnnamedText_19668
-	db $50
+	db "@"
 ; 0x19668 + 5 bytes
 
 UnnamedText_1966d: ; 1966d (6:566d)
 	TX_FAR _UnnamedText_1966d
-	db $50
+	db "@"
 ; 0x1966d + 5 bytes
 
 UnnamedText_19672: ; 19672 (6:5672)
 	TX_FAR _UnnamedText_19672
-	db $50
+	db "@"
 ; 0x19672 + 5 bytes
 
 UnnamedText_19677: ; 19677 (6:5677)
 	TX_FAR _UnnamedText_19677
-	db $50
+	db "@"
 ; 0x19677 + 5 bytes
 
 CeruleanCityText2: ; 1967c (6:567c)
@@ -35005,47 +35005,47 @@ CeruleanCityText2: ; 1967c (6:567c)
 
 UnnamedText_196d9: ; 196d9 (6:56d9)
 	TX_FAR _UnnamedText_196d9
-	db $50
+	db "@"
 ; 0x196d9 + 5 bytes
 
 ReceivedTM28Text: ; 196de (6:56de)
 	TX_FAR _ReceivedTM28Text ; 0xa4f82
 	db $0B
 	TX_FAR _ReceivedTM28Text2 ; 0xa4f96
-	db $0D, $50
+	db $0D, "@"
 ; 0x196e9
 
 TM28NoRoomText: ; 196e9 (6:56e9)
 	TX_FAR _TM28NoRoomText
-	db $50
+	db "@"
 ; 0x196e9 + 5 bytes
 
 UnnamedText_196ee: ; 196ee (6:56ee)
 	TX_FAR _UnnamedText_196ee
-	db $50
+	db "@"
 ; 0x196ee + 5 bytes
 
 UnnamedText_196f3: ; 196f3 (6:56f3)
 	TX_FAR _UnnamedText_196f3
-	db $50
+	db "@"
 ; 0x196f3 + 5 bytes
 
 CeruleanCityText3: ; 196f8 (6:56f8)
 	TX_FAR _CeruleanCityText3
-	db $50
+	db "@"
 
 CeruleanCityText4: ; 196fd (6:56fd)
 	TX_FAR _CeruleanCityText4
-	db $50
+	db "@"
 
 CeruleanCityText5: ; 19702 (6:5702)
 	TX_FAR _CeruleanCityText5
-	db $50
+	db "@"
 
 CeruleanCityText11: ; 19707 (6:5707)
 CeruleanCityText6: ; 19707 (6:5707)
 	TX_FAR _CeruleanCityText6
-	db $50
+	db "@"
 
 CeruleanCityText7: ; 1970c (6:570c)
 	db $08 ; asm
@@ -35069,17 +35069,17 @@ CeruleanCityText7: ; 1970c (6:570c)
 
 UnnamedText_19730: ; 19730 (6:5730)
 	TX_FAR _UnnamedText_19730
-	db $50
+	db "@"
 ; 0x19730 + 5 bytes
 
 UnnamedText_19735: ; 19735 (6:5735)
 	TX_FAR _UnnamedText_19735
-	db $50
+	db "@"
 ; 0x19735 + 5 bytes
 
 UnnamedText_1973a: ; 1973a (6:573a)
 	TX_FAR _UnnamedText_1973a
-	db $50
+	db "@"
 ; 0x1973a + 5 bytes
 
 CeruleanCityText8: ; 1973f (6:573f)
@@ -35110,47 +35110,47 @@ CeruleanCityText8: ; 1973f (6:573f)
 
 UnnamedText_1976f: ; 1976f (6:576f)
 	TX_FAR _UnnamedText_1976f
-	db $50
+	db "@"
 ; 0x1976f + 5 bytes
 
 UnnamedText_19774: ; 19774 (6:5774)
 	TX_FAR _UnnamedText_19774
-	db $50
+	db "@"
 ; 0x19774 + 5 bytes
 
 UnnamedText_19779: ; 19779 (6:5779)
 	TX_FAR _UnnamedText_19779
-	db $50
+	db "@"
 ; 0x19779 + 5 bytes
 
 UnnamedText_1977e: ; 1977e (6:577e)
 	TX_FAR _UnnamedText_1977e
-	db $50
+	db "@"
 ; 0x1977e + 5 bytes
 
 CeruleanCityText9: ; 19783 (6:5783)
 	TX_FAR _CeruleanCityText9
-	db $50
+	db "@"
 
 CeruleanCityText10: ; 19788 (6:5788)
 	TX_FAR _CeruleanCityText10
-	db $50
+	db "@"
 
 CeruleanCityText12: ; 1978d (6:578d)
 	TX_FAR _CeruleanCityText12
-	db $50
+	db "@"
 
 CeruleanCityText13: ; 19792 (6:5792)
 	TX_FAR _CeruleanCityText13
-	db $50
+	db "@"
 
 CeruleanCityText16: ; 19797 (6:5797)
 	TX_FAR _CeruleanCityText16
-	db $50
+	db "@"
 
 CeruleanCityText17: ; 1979c (6:579c)
 	TX_FAR _CeruleanCityText17
-	db $50
+	db "@"
 
 VermilionCityScript: ; 197a1 (6:57a1)
 	call EnableAutoTextBoxDrawing
@@ -35277,7 +35277,7 @@ VermilionCityTexts: ; 1986f (6:586f)
 
 VermilionCityText1: ; 19889 (6:5889)
 	TX_FAR _VermilionCityText1
-	db $50
+	db "@"
 
 VermilionCityText2: ; 1988e (6:588e)
 	db $08 ; asm
@@ -35295,12 +35295,12 @@ VermilionCityText2: ; 1988e (6:588e)
 
 UnnamedText_198a7: ; 198a7 (6:58a7)
 	TX_FAR _UnnamedText_198a7
-	db $50
+	db "@"
 ; 0x198a7 + 5 bytes
 
 UnnamedText_198ac: ; 198ac (6:58ac)
 	TX_FAR _UnnamedText_198ac
-	db $50
+	db "@"
 ; 0x198ac + 5 bytes
 
 VermilionCityText3: ; 198b1 (6:58b1)
@@ -35349,32 +35349,32 @@ VermilionCityCoords1: ; 198ff (6:58ff)
 
 SSAnneWelcomeText4: ; 19904 (6:5904)
 	TX_FAR _SSAnneWelcomeText4
-	db $50
+	db "@"
 ; 0x19904 + 5 bytes
 
 SSAnneWelcomeText9: ; 19909 (6:5909)
 	TX_FAR _SSAnneWelcomeText9
-	db $50
+	db "@"
 ; 0x19909 + 5 bytes
 
 SSAnneFlashedTicketText: ; 1990e (6:590e)
 	TX_FAR _SSAnneFlashedTicketText
-	db $50
+	db "@"
 ; 0x1990e + 5 bytes
 
 SSAnneNoTicketText: ; 19913 (6:5913)
 	TX_FAR _SSAnneNoTicketText
-	db $50
+	db "@"
 ; 0x19913 + 5 bytes
 
 SSAnneNotHereText: ; 19918 (6:5918)
 	TX_FAR _SSAnneNotHereText
-	db $50
+	db "@"
 ; 0x19918 + 5 bytes
 
 VermilionCityText4: ; 1991d (6:591d)
 	TX_FAR _VermilionCityText4
-	db $50
+	db "@"
 
 VermilionCityText5: ; 19922 (6:5922)
 	TX_FAR _VermilionCityText5
@@ -35387,31 +35387,31 @@ VermilionCityText5: ; 19922 (6:5922)
 
 VermilionCityText14: ; 19933 (6:5933)
 	TX_FAR _VermilionCityText14
-	db $50
+	db "@"
 
 VermilionCityText6: ; 19938 (6:5938)
 	TX_FAR _VermilionCityText6
-	db $50
+	db "@"
 
 VermilionCityText7: ; 1993d (6:593d)
 	TX_FAR _VermilionCityText7
-	db $50
+	db "@"
 
 VermilionCityText8: ; 19942 (6:5942)
 	TX_FAR _VermilionCityText8
-	db $50
+	db "@"
 
 VermilionCityText11: ; 19947 (6:5947)
 	TX_FAR _VermilionCityText11
-	db $50
+	db "@"
 
 VermilionCityText12: ; 1994c (6:594c)
 	TX_FAR _VermilionCityText12
-	db $50
+	db "@"
 
 VermilionCityText13: ; 19951 (6:5951)
 	TX_FAR _VermilionCityText13
-	db $50
+	db "@"
 
 CeladonCityScript: ; 19956 (6:5956)
 	call EnableAutoTextBoxDrawing
@@ -35428,19 +35428,19 @@ CeladonCityTexts: ; 19966 (6:5966)
 
 CeladonCityText1: ; 1998a (6:598a)
 	TX_FAR _CeladonCityText1
-	db $50
+	db "@"
 
 CeladonCityText2: ; 1998f (6:598f)
 	TX_FAR _CeladonCityText2
-	db $50
+	db "@"
 
 CeladonCityText3: ; 19994 (6:5994)
 	TX_FAR _CeladonCityText3
-	db $50
+	db "@"
 
 CeladonCityText4: ; 19999 (6:5999)
 	TX_FAR _CeladonCityText4
-	db $50
+	db "@"
 
 CeladonCityText5: ; 1999e (6:599e)
 	db $08 ; asm
@@ -35469,27 +35469,27 @@ CeladonCityText5: ; 1999e (6:599e)
 
 TM41PreText: ; 199d2 (6:59d2)
 	TX_FAR _TM41PreText
-	db $50
+	db "@"
 ; 0x199d2 + 5 bytes
 
 ReceivedTM41Text: ; 199d7 (6:59d7)
 	TX_FAR _ReceivedTM41Text ; 0xa5b5a
-	db $0B, $50
+	db $0B, "@"
 ; 0x199d7 + 6 bytes = 0x199dd
 
 TM41ExplanationText: ; 199dd (6:59dd)
 	TX_FAR _TM41ExplanationText
-	db $50
+	db "@"
 ; 0x199dd + 5 bytes
 
 TM41NoRoomText: ; 199e2 (6:59e2)
 	TX_FAR _TM41NoRoomText
-	db $50
+	db "@"
 ; 0x199e2 + 5 bytes
 
 CeladonCityText6: ; 199e7 (6:59e7)
 	TX_FAR _CeladonCityText6
-	db $50
+	db "@"
 
 CeladonCityText7: ; 199ec (6:59ec)
 	TX_FAR _CeladonCityText7
@@ -35500,43 +35500,43 @@ CeladonCityText7: ; 199ec (6:59ec)
 
 CeladonCityText8: ; 199f9 (6:59f9)
 	TX_FAR _CeladonCityText8
-	db $50
+	db "@"
 
 CeladonCityText9: ; 199fe (6:59fe)
 	TX_FAR _CeladonCityText9
-	db $50
+	db "@"
 
 CeladonCityText10: ; 19a03 (6:5a03)
 	TX_FAR _CeladonCityText10
-	db $50
+	db "@"
 
 CeladonCityText11: ; 19a08 (6:5a08)
 	TX_FAR _CeladonCityText11
-	db $50
+	db "@"
 
 CeladonCityText13: ; 19a0d (6:5a0d)
 	TX_FAR _CeladonCityText13
-	db $50
+	db "@"
 
 CeladonCityText14: ; 19a12 (6:5a12)
 	TX_FAR _CeladonCityText14
-	db $50
+	db "@"
 
 CeladonCityText15: ; 19a17 (6:5a17)
 	TX_FAR _CeladonCityText15
-	db $50
+	db "@"
 
 CeladonCityText16: ; 19a1c (6:5a1c)
 	TX_FAR _CeladonCityText16
-	db $50
+	db "@"
 
 CeladonCityText17: ; 19a21 (6:5a21)
 	TX_FAR _CeladonCityText17
-	db $50
+	db "@"
 
 CeladonCityText18: ; 19a26 (6:5a26)
 	TX_FAR _CeladonCityText18
-	db $50
+	db "@"
 
 FuchsiaCityScript: ; 19a2b (6:5a2b)
 	jp EnableAutoTextBoxDrawing
@@ -35547,19 +35547,19 @@ FuchsiaCityTexts: ; 19a2e (6:5a2e)
 
 FuchsiaCityText1: ; 19a5e (6:5a5e)
 	TX_FAR _FuchsiaCityText1
-	db $50
+	db "@"
 
 FuchsiaCityText2: ; 19a63 (6:5a63)
 	TX_FAR _FuchsiaCityText2
-	db $50
+	db "@"
 
 FuchsiaCityText3: ; 19a68 (6:5a68)
 	TX_FAR _FuchsiaCityText3
-	db $50
+	db "@"
 
 FuchsiaCityText4: ; 19a6d (6:5a6d)
 	TX_FAR _FuchsiaCityText4
-	db $50
+	db "@"
 
 FuchsiaCityText5: ; 19a72 (6:5a72)
 FuchsiaCityText6: ; 19a72 (6:5a72)
@@ -35568,28 +35568,28 @@ FuchsiaCityText8: ; 19a72 (6:5a72)
 FuchsiaCityText9: ; 19a72 (6:5a72)
 FuchsiaCityText10: ; 19a72 (6:5a72)
 	TX_FAR _FuchsiaCityText5
-	db $50
+	db "@"
 
 FuchsiaCityText12: ; 19a77 (6:5a77)
 FuchsiaCityText11: ; 19a77 (6:5a77)
 	TX_FAR _FuchsiaCityText11
-	db $50
+	db "@"
 
 FuchsiaCityText13: ; 19a7c (6:5a7c)
 	TX_FAR _FuchsiaCityText13
-	db $50
+	db "@"
 
 FuchsiaCityText16: ; 19a81 (6:5a81)
 	TX_FAR _FuchsiaCityText16
-	db $50
+	db "@"
 
 FuchsiaCityText17: ; 19a86 (6:5a86)
 	TX_FAR _FuchsiaCityText17
-	db $50
+	db "@"
 
 FuchsiaCityText18: ; 19a8b (6:5a8b)
 	TX_FAR _FuchsiaCityText18
-	db $50
+	db "@"
 
 FuchsiaCityText19: ; 19a90 (6:5a90)
 	db $08 ; asm
@@ -35601,7 +35601,7 @@ FuchsiaCityText19: ; 19a90 (6:5a90)
 
 FuchsiaCityChanseyText: ; 19a9f (6:5a9f)
 	TX_FAR _FuchsiaCityChanseyText
-	db $50
+	db "@"
 ; 0x19a9f + 5 bytes
 
 FuchsiaCityText20: ; 19aa4 (6:5aa4)
@@ -35614,7 +35614,7 @@ FuchsiaCityText20: ; 19aa4 (6:5aa4)
 
 FuchsiaCityVoltorbText: ; 19ab3 (6:5ab3)
 	TX_FAR _FuchsiaCityVoltorbText
-	db $50
+	db "@"
 ; 0x19ab3 + 5 bytes
 
 FuchsiaCityText21: ; 19ab8 (6:5ab8)
@@ -35627,7 +35627,7 @@ FuchsiaCityText21: ; 19ab8 (6:5ab8)
 
 FuchsiaCityKangaskhanText: ; 19ac7 (6:5ac7)
 	TX_FAR _FuchsiaCityKangaskhanText
-	db $50
+	db "@"
 ; 0x19ac7 + 5 bytes
 
 FuchsiaCityText22: ; 19acc (6:5acc)
@@ -35640,7 +35640,7 @@ FuchsiaCityText22: ; 19acc (6:5acc)
 
 FuchsiaCitySlowpokeText: ; 19adb (6:5adb)
 	TX_FAR _FuchsiaCitySlowpokeText
-	db $50
+	db "@"
 ; 0x19adb + 5 bytes
 
 FuchsiaCityText23: ; 19ae0 (6:5ae0)
@@ -35653,7 +35653,7 @@ FuchsiaCityText23: ; 19ae0 (6:5ae0)
 
 FuchsiaCityLaprasText: ; 19aef (6:5aef)
 	TX_FAR _FuchsiaCityLaprasText
-	db $50
+	db "@"
 ; 0x19aef + 5 bytes
 
 FuchsiaCityText24: ; 19af4 (6:5af4)
@@ -35682,17 +35682,17 @@ FuchsiaCityText24: ; 19af4 (6:5af4)
 
 FuchsiaCityOmanyteText: ; 19b20 (6:5b20)
 	TX_FAR _FuchsiaCityOmanyteText
-	db $50
+	db "@"
 ; 0x19b20 + 5 bytes
 
 FuchsiaCityKabutoText: ; 19b25 (6:5b25)
 	TX_FAR _FuchsiaCityKabutoText
-	db $50
+	db "@"
 ; 0x19b25 + 5 bytes
 
 UnnamedText_19b2a: ; 19b2a (6:5b2a)
 	TX_FAR _UnnamedText_19b2a
-	db $50
+	db "@"
 ; 0x19b2a + 5 bytes
 
 BluesHouse_h: ; 0x19b2f id=39
@@ -35894,11 +35894,11 @@ IndigoPlateauLobbyText1: ; 19c89 (6:5c89)
 
 IndigoPlateauLobbyText2: ; 19c8a (6:5c8a)
 	TX_FAR _IndigoPlateauLobbyText1
-	db $50
+	db "@"
 
 IndigoPlateauLobbyText3: ; 19c8f (6:5c8f)
 	TX_FAR _IndigoPlateauLobbyText3
-	db $50
+	db "@"
 
 IndigoPlateauLobbyText5: ; 19c94 (6:5c94)
 	db $f6
@@ -36076,12 +36076,12 @@ SilphCo4Text1: ; 19dd3 (6:5dd3)
 
 UnnamedText_19de0: ; 19de0 (6:5de0)
 	TX_FAR _UnnamedText_19de0
-	db $50
+	db "@"
 ; 0x19de0 + 5 bytes
 
 UnnamedText_19de5: ; 19de5 (6:5de5)
 	TX_FAR _UnnamedText_19de5
-	db $50
+	db "@"
 ; 0x19de5 + 5 bytes
 
 SilphCo4Text2: ; 19dea (6:5dea)
@@ -36092,17 +36092,17 @@ SilphCo4Text2: ; 19dea (6:5dea)
 
 SilphCo4BattleText2: ; 19df4 (6:5df4)
 	TX_FAR _SilphCo4BattleText2
-	db $50
+	db "@"
 ; 0x19df4 + 5 bytes
 
 SilphCo4EndBattleText2: ; 19df9 (6:5df9)
 	TX_FAR _SilphCo4EndBattleText2
-	db $50
+	db "@"
 ; 0x19df9 + 5 bytes
 
 SilphCo4AfterBattleText2: ; 19dfe (6:5dfe)
 	TX_FAR _SilphCo4AfterBattleText2
-	db $50
+	db "@"
 ; 0x19dfe + 5 bytes
 
 SilphCo4Text3: ; 19e03 (6:5e03)
@@ -36113,17 +36113,17 @@ SilphCo4Text3: ; 19e03 (6:5e03)
 
 SilphCo4BattleText3: ; 19e0d (6:5e0d)
 	TX_FAR _SilphCo4BattleText3
-	db $50
+	db "@"
 ; 0x19e0d + 5 bytes
 
 SilphCo4EndBattleText3: ; 19e12 (6:5e12)
 	TX_FAR _SilphCo4EndBattleText3
-	db $50
+	db "@"
 ; 0x19e12 + 5 bytes
 
 SilphCo4AfterBattleText3: ; 19e17 (6:5e17)
 	TX_FAR _SilphCo4AfterBattleText3
-	db $50
+	db "@"
 ; 0x19e17 + 5 bytes
 
 SilphCo4Text4: ; 19e1c (6:5e1c)
@@ -36134,17 +36134,17 @@ SilphCo4Text4: ; 19e1c (6:5e1c)
 
 SilphCo4BattleText4: ; 19e26 (6:5e26)
 	TX_FAR _SilphCo4BattleText4
-	db $50
+	db "@"
 ; 0x19e26 + 5 bytes
 
 SilphCo4EndBattleText4: ; 19e2b (6:5e2b)
 	TX_FAR _SilphCo4EndBattleText4
-	db $50
+	db "@"
 ; 0x19e2b + 5 bytes
 
 SilphCo4AfterBattleText4: ; 19e30 (6:5e30)
 	TX_FAR _SilphCo4AfterBattleText4
-	db $50
+	db "@"
 ; 0x19e30 + 5 bytes
 
 SilphCo4Object: ; 0x19e35 (size=111)
@@ -36320,12 +36320,12 @@ SilphCo5Text1: ; 1a003 (6:6003)
 
 UnnamedText_1a010: ; 1a010 (6:6010)
 	TX_FAR _UnnamedText_1a010
-	db $50
+	db "@"
 ; 0x1a010 + 5 bytes
 
 UnnamedText_1a015: ; 1a015 (6:6015)
 	TX_FAR _UnnamedText_1a015
-	db $50
+	db "@"
 ; 0x1a015 + 5 bytes
 
 SilphCo5Text2: ; 1a01a (6:601a)
@@ -36336,17 +36336,17 @@ SilphCo5Text2: ; 1a01a (6:601a)
 
 SilphCo5BattleText2: ; 1a024 (6:6024)
 	TX_FAR _SilphCo5BattleText2
-	db $50
+	db "@"
 ; 0x1a024 + 5 bytes
 
 SilphCo5EndBattleText2: ; 1a029 (6:6029)
 	TX_FAR _SilphCo5EndBattleText2
-	db $50
+	db "@"
 ; 0x1a029 + 5 bytes
 
 SilphCo5AfterBattleText2: ; 1a02e (6:602e)
 	TX_FAR _SilphCo5AfterBattleText2
-	db $50
+	db "@"
 ; 0x1a02e + 5 bytes
 
 SilphCo5Text3: ; 1a033 (6:6033)
@@ -36357,17 +36357,17 @@ SilphCo5Text3: ; 1a033 (6:6033)
 
 SilphCo5BattleText3: ; 1a03d (6:603d)
 	TX_FAR _SilphCo5BattleText3
-	db $50
+	db "@"
 ; 0x1a03d + 5 bytes
 
 SilphCo5EndBattleText3: ; 1a042 (6:6042)
 	TX_FAR _SilphCo5EndBattleText3
-	db $50
+	db "@"
 ; 0x1a042 + 5 bytes
 
 SilphCo5AfterBattleText3: ; 1a047 (6:6047)
 	TX_FAR _SilphCo5AfterBattleText3
-	db $50
+	db "@"
 ; 0x1a047 + 5 bytes
 
 SilphCo5Text4: ; 1a04c (6:604c)
@@ -36378,17 +36378,17 @@ SilphCo5Text4: ; 1a04c (6:604c)
 
 SilphCo5BattleText4: ; 1a056 (6:6056)
 	TX_FAR _SilphCo5BattleText4
-	db $50
+	db "@"
 ; 0x1a056 + 5 bytes
 
 SilphCo5EndBattleText4: ; 1a05b (6:605b)
 	TX_FAR _SilphCo5EndBattleText4
-	db $50
+	db "@"
 ; 0x1a05b + 5 bytes
 
 SilphCo5AfterBattleText4: ; 1a060 (6:6060)
 	TX_FAR _SilphCo5AfterBattleText4
-	db $50
+	db "@"
 ; 0x1a060 + 5 bytes
 
 SilphCo5Text5: ; 1a065 (6:6065)
@@ -36399,30 +36399,30 @@ SilphCo5Text5: ; 1a065 (6:6065)
 
 SilphCo5BattleText5: ; 1a06f (6:606f)
 	TX_FAR _SilphCo5BattleText5
-	db $50
+	db "@"
 ; 0x1a06f + 5 bytes
 
 SilphCo5EndBattleText5: ; 1a074 (6:6074)
 	TX_FAR _SilphCo5EndBattleText5
-	db $50
+	db "@"
 ; 0x1a074 + 5 bytes
 
 SilphCo5AfterBattleText5: ; 1a079 (6:6079)
 	TX_FAR _SilphCo5AfterBattleText5
-	db $50
+	db "@"
 ; 0x1a079 + 5 bytes
 
 SilphCo5Text9: ; 1a07e (6:607e)
 	TX_FAR _SilphCo5Text9
-	db $50
+	db "@"
 
 SilphCo5Text10: ; 1a083 (6:6083)
 	TX_FAR _SilphCo5Text10
-	db $50
+	db "@"
 
 SilphCo5Text11: ; 1a088 (6:6088)
 	TX_FAR _SilphCo5Text11
-	db $50
+	db "@"
 
 SilphCo5Object: ; 0x1a08d (size=137)
 	db $2e ; border tile
@@ -36572,12 +36572,12 @@ SilphCo6Text1: ; 1a23d (6:623d)
 
 UnnamedText_1a24a: ; 1a24a (6:624a)
 	TX_FAR _UnnamedText_1a24a
-	db $50
+	db "@"
 ; 0x1a24a + 5 bytes
 
 UnnamedText_1a24f: ; 1a24f (6:624f)
 	TX_FAR _UnnamedText_1a24f
-	db $50
+	db "@"
 ; 0x1a24f + 5 bytes
 
 SilphCo6Text2: ; 1a254 (6:6254)
@@ -36589,12 +36589,12 @@ SilphCo6Text2: ; 1a254 (6:6254)
 
 UnnamedText_1a261: ; 1a261 (6:6261)
 	TX_FAR _UnnamedText_1a261
-	db $50
+	db "@"
 ; 0x1a261 + 5 bytes
 
 UnnamedText_1a266: ; 1a266 (6:6266)
 	TX_FAR _UnnamedText_1a266
-	db $50
+	db "@"
 ; 0x1a266 + 5 bytes
 
 SilphCo6Text3: ; 1a26b (6:626b)
@@ -36606,12 +36606,12 @@ SilphCo6Text3: ; 1a26b (6:626b)
 
 UnnamedText_1a278: ; 1a278 (6:6278)
 	TX_FAR _UnnamedText_1a278
-	db $50
+	db "@"
 ; 0x1a278 + 5 bytes
 
 UnnamedText_1a27d: ; 1a27d (6:627d)
 	TX_FAR _UnnamedText_1a27d
-	db $50
+	db "@"
 ; 0x1a27d + 5 bytes
 
 SilphCo6Text4: ; 1a282 (6:6282)
@@ -36623,12 +36623,12 @@ SilphCo6Text4: ; 1a282 (6:6282)
 
 UnnamedText_1a28f: ; 1a28f (6:628f)
 	TX_FAR _UnnamedText_1a28f
-	db $50
+	db "@"
 ; 0x1a28f + 5 bytes
 
 UnnamedText_1a294: ; 1a294 (6:6294)
 	TX_FAR _UnnamedText_1a294
-	db $50
+	db "@"
 ; 0x1a294 + 5 bytes
 
 SilphCo6Text5: ; 1a299 (6:6299)
@@ -36640,12 +36640,12 @@ SilphCo6Text5: ; 1a299 (6:6299)
 
 UnnamedText_1a2a6: ; 1a2a6 (6:62a6)
 	TX_FAR _UnnamedText_1a2a6
-	db $50
+	db "@"
 ; 0x1a2a6 + 5 bytes
 
 UnnamedText_1a2ab: ; 1a2ab (6:62ab)
 	TX_FAR _UnnamedText_1a2ab
-	db $50
+	db "@"
 ; 0x1a2ab + 5 bytes
 
 SilphCo6Text6: ; 1a2b0 (6:62b0)
@@ -36656,17 +36656,17 @@ SilphCo6Text6: ; 1a2b0 (6:62b0)
 
 SilphCo6BattleText2: ; 1a2ba (6:62ba)
 	TX_FAR _SilphCo6BattleText2
-	db $50
+	db "@"
 ; 0x1a2ba + 5 bytes
 
 SilphCo6EndBattleText2: ; 1a2bf (6:62bf)
 	TX_FAR _SilphCo6EndBattleText2
-	db $50
+	db "@"
 ; 0x1a2bf + 5 bytes
 
 SilphCo6AfterBattleText2: ; 1a2c4 (6:62c4)
 	TX_FAR _SilphCo6AfterBattleText2
-	db $50
+	db "@"
 ; 0x1a2c4 + 5 bytes
 
 SilphCo6Text7: ; 1a2c9 (6:62c9)
@@ -36677,17 +36677,17 @@ SilphCo6Text7: ; 1a2c9 (6:62c9)
 
 SilphCo6BattleText3: ; 1a2d3 (6:62d3)
 	TX_FAR _SilphCo6BattleText3
-	db $50
+	db "@"
 ; 0x1a2d3 + 5 bytes
 
 SilphCo6EndBattleText3: ; 1a2d8 (6:62d8)
 	TX_FAR _SilphCo6EndBattleText3
-	db $50
+	db "@"
 ; 0x1a2d8 + 5 bytes
 
 SilphCo6AfterBattleText3: ; 1a2dd (6:62dd)
 	TX_FAR _SilphCo6AfterBattleText3
-	db $50
+	db "@"
 ; 0x1a2dd + 5 bytes
 
 SilphCo6Text8: ; 1a2e2 (6:62e2)
@@ -36698,17 +36698,17 @@ SilphCo6Text8: ; 1a2e2 (6:62e2)
 
 SilphCo6BattleText4: ; 1a2ec (6:62ec)
 	TX_FAR _SilphCo6BattleText4
-	db $50
+	db "@"
 ; 0x1a2ec + 5 bytes
 
 SilphCo6EndBattleText4: ; 1a2f1 (6:62f1)
 	TX_FAR _SilphCo6EndBattleText4
-	db $50
+	db "@"
 ; 0x1a2f1 + 5 bytes
 
 SilphCo6AfterBattleText4: ; 1a2f6 (6:62f6)
 	TX_FAR _SilphCo6AfterBattleText4
-	db $50
+	db "@"
 ; 0x1a2f6 + 5 bytes
 
 SilphCo6Object: ; 0x1a2fb (size=112)
@@ -37502,7 +37502,7 @@ Func_1c98a: ; 1c98a (7:498a)
 ; 1c9c1 (7:49c1)
 UnnamedText_1c9c1: ; 1c9c1 (7:49c1)
 	TX_FAR _UnnamedText_1c9c1
-	db $50
+	db "@"
 ; 0x1c9c1 + 5 bytes
 
 ; known jump sources: 4583e (11:583e)
@@ -37554,7 +37554,7 @@ Func_1ca0d: ; 1ca0d (7:4a0d)
 ; 1ca14 (7:4a14)
 UnnamedText_1ca14: ; 1ca14 (7:4a14)
 	TX_FAR _UnnamedText_1ca14
-	db $50
+	db "@"
 ; 0x1ca14 + 5 bytes
 
 CinnabarIslandScript: ; 1ca19 (7:4a19)
@@ -37618,28 +37618,28 @@ CinnabarIslandTexts: ; 1ca81 (7:4a81)
 
 CinnabarIslandText8: ; 1ca91 (7:4a91)
 	TX_FAR _CinnabarIslandText8
-	db $50
+	db "@"
 ; 0x1ca91 + 5 bytes
 
 CinnabarIslandText1: ; 1ca96 (7:4a96)
 	TX_FAR _CinnabarIslandText1
-	db $50
+	db "@"
 
 CinnabarIslandText2: ; 1ca9b (7:4a9b)
 	TX_FAR _CinnabarIslandText2
-	db $50
+	db "@"
 
 CinnabarIslandText3: ; 1caa0 (7:4aa0)
 	TX_FAR _CinnabarIslandText3
-	db $50
+	db "@"
 
 CinnabarIslandText6: ; 1caa5 (7:4aa5)
 	TX_FAR _CinnabarIslandText6
-	db $50
+	db "@"
 
 CinnabarIslandText7: ; 1caaa (7:4aaa)
 	TX_FAR _CinnabarIslandText7
-	db $50
+	db "@"
 
 Route1Script: ; 1caaf (7:4aaf)
 	jp EnableAutoTextBoxDrawing
@@ -37672,30 +37672,30 @@ Route1Text1: ; 1cab8 (7:4ab8)
 
 Route1ViridianMartSampleText: ; 1cae3 (7:4ae3)
 	TX_FAR _Route1ViridianMartSampleText
-	db $50
+	db "@"
 ; 0x1cae3 + 5 bytes
 
 UnnamedText_1cae8: ; 1cae8 (7:4ae8)
 	TX_FAR _UnnamedText_1cae8
-	db $0b,$50
+	db $0b,"@"
 
 UnnamedText_1caee: ; 1caee (7:4aee)
 	TX_FAR _UnnamedText_1caee
-	db $50
+	db "@"
 ; 0x1caee + 5 bytes
 
 UnnamedText_1caf3: ; 1caf3 (7:4af3)
 	TX_FAR _UnnamedText_1caf3
-	db $50
+	db "@"
 ; 0x1caf3 + 5 bytes
 
 Route1Text2: ; 1caf8 (7:4af8)
 	TX_FAR _Route1Text2
-	db $50
+	db "@"
 
 Route1Text3: ; 1cafd (7:4afd)
 	TX_FAR _Route1Text3
-	db $50
+	db "@"
 
 OaksLab_h: ; 0x1cb02 to 0x1cb0e (12 bytes) (bank=7) (id=40)
 	db $05 ; tileset
@@ -38450,17 +38450,17 @@ OaksLabText1: ; 1d0ce (7:50ce)
 
 OaksLabGaryText1: ; 1d0f3 (7:50f3)
 	TX_FAR _OaksLabGaryText1
-	db $50
+	db "@"
 ; 0x1d0f8
 
 OaksLabText40: ; 1d0f8 (7:50f8)
 	TX_FAR _OaksLabText40
-	db $50
+	db "@"
 ; 0x1d0f8 + 5 bytes
 
 OaksLabText41: ; 1d0fd (7:50fd)
 	TX_FAR _OaksLabText41
-	db $50
+	db "@"
 ; 0x1d0fd + 5 bytes
 
 OaksLabText29: ; 1d102 (7:5102)
@@ -38512,7 +38512,7 @@ asm_1d133: ; 1d133 (7:5133)
 
 OaksLabText39: ; 1d152 (7:5152)
 	TX_FAR _OaksLabText39
-	db $50
+	db "@"
 
 asm_1d157: ; 1d157 (7:5157)
 	ld a, $5
@@ -38549,7 +38549,7 @@ OaksLabLookAtCharmander ; 0x1d195
 	jr OaksLabMonChoiceMenu
 OaksLabCharmanderText: ; 1d19a (7:519a)
 	TX_FAR _OaksLabCharmanderText ; 0x94e06
-	db $50
+	db "@"
 ; 0x1d19f
 
 OaksLabLookAtSquirtle: ; 1d19f (7:519f)
@@ -38557,7 +38557,7 @@ OaksLabLookAtSquirtle: ; 1d19f (7:519f)
 	jr OaksLabMonChoiceMenu
 OaksLabSquirtleText: ; 1d1a4 (7:51a4)
 	TX_FAR _OaksLabSquirtleText ; 0x94e2f
-	db $50
+	db "@"
 ; 0x1d1a9
 
 OaksLabLookAtBulbasaur: ; 1d1a9 (7:51a9)
@@ -38565,7 +38565,7 @@ OaksLabLookAtBulbasaur: ; 1d1a9 (7:51a9)
 	jr OaksLabMonChoiceMenu
 OaksLabBulbasaurText: ; 1d1ae (7:51ae)
 	TX_FAR _OaksLabBulbasaurText ; 0x94e57
-	db $50
+	db "@"
 ; 0x1d1b3
 
 OaksLabMonChoiceMenu: ; 1d1b3 (7:51b3)
@@ -38621,12 +38621,12 @@ OaksLabMonChoiceEnd: ; 1d21f (7:521f)
 
 OaksLabMonEnergeticText: ; 1d222 (7:5222)
 	TX_FAR _OaksLabMonEnergeticText
-	db $50
+	db "@"
 ; 0x1d222 + 5 bytes
 
 OaksLabReceivedMonText: ; 1d227 (7:5227)
 	TX_FAR _OaksLabReceivedMonText ; 0x94ea0
-	db $11, $50
+	db $11, "@"
 ; 0x1d22d
 
 Unknown_1d22d: ; 1d22d (7:522d)
@@ -38642,7 +38642,7 @@ Unknown_1d22d: ; 1d22d (7:522d)
 
 OaksLabLastMonText: ; 1d243 (7:5243)
 	TX_FAR _OaksLabLastMonText
-	db $50
+	db "@"
 ; 0x1d248
 
 OaksLabText32: ; 1d248 (7:5248)
@@ -38727,46 +38727,46 @@ OaksLabText5: ; 1d248 (7:5248)
 
 UnnamedText_1d2f0: ; 1d2f0 (7:52f0)
 	TX_FAR _UnnamedText_1d2f0
-	db $50
+	db "@"
 ; 0x1d2f5
 
 UnnamedText_1d2f5: ; 1d2f5 (7:52f5)
 	TX_FAR _UnnamedText_1d2f5
-	db $50
+	db "@"
 ; 0x1d2fa
 
 UnnamedText_1d2fa: ; 1d2fa (7:52fa)
 	TX_FAR _UnnamedText_1d2fa
-	db $50
+	db "@"
 ; 0x1d2ff
 
 OaksLabDeliverParcelText: ; 1d2ff (7:52ff)
 	TX_FAR _OaksLabDeliverParcelText1 ; 0x94f69
 	db $11
 	TX_FAR _OaksLabDeliverParcelText2
-	db $50
+	db "@"
 ; 0x1d309
 
 OaksLabAroundWorldText: ; 1d309 (7:5309)
 	TX_FAR _OaksLabAroundWorldText
-	db $50
+	db "@"
 ; 0x1d30e
 
 OaksLabGivePokeballsText: ; 1d30e (7:530e)
 	TX_FAR _OaksLabGivePokeballsText1 ; 0x9506d
 	db $11
 	TX_FAR _OaksLabGivePokeballsText2
-	db $50
+	db "@"
 ; 0x1d318
 
 OaksLabPleaseVisitText: ; 1d318 (7:5318)
 	TX_FAR _OaksLabPleaseVisitText
-	db $50
+	db "@"
 ; 0x1d318 + 5 bytes
 
 UnnamedText_1d31d: ; 1d31d (7:531d)
 	TX_FAR _UnnamedText_1d31d
-	db $50
+	db "@"
 ; 0x1d31d + 5 bytes
 
 OaksLabText34: ; 1d322 (7:5322)
@@ -38780,13 +38780,13 @@ OaksLabText6: ; 1d322 (7:5322)
 
 UnnamedText_1d32c: ; 1d32c (7:532c)
 	TX_FAR _UnnamedText_1d32c
-	db $50
+	db "@"
 ; 0x1d32c + 5 bytes
 
 OaksLabText35: ; 1d331 (7:5331)
 OaksLabText8: ; 1d331 (7:5331)
 	TX_FAR _OaksLabText8
-	db $50
+	db "@"
 
 OaksLabText36: ; 1d336 (7:5336)
 OaksLabText9: ; 1d336 (7:5336)
@@ -38797,7 +38797,7 @@ OaksLabText9: ; 1d336 (7:5336)
 
 UnnamedText_1d340: ; 1d340 (7:5340)
 	TX_FAR _UnnamedText_1d340
-	db $50
+	db "@"
 ; 0x1d340 + 5 bytes
 
 OaksLabText17: ; 1d345 (7:5345)
@@ -38809,7 +38809,7 @@ OaksLabText17: ; 1d345 (7:5345)
 
 OaksLabRivalWaitingText: ; 1d34f (7:534f)
 	TX_FAR _OaksLabRivalWaitingText
-	db $50
+	db "@"
 ; 0x1d34f + 5 bytes
 
 OaksLabText18: ; 1d354 (7:5354)
@@ -38821,7 +38821,7 @@ OaksLabText18: ; 1d354 (7:5354)
 
 OaksLabChooseMonText: ; 1d35e (7:535e)
 	TX_FAR _OaksLabChooseMonText
-	db $50
+	db "@"
 ; 0x1d35e + 5 bytes
 
 OaksLabText19: ; 1d363 (7:5363)
@@ -38833,7 +38833,7 @@ OaksLabText19: ; 1d363 (7:5363)
 
 OaksLabRivalInterjectionText: ; 1d36d (7:536d)
 	TX_FAR _OaksLabRivalInterjectionText
-	db $50
+	db "@"
 ; 0x1d36d + 5 bytes
 
 OaksLabText20: ; 1d372 (7:5372)
@@ -38845,7 +38845,7 @@ OaksLabText20: ; 1d372 (7:5372)
 
 OaksLabBePatientText: ; 1d37c (7:537c)
 	TX_FAR _OaksLabBePatientText
-	db $50
+	db "@"
 ; 0x1d37c + 5 bytes
 
 OaksLabText12: ; 1d381 (7:5381)
@@ -38857,7 +38857,7 @@ OaksLabText12: ; 1d381 (7:5381)
 
 OaksLabLeavingText: ; 1d38b (7:538b)
 	TX_FAR _OaksLabLeavingText
-	db $50
+	db "@"
 ; 0x1d38b + 5 bytes
 
 OaksLabText13: ; 1d390 (7:5390)
@@ -38869,7 +38869,7 @@ OaksLabText13: ; 1d390 (7:5390)
 
 OaksLabRivalPickingMonText: ; 1d39a (7:539a)
 	TX_FAR _OaksLabRivalPickingMonText
-	db $50
+	db "@"
 ; 0x1d39f
 
 OaksLabText14: ; 1d39f (7:539f)
@@ -38881,7 +38881,7 @@ OaksLabText14: ; 1d39f (7:539f)
 
 OaksLabRivalReceivedMonText: ; 1d3a9 (7:53a9)
 	TX_FAR _OaksLabRivalReceivedMonText ; 0x95461
-	db $11, $50
+	db $11, "@"
 ; 0x1d3af
 
 OaksLabText15: ; 1d3af (7:53af)
@@ -38893,17 +38893,17 @@ OaksLabText15: ; 1d3af (7:53af)
 
 OaksLabRivalChallengeText: ; 1d3b9 (7:53b9)
 	TX_FAR _OaksLabRivalChallengeText
-	db $50
+	db "@"
 ; 0x1d3be
 
 UnnamedText_1d3be: ; 1d3be (7:53be)
 	TX_FAR _UnnamedText_1d3be
-	db $50
+	db "@"
 ; 0x1d3c3
 
 UnnamedText_1d3c3: ; 1d3c3 (7:53c3)
 	TX_FAR _UnnamedText_1d3c3
-	db $50
+	db "@"
 ; 0x1d3c8
 
 OaksLabText16: ; 1d3c8 (7:53c8)
@@ -38915,42 +38915,42 @@ OaksLabText16: ; 1d3c8 (7:53c8)
 
 OaksLabRivalToughenUpText: ; 1d3d2 (7:53d2)
 	TX_FAR _OaksLabRivalToughenUpText
-	db $50
+	db "@"
 ; 0x1d3d7
 
 OaksLabText21: ; 1d3d7 (7:53d7)
 	TX_FAR _OaksLabText21
-	db $50
+	db "@"
 ; 0x1d3dc
 
 OaksLabText22: ; 1d3dc (7:53dc)
 	TX_FAR _OaksLabText22
-	db $50
+	db "@"
 ; 0x1d3e1
 
 OaksLabText23: ; 1d3e1 (7:53e1)
 	TX_FAR _OaksLabText23
-	db $50
+	db "@"
 ; 0x1d3e6
 
 OaksLabText24: ; 1d3e6 (7:53e6)
 	TX_FAR _OaksLabText24
-	db $50
+	db "@"
 ; 0x1d3eb
 
 OaksLabText25: ; 1d3eb (7:53eb)
 	TX_FAR _OaksLabText25
-	db $11, $50
+	db $11, "@"
 ; 0x1d3f1
 
 OaksLabText26: ; 1d3f1 (7:53f1)
 	TX_FAR _OaksLabText26
-	db $50
+	db "@"
 ; 0x1d3f6
 
 OaksLabText27: ; 1d3f6 (7:53f6)
 	TX_FAR _OaksLabText27
-	db $50
+	db "@"
 ; 0x1d3fb
 
 OaksLabText38: ; 1d3fb (7:53fb)
@@ -38964,7 +38964,7 @@ OaksLabText10: ; 1d3fb (7:53fb)
 
 UnnamedText_1d405: ; 1d405 (7:5405)
 	TX_FAR _UnnamedText_1d405
-	db $50
+	db "@"
 ; 0x1d405 + 5 bytes
 
 OaksLabObject: ; 0x1d40a (size=88)
@@ -39080,24 +39080,24 @@ ViridianMartTexts: ; 1d4e0 (7:54e0)
 
 ViridianMartText1: ; 1d4f0 (7:54f0)
 	TX_FAR _ViridianMartText1
-	db $50
+	db "@"
 
 ViridianMartText4: ; 1d4f5 (7:54f5)
 	TX_FAR _ViridianMartText4
-	db $50
+	db "@"
 
 ViridianMartText5: ; 1d4fa (7:54fa)
 	TX_FAR ViridianMartParcelQuestText
 	db $11
-	db $50
+	db "@"
 
 ViridianMartText2: ; 1d500 (7:5500)
 	TX_FAR _ViridianMartText2
-	db $50
+	db "@"
 
 ViridianMartText3: ; 1d505 (7:5505)
 	TX_FAR _ViridianMartText3
-	db $50
+	db "@"
 
 ViridianMartObject: ; 0x1d50a (size=38)
 	db $0 ; border tile
@@ -39137,11 +39137,11 @@ SchoolTexts: ; 1d54f (7:554f)
 
 SchoolText1: ; 1d553 (7:5553)
 	TX_FAR _SchoolText1
-	db $50
+	db "@"
 
 SchoolText2: ; 1d558 (7:5558)
 	TX_FAR _SchoolText2
-	db $50
+	db "@"
 
 SchoolObject: ; 0x1d55d (size=32)
 	db $a ; border tile
@@ -39180,11 +39180,11 @@ ViridianHouseTexts: ; 1d58d (7:558d)
 
 ViridianHouseText1: ; 1d595 (7:5595)
 	TX_FAR _ViridianHouseText1
-	db $50
+	db "@"
 
 ViridianHouseText2: ; 1d59a (7:559a)
 	TX_FAR _ViridianHouseText2
-	db $50
+	db "@"
 
 ViridianHouseText3: ; 1d59f (7:559f)
 	db $08 ; asm
@@ -39197,12 +39197,12 @@ ViridianHouseText3: ; 1d59f (7:559f)
 
 UnnamedText_1d5b1: ; 1d5b1 (7:55b1)
 	TX_FAR _UnnamedText_1d5b1
-	db $50
+	db "@"
 ; 0x1d5b1 + 5 bytes
 
 ViridianHouseText4: ; 1d5b6 (7:55b6)
 	TX_FAR _ViridianHouseText4
-	db $50
+	db "@"
 
 ViridianHouseObject: ; 0x1d5bb (size=44)
 	db $a ; border tile
@@ -39248,11 +39248,11 @@ PewterHouse1Text1: ; 1d5fc (7:55fc)
 
 PewterHouse1Text2: ; 1d60c (7:560c)
 	TX_FAR _PewterHouse1Text2
-	db $50
+	db "@"
 
 PewterHouse1Text3: ; 1d611 (7:5611)
 	TX_FAR _PewterHouse1Text3
-	db $50
+	db "@"
 
 PewterHouse1Object: ; 0x1d616 (size=38)
 	db $a ; border tile
@@ -39289,11 +39289,11 @@ PewterHouse2Texts: ; 1d64b (7:564b)
 
 PewterHouse2Text1: ; 1d64f (7:564f)
 	TX_FAR _PewterHouse2Text1
-	db $50
+	db "@"
 
 PewterHouse2Text2: ; 1d654 (7:5654)
 	TX_FAR _PewterHouse2Text2
-	db $50
+	db "@"
 
 PewterHouse2Object: ; 0x1d659 (size=32)
 	db $a ; border tile
@@ -39346,21 +39346,21 @@ CeruleanHouseTrashedText1: ; 1d68f (7:568f)
 
 UnnamedText_1d6ab: ; 1d6ab (7:56ab)
 	TX_FAR _UnnamedText_1d6ab
-	db $50
+	db "@"
 ; 0x1d6ab + 5 bytes
 
 UnnamedText_1d6b0: ; 1d6b0 (7:56b0)
 	TX_FAR _UnnamedText_1d6b0
-	db $50
+	db "@"
 ; 0x1d6b0 + 5 bytes
 
 CeruleanHouseTrashedText2: ; 1d6b5 (7:56b5)
 	TX_FAR _CeruleanHouseTrashedText2
-	db $50
+	db "@"
 
 CeruleanHouseTrashedText3: ; 1d6ba (7:56ba)
 	TX_FAR _CeruleanHouseTrashedText3
-	db $50
+	db "@"
 
 CeruleanHouseTrashedObject: ; 0x1d6bf (size=43)
 	db $a ; border tile
@@ -39399,7 +39399,7 @@ CeruleanHouseTexts: ; 1d6f9 (7:56f9)
 
 CeruleanHouseText1: ; 1d6fd (7:56fd)
 	TX_FAR _CeruleanHouseText1
-	db $50
+	db "@"
 
 CeruleanHouseText2: ; 1d702 (7:5702)
 	db $08 ; asm
@@ -39528,41 +39528,41 @@ BikeShopMenuPrice: ; 1d807 (7:5807)
 
 UnnamedText_1d810: ; 1d810 (7:5810)
 	TX_FAR _UnnamedText_1d810
-	db $50
+	db "@"
 ; 0x1d810 + 5 bytes
 
 UnnamedText_1d815: ; 1d815 (7:5815)
 	TX_FAR _UnnamedText_1d815
-	db $50
+	db "@"
 ; 0x1d815 + 5 bytes
 
 UnnamedText_1d81a: ; 1d81a (7:581a)
 	TX_FAR _UnnamedText_1d81a
-	db $50
+	db "@"
 ; 0x1d81a + 5 bytes
 
 UnnamedText_1d81f: ; 1d81f (7:581f)
 	TX_FAR _UnnamedText_1d81f
-	db $50
+	db "@"
 ; 0x1d81f + 5 bytes
 
 UnnamedText_1d824: ; 1d824 (7:5824)
 	TX_FAR _UnnamedText_1d824 ; 0x98eb2
-	db $11, $50
+	db $11, "@"
 
 UnnamedText_1d82a: ; 1d82a (7:582a)
 	TX_FAR _UnnamedText_1d82a
-	db $50
+	db "@"
 ; 0x1d82a + 5 bytes
 
 UnnamedText_1d82f: ; 1d82f (7:582f)
 	TX_FAR _UnnamedText_1d82f
-	db $50
+	db "@"
 ; 0x1d82f + 5 bytes
 
 UnnamedText_1d834: ; 1d834 (7:5834)
 	TX_FAR _UnnamedText_1d834
-	db $50
+	db "@"
 ; 0x1d834 + 5 bytes
 
 BikeShopText2: ; 1d839 (7:5839)
@@ -39573,7 +39573,7 @@ BikeShopText2: ; 1d839 (7:5839)
 
 UnnamedText_1d843: ; 1d843 (7:5843)
 	TX_FAR _UnnamedText_1d843
-	db $50
+	db "@"
 ; 0x1d843 + 5 bytes
 
 BikeShopText3: ; 1d848 (7:5848)
@@ -39589,12 +39589,12 @@ BikeShopText3: ; 1d848 (7:5848)
 
 UnnamedText_1d85c: ; 1d85c (7:585c)
 	TX_FAR _UnnamedText_1d85c
-	db $50
+	db "@"
 ; 0x1d85c + 5 bytes
 
 UnnamedText_1d861: ; 1d861 (7:5861)
 	TX_FAR _UnnamedText_1d861
-	db $50
+	db "@"
 ; 0x1d861 + 5 bytes
 
 BikeShopObject: ; 0x1d866 (size=38)
@@ -39650,12 +39650,12 @@ LavenderHouse1Text1: ; 1d8b8 (7:58b8)
 
 UnnamedText_1d8d1: ; 1d8d1 (7:58d1)
 	TX_FAR _UnnamedText_1d8d1
-	db $50
+	db "@"
 ; 0x1d8d1 + 5 bytes
 
 UnnamedText_1d8d6: ; 1d8d6 (7:58d6)
 	TX_FAR _UnnamedText_1d8d6
-	db $50
+	db "@"
 ; 0x1d8d6 + 5 bytes
 
 LavenderHouse1Text2: ; 1d8db (7:58db)
@@ -39674,12 +39674,12 @@ LavenderHouse1Text2: ; 1d8db (7:58db)
 
 UnnamedText_1d8f4: ; 1d8f4 (7:58f4)
 	TX_FAR _UnnamedText_1d8f4
-	db $50
+	db "@"
 ; 0x1d8f4 + 5 bytes
 
 UnnamedText_1d8f9: ; 1d8f9 (7:58f9)
 	TX_FAR _UnnamedText_1d8f9
-	db $50
+	db "@"
 ; 0x1d8f9 + 5 bytes
 
 LavenderHouse1Text3: ; 1d8fe (7:58fe)
@@ -39724,29 +39724,29 @@ LavenderHouse1Text5: ; 1d918 (7:5918)
 
 UnnamedText_1d94c: ; 1d94c (7:594c)
 	TX_FAR _UnnamedText_1d94c
-	db $50
+	db "@"
 ; 0x1d94c + 5 bytes
 
 ReceivedFluteText: ; 1d951 (7:5951)
 	TX_FAR _ReceivedFluteText ; 0x99ffb
 	db $11
 	TX_FAR _FluteExplanationText ; 0x9a011
-	db $50
+	db "@"
 ; 0x1d95b
 
 FluteNoRoomText: ; 1d95b (7:595b)
 	TX_FAR _FluteNoRoomText
-	db $50
+	db "@"
 ; 0x1d95b + 5 bytes
 
 MrFujiAfterFluteText: ; 1d960 (7:5960)
 	TX_FAR _MrFujiAfterFluteText
-	db $50
+	db "@"
 ; 0x1d960 + 5 bytes
 
 LavenderHouse1Text6: ; 1d965 (7:5965)
 	TX_FAR _LavenderHouse1Text6
-	db $50
+	db "@"
 
 LavenderHouse1Object: ; 0x1d96a (size=56)
 	db $a ; border tile
@@ -39809,12 +39809,12 @@ LavenderHouse2Text2: ; 1d9c3 (7:59c3)
 
 UnnamedText_1d9dc: ; 1d9dc (7:59dc)
 	TX_FAR _UnnamedText_1d9dc
-	db $50
+	db "@"
 ; 0x1d9dc + 5 bytes
 
 UnnamedText_1d9e1: ; 1d9e1 (7:59e1)
 	TX_FAR _UnnamedText_1d9e1
-	db $50
+	db "@"
 ; 0x1d9e1 + 5 bytes
 
 LavenderHouse2Object: ; 0x1d9e6 (size=32)
@@ -39928,37 +39928,37 @@ NameRaterText1: ; 1da56 (7:5a56)
 
 UnnamedText_1dab3: ; 1dab3 (7:5ab3)
 	TX_FAR _UnnamedText_1dab3
-	db $50
+	db "@"
 ; 0x1dab3 + 5 bytes
 
 UnnamedText_1dab8: ; 1dab8 (7:5ab8)
 	TX_FAR _UnnamedText_1dab8
-	db $50
+	db "@"
 ; 0x1dab8 + 5 bytes
 
 UnnamedText_1dabd: ; 1dabd (7:5abd)
 	TX_FAR _UnnamedText_1dabd
-	db $50
+	db "@"
 ; 0x1dabd + 5 bytes
 
 UnnamedText_1dac2: ; 1dac2 (7:5ac2)
 	TX_FAR _UnnamedText_1dac2
-	db $50
+	db "@"
 ; 0x1dac2 + 5 bytes
 
 UnnamedText_1dac7: ; 1dac7 (7:5ac7)
 	TX_FAR _UnnamedText_1dac7
-	db $50
+	db "@"
 ; 0x1dac7 + 5 bytes
 
 UnnamedText_1dacc: ; 1dacc (7:5acc)
 	TX_FAR _UnnamedText_1dacc
-	db $50
+	db "@"
 ; 0x1dacc + 5 bytes
 
 UnnamedText_1dad1: ; 1dad1 (7:5ad1)
 	TX_FAR _UnnamedText_1dad1
-	db $50
+	db "@"
 ; 0x1dad1 + 5 bytes
 
 NameRaterObject: ; 0x1dad6 (size=26)
@@ -39995,7 +39995,7 @@ VermilionHouse1Texts: ; 1db00 (7:5b00)
 
 VermilionHouse1Text1: ; 1db06 (7:5b06)
 	TX_FAR _VermilionHouse1Text1
-	db $50
+	db "@"
 
 VermilionHouse1Text2: ; 1db0b (7:5b0b)
 	TX_FAR _VermilionHouse1Text2
@@ -40007,7 +40007,7 @@ VermilionHouse1Text2: ; 1db0b (7:5b0b)
 
 VermilionHouse1Text3: ; 1db1b (7:5b1b)
 	TX_FAR _VermilionHouse1Text3
-	db $50
+	db "@"
 
 VermilionHouse1Object: ; 0x1db20 (size=38)
 	db $a ; border tile
@@ -40245,7 +40245,7 @@ VermilionDockTexts: ; 1dcbf (7:5cbf)
 
 UnnamedText_1dcc1: ; 1dcc1 (7:5cc1)
 	TX_FAR _UnnamedText_1dcc1
-	db $50
+	db "@"
 ; 0x1dcc1 + 5 bytes
 
 VermilionDockObject: ; 0x1dcc6 (size=20)
@@ -40283,7 +40283,7 @@ CeladonMansion5Texts: ; 1dd3d (7:5d3d)
 
 CeladonMansion5Text1: ; 1dd41 (7:5d41)
 	TX_FAR _CeladonMansion5Text1
-	db $50
+	db "@"
 
 CeladonMansion5Text2: ; 1dd46 (7:5d46)
 	db $08 ; asm
@@ -40331,11 +40331,11 @@ FuchsiaMartTexts: ; 1dd8b (7:5d8b)
 
 FuchsiaMartText2: ; 1dd91 (7:5d91)
 	TX_FAR _FuchsiaMartText2
-	db $50
+	db "@"
 
 FuchsiaMartText3: ; 1dd96 (7:5d96)
 	TX_FAR _FuchsiaMartText3
-	db $50
+	db "@"
 
 FuchsiaMartObject: ; 0x1dd9b (size=38)
 	db $0 ; border tile
@@ -40375,7 +40375,7 @@ SaffronHouse1Texts: ; 1dde0 (7:5de0)
 
 SaffronHouse1Text1: ; 1dde8 (7:5de8)
 	TX_FAR _SaffronHouse1Text1
-	db $50
+	db "@"
 
 SaffronHouse1Text2: ; 1dded (7:5ded)
 	TX_FAR _SaffronHouse1Text2
@@ -40387,11 +40387,11 @@ SaffronHouse1Text2: ; 1dded (7:5ded)
 
 SaffronHouse1Text3: ; 1ddfa (7:5dfa)
 	TX_FAR _SaffronHouse1Text3
-	db $50
+	db "@"
 
 SaffronHouse1Text4: ; 1ddff (7:5dff)
 	TX_FAR _SaffronHouse1Text4
-	db $50
+	db "@"
 
 SaffronHouse1Object: ; 0x1de04 (size=44)
 	db $a ; border tile
@@ -40454,22 +40454,22 @@ SaffronHouse2Text1: ; 1de41 (7:5e41)
 
 TM29PreReceiveText: ; 1de75 (7:5e75)
 	TX_FAR _TM29PreReceiveText
-	db $50
+	db "@"
 ; 0x1de75 + 5 bytes
 
 ReceivedTM29Text: ; 1de7a (7:5e7a)
 	TX_FAR _ReceivedTM29Text ; 0xa252a
-	db $0B, $50
+	db $0B, "@"
 ; 0x1de80
 
 TM29ExplanationText: ; 1de80 (7:5e80)
 	TX_FAR _TM29ExplanationText
-	db $50
+	db "@"
 ; 0x1de80 + 5 bytes
 
 TM29NoRoomText: ; 1de85 (7:5e85)
 	TX_FAR _TM29NoRoomText
-	db $50
+	db "@"
 ; 0x1de85 + 5 bytes
 
 SaffronHouse2Object: ; 0x1de8a (size=26)
@@ -40507,7 +40507,7 @@ DiglettsCaveRoute2Texts: ; 1deb8 (7:5eb8)
 
 DiglettsCaveRoute2Text1: ; 1deba (7:5eba)
 	TX_FAR _DiglettsCaveRoute2Text1
-	db $50
+	db "@"
 
 DiglettsCaveRoute2Object: ; 0x1debf (size=34)
 	db $7d ; border tile
@@ -40544,7 +40544,7 @@ Route2HouseTexts: ; 1def0 (7:5ef0)
 
 Route2HouseText1: ; 1def4 (7:5ef4)
 	TX_FAR _Route2HouseText1
-	db $50
+	db "@"
 
 Route2HouseText2: ; 1def9 (7:5ef9)
 	db $08 ; asm
@@ -40685,7 +40685,7 @@ Route6GateText2: ; 1dfe7 (7:5fe7)
 Route5GateText2: ; 1dfe7 (7:5fe7)
 UnnamedText_1dfe7: ; 1dfe7 (7:5fe7)
 	TX_FAR _UnnamedText_1dfe7
-	db $50
+	db "@"
 ; 0x1dfe7 + 5 bytes
 
 Route8GateText3: ; 1dfec (7:5fec)
@@ -40696,12 +40696,12 @@ UnnamedText_1dfec: ; 1dfec (7:5fec)
 	TX_FAR _UnnamedText_8aaa9 ; 0x8aaa9
 	db $11
 	TX_FAR _UnnamedText_1dff1 ; 0x8aaef
-	db $50
+	db "@"
 ; 0x1dff6
 
 UnnamedText_1dff6: ; 1dff6 (7:5ff6)
 	TX_FAR _UnnamedText_1dff6
-	db $50
+	db "@"
 ; 0x1dff6 + 5 bytes
 
 Route5GateObject: ; 0x1dffb (size=42)
@@ -41067,7 +41067,7 @@ UndergroundPathEntranceRoute8Texts: ; 1e291 (7:6291)
 UndergroundPathEntranceRoute8Text1: ; 1e293 (7:6293)
 	db $17, $8d, $42, $23
 	;TX_FAR _UndergroundPathEntranceRoute8Text1
-	db $50
+	db "@"
 
 UndergroundPathEntranceRoute8Object: ; 0x1e298 (size=34)
 	db $a ; border tile
@@ -41252,7 +41252,7 @@ PowerPlantText9: ; 1e3a4 (7:63a4)
 
 VoltorbBattleText: ; 1e3aa (7:63aa)
 	TX_FAR _VoltorbBattleText ; 0x8c5e2
-	db $50
+	db "@"
 ; 0x1e3af
 
 ZapdosBattleText: ; 1e3af (7:63af)
@@ -41320,7 +41320,7 @@ DiglettsCaveEntranceRoute11Texts: ; 1e5c3 (7:65c3)
 DiglettsCaveEntranceRoute11Text1: ; 1e5c5 (7:65c5)
 	db $17, $f9, $47, $23
 	;TX_FAR _DiglettsCaveEntranceRoute11Text1
-	db $50
+	db "@"
 
 DiglettsCaveEntranceRoute11Object: ; 0x1e5ca (size=34)
 	db $7d ; border tile
@@ -41378,21 +41378,21 @@ Route16HouseText1: ; 1e5ff (7:65ff)
 
 Route16HouseText3: ; 1e62b (7:662b)
 	TX_FAR _Route16HouseText3
-	db $50
+	db "@"
 ; 0x1e62b + 5 bytes
 
 ReceivedHM02Text: ; 1e630 (7:6630)
 	TX_FAR _ReceivedHM02Text ; 0x8ce66
-	db $11, $50
+	db $11, "@"
 
 HM02ExplanationText: ; 1e636 (7:6636)
 	TX_FAR _HM02ExplanationText
-	db $50
+	db "@"
 ; 0x1e636 + 5 bytes
 
 HM02NoRoomText: ; 1e63b (7:663b)
 	TX_FAR _HM02NoRoomText
-	db $50
+	db "@"
 ; 0x1e63b + 5 bytes
 
 Route16HouseText2: ; 1e640 (7:6640)
@@ -41406,7 +41406,7 @@ Route16HouseText2: ; 1e640 (7:6640)
 
 UnnamedText_1e652: ; 1e652 (7:6652)
 	TX_FAR _UnnamedText_1e652
-	db $50
+	db "@"
 ; 0x1e652 + 5 bytes
 
 Route16HouseObject: ; 0x1e657 (size=32)
@@ -41525,12 +41525,12 @@ UnnamedText_1e704: ; 1e704 (7:6704)
 
 UnnamedText_1e715: ; 1e715 (7:6715)
 	TX_FAR _UnnamedText_1e715
-	db $50
+	db "@"
 ; 0x1e71a
 
 UnnamedText_1e71a: ; 1e71a (7:671a)
 	TX_FAR _UnnamedText_1e71a ; 0x8d03e
-	db $0B, $50
+	db $0B, "@"
 ; 0x1e720
 
 Route22GateObject: ; 0x1e720 (size=42)
@@ -41703,17 +41703,17 @@ asm_fd4e2 ; 0x1e862
 
 UnnamedText_1e865: ; 1e865 (7:6865)
 	TX_FAR _UnnamedText_1e865 ; 0x8d267
-	db $50
+	db "@"
 ; 0x1e86a
 
 UnnamedText_1e86a: ; 1e86a (7:686a)
 	TX_FAR _UnnamedText_1e86a ; 0x8d345
-	db $50
+	db "@"
 ; 0x1e86f
 
 UnnamedText_1e86f: ; 1e86f (7:686f)
 	TX_FAR _UnnamedText_1e86f ; 0x8d391
-	db $50
+	db "@"
 ; 0x1e874
 
 BillsHouseText2: ; 1e874 (7:6874)
@@ -41750,21 +41750,21 @@ BillsHouseText2: ; 1e874 (7:6874)
 
 BillThankYouText: ; 1e8ba (7:68ba)
 	TX_FAR _BillThankYouText
-	db $50
+	db "@"
 ; 0x1e8ba + 5 bytes
 
 SSTicketReceivedText: ; 1e8bf (7:68bf)
 	TX_FAR _SSTicketReceivedText ; 0x8d499
-	db $11, $6, $50
+	db $11, $6, "@"
 
 SSTicketNoRoomText: ; 1e8c6 (7:68c6)
 	TX_FAR _SSTicketNoRoomText
-	db $50
+	db "@"
 ; 0x1e8c6 + 5 bytes
 
 UnnamedText_1e8cb: ; 1e8cb (7:68cb)
 	TX_FAR _UnnamedText_1e8cb
-	db $50
+	db "@"
 ; 0x1e8cb + 5 bytes
 
 BillsHouseText3: ; 1e8d0 (7:68d0)
@@ -41776,7 +41776,7 @@ BillsHouseText3: ; 1e8d0 (7:68d0)
 
 UnnamedText_1e8da: ; 1e8da (7:68da)
 	TX_FAR _UnnamedText_1e8da
-	db $50
+	db "@"
 ; 0x1e8da + 5 bytes
 
 BillsHouseObject: ; 0x1e8df (size=38)
@@ -41820,16 +41820,16 @@ Func_1e915: ; 1e915 (7:6915)
 ; 1e93b (7:693b)
 UnnamedText_1e93b: ; 1e93b (7:693b)
 	TX_FAR _UnnamedText_1e93b
-	db $50
+	db "@"
 ; 0x1e93b + 5 bytes
 
 UnnamedText_1e940: ; 1e940 (7:6940)
 	TX_FAR _UnnamedText_1e940
-	db $0d,$50
+	db $0d,"@"
 
 UnnamedText_1e946: ; 1e946 (7:6946)
 	TX_FAR _UnnamedText_1e946
-	db $50
+	db "@"
 ; 0x1e946 + 5 bytes
 
 	call EnableAutoTextBoxDrawing
@@ -41838,7 +41838,7 @@ UnnamedText_1e946: ; 1e946 (7:6946)
 
 UnnamedText_1e953: ; 1e953 (7:6953)
 	TX_FAR _UnnamedText_1e953
-	db $50
+	db "@"
 ; 0x1e953 + 5 bytes
 
 	call EnableAutoTextBoxDrawing
@@ -41847,7 +41847,7 @@ UnnamedText_1e953: ; 1e953 (7:6953)
 
 UnnamedText_1e960: ; 1e960 (7:6960)
 	TX_FAR _UnnamedText_1e960
-	db $50
+	db "@"
 ; 0x1e960 + 5 bytes
 
 	call EnableAutoTextBoxDrawing
@@ -41864,12 +41864,12 @@ UnnamedText_1e960: ; 1e960 (7:6960)
 
 UnnamedText_1e97e: ; 1e97e (7:697e)
 	TX_FAR _UnnamedText_1e97e
-	db $50
+	db "@"
 ; 0x1e97e + 5 bytes
 
 UnnamedText_1e983: ; 1e983 (7:6983)
 	TX_FAR _UnnamedText_1e983
-	db $50
+	db "@"
 ; 0x1e983 + 5 bytes
 
 ; known jump sources: 41f (0:41f)
@@ -41950,12 +41950,12 @@ INCBIN "baserom.gbc",$1e9f7,$1e9f8 - $1e9f7
 ; 1ea0d (7:6a0d)
 UnnamedText_1ea0d: ; 1ea0d (7:6a0d)
 	TX_FAR _UnnamedText_1ea0d
-	db $50
+	db "@"
 ; 0x1ea0d + 5 bytes
 
 UnnamedText_1ea12: ; 1ea12 (7:6a12)
 	TX_FAR _UnnamedText_1ea12
-	db $50
+	db "@"
 ; 0x1ea12 + 5 bytes
 
 	ld a, [$c109]
@@ -41996,7 +41996,7 @@ INCBIN "baserom.gbc",$1ea25,$1ea26 - $1ea25
 ; 1ea5b (7:6a5b)
 UnnamedText_1ea5b: ; 1ea5b (7:6a5b)
 	TX_FAR _UnnamedText_1ea5b
-	db $50
+	db "@"
 ; 0x1ea5b + 5 bytes
 
 PointerTable_1ea60: ; 1ea60 (7:6a60)
@@ -42009,32 +42009,32 @@ PointerTable_1ea60: ; 1ea60 (7:6a60)
 
 UnnamedText_1ea6c: ; 1ea6c (7:6a6c)
 	TX_FAR _UnnamedText_1ea6c
-	db $50
+	db "@"
 ; 0x1ea6c + 5 bytes
 
 UnnamedText_1ea71: ; 1ea71 (7:6a71)
 	TX_FAR _UnnamedText_1ea71
-	db $50
+	db "@"
 ; 0x1ea71 + 5 bytes
 
 UnnamedText_1ea76: ; 1ea76 (7:6a76)
 	TX_FAR _UnnamedText_1ea76
-	db $50
+	db "@"
 ; 0x1ea76 + 5 bytes
 
 UnnamedText_1ea7b: ; 1ea7b (7:6a7b)
 	TX_FAR _UnnamedText_1ea7b
-	db $50
+	db "@"
 ; 0x1ea7b + 5 bytes
 
 UnnamedText_1ea80: ; 1ea80 (7:6a80)
 	TX_FAR _UnnamedText_1ea80
-	db $50
+	db "@"
 ; 0x1ea80 + 5 bytes
 
 UnnamedText_1ea85: ; 1ea85 (7:6a85)
 	TX_FAR _UnnamedText_1ea85
-	db $50
+	db "@"
 ; 0x1ea85 + 5 bytes
 
 ; known jump sources: 1eab2 (7:6ab2), 1eaef (7:6aef), 1eb2a (7:6b2a)
@@ -42104,7 +42104,7 @@ UnnamedText_1eae3: ; 1eae3 (7:6ae3)
 ; 1eb05 (7:6b05)
 UnnamedText_1eb05: ; 1eb05 (7:6b05)
 	TX_FAR _UnnamedText_1eb05
-	db $50
+	db "@"
 ; 0x1eb05 + 5 bytes
 
 ; known jump sources: 3eb2 (0:3eb2), 1eab5 (7:6ab5)
@@ -42166,7 +42166,7 @@ CinnabarGymGateCoords: ; 1eb48 (7:6b48)
 
 UnnamedText_1eb69: ; 1eb69 (7:6b69)
 	TX_FAR _UnnamedText_1eb69
-	db $50
+	db "@"
 ; 0x1eb69 + 5 bytes
 
 	call EnableAutoTextBoxDrawing
@@ -42221,7 +42221,7 @@ UnnamedText_1eb69: ; 1eb69 (7:6b69)
 ; 1ebdd (7:6bdd)
 UnnamedText_1ebdd: ; 1ebdd (7:6bdd)
 	TX_FAR _UnnamedText_1ebdd
-	db $50
+	db "@"
 ; 0x1ebdd + 5 bytes
 
 UnnamedText_1ebe2: ; 1ebe2 (7:6be2
@@ -42296,7 +42296,7 @@ INCBIN "baserom.gbc",$1ec05,$1ec06 - $1ec05
 
 UnnamedText_1ec7f: ; 1ec7f (7:6c7f)
 	TX_FAR _UnnamedText_1ec7f
-	db $50
+	db "@"
 ; 0x1ec7f + 5 bytes
 
 BillsMonListText: ; 1ec84 (7:6c84)
@@ -42304,7 +42304,7 @@ BillsMonListText: ; 1ec84 (7:6c84)
 
 UnnamedText_1ecaa: ; 1ecaa (7:6caa)
 	TX_FAR _UnnamedText_1ecaa
-	db $50
+	db "@"
 ; 0x1ecaa + 5 bytes
 
 Unknown_1ecaf
@@ -42317,7 +42317,7 @@ Unknown_1ecaf
 
 UnnamedText_1ecbd: ; 1ecbd (7:6cbd)
 	TX_FAR _UnnamedText_1ecbd
-	db $50
+	db "@"
 ; 0x1ecbd + 5 bytes
 
 SECTION "bank8",ROMX,BANK[$8]
@@ -42891,62 +42891,62 @@ StatsCancelPCText: ; 217dc (8:57dc)
 
 UnnamedText_217e9: ; 217e9 (8:57e9)
 	TX_FAR _UnnamedText_217e9
-	db $50
+	db "@"
 ; 0x217e9 + 5 bytes
 
 UnnamedText_217ee: ; 217ee (8:57ee)
 	TX_FAR _UnnamedText_217ee
-	db $50
+	db "@"
 ; 0x217ee + 5 bytes
 
 UnnamedText_217f3: ; 217f3 (8:57f3)
 	TX_FAR _UnnamedText_217f3
-	db $50
+	db "@"
 ; 0x217f3 + 5 bytes
 
 UnnamedText_217f8: ; 217f8 (8:57f8)
 	TX_FAR _UnnamedText_217f8
-	db $50
+	db "@"
 ; 0x217f8 + 5 bytes
 
 UnnamedText_217fd: ; 217fd (8:57fd)
 	TX_FAR _UnnamedText_217fd
-	db $50
+	db "@"
 ; 0x217fd + 5 bytes
 
 UnnamedText_21802: ; 21802 (8:5802)
 	TX_FAR _UnnamedText_21802
-	db $50
+	db "@"
 ; 0x21802 + 5 bytes
 
 UnnamedText_21807: ; 21807 (8:5807)
 	TX_FAR _UnnamedText_21807
-	db $50
+	db "@"
 ; 0x21807 + 5 bytes
 
 UnnamedText_2180c: ; 2180c (8:580c)
 	TX_FAR _UnnamedText_2180c
-	db $50
+	db "@"
 ; 0x2180c + 5 bytes
 
 UnnamedText_21811: ; 21811 (8:5811)
 	TX_FAR _UnnamedText_21811
-	db $50
+	db "@"
 ; 0x21811 + 5 bytes
 
 UnnamedText_21816: ; 21816 (8:5816)
 	TX_FAR _UnnamedText_21816
-	db $50
+	db "@"
 ; 0x21816 + 5 bytes
 
 UnnamedText_2181b: ; 2181b (8:581b)
 	TX_FAR _UnnamedText_2181b
-	db $50
+	db "@"
 ; 0x2181b + 5 bytes
 
 UnnamedText_21820: ; 21820 (8:5820)
 	TX_FAR _UnnamedText_21820
-	db $50
+	db "@"
 ; 0x21820 + 5 bytes
 
 	ld a, [$ff00+$aa]
@@ -42985,7 +42985,7 @@ UnnamedText_21820: ; 21820 (8:5820)
 
 UnnamedText_21865: ; 21865 (8:5865)
 	TX_FAR _UnnamedText_21865
-	db $50
+	db "@"
 ; 0x21865 + 5 bytes
 
 	ld a, [$c109]
@@ -45103,7 +45103,7 @@ Func_27f86: ; 27f86 (9:7f86)
 UnnamedText_27fb3: ; 27fb3 (9:7fb3)
 	db $0a
 	TX_FAR _UnnamedText_27fb3
-	db $50
+	db "@"
 ; 0x27fb3 + 5 bytes
 
 SECTION "bankA",ROMX,BANK[$A]
@@ -45275,12 +45275,12 @@ Func_2bea9: ; 2bea9 (a:7ea9)
 ; 2bef2 (a:7ef2)
 UnnamedText_2bef2: ; 2bef2 (a:7ef2)
 	TX_FAR _UnnamedText_2bef2
-	db $50
+	db "@"
 ; 0x2bef2 + 5 bytes
 
 UnnamedText_2bef7: ; 2bef7 (a:7ef7)
 	TX_FAR _UnnamedText_2bef7
-	db $50
+	db "@"
 ; 0x2bef7 + 5 bytes
 
 SECTION "bankB",ROMX,BANK[$B]
@@ -45436,12 +45436,12 @@ DisplayEffectiveness: ; 2fb7b (b:7b7b)
 
 UnnamedText_2fb8e: ; 2fb8e (b:7b8e)
 	TX_FAR _UnnamedText_2fb8e
-	db $50
+	db "@"
 ; 0x2fb8e + 5 bytes
 
 UnnamedText_2fb93: ; 2fb93 (b:7b93)
 	TX_FAR _UnnamedText_2fb93
-	db $50
+	db "@"
 ; 0x2fb93 + 5 bytes
 
 TrainerInfoTextBoxTileGraphics: ; 2fb98 (b:7b98)
@@ -45481,7 +45481,7 @@ Func_2fe18: ; 2fe18 (b:7e18)
 ; 2fe3b (b:7e3b)
 UnnamedText_2fe3b: ; 2fe3b (b:7e3b)
 	TX_FAR _UnnamedText_2fe3b
-	db $50
+	db "@"
 ; 0x2fe3b + 5 bytes
 
 ; known jump sources: 3eca5 (f:6ca5), 3f11b (f:711b), 70362 (1c:4362)
@@ -45619,7 +45619,7 @@ Func_2feb8 ; 0x2feb8
 
 UnnamedText_2ff04: ; 2ff04 (b:7f04)
 	TX_FAR _UnnamedText_2ff04
-	db $50
+	db "@"
 ; 0x2ff04 + 5 bytes
 
 	ld a, [$c102]
@@ -45648,12 +45648,12 @@ UnnamedText_2ff04: ; 2ff04 (b:7f04)
 
 UnnamedText_2ff32: ; 2ff32 (b:7f32)
 	TX_FAR _UnnamedText_2ff32
-	db $50
+	db "@"
 ; 0x2ff32 + 5 bytes
 
 UnnamedText_2ff37: ; 2ff37 (b:7f37)
 	TX_FAR _UnnamedText_2ff37
-	db $50
+	db "@"
 ; 0x2ff37 + 5 bytes
 
 SECTION "bankC",ROMX,BANK[$C]
@@ -45799,7 +45799,7 @@ OldManPic: ; 33e9a (c:7e9a)
 
 UnnamedText_33f52: ; 33f52 (c:7f52)
 	TX_FAR _UnnamedText_33f52
-	db $50
+	db "@"
 ; 0x33f52 + 5 bytes
 
 ; known jump sources: 3f889 (f:7889)
@@ -46082,41 +46082,41 @@ INCBIN "baserom.gbc",$3730e,$37390 - $3730e
 
 UnnamedText_37390: ; 37390 (d:7390)
 	TX_FAR _UnnamedText_37390
-	db $50
+	db "@"
 ; 0x37390 + 5 bytes
 
 INCBIN "baserom.gbc",$37395,$37467 - $37395
 
 UnnamedText_37467: ; 37467 (d:7467)
 	TX_FAR _UnnamedText_37467
-	db $50
+	db "@"
 ; 0x37467 + 5 bytes
 
 UnnamedText_3746c: ; 3746c (d:746c)
 	TX_FAR _UnnamedText_3746c
-	db $50
+	db "@"
 ; 0x3746c + 5 bytes
 
 UnnamedText_37471: ; 37471 (d:7471)
 	TX_FAR _UnnamedText_37471
-	db $50
+	db "@"
 ; 0x37471 + 5 bytes
 
 UnnamedText_37476: ; 37476 (d:7476)
 	TX_FAR _UnnamedText_37476
-	db $50
+	db "@"
 ; 0x37476 + 5 bytes
 
 UnnamedText_3747b: ; 3747b (d:747b)
 	TX_FAR _UnnamedText_3747b
-	db $50
+	db "@"
 ; 0x3747b + 5 bytes
 
 INCBIN "baserom.gbc",$37480,$37673 - $37480
 
 UnnamedText_37673: ; 37673 (d:7673)
 	TX_FAR _UnnamedText_37673
-	db $50
+	db "@"
 ; 0x37673 + 5 bytes
 
 INCBIN "baserom.gbc",$37678,$37690 - $37678
@@ -46126,7 +46126,7 @@ SlotRewardValues:
 
 UnnamedText_3769d: ; 3769d (d:769d)
 	TX_FAR _UnnamedText_3769d
-	db $50
+	db "@"
 ; 0x3769d + 5 bytes
 
 INCBIN "baserom.gbc",$376a2,$378f5 - $376a2
@@ -46296,17 +46296,17 @@ INCBIN "baserom.gbc",$37e2d,$37e79 - $37e2d
 
 UnnamedText_37e79: ; 37e79 (d:7e79)
 	TX_FAR _UnnamedText_37e79
-	db $50
+	db "@"
 ; 0x37e79 + 5 bytes
 
 UnnamedText_37e7e: ; 37e7e (d:7e7e)
 	TX_FAR _UnnamedText_37e7e
-	db $50
+	db "@"
 ; 0x37e7e + 5 bytes
 
 UnnamedText_37e83: ; 37e83 (d:7e83)
 	TX_FAR _UnnamedText_37e83
-	db $50
+	db "@"
 ; 0x37e83 + 5 bytes
 
 SECTION "bankE",ROMX,BANK[$E]
@@ -52906,7 +52906,7 @@ Func_39b87: ; 39b87 (e:5b87)
 	inc de
 	jr .asm_39bc1
 .asm_39bd1
-	ld a, $50
+	ld a, "@"
 	ld [de], a
 	ret
 
@@ -54951,22 +54951,22 @@ Func_3af2e: ; 3af2e (e:6f2e)
 ; 3af3e (e:6f3e)
 UnnamedText_3af3e: ; 3af3e (e:6f3e)
 	TX_FAR _UnnamedText_3af3e
-	db $50
+	db "@"
 ; 0x3af3e + 5 bytes
 
 UnnamedText_3af43: ; 3af43 (e:6f43)
 	TX_FAR _UnnamedText_3af43
-	db $50
+	db "@"
 ; 0x3af43 + 5 bytes
 
 UnnamedText_3af48: ; 3af48 (e:6f48)
 	TX_FAR _UnnamedText_3af48
-	db $50
+	db "@"
 ; 0x3af48 + 5 bytes
 
 UnnamedText_3af4d: ; 3af4d (e:6f4d)
 	TX_FAR _UnnamedText_3af4d
-	db $50
+	db "@"
 ; 0x3af4d + 5 bytes
 
 ; known jump sources: 3aeb1 (e:6eb1), 3af38 (e:6f38)
@@ -57444,17 +57444,17 @@ Func_3ba97: ; 3ba97 (e:7a97)
 ; 3baa2 (e:7aa2)
 UnnamedText_3baa2: ; 3baa2 (e:7aa2)
 	TX_FAR _UnnamedText_3baa2
-	db $50
+	db "@"
 ; 0x3baa2 + 5 bytes
 
 UnnamedText_3baa7: ; 3baa7 (e:7aa7)
 	TX_FAR _UnnamedText_3baa7
-	db $50
+	db "@"
 ; 0x3baa7 + 5 bytes
 
 UnnamedText_3baac: ; 3baac (e:7aac)
 	TX_FAR _UnnamedText_3baac
-	db $50
+	db "@"
 ; 0x3baac + 5 bytes
 
 ; known jump sources: 3fb33 (f:7b33)
@@ -57597,7 +57597,7 @@ Func_3bb8c: ; 3bb8c (e:7b8c)
 ; 3bb92 (e:7b92)
 UnnamedText_3bb92: ; 3bb92 (e:7b92)
 	TX_FAR _UnnamedText_3bb92
-	db $50
+	db "@"
 ; 0x3bb92 + 5 bytes
 
 ; known jump sources: 3fb3b (f:7b3b)
@@ -57637,12 +57637,12 @@ Func_3bb97: ; 3bb97 (e:7b97)
 ; 3bbd7 (e:7bd7)
 UnnamedText_3bbd7: ; 3bbd7 (e:7bd7)
 	TX_FAR _UnnamedText_3bbd7
-	db $50
+	db "@"
 ; 0x3bbd7 + 5 bytes
 
 UnnamedText_3bbdc: ; 3bbdc (e:7bdc)
 	TX_FAR _UnnamedText_3bbdc
-	db $50
+	db "@"
 ; 0x3bbdc + 5 bytes
 
 BankswitchEtoF: ; 3bbe1 (e:7be1)
@@ -57873,7 +57873,7 @@ Func_3c11e: ; 3c11e (f:411e)
 ; 3c1a8 (f:41a8)
 UnnamedText_3c1a8: ; 3c1a8 (f:41a8)
 	TX_FAR _UnnamedText_3c1a8
-	db $50
+	db "@"
 ; 0x3c1a8 + 5 bytes
 
 ; known jump sources: 3c15e (f:415e)
@@ -57939,12 +57939,12 @@ asm_3c202: ; 3c202 (f:4202)
 ; 3c229 (f:4229)
 UnnamedText_3c229: ; 3c229 (f:4229)
 	TX_FAR _UnnamedText_3c229
-	db $50
+	db "@"
 ; 0x3c229 + 5 bytes
 
 UnnamedText_3c22e: ; 3c22e (f:422e)
 	TX_FAR _UnnamedText_3c22e
-	db $50
+	db "@"
 ; 0x3c22e + 5 bytes
 
 
@@ -58206,17 +58206,17 @@ HandlePoisonBurnLeechSeed: ; 3c3bd (f:43bd)
 
 HurtByPoisonText: ; 3c42e (f:442e)
 	TX_FAR _HurtByPoisonText
-	db $50
+	db "@"
 ; 0x3c42e + 5 bytes
 
 HurtByBurnText: ; 3c433 (f:4433)
 	TX_FAR _HurtByBurnText
-	db $50
+	db "@"
 ; 0x3c433 + 5 bytes
 
 HurtByLeechSeedText: ; 3c438 (f:4438)
 	TX_FAR _HurtByLeechSeedText
-	db $50
+	db "@"
 ; 0x3c438 + 5 bytes
 
 ; known jump sources: 3c3ec (f:43ec), 3c413 (f:4413)
@@ -58524,7 +58524,7 @@ Func_3c567: ; 3c567 (f:4567)
 ; 3c63e (f:463e)
 UnnamedText_3c63e: ; 3c63e (f:463e)
 	TX_FAR _UnnamedText_3c63e
-	db $50
+	db "@"
 ; 0x3c63e + 5 bytes
 
 ; known jump sources: 3c5d3 (f:45d3), 3c696 (f:4696)
@@ -58713,7 +58713,7 @@ Func_3c741: ; 3c741 (f:4741)
 
 PlayerMonFaintedText: ; 3c796 (f:4796)
 	TX_FAR _PlayerMonFaintedText
-	db $50
+	db "@"
 ; 0x3c796 + 5 bytes
 
 ; known jump sources: 3c54e (f:454e), 3c725 (f:4725)
@@ -58748,7 +58748,7 @@ Func_3c79b: ; 3c79b (f:479b)
 ; 3c7d3 (f:47d3)
 UnnamedText_3c7d3: ; 3c7d3 (f:47d3)
 	TX_FAR _UnnamedText_3c7d3
-	db $50
+	db "@"
 ; 0x3c7d3 + 5 bytes
 
 ; known jump sources: 3c552 (f:4552), 3c729 (f:4729)
@@ -58839,17 +58839,17 @@ HandlePlayerBlackOut: ; 3c837 (f:4837)
 
 Sony1WinText: ; 3c884 (f:4884)
 	TX_FAR _Sony1WinText
-	db $50
+	db "@"
 ; 0x3c884 + 5 bytes
 
 PlayerBlackedOutText2: ; 3c889 (f:4889)
 	TX_FAR _PlayerBlackedOutText2
-	db $50
+	db "@"
 ; 0x3c889 + 5 bytes
 
 LinkBattleLostText: ; 3c88e (f:488e)
 	TX_FAR _LinkBattleLostText
-	db $50
+	db "@"
 ; 0x3c88e + 5 bytes
 
 ; known jump sources: 3c5a4 (f:45a4), 3c77d (f:477d)
@@ -59163,7 +59163,7 @@ Func_3ca97: ; 3ca97 (f:4a97)
 ; 3cab4 (f:4ab4)
 UnnamedText_3cab4: ; 3cab4 (f:4ab4)
 	TX_FAR _UnnamedText_3cab4
-	db $50
+	db "@"
 ; 0x3cab4 + 5 bytes
 
 ; known jump sources: 3c7d0 (f:47d0), 3d208 (f:5208)
@@ -59281,17 +59281,17 @@ Func_3cab9: ; 3cab9 (f:4ab9)
 ; 3cb97 (f:4b97)
 UnnamedText_3cb97: ; 3cb97 (f:4b97)
 	TX_FAR _UnnamedText_3cb97
-	db $50
+	db "@"
 ; 0x3cb97 + 5 bytes
 
 UnnamedText_3cb9c: ; 3cb9c (f:4b9c)
 	TX_FAR _UnnamedText_3cb9c
-	db $50
+	db "@"
 ; 0x3cb9c + 5 bytes
 
 UnnamedText_3cba1: ; 3cba1 (f:4ba1)
 	TX_FAR _UnnamedText_3cba1
-	db $50
+	db "@"
 ; 0x3cba1 + 5 bytes
 
 ; known jump sources: 3c1f7 (f:41f7), 3c81c (f:481c), 3d1e5 (f:51e5)
@@ -60128,7 +60128,7 @@ Func_3d1ba: ; 3d1ba (f:51ba)
 ; 3d1f5 (f:51f5)
 UnnamedText_3d1f5: ; 3d1f5 (f:51f5)
 	TX_FAR _UnnamedText_3d1f5
-	db $50
+	db "@"
 ; 0x3d1f5 + 5 bytes
 
 ; known jump sources: 3d0cb (f:50cb)
@@ -60456,7 +60456,7 @@ Func_3d3f5: ; 3d3f5 (f:53f5)
 ; 3d430 (f:5430)
 UnnamedText_3d430: ; 3d430 (f:5430)
 	TX_FAR _UnnamedText_3d430
-	db $50
+	db "@"
 ; 0x3d430 + 5 bytes
 
 ; known jump sources: 3d347 (f:5347)
@@ -61349,7 +61349,7 @@ Func_3da88: ; 3da88 (f:5a88)
 ; 3daa8 (f:5aa8)
 UnnamedText_3daa8: ; 3daa8 (f:5aa8)
 	TX_FAR _UnnamedText_3daa8
-	db $50
+	db "@"
 ; 0x3daa8 + 5 bytes
 
 ; known jump sources: 3d924 (f:5924), 3dd08 (f:5d08)
@@ -61466,27 +61466,27 @@ INCBIN "baserom.gbc",$3db62,$3db6c - $3db62
 
 UnnamedText_3db6c: ; 3db6c (f:5b6c)
 	TX_FAR _UnnamedText_3db6c
-	db $50
+	db "@"
 ; 0x3db6c + 5 bytes
 
 UnnamedText_3db71: ; 3db71 (f:5b71)
 	TX_FAR _UnnamedText_3db71
-	db $50
+	db "@"
 ; 0x3db71 + 5 bytes
 
 UnnamedText_3db76: ; 3db76 (f:5b76)
 	TX_FAR _UnnamedText_3db76
-	db $50
+	db "@"
 ; 0x3db76 + 5 bytes
 
 UnnamedText_3db7b: ; 3db7b (f:5b7b)
 	TX_FAR _UnnamedText_3db7b
-	db $50
+	db "@"
 ; 0x3db7b + 5 bytes
 
 UnnamedText_3db80: ; 3db80 (f:5b80)
 	TX_FAR _UnnamedText_3db80
-	db $50
+	db "@"
 ; 0x3db80 + 5 bytes
 
 ; known jump sources: 3db15 (f:5b15)
@@ -61572,17 +61572,17 @@ Func_3dbe2: ; 3dbe2 (f:5be2)
 ; 3dc42 (f:5c42)
 UnnamedText_3dc42: ; 3dc42 (f:5c42)
 	TX_FAR _UnnamedText_3dc42
-	db $50
+	db "@"
 ; 0x3dc42 + 5 bytes
 
 UnnamedText_3dc47: ; 3dc47 (f:5c47)
 	TX_FAR _UnnamedText_3dc47
-	db $50
+	db "@"
 ; 0x3dc47 + 5 bytes
 
 UnnamedText_3dc4c: ; 3dc4c (f:5c4c)
 	TX_FAR _UnnamedText_3dc4c
-	db $50
+	db "@"
 ; 0x3dc4c + 5 bytes
 
 ; known jump sources: 52670 (14:6670)
@@ -61592,7 +61592,7 @@ Func_3dc51: ; 3dc51 (f:5c51)
 ; 3dc57 (f:5c57)
 UnnamedText_3dc57: ; 3dc57 (f:5c57)
 	TX_FAR _UnnamedText_3dc57
-	db $50
+	db "@"
 ; 0x3dc57 + 5 bytes
 
 ; known jump sources: 3d7a9 (f:57a9), 3e82e (f:682e)
@@ -61621,12 +61621,12 @@ INCBIN "baserom.gbc",$3dc7a,$3dc7e - $3dc7a
 
 UnnamedText_3dc7e: ; 3dc7e (f:5c7e)
 	TX_FAR _UnnamedText_3dc7e
-	db $50
+	db "@"
 ; 0x3dc7e + 5 bytes
 
 UnnamedText_3dc83: ; 3dc83 (f:5c83)
 	TX_FAR _UnnamedText_3dc83
-	db $50
+	db "@"
 ; 0x3dc83 + 5 bytes
 
 ; known jump sources: 3d694 (f:5694)
@@ -61811,27 +61811,27 @@ Func_3ddb4: ; 3ddb4 (f:5db4)
 ; 3ddb6 (f:5db6)
 UnnamedText_3ddb6: ; 3ddb6 (f:5db6)
 	TX_FAR _UnnamedText_3ddb6
-	db $50
+	db "@"
 ; 0x3ddb6 + 5 bytes
 
 UnnamedText_3ddbb: ; 3ddbb (f:5dbb)
 	TX_FAR _UnnamedText_3ddbb
-	db $50
+	db "@"
 ; 0x3ddbb + 5 bytes
 
 UnnamedText_3ddc0: ; 3ddc0 (f:5dc0)
 	TX_FAR _UnnamedText_3ddc0
-	db $50
+	db "@"
 ; 0x3ddc0 + 5 bytes
 
 UnnamedText_3ddc5: ; 3ddc5 (f:5dc5)
 	TX_FAR _UnnamedText_3ddc5
-	db $50
+	db "@"
 ; 0x3ddc5 + 5 bytes
 
 UnnamedText_3ddca: ; 3ddca (f:5dca)
 	TX_FAR _UnnamedText_3ddca
-	db $50
+	db "@"
 ; 0x3ddca + 5 bytes
 
 CalculateDamage: ; 3ddcf (f:5dcf)
@@ -62637,12 +62637,12 @@ AttackSubstitute: ; 3e25e (f:625e)
 
 SubstituteTookDamageText: ; 3e2ac (f:62ac)
 	TX_FAR _SubstituteTookDamageText
-	db $50
+	db "@"
 ; 0x3e2ac + 5 bytes
 
 SubstituteBrokeText: ; 3e2b1 (f:62b1)
 	TX_FAR _SubstituteBrokeText
-	db $50
+	db "@"
 ; 0x3e2b1 + 5 bytes
 
 ; this function raises the attack modifier of a pokemon using Rage when that pokemon is attacked
@@ -62690,7 +62690,7 @@ HandleBuildingRage: ; 3e2b6 (f:62b6)
 
 BuildingRageText: ; 3e2f8 (f:62f8)
 	TX_FAR _BuildingRageText
-	db $50
+	db "@"
 ; 0x3e2f8 + 5 bytes
 
 ; copy last move for Mirror Move
@@ -62722,7 +62722,7 @@ MirrorMoveCopyMove: ; 3e2fd (f:62fd)
 
 MirrorMoveFailedText: ; 3e324 (f:6324)
 	TX_FAR _MirrorMoveFailedText
-	db $50
+	db "@"
 ; 0x3e324 + 5 bytes
 
 ; function used to reload move data for moves like Mirror Move and Metronome
@@ -63487,7 +63487,7 @@ asm_3e7ef: ; 3e7ef (f:67ef)
 ; 3e887 (f:6887)
 UnnamedText_3e887: ; 3e887 (f:6887)
 	TX_FAR _UnnamedText_3e887
-	db $50
+	db "@"
 ; 0x3e887 + 5 bytes
 
 ; known jump sources: 3e6c0 (f:66c0), 3e6c6 (f:66c6), 3e7f9 (f:67f9), 3e828 (f:6828), 3e877 (f:6877), 3e885 (f:6885)
@@ -64549,7 +64549,7 @@ Func_3ef8b: ; 3ef8b (f:6f8b)
 	ld [hli], a
 	ld a, "T"
 	ld [hli], a
-	ld [hl], $50
+	ld [hl], "@"
 	ld a, [$cf91]
 	push af
 	ld a, MON_GHOST
@@ -64828,12 +64828,12 @@ Func_3f20e: ; 3f20e (f:720e)
 ; 3f245 (f:7245)
 UnnamedText_3f245: ; 3f245 (f:7245)
 	TX_FAR _UnnamedText_3f245
-	db $50
+	db "@"
 ; 0x3f245 + 5 bytes
 
 UnnamedText_3f24a: ; 3f24a (f:724a)
 	TX_FAR _UnnamedText_3f24a
-	db $50
+	db "@"
 ; 0x3f24a + 5 bytes
 
 	ld hl, W_ENEMYMONSTATUS ; $cfe9
@@ -64923,12 +64923,12 @@ UnnamedText_3f24a: ; 3f24a (f:724a)
 ; 3f2df (f:72df)
 UnnamedText_3f2df: ; 3f2df (f:72df)
 	TX_FAR _UnnamedText_3f2df
-	db $50
+	db "@"
 ; 0x3f2df + 5 bytes
 
 UnnamedText_3f2e4: ; 3f2e4 (f:72e4)
 	TX_FAR _UnnamedText_3f2e4
-	db $50
+	db "@"
 ; 0x3f2e4 + 5 bytes
 
 	ld hl, Func_783f
@@ -65059,12 +65059,12 @@ opponentAttacker: ; 3f382 (f:7382)
 
 UnnamedText_3f3d8: ; 3f3d8 (f:73d8)
 	TX_FAR _UnnamedText_3f3d8
-	db $50
+	db "@"
 ; 0x3f3d8 + 5 bytes
 
 UnnamedText_3f3dd: ; 3f3dd (f:73dd)
 	TX_FAR _UnnamedText_3f3dd
-	db $50
+	db "@"
 ; 0x3f3dd + 5 bytes
 
 CheckDefrost: ; 3f3e2 (f:73e2)
@@ -65105,7 +65105,7 @@ CheckDefrost: ; 3f3e2 (f:73e2)
 
 UnnamedText_3f423: ; 3f423 (f:7423)
 	TX_FAR _UnnamedText_3f423
-	db $50
+	db "@"
 ; 0x3f423 + 5 bytes
 
 ; known jump sources: e137 (3:6137), 3a821 (e:6821), 3e2e8 (f:62e8)
@@ -65288,7 +65288,7 @@ INCBIN "baserom.gbc",$3f542,$3f547 - $3f542
 
 UnnamedText_3f547: ; 3f547 (f:7547)
 	TX_FAR _UnnamedText_3f547
-	db $50
+	db "@"
 ; 0x3f547 + 5 bytes
 
 	ld hl, W_ENEMYMONATTACKMOD ; $cd2e
@@ -65487,7 +65487,7 @@ INCBIN "baserom.gbc",$3f67e,$3f683 - $3f67e
 
 UnnamedText_3f683: ; 3f683 (f:7683)
 	TX_FAR _UnnamedText_3f683
-	db $50
+	db "@"
 ; 0x3f683 + 5 bytes
 
 ; known jump sources: 3f4cc (f:74cc), 3f62f (f:762f)
@@ -65638,17 +65638,17 @@ INCBIN "baserom.gbc",$3f6cb,$3f717 - $3f6cb
 ; 3f802 (f:7802)
 UnnamedText_3f802: ; 3f802 (f:7802)
 	TX_FAR _UnnamedText_3f802
-	db $50
+	db "@"
 ; 0x3f802 + 5 bytes
 
 UnnamedText_3f807: ; 3f807 (f:7807)
 	TX_FAR _UnnamedText_3f807
-	db $50
+	db "@"
 ; 0x3f807 + 5 bytes
 
 UnnamedText_3f80c: ; 3f80c (f:780c)
 	TX_FAR _UnnamedText_3f80c
-	db $50
+	db "@"
 ; 0x3f80c + 5 bytes
 
 	ld hl, W_PLAYERBATTSTATUS1 ; $d062
@@ -65776,32 +65776,32 @@ INCBIN "baserom.gbc",$3f8c8,$3f8cd - $3f8c8
 ; 3f8f9 (f:78f9)
 UnnamedText_3f8f9: ; 3f8f9 (f:78f9)
 	TX_FAR _UnnamedText_3f8f9
-	db $50
+	db "@"
 ; 0x3f8f9 + 5 bytes
 
 UnnamedText_3f8fe: ; 3f8fe (f:78fe)
 	TX_FAR _UnnamedText_3f8fe
-	db $50
+	db "@"
 ; 0x3f8fe + 5 bytes
 
 UnnamedText_3f903: ; 3f903 (f:7903)
 	TX_FAR _UnnamedText_3f903
-	db $50
+	db "@"
 ; 0x3f903 + 5 bytes
 
 UnnamedText_3f908: ; 3f908 (f:7908)
 	TX_FAR _UnnamedText_3f908
-	db $50
+	db "@"
 ; 0x3f908 + 5 bytes
 
 UnnamedText_3f90d: ; 3f90d (f:790d)
 	TX_FAR _UnnamedText_3f90d
-	db $50
+	db "@"
 ; 0x3f90d + 5 bytes
 
 UnnamedText_3f912: ; 3f912 (f:7912)
 	TX_FAR _UnnamedText_3f912
-	db $50
+	db "@"
 ; 0x3f912 + 5 bytes
 
 	ld hl, W_PLAYERBATTSTATUS1 ; $d062
@@ -65872,7 +65872,7 @@ INCBIN "baserom.gbc",$3f941,$3f949 - $3f941
 ; 3f9a1 (f:79a1)
 UnnamedText_3f9a1: ; 3f9a1 (f:79a1)
 	TX_FAR _UnnamedText_3f9a1
-	db $50
+	db "@"
 ; 0x3f9a1 + 5 bytes
 
 asm_3f9a6: ; 3f9a6 (f:79a6)
@@ -65912,7 +65912,7 @@ INCBIN "baserom.gbc",$3f9df,$3fa77 - $3f9df
 
 UnnamedText_3fa77: ; 3fa77 (f:7a77)
 	TX_FAR _UnnamedText_3fa77
-	db $50
+	db "@"
 ; 0x3fa77 + 5 bytes
 
 	ld hl, Func_2bea9
@@ -66001,7 +66001,7 @@ INCBIN "baserom.gbc",$3fa84,$3fa8a - $3fa84
 ; 3fb09 (f:7b09)
 UnnamedText_3fb09: ; 3fb09 (f:7b09)
 	TX_FAR _UnnamedText_3fb09
-	db $50
+	db "@"
 ; 0x3fb09 + 5 bytes
 
 INCBIN "baserom.gbc",$3fb0e,$3fb26 - $3fb0e
@@ -66017,14 +66017,14 @@ INCBIN "baserom.gbc",$3fb0e,$3fb26 - $3fb0e
 ; 3fb3e (f:7b3e)
 UnnamedText_3fb3e: ; 3fb3e (f:7b3e)
 	TX_FAR _UnnamedText_3fb3e
-	db $50
+	db "@"
 ; 0x3fb3e + 5 bytes
 
 INCBIN "baserom.gbc",$3fb43,$3fb49 - $3fb43
 
 UnnamedText_3fb49: ; 3fb49 (f:7b49)
 	TX_FAR _UnnamedText_3fb49
-	db $50
+	db "@"
 ; 0x3fb49 + 5 bytes
 
 ; known jump sources: 3f65e (f:765e), 3f7e1 (f:77e1), 3f9ae (f:79ae)
@@ -66040,7 +66040,7 @@ Func_3fb53: ; 3fb53 (f:7b53)
 ; 3fb59 (f:7b59)
 UnnamedText_3fb59: ; 3fb59 (f:7b59)
 	TX_FAR _UnnamedText_3fb59
-	db $50
+	db "@"
 ; 0x3fb59 + 5 bytes
 
 ; known jump sources: 3f242 (f:7242), 3f2dc (f:72dc), 3f768 (f:7768), 3f7bb (f:77bb), 52663 (14:6663)
@@ -66050,12 +66050,12 @@ Func_3fb5e: ; 3fb5e (f:7b5e)
 ; 3fb64 (f:7b64)
 UnnamedText_3fb64: ; 3fb64 (f:7b64)
 	TX_FAR _UnnamedText_3fb64
-	db $50
+	db "@"
 ; 0x3fb64 + 5 bytes
 
 UnnamedText_3fb69: ; 3fb69 (f:7b69)
 	TX_FAR _UnnamedText_3fb69
-	db $50
+	db "@"
 ; 0x3fb69 + 5 bytes
 
 ; known jump sources: 3f359 (f:7359), 3f3bc (f:73bc), 52656 (14:6656)
@@ -66065,7 +66065,7 @@ Func_3fb6e: ; 3fb6e (f:7b6e)
 ; 3fb74 (f:7b74)
 UnnamedText_3fb74: ; 3fb74 (f:7b74)
 	TX_FAR _UnnamedText_3fb74
-	db $50
+	db "@"
 ; 0x3fb74 + 5 bytes
 
 CheckTargetSubstitute: ; 3fb79 (f:7b79)
@@ -68909,7 +68909,7 @@ Func_415df: ; 415df (10:55df)
 ; 4160c (10:560c)
 UnnamedText_4160c: ; 4160c (10:560c)
 	TX_FAR _UnnamedText_4160c
-	db $50
+	db "@"
 ; 0x4160c + 5 bytes
 
 	ld hl, UnnamedText_41623 ; $5623
@@ -68921,12 +68921,12 @@ UnnamedText_4160c: ; 4160c (10:560c)
 ; 41623 (10:5623)
 UnnamedText_41623: ; 41623 (10:5623)
 	TX_FAR _UnnamedText_41623
-	db $50
+	db "@"
 ; 0x41623 + 5 bytes
 
 UnnamedText_41628: ; 41628 (10:5628)
 	TX_FAR _UnnamedText_41628
-	db $50
+	db "@"
 ; 0x41628 + 5 bytes
 
 	ld hl, UnnamedText_41642 ; $5642
@@ -68939,12 +68939,12 @@ UnnamedText_41628: ; 41628 (10:5628)
 ; 41642 (10:5642)
 UnnamedText_41642: ; 41642 (10:5642)
 	TX_FAR _UnnamedText_41642
-	db $50
+	db "@"
 ; 0x41642 + 5 bytes
 
 UnnamedText_41647: ; 41647 (10:5647)
 	TX_FAR _UnnamedText_41647
-	db $50
+	db "@"
 ; 0x41647 + 5 bytes
 
 ; known jump sources: 41373 (10:5373)
@@ -68955,19 +68955,19 @@ Func_4164c: ; 4164c (10:564c)
 ; 41655 (10:5655)
 UnnamedText_41655: ; 41655 (10:5655)
 	TX_FAR _UnnamedText_41655
-	db $50
+	db "@"
 ; 0x41655 + 5 bytes
 
 INCBIN "baserom.gbc",$4165a,$4166c - $4165a
 
 UnnamedText_4166c: ; 4166c (10:566c)
 	TX_FAR _UnnamedText_4166c
-	db $50
+	db "@"
 ; 0x4166c + 5 bytes
 
 UnnamedText_41671: ; 41671 (10:5671)
 	TX_FAR _UnnamedText_41671
-	db $50
+	db "@"
 ; 0x41671 + 5 bytes
 
 ; known jump sources: 41286 (10:5286), 4128b (10:528b), 412d4 (10:52d4), 41338 (10:5338), 4135a (10:535a)
@@ -69540,42 +69540,42 @@ LavenderTownText1: ; 44120 (11:4120)
 
 UnnamedText_4413c: ; 4413c (11:413c)
 	TX_FAR _UnnamedText_4413c
-	db $50
+	db "@"
 ; 0x4413c + 5 bytes
 
 UnnamedText_44141: ; 44141 (11:4141)
 	TX_FAR _UnnamedText_44141
-	db $50
+	db "@"
 ; 0x44141 + 5 bytes
 
 UnnamedText_44146: ; 44146 (11:4146)
 	TX_FAR _UnnamedText_44146
-	db $50
+	db "@"
 ; 0x44146 + 5 bytes
 
 LavenderTownText2: ; 4414b (11:414b)
 	TX_FAR _LavenderTownText2
-	db $50
+	db "@"
 
 LavenderTownText3: ; 44150 (11:4150)
 	TX_FAR _LavenderTownText3
-	db $50
+	db "@"
 
 LavenderTownText4: ; 44155 (11:4155)
 	TX_FAR _LavenderTownText4
-	db $50
+	db "@"
 
 LavenderTownText5: ; 4415a (11:415a)
 	TX_FAR _LavenderTownText5
-	db $50
+	db "@"
 
 LavenderTownText8: ; 4415f (11:415f)
 	TX_FAR _LavenderTownText8
-	db $50
+	db "@"
 
 LavenderTownText9: ; 44164 (11:4164)
 	TX_FAR _LavenderTownText9
-	db $50
+	db "@"
 
 DisplayDexRating: ; 44169 (11:4169)
 	ld hl, W_SEENPOKEMON
@@ -69637,7 +69637,7 @@ DisplayDexRating: ; 44169 (11:4169)
 
 UnnamedText_441cc: ; 441cc (11:41cc)
 	TX_FAR _UnnamedText_441cc
-	db $50
+	db "@"
 ; 0x441cc + 5 bytes
 
 DexRatingsTable: ; 441d1 (11:41d1)
@@ -69676,82 +69676,82 @@ DexRatingsTable: ; 441d1 (11:41d1)
 
 UnnamedText_44201: ; 44201 (11:4201)
 	TX_FAR _UnnamedText_44201
-	db $50
+	db "@"
 ; 0x44201 + 5 bytes
 
 UnnamedText_44206: ; 44206 (11:4206)
 	TX_FAR _UnnamedText_44206
-	db $50
+	db "@"
 ; 0x44206 + 5 bytes
 
 UnnamedText_4420b: ; 4420b (11:420b)
 	TX_FAR _UnnamedText_4420b
-	db $50
+	db "@"
 ; 0x4420b + 5 bytes
 
 UnnamedText_44210: ; 44210 (11:4210)
 	TX_FAR _UnnamedText_44210
-	db $50
+	db "@"
 ; 0x44210 + 5 bytes
 
 UnnamedText_44215: ; 44215 (11:4215)
 	TX_FAR _UnnamedText_44215
-	db $50
+	db "@"
 ; 0x44215 + 5 bytes
 
 UnnamedText_4421a: ; 4421a (11:421a)
 	TX_FAR _UnnamedText_4421a
-	db $50
+	db "@"
 ; 0x4421a + 5 bytes
 
 UnnamedText_4421f: ; 4421f (11:421f)
 	TX_FAR _UnnamedText_4421f
-	db $50
+	db "@"
 ; 0x4421f + 5 bytes
 
 UnnamedText_44224: ; 44224 (11:4224)
 	TX_FAR _UnnamedText_44224
-	db $50
+	db "@"
 ; 0x44224 + 5 bytes
 
 UnnamedText_44229: ; 44229 (11:4229)
 	TX_FAR _UnnamedText_44229
-	db $50
+	db "@"
 ; 0x44229 + 5 bytes
 
 UnnamedText_4422e: ; 4422e (11:422e)
 	TX_FAR _UnnamedText_4422e
-	db $50
+	db "@"
 ; 0x4422e + 5 bytes
 
 UnnamedText_44233: ; 44233 (11:4233)
 	TX_FAR _UnnamedText_44233
-	db $50
+	db "@"
 ; 0x44233 + 5 bytes
 
 UnnamedText_44238: ; 44238 (11:4238)
 	TX_FAR _UnnamedText_44238
-	db $50
+	db "@"
 ; 0x44238 + 5 bytes
 
 UnnamedText_4423d: ; 4423d (11:423d)
 	TX_FAR _UnnamedText_4423d
-	db $50
+	db "@"
 ; 0x4423d + 5 bytes
 
 UnnamedText_44242: ; 44242 (11:4242)
 	TX_FAR _UnnamedText_44242
-	db $50
+	db "@"
 ; 0x44242 + 5 bytes
 
 UnnamedText_44247: ; 44247 (11:4247)
 	TX_FAR _UnnamedText_44247
-	db $50
+	db "@"
 ; 0x44247 + 5 bytes
 
 UnnamedText_4424c: ; 4424c (11:424c)
 	TX_FAR _UnnamedText_4424c
-	db $50
+	db "@"
 ; 0x4424c + 5 bytes
 
 ViridianPokecenter_h: ; 0x44251 to 0x4425d (12 bytes) (bank=11) (id=41)
@@ -69775,12 +69775,11 @@ ViridianPokeCenterText1: ; 4426b (11:426b)
 
 ViridianPokeCenterText2: ; 4426c (11:426c)
 	TX_FAR _ViridianPokeCenterText1
-	db $50
-
+	db "@"
 
 ViridianPokeCenterText3: ; 44271 (11:4271)
 	TX_FAR _ViridianPokeCenterText3
-	db $50
+	db "@"
 
 ViridianPokeCenterText4: ; 44276 (11:4276)
 	db $f6
@@ -69894,17 +69893,17 @@ Mansion1Text1: ; 44341 (11:4341)
 
 Mansion1BattleText2: ; 4434b (11:434b)
 	TX_FAR _Mansion1BattleText2
-	db $50
+	db "@"
 ; 0x4434b + 5 bytes
 
 Mansion1EndBattleText2: ; 44350 (11:4350)
 	TX_FAR _Mansion1EndBattleText2
-	db $50
+	db "@"
 ; 0x44350 + 5 bytes
 
 Mansion1AfterBattleText2: ; 44355 (11:4355)
 	TX_FAR _Mansion1AfterBattleText2
-	db $50
+	db "@"
 ; 0x44355 + 5 bytes
 
 Mansion1Text4: ; 4435a (11:435a)
@@ -69938,17 +69937,17 @@ Mansion1Text4: ; 4435a (11:435a)
 
 UnnamedText_44395: ; 44395 (11:4395)
 	TX_FAR _UnnamedText_44395
-	db $50
+	db "@"
 ; 0x44395 + 5 bytes
 
 UnnamedText_4439a: ; 4439a (11:439a)
 	TX_FAR _UnnamedText_4439a
-	db $50
+	db "@"
 ; 0x4439a + 5 bytes
 
 UnnamedText_4439f: ; 4439f (11:439f)
 	TX_FAR _UnnamedText_4439f
-	db $50
+	db "@"
 ; 0x4439f + 5 bytes
 
 Mansion1Object: ; 0x443a4 (size=90)
@@ -70068,112 +70067,112 @@ asm_0c916: ; 44582 (11:4582)
 
 UnnamedText_44588: ; 44588 (11:4588)
 	TX_FAR _UnnamedText_44588
-	db $50
+	db "@"
 ; 0x44588 + 5 bytes
 
 UnnamedText_4458d: ; 4458d (11:458d)
 	TX_FAR _UnnamedText_4458d
-	db $50
+	db "@"
 ; 0x4458d + 5 bytes
 
 UnnamedText_44592: ; 44592 (11:4592)
 	TX_FAR _UnnamedText_44592
-	db $50
+	db "@"
 ; 0x44592 + 5 bytes
 
 UnnamedText_44597: ; 44597 (11:4597)
 	TX_FAR _UnnamedText_44597
-	db $50
+	db "@"
 ; 0x44597 + 5 bytes
 
 UnnamedText_4459c: ; 4459c (11:459c)
 	TX_FAR _UnnamedText_4459c
-	db $50
+	db "@"
 ; 0x4459c + 5 bytes
 
 UnnamedText_445a1: ; 445a1 (11:45a1)
 	TX_FAR _UnnamedText_445a1
-	db $50
+	db "@"
 ; 0x445a1 + 5 bytes
 
 UnnamedText_445a6: ; 445a6 (11:45a6)
 	TX_FAR _UnnamedText_445a6
-	db $50
+	db "@"
 ; 0x445a6 + 5 bytes
 
 UnnamedText_445ab: ; 445ab (11:45ab)
 	TX_FAR _UnnamedText_445ab
-	db $50
+	db "@"
 ; 0x445ab + 5 bytes
 
 UnnamedText_445b0: ; 445b0 (11:45b0)
 	TX_FAR _UnnamedText_445b0
-	db $50
+	db "@"
 ; 0x445b0 + 5 bytes
 
 UnnamedText_445b5: ; 445b5 (11:45b5)
 	TX_FAR _UnnamedText_445b5
-	db $50
+	db "@"
 ; 0x445b5 + 5 bytes
 
 UnnamedText_445ba: ; 445ba (11:45ba)
 	TX_FAR _UnnamedText_445ba
-	db $50
+	db "@"
 ; 0x445ba + 5 bytes
 
 UnnamedText_445bf: ; 445bf (11:45bf)
 	TX_FAR _UnnamedText_445bf
-	db $50
+	db "@"
 ; 0x445bf + 5 bytes
 
 UnnamedText_445c4: ; 445c4 (11:45c4)
 	TX_FAR _UnnamedText_445c4
-	db $50
+	db "@"
 ; 0x445c4 + 5 bytes
 
 UnnamedText_445c9: ; 445c9 (11:45c9)
 	TX_FAR _UnnamedText_445c9
-	db $50
+	db "@"
 ; 0x445c9 + 5 bytes
 
 UnnamedText_445ce: ; 445ce (11:45ce)
 	TX_FAR _UnnamedText_445ce
-	db $50
+	db "@"
 ; 0x445ce + 5 bytes
 
 UnnamedText_445d3: ; 445d3 (11:45d3)
 	TX_FAR _UnnamedText_445d3
-	db $50
+	db "@"
 ; 0x445d3 + 5 bytes
 
 UnnamedText_445d8: ; 445d8 (11:45d8)
 	TX_FAR _UnnamedText_445d8
-	db $50
+	db "@"
 ; 0x445d8 + 5 bytes
 
 UnnamedText_445dd: ; 445dd (11:45dd)
 	TX_FAR _UnnamedText_445dd
-	db $50
+	db "@"
 ; 0x445dd + 5 bytes
 
 UnnamedText_445e2: ; 445e2 (11:45e2)
 	TX_FAR _UnnamedText_445e2
-	db $50
+	db "@"
 ; 0x445e2 + 5 bytes
 
 UnnamedText_445e7: ; 445e7 (11:45e7)
 	TX_FAR _UnnamedText_445e7
-	db $50
+	db "@"
 ; 0x445e7 + 5 bytes
 
 UnnamedText_445ec: ; 445ec (11:45ec)
 	TX_FAR _UnnamedText_445ec
-	db $50
+	db "@"
 ; 0x445ec + 5 bytes
 
 RockTunnel1Text8: ; 445f1 (11:45f1)
 	TX_FAR _RockTunnel1Text8
-	db $50
+	db "@"
 
 RockTunnel1Object: ; 0x445f6 (size=127)
 	db $3 ; border tile
@@ -70321,7 +70320,7 @@ SSAnne3Texts: ; 44935 (11:4935)
 
 SSAnne3Text1: ; 44937 (11:4937)
 	TX_FAR _SSAnne3Text1
-	db $50
+	db "@"
 
 SSAnne3Object: ; 0x4493c (size=26)
 	db $c ; border tile
@@ -70500,62 +70499,62 @@ VictoryRoad3Text4: ; 44a87 (11:4a87)
 
 VictoryRoad3BattleText2: ; 44a91 (11:4a91)
 	TX_FAR _VictoryRoad3BattleText2
-	db $50
+	db "@"
 ; 0x44a91 + 5 bytes
 
 VictoryRoad3EndBattleText2: ; 44a96 (11:4a96)
 	TX_FAR _VictoryRoad3EndBattleText2
-	db $50
+	db "@"
 ; 0x44a96 + 5 bytes
 
 VictoryRoad3AfterBattleText2: ; 44a9b (11:4a9b)
 	TX_FAR _VictoryRoad3AfterBattleText2
-	db $50
+	db "@"
 ; 0x44a9b + 5 bytes
 
 VictoryRoad3BattleText3: ; 44aa0 (11:4aa0)
 	TX_FAR _VictoryRoad3BattleText3
-	db $50
+	db "@"
 ; 0x44aa0 + 5 bytes
 
 VictoryRoad3EndBattleText3: ; 44aa5 (11:4aa5)
 	TX_FAR _VictoryRoad3EndBattleText3
-	db $50
+	db "@"
 ; 0x44aa5 + 5 bytes
 
 VictoryRoad3AfterBattleText3: ; 44aaa (11:4aaa)
 	TX_FAR _VictoryRoad3AfterBattleText3
-	db $50
+	db "@"
 ; 0x44aaa + 5 bytes
 
 VictoryRoad3BattleText4: ; 44aaf (11:4aaf)
 	TX_FAR _VictoryRoad3BattleText4
-	db $50
+	db "@"
 ; 0x44aaf + 5 bytes
 
 VictoryRoad3EndBattleText4: ; 44ab4 (11:4ab4)
 	TX_FAR _VictoryRoad3EndBattleText4
-	db $50
+	db "@"
 ; 0x44ab4 + 5 bytes
 
 VictoryRoad3AfterBattleText4: ; 44ab9 (11:4ab9)
 	TX_FAR _VictoryRoad3AfterBattleText4
-	db $50
+	db "@"
 ; 0x44ab9 + 5 bytes
 
 VictoryRoad3BattleText5: ; 44abe (11:4abe)
 	TX_FAR _VictoryRoad3BattleText5
-	db $50
+	db "@"
 ; 0x44abe + 5 bytes
 
 VictoryRoad3EndBattleText5: ; 44ac3 (11:4ac3)
 	TX_FAR _VictoryRoad3EndBattleText5
-	db $50
+	db "@"
 ; 0x44ac3 + 5 bytes
 
 VictoryRoad3AfterBattleText5: ; 44ac8 (11:4ac8)
 	TX_FAR _VictoryRoad3AfterBattleText5
-	db $50
+	db "@"
 ; 0x44ac8 + 5 bytes
 
 VictoryRoad3Object: ; 0x44acd (size=106)
@@ -70716,72 +70715,72 @@ UnnamedText_44c9f: ; 44c9f (11:4c9f)
 
 RocketHideout1BattleText2: ; 44ca1 (11:4ca1)
 	TX_FAR _RocketHideout1BattleText2
-	db $50
+	db "@"
 ; 0x44ca1 + 5 bytes
 
 RocketHideout1EndBattleText2: ; 44ca6 (11:4ca6)
 	TX_FAR _RocketHideout1EndBattleText2
-	db $50
+	db "@"
 ; 0x44ca6 + 5 bytes
 
 RocketHideout1AfterBattleTxt2: ; 44cab (11:4cab)
 	TX_FAR _RocketHideout1AfterBattleTxt2
-	db $50
+	db "@"
 ; 0x44cab + 5 bytes
 
 RocketHideout1BattleText3: ; 44cb0 (11:4cb0)
 	TX_FAR _RocketHideout1BattleText3
-	db $50
+	db "@"
 ; 0x44cb0 + 5 bytes
 
 RocketHideout1EndBattleText3: ; 44cb5 (11:4cb5)
 	TX_FAR _RocketHideout1EndBattleText3
-	db $50
+	db "@"
 ; 0x44cb5 + 5 bytes
 
 RocketHideout1AfterBattleTxt3: ; 44cba (11:4cba)
 	TX_FAR _RocketHideout1AfterBattleTxt3
-	db $50
+	db "@"
 ; 0x44cba + 5 bytes
 
 RocketHideout1BattleText4: ; 44cbf (11:4cbf)
 	TX_FAR _RocketHideout1BattleText4
-	db $50
+	db "@"
 ; 0x44cbf + 5 bytes
 
 RocketHideout1EndBattleText4: ; 44cc4 (11:4cc4)
 	TX_FAR _RocketHideout1EndBattleText4
-	db $50
+	db "@"
 ; 0x44cc4 + 5 bytes
 
 RocketHideout1AfterBattleTxt4: ; 44cc9 (11:4cc9)
 	TX_FAR _RocketHideout1AfterBattleTxt4
-	db $50
+	db "@"
 ; 0x44cc9 + 5 bytes
 
 RocketHideout1BattleText5: ; 44cce (11:4cce)
 	TX_FAR _RocketHideout1BattleText5
-	db $50
+	db "@"
 ; 0x44cce + 5 bytes
 
 RocketHideout1EndBattleText5: ; 44cd3 (11:4cd3)
 	TX_FAR _RocketHideout1EndBattleText5
-	db $50
+	db "@"
 ; 0x44cd3 + 5 bytes
 
 RocketHideout1AfterBattleTxt5: ; 44cd8 (11:4cd8)
 	TX_FAR _RocketHideout1AfterBattleTxt5
-	db $50
+	db "@"
 ; 0x44cd8 + 5 bytes
 
 RocketHideout1BattleText6: ; 44cdd (11:4cdd)
 	TX_FAR _RocketHideout1BattleText6
-	db $50
+	db "@"
 ; 0x44cdd + 5 bytes
 
 RocketHideout1AfterBattleTxt6: ; 44ce2 (11:4ce2)
 	TX_FAR _RocketHideout1AfterBattleTxt6
-	db $50
+	db "@"
 ; 0x44ce2 + 5 bytes
 
 RocketHideout1Object: ; 0x44ce7 (size=98)
@@ -71003,17 +71002,17 @@ RocketHideout2Text1: ; 450de (11:50de)
 
 RocketHideout2BattleText2: ; 450e8 (11:50e8)
 	TX_FAR _RocketHideout2BattleText2
-	db $50
+	db "@"
 ; 0x450e8 + 5 bytes
 
 RocketHideout2EndBattleText2: ; 450ed (11:50ed)
 	TX_FAR _RocketHideout2EndBattleText2
-	db $50
+	db "@"
 ; 0x450ed + 5 bytes
 
 RocketHideout2AfterBattleTxt2: ; 450f2 (11:50f2)
 	TX_FAR _RocketHideout2AfterBattleTxt2
-	db $50
+	db "@"
 ; 0x450f2 + 5 bytes
 
 RocketHideout2Object: ; 0x450f7 (size=80)
@@ -71100,17 +71099,17 @@ RocketHideout3Text1: ; 4531b (11:531b)
 
 RocketHideout3BattleText2: ; 45325 (11:5325)
 	TX_FAR _RocketHideout3BattleText2
-	db $50
+	db "@"
 ; 0x45325 + 5 bytes
 
 RocketHideout3EndBattleText2: ; 4532a (11:532a)
 	TX_FAR _RocketHideout3EndBattleText2
-	db $50
+	db "@"
 ; 0x4532a + 5 bytes
 
 RocketHideout3AfterBattleTxt2: ; 4532f (11:532f)
 	TX_FAR _RocketHideout3AfterBattleTxt2
-	db $50
+	db "@"
 ; 0x4532f + 5 bytes
 
 RocketHideout3Text2: ; 45334 (11:5334)
@@ -71121,12 +71120,12 @@ RocketHideout3Text2: ; 45334 (11:5334)
 
 RocketHideout3BattleTxt: ; 4533e (11:533e)
 	TX_FAR _RocketHideout3BattleTxt
-	db $50
+	db "@"
 ; 0x4533e + 5 bytes
 
 RocketHideout3EndBattleText3: ; 45343 (11:5343)
 	TX_FAR _RocketHideout3EndBattleText3
-	db $50
+	db "@"
 ; 0x45343 + 5 bytes
 
 RocketHideout3AfterBattleText3: ; 45348 (11:5348)
@@ -71134,7 +71133,7 @@ RocketHideout3AfterBattleText3: ; 45348 (11:5348)
 	db $17
 	dw _RocketHideout3AfterBattleText3
 	db BANK(_RocketHideout3AfterBattleText3)
-	db $50
+	db "@"
 ; 0x45348 + 5 bytes
 
 RocketHideout3Object: ; 0x4534d (size=50)
@@ -71251,17 +71250,17 @@ RocketHideout4Text1: ; 4553a (11:553a)
 
 UnnamedText_4557a: ; 4557a (11:557a)
 	TX_FAR _UnnamedText_4557a
-	db $50
+	db "@"
 ; 0x4557a + 5 bytes
 
 UnnamedText_4557f: ; 4557f (11:557f)
 	TX_FAR _UnnamedText_4557f
-	db $50
+	db "@"
 ; 0x4557f + 5 bytes
 
 RocketHideout4Text10: ; 45584 (11:5584)
 	TX_FAR _UnnamedText_45584
-	db $50
+	db "@"
 ; 0x45584 + 5 bytes
 
 RocketHideout4Text2: ; 45589 (11:5589)
@@ -71272,12 +71271,12 @@ RocketHideout4Text2: ; 45589 (11:5589)
 
 RocketHideout4BattleText2: ; 45593 (11:5593)
 	TX_FAR _RocketHideout4BattleText2
-	db $50
+	db "@"
 ; 0x45593 + 5 bytes
 
 RocketHideout4EndBattleText2: ; 45598 (11:5598)
 	TX_FAR _RocketHideout4EndBattleText2
-	db $50
+	db "@"
 ; 0x45598 + 5 bytes
 
 RocketHideout4AfterBattleText2: ; 4559d (11:559d)
@@ -71285,7 +71284,7 @@ RocketHideout4AfterBattleText2: ; 4559d (11:559d)
 	db $17
 	dw _RocketHideout4AfterBattleText2
 	db BANK(_RocketHideout4AfterBattleText2)
-	db $50
+	db "@"
 ; 0x4559d + 5 bytes
 
 RocketHideout4Text3: ; 455a2 (11:55a2)
@@ -71296,12 +71295,12 @@ RocketHideout4Text3: ; 455a2 (11:55a2)
 
 RocketHideout4BattleText3: ; 455ac (11:55ac)
 	TX_FAR _RocketHideout4BattleText3
-	db $50
+	db "@"
 ; 0x455ac + 5 bytes
 
 RocketHideout4EndBattleText3: ; 455b1 (11:55b1)
 	TX_FAR _RocketHideout4EndBattleText3
-	db $50
+	db "@"
 ; 0x455b1 + 5 bytes
 
 RocketHideout4AfterBattleText3: ; 455b6 (11:55b6)
@@ -71309,7 +71308,7 @@ RocketHideout4AfterBattleText3: ; 455b6 (11:55b6)
 	db $17
 	dw _RocketHideout4AfterBattleText3
 	db BANK(_RocketHideout4AfterBattleText3)
-	db $50
+	db "@"
 ; 0x455b6 + 5 bytes
 
 RocketHideout4Text4: ; 455bb (11:55bb)
@@ -71320,12 +71319,12 @@ RocketHideout4Text4: ; 455bb (11:55bb)
 
 RocketHideout4BattleText4: ; 455c5 (11:55c5)
 	TX_FAR _RocketHideout4BattleText4
-	db $50
+	db "@"
 ; 0x455c5 + 5 bytes
 
 RocketHideout4EndBattleText4: ; 455ca (11:55ca)
 	TX_FAR _RocketHideout4EndBattleText4
-	db $50
+	db "@"
 ; 0x455ca + 5 bytes
 
 RocketHideout4AfterBattleText4: ; 455cf (11:55cf)
@@ -71346,7 +71345,7 @@ RocketHideout4AfterBattleText4: ; 455cf (11:55cf)
 
 UnnamedText_455ec: ; 455ec (11:55ec)
 	TX_FAR _UnnamedText_455ec
-	db $50
+	db "@"
 ; 0x455ec + 5 bytes
 
 RocketHideout4Object: ; 0x455f1 (size=95)
@@ -71451,7 +71450,7 @@ RocketHideoutElevatorText1: ; 4576d (11:576d)
 
 UnnamedText_4578b: ; 4578b (11:578b)
 	TX_FAR _UnnamedText_4578b ; 0x82438
-	db $d, $50
+	db $d, "@"
 
 RocketHideoutElevatorObject: ; 0x45791 (size=23)
 	db $f ; border tile
@@ -71586,15 +71585,15 @@ SafariZoneEastTexts: ; 4586e (11:586e)
 
 SafariZoneEastText5: ; 4587c (11:587c)
 	TX_FAR _SafariZoneEastText5
-	db $50
+	db "@"
 
 SafariZoneEastText6: ; 45881 (11:5881)
 	TX_FAR _SafariZoneEastText6
-	db $50
+	db "@"
 
 SafariZoneEastText7: ; 45886 (11:5886)
 	TX_FAR _SafariZoneEastText7
-	db $50
+	db "@"
 
 SafariZoneEastObject: ; 0x4588b (size=81)
 	db $0 ; border tile
@@ -71644,23 +71643,23 @@ SafariZoneNorthTexts: ; 459ae (11:59ae)
 
 SafariZoneNorthText3: ; 459bc (11:59bc)
 	TX_FAR _SafariZoneNorthText3
-	db $50
+	db "@"
 
 SafariZoneNorthText4: ; 459c1 (11:59c1)
 	TX_FAR _SafariZoneNorthText4
-	db $50
+	db "@"
 
 SafariZoneNorthText5: ; 459c6 (11:59c6)
 	TX_FAR _SafariZoneNorthText5
-	db $50
+	db "@"
 
 SafariZoneNorthText6: ; 459cb (11:59cb)
 	TX_FAR _SafariZoneNorthText6
-	db $50
+	db "@"
 
 SafariZoneNorthText7: ; 459d0 (11:59d0)
 	TX_FAR _SafariZoneNorthText7
-	db $50
+	db "@"
 
 SafariZoneNorthObject: ; 0x459d5 (size=105)
 	db $0 ; border tile
@@ -71718,11 +71717,11 @@ SafariZoneCenterTexts: ; 45bb5 (11:5bb5)
 
 SafariZoneCenterText2: ; 45bbb (11:5bbb)
 	TX_FAR _SafariZoneCenterText2
-	db $50
+	db "@"
 
 SafariZoneCenterText3: ; 45bc0 (11:5bc0)
 	TX_FAR _SafariZoneCenterText3
-	db $50
+	db "@"
 
 SafariZoneCenterObject: ; 0x45bc5 (size=89)
 	db $0 ; border tile
@@ -71776,11 +71775,11 @@ SafariZoneRestHouse1Texts: ; 45cf0 (11:5cf0)
 
 SafariZoneRestHouse1Text1: ; 45cf4 (11:5cf4)
 	TX_FAR _SafariZoneRestHouse1Text1
-	db $50
+	db "@"
 
 SafariZoneRestHouse1Text2: ; 45cf9 (11:5cf9)
 	TX_FAR _SafariZoneRestHouse1Text2
-	db $50
+	db "@"
 
 SafariZoneRestHouse1Object: ; 0x45cfe (size=32)
 	db $a ; border tile
@@ -71817,15 +71816,15 @@ SafariZoneRestHouse2Texts: ; 45d2e (11:5d2e)
 
 SafariZoneRestHouse2Text1: ; 45d34 (11:5d34)
 	TX_FAR _SafariZoneRestHouse2Text1
-	db $50
+	db "@"
 
 SafariZoneRestHouse2Text2: ; 45d39 (11:5d39)
 	TX_FAR _SafariZoneRestHouse2Text2
-	db $50
+	db "@"
 
 SafariZoneRestHouse2Text3: ; 45d3e (11:5d3e)
 	TX_FAR _SafariZoneRestHouse2Text3
-	db $50
+	db "@"
 
 SafariZoneRestHouse2Object: ; 0x45d43 (size=38)
 	db $a ; border tile
@@ -71863,15 +71862,15 @@ SafariZoneRestHouse3Texts: ; 45d79 (11:5d79)
 
 SafariZoneRestHouse3Text1: ; 45d7f (11:5d7f)
 	TX_FAR _SafariZoneRestHouse3Text1
-	db $50
+	db "@"
 
 SafariZoneRestHouse3Text2: ; 45d84 (11:5d84)
 	TX_FAR _SafariZoneRestHouse3Text2
-	db $50
+	db "@"
 
 SafariZoneRestHouse3Text3: ; 45d89 (11:5d89)
 	TX_FAR _SafariZoneRestHouse3Text3
-	db $50
+	db "@"
 
 SafariZoneRestHouse3Object: ; 0x45d8e (size=38)
 	db $a ; border tile
@@ -71909,15 +71908,15 @@ SafariZoneRestHouse4Texts: ; 45dc4 (11:5dc4)
 
 SafariZoneRestHouse4Text1: ; 45dca (11:5dca)
 	TX_FAR _SafariZoneRestHouse4Text1
-	db $50
+	db "@"
 
 SafariZoneRestHouse4Text2: ; 45dcf (11:5dcf)
 	TX_FAR _SafariZoneRestHouse4Text2
-	db $50
+	db "@"
 
 SafariZoneRestHouse4Text3: ; 45dd4 (11:5dd4)
 	TX_FAR _SafariZoneRestHouse4Text3
-	db $50
+	db "@"
 
 SafariZoneRestHouse4Object: ; 0x45dd9 (size=38)
 	db $a ; border tile
@@ -72209,122 +72208,122 @@ RockTunnel2Text8: ; 460bb (11:60bb)
 
 RockTunnel2BattleText2: ; 460c5 (11:60c5)
 	TX_FAR _RockTunnel2BattleText2
-	db $50
+	db "@"
 ; 0x460c5 + 5 bytes
 
 RockTunnel2EndBattleText2: ; 460ca (11:60ca)
 	TX_FAR _RockTunnel2EndBattleText2
-	db $50
+	db "@"
 ; 0x460ca + 5 bytes
 
 RockTunnel2AfterBattleText2: ; 460cf (11:60cf)
 	TX_FAR _RockTunnel2AfterBattleText2
-	db $50
+	db "@"
 ; 0x460cf + 5 bytes
 
 RockTunnel2BattleText3: ; 460d4 (11:60d4)
 	TX_FAR _RockTunnel2BattleText3
-	db $50
+	db "@"
 ; 0x460d4 + 5 bytes
 
 RockTunnel2EndBattleText3: ; 460d9 (11:60d9)
 	TX_FAR _RockTunnel2EndBattleText3
-	db $50
+	db "@"
 ; 0x460d9 + 5 bytes
 
 RockTunnel2AfterBattleText3: ; 460de (11:60de)
 	TX_FAR _RockTunnel2AfterBattleText3
-	db $50
+	db "@"
 ; 0x460de + 5 bytes
 
 RockTunnel2BattleText4: ; 460e3 (11:60e3)
 	TX_FAR _RockTunnel2BattleText4
-	db $50
+	db "@"
 ; 0x460e3 + 5 bytes
 
 RockTunnel2EndBattleText4: ; 460e8 (11:60e8)
 	TX_FAR _RockTunnel2EndBattleText4
-	db $50
+	db "@"
 ; 0x460e8 + 5 bytes
 
 RockTunnel2AfterBattleText4: ; 460ed (11:60ed)
 	TX_FAR _RockTunnel2AfterBattleText4
-	db $50
+	db "@"
 ; 0x460ed + 5 bytes
 
 RockTunnel2BattleText5: ; 460f2 (11:60f2)
 	TX_FAR _RockTunnel2BattleText5
-	db $50
+	db "@"
 ; 0x460f2 + 5 bytes
 
 RockTunnel2EndBattleText5: ; 460f7 (11:60f7)
 	TX_FAR _RockTunnel2EndBattleText5
-	db $50
+	db "@"
 ; 0x460f7 + 5 bytes
 
 RockTunnel2AfterBattleText5: ; 460fc (11:60fc)
 	TX_FAR _RockTunnel2AfterBattleText5
-	db $50
+	db "@"
 ; 0x460fc + 5 bytes
 
 RockTunnel2BattleText6: ; 46101 (11:6101)
 	TX_FAR _RockTunnel2BattleText6
-	db $50
+	db "@"
 ; 0x46101 + 5 bytes
 
 RockTunnel2EndBattleText6: ; 46106 (11:6106)
 	TX_FAR _RockTunnel2EndBattleText6
-	db $50
+	db "@"
 ; 0x46106 + 5 bytes
 
 RockTunnel2AfterBattleText6: ; 4610b (11:610b)
 	TX_FAR _RockTunnel2AfterBattleText6
-	db $50
+	db "@"
 ; 0x4610b + 5 bytes
 
 RockTunnel2BattleText7: ; 46110 (11:6110)
 	TX_FAR _RockTunnel2BattleText7
-	db $50
+	db "@"
 ; 0x46110 + 5 bytes
 
 RockTunnel2EndBattleText7: ; 46115 (11:6115)
 	TX_FAR _RockTunnel2EndBattleText7
-	db $50
+	db "@"
 ; 0x46115 + 5 bytes
 
 RockTunnel2AfterBattleText7: ; 4611a (11:611a)
 	TX_FAR _RockTunnel2AfterBattleText7
-	db $50
+	db "@"
 ; 0x4611a + 5 bytes
 
 RockTunnel2BattleText8: ; 4611f (11:611f)
 	TX_FAR _RockTunnel2BattleText8
-	db $50
+	db "@"
 ; 0x4611f + 5 bytes
 
 RockTunnel2EndBattleText8: ; 46124 (11:6124)
 	TX_FAR _RockTunnel2EndBattleText8
-	db $50
+	db "@"
 ; 0x46124 + 5 bytes
 
 RockTunnel2AfterBattleText8: ; 46129 (11:6129)
 	TX_FAR _RockTunnel2AfterBattleText8
-	db $50
+	db "@"
 ; 0x46129 + 5 bytes
 
 RockTunnel2BattleText9: ; 4612e (11:612e)
 	TX_FAR _RockTunnel2BattleText9
-	db $50
+	db "@"
 ; 0x4612e + 5 bytes
 
 RockTunnel2EndBattleText9: ; 46133 (11:6133)
 	TX_FAR _RockTunnel2EndBattleText9
-	db $50
+	db "@"
 ; 0x46133 + 5 bytes
 
 RockTunnel2AfterBattleText9: ; 46138 (11:6138)
 	TX_FAR _RockTunnel2AfterBattleText9
-	db $50
+	db "@"
 ; 0x46138 + 5 bytes
 
 RockTunnel2Object: ; 0x4613d (size=100)
@@ -72786,11 +72785,11 @@ SeafoamIslands5BattleText2: ; 468a2 (11:68a2)
 
 SeafoamIslands5Text4: ; 468b2 (11:68b2)
 	TX_FAR _SeafoamIslands5Text4
-	db $50
+	db "@"
 
 SeafoamIslands5Text5: ; 468b7 (11:68b7)
 	TX_FAR _SeafoamIslands5Text5
-	db $50
+	db "@"
 
 SeafoamIslands5Object: ; 0x468bc (size=62)
 	db $7d ; border tile
@@ -73880,7 +73879,7 @@ db $57, $41
 
 Route7Text1: ; 48157 (12:4157)
 	TX_FAR _Route7Text1
-	db $50
+	db "@"
 
 RedsHouse1F_h: ; 4815c (12:415c)
 	db $01 ; tileset
@@ -74026,72 +74025,72 @@ CeladonMart3Text1: ; 4824a (12:424a)
 
 TM18PreReceiveText: ; 48278 (12:4278)
 	TX_FAR _TM18PreReceiveText
-	db $50
+	db "@"
 ; 0x48278 + 5 bytes
 
 ReceivedTM18Text: ; 4827d (12:427d)
 	TX_FAR _ReceivedTM18Text ; 0x9c85a
-	db $0B, $50
+	db $0B, "@"
 ; 0x48283
 
 TM18ExplanationText: ; 48283 (12:4283)
 	TX_FAR _TM18ExplanationText
-	db $50
+	db "@"
 ; 0x48283 + 5 bytes
 
 TM18NoRoomText: ; 48288 (12:4288)
 	TX_FAR _TM18NoRoomText
-	db $50
+	db "@"
 ; 0x48288 + 5 bytes
 
 CeladonMart3Text2: ; 4828d (12:428d)
 	TX_FAR _CeladonMart3Text2
-	db $50
+	db "@"
 
 CeladonMart3Text3: ; 48292 (12:4292)
 	TX_FAR _CeladonMart3Text3
-	db $50
+	db "@"
 
 CeladonMart3Text4: ; 48297 (12:4297)
 	TX_FAR _CeladonMart3Text4
-	db $50
+	db "@"
 
 CeladonMart3Text5: ; 4829c (12:429c)
 	TX_FAR _CeladonMart3Text5
-	db $50
+	db "@"
 
 CeladonMart3Text12
 CeladonMart3Text10: ; 482a1 (12:42a1)
 CeladonMart3Text8: ; 482a1 (12:42a1)
 CeladonMart3Text6: ; 482a1 (12:42a1)
 	TX_FAR _CeladonMart3Text6
-	db $50
+	db "@"
 
 CeladonMart3Text7: ; 482a6 (12:42a6)
 	TX_FAR _CeladonMart3Text7
-	db $50
+	db "@"
 
 CeladonMart3Text9: ; 482ab (12:42ab)
 	TX_FAR _CeladonMart3Text9
-	db $50
+	db "@"
 
 CeladonMart3Text11: ; 482b0 (12:42b0)
 	TX_FAR _CeladonMart3Text11
-	db $50
+	db "@"
 
 CeladonMart3Text13: ; 482b5 (12:42b5)
 	TX_FAR _CeladonMart3Text13
-	db $50
+	db "@"
 
 CeladonMart3Text14: ; 482ba (12:42ba)
 	TX_FAR _CeladonMart3Text14
-	db $50
+	db "@"
 
 CeladonMart3Text17: ; 482bf (12:42bf)
 CeladonMart3Text16: ; 482bf (12:42bf)
 CeladonMart3Text15: ; 482bf (12:42bf)
 	TX_FAR _CeladonMart3Text15
-	db $50
+	db "@"
 
 CeladonMart3Object: ; 0x482c4 (size=94)
 	db $f ; border tile
@@ -74147,15 +74146,15 @@ CeladonMart4Texts: ; 48359 (12:4359)
 
 CeladonMart4Text2: ; 48361 (12:4361)
 	TX_FAR _CeladonMart4Text2
-	db $50
+	db "@"
 
 CeladonMart4Text3: ; 48366 (12:4366)
 	TX_FAR _CeladonMart4Text3
-	db $50
+	db "@"
 
 CeladonMart4Text4: ; 4836b (12:436b)
 	TX_FAR _CeladonMart4Text4
-	db $50
+	db "@"
 
 CeladonMart4Object: ; 0x48370 (size=49)
 	db $f ; border tile
@@ -74335,7 +74334,7 @@ RemoveItemByIDBank12: ; 484e6 (12:44e6)
 
 UnnamedText_484ee: ; 484ee (12:44ee)
 	TX_FAR _UnnamedText_484ee
-	db $50
+	db "@"
 ; 0x484ee + 5 bytes
 
 Unknown_484f3: ; 484f3 (12:44f3)
@@ -74391,7 +74390,7 @@ CeladonMartRoofTexts: ; 4855b (12:455b)
 
 CeladonMartRoofText1: ; 48567 (12:4567)
 	TX_FAR _CeladonMartRoofText1
-	db $50
+	db "@"
 
 CeladonMartRoofText2: ; 4856c (12:456c)
 	db $08 ; asm
@@ -74417,13 +74416,13 @@ CeladonMartRoofText2: ; 4856c (12:456c)
 
 CeladonMartRoofText3: ; 48598 (12:4598)
 	TX_FAR _UnnamedText_48598
-	db $50
+	db "@"
 ; 0x48598 + 5 bytes
 
 CeladonMartRoofText4: ; 4859d (12:459d)
 UnnamedText_4859d: ; 4859d (12:459d)
 	TX_FAR _UnnamedText_4859d
-	db $50
+	db "@"
 ; 0x4859d + 5 bytes
 
 CeladonMartRoofText5: ; 485a2 (12:45a2)
@@ -74431,7 +74430,7 @@ CeladonMartRoofText5: ; 485a2 (12:45a2)
 
 CeladonMartRoofText6: ; 485a3 (12:45a3)
 	TX_FAR _CeladonMartRoofText6
-	db $50
+	db "@"
 
 CeladonMartRoofObject: ; 0x485a8 (size=36)
 	db $42 ; border tile
@@ -74563,7 +74562,7 @@ CeladonMansion1Text1: ; 486a7 (12:46a7)
 
 CeladonMansion1Text2: ; 486b1 (12:46b1)
 	TX_FAR _CeladonMansion1Text2
-	db $50
+	db "@"
 
 CeladonMansion1Text3: ; 486b6 (12:46b6)
 	TX_FAR _CeladonMansion1Text3
@@ -74581,7 +74580,7 @@ CeladonMansion1Text4: ; 486c0 (12:46c0)
 
 CeladonMansion1Text5: ; 486ca (12:46ca)
 	TX_FAR _CeladonMansion1Text5
-	db $50
+	db "@"
 
 CeladonMansion1Object: ; 0x486cf (size=71)
 	db $f ; border tile
@@ -74630,7 +74629,7 @@ CeladonMansion2Texts: ; 4873e (12:473e)
 
 CeladonMansion2Text1: ; 48740 (12:4740)
 	TX_FAR _CeladonMansion2Text1
-	db $50
+	db "@"
 
 CeladonMansion2Object: ; 0x48745 (size=39)
 	db $f ; border tile
@@ -74679,15 +74678,15 @@ CeladonMansion3Texts: ; 48793 (12:4793)
 
 ProgrammerText: ; 487a3 (12:47a3)
 	TX_FAR _ProgrammerText
-	db $50
+	db "@"
 
 GraphicArtistText: ; 487a8 (12:47a8)
 	TX_FAR _GraphicArtistText
-	db $50
+	db "@"
 
 WriterText: ; 487ad (12:47ad)
 	TX_FAR _WriterText
-	db $50
+	db "@"
 
 DirectorText: ; 487b2 (12:47b2)
 	db $08 ; asm
@@ -74726,19 +74725,19 @@ DirectorText: ; 487b2 (12:47b2)
 
 GameFreakPCText1: ; 487eb (12:47eb)
 	TX_FAR _CeladonMansion3Text5
-	db $50
+	db "@"
 
 GameFreakPCText2: ; 487f0 (12:47f0)
 	TX_FAR _CeladonMansion3Text6
-	db $50
+	db "@"
 
 GameFreakPCText3: ; 487f5 (12:47f5)
 	TX_FAR _CeladonMansion3Text7
-	db $50
+	db "@"
 
 GameFreakSignText: ; 487fa (12:47fa)
 	TX_FAR _CeladonMansion3Text8
-	db $50
+	db "@"
 
 CeladonMansion3Object: ; 0x487ff (size=72)
 	db $f ; border tile
@@ -74787,7 +74786,7 @@ CeladonMansion4Texts: ; 4886e (12:486e)
 
 CeladonMansion4Text1: ; 48870 (12:4870)
 	TX_FAR _CeladonMansion4Text1
-	db $50
+	db "@"
 
 CeladonMansion4Object: ; 0x48875 (size=31)
 	db $9 ; border tile
@@ -74834,11 +74833,11 @@ CeladonPokecenterText1: ; 488c7 (12:48c7)
 
 CeladonPokecenterText2: ; 488c8 (12:48c8)
 	TX_FAR _CeladonPokecenterText2
-	db $50
+	db "@"
 
 CeladonPokecenterText3: ; 488cd (12:48cd)
 	TX_FAR _CeladonPokecenterText3
-	db $50
+	db "@"
 
 CeladonPokecenterObject: ; 0x488d2 (size=44)
 	db $0 ; border tile
@@ -75053,35 +75052,35 @@ CeladonGymText1: ; 48a11 (12:4a11)
 
 UnnamedText_48a5e: ; 48a5e (12:4a5e)
 	TX_FAR _UnnamedText_48a5e
-	db $50
+	db "@"
 ; 0x48a5e + 5 bytes
 
 UnnamedText_48a63: ; 48a63 (12:4a63)
 	TX_FAR _UnnamedText_48a63
-	db $50
+	db "@"
 ; 0x48a63 + 5 bytes
 
 UnnamedText_48a68: ; 48a68 (12:4a68)
 	TX_FAR _UnnamedText_48a68
-	db $50
+	db "@"
 ; 0x48a68 + 5 bytes
 
 CeladonGymText9: ; 48a6d (12:4a6d)
 UnnamedText_48a6d: ; 48a6d (12:4a6d)
 	TX_FAR _UnnamedText_48a6d
-	db $50
+	db "@"
 ; 0x48a6d + 5 bytes
 
 TM21Text: ; 48a72 (12:4a72)
 	TX_FAR _ReceivedTM21Text ; 0x9d50c
 	db $0B
 	TX_FAR _TM21ExplanationText ; 0x9d520
-	db $50
+	db "@"
 ; 0x48a7c
 
 TM21NoRoomText: ; 48a7c (12:4a7c)
 	TX_FAR _TM21NoRoomText
-	db $50
+	db "@"
 ; 0x48a7c + 5 bytes
 
 CeladonGymText2: ; 48a81 (12:4a81)
@@ -75092,17 +75091,17 @@ CeladonGymText2: ; 48a81 (12:4a81)
 
 CeladonGymBattleText2: ; 48a8b (12:4a8b)
 	TX_FAR _CeladonGymBattleText2
-	db $50
+	db "@"
 ; 0x48a8b + 5 bytes
 
 CeladonGymEndBattleText2: ; 48a90 (12:4a90)
 	TX_FAR _CeladonGymEndBattleText2
-	db $50
+	db "@"
 ; 0x48a90 + 5 bytes
 
 CeladonGymAfterBattleText2: ; 48a95 (12:4a95)
 	TX_FAR _CeladonGymAfterBattleText2
-	db $50
+	db "@"
 ; 0x48a95 + 5 bytes
 
 CeladonGymText3: ; 48a9a (12:4a9a)
@@ -75113,17 +75112,17 @@ CeladonGymText3: ; 48a9a (12:4a9a)
 
 CeladonGymBattleText3: ; 48aa4 (12:4aa4)
 	TX_FAR _CeladonGymBattleText3
-	db $50
+	db "@"
 ; 0x48aa4 + 5 bytes
 
 CeladonGymEndBattleText3: ; 48aa9 (12:4aa9)
 	TX_FAR _CeladonGymEndBattleText3
-	db $50
+	db "@"
 ; 0x48aa9 + 5 bytes
 
 CeladonGymAfterBattleText3: ; 48aae (12:4aae)
 	TX_FAR _CeladonGymAfterBattleText3
-	db $50
+	db "@"
 ; 0x48aae + 5 bytes
 
 CeladonGymText4: ; 48ab3 (12:4ab3)
@@ -75134,17 +75133,17 @@ CeladonGymText4: ; 48ab3 (12:4ab3)
 
 CeladonGymBattleText4: ; 48abd (12:4abd)
 	TX_FAR _CeladonGymBattleText4
-	db $50
+	db "@"
 ; 0x48abd + 5 bytes
 
 CeladonGymEndBattleText4: ; 48ac2 (12:4ac2)
 	TX_FAR _CeladonGymEndBattleText4
-	db $50
+	db "@"
 ; 0x48ac2 + 5 bytes
 
 CeladonGymAfterBattleText4: ; 48ac7 (12:4ac7)
 	TX_FAR _CeladonGymAfterBattleText4
-	db $50
+	db "@"
 ; 0x48ac7 + 5 bytes
 
 CeladonGymText5: ; 48acc (12:4acc)
@@ -75155,17 +75154,17 @@ CeladonGymText5: ; 48acc (12:4acc)
 
 CeladonGymBattleText5: ; 48ad6 (12:4ad6)
 	TX_FAR _CeladonGymBattleText5
-	db $50
+	db "@"
 ; 0x48ad6 + 5 bytes
 
 CeladonGymEndBattleText5: ; 48adb (12:4adb)
 	TX_FAR _CeladonGymEndBattleText5
-	db $50
+	db "@"
 ; 0x48adb + 5 bytes
 
 CeladonGymAfterBattleText5: ; 48ae0 (12:4ae0)
 	TX_FAR _CeladonGymAfterBattleText5
-	db $50
+	db "@"
 ; 0x48ae0 + 5 bytes
 
 CeladonGymText6: ; 48ae5 (12:4ae5)
@@ -75176,17 +75175,17 @@ CeladonGymText6: ; 48ae5 (12:4ae5)
 
 CeladonGymBattleText6: ; 48aef (12:4aef)
 	TX_FAR _CeladonGymBattleText6
-	db $50
+	db "@"
 ; 0x48aef + 5 bytes
 
 CeladonGymEndBattleText6: ; 48af4 (12:4af4)
 	TX_FAR _CeladonGymEndBattleText6
-	db $50
+	db "@"
 ; 0x48af4 + 5 bytes
 
 CeladonGymAfterBattleText6: ; 48af9 (12:4af9)
 	TX_FAR _CeladonGymAfterBattleText6
-	db $50
+	db "@"
 ; 0x48af9 + 5 bytes
 
 CeladonGymText7: ; 48afe (12:4afe)
@@ -75197,17 +75196,17 @@ CeladonGymText7: ; 48afe (12:4afe)
 
 CeladonGymBattleText7: ; 48b08 (12:4b08)
 	TX_FAR _CeladonGymBattleText7
-	db $50
+	db "@"
 ; 0x48b08 + 5 bytes
 
 CeladonGymEndBattleText7: ; 48b0d (12:4b0d)
 	TX_FAR _CeladonGymEndBattleText7
-	db $50
+	db "@"
 ; 0x48b0d + 5 bytes
 
 CeladonGymAfterBattleText7: ; 48b12 (12:4b12)
 	TX_FAR _CeladonGymAfterBattleText7
-	db $50
+	db "@"
 ; 0x48b12 + 5 bytes
 
 CeladonGymText8: ; 48b17 (12:4b17)
@@ -75218,17 +75217,17 @@ CeladonGymText8: ; 48b17 (12:4b17)
 
 CeladonGymBattleText8: ; 48b21 (12:4b21)
 	TX_FAR _CeladonGymBattleText8
-	db $50
+	db "@"
 ; 0x48b21 + 5 bytes
 
 CeladonGymEndBattleText8: ; 48b26 (12:4b26)
 	TX_FAR _CeladonGymEndBattleText8
-	db $50
+	db "@"
 ; 0x48b26 + 5 bytes
 
 CeladonGymAfterBattleText8: ; 48b2b (12:4b2b)
 	TX_FAR _CeladonGymAfterBattleText8
-	db $50
+	db "@"
 ; 0x48b2b + 5 bytes
 
 CeladonGymObject: ; 0x48b30 (size=84)
@@ -75315,7 +75314,7 @@ CeladonGameCornerTexts: ; 48c8a (12:4c8a)
 
 CeladonGameCornerText1: ; 48ca4 (12:4ca4)
 	TX_FAR _CeladonGameCornerText1
-	db $50
+	db "@"
 
 CeladonGameCornerText2: ; 48ca9 (12:4ca9)
 	db $08 ; asm
@@ -75378,41 +75377,41 @@ CeladonGameCornerText2: ; 48ca9 (12:4ca9)
 
 UnnamedText_48d22: ; 48d22 (12:4d22)
 	TX_FAR _UnnamedText_48d22
-	db $50
+	db "@"
 ; 0x48d27
 
 UnnamedText_48d27: ; 48d27 (12:4d27)
 	TX_FAR _UnnamedText_48d27
-	db $50
+	db "@"
 ; 0x48d2c
 
 UnnamedText_48d2c: ; 48d2c (12:4d2c)
 	TX_FAR _UnnamedText_48d2c
-	db $50
+	db "@"
 ; 0x48d31
 
 UnnamedText_48d31: ; 48d31 (12:4d31)
 	TX_FAR _UnnamedText_48d31
-	db $50
+	db "@"
 ; 0x48d36
 
 UnnamedText_48d36: ; 48d36 (12:4d36)
 	TX_FAR _UnnamedText_48d36
-	db $50
+	db "@"
 ; 0x48d3b
 
 UnnamedText_48d3b: ; 48d3b (12:4d3b)
 	TX_FAR _UnnamedText_48d3b
-	db $50
+	db "@"
 ; 0x48d40
 
 CeladonGameCornerText3: ; 48d40 (12:4d40)
 	TX_FAR _CeladonGameCornerText3
-	db $50
+	db "@"
 
 CeladonGameCornerText4: ; 48d45 (12:4d45)
 	TX_FAR _CeladonGameCornerText4
-	db $50
+	db "@"
 
 CeladonGameCornerText5: ; 48d4a (12:4d4a)
 	db $08 ; asm
@@ -75456,26 +75455,26 @@ CeladonGameCornerText5: ; 48d4a (12:4d4a)
 
 UnnamedText_48d9c: ; 48d9c (12:4d9c)
 	TX_FAR _UnnamedText_48d9c
-	db $50
+	db "@"
 ; 0x48d9c + 5 bytes
 
 Received10CoinsText: ; 48da1 (12:4da1)
 	TX_FAR _Received10CoinsText ; 0x9daa9
-	db $0B, $50
+	db $0B, "@"
 
 UnnamedText_48da7: ; 48da7 (12:4da7)
 	TX_FAR _UnnamedText_48da7
-	db $50
+	db "@"
 ; 0x48da7 + 5 bytes
 
 UnnamedText_48dac: ; 48dac (12:4dac)
 	TX_FAR _UnnamedText_48dac
-	db $50
+	db "@"
 ; 0x48dac + 5 bytes
 
 CeladonGameCornerText6: ; 48db1 (12:4db1)
 	TX_FAR _CeladonGameCornerText6
-	db $50
+	db "@"
 
 CeladonGameCornerText7: ; 48db6 (12:4db6)
 	db $08 ; asm
@@ -75490,17 +75489,17 @@ CeladonGameCornerText7: ; 48db6 (12:4db6)
 
 UnnamedText_48dca: ; 48dca (12:4dca)
 	TX_FAR _UnnamedText_48dca
-	db $50
+	db "@"
 ; 0x48dca + 5 bytes
 
 UnnamedText_48dcf: ; 48dcf (12:4dcf)
 	TX_FAR _UnnamedText_48dcf
-	db $50
+	db "@"
 ; 0x48dcf + 5 bytes
 
 CeladonGameCornerText8: ; 48dd4 (12:4dd4)
 	TX_FAR _CeladonGameCornerText8
-	db $50
+	db "@"
 
 CeladonGameCornerText9: ; 48dd9 (12:4dd9)
 	db $08 ; asm
@@ -75542,22 +75541,22 @@ CeladonGameCornerText9: ; 48dd9 (12:4dd9)
 
 UnnamedText_48e26: ; 48e26 (12:4e26)
 	TX_FAR _UnnamedText_48e26
-	db $50
+	db "@"
 ; 0x48e26 + 5 bytes
 
 Received20CoinsText: ; 48e2b (12:4e2b)
 	TX_FAR _Received20CoinsText ; 0x9dc4f
-	db $0B, $50
+	db $0B, "@"
 ; 0x48e31
 
 UnnamedText_48e31: ; 48e31 (12:4e31)
 	TX_FAR _UnnamedText_48e31
-	db $50
+	db "@"
 ; 0x48e31 + 5 bytes
 
 UnnamedText_48e36: ; 48e36 (12:4e36)
 	TX_FAR _UnnamedText_48e36
-	db $50
+	db "@"
 ; 0x48e36 + 5 bytes
 
 CeladonGameCornerText10: ; 48e3b (12:4e3b)
@@ -75600,22 +75599,22 @@ CeladonGameCornerText10: ; 48e3b (12:4e3b)
 
 UnnamedText_48e88: ; 48e88 (12:4e88)
 	TX_FAR _UnnamedText_48e88
-	db $50
+	db "@"
 ; 0x48e88 + 5 bytes
 
 UnnamedText_48e8d: ; 48e8d (12:4e8d)
 	TX_FAR _UnnamedText_48e8d ; 0x9dceb
-	db $0B, $50
+	db $0B, "@"
 ; 0x48e93
 
 UnnamedText_48e93: ; 48e93 (12:4e93)
 	TX_FAR _UnnamedText_48e93
-	db $50
+	db "@"
 ; 0x48e93 + 5 bytes
 
 UnnamedText_48e98: ; 48e98 (12:4e98)
 	TX_FAR _UnnamedText_48e98
-	db $50
+	db "@"
 ; 0x48e98 + 5 bytes
 
 CeladonGameCornerText11: ; 48e9d (12:4e9d)
@@ -75642,17 +75641,17 @@ CeladonGameCornerText11: ; 48e9d (12:4e9d)
 
 UnnamedText_48ece: ; 48ece (12:4ece)
 	TX_FAR _UnnamedText_48ece
-	db $50
+	db "@"
 ; 0x48ece + 5 bytes
 
 UnnamedText_48ed3: ; 48ed3 (12:4ed3)
 	TX_FAR _UnnamedText_48ed3
-	db $50
+	db "@"
 ; 0x48ed3 + 5 bytes
 
 CeladonGameCornerText13: ; 48ed8 (12:4ed8)
 	TX_FAR _UnnamedText_48ed8
-	db $50
+	db "@"
 ; 0x48ed8 + 5 bytes
 
 CeladonGameCornerText12: ; 48edd (12:4edd)
@@ -75685,7 +75684,7 @@ UnnamedText_48f09: ; 48f09 (12:4f09)
 
 UnnamedText_48f19: ; 48f19 (12:4f19)
 	TX_FAR _UnnamedText_48f19
-	db $50
+	db "@"
 ; 0x48f19 + 5 bytes
 
 Func_48f1e: ; 48f1e (12:4f1e)
@@ -75802,15 +75801,15 @@ CeladonMart5Texts: ; 4906c (12:506c)
 
 CeladonMart5Text1: ; 49076 (12:5076)
 	TX_FAR _CeladonMart5Text1
-	db $50
+	db "@"
 
 CeladonMart5Text2: ; 4907b (12:507b)
 	TX_FAR _CeladonMart5Text2
-	db $50
+	db "@"
 
 CeladonMart5Text5: ; 49080 (12:5080)
 	TX_FAR _CeladonMart5Text5
-	db $50
+	db "@"
 
 CeladonMart5Object: ; 0x49085 (size=55)
 	db $f ; border tile
@@ -75854,11 +75853,11 @@ CeladonPrizeRoomTexts: ; 490f3 (12:50f3)
 
 CeladonPrizeRoomText1: ; 490fd (12:50fd)
 	TX_FAR _CeladonPrizeRoomText1
-	db $50
+	db "@"
 
 CeladonPrizeRoomText2: ; 49102 (12:5102)
 	TX_FAR _CeladonPrizeRoomText2
-	db $50
+	db "@"
 
 CeladonPrizeRoomText3: ; 49107 (12:5107)
 	db $f7
@@ -75904,19 +75903,19 @@ CeladonDinerTexts: ; 49155 (12:5155)
 
 CeladonDinerText1: ; 4915f (12:515f)
 	TX_FAR _CeladonDinerText1
-	db $50
+	db "@"
 
 CeladonDinerText2: ; 49164 (12:5164)
 	TX_FAR _CeladonDinerText2
-	db $50
+	db "@"
 
 CeladonDinerText3: ; 49169 (12:5169)
 	TX_FAR _CeladonDinerText3
-	db $50
+	db "@"
 
 CeladonDinerText4: ; 4916e (12:516e)
 	TX_FAR _CeladonDinerText4
-	db $50
+	db "@"
 
 CeladonDinerText5: ; 49173 (12:5173)
 	db $08 ; asm
@@ -75945,22 +75944,22 @@ CeladonDinerText5: ; 49173 (12:5173)
 
 UnnamedText_491a7: ; 491a7 (12:51a7)
 	TX_FAR _UnnamedText_491a7
-	db $50
+	db "@"
 ; 0x491a7 + 5 bytes
 
 ReceivedCoinCaseText: ; 491ac (12:51ac)
 	TX_FAR _ReceivedCoinCaseText ; 0x9e07a
-	db $11, $50
+	db $11, "@"
 ; 0x491b2
 
 CoinCaseNoRoomText: ; 491b2 (12:51b2)
 	TX_FAR _CoinCaseNoRoomText
-	db $50
+	db "@"
 ; 0x491b2 + 5 bytes
 
 UnnamedText_491b7: ; 491b7 (12:51b7)
 	TX_FAR _UnnamedText_491b7
-	db $50
+	db "@"
 ; 0x491b7 + 5 bytes
 
 CeladonDinerObject: ; 0x491bc (size=50)
@@ -76004,15 +76003,15 @@ CeladonHouseTexts: ; 49212 (12:5212)
 
 CeladonHouseText1: ; 49218 (12:5218)
 	TX_FAR _CeladonHouseText1
-	db $50
+	db "@"
 
 CeladonHouseText2: ; 4921d (12:521d)
 	TX_FAR _CeladonHouseText2
-	db $50
+	db "@"
 
 CeladonHouseText3: ; 49222 (12:5222)
 	TX_FAR _CeladonHouseText3
-	db $50
+	db "@"
 
 CeladonHouseObject: ; 0x49227 (size=38)
 	db $f ; border tile
@@ -76052,15 +76051,15 @@ CeladonHotelTexts: ; 4926c (12:526c)
 
 CeladonHotelText1: ; 49272 (12:5272)
 	TX_FAR _CeladonHotelText1
-	db $50
+	db "@"
 
 CeladonHotelText2: ; 49277 (12:5277)
 	TX_FAR _CeladonHotelText2
-	db $50
+	db "@"
 
 CeladonHotelText3: ; 4927c (12:527c)
 	TX_FAR _CeladonHotelText3
-	db $50
+	db "@"
 
 CeladonHotelObject: ; 0x49281 (size=38)
 	db $0 ; border tile
@@ -76104,11 +76103,11 @@ MtMoonPokecenterText1: ; 492e1 (12:52e1)
 
 MtMoonPokecenterText2: ; 492e2 (12:52e2)
 	TX_FAR _MtMoonPokecenterText1
-	db $50
+	db "@"
 
 MtMoonPokecenterText3: ; 492e7 (12:52e7)
 	TX_FAR _MtMoonPokecenterText3
-	db $50
+	db "@"
 
 MtMoonPokecenterText4: ; 492ec (12:52ec)
 	db $08 ; asm
@@ -76164,27 +76163,27 @@ MtMoonPokecenterText4: ; 492ec (12:52ec)
 
 UnnamedText_4935c: ; 4935c (12:535c)
 	TX_FAR _UnnamedText_4935c
-	db $50
+	db "@"
 ; 0x4935c + 5 bytes
 
 UnnamedText_49361: ; 49361 (12:5361)
 	TX_FAR _UnnamedText_49361
-	db $50
+	db "@"
 ; 0x49361 + 5 bytes
 
 UnnamedText_49366: ; 49366 (12:5366)
 	TX_FAR _UnnamedText_49366
-	db $50
+	db "@"
 ; 0x49366 + 5 bytes
 
 UnnamedText_4936b: ; 4936b (12:536b)
 	TX_FAR _UnnamedText_4936b
-	db $50
+	db "@"
 ; 0x4936b + 5 bytes
 
 MtMoonPokecenterText5: ; 49370 (12:5370)
 	TX_FAR _MtMoonPokecenterText5
-	db $50
+	db "@"
 
 MtMoonPokecenterText6: ; 49375 (12:5375)
 	db $f6
@@ -76231,11 +76230,11 @@ RockTunnelPokecenterText1: ; 493c8 (12:53c8)
 
 RockTunnelPokecenterText2: ; 493c9 (12:53c9)
 	TX_FAR _RockTunnelPokecenterText1
-	db $50
+	db "@"
 
 RockTunnelPokecenterText3: ; 493ce (12:53ce)
 	TX_FAR _RockTunnelPokecenterText3
-	db $50
+	db "@"
 
 RockTunnelPokecenterText4: ; 493d3 (12:53d3)
 	db $f6
@@ -76276,7 +76275,7 @@ Route11GateTexts: ; 4940f (12:540f)
 
 Route11GateText1: ; 49411 (12:5411)
 	TX_FAR _Route11GateText1
-	db $50
+	db "@"
 
 Route11GateObject: ; 0x49416 (size=50)
 	db $a ; border tile
@@ -76356,7 +76355,7 @@ Route11GateUpstairsText2: ; 4946c (12:546c)
 
 UnnamedText_494a3: ; 494a3 (12:54a3)
 	TX_FAR _UnnamedText_494a3
-	db $50
+	db "@"
 ; 0x494a3 + 5 bytes
 
 Route11GateUpstairsText3: ; 494a8 (12:54a8)
@@ -76375,12 +76374,12 @@ Route11GateUpstairsText3: ; 494a8 (12:54a8)
 
 UnnamedText_494c4: ; 494c4 (12:54c4)
 	TX_FAR _UnnamedText_494c4
-	db $50
+	db "@"
 ; 0x494c4 + 5 bytes
 
 UnnamedText_494c9: ; 494c9 (12:54c9)
 	TX_FAR _UnnamedText_494c9
-	db $50
+	db "@"
 ; 0x494c9 + 5 bytes
 
 Route11GateUpstairsText4: ; 494ce (12:54ce)
@@ -76391,7 +76390,7 @@ Route11GateUpstairsText4: ; 494ce (12:54ce)
 
 UnnamedText_494d5: ; 494d5 (12:54d5)
 	TX_FAR _UnnamedText_494d5
-	db $50
+	db "@"
 ; 0x494d5 + 5 bytes
 
 Route11GateUpstairsObject: ; 0x494da (size=30)
@@ -76428,7 +76427,7 @@ Route12GateTexts: ; 49507 (12:5507)
 
 Route12GateText1: ; 49509 (12:5509)
 	TX_FAR _Route12GateText1
-	db $50
+	db "@"
 
 Route12GateObject: ; 0x4950e (size=50)
 	db $a ; border tile
@@ -76497,22 +76496,22 @@ Route12GateUpstairsText1: ; 49569 (12:5569)
 
 TM39PreReceiveText: ; 4959c (12:559c)
 	TX_FAR _TM39PreReceiveText
-	db $50
+	db "@"
 ; 0x4959c + 5 bytes
 
 ReceivedTM39Text: ; 495a1 (12:55a1)
 	TX_FAR _ReceivedTM39Text ; 0x8c8c6
-	db $0B, $50
+	db $0B, "@"
 ; 0x495a7
 
 TM39ExplanationText: ; 495a7 (12:55a7)
 	TX_FAR _TM39ExplanationText
-	db $50
+	db "@"
 ; 0x495a7 + 5 bytes
 
 TM39NoRoomText: ; 495ac (12:55ac)
 	TX_FAR _TM39NoRoomText
-	db $50
+	db "@"
 ; 0x495ac + 5 bytes
 
 Route12GateUpstairsText2: ; 495b1 (12:55b1)
@@ -76522,7 +76521,7 @@ Route12GateUpstairsText2: ; 495b1 (12:55b1)
 
 UnnamedText_495b8: ; 495b8 (12:55b8)
 	TX_FAR _UnnamedText_495b8 ; 0x8c95a
-	db $50
+	db "@"
 ; 0x495bd
 
 Route12GateUpstairsText3: ; 495bd (12:55bd)
@@ -76533,7 +76532,7 @@ Route12GateUpstairsText3: ; 495bd (12:55bd)
 
 UnnamedText_495c4: ; 495c4 (12:55c4)
 	TX_FAR _UnnamedText_495c4
-	db $50
+	db "@"
 ; 0x495c4 + 5 bytes
 
 Unnamed_55c9: ; 495c9 (12:55c9)
@@ -76583,7 +76582,7 @@ Route15GateTexts: ; 49605 (12:5605)
 
 Route15GateText1: ; 49607 (12:5607)
 	TX_FAR _Route15GateText1
-	db $50
+	db "@"
 
 Route15GateObject: ; 0x4960c (size=50)
 	db $a ; border tile
@@ -76653,7 +76652,7 @@ Route15GateUpstairsText1: ; 49651 (12:5651)
 
 UnnamedText_4968c: ; 4968c (12:568c)
 	TX_FAR _UnnamedText_4968c
-	db $50
+	db "@"
 ; 0x4968c + 5 bytes
 
 Route15GateUpstairsText2: ; 49691 (12:5691)
@@ -76664,7 +76663,7 @@ Route15GateUpstairsText2: ; 49691 (12:5691)
 
 UnnamedText_49698: ; 49698 (12:5698)
 	TX_FAR _UnnamedText_49698
-	db $50
+	db "@"
 ; 0x49698 + 5 bytes
 
 Route15GateUpstairsObject: ; 4969d (12:569d)
@@ -76762,22 +76761,22 @@ Route16GateMapText1: ; 49760 (12:5760)
 
 UnnamedText_49777: ; 49777 (12:5777)
 	TX_FAR _UnnamedText_49777
-	db $50
+	db "@"
 ; 0x49777 + 5 bytes
 
 UnnamedText_4977c: ; 4977c (12:577c)
 	TX_FAR _UnnamedText_4977c
-	db $50
+	db "@"
 ; 0x4977c + 5 bytes
 
 Route16GateMapText3: ; 49781 (12:5781)
 	TX_FAR _UnnamedText_49781
-	db $50
+	db "@"
 ; 0x49781 + 5 bytes
 
 Route16GateMapText2: ; 49786 (12:5786)
 	TX_FAR _Route16GateMapText2
-	db $50
+	db "@"
 
 Route16GateMapObject: ; 0x4978b (size=88)
 	db $a ; border tile
@@ -76836,7 +76835,7 @@ Route16GateUpstairsText1: ; 49816 (12:5816)
 
 UnnamedText_49820: ; 49820 (12:5820)
 	TX_FAR _UnnamedText_49820
-	db $50
+	db "@"
 ; 0x49820 + 5 bytes
 
 Route16GateUpstairsText2: ; 49825 (12:5825)
@@ -76847,7 +76846,7 @@ Route16GateUpstairsText2: ; 49825 (12:5825)
 
 UnnamedText_4982f: ; 4982f (12:582f)
 	TX_FAR _UnnamedText_4982f
-	db $50
+	db "@"
 ; 0x4982f + 5 bytes
 
 Route16GateUpstairsText3: ; 49834 (12:5834)
@@ -76858,7 +76857,7 @@ Route16GateUpstairsText3: ; 49834 (12:5834)
 
 UnnamedText_4983b: ; 4983b (12:583b)
 	TX_FAR _UnnamedText_4983b
-	db $50
+	db "@"
 ; 0x4983b + 5 bytes
 
 Route16GateUpstairsText4: ; 49840 (12:5840)
@@ -76869,7 +76868,7 @@ Route16GateUpstairsText4: ; 49840 (12:5840)
 
 UnnamedText_49847: ; 49847 (12:5847)
 	TX_FAR _UnnamedText_49847
-	db $50
+	db "@"
 ; 0x49847 + 5 bytes
 
 Route16GateUpstairsObject: ; 0x4984c (size=30)
@@ -76964,17 +76963,17 @@ Route18GateText1: ; 49911 (12:5911)
 
 UnnamedText_49928: ; 49928 (12:5928)
 	TX_FAR _UnnamedText_49928
-	db $50
+	db "@"
 ; 0x4992d
 
 UnnamedText_4992d: ; 4992d (12:592d)
 	TX_FAR _UnnamedText_4992d
-	db $50
+	db "@"
 ; 0x49932
 
 Route18GateText2: ; 49932 (12:5932)
 	TX_FAR _UnnamedText_49932
-	db $50
+	db "@"
 ; 0x49937
 
 Route18GateObject: ; 0x49937 (size=50)
@@ -77030,7 +77029,7 @@ Route18GateUpstairsText2: ; 4998c (12:598c)
 
 UnnamedText_49993: ; 49993 (12:5993)
 	TX_FAR _UnnamedText_49993
-	db $50
+	db "@"
 ; 0x49993 + 5 bytes
 
 Route18GateUpstairsText3: ; 49998 (12:5998)
@@ -77041,7 +77040,7 @@ Route18GateUpstairsText3: ; 49998 (12:5998)
 
 UnnamedText_4999f: ; 4999f (12:599f)
 	TX_FAR _UnnamedText_4999f
-	db $50
+	db "@"
 ; 0x4999f + 5 bytes
 
 Route18GateUpstairsObject: ; 0x499a4 (size=24)
@@ -77201,112 +77200,112 @@ MtMoon1Text7: ; 49a8e (12:5a8e)
 
 MtMoon1BattleText2: ; 49a98 (12:5a98)
 	TX_FAR _MtMoon1BattleText2
-	db $50
+	db "@"
 ; 0x49a98 + 5 bytes
 
 MtMoon1EndBattleText2: ; 49a9d (12:5a9d)
 	TX_FAR _MtMoon1EndBattleText2
-	db $50
+	db "@"
 ; 0x49a9d + 5 bytes
 
 MtMoon1AfterBattleText2: ; 49aa2 (12:5aa2)
 	TX_FAR _MtMoon1AfterBattleText2
-	db $50
+	db "@"
 ; 0x49aa2 + 5 bytes
 
 MtMoon1BattleText3: ; 49aa7 (12:5aa7)
 	TX_FAR _MtMoon1BattleText3
-	db $50
+	db "@"
 ; 0x49aa7 + 5 bytes
 
 MtMoon1EndBattleText3: ; 49aac (12:5aac)
 	TX_FAR _MtMoon1EndBattleText3
-	db $50
+	db "@"
 ; 0x49aac + 5 bytes
 
 MtMoon1AfterBattleText3: ; 49ab1 (12:5ab1)
 	TX_FAR _MtMoon1AfterBattleText3
-	db $50
+	db "@"
 ; 0x49ab1 + 5 bytes
 
 MtMoon1BattleText4: ; 49ab6 (12:5ab6)
 	TX_FAR _MtMoon1BattleText4
-	db $50
+	db "@"
 ; 0x49ab6 + 5 bytes
 
 MtMoon1EndBattleText4: ; 49abb (12:5abb)
 	TX_FAR _MtMoon1EndBattleText4
-	db $50
+	db "@"
 ; 0x49abb + 5 bytes
 
 MtMoon1AfterBattleText4: ; 49ac0 (12:5ac0)
 	TX_FAR _MtMoon1AfterBattleText4
-	db $50
+	db "@"
 ; 0x49ac0 + 5 bytes
 
 MtMoon1BattleText5: ; 49ac5 (12:5ac5)
 	TX_FAR _MtMoon1BattleText5
-	db $50
+	db "@"
 ; 0x49ac5 + 5 bytes
 
 MtMoon1EndBattleText5: ; 49aca (12:5aca)
 	TX_FAR _MtMoon1EndBattleText5
-	db $50
+	db "@"
 ; 0x49aca + 5 bytes
 
 MtMoon1AfterBattleText5: ; 49acf (12:5acf)
 	TX_FAR _MtMoon1AfterBattleText5
-	db $50
+	db "@"
 ; 0x49acf + 5 bytes
 
 MtMoon1BattleText6: ; 49ad4 (12:5ad4)
 	TX_FAR _MtMoon1BattleText6
-	db $50
+	db "@"
 ; 0x49ad4 + 5 bytes
 
 MtMoon1EndBattleText6: ; 49ad9 (12:5ad9)
 	TX_FAR _MtMoon1EndBattleText6
-	db $50
+	db "@"
 ; 0x49ad9 + 5 bytes
 
 MtMoon1AfterBattleText6: ; 49ade (12:5ade)
 	TX_FAR _MtMoon1AfterBattleText6
-	db $50
+	db "@"
 ; 0x49ade + 5 bytes
 
 MtMoon1BattleText7: ; 49ae3 (12:5ae3)
 	TX_FAR _MtMoon1BattleText7
-	db $50
+	db "@"
 ; 0x49ae3 + 5 bytes
 
 MtMoon1EndBattleText7: ; 49ae8 (12:5ae8)
 	TX_FAR _MtMoon1EndBattleText7
-	db $50
+	db "@"
 ; 0x49ae8 + 5 bytes
 
 MtMoon1AfterBattleText7: ; 49aed (12:5aed)
 	TX_FAR _MtMoon1AfterBattleText7
-	db $50
+	db "@"
 ; 0x49aed + 5 bytes
 
 MtMoon1BattleText8: ; 49af2 (12:5af2)
 	TX_FAR _MtMoon1BattleText8
-	db $50
+	db "@"
 ; 0x49af2 + 5 bytes
 
 MtMoon1EndBattleText8: ; 49af7 (12:5af7)
 	TX_FAR _MtMoon1EndBattleText8
-	db $50
+	db "@"
 ; 0x49af7 + 5 bytes
 
 MtMoon1AfterBattleText8: ; 49afc (12:5afc)
 	TX_FAR _MtMoon1AfterBattleText8
-	db $50
+	db "@"
 ; 0x49afc + 5 bytes
 
 MtMoon1Text14: ; 49b01 (12:5b01)
 	TX_FAR _MtMoon1Text14
-	db $50
+	db "@"
 
 MtMoon1Object: ; 0x49b06 (size=145)
 	db $3 ; border tile
@@ -77615,7 +77614,7 @@ MtMoon3Text6: ; 49ee9 (12:5ee9)
 
 UnnamedText_49f24: ; 49f24 (12:5f24)
 	TX_FAR _UnnamedText_49f24
-	db $50
+	db "@"
 ; 0x49f24 + 5 bytes
 
 MtMoon3Text7: ; 49f29 (12:5f29)
@@ -77646,7 +77645,7 @@ MtMoon3Text7: ; 49f29 (12:5f29)
 
 UnnamedText_49f64: ; 49f64 (12:5f64)
 	TX_FAR _UnnamedText_49f64
-	db $50
+	db "@"
 ; 0x49f64 + 5 bytes
 
 Unnamed_49f69: ; 49f69 (12:5f69)
@@ -77656,7 +77655,7 @@ Unnamed_49f69: ; 49f69 (12:5f69)
 
 UnnamedText_49f6f: ; 49f6f (12:5f6f)
 	TX_FAR _UnnamedText_49f6f ; 0x80995
-	db $11, $d, $50
+	db $11, $d, "@"
 ; 0x49f76
 
 Unnamed_49f76: ; 49f76 (12:5f76)
@@ -77667,27 +77666,27 @@ Unnamed_49f76: ; 49f76 (12:5f76)
 
 UnnamedText_49f7f: ; 49f7f (12:5f7f)
 	TX_FAR _UnnamedText_49f7f ; 0x809a8
-	db $d, $50
+	db $d, "@"
 ; 0x49f85
 
 UnnamedText_49f85: ; 49f85 (12:5f85)
 	TX_FAR _UnnamedText_49f85
-	db $50
+	db "@"
 ; 0x49f85 + 5 bytes
 
 UnnamedText_49f8a: ; 49f8a (12:5f8a)
 	TX_FAR _UnnamedText_49f8a
-	db $50
+	db "@"
 ; 0x49f8a + 5 bytes
 
 UnnamedText_49f8f: ; 49f8f (12:5f8f)
 	TX_FAR _UnnamedText_49f8f
-	db $50
+	db "@"
 ; 0x49f8f + 5 bytes
 
 UnnamedText_49f94: ; 49f94 (12:5f94)
 	TX_FAR _UnnamedText_49f94
-	db $50
+	db "@"
 ; 0x49f94 + 5 bytes
 
 Unnamed_49f99: ; 49f99 (12:5f99)
@@ -77695,62 +77694,62 @@ INCBIN "baserom.gbc",$49f99,$49f9f - $49f99
 
 MtMoon3BattleText2: ; 49f9f (12:5f9f)
 	TX_FAR _MtMoon3BattleText2
-	db $50
+	db "@"
 ; 0x49f9f + 5 bytes
 
 MtMoon3EndBattleText2: ; 49fa4 (12:5fa4)
 	TX_FAR _MtMoon3EndBattleText2
-	db $50
+	db "@"
 ; 0x49fa4 + 5 bytes
 
 MtMoon3AfterBattleText2: ; 49fa9 (12:5fa9)
 	TX_FAR _MtMoon3AfterBattleText2
-	db $50
+	db "@"
 ; 0x49fa9 + 5 bytes
 
 MtMoon3BattleText3: ; 49fae (12:5fae)
 	TX_FAR _MtMoon3BattleText3
-	db $50
+	db "@"
 ; 0x49fae + 5 bytes
 
 MtMoon3EndBattleText3: ; 49fb3 (12:5fb3)
 	TX_FAR _MtMoon3EndBattleText3
-	db $50
+	db "@"
 ; 0x49fb3 + 5 bytes
 
 MtMoon3AfterBattleText3: ; 49fb8 (12:5fb8)
 	TX_FAR _MtMoon3AfterBattleText3
-	db $50
+	db "@"
 ; 0x49fb8 + 5 bytes
 
 MtMoon3BattleText4: ; 49fbd (12:5fbd)
 	TX_FAR _MtMoon3BattleText4
-	db $50
+	db "@"
 ; 0x49fbd + 5 bytes
 
 MtMoon3EndBattleText4: ; 49fc2 (12:5fc2)
 	TX_FAR _MtMoon3EndBattleText4
-	db $50
+	db "@"
 ; 0x49fc2 + 5 bytes
 
 MtMoon3AfterBattleText4: ; 49fc7 (12:5fc7)
 	TX_FAR _MtMoon3AfterBattleText4
-	db $50
+	db "@"
 ; 0x49fc7 + 5 bytes
 
 MtMoon3BattleText5: ; 49fcc (12:5fcc)
 	TX_FAR _MtMoon3BattleText5
-	db $50
+	db "@"
 ; 0x49fcc + 5 bytes
 
 MtMoon3EndBattleText5: ; 49fd1 (12:5fd1)
 	TX_FAR _MtMoon3EndBattleText5
-	db $50
+	db "@"
 ; 0x49fd1 + 5 bytes
 
 MtMoon3AfterBattleText5: ; 49fd6 (12:5fd6)
 	TX_FAR _MtMoon3AfterBattleText5
-	db $50
+	db "@"
 ; 0x49fd6 + 5 bytes
 
 MtMoon3Object: ; 0x49fdb (size=102)
@@ -77801,19 +77800,19 @@ SafariZoneWestTexts: ; 4a1b8 (12:61b8)
 
 SafariZoneWestText5: ; 4a1c8 (12:61c8)
 	TX_FAR _SafariZoneWestText5
-	db $50
+	db "@"
 
 SafariZoneWestText6: ; 4a1cd (12:61cd)
 	TX_FAR _SafariZoneWestText6
-	db $50
+	db "@"
 
 SafariZoneWestText7: ; 4a1d2 (12:61d2)
 	TX_FAR _SafariZoneWestText7
-	db $50
+	db "@"
 
 SafariZoneWestText8: ; 4a1d7 (12:61d7)
 	TX_FAR _SafariZoneWestText8
-	db $50
+	db "@"
 
 SafariZoneWestObject: ; 0x4a1dc (size=108)
 	db $0 ; border tile
@@ -77895,22 +77894,22 @@ SafariZoneSecretHouseText1: ; 4a31c (12:631c)
 
 UnnamedText_4a350: ; 4a350 (12:6350)
 	TX_FAR _UnnamedText_4a350
-	db $50
+	db "@"
 ; 0x4a350 + 5 bytes
 
 ReceivedHM03Text: ; 4a355 (12:6355)
 	TX_FAR _ReceivedHM03Text ; 0x85943
-	db $0B, $50
+	db $0B, "@"
 ; 0x4a35b
 
 HM03ExplanationText: ; 4a35b (12:635b)
 	TX_FAR _HM03ExplanationText
-	db $50
+	db "@"
 ; 0x4a35b + 5 bytes
 
 HM03NoRoomText: ; 4a360 (12:6360)
 	TX_FAR _HM03NoRoomText
-	db $50
+	db "@"
 ; 0x4a360 + 5 bytes
 
 SafariZoneSecretHouseObject: ; 0x4a365 (size=26)
@@ -78072,7 +78071,7 @@ BattleCenterMTexts: ; 4fd4c (13:7d4c)
 
 BattleCenterMText1: ; 4fd4e (13:7d4e)
 	TX_FAR _BattleCenterMText1
-	db $50
+	db "@"
 
 BattleCenterMObject: ; 0x4fd53 (size=10)
 	db $e ; border tile
@@ -78104,7 +78103,7 @@ TradeCenterMTexts: ; 4fd80 (13:7d80)
 
 TradeCenterMText1: ; 4fd82 (13:7d82)
 	TX_FAR _TradeCenterMText1
-	db $50
+	db "@"
 
 TradeCenterMObject: ; 0x4fd87 (size=10)
 	db $e ; border tile
@@ -78199,12 +78198,12 @@ INCBIN "baserom.gbc",$4fe39,$4fe3f - $4fe39
 
 UnnamedText_4fe3f: ; 4fe3f (13:7e3f)
 	TX_FAR _UnnamedText_4fe3f
-	db $50
+	db "@"
 ; 0x4fe3f + 5 bytes
 
 UnnamedText_4fe44: ; 4fe44 (13:7e44)
 	TX_FAR _UnnamedText_4fe44
-	db $50
+	db "@"
 ; 0x4fe44 + 5 bytes
 
 GetPredefPointer: ; 4fe49 (13:7e49)
@@ -78775,95 +78774,95 @@ SaffronCityTexts: ; 50c03 (14:4c03)
 
 SaffronCityText1: ; 50c35 (14:4c35)
 	TX_FAR _SaffronCityText1
-	db $50
+	db "@"
 
 SaffronCityText2: ; 50c3a (14:4c3a)
 	TX_FAR _SaffronCityText2
-	db $50
+	db "@"
 
 SaffronCityText3: ; 50c3f (14:4c3f)
 	TX_FAR _SaffronCityText3
-	db $50
+	db "@"
 
 SaffronCityText4: ; 50c44 (14:4c44)
 	TX_FAR _SaffronCityText4
-	db $50
+	db "@"
 
 SaffronCityText5: ; 50c49 (14:4c49)
 	TX_FAR _SaffronCityText5
-	db $50
+	db "@"
 
 SaffronCityText6: ; 50c4e (14:4c4e)
 	TX_FAR _SaffronCityText6
-	db $50
+	db "@"
 
 SaffronCityText7: ; 50c53 (14:4c53)
 	TX_FAR _SaffronCityText7
-	db $50
+	db "@"
 
 SaffronCityText8: ; 50c58 (14:4c58)
 	TX_FAR _SaffronCityText8
-	db $50
+	db "@"
 
 SaffronCityText9: ; 50c5d (14:4c5d)
 	TX_FAR _SaffronCityText9
-	db $50
+	db "@"
 
 SaffronCityText10: ; 50c62 (14:4c62)
 	TX_FAR _SaffronCityText10
-	db $50
+	db "@"
 
 SaffronCityText11: ; 50c67 (14:4c67)
 	TX_FAR _SaffronCityText11
-	db $50
+	db "@"
 
 SaffronCityText12: ; 50c6c (14:4c6c)
 	TX_FAR _SaffronCityText12
-	db $15, $50
+	db $15, "@"
 
 SaffronCityText13: ; 50c72 (14:4c72)
 	TX_FAR _SaffronCityText13
-	db $50
+	db "@"
 
 SaffronCityText14: ; 50c77 (14:4c77)
 	TX_FAR _SaffronCityText14
-	db $50
+	db "@"
 
 SaffronCityText15: ; 50c7c (14:4c7c)
 	TX_FAR _SaffronCityText15
-	db $50
+	db "@"
 
 SaffronCityText16: ; 50c81 (14:4c81)
 	TX_FAR _SaffronCityText16
-	db $50
+	db "@"
 
 SaffronCityText17: ; 50c86 (14:4c86)
 	TX_FAR _SaffronCityText17
-	db $50
+	db "@"
 
 SaffronCityText18: ; 50c8b (14:4c8b)
 	TX_FAR _SaffronCityText18
-	db $50
+	db "@"
 
 SaffronCityText20: ; 50c90 (14:4c90)
 	TX_FAR _SaffronCityText20
-	db $50
+	db "@"
 
 SaffronCityText21: ; 50c95 (14:4c95)
 	TX_FAR _SaffronCityText21
-	db $50
+	db "@"
 
 SaffronCityText22: ; 50c9a (14:4c9a)
 	TX_FAR _SaffronCityText22
-	db $50
+	db "@"
 
 SaffronCityText24: ; 50c9f (14:4c9f)
 	TX_FAR _SaffronCityText24
-	db $50
+	db "@"
 
 SaffronCityText25: ; 50ca4 (14:4ca4)
 	TX_FAR _SaffronCityText25
-	db $50
+	db "@"
 
 Route20Script: ; 50ca9 (14:4ca9)
 	ld hl, $d7e7
@@ -79100,158 +79099,158 @@ Route20Text10: ; 50e0d (14:4e0d)
 
 Route20BattleText1: ; 50e17 (14:4e17)
 	TX_FAR _Route20BattleText1
-	db $50
+	db "@"
 ; 0x50e17 + 5 bytes
 
 Route20EndBattleText1: ; 50e1c (14:4e1c)
 	TX_FAR _Route20EndBattleText1
-	db $50
+	db "@"
 ; 0x50e1c + 5 bytes
 
 Route20AfterBattleText1: ; 50e21 (14:4e21)
 	TX_FAR _Route20AfterBattleText1
-	db $50
+	db "@"
 ; 0x50e21 + 5 bytes
 
 Route20BattleText2: ; 50e26 (14:4e26)
 	TX_FAR _Route20BattleText2
-	db $50
+	db "@"
 ; 0x50e26 + 5 bytes
 
 Route20EndBattleText2: ; 50e2b (14:4e2b)
 	TX_FAR _Route20EndBattleText2
-	db $50
+	db "@"
 ; 0x50e2b + 5 bytes
 
 Route20AfterBattleText2: ; 50e30 (14:4e30)
 	TX_FAR _Route20AfterBattleText2
-	db $50
+	db "@"
 ; 0x50e30 + 5 bytes
 
 Route20BattleText3: ; 50e35 (14:4e35)
 	TX_FAR _Route20BattleText3
-	db $50
+	db "@"
 ; 0x50e35 + 5 bytes
 
 Route20EndBattleText3: ; 50e3a (14:4e3a)
 	TX_FAR _Route20EndBattleText3
-	db $50
+	db "@"
 ; 0x50e3a + 5 bytes
 
 Route20AfterBattleText3: ; 50e3f (14:4e3f)
 	TX_FAR _Route20AfterBattleText3
-	db $50
+	db "@"
 ; 0x50e3f + 5 bytes
 
 Route20BattleText4: ; 50e44 (14:4e44)
 	TX_FAR _Route20BattleText4
-	db $50
+	db "@"
 ; 0x50e44 + 5 bytes
 
 Route20EndBattleText4: ; 50e49 (14:4e49)
 	TX_FAR _Route20EndBattleText4
-	db $50
+	db "@"
 ; 0x50e49 + 5 bytes
 
 Route20AfterBattleText4: ; 50e4e (14:4e4e)
 	TX_FAR _Route20AfterBattleText4
-	db $50
+	db "@"
 ; 0x50e4e + 5 bytes
 
 Route20BattleText5: ; 50e53 (14:4e53)
 	TX_FAR _Route20BattleText5
-	db $50
+	db "@"
 ; 0x50e53 + 5 bytes
 
 Route20EndBattleText5: ; 50e58 (14:4e58)
 	TX_FAR _Route20EndBattleText5
-	db $50
+	db "@"
 ; 0x50e58 + 5 bytes
 
 Route20AfterBattleText5: ; 50e5d (14:4e5d)
 	TX_FAR _Route20AfterBattleText5
-	db $50
+	db "@"
 ; 0x50e5d + 5 bytes
 
 Route20BattleText6: ; 50e62 (14:4e62)
 	TX_FAR _Route20BattleText6
-	db $50
+	db "@"
 ; 0x50e62 + 5 bytes
 
 Route20EndBattleText6: ; 50e67 (14:4e67)
 	TX_FAR _Route20EndBattleText6
-	db $50
+	db "@"
 ; 0x50e67 + 5 bytes
 
 Route20AfterBattleText6: ; 50e6c (14:4e6c)
 	TX_FAR _Route20AfterBattleText6
-	db $50
+	db "@"
 ; 0x50e6c + 5 bytes
 
 Route20BattleText7: ; 50e71 (14:4e71)
 	TX_FAR _Route20BattleText7
-	db $50
+	db "@"
 ; 0x50e71 + 5 bytes
 
 Route20EndBattleText7: ; 50e76 (14:4e76)
 	TX_FAR _Route20EndBattleText7
-	db $50
+	db "@"
 ; 0x50e76 + 5 bytes
 
 Route20AfterBattleText7: ; 50e7b (14:4e7b)
 	TX_FAR _Route20AfterBattleText7
-	db $50
+	db "@"
 ; 0x50e7b + 5 bytes
 
 Route20BattleText8: ; 50e80 (14:4e80)
 	TX_FAR _Route20BattleText8
-	db $50
+	db "@"
 ; 0x50e80 + 5 bytes
 
 Route20EndBattleText8: ; 50e85 (14:4e85)
 	TX_FAR _Route20EndBattleText8
-	db $50
+	db "@"
 ; 0x50e85 + 5 bytes
 
 Route20AfterBattleText8: ; 50e8a (14:4e8a)
 	TX_FAR _Route20AfterBattleText8
-	db $50
+	db "@"
 ; 0x50e8a + 5 bytes
 
 Route20BattleText9: ; 50e8f (14:4e8f)
 	TX_FAR _Route20BattleText9
-	db $50
+	db "@"
 ; 0x50e8f + 5 bytes
 
 Route20EndBattleText9: ; 50e94 (14:4e94)
 	TX_FAR _Route20EndBattleText9
-	db $50
+	db "@"
 ; 0x50e94 + 5 bytes
 
 Route20AfterBattleText9: ; 50e99 (14:4e99)
 	TX_FAR _Route20AfterBattleText9
-	db $50
+	db "@"
 ; 0x50e99 + 5 bytes
 
 Route20BattleText10: ; 50e9e (14:4e9e)
 	TX_FAR _Route20BattleText10
-	db $50
+	db "@"
 ; 0x50e9e + 5 bytes
 
 Route20EndBattleText10: ; 50ea3 (14:4ea3)
 	TX_FAR _Route20EndBattleText10
-	db $50
+	db "@"
 ; 0x50ea3 + 5 bytes
 
 Route20AfterBattleText10: ; 50ea8 (14:4ea8)
 	TX_FAR _Route20AfterBattleText10
-	db $50
+	db "@"
 ; 0x50ea8 + 5 bytes
 
 Route20Text12: ; 50ead (14:4ead)
 Route20Text11: ; 50ead (14:4ead)
 	TX_FAR _Route20Text11
-	db $50
+	db "@"
 
 Route22Script: ; 50eb2 (14:4eb2)
 	call EnableAutoTextBoxDrawing
@@ -79654,47 +79653,47 @@ Route22Text2: ; 51194 (14:5194)
 
 UnnamedText_511ad: ; 511ad (14:51ad)
 	TX_FAR _UnnamedText_511ad
-	db $50
+	db "@"
 ; 0x511ad + 5 bytes
 
 UnnamedText_511b2: ; 511b2 (14:51b2)
 	TX_FAR _UnnamedText_511b2
-	db $50
+	db "@"
 ; 0x511b2 + 5 bytes
 
 UnnamedText_511b7: ; 511b7 (14:51b7)
 	TX_FAR _UnnamedText_511b7
-	db $50
+	db "@"
 ; 0x511b7 + 5 bytes
 
 UnnamedText_511bc: ; 511bc (14:51bc)
 	TX_FAR _UnnamedText_511bc
-	db $50
+	db "@"
 ; 0x511bc + 5 bytes
 
 UnnamedText_511c1: ; 511c1 (14:51c1)
 	TX_FAR _UnnamedText_511c1
-	db $50
+	db "@"
 ; 0x511c1 + 5 bytes
 
 UnnamedText_511c6: ; 511c6 (14:51c6)
 	TX_FAR _UnnamedText_511c6
-	db $50
+	db "@"
 ; 0x511c6 + 5 bytes
 
 UnnamedText_511cb: ; 511cb (14:51cb)
 	TX_FAR _UnnamedText_511cb
-	db $50
+	db "@"
 ; 0x511cb + 5 bytes
 
 UnnamedText_511d0: ; 511d0 (14:51d0)
 	TX_FAR _UnnamedText_511d0
-	db $50
+	db "@"
 ; 0x511d0 + 5 bytes
 
 Route22Text3: ; 511d5 (14:51d5)
 	TX_FAR _Route22Text3
-	db $50
+	db "@"
 
 Route23Script: ; 511da (14:51da)
 	call Func_511e9
@@ -79911,12 +79910,12 @@ INCBIN "baserom.gbc",$5139e,$513a3 - $5139e
 
 UnnamedText_513a3: ; 513a3 (14:53a3)
 	TX_FAR _UnnamedText_513a3
-	db $50
+	db "@"
 ; 0x513a3 + 5 bytes
 
 Route23Text8: ; 513a8 (14:53a8)
 	TX_FAR _Route23Text8
-	db $50
+	db "@"
 
 Route24Script: ; 513ad (14:53ad)
 	call EnableAutoTextBoxDrawing
@@ -80099,31 +80098,31 @@ UnnamedText_51510: ; 51510 (14:5510)
 	TX_FAR _UnnamedText_51510 ; 0x92721
 	db $0B
 	TX_FAR _UnnamedText_51515 ; 0x92755
-	db $50
+	db "@"
 ; 0x5151a
 
 UnnamedText_5151a: ; 5151a (14:551a)
 	TX_FAR _UnnamedText_5151a ; 0x92779
-	db $0B, $6, $50
+	db $0B, $6, "@"
 
 UnnamedText_51521: ; 51521 (14:5521)
 	TX_FAR _UnnamedText_51521
-	db $50
+	db "@"
 ; 0x51521 + 5 bytes
 
 UnnamedText_51526: ; 51526 (14:5526)
 	TX_FAR _UnnamedText_51526
-	db $50
+	db "@"
 ; 0x51526 + 5 bytes
 
 UnnamedText_5152b: ; 5152b (14:552b)
 	TX_FAR _UnnamedText_5152b
-	db $50
+	db "@"
 ; 0x5152b + 5 bytes
 
 UnnamedText_51530: ; 51530 (14:5530)
 	TX_FAR _UnnamedText_51530
-	db $50
+	db "@"
 ; 0x51530 + 5 bytes
 
 Route24Text2: ; 51535 (14:5535)
@@ -80164,92 +80163,92 @@ Route24Text7: ; 51567 (14:5567)
 
 Route24BattleText1: ; 51571 (14:5571)
 	TX_FAR _Route24BattleText1
-	db $50
+	db "@"
 ; 0x51571 + 5 bytes
 
 Route24EndBattleText1: ; 51576 (14:5576)
 	TX_FAR _Route24EndBattleText1
-	db $50
+	db "@"
 ; 0x51576 + 5 bytes
 
 Route24AfterBattleText1: ; 5157b (14:557b)
 	TX_FAR _Route24AfterBattleText1
-	db $50
+	db "@"
 ; 0x5157b + 5 bytes
 
 Route24BattleText2: ; 51580 (14:5580)
 	TX_FAR _Route24BattleText2
-	db $50
+	db "@"
 ; 0x51580 + 5 bytes
 
 Route24EndBattleText2: ; 51585 (14:5585)
 	TX_FAR _Route24EndBattleText2
-	db $50
+	db "@"
 ; 0x51585 + 5 bytes
 
 Route24AfterBattleText2: ; 5158a (14:558a)
 	TX_FAR _Route24AfterBattleText2
-	db $50
+	db "@"
 ; 0x5158a + 5 bytes
 
 Route24BattleText3: ; 5158f (14:558f)
 	TX_FAR _Route24BattleText3
-	db $50
+	db "@"
 ; 0x5158f + 5 bytes
 
 Route24EndBattleText3: ; 51594 (14:5594)
 	TX_FAR _Route24EndBattleText3
-	db $50
+	db "@"
 ; 0x51594 + 5 bytes
 
 Route24AfterBattleText3: ; 51599 (14:5599)
 	TX_FAR _Route24AfterBattleText3
-	db $50
+	db "@"
 ; 0x51599 + 5 bytes
 
 Route24BattleText4: ; 5159e (14:559e)
 	TX_FAR _Route24BattleText4
-	db $50
+	db "@"
 ; 0x5159e + 5 bytes
 
 Route24EndBattleText4: ; 515a3 (14:55a3)
 	TX_FAR _Route24EndBattleText4
-	db $50
+	db "@"
 ; 0x515a3 + 5 bytes
 
 Route24AfterBattleText4: ; 515a8 (14:55a8)
 	TX_FAR _Route24AfterBattleText4
-	db $50
+	db "@"
 ; 0x515a8 + 5 bytes
 
 Route24BattleText5: ; 515ad (14:55ad)
 	TX_FAR _Route24BattleText5
-	db $50
+	db "@"
 ; 0x515ad + 5 bytes
 
 Route24EndBattleText5: ; 515b2 (14:55b2)
 	TX_FAR _Route24EndBattleText5
-	db $50
+	db "@"
 ; 0x515b2 + 5 bytes
 
 Route24AfterBattleText5: ; 515b7 (14:55b7)
 	TX_FAR _Route24AfterBattleText5
-	db $50
+	db "@"
 ; 0x515b7 + 5 bytes
 
 Route24BattleText6: ; 515bc (14:55bc)
 	TX_FAR _Route24BattleText6
-	db $50
+	db "@"
 ; 0x515bc + 5 bytes
 
 Route24EndBattleText6: ; 515c1 (14:55c1)
 	TX_FAR _Route24EndBattleText6
-	db $50
+	db "@"
 ; 0x515c1 + 5 bytes
 
 Route24AfterBattleText6: ; 515c6 (14:55c6)
 	TX_FAR _Route24AfterBattleText6
-	db $50
+	db "@"
 ; 0x515c6 + 5 bytes
 
 Route25Script: ; 515cb (14:55cb)
@@ -80450,142 +80449,142 @@ Route25Text9: ; 516fb (14:56fb)
 
 Route25BattleText1: ; 51705 (14:5705)
 	TX_FAR _Route25BattleText1
-	db $50
+	db "@"
 ; 0x51705 + 5 bytes
 
 Route25EndBattleText1: ; 5170a (14:570a)
 	TX_FAR _Route25EndBattleText1
-	db $50
+	db "@"
 ; 0x5170a + 5 bytes
 
 Route25AfterBattleText1: ; 5170f (14:570f)
 	TX_FAR _Route25AfterBattleText1
-	db $50
+	db "@"
 ; 0x5170f + 5 bytes
 
 Route25BattleText2: ; 51714 (14:5714)
 	TX_FAR _Route25BattleText2
-	db $50
+	db "@"
 ; 0x51714 + 5 bytes
 
 Route25EndBattleText2: ; 51719 (14:5719)
 	TX_FAR _Route25EndBattleText2
-	db $50
+	db "@"
 ; 0x51719 + 5 bytes
 
 Route25AfterBattleText2: ; 5171e (14:571e)
 	TX_FAR _Route25AfterBattleText2
-	db $50
+	db "@"
 ; 0x5171e + 5 bytes
 
 Route25BattleText3: ; 51723 (14:5723)
 	TX_FAR _Route25BattleText3
-	db $50
+	db "@"
 ; 0x51723 + 5 bytes
 
 Route25EndBattleText3: ; 51728 (14:5728)
 	TX_FAR _Route25EndBattleText3
-	db $50
+	db "@"
 ; 0x51728 + 5 bytes
 
 Route25AfterBattleText3: ; 5172d (14:572d)
 	TX_FAR _Route25AfterBattleText3
-	db $50
+	db "@"
 ; 0x5172d + 5 bytes
 
 Route25BattleText4: ; 51732 (14:5732)
 	TX_FAR _Route25BattleText4
-	db $50
+	db "@"
 ; 0x51732 + 5 bytes
 
 Route25EndBattleText4: ; 51737 (14:5737)
 	TX_FAR _Route25EndBattleText4
-	db $50
+	db "@"
 ; 0x51737 + 5 bytes
 
 Route25AfterBattleText4: ; 5173c (14:573c)
 	TX_FAR _Route25AfterBattleText4
-	db $50
+	db "@"
 ; 0x5173c + 5 bytes
 
 Route25BattleText5: ; 51741 (14:5741)
 	TX_FAR _Route25BattleText5
-	db $50
+	db "@"
 ; 0x51741 + 5 bytes
 
 Route25EndBattleText5: ; 51746 (14:5746)
 	TX_FAR _Route25EndBattleText5
-	db $50
+	db "@"
 ; 0x51746 + 5 bytes
 
 Route25AfterBattleText5: ; 5174b (14:574b)
 	TX_FAR _Route25AfterBattleText5
-	db $50
+	db "@"
 ; 0x5174b + 5 bytes
 
 Route25BattleText6: ; 51750 (14:5750)
 	TX_FAR _Route25BattleText6
-	db $50
+	db "@"
 ; 0x51750 + 5 bytes
 
 Route25EndBattleText6: ; 51755 (14:5755)
 	TX_FAR _Route25EndBattleText6
-	db $50
+	db "@"
 ; 0x51755 + 5 bytes
 
 Route25AfterBattleText6: ; 5175a (14:575a)
 	TX_FAR _Route25AfterBattleText6
-	db $50
+	db "@"
 ; 0x5175a + 5 bytes
 
 Route25BattleText7: ; 5175f (14:575f)
 	TX_FAR _Route25BattleText7
-	db $50
+	db "@"
 ; 0x5175f + 5 bytes
 
 Route25EndBattleText7: ; 51764 (14:5764)
 	TX_FAR _Route25EndBattleText7
-	db $50
+	db "@"
 ; 0x51764 + 5 bytes
 
 Route25AfterBattleText7: ; 51769 (14:5769)
 	TX_FAR _Route25AfterBattleText7
-	db $50
+	db "@"
 ; 0x51769 + 5 bytes
 
 Route25BattleText8: ; 5176e (14:576e)
 	TX_FAR _Route25BattleText8
-	db $50
+	db "@"
 ; 0x5176e + 5 bytes
 
 Route25EndBattleText8: ; 51773 (14:5773)
 	TX_FAR _Route25EndBattleText8
-	db $50
+	db "@"
 ; 0x51773 + 5 bytes
 
 Route25AfterBattleText8: ; 51778 (14:5778)
 	TX_FAR _Route25AfterBattleText8
-	db $50
+	db "@"
 ; 0x51778 + 5 bytes
 
 Route25BattleText9: ; 5177d (14:577d)
 	TX_FAR _Route25BattleText9
-	db $50
+	db "@"
 ; 0x5177d + 5 bytes
 
 Route25EndBattleText9: ; 51782 (14:5782)
 	TX_FAR _Route25EndBattleText9
-	db $50
+	db "@"
 ; 0x51782 + 5 bytes
 
 Route25AfterBattleText9: ; 51787 (14:5787)
 	TX_FAR _Route25AfterBattleText9
-	db $50
+	db "@"
 ; 0x51787 + 5 bytes
 
 Route25Text11: ; 5178c (14:578c)
 	TX_FAR _Route25Text11
-	db $50
+	db "@"
 
 VictoryRoad2_h: ; 0x51791 to 0x5179d (12 bytes) (id=194)
 	db $11 ; tileset
@@ -80778,77 +80777,77 @@ VictoryRoad2BattleText6: ; 518ba (14:58ba)
 
 VictoryRoad2BattleText1: ; 518ca (14:58ca)
 	TX_FAR _VictoryRoad2BattleText1
-	db $50
+	db "@"
 ; 0x518ca + 5 bytes
 
 VictoryRoad2EndBattleText1: ; 518cf (14:58cf)
 	TX_FAR _VictoryRoad2EndBattleText1
-	db $50
+	db "@"
 ; 0x518cf + 5 bytes
 
 VictoryRoad2AfterBattleText1: ; 518d4 (14:58d4)
 	TX_FAR _VictoryRoad2AfterBattleText1
-	db $50
+	db "@"
 ; 0x518d4 + 5 bytes
 
 VictoryRoad2BattleText2: ; 518d9 (14:58d9)
 	TX_FAR _VictoryRoad2BattleText2
-	db $50
+	db "@"
 ; 0x518d9 + 5 bytes
 
 VictoryRoad2EndBattleText2: ; 518de (14:58de)
 	TX_FAR _VictoryRoad2EndBattleText2
-	db $50
+	db "@"
 ; 0x518de + 5 bytes
 
 VictoryRoad2AfterBattleText2: ; 518e3 (14:58e3)
 	TX_FAR _VictoryRoad2AfterBattleText2
-	db $50
+	db "@"
 ; 0x518e3 + 5 bytes
 
 VictoryRoad2BattleText3: ; 518e8 (14:58e8)
 	TX_FAR _VictoryRoad2BattleText3
-	db $50
+	db "@"
 ; 0x518e8 + 5 bytes
 
 VictoryRoad2EndBattleText3: ; 518ed (14:58ed)
 	TX_FAR _VictoryRoad2EndBattleText3
-	db $50
+	db "@"
 ; 0x518ed + 5 bytes
 
 VictoryRoad2AfterBattleText3: ; 518f2 (14:58f2)
 	TX_FAR _VictoryRoad2AfterBattleText3
-	db $50
+	db "@"
 ; 0x518f2 + 5 bytes
 
 VictoryRoad2BattleText4: ; 518f7 (14:58f7)
 	TX_FAR _VictoryRoad2BattleText4
-	db $50
+	db "@"
 ; 0x518f7 + 5 bytes
 
 VictoryRoad2EndBattleText4: ; 518fc (14:58fc)
 	TX_FAR _VictoryRoad2EndBattleText4
-	db $50
+	db "@"
 ; 0x518fc + 5 bytes
 
 VictoryRoad2AfterBattleText4: ; 51901 (14:5901)
 	TX_FAR _VictoryRoad2AfterBattleText4
-	db $50
+	db "@"
 ; 0x51901 + 5 bytes
 
 VictoryRoad2BattleText5: ; 51906 (14:5906)
 	TX_FAR _VictoryRoad2BattleText5
-	db $50
+	db "@"
 ; 0x51906 + 5 bytes
 
 VictoryRoad2EndBattleText5: ; 5190b (14:590b)
 	TX_FAR _VictoryRoad2EndBattleText5
-	db $50
+	db "@"
 ; 0x5190b + 5 bytes
 
 VictoryRoad2AfterBattleText5: ; 51910 (14:5910)
 	TX_FAR _VictoryRoad2AfterBattleText5
-	db $50
+	db "@"
 ; 0x51910 + 5 bytes
 
 VictoryRoad2Object: ; 0x51915 (size=154)
@@ -80910,7 +80909,7 @@ MtMoon2Texts: ; 51a46 (14:5a46)
 
 MtMoonText1: ; 51a48 (14:5a48)
 	TX_FAR _UnnamedText_51a48
-	db $50
+	db "@"
 ; 0x51a48 + 5 bytes
 
 MtMoon2Object: ; 0x51a4d (size=68)
@@ -81278,22 +81277,22 @@ SilphCo7Text1: ; 51d8e (14:5d8e)
 
 UnnamedText_51dd3: ; 51dd3 (14:5dd3)
 	TX_FAR _UnnamedText_51dd3
-	db $50
+	db "@"
 ; 0x51dd3 + 5 bytes
 
 UnnamedText_51dd8: ; 51dd8 (14:5dd8)
 	TX_FAR _UnnamedText_51dd8
-	db $50
+	db "@"
 ; 0x51dd8 + 5 bytes
 
 UnnamedText_51ddd: ; 51ddd (14:5ddd)
 	TX_FAR _UnnamedText_51ddd
-	db $50
+	db "@"
 ; 0x51ddd + 5 bytes
 
 UnnamedText_51de2: ; 51de2 (14:5de2)
 	TX_FAR _UnnamedText_51de2
-	db $50
+	db "@"
 ; 0x51de2 + 5 bytes
 
 SilphCo7Text2: ; 51de7 (14:5de7)
@@ -81313,12 +81312,12 @@ SilphCo7Text2: ; 51de7 (14:5de7)
 
 UnnamedText_51e00: ; 51e00 (14:5e00)
 	TX_FAR _UnnamedText_51e00
-	db $50
+	db "@"
 ; 0x51e00 + 5 bytes
 
 UnnamedText_51e05: ; 51e05 (14:5e05)
 	TX_FAR _UnnamedText_51e05
-	db $50
+	db "@"
 ; 0x51e05 + 5 bytes
 
 SilphCo7Text3: ; 51e0a (14:5e0a)
@@ -81337,12 +81336,12 @@ SilphCo7Text3: ; 51e0a (14:5e0a)
 
 UnnamedText_51e23: ; 51e23 (14:5e23)
 	TX_FAR _UnnamedText_51e23
-	db $50
+	db "@"
 ; 0x51e23 + 5 bytes
 
 UnnamedText_51e28: ; 51e28 (14:5e28)
 	TX_FAR _UnnamedText_51e28
-	db $50
+	db "@"
 ; 0x51e28 + 5 bytes
 
 SilphCo7Text4: ; 51e2d (14:5e2d)
@@ -81361,12 +81360,12 @@ SilphCo7Text4: ; 51e2d (14:5e2d)
 
 UnnamedText_51e46: ; 51e46 (14:5e46)
 	TX_FAR _UnnamedText_51e46
-	db $50
+	db "@"
 ; 0x51e46 + 5 bytes
 
 UnnamedText_51e4b: ; 51e4b (14:5e4b)
 	TX_FAR _UnnamedText_51e4b
-	db $50
+	db "@"
 ; 0x51e4b + 5 bytes
 
 SilphCo7Text5: ; 51e50 (14:5e50)
@@ -81377,17 +81376,17 @@ SilphCo7Text5: ; 51e50 (14:5e50)
 
 SilphCo7BattleText1: ; 51e5a (14:5e5a)
 	TX_FAR _SilphCo7BattleText1
-	db $50
+	db "@"
 ; 0x51e5a + 5 bytes
 
 SilphCo7EndBattleText1: ; 51e5f (14:5e5f)
 	TX_FAR _SilphCo7EndBattleText1
-	db $50
+	db "@"
 ; 0x51e5f + 5 bytes
 
 SilphCo7AfterBattleText1: ; 51e64 (14:5e64)
 	TX_FAR _SilphCo7AfterBattleText1
-	db $50
+	db "@"
 ; 0x51e64 + 5 bytes
 
 SilphCo7Text6: ; 51e69 (14:5e69)
@@ -81398,17 +81397,17 @@ SilphCo7Text6: ; 51e69 (14:5e69)
 
 SilphCo7BattleText2: ; 51e73 (14:5e73)
 	TX_FAR _SilphCo7BattleText2
-	db $50
+	db "@"
 ; 0x51e73 + 5 bytes
 
 SilphCo7EndBattleText2: ; 51e78 (14:5e78)
 	TX_FAR _SilphCo7EndBattleText2
-	db $50
+	db "@"
 ; 0x51e78 + 5 bytes
 
 SilphCo7AfterBattleText2: ; 51e7d (14:5e7d)
 	TX_FAR _SilphCo7AfterBattleText2
-	db $50
+	db "@"
 ; 0x51e7d + 5 bytes
 
 SilphCo7Text7: ; 51e82 (14:5e82)
@@ -81419,17 +81418,17 @@ SilphCo7Text7: ; 51e82 (14:5e82)
 
 SilphCo7BattleText3: ; 51e8c (14:5e8c)
 	TX_FAR _SilphCo7BattleText3
-	db $50
+	db "@"
 ; 0x51e8c + 5 bytes
 
 SilphCo7EndBattleText3: ; 51e91 (14:5e91)
 	TX_FAR _SilphCo7EndBattleText3
-	db $50
+	db "@"
 ; 0x51e91 + 5 bytes
 
 SilphCo7AfterBattleText3: ; 51e96 (14:5e96)
 	TX_FAR _SilphCo7AfterBattleText3
-	db $50
+	db "@"
 ; 0x51e96 + 5 bytes
 
 SilphCo7Text8: ; 51e9b (14:5e9b)
@@ -81440,17 +81439,17 @@ SilphCo7Text8: ; 51e9b (14:5e9b)
 
 SilphCo7BattleText4: ; 51ea5 (14:5ea5)
 	TX_FAR _SilphCo7BattleText4
-	db $50
+	db "@"
 ; 0x51ea5 + 5 bytes
 
 SilphCo7EndBattleText4: ; 51eaa (14:5eaa)
 	TX_FAR _SilphCo7EndBattleText4
-	db $50
+	db "@"
 ; 0x51eaa + 5 bytes
 
 SilphCo7AfterBattleText4: ; 51eaf (14:5eaf)
 	TX_FAR _SilphCo7AfterBattleText4
-	db $50
+	db "@"
 ; 0x51eaf + 5 bytes
 
 SilphCo7Text9: ; 51eb4 (14:5eb4)
@@ -81461,27 +81460,27 @@ SilphCo7Text9: ; 51eb4 (14:5eb4)
 
 UnnamedText_51ebe: ; 51ebe (14:5ebe)
 	TX_FAR _UnnamedText_51ebe
-	db $50
+	db "@"
 ; 0x51ebe + 5 bytes
 
 SilphCo7Text13: ; 51ec3 (14:5ec3)
 	TX_FAR _UnnamedText_51ec3
-	db $50
+	db "@"
 ; 0x51ec3 + 5 bytes
 
 SilphCo7Text14: ; 51ec8 (14:5ec8)
 	TX_FAR _UnnamedText_51ec8
-	db $50
+	db "@"
 ; 0x51ec8 + 5 bytes
 
 UnnamedText_51ecd: ; 51ecd (14:5ecd)
 	TX_FAR _UnnamedText_51ecd
-	db $50
+	db "@"
 ; 0x51ecd + 5 bytes
 
 SilphCo7Text15: ; 51ed2 (14:5ed2)
 	TX_FAR _UnnamedText_51ed2
-	db $50
+	db "@"
 ; 0x51ed2 + 5 bytes
 
 SilphCo7Object: ; 0x51ed7 (size=128)
@@ -81605,26 +81604,26 @@ Mansion2Text1: ; 52064 (14:6064)
 
 Mansion2BattleText1: ; 5206e (14:606e)
 	TX_FAR _Mansion2BattleText1
-	db $50
+	db "@"
 ; 0x5206e + 5 bytes
 
 Mansion2EndBattleText1: ; 52073 (14:6073)
 	TX_FAR _Mansion2EndBattleText1
-	db $50
+	db "@"
 ; 0x52073 + 5 bytes
 
 Mansion2AfterBattleText1: ; 52078 (14:6078)
 	TX_FAR _Mansion2AfterBattleText1
-	db $50
+	db "@"
 ; 0x52078 + 5 bytes
 
 Mansion2Text3: ; 5207d (14:607d)
 	TX_FAR _Mansion2Text3
-	db $50
+	db "@"
 
 Mansion2Text4: ; 52082 (14:6082)
 	TX_FAR _Mansion2Text4
-	db $50
+	db "@"
 
 Mansion3Text6: ; 52087 (14:6087)
 Mansion2Text5: ; 52087 (14:6087)
@@ -81658,17 +81657,17 @@ Mansion2Text5: ; 52087 (14:6087)
 
 UnnamedText_520c2: ; 520c2 (14:60c2)
 	TX_FAR _UnnamedText_520c2
-	db $50
+	db "@"
 ; 0x520c2 + 5 bytes
 
 UnnamedText_520c7: ; 520c7 (14:60c7)
 	TX_FAR _UnnamedText_520c7
-	db $50
+	db "@"
 ; 0x520c7 + 5 bytes
 
 UnnamedText_520cc: ; 520cc (14:60cc)
 	TX_FAR _UnnamedText_520cc
-	db $50
+	db "@"
 ; 0x520cc + 5 bytes
 
 Mansion2Object: ; 0x520d1 (size=63)
@@ -81823,37 +81822,37 @@ Mansion3Text2: ; 522b9 (14:62b9)
 
 Mansion3BattleText1: ; 522c3 (14:62c3)
 	TX_FAR _Mansion3BattleText1
-	db $50
+	db "@"
 ; 0x522c3 + 5 bytes
 
 Mansion3EndBattleText1: ; 522c8 (14:62c8)
 	TX_FAR _Mansion3EndBattleText1
-	db $50
+	db "@"
 ; 0x522c8 + 5 bytes
 
 Mansion3AfterBattleText1: ; 522cd (14:62cd)
 	TX_FAR _Mansion3AfterBattleText1
-	db $50
+	db "@"
 ; 0x522cd + 5 bytes
 
 Mansion3BattleText2: ; 522d2 (14:62d2)
 	TX_FAR _Mansion3BattleText2
-	db $50
+	db "@"
 ; 0x522d2 + 5 bytes
 
 Mansion3EndBattleText2: ; 522d7 (14:62d7)
 	TX_FAR _Mansion3EndBattleText2
-	db $50
+	db "@"
 ; 0x522d7 + 5 bytes
 
 Mansion3AfterBattleText2: ; 522dc (14:62dc)
 	TX_FAR _Mansion3AfterBattleText2
-	db $50
+	db "@"
 ; 0x522dc + 5 bytes
 
 Mansion3Text5: ; 522e1 (14:62e1)
 	TX_FAR _Mansion3Text5
-	db $50
+	db "@"
 
 Mansion3Object: ; 0x522e6 (size=64)
 	db $1 ; border tile
@@ -81986,37 +81985,37 @@ Mansion4Text2: ; 5246b (14:646b)
 
 Mansion4BattleText1: ; 52475 (14:6475)
 	TX_FAR _Mansion4BattleText1
-	db $50
+	db "@"
 ; 0x52475 + 5 bytes
 
 Mansion4EndBattleText1: ; 5247a (14:647a)
 	TX_FAR _Mansion4EndBattleText1
-	db $50
+	db "@"
 ; 0x5247a + 5 bytes
 
 Mansion4AfterBattleText1: ; 5247f (14:647f)
 	TX_FAR _Mansion4AfterBattleText1
-	db $50
+	db "@"
 ; 0x5247f + 5 bytes
 
 Mansion4BattleText2: ; 52484 (14:6484)
 	TX_FAR _Mansion4BattleText2
-	db $50
+	db "@"
 ; 0x52484 + 5 bytes
 
 Mansion4EndBattleText2: ; 52489 (14:6489)
 	TX_FAR _Mansion4EndBattleText2
-	db $50
+	db "@"
 ; 0x52489 + 5 bytes
 
 Mansion4AfterBattleText2: ; 5248e (14:648e)
 	TX_FAR _Mansion4AfterBattleText2
-	db $50
+	db "@"
 ; 0x5248e + 5 bytes
 
 Mansion4Text7: ; 52493 (14:6493)
 	TX_FAR _Mansion4Text7
-	db $50
+	db "@"
 
 Mansion4Object: ; 0x52498 (size=69)
 	db $1 ; border tile
@@ -82214,12 +82213,12 @@ INCBIN "baserom.gbc",$526e3,$526f3 - $526e3
 
 UnnamedText_526f3: ; 526f3 (14:66f3)
 	TX_FAR _UnnamedText_526f3
-	db $50
+	db "@"
 ; 0x526f3 + 5 bytes
 
 UnnamedText_526f8: ; 526f8 (14:66f8)
 	TX_FAR _UnnamedText_526f8
-	db $50
+	db "@"
 ; 0x526f8 + 5 bytes
 
 ; known jump sources: 526a3 (14:66a3)
@@ -82654,57 +82653,57 @@ INCBIN "baserom.gbc",$52996,$529e9 - $52996
 
 UnnamedText_529e9: ; 529e9 (14:69e9)
 	TX_FAR _UnnamedText_529e9
-	db $50
+	db "@"
 ; 0x529e9 + 5 bytes
 
 INCBIN "baserom.gbc",$529ee,$529f4 - $529ee
 
 UnnamedText_529f4: ; 529f4 (14:69f4)
 	TX_FAR _UnnamedText_529f4
-	db $50
+	db "@"
 ; 0x529f4 + 5 bytes
 
 UnnamedText_529f9: ; 529f9 (14:69f9)
 	TX_FAR _UnnamedText_529f9
-	db $50
+	db "@"
 ; 0x529f9 + 5 bytes
 
 UnnamedText_529fe: ; 529fe (14:69fe)
 	TX_FAR _UnnamedText_529fe
-	db $50
+	db "@"
 ; 0x529fe + 5 bytes
 
 UnnamedText_52a03: ; 52a03 (14:6a03)
 	TX_FAR _UnnamedText_52a03
-	db $50
+	db "@"
 ; 0x52a03 + 5 bytes
 
 INCBIN "baserom.gbc",$52a08,$52a10 - $52a08
 
 UnnamedText_52a10: ; 52a10 (14:6a10)
 	TX_FAR _UnnamedText_52a10
-	db $50
+	db "@"
 ; 0x52a10 + 5 bytes
 
 INCBIN "baserom.gbc",$52a15,$52a1d - $52a15
 
 UnnamedText_52a1d: ; 52a1d (14:6a1d)
 	TX_FAR _UnnamedText_52a1d
-	db $50
+	db "@"
 ; 0x52a1d + 5 bytes
 
 INCBIN "baserom.gbc",$52a22,$52a2a - $52a22
 
 UnnamedText_52a2a: ; 52a2a (14:6a2a)
 	TX_FAR _UnnamedText_52a2a
-	db $50
+	db "@"
 ; 0x52a2a + 5 bytes
 
 INCBIN "baserom.gbc",$52a2f,$52a3d - $52a2f
 
 UnnamedText_52a3d: ; 52a3d (14:6a3d)
 	TX_FAR _UnnamedText_52a3d
-	db $50
+	db "@"
 ; 0x52a3d + 5 bytes
 
 SECTION "bank15",ROMX,BANK[$15]
@@ -83605,7 +83604,7 @@ INCBIN "baserom.gbc",$554d4,$554d8 - $554d4
 
 UnnamedText_554d8: ; 554d8 (15:54d8)
 	TX_FAR _UnnamedText_554d8 ; 0x89bee
-	db $50
+	db "@"
 ; 0x554dd
 
 Unknown_554dd: ; 554dd (15:54dd)
@@ -83620,11 +83619,11 @@ Route2Texts: ; 554e6 (15:54e6)
 
 Route2Text3: ; 554ee (15:54ee)
 	TX_FAR _Route2Text3
-	db $50
+	db "@"
 
 Route2Text4: ; 554f3 (15:54f3)
 	TX_FAR _Route2Text4
-	db $50
+	db "@"
 
 Route3Script: ; 554f8 (15:54f8)
 	call EnableAutoTextBoxDrawing
@@ -83727,7 +83726,7 @@ db $ff
 
 Route3Text1: ; 55586 (15:5586)
 	TX_FAR _Route3Text1
-	db $50
+	db "@"
 
 Route3Text2: ; 5558b (15:558b)
 	db $08 ; asm
@@ -83737,17 +83736,17 @@ Route3Text2: ; 5558b (15:558b)
 
 Route3BattleText1: ; 55595 (15:5595)
 	TX_FAR _Route3BattleText1
-	db $50
+	db "@"
 ; 0x55595 + 5 bytes
 
 Route3EndBattleText1: ; 5559a (15:559a)
 	TX_FAR _Route3EndBattleText1
-	db $50
+	db "@"
 ; 0x5559a + 5 bytes
 
 Route3AfterBattleText1: ; 5559f (15:559f)
 	TX_FAR _Route3AfterBattleText1
-	db $50
+	db "@"
 ; 0x5559f + 5 bytes
 
 Route3Text3: ; 555a4 (15:55a4)
@@ -83758,17 +83757,17 @@ Route3Text3: ; 555a4 (15:55a4)
 
 Route3BattleText2: ; 555ae (15:55ae)
 	TX_FAR _Route3BattleText2
-	db $50
+	db "@"
 ; 0x555ae + 5 bytes
 
 Route3EndBattleText2: ; 555b3 (15:55b3)
 	TX_FAR _Route3EndBattleText2
-	db $50
+	db "@"
 ; 0x555b3 + 5 bytes
 
 Route3AfterBattleText2: ; 555b8 (15:55b8)
 	TX_FAR _Route3AfterBattleText2
-	db $50
+	db "@"
 ; 0x555b8 + 5 bytes
 
 Route3Text4: ; 555bd (15:55bd)
@@ -83779,17 +83778,17 @@ Route3Text4: ; 555bd (15:55bd)
 
 Route3BattleText3: ; 555c7 (15:55c7)
 	TX_FAR _Route3BattleText3
-	db $50
+	db "@"
 ; 0x555c7 + 5 bytes
 
 Route3EndBattleText3: ; 555cc (15:55cc)
 	TX_FAR _Route3EndBattleText3
-	db $50
+	db "@"
 ; 0x555cc + 5 bytes
 
 Route3AfterBattleText3: ; 555d1 (15:55d1)
 	TX_FAR _Route3AfterBattleText3
-	db $50
+	db "@"
 ; 0x555d1 + 5 bytes
 
 Route3Text5: ; 555d6 (15:55d6)
@@ -83800,17 +83799,17 @@ Route3Text5: ; 555d6 (15:55d6)
 
 Route3BattleText4: ; 555e0 (15:55e0)
 	TX_FAR _Route3BattleText4
-	db $50
+	db "@"
 ; 0x555e0 + 5 bytes
 
 Route3EndBattleText4: ; 555e5 (15:55e5)
 	TX_FAR _Route3EndBattleText4
-	db $50
+	db "@"
 ; 0x555e5 + 5 bytes
 
 Route3AfterBattleText4: ; 555ea (15:55ea)
 	TX_FAR _Route3AfterBattleText4
-	db $50
+	db "@"
 ; 0x555ea + 5 bytes
 
 Route3Text6: ; 555ef (15:55ef)
@@ -83821,17 +83820,17 @@ Route3Text6: ; 555ef (15:55ef)
 
 Route3BattleText5: ; 555f9 (15:55f9)
 	TX_FAR _Route3BattleText5
-	db $50
+	db "@"
 ; 0x555f9 + 5 bytes
 
 Route3EndBattleText5: ; 555fe (15:55fe)
 	TX_FAR _Route3EndBattleText5
-	db $50
+	db "@"
 ; 0x555fe + 5 bytes
 
 Route3AfterBattleText5: ; 55603 (15:5603)
 	TX_FAR _Route3AfterBattleText5
-	db $50
+	db "@"
 ; 0x55603 + 5 bytes
 
 Route3Text7: ; 55608 (15:5608)
@@ -83842,17 +83841,17 @@ Route3Text7: ; 55608 (15:5608)
 
 Route3BattleText6: ; 55612 (15:5612)
 	TX_FAR _Route3BattleText6
-	db $50
+	db "@"
 ; 0x55612 + 5 bytes
 
 Route3EndBattleText6: ; 55617 (15:5617)
 	TX_FAR _Route3EndBattleText6
-	db $50
+	db "@"
 ; 0x55617 + 5 bytes
 
 Route3AfterBattleText6: ; 5561c (15:561c)
 	TX_FAR _Route3AfterBattleText6
-	db $50
+	db "@"
 ; 0x5561c + 5 bytes
 
 Route3Text8: ; 55621 (15:5621)
@@ -83863,17 +83862,17 @@ Route3Text8: ; 55621 (15:5621)
 
 Route3BattleText7: ; 5562b (15:562b)
 	TX_FAR _Route3BattleText7
-	db $50
+	db "@"
 ; 0x5562b + 5 bytes
 
 Route3EndBattleText7: ; 55630 (15:5630)
 	TX_FAR _Route3EndBattleText7
-	db $50
+	db "@"
 ; 0x55630 + 5 bytes
 
 Route3AfterBattleText7: ; 55635 (15:5635)
 	TX_FAR _Route3AfterBattleText7
-	db $50
+	db "@"
 ; 0x55635 + 5 bytes
 
 Route3Text9: ; 5563a (15:563a)
@@ -83884,22 +83883,22 @@ Route3Text9: ; 5563a (15:563a)
 
 Route3BattleText8: ; 55644 (15:5644)
 	TX_FAR _Route3BattleText8
-	db $50
+	db "@"
 ; 0x55644 + 5 bytes
 
 Route3EndBattleText8: ; 55649 (15:5649)
 	TX_FAR _Route3EndBattleText8
-	db $50
+	db "@"
 ; 0x55649 + 5 bytes
 
 Route3AfterBattleText8: ; 5564e (15:564e)
 	TX_FAR _Route3AfterBattleText8
-	db $50
+	db "@"
 ; 0x5564e + 5 bytes
 
 Route3Text10: ; 55653 (15:5653)
 	TX_FAR _Route3Text10
-	db $50
+	db "@"
 
 Route4Script: ; 55658 (15:5658)
 	call EnableAutoTextBoxDrawing
@@ -83932,7 +83931,7 @@ db $ff
 
 Route4Text1: ; 5568a (15:568a)
 	TX_FAR _Route4Text1
-	db $50
+	db "@"
 
 Route4Text2: ; 5568f (15:568f)
 	db $08 ; asm
@@ -83942,26 +83941,26 @@ Route4Text2: ; 5568f (15:568f)
 
 Route4BattleText1: ; 55699 (15:5699)
 	TX_FAR _Route4BattleText1
-	db $50
+	db "@"
 ; 0x55699 + 5 bytes
 
 Route4EndBattleText1: ; 5569e (15:569e)
 	TX_FAR _Route4EndBattleText1
-	db $50
+	db "@"
 ; 0x5569e + 5 bytes
 
 Route4AfterBattleText1: ; 556a3 (15:56a3)
 	TX_FAR _Route4AfterBattleText1
-	db $50
+	db "@"
 ; 0x556a3 + 5 bytes
 
 Route4Text5: ; 556a8 (15:56a8)
 	TX_FAR _Route4Text5
-	db $50
+	db "@"
 
 Route4Text6: ; 556ad (15:56ad)
 	TX_FAR _Route4Text6
-	db $50
+	db "@"
 
 Route5Script: ; 556b2 (15:56b2)
 	jp EnableAutoTextBoxDrawing
@@ -83972,7 +83971,7 @@ Route5Texts: ; 556b5 (15:56b5)
 
 Route5Text1: ; 556b7 (15:56b7)
 	TX_FAR _Route5Text1
-	db $50
+	db "@"
 
 Route9Script: ; 556bc (15:56bc)
 	call EnableAutoTextBoxDrawing
@@ -84133,142 +84132,142 @@ asm_8be3d: ; 5578c (15:578c)
 
 Route9BattleText1: ; 55792 (15:5792)
 	TX_FAR _Route9BattleText1
-	db $50
+	db "@"
 ; 0x55792 + 5 bytes
 
 Route9EndBattleText1: ; 55797 (15:5797)
 	TX_FAR _Route9EndBattleText1
-	db $50
+	db "@"
 ; 0x55797 + 5 bytes
 
 Route9AfterBattleText1: ; 5579c (15:579c)
 	TX_FAR _Route9AfterBattleText1
-	db $50
+	db "@"
 ; 0x5579c + 5 bytes
 
 Route9BattleText2: ; 557a1 (15:57a1)
 	TX_FAR _Route9BattleText2
-	db $50
+	db "@"
 ; 0x557a1 + 5 bytes
 
 Route9EndBattleText2: ; 557a6 (15:57a6)
 	TX_FAR _Route9EndBattleText2
-	db $50
+	db "@"
 ; 0x557a6 + 5 bytes
 
 Route9AfterBattleText2: ; 557ab (15:57ab)
 	TX_FAR _Route9AfterBattleText2
-	db $50
+	db "@"
 ; 0x557ab + 5 bytes
 
 Route9BattleText3: ; 557b0 (15:57b0)
 	TX_FAR _Route9BattleText3
-	db $50
+	db "@"
 ; 0x557b0 + 5 bytes
 
 Route9EndBattleText3: ; 557b5 (15:57b5)
 	TX_FAR _Route9EndBattleText3
-	db $50
+	db "@"
 ; 0x557b5 + 5 bytes
 
 Route9AfterBattleText3: ; 557ba (15:57ba)
 	TX_FAR _Route9AfterBattleText3
-	db $50
+	db "@"
 ; 0x557ba + 5 bytes
 
 Route9BattleText4: ; 557bf (15:57bf)
 	TX_FAR _Route9BattleText4
-	db $50
+	db "@"
 ; 0x557bf + 5 bytes
 
 Route9EndBattleText4: ; 557c4 (15:57c4)
 	TX_FAR _Route9EndBattleText4
-	db $50
+	db "@"
 ; 0x557c4 + 5 bytes
 
 Route9AfterBattleText4: ; 557c9 (15:57c9)
 	TX_FAR _Route9AfterBattleText4
-	db $50
+	db "@"
 ; 0x557c9 + 5 bytes
 
 Route9BattleText5: ; 557ce (15:57ce)
 	TX_FAR _Route9BattleText5
-	db $50
+	db "@"
 ; 0x557ce + 5 bytes
 
 Route9EndBattleText5: ; 557d3 (15:57d3)
 	TX_FAR _Route9EndBattleText5
-	db $50
+	db "@"
 ; 0x557d3 + 5 bytes
 
 Route9AfterBattleText5: ; 557d8 (15:57d8)
 	TX_FAR _Route9AfterBattleText5
-	db $50
+	db "@"
 ; 0x557d8 + 5 bytes
 
 Route9BattleText6: ; 557dd (15:57dd)
 	TX_FAR _Route9BattleText6
-	db $50
+	db "@"
 ; 0x557dd + 5 bytes
 
 Route9EndBattleText6: ; 557e2 (15:57e2)
 	TX_FAR _Route9EndBattleText6
-	db $50
+	db "@"
 ; 0x557e2 + 5 bytes
 
 Route9AfterBattleText6: ; 557e7 (15:57e7)
 	TX_FAR _Route9AfterBattleText6
-	db $50
+	db "@"
 ; 0x557e7 + 5 bytes
 
 Route9BattleText7: ; 557ec (15:57ec)
 	TX_FAR _Route9BattleText7
-	db $50
+	db "@"
 ; 0x557ec + 5 bytes
 
 Route9EndBattleText7: ; 557f1 (15:57f1)
 	TX_FAR _Route9EndBattleText7
-	db $50
+	db "@"
 ; 0x557f1 + 5 bytes
 
 Route9AfterBattleText7: ; 557f6 (15:57f6)
 	TX_FAR _Route9AfterBattleText7
-	db $50
+	db "@"
 ; 0x557f6 + 5 bytes
 
 Route9BattleText8: ; 557fb (15:57fb)
 	TX_FAR _Route9BattleText8
-	db $50
+	db "@"
 ; 0x557fb + 5 bytes
 
 Route9EndBattleText8: ; 55800 (15:5800)
 	TX_FAR _Route9EndBattleText8
-	db $50
+	db "@"
 ; 0x55800 + 5 bytes
 
 Route9AfterBattleText8: ; 55805 (15:5805)
 	TX_FAR _Route9AfterBattleText8
-	db $50
+	db "@"
 ; 0x55805 + 5 bytes
 
 Route9BattleText9: ; 5580a (15:580a)
 	TX_FAR _Route9BattleText9
-	db $50
+	db "@"
 ; 0x5580a + 5 bytes
 
 Route9EndBattleText9: ; 5580f (15:580f)
 	TX_FAR _Route9EndBattleText9
-	db $50
+	db "@"
 ; 0x5580f + 5 bytes
 
 Route9AfterBattleText9: ; 55814 (15:5814)
 	TX_FAR _Route9AfterBattleText9
-	db $50
+	db "@"
 ; 0x55814 + 5 bytes
 
 Route9Text11: ; 55819 (15:5819)
 	TX_FAR _Route9Text11
-	db $50
+	db "@"
 
 Route13Script: ; 5581e (15:581e)
 	call EnableAutoTextBoxDrawing
@@ -84397,17 +84396,17 @@ Route13Text1: ; 558ca (15:58ca)
 
 Route13BattleText2: ; 558d4 (15:58d4)
 	TX_FAR _Route13BattleText2
-	db $50
+	db "@"
 ; 0x558d4 + 5 bytes
 
 Route13EndBattleText2: ; 558d9 (15:58d9)
 	TX_FAR _Route13EndBattleText2
-	db $50
+	db "@"
 ; 0x558d9 + 5 bytes
 
 Route13AfterBattleText2: ; 558de (15:58de)
 	TX_FAR _Route13AfterBattleText2
-	db $50
+	db "@"
 ; 0x558de + 5 bytes
 
 Route13Text2: ; 558e3 (15:58e3)
@@ -84418,17 +84417,17 @@ Route13Text2: ; 558e3 (15:58e3)
 
 Route13BattleText3: ; 558ed (15:58ed)
 	TX_FAR _Route13BattleText3
-	db $50
+	db "@"
 ; 0x558ed + 5 bytes
 
 Route13EndBattleText3: ; 558f2 (15:58f2)
 	TX_FAR _Route13EndBattleText3
-	db $50
+	db "@"
 ; 0x558f2 + 5 bytes
 
 Route13AfterBattleText3: ; 558f7 (15:58f7)
 	TX_FAR _Route13AfterBattleText3
-	db $50
+	db "@"
 ; 0x558f7 + 5 bytes
 
 Route13Text3: ; 558fc (15:58fc)
@@ -84439,17 +84438,17 @@ Route13Text3: ; 558fc (15:58fc)
 
 Route13BattleText4: ; 55906 (15:5906)
 	TX_FAR _Route13BattleText4
-	db $50
+	db "@"
 ; 0x55906 + 5 bytes
 
 Route13EndBattleText4: ; 5590b (15:590b)
 	TX_FAR _Route13EndBattleText4
-	db $50
+	db "@"
 ; 0x5590b + 5 bytes
 
 Route13AfterBattleText4: ; 55910 (15:5910)
 	TX_FAR _Route13AfterBattleText4
-	db $50
+	db "@"
 ; 0x55910 + 5 bytes
 
 Route13Text4: ; 55915 (15:5915)
@@ -84460,17 +84459,17 @@ Route13Text4: ; 55915 (15:5915)
 
 Route13BattleText5: ; 5591f (15:591f)
 	TX_FAR _Route13BattleText5
-	db $50
+	db "@"
 ; 0x5591f + 5 bytes
 
 Route13EndBattleText5: ; 55924 (15:5924)
 	TX_FAR _Route13EndBattleText5
-	db $50
+	db "@"
 ; 0x55924 + 5 bytes
 
 Route13AfterBattleText5: ; 55929 (15:5929)
 	TX_FAR _Route13AfterBattleText5
-	db $50
+	db "@"
 ; 0x55929 + 5 bytes
 
 Route13Text5: ; 5592e (15:592e)
@@ -84481,17 +84480,17 @@ Route13Text5: ; 5592e (15:592e)
 
 Route13BattleText6: ; 55938 (15:5938)
 	TX_FAR _Route13BattleText6
-	db $50
+	db "@"
 ; 0x55938 + 5 bytes
 
 Route13EndBattleText6: ; 5593d (15:593d)
 	TX_FAR _Route13EndBattleText6
-	db $50
+	db "@"
 ; 0x5593d + 5 bytes
 
 Route13AfterBattleText6: ; 55942 (15:5942)
 	TX_FAR _Route13AfterBattleText6
-	db $50
+	db "@"
 ; 0x55942 + 5 bytes
 
 Route13Text6: ; 55947 (15:5947)
@@ -84502,17 +84501,17 @@ Route13Text6: ; 55947 (15:5947)
 
 Route13BattleText7: ; 55951 (15:5951)
 	TX_FAR _Route13BattleText7
-	db $50
+	db "@"
 ; 0x55951 + 5 bytes
 
 Route13EndBattleText7: ; 55956 (15:5956)
 	TX_FAR _Route13EndBattleText7
-	db $50
+	db "@"
 ; 0x55956 + 5 bytes
 
 Route13AfterBattleText7: ; 5595b (15:595b)
 	TX_FAR _Route13AfterBattleText7
-	db $50
+	db "@"
 ; 0x5595b + 5 bytes
 
 Route13Text7: ; 55960 (15:5960)
@@ -84523,17 +84522,17 @@ Route13Text7: ; 55960 (15:5960)
 
 Route13BattleText8: ; 5596a (15:596a)
 	TX_FAR _Route13BattleText8
-	db $50
+	db "@"
 ; 0x5596a + 5 bytes
 
 Route13EndBattleText8: ; 5596f (15:596f)
 	TX_FAR _Route13EndBattleText8
-	db $50
+	db "@"
 ; 0x5596f + 5 bytes
 
 Route13AfterBattleText8: ; 55974 (15:5974)
 	TX_FAR _Route13AfterBattleText8
-	db $50
+	db "@"
 ; 0x55974 + 5 bytes
 
 Route13Text8: ; 55979 (15:5979)
@@ -84544,17 +84543,17 @@ Route13Text8: ; 55979 (15:5979)
 
 Route13BattleText9: ; 55983 (15:5983)
 	TX_FAR _Route13BattleText9
-	db $50
+	db "@"
 ; 0x55983 + 5 bytes
 
 Route13EndBattleText9: ; 55988 (15:5988)
 	TX_FAR _Route13EndBattleText9
-	db $50
+	db "@"
 ; 0x55988 + 5 bytes
 
 Route13AfterBattleText9: ; 5598d (15:598d)
 	TX_FAR _Route13AfterBattleText9
-	db $50
+	db "@"
 ; 0x5598d + 5 bytes
 
 Route13Text9: ; 55992 (15:5992)
@@ -84565,17 +84564,17 @@ Route13Text9: ; 55992 (15:5992)
 
 Route13BattleText10: ; 5599c (15:599c)
 	TX_FAR _Route13BattleText10
-	db $50
+	db "@"
 ; 0x5599c + 5 bytes
 
 Route13EndBattleText10: ; 559a1 (15:59a1)
 	TX_FAR _Route13EndBattleText10
-	db $50
+	db "@"
 ; 0x559a1 + 5 bytes
 
 Route13AfterBattleText10: ; 559a6 (15:59a6)
 	TX_FAR _Route13AfterBattleText10
-	db $50
+	db "@"
 ; 0x559a6 + 5 bytes
 
 Route13Text10: ; 559ab (15:59ab)
@@ -84586,30 +84585,30 @@ Route13Text10: ; 559ab (15:59ab)
 
 Route13BattleText11: ; 559b5 (15:59b5)
 	TX_FAR _Route13BattleText11
-	db $50
+	db "@"
 ; 0x559b5 + 5 bytes
 
 Route13EndBattleText11: ; 559ba (15:59ba)
 	TX_FAR _Route13EndBattleText11
-	db $50
+	db "@"
 ; 0x559ba + 5 bytes
 
 Route13AfterBattleText11: ; 559bf (15:59bf)
 	TX_FAR _Route13AfterBattleText11
-	db $50
+	db "@"
 ; 0x559bf + 5 bytes
 
 Route13Text11: ; 559c4 (15:59c4)
 	TX_FAR _Route13Text11
-	db $50
+	db "@"
 
 Route13Text12: ; 559c9 (15:59c9)
 	TX_FAR _Route13Text12
-	db $50
+	db "@"
 
 Route13Text13: ; 559ce (15:59ce)
 	TX_FAR _Route13Text13
-	db $50
+	db "@"
 
 Route14Script: ; 559d3 (15:59d3)
 	call EnableAutoTextBoxDrawing
@@ -84738,17 +84737,17 @@ Route14Text1: ; 55a7b (15:5a7b)
 
 Route14BattleText1: ; 55a85 (15:5a85)
 	TX_FAR _Route14BattleText1
-	db $50
+	db "@"
 ; 0x55a85 + 5 bytes
 
 Route14EndBattleText1: ; 55a8a (15:5a8a)
 	TX_FAR _Route14EndBattleText1
-	db $50
+	db "@"
 ; 0x55a8a + 5 bytes
 
 Route14AfterBattleText1: ; 55a8f (15:5a8f)
 	TX_FAR _Route14AfterBattleText1
-	db $50
+	db "@"
 ; 0x55a8f + 5 bytes
 
 Route14Text2: ; 55a94 (15:5a94)
@@ -84759,17 +84758,17 @@ Route14Text2: ; 55a94 (15:5a94)
 
 Route14BattleText2: ; 55a9e (15:5a9e)
 	TX_FAR _Route14BattleText2
-	db $50
+	db "@"
 ; 0x55a9e + 5 bytes
 
 Route14EndBattleText2: ; 55aa3 (15:5aa3)
 	TX_FAR _Route14EndBattleText2
-	db $50
+	db "@"
 ; 0x55aa3 + 5 bytes
 
 Route14AfterBattleText2: ; 55aa8 (15:5aa8)
 	TX_FAR _Route14AfterBattleText2
-	db $50
+	db "@"
 ; 0x55aa8 + 5 bytes
 
 Route14Text3: ; 55aad (15:5aad)
@@ -84780,17 +84779,17 @@ Route14Text3: ; 55aad (15:5aad)
 
 Route14BattleText3: ; 55ab7 (15:5ab7)
 	TX_FAR _Route14BattleText3
-	db $50
+	db "@"
 ; 0x55ab7 + 5 bytes
 
 Route14EndBattleText3: ; 55abc (15:5abc)
 	TX_FAR _Route14EndBattleText3
-	db $50
+	db "@"
 ; 0x55abc + 5 bytes
 
 Route14AfterBattleText3: ; 55ac1 (15:5ac1)
 	TX_FAR _Route14AfterBattleText3
-	db $50
+	db "@"
 ; 0x55ac1 + 5 bytes
 
 Route14Text4: ; 55ac6 (15:5ac6)
@@ -84801,17 +84800,17 @@ Route14Text4: ; 55ac6 (15:5ac6)
 
 Route14BattleText4: ; 55ad0 (15:5ad0)
 	TX_FAR _Route14BattleText4
-	db $50
+	db "@"
 ; 0x55ad0 + 5 bytes
 
 Route14EndBattleText4: ; 55ad5 (15:5ad5)
 	TX_FAR _Route14EndBattleText4
-	db $50
+	db "@"
 ; 0x55ad5 + 5 bytes
 
 Route14AfterBattleText4: ; 55ada (15:5ada)
 	TX_FAR _Route14AfterBattleText4
-	db $50
+	db "@"
 ; 0x55ada + 5 bytes
 
 Route14Text5: ; 55adf (15:5adf)
@@ -84822,17 +84821,17 @@ Route14Text5: ; 55adf (15:5adf)
 
 Route14BattleText5: ; 55ae9 (15:5ae9)
 	TX_FAR _Route14BattleText5
-	db $50
+	db "@"
 ; 0x55ae9 + 5 bytes
 
 Route14EndBattleText5: ; 55aee (15:5aee)
 	TX_FAR _Route14EndBattleText5
-	db $50
+	db "@"
 ; 0x55aee + 5 bytes
 
 Route14AfterBattleText5: ; 55af3 (15:5af3)
 	TX_FAR _Route14AfterBattleText5
-	db $50
+	db "@"
 ; 0x55af3 + 5 bytes
 
 Route14Text6: ; 55af8 (15:5af8)
@@ -84843,17 +84842,17 @@ Route14Text6: ; 55af8 (15:5af8)
 
 Route14BattleText6: ; 55b02 (15:5b02)
 	TX_FAR _Route14BattleText6
-	db $50
+	db "@"
 ; 0x55b02 + 5 bytes
 
 Route14EndBattleText6: ; 55b07 (15:5b07)
 	TX_FAR _Route14EndBattleText6
-	db $50
+	db "@"
 ; 0x55b07 + 5 bytes
 
 Route14AfterBattleText6: ; 55b0c (15:5b0c)
 	TX_FAR _Route14AfterBattleText6
-	db $50
+	db "@"
 ; 0x55b0c + 5 bytes
 
 Route14Text7: ; 55b11 (15:5b11)
@@ -84864,17 +84863,17 @@ Route14Text7: ; 55b11 (15:5b11)
 
 Route14BattleText7: ; 55b1b (15:5b1b)
 	TX_FAR _Route14BattleText7
-	db $50
+	db "@"
 ; 0x55b1b + 5 bytes
 
 Route14EndBattleText7: ; 55b20 (15:5b20)
 	TX_FAR _Route14EndBattleText7
-	db $50
+	db "@"
 ; 0x55b20 + 5 bytes
 
 Route14AfterBattleText7: ; 55b25 (15:5b25)
 	TX_FAR _Route14AfterBattleText7
-	db $50
+	db "@"
 ; 0x55b25 + 5 bytes
 
 Route14Text8: ; 55b2a (15:5b2a)
@@ -84885,17 +84884,17 @@ Route14Text8: ; 55b2a (15:5b2a)
 
 Route14BattleText8: ; 55b34 (15:5b34)
 	TX_FAR _Route14BattleText8
-	db $50
+	db "@"
 ; 0x55b34 + 5 bytes
 
 Route14EndBattleText8: ; 55b39 (15:5b39)
 	TX_FAR _Route14EndBattleText8
-	db $50
+	db "@"
 ; 0x55b39 + 5 bytes
 
 Route14AfterBattleText8: ; 55b3e (15:5b3e)
 	TX_FAR _Route14AfterBattleText8
-	db $50
+	db "@"
 ; 0x55b3e + 5 bytes
 
 Route14Text9: ; 55b43 (15:5b43)
@@ -84906,17 +84905,17 @@ Route14Text9: ; 55b43 (15:5b43)
 
 Route14BattleText9: ; 55b4d (15:5b4d)
 	TX_FAR _Route14BattleText9
-	db $50
+	db "@"
 ; 0x55b4d + 5 bytes
 
 Route14EndBattleText9: ; 55b52 (15:5b52)
 	TX_FAR _Route14EndBattleText9
-	db $50
+	db "@"
 ; 0x55b52 + 5 bytes
 
 Route14AfterBattleText9: ; 55b57 (15:5b57)
 	TX_FAR _Route14AfterBattleText9
-	db $50
+	db "@"
 ; 0x55b57 + 5 bytes
 
 Route14Text10: ; 55b5c (15:5b5c)
@@ -84927,22 +84926,22 @@ Route14Text10: ; 55b5c (15:5b5c)
 
 Route14BattleText10: ; 55b66 (15:5b66)
 	TX_FAR _Route14BattleText10
-	db $50
+	db "@"
 ; 0x55b66 + 5 bytes
 
 Route14EndBattleText10: ; 55b6b (15:5b6b)
 	TX_FAR _Route14EndBattleText10
-	db $50
+	db "@"
 ; 0x55b6b + 5 bytes
 
 Route14AfterBattleText10: ; 55b70 (15:5b70)
 	TX_FAR _Route14AfterBattleText10
-	db $50
+	db "@"
 ; 0x55b70 + 5 bytes
 
 Route14Text11: ; 55b75 (15:5b75)
 	TX_FAR _Route14Text11
-	db $50
+	db "@"
 
 Route17Script: ; 55b7a (15:5b7a)
 	call EnableAutoTextBoxDrawing
@@ -85071,17 +85070,17 @@ Route17Text1: ; 55c2c (15:5c2c)
 
 Route17BattleText1: ; 55c36 (15:5c36)
 	TX_FAR _Route17BattleText1
-	db $50
+	db "@"
 ; 0x55c36 + 5 bytes
 
 Route17EndBattleText1: ; 55c3b (15:5c3b)
 	TX_FAR _Route17EndBattleText1
-	db $50
+	db "@"
 ; 0x55c3b + 5 bytes
 
 Route17AfterBattleText1: ; 55c40 (15:5c40)
 	TX_FAR _Route17AfterBattleText1
-	db $50
+	db "@"
 ; 0x55c40 + 5 bytes
 
 Route17Text2: ; 55c45 (15:5c45)
@@ -85092,17 +85091,17 @@ Route17Text2: ; 55c45 (15:5c45)
 
 Route17BattleText2: ; 55c4f (15:5c4f)
 	TX_FAR _Route17BattleText2
-	db $50
+	db "@"
 ; 0x55c4f + 5 bytes
 
 Route17EndBattleText2: ; 55c54 (15:5c54)
 	TX_FAR _Route17EndBattleText2
-	db $50
+	db "@"
 ; 0x55c54 + 5 bytes
 
 Route17AfterBattleText2: ; 55c59 (15:5c59)
 	TX_FAR _Route17AfterBattleText2
-	db $50
+	db "@"
 ; 0x55c59 + 5 bytes
 
 Route17Text3: ; 55c5e (15:5c5e)
@@ -85113,17 +85112,17 @@ Route17Text3: ; 55c5e (15:5c5e)
 
 Route17BattleText3: ; 55c68 (15:5c68)
 	TX_FAR _Route17BattleText3
-	db $50
+	db "@"
 ; 0x55c68 + 5 bytes
 
 Route17EndBattleText3: ; 55c6d (15:5c6d)
 	TX_FAR _Route17EndBattleText3
-	db $50
+	db "@"
 ; 0x55c6d + 5 bytes
 
 Route17AfterBattleText3: ; 55c72 (15:5c72)
 	TX_FAR _Route17AfterBattleText3
-	db $50
+	db "@"
 ; 0x55c72 + 5 bytes
 
 Route17Text4: ; 55c77 (15:5c77)
@@ -85134,17 +85133,17 @@ Route17Text4: ; 55c77 (15:5c77)
 
 Route17BattleText4: ; 55c81 (15:5c81)
 	TX_FAR _Route17BattleText4
-	db $50
+	db "@"
 ; 0x55c81 + 5 bytes
 
 Route17EndBattleText4: ; 55c86 (15:5c86)
 	TX_FAR _Route17EndBattleText4
-	db $50
+	db "@"
 ; 0x55c86 + 5 bytes
 
 Route17AfterBattleText4: ; 55c8b (15:5c8b)
 	TX_FAR _Route17AfterBattleText4
-	db $50
+	db "@"
 ; 0x55c8b + 5 bytes
 
 Route17Text5: ; 55c90 (15:5c90)
@@ -85155,17 +85154,17 @@ Route17Text5: ; 55c90 (15:5c90)
 
 Route17BattleText5: ; 55c9a (15:5c9a)
 	TX_FAR _Route17BattleText5
-	db $50
+	db "@"
 ; 0x55c9a + 5 bytes
 
 Route17EndBattleText5: ; 55c9f (15:5c9f)
 	TX_FAR _Route17EndBattleText5
-	db $50
+	db "@"
 ; 0x55c9f + 5 bytes
 
 Route17AfterBattleText5: ; 55ca4 (15:5ca4)
 	TX_FAR _Route17AfterBattleText5
-	db $50
+	db "@"
 ; 0x55ca4 + 5 bytes
 
 Route17Text6: ; 55ca9 (15:5ca9)
@@ -85176,17 +85175,17 @@ Route17Text6: ; 55ca9 (15:5ca9)
 
 Route17BattleText6: ; 55cb3 (15:5cb3)
 	TX_FAR _Route17BattleText6
-	db $50
+	db "@"
 ; 0x55cb3 + 5 bytes
 
 Route17EndBattleText6: ; 55cb8 (15:5cb8)
 	TX_FAR _Route17EndBattleText6
-	db $50
+	db "@"
 ; 0x55cb8 + 5 bytes
 
 Route17AfterBattleText6: ; 55cbd (15:5cbd)
 	TX_FAR _Route17AfterBattleText6
-	db $50
+	db "@"
 ; 0x55cbd + 5 bytes
 
 Route17Text7: ; 55cc2 (15:5cc2)
@@ -85197,17 +85196,17 @@ Route17Text7: ; 55cc2 (15:5cc2)
 
 Route17BattleText7: ; 55ccc (15:5ccc)
 	TX_FAR _Route17BattleText7
-	db $50
+	db "@"
 ; 0x55ccc + 5 bytes
 
 Route17EndBattleText7: ; 55cd1 (15:5cd1)
 	TX_FAR _Route17EndBattleText7
-	db $50
+	db "@"
 ; 0x55cd1 + 5 bytes
 
 Route17AfterBattleText7: ; 55cd6 (15:5cd6)
 	TX_FAR _Route17AfterBattleText7
-	db $50
+	db "@"
 ; 0x55cd6 + 5 bytes
 
 Route17Text8: ; 55cdb (15:5cdb)
@@ -85218,17 +85217,17 @@ Route17Text8: ; 55cdb (15:5cdb)
 
 Route17BattleText8: ; 55ce5 (15:5ce5)
 	TX_FAR _Route17BattleText8
-	db $50
+	db "@"
 ; 0x55ce5 + 5 bytes
 
 Route17EndBattleText8: ; 55cea (15:5cea)
 	TX_FAR _Route17EndBattleText8
-	db $50
+	db "@"
 ; 0x55cea + 5 bytes
 
 Route17AfterBattleText8: ; 55cef (15:5cef)
 	TX_FAR _Route17AfterBattleText8
-	db $50
+	db "@"
 ; 0x55cef + 5 bytes
 
 Route17Text9: ; 55cf4 (15:5cf4)
@@ -85239,17 +85238,17 @@ Route17Text9: ; 55cf4 (15:5cf4)
 
 Route17BattleText9: ; 55cfe (15:5cfe)
 	TX_FAR _Route17BattleText9
-	db $50
+	db "@"
 ; 0x55cfe + 5 bytes
 
 Route17EndBattleText9: ; 55d03 (15:5d03)
 	TX_FAR _Route17EndBattleText9
-	db $50
+	db "@"
 ; 0x55d03 + 5 bytes
 
 Route17AfterBattleText9: ; 55d08 (15:5d08)
 	TX_FAR _Route17AfterBattleText9
-	db $50
+	db "@"
 ; 0x55d08 + 5 bytes
 
 Route17Text10: ; 55d0d (15:5d0d)
@@ -85260,42 +85259,42 @@ Route17Text10: ; 55d0d (15:5d0d)
 
 Route17BattleText10: ; 55d17 (15:5d17)
 	TX_FAR _Route17BattleText10
-	db $50
+	db "@"
 ; 0x55d17 + 5 bytes
 
 Route17EndBattleText10: ; 55d1c (15:5d1c)
 	TX_FAR _Route17EndBattleText10
-	db $50
+	db "@"
 ; 0x55d1c + 5 bytes
 
 Route17AfterBattleText10: ; 55d21 (15:5d21)
 	TX_FAR _Route17AfterBattleText10
-	db $50
+	db "@"
 ; 0x55d21 + 5 bytes
 
 Route17Text11: ; 55d26 (15:5d26)
 	TX_FAR _Route17Text11
-	db $50
+	db "@"
 
 Route17Text12: ; 55d2b (15:5d2b)
 	TX_FAR _Route17Text12
-	db $50
+	db "@"
 
 Route17Text13: ; 55d30 (15:5d30)
 	TX_FAR _Route17Text13
-	db $50
+	db "@"
 
 Route17Text14: ; 55d35 (15:5d35)
 	TX_FAR _Route17Text14
-	db $50
+	db "@"
 
 Route17Text15: ; 55d3a (15:5d3a)
 	TX_FAR _Route17Text15
-	db $50
+	db "@"
 
 Route17Text16: ; 55d3f (15:5d3f)
 	TX_FAR _Route17Text16
-	db $50
+	db "@"
 
 Route19Script: ; 55d44 (15:5d44)
 	call EnableAutoTextBoxDrawing
@@ -85478,157 +85477,157 @@ Route19Text10: ; 55e46 (15:5e46)
 
 Route19BattleText1: ; 55e50 (15:5e50)
 	TX_FAR _Route19BattleText1
-	db $50
+	db "@"
 ; 0x55e50 + 5 bytes
 
 Route19EndBattleText1: ; 55e55 (15:5e55)
 	TX_FAR _Route19EndBattleText1
-	db $50
+	db "@"
 ; 0x55e55 + 5 bytes
 
 Route19AfterBattleText1: ; 55e5a (15:5e5a)
 	TX_FAR _Route19AfterBattleText1
-	db $50
+	db "@"
 ; 0x55e5a + 5 bytes
 
 Route19BattleText2: ; 55e5f (15:5e5f)
 	TX_FAR _Route19BattleText2
-	db $50
+	db "@"
 ; 0x55e5f + 5 bytes
 
 Route19EndBattleText2: ; 55e64 (15:5e64)
 	TX_FAR _Route19EndBattleText2
-	db $50
+	db "@"
 ; 0x55e64 + 5 bytes
 
 Route19AfterBattleText2: ; 55e69 (15:5e69)
 	TX_FAR _Route19AfterBattleText2
-	db $50
+	db "@"
 ; 0x55e69 + 5 bytes
 
 Route19BattleText3: ; 55e6e (15:5e6e)
 	TX_FAR _Route19BattleText3
-	db $50
+	db "@"
 ; 0x55e6e + 5 bytes
 
 Route19EndBattleText3: ; 55e73 (15:5e73)
 	TX_FAR _Route19EndBattleText3
-	db $50
+	db "@"
 ; 0x55e73 + 5 bytes
 
 Route19AfterBattleText3: ; 55e78 (15:5e78)
 	TX_FAR _Route19AfterBattleText3
-	db $50
+	db "@"
 ; 0x55e78 + 5 bytes
 
 Route19BattleText4: ; 55e7d (15:5e7d)
 	TX_FAR _Route19BattleText4
-	db $50
+	db "@"
 ; 0x55e7d + 5 bytes
 
 Route19EndBattleText4: ; 55e82 (15:5e82)
 	TX_FAR _Route19EndBattleText4
-	db $50
+	db "@"
 ; 0x55e82 + 5 bytes
 
 Route19AfterBattleText4: ; 55e87 (15:5e87)
 	TX_FAR _Route19AfterBattleText4
-	db $50
+	db "@"
 ; 0x55e87 + 5 bytes
 
 Route19BattleText5: ; 55e8c (15:5e8c)
 	TX_FAR _Route19BattleText5
-	db $50
+	db "@"
 ; 0x55e8c + 5 bytes
 
 Route19EndBattleText5: ; 55e91 (15:5e91)
 	TX_FAR _Route19EndBattleText5
-	db $50
+	db "@"
 ; 0x55e91 + 5 bytes
 
 Route19AfterBattleText5: ; 55e96 (15:5e96)
 	TX_FAR _Route19AfterBattleText5
-	db $50
+	db "@"
 ; 0x55e96 + 5 bytes
 
 Route19BattleText6: ; 55e9b (15:5e9b)
 	TX_FAR _Route19BattleText6
-	db $50
+	db "@"
 ; 0x55e9b + 5 bytes
 
 Route19EndBattleText6: ; 55ea0 (15:5ea0)
 	TX_FAR _Route19EndBattleText6
-	db $50
+	db "@"
 ; 0x55ea0 + 5 bytes
 
 Route19AfterBattleText6: ; 55ea5 (15:5ea5)
 	TX_FAR _Route19AfterBattleText6
-	db $50
+	db "@"
 ; 0x55ea5 + 5 bytes
 
 Route19BattleText7: ; 55eaa (15:5eaa)
 	TX_FAR _Route19BattleText7
-	db $50
+	db "@"
 ; 0x55eaa + 5 bytes
 
 Route19EndBattleText7: ; 55eaf (15:5eaf)
 	TX_FAR _Route19EndBattleText7
-	db $50
+	db "@"
 ; 0x55eaf + 5 bytes
 
 Route19AfterBattleText7: ; 55eb4 (15:5eb4)
 	TX_FAR _Route19AfterBattleText7
-	db $50
+	db "@"
 ; 0x55eb4 + 5 bytes
 
 Route19BattleText8: ; 55eb9 (15:5eb9)
 	TX_FAR _Route19BattleText8
-	db $50
+	db "@"
 ; 0x55eb9 + 5 bytes
 
 Route19EndBattleText8: ; 55ebe (15:5ebe)
 	TX_FAR _Route19EndBattleText8
-	db $50
+	db "@"
 ; 0x55ebe + 5 bytes
 
 Route19AfterBattleText8: ; 55ec3 (15:5ec3)
 	TX_FAR _Route19AfterBattleText8
-	db $50
+	db "@"
 ; 0x55ec3 + 5 bytes
 
 Route19BattleText9: ; 55ec8 (15:5ec8)
 	TX_FAR _Route19BattleText9
-	db $50
+	db "@"
 ; 0x55ec8 + 5 bytes
 
 Route19EndBattleText9: ; 55ecd (15:5ecd)
 	TX_FAR _Route19EndBattleText9
-	db $50
+	db "@"
 ; 0x55ecd + 5 bytes
 
 Route19AfterBattleText9: ; 55ed2 (15:5ed2)
 	TX_FAR _Route19AfterBattleText9
-	db $50
+	db "@"
 ; 0x55ed2 + 5 bytes
 
 Route19BattleText10: ; 55ed7 (15:5ed7)
 	TX_FAR _Route19BattleText10
-	db $50
+	db "@"
 ; 0x55ed7 + 5 bytes
 
 Route19EndBattleText10: ; 55edc (15:5edc)
 	TX_FAR _Route19EndBattleText10
-	db $50
+	db "@"
 ; 0x55edc + 5 bytes
 
 Route19AfterBattleText10: ; 55ee1 (15:5ee1)
 	TX_FAR _Route19AfterBattleText10
-	db $50
+	db "@"
 ; 0x55ee1 + 5 bytes
 
 Route19Text11: ; 55ee6 (15:5ee6)
 	TX_FAR _Route19Text11
-	db $50
+	db "@"
 
 Route21Script: ; 55eeb (15:5eeb)
 	call EnableAutoTextBoxDrawing
@@ -85795,137 +85794,137 @@ Route21Text9: ; 55fd3 (15:5fd3)
 
 Route21BattleText1: ; 55fdd (15:5fdd)
 	TX_FAR _Route21BattleText1
-	db $50
+	db "@"
 ; 0x55fdd + 5 bytes
 
 Route21EndBattleText1: ; 55fe2 (15:5fe2)
 	TX_FAR _Route21EndBattleText1
-	db $50
+	db "@"
 ; 0x55fe2 + 5 bytes
 
 Route21AfterBattleText1: ; 55fe7 (15:5fe7)
 	TX_FAR _Route21AfterBattleText1
-	db $50
+	db "@"
 ; 0x55fe7 + 5 bytes
 
 Route21BattleText2: ; 55fec (15:5fec)
 	TX_FAR _Route21BattleText2
-	db $50
+	db "@"
 ; 0x55fec + 5 bytes
 
 Route21EndBattleText2: ; 55ff1 (15:5ff1)
 	TX_FAR _Route21EndBattleText2
-	db $50
+	db "@"
 ; 0x55ff1 + 5 bytes
 
 Route21AfterBattleText2: ; 55ff6 (15:5ff6)
 	TX_FAR _Route21AfterBattleText2
-	db $50
+	db "@"
 ; 0x55ff6 + 5 bytes
 
 Route21BattleText3: ; 55ffb (15:5ffb)
 	TX_FAR _Route21BattleText3
-	db $50
+	db "@"
 ; 0x55ffb + 5 bytes
 
 Route21EndBattleText3: ; 56000 (15:6000)
 	TX_FAR _Route21EndBattleText3
-	db $50
+	db "@"
 ; 0x56000 + 5 bytes
 
 Route21AfterBattleText3: ; 56005 (15:6005)
 	TX_FAR _Route21AfterBattleText3
-	db $50
+	db "@"
 ; 0x56005 + 5 bytes
 
 Route21BattleText4: ; 5600a (15:600a)
 	TX_FAR _Route21BattleText4
-	db $50
+	db "@"
 ; 0x5600a + 5 bytes
 
 Route21EndBattleText4: ; 5600f (15:600f)
 	TX_FAR _Route21EndBattleText4
-	db $50
+	db "@"
 ; 0x5600f + 5 bytes
 
 Route21AfterBattleText4: ; 56014 (15:6014)
 	TX_FAR _Route21AfterBattleText4
-	db $50
+	db "@"
 ; 0x56014 + 5 bytes
 
 Route21BattleText5: ; 56019 (15:6019)
 	TX_FAR _Route21BattleText5
-	db $50
+	db "@"
 ; 0x56019 + 5 bytes
 
 Route21EndBattleText5: ; 5601e (15:601e)
 	TX_FAR _Route21EndBattleText5
-	db $50
+	db "@"
 ; 0x5601e + 5 bytes
 
 Route21AfterBattleText5: ; 56023 (15:6023)
 	TX_FAR _Route21AfterBattleText5
-	db $50
+	db "@"
 ; 0x56023 + 5 bytes
 
 Route21BattleText6: ; 56028 (15:6028)
 	TX_FAR _Route21BattleText6
-	db $50
+	db "@"
 ; 0x56028 + 5 bytes
 
 Route21EndBattleText6: ; 5602d (15:602d)
 	TX_FAR _Route21EndBattleText6
-	db $50
+	db "@"
 ; 0x5602d + 5 bytes
 
 Route21AfterBattleText6: ; 56032 (15:6032)
 	TX_FAR _Route21AfterBattleText6
-	db $50
+	db "@"
 ; 0x56032 + 5 bytes
 
 Route21BattleText7: ; 56037 (15:6037)
 	TX_FAR _Route21BattleText7
-	db $50
+	db "@"
 ; 0x56037 + 5 bytes
 
 Route21EndBattleText7: ; 5603c (15:603c)
 	TX_FAR _Route21EndBattleText7
-	db $50
+	db "@"
 ; 0x5603c + 5 bytes
 
 Route21AfterBattleText7: ; 56041 (15:6041)
 	TX_FAR _Route21AfterBattleText7
-	db $50
+	db "@"
 ; 0x56041 + 5 bytes
 
 Route21BattleText8: ; 56046 (15:6046)
 	TX_FAR _Route21BattleText8
-	db $50
+	db "@"
 ; 0x56046 + 5 bytes
 
 Route21EndBattleText8: ; 5604b (15:604b)
 	TX_FAR _Route21EndBattleText8
-	db $50
+	db "@"
 ; 0x5604b + 5 bytes
 
 Route21AfterBattleText8: ; 56050 (15:6050)
 	TX_FAR _Route21AfterBattleText8
-	db $50
+	db "@"
 ; 0x56050 + 5 bytes
 
 Route21BattleText9: ; 56055 (15:6055)
 	TX_FAR _Route21BattleText9
-	db $50
+	db "@"
 ; 0x56055 + 5 bytes
 
 Route21EndBattleText9: ; 5605a (15:605a)
 	TX_FAR _Route21EndBattleText9
-	db $50
+	db "@"
 ; 0x5605a + 5 bytes
 
 Route21AfterBattleText9: ; 5605f (15:605f)
 	TX_FAR _Route21AfterBattleText9
-	db $50
+	db "@"
 ; 0x5605f + 5 bytes
 
 VermilionHouse2_h: ; 0x56064 to 0x56070 (12 bytes) (id=163)
@@ -85975,29 +85974,29 @@ asm_5dd95 ; 0x560ab
 
 UnnamedText_560b1: ; 560b1 (15:60b1)
 	TX_FAR _UnnamedText_560b1
-	db $50
+	db "@"
 ; 0x560b1 + 5 bytes
 
 UnnamedText_560b6: ; 560b6 (15:60b6)
 	TX_FAR _UnnamedText_560b6 ; 0x9c554
 	db $0B
 	TX_FAR _UnnamedText_560bb ; 0x9c5a4
-	db $50
+	db "@"
 ; 0x560c0
 
 UnnamedText_560c0: ; 560c0 (15:60c0)
 	TX_FAR _UnnamedText_560c0
-	db $50
+	db "@"
 ; 0x560c0 + 5 bytes
 
 UnnamedText_560c5: ; 560c5 (15:60c5)
 	TX_FAR _UnnamedText_560c5
-	db $50
+	db "@"
 ; 0x560c5 + 5 bytes
 
 UnnamedText_560ca: ; 560ca (15:60ca)
 	TX_FAR _UnnamedText_560ca
-	db $50
+	db "@"
 ; 0x560ca + 5 bytes
 
 VermilionHouse2Object: ; 0x560cf (size=26)
@@ -86033,15 +86032,15 @@ CeladonMart2Texts: ; 560f8 (15:60f8)
 
 CeladonMart2Text3: ; 56102 (15:6102)
 	TX_FAR _CeladonMart2Text3
-	db $50
+	db "@"
 
 CeladonMart2Text4: ; 56107 (15:6107)
 	TX_FAR _CeladonMart2Text4
-	db $50
+	db "@"
 
 CeladonMart2Text5: ; 5610c (15:610c)
 	TX_FAR _CeladonMart2Text5
-	db $50
+	db "@"
 
 CeladonMart2Object: ; 0x56111 (size=55)
 	db $f ; border tile
@@ -86115,29 +86114,29 @@ asm_1b09c ; 0x561b7
 
 UnnamedText_561bd: ; 561bd (15:61bd)
 	TX_FAR _UnnamedText_561bd
-	db $50
+	db "@"
 ; 0x561bd + 5 bytes
 
 UnnamedText_561c2: ; 561c2 (15:61c2)
 	TX_FAR _UnnamedText_561c2 ; 0xa06e8
-	db $0B, $50
+	db $0B, "@"
 ; 0x561c8
 
 INCBIN "baserom.gbc",$561c8,$56212 - $561c8
 
 UnnamedText_56212: ; 56212 (15:6212)
 	TX_FAR _UnnamedText_56212
-	db $50
+	db "@"
 ; 0x56212 + 5 bytes
 
 UnnamedText_56217: ; 56217 (15:6217)
 	TX_FAR _UnnamedText_56217
-	db $50
+	db "@"
 ; 0x56217 + 5 bytes
 
 UnnamedText_5621c: ; 5621c (15:621c)
 	TX_FAR _UnnamedText_5621c
-	db $50
+	db "@"
 ; 0x5621c + 5 bytes
 
 FuchsiaHouse3Object: ; 0x56221 (size=34)
@@ -86240,74 +86239,74 @@ Unnamed_56409: ; 56409 (15:6409)
 
 UnnamedText_5640f: ; 5640f (15:640f)
 	TX_FAR _UnnamedText_5640f
-	db $50
+	db "@"
 ; 0x5640f + 5 bytes
 
 UnnamedText_56414: ; 56414 (15:6414)
 	TX_FAR _UnnamedText_56414
-	db $50
+	db "@"
 ; 0x56414 + 5 bytes
 
 UnnamedText_56419: ; 56419 (15:6419)
 	TX_FAR _UnnamedText_56419
-	db $50
+	db "@"
 ; 0x56419 + 5 bytes
 
 UnnamedText_5641e: ; 5641e (15:641e)
 	TX_FAR _UnnamedText_5641e
-	db $50
+	db "@"
 ; 0x5641e + 5 bytes
 
 UnnamedText_56423: ; 56423 (15:6423)
 	TX_FAR _UnnamedText_56423
-	db $50
+	db "@"
 ; 0x56423 + 5 bytes
 
 UnnamedText_56428: ; 56428 (15:6428)
 	TX_FAR _UnnamedText_56428
-	db $50
+	db "@"
 ; 0x56428 + 5 bytes
 
 UnnamedText_5642d: ; 5642d (15:642d)
 	TX_FAR _UnnamedText_5642d
-	db $50
+	db "@"
 ; 0x5642d + 5 bytes
 
 UnnamedText_56432: ; 56432 (15:6432)
 	TX_FAR _UnnamedText_56432
-	db $50
+	db "@"
 ; 0x56432 + 5 bytes
 
 UnnamedText_56437: ; 56437 (15:6437)
 	TX_FAR _UnnamedText_56437 ; 0x8c000
 UnnamedText_5643b: ; 5643b (15:643b)
 	TX_FAR _UnnamedText_5643b ; 0x8c013
-	db $50
+	db "@"
 ; 0x5643b + 5 bytes
 
 UnnamedText_56440: ; 56440 (15:6440)
 	TX_FAR _UnnamedText_56440
-	db $50
+	db "@"
 ; 0x56440 + 5 bytes
 
 UnnamedText_56445: ; 56445 (15:6445)
 	TX_FAR _UnnamedText_56445
-	db $50
+	db "@"
 ; 0x56445 + 5 bytes
 
 UnnamedText_5644a: ; 5644a (15:644a)
 	TX_FAR _UnnamedText_5644a
-	db $50
+	db "@"
 ; 0x5644a + 5 bytes
 
 UnnamedText_5644f: ; 5644f (15:644f)
 	TX_FAR _UnnamedText_5644f
-	db $50
+	db "@"
 ; 0x5644f + 5 bytes
 
 UnnamedText_56454: ; 56454 (15:6454)
 	TX_FAR _UnnamedText_56454
-	db $50
+	db "@"
 ; 0x56454 + 5 bytes
 
 DayCareMObject: ; 0x56459 (size=26)
@@ -86373,29 +86372,29 @@ asm_df984 ; 0x564ba
 
 UnnamedText_564c0: ; 564c0 (15:64c0)
 	TX_FAR _UnnamedText_564c0
-	db $50
+	db "@"
 ; 0x564c0 + 5 bytes
 
 UnnamedText_564c5: ; 564c5 (15:64c5)
 	TX_FAR _UnnamedText_564c5 ; 0x8ca00
 	db $0B
 	TX_FAR _UnnamedText_564ca ; 0x8ca4f
-	db $50
+	db "@"
 ; 0x564c5 + 10 bytes = 0x564cf
 
 UnnamedText_564cf: ; 564cf (15:64cf)
 	TX_FAR _UnnamedText_564cf
-	db $50
+	db "@"
 ; 0x564cf + 5 bytes
 
 UnnamedText_564d4: ; 564d4 (15:64d4)
 	TX_FAR _UnnamedText_564d4
-	db $50
+	db "@"
 ; 0x564d4 + 5 bytes
 
 UnnamedText_564d9: ; 564d9 (15:64d9)
 	TX_FAR _UnnamedText_564d9
-	db $50
+	db "@"
 ; 0x564d9 + 5 bytes
 
 Route12HouseObject: ; 0x564de (size=26)
@@ -86551,12 +86550,12 @@ asm_a468f ; 0x565b8
 
 UnnamedText_565be: ; 565be (15:65be)
 	TX_FAR _UnnamedText_565be
-	db $50
+	db "@"
 ; 0x565be + 5 bytes
 
 UnnamedText_565c3: ; 565c3 (15:65c3)
 	TX_FAR _UnnamedText_565c3
-	db $50
+	db "@"
 ; 0x565c3 + 5 bytes
 
 SilphCo8Text2: ; 565c8 (15:65c8)
@@ -86579,47 +86578,47 @@ SilphCo8Text4: ; 565dc (15:65dc)
 
 SilphCo8BattleText1: ; 565e6 (15:65e6)
 	TX_FAR _SilphCo8BattleText1
-	db $50
+	db "@"
 ; 0x565e6 + 5 bytes
 
 SilphCo8EndBattleText1: ; 565eb (15:65eb)
 	TX_FAR _SilphCo8EndBattleText1
-	db $50
+	db "@"
 ; 0x565eb + 5 bytes
 
 SilphCo8AfterBattleText1: ; 565f0 (15:65f0)
 	TX_FAR _SilphCo8AfterBattleText1
-	db $50
+	db "@"
 ; 0x565f0 + 5 bytes
 
 SilphCo8BattleText2: ; 565f5 (15:65f5)
 	TX_FAR _SilphCo8BattleText2
-	db $50
+	db "@"
 ; 0x565f5 + 5 bytes
 
 SilphCo8EndBattleText2: ; 565fa (15:65fa)
 	TX_FAR _SilphCo8EndBattleText2
-	db $50
+	db "@"
 ; 0x565fa + 5 bytes
 
 SilphCo8AfterBattleText2: ; 565ff (15:65ff)
 	TX_FAR _SilphCo8AfterBattleText2
-	db $50
+	db "@"
 ; 0x565ff + 5 bytes
 
 SilphCo8BattleText3: ; 56604 (15:6604)
 	TX_FAR _SilphCo8BattleText3
-	db $50
+	db "@"
 ; 0x56604 + 5 bytes
 
 SilphCo8EndBattleText3: ; 56609 (15:6609)
 	TX_FAR _SilphCo8EndBattleText3
-	db $50
+	db "@"
 ; 0x56609 + 5 bytes
 
 SilphCo8AfterBattleText3: ; 5660e (15:660e)
 	TX_FAR _SilphCo8AfterBattleText3
-	db $50
+	db "@"
 ; 0x5660e + 5 bytes
 
 SilphCo8Object: ; 0x56613 (size=90)
@@ -87688,32 +87687,32 @@ asm_58e3a: ; 58e3a (16:4e3a)
 ; 58e3b (16:4e3b)
 UnnamedText_58e3b: ; 58e3b (16:4e3b)
 	TX_FAR _UnnamedText_58e3b
-	db $50
+	db "@"
 ; 0x58e3b + 5 bytes
 
 UnnamedText_58e40: ; 58e40 (16:4e40)
 	TX_FAR _UnnamedText_58e40
-	db $50
+	db "@"
 ; 0x58e40 + 5 bytes
 
 UnnamedText_58e45: ; 58e45 (16:4e45)
 	TX_FAR _UnnamedText_58e45
-	db $50
+	db "@"
 ; 0x58e45 + 5 bytes
 
 UnnamedText_58e4a: ; 58e4a (16:4e4a)
 	TX_FAR _UnnamedText_58e4a
-	db $50
+	db "@"
 ; 0x58e4a + 5 bytes
 
 UnnamedText_58e4f: ; 58e4f (16:4e4f)
 	TX_FAR _UnnamedText_58e4f
-	db $50
+	db "@"
 ; 0x58e4f + 5 bytes
 
 UnnamedText_58e54: ; 58e54 (16:4e54)
 	TX_FAR _UnnamedText_58e54
-	db $50
+	db "@"
 ; 0x58e54 + 5 bytes
 
 ; known jump sources: 3cc96 (f:4c96)
@@ -87783,7 +87782,7 @@ INCBIN "baserom.gbc",$58ec3,$58ec8 - $58ec3
 
 UnnamedText_58ecc: ; 58ecc (16:4ecc)
 	TX_FAR _UnnamedText_58ecc
-	db $50
+	db "@"
 ; 0x58ecc + 5 bytes
 
 ; known jump sources: 3d1bf (f:51bf)
@@ -87796,7 +87795,7 @@ INCBIN "baserom.gbc",$58ed7,$58f3e - $58ed7
 
 UnnamedText_58f3e: ; 58f3e (16:4f3e)
 	TX_FAR _UnnamedText_58f3e
-	db $50
+	db "@"
 ; 0x58f3e + 5 bytes
 
 ; known jump sources: f64c (3:764c), 55350 (15:5350)
@@ -88008,22 +88007,22 @@ Func_59035 ; 0x59035
 
 UnnamedText_59091: ; 59091 (16:5091)
 	TX_FAR _UnnamedText_59091
-	db $50
+	db "@"
 ; 0x59091 + 5 bytes
 
 UnnamedText_59096: ; 59096 (16:5096)
 	TX_FAR _UnnamedText_59096
-	db $50
+	db "@"
 ; 0x59096 + 5 bytes
 
 UnnamedText_5909b: ; 5909b (16:509b)
 	TX_FAR _UnnamedText_5909b
-	db $50
+	db "@"
 ; 0x5909b + 5 bytes
 
 UnnamedText_590a0: ; 590a0 (16:50a0)
 	TX_FAR _UnnamedText_590a0
-	db $50
+	db "@"
 ; 0x590a0 + 5 bytes
 
 Unknown_590a5: ; 590a5 (16:50a5)
@@ -88031,7 +88030,7 @@ INCBIN "baserom.gbc",$590a5,$590ab - $590a5
 
 UnnamedText_590ab: ; 590ab (16:50ab)
 	TX_FAR _UnnamedText_590ab
-	db $50
+	db "@"
 ; 0x590ab + 5 bytes
 
 Route6Script: ; 590b0 (16:50b0)
@@ -88122,17 +88121,17 @@ Route6Text1: ; 59120 (16:5120)
 
 Route6BattleText1: ; 5912a (16:512a)
 	TX_FAR _Route6BattleText1
-	db $50
+	db "@"
 ; 0x5912a + 5 bytes
 
 Route6EndBattleText1: ; 5912f (16:512f)
 	TX_FAR _Route6EndBattleText1
-	db $50
+	db "@"
 ; 0x5912f + 5 bytes
 
 Route6AfterBattleText1: ; 59134 (16:5134)
 	TX_FAR _Route6AfterBattleText1
-	db $50
+	db "@"
 ; 0x59134 + 5 bytes
 
 Route6Text2: ; 59139 (16:5139)
@@ -88143,12 +88142,12 @@ Route6Text2: ; 59139 (16:5139)
 
 Route6BattleText2: ; 59143 (16:5143)
 	TX_FAR _Route6BattleText2
-	db $50
+	db "@"
 ; 0x59143 + 5 bytes
 
 Route6EndBattleText2: ; 59148 (16:5148)
 	TX_FAR _Route6EndBattleText2
-	db $50
+	db "@"
 ; 0x59148 + 5 bytes
 
 Route6Text3: ; 5914d (16:514d)
@@ -88159,17 +88158,17 @@ Route6Text3: ; 5914d (16:514d)
 
 Route6BattleText3: ; 59157 (16:5157)
 	TX_FAR _Route6BattleText3
-	db $50
+	db "@"
 ; 0x59157 + 5 bytes
 
 Route6EndBattleText3: ; 5915c (16:515c)
 	TX_FAR _Route6EndBattleText3
-	db $50
+	db "@"
 ; 0x5915c + 5 bytes
 
 Route6AfterBattleText3: ; 59161 (16:5161)
 	TX_FAR _Route6AfterBattleText3
-	db $50
+	db "@"
 ; 0x59161 + 5 bytes
 
 Route6Text4: ; 59166 (16:5166)
@@ -88180,17 +88179,17 @@ Route6Text4: ; 59166 (16:5166)
 
 Route6BattleText4: ; 59170 (16:5170)
 	TX_FAR _Route6BattleText4
-	db $50
+	db "@"
 ; 0x59170 + 5 bytes
 
 Route6EndBattleText4: ; 59175 (16:5175)
 	TX_FAR _Route6EndBattleText4
-	db $50
+	db "@"
 ; 0x59175 + 5 bytes
 
 Route6AfterBattleText4: ; 5917a (16:517a)
 	TX_FAR _Route6AfterBattleText4
-	db $50
+	db "@"
 ; 0x5917a + 5 bytes
 
 Route6Text5: ; 5917f (16:517f)
@@ -88201,17 +88200,17 @@ Route6Text5: ; 5917f (16:517f)
 
 Route6BattleText5: ; 59189 (16:5189)
 	TX_FAR _Route6BattleText5
-	db $50
+	db "@"
 ; 0x59189 + 5 bytes
 
 Route6EndBattleText5: ; 5918e (16:518e)
 	TX_FAR _Route6EndBattleText5
-	db $50
+	db "@"
 ; 0x5918e + 5 bytes
 
 Route6AfterBattleText5: ; 59193 (16:5193)
 	TX_FAR _Route6AfterBattleText5
-	db $50
+	db "@"
 ; 0x59193 + 5 bytes
 
 Route6Text6: ; 59198 (16:5198)
@@ -88222,22 +88221,22 @@ Route6Text6: ; 59198 (16:5198)
 
 Route6BattleText6: ; 591a2 (16:51a2)
 	TX_FAR _Route6BattleText6
-	db $50
+	db "@"
 ; 0x591a2 + 5 bytes
 
 Route6EndBattleText6: ; 591a7 (16:51a7)
 	TX_FAR _Route6EndBattleText6
-	db $50
+	db "@"
 ; 0x591a7 + 5 bytes
 
 Route6AfterBattleText6: ; 591ac (16:51ac)
 	TX_FAR _Route6AfterBattleText6
-	db $50
+	db "@"
 ; 0x591ac + 5 bytes
 
 Route6Text7: ; 591b1 (16:51b1)
 	TX_FAR _Route6Text7
-	db $50
+	db "@"
 
 Route8Script: ; 591b6 (16:51b6)
 	call EnableAutoTextBoxDrawing
@@ -88357,17 +88356,17 @@ Route8Text1: ; 59250 (16:5250)
 
 Route8BattleText1: ; 5925a (16:525a)
 	TX_FAR _Route8BattleText1
-	db $50
+	db "@"
 ; 0x5925f
 
 Route8EndBattleText1: ; 5925f (16:525f)
 	TX_FAR _Route8EndBattleText1
-	db $50
+	db "@"
 ; 0x5925f + 5 bytes
 
 Route8AfterBattleText1: ; 59264 (16:5264)
 	TX_FAR _Route8AfterBattleText1
-	db $50
+	db "@"
 ; 0x59264 + 5 bytes
 
 Route8Text2: ; 59269 (16:5269)
@@ -88378,17 +88377,17 @@ Route8Text2: ; 59269 (16:5269)
 
 Route8BattleText2: ; 59273 (16:5273)
 	TX_FAR _Route8BattleText2
-	db $50
+	db "@"
 ; 0x59273 + 5 bytes
 
 Route8EndBattleText2: ; 59278 (16:5278)
 	TX_FAR _Route8EndBattleText2
-	db $50
+	db "@"
 ; 0x59278 + 5 bytes
 
 Route8AfterBattleText2: ; 5927d (16:527d)
 	TX_FAR _Route8AfterBattleText2
-	db $50
+	db "@"
 ; 0x5927d + 5 bytes
 
 Route8Text3: ; 59282 (16:5282)
@@ -88399,17 +88398,17 @@ Route8Text3: ; 59282 (16:5282)
 
 Route8BattleText3: ; 5928c (16:528c)
 	TX_FAR _Route8BattleText3
-	db $50
+	db "@"
 ; 0x5928c + 5 bytes
 
 Route8EndBattleText3: ; 59291 (16:5291)
 	TX_FAR _Route8EndBattleText3
-	db $50
+	db "@"
 ; 0x59291 + 5 bytes
 
 Route8AfterBattleText3: ; 59296 (16:5296)
 	TX_FAR _Route8AfterBattleText3
-	db $50
+	db "@"
 ; 0x59296 + 5 bytes
 
 Route8Text4: ; 5929b (16:529b)
@@ -88420,17 +88419,17 @@ Route8Text4: ; 5929b (16:529b)
 
 Route8BattleText4: ; 592a5 (16:52a5)
 	TX_FAR _Route8BattleText4
-	db $50
+	db "@"
 ; 0x592a5 + 5 bytes
 
 Route8EndBattleText4: ; 592aa (16:52aa)
 	TX_FAR _Route8EndBattleText4
-	db $50
+	db "@"
 ; 0x592aa + 5 bytes
 
 Route8AfterBattleText4: ; 592af (16:52af)
 	TX_FAR _Route8AfterBattleText4
-	db $50
+	db "@"
 ; 0x592af + 5 bytes
 
 Route8Text5: ; 592b4 (16:52b4)
@@ -88441,17 +88440,17 @@ Route8Text5: ; 592b4 (16:52b4)
 
 Route8BattleText5: ; 592be (16:52be)
 	TX_FAR _Route8BattleText5
-	db $50
+	db "@"
 ; 0x592be + 5 bytes
 
 Route8EndBattleText5: ; 592c3 (16:52c3)
 	TX_FAR _Route8EndBattleText5
-	db $50
+	db "@"
 ; 0x592c3 + 5 bytes
 
 Route8AfterBattleText5: ; 592c8 (16:52c8)
 	TX_FAR _Route8AfterBattleText5
-	db $50
+	db "@"
 ; 0x592c8 + 5 bytes
 
 Route8Text6: ; 592cd (16:52cd)
@@ -88462,17 +88461,17 @@ Route8Text6: ; 592cd (16:52cd)
 
 Route8BattleText6: ; 592d7 (16:52d7)
 	TX_FAR _Route8BattleText6
-	db $50
+	db "@"
 ; 0x592d7 + 5 bytes
 
 Route8EndBattleText6: ; 592dc (16:52dc)
 	TX_FAR _Route8EndBattleText6
-	db $50
+	db "@"
 ; 0x592dc + 5 bytes
 
 Route8AfterBattleText6: ; 592e1 (16:52e1)
 	TX_FAR _Route8AfterBattleText6
-	db $50
+	db "@"
 ; 0x592e1 + 5 bytes
 
 Route8Text7: ; 592e6 (16:52e6)
@@ -88483,17 +88482,17 @@ Route8Text7: ; 592e6 (16:52e6)
 
 Route8BattleText7: ; 592f0 (16:52f0)
 	TX_FAR _Route8BattleText7
-	db $50
+	db "@"
 ; 0x592f0 + 5 bytes
 
 Route8EndBattleText7: ; 592f5 (16:52f5)
 	TX_FAR _Route8EndBattleText7
-	db $50
+	db "@"
 ; 0x592f5 + 5 bytes
 
 Route8AfterBattleText7: ; 592fa (16:52fa)
 	TX_FAR _Route8AfterBattleText7
-	db $50
+	db "@"
 ; 0x592fa + 5 bytes
 
 Route8Text8: ; 592ff (16:52ff)
@@ -88504,17 +88503,17 @@ Route8Text8: ; 592ff (16:52ff)
 
 Route8BattleText8: ; 59309 (16:5309)
 	TX_FAR _Route8BattleText8
-	db $50
+	db "@"
 ; 0x59309 + 5 bytes
 
 Route8EndBattleText8: ; 5930e (16:530e)
 	TX_FAR _Route8EndBattleText8
-	db $50
+	db "@"
 ; 0x5930e + 5 bytes
 
 Route8AfterBattleText8: ; 59313 (16:5313)
 	TX_FAR _Route8AfterBattleText8
-	db $50
+	db "@"
 ; 0x59313 + 5 bytes
 
 Route8Text9: ; 59318 (16:5318)
@@ -88525,22 +88524,22 @@ Route8Text9: ; 59318 (16:5318)
 
 Route8BattleText9: ; 59322 (16:5322)
 	TX_FAR _Route8BattleText9
-	db $50
+	db "@"
 ; 0x59322 + 5 bytes
 
 Route8EndBattleText9: ; 59327 (16:5327)
 	TX_FAR _Route8EndBattleText9
-	db $50
+	db "@"
 ; 0x59327 + 5 bytes
 
 Route8AfterBattleText9: ; 5932c (16:532c)
 	TX_FAR _Route8AfterBattleText9
-	db $50
+	db "@"
 ; 0x5932c + 5 bytes
 
 Route8Text10: ; 59331 (16:5331)
 	TX_FAR _Route8Text10
-	db $50
+	db "@"
 
 Route10Script: ; 59336 (16:5336)
 	call EnableAutoTextBoxDrawing
@@ -88629,17 +88628,17 @@ Route10Text1: ; 593ac (16:53ac)
 
 Route10BattleText1: ; 593b6 (16:53b6)
 	TX_FAR _Route10BattleText1
-	db $50
+	db "@"
 ; 0x593b6 + 5 bytes
 
 Route10EndBattleText1: ; 593bb (16:53bb)
 	TX_FAR _Route10EndBattleText1
-	db $50
+	db "@"
 ; 0x593bb + 5 bytes
 
 Route10AfterBattleText1: ; 593c0 (16:53c0)
 	TX_FAR _Route10AfterBattleText1
-	db $50
+	db "@"
 ; 0x593c0 + 5 bytes
 
 Route10Text2: ; 593c5 (16:53c5)
@@ -88650,17 +88649,17 @@ Route10Text2: ; 593c5 (16:53c5)
 
 Route10BattleText2: ; 593cf (16:53cf)
 	TX_FAR _Route10BattleText2
-	db $50
+	db "@"
 ; 0x593cf + 5 bytes
 
 Route10EndBattleText2: ; 593d4 (16:53d4)
 	TX_FAR _Route10EndBattleText2
-	db $50
+	db "@"
 ; 0x593d4 + 5 bytes
 
 Route10AfterBattleText2: ; 593d9 (16:53d9)
 	TX_FAR _Route10AfterBattleText2
-	db $50
+	db "@"
 ; 0x593d9 + 5 bytes
 
 Route10Text3: ; 593de (16:53de)
@@ -88671,17 +88670,17 @@ Route10Text3: ; 593de (16:53de)
 
 Route10BattleText3: ; 593e8 (16:53e8)
 	TX_FAR _Route10BattleText3
-	db $50
+	db "@"
 ; 0x593e8 + 5 bytes
 
 Route10EndBattleText3: ; 593ed (16:53ed)
 	TX_FAR _Route10EndBattleText3
-	db $50
+	db "@"
 ; 0x593ed + 5 bytes
 
 Route10AfterBattleText3: ; 593f2 (16:53f2)
 	TX_FAR _Route10AfterBattleText3
-	db $50
+	db "@"
 ; 0x593f2 + 5 bytes
 
 Route10Text4: ; 593f7 (16:53f7)
@@ -88692,17 +88691,17 @@ Route10Text4: ; 593f7 (16:53f7)
 
 Route10BattleText4: ; 59401 (16:5401)
 	TX_FAR _Route10BattleText4
-	db $50
+	db "@"
 ; 0x59401 + 5 bytes
 
 Route10EndBattleText4: ; 59406 (16:5406)
 	TX_FAR _Route10EndBattleText4
-	db $50
+	db "@"
 ; 0x59406 + 5 bytes
 
 Route10AfterBattleText4: ; 5940b (16:540b)
 	TX_FAR _Route10AfterBattleText4
-	db $50
+	db "@"
 ; 0x5940b + 5 bytes
 
 Route10Text5: ; 59410 (16:5410)
@@ -88713,17 +88712,17 @@ Route10Text5: ; 59410 (16:5410)
 
 Route10BattleText5: ; 5941a (16:541a)
 	TX_FAR _Route10BattleText5
-	db $50
+	db "@"
 ; 0x5941a + 5 bytes
 
 Route10EndBattleText5: ; 5941f (16:541f)
 	TX_FAR _Route10EndBattleText5
-	db $50
+	db "@"
 ; 0x5941f + 5 bytes
 
 Route10AfterBattleText5: ; 59424 (16:5424)
 	TX_FAR _Route10AfterBattleText5
-	db $50
+	db "@"
 ; 0x59424 + 5 bytes
 
 Route10Text6: ; 59429 (16:5429)
@@ -88734,27 +88733,27 @@ Route10Text6: ; 59429 (16:5429)
 
 Route10BattleText6: ; 59433 (16:5433)
 	TX_FAR _Route10BattleText6
-	db $50
+	db "@"
 ; 0x59433 + 5 bytes
 
 Route10EndBattleText6: ; 59438 (16:5438)
 	TX_FAR _Route10EndBattleText6
-	db $50
+	db "@"
 ; 0x59438 + 5 bytes
 
 Route10AfterBattleText6: ; 5943d (16:543d)
 	TX_FAR _Route10AfterBattleText6
-	db $50
+	db "@"
 ; 0x5943d + 5 bytes
 
 Route10Text9: ; 59442 (16:5442)
 Route10Text7: ; 59442 (16:5442)
 	TX_FAR _Route10Text7 ; _Route10Text9
-	db $50
+	db "@"
 
 Route10Text10: ; 59447 (16:5447)
 	TX_FAR _Route10Text10
-	db $50
+	db "@"
 
 Route11Script: ; 5944c (16:544c)
 	call EnableAutoTextBoxDrawing
@@ -88886,17 +88885,17 @@ UnnamedText_594f4: ; 594f4 (16:54f4)
 
 Route11BattleText1: ; 594fe (16:54fe)
 	TX_FAR _Route11BattleText1
-	db $50
+	db "@"
 ; 0x594fe + 5 bytes
 
 Route11EndBattleText1: ; 59503 (16:5503)
 	TX_FAR _Route11EndBattleText1
-	db $50
+	db "@"
 ; 0x59503 + 5 bytes
 
 Route11AfterBattleText1: ; 59508 (16:5508)
 	TX_FAR _Route11AfterBattleText1
-	db $50
+	db "@"
 ; 0x59508 + 5 bytes
 
 Route11Text2: ; 5950d (16:550d)
@@ -88907,17 +88906,17 @@ Route11Text2: ; 5950d (16:550d)
 
 Route11BattleText2: ; 59517 (16:5517)
 	TX_FAR _Route11BattleText2
-	db $50
+	db "@"
 ; 0x59517 + 5 bytes
 
 Route11EndBattleText2: ; 5951c (16:551c)
 	TX_FAR _Route11EndBattleText2
-	db $50
+	db "@"
 ; 0x5951c + 5 bytes
 
 Route11AfterBattleText2: ; 59521 (16:5521)
 	TX_FAR _Route11AfterBattleText2
-	db $50
+	db "@"
 ; 0x59521 + 5 bytes
 
 Route11Text3: ; 59526 (16:5526)
@@ -88928,17 +88927,17 @@ Route11Text3: ; 59526 (16:5526)
 
 Route11BattleText3: ; 59530 (16:5530)
 	TX_FAR _Route11BattleText3
-	db $50
+	db "@"
 ; 0x59530 + 5 bytes
 
 Route11EndBattleText3: ; 59535 (16:5535)
 	TX_FAR _Route11EndBattleText3
-	db $50
+	db "@"
 ; 0x59535 + 5 bytes
 
 Route11AfterBattleText3: ; 5953a (16:553a)
 	TX_FAR _Route11AfterBattleText3
-	db $50
+	db "@"
 ; 0x5953a + 5 bytes
 
 Route11Text4: ; 5953f (16:553f)
@@ -88949,17 +88948,17 @@ Route11Text4: ; 5953f (16:553f)
 
 Route11BattleText4: ; 59549 (16:5549)
 	TX_FAR _Route11BattleText4
-	db $50
+	db "@"
 ; 0x59549 + 5 bytes
 
 Route11EndBattleText4: ; 5954e (16:554e)
 	TX_FAR _Route11EndBattleText4
-	db $50
+	db "@"
 ; 0x5954e + 5 bytes
 
 Route11AfterBattleText4: ; 59553 (16:5553)
 	TX_FAR _Route11AfterBattleText4
-	db $50
+	db "@"
 ; 0x59553 + 5 bytes
 
 Route11Text5: ; 59558 (16:5558)
@@ -88970,17 +88969,17 @@ Route11Text5: ; 59558 (16:5558)
 
 Route11BattleText5: ; 59562 (16:5562)
 	TX_FAR _Route11BattleText5
-	db $50
+	db "@"
 ; 0x59562 + 5 bytes
 
 Route11EndBattleText5: ; 59567 (16:5567)
 	TX_FAR _Route11EndBattleText5
-	db $50
+	db "@"
 ; 0x59567 + 5 bytes
 
 Route11AfterBattleText5: ; 5956c (16:556c)
 	TX_FAR _Route11AfterBattleText5
-	db $50
+	db "@"
 ; 0x5956c + 5 bytes
 
 Route11Text6: ; 59571 (16:5571)
@@ -88991,17 +88990,17 @@ Route11Text6: ; 59571 (16:5571)
 
 Route11BattleText6: ; 5957b (16:557b)
 	TX_FAR _Route11BattleText6
-	db $50
+	db "@"
 ; 0x5957b + 5 bytes
 
 Route11EndBattleText6: ; 59580 (16:5580)
 	TX_FAR _Route11EndBattleText6
-	db $50
+	db "@"
 ; 0x59580 + 5 bytes
 
 Route11AfterBattleText6: ; 59585 (16:5585)
 	TX_FAR _Route11AfterBattleText6
-	db $50
+	db "@"
 ; 0x59585 + 5 bytes
 
 Route11Text7: ; 5958a (16:558a)
@@ -89012,17 +89011,17 @@ Route11Text7: ; 5958a (16:558a)
 
 Route11BattleText7: ; 59594 (16:5594)
 	TX_FAR _Route11BattleText7
-	db $50
+	db "@"
 ; 0x59594 + 5 bytes
 
 Route11EndBattleText7: ; 59599 (16:5599)
 	TX_FAR _Route11EndBattleText7
-	db $50
+	db "@"
 ; 0x59599 + 5 bytes
 
 Route11AfterBattleText7: ; 5959e (16:559e)
 	TX_FAR _Route11AfterBattleText7
-	db $50
+	db "@"
 ; 0x5959e + 5 bytes
 
 Route11Text8: ; 595a3 (16:55a3)
@@ -89033,17 +89032,17 @@ Route11Text8: ; 595a3 (16:55a3)
 
 Route11BattleText8: ; 595ad (16:55ad)
 	TX_FAR _Route11BattleText8
-	db $50
+	db "@"
 ; 0x595ad + 5 bytes
 
 Route11EndBattleText8: ; 595b2 (16:55b2)
 	TX_FAR _Route11EndBattleText8
-	db $50
+	db "@"
 ; 0x595b2 + 5 bytes
 
 Route11AfterBattleText8: ; 595b7 (16:55b7)
 	TX_FAR _Route11AfterBattleText8
-	db $50
+	db "@"
 ; 0x595b7 + 5 bytes
 
 Route11Text9: ; 595bc (16:55bc)
@@ -89054,17 +89053,17 @@ Route11Text9: ; 595bc (16:55bc)
 
 Route11BattleText9: ; 595c6 (16:55c6)
 	TX_FAR _Route11BattleText9
-	db $50
+	db "@"
 ; 0x595c6 + 5 bytes
 
 Route11EndBattleText9: ; 595cb (16:55cb)
 	TX_FAR _Route11EndBattleText9
-	db $50
+	db "@"
 ; 0x595cb + 5 bytes
 
 Route11AfterBattleText9: ; 595d0 (16:55d0)
 	TX_FAR _Route11AfterBattleText9
-	db $50
+	db "@"
 ; 0x595d0 + 5 bytes
 
 Route11Text10: ; 595d5 (16:55d5)
@@ -89075,22 +89074,22 @@ Route11Text10: ; 595d5 (16:55d5)
 
 Route11BattleText10: ; 595df (16:55df)
 	TX_FAR _Route11BattleText10
-	db $50
+	db "@"
 ; 0x595df + 5 bytes
 
 Route11EndBattleText10: ; 595e4 (16:55e4)
 	TX_FAR _Route11EndBattleText10
-	db $50
+	db "@"
 ; 0x595e4 + 5 bytes
 
 Route11AfterBattleText10: ; 595e9 (16:55e9)
 	TX_FAR _Route11AfterBattleText10
-	db $50
+	db "@"
 ; 0x595e9 + 5 bytes
 
 Route11Text11: ; 595ee (16:55ee)
 	TX_FAR _Route11Text11
-	db $50
+	db "@"
 
 Route12Script: ; 595f3 (16:55f3)
 	call EnableAutoTextBoxDrawing
@@ -89228,18 +89227,18 @@ db $ff
 
 Route12Text1: ; 596e6 (16:56e6)
 	TX_FAR _Route12Text1
-	db $50
+	db "@"
 
 Route12Text13: ; 596eb (16:56eb)
 UnnamedText_596eb: ; 596eb (16:56eb)
 	TX_FAR _UnnamedText_596eb
-	db $50
+	db "@"
 ; 0x596eb + 5 bytes
 
 Route12Text14: ; 596f0 (16:56f0)
 UnnamedText_596f0: ; 596f0 (16:56f0)
 	TX_FAR _UnnamedText_596f0
-	db $50
+	db "@"
 ; 0x596f0 + 5 bytes
 
 Route12Text2: ; 596f5 (16:56f5)
@@ -89250,17 +89249,17 @@ Route12Text2: ; 596f5 (16:56f5)
 
 Route12BattleText1: ; 596ff (16:56ff)
 	TX_FAR _Route12BattleText1
-	db $50
+	db "@"
 ; 0x596ff + 5 bytes
 
 Route12EndBattleText1: ; 59704 (16:5704)
 	TX_FAR _Route12EndBattleText1
-	db $50
+	db "@"
 ; 0x59704 + 5 bytes
 
 Route12AfterBattleText1: ; 59709 (16:5709)
 	TX_FAR _Route12AfterBattleText1
-	db $50
+	db "@"
 ; 0x59709 + 5 bytes
 
 Route12Text3: ; 5970e (16:570e)
@@ -89271,17 +89270,17 @@ Route12Text3: ; 5970e (16:570e)
 
 Route12BattleText2: ; 59718 (16:5718)
 	TX_FAR _Route12BattleText2
-	db $50
+	db "@"
 ; 0x59718 + 5 bytes
 
 Route12EndBattleText2: ; 5971d (16:571d)
 	TX_FAR _Route12EndBattleText2
-	db $50
+	db "@"
 ; 0x5971d + 5 bytes
 
 Route12AfterBattleText2: ; 59722 (16:5722)
 	TX_FAR _Route12AfterBattleText2
-	db $50
+	db "@"
 ; 0x59722 + 5 bytes
 
 Route12Text4: ; 59727 (16:5727)
@@ -89292,17 +89291,17 @@ Route12Text4: ; 59727 (16:5727)
 
 Route12BattleText3: ; 59731 (16:5731)
 	TX_FAR _Route12BattleText3
-	db $50
+	db "@"
 ; 0x59731 + 5 bytes
 
 Route12EndBattleText3: ; 59736 (16:5736)
 	TX_FAR _Route12EndBattleText3
-	db $50
+	db "@"
 ; 0x59736 + 5 bytes
 
 Route12AfterBattleText3: ; 5973b (16:573b)
 	TX_FAR _Route12AfterBattleText3
-	db $50
+	db "@"
 ; 0x5973b + 5 bytes
 
 Route12Text5: ; 59740 (16:5740)
@@ -89313,17 +89312,17 @@ Route12Text5: ; 59740 (16:5740)
 
 Route12BattleText4: ; 5974a (16:574a)
 	TX_FAR _Route12BattleText4
-	db $50
+	db "@"
 ; 0x5974a + 5 bytes
 
 Route12EndBattleText4: ; 5974f (16:574f)
 	TX_FAR _Route12EndBattleText4
-	db $50
+	db "@"
 ; 0x5974f + 5 bytes
 
 Route12AfterBattleText4: ; 59754 (16:5754)
 	TX_FAR _Route12AfterBattleText4
-	db $50
+	db "@"
 ; 0x59754 + 5 bytes
 
 Route12Text6: ; 59759 (16:5759)
@@ -89334,17 +89333,17 @@ Route12Text6: ; 59759 (16:5759)
 
 Route12BattleText5: ; 59763 (16:5763)
 	TX_FAR _Route12BattleText5
-	db $50
+	db "@"
 ; 0x59763 + 5 bytes
 
 Route12EndBattleText5: ; 59768 (16:5768)
 	TX_FAR _Route12EndBattleText5
-	db $50
+	db "@"
 ; 0x59768 + 5 bytes
 
 Route12AfterBattleText5: ; 5976d (16:576d)
 	TX_FAR _Route12AfterBattleText5
-	db $50
+	db "@"
 ; 0x5976d + 5 bytes
 
 Route12Text7: ; 59772 (16:5772)
@@ -89355,17 +89354,17 @@ Route12Text7: ; 59772 (16:5772)
 
 Route12BattleText6: ; 5977c (16:577c)
 	TX_FAR _Route12BattleText6
-	db $50
+	db "@"
 ; 0x5977c + 5 bytes
 
 Route12EndBattleText6: ; 59781 (16:5781)
 	TX_FAR _Route12EndBattleText6
-	db $50
+	db "@"
 ; 0x59781 + 5 bytes
 
 Route12AfterBattleText6: ; 59786 (16:5786)
 	TX_FAR _Route12AfterBattleText6
-	db $50
+	db "@"
 ; 0x59786 + 5 bytes
 
 Route12Text8: ; 5978b (16:578b)
@@ -89376,26 +89375,26 @@ Route12Text8: ; 5978b (16:578b)
 
 Route12BattleText7: ; 59795 (16:5795)
 	TX_FAR _Route12BattleText7
-	db $50
+	db "@"
 ; 0x59795 + 5 bytes
 
 Route12EndBattleText7: ; 5979a (16:579a)
 	TX_FAR _Route12EndBattleText7
-	db $50
+	db "@"
 ; 0x5979a + 5 bytes
 
 Route12AfterBattleText7: ; 5979f (16:579f)
 	TX_FAR _Route12AfterBattleText7
-	db $50
+	db "@"
 ; 0x5979f + 5 bytes
 
 Route12Text11: ; 597a4 (16:57a4)
 	TX_FAR _Route12Text11
-	db $50
+	db "@"
 
 Route12Text12: ; 597a9 (16:57a9)
 	TX_FAR _Route12Text12
-	db $50
+	db "@"
 
 Route15Script: ; 597ae (16:57ae)
 	call EnableAutoTextBoxDrawing
@@ -89571,157 +89570,157 @@ asm_33cb7: ; 59892 (16:5892)
 
 Route15BattleText1: ; 59898 (16:5898)
 	TX_FAR _Route15BattleText1
-	db $50
+	db "@"
 ; 0x59898 + 5 bytes
 
 Route15EndBattleText1: ; 5989d (16:589d)
 	TX_FAR _Route15EndBattleText1
-	db $50
+	db "@"
 ; 0x5989d + 5 bytes
 
 Route15AfterBattleText1: ; 598a2 (16:58a2)
 	TX_FAR _Route15AfterBattleText1
-	db $50
+	db "@"
 ; 0x598a2 + 5 bytes
 
 Route15BattleText2: ; 598a7 (16:58a7)
 	TX_FAR _Route15BattleText2
-	db $50
+	db "@"
 ; 0x598a7 + 5 bytes
 
 Route15EndBattleText2: ; 598ac (16:58ac)
 	TX_FAR _Route15EndBattleText2
-	db $50
+	db "@"
 ; 0x598ac + 5 bytes
 
 Route15AfterBattleText2: ; 598b1 (16:58b1)
 	TX_FAR _Route15AfterBattleText2
-	db $50
+	db "@"
 ; 0x598b1 + 5 bytes
 
 Route15BattleText3: ; 598b6 (16:58b6)
 	TX_FAR _Route15BattleText3
-	db $50
+	db "@"
 ; 0x598b6 + 5 bytes
 
 Route15EndBattleText3: ; 598bb (16:58bb)
 	TX_FAR _Route15EndBattleText3
-	db $50
+	db "@"
 ; 0x598bb + 5 bytes
 
 Route15AfterBattleText3: ; 598c0 (16:58c0)
 	TX_FAR _Route15AfterBattleText3
-	db $50
+	db "@"
 ; 0x598c0 + 5 bytes
 
 Route15BattleText4: ; 598c5 (16:58c5)
 	TX_FAR _Route15BattleText4
-	db $50
+	db "@"
 ; 0x598c5 + 5 bytes
 
 Route15EndBattleText4: ; 598ca (16:58ca)
 	TX_FAR _Route15EndBattleText4
-	db $50
+	db "@"
 ; 0x598ca + 5 bytes
 
 Route15AfterBattleText4: ; 598cf (16:58cf)
 	TX_FAR _Route15AfterBattleText4
-	db $50
+	db "@"
 ; 0x598cf + 5 bytes
 
 Route15BattleText5: ; 598d4 (16:58d4)
 	TX_FAR _Route15BattleText5
-	db $50
+	db "@"
 ; 0x598d4 + 5 bytes
 
 Route15EndBattleText5: ; 598d9 (16:58d9)
 	TX_FAR _Route15EndBattleText5
-	db $50
+	db "@"
 ; 0x598d9 + 5 bytes
 
 Route15AfterBattleText5: ; 598de (16:58de)
 	TX_FAR _Route15AfterBattleText5
-	db $50
+	db "@"
 ; 0x598de + 5 bytes
 
 Route15BattleText6: ; 598e3 (16:58e3)
 	TX_FAR _Route15BattleText6
-	db $50
+	db "@"
 ; 0x598e3 + 5 bytes
 
 Route15EndBattleText6: ; 598e8 (16:58e8)
 	TX_FAR _Route15EndBattleText6
-	db $50
+	db "@"
 ; 0x598e8 + 5 bytes
 
 Route15AfterBattleText6: ; 598ed (16:58ed)
 	TX_FAR _Route15AfterBattleText6
-	db $50
+	db "@"
 ; 0x598ed + 5 bytes
 
 Route15BattleText7: ; 598f2 (16:58f2)
 	TX_FAR _Route15BattleText7
-	db $50
+	db "@"
 ; 0x598f2 + 5 bytes
 
 Route15EndBattleText7: ; 598f7 (16:58f7)
 	TX_FAR _Route15EndBattleText7
-	db $50
+	db "@"
 ; 0x598f7 + 5 bytes
 
 Route15AfterBattleText7: ; 598fc (16:58fc)
 	TX_FAR _Route15AfterBattleText7
-	db $50
+	db "@"
 ; 0x598fc + 5 bytes
 
 Route15BattleText8: ; 59901 (16:5901)
 	TX_FAR _Route15BattleText8
-	db $50
+	db "@"
 ; 0x59901 + 5 bytes
 
 Route15EndBattleText8: ; 59906 (16:5906)
 	TX_FAR _Route15EndBattleText8
-	db $50
+	db "@"
 ; 0x59906 + 5 bytes
 
 Route15AfterBattleText8: ; 5990b (16:590b)
 	TX_FAR _Route15AfterBattleText8
-	db $50
+	db "@"
 ; 0x5990b + 5 bytes
 
 Route15BattleText9: ; 59910 (16:5910)
 	TX_FAR _Route15BattleText9
-	db $50
+	db "@"
 ; 0x59910 + 5 bytes
 
 Route15EndBattleText9: ; 59915 (16:5915)
 	TX_FAR _Route15EndBattleText9
-	db $50
+	db "@"
 ; 0x59915 + 5 bytes
 
 Route15AfterBattleText9: ; 5991a (16:591a)
 	TX_FAR _Route15AfterBattleText9
-	db $50
+	db "@"
 ; 0x5991a + 5 bytes
 
 Route15BattleText10: ; 5991f (16:591f)
 	TX_FAR _Route15BattleText10
-	db $50
+	db "@"
 ; 0x5991f + 5 bytes
 
 Route15EndBattleText10: ; 59924 (16:5924)
 	TX_FAR _Route15EndBattleText10
-	db $50
+	db "@"
 ; 0x59924 + 5 bytes
 
 Route15AfterBattleText10: ; 59929 (16:5929)
 	TX_FAR _Route15AfterBattleText10
-	db $50
+	db "@"
 ; 0x59929 + 5 bytes
 
 Route15Text12: ; 5992e (16:592e)
 	TX_FAR _Route15Text12
-	db $50
+	db "@"
 
 Route16Script: ; 59933 (16:5933)
 	call EnableAutoTextBoxDrawing
@@ -89858,17 +89857,17 @@ Route16Text1: ; 59a18 (16:5a18)
 
 Route16BattleText1: ; 59a22 (16:5a22)
 	TX_FAR _Route16BattleText1
-	db $50
+	db "@"
 ; 0x59a22 + 5 bytes
 
 Route16EndBattleText1: ; 59a27 (16:5a27)
 	TX_FAR _Route16EndBattleText1
-	db $50
+	db "@"
 ; 0x59a27 + 5 bytes
 
 Route16AfterBattleText1: ; 59a2c (16:5a2c)
 	TX_FAR _Route16AfterBattleText1
-	db $50
+	db "@"
 ; 0x59a2c + 5 bytes
 
 Route16Text2: ; 59a31 (16:5a31)
@@ -89879,17 +89878,17 @@ Route16Text2: ; 59a31 (16:5a31)
 
 Route16BattleText2: ; 59a3b (16:5a3b)
 	TX_FAR _Route16BattleText2
-	db $50
+	db "@"
 ; 0x59a3b + 5 bytes
 
 Route16EndBattleText2: ; 59a40 (16:5a40)
 	TX_FAR _Route16EndBattleText2
-	db $50
+	db "@"
 ; 0x59a40 + 5 bytes
 
 Route16AfterBattleText2: ; 59a45 (16:5a45)
 	TX_FAR _Route16AfterBattleText2
-	db $50
+	db "@"
 ; 0x59a45 + 5 bytes
 
 Route16Text3: ; 59a4a (16:5a4a)
@@ -89900,17 +89899,17 @@ Route16Text3: ; 59a4a (16:5a4a)
 
 Route16BattleText3: ; 59a54 (16:5a54)
 	TX_FAR _Route16BattleText3
-	db $50
+	db "@"
 ; 0x59a54 + 5 bytes
 
 Route16EndBattleText3: ; 59a59 (16:5a59)
 	TX_FAR _Route16EndBattleText3
-	db $50
+	db "@"
 ; 0x59a59 + 5 bytes
 
 Route16AfterBattleText3: ; 59a5e (16:5a5e)
 	TX_FAR _Route16AfterBattleText3
-	db $50
+	db "@"
 ; 0x59a5e + 5 bytes
 
 Route16Text4: ; 59a63 (16:5a63)
@@ -89921,17 +89920,17 @@ Route16Text4: ; 59a63 (16:5a63)
 
 Route16BattleText4: ; 59a6d (16:5a6d)
 	TX_FAR _Route16BattleText4
-	db $50
+	db "@"
 ; 0x59a6d + 5 bytes
 
 Route16EndBattleText4: ; 59a72 (16:5a72)
 	TX_FAR _Route16EndBattleText4
-	db $50
+	db "@"
 ; 0x59a72 + 5 bytes
 
 Route16AfterBattleText4: ; 59a77 (16:5a77)
 	TX_FAR _Route16AfterBattleText4
-	db $50
+	db "@"
 ; 0x59a77 + 5 bytes
 
 Route16Text5: ; 59a7c (16:5a7c)
@@ -89942,17 +89941,17 @@ Route16Text5: ; 59a7c (16:5a7c)
 
 Route16BattleText5: ; 59a86 (16:5a86)
 	TX_FAR _Route16BattleText5
-	db $50
+	db "@"
 ; 0x59a86 + 5 bytes
 
 Route16EndBattleText5: ; 59a8b (16:5a8b)
 	TX_FAR _Route16EndBattleText5
-	db $50
+	db "@"
 ; 0x59a8b + 5 bytes
 
 Route16AfterBattleText5: ; 59a90 (16:5a90)
 	TX_FAR _Route16AfterBattleText5
-	db $50
+	db "@"
 ; 0x59a90 + 5 bytes
 
 Route16Text6: ; 59a95 (16:5a95)
@@ -89963,40 +89962,40 @@ Route16Text6: ; 59a95 (16:5a95)
 
 Route16BattleText6: ; 59a9f (16:5a9f)
 	TX_FAR _Route16BattleText6
-	db $50
+	db "@"
 ; 0x59a9f + 5 bytes
 
 Route16EndBattleText6: ; 59aa4 (16:5aa4)
 	TX_FAR _Route16EndBattleText6
-	db $50
+	db "@"
 ; 0x59aa4 + 5 bytes
 
 Route16AfterBattleText6: ; 59aa9 (16:5aa9)
 	TX_FAR _Route16AfterBattleText6
-	db $50
+	db "@"
 ; 0x59aa9 + 5 bytes
 
 Route16Text7: ; 59aae (16:5aae)
 	TX_FAR _Route16Text7
-	db $50
+	db "@"
 
 Route16Text10: ; 59ab3 (16:5ab3)
 	TX_FAR _UnnamedText_59ab3
-	db $50
+	db "@"
 ; 0x59ab3 + 5 bytes
 
 Route16Text11: ; 59ab8 (16:5ab8)
 	TX_FAR _UnnamedText_59ab8
-	db $50
+	db "@"
 ; 0x59ab8 + 5 bytes
 
 Route16Text8: ; 59abd (16:5abd)
 	TX_FAR _Route16Text8
-	db $50
+	db "@"
 
 Route16Text9: ; 59ac2 (16:5ac2)
 	TX_FAR _Route16Text9
-	db $50
+	db "@"
 
 Route18Script: ; 59ac7 (16:5ac7)
 	call EnableAutoTextBoxDrawing
@@ -90055,17 +90054,17 @@ Route18Text1: ; 59b0f (16:5b0f)
 
 Route18BattleText1: ; 59b19 (16:5b19)
 	TX_FAR _Route18BattleText1
-	db $50
+	db "@"
 ; 0x59b19 + 5 bytes
 
 Route18EndBattleText1: ; 59b1e (16:5b1e)
 	TX_FAR _Route18EndBattleText1
-	db $50
+	db "@"
 ; 0x59b1e + 5 bytes
 
 Route18AfterBattleText1: ; 59b23 (16:5b23)
 	TX_FAR _Route18AfterBattleText1
-	db $50
+	db "@"
 ; 0x59b23 + 5 bytes
 
 Route18Text2: ; 59b28 (16:5b28)
@@ -90076,17 +90075,17 @@ Route18Text2: ; 59b28 (16:5b28)
 
 Route18BattleText2: ; 59b32 (16:5b32)
 	TX_FAR _Route18BattleText2
-	db $50
+	db "@"
 ; 0x59b32 + 5 bytes
 
 Route18EndBattleText2: ; 59b37 (16:5b37)
 	TX_FAR _Route18EndBattleText2
-	db $50
+	db "@"
 ; 0x59b37 + 5 bytes
 
 Route18AfterBattleText2: ; 59b3c (16:5b3c)
 	TX_FAR _Route18AfterBattleText2
-	db $50
+	db "@"
 ; 0x59b3c + 5 bytes
 
 Route18Text3: ; 59b41 (16:5b41)
@@ -90097,26 +90096,26 @@ Route18Text3: ; 59b41 (16:5b41)
 
 Route18BattleText3: ; 59b4b (16:5b4b)
 	TX_FAR _Route18BattleText3
-	db $50
+	db "@"
 ; 0x59b4b + 5 bytes
 
 Route18EndBattleText3: ; 59b50 (16:5b50)
 	TX_FAR _Route18EndBattleText3
-	db $50
+	db "@"
 ; 0x59b50 + 5 bytes
 
 Route18AfterBattleText3: ; 59b55 (16:5b55)
 	TX_FAR _Route18AfterBattleText3
-	db $50
+	db "@"
 ; 0x59b55 + 5 bytes
 
 Route18Text4: ; 59b5a (16:5b5a)
 	TX_FAR _Route18Text4
-	db $50
+	db "@"
 
 Route18Text5: ; 59b5f (16:5b5f)
 	TX_FAR _Route18Text5
-	db $50
+	db "@"
 
 FanClub_h: ; 0x59b64 to 0x59b70 (12 bytes) (id=90)
 	db $10 ; tileset
@@ -90164,12 +90163,12 @@ asm_64f01 ; 0x59bb4
 
 UnnamedText_59bb7: ; 59bb7 (16:5bb7)
 	TX_FAR _UnnamedText_59bb7
-	db $50
+	db "@"
 ; 0x59bb7 + 5 bytes
 
 UnnamedText_59bbc: ; 59bbc (16:5bbc)
 	TX_FAR _UnnamedText_59bbc
-	db $50
+	db "@"
 ; 0x59bbc + 5 bytes
 
 FanClubText2: ; 59bc1 (16:5bc1)
@@ -90192,12 +90191,12 @@ asm_59625 ; 0x59be1
 
 UnnamedText_59be4: ; 59be4 (16:5be4)
 	TX_FAR _UnnamedText_59be4
-	db $50
+	db "@"
 ; 0x59be4 + 5 bytes
 
 UnnamedText_59be9: ; 59be9 (16:5be9)
 	TX_FAR _UnnamedText_59be9
-	db $50
+	db "@"
 ; 0x59be9 + 5 bytes
 
 FanClubText3: ; 59bee (16:5bee)
@@ -90212,7 +90211,7 @@ FanClubText3: ; 59bee (16:5bee)
 
 UnnamedText_59c00: ; 59c00 (16:5c00)
 	TX_FAR _UnnamedText_59c00
-	db $50
+	db "@"
 ; 0x59c00 + 5 bytes
 
 FanClubText4: ; 59c05 (16:5c05)
@@ -90226,7 +90225,7 @@ FanClubText4: ; 59c05 (16:5c05)
 
 UnnamedText_59c17: ; 59c17 (16:5c17)
 	TX_FAR _UnnamedText_59c17
-	db $50
+	db "@"
 ; 0x59c17 + 5 bytes
 
 FanClubText5: ; 59c1c (16:5c1c)
@@ -90265,47 +90264,47 @@ asm_d3c26 ; 0x59c62
 
 UnnamedText_59c65: ; 59c65 (16:5c65)
 	TX_FAR _UnnamedText_59c65
-	db $50
+	db "@"
 ; 0x59c65 + 5 bytes
 
 UnnamedText_59c6a: ; 59c6a (16:5c6a)
 	TX_FAR _UnnamedText_59c6a
-	db $50
+	db "@"
 ; 0x59c6a + 5 bytes
 
 ReceivedBikeVoucherText: ; 59c6f (16:5c6f)
 	TX_FAR _ReceivedBikeVoucherText ; 0x9a82e
 	db $11
 	TX_FAR _UnnamedText_59c74 ; 0x9a844
-	db $50
+	db "@"
 ; 0x59c6f + 10 bytes = 0x59c79
 
 UnnamedText_59c79: ; 59c79 (16:5c79)
 	TX_FAR _UnnamedText_59c79
-	db $50
+	db "@"
 ; 0x59c79 + 5 bytes
 
 UnnamedText_59c7e: ; 59c7e (16:5c7e)
 	TX_FAR _UnnamedText_59c7e
-	db $50
+	db "@"
 ; 0x59c7e + 5 bytes
 
 UnnamedText_59c83: ; 59c83 (16:5c83)
 	TX_FAR _UnnamedText_59c83
-	db $50
+	db "@"
 ; 0x59c83 + 5 bytes
 
 FanClubText6: ; 59c88 (16:5c88)
 	TX_FAR _FanClubText6
-	db $50
+	db "@"
 
 FanClubText7: ; 59c8d (16:5c8d)
 	TX_FAR _FanClubText7
-	db $50
+	db "@"
 
 FanClubText8: ; 59c92 (16:5c92)
 	TX_FAR _FanClubText8
-	db $50
+	db "@"
 
 FanClubObject: ; 0x59c97 (size=62)
 	db $d ; border tile
@@ -90466,22 +90465,22 @@ asm_2c1e0 ; 0x59de7
 
 UnnamedText_59ded: ; 59ded (16:5ded)
 	TX_FAR _UnnamedText_59ded
-	db $50
+	db "@"
 ; 0x59ded + 5 bytes
 
 ReceivedTM36Text: ; 59df2 (16:5df2)
 	TX_FAR _ReceivedTM36Text ; 0x824ba
-	db $0B, $50
+	db $0B, "@"
 ; 0x59df2 + 6 bytes = 0x59df8
 
 TM36ExplanationText: ; 59df8 (16:5df8)
 	TX_FAR _TM36ExplanationText
-	db $50
+	db "@"
 ; 0x59df8 + 5 bytes
 
 TM36NoRoomText: ; 59dfd (16:5dfd)
 	TX_FAR _TM36NoRoomText
-	db $50
+	db "@"
 ; 0x59dfd + 5 bytes
 
 SilphCo2Text2: ; 59e02 (16:5e02)
@@ -90510,62 +90509,62 @@ SilphCo2Text5: ; 59e20 (16:5e20)
 
 SilphCo2BattleText1: ; 59e2a (16:5e2a)
 	TX_FAR _SilphCo2BattleText1
-	db $50
+	db "@"
 ; 0x59e2a + 5 bytes
 
 SilphCo2EndBattleText1: ; 59e2f (16:5e2f)
 	TX_FAR _SilphCo2EndBattleText1
-	db $50
+	db "@"
 ; 0x59e2f + 5 bytes
 
 SilphCo2AfterBattleText1: ; 59e34 (16:5e34)
 	TX_FAR _SilphCo2AfterBattleText1
-	db $50
+	db "@"
 ; 0x59e34 + 5 bytes
 
 SilphCo2BattleText2: ; 59e39 (16:5e39)
 	TX_FAR _SilphCo2BattleText2
-	db $50
+	db "@"
 ; 0x59e39 + 5 bytes
 
 SilphCo2EndBattleText2: ; 59e3e (16:5e3e)
 	TX_FAR _SilphCo2EndBattleText2
-	db $50
+	db "@"
 ; 0x59e3e + 5 bytes
 
 SilphCo2AfterBattleText2: ; 59e43 (16:5e43)
 	TX_FAR _SilphCo2AfterBattleText2
-	db $50
+	db "@"
 ; 0x59e43 + 5 bytes
 
 SilphCo2BattleText3: ; 59e48 (16:5e48)
 	TX_FAR _SilphCo2BattleText3
-	db $50
+	db "@"
 ; 0x59e48 + 5 bytes
 
 SilphCo2EndBattleText3: ; 59e4d (16:5e4d)
 	TX_FAR _SilphCo2EndBattleText3
-	db $50
+	db "@"
 ; 0x59e4d + 5 bytes
 
 SilphCo2AfterBattleText3: ; 59e52 (16:5e52)
 	TX_FAR _SilphCo2AfterBattleText3
-	db $50
+	db "@"
 ; 0x59e52 + 5 bytes
 
 SilphCo2BattleText4: ; 59e57 (16:5e57)
 	TX_FAR _SilphCo2BattleText4
-	db $50
+	db "@"
 ; 0x59e57 + 5 bytes
 
 SilphCo2EndBattleText4: ; 59e5c (16:5e5c)
 	TX_FAR _SilphCo2EndBattleText4
-	db $50
+	db "@"
 ; 0x59e5c + 5 bytes
 
 SilphCo2AfterBattleText4: ; 59e61 (16:5e61)
 	TX_FAR _SilphCo2AfterBattleText4
-	db $50
+	db "@"
 ; 0x59e61 + 5 bytes
 
 SilphCo2Object: ; 0x59e66 (size=98)
@@ -90706,12 +90705,12 @@ asm_8c56f ; 0x59ff3
 
 UnnamedText_59ff9: ; 59ff9 (16:5ff9)
 	TX_FAR _UnnamedText_59ff9
-	db $50
+	db "@"
 ; 0x59ff9 + 5 bytes
 
 UnnamedText_59ffe: ; 59ffe (16:5ffe)
 	TX_FAR _UnnamedText_59ffe
-	db $50
+	db "@"
 ; 0x59ffe + 5 bytes
 
 SilphCo3Text2: ; 5a003 (16:6003)
@@ -90722,17 +90721,17 @@ SilphCo3Text2: ; 5a003 (16:6003)
 
 SilphCo3BattleText1: ; 5a00d (16:600d)
 	TX_FAR _SilphCo3BattleText1
-	db $50
+	db "@"
 ; 0x5a00d + 5 bytes
 
 SilphCo3EndBattleText1: ; 5a012 (16:6012)
 	TX_FAR _SilphCo3EndBattleText1
-	db $50
+	db "@"
 ; 0x5a012 + 5 bytes
 
 SilphCo3AfterBattleText1: ; 5a017 (16:6017)
 	TX_FAR _SilphCo3AfterBattleText1
-	db $50
+	db "@"
 ; 0x5a017 + 5 bytes
 
 SilphCo3Text3: ; 5a01c (16:601c)
@@ -90743,17 +90742,17 @@ SilphCo3Text3: ; 5a01c (16:601c)
 
 SilphCo3BattleText2: ; 5a026 (16:6026)
 	TX_FAR _SilphCo3BattleText2
-	db $50
+	db "@"
 ; 0x5a026 + 5 bytes
 
 SilphCo3EndBattleText2: ; 5a02b (16:602b)
 	TX_FAR _SilphCo3EndBattleText2
-	db $50
+	db "@"
 ; 0x5a02b + 5 bytes
 
 SilphCo3AfterBattleText2: ; 5a030 (16:6030)
 	TX_FAR _SilphCo3AfterBattleText2
-	db $50
+	db "@"
 ; 0x5a030 + 5 bytes
 
 SilphCo3Object: ; 0x5a035 (size=113)
@@ -90896,42 +90895,42 @@ asm_cf85f ; 0x5a1cd
 
 UnnamedText_5a1d3: ; 5a1d3 (16:61d3)
 	TX_FAR _UnnamedText_5a1d3
-	db $50
+	db "@"
 ; 0x5a1d3 + 5 bytes
 
 UnnamedText_5a1d8: ; 5a1d8 (16:61d8)
 	TX_FAR _UnnamedText_5a1d8
-	db $50
+	db "@"
 ; 0x5a1d8 + 5 bytes
 
 SilphCo10BattleText1: ; 5a1dd (16:61dd)
 	TX_FAR _SilphCo10BattleText1
-	db $50
+	db "@"
 ; 0x5a1dd + 5 bytes
 
 SilphCo10EndBattleText1: ; 5a1e2 (16:61e2)
 	TX_FAR _SilphCo10EndBattleText1
-	db $50
+	db "@"
 ; 0x5a1e2 + 5 bytes
 
 SilphCo10AfterBattleText1: ; 5a1e7 (16:61e7)
 	TX_FAR _SilphCo10AfterBattleText1
-	db $50
+	db "@"
 ; 0x5a1e7 + 5 bytes
 
 SilphCo10BattleText2: ; 5a1ec (16:61ec)
 	TX_FAR _SilphCo10BattleText2
-	db $50
+	db "@"
 ; 0x5a1ec + 5 bytes
 
 SilphCo10EndBattleText2: ; 5a1f1 (16:61f1)
 	TX_FAR _SilphCo10EndBattleText2
-	db $50
+	db "@"
 ; 0x5a1f1 + 5 bytes
 
 SilphCo10AfterBattleText2: ; 5a1f6 (16:61f6)
 	TX_FAR _SilphCo10AfterBattleText2
-	db $50
+	db "@"
 ; 0x5a1f6 + 5 bytes
 
 SilphCo10Object: ; 0x5a1fb (size=95)
@@ -91117,12 +91116,12 @@ LanceText1: ; 5a3a4 (16:63a4)
 
 LanceBeforeBattleText: ; 5a3ae (16:63ae)
 	TX_FAR _LanceBeforeBattleText
-	db $50
+	db "@"
 ; 0x5a3ae + 5 bytes
 
 LanceEndBattleText: ; 5a3b3 (16:63b3)
 	TX_FAR _LanceEndBattleText
-	db $50
+	db "@"
 ; 0x5a3b3 + 5 bytes
 
 LanceAfterBattleText: ; 5a3b8 (16:63b8)
@@ -91275,7 +91274,7 @@ HallofFameRoomTexts: ; 5a56a (16:656a)
 
 HallofFameRoomText1: ; 5a56c (16:656c)
 	TX_FAR _HallofFameRoomText1
-	db $50
+	db "@"
 
 HallofFameRoomObject: ; 0x5a571 (size=26)
 	db $3 ; border tile
@@ -91558,47 +91557,47 @@ asm_d1145: ; 5c217 (17:4217)
 
 UnnamedText_5c21a: ; 5c21a (17:421a)
 	TX_FAR _UnnamedText_5c21a
-	db $50
+	db "@"
 ; 0x5c21a + 5 bytes
 
 UnnamedText_5c21f: ; 5c21f (17:421f)
 	TX_FAR _UnnamedText_5c21f
-	db $50
+	db "@"
 ; 0x5c21f + 5 bytes
 
 UnnamedText_5c224: ; 5c224 (17:4224)
 	TX_FAR _UnnamedText_5c224
-	db $50
+	db "@"
 ; 0x5c224 + 5 bytes
 
 UnnamedText_5c229: ; 5c229 (17:4229)
 	TX_FAR _UnnamedText_5c229
-	db $50
+	db "@"
 ; 0x5c229 + 5 bytes
 
 UnnamedText_5c22e: ; 5c22e (17:422e)
 	TX_FAR _UnnamedText_5c22e
-	db $50
+	db "@"
 ; 0x5c22e + 5 bytes
 
 UnnamedText_5c233: ; 5c233 (17:4233)
 	TX_FAR _UnnamedText_5c233
-	db $50
+	db "@"
 ; 0x5c233 + 5 bytes
 
 UnnamedText_5c238: ; 5c238 (17:4238)
 	TX_FAR _UnnamedText_5c238
-	db $50
+	db "@"
 ; 0x5c238 + 5 bytes
 
 UnnamedText_5c23d: ; 5c23d (17:423d)
 	TX_FAR _UnnamedText_5c23d
-	db $50
+	db "@"
 ; 0x5c23d + 5 bytes
 
 UnnamedText_5c242: ; 5c242 (17:4242)
 	TX_FAR _UnnamedText_5c242
-	db $50
+	db "@"
 ; 0x5c242 + 5 bytes
 
 MuseumF1Text2: ; 5c247 (17:4247)
@@ -91609,7 +91608,7 @@ MuseumF1Text2: ; 5c247 (17:4247)
 
 UnnamedText_5c251: ; 5c251 (17:4251)
 	TX_FAR _UnnamedText_5c251
-	db $50
+	db "@"
 ; 0x5c251 + 5 bytes
 
 MuseumF1Text3: ; 5c256 (17:4256)
@@ -91641,22 +91640,22 @@ MuseumF1Text3: ; 5c256 (17:4256)
 
 UnnamedText_5c28e: ; 5c28e (17:428e)
 	TX_FAR _UnnamedText_5c28e
-	db $50
+	db "@"
 ; 0x5c28e + 5 bytes
 
 ReceivedOldAmberText: ; 5c293 (17:4293)
 	TX_FAR _ReceivedOldAmberText ; 0x96790
-	db $0B, $50
+	db $0B, "@"
 ; 0x5c293 + 6 bytes = 0x5c299
 
 UnnamedText_5c299: ; 5c299 (17:4299)
 	TX_FAR _UnnamedText_5c299
-	db $50
+	db "@"
 ; 0x5c299 + 5 bytes
 
 UnnamedText_5c29e: ; 5c29e (17:429e)
 	TX_FAR _UnnamedText_5c29e
-	db $50
+	db "@"
 ; 0x5c29e + 5 bytes
 
 MuseumF1Text4: ; 5c2a3 (17:42a3)
@@ -91667,7 +91666,7 @@ MuseumF1Text4: ; 5c2a3 (17:42a3)
 
 UnnamedText_5c2ad: ; 5c2ad (17:42ad)
 	TX_FAR _UnnamedText_5c2ad
-	db $50
+	db "@"
 ; 0x5c2ad + 5 bytes
 
 MuseumF1Text5: ; 5c2b2 (17:42b2)
@@ -91678,7 +91677,7 @@ MuseumF1Text5: ; 5c2b2 (17:42b2)
 
 UnnamedText_5c2bc: ; 5c2bc (17:42bc)
 	TX_FAR _UnnamedText_5c2bc
-	db $50
+	db "@"
 ; 0x5c2bc + 5 bytes
 
 MuseumF1Object: ; 0x5c2c1 (size=74)
@@ -91724,31 +91723,31 @@ MuseumF2Texts: ; 5c31a (17:431a)
 
 MuseumF2Text1: ; 5c328 (17:4328)
 	TX_FAR _MuseumF2Text1
-	db $50
+	db "@"
 
 MuseumF2Text2: ; 5c32d (17:432d)
 	TX_FAR _MuseumF2Text2
-	db $50
+	db "@"
 
 MuseumF2Text3: ; 5c332 (17:4332)
 	TX_FAR _MuseumF2Text3
-	db $50
+	db "@"
 
 MuseumF2Text4: ; 5c337 (17:4337)
 	TX_FAR _MuseumF2Text4
-	db $50
+	db "@"
 
 MuseumF2Text5: ; 5c33c (17:433c)
 	TX_FAR _MuseumF2Text5
-	db $50
+	db "@"
 
 MuseumF2Text6: ; 5c341 (17:4341)
 	TX_FAR _MuseumF2Text6
-	db $50
+	db "@"
 
 MuseumF2Text7: ; 5c346 (17:4346)
 	TX_FAR _MuseumF2Text7
-	db $50
+	db "@"
 
 MuseumF2Object: ; 0x5c34b (size=48)
 	db $a ; border tile
@@ -91914,35 +91913,35 @@ PewterGymText1: ; 5c44e (17:444e)
 
 UnnamedText_5c49e: ; 5c49e (17:449e)
 	TX_FAR _UnnamedText_5c49e
-	db $50
+	db "@"
 ; 0x5c49e + 5 bytes
 
 UnnamedText_5c4a3: ; 5c4a3 (17:44a3)
 	TX_FAR _UnnamedText_5c4a3
-	db $50
+	db "@"
 ; 0x5c4a3 + 5 bytes
 
 PewterGymText4: ; 5c4a8 (17:44a8)
 	TX_FAR _TM34PreReceiveText
-	db $50
+	db "@"
 ; 0x5c4a8 + 5 bytes
 
 PewterGymText5: ; 5c4ad (17:44ad)
 	TX_FAR _ReceivedTM34Text ; 0x980ad
 	db $0B
 	TX_FAR _TM34ExplanationText ; 0x980c0
-	db $50
+	db "@"
 ; 0x5c4ad + 10 bytes = 0x5c4b7
 
 PewterGymText6: ; 5c4b7 (17:44b7)
 	TX_FAR _TM34NoRoomText
-	db $50
+	db "@"
 
 UnnamedText_5c4bc: ; 5c4bc (17:44bc)
 	TX_FAR _UnnamedText_5c4bc ; 0x981c9
 	db $0B
 	TX_FAR _UnnamedText_5c4c1 ; 0x98232
-	db $50
+	db "@"
 ; 0x5c4c6
 
 PewterGymText2: ; 5c4c6 (17:44c6)
@@ -91953,17 +91952,17 @@ PewterGymText2: ; 5c4c6 (17:44c6)
 
 PewterGymBattleText1: ; 5c4d0 (17:44d0)
 	TX_FAR _PewterGymBattleText1
-	db $50
+	db "@"
 ; 0x5c4d0 + 5 bytes
 
 PewterGymEndBattleText1: ; 5c4d5 (17:44d5)
 	TX_FAR _PewterGymEndBattleText1
-	db $50
+	db "@"
 ; 0x5c4d5 + 5 bytes
 
 PewterGymAfterBattleText1: ; 5c4da (17:44da)
 	TX_FAR _PewterGymAfterBattleText1
-	db $50
+	db "@"
 ; 0x5c4da + 5 bytes
 
 PewterGymText3: ; 5c4df (17:44df)
@@ -91995,27 +91994,27 @@ PewterGymText3: ; 5c4df (17:44df)
 
 UnnamedText_5c515: ; 5c515 (17:4515)
 	TX_FAR _UnnamedText_5c515
-	db $50
+	db "@"
 ; 0x5c515 + 5 bytes
 
 UnnamedText_5c51a: ; 5c51a (17:451a)
 	TX_FAR _UnnamedText_5c51a
-	db $50
+	db "@"
 ; 0x5c51a + 5 bytes
 
 UnnamedText_5c51f: ; 5c51f (17:451f)
 	TX_FAR _UnnamedText_5c51f
-	db $50
+	db "@"
 ; 0x5c51f + 5 bytes
 
 UnnamedText_5c524: ; 5c524 (17:4524)
 	TX_FAR _UnnamedText_5c524
-	db $50
+	db "@"
 ; 0x5c524 + 5 bytes
 
 UnnamedText_5c529: ; 5c529 (17:4529)
 	TX_FAR _UnnamedText_5c529
-	db $50
+	db "@"
 ; 0x5c529 + 5 bytes
 
 PewterGymObject: ; 0x5c52e (size=42)
@@ -92060,7 +92059,7 @@ PewterPokecenterText1: ; 5c595 (17:4595)
 
 PewterPokecenterText2: ; 5c596 (17:4596)
 	TX_FAR _PewterPokecenterText1
-	db $50
+	db "@"
 
 PewterPokecenterText3: ; 5c59b (17:459b)
 	db $8
@@ -92114,7 +92113,7 @@ PewterPokecenterText3: ; 5c59b (17:459b)
 
 PewterPokecenterText5: ; 5c603 (17:4603)
 	TX_FAR _PewterPokecenterText5 ; 0x98744
-	db $50
+	db "@"
 ; 0x5c603 + 5 bytes = 0x5c608
 
 Unknown_5c608: ; 5c608 (17:4608)
@@ -92166,11 +92165,11 @@ CeruleanPokecenterText1: ; 5c654 (17:4654)
 
 CeruleanPokecenterText2: ; 5c655 (17:4655)
 	TX_FAR _CeruleanPokecenterText1
-	db $50
+	db "@"
 
 CeruleanPokecenterText3: ; 5c65a (17:465a)
 	TX_FAR _CeruleanPokecenterText3
-	db $50
+	db "@"
 
 CeruleanPokecenterObject: ; 0x5c65f (size=44)
 	db $0 ; border tile
@@ -92337,33 +92336,33 @@ CeruleanGymText1: ; 5c771 (17:4771)
 
 UnnamedText_5c7be: ; 5c7be (17:47be)
 	TX_FAR _UnnamedText_5c7be
-	db $50
+	db "@"
 ; 0x5c7be + 5 bytes
 
 UnnamedText_5c7c3: ; 5c7c3 (17:47c3)
 	TX_FAR _UnnamedText_5c7c3
-	db $50
+	db "@"
 ; 0x5c7c3 + 5 bytes
 
 CeruleanGymText5: ; 5c7c8 (17:47c8)
 	TX_FAR _UnnamedText_5c7c8
-	db $50
+	db "@"
 ; 0x5c7c8 + 5 bytes
 
 CeruleanGymText6: ; 5c7cd (17:47cd)
 ReceivedTM11Text: ; 5c7cd (17:47cd)
 	TX_FAR _ReceivedTM11Text ; 0x98b7d
-	db $0B, $50
+	db $0B, "@"
 ; 0x5c7cd + 6 bytes = 0x5c7d3
 
 CeruleanGymText7: ; 5c7d3 (17:47d3)
 	TX_FAR _UnnamedText_5c7d3
-	db $50
+	db "@"
 ; 0x5c7d3 + 5 bytes
 
 UnnamedText_5c7d8: ; 5c7d8 (17:47d8)
 	TX_FAR _UnnamedText_5c7d8 ; 0x98bb0
-	db $11, $6, $50
+	db $11, $6, "@"
 ; 0x5c7d8 + 7 bytes = 0x5c7df
 
 CeruleanGymText2: ; 5c7df (17:47df)
@@ -92374,17 +92373,17 @@ CeruleanGymText2: ; 5c7df (17:47df)
 
 CeruleanGymBattleText1: ; 5c7e9 (17:47e9)
 	TX_FAR _CeruleanGymBattleText1
-	db $50
+	db "@"
 ; 0x5c7e9 + 5 bytes
 
 CeruleanGymEndBattleText1: ; 5c7ee (17:47ee)
 	TX_FAR _CeruleanGymEndBattleText1
-	db $50
+	db "@"
 ; 0x5c7ee + 5 bytes
 
 CeruleanGymAfterBattleText1: ; 5c7f3 (17:47f3)
 	TX_FAR _CeruleanGymAfterBattleText1
-	db $50
+	db "@"
 ; 0x5c7f3 + 5 bytes
 
 CeruleanGymText3: ; 5c7f8 (17:47f8)
@@ -92395,17 +92394,17 @@ CeruleanGymText3: ; 5c7f8 (17:47f8)
 
 CeruleanGymBattleText2: ; 5c802 (17:4802)
 	TX_FAR _CeruleanGymBattleText2
-	db $50
+	db "@"
 ; 0x5c802 + 5 bytes
 
 CeruleanGymEndBattleText2: ; 5c807 (17:4807)
 	TX_FAR _CeruleanGymEndBattleText2
-	db $50
+	db "@"
 ; 0x5c807 + 5 bytes
 
 CeruleanGymAfterBattleText2: ; 5c80c (17:480c)
 	TX_FAR _CeruleanGymAfterBattleText2
-	db $50
+	db "@"
 ; 0x5c80c + 5 bytes
 
 CeruleanGymText4: ; 5c811 (17:4811)
@@ -92424,12 +92423,12 @@ CeruleanGymText4: ; 5c811 (17:4811)
 
 UnnamedText_5c82a: ; 5c82a (17:482a)
 	TX_FAR _UnnamedText_5c82a
-	db $50
+	db "@"
 ; 0x5c82a + 5 bytes
 
 UnnamedText_5c82f: ; 5c82f (17:482f)
 	TX_FAR _UnnamedText_5c82f
-	db $50
+	db "@"
 ; 0x5c82f + 5 bytes
 
 CeruleanGymObject: ; 0x5c834 (size=50)
@@ -92471,11 +92470,11 @@ CeruleanMartTexts: ; 5c898 (17:4898)
 
 CeruleanMartText2: ; 5c89e (17:489e)
 	TX_FAR _CeruleanMartText2
-	db $50
+	db "@"
 
 CeruleanMartText3: ; 5c8a3 (17:48a3)
 	TX_FAR _CeruleanMartText3
-	db $50
+	db "@"
 
 CeruleanMartObject: ; 0x5c8a8 (size=38)
 	db $0 ; border tile
@@ -92519,11 +92518,11 @@ LavenderPokecenterText1: ; 5c8e9 (17:48e9)
 
 LavenderPokecenterText2: ; 5c8ea (17:48ea)
 	TX_FAR _LavenderPokecenterText1
-	db $50
+	db "@"
 
 LavenderPokecenterText3: ; 5c8ef (17:48ef)
 	TX_FAR _LavenderPokecenterText3
-	db $50
+	db "@"
 
 LavenderPokecenterObject: ; 0x5c8f4 (size=44)
 	db $0 ; border tile
@@ -92561,7 +92560,7 @@ LavenderMartTexts: ; 5c92f (17:492f)
 
 LavenderMartText2: ; 5c935 (17:4935)
 	TX_FAR _LavenderMartText2
-	db $50
+	db "@"
 
 LavenderMartText3: ; 5c93a (17:493a)
 	db $08 ; asm
@@ -92579,12 +92578,12 @@ LavenderMartText3: ; 5c93a (17:493a)
 
 UnnamedText_5c953: ; 5c953 (17:4953)
 	TX_FAR _UnnamedText_5c953
-	db $50
+	db "@"
 ; 0x5c953 + 5 bytes
 
 UnnamedText_5c958: ; 5c958 (17:4958)
 	TX_FAR _UnnamedText_5c958
-	db $50
+	db "@"
 ; 0x5c958 + 5 bytes
 
 LavenderMartObject: ; 0x5c95d (size=38)
@@ -92626,11 +92625,11 @@ VermilionPokecenterText1: ; 5c99d (17:499d)
 
 VermilionPokecenterText2: ; 5c99e (17:499e)
 	TX_FAR _VermilionPokecenterText1
-	db $50
+	db "@"
 
 VermilionPokecenterText3: ; 5c9a3 (17:49a3)
 	TX_FAR _VermilionPokecenterText3
-	db $50
+	db "@"
 
 VermilionPokecenterText4: ; 5c9a8 (17:49a8)
 	db $f6
@@ -92671,11 +92670,11 @@ VermilionMartTexts: ; 5c9e4 (17:49e4)
 
 VermilionMartText2: ; 5c9ea (17:49ea)
 	TX_FAR _VermilionMartText2
-	db $50
+	db "@"
 
 VermilionMartText3: ; 5c9ef (17:49ef)
 	TX_FAR _VermilionMartText3
-	db $50
+	db "@"
 
 VermilionMartObject: ; 0x5c9f4 (size=38)
 	db $0 ; border tile
@@ -92871,33 +92870,33 @@ VermilionGymText1: ; 5cb1d (17:4b1d)
 
 UnnamedText_5cb6d: ; 5cb6d (17:4b6d)
 	TX_FAR _UnnamedText_5cb6d
-	db $50
+	db "@"
 ; 0x5cb6d + 5 bytes
 
 UnnamedText_5cb72: ; 5cb72 (17:4b72)
 	TX_FAR _UnnamedText_5cb72
-	db $50
+	db "@"
 ; 0x5cb72 + 5 bytes
 
 VermilionGymText6: ; 5cb77 (17:4b77)
 	TX_FAR _UnnamedText_5cb77
-	db $50
+	db "@"
 ; 0x5cb77 + 5 bytes
 
 VermilionGymText7: ; 5cb7c (17:4b7c)
 	TX_FAR _ReceivedTM24Text ; 0x9c0e0
 	db $11
 	TX_FAR _TM24ExplanationText ; 0x9c0f5
-	db $50
+	db "@"
 ; 0x5cb7c + 10 bytes = 0x5cb86
 
 VermilionGymText8: ; 5cb86 (17:4b86)
 	TX_FAR _TM24NoRoomText
-	db $50
+	db "@"
 
 ReceivedThunderbadgeText: ; 5cb8b (17:4b8b)
 	TX_FAR _ReceivedThunderbadgeText
-	db $50
+	db "@"
 
 VermilionGymText2: ; 5cb90 (17:4b90)
 	db $08 ; asm
@@ -92907,17 +92906,17 @@ VermilionGymText2: ; 5cb90 (17:4b90)
 
 VermilionGymBattleText1: ; 5cb9a (17:4b9a)
 	TX_FAR _VermilionGymBattleText1
-	db $50
+	db "@"
 ; 0x5cb9a + 5 bytes
 
 VermilionGymEndBattleText1: ; 5cb9f (17:4b9f)
 	TX_FAR _VermilionGymEndBattleText1
-	db $50
+	db "@"
 ; 0x5cb9f + 5 bytes
 
 VermilionGymAfterBattleText1: ; 5cba4 (17:4ba4)
 	TX_FAR _VermilionGymAfterBattleText1
-	db $50
+	db "@"
 ; 0x5cba4 + 5 bytes
 
 VermilionGymText3: ; 5cba9 (17:4ba9)
@@ -92928,17 +92927,17 @@ VermilionGymText3: ; 5cba9 (17:4ba9)
 
 VermilionGymBattleText2: ; 5cbb3 (17:4bb3)
 	TX_FAR _VermilionGymBattleText2
-	db $50
+	db "@"
 ; 0x5cbb3 + 5 bytes
 
 VermilionGymEndBattleText2: ; 5cbb8 (17:4bb8)
 	TX_FAR _VermilionGymEndBattleText2
-	db $50
+	db "@"
 ; 0x5cbb8 + 5 bytes
 
 VermilionGymAfterBattleText2: ; 5cbbd (17:4bbd)
 	TX_FAR _VermilionGymAfterBattleText2
-	db $50
+	db "@"
 ; 0x5cbbd + 5 bytes
 
 VermilionGymText4: ; 5cbc2 (17:4bc2)
@@ -92949,17 +92948,17 @@ VermilionGymText4: ; 5cbc2 (17:4bc2)
 
 VermilionGymBattleText3: ; 5cbcc (17:4bcc)
 	TX_FAR _VermilionGymBattleText3
-	db $50
+	db "@"
 ; 0x5cbcc + 5 bytes
 
 VermilionGymEndBattleText3: ; 5cbd1 (17:4bd1)
 	TX_FAR _VermilionGymEndBattleText3
-	db $50
+	db "@"
 ; 0x5cbd1 + 5 bytes
 
 VermilionGymAfterBattleText3: ; 5cbd6 (17:4bd6)
 	TX_FAR _VermilionGymAfterBattleText3
-	db $50
+	db "@"
 ; 0x5cbd6 + 5 bytes
 
 VermilionGymText5: ; 5cbdb (17:4bdb)
@@ -92978,12 +92977,12 @@ VermilionGymText5: ; 5cbdb (17:4bdb)
 
 UnnamedText_5cbf4: ; 5cbf4 (17:4bf4)
 	TX_FAR _UnnamedText_5cbf4
-	db $50
+	db "@"
 ; 0x5cbf4 + 5 bytes
 
 UnnamedText_5cbf9: ; 5cbf9 (17:4bf9)
 	TX_FAR _UnnamedText_5cbf9
-	db $50
+	db "@"
 ; 0x5cbf9 + 5 bytes
 
 VermilionGymObject: ; 0x5cbfe (size=58)
@@ -93063,12 +93062,12 @@ CopycatsHouseF2Text1: ; 5cc82 (17:4c82)
 
 UnnamedText_5ccd4: ; 5ccd4 (17:4cd4)
 	TX_FAR _UnnamedText_5ccd4
-	db $50
+	db "@"
 ; 0x5ccd4 + 5 bytes
 
 TM31PreReceiveText: ; 5ccd9 (17:4cd9)
 	TX_FAR _TM31PreReceiveText
-	db $50
+	db "@"
 ; 0x5ccd9 + 5 bytes
 
 ReceivedTM31Text: ; 5ccde (17:4cde)
@@ -93076,32 +93075,32 @@ ReceivedTM31Text: ; 5ccde (17:4cde)
 	db $0B
 TM31ExplanationText1: ; 5cce3 (17:4ce3)
 	TX_FAR _TM31ExplanationText1 ; 0xa1689
-	db $d, $50
+	db $d, "@"
 ; 0x5cce9
 
 TM31ExplanationText2: ; 5cce9 (17:4ce9)
 	TX_FAR _TM31ExplanationText2 ; 0xa16c5
-	db $50
+	db "@"
 ; 0x5cce9 + 5 bytes = 0x5ccee
 
 TM31NoRoomText: ; 5ccee (17:4cee)
 	TX_FAR _TM31NoRoomText ; 0xa1733
-	db $d, $50
+	db $d, "@"
 ; 0x5ccf4
 
 CopycatsHouseF2Text2: ; 5ccf4 (17:4cf4)
 	TX_FAR _CopycatsHouseF2Text2
-	db $50
+	db "@"
 
 CopycatsHouseF2Text5: ; 5ccf9 (17:4cf9)
 CopycatsHouseF2Text4: ; 5ccf9 (17:4cf9)
 CopycatsHouseF2Text3: ; 5ccf9 (17:4cf9)
 	TX_FAR _CopycatsHouseF2Text3
-	db $50
+	db "@"
 
 CopycatsHouseF2Text6: ; 5ccfe (17:4cfe)
 	TX_FAR _CopycatsHouseF2Text6
-	db $50
+	db "@"
 
 CopycatsHouseF2Text7: ; 5cd03 (17:4d03)
 	db $08 ; asm
@@ -93116,12 +93115,12 @@ CopycatsHouseF2Text7: ; 5cd03 (17:4d03)
 
 UnnamedText_5cd17: ; 5cd17 (17:4d17)
 	TX_FAR _UnnamedText_5cd17
-	db $50
+	db "@"
 ; 0x5cd17 + 5 bytes
 
 UnnamedText_5cd1c: ; 5cd1c (17:4d1c)
 	TX_FAR _UnnamedText_5cd1c
-	db $50
+	db "@"
 ; 0x5cd1c + 5 bytes
 
 CopycatsHouseF2Object: ; 0x5cd21 (size=48)
@@ -93248,22 +93247,22 @@ FightingDojoText1: ; 5ce44 (17:4e44)
 
 UnnamedText_5ce8e: ; 5ce8e (17:4e8e)
 	TX_FAR _UnnamedText_5ce8e
-	db $50
+	db "@"
 ; 0x5ce8e + 5 bytes
 
 UnnamedText_5ce93: ; 5ce93 (17:4e93)
 	TX_FAR _UnnamedText_5ce93
-	db $50
+	db "@"
 ; 0x5ce93 + 5 bytes
 
 FightingDojoText8: ; 5ce98 (17:4e98)
 	TX_FAR _UnnamedText_5ce98
-	db $50
+	db "@"
 ; 0x5ce98 + 5 bytes
 
 UnnamedText_5ce9d: ; 5ce9d (17:4e9d)
 	TX_FAR _UnnamedText_5ce9d
-	db $50
+	db "@"
 ; 0x5ce9d + 5 bytes
 
 FightingDojoText2: ; 5cea2 (17:4ea2)
@@ -93274,17 +93273,17 @@ FightingDojoText2: ; 5cea2 (17:4ea2)
 
 FightingDojoBattleText1: ; 5ceac (17:4eac)
 	TX_FAR _FightingDojoBattleText1
-	db $50
+	db "@"
 ; 0x5ceac + 5 bytes
 
 FightingDojoEndBattleText1: ; 5ceb1 (17:4eb1)
 	TX_FAR _FightingDojoEndBattleText1
-	db $50
+	db "@"
 ; 0x5ceb1 + 5 bytes
 
 FightingDojoAfterBattleText1: ; 5ceb6 (17:4eb6)
 	TX_FAR _FightingDojoAfterBattleText1
-	db $50
+	db "@"
 ; 0x5ceb6 + 5 bytes
 
 FightingDojoText3: ; 5cebb (17:4ebb)
@@ -93295,17 +93294,17 @@ FightingDojoText3: ; 5cebb (17:4ebb)
 
 FightingDojoBattleText2: ; 5cec5 (17:4ec5)
 	TX_FAR _FightingDojoBattleText2
-	db $50
+	db "@"
 ; 0x5cec5 + 5 bytes
 
 FightingDojoEndBattleText2: ; 5ceca (17:4eca)
 	TX_FAR _FightingDojoEndBattleText2
-	db $50
+	db "@"
 ; 0x5ceca + 5 bytes
 
 FightingDojoAfterBattleText2: ; 5cecf (17:4ecf)
 	TX_FAR _FightingDojoAfterBattleText2
-	db $50
+	db "@"
 ; 0x5cecf + 5 bytes
 
 FightingDojoText4: ; 5ced4 (17:4ed4)
@@ -93316,17 +93315,17 @@ FightingDojoText4: ; 5ced4 (17:4ed4)
 
 FightingDojoBattleText3: ; 5cede (17:4ede)
 	TX_FAR _FightingDojoBattleText3
-	db $50
+	db "@"
 ; 0x5cede + 5 bytes
 
 FightingDojoEndBattleText3: ; 5cee3 (17:4ee3)
 	TX_FAR _FightingDojoEndBattleText3
-	db $50
+	db "@"
 ; 0x5cee3 + 5 bytes
 
 FightingDojoAfterBattleText3: ; 5cee8 (17:4ee8)
 	TX_FAR _FightingDojoAfterBattleText3
-	db $50
+	db "@"
 ; 0x5cee8 + 5 bytes
 
 FightingDojoText5: ; 5ceed (17:4eed)
@@ -93337,17 +93336,17 @@ FightingDojoText5: ; 5ceed (17:4eed)
 
 FightingDojoBattleText4: ; 5cef7 (17:4ef7)
 	TX_FAR _FightingDojoBattleText4
-	db $50
+	db "@"
 ; 0x5cef7 + 5 bytes
 
 FightingDojoEndBattleText4: ; 5cefc (17:4efc)
 	TX_FAR _FightingDojoEndBattleText4
-	db $50
+	db "@"
 ; 0x5cefc + 5 bytes
 
 FightingDojoAfterBattleText4: ; 5cf01 (17:4f01)
 	TX_FAR _FightingDojoAfterBattleText4
-	db $50
+	db "@"
 ; 0x5cf01 + 5 bytes
 
 FightingDojoText6: ; 5cf06 (17:4f06)
@@ -93387,7 +93386,7 @@ FightingDojoText6: ; 5cf06 (17:4f06)
 
 WantHitmonleeText: ; 5cf49 (17:4f49)
 	TX_FAR _WantHitmonleeText
-	db $50
+	db "@"
 ; 0x5cf49 + 5 bytes
 
 FightingDojoText7: ; 5cf4e (17:4f4e)
@@ -93427,12 +93426,12 @@ FightingDojoText7: ; 5cf4e (17:4f4e)
 
 WantHitmonchanText: ; 5cf91 (17:4f91)
 	TX_FAR _WantHitmonchanText
-	db $50
+	db "@"
 ; 0x5cf91 + 5 bytes
 
 OtherHitmonText: ; 5cf96 (17:4f96)
 	TX_FAR _OtherHitmonText
-	db $50
+	db "@"
 ; 0x5cf96 + 5 bytes
 
 FightingDojoObject: ; 0x5cf9b (size=72)
@@ -93652,35 +93651,35 @@ SaffronGymText1: ; 5d118 (17:5118)
 
 UnnamedText_5d162: ; 5d162 (17:5162)
 	TX_FAR _UnnamedText_5d162
-	db $50
+	db "@"
 ; 0x5d162 + 5 bytes
 
 UnnamedText_5d167: ; 5d167 (17:5167)
 	TX_FAR _UnnamedText_5d167 ; 0xa1c73
 	db $11 ; play same sound as red giving oak parcel
 	db $6 ; wait for keypress
-	db $50
+	db "@"
 ; 0x5d16e
 
 UnnamedText_5d16e: ; 5d16e (17:516e)
 	TX_FAR _UnnamedText_5d16e
-	db $50
+	db "@"
 ; 0x5d16e + 5 bytes
 
 SaffronGymText10: ; 5d173 (17:5173)
 	TX_FAR _UnnamedText_5d173
-	db $50
+	db "@"
 ; 0x5d173 + 5 bytes
 
 SaffronGymText11: ; 5d178 (17:5178)
 	TX_FAR ReceivedTM46Text
 	db $b
 	TX_FAR _TM46ExplanationText
-	db $50
+	db "@"
 
 SaffronGymText12: ; 5d182 (17:5182)
 	TX_FAR _TM46NoRoomText ; pack full
-	db $50
+	db "@"
 ; 0x5d182 + 5 bytes
 
 SaffronGymText2: ; 5d187 (17:5187)
@@ -93741,117 +93740,117 @@ SaffronGymText9: ; 5d1cd (17:51cd)
 
 UnnamedText_5d1e6: ; 5d1e6 (17:51e6)
 	TX_FAR _UnnamedText_5d1e6
-	db $50
+	db "@"
 ; 0x5d1e6 + 5 bytes
 
 UnnamedText_5d1eb: ; 5d1eb (17:51eb)
 	TX_FAR _UnnamedText_5d1eb
-	db $50
+	db "@"
 ; 0x5d1eb + 5 bytes
 
 SaffronGymBattleText1: ; 5d1f0 (17:51f0)
 	TX_FAR _SaffronGymBattleText1
-	db $50
+	db "@"
 ; 0x5d1f0 + 5 bytes
 
 SaffronGymEndBattleText1: ; 5d1f5 (17:51f5)
 	TX_FAR _SaffronGymEndBattleText1
-	db $50
+	db "@"
 ; 0x5d1f5 + 5 bytes
 
 SaffronGymAfterBattleText1: ; 5d1fa (17:51fa)
 	TX_FAR _SaffronGymAfterBattleText1
-	db $50
+	db "@"
 ; 0x5d1fa + 5 bytes
 
 SaffronGymBattleText2: ; 5d1ff (17:51ff)
 	TX_FAR _SaffronGymBattleText2
-	db $50
+	db "@"
 ; 0x5d1ff + 5 bytes
 
 SaffronGymEndBattleText2: ; 5d204 (17:5204)
 	TX_FAR _SaffronGymEndBattleText2
-	db $50
+	db "@"
 ; 0x5d204 + 5 bytes
 
 SaffronGymAfterBattleText2: ; 5d209 (17:5209)
 	TX_FAR _SaffronGymAfterBattleText2
-	db $50
+	db "@"
 ; 0x5d209 + 5 bytes
 
 SaffronGymBattleText3: ; 5d20e (17:520e)
 	TX_FAR _SaffronGymBattleText3
-	db $50
+	db "@"
 ; 0x5d20e + 5 bytes
 
 SaffronGymEndBattleText3: ; 5d213 (17:5213)
 	TX_FAR _SaffronGymEndBattleText3
-	db $50
+	db "@"
 ; 0x5d213 + 5 bytes
 
 SaffronGymAfterBattleText3: ; 5d218 (17:5218)
 	TX_FAR _SaffronGymAfterBattleText3
-	db $50
+	db "@"
 ; 0x5d218 + 5 bytes
 
 SaffronGymBattleText4: ; 5d21d (17:521d)
 	TX_FAR _SaffronGymBattleText4
-	db $50
+	db "@"
 ; 0x5d21d + 5 bytes
 
 SaffronGymEndBattleText4: ; 5d222 (17:5222)
 	TX_FAR _SaffronGymEndBattleText4
-	db $50
+	db "@"
 ; 0x5d222 + 5 bytes
 
 SaffronGymAfterBattleText4: ; 5d227 (17:5227)
 	TX_FAR _SaffronGymAfterBattleText4
-	db $50
+	db "@"
 ; 0x5d227 + 5 bytes
 
 SaffronGymBattleText5: ; 5d22c (17:522c)
 	TX_FAR _SaffronGymBattleText5
-	db $50
+	db "@"
 ; 0x5d22c + 5 bytes
 
 SaffronGymEndBattleText5: ; 5d231 (17:5231)
 	TX_FAR _SaffronGymEndBattleText5
-	db $50
+	db "@"
 ; 0x5d231 + 5 bytes
 
 SaffronGymAfterBattleText5: ; 5d236 (17:5236)
 	TX_FAR _SaffronGymAfterBattleText5
-	db $50
+	db "@"
 ; 0x5d236 + 5 bytes
 
 SaffronGymBattleText6: ; 5d23b (17:523b)
 	TX_FAR _SaffronGymBattleText6
-	db $50
+	db "@"
 ; 0x5d23b + 5 bytes
 
 SaffronGymEndBattleText6: ; 5d240 (17:5240)
 	TX_FAR _SaffronGymEndBattleText6
-	db $50
+	db "@"
 ; 0x5d240 + 5 bytes
 
 SaffronGymAfterBattleText6: ; 5d245 (17:5245)
 	TX_FAR _SaffronGymAfterBattleText6
-	db $50
+	db "@"
 ; 0x5d245 + 5 bytes
 
 SaffronGymBattleText7: ; 5d24a (17:524a)
 	TX_FAR _SaffronGymBattleText7
-	db $50
+	db "@"
 ; 0x5d24a + 5 bytes
 
 SaffronGymEndBattleText7: ; 5d24f (17:524f)
 	TX_FAR _SaffronGymEndBattleText7
-	db $50
+	db "@"
 ; 0x5d24f + 5 bytes
 
 SaffronGymAfterBattleText7: ; 5d254 (17:5254)
 	TX_FAR _SaffronGymAfterBattleText7
-	db $50
+	db "@"
 ; 0x5d254 + 5 bytes
 
 SaffronGymObject: ; 0x5d259 (size=330)
@@ -93958,11 +93957,11 @@ SaffronMartTexts: ; 5d40c (17:540c)
 
 SaffronMartText2: ; 5d412 (17:5412)
 	TX_FAR _SaffronMartText2
-	db $50
+	db "@"
 
 SaffronMartText3: ; 5d417 (17:5417)
 	TX_FAR _SaffronMartText3
-	db $50
+	db "@"
 
 SaffronMartObject: ; 0x5d41c (size=38)
 	db $0 ; border tile
@@ -94010,7 +94009,7 @@ SilphCo1Texts: ; 5d469 (17:5469)
 
 SilphCo1Text1: ; 5d46b (17:546b)
 	TX_FAR _SilphCo1Text1
-	db $50
+	db "@"
 
 SilphCo1Object: ; 0x5d470 (size=50)
 	db $2e ; border tile
@@ -94058,11 +94057,11 @@ SaffronPokecenterText1: ; 5d543 (17:5543)
 
 SaffronPokecenterText2: ; 5d544 (17:5544)
 	TX_FAR _SaffronPokecenterText1
-	db $50
+	db "@"
 
 SaffronPokecenterText3: ; 5d549 (17:5549)
 	TX_FAR _SaffronPokecenterText3
-	db $50
+	db "@"
 
 SaffronPokecenterText4: ; 5d54e (17:554e)
 	db $f6
@@ -94103,11 +94102,11 @@ ViridianForestexitTexts: ; 5d58a (17:558a)
 
 ViridianForestexitText1: ; 5d58e (17:558e)
 	TX_FAR _ViridianForestexitText1
-	db $50
+	db "@"
 
 ViridianForestexitText2: ; 5d593 (17:5593)
 	TX_FAR _ViridianForestexitText2
-	db $50
+	db "@"
 
 ViridianForestexitObject: ; 0x5d598 (size=48)
 	db $a ; border tile
@@ -94175,12 +94174,12 @@ Route2GateText1: ; 5d5db (17:55db)
 
 UnnamedText_5d616: ; 5d616 (17:5616)
 	TX_FAR _UnnamedText_5d616
-	db $50
+	db "@"
 ; 0x5d616 + 5 bytes
 
 Route2GateText2: ; 5d61b (17:561b)
 	TX_FAR _Route2GateText2
-	db $50
+	db "@"
 
 Route2GateObject: ; 0x5d620 (size=48)
 	db $a ; border tile
@@ -94220,11 +94219,11 @@ ViridianForestEntranceTexts: ; 5d65f (17:565f)
 
 ViridianForestEntranceText1: ; 5d663 (17:5663)
 	TX_FAR _ViridianForestEntranceText1
-	db $50
+	db "@"
 
 ViridianForestEntranceText2: ; 5d668 (17:5668)
 	TX_FAR _ViridianForestEntranceText2
-	db $50
+	db "@"
 
 ViridianForestEntranceObject: ; 0x5d66d (size=48)
 	db $a ; border tile
@@ -94315,7 +94314,7 @@ UndergroundTunnelEntranceRoute6Texts: ; 5d6f7 (17:56f7)
 UndergroundTunnelEntranceRoute6Text1: ; 5d6f9 (17:56f9)
 	db $17, $cb, $40, $23
 	;TX_FAR _UndergroundTunnelEntranceRoute6Text1 ; $cb, $40, $23
-	db $50
+	db "@"
 
 UndergroundTunnelEntranceRoute6Object: ; 0x5d6fe (size=34)
 	db $a ; border tile
@@ -94355,7 +94354,7 @@ UndergroundPathEntranceRoute7Texts: ; 5d734 (17:5734)
 UndergroundPathEntranceRoute7Text1: ; 5d736 (17:5736)
 	db $17, $ff, $40, $23
 	;TX_FAR _UndergroundPathEntranceRoute7Text1
-	db $50
+	db "@"
 
 UndergroundPathEntranceRoute7Object: ; 0x5d73b (size=34)
 	db $a ; border tile
@@ -94379,22 +94378,22 @@ INCBIN "baserom.gbc",$5d75d,$5d773 - $5d75d
 
 UnnamedText_5d773: ; 5d773 (17:5773)
 	TX_FAR _UnnamedText_5d773
-	db $50
+	db "@"
 ; 0x5d773 + 5 bytes
 
 UnnamedText_5d778: ; 5d778 (17:5778)
 	TX_FAR _UnnamedText_5d778
-	db $50
+	db "@"
 ; 0x5d778 + 5 bytes
 
 UnnamedText_5d77d: ; 5d77d (17:577d)
 	TX_FAR _UnnamedText_5d77d
-	db $50
+	db "@"
 ; 0x5d77d + 5 bytes
 
 UnnamedText_5d782: ; 5d782 (17:5782)
 	TX_FAR _UnnamedText_5d782
-	db $50
+	db "@"
 ; 0x5d782 + 5 bytes
 
 INCBIN "baserom.gbc",$5d787,$5d7af - $5d787
@@ -94593,17 +94592,17 @@ SilphCo9Text1: ; 5d8b8 (17:58b8)
 
 UnnamedText_5d8e5: ; 5d8e5 (17:58e5)
 	TX_FAR _UnnamedText_5d8e5
-	db $50
+	db "@"
 ; 0x5d8e5 + 5 bytes
 
 UnnamedText_5d8ea: ; 5d8ea (17:58ea)
 	TX_FAR _UnnamedText_5d8ea
-	db $50
+	db "@"
 ; 0x5d8ea + 5 bytes
 
 UnnamedText_5d8ef: ; 5d8ef (17:58ef)
 	TX_FAR _UnnamedText_5d8ef
-	db $50
+	db "@"
 ; 0x5d8ef + 5 bytes
 
 SilphCo9Text2: ; 5d8f4 (17:58f4)
@@ -94626,47 +94625,47 @@ SilphCo9Text4: ; 5d908 (17:5908)
 
 SilphCo9BattleText1: ; 5d912 (17:5912)
 	TX_FAR _SilphCo9BattleText1
-	db $50
+	db "@"
 ; 0x5d912 + 5 bytes
 
 SilphCo9EndBattleText1: ; 5d917 (17:5917)
 	TX_FAR _SilphCo9EndBattleText1
-	db $50
+	db "@"
 ; 0x5d917 + 5 bytes
 
 SilphCo9AfterBattleText1: ; 5d91c (17:591c)
 	TX_FAR _SilphCo9AfterBattleText1
-	db $50
+	db "@"
 ; 0x5d91c + 5 bytes
 
 SilphCo9BattleText2: ; 5d921 (17:5921)
 	TX_FAR _SilphCo9BattleText2
-	db $50
+	db "@"
 ; 0x5d921 + 5 bytes
 
 SilphCo9EndBattleText2: ; 5d926 (17:5926)
 	TX_FAR _SilphCo9EndBattleText2
-	db $50
+	db "@"
 ; 0x5d926 + 5 bytes
 
 SilphCo9AfterBattleText2: ; 5d92b (17:592b)
 	TX_FAR _SilphCo9AfterBattleText2
-	db $50
+	db "@"
 ; 0x5d92b + 5 bytes
 
 SilphCo9BattleText3: ; 5d930 (17:5930)
 	TX_FAR _SilphCo9BattleText3
-	db $50
+	db "@"
 ; 0x5d930 + 5 bytes
 
 SilphCo9EndBattleText3: ; 5d935 (17:5935)
 	TX_FAR _SilphCo9EndBattleText3
-	db $50
+	db "@"
 ; 0x5d935 + 5 bytes
 
 SilphCo9AfterBattleText3: ; 5d93a (17:593a)
 	TX_FAR _SilphCo9AfterBattleText3
-	db $50
+	db "@"
 ; 0x5d93a + 5 bytes
 
 SilphCo9Object: ; 0x5d93f (size=74)
@@ -94785,32 +94784,32 @@ VictoryRoad1Text2: ; 5da90 (17:5a90)
 
 VictoryRoad1BattleText1: ; 5da9a (17:5a9a)
 	TX_FAR _VictoryRoad1BattleText1
-	db $50
+	db "@"
 ; 0x5da9a + 5 bytes
 
 VictoryRoad1EndBattleText1: ; 5da9f (17:5a9f)
 	TX_FAR _VictoryRoad1EndBattleText1
-	db $50
+	db "@"
 ; 0x5da9f + 5 bytes
 
 VictoryRoad1AfterBattleText1: ; 5daa4 (17:5aa4)
 	TX_FAR _VictoryRoad1AfterBattleText1
-	db $50
+	db "@"
 ; 0x5daa4 + 5 bytes
 
 VictoryRoad1BattleText2: ; 5daa9 (17:5aa9)
 	TX_FAR _VictoryRoad1BattleText2
-	db $50
+	db "@"
 ; 0x5daa9 + 5 bytes
 
 VictoryRoad1EndBattleText2: ; 5daae (17:5aae)
 	TX_FAR _VictoryRoad1EndBattleText2
-	db $50
+	db "@"
 ; 0x5daae + 5 bytes
 
 VictoryRoad1AfterBattleText2: ; 5dab3 (17:5ab3)
 	TX_FAR _VictoryRoad1AfterBattleText2
-	db $50
+	db "@"
 ; 0x5dab3 + 5 bytes
 
 VictoryRoad1Object: ; 0x5dab8 (size=76)
@@ -94861,14 +94860,14 @@ INCBIN "baserom.gbc",$5db79,$5db81 - $5db79
 
 UnnamedText_5db81: ; 5db81 (17:5b81)
 	TX_FAR _UnnamedText_5db81
-	db $50
+	db "@"
 ; 0x5db81 + 5 bytes
 
 INCBIN "baserom.gbc",$5db86,$5dba8 - $5db86
 
 UnnamedText_5dba8: ; 5dba8 (17:5ba8)
 	TX_FAR _UnnamedText_5dba8
-	db $50
+	db "@"
 ; 0x5dba8 + 5 bytes
 
 	ld a, $b7
@@ -94881,7 +94880,7 @@ UnnamedText_5dba8: ; 5dba8 (17:5ba8)
 ; 5dbbe (17:5bbe)
 UnnamedText_5dbbe: ; 5dbbe (17:5bbe)
 	TX_FAR _UnnamedText_5dbbe
-	db $50
+	db "@"
 ; 0x5dbbe + 5 bytes
 
 	ld a, $b6
@@ -94894,7 +94893,7 @@ UnnamedText_5dbbe: ; 5dbbe (17:5bbe)
 ; 5dbd4 (17:5bd4)
 UnnamedText_5dbd4: ; 5dbd4 (17:5bd4)
 	TX_FAR _UnnamedText_5dbd4
-	db $50
+	db "@"
 ; 0x5dbd4 + 5 bytes
 
 ; known jump sources: 5dbb2 (17:5bb2), 5dbc8 (17:5bc8)
@@ -94991,12 +94990,12 @@ Unknown_5dc2a: ; 5dc2a (17:5c2a)
 
 UnnamedText_5dc9e: ; 5dc9e (17:5c9e)
 	TX_FAR _UnnamedText_5dc9e
-	db $50
+	db "@"
 ; 0x5dc9e + 5 bytes
 
 UnnamedText_5dca3: ; 5dca3 (17:5ca3)
 	TX_FAR _UnnamedText_5dca3
-	db $50
+	db "@"
 ; 0x5dca3 + 5 bytes
 
 HowToLinkText: ; 5dca8 (17:5ca8)
@@ -95009,29 +95008,29 @@ PointerTable_5dcd8: ; 5dcd8 (17:5cd8)
 
 UnnamedText_5dcde: ; 5dcde (17:5cde)
 	TX_FAR _UnnamedText_5dcde
-	db $50
+	db "@"
 ; 0x5dcde + 5 bytes
 
 UnnamedText_5dce3: ; 5dce3 (17:5ce3)
 	TX_FAR _UnnamedText_5dce3
-	db $50
+	db "@"
 ; 0x5dce3 + 5 bytes
 
 UnnamedText_5dce8: ; 5dce8 (17:5ce8)
 	TX_FAR _UnnamedText_5dce8
-	db $50
+	db "@"
 ; 0x5dce8 + 5 bytes
 
 INCBIN "baserom.gbc",$5dced,$5dda2 - $5dced
 
 UnnamedText_5dda2: ; 5dda2 (17:5da2)
 	TX_FAR _UnnamedText_5dda2
-	db $50
+	db "@"
 ; 0x5dda2 + 5 bytes
 
 UnnamedText_5dda7: ; 5dda7 (17:5da7)
 	TX_FAR _UnnamedText_5dda7
-	db $50
+	db "@"
 ; 0x5dda7 + 5 bytes
 
 StatusAilmentText:
@@ -95051,27 +95050,27 @@ PointerTable_5ddcc: ; 5ddcc (17:5ddc)
 
 UnnamedText_5ddd6: ; 5ddd6 (17:5dd6)
 	TX_FAR _UnnamedText_5ddd6
-	db $50
+	db "@"
 ; 0x5ddd6 + 5 bytes
 
 UnnamedText_5dddb: ; 5dddb (17:5ddb)
 	TX_FAR _UnnamedText_5dddb
-	db $50
+	db "@"
 ; 0x5dddb + 5 bytes
 
 UnnamedText_5dde0: ; 5dde0 (17:5de0)
 	TX_FAR _UnnamedText_5dde0
-	db $50
+	db "@"
 ; 0x5dde0 + 5 bytes
 
 UnnamedText_5dde5: ; 5dde5 (17:5de5)
 	TX_FAR _UnnamedText_5dde5
-	db $50
+	db "@"
 ; 0x5dde5 + 5 bytes
 
 UnnamedText_5ddea: ; 5ddea (17:5dea)
 	TX_FAR _UnnamedText_5ddea
-	db $50
+	db "@"
 ; 0x5ddea + 5 bytes
 
 Unknown_5ddef: ; 5ddef (17:5def)
@@ -95081,7 +95080,7 @@ Unknown_5ddef: ; 5ddef (17:5def)
 
 UnnamedText_5ddf7: ; 5ddf7 (17:5df7)
 	TX_FAR _UnnamedText_5ddf7
-	db $50
+	db "@"
 ; 0x5ddf7 + 5 bytes
 
 	call EnableAutoTextBoxDrawing
@@ -95164,7 +95163,7 @@ INCBIN "baserom.gbc",$5de7d,$5decd - $5de7d
 ; 5dedb (17:5edb)
 UnnamedText_5dedb: ; 5dedb (17:5edb)
 	TX_FAR _UnnamedText_5dedb
-	db $50
+	db "@"
 ; 0x5dedb + 5 bytes
 
 INCBIN "baserom.gbc",$5dee0,$5def4 - $5dee0
@@ -95212,23 +95211,23 @@ PokemonTower1Texts: ; 6042f (18:442f)
 
 PokemonTower1Text1: ; 60439 (18:4439)
 	TX_FAR _PokemonTower1Text1
-	db $50
+	db "@"
 
 PokemonTower1Text2: ; 6043e (18:443e)
 	TX_FAR _PokemonTower1Text2
-	db $50
+	db "@"
 
 PokemonTower1Text3: ; 60443 (18:4443)
 	TX_FAR _PokemonTower1Text3
-	db $50
+	db "@"
 
 PokemonTower1Text4: ; 60448 (18:4448)
 	TX_FAR _PokemonTower1Text4
-	db $50
+	db "@"
 
 PokemonTower1Text5: ; 6044d (18:444d)
 	TX_FAR _PokemonTower1Text5
-	db $50
+	db "@"
 
 PokemonTower1Object: ; 0x60452 (size=58)
 	db $1 ; border tile
@@ -95426,27 +95425,27 @@ PokemonTower2Text1: ; 605df (18:45df)
 
 UnnamedText_6062d: ; 6062d (18:462d)
 	TX_FAR _UnnamedText_6062d
-	db $50
+	db "@"
 ; 0x6062d + 5 bytes
 
 UnnamedText_60632: ; 60632 (18:4632)
 	TX_FAR _UnnamedText_60632
-	db $50
+	db "@"
 ; 0x60632 + 5 bytes
 
 UnnamedText_60637: ; 60637 (18:4637)
 	TX_FAR _UnnamedText_60637
-	db $50
+	db "@"
 ; 0x60637 + 5 bytes
 
 UnnamedText_6063c: ; 6063c (18:463c)
 	TX_FAR _UnnamedText_6063c
-	db $50
+	db "@"
 ; 0x6063c + 5 bytes
 
 PokemonTower2Text2: ; 60641 (18:4641)
 	TX_FAR _PokemonTower2Text2
-	db $50
+	db "@"
 
 PokemonTower2Object: ; 0x60646 (size=32)
 	db $1 ; border tile
@@ -95544,47 +95543,47 @@ PokemonTower3Text3: ; 60726 (18:4726)
 
 PokemonTower3BattleText1: ; 60730 (18:4730)
 	TX_FAR _PokemonTower3BattleText1
-	db $50
+	db "@"
 ; 0x60730 + 5 bytes
 
 PokemonTower3EndBattleText1: ; 60735 (18:4735)
 	TX_FAR _PokemonTower3EndBattleText1
-	db $50
+	db "@"
 ; 0x60735 + 5 bytes
 
 PokemonTower3AfterBattleText1: ; 6073a (18:473a)
 	TX_FAR _PokemonTower3AfterBattleText1
-	db $50
+	db "@"
 ; 0x6073a + 5 bytes
 
 PokemonTower3BattleText2: ; 6073f (18:473f)
 	TX_FAR _PokemonTower3BattleText2
-	db $50
+	db "@"
 ; 0x6073f + 5 bytes
 
 PokemonTower3EndBattleText2: ; 60744 (18:4744)
 	TX_FAR _PokemonTower3EndBattleText2
-	db $50
+	db "@"
 ; 0x60744 + 5 bytes
 
 PokemonTower3AfterBattleText2: ; 60749 (18:4749)
 	TX_FAR _PokemonTower3AfterBattleText2
-	db $50
+	db "@"
 ; 0x60749 + 5 bytes
 
 PokemonTower3BattleText3: ; 6074e (18:474e)
 	TX_FAR _PokemonTower3BattleText3
-	db $50
+	db "@"
 ; 0x6074e + 5 bytes
 
 PokemonTower3EndBattleText3: ; 60753 (18:4753)
 	TX_FAR _PokemonTower3EndBattleText3
-	db $50
+	db "@"
 ; 0x60753 + 5 bytes
 
 PokemonTower3AfterBattleText3: ; 60758 (18:4758)
 	TX_FAR _PokemonTower3AfterBattleText3
-	db $50
+	db "@"
 ; 0x60758 + 5 bytes
 
 PokemonTower3Object: ; 0x6075d (size=51)
@@ -95686,47 +95685,47 @@ PokemonTower4Text3: ; 60854 (18:4854)
 
 PokemonTower4BattleText1: ; 6085e (18:485e)
 	TX_FAR _PokemonTower4BattleText1
-	db $50
+	db "@"
 ; 0x6085e + 5 bytes
 
 PokemonTower4EndBattleText1: ; 60863 (18:4863)
 	TX_FAR _PokemonTower4EndBattleText1
-	db $50
+	db "@"
 ; 0x60863 + 5 bytes
 
 PokemonTower4AfterBattleText1: ; 60868 (18:4868)
 	TX_FAR _PokemonTower4AfterBattleText1
-	db $50
+	db "@"
 ; 0x60868 + 5 bytes
 
 PokemonTower4BattleText2: ; 6086d (18:486d)
 	TX_FAR _PokemonTower4BattleText2
-	db $50
+	db "@"
 ; 0x6086d + 5 bytes
 
 PokemonTower4EndBattleText2: ; 60872 (18:4872)
 	TX_FAR _PokemonTower4EndBattleText2
-	db $50
+	db "@"
 ; 0x60872 + 5 bytes
 
 PokemonTower4AfterBattleText2: ; 60877 (18:4877)
 	TX_FAR _PokemonTower4AfterBattleText2
-	db $50
+	db "@"
 ; 0x60877 + 5 bytes
 
 PokemonTower4BattleText3: ; 6087c (18:487c)
 	TX_FAR _PokemonTower4BattleText3
-	db $50
+	db "@"
 ; 0x6087c + 5 bytes
 
 PokemonTower4EndBattleText3: ; 60881 (18:4881)
 	TX_FAR _PokemonTower4EndBattleText3
-	db $50
+	db "@"
 ; 0x60881 + 5 bytes
 
 PokemonTower4AfterBattleText3: ; 60886 (18:4886)
 	TX_FAR _PokemonTower4AfterBattleText3
-	db $50
+	db "@"
 ; 0x60886 + 5 bytes
 
 PokemonTower4Object: ; 0x6088b (size=65)
@@ -95856,7 +95855,7 @@ db $ff
 
 PokemonTower5Text1: ; 609da (18:49da)
 	TX_FAR _PokemonTower5Text1
-	db $50
+	db "@"
 
 PokemonTower5Text2: ; 609df (18:49df)
 	db $08 ; asm
@@ -95866,17 +95865,17 @@ PokemonTower5Text2: ; 609df (18:49df)
 
 PokemonTower5BattleText1: ; 609e9 (18:49e9)
 	TX_FAR _PokemonTower5BattleText1
-	db $50
+	db "@"
 ; 0x609e9 + 5 bytes
 
 PokemonTower5EndBattleText1: ; 609ee (18:49ee)
 	TX_FAR _PokemonTower5EndBattleText1
-	db $50
+	db "@"
 ; 0x609ee + 5 bytes
 
 PokemonTower5AfterBattleText1: ; 609f3 (18:49f3)
 	TX_FAR _PokemonTower5AfterBattleText1
-	db $50
+	db "@"
 ; 0x609f3 + 5 bytes
 
 PokemonTower5Text3: ; 609f8 (18:49f8)
@@ -95887,17 +95886,17 @@ PokemonTower5Text3: ; 609f8 (18:49f8)
 
 PokemonTower5BattleText2: ; 60a02 (18:4a02)
 	TX_FAR _PokemonTower5BattleText2
-	db $50
+	db "@"
 ; 0x60a02 + 5 bytes
 
 PokemonTower5EndBattleText2: ; 60a07 (18:4a07)
 	TX_FAR _PokemonTower5EndBattleText2
-	db $50
+	db "@"
 ; 0x60a07 + 5 bytes
 
 PokemonTower5AfterBattleText2: ; 60a0c (18:4a0c)
 	TX_FAR _PokemonTower5AfterBattleText2
-	db $50
+	db "@"
 ; 0x60a0c + 5 bytes
 
 PokemonTower5Text4: ; 60a11 (18:4a11)
@@ -95908,17 +95907,17 @@ PokemonTower5Text4: ; 60a11 (18:4a11)
 
 PokemonTower5BattleText3: ; 60a1b (18:4a1b)
 	TX_FAR _PokemonTower5BattleText3
-	db $50
+	db "@"
 ; 0x60a1b + 5 bytes
 
 PokemonTower5EndBattleText3: ; 60a20 (18:4a20)
 	TX_FAR _PokemonTower5EndBattleText3
-	db $50
+	db "@"
 ; 0x60a20 + 5 bytes
 
 PokemonTower5AfterBattleText3: ; 60a25 (18:4a25)
 	TX_FAR _PokemonTower5AfterBattleText3
-	db $50
+	db "@"
 ; 0x60a25 + 5 bytes
 
 PokemonTower5Text5: ; 60a2a (18:4a2a)
@@ -95929,22 +95928,22 @@ PokemonTower5Text5: ; 60a2a (18:4a2a)
 
 PokemonTower5BattleText4: ; 60a34 (18:4a34)
 	TX_FAR _PokemonTower5BattleText4
-	db $50
+	db "@"
 ; 0x60a34 + 5 bytes
 
 PokemonTower5EndBattleText4: ; 60a39 (18:4a39)
 	TX_FAR _PokemonTower5EndBattleText4
-	db $50
+	db "@"
 ; 0x60a39 + 5 bytes
 
 PokemonTower5AfterBattleText4: ; 60a3e (18:4a3e)
 	TX_FAR _PokemonTower5AfterBattleText4
-	db $50
+	db "@"
 ; 0x60a3e + 5 bytes
 
 PokemonTower5Text7: ; 60a43 (18:4a43)
 	TX_FAR _UnnamedText_60a43
-	db $50
+	db "@"
 ; 0x60a43 + 5 bytes
 
 PokemonTower5Object: ; 0x60a48 (size=65)
@@ -96133,62 +96132,62 @@ PokemonTower6Text7: ; 60c02 (18:4c02)
 
 UnnamedText_60c1f: ; 60c1f (18:4c1f)
 	TX_FAR _UnnamedText_60c1f
-	db $50
+	db "@"
 ; 0x60c1f + 5 bytes
 
 UnnamedText_60c24: ; 60c24 (18:4c24)
 	TX_FAR _UnnamedText_60c24
-	db $50
+	db "@"
 ; 0x60c24 + 5 bytes
 
 PokemonTower6BattleText1: ; 60c29 (18:4c29)
 	TX_FAR _PokemonTower6BattleText1
-	db $50
+	db "@"
 ; 0x60c29 + 5 bytes
 
 PokemonTower6EndBattleText1: ; 60c2e (18:4c2e)
 	TX_FAR _PokemonTower6EndBattleText1
-	db $50
+	db "@"
 ; 0x60c2e + 5 bytes
 
 PokemonTower6AfterBattleText1: ; 60c33 (18:4c33)
 	TX_FAR _PokemonTower6AfterBattleText1
-	db $50
+	db "@"
 ; 0x60c33 + 5 bytes
 
 PokemonTower6BattleText2: ; 60c38 (18:4c38)
 	TX_FAR _PokemonTower6BattleText2
-	db $50
+	db "@"
 ; 0x60c38 + 5 bytes
 
 PokemonTower6EndBattleText2: ; 60c3d (18:4c3d)
 	TX_FAR _PokemonTower6EndBattleText2
-	db $50
+	db "@"
 ; 0x60c3d + 5 bytes
 
 PokemonTower6AfterBattleText2: ; 60c42 (18:4c42)
 	TX_FAR _PokemonTower6AfterBattleText2
-	db $50
+	db "@"
 ; 0x60c42 + 5 bytes
 
 PokemonTower6BattleText3: ; 60c47 (18:4c47)
 	TX_FAR _PokemonTower6BattleText3
-	db $50
+	db "@"
 ; 0x60c47 + 5 bytes
 
 PokemonTower6EndBattleText3: ; 60c4c (18:4c4c)
 	TX_FAR _PokemonTower6EndBattleText3
-	db $50
+	db "@"
 ; 0x60c4c + 5 bytes
 
 PokemonTower6AfterBattleText3: ; 60c51 (18:4c51)
 	TX_FAR _PokemonTower6AfterBattleText3
-	db $50
+	db "@"
 ; 0x60c51 + 5 bytes
 
 PokemonTower6Text6: ; 60c56 (18:4c56)
 	TX_FAR _UnnamedText_60c56
-	db $50
+	db "@"
 ; 0x60c56 + 5 bytes
 
 PokemonTower6Object: ; 0x60c5b (size=58)
@@ -96421,52 +96420,52 @@ PokemonTower7Text4: ; 60e8a (18:4e8a)
 
 UnnamedText_60ec4: ; 60ec4 (18:4ec4)
 	TX_FAR _UnnamedText_60ec4
-	db $50
+	db "@"
 ; 0x60ec4 + 5 bytes
 
 PokemonTower7BattleText1: ; 60ec9 (18:4ec9)
 	TX_FAR _PokemonTower7BattleText1
-	db $50
+	db "@"
 ; 0x60ec9 + 5 bytes
 
 PokemonTower7EndBattleText1: ; 60ece (18:4ece)
 	TX_FAR _PokemonTower7EndBattleText1
-	db $50
+	db "@"
 ; 0x60ece + 5 bytes
 
 PokemonTower7AfterBattleText1: ; 60ed3 (18:4ed3)
 	TX_FAR _PokemonTower7AfterBattleText1
-	db $50
+	db "@"
 ; 0x60ed3 + 5 bytes
 
 PokemonTower7BattleText2: ; 60ed8 (18:4ed8)
 	TX_FAR _PokemonTower7BattleText2
-	db $50
+	db "@"
 ; 0x60ed8 + 5 bytes
 
 PokemonTower7EndBattleText2: ; 60edd (18:4edd)
 	TX_FAR _PokemonTower7EndBattleText2
-	db $50
+	db "@"
 ; 0x60edd + 5 bytes
 
 PokemonTower7AfterBattleText2: ; 60ee2 (18:4ee2)
 	TX_FAR _PokemonTower7AfterBattleText2
-	db $50
+	db "@"
 ; 0x60ee2 + 5 bytes
 
 PokemonTower7BattleText3: ; 60ee7 (18:4ee7)
 	TX_FAR _PokemonTower7BattleText3
-	db $50
+	db "@"
 ; 0x60ee7 + 5 bytes
 
 PokemonTower7EndBattleText3: ; 60eec (18:4eec)
 	TX_FAR _PokemonTower7EndBattleText3
-	db $50
+	db "@"
 ; 0x60eec + 5 bytes
 
 PokemonTower7AfterBattleText3: ; 60ef1 (18:4ef1)
 	TX_FAR _PokemonTower7AfterBattleText3
-	db $50
+	db "@"
 ; 0x60ef1 + 5 bytes
 
 PokemonTower7Object: ; 0x60ef6 (size=42)
@@ -96506,15 +96505,15 @@ CeladonMart1Texts: ; 60f89 (18:4f89)
 
 CeladonMart1Text1: ; 60f8f (18:4f8f)
 	TX_FAR _CeladonMart1Text1
-	db $50
+	db "@"
 
 CeladonMart1Text2: ; 60f94 (18:4f94)
 	TX_FAR _CeladonMart1Text2
-	db $50
+	db "@"
 
 CeladonMart1Text3: ; 60f99 (18:4f99)
 	TX_FAR _CeladonMart1Text3
-	db $50
+	db "@"
 
 CeladonMart1Object: ; 0x60f9e (size=64)
 	db $f ; border tile
@@ -96627,22 +96626,22 @@ GiveFossilToCinnabarLab: ; 61006 (18:5006)
 
 UnnamedText_610ae: ; 610ae (18:50ae)
 	TX_FAR _UnnamedText_610ae
-	db $50
+	db "@"
 ; 0x610ae + 5 bytes
 
 UnnamedText_610b3: ; 610b3 (18:50b3)
 	TX_FAR _UnnamedText_610b3
-	db $50
+	db "@"
 ; 0x610b3 + 5 bytes
 
 UnnamedText_610b8: ; 610b8 (18:50b8)
 	TX_FAR _UnnamedText_610b8
-	db $50
+	db "@"
 ; 0x610b8 + 5 bytes
 
 UnnamedText_610bd: ; 610bd (18:50bd)
 	TX_FAR _UnnamedText_610bd
-	db $50
+	db "@"
 ; 0x610bd + 5 bytes
 
 ; known jump sources: 6103f (18:503f)
@@ -96741,7 +96740,7 @@ db $ff
 
 ViridianForestText1: ; 61167 (18:5167)
 	TX_FAR _ViridianForestText1
-	db $50
+	db "@"
 
 ViridianForestText2: ; 6116c (18:516c)
 	db $08 ; asm
@@ -96763,12 +96762,12 @@ ViridianForestText4: ; 61180 (18:5180)
 
 ViridianForestBattleText1: ; 6118a (18:518a)
 	TX_FAR _ViridianForestBattleText1
-	db $50
+	db "@"
 ; 0x6118a + 5 bytes
 
 ViridianForestEndBattleText1: ; 6118f (18:518f)
 	TX_FAR _ViridianForestEndBattleText1
-	db $50
+	db "@"
 ; 0x6118f + 5 bytes
 
 ViridianForestAfterBattleText1: ; 61194 (18:5194)
@@ -96776,17 +96775,17 @@ ViridianForestAfterBattleText1: ; 61194 (18:5194)
 	db $17
 	dw _ViridianForestAfterBattleText1
 	db BANK(_ViridianForestAfterBattleText1)
-	db $50
+	db "@"
 ; 0x61194 + 5 bytes
 
 ViridianForestBattleText2: ; 61199 (18:5199)
 	TX_FAR _ViridianForestBattleText2
-	db $50
+	db "@"
 ; 0x61199 + 5 bytes
 
 ViridianForestEndBattleText2: ; 6119e (18:519e)
 	TX_FAR _ViridianForestEndBattleText2
-	db $50
+	db "@"
 ; 0x6119e + 5 bytes
 
 ViridianForestAfterBattleText2: ; 611a3 (18:51a3)
@@ -96794,17 +96793,17 @@ ViridianForestAfterBattleText2: ; 611a3 (18:51a3)
 	db $17
 	dw _ViridianForestAfterBattleText2
 	db BANK(_ViridianForestAfterBattleText2)
-	db $50
+	db "@"
 ; 0x611a3 + 5 bytes
 
 ViridianForestBattleText3: ; 611a8 (18:51a8)
 	TX_FAR _ViridianForestBattleText3
-	db $50
+	db "@"
 ; 0x611a8 + 5 bytes
 
 ViridianForestEndBattleText3: ; 611ad (18:51ad)
 	TX_FAR _ViridianForestEndBattleText3
-	db $50
+	db "@"
 ; 0x611ad + 5 bytes
 
 ViridianForestAfterBattleText3: ; 611b2 (18:51b2)
@@ -96812,36 +96811,36 @@ ViridianForestAfterBattleText3: ; 611b2 (18:51b2)
 	db $17
 	dw _ViridianForestAfterBattleText3
 	db BANK(_ViridianForestAfterBattleText3)
-	db $50
+	db "@"
 ; 0x611b2 + 5 bytes
 
 ViridianForestText8: ; 611b7 (18:51b7)
 	TX_FAR _ViridianForestText8
-	db $50
+	db "@"
 
 ViridianForestText9: ; 611bc (18:51bc)
 	TX_FAR _ViridianForestText9
-	db $50
+	db "@"
 
 ViridianForestText10: ; 611c1 (18:51c1)
 	TX_FAR _ViridianForestText10
-	db $50
+	db "@"
 
 ViridianForestText11: ; 611c6 (18:51c6)
 	TX_FAR _ViridianForestText11
-	db $50
+	db "@"
 
 ViridianForestText12: ; 611cb (18:51cb)
 	TX_FAR _ViridianForestText12
-	db $50
+	db "@"
 
 ViridianForestText13: ; 611d0 (18:51d0)
 	TX_FAR _ViridianForestText13
-	db $50
+	db "@"
 
 ViridianForestText14: ; 611d5 (18:51d5)
 	TX_FAR _ViridianForestText14
-	db $50
+	db "@"
 
 ViridianForestObject: ; 0x611da (size=127)
 	db $3 ; border tile
@@ -96898,11 +96897,11 @@ SSAnne1Texts: ; 61269 (18:5269)
 
 SSAnne1Text1: ; 6126d (18:526d)
 	TX_FAR _SSAnne1Text1
-	db $50
+	db "@"
 
 SSAnne1Text2: ; 61272 (18:5272)
 	TX_FAR _SSAnne1Text2
-	db $50
+	db "@"
 
 SSAnne1Object: ; 0x61277 (size=104)
 	db $c ; border tile
@@ -97133,7 +97132,7 @@ SSAnne2Texts: ; 614db (18:54db)
 
 SSAnne2Text1: ; 614e1 (18:54e1)
 	TX_FAR _SSAnne2Text1
-	db $50
+	db "@"
 
 SSAnne2Text2: ; 614e6 (18:54e6)
 	db $8
@@ -97150,22 +97149,22 @@ SSAnne2Text2: ; 614e6 (18:54e6)
 
 SSAnneRivalBeforeBattleText: ; 61500 (18:5500)
 	TX_FAR _SSAnneRivalBeforeBattleText
-	db $50
+	db "@"
 ; 0x61500 + 5 bytes
 
 SSAnneRivalDefeatedText: ; 61505 (18:5505)
 	TX_FAR _SSAnneRivalDefeatedText
-	db $50
+	db "@"
 ; 0x61505 + 5 bytes
 
 SSAnneRivalWonText: ; 6150a (18:550a)
 	TX_FAR _SSAnneRivalWonText
-	db $50
+	db "@"
 ; 0x6150a + 5 bytes
 
 SSAnne2Text3: ; 6150f (18:550f)
 	TX_FAR _SSAnneRivalCaptainText
-	db $50
+	db "@"
 ; 0x6150f + 5 bytes
 
 SSAnne2Object: ; 0x61514 (size=90)
@@ -97215,7 +97214,7 @@ SSAnne4Script: ; 6162e (18:562e)
 ; 0x61631
 
 SSAnne4Texts: ; 61631 (18:5631)
-	db $50
+	db "@"
 
 SSAnne4Object: ; 0x61632 (size=52)
 	db $c ; border tile
@@ -97292,15 +97291,15 @@ db $ff
 
 SSAnne5Text1: ; 616ea (18:56ea)
 	TX_FAR _SSAnne5Text1
-	db $50
+	db "@"
 
 SSAnne5Text2: ; 616ef (18:56ef)
 	TX_FAR _SSAnne5Text2
-	db $50
+	db "@"
 
 SSAnne5Text3: ; 616f4 (18:56f4)
 	TX_FAR _SSAnne5Text3
-	db $50
+	db "@"
 
 SSAnne5Text4: ; 616f9 (18:56f9)
 	db $08 ; asm
@@ -97310,17 +97309,17 @@ SSAnne5Text4: ; 616f9 (18:56f9)
 
 SSAnneBattleText1: ; 61703 (18:5703)
 	TX_FAR _SSAnneBattleText1
-	db $50
+	db "@"
 ; 0x61703 + 5 bytes
 
 SSAnneEndBattleText1: ; 61708 (18:5708)
 	TX_FAR _SSAnneEndBattleText1
-	db $50
+	db "@"
 ; 0x61708 + 5 bytes
 
 SSAnneAfterBattleText1: ; 6170d (18:570d)
 	TX_FAR _SSAnneAfterBattleText1
-	db $50
+	db "@"
 ; 0x6170d + 5 bytes
 
 SSAnne5Text5: ; 61712 (18:5712)
@@ -97331,17 +97330,17 @@ SSAnne5Text5: ; 61712 (18:5712)
 
 SSAnneBattleText2: ; 6171c (18:571c)
 	TX_FAR _SSAnneBattleText2
-	db $50
+	db "@"
 ; 0x6171c + 5 bytes
 
 SSAnneEndBattleText2: ; 61721 (18:5721)
 	TX_FAR _SSAnneEndBattleText2
-	db $50
+	db "@"
 ; 0x61721 + 5 bytes
 
 SSAnneAfterBattleText2: ; 61726 (18:5726)
 	TX_FAR _SSAnneAfterBattleText2
-	db $50
+	db "@"
 ; 0x61726 + 5 bytes
 
 SSAnne5Object: ; 0x6172b (size=54)
@@ -97385,27 +97384,27 @@ SSAnne6Texts: ; 617b7 (18:57b7)
 
 SSAnne6Text1: ; 617c5 (18:57c5)
 	TX_FAR _SSAnne6Text1
-	db $50
+	db "@"
 
 SSAnne6Text2: ; 617ca (18:57ca)
 	TX_FAR _SSAnne6Text2
-	db $50
+	db "@"
 
 SSAnne6Text3: ; 617cf (18:57cf)
 	TX_FAR _SSAnne6Text3
-	db $50
+	db "@"
 
 SSAnne6Text4: ; 617d4 (18:57d4)
 	TX_FAR _SSAnne6Text4
-	db $50
+	db "@"
 
 SSAnne6Text5: ; 617d9 (18:57d9)
 	TX_FAR _SSAnne6Text5
-	db $50
+	db "@"
 
 SSAnne6Text6: ; 617de (18:57de)
 	TX_FAR _SSAnne6Text6
-	db $50
+	db "@"
 
 SSAnne6Text7: ; 617e3 (18:57e3)
 	db $08 ; asm
@@ -97429,22 +97428,22 @@ SSAnne6Text7: ; 617e3 (18:57e3)
 
 UnnamedText_61807: ; 61807 (18:5807)
 	TX_FAR _UnnamedText_61807
-	db $50
+	db "@"
 ; 0x61807 + 5 bytes
 
 UnnamedText_6180c: ; 6180c (18:580c)
 	TX_FAR _UnnamedText_6180c
-	db $50
+	db "@"
 ; 0x6180c + 5 bytes
 
 UnnamedText_61811: ; 61811 (18:5811)
 	TX_FAR _UnnamedText_61811
-	db $50
+	db "@"
 ; 0x61811 + 5 bytes
 
 UnnamedText_61816: ; 61816 (18:5816)
 	TX_FAR _UnnamedText_61816
-	db $50
+	db "@"
 ; 0x61816 + 5 bytes
 
 SSAnne6Object: ; 0x6181b (size=54)
@@ -97553,31 +97552,31 @@ SSAnne7RubText: ; 618ec (18:58ec)
 
 ReceivingHM01Text: ; 61927 (18:5927)
 	TX_FAR _ReceivingHM01Text
-	db $50
+	db "@"
 ; 0x61927 + 5 bytes
 
 ReceivedHM01Text: ; 6192c (18:592c)
 	TX_FAR _ReceivedHM01Text ; 0x8140d
-	db $11, $50
+	db $11, "@"
 ; 0x6192c + 6 bytes = 0x61932
 
 UnnamedText_61932: ; 61932 (18:5932)
 	TX_FAR _UnnamedText_61932
-	db $50
+	db "@"
 ; 0x61932 + 5 bytes
 
 HM01NoRoomText: ; 61937 (18:5937)
 	TX_FAR _HM01NoRoomText
-	db $50
+	db "@"
 ; 0x61937 + 5 bytes
 
 SSAnne7Text2: ; 6193c (18:593c)
 	TX_FAR _SSAnne7Text2
-	db $50
+	db "@"
 
 SSAnne7Text3: ; 61941 (18:5941)
 	TX_FAR _SSAnne7Text3
-	db $50
+	db "@"
 
 SSAnne7Object: ; 0x61946 (size=24)
 	db $c ; border tile
@@ -97698,83 +97697,83 @@ SSAnne8Text8: ; 619fe (18:59fe)
 
 SSAnne8BattleText1: ; 61a0b (18:5a0b)
 	TX_FAR _SSAnne8BattleText1
-	db $50
+	db "@"
 ; 0x61a0b + 5 bytes
 
 SSAnne8EndBattleText1: ; 61a10 (18:5a10)
 	TX_FAR _SSAnne8EndBattleText1
-	db $50
+	db "@"
 ; 0x61a10 + 5 bytes
 
 SSAnne8AfterBattleText1: ; 61a15 (18:5a15)
 	TX_FAR _SSAnne8AfterBattleText1
-	db $50
+	db "@"
 ; 0x61a15 + 5 bytes
 
 SSAnne8BattleText2: ; 61a1a (18:5a1a)
 	TX_FAR _SSAnne8BattleText2
-	db $50
+	db "@"
 ; 0x61a1a + 5 bytes
 
 SSAnne8EndBattleText2: ; 61a1f (18:5a1f)
 	TX_FAR _SSAnne8EndBattleText2
-	db $50
+	db "@"
 ; 0x61a1f + 5 bytes
 
 UnnamedText_61a24: ; 61a24 (18:5a24)
 	TX_FAR _UnnamedText_61a24
-	db $50
+	db "@"
 ; 0x61a24 + 5 bytes
 
 SSAnne8BattleText3: ; 61a29 (18:5a29)
 	TX_FAR _SSAnne8BattleText3
-	db $50
+	db "@"
 ; 0x61a29 + 5 bytes
 
 SSAnne8EndBattleText3: ; 61a2e (18:5a2e)
 	TX_FAR _SSAnne8EndBattleText3
-	db $50
+	db "@"
 ; 0x61a2e + 5 bytes
 
 SSAnne8AfterBattleText3: ; 61a33 (18:5a33)
 	TX_FAR _SSAnne8AfterBattleText3
-	db $50
+	db "@"
 ; 0x61a33 + 5 bytes
 
 SSAnne8BattleText4: ; 61a38 (18:5a38)
 	TX_FAR _SSAnne8BattleText4
-	db $50
+	db "@"
 ; 0x61a38 + 5 bytes
 
 SSAnne8EndBattleText4: ; 61a3d (18:5a3d)
 	TX_FAR _SSAnne8EndBattleText4
-	db $50
+	db "@"
 ; 0x61a3d + 5 bytes
 
 SSAnne8AfterBattleText4: ; 61a42 (18:5a42)
 	TX_FAR _SSAnne8AfterBattleText4
-	db $50
+	db "@"
 ; 0x61a42 + 5 bytes
 
 SSAnne8Text5: ; 61a47 (18:5a47)
 	TX_FAR _SSAnne8Text5
-	db $50
+	db "@"
 
 SSAnne8Text6: ; 61a4c (18:5a4c)
 	TX_FAR _SSAnne8Text6
-	db $50
+	db "@"
 
 SSAnne8Text7: ; 61a51 (18:5a51)
 	TX_FAR _SSAnne8Text7
-	db $50
+	db "@"
 
 SSAnne8Text9: ; 61a56 (18:5a56)
 	TX_FAR _SSAnne8Text9
-	db $50
+	db "@"
 
 SSAnne8Text11: ; 61a5b (18:5a5b)
 	TX_FAR _SSAnne8Text11
-	db $50
+	db "@"
 
 SSAnne8Object: ; 0x61a60 (size=127)
 	db $c ; border tile
@@ -97920,7 +97919,7 @@ SSAnne9Text5: ; 61bdd (18:5bdd)
 
 UnnamedText_61bf2: ; 61bf2 (18:5bf2)
 	TX_FAR _UnnamedText_61bf2
-	db $50
+	db "@"
 ; 0x61bf2 + 5 bytes
 
 SSAnne9Text7: ; 61bf7 (18:5bf7)
@@ -97931,7 +97930,7 @@ SSAnne9Text7: ; 61bf7 (18:5bf7)
 
 UnnamedText_61c01: ; 61c01 (18:5c01)
 	TX_FAR _UnnamedText_61c01
-	db $50
+	db "@"
 ; 0x61c01 + 5 bytes
 
 SSAnne9Text8: ; 61c06 (18:5c06)
@@ -97942,7 +97941,7 @@ SSAnne9Text8: ; 61c06 (18:5c06)
 
 UnnamedText_61c10: ; 61c10 (18:5c10)
 	TX_FAR _UnnamedText_61c10
-	db $50
+	db "@"
 ; 0x61c10 + 5 bytes
 
 SSAnne9Text10: ; 61c15 (18:5c15)
@@ -97953,7 +97952,7 @@ SSAnne9Text10: ; 61c15 (18:5c15)
 
 UnnamedText_61c1f: ; 61c1f (18:5c1f)
 	TX_FAR _UnnamedText_61c1f
-	db $50
+	db "@"
 ; 0x61c1f + 5 bytes
 
 SSAnne9Text11: ; 61c24 (18:5c24)
@@ -97964,7 +97963,7 @@ SSAnne9Text11: ; 61c24 (18:5c24)
 
 UnnamedText_61c2e: ; 61c2e (18:5c2e)
 	TX_FAR _UnnamedText_61c2e
-	db $50
+	db "@"
 ; 0x61c2e + 5 bytes
 
 SSAnne9Text12: ; 61c33 (18:5c33)
@@ -97975,7 +97974,7 @@ SSAnne9Text12: ; 61c33 (18:5c33)
 
 UnnamedText_61c3d: ; 61c3d (18:5c3d)
 	TX_FAR _UnnamedText_61c3d
-	db $50
+	db "@"
 ; 0x61c3d + 5 bytes
 
 SSAnne9Text13: ; 61c42 (18:5c42)
@@ -97986,67 +97985,67 @@ SSAnne9Text13: ; 61c42 (18:5c42)
 
 UnnamedText_61c4c: ; 61c4c (18:5c4c)
 	TX_FAR _UnnamedText_61c4c
-	db $50
+	db "@"
 ; 0x61c4c + 5 bytes
 
 SSAnne9BattleText1: ; 61c51 (18:5c51)
 	TX_FAR _SSAnne9BattleText1
-	db $50
+	db "@"
 ; 0x61c51 + 5 bytes
 
 SSAnne9EndBattleText1: ; 61c56 (18:5c56)
 	TX_FAR _SSAnne9EndBattleText1
-	db $50
+	db "@"
 ; 0x61c56 + 5 bytes
 
 SSAnne9AfterBattleText1: ; 61c5b (18:5c5b)
 	TX_FAR _SSAnne9AfterBattleText1
-	db $50
+	db "@"
 ; 0x61c5b + 5 bytes
 
 SSAnne9BattleText2: ; 61c60 (18:5c60)
 	TX_FAR _SSAnne9BattleText2
-	db $50
+	db "@"
 ; 0x61c60 + 5 bytes
 
 SSAnne9EndBattleText2: ; 61c65 (18:5c65)
 	TX_FAR _SSAnne9EndBattleText2
-	db $50
+	db "@"
 ; 0x61c65 + 5 bytes
 
 SSAnne9AfterBattleText2: ; 61c6a (18:5c6a)
 	TX_FAR _SSAnne9AfterBattleText2
-	db $50
+	db "@"
 ; 0x61c6a + 5 bytes
 
 SSAnne9BattleText3: ; 61c6f (18:5c6f)
 	TX_FAR _SSAnne9BattleText3
-	db $50
+	db "@"
 ; 0x61c6f + 5 bytes
 
 SSAnne9EndBattleText3: ; 61c74 (18:5c74)
 	TX_FAR _SSAnne9EndBattleText3
-	db $50
+	db "@"
 ; 0x61c74 + 5 bytes
 
 SSAnne9AfterBattleText3: ; 61c79 (18:5c79)
 	TX_FAR _SSAnne9AfterBattleText3
-	db $50
+	db "@"
 ; 0x61c79 + 5 bytes
 
 SSAnne9BattleText4: ; 61c7e (18:5c7e)
 	TX_FAR _SSAnne9BattleText4
-	db $50
+	db "@"
 ; 0x61c7e + 5 bytes
 
 SSAnne9EndBattleText4: ; 61c83 (18:5c83)
 	TX_FAR _SSAnne9EndBattleText4
-	db $50
+	db "@"
 ; 0x61c83 + 5 bytes
 
 SSAnne9AfterBattleText4: ; 61c88 (18:5c88)
 	TX_FAR _SSAnne9AfterBattleText4
-	db $50
+	db "@"
 ; 0x61c88 + 5 bytes
 
 SSAnne9Object: ; 0x61c8d (size=188)
@@ -98229,97 +98228,97 @@ SSAnne10Text8: ; 61e09 (18:5e09)
 
 SSAnne10BattleText1: ; 61e16 (18:5e16)
 	TX_FAR _SSAnne10BattleText1
-	db $50
+	db "@"
 ; 0x61e16 + 5 bytes
 
 SSAnne10EndBattleText1: ; 61e1b (18:5e1b)
 	TX_FAR _SSAnne10EndBattleText1
-	db $50
+	db "@"
 ; 0x61e1b + 5 bytes
 
 SSAnne10AfterBattleText1: ; 61e20 (18:5e20)
 	TX_FAR _SSAnne10AfterBattleText1
-	db $50
+	db "@"
 ; 0x61e20 + 5 bytes
 
 SSAnne10BattleText2: ; 61e25 (18:5e25)
 	TX_FAR _SSAnne10BattleText2
-	db $50
+	db "@"
 ; 0x61e25 + 5 bytes
 
 SSAnne10EndBattleText2: ; 61e2a (18:5e2a)
 	TX_FAR _SSAnne10EndBattleText2
-	db $50
+	db "@"
 ; 0x61e2a + 5 bytes
 
 SSAnne10AfterBattleText2: ; 61e2f (18:5e2f)
 	TX_FAR _SSAnne10AfterBattleText2
-	db $50
+	db "@"
 ; 0x61e2f + 5 bytes
 
 SSAnne10BattleText3: ; 61e34 (18:5e34)
 	TX_FAR _SSAnne10BattleText3
-	db $50
+	db "@"
 ; 0x61e34 + 5 bytes
 
 SSAnne10EndBattleText3: ; 61e39 (18:5e39)
 	TX_FAR _SSAnne10EndBattleText3
-	db $50
+	db "@"
 ; 0x61e39 + 5 bytes
 
 SSAnne10AfterBattleText3: ; 61e3e (18:5e3e)
 	TX_FAR _SSAnne10AfterBattleText3
-	db $50
+	db "@"
 ; 0x61e3e + 5 bytes
 
 SSAnne10BattleText4: ; 61e43 (18:5e43)
 	TX_FAR _SSAnne10BattleText4
-	db $50
+	db "@"
 ; 0x61e43 + 5 bytes
 
 SSAnne10EndBattleText4: ; 61e48 (18:5e48)
 	TX_FAR _SSAnne10EndBattleText4
-	db $50
+	db "@"
 ; 0x61e48 + 5 bytes
 
 SSAnne10AfterBattleText4: ; 61e4d (18:5e4d)
 	TX_FAR _SSAnne10AfterBattleText4
-	db $50
+	db "@"
 ; 0x61e4d + 5 bytes
 
 SSAnne10BattleText5: ; 61e52 (18:5e52)
 	TX_FAR _SSAnne10BattleText5
-	db $50
+	db "@"
 ; 0x61e52 + 5 bytes
 
 SSAnne10EndBattleText5: ; 61e57 (18:5e57)
 	TX_FAR _SSAnne10EndBattleText5
-	db $50
+	db "@"
 ; 0x61e57 + 5 bytes
 
 SSAnne10AfterBattleText5: ; 61e5c (18:5e5c)
 	TX_FAR _SSAnne10AfterBattleText5
-	db $50
+	db "@"
 ; 0x61e5c + 5 bytes
 
 SSAnne10BattleText6: ; 61e61 (18:5e61)
 	TX_FAR _SSAnne10BattleText6
-	db $50
+	db "@"
 ; 0x61e61 + 5 bytes
 
 SSAnne10EndBattleText6: ; 61e66 (18:5e66)
 	TX_FAR _SSAnne10EndBattleText6
-	db $50
+	db "@"
 ; 0x61e66 + 5 bytes
 
 SSAnne10AfterBattleText6: ; 61e6b (18:5e6b)
 	TX_FAR _SSAnne10AfterBattleText6
-	db $50
+	db "@"
 ; 0x61e6b + 5 bytes
 
 SSAnne10Text7: ; 61e70 (18:5e70)
 	TX_FAR _SSAnne10Text7
-	db $50
+	db "@"
 
 SSAnne10Object: ; 0x61e75 (size=165)
 	db $c ; border tile
@@ -98376,7 +98375,7 @@ UndergroundPathNSScript: ; 61f26 (18:5f26)
 ; 0x61f29
 
 UndergroundPathNSTexts: ; 61f29 (18:5f29)
-	db $50
+	db "@"
 
 UndergroundPathNSObject: ; 0x61f2a (size=20)
 	db $1 ; border tile
@@ -98406,7 +98405,7 @@ UndergroundPathWEScript: ; 61f4a (18:5f4a)
 ; 0x61f4d
 
 UndergroundPathWETexts: ; 61f4d (18:5f4d)
-	db $50
+	db "@"
 
 UndergroundPathWEObject: ; 0x61f4e (size=20)
 	db $1 ; border tile
@@ -98436,7 +98435,7 @@ DiglettsCaveScript: ; 61f6e (18:5f6e)
 ; 0x61f71
 
 DiglettsCaveTexts: ; 61f71 (18:5f71)
-	db $50
+	db "@"
 
 DiglettsCaveObject: ; 0x61f72 (size=20)
 	db $19 ; border tile
@@ -98740,40 +98739,40 @@ SilphCo11Text1: ; 622dc (18:62dc)
 
 SilphCoPresidentText: ; 62311 (18:6311)
 	TX_FAR _SilphCoPresidentText
-	db $50
+	db "@"
 ; 0x62311 + 5 bytes
 
 ReceivedSilphCoMasterBallText: ; 62316 (18:6316)
 	TX_FAR _ReceivedSilphCoMasterBallText ; 0x84f63
-	db $11, $50
+	db $11, "@"
 ; 0x62316 + 6 bytes = 0x6231c
 
 UnnamedText_6231c: ; 6231c (18:631c)
 	TX_FAR _UnnamedText_6231c
-	db $50
+	db "@"
 ; 0x6231c + 5 bytes
 
 SilphCoMasterBallNoRoomText: ; 62321 (18:6321)
 	TX_FAR _SilphCoMasterBallNoRoomText
-	db $50
+	db "@"
 ; 0x62321 + 5 bytes
 
 SilphCo11Text2: ; 62326 (18:6326)
 	TX_FAR _SilphCo11Text2
-	db $50
+	db "@"
 
 SilphCo11Text3: ; 6232b (18:632b)
 	TX_FAR _SilphCo11Text3
-	db $50
+	db "@"
 
 UnnamedText_62330: ; 62330 (18:6330)
 	TX_FAR _UnnamedText_62330
-	db $50
+	db "@"
 ; 0x62330 + 5 bytes
 
 SilphCo11Text6: ; 62335 (18:6335)
 	TX_FAR _UnnamedText_62335
-	db $50
+	db "@"
 ; 0x62335 + 5 bytes
 
 SilphCo11Text4: ; 6233a (18:633a)
@@ -98784,17 +98783,17 @@ SilphCo11Text4: ; 6233a (18:633a)
 
 SilphCo11BattleText1: ; 62344 (18:6344)
 	TX_FAR _SilphCo11BattleText1
-	db $50
+	db "@"
 ; 0x62344 + 5 bytes
 
 SilphCo11EndBattleText1: ; 62349 (18:6349)
 	TX_FAR _SilphCo11EndBattleText1
-	db $50
+	db "@"
 ; 0x62349 + 5 bytes
 
 SilphCo11AfterBattleText1: ; 6234e (18:634e)
 	TX_FAR _SilphCo11AfterBattleText1
-	db $50
+	db "@"
 ; 0x6234e + 5 bytes
 
 SilphCo11Text5: ; 62353 (18:6353)
@@ -98805,17 +98804,17 @@ SilphCo11Text5: ; 62353 (18:6353)
 
 SilphCo11BattleText2: ; 6235d (18:635d)
 	TX_FAR _SilphCo11BattleText2
-	db $50
+	db "@"
 ; 0x6235d + 5 bytes
 
 SilphCo11EndBattleText2: ; 62362 (18:6362)
 	TX_FAR _SilphCo11EndBattleText2
-	db $50
+	db "@"
 ; 0x62362 + 5 bytes
 
 SilphCo11AfterBattleText2: ; 62367 (18:6367)
 	TX_FAR _SilphCo11AfterBattleText2
-	db $50
+	db "@"
 ; 0x62367 + 5 bytes
 
 UnknownText_6236c: ; 6236c (18:636c)
@@ -98829,7 +98828,7 @@ UnknownText_6236c: ; 6236c (18:636c)
 
 UnnamedText_6237b: ; 6237b (18:637b)
 	TX_FAR _UnnamedText_6237b
-	db $50
+	db "@"
 ; 0x6237b + 5 bytes
 
 SilphCo11Object: ; 0x62380 (size=72)
@@ -98902,79 +98901,79 @@ GymStatues: ; 62419 (18:6419)
 
 UnnamedText_62453: ; 62453 (18:6453)
 	TX_FAR _UnnamedText_62453
-	db $50
+	db "@"
 ; 0x62453 + 5 bytes
 
 UnnamedText_62458: ; 62458 (18:6458)
 	TX_FAR _UnnamedText_62458
-	db $50
+	db "@"
 ; 0x62458 + 5 bytes
 
 INCBIN "baserom.gbc",$6245d,$624a3 - $6245d
 
 UnnamedText_624a3: ; 624a3 (18:64a3)
 	TX_FAR _UnnamedText_624a3
-	db $50
+	db "@"
 ; 0x624a3 + 5 bytes
 
 UnnamedText_624a8: ; 624a8 (18:64a8)
 	TX_FAR _UnnamedText_624a8
-	db $50
+	db "@"
 ; 0x624a8 + 5 bytes
 
 UnnamedText_624ad: ; 624ad (18:64ad)
 	TX_FAR _UnnamedText_624ad
-	db $50
+	db "@"
 ; 0x624ad + 5 bytes
 
 UnnamedText_624b2: ; 624b2 (18:64b2)
 	TX_FAR _UnnamedText_624b2
-	db $50
+	db "@"
 ; 0x624b2 + 5 bytes
 
 UnnamedText_624b7: ; 624b7 (18:64b7)
 	TX_FAR _UnnamedText_624b7
-	db $50
+	db "@"
 ; 0x624b7 + 5 bytes
 
 UnnamedText_624bc: ; 624bc (18:64bc)
 	TX_FAR _UnnamedText_624bc
-	db $50
+	db "@"
 ; 0x624bc + 5 bytes
 
 UnnamedText_624c1: ; 624c1 (18:64c1)
 	TX_FAR _UnnamedText_624c1
-	db $50
+	db "@"
 ; 0x624c1 + 5 bytes
 
 UnnamedText_624c6: ; 624c6 (18:64c6)
 	TX_FAR _UnnamedText_624c6
-	db $50
+	db "@"
 ; 0x624c6 + 5 bytes
 
 UnnamedText_624cb: ; 624cb (18:64cb)
 	TX_FAR _UnnamedText_624cb
-	db $50
+	db "@"
 ; 0x624cb + 5 bytes
 
 UnnamedText_624d0: ; 624d0 (18:64d0)
 	TX_FAR _UnnamedText_624d0
-	db $50
+	db "@"
 ; 0x624d0 + 5 bytes
 
 UnnamedText_624d5: ; 624d5 (18:64d5)
 	TX_FAR _UnnamedText_624d5
-	db $50
+	db "@"
 ; 0x624d5 + 5 bytes
 
 UnnamedText_624da: ; 624da (18:64da)
 	TX_FAR _UnnamedText_624da
-	db $50
+	db "@"
 ; 0x624da + 5 bytes
 
 UnnamedText_624df: ; 624df (18:64df)
 	TX_FAR _UnnamedText_624df
-	db $50
+	db "@"
 ; 0x624df + 5 bytes
 
 UnnamedText_624e4: ; 624e4 (18:64e4)
@@ -98991,24 +98990,24 @@ UnnamedText_624e4: ; 624e4 (18:64e4)
 
 UnnamedText_624f8: ; 624f8 (18:64f8)
 	TX_FAR _UnnamedText_624f8
-	db $50
+	db "@"
 ; 0x624f8 + 5 bytes
 
 UnnamedText_624fd: ; 624fd (18:64fd)
 	TX_FAR _UnnamedText_624fd
-	db $50
+	db "@"
 ; 0x624fd + 5 bytes
 
 UnnamedText_62502: ; 62502 (18:6502)
 	TX_FAR _UnnamedText_62502
-	db $50
+	db "@"
 ; 0x62502 + 5 bytes
 
 INCBIN "baserom.gbc",$62507,$62511 - $62507
 
 UnnamedText_62511: ; 62511 (18:6511)
 	TX_FAR _UnnamedText_62511
-	db $50
+	db "@"
 ; 0x62511 + 5 bytes
 
 	ld a, [$c109]
@@ -99636,12 +99635,12 @@ HoFMoneyText: ; 703f4 (1c:43f4)
 
 UnnamedText_703fa: ; 703fa (1c:43fa)
 	TX_FAR _UnnamedText_703fa
-	db $50
+	db "@"
 ; 0x703fa + 5 bytes
 
 UnnamedText_703ff: ; 703ff (1c:43ff)
 	TX_FAR _UnnamedText_703ff
-	db $50
+	db "@"
 ; 0x703ff + 5 bytes
 
 ; known jump sources: 702ed (1c:42ed)
@@ -100182,17 +100181,17 @@ Func_70842: ; 70842 (1c:4842)
 ; 70847 (1c:4847)
 UnnamedText_70847: ; 70847 (1c:4847)
 	TX_FAR _UnnamedText_70847
-	db $50
+	db "@"
 ; 0x70847 + 5 bytes
 
 UnnamedText_7084c: ; 7084c (1c:484c)
 	TX_FAR _UnnamedText_7084c
-	db $50
+	db "@"
 ; 0x7084c + 5 bytes
 
 UnnamedText_70851: ; 70851 (1c:4851)
 	TX_FAR _UnnamedText_70851
-	db $50
+	db "@"
 ; 0x70851 + 5 bytes
 
 Unknown_70856: ; 70856 (1c:4856)
@@ -102451,86 +102450,86 @@ INCBIN "baserom.gbc",$71d64,$71d88 - $71d64
 
 UnnamedText_71d88: ; 71d88 (1c:5d88)
 	TX_FAR _UnnamedText_71d88
-	db $50
+	db "@"
 ; 0x71d88 + 5 bytes
 
 UnnamedText_71d8d: ; 71d8d (1c:5d8d)
 	TX_FAR _UnnamedText_71d8d ; 0xa80bc
-	db $11, $a, $50
+	db $11, $a, "@"
 
 UnnamedText_71d94: ; 71d94 (1c:5d94)
 	TX_FAR _UnnamedText_71d94
-	db $50
+	db "@"
 ; 0x71d94 + 5 bytes
 
 UnnamedText_71d99: ; 71d99 (1c:5d99)
 	TX_FAR _UnnamedText_71d99
-	db $50
+	db "@"
 ; 0x71d99 + 5 bytes
 
 UnnamedText_71d9e: ; 71d9e (1c:5d9e)
 	TX_FAR _UnnamedText_71d9e
-	db $50
+	db "@"
 ; 0x71d9e + 5 bytes
 
 UnnamedText_71da3: ; 71da3 (1c:5da3)
 	TX_FAR _UnnamedText_71da3
-	db $50
+	db "@"
 ; 0x71da3 + 5 bytes
 
 UnnamedText_71da8: ; 71da8 (1c:5da8)
 	TX_FAR _UnnamedText_71da8
-	db $50
+	db "@"
 ; 0x71da8 + 5 bytes
 
 UnnamedText_71dad: ; 71dad (1c:5dad)
 	TX_FAR _UnnamedText_71dad
-	db $50
+	db "@"
 ; 0x71dad + 5 bytes
 
 UnnamedText_71db2: ; 71db2 (1c:5db2)
 	TX_FAR _UnnamedText_71db2
-	db $50
+	db "@"
 ; 0x71db2 + 5 bytes
 
 UnnamedText_71db7: ; 71db7 (1c:5db7)
 	TX_FAR _UnnamedText_71db7
-	db $50
+	db "@"
 ; 0x71db7 + 5 bytes
 
 UnnamedText_71dbc: ; 71dbc (1c:5dbc)
 	TX_FAR _UnnamedText_71dbc
-	db $50
+	db "@"
 ; 0x71dbc + 5 bytes
 
 UnnamedText_71dc1: ; 71dc1 (1c:5dc1)
 	TX_FAR _UnnamedText_71dc1
-	db $50
+	db "@"
 ; 0x71dc1 + 5 bytes
 
 UnnamedText_71dc6: ; 71dc6 (1c:5dc6)
 	TX_FAR _UnnamedText_71dc6
-	db $50
+	db "@"
 ; 0x71dc6 + 5 bytes
 
 UnnamedText_71dcb: ; 71dcb (1c:5dcb)
 	TX_FAR _UnnamedText_71dcb
-	db $50
+	db "@"
 ; 0x71dcb + 5 bytes
 
 UnnamedText_71dd0: ; 71dd0 (1c:5dd0)
 	TX_FAR _UnnamedText_71dd0
-	db $50
+	db "@"
 ; 0x71dd0 + 5 bytes
 
 UnnamedText_71dd5: ; 71dd5 (1c:5dd5)
 	TX_FAR _UnnamedText_71dd5
-	db $50
+	db "@"
 ; 0x71dd5 + 5 bytes
 
 UnnamedText_71dda: ; 71dda (1c:5dda)
 	TX_FAR _UnnamedText_71dda
-	db $50
+	db "@"
 ; 0x71dda + 5 bytes
 
 ; known jump sources: 3df6 (0:3df6)
@@ -103978,7 +103977,7 @@ Func_738a1: ; 738a1 (1c:78a1)
 ; 73909 (1c:7909)
 UnnamedText_73909: ; 73909 (1c:7909)
 	TX_FAR _UnnamedText_73909
-	db $50
+	db "@"
 ; 0x73909 + 5 bytes
 
 ; known jump sources: 738d5 (1c:78d5), 738e6 (1c:78e6)
@@ -104087,7 +104086,7 @@ Func_7393f: ; 7393f (1c:793f)
 ; 739d4 (1c:79d4)
 UnnamedText_739d4: ; 739d4 (1c:79d4)
 	TX_FAR _UnnamedText_739d4
-	db $50
+	db "@"
 ; 0x739d4 + 5 bytes
 
 BoxNames: ; 739d9 (1c:79d9)
@@ -105268,22 +105267,22 @@ ViridianGymText1: ; 74a69 (1d:4a69)
 
 UnnamedText_74ace: ; 74ace (1d:4ace)
 	TX_FAR _UnnamedText_74ace
-	db $50
+	db "@"
 ; 0x74ace + 5 bytes
 
 UnnamedText_74ad3: ; 74ad3 (1d:4ad3)
 	TX_FAR _UnnamedText_74ad3
-	db $0b, $50
+	db $0b, "@"
 ; 0x74ad9
 
 UnnamedText_74ad9: ; 74ad9 (1d:4ad9)
 	TX_FAR _UnnamedText_74ad9
-	db $0d, $50
+	db $0d, "@"
 ; 0x74add
 
 ViridianGymText12: ; 74adf (1d:4adf)
 	TX_FAR _ViridianGymText12
-	db $50
+	db "@"
 ; 0x74adf + 5 bytes
 
 ViridianGymText13: ; 74ae4 (1d:4ae4)
@@ -105292,11 +105291,11 @@ ViridianGymText13: ; 74ae4 (1d:4ae4)
 
 TM27ExplanationText: ; 74ae9 (1d:4ae9)
 	TX_FAR _TM27ExplanationText
-	db $50
+	db "@"
 
 ViridianGymText14: ; 74aee (1d:4aee)
 	TX_FAR _TM27NoRoomText
-	db $50
+	db "@"
 ; 0x74aee + 5 bytes
 
 ViridianGymText2: ; 74af3 (1d:4af3)
@@ -105307,17 +105306,17 @@ ViridianGymText2: ; 74af3 (1d:4af3)
 
 ViridianGymBattleText1: ; 74afd (1d:4afd)
 	TX_FAR _ViridianGymBattleText1
-	db $50
+	db "@"
 ; 0x74afd + 5 bytes
 
 ViridianGymEndBattleText1: ; 74b02 (1d:4b02)
 	TX_FAR _ViridianGymEndBattleText1
-	db $50
+	db "@"
 ; 0x74b02 + 5 bytes
 
 ViridianGymAfterBattleText1: ; 74b07 (1d:4b07)
 	TX_FAR _ViridianGymAfterBattleText1
-	db $50
+	db "@"
 ; 0x74b07 + 5 bytes
 
 ViridianGymText3: ; 74b0c (1d:4b0c)
@@ -105328,17 +105327,17 @@ ViridianGymText3: ; 74b0c (1d:4b0c)
 
 ViridianGymBattleText2: ; 74b16 (1d:4b16)
 	TX_FAR _ViridianGymBattleText2
-	db $50
+	db "@"
 ; 0x74b16 + 5 bytes
 
 ViridianGymEndBattleText2: ; 74b1b (1d:4b1b)
 	TX_FAR _ViridianGymEndBattleText2
-	db $50
+	db "@"
 ; 0x74b1b + 5 bytes
 
 ViridianGymAfterBattleText2: ; 74b20 (1d:4b20)
 	TX_FAR _ViridianGymAfterBattleText2
-	db $50
+	db "@"
 ; 0x74b20 + 5 bytes
 
 ViridianGymText4: ; 74b25 (1d:4b25)
@@ -105349,17 +105348,17 @@ ViridianGymText4: ; 74b25 (1d:4b25)
 
 ViridianGymBattleText3: ; 74b2f (1d:4b2f)
 	TX_FAR _ViridianGymBattleText3
-	db $50
+	db "@"
 ; 0x74b2f + 5 bytes
 
 ViridianGymEndBattleText3: ; 74b34 (1d:4b34)
 	TX_FAR _ViridianGymEndBattleText3
-	db $50
+	db "@"
 ; 0x74b34 + 5 bytes
 
 ViridianGymAfterBattleText3: ; 74b39 (1d:4b39)
 	TX_FAR _ViridianGymAfterBattleText3
-	db $50
+	db "@"
 ; 0x74b39 + 5 bytes
 
 ViridianGymText5: ; 74b3e (1d:4b3e)
@@ -105370,17 +105369,17 @@ ViridianGymText5: ; 74b3e (1d:4b3e)
 
 ViridianGymBattleText4: ; 74b48 (1d:4b48)
 	TX_FAR _ViridianGymBattleText4
-	db $50
+	db "@"
 ; 0x74b48 + 5 bytes
 
 ViridianGymEndBattleText4: ; 74b4d (1d:4b4d)
 	TX_FAR _ViridianGymEndBattleText4
-	db $50
+	db "@"
 ; 0x74b4d + 5 bytes
 
 ViridianGymAfterBattleText4: ; 74b52 (1d:4b52)
 	TX_FAR _ViridianGymAfterBattleText4
-	db $50
+	db "@"
 ; 0x74b52 + 5 bytes
 
 ViridianGymText6: ; 74b57 (1d:4b57)
@@ -105391,17 +105390,17 @@ ViridianGymText6: ; 74b57 (1d:4b57)
 
 ViridianGymBattleText5: ; 74b61 (1d:4b61)
 	TX_FAR _ViridianGymBattleText5
-	db $50
+	db "@"
 ; 0x74b61 + 5 bytes
 
 ViridianGymEndBattleText5: ; 74b66 (1d:4b66)
 	TX_FAR _ViridianGymEndBattleText5
-	db $50
+	db "@"
 ; 0x74b66 + 5 bytes
 
 ViridianGymAfterBattleText5: ; 74b6b (1d:4b6b)
 	TX_FAR _ViridianGymAfterBattleText5
-	db $50
+	db "@"
 ; 0x74b6b + 5 bytes
 
 ViridianGymText7: ; 74b70 (1d:4b70)
@@ -105412,17 +105411,17 @@ ViridianGymText7: ; 74b70 (1d:4b70)
 
 ViridianGymBattleText6: ; 74b7a (1d:4b7a)
 	TX_FAR _ViridianGymBattleText6
-	db $50
+	db "@"
 ; 0x74b7a + 5 bytes
 
 ViridianGymEndBattleText6: ; 74b7f (1d:4b7f)
 	TX_FAR _ViridianGymEndBattleText6
-	db $50
+	db "@"
 ; 0x74b7f + 5 bytes
 
 ViridianGymAfterBattleText6: ; 74b84 (1d:4b84)
 	TX_FAR _ViridianGymAfterBattleText6
-	db $50
+	db "@"
 ; 0x74b84 + 5 bytes
 
 ViridianGymText8: ; 74b89 (1d:4b89)
@@ -105433,17 +105432,17 @@ ViridianGymText8: ; 74b89 (1d:4b89)
 
 ViridianGymBattleText7: ; 74b93 (1d:4b93)
 	TX_FAR _ViridianGymBattleText7
-	db $50
+	db "@"
 ; 0x74b93 + 5 bytes
 
 ViridianGymEndBattleText7: ; 74b98 (1d:4b98)
 	TX_FAR _ViridianGymEndBattleText7
-	db $50
+	db "@"
 ; 0x74b98 + 5 bytes
 
 ViridianGymAfterBattleText7: ; 74b9d (1d:4b9d)
 	TX_FAR _ViridianGymAfterBattleText7
-	db $50
+	db "@"
 ; 0x74b9d + 5 bytes
 
 ViridianGymText9: ; 74ba2 (1d:4ba2)
@@ -105454,17 +105453,17 @@ ViridianGymText9: ; 74ba2 (1d:4ba2)
 
 ViridianGymBattleText8: ; 74bac (1d:4bac)
 	TX_FAR _ViridianGymBattleText8
-	db $50
+	db "@"
 ; 0x74bac + 5 bytes
 
 ViridianGymEndBattleText8: ; 74bb1 (1d:4bb1)
 	TX_FAR _ViridianGymEndBattleText8
-	db $50
+	db "@"
 ; 0x74bb1 + 5 bytes
 
 ViridianGymAfterBattleText8: ; 74bb6 (1d:4bb6)
 	TX_FAR _ViridianGymAfterBattleText8
-	db $50
+	db "@"
 ; 0x74bb6 + 5 bytes
 
 ViridianGymText10: ; 74bbb (1d:4bbb)
@@ -105483,12 +105482,12 @@ ViridianGymText10: ; 74bbb (1d:4bbb)
 
 UnnamedText_74bd4: ; 74bd4 (1d:4bd4)
 	TX_FAR _UnnamedText_74bd4
-	db $50
+	db "@"
 ; 0x74bd4 + 5 bytes
 
 UnnamedText_74bd9: ; 74bd9 (1d:4bd9)
 	TX_FAR _UnnamedText_74bd9
-	db $50
+	db "@"
 ; 0x74bd9 + 5 bytes
 
 ViridianGymObject: ; 0x74bde (size=105)
@@ -105546,7 +105545,7 @@ PewterMartText2: ; 74cbc (1d:4cbc)
 
 UnnamedText_74cc6: ; 74cc6 (1d:4cc6)
 	TX_FAR _UnnamedText_74cc6
-	db $50
+	db "@"
 ; 0x74cc6 + 5 bytes
 
 PewterMartText3: ; 74ccb (1d:4ccb)
@@ -105557,7 +105556,7 @@ PewterMartText3: ; 74ccb (1d:4ccb)
 
 UnnamedText_74cd5: ; 74cd5 (1d:4cd5)
 	TX_FAR _UnnamedText_74cd5
-	db $50
+	db "@"
 ; 0x74cd5 + 5 bytes
 
 PewterMartObject: ; 0x74cda (size=38)
@@ -105696,17 +105695,17 @@ db $8,BOULDERBADGE,CASCADEBADGE,THUNDERBADGE,RAINBOWBADGE,SOULBADGE,MARSHBADGE,V
 
 UnnamedText_74e77: ; 74e77 (1d:4e77)
 	TX_FAR _UnnamedText_74e77
-	db $50
+	db "@"
 ; 0x74e77 + 5 bytes
 
 UnnamedText_74e7c: ; 74e7c (1d:4e7c)
 	TX_FAR _UnnamedText_74e7c
-	db $50
+	db "@"
 ; 0x74e7c + 5 bytes
 
 UnnamedText_74e81: ; 74e81 (1d:4e81)
 	TX_FAR _UnnamedText_74e81
-	db $50
+	db "@"
 ; 0x74e81 + 5 bytes
 
 Unknown_74e86: ; 74e86 (1d:4e86)
@@ -105721,42 +105720,42 @@ dw UnnamedText_74eb9
 
 UnnamedText_74e96: ; 74e96 (1d:4e96)
 	TX_FAR _UnnamedText_74e96
-	db $50
+	db "@"
 ; 0x74e96 + 5 bytes
 
 UnnamedText_74e9b: ; 74e9b (1d:4e9b)
 	TX_FAR _UnnamedText_74e9b
-	db $50
+	db "@"
 ; 0x74e9b + 5 bytes
 
 UnnamedText_74ea0: ; 74ea0 (1d:4ea0)
 	TX_FAR _UnnamedText_74ea0
-	db $50
+	db "@"
 ; 0x74ea0 + 5 bytes
 
 UnnamedText_74ea5: ; 74ea5 (1d:4ea5)
 	TX_FAR _UnnamedText_74ea5
-	db $50
+	db "@"
 ; 0x74ea5 + 5 bytes
 
 UnnamedText_74eaa: ; 74eaa (1d:4eaa)
 	TX_FAR _UnnamedText_74eaa
-	db $50
+	db "@"
 ; 0x74eaa + 5 bytes
 
 UnnamedText_74eaf: ; 74eaf (1d:4eaf)
 	TX_FAR _UnnamedText_74eaf
-	db $50
+	db "@"
 ; 0x74eaf + 5 bytes
 
 UnnamedText_74eb4: ; 74eb4 (1d:4eb4)
 	TX_FAR _UnnamedText_74eb4
-	db $50
+	db "@"
 ; 0x74eb4 + 5 bytes
 
 UnnamedText_74eb9: ; 74eb9 (1d:4eb9)
 	TX_FAR _UnnamedText_74eb9
-	db $50
+	db "@"
 ; 0x74eb9 + 5 bytes
 
 CeruleanHouse2Object: ; 0x74ebe (size=34)
@@ -105863,7 +105862,7 @@ Unknown_74ee0: ; 74ee0 (1d:4ee0)
 ; 74f99 (1d:4f99)
 UnnamedText_74f99: ; 74f99 (1d:4f99)
 	TX_FAR _UnnamedText_74f99
-	db $50
+	db "@"
 ; 0x74f99 + 5 bytes
 
 Unnamed_74f9e: ; 74f9e (1d:4f9e)
@@ -105878,22 +105877,22 @@ Unnamed_74fc3: ; 74fc3 (1d:4fc3)
 
 UnnamedText_74fd3: ; 74fd3 (1d:4fd3)
 	TX_FAR _UnnamedText_74fd3
-	db $50
+	db "@"
 ; 0x74fd3 + 5 bytes
 
 UnnamedText_74fd8: ; 74fd8 (1d:4fd8)
 	TX_FAR _UnnamedText_74fd8
-	db $50
+	db "@"
 ; 0x74fd8 + 5 bytes
 
 UnnamedText_74fdd: ; 74fdd (1d:4fdd)
 	TX_FAR _UnnamedText_74fdd
-	db $50
+	db "@"
 ; 0x74fdd + 5 bytes
 
 UnnamedText_74fe2: ; 74fe2 (1d:4fe2)
 	TX_FAR _UnnamedText_74fe2
-	db $50
+	db "@"
 ; 0x74fe2 + 5 bytes
 
 Unknown_74fe7: ; 74fe7 (1d:4fe7)
@@ -105937,15 +105936,15 @@ FuchsiaHouse1Texts: ; 7501c (1d:501c)
 
 FuchsiaHouse1Text1: ; 75022 (1d:5022)
 	TX_FAR _FuchsiaHouse1Text1
-	db $50
+	db "@"
 
 FuchsiaHouse1Text2: ; 75027 (1d:5027)
 	TX_FAR _FuchsiaHouse1Text2
-	db $50
+	db "@"
 
 FuchsiaHouse1Text3: ; 7502c (1d:502c)
 	TX_FAR _FuchsiaHouse1Text3
-	db $50
+	db "@"
 
 FuchsiaHouse1Object: ; 0x75031 (size=38)
 	db $a ; border tile
@@ -105986,11 +105985,11 @@ FuchsiaPokecenterText1: ; 75071 (1d:5071)
 
 FuchsiaPokecenterText2: ; 75072 (1d:5072)
 	TX_FAR _FuchsiaPokecenterText1
-	db $50
+	db "@"
 
 FuchsiaPokecenterText3: ; 75077 (1d:5077)
 	TX_FAR _FuchsiaPokecenterText3
-	db $50
+	db "@"
 
 FuchsiaPokecenterText4: ; 7507c (1d:507c)
 	db $f6
@@ -106084,17 +106083,17 @@ FuchsiaHouse2Text1: ; 750c2 (1d:50c2)
 
 WardenGibberishText1: ; 75135 (1d:5135)
 	TX_FAR _WardenGibberishText1
-	db $50
+	db "@"
 ; 0x75135 + 5 bytes
 
 WardenGibberishText2: ; 7513a (1d:513a)
 	TX_FAR _WardenGibberishText2
-	db $50
+	db "@"
 ; 0x7513a + 5 bytes
 
 WardenGibberishText3: ; 7513f (1d:513f)
 	TX_FAR _WardenGibberishText3
-	db $50
+	db "@"
 ; 0x7513f + 5 bytes
 
 WardenTeethText1: ; 75144 (1d:5144)
@@ -106103,27 +106102,27 @@ WardenTeethText1: ; 75144 (1d:5144)
 
 WardenTeethText2: ; 75149 (1d:5149)
 	TX_FAR _WardenTeethText2
-	db $50
+	db "@"
 ; 0x75149 + 5 bytes
 
 WardenThankYouText: ; 7514e (1d:514e)
 	TX_FAR _WardenThankYouText
-	db $50
+	db "@"
 ; 0x7514e + 5 bytes
 
 ReceivedHM04Text: ; 75153 (1d:5153)
 	TX_FAR _ReceivedHM04Text ; 0x9e5a2
-	db $0B, $50
+	db $0B, "@"
 ; 0x75153 + 6 bytes = 0x75159
 
 HM04ExplanationText: ; 75159 (1d:5159)
 	TX_FAR _HM04ExplanationText
-	db $50
+	db "@"
 ; 0x75159 + 5 bytes
 
 HM04NoRoomText: ; 7515e (1d:515e)
 	TX_FAR _HM04NoRoomText
-	db $50
+	db "@"
 ; 0x7515e + 5 bytes
 
 FuchsiaHouse2Text5: ; 75163 (1d:5163)
@@ -106140,12 +106139,12 @@ FuchsiaHouse2Text4: ; 75163 (1d:5163)
 
 UnnamedText_75176: ; 75176 (1d:5176)
 	TX_FAR _UnnamedText_75176
-	db $50
+	db "@"
 ; 0x75176 + 5 bytes
 
 UnnamedText_7517b: ; 7517b (1d:517b)
 	TX_FAR _UnnamedText_7517b
-	db $50
+	db "@"
 ; 0x7517b + 5 bytes
 
 FuchsiaHouse2Object: ; 0x75180 (size=45)
@@ -106318,7 +106317,7 @@ SafariZoneEntranceTexts: ; 752b9 (1d:52b9)
 SafariZoneEntranceText3: ; 752c5 (1d:52c5)
 SafariZoneEntranceText1: ; 752c5 (1d:52c5)
 	TX_FAR _SafariZoneEntranceText1
-	db $50
+	db "@"
 
 SafariZoneEntranceText4: ; 752ca (1d:52ca)
 	TX_FAR UnnamedText_9e6e4 ; 0x9e6e4
@@ -106393,17 +106392,17 @@ UnnamedText_7535b: ; 7535b (1d:535b)
 
 UnnamedText_75360: ; 75360 (1d:5360)
 	TX_FAR _UnnamedText_75360
-	db $50
+	db "@"
 ; 0x75360 + 5 bytes
 
 UnnamedText_75365: ; 75365 (1d:5365)
 	TX_FAR _UnnamedText_75365
-	db $50
+	db "@"
 ; 0x75365 + 5 bytes
 
 UnnamedText_7536a: ; 7536a (1d:536a)
 	TX_FAR _UnnamedText_7536a
-	db $50
+	db "@"
 ; 0x7536a + 5 bytes
 
 SafariZoneEntranceText5: ; 7536f (1d:536f)
@@ -106444,17 +106443,17 @@ SafariZoneEntranceText5: ; 7536f (1d:536f)
 
 UnnamedText_753bb: ; 753bb (1d:53bb)
 	TX_FAR _UnnamedText_753bb
-	db $50
+	db "@"
 ; 0x753bb + 5 bytes
 
 UnnamedText_753c0: ; 753c0 (1d:53c0)
 	TX_FAR _UnnamedText_753c0
-	db $50
+	db "@"
 ; 0x753c0 + 5 bytes
 
 SafariZoneEntranceText6: ; 753c5 (1d:53c5)
 	TX_FAR _UnnamedText_753c5
-	db $50
+	db "@"
 ; 0x753c5 + 5 bytes
 
 SafariZoneEntranceText2: ; 753ca (1d:53ca)
@@ -106473,17 +106472,17 @@ SafariZoneEntranceText2: ; 753ca (1d:53ca)
 
 UnnamedText_753e6: ; 753e6 (1d:53e6)
 	TX_FAR _UnnamedText_753e6
-	db $50
+	db "@"
 ; 0x753e6 + 5 bytes
 
 UnnamedText_753eb: ; 753eb (1d:53eb)
 	TX_FAR _UnnamedText_753eb
-	db $50
+	db "@"
 ; 0x753eb + 5 bytes
 
 UnnamedText_753f0: ; 753f0 (1d:53f0)
 	TX_FAR _UnnamedText_753f0
-	db $50
+	db "@"
 ; 0x753f0 + 5 bytes
 
 SafariZoneEntranceObject: ; 0x753f5 (size=48)
@@ -106700,22 +106699,22 @@ FuchsiaGymText1: ; 75534 (1d:5534)
 
 UnnamedText_75581: ; 75581 (1d:5581)
 	TX_FAR _UnnamedText_75581
-	db $50
+	db "@"
 ; 0x75581 + 5 bytes
 
 UnnamedText_75586: ; 75586 (1d:5586)
 	TX_FAR _UnnamedText_75586
-	db $50
+	db "@"
 ; 0x75586 + 5 bytes
 
 UnnamedText_7558b: ; 7558b (1d:558b)
 	TX_FAR _UnnamedText_7558b
-	db $50
+	db "@"
 ; 0x7558b + 5 bytes
 
 FuchsiaGymText9: ; 75590 (1d:5590)
 	TX_FAR _UnnamedText_75590
-	db $50
+	db "@"
 ; 0x75590 + 5 bytes
 
 FuchsiaGymText10: ; 75595 (1d:5595)
@@ -106724,12 +106723,12 @@ FuchsiaGymText10: ; 75595 (1d:5595)
 
 TM06ExplanationText: ; 7559a (1d:559a)
 	TX_FAR _TM06ExplanationText
-	db $50
+	db "@"
 ; 0x7559a + 5 bytes
 
 FuchsiaGymText11: ; 7559f (1d:559f)
 	TX_FAR _TM06NoRoomText
-	db $50
+	db "@"
 ; 0x7559f + 5 bytes
 
 FuchsiaGymText2: ; 755a4 (1d:55a4)
@@ -106740,17 +106739,17 @@ FuchsiaGymText2: ; 755a4 (1d:55a4)
 
 FuchsiaGymBattleText1: ; 755ae (1d:55ae)
 	TX_FAR _FuchsiaGymBattleText1
-	db $50
+	db "@"
 ; 0x755ae + 5 bytes
 
 FuchsiaGymEndBattleText1: ; 755b3 (1d:55b3)
 	TX_FAR _FuchsiaGymEndBattleText1
-	db $50
+	db "@"
 ; 0x755b3 + 5 bytes
 
 FuchsiaGymAfterBattleText1: ; 755b8 (1d:55b8)
 	TX_FAR _FuchsiaGymAfterBattleText1
-	db $50
+	db "@"
 ; 0x755b8 + 5 bytes
 
 FuchsiaGymText3: ; 755bd (1d:55bd)
@@ -106761,17 +106760,17 @@ FuchsiaGymText3: ; 755bd (1d:55bd)
 
 FuchsiaGymBattleText2: ; 755c7 (1d:55c7)
 	TX_FAR _FuchsiaGymBattleText2
-	db $50
+	db "@"
 ; 0x755c7 + 5 bytes
 
 FuchsiaGymEndBattleText2: ; 755cc (1d:55cc)
 	TX_FAR _FuchsiaGymEndBattleText2
-	db $50
+	db "@"
 ; 0x755cc + 5 bytes
 
 FuchsiaGymAfterBattleText2: ; 755d1 (1d:55d1)
 	TX_FAR _FuchsiaGymAfterBattleText2
-	db $50
+	db "@"
 ; 0x755d1 + 5 bytes
 
 FuchsiaGymText4: ; 755d6 (1d:55d6)
@@ -106782,17 +106781,17 @@ FuchsiaGymText4: ; 755d6 (1d:55d6)
 
 FuchsiaGymBattleText3: ; 755e0 (1d:55e0)
 	TX_FAR _FuchsiaGymBattleText3
-	db $50
+	db "@"
 ; 0x755e0 + 5 bytes
 
 FuchsiaGymEndBattleText3: ; 755e5 (1d:55e5)
 	TX_FAR _FuchsiaGymEndBattleText3
-	db $50
+	db "@"
 ; 0x755e5 + 5 bytes
 
 FuchsiaGymAfterBattleText3: ; 755ea (1d:55ea)
 	TX_FAR _FuchsiaGymAfterBattleText3
-	db $50
+	db "@"
 ; 0x755ea + 5 bytes
 
 FuchsiaGymText5: ; 755ef (1d:55ef)
@@ -106803,17 +106802,17 @@ FuchsiaGymText5: ; 755ef (1d:55ef)
 
 FuchsiaGymBattleText4: ; 755f9 (1d:55f9)
 	TX_FAR _FuchsiaGymBattleText4
-	db $50
+	db "@"
 ; 0x755f9 + 5 bytes
 
 FuchsiaGymEndBattleText4: ; 755fe (1d:55fe)
 	TX_FAR _FuchsiaGymEndBattleText4
-	db $50
+	db "@"
 ; 0x755fe + 5 bytes
 
 FuchsiaGymAfterBattleText4: ; 75603 (1d:5603)
 	TX_FAR _FuchsiaGymAfterBattleText4
-	db $50
+	db "@"
 ; 0x75603 + 5 bytes
 
 FuchsiaGymText6: ; 75608 (1d:5608)
@@ -106824,17 +106823,17 @@ FuchsiaGymText6: ; 75608 (1d:5608)
 
 FuchsiaGymBattleText5: ; 75612 (1d:5612)
 	TX_FAR _FuchsiaGymBattleText5
-	db $50
+	db "@"
 ; 0x75612 + 5 bytes
 
 FuchsiaGymEndBattleText5: ; 75617 (1d:5617)
 	TX_FAR _FuchsiaGymEndBattleText5
-	db $50
+	db "@"
 ; 0x75617 + 5 bytes
 
 FuchsiaGymAfterBattleText5: ; 7561c (1d:561c)
 	TX_FAR _FuchsiaGymAfterBattleText5
-	db $50
+	db "@"
 ; 0x7561c + 5 bytes
 
 FuchsiaGymText7: ; 75621 (1d:5621)
@@ -106845,17 +106844,17 @@ FuchsiaGymText7: ; 75621 (1d:5621)
 
 FuchsiaGymBattleText6: ; 7562b (1d:562b)
 	TX_FAR _FuchsiaGymBattleText6
-	db $50
+	db "@"
 ; 0x7562b + 5 bytes
 
 FuchsiaGymEndBattleText6: ; 75630 (1d:5630)
 	TX_FAR _FuchsiaGymEndBattleText6
-	db $50
+	db "@"
 ; 0x75630 + 5 bytes
 
 FuchsiaGymAfterBattleText6: ; 75635 (1d:5635)
 	TX_FAR _FuchsiaGymAfterBattleText6
-	db $50
+	db "@"
 ; 0x75635 + 5 bytes
 
 FuchsiaGymText8: ; 7563a (1d:563a)
@@ -106871,12 +106870,12 @@ FuchsiaGymText8: ; 7563a (1d:563a)
 
 UnnamedText_7564e: ; 7564e (1d:564e)
 	TX_FAR _UnnamedText_7564e
-	db $50
+	db "@"
 ; 0x7564e + 5 bytes
 
 UnnamedText_75653: ; 75653 (1d:5653)
 	TX_FAR _UnnamedText_75653
-	db $50
+	db "@"
 ; 0x75653 + 5 bytes
 
 FuchsiaGymObject: ; 0x75658 (size=82)
@@ -106923,15 +106922,15 @@ FuchsiaMeetingRoomTexts: ; 756e7 (1d:56e7)
 
 FuchsiaMeetingRoomText1: ; 756ed (1d:56ed)
 	TX_FAR _FuchsiaMeetingRoomText1
-	db $50
+	db "@"
 
 FuchsiaMeetingRoomText2: ; 756f2 (1d:56f2)
 	TX_FAR _FuchsiaMeetingRoomText2
-	db $50
+	db "@"
 
 FuchsiaMeetingRoomText3: ; 756f7 (1d:56f7)
 	TX_FAR _FuchsiaMeetingRoomText3
-	db $50
+	db "@"
 
 FuchsiaMeetingRoomObject: ; 0x756fc (size=38)
 	db $17 ; border tile
@@ -107187,35 +107186,35 @@ CinnabarGymText1: ; 758df (1d:58df)
 
 UnnamedText_75914: ; 75914 (1d:5914)
 	TX_FAR _UnnamedText_75914
-	db $50
+	db "@"
 ; 0x75914 + 5 bytes
 
 UnnamedText_75919: ; 75919 (1d:5919)
 	TX_FAR UnnamedText_a08c7
 	db $11
 	db $d
-	db $50
+	db "@"
 
 UnnamedText_75920: ; 75920 (1d:5920)
 	TX_FAR _UnnamedText_75920
-	db $50
+	db "@"
 ; 0x75920 + 5 bytes
 
 UnnamedText_75925: ; 75925 (1d:5925)
 	TX_FAR _UnnamedText_75925
-	db $50
+	db "@"
 ; 0x75925 + 5 bytes
 
 ReceivedTM38Text: ; 7592a (1d:592a)
 	TX_FAR _ReceivedTM38Text ; 0xa09a8
 	db $0B
 	TX_FAR _TM38ExplanationText
-	db $50
+	db "@"
 ; 0x75934
 
 TM38NoRoomText: ; 75934 (1d:5934)
 	TX_FAR _TM38NoRoomText
-	db $50
+	db "@"
 ; 0x75934 + 5 bytes
 
 CinnabarGymText2: ; 75939 (1d:5939)
@@ -107237,17 +107236,17 @@ CinnabarGymText2: ; 75939 (1d:5939)
 
 UnnamedText_7595f: ; 7595f (1d:595f)
 	TX_FAR _UnnamedText_7595f
-	db $50
+	db "@"
 ; 0x7595f + 5 bytes
 
 UnnamedText_75964: ; 75964 (1d:5964)
 	TX_FAR _UnnamedText_75964
-	db $50
+	db "@"
 ; 0x75964 + 5 bytes
 
 UnnamedText_75969: ; 75969 (1d:5969)
 	TX_FAR _UnnamedText_75969
-	db $50
+	db "@"
 ; 0x75969 + 5 bytes
 
 CinnabarGymText3: ; 7596e (1d:596e)
@@ -107269,17 +107268,17 @@ CinnabarGymText3: ; 7596e (1d:596e)
 
 UnnamedText_75994: ; 75994 (1d:5994)
 	TX_FAR _UnnamedText_75994
-	db $50
+	db "@"
 ; 0x75994 + 5 bytes
 
 UnnamedText_75999: ; 75999 (1d:5999)
 	TX_FAR _UnnamedText_75999
-	db $50
+	db "@"
 ; 0x75999 + 5 bytes
 
 UnnamedText_7599e: ; 7599e (1d:599e)
 	TX_FAR _UnnamedText_7599e
-	db $50
+	db "@"
 ; 0x7599e + 5 bytes
 
 CinnabarGymText4: ; 759a3 (1d:59a3)
@@ -107301,17 +107300,17 @@ CinnabarGymText4: ; 759a3 (1d:59a3)
 
 UnnamedText_759c9: ; 759c9 (1d:59c9)
 	TX_FAR _UnnamedText_759c9
-	db $50
+	db "@"
 ; 0x759c9 + 5 bytes
 
 UnnamedText_759ce: ; 759ce (1d:59ce)
 	TX_FAR _UnnamedText_759ce
-	db $50
+	db "@"
 ; 0x759ce + 5 bytes
 
 UnnamedText_759d3: ; 759d3 (1d:59d3)
 	TX_FAR _UnnamedText_759d3
-	db $50
+	db "@"
 ; 0x759d3 + 5 bytes
 
 CinnabarGymText5: ; 759d8 (1d:59d8)
@@ -107333,17 +107332,17 @@ CinnabarGymText5: ; 759d8 (1d:59d8)
 
 UnnamedText_759fe: ; 759fe (1d:59fe)
 	TX_FAR _UnnamedText_759fe
-	db $50
+	db "@"
 ; 0x759fe + 5 bytes
 
 UnnamedText_75a03: ; 75a03 (1d:5a03)
 	TX_FAR _UnnamedText_75a03
-	db $50
+	db "@"
 ; 0x75a03 + 5 bytes
 
 UnnamedText_75a08: ; 75a08 (1d:5a08)
 	TX_FAR _UnnamedText_75a08
-	db $50
+	db "@"
 ; 0x75a08 + 5 bytes
 
 CinnabarGymText6: ; 75a0d (1d:5a0d)
@@ -107365,17 +107364,17 @@ CinnabarGymText6: ; 75a0d (1d:5a0d)
 
 UnnamedText_75a33: ; 75a33 (1d:5a33)
 	TX_FAR _UnnamedText_75a33
-	db $50
+	db "@"
 ; 0x75a33 + 5 bytes
 
 UnnamedText_75a38: ; 75a38 (1d:5a38)
 	TX_FAR _UnnamedText_75a38
-	db $50
+	db "@"
 ; 0x75a38 + 5 bytes
 
 UnnamedText_75a3d: ; 75a3d (1d:5a3d)
 	TX_FAR _UnnamedText_75a3d
-	db $50
+	db "@"
 ; 0x75a3d + 5 bytes
 
 CinnabarGymText7: ; 75a42 (1d:5a42)
@@ -107397,17 +107396,17 @@ CinnabarGymText7: ; 75a42 (1d:5a42)
 
 UnnamedText_75a68: ; 75a68 (1d:5a68)
 	TX_FAR _UnnamedText_75a68
-	db $50
+	db "@"
 ; 0x75a68 + 5 bytes
 
 UnnamedText_75a6d: ; 75a6d (1d:5a6d)
 	TX_FAR _UnnamedText_75a6d
-	db $50
+	db "@"
 ; 0x75a6d + 5 bytes
 
 UnnamedText_75a72: ; 75a72 (1d:5a72)
 	TX_FAR _UnnamedText_75a72
-	db $50
+	db "@"
 ; 0x75a72 + 5 bytes
 
 CinnabarGymText8: ; 75a77 (1d:5a77)
@@ -107429,17 +107428,17 @@ CinnabarGymText8: ; 75a77 (1d:5a77)
 
 UnnamedText_75a9d: ; 75a9d (1d:5a9d)
 	TX_FAR _UnnamedText_75a9d
-	db $50
+	db "@"
 ; 0x75a9d + 5 bytes
 
 UnnamedText_75aa2: ; 75aa2 (1d:5aa2)
 	TX_FAR _UnnamedText_75aa2
-	db $50
+	db "@"
 ; 0x75aa2 + 5 bytes
 
 UnnamedText_75aa7: ; 75aa7 (1d:5aa7)
 	TX_FAR _UnnamedText_75aa7
-	db $50
+	db "@"
 ; 0x75aa7 + 5 bytes
 
 CinnabarGymText9: ; 75aac (1d:5aac)
@@ -107457,12 +107456,12 @@ CinnabarGymText9: ; 75aac (1d:5aac)
 
 UnnamedText_75ac2: ; 75ac2 (1d:5ac2)
 	TX_FAR _UnnamedText_75ac2
-	db $50
+	db "@"
 ; 0x75ac2 + 5 bytes
 
 UnnamedText_75ac7: ; 75ac7 (1d:5ac7)
 	TX_FAR _UnnamedText_75ac7
-	db $50
+	db "@"
 ; 0x75ac7 + 5 bytes
 
 CinnabarGymObject: ; 0x75acc (size=90)
@@ -107510,23 +107509,23 @@ Lab1Texts: ; 75b90 (1d:5b90)
 
 Lab1Text1: ; 75b9a (1d:5b9a)
 	TX_FAR _Lab1Text1
-	db $50
+	db "@"
 
 Lab1Text2: ; 75b9f (1d:5b9f)
 	TX_FAR _Lab1Text2
-	db $50
+	db "@"
 
 Lab1Text3: ; 75ba4 (1d:5ba4)
 	TX_FAR _Lab1Text3
-	db $50
+	db "@"
 
 Lab1Text4: ; 75ba9 (1d:5ba9)
 	TX_FAR _Lab1Text4
-	db $50
+	db "@"
 
 Lab1Text5: ; 75bae (1d:5bae)
 	TX_FAR _Lab1Text5
-	db $50
+	db "@"
 
 Lab1Object: ; 0x75bb3 (size=62)
 	db $17 ; border tile
@@ -107574,7 +107573,7 @@ Lab2Texts: ; 75c24 (1d:5c24)
 
 Lab2Text1: ; 75c2a (1d:5c2a)
 	TX_FAR _Lab2Text1
-	db $50
+	db "@"
 
 Lab2Text2: ; 75c2f (1d:5c2f)
 	db $8
@@ -107654,36 +107653,36 @@ Lab3Text1: ; 75c94 (1d:5c94)
 
 TM35PreReceiveText: ; 75cc8 (1d:5cc8)
 	TX_FAR _TM35PreReceiveText
-	db $50
+	db "@"
 ; 0x75cc8 + 5 bytes
 
 ReceivedTM35Text: ; 75ccd (1d:5ccd)
 	TX_FAR _ReceivedTM35Text ; 0xa0f48
-	db $0B, $50
+	db $0B, "@"
 ; 0x75cd3
 
 TM35ExplanationText: ; 75cd3 (1d:5cd3)
 	TX_FAR _TM35ExplanationText
-	db $50
+	db "@"
 ; 0x75cd3 + 5 bytes
 
 TM35NoRoomText: ; 75cd8 (1d:5cd8)
 	TX_FAR _TM35NoRoomText
-	db $50
+	db "@"
 ; 0x75cd8 + 5 bytes
 
 Lab3Text2: ; 75cdd (1d:5cdd)
 	TX_FAR _Lab3Text2
-	db $50
+	db "@"
 
 Lab3Text4: ; 75ce2 (1d:5ce2)
 Lab3Text3: ; 75ce2 (1d:5ce2)
 	TX_FAR _Lab3Text3
-	db $50
+	db "@"
 
 Lab3Text5: ; 75ce7 (1d:5ce7)
 	TX_FAR _Lab3Text5
-	db $50
+	db "@"
 
 Lab3Object: ; 0x75cec (size=41)
 	db $17 ; border tile
@@ -107805,22 +107804,22 @@ Lab4Text1: ; 75d6c (1d:5d6c)
 
 UnnamedText_75dc6: ; 75dc6 (1d:5dc6)
 	TX_FAR _UnnamedText_75dc6
-	db $50
+	db "@"
 ; 0x75dc6 + 5 bytes
 
 UnnamedText_75dcb: ; 75dcb (1d:5dcb)
 	TX_FAR _UnnamedText_75dcb
-	db $50
+	db "@"
 ; 0x75dcb + 5 bytes
 
 UnnamedText_75dd0: ; 75dd0 (1d:5dd0)
 	TX_FAR _UnnamedText_75dd0
-	db $50
+	db "@"
 ; 0x75dd0 + 5 bytes
 
 UnnamedText_75dd5: ; 75dd5 (1d:5dd5)
 	TX_FAR _UnnamedText_75dd5
-	db $50
+	db "@"
 ; 0x75dd5 + 5 bytes
 
 Lab4Text2: ; 75dda (1d:5dda)
@@ -107878,11 +107877,11 @@ CinnabarPokecenterText1: ; 75e3a (1d:5e3a)
 
 CinnabarPokecenterText2: ; 75e3b (1d:5e3b)
 	TX_FAR _CinnabarPokecenterText1
-	db $50
+	db "@"
 
 CinnabarPokecenterText3: ; 75e40 (1d:5e40)
 	TX_FAR _CinnabarPokecenterText3
-	db $50
+	db "@"
 
 CinnabarPokecenterText4: ; 75e45 (1d:5e45)
 	db $f6
@@ -107923,11 +107922,11 @@ CinnabarMartTexts: ; 75e81 (1d:5e81)
 
 CinnabarMartText2: ; 75e87 (1d:5e87)
 	TX_FAR _CinnabarMartText2
-	db $50
+	db "@"
 
 CinnabarMartText3: ; 75e8c (1d:5e8c)
 	TX_FAR _CinnabarMartText3
-	db $50
+	db "@"
 
 CinnabarMartObject: ; 0x75e91 (size=38)
 	db $0 ; border tile
@@ -107964,11 +107963,11 @@ CopycatsHouseF1Texts: ; 75ec6 (1d:5ec6)
 
 CopycatsHouseF1Text1: ; 75ecc (1d:5ecc)
 	TX_FAR _CopycatsHouseF1Text1
-	db $50
+	db "@"
 
 CopycatsHouseF1Text2: ; 75ed1 (1d:5ed1)
 	TX_FAR _CopycatsHouseF1Text2
-	db $50
+	db "@"
 
 CopycatsHouseF1Text3: ; 75ed6 (1d:5ed6)
 	TX_FAR _CopycatsHouseF1Text3
@@ -108261,27 +108260,27 @@ GaryText1: ; 760e0 (1d:60e0)
 
 UnnamedText_760f4: ; 760f4 (1d:60f4)
 	TX_FAR _UnnamedText_760f4
-	db $50
+	db "@"
 ; 0x760f4 + 5 bytes
 
 UnnamedText_760f9: ; 760f9 (1d:60f9)
 	TX_FAR _UnnamedText_760f9
-	db $50
+	db "@"
 ; 0x760f9 + 5 bytes
 
 UnnamedText_760fe: ; 760fe (1d:60fe)
 	TX_FAR _UnnamedText_760fe
-	db $50
+	db "@"
 ; 0x760fe + 5 bytes
 
 UnnamedText_76103: ; 76103 (1d:6103)
 	TX_FAR _UnnamedText_76103
-	db $50
+	db "@"
 ; 0x76103 + 5 bytes
 
 GaryText2: ; 76108 (1d:6108)
 	TX_FAR _GaryText2
-	db $50
+	db "@"
 
 GaryText3: ; 7610d (1d:610d)
 	db $8
@@ -108295,17 +108294,17 @@ GaryText3: ; 7610d (1d:610d)
 
 UnnamedText_76120: ; 76120 (1d:6120)
 	TX_FAR _UnnamedText_76120
-	db $50
+	db "@"
 ; 0x76120 + 5 bytes
 
 GaryText4: ; 76125 (1d:6125)
 	TX_FAR _UnnamedText_76125
-	db $50
+	db "@"
 ; 0x76125 + 5 bytes
 
 GaryText5: ; 7612a (1d:612a)
 	TX_FAR _UnnamedText_7612a
-	db $50
+	db "@"
 ; 0x7612a + 5 bytes
 
 GaryObject: ; 0x7612f (size=48)
@@ -108479,22 +108478,22 @@ LoreleiText1: ; 76262 (1d:6262)
 
 LoreleiBeforeBattleText: ; 7626c (1d:626c)
 	TX_FAR _LoreleiBeforeBattleText
-	db $50
+	db "@"
 ; 0x7626c + 5 bytes
 
 LoreleiEndBattleText: ; 76271 (1d:6271)
 	TX_FAR _LoreleiEndBattleText
-	db $50
+	db "@"
 ; 0x76271 + 5 bytes
 
 LoreleiAfterBattleText: ; 76276 (1d:6276)
 	TX_FAR _LoreleiAfterBattleText
-	db $50
+	db "@"
 ; 0x76276 + 5 bytes
 
 LoreleiText2: ; 7627b (1d:627b)
 	TX_FAR _UnnamedText_7627b
-	db $50
+	db "@"
 ; 0x7627b + 5 bytes
 
 LoreleiObject: ; 0x76280 (size=44)
@@ -108669,22 +108668,22 @@ BrunoText1: ; 763b9 (1d:63b9)
 
 BrunoBeforeBattleText: ; 763c3 (1d:63c3)
 	TX_FAR _BrunoBeforeBattleText
-	db $50
+	db "@"
 ; 0x763c3 + 5 bytes
 
 BrunoEndBattleText: ; 763c8 (1d:63c8)
 	TX_FAR _BrunoEndBattleText
-	db $50
+	db "@"
 ; 0x763c8 + 5 bytes
 
 BrunoAfterBattleText: ; 763cd (1d:63cd)
 	TX_FAR _BrunoAfterBattleText
-	db $50
+	db "@"
 ; 0x763cd + 5 bytes
 
 BrunoText2: ; 763d2 (1d:63d2)
 	TX_FAR _UnnamedText_763d2
-	db $50
+	db "@"
 ; 0x763d2 + 5 bytes
 
 BrunoObject: ; 0x763d7 (size=44)
@@ -108862,22 +108861,22 @@ AgathaText1: ; 76516 (1d:6516)
 
 AgathaBeforeBattleText: ; 76520 (1d:6520)
 	TX_FAR _AgathaBeforeBattleText
-	db $50
+	db "@"
 ; 0x76520 + 5 bytes
 
 AgathaEndBattleText: ; 76525 (1d:6525)
 	TX_FAR _AgathaEndBattleText
-	db $50
+	db "@"
 ; 0x76525 + 5 bytes
 
 AgathaAfterBattleText: ; 7652a (1d:652a)
 	TX_FAR _AgathaAfterBattleText
-	db $50
+	db "@"
 ; 0x7652a + 5 bytes
 
 AgathaText2: ; 7652f (1d:652f)
 	TX_FAR _AgathaText2
-	db $50
+	db "@"
 ; 0x7652f + 5 bytes
 
 AgathaObject: ; 0x76534 (size=44)
@@ -109026,7 +109025,7 @@ HallOfFameNoText: ; 76670 (1d:6670)
 
 UnnamedText_76683: ; 76683 (1d:6683)
 	TX_FAR _UnnamedText_76683
-	db $50
+	db "@"
 ; 0x76683 + 5 bytes
 
 HiddenItems: ; 76688 (1d:6688)
@@ -109138,7 +109137,7 @@ FoundHiddenItemText: ; 7675b (1d:675b)
 
 HiddenItemBagFullText: ; 76794 (1d:6794)
 	TX_FAR _UnnamedText_76794
-	db $50
+	db "@"
 
 HiddenCoins: ; 76799 (1d:6799)
 	ld b, COIN_CASE
@@ -109236,7 +109235,7 @@ DroppedHiddenCoinsText: ; 7684d (1d:684d)
 	TX_FAR _FoundHiddenCoins2Text
 	db $10
 	TX_FAR _DroppedHiddenCoinsText
-	db $50
+	db "@"
 
 Label76857: ; 76857 (1d:6857)
 	ld a, [$cd40]
@@ -117139,7 +117138,7 @@ UnnamedText_8824c: ; 8824c (22:424c)
 	db $0, $4f
 	db "         Owned:@"
 	TX_NUM $cc5c, 1, 3
-	db $50
+	db "@"
 ; 0x88267
 
 _UnnamedText_703ff: ; 88267 (22:4267)
@@ -121155,8 +121154,7 @@ _Route15EndBattleText10: ; 91029 (24:5029)
 
 _Route15AfterBattleText10: ; 9103f (24:503f)
 	db $0, "I'll go train with", $4f
-	db "weaker people.@"
-	db $50
+	db "weaker people.@@"
 ; 0x9103f + 34 bytes + 1
 
 _Route15Text12: ; 91062 (24:5062)
@@ -129227,7 +129225,7 @@ _UnnamedText_71dda: ; a82c9 (2a:42c9)
 	db "doing great!", $57
 ; 0xa82f8
 
-; XXX
+_UnnamedText_ef7d ; a82f8 (2a:42f8)
 	db $0, "There isn't", $4f
 	db "anything to CUT!", $58
 	TX_RAM $cd6d
