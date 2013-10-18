@@ -54424,7 +54424,7 @@ ReadMove: ; 39884 (e:5884)
 	pop hl
 	ret
 
-; move choice modifiaction methods that are applied for each trainer class
+; move choice modification methods that are applied for each trainer class
 ; 0 is sentinel value
 TrainerClassMoveChoiceModifications: ; 3989b (e:589b)
 db 0      ; YOUNGSTER
@@ -54476,6 +54476,7 @@ db 1,0    ; AGATHA
 db 1,3,0  ; LANCE
 
 ; trainer pic pointers and base money.
+; money received after battle = base money × level of highest-level enemy mon
 dw YoungsterPic
 db 0,$15,0
 
