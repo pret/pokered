@@ -18633,16 +18633,16 @@ Func_91d0 ; 0x91d0
 	add hl, bc
 	res 4, [hl]
 	res 5, [hl]
-	call Func_91e6
+	call Music_endchannel
 	ret
 ; 0x91e6
 
-Func_91e6 ; 0x91e6
-	call Func_9825
+Music_endchannel: ; 0x91e6
+	call GetNextMusicByte
 	ld d, a
-	cp $ff
-	jp nz, Func_9274
-	ld b, $0
+	cp $ff ; is this command an endchannel?
+	jp nz, Music_callchannel ; no
+	ld b, $0 ; yes
 	ld hl, $c02e
 	add hl, bc
 	bit 1, [hl]
@@ -18691,7 +18691,7 @@ Func_91e6 ; 0x91e6
 	inc de
 	ld a, [de]
 	ld [hl], a
-	jp Func_91e6
+	jp Music_endchannel
 .asm_923f
 	ld hl, $5b1f
 	add hl, bc
@@ -18725,18 +18725,17 @@ Func_91e6 ; 0x91e6
 	add hl, bc
 	ld [hl], b
 	ret
-; 0x9274
 
-Func_9274: ; 0x9274
-	cp $fd
-	jp nz, Func_92a9
-	call Func_9825
+Music_callchannel: ; 0x9274
+	cp $fd ; is this command a callchannel?
+	jp nz, Music_loopchannel ; no
+	call GetNextMusicByte ; yes
 	push af
-	call Func_9825
+	call GetNextMusicByte
 	ld d, a
 	pop af
 	ld e, a
-	push de
+	push de ; store pointer
 	ld d, $0
 	ld a, c
 	add a
@@ -18753,43 +18752,43 @@ Func_9274: ; 0x9274
 	ld [de], a
 	inc de
 	ld a, [hld]
-	ld [de], a
+	ld [de], a ; copy current channel address
 	pop de
 	ld [hl], e
 	inc hl
-	ld [hl], d
+	ld [hl], d ; overwrite current address with pointer
 	ld b, $0
 	ld hl, $c02e
 	add hl, bc
 	set 1, [hl]
-	jp Func_91e6
-; 0x92a9
+	jp Music_endchannel
 
-Func_92a9: ; 0x92a9
-	cp $fe
-	jp nz, Func_92e4
-	call Func_9825
+Music_loopchannel: ; 0x92a9
+	cp $fe ; is this command a loopchannel?
+	jp nz, Music_notetype ; no
+	call GetNextMusicByte ; yes
 	ld e, a
 	and a
-	jr z, .asm_92cd ; 0x92b3 $18
+	jr z, .infiniteLoop
 	ld b, $0
 	ld hl, $c0be
 	add hl, bc
 	ld a, [hl]
 	cp e
-	jr nz, .asm_92cb ; 0x92bd $c
-	ld a, $1
+	jr nz, .loopAgain
+	ld a, $1 ; if no more loops to make,
 	ld [hl], a
-	call Func_9825
-	call Func_9825
-	jp Func_91e6
-.asm_92cb
+	call GetNextMusicByte ; skip pointer
+	call GetNextMusicByte
+	jp Music_endchannel
+.loopAgain ; inc loop count
 	inc a
 	ld [hl], a
-.asm_92cd
-	call Func_9825
+	; fall through
+.infiniteLoop ; overwrite current address with pointer
+	call GetNextMusicByte
 	push af
-	call Func_9825
+	call GetNextMusicByte
 	ld b, a
 	ld d, $0
 	ld a, c
@@ -18800,73 +18799,76 @@ Func_92a9: ; 0x92a9
 	pop af
 	ld [hli], a
 	ld [hl], b
-	jp Func_91e6
-; 0x92e4
+	jp Music_endchannel
 
-Func_92e4: ; 0x92e4
+Music_notetype: ; 0x92e4
 	and $f0
-	cp $d0
-	jp nz, Func_9323
-	ld a, d
+	cp $d0 ; is this command a notetype?
+	jp nz, Music_unknownmusic0xe8 ; no
+	ld a, d ; yes
 	and $f
 	ld b, $0
 	ld hl, $c0c6
 	add hl, bc
-	ld [hl], a
+	ld [hl], a ; store low nibble as speed
 	ld a, c
 	cp $3
-	jr z, .asm_9320 ; 0x92f8 $26
-	call Func_9825
+	jr z, .noiseChannel ; noise channel has 0 params
+	call GetNextMusicByte
 	ld d, a
 	ld a, c
 	cp $2
-	jr z, .asm_930c ; 0x9301 $9
+	jr z, .musicChannel3
 	cp $6
-	jr nz, .asm_9319 ; 0x9305 $12
+	jr nz, .notChannel3
 	ld hl, $c0e7
-	jr .asm_930f ; 0x930a $3
-.asm_930c
+	jr .sfxChannel3
+.musicChannel3
 	ld hl, $c0e6
-.asm_930f
+.sfxChannel3
 	ld a, d
 	and $f
-	ld [hl], a
+	ld [hl], a ; store low nibble of param as duty
 	ld a, d
 	and $30
 	sla a
 	ld d, a
-.asm_9319
+	; fall through
+	
+	; if channel 3, store high nibble as volume
+	; else, store volume (high nibble) and fade (low nibble)
+.notChannel3
 	ld b, $0
 	ld hl, $c0de
 	add hl, bc
 	ld [hl], d
-.asm_9320
-	jp Func_91e6
-; 0x9323
+.noiseChannel
+	jp Music_endchannel
 
-Func_9323: ; 0x9323
+Music_unknownmusic0xe8: ; 0x9323
 	ld a, d
-	cp $e8
-	jr nz, .asm_9335 ; 0x9326 $d
-	ld b, $0
+	cp $e8 ; is this command an unknownmusic0xe8?
+	jr nz, Music_vibrato ; no
+	ld b, $0 ; yes
 	ld hl, $c02e
 	add hl, bc
 	ld a, [hl]
 	xor $1
 	ld [hl], a
-	jp Func_91e6
-.asm_9335
-	cp $ea
-	jr nz, .asm_936d ; 0x9337 $34
-	call Func_9825
+	jp Music_endchannel
+	
+Music_vibrato: ; 0x9335
+	cp $ea ; is this command a vibrato?
+	jr nz, Music_pitchbend ; no
+	call GetNextMusicByte ; yes
 	ld b, $0
 	ld hl, $c04e
 	add hl, bc
-	ld [hl], a
+	ld [hl], a ; store delay 
 	ld hl, $c06e
 	add hl, bc
-	ld [hl], a
-	call Func_9825
+	ld [hl], a ; store delay
+	call GetNextMusicByte
 	ld d, a
 	and $f0
 	swap a
@@ -18878,7 +18880,7 @@ Func_9323: ; 0x9323
 	adc b
 	swap a
 	or e
-	ld [hl], a
+	ld [hl], a ; store rate as both high and low nibbles
 	ld a, d
 	and $f
 	ld d, a
@@ -18886,17 +18888,18 @@ Func_9323: ; 0x9323
 	add hl, bc
 	swap a
 	or d
-	ld [hl], a
-	jp Func_91e6
-.asm_936d
-	cp $eb
-	jr nz, .asm_93a5 ; 0x936f $34
-	call Func_9825
+	ld [hl], a ; store depth as both high and low nibbles
+	jp Music_endchannel
+	
+Music_pitchbend: ; 0x936d
+	cp $eb ; is this command a pitchbend?
+	jr nz, Music_duty ; no
+	call GetNextMusicByte ; yes
 	ld b, $0
 	ld hl, $c076
 	add hl, bc
-	ld [hl], a
-	call Func_9825
+	ld [hl], a ; store first param
+	call GetNextMusicByte
 	ld d, a
 	and $f0
 	swap a
@@ -18907,67 +18910,71 @@ Func_9323: ; 0x9323
 	ld b, $0
 	ld hl, $c0a6
 	add hl, bc
-	ld [hl], d
+	ld [hl], d ; store unknown part of second param
 	ld hl, $c0ae
 	add hl, bc
-	ld [hl], e
+	ld [hl], e ; store unknown part of second param
 	ld b, $0
 	ld hl, $c02e
 	add hl, bc
 	set 4, [hl]
-	call Func_9825
+	call GetNextMusicByte
 	ld d, a
 	jp Func_950a
-.asm_93a5
-	cp $ec
-	jr nz, .asm_93ba ; 0x93a7 $11
-	call Func_9825
+	
+Music_duty: ; 0x93a5
+	cp $ec ; is this command a duty?
+	jr nz, Music_tempo ; no
+	call GetNextMusicByte ; yes
 	rrca
 	rrca
 	and $c0
 	ld b, $0
 	ld hl, $c03e
 	add hl, bc
-	ld [hl], a
-	jp Func_91e6
-.asm_93ba
-	cp $ed
-	jr nz, .asm_93fa ; 0x93bc $3c
-	ld a, c
+	ld [hl], a ; store duty
+	jp Music_endchannel
+	
+Music_tempo: ; 0x93ba
+	cp $ed ; is this command a tempo?
+	jr nz, Music_unknownmusic0xee ; no
+	ld a, c ; yes
 	cp $4
-	jr nc, .asm_93de ; 0x93c1 $1b
-	call Func_9825
-	ld [$c0e8], a
-	call Func_9825
-	ld [$c0e9], a
+	jr nc, .sfxChannel
+	call GetNextMusicByte
+	ld [$c0e8], a ; store first param
+	call GetNextMusicByte
+	ld [$c0e9], a ; store second param
 	xor a
-	ld [$c0ce], a
+	ld [$c0ce], a ; clear RAM
 	ld [$c0cf], a
 	ld [$c0d0], a
 	ld [$c0d1], a
-	jr .asm_93f7 ; 0x93dc $19
-.asm_93de
-	call Func_9825
-	ld [$c0ea], a
-	call Func_9825
-	ld [$c0eb], a
+	jr .musicChannelDone
+.sfxChannel
+	call GetNextMusicByte
+	ld [$c0ea], a ; store first param
+	call GetNextMusicByte
+	ld [$c0eb], a ; store second param
 	xor a
-	ld [$c0d2], a
+	ld [$c0d2], a ; clear RAM
 	ld [$c0d3], a
 	ld [$c0d4], a
 	ld [$c0d5], a
-.asm_93f7
-	jp Func_91e6
-.asm_93fa
-	cp $ee
-	jr nz, .asm_9407 ; 0x93fc $9
-	call Func_9825
-	ld [$c004], a
-	jp Func_91e6
-.asm_9407
-	cp $ef
-	jr nz, .asm_9426 ; 0x9409 $1b
-	call Func_9825
+.musicChannelDone
+	jp Music_endchannel
+	
+Music_unknownmusic0xee: ; 0x93fa
+	cp $ee ; is this command an unknownmusic0xee?
+	jr nz, Music_unknownmusic0xef ; no
+	call GetNextMusicByte ; yes
+	ld [$c004], a ; store first param
+	jp Music_endchannel
+	
+Music_unknownmusic0xef ; 0x9407
+	cp $ef ; is this command an unknownmusic0xef?
+	jr nz, Music_dutycycle ; no
+	call GetNextMusicByte ; yes
 	push bc
 	call Func_9876
 	pop bc
@@ -18979,48 +18986,53 @@ Func_9323: ; 0x9323
 	xor a
 	ld [$c02d], a
 .asm_9423
-	jp Func_91e6
-.asm_9426
-	cp $fc
-	jr nz, .asm_9444 ; 0x9428 $1a
-	call Func_9825
+	jp Music_endchannel
+	
+Music_dutycycle: ; 0x9426
+	cp $fc ; is this command a dutycycle?
+	jr nz, Music_stereopanning ; no
+	call GetNextMusicByte ; yes
 	ld b, $0
 	ld hl, $c046
 	add hl, bc
-	ld [hl], a
+	ld [hl], a ; store full cycle
 	and $c0
 	ld hl, $c03e
 	add hl, bc
-	ld [hl], a
+	ld [hl], a ; store first duty
 	ld hl, $c02e
 	add hl, bc
-	set 6, [hl]
-	jp Func_91e6
-.asm_9444
-	cp $f0
-	jr nz, .asm_9450 ; 0x9446 $8
-	call Func_9825
-	ld [$ff00+$24], a
-	jp Func_91e6
-.asm_9450
-	cp $f8
-	jr nz, .asm_945f ; 0x9452 $b
-	ld b, $0
+	set 6, [hl] ; set dutycycle flag
+	jp Music_endchannel
+	
+Music_stereopanning: ; 0x9444
+	cp $f0 ; is this command a stereopanning?
+	jr nz, Music_unknownmusic0xf8 ; no
+	call GetNextMusicByte ; yes
+	ld [$ff00+$24], a ; store stereopanning
+	jp Music_endchannel
+	
+Music_unknownmusic0xf8: ; 0x9450
+	cp $f8 ; is this command an unknownmusic0xf8?
+	jr nz, Music_octave ; no
+	ld b, $0 ; yes
 	ld hl, $c036
 	add hl, bc
 	set 0, [hl]
-	jp Func_91e6
-.asm_945f
+	jp Music_endchannel
+	
+Music_octave: ; 0x945f
 	and $f0
-	cp $e0
-	jr nz, .asm_9472 ; 0x9463 $d
-	ld hl, $c0d6
+	cp $e0 ; is this command an octave?
+	jr nz, .asm_9472 ; no
+	ld hl, $c0d6 ; yes
 	ld b, $0
 	add hl, bc
 	ld a, d
 	and $f
-	ld [hl], a
-	jp Func_91e6
+	ld [hl], a ; store low nibble as octave
+	jp Music_endchannel
+
 .asm_9472
 	cp $20
 	jr nz, .asm_94bf ; 0x9474 $49
@@ -19043,19 +19055,19 @@ Func_9323: ; 0x9323
 	ld b, $1
 	call Func_9838
 	ld [hl], d
-	call Func_9825
+	call GetNextMusicByte
 	ld d, a
 	ld b, $2
 	call Func_9838
 	ld [hl], d
-	call Func_9825
+	call GetNextMusicByte
 	ld e, a
 	ld a, c
 	cp $7
 	ld a, $0
 	jr z, .asm_94b2 ; 0x94ab $5
 	push de
-	call Func_9825
+	call GetNextMusicByte
 	pop de
 .asm_94b2
 	ld d, a
@@ -19077,9 +19089,9 @@ Func_9323: ; 0x9323
 	add hl, bc
 	bit 0, [hl]
 	jr nz, .asm_94db ; 0x94d1 $8
-	call Func_9825
+	call GetNextMusicByte
 	ld [$ff00+$10], a
-	jp Func_91e6
+	jp Music_endchannel
 .asm_94db
 	ld a, c
 	cp $3
@@ -19103,7 +19115,7 @@ Func_9323: ; 0x9323
 	and $f
 	push af
 	push bc
-	call Func_9825
+	call GetNextMusicByte
 .asm_94fd
 	ld d, a
 	ld a, [$c003]
@@ -19669,7 +19681,7 @@ Func_980d: ; 0x980d
 	ret
 ; 0x9825
 
-Func_9825: ; 0x9825
+GetNextMusicByte: ; 0x9825
 	ld d, $0
 	ld a, c
 	add a
@@ -19680,9 +19692,9 @@ Func_9825: ; 0x9825
 	ld e, a
 	ld a, [hld]
 	ld d, a
-	ld a, [de]
+	ld a, [de] ; get next music command
 	inc de
-	ld [hl], e
+	ld [hl], e ; store address of next command
 	inc hl
 	ld [hl], d
 	ret
@@ -19725,7 +19737,7 @@ Func_9858: ; 0x9858
 	add hl, hl
 	ld d, h
 	ld e, l
-	ld hl, $5b2f
+	ld hl, Unknown_9b2f
 	add hl, de
 	ld e, [hl]
 	inc hl
@@ -19764,53 +19776,53 @@ Func_9876: ; 0x9876
 	ld [$c0e7], a
 	ld d, $8
 	ld hl, $c016
-	call Func_9a89
+	call FillMusicRAM
 	ld hl, $c006
-	call Func_9a89
+	call FillMusicRAM
 	ld d, $4
 	ld hl, $c026
-	call Func_9a89
+	call FillMusicRAM
 	ld hl, $c02e
-	call Func_9a89
+	call FillMusicRAM
 	ld hl, $c03e
-	call Func_9a89
+	call FillMusicRAM
 	ld hl, $c046
-	call Func_9a89
+	call FillMusicRAM
 	ld hl, $c04e
-	call Func_9a89
+	call FillMusicRAM
 	ld hl, $c056
-	call Func_9a89
+	call FillMusicRAM
 	ld hl, $c05e
-	call Func_9a89
+	call FillMusicRAM
 	ld hl, $c066
-	call Func_9a89
+	call FillMusicRAM
 	ld hl, $c06e
-	call Func_9a89
+	call FillMusicRAM
 	ld hl, $c036
-	call Func_9a89
+	call FillMusicRAM
 	ld hl, $c076
-	call Func_9a89
+	call FillMusicRAM
 	ld hl, $c07e
-	call Func_9a89
+	call FillMusicRAM
 	ld hl, $c086
-	call Func_9a89
+	call FillMusicRAM
 	ld hl, $c08e
-	call Func_9a89
+	call FillMusicRAM
 	ld hl, $c096
-	call Func_9a89
+	call FillMusicRAM
 	ld hl, $c09e
-	call Func_9a89
+	call FillMusicRAM
 	ld hl, $c0a6
-	call Func_9a89
+	call FillMusicRAM
 	ld hl, $c0ae
-	call Func_9a89
+	call FillMusicRAM
 	ld a, $1
 	ld hl, $c0be
-	call Func_9a89
+	call FillMusicRAM
 	ld hl, $c0b6
-	call Func_9a89
+	call FillMusicRAM
 	ld hl, $c0c6
-	call Func_9a89
+	call FillMusicRAM
 	ld [$c0e8], a
 	ld a, $ff
 	ld [$c004], a
@@ -19836,7 +19848,7 @@ Func_994e: ; 0x994e
 	ld d, h
 	add hl, hl
 	add hl, de
-	ld de, $4000
+	ld de, SFX_Headers_02
 	add hl, de
 	ld a, h
 	ld [$c0ec], a
@@ -20009,11 +20021,11 @@ Func_9a34: ; 0x9a34
 	ld [$c0e7], a
 	ld d, $a0
 	ld hl, $c006
-	call Func_9a89
+	call FillMusicRAM
 	ld a, $1
 	ld d, $18
 	ld hl, $c0b6
-	call Func_9a89
+	call FillMusicRAM
 	ld [$c0e8], a
 	ld [$c0ea], a
 	ld a, $ff
@@ -20021,7 +20033,8 @@ Func_9a34: ; 0x9a34
 	ret
 ; 0x9a89
 
-Func_9a89: ; 0x9a89
+; fills d bytes at hl with a
+FillMusicRAM: ; 0x9a89
 	ld b, d
 .asm_9a8a
 	ld [hli], a
@@ -20038,12 +20051,12 @@ Func_9a8f: ; 0x9a8f
 	ld d, h
 	add hl, hl
 	add hl, de
-	ld de, $4000
+	ld de, SFX_Headers_02
 	add hl, de
 	ld e, l
 	ld d, h
 	ld hl, $c006
-	ld a, [de]
+	ld a, [de] ; get channel number
 	ld b, a
 	rlca
 	rlca
@@ -20081,7 +20094,7 @@ Func_9a8f: ; 0x9a8f
 .asm_9ad2
 	pop bc
 	pop hl
-	ld a, [de]
+	ld a, [de] ; get channel pointer
 	ld [hli], a
 	inc de
 	ld a, [de]
@@ -20126,7 +20139,10 @@ Func_9a8f: ; 0x9a8f
 	ret
 ; 0x9b16
 
-INCBIN "baserom.gbc",$9b16,$9b47 - $9b16
+INCBIN "baserom.gbc",$9b16,$9b2f - $9b16
+
+Unknown_9b2f: ; 0x9b2f
+INCBIN "baserom.gbc",$9b2f,$9b47 - $9b2f
 
 Func_9b47: ; 0x9b47
 	ld c, $2
