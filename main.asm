@@ -18920,7 +18920,7 @@ Music_pitchbend: ; 0x936d
 	set 4, [hl]
 	call GetNextMusicByte
 	ld d, a
-	jp Func_950a
+	jp Music_notelength
 	
 Music_duty: ; 0x93a5
 	cp $ec ; is this command a duty?
@@ -19044,7 +19044,7 @@ Music_octave: ; 0x945f
 	add hl, bc
 	bit 0, [hl]
 	jr nz, .asm_94bf ; 0x9483 $3a
-	call Func_950a
+	call Music_notelength
 	ld d, a
 	ld b, $0
 	ld hl, $c03e
@@ -19080,7 +19080,7 @@ Music_octave: ; 0x945f
 .asm_94bf
 	ld a, c
 	cp $4
-	jr c, .asm_94db ; 0x94c2 $17
+	jr c, .asm_94db ; if not a sfx
 	ld a, d
 	cp $10
 	jr nz, .asm_94db ; 0x94c7 $12
@@ -19095,12 +19095,12 @@ Music_octave: ; 0x945f
 .asm_94db
 	ld a, c
 	cp $3
-	jr nz, Func_950a ; 0x94de $2a
+	jr nz, Music_notelength ; if not channel 3
 	ld a, d
 	and $f0
 	cp $b0
 	jr z, .asm_94f5 ; 0x94e5 $e
-	jr nc, Func_950a ; 0x94e7 $21
+	jr nc, Music_notelength ; 0x94e7 $21
 	swap a
 	ld b, a
 	ld a, d
@@ -19127,13 +19127,13 @@ Music_octave: ; 0x945f
 	pop bc
 	pop de
 
-Func_950a: ; 0x950a
+Music_notelength: ; 0x950a
 	ld a, d
 	push af
 	and $f
 	inc a
 	ld b, $0
-	ld e, a
+	ld e, a  ; store note length (in 16ths)
 	ld d, b
 	ld hl, $c0c6
 	add hl, bc
@@ -19142,23 +19142,23 @@ Func_950a: ; 0x950a
 	call Func_9847
 	ld a, c
 	cp $4
-	jr nc, .asm_952b ; 0x951f $a
+	jr nc, .sfxChannel
 	ld a, [$c0e8]
 	ld d, a
 	ld a, [$c0e9]
 	ld e, a
-	jr .asm_953e ; 0x9529 $13
-.asm_952b
+	jr .done
+.sfxChannel
 	ld d, $1
 	ld e, $0
 	cp $7
-	jr z, .asm_953e ; 0x9531 $b
+	jr z, .done ; if noise channel
 	call Func_9693
 	ld a, [$c0ea]
 	ld d, a
 	ld a, [$c0eb]
 	ld e, a
-.asm_953e
+.done
 	ld a, l
 	ld b, $0
 	ld hl, $c0ce
@@ -19177,41 +19177,43 @@ Func_950a: ; 0x950a
 	ld hl, $c036
 	add hl, bc
 	bit 0, [hl]
-	jr nz, .asm_9568 ; 0x955c $a
+	jr nz, Music_notepitch ; 0x955c $a
 	ld hl, $c02e
 	add hl, bc
 	bit 2, [hl]
-	jr z, .asm_9568 ; 0x9564 $2
+	jr z, Music_notepitch ; 0x9564 $2
 	pop hl
 	ret
-.asm_9568
+	
+Music_notepitch: ; 0x9568
 	pop af
 	and $f0
-	cp $c0
-	jr nz, .asm_959f ; 0x956d $30
+	cp $c0 ; compare to rest
+	jr nz, .notRest
 	ld a, c
 	cp $4
-	jr nc, .asm_957c ; 0x9572 $8
+	jr nc, .sfxChannel
 	ld hl, $c02a
 	add hl, bc
 	ld a, [hl]
 	and a
-	jr nz, .asm_959e ; 0x957a $22
-.asm_957c
+	jr nz, .done
+	; fall through
+.sfxChannel
 	ld a, c
 	cp $2
-	jr z, .asm_9585 ; 0x957f $4
+	jr z, .musicChannel3
 	cp $6
-	jr nz, .asm_9592 ; 0x9583 $d
-.asm_9585
+	jr nz, .notsfxChannel3
+.musicChannel3
 	ld b, $0
 	ld hl, $5b1f
 	add hl, bc
 	ld a, [$ff00+$25]
 	and [hl]
 	ld [$ff00+$25], a
-	jr .asm_959e ; 0x9590 $c
-.asm_9592
+	jr .done
+.notsfxChannel3
 	ld b, $2
 	call Func_9838
 	ld a, $8
@@ -19219,9 +19221,9 @@ Func_950a: ; 0x950a
 	inc hl
 	ld a, $80
 	ld [hl], a
-.asm_959e
+.done
 	ret
-.asm_959f
+.notRest
 	swap a
 	ld b, $0
 	ld hl, $c0d6
@@ -19238,7 +19240,7 @@ Func_950a: ; 0x950a
 	push de
 	ld a, c
 	cp $4
-	jr nc, .asm_95cd ; 0x95bc $f
+	jr nc, .skip ; if sfx channel
 	ld hl, $c02a
 	ld d, $0
 	ld e, a
@@ -19246,11 +19248,11 @@ Func_950a: ; 0x950a
 	ld a, [hl]
 	and a
 	jr nz, .asm_95cb ; 0x95c7 $2
-	jr .asm_95cd ; 0x95c9 $2
+	jr .skip
 .asm_95cb
 	pop de
 	ret
-.asm_95cd
+.skip
 	ld b, $0
 	ld hl, $c0de
 	add hl, bc
@@ -19286,15 +19288,15 @@ Func_95f8: ; 0x95f8
 	ld d, a
 	ld a, c
 	cp $7
-	jr z, .asm_9613 ; 0x9605 $c
+	jr z, .sfxNoiseChannel
 	cp $4
-	jr nc, .asm_9625 ; 0x9609 $1a
+	jr nc, .skip ; if music noise channel
 	ld hl, $c02a
 	add hl, bc
 	ld a, [hl]
 	and a
-	jr nz, .asm_9625 ; 0x9611 $12
-.asm_9613
+	jr nz, .skip
+.sfxNoiseChannel
 	ld a, [$c004]
 	ld hl, $5b27
 	add hl, bc
@@ -19306,7 +19308,7 @@ Func_95f8: ; 0x95f8
 	and [hl]
 	or d
 	ld d, a
-.asm_9625
+.skip
 	ld a, d
 	ld [$ff00+$25], a
 	ret
@@ -19319,9 +19321,9 @@ Func_9629: ; 0x9629
 	ld d, [hl]
 	ld a, c
 	cp $2
-	jr z, .asm_9644 ; 0x9633 $f
+	jr z, .channel3 ; if music channel 3
 	cp $6
-	jr z, .asm_9644 ; 0x9637 $b
+	jr z, .channel3 ; if sfx channel 3
 	ld a, d
 	and $3f
 	ld d, a
@@ -19330,7 +19332,7 @@ Func_9629: ; 0x9629
 	ld a, [hl]
 	or d
 	ld d, a
-.asm_9644
+.channel3
 	ld b, $1
 	call Func_9838
 	ld [hl], d
@@ -19340,16 +19342,17 @@ Func_9629: ; 0x9629
 Func_964b: ; 0x964b
 	ld a, c
 	cp $2
-	jr z, .asm_9654 ; 0x964e $4
+	jr z, .musicChannel3
 	cp $6
-	jr nz, .asm_9681 ; 0x9652 $2d
-.asm_9654
+	jr nz, .notsfxChannel3
+	; fall through
+.musicChannel3
 	push de
 	ld de, $c0e6
 	cp $2
-	jr z, .asm_965f ; 0x965a $3
+	jr z, .musicChannel3again
 	ld de, $c0e7
-.asm_965f
+.musicChannel3again
 	ld a, [de]
 	add a
 	ld d, $0
@@ -19363,18 +19366,18 @@ Func_964b: ; 0x964b
 	ld b, $f
 	ld a, $0
 	ld [$ff00+$1a], a
-.asm_9674
+.loop
 	ld a, [de]
 	inc de
 	ld [hli], a
 	ld a, b
 	dec b
 	and a
-	jr nz, .asm_9674 ; 0x967a $f8
+	jr nz, .loop
 	ld a, $80
 	ld [$ff00+$1a], a
 	pop de
-.asm_9681
+.notsfxChannel3
 	ld a, d
 	or $80
 	and $c7
