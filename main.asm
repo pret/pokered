@@ -18369,6 +18369,7 @@ INCLUDE "music/sfx/sfx_02_11.tx"
 INCLUDE "music/sfx/sfx_02_12.tx"
 INCLUDE "music/sfx/sfx_02_13.tx"
 
+Unknown_8361:
 INCBIN "baserom.gbc",$8361,$83c3 - $8361
 
 INCLUDE "music/sfx/sfx_02_3f.tx"
@@ -18447,59 +18448,58 @@ INCLUDE "music/sfx/sfx_02_34.tx"
 INCLUDE "music/sfx/sfx_02_35.tx"
 INCLUDE "music/sfx/sfx_02_36.tx"
 
-Func_90c6: ; 0x90c6
+PlayBattleMusic: ; 0x90c6
 	xor a
 	ld [$cfc7], a
 	ld [$d083], a
 	dec a
 	ld [$c0ee], a
-	call PlaySound
+	call PlaySound ; stop music
 	call DelayFrame
-	ld c, $8
-	ld a, [$d05c]
+	ld c, BANK(Music_GymLeaderBattle)
+	ld a, [W_GYMLEADERNO]
 	and a
-	jr z, .asm_90e3 ; 0x90dd $4
-	ld a, $ea
-	jr .asm_9100 ; 0x90e1 $1d
-.asm_90e3
-	ld a, [$d059]
+	jr z, .notGymLeaderBattle
+	ld a, (Music_GymLeaderBattle - $4000) / 3
+	jr .playSong
+.notGymLeaderBattle
+	ld a, [W_CUROPPONENT]
 	cp $c8
-	jr c, .asm_90fe ; 0x90e8 $14
-	cp $f3
-	jr z, .asm_90fa ; 0x90ec $c
-	cp $f7
-	jr nz, .asm_90f6 ; 0x90f0 $4
-	ld a, $ea
-	jr .asm_9100 ; 0x90f4 $a
-.asm_90f6
-	ld a, $ed
-	jr .asm_9100 ; 0x90f8 $6
-.asm_90fa
-	ld a, $f3
-	jr .asm_9100 ; 0x90fc $2
-.asm_90fe
-	ld a, $f0
-.asm_9100
+	jr c, .wildBattle
+	cp SONY3 + $c8
+	jr z, .finalBattle
+	cp LANCE + $c8
+	jr nz, .normalTrainerBattle
+	ld a, (Music_GymLeaderBattle - $4000) / 3 ; lance also plays gym leader theme
+	jr .playSong
+.normalTrainerBattle
+	ld a, (Music_TrainerBattle - $4000) / 3
+	jr .playSong
+.finalBattle
+	ld a, (Music_FinalBattle - $4000) / 3
+	jr .playSong
+.wildBattle
+	ld a, (Music_WildBattle - $4000) / 3
+.playSong
 	jp PlayMusic
-; 0x9103
 
 Func_9103: ; 0x9103
-	ld c, $0
-.asm_9105
+	ld c, CH0
+.loop
 	ld b, $0
 	ld hl, $c026
 	add hl, bc
 	ld a, [hl]
 	and a
-	jr z, .asm_9131 ; 0x910d $22
+	jr z, .nextChannel
 	ld a, c
-	cp $4
-	jr nc, .asm_912e ; 0x9112 $1a
+	cp CH4
+	jr nc, .asm_912e ; if sfx channel
 	ld a, [$c002]
 	and a
-	jr z, .asm_912e ; 0x9118 $14
+	jr z, .asm_912e
 	bit 7, a
-	jr nz, .asm_9131 ; 0x911c $13
+	jr nz, .nextChannel
 	set 7, a
 	ld [$c002], a
 	xor a
@@ -18507,63 +18507,65 @@ Func_9103: ; 0x9103
 	ld [$ff00+$1a], a
 	ld a, $80
 	ld [$ff00+$1a], a
-	jr .asm_9131 ; 0x912c $3
+	jr .nextChannel
 .asm_912e
 	call Func_9138
-.asm_9131
+.nextChannel
 	ld a, c
-	inc c
-	cp $7
-	jr nz, .asm_9105 ; 0x9135 $ce
+	inc c ; inc channel number
+	cp CH7
+	jr nz, .loop 
 	ret
-; 0x9138
 
+; this routine checks flags for music effects currently applied
+; to the channel and calls certain functions based on flags.
+; specific flags are unknown
 Func_9138: ; 0x9138
 	ld b, $0
-	ld hl, $c0b6
+	ld hl, $c0b6 ; delay unitl next note
 	add hl, bc
 	ld a, [hl]
-	cp $1
-	jp z, Func_91d0
-	dec a
+	cp $1 ; if the delay is 1, play next note
+	jp z, PlayNextNote
+	dec a ; otherwise, decrease the delay timer
 	ld [hl], a
 	ld a, c
-	cp $4
-	jr nc, .asm_9154 ; 0x9149 $9
+	cp CH4
+	jr nc, .skip ; if a sfx channel
 	ld hl, $c02a
 	add hl, bc
 	ld a, [hl]
 	and a
-	jr z, .asm_9154 ; 0x9151 $1
+	jr z, .skip
 	ret
-.asm_9154
+.skip
 	ld hl, $c02e
 	add hl, bc
 	bit 6, [hl]
-	jr z, .asm_915f ; 0x915a $3
+	jr z, .asm_915f
 	call Func_980d
 .asm_915f
 	ld b, $0
 	ld hl, $c036
 	add hl, bc
 	bit 0, [hl]
-	jr nz, .asm_9171 ; 0x9167 $8
+	jr nz, .asm_9171
 	ld hl, $c02e
 	add hl, bc
 	bit 2, [hl]
-	jr nz, .asm_9185 ; 0x916f $14
+	jr nz, .asm_9185
 .asm_9171
 	ld hl, $c02e
 	add hl, bc
 	bit 4, [hl]
-	jr z, .asm_917c ; 0x9177 $3
+	jr z, .asm_917c
 	jp Func_96f9
 .asm_917c
 	ld hl, $c04e
 	add hl, bc
 	ld a, [hl]
 	and a
-	jr z, .asm_9186 ; 0x9182 $2
+	jr z, .asm_9186
 	dec [hl]
 .asm_9185
 	ret
@@ -18572,7 +18574,7 @@ Func_9138: ; 0x9138
 	add hl, bc
 	ld a, [hl]
 	and a
-	jr nz, .asm_918f ; 0x918c $1
+	jr nz, .asm_918f
 	ret
 .asm_918f
 	ld d, a
@@ -18581,7 +18583,7 @@ Func_9138: ; 0x9138
 	ld a, [hl]
 	and $f
 	and a
-	jr z, .asm_919c ; 0x9198 $2
+	jr z, .asm_919c
 	dec [hl]
 	ret
 .asm_919c
@@ -18595,24 +18597,24 @@ Func_9138: ; 0x9138
 	ld hl, $c02e
 	add hl, bc
 	bit 3, [hl]
-	jr z, .asm_91bc ; 0x91ac $e
+	jr z, .asm_91bc
 	res 3, [hl]
 	ld a, d
 	and $f
 	ld d, a
 	ld a, e
 	sub d
-	jr nc, .asm_91ba ; 0x91b6 $2
+	jr nc, .asm_91ba
 	ld a, $0
 .asm_91ba
-	jr .asm_91c8 ; 0x91ba $c
+	jr .asm_91c8
 .asm_91bc
 	set 3, [hl]
 	ld a, d
 	and $f0
 	swap a
 	add e
-	jr nc, .asm_91c8 ; 0x91c4 $2
+	jr nc, .asm_91c8
 	ld a, $ff
 .asm_91c8
 	ld d, a
@@ -18620,9 +18622,11 @@ Func_9138: ; 0x9138
 	call Func_9838
 	ld [hl], d
 	ret
-; 0x91d0
 
-Func_91d0 ; 0x91d0
+; this routine executes all music commands that take up no time,
+; like tempo changes, duty changes etc. and doesn't return
+; until the first note is reached
+PlayNextNote ; 0x91d0
 	ld hl, $c06e
 	add hl, bc
 	ld a, [hl]
@@ -18635,7 +18639,6 @@ Func_91d0 ; 0x91d0
 	res 5, [hl]
 	call Music_endchannel
 	ret
-; 0x91e6
 
 Music_endchannel: ; 0x91e6
 	call GetNextMusicByte
@@ -18646,33 +18649,33 @@ Music_endchannel: ; 0x91e6
 	ld hl, $c02e
 	add hl, bc
 	bit 1, [hl]
-	jr nz, .asm_9224 ; 0x91f7 $2b
+	jr nz, .returnFromCall
 	ld a, c
-	cp $3
-	jr nc, .asm_9200 ; 0x91fc $2
-	jr .asm_923f ; 0x91fe $3f
-.asm_9200
+	cp CH3
+	jr nc, .noiseOrSfxChannel
+	jr .asm_923f
+.noiseOrSfxChannel
 	res 2, [hl]
 	ld hl, $c036
 	add hl, bc
 	res 0, [hl]
-	cp $6
-	jr nz, .asm_9214 ; 0x920a $8
+	cp CH6
+	jr nz, .notSfxChannel3
 	ld a, $0
 	ld [$ff00+$1a], a
 	ld a, $80
 	ld [$ff00+$1a], a
-.asm_9214
-	jr nz, .asm_9222 ; 0x9214 $c
+.notSfxChannel3
+	jr nz, .asm_9222
 	ld a, [$c003]
 	and a
-	jr z, .asm_9222 ; 0x921a $6
+	jr z, .asm_9222
 	xor a
 	ld [$c003], a
-	jr .asm_923f ; 0x9220 $1d
+	jr .asm_923f
 .asm_9222
-	jr .asm_9248 ; 0x9222 $24
-.asm_9224
+	jr .asm_9248
+.returnFromCall
 	res 1, [hl]
 	ld d, $0
 	ld a, c
@@ -18680,7 +18683,7 @@ Music_endchannel: ; 0x91e6
 	ld e, a
 	ld hl, $c006
 	add hl, de
-	push hl
+	push hl ; store current channel address
 	ld hl, $c016
 	add hl, de
 	ld e, l
@@ -18690,7 +18693,7 @@ Music_endchannel: ; 0x91e6
 	ld [hli], a
 	inc de
 	ld a, [de]
-	ld [hl], a
+	ld [hl], a ; store channel address from call
 	jp Music_endchannel
 .asm_923f
 	ld hl, $5b1f
@@ -18701,18 +18704,18 @@ Music_endchannel: ; 0x91e6
 .asm_9248
 	ld a, [$c02a]
 	cp $14
-	jr nc, .asm_9251 ; 0x924d $2
-	jr .asm_926e ; 0x924f $1d
+	jr nc, .asm_9251
+	jr .asm_926e
 .asm_9251
 	ld a, [$c02a]
 	cp $86
-	jr z, .asm_926e ; 0x9256 $16
-	jr c, .asm_925c ; 0x9258 $2
-	jr .asm_926e ; 0x925a $12
+	jr z, .asm_926e
+	jr c, .asm_925c
+	jr .asm_926e
 .asm_925c
 	ld a, c
 	cp $4
-	jr z, .asm_9265 ; 0x925f $4
+	jr z, .asm_9265
 	call Func_96c7
 	ret c
 .asm_9265
@@ -18760,7 +18763,7 @@ Music_callchannel: ; 0x9274
 	ld b, $0
 	ld hl, $c02e
 	add hl, bc
-	set 1, [hl]
+	set 1, [hl] ; set the call flag
 	jp Music_endchannel
 
 Music_loopchannel: ; 0x92a9
@@ -18812,14 +18815,14 @@ Music_notetype: ; 0x92e4
 	add hl, bc
 	ld [hl], a ; store low nibble as speed
 	ld a, c
-	cp $3
+	cp CH3
 	jr z, .noiseChannel ; noise channel has 0 params
 	call GetNextMusicByte
 	ld d, a
 	ld a, c
-	cp $2
+	cp CH2
 	jr z, .musicChannel3
-	cp $6
+	cp CH6
 	jr nz, .notChannel3
 	ld hl, $c0e7
 	jr .sfxChannel3
@@ -18917,7 +18920,7 @@ Music_pitchbend: ; 0x936d
 	ld b, $0
 	ld hl, $c02e
 	add hl, bc
-	set 4, [hl]
+	set 4, [hl] ; set pitchbend flag
 	call GetNextMusicByte
 	ld d, a
 	jp Music_notelength
@@ -19024,7 +19027,7 @@ Music_unknownmusic0xf8: ; 0x9450
 Music_octave: ; 0x945f
 	and $f0
 	cp $e0 ; is this command an octave?
-	jr nz, .asm_9472 ; no
+	jr nz, UnknownNoiseCommand ; no
 	ld hl, $c0d6 ; yes
 	ld b, $0
 	add hl, bc
@@ -19033,17 +19036,17 @@ Music_octave: ; 0x945f
 	ld [hl], a ; store low nibble as octave
 	jp Music_endchannel
 
-.asm_9472
-	cp $20
-	jr nz, .asm_94bf ; 0x9474 $49
+UnknownNoiseCommand: ; 0x9472
+	cp $20 ; is this command an unknownnoisecommand?
+	jr nz, .skip ; no
 	ld a, c
-	cp $3
-	jr c, .asm_94bf ; 0x9479 $44
+	cp CH3 ; is this a noise or sfx channel?
+	jr c, .skip ; no
 	ld b, $0
 	ld hl, $c036
 	add hl, bc
 	bit 0, [hl]
-	jr nz, .asm_94bf ; 0x9483 $3a
+	jr nz, .skip
 	call Music_notelength
 	ld d, a
 	ld b, $0
@@ -19063,13 +19066,13 @@ Music_octave: ; 0x945f
 	call GetNextMusicByte
 	ld e, a
 	ld a, c
-	cp $7
+	cp CH7
 	ld a, $0
-	jr z, .asm_94b2 ; 0x94ab $5
+	jr z, .sfxNoiseChannel
 	push de
 	call GetNextMusicByte
 	pop de
-.asm_94b2
+.sfxNoiseChannel
 	ld d, a
 	push de
 	call Func_9629
@@ -19077,30 +19080,30 @@ Music_octave: ; 0x945f
 	pop de
 	call Func_964b
 	ret
-.asm_94bf
+.skip
 	ld a, c
-	cp $4
+	cp CH4
 	jr c, .asm_94db ; if not a sfx
 	ld a, d
 	cp $10
-	jr nz, .asm_94db ; 0x94c7 $12
+	jr nz, .asm_94db
 	ld b, $0
 	ld hl, $c036
 	add hl, bc
 	bit 0, [hl]
-	jr nz, .asm_94db ; 0x94d1 $8
+	jr nz, .asm_94db
 	call GetNextMusicByte
 	ld [$ff00+$10], a
 	jp Music_endchannel
 .asm_94db
 	ld a, c
-	cp $3
-	jr nz, Music_notelength ; if not channel 3
+	cp CH3
+	jr nz, Music_notelength ; if not noise channel
 	ld a, d
 	and $f0
-	cp $b0
-	jr z, .asm_94f5 ; 0x94e5 $e
-	jr nc, Music_notelength ; 0x94e7 $21
+	cp $b0 ; is this command a dnote?
+	jr z, Music_dnote
+	jr nc, Music_notelength
 	swap a
 	ld b, a
 	ld a, d
@@ -19109,14 +19112,15 @@ Music_octave: ; 0x945f
 	ld a, b
 	push de
 	push bc
-	jr .asm_94fd ; 0x94f3 $8
-.asm_94f5
+	jr asm_94fd
+
+Music_dnote:
 	ld a, d
 	and $f
 	push af
 	push bc
-	call GetNextMusicByte
-.asm_94fd
+	call GetNextMusicByte ; get dnote instrument
+asm_94fd
 	ld d, a
 	ld a, [$c003]
 	and a
@@ -19141,7 +19145,7 @@ Music_notelength: ; 0x950a
 	ld l, b
 	call Func_9847
 	ld a, c
-	cp $4
+	cp CH4
 	jr nc, .sfxChannel
 	ld a, [$c0e8]
 	ld d, a
@@ -19151,7 +19155,7 @@ Music_notelength: ; 0x950a
 .sfxChannel
 	ld d, $1
 	ld e, $0
-	cp $7
+	cp CH7
 	jr z, .done ; if noise channel
 	call Func_9693
 	ld a, [$c0ea]
@@ -19177,11 +19181,11 @@ Music_notelength: ; 0x950a
 	ld hl, $c036
 	add hl, bc
 	bit 0, [hl]
-	jr nz, Music_notepitch ; 0x955c $a
+	jr nz, Music_notepitch
 	ld hl, $c02e
 	add hl, bc
 	bit 2, [hl]
-	jr z, Music_notepitch ; 0x9564 $2
+	jr z, Music_notepitch
 	pop hl
 	ret
 	
@@ -19191,7 +19195,7 @@ Music_notepitch: ; 0x9568
 	cp $c0 ; compare to rest
 	jr nz, .notRest
 	ld a, c
-	cp $4
+	cp CH4
 	jr nc, .sfxChannel
 	ld hl, $c02a
 	add hl, bc
@@ -19201,9 +19205,9 @@ Music_notepitch: ; 0x9568
 	; fall through
 .sfxChannel
 	ld a, c
-	cp $2
+	cp CH2
 	jr z, .musicChannel3
-	cp $6
+	cp CH6
 	jr nz, .notsfxChannel3
 .musicChannel3
 	ld b, $0
@@ -19239,7 +19243,7 @@ Music_notepitch: ; 0x9568
 .asm_95b8
 	push de
 	ld a, c
-	cp $4
+	cp CH4
 	jr nc, .skip ; if sfx channel
 	ld hl, $c02a
 	ld d, $0
@@ -19277,7 +19281,6 @@ Music_notepitch: ; 0x9568
 	ld [hl], e
 	call Func_964b
 	ret
-; 0x95f8
 
 Func_95f8: ; 0x95f8
 	ld b, $0
@@ -19287,10 +19290,10 @@ Func_95f8: ; 0x95f8
 	or [hl]
 	ld d, a
 	ld a, c
-	cp $7
+	cp CH7
 	jr z, .sfxNoiseChannel
-	cp $4
-	jr nc, .skip ; if music noise channel
+	cp CH4
+	jr nc, .skip ; if sfx channel
 	ld hl, $c02a
 	add hl, bc
 	ld a, [hl]
@@ -19312,7 +19315,6 @@ Func_95f8: ; 0x95f8
 	ld a, d
 	ld [$ff00+$25], a
 	ret
-; 0x9629
 
 Func_9629: ; 0x9629
 	ld b, $0
@@ -19320,9 +19322,9 @@ Func_9629: ; 0x9629
 	add hl, bc
 	ld d, [hl]
 	ld a, c
-	cp $2
+	cp CH2
 	jr z, .channel3 ; if music channel 3
-	cp $6
+	cp CH6
 	jr z, .channel3 ; if sfx channel 3
 	ld a, d
 	and $3f
@@ -19337,27 +19339,26 @@ Func_9629: ; 0x9629
 	call Func_9838
 	ld [hl], d
 	ret
-; 0x964b
 
 Func_964b: ; 0x964b
 	ld a, c
-	cp $2
-	jr z, .musicChannel3
-	cp $6
+	cp CH2
+	jr z, .channel3
+	cp CH6
 	jr nz, .notsfxChannel3
 	; fall through
-.musicChannel3
+.channel3
 	push de
 	ld de, $c0e6
-	cp $2
-	jr z, .musicChannel3again
+	cp CH2
+	jr z, .musicChannel3
 	ld de, $c0e7
-.musicChannel3again
+.musicChannel3
 	ld a, [de]
 	add a
 	ld d, $0
 	ld e, a
-	ld hl, $4361
+	ld hl, Unknown_8361
 	add hl, de
 	ld e, [hl]
 	inc hl
@@ -19389,7 +19390,6 @@ Func_964b: ; 0x964b
 	ld [hl], d
 	call Func_96b5
 	ret
-; 0x9693
 
 Func_9693: ; 0x9693
 	call Func_96e5
@@ -19411,7 +19411,6 @@ Func_9693: ; 0x9693
 	ld [$c0ea], a
 .asm_96b4
 	ret
-; 0x96b5
 
 Func_96b5: ; 0x96b5
 	call Func_96e5
@@ -19428,7 +19427,6 @@ Func_96b5: ; 0x96b5
 	ld [hl], d
 .asm_96c6
 	ret
-; 0x96c7
 
 Func_96c7: ; 0x96c7
 	call Func_96e5
@@ -19452,7 +19450,6 @@ Func_96c7: ; 0x96c7
 	scf
 	ccf
 	ret
-; 0x96e5
 
 Func_96e5: ; 0x96e5
 	ld a, [$c02a]
@@ -19470,7 +19467,6 @@ Func_96e5: ; 0x96e5
 .asm_96f7
 	scf
 	ret
-; 0x96f9
 
 Func_96f9: ; 0x96f9
 	ld hl, $c02e
@@ -19573,7 +19569,6 @@ Func_96f9: ; 0x96f9
 	res 4, [hl]
 	res 5, [hl]
 	ret
-; 0x978f
 
 Func_978f: ; 0x978f
 	ld hl, $c096
@@ -19663,7 +19658,6 @@ Func_978f: ; 0x978f
 	add hl, bc
 	ld [hl], a
 	ret
-; 0x980d
 
 Func_980d: ; 0x980d
 	ld b, $0
@@ -19682,7 +19676,6 @@ Func_980d: ; 0x980d
 	or d
 	ld [hl], a
 	ret
-; 0x9825
 
 GetNextMusicByte: ; 0x9825
 	ld d, $0
@@ -19701,7 +19694,6 @@ GetNextMusicByte: ; 0x9825
 	inc hl
 	ld [hl], d
 	ret
-; 0x9838
 
 Func_9838: ; 0x9838
 	ld a, c
@@ -19716,7 +19708,6 @@ Func_9838: ; 0x9838
 	ld l, a
 	ld h, $ff
 	ret
-; 0x9847
 
 Func_9847: ; 0x9847
 	ld h, $0
@@ -19732,7 +19723,6 @@ Func_9847: ; 0x9847
 	jr .asm_9849 ; 0x9855 $f2
 .asm_9857
 	ret
-; 0x9858
 
 Func_9858: ; 0x9858
 	ld h, $0
@@ -19758,7 +19748,6 @@ Func_9858: ; 0x9858
 	add d
 	ld d, a
 	ret
-; 0x9876
 
 Func_9876: ; 0x9876
 	ld [$c001], a
@@ -19842,7 +19831,6 @@ Func_9876: ; 0x9876
 	ld a, $77
 	ld [$ff00+$24], a
 	jp Func_9a8f
-; 0x994e
 
 Func_994e: ; 0x994e
 	ld l, a
@@ -19994,7 +19982,6 @@ Func_994e: ; 0x994e
 	jp z, Func_9a8f
 	dec c
 	jp .asm_9967
-; 0x9a34
 
 Func_9a34: ; 0x9a34
 	ld a, $80
@@ -20034,7 +20021,6 @@ Func_9a34: ; 0x9a34
 	ld a, $ff
 	ld [$c004], a
 	ret
-; 0x9a89
 
 ; fills d bytes at hl with a
 FillMusicRAM: ; 0x9a89
@@ -20044,7 +20030,6 @@ FillMusicRAM: ; 0x9a89
 	dec b
 	jr nz, .asm_9a8a ; 0x9a8c $fc
 	ret
-; 0x9a8f
 
 Func_9a8f: ; 0x9a8f
 	ld a, [$c001]
@@ -20140,49 +20125,49 @@ Func_9a8f: ; 0x9a8f
 	ld [$ff00+$24], a
 .asm_9b15
 	ret
-; 0x9b16
 
 INCBIN "baserom.gbc",$9b16,$9b2f - $9b16
 
 Unknown_9b2f: ; 0x9b2f
 INCBIN "baserom.gbc",$9b2f,$9b47 - $9b2f
 
-Func_9b47: ; 0x9b47
-	ld c, $2
-	ld a, $de
+; an alternate start for MeetRival which has a different first measure
+Music_RivalAlternateStart: ; 0x9b47
+	ld c, BANK(Music_MeetRival)
+	ld a, (Music_MeetRival - $4000) / 3
 	call PlayMusic
 	ld hl, $c006
 	ld de, Music_MeetRival_branch_b1a2
-	call Func_9b60
+	call OverwriteChannelPointer
 	ld de, Music_MeetRival_branch_b21d
-	call Func_9b60
+	call OverwriteChannelPointer
 	ld de, Music_MeetRival_branch_b2b5
 
-Func_9b60: ; 0x9b60
+OverwriteChannelPointer: ; 0x9b60
 	ld a, e
 	ld [hli], a
 	ld a, d
 	ld [hli], a
 	ret
-; 0x9b65
 
-Func_9b65: ; 0x9b65
-	ld c, $2
-	ld a, $de
+; an alternate tempo for MeetRival which has a slightly slower tempo
+Music_RivalAlternateTempo: ; 0x9b65
+	ld c, BANK(Music_MeetRival)
+	ld a, (Music_MeetRival - $4000) / 3
 	call PlayMusic
 	ld hl, $c006
 	ld de, Music_MeetRival_branch_b119
-	jp Func_9b60
-; 0x9b75
+	jp OverwriteChannelPointer
 
-Func_9b75: ; 0x9b75
-	call Func_9b47
+; applies both the alternate start and alternate tempo
+Music_RivalAlternateStartAndTempo: ; 0x9b75
+	call Music_RivalAlternateStart
 	ld hl, $c006
 	ld de, Music_MeetRival_branch_b19b
-	jp Func_9b60
-; 0x9b81
+	jp OverwriteChannelPointer
 
-Func_9b81: ; 0x9b81
+; an alternate tempo for Cities1 which is used for the Hall of Fame room
+Music_Cities1AlternateTempo: ; 0x9b81
 	ld a, $a
 	ld [$cfc8], a
 	ld [$cfc9], a
@@ -20190,13 +20175,12 @@ Func_9b81: ; 0x9b81
 	ld [$cfc7], a
 	ld c, $64
 	call DelayFrames
-	ld c, $2
-	ld a, $c3
+	ld c, BANK(Music_Cities1)
+	ld a, (Music_Cities1 - $4000) / 3
 	call PlayMusic
 	ld hl, $c006
 	ld de, Music_Cities1_branch_aa6f
-	jp Func_9b60
-; 0x9ba3
+	jp OverwriteChannelPointer
 
 INCLUDE "music/pkmnhealed.tx"
 INCLUDE "music/routes1.tx"
@@ -36555,8 +36539,8 @@ CeruleanCityScript2: ; 195b1 (6:55b1)
 	ld a, $ff
 	ld [$c0ee], a
 	call PlaySound
-	ld b, BANK(Func_9b47)
-	ld hl, Func_9b47
+	ld b, BANK(Music_RivalAlternateStart)
+	ld hl, Music_RivalAlternateStart
 	call Bankswitch
 	ld a, $1
 	ld [$ff00+$8c], a
@@ -39804,8 +39788,8 @@ OaksLabScript13: ; 1ce32 (7:4e32)
 	ld a, $10
 	ld [$ff00+$8c], a
 	call DisplayTextID
-	ld b, BANK(Func_9b47)
-	ld hl, Func_9b47
+	ld b, BANK(Music_RivalAlternateStart)
+	ld hl, Music_RivalAlternateStart
 	call Bankswitch
 	ld a, $1
 	ld [$ff00+$8c], a
@@ -39874,8 +39858,8 @@ OaksLabScript15: ; 1ceb0 (7:4eb0)
 	ld a, $ff
 	ld [$c0ee], a
 	call PlaySound
-	ld b, BANK(Func_9b47)
-	ld hl, Func_9b47
+	ld b, BANK(Music_RivalAlternateStart)
+	ld hl, Music_RivalAlternateStart
 	call Bankswitch
 	ld a, $15
 	ld [$ff00+$8c], a
@@ -39986,8 +39970,8 @@ OaksLabScript16: ; 1cf12 (7:4f12)
 	ld a, $ff
 	ld [$c0ee], a
 	call PlaySound
-	ld b, BANK(Func_9b47)
-	ld hl, Func_9b47
+	ld b, BANK(Music_RivalAlternateStart)
+	ld hl, Music_RivalAlternateStart
 	call Bankswitch
 	ld a, $1
 	ld [$ff00+$8c], a
@@ -81251,8 +81235,8 @@ Route22Script2: ; 50fb5 (14:4fb5)
 	ld a, $ff
 	ld [$c0ee], a
 	call PlaySound
-	ld b, BANK(Func_9b47)
-	ld hl, Func_9b47
+	ld b, BANK(Music_RivalAlternateStart)
+	ld hl, Music_RivalAlternateStart
 	call Bankswitch
 	ld a, [$cf0d]
 	cp $1
@@ -81322,9 +81306,9 @@ Func_5104e: ; 5104e (14:504e)
 	ld a, $ff
 	ld [$c0ee], a
 	call PlaySound
-	ld b, BANK(Func_9b65)
-	ld hl, Func_9b65
-	call Bankswitch ; indirect jump to Func_9b65 (9b65 (2:5b65))
+	ld b, BANK(Music_RivalAlternateTempo)
+	ld hl, Music_RivalAlternateTempo
+	call Bankswitch ; indirect jump to Music_RivalAlternateTempo (9b65 (2:5b65))
 	ld a, $2
 	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
 	call Func_50ee6
@@ -81400,9 +81384,9 @@ INCBIN "baserom.gbc",$510d9,$510df - $510d9
 	ld a, $ff
 	ld [$c0ee], a
 	call PlaySound
-	ld b, BANK(Func_9b75)
-	ld hl, Func_9b75
-	call Bankswitch ; indirect jump to Func_9b75 (9b75 (2:5b75))
+	ld b, BANK(Music_RivalAlternateStartAndTempo)
+	ld hl, Music_RivalAlternateStartAndTempo
+	call Bankswitch ; indirect jump to Music_RivalAlternateStartAndTempo (9b75 (2:5b75))
 	ld a, [$cf0d]
 	cp $1
 	jr nz, .asm_51134
@@ -82995,9 +82979,9 @@ INCBIN "baserom.gbc",$51c7d,$51c82 - $51c7d
 	ld a, $ff
 	ld [$c0ee], a
 	call PlaySound
-	ld b, BANK(Func_9b47)
-	ld hl, Func_9b47
-	call Bankswitch ; indirect jump to Func_9b47 (9b47 (2:5b47))
+	ld b, BANK(Music_RivalAlternateStart)
+	ld hl, Music_RivalAlternateStart
+	call Bankswitch ; indirect jump to Music_RivalAlternateStart (9b47 (2:5b47))
 	ld de, Unknown_51d1d ; $5d1d
 	ld a, [$cf0d]
 	cp $1
@@ -83909,9 +83893,9 @@ Func_525af: ; 525af (14:65af)
 	ld a, $2
 	ld [W_BATTLETYPE], a ; $d05a
 .asm_525f9
-	ld hl, Func_90c6
-	ld b, BANK(Func_90c6)
-	jp Bankswitch ; indirect jump to Func_90c6 (90c6 (2:50c6))
+	ld hl, PlayBattleMusic
+	ld b, BANK(PlayBattleMusic)
+	jp Bankswitch ; indirect jump to PlayBattleMusic (90c6 (2:50c6))
 
 ; known jump sources: 3f9b6 (f:79b6)
 Func_52601: ; 52601 (14:6601)
@@ -97176,8 +97160,8 @@ PokemonTower2Script1: ; 60563 (18:4563)
 	ld a, $ff
 	ld [$c0ee], a
 	call PlaySound
-	ld b, BANK(Func_9b47)
-	ld hl, Func_9b47
+	ld b, BANK(Music_RivalAlternateStart)
+	ld hl, Music_RivalAlternateStart
 	call Bankswitch
 	ld a, $2
 	ld [W_POKEMONTOWER2CURSCRIPT], a
@@ -98927,8 +98911,8 @@ SSAnne2Script2: ; 6146d (18:546d)
 	ld a, $ff
 	ld [$c0ee], a
 	call PlaySound
-	ld b, BANK(Func_9b47)
-	ld hl, Func_9b47
+	ld b, BANK(Music_RivalAlternateStart)
+	ld hl, Music_RivalAlternateStart
 	call Bankswitch
 	ld a, $3
 	ld [W_SSANNE2CURSCRIPT], a
@@ -109946,8 +109930,8 @@ GaryScript3: ; 75fbb (1d:5fbb)
 	ret
 
 GaryScript4: ; 75fe4 (1d:5fe4)
-	ld b, BANK(Func_9b81)
-	ld hl, Func_9b81
+	ld b, BANK(Music_Cities1AlternateTempo)
+	ld hl, Music_Cities1AlternateTempo
 	call Bankswitch
 	ld a, $2
 	ld [$ff00+$8c], a
