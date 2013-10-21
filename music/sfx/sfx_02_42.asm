@@ -1,9 +1,9 @@
 SFX_02_42_Ch1: ; b362 (2:7362)
-	unknownmusic0xf8
+	executemusic
 	tempo 1, 0
 	stereopanning 119
 	duty 2
-	unknownmusic0xe8
+	togglecall
 	notetype 5, 10, 4
 	octave 3
 	note A#, 4
@@ -24,7 +24,7 @@ SFX_02_42_Ch1: ; b362 (2:7362)
 
 
 SFX_02_42_Ch2: ; b381 (2:7381)
-	unknownmusic0xf8
+	executemusic
 	vibrato 4, 2, 3
 	duty 2
 	notetype 5, 13, 1
@@ -48,7 +48,7 @@ SFX_02_42_Ch2: ; b381 (2:7381)
 
 
 SFX_02_42_Ch3: ; b39d (2:739d)
-	unknownmusic0xf8
+	executemusic
 	notetype 5, 1, 0
 	octave 4
 	note D#, 4

@@ -1,44 +1,15 @@
 SFX_1f_67_Ch1: ; 7c72d (1f:472d)
 	dutycycle 228
-	note C#, 1
-	note D_, 16
-	note D_, 5
-	note E_, 1
-	octave 8
-	note C_, 8
-	note D_, 5
-	note F#, 1
-	octave 8
-	note C_, 8
-	note D_, 5
-	note G#, 1
-	octave 8
-	note C_, 8
-	note D_, 9
-	note A#, 1
-	octave 8
-	note C_, 8
-	note D_, 9
-	note A#, 1
-	octave 8
-	note C_, 8
-	note D_, 9
-	note G#, 1
-	octave 8
-	note C_, 8
-	note D_, 9
-	note F#, 1
-	octave 8
-	note C_, 8
-	note D_, 9
-	note D#, 1
-	octave 8
-	note C_, 8
-	note D_, 16
-	note C#, 3
-	octave 8
-	note C_, 8
-	note C#, 1
-	note C_, 9
+	unknownsfx0x10 47
+	unknownsfx0x20 4, 64, 224, 7
+	unknownsfx0x20 4, 96, 224, 7
+	unknownsfx0x20 4, 128, 224, 7
+	unknownsfx0x20 8, 160, 224, 7
+	unknownsfx0x20 8, 160, 224, 7
+	unknownsfx0x20 8, 128, 224, 7
+	unknownsfx0x20 8, 96, 224, 7
+	unknownsfx0x20 8, 48, 224, 7
+	unknownsfx0x20 15, 18, 224, 7
+	unknownsfx0x10 8
 	endchannel
 ; 0x7c758

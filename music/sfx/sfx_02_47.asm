@@ -1,18 +1,8 @@
 SFX_02_47_Ch1: ; 853b (2:453b)
 	duty 2
-	note D_, 7
-	stereopanning 0
-	note C_, 8
-	note D_, 5
-	note C_, 1
-	note C_, 1
-	note C_, 1
-	note D_, 7
-	stereopanning 0
-	note C_, 8
-	note D_, 2
-	note C_, 1
-	note C_, 1
-	note C_, 1
+	unknownsfx0x20 6, 240, 0, 7
+	unknownsfx0x20 4, 0, 0, 0
+	unknownsfx0x20 6, 240, 0, 7
+	unknownsfx0x20 1, 0, 0, 0
 	endchannel
 ; 0x854e

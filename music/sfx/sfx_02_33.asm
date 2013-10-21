@@ -1,54 +1,25 @@
 SFX_02_33_Ch1: ; 8fe7 (2:4fe7)
 	dutycycle 165
-	note D_, 4
-	unknownmusic0xf4
-	note E_, 2
-	note C_, 7
-	note D_, 14
-	notetype 6, 2, 1
-	note C_, 8
-	note D_, 9
-	unknownmusic0xf4
-	note C#, 10
-	note C_, 8
-	note D_, 9
-	rest 2
-	note C#, 11
-	note C_, 8
+	unknownsfx0x20 3, 244, 65, 6
+	unknownsfx0x20 13, 214, 33, 7
+	unknownsfx0x20 8, 244, 25, 7
+	unknownsfx0x20 8, 193, 26, 7
 	endchannel
 
 
 SFX_02_33_Ch2: ; 8ffa (2:4ffa)
 	dutycycle 204
-	note D_, 5
-	unknownmusic0xf4
-	note G#, 1
-	note C_, 6
-	note D_, 15
-	octave 2
-	octave 8
-	note C_, 7
-	note D_, 9
-	notetype 5, 13, 8
-	note C_, 7
-	note D_, 9
-	notetype 1, 13, 12
-	note C_, 7
+	unknownsfx0x20 4, 244, 128, 5
+	unknownsfx0x20 14, 230, 224, 6
+	unknownsfx0x20 8, 213, 216, 6
+	unknownsfx0x20 8, 209, 220, 6
 	endchannel
 
 
 SFX_02_33_Ch3: ; 900d (2:500d)
-	note D_, 6
-	rest 5
-	note E_, 7
-	note D_, 14
-	note A#, 6
-	note E_, 5
-	note D_, 9
-	rest 5
-	note E_, 6
-	note D_, 9
-	note B_, 2
-	note E_, 5
+	unknownnoise0x20 5, 196, 70
+	unknownnoise0x20 13, 165, 68
+	unknownnoise0x20 8, 196, 69
+	unknownnoise0x20 8, 177, 68
 	endchannel
 ; 0x901a

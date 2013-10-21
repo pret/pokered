@@ -1,15 +1,7 @@
 SFX_08_51_Ch1: ; 204fe (8:44fe)
-	note D_, 5
-	note G#, 16
-	note F_, 6
-	note D_, 3
-	unknownmusic0xf4
-	note E_, 5
-	note D_, 9
-	unknownmusic0xf4
-	note D_, 3
-	note D_, 16
-	unknownmusic0xf2
-	note D_, 2
+	unknownnoise0x20 4, 143, 85
+	unknownnoise0x20 2, 244, 68
+	unknownnoise0x20 8, 244, 34
+	unknownnoise0x20 15, 242, 33
 	endchannel
 ; 0x2050b

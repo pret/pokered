@@ -2,7 +2,7 @@ Music_Lavender_Ch1: ; bb58 (2:7b58)
 	tempo 0, 152
 	stereopanning 119
 	duty 1
-	unknownmusic0xe8
+	togglecall
 	vibrato 0, 8, 8
 	notetype 12, 8, 7
 	rest 16

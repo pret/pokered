@@ -3,7 +3,7 @@ Music_Routes4_Ch1: ; a26a (2:626a)
 	stereopanning 119
 	duty 3
 	vibrato 10, 3, 4
-	unknownmusic0xe8
+	togglecall
 	notetype 12, 10, 2
 	octave 2
 	note G#, 4

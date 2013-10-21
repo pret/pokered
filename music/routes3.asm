@@ -3,7 +3,7 @@ Music_Routes3_Ch1: ; 9fad (2:5fad)
 	stereopanning 119
 	duty 3
 	vibrato 6, 3, 4
-	unknownmusic0xe8
+	togglecall
 	notetype 12, 11, 5
 	octave 3
 	note E_, 1

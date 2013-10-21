@@ -3,7 +3,7 @@ Music_SSAnne_Ch1: ; b3a7 (2:73a7)
 	stereopanning 119
 	duty 1
 	vibrato 8, 3, 4
-	unknownmusic0xe8
+	togglecall
 
 Music_SSAnne_branch_b3b2:
 	notetype 12, 10, 4

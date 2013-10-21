@@ -3,7 +3,7 @@ Music_HallOfFame_Ch1: ; 7fbaf (1f:7baf)
 	stereopanning 119
 	duty 3
 	vibrato 12, 2, 2
-	unknownmusic0xe8
+	togglecall
 	notetype 12, 11, 3
 	rest 16
 	rest 16

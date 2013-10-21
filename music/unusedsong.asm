@@ -185,7 +185,7 @@ Music_UnusedSong_branch_a91b:
 Music_UnusedSong_Ch2: ; a9cf (2:69cf)
 	tempo 0, 144
 	stereopanning 119
-	unknownmusic0xe8
+	togglecall
 	vibrato 6, 1, 5
 
 Music_UnusedSong_branch_a9d8:

@@ -3,7 +3,7 @@ Music_GymLeaderBattle_Ch1: ; 22370 (8:6370)
 	stereopanning 119
 	duty 3
 	vibrato 8, 3, 4
-	unknownmusic0xe8
+	togglecall
 	notetype 12, 11, 3
 	rest 6
 	octave 3

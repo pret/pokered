@@ -1,9 +1,9 @@
 SFX_08_3b_Ch1: ; 239c7 (8:79c7)
-	unknownmusic0xf8
+	executemusic
 	tempo 1, 0
 	stereopanning 119
 	duty 2
-	unknownmusic0xe8
+	togglecall
 	notetype 5, 11, 4
 	octave 4
 	note D_, 4
@@ -26,7 +26,7 @@ SFX_08_3b_Ch1: ; 239c7 (8:79c7)
 
 
 SFX_08_3b_Ch2: ; 239e6 (8:79e6)
-	unknownmusic0xf8
+	executemusic
 	vibrato 8, 2, 7
 	duty 2
 	notetype 5, 12, 5
@@ -47,7 +47,7 @@ SFX_08_3b_Ch2: ; 239e6 (8:79e6)
 
 
 SFX_08_3b_Ch3: ; 239fe (8:79fe)
-	unknownmusic0xf8
+	executemusic
 	notetype 5, 1, 0
 	octave 5
 	note F_, 4

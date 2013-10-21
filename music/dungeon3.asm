@@ -2,7 +2,7 @@ Music_Dungeon3_Ch1: ; 7e9f1 (1f:69f1)
 	tempo 0, 160
 	stereopanning 119
 	duty 3
-	unknownmusic0xe8
+	togglecall
 	vibrato 8, 1, 4
 
 Music_Dungeon3_branch_7e9fc:

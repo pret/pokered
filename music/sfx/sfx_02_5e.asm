@@ -8,12 +8,9 @@ SFX_02_5e_Ch1: ; 83ca (2:43ca)
 	note A_, 2
 	note G_, 2
 	octave 6
-	note C_, 4
-	note C_, 2
-	note D_, 2
-	note C_, 2
-	octave 5
-	note G_, 2
+	db $03
+	db $01
+	unknownsfx0x20 1, 1, 227, 113
 	note A_, 2
 	note F_, 2
 	note G_, 8

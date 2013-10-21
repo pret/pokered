@@ -3,7 +3,7 @@ Music_GameCorner_Ch1: ; 7e20b (1f:620b)
 	stereopanning 119
 	duty 3
 	vibrato 12, 3, 4
-	unknownmusic0xe8
+	togglecall
 	notetype 12, 11, 5
 	octave 3
 	note A_, 6

@@ -1,6 +1,4 @@
 SFX_08_0e_Ch1: ; 20343 (8:4343)
-	note D_, 1
-	note A#, 3
-	note F_, 1
+	unknownnoise0x20 0, 162, 80
 	endchannel
 ; 0x20347

@@ -9,7 +9,7 @@ Music_MeetRival_branch_b123:
 	stereopanning 119
 	duty 3
 	vibrato 6, 3, 4
-	unknownmusic0xe8
+	togglecall
 	notetype 12, 11, 3
 	octave 4
 	note D_, 1
@@ -130,7 +130,7 @@ Music_MeetRival_branch_b1a5:
 	stereopanning 119
 	duty 3
 	vibrato 6, 3, 4
-	unknownmusic0xe8
+	togglecall
 	notetype 12, 11, 3
 	octave 3
 	note D_, 1

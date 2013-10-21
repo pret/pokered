@@ -403,7 +403,7 @@ Music_Cities1_branch_ac00:
 
 Music_Cities1_Ch3: ; ac32 (2:6c32)
 	notetype 12, 1, 1
-	unknownmusic0xe8
+	togglecall
 
 Music_Cities1_branch_ac35:
 	vibrato 0, 0, 0

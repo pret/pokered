@@ -1,27 +1,11 @@
 SFX_1f_53_Ch1: ; 7c631 (1f:4631)
-	note D_, 5
-	note A#, 3
-	note D_, 4
-	note D_, 9
-	unknownmusic0xf1
-	note D#, 5
-	note D_, 16
-	note C_, 1
-	note C_, 1
-	note D_, 3
-	unknownmusic0xf7
-	note D_, 5
-	note D_, 3
-	unknownmusic0xf7
-	note D#, 5
-	note D_, 5
-	unknownmusic0xf7
-	note E_, 5
-	note D_, 9
-	unknownmusic0xf4
-	note F_, 6
-	note D_, 9
-	unknownmusic0xf1
-	note E_, 5
+	unknownnoise0x20 4, 162, 35
+	unknownnoise0x20 8, 241, 52
+	unknownnoise0x20 15, 0, 0
+	unknownnoise0x20 2, 247, 36
+	unknownnoise0x20 2, 247, 52
+	unknownnoise0x20 4, 247, 68
+	unknownnoise0x20 8, 244, 85
+	unknownnoise0x20 8, 241, 68
 	endchannel
 ; 0x7c64a

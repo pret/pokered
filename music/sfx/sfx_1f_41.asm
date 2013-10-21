@@ -1,5 +1,5 @@
 SFX_1f_41_Ch1: ; 7edda (1f:6dda)
-	unknownmusic0xf8
+	executemusic
 	tempo 1, 0
 	stereopanning 119
 	duty 2
@@ -22,7 +22,7 @@ SFX_1f_41_Ch1: ; 7edda (1f:6dda)
 
 
 SFX_1f_41_Ch2: ; 7edf3 (1f:6df3)
-	unknownmusic0xf8
+	executemusic
 	duty 2
 	notetype 5, 12, 2
 	octave 5
@@ -45,7 +45,7 @@ SFX_1f_41_Ch2: ; 7edf3 (1f:6df3)
 
 
 SFX_1f_41_Ch3: ; 7ee09 (1f:6e09)
-	unknownmusic0xf8
+	executemusic
 	notetype 5, 1, 0
 	octave 5
 	note C_, 1

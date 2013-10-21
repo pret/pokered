@@ -3,7 +3,7 @@ Music_WildBattle_Ch1: ; 23099 (8:7099)
 	stereopanning 119
 	duty 3
 	vibrato 6, 3, 4
-	unknownmusic0xe8
+	togglecall
 	notetype 12, 11, 3
 	octave 4
 	note C_, 1

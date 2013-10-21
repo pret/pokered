@@ -2,7 +2,7 @@ Music_DefeatedTrainer_Ch1: ; 23a53 (8:7a53)
 	tempo 0, 224
 	stereopanning 119
 	duty 2
-	unknownmusic0xe8
+	togglecall
 	tempo 0, 224
 	notetype 4, 10, 2
 	octave 4

@@ -40,7 +40,7 @@ Music_CinnabarMansion_branch_7ed19:
 
 Music_CinnabarMansion_Ch2: ; 7ed40 (1f:6d40)
 	duty 2
-	unknownmusic0xe8
+	togglecall
 	vibrato 10, 2, 4
 	notetype 12, 12, 2
 

@@ -2,7 +2,7 @@ Music_MeetEvilTrainer_Ch1: ; 7f69d (1f:769d)
 	tempo 0, 124
 	stereopanning 119
 	duty 2
-	unknownmusic0xe8
+	togglecall
 	notetype 12, 11, 1
 	rest 4
 	octave 3

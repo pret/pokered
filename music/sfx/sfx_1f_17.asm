@@ -1,78 +1,31 @@
 SFX_1f_17_Ch1: ; 7c91b (1f:491b)
 	dutycycle 240
-	note D_, 5
-	unknownmusic0xf7
-	note C_, 9
-	note C_, 7
-	note D_, 7
-	octave 2
-	note C_, 1
-	note C_, 7
-	note D_, 7
-	notetype 7, 15, 0
-	note C_, 6
-	note D_, 7
-	rest 5
-	octave 8
-	note C_, 6
-	note D_, 6
-	notetype 3, 12, 0
-	note C_, 6
-	note D_, 5
-	notetype 3, 10, 0
-	note C_, 6
-	note D_, 9
-	octave 7
-	note G#, 1
-	note C_, 6
+	unknownsfx0x20 4, 247, 8, 6
+	unknownsfx0x20 6, 230, 0, 6
+	unknownsfx0x20 6, 215, 240, 5
+	unknownsfx0x20 6, 196, 224, 5
+	unknownsfx0x20 5, 211, 192, 5
+	unknownsfx0x20 4, 211, 160, 5
+	unknownsfx0x20 8, 225, 128, 5
 	endchannel
 
 
 SFX_1f_17_Ch2: ; 7c93a (1f:493a)
 	dutycycle 10
-	note D_, 5
-	rest 8
-	note C_, 5
-	note C_, 6
-	note D_, 7
-	note A#, 7
-	note C_, 3
-	note C_, 6
-	note D_, 7
-	note A_, 8
-	unknownmusic0xf1
-	note C_, 5
-	note D_, 5
-	note B_, 5
-	octave 7
-	note C_, 5
-	note D_, 6
-	note A#, 4
-	rest 3
-	note C_, 5
-	note D_, 5
-	note B_, 4
-	note A#, 4
-	note C_, 5
-	note D_, 9
-	rest 2
-	note G#, 3
-	note C_, 5
+	unknownsfx0x20 4, 199, 4, 5
+	unknownsfx0x20 6, 166, 2, 5
+	unknownsfx0x20 6, 151, 241, 4
+	unknownsfx0x20 4, 180, 225, 4
+	unknownsfx0x20 5, 163, 194, 4
+	unknownsfx0x20 4, 179, 163, 4
+	unknownsfx0x20 8, 193, 130, 4
 	endchannel
 
 
 SFX_1f_17_Ch3: ; 7c959 (1f:4959)
-	note D_, 13
-	octave 4
-	note E_, 13
-	note D_, 11
-	rest 8
-	note F_, 13
-	note D_, 13
-	note B_, 7
-	note E_, 13
-	note D_, 16
-	note A#, 3
-	note F_, 13
+	unknownnoise0x20 12, 228, 76
+	unknownnoise0x20 10, 199, 92
+	unknownnoise0x20 12, 182, 76
+	unknownnoise0x20 15, 162, 92
 	endchannel
 ; 0x7c966

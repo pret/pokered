@@ -2,7 +2,7 @@ Music_Celadon_Ch1: ; b6c7 (2:76c7)
 	tempo 0, 144
 	stereopanning 119
 	duty 3
-	unknownmusic0xe8
+	togglecall
 	notetype 12, 2, 15
 	rest 8
 	octave 3

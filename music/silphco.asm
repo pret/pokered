@@ -2,7 +2,7 @@ Music_SilphCo_Ch1: ; 7f243 (1f:7243)
 	tempo 0, 160
 	stereopanning 119
 	duty 3
-	unknownmusic0xe8
+	togglecall
 	vibrato 8, 2, 2
 	notetype 6, 11, 3
 	octave 2

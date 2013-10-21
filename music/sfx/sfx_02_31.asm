@@ -1,72 +1,30 @@
 SFX_02_31_Ch1: ; 8f48 (2:4f48)
 	dutycycle 244
-	note D_, 16
-	stereopanning 5
-	note C_, 8
-	note D_, 11
-	octave 8
-	note C_, 1
-	note C_, 8
-	note D_, 7
-	note B_, 5
-	note C#, 1
-	note C_, 8
-	note D_, 5
-	notetype 3, 0, 0
-	note C_, 8
-	note D_, 7
-	note B_, 3
-	note D_, 1
-	note C_, 7
-	note D_, 9
-	note A#, 2
-	note D_, 5
-	note C_, 7
+	unknownsfx0x20 15, 240, 5, 7
+	unknownsfx0x20 10, 224, 0, 7
+	unknownsfx0x20 6, 180, 16, 7
+	unknownsfx0x20 4, 211, 0, 7
+	unknownsfx0x20 6, 178, 32, 6
+	unknownsfx0x20 8, 161, 36, 6
 	endchannel
 
 
 SFX_02_31_Ch2: ; 8f63 (2:4f63)
 	dutycycle 34
-	note D_, 16
-	note B_, 1
-	rest 4
-	note C_, 7
-	note D_, 11
-	note A#, 1
-	rest 2
-	note C_, 7
-	note D_, 7
-	note G#, 5
-	notetype 2, 0, 6
-	note D_, 5
-	note A_, 4
-	rest 2
-	note C_, 7
-	note D_, 7
-	note G#, 3
-	octave 7
-	note C_, 6
-	note D_, 9
-	note F#, 2
-	unknownmusic0xe8
-	note C_, 6
+	unknownsfx0x20 15, 176, 195, 6
+	unknownsfx0x20 10, 160, 193, 6
+	unknownsfx0x20 6, 132, 210, 6
+	unknownsfx0x20 4, 147, 193, 6
+	unknownsfx0x20 6, 130, 225, 5
+	unknownsfx0x20 8, 97, 232, 5
 	endchannel
 
 
 SFX_02_31_Ch3: ; 8f7e (2:4f7e)
-	note D_, 7
-	octave 2
-	note E_, 13
-	note D_, 16
-	notetype 6, 3, 12
-	note D_, 11
-	rest 6
-	note E_, 11
-	note D_, 2
-	note B_, 3
-	note F_, 12
-	note D_, 16
-	rest 3
-	note E_, 13
+	unknownnoise0x20 6, 230, 76
+	unknownnoise0x20 15, 214, 60
+	unknownnoise0x20 10, 197, 74
+	unknownnoise0x20 1, 178, 91
+	unknownnoise0x20 15, 194, 76
 	endchannel
 ; 0x8f8e

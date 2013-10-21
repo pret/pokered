@@ -1,18 +1,8 @@
 SFX_08_65_Ch1: ; 205fe (8:45fe)
-	note D_, 16
-	note E_, 16
-	note E_, 2
-	note D_, 9
-	note G#, 16
-	note E_, 2
-	note D_, 9
-	rest 16
-	note E_, 2
-	note D_, 9
-	unknownmusic0xf2
-	note E_, 3
-	note D_, 16
-	unknownmusic0xf2
-	note E_, 2
+	unknownnoise0x20 15, 79, 65
+	unknownnoise0x20 8, 143, 65
+	unknownnoise0x20 8, 207, 65
+	unknownnoise0x20 8, 242, 66
+	unknownnoise0x20 15, 242, 65
 	endchannel
 ; 0x2060e

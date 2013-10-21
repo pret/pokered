@@ -1,62 +1,29 @@
 SFX_08_6a_Ch1: ; 206a9 (8:46a9)
 	dutycycle 57
-	note D_, 5
-	unknownmusic0xf4
-	note C_, 1
-	note C_, 7
-	note D_, 4
-	rest 5
-	note C_, 1
-	note C_, 6
-	note D_, 6
-	note B_, 6
-	note C_, 1
-	note C_, 7
-	note D_, 14
-	octave 6
-	rest 1
-	note C_, 7
+	unknownsfx0x20 4, 244, 0, 6
+	unknownsfx0x20 3, 196, 0, 5
+	unknownsfx0x20 5, 181, 0, 6
+	unknownsfx0x20 13, 226, 192, 6
 	loopchannel 3, SFX_08_6a_Ch1
-	note D_, 9
-	notetype 1, 0, 0
-	note C_, 7
+	unknownsfx0x20 8, 209, 0, 6
 	endchannel
 
 
 SFX_08_6a_Ch2: ; 206c4 (8:46c4)
 	dutycycle 141
-	note D_, 6
-	octave 4
-	octave 8
-	note C_, 6
-	note D_, 5
-	note B_, 5
-	octave 8
-	note C_, 5
-	note D_, 7
-	note A#, 6
-	unknownmusic0xe8
-	note C_, 6
-	note D_, 15
-	notetype 1, 10, 0
-	note C_, 7
+	unknownsfx0x20 5, 228, 224, 5
+	unknownsfx0x20 4, 180, 224, 4
+	unknownsfx0x20 6, 165, 232, 5
+	unknownsfx0x20 14, 209, 160, 6
 	loopchannel 3, SFX_08_6a_Ch2
 	endchannel
 
 
 SFX_08_6a_Ch3: ; 206db (8:46db)
-	note D_, 6
-	rest 4
-	note D#, 4
-	note D_, 4
-	note A_, 3
-	note E_, 4
-	note D_, 11
-	note B_, 6
-	note D#, 4
-	note D_, 16
-	rest 4
-	note D#, 3
+	unknownnoise0x20 5, 195, 51
+	unknownnoise0x20 3, 146, 67
+	unknownnoise0x20 10, 181, 51
+	unknownnoise0x20 15, 195, 50
 	loopchannel 2, SFX_08_6a_Ch3
 	endchannel
 ; 0x206ec

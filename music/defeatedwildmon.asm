@@ -1,10 +1,10 @@
 Music_DefeatedWildMon_Ch1: ; 23b74 (8:7b74)
 	tempo 0, 112
 	stereopanning 119
-	unknownmusic0xf8
+	executemusic
 	duty 3
 	vibrato 6, 3, 4
-	unknownmusic0xe8
+	togglecall
 	tempo 0, 112
 	notetype 12, 11, 7
 	octave 3
@@ -68,7 +68,7 @@ Music_DefeatedWildMon_branch_23b8b:
 
 
 Music_DefeatedWildMon_Ch2: ; 23bc1 (8:7bc1)
-	unknownmusic0xf8
+	executemusic
 	duty 2
 	notetype 12, 12, 3
 	octave 4
@@ -143,7 +143,7 @@ Music_DefeatedWildMon_branch_23bce:
 
 
 Music_DefeatedWildMon_Ch3: ; 23c0e (8:7c0e)
-	unknownmusic0xf8
+	executemusic
 	notetype 12, 2, 0
 	octave 5
 	note E_, 1

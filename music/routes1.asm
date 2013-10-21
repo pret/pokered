@@ -3,7 +3,7 @@ Music_Routes1_Ch1: ; 9bde (2:5bde)
 	stereopanning 119
 	vibrato 4, 2, 3
 	duty 2
-	unknownmusic0xe8
+	togglecall
 
 Music_Routes1_branch_9be9:
 	notetype 12, 10, 1

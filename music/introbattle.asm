@@ -3,7 +3,7 @@ Music_IntroBattle_Ch1: ; 7f844 (1f:7844)
 	stereopanning 119
 	duty 3
 	vibrato 6, 3, 4
-	unknownmusic0xe8
+	togglecall
 	notetype 12, 11, 1
 	rest 8
 	octave 2
