@@ -17,7 +17,7 @@
 .*.swp
 
 # no data from extras/
-extras/*.json
+*.json
 
 # for any of the poor souls with save game files in their working directory
 baserom.sgm

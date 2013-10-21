@@ -1,17 +1,16 @@
 .SUFFIXES: .asm .tx .o .gbc
 
-TEXTFILES =	text/oakspeech.tx text/pokedex.tx text/mapRedsHouse1F.tx \
-		text/mapBluesHouse.tx text/mapPalletTown.tx
+TEXTFILES := $(shell find ./ -type f -name '*.asm')
 
 all: pokered.gbc
 
-pokered.o: pokered.asm main.tx constants.asm ${TEXTFILES}
-	rgbasm -o pokered.o pokered.asm
+pokered.o: pokered.tx main.tx constants.tx music.tx wram.tx ${TEXTFILES:.asm=.tx}
+	rgbasm -o pokered.o pokered.tx
 	
-pokeblue.o: pokeblue.asm main.tx constants.asm ${TEXTFILES}
-	rgbasm -o pokeblue.o pokeblue.asm
+pokeblue.o: pokeblue.tx main.tx constants.tx music.tx wram.tx ${TEXTFILES:.asm=.tx}
+	rgbasm -o pokeblue.o pokeblue.tx
 
-redrle: extras/redrle.c
+redrle: extras/redtools/redrle.c
 	${CC} -o $@ $>
 
 .asm.tx:
@@ -25,8 +24,9 @@ pokered.gbc: pokered.o
 pokeblue.gbc: pokeblue.o
 	rgblink -o $@ $*.o
 	rgbfix -jsv -k 01 -l 0x33 -m 0x13 -p 0 -r 03 -t "POKEMON BLUE" $@
+	cmp blue.gbc $@
 
 clean:
-	rm -f main.tx pokered.o pokered.gbc pokeblue.o pokeblue.gbc redrle ${TEXTFILES}
+	rm -f pokered.o pokered.gbc pokeblue.o pokeblue.gbc redrle $(TEXTFILES:.asm=.tx)
 
 more: pokered.gbc pokeblue.gbc

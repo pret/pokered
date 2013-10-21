@@ -4811,3035 +4811,1684 @@ UnknSong_md_90b9:
 
 	mus_end
 
-UnknSong_md_90c6:
-		mus_note noteA#, note1
-
-	mus_mod 199, 12, 15; 90C9
-	mus_mod 131, 13, 0
-		mus_note noteD#, note2_4_8
-
-	mus_mod 238, 12, 0
-		mus_note noteRst, note2_4_8
-
-		mus_note noteB, note8; 90D2
-		mus_note noteD, note4
-		mus_note noteRst, note2_4_8
-
-		mus_note noteA#, note1
-		mus_note noteD, note16
-		mus_note noteC, note2_4_8_16; 90D7
-		mus_note noteC, note2_16
-
-	db $fa
-
-		mus_note noteF, note2_4_16
-
-	db $d0
-
-		mus_note noteA#, note2; 90DC
-		mus_note noteD, note2_16
-		mus_note noteC, note4_16
-		mus_note noteD#, note2_4_8_16
-
-	mus_mod 24, 1, 13
-	db $fa; 90E3
-
-		mus_note noteF, note2_8
-
-	db $d0
-	mus_jump 200, $1438
-	mus_jump 243, $C28
-	mus_jump 247, $420; 90F1
-		mus_note noteD#, note2_4_8_16
-
-	mus_mod 24, 0, 10
-		mus_note noteD#, note2_4_8_16
-
-	mus_tempo 24, 6
-		mus_note noteD#, note2_4_8_16; 90FA
-
-	db $f3
-
-		mus_note noteC#, note2_16
-		mus_note noteC, note8_16
-		mus_note noteD#, note2_4_8_16
-
-	mus_volume 195; 9100
-		mus_note noteA#, note8
-		mus_note noteD, note4
-		mus_note noteC, note2_4_8_16
-		mus_note noteC, note16
-		mus_note noteC, note4_8_16; 9105
-		mus_note noteC, note16
-		mus_note noteD, note8
-		mus_note noteD, note4_8_16
-		mus_note noteRst, note16
-
-		mus_note noteC, note2_8; 910A
-		mus_note noteG, note2_4_8_16
-		mus_note noteA#, note2
-		mus_note noteD, note2_16
-		mus_note noteD, note8_16
-		mus_note noteG, note2_8; 910F
-
-	mus_jump 4, $1A30
-	db $fa
-
-		mus_note noteC, note8_16
-		mus_note noteRst, note16
-
-		mus_note noteA#, note2; 9117
-		mus_note noteD, note2_16
-		mus_note noteC#, note4_16
-		mus_note noteRst, note2_4
-
-		mus_note noteG, note1
-		mus_note noteD, note16; 911C
-		mus_note noteC#, note4
-		mus_note noteRst, note2_4
-
-	mus_end
-
-UnknSong_md_9120:
-	mus_mod 2, 12, 0
-		mus_note noteA#, note1; 9123
-
-	mus_octave oct7
-		mus_note noteD, note4_8
-
-	mus_octave oct7
-		mus_note noteC#, note2_8_16
-		mus_note noteD#, note2_4_8_16; 9128
-		mus_note noteG#, note16
-
-	mus_octave oct7
-		mus_note noteC#, note2_8_16
-		mus_note noteC#, note2_16
-		mus_note noteC, note4; 912D
-		mus_note noteRst, note2_4_8
-
-		mus_note noteD#, note2_16
-		mus_note noteF, note8
-		mus_note noteG, note2_8
-		mus_note noteC, note2_4_16; 9132
-
-	mus_jump 7, $CE20
-		mus_note noteRst, note2_8
-
-		mus_note noteC, note4_8_16
-		mus_note noteC, note16
-		mus_note noteD, note8; 913A
-		mus_note noteB, note4_8_16
-		mus_note noteRst, note16
-
-		mus_note noteC, note2_8
-		mus_note noteG, note2_4_8_16
-
-	mus_jump 1, $D0CA; 9142
-		mus_note noteF, note8
-		mus_note noteD#, note2_4_8
-		mus_note noteG, note2
-		mus_note noteG, note2_8
-
-	mus_jump 4, $930; 914A
-		mus_note noteD, note8
-		mus_note noteD, note2_8_16
-		mus_note noteRst, note16
-
-		mus_note noteC, note2_8
-		mus_note noteG, note2_4_8_16; 914F
-		mus_note noteA#, note2
-		mus_note noteD, note2_16
-		mus_note noteC, note8
-		mus_note noteRst, note2_8
-
-		mus_note noteD, note8; 9154
-		mus_note noteD, note2_4_8_16
-		mus_note noteRst, note16
-
-		mus_note noteC, note2_8
-		mus_note noteRst, note2_4
-
-		mus_note noteG, note4_8_16; 9159
-		mus_note noteD, note2_16
-		mus_note noteC, note4
-		mus_note noteRst, note2_4_8
-
-		mus_note noteC, note2_4_8
-		mus_note noteF, note2_16; 915E
-		mus_note noteC, note4_8_16
-		mus_note noteC, note16
-		mus_note noteD, note8
-		mus_note noteD#, note4_8_16
-		mus_note noteRst, note16; 9163
-
-		mus_note noteC, note2_8
-		mus_note noteRst, note2_4
-
-		mus_note noteE, note4_8_16
-		mus_note noteD, note16
-		mus_note noteC, note2_16; 9168
-		mus_note noteD, note8
-		mus_note noteD, note2_4_8_16
-		mus_note noteRst, note16
-
-		mus_note noteC, note2_8
-		mus_note noteRst, note2_4; 916D
-
-		mus_note noteF, note4_8_16
-		mus_note noteD, note16
-		mus_note noteC#, note4_16
-		mus_note noteD, note8
-		mus_note noteD, note2_4_8_16; 9172
-		mus_note noteRst, note16
-
-		mus_note noteC, note2_8
-		mus_note noteRst, note2_4
-
-		mus_note noteF#, note4_8_16
-		mus_note noteD, note2_16; 9177
-		mus_note noteC, note4
-		mus_note noteRst, note4
-
-	db $f9
-
-		mus_note noteF, note4_8_16
-		mus_note noteD, note8; 917C
-		mus_note noteE, note2_4_8_16
-		mus_note noteRst, note16
-
-		mus_note noteC, note2_8
-		mus_note noteG, note2_4_8_16
-		mus_note noteA#, note2; 9181
-		mus_note noteD, note2_16
-		mus_note noteC, note8_16
-		mus_note noteD#, note4_8
-		mus_note noteRst, note2_8
-
-		mus_note noteD, note8; 9186
-		mus_note noteF, note4_8_16
-		mus_note noteRst, note16
-
-		mus_note noteC, note2_8
-		mus_note noteG, note2_4_8_16
-		mus_note noteA#, note2; 918B
-		mus_note noteD, note16
-		mus_note noteC, note8
-		mus_note noteRst, note2_8
-
-		mus_note noteF, note2
-		mus_note noteD, note8; 9190
-		mus_note noteF, note2_4_8_16
-		mus_note noteRst, note16
-
-		mus_note noteC, note2_8
-		mus_note noteG, note2_4_8_16
-
-	mus_octave oct1; 9195
-		mus_note noteC, note1
-		mus_note noteA#, note2
-		mus_note noteD, note2_16
-		mus_note noteC, note8_16
-		mus_note noteD#, note4_8; 919A
-		mus_note noteRst, note2_8
-
-		mus_note noteG, note2_4_8_16
-		mus_note noteRst, note2_4
-
-		mus_note noteD#, note4_8_16
-		mus_note noteB, note4_8_16; 919F
-		mus_note noteG, note2
-		mus_note noteD, note8
-		mus_note noteF#, note4_8_16
-		mus_note noteRst, note16
-
-		mus_note noteC, note2_8; 91A4
-		mus_note noteF, note2_4_8_16
-		mus_note noteD, note8
-		mus_note noteD, note2_4_8_16
-		mus_note noteRst, note16
-
-		mus_note noteC, note2_8; 91A9
-		mus_note noteRst, note2_4
-
-		mus_note noteF, note2_4_8_16
-		mus_note noteD, note2_16
-		mus_note noteC, note2_4_8_16
-		mus_note noteRst, note2_4; 91AE
-
-		mus_note noteA, note2_4_8_16
-		mus_note noteG, note2_8_16
-
-	mus_octave oct1
-		mus_note noteC, note1
-		mus_note noteF, note2; 91B3
-		mus_note noteG, note2_4
-		mus_note noteA, note8_16
-		mus_note noteD#, note16
-		mus_note noteC, note8_16
-		mus_note noteD#, note2_4_8_16; 91B8
-		mus_note noteC, note16
-		mus_note noteC#, note2_16
-		mus_note noteC, note2_4_16
-		mus_note noteRst, note2_4
-
-	db $de; 91BD
-
-		mus_note noteG, note2_8_16
-
-	mus_octave oct1
-	mus_volume 203
-		mus_note noteD#, note2
-		mus_note noteG#, note4; 91C3
-		mus_note noteD#, note16
-		mus_note noteC, note8_16
-		mus_note noteD#, note2_4_8_16
-
-	mus_end
-
-UnknSong_md_91c8:
-		mus_note noteF, note2; 91C8
-		mus_note noteC, note4_8_16
-		mus_note noteC, note4
-		mus_note noteRst, note2_4_8
-
-		mus_note noteD#, note2_16
-		mus_note noteF, note2_16; 91CD
-		mus_note noteG, note8_16
-		mus_note noteRst, note2_8
-
-		mus_note noteD, note8
-		mus_note noteF#, note2_4_8_16
-		mus_note noteRst, note16; 91D2
-
-		mus_note noteC, note2_8
-		mus_note noteG, note2_4_8_16
-		mus_note noteD, note8
-		mus_note noteE, note2_4_8_16
-		mus_note noteRst, note16; 91D7
-
-		mus_note noteC, note2_8
-		mus_note noteG, note2
-		mus_note noteD, note8
-		mus_note noteD, note2_4_8_16
-		mus_note noteRst, note16; 91DC
-
-		mus_note noteC, note2_8
-		mus_note noteRst, note2_4
-
-		mus_note noteA#, note4_8_16
-		mus_note noteRst, note2_4
-
-		mus_note noteA#, note2_4_8_16; 91E1
-		mus_note noteRst, note2_4_8
-
-	mus_octave oct1
-		mus_note noteF, note8
-		mus_note noteRst, note2_8
-
-		mus_note noteRst, note2_4_8; 91E6
-
-		mus_note noteD, note4_8
-		mus_note noteF, note2_16
-		mus_note noteF, note2
-
-	mus_jump 255, $74C2
-		mus_note noteF, note8_16; 91EE
-		mus_note noteC, note4_8_16
-		mus_note noteC, note16
-		mus_note noteD, note8
-		mus_note noteD, note2_4_8_16
-		mus_note noteRst, note16; 91F3
-
-		mus_note noteC, note2_8
-		mus_note noteRst, note2_4
-
-		mus_note noteE, note2_4_8_16
-		mus_note noteD, note16
-		mus_note noteD, note2_4; 91F8
-		mus_note noteG, note2_8
-
-	mus_jump 3, $230
-		mus_note noteC#, note2_16
-		mus_note noteD#, note1
-		mus_note noteRst, note2_4; 9200
-
-		mus_note noteA, note4_8_16
-		mus_note noteD, note8
-		mus_note noteD#, note4_8_16
-		mus_note noteRst, note16
-
-		mus_note noteC, note2_8; 9205
-		mus_note noteRst, note2_4
-
-		mus_note noteG#, note4_8_16
-
-	mus_jump 6, $820
-		mus_note noteD#, note2_4_8_16
-		mus_note noteC, note16; 920D
-
-	mus_octave oct7
-		mus_note noteC#, note2_8_16
-		mus_note noteD#, note2_4_8_16
-		mus_note noteG#, note16
-
-	mus_octave oct7; 9212
-		mus_note noteC#, note2_8_16
-		mus_note noteD, note16
-		mus_note noteC, note2_4_16
-
-	db $fa
-
-		mus_note noteC, note4; 9217
-		mus_note noteRst, note16
-
-		mus_note noteA#, note2
-		mus_note noteD, note2_16
-		mus_note noteC, note4_8_16
-		mus_note noteA#, note1; 921C
-
-	mus_mod 3, 12, 0
-		mus_note noteC#, note2_16
-		mus_note noteC#, note2_4_8
-		mus_note noteC#, note2_16
-		mus_note noteD, note4_16; 9223
-		mus_note noteRst, note2_4
-
-		mus_note noteG#, note2_4_8_16
-		mus_note noteC#, note4_8_16
-		mus_note noteC, note16
-		mus_note noteG, note2_8; 9228
-		mus_note noteG#, note2
-		mus_note noteF, note1
-		mus_note noteD, note8
-		mus_note noteC, note4_8_16
-		mus_note noteRst, note16; 922D
-
-		mus_note noteC#, note2_8
-
-	mus_octave oct2
-		mus_note noteD, note8
-		mus_note noteC#, note4_8_16
-		mus_note noteRst, note16; 9232
-
-		mus_note noteC#, note2_8
-		mus_note noteF, note2_4_8
-		mus_note noteF, note4_16
-
-	mus_octave oct6
-		mus_note noteC#, note2_8_16; 9237
-		mus_note noteD, note8_16
-		mus_note noteC#, note4
-		mus_note noteC#, note2_8_16
-		mus_note noteG, note2
-		mus_note noteRst, note4; 923C
-
-	mus_octave oct1
-		mus_note noteF, note8
-		mus_note noteD, note8
-		mus_note noteC#, note1
-		mus_note noteF, note2_4; 9241
-		mus_note noteC, note2_8
-
-	mus_volume 37
-		mus_note noteA#, note4_8_16
-
-	mus_octave oct7
-		mus_note noteD, note4_8; 9247
-
-	db $fa
-
-		mus_note noteD, note2_8_16
-		mus_note noteRst, note16
-
-	mus_jump 20, $230
-		mus_note noteC#, note2_16; 924F
-		mus_note noteC#, note2_4_8
-
-	db $fa
-
-		mus_note noteD, note2_8_16
-		mus_note noteRst, note16
-
-	mus_jump 134, $1628; 9257
-		mus_note noteD#, note2_16
-		mus_note noteC, note8_16
-		mus_note noteC#, note2_16
-		mus_note noteC#, note8_16
-		mus_note noteG, note2_8; 925C
-
-	mus_jump 4, $428
-		mus_note noteRst, note2_4_8
-
-		mus_note noteRst, note2
-
-		mus_note noteF, note4_8_16
-
-	db $d8; 9264
-	db $fa
-
-		mus_note noteC, note4_8
-		mus_note noteRst, note16
-
-	mus_octave oct7
-		mus_note noteD, note4_16; 9269
-		mus_note noteA#, note1
-
-	mus_mod 5, 12, 0
-		mus_note noteD, note8
-		mus_note noteD, note4_8_16
-		mus_note noteRst, note16; 9270
-
-		mus_note noteC, note2_8
-		mus_note noteG, note16
-		mus_note noteRst, note2_8
-
-	mus_jump 253, $A9C2
-		mus_note noteF, note8_16; 9278
-		mus_note noteRst, note2_4_8
-
-		mus_note noteD, note4_8
-		mus_note noteF, note2_16
-
-	db $f5
-
-		mus_note noteRst, note2_4_8; 927D
-
-		mus_note noteD, note4_8
-		mus_note noteF, note2_16
-		mus_note noteF, note2
-
-	db $f1
-
-		mus_note noteF, note1; 9282
-
-	db $d5
-
-		mus_note noteC#, note4_8_16
-		mus_note noteC, note16
-		mus_note noteG, note2_8
-		mus_note noteG#, note2; 9287
-		mus_note noteF, note1
-		mus_note noteD, note8
-		mus_note noteC, note4_8_16
-		mus_note noteRst, note16
-
-		mus_note noteC#, note2_8; 928C
-
-	mus_octave oct2
-		mus_note noteD, note8
-		mus_note noteC#, note4_8_16
-		mus_note noteRst, note16
-
-		mus_note noteC#, note2_8; 9291
-		mus_note noteF, note2_4_8
-		mus_note noteF, note4_16
-
-	mus_octave oct6
-		mus_note noteD, note2_8_16
-		mus_note noteC#, note8_16; 9296
-		mus_note noteC#, note4
-		mus_note noteD#, note2_8_16
-		mus_note noteC#, note8_16
-
-	db $d1
-
-		mus_note noteG, note4; 929B
-		mus_note noteD, note4
-		mus_note noteG, note8_16
-		mus_note noteC, note4_8_16
-		mus_note noteC, note16
-		mus_note noteD, note8; 92A0
-		mus_note noteD, note2_4_8_16
-		mus_note noteRst, note16
-
-		mus_note noteC, note2_8
-		mus_note noteRst, note2_4
-
-		mus_note noteRst, note2_4_8_16; 92A5
-
-		mus_note noteRst, note4
-
-	mus_octave oct1
-		mus_note noteF, note8
-
-	mus_jump 254, $E4C2
-		mus_note noteF, note8_16; 92AD
-		mus_note noteRst, note2_4_8
-
-		mus_note noteD, note4_8
-		mus_note noteF, note2_16
-		mus_note noteF, note1
-		mus_note noteA#, note2; 92B2
-		mus_note noteD, note2_16
-		mus_note noteC#, note2_16
-		mus_note noteC, note4_8_16
-		mus_note noteC, note16
-		mus_note noteD, note8; 92B7
-		mus_note noteB, note2_4_8_16
-		mus_note noteRst, note16
-
-		mus_note noteC, note2_8
-		mus_note noteG, note2_4_8_16
-		mus_note noteB, note2_4; 92BC
-		mus_note noteD, note16
-		mus_note noteC, note2_4_16
-		mus_note noteD#, note2_4_8_16
-		mus_note noteC, note8
-		mus_note noteG, note2; 92C1
-		mus_note noteRst, note2_4_8
-
-		mus_note noteD, note4_8
-		mus_note noteF, note2_16
-		mus_note noteRst, note2_4_8
-
-		mus_note noteD, note4_8; 92C6
-		mus_note noteF, note2_16
-		mus_note noteRst, note4
-
-	mus_octave oct1
-		mus_note noteF, note8
-		mus_note noteD#, note2_4_16; 92CB
-		mus_note noteG, note2
-		mus_note noteRst, note2_4_8
-
-		mus_note noteD, note4_8
-		mus_note noteF, note2_16
-
-	db $f5; 92D0
-
-		mus_note noteRst, note2_4_8
-
-		mus_note noteD, note4_8
-		mus_note noteF, note2_16
-		mus_note noteE, note2
-		mus_note noteC#, note4_8_16; 92D5
-		mus_note noteC, note16
-		mus_note noteG, note2_8
-		mus_note noteG#, note2
-		mus_note noteF, note1
-		mus_note noteD, note8; 92DA
-		mus_note noteC, note4_8_16
-		mus_note noteRst, note16
-
-		mus_note noteC#, note2_8
-
-	db $f1
-
-		mus_note noteD, note8_16; 92DF
-		mus_note noteG, note16
-		mus_note noteRst, note4
-
-	mus_octave oct1
-		mus_note noteF, note8
-
-	mus_octave oct1; 92E4
-	mus_volume 254
-	db $d0
-
-		mus_note noteRst, note8_16
-
-		mus_note noteD, note4
-		mus_note noteF, note4; 92EA
-		mus_note noteG, note2_8_16
-
-	mus_octave oct1
-		mus_note noteC, note1
-		mus_note noteC, note4_8_16
-		mus_note noteC, note16; 92EF
-		mus_note noteD, note8
-		mus_note noteRst, note4_8_16
-
-		mus_note noteRst, note16
-
-		mus_note noteC, note2_8
-		mus_note noteG, note2; 92F4
-		mus_note noteG, note2_8
-
-	mus_jump 3, $2628
-		mus_note noteRst, note2_4_8
-
-		mus_note noteD, note4_8
-		mus_note noteF, note2_16; 92FC
-		mus_note noteF, note2
-		mus_note noteG, note2_8
-
-	mus_jump 2, $928
-	mus_jump 6, $1220
-		mus_note noteD, note8; 9307
-
-	mus_octave oct0
-		mus_note noteRst, note16
-
-		mus_note noteC#, note2_16
-		mus_note noteC, note4
-		mus_note noteD, note8; 930C
-
-	mus_octave oct1
-		mus_note noteRst, note16
-
-		mus_note noteG, note2_8_16
-
-	mus_octave oct1
-		mus_note noteC, note1; 9311
-		mus_note noteG, note2
-		mus_note noteG, note2_8_16
-
-	mus_octave oct1
-		mus_note noteD#, note16
-		mus_note noteRst, note2_4; 9316
-
-		mus_note noteD, note2
-		mus_note noteF, note2
-		mus_note noteC, note4_8_16
-		mus_note noteC, note16
-		mus_note noteD, note8; 931B
-
-	db $de
-
-		mus_note noteRst, note16
-
-		mus_note noteC, note2_8
-		mus_note noteG, note8_16
-		mus_note noteRst, note4; 9320
-
-	mus_octave oct1
-		mus_note noteF, note8
-		mus_note noteG, note2_8_16
-
-	mus_jump 232, $D20
-		mus_note noteC, note4_8_16; 9328
-		mus_note noteC, note16
-		mus_note noteD, note8
-		mus_note noteD, note2_4_8_16
-		mus_note noteRst, note16
-
-		mus_note noteC, note2_8; 932D
-		mus_note noteG, note2_4_8_16
-
-	db $ee
-
-		mus_note noteC, note8
-		mus_note noteG, note2
-		mus_note noteRst, note4; 9332
-
-	mus_octave oct1
-		mus_note noteF, note8
-
-	mus_jump 234, $3420
-		mus_note noteRst, note2_4_8
-
-		mus_note noteD, note4_8; 933A
-		mus_note noteF, note2_16
-		mus_note noteC, note4_8_16
-		mus_note noteC, note16
-		mus_note noteD, note8
-		mus_note noteE, note2_4_8_16; 933F
-		mus_note noteRst, note16
-
-		mus_note noteC, note2_8
-		mus_note noteG, note2
-		mus_note noteD, note8
-		mus_note noteF#, note2_4_8_16; 9344
-		mus_note noteRst, note16
-
-		mus_note noteC, note2_8
-		mus_note noteG, note2
-		mus_note noteRst, note2_4_8
-
-		mus_note noteD, note4_8; 9349
-		mus_note noteF, note2_16
-		mus_note noteF, note2
-
-	mus_octave oct1
-	mus_volume 203
-		mus_note noteD#, note2; 934F
-		mus_note noteC, note4_8_16
-		mus_note noteC, note16
-		mus_note noteD, note8
-		mus_note noteF, note4_8_16
-		mus_note noteRst, note16; 9354
-
-		mus_note noteC, note2_8
-		mus_note noteRst, note2_4
-
-		mus_note noteD#, note1
-		mus_note noteF, note1
-		mus_note noteG#, note2_16; 9359
-		mus_note noteRst, note2_4
-
-		mus_note noteD#, note2
-		mus_note noteB, note4
-		mus_note noteG, note2
-		mus_note noteG, note2_8_16; 935E
-
-	mus_octave oct1
-		mus_note noteC, note1
-		mus_note noteF, note2
-		mus_note noteD, note8
-		mus_note noteF, note2_4_8_16; 9363
-		mus_note noteRst, note16
-
-		mus_note noteC, note2_8
-		mus_note noteRst, note2_4
-
-		mus_note noteD#, note2
-		mus_note noteB, note8_16; 9368
-		mus_note noteG, note2
-		mus_note noteRst, note4
-
-	mus_octave oct1
-		mus_note noteF, note8
-
-	mus_jump 235, $3420; 9370
-		mus_note noteRst, note2_4_8
-
-		mus_note noteD, note4_8
-		mus_note noteF, note2_16
-		mus_note noteC, note4_8_16
-		mus_note noteC, note16; 9375
-		mus_note noteD, note8
-		mus_note noteG, note4_8_16
-		mus_note noteRst, note16
-
-		mus_note noteC, note2_8
-		mus_note noteG, note2; 937A
-		mus_note noteRst, note2_4_8
-
-		mus_note noteD, note4_8
-		mus_note noteF, note2_16
-		mus_note noteF, note2
-
-	mus_octave oct1; 937F
-	mus_volume 203
-		mus_note noteD#, note2
-		mus_note noteE, note2
-		mus_note noteG, note2_8_16
-
-	mus_octave oct1; 9385
-		mus_note noteC, note1
-		mus_note noteRst, note2_4_8
-
-		mus_note noteF, note2_16
-		mus_note noteF, note2_16
-		mus_note noteC, note4_8_16; 938A
-		mus_note noteC, note16
-		mus_note noteD, note8
-		mus_note noteA#, note4_8_16
-		mus_note noteRst, note16
-
-		mus_note noteC, note2_8; 938F
-		mus_note noteG, note8_16
-		mus_note noteD, note8
-		mus_note noteA#, note2_4_8_16
-		mus_note noteRst, note16
-
-		mus_note noteC, note2_8; 9394
-		mus_note noteG, note4
-		mus_note noteC, note4_8_16
-		mus_note noteC, note16
-		mus_note noteD, note8
-		mus_note noteD, note2_4_8_16; 9399
-		mus_note noteRst, note16
-
-		mus_note noteC, note2_8
-		mus_note noteRst, note2_4
-
-	mus_octave oct1
-		mus_note noteRst, note2_4_8; 939E
-
-		mus_note noteD, note4_8
-		mus_note noteF, note2_16
-		mus_note noteF, note2
-		mus_note noteRst, note4
-
-		mus_note noteC, note2_8_16; 93A3
-		mus_note noteF, note4_8
-
-	mus_jump 236, $1120
-		mus_note noteRst, note2_4_8
-
-		mus_note noteD, note4_8
-		mus_note noteF, note2_16; 93AB
-		mus_note noteC, note1
-		mus_note noteC, note1
-
-	mus_octave oct1
-		mus_note noteRst, note16
-
-		mus_note noteC, note4_8_16; 93B0
-		mus_note noteC, note16
-		mus_note noteD, note8
-		mus_note noteD#, note2_4_8_16
-		mus_note noteRst, note16
-
-		mus_note noteC, note2_8; 93B5
-		mus_note noteG, note2
-		mus_note noteRst, note4
-
-	mus_octave oct1
-		mus_note noteF, note8
-
-	mus_jump 237, $3C20; 93BD
-		mus_note noteG, note2_8
-
-	mus_jump 4, $1B30
-		mus_note noteRst, note2_4_8
-
-		mus_note noteD, note4_8
-		mus_note noteF, note2_16; 93C5
-
-	mus_mod 232, 12, 0
-		mus_note noteRst, note2_4_8
-
-		mus_note noteD, note4_8
-		mus_note noteF, note2_16
-
-	mus_mod 233, 12, 0; 93CE
-		mus_note noteA#, note1
-
-	mus_mod 206, 12, 0
-	mus_mod 207, 12, 0
-	mus_mod 208, 12, 0
-	mus_mod 209, 12, 0; 93DB
-		mus_note noteC#, note2_16
-		mus_note noteC#, note2_8
-		mus_note noteRst, note2_4_8
-
-		mus_note noteD, note4_8
-		mus_note noteF, note2_16; 93E0
-
-	mus_mod 234, 12, 0
-		mus_note noteRst, note2_4_8
-
-		mus_note noteD, note4_8
-		mus_note noteF, note2_16
-
-	mus_mod 235, 12, 0; 93E9
-		mus_note noteA#, note1
-
-	mus_mod 210, 12, 0
-	mus_mod 211, 12, 0
-	mus_mod 212, 12, 0
-	mus_mod 213, 12, 0; 93F6
-		mus_note noteRst, note4
-
-	mus_octave oct1
-		mus_note noteF, note8
-
-	mus_jump 238, $920
-		mus_note noteRst, note2_4_8; 93FE
-
-		mus_note noteD, note4_8
-		mus_note noteF, note2_16
-
-	mus_mod 4, 12, 0
-		mus_note noteRst, note4
-
-	mus_octave oct1; 9405
-		mus_note noteF, note8
-
-	mus_jump 239, $1B20
-		mus_note noteRst, note2_4_8
-
-		mus_note noteD, note4_8
-		mus_note noteF, note2_16; 940D
-		mus_note noteRst, note4_8
-
-		mus_note noteRst, note2_4_8
-
-		mus_note noteG, note4_8_16
-		mus_note noteF, note2_16
-		mus_note noteRst, note8; 9412
-
-	db $fa
-
-		mus_note noteC, note4
-		mus_note noteRst, note16
-
-		mus_note noteA#, note2
-		mus_note noteD, note16; 9417
-		mus_note noteC, note2_8_16
-
-	db $fa
-
-		mus_note noteD, note2_4_8
-		mus_note noteRst, note16
-
-	mus_mod 3, 12, 0; 941E
-		mus_note noteA#, note1
-
-	mus_mod 45, 12, 0
-		mus_note noteRst, note4
-
-	mus_octave oct1
-		mus_note noteF, note8; 9425
-
-	mus_jump 252, $1A20
-		mus_note noteRst, note2_4_8
-
-		mus_note noteD, note4_8
-		mus_note noteF, note2_16
-		mus_note noteC, note4_8_16; 942D
-		mus_note noteC, note16
-		mus_note noteD, note8
-		mus_note noteE, note4_8_16
-		mus_note noteRst, note16
-
-		mus_note noteC, note2_8; 9432
-		mus_note noteG, note2
-
-	mus_octave oct1
-		mus_note noteRst, note16
-
-		mus_note noteD, note8
-		mus_note noteD#, note2_4_8_16; 9437
-		mus_note noteRst, note16
-
-		mus_note noteC, note2_8
-		mus_note noteG, note2
-		mus_note noteD, note8
-		mus_note noteD, note2_4_8_16; 943C
-		mus_note noteRst, note16
-
-		mus_note noteC, note2_8
-		mus_note noteRst, note2_4
-
-	db $f6
-
-		mus_note noteRst, note4; 9441
-
-	mus_octave oct1
-		mus_note noteF, note8
-
-	mus_jump 240, $820
-		mus_note noteRst, note2_4_8
-
-		mus_note noteD, note4_8; 9449
-		mus_note noteF, note2_16
-
-	mus_octave oct7
-		mus_note noteD, note4_16
-		mus_note noteRst, note4
-
-	mus_octave oct1; 944E
-		mus_note noteF, note8
-
-	mus_jump 248, $B20
-		mus_note noteC, note4_8_16
-		mus_note noteC, note16
-		mus_note noteD, note8; 9456
-		mus_note noteD#, note4_8_16
-		mus_note noteRst, note16
-
-		mus_note noteC, note2_8
-		mus_note noteRst, note2_4
-
-		mus_note noteRst, note4_8_16; 945B
-
-		mus_note noteRst, note4
-
-	mus_octave oct1
-		mus_note noteF, note8
-
-	mus_octave oct1
-	mus_volume 254; 9461
-
-	mus_octave oct7
-		mus_note noteD, note16
-		mus_note noteC, note2_4_8
-		mus_note noteD, note8
-
-	db $d6; 9466
-
-		mus_note noteRst, note16
-
-		mus_note noteC, note4_8_16
-		mus_note noteC, note16
-		mus_note noteC, note2_8
-		mus_note noteG, note2_8_16; 946B
-
-	mus_octave oct1
-		mus_note noteC, note1
-		mus_note noteG, note2
-		mus_note noteRst, note4
-
-	mus_octave oct1; 9470
-		mus_note noteF, note8
-
-	mus_jump 32, $4920
-		mus_note noteG, note2_8
-
-	mus_jump 3, $4438
-		mus_note noteC, note4_8_16; 947B
-		mus_note noteC, note16
-		mus_note noteD, note8
-		mus_note noteD#, note4_8_16
-		mus_note noteRst, note16
-
-		mus_note noteC, note2_8; 9480
-		mus_note noteRst, note2_4
-
-		mus_note noteE, note4_8_16
-		mus_note noteD, note16
-		mus_note noteD#, note2_8_16
-		mus_note noteRst, note2_4_8; 9485
-
-		mus_note noteC, note2_8_16
-		mus_note noteF, note4_8
-		mus_note noteF, note2
-		mus_note noteC, note4_8_16
-		mus_note noteC, note16; 948A
-		mus_note noteD, note8
-		mus_note noteD#, note2_4_8_16
-		mus_note noteRst, note16
-
-		mus_note noteC, note2_8
-		mus_note noteG, note2_4_8_16; 948F
-		mus_note noteB, note8_16
-		mus_note noteF, note2
-		mus_note noteC, note4_8_16
-		mus_note noteC, note8
-		mus_note noteRst, note2_4_8; 9494
-
-		mus_note noteD#, note2_16
-		mus_note noteF, note2_16
-		mus_note noteG, note8_16
-		mus_note noteRst, note2_4_8
-
-		mus_note noteD, note4_8; 9499
-		mus_note noteF, note2_16
-		mus_note noteF, note2
-		mus_note noteC, note4_8_16
-		mus_note noteC, note8_16
-		mus_note noteRst, note2_4_8; 949E
-
-		mus_note noteD#, note2_16
-		mus_note noteF, note2_16
-		mus_note noteG, note8_16
-		mus_note noteRst, note2_4_8
-
-		mus_note noteD, note4_8; 94A3
-		mus_note noteF, note2_16
-		mus_note noteF, note1
-		mus_note noteG, note2_8
-
-	mus_jump 7, $3E
-		mus_note noteD, note2_16; 94AB
-		mus_note noteC, note4_8
-
-	db $d5
-
-		mus_note noteRst, note2_4_8
-
-		mus_note noteD, note4_8
-		mus_note noteF, note2_16; 94B0
-
-	db $d1
-
-		mus_note noteF, note2
-
-	db $d5
-
-		mus_note noteRst, note2_4_8
-
-		mus_note noteD, note2_8; 94B5
-		mus_note noteF, note4_8_16
-		mus_note noteRst, note2_4_8
-
-	db $f8
-
-		mus_note noteF, note4_8
-
-	db $d1; 94BA
-
-		mus_note noteRst, note2_4_8
-
-		mus_note noteE, note2_4
-		mus_note noteF, note4_8_16
-		mus_note noteRst, note2_8
-
-		mus_note noteG, note2_8; 94BF
-
-	mus_jump 4, $1738
-		mus_note noteG, note2_8_16
-
-	mus_jump 16, $1220
-		mus_note noteC, note4_8_16
-		mus_note noteC, note16; 94CA
-		mus_note noteD, note8
-		mus_note noteD#, note4_8_16
-		mus_note noteRst, note16
-
-		mus_note noteC, note2_8
-		mus_note noteRst, note2_4; 94CF
-
-		mus_note noteE, note4_8_16
-		mus_note noteD, note16
-		mus_note noteC, note2_16
-		mus_note noteRst, note2_4_8
-
-		mus_note noteD, note4_8; 94D4
-		mus_note noteF, note2_16
-
-	mus_octave oct7
-		mus_note noteC#, note16
-		mus_note noteRst, note4
-
-	mus_octave oct1; 94D9
-		mus_note noteF, note8
-		mus_note noteG, note2_8
-
-	mus_jump 3, $2A20
-		mus_note noteG, note2_8_16
-
-	mus_octave oct1; 94E1
-	mus_volume 254
-		mus_note noteB, note16
-		mus_note noteD, note2_16
-		mus_note noteC, note2_4_8_16
-		mus_note noteD#, note16; 94E7
-		mus_note noteD, note8
-		mus_note noteRst, note2_4
-
-		mus_note noteD#, note2
-		mus_note noteE, note2
-		mus_note noteG, note2_8_16; 94EC
-
-	mus_octave oct1
-		mus_note noteC, note1
-		mus_note noteF, note2
-		mus_note noteG, note2_16
-
-	db $d5; 94F1
-
-		mus_note noteRst, note4_8
-
-		mus_note noteC#, note2_16
-		mus_note noteC, note2_16
-		mus_note noteG, note2_8_16
-
-	mus_octave oct1; 94F6
-		mus_note noteC, note1
-
-	db $f5
-
-		mus_note noteRst, note4_8
-
-		mus_note noteRst, note2_4_8
-
-		mus_note noteD, note4_8; 94FB
-		mus_note noteF, note2_16
-		mus_note noteF, note2
-
-	db $fa
-
-		mus_note noteC, note4
-		mus_note noteRst, note16; 9500
-
-		mus_note noteA#, note2
-		mus_note noteD, note16
-		mus_note noteC, note4_16
-		mus_note noteG, note2_8_16
-		mus_note noteRst, note2_4_8; 9505
-
-		mus_note noteG, note4_8_16
-		mus_note noteF, note2_16
-		mus_note noteRst, note8
-
-	db $d1
-
-		mus_note noteG, note2_8_16; 950A
-
-	db $f5
-
-	mus_octave oct1
-		mus_note noteC, note1
-		mus_note noteD#, note2_4_16
-		mus_note noteC, note4_8_16; 950F
-		mus_note noteC, note16
-		mus_note noteF, note1
-		mus_note noteF, note16
-		mus_note noteD, note8
-		mus_note noteRst, note4_8_16; 9514
-
-		mus_note noteRst, note16
-
-		mus_note noteC, note2_8
-		mus_note noteG, note2_4_8_16
-		mus_note noteF#, note2_16
-		mus_note noteRst, note2_4_8; 9519
-
-		mus_note noteE, note2
-		mus_note noteF, note2_16
-		mus_note noteG, note2_8
-
-	mus_jump 4, $A30
-	db $fa; 9521
-	db $e8
-
-		mus_note noteRst, note16
-
-		mus_note noteF, note2
-
-	db $fa
-	db $e9; 9526
-
-		mus_note noteRst, note16
-
-		mus_note noteF, note1
-		mus_note noteC#, note2_16
-		mus_note noteC#, note4
-		mus_note noteC#, note4_8_16; 952B
-		mus_note noteC, note8
-		mus_note noteC#, note2_4_8_16
-		mus_note noteC, note16
-
-	mus_jump 7, $B28
-		mus_note noteRst, note2_4_8; 9533
-
-		mus_note noteA, note4
-		mus_note noteF, note4_8_16
-
-	db $fa
-	mus_mod 192, 5, 7
-	db $fa; 953A
-	db $eb, $c0
-
-		mus_note noteF, note1
-		mus_note noteG, note2_4_8
-		mus_note noteC, note4_8_16
-		mus_note noteC, note16; 9540
-		mus_note noteD, note8
-		mus_note noteRst, note2_4_8_16
-
-		mus_note noteRst, note16
-
-		mus_note noteC, note2_8
-		mus_note noteF#, note2_4_8_16; 9545
-		mus_note noteRst, note2_4_8
-
-		mus_note noteE, note2
-		mus_note noteF, note2_16
-		mus_note noteF, note2_4_8
-		mus_note noteF, note4_16; 954A
-		mus_note noteD, note8
-		mus_note noteRst, note2_4_8_16
-
-		mus_note noteRst, note16
-
-		mus_note noteC, note2_8
-		mus_note noteG, note4; 954F
-		mus_note noteG, note2_8_16
-		mus_note noteD, note8
-		mus_note noteB, note4_8_16
-		mus_note noteRst, note16
-
-		mus_note noteC, note2_8; 9554
-		mus_note noteG, note2
-		mus_note noteD, note8
-		mus_note noteD#, note4_8_16
-		mus_note noteRst, note16
-
-		mus_note noteC, note2_8; 9559
-		mus_note noteRst, note2_4
-
-		mus_note noteE, note4_8_16
-		mus_note noteD, note16
-		mus_note noteC, note2_8_16
-		mus_note noteD, note8; 955E
-		mus_note noteD, note2_4_8_16
-		mus_note noteRst, note16
-
-		mus_note noteC, note2_8
-		mus_note noteRst, note2_4
-
-		mus_note noteF, note4_8_16; 9563
-		mus_note noteD, note2_16
-		mus_note noteC, note8_16
-
-	mus_octave oct6
-		mus_note noteRst, note2_8
-
-	db $f1; 9568
-
-	mus_octave oct1
-	mus_volume 254
-		mus_note noteRst, note16
-
-		mus_note noteD, note16
-		mus_note noteD#, note16; 956E
-		mus_note noteG, note2_8
-
-	mus_jump 4, $830
-		mus_note noteD, note8
-		mus_note noteD, note2_8_16
-		mus_note noteRst, note16; 9576
-
-		mus_note noteC, note2_8
-		mus_note noteG, note2_4_8_16
-		mus_note noteA#, note2
-		mus_note noteD, note16
-		mus_note noteD, note8_16; 957B
-		mus_note noteG, note2_8
-
-	mus_jump 2, $428
-	mus_jump 6, $D20
-		mus_note noteC, note4_8_16
-		mus_note noteC, note16; 9586
-		mus_note noteD, note8
-		mus_note noteC#, note1
-		mus_note noteF, note2_4
-		mus_note noteC, note2_8
-
-	mus_volume 37; 958C
-		mus_note noteA#, note4_8_16
-
-	mus_octave oct7
-		mus_note noteD, note4_8
-		mus_note noteC#, note2_16
-		mus_note noteC, note2_4_16; 9591
-		mus_note noteC, note4_8_16
-		mus_note noteC, note8_16
-		mus_note noteRst, note2_4_8
-
-		mus_note noteD#, note2_16
-		mus_note noteF, note2_16; 9596
-		mus_note noteD#, note2_4_8_16
-		mus_note noteC, note2_16
-		mus_note noteD, note8_16
-		mus_note noteD, note4
-		mus_note noteD#, note2_4_8_16; 959B
-		mus_note noteG#, note16
-		mus_note noteG, note2
-		mus_note noteRst, note2_8
-
-		mus_note noteRst, note2_4
-
-		mus_note noteD#, note2; 95A0
-		mus_note noteC, note4_8_16
-		mus_note noteC, note16
-		mus_note noteD, note8
-
-	db $d6
-
-		mus_note noteRst, note16; 95A5
-
-		mus_note noteC, note2_8
-		mus_note noteE, note4_8_16
-		mus_note noteRst, note2_4_8
-
-		mus_note noteF, note2_16
-		mus_note noteF, note2_16; 95AA
-		mus_note noteC, note4_8_16
-		mus_note noteC, note16
-		mus_note noteD, note8
-		mus_note noteD, note2_4_8_16
-		mus_note noteRst, note16; 95AF
-
-		mus_note noteC, note2_8
-		mus_note noteRst, note2_4
-
-		mus_note noteF#, note4_8_16
-		mus_note noteD, note2_16
-		mus_note noteC, note4; 95B4
-		mus_note noteRst, note2_4_8
-
-		mus_note noteG#, note1
-		mus_note noteF, note2
-
-	db $d5
-
-		mus_note noteG, note2_8; 95B9
-
-	mus_jump 4, $F30
-		mus_note noteD, note8
-		mus_note noteD, note2_8_16
-		mus_note noteRst, note16
-
-		mus_note noteC#, note4_8_16; 95C1
-		mus_note noteC, note16
-		mus_note noteF, note1
-		mus_note noteC#, note2_8
-		mus_note noteG, note2_4_8_16
-		mus_note noteA#, note2; 95C6
-		mus_note noteD, note16
-		mus_note noteC, note8_16
-		mus_note noteC#, note2_16
-		mus_note noteC, note8_16
-
-	db $d1; 95CB
-
-		mus_note noteRst, note2_8
-
-		mus_note noteC, note4_8_16
-		mus_note noteC, note16
-		mus_note noteD, note8
-
-	db $de; 95D0
-
-		mus_note noteRst, note16
-
-		mus_note noteC, note2_8
-		mus_note noteF, note4_8_16
-		mus_note noteC, note4_8_16
-		mus_note noteC, note8_16; 95D5
-		mus_note noteRst, note2_4_8
-
-		mus_note noteD#, note2_16
-		mus_note noteF, note2_16
-		mus_note noteG, note8_16
-		mus_note noteRst, note2_4_8; 95DA
-
-		mus_note noteD, note2_8
-		mus_note noteF, note4_8_16
-		mus_note noteRst, note2_4_8
-
-	db $f8
-
-		mus_note noteF, note4_8; 95DF
-
-	db $d1
-
-		mus_note noteC, note4_8_16
-		mus_note noteC, note16
-		mus_note noteD, note8
-		mus_note noteD, note2_4_8_16; 95E4
-		mus_note noteRst, note16
-
-		mus_note noteC, note2_8
-		mus_note noteRst, note2_4
-
-		mus_note noteE, note4_8_16
-		mus_note noteD, note2_16; 95E9
-		mus_note noteC, note4_16
-		mus_note noteC#, note2_4_16
-		mus_note noteD#, note16
-		mus_note noteC, note8
-		mus_note noteC#, note4_16; 95EE
-		mus_note noteD, note8
-		mus_note noteF#, note4_8_16
-		mus_note noteRst, note16
-
-		mus_note noteC, note2_8
-		mus_note noteG, note4; 95F3
-		mus_note noteRst, note2_4_8
-
-		mus_note noteE, note2_4
-		mus_note noteF, note4_8_16
-		mus_note noteRst, note2_8
-
-		mus_note noteC, note4_8_16; 95F8
-		mus_note noteC, note16
-		mus_note noteD, note8
-		mus_note noteD, note2
-		mus_note noteF, note2_4
-		mus_note noteC, note2_8; 95FD
-
-	mus_volume 37
-		mus_note noteB, note4_8_16
-		mus_note noteF, note2
-		mus_note noteG, note2_8
-
-	mus_jump 7, $C28; 9606
-	mus_jump 4, $1A30
-		mus_note noteD, note8
-		mus_note noteD, note2_8_16
-		mus_note noteRst, note16
-
-		mus_note noteC, note2_8; 960E
-		mus_note noteG, note2_4_8_16
-		mus_note noteA#, note2
-		mus_note noteD, note16
-		mus_note noteC#, note8_16
-
-	db $fa; 9613
-
-		mus_note noteC, note4_16
-		mus_note noteRst, note16
-
-		mus_note noteD, note8
-		mus_note noteD, note2
-		mus_note noteF, note2_4; 9618
-		mus_note noteC, note2_8
-		mus_note noteA#, note4_8_16
-		mus_note noteF, note2
-
-	mus_volume 37
-		mus_note noteD, note8; 961E
-		mus_note noteC#, note1
-		mus_note noteF, note2_4
-		mus_note noteC, note2_8
-		mus_note noteA#, note4_8_16
-		mus_note noteB, note8_16; 9623
-		mus_note noteF, note2
-		mus_note noteG, note2_8_16
-
-	mus_octave oct7
-		mus_note noteD, note4_8
-		mus_note noteRst, note2_8; 9628
-
-		mus_note noteC, note4_8_16
-		mus_note noteC, note16
-		mus_note noteD, note8
-		mus_note noteB, note4_8_16
-		mus_note noteRst, note16; 962D
-
-		mus_note noteC, note2_8
-		mus_note noteF, note4_8_16
-		mus_note noteG, note2_8
-
-	mus_jump 2, $F28
-	mus_jump 6, $B28; 9638
-		mus_note noteG, note2_8_16
-
-	mus_octave oct1
-		mus_note noteD#, note1
-		mus_note noteF, note2
-		mus_note noteD, note8; 963D
-		mus_note noteD#, note2_4_8_16
-		mus_note noteRst, note16
-
-		mus_note noteC, note2_8
-		mus_note noteG, note2_4_8_16
-		mus_note noteB, note8_16; 9642
-		mus_note noteF, note2
-		mus_note noteC, note4_8_16
-		mus_note noteC, note8
-		mus_note noteRst, note2_4_8
-
-		mus_note noteD#, note2_16; 9647
-		mus_note noteF, note2_16
-		mus_note noteG, note8_16
-		mus_note noteRst, note2_8
-
-		mus_note noteG, note2_8
-
-	mus_jump 2, $428; 964F
-	mus_jump 6, $2D20
-	db $d5
-
-		mus_note noteC#, note8
-
-	mus_octave oct1
-		mus_note noteRst, note16; 9657
-
-	mus_jump 2, $328
-		mus_note noteC#, note8
-
-	mus_octave oct0
-		mus_note noteRst, note16
-
-		mus_note noteC#, note2_8_16; 965F
-		mus_note noteG#, note2
-		mus_note noteC#, note4_8_16
-		mus_note noteC, note16
-		mus_note noteF, note1
-		mus_note noteD, note8; 9664
-		mus_note noteF#, note8
-		mus_note noteE, note4
-		mus_note noteC#, note2_8
-		mus_note noteF, note2_4_8_16
-		mus_note noteD, note4; 9669
-		mus_note noteF, note4_8_16
-		mus_note noteD, note8
-		mus_note noteD#, note16
-
-	mus_end
-
-UnknSong_md_966e:
-		mus_note noteC, note4_8_16; 966E
-		mus_note noteC, note1
-		mus_note noteD#, note2_4_8_16
-		mus_note noteC, note16
-
-	mus_octave oct7
-		mus_note noteC#, note2_8_16; 9673
-		mus_note noteC#, note2_8_16
-		mus_note noteC#, note4
-		mus_note noteD, note8_16
-		mus_note noteG, note2_16
-		mus_note noteC, note4_8; 9678
-		mus_note noteA#, note2
-		mus_note noteD, note16
-
-	db $f8
-
-		mus_note noteD#, note2_4_8_16
-		mus_note noteG#, note16; 967D
-
-	mus_octave oct7
-		mus_note noteC#, note2_8_16
-
-	db $d1
-
-		mus_note noteG, note2_8_16
-
-	db $f6; 9682
-
-		mus_note noteG#, note16
-
-	mus_octave oct1
-		mus_note noteRst, note2
-
-		mus_note noteF, note2
-		mus_note noteC, note4_8_16; 9687
-		mus_note noteC, note4
-		mus_note noteRst, note2_4_8
-
-		mus_note noteD#, note2_16
-		mus_note noteF, note2_16
-		mus_note noteG, note4; 968C
-		mus_note noteD, note4
-		mus_note noteG, note8_16
-		mus_note noteRst, note2_4_8
-
-		mus_note noteB, note4_8
-		mus_note noteF, note4_8_16; 9691
-		mus_note noteRst, note2_8
-
-		mus_note noteRst, note2_4_8
-
-	mus_octave oct2
-		mus_note noteF, note4_8_16
-		mus_note noteD#, note16; 9696
-		mus_note noteC#, note4
-		mus_note noteC#, note4_8_16
-		mus_note noteC, note16
-
-	db $fa
-	db $f2; 969B
-
-		mus_note noteRst, note16
-
-		mus_note noteRst, note4_8_16
-
-		mus_note noteG#, note16
-		mus_note noteD#, note16
-		mus_note noteC, note8; 96A0
-		mus_note noteC#, note4_16
-
-	mus_mod 235, 12, 0
-		mus_note noteG, note2_8_16
-
-	mus_mod 234, 12, 0
-		mus_note noteC#, note2_16; 96A9
-		mus_note noteC, note2_8
-		mus_note noteA#, note1
-
-	mus_mod 235, 12, 0
-		mus_note noteD#, note2_4_8_16
-		mus_note noteC, note8; 96B0
-
-	mus_mod 234, 12, 0
-		mus_note noteRst, note2_8
-
-		mus_note noteRst, note2_4_8
-
-	mus_octave oct2
-		mus_note noteF, note4_8_16; 96B7
-		mus_note noteD#, note16
-		mus_note noteC, note2_4_16
-
-	db $fa
-	db $f1
-
-		mus_note noteRst, note16; 96BC
-
-		mus_note noteG#, note4
-		mus_note noteD#, note16
-		mus_note noteC, note8
-		mus_note noteC#, note4_16
-		mus_note noteD, note2_4; 96C1
-		mus_note noteF, note1
-		mus_note noteG, note4
-		mus_note noteD, note4
-		mus_note noteG, note8_16
-		mus_note noteRst, note2_8; 96C6
-
-		mus_note noteRst, note2_4_8
-
-	mus_octave oct2
-		mus_note noteF, note4_8_16
-		mus_note noteD#, note16
-		mus_note noteC#, note4_8_16; 96CB
-		mus_note noteD, note8
-		mus_note noteC, note4_8_16
-		mus_note noteRst, note16
-
-		mus_note noteF, note2_8
-		mus_note noteC#, note4_8_16; 96D0
-		mus_note noteC, note16
-		mus_note noteRst, note2_4
-
-		mus_note noteD, note4
-		mus_note noteRst, note2_4
-
-		mus_note noteC#, note8_16; 96D5
-		mus_note noteC#, note2_8
-		mus_note noteG, note2_4_8_16
-
-	db $d6
-
-		mus_note noteC, note8
-		mus_note noteG, note2; 96DA
-		mus_note noteD, note4
-		mus_note noteG, note2_4_8_16
-
-	db $de
-
-		mus_note noteC, note16
-		mus_note noteG, note2; 96DF
-		mus_note noteD#, note2
-		mus_note noteRst, note2_8
-
-		mus_note noteD#, note2
-		mus_note noteD#, note1
-		mus_note noteRst, note2_8; 96E4
-
-	db $fa
-
-		mus_note noteD, note2_8_16
-		mus_note noteRst, note16
-
-	mus_jump 20, $230
-		mus_note noteC#, note2_16; 96EC
-		mus_note noteC, note4_8_16
-
-	mus_jump 134, $228
-		mus_note noteD#, note2_16
-		mus_note noteC, note4
-		mus_note noteD#, note2; 96F4
-		mus_note noteD#, note1
-		mus_note noteRst, note2_8
-
-		mus_note noteD#, note2
-		mus_note noteRst, note2_8
-
-		mus_note noteD, note8; 96F9
-		mus_note noteD, note2_4_8_16
-		mus_note noteRst, note16
-
-		mus_note noteC, note2_8
-		mus_note noteRst, note2_4
-
-		mus_note noteF#, note2_4_8_16; 96FE
-		mus_note noteRst, note8_16
-
-		mus_note noteE, note16
-		mus_note noteF, note2
-		mus_note noteD, note8
-		mus_note noteA, note2_4_8_16; 9703
-		mus_note noteRst, note16
-
-		mus_note noteC, note2_8
-		mus_note noteF, note2_4_8_16
-		mus_note noteD, note8
-		mus_note noteA, note4_8_16; 9708
-		mus_note noteRst, note16
-
-		mus_note noteC, note2_8
-		mus_note noteF, note4_8_16
-		mus_note noteD, note8
-		mus_note noteG, note2_4_8_16; 970D
-		mus_note noteRst, note16
-
-		mus_note noteC, note2_8
-		mus_note noteF#, note2_4_8_16
-		mus_note noteF#, note16
-		mus_note noteC#, note2_8; 9712
-		mus_note noteF, note4_16
-		mus_note noteF, note2_4_8
-		mus_note noteD, note8
-		mus_note noteG#, note2_4_8_16
-		mus_note noteRst, note16; 9717
-
-		mus_note noteC, note2_8
-
-	mus_octave oct2
-		mus_note noteD, note8
-		mus_note noteG#, note4_8_16
-		mus_note noteRst, note16; 971C
-
-		mus_note noteC, note2_8
-		mus_note noteG, note2_4_8_16
-
-	mus_octave oct6
-		mus_note noteG#, note4_8_16
-		mus_note noteG, note2; 9721
-		mus_note noteD#, note2_4_8_16
-		mus_note noteC, note16
-		mus_note noteG#, note2_4
-		mus_note noteF, note1
-		mus_note noteD#, note2_4_8_16; 9726
-		mus_note noteC, note16
-		mus_note noteG#, note2_8_16
-		mus_note noteF, note2
-		mus_note noteD, note8
-		mus_note noteA#, note4_8_16; 972B
-		mus_note noteRst, note16
-
-		mus_note noteC, note2_8
-		mus_note noteG, note2_4_8_16
-		mus_note noteB, note2_8_16
-
-	db $da; 9730
-
-		mus_note noteG#, note4_8_16
-		mus_note noteF, note2
-		mus_note noteD, note16
-		mus_note noteD#, note2_4_8_16
-		mus_note noteD, note8; 9735
-		mus_note noteA#, note2_4_8_16
-		mus_note noteRst, note16
-
-		mus_note noteC, note2_8
-		mus_note noteG, note2_4_8_16
-		mus_note noteB, note2_4; 973A
-
-	db $da
-
-		mus_note noteG#, note4_8_16
-		mus_note noteF, note2
-		mus_note noteC#, note2_16
-		mus_note noteD#, note4; 973F
-		mus_note noteD, note8
-		mus_note noteA, note2_4_8_16
-		mus_note noteRst, note16
-
-		mus_note noteC, note2_8
-		mus_note noteG, note2_4_8_16; 9744
-		mus_note noteD, note8
-		mus_note noteA, note4_8_16
-		mus_note noteRst, note16
-
-		mus_note noteC, note2_8
-		mus_note noteF, note4_8_16; 9749
-		mus_note noteD, note8
-		mus_note noteG, note2_4_8_16
-		mus_note noteRst, note16
-
-		mus_note noteC, note2_8
-		mus_note noteF, note2_4_8_16; 974E
-		mus_note noteA, note4
-		mus_note noteF, note1
-		mus_note noteG, note2_8_16
-		mus_note noteA, note2_16
-		mus_note noteF, note2; 9753
-		mus_note noteD, note8
-		mus_note noteG#, note4_8_16
-		mus_note noteRst, note16
-
-		mus_note noteC, note2_8
-		mus_note noteG, note2_4_8_16; 9758
-		mus_note noteG#, note2
-		mus_note noteG, note2
-		mus_note noteG, note2_4
-		mus_note noteA, note2_16
-		mus_note noteF, note1; 975D
-		mus_note noteG, note2_8_16
-		mus_note noteA, note2_16
-		mus_note noteF, note2
-		mus_note noteD, note8
-		mus_note noteA#, note4_8_16; 9762
-		mus_note noteRst, note16
-
-		mus_note noteC, note2_8
-		mus_note noteG, note2_8_16
-		mus_note noteB, note2_4_8_16
-		mus_note noteD#, note2_16; 9767
-		mus_note noteC#, note2_4_8
-		mus_note noteD, note16
-		mus_note noteC, note2_16
-		mus_note noteD, note8
-		mus_note noteA#, note2_4_8_16; 976C
-		mus_note noteRst, note16
-
-		mus_note noteC, note2_8
-		mus_note noteG, note2_4
-		mus_note noteB, note2_4_8_16
-		mus_note noteD#, note2_16; 9771
-		mus_note noteC#, note4
-		mus_note noteD, note8
-		mus_note noteA, note2_4_8_16
-		mus_note noteRst, note16
-
-		mus_note noteC, note2_8; 9776
-		mus_note noteG, note4
-		mus_note noteD, note8
-		mus_note noteA, note4_8_16
-		mus_note noteRst, note16
-
-		mus_note noteC, note2_8; 977B
-		mus_note noteG, note8_16
-		mus_note noteC, note4_8_16
-		mus_note noteC, note4
-		mus_note noteRst, note2_4_8
-
-		mus_note noteD#, note2_16; 9780
-		mus_note noteF, note2_16
-		mus_note noteG, note2_4
-		mus_note noteD, note8_16
-		mus_note noteG, note8_16
-		mus_note noteRst, note2_8; 9785
-
-		mus_note noteD, note8
-		mus_note noteD, note2_4_8_16
-		mus_note noteRst, note16
-
-		mus_note noteC, note2_8
-		mus_note noteRst, note2_4; 978A
-
-		mus_note noteA#, note4_8_16
-		mus_note noteRst, note2_4
-
-		mus_note noteA#, note2_4_8_16
-		mus_note noteRst, note2_8
-
-		mus_note noteD, note8; 978F
-		mus_note noteA, note4_8_16
-		mus_note noteRst, note16
-
-		mus_note noteC, note2_8
-		mus_note noteG, note8_16
-		mus_note noteD, note8; 9794
-		mus_note noteA, note2_4_8_16
-		mus_note noteRst, note16
-
-		mus_note noteC, note2_8
-		mus_note noteG, note4
-		mus_note noteD, note8; 9799
-		mus_note noteB, note4_8_16
-		mus_note noteRst, note16
-
-		mus_note noteC, note2_8
-		mus_note noteG, note2_4_8_16
-		mus_note noteD, note8; 979E
-		mus_note noteG, note4_8_16
-		mus_note noteRst, note16
-
-		mus_note noteC, note2_8
-		mus_note noteA, note4_8_16
-		mus_note noteD#, note16; 97A3
-		mus_note noteC, note8_16
-		mus_note noteD#, note2_4_8_16
-		mus_note noteC, note8
-		mus_note noteG, note2
-		mus_note noteD, note8; 97A8
-		mus_note noteA#, note2_4_8_16
-		mus_note noteRst, note16
-
-		mus_note noteC, note2_8
-		mus_note noteG, note2_4
-		mus_note noteA, note4_8_16; 97AD
-		mus_note noteF, note1
-		mus_note noteG, note2_8_16
-		mus_note noteA, note2_16
-		mus_note noteD, note8
-		mus_note noteA#, note4_8_16; 97B2
-		mus_note noteRst, note16
-
-		mus_note noteC, note2_8
-		mus_note noteA, note4_8_16
-		mus_note noteD#, note2_16
-		mus_note noteC, note2_4; 97B7
-		mus_note noteF, note2
-		mus_note noteC, note4_8_16
-		mus_note noteC, note16
-		mus_note noteD, note8
-		mus_note noteD, note2_4_8_16; 97BC
-		mus_note noteRst, note16
-
-		mus_note noteC, note2_8
-		mus_note noteRst, note2_4
-
-	db $ee
-
-		mus_note noteC#, note2_16; 97C1
-		mus_note noteD, note4
-		mus_note noteD, note8
-		mus_note noteA, note4_8_16
-		mus_note noteRst, note16
-
-		mus_note noteC, note2_8; 97C6
-		mus_note noteF, note4_8_16
-		mus_note noteD, note8
-		mus_note noteA, note2_4_8_16
-		mus_note noteRst, note16
-
-		mus_note noteC, note2_8; 97CB
-		mus_note noteF, note2_4_8_16
-		mus_note noteD, note8
-		mus_note noteA#, note2_4_8_16
-		mus_note noteRst, note16
-
-		mus_note noteC, note2_8; 97D0
-		mus_note noteG, note2_4_8_16
-		mus_note noteA, note4
-		mus_note noteF, note1
-		mus_note noteG, note2_8_16
-		mus_note noteA, note2_16; 97D5
-		mus_note noteF, note2
-		mus_note noteD, note8
-		mus_note noteA#, note4_8_16
-		mus_note noteRst, note16
-
-		mus_note noteC, note2_8; 97DA
-		mus_note noteG, note2_4_8_16
-		mus_note noteA, note8_16
-		mus_note noteF, note2
-		mus_note noteC, note4_8_16
-		mus_note noteC, note16; 97DF
-		mus_note noteD, note8
-		mus_note noteD, note2_4_8_16
-		mus_note noteRst, note16
-
-		mus_note noteC, note2_8
-		mus_note noteRst, note2_4; 97E4
-
-		mus_note noteA#, note2_4_8_16
-		mus_note noteD, note8
-		mus_note noteG, note4_8_16
-		mus_note noteRst, note16
-
-		mus_note noteC, note2_8; 97E9
-		mus_note noteC, note4_16
-		mus_note noteG, note2_4
-		mus_note noteA, note4_8_16
-		mus_note noteF, note1
-		mus_note noteD#, note16; 97EE
-
-	db $fa
-
-		mus_note noteG, note2_8_16
-		mus_note noteA#, note2
-		mus_note noteD, note2_16
-		mus_note noteC, note4_16; 97F3
-		mus_note noteD#, note2_4_8
-		mus_note noteF, note2
-		mus_note noteC#, note2_16
-
-	db $f2
-
-		mus_note noteG, note2_4; 97F8
-		mus_note noteG#, note4_8_16
-		mus_note noteF, note16
-		mus_note noteC, note4_8_16
-		mus_note noteC, note16
-		mus_note noteD, note8; 97FD
-		mus_note noteG, note2_4_8_16
-		mus_note noteRst, note16
-
-		mus_note noteC, note2_8
-		mus_note noteG, note8_16
-		mus_note noteD, note8; 9802
-		mus_note noteG#, note4_8_16
-		mus_note noteRst, note16
-
-		mus_note noteC, note2_8
-		mus_note noteG, note2
-		mus_note noteD, note8; 9807
-		mus_note noteG#, note2_4_8_16
-		mus_note noteRst, note16
-
-		mus_note noteC, note2_8
-		mus_note noteG, note2
-		mus_note noteRst, note2_8; 980C
-
-		mus_note noteC, note4_8_16
-		mus_note noteC, note16
-		mus_note noteD, note8
-		mus_note noteE, note4_8_16
-		mus_note noteRst, note16; 9811
-
-		mus_note noteC, note2_8
-		mus_note noteG, note2_4_8_16
-		mus_note noteC, note2
-		mus_note noteC, note2
-		mus_note noteG, note2; 9816
-
-	mus_octave oct1
-		mus_note noteRst, note16
-
-		mus_note noteF, note2
-		mus_note noteC, note4_8_16
-		mus_note noteC, note8; 981B
-		mus_note noteRst, note2_4_8
-
-		mus_note noteD#, note2_16
-		mus_note noteF, note2_16
-		mus_note noteG, note2_4_8_16
-
-	mus_octave oct1; 9820
-		mus_note noteD#, note1
-		mus_note noteB, note8_16
-		mus_note noteG, note2
-		mus_note noteRst, note2_8
-
-		mus_note noteC#, note4_8_16; 9825
-		mus_note noteC, note16
-		mus_note noteG, note2_8
-		mus_note noteG#, note2
-		mus_note noteF, note1
-		mus_note noteD, note8; 982A
-		mus_note noteC, note4_8_16
-		mus_note noteRst, note16
-
-		mus_note noteC#, note2_8
-		mus_note noteD, note2_8_16
-		mus_note noteF, note1; 982F
-		mus_note noteD#, note2_8_16
-		mus_note noteF, note2
-		mus_note noteC#, note2_8_16
-		mus_note noteC#, note4
-		mus_note noteG, note4; 9834
-		mus_note noteD, note4
-		mus_note noteG, note8_16
-		mus_note noteRst, note2_8
-
-		mus_note noteG, note2_8
-		mus_note noteD, note8; 9839
-		mus_note noteC#, note2
-		mus_note noteF, note2_4
-		mus_note noteG#, note4_8
-		mus_note noteD#, note16
-		mus_note noteC, note8; 983E
-		mus_note noteD, note4_16
-		mus_note noteF#, note1
-		mus_note noteG, note2_4_8_16
-		mus_note noteG#, note16
-		mus_note noteF#, note1; 9843
-		mus_note noteD, note4_8_16
-
-	mus_end
-
-UnknSong_md_9846:
-		mus_note noteRst, note2_8
-
-		mus_note noteD, note4_8_16
-		mus_note noteC, note16; 9848
-		mus_note noteRst, note2_4
-
-		mus_note noteD#, note1
-		mus_note noteD#, note16
-		mus_note noteC, note8
-		mus_note noteC#, note2_8; 984D
-		mus_note noteRst, note2_4
-
-		mus_note noteD, note4
-		mus_note noteRst, note2_4
-
-		mus_note noteC#, note8_16
-		mus_note noteA#, note2; 9852
-		mus_note noteD, note2_16
-		mus_note noteC, note8_16
-		mus_note noteC#, note2_16
-
-	db $f2
-
-		mus_note noteRst, note2_8; 9857
-
-		mus_note noteD, note4_8_16
-		mus_note noteC, note16
-		mus_note noteF#, note1
-		mus_note noteD, note2_8
-		mus_note noteF, note4_16; 985C
-		mus_note noteF, note2_4_8
-		mus_note noteD, note8
-		mus_note noteD, note1
-		mus_note noteF, note2_4
-		mus_note noteC#, note2_8; 9861
-		mus_note noteF, note2_4_8_16
-		mus_note noteD, note4
-		mus_note noteF, note4_8_16
-		mus_note noteG, note2_16
-
-	mus_jump 7, $728; 9869
-		mus_note noteRst, note2_4
-
-		mus_note noteD, note2_8_16
-		mus_note noteRst, note2_4
-
-		mus_note noteC#, note2_4
-		mus_note noteD#, note2_4_16; 986E
-		mus_note noteC#, note2_16
-
-	db $f5
-
-		mus_note noteD#, note2_4_8_16
-		mus_note noteC, note2_16
-		mus_note noteG#, note8_16; 9873
-		mus_note noteF, note2
-		mus_note noteRst, note2_8
-
-	mus_mod 1, 12, 0
-	mus_jump 255, $34CA
-		mus_note noteF, note2_8_16; 987D
-
-	mus_jump 185, $4ECA
-		mus_note noteF, note2_8
-
-	db $da
-
-		mus_note noteE, note2_4_8_16
-		mus_note noteF, note2_8; 9885
-
-	mus_jump 254, $328
-	db $d2
-
-		mus_note noteE, note2_4_8_16
-		mus_note noteF, note2_8
-		mus_note noteA#, note1; 988D
-
-	mus_mod 0, 12, 0
-	mus_mod 3, 12, 0
-	mus_mod 233, 12, 0
-	mus_mod 230, 12, 0
-	mus_mod 231, 12, 0; 989C
-		mus_note noteC#, note4_8_16
-		mus_note noteC, note2_16
-		mus_note noteD, note8
-		mus_note noteC#, note4_8_16
-		mus_note noteRst, note16; 98A1
-
-		mus_note noteRst, note2_4_8
-
-		mus_note noteG#, note2_8
-		mus_note noteF, note2_8_16
-		mus_note noteD, note8
-		mus_note noteC, note4_8_16; 98A6
-		mus_note noteRst, note16
-
-		mus_note noteRst, note2_4_8
-
-		mus_note noteG#, note2_8
-		mus_note noteF, note2_8_16
-		mus_note noteC#, note4_8_16; 98AB
-		mus_note noteC, note4_16
-		mus_note noteD, note8
-		mus_note noteD, note4_8_16
-		mus_note noteRst, note16
-
-		mus_note noteRst, note2_4_8; 98B0
-
-		mus_note noteG#, note2_8
-		mus_note noteF, note2_8_16
-		mus_note noteD, note8
-		mus_note noteD, note2_4_8_16
-		mus_note noteRst, note16; 98B5
-
-		mus_note noteRst, note2_4_8
-
-		mus_note noteG#, note2_8
-		mus_note noteF, note2_8_16
-		mus_note noteD, note8
-		mus_note noteD#, note2_4_8_16; 98BA
-		mus_note noteRst, note16
-
-		mus_note noteRst, note2_4_8
-
-		mus_note noteG#, note2_8
-		mus_note noteF, note2_8_16
-		mus_note noteD, note8; 98BF
-		mus_note noteE, note4_8_16
-		mus_note noteRst, note16
-
-		mus_note noteRst, note2_4_8
-
-		mus_note noteG#, note2_8
-		mus_note noteF, note2_8_16; 98C4
-		mus_note noteD, note8
-		mus_note noteE, note2_4_8_16
-		mus_note noteRst, note16
-
-		mus_note noteRst, note2_4_8
-
-		mus_note noteG#, note2_8; 98C9
-		mus_note noteF, note2_8_16
-		mus_note noteD, note8
-		mus_note noteF, note4_8_16
-		mus_note noteRst, note16
-
-		mus_note noteRst, note2_4_8; 98CE
-
-		mus_note noteG#, note2_8
-		mus_note noteF, note2_8_16
-		mus_note noteD, note8
-		mus_note noteF, note2_4_8_16
-		mus_note noteRst, note16; 98D3
-
-		mus_note noteRst, note2_4_8
-
-		mus_note noteG#, note2_8
-		mus_note noteF, note2_8_16
-		mus_note noteD, note8
-		mus_note noteF#, note4_8_16; 98D8
-		mus_note noteRst, note16
-
-		mus_note noteRst, note2_4_8
-
-		mus_note noteG#, note2_8
-		mus_note noteF, note2_8_16
-		mus_note noteD, note8; 98DD
-		mus_note noteF#, note2_4_8_16
-		mus_note noteRst, note16
-
-		mus_note noteRst, note2_4_8
-
-		mus_note noteG#, note2_8
-		mus_note noteF, note2_8_16; 98E2
-		mus_note noteD, note8
-		mus_note noteD#, note4_8_16
-		mus_note noteRst, note16
-
-		mus_note noteRst, note2_4_8
-
-		mus_note noteG#, note2_8; 98E7
-		mus_note noteF, note2_8_16
-		mus_note noteD, note8
-		mus_note noteG, note4_8_16
-		mus_note noteRst, note16
-
-		mus_note noteRst, note2_4_8; 98EC
-
-		mus_note noteG#, note2_8
-		mus_note noteF, note2_8_16
-		mus_note noteD, note8
-		mus_note noteG, note2_4_8_16
-		mus_note noteRst, note16; 98F1
-
-		mus_note noteRst, note2_4_8
-
-		mus_note noteG#, note2_8
-		mus_note noteF, note2_8_16
-		mus_note noteD, note8
-		mus_note noteG#, note4_8_16; 98F6
-		mus_note noteRst, note16
-
-		mus_note noteRst, note2_4_8
-
-		mus_note noteG#, note2_8
-		mus_note noteF, note2_8_16
-		mus_note noteD, note8; 98FB
-		mus_note noteG#, note2_4_8_16
-		mus_note noteRst, note16
-
-		mus_note noteRst, note2_4_8
-
-		mus_note noteG#, note2_8
-		mus_note noteF, note2_8_16; 9900
-		mus_note noteD, note8
-		mus_note noteA, note4_8_16
-		mus_note noteRst, note16
-
-		mus_note noteRst, note2_4_8
-
-		mus_note noteG#, note2_8; 9905
-		mus_note noteF, note2_8_16
-		mus_note noteD, note8
-		mus_note noteA, note2_4_8_16
-		mus_note noteRst, note16
-
-		mus_note noteRst, note2_4_8; 990A
-
-		mus_note noteG#, note2_8
-		mus_note noteF, note2_8_16
-		mus_note noteD, note8
-		mus_note noteA#, note4_8_16
-		mus_note noteRst, note16; 990F
-
-		mus_note noteRst, note2_4_8
-
-		mus_note noteG#, note2_8
-		mus_note noteF, note2_8_16
-		mus_note noteD, note8
-		mus_note noteA#, note2_4_8_16; 9914
-		mus_note noteRst, note16
-
-		mus_note noteRst, note2_4_8
-
-		mus_note noteG#, note2_8
-		mus_note noteF, note2_8_16
-		mus_note noteD#, note2_4_8_16; 9919
-		mus_note noteC, note8
-		mus_note noteD, note8
-		mus_note noteB, note2_4_8_16
-		mus_note noteRst, note16
-
-		mus_note noteRst, note2_4_8; 991E
-
-		mus_note noteG#, note2_8
-		mus_note noteF, note2_8_16
-		mus_note noteD, note8
-		mus_note noteB, note4_8_16
-		mus_note noteRst, note16; 9923
-
-		mus_note noteRst, note2_4_8
-
-		mus_note noteG#, note2_8
-		mus_note noteF, note2_8_16
-		mus_note noteD, note8
-		mus_note noteRst, note4_8_16; 9928
-
-		mus_note noteRst, note16
-
-		mus_note noteRst, note2_4_8
-
-		mus_note noteG#, note2_8
-		mus_note noteF, note2_8_16
-
-	mus_mod 232, 12, 0; 992F
-		mus_note noteD#, note2_4_8_16
-
-	mus_end
-
-UnknSong_md_9932:
-	mus_mod 4, 12, 0
-		mus_note noteA#, note1
-
-	mus_octave oct7; 9936
-		mus_note noteD, note4_16
-		mus_note noteD#, note2_4_8_16
-		mus_note noteC, note2_16
-
-	mus_octave oct7
-		mus_note noteC#, note16; 993B
-		mus_note noteD#, note2_4_8_16
-		mus_note noteC, note16
-
-	mus_octave oct7
-		mus_note noteD, note4_8
-		mus_note noteA#, note1; 9940
-
-	mus_octave oct7
-		mus_note noteC#, note2_8_16
-		mus_note noteD#, note2_4_8_16
-		mus_note noteG#, note16
-
-	mus_octave oct7; 9945
-		mus_note noteC#, note2_8_16
-		mus_note noteD#, note2_4_8_16
-		mus_note noteG, note2
-
-	mus_octave oct7
-		mus_note noteD, note4_16; 994A
-		mus_note noteRst, note4
-
-		mus_note noteG#, note1
-		mus_note noteF, note2_8_16
-		mus_note noteF#, note1
-		mus_note noteF, note1; 994F
-		mus_note noteD, note4_8_16
-		mus_note noteC, note16
-		mus_note noteF, note4_16
-		mus_note noteD, note2_8
-		mus_note noteC#, note2_8; 9954
-		mus_note noteC#, note8
-		mus_note noteC, note16
-		mus_note noteE, note16
-		mus_note noteC#, note2_8
-		mus_note noteG, note2_4_16; 9959
-
-	mus_mod 236, 12, 0
-		mus_note noteG, note2_4_8
-
-	mus_mod 237, 12, 0
-		mus_note noteG, note2_4_8_16
-
-	mus_octave oct1; 9962
-		mus_note noteRst, note16
-
-		mus_note noteC, note2
-		mus_note noteC, note2
-		mus_note noteE, note1
-		mus_note noteF, note8; 9967
-		mus_note noteG, note2_8
-		mus_note noteG#, note2
-		mus_note noteG#, note8
-		mus_note noteE, note1
-		mus_note noteC, note4_8_16; 996C
-		mus_note noteC, note16
-
-	db $fa
-	db $ec
-
-		mus_note noteRst, note16
-
-		mus_note noteF#, note2; 9971
-
-	db $fa
-	mus_tempo 192, 111
-		mus_note noteC, note2_8
-		mus_note noteE, note2_8_16
-		mus_note noteG, note2_4_8_16; 9978
-
-	mus_octave oct1
-		mus_note noteC, note1
-		mus_note noteF, note1
-		mus_note noteC#, note4_8_16
-		mus_note noteC, note16; 997D
-		mus_note noteD, note8
-		mus_note noteD, note4_8_16
-		mus_note noteRst, note16
-
-		mus_note noteC#, note2_8
-		mus_note noteG, note2_4_8_16; 9982
-		mus_note noteA#, note2
-		mus_note noteD, note2_16
-		mus_note noteC#, note2_4_8
-		mus_note noteG, note2_4
-
-	mus_jump 7, $F20; 998A
-	db $fa
-
-		mus_note noteC, note8
-		mus_note noteRst, note16
-
-	mus_jump 20, $130
-		mus_note noteRst, note2_8; 9992
-
-		mus_note noteG, note2_4_8_16
-
-	mus_jump 20, $B28
-		mus_note noteD#, note2_16
-		mus_note noteC, note2_8
-
-	db $fa; 999A
-
-		mus_note noteC, note8
-		mus_note noteRst, note16
-
-		mus_note noteB, note2_4_8_16
-		mus_note noteD, note2_16
-		mus_note noteC, note4; 999F
-		mus_note noteD#, note2_16
-		mus_note noteC, note8
-		mus_note noteRst, note2_8
-
-		mus_note noteA#, note1
-
-	db $d5; 99A4
-
-		mus_note noteF#, note8_16
-		mus_note noteF#, note2_4
-		mus_note noteD, note2_8
-		mus_note noteF, note4_16
-		mus_note noteF, note2_4_8; 99A9
-		mus_note noteD, note8
-		mus_note noteC#, note4_8_16
-		mus_note noteRst, note16
-
-		mus_note noteC#, note2_8
-		mus_note noteD, note8_16; 99AE
-		mus_note noteG, note2
-		mus_note noteD, note8
-		mus_note noteC, note4_8_16
-		mus_note noteRst, note16
-
-		mus_note noteC#, note2_8; 99B3
-		mus_note noteD, note8_16
-		mus_note noteG, note2
-
-	db $d1
-
-		mus_note noteD, note8
-		mus_note noteD, note4_8_16; 99B8
-		mus_note noteRst, note16
-
-		mus_note noteC#, note2_8
-		mus_note noteG, note2
-		mus_note noteD, note8
-		mus_note noteD, note2_4_8_16; 99BD
-		mus_note noteRst, note16
-
-		mus_note noteC#, note2_8
-		mus_note noteG, note2
-		mus_note noteD, note8
-		mus_note noteD#, note2_4_8_16; 99C2
-		mus_note noteRst, note16
-
-		mus_note noteC#, note2_8
-		mus_note noteG, note2
-		mus_note noteD, note8
-		mus_note noteE, note4_8_16; 99C7
-		mus_note noteRst, note16
-
-		mus_note noteC#, note2_8
-		mus_note noteG, note2
-		mus_note noteD, note8
-		mus_note noteE, note2_4_8_16; 99CC
-		mus_note noteRst, note16
-
-		mus_note noteC#, note2_8
-		mus_note noteG, note2
-		mus_note noteD, note8
-		mus_note noteF, note4_8_16; 99D1
-		mus_note noteRst, note16
-
-		mus_note noteC#, note2_8
-		mus_note noteG, note2
-		mus_note noteD, note8
-		mus_note noteF, note2_4_8_16; 99D6
-		mus_note noteRst, note16
-
-		mus_note noteC#, note2_8
-		mus_note noteG, note2
-		mus_note noteD, note8
-		mus_note noteF#, note4_8_16; 99DB
-		mus_note noteRst, note16
-
-		mus_note noteC#, note2_8
-		mus_note noteG, note2
-		mus_note noteD, note8
-		mus_note noteF#, note2_4_8_16; 99E0
-		mus_note noteRst, note16
-
-		mus_note noteC#, note2_8
-		mus_note noteG, note2
-		mus_note noteD, note8
-		mus_note noteG, note4_8_16; 99E5
-		mus_note noteRst, note16
-
-		mus_note noteC#, note2_8
-		mus_note noteG, note2
-		mus_note noteD, note8
-		mus_note noteG, note2_4_8_16; 99EA
-		mus_note noteRst, note16
-
-		mus_note noteC#, note2_8
-		mus_note noteG, note2
-		mus_note noteD, note8
-		mus_note noteG#, note4_8_16; 99EF
-		mus_note noteRst, note16
-
-		mus_note noteC#, note2_8
-		mus_note noteG, note2
-		mus_note noteD, note8
-		mus_note noteG#, note2_4_8_16; 99F4
-		mus_note noteRst, note16
-
-		mus_note noteC#, note2_8
-		mus_note noteG, note2
-		mus_note noteD, note8
-		mus_note noteA, note4_8_16; 99F9
-		mus_note noteRst, note16
-
-		mus_note noteC#, note2_8
-		mus_note noteG, note2
-		mus_note noteD, note8
-		mus_note noteA, note2_4_8_16; 99FE
-		mus_note noteRst, note16
-
-		mus_note noteC#, note2_8
-		mus_note noteG, note2
-		mus_note noteD, note8
-		mus_note noteA#, note4_8_16; 9A03
-		mus_note noteRst, note16
-
-		mus_note noteC#, note2_8
-		mus_note noteG, note2
-		mus_note noteD, note8
-		mus_note noteA#, note2_4_8_16; 9A08
-		mus_note noteRst, note16
-
-		mus_note noteC#, note2_8
-		mus_note noteG, note2
-		mus_note noteD, note8
-		mus_note noteD#, note4_8_16; 9A0D
-		mus_note noteRst, note16
-
-		mus_note noteC#, note2_8
-		mus_note noteG, note2
-		mus_note noteD#, note2_4_8_16
-		mus_note noteC, note8; 9A12
-		mus_note noteD, note8
-		mus_note noteB, note2_4_8_16
-		mus_note noteRst, note16
-
-		mus_note noteC#, note2_8
-		mus_note noteG, note2; 9A17
-		mus_note noteD, note8
-		mus_note noteB, note4_8_16
-		mus_note noteRst, note16
-
-		mus_note noteC#, note2_8
-		mus_note noteG, note2; 9A1C
-		mus_note noteD, note8
-		mus_note noteRst, note4_8_16
-
-		mus_note noteRst, note16
-
-		mus_note noteC#, note2_8
-		mus_note noteG, note2; 9A21
-		mus_note noteG, note2_4
-
-	mus_jump 4, $420
-		mus_note noteD#, note2_4_8_16
-		mus_note noteC, note2_16
-
-	mus_octave oct7; 9A29
-		mus_note noteC#, note16
-		mus_note noteG, note2_8
-		mus_note noteA#, note2
-		mus_note noteRst, note2_8_16
-
-		mus_note noteG#, note1; 9A2E
-		mus_note noteF, note2_8_16
-		mus_note noteC, note2_4_8
-		mus_note noteRst, note4
-
-		mus_note noteF#, note2
-		mus_note noteF, note2_8; 9A33
-		mus_note noteD#, note2_4_8_16
-		mus_note noteG#, note16
-
-	mus_octave oct7
-		mus_note noteD, note4_8_16
-
-	mus_octave oct7; 9A38
-		mus_note noteC#, note2_8_16
-		mus_note noteA#, note1
-
-	mus_octave oct7
-		mus_note noteD, note4_8
-
-	mus_octave oct7; 9A3D
-		mus_note noteC#, note2_4_16
-		mus_note noteD#, note2_4_8_16
-		mus_note noteC, note2_16
-
-	mus_octave oct7
-		mus_note noteC#, note16; 9A42
-
-	mus_octave oct7
-		mus_note noteC#, note8_16
-
-	mus_octave oct7
-		mus_note noteC#, note2
-
-	mus_octave oct7; 9A47
-		mus_note noteD, note8
-		mus_note noteD#, note2_4_8_16
-		mus_note noteE, note16
-
-	mus_octave oct7
-		mus_note noteC#, note4_16; 9A4C
-
-	mus_octave oct7
-		mus_note noteC#, note2_8
-
-	mus_octave oct7
-		mus_note noteD, note4
-		mus_note noteD#, note2_4_8_16; 9A51
-		mus_note noteG, note2
-
-	mus_octave oct7
-		mus_note noteD, note4_16
-		mus_note noteA#, note1
-
-	mus_mod 0, 12, 0; 9A58
-	mus_mod 3, 12, 0
-	mus_mod 2, 12, 0
-	mus_mod 233, 12, 0
-	mus_mod 235, 12, 0
-	mus_mod 230, 12, 0; 9A67
-	mus_mod 231, 12, 0
-		mus_note noteC#, note4_8_16
-		mus_note noteA#, note16
-		mus_note noteD, note8
-		mus_note noteC, note4_8_16; 9A6E
-		mus_note noteRst, note16
-
-		mus_note noteRst, note2_4_8
-
-		mus_note noteG#, note2_8
-		mus_note noteF, note2_8_16
-		mus_note noteD#, note2_4_8_16; 9A73
-		mus_note noteC, note8
-		mus_note noteC#, note4_8_16
-		mus_note noteC#, note2_16
-		mus_note noteD, note8
-		mus_note noteB, note4_8_16; 9A78
-		mus_note noteRst, note16
-
-		mus_note noteRst, note2_4_8
-
-		mus_note noteG#, note2_8
-		mus_note noteF, note2_8_16
-
-	mus_mod 232, 12, 0; 9A7F
-	mus_mod 234, 12, 0
-		mus_note noteD#, note2_4_8_16
-
-	mus_end
-
-UnknSong_md_9a85:
-	mus_mod 4, 12, 0
-		mus_note noteRst, note2_8; 9A88
-
-		mus_note noteE, note8_16
-		mus_note noteD, note8_16
-		mus_note noteC, note4_8
-		mus_note noteD, note16
-
-	db $fc; 9A8D
-
-		mus_note noteRst, note2_8
-
-	db $fa
-
-		mus_note noteC, note8
-		mus_note noteRst, note16
-
-		mus_note noteF#, note1; 9A92
-		mus_note noteF, note1
-		mus_note noteD, note4_8_16
-		mus_note noteC, note16
-		mus_note noteF, note4_16
-		mus_note noteD, note2_8; 9A97
-		mus_note noteC#, note2_8
-		mus_note noteC#, note8
-		mus_note noteC, note16
-		mus_note noteE, note16
-		mus_note noteC#, note2_8; 9A9C
-		mus_note noteF, note2_4_8
-		mus_note noteF, note4_16
-		mus_note noteD, note8
-		mus_note noteC, note4_8_16
-		mus_note noteRst, note16; 9AA1
-
-		mus_note noteC#, note2_8_16
-		mus_note noteE, note2
-		mus_note noteC, note2
-		mus_note noteC, note2
-
-	mus_octave oct1; 9AA6
-		mus_note noteC, note4
-		mus_note noteE, note1
-		mus_note noteG, note2_16
-
-	mus_octave oct1
-		mus_note noteC, note1; 9AAB
-		mus_note noteE, note8
-		mus_note noteC, note4_16
-		mus_note noteC#, note4
-		mus_note noteC, note2_4_8_16
-		mus_note noteC, note16; 9AB0
-		mus_note noteB, note2_8
-		mus_note noteD, note2_16
-		mus_note noteC, note4_8
-		mus_note noteC, note2_4_16
-		mus_note noteD, note4; 9AB5
-		mus_note noteD, note4
-		mus_note noteC#, note2_16
-
-	db $f8
-
-	mus_octave oct2
-		mus_note noteRst, note4_8; 9ABA
-
-	db $f5
-
-		mus_note noteC, note4_8_16
-		mus_note noteC, note16
-		mus_note noteE, note1
-		mus_note noteD, note8; 9ABF
-		mus_note noteD, note4_8_16
-		mus_note noteRst, note16
-
-		mus_note noteC, note2_8
-
-	db $fa
-
-		mus_note noteC, note8; 9AC4
-		mus_note noteRst, note16
-
-		mus_note noteG, note2
-
-	db $f1
-	mus_jump 3, $638
-		mus_note noteD, note8; 9ACC
-		mus_note noteD, note2_4_8_16
-		mus_note noteRst, note16
-
-		mus_note noteC, note2_8
-		mus_note noteRst, note2_4
-
-	db $d6; 9AD1
-
-		mus_note noteRst, note8
-
-	mus_octave oct6
-		mus_note noteC#, note2_8_16
-		mus_note noteD, note8_16
-		mus_note noteC#, note4; 9AD6
-		mus_note noteC#, note2_8_16
-		mus_note noteD, note8_16
-		mus_note noteC#, note4
-		mus_note noteC, note2_4_16
-		mus_note noteC, note4_8; 9ADB
-		mus_note noteG, note2_16
-		mus_note noteA#, note2
-		mus_note noteC#, note2_8_16
-		mus_note noteC#, note4
-		mus_note noteD, note16; 9AE0
-		mus_note noteRst, note1
-
-	db $fa
-
-		mus_note noteC, note8
-		mus_note noteRst, note16
-
-	mus_jump 20, $230; 9AE8
-		mus_note noteC#, note2_16
-		mus_note noteD, note2_8_16
-
-	db $fa
-
-		mus_note noteC, note8
-		mus_note noteRst, note16; 9AED
-
-	mus_jump 134, $2328
-		mus_note noteD#, note2_16
-		mus_note noteC, note8_16
-		mus_note noteC#, note2_16
-		mus_note noteC#, note1; 9AF5
-		mus_note noteD, note8
-		mus_note noteD, note2_8_16
-		mus_note noteRst, note16
-
-		mus_note noteD, note8_16
-		mus_note noteD, note8_16; 9AFA
-		mus_note noteD, note8_16
-		mus_note noteG, note2
-		mus_note noteD, note8
-		mus_note noteC#, note8_16
-		mus_note noteRst, note16; 9AFF
-
-		mus_note noteC#, note8
-		mus_note noteC#, note4_8_16
-		mus_note noteF, note2_4
-		mus_note noteG, note4
-		mus_note noteD, note4; 9B04
-		mus_note noteG, note8_16
-
-	db $fa
-
-		mus_note noteC, note4_8
-		mus_note noteRst, note16
-
-		mus_note noteA#, note2; 9B09
-		mus_note noteD, note16
-		mus_note noteC, note2_8
-
-	mus_volume 36
-	mus_mod 5, 12, 0
-		mus_note noteD#, note2_4_8_16; 9B11
-		mus_note noteG, note2
-
-	mus_octave oct7
-		mus_note noteD, note4_16
-		mus_note noteRst, note2_8
+Func_90c6: ; 0x90c6
+	xor a
+	ld [$cfc7], a
+	ld [$d083], a
+	dec a
+	ld [$c0ee], a
+	call PlaySound
+	call DelayFrame
+	ld c, $8
+	ld a, [$d05c]
+	and a
+	jr z, .asm_90e3 ; 0x90dd $4
+	ld a, $ea
+	jr .asm_9100 ; 0x90e1 $1d
+.asm_90e3
+	ld a, [$d059]
+	cp $c8
+	jr c, .asm_90fe ; 0x90e8 $14
+	cp $f3
+	jr z, .asm_90fa ; 0x90ec $c
+	cp $f7
+	jr nz, .asm_90f6 ; 0x90f0 $4
+	ld a, $ea
+	jr .asm_9100 ; 0x90f4 $a
+.asm_90f6
+	ld a, $ed
+	jr .asm_9100 ; 0x90f8 $6
+.asm_90fa
+	ld a, $f3
+	jr .asm_9100 ; 0x90fc $2
+.asm_90fe
+	ld a, $f0
+.asm_9100
+	jp PlayMusic
+; 0x9103
+
+Func_9103: ; 0x9103
+	ld c, $0
+.asm_9105
+	ld b, $0
+	ld hl, $c026
+	add hl, bc
+	ld a, [hl]
+	and a
+	jr z, .asm_9131 ; 0x910d $22
+	ld a, c
+	cp $4
+	jr nc, .asm_912e ; 0x9112 $1a
+	ld a, [$c002]
+	and a
+	jr z, .asm_912e ; 0x9118 $14
+	bit 7, a
+	jr nz, .asm_9131 ; 0x911c $13
+	set 7, a
+	ld [$c002], a
+	xor a
+	ld [$ff00+$25], a
+	ld [$ff00+$1a], a
+	ld a, $80
+	ld [$ff00+$1a], a
+	jr .asm_9131 ; 0x912c $3
+.asm_912e
+	call Func_9138
+.asm_9131
+	ld a, c
+	inc c
+	cp $7
+	jr nz, .asm_9105 ; 0x9135 $ce
+	ret
+; 0x9138
+
+Func_9138: ; 0x9138
+	ld b, $0
+	ld hl, $c0b6
+	add hl, bc
+	ld a, [hl]
+	cp $1
+	jp z, Func_91d0
+	dec a
+	ld [hl], a
+	ld a, c
+	cp $4
+	jr nc, .asm_9154 ; 0x9149 $9
+	ld hl, $c02a
+	add hl, bc
+	ld a, [hl]
+	and a
+	jr z, .asm_9154 ; 0x9151 $1
+	ret
+.asm_9154
+	ld hl, $c02e
+	add hl, bc
+	bit 6, [hl]
+	jr z, .asm_915f ; 0x915a $3
+	call Func_980d
+.asm_915f
+	ld b, $0
+	ld hl, $c036
+	add hl, bc
+	bit 0, [hl]
+	jr nz, .asm_9171 ; 0x9167 $8
+	ld hl, $c02e
+	add hl, bc
+	bit 2, [hl]
+	jr nz, .asm_9185 ; 0x916f $14
+.asm_9171
+	ld hl, $c02e
+	add hl, bc
+	bit 4, [hl]
+	jr z, .asm_917c ; 0x9177 $3
+	jp Func_96f9
+.asm_917c
+	ld hl, $c04e
+	add hl, bc
+	ld a, [hl]
+	and a
+	jr z, .asm_9186 ; 0x9182 $2
+	dec [hl]
+.asm_9185
+	ret
+.asm_9186
+	ld hl, $c056
+	add hl, bc
+	ld a, [hl]
+	and a
+	jr nz, .asm_918f ; 0x918c $1
+	ret
+.asm_918f
+	ld d, a
+	ld hl, $c05e
+	add hl, bc
+	ld a, [hl]
+	and $f
+	and a
+	jr z, .asm_919c ; 0x9198 $2
+	dec [hl]
+	ret
+.asm_919c
+	ld a, [hl]
+	swap [hl]
+	or [hl]
+	ld [hl], a
+	ld hl, $c066
+	add hl, bc
+	ld e, [hl]
+	ld hl, $c02e
+	add hl, bc
+	bit 3, [hl]
+	jr z, .asm_91bc ; 0x91ac $e
+	res 3, [hl]
+	ld a, d
+	and $f
+	ld d, a
+	ld a, e
+	sub d
+	jr nc, .asm_91ba ; 0x91b6 $2
+	ld a, $0
+.asm_91ba
+	jr .asm_91c8 ; 0x91ba $c
+.asm_91bc
+	set 3, [hl]
+	ld a, d
+	and $f0
+	swap a
+	add e
+	jr nc, .asm_91c8 ; 0x91c4 $2
+	ld a, $ff
+.asm_91c8
+	ld d, a
+	ld b, $3
+	call Func_9838
+	ld [hl], d
+	ret
+; 0x91d0
+
+Func_91d0 ; 0x91d0
+	ld hl, $c06e
+	add hl, bc
+	ld a, [hl]
+	ld hl, $c04e
+	add hl, bc
+	ld [hl], a
+	ld hl, $c02e
+	add hl, bc
+	res 4, [hl]
+	res 5, [hl]
+	call Func_91e6
+	ret
+; 0x91e6
+
+Func_91e6 ; 0x91e6
+	call Func_9825
+	ld d, a
+	cp $ff
+	jp nz, Func_9274
+	ld b, $0
+	ld hl, $c02e
+	add hl, bc
+	bit 1, [hl]
+	jr nz, .asm_9224 ; 0x91f7 $2b
+	ld a, c
+	cp $3
+	jr nc, .asm_9200 ; 0x91fc $2
+	jr .asm_923f ; 0x91fe $3f
+.asm_9200
+	res 2, [hl]
+	ld hl, $c036
+	add hl, bc
+	res 0, [hl]
+	cp $6
+	jr nz, .asm_9214 ; 0x920a $8
+	ld a, $0
+	ld [$ff00+$1a], a
+	ld a, $80
+	ld [$ff00+$1a], a
+.asm_9214
+	jr nz, .asm_9222 ; 0x9214 $c
+	ld a, [$c003]
+	and a
+	jr z, .asm_9222 ; 0x921a $6
+	xor a
+	ld [$c003], a
+	jr .asm_923f ; 0x9220 $1d
+.asm_9222
+	jr .asm_9248 ; 0x9222 $24
+.asm_9224
+	res 1, [hl]
+	ld d, $0
+	ld a, c
+	add a
+	ld e, a
+	ld hl, $c006
+	add hl, de
+	push hl
+	ld hl, $c016
+	add hl, de
+	ld e, l
+	ld d, h
+	pop hl
+	ld a, [de]
+	ld [hli], a
+	inc de
+	ld a, [de]
+	ld [hl], a
+	jp Func_91e6
+.asm_923f
+	ld hl, $5b1f
+	add hl, bc
+	ld a, [$ff00+$25]
+	and [hl]
+	ld [$ff00+$25], a
+.asm_9248
+	ld a, [$c02a]
+	cp $14
+	jr nc, .asm_9251 ; 0x924d $2
+	jr .asm_926e ; 0x924f $1d
+.asm_9251
+	ld a, [$c02a]
+	cp $86
+	jr z, .asm_926e ; 0x9256 $16
+	jr c, .asm_925c ; 0x9258 $2
+	jr .asm_926e ; 0x925a $12
+.asm_925c
+	ld a, c
+	cp $4
+	jr z, .asm_9265 ; 0x925f $4
+	call Func_96c7
+	ret c
+.asm_9265
+	ld a, [$c005]
+	ld [$ff00+$24], a
+	xor a
+	ld [$c005], a
+.asm_926e
+	ld hl, $c026
+	add hl, bc
+	ld [hl], b
+	ret
+; 0x9274
+
+Func_9274: ; 0x9274
+	cp $fd
+	jp nz, Func_92a9
+	call Func_9825
+	push af
+	call Func_9825
+	ld d, a
+	pop af
+	ld e, a
+	push de
+	ld d, $0
+	ld a, c
+	add a
+	ld e, a
+	ld hl, $c006
+	add hl, de
+	push hl
+	ld hl, $c016
+	add hl, de
+	ld e, l
+	ld d, h
+	pop hl
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hld]
+	ld [de], a
+	pop de
+	ld [hl], e
+	inc hl
+	ld [hl], d
+	ld b, $0
+	ld hl, $c02e
+	add hl, bc
+	set 1, [hl]
+	jp Func_91e6
+; 0x92a9
+
+Func_92a9: ; 0x92a9
+	cp $fe
+	jp nz, Func_92e4
+	call Func_9825
+	ld e, a
+	and a
+	jr z, .asm_92cd ; 0x92b3 $18
+	ld b, $0
+	ld hl, $c0be
+	add hl, bc
+	ld a, [hl]
+	cp e
+	jr nz, .asm_92cb ; 0x92bd $c
+	ld a, $1
+	ld [hl], a
+	call Func_9825
+	call Func_9825
+	jp Func_91e6
+.asm_92cb
+	inc a
+	ld [hl], a
+.asm_92cd
+	call Func_9825
+	push af
+	call Func_9825
+	ld b, a
+	ld d, $0
+	ld a, c
+	add a
+	ld e, a
+	ld hl, $c006
+	add hl, de
+	pop af
+	ld [hli], a
+	ld [hl], b
+	jp Func_91e6
+; 0x92e4
+
+Func_92e4: ; 0x92e4
+	and $f0
+	cp $d0
+	jp nz, Func_9323
+	ld a, d
+	and $f
+	ld b, $0
+	ld hl, $c0c6
+	add hl, bc
+	ld [hl], a
+	ld a, c
+	cp $3
+	jr z, .asm_9320 ; 0x92f8 $26
+	call Func_9825
+	ld d, a
+	ld a, c
+	cp $2
+	jr z, .asm_930c ; 0x9301 $9
+	cp $6
+	jr nz, .asm_9319 ; 0x9305 $12
+	ld hl, $c0e7
+	jr .asm_930f ; 0x930a $3
+.asm_930c
+	ld hl, $c0e6
+.asm_930f
+	ld a, d
+	and $f
+	ld [hl], a
+	ld a, d
+	and $30
+	sla a
+	ld d, a
+.asm_9319
+	ld b, $0
+	ld hl, $c0de
+	add hl, bc
+	ld [hl], d
+.asm_9320
+	jp Func_91e6
+; 0x9323
+
+Func_9323: ; 0x9323
+	ld a, d
+	cp $e8
+	jr nz, .asm_9335 ; 0x9326 $d
+	ld b, $0
+	ld hl, $c02e
+	add hl, bc
+	ld a, [hl]
+	xor $1
+	ld [hl], a
+	jp Func_91e6
+.asm_9335
+	cp $ea
+	jr nz, .asm_936d ; 0x9337 $34
+	call Func_9825
+	ld b, $0
+	ld hl, $c04e
+	add hl, bc
+	ld [hl], a
+	ld hl, $c06e
+	add hl, bc
+	ld [hl], a
+	call Func_9825
+	ld d, a
+	and $f0
+	swap a
+	ld b, $0
+	ld hl, $c056
+	add hl, bc
+	srl a
+	ld e, a
+	adc b
+	swap a
+	or e
+	ld [hl], a
+	ld a, d
+	and $f
+	ld d, a
+	ld hl, $c05e
+	add hl, bc
+	swap a
+	or d
+	ld [hl], a
+	jp Func_91e6
+.asm_936d
+	cp $eb
+	jr nz, .asm_93a5 ; 0x936f $34
+	call Func_9825
+	ld b, $0
+	ld hl, $c076
+	add hl, bc
+	ld [hl], a
+	call Func_9825
+	ld d, a
+	and $f0
+	swap a
+	ld b, a
+	ld a, d
+	and $f
+	call Func_9858
+	ld b, $0
+	ld hl, $c0a6
+	add hl, bc
+	ld [hl], d
+	ld hl, $c0ae
+	add hl, bc
+	ld [hl], e
+	ld b, $0
+	ld hl, $c02e
+	add hl, bc
+	set 4, [hl]
+	call Func_9825
+	ld d, a
+	jp Func_950a
+.asm_93a5
+	cp $ec
+	jr nz, .asm_93ba ; 0x93a7 $11
+	call Func_9825
+	rrca
+	rrca
+	and $c0
+	ld b, $0
+	ld hl, $c03e
+	add hl, bc
+	ld [hl], a
+	jp Func_91e6
+.asm_93ba
+	cp $ed
+	jr nz, .asm_93fa ; 0x93bc $3c
+	ld a, c
+	cp $4
+	jr nc, .asm_93de ; 0x93c1 $1b
+	call Func_9825
+	ld [$c0e8], a
+	call Func_9825
+	ld [$c0e9], a
+	xor a
+	ld [$c0ce], a
+	ld [$c0cf], a
+	ld [$c0d0], a
+	ld [$c0d1], a
+	jr .asm_93f7 ; 0x93dc $19
+.asm_93de
+	call Func_9825
+	ld [$c0ea], a
+	call Func_9825
+	ld [$c0eb], a
+	xor a
+	ld [$c0d2], a
+	ld [$c0d3], a
+	ld [$c0d4], a
+	ld [$c0d5], a
+.asm_93f7
+	jp Func_91e6
+.asm_93fa
+	cp $ee
+	jr nz, .asm_9407 ; 0x93fc $9
+	call Func_9825
+	ld [$c004], a
+	jp Func_91e6
+.asm_9407
+	cp $ef
+	jr nz, .asm_9426 ; 0x9409 $1b
+	call Func_9825
+	push bc
+	call Func_9876
+	pop bc
+	ld a, [$c003]
+	and a
+	jr nz, .asm_9423 ; 0x9417 $a
+	ld a, [$c02d]
+	ld [$c003], a
+	xor a
+	ld [$c02d], a
+.asm_9423
+	jp Func_91e6
+.asm_9426
+	cp $fc
+	jr nz, .asm_9444 ; 0x9428 $1a
+	call Func_9825
+	ld b, $0
+	ld hl, $c046
+	add hl, bc
+	ld [hl], a
+	and $c0
+	ld hl, $c03e
+	add hl, bc
+	ld [hl], a
+	ld hl, $c02e
+	add hl, bc
+	set 6, [hl]
+	jp Func_91e6
+.asm_9444
+	cp $f0
+	jr nz, .asm_9450 ; 0x9446 $8
+	call Func_9825
+	ld [$ff00+$24], a
+	jp Func_91e6
+.asm_9450
+	cp $f8
+	jr nz, .asm_945f ; 0x9452 $b
+	ld b, $0
+	ld hl, $c036
+	add hl, bc
+	set 0, [hl]
+	jp Func_91e6
+.asm_945f
+	and $f0
+	cp $e0
+	jr nz, .asm_9472 ; 0x9463 $d
+	ld hl, $c0d6
+	ld b, $0
+	add hl, bc
+	ld a, d
+	and $f
+	ld [hl], a
+	jp Func_91e6
+.asm_9472
+	cp $20
+	jr nz, .asm_94bf ; 0x9474 $49
+	ld a, c
+	cp $3
+	jr c, .asm_94bf ; 0x9479 $44
+	ld b, $0
+	ld hl, $c036
+	add hl, bc
+	bit 0, [hl]
+	jr nz, .asm_94bf ; 0x9483 $3a
+	call Func_950a
+	ld d, a
+	ld b, $0
+	ld hl, $c03e
+	add hl, bc
+	ld a, [hl]
+	or d
+	ld d, a
+	ld b, $1
+	call Func_9838
+	ld [hl], d
+	call Func_9825
+	ld d, a
+	ld b, $2
+	call Func_9838
+	ld [hl], d
+	call Func_9825
+	ld e, a
+	ld a, c
+	cp $7
+	ld a, $0
+	jr z, .asm_94b2 ; 0x94ab $5
+	push de
+	call Func_9825
+	pop de
+.asm_94b2
+	ld d, a
+	push de
+	call Func_9629
+	call Func_95f8
+	pop de
+	call Func_964b
+	ret
+.asm_94bf
+	ld a, c
+	cp $4
+	jr c, .asm_94db ; 0x94c2 $17
+	ld a, d
+	cp $10
+	jr nz, .asm_94db ; 0x94c7 $12
+	ld b, $0
+	ld hl, $c036
+	add hl, bc
+	bit 0, [hl]
+	jr nz, .asm_94db ; 0x94d1 $8
+	call Func_9825
+	ld [$ff00+$10], a
+	jp Func_91e6
+.asm_94db
+	ld a, c
+	cp $3
+	jr nz, Func_950a ; 0x94de $2a
+	ld a, d
+	and $f0
+	cp $b0
+	jr z, .asm_94f5 ; 0x94e5 $e
+	jr nc, Func_950a ; 0x94e7 $21
+	swap a
+	ld b, a
+	ld a, d
+	and $f
+	ld d, a
+	ld a, b
+	push de
+	push bc
+	jr .asm_94fd ; 0x94f3 $8
+.asm_94f5
+	ld a, d
+	and $f
+	push af
+	push bc
+	call Func_9825
+.asm_94fd
+	ld d, a
+	ld a, [$c003]
+	and a
+	jr nz, .asm_9508 ; 0x9502 $4
+	ld a, d
+	call Func_9876
+.asm_9508
+	pop bc
+	pop de
+
+Func_950a: ; 0x950a
+	ld a, d
+	push af
+	and $f
+	inc a
+	ld b, $0
+	ld e, a
+	ld d, b
+	ld hl, $c0c6
+	add hl, bc
+	ld a, [hl]
+	ld l, b
+	call Func_9847
+	ld a, c
+	cp $4
+	jr nc, .asm_952b ; 0x951f $a
+	ld a, [$c0e8]
+	ld d, a
+	ld a, [$c0e9]
+	ld e, a
+	jr .asm_953e ; 0x9529 $13
+.asm_952b
+	ld d, $1
+	ld e, $0
+	cp $7
+	jr z, .asm_953e ; 0x9531 $b
+	call Func_9693
+	ld a, [$c0ea]
+	ld d, a
+	ld a, [$c0eb]
+	ld e, a
+.asm_953e
+	ld a, l
+	ld b, $0
+	ld hl, $c0ce
+	add hl, bc
+	ld l, [hl]
+	call Func_9847
+	ld e, l
+	ld d, h
+	ld hl, $c0ce
+	add hl, bc
+	ld [hl], e
+	ld a, d
+	ld hl, $c0b6
+	add hl, bc
+	ld [hl], a
+	ld hl, $c036
+	add hl, bc
+	bit 0, [hl]
+	jr nz, .asm_9568 ; 0x955c $a
+	ld hl, $c02e
+	add hl, bc
+	bit 2, [hl]
+	jr z, .asm_9568 ; 0x9564 $2
+	pop hl
+	ret
+.asm_9568
+	pop af
+	and $f0
+	cp $c0
+	jr nz, .asm_959f ; 0x956d $30
+	ld a, c
+	cp $4
+	jr nc, .asm_957c ; 0x9572 $8
+	ld hl, $c02a
+	add hl, bc
+	ld a, [hl]
+	and a
+	jr nz, .asm_959e ; 0x957a $22
+.asm_957c
+	ld a, c
+	cp $2
+	jr z, .asm_9585 ; 0x957f $4
+	cp $6
+	jr nz, .asm_9592 ; 0x9583 $d
+.asm_9585
+	ld b, $0
+	ld hl, $5b1f
+	add hl, bc
+	ld a, [$ff00+$25]
+	and [hl]
+	ld [$ff00+$25], a
+	jr .asm_959e ; 0x9590 $c
+.asm_9592
+	ld b, $2
+	call Func_9838
+	ld a, $8
+	ld [hli], a
+	inc hl
+	ld a, $80
+	ld [hl], a
+.asm_959e
+	ret
+.asm_959f
+	swap a
+	ld b, $0
+	ld hl, $c0d6
+	add hl, bc
+	ld b, [hl]
+	call Func_9858
+	ld b, $0
+	ld hl, $c02e
+	add hl, bc
+	bit 4, [hl]
+	jr z, .asm_95b8 ; 0x95b3 $3
+	call Func_978f
+.asm_95b8
+	push de
+	ld a, c
+	cp $4
+	jr nc, .asm_95cd ; 0x95bc $f
+	ld hl, $c02a
+	ld d, $0
+	ld e, a
+	add hl, de
+	ld a, [hl]
+	and a
+	jr nz, .asm_95cb ; 0x95c7 $2
+	jr .asm_95cd ; 0x95c9 $2
+.asm_95cb
+	pop de
+	ret
+.asm_95cd
+	ld b, $0
+	ld hl, $c0de
+	add hl, bc
+	ld d, [hl]
+	ld b, $2
+	call Func_9838
+	ld [hl], d
+	call Func_9629
+	call Func_95f8
+	pop de
+	ld b, $0
+	ld hl, $c02e
+	add hl, bc
+	bit 0, [hl]
+	jr z, .asm_95ef ; 0x95e9 $4
+	inc e
+	jr nc, .asm_95ef ; 0x95ec $1
+	inc d
+.asm_95ef
+	ld hl, $c066
+	add hl, bc
+	ld [hl], e
+	call Func_964b
+	ret
+; 0x95f8
+
+Func_95f8: ; 0x95f8
+	ld b, $0
+	ld hl, $5b27
+	add hl, bc
+	ld a, [$ff00+$25]
+	or [hl]
+	ld d, a
+	ld a, c
+	cp $7
+	jr z, .asm_9613 ; 0x9605 $c
+	cp $4
+	jr nc, .asm_9625 ; 0x9609 $1a
+	ld hl, $c02a
+	add hl, bc
+	ld a, [hl]
+	and a
+	jr nz, .asm_9625 ; 0x9611 $12
+.asm_9613
+	ld a, [$c004]
+	ld hl, $5b27
+	add hl, bc
+	and [hl]
+	ld d, a
+	ld a, [$ff00+$25]
+	ld hl, $5b1f
+	add hl, bc
+	and [hl]
+	or d
+	ld d, a
+.asm_9625
+	ld a, d
+	ld [$ff00+$25], a
+	ret
+; 0x9629
+
+Func_9629: ; 0x9629
+	ld b, $0
+	ld hl, $c0b6
+	add hl, bc
+	ld d, [hl]
+	ld a, c
+	cp $2
+	jr z, .asm_9644 ; 0x9633 $f
+	cp $6
+	jr z, .asm_9644 ; 0x9637 $b
+	ld a, d
+	and $3f
+	ld d, a
+	ld hl, $c03e
+	add hl, bc
+	ld a, [hl]
+	or d
+	ld d, a
+.asm_9644
+	ld b, $1
+	call Func_9838
+	ld [hl], d
+	ret
+; 0x964b
+
+Func_964b: ; 0x964b
+	ld a, c
+	cp $2
+	jr z, .asm_9654 ; 0x964e $4
+	cp $6
+	jr nz, .asm_9681 ; 0x9652 $2d
+.asm_9654
+	push de
+	ld de, $c0e6
+	cp $2
+	jr z, .asm_965f ; 0x965a $3
+	ld de, $c0e7
+.asm_965f
+	ld a, [de]
+	add a
+	ld d, $0
+	ld e, a
+	ld hl, $4361
+	add hl, de
+	ld e, [hl]
+	inc hl
+	ld d, [hl]
+	ld hl, $ff30
+	ld b, $f
+	ld a, $0
+	ld [$ff00+$1a], a
+.asm_9674
+	ld a, [de]
+	inc de
+	ld [hli], a
+	ld a, b
+	dec b
+	and a
+	jr nz, .asm_9674 ; 0x967a $f8
+	ld a, $80
+	ld [$ff00+$1a], a
+	pop de
+.asm_9681
+	ld a, d
+	or $80
+	and $c7
+	ld d, a
+	ld b, $3
+	call Func_9838
+	ld [hl], e
+	inc hl
+	ld [hl], d
+	call Func_96b5
+	ret
+; 0x9693
+
+Func_9693: ; 0x9693
+	call Func_96e5
+	jr nc, .asm_96ab ; 0x9696 $13
+	ld d, $0
+	ld a, [$c0f2]
+	add $80
+	jr nc, .asm_96a2 ; 0x969f $1
+	inc d
+.asm_96a2
+	ld [$c0eb], a
+	ld a, d
+	ld [$c0ea], a
+	jr .asm_96b4 ; 0x96a9 $9
+.asm_96ab
+	xor a
+	ld [$c0eb], a
+	ld a, $1
+	ld [$c0ea], a
+.asm_96b4
+	ret
+; 0x96b5
+
+Func_96b5: ; 0x96b5
+	call Func_96e5
+	jr nc, .asm_96c6 ; 0x96b8 $c
+	ld a, [$c0f1]
+	add e
+	jr nc, .asm_96c1 ; 0x96be $1
+	inc d
+.asm_96c1
+	dec hl
+	ld e, a
+	ld [hl], e
+	inc hl
+	ld [hl], d
+.asm_96c6
+	ret
+; 0x96c7
+
+Func_96c7: ; 0x96c7
+	call Func_96e5
+	jr nc, .asm_96e2 ; 0x96ca $16
+	ld hl, $c006
+	ld e, c
+	ld d, $0
+	sla e
+	rl d
+	add hl, de
+	ld a, [hl]
+	sub $1
+	ld [hl], a
+	inc hl
+	ld a, [hl]
+	sbc $0
+	ld [hl], a
+	scf
+	ret
+.asm_96e2
+	scf
+	ccf
+	ret
+; 0x96e5
+
+Func_96e5: ; 0x96e5
+	ld a, [$c02a]
+	cp $14
+	jr nc, .asm_96ee ; 0x96ea $2
+	jr .asm_96f4 ; 0x96ec $6
+.asm_96ee
+	cp $86
+	jr z, .asm_96f4 ; 0x96f0 $2
+	jr c, .asm_96f7 ; 0x96f2 $3
+.asm_96f4
+	scf
+	ccf
+	ret
+.asm_96f7
+	scf
+	ret
+; 0x96f9
+
+Func_96f9: ; 0x96f9
+	ld hl, $c02e
+	add hl, bc
+	bit 5, [hl]
+	jp nz, .asm_9740
+	ld hl, $c09e
+	add hl, bc
+	ld e, [hl]
+	ld hl, $c096
+	add hl, bc
+	ld d, [hl]
+	ld hl, $c07e
+	add hl, bc
+	ld l, [hl]
+	ld h, b
+	add hl, de
+	ld d, h
+	ld e, l
+	ld hl, $c08e
+	add hl, bc
+	push hl
+	ld hl, $c086
+	add hl, bc
+	ld a, [hl]
+	pop hl
+	add [hl]
+	ld [hl], a
+	ld a, $0
+	adc e
+	ld e, a
+	ld a, $0
+	adc d
+	ld d, a
+	ld hl, $c0a6
+	add hl, bc
+	ld a, [hl]
+	cp d
+	jp c, .asm_9786
+	jr nz, .asm_9773 ; 0x9733 $3e
+	ld hl, $c0ae
+	add hl, bc
+	ld a, [hl]
+	cp e
+	jp c, .asm_9786
+	jr .asm_9773 ; 0x973e $33
+.asm_9740
+	ld hl, $c09e
+	add hl, bc
+	ld a, [hl]
+	ld hl, $c096
+	add hl, bc
+	ld d, [hl]
+	ld hl, $c07e
+	add hl, bc
+	ld e, [hl]
+	sub e
+	ld e, a
+	ld a, d
+	sbc b
+	ld d, a
+	ld hl, $c086
+	add hl, bc
+	ld a, [hl]
+	add a
+	ld [hl], a
+	ld a, e
+	sbc b
+	ld e, a
+	ld a, d
+	sbc b
+	ld d, a
+	ld hl, $c0a6
+	add hl, bc
+	ld a, d
+	cp [hl]
+	jr c, .asm_9786 ; 0x9767 $1d
+	jr nz, .asm_9773 ; 0x9769 $8
+	ld hl, $c0ae
+	add hl, bc
+	ld a, e
+	cp [hl]
+	jr c, .asm_9786 ; 0x9771 $13
+.asm_9773
+	ld hl, $c09e
+	add hl, bc
+	ld [hl], e
+	ld hl, $c096
+	add hl, bc
+	ld [hl], d
+	ld b, $3
+	call Func_9838
+	ld a, e
+	ld [hli], a
+	ld [hl], d
+	ret
+.asm_9786
+	ld hl, $c02e
+	add hl, bc
+	res 4, [hl]
+	res 5, [hl]
+	ret
+; 0x978f
+
+Func_978f: ; 0x978f
+	ld hl, $c096
+	add hl, bc
+	ld [hl], d
+	ld hl, $c09e
+	add hl, bc
+	ld [hl], e
+	ld hl, $c0b6
+	add hl, bc
+	ld a, [hl]
+	ld hl, $c076
+	add hl, bc
+	sub [hl]
+	jr nc, .asm_97a7 ; 0x97a3 $2
+	ld a, $1
+.asm_97a7
+	ld [hl], a
+	ld hl, $c0ae
+	add hl, bc
+	ld a, e
+	sub [hl]
+	ld e, a
+	ld a, d
+	sbc b
+	ld hl, $c0a6
+	add hl, bc
+	sub [hl]
+	jr c, .asm_97c3 ; 0x97b6 $b
+	ld d, a
+	ld b, $0
+	ld hl, $c02e
+	add hl, bc
+	set 5, [hl]
+	jr .asm_97e6 ; 0x97c1 $23
+.asm_97c3
+	ld hl, $c096
+	add hl, bc
+	ld d, [hl]
+	ld hl, $c09e
+	add hl, bc
+	ld e, [hl]
+	ld hl, $c0ae
+	add hl, bc
+	ld a, [hl]
+	sub e
+	ld e, a
+	ld a, d
+	sbc b
+	ld d, a
+	ld hl, $c0a6
+	add hl, bc
+	ld a, [hl]
+	sub d
+	ld d, a
+	ld b, $0
+	ld hl, $c02e
+	add hl, bc
+	res 5, [hl]
+.asm_97e6
+	ld hl, $c076
+	add hl, bc
+.asm_97ea
+	inc b
+	ld a, e
+	sub [hl]
+	ld e, a
+	jr nc, .asm_97ea ; 0x97ee $fa
+	ld a, d
+	and a
+	jr z, .asm_97f8 ; 0x97f2 $4
+	dec a
+	ld d, a
+	jr .asm_97ea ; 0x97f6 $f2
+.asm_97f8
+	ld a, e
+	add [hl]
+	ld d, b
+	ld b, $0
+	ld hl, $c07e
+	add hl, bc
+	ld [hl], d
+	ld hl, $c086
+	add hl, bc
+	ld [hl], a
+	ld hl, $c08e
+	add hl, bc
+	ld [hl], a
+	ret
+; 0x980d
+
+Func_980d: ; 0x980d
+	ld b, $0
+	ld hl, $c046
+	add hl, bc
+	ld a, [hl]
+	rlca
+	rlca
+	ld [hl], a
+	and $c0
+	ld d, a
+	ld b, $1
+	call Func_9838
+	ld a, [hl]
+	and $3f
+	or d
+	ld [hl], a
+	ret
+; 0x9825
+
+Func_9825: ; 0x9825
+	ld d, $0
+	ld a, c
+	add a
+	ld e, a
+	ld hl, $c006
+	add hl, de
+	ld a, [hli]
+	ld e, a
+	ld a, [hld]
+	ld d, a
+	ld a, [de]
+	inc de
+	ld [hl], e
+	inc hl
+	ld [hl], d
+	ret
+; 0x9838
+
+Func_9838: ; 0x9838
+	ld a, c
+	ld hl, $5b17
+	add l
+	jr nc, .asm_9840 ; 0x983d $1
+	inc h
+.asm_9840
+	ld l, a
+	ld a, [hl]
+	add b
+	ld l, a
+	ld h, $ff
+	ret
+; 0x9847
+
+Func_9847: ; 0x9847
+	ld h, $0
+.asm_9849
+	srl a
+	jr nc, .asm_984e ; 0x984b $1
+	add hl, de
+.asm_984e
+	sla e
+	rl d
+	and a
+	jr z, .asm_9857 ; 0x9853 $2
+	jr .asm_9849 ; 0x9855 $f2
+.asm_9857
+	ret
+; 0x9858
+
+Func_9858: ; 0x9858
+	ld h, $0
+	ld l, a
+	add hl, hl
+	ld d, h
+	ld e, l
+	ld hl, $5b2f
+	add hl, de
+	ld e, [hl]
+	inc hl
+	ld d, [hl]
+	ld a, b
+.asm_9866
+	cp $7
+	jr z, .asm_9871 ; 0x9868 $7
+	sra d
+	rr e
+	inc a
+	jr .asm_9866 ; 0x986f $f5
+.asm_9871
+	ld a, $8
+	add d
+	ld d, a
+	ret
+; 0x9876
+
+Func_9876: ; 0x9876
+	ld [$c001], a
+	cp $ff
+	jp z, Func_9a34
+	cp $b9
+	jp z, Func_994e
+	jp c, Func_994e
+	cp $fe
+	jr z, .asm_988d ; 0x9888 $3
+	jp nc, Func_994e
+.asm_988d
+	xor a
+	ld [$c000], a
+	ld [$c003], a
+	ld [$c0e9], a
+	ld [$c0e6], a
+	ld [$c0e7], a
+	ld d, $8
+	ld hl, $c016
+	call Func_9a89
+	ld hl, $c006
+	call Func_9a89
+	ld d, $4
+	ld hl, $c026
+	call Func_9a89
+	ld hl, $c02e
+	call Func_9a89
+	ld hl, $c03e
+	call Func_9a89
+	ld hl, $c046
+	call Func_9a89
+	ld hl, $c04e
+	call Func_9a89
+	ld hl, $c056
+	call Func_9a89
+	ld hl, $c05e
+	call Func_9a89
+	ld hl, $c066
+	call Func_9a89
+	ld hl, $c06e
+	call Func_9a89
+	ld hl, $c036
+	call Func_9a89
+	ld hl, $c076
+	call Func_9a89
+	ld hl, $c07e
+	call Func_9a89
+	ld hl, $c086
+	call Func_9a89
+	ld hl, $c08e
+	call Func_9a89
+	ld hl, $c096
+	call Func_9a89
+	ld hl, $c09e
+	call Func_9a89
+	ld hl, $c0a6
+	call Func_9a89
+	ld hl, $c0ae
+	call Func_9a89
+	ld a, $1
+	ld hl, $c0be
+	call Func_9a89
+	ld hl, $c0b6
+	call Func_9a89
+	ld hl, $c0c6
+	call Func_9a89
+	ld [$c0e8], a
+	ld a, $ff
+	ld [$c004], a
+	xor a
+	ld [$ff00+$24], a
+	ld a, $8
+	ld [$ff00+$10], a
+	ld a, $0
+	ld [$ff00+$25], a
+	xor a
+	ld [$ff00+$1a], a
+	ld a, $80
+	ld [$ff00+$1a], a
+	ld a, $77
+	ld [$ff00+$24], a
+	jp Func_9a8f
+; 0x994e
+
+Func_994e: ; 0x994e
+	ld l, a
+	ld e, a
+	ld h, $0
+	ld d, h
+	add hl, hl
+	add hl, de
+	ld de, $4000
+	add hl, de
+	ld a, h
+	ld [$c0ec], a
+	ld a, l
+	ld [$c0ed], a
+	ld a, [hl]
+	and $c0
+	rlca
+	rlca
+	ld c, a
+.asm_9967
+	ld d, c
+	ld a, c
+	add a
+	add c
+	ld c, a
+	ld b, $0
+	ld a, [$c0ec]
+	ld h, a
+	ld a, [$c0ed]
+	ld l, a
+	add hl, bc
+	ld c, d
+	ld a, [hl]
+	and $f
+	ld e, a
+	ld d, $0
+	ld hl, $c026
+	add hl, de
+	ld a, [hl]
+	and a
+	jr z, .asm_99a3 ; 0x9984 $1d
+	ld a, e
+	cp $7
+	jr nz, .asm_999a ; 0x9989 $f
+	ld a, [$c001]
+	cp $14
+	jr nc, .asm_9993 ; 0x9990 $1
+	ret
+.asm_9993
+	ld a, [hl]
+	cp $14
+	jr z, .asm_99a3 ; 0x9996 $b
+	jr c, .asm_99a3 ; 0x9998 $9
+.asm_999a
+	ld a, [$c001]
+	cp [hl]
+	jr z, .asm_99a3 ; 0x999e $3
+	jr c, .asm_99a3 ; 0x99a0 $1
+	ret
+.asm_99a3
+	xor a
+	push de
+	ld h, d
+	ld l, e
+	add hl, hl
+	ld d, h
+	ld e, l
+	ld hl, $c016
+	add hl, de
+	ld [hli], a
+	ld [hl], a
+	ld hl, $c006
+	add hl, de
+	ld [hli], a
+	ld [hl], a
+	pop de
+	ld hl, $c026
+	add hl, de
+	ld [hl], a
+	ld hl, $c02e
+	add hl, de
+	ld [hl], a
+	ld hl, $c03e
+	add hl, de
+	ld [hl], a
+	ld hl, $c046
+	add hl, de
+	ld [hl], a
+	ld hl, $c04e
+	add hl, de
+	ld [hl], a
+	ld hl, $c056
+	add hl, de
+	ld [hl], a
+	ld hl, $c05e
+	add hl, de
+	ld [hl], a
+	ld hl, $c066
+	add hl, de
+	ld [hl], a
+	ld hl, $c06e
+	add hl, de
+	ld [hl], a
+	ld hl, $c076
+	add hl, de
+	ld [hl], a
+	ld hl, $c07e
+	add hl, de
+	ld [hl], a
+	ld hl, $c086
+	add hl, de
+	ld [hl], a
+	ld hl, $c08e
+	add hl, de
+	ld [hl], a
+	ld hl, $c096
+	add hl, de
+	ld [hl], a
+	ld hl, $c09e
+	add hl, de
+	ld [hl], a
+	ld hl, $c0a6
+	add hl, de
+	ld [hl], a
+	ld hl, $c0ae
+	add hl, de
+	ld [hl], a
+	ld hl, $c036
+	add hl, de
+	ld [hl], a
+	ld a, $1
+	ld hl, $c0be
+	add hl, de
+	ld [hl], a
+	ld hl, $c0b6
+	add hl, de
+	ld [hl], a
+	ld hl, $c0c6
+	add hl, de
+	ld [hl], a
+	ld a, e
+	cp $4
+	jr nz, .asm_9a2b ; 0x9a25 $4
+	ld a, $8
+	ld [$ff00+$10], a
+.asm_9a2b
+	ld a, c
+	and a
+	jp z, Func_9a8f
+	dec c
+	jp .asm_9967
+; 0x9a34
+
+Func_9a34: ; 0x9a34
+	ld a, $80
+	ld [$ff00+$26], a
+	ld [$ff00+$1a], a
+	xor a
+	ld [$ff00+$25], a
+	ld [$ff00+$1c], a
+	ld a, $8
+	ld [$ff00+$10], a
+	ld [$ff00+$12], a
+	ld [$ff00+$17], a
+	ld [$ff00+$21], a
+	ld a, $40
+	ld [$ff00+$14], a
+	ld [$ff00+$19], a
+	ld [$ff00+$23], a
+	ld a, $77
+	ld [$ff00+$24], a
+	xor a
+	ld [$c000], a
+	ld [$c003], a
+	ld [$c002], a
+	ld [$c0e9], a
+	ld [$c0eb], a
+	ld [$c0e6], a
+	ld [$c0e7], a
+	ld d, $a0
+	ld hl, $c006
+	call Func_9a89
+	ld a, $1
+	ld d, $18
+	ld hl, $c0b6
+	call Func_9a89
+	ld [$c0e8], a
+	ld [$c0ea], a
+	ld a, $ff
+	ld [$c004], a
+	ret
+; 0x9a89
+
+Func_9a89: ; 0x9a89
+	ld b, d
+.asm_9a8a
+	ld [hli], a
+	dec b
+	jr nz, .asm_9a8a ; 0x9a8c $fc
+	ret
+; 0x9a8f
+
+Func_9a8f: ; 0x9a8f
+	ld a, [$c001]
+	ld l, a
+	ld e, a
+	ld h, $0
+	ld d, h
+	add hl, hl
+	add hl, de
+	ld de, $4000
+	add hl, de
+	ld e, l
+	ld d, h
+	ld hl, $c006
+	ld a, [de]
+	ld b, a
+	rlca
+	rlca
+	and $3
+	ld c, a
+	ld a, b
+	and $f
+	ld b, c
+	inc b
+	inc de
+	ld c, $0
+.asm_9ab1
+	cp c
+	jr z, .asm_9ab9 ; 0x9ab2 $5
+	inc c
+	inc hl
+	inc hl
+	jr .asm_9ab1 ; 0x9ab7 $f8
+.asm_9ab9
+	push hl
+	push bc
+	push af
+	ld b, $0
+	ld c, a
+	ld hl, $c026
+	add hl, bc
+	ld a, [$c001]
+	ld [hl], a
+	pop af
+	cp $3
+	jr c, .asm_9ad2 ; 0x9aca $6
+	ld hl, $c02e
+	add hl, bc
+	set 2, [hl]
+.asm_9ad2
+	pop bc
+	pop hl
+	ld a, [de]
+	ld [hli], a
+	inc de
+	ld a, [de]
+	ld [hli], a
+	inc de
+	inc c
+	dec b
+	ld a, b
+	and a
+	ld a, [de]
+	inc de
+	jr nz, .asm_9ab1 ; 0x9ae0 $cf
+	ld a, [$c001]
+	cp $14
+	jr nc, .asm_9aeb ; 0x9ae7 $2
+	jr .asm_9b15 ; 0x9ae9 $2a
+.asm_9aeb
+	ld a, [$c001]
+	cp $86
+	jr z, .asm_9b15 ; 0x9af0 $23
+	jr c, .asm_9af6 ; 0x9af2 $2
+	jr .asm_9b15 ; 0x9af4 $1f
+.asm_9af6
+	ld hl, $c02a
+	ld [hli], a
+	ld [hli], a
+	ld [hli], a
+	ld [hl], a
+	ld hl, $c012
+	ld de, $5b16
+	ld [hl], e
+	inc hl
+	ld [hl], d
+	ld a, [$c005]
+	and a
+	jr nz, .asm_9b15 ; 0x9b0a $9
+	ld a, [$ff00+$24]
+	ld [$c005], a
+	ld a, $77
+	ld [$ff00+$24], a
+.asm_9b15
+	ret
+; 0x9b16
 
 	mus_end; 9B16
 
@@ -7918,117 +6567,56 @@ UnknSong_md_9b17:
 	db $da
 	db $fb
 
-		mus_note noteC, note2_4_8_16
-		mus_note noteC, note8_16; 9B48
-		mus_note noteD#, note2_4_8_16
+Func_9b47: ; 0x9b47
+	ld c, $2
+	ld a, $de
+	call PlayMusic
+	ld hl, $c006
+	ld de, $71a2
+	call Func_9b60
+	ld de, $721d
+	call Func_9b60
+	ld de, $72b5
 
-	db $de
+Func_9b60: ; 0x9b60
+	ld a, e
+	ld [hli], a
+	ld a, d
+	ld [hli], a
+	ret
+; 0x9b65
 
-		mus_note noteRst, note2_4_8
+Func_9b65: ; 0x9b65
+	ld c, $2
+	ld a, $de
+	call PlayMusic
+	ld hl, $c006
+	ld de, $7119
+	jp Func_9b60
+; 0x9b75
 
-		mus_note noteA#, note8
-		mus_note noteD, note4; 9B4D
-		mus_note noteD, note8
-		mus_note noteC, note4_8_16
-		mus_note noteRst, note16
+Func_9b75: ; 0x9b75
+	call Func_9b47
+	ld hl, $c006
+	ld de, $719b
+	jp Func_9b60
+; 0x9b81
 
-		mus_note noteC#, note8
-		mus_note noteA#, note8_16; 9B52
-		mus_note noteG, note8
-		mus_note noteRst, note2_4_8
-
-		mus_note noteF#, note16
-		mus_note noteF, note2_4
-		mus_note noteC#, note8; 9B57
-		mus_note noteC#, note2_4_8
-		mus_note noteG, note8_16
-		mus_note noteRst, note2_4_8
-
-		mus_note noteF#, note16
-		mus_note noteF, note2_4; 9B5C
-		mus_note noteC#, note8
-		mus_note noteB, note4_8
-		mus_note noteG, note8_16
-		mus_note noteG, note2_4
-		mus_note noteD, note8_16; 9B61
-		mus_note noteG, note2_8_16
-		mus_note noteD, note8_16
-		mus_note noteRst, note2_8
-
-		mus_note noteC, note2_4_8_16
-		mus_note noteC, note8_16; 9B66
-		mus_note noteD#, note2_4_8_16
-
-	db $de
-
-		mus_note noteRst, note2_4_8
-
-		mus_note noteA#, note8
-		mus_note noteD, note4; 9B6B
-		mus_note noteD, note8
-		mus_note noteC, note4_8_16
-		mus_note noteRst, note16
-
-		mus_note noteC#, note8
-		mus_note noteC#, note2_8; 9B70
-		mus_note noteG, note8
-		mus_note noteRst, note4
-
-		mus_note noteF#, note16
-		mus_note noteF, note2_4
-		mus_note noteRst, note2_4_8; 9B75
-
-		mus_note noteE, note2
-		mus_note noteF, note2_4
-		mus_note noteD, note8
-		mus_note noteC, note4_8_16
-		mus_note noteRst, note16; 9B7A
-
-		mus_note noteC#, note8
-		mus_note noteA, note2_4
-		mus_note noteG, note8
-		mus_note noteRst, note4
-
-		mus_note noteF#, note16; 9B7F
-		mus_note noteF, note2_4
-		mus_note noteD#, note2_4_8_16
-		mus_note noteC, note2_8_16
-
-	mus_mod 200, 12, 15
-	mus_mod 201, 12, 15; 9B88
-		mus_note noteD#, note2_4_8_16
-
-	mus_end
-
-UnknSong_md_9b8b:
-	mus_mod 199, 12, 15
-		mus_note noteC, note2_4_8_16
-		mus_note noteF#, note4_16; 9B8F
-		mus_note noteRst, note2_4_8
-
-		mus_note noteD#, note2_8
-		mus_note noteD#, note2
-		mus_note noteC, note2_4_8_16
-		mus_note noteC, note8_16; 9B94
-		mus_note noteD#, note2_4_8_16
-		mus_note noteRst, note4
-
-		mus_note noteRst, note2_4_8
-
-		mus_note noteA#, note8
-		mus_note noteD, note4; 9B99
-		mus_note noteD, note8
-		mus_note noteC, note4_8_16
-		mus_note noteRst, note16
-
-		mus_note noteC#, note8
-		mus_note noteF#, note1; 9B9E
-		mus_note noteF#, note2_8_16
-		mus_note noteRst, note4
-
-		mus_note noteF#, note16
-		mus_note noteF, note2_4
-; 9BA2
+Func_9b81: ; 0x9b81
+	ld a, $a
+	ld [$cfc8], a
+	ld [$cfc9], a
+	ld a, $ff
+	ld [$cfc7], a
+	ld c, $64
+	call DelayFrames
+	ld c, $2
+	ld a, $c3
+	call PlayMusic
+	ld hl, $c006
+	ld de, $6a6f
+	jp Func_9b60
+; 0x9ba3
  
 ;Pokemon Healed Music
 PkmnHealed_md_1: ;9BA3 - 9BC3

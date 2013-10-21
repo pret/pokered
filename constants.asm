@@ -105,6 +105,57 @@ PREDEF_JUMP: MACRO
 
 ; wram locations
 
+; data for all sprites on the current map
+; holds info for 16 sprites with $10 bytes each
+; player sprite is always sprite 0
+; C1x0: picture ID (fixed, loaded at map init)
+; C1x1: movement status (0: uninitialized, 1: ready, 2: delayed, 3: moving)
+; C1x2: sprite image index (changed on update, $ff if off screen, includes facing direction, progress in walking animation and a sprite-specific offset)
+; C1x3: Y screen position delta (-1,0 or 1; added to c1x4 on each walking animation update)
+; C1x4: Y screen position (in pixels, always 4 pixels above grid which makes sprites appear to be in the center of a tile)
+; C1x5: X screen position delta (-1,0 or 1; added to c1x6 on each walking animation update)
+; C1x6: X screen position (in pixels, snaps to grid if not currently walking)
+; C1x7: intra-animation-frame counter (counting upwards to 4 until c1x8 is incremented)
+; C1x8: animation frame counter (increased every 4 updates, hold four states (totalling to 16 walking frames)
+; C1x9: facing direction (0: down, 4: up, 8: left, $c: right)
+; C1xA
+; C1xB
+; C1xC
+; C1xD
+; C1xE
+; C1xF
+W_SPRITESTATEDATA1 EQU $C100 ; to $C200
+
+; more data for all sprites on the current map
+; holds info for 16 sprites with $10 bytes each
+; player sprite is always sprite 0
+; C2x0: walk animation counter (counting from $10 backwards when moving)
+; C2x1: 
+; C2x2: Y displacement (initialized at 8, supposed to keep moving sprites from moving too far, but bugged)
+; C2x3: X displacement (initialized at 8, supposed to keep moving sprites from moving too far, but bugged)
+; C2x4: Y position (in 2x2 tile grid steps, topmost 2x2 tile has value 4)
+; C2x5: X position (in 2x2 tile grid steps, leftmost 2x2 tile has value 4)
+; C2x6: movement byte 1 (determines whether a sprite can move, $ff:not moving, $fe:random movements, others unknown)
+; C2x7: (?) (set to $80 when in grass, else $0; may be used to draw grass above the sprite)
+; C2x8: delay until next movement (counted downwards, status (c1x1) is set to ready if reached 0)
+; C2x9
+; C2xA
+; C2xB
+; C2xC
+; C2xD
+; C2xE: sprite image base offset (in video ram, player always has value 1, used to compute c1x2)
+; C2xF
+W_SPRITESTATEDATA2 EQU $C200 ; to $C300
+
+; buffer for OAM data. Is copied to OAM RAM by OAM DMA
+W_OAMBUFFER EQU $C300 ; size $a0, to $C3A0
+
+; buffer for tiles that are visible on screen (20 columns by 18 rows = $168 bytes)
+W_SCREENTILESBUFFER EQU $C3A0 ; size $168, to $C508
+
+; buffer for temporarily saving and restoring current screen's tiles (e.g. if menus are drawn on top)
+W_SCREENTILESBACKBUFFER EQU $C508 ; size $168, to $C670
+
 ; the tiles of the row or column to be redrawn by RedrawExposedScreenEdge
 W_SCREENEDGETILES EQU $CBFC
 
@@ -144,6 +195,10 @@ W_LISTSCROLLOFFSET EQU $CC36
 ; set to 0 if you can't go past the top or bottom of the menu
 W_MENUWRAPPINGENABLED EQU $CC4A
 
+W_TRAINERHEADERFLAGBIT EQU $CC55
+
+W_RLEBYTECOUNTER      EQU $CCD2
+
 ; current HP of player and enemy substitutes
 W_PLAYERSUBSITUTEHP EQU $CCD7
 W_ENEMYSUBSITUTEHP EQU $CCD8
@@ -167,6 +222,10 @@ W_PLAYERMONSPECIALMOD  EQU $CD1D
 W_PLAYERMONACCURACYMOD EQU $CD1E
 W_PLAYERMONEVASIONMOD  EQU $CD1F
 
+
+W_ENGAGEDTRAINERCLASS  EQU $CD2D
+W_ENGAGEDTRAINERSETNUM EQU $CD2E
+
 ; stat modifiers for the enemy's current pokemon
 ; value can range from 1 - 13 ($1 to $D)
 ; 7 is normal
@@ -178,10 +237,37 @@ W_ENEMYMONACCURACYMOD EQU $CD32
 W_ENEMYMONEVASIONMOD  EQU $CD33
 
 W_WHICHTRADE EQU $CD3D ; which entry from TradeMons to select
+W_TRAINERSPRITEOFFSET   EQU $CD3D
+W_TRAINERENGAGEDISTANCE EQU $CD3E
+W_TRAINERFACINGDIR      EQU $CD3F
+W_TRAINERSCREENYPOS     EQU $CD40
+W_TRAINERSCREENXPOS     EQU $CD41
+
+; bit 0: is player engaged by trainer (to avoid being engaged by multiple trainers simultaniously)
+W_FLAGS_CD60 EQU $CD60
+
+; bit 1 means button presses will be ignored for that futton
+W_JOYPADFORBIDDENBUTTONSMASK EQU $CD6B
+
+; second buffer for temporarily saving and restoring current screen's tiles (e.g. if menus are drawn on top)
+W_SCREENTILESBACKBUFFER2 EQU $CD81 ; size $168, to $CEE9
+
+W_HPBARMAXHP   EQU $CEE9
+W_HPBAROLDHP   EQU $CEEB
+W_HPBARNEWHP   EQU $CEED
+W_HPBARDELTA   EQU $CEEF
+
+W_HPBARHPDIFFERENCE EQU $CEFD
 
 W_BUFFER EQU $CEE9 ; used for temporary things
 
 W_ANIMSOUNDID EQU $CF07 ; sound ID during battle animations
+
+; movement byte 2 of current sprite
+W_CURSPRITEMOVEMENT2 EQU $CF14
+
+W_GYMCITYNAME   EQU $CF5F
+W_GYMLEADERNAME EQU $CF70
 
 W_WHICHPOKEMON EQU $CF92 ; which pokemon you selected
 
@@ -203,6 +289,10 @@ W_PLAYERMOVETYPE     EQU $CFD5
 W_PLAYERMOVEACCURACY EQU $CFD6
 W_PLAYERMOVEMAXPP    EQU $CFD7
 
+W_ENEMYMONID    EQU $CFD8
+
+W_ENEMYMONNAME  EQU $CFDA
+
 W_ENEMYMONCURHP EQU $CFE6 ; active opponent's hp (16 bits)
 W_ENEMYMONNUMBER EQU $CFE8 ; active opponent's position in team (0 to 5)
 W_ENEMYMONSTATUS EQU $CFE9 ; active opponent's status condition
@@ -214,16 +304,23 @@ W_ENEMYMONSTATUS EQU $CFE9 ; active opponent's status condition
 	; bit 5 frz
 	; bit 6 par
 	; unused? (XXX confirm)
-W_ENEMYMONTYPES   EQU $CFEA
-W_ENEMYMONTYPE1   EQU $CFEA
-W_ENEMYMONTYPE2   EQU $CFEB
-W_ENEMYMONLEVEL   EQU $CFF3
-W_ENEMYMONMAXHP   EQU $CFF4 ; (16 bits)
-W_ENEMYMONDEFENSE EQU $CFF8
-W_ENEMYMONSPECIAL EQU $CFFC
-W_ENEMYMONPP      EQU $CFFE
+W_ENEMYMONTYPES    EQU $CFEA
+W_ENEMYMONTYPE1    EQU $CFEA
+W_ENEMYMONTYPE2    EQU $CFEB
+W_ENEMYMONMOVES    EQU $CFED
+W_ENEMYMONATKDEFIV EQU $CFF1
+W_ENEMYMONSPDSPCIV EQU $CFF2
+W_ENEMYMONLEVEL    EQU $CFF3
+W_ENEMYMONMAXHP    EQU $CFF4 ; (16 bits)
+W_ENEMYMONATTACK   EQU $CFF6
+W_ENEMYMONDEFENSE  EQU $CFF8
+W_ENEMYMONSPEED    EQU $CFFA
+W_ENEMYMONSPECIAL  EQU $CFFC
+W_ENEMYMONPP       EQU $CFFE
 
-W_PLAYERMONCURHP EQU $D015 ; active opponent's hp (16 bits)
+W_PLAYERMONNAME   EQU $D009
+W_PLAYERMONID     EQU $D014
+W_PLAYERMONCURHP  EQU $D015 ; active opponent's hp (16 bits)
 W_PLAYERMONSTATUS EQU $D018 ; the status of the player’s current monster
 	; bit 0 slp
 	; bit 1 slp
@@ -233,18 +330,26 @@ W_PLAYERMONSTATUS EQU $D018 ; the status of the player’s current monster
 	; bit 5 frz
 	; bit 6 par
 	; unused? (XXX confirm)
-W_PLAYERMONTYPES EQU $D019
-W_PLAYERMONTYPE1 EQU $D019
-W_PLAYERMONTYPE2 EQU $D01A
-W_PLAYERMONLEVEL EQU $D022
-W_PLAYERMONMAXHP EQU $D023 ; (16 bits)
-W_PLAYERMONPP    EQU $D02D
+W_PLAYERMONTYPES    EQU $D019
+W_PLAYERMONTYPE1    EQU $D019
+W_PLAYERMONTYPE2    EQU $D01A
+W_PLAYERMONMOVES    EQU $D01C
+W_PLAYERMONIVS      EQU $D020 ; 4x 4 bit: atk, def, spd, spc
+W_PLAYERMONLEVEL    EQU $D022
+W_PLAYERMONMAXHP    EQU $D023 ; (16 bits)
+W_PLAYERMONATK      EQU $D025
+W_PLAYERMONDEF      EQU $D027
+W_PLAYERMONSPEED    EQU $D029
+W_PLAYERMONSPECIAL  EQU $D02B
+W_PLAYERMONPP       EQU $D02D
 
 W_TRAINERCLASS EQU $D031
 
 W_ISINBATTLE EQU $D057 ; no battle, this is 0
                        ; wild battle, this is 1
                        ; trainer battle, this is 2
+
+W_PLAYERMONSALIVEFLAGS EQU $D058 ; 6 bit array, 1 if player mon is alive
 
 W_CUROPPONENT EQU $D059 ; in a wild battle, this is the species of pokemon
                         ; in a trainer battle, this is the trainer class + $C8
@@ -310,7 +415,6 @@ W_BASECOORDY EQU $D082
 W_FBTILECOUNTER EQU $D084 ; counts how many tiles of the current frame block have been drawn
 
 W_SUBANIMFRAMEDELAY EQU $D086 ; duration of each frame of the current subanimation in terms of screen refreshes
-
 W_SUBANIMCOUNTER EQU $D087 ; counts the number of subentries left in the current subanimation
 
 W_NUMFBTILES EQU $D089 ; number of tiles in current battle animation frame block
@@ -320,6 +424,12 @@ W_SUBANIMTRANSFORM EQU $D08B ; controls what transformations are applied to the 
 ; 02: flip horizontally and translate downwards 40 pixels
 ; 03: translate base coordinates of frame blocks, but don't change their internal coordinates or flip their tiles
 ; 04: reverse the subanimation
+
+W_PBSTOREDREGISTERH  EQU $D08C
+W_PBSTOREDREGISTERL  EQU $D08D
+W_PBSTOREDREGISTERD  EQU $D08E
+W_PBSTOREDREGISTERE  EQU $D08F
+W_PBSTOREDROMBANK    EQU $D092
 
 W_SUBANIMADDRPTR EQU $D094 ; the address _of the address_ of the current subanimation entry (2 bytes)
 
@@ -334,10 +444,53 @@ W_FBMODE EQU $D09E ; controls how the frame blocks are put together to form fram
 ; 03: delay, but don't clean OAM buffer
 ; 04: delay, without cleaning OAM buffer, and do not advance [W_FBDESTADDR], so that the next frame block will overwrite this one
 
-W_DAMAGE EQU $D0D7
+; sprite data is written column by column, each byte contains 8 columns (one for ech bit)
+; for 2bpp sprites, pairs of two consecutive bytes (i.e. pairs of consecutive rows of sprite data)
+; contain the upper and lower bit of each of the 8 pixels, respectively
+SPRITEBUFFERSIZE   EQU $188 ; 7 * 7 (tiles) * 8 (bytes per tile)
+S_SPRITEBUFFER0    EQU $A000 + 0 * SPRITEBUFFERSIZE
+S_SPRITEBUFFER1    EQU $A000 + 1 * SPRITEBUFFERSIZE
+S_SPRITEBUFFER2    EQU $A000 + 2 * SPRITEBUFFERSIZE
+
+W_SPRITECURPOSX         EQU $D0A1
+W_SPRITECURPOSY         EQU $D0A2
+W_SPRITEWITDH           EQU $D0A3
+W_SPRITEHEIGHT          EQU $D0A4
+W_SPRITEINPUTCURBYTE    EQU $D0A5 ; current input byte
+W_SPRITEINPUTBITCOUNTER EQU $D0A6 ; bit offset of last read input bit
+
+; determines where in the output byte the two bits are placed. Each byte contains four columns (2bpp data)
+; 3 -> XX000000   1st column
+; 2 -> 00XX0000   2nd column
+; 1 -> 0000XX00   3rd column
+; 0 -> 000000XX   4th column
+W_SPRITEOUTPUTBITOFFSET EQU $D0A7
+
+; bit 0 determines used buffer (0 -> $a188, 1 -> $a310)
+; bit 1 loading last sprite chunk? (there are at most 2 chunks per load operation)
+W_SPRITELOADFLAGS       EQU $D0A8
+W_SPRITEUNPACKMODE      EQU $D0A9
+W_SPRITEFLIPPED         EQU $D0AA
+
+W_SPRITEINPUTPTR        EQU $D0AB ; pointer to next input byte
+W_SPRITEOUTPUTPTR       EQU $D0AD ; pointer to current output byte
+W_SPRITEOUTPUTPTRCACHED EQU $D0AF ; used to revert pointer for different bit offsets
+W_SPRITEDECODETABLE0PTR EQU $D0B1 ; pointer to differential decoding table (assuming initial value 0)
+W_SPRITEDECODETABLE1PTR EQU $D0B3 ; pointer to differential decoding table (assuming initial value 1)
+
+H_SPRITEWIDTH           EQU $FF8B ; in bytes
+H_SPRITEINTERLACECOUNTER EQU $FF8B
+H_SPRITEHEIGHT          EQU $FF8C ; in bytes
+H_SPRITEOFFSET          EQU $FF8D
+
+; OAM flags used by this game
+OAMFLAG_ENDOFDATA   EQU %00000001 ; pseudo OAM flag, only used by game logic
+OAMFLAG_CANBEMASKED EQU %00000010 ; pseudo OAM flag, only used by game logic
+OAMFLAG_VFLIPPED    EQU %00100000 ; OAM flag flips the sprite vertically. Used for making left facing sprites face right and to alternate between left and right foot animation when walking up or down
 
 ; List type
 ; used in $D0B6
+W_LISTTYPE    EQU $D0B6
 MONSTER_NAME  EQU 1
 MOVE_NAME     EQU 2
 ; ???_NAME    EQU 3
@@ -345,6 +498,36 @@ ITEM_NAME     EQU 4
 PLAYEROT_NAME EQU 5
 ENEMYOT_NAME  EQU 6
 TRAINER_NAME  EQU 7
+
+W_MONHEADER       EQU $d0b8
+W_MONHDEXNUM      EQU $d0b8
+W_MONHBASESTATS   EQU $d0b9
+;W_MONHBASEHP      EQU $d0b9
+;W_MONHBASEATTACK  EQU $d0ba
+;W_MONHBASEDEFENSE EQU $d0bb
+W_MONHBASESPEED   EQU $d0bc
+;W_MONHBASESPECIAL EQU $d0bd
+W_MONHTYPES       EQU $d0be
+W_MONHTYPE1       EQU $d0be
+W_MONHTYPE2       EQU $d0bf
+W_MONHCATCHRATE   EQU $d0c0
+;W_MONHBASEXP      EQU $d0c1
+W_MONHSPRITEDIM   EQU $d0c2
+W_MONHFRONTSPRITE EQU $d0c3
+W_MONHBACKSPRITE  EQU $d0c5
+W_MONHMOVES       EQU $d0c7
+;W_MONHMOVE1       EQU $d0c7
+;W_MONHMOVE2       EQU $d0c8
+;W_MONHMOVE3       EQU $d0c9
+;W_MONHMOVE4       EQU $d0ca
+W_MONHGROWTHRATE  EQU $d0cb
+W_MONHLEARNSET    EQU $d0cc ; bit field, 7 bytes
+;W_MONHPADDING     EQU $d0d7
+
+
+
+W_DAMAGE EQU $D0D7
+
 
 W_CURENEMYLVL EQU $D127
 
@@ -357,60 +540,6 @@ W_PRIZE3 EQU $D13F
 W_PLAYERNAME EQU $D158 ; 11 characters, including null
 
 W_NUMINPARTY EQU $D163
-
-W_OWNEDPOKEMON EQU $D2F7 ; bit field, 19 bytes
-
-W_SEENPOKEMON EQU $D30A ; bit field, 19 bytes
-
-;number of items in bag
-W_NUMBAGITEMS     EQU $D31D
-; BAGITEM01  is an item id
-; BAGCOUNT01 is how many of this item
-W_BAGITEM01         EQU $D31E
-W_BAGITEM01QTY      EQU $D31F
-W_BAGITEM02         EQU $D320
-W_BAGITEM02QTY      EQU $D321
-W_BAGITEM03         EQU $D322
-W_BAGITEM03QTY      EQU $D323
-W_BAGITEM04         EQU $D324
-W_BAGITEM04QTY      EQU $D325
-W_BAGITEM05         EQU $D326
-W_BAGITEM05QTY      EQU $D327
-W_BAGITEM06         EQU $D328
-W_BAGITEM06QTY      EQU $D329
-W_BAGITEM07         EQU $D32A
-W_BAGITEM07QTY      EQU $D32B
-W_BAGITEM08         EQU $D32C
-W_BAGITEM08QTY      EQU $D32D
-W_BAGITEM09         EQU $D32E
-W_BAGITEM09QTY      EQU $D32F
-W_BAGITEM10         EQU $D330
-W_BAGITEM10QTY      EQU $D331
-W_BAGITEM11         EQU $D332
-W_BAGITEM11QTY      EQU $D333
-W_BAGITEM12         EQU $D334
-W_BAGITEM12QTY      EQU $D335
-W_BAGITEM13         EQU $D336
-W_BAGITEM13QTY      EQU $D337
-W_BAGITEM14         EQU $D338
-W_BAGITEM14QTY      EQU $D339
-W_BAGITEM15         EQU $D33A
-W_BAGITEM15QTY      EQU $D33B
-W_BAGITEM16         EQU $D33C
-W_BAGITEM16QTY      EQU $D33D
-W_BAGITEM17         EQU $D33E
-W_BAGITEM17QTY      EQU $D33F
-W_BAGITEM18         EQU $D340
-W_BAGITEM18QTY      EQU $D341
-W_BAGITEM19         EQU $D342
-W_BAGITEM19QTY      EQU $D343
-W_BAGITEM20         EQU $D344
-W_BAGITEM20QTY      EQU $D345
-
-; money is in decimal
-W_PLAYERMONEY3 EQU $D347
-W_PLAYERMONEY2 EQU $D348
-W_PLAYERMONEY1 EQU $D349
 
 W_PARTYMON1 EQU $D164
 W_PARTYMON2 EQU $D165
@@ -620,6 +749,60 @@ W_PARTYMON4NAME EQU $D2D6
 W_PARTYMON5NAME EQU $D2E1
 W_PARTYMON6NAME EQU $D2EC
 
+W_OWNEDPOKEMON EQU $D2F7 ; bit field, 19 bytes
+
+W_SEENPOKEMON EQU $D30A ; bit field, 19 bytes
+
+;number of items in bag
+W_NUMBAGITEMS     EQU $D31D
+; BAGITEM01  is an item id
+; BAGCOUNT01 is how many of this item
+W_BAGITEM01         EQU $D31E
+W_BAGITEM01QTY      EQU $D31F
+W_BAGITEM02         EQU $D320
+W_BAGITEM02QTY      EQU $D321
+W_BAGITEM03         EQU $D322
+W_BAGITEM03QTY      EQU $D323
+W_BAGITEM04         EQU $D324
+W_BAGITEM04QTY      EQU $D325
+W_BAGITEM05         EQU $D326
+W_BAGITEM05QTY      EQU $D327
+W_BAGITEM06         EQU $D328
+W_BAGITEM06QTY      EQU $D329
+W_BAGITEM07         EQU $D32A
+W_BAGITEM07QTY      EQU $D32B
+W_BAGITEM08         EQU $D32C
+W_BAGITEM08QTY      EQU $D32D
+W_BAGITEM09         EQU $D32E
+W_BAGITEM09QTY      EQU $D32F
+W_BAGITEM10         EQU $D330
+W_BAGITEM10QTY      EQU $D331
+W_BAGITEM11         EQU $D332
+W_BAGITEM11QTY      EQU $D333
+W_BAGITEM12         EQU $D334
+W_BAGITEM12QTY      EQU $D335
+W_BAGITEM13         EQU $D336
+W_BAGITEM13QTY      EQU $D337
+W_BAGITEM14         EQU $D338
+W_BAGITEM14QTY      EQU $D339
+W_BAGITEM15         EQU $D33A
+W_BAGITEM15QTY      EQU $D33B
+W_BAGITEM16         EQU $D33C
+W_BAGITEM16QTY      EQU $D33D
+W_BAGITEM17         EQU $D33E
+W_BAGITEM17QTY      EQU $D33F
+W_BAGITEM18         EQU $D340
+W_BAGITEM18QTY      EQU $D341
+W_BAGITEM19         EQU $D342
+W_BAGITEM19QTY      EQU $D343
+W_BAGITEM20         EQU $D344
+W_BAGITEM20QTY      EQU $D345
+
+; money is in decimal
+W_PLAYERMONEY3 EQU $D347
+W_PLAYERMONEY2 EQU $D348
+W_PLAYERMONEY1 EQU $D349
+
 W_RIVALNAME  EQU $D34A ; 11 characters, including null
 
 W_OPTIONS EQU $D355
@@ -663,48 +846,19 @@ W_SPRITESET EQU $D39D ; sprite set for the current map (11 sprite picture ID's)
 W_SPRITESETID EQU $D3A8 ; sprite set ID for the current map
 
 W_NUMSPRITES EQU $D4E1 ; number of sprites on the current map
-W_PEOPLEMOVEPERMISSIONS EQU $D4E4
 
-; coins are in decimal
-W_PLAYERCOINS1 EQU $D5A4
-W_PLAYERCOINS2 EQU $D5A5
+; two bytes per sprite (movement byte 2 , text ID)
+W_MAPSPRITEDATA EQU $D4e4
 
-W_OAKSLABCURSCRIPT EQU $D5F0
+; two bytes per sprite (trainer class/item ID , trainer set ID)
+W_MAPSPRITEEXTRADATA EQU $D504
 
-W_RIVALSTARTER EQU $D715
-
-W_PLAYERSTARTER EQU $D717
-
-W_GRASSRATE EQU $D887
-W_GRASSMONS EQU $D888
-W_WATERRATE EQU $D8A4 ; OVERLOADED
-W_WATERMONS EQU $D8A5 ; OVERLOADED
-
-W_ENEMYMONCOUNT  EQU $D89C
-
-W_ENEMYMON1HP EQU $D8A5 ; 16 bits
-
-W_ENEMYMON1MOVE3 EQU $D8AE
-
-W_ENEMYMON2MOVE3 EQU $D8DA
-
-W_ENEMYMON3MOVE3 EQU $D906
-
-W_ENEMYMON4MOVE3 EQU $D932
-
-W_ENEMYMON5MOVE3 EQU $D95E
-
-W_ENEMYMON6MOVE3 EQU $D98A
-
-W_PLAYTIMEHOURS     EQU $DA40 ; two bytes
-W_PLAYTIMEMINUTES   EQU $DA42 ; two bytes
-W_PLAYTIMESECONDS   EQU $DA44 ; one byte
-W_PLAYTIMEFRAMES    EQU $DA45 ; one byte
-
-W_NUMSAFARIBALLS EQU $DA47
-
-; number of mons in current box
-W_NUMINBOX EQU $DA80
+W_TILESETBANK             EQU $D52B
+W_TILESETBLOCKSPTR        EQU $D52C ; maps blocks (4x4 tiles) to it's tiles
+W_TILESETGFXPTR           EQU $D52E
+W_TILESETCOLLISIONPTR     EQU $D530 ; list of all walkable tiles
+W_TILESETTALKINGOVERTILES EQU $D532 ; 3 bytes
+W_GRASSTILE               EQU $D535
 
 ;number of items in box
 W_NUMBOXITEMS EQU $D53A
@@ -812,8 +966,203 @@ W_BOXITEM50       EQU $D59D
 W_BOXITEM50QTY    EQU $D59E
 ;box end of list $D59F
 
+; coins are in decimal
+W_PLAYERCOINS1 EQU $D5A4
+W_PLAYERCOINS2 EQU $D5A5
+W_MISSABLEOBJECTFLAGS EQU $D5A6 ; $20 bytes, bit array of missable objects. bit 1 = removed
+
+; each entry consists of 2 bytes
+; * the sprite ID (depending on the current map)
+; * the missable object index (global, used for W_MISSABLEOBJECTFLAGS)
+; terminated with $FF
+W_MISSABLEOBJECTLIST EQU $D5CE
+
+W_GAMEPROGRESSFLAGS           EQU $D5F0 ; $c8 bytes
+W_OAKSLABCURSCRIPT            EQU $D5F0
+W_PALLETTOWNCURSCRIPT         EQU $D5F1
+
+W_BLUESHOUSECURSCRIPT         EQU $D5F3
+W_VIRIDIANCITYCURSCRIPT       EQU $D5F4
+
+W_PEWTERCITYCURSCRIPT         EQU $D5F7
+W_ROUTE3CURSCRIPT             EQU $D5F8
+W_ROUTE4CURSCRIPT             EQU $D5F9
+
+W_VIRIDIANGYMCURSCRIPT        EQU $D5FB
+W_PEWTERGYMCURSCRIPT          EQU $D5FC
+W_CERULEANGYMCURSCRIPT        EQU $D5FD
+W_VERMILIONGYMCURSCRIPT       EQU $D5FE
+W_CELADONGYMCURSCRIPT         EQU $D5FF
+W_ROUTE6CURSCRIPT             EQU $D600
+W_ROUTE8CURSCRIPT             EQU $D601
+W_ROUTE24CURSCRIPT            EQU $D602
+W_ROUTE25CURSCRIPT            EQU $D603
+W_ROUTE9CURSCRIPT             EQU $D604
+W_ROUTE10CURSCRIPT            EQU $D605
+W_MTMOON1CURSCRIPT            EQU $D606
+W_MTMOON3CURSCRIPT            EQU $D607
+W_SSANNE8CURSCRIPT            EQU $D608
+W_SSANNE9CURSCRIPT            EQU $D609
+W_ROUTE22CURSCRIPT            EQU $D60A
+
+W_REDSHOUSE2CURSCRIPT         EQU $D60C
+W_VIRIDIANMARKETCURSCRIPT     EQU $D60D
+W_ROUTE22GATECURSCRIPT        EQU $D60E
+W_CERULEANCITYCURSCRIPT       EQU $D60F
+
+W_SSANNE5CURSCRIPT            EQU $D617
+W_VIRIDIANFORESTCURSCRIPT     EQU $D618
+W_MUSEUMF1CURSCRIPT           EQU $D619
+W_ROUTE13CURSCRIPT            EQU $D61A
+W_ROUTE14CURSCRIPT            EQU $D61B
+W_ROUTE17CURSCRIPT            EQU $D61C
+W_ROUTE19CURSCRIPT            EQU $D61D
+W_ROUTE21CURSCRIPT            EQU $D61E
+W_SAFARIZONEENTRANCECURSCRIPT EQU $D61F
+W_ROCKTUNNEL2CURSCRIPT        EQU $D620
+W_ROCKTUNNEL1CURSCRIPT        EQU $D621
+
+W_ROUTE11CURSCRIPT            EQU $D623
+W_ROUTE12CURSCRIPT            EQU $D624
+W_ROUTE15CURSCRIPT            EQU $D625
+W_ROUTE16CURSCRIPT            EQU $D626
+W_ROUTE18CURSCRIPT            EQU $D627
+W_ROUTE20CURSCRIPT            EQU $D628
+W_SSANNE10CURSCRIPT           EQU $D629
+W_VERMILIONCITYCURSCRIPT      EQU $D62A
+W_POKEMONTOWER2CURSCRIPT      EQU $D62B
+W_POKEMONTOWER3CURSCRIPT      EQU $D62C
+W_POKEMONTOWER4CURSCRIPT      EQU $D62D
+W_POKEMONTOWER5CURSCRIPT      EQU $D62E
+W_POKEMONTOWER6CURSCRIPT      EQU $D62F
+W_POKEMONTOWER7CURSCRIPT      EQU $D630
+W_ROCKETHIDEOUT1CURSCRIPT     EQU $D631
+W_ROCKETHIDEOUT2CURSCRIPT     EQU $D632
+W_ROCKETHIDEOUT3CURSCRIPT     EQU $D633
+W_ROCKETHIDEOUT4CURSCRIPT     EQU $D634
+
+W_ROUTE6GATECURSCRIPT         EQU $D636
+W_ROUTE8GATECURSCRIPT         EQU $D637
+
+W_CINNABARISLANDCURSCRIPT     EQU $D639
+W_MANSION1CURSCRIPT           EQU $D63A
+
+W_MANSION2CURSCRIPT           EQU $D63C
+W_MANSION3CURSCRIPT           EQU $D63D
+W_MANSION4CURSCRIPT           EQU $D63E
+W_VICTORYROAD2CURSCRIPT       EQU $D63F
+W_VICTORYROAD3CURSCRIPT       EQU $D640
+
+W_FIGHTINGDOJOCURSCRIPT       EQU $D642
+W_SILPHCO2CURSCRIPT           EQU $D643
+W_SILPHCO3CURSCRIPT           EQU $D644
+W_SILPHCO4CURSCRIPT           EQU $D645
+W_SILPHCO5CURSCRIPT           EQU $D646
+W_SILPHCO6CURSCRIPT           EQU $D647
+W_SILPHCO7CURSCRIPT           EQU $D648
+W_SILPHCO8CURSCRIPT           EQU $D649
+W_SILPHCO9CURSCRIPT           EQU $D64A
+W_HALLOFFAMEROOMCURSCRIPT     EQU $D64B
+W_GARYCURSCRIPT               EQU $D64C
+W_LORELEICURSCRIPT            EQU $D64D
+W_BRUNOCURSCRIPT              EQU $D64E
+W_AGATHACURSCRIPT             EQU $D64F
+W_UNKNOWNDUNGEON3CURSCRIPT    EQU $D650
+W_VICTORYROAD1CURSCRIPT       EQU $D651
+
+W_LANCECURSCRIPT              EQU $D653
+
+W_SILPHCO10CURSCRIPT          EQU $D658
+W_SILPHCO11CURSCRIPT          EQU $D659
+
+W_FUCHSIAGYMCURSCRIPT         EQU $D65B
+W_SAFFRONGYMCURSCRIPT         EQU $D65C
+
+W_CINNABARGYMCURSCRIPT        EQU $D65E
+W_CELADONGAMECORNERCURSCRIPT  EQU $D65F
+W_ROUTE16GATECURSCRIPT        EQU $D660
+W_BILLSHOUSECURSCRIPT         EQU $D661
+W_ROUTE5GATECURSCRIPT         EQU $D662
+W_POWERPLANTCURSCRIPT         EQU $D663 ; overload
+W_ROUTE7GATECURSCRIPT         EQU $D663 ; overload
+
+W_SSANNE2CURSCRIPT            EQU $D665
+W_SEAFOAMISLANDS4CURSCRIPT    EQU $D666
+W_ROUTE23CURSCRIPT            EQU $D667
+W_SEAFOAMISLANDS5CURSCRIPT    EQU $D668
+W_ROUTE18GATECURSCRIPT        EQU $D669
+
+W_TOWNVISITEDFLAG EQU $D70B ; 2 bytes bit array, 1 means visited
+
 W_SAFARITIMER1 EQU $D70D ; use 01 for maximum
 W_SAFARITIMER2 EQU $D70E ; use F4 for maximum
+W_FOSSILITEM   EQU $D70F ; item given to cinnabar lab
+W_FOSSILMON    EQU $D710 ; mon that will result from the item
+
+W_ENEMYMONORTRAINERCLASS EQU $D713 ; trainer classes start at $c8
+
+W_RIVALSTARTER EQU $D715
+
+W_PLAYERSTARTER EQU $D717
+
+; bit 4: use variable [W_CURMAPSCRIPT] instead of the provided index for next frame's map script (used to start battle when talking to trainers)
+W_FLAGS_D733 EQU $D733
+
+
+W_GRASSRATE EQU $D887
+W_GRASSMONS EQU $D888
+W_WATERRATE EQU $D8A4 ; OVERLOADED
+W_WATERMONS EQU $D8A5 ; OVERLOADED
+
+W_ENEMYMONCOUNT  EQU $D89C
+
+W_ENEMYMON1HP EQU $D8A5 ; 16 bits
+
+W_ENEMYMON1MOVE3 EQU $D8AE
+
+W_ENEMYMON2MOVE3 EQU $D8DA
+
+W_ENEMYMON3MOVE3 EQU $D906
+
+W_ENEMYMON4MOVE3 EQU $D932
+
+W_ENEMYMON5MOVE3 EQU $D95E
+
+W_ENEMYMON6MOVE3 EQU $D98A
+
+W_ENEMYMON1OT    EQU $D9AC
+W_ENEMYMON2OT    EQU $D9B7
+W_ENEMYMON3OT    EQU $D9C2
+W_ENEMYMON4OT    EQU $D9CD
+W_ENEMYMON5OT    EQU $D9D8
+W_ENEMYMON6OT    EQU $D9E3
+
+W_ENEMYMON1NAME     EQU $D9EE
+W_ENEMYMON2NAME     EQU $D9F9
+W_ENEMYMON3NAME     EQU $DA04
+W_ENEMYMON4NAME     EQU $DA0F
+W_ENEMYMON5NAME     EQU $DA1A
+W_ENEMYMON6NAME     EQU $DA25 ; to $da2f
+W_TRAINERHEADERPTR  EQU $DA30
+
+; index of current map script, mostly used as index for function pointer array
+; mostly copied from map-specific map script pointer and wirtten back later
+W_CURMAPSCRIPT      EQU $DA39
+
+W_PLAYTIMEHOURS     EQU $DA40 ; two bytes
+W_PLAYTIMEMINUTES   EQU $DA42 ; two bytes
+W_PLAYTIMESECONDS   EQU $DA44 ; one byte
+W_PLAYTIMEFRAMES    EQU $DA45 ; one byte
+
+W_NUMSAFARIBALLS EQU $DA47
+
+; number of mons in current box
+W_NUMINBOX    EQU $DA80
+W_BOXMON1DATA EQU $DA96
+W_BOXMON2DATA EQU $DAB7
+
+
+H_SOFTRESETCOUNTER EQU $FF8A ; initialized to 16, decremented each input iteration if the user presses the reset sequence (A+B+S+s). Soft reset when 0 is reached.
 
 ; counters for blinking down arrow
 H_DOWNARROWBLINKCNT1 EQU $FF8B
@@ -836,6 +1185,13 @@ H_PASTLEADINGZEROES EQU $FF95 ; flag to indicate that a nonzero digit has been p
 H_NUMTOPRINT        EQU $FF96 ; 3 bytes, big endian order
 H_POWEROFTEN        EQU $FF99 ; 3 bytes, big endian order
 H_SAVEDNUMTOPRINT   EQU $FF9C ; 3 bytes, big endian order (to back out of a subtraction)
+
+H_OLDPRESSEDBUTTONS     EQU $FFB1
+H_NEWLYRELEASEDBUTTONS  EQU $FFB2
+H_NEWLYPRESSEDBUTTONS   EQU $FFB3
+H_CURRENTPRESSEDBUTTONS EQU $FFB4
+
+H_LOADEDROMBANK     EQU $FFB8
 
 ; is automatic background transfer during V-blank enabled?
 ; if nonzero, yes
@@ -910,7 +1266,11 @@ H_FRAMECOUNTER EQU $FFD5 ; decremented every V-blank (used for delays)
 ; you can detect that the V-blank handler has run since then.
 H_VBLANKOCCURRED EQU $FFD6
 
+H_CURRENTSPRITEOFFSET EQU $FFDA ; multiple of $10
+
 H_WHOSETURN EQU $FFF3 ; 0 on player’s turn, 1 on enemy’s turn
+
+H_JOYPADSTATE EQU $FFF8
 
 ; hardware registers, from the pandocs http://nocash.emubase.de/pandocs.htm
 rJOYP EQU $FF00
@@ -924,6 +1284,15 @@ rOBP1 EQU $FF49
 rWY EQU $FF4A
 rWX EQU $FF4B
 rIE EQU $FFFF
+
+BTN_A      EQU %00000001
+BTN_B      EQU %00000010
+BTN_SELECT EQU %00000100
+BTN_START  EQU %00001000
+BTN_RIGHT  EQU %00010000
+BTN_LEFT   EQU %00100000
+BTN_UP     EQU %01000000
+BTN_DOWN   EQU %10000000
 
 ; OAM attribute flags
 OAM_HFLIP EQU %00100000 ; horizontal flip
@@ -1082,6 +1451,9 @@ SQUIRTLE   EQU $B1
 CHARMELEON EQU $B2
 WARTORTLE  EQU $B3
 CHARIZARD  EQU $B4
+FOSSIL_KABUTOPS EQU $B6
+FOSSIL_AERODACTYL EQU $B7
+MON_GHOST  EQU $B8
 ODDISH     EQU $B9
 GLOOM      EQU $BA
 VILEPLUME  EQU $BB
@@ -1364,7 +1736,7 @@ X_DEFEND      EQU $42
 X_SPEED       EQU $43
 X_SPECIAL     EQU $44
 COIN_CASE     EQU $45
-OAKS_PARCEL  EQU $46
+OAKS_PARCEL   EQU $46
 ITEMFINDER    EQU $47
 SILPH_SCOPE   EQU $48
 POKE_FLUTE    EQU $49
@@ -1439,6 +1811,7 @@ TM_50         EQU $FA
 ; {stat}_(UP|DOWN)(1|2) means that the move raises the user's (or lowers the target's) corresponding stat modifier by 1 (or 2) stages
 ; {status condition}_side_effect means that the move has a side chance of causing that condition
 ; {status condition}_effect means that the move causes the status condition every time it hits the target
+NO_ADDITIONAL_EFFECT       EQU $00
 POISON_SIDE_EFFECT1        EQU $02
 DRAIN_HP_EFFECT            EQU $03
 BURN_SIDE_EFFECT1          EQU $04
@@ -2356,7 +2729,7 @@ MT_MOON_3_WIDTH  EQU $14
 TRASHED_HOUSE_HEIGHT EQU $04
 TRASHED_HOUSE_WIDTH  EQU $04
 
-; CeruleanHouse2_h map_id=63
+; CeruleanHouse_h map_id=63
 CERULEAN_HOUSE_HEIGHT EQU $04
 CERULEAN_HOUSE_WIDTH  EQU $04
 
@@ -2553,12 +2926,12 @@ CELADON_MART_4_HEIGHT EQU $04
 CELADON_MART_4_WIDTH  EQU $0a
 
 ; CeladonMartRoof_h map_id=126
-CELADON_MART_5_HEIGHT EQU $04
-CELADON_MART_5_WIDTH  EQU $0a
+CELADON_MART_ROOF_HEIGHT EQU $04
+CELADON_MART_ROOF_WIDTH  EQU $0a
 
 ; CeladonMartElevator_h map_id=127
-CELADON_MART_6_HEIGHT EQU $02
-CELADON_MART_6_WIDTH  EQU $02
+CELADON_MART_ELEVATOR_HEIGHT EQU $02
+CELADON_MART_ELEVATOR_WIDTH  EQU $02
 
 ; CeladonMansion1_h map_id=128
 CELADON_MANSION_1_HEIGHT EQU $06
@@ -2593,8 +2966,8 @@ GAME_CORNER_HEIGHT EQU $09
 GAME_CORNER_WIDTH  EQU $0a
 
 ; CeladonMart5_h map_id=136
-CELADON_HOUSE_HEIGHT EQU $04
-CELADON_HOUSE_WIDTH  EQU $0a
+CELADON_MART_5_HEIGHT EQU $04
+CELADON_MART_5_WIDTH  EQU $0a
 
 ; CeladonPrizeRoom_h map_id=137
 CELADONPRIZE_ROOM_HEIGHT EQU $04
@@ -2605,8 +2978,8 @@ CELADON_DINER_HEIGHT EQU $04
 CELADON_DINER_WIDTH  EQU $05
 
 ; CeladonHouse_h map_id=139
-CELADON_HOUSE_2_HEIGHT EQU $04
-CELADON_HOUSE_2_WIDTH  EQU $04
+CELADON_HOUSE_HEIGHT EQU $04
+CELADON_HOUSE_WIDTH  EQU $04
 
 ; CeladonHotel_h map_id=140
 CELADONHOTEL_HEIGHT EQU $04
@@ -2952,9 +3325,9 @@ UNKNOWN_DUNGEON_1_WIDTH  EQU $0f
 NAME_RATERS_HOUSE_HEIGHT EQU $04
 NAME_RATERS_HOUSE_WIDTH  EQU $04
 
-; CeruleanHouse3_h map_id=230
-CERULEAN_HOUSE_3_HEIGHT EQU $04
-CERULEAN_HOUSE_3_WIDTH  EQU $04
+; CeruleanHouse2_h map_id=230
+CERULEAN_HOUSE_2_HEIGHT EQU $04
+CERULEAN_HOUSE_2_WIDTH  EQU $04
 
 ; RockTunnel2_h map_id=232
 ROCK_TUNNEL_2_HEIGHT EQU $12
