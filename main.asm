@@ -18429,9 +18429,7 @@ INCLUDE "music/sfx/sfx_02_53.tx"
 INCLUDE "music/sfx/sfx_02_54.tx"
 INCLUDE "music/sfx/sfx_02_55.tx"
 INCLUDE "music/sfx/sfx_02_5f.tx"
-
-INCBIN "baserom.gbc",$86e3,$872f - $86e3
-
+INCLUDE "music/sfx/sfx_02_unused.tx"
 INCLUDE "music/sfx/sfx_02_1d.tx"
 INCLUDE "music/sfx/sfx_02_37.tx"
 INCLUDE "music/sfx/sfx_02_38.tx"
