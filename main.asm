@@ -19000,7 +19000,8 @@ Music_unknownmusic0xee: ; 0x93fa
 	call GetNextMusicByte ; yes
 	ld [$c004], a ; store first param
 	jp Music_endchannel
-	
+
+; this appears to never be used
 Music_unknownmusic0xef ; 0x9407
 	cp $ef ; is this command an unknownmusic0xef?
 	jr nz, Music_dutycycle ; no
@@ -19065,15 +19066,15 @@ Music_octave: ; 0x945f
 
 Music_unknownsfx0x20: ; 0x9472
 	cp $20 ; is this command an unknownsfx0x20?
-	jr nz, .skip ; no
+	jr nz, Music_unknownsfx0x10 ; no
 	ld a, c
 	cp CH3 ; is this a noise or sfx channel?
-	jr c, .skip ; no
+	jr c, Music_unknownsfx0x10 ; no
 	ld b, $0
 	ld hl, $c036
 	add hl, bc
 	bit 0, [hl]
-	jr nz, .skip ; no
+	jr nz, Music_unknownsfx0x10 ; no
 	call Music_notelength ; yes
 	ld d, a
 	ld b, $0
@@ -19107,30 +19108,32 @@ Music_unknownsfx0x20: ; 0x9472
 	pop de
 	call Func_964b
 	ret
-.skip
+
+Music_unknownsfx0x10:
 	ld a, c
 	cp CH4
-	jr c, .asm_94db ; if not a sfx
+	jr c, Music_note ; if not a sfx
 	ld a, d
 	cp $10 ; is this command a unknownsfx0x10?
-	jr nz, .asm_94db ; no
+	jr nz, Music_note ; no
 	ld b, $0 ; yes
 	ld hl, $c036
 	add hl, bc
 	bit 0, [hl]
-	jr nz, .asm_94db ; no
+	jr nz, Music_note ; no
 	call GetNextMusicByte
 	ld [$ff00+$10], a
 	jp Music_endchannel
-.asm_94db
+
+Music_note:
 	ld a, c
 	cp CH3
 	jr nz, Music_notelength ; if not noise channel
 	ld a, d
 	and $f0
 	cp $b0 ; is this command a dnote?
-	jr z, Music_dnote
-	jr nc, Music_notelength
+	jr z, Music_dnote ; yes
+	jr nc, Music_notelength ; no
 	swap a
 	ld b, a
 	ld a, d
@@ -19178,18 +19181,18 @@ Music_notelength: ; 0x950a
 	ld d, a
 	ld a, [$c0e9]
 	ld e, a
-	jr .done
+	jr .skip
 .sfxChannel
 	ld d, $1
 	ld e, $0
 	cp CH7
-	jr z, .done ; if noise channel
+	jr z, .skip ; if noise channel
 	call Func_9693
 	ld a, [$c0ea]
 	ld d, a
 	ld a, [$c0eb]
 	ld e, a
-.done
+.skip
 	ld a, l
 	ld b, $0
 	ld hl, $c0ce

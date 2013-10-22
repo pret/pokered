@@ -3499,10 +3499,6 @@ unknownmusic0xee: MACRO
 	db \1
 ENDM
 
-unknownmusic0xef: MACRO
-	db $EF
-ENDM
-
 stereopanning: MACRO
 	db $F0
 	db \1
