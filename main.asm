@@ -19152,7 +19152,7 @@ asm_94fd
 	ld d, a
 	ld a, [$c003]
 	and a
-	jr nz, .asm_9508 ; 0x9502 $4
+	jr nz, .asm_9508
 	ld a, d
 	call Func_9876
 .asm_9508
@@ -19266,7 +19266,7 @@ Music_notepitch: ; 0x9568
 	ld hl, $c02e
 	add hl, bc
 	bit 4, [hl]
-	jr z, .asm_95b8 ; 0x95b3 $3
+	jr z, .asm_95b8
 	call Func_978f
 .asm_95b8
 	push de
@@ -19279,7 +19279,7 @@ Music_notepitch: ; 0x9568
 	add hl, de
 	ld a, [hl]
 	and a
-	jr nz, .asm_95cb ; 0x95c7 $2
+	jr nz, .asm_95cb
 	jr .skip
 .asm_95cb
 	pop de
@@ -19299,9 +19299,9 @@ Music_notepitch: ; 0x9568
 	ld hl, $c02e
 	add hl, bc
 	bit 0, [hl]
-	jr z, .asm_95ef ; 0x95e9 $4
+	jr z, .asm_95ef
 	inc e
-	jr nc, .asm_95ef ; 0x95ec $1
+	jr nc, .asm_95ef
 	inc d
 .asm_95ef
 	ld hl, $c066
@@ -19421,17 +19421,17 @@ Func_964b: ; 0x964b
 
 Func_9693: ; 0x9693
 	call Func_96e5
-	jr nc, .asm_96ab ; 0x9696 $13
+	jr nc, .asm_96ab
 	ld d, $0
 	ld a, [$c0f2]
 	add $80
-	jr nc, .asm_96a2 ; 0x969f $1
+	jr nc, .asm_96a2
 	inc d
 .asm_96a2
 	ld [$c0eb], a
 	ld a, d
 	ld [$c0ea], a
-	jr .asm_96b4 ; 0x96a9 $9
+	jr .asm_96b4
 .asm_96ab
 	xor a
 	ld [$c0eb], a
@@ -19442,10 +19442,10 @@ Func_9693: ; 0x9693
 
 Func_96b5: ; 0x96b5
 	call Func_96e5
-	jr nc, .asm_96c6 ; 0x96b8 $c
+	jr nc, .asm_96c6
 	ld a, [$c0f1]
 	add e
-	jr nc, .asm_96c1 ; 0x96be $1
+	jr nc, .asm_96c1
 	inc d
 .asm_96c1
 	dec hl
@@ -19458,7 +19458,7 @@ Func_96b5: ; 0x96b5
 
 Func_96c7: ; 0x96c7
 	call Func_96e5
-	jr nc, .asm_96e2 ; 0x96ca $16
+	jr nc, .asm_96e2
 	ld hl, $c006
 	ld e, c
 	ld d, $0
@@ -19482,12 +19482,12 @@ Func_96c7: ; 0x96c7
 Func_96e5: ; 0x96e5
 	ld a, [$c02a]
 	cp $14
-	jr nc, .asm_96ee ; 0x96ea $2
-	jr .asm_96f4 ; 0x96ec $6
+	jr nc, .asm_96ee
+	jr .asm_96f4
 .asm_96ee
 	cp $86
-	jr z, .asm_96f4 ; 0x96f0 $2
-	jr c, .asm_96f7 ; 0x96f2 $3
+	jr z, .asm_96f4
+	jr c, .asm_96f7
 .asm_96f4
 	scf
 	ccf
@@ -19534,13 +19534,13 @@ Music_ApplyPitchBend: ; 0x96f9
 	ld a, [hl]
 	cp d
 	jp c, .asm_9786
-	jr nz, .asm_9773 ; 0x9733 $3e
+	jr nz, .asm_9773
 	ld hl, $c0ae
 	add hl, bc
 	ld a, [hl]
 	cp e
 	jp c, .asm_9786
-	jr .asm_9773 ; 0x973e $33
+	jr .asm_9773
 .asm_9740
 	ld hl, $c09e
 	add hl, bc
@@ -19571,13 +19571,13 @@ Music_ApplyPitchBend: ; 0x96f9
 	add hl, bc
 	ld a, d
 	cp [hl]
-	jr c, .asm_9786 ; 0x9767 $1d
-	jr nz, .asm_9773 ; 0x9769 $8
+	jr c, .asm_9786
+	jr nz, .asm_9773
 	ld hl, $c0ae
 	add hl, bc
 	ld a, e
 	cp [hl]
-	jr c, .asm_9786 ; 0x9771 $13
+	jr c, .asm_9786
 .asm_9773
 	ld hl, $c09e
 	add hl, bc
@@ -19611,7 +19611,7 @@ Func_978f: ; 0x978f
 	ld hl, $c076
 	add hl, bc
 	sub [hl]
-	jr nc, .asm_97a7 ; 0x97a3 $2
+	jr nc, .asm_97a7
 	ld a, $1
 .asm_97a7
 	ld [hl], a
@@ -19625,13 +19625,13 @@ Func_978f: ; 0x978f
 	ld hl, $c0a6
 	add hl, bc
 	sub [hl]
-	jr c, .asm_97c3 ; 0x97b6 $b
+	jr c, .asm_97c3
 	ld d, a
 	ld b, $0
 	ld hl, $c02e
 	add hl, bc
 	set 5, [hl]
-	jr .asm_97e6 ; 0x97c1 $23
+	jr .asm_97e6
 .asm_97c3
 	ld hl, $c096
 	add hl, bc
@@ -19664,13 +19664,13 @@ Func_978f: ; 0x978f
 	ld a, e
 	sub [hl]
 	ld e, a
-	jr nc, .asm_97ea ; 0x97ee $fa
+	jr nc, .asm_97ea
 	ld a, d
 	and a
-	jr z, .asm_97f8 ; 0x97f2 $4
+	jr z, .asm_97f8
 	dec a
 	ld d, a
-	jr .asm_97ea ; 0x97f6 $f2
+	jr .asm_97ea
 .asm_97f8
 	ld a, e
 	add [hl]
@@ -19741,14 +19741,14 @@ Func_9847: ; 0x9847
 	ld h, $0
 .asm_9849
 	srl a
-	jr nc, .asm_984e ; 0x984b $1
+	jr nc, .asm_984e
 	add hl, de
 .asm_984e
 	sla e
 	rl d
 	and a
-	jr z, .asm_9857 ; 0x9853 $2
-	jr .asm_9849 ; 0x9855 $f2
+	jr z, .asm_9857
+	jr .asm_9849
 .asm_9857
 	ret
 
@@ -19766,11 +19766,11 @@ Func_9858: ; 0x9858
 	ld a, b
 .asm_9866
 	cp $7
-	jr z, .asm_9871 ; 0x9868 $7
+	jr z, .asm_9871
 	sra d
 	rr e
 	inc a
-	jr .asm_9866 ; 0x986f $f5
+	jr .asm_9866
 .asm_9871
 	ld a, $8
 	add d
@@ -19785,7 +19785,7 @@ Func_9876: ; 0x9876
 	jp z, Func_994e
 	jp c, Func_994e
 	cp $fe
-	jr z, .asm_988d ; 0x9888 $3
+	jr z, .asm_988d
 	jp nc, Func_994e
 .asm_988d
 	xor a
@@ -19899,24 +19899,24 @@ Func_994e: ; 0x994e
 	add hl, de
 	ld a, [hl]
 	and a
-	jr z, .asm_99a3 ; 0x9984 $1d
+	jr z, .asm_99a3
 	ld a, e
 	cp $7
-	jr nz, .asm_999a ; 0x9989 $f
+	jr nz, .asm_999a
 	ld a, [$c001]
 	cp $14
-	jr nc, .asm_9993 ; 0x9990 $1
+	jr nc, .asm_9993
 	ret
 .asm_9993
 	ld a, [hl]
 	cp $14
-	jr z, .asm_99a3 ; 0x9996 $b
-	jr c, .asm_99a3 ; 0x9998 $9
+	jr z, .asm_99a3
+	jr c, .asm_99a3
 .asm_999a
 	ld a, [$c001]
 	cp [hl]
-	jr z, .asm_99a3 ; 0x999e $3
-	jr c, .asm_99a3 ; 0x99a0 $1
+	jr z, .asm_99a3
+	jr c, .asm_99a3
 	ret
 .asm_99a3
 	xor a
@@ -20001,7 +20001,7 @@ Func_994e: ; 0x994e
 	ld [hl], a
 	ld a, e
 	cp $4
-	jr nz, .asm_9a2b ; 0x9a25 $4
+	jr nz, .asm_9a2b
 	ld a, $8
 	ld [$ff00+$10], a
 .asm_9a2b
@@ -20086,11 +20086,11 @@ Func_9a8f: ; 0x9a8f
 	ld c, $0
 .asm_9ab1
 	cp c
-	jr z, .asm_9ab9 ; 0x9ab2 $5
+	jr z, .asm_9ab9
 	inc c
 	inc hl
 	inc hl
-	jr .asm_9ab1 ; 0x9ab7 $f8
+	jr .asm_9ab1
 .asm_9ab9
 	push hl
 	push bc
@@ -20103,7 +20103,7 @@ Func_9a8f: ; 0x9a8f
 	ld [hl], a
 	pop af
 	cp $3
-	jr c, .asm_9ad2 ; 0x9aca $6
+	jr c, .asm_9ad2
 	ld hl, $c02e
 	add hl, bc
 	set 2, [hl]
@@ -20122,31 +20122,31 @@ Func_9a8f: ; 0x9a8f
 	and a
 	ld a, [de]
 	inc de
-	jr nz, .asm_9ab1 ; 0x9ae0 $cf
+	jr nz, .asm_9ab1
 	ld a, [$c001]
 	cp $14
-	jr nc, .asm_9aeb ; 0x9ae7 $2
-	jr .asm_9b15 ; 0x9ae9 $2a
+	jr nc, .asm_9aeb
+	jr .asm_9b15
 .asm_9aeb
 	ld a, [$c001]
 	cp $86
-	jr z, .asm_9b15 ; 0x9af0 $23
-	jr c, .asm_9af6 ; 0x9af2 $2
-	jr .asm_9b15 ; 0x9af4 $1f
+	jr z, .asm_9b15
+	jr c, .asm_9af6
+	jr .asm_9b15
 .asm_9af6
 	ld hl, $c02a
 	ld [hli], a
 	ld [hli], a
 	ld [hli], a
 	ld [hl], a
-	ld hl, $c012
-	ld de, Unknown_9b16
+	ld hl, $c012 ; sfx noise channel pointer
+	ld de, Noise_endchannel
 	ld [hl], e
 	inc hl
-	ld [hl], d
+	ld [hl], d ; overwrite pointer to point to endchannel
 	ld a, [$c005]
 	and a
-	jr nz, .asm_9b15 ; 0x9b0a $9
+	jr nz, .asm_9b15
 	ld a, [$ff00+$24]
 	ld [$c005], a
 	ld a, $77
@@ -20154,8 +20154,8 @@ Func_9a8f: ; 0x9a8f
 .asm_9b15
 	ret
 
-Unknown_9b16: ; 0x9b16
-	db $FF
+Noise_endchannel: ; 0x9b16
+	endchannel
 
 Unknown_9b17: ; 0x9b17
 	db $10, $15, $1A, $1F ; channels 0-3
