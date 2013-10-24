@@ -5831,10 +5831,10 @@ asm_2324: ; 2324 (0:2324)
 	jr z, .asm_2343
 	cp $2
 	jr z, .asm_2332
-	ld a, $d2
+	ld a, (Music_BikeRiding - $4000) / 3
 	jr .asm_2334
 .asm_2332
-	ld a, $d6
+	ld a, (Music_Surfing - $4000) / 3
 .asm_2334
 	ld b, a
 	ld a, d
@@ -7038,7 +7038,7 @@ DisplayStartMenu: ; 2acd (0:2acd)
 	ld [$2000],a ; ROM bank 4
 	ld a,[$d700] ; walking/biking/surfing
 	ld [$d11a],a
-	ld a,$8f ; Start menu sound
+	ld a, (SFX_02_3f - $4000) / 3 ; Start menu sound
 	call PlaySound
 
 RedisplayStartMenu: ; 2adf (0:2adf)
@@ -7167,7 +7167,7 @@ AddAmountSoldToMoney: ; 2b9e (0:2b9e)
 	ld a,$13
 	ld [$d125],a
 	call DisplayTextBoxID ; redraw money text box
-	ld a,$b2
+	ld a, (SFX_02_5a - $4000) / 3
 	call PlaySoundWaitForCurrent ; play sound
 	jp WaitForSoundToFinish ; wait until sound is done playing
 
@@ -11113,7 +11113,7 @@ INCBIN "baserom.gbc",$43db,$43ea - $43db
 	call PrintGameVersionOnTitleScreen
 	call Delay3
 	call WaitForSoundToFinish
-	ld a, $c3
+	ld a, (Music_TitleScreen - $4000) / 3
 	ld [$c0ee], a
 	call PlaySound
 	xor a
@@ -13305,8 +13305,8 @@ Func_5317: ; 5317 (1:5317)
 	call Predef ; indirect jump to HealParty (f6a5 (3:76a5))
 	jp Func_577d
 .asm_5506
-	ld c, $1f
-	ld a, $d9
+	ld c, BANK(Music_GameCorner)
+	ld a, (Music_GameCorner - $4000) / 3
 	call PlayMusic
 	jr Func_551c
 
@@ -13945,9 +13945,9 @@ Func_5a5f: ; 5a5f (1:5a5f)
 	ld [$FF00+$b5], a
 	ld a, $a
 	ld [W_CURCHANNELPOINTER], a
-	ld a, $2
+	ld a, BANK(Music_Celadon)
 	ld [$c0f0], a
-	ld a, $ca
+	ld a, (Music_Celadon - $4000) / 3
 	ld [$c0ee], a
 	jp PlaySound
 
@@ -14756,9 +14756,9 @@ Func_60ca: ; 60ca (1:60ca)
 OakSpeech: ; 6115 (1:6115)
 	ld a,$FF
 	call PlaySound ; stop music
-	ld a,2     ; bank of song
+	ld a, BANK(Music_Routes2) ; bank of song
 	ld c,a
-	ld a,$EF    ; song #
+	ld a, (Music_Routes2 - $4000) / 3 ; song #
 	call PlayMusic  ; plays music
 	call ClearScreen
 	call LoadTextBoxTilePatterns
@@ -18567,9 +18567,9 @@ Music2_ApplyMusicAffects: ; 0x9138
 	ld hl, $c02e
 	add hl, bc
 	bit 6, [hl] ; dutycycle
-	jr z, .checkForexecutemusic
+	jr z, .checkForExecuteMusic
 	call Music2_ApplyDutyCycle
-.checkForexecutemusic
+.checkForExecuteMusic
 	ld b, $0
 	ld hl, $c036
 	add hl, bc
@@ -20190,12 +20190,12 @@ Music_RivalAlternateStart: ; 0x9b47
 	call PlayMusic
 	ld hl, $c006
 	ld de, Music_MeetRival_branch_b1a2
-	call OverwriteChannelPointer
+	call Music2_OverwriteChannelPointer
 	ld de, Music_MeetRival_branch_b21d
-	call OverwriteChannelPointer
+	call Music2_OverwriteChannelPointer
 	ld de, Music_MeetRival_branch_b2b5
 
-OverwriteChannelPointer: ; 0x9b60
+Music2_OverwriteChannelPointer: ; 0x9b60
 	ld a, e
 	ld [hli], a
 	ld a, d
@@ -20209,14 +20209,14 @@ Music_RivalAlternateTempo: ; 0x9b65
 	call PlayMusic
 	ld hl, $c006
 	ld de, Music_MeetRival_branch_b119
-	jp OverwriteChannelPointer
+	jp Music2_OverwriteChannelPointer
 
 ; applies both the alternate start and alternate tempo
 Music_RivalAlternateStartAndTempo: ; 0x9b75
 	call Music_RivalAlternateStart
 	ld hl, $c006
 	ld de, Music_MeetRival_branch_b19b
-	jp OverwriteChannelPointer
+	jp Music2_OverwriteChannelPointer
 
 ; an alternate tempo for Cities1 which is used for the Hall of Fame room
 Music_Cities1AlternateTempo: ; 0x9b81
@@ -20232,7 +20232,7 @@ Music_Cities1AlternateTempo: ; 0x9b81
 	call PlayMusic
 	ld hl, $c006
 	ld de, Music_Cities1_branch_aa6f
-	jp OverwriteChannelPointer
+	jp Music2_OverwriteChannelPointer
 
 INCLUDE "music/pkmnhealed.tx"
 INCLUDE "music/routes1.tx"
@@ -27593,8 +27593,8 @@ ItemUsePokeflute: ; e140 (3:6140)
 	and a,$80
 	jr nz,.skipMusic
 	call WaitForSoundToFinish ; wait for sound to end
-	ld b, BANK(Func_22306)
-	ld hl, Func_22306
+	ld b, BANK(Music_PokeFluteInBattle)
+	ld hl, Music_PokeFluteInBattle
 	call Bankswitch ; play in-battle pokeflute music
 .musicWaitLoop ; wait for music to finish playing
 	ld a,[$c02c]
@@ -27666,8 +27666,8 @@ PlayedFluteHadEffectText: ; e215 (3:6215)
 ; play out-of-battle pokeflute music
 	ld a,$ff
 	call PlaySound ; turn off music
-	ld a,$b8
-	ld c,$02
+	ld a, (SFX_02_5e - $4000) / 3
+	ld c, BANK(SFX_02_5e)
 	call PlayMusic ; play music
 .musicWaitLoop ; wait for music to finish playing
 	ld a,[$c028]
@@ -35552,9 +35552,9 @@ PalletTownScript1: ; 18e81 (6:4e81)
 	ld [$D528],a
 	ld a,$FF
 	call PlaySound ; stop music
-	ld a,2
+	ld a, BANK(Music_MeetProfOak)
 	ld c,a ; song bank
-	ld a,$DB ; “oak appears” music
+	ld a, (Music_MeetProfOak - $4000) / 3 ; “oak appears” music
 	call PlayMusic ; plays music
 	ld a,$FC
 	ld [W_JOYPADFORBIDDENBUTTONSMASK],a
@@ -36484,8 +36484,8 @@ CeruleanCityScript0: ; 194c8 (6:54c8)
 	ld [$c0ee], a
 	call PlaySound
 .asm_19512
-	ld c, $2
-	ld a, $de
+	ld c, BANK(Music_MeetRival)
+	ld a, (Music_MeetRival - $4000) / 3
 	call PlayMusic
 	xor a
 	ld [H_CURRENTPRESSEDBUTTONS], a
@@ -39741,8 +39741,8 @@ OaksLabScript10: ; 1cd6d (7:4d6d)
 	call Func_34a6 ; face object
 	ld a, $8
 	ld [$d528], a
-	ld c, $2
-	ld a, $de
+	ld c, BANK(Music_MeetRival)
+	ld a, (Music_MeetRival - $4000) / 3
 	call PlayMusic ; play music
 	ld a, $f
 	ld [$ff00+$8c], a
@@ -41792,8 +41792,8 @@ VermilionDock_1db9b: ; 1db9b (7:5b9b)
 	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
 	ld [$c0ee], a
 	call PlaySound
-	ld c, $1f
-	ld a, $d6
+	ld c, BANK(Music_Surfing)
+	ld a, (Music_Surfing - $4000) / 3
 	call PlayMusic
 	ld b, BANK(Func_79fc0)
 	ld hl, Func_79fc0
@@ -43616,8 +43616,8 @@ asm_1e9b0: ; 1e9b0 (7:69b0)
 	ld [W_CURCHANNELPOINTER], a
 	dec a
 	call PlaySound
-	ld c, $2
-	ld a, $b9
+	ld c, BANK(SFX_02_5f)
+	ld a, (SFX_02_5f - $4000) / 3
 	call PlayMusic
 .asm_1e9c2
 	ld a, [$c02a]
@@ -44056,8 +44056,31 @@ INCLUDE "music/sfx/sfx_08_11.tx"
 INCLUDE "music/sfx/sfx_08_12.tx"
 INCLUDE "music/sfx/sfx_08_13.tx"
 
-Unknown_20361: ; 20361 (8:4361)
-INCBIN "baserom.gbc",$20361,$203c3 - $20361
+Music8_Channel3DutyPointers: ; 20361 (1f:4361)
+	dw Music8_Channel3Duty1
+	dw Music8_Channel3Duty2
+	dw Music8_Channel3Duty3
+	dw Music8_Channel3Duty4
+	dw Music8_Channel3Duty5
+	dw SFX_08_40_Ch1 ; unused
+	dw SFX_08_40_Ch1 ; unused
+	dw SFX_08_40_Ch1 ; unused
+	dw SFX_08_40_Ch1 ; unused
+	
+Music8_Channel3Duty1: ; 20373 (8:4373)
+	db $02,$46,$8A,$CE,$FF,$FE,$ED,$DC,$CB,$A9,$87,$65,$44,$33,$22,$11
+
+Music8_Channel3Duty2: ; 20383 (8:4383)
+	db $02,$46,$8A,$CE,$EF,$FF,$FE,$EE,$DD,$CB,$A9,$87,$65,$43,$22,$11
+
+Music8_Channel3Duty3: ; 20393 (8:4393)
+	db $13,$69,$BD,$EE,$EE,$FF,$FF,$ED,$DE,$FF,$FF,$EE,$EE,$DB,$96,$31
+
+Music8_Channel3Duty4: ; 203a3 (8:43a3)
+	db $02,$46,$8A,$CD,$EF,$FE,$DE,$FF,$EE,$DC,$BA,$98,$76,$54,$32,$10
+
+Music8_Channel3Duty5: ; 203b3 (8:43b3)
+	db $01,$23,$45,$67,$8A,$CD,$EE,$F7,$7F,$EE,$DC,$A8,$76,$54,$32,$10
 
 INCLUDE "music/sfx/sfx_08_40.tx"
 INCLUDE "music/sfx/sfx_08_3f.tx"
@@ -44070,10 +44093,7 @@ INCLUDE "music/sfx/sfx_08_42.tx"
 INCLUDE "music/sfx/sfx_08_43.tx"
 INCLUDE "music/sfx/sfx_08_44.tx"
 INCLUDE "music/sfx/sfx_08_45.tx"
-
-Unknown_2049b: ; 2049b (8:449b)
-INCBIN "baserom.gbc",$2049b,$204aa - $2049b
-
+INCLUDE "music/sfx/sfx_08_pokeflute_ch3.tx"
 INCLUDE "music/sfx/sfx_08_47.tx"
 INCLUDE "music/sfx/sfx_08_48.tx"
 INCLUDE "music/sfx/sfx_08_49.tx"
@@ -44122,9 +44142,7 @@ INCLUDE "music/sfx/sfx_08_73.tx"
 INCLUDE "music/sfx/sfx_08_74.tx"
 INCLUDE "music/sfx/sfx_08_75.tx"
 INCLUDE "music/sfx/sfx_08_76.tx"
-
-INCBIN "baserom.gbc",$2098b,$209d7 - $2098b ; unknown music
-
+INCLUDE "music/sfx/sfx_08_unused.tx"
 INCLUDE "music/sfx/sfx_08_1d.tx"
 INCLUDE "music/sfx/sfx_08_37.tx"
 INCLUDE "music/sfx/sfx_08_38.tx"
@@ -44217,13 +44235,13 @@ asm_213af: ; 213af (8:53af)
 	ret
 
 Unknown_213bc: ; 213bc (8:53bc)
-INCBIN "baserom.gbc",$213bc,$213c0 - $213bc
+	db $A0,$E2,$50,$87
 
 Unknown_213c0: ; 213c0 (8:53c0)
-INCBIN "baserom.gbc",$213c0,$213c4 - $213c0
+	db $B0,$E2,$EE,$86
 
 Unknown_213c4: ; 213c4 (8:53c4)
-INCBIN "baserom.gbc",$213c4,$213c8 - $213c4
+	db $00,$00,$00,$80
 
 ; known jump sources: 17e4d (5:7e4d)
 Func_213c8: ; 213c8 (8:53c8)
@@ -44831,22 +44849,22 @@ UnnamedText_21865: ; 21865 (8:5865)
 INCBIN "baserom.gbc",$21878,$21879 - $21878
 
 Func_21879: ; 21879 (8:5879)
-	ld c, $0
-.asm_2187b
+	ld c, CH0
+.loop
 	ld b, $0
 	ld hl, $c026
 	add hl, bc
 	ld a, [hl]
 	and a
-	jr z, .asm_218a7
+	jr z, .nextChannel
 	ld a, c
-	cp $4
-	jr nc, .asm_218a4
+	cp CH4
+	jr nc, .applyAffects ; if sfx channel
 	ld a, [$c002]
 	and a
-	jr z, .asm_218a4
+	jr z, .applyAffects
 	bit 7, a
-	jr nz, .asm_218a7
+	jr nz, .nextChannel
 	set 7, a
 	ld [$c002], a
 	xor a
@@ -44854,122 +44872,130 @@ Func_21879: ; 21879 (8:5879)
 	ld [$FF00+$1a], a
 	ld a, $80
 	ld [$FF00+$1a], a
-	jr .asm_218a7
-.asm_218a4
-	call Func_218ae
-.asm_218a7
+	jr .nextChannel
+.applyAffects
+	call Music8_ApplyMusicAffects
+.nextChannel
 	ld a, c
 	inc c
-	cp $7
-	jr nz, .asm_2187b
+	cp CH7
+	jr nz, .loop
 	ret
 
-; known jump sources: 218a4 (8:58a4)
-Func_218ae: ; 218ae (8:58ae)
+; this routine checks flags for music effects currently applied
+; to the channel and calls certain functions based on flags.
+; known flags for $c02e:
+;	1: call has been used
+;	3: a toggle used only by this routine for vibrato
+;	4: pitchbend flag
+;	6: dutycycle flag
+Music8_ApplyMusicAffects: ; 218ae (8:58ae)
 	ld b, $0
-	ld hl, $c0b6
+	ld hl, $c0b6 ; delay unitl next note
 	add hl, bc
 	ld a, [hl]
-	cp $1
-	jp z, Func_21946
-	dec a
+	cp $1 ; if the delay is 1, play next note
+	jp z, Music8_PlayNextNote
+	dec a ; otherwise, decrease the delay timer
 	ld [hl], a
 	ld a, c
-	cp $4
-	jr nc, .asm_218ca
+	cp CH4
+	jr nc, .startChecks ; if a sfx channel
 	ld hl, $c02a
 	add hl, bc
 	ld a, [hl]
 	and a
-	jr z, .asm_218ca
+	jr z, .startChecks
 	ret
-.asm_218ca
+.startChecks
 	ld hl, $c02e
 	add hl, bc
-	bit 6, [hl]
-	jr z, .asm_218d5
-	call Func_21fcc
-.asm_218d5
+	bit 6, [hl] ; dutycycle
+	jr z, .checkForExecuteMusic
+	call Music8_ApplyDutyCycle
+.checkForExecuteMusic
 	ld b, $0
 	ld hl, $c036
 	add hl, bc
 	bit 0, [hl]
-	jr nz, .asm_218e7
+	jr nz, .checkForPitchBend
 	ld hl, $c02e
 	add hl, bc
 	bit 2, [hl]
-	jr nz, .asm_218fb
-.asm_218e7
+	jr nz, .disablePitchBendVibrato
+.checkForPitchBend
 	ld hl, $c02e
 	add hl, bc
-	bit 4, [hl]
-	jr z, .asm_218f2
-	jp Func_21eb8
-.asm_218f2
-	ld hl, $c04e
+	bit 4, [hl] ; pitchbend
+	jr z, .checkVibratoDelay
+	jp Music8_ApplyPitchBend
+.checkVibratoDelay
+	ld hl, $c04e ; vibrato delay
+	add hl, bc
+	ld a, [hl]
+	and a ; check if delay is over
+	jr z, .checkForVibrato
+	dec [hl] ; otherwise, dec delay
+.disablePitchBendVibrato
+	ret
+.checkForVibrato
+	ld hl, $c056 ; vibrato rate
 	add hl, bc
 	ld a, [hl]
 	and a
-	jr z, .asm_218fc
-	dec [hl]
-.asm_218fb
-	ret
-.asm_218fc
-	ld hl, $c056
-	add hl, bc
-	ld a, [hl]
-	and a
-	jr nz, .asm_21905
-	ret
-.asm_21905
+	jr nz, .vibrato
+	ret ; no vibrato
+.vibrato
 	ld d, a
 	ld hl, $c05e
 	add hl, bc
 	ld a, [hl]
 	and $f
 	and a
-	jr z, .asm_21912
-	dec [hl]
+	jr z, .vibratoAlreadyDone
+	dec [hl] ; apply vibrato pitch change
 	ret
-.asm_21912
+.vibratoAlreadyDone
 	ld a, [hl]
 	swap [hl]
 	or [hl]
-	ld [hl], a
+	ld [hl], a ; reset the vibrato value and start again
 	ld hl, $c066
 	add hl, bc
-	ld e, [hl]
+	ld e, [hl] ; get note pitch
 	ld hl, $c02e
 	add hl, bc
-	bit 3, [hl]
-	jr z, .asm_21932
+	bit 3, [hl] ; this is the only code that sets/resets bit three so
+	jr z, .unset ; it continuously alternates which path it takes
 	res 3, [hl]
 	ld a, d
 	and $f
 	ld d, a
 	ld a, e
 	sub d
-	jr nc, .asm_21930
+	jr nc, .noCarry
 	ld a, $0
-.asm_21930
-	jr .asm_2193e
-.asm_21932
+.noCarry
+	jr .done
+.unset
 	set 3, [hl]
 	ld a, d
 	and $f0
 	swap a
 	add e
-	jr nc, .asm_2193e
+	jr nc, .done
 	ld a, $ff
-.asm_2193e
+.done
 	ld d, a
 	ld b, $3
 	call Func_21ff7
 	ld [hl], d
 	ret
 
-; known jump sources: 218b7 (8:58b7)
-Func_21946: ; 21946 (8:5946)
+; this routine executes all music commands that take up no time,
+; like tempo changes, duty changes etc. and doesn't return
+; until the first note is reached
+Music8_PlayNextNote: ; 21946 (8:5946)
 	ld hl, $c06e
 	add hl, bc
 	ld a, [hl]
@@ -44981,42 +45007,41 @@ Func_21946: ; 21946 (8:5946)
 	res 4, [hl]
 	res 5, [hl]
 	ld a, c
-	cp $4
-	jr nz, .asm_21963
+	cp CH4
+	jr nz, .beginChecks
 	ld a, [$d083]
 	bit 7, a
 	ret nz
-.asm_21963
-	call Func_21967
+.beginChecks
+	call Music8_endchannel
 	ret
 
-; known jump sources: 21963 (8:5963), 219bd (8:59bd), 21a27 (8:5a27), 21a49 (8:5a49), 21a62 (8:5a62), 21aa1 (8:5aa1), 21ab3 (8:5ab3), 21aeb (8:5aeb), 21b38 (8:5b38), 21b78 (8:5b78), 21b85 (8:5b85), 21ba4 (8:5ba4), 21bc2 (8:5bc2), 21bce (8:5bce), 21bdd (8:5bdd), 21bf0 (8:5bf0), 21c59 (8:5c59)
-Func_21967: ; 21967 (8:5967)
-	call Func_21fe4
+Music8_endchannel: ; 21967 (8:5967)
+	call Music8_GetNextMusicByte
 	ld d, a
-	cp $ff
-	jp nz, Func_219f5
-	ld b, $0
+	cp $ff ; is this command an endchannel?
+	jp nz, Music8_callchannel ; no
+	ld b, $0 ; yes
 	ld hl, $c02e
 	add hl, bc
 	bit 1, [hl]
-	jr nz, .asm_219a5
+	jr nz, .returnFromCall
 	ld a, c
-	cp $3
-	jr nc, .asm_21981
+	cp CH3
+	jr nc, .noiseOrSfxChannel
 	jr .asm_219c0
-.asm_21981
+.noiseOrSfxChannel
 	res 2, [hl]
 	ld hl, $c036
 	add hl, bc
 	res 0, [hl]
-	cp $6
-	jr nz, .asm_21995
+	cp CH6
+	jr nz, .notSfxChannel3
 	ld a, $0
 	ld [$FF00+$1a], a
 	ld a, $80
 	ld [$FF00+$1a], a
-.asm_21995
+.notSfxChannel3
 	jr nz, .asm_219a3
 	ld a, [$c003]
 	and a
@@ -45026,7 +45051,7 @@ Func_21967: ; 21967 (8:5967)
 	jr .asm_219c0
 .asm_219a3
 	jr .asm_219c9
-.asm_219a5
+.returnFromCall
 	res 1, [hl]
 	ld d, $0
 	ld a, c
@@ -45034,7 +45059,7 @@ Func_21967: ; 21967 (8:5967)
 	ld e, a
 	ld hl, $c006
 	add hl, de
-	push hl
+	push hl ; store current channel address
 	ld hl, $c016
 	add hl, de
 	ld e, l
@@ -45044,10 +45069,10 @@ Func_21967: ; 21967 (8:5967)
 	ld [hli], a
 	inc de
 	ld a, [de]
-	ld [hl], a
-	jp Func_21967
+	ld [hl], a ; loads channel address to return to
+	jp Music8_endchannel
 .asm_219c0
-	ld hl, Unknown_222de ; $62de
+	ld hl, Unknown_222de
 	add hl, bc
 	ld a, [$FF00+$25]
 	and [hl]
@@ -45065,7 +45090,7 @@ Func_21967: ; 21967 (8:5967)
 	jr .asm_219ef
 .asm_219dd
 	ld a, c
-	cp $4
+	cp CH4
 	jr z, .asm_219e6
 	call Func_21e6d
 	ret c
@@ -45080,17 +45105,16 @@ Func_21967: ; 21967 (8:5967)
 	ld [hl], b
 	ret
 
-; known jump sources: 2196d (8:596d)
-Func_219f5: ; 219f5 (8:59f5)
-	cp $fd
-	jp nz, Func_21a2a
-	call Func_21fe4
+Music8_callchannel: ; 219f5 (8:59f5)
+	cp $fd ; is this command a callchannel?
+	jp nz, Music8_loopchannel ; no
+	call Music8_GetNextMusicByte ; yes
 	push af
-	call Func_21fe4
+	call Music8_GetNextMusicByte
 	ld d, a
 	pop af
 	ld e, a
-	push de
+	push de ; store pointer
 	ld d, $0
 	ld a, c
 	add a
@@ -45107,43 +45131,43 @@ Func_219f5: ; 219f5 (8:59f5)
 	ld [de], a
 	inc de
 	ld a, [hld]
-	ld [de], a
+	ld [de], a ; copy current channel address
 	pop de
 	ld [hl], e
 	inc hl
-	ld [hl], d
+	ld [hl], d ; overwrite current address with pointer
 	ld b, $0
 	ld hl, $c02e
 	add hl, bc
-	set 1, [hl]
-	jp Func_21967
+	set 1, [hl] ; set the call flag
+	jp Music8_endchannel
 
-; known jump sources: 219f7 (8:59f7)
-Func_21a2a: ; 21a2a (8:5a2a)
-	cp $fe
-	jp nz, Func_21a65
-	call Func_21fe4
+Music8_loopchannel: ; 21a2a (8:5a2a)
+	cp $fe ; is this command a loopchannel?
+	jp nz, Music8_notetype ; no
+	call Music8_GetNextMusicByte ; yes
 	ld e, a
 	and a
-	jr z, .asm_21a4e
+	jr z, .infiniteLoop
 	ld b, $0
 	ld hl, $c0be
 	add hl, bc
 	ld a, [hl]
 	cp e
-	jr nz, .asm_21a4c
-	ld a, $1
+	jr nz, .loopAgain
+	ld a, $1 ; if no more loops to make,
 	ld [hl], a
-	call Func_21fe4
-	call Func_21fe4
-	jp Func_21967
-.asm_21a4c
+	call Music8_GetNextMusicByte ; skip pointer
+	call Music8_GetNextMusicByte
+	jp Music8_endchannel
+.loopAgain ; inc loop count
 	inc a
 	ld [hl], a
-.asm_21a4e
-	call Func_21fe4
+	; fall through
+.infiniteLoop ; overwrite current address with pointer
+	call Music8_GetNextMusicByte
 	push af
-	call Func_21fe4
+	call Music8_GetNextMusicByte
 	ld b, a
 	ld d, $0
 	ld a, c
@@ -45154,73 +45178,76 @@ Func_21a2a: ; 21a2a (8:5a2a)
 	pop af
 	ld [hli], a
 	ld [hl], b
-	jp Func_21967
+	jp Music8_endchannel
 
-; known jump sources: 21a2c (8:5a2c)
-Func_21a65: ; 21a65 (8:5a65)
+Music8_notetype: ; 21a65 (8:5a65)
 	and $f0
-	cp $d0
-	jp nz, Func_21aa4
-	ld a, d
+	cp $d0 ; is this command a notetype?
+	jp nz, Music8_togglecall ; no
+	ld a, d ; yes
 	and $f
 	ld b, $0
 	ld hl, $c0c6
 	add hl, bc
-	ld [hl], a
+	ld [hl], a ; store low nibble as speed
 	ld a, c
-	cp $3
-	jr z, .asm_21aa1
-	call Func_21fe4
+	cp CH3
+	jr z, .noiseChannel ; noise channel has 0 params
+	call Music8_GetNextMusicByte
 	ld d, a
 	ld a, c
-	cp $2
-	jr z, .asm_21a8d
-	cp $6
-	jr nz, .asm_21a9a
+	cp CH2
+	jr z, .musicChannel3
+	cp CH6
+	jr nz, .notChannel3
 	ld hl, $c0e7
-	jr .asm_21a90
-.asm_21a8d
+	jr .sfxChannel3
+.musicChannel3
 	ld hl, $c0e6
-.asm_21a90
+.sfxChannel3
 	ld a, d
 	and $f
-	ld [hl], a
+	ld [hl], a ; store low nibble of param as duty
 	ld a, d
 	and $30
 	sla a
 	ld d, a
-.asm_21a9a
+	; fall through
+	
+	; if channel 3, store high nibble as volume
+	; else, store volume (high nibble) and fade (low nibble)
+.notChannel3
 	ld b, $0
 	ld hl, $c0de
 	add hl, bc
 	ld [hl], d
-.asm_21aa1
-	jp Func_21967
+.noiseChannel
+	jp Music8_endchannel
 
-; known jump sources: 21a69 (8:5a69)
-Func_21aa4: ; 21aa4 (8:5aa4)
+Music8_togglecall: ; 21aa4 (8:5aa4)
 	ld a, d
-	cp $e8
-	jr nz, .asm_21ab6
-	ld b, $0
+	cp $e8 ; is this command an togglecall?
+	jr nz, Music8_vibrato ; no
+	ld b, $0 ; yes
 	ld hl, $c02e
 	add hl, bc
 	ld a, [hl]
 	xor $1
-	ld [hl], a
-	jp Func_21967
-.asm_21ab6
-	cp $ea
-	jr nz, .asm_21aee
-	call Func_21fe4
+	ld [hl], a ; flip bit 0 of $c02e (toggle returning from call)
+	jp Music8_endchannel
+	
+Music8_vibrato: ; 21ab6 (8:5ab6)
+	cp $ea ; is this command a vibrato?
+	jr nz, Music8_pitchbend ; no
+	call Music8_GetNextMusicByte ; yes
 	ld b, $0
 	ld hl, $c04e
 	add hl, bc
-	ld [hl], a
+	ld [hl], a ; store delay 
 	ld hl, $c06e
 	add hl, bc
-	ld [hl], a
-	call Func_21fe4
+	ld [hl], a ; store delay 
+	call Music8_GetNextMusicByte
 	ld d, a
 	and $f0
 	swap a
@@ -45232,7 +45259,7 @@ Func_21aa4: ; 21aa4 (8:5aa4)
 	adc b
 	swap a
 	or e
-	ld [hl], a
+	ld [hl], a ; store rate as both high and low nibbles
 	ld a, d
 	and $f
 	ld d, a
@@ -45240,17 +45267,18 @@ Func_21aa4: ; 21aa4 (8:5aa4)
 	add hl, bc
 	swap a
 	or d
-	ld [hl], a
-	jp Func_21967
-.asm_21aee
-	cp $eb
-	jr nz, .asm_21b26
-	call Func_21fe4
+	ld [hl], a ; store depth as both high and low nibbles
+	jp Music8_endchannel
+	
+Music8_pitchbend: ; 21aee (8:5aee)
+	cp $eb ; is this command a pitchbend?
+	jr nz, Music8_duty ; no
+	call Music8_GetNextMusicByte ; yes
 	ld b, $0
 	ld hl, $c076
 	add hl, bc
-	ld [hl], a
-	call Func_21fe4
+	ld [hl], a ; store first param
+	call Music8_GetNextMusicByte
 	ld d, a
 	and $f0
 	swap a
@@ -45261,132 +45289,142 @@ Func_21aa4: ; 21aa4 (8:5aa4)
 	ld b, $0
 	ld hl, $c0a6
 	add hl, bc
-	ld [hl], d
+	ld [hl], d ; store unknown part of second param
 	ld hl, $c0ae
 	add hl, bc
-	ld [hl], e
+	ld [hl], e ; store unknown part of second param
 	ld b, $0
 	ld hl, $c02e
 	add hl, bc
-	set 4, [hl]
-	call Func_21fe4
+	set 4, [hl] ; set pitchbend flag
+	call Music8_GetNextMusicByte
 	ld d, a
-	jp Func_21c8b
-.asm_21b26
-	cp $ec
-	jr nz, .asm_21b3b
-	call Func_21fe4
+	jp Music8_notelength
+	
+Music8_duty: ; 21b26 (8:5b26)
+	cp $ec ; is this command a duty?
+	jr nz, Music8_tempo ; no
+	call Music8_GetNextMusicByte ; yes
 	rrca
 	rrca
 	and $c0
 	ld b, $0
 	ld hl, $c03e
 	add hl, bc
-	ld [hl], a
-	jp Func_21967
-.asm_21b3b
-	cp $ed
-	jr nz, .asm_21b7b
-	ld a, c
-	cp $4
-	jr nc, .asm_21b5f
-	call Func_21fe4
-	ld [$c0e8], a
-	call Func_21fe4
-	ld [$c0e9], a
+	ld [hl], a ; store duty
+	jp Music8_endchannel
+	
+Music8_tempo: ; 21b3b (8:5b3b)
+	cp $ed ; is this command a tempo?
+	jr nz, Music8_unknownmusic0xee ; no
+	ld a, c ; yes
+	cp CH4
+	jr nc, .sfxChannel
+	call Music8_GetNextMusicByte
+	ld [$c0e8], a ; store first param
+	call Music8_GetNextMusicByte
+	ld [$c0e9], a ; store second param
 	xor a
-	ld [$c0ce], a
+	ld [$c0ce], a ; clear RAM
 	ld [$c0cf], a
 	ld [$c0d0], a
 	ld [$c0d1], a
-	jr .asm_21b78
-.asm_21b5f
-	call Func_21fe4
-	ld [$c0ea], a
-	call Func_21fe4
-	ld [$c0eb], a
+	jr .musicChannelDone
+.sfxChannel
+	call Music8_GetNextMusicByte
+	ld [$c0ea], a ; store first param
+	call Music8_GetNextMusicByte
+	ld [$c0eb], a ; store second param
 	xor a
-	ld [$c0d2], a
+	ld [$c0d2], a ; clear RAM
 	ld [$c0d3], a
 	ld [$c0d4], a
 	ld [$c0d5], a
-.asm_21b78
-	jp Func_21967
-.asm_21b7b
-	cp $ee
-	jr nz, .asm_21b88
-	call Func_21fe4
-	ld [$c004], a
-	jp Func_21967
-.asm_21b88
-	cp $ef
-	jr nz, .asm_21ba7
-	call Func_21fe4
+.musicChannelDone
+	jp Music8_endchannel
+	
+Music8_unknownmusic0xee: ; 21b7b (8:5b7b)
+	cp $ee ; is this command an unknownmusic0xee?
+	jr nz, Music8_unknownmusic0xef ; no
+	call Music8_GetNextMusicByte ; yes
+	ld [$c004], a ; store first param
+	jp Music8_endchannel
+	
+; this appears to never be used
+Music8_unknownmusic0xef: ; 21b88 (8:5b88)
+	cp $ef ; is this command an unknownmusic0xef?
+	jr nz, Music8_dutycycle ; no
+	call Music8_GetNextMusicByte ; yes
 	push bc
 	call Func_22035
 	pop bc
 	ld a, [$c003]
 	and a
-	jr nz, .asm_21ba4
+	jr nz, .skip
 	ld a, [$c02d]
 	ld [$c003], a
 	xor a
 	ld [$c02d], a
-.asm_21ba4
-	jp Func_21967
-.asm_21ba7
-	cp $fc
-	jr nz, .asm_21bc5
-	call Func_21fe4
+.skip
+	jp Music8_endchannel
+	
+Music8_dutycycle: ; 21ba7 (8:5ba7)
+	cp $fc ; is this command a dutycycle?
+	jr nz, Music8_stereopanning ; no
+	call Music8_GetNextMusicByte ; yes
 	ld b, $0
 	ld hl, $c046
 	add hl, bc
-	ld [hl], a
+	ld [hl], a ; store full cycle
 	and $c0
 	ld hl, $c03e
 	add hl, bc
-	ld [hl], a
+	ld [hl], a ; store first duty
 	ld hl, $c02e
 	add hl, bc
-	set 6, [hl]
-	jp Func_21967
-.asm_21bc5
-	cp $f0
-	jr nz, .asm_21bd1
-	call Func_21fe4
+	set 6, [hl] ; set dutycycle flag
+	jp Music8_endchannel
+	
+Music8_stereopanning: ; 21bc5 (8:5bc5)
+	cp $f0 ; is this command a stereopanning?
+	jr nz, Music8_executemusic ; no
+	call Music8_GetNextMusicByte ; yes
 	ld [$FF00+$24], a
-	jp Func_21967
-.asm_21bd1
-	cp $f8
-	jr nz, .asm_21be0
-	ld b, $0
+	jp Music8_endchannel
+	
+Music8_executemusic: ; 21bd1 (8:5bd1)
+	cp $f8 ; is this command an executemusic?
+	jr nz, Music8_octave ; no
+	ld b, $0 ; yes
 	ld hl, $c036
 	add hl, bc
 	set 0, [hl]
-	jp Func_21967
-.asm_21be0
+	jp Music8_endchannel
+	
+Music8_octave: ; 21be0 (8:5be0)
 	and $f0
-	cp $e0
-	jr nz, .asm_21bf3
-	ld hl, $c0d6
+	cp $e0 ; is this command an octave?
+	jr nz, Music8_unknownsfx0x20 ; no
+	ld hl, $c0d6 ; yes
 	ld b, $0
 	add hl, bc
 	ld a, d
 	and $f
-	ld [hl], a
-	jp Func_21967
-.asm_21bf3
-	cp $20
-	jr nz, .asm_21c40
+	ld [hl], a ; store low nibble as octave
+	jp Music8_endchannel
+	
+Music8_unknownsfx0x20: ; 21bf3
+	cp $20 ; is this command an unknownsfx0x20?
+	jr nz, Music8_unknownsfx0x10 ; no
 	ld a, c
-	cp $3
-	jr c, .asm_21c40
+	cp CH3 ; is this a noise or sfx channel?
+	jr c, Music8_unknownsfx0x10 ; no
 	ld b, $0
 	ld hl, $c036
 	add hl, bc
 	bit 0, [hl]
-	jr nz, .asm_21c40
-	call Func_21c8b
+	jr nz, Music8_unknownsfx0x10 ; no
+	call Music8_notelength
 	ld d, a
 	ld b, $0
 	ld hl, $c03e
@@ -45397,21 +45435,21 @@ Func_21aa4: ; 21aa4 (8:5aa4)
 	ld b, $1
 	call Func_21ff7
 	ld [hl], d
-	call Func_21fe4
+	call Music8_GetNextMusicByte
 	ld d, a
 	ld b, $2
 	call Func_21ff7
 	ld [hl], d
-	call Func_21fe4
+	call Music8_GetNextMusicByte
 	ld e, a
 	ld a, c
-	cp $7
+	cp CH7
 	ld a, $0
-	jr z, .asm_21c33
+	jr z, .sfxNoiseChannel ; only two params for noise channel
 	push de
-	call Func_21fe4
+	call Music8_GetNextMusicByte
 	pop de
-.asm_21c33
+.sfxNoiseChannel
 	ld d, a
 	push de
 	call Func_21daa
@@ -45419,30 +45457,32 @@ Func_21aa4: ; 21aa4 (8:5aa4)
 	pop de
 	call Func_21dcc
 	ret
-.asm_21c40
+	
+Music8_unknownsfx0x10: ; 21c40 (8:5c40)
 	ld a, c
-	cp $4
-	jr c, .asm_21c5c
+	cp CH4
+	jr c, Music8_note ; if not a sfx
 	ld a, d
-	cp $10
-	jr nz, .asm_21c5c
+	cp $10 ; is this command a unknownsfx0x10?
+	jr nz, Music8_note ; no
 	ld b, $0
 	ld hl, $c036
 	add hl, bc
 	bit 0, [hl]
-	jr nz, .asm_21c5c
-	call Func_21fe4
+	jr nz, Music8_note ; no
+	call Music8_GetNextMusicByte ; yes
 	ld [$FF00+$10], a
-	jp Func_21967
-.asm_21c5c
+	jp Music8_endchannel
+	
+Music8_note: ; 21c5c (8:5c5c)
 	ld a, c
-	cp $3
-	jr nz, Func_21c8b
+	cp CH3
+	jr nz, Music8_notelength ; if not noise channel
 	ld a, d
 	and $f0
-	cp $b0
-	jr z, .asm_21c76
-	jr nc, Func_21c8b
+	cp $b0 ; is this command a dnote?
+	jr z, Music8_dnote ; yes
+	jr nc, Music8_notelength ; no
 	swap a
 	ld b, a
 	ld a, d
@@ -45451,14 +45491,15 @@ Func_21aa4: ; 21aa4 (8:5aa4)
 	ld a, b
 	push de
 	push bc
-	jr .asm_21c7e
-.asm_21c76
+	jr asm_21c7e
+	
+Music8_dnote: ; 21c76 (8:5c76)
 	ld a, d
 	and $f
 	push af
 	push bc
-	call Func_21fe4
-.asm_21c7e
+	call Music8_GetNextMusicByte ; get dnote instrument
+asm_21c7e
 	ld d, a
 	ld a, [$c003]
 	and a
@@ -45469,14 +45510,13 @@ Func_21aa4: ; 21aa4 (8:5aa4)
 	pop bc
 	pop de
 
-; known jump sources: 21b23 (8:5b23), 21c06 (8:5c06), 21c5f (8:5c5f), 21c68 (8:5c68)
-Func_21c8b: ; 21c8b (8:5c8b)
+Music8_notelength: ; 21c8b (8:5c8b)
 	ld a, d
 	push af
 	and $f
 	inc a
 	ld b, $0
-	ld e, a
+	ld e, a ; store note length (in 16ths)
 	ld d, b
 	ld hl, $c0c6
 	add hl, bc
@@ -45484,24 +45524,24 @@ Func_21c8b: ; 21c8b (8:5c8b)
 	ld l, b
 	call Func_22006
 	ld a, c
-	cp $4
-	jr nc, .asm_21cac
+	cp CH4
+	jr nc, .sfxChannel
 	ld a, [$c0e8]
 	ld d, a
 	ld a, [$c0e9]
 	ld e, a
-	jr .asm_21cbf
-.asm_21cac
+	jr .skip
+.sfxChannel
 	ld d, $1
 	ld e, $0
-	cp $7
-	jr z, .asm_21cbf
+	cp CH7
+	jr z, .skip ; if noise channel
 	call Func_21e2f
 	ld a, [$c0ea]
 	ld d, a
 	ld a, [$c0eb]
 	ld e, a
-.asm_21cbf
+.skip
 	ld a, l
 	ld b, $0
 	ld hl, $c0ce
@@ -45520,41 +45560,43 @@ Func_21c8b: ; 21c8b (8:5c8b)
 	ld hl, $c036
 	add hl, bc
 	bit 0, [hl]
-	jr nz, .asm_21ce9
+	jr nz, Music8_notepitch
 	ld hl, $c02e
 	add hl, bc
 	bit 2, [hl]
-	jr z, .asm_21ce9
+	jr z, Music8_notepitch
 	pop hl
 	ret
-.asm_21ce9
+	
+Music8_notepitch: ; 21ce9 (8:5ce9)
 	pop af
 	and $f0
-	cp $c0
-	jr nz, .asm_21d20
+	cp $c0 ; compare to rest
+	jr nz, .notRest
 	ld a, c
-	cp $4
-	jr nc, .asm_21cfd
+	cp CH4
+	jr nc, .sfxChannel
 	ld hl, $c02a
 	add hl, bc
 	ld a, [hl]
 	and a
-	jr nz, .asm_21d1f
-.asm_21cfd
+	jr nz, .done
+	; fall through
+.sfxChannel
 	ld a, c
-	cp $2
-	jr z, .asm_21d06
-	cp $6
-	jr nz, .asm_21d13
-.asm_21d06
+	cp CH2
+	jr z, .musicChannel3
+	cp CH6
+	jr nz, .notSfxChannel3
+.musicChannel3
 	ld b, $0
-	ld hl, Unknown_222de ; $62de
+	ld hl, Unknown_222de
 	add hl, bc
 	ld a, [$FF00+$25]
 	and [hl]
 	ld [$FF00+$25], a
-	jr .asm_21d1f
-.asm_21d13
+	jr .done
+.notSfxChannel3
 	ld b, $2
 	call Func_21ff7
 	ld a, $8
@@ -45562,9 +45604,9 @@ Func_21c8b: ; 21c8b (8:5c8b)
 	inc hl
 	ld a, $80
 	ld [hl], a
-.asm_21d1f
+.done
 	ret
-.asm_21d20
+.notRest
 	swap a
 	ld b, $0
 	ld hl, $c0d6
@@ -45580,8 +45622,8 @@ Func_21c8b: ; 21c8b (8:5c8b)
 .asm_21d39
 	push de
 	ld a, c
-	cp $4
-	jr nc, .asm_21d4e
+	cp CH4
+	jr nc, .skip ; if sfx channel
 	ld hl, $c02a
 	ld d, $0
 	ld e, a
@@ -45589,11 +45631,11 @@ Func_21c8b: ; 21c8b (8:5c8b)
 	ld a, [hl]
 	and a
 	jr nz, .asm_21d4c
-	jr .asm_21d4e
+	jr .skip
 .asm_21d4c
 	pop de
 	ret
-.asm_21d4e
+.skip
 	ld b, $0
 	ld hl, $c0de
 	add hl, bc
@@ -45619,52 +45661,50 @@ Func_21c8b: ; 21c8b (8:5c8b)
 	call Func_21dcc
 	ret
 
-; known jump sources: 21c38 (8:5c38), 21d5e (8:5d5e)
 Func_21d79: ; 21d79 (8:5d79)
 	ld b, $0
-	ld hl, Unknown_222e6 ; $62e6
+	ld hl, Unknown_222e6
 	add hl, bc
 	ld a, [$FF00+$25]
 	or [hl]
 	ld d, a
 	ld a, c
-	cp $7
-	jr z, .asm_21d94
-	cp $4
-	jr nc, .asm_21da6
+	cp CH7
+	jr z, .sfxNoiseChannel
+	cp CH4
+	jr nc, .skip ; if sfx channel
 	ld hl, $c02a
 	add hl, bc
 	ld a, [hl]
 	and a
-	jr nz, .asm_21da6
-.asm_21d94
+	jr nz, .skip
+.sfxNoiseChannel
 	ld a, [$c004]
-	ld hl, Unknown_222e6 ; $62e6
+	ld hl, Unknown_222e6
 	add hl, bc
 	and [hl]
 	ld d, a
 	ld a, [$FF00+$25]
-	ld hl, Unknown_222de ; $62de
+	ld hl, Unknown_222de
 	add hl, bc
 	and [hl]
 	or d
 	ld d, a
-.asm_21da6
+.skip
 	ld a, d
 	ld [$FF00+$25], a
 	ret
 
-; known jump sources: 21c35 (8:5c35), 21d5b (8:5d5b)
 Func_21daa: ; 21daa (8:5daa)
 	ld b, $0
 	ld hl, $c0b6
 	add hl, bc
 	ld d, [hl]
 	ld a, c
-	cp $2
-	jr z, .asm_21dc5
-	cp $6
-	jr z, .asm_21dc5
+	cp CH2
+	jr z, .channel3 ; if music channel 3
+	cp CH6
+	jr z, .channel3 ; if sfx channel 3
 	ld a, d
 	and $3f
 	ld d, a
@@ -45673,31 +45713,31 @@ Func_21daa: ; 21daa (8:5daa)
 	ld a, [hl]
 	or d
 	ld d, a
-.asm_21dc5
+.channel3
 	ld b, $1
 	call Func_21ff7
 	ld [hl], d
 	ret
 
-; known jump sources: 21c3c (8:5c3c), 21d75 (8:5d75)
 Func_21dcc: ; 21dcc (8:5dcc)
 	ld a, c
-	cp $2
-	jr z, .asm_21dd5
-	cp $6
-	jr nz, .asm_21e02
-.asm_21dd5
+	cp CH2
+	jr z, .channel3
+	cp CH6
+	jr nz, .notSfxChannel3
+	; fall through
+.channel3
 	push de
 	ld de, $c0e6
-	cp $2
-	jr z, .asm_21de0
+	cp CH2
+	jr z, .musicChannel3
 	ld de, $c0e7
-.asm_21de0
+.musicChannel3
 	ld a, [de]
 	add a
 	ld d, $0
 	ld e, a
-	ld hl, Unknown_20361 ; $4361
+	ld hl, Music8_Channel3DutyPointers
 	add hl, de
 	ld e, [hl]
 	inc hl
@@ -45706,18 +45746,18 @@ Func_21dcc: ; 21dcc (8:5dcc)
 	ld b, $f
 	ld a, $0
 	ld [$FF00+$1a], a
-.asm_21df5
+.loop
 	ld a, [de]
 	inc de
 	ld [hli], a
 	ld a, b
 	dec b
 	and a
-	jr nz, .asm_21df5
+	jr nz, .loop
 	ld a, $80
 	ld [$FF00+$1a], a
 	pop de
-.asm_21e02
+.notSfxChannel3
 	ld a, d
 	or $80
 	and $c7
@@ -45728,18 +45768,19 @@ Func_21dcc: ; 21dcc (8:5dcc)
 	inc hl
 	ld [hl], d
 	ld a, c
-	cp $4
-	jr c, .asm_21e18
+	cp CH4
+	jr c, .musicChannel
 	call Func_21e56
-.asm_21e18
+.musicChannel
 	ret
 
+Func_21e19: ; 21e19 (8:5e19)
 	ld a, c
-	cp $4
-	jr nz, .asm_21e2e ; 0x21e1c $10
+	cp CH4
+	jr nz, .asm_21e2e
 	ld a, [$d083]
 	bit 7, a
-	jr z, .asm_21e2e ; 0x21e23 $9
+	jr z, .asm_21e2e
 	xor a
 	ld [$c0f1], a
 	ld a, $80
@@ -45747,7 +45788,6 @@ Func_21dcc: ; 21dcc (8:5dcc)
 .asm_21e2e
 	ret
 
-; known jump sources: 21cb4 (8:5cb4)
 Func_21e2f: ; 21e2f (8:5e2f)
 	call Func_21e8b
 	jr c, .asm_21e39
@@ -45772,7 +45812,6 @@ Func_21e2f: ; 21e2f (8:5e2f)
 .asm_21e55
 	ret
 
-; known jump sources: 21e15 (8:5e15)
 Func_21e56: ; 21e56 (8:5e56)
 	call Func_21e8b
 	jr c, .asm_21e60
@@ -45792,7 +45831,6 @@ Func_21e56: ; 21e56 (8:5e56)
 .asm_21e6c
 	ret
 
-; known jump sources: 219e2 (8:59e2)
 Func_21e6d: ; 21e6d (8:5e6d)
 	call Func_21e8b
 	jr nc, .asm_21e88
@@ -45816,7 +45854,6 @@ Func_21e6d: ; 21e6d (8:5e6d)
 	ccf
 	ret
 
-; known jump sources: 21e2f (8:5e2f), 21e56 (8:5e56), 21e6d (8:5e6d)
 Func_21e8b: ; 21e8b (8:5e8b)
 	ld a, [$c02a]
 	cp $14
@@ -45834,7 +45871,6 @@ Func_21e8b: ; 21e8b (8:5e8b)
 	scf
 	ret
 
-; known jump sources: 21e34 (8:5e34), 21e5b (8:5e5b)
 Func_21e9f: ; 21e9f (8:5e9f)
 	ld a, [$c02d]
 	ld b, a
@@ -45855,12 +45891,11 @@ Func_21e9f: ; 21e9f (8:5e9f)
 	scf
 	ret
 
-; known jump sources: 218ef (8:58ef)
-Func_21eb8: ; 21eb8 (8:5eb8)
+Music8_ApplyPitchBend: ; 21eb8 (8:5eb8)
 	ld hl, $c02e
 	add hl, bc
 	bit 5, [hl]
-	jp nz, Func_21eff
+	jp nz, .asm_21eff
 	ld hl, $c09e
 	add hl, bc
 	ld e, [hl]
@@ -45893,17 +45928,15 @@ Func_21eb8: ; 21eb8 (8:5eb8)
 	add hl, bc
 	ld a, [hl]
 	cp d
-	jp c, Func_21f45
-	jr nz, asm_21f32
+	jp c, .asm_21f45
+	jr nz, .asm_21f32
 	ld hl, $c0ae
 	add hl, bc
 	ld a, [hl]
 	cp e
-	jp c, Func_21f45
-	jr asm_21f32
-
-; known jump sources: 21ebe (8:5ebe)
-Func_21eff: ; 21eff (8:5eff)
+	jp c, .asm_21f45
+	jr .asm_21f32
+.asm_21eff
 	ld hl, $c09e
 	add hl, bc
 	ld a, [hl]
@@ -45933,14 +45966,14 @@ Func_21eff: ; 21eff (8:5eff)
 	add hl, bc
 	ld a, d
 	cp [hl]
-	jr c, Func_21f45
-	jr nz, asm_21f32
+	jr c, .asm_21f45
+	jr nz, .asm_21f32
 	ld hl, $c0ae
 	add hl, bc
 	ld a, e
 	cp [hl]
-	jr c, Func_21f45
-asm_21f32: ; 21f32 (8:5f32)
+	jr c, .asm_21f45
+.asm_21f32
 	ld hl, $c09e
 	add hl, bc
 	ld [hl], e
@@ -45953,16 +45986,13 @@ asm_21f32: ; 21f32 (8:5f32)
 	ld [hli], a
 	ld [hl], d
 	ret
-
-; known jump sources: 21eef (8:5eef), 21efa (8:5efa), 21f26 (8:5f26), 21f30 (8:5f30)
-Func_21f45: ; 21f45 (8:5f45)
+.asm_21f45
 	ld hl, $c02e
 	add hl, bc
 	res 4, [hl]
 	res 5, [hl]
 	ret
 
-; known jump sources: 21d36 (8:5d36)
 Func_21f4e: ; 21f4e (8:5f4e)
 	ld hl, $c096
 	add hl, bc
@@ -46052,8 +46082,7 @@ Func_21f4e: ; 21f4e (8:5f4e)
 	ld [hl], a
 	ret
 
-; known jump sources: 218d2 (8:58d2)
-Func_21fcc: ; 21fcc (8:5fcc)
+Music8_ApplyDutyCycle: ; 21fcc (8:5fcc)
 	ld b, $0
 	ld hl, $c046
 	add hl, bc
@@ -46071,8 +46100,7 @@ Func_21fcc: ; 21fcc (8:5fcc)
 	ld [hl], a
 	ret
 
-; known jump sources: 21967 (8:5967), 219fa (8:59fa), 219fe (8:59fe), 21a2f (8:5a2f), 21a43 (8:5a43), 21a46 (8:5a46), 21a4e (8:5a4e), 21a52 (8:5a52), 21a7b (8:5a7b), 21aba (8:5aba), 21ac9 (8:5ac9), 21af2 (8:5af2), 21afc (8:5afc), 21b1f (8:5b1f), 21b2a (8:5b2a), 21b44 (8:5b44), 21b4a (8:5b4a), 21b5f (8:5b5f), 21b65 (8:5b65), 21b7f (8:5b7f), 21b8c (8:5b8c), 21bab (8:5bab), 21bc9 (8:5bc9), 21c19 (8:5c19), 21c23 (8:5c23), 21c2f (8:5c2f), 21c54 (8:5c54), 21c7b (8:5c7b)
-Func_21fe4: ; 21fe4 (8:5fe4)
+Music8_GetNextMusicByte: ; 21fe4 (8:5fe4)
 	ld d, $0
 	ld a, c
 	add a
@@ -46083,21 +46111,20 @@ Func_21fe4: ; 21fe4 (8:5fe4)
 	ld e, a
 	ld a, [hld]
 	ld d, a
-	ld a, [de]
+	ld a, [de] ; get next music command
 	inc de
-	ld [hl], e
+	ld [hl], e ; store address of next command
 	inc hl
 	ld [hl], d
 	ret
 
-; known jump sources: 21941 (8:5941), 21c15 (8:5c15), 21c1f (8:5c1f), 21d15 (8:5d15), 21d57 (8:5d57), 21dc7 (8:5dc7), 21e0a (8:5e0a), 21f3e (8:5f3e), 21fdb (8:5fdb)
 Func_21ff7: ; 21ff7 (8:5ff7)
 	ld a, c
-	ld hl, Unknown_222d6 ; $62d6
+	ld hl, Unknown_222d6
 	add l
-	jr nc, .asm_21fff
+	jr nc, .noCarry
 	inc h
-.asm_21fff
+.noCarry
 	ld l, a
 	ld a, [hl]
 	add b
@@ -46105,49 +46132,46 @@ Func_21ff7: ; 21ff7 (8:5ff7)
 	ld h, $ff
 	ret
 
-; known jump sources: 21c9a (8:5c9a), 21cc7 (8:5cc7)
 Func_22006: ; 22006 (8:6006)
 	ld h, $0
-.asm_22008
+.loop
 	srl a
-	jr nc, .asm_2200d
+	jr nc, .noCarry
 	add hl, de
-.asm_2200d
+.noCarry
 	sla e
 	rl d
 	and a
-	jr z, .asm_22016
-	jr .asm_22008
-.asm_22016
+	jr z, .done
+	jr .loop
+.done
 	ret
 
-; known jump sources: 21b08 (8:5b08), 21d29 (8:5d29)
 Func_22017: ; 22017 (8:6017)
 	ld h, $0
 	ld l, a
 	add hl, hl
 	ld d, h
 	ld e, l
-	ld hl, Unknown_222ee ; $62ee
+	ld hl, Unknown_222ee
 	add hl, de
 	ld e, [hl]
 	inc hl
 	ld d, [hl]
 	ld a, b
-.asm_22025
-	cp $7
-	jr z, .asm_22030
+.loop
+	cp CH7
+	jr z, .done
 	sra d
 	rr e
 	inc a
-	jr .asm_22025
-.asm_22030
+	jr .loop
+.done
 	ld a, $8
 	add d
 	ld d, a
 	ret
 
-; known jump sources: 21b90 (8:5b90), 21c86 (8:5c86)
 Func_22035: ; 22035 (8:6035)
 	ld [$c001], a
 	cp $ff
@@ -46167,53 +46191,53 @@ Func_22035: ; 22035 (8:6035)
 	ld [$c0e7], a
 	ld d, $8
 	ld hl, $c016
-	call Func_22248
+	call FillMusicRAM8
 	ld hl, $c006
-	call Func_22248
+	call FillMusicRAM8
 	ld d, $4
 	ld hl, $c026
-	call Func_22248
+	call FillMusicRAM8
 	ld hl, $c02e
-	call Func_22248
+	call FillMusicRAM8
 	ld hl, $c03e
-	call Func_22248
+	call FillMusicRAM8
 	ld hl, $c046
-	call Func_22248
+	call FillMusicRAM8
 	ld hl, $c04e
-	call Func_22248
+	call FillMusicRAM8
 	ld hl, $c056
-	call Func_22248
+	call FillMusicRAM8
 	ld hl, $c05e
-	call Func_22248
+	call FillMusicRAM8
 	ld hl, $c066
-	call Func_22248
+	call FillMusicRAM8
 	ld hl, $c06e
-	call Func_22248
+	call FillMusicRAM8
 	ld hl, $c036
-	call Func_22248
+	call FillMusicRAM8
 	ld hl, $c076
-	call Func_22248
+	call FillMusicRAM8
 	ld hl, $c07e
-	call Func_22248
+	call FillMusicRAM8
 	ld hl, $c086
-	call Func_22248
+	call FillMusicRAM8
 	ld hl, $c08e
-	call Func_22248
+	call FillMusicRAM8
 	ld hl, $c096
-	call Func_22248
+	call FillMusicRAM8
 	ld hl, $c09e
-	call Func_22248
+	call FillMusicRAM8
 	ld hl, $c0a6
-	call Func_22248
+	call FillMusicRAM8
 	ld hl, $c0ae
-	call Func_22248
+	call FillMusicRAM8
 	ld a, $1
 	ld hl, $c0be
-	call Func_22248
+	call FillMusicRAM8
 	ld hl, $c0b6
-	call Func_22248
+	call FillMusicRAM8
 	ld hl, $c0c6
-	call Func_22248
+	call FillMusicRAM8
 	ld [$c0e8], a
 	ld a, $ff
 	ld [$c004], a
@@ -46231,7 +46255,6 @@ Func_22035: ; 22035 (8:6035)
 	ld [$FF00+$24], a
 	jp Func_2224e
 
-; known jump sources: 2203f (8:603f), 22042 (8:6042), 22049 (8:6049)
 Func_2210d: ; 2210d (8:610d)
 	ld l, a
 	ld e, a
@@ -46239,7 +46262,7 @@ Func_2210d: ; 2210d (8:610d)
 	ld d, h
 	add hl, hl
 	add hl, de
-	ld de, SFX_Headers_08 ; $4000
+	ld de, SFX_Headers_08
 	add hl, de
 	ld a, h
 	ld [$c0ec], a
@@ -46250,9 +46273,7 @@ Func_2210d: ; 2210d (8:610d)
 	rlca
 	rlca
 	ld c, a
-
-; known jump sources: 221f0 (8:61f0)
-Func_22126: ; 22126 (8:6126)
+.asm_22126
 	ld d, c
 	ld a, c
 	add a
@@ -46383,9 +46404,8 @@ Func_22126: ; 22126 (8:6126)
 	and a
 	jp z, Func_2224e
 	dec c
-	jp Func_22126
+	jp .asm_22126
 
-; known jump sources: 2203a (8:603a)
 Func_221f3: ; 221f3 (8:61f3)
 	ld a, $80
 	ld [$FF00+$26], a
@@ -46414,27 +46434,26 @@ Func_221f3: ; 221f3 (8:61f3)
 	ld [$c0e7], a
 	ld d, $a0
 	ld hl, $c006
-	call Func_22248
+	call FillMusicRAM8
 	ld a, $1
 	ld d, $18
 	ld hl, $c0b6
-	call Func_22248
+	call FillMusicRAM8
 	ld [$c0e8], a
 	ld [$c0ea], a
 	ld a, $ff
 	ld [$c004], a
 	ret
 
-; known jump sources: 22061 (8:6061), 22067 (8:6067), 2206f (8:606f), 22075 (8:6075), 2207b (8:607b), 22081 (8:6081), 22087 (8:6087), 2208d (8:608d), 22093 (8:6093), 22099 (8:6099), 2209f (8:609f), 220a5 (8:60a5), 220ab (8:60ab), 220b1 (8:60b1), 220b7 (8:60b7), 220bd (8:60bd), 220c3 (8:60c3), 220c9 (8:60c9), 220cf (8:60cf), 220d5 (8:60d5), 220dd (8:60dd), 220e3 (8:60e3), 220e9 (8:60e9), 2222f (8:622f), 22239 (8:6239)
-Func_22248: ; 22248 (8:6248)
+; fills d bytes at hl with a
+FillMusicRAM8: ; 22248 (8:6248)
 	ld b, d
-.asm_22249
+.loop
 	ld [hli], a
 	dec b
-	jr nz, .asm_22249
+	jr nz, .loop
 	ret
 
-; known jump sources: 2210a (8:610a), 221ec (8:61ec)
 Func_2224e: ; 2224e (8:624e)
 	ld a, [$c001]
 	ld l, a
@@ -46443,12 +46462,12 @@ Func_2224e: ; 2224e (8:624e)
 	ld d, h
 	add hl, hl
 	add hl, de
-	ld de, SFX_Headers_08 ; $4000
+	ld de, SFX_Headers_08
 	add hl, de
 	ld e, l
 	ld d, h
 	ld hl, $c006
-	ld a, [de]
+	ld a, [de] ; get channel number
 	ld b, a
 	rlca
 	rlca
@@ -46486,7 +46505,7 @@ Func_2224e: ; 2224e (8:624e)
 .asm_22291
 	pop bc
 	pop hl
-	ld a, [de]
+	ld a, [de] ; get channel pointer
 	ld [hli], a
 	inc de
 	ld a, [de]
@@ -46515,11 +46534,11 @@ Func_2224e: ; 2224e (8:624e)
 	ld [hli], a
 	ld [hli], a
 	ld [hl], a
-	ld hl, $c012
-	ld de, Unknown_222d5 ; $62d5
+	ld hl, $c012 ; sfx noise channel pointer
+	ld de, Noise8_endchannel
 	ld [hl], e
 	inc hl
-	ld [hl], d
+	ld [hl], d ; overwrite pointer to point to endchannel
 	ld a, [$c005]
 	and a
 	jr nz, .asm_222d4
@@ -46530,46 +46549,54 @@ Func_2224e: ; 2224e (8:624e)
 .asm_222d4
 	ret
 
-Unknown_222d5: ; 222d5 (8:62d5)
-INCBIN "baserom.gbc",$222d5,$222d6 - $222d5
+Noise8_endchannel: ; 222d5 (8:62d5)
+	endchannel
 
 Unknown_222d6: ; 222d6 (8:62d6)
-INCBIN "baserom.gbc",$222d6,$222de - $222d6
+	db $10, $15, $1A, $1F ; channels 0-3
+	db $10, $15, $1A, $1F ; channels 4-7
 
 Unknown_222de: ; 222de (8:62de)
-INCBIN "baserom.gbc",$222de,$222e6 - $222de
+	db $EE, $DD, $BB, $77 ; channels 0-3
+	db $EE, $DD, $BB, $77 ; channels 4-7
 
 Unknown_222e6: ; 222e6 (8:62e6)
-INCBIN "baserom.gbc",$222e6,$222ee - $222e6
+	db $11, $22, $44, $88 ; channels 0-3
+	db $11, $22, $44, $88 ; channels 4-7
 
 Unknown_222ee: ; 222ee (8:62ee)
-INCBIN "baserom.gbc",$222ee,$22306 - $222ee
+	dw $F82C
+	dw $F89D
+	dw $F907
+	dw $F96B
+	dw $F9CA
+	dw $FA23
+	dw $FA77
+	dw $FAC7
+	dw $FB12
+	dw $FB58
+	dw $FB9B
+	dw $FBDA
 
-; known jump sources: e1d6 (3:61d6)
-Func_22306: ; 22306 (8:6306)
-	ld a, $9a
+Music_PokeFluteInBattle: ; 22306 (8:6306)
+	ld a, (SFX_08_46 - $4000) / 3 ; PokeFlute outside of battle
 	call PlaySoundWaitForCurrent
 	ld hl, $c00e
-	ld de, Unknown_22322 ; $6322
-	call Func_2231d
-	ld de, Unknown_22325 ; $6325
-	call Func_2231d
-	ld de, Unknown_2049b ; $449b
+	ld de, SFX_08_PokeFlute_Ch1
+	call Music8_OverwriteChannelPointer
+	ld de, SFX_08_PokeFlute_Ch2
+	call Music8_OverwriteChannelPointer
+	ld de, SFX_08_PokeFlute_Ch3
 
-; known jump sources: 22311 (8:6311), 22317 (8:6317)
-Func_2231d: ; 2231d (8:631d)
+Music8_OverwriteChannelPointer: ; 2231d (8:631d)
 	ld a, e
 	ld [hli], a
 	ld a, d
 	ld [hli], a
 	ret
 
-Unknown_22322: ; 22322 (8:6322)
-INCBIN "baserom.gbc",$22322,$22325 - $22322
-
-Unknown_22325: ; 22325 (8:6325)
-INCBIN "baserom.gbc",$22325,$22370 - $22325
-
+INCLUDE "music/sfx/sfx_08_pokeflute.tx"
+INCLUDE "music/sfx/sfx_08_unused2.tx"
 INCLUDE "music/gymleaderbattle.tx"
 INCLUDE "music/trainerbattle.tx"
 INCLUDE "music/wildbattle.tx"
@@ -60310,7 +60337,7 @@ Func_3c567: ; 3c567 (f:4567)
 	jr .asm_3c5db
 .asm_3c5d3
 	call Func_3c643
-	ld a, $f9
+	ld a, (Music_DefeatedWildMon - $4000) / 3
 	call Func_3c6ee
 .asm_3c5db
 	ld hl, W_PLAYERMONCURHP ; $d015
@@ -60426,16 +60453,16 @@ Func_3c664: ; 3c664 (f:4664)
 ; known jump sources: 3c544 (f:4544), 3c722 (f:4722)
 TrainerBattleVictory: ; 3c696 (f:4696)
 	call Func_3c643
-	ld b, $fc
+	ld b, (Music_DefeatedGymLeader - $4000) / 3
 	ld a, [W_GYMLEADERNO] ; $d05c
 	and a
-	jr nz, .notgymleader
-	ld b, $f6 ; gym leader win music
-.notgymleader
+	jr nz, .gymleader
+	ld b, (Music_DefeatedTrainer - $4000) / 3
+.gymleader
 	ld a, [W_TRAINERCLASS] ; $d031
 	cp SONY3 ; final battle against rival
 	jr nz, .notrival
-	ld b, $fc ; final rival battle win music
+	ld b, (Music_DefeatedGymLeader - $4000) / 3
 	ld hl, W_FLAGS_D733
 	set 1, [hl]
 .notrival
@@ -60476,7 +60503,7 @@ Func_3c6ee: ; 3c6ee (f:46ee)
 	ld a, $ff
 	ld [$c0ee], a
 	call PlaySoundWaitForCurrent
-	ld c, $8
+	ld c, BANK(Music_DefeatedTrainer)
 	pop af
 	call PlayMusic
 	jp Delay3
@@ -81188,8 +81215,8 @@ Route22Script0: ; 50f00 (14:4f00)
 	ld [$c0ee], a
 	call PlaySound
 .asm_50f4e
-	ld c, $2
-	ld a, $de
+	ld c, BANK(Music_MeetRival)
+	ld a, (Music_MeetRival - $4000) / 3
 	call PlayMusic
 	ld a, $1
 	ld [$ff00+$8c], a
@@ -82930,8 +82957,8 @@ INCBIN "baserom.gbc",$51c17,$51c23 - $51c17
 	ld a, $ff
 	ld [$c0ee], a
 	call PlaySound
-	ld c, $2
-	ld a, $de
+	ld c, BANK(Music_MeetRival)
+	ld a, (Music_MeetRival - $4000) / 3
 	call PlayMusic
 	ld a, $9
 	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
@@ -93928,8 +93955,8 @@ PewterPokecenterText3: ; 5c59b (17:459b)
 	jr nz, .asm_5c5c3 ; 0x5c5c5 $fc
 	dec hl
 	push hl
-	ld c, $1f
-	ld a, $d0
+	ld c, BANK(Music_JigglypuffSong)
+	ld a, (Music_JigglypuffSong - $4000) / 3
 	call PlayMusic
 	pop hl
 .asm_5c5d1
@@ -97135,8 +97162,8 @@ PokemonTower2Script0: ; 6050f (18:450f)
 	ld a, $ff
 	ld [$c0ee], a
 	call PlaySound
-	ld c, $2
-	ld a, $de
+	ld c, BANK(Music_MeetRival)
+	ld a, (Music_MeetRival - $4000) / 3
 	call PlayMusic
 	ld hl, $d764
 	res 6, [hl]
@@ -98822,8 +98849,8 @@ SSAnne2Script0: ; 613be (18:53be)
 	ld a, $ff
 	ld [$c0ee], a
 	call PlaySound
-	ld c, $2
-	ld a, $de
+	ld c, BANK(Music_MeetRival)
+	ld a, (Music_MeetRival - $4000) / 3
 	call PlayMusic
 	ld a, [$cd3d]
 	ld [$ff00+$db], a
@@ -101232,8 +101259,8 @@ Func_701a0: ; 701a0 (1c:41a0)
 .asm_701eb
 	ld a, $90
 	ld [$FF00+$b0], a
-	ld c, $1f
-	ld a, $ca
+	ld c, BANK(Music_HallOfFame)
+	ld a, (Music_HallOfFame - $4000) / 3
 	call PlayMusic
 	ld hl, W_PARTYMON1 ; $d164
 	ld c, $ff
@@ -106196,8 +106223,8 @@ Func_7405c: ; 7405c (1d:405c)
 	call EnableLCD
 	ld a, $ff
 	call PlaySoundWaitForCurrent
-	ld c, $1f
-	ld a, $c7
+	ld c, BANK(Music_Credits)
+	ld a, (Music_Credits - $4000) / 3
 	call PlayMusic
 	ld c, $80
 	call DelayFrames
@@ -113783,8 +113810,8 @@ Func_7bde9: ; 7bde9 (1e:7de9)
 	ld a, [$cee9]
 	call PlayCry
 	call WaitForSoundToFinish
-	ld c, $2
-	ld a, $e5
+	ld c, BANK(Music_SafariZone)
+	ld a, (Music_SafariZone - $4000) / 3
 	call PlayMusic
 	ld c, $50
 	call DelayFrames
@@ -113923,8 +113950,8 @@ Func_7bf15: ; 7bf15 (1e:7f15)
 	add d
 	ld [$FF00+$af], a
 	push bc
-	ld c, $2
-	ld a, $b4
+	ld c, BANK(SFX_02_5b)
+	ld a, (SFX_02_5b - $4000) / 3
 	call PlayMusic
 	pop bc
 	ld c, $2
@@ -113935,8 +113962,8 @@ Func_7bf15: ; 7bf15 (1e:7f15)
 	ld [$FF00+$af], a
 	ld a, $ff
 	call PlaySound
-	ld c, $2
-	ld a, $b9
+	ld c, BANK(SFX_02_5f)
+	ld a, (SFX_02_5f - $4000) / 3
 	call PlayMusic
 .asm_7bf57
 	ld a, [$c02a]
@@ -114038,10 +114065,10 @@ Music1f_Channel3DutyPointers: ; 7c361 (1f:4361)
 	dw Music1f_Channel3Duty3
 	dw Music1f_Channel3Duty4
 	dw Music1f_Channel3Duty5
-	dw SFX_1f_3f_Ch1
-	dw SFX_1f_3f_Ch1
-	dw SFX_1f_3f_Ch1
-	dw SFX_1f_3f_Ch1
+	dw SFX_1f_3f_Ch1 ; unused
+	dw SFX_1f_3f_Ch1 ; unused
+	dw SFX_1f_3f_Ch1 ; unused
+	dw SFX_1f_3f_Ch1 ; unused
 	
 Music1f_Channel3Duty1: ; 7c373 (1f:4373)
 	db $02,$46,$8A,$CE,$FF,$FE,$ED,$DC,$CB,$A9,$87,$65,$44,$33,$22,$11
@@ -114252,9 +114279,9 @@ Music1f_Music2_ApplyMusicAffects: ; 7d1ac (1f:51ac)
 	ld hl, $c02e
 	add hl, bc
 	bit 6, [hl] ; dutycycle
-	jr z, .checkForexecutemusic
+	jr z, .checkForExecuteMusic
 	call Music1f_ApplyDutyCycle
-.checkForexecutemusic
+.checkForExecuteMusic
 	ld b, $0
 	ld hl, $c036
 	add hl, bc
