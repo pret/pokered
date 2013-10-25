@@ -2855,7 +2855,6 @@ SwitchToMapRomBank: ; 12bc (0:12bc)
 	pop hl
 	ret
 
-; known jump sources: 7af (0:7af)
 Func_12da: ; 12da (0:12da)
 	ld a, $1e
 	ld [$d13a], a
@@ -2865,7 +2864,6 @@ Func_12da: ; 12da (0:12da)
 	ld [hl], a
 	ret
 
-; known jump sources: 3c9 (0:3c9)
 Func_12e7: ; 12e7 (0:12e7)
 	ld hl, $d728
 	res 0, [hl]
@@ -3005,7 +3003,6 @@ LoadMonData: ; 1372 (0:1372)
 	ld b,BANK(LoadMonData_)
 	jp Bankswitch
 
-; no known jump sources
 ; writes c to $d0dc+b
 Func_137a: ; 137a (0:137a)
 	ld hl, $d0dc
@@ -3016,12 +3013,10 @@ Func_137a: ; 137a (0:137a)
 	ld [hl], a
 	ret
 
-; known jump sources: 617a (1:617a), 12a6e (4:6a6e), 403b0 (10:43b0), 415c0 (10:55c0), 7bebf (1e:7ebf)
 LoadFlippedFrontSpriteByMonIndex: ; 1384 (0:1384)
 	ld a, $1
 	ld [W_SPRITEFLIPPED], a
 
-; known jump sources: 4530 (1:4530), 702a3 (1c:42a3), 740ec (1d:40ec), 76643 (1d:6643), 797ab (1e:57ab)
 LoadFrontSpriteByMonIndex: ; 1389 (0:1389)
 	push hl
 	ld a, [$d11e]
@@ -3517,7 +3512,6 @@ UncompressMonSprite: ; 1627 (0:1627)
 .GotBank
 	jp UncompressSpriteData
 
-; known jump sources: 13b1 (0:13b1), 3ca4f (f:4a4f), 3d17d (f:517d), 3efce (f:6fce), 3efda (f:6fda), 5dbfd (17:5bfd)
 ; de: destination location
 LoadMonFrontSprite: ; 1665 (0:1665)
 	push de
@@ -3529,7 +3523,6 @@ LoadMonFrontSprite: ; 1665 (0:1665)
 	pop de
 	; fall through
 
-; known jump sources: 3f066 (f:7066)
 ; postprocesses uncompressed sprite chunks to a 2bpp sprite and loads it into video ram
 ; calculates alignment parameters to place both sprite chunks in the center of the 7*7 tile sprite buffers
 ; de: destination location
@@ -3581,7 +3574,6 @@ LoadUncompressedSpriteData: ; 1672 (0:1672)
 	pop de
 	jp InterlaceMergeSpriteBuffers
 
-; known jump sources: 16ac (0:16ac), 16bb (0:16bb)
 ; copies and aligns the sprite data properly inside the sprite buffer
 ; sprite buffers are 7*7 tiles in size, the loaded sprite is centered within this area
 AlignSpriteDataCentered: ; 16c2 (0:16c2)
@@ -3621,7 +3613,6 @@ ZeroSpriteBuffer: ; 16df (0:16df)
 	jr nz, .nextByteLoop
 	ret
 
-; known jump sources: 16bf (0:16bf), 62b8 (1:62b8), 3ecd8 (f:6cd8), 3f121 (f:7121), 70355 (1c:4355), 70368 (1c:4368)
 ; combines the (7*7 tiles, 1bpp) sprite chunks in buffer 0 and 1 into a 2bpp sprite located in buffer 1 through 2
 ; in the resulting sprite, the rows of the two source sprites are interlaced
 ; de: output address
@@ -3882,7 +3873,6 @@ ClearScreenArea: ; 18c4 (0:18c4)
 	jr nz,.loop
 	ret
 
-; known jump sources: 70fd (1:70fd), 1dbc2 (7:5bc2), 41265 (10:5265), 4129d (10:529d), 41324 (10:5324)
 ; copies the screen tile buffer from WRAM to VRAM
 ; copying is done in 3 chunks of 6 rows each
 ; b: high byte of VRAM destination address ($98 or $9c for window tile map 0 or 1 resp.)
@@ -5169,7 +5159,6 @@ INCBIN "gfx/tilesets/flower/flower2.2bpp"
 FlowerTilePattern3: ; 1f39 (0:1f39)
 INCBIN "gfx/tilesets/flower/flower3.2bpp"
 
-; known jump sources: c047 (3:4047)
 SoftReset: ; 1f49 (0:1f49)
 	call StopAllSounds
 	call GBPalWhiteOut
@@ -5280,7 +5269,6 @@ ZeroVram: ; 2004 (0:2004)
 	xor a
 	jp FillMemory
 
-; known jump sources: 962 (0:962), 1f49 (0:1f49), 1fd0 (0:1fd0)
 ; immediately stops all sounds
 StopAllSounds: ; 200e (0:200e)
 	ld a, $2
@@ -5482,7 +5470,6 @@ DecGradGBPalTable_02: ; 2121 (0:2121)
 	db %00000000
 	db %00000000
 
-; known jump sources: 58 (0:58)
 SerialInterruptHandler: ; 2125 (0:2125)
 	push af
 	push bc
@@ -5532,7 +5519,6 @@ SerialInterruptHandler: ; 2125 (0:2125)
 	pop af
 	reti
 
-; known jump sources: 53e2 (1:53e2), 53f1 (1:53f1), 5400 (1:5400)
 Func_216f: ; 216f (0:216f)
 	ld a, $1
 	ld [$FF00+$ab], a
@@ -5567,7 +5553,6 @@ Func_216f: ; 216f (0:216f)
 	jr nz, .asm_2173
 	ret
 
-; known jump sources: 2176 (0:2176), 222e (0:222e), 2259 (0:2259)
 Func_219a: ; 219a (0:219a)
 	xor a
 	ld [$FF00+$a9], a
@@ -5656,7 +5641,6 @@ Func_219a: ; 219a (0:219a)
 	call DelayFrame
 	jp Func_219a
 
-; known jump sources: 21b7 (0:21b7)
 Func_2231: ; 2231 (0:2231)
 	ld a, $f
 .asm_2233
@@ -5664,7 +5648,6 @@ Func_2231: ; 2231 (0:2231)
 	jr nz, .asm_2233
 	ret
 
-; known jump sources: 21b2 (0:21b2), 21c4 (0:21c4), 2209 (0:2209), 221a (0:221a), 228a (0:228a)
 Func_2237: ; 2237 (0:2237)
 	push hl
 	ld hl, $cc47
@@ -5673,14 +5656,12 @@ Func_2237: ; 2237 (0:2237)
 	pop hl
 	ret
 
-; known jump sources: 21c9 (0:21c9), 221d (0:221d), 229c (0:229c)
 Func_223f: ; 223f (0:223f)
 	dec a
 	ld [$cc47], a
 	ld [$cc48], a
 	ret
 
-; known jump sources: 5c66 (1:5c66)
 Func_2247: ; 2247 (0:2247)
 	ld hl, $cc42
 	ld de, $cc3d
@@ -5706,7 +5687,6 @@ Func_2247: ; 2247 (0:2247)
 	jr nz, .asm_2253
 	ret
 
-; no known jump sources (dead code?)
 Func_226e: ; 226e (0:226e)
 	call SaveScreenTilesToBuffer1
 	ld hl, Func_4c05
@@ -5715,7 +5695,6 @@ Func_226e: ; 226e (0:226e)
 	call Func_227f
 	jp LoadScreenTilesFromBuffer1
 
-; known jump sources: 53b5 (1:53b5), 7263 (1:7263)
 Func_227f: ; 227f (0:227f)
 	ld a, $ff
 	ld [$cc3e], a
@@ -5756,7 +5735,6 @@ Func_227f: ; 227f (0:227f)
 	ld [$cc3d], a
 	ret
 
-; known jump sources: 2284 (0:2284), 22ab (0:22ab), 3d63b (f:563b), 3d64c (f:564c)
 Func_22c3: ; 22c3 (0:22c3)
 	call asm_22d7
 	ld a, [$cc42]
@@ -5780,7 +5758,6 @@ asm_22d7: ; 22d7 (0:22d7)
 	ld [$cc3e], a
 	ret
 
-; known jump sources: 22b6 (0:22b6), 721a (1:721a), 7220 (1:7220), 7276 (1:7276), 3d657 (f:5657)
 Func_22ed: ; 22ed (0:22ed)
 	xor a
 	ld [$FF00+$ac], a
@@ -5791,7 +5768,6 @@ Func_22ed: ; 22ed (0:22ed)
 	ld [$FF00+$2], a
 	ret
 
-; known jump sources: 19c5b (6:5c5b), 4425d (11:425d), 488b8 (12:48b8), 492cf (12:52cf), 493ba (12:53ba), 5c587 (17:4587), 5c645 (17:4645), 5c8da (17:48da), 5c98f (17:498f), 5d535 (17:5535), 75063 (1d:5063), 75e2c (1d:5e2c)
 Func_22fa: ; 22fa (0:22fa)
 	ld a, $2
 	ld [$FF00+$1], a
@@ -5805,7 +5781,6 @@ Func_22fa: ; 22fa (0:22fa)
 TimerHandler: ; 2306 (0:2306)
 	reti
 
-; known jump sources: 100d (0:100d), 12f5 (0:12f5), d993 (3:5993), d9ae (3:59ae), d9da (3:59da), da22 (3:5a22), e234 (3:6234), 17daa (5:7daa), 19624 (6:5624), 1cbf4 (7:4bf4), 1ce82 (7:4e82), 1cf1b (7:4f1b), 1cfda (7:4fda), 1ebc9 (7:6bc9), 3aef3 (e:6ef3), 51165 (14:5165), 51d35 (14:5d35), 605cf (18:45cf), 614d2 (18:54d2), 61917 (18:5917), 70558 (1c:4558), 7bf61 (1e:7f61), 7d15f (1f:515f)
 Func_2307: ; 2307 (0:2307)
 	call WaitForSoundToFinish
 	xor a
@@ -5814,7 +5789,6 @@ Func_2307: ; 2307 (0:2307)
 	ld [$cfca], a
 	jr asm_2324
 
-; known jump sources: 8b0 (0:8b0), 94b (0:94b), 12b2 (0:12b2)
 Func_2312: ; 2312 (0:2312)
 	ld c, $a
 	ld d, $0
@@ -5862,7 +5836,6 @@ asm_2324: ; 2324 (0:2324)
 	ld [$c0ee], a
 	jp PlaySound
 
-; known jump sources: 12af (0:12af)
 Func_235f: ; 235f (0:235f)
 	ld a, [$c0ef]
 	ld b, a
@@ -5891,7 +5864,6 @@ Func_235f: ; 235f (0:235f)
 	jr nz, .asm_237a
 	ret
 
-; known jump sources: 2347 (0:2347)
 Func_2385: ; 2385 (0:2385)
 	ld a, [$d35c]
 	ld e, a
@@ -6094,12 +6066,10 @@ TextScriptEnd: ; 24d7 (0:24d7)
 UnnamedText_24db: ; 24db (0:24db)
 	TX_FAR _UnnamedText_24db
 	db "@"
-; 0x24db + 5 bytes
 
 UnnamedText_24e0: ; 24e0 (0:24e0)
 	TX_FAR _UnnamedText_24e0
 	db "@"
-; 0x24e0 + 5 bytes
 
 BoulderText: ; 24e5 (0:24e5)
 	TX_FAR _BoulderText
@@ -6712,7 +6682,6 @@ StoreSpriteOutputPointer: ; 2897 (0:2897)
 	ld [W_SPRITEOUTPUTPTRCACHED+1], a
 	ret
 
-; known jump sources: 5d6e (1:5d6e), 6210 (1:6210)
 ResetPlayerSpriteData: ; 28a6 (0:28a6)
 	ld hl, $c100
 	call ResetPlayerSpriteData_ClearSpriteData
@@ -6728,14 +6697,12 @@ ResetPlayerSpriteData: ; 28a6 (0:28a6)
 	ld [hl], $40     ; set X screen pos
 	ret
 
-; known jump sources: 28a9 (0:28a9), 28af (0:28af)
 ; overwrites sprite data with zeroes
 ResetPlayerSpriteData_ClearSpriteData: ; 28c4 (0:28c4)
 	ld bc, $10
 	xor a
 	jp FillMemory
 
-; known jump sources: 2071 (0:2071)
 Func_28cb: ; 28cb (0:28cb)
 	ld a, [$cfc7]
 	and a
@@ -8003,7 +7970,6 @@ DisplayTextBoxID: ; 30e8 (0:30e8)
 	ld [$2000],a
 	ret
 
-; known jump sources: 466 (0:466), 68a (0:68a)
 Func_30fd: ; 30fd (0:30fd)
 	ld a, [$cc57]
 	and a
@@ -8015,7 +7981,6 @@ Func_30fd: ; 30fd (0:30fd)
 	and $80
 	ret
 
-; known jump sources: 1038 (0:1038)
 Func_310e: ; 310e (0:310e)
 	ld hl, $d736
 	bit 0, [hl]
@@ -8053,13 +8018,11 @@ Func_310e: ; 310e (0:310e)
 	ld hl, Func_1a3e0
 	jp Bankswitch ; indirect jump to Func_1a3e0 (1a3e0 (6:63e0))
 
-; known jump sources: 1a50d (6:650d)
 Func_314e: ; 314e (0:314e)
 	ld b, BANK(Func_1a41d)
 	ld hl, Func_1a41d
 	jp Bankswitch ; indirect jump to Func_1a41d (1a41d (6:641d))
 
-; no known jump sources
 Func_3156: ; 3156 (0:3156)
 	ret
 
@@ -8228,7 +8191,6 @@ Func_324c: ; 324c (0:324c)
 	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
 	call DisplayTextID
 
-; known jump sources: 3216 (0:3216)
 Func_325d: ; 325d (0:325d)
 	xor a
 	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
@@ -8242,7 +8204,6 @@ Func_325d: ; 325d (0:325d)
 	inc [hl]        ; progress to battle phase 2 (battling)
 	ret
 
-; known jump sources: 5a349 (16:6349), 60d3a (18:4d3a), 7623f (1d:623f), 76396 (1d:6396), 764ed (1d:64ed)
 EndTrainerBattle: ; 3275 (0:3275)
 	ld hl, $d126
 	set 5, [hl]
@@ -8278,7 +8239,6 @@ EndTrainerBattle: ; 3275 (0:3275)
 	res 4, [hl]
 	ret nz
 
-; known jump sources: 328b (0:328b)
 ResetButtonPressedAndMapScript: ; 32c1 (0:32c1)
 	xor a
 	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
@@ -8308,7 +8268,6 @@ InitBattleEnemyParameters: ; 32d7 (0:32d7)
 	ld [W_CURENEMYLVL], a ; $d127
 	ret
 
-; known jump sources: 1cde1 (7:4de1)
 Func_32ef: ; 32ef (0:32ef)
 	ld hl, Func_567f9
 	jr asm_3301
@@ -8317,7 +8276,6 @@ Func_32f4: ; 32f4 (0:32f4)
 	ld hl, Func_56819
 	jr asm_3301 ; 0x32f7 $8
 
-; known jump sources: 1ce15 (7:4e15), 1d072 (7:5072), 1e7e5 (7:67e5)
 Func_32f9: ; 32f9 (0:32f9)
 	ld hl, Func_5683d
 	jr asm_3301
@@ -8328,7 +8286,6 @@ asm_3301: ; 3301 (0:3301)
 	ld b, $15
 	jp Bankswitch ; indirect jump to one of the four functions
 
-; known jump sources: 3219 (0:3219)
 CheckForEngagingTrainers: ; 3306 (0:3306)
 	xor a
 	call ReadTrainerHeaderInfo       ; read trainer flag's bit (unused)
@@ -8406,7 +8363,6 @@ EngageMapTrainer: ; 336a (0:336a)
 	ld [W_ENEMYMONATTACKMOD], a ; $cd2e
 	jp PlayTrainerMusic
 
-; known jump sources: 3c6ce (f:46ce)
 Func_3381: ; 3381 (0:3381)
 	push hl
 	ld hl, $d72d
@@ -8434,7 +8390,6 @@ Func_3381: ; 3381 (0:3381)
 	call Bankswitch ; indirect jump to Func_1a5e7 (1a5e7 (6:65e7))
 	jp WaitForSoundToFinish
 
-; known jump sources: 33d4 (0:33d4)
 Func_33b7: ; 33b7 (0:33b7)
 	ld a, [$cf0b]
 	and a
@@ -8460,7 +8415,6 @@ Func_33d4: ; 33d4 (0:33d4)
 	call TextCommandProcessor
 	jp TextScriptEnd
 
-; no known jump sources
 Func_33dd: ; 33dd (0:33dd)
 	ld a, [W_FLAGS_CD60]
 	bit 0, a
@@ -8468,9 +8422,7 @@ Func_33dd: ; 33dd (0:33dd)
 	call EngageMapTrainer
 	xor a
 	ret
-; 0x33e8
 
-; known jump sources: 337e (0:337e)
 PlayTrainerMusic: ; 33e8 (0:33e8)
 	ld a, [W_ENGAGEDTRAINERCLASS]
 	cp $c8 + SONY1
@@ -8534,7 +8486,6 @@ db $c8+GIOVANNI
 db $c8+ROCKET
 db $FF
 
-; known jump sources: 345e (0:345e), 748f6 (1d:48f6)
 Func_3442: ; 3442 (0:3442)
 	ld a, [hli]
 	cp $ff
@@ -8559,20 +8510,17 @@ Func_3442: ; 3442 (0:3442)
 	inc hl
 	jr Func_3442
 
-; known jump sources: 299f (0:299f)
 FuncTX_ItemStoragePC: ; 3460 (0:3460)
 	call SaveScreenTilesToBuffer2
 	ld b, BANK(Func_78e6)
 	ld hl, Func_78e6
 	jr bankswitchAndContinue
 
-; known jump sources: 29a4 (0:29a4)
 FuncTX_BillsPC: ; 346a (0:346a)
 	call SaveScreenTilesToBuffer2
 	ld b, BANK(Func_214c2)
 	ld hl, Func_214c2
 	jr bankswitchAndContinue
-; 3474 (0:3474)
 
 FuncTX_SlotMachine: ; 3474 (0:3474)
 ; XXX find a better name for this function
@@ -8583,13 +8531,11 @@ bankswitchAndContinue: ; 3479 (0:3479)
 	call Bankswitch
 	jp HoldTextDisplayOpen        ; continue to main text-engine function
 
-; known jump sources: 29a9 (0:29a9)
 FuncTX_PokemonCenterPC: ; 347f (0:347f)
 	ld b, BANK(ActivatePC)
 	ld hl, ActivatePC
 	jr bankswitchAndContinue
 
-; known jump sources: 190cf (6:50cf), 1981a (6:581a), 19845 (6:5845), 1a402 (6:6402), 1a6b7 (6:66b7), 1ca63 (7:4a63), 1cbb2 (7:4bb2), 1cc64 (7:4c64), 1d4b2 (7:54b2), 1e6ca (7:66ca), 49705 (12:5705), 498bd (12:58bd), 512e9 (14:52e9), 51402 (14:5402), 5a36d (16:636d), 5a51f (16:651f), 5c1ea (17:41ea), 748fe (1d:48fe), 752b1 (1d:52b1), 75f5a (1d:5f5a), 760ab (1d:60ab), 761d6 (1d:61d6), 76217 (1d:6217), 7632d (1d:632d), 7636e (1d:636e), 76484 (1d:6484), 764c5 (1d:64c5)
 Func_3486: ; 3486 (0:3486)
 	xor a
 	ld [$cd3b], a
@@ -8597,7 +8543,6 @@ Func_3486: ; 3486 (0:3486)
 	ld hl, $d730
 	set 7, [hl]
 	ret
-; 3493 (0:3493)
 
 IsItemInBag: ; 3493 (0:3493)
 ; given an item_id in b
@@ -8615,15 +8560,12 @@ DisplayPokedex: ; 349b (0:349b)
 	ld b, BANK(Func_7c18)
 	ld hl, Func_7c18
 	jp Bankswitch
-; 0x34a6
 
-; known jump sources: 18eda (6:4eda), 19564 (6:5564), 1cbbc (7:4bbc), 1cbc6 (7:4bc6), 1cbe9 (7:4be9), 1cc43 (7:4c43), 1cc4d (7:4c4d), 1cd13 (7:4d13), 1cd54 (7:4d54), 1cd7a (7:4d7a), 1ce1f (7:4e1f), 1cf05 (7:4f05), 1cf0f (7:4f0f), 1cf7a (7:4f7a), 50ef8 (14:4ef8), 510aa (14:50aa), 51104 (14:5104), 51ce7 (14:5ce7), 5a540 (16:6540), 6054e (18:454e), 6142d (18:542d), 62224 (18:6224), 7602d (1d:602d), 76037 (1d:6037), 7604f (1d:604f), 76066 (1d:6066)
 Func_34a6: ; 34a6 (0:34a6)
 	call Func_34ae
 	ld c, $6
 	jp DelayFrames
 
-; known jump sources: 34a6 (0:34a6)
 Func_34ae: ; 34ae (0:34ae)
 	ld a, $9
 	ld [H_DOWNARROWBLINKCNT1], a ; $FF00+$8b
@@ -8637,7 +8579,6 @@ Func_34b9: ; 34b9 (0:34b9)
 	add hl, de
 	ld [hl], a
 	ret
-; 0x34bf
 
 ; tests if the player's coordinates are in a specified array
 ; INPUT:
@@ -8702,14 +8643,11 @@ CheckBoulderCoords: ; 34e4 (0:34e4)
 	ld c, a
 	pop hl
 	jp CheckCoords
-; 0x34fc
 
-; known jump sources: 34b2 (0:34b2), 1ccd8 (7:4cd8), 1d15f (7:515f), 1d16c (7:516c), 1d235 (7:5235)
 Func_34fc: ; 34fc (0:34fc)
 	ld h, $c1
 	jr asm_3502
 
-; known jump sources: 19530 (6:5530)
 Func_3500: ; 3500 (0:3500)
 	ld h, $c2
 asm_3502: ; 3502 (0:3502)
@@ -8721,7 +8659,6 @@ asm_3502: ; 3502 (0:3502)
 	ld l, a
 	ret
 
-; known jump sources: 3453 (0:3453), 1a4bc (6:64bc), 1a4c9 (6:64c9), 1cbab (7:4bab), 1d4ab (7:54ab), 5a366 (16:6366), 5a518 (16:6518), 75f53 (1d:5f53), 760a4 (1d:60a4)
 ; decodes a $ff-terminated RLEncoded list
 ; each entry is a pair of bytes <byte value> <repetitions>
 ; the final $ff will be replicated in the output list and a contains the number of bytes written
@@ -8763,7 +8700,6 @@ SetSpriteMovementBytesToFE: ; 3533 (0:3533)
 	ld [hl], a
 	pop hl
 	ret
-; 0x3541
 
 ; sets both movement bytes for sprite [$FF8C] to $FF
 SetSpriteMovementBytesToFF: ; 3541 (0:3541)
@@ -8797,7 +8733,6 @@ GetSpriteMovementByte2Pointer: ; 3558 (0:3558)
 	pop de
 	ret
 
-; known jump sources: 3ef5b (f:6f5b)
 Func_3566: ; 3566 (0:3566)
 	call Func_359e
 	ld a, [W_ISLINKBATTLE] ; $d12b
@@ -8831,7 +8766,6 @@ Func_3566: ; 3566 (0:3566)
 	ld [hl], d
 	ret
 
-; known jump sources: 3566 (0:3566)
 Func_359e: ; 359e (0:359e)
 	ld b, BANK(Func_13a58)
 	ld hl, Func_13a58
@@ -8854,7 +8788,6 @@ HasEnoughCoins: ; 35b1 (0:35b1)
 	ld hl, $ffa0
 	ld c, $2
 	jp StringCmp
-; 0x35bc
 
 BankswitchHome: ; 35bc (0:35bc)
 ; switches to bank # in a
@@ -8899,13 +8832,11 @@ YesNoChoice: ; 35ec (0:35ec)
 	call InitYesNoTextBoxParameters
 	jr DisplayYesNoChoice
 
-; no known jump sources
 Func_35f4: ; 35f4 (0:35f4)
 	ld a, $14
 	ld [$d125], a
 	call InitYesNoTextBoxParameters
 	jp DisplayTextBoxID
-; 0x35ff
 
 InitYesNoTextBoxParameters: ; 35ff (0:35ff)
 	xor a
@@ -8915,7 +8846,6 @@ InitYesNoTextBoxParameters: ; 35ff (0:35ff)
 	ld bc, $80f
 	ret
 
-; known jump sources: 7000 (1:7000)
 YesNoChoicePokeCenter: ; 360a (0:360a)
 	call SaveScreenTilesToBuffer1
 	ld a, $6
@@ -8925,7 +8855,6 @@ YesNoChoicePokeCenter: ; 360a (0:360a)
 	ld bc, $80c
 	jr DisplayYesNoChoice
 
-; no known jump sources
 Func_361a: ; 361a (0:361a)
 	call SaveScreenTilesToBuffer1
 	ld a, $3
@@ -8985,7 +8914,6 @@ MoveSprite_: ; 363d (0:363d)
 	ld [$CD3A],a
 	ret
 
-; known jump sources: f964 (3:7964), f98d (3:798d)
 Func_366b: ; 366b (0:366b)
 	push hl
 	ld hl, $ffe7
@@ -9072,7 +9000,6 @@ FillMemory: ; 36e0 (0:36e0)
 	pop de
 	ret
 
-; known jump sources: 62a6 (1:62a6), 3eca0 (f:6ca0), 3f05d (f:705d), 70343 (1c:4343), 7035d (1c:435d)
 ; loads sprite that de points to
 UncompressSpriteFromDE: ; 36eb (0:36eb)
 	ld hl, W_SPRITEINPUTPTR
@@ -9245,7 +9172,6 @@ GetName: ; 376b (0:376b)
 	ld [$2000],a
 	ret
 
-; known jump sources: 2cdc (0:2cdc), 2ee0 (0:2ee0)
 GetItemPrice: ; 37df (0:37df)
 	ld a, [H_LOADEDROMBANK]
 	push af
@@ -9729,7 +9655,6 @@ CalcStat: ; 394a (0:394a)
 	pop hl
 	ret
 
-; no known jump sources
 AddEnemyMonToPlayerParty: ; 3a53 (0:3a53)
 	ld a, [H_LOADEDROMBANK]
 	push af
@@ -9742,9 +9667,7 @@ AddEnemyMonToPlayerParty: ; 3a53 (0:3a53)
 	ld [H_LOADEDROMBANK], a
 	ld [$2000], a
 	ret
-; 0x3a68
 
-; known jump sources: 215e8 (8:55e8), 2165c (8:565c)
 Func_3a68: ; 3a68 (0:3a68)
 	ld a, [H_LOADEDROMBANK]
 	push af
@@ -10412,7 +10335,6 @@ IsInArrayCummulativeCount: ; 3dad (0:3dad)
 	scf
 	ret
 
-; known jump sources: 656e (1:656e), ef9e (3:6f9e), 130ce (4:70ce), 132d9 (4:72d9), 133f9 (4:73f9), 1da79 (7:5a79), 71ca5 (1c:5ca5)
 Func_3dbe: ; 3dbe (0:3dbe)
 	call CleanLCD_OAM
 	ld a, $1
@@ -10422,7 +10344,7 @@ Func_3dbe: ; 3dbe (0:3dbe)
 	call LoadTextBoxTilePatterns
 	call GoPAL_SET_CF1C
 	jr Delay3
-; 3dd4 (0:3dd4)
+
 ; calls GBPalWhiteOut and then Delay3
 GBPalWhiteOutWithDelay3: ; 3dd4 (0:3dd4)
 	call GBPalWhiteOut
@@ -10457,7 +10379,6 @@ GoPAL_SET: ; 3def (0:3def)
 	ld a,$45
 	jp Predef
 
-; known jump sources: 129eb (4:69eb), 12ed1 (4:6ed1), 3ce91 (f:4e91)
 Func_3df9: ; 3df9 (0:3df9)
 	ld a, e
 	cp $1b
@@ -10471,7 +10392,6 @@ Func_3df9: ; 3df9 (0:3df9)
 	ld [hl], d
 	ret
 
-; known jump sources: 3dc6 (0:3dc6), 653b (1:653b)
 Func_3e08: ; 3e08 (0:3e08)
 	ld hl, $cfc4
 	ld a, [hl]
@@ -10581,15 +10501,12 @@ Load16BitRegisters: ; 3e94 (0:3e94)
 	ld a, [$cc54]
 	ld c, a
 	ret
-; 0x3ead
 
-; known jump sources: 75769 (1d:5769), 75837 (1d:5837)
 Func_3ead: ; 3ead (0:3ead)
 	ld b, BANK(Func_1eb0a)
 	ld hl, Func_1eb0a
 	jp Bankswitch ; indirect jump to Func_1eb0a (1eb0a (7:6b0a))
 
-; known jump sources: 46b (0:46b)
 Func_3eb5: ; 3eb5 (0:3eb5)
 	ld a, [H_LOADEDROMBANK]
 	push af
@@ -10627,7 +10544,6 @@ Func_3eb5: ; 3eb5 (0:3eb5)
 	ld [H_LOADEDROMBANK], a
 	ret
 
-; known jump sources: fb74 (3:7b74), 1ea22 (7:6a22), 1eb88 (7:6b88), 1eb92 (7:6b92), 1ebd9 (7:6bd9), 526ab (14:66ab), 526e0 (14:66e0), 5dbba (17:5bba), 5dbd0 (17:5bd0), 5de0e (17:5e0e), 5de7a (17:5e7a), 62526 (18:6526), 766b5 (1d:66b5)
 Func_3ef5: ; 3ef5 (0:3ef5)
 	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
 	ld hl, $3f22
@@ -10636,7 +10552,6 @@ Func_3ef5: ; 3ef5 (0:3ef5)
 	set 0, [hl]
 	call DisplayTextID
 
-; known jump sources: 738f4 (1c:78f4)
 Func_3f05: ; 3f05 (0:3f05)
 	ld hl, W_MAPTEXTPTR ; $d36c
 	ld a, [$FF00+$ec]
@@ -10645,7 +10560,6 @@ Func_3f05: ; 3f05 (0:3f05)
 	ld [hl], a
 	ret
 
-; known jump sources: 3efa (0:3efa), 738fd (1c:78fd)
 Func_3f0f: ; 3f0f (0:3f0f)
 	ld a, [W_MAPTEXTPTR] ; $d36c
 	ld [$FF00+$ec], a
@@ -10657,7 +10571,6 @@ Func_3f0f: ; 3f0f (0:3f0f)
 	ld [$d36d], a
 	ret
 ; 3f22 (0:3f22)
-; 0x3F22
 	dw $66ee
 	dw $66f8
 	dw $5b8e
@@ -10785,7 +10698,6 @@ SpriteOAMParametersFlipped: ; 40a4 (1:40a4)
 	db $08,$08, OAMFLAG_VFLIPPED | OAMFLAG_CANBEMASKED
 	db $08,$00, OAMFLAG_VFLIPPED | OAMFLAG_CANBEMASKED | OAMFLAG_ENDOFDATA
 
-; known jump sources: 945 (0:945)
 Func_40b0: ; 40b0 (1:40b0)
 	xor a
 	ld [$cf0b], a
@@ -10834,7 +10746,6 @@ MewPicFront: ; 4112 (1:4112)
 	INCBIN "pic/bmon/mew.pic"
 MewPicBack: ; 4205 (1:4205)
 	INCBIN "pic/monback/mewb.pic"
-; 0x425b
 
 MewBaseStats: ; 425b (1:425b)
 	db DEX_MEW ; pokedex id
@@ -10872,7 +10783,6 @@ MewBaseStats: ; 425b (1:425b)
 	db %11111111
 	db %11111111 ; usually spacing
 
-; known jump sources: 3c17f (f:417f)
 Func_4277: ; 4277 (1:4277)
 	ld hl, $cce9
 	ld a, [hl]
@@ -10901,16 +10811,14 @@ Func_4277: ; 4277 (1:4277)
 	call LoadScreenTilesFromBuffer1
 	pop hl
 	jp PrintText
-; 42a7 (1:42a7)
+
 UnnamedText_42a7: ; 42a7 (1:42a7)
 	TX_FAR SafariZoneEatingText
 	db "@"
-; 0x42a7 + 5 bytes
 
 UnnamedText_42ac: ; 42ac (1:42ac)
 	TX_FAR SafariZoneAngryText
 	db "@"
-; 0x42ac + 5 bytes
 
 ; copy text of fixed length $b (like player name, rival name, mon names, ...)
 CopyFixedLengthText: ; 42b1 (1:42b1)
@@ -10935,7 +10843,6 @@ Func_42b7: ; 42b7 (1:42b7)
 	ld [$c0ef], a
 	ld [$c0f0], a
 
-; known jump sources: 5526 (1:5526), 5b89 (1:5b89)
 Func_42dd: ; 42dd (1:42dd)
 	call GBPalWhiteOut
 	ld a, $1
@@ -10972,7 +10879,6 @@ Func_42dd: ; 42dd (1:42dd)
 	call FarCopyData2          ; second chunk
 	ld hl, Version_GFX ; $402f
 ; 4335 (1:4335)
-; 0x4335
 IF _RED
 	ld de,$9600 ; where to put redgreenversion.2bpp in the VRAM
 	ld bc,$50 ; how big that file is
@@ -11155,13 +11061,11 @@ INCBIN "baserom.gbc",$43db,$43ea - $43db
 	jp z, Func_448e
 	jp MainMenu
 
-; known jump sources: 4488 (1:4488)
 Func_448e: ; 448e (1:448e)
 	ld b, BANK(Func_1c98a)
 	ld hl, Func_1c98a
 	jp Bankswitch ; indirect jump to Func_1c98a (1c98a (7:498a))
 
-; known jump sources: 4454 (1:4454)
 Func_4496: ; 4496 (1:4496)
 	ld a, $98
 	call Func_4533
@@ -11186,7 +11090,6 @@ Func_4496: ; 4496 (1:4496)
 	call Bankswitch ; indirect jump to LoadScreenTilesFromBuffer18 (37258 (d:7258))
 	ret
 
-; known jump sources: 4442 (1:4442)
 Func_44c1: ; 44c1 (1:44c1)
 	ld d, $0
 	ld b, BANK(LoadScreenTilesFromBuffer18)
@@ -11196,7 +11099,6 @@ Func_44c1: ; 44c1 (1:44c1)
 	ld [$FF00+$b0], a
 	ret
 
-; known jump sources: 440d (1:440d), 4414 (1:4414), 44d2 (1:44d2)
 Func_44cf: ; 44cf (1:44cf)
 	ld a, [$FF00+$44]
 	cp l
@@ -11209,7 +11111,6 @@ Func_44cf: ; 44cf (1:44cf)
 	jr z, .asm_44d7
 	ret
 
-; known jump sources: 4366 (1:4366)
 Func_44dd: ; 44dd (1:44dd)
 	ld hl, PlayerCharacterTitleGraphics ; $66a8
 	ld de, $8000
@@ -11247,14 +11148,12 @@ Func_44dd: ; 44dd (1:44dd)
 	jr nz, .asm_44fa
 	ret
 
-; known jump sources: 4340 (1:4340)
 Func_4519: ; 4519 (1:4519)
 	ld hl, $9800
 	ld bc, $800
 	ld a, $7f
 	jp FillMemory
 
-; known jump sources: 439d (1:439d), 44af (1:44af)
 Func_4524: ; 4524 (1:4524)
 	ld [$cf91], a
 	ld [$d0b5], a
@@ -11263,19 +11162,16 @@ Func_4524: ; 4524 (1:4524)
 	call GetMonHeader
 	jp LoadFrontSpriteByMonIndex
 
-; known jump sources: 43a2 (1:43a2), 43b1 (1:43b1), 4420 (1:4420), 4473 (1:4473), 4478 (1:4478), 4498 (1:4498)
 Func_4533: ; 4533 (1:4533)
 	ld [$FF00+$bd], a
 	jp Delay3
 
-; known jump sources: 41894 (10:5894)
 Func_4538: ; 4538 (1:4538)
 	xor a
 	ld [$FF00+$b0], a
 	call ClearScreen
 	call LoadTextBoxTilePatterns
 
-; known jump sources: 741fa (1d:41fa)
 Func_4541: ; 4541 (1:4541)
 	ld de, NintendoCopyrightLogoGraphics ; $60c8
 	ld hl, $9600
@@ -11773,7 +11669,6 @@ PrepareOAMData: ; 4b0f (1:4b0f)
 	add hl, de
 	jr .clearUnusedOAMEntriesLoop
 
-; known jump sources: 4b37 (1:4b37), 4b64 (1:4b64)
 Func_4bd1: ; 4bd1 (1:4bd1)
 	inc e
 	inc e
@@ -11796,7 +11691,6 @@ Func_4bd1: ; 4bd1 (1:4bd1)
 	ld [de], a            ; c1xb (sprite X pos (snapped to whole steps (?))
 	ret
 
-; known jump sources: 1f9e (0:1f9e)
 ; copies DMA routine to HRAM. By GB specifications, all DMA needs to be done in HRAM (no other memory section is available during DMA)
 WriteDMACodeToHRAM: ; 4bed (1:4bed)
 	ld c, $80
@@ -11819,9 +11713,7 @@ DMARoutine: ; 4bfb (1:4bfb)
 	dec a
 	jr nz, .waitLoop
 	ret
-; 0x4c05
 
-; known jump sources: 3d638 (f:5638)
 Func_4c05: ; 4c05 (1:4c05)
 	FuncCoord 3, 10 ; $c46b
 	ld hl, Coord
@@ -11845,7 +11737,6 @@ Func_4c05: ; 4c05 (1:4c05)
 WaitingText: ; 4c28 (1:4c28)
 	db "Waiting...!@"
 
-; known jump sources: 2438 (0:2438)
 _UpdateSprites: ; 4c34 (1:4c34)
 	ld h, $c1
 	inc h
@@ -11876,7 +11767,6 @@ _UpdateSprites: ; 4c34 (1:4c34)
 	jp nz, UpdateNonPlayerSprite
 	jp UpdatePlayerSprite
 
-; known jump sources: 4c56 (1:4c56)
 UpdateNonPlayerSprite: ; 4c5c (1:4c5c)
 	dec a
 	swap a
@@ -11890,7 +11780,6 @@ UpdateNonPlayerSprite: ; 4c5c (1:4c5c)
 .unequal
 	jp Func_4ed1
 
-; known jump sources: 4e50 (1:4e50), 51af (1:51af)
 Func_4c70: ; 4c70 (1:4c70)
 	nop
 	ld h, $c1
@@ -11930,7 +11819,6 @@ Func_4c70: ; 4c70 (1:4c70)
 	ld [hl], a
 	xor a
 
-; known jump sources: 4d6e (1:4d6e)
 Func_4ca5: ; 4ca5 (1:4ca5)
 	ld [$FF00+$8f], a
 	swap a
@@ -12082,7 +11970,6 @@ Func_4ca5: ; 4ca5 (1:4ca5)
 	jp nz, Func_4ca5
 	ret
 
-; known jump sources: 4c80 (1:4c80), 4c8d (1:4c8d), 4cc4 (1:4cc4), 4d05 (1:4d05)
 Func_4d72: ; 4d72 (1:4d72)
 	and a
 	ld b, $0
@@ -12103,7 +11990,6 @@ INCBIN "gfx/diagonal_lines.2bpp"
 
 INCBIN "baserom.gbc",$4da5,$4de1 - $4da5
 
-; known jump sources: 24f7 (0:24f7)
 PickupItem: ; 4de1 (1:4de1)
 	call EnableAutoTextBoxDrawing
 	ld a, [H_DOWNARROWBLINKCNT2] ; $FF00+$8c
@@ -12150,14 +12036,11 @@ FoundItemText: ; 4e26 (1:4e26)
 	TX_FAR _FoundItemText
 	db $0B
 	db "@"
-; 0x4e26 + 5 bytes
 
 NoMoreRoomForItemText: ; 4e2c (1:4e2c)
 	TX_FAR _NoMoreRoomForItemText
 	db "@"
-; 0x4e2c + 5 bytes
 
-; known jump sources: 4c59 (1:4c59)
 UpdatePlayerSprite: ; 4e31 (1:4e31)
 	ld a, [$c200]
 	and a
@@ -12252,7 +12135,6 @@ UpdatePlayerSprite: ; 4e31 (1:4e31)
 
 INCBIN "baserom.gbc",$4ec7,$4ed1 - $4ec7
 
-; known jump sources: 4c6d (1:4c6d)
 Func_4ed1: ; 4ed1 (1:4ed1)
 	ld a, [H_CURRENTSPRITEOFFSET]
 	swap a
@@ -12390,8 +12272,7 @@ Func_4ed1: ; 4ed1 (1:4ed1)
 	ld bc, $10c
 	jr TryWalking
 
-; known jump sources: 4f36 (1:4f36)
-; cahnges facing direction by zeroing the movement delta and calling TryWalking
+; changes facing direction by zeroing the movement delta and calling TryWalking
 ChangeFacingDirection: ; 4fc8 (1:4fc8)
 	ld de, $0
 	; fall through
@@ -12440,7 +12321,6 @@ TryWalking: ; 4fcb (1:4fcb)
 	ld [hl], $3         ; c1x1: set movement status to walking
 	jp UpdateSpriteImage
 
-; known jump sources: 4f0c (1:4f0c)
 ; update the walking animation parameters for a sprite that is currently walking
 UpdateSpriteInWalkingAnimation: ; 4ffe (1:4ffe)
 	ld a, [H_CURRENTSPRITEOFFSET]
@@ -12514,7 +12394,6 @@ UpdateSpriteInWalkingAnimation: ; 4ffe (1:4ffe)
 	ld [hl], a                       ; reset movement X delta
 	ret
 
-; known jump sources: 4f07 (1:4f07)
 ; update delay value (c2x8) for sprites in the delayed state (c1x1)
 UpdateSpriteMovementDelay: ; 5057 (1:5057)
 	ld h, $c2
@@ -12545,7 +12424,6 @@ notYetMoving: ; 5073 (1:5073)
 	ld [hl], $0             ; c1x8 = 0 (walk animation frame)
 	jp UpdateSpriteImage
 
-; known jump sources: 4ef8 (1:4ef8)
 InitializeSpriteFacingDirection: ; 507f (1:507f)
 	ld a, [$d72d]
 	bit 5, a
@@ -12575,7 +12453,6 @@ InitializeSpriteFacingDirection: ; 507f (1:507f)
 	ld [hl], c              ; c1x9: set facing direction
 	jr notYetMoving
 
-; known jump sources: 4ee8 (1:4ee8)
 InitializeSpriteStatus: ; 50ad (1:50ad)
 	ld [hl], $1   ; $c1x1: set movement status to ready
 	inc l
@@ -12589,7 +12466,6 @@ InitializeSpriteStatus: ; 50ad (1:50ad)
 	ld [hl], a    ; $c2x3: set X displacement to 8
 	ret
 
-; known jump sources: 4f14 (1:4f14)
 ; calculates the spprite's scrren position form its map position and the player position
 InitializeSpriteScreenPosition: ; 50bd (1:50bd)
 	ld h, $c2
@@ -12614,7 +12490,6 @@ InitializeSpriteScreenPosition: ; 50bd (1:50bd)
 	ld [hl], a      ; c1x6 (screen X position)
 	ret
 
-; known jump sources: 4eeb (1:4eeb)
 ; tests if sprite is off screen or otherwise unable to do anything
 CheckSpriteAvailability: ; 50dc (1:50dc)
 	ld a, $12
@@ -12696,7 +12571,6 @@ CheckSpriteAvailability: ; 50dc (1:50dc)
 .done
 	ret
 
-; known jump sources: 4ffb (1:4ffb), 507c (1:507c), 5141 (1:5141)
 UpdateSpriteImage: ; 5157 (1:5157)
 	ld h, $c1
 	ld a, [H_CURRENTSPRITEOFFSET]
@@ -12716,7 +12590,6 @@ UpdateSpriteImage: ; 5157 (1:5157)
 	ld [hl], b         ; c1x2: sprite to display
 	ret
 
-; known jump sources: 4fe0 (1:4fe0)
 ; tests if sprite can walk the specified direction
 ; b: direction (1,2,4 or 8)
 ; c: ID of tile the sprite would walk onto
@@ -12830,7 +12703,6 @@ CanWalkOntoTile: ; 516e (1:516e)
 	scf                ; set carry (marking failure to walk)
 	ret
 
-; known jump sources: 4f59 (1:4f59), 5115 (1:5115)
 ; calculates the tile pointer pointing to the tile the current sprite stancs on
 ; this is always the lower left tile of the 2x2 tile blocks all sprites are snapped to
 ; hl: output pointer
@@ -12872,7 +12744,6 @@ LoadDEPlusA: ; 522f (1:522f)
 	ld a, [de]
 	ret
 
-; known jump sources: 4c6a (1:4c6a)
 Func_5236: ; 5236 (1:5236)
 	ld a, [$d730]
 	bit 7, a
@@ -12939,7 +12810,6 @@ Func_5236: ; 5236 (1:5236)
 	inc [hl]
 	ret
 
-; known jump sources: 5243 (1:5243)
 Func_52a6: ; 52a6 (1:52a6)
 	xor a
 	ld [$cd37], a
@@ -12947,13 +12817,11 @@ Func_52a6: ; 52a6 (1:52a6)
 	ld [$cf18], a
 	jp Func_52c3
 
-; known jump sources: 5256 (1:5256), 5263 (1:5263)
 Func_52b2: ; 52b2 (1:52b2)
 	ld a, $4
 	ld b, a
 	jr asm_52ba
 
-; known jump sources: 5270 (1:5270), 527d (1:527d)
 Func_52b7: ; 52b7 (1:52b7)
 	ld a, $6
 	ld b, a
@@ -12965,7 +12833,6 @@ asm_52ba: ; 52ba (1:52ba)
 	ld l, a
 	ret
 
-; known jump sources: 5294 (1:5294), 52af (1:52af)
 Func_52c3: ; 52c3 (1:52c3)
 	ld hl, $c200
 	ld a, [H_CURRENTSPRITEOFFSET]
@@ -13005,7 +12872,6 @@ Func_52c3: ; 52c3 (1:52c3)
 	ld [hl], a
 	ret
 
-; known jump sources: 52ee (1:52ee)
 Func_5301: ; 5301 (1:5301)
 	ld a, [H_CURRENTSPRITEOFFSET]
 	add $7
@@ -13025,7 +12891,6 @@ Func_5301: ; 5301 (1:5301)
 	ld [$FF00+$ea], a
 	ret
 
-; known jump sources: 5a75 (1:5a75)
 Func_5317: ; 5317 (1:5317)
 	ld c, $50
 	call DelayFrames
@@ -13596,7 +13461,6 @@ Func_5530
 	cp $f
 	jr nz, .asm_5745 ; 0x577b $c8
 
-; known jump sources: 5503 (1:5503)
 Func_577d: ; 577d (1:577d)
 	call GBPalWhiteOutWithDelay3
 	ld hl, $cfc4
@@ -13900,7 +13764,6 @@ Func_5a18:
 SSAnne8AfterBattleText2: ; 5a24 (1:5a24)
 	TX_FAR _SSAnne8AfterBattleText2
 	db "@"
-; 0x5a24 + 5 bytes
 
 TradeCompleted:
 	db "Trade completed!@"
@@ -13912,7 +13775,6 @@ PointerTable_5a5b: ; 5a5b (1:5a5b)
 	dw Func_5530
 	dw Func_5849
 
-; known jump sources: 3888 (0:3888)
 Func_5a5f: ; 5a5f (1:5a5f)
 	ld a, [W_ISLINKBATTLE] ; $d12b
 	cp $2
@@ -13951,14 +13813,12 @@ Func_5a5f: ; 5a5f (1:5a5f)
 	ld [$c0ee], a
 	jp PlaySound
 
-; known jump sources: 5a6f (1:5a6f)
 Func_5aaf: ; 5aaf (1:5aaf)
 	ret
 
 Unknown_5ab0:
 	call Load16BitRegisters
 
-; known jump sources: 4c17 (1:4c17), 5332 (1:5332), 75b4 (1:75b4)
 Func_5ab3: ; 5ab3 (1:5ab3)
 	push hl
 	ld a, $78
@@ -13989,7 +13849,6 @@ Func_5ab3: ; 5ab3 (1:5ab3)
 	ld [hl], $7d
 	ret
 
-; known jump sources: 5ab8 (1:5ab8), 5ac8 (1:5ac8), 5ada (1:5ada)
 Func_5ae0: ; 5ae0 (1:5ae0)
 	ld d, c
 .asm_5ae1
@@ -13998,13 +13857,11 @@ Func_5ae0: ; 5ae0 (1:5ae0)
 	jr nz, .asm_5ae1
 	ret
 
-; known jump sources: 5328 (1:5328)
 Func_5ae6: ; 5ae6 (1:5ae6)
 	ld de, TrainerInfoTextBoxTileGraphics ; $7b98
 	ld hl, $9760
 	ld bc, (BANK(TrainerInfoTextBoxTileGraphics) << 8) +$09
 	jp CopyVideoData
-; 5af2 (1:5af2)
 
 MainMenu: ; 5af2 (1:5af2)
 ; Check save file
@@ -14140,9 +13997,7 @@ Func_5bff: ; 5bff (1:5bff)
 	ld a,3
 	ld [$D355],a
 	ret
-; 0x5c0a
 
-; known jump sources: 72b0 (1:72b0)
 Func_5c0a: ; 5c0a (1:5c0a)
 	xor a
 	ld [$d358], a
@@ -14303,23 +14158,19 @@ Func_5c0a: ; 5c0a (1:5c0a)
 	ld hl, $d72e
 	res 6, [hl]
 	ret
-; 5d43 (1:5d43)
+
 UnnamedText_5d43: ; 5d43 (1:5d43)
 	TX_FAR _UnnamedText_5d43
 	db "@"
-; 0x5d43 + 5 bytes
 
 UnnamedText_5d48: ; 5d48 (1:5d48)
 	TX_FAR _UnnamedText_5d48
 	db "@"
-; 0x5d48 + 5 bytes
 
 UnnamedText_5d4d: ; 5d4d (1:5d4d)
 	TX_FAR _UnnamedText_5d4d
 	db "@"
-; 0x5d4d + 5 bytes
 
-; known jump sources: 5ba4 (1:5ba4)
 Func_5d52: ; 5d52 (1:5d52)
 	ld hl, $d732
 	res 1, [hl]
@@ -14327,7 +14178,6 @@ Func_5d52: ; 5d52 (1:5d52)
 	ld c, $14
 	call DelayFrames
 
-; known jump sources: 5be5 (1:5be5), 5bed (1:5bed), 5bfc (1:5bfc), 5d2b (1:5d2b)
 Func_5d5f: ; 5d5f (1:5d5f)
 	xor a
 	ld [H_NEWLYPRESSEDBUTTONS], a
@@ -14353,7 +14203,6 @@ NewGameText: ; 5d87 (1:5d87)
 TradeCenterText: ; 5d97 (1:5d97)
 	db "TRADE CENTER",$4e,"COLOSSEUM",$4e,"CANCEL@"
 
-; known jump sources: 5bb2 (1:5bb2)
 Func_5db5: ; 5db5 (1:5db5)
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
@@ -14386,7 +14235,6 @@ Func_5db5: ; 5db5 (1:5db5)
 
 INCBIN "baserom.gbc",$5def,$5e2f - $5def
 
-; known jump sources: 5dd7 (1:5dd7)
 Func_5e2f: ; 5e2f (1:5e2f)
 	push hl
 	ld hl, W_OBTAINEDBADGES ; $d356
@@ -14397,7 +14245,6 @@ Func_5e2f: ; 5e2f (1:5e2f)
 	ld bc, $102
 	jp PrintNumber
 
-; known jump sources: 5ddd (1:5ddd)
 Func_5e42: ; 5e42 (1:5e42)
 	push hl
 	ld hl, W_OWNEDPOKEMON ; $d2f7
@@ -14408,7 +14255,6 @@ Func_5e42: ; 5e42 (1:5e42)
 	ld bc, $103
 	jp PrintNumber
 
-; known jump sources: 5de3 (1:5de3)
 Func_5e55: ; 5e55 (1:5e55)
 	ld de, $da41
 	ld bc, $103
@@ -14691,7 +14537,6 @@ TextSpeedOptionData: ; 6096 (1:6096)
 	db 7 ; default X coordinate (Medium)
 	db $ff ; terminator
 
-; known jump sources: 5afd (1:5afd)
 Func_609e: ; 609e (1:609e)
 	ld a, $a
 	ld [$0], a
@@ -14718,7 +14563,6 @@ Func_609e: ; 609e (1:609e)
 	scf
 	ret
 
-; known jump sources: 6128 (1:6128)
 Func_60ca: ; 60ca (1:60ca)
 	ld a, [$d358]
 	push af
@@ -14985,7 +14829,6 @@ Function62CE: ; 62CE XXX called by 4B2 948 989 5BF9 5D15
 	ld [$D365],a
 	ret
 
-; known jump sources: 62ce (1:62ce)
 Func_62ff: ; 62ff (1:62ff)
 	ld a, [$d72d]
 	cp $ef
@@ -15190,11 +15033,9 @@ Map15FlyWarp: ; 64c4 (1:64c4)
 
 INCBIN "baserom.gbc",$64ca,$64ea - $64ca
 
-; known jump sources: 62e8 (1:62e8)
 Func_64ea: ; 64ea (1:64ea)
 	ret
 
-; known jump sources: e834 (3:6834), f33c (3:733c)
 Func_64eb: ; 64eb (1:64eb)
 	call SaveScreenTilesToBuffer1
 	call Load16BitRegisters
@@ -15246,13 +15087,11 @@ Func_64eb: ; 64eb (1:64eb)
 	ld hl, $cd6d
 	ld bc, $b
 	jp CopyData
-; 6557 (1:6557)
+
 UnnamedText_6557: ; 6557 (1:6557)
 	TX_FAR _UnnamedText_6557
 	db "@"
-; 0x6557 + 5 bytes
 
-; known jump sources: 1daa0 (7:5aa0)
 Func_655c: ; 655c (1:655c)
 	ld hl, $cee9
 	xor a
@@ -15281,7 +15120,6 @@ Func_655c: ; 655c (1:655c)
 	scf
 	ret
 
-; known jump sources: 6532 (1:6532), 6568 (1:6568), 6981 (1:6981), 69c9 (1:69c9)
 Func_6596: ; 6596 (1:6596)
 	push hl
 	ld hl, $d730
@@ -15465,7 +15303,6 @@ INCBIN "baserom.gbc",$665e,$667e - $665e
 	inc a
 	jr asm_6755
 
-; known jump sources: 670d (1:670d)
 Func_6714: ; 6714 (1:6714)
 	ld a, $1
 	jr asm_6755
@@ -15478,7 +15315,6 @@ Func_6714: ; 6714 (1:6714)
 	dec a
 	jr asm_6755
 
-; known jump sources: 6722 (1:6722)
 Func_6728: ; 6728 (1:6728)
 	ld a, $11
 	jr asm_6755
@@ -15507,7 +15343,6 @@ asm_6755: ; 6755 (1:6755)
 	ld [W_TOPMENUITEMX], a ; $cc25
 	jp EraseMenuCursor
 
-; known jump sources: 65ad (1:65ad)
 Func_675b: ; 675b (1:675b)
 	ld de, Unknown_6767 ; $6767
 	ld hl, $8f00
@@ -15517,7 +15352,6 @@ Func_675b: ; 675b (1:675b)
 Unknown_6767: ; 6767 (1:6767)
 INCBIN "baserom.gbc",$6767,$676f - $6767
 
-; known jump sources: 65ed (1:65ed)
 Func_676f: ; 676f (1:676f)
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
@@ -15555,7 +15389,6 @@ LowerCaseAlphabet: ; 679e (1:679e)
 UpperCaseAlphabet: ; 67d6 (1:67d6)
 	db "ABCDEFGHIJKLMNOPQRSTUVWXYZ ×():;[]",$e1,$e2,"-?!♂♀/",$f2,",¥lower case@"
 
-; known jump sources: 65f9 (1:65f9)
 Func_680e: ; 680e (1:680e)
 	call Func_68eb
 	ld a, c
@@ -15612,7 +15445,6 @@ Func_680e: ; 680e (1:680e)
 	ld [hl], $77
 	ret
 
-; known jump sources: 66e4 (1:66e4)
 Func_6871: ; 6871 (1:6871)
 	push de
 	call Func_68eb
@@ -15633,7 +15465,6 @@ INCBIN "baserom.gbc",$6885,$68d6 - $6885
 Unknown_68d6: ; 68d6 (1:68d6)
 INCBIN "baserom.gbc",$68d6,$68eb - $68d6
 
-; known jump sources: 66b9 (1:66b9), 66fb (1:66fb), 680e (1:680e), 6872 (1:6872)
 Func_68eb: ; 68eb (1:68eb)
 	ld hl, $cf4b
 	ld c, $0
@@ -15645,7 +15476,6 @@ Func_68eb: ; 68eb (1:68eb)
 	inc c
 	jr .asm_68f0
 
-; known jump sources: 65c2 (1:65c2)
 Func_68f8: ; 68f8 (1:68f8)
 	FuncCoord 0, 1 ; $c3b4
 	ld hl, Coord
@@ -15695,7 +15525,6 @@ NameTextString: ; 694d (1:694d)
 NicknameTextString: ; 6953 (1:6953)
 	db "NICKNAME?@"
 
-; known jump sources: 619e (1:619e)
 Func_695d: ; 695d (1:695d)
 	call Unnamed_6a12
 	ld de, DefaultNamesPlayer ; $6aa8
@@ -15724,11 +15553,10 @@ Func_695d: ; 695d (1:695d)
 .asm_6999
 	ld hl, UnnamedText_699f ; $699f
 	jp PrintText
-; 699f (1:699f)
+
 UnnamedText_699f: ; 699f (1:699f)
 	TX_FAR _UnnamedText_699f
 	db "@"
-; 0x699f + 5 bytes
 
 Func_69a4: ; 69a4 (1:69a4)
 	call Unnamed_6a12 ; 0x69a4 call 0x6a12
@@ -15758,13 +15586,11 @@ Func_69a4: ; 69a4 (1:69a4)
 .asm_69e1
 	ld hl, UnnamedText_69e7 ; $69e7
 	jp PrintText
-; 69e7 (1:69e7)
+
 UnnamedText_69e7: ; 69e7 (1:69e7)
 	TX_FAR _UnnamedText_69e7
 	db "@"
-; 0x69e7 + 5 bytes
 
-; known jump sources: 6975 (1:6975), 69bc (1:69bc)
 Func_69ec: ; 69ec (1:69ec)
 	push de
 	ld hl, W_SCREENTILESBUFFER
@@ -15856,7 +15682,6 @@ asm_6a19: ; 6a19 (1:6a19)
 	pop hl
 	ret
 
-; known jump sources: 6963 (1:6963), 69aa (1:69aa)
 Func_6a6c: ; 6a6c (1:6a6c)
 	push de
 	ld hl, W_SCREENTILESBUFFER
@@ -15900,7 +15725,6 @@ DefaultNamesRival: ; 6abe (1:6abe)
 	db "NEW NAME",$4E,"RED",$4E,"ASH",$4E,"JACK@"
 ENDC
 
-; known jump sources: 696f (1:696f), 69b6 (1:69b6)
 Func_6ad6: ; 6ad6 (1:6ad6)
 	ld b, a
 	ld c, $0
@@ -16369,7 +16193,6 @@ PokemartAnythingElseText: ; 6e3e (1:6e3e)
 	TX_FAR _PokemartAnythingElseText
 	db "@"
 
-; known jump sources: e537 (3:6537), 3afae (e:6fae)
 Func_6e43: ; 6e43 (1:6e43)
 	call SaveScreenTilesToBuffer1
 	ld a, [W_WHICHPOKEMON] ; $cf92
@@ -16380,7 +16203,6 @@ Func_6e43: ; 6e43 (1:6e43)
 	ld bc, $b
 	call CopyData
 
-; known jump sources: 6ef2 (1:6ef2)
 Func_6e5b: ; 6e5b (1:6e5b)
 	ld hl, W_PARTYMON1_MOVE1 ; $d173
 	ld bc, $2c
@@ -16446,7 +16268,6 @@ Func_6e5b: ; 6e5b (1:6e5b)
 	call CopyData
 	jp Func_6efe
 
-; known jump sources: 6e78 (1:6e78)
 Func_6eda: ; 6eda (1:6eda)
 	ld hl, UnnamedText_6fb9 ; $6fb9
 	call PrintText
@@ -16464,14 +16285,12 @@ Func_6eda: ; 6eda (1:6eda)
 	ld b, $0
 	ret
 
-; known jump sources: 6eb1 (1:6eb1), 6ebc (1:6ebc), 6ed7 (1:6ed7)
 Func_6efe: ; 6efe (1:6efe)
 	ld hl, UnnamedText_6fad ; $6fad
 	call PrintText
 	ld b, $1
 	ret
 
-; known jump sources: 6e74 (1:6e74)
 Func_6f07: ; 6f07 (1:6f07)
 	push hl
 	ld hl, UnnamedText_6fc3 ; $6fc3
@@ -16572,22 +16391,18 @@ UnnamedText_6fad: ; 6fb4 (1:6fb4)
 UnnamedText_6fb4: ; 6fb4 (1:6fb4)
 	TX_FAR _UnnamedText_6fb4
 	db "@"
-; 0x6fb4 + 5 bytes
 
 UnnamedText_6fb9: ; 6fb9 (1:6fb9)
 	TX_FAR _UnnamedText_6fb9
 	db "@"
-; 0x6fb9 + 5 bytes
 
 UnnamedText_6fbe: ; 6fbe (1:6fbe)
 	TX_FAR _UnnamedText_6fbe
 	db "@"
-; 0x6fbe + 5 bytes
 
 UnnamedText_6fc3: ; 6fc3 (1:6fc3)
 	TX_FAR _UnnamedText_6fc3
 	db "@"
-; 0x6fc3 + 5 bytes
 
 UnnamedText_6fc8: ; 6fc8 (1:6fc8)
 	TX_FAR _UnnamedText_6fc8 ; 0xa2819
@@ -16597,7 +16412,6 @@ UnnamedText_6fc8: ; 6fc8 (1:6fc8)
 	call PlaySoundWaitForCurrent
 	ld hl, UnnamedText_6fd7 ; $6fd7
 	ret
-; 0x6fd7
 
 UnnamedText_6fd7: ; 6fd7 (1:6fd7)
 	TX_FAR _UnnamedText_6fd7 ; 0xa2827
@@ -16605,12 +16419,10 @@ UnnamedText_6fd7: ; 6fd7 (1:6fd7)
 UnnamedText_6fdc: ; 6fdc (1:6fdc)
 	TX_FAR _UnnamedText_6fdc
 	db "@"
-; 0x6fe1
 
 UnnamedText_6fe1: ; 6fe1 (1:6fe1)
 	TX_FAR _UnnamedText_6fe1
 	db "@"
-; 0x6fe1 + 5 bytes
 
 DisplayPokemonCenterDialogue_: ; 6fe6 (1:6fe6)
 	call SaveScreenTilesToBuffer1 ; save screen
@@ -16701,7 +16513,6 @@ Unknown_7078: ; 7078 (1:7078)
 .asm_7090
 	pop hl
 	ret
-; 0x7092
 
 SafariZoneRestHouses: ; 7092 (1:7092)
 	db SAFARI_ZONE_REST_HOUSE_2
@@ -16898,7 +16709,6 @@ Unknown_71c5: ; 71c5 (1:71c5)
 	ld hl, UnnamedText_72d2 ; $72d2
 	call PrintText
 	jp Func_7298
-; 0x71e1
 
 Unknown_71e1: ; 71e1 (1:71e1)
 	ld a, $1
@@ -17006,22 +16816,18 @@ Func_72a8: ; 72a8 (1:72a8)
 	ld hl, Func_5c0a
 	ld b, BANK(Func_5c0a)
 	jp Bankswitch
-; 0x72b3
 
 UnnamedText_72b3: ; 72b3 (1:72b3)
 	TX_FAR _UnnamedText_72b3
 	db "@"
-; 0x72b3 + 5 bytes
 
 UnnamedText_72b8: ; 72b8 (1:72b8)
 	TX_FAR _UnnamedText_72b8
 	db "@"
-; 0x72b8 + 5 bytes
 
 UnnamedText_72bd: ; 72bd (1:72bd)
 	TX_FAR _UnnamedText_72bd
 	db "@"
-; 0x72bd + 5 bytes
 
 UnnamedText_72c2: ; 72c2 (1:72c2)
 	TX_FAR UnnamedText_a29cc
@@ -17030,19 +16836,15 @@ UnnamedText_72c2: ; 72c2 (1:72c2)
 UnnamedText_72c8: ; 72c8 (1:72c8)
 	TX_FAR _UnnamedText_72c8
 	db "@"
-; 0x72c8 + 5 bytes
 
 UnnamedText_72cd: ; 72cd (1:72cd)
 	TX_FAR _UnnamedText_72cd
 	db "@"
-; 0x72cd + 5 bytes
 
 UnnamedText_72d2: ; 72d2 (1:72d2)
 	TX_FAR _UnnamedText_72d2
 	db "@"
-; 0x72d2 + 5 bytes
 
-; known jump sources: 5d34 (1:5d34), 727c (1:727c), 728f (1:728f)
 Func_72d7: ; 72d7 (1:72d7)
 	call Delay3
 	ld a, $ff
@@ -17054,7 +16856,6 @@ Func_72d7: ; 72d7 (1:72d7)
 	ld a, $80
 	ld [$FF00+$2], a
 	ret
-; 72ea (1:72ea)
 
 ; function to draw various text boxes
 ; INPUT:
@@ -17405,7 +17206,6 @@ Function_74ea: ; 0x74ea, 1:34ea
 	scf
 	ret
 
-; known jump sources: 72ef (1:72ef)
 DisplayYesNoTextBox: ; 7559 (1:7559)
 	push hl
 	ld a, [$d730]
@@ -17532,7 +17332,6 @@ DisplayYesNoTextBox: ; 7559 (1:7559)
 	scf
 	ret
 
-; known jump sources: 7593 (1:7593)
 Func_763e: ; 763e (1:763e)
 	ld de, $cee9
 	ld bc, $506
@@ -17551,7 +17350,6 @@ Func_763e: ; 763e (1:763e)
 	jr nz, .asm_7644
 	ret
 
-; known jump sources: 7622 (1:7622), 7639 (1:7639)
 Func_7656: ; 7656 (1:7656)
 	ld de, $cee9
 	ld bc, $506
@@ -17729,7 +17527,6 @@ PokemonMenuEntries: ; 77c2 (1:77c2)
 	db "SWITCH",$4E
 	db "CANCEL@"
 
-; known jump sources: 76ec (1:76ec)
 Func_77d6: ; 77d6 (1:77d6)
 	ld a, [W_WHICHPOKEMON] ; $cf92
 	ld hl, W_PARTYMON1_MOVE1 ; $d173
@@ -17785,7 +17582,6 @@ Func_77d6: ; 77d6 (1:77d6)
 Unknown_7823: ; 7823 (1:7823)
 INCBIN "baserom.gbc",$7823,$783f - $7823
 
-; known jump sources: 3f2ee (f:72ee)
 Func_783f: ; 783f (1:783f)
 	ld hl, W_DAMAGE ; $d0d7
 	ld a, [hl]
@@ -17807,7 +17603,6 @@ Func_783f: ; 783f (1:783f)
 	ld hl, W_ENEMYMONCURHP ; $cfe6
 	ld de, W_ENEMYMONMAXHP ; $cff4
 
-; known jump sources: 7858 (1:7858)
 Func_7861: ; 7861 (1:7861)
 	ld bc, W_HPBAROLDHP+1
 	ld a, [hli]
@@ -17886,18 +17681,15 @@ Func_7861: ; 7861 (1:7861)
 	ld hl, UnnamedText_78e1 ; $78e1
 .asm_78d9
 	jp PrintText
-; 78dc (1:78dc)
+
 UnnamedText_78dc: ; 78dc (1:78dc)
 	TX_FAR _UnnamedText_78dc
 	db "@"
-; 0x78dc + 5 bytes
 
 UnnamedText_78e1: ; 78e1 (1:78e1)
 	TX_FAR _UnnamedText_78e1
 	db "@"
-; 0x78e1 + 5 bytes
 
-; known jump sources: 3479 (0:3479), 17ebb (5:7ebb)
 Func_78e6: ; 78e6 (1:78e6)
 	ld hl, $d730
 	set 6, [hl]
@@ -17915,7 +17707,6 @@ Func_78e6: ; 78e6 (1:78e6)
 	ld hl, UnnamedText_7b22 ; $7b22
 	call PrintText
 
-; known jump sources: 78ff (1:78ff), 79a8 (1:79a8), 79c8 (1:79c8), 7a25 (1:7a25), 7a45 (1:7a45), 7aa2 (1:7aa2), 7ac4 (1:7ac4)
 Func_790c: ; 790c (1:790c)
 	ld a, [$ccd3]
 	ld [W_CURMENUITEMID], a ; $cc26
@@ -17963,7 +17754,6 @@ Func_790c: ; 790c (1:790c)
 	dec a
 	jp z, Func_7a8f
 
-; known jump sources: 7955 (1:7955)
 Func_796d: ; 796d (1:796d)
 	ld a, [W_FLAGS_CD60]
 	bit 3, a
@@ -17984,7 +17774,6 @@ Func_796d: ; 796d (1:796d)
 	ld [$cc3c], a
 	ret
 
-; known jump sources: 7966 (1:7966)
 Func_7995: ; 7995 (1:7995)
 	xor a
 	ld [W_CURMENUITEMID], a ; $cc26
@@ -17996,7 +17785,6 @@ Func_7995: ; 7995 (1:7995)
 	call PrintText
 	jp Func_790c
 
-; known jump sources: 79a0 (1:79a0), 79e4 (1:79e4), 79f5 (1:79f5), 7a0f (1:7a0f)
 Func_79ab: ; 79ab (1:79ab)
 	ld hl, UnnamedText_7b2c ; $7b2c
 	call PrintText
@@ -18040,7 +17828,6 @@ Func_79ab: ; 79ab (1:79ab)
 	call PrintText
 	jp Func_79ab
 
-; known jump sources: 7962 (1:7962)
 Func_7a12: ; 7a12 (1:7a12)
 	xor a
 	ld [W_CURMENUITEMID], a ; $cc26
@@ -18052,7 +17839,6 @@ Func_7a12: ; 7a12 (1:7a12)
 	call PrintText
 	jp Func_790c
 
-; known jump sources: 7a1d (1:7a1d), 7a61 (1:7a61), 7a72 (1:7a72), 7a8c (1:7a8c)
 Func_7a28: ; 7a28 (1:7a28)
 	ld hl, UnnamedText_7b45 ; $7b45
 	call PrintText
@@ -18096,7 +17882,6 @@ Func_7a28: ; 7a28 (1:7a28)
 	call PrintText
 	jp Func_7a28
 
-; known jump sources: 796a (1:796a)
 Func_7a8f: ; 7a8f (1:7a8f)
 	xor a
 	ld [W_CURMENUITEMID], a ; $cc26
@@ -18108,7 +17893,6 @@ Func_7a8f: ; 7a8f (1:7a8f)
 	call PrintText
 	jp Func_790c
 
-; known jump sources: 7a9a (1:7a9a), 7aec (1:7aec), 7af2 (1:7af2)
 Func_7aa5: ; 7aa5 (1:7aa5)
 	ld hl, UnnamedText_7b5e ; $7b5e
 	call PrintText
@@ -18146,7 +17930,7 @@ Func_7aa5: ; 7aa5 (1:7aa5)
 .asm_7aef
 	call TossItem
 	jp Func_7aa5
-; 7af5 (1:7af5)
+
 PlayersPCMenuEntries: ; 7af5 (1:7af5)
 	db "WITHDRAW ITEM",$4E
 	db "DEPOSIT ITEM",$4E
@@ -18156,74 +17940,59 @@ PlayersPCMenuEntries: ; 7af5 (1:7af5)
 UnnamedText_7b22: ; 7b22 (1:7b22)
 	TX_FAR _UnnamedText_7b22
 	db "@"
-; 0x7b22 + 5 bytes
 
 UnnamedText_7b27: ; 7b27 (1:7b27)
 	TX_FAR _UnnamedText_7b27
 	db "@"
-; 0x7b27 + 5 bytes
 
 UnnamedText_7b2c: ; 7b2c (1:7b2c)
 	TX_FAR _UnnamedText_7b2c
 	db "@"
-; 0x7b2c + 5 bytes
 
 UnnamedText_7b31: ; 7b31 (1:7b31)
 	TX_FAR _UnnamedText_7b31
 	db "@"
-; 0x7b31 + 5 bytes
 
 UnnamedText_7b36: ; 7b36 (1:7b36)
 	TX_FAR _UnnamedText_7b36
 	db "@"
-; 0x7b36 + 5 bytes
 
 UnnamedText_7b3b: ; 7b3b (1:7b3b)
 	TX_FAR _UnnamedText_7b3b
 	db "@"
-; 0x7b3b + 5 bytes
 
 UnnamedText_7b40: ; 7b40 (1:7b40)
 	TX_FAR _UnnamedText_7b40
 	db "@"
-; 0x7b40 + 5 bytes
 
 UnnamedText_7b45: ; 7b45 (1:7b45)
 	TX_FAR _UnnamedText_7b45
 	db "@"
-; 0x7b45 + 5 bytes
 
 UnnamedText_7b4a: ; 7b4a (1:7b4a)
 	TX_FAR _UnnamedText_7b4a
 	db "@"
-; 0x7b4a + 5 bytes
 
 UnnamedText_7b4f: ; 7b4f (1:7b4f)
 	TX_FAR _UnnamedText_7b4f
 	db "@"
-; 0x7b4f + 5 bytes
 
 UnnamedText_7b54: ; 7b54 (1:7b54)
 	TX_FAR _UnnamedText_7b54
 	db "@"
-; 0x7b54 + 5 bytes
 
 UnnamedText_7b59: ; 7b59 (1:7b59)
 	TX_FAR _UnnamedText_7b59
 	db "@"
-; 0x7b59 + 5 bytes
 
 UnnamedText_7b5e: ; 7b5e (1:7b5e)
 	TX_FAR _UnnamedText_7b5e
 	db "@"
-; 0x7b5e + 5 bytes
 
 UnnamedText_7b63: ; 7b63 (1:7b63)
 	TX_FAR _UnnamedText_7b63
 	db "@"
-; 0x7b63 + 5 bytes
 
-; known jump sources: 3924 (0:3924)
 _RemovePokemon: ; 7b68 (1:7b68)
 	ld hl, W_NUMINPARTY ; $d163
 	ld a, [$cf95]
@@ -18342,7 +18111,6 @@ Func_7c18: ; 7c18 (1:7c18)
 	ld a, $1
 	ld [$cc3c], a
 	ret
-; 0x7c49
 
 SECTION "bank2",ROMX,BANK[$2]
 
@@ -18551,7 +18319,6 @@ INCLUDE "music.asm"
 	
 SECTION "bank3",ROMX,BANK[$3]
 
-; known jump sources: 1a4 (0:1a4)
 _GetJoypadState: ; c000 (3:4000)
 	ld a, [H_JOYPADSTATE]
 	cp BTN_A | BTN_B | BTN_SELECT | BTN_START ; soft reset sequence
@@ -18594,7 +18361,6 @@ DiscardButtonPresses: ; c034 (3:4034)
 	ld [H_NEWLYRELEASEDBUTTONS], a
 	ret
 
-; known jump sources: c004 (3:4004)
 HandleJoypadResetButtons: ; c03c (3:403c)
 	call DelayFrame
 	ld a, $30
@@ -18857,7 +18623,6 @@ MapHeaderBanks: ; c23d (3:423d)
 	db BANK(Bruno_h)
 	db BANK(Agatha_h)
 
-; known jump sources: 3b3 (0:3b3), 5798 (1:5798)
 Func_c335: ; c335 (3:4335)
 	ld a, $90
 	ld [$FF00+$b0], a
@@ -18879,7 +18644,6 @@ Func_c335: ; c335 (3:4335)
 	call FillMemory
 	ret
 
-; known jump sources: 924 (0:924)
 Func_c35f: ; c35f (3:435f)
 	ld a, [$d3ae]
 	and a
@@ -18962,7 +18726,6 @@ CheckForceBikeOrSurf: ; c38b (3:438b)
 	ld [$d700], a
 	ld [$d11a], a
 	jp ForceBikeOrSurf
-; 0xc3e6
 
 ForcedBikeOrSurfMaps: ; c3e6 (3:43e6)
 ; map id, y, x
@@ -18975,9 +18738,7 @@ db SEAFOAM_ISLANDS_4,$07,$13
 db SEAFOAM_ISLANDS_5,$0E,$04 
 db SEAFOAM_ISLANDS_5,$0E,$05
 db $FF ;end
-; 0xc3ff
 
-; known jump sources: 91c (0:91c)
 Func_c3ff: ; c3ff (3:43ff)
 	push hl
 	push de
@@ -19074,7 +18835,6 @@ INCBIN "baserom.gbc",$c477,$c490 - $c477
 	and a
 	jr .asm_c473
 
-; known jump sources: 6e0 (0:6e0), 1387f (4:787f)
 Func_c49d: ; c49d (3:449d)
 	push hl
 	push de
@@ -19108,7 +18868,6 @@ Func_c49d: ; c49d (3:449d)
 Unknown_c4cc: ; c4cc (3:44cc)
 INCBIN "baserom.gbc",$c4cc,$c52f - $c4cc
 
-; known jump sources: 2aec (0:2aec)
 Func_c52f: ; c52f (3:452f)
 	ld a, [W_CURMAP] ; $d35e
 	cp $d9
@@ -19152,11 +18911,9 @@ SafariSteps: ; c579 (3:4579)
 SafariBallText: ; c57e (3:457e)
 	db "BALL×× @"
 
-; known jump sources: 47f (0:47f), b2e (0:b2e), b5a (0:b5a), c12 (0:c12), c2d (0:c2d), fd3 (0:fd3), 1a67f (6:667f), 52683 (14:6683)
 Func_c586: ; c586 (3:4586)
 	call Load16BitRegisters
 
-; known jump sources: c451 (3:4451)
 Func_c589: ; c589 (3:4589)
 	ld a, [W_YCOORD] ; $d361
 	ld d, a
@@ -19194,7 +18951,6 @@ Func_c589: ; c589 (3:4589)
 	ld [$cfc6], a
 	ret
 
-; known jump sources: c60b (3:460b)
 Func_c5be: ; c5be (3:45be)
 	xor a
 	ld [$FF00+$db], a
@@ -19243,7 +18999,6 @@ Func_c5be: ; c5be (3:45be)
 	ld [$cfc6], a
 	ret
 
-; known jump sources: f265 (3:7265)
 Func_c60b: ; c60b (3:460b)
 	call Func_c5be
 	ld hl, $d530
@@ -19269,7 +19024,6 @@ Func_c60b: ; c60b (3:460b)
 	ld [$d71c], a
 	ret
 
-; known jump sources: c62f (3:462f)
 Func_c636: ; c636 (3:4636)
 	ld a, [$d718]
 	dec a
@@ -19345,7 +19099,6 @@ Func_c636: ; c636 (3:4636)
 	xor a
 	ret
 
-; known jump sources: 622 (0:622)
 Func_c69c: ; c69c (3:469c)
 	ld a, [$d730]
 	add a
@@ -19458,7 +19211,6 @@ Func_c69c: ; c69c (3:469c)
 	ld [$d12d], a
 	ret
 
-; known jump sources: 11fa (0:11fa), 62d3 (1:62d3)
 Func_c754: ; c754 (3:4754)
 	call Load16BitRegisters
 	push hl
@@ -19546,9 +19298,7 @@ TilesetsHeadPtr: ; c7be (3:47be)
 	TSETHEAD Tset15_Block,Tset15_GFX,Tset15_Coll,$07,$17,$FF,$FF,0
 	TSETHEAD Tset16_Block,Tset16_GFX,Tset16_Coll,$12,$FF,$FF,$FF,1
 	TSETHEAD Tset17_Block,Tset17_GFX,Tset17_Coll,$FF,$FF,$FF,$45,1
-; 0xC8DE
 
-; known jump sources: c6aa (3:46aa)
 Func_c8de: ; c8de (3:48de)
 	ld a, [$da48]
 	and a
@@ -20146,7 +19896,6 @@ MapHSA2: ; cd8d (3:4d8d)
 
 	db $FF,$01,Show
 
-; known jump sources: 1320a (4:720a)
 Func_cd99: ; cd99 (3:4d99)
 	ld hl, $d728
 	set 0, [hl]
@@ -20161,13 +19910,11 @@ INCBIN "baserom.gbc",$cdaa,$cdaf - $cdaa
 	call PlayCry
 	call Delay3
 	jp TextScriptEnd
-; cdbb (3:4dbb)
+
 UnnamedText_cdbb: ; cdbb (3:4dbb)
 	TX_FAR _UnnamedText_cdbb
 	db "@"
-; 0xcdbb + 5 bytes
 
-; known jump sources: 131de (4:71de)
 Func_cdc0: ; cdc0 (3:4dc0)
 	ld hl, $d728
 	set 1, [hl]
@@ -20200,12 +19947,10 @@ INCBIN "baserom.gbc",$cdf7,$cdfa - $cdf7
 UnnamedText_cdfa: ; cdfa (3:4dfa)
 	TX_FAR _UnnamedText_cdfa
 	db "@"
-; 0xcdfa + 5 bytes
 
 UnnamedText_cdff: ; cdff (3:4dff)
 	TX_FAR _UnnamedText_cdff
 	db "@"
-; 0xcdff + 5 bytes
 
 
 ; function to add an item (in varying quantities) to the player's bag or PC box
@@ -26831,7 +26576,6 @@ KeyItemBitfield: ; e799 (3:6799)
 	db %00111011
 	db %00000000
 
-; known jump sources: d90a (3:590a), 4fdd4 (13:7dd4)
 Func_e7a4: ; e7a4 (3:67a4)
 	ld de, W_NUMINBOX ; $da80
 	ld a, [de]
@@ -27078,7 +26822,6 @@ ReadSuperRodData: ; e8ea (3:68ea)
 	ld c, [hl] ; species
 	ld e, $1 ; $1 if there's a bite
 	ret
-; 0xe919
 
 ; super rod data
 ; format: map, pointer to fishing group
@@ -27188,7 +26931,6 @@ ItemUseReloadOverworldData: ; e9c5 (3:69c5)
 	call LoadCurrentMapView
 	jp UpdateSprites
 
-; known jump sources: 711f4 (1c:51f4)
 Func_e9cb: ; e9cb (3:69cb)
 	ld hl, WildDataPointers ; $4eeb
 	ld de, $cee9
@@ -27218,7 +26960,6 @@ Func_e9cb: ; e9cb (3:69cb)
 	ld [de], a
 	ret
 
-; known jump sources: e9de (3:69de), e9e3 (3:69e3)
 Func_e9f0: ; e9f0 (3:69f0)
 	inc hl
 	ld b, $a
@@ -27358,12 +27099,10 @@ DrawBadges: ; ea03 (3:6a03)
 
 .FaceBadgeTiles
 	db $20, $28, $30, $38, $40, $48, $50, $58
-; ea9e
 
 GymLeaderFaceAndBadgeTileGraphics: ; ea9e (3:6a9e)
 INCBIN "gfx/badges.2bpp"
 
-; known jump sources: 19f70 (6:5f70), 19f83 (6:5f83), 19f94 (6:5f94), 1a1e0 (6:61e0), 1eb3e (7:6b3e), 44312 (11:4312), 449ae (11:49ae), 517e7 (14:57e7), 51b9a (14:5b9a), 51bad (14:5bad), 51bbe (14:5bbe), 52034 (14:6034), 526cf (14:66cf), 5653b (15:653b), 59f94 (16:5f94), 59fa5 (16:5fa5), 5a170 (16:6170), 5a2f2 (16:62f2), 5ca87 (17:4a87), 5d7f4 (17:57f4), 5d807 (17:5807), 5d81a (17:581a), 5d82b (17:582b), 5da37 (17:5a37), 62131 (18:6131), 761b3 (1d:61b3), 7630a (1d:630a), 76461 (1d:6461)
 Func_ee9e: ; ee9e (3:6e9e)
 	call Load16BitRegisters
 	ld hl, $c6e8
@@ -27407,7 +27146,6 @@ Func_ee9e: ; ee9e (3:6e9e)
 	call Func_ef4e
 	ret c
 
-; known jump sources: efd3 (3:6fd3), efef (3:6fef), 71c95 (1c:5c95)
 Func_eedc: ; eedc (3:6edc)
 	ld a, [W_ISINBATTLE] ; $d057
 	inc a
@@ -27479,7 +27217,6 @@ Func_eedc: ; eedc (3:6edc)
 	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
 	ret
 
-; known jump sources: eec8 (3:6ec8), eed8 (3:6ed8)
 Func_ef4e: ; ef4e (3:6f4e)
 	ld a, h
 	sub b
@@ -27488,7 +27225,6 @@ Func_ef4e: ; ef4e (3:6f4e)
 	sub c
 	ret
 
-; known jump sources: 131c7 (4:71c7)
 Func_ef54: ; ef54 (3:6f54)
 	xor a
 	ld [$cd6a], a
@@ -27511,11 +27247,10 @@ Func_ef54: ; ef54 (3:6f54)
 .asm_ef77
 	ld hl, UnnamedText_ef7d ; $6f7d
 	jp PrintText
-; ef7d (3:6f7d)
+
 UnnamedText_ef7d: ; ef7d (3:6f7d)
 	TX_FAR _UnnamedText_ef7d
 	db "@"
-; 0xef7d + 5 bytes
 
 asm_ef82: ; ef82 (3:6f82)
 	ld [$cd4d], a
@@ -27564,7 +27299,6 @@ asm_ef82: ; ef82 (3:6f82)
 Unknown_eff2: ; eff2 (3:6ff2)
 INCBIN "baserom.gbc",$eff2,$eff7 - $eff2
 
-; known jump sources: efca (3:6fca)
 Func_eff7: ; eff7 (3:6ff7)
 	xor a
 	ld [$cd50], a
@@ -27604,7 +27338,6 @@ Func_eff7: ; eff7 (3:6ff7)
 	jr nz, .asm_f044
 	ret
 
-; known jump sources: f023 (3:7023), f029 (3:7029), f02f (3:702f), f035 (3:7035)
 Func_f04c: ; f04c (3:704c)
 	ld de, AnimationTileset2 + $60 ; $474e ; tile depicting a leaf
 	ld bc, (BANK(AnimationTileset2) << 8) + $01
@@ -27618,7 +27351,6 @@ asm_f055: ; f055 (3:7055)
 Unknown_f060: ; f060 (3:7060)
 INCBIN "baserom.gbc",$f060,$f068 - $f060
 
-; known jump sources: f055 (3:7055)
 Func_f068: ; f068 (3:7068)
 	ld hl, $c104
 	ld a, [hli]
@@ -27656,7 +27388,6 @@ INCBIN "baserom.gbc",$f08f,$f097 - $f08f
 Unknown_f097: ; f097 (3:7097)
 INCBIN "baserom.gbc",$f097,$f09f - $f097
 
-; known jump sources: efd0 (3:6fd0)
 Func_f09f: ; f09f (3:709f)
 	push de
 	ld a, [W_CURMAPWIDTH] ; $d369
@@ -27732,7 +27463,6 @@ Func_f09f: ; f09f (3:709f)
 Unknown_f100: ; f100 (3:7100)
 INCBIN "baserom.gbc",$f100,$f113 - $f100
 
-; known jump sources: 1081 (0:1081)
 Func_f113: ; f113 (3:7113)
 	ld a, [W_CURMAP] ; $d35e
 	cp ROUTE_1
@@ -27800,7 +27530,6 @@ Func_f113: ; f113 (3:7113)
 	ld [de], a                 ; write sentinel
 	ret
 
-; known jump sources: f89d (3:789d)
 InitializeMissableObjectsFlags: ; f175 (3:7175)
 	ld hl, W_MISSABLEOBJECTFLAGS
 	ld bc, $20
@@ -27831,7 +27560,6 @@ InitializeMissableObjectsFlags: ; f175 (3:7175)
 	inc hl
 	jr .missableObjectsLoop
 
-; known jump sources: 50de (1:50de)
 
 ; tests if current sprite is a missable object that is hidden/has been removed
 IsMissableObjectHidden: ; f1a6 (3:71a6)
@@ -27879,7 +27607,6 @@ RemoveMissableObject: ; f1d7 (3:71d7)
 	call HandleBitArray2   ; set "removed" flag
 	jp UpdateSprites
 
-; known jump sources: f19a (3:719a), f1bd (3:71bd), f1d1 (3:71d1), f1e0 (3:71e0)
 ; functionally identical to _HandleBitArray, but with less optimized instructions
 ; executes operations on a field of bits
 ; b = 0 -> reset bit
@@ -27943,7 +27670,6 @@ HandleBitArray2: ; f1e6 (3:71e6)
 	ld c, a
 	ret
 
-; known jump sources: 1023 (0:1023)
 Func_f225: ; f225 (3:7225)
 	ld a, [$d728]
 	bit 0, a
@@ -28028,7 +27754,6 @@ INCBIN "baserom.gbc",$f2b1,$f2b3 - $f2b1
 Unknown_f2b3: ; f2b3 (3:72b3)
 INCBIN "baserom.gbc",$f2b3,$f2b5 - $f2b3
 
-; known jump sources: 1032 (0:1032)
 Func_f2b5: ; f2b5 (3:72b5)
 	ld a, [$d730]
 	bit 0, a
@@ -28047,14 +27772,12 @@ Func_f2b5: ; f2b5 (3:72b5)
 	ld a, $ac
 	jp PlaySound
 
-; known jump sources: f23d (3:723d), f253 (3:7253), f26c (3:726c), f2c9 (3:72c9)
 Func_f2dd: ; f2dd (3:72dd)
 	ld hl, W_FLAGS_CD60
 	res 1, [hl]
 	res 6, [hl]
 	ret
 
-; known jump sources: 392f (0:392f)
 _AddPokemonToParty: ; f2e5 (3:72e5)
 	ld de, W_NUMINPARTY ; $d163
 	ld a, [$cc49]
@@ -28296,11 +28019,9 @@ _AddPokemonToParty: ; f2e5 (3:72e5)
 	scf
 	ret
 
-; known jump sources: e618 (3:6618), 3ebd2 (f:6bd2)
 LoadMovePPs: ; f473 (3:7473)
 	call Load16BitRegisters
 	; fallthrough
-; known jump sources: f44c (3:744c)
 AddPokemonToParty_WriteMovePP: ; f476 (3:7476)
 	ld b, $4
 .pploop
@@ -28391,9 +28112,7 @@ _AddEnemyMonToPlayerParty: ; f49d (3:749d)
 	call _HandleBitArray ; add to seen pokemon
 	and a
 	ret                  ; return success
-; 0xf51e
 
-; known jump sources: 3a72 (0:3a72)
 Func_f51e: ; f51e (3:751e)
 	ld a, [$cf95]
 	and a
@@ -28579,7 +28298,6 @@ Func_f51e: ; f51e (3:751e)
 HandleBitArray: ; f666 (3:7666)
 	call Load16BitRegisters
 
-; known jump sources: f38b (3:738b), f39a (3:739a), f3a1 (3:73a1)
 _HandleBitArray: ; f669 (3:7669)
 	push hl
 	push de
@@ -28721,7 +28439,6 @@ HealParty: ; f6a5 (3:76a5)
 ; predef $a
 ; predef $d
 ; predef $e
-; known jump sources: 2df5 (0:2df5), 40ed (1:40ed)
 Func_f71e: ; f71e (3:771e)
 	call Load16BitRegisters
 	xor a
@@ -28833,7 +28550,6 @@ Func_f71e: ; f71e (3:771e)
 	jr nz, .asm_f7ce
 	ret
 
-; known jump sources: f76c (3:776c), f77c (3:777c), f78e (3:778e), f79e (3:779e), f7b0 (3:77b0), f7cf (3:77cf)
 Func_f7d7: ; f7d7 (3:77d7)
 	ld a, [$FF00+$a4]
 	swap a
@@ -28859,7 +28575,6 @@ Func_f7d7: ; f7d7 (3:77d7)
 	ld [$FF00+$a2], a
 	ret
 
-; known jump sources: f75d (3:775d), f76f (3:776f), f77f (3:777f), f791 (3:7791), f7a1 (3:77a1), f7b3 (3:77b3)
 Func_f800: ; f800 (3:7800)
 	ld bc, $3
 .asm_f803
@@ -28877,7 +28592,6 @@ Func_f800: ; f800 (3:7800)
 	pop bc
 	jr .asm_f803
 
-; known jump sources: 2ba8 (0:2ba8), 2dde (0:2dde), 13801 (4:7801), 39d18 (e:5d18), 3c6e1 (f:46e1)
 Func_f81d: ; f81d (3:781d)
 	call Load16BitRegisters
 	and a
@@ -28902,11 +28616,9 @@ Func_f81d: ; f81d (3:781d)
 .asm_f835
 	ret
 
-; known jump sources: 6b37 (1:6b37), 5c1c5 (17:41c5), 74f82 (1d:4f82), 75311 (1d:5311)
 Func_f836: ; f836 (3:7836)
 	call Load16BitRegisters
 
-; known jump sources: f817 (3:7817)
 Func_f839: ; f839 (3:7839)
 	and a
 	ld b, c
@@ -28931,7 +28643,6 @@ Func_f839: ; f839 (3:7839)
 .asm_f84f
 	ret
 
-; known jump sources: 612d (1:612d)
 InitializePlayerData: ; f850 (3:7850)
 	call GenRandom
 	ld a, [H_RAND2]
@@ -28976,7 +28687,6 @@ InitializeEmptyList: ; f8a0 (3:78a0)
 	ld [hl], a
 	ret
 
-; known jump sources: 3495 (0:3495), 1980a (6:580a), 198da (6:58da), 483ee (12:43ee), 75d4e (1d:5d4e)
 Func_f8a5: ; f8a5 (3:78a5)
 	call Load16BitRegisters
 	ld hl, W_NUMBAGITEMS ; $d31d
@@ -28994,7 +28704,6 @@ Func_f8a5: ; f8a5 (3:78a5)
 	ld b, $0
 	ret
 
-; known jump sources: 18efa (6:4efa), 1cda6 (7:4da6)
 Func_f8ba: ; f8ba (3:78ba)
 	xor a
 	ld hl, $ff97
@@ -29005,7 +28714,6 @@ Func_f8ba: ; f8ba (3:78ba)
 	ld hl, $cc97
 	ld de, $0
 
-; known jump sources: f923 (3:7923)
 Func_f8c8: ; f8c8 (3:78c8)
 	ld a, [H_REMAINDER] ; $FF00+$99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
 	ld b, a
@@ -29070,7 +28778,6 @@ Func_f8c8: ; f8c8 (3:78c8)
 	ld [hl], $ff
 	ret
 
-; known jump sources: 18ef1 (6:4ef1), 1cd9c (7:4d9c)
 Func_f929: ; f929 (3:7929)
 	xor a
 	ld [$FF00+$9d], a
@@ -29148,7 +28855,6 @@ Func_f929: ; f929 (3:7929)
 
 INCBIN "baserom.gbc",$f9a0,$f9dc - $f9a0
 
-; known jump sources: 1291d (4:691d)
 Func_f9dc: ; f9dc (3:79dc)
 	call Load16BitRegisters
 
@@ -29195,7 +28901,6 @@ UpdateHPBar_CalcNumberOfHPBarPixels: ; f9df (3:79df)
 	ld e, $1           ; make result at least 1
 	ret
 
-; known jump sources: 78af (1:78af), dcad (3:5cad), dda1 (3:5da1), 13995 (4:7995), 3a724 (e:6724), 3ba88 (e:7a88), 3c50a (f:450a), 3e19a (f:619a), 3e258 (f:6258)
 ; predef $48
 UpdateHPBar: ; fa1d (3:7a1d)
 	push hl
@@ -29284,7 +28989,6 @@ UpdateHPBar: ; fa1d (3:7a1d)
 	call UpdateHPBar_AnimateHPBar
 	jp Delay3
 
-; known jump sources: fa84 (3:7a84), faab (3:7aab)
 ; animates the HP bar going up or down for (a) ticks (two waiting frames each)
 ; stops prematurely if bar is filled up
 ; e: current health (in pixels) to start with
@@ -29322,7 +29026,6 @@ UpdateHPBar_CompareNewHPToOldHP: ; fad1 (3:7ad1)
 	sub c
 	ret
 
-; known jump sources: fa2b (3:7a2b)
 ; calcs HP difference between bc and de (into de)
 UpdateHPBar_CalcHPDifference: ; fad7 (3:7ad7)
 	ld a, d
@@ -29353,7 +29056,6 @@ UpdateHPBar_CalcHPDifference: ; fad7 (3:7ad7)
 	ld de, $0
 	ret
 
-; known jump sources: fa7e (3:7a7e), faa6 (3:7aa6)
 UpdateHPBar_PrintHPNumber: ; faf5 (3:7af5)
 	push af
 	push de
@@ -29390,7 +29092,6 @@ UpdateHPBar_PrintHPNumber: ; faf5 (3:7af5)
 	pop af
 	ret
 
-; known jump sources: fa69 (3:7a69), fa79 (3:7a79), faa2 (3:7aa2)
 ; calcs number of HP bar pixels for old and new HP value
 ; d: new pixels
 ; e: old pixels
@@ -29422,7 +29123,6 @@ UpdateHPBar_CalcOldNewHPBarPixels: ; fb30 (3:7b30)
 	pop hl
 	ret
 
-; known jump sources: 3ee2 (0:3ee2)
 Func_fb50: ; fb50 (3:7b50)
 	ld a, [$c109]
 	cp $4
@@ -29468,41 +29168,34 @@ INCBIN "baserom.gbc",$fb8b,$fbd9 - $fb8b
 UnnamedText_fbd9: ; fbd9 (3:7bd9)
 	TX_FAR _UnnamedText_fbd9
 	db "@"
-; 0xfbd9 + 5 bytes
 
 UnnamedText_fbde: ; fbde (3:7bde)
 	TX_FAR _UnnamedText_fbde
 	db "@"
-; 0xfbde + 5 bytes
 
 UnnamedText_fbe3: ; fbe3 (3:7be3)
 	TX_FAR _UnnamedText_fbe3
 	db "@"
-; 0xfbe3 + 5 bytes
 
 INCBIN "baserom.gbc",$fbe8,$fc03 - $fbe8
 
 UnnamedText_fc03: ; fc03 (3:7c03)
 	TX_FAR _UnnamedText_fc03
 	db "@"
-; 0xfc03 + 5 bytes
 
 UnnamedText_fc08: ; fc08 (3:7c08)
 	TX_FAR _UnnamedText_fc08
 	db "@"
-; 0xfc08 + 5 bytes
 
 UnnamedText_fc0d: ; fc0d (3:7c0d)
 	TX_FAR _UnnamedText_fc0d
 	db "@"
-; 0xfc0d + 5 bytes
 
 INCBIN "baserom.gbc",$fc12,$fc45 - $fc12
 
 UnnamedText_fc45: ; fc45 (3:7c45)
 	TX_FAR _UnnamedText_fc45
 	db "@"
-; 0xfc45 + 5 bytes
 
 SECTION "bank4",ROMX,BANK[$4]
 
@@ -29599,7 +29292,6 @@ INCBIN "gfx/town_map.2bpp"
 PlayerCharacterTitleGraphics: ; 126a8 (4:66a8)
 INCBIN "gfx/player_title.2bpp"
 
-; known jump sources: 1388d (4:788d)
 Func_128d8: ; 128d8 (4:68d8)
 	ld a, [W_YCOORD] ; $d361
 	ld b, a
@@ -29610,7 +29302,6 @@ Func_128d8: ; 128d8 (4:68d8)
 	ld b, a
 	ld a, [W_CURMAPWIDTH] ; $d369
 
-; known jump sources: 128df (4:68df)
 Func_128ea: ; 128ea (4:68ea)
 	add a
 	cp b
@@ -29618,13 +29309,11 @@ Func_128ea: ; 128ea (4:68ea)
 	inc b
 	ret
 
-; known jump sources: 129e5 (4:69e5), 3cdb9 (f:4db9)
 Func_128ef: ; 128ef (4:68ef)
 	call Load16BitRegisters
 	ld a, $1
 	jr asm_128fb
 
-; known jump sources: 12d67 (4:6d67)
 Func_128f6: ; 128f6 (4:68f6)
 	call Load16BitRegisters
 	ld a, $2
@@ -29654,7 +29343,6 @@ asm_128fb: ; 128fb (4:68fb)
 	ld d, a
 	ld c, a
 
-; known jump sources: 12910 (4:6910)
 Func_12924: ; 12924 (4:6924)
 	pop hl
 	push de
@@ -29826,7 +29514,6 @@ StatusScreen: ; 12953 (4:6953)
 	ret z
 	ld a, [W_WHICHPOKEMON]
 	jp SkipFixedLengthTextEntries
-; 0x12a95
 
 Unknown_12a95: ; 12a95 (4:6a95)
 INCBIN "baserom.gbc",$12a95,$12a9d - $12a95
@@ -30118,13 +29805,11 @@ EXPPointsText: ; 12caf (4:6caf)
 LevelUpText: ; 12cba (4:6cba)
 	db "LEVEL UP@"
 
-; known jump sources: 12c52 (4:6c52), 12c58 (4:6c58)
 Func_12cc3: ; 12cc3 (4:6cc3)
 	ld bc, $a
 	ld a, $7f
 	jp FillMemory
 
-; known jump sources: 12bae (4:6bae), 12bb8 (4:6bb8), 12ccf (4:6ccf)
 Func_12ccb: ; 12ccb (4:6ccb)
 	ld [hli], a
 	ld [hld], a
@@ -30455,7 +30140,6 @@ RareCandyText: ; 12ec0 (4:6ec0)
 	db $06
 	db "@"
 
-; known jump sources: 12d70 (4:6d70)
 Func_12ec7: ; 12ec7 (4:6ec7)
 	ld hl, $cf1f
 	ld a, [$cf2d]
@@ -30468,7 +30152,6 @@ Func_12ec7: ; 12ec7 (4:6ec7)
 	ld hl, $cf2d
 	inc [hl]
 	ret
-; 12ede (4:6ede)
 
 RedPicFront: ; 12ede (4:6ede)
 	INCBIN "pic/trainer/red.pic"
@@ -30477,7 +30160,6 @@ ShrinkPic1: ; 12fe8 (4:6fe8)
 ShrinkPic2: ; 13042 (4:7042)
 	INCBIN "pic/trainer/shrink2.pic"
 
-; known jump sources: 2976 (0:2976)
 Func_13074: ; 13074 (4:7074)
 	ld h, $c2
 	ld a, [H_CURRENTSPRITEOFFSET]
@@ -31237,7 +30919,6 @@ StartMenu_Option: ; 135f6 (4:75f6)
 	call UpdateSprites
 	jp RedisplayStartMenu
 
-; known jump sources: 14cf (0:14cf)
 Func_13613: ; 13613 (4:7613)
 	call Func_13653
 	ld a, [W_WHICHTRADE] ; $cd3d
@@ -31246,7 +30927,6 @@ Func_13613: ; 13613 (4:7613)
 	call Func_13625
 	jp RedrawPartyMenu_
 
-; known jump sources: 13619 (4:7619), 1361f (4:761f)
 Func_13625: ; 13625 (4:7625)
 	push af
 	ld hl, W_SCREENTILESBUFFER
@@ -31273,7 +30953,6 @@ Func_13625: ; 13625 (4:7625)
 	ld a, $ae
 	jp PlaySound
 
-; known jump sources: 1313b (4:713b), 13613 (4:7613)
 Func_13653: ; 13653 (4:7653)
 	ld a, [$cc35]
 	and a
@@ -31387,7 +31066,6 @@ Func_13653: ; 13653 (4:7653)
 	pop hl
 	ret
 
-; known jump sources: e50c (3:650c), 12d79 (4:6d79)
 ; tests if mon [$cf91] can learn move [$d0e0]
 TestMonMoveCompatibility: ; 1373e (4:773e)
 	ld a, [$cf91]
@@ -31411,7 +31089,6 @@ TestMonMoveCompatibility: ; 1373e (4:773e)
 	ld a, $10
 	jp Predef ; indirect jump to HandleBitArray (f666 (3:7666))
 
-; known jump sources: e490 (3:6490)
 ; converts TM/HM number in $d11e into move number
 ; HMs start at 51
 TMToMove: ; 13763 (4:7763)
@@ -31483,7 +31160,6 @@ TechnicalMachines: ; 13773 (4:7773)
 	db STRENGTH
 	db FLASH
 
-; known jump sources: 3f038 (f:7038)
 Func_137aa: ; 137aa (4:77aa)
 	ld a, [W_ISLINKBATTLE] ; $d12b
 	cp $4
@@ -31576,9 +31252,7 @@ DrawText: ; 13864 (4:7864)
 UnnamedText_1386b: ; 1386b (4:786b)
 	TX_FAR _UnnamedText_1386b
 	db "@"
-; 0x1386b + 5 bytes
 
-; known jump sources: 3ef39 (f:6f39)
 Func_13870: ; 13870 (4:7870)
 	ld a, [$cc57]
 	and a
@@ -31680,7 +31354,6 @@ Func_13870: ; 13870 (4:7870)
 Unknown_13918: ; 13918 (4:7918)
 INCBIN "baserom.gbc",$13918,$1392c - $13918
 
-; known jump sources: 3f956 (f:7956)
 Func_1392c: ; 1392c (4:792c)
 	ld a, [H_WHOSETURN] ; $FF00+$f3
 	and a
@@ -31749,27 +31422,22 @@ Func_1392c: ; 1392c (4:792c)
 	call Predef ; indirect jump to UpdateHPBar (fa1d (3:7a1d))
 	ld hl, UnnamedText_1399e ; $799e
 	jp PrintText
-; 1399e (4:799e)
 UnnamedText_1399e: ; 1399e (4:799e)
 	TX_FAR _UnnamedText_1399e
 	db "@"
-; 0x1399e + 5 bytes
 
 INCBIN "baserom.gbc",$139a3,$139cd - $139a3
 
 UnnamedText_139cd: ; 139cd (4:79cd)
 	TX_FAR _UnnamedText_139cd
 	db "@"
-; 0x139cd + 5 bytes
 
 INCBIN "baserom.gbc",$139d2,$13a53 - $139d2
 
 UnnamedText_13a53: ; 13a53 (4:7a53)
 	TX_FAR _UnnamedText_13a53
 	db "@"
-; 0x13a53 + 5 bytes
 
-; known jump sources: 35a3 (0:35a3)
 Func_13a58: ; 13a58 (4:7a58)
 	ld hl, W_GRASSRATE ; $d887
 	ld a, [W_ISLINKBATTLE] ; $d12b
@@ -32894,9 +32562,7 @@ SpriteSheetPointerTable: ; 17b27 (5:7b27)
 	dw LyingOldManSprite
 	db $40 ; byte count
 	db BANK(LyingOldManSprite)
-; 0x17c47
 
-; known jump sources: 3239 (0:3239), 18fc3 (6:4fc3), 50f3d (14:4f3d), 51059 (14:5059), 70824 (1c:4824)
 Func_17c47: ; 17c47 (5:7c47)
 	ld a, [$cd50]
 	ld c, a
@@ -32960,7 +32626,6 @@ INCBIN "baserom.gbc",$17caf,$17cb5 - $17caf
 EmotionBubbles: ; 17cb5 (5:7cb5)
 INCBIN "gfx/emotion_bubbles.2bpp"
 
-; known jump sources: 71c87 (1c:5c87)
 Func_17d7d: ; 17d7d (5:7d7d)
 	ld a, [W_PLAYERMONACCURACYMOD] ; $cd1e
 	cp $86
@@ -33054,17 +32719,14 @@ SubstituteEffectHandler: ; 17dad (5:7dad)
 UnnamedText_17e1d: ; 17e1d (5:7e1d)
 	TX_FAR _UnnamedText_17e1d
 	db "@"
-; 0x17e1d + 5 bytes
 
 UnnamedText_17e22: ; 17e22 (5:7e22)
 	TX_FAR _UnnamedText_17e22
 	db "@"
-; 0x17e22 + 5 bytes
 
 UnnamedText_17e27: ; 17e27 (5:7e27)
 	TX_FAR _UnnamedText_17e27
 	db "@"
-; 0x17e27 + 5 bytes
 
 ActivatePC: ; 17e2c (5:7e2c)
 	call SaveScreenTilesToBuffer2  ;XXX: copy background from W_SCREENTILESBUFFER to W_SCREENTILESBACKBUFFER2
@@ -33180,24 +32842,19 @@ LogOff: ; 17f13 (5:7f13)
 UnnamedText_17f23: ; 17f23 (5:7f23)
 	TX_FAR _UnnamedText_17f23
 	db "@"
-; 0x17f23 + 5 bytes
 
 UnnamedText_17f28: ; 17f28 (5:7f28)
 	TX_FAR _UnnamedText_17f28
 	db "@"
-; 0x17f28 + 5 bytes
 
 UnnamedText_17f2d: ; 17f2d (5:7f2d)
 	TX_FAR _UnnamedText_17f2d
 	db "@"
-; 0x17f2d + 5 bytes
 
 UnnamedText_17f32: ; 17f32 (5:7f32)
 	TX_FAR _UnnamedText_17f32
 	db "@"
-; 0x17f32 + 5 bytes
 
-; known jump sources: 1d774 (7:5774), 484eb (12:44eb), 5a5b4 (16:65b4), 61096 (18:5096), 75101 (1d:5101)
 ; removes one of the specified item ID [$FFdb] from bag (if existent)
 RemoveItemByID: ; 17f37 (5:7f37)
 	ld hl, W_BAGITEM01 ; $d31e
@@ -33223,7 +32880,7 @@ RemoveItemByID: ; 17f37 (5:7f37)
 	ld [W_WHICHPOKEMON], a ; $cf92
 	ld hl, W_NUMBAGITEMS ; $d31d
 	jp RemoveItemFromInventory
-; 17f5f (5:7f5f)
+
 SECTION "bank6",ROMX,BANK[$6]
 
 CeladonCity_h: ; 18000 (6:4000)
@@ -33454,7 +33111,6 @@ PewterCity_h: ; 0x18554 to 0x18576 (34 bytes) (bank=6) (id=2)
 
 	dw PewterCityObject ; objects
 
-; 0x18576
 db $0
 
 PewterCityObject: ; 0x18577 (size=111)
@@ -33748,7 +33404,6 @@ FuchsiaCityObject: ; 0x18bd4 (size=178)
 FuchsiaCityBlocks: ; 18c86 (6:4c86)
 	INCBIN "maps/fuchsiacity.blk"
 
-; known jump sources: 2099 (0:2099)
 Func_18dee: ; 18dee (6:4dee)
 	call Func_18e36
 	ld a, [$d732]
@@ -33787,7 +33442,6 @@ Func_18dee: ; 18dee (6:4dee)
 	ld [W_PLAYTIMEMINUTES], a ; $da42
 	ret
 
-; known jump sources: 18dee (6:4dee)
 Func_18e36: ; 18e36 (6:4e36)
 	ld a, [$d13a]
 	and a
@@ -33823,7 +33477,6 @@ PalletTownScript: ; 18e5b (6:4e5b)
 	ld hl,PalletTownScriptPointers
 	ld a,[W_PALLETTOWNCURSCRIPT]
 	jp CallFunctionInTable
-; 0x18e73
 
 PalletTownScriptPointers: ; 18e73 (6:4e73)
 	dw PalletTownScript1,PalletTownScript2,PalletTownScript3,PalletTownScript4,PalletTownScript5,PalletTownScript6,PalletTownScript7
@@ -34009,27 +33662,22 @@ OakWalksUpText: ; 18fce (6:4fce)
 PalletTownText2: ; 0x18fd3 girl
 	TX_FAR _PalletTownText2 ; dc 42 29 pointing to 0xa42dc
 	db "@"
-; 0x18fd8
 
 PalletTownText3: ; 0x18fd8 fat man
 	TX_FAR _PalletTownText3
 	db "@"
-; 0x18fdd
 
 PalletTownText4: ; 0x18fdd sign by lab
 	TX_FAR _PalletTownText4
 	db "@"
-; 0x18fe2
 
 PalletTownText5: ; 0x18fe2 sign by fence
 	TX_FAR _PalletTownText5
 	db "@"
-; 0x18fe7
 
 PalletTownText6: ; 0x18fe7 sign by Red’s house
 	TX_FAR _PalletTownText6
 	db "@"
-; 0x18fec
 
 PalletTownText7: ; 0x18fec sign by Blue’s house
 	TX_FAR _PalletTownText7
@@ -34040,7 +33688,6 @@ ViridianCityScript: ; 18ff1 (6:4ff1)
 	ld hl, ViridianCityScripts
 	ld a, [W_VIRIDIANCITYCURSCRIPT]
 	jp CallFunctionInTable
-; 0x18ffd
 
 ViridianCityScripts: ; 18ffd (6:4ffd)
 	dw ViridianCityScript0
@@ -34189,12 +33836,10 @@ ViridianCityText2: ; 19107 (6:5107)
 UnnamedText_19122: ; 19122 (6:5122)
 	TX_FAR _UnnamedText_19122
 	db "@"
-; 0x19122 + 5 bytes
 
 UnnamedText_19127: ; 19127 (6:5127)
 	TX_FAR _UnnamedText_19127
 	db "@"
-; 0x19127 + 5 bytes
 
 ViridianCityText3: ; 1912c (6:512c)
 	db $08 ; asm
@@ -34216,17 +33861,14 @@ ViridianCityText3: ; 1912c (6:512c)
 UnnamedText_1914d: ; 1914d (6:514d)
 	TX_FAR _UnnamedText_1914d
 	db "@"
-; 0x1914d + 5 bytes
 
 UnnamedText_19152: ; 19152 (6:5152)
 	TX_FAR _UnnamedText_19152
 	db "@"
-; 0x19152 + 5 bytes
 
 UnnamedText_19157: ; 19157 (6:5157)
 	TX_FAR _UnnamedText_19157
 	db "@"
-; 0x19157 + 5 bytes
 
 ViridianCityText4: ; 1915c (6:515c)
 	db $08 ; asm
@@ -34245,12 +33887,10 @@ ViridianCityText4: ; 1915c (6:515c)
 UnnamedText_19175: ; 19175 (6:5175)
 	TX_FAR _UnnamedText_19175
 	db "@"
-; 0x19175 + 5 bytes
 
 UnnamedText_1917a: ; 1917a (6:517a)
 	TX_FAR _UnnamedText_1917a
 	db "@"
-; 0x1917a + 5 bytes
 
 ViridianCityText5: ; 1917f (6:517f)
 	db $08 ; asm
@@ -34264,7 +33904,6 @@ ViridianCityText5: ; 1917f (6:517f)
 UnnamedText_19191: ; 19191 (6:5191)
 	TX_FAR _UnnamedText_19191
 	db "@"
-; 0x19191 + 5 bytes
 
 ViridianCityText6: ; 19196 (6:5196)
 	db $08 ; asm
@@ -34294,22 +33933,18 @@ ViridianCityText6: ; 19196 (6:5196)
 UnnamedText_191ca: ; 191ca (6:51ca)
 	TX_FAR _UnnamedText_191ca
 	db "@"
-; 0x191ca + 5 bytes
 
 ReceivedTM42Text: ; 191cf (6:51cf)
 	TX_FAR _ReceivedTM42Text ; 0xa469a
 	db $10, "@"
-; 0x191cf + 6 bytes = 0x191d5
 
 TM42Explanation: ; 191d5 (6:51d5)
 	TX_FAR _TM42Explanation
 	db "@"
-; 0x191d5 + 5 bytes
 
 TM42NoRoomText: ; 191da (6:51da)
 	TX_FAR _TM42NoRoomText
 	db "@"
-; 0x191da + 5 bytes
 
 ViridianCityText7: ; 191df (6:51df)
 	db $08 ; asm
@@ -34335,22 +33970,18 @@ ViridianCityText7: ; 191df (6:51df)
 UnnamedText_1920a: ; 1920a (6:520a)
 	TX_FAR _UnnamedText_1920a
 	db "@"
-; 0x1920a + 5 bytes
 
 UnnamedText_1920f: ; 1920f (6:520f)
 	TX_FAR _UnnamedText_1920f
 	db "@"
-; 0x1920f + 5 bytes
 
 UnnamedText_19214: ; 19214 (6:5214)
 	TX_FAR _UnnamedText_19214
 	db "@"
-; 0x19214 + 5 bytes
 
 ViridianCityText15: ; 19219 (6:5219)
 	TX_FAR _UnnamedText_19219
 	db "@"
-; 0x19219 + 5 bytes
 
 ViridianCityText8: ; 1921e (6:521e)
 	TX_FAR _ViridianCityText8
@@ -34371,14 +34002,12 @@ ViridianCityText13: ; 1922d (6:522d)
 ViridianCityText14: ; 19232 (6:5232)
 	TX_FAR _ViridianCityText14
 	db "@"
-; 0x19232 + 5 bytes
 
 PewterCityScript: ; 19237 (6:5237)
 	call EnableAutoTextBoxDrawing
 	ld hl, PewterCityScripts
 	ld a, [W_PEWTERCITYCURSCRIPT]
 	jp CallFunctionInTable
-; 0x19243
 
 PewterCityScripts: ; 19243 (6:5243)
 	dw PewterCityScript0
@@ -34396,7 +34025,6 @@ PewterCityScript0: ; 19251 (6:5251)
 	res 0, [hl]
 	call Function1925e
 	ret
-; 0x1925e
 
 Function1925e: ; 1925e (6:525e)
 	ld a, [$d755]
@@ -34454,7 +34082,6 @@ PewterCityScript1: ; 19280 (6:5280)
 	ld a, $2
 	ld [W_PEWTERCITYCURSCRIPT], a
 	ret
-; 0x192ce
 
 MovementData192ce: ; 192ce (6:52ce)
 	db 0,0,0,0,$ff
@@ -34595,24 +34222,20 @@ PewterCityText3: ; 193b1 (6:53b1)
 UnnamedText_193f1: ; 193f1 (6:53f1)
 	TX_FAR _UnnamedText_193f1
 	db "@"
-; 0x193f1 + 5 bytes
 
 UnnamedText_193f6: ; 193f6 (6:53f6)
 	TX_FAR _UnnamedText_193f6
 	db "@"
-; 0x193f6 + 5 bytes
 
 UnnamedText_193fb: ; 193fb (6:53fb)
 	TX_FAR _UnnamedText_193fb
 	db "@"
-; 0x193fb + 5 bytes
 
 PewterCityText13: ; 19400 (6:5400)
 
 UnnamedText_19400: ; 19400 (6:5400)
 	TX_FAR _UnnamedText_19400
 	db "@"
-; 0x19400 + 5 bytes
 
 PewterCityText4: ; 19405 (6:5405)
 	db $8
@@ -34630,22 +34253,18 @@ PewterCityText4: ; 19405 (6:5405)
 	call PrintText
 .asm_e4604 ; 0x19424
 	jp TextScriptEnd
-; 0x19427
 
 UnnamedText_19427: ; 19427 (6:5427)
 	TX_FAR _UnnamedText_19427
 	db "@"
-; 0x19427 + 5 bytes
 
 UnnamedText_1942c: ; 1942c (6:542c)
 	TX_FAR _UnnamedText_1942c
 	db "@"
-; 0x1942c + 5 bytes
 
 UnnamedText_19431: ; 19431 (6:5431)
 	TX_FAR _UnnamedText_19431
 	db "@"
-; 0x19431 + 5 bytes
 
 PewterCityText5: ; 19436 (6:5436)
 	db $08 ; asm
@@ -34668,14 +34287,12 @@ PewterCityText5: ; 19436 (6:5436)
 UnnamedText_1945d: ; 1945d (6:545d)
 	TX_FAR _UnnamedText_1945d
 	db "@"
-; 0x1945d + 5 bytes
 
 PewterCityText14: ; 19462 (6:5462)
 
 UnnamedText_19462: ; 19462 (6:5462)
 	TX_FAR _UnnamedText_19462
 	db "@"
-; 0x19462 + 5 bytes
 
 PewterCityText6: ; 19467 (6:5467)
 	TX_FAR _PewterCityText6
@@ -34702,7 +34319,6 @@ CeruleanCityScript: ; 19480 (6:5480)
 	ld hl, CeruleanCityScripts
 	ld a, [W_CERULEANCITYCURSCRIPT]
 	jp CallFunctionInTable
-; 0x1948c
 
 CeruleanCity_Unknown1948c: ; 1948c (6:548c)
 	xor a
@@ -34712,7 +34328,6 @@ CeruleanCity_Unknown1948c: ; 1948c (6:548c)
 	ld [$cc4d], a
 	ld a, $11
 	jp Predef
-; 0x1949d
 
 CeruleanCityScripts: ; 1949d (6:549d)
 	dw CeruleanCityScript0
@@ -34801,7 +34416,6 @@ CeruleanCityScript0: ; 194c8 (6:54c8)
 	ld a, $1
 	ld [W_CERULEANCITYCURSCRIPT], a
 	ret
-; 0x1954f
 
 CeruleanCityCoords1: ; 1954f (6:554f)
 	db $07,$1e
@@ -34863,7 +34477,6 @@ CeruleanCityScript1: ; 19567 (6:5567)
 	ld a, $2
 	ld [W_CERULEANCITYCURSCRIPT], a
 	ret
-; 0x195b1
 
 CeruleanCityScript2: ; 195b1 (6:55b1)
 	ld a, [$d057]
@@ -34921,7 +34534,6 @@ CeruleanCityScript3: ; 19610 (6:5610)
 	ld a, $0
 	ld [W_CERULEANCITYCURSCRIPT], a
 	ret
-; 0x1962d
 
 CeruleanCityTexts: ; 1962d (6:562d)
 	dw CeruleanCityText1, CeruleanCityText2, CeruleanCityText3, CeruleanCityText4, CeruleanCityText5, CeruleanCityText6, CeruleanCityText7, CeruleanCityText8, CeruleanCityText9, CeruleanCityText10, CeruleanCityText11, CeruleanCityText12, CeruleanCityText13, MartSignText, PokeCenterSignText, CeruleanCityText16, CeruleanCityText17
@@ -34945,22 +34557,18 @@ CeruleanCityText1: ; 1964f (6:564f)
 UnnamedText_19668: ; 19668 (6:5668)
 	TX_FAR _UnnamedText_19668
 	db "@"
-; 0x19668 + 5 bytes
 
 UnnamedText_1966d: ; 1966d (6:566d)
 	TX_FAR _UnnamedText_1966d
 	db "@"
-; 0x1966d + 5 bytes
 
 UnnamedText_19672: ; 19672 (6:5672)
 	TX_FAR _UnnamedText_19672
 	db "@"
-; 0x19672 + 5 bytes
 
 UnnamedText_19677: ; 19677 (6:5677)
 	TX_FAR _UnnamedText_19677
 	db "@"
-; 0x19677 + 5 bytes
 
 CeruleanCityText2: ; 1967c (6:567c)
 	db $8
@@ -35001,34 +34609,28 @@ CeruleanCityText2: ; 1967c (6:567c)
 	call Bankswitch
 .Done
 	jp TextScriptEnd
-; 0x196d9
 
 UnnamedText_196d9: ; 196d9 (6:56d9)
 	TX_FAR _UnnamedText_196d9
 	db "@"
-; 0x196d9 + 5 bytes
 
 ReceivedTM28Text: ; 196de (6:56de)
 	TX_FAR _ReceivedTM28Text ; 0xa4f82
 	db $0B
 	TX_FAR _ReceivedTM28Text2 ; 0xa4f96
 	db $0D, "@"
-; 0x196e9
 
 TM28NoRoomText: ; 196e9 (6:56e9)
 	TX_FAR _TM28NoRoomText
 	db "@"
-; 0x196e9 + 5 bytes
 
 UnnamedText_196ee: ; 196ee (6:56ee)
 	TX_FAR _UnnamedText_196ee
 	db "@"
-; 0x196ee + 5 bytes
 
 UnnamedText_196f3: ; 196f3 (6:56f3)
 	TX_FAR _UnnamedText_196f3
 	db "@"
-; 0x196f3 + 5 bytes
 
 CeruleanCityText3: ; 196f8 (6:56f8)
 	TX_FAR _CeruleanCityText3
@@ -35070,17 +34672,14 @@ CeruleanCityText7: ; 1970c (6:570c)
 UnnamedText_19730: ; 19730 (6:5730)
 	TX_FAR _UnnamedText_19730
 	db "@"
-; 0x19730 + 5 bytes
 
 UnnamedText_19735: ; 19735 (6:5735)
 	TX_FAR _UnnamedText_19735
 	db "@"
-; 0x19735 + 5 bytes
 
 UnnamedText_1973a: ; 1973a (6:573a)
 	TX_FAR _UnnamedText_1973a
 	db "@"
-; 0x1973a + 5 bytes
 
 CeruleanCityText8: ; 1973f (6:573f)
 	db $08 ; asm
@@ -35111,22 +34710,18 @@ CeruleanCityText8: ; 1973f (6:573f)
 UnnamedText_1976f: ; 1976f (6:576f)
 	TX_FAR _UnnamedText_1976f
 	db "@"
-; 0x1976f + 5 bytes
 
 UnnamedText_19774: ; 19774 (6:5774)
 	TX_FAR _UnnamedText_19774
 	db "@"
-; 0x19774 + 5 bytes
 
 UnnamedText_19779: ; 19779 (6:5779)
 	TX_FAR _UnnamedText_19779
 	db "@"
-; 0x19779 + 5 bytes
 
 UnnamedText_1977e: ; 1977e (6:577e)
 	TX_FAR _UnnamedText_1977e
 	db "@"
-; 0x1977e + 5 bytes
 
 CeruleanCityText9: ; 19783 (6:5783)
 	TX_FAR _CeruleanCityText9
@@ -35166,7 +34761,6 @@ VermilionCityScript: ; 197a1 (6:57a1)
 	ld hl, VermilionCityScripts
 	ld a, [W_VERMILIONCITYCURSCRIPT]
 	jp CallFunctionInTable
-; 0x197c0
 
 VermilionCityScript_Unknown197c0: ; 197c0 (6:57c0)
 	call GenRandom
@@ -35270,7 +34864,6 @@ VermilionCityScript1: ; 1985f (6:585f)
 	ld a, $0
 	ld [W_VERMILIONCITYCURSCRIPT], a
 	ret
-; 0x1986f
 
 VermilionCityTexts: ; 1986f (6:586f)
 	dw VermilionCityText1, VermilionCityText2, VermilionCityText3, VermilionCityText4, VermilionCityText5, VermilionCityText6, VermilionCityText7, VermilionCityText8, MartSignText, PokeCenterSignText, VermilionCityText11, VermilionCityText12, VermilionCityText13
@@ -35296,12 +34889,10 @@ VermilionCityText2: ; 1988e (6:588e)
 UnnamedText_198a7: ; 198a7 (6:58a7)
 	TX_FAR _UnnamedText_198a7
 	db "@"
-; 0x198a7 + 5 bytes
 
 UnnamedText_198ac: ; 198ac (6:58ac)
 	TX_FAR _UnnamedText_198ac
 	db "@"
-; 0x198ac + 5 bytes
 
 VermilionCityText3: ; 198b1 (6:58b1)
 	db $08 ; asm
@@ -35350,27 +34941,22 @@ VermilionCityCoords1: ; 198ff (6:58ff)
 SSAnneWelcomeText4: ; 19904 (6:5904)
 	TX_FAR _SSAnneWelcomeText4
 	db "@"
-; 0x19904 + 5 bytes
 
 SSAnneWelcomeText9: ; 19909 (6:5909)
 	TX_FAR _SSAnneWelcomeText9
 	db "@"
-; 0x19909 + 5 bytes
 
 SSAnneFlashedTicketText: ; 1990e (6:590e)
 	TX_FAR _SSAnneFlashedTicketText
 	db "@"
-; 0x1990e + 5 bytes
 
 SSAnneNoTicketText: ; 19913 (6:5913)
 	TX_FAR _SSAnneNoTicketText
 	db "@"
-; 0x19913 + 5 bytes
 
 SSAnneNotHereText: ; 19918 (6:5918)
 	TX_FAR _SSAnneNotHereText
 	db "@"
-; 0x19918 + 5 bytes
 
 VermilionCityText4: ; 1991d (6:591d)
 	TX_FAR _VermilionCityText4
@@ -35421,7 +35007,6 @@ CeladonCityScript: ; 19956 (6:5956)
 	ld hl, $d816
 	res 7, [hl]
 	ret
-; 0x19966
 
 CeladonCityTexts: ; 19966 (6:5966)
 	dw CeladonCityText1, CeladonCityText2, CeladonCityText3, CeladonCityText4, CeladonCityText5, CeladonCityText6, CeladonCityText7, CeladonCityText8, CeladonCityText9, CeladonCityText10, CeladonCityText11, PokeCenterSignText, CeladonCityText13, CeladonCityText14, CeladonCityText15, CeladonCityText16, CeladonCityText17, CeladonCityText18
@@ -35470,22 +35055,18 @@ CeladonCityText5: ; 1999e (6:599e)
 TM41PreText: ; 199d2 (6:59d2)
 	TX_FAR _TM41PreText
 	db "@"
-; 0x199d2 + 5 bytes
 
 ReceivedTM41Text: ; 199d7 (6:59d7)
 	TX_FAR _ReceivedTM41Text ; 0xa5b5a
 	db $0B, "@"
-; 0x199d7 + 6 bytes = 0x199dd
 
 TM41ExplanationText: ; 199dd (6:59dd)
 	TX_FAR _TM41ExplanationText
 	db "@"
-; 0x199dd + 5 bytes
 
 TM41NoRoomText: ; 199e2 (6:59e2)
 	TX_FAR _TM41NoRoomText
 	db "@"
-; 0x199e2 + 5 bytes
 
 CeladonCityText6: ; 199e7 (6:59e7)
 	TX_FAR _CeladonCityText6
@@ -35540,7 +35121,6 @@ CeladonCityText18: ; 19a26 (6:5a26)
 
 FuchsiaCityScript: ; 19a2b (6:5a2b)
 	jp EnableAutoTextBoxDrawing
-; 0x19a2e
 
 FuchsiaCityTexts: ; 19a2e (6:5a2e)
 	dw FuchsiaCityText1, FuchsiaCityText2, FuchsiaCityText3, FuchsiaCityText4, FuchsiaCityText5, FuchsiaCityText6, FuchsiaCityText7, FuchsiaCityText8, FuchsiaCityText9, FuchsiaCityText10, FuchsiaCityText11, FuchsiaCityText12, FuchsiaCityText13, MartSignText, PokeCenterSignText, FuchsiaCityText16, FuchsiaCityText17, FuchsiaCityText18, FuchsiaCityText19, FuchsiaCityText20, FuchsiaCityText21, FuchsiaCityText22, FuchsiaCityText23, FuchsiaCityText24
@@ -35602,7 +35182,6 @@ FuchsiaCityText19: ; 19a90 (6:5a90)
 FuchsiaCityChanseyText: ; 19a9f (6:5a9f)
 	TX_FAR _FuchsiaCityChanseyText
 	db "@"
-; 0x19a9f + 5 bytes
 
 FuchsiaCityText20: ; 19aa4 (6:5aa4)
 	db $08 ; asm
@@ -35615,7 +35194,6 @@ FuchsiaCityText20: ; 19aa4 (6:5aa4)
 FuchsiaCityVoltorbText: ; 19ab3 (6:5ab3)
 	TX_FAR _FuchsiaCityVoltorbText
 	db "@"
-; 0x19ab3 + 5 bytes
 
 FuchsiaCityText21: ; 19ab8 (6:5ab8)
 	db $08 ; asm
@@ -35628,7 +35206,6 @@ FuchsiaCityText21: ; 19ab8 (6:5ab8)
 FuchsiaCityKangaskhanText: ; 19ac7 (6:5ac7)
 	TX_FAR _FuchsiaCityKangaskhanText
 	db "@"
-; 0x19ac7 + 5 bytes
 
 FuchsiaCityText22: ; 19acc (6:5acc)
 	db $08 ; asm
@@ -35641,7 +35218,6 @@ FuchsiaCityText22: ; 19acc (6:5acc)
 FuchsiaCitySlowpokeText: ; 19adb (6:5adb)
 	TX_FAR _FuchsiaCitySlowpokeText
 	db "@"
-; 0x19adb + 5 bytes
 
 FuchsiaCityText23: ; 19ae0 (6:5ae0)
 	db $08 ; asm
@@ -35654,7 +35230,6 @@ FuchsiaCityText23: ; 19ae0 (6:5ae0)
 FuchsiaCityLaprasText: ; 19aef (6:5aef)
 	TX_FAR _FuchsiaCityLaprasText
 	db "@"
-; 0x19aef + 5 bytes
 
 FuchsiaCityText24: ; 19af4 (6:5af4)
 	db $08 ; asm
@@ -35683,17 +35258,14 @@ FuchsiaCityText24: ; 19af4 (6:5af4)
 FuchsiaCityOmanyteText: ; 19b20 (6:5b20)
 	TX_FAR _FuchsiaCityOmanyteText
 	db "@"
-; 0x19b20 + 5 bytes
 
 FuchsiaCityKabutoText: ; 19b25 (6:5b25)
 	TX_FAR _FuchsiaCityKabutoText
 	db "@"
-; 0x19b25 + 5 bytes
 
 UnnamedText_19b2a: ; 19b2a (6:5b2a)
 	TX_FAR _UnnamedText_19b2a
 	db "@"
-; 0x19b2a + 5 bytes
 
 BluesHouse_h: ; 0x19b2f id=39
 	db $08 ; tileset
@@ -35824,7 +35396,6 @@ VermilionHouse3_h: ; 0x19c06 to 0x19c12 (12 bytes) (bank=6) (id=196)
 
 VermilionHouse3Script: ; 19c12 (6:5c12)
 	jp EnableAutoTextBoxDrawing
-; 0x19c15
 
 VermilionHouse3Texts: ; 19c15 (6:5c15)
 	dw VermilionHouse3Text1
@@ -35884,7 +35455,6 @@ IndigoPlateauLobbyScript: ; 19c5b (6:5c5b)
 	ld [hli], a
 	ld [hl], a
 	ret
-; 0x19c7f
 
 IndigoPlateauLobbyTexts: ; 19c7f (6:5c7f)
 	dw IndigoPlateauLobbyText1, IndigoPlateauLobbyText2, IndigoPlateauLobbyText3, IndigoPlateauLobbyText4, IndigoPlateauLobbyText5
@@ -35945,7 +35515,6 @@ SilphCo4Script: ; 19d0b (6:5d0b)
 	call ExecuteCurMapScriptInTable
 	ld [W_SILPHCO4CURSCRIPT], a
 	ret
-; 0x19d21
 
 SilphCo4Script_Unknown19d21: ; 19d21 (6:5d21)
 	ld hl, $d126
@@ -36043,7 +35612,6 @@ SilphCo4TrainerHeader0: ; 19dae (6:5dae)
 	dw SilphCo4AfterBattleText2 ; 0x5dfe TextAfterBattle
 	dw SilphCo4EndBattleText2 ; 0x5df9 TextEndBattle
 	dw SilphCo4EndBattleText2 ; 0x5df9 TextEndBattle
-; 0x19dba
 
 SilphCo4TrainerHeader2: ; 19dba (6:5dba)
 	db $3 ; flag's bit
@@ -36053,7 +35621,6 @@ SilphCo4TrainerHeader2: ; 19dba (6:5dba)
 	dw SilphCo4AfterBattleText3 ; 0x5e17 TextAfterBattle
 	dw SilphCo4EndBattleText3 ; 0x5e12 TextEndBattle
 	dw SilphCo4EndBattleText3 ; 0x5e12 TextEndBattle
-; 0x19dc4
 
 SilphCo4TrainerHeader3: ; 19dc6 (6:5dc6)
 	db $4 ; flag's bit
@@ -36063,7 +35630,6 @@ SilphCo4TrainerHeader3: ; 19dc6 (6:5dc6)
 	dw SilphCo4AfterBattleText4 ; 0x5e30 TextAfterBattle
 	dw SilphCo4EndBattleText4 ; 0x5e2b TextEndBattle
 	dw SilphCo4EndBattleText4 ; 0x5e2b TextEndBattle
-; 0x19dd2
 
 db $ff
 
@@ -36077,12 +35643,10 @@ SilphCo4Text1: ; 19dd3 (6:5dd3)
 UnnamedText_19de0: ; 19de0 (6:5de0)
 	TX_FAR _UnnamedText_19de0
 	db "@"
-; 0x19de0 + 5 bytes
 
 UnnamedText_19de5: ; 19de5 (6:5de5)
 	TX_FAR _UnnamedText_19de5
 	db "@"
-; 0x19de5 + 5 bytes
 
 SilphCo4Text2: ; 19dea (6:5dea)
 	db $08 ; asm
@@ -36093,17 +35657,14 @@ SilphCo4Text2: ; 19dea (6:5dea)
 SilphCo4BattleText2: ; 19df4 (6:5df4)
 	TX_FAR _SilphCo4BattleText2
 	db "@"
-; 0x19df4 + 5 bytes
 
 SilphCo4EndBattleText2: ; 19df9 (6:5df9)
 	TX_FAR _SilphCo4EndBattleText2
 	db "@"
-; 0x19df9 + 5 bytes
 
 SilphCo4AfterBattleText2: ; 19dfe (6:5dfe)
 	TX_FAR _SilphCo4AfterBattleText2
 	db "@"
-; 0x19dfe + 5 bytes
 
 SilphCo4Text3: ; 19e03 (6:5e03)
 	db $08 ; asm
@@ -36114,17 +35675,14 @@ SilphCo4Text3: ; 19e03 (6:5e03)
 SilphCo4BattleText3: ; 19e0d (6:5e0d)
 	TX_FAR _SilphCo4BattleText3
 	db "@"
-; 0x19e0d + 5 bytes
 
 SilphCo4EndBattleText3: ; 19e12 (6:5e12)
 	TX_FAR _SilphCo4EndBattleText3
 	db "@"
-; 0x19e12 + 5 bytes
 
 SilphCo4AfterBattleText3: ; 19e17 (6:5e17)
 	TX_FAR _SilphCo4AfterBattleText3
 	db "@"
-; 0x19e17 + 5 bytes
 
 SilphCo4Text4: ; 19e1c (6:5e1c)
 	db $08 ; asm
@@ -36135,17 +35693,14 @@ SilphCo4Text4: ; 19e1c (6:5e1c)
 SilphCo4BattleText4: ; 19e26 (6:5e26)
 	TX_FAR _SilphCo4BattleText4
 	db "@"
-; 0x19e26 + 5 bytes
 
 SilphCo4EndBattleText4: ; 19e2b (6:5e2b)
 	TX_FAR _SilphCo4EndBattleText4
 	db "@"
-; 0x19e2b + 5 bytes
 
 SilphCo4AfterBattleText4: ; 19e30 (6:5e30)
 	TX_FAR _SilphCo4AfterBattleText4
 	db "@"
-; 0x19e30 + 5 bytes
 
 SilphCo4Object: ; 0x19e35 (size=111)
 	db $2e ; border tile
@@ -36199,7 +35754,6 @@ SilphCo5Script: ; 19f37 (6:5f37)
 	call ExecuteCurMapScriptInTable
 	ld [W_SILPHCO5CURSCRIPT], a
 	ret
-; 0x19f4d
 
 Unnamed_19f4d: ; 19f4d (6:5f4d)
 	ld hl, $d126
@@ -36237,7 +35791,6 @@ Unnamed_19f4d: ; 19f4d (6:5f4d)
 	ld bc, $0507
 	ld a, $17
 	jp Predef
-; 0x19f97
 
 SilphCo5Coords: ; 19f97 (6:5f97) ; coords?
 	db $02, $03, $06, $03, $05, $07, $ff
@@ -36277,7 +35830,6 @@ Silphco5TrainerHeader0: ; 19fd2 (6:5fd2)
 	dw SilphCo5AfterBattleText2 ; 0x602e TextAfterBattle
 	dw SilphCo5EndBattleText2 ; 0x6029 TextEndBattle
 	dw SilphCo5EndBattleText2 ; 0x6029 TextEndBattle
-; 0x19fde
 
 Silphco5TrainerHeader2: ; 19fde (6:5fde)
 	db $3 ; flag's bit
@@ -36287,7 +35839,6 @@ Silphco5TrainerHeader2: ; 19fde (6:5fde)
 	dw SilphCo5AfterBattleText3 ; 0x6047 TextAfterBattle
 	dw SilphCo5EndBattleText3 ; 0x6042 TextEndBattle
 	dw SilphCo5EndBattleText3 ; 0x6042 TextEndBattle
-; 0x19fea
 
 Silphco5TrainerHeader3: ; 19fea (6:5fea)
 	db $4 ; flag's bit
@@ -36297,7 +35848,6 @@ Silphco5TrainerHeader3: ; 19fea (6:5fea)
 	dw SilphCo5AfterBattleText4 ; 0x6060 TextAfterBattle
 	dw SilphCo5EndBattleText4 ; 0x605b TextEndBattle
 	dw SilphCo5EndBattleText4 ; 0x605b TextEndBattle
-; 0x19ff4
 
 Silphco5TrainerHeader4: ; 19ff6 (6:5ff6)
 	db $5 ; flag's bit
@@ -36307,7 +35857,6 @@ Silphco5TrainerHeader4: ; 19ff6 (6:5ff6)
 	dw SilphCo5AfterBattleText5 ; 0x6079 TextAfterBattle
 	dw SilphCo5EndBattleText5 ; 0x6074 TextEndBattle
 	dw SilphCo5EndBattleText5 ; 0x6074 TextEndBattle
-; 0x1a002
 
 db $ff
 
@@ -36321,12 +35870,10 @@ SilphCo5Text1: ; 1a003 (6:6003)
 UnnamedText_1a010: ; 1a010 (6:6010)
 	TX_FAR _UnnamedText_1a010
 	db "@"
-; 0x1a010 + 5 bytes
 
 UnnamedText_1a015: ; 1a015 (6:6015)
 	TX_FAR _UnnamedText_1a015
 	db "@"
-; 0x1a015 + 5 bytes
 
 SilphCo5Text2: ; 1a01a (6:601a)
 	db $08 ; asm
@@ -36337,17 +35884,14 @@ SilphCo5Text2: ; 1a01a (6:601a)
 SilphCo5BattleText2: ; 1a024 (6:6024)
 	TX_FAR _SilphCo5BattleText2
 	db "@"
-; 0x1a024 + 5 bytes
 
 SilphCo5EndBattleText2: ; 1a029 (6:6029)
 	TX_FAR _SilphCo5EndBattleText2
 	db "@"
-; 0x1a029 + 5 bytes
 
 SilphCo5AfterBattleText2: ; 1a02e (6:602e)
 	TX_FAR _SilphCo5AfterBattleText2
 	db "@"
-; 0x1a02e + 5 bytes
 
 SilphCo5Text3: ; 1a033 (6:6033)
 	db $08 ; asm
@@ -36358,17 +35902,14 @@ SilphCo5Text3: ; 1a033 (6:6033)
 SilphCo5BattleText3: ; 1a03d (6:603d)
 	TX_FAR _SilphCo5BattleText3
 	db "@"
-; 0x1a03d + 5 bytes
 
 SilphCo5EndBattleText3: ; 1a042 (6:6042)
 	TX_FAR _SilphCo5EndBattleText3
 	db "@"
-; 0x1a042 + 5 bytes
 
 SilphCo5AfterBattleText3: ; 1a047 (6:6047)
 	TX_FAR _SilphCo5AfterBattleText3
 	db "@"
-; 0x1a047 + 5 bytes
 
 SilphCo5Text4: ; 1a04c (6:604c)
 	db $08 ; asm
@@ -36379,17 +35920,14 @@ SilphCo5Text4: ; 1a04c (6:604c)
 SilphCo5BattleText4: ; 1a056 (6:6056)
 	TX_FAR _SilphCo5BattleText4
 	db "@"
-; 0x1a056 + 5 bytes
 
 SilphCo5EndBattleText4: ; 1a05b (6:605b)
 	TX_FAR _SilphCo5EndBattleText4
 	db "@"
-; 0x1a05b + 5 bytes
 
 SilphCo5AfterBattleText4: ; 1a060 (6:6060)
 	TX_FAR _SilphCo5AfterBattleText4
 	db "@"
-; 0x1a060 + 5 bytes
 
 SilphCo5Text5: ; 1a065 (6:6065)
 	db $08 ; asm
@@ -36400,17 +35938,14 @@ SilphCo5Text5: ; 1a065 (6:6065)
 SilphCo5BattleText5: ; 1a06f (6:606f)
 	TX_FAR _SilphCo5BattleText5
 	db "@"
-; 0x1a06f + 5 bytes
 
 SilphCo5EndBattleText5: ; 1a074 (6:6074)
 	TX_FAR _SilphCo5EndBattleText5
 	db "@"
-; 0x1a074 + 5 bytes
 
 SilphCo5AfterBattleText5: ; 1a079 (6:6079)
 	TX_FAR _SilphCo5AfterBattleText5
 	db "@"
-; 0x1a079 + 5 bytes
 
 SilphCo5Text9: ; 1a07e (6:607e)
 	TX_FAR _SilphCo5Text9
@@ -36480,7 +36015,6 @@ SilphCo6Script: ; 1a1a9 (6:61a9)
 	call ExecuteCurMapScriptInTable
 	ld [W_SILPHCO6CURSCRIPT], a
 	ret
-; 0x1a1bf
 
 Unnamed_1a1bf: ; 1a1bf (6:61bf)
 	ld hl, $d126
@@ -36528,7 +36062,6 @@ SilphCo6TrainerHeader0: ; 1a20a (6:620a)
 	dw SilphCo6AfterBattleText2 ; 0x62c4 TextAfterBattle
 	dw SilphCo6EndBattleText2 ; 0x62bf TextEndBattle
 	dw SilphCo6EndBattleText2 ; 0x62bf TextEndBattle
-; 0x1a216
 
 SilphCo6TrainerHeader2: ; 1a216 (6:6216)
 	db $7 ; flag's bit
@@ -36538,7 +36071,6 @@ SilphCo6TrainerHeader2: ; 1a216 (6:6216)
 	dw SilphCo6AfterBattleText3 ; 0x62dd TextAfterBattle
 	dw SilphCo6EndBattleText3 ; 0x62d8 TextEndBattle
 	dw SilphCo6EndBattleText3 ; 0x62d8 TextEndBattle
-; 0x1a222
 
 SilphCo6TrainerHeader3: ; 1a222 (6:6222)
 	db $8 ; flag's bit
@@ -36548,7 +36080,6 @@ SilphCo6TrainerHeader3: ; 1a222 (6:6222)
 	dw SilphCo6AfterBattleText4 ; 0x62f6 TextAfterBattle
 	dw SilphCo6EndBattleText4 ; 0x62f1 TextEndBattle
 	dw SilphCo6EndBattleText4 ; 0x62f1 TextEndBattle
-; 0x1a22e
 
 db $ff
 
@@ -36573,12 +36104,10 @@ SilphCo6Text1: ; 1a23d (6:623d)
 UnnamedText_1a24a: ; 1a24a (6:624a)
 	TX_FAR _UnnamedText_1a24a
 	db "@"
-; 0x1a24a + 5 bytes
 
 UnnamedText_1a24f: ; 1a24f (6:624f)
 	TX_FAR _UnnamedText_1a24f
 	db "@"
-; 0x1a24f + 5 bytes
 
 SilphCo6Text2: ; 1a254 (6:6254)
 	db $08 ; asm
@@ -36590,12 +36119,10 @@ SilphCo6Text2: ; 1a254 (6:6254)
 UnnamedText_1a261: ; 1a261 (6:6261)
 	TX_FAR _UnnamedText_1a261
 	db "@"
-; 0x1a261 + 5 bytes
 
 UnnamedText_1a266: ; 1a266 (6:6266)
 	TX_FAR _UnnamedText_1a266
 	db "@"
-; 0x1a266 + 5 bytes
 
 SilphCo6Text3: ; 1a26b (6:626b)
 	db $08 ; asm
@@ -36607,12 +36134,10 @@ SilphCo6Text3: ; 1a26b (6:626b)
 UnnamedText_1a278: ; 1a278 (6:6278)
 	TX_FAR _UnnamedText_1a278
 	db "@"
-; 0x1a278 + 5 bytes
 
 UnnamedText_1a27d: ; 1a27d (6:627d)
 	TX_FAR _UnnamedText_1a27d
 	db "@"
-; 0x1a27d + 5 bytes
 
 SilphCo6Text4: ; 1a282 (6:6282)
 	db $08 ; asm
@@ -36624,12 +36149,10 @@ SilphCo6Text4: ; 1a282 (6:6282)
 UnnamedText_1a28f: ; 1a28f (6:628f)
 	TX_FAR _UnnamedText_1a28f
 	db "@"
-; 0x1a28f + 5 bytes
 
 UnnamedText_1a294: ; 1a294 (6:6294)
 	TX_FAR _UnnamedText_1a294
 	db "@"
-; 0x1a294 + 5 bytes
 
 SilphCo6Text5: ; 1a299 (6:6299)
 	db $08 ; asm
@@ -36641,12 +36164,10 @@ SilphCo6Text5: ; 1a299 (6:6299)
 UnnamedText_1a2a6: ; 1a2a6 (6:62a6)
 	TX_FAR _UnnamedText_1a2a6
 	db "@"
-; 0x1a2a6 + 5 bytes
 
 UnnamedText_1a2ab: ; 1a2ab (6:62ab)
 	TX_FAR _UnnamedText_1a2ab
 	db "@"
-; 0x1a2ab + 5 bytes
 
 SilphCo6Text6: ; 1a2b0 (6:62b0)
 	db $08 ; asm
@@ -36657,17 +36178,14 @@ SilphCo6Text6: ; 1a2b0 (6:62b0)
 SilphCo6BattleText2: ; 1a2ba (6:62ba)
 	TX_FAR _SilphCo6BattleText2
 	db "@"
-; 0x1a2ba + 5 bytes
 
 SilphCo6EndBattleText2: ; 1a2bf (6:62bf)
 	TX_FAR _SilphCo6EndBattleText2
 	db "@"
-; 0x1a2bf + 5 bytes
 
 SilphCo6AfterBattleText2: ; 1a2c4 (6:62c4)
 	TX_FAR _SilphCo6AfterBattleText2
 	db "@"
-; 0x1a2c4 + 5 bytes
 
 SilphCo6Text7: ; 1a2c9 (6:62c9)
 	db $08 ; asm
@@ -36678,17 +36196,14 @@ SilphCo6Text7: ; 1a2c9 (6:62c9)
 SilphCo6BattleText3: ; 1a2d3 (6:62d3)
 	TX_FAR _SilphCo6BattleText3
 	db "@"
-; 0x1a2d3 + 5 bytes
 
 SilphCo6EndBattleText3: ; 1a2d8 (6:62d8)
 	TX_FAR _SilphCo6EndBattleText3
 	db "@"
-; 0x1a2d8 + 5 bytes
 
 SilphCo6AfterBattleText3: ; 1a2dd (6:62dd)
 	TX_FAR _SilphCo6AfterBattleText3
 	db "@"
-; 0x1a2dd + 5 bytes
 
 SilphCo6Text8: ; 1a2e2 (6:62e2)
 	db $08 ; asm
@@ -36699,17 +36214,14 @@ SilphCo6Text8: ; 1a2e2 (6:62e2)
 SilphCo6BattleText4: ; 1a2ec (6:62ec)
 	TX_FAR _SilphCo6BattleText4
 	db "@"
-; 0x1a2ec + 5 bytes
 
 SilphCo6EndBattleText4: ; 1a2f1 (6:62f1)
 	TX_FAR _SilphCo6EndBattleText4
 	db "@"
-; 0x1a2f1 + 5 bytes
 
 SilphCo6AfterBattleText4: ; 1a2f6 (6:62f6)
 	TX_FAR _SilphCo6AfterBattleText4
 	db "@"
-; 0x1a2f6 + 5 bytes
 
 SilphCo6Object: ; 0x1a2fb (size=112)
 	db $2e ; border tile
@@ -36745,7 +36257,6 @@ SilphCo6Object: ; 0x1a2fb (size=112)
 SilphCo6Blocks: ; 1a36b (6:636b)
 	INCBIN "maps/silphco6.blk"
 
-; known jump sources: 314b (0:314b)
 Func_1a3e0: ; 1a3e0 (6:63e0)
 	ld hl, $d730
 	res 1, [hl]
@@ -36775,7 +36286,6 @@ Func_1a3e0: ; 1a3e0 (6:63e0)
 	res 7, [hl]
 	ret
 
-; known jump sources: 3153 (0:3153)
 Func_1a41d: ; 1a41d (6:641d)
 	ld hl, $d730
 	res 7, [hl]
@@ -36841,7 +36351,6 @@ Func_1a485: ; 1a485 (6:6485)
 	ld a, $2
 	ld [$cf10], a
 	ret
-; 0x1a4a1
 
 Func_1a4a1: ; 1a4a1 (6:64a1)
 	ld a, [$cd38]
@@ -36935,7 +36444,6 @@ Func_1a514: ; 1a514 (6:6514)
 	ld a, $1
 	ld [$cf10], a
 	ret
-; 0x1a559
 
 RLEList_1a559: ; 1a559 (6:6559)
 db $00, $01
@@ -36960,7 +36468,6 @@ Func_1a56b: ; 1a56b (6:656b)
 	ld hl, $d72e
 	res 7, [hl]
 	jp Func_314e
-; 0x1a57d
 
 Unknown_1a57d: ; 1a57d (6:657d)
 	dw Func_1a581
@@ -36997,7 +36504,6 @@ Func_1a581: ; 1a581 (6:6581)
 	ld a, $1
 	ld [$cf10], a
 	ret
-; 0x1a5cd
 
 RLEList_1a5cd: ; 1a5cd (6:65cd)
 db $00, $01
@@ -37017,7 +36523,6 @@ db $00, $05
 db $C0, $03
 db $FF
 
-; known jump sources: 33b1 (0:33b1)
 Func_1a5e7: ; 1a5e7 (6:65e7)
 	ld a, [W_CURMAP] ; $d35e
 	cp $94
@@ -37040,7 +36545,6 @@ Func_1a5e7: ; 1a5e7 (6:65e7)
 Unknown_1a605: ; 1a605 (6:6605)
 INCBIN "baserom.gbc",$1a605,$1a609 - $1a605
 
-; known jump sources: c4a5 (3:44a5), 1a3e5 (6:63e5)
 Func_1a609: ; 1a609 (6:6609)
 	push de
 	ld hl, Unknown_1a62c ; $662c
@@ -37071,7 +36575,6 @@ Func_1a609: ; 1a609 (6:6609)
 Unknown_1a62c: ; 1a62c (6:662c)
 INCBIN "baserom.gbc",$1a62c,$1a672 - $1a62c
 
-; known jump sources: c37 (0:c37)
 Func_1a672: ; 1a672 (6:6672)
 	ld a, [$d736]
 	bit 6, a
@@ -37133,7 +36636,6 @@ Func_1a672: ; 1a672 (6:6672)
 Unknown_1a6cf: ; 1a6cf (6:66cf)
 INCBIN "baserom.gbc",$1a6cf,$1a6f0 - $1a6cf
 
-; known jump sources: 1a6c6 (6:66c6)
 Func_1a6f0: ; 1a6f0 (6:66f0)
 	ld hl, $8ff0
 	ld de, LedgeHoppingShadow ; $6708
@@ -37476,7 +36978,6 @@ MonsterNames: ; 1c21e (7:421e)
 	db "WEEPINBELL"
 	db "VICTREEBEL"
 
-; known jump sources: 4493 (1:4493)
 Func_1c98a: ; 1c98a (7:498a)
 	call ClearScreen
 	call GoPAL_SET_CF1C
@@ -37499,13 +37000,11 @@ Func_1c98a: ; 1c98a (7:498a)
 	ld hl, Func_73b6a
 	call Bankswitch ; indirect jump to Func_73b6a (73b6a (1c:7b6a))
 	jp InitGame
-; 1c9c1 (7:49c1)
+
 UnnamedText_1c9c1: ; 1c9c1 (7:49c1)
 	TX_FAR _UnnamedText_1c9c1
 	db "@"
-; 0x1c9c1 + 5 bytes
 
-; known jump sources: 4583e (11:583e)
 Func_1c9c6: ; 1c9c6 (7:49c6)
 	ld hl, UnnamedText_1ca14 ; $4a14
 	call PrintText
@@ -37542,7 +37041,6 @@ Func_1c9c6: ; 1c9c6 (7:49c6)
 	ld hl, $d3af
 	call Func_1ca0d
 
-; known jump sources: 1ca0a (7:4a0a)
 Func_1ca0d: ; 1ca0d (7:4a0d)
 	inc hl
 	inc hl
@@ -37551,11 +37049,10 @@ Func_1ca0d: ; 1ca0d (7:4a0d)
 	ld a, c
 	ld [hli], a
 	ret
-; 1ca14 (7:4a14)
+
 UnnamedText_1ca14: ; 1ca14 (7:4a14)
 	TX_FAR _UnnamedText_1ca14
 	db "@"
-; 0x1ca14 + 5 bytes
 
 CinnabarIslandScript: ; 1ca19 (7:4a19)
 	call EnableAutoTextBoxDrawing
@@ -37568,7 +37065,6 @@ CinnabarIslandScript: ; 1ca19 (7:4a19)
 	ld hl, CinnabarIslandScripts
 	ld a, [W_CINNABARISLANDCURSCRIPT]
 	jp CallFunctionInTable
-; 0x1ca34
 
 CinnabarIslandScripts: ; 1ca34 (7:4a34)
 	dw CinnabarIslandScript0, CinnabarIslandScript1
@@ -37601,7 +37097,6 @@ CinnabarIslandScript0: ; 1ca38 (7:4a38)
 	ld a, $1
 	ld [W_CINNABARISLANDCURSCRIPT], a
 	ret
-; 0x1ca73
 
 CinnabarIslandScript1: ; 1ca73 (7:4a73)
 	ld a, [$cd38]
@@ -37611,7 +37106,6 @@ CinnabarIslandScript1: ; 1ca73 (7:4a73)
 	ld a, $0
 	ld [W_CINNABARISLANDCURSCRIPT], a
 	ret
-; 0x1ca81
 
 CinnabarIslandTexts: ; 1ca81 (7:4a81)
 	dw CinnabarIslandText1, CinnabarIslandText2, CinnabarIslandText3, MartSignText, PokeCenterSignText, CinnabarIslandText6, CinnabarIslandText7, CinnabarIslandText8
@@ -37619,7 +37113,6 @@ CinnabarIslandTexts: ; 1ca81 (7:4a81)
 CinnabarIslandText8: ; 1ca91 (7:4a91)
 	TX_FAR _CinnabarIslandText8
 	db "@"
-; 0x1ca91 + 5 bytes
 
 CinnabarIslandText1: ; 1ca96 (7:4a96)
 	TX_FAR _CinnabarIslandText1
@@ -37643,7 +37136,6 @@ CinnabarIslandText7: ; 1caaa (7:4aaa)
 
 Route1Script: ; 1caaf (7:4aaf)
 	jp EnableAutoTextBoxDrawing
-; 0x1cab2
 
 Route1Texts: ; 1cab2 (7:4ab2)
 	dw Route1Text1, Route1Text2, Route1Text3
@@ -37673,7 +37165,6 @@ Route1Text1: ; 1cab8 (7:4ab8)
 Route1ViridianMartSampleText: ; 1cae3 (7:4ae3)
 	TX_FAR _Route1ViridianMartSampleText
 	db "@"
-; 0x1cae3 + 5 bytes
 
 UnnamedText_1cae8: ; 1cae8 (7:4ae8)
 	TX_FAR _UnnamedText_1cae8
@@ -37682,12 +37173,10 @@ UnnamedText_1cae8: ; 1cae8 (7:4ae8)
 UnnamedText_1caee: ; 1caee (7:4aee)
 	TX_FAR _UnnamedText_1caee
 	db "@"
-; 0x1caee + 5 bytes
 
 UnnamedText_1caf3: ; 1caf3 (7:4af3)
 	TX_FAR _UnnamedText_1caf3
 	db "@"
-; 0x1caf3 + 5 bytes
 
 Route1Text2: ; 1caf8 (7:4af8)
 	TX_FAR _Route1Text2
@@ -37716,7 +37205,6 @@ OaksLabScript: ; 1cb0e (7:4b0e)
 	ld hl, OaksLabScripts
 	ld a, [W_OAKSLABCURSCRIPT]
 	jp CallFunctionInTable
-; 0x1cb28
 
 OaksLabScripts: ; 1cb28 (7:4b28)
 	dw OaksLabScript0, OaksLabScript1, OaksLabScript2, OaksLabScript3, OaksLabScript4, OaksLabScript5, OaksLabScript6, OaksLabScript7, OaksLabScript8, OaksLabScript9, OaksLabScript10, OaksLabScript11, OaksLabScript12, OaksLabScript13, OaksLabScript14, OaksLabScript15, OaksLabScript16, OaksLabScript17, OaksLabScript18
@@ -37738,7 +37226,6 @@ OaksLabScript0: ; 1cb4e (7:4b4e)
 	ld a, $1
 	ld [W_OAKSLABCURSCRIPT], a
 	ret
-; 0x1cb6e
 
 OaksLabScript1: ; 1cb6e (7:4b6e)
 	ld a, $8
@@ -37749,7 +37236,6 @@ OaksLabScript1: ; 1cb6e (7:4b6e)
 	ld a, $2
 	ld [W_OAKSLABCURSCRIPT], a
 	ret
-; 0x1cb7e
 
 OakEntryMovement: ; 1cb7e (7:4b7e)
 	db $40, $40, $40, $ff
@@ -37770,7 +37256,6 @@ OaksLabScript2: ; 1cb82 (7:4b82)
 	ld a, $3
 	ld [W_OAKSLABCURSCRIPT], a
 	ret
-; 0x1cba2
 
 OaksLabScript3: ; 1cba2 (7:4ba2)
 	call Delay3
@@ -37794,7 +37279,6 @@ OaksLabScript3: ; 1cba2 (7:4ba2)
 	ld a, $4
 	ld [W_OAKSLABCURSCRIPT], a
 	ret
-; 0x1cbcf
 
 PlayerEntryMovementRLE: ; 1cbcf (7:4bcf)
 	db $40, $8, $ff
@@ -37820,7 +37304,6 @@ OaksLabScript4: ; 1cbd2 (7:4bd2)
 	ld a, $5
 	ld [W_OAKSLABCURSCRIPT], a
 	ret
-; 0x1cbfd
 
 OaksLabScript5: ; 1cbfd (7:4bfd)
 	ld a, $fc
@@ -37848,7 +37331,6 @@ OaksLabScript5: ; 1cbfd (7:4bfd)
 	ld a, $6
 	ld [W_OAKSLABCURSCRIPT], a
 	ret
-; 0x1cc36
 
 OaksLabScript6: ; 1cc36 (7:4c36)
 	ld a, [W_YCOORD]
@@ -37879,7 +37361,6 @@ OaksLabScript6: ; 1cc36 (7:4c36)
 	ld a, $7
 	ld [W_OAKSLABCURSCRIPT], a
 	ret
-; 0x1cc72
 
 OaksLabScript7: ; 1cc72 (7:4c72)
 	ld a, [$cd38]
@@ -37890,7 +37371,6 @@ OaksLabScript7: ; 1cc72 (7:4c72)
 	ld a, $6
 	ld [W_OAKSLABCURSCRIPT], a
 	ret
-; 0x1cc80
 
 OaksLabScript8: ; 1cc80 (7:4c80)
 	ld a, [W_PLAYERSTARTER]
@@ -37963,7 +37443,6 @@ OaksLabScript8: ; 1cc80 (7:4c80)
 	ld a, $9
 	ld [W_OAKSLABCURSCRIPT], a
 	ret
-; 0x1cd00
 
 OaksLabScript9: ; 1cd00 (7:4d00)
 	ld a, [$d730]
@@ -38017,7 +37496,6 @@ OaksLabScript9: ; 1cd00 (7:4d00)
 	ld a, $a
 	ld [W_OAKSLABCURSCRIPT], a
 	ret
-; 0x1cd6d
 
 OaksLabScript10: ; 1cd6d (7:4d6d)
 	ld a, [W_YCOORD]
@@ -38056,7 +37534,6 @@ OaksLabScript10: ; 1cd6d (7:4d6d)
 	ld a, $b
 	ld [W_OAKSLABCURSCRIPT], a
 	ret
-; 0x1cdb9
 
 OaksLabScript11: ; 1cdb9 (7:4db9)
 	ld a, [$d730]
@@ -38097,7 +37574,6 @@ OaksLabScript11: ; 1cdb9 (7:4db9)
 	ld a, $c
 	ld [W_OAKSLABCURSCRIPT], a
 	ret
-; 0x1ce03
 
 OaksLabScript12: ; 1ce03 (7:4e03)
 	ld a, $f0
@@ -38121,7 +37597,6 @@ OaksLabScript12: ; 1ce03 (7:4e03)
 	ld a, $d
 	ld [W_OAKSLABCURSCRIPT], a
 	ret
-; 0x1ce32
 
 OaksLabScript13: ; 1ce32 (7:4e32)
 	ld c, $14
@@ -38150,7 +37625,6 @@ OaksLabScript13: ; 1ce32 (7:4e32)
 	ld a, $e
 	ld [W_OAKSLABCURSCRIPT], a
 	ret
-; 0x1ce66
 
 .RivalExitMovement
 	db $E0,0,0,0,0,0,$FF
@@ -38190,7 +37664,6 @@ OaksLabScript14: ; 1ce6d (7:4e6d)
 	ld [$c109], a
 .done
 	ret
-; 0x1ceb0
 
 OaksLabScript15: ; 1ceb0 (7:4eb0)
 	xor a
@@ -38226,7 +37699,6 @@ OaksLabScript15: ; 1ceb0 (7:4eb0)
 	ld a, $10
 	ld [W_OAKSLABCURSCRIPT], a
 	ret
-; 0x1cefd
 
 Function1CEFD ; 0x1cefd
 	ld a, $1
@@ -38239,7 +37711,6 @@ Function1CEFD ; 0x1cefd
 	xor a
 	ld [$ff00+$8d], a
 	jp Func_34a6 ; face object
-; 0x1cf12
 
 OaksLabScript16: ; 1cf12 (7:4f12)
 	ld a, [$d730]
@@ -38322,7 +37793,6 @@ OaksLabScript16: ; 1cf12 (7:4f12)
 	ld a, $11
 	ld [W_OAKSLABCURSCRIPT], a
 	ret
-; 0x1cfd4
 
 OaksLabScript17: ; 1cfd4 (7:4fd4)
 	ld a, [$d730]
@@ -38349,11 +37819,9 @@ OaksLabScript17: ; 1cfd4 (7:4fd4)
 	ld a, $12
 	ld [W_OAKSLABCURSCRIPT], a
 	ret
-; 0x1d009
 
 OaksLabScript18: ; 1d009 (7:5009)
 	ret
-; 0x1d00a
 
 Function1D00A: ; 1d00a (7:500a)
 	ld hl, W_BAGITEM01
@@ -38451,17 +37919,14 @@ OaksLabText1: ; 1d0ce (7:50ce)
 OaksLabGaryText1: ; 1d0f3 (7:50f3)
 	TX_FAR _OaksLabGaryText1
 	db "@"
-; 0x1d0f8
 
 OaksLabText40: ; 1d0f8 (7:50f8)
 	TX_FAR _OaksLabText40
 	db "@"
-; 0x1d0f8 + 5 bytes
 
 OaksLabText41: ; 1d0fd (7:50fd)
 	TX_FAR _OaksLabText41
 	db "@"
-; 0x1d0fd + 5 bytes
 
 OaksLabText29: ; 1d102 (7:5102)
 OaksLabText2: ; 1d102 (7:5102)
@@ -38508,7 +37973,6 @@ asm_1d133: ; 1d133 (7:5133)
 	ld hl, OaksLabText39
 	call PrintText
 	jp TextScriptEnd
-; 0x1d152
 
 OaksLabText39: ; 1d152 (7:5152)
 	TX_FAR _OaksLabText39
@@ -38550,7 +38014,6 @@ OaksLabLookAtCharmander ; 0x1d195
 OaksLabCharmanderText: ; 1d19a (7:519a)
 	TX_FAR _OaksLabCharmanderText ; 0x94e06
 	db "@"
-; 0x1d19f
 
 OaksLabLookAtSquirtle: ; 1d19f (7:519f)
 	ld hl, OaksLabSquirtleText
@@ -38558,7 +38021,6 @@ OaksLabLookAtSquirtle: ; 1d19f (7:519f)
 OaksLabSquirtleText: ; 1d1a4 (7:51a4)
 	TX_FAR _OaksLabSquirtleText ; 0x94e2f
 	db "@"
-; 0x1d1a9
 
 OaksLabLookAtBulbasaur: ; 1d1a9 (7:51a9)
 	ld hl, OaksLabBulbasaurText
@@ -38566,7 +38028,6 @@ OaksLabLookAtBulbasaur: ; 1d1a9 (7:51a9)
 OaksLabBulbasaurText: ; 1d1ae (7:51ae)
 	TX_FAR _OaksLabBulbasaurText ; 0x94e57
 	db "@"
-; 0x1d1b3
 
 OaksLabMonChoiceMenu: ; 1d1b3 (7:51b3)
 	call PrintText
@@ -38617,17 +38078,14 @@ asm_1d1e5: ; 1d1e5 (7:51e5)
 	ld [W_OAKSLABCURSCRIPT], a
 OaksLabMonChoiceEnd: ; 1d21f (7:521f)
 	jp TextScriptEnd
-; 0x1d222
 
 OaksLabMonEnergeticText: ; 1d222 (7:5222)
 	TX_FAR _OaksLabMonEnergeticText
 	db "@"
-; 0x1d222 + 5 bytes
 
 OaksLabReceivedMonText: ; 1d227 (7:5227)
 	TX_FAR _OaksLabReceivedMonText ; 0x94ea0
 	db $11, "@"
-; 0x1d22d
 
 Unknown_1d22d: ; 1d22d (7:522d)
 	ld a, $5
@@ -38643,7 +38101,6 @@ Unknown_1d22d: ; 1d22d (7:522d)
 OaksLabLastMonText: ; 1d243 (7:5243)
 	TX_FAR _OaksLabLastMonText
 	db "@"
-; 0x1d248
 
 OaksLabText32: ; 1d248 (7:5248)
 OaksLabText5: ; 1d248 (7:5248)
@@ -38723,51 +38180,42 @@ OaksLabText5: ; 1d248 (7:5248)
 	call PrintText
 .asm_0f042 ; 0x1d2ed
 	jp TextScriptEnd
-; 0x1d2f0
 
 UnnamedText_1d2f0: ; 1d2f0 (7:52f0)
 	TX_FAR _UnnamedText_1d2f0
 	db "@"
-; 0x1d2f5
 
 UnnamedText_1d2f5: ; 1d2f5 (7:52f5)
 	TX_FAR _UnnamedText_1d2f5
 	db "@"
-; 0x1d2fa
 
 UnnamedText_1d2fa: ; 1d2fa (7:52fa)
 	TX_FAR _UnnamedText_1d2fa
 	db "@"
-; 0x1d2ff
 
 OaksLabDeliverParcelText: ; 1d2ff (7:52ff)
 	TX_FAR _OaksLabDeliverParcelText1 ; 0x94f69
 	db $11
 	TX_FAR _OaksLabDeliverParcelText2
 	db "@"
-; 0x1d309
 
 OaksLabAroundWorldText: ; 1d309 (7:5309)
 	TX_FAR _OaksLabAroundWorldText
 	db "@"
-; 0x1d30e
 
 OaksLabGivePokeballsText: ; 1d30e (7:530e)
 	TX_FAR _OaksLabGivePokeballsText1 ; 0x9506d
 	db $11
 	TX_FAR _OaksLabGivePokeballsText2
 	db "@"
-; 0x1d318
 
 OaksLabPleaseVisitText: ; 1d318 (7:5318)
 	TX_FAR _OaksLabPleaseVisitText
 	db "@"
-; 0x1d318 + 5 bytes
 
 UnnamedText_1d31d: ; 1d31d (7:531d)
 	TX_FAR _UnnamedText_1d31d
 	db "@"
-; 0x1d31d + 5 bytes
 
 OaksLabText34: ; 1d322 (7:5322)
 OaksLabText33: ; 1d322 (7:5322)
@@ -38781,7 +38229,6 @@ OaksLabText6: ; 1d322 (7:5322)
 UnnamedText_1d32c: ; 1d32c (7:532c)
 	TX_FAR _UnnamedText_1d32c
 	db "@"
-; 0x1d32c + 5 bytes
 
 OaksLabText35: ; 1d331 (7:5331)
 OaksLabText8: ; 1d331 (7:5331)
@@ -38798,160 +38245,132 @@ OaksLabText9: ; 1d336 (7:5336)
 UnnamedText_1d340: ; 1d340 (7:5340)
 	TX_FAR _UnnamedText_1d340
 	db "@"
-; 0x1d340 + 5 bytes
 
 OaksLabText17: ; 1d345 (7:5345)
 	db $8
 	ld hl, OaksLabRivalWaitingText
 	call PrintText
 	jp TextScriptEnd
-; 0x1d34f
 
 OaksLabRivalWaitingText: ; 1d34f (7:534f)
 	TX_FAR _OaksLabRivalWaitingText
 	db "@"
-; 0x1d34f + 5 bytes
 
 OaksLabText18: ; 1d354 (7:5354)
 	db $8
 	ld hl, OaksLabChooseMonText
 	call PrintText
 	jp TextScriptEnd
-; 0x1d35e
 
 OaksLabChooseMonText: ; 1d35e (7:535e)
 	TX_FAR _OaksLabChooseMonText
 	db "@"
-; 0x1d35e + 5 bytes
 
 OaksLabText19: ; 1d363 (7:5363)
 	db $8
 	ld hl, OaksLabRivalInterjectionText
 	call PrintText
 	jp TextScriptEnd
-; 0x1d36d
 
 OaksLabRivalInterjectionText: ; 1d36d (7:536d)
 	TX_FAR _OaksLabRivalInterjectionText
 	db "@"
-; 0x1d36d + 5 bytes
 
 OaksLabText20: ; 1d372 (7:5372)
 	db $8
 	ld hl, OaksLabBePatientText
 	call PrintText
 	jp TextScriptEnd
-; 0x1d37c
 
 OaksLabBePatientText: ; 1d37c (7:537c)
 	TX_FAR _OaksLabBePatientText
 	db "@"
-; 0x1d37c + 5 bytes
 
 OaksLabText12: ; 1d381 (7:5381)
 	db $8
 	ld hl, OaksLabLeavingText
 	call PrintText
 	jp TextScriptEnd
-; 0x1d38b
 
 OaksLabLeavingText: ; 1d38b (7:538b)
 	TX_FAR _OaksLabLeavingText
 	db "@"
-; 0x1d38b + 5 bytes
 
 OaksLabText13: ; 1d390 (7:5390)
 	db $8
 	ld hl, OaksLabRivalPickingMonText
 	call PrintText
 	jp TextScriptEnd
-; 0x1d39a
 
 OaksLabRivalPickingMonText: ; 1d39a (7:539a)
 	TX_FAR _OaksLabRivalPickingMonText
 	db "@"
-; 0x1d39f
 
 OaksLabText14: ; 1d39f (7:539f)
 	db $8
 	ld hl, OaksLabRivalReceivedMonText
 	call PrintText
 	jp TextScriptEnd
-; 0x1d3a9
 
 OaksLabRivalReceivedMonText: ; 1d3a9 (7:53a9)
 	TX_FAR _OaksLabRivalReceivedMonText ; 0x95461
 	db $11, "@"
-; 0x1d3af
 
 OaksLabText15: ; 1d3af (7:53af)
 	db $8
 	ld hl, OaksLabRivalChallengeText
 	call PrintText
 	jp TextScriptEnd
-; 0x1d3b9
 
 OaksLabRivalChallengeText: ; 1d3b9 (7:53b9)
 	TX_FAR _OaksLabRivalChallengeText
 	db "@"
-; 0x1d3be
 
 UnnamedText_1d3be: ; 1d3be (7:53be)
 	TX_FAR _UnnamedText_1d3be
 	db "@"
-; 0x1d3c3
 
 UnnamedText_1d3c3: ; 1d3c3 (7:53c3)
 	TX_FAR _UnnamedText_1d3c3
 	db "@"
-; 0x1d3c8
 
 OaksLabText16: ; 1d3c8 (7:53c8)
 	db $8
 	ld hl, OaksLabRivalToughenUpText
 	call PrintText
 	jp TextScriptEnd
-; 0x1d3d2
 
 OaksLabRivalToughenUpText: ; 1d3d2 (7:53d2)
 	TX_FAR _OaksLabRivalToughenUpText
 	db "@"
-; 0x1d3d7
 
 OaksLabText21: ; 1d3d7 (7:53d7)
 	TX_FAR _OaksLabText21
 	db "@"
-; 0x1d3dc
 
 OaksLabText22: ; 1d3dc (7:53dc)
 	TX_FAR _OaksLabText22
 	db "@"
-; 0x1d3e1
 
 OaksLabText23: ; 1d3e1 (7:53e1)
 	TX_FAR _OaksLabText23
 	db "@"
-; 0x1d3e6
 
 OaksLabText24: ; 1d3e6 (7:53e6)
 	TX_FAR _OaksLabText24
 	db "@"
-; 0x1d3eb
 
 OaksLabText25: ; 1d3eb (7:53eb)
 	TX_FAR _OaksLabText25
 	db $11, "@"
-; 0x1d3f1
 
 OaksLabText26: ; 1d3f1 (7:53f1)
 	TX_FAR _OaksLabText26
 	db "@"
-; 0x1d3f6
 
 OaksLabText27: ; 1d3f6 (7:53f6)
 	TX_FAR _OaksLabText27
 	db "@"
-; 0x1d3fb
 
 OaksLabText38: ; 1d3fb (7:53fb)
 OaksLabText37: ; 1d3fb (7:53fb)
@@ -38965,7 +38384,6 @@ OaksLabText10: ; 1d3fb (7:53fb)
 UnnamedText_1d405: ; 1d405 (7:5405)
 	TX_FAR _UnnamedText_1d405
 	db "@"
-; 0x1d405 + 5 bytes
 
 OaksLabObject: ; 0x1d40a (size=88)
 	db $3 ; border tile
@@ -39007,7 +38425,6 @@ ViridianMartScript: ; 1d46e (7:546e)
 	ld hl, ViridianMartScriptPointers
 	ld a, [W_VIRIDIANMARKETCURSCRIPT]
 	jp CallFunctionInTable
-; 0x1d47d
 
 ViridianMartScript_Unknown1d47d: ; 1d47d (7:547d)
 	ld a, [$d74e]
@@ -39066,7 +38483,6 @@ ViridianMartScript1: ; 1d4c0 (7:54c0)
 	; fallthrough
 ViridianMartScript2: ; 1d4df (7:54df)
 	ret
-; 0x1d4e0
 
 ViridianMartTexts: ; 1d4e0 (7:54e0)
 	dw ViridianMartText1
@@ -39130,7 +38546,6 @@ School_h: ; 0x1d540 to 0x1d54c (12 bytes) (bank=7) (id=43)
 
 SchoolScript: ; 1d54c (7:554c)
 	jp EnableAutoTextBoxDrawing
-; 0x1d54f
 
 SchoolTexts: ; 1d54f (7:554f)
 	dw SchoolText1, SchoolText2
@@ -39168,12 +38583,10 @@ ViridianHouse_h: ; 0x1d57d to 0x1d589 (12 bytes) (bank=7) (id=44)
 
 	dw ViridianHouseObject ; objects
 
-; 0x1d589
 db $0
 
 ViridianHouseScript: ; 1d58a (7:558a)
 	jp EnableAutoTextBoxDrawing
-; 0x1d58d
 
 ViridianHouseTexts: ; 1d58d (7:558d)
 	dw ViridianHouseText1, ViridianHouseText2, ViridianHouseText3, ViridianHouseText4
@@ -39198,7 +38611,6 @@ ViridianHouseText3: ; 1d59f (7:559f)
 UnnamedText_1d5b1: ; 1d5b1 (7:55b1)
 	TX_FAR _UnnamedText_1d5b1
 	db "@"
-; 0x1d5b1 + 5 bytes
 
 ViridianHouseText4: ; 1d5b6 (7:55b6)
 	TX_FAR _ViridianHouseText4
@@ -39233,7 +38645,6 @@ PewterHouse1_h: ; 0x1d5e7 to 0x1d5f3 (12 bytes) (bank=7) (id=55)
 
 PewterHouse1Script: ; 1d5f3 (7:55f3)
 	jp EnableAutoTextBoxDrawing
-; 0x1d5f6
 
 PewterHouse1Texts: ; 1d5f6 (7:55f6)
 	dw PewterHouse1Text1, PewterHouse1Text2, PewterHouse1Text3
@@ -39282,7 +38693,6 @@ PewterHouse2_h: ; 0x1d63c to 0x1d648 (12 bytes) (bank=7) (id=57)
 
 PewterHouse2Script: ; 1d648 (7:5648)
 	jp EnableAutoTextBoxDrawing
-; 0x1d64b
 
 PewterHouse2Texts: ; 1d64b (7:564b)
 	dw PewterHouse2Text1, PewterHouse2Text2
@@ -39323,7 +38733,6 @@ CeruleanHouseTrashed_h: ; 0x1d679 to 0x1d685 (12 bytes) (bank=7) (id=62)
 CeruleanHouseTrashedScript: ; 1d685 (7:5685)
 	call EnableAutoTextBoxDrawing
 	ret
-; 0x1d689
 
 CeruleanHouseTrashedTexts: ; 1d689 (7:5689)
 	dw CeruleanHouseTrashedText1, CeruleanHouseTrashedText2, CeruleanHouseTrashedText3
@@ -39347,12 +38756,10 @@ CeruleanHouseTrashedText1: ; 1d68f (7:568f)
 UnnamedText_1d6ab: ; 1d6ab (7:56ab)
 	TX_FAR _UnnamedText_1d6ab
 	db "@"
-; 0x1d6ab + 5 bytes
 
 UnnamedText_1d6b0: ; 1d6b0 (7:56b0)
 	TX_FAR _UnnamedText_1d6b0
 	db "@"
-; 0x1d6b0 + 5 bytes
 
 CeruleanHouseTrashedText2: ; 1d6b5 (7:56b5)
 	TX_FAR _CeruleanHouseTrashedText2
@@ -39392,7 +38799,6 @@ CeruleanHouse_h: ; 0x1d6ea to 0x1d6f6 (12 bytes) (bank=7) (id=63)
 
 CeruleanHouseScript: ; 1d6f6 (7:56f6)
 	jp EnableAutoTextBoxDrawing
-; 0x1d6f9
 
 CeruleanHouseTexts: ; 1d6f9 (7:56f9)
 	dw CeruleanHouseText1, CeruleanHouseText2
@@ -39436,7 +38842,6 @@ BikeShop_h: ; 0x1d730 to 0x1d73c (12 bytes) (bank=7) (id=66)
 
 BikeShopScript: ; 1d73c (7:573c)
 	jp EnableAutoTextBoxDrawing
-; 0x1d73f
 
 BikeShopTexts: ; 1d73f (7:573f)
 	dw BikeShopText1, BikeShopText2, BikeShopText3
@@ -39529,22 +38934,18 @@ BikeShopMenuPrice: ; 1d807 (7:5807)
 UnnamedText_1d810: ; 1d810 (7:5810)
 	TX_FAR _UnnamedText_1d810
 	db "@"
-; 0x1d810 + 5 bytes
 
 UnnamedText_1d815: ; 1d815 (7:5815)
 	TX_FAR _UnnamedText_1d815
 	db "@"
-; 0x1d815 + 5 bytes
 
 UnnamedText_1d81a: ; 1d81a (7:581a)
 	TX_FAR _UnnamedText_1d81a
 	db "@"
-; 0x1d81a + 5 bytes
 
 UnnamedText_1d81f: ; 1d81f (7:581f)
 	TX_FAR _UnnamedText_1d81f
 	db "@"
-; 0x1d81f + 5 bytes
 
 UnnamedText_1d824: ; 1d824 (7:5824)
 	TX_FAR _UnnamedText_1d824 ; 0x98eb2
@@ -39553,17 +38954,14 @@ UnnamedText_1d824: ; 1d824 (7:5824)
 UnnamedText_1d82a: ; 1d82a (7:582a)
 	TX_FAR _UnnamedText_1d82a
 	db "@"
-; 0x1d82a + 5 bytes
 
 UnnamedText_1d82f: ; 1d82f (7:582f)
 	TX_FAR _UnnamedText_1d82f
 	db "@"
-; 0x1d82f + 5 bytes
 
 UnnamedText_1d834: ; 1d834 (7:5834)
 	TX_FAR _UnnamedText_1d834
 	db "@"
-; 0x1d834 + 5 bytes
 
 BikeShopText2: ; 1d839 (7:5839)
 	db $08 ; asm
@@ -39574,7 +38972,6 @@ BikeShopText2: ; 1d839 (7:5839)
 UnnamedText_1d843: ; 1d843 (7:5843)
 	TX_FAR _UnnamedText_1d843
 	db "@"
-; 0x1d843 + 5 bytes
 
 BikeShopText3: ; 1d848 (7:5848)
 	db $08 ; asm
@@ -39590,12 +38987,10 @@ BikeShopText3: ; 1d848 (7:5848)
 UnnamedText_1d85c: ; 1d85c (7:585c)
 	TX_FAR _UnnamedText_1d85c
 	db "@"
-; 0x1d85c + 5 bytes
 
 UnnamedText_1d861: ; 1d861 (7:5861)
 	TX_FAR _UnnamedText_1d861
 	db "@"
-; 0x1d861 + 5 bytes
 
 BikeShopObject: ; 0x1d866 (size=38)
 	db $e ; border tile
@@ -39629,7 +39024,6 @@ LavenderHouse1_h: ; 0x1d89c to 0x1d8a8 (12 bytes) (bank=7) (id=149)
 LavenderHouse1Script: ; 1d8a8 (7:58a8)
 	call EnableAutoTextBoxDrawing
 	ret
-; 0x1d8ac
 
 LavenderHouse1Texts: ; 1d8ac (7:58ac)
 	dw LavenderHouse1Text1, LavenderHouse1Text2, LavenderHouse1Text3, LavenderHouse1Text4, LavenderHouse1Text5, LavenderHouse1Text6
@@ -39651,12 +39045,10 @@ LavenderHouse1Text1: ; 1d8b8 (7:58b8)
 UnnamedText_1d8d1: ; 1d8d1 (7:58d1)
 	TX_FAR _UnnamedText_1d8d1
 	db "@"
-; 0x1d8d1 + 5 bytes
 
 UnnamedText_1d8d6: ; 1d8d6 (7:58d6)
 	TX_FAR _UnnamedText_1d8d6
 	db "@"
-; 0x1d8d6 + 5 bytes
 
 LavenderHouse1Text2: ; 1d8db (7:58db)
 	db $08 ; asm
@@ -39675,12 +39067,10 @@ LavenderHouse1Text2: ; 1d8db (7:58db)
 UnnamedText_1d8f4: ; 1d8f4 (7:58f4)
 	TX_FAR _UnnamedText_1d8f4
 	db "@"
-; 0x1d8f4 + 5 bytes
 
 UnnamedText_1d8f9: ; 1d8f9 (7:58f9)
 	TX_FAR _UnnamedText_1d8f9
 	db "@"
-; 0x1d8f9 + 5 bytes
 
 LavenderHouse1Text3: ; 1d8fe (7:58fe)
 	TX_FAR _LavenderHouse1Text3
@@ -39695,7 +39085,6 @@ LavenderHouse1Text4: ; 1d90b (7:590b)
 	ld a, NIDORINO
 	call PlayCry
 	jp TextScriptEnd
-; 0x1d918
 
 LavenderHouse1Text5: ; 1d918 (7:5918)
 	db $08 ; asm
@@ -39725,24 +39114,20 @@ LavenderHouse1Text5: ; 1d918 (7:5918)
 UnnamedText_1d94c: ; 1d94c (7:594c)
 	TX_FAR _UnnamedText_1d94c
 	db "@"
-; 0x1d94c + 5 bytes
 
 ReceivedFluteText: ; 1d951 (7:5951)
 	TX_FAR _ReceivedFluteText ; 0x99ffb
 	db $11
 	TX_FAR _FluteExplanationText ; 0x9a011
 	db "@"
-; 0x1d95b
 
 FluteNoRoomText: ; 1d95b (7:595b)
 	TX_FAR _FluteNoRoomText
 	db "@"
-; 0x1d95b + 5 bytes
 
 MrFujiAfterFluteText: ; 1d960 (7:5960)
 	TX_FAR _MrFujiAfterFluteText
 	db "@"
-; 0x1d960 + 5 bytes
 
 LavenderHouse1Text6: ; 1d965 (7:5965)
 	TX_FAR _LavenderHouse1Text6
@@ -39780,7 +39165,6 @@ LavenderHouse2_h: ; 0x1d9a2 to 0x1d9ae (12 bytes) (bank=7) (id=151)
 LavenderHouse2Script: ; 1d9ae (7:59ae)
 	call EnableAutoTextBoxDrawing
 	ret
-; 0x1d9b2
 
 LavenderHouse2Texts: ; 1d9b2 (7:59b2)
 	dw LavenderHouse2Text1, LavenderHouse2Text2
@@ -39791,7 +39175,6 @@ LavenderHouse2Text1: ; 1d9b6 (7:59b6)
 	ld a, CUBONE
 	call PlayCry
 	jp TextScriptEnd
-; 0x1d9c3
 
 LavenderHouse2Text2: ; 1d9c3 (7:59c3)
 	db $08 ; asm
@@ -39810,12 +39193,10 @@ LavenderHouse2Text2: ; 1d9c3 (7:59c3)
 UnnamedText_1d9dc: ; 1d9dc (7:59dc)
 	TX_FAR _UnnamedText_1d9dc
 	db "@"
-; 0x1d9dc + 5 bytes
 
 UnnamedText_1d9e1: ; 1d9e1 (7:59e1)
 	TX_FAR _UnnamedText_1d9e1
 	db "@"
-; 0x1d9e1 + 5 bytes
 
 LavenderHouse2Object: ; 0x1d9e6 (size=32)
 	db $a ; border tile
@@ -39844,7 +39225,6 @@ NameRater_h: ; 0x1da06 to 0x1da12 (12 bytes) (bank=7) (id=229)
 
 NameRaterScript: ; 1da12 (7:5a12)
 	jp EnableAutoTextBoxDrawing
-; 0x1da15
 
 Unknown_1da15: ; 1da15 (7:5a15)
 	call PrintText
@@ -39924,42 +39304,34 @@ NameRaterText1: ; 1da56 (7:5a56)
 .asm_1daae
 	ld hl, UnnamedText_1dacc
 	jr .asm_1daa8 ; 0x1dab1 $f5
-; 0x1dab3
 
 UnnamedText_1dab3: ; 1dab3 (7:5ab3)
 	TX_FAR _UnnamedText_1dab3
 	db "@"
-; 0x1dab3 + 5 bytes
 
 UnnamedText_1dab8: ; 1dab8 (7:5ab8)
 	TX_FAR _UnnamedText_1dab8
 	db "@"
-; 0x1dab8 + 5 bytes
 
 UnnamedText_1dabd: ; 1dabd (7:5abd)
 	TX_FAR _UnnamedText_1dabd
 	db "@"
-; 0x1dabd + 5 bytes
 
 UnnamedText_1dac2: ; 1dac2 (7:5ac2)
 	TX_FAR _UnnamedText_1dac2
 	db "@"
-; 0x1dac2 + 5 bytes
 
 UnnamedText_1dac7: ; 1dac7 (7:5ac7)
 	TX_FAR _UnnamedText_1dac7
 	db "@"
-; 0x1dac7 + 5 bytes
 
 UnnamedText_1dacc: ; 1dacc (7:5acc)
 	TX_FAR _UnnamedText_1dacc
 	db "@"
-; 0x1dacc + 5 bytes
 
 UnnamedText_1dad1: ; 1dad1 (7:5ad1)
 	TX_FAR _UnnamedText_1dad1
 	db "@"
-; 0x1dad1 + 5 bytes
 
 NameRaterObject: ; 0x1dad6 (size=26)
 	db $a ; border tile
@@ -39988,7 +39360,6 @@ VermilionHouse1_h: ; 0x1daf0 to 0x1dafc (12 bytes) (bank=7) (id=93)
 VermilionHouse1Script: ; 1dafc (7:5afc)
 	call EnableAutoTextBoxDrawing
 	ret
-; 0x1db00
 
 VermilionHouse1Texts: ; 1db00 (7:5b00)
 	dw VermilionHouse1Text1, VermilionHouse1Text2, VermilionHouse1Text3
@@ -40073,7 +39444,6 @@ VermilionDockScript: ; 1db52 (7:5b52)
 	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
 	set 5, [hl]
 	ret
-; 0x1db9b
 
 VermilionDock_1db9b: ; 1db9b (7:5b9b)
 	set 2, [hl]
@@ -40246,7 +39616,6 @@ VermilionDockTexts: ; 1dcbf (7:5cbf)
 UnnamedText_1dcc1: ; 1dcc1 (7:5cc1)
 	TX_FAR _UnnamedText_1dcc1
 	db "@"
-; 0x1dcc1 + 5 bytes
 
 VermilionDockObject: ; 0x1dcc6 (size=20)
 	db $f ; border tile
@@ -40276,7 +39645,6 @@ CeladonMansion5_h: ; 0x1dd2e to 0x1dd3a (12 bytes) (bank=7) (id=132)
 
 CeladonMansion5Script: ; 1dd3a (7:5d3a)
 	jp EnableAutoTextBoxDrawing
-; 0x1dd3d
 
 CeladonMansion5Texts: ; 1dd3d (7:5d3d)
 	dw CeladonMansion5Text1, CeladonMansion5Text2
@@ -40324,7 +39692,6 @@ FuchsiaMart_h: ; 0x1dd7c to 0x1dd88 (12 bytes) (bank=7) (id=152)
 
 FuchsiaMartScript: ; 1dd88 (7:5d88)
 	jp EnableAutoTextBoxDrawing
-; 0x1dd8b
 
 FuchsiaMartTexts: ; 1dd8b (7:5d8b)
 	dw FuchsiaMartText1, FuchsiaMartText2, FuchsiaMartText3
@@ -40368,7 +39735,6 @@ SaffronHouse1_h: ; 0x1ddd1 to 0x1dddd (12 bytes) (bank=7) (id=179)
 
 SaffronHouse1Script: ; 1dddd (7:5ddd)
 	jp EnableAutoTextBoxDrawing
-; 0x1dde0
 
 SaffronHouse1Texts: ; 1dde0 (7:5de0)
 	dw SaffronHouse1Text1, SaffronHouse1Text2, SaffronHouse1Text3, SaffronHouse1Text4
@@ -40383,7 +39749,6 @@ SaffronHouse1Text2: ; 1dded (7:5ded)
 	ld a, PIDGEY
 	call PlayCry
 	jp TextScriptEnd
-; 0x1ddfa
 
 SaffronHouse1Text3: ; 1ddfa (7:5dfa)
 	TX_FAR _SaffronHouse1Text3
@@ -40422,7 +39787,6 @@ SaffronHouse2_h: ; 0x1de30 to 0x1de3c (12 bytes) (bank=7) (id=183)
 
 SaffronHouse2Script: ; 1de3c (7:5e3c)
 	jp EnableAutoTextBoxDrawing
-; 0x1de3f
 
 SaffronHouse2Texts: ; 1de3f (7:5e3f)
 	dw SaffronHouse2Text1
@@ -40455,22 +39819,18 @@ SaffronHouse2Text1: ; 1de41 (7:5e41)
 TM29PreReceiveText: ; 1de75 (7:5e75)
 	TX_FAR _TM29PreReceiveText
 	db "@"
-; 0x1de75 + 5 bytes
 
 ReceivedTM29Text: ; 1de7a (7:5e7a)
 	TX_FAR _ReceivedTM29Text ; 0xa252a
 	db $0B, "@"
-; 0x1de80
 
 TM29ExplanationText: ; 1de80 (7:5e80)
 	TX_FAR _TM29ExplanationText
 	db "@"
-; 0x1de80 + 5 bytes
 
 TM29NoRoomText: ; 1de85 (7:5e85)
 	TX_FAR _TM29NoRoomText
 	db "@"
-; 0x1de85 + 5 bytes
 
 SaffronHouse2Object: ; 0x1de8a (size=26)
 	db $a ; border tile
@@ -40500,7 +39860,6 @@ DiglettsCaveRoute2Script: ; 1deb0 (7:5eb0)
 	ld a, $d
 	ld [$d365], a
 	jp EnableAutoTextBoxDrawing
-; 0x1deb8
 
 DiglettsCaveRoute2Texts: ; 1deb8 (7:5eb8)
 	dw DiglettsCaveRoute2Text1
@@ -40537,7 +39896,6 @@ Route2House_h: ; 0x1dee1 to 0x1deed (12 bytes) (bank=7) (id=48)
 
 Route2HouseScript: ; 1deed (7:5eed)
 	jp EnableAutoTextBoxDrawing
-; 0x1def0
 
 Route2HouseTexts: ; 1def0 (7:5ef0)
 	dw Route2HouseText1, Route2HouseText2
@@ -40584,7 +39942,6 @@ Route5GateScript: ; 1df33 (7:5f33)
 	ld a, [W_ROUTE5GATECURSCRIPT]
 	ld hl, Route5GateScripts
 	jp CallFunctionInTable
-; 0x1df3f
 
 Route5GateScripts: ; 1df3f (7:5f3f)
 	dw Route5GateScript0
@@ -40677,7 +40034,6 @@ Route5GateText1: ; 1dfaa (7:5faa)
 	ld hl, UnnamedText_1dff6
 	call PrintText
 	jp TextScriptEnd
-; 0x1dfe7
 
 Route8GateText2: ; 1dfe7 (7:5fe7)
 Route7GateText2: ; 1dfe7 (7:5fe7)
@@ -40686,7 +40042,6 @@ Route5GateText2: ; 1dfe7 (7:5fe7)
 UnnamedText_1dfe7: ; 1dfe7 (7:5fe7)
 	TX_FAR _UnnamedText_1dfe7
 	db "@"
-; 0x1dfe7 + 5 bytes
 
 Route8GateText3: ; 1dfec (7:5fec)
 Route7GateText3: ; 1dfec (7:5fec)
@@ -40697,12 +40052,10 @@ UnnamedText_1dfec: ; 1dfec (7:5fec)
 	db $11
 	TX_FAR _UnnamedText_1dff1 ; 0x8aaef
 	db "@"
-; 0x1dff6
 
 UnnamedText_1dff6: ; 1dff6 (7:5ff6)
 	TX_FAR _UnnamedText_1dff6
 	db "@"
-; 0x1dff6 + 5 bytes
 
 Route5GateObject: ; 0x1dffb (size=42)
 	db $a ; border tile
@@ -40741,7 +40094,6 @@ Route6GateScript: ; 1e03d (7:603d)
 	ld a, [W_ROUTE6GATECURSCRIPT]
 	call CallFunctionInTable
 	ret
-; 0x1e04a
 
 Route6GateScripts: ; 1e04a (7:604a)
 	dw Route6GateScript0, Route6GateScript1
@@ -40776,7 +40128,6 @@ Route6GateScript0: ; 1e04e (7:604e)
 	ld a, $3
 	ld [$ff00+$8c], a
 	jp DisplayTextID
-; 0x1e08c
 
 Unknown_1e08c: ; 1e08c (7:608c)
 	ld [bc], a
@@ -40794,7 +40145,6 @@ Route6GateScript1: ; 1e091 (7:6091)
 	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
 	ld [W_ROUTE6GATECURSCRIPT], a
 	ret
-; 0x1e0a1
 
 Unknown_1e0a1: ; 1e0a1 (7:60a1)
 	ld hl, $d730
@@ -40807,7 +40157,6 @@ Unknown_1e0a1: ; 1e0a1 (7:60a1)
 	ld [$c206], a
 	ld [$cd3b], a
 	ret
-; 0x1e0b8
 
 Route6GateTexts: ; 1e0b8 (7:60b8)
 	dw Route6GateText1, Route6GateText2, Route6GateText3
@@ -40849,7 +40198,6 @@ Route7GateScript: ; 1e100 (7:6100)
 	ld hl, Route7GateScripts
 	call CallFunctionInTable
 	ret
-; 0x1e10d
 
 Route7GateScripts: ; 1e10d (7:610d)
 	dw Route7GateScript0
@@ -40955,7 +40303,6 @@ Route8GateScript: ; 1e1c7 (7:61c7)
 	ld hl, Route8GateScripts
 	ld a, [W_ROUTE8GATECURSCRIPT]
 	jp CallFunctionInTable
-; 0x1e1d3
 
 Route8GateScripts: ; 1e1d3 (7:61d3)
 	dw Route8GateScript0
@@ -41003,7 +40350,6 @@ Route8GateScript0: ; 1e1ee (7:61ee)
 	ld a, $3
 	ld [$ff00+$8c], a
 	jp DisplayTextID
-; 0x1e22c
 
 Coords1e22c: ; 1e22c (7:622c)
 	db 3,2
@@ -41058,7 +40404,6 @@ UndergroundPathEntranceRoute8Script: ; 1e289 (7:6289)
 	ld a, $13
 	ld [$d365], a
 	jp EnableAutoTextBoxDrawing
-; 0x1e291
 
 UndergroundPathEntranceRoute8Texts: ; 1e291 (7:6291)
 	dw UndergroundPathEntranceRoute8Text1
@@ -41103,7 +40448,6 @@ PowerPlantScript: ; 1e2c6 (7:62c6)
 	call ExecuteCurMapScriptInTable
 	ld [W_POWERPLANTCURSCRIPT], a
 	ret
-; 0x1e2d9
 
 PowerPlantScriptPointers: ; 1e2d9 (7:62d9)
 	dw CheckFightingMapTrainers
@@ -41202,7 +40546,6 @@ asm_234cc: ; 1e368 (7:6368)
 	ld a, [W_CURMAPSCRIPT]
 	ld [W_POWERPLANTCURSCRIPT], a
 	jp TextScriptEnd
-; 0x1e374
 
 PowerPlantText1: ; 1e374 (7:6374)
 	db $8 ; asm
@@ -41248,12 +40591,10 @@ PowerPlantText9: ; 1e3a4 (7:63a4)
 	db $8 ; asm
 	ld hl, PowerPlantTrainerHeader8 ; $635b
 	jr asm_234cc ; 0x1e3a8 $be
-; 0x1e3aa
 
 VoltorbBattleText: ; 1e3aa (7:63aa)
 	TX_FAR _VoltorbBattleText ; 0x8c5e2
 	db "@"
-; 0x1e3af
 
 ZapdosBattleText: ; 1e3af (7:63af)
 	TX_FAR _ZapdosBattleText ; 0x8c5ea
@@ -41262,7 +40603,6 @@ ZapdosBattleText: ; 1e3af (7:63af)
 	call PlayCry
 	call WaitForSoundToFinish
 	jp TextScriptEnd
-; 0x1e3bf
 
 PowerPlantObject: ; 0x1e3bf (size=135)
 	db $2e ; border tile
@@ -41311,7 +40651,6 @@ DiglettsCaveEntranceRoute11Script: ; 1e5ba (7:65ba)
 	ld a, $16
 	ld [$d365], a
 	ret
-; 0x1e5c3
 
 DiglettsCaveEntranceRoute11Texts: ; 1e5c3 (7:65c3)
 	dw DiglettsCaveEntranceRoute11Text1
@@ -41350,7 +40689,6 @@ Route16House_h: ; 0x1e5ec to 0x1e5f8 (12 bytes) (bank=7) (id=188)
 
 Route16HouseScript: ; 1e5f8 (7:65f8)
 	jp EnableAutoTextBoxDrawing
-; 0x1e5fb
 
 Route16HouseTexts: ; 1e5fb (7:65fb)
 	dw Route16HouseText1, Route16HouseText2
@@ -41379,7 +40717,6 @@ Route16HouseText1: ; 1e5ff (7:65ff)
 Route16HouseText3: ; 1e62b (7:662b)
 	TX_FAR _Route16HouseText3
 	db "@"
-; 0x1e62b + 5 bytes
 
 ReceivedHM02Text: ; 1e630 (7:6630)
 	TX_FAR _ReceivedHM02Text ; 0x8ce66
@@ -41388,12 +40725,10 @@ ReceivedHM02Text: ; 1e630 (7:6630)
 HM02ExplanationText: ; 1e636 (7:6636)
 	TX_FAR _HM02ExplanationText
 	db "@"
-; 0x1e636 + 5 bytes
 
 HM02NoRoomText: ; 1e63b (7:663b)
 	TX_FAR _HM02NoRoomText
 	db "@"
-; 0x1e63b + 5 bytes
 
 Route16HouseText2: ; 1e640 (7:6640)
 	db $08 ; asm
@@ -41407,7 +40742,6 @@ Route16HouseText2: ; 1e640 (7:6640)
 UnnamedText_1e652: ; 1e652 (7:6652)
 	TX_FAR _UnnamedText_1e652
 	db "@"
-; 0x1e652 + 5 bytes
 
 Route16HouseObject: ; 0x1e657 (size=32)
 	db $a ; border tile
@@ -41447,7 +40781,6 @@ Route22GateScript: ; 1e683 (7:6683)
 .asm_1e69a
 	ld [$d365], a
 	ret
-; 0x1e69e
 
 Route22GateScripts: ; 1e69e (7:669e)
 	dw Route22GateScript0, Route22GateScript1, Route22GateScript2
@@ -41461,7 +40794,6 @@ Route22GateScript0: ; 1e6a4 (7:66a4)
 	ld a, $1
 	ld [$ff00+$8c], a
 	jp DisplayTextID
-; 0x1e6b5
 
 Route22GateScriptCoords: ; 1e6b5 (7:66b5)
 	db 2,4
@@ -41476,7 +40808,6 @@ Func_1e6ba: ; 1e6ba (7:66ba)
 	ld [$c109], a
 	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
 	jp Func_3486
-; 0x1e6cd
 
 Route22GateScript1: ; 1e6cd (7:66cd)
 	ld a, [$cd38]
@@ -41489,7 +40820,6 @@ Route22GateScript1: ; 1e6cd (7:66cd)
 	ld [W_ROUTE22GATECURSCRIPT], a
 Route22GateScript2: ; 1e6de (7:66de)
 	ret
-; 0x1e6df
 
 Route22GateTexts: ; 1e6df (7:66df)
 	dw Route22GateText1
@@ -41511,7 +40841,6 @@ Route22GateText1: ; 1e6e1 (7:66e1)
 .asm_20f7e ; 0x1e6fe
 	ld [W_ROUTE22GATECURSCRIPT], a
 	jp TextScriptEnd
-; 0x1e704
 
 UnnamedText_1e704: ; 1e704 (7:6704)
 	TX_FAR _UnnamedText_1e704 ; 0x8cfbb
@@ -41521,17 +40850,14 @@ UnnamedText_1e704: ; 1e704 (7:6704)
 	call WaitForSoundToFinish
 	ld hl, UnnamedText_1e715 ; $6715
 	ret
-; 0x1e715
 
 UnnamedText_1e715: ; 1e715 (7:6715)
 	TX_FAR _UnnamedText_1e715
 	db "@"
-; 0x1e71a
 
 UnnamedText_1e71a: ; 1e71a (7:671a)
 	TX_FAR _UnnamedText_1e71a ; 0x8d03e
 	db $0B, "@"
-; 0x1e720
 
 Route22GateObject: ; 0x1e720 (size=42)
 	db $a ; border tile
@@ -41569,7 +40895,6 @@ BillsHouseScript: ; 1e76a (7:676a)
 	ld a, [W_BILLSHOUSECURSCRIPT]
 	ld hl, BillsHouseScripts
 	jp CallFunctionInTable
-; 0x1e776
 
 BillsHouseScripts: ; 1e776 (7:6776)
 	dw BillsHouseScript0
@@ -41704,17 +41029,14 @@ asm_fd4e2 ; 0x1e862
 UnnamedText_1e865: ; 1e865 (7:6865)
 	TX_FAR _UnnamedText_1e865 ; 0x8d267
 	db "@"
-; 0x1e86a
 
 UnnamedText_1e86a: ; 1e86a (7:686a)
 	TX_FAR _UnnamedText_1e86a ; 0x8d345
 	db "@"
-; 0x1e86f
 
 UnnamedText_1e86f: ; 1e86f (7:686f)
 	TX_FAR _UnnamedText_1e86f ; 0x8d391
 	db "@"
-; 0x1e874
 
 BillsHouseText2: ; 1e874 (7:6874)
 	db $08 ; asm
@@ -41751,7 +41073,6 @@ BillsHouseText2: ; 1e874 (7:6874)
 BillThankYouText: ; 1e8ba (7:68ba)
 	TX_FAR _BillThankYouText
 	db "@"
-; 0x1e8ba + 5 bytes
 
 SSTicketReceivedText: ; 1e8bf (7:68bf)
 	TX_FAR _SSTicketReceivedText ; 0x8d499
@@ -41760,24 +41081,20 @@ SSTicketReceivedText: ; 1e8bf (7:68bf)
 SSTicketNoRoomText: ; 1e8c6 (7:68c6)
 	TX_FAR _SSTicketNoRoomText
 	db "@"
-; 0x1e8c6 + 5 bytes
 
 UnnamedText_1e8cb: ; 1e8cb (7:68cb)
 	TX_FAR _UnnamedText_1e8cb
 	db "@"
-; 0x1e8cb + 5 bytes
 
 BillsHouseText3: ; 1e8d0 (7:68d0)
 	db $08 ; asm
 	ld hl, UnnamedText_1e8da
 	call PrintText
 	jp TextScriptEnd
-; 0x1e8da
 
 UnnamedText_1e8da: ; 1e8da (7:68da)
 	TX_FAR _UnnamedText_1e8da
 	db "@"
-; 0x1e8da + 5 bytes
 
 BillsHouseObject: ; 0x1e8df (size=38)
 	db $d ; border tile
@@ -41800,7 +41117,6 @@ BillsHouseObject: ; 0x1e8df (size=38)
 BillsHouseBlocks: ; 1e905 (7:6905)
 	INCBIN "maps/billshouse.blk"
 
-; known jump sources: 17ecd (5:7ecd)
 Func_1e915: ; 1e915 (7:6915)
 	call SaveScreenTilesToBuffer2
 	ld hl, UnnamedText_1e946 ; $6946
@@ -41817,11 +41133,10 @@ Func_1e915: ; 1e915 (7:6915)
 	ld hl, UnnamedText_1e940 ; $6940
 	call PrintText
 	jp LoadScreenTilesFromBuffer2
-; 1e93b (7:693b)
+
 UnnamedText_1e93b: ; 1e93b (7:693b)
 	TX_FAR _UnnamedText_1e93b
 	db "@"
-; 0x1e93b + 5 bytes
 
 UnnamedText_1e940: ; 1e940 (7:6940)
 	TX_FAR _UnnamedText_1e940
@@ -41830,7 +41145,6 @@ UnnamedText_1e940: ; 1e940 (7:6940)
 UnnamedText_1e946: ; 1e946 (7:6946)
 	TX_FAR _UnnamedText_1e946
 	db "@"
-; 0x1e946 + 5 bytes
 
 	call EnableAutoTextBoxDrawing
 	ld a, $39
@@ -41839,7 +41153,6 @@ UnnamedText_1e946: ; 1e946 (7:6946)
 UnnamedText_1e953: ; 1e953 (7:6953)
 	TX_FAR _UnnamedText_1e953
 	db "@"
-; 0x1e953 + 5 bytes
 
 	call EnableAutoTextBoxDrawing
 	ld a, $05
@@ -41848,7 +41161,6 @@ UnnamedText_1e953: ; 1e953 (7:6953)
 UnnamedText_1e960: ; 1e960 (7:6960)
 	TX_FAR _UnnamedText_1e960
 	db "@"
-; 0x1e960 + 5 bytes
 
 	call EnableAutoTextBoxDrawing
     ld hl, $d2f7
@@ -41865,14 +41177,11 @@ UnnamedText_1e960: ; 1e960 (7:6960)
 UnnamedText_1e97e: ; 1e97e (7:697e)
 	TX_FAR _UnnamedText_1e97e
 	db "@"
-; 0x1e97e + 5 bytes
 
 UnnamedText_1e983: ; 1e983 (7:6983)
 	TX_FAR _UnnamedText_1e983
 	db "@"
-; 0x1e983 + 5 bytes
 
-; known jump sources: 41f (0:41f)
 Func_1e988: ; 1e988 (7:6988)
 	ld hl, $d790
 	bit 7, [hl]
@@ -41882,7 +41191,6 @@ Func_1e988: ; 1e988 (7:6988)
 	jr z, asm_1e9b0
 	jr asm_1e9ab
 
-; known jump sources: 60f (0:60f)
 Func_1e997: ; 1e997 (7:6997)
 	ld a, [W_SAFARITIMER1] ; $d70d
 	ld b, a
@@ -41929,7 +41237,6 @@ asm_1e9b0: ; 1e9b0 (7:69b0)
 	ld [$da46], a
 	ret
 
-; known jump sources: 2a95 (0:2a95)
 Func_1e9ed: ; 1e9ed (7:69ed)
 	xor a
 	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
@@ -41947,16 +41254,14 @@ INCBIN "baserom.gbc",$1e9f7,$1e9f8 - $1e9f7
 	ld hl, UnnamedText_1ea12 ; $6a12
 	call PrintText
 	jp TextScriptEnd
-; 1ea0d (7:6a0d)
+
 UnnamedText_1ea0d: ; 1ea0d (7:6a0d)
 	TX_FAR _UnnamedText_1ea0d
 	db "@"
-; 0x1ea0d + 5 bytes
 
 UnnamedText_1ea12: ; 1ea12 (7:6a12)
 	TX_FAR _UnnamedText_1ea12
 	db "@"
-; 0x1ea12 + 5 bytes
 
 	ld a, [$c109]
 	cp $4
@@ -41993,11 +41298,10 @@ INCBIN "baserom.gbc",$1ea25,$1ea26 - $1ea25
 	ld [$cc3c], a
 	call Func_1ea92
 	jp TextScriptEnd
-; 1ea5b (7:6a5b)
+
 UnnamedText_1ea5b: ; 1ea5b (7:6a5b)
 	TX_FAR _UnnamedText_1ea5b
 	db "@"
-; 0x1ea5b + 5 bytes
 
 PointerTable_1ea60: ; 1ea60 (7:6a60)
 	dw UnnamedText_1ea6c
@@ -42010,40 +41314,32 @@ PointerTable_1ea60: ; 1ea60 (7:6a60)
 UnnamedText_1ea6c: ; 1ea6c (7:6a6c)
 	TX_FAR _UnnamedText_1ea6c
 	db "@"
-; 0x1ea6c + 5 bytes
 
 UnnamedText_1ea71: ; 1ea71 (7:6a71)
 	TX_FAR _UnnamedText_1ea71
 	db "@"
-; 0x1ea71 + 5 bytes
 
 UnnamedText_1ea76: ; 1ea76 (7:6a76)
 	TX_FAR _UnnamedText_1ea76
 	db "@"
-; 0x1ea76 + 5 bytes
 
 UnnamedText_1ea7b: ; 1ea7b (7:6a7b)
 	TX_FAR _UnnamedText_1ea7b
 	db "@"
-; 0x1ea7b + 5 bytes
 
 UnnamedText_1ea80: ; 1ea80 (7:6a80)
 	TX_FAR _UnnamedText_1ea80
 	db "@"
-; 0x1ea80 + 5 bytes
 
 UnnamedText_1ea85: ; 1ea85 (7:6a85)
 	TX_FAR _UnnamedText_1ea85
 	db "@"
-; 0x1ea85 + 5 bytes
 
-; known jump sources: 1eab2 (7:6ab2), 1eaef (7:6aef), 1eb2a (7:6b2a)
 Func_1ea8a: ; 1ea8a (7:6a8a)
 	ld hl, $d79c
 	ld a, $10
 	jp Predef ; indirect jump to HandleBitArray (f666 (3:7666))
 
-; known jump sources: 1ea55 (7:6a55)
 Func_1ea92: ; 1ea92 (7:6a92)
 	call YesNoChoice
 	ld a, [$FF00+$dc]
@@ -42101,13 +41397,11 @@ UnnamedText_1eae3: ; 1eae3 (7:6ae3)
 	call PlaySound
 	call WaitForSoundToFinish
 	jp TextScriptEnd
-; 1eb05 (7:6b05)
+
 UnnamedText_1eb05: ; 1eb05 (7:6b05)
 	TX_FAR _UnnamedText_1eb05
 	db "@"
-; 0x1eb05 + 5 bytes
 
-; known jump sources: 3eb2 (0:3eb2), 1eab5 (7:6ab5)
 Func_1eb0a: ; 1eb0a (7:6b0a)
 	ld a, $6
 	ld [$FF00+$db], a
@@ -42167,7 +41461,6 @@ CinnabarGymGateCoords: ; 1eb48 (7:6b48)
 UnnamedText_1eb69: ; 1eb69 (7:6b69)
 	TX_FAR _UnnamedText_1eb69
 	db "@"
-; 0x1eb69 + 5 bytes
 
 	call EnableAutoTextBoxDrawing
 	ld a, [$c109]
@@ -42218,11 +41511,10 @@ UnnamedText_1eb69: ; 1eb69 (7:6b69)
 	ld a, $2f
 	call Func_3ef5
 	ret
-; 1ebdd (7:6bdd)
+
 UnnamedText_1ebdd: ; 1ebdd (7:6bdd)
 	TX_FAR _UnnamedText_1ebdd
 	db "@"
-; 0x1ebdd + 5 bytes
 
 UnnamedText_1ebe2: ; 1ebe2 (7:6be2
 	TX_FAR _UnnamedText_1ebe2
@@ -42297,7 +41589,6 @@ INCBIN "baserom.gbc",$1ec05,$1ec06 - $1ec05
 UnnamedText_1ec7f: ; 1ec7f (7:6c7f)
 	TX_FAR _UnnamedText_1ec7f
 	db "@"
-; 0x1ec7f + 5 bytes
 
 BillsMonListText: ; 1ec84 (7:6c84)
 	db "EEVEE",$4e,"FLAREON",$4e,"JOLTEON",$4e,"VAPOREON",$4e,"CANCEL@"
@@ -42305,7 +41596,6 @@ BillsMonListText: ; 1ec84 (7:6c84)
 UnnamedText_1ecaa: ; 1ecaa (7:6caa)
 	TX_FAR _UnnamedText_1ecaa
 	db "@"
-; 0x1ecaa + 5 bytes
 
 Unknown_1ecaf
 	ld a, [$c109]
@@ -42318,7 +41608,6 @@ Unknown_1ecaf
 UnnamedText_1ecbd: ; 1ecbd (7:6cbd)
 	TX_FAR _UnnamedText_1ecbd
 	db "@"
-; 0x1ecbd + 5 bytes
 
 SECTION "bank8",ROMX,BANK[$8]
 
@@ -42363,12 +41652,10 @@ Func_2136e: ; 2136e (8:536e)
 	ld de, Unknown_213c4 ; $53c4
 	jr asm_213af
 
-; known jump sources: 2137c (8:537c)
 Func_213a7: ; 213a7 (8:53a7)
 	ld de, Unknown_213bc ; $53bc
 	jr asm_213af
 
-; known jump sources: 21387 (8:5387)
 Func_213ac: ; 213ac (8:53ac)
 	ld de, Unknown_213c0 ; $53c0
 asm_213af: ; 213af (8:53af)
@@ -42392,7 +41679,6 @@ INCBIN "baserom.gbc",$213c0,$213c4 - $213c0
 Unknown_213c4: ; 213c4 (8:53c4)
 INCBIN "baserom.gbc",$213c4,$213c8 - $213c4
 
-; known jump sources: 17e4d (5:7e4d)
 Func_213c8: ; 213c8 (8:53c8)
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
@@ -42509,7 +41795,6 @@ PKMNLeaguePCText: ; 214b2 (8:54b2)
 LogOffPCText: ; 214ba (8:54ba)
 	db "LOG OFF@"
 
-; known jump sources: 17f03 (5:7f03)
 Func_214c2: ; 214c2 (8:54c2)
 	ld hl, $d730
 	set 6, [hl]
@@ -42528,7 +41813,6 @@ Func_214c2: ; 214c2 (8:54c2)
 	ld hl, UnnamedText_217e9 ; $57e9
 	call PrintText
 
-; known jump sources: 214db (8:54db), 215b8 (8:55b8), 215c8 (8:55c8), 215d1 (8:55d1), 215d7 (8:55d7), 21615 (8:5615), 21624 (8:5624), 21634 (8:5634), 2163d (8:563d), 21643 (8:5643), 21670 (8:5670), 2167f (8:567f), 21688 (8:5688), 216b0 (8:56b0), 216bb (8:56bb)
 Func_214e8: ; 214e8 (8:54e8)
 	ld a, [$ccd3]
 	ld [W_CURMENUITEMID], a ; $cc26
@@ -42607,7 +41891,6 @@ Func_214e8: ; 214e8 (8:54e8)
 	cp $3
 	jp z, Func_216b3
 
-; known jump sources: 21569 (8:5569)
 Func_21588: ; 21588 (8:5588)
 	ld a, [W_FLAGS_CD60]
 	bit 3, a
@@ -42626,7 +41909,6 @@ Func_21588: ; 21588 (8:5588)
 	res 6, [hl]
 	ret
 
-; known jump sources: 2157b (8:557b)
 Func_215ac: ; 215ac (8:55ac)
 	ld a, [W_NUMINPARTY] ; $d163
 	dec a
@@ -42676,7 +41958,6 @@ Func_215ac: ; 215ac (8:55ac)
 	call PrintText
 	jp Func_214e8
 
-; known jump sources: 21576 (8:5576)
 Func_21618: ; 21618 (8:5618)
 	ld a, [W_NUMINBOX] ; $da80
 	and a
@@ -42714,7 +41995,6 @@ Func_21618: ; 21618 (8:5618)
 	call PrintText
 	jp Func_214e8
 
-; known jump sources: 21580 (8:5580)
 Func_21673: ; 21673 (8:5673)
 	ld a, [W_NUMINBOX] ; $da80
 	and a
@@ -42742,14 +42022,12 @@ Func_21673: ; 21673 (8:5673)
 	call PrintText
 	jp Func_214e8
 
-; known jump sources: 21585 (8:5585)
 Func_216b3: ; 216b3 (8:56b3)
 	ld b, BANK(Func_738a1)
 	ld hl, Func_738a1
 	call Bankswitch ; indirect jump to Func_738a1 (738a1 (1c:78a1))
 	jp Func_214e8
 
-; known jump sources: 215ce (8:55ce), 2163a (8:563a), 21685 (8:5685)
 Func_216be: ; 216be (8:56be)
 	ld a, l
 	ld [$cf8b], a
@@ -42797,7 +42075,6 @@ Func_2171b: ; 2171b (8:571b)
 	jr nz, .asm_21731 ; 0x21741 $ee
 	and a
 	ret
-; 0x21745
 
 HMMoveArray: ; 21745 (8:5745)
 	db CUT
@@ -42807,7 +42084,6 @@ HMMoveArray: ; 21745 (8:5745)
 	db FLASH
 	db $ff
 
-; known jump sources: 215d4 (8:55d4), 21640 (8:5640)
 Func_2174b: ; 2174b (8:574b)
 	FuncCoord 9, 10 ; $c471
 	ld hl, Coord
@@ -42892,62 +42168,50 @@ StatsCancelPCText: ; 217dc (8:57dc)
 UnnamedText_217e9: ; 217e9 (8:57e9)
 	TX_FAR _UnnamedText_217e9
 	db "@"
-; 0x217e9 + 5 bytes
 
 UnnamedText_217ee: ; 217ee (8:57ee)
 	TX_FAR _UnnamedText_217ee
 	db "@"
-; 0x217ee + 5 bytes
 
 UnnamedText_217f3: ; 217f3 (8:57f3)
 	TX_FAR _UnnamedText_217f3
 	db "@"
-; 0x217f3 + 5 bytes
 
 UnnamedText_217f8: ; 217f8 (8:57f8)
 	TX_FAR _UnnamedText_217f8
 	db "@"
-; 0x217f8 + 5 bytes
 
 UnnamedText_217fd: ; 217fd (8:57fd)
 	TX_FAR _UnnamedText_217fd
 	db "@"
-; 0x217fd + 5 bytes
 
 UnnamedText_21802: ; 21802 (8:5802)
 	TX_FAR _UnnamedText_21802
 	db "@"
-; 0x21802 + 5 bytes
 
 UnnamedText_21807: ; 21807 (8:5807)
 	TX_FAR _UnnamedText_21807
 	db "@"
-; 0x21807 + 5 bytes
 
 UnnamedText_2180c: ; 2180c (8:580c)
 	TX_FAR _UnnamedText_2180c
 	db "@"
-; 0x2180c + 5 bytes
 
 UnnamedText_21811: ; 21811 (8:5811)
 	TX_FAR _UnnamedText_21811
 	db "@"
-; 0x21811 + 5 bytes
 
 UnnamedText_21816: ; 21816 (8:5816)
 	TX_FAR _UnnamedText_21816
 	db "@"
-; 0x21816 + 5 bytes
 
 UnnamedText_2181b: ; 2181b (8:581b)
 	TX_FAR _UnnamedText_2181b
 	db "@"
-; 0x2181b + 5 bytes
 
 UnnamedText_21820: ; 21820 (8:5820)
 	TX_FAR _UnnamedText_21820
 	db "@"
-; 0x21820 + 5 bytes
 
 	ld a, [$ff00+$aa]
 	cp $1
@@ -42986,7 +42250,6 @@ UnnamedText_21820: ; 21820 (8:5820)
 UnnamedText_21865: ; 21865 (8:5865)
 	TX_FAR _UnnamedText_21865
 	db "@"
-; 0x21865 + 5 bytes
 
 	ld a, [$c109]
 	cp $4
@@ -44856,7 +44119,6 @@ TangelaPicFront: ; 27b39 (9:7b39)
 TangelaPicBack: ; 27ce7 (9:7ce7)
 	INCBIN "pic/monback/tangelab.pic"
 
-; known jump sources: 12a35 (4:6a35), 70320 (1c:4320)
 Func_27d6b: ; 27d6b (9:7d6b)
 	call Load16BitRegisters
 	push hl
@@ -44874,7 +44136,6 @@ Func_27d6b: ; 27d6b (9:7d6b)
 	ld bc, $28
 	add hl, bc
 
-; known jump sources: 27d77 (9:7d77)
 Func_27d89: ; 27d89 (9:7d89)
 	push hl
 	jr asm_27d9f
@@ -44885,7 +44146,6 @@ asm_27d8c: ; 27d8c (9:7d8c)
 	ld bc, $6
 	jp FillMemory
 
-; known jump sources: 3d54b (f:554b)
 Func_27d98: ; 27d98 (9:7d98)
 	call Load16BitRegisters
 	push hl
@@ -44901,7 +44161,7 @@ asm_27d9f: ; 27d9f (9:7d9f)
 	ld d, [hl]
 	pop hl
 	jp PlaceString
-; 27dae (9:7dae)
+
 TypeNamePointers: ; 27dae (9:7dae)
 	dw Type00Name
 	dw Type01Name
@@ -45077,7 +44337,6 @@ CooltrainerMName: ; 27f6c (9:7f6c)
 CooltrainerFName: ; 27f79 (9:7f79)
 	db "COOLTRAINER♀@"
 
-; known jump sources: 3f94e (f:794e)
 Func_27f86: ; 27f86 (9:7f86)
 	ld hl, W_PLAYERBATTSTATUS2 ; $d063
 	ld a, [H_WHOSETURN] ; $FF00+$f3
@@ -45104,7 +44363,6 @@ UnnamedText_27fb3: ; 27fb3 (9:7fb3)
 	db $0a
 	TX_FAR _UnnamedText_27fb3
 	db "@"
-; 0x27fb3 + 5 bytes
 
 SECTION "bankA",ROMX,BANK[$A]
 GrowlithePicFront: ; 28000 (a:4000)
@@ -45236,7 +44494,6 @@ MoltresPicFront: ; 2bbac (a:7bac)
 MoltresPicBack: ; 2be02 (a:7e02)
 	INCBIN "pic/monback/moltresb.pic"
 
-; known jump sources: 3fa81 (f:7a81)
 Func_2bea9: ; 2bea9 (a:7ea9)
 	ld hl, MoveHitTest
 	ld b, BANK(MoveHitTest)
@@ -45272,16 +44529,14 @@ Func_2bea9: ; 2bea9 (a:7ea9)
 	call DelayFrames
 	ld hl, UnnamedText_2bef7 ; $7ef7
 	jp PrintText
-; 2bef2 (a:7ef2)
+
 UnnamedText_2bef2: ; 2bef2 (a:7ef2)
 	TX_FAR _UnnamedText_2bef2
 	db "@"
-; 0x2bef2 + 5 bytes
 
 UnnamedText_2bef7: ; 2bef7 (a:7ef7)
 	TX_FAR _UnnamedText_2bef7
 	db "@"
-; 0x2bef7 + 5 bytes
 
 SECTION "bankB",ROMX,BANK[$B]
 ArticunoPicFront: ; 2c000 (b:4000)
@@ -45437,12 +44692,10 @@ DisplayEffectiveness: ; 2fb7b (b:7b7b)
 UnnamedText_2fb8e: ; 2fb8e (b:7b8e)
 	TX_FAR _UnnamedText_2fb8e
 	db "@"
-; 0x2fb8e + 5 bytes
 
 UnnamedText_2fb93: ; 2fb93 (b:7b93)
 	TX_FAR _UnnamedText_2fb93
 	db "@"
-; 0x2fb93 + 5 bytes
 
 TrainerInfoTextBoxTileGraphics: ; 2fb98 (b:7b98)
 INCBIN "gfx/trainer_info.2bpp"
@@ -45456,7 +44709,6 @@ INCBIN "gfx/circle_tile.2bpp"
 BadgeNumbersTileGraphics: ; 2fd98 (b:7d98)
 INCBIN "gfx/badge_numbers.2bpp"
 
-; known jump sources: e530 (3:6530)
 Func_2fe18: ; 2fe18 (b:7e18)
 	ld a, [W_WHICHPOKEMON] ; $cf92
 	ld hl, W_PARTYMON1_MOVE1 ; $d173
@@ -45478,13 +44730,11 @@ Func_2fe18: ; 2fe18 (b:7e18)
 	call PrintText
 	scf
 	ret
-; 2fe3b (b:7e3b)
+
 UnnamedText_2fe3b: ; 2fe3b (b:7e3b)
 	TX_FAR _UnnamedText_2fe3b
 	db "@"
-; 0x2fe3b + 5 bytes
 
-; known jump sources: 3eca5 (f:6ca5), 3f11b (f:711b), 70362 (1c:4362)
 ; scales both uncompressed sprite chunks by two in every dimension (creating 2x2 output pixels per input pixel)
 ; assumes that input sprite chunks are 4x4 tiles, and the rightmost and bottommost 4 pixels will be ignored
 ; resulting in a 7*7 tile output sprite chunk
@@ -45497,7 +44747,6 @@ ScaleSpriteByTwo: ; 2fe40 (b:7e40)
 	ld hl, S_SPRITEBUFFER1 + SPRITEBUFFERSIZE - 1 ; end of destination buffer
 	call ScaleLastSpriteColumnByTwo               ; last tile column is special case
 
-; known jump sources: 2fe49 (b:7e49)
 ScaleFirstThreeSpriteColumnsByTwo: ; 2fe55 (b:7e55)
 	ld b, $3 ; 3 tile columns
 .columnLoop
@@ -45527,7 +44776,6 @@ ScaleFirstThreeSpriteColumnsByTwo: ; 2fe55 (b:7e55)
 	jr nz, .columnLoop
 	ret
 
-; known jump sources: 2fe46 (b:7e46), 2fe52 (b:7e52)
 ScaleLastSpriteColumnByTwo: ; 2fe7d (b:7e7d)
 	ld a, 4*8 - 4 ; $1c, 4 tiles minus 4 unused rows
 	ld [H_SPRITEINTERLACECOUNTER], a ; $FF00+$8b
@@ -45547,7 +44795,6 @@ ScaleLastSpriteColumnByTwo: ; 2fe7d (b:7e7d)
 	dec de
 	ret
 
-; known jump sources: 2fe5e (b:7e5e), 2fe68 (b:7e68), 2fe88 (b:7e88)
 ; scales the given 4 bits in a (4x1 pixels) to 2 output bytes (8x2 pixels)
 ; hl: destination pointer
 ; bc: destination pointer offset (added after the two bytes have been written)
@@ -45574,7 +44821,6 @@ db $30, $33, $3c, $3f
 db $c0, $c3, $cc, $cf
 db $f0, $f3, $fc, $ff
 
-; no known jump sources
 Func_2feb8 ; 0x2feb8
 	xor a
 	ld hl, $cd6d
@@ -45615,12 +44861,10 @@ Func_2feb8 ; 0x2feb8
 	call Predef
 	ld hl, UnnamedText_2ff04 ; $7f04
 	jp PrintText
-; 0x2ff04
 
 UnnamedText_2ff04: ; 2ff04 (b:7f04)
 	TX_FAR _UnnamedText_2ff04
 	db "@"
-; 0x2ff04 + 5 bytes
 
 	ld a, [$c102]
 	and $8
@@ -45649,12 +44893,10 @@ UnnamedText_2ff04: ; 2ff04 (b:7f04)
 UnnamedText_2ff32: ; 2ff32 (b:7f32)
 	TX_FAR _UnnamedText_2ff32
 	db "@"
-; 0x2ff32 + 5 bytes
 
 UnnamedText_2ff37: ; 2ff37 (b:7f37)
 	TX_FAR _UnnamedText_2ff37
 	db "@"
-; 0x2ff37 + 5 bytes
 
 SECTION "bankC",ROMX,BANK[$C]
 DodrioPicFront: ; 30000 (c:4000)
@@ -45800,9 +45042,7 @@ OldManPic: ; 33e9a (c:7e9a)
 UnnamedText_33f52: ; 33f52 (c:7f52)
 	TX_FAR _UnnamedText_33f52
 	db "@"
-; 0x33f52 + 5 bytes
 
-; known jump sources: 3f889 (f:7889)
 Func_33f57: ; 33f57 (c:7f57)
 	ld hl, W_DAMAGE ; $d0d7
 	xor a
@@ -45839,7 +45079,7 @@ Func_33f57: ; 33f57 (c:7f57)
 	ld a, $1
 	ld [W_MOVEMISSED], a ; $d05f
 	ret
-; 33f90 (c:7f90)
+
 SECTION "bankD",ROMX,BANK[$D]
 BulbasaurPicFront: ; 34000 (d:4000)
 	INCBIN "pic/bmon/bulbasaur.pic"
@@ -45959,7 +45199,6 @@ INCBIN "baserom.gbc",$37247,$3724f - $37247
 Unknown_3724f: ; 3724f (d:724f)
 INCBIN "baserom.gbc",$3724f,$37258 - $3724f
 
-; known jump sources: 44bd (1:44bd), 44c8 (1:44c8)
 LoadScreenTilesFromBuffer18: ; 37258 (d:7258)
 	ld a, d
 	ld bc, Unknown_37247 ; $7247
@@ -45971,7 +45210,6 @@ LoadScreenTilesFromBuffer18: ; 37258 (d:7258)
 	ld d, $0
 	ld e, $0
 
-; known jump sources: 37261 (d:7261), 37290 (d:7290), 372c1 (d:72c1)
 Func_3726a: ; 3726a (d:726a)
 	ld a, [bc]
 	and a
@@ -46001,7 +45239,6 @@ Func_3726a: ; 3726a (d:726a)
 	pop bc
 	jr Func_3726a
 
-; known jump sources: 3727c (d:727c), 37283 (d:7283), 37295 (d:7295)
 Func_37292: ; 37292 (d:7292)
 	ld a, [$FF00+$44]
 	cp l
@@ -46017,7 +45254,6 @@ Func_37292: ; 37292 (d:7292)
 Unknown_372a0: ; 372a0 (d:72a0)
 INCBIN "baserom.gbc",$372a0,$372ac - $372a0
 
-; known jump sources: 4451 (1:4451)
 Func_372ac: ; 372ac (d:72ac)
 	ld a, [W_WHICHTRADE] ; $cd3d
 	cp $b0
@@ -46032,7 +45268,6 @@ Func_372ac: ; 372ac (d:72ac)
 	ld d, $0
 	jp Func_3726a
 
-; known jump sources: 37289 (d:7289)
 Func_372c4: ; 372c4 (d:72c4)
 	push de
 	push hl
@@ -46049,7 +45284,6 @@ Func_372c4: ; 372c4 (d:72c4)
 	inc e
 	ret
 
-; known jump sources: 137c9 (4:77c9), 3ec42 (f:6c42)
 Func_372d6: ; 372d6 (d:72d6)
 	call LoadTextBoxTilePatterns
 	FuncCoord 3, 4 ; $c3f3
@@ -46083,41 +45317,34 @@ INCBIN "baserom.gbc",$3730e,$37390 - $3730e
 UnnamedText_37390: ; 37390 (d:7390)
 	TX_FAR _UnnamedText_37390
 	db "@"
-; 0x37390 + 5 bytes
 
 INCBIN "baserom.gbc",$37395,$37467 - $37395
 
 UnnamedText_37467: ; 37467 (d:7467)
 	TX_FAR _UnnamedText_37467
 	db "@"
-; 0x37467 + 5 bytes
 
 UnnamedText_3746c: ; 3746c (d:746c)
 	TX_FAR _UnnamedText_3746c
 	db "@"
-; 0x3746c + 5 bytes
 
 UnnamedText_37471: ; 37471 (d:7471)
 	TX_FAR _UnnamedText_37471
 	db "@"
-; 0x37471 + 5 bytes
 
 UnnamedText_37476: ; 37476 (d:7476)
 	TX_FAR _UnnamedText_37476
 	db "@"
-; 0x37476 + 5 bytes
 
 UnnamedText_3747b: ; 3747b (d:747b)
 	TX_FAR _UnnamedText_3747b
 	db "@"
-; 0x3747b + 5 bytes
 
 INCBIN "baserom.gbc",$37480,$37673 - $37480
 
 UnnamedText_37673: ; 37673 (d:7673)
 	TX_FAR _UnnamedText_37673
 	db "@"
-; 0x37673 + 5 bytes
 
 INCBIN "baserom.gbc",$37678,$37690 - $37678
 
@@ -46127,7 +45354,6 @@ SlotRewardValues:
 UnnamedText_3769d: ; 3769d (d:769d)
 	TX_FAR _UnnamedText_3769d
 	db "@"
-; 0x3769d + 5 bytes
 
 INCBIN "baserom.gbc",$376a2,$378f5 - $376a2
 
@@ -46146,7 +45372,6 @@ ENDC
 
 INCBIN "baserom.gbc",$37ca1,$37d41 - $37ca1
 
-; known jump sources: 38b3 (0:38b3)
 _Multiply: ; 37d41 (d:7d41)
 	ld a, $8
 	ld b, a
@@ -46208,7 +45433,6 @@ _Multiply: ; 37d41 (d:7d41)
 	ld [H_DIVIDEND], a ; $FF00+$95 (aliases: H_PRODUCT, H_PASTLEADINGZEROES, H_QUOTIENT)
 	ret
 
-; known jump sources: 38c6 (0:38c6)
 _Divide: ; 37da5 (d:7da5)
 	xor a
 	ld [$FF00+$9a], a
@@ -46297,17 +45521,14 @@ INCBIN "baserom.gbc",$37e2d,$37e79 - $37e2d
 UnnamedText_37e79: ; 37e79 (d:7e79)
 	TX_FAR _UnnamedText_37e79
 	db "@"
-; 0x37e79 + 5 bytes
 
 UnnamedText_37e7e: ; 37e7e (d:7e7e)
 	TX_FAR _UnnamedText_37e7e
 	db "@"
-; 0x37e7e + 5 bytes
 
 UnnamedText_37e83: ; 37e83 (d:7e83)
 	TX_FAR _UnnamedText_37e83
 	db "@"
-; 0x37e83 + 5 bytes
 
 SECTION "bankE",ROMX,BANK[$E]
 
@@ -52224,7 +51445,6 @@ CryData: ; 39446 (e:5446)
 	db $25, $44, $20; Weepinbell
 	db $25, $66, $CC; Victreebel
 
-; known jump sources: 3ed07 (f:6d07)
 Func_39680: ; 39680 (e:5680)
 	ld a, [H_WHOSETURN] ; $FF00+$f3
 	and a
@@ -52245,7 +51465,6 @@ Func_39680: ; 39680 (e:5680)
 	ret z
 	jr .asm_39694
 
-; known jump sources: 39696 (e:5696)
 Func_3969f: ; 3969f (e:569f)
 	ld a, [hl]
 	add a
@@ -52255,7 +51474,6 @@ Func_3969f: ; 3969f (e:569f)
 	ld [hli], a
 	ret
 
-; known jump sources: 3ed0f (f:6d0f)
 Func_396a7: ; 396a7 (e:56a7)
 	ld a, [H_WHOSETURN] ; $FF00+$f3
 	and a
@@ -52276,7 +51494,6 @@ Func_396a7: ; 396a7 (e:56a7)
 	ret z
 	jr .asm_396bb
 
-; known jump sources: 396bd (e:56bd)
 Func_396c6: ; 396c6 (e:56c6)
 	ld a, [hl]
 	srl a
@@ -52289,7 +51506,6 @@ Func_396c6: ; 396c6 (e:56c6)
 	dec hl
 	ret
 
-; known jump sources: 3ed17 (f:6d17)
 Func_396d3: ; 396d3 (e:56d3)
 	xor a
 	ld [W_ENEMYMONID], a
@@ -52324,7 +51540,6 @@ Func_396d3: ; 396d3 (e:56d3)
 	dec hl
 	jr .asm_396e9
 
-; known jump sources: 396f2 (e:56f2)
 Func_39707: ; 39707 (e:5707)
 	push hl
 	push de
@@ -52341,7 +51556,7 @@ Func_39707: ; 39707 (e:5707)
 	pop de
 	pop hl
 	ret
-; 39719 (e:5719)
+
 ; creates a set of moves that may be used and returns its address in hl
 ; unused slots are filled with 0, all used slots may be chosen with equal probability
 AIEnemyTrainerChooseMoves: ; 39719 (e:5719)
@@ -52857,7 +52072,6 @@ TrainerNames: ; 399ff (e:59ff)
 	db "AGATHA@"
 	db "LANCE@"
 
-; known jump sources: 6f35 (1:6f35), 12b79 (4:6b79), 3d232 (f:5232)
 Func_39b87: ; 39b87 (e:5b87)
 	ld hl, $d0dc
 	ld de, $d0e1
@@ -52910,7 +52124,6 @@ Func_39b87: ; 39b87 (e:5b87)
 	ld [de], a
 	ret
 
-; known jump sources: 6c76 (1:6c76), 6d2d (1:6d2d)
 Func_39bd5: ; 39bd5 (e:5bd5)
 	ld a, [$d11b]
 	cp $1
@@ -52961,7 +52174,6 @@ Func_39bd5: ; 39bd5 (e:5bd5)
 	ld [$cf90], a
 	ret
 
-; known jump sources: 45cc (1:45cc)
 Func_39c37: ; 39c37 (e:5c37)
 	ld hl, W_PARTYMON1 ; $d164
 	ld a, [$cc49]
@@ -52979,7 +52191,7 @@ Func_39c37: ; 39c37 (e:5c37)
 	ld a, [hl]
 	ld [$cf91], a
 	ret
-; 39c53 (e:5c53)
+
 ReadTrainer: ; 39c53 (e:5c53)
 
 ; don't change any moves in a link battle
@@ -54179,7 +53391,6 @@ AIUseFullRestore: ; 3a6a0 (e:66a0)
 	ld [W_HPBARMAXHP+1],a
 	ld [W_ENEMYMONCURHP],a
 	jr Function6718
-; 0x3a6ca
 
 AIUsePotion: ; 3a6ca (e:66ca)
 ; enemy trainer heals his monster with a potion
@@ -54440,7 +53651,6 @@ AIBattleUseItemText: ; 3a844 (e:6844)
 	TX_FAR _AIBattleUseItemText
 	db "@"
 
-; known jump sources: 58dcf (16:4dcf)
 Func_3a849: ; 3a849 (e:6849)
 	call Func_3a85d
 	call Func_3a869
@@ -54449,19 +53659,16 @@ Func_3a849: ; 3a849 (e:6849)
 	ret z
 	jp Func_3a887
 
-; known jump sources: 3c671 (f:4671)
 Func_3a857: ; 3a857 (e:6857)
 	call Func_3a85d
 	jp Func_3a887
 
-; known jump sources: 3a849 (e:6849), 3a857 (e:6857), 3a948 (e:6948)
 Func_3a85d: ; 3a85d (e:685d)
 	ld de, PokeballTileGraphics ; $697e
 	ld hl, $8310
 	ld bc, (BANK(PokeballTileGraphics) << 8) + $04
 	jp CopyVideoData
 
-; known jump sources: 3a84c (e:684c)
 Func_3a869: ; 3a869 (e:6869)
 	call Func_3a902
 	ld hl, W_PARTYMON1_NUM ; $d16b (aliases: W_PARTYMON1DATA)
@@ -54476,7 +53683,6 @@ Func_3a869: ; 3a869 (e:6869)
 	ld hl, W_OAMBUFFER
 	jp Func_3a8e1
 
-; known jump sources: 3a854 (e:6854), 3a85a (e:685a)
 Func_3a887: ; 3a887 (e:6887)
 	call Func_3a919
 	ld hl, W_WATERRATE ; $d8a4
@@ -54491,7 +53697,6 @@ Func_3a887: ; 3a887 (e:6887)
 	ld hl, $c318
 	jp Func_3a8e1
 
-; known jump sources: 3a872 (e:6872), 3a890 (e:6890), 3a951 (e:6951), 3a96d (e:696d)
 Func_3a8a6: ; 3a8a6 (e:68a6)
 	ld a, [de]
 	push af
@@ -54514,7 +53719,6 @@ Func_3a8a6: ; 3a8a6 (e:68a6)
 	jr nz, .asm_3a8b8
 	ret
 
-; known jump sources: 3a8b9 (e:68b9)
 Func_3a8c2: ; 3a8c2 (e:68c2)
 	inc hl
 	ld a, [hli]
@@ -54543,7 +53747,6 @@ Func_3a8c2: ; 3a8c2 (e:68c2)
 	add hl, bc
 	ret
 
-; known jump sources: 3a884 (e:6884), 3a8a3 (e:68a3), 3a964 (e:6964), 3a97b (e:697b)
 Func_3a8e1: ; 3a8e1 (e:68e1)
 	ld de, $cee9
 	ld c, $6
@@ -54566,7 +53769,6 @@ Func_3a8e1: ; 3a8e1 (e:68e1)
 	jr nz, .asm_3a8e6
 	ret
 
-; known jump sources: 3a869 (e:6869), 3cd71 (f:4d71)
 Func_3a902: ; 3a902 (e:6902)
 	ld hl, Unknown_3a916 ; $6916
 	ld de, $cd3f
@@ -54580,7 +53782,6 @@ Func_3a902: ; 3a902 (e:6902)
 Unknown_3a916: ; 3a916 (e:6916)
 INCBIN "baserom.gbc",$3a916,$3a919 - $3a916
 
-; known jump sources: 3a887 (e:6887), 3cdfd (f:4dfd)
 Func_3a919: ; 3a919 (e:6919)
 	ld hl, Unknown_3a92d ; $692d
 	ld de, $cd3f
@@ -54610,7 +53811,6 @@ asm_3a930: ; 3a930 (e:6930)
 	ld [hl], a
 	ret
 
-; known jump sources: 37306 (d:7306)
 Func_3a948: ; 3a948 (e:6948)
 	call Func_3a85d
 	ld hl, W_PARTYMON1_NUM ; $d16b (aliases: W_PARTYMON1DATA)
@@ -54646,7 +53846,6 @@ INCBIN "gfx/trade.2bpp"
 TradingAnimationGraphics2: ; 3acce (e:6cce)
 INCBIN "gfx/trade2.2bpp"
 
-; known jump sources: df11 (3:5f11), 17da3 (5:7da3)
 Func_3ad0e: ; 3ad0e (e:6d0e)
 	ld hl, $ccd3
 	xor a
@@ -54656,7 +53855,6 @@ Func_3ad0e: ; 3ad0e (e:6d0e)
 	ld b, $1
 	call Func_3b057
 
-; known jump sources: 13810 (4:7810)
 Func_3ad1c: ; 3ad1c (e:6d1c)
 	ld a, [$FF00+$d7]
 	push af
@@ -54708,7 +53906,6 @@ asm_3ad2e: ; 3ad2e (e:6d2e)
 	ld [$cf91], a
 	pop hl
 
-; known jump sources: 3aedb (e:6edb)
 Func_3ad71: ; 3ad71 (e:6d71)
 	ld a, [hli]
 	and a
@@ -54884,16 +54081,13 @@ Func_3ad71: ; 3ad71 (e:6d71)
 	ld h, d
 	jr Func_3aeda
 
-; known jump sources: 3ad96 (e:6d96), 3adaa (e:6daa)
 Func_3aed9: ; 3aed9 (e:6ed9)
 	inc hl
 
-; known jump sources: 3adb3 (e:6db3), 3aed7 (e:6ed7)
 Func_3aeda: ; 3aeda (e:6eda)
 	inc hl
 	jp Func_3ad71
 
-; known jump sources: 3ad37 (e:6d37)
 Func_3aede: ; 3aede (e:6ede)
 	pop de
 	pop bc
@@ -54911,7 +54105,6 @@ Func_3aede: ; 3aede (e:6ede)
 	call nz, Func_2307
 	ret
 
-; known jump sources: 3ae32 (e:6e32)
 Func_3aef7: ; 3aef7 (e:6ef7)
 	ld a, [$d0b5]
 	push af
@@ -54940,7 +54133,6 @@ Func_3aef7: ; 3aef7 (e:6ef7)
 	pop de
 	jp CopyData
 
-; known jump sources: 3adfa (e:6dfa)
 Func_3af2e: ; 3af2e (e:6f2e)
 	ld hl, UnnamedText_3af48 ; $6f48
 	call PrintText
@@ -54948,35 +54140,29 @@ Func_3af2e: ; 3af2e (e:6f2e)
 	pop hl
 	call Func_3af52
 	jp asm_3ad2e
-; 3af3e (e:6f3e)
+
 UnnamedText_3af3e: ; 3af3e (e:6f3e)
 	TX_FAR _UnnamedText_3af3e
 	db "@"
-; 0x3af3e + 5 bytes
 
 UnnamedText_3af43: ; 3af43 (e:6f43)
 	TX_FAR _UnnamedText_3af43
 	db "@"
-; 0x3af43 + 5 bytes
 
 UnnamedText_3af48: ; 3af48 (e:6f48)
 	TX_FAR _UnnamedText_3af48
 	db "@"
-; 0x3af48 + 5 bytes
 
 UnnamedText_3af4d: ; 3af4d (e:6f4d)
 	TX_FAR _UnnamedText_3af4d
 	db "@"
-; 0x3af4d + 5 bytes
 
-; known jump sources: 3aeb1 (e:6eb1), 3af38 (e:6f38)
 Func_3af52: ; 3af52 (e:6f52)
 	ld a, [W_ISLINKBATTLE] ; $d12b
 	cp $32
 	ret z
 	jp ReloadTilesetTilePatterns
 
-; known jump sources: df05 (3:5f05), 3aea4 (e:6ea4), 55420 (15:5420)
 Func_3af5b: ; 3af5b (e:6f5b)
 	ld hl, EvosMovesPointerTable
 	ld a, [$d11e]
@@ -55032,7 +54218,6 @@ Func_3af5b: ; 3af5b (e:6f5b)
 	ld [$d11e], a
 	ret
 
-; known jump sources: f419 (3:7419), 3ebc7 (f:6bc7)
 ; writes the moves a mon has at level [W_CURENEMYLVL] to [de]
 ; move slots are being filled up sequentially and shifted if all slots are full
 ; [$cee9]: (?)
@@ -55153,11 +54338,9 @@ WriteMonMoves_ShiftMoveData: ; 3b04e (e:704e)
 	jr nz, .asm_3b050
 	ret
 
-; known jump sources: 3ad19 (e:6d19), 3ad47 (e:6d47), 3aec4 (e:6ec4), 3aecb (e:6ecb)
 Func_3b057: ; 3b057 (e:7057)
 	ld a, $10
 	jp Predef ; indirect jump to HandleBitArray (f666 (3:7666))
-; 3b05c (e:705c)
 
 EvosMovesPointerTable: ; 3b05c (e:705c)
 	dw Mon112_EvosMoves
@@ -57331,7 +56514,6 @@ Mon071_EvosMoves: ; 3b9e4 (e:79e4)
 	db 18,SLEEP_POWDER
 	db 0
 
-; known jump sources: 3fb2b (f:7b2b)
 Func_3b9ec: ; 3b9ec (e:79ec)
 	ld a, [H_WHOSETURN] ; $FF00+$f3
 	and a
@@ -57435,29 +56617,24 @@ Func_3b9ec: ; 3b9ec (e:79ec)
 	ld hl, UnnamedText_3baac ; $7aac
 	jp PrintText
 
-; known jump sources: 3ba0a (e:7a0a)
 Func_3ba97: ; 3ba97 (e:7a97)
 	ld c, $32
 	call DelayFrames
 	ld hl, Func_3fb53
 	jp BankswitchEtoF
-; 3baa2 (e:7aa2)
+
 UnnamedText_3baa2: ; 3baa2 (e:7aa2)
 	TX_FAR _UnnamedText_3baa2
 	db "@"
-; 0x3baa2 + 5 bytes
 
 UnnamedText_3baa7: ; 3baa7 (e:7aa7)
 	TX_FAR _UnnamedText_3baa7
 	db "@"
-; 0x3baa7 + 5 bytes
 
 UnnamedText_3baac: ; 3baac (e:7aac)
 	TX_FAR _UnnamedText_3baac
 	db "@"
-; 0x3baac + 5 bytes
 
-; known jump sources: 3fb33 (f:7b33)
 Func_3bab1: ; 3bab1 (e:7ab1)
 	ld hl, W_PLAYERMONID
 	ld de, $cfe5
@@ -57577,7 +56754,6 @@ Func_3bab1: ; 3bab1 (e:7ab1)
 	ld hl, UnnamedText_3bb92 ; $7b92
 	jp PrintText
 
-; known jump sources: 3bb6b (e:7b6b), 3bb74 (e:7b74)
 Func_3bb7d: ; 3bb7d (e:7b7d)
 	ld a, [H_WHOSETURN] ; $FF00+$f3
 	and a
@@ -57590,17 +56766,14 @@ Func_3bb7d: ; 3bb7d (e:7b7d)
 	ld bc, $8
 	jp CopyData
 
-; known jump sources: 3bad3 (e:7ad3)
 Func_3bb8c: ; 3bb8c (e:7b8c)
 	ld hl, Func_3fb53 ; $7b53
 	jp BankswitchEtoF
-; 3bb92 (e:7b92)
+
 UnnamedText_3bb92: ; 3bb92 (e:7b92)
 	TX_FAR _UnnamedText_3bb92
 	db "@"
-; 0x3bb92 + 5 bytes
 
-; known jump sources: 3fb3b (f:7b3b)
 Func_3bb97: ; 3bb97 (e:7b97)
 	ld hl, W_PLAYERBATTSTATUS3 ; $d064
 	ld de, W_PLAYERMOVEEFFECT ; $cfd3
@@ -57634,21 +56807,18 @@ Func_3bb97: ; 3bb97 (e:7b97)
 	call DelayFrames
 	ld hl, Func_3fb53 ; $7b53
 	jp BankswitchEtoF
-; 3bbd7 (e:7bd7)
+
 UnnamedText_3bbd7: ; 3bbd7 (e:7bd7)
 	TX_FAR _UnnamedText_3bbd7
 	db "@"
-; 0x3bbd7 + 5 bytes
 
 UnnamedText_3bbdc: ; 3bbdc (e:7bdc)
 	TX_FAR _UnnamedText_3bbdc
 	db "@"
-; 0x3bbdc + 5 bytes
 
 BankswitchEtoF: ; 3bbe1 (e:7be1)
 	ld b, $f
 	jp Bankswitch
-; 0x3bbe6
 
 SECTION "bankF",ROMX,BANK[$F]
 
@@ -57671,7 +56841,6 @@ EffectsArray5B: ; 3c049 (f:4049)
 ; moves that prevent the player from switching moves?
 	db $1B,$2A,$FF
 
-; known jump sources: 3eff0 (f:6ff0)
 Func_3c04c: ; 3c04c (f:404c)
 	call Func_3ec92
 	ld a, $1
@@ -57769,7 +56938,6 @@ Func_3c04c: ; 3c04c (f:404c)
 	ld b, BANK(Func_58d99)
 	jp Bankswitch ; indirect jump to Func_58d99 (58d99 (16:4d99))
 
-; known jump sources: 3c0ca (f:40ca)
 Func_3c0ff: ; 3c0ff (f:40ff)
 	push bc
 	ld hl, $c301
@@ -57784,7 +56952,6 @@ Func_3c0ff: ; 3c0ff (f:40ff)
 	pop bc
 	ret
 
-; known jump sources: 3c0be (f:40be), 3c0c7 (f:40c7), 3c113 (f:4113)
 Func_3c110: ; 3c110 (f:4110)
 	ld a, [$FF00+$44]
 	cp l
@@ -57797,7 +56964,6 @@ Func_3c110: ; 3c110 (f:4110)
 	jr z, .asm_3c118
 	ret
 
-; known jump sources: 3f030 (f:7030)
 Func_3c11e: ; 3c11e (f:411e)
 	xor a
 	ld [W_PLAYERMONSALIVEFLAGS], a
@@ -57870,13 +57036,11 @@ Func_3c11e: ; 3c11e (f:411e)
 	cp b
 	jr nc, .asm_3c14f
 	jr asm_3c202
-; 3c1a8 (f:41a8)
+
 UnnamedText_3c1a8: ; 3c1a8 (f:41a8)
 	TX_FAR _UnnamedText_3c1a8
 	db "@"
-; 0x3c1a8 + 5 bytes
 
-; known jump sources: 3c15e (f:415e)
 Func_3c1ad: ; 3c1ad (f:41ad)
 	xor a
 	ld [W_WHICHPOKEMON], a ; $cf92
@@ -57936,17 +57100,14 @@ asm_3c202: ; 3c202 (f:4202)
 	ld hl, Func_792b9
 	ld b, BANK(Func_792b9)
 	jp Bankswitch ; indirect jump to Func_792b9 (792b9 (1e:52b9))
-; 3c229 (f:4229)
+
 UnnamedText_3c229: ; 3c229 (f:4229)
 	TX_FAR _UnnamedText_3c229
 	db "@"
-; 0x3c229 + 5 bytes
 
 UnnamedText_3c22e: ; 3c22e (f:422e)
 	TX_FAR _UnnamedText_3c22e
 	db "@"
-; 0x3c22e + 5 bytes
-
 
 MainInBattleLoop: ; 3c233 (f:4233)
 	call ReadPlayerMonCurHPAndStatus
@@ -58138,7 +57299,6 @@ MainInBattleLoop: ; 3c233 (f:4233)
 	call Func_3c50f
 	jp MainInBattleLoop
 
-; known jump sources: 3c358 (f:4358), 3c36e (f:436e), 3c38a (f:438a), 3c3ae (f:43ae)
 HandlePoisonBurnLeechSeed: ; 3c3bd (f:43bd)
 	ld hl, W_PLAYERMONCURHP ; $d015
 	ld de, W_PLAYERMONSTATUS ; $d018
@@ -58202,24 +57362,19 @@ HandlePoisonBurnLeechSeed: ; 3c3bd (f:43bd)
 	call DelayFrames
 	xor a
 	ret
-; 3c42e (f:442e)
 
 HurtByPoisonText: ; 3c42e (f:442e)
 	TX_FAR _HurtByPoisonText
 	db "@"
-; 0x3c42e + 5 bytes
 
 HurtByBurnText: ; 3c433 (f:4433)
 	TX_FAR _HurtByBurnText
 	db "@"
-; 0x3c433 + 5 bytes
 
 HurtByLeechSeedText: ; 3c438 (f:4438)
 	TX_FAR _HurtByLeechSeedText
 	db "@"
-; 0x3c438 + 5 bytes
 
-; known jump sources: 3c3ec (f:43ec), 3c413 (f:4413)
 ; decreases the mon's current HP by 1/16 of the Max HP (multiplied by number of toxic ticks if active)
 ; note that the toxic ticks are considered even if the damage is not poison (hence the Leech Seed glitch)
 ; hl: HP pointer
@@ -58290,7 +57445,6 @@ HandlePoisonBurnLeechSeed_DecreaseOwnHP: ; 3c43d (f:443d)
 	pop hl
 	ret
 
-; known jump sources: 3c416 (f:4416)
 ; adds bc to enemy HP
 HandlePoisonBurnLeechSeed_IncreaseEnemyHP: ; 3c4a3 (f:44a3)
 	push hl
@@ -58342,7 +57496,6 @@ HandlePoisonBurnLeechSeed_IncreaseEnemyHP: ; 3c4a3 (f:44a3)
 	pop hl
 	ret
 
-; known jump sources: 3c49e (f:449e), 3c4eb (f:44eb)
 UpdateCurMonHPBar: ; 3c4f6 (f:44f6)
 	FuncCoord 10, 9 ; $c45e
 	ld hl, Coord    ; tile pointer to player HP bar
@@ -58361,7 +57514,6 @@ UpdateCurMonHPBar: ; 3c4f6 (f:44f6)
 	pop bc
 	ret
 
-; known jump sources: 3c377 (f:4377), 3c3b7 (f:43b7)
 Func_3c50f: ; 3c50f (f:450f)
 	ld a, [$d06a]
 	and a
@@ -58376,7 +57528,6 @@ Func_3c50f: ; 3c50f (f:450f)
 	res 5, [hl]
 	ret
 
-; known jump sources: 3c243 (f:4243), 3c35b (f:435b), 3c36b (f:436b), 3c387 (f:4387), 3c3b1 (f:43b1)
 Func_3c525: ; 3c525 (f:4525)
 	xor a
 	ld [$ccf0], a
@@ -58410,7 +57561,6 @@ Func_3c525: ; 3c525 (f:4525)
 	ld [$cd6a], a
 	jp MainInBattleLoop
 
-; known jump sources: 3c529 (f:4529), 3c717 (f:4717)
 Func_3c567: ; 3c567 (f:4567)
 	call ReadPlayerMonCurHPAndStatus
 	ld a, [W_ISINBATTLE] ; $d057
@@ -58521,13 +57671,11 @@ Func_3c567: ; 3c567 (f:4567)
 	ld hl, Func_5524f
 	ld b, BANK(Func_5524f)
 	jp Bankswitch ; indirect jump to Func_5524f (5524f (15:524f))
-; 3c63e (f:463e)
+
 UnnamedText_3c63e: ; 3c63e (f:463e)
 	TX_FAR _UnnamedText_3c63e
 	db "@"
-; 0x3c63e + 5 bytes
 
-; known jump sources: 3c5d3 (f:45d3), 3c696 (f:4696)
 Func_3c643: ; 3c643 (f:4643)
 	xor a
 	ld [$d083], a
@@ -58536,7 +57684,6 @@ Func_3c643: ; 3c643 (f:4643)
 	ld [$ccf6], a
 	ret
 
-; known jump sources: 3c541 (f:4541), 3c71f (f:471f)
 Func_3c64f: ; 3c64f (f:464f)
 	ld a, [W_ENEMYMONCOUNT] ; $d89c
 	ld b, a
@@ -58554,7 +57701,6 @@ Func_3c64f: ; 3c64f (f:464f)
 	and a
 	ret
 
-; known jump sources: 3c55a (f:455a), 3c734 (f:4734)
 Func_3c664: ; 3c664 (f:4664)
 	ld hl, $cf1e
 	ld e, $30
@@ -58579,7 +57725,6 @@ Func_3c664: ; 3c664 (f:4664)
 	inc a
 	ret
 
-; known jump sources: 3c544 (f:4544), 3c722 (f:4722)
 TrainerBattleVictory: ; 3c696 (f:4696)
 	call Func_3c643
 	ld b, $fc
@@ -58615,7 +57760,6 @@ TrainerBattleVictory: ; 3c696 (f:4696)
 	ld c, $3
 	ld a, $b
 	jp Predef ; indirect jump to Func_f81d (f81d (3:781d))
-; 3c6e4 (f:46e4)
 
 MoneyForWinningText: ; 3c6e4 (f:46e4)
 	TX_FAR _MoneyForWinningText
@@ -58624,9 +57768,7 @@ MoneyForWinningText: ; 3c6e4 (f:46e4)
 TrainerDefeatedText: ; 3c6e9 (f:46e9)
 	TX_FAR _TrainerDefeatedText
 	db "@"
-; 0x3c6e9 + 5 bytes
 
-; known jump sources: 3c5d8 (f:45d8), 3c6b7 (f:46b7)
 Func_3c6ee: ; 3c6ee (f:46ee)
 	push af
 	ld a, $ff
@@ -58637,7 +57779,6 @@ Func_3c6ee: ; 3c6ee (f:46ee)
 	call PlayMusic
 	jp Delay3
 
-; known jump sources: 3c23b (f:423b), 3c355 (f:4355), 3c371 (f:4371), 3c38d (f:438d), 3c3ab (f:43ab)
 HandlePlayerMonFainted: ; 3c700 (f:4700)
 	ld a, $1
 	ld [$ccf0], a
@@ -58669,7 +57810,6 @@ HandlePlayerMonFainted: ; 3c700 (f:4700)
 	ld [$cd6a], a
 	jp MainInBattleLoop
 
-; known jump sources: 3c5e8 (f:45e8), 3c705 (f:4705)
 Func_3c741: ; 3c741 (f:4741)
 	ld a, [W_PLAYERMONNUMBER] ; $cc2f
 	ld c, a
@@ -58709,14 +57849,11 @@ Func_3c741: ; 3c741 (f:4741)
 	call PlayCry
 	ld hl, PlayerMonFaintedText
 	jp PrintText
-; 3c796 (f:4796)
 
 PlayerMonFaintedText: ; 3c796 (f:4796)
 	TX_FAR _PlayerMonFaintedText
 	db "@"
-; 0x3c796 + 5 bytes
 
-; known jump sources: 3c54e (f:454e), 3c725 (f:4725)
 Func_3c79b: ; 3c79b (f:479b)
 	call Func_3ee94
 	call SaveScreenTilesToBuffer1
@@ -58745,13 +57882,11 @@ Func_3c79b: ; 3c79b (f:479b)
 	ld hl, W_PARTYMON1_SPEED ; $d193
 	ld de, W_ENEMYMONSPEED
 	jp Func_3cab9
-; 3c7d3 (f:47d3)
+
 UnnamedText_3c7d3: ; 3c7d3 (f:47d3)
 	TX_FAR _UnnamedText_3c7d3
 	db "@"
-; 0x3c7d3 + 5 bytes
 
-; known jump sources: 3c552 (f:4552), 3c729 (f:4729)
 Func_3c7d8: ; 3c7d8 (f:47d8)
 	ld a, $2
 	ld [$d07d], a
@@ -58798,7 +57933,6 @@ Func_3c7d8: ; 3c7d8 (f:47d8)
 	or [hl]
 	ret
 
-; known jump sources: 3c154 (f:4154), 3c531 (f:4531), 3c70d (f:470d)
 ; called when player is out of usable mons.
 ; prints approriate lose message, sets carry flag if player blacked out (special case for initial rival fight)
 HandlePlayerBlackOut: ; 3c837 (f:4837)
@@ -58835,24 +57969,19 @@ HandlePlayerBlackOut: ; 3c837 (f:4837)
 	call ClearScreen
 	scf
 	ret
-; 3c884 (f:4884)
 
 Sony1WinText: ; 3c884 (f:4884)
 	TX_FAR _Sony1WinText
 	db "@"
-; 0x3c884 + 5 bytes
 
 PlayerBlackedOutText2: ; 3c889 (f:4889)
 	TX_FAR _PlayerBlackedOutText2
 	db "@"
-; 0x3c889 + 5 bytes
 
 LinkBattleLostText: ; 3c88e (f:488e)
 	TX_FAR _LinkBattleLostText
 	db "@"
-; 0x3c88e + 5 bytes
 
-; known jump sources: 3c5a4 (f:45a4), 3c77d (f:477d)
 Func_3c893: ; 3c893 (f:4893)
 	ld a, [$d730]
 	push af
@@ -58902,7 +58031,6 @@ Func_3c893: ; 3c893 (f:4893)
 SevenSpacesText: ; 3c8d7 (f:48d7)
 	db "       @"
 
-; known jump sources: 3c1d9 (f:41d9), 3c94f (f:494f)
 Func_3c8df: ; 3c8df (f:48df)
 	ld [H_DOWNARROWBLINKCNT1], a ; $FF00+$8b
 	ld c, a
@@ -58941,7 +58069,6 @@ Func_3c8df: ; 3c8df (f:48df)
 	dec c
 	jr nz, .asm_3c8e2
 	ret
-; 3c90e (f:490e)
 
 ; XXX this needs cleaning up. it's what runs when a juggler switches pokemon
 EnemySendOut: ; 3c90e (f:490e)
@@ -59143,7 +58270,6 @@ AnyPokemonAliveCheck: ; 3ca83 (f:4a83)
 	ld d, a
 	ret
 
-; known jump sources: 3c1b1 (f:41b1), 3c7e7 (f:47e7), 3ca14 (f:4a14), 3d19d (f:519d)
 Func_3ca97: ; 3ca97 (f:4a97)
 	ld a, [W_WHICHPOKEMON] ; $cf92
 	ld hl, W_PARTYMON1_HP ; $d16c
@@ -59160,13 +58286,11 @@ Func_3ca97: ; 3ca97 (f:4a97)
 .asm_3cab2
 	xor a
 	ret
-; 3cab4 (f:4ab4)
+
 UnnamedText_3cab4: ; 3cab4 (f:4ab4)
 	TX_FAR _UnnamedText_3cab4
 	db "@"
-; 0x3cab4 + 5 bytes
 
-; known jump sources: 3c7d0 (f:47d0), 3d208 (f:5208)
 Func_3cab9: ; 3cab9 (f:4ab9)
 	call Function583A
 	jp z, .asm_3cb5c
@@ -59278,23 +58402,19 @@ Func_3cab9: ; 3cab9 (f:4ab9)
 	call SaveScreenTilesToBuffer1
 	scf
 	ret
-; 3cb97 (f:4b97)
+
 UnnamedText_3cb97: ; 3cb97 (f:4b97)
 	TX_FAR _UnnamedText_3cb97
 	db "@"
-; 0x3cb97 + 5 bytes
 
 UnnamedText_3cb9c: ; 3cb9c (f:4b9c)
 	TX_FAR _UnnamedText_3cb9c
 	db "@"
-; 0x3cb9c + 5 bytes
 
 UnnamedText_3cba1: ; 3cba1 (f:4ba1)
 	TX_FAR _UnnamedText_3cba1
 	db "@"
-; 0x3cba1 + 5 bytes
 
-; known jump sources: 3c1f7 (f:41f7), 3c81c (f:481c), 3d1e5 (f:51e5)
 Func_3cba6: ; 3cba6 (f:4ba6)
 	ld a, [W_WHICHPOKEMON] ; $cf92
 	ld bc, $2c
@@ -59338,7 +58458,6 @@ Func_3cba6: ; 3cba6 (f:4ba6)
 	jr nz, .asm_3cc0e
 	ret
 
-; known jump sources: 3eb06 (f:6b06)
 Func_3cc13: ; 3cc13 (f:4c13)
 	ld a, [W_WHICHPOKEMON] ; $cf92
 	ld bc, $2c
@@ -59392,7 +58511,6 @@ Func_3cc13: ; 3cc13 (f:4c13)
 	ld [W_ENEMYMONNUMBER], a ; $cfe8
 	ret
 
-; known jump sources: 3c1fd (f:41fd), 3c82e (f:482e), 3d1e8 (f:51e8)
 Func_3cc91: ; 3cc91 (f:4c91)
 	ld hl, Func_58e59
 	ld b, BANK(Func_58e59)
@@ -59403,7 +58521,6 @@ Func_3cc91: ; 3cc91 (f:4c91)
 	jp z, Func_3cca4
 	call Func_3cdec
 
-; known jump sources: 3cc9e (f:4c9e)
 Func_3cca4: ; 3cca4 (f:4ca4)
 	call Func_3cd60
 	ld a, $4
@@ -59445,7 +58562,6 @@ Func_3cca4: ; 3cca4 (f:4ca4)
 	call Func_3ee94
 	jp SaveScreenTilesToBuffer1
 
-; known jump sources: 3d1c7 (f:51c7)
 Func_3ccfa: ; 3ccfa (f:4cfa)
 	FuncCoord 1, 5 ; $c405
 	ld hl, Coord
@@ -59477,14 +58593,12 @@ Func_3ccfa: ; 3ccfa (f:4cfa)
 	FuncCoord 5, 11 ; $c481
 	ld [Coord], a
 
-; known jump sources: 3cd19 (f:4d19), 3cd32 (f:4d32)
 Func_3cd3a: ; 3cd3a (f:4d3a)
 	FuncCoord 1, 5 ; $c405
 	ld hl, Coord
 	ld bc, $707
 	jp ClearScreenArea
 
-; known jump sources: 78c1 (1:78c1), 3c233 (f:4233), 3c567 (f:4567), 3c76b (f:476b), 3f76e (f:776e), 3f7c1 (f:77c1)
 ; reads player's current mon's HP into W_PLAYERMONCURHP
 ReadPlayerMonCurHPAndStatus: ; 3cd43 (f:4d43)
 	ld a, [W_PLAYERMONNUMBER] ; $cc2f
@@ -59497,12 +58611,10 @@ ReadPlayerMonCurHPAndStatus: ; 3cd43 (f:4d43)
 	ld bc, $4               ; 2 bytes HP, 1 byte unknown (unused?), 1 byte status
 	jp CopyData
 
-; known jump sources: 3c2a0 (f:42a0), 3c35e (f:435e), 3c374 (f:4374), 3c390 (f:4390), 3c3b4 (f:43b4), 3c424 (f:4424), 3cebc (f:4ebc), 3d017 (f:5017), 3d0ac (f:50ac), 3e19d (f:619d), 3e25b (f:625b), 3e2a9 (f:62a9)
 Func_3cd5a: ; 3cd5a (f:4d5a)
 	call Func_3cd60
 	jp Func_3cdec
 
-; known jump sources: 78b4 (1:78b4), 3c539 (f:4539), 3cca4 (f:4ca4), 3cd5a (f:4d5a), 3d739 (f:5739), 3daec (f:5aec), 553e9 (15:53e9)
 Func_3cd60: ; 3cd60 (f:4d60)
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
@@ -59572,7 +58684,6 @@ Func_3cd60: ; 3cd60 (f:4d60)
 	set 7, [hl]
 	ret
 
-; known jump sources: 78b9 (1:78b9), 3ca64 (f:4a64), 3cca1 (f:4ca1), 3cd5d (f:4d5d), 3e7bf (f:67bf), 3f02d (f:702d)
 Func_3cdec: ; 3cdec (f:4dec)
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
@@ -59654,7 +58765,6 @@ Func_3cdec: ; 3cdec (f:4dec)
 	ld d, a
 	ld c, a
 
-; known jump sources: 3ce33 (f:4e33)
 Func_3ce7f: ; 3ce7f (f:4e7f)
 	xor a
 	ld [W_LISTMENUID], a ; $cf94
@@ -59665,7 +58775,6 @@ Func_3ce7f: ; 3ce7f (f:4e7f)
 	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
 	ld hl, $cf1e
 
-; known jump sources: 3c669 (f:4669), 3cdc3 (f:4dc3)
 Func_3ce90: ; 3ce90 (f:4e90)
 	ld b, [hl]
 	call Func_3df9
@@ -59675,7 +58784,6 @@ Func_3ce90: ; 3ce90 (f:4e90)
 	ld b, $1
 	jp GoPAL_SET
 
-; known jump sources: 3cd7f (f:4d7f), 3ce06 (f:4e06)
 Func_3ce9c: ; 3ce9c (f:4e9c)
 	push de
 	inc hl
@@ -59697,7 +58805,6 @@ Func_3ce9c: ; 3ce9c (f:4e9c)
 	pop de
 	ret
 
-; known jump sources: 3c161 (f:4161), 3c263 (f:4263), 3cffa (f:4ffa), 3d05c (f:505c), 3d102 (f:5102), 3d216 (f:5216)
 InitBattleMenu: ; 3ceb3 (f:4eb3)
 	call LoadScreenTilesFromBuffer1 ; restore saved screen
 	ld a, [W_BATTLETYPE] ; $d05a
@@ -59868,7 +58975,6 @@ RegularBattleMenu: ; 3cf1a (f:4f1a)
 	ld [$cf91], a
 	jr asm_3d05f
 
-; known jump sources: 3cf0f (f:4f0f), 3cfd1 (f:4fd1)
 Func_3cfe8: ; 3cfe8 (f:4fe8)
 	cp $2
 	jp nz, Func_3d0ca
@@ -59974,13 +59080,11 @@ asm_3d05f: ; 3d05f (f:505f)
 	ld [$cf0b], a
 	scf
 	ret
-; 3d0c5 (f:50c5)
+
 ItemsCantBeUsedHere: ; 3d0c5 (f:50c5)
 	TX_FAR ItemsCantBeUsedHere_
 	db "@"
-; 0x3d0c5 + 5 bytes
 
-; known jump sources: 3cfea (f:4fea)
 Func_3d0ca: ; 3d0ca (f:50ca)
 	dec a
 	jp nz, Func_3d1fa
@@ -59992,7 +59096,6 @@ Func_3d0ca: ; 3d0ca (f:50ca)
 	ld [$cf91], a
 	jp asm_3d05f
 
-; known jump sources: 3d0d6 (f:50d6), 3d187 (f:5187)
 Func_3d0e0: ; 3d0e0 (f:50e0)
 	call LoadScreenTilesFromBuffer1
 	xor a
@@ -60010,7 +59113,6 @@ asm_3d0f0: ; 3d0f0 (f:50f0)
 	call GBPalNormal
 	jp InitBattleMenu
 
-; known jump sources: 3d138 (f:5138), 3d19a (f:519a), 3d1a0 (f:51a0)
 Func_3d105: ; 3d105 (f:5105)
 	FuncCoord 11, 11 ; $c487
 	ld hl, Coord
@@ -60022,7 +59124,6 @@ Func_3d105: ; 3d105 (f:5105)
 	call GoBackToPartyMenu
 	jr asm_3d0ed
 
-; known jump sources: 3d0ed (f:50ed)
 Func_3d119: ; 3d119 (f:5119)
 	ld a, $c
 	ld [$d125], a
@@ -60098,7 +59199,6 @@ Func_3d119: ; 3d119 (f:5119)
 	call GoPAL_SET_CF1C
 	call GBPalNormal
 
-; known jump sources: 3ca76 (f:4a76)
 Func_3d1ba: ; 3d1ba (f:51ba)
 	ld hl, Func_58ed1
 	ld b, BANK(Func_58ed1)
@@ -60125,13 +59225,11 @@ Func_3d1ba: ; 3d1ba (f:51ba)
 	ld [W_CURMENUITEMID], a ; $cc26
 	and a
 	ret
-; 3d1f5 (f:51f5)
+
 UnnamedText_3d1f5: ; 3d1f5 (f:51f5)
 	TX_FAR _UnnamedText_3d1f5
 	db "@"
-; 0x3d1f5 + 5 bytes
 
-; known jump sources: 3d0cb (f:50cb)
 Func_3d1fa: ; 3d1fa (f:51fa)
 	call LoadScreenTilesFromBuffer1
 	ld a, $3
@@ -60147,7 +59245,6 @@ Func_3d1fa: ; 3d1fa (f:51fa)
 	ret nz
 	jp InitBattleMenu
 
-; known jump sources: e35f (3:635f), 3c299 (f:4299), 3d3ab (f:53ab), 3d490 (f:5490), 3d4b3 (f:54b3)
 MoveSelectionMenu: ; 3d219 (f:5219)
 	ld a, [W_MOVEMENUTYPE]
 	dec a
@@ -60156,7 +59253,6 @@ MoveSelectionMenu: ; 3d219 (f:5219)
 	jr z, .relearnmenu
 	jr .regularmenu
 
-; known jump sources: 3d250 (f:5250), 3d278 (f:5278), 3d29d (f:529d)
 .loadmoves
 	ld de, $d0dc
 	ld bc, $4
@@ -60166,7 +59262,6 @@ MoveSelectionMenu: ; 3d219 (f:5219)
 	call Bankswitch ; indirect jump to Func_39b87 (39b87 (e:5b87))
 	ret
 
-; known jump sources: 3d26c (f:526c), 3d288 (f:5288), 3d2ad (f:52ad)
 .writemoves
 	ld de, $d0e1
 	ld a, [$FF00+$f6]
@@ -60277,7 +59372,6 @@ MoveSelectionMenu: ; 3d219 (f:5219)
 .movelistindex1
 	ld [hl], a ; W_OLDMENUITEMID
 
-; known jump sources: 3d3cd (f:53cd), 3d3da (f:53da), 3d3e7 (f:53e7), 3d3f2 (f:53f2)
 Func_3d2fe: ; 3d2fe (f:52fe)
 	ld a, [W_MOVEMENUTYPE]
 	and a
@@ -60386,7 +59480,6 @@ MoveDisabledText: ; 3d3b3 (f:53b3)
 WhichTechniqueString: ; 3d3b8 (f:53b8)
 	db "WHICH TECHNIQUE?@"
 
-; known jump sources: 3d33d (f:533d)
 Func_3d3c9: ; 3d3c9 (f:53c9)
 	ld a, [W_CURMENUITEMID] ; $cc26
 	and a
@@ -60397,7 +59490,6 @@ Func_3d3c9: ; 3d3c9 (f:53c9)
 	ld [W_CURMENUITEMID], a ; $cc26
 	jp Func_3d2fe
 
-; known jump sources: 3d342 (f:5342)
 Func_3d3dd: ; 3d3dd (f:53dd)
 	ld a, [W_CURMENUITEMID] ; $cc26
 	ld b, a
@@ -60411,7 +59503,6 @@ Func_3d3dd: ; 3d3dd (f:53dd)
 	ld [W_CURMENUITEMID], a ; $cc26
 	jp Func_3d2fe
 
-; known jump sources: 3d249 (f:5249)
 Func_3d3f5: ; 3d3f5 (f:53f5)
 	ld a, $a5
 	ld [W_PLAYERSELECTEDMOVE], a ; $ccdc
@@ -60453,13 +59544,11 @@ Func_3d3f5: ; 3d3f5 (f:53f5)
 	call DelayFrames
 	xor a
 	ret
-; 3d430 (f:5430)
+
 UnnamedText_3d430: ; 3d430 (f:5430)
 	TX_FAR _UnnamedText_3d430
 	db "@"
-; 0x3d430 + 5 bytes
 
-; known jump sources: 3d347 (f:5347)
 Func_3d435: ; 3d435 (f:5435)
 	ld a, [$cc35]
 	and a
@@ -60510,7 +59599,6 @@ Func_3d435: ; 3d435 (f:5435)
 	ld [$cc35], a
 	jp MoveSelectionMenu
 
-; known jump sources: 3d43e (f:543e), 3d444 (f:5444), 3d481 (f:5481), 3d489 (f:5489)
 Func_3d493: ; 3d493 (f:5493)
 	push hl
 	ld a, [$cc35]
@@ -60537,7 +59625,6 @@ asm_3d4ad: ; 3d4ad (f:54ad)
 	ld [$cc35], a
 	jp MoveSelectionMenu
 
-; known jump sources: 3d319 (f:5319)
 Func_3d4b6: ; 3d4b6 (f:54b6)
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
@@ -60717,7 +59804,6 @@ SelectEnemyMove: ; 3d564 (f:5564)
 	ld a, $a5
 	jr .done
 
-; known jump sources: 3c67b (f:467b), 3c7f7 (f:47f7), 3cb71 (f:4b71), 3d56e (f:556e)
 Func_3d605: ; 3d605 (f:5605)
 	ld a, $ff
 	ld [$cc3e], a
@@ -60767,7 +59853,6 @@ Func_3d605: ; 3d605 (f:5605)
 	jr nz, .asm_3d654
 	ret
 
-; known jump sources: 3c361 (f:4361), 3c37d (f:437d)
 Func_3d65e: ; 3d65e (f:565e)
 	xor a
 	ld [H_WHOSETURN], a ; $FF00+$f3
@@ -60796,7 +59881,6 @@ Func_3d65e: ; 3d65e (f:565e)
 	call Func_3dc88
 	jp z, Function580A
 
-; known jump sources: 3d777 (f:5777), 3d781 (f:5781)
 Func_3d69a: ; 3d69a (f:569a)
 	ld a, [W_PLAYERMOVEEFFECT] ; $cfd3
 	cp $27
@@ -60804,7 +59888,7 @@ Func_3d69a: ; 3d69a (f:569a)
 	cp $2b
 	jp z, Func_3f132
 	jr asm_3d6b0
-; 3d6a9 (f:56a9)
+
 ; in-battle stuff
 asm_3d6a9: ; 3d6a9 (f:56a9)
 	ld hl,W_PLAYERBATTSTATUS1
@@ -61243,7 +60327,6 @@ HyperBeamCheck: ; 3d8c2 (f:58c2)
 	jp nz,Func_3da37
 	jp Func_3da37
 
-; known jump sources: 3da01 (f:5a01)
 Func_3da1a: ; 3da1a (f:5a1a)
 	ld a, [W_PLAYERBATTSTATUS2] ; $d063
 	bit 6, a
@@ -61257,17 +60340,15 @@ Func_3da1a: ; 3da1a (f:5a1a)
 	ld hl, asm_3d6b0 ; $56b0
 	jp Func_3da37
 
-; known jump sources: 3d881 (f:5881), 3d895 (f:5895), 3d8a9 (f:58a9), 3d8bf (f:58bf), 3d8d4 (f:58d4), 3d93b (f:593b), 3d972 (f:5972), 3d998 (f:5998), 3d9cd (f:59cd), 3d9e6 (f:59e6), 3d9fc (f:59fc), 3da14 (f:5a14), 3da17 (f:5a17), 3da34 (f:5a34)
 Func_3da37: ; 3da37 (f:5a37)
 	xor a
 	ret
 
-; known jump sources: 3da1f (f:5a1f)
 Func_3da39: ; 3da39 (f:5a39)
 	ld a, $1
 	and a
 	ret
-; 3da3d (f:5a3d)
+
 FastAsleepText: ; 3da3d (f:5a3d)
 	TX_FAR _FastAsleepText
 	db "@"
@@ -61328,7 +60409,6 @@ CantMoveText: ; 3da83 (f:5a83)
 	TX_FAR _CantMoveText
 	db "@"
 
-; known jump sources: 3d935 (f:5935), 3e9b6 (f:69b6)
 Func_3da88: ; 3da88 (f:5a88)
 	ld hl, W_PLAYERSELECTEDMOVE ; $ccdc
 	ld de, W_PLAYERBATTSTATUS1 ; $d062
@@ -61346,13 +60426,11 @@ Func_3da88: ; 3da88 (f:5a88)
 	call GetMoveName
 	ld hl, UnnamedText_3daa8 ; $5aa8
 	jp PrintText
-; 3daa8 (f:5aa8)
+
 UnnamedText_3daa8: ; 3daa8 (f:5aa8)
 	TX_FAR _UnnamedText_3daa8
 	db "@"
-; 0x3daa8 + 5 bytes
 
-; known jump sources: 3d924 (f:5924), 3dd08 (f:5d08)
 Func_3daad: ; 3daad (f:5aad)
 	ld hl, HurtItselfText ; $5a65
 	call PrintText
@@ -61396,7 +60474,6 @@ Func_3daad: ; 3daad (f:5aad)
 	ld [H_WHOSETURN], a ; $FF00+$f3
 	jp ApplyDamageToPlayerPokemon
 
-; known jump sources: 3d6b0 (f:56b0), 3e72f (f:672f)
 Func_3daf5: ; 3daf5 (f:5af5)
 	ld hl, Unknown_3dafb ; $5afb
 	jp PrintText
@@ -61467,29 +60544,23 @@ INCBIN "baserom.gbc",$3db62,$3db6c - $3db62
 UnnamedText_3db6c: ; 3db6c (f:5b6c)
 	TX_FAR _UnnamedText_3db6c
 	db "@"
-; 0x3db6c + 5 bytes
 
 UnnamedText_3db71: ; 3db71 (f:5b71)
 	TX_FAR _UnnamedText_3db71
 	db "@"
-; 0x3db71 + 5 bytes
 
 UnnamedText_3db76: ; 3db76 (f:5b76)
 	TX_FAR _UnnamedText_3db76
 	db "@"
-; 0x3db76 + 5 bytes
 
 UnnamedText_3db7b: ; 3db7b (f:5b7b)
 	TX_FAR _UnnamedText_3db7b
 	db "@"
-; 0x3db7b + 5 bytes
 
 UnnamedText_3db80: ; 3db80 (f:5b80)
 	TX_FAR _UnnamedText_3db80
 	db "@"
-; 0x3db80 + 5 bytes
 
-; known jump sources: 3db15 (f:5b15)
 Func_3db85: ; 3db85 (f:5b85)
 	push bc
 	ld a, [$d11e]
@@ -61515,7 +60586,6 @@ Func_3db85: ; 3db85 (f:5b85)
 Unknown_3dba3: ; 3dba3 (f:5ba3)
 INCBIN "baserom.gbc",$3dba3,$3dbe2 - $3dba3
 
-; known jump sources: 3d799 (f:5799), 3e81e (f:681e)
 Func_3dbe2: ; 3dbe2 (f:5be2)
 	ld de, W_PLAYERMOVEEFFECT ; $cfd3
 	ld a, [H_WHOSETURN] ; $FF00+$f3
@@ -61569,33 +60639,27 @@ Func_3dbe2: ; 3dbe2 (f:5be2)
 	jp ApplyDamageToPlayerPokemon
 .asm_3dc3f
 	jp ApplyDamageToEnemyPokemon
-; 3dc42 (f:5c42)
+
 UnnamedText_3dc42: ; 3dc42 (f:5c42)
 	TX_FAR _UnnamedText_3dc42
 	db "@"
-; 0x3dc42 + 5 bytes
 
 UnnamedText_3dc47: ; 3dc47 (f:5c47)
 	TX_FAR _UnnamedText_3dc47
 	db "@"
-; 0x3dc47 + 5 bytes
 
 UnnamedText_3dc4c: ; 3dc4c (f:5c4c)
 	TX_FAR _UnnamedText_3dc4c
 	db "@"
-; 0x3dc4c + 5 bytes
 
-; known jump sources: 52670 (14:6670)
 Func_3dc51: ; 3dc51 (f:5c51)
 	ld hl, UnnamedText_3dc57 ; $5c57
 	jp PrintText
-; 3dc57 (f:5c57)
+
 UnnamedText_3dc57: ; 3dc57 (f:5c57)
 	TX_FAR _UnnamedText_3dc57
 	db "@"
-; 0x3dc57 + 5 bytes
 
-; known jump sources: 3d7a9 (f:57a9), 3e82e (f:682e)
 Func_3dc5c: ; 3dc5c (f:5c5c)
 	ld a, [$d05e]
 	and a
@@ -61622,14 +60686,11 @@ INCBIN "baserom.gbc",$3dc7a,$3dc7e - $3dc7a
 UnnamedText_3dc7e: ; 3dc7e (f:5c7e)
 	TX_FAR _UnnamedText_3dc7e
 	db "@"
-; 0x3dc7e + 5 bytes
 
 UnnamedText_3dc83: ; 3dc83 (f:5c83)
 	TX_FAR _UnnamedText_3dc83
 	db "@"
-; 0x3dc83 + 5 bytes
 
-; known jump sources: 3d694 (f:5694)
 Func_3dc88: ; 3dc88 (f:5c88)
 	xor a
 	ld [$cced], a
@@ -61798,41 +60859,34 @@ Func_3dc88: ; 3dc88 (f:5c88)
 	ld [W_PLAYERSELECTEDMOVE], a ; $ccdc
 	call GetCurrentMove
 
-; known jump sources: 3dcae (f:5cae), 3dcdc (f:5cdc), 3dce8 (f:5ce8)
 Func_3ddb0: ; 3ddb0 (f:5db0)
 	ld a, $1
 	and a
 	ret
 
-; known jump sources: 3dd0b (f:5d0b), 3dd3d (f:5d3d)
 Func_3ddb4: ; 3ddb4 (f:5db4)
 	xor a
 	ret
-; 3ddb6 (f:5db6)
+
 UnnamedText_3ddb6: ; 3ddb6 (f:5db6)
 	TX_FAR _UnnamedText_3ddb6
 	db "@"
-; 0x3ddb6 + 5 bytes
 
 UnnamedText_3ddbb: ; 3ddbb (f:5dbb)
 	TX_FAR _UnnamedText_3ddbb
 	db "@"
-; 0x3ddbb + 5 bytes
 
 UnnamedText_3ddc0: ; 3ddc0 (f:5dc0)
 	TX_FAR _UnnamedText_3ddc0
 	db "@"
-; 0x3ddc0 + 5 bytes
 
 UnnamedText_3ddc5: ; 3ddc5 (f:5dc5)
 	TX_FAR _UnnamedText_3ddc5
 	db "@"
-; 0x3ddc5 + 5 bytes
 
 UnnamedText_3ddca: ; 3ddca (f:5dca)
 	TX_FAR _UnnamedText_3ddca
 	db "@"
-; 0x3ddca + 5 bytes
 
 CalculateDamage: ; 3ddcf (f:5dcf)
 	xor a
@@ -61936,7 +60990,6 @@ CalculateDamage: ; 3ddcf (f:5dcf)
 	and a
 	ret
 
-; known jump sources: 3e76d (f:676d), 3e986 (f:6986)
 Func_3de75: ; 3de75 (f:5e75)
 	ld hl, W_DAMAGE ; $d0d7
 	xor a
@@ -62036,7 +61089,6 @@ Func_3de75: ; 3de75 (f:5e75)
 	and a
 	ret
 
-; known jump sources: 3ddfd (f:5dfd), 3de32 (f:5e32), 3deb3 (f:5eb3), 3dee8 (f:5ee8)
 Func_3df1c: ; 3df1c (f:5f1c)
 	push de
 	push bc
@@ -62077,7 +61129,7 @@ Func_3df1c: ; 3df1c (f:5f1c)
 	call CalcStat
 	pop de
 	ret
-; 3df65 (f:5f65)
+
 MoreCalculateDamage: ; 3df65 (f:5f65)
 	ld a, [$ff00+$f3]  ;FFF3 decides which address to use
 	and a
@@ -62200,7 +61252,6 @@ MoreCalculateDamage: ; 3df65 (f:5f65)
 	and a
 	ret
 
-; known jump sources: 3df83 (f:5f83)
 Func_3e016: ; 3e016 (f:6016)
 	call Func_3f132
 	ld a, [W_MOVEMISSED] ; $d05f
@@ -62277,7 +61328,6 @@ CriticalHitTest: ; 3e023 (f:6023)
 	ld a, $1
 	ld [$d05e], a                ; set critical hit flag
 	ret
-; 0x3e08e
 
 ; high critical hit moves
 HighCriticalMoves: ; 3e08e (f:608e)
@@ -62286,7 +61336,6 @@ HighCriticalMoves: ; 3e08e (f:608e)
 	db CRABHAMMER
 	db SLASH
 	db $FF
-; 0x3e093
 
 ; function to determine if Counter hits and if so, how much damage it does
 HandleCounterMove: ; 3e093 (f:6093)
@@ -62638,12 +61687,10 @@ AttackSubstitute: ; 3e25e (f:625e)
 SubstituteTookDamageText: ; 3e2ac (f:62ac)
 	TX_FAR _SubstituteTookDamageText
 	db "@"
-; 0x3e2ac + 5 bytes
 
 SubstituteBrokeText: ; 3e2b1 (f:62b1)
 	TX_FAR _SubstituteBrokeText
 	db "@"
-; 0x3e2b1 + 5 bytes
 
 ; this function raises the attack modifier of a pokemon using Rage when that pokemon is attacked
 HandleBuildingRage: ; 3e2b6 (f:62b6)
@@ -62691,7 +61738,6 @@ HandleBuildingRage: ; 3e2b6 (f:62b6)
 BuildingRageText: ; 3e2f8 (f:62f8)
 	TX_FAR _BuildingRageText
 	db "@"
-; 0x3e2f8 + 5 bytes
 
 ; copy last move for Mirror Move
 ; sets zero flag on failure and unsets zero flag on success
@@ -62723,7 +61769,6 @@ MirrorMoveCopyMove: ; 3e2fd (f:62fd)
 MirrorMoveFailedText: ; 3e324 (f:6324)
 	TX_FAR _MirrorMoveFailedText
 	db "@"
-; 0x3e324 + 5 bytes
 
 ; function used to reload move data for moves like Mirror Move and Metronome
 ReloadMoveData: ; 3e329 (f:6329)
@@ -63234,7 +62279,6 @@ CalcHitChance: ; 3e624 (f:6624)
 	ld [hl],a ; store the hit chance in the move accuracy variable
 	ret
 
-; known jump sources: 3d6ff (f:56ff), 3e77c (f:677c)
 Func_3e687: ; 3e687 (f:6687)
 	ld hl, W_DAMAGE ; $d0d7
 	ld a, [hli]
@@ -63269,7 +62313,6 @@ Func_3e687: ; 3e687 (f:6687)
 	ld [hl], a
 	ret
 
-; known jump sources: 3c34b (f:434b), 3c3a1 (f:43a1)
 Func_3e6bc: ; 3e6bc (f:66bc)
 	ld a, [W_ENEMYSELECTEDMOVE] ; $ccdd
 	inc a
@@ -63302,7 +62345,6 @@ Func_3e6bc: ; 3e6bc (f:66bc)
 	jr nz, asm_3e70b
 	call GetCurrentMove
 
-; known jump sources: 3e7fc (f:67fc), 3e806 (f:6806)
 Func_3e6fc: ; 3e6fc (f:66fc)
 	ld a, [W_ENEMYMOVEEFFECT] ; $cfcd
 	cp $27
@@ -63355,7 +62397,6 @@ asm_3e750: ; 3e750 (f:6750)
 	call AdjustDamageForMoveType
 	call Func_3e687
 
-; known jump sources: 3e75f (f:675f)
 Func_3e77f: ; 3e77f (f:677f)
 	call MoveHitTest
 asm_3e782: ; 3e782 (f:6782)
@@ -63369,7 +62410,6 @@ asm_3e782: ; 3e782 (f:6782)
 .asm_3e791
 	call Func_3ec81
 
-; known jump sources: 3e864 (f:6864)
 Func_3e794: ; 3e794 (f:6794)
 	ld a, [W_ENEMYMOVEEFFECT] ; $cfcd
 	and a
@@ -63400,7 +62440,6 @@ asm_3e7a4: ; 3e7a4 (f:67a4)
 	call nz, Bankswitch
 	jr asm_3e7ef
 
-; known jump sources: 3e776 (f:6776), 3e78f (f:678f)
 Func_3e7d1: ; 3e7d1 (f:67d1)
 	call Func_3ec81
 	ld c, $1e
@@ -63484,18 +62523,15 @@ asm_3e7ef: ; 3e7ef (f:67ef)
 	call IsInArray
 	call nc, Func_3f132
 	jr Func_3e88c
-; 3e887 (f:6887)
+
 UnnamedText_3e887: ; 3e887 (f:6887)
 	TX_FAR _UnnamedText_3e887
 	db "@"
-; 0x3e887 + 5 bytes
 
-; known jump sources: 3e6c0 (f:66c0), 3e6c6 (f:66c6), 3e7f9 (f:67f9), 3e828 (f:6828), 3e877 (f:6877), 3e885 (f:6885)
 Func_3e88c: ; 3e88c (f:688c)
 	ld b, $1
 	ret
 
-; known jump sources: 3e6ec (f:66ec)
 Func_3e88f: ; 3e88f (f:688f)
 	ld hl, W_ENEMYMONSTATUS ; $cfe9
 	ld a, [hl]
@@ -63538,7 +62574,6 @@ Func_3e88f: ; 3e88f (f:688f)
 	ld hl, Func_3e88c ; $688c
 	jp Func_3eab8
 
-; known jump sources: 3e8d8 (f:68d8)
 Func_3e8e7: ; 3e8e7 (f:68e7)
 	ld hl, W_ENEMYBATTSTATUS1 ; $d067
 	bit 3, [hl]
@@ -63549,7 +62584,6 @@ Func_3e8e7: ; 3e8e7 (f:68e7)
 	ld hl, Func_3e88c ; $688c
 	jp Func_3eab8
 
-; known jump sources: 3e8ec (f:68ec)
 Func_3e8fd: ; 3e8fd (f:68fd)
 	ld hl, W_ENEMYBATTSTATUS2 ; $d068
 	bit 5, [hl]
@@ -63640,7 +62674,6 @@ Func_3e8fd: ; 3e8fd (f:68fd)
 	call ApplyDamageToEnemyPokemon
 	jr asm_3e9d3
 
-; known jump sources: 3e92d (f:692d), 3e941 (f:6941), 3e958 (f:6958)
 Func_3e9aa: ; 3e9aa (f:69aa)
 	ld a, [$ccef]
 	and a
@@ -63762,7 +62795,6 @@ asm_3e9f6: ; 3e9f6 (f:69f6)
 	jp nz, Func_3eab8
 	jp Func_3eab8
 
-; known jump sources: 3ea85 (f:6a85)
 Func_3ea9b: ; 3ea9b (f:6a9b)
 	ld a, [W_ENEMYBATTSTATUS2] ; $d068
 	bit 6, a
@@ -63776,18 +62808,15 @@ Func_3ea9b: ; 3ea9b (f:6a9b)
 	ld hl, asm_3e72b ; $672b
 	jp Func_3eab8
 
-; known jump sources: 3e8bc (f:68bc), 3e8d0 (f:68d0), 3e8e4 (f:68e4), 3e8fa (f:68fa), 3e90f (f:690f), 3e9bc (f:69bc), 3e9f3 (f:69f3), 3ea19 (f:6a19), 3ea51 (f:6a51), 3ea6a (f:6a6a), 3ea80 (f:6a80), 3ea95 (f:6a95), 3ea98 (f:6a98), 3eab5 (f:6ab5)
 Func_3eab8: ; 3eab8 (f:6ab8)
 	xor a
 	ret
 
-; known jump sources: 3eaa0 (f:6aa0)
 Func_3eaba: ; 3eaba (f:6aba)
 	ld a, $1
 	and a
 	ret
 
-; known jump sources: 3d543 (f:5543), 3d68a (f:568a), 3ddad (f:5dad), 3e6f9 (f:66f9)
 GetCurrentMove: ; 3eabe (f:6abe)
 	ld a, [H_WHOSETURN] ; $FF00+$f3
 	and a
@@ -63818,7 +62847,6 @@ GetCurrentMove: ; 3eabe (f:6abe)
 	ld de, $cd6d
 	jp CopyStringToCF4B
 
-; known jump sources: d893 (3:5893), 3c9aa (f:49aa), 3ef90 (f:6f90), 4fdc9 (13:7dc9), 58df0 (16:4df0), 58e18 (16:4e18)
 Func_3eb01: ; 3eb01 (f:6b01)
 	ld a, [W_ISLINKBATTLE] ; $d12b
 	cp $4
@@ -63976,7 +63004,6 @@ Func_3eb01: ; 3eb01 (f:6b01)
 	jr nz, .asm_3ec2d
 	ret
 
-; known jump sources: 3ef66 (f:6f66), 3ef93 (f:6f93)
 Func_3ec32: ; 3ec32 (f:6c32)
 	ld a, [W_ISLINKBATTLE] ; $d12b
 	cp $4
@@ -64016,7 +63043,6 @@ Func_3ec32: ; 3ec32 (f:6c32)
 	ld [W_PLAYERDISABLEDMOVE], a ; $d06d
 	ret
 
-; known jump sources: 3e750 (f:6750), 3e76a (f:676a), 3e770 (f:6770), 3e791 (f:6791), 3e7a0 (f:67a0), 3e7d1 (f:67d1), 3ea4b (f:6a4b)
 Func_3ec81: ; 3ec81 (f:6c81)
 	push bc
 	ld a, [W_PLAYERMONLEVEL] ; $d022
@@ -64028,7 +63054,6 @@ Func_3ec81: ; 3ec81 (f:6c81)
 	pop bc
 	ret
 
-; known jump sources: 3c04c (f:404c)
 Func_3ec92: ; 3ec92 (f:6c92)
 	ld a, [W_BATTLETYPE] ; $d05a
 	dec a
@@ -64092,7 +63117,6 @@ Func_3ec92: ; 3ec92 (f:6c92)
 	ld a, $1
 	jp Predef ; indirect jump to Func_3f0c6 (3f0c6 (f:70c6))
 
-; known jump sources: dba3 (3:5ba3)
 Func_3ed02: ; 3ed02 (f:6d02)
 	ld hl, Func_39680
 	ld b, BANK(Func_39680)
@@ -64101,18 +63125,15 @@ Func_3ed02: ; 3ed02 (f:6d02)
 	ld b, BANK(Func_396a7)
 	jp Bankswitch ; indirect jump to Func_396a7 (396a7 (e:56a7))
 
-; known jump sources: 3c6c6 (f:46c6), 3c84e (f:484e)
 Func_3ed12: ; 3ed12 (f:6d12)
 	ld hl, Func_396d3
 	ld b, BANK(Func_396d3)
 	jp Bankswitch ; indirect jump to Func_396d3 (396d3 (e:56d3))
 
-; known jump sources: 3cc01 (f:4c01), 553d9 (15:53d9)
 Func_3ed1a: ; 3ed1a (f:6d1a)
 	ld a, $1
 	jr asm_3ed1f
 
-; known jump sources: 3cc6e (f:4c6e)
 Func_3ed1e: ; 3ed1e (f:6d1e)
 	xor a
 asm_3ed1f: ; 3ed1f (f:6d1f)
@@ -64120,7 +63141,6 @@ asm_3ed1f: ; 3ed1f (f:6d1f)
 	call Func_3ed27
 	jp Func_3ed64
 
-; known jump sources: 3ed21 (f:6d21), 3f351 (f:7351), 3f3b9 (f:73b9), 3f51a (f:751a), 3f647 (f:7647), 52641 (14:6641)
 Func_3ed27: ; 3ed27 (f:6d27)
 	ld a, [H_WHOSETURN] ; $FF00+$f3
 	and a
@@ -64163,7 +63183,6 @@ Func_3ed27: ; 3ed27 (f:6d27)
 	ld [hl], b
 	ret
 
-; known jump sources: 3ed24 (f:6d24), 3f361 (f:7361), 3f3c4 (f:73c4), 3f51d (f:751d), 3f64a (f:764a)
 Func_3ed64: ; 3ed64 (f:6d64)
 	ld a, [H_WHOSETURN] ; $FF00+$f3
 	and a
@@ -64202,7 +63221,6 @@ Func_3ed64: ; 3ed64 (f:6d64)
 	ld [hl], b
 	ret
 
-; known jump sources: 553d1 (15:53d1)
 Func_3ed99: ; 3ed99 (f:6d99)
 	ld c, $0
 .asm_3ed9b
@@ -64213,7 +63231,6 @@ Func_3ed99: ; 3ed99 (f:6d99)
 	jr nz, .asm_3ed9b
 	ret
 
-; known jump sources: 3ed9b (f:6d9b)
 Func_3eda5: ; 3eda5 (f:6da5)
 	push bc
 	push bc
@@ -64279,7 +63296,6 @@ Func_3eda5: ; 3eda5 (f:6da5)
 	ld a, $e7
 	ld [$FF00+$98], a
 
-; known jump sources: 3ee01 (f:6e01)
 Func_3ee0c: ; 3ee0c (f:6e0c)
 	ld a, [$FF00+$97]
 	ld [hli], a
@@ -64293,7 +63309,6 @@ Func_3ee0c: ; 3ee0c (f:6e0c)
 	pop bc
 	ret
 
-; known jump sources: 3cc04 (f:4c04), 3f511 (f:7511), 3f63e (f:763e), 553e1 (15:53e1)
 Func_3ee19: ; 3ee19 (f:6e19)
 	ld a, [W_ISLINKBATTLE] ; $d12b
 	cp $4
@@ -64312,7 +63327,6 @@ Func_3ee19: ; 3ee19 (f:6e19)
 	jr nz, .asm_3ee28
 	ret
 
-; known jump sources: 3ee2a (f:6e2a)
 Func_3ee35: ; 3ee35 (f:6e35)
 	ld a, [hli]
 	ld d, a
@@ -64340,11 +63354,9 @@ Func_3ee35: ; 3ee35 (f:6e35)
 	ld [hld], a
 	ret
 
-; known jump sources: 3c066 (f:4066), 3ec5a (f:6c5a)
 Func_3ee58: ; 3ee58 (f:6e58)
 	call LoadHpBarAndStatusTilePatterns
 
-; known jump sources: 665b (1:665b), 3c822 (f:4822), 3ca20 (f:4a20), 3d072 (f:5072), 3d0f6 (f:50f6), 3d1ae (f:51ae)
 Func_3ee5b: ; 3ee5b (f:6e5b)
 	ld a, [rLCDC] ; $FF00+$40
 	add a
@@ -64369,7 +63381,6 @@ Func_3ee5b: ; 3ee5b (f:6e5b)
 	ld bc, (BANK(BattleHudTiles2) << 8) + $06
 	jp CopyVideoDataDouble
 
-; known jump sources: 3c5f7 (f:45f7), 3c79b (f:479b), 3c952 (f:4952), 3ccf4 (f:4cf4), 3cebf (f:4ebf), 553f1 (15:53f1)
 Func_3ee94: ; 3ee94 (f:6e94)
 	ld hl, Unknown_3ee9a ; $6e9a
 	jp PrintText
@@ -64418,9 +63429,7 @@ GenRandomInBattle: ; 3ee9b (f:6e9b)
 	pop bc
 	pop hl
 	ret
-; 0x3eed3
 
-; known jump sources: 3d736 (f:5736), 3e7bc (f:67bc)
 Func_3eed3: ; 3eed3 (f:6ed3)
 	ld a, [H_WHOSETURN] ; $FF00+$f3
 	and a
@@ -64451,19 +63460,17 @@ Func_3eed3: ; 3eed3 (f:6ed3)
 	ret nz
 	ld a, $5
 	ld [$cc5b], a
-; 3ef07 (f:6f07)
+
 PlayMoveAnimation: ; 3ef07 (f:6f07)
 	ld [$D07C],a
 	call Delay3
 	PREDEF_JUMP MoveAnimationPredef ; predef 8
 
-; known jump sources: 69b (0:69b)
 Func_3ef12: ; 3ef12 (f:6f12)
 	ld a, [W_CUROPPONENT] ; $d059
 	and a
 	jr z, asm_3ef23
 
-; known jump sources: 54fb (1:54fb)
 Func_3ef18: ; 3ef18 (f:6f18)
 	ld a, [W_CUROPPONENT] ; $d059
 	ld [$cf91], a
@@ -64519,7 +63526,6 @@ asm_3ef3d: ; 3ef3d (f:6f3d)
 	ld [W_ISINBATTLE], a ; $d057
 	jp Func_3efeb
 
-; known jump sources: 3ef55 (f:6f55)
 Func_3ef8b: ; 3ef8b (f:6f8b)
 	ld a, $1
 	ld [W_ISINBATTLE], a ; $d057
@@ -64571,7 +63577,6 @@ Func_3ef8b: ; 3ef8b (f:6f8b)
 	ld a, $1
 	call Predef ; indirect jump to Func_3f0c6 (3f0c6 (f:70c6))
 
-; known jump sources: 3ef88 (f:6f88)
 Func_3efeb: ; 3efeb (f:6feb)
 	ld b, $0
 	call GoPAL_SET
@@ -64618,7 +63623,6 @@ Func_3efeb: ; 3efeb (f:6feb)
 Unknown_3f04a: ; 3f04a (f:704a)
 	db $50
 
-; known jump sources: 396e1 (e:56e1), 3ef69 (f:6f69)
 Func_3f04b: ; 3f04b (f:704b)
 	ld a, [$d033]
 	ld e, a
@@ -64638,7 +63642,6 @@ Func_3f04b: ; 3f04b (f:704b)
 
 INCBIN "baserom.gbc",$3f069,$3f073 - $3f069
 
-; known jump sources: 3ca5b (f:4a5b), 3cceb (f:4ceb), 5dc09 (17:5c09)
 Func_3f073: ; 3f073 (f:7073)
 	ld a, [$cc4f]
 	ld h, a
@@ -64681,7 +63684,6 @@ Func_3f073: ; 3f073 (f:7073)
 	add $31
 	jr asm_3f0d0
 
-; known jump sources: 62cb (1:62cb), 3c0e1 (f:40e1), 3ecff (f:6cff), 3ef7b (f:6f7b), 3efe8 (f:6fe8)
 Func_3f0c6: ; 3f0c6 (f:70c6)
 	ld a, [$cc4f]
 	ld h, a
@@ -64734,7 +63736,6 @@ asm_3f0d0: ; 3f0d0 (f:70d0)
 	jr nz, .asm_3f0f4
 	ret
 
-; known jump sources: 3cca9 (f:4ca9), 702a8 (1c:42a8), 797c2 (1e:57c2)
 ; loads back sprite of mon to $8000
 ; assumes the corresponding mon header is already loaded
 LoadMonBackSprite: ; 3f103 (f:7103)
@@ -64758,12 +63759,11 @@ LoadMonBackSprite: ; 3f103 (f:7103)
 	ld b, a
 	jp CopyVideoData
 
-; known jump sources: 3d69f (f:569f), 3d6a4 (f:56a4), 3d6ca (f:56ca), 3d6d9 (f:56d9), 3d790 (f:5790), 3d7c5 (f:57c5), 3d7ff (f:57ff), 3e016 (f:6016), 3e701 (f:6701), 3e706 (f:6706), 3e73e (f:673e), 3e74d (f:674d), 3e815 (f:6815), 3e84a (f:684a), 3e882 (f:6882)
 Func_3f132: ; 3f132 (f:7132)
 	call JumpMoveEffect
 	ld b, $1
 	ret
-; 3f138 (f:7138)
+
 JumpMoveEffect: ; 3f138 (f:7138)
 	ld a, [$ff00+$f3]  ;whose turn?
 	and a
@@ -64792,7 +63792,6 @@ INCBIN "baserom.gbc",$3f150,$3f1fc - $3f150
 	ld de, W_PLAYERMONSTATUS ; $d018
 	ld bc, W_PLAYERBATTSTATUS2 ; $d063
 
-; known jump sources: 3f205 (f:7205)
 Func_3f20e: ; 3f20e (f:720e)
 	ld a, [bc]
 	bit 5, a
@@ -64825,16 +63824,14 @@ Func_3f20e: ; 3f20e (f:720e)
 	jp PrintText
 .asm_3f242
 	jp Func_3fb5e
-; 3f245 (f:7245)
+
 UnnamedText_3f245: ; 3f245 (f:7245)
 	TX_FAR _UnnamedText_3f245
 	db "@"
-; 0x3f245 + 5 bytes
 
 UnnamedText_3f24a: ; 3f24a (f:724a)
 	TX_FAR _UnnamedText_3f24a
 	db "@"
-; 0x3f24a + 5 bytes
 
 	ld hl, W_ENEMYMONSTATUS ; $cfe9
 	ld de, W_PLAYERMOVEEFFECT ; $cfd3
@@ -64920,16 +63917,14 @@ UnnamedText_3f24a: ; 3f24a (f:724a)
 	ld c, $32
 	call DelayFrames
 	jp Func_3fb5e
-; 3f2df (f:72df)
+
 UnnamedText_3f2df: ; 3f2df (f:72df)
 	TX_FAR _UnnamedText_3f2df
 	db "@"
-; 0x3f2df + 5 bytes
 
 UnnamedText_3f2e4: ; 3f2e4 (f:72e4)
 	TX_FAR _UnnamedText_3f2e4
 	db "@"
-; 0x3f2e4 + 5 bytes
 
 	ld hl, Func_783f
 	ld b, BANK(Func_783f)
@@ -64951,7 +63946,7 @@ UnnamedText_3f2e4: ; 3f2e4 (f:72e4)
 	res 7, a
 	ld [de], a
 	ret
-; 3f30c (f:730c)
+
 FreezeBurnParalyzeEffect: ; 3f30c (f:730c)
 	xor a
 	ld [$cc5b], a
@@ -65060,12 +64055,10 @@ opponentAttacker: ; 3f382 (f:7382)
 UnnamedText_3f3d8: ; 3f3d8 (f:73d8)
 	TX_FAR _UnnamedText_3f3d8
 	db "@"
-; 0x3f3d8 + 5 bytes
 
 UnnamedText_3f3dd: ; 3f3dd (f:73dd)
 	TX_FAR _UnnamedText_3f3dd
 	db "@"
-; 0x3f3dd + 5 bytes
 
 CheckDefrost: ; 3f3e2 (f:73e2)
 	and a, FRZ			;are they frozen?
@@ -65106,9 +64099,7 @@ CheckDefrost: ; 3f3e2 (f:73e2)
 UnnamedText_3f423: ; 3f423 (f:7423)
 	TX_FAR _UnnamedText_3f423
 	db "@"
-; 0x3f423 + 5 bytes
 
-; known jump sources: e137 (3:6137), 3a821 (e:6821), 3e2e8 (f:62e8)
 Func_3f428: ; 3f428 (f:7428)
 	ld hl, W_PLAYERMONATTACKMOD ; $cd1a
 	ld de, W_PLAYERMOVEEFFECT ; $cfd3
@@ -65206,7 +64197,6 @@ Func_3f428: ; 3f428 (f:7428)
 	ld a, $e7
 	ld [$FF00+$98], a
 
-; known jump sources: 3f4b8 (f:74b8)
 Func_3f4c3: ; 3f4c3 (f:74c3)
 	ld a, [$FF00+$97]
 	ld [hli], a
@@ -65259,12 +64249,10 @@ asm_3f4ca: ; 3f4ca (f:74ca)
 	call Func_3ed27
 	jp Func_3ed64
 
-; known jump sources: 3f487 (f:7487)
 Func_3f520: ; 3f520 (f:7520)
 	pop hl
 	dec [hl]
 
-; known jump sources: 3f44b (f:744b)
 Func_3f522: ; 3f522 (f:7522)
 	ld hl, UnnamedText_3fb3e ; $7b3e
 	jp PrintText
@@ -65289,7 +64277,6 @@ INCBIN "baserom.gbc",$3f542,$3f547 - $3f542
 UnnamedText_3f547: ; 3f547 (f:7547)
 	TX_FAR _UnnamedText_3f547
 	db "@"
-; 0x3f547 + 5 bytes
 
 	ld hl, W_ENEMYMONATTACKMOD ; $cd2e
 	ld de, W_PLAYERMOVEEFFECT ; $cfd3
@@ -65418,7 +64405,6 @@ UnnamedText_3f547: ; 3f547 (f:7547)
 	ld a, $1
 	ld [$FF00+$98], a
 
-; known jump sources: 3f61b (f:761b)
 Func_3f624: ; 3f624 (f:7624)
 	ld a, [$FF00+$97]
 	ld [hli], a
@@ -65445,13 +64431,11 @@ asm_3f62c: ; 3f62c (f:762c)
 	call Func_3ed27
 	jp Func_3ed64
 
-; known jump sources: 3f5ec (f:75ec)
 Func_3f64d: ; 3f64d (f:764d)
 	pop de
 	pop hl
 	inc [hl]
 
-; known jump sources: 3f582 (f:7582), 3f5af (f:75af)
 Func_3f650: ; 3f650 (f:7650)
 	ld a, [de]
 	cp $44
@@ -65459,7 +64443,6 @@ Func_3f650: ; 3f650 (f:7650)
 	ld hl, UnnamedText_3fb3e ; $7b3e
 	jp PrintText
 
-; known jump sources: 3f56f (f:756f), 3f575 (f:7575), 3f597 (f:7597), 3f59d (f:759d)
 Func_3f65a: ; 3f65a (f:765a)
 	ld a, [de]
 	cp $44
@@ -65488,9 +64471,7 @@ INCBIN "baserom.gbc",$3f67e,$3f683 - $3f67e
 UnnamedText_3f683: ; 3f683 (f:7683)
 	TX_FAR _UnnamedText_3f683
 	db "@"
-; 0x3f683 + 5 bytes
 
-; known jump sources: 3f4cc (f:74cc), 3f62f (f:762f)
 Func_3f688: ; 3f688 (f:7688)
 	ld hl, StatsTextStrings ; $769f
 	ld c, $50
@@ -65635,21 +64616,18 @@ INCBIN "baserom.gbc",$3f6cb,$3f717 - $3f6cb
 	ld hl, UnnamedText_3f80c ; $780c
 .asm_3f7ff
 	jp PrintText
-; 3f802 (f:7802)
+
 UnnamedText_3f802: ; 3f802 (f:7802)
 	TX_FAR _UnnamedText_3f802
 	db "@"
-; 0x3f802 + 5 bytes
 
 UnnamedText_3f807: ; 3f807 (f:7807)
 	TX_FAR _UnnamedText_3f807
 	db "@"
-; 0x3f807 + 5 bytes
 
 UnnamedText_3f80c: ; 3f80c (f:780c)
 	TX_FAR _UnnamedText_3f80c
 	db "@"
-; 0x3f80c + 5 bytes
 
 	ld hl, W_PLAYERBATTSTATUS1 ; $d062
 	ld de, $d06a
@@ -65773,36 +64751,30 @@ INCBIN "baserom.gbc",$3f8c8,$3f8cd - $3f8c8
 	ld hl, UnnamedText_3f912 ; $7912
 .asm_3f8f8
 	ret
-; 3f8f9 (f:78f9)
+
 UnnamedText_3f8f9: ; 3f8f9 (f:78f9)
 	TX_FAR _UnnamedText_3f8f9
 	db "@"
-; 0x3f8f9 + 5 bytes
 
 UnnamedText_3f8fe: ; 3f8fe (f:78fe)
 	TX_FAR _UnnamedText_3f8fe
 	db "@"
-; 0x3f8fe + 5 bytes
 
 UnnamedText_3f903: ; 3f903 (f:7903)
 	TX_FAR _UnnamedText_3f903
 	db "@"
-; 0x3f903 + 5 bytes
 
 UnnamedText_3f908: ; 3f908 (f:7908)
 	TX_FAR _UnnamedText_3f908
 	db "@"
-; 0x3f908 + 5 bytes
 
 UnnamedText_3f90d: ; 3f90d (f:790d)
 	TX_FAR _UnnamedText_3f90d
 	db "@"
-; 0x3f90d + 5 bytes
 
 UnnamedText_3f912: ; 3f912 (f:7912)
 	TX_FAR _UnnamedText_3f912
 	db "@"
-; 0x3f912 + 5 bytes
 
 	ld hl, W_PLAYERBATTSTATUS1 ; $d062
 	ld de, $d06a
@@ -65869,11 +64841,10 @@ INCBIN "baserom.gbc",$3f941,$3f949 - $3f941
 	call nz, Func_3fb89
 	ld hl, UnnamedText_3f9a1 ; $79a1
 	jp PrintText
-; 3f9a1 (f:79a1)
+
 UnnamedText_3f9a1: ; 3f9a1 (f:79a1)
 	TX_FAR _UnnamedText_3f9a1
 	db "@"
-; 0x3f9a1 + 5 bytes
 
 asm_3f9a6: ; 3f9a6 (f:79a6)
 	cp $4c
@@ -65895,7 +64866,6 @@ INCBIN "baserom.gbc",$3f9b9,$3f9c1 - $3f9b9
 	set 5, [hl]
 	ret
 
-; known jump sources: 3f36f (f:736f), 3f880 (f:7880), 3f92b (f:792b)
 Func_3f9cf: ; 3f9cf (f:79cf)
 	push hl
 	ld hl, W_ENEMYBATTSTATUS2 ; $d068
@@ -65913,7 +64883,6 @@ INCBIN "baserom.gbc",$3f9df,$3fa77 - $3f9df
 UnnamedText_3fa77: ; 3fa77 (f:7a77)
 	TX_FAR _UnnamedText_3fa77
 	db "@"
-; 0x3fa77 + 5 bytes
 
 	ld hl, Func_2bea9
 	ld b, BANK(Func_2bea9)
@@ -65998,11 +64967,10 @@ INCBIN "baserom.gbc",$3fa84,$3fa8a - $3fa84
 	pop hl
 .asm_3fb06
 	jp Func_3fb53
-; 3fb09 (f:7b09)
+
 UnnamedText_3fb09: ; 3fb09 (f:7b09)
 	TX_FAR _UnnamedText_3fb09
 	db "@"
-; 0x3fb09 + 5 bytes
 
 INCBIN "baserom.gbc",$3fb0e,$3fb26 - $3fb0e
 	ld hl, Func_3b9ec
@@ -66014,59 +64982,49 @@ INCBIN "baserom.gbc",$3fb0e,$3fb26 - $3fb0e
 	ld hl, Func_3bb97
 	ld b, BANK(Func_3bb97)
 	jp Bankswitch ; indirect jump to Func_3bb97 (3bb97 (e:7b97))
-; 3fb3e (f:7b3e)
+
 UnnamedText_3fb3e: ; 3fb3e (f:7b3e)
 	TX_FAR _UnnamedText_3fb3e
 	db "@"
-; 0x3fb3e + 5 bytes
 
 INCBIN "baserom.gbc",$3fb43,$3fb49 - $3fb43
 
 UnnamedText_3fb49: ; 3fb49 (f:7b49)
 	TX_FAR _UnnamedText_3fb49
 	db "@"
-; 0x3fb49 + 5 bytes
 
-; known jump sources: 3f65e (f:765e), 3f7e1 (f:77e1), 3f9ae (f:79ae)
 Func_3fb4e: ; 3fb4e (f:7b4e)
 	ld a, [$ccf4]
 	and a
 	ret nz
 
-; known jump sources: 27faf (9:7faf), 3bbe3 (e:7be3), 3f76b (f:776b), 3f78e (f:778e), 3f7be (f:77be), 3fb06 (f:7b06)
 Func_3fb53: ; 3fb53 (f:7b53)
 	ld hl, UnnamedText_3fb59 ; $7b59
 	jp PrintText
-; 3fb59 (f:7b59)
+
 UnnamedText_3fb59: ; 3fb59 (f:7b59)
 	TX_FAR _UnnamedText_3fb59
 	db "@"
-; 0x3fb59 + 5 bytes
 
-; known jump sources: 3f242 (f:7242), 3f2dc (f:72dc), 3f768 (f:7768), 3f7bb (f:77bb), 52663 (14:6663)
 Func_3fb5e: ; 3fb5e (f:7b5e)
 	ld hl, UnnamedText_3fb64 ; $7b64
 	jp PrintText
-; 3fb64 (f:7b64)
+
 UnnamedText_3fb64: ; 3fb64 (f:7b64)
 	TX_FAR _UnnamedText_3fb64
 	db "@"
-; 0x3fb64 + 5 bytes
 
 UnnamedText_3fb69: ; 3fb69 (f:7b69)
 	TX_FAR _UnnamedText_3fb69
 	db "@"
-; 0x3fb69 + 5 bytes
 
-; known jump sources: 3f359 (f:7359), 3f3bc (f:73bc), 52656 (14:6656)
 Func_3fb6e: ; 3fb6e (f:7b6e)
 	ld hl, UnnamedText_3fb74 ; $7b74
 	jp PrintText
-; 3fb74 (f:7b74)
+
 UnnamedText_3fb74: ; 3fb74 (f:7b74)
 	TX_FAR _UnnamedText_3fb74
 	db "@"
-; 0x3fb74 + 5 bytes
 
 CheckTargetSubstitute: ; 3fb79 (f:7b79)
 	push hl
@@ -66080,7 +65038,6 @@ CheckTargetSubstitute: ; 3fb79 (f:7b79)
 	pop hl
 	ret
 
-; known jump sources: 3f239 (f:7239), 3f2cd (f:72cd), 3f638 (f:7638), 3f998 (f:7998), 3faec (f:7aec)
 Func_3fb89: ; 3fb89 (f:7b89)
 	ld a, [H_WHOSETURN] ; $FF00+$f3
 	and a
@@ -66091,7 +65048,6 @@ Func_3fb89: ; 3fb89 (f:7b89)
 	and a
 	ret z
 
-; known jump sources: 3f2c7 (f:72c7), 3f736 (f:7736)
 Func_3fb96: ; 3fb96 (f:7b96)
 	ld [W_ANIMATIONID], a ; $d07c
 	ld a, [H_WHOSETURN] ; $FF00+$f3
@@ -66103,7 +65059,6 @@ Func_3fb96: ; 3fb96 (f:7b96)
 	ld [$cc5b], a
 	jp Func_3fbbc
 
-; known jump sources: 27f9c (9:7f9c), 2bede (a:7ede), 3f4f9 (f:74f9), 5264e (14:664e)
 Func_3fba8: ; 3fba8 (f:7ba8)
 	xor a
 	ld [$cc5b], a
@@ -66116,11 +65071,9 @@ Func_3fba8: ; 3fba8 (f:7ba8)
 	and a
 	ret z
 
-; known jump sources: 3f356 (f:7356), 3f366 (f:7366), 3f379 (f:7379), 3f7e5 (f:77e5), 3f8bb (f:78bb)
 Func_3fbb9: ; 3fbb9 (f:7bb9)
 	ld [W_ANIMATIONID], a ; $d07c
 
-; known jump sources: 3fba5 (f:7ba5)
 Func_3fbbc: ; 3fbbc (f:7bbc)
 	push hl
 	push de
@@ -68263,7 +67216,6 @@ PokedexOrder: ; 41024 (10:5024)
 	db DEX_WEEPINBELL
 	db DEX_VICTREEBEL
 
-; known jump sources: 71c5c (1c:5c5c)
 Func_410e2: ; 410e2 (10:50e2)
 	ld a, [W_WHICHTRADE] ; $cd3d
 	ld [$cd5e], a
@@ -68318,12 +67270,10 @@ INCBIN "baserom.gbc",$41138,$4115f - $41138
 Unknown_4115f: ; 4115f (10:515f)
 INCBIN "baserom.gbc",$4115f,$41181 - $4115f
 
-; known jump sources: 41367 (10:5367)
 Func_41181: ; 41181 (10:5181)
 	ld c, $64
 	jp DelayFrames
 
-; known jump sources: 412be (10:52be), 4134b (10:534b), 41398 (10:5398), 413e3 (10:53e3)
 Func_41186: ; 41186 (10:5186)
 	ld a, $1
 	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
@@ -68332,12 +67282,10 @@ Func_41186: ; 41186 (10:5186)
 	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
 	ret
 
-; known jump sources: 41281 (10:5281), 41617 (10:5617), 41620 (10:5620), 41633 (10:5633), 4163c (10:563c), 41652 (10:5652)
 Func_41191: ; 41191 (10:5191)
 	ld c, $50
 	jp DelayFrames
 
-; known jump sources: 411a1 (10:51a1), 41298 (10:5298), 4142d (10:542d), 4145c (10:545c), 4149f (10:549f), 415f1 (10:55f1)
 Func_41196: ; 41196 (10:5196)
 	ld hl, W_SCREENTILESBUFFER
 	ld bc, $168
@@ -68385,7 +67333,6 @@ Func_41196: ; 41196 (10:5196)
 	ld [$d11e], a
 	jp GetMonName
 
-; known jump sources: 4141b (10:541b)
 Func_4120b: ; 4120b (10:520b)
 	ld a, $d0
 	ld [rOBP1], a ; $FF00+$49
@@ -68604,7 +67551,6 @@ INCBIN "baserom.gbc",$4132e,$41336 - $4132e
 	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
 	jp CleanLCD_OAM
 
-; known jump sources: 41376 (10:5376), 413c6 (10:53c6)
 Func_41411: ; 41411 (10:5411)
 	ld a, $1
 	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
@@ -68621,7 +67567,6 @@ Func_41411: ; 41411 (10:5411)
 	ld [$FF00+$b0], a
 	ret
 
-; known jump sources: 41395 (10:5395), 41403 (10:5403)
 Func_4142d: ; 4142d (10:542d)
 	call Func_41196
 	FuncCoord 11, 4 ; $c3fb
@@ -68649,7 +67594,6 @@ Func_4142d: ; 4142d (10:542d)
 	call PlaceString
 	jp DelayFrame
 
-; known jump sources: 413b5 (10:53b5), 413e0 (10:53e0)
 Func_4145c: ; 4145c (10:545c)
 	call Func_41196
 	FuncCoord 0, 4 ; $c3f0
@@ -68692,7 +67636,6 @@ Func_4145c: ; 4145c (10:545c)
 	call PlaceString
 	jp DelayFrame
 
-; known jump sources: 4139b (10:539b), 413ad (10:53ad), 413e6 (10:53e6), 413fb (10:53fb)
 Func_4149f: ; 4149f (10:549f)
 	call Func_41196
 	FuncCoord 0, 4 ; $c3f0
@@ -68705,7 +67648,6 @@ Func_4149f: ; 4149f (10:549f)
 	jr nz, .asm_414a9
 	ret
 
-; known jump sources: 412a8 (10:52a8), 413a1 (10:53a1), 413ec (10:53ec)
 Func_414ae: ; 414ae (10:54ae)
 	push hl
 	FuncCoord 0, 4 ; $c3f0
@@ -68721,7 +67663,6 @@ Func_414ae: ; 414ae (10:54ae)
 	ld c, $a
 	jp DelayFrames
 
-; known jump sources: 413a6 (10:53a6), 413b2 (10:53b2), 413ba (10:53ba), 413f4 (10:53f4), 41400 (10:5400), 41408 (10:5408), 414e5 (10:54e5)
 Func_414c5: ; 414c5 (10:54c5)
 	ld a, [$d08a]
 	ld e, a
@@ -68746,7 +67687,6 @@ Func_414c5: ; 414c5 (10:54c5)
 	jr nz, Func_414c5
 	ret
 
-; known jump sources: 414e1 (10:54e1), 4154c (10:554c)
 Func_414e8: ; 414e8 (10:54e8)
 	push de
 	push bc
@@ -68769,14 +67709,12 @@ Func_414e8: ; 414e8 (10:54e8)
 	pop de
 	ret
 
-; known jump sources: 41392 (10:5392), 413dd (10:53dd)
 Func_41505: ; 41505 (10:5505)
 	ld b, BANK(Func_71882)
 	ld hl, Func_71882
 	call Bankswitch ; indirect jump to Func_71882 (71882 (1c:5882))
 	call Func_41558
 
-; known jump sources: 41549 (10:5549)
 Func_41510: ; 41510 (10:5510)
 	ld hl, W_OAMBUFFER
 	ld c, $14
@@ -68793,7 +67731,6 @@ Func_41510: ; 41510 (10:5510)
 	jr nz, .asm_41515
 	ret
 
-; known jump sources: 413c0 (10:53c0), 413ef (10:53ef)
 Func_41525: ; 41525 (10:5525)
 	ld a, [$d08a]
 	and a
@@ -68821,7 +67758,6 @@ Func_41525: ; 41525 (10:5525)
 	jr nz, .asm_41549
 	ret
 
-; known jump sources: 4150d (10:550d)
 Func_41558: ; 41558 (10:5558)
 	ld hl, Unknown_41574 ; $5574
 	ld c, $4
@@ -68850,7 +67786,6 @@ Func_41558: ; 41558 (10:5558)
 Unknown_41574: ; 41574 (10:5574)
 INCBIN "baserom.gbc",$41574,$415a4 - $41574
 
-; known jump sources: 4126e (10:526e), 41355 (10:5355)
 Func_415a4: ; 415a4 (10:55a4)
 	ld [$cf91], a
 	ld [$d0b5], a
@@ -68868,7 +67803,6 @@ Func_415a4: ; 415a4 (10:55a4)
 	ld c, $a
 	jp DelayFrames
 
-; known jump sources: 4133b (10:533b)
 Func_415c8: ; 415c8 (10:55c8)
 	ld a, $1
 	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
@@ -68883,7 +67817,6 @@ Func_415c8: ; 415c8 (10:55c8)
 	ld [$FF00+$ae], a
 	ret
 
-; known jump sources: 41609 (10:5609), 4163f (10:563f)
 Func_415df: ; 415df (10:55df)
 	ld c, $32
 	call DelayFrames
@@ -68906,11 +67839,10 @@ Func_415df: ; 415df (10:55df)
 	ld c, $c8
 	call DelayFrames
 	jp Func_415df
-; 4160c (10:560c)
+
 UnnamedText_4160c: ; 4160c (10:560c)
 	TX_FAR _UnnamedText_4160c
 	db "@"
-; 0x4160c + 5 bytes
 
 	ld hl, UnnamedText_41623 ; $5623
 	call PrintText
@@ -68918,16 +67850,14 @@ UnnamedText_4160c: ; 4160c (10:560c)
 	ld hl, UnnamedText_41628 ; $5628
 	call PrintText
 	jp Func_41191
-; 41623 (10:5623)
+
 UnnamedText_41623: ; 41623 (10:5623)
 	TX_FAR _UnnamedText_41623
 	db "@"
-; 0x41623 + 5 bytes
 
 UnnamedText_41628: ; 41628 (10:5628)
 	TX_FAR _UnnamedText_41628
 	db "@"
-; 0x41628 + 5 bytes
 
 	ld hl, UnnamedText_41642 ; $5642
 	call PrintText
@@ -68936,41 +67866,34 @@ UnnamedText_41628: ; 41628 (10:5628)
 	call PrintText
 	call Func_41191
 	jp Func_415df
-; 41642 (10:5642)
+
 UnnamedText_41642: ; 41642 (10:5642)
 	TX_FAR _UnnamedText_41642
 	db "@"
-; 0x41642 + 5 bytes
 
 UnnamedText_41647: ; 41647 (10:5647)
 	TX_FAR _UnnamedText_41647
 	db "@"
-; 0x41647 + 5 bytes
 
-; known jump sources: 41373 (10:5373)
 Func_4164c: ; 4164c (10:564c)
 	ld hl, UnnamedText_41655 ; $5655
 	call PrintText
 	jp Func_41191
-; 41655 (10:5655)
+
 UnnamedText_41655: ; 41655 (10:5655)
 	TX_FAR _UnnamedText_41655
 	db "@"
-; 0x41655 + 5 bytes
 
 INCBIN "baserom.gbc",$4165a,$4166c - $4165a
 
 UnnamedText_4166c: ; 4166c (10:566c)
 	TX_FAR _UnnamedText_4166c
 	db "@"
-; 0x4166c + 5 bytes
 
 UnnamedText_41671: ; 41671 (10:5671)
 	TX_FAR _UnnamedText_41671
 	db "@"
-; 0x41671 + 5 bytes
 
-; known jump sources: 41286 (10:5286), 4128b (10:528b), 412d4 (10:52d4), 41338 (10:5338), 4135a (10:535a)
 Func_41676: ; 41676 (10:5676)
 	ld [W_ANIMATIONID], a ; $d07c
 	xor a
@@ -68978,7 +67901,6 @@ Func_41676: ; 41676 (10:5676)
 	ld a, $8
 	jp Predef ; indirect jump to MoveAnimation (78d5e (1e:4d5e))
 
-; known jump sources: 1fee (0:1fee)
 PlayIntro: ; 41682 (10:5682)
 	xor a
 	ld [H_CURRENTPRESSEDBUTTONS], a
@@ -69131,7 +68053,6 @@ AnimateIntroNidorino: ; 41793 (10:5793)
 	inc de
 	jr AnimateIntroNidorino
 
-; known jump sources: 417a2 (10:57a2), 41829 (10:5829)
 Func_417ae: ; 417ae (10:57ae)
 	ld hl, W_OAMBUFFER
 	ld a, [$d09f]
@@ -69151,7 +68072,6 @@ Func_417ae: ; 417ae (10:57ae)
 	jr nz, .asm_417b5
 	ret
 
-; known jump sources: 416bf (10:56bf)
 Func_417c7: ; 417c7 (10:57c7)
 	ld hl, W_OAMBUFFER
 	ld d, $0
@@ -69181,13 +68101,11 @@ Func_417c7: ; 417c7 (10:57c7)
 	jr nz, .asm_417cc
 	ret
 
-; known jump sources: 418e9 (10:58e9)
 Func_417f0: ; 417f0 (10:57f0)
 	ld hl, $9c00
 	ld bc, $240
 	jr asm_417fe
 
-; known jump sources: 418e0 (10:58e0)
 Func_417f8: ; 417f8 (10:57f8)
 	FuncCoord 0, 4 ; $c3f0
 	ld hl, Coord
@@ -69201,7 +68119,6 @@ asm_417fe: ; 417fe (10:57fe)
 	jr nz, asm_417fe
 	ret
 
-; known jump sources: 418f1 (10:58f1), 418f9 (10:58f9), 41901 (10:5901), 41909 (10:5909)
 Func_41807: ; 41807 (10:5807)
 	ld a, $1
 .asm_41809
@@ -69210,7 +68127,6 @@ Func_41807: ; 41807 (10:5807)
 	jr nz, .asm_41809
 	ret
 
-; known jump sources: 416c5 (10:56c5), 41712 (10:5712), 41728 (10:5728), 41744 (10:5744), 4183c (10:583c)
 Func_4180e: ; 4180e (10:580e)
 	ld a, e
 	cp $ff
@@ -69245,12 +68161,10 @@ Func_4180e: ; 4180e (10:580e)
 	jr nz, Func_4180e
 	ret
 
-; known jump sources: 416af (10:56af), 41707 (10:5707), 4171d (10:571d), 41749 (10:5749)
 Func_4183f: ; 4183f (10:583f)
 	FuncCoord 13, 7 ; $c439
 	ld hl, Coord
 
-; known jump sources: 412bb (10:52bb), 41443 (10:5443), 41486 (10:5486)
 Func_41842: ; 41842 (10:5842)
 	ld c, $0
 	ld a, $31
@@ -69258,7 +68172,6 @@ Func_41842: ; 41842 (10:5842)
 
 INCBIN "baserom.gbc",$41849,$41852 - $41849
 
-; known jump sources: 418ad (10:58ad)
 Func_41852: ; 41852 (10:5852)
 	ld hl, FightIntroBackMon ; $5a99
 	ld de, $9000
@@ -69281,7 +68194,6 @@ Func_41852: ; 41852 (10:5852)
 	ld a, BANK(FightIntroFrontMon)
 	jp FarCopyData2
 
-; known jump sources: 41688 (10:5688)
 Func_4188a: ; 4188a (10:588a)
 	ld b, $c
 	call GoPAL_SET
@@ -69323,7 +68235,6 @@ Func_4188a: ; 4188a (10:588a)
 	call CleanLCD_OAM
 	jp Delay3
 
-; known jump sources: 418aa (10:58aa)
 Func_418e9: ; 418e9 (10:58e9)
 	call Func_417f0
 	ld hl, W_SCREENTILESBUFFER
@@ -69519,7 +68430,6 @@ SafariZoneRestHouse1Blocks: ; 440fb (11:40fb)
 
 LavenderTownScript: ; 4410b (11:410b)
 	jp EnableAutoTextBoxDrawing
-; 0x4410e
 
 LavenderTownTexts: ; 4410e (11:410e)
 	dw LavenderTownText1, LavenderTownText2, LavenderTownText3, LavenderTownText4, LavenderTownText5, MartSignText, PokeCenterSignText, LavenderTownText8, LavenderTownText9
@@ -69541,17 +68451,14 @@ LavenderTownText1: ; 44120 (11:4120)
 UnnamedText_4413c: ; 4413c (11:413c)
 	TX_FAR _UnnamedText_4413c
 	db "@"
-; 0x4413c + 5 bytes
 
 UnnamedText_44141: ; 44141 (11:4141)
 	TX_FAR _UnnamedText_44141
 	db "@"
-; 0x44141 + 5 bytes
 
 UnnamedText_44146: ; 44146 (11:4146)
 	TX_FAR _UnnamedText_44146
 	db "@"
-; 0x44146 + 5 bytes
 
 LavenderTownText2: ; 4414b (11:414b)
 	TX_FAR _LavenderTownText2
@@ -69638,7 +68545,6 @@ DisplayDexRating: ; 44169 (11:4169)
 UnnamedText_441cc: ; 441cc (11:41cc)
 	TX_FAR _UnnamedText_441cc
 	db "@"
-; 0x441cc + 5 bytes
 
 DexRatingsTable: ; 441d1 (11:41d1)
 	db 10
@@ -69677,82 +68583,66 @@ DexRatingsTable: ; 441d1 (11:41d1)
 UnnamedText_44201: ; 44201 (11:4201)
 	TX_FAR _UnnamedText_44201
 	db "@"
-; 0x44201 + 5 bytes
 
 UnnamedText_44206: ; 44206 (11:4206)
 	TX_FAR _UnnamedText_44206
 	db "@"
-; 0x44206 + 5 bytes
 
 UnnamedText_4420b: ; 4420b (11:420b)
 	TX_FAR _UnnamedText_4420b
 	db "@"
-; 0x4420b + 5 bytes
 
 UnnamedText_44210: ; 44210 (11:4210)
 	TX_FAR _UnnamedText_44210
 	db "@"
-; 0x44210 + 5 bytes
 
 UnnamedText_44215: ; 44215 (11:4215)
 	TX_FAR _UnnamedText_44215
 	db "@"
-; 0x44215 + 5 bytes
 
 UnnamedText_4421a: ; 4421a (11:421a)
 	TX_FAR _UnnamedText_4421a
 	db "@"
-; 0x4421a + 5 bytes
 
 UnnamedText_4421f: ; 4421f (11:421f)
 	TX_FAR _UnnamedText_4421f
 	db "@"
-; 0x4421f + 5 bytes
 
 UnnamedText_44224: ; 44224 (11:4224)
 	TX_FAR _UnnamedText_44224
 	db "@"
-; 0x44224 + 5 bytes
 
 UnnamedText_44229: ; 44229 (11:4229)
 	TX_FAR _UnnamedText_44229
 	db "@"
-; 0x44229 + 5 bytes
 
 UnnamedText_4422e: ; 4422e (11:422e)
 	TX_FAR _UnnamedText_4422e
 	db "@"
-; 0x4422e + 5 bytes
 
 UnnamedText_44233: ; 44233 (11:4233)
 	TX_FAR _UnnamedText_44233
 	db "@"
-; 0x44233 + 5 bytes
 
 UnnamedText_44238: ; 44238 (11:4238)
 	TX_FAR _UnnamedText_44238
 	db "@"
-; 0x44238 + 5 bytes
 
 UnnamedText_4423d: ; 4423d (11:423d)
 	TX_FAR _UnnamedText_4423d
 	db "@"
-; 0x4423d + 5 bytes
 
 UnnamedText_44242: ; 44242 (11:4242)
 	TX_FAR _UnnamedText_44242
 	db "@"
-; 0x44242 + 5 bytes
 
 UnnamedText_44247: ; 44247 (11:4247)
 	TX_FAR _UnnamedText_44247
 	db "@"
-; 0x44247 + 5 bytes
 
 UnnamedText_4424c: ; 4424c (11:424c)
 	TX_FAR _UnnamedText_4424c
 	db "@"
-; 0x4424c + 5 bytes
 
 ViridianPokecenter_h: ; 0x44251 to 0x4425d (12 bytes) (bank=11) (id=41)
 	db $06 ; tileset
@@ -69765,7 +68655,6 @@ ViridianPokecenter_h: ; 0x44251 to 0x4425d (12 bytes) (bank=11) (id=41)
 ViridianPokeCenterScript: ; 4425d (11:425d)
 	call Func_22fa
 	jp EnableAutoTextBoxDrawing
-; 0x44263
 
 ViridianPokecenterTexts: ; 44263 (11:4263)
 	dw ViridianPokeCenterText1, ViridianPokeCenterText2, ViridianPokeCenterText3, ViridianPokeCenterText4
@@ -69820,7 +68709,6 @@ Mansion1Script: ; 442af (11:42af)
 	call ExecuteCurMapScriptInTable
 	ld [W_MANSION1CURSCRIPT], a
 	ret
-; 0x442c5
 
 Mansion1Subscript1: ; 442c5 (11:42c5)
 	ld hl, $d126
@@ -69847,15 +68735,12 @@ Mansion1Subscript1: ; 442c5 (11:42c5)
 	call Func_4430b
 	ld bc, $0d0d
 	jp Func_4430b
-; 0x44304
 
-; known jump sources: 442dd (11:42dd), 442e3 (11:42e3), 442e9 (11:42e9), 442ef (11:42ef)
 Func_44304: ; 44304 (11:4304)
 	ld a, $2d
 	ld [$d09f], a
 	jr asm_44310
 
-; known jump sources: 442d7 (11:42d7), 442f5 (11:42f5), 442fb (11:42fb), 44301 (11:4301)
 Func_4430b: ; 4430b (11:430b)
 	ld a, $e
 	ld [$d09f], a
@@ -69881,7 +68766,6 @@ Mansion1TrainerHeader0: ; 44334 (11:4334)
 	dw Mansion1AfterBattleText2 ; 0x4355 TextAfterBattle
 	dw Mansion1EndBattleText2 ; 0x4350 TextEndBattle
 	dw Mansion1EndBattleText2 ; 0x4350 TextEndBattle
-; 0x44340
 
 db $ff
 
@@ -69894,17 +68778,14 @@ Mansion1Text1: ; 44341 (11:4341)
 Mansion1BattleText2: ; 4434b (11:434b)
 	TX_FAR _Mansion1BattleText2
 	db "@"
-; 0x4434b + 5 bytes
 
 Mansion1EndBattleText2: ; 44350 (11:4350)
 	TX_FAR _Mansion1EndBattleText2
 	db "@"
-; 0x44350 + 5 bytes
 
 Mansion1AfterBattleText2: ; 44355 (11:4355)
 	TX_FAR _Mansion1AfterBattleText2
 	db "@"
-; 0x44355 + 5 bytes
 
 Mansion1Text4: ; 4435a (11:435a)
 	db $8
@@ -69933,22 +68814,18 @@ Mansion1Text4: ; 4435a (11:435a)
 	call PrintText
 .asm_44392
 	jp TextScriptEnd
-; 0x44395
 
 UnnamedText_44395: ; 44395 (11:4395)
 	TX_FAR _UnnamedText_44395
 	db "@"
-; 0x44395 + 5 bytes
 
 UnnamedText_4439a: ; 4439a (11:439a)
 	TX_FAR _UnnamedText_4439a
 	db "@"
-; 0x4439a + 5 bytes
 
 UnnamedText_4439f: ; 4439f (11:439f)
 	TX_FAR _UnnamedText_4439f
 	db "@"
-; 0x4439f + 5 bytes
 
 Mansion1Object: ; 0x443a4 (size=90)
 	db $2e ; border tile
@@ -69999,7 +68876,6 @@ RockTunnel1Script: ; 444dc (11:44dc)
 	call ExecuteCurMapScriptInTable
 	ld [W_ROCKTUNNEL1CURSCRIPT], a
 	ret
-; 0x444ef
 
 Unnamed_444ef: ; 444ef (11:44ef)
 INCBIN "baserom.gbc",$444ef,$444f5 - $444ef
@@ -70068,107 +68944,86 @@ asm_0c916: ; 44582 (11:4582)
 UnnamedText_44588: ; 44588 (11:4588)
 	TX_FAR _UnnamedText_44588
 	db "@"
-; 0x44588 + 5 bytes
 
 UnnamedText_4458d: ; 4458d (11:458d)
 	TX_FAR _UnnamedText_4458d
 	db "@"
-; 0x4458d + 5 bytes
 
 UnnamedText_44592: ; 44592 (11:4592)
 	TX_FAR _UnnamedText_44592
 	db "@"
-; 0x44592 + 5 bytes
 
 UnnamedText_44597: ; 44597 (11:4597)
 	TX_FAR _UnnamedText_44597
 	db "@"
-; 0x44597 + 5 bytes
 
 UnnamedText_4459c: ; 4459c (11:459c)
 	TX_FAR _UnnamedText_4459c
 	db "@"
-; 0x4459c + 5 bytes
 
 UnnamedText_445a1: ; 445a1 (11:45a1)
 	TX_FAR _UnnamedText_445a1
 	db "@"
-; 0x445a1 + 5 bytes
 
 UnnamedText_445a6: ; 445a6 (11:45a6)
 	TX_FAR _UnnamedText_445a6
 	db "@"
-; 0x445a6 + 5 bytes
 
 UnnamedText_445ab: ; 445ab (11:45ab)
 	TX_FAR _UnnamedText_445ab
 	db "@"
-; 0x445ab + 5 bytes
 
 UnnamedText_445b0: ; 445b0 (11:45b0)
 	TX_FAR _UnnamedText_445b0
 	db "@"
-; 0x445b0 + 5 bytes
 
 UnnamedText_445b5: ; 445b5 (11:45b5)
 	TX_FAR _UnnamedText_445b5
 	db "@"
-; 0x445b5 + 5 bytes
 
 UnnamedText_445ba: ; 445ba (11:45ba)
 	TX_FAR _UnnamedText_445ba
 	db "@"
-; 0x445ba + 5 bytes
 
 UnnamedText_445bf: ; 445bf (11:45bf)
 	TX_FAR _UnnamedText_445bf
 	db "@"
-; 0x445bf + 5 bytes
 
 UnnamedText_445c4: ; 445c4 (11:45c4)
 	TX_FAR _UnnamedText_445c4
 	db "@"
-; 0x445c4 + 5 bytes
 
 UnnamedText_445c9: ; 445c9 (11:45c9)
 	TX_FAR _UnnamedText_445c9
 	db "@"
-; 0x445c9 + 5 bytes
 
 UnnamedText_445ce: ; 445ce (11:45ce)
 	TX_FAR _UnnamedText_445ce
 	db "@"
-; 0x445ce + 5 bytes
 
 UnnamedText_445d3: ; 445d3 (11:45d3)
 	TX_FAR _UnnamedText_445d3
 	db "@"
-; 0x445d3 + 5 bytes
 
 UnnamedText_445d8: ; 445d8 (11:45d8)
 	TX_FAR _UnnamedText_445d8
 	db "@"
-; 0x445d8 + 5 bytes
 
 UnnamedText_445dd: ; 445dd (11:45dd)
 	TX_FAR _UnnamedText_445dd
 	db "@"
-; 0x445dd + 5 bytes
 
 UnnamedText_445e2: ; 445e2 (11:45e2)
 	TX_FAR _UnnamedText_445e2
 	db "@"
-; 0x445e2 + 5 bytes
 
 UnnamedText_445e7: ; 445e7 (11:45e7)
 	TX_FAR _UnnamedText_445e7
 	db "@"
-; 0x445e7 + 5 bytes
 
 UnnamedText_445ec: ; 445ec (11:45ec)
 	TX_FAR _UnnamedText_445ec
 	db "@"
-; 0x445ec + 5 bytes
 
 RockTunnel1Text8: ; 445f1 (11:45f1)
 	TX_FAR _RockTunnel1Text8
@@ -70261,7 +69116,6 @@ SeafoamIslands1Script: ; 447e9 (11:47e9)
 	ld [$d71d], a
 	ld hl, Seafoam1HolesCoords
 	jp Func_46981
-; 0x44846
 
 Seafoam1HolesCoords: ; 44846 (11:4846)
 	db $06,$11
@@ -70313,7 +69167,6 @@ SSAnne3_h: ; 0x44926 to 0x44932 (12 bytes) (bank=11) (id=97)
 
 SSAnne3Script: ; 44932 (11:4932)
 	jp EnableAutoTextBoxDrawing
-; 0x44935
 
 SSAnne3Texts: ; 44935 (11:4935)
 	dw SSAnne3Text1
@@ -70358,7 +69211,6 @@ VictoryRoad3Script: ; 44980 (11:4980)
 	call ExecuteCurMapScriptInTable
 	ld [W_VICTORYROAD3CURSCRIPT], a
 	ret
-; 0x44996
 
 VictoryRoad3Script_Unknown44996: ; 44996 (11:4996)
 	ld hl, $d126
@@ -70426,7 +69278,7 @@ INCBIN "baserom.gbc",$449f9,$449fe - $449f9
 	bit 4, a
 	jp z, CheckFightingMapTrainers
 	ret
-; 44a24 (11:4a24)
+
 VictoryRoad3Texts: ; 44a24 (11:4a24)
 	dw VictoryRoad3Text1, VictoryRoad3Text2, VictoryRoad3Text3, VictoryRoad3Text4, Predef5CText, Predef5CText, BoulderText, BoulderText, BoulderText, BoulderText
 
@@ -70439,7 +69291,6 @@ VictoryRoad3TrainerHeader0: ; 44a38 (11:4a38)
 	dw VictoryRoad3AfterBattleText2 ; 0x4a9b TextAfterBattle
 	dw VictoryRoad3EndBattleText2 ; 0x4a96 TextEndBattle
 	dw VictoryRoad3EndBattleText2 ; 0x4a96 TextEndBattle
-; 0x44a44
 
 VictoryRoad3TrainerHeader2: ; 44a44 (11:4a44)
 	db $2 ; flag's bit
@@ -70449,7 +69300,6 @@ VictoryRoad3TrainerHeader2: ; 44a44 (11:4a44)
 	dw VictoryRoad3AfterBattleText3 ; 0x4aaa TextAfterBattle
 	dw VictoryRoad3EndBattleText3 ; 0x4aa5 TextEndBattle
 	dw VictoryRoad3EndBattleText3 ; 0x4aa5 TextEndBattle
-; 0x44a50
 
 VictoryRoad3TrainerHeader3: ; 44a50 (11:4a50)
 	db $3 ; flag's bit
@@ -70459,7 +69309,6 @@ VictoryRoad3TrainerHeader3: ; 44a50 (11:4a50)
 	dw VictoryRoad3AfterBattleText4 ; 0x4ab9 TextAfterBattle
 	dw VictoryRoad3EndBattleText4 ; 0x4ab4 TextEndBattle
 	dw VictoryRoad3EndBattleText4 ; 0x4ab4 TextEndBattle
-; 0x44a5c
 
 VictoryRoad3TrainerHeader4: ; 44a5c (11:4a5c)
 	db $4 ; flag's bit
@@ -70469,7 +69318,6 @@ VictoryRoad3TrainerHeader4: ; 44a5c (11:4a5c)
 	dw VictoryRoad3AfterBattleText5 ; 0x4ac8 TextAfterBattle
 	dw VictoryRoad3EndBattleText5 ; 0x4ac3 TextEndBattle
 	dw VictoryRoad3EndBattleText5 ; 0x4ac3 TextEndBattle
-; 0x44a68
 
 db $ff
 
@@ -70500,62 +69348,50 @@ VictoryRoad3Text4: ; 44a87 (11:4a87)
 VictoryRoad3BattleText2: ; 44a91 (11:4a91)
 	TX_FAR _VictoryRoad3BattleText2
 	db "@"
-; 0x44a91 + 5 bytes
 
 VictoryRoad3EndBattleText2: ; 44a96 (11:4a96)
 	TX_FAR _VictoryRoad3EndBattleText2
 	db "@"
-; 0x44a96 + 5 bytes
 
 VictoryRoad3AfterBattleText2: ; 44a9b (11:4a9b)
 	TX_FAR _VictoryRoad3AfterBattleText2
 	db "@"
-; 0x44a9b + 5 bytes
 
 VictoryRoad3BattleText3: ; 44aa0 (11:4aa0)
 	TX_FAR _VictoryRoad3BattleText3
 	db "@"
-; 0x44aa0 + 5 bytes
 
 VictoryRoad3EndBattleText3: ; 44aa5 (11:4aa5)
 	TX_FAR _VictoryRoad3EndBattleText3
 	db "@"
-; 0x44aa5 + 5 bytes
 
 VictoryRoad3AfterBattleText3: ; 44aaa (11:4aaa)
 	TX_FAR _VictoryRoad3AfterBattleText3
 	db "@"
-; 0x44aaa + 5 bytes
 
 VictoryRoad3BattleText4: ; 44aaf (11:4aaf)
 	TX_FAR _VictoryRoad3BattleText4
 	db "@"
-; 0x44aaf + 5 bytes
 
 VictoryRoad3EndBattleText4: ; 44ab4 (11:4ab4)
 	TX_FAR _VictoryRoad3EndBattleText4
 	db "@"
-; 0x44ab4 + 5 bytes
 
 VictoryRoad3AfterBattleText4: ; 44ab9 (11:4ab9)
 	TX_FAR _VictoryRoad3AfterBattleText4
 	db "@"
-; 0x44ab9 + 5 bytes
 
 VictoryRoad3BattleText5: ; 44abe (11:4abe)
 	TX_FAR _VictoryRoad3BattleText5
 	db "@"
-; 0x44abe + 5 bytes
 
 VictoryRoad3EndBattleText5: ; 44ac3 (11:4ac3)
 	TX_FAR _VictoryRoad3EndBattleText5
 	db "@"
-; 0x44ac3 + 5 bytes
 
 VictoryRoad3AfterBattleText5: ; 44ac8 (11:4ac8)
 	TX_FAR _VictoryRoad3AfterBattleText5
 	db "@"
-; 0x44ac8 + 5 bytes
 
 VictoryRoad3Object: ; 0x44acd (size=106)
 	db $7d ; border tile
@@ -70606,7 +69442,6 @@ RocketHideout1Script: ; 44bca (11:4bca)
 	call ExecuteCurMapScriptInTable
 	ld [W_ROCKETHIDEOUT1CURSCRIPT], a
 	ret
-; 0x44be0
 
 Unknown_44be0: ; 44be0 (11:4be0)
 INCBIN "baserom.gbc",$44be0,$44c0e - $44be0
@@ -70626,7 +69461,6 @@ RocketHideout1TrainerHeader0: ; 44c22 (11:4c22)
 	dw RocketHideout1AfterBattleTxt2 ; 0x4cab TextAfterBattle
 	dw RocketHideout1EndBattleText2 ; 0x4ca6 TextEndBattle
 	dw RocketHideout1EndBattleText2 ; 0x4ca6 TextEndBattle
-; 0x44c2e
 
 RocketHideout1TrainerHeader2: ; 44c2e (11:4c2e)
 	db $2 ; flag's bit
@@ -70636,7 +69470,6 @@ RocketHideout1TrainerHeader2: ; 44c2e (11:4c2e)
 	dw RocketHideout1AfterBattleTxt3 ; 0x4cba TextAfterBattle
 	dw RocketHideout1EndBattleText3 ; 0x4cb5 TextEndBattle
 	dw RocketHideout1EndBattleText3 ; 0x4cb5 TextEndBattle
-; 0x44c3a
 
 RocketHideout1TrainerHeader3: ; 44c3a (11:4c3a)
 	db $3 ; flag's bit
@@ -70646,7 +69479,6 @@ RocketHideout1TrainerHeader3: ; 44c3a (11:4c3a)
 	dw RocketHideout1AfterBattleTxt4 ; 0x4cc9 TextAfterBattle
 	dw RocketHideout1EndBattleText4 ; 0x4cc4 TextEndBattle
 	dw RocketHideout1EndBattleText4 ; 0x4cc4 TextEndBattle
-; 0x44c46
 
 RocketHideout1TrainerHeader4: ; 44c46 (11:4c46)
 	db $4 ; flag's bit
@@ -70656,7 +69488,6 @@ RocketHideout1TrainerHeader4: ; 44c46 (11:4c46)
 	dw RocketHideout1AfterBattleTxt5 ; 0x4cd8 TextAfterBattle
 	dw RocketHideout1EndBattleText5 ; 0x4cd3 TextEndBattle
 	dw RocketHideout1EndBattleText5 ; 0x4cd3 TextEndBattle
-; 0x44c52
 
 RocketHideout1TrainerHeader5: ; 44c52 (11:4c52)
 	db $5 ; flag's bit
@@ -70666,7 +69497,6 @@ RocketHideout1TrainerHeader5: ; 44c52 (11:4c52)
 	dw RocketHideout1AfterBattleTxt6 ; 0x4ce2 TextAfterBattle
 	dw RocketHideout1EndBattleText6 ; 0x4c91 TextEndBattle
 	dw RocketHideout1EndBattleText6 ; 0x4c91 TextEndBattle
-; 0x44c5e
 
 db $ff
 
@@ -70707,81 +69537,65 @@ RocketHideout1EndBattleText6: ; 44c91 (11:4c91)
 	set 5, [hl]
 	ld hl, UnnamedText_44c9f
 	ret
-; 0x44c9f
 
 UnnamedText_44c9f: ; 44c9f (11:4c9f)
 	db $6, $50
-; 0x44ca1
 
 RocketHideout1BattleText2: ; 44ca1 (11:4ca1)
 	TX_FAR _RocketHideout1BattleText2
 	db "@"
-; 0x44ca1 + 5 bytes
 
 RocketHideout1EndBattleText2: ; 44ca6 (11:4ca6)
 	TX_FAR _RocketHideout1EndBattleText2
 	db "@"
-; 0x44ca6 + 5 bytes
 
 RocketHideout1AfterBattleTxt2: ; 44cab (11:4cab)
 	TX_FAR _RocketHideout1AfterBattleTxt2
 	db "@"
-; 0x44cab + 5 bytes
 
 RocketHideout1BattleText3: ; 44cb0 (11:4cb0)
 	TX_FAR _RocketHideout1BattleText3
 	db "@"
-; 0x44cb0 + 5 bytes
 
 RocketHideout1EndBattleText3: ; 44cb5 (11:4cb5)
 	TX_FAR _RocketHideout1EndBattleText3
 	db "@"
-; 0x44cb5 + 5 bytes
 
 RocketHideout1AfterBattleTxt3: ; 44cba (11:4cba)
 	TX_FAR _RocketHideout1AfterBattleTxt3
 	db "@"
-; 0x44cba + 5 bytes
 
 RocketHideout1BattleText4: ; 44cbf (11:4cbf)
 	TX_FAR _RocketHideout1BattleText4
 	db "@"
-; 0x44cbf + 5 bytes
 
 RocketHideout1EndBattleText4: ; 44cc4 (11:4cc4)
 	TX_FAR _RocketHideout1EndBattleText4
 	db "@"
-; 0x44cc4 + 5 bytes
 
 RocketHideout1AfterBattleTxt4: ; 44cc9 (11:4cc9)
 	TX_FAR _RocketHideout1AfterBattleTxt4
 	db "@"
-; 0x44cc9 + 5 bytes
 
 RocketHideout1BattleText5: ; 44cce (11:4cce)
 	TX_FAR _RocketHideout1BattleText5
 	db "@"
-; 0x44cce + 5 bytes
 
 RocketHideout1EndBattleText5: ; 44cd3 (11:4cd3)
 	TX_FAR _RocketHideout1EndBattleText5
 	db "@"
-; 0x44cd3 + 5 bytes
 
 RocketHideout1AfterBattleTxt5: ; 44cd8 (11:4cd8)
 	TX_FAR _RocketHideout1AfterBattleTxt5
 	db "@"
-; 0x44cd8 + 5 bytes
 
 RocketHideout1BattleText6: ; 44cdd (11:4cdd)
 	TX_FAR _RocketHideout1BattleText6
 	db "@"
-; 0x44cdd + 5 bytes
 
 RocketHideout1AfterBattleTxt6: ; 44ce2 (11:4ce2)
 	TX_FAR _RocketHideout1AfterBattleTxt6
 	db "@"
-; 0x44ce2 + 5 bytes
 
 RocketHideout1Object: ; 0x44ce7 (size=98)
 	db $2e ; border tile
@@ -70830,12 +69644,10 @@ RocketHideout2Script: ; 44e27 (11:4e27)
 	call ExecuteCurMapScriptInTable
 	ld [W_ROCKETHIDEOUT2CURSCRIPT], a
 	ret
-; 0x44e3a
 
 RocketHideout2_Unknown44e3a: ; 44e3a (11:4e3a)
 INCBIN "baserom.gbc",$44e3a,$44fd7 - $44e3a
 
-; known jump sources: 5c1 (0:5c1), 74985 (1d:4985)
 Func_44fd7: ; 44fd7 (11:4fd7)
 	ld a, [$c102]
 	srl a
@@ -70886,7 +69698,6 @@ Func_44fd7: ; 44fd7 (11:4fd7)
 	dec a
 	jr nz, .asm_45006
 	ret
-; 45023 (11:5023)
 
 Unknown_45023: ; 45023 (11:5023)
 ; 0x45023 XXX: it looks to me this is probably data for copying tiles into memory, maybe to mix and match a few tilesets, but I don't really know for sure
@@ -70990,7 +69801,6 @@ RocketHideout2TrainerHeader0: ; 450d1 (11:50d1)
 	dw RocketHideout2AfterBattleTxt2 ; 0x50f2 TextAfterBattle
 	dw RocketHideout2EndBattleText2 ; 0x50ed TextEndBattle
 	dw RocketHideout2EndBattleText2 ; 0x50ed TextEndBattle
-; 0x450dd
 
 db $ff
 
@@ -71003,17 +69813,14 @@ RocketHideout2Text1: ; 450de (11:50de)
 RocketHideout2BattleText2: ; 450e8 (11:50e8)
 	TX_FAR _RocketHideout2BattleText2
 	db "@"
-; 0x450e8 + 5 bytes
 
 RocketHideout2EndBattleText2: ; 450ed (11:50ed)
 	TX_FAR _RocketHideout2EndBattleText2
 	db "@"
-; 0x450ed + 5 bytes
 
 RocketHideout2AfterBattleTxt2: ; 450f2 (11:50f2)
 	TX_FAR _RocketHideout2AfterBattleTxt2
 	db "@"
-; 0x450f2 + 5 bytes
 
 RocketHideout2Object: ; 0x450f7 (size=80)
 	db $2e ; border tile
@@ -71060,7 +69867,6 @@ RocketHideout3Script: ; 45225 (11:5225)
 	call ExecuteCurMapScriptInTable
 	ld [W_ROCKETHIDEOUT3CURSCRIPT], a
 	ret
-; 0x45238
 
 RocketHideout3Script_Unknown45238: ; 45238 (11:5238)
 INCBIN "baserom.gbc",$45238,$452fa - $45238
@@ -71077,7 +69883,6 @@ RocketHideout3TrainerHeader0: ; 45302 (11:5302)
 	dw RocketHideout3AfterBattleTxt2 ; 0x532f TextAfterBattle
 	dw RocketHideout3EndBattleText2 ; 0x532a TextEndBattle
 	dw RocketHideout3EndBattleText2 ; 0x532a TextEndBattle
-; 0x4530e
 
 RocketHideout3TrainerHeader2: ; 4530e (11:530e)
 	db $2 ; flag's bit
@@ -71087,7 +69892,6 @@ RocketHideout3TrainerHeader2: ; 4530e (11:530e)
 	dw RocketHideout3AfterBattleText3 ; 0x5348 TextAfterBattle
 	dw RocketHideout3EndBattleText3 ; 0x5343 TextEndBattle
 	dw RocketHideout3EndBattleText3 ; 0x5343 TextEndBattle
-; 0x4531a
 
 db $ff
 
@@ -71100,17 +69904,14 @@ RocketHideout3Text1: ; 4531b (11:531b)
 RocketHideout3BattleText2: ; 45325 (11:5325)
 	TX_FAR _RocketHideout3BattleText2
 	db "@"
-; 0x45325 + 5 bytes
 
 RocketHideout3EndBattleText2: ; 4532a (11:532a)
 	TX_FAR _RocketHideout3EndBattleText2
 	db "@"
-; 0x4532a + 5 bytes
 
 RocketHideout3AfterBattleTxt2: ; 4532f (11:532f)
 	TX_FAR _RocketHideout3AfterBattleTxt2
 	db "@"
-; 0x4532f + 5 bytes
 
 RocketHideout3Text2: ; 45334 (11:5334)
 	db $08 ; asm
@@ -71121,12 +69922,10 @@ RocketHideout3Text2: ; 45334 (11:5334)
 RocketHideout3BattleTxt: ; 4533e (11:533e)
 	TX_FAR _RocketHideout3BattleTxt
 	db "@"
-; 0x4533e + 5 bytes
 
 RocketHideout3EndBattleText3: ; 45343 (11:5343)
 	TX_FAR _RocketHideout3EndBattleText3
 	db "@"
-; 0x45343 + 5 bytes
 
 RocketHideout3AfterBattleText3: ; 45348 (11:5348)
 	;TX_FAR _RocketHideout3AfterBattleText3
@@ -71134,7 +69933,6 @@ RocketHideout3AfterBattleText3: ; 45348 (11:5348)
 	dw _RocketHideout3AfterBattleText3
 	db BANK(_RocketHideout3AfterBattleText3)
 	db "@"
-; 0x45348 + 5 bytes
 
 RocketHideout3Object: ; 0x4534d (size=50)
 	db $2e ; border tile
@@ -71175,7 +69973,6 @@ RocketHideout4Script: ; 4545d (11:545d)
 	call ExecuteCurMapScriptInTable
 	ld [W_ROCKETHIDEOUT4CURSCRIPT], a
 	ret
-; 0x45473
 
 Unnamed_45473: ; 45473 (11:5473)
 INCBIN "baserom.gbc",$45473,$454ae - $45473
@@ -71195,7 +69992,6 @@ RocketHideout4TrainerHeader0: ; 45515 (11:5515)
 	dw RocketHideout4AfterBattleText2 ; 0x559d TextAfterBattle
 	dw RocketHideout4EndBattleText2 ; 0x5598 TextEndBattle
 	dw RocketHideout4EndBattleText2 ; 0x5598 TextEndBattle
-; 0x45521
 
 RocketHideout4TrainerHeader2: ; 45521 (11:5521)
 	db $3 ; flag's bit
@@ -71205,7 +70001,6 @@ RocketHideout4TrainerHeader2: ; 45521 (11:5521)
 	dw RocketHideout4AfterBattleText3 ; 0x55b6 TextAfterBattle
 	dw RocketHideout4EndBattleText3 ; 0x55b1 TextEndBattle
 	dw RocketHideout4EndBattleText3 ; 0x55b1 TextEndBattle
-; 0x4552d
 
 RocketHideout4TrainerHeader3: ; 4552d (11:552d)
 	db $4 ; flag's bit
@@ -71215,7 +70010,6 @@ RocketHideout4TrainerHeader3: ; 4552d (11:552d)
 	dw RocketHideout4AfterBattleText4 ; 0x55cf TextAfterBattle
 	dw RocketHideout4EndBattleText4 ; 0x55ca TextEndBattle
 	dw RocketHideout4EndBattleText4 ; 0x55ca TextEndBattle
-; 0x45539
 
 db $ff
 
@@ -71251,17 +70045,14 @@ RocketHideout4Text1: ; 4553a (11:553a)
 UnnamedText_4557a: ; 4557a (11:557a)
 	TX_FAR _UnnamedText_4557a
 	db "@"
-; 0x4557a + 5 bytes
 
 UnnamedText_4557f: ; 4557f (11:557f)
 	TX_FAR _UnnamedText_4557f
 	db "@"
-; 0x4557f + 5 bytes
 
 RocketHideout4Text10: ; 45584 (11:5584)
 	TX_FAR _UnnamedText_45584
 	db "@"
-; 0x45584 + 5 bytes
 
 RocketHideout4Text2: ; 45589 (11:5589)
 	db $08 ; asm
@@ -71272,12 +70063,10 @@ RocketHideout4Text2: ; 45589 (11:5589)
 RocketHideout4BattleText2: ; 45593 (11:5593)
 	TX_FAR _RocketHideout4BattleText2
 	db "@"
-; 0x45593 + 5 bytes
 
 RocketHideout4EndBattleText2: ; 45598 (11:5598)
 	TX_FAR _RocketHideout4EndBattleText2
 	db "@"
-; 0x45598 + 5 bytes
 
 RocketHideout4AfterBattleText2: ; 4559d (11:559d)
 	;TX_FAR _RocketHideout4AfterBattleText2
@@ -71285,7 +70074,6 @@ RocketHideout4AfterBattleText2: ; 4559d (11:559d)
 	dw _RocketHideout4AfterBattleText2
 	db BANK(_RocketHideout4AfterBattleText2)
 	db "@"
-; 0x4559d + 5 bytes
 
 RocketHideout4Text3: ; 455a2 (11:55a2)
 	db $08 ; asm
@@ -71296,12 +70084,10 @@ RocketHideout4Text3: ; 455a2 (11:55a2)
 RocketHideout4BattleText3: ; 455ac (11:55ac)
 	TX_FAR _RocketHideout4BattleText3
 	db "@"
-; 0x455ac + 5 bytes
 
 RocketHideout4EndBattleText3: ; 455b1 (11:55b1)
 	TX_FAR _RocketHideout4EndBattleText3
 	db "@"
-; 0x455b1 + 5 bytes
 
 RocketHideout4AfterBattleText3: ; 455b6 (11:55b6)
 	;TX_FAR _RocketHideout4AfterBattleText3
@@ -71309,7 +70095,6 @@ RocketHideout4AfterBattleText3: ; 455b6 (11:55b6)
 	dw _RocketHideout4AfterBattleText3
 	db BANK(_RocketHideout4AfterBattleText3)
 	db "@"
-; 0x455b6 + 5 bytes
 
 RocketHideout4Text4: ; 455bb (11:55bb)
 	db $08 ; asm
@@ -71320,12 +70105,10 @@ RocketHideout4Text4: ; 455bb (11:55bb)
 RocketHideout4BattleText4: ; 455c5 (11:55c5)
 	TX_FAR _RocketHideout4BattleText4
 	db "@"
-; 0x455c5 + 5 bytes
 
 RocketHideout4EndBattleText4: ; 455ca (11:55ca)
 	TX_FAR _RocketHideout4EndBattleText4
 	db "@"
-; 0x455ca + 5 bytes
 
 RocketHideout4AfterBattleText4: ; 455cf (11:55cf)
 	db $8
@@ -71341,12 +70124,10 @@ RocketHideout4AfterBattleText4: ; 455cf (11:55cf)
 	call Predef
 .asm_455e9
 	jp TextScriptEnd
-; 0x455ec
 
 UnnamedText_455ec: ; 455ec (11:55ec)
 	TX_FAR _UnnamedText_455ec
 	db "@"
-; 0x455ec + 5 bytes
 
 RocketHideout4Object: ; 0x455f1 (size=95)
 	db $2e ; border tile
@@ -71400,7 +70181,6 @@ RocketHideoutElevatorScript: ; 45710 (11:5710)
 	inc a
 	ld [$cc3c], a
 	ret
-; 0x4572c
 
 RocketHideoutElevatorScript_Unknown4572c: ; 4572c (11:572c)
 INCBIN "baserom.gbc",$4572c,$45741 - $4572c
@@ -71413,7 +70193,6 @@ Func_45741: ; 45741 (11:5741)
 	ld bc, $0006
 	call CopyData
 	ret
-; 0x45754
 
 Unknown_45754: ; 45754 (11:5754)
 INCBIN "baserom.gbc",$45754,$45759 - $45754
@@ -71427,7 +70206,6 @@ Func_4575f: ; 4575f (11:575f)
 	ld hl, Func_7bf15
 	call Bankswitch
 	ret
-; 0x4576b
 
 RocketHideoutElevatorTexts: ; 4576b (11:576b)
 	dw RocketHideoutElevatorText1
@@ -71494,7 +70272,6 @@ SilphCoElevatorScript: ; 457c0 (11:57c0)
 	inc a
 	ld [$cc3c], a
 	ret
-; 0x457dc
 
 SilphCoElevatorScript_Unknown457dc: ; 457dc (11:57dc)
 	ld hl, $d3af
@@ -71504,7 +70281,6 @@ SilphCoElevatorScript_Unknown457dc: ; 457dc (11:57dc)
 	ld c, a
 	call Func_457ea
 
-; known jump sources: 457e7 (11:57e7)
 Func_457ea: ; 457ea (11:57ea)
 	inc hl
 	inc hl
@@ -71514,7 +70290,6 @@ Func_457ea: ; 457ea (11:57ea)
 	ld [hli], a
 	ret
 
-; known jump sources: 45836 (11:5836)
 Func_457f1: ; 457f1 (11:57f1)
 	ld hl, Unknown_45804 ; $5804
 	call LoadItemList
@@ -71530,14 +70305,13 @@ INCBIN "baserom.gbc",$45804,$45811 - $45804
 Unknown_45811: ; 45811 (11:5811)
 INCBIN "baserom.gbc",$45811,$45827 - $45811
 
-; known jump sources: 457d0 (11:57d0)
 Func_45827: ; 45827 (11:5827)
 	call Delay3
 	ld b, BANK(Func_7bf15)
 	ld hl, Func_7bf15
 	call Bankswitch ; indirect jump to Func_7bf15 (7bf15 (1e:7f15))
 	ret
-; 45833 (11:5833)
+
 SilphCoElevatorTexts: ; 45833 (11:5833)
 	dw SilphCoElevatorText1
 
@@ -71578,7 +70352,6 @@ SafariZoneEast_h: ; 0x4585f to 0x4586b (12 bytes) (bank=11) (id=217)
 
 SafariZoneEastScript: ; 4586b (11:586b)
 	jp EnableAutoTextBoxDrawing
-; 0x4586e
 
 SafariZoneEastTexts: ; 4586e (11:586e)
 	dw Predef5CText, Predef5CText, Predef5CText, Predef5CText, SafariZoneEastText5, SafariZoneEastText6, SafariZoneEastText7
@@ -71636,7 +70409,6 @@ SafariZoneNorth_h: ; 0x4599f to 0x459ab (12 bytes) (bank=11) (id=218)
 
 SafariZoneNorthScript: ; 459ab (11:59ab)
 	jp EnableAutoTextBoxDrawing
-; 0x459ae
 
 SafariZoneNorthTexts: ; 459ae (11:59ae)
 	dw Predef5CText, Predef5CText, SafariZoneNorthText3, SafariZoneNorthText4, SafariZoneNorthText5, SafariZoneNorthText6, SafariZoneNorthText7
@@ -71710,7 +70482,6 @@ SafariZoneCenter_h: ; 0x45ba6 to 0x45bb2 (12 bytes) (bank=11) (id=220)
 
 SafariZoneCenterScript: ; 45bb2 (11:5bb2)
 	jp EnableAutoTextBoxDrawing
-; 0x45bb5
 
 SafariZoneCenterTexts: ; 45bb5 (11:5bb5)
 	dw Predef5CText, SafariZoneCenterText2, SafariZoneCenterText3
@@ -71768,7 +70539,6 @@ SafariZoneRestHouse1_h: ; 0x45ce1 to 0x45ced (12 bytes) (bank=11) (id=221)
 
 SafariZoneRestHouse1Script: ; 45ced (11:5ced)
 	jp EnableAutoTextBoxDrawing
-; 0x45cf0
 
 SafariZoneRestHouse1Texts: ; 45cf0 (11:5cf0)
 	dw SafariZoneRestHouse1Text1, SafariZoneRestHouse1Text2
@@ -71809,7 +70579,6 @@ SafariZoneRestHouse2_h: ; 0x45d1e to 0x45d2a (12 bytes) (bank=11) (id=223)
 SafariZoneRestHouse2Script: ; 45d2a (11:5d2a)
 	call EnableAutoTextBoxDrawing
 	ret
-; 0x45d2e
 
 SafariZoneRestHouse2Texts: ; 45d2e (11:5d2e)
 	dw SafariZoneRestHouse2Text1, SafariZoneRestHouse2Text2, SafariZoneRestHouse2Text3
@@ -71855,7 +70624,6 @@ SafariZoneRestHouse3_h: ; 0x45d69 to 0x45d75 (12 bytes) (bank=11) (id=224)
 SafariZoneRestHouse3Script: ; 45d75 (11:5d75)
 	call EnableAutoTextBoxDrawing
 	ret
-; 0x45d79
 
 SafariZoneRestHouse3Texts: ; 45d79 (11:5d79)
 	dw SafariZoneRestHouse3Text1, SafariZoneRestHouse3Text2, SafariZoneRestHouse3Text3
@@ -71901,7 +70669,6 @@ SafariZoneRestHouse4_h: ; 0x45db4 to 0x45dc0 (12 bytes) (bank=11) (id=225)
 SafariZoneRestHouse4Script: ; 45dc0 (11:5dc0)
 	call EnableAutoTextBoxDrawing
 	ret
-; 0x45dc4
 
 SafariZoneRestHouse4Texts: ; 45dc4 (11:5dc4)
 	dw SafariZoneRestHouse4Text1, SafariZoneRestHouse4Text2, SafariZoneRestHouse4Text3
@@ -71946,7 +70713,6 @@ UnknownDungeon2_h: ; 0x45dff to 0x45e0b (12 bytes) (bank=11) (id=226)
 
 UnknownDungeon2Script: ; 45e0b (11:5e0b)
 	jp EnableAutoTextBoxDrawing
-; 0x45e0e
 
 UnknownDungeon2Texts: ; 45e0e (11:5e0e)
 	dw Predef5CText, Predef5CText, Predef5CText
@@ -71996,7 +70762,6 @@ UnknownDungeon3Script: ; 45ef0 (11:5ef0)
 	call ExecuteCurMapScriptInTable
 	ld [W_UNKNOWNDUNGEON3CURSCRIPT], a
 	ret
-; 0x45f03
 
 UnknownDungeon3Script_Unknown45f03: ; 45f03 (11:5f03)
 INCBIN "baserom.gbc",$45f03,$45f09 - $45f03
@@ -72013,7 +70778,6 @@ UnknownDungeon3TrainerHeader0: ; 45f0f (11:5f0f)
 	dw UnknownDungeon3MewtwoText ; 0x5f26 TextAfterBattle
 	dw UnknownDungeon3MewtwoText ; 0x5f26 TextEndBattle
 	dw UnknownDungeon3MewtwoText ; 0x5f26 TextEndBattle
-; 0x45f1b
 
 db $ff
 
@@ -72030,7 +70794,6 @@ UnknownDungeon3MewtwoText: ; 45f26 (11:5f26)
 	call PlayCry
 	call WaitForSoundToFinish
 	jp TextScriptEnd
-; 0x45f36
 
 UnknownDungeon3Object: ; 0x45f36 (size=34)
 	db $7d ; border tile
@@ -72067,7 +70830,6 @@ RockTunnel2Script: ; 45feb (11:5feb)
 	call ExecuteCurMapScriptInTable
 	ld [W_ROCKTUNNEL2CURSCRIPT], a
 	ret
-; 0x45ffe
 
 RockTunnel2Script_Unknown45ffe: ; 45ffe (11:5ffe)
 INCBIN "baserom.gbc",$45ffe,$46004 - $45ffe
@@ -72084,7 +70846,6 @@ RockTunnel2TrainerHeader0: ; 46014 (11:6014)
 	dw RockTunnel2AfterBattleText2 ; 0x60cf TextAfterBattle
 	dw RockTunnel2EndBattleText2 ; 0x60ca TextEndBattle
 	dw RockTunnel2EndBattleText2 ; 0x60ca TextEndBattle
-; 0x46020
 
 RockTunnel2TrainerHeader2: ; 46020 (11:6020)
 	db $2 ; flag's bit
@@ -72094,7 +70855,6 @@ RockTunnel2TrainerHeader2: ; 46020 (11:6020)
 	dw RockTunnel2AfterBattleText3 ; 0x60de TextAfterBattle
 	dw RockTunnel2EndBattleText3 ; 0x60d9 TextEndBattle
 	dw RockTunnel2EndBattleText3 ; 0x60d9 TextEndBattle
-; 0x4602c
 
 RockTunnel2TrainerHeader3: ; 4602c (11:602c)
 	db $3 ; flag's bit
@@ -72104,7 +70864,6 @@ RockTunnel2TrainerHeader3: ; 4602c (11:602c)
 	dw RockTunnel2AfterBattleText4 ; 0x60ed TextAfterBattle
 	dw RockTunnel2EndBattleText4 ; 0x60e8 TextEndBattle
 	dw RockTunnel2EndBattleText4 ; 0x60e8 TextEndBattle
-; 0x46038
 
 RockTunnel2TrainerHeader4: ; 46038 (11:6038)
 	db $4 ; flag's bit
@@ -72114,7 +70873,6 @@ RockTunnel2TrainerHeader4: ; 46038 (11:6038)
 	dw RockTunnel2AfterBattleText5 ; 0x60fc TextAfterBattle
 	dw RockTunnel2EndBattleText5 ; 0x60f7 TextEndBattle
 	dw RockTunnel2EndBattleText5 ; 0x60f7 TextEndBattle
-; 0x46044
 
 RockTunnel2TrainerHeader5: ; 46044 (11:6044)
 	db $5 ; flag's bit
@@ -72124,7 +70882,6 @@ RockTunnel2TrainerHeader5: ; 46044 (11:6044)
 	dw RockTunnel2AfterBattleText6 ; 0x610b TextAfterBattle
 	dw RockTunnel2EndBattleText6 ; 0x6106 TextEndBattle
 	dw RockTunnel2EndBattleText6 ; 0x6106 TextEndBattle
-; 0x46050
 
 RockTunnel2TrainerHeader6: ; 46050 (11:6050)
 	db $6 ; flag's bit
@@ -72134,7 +70891,6 @@ RockTunnel2TrainerHeader6: ; 46050 (11:6050)
 	dw RockTunnel2AfterBattleText7 ; 0x611a TextAfterBattle
 	dw RockTunnel2EndBattleText7 ; 0x6115 TextEndBattle
 	dw RockTunnel2EndBattleText7 ; 0x6115 TextEndBattle
-; 0x4605c
 
 RockTunnel2TrainerHeader7: ; 4605c (11:605c)
 	db $7 ; flag's bit
@@ -72144,7 +70900,6 @@ RockTunnel2TrainerHeader7: ; 4605c (11:605c)
 	dw RockTunnel2AfterBattleText8 ; 0x6129 TextAfterBattle
 	dw RockTunnel2EndBattleText8 ; 0x6124 TextEndBattle
 	dw RockTunnel2EndBattleText8 ; 0x6124 TextEndBattle
-; 0x46068
 
 RockTunnel2TrainerHeader8: ; 46068 (11:6068)
 	db $8 ; flag's bit
@@ -72154,7 +70909,6 @@ RockTunnel2TrainerHeader8: ; 46068 (11:6068)
 	dw RockTunnel2AfterBattleText9 ; 0x6138 TextAfterBattle
 	dw RockTunnel2EndBattleText9 ; 0x6133 TextEndBattle
 	dw RockTunnel2EndBattleText9 ; 0x6133 TextEndBattle
-; 0x46074
 
 db $ff
 
@@ -72209,122 +70963,98 @@ RockTunnel2Text8: ; 460bb (11:60bb)
 RockTunnel2BattleText2: ; 460c5 (11:60c5)
 	TX_FAR _RockTunnel2BattleText2
 	db "@"
-; 0x460c5 + 5 bytes
 
 RockTunnel2EndBattleText2: ; 460ca (11:60ca)
 	TX_FAR _RockTunnel2EndBattleText2
 	db "@"
-; 0x460ca + 5 bytes
 
 RockTunnel2AfterBattleText2: ; 460cf (11:60cf)
 	TX_FAR _RockTunnel2AfterBattleText2
 	db "@"
-; 0x460cf + 5 bytes
 
 RockTunnel2BattleText3: ; 460d4 (11:60d4)
 	TX_FAR _RockTunnel2BattleText3
 	db "@"
-; 0x460d4 + 5 bytes
 
 RockTunnel2EndBattleText3: ; 460d9 (11:60d9)
 	TX_FAR _RockTunnel2EndBattleText3
 	db "@"
-; 0x460d9 + 5 bytes
 
 RockTunnel2AfterBattleText3: ; 460de (11:60de)
 	TX_FAR _RockTunnel2AfterBattleText3
 	db "@"
-; 0x460de + 5 bytes
 
 RockTunnel2BattleText4: ; 460e3 (11:60e3)
 	TX_FAR _RockTunnel2BattleText4
 	db "@"
-; 0x460e3 + 5 bytes
 
 RockTunnel2EndBattleText4: ; 460e8 (11:60e8)
 	TX_FAR _RockTunnel2EndBattleText4
 	db "@"
-; 0x460e8 + 5 bytes
 
 RockTunnel2AfterBattleText4: ; 460ed (11:60ed)
 	TX_FAR _RockTunnel2AfterBattleText4
 	db "@"
-; 0x460ed + 5 bytes
 
 RockTunnel2BattleText5: ; 460f2 (11:60f2)
 	TX_FAR _RockTunnel2BattleText5
 	db "@"
-; 0x460f2 + 5 bytes
 
 RockTunnel2EndBattleText5: ; 460f7 (11:60f7)
 	TX_FAR _RockTunnel2EndBattleText5
 	db "@"
-; 0x460f7 + 5 bytes
 
 RockTunnel2AfterBattleText5: ; 460fc (11:60fc)
 	TX_FAR _RockTunnel2AfterBattleText5
 	db "@"
-; 0x460fc + 5 bytes
 
 RockTunnel2BattleText6: ; 46101 (11:6101)
 	TX_FAR _RockTunnel2BattleText6
 	db "@"
-; 0x46101 + 5 bytes
 
 RockTunnel2EndBattleText6: ; 46106 (11:6106)
 	TX_FAR _RockTunnel2EndBattleText6
 	db "@"
-; 0x46106 + 5 bytes
 
 RockTunnel2AfterBattleText6: ; 4610b (11:610b)
 	TX_FAR _RockTunnel2AfterBattleText6
 	db "@"
-; 0x4610b + 5 bytes
 
 RockTunnel2BattleText7: ; 46110 (11:6110)
 	TX_FAR _RockTunnel2BattleText7
 	db "@"
-; 0x46110 + 5 bytes
 
 RockTunnel2EndBattleText7: ; 46115 (11:6115)
 	TX_FAR _RockTunnel2EndBattleText7
 	db "@"
-; 0x46115 + 5 bytes
 
 RockTunnel2AfterBattleText7: ; 4611a (11:611a)
 	TX_FAR _RockTunnel2AfterBattleText7
 	db "@"
-; 0x4611a + 5 bytes
 
 RockTunnel2BattleText8: ; 4611f (11:611f)
 	TX_FAR _RockTunnel2BattleText8
 	db "@"
-; 0x4611f + 5 bytes
 
 RockTunnel2EndBattleText8: ; 46124 (11:6124)
 	TX_FAR _RockTunnel2EndBattleText8
 	db "@"
-; 0x46124 + 5 bytes
 
 RockTunnel2AfterBattleText8: ; 46129 (11:6129)
 	TX_FAR _RockTunnel2AfterBattleText8
 	db "@"
-; 0x46129 + 5 bytes
 
 RockTunnel2BattleText9: ; 4612e (11:612e)
 	TX_FAR _RockTunnel2BattleText9
 	db "@"
-; 0x4612e + 5 bytes
 
 RockTunnel2EndBattleText9: ; 46133 (11:6133)
 	TX_FAR _RockTunnel2EndBattleText9
 	db "@"
-; 0x46133 + 5 bytes
 
 RockTunnel2AfterBattleText9: ; 46138 (11:6138)
 	TX_FAR _RockTunnel2AfterBattleText9
 	db "@"
-; 0x46138 + 5 bytes
 
 RockTunnel2Object: ; 0x4613d (size=100)
 	db $3 ; border tile
@@ -72403,7 +71133,6 @@ SeafoamIslands2Script: ; 46315 (11:6315)
 	ld [$d71d], a
 	ld hl, Seafoam2HolesCoords
 	jp Func_46981
-; 0x4636d
 
 Seafoam2HolesCoords: ; 4636d (11:636d)
 	db $06,$12
@@ -72490,7 +71219,6 @@ SeafoamIslands3Script: ; 46451 (11:6451)
 	ld [$d71d], a
 	ld hl, Seafoam3HolesCoords
 	jp Func_46981
-; 0x464a9
 
 Seafoam3HolesCoords: ; 464a9 (11:64a9)
 	db $06,$13
@@ -72585,7 +71313,6 @@ SeafoamIslands4Script: ; 4658d (11:658d)
 	ld hl, SeafoamIslands4Scripts
 	ld a, [W_SEAFOAMISLANDS4CURSCRIPT]
 	jp CallFunctionInTable
-; 0x465f6
 
 Seafoam4HolesCoords: ; 465f6 (11:65f6)
 	db $10,$03
@@ -72617,7 +71344,6 @@ SeafoamIslands4Script0: ; 46603 (11:6603)
 	ld a, $1
 	ld [W_SEAFOAMISLANDS4CURSCRIPT], a
 	ret
-; 0x46632
 
 RLEMovement46632: ; 46632 (11:6632)
 	db $80,6
@@ -72632,7 +71358,6 @@ SeafoamIslands4Script1: ; 46639 (11:6639)
 	ld a, $0
 	ld [W_SEAFOAMISLANDS4CURSCRIPT], a
 	ret
-; 0x46644
 
 SeafoamIslands4Script2: ; 46644 (11:6644)
 INCBIN "baserom.gbc",$46644,$4668f - $46644
@@ -72644,7 +71369,6 @@ SeafoamIslands4Script3: ; 4668f (11:668f)
 	ld a, $0
 	ld [W_SEAFOAMISLANDS4CURSCRIPT], a
 	ret
-; 0x4669a
 
 SeafoamIslands4Texts: ; 4669a (11:669a)
 	dw BoulderText, BoulderText, BoulderText, BoulderText, BoulderText, BoulderText
@@ -72696,7 +71420,6 @@ SeafoamIslands5Script: ; 46799 (11:6799)
 	ld a, [W_SEAFOAMISLANDS5CURSCRIPT]
 	ld hl, SeafoamIslands5Scripts
 	jp CallFunctionInTable
-; 0x467a5
 
 INCBIN "baserom.gbc",$467a5,$467ad - $467a5
 
@@ -72732,7 +71455,6 @@ SeafoamIslands5Script0: ; 467c7 (11:67c7)
 	ld a, $1
 	ld [W_SEAFOAMISLANDS5CURSCRIPT], a
 	ret
-; 0x467fe
 
 Unknown_467fe: ; 467fe (11:67fe)
 INCBIN "baserom.gbc",$467fe,$46807 - $467fe
@@ -72746,7 +71468,6 @@ SeafoamIslands5Script1: ; 46807 (11:6807)
 	ld a, $0
 	ld [W_SEAFOAMISLANDS5CURSCRIPT], a
 	ret
-; 0x46816
 
 INCBIN "baserom.gbc",$46816,$4687c - $46816
 
@@ -72762,7 +71483,6 @@ SeafoamIslands5TrainerHeader0: ; 46886 (11:6886)
 	dw SeafoamIslands5BattleText2 ; 0x68a2 TextAfterBattle
 	dw SeafoamIslands5BattleText2 ; 0x68a2 TextEndBattle
 	dw SeafoamIslands5BattleText2 ; 0x68a2 TextEndBattle
-; 0x46892
 
 db $ff
 
@@ -72781,7 +71501,6 @@ SeafoamIslands5BattleText2: ; 468a2 (11:68a2)
 	call PlayCry
 	call WaitForSoundToFinish
 	jp TextScriptEnd
-; 0x468b2
 
 SeafoamIslands5Text4: ; 468b2 (11:68b2)
 	TX_FAR _SeafoamIslands5Text4
@@ -72818,7 +71537,6 @@ SeafoamIslands5Object: ; 0x468bc (size=62)
 SeafoamIslands5Blocks: ; 468fa (11:68fa)
 	INCBIN "maps/seafoamislands5.blk"
 
-; known jump sources: 44843 (11:4843), 44a06 (11:4a06), 4636a (11:636a)
 Func_46981: ; 46981 (11:6981)
 	xor a
 	ld [$d71e], a
@@ -72835,7 +71553,6 @@ Func_46981: ; 46981 (11:6981)
 	set 4, [hl]
 	ret
 
-; known jump sources: 3ec5 (0:3ec5)
 Func_469a0: ; 469a0 (11:69a0)
 	ld hl, $ffeb
 	xor a
@@ -72905,7 +71622,6 @@ Func_469a0: ; 469a0 (11:69a0)
 	ld [$FF00+$ee], a
 	ret
 
-; known jump sources: 469dc (11:69dc)
 Func_46a01: ; 46a01 (11:6a01)
 	ld a, [$c109]
 	cp $4
@@ -72948,7 +71664,7 @@ Func_46a01: ; 46a01 (11:6a01)
 .asm_46a3d
 	ld [$FF00+$ea], a
 	ret
-; 46a40 (11:6a40)
+
 HiddenObjectMaps: ; 46a40 (11:6a40)
 	db REDS_HOUSE_2F
 	db BLUES_HOUSE
@@ -73800,7 +72516,6 @@ Route15GateUpstairsBlocks: ; 480db (12:40db)
 Route11GateUpstairsBlocks: ; 480db (12:40db)
 	INCBIN "maps/route11gateupstairs.blk"
 
-; known jump sources: c72b (3:472b)
 Func_480eb: ; 480eb (12:40eb)
 	call Load16BitRegisters
 	ld a, [rBGP] ; $FF00+$47
@@ -73813,7 +72528,6 @@ Func_480eb: ; 480eb (12:40eb)
 	ld [rBGP], a ; $FF00+$47
 	ret
 
-; known jump sources: 7920b (1e:520b)
 Func_480ff: ; 480ff (12:40ff)
 	call Load16BitRegisters
 	ld a, $1
@@ -73830,7 +72544,6 @@ Func_480ff: ; 480ff (12:40ff)
 	ld [$d0a0], a
 	ret
 
-; known jump sources: 4810a (12:410a), 4810d (12:410d)
 Func_48119: ; 48119 (12:4119)
 	ld a, [H_NUMTOPRINT] ; $FF00+$96 (aliases: H_MULTIPLICAND)
 	xor b
@@ -73839,7 +72552,6 @@ Func_48119: ; 48119 (12:4119)
 	ld c, $3
 	jp DelayFrames
 
-; known jump sources: 3dc34 (f:5c34), 79212 (1e:5212)
 Func_48125: ; 48125 (12:4125)
 	call Load16BitRegisters
 	xor a
@@ -73856,7 +72568,6 @@ Func_48125: ; 48125 (12:4125)
 	ld [rWX], a ; $FF00+$4b
 	ret
 
-; known jump sources: 4812b (12:412b), 48133 (12:4133)
 Func_4813f: ; 4813f (12:413f)
 	ld a, [$FF00+$97]
 	xor b
@@ -73869,10 +72580,9 @@ Func_4813f: ; 4813f (12:413f)
 	ld [rWX], a ; $FF00+$4b
 	ld c, $4
 	jp DelayFrames
-; 48152 (12:4152)
+
 Route7Script: ; 48152 (12:4152)
 	jp EnableAutoTextBoxDrawing
-; 0x48155
 
 ; XXX
 db $57, $41
@@ -73995,7 +72705,6 @@ CeladonMart3_h: ; 0x48219 to 0x48225 (12 bytes) (bank=12) (id=124)
 
 CeladonMart3Script: ; 48225 (12:4225)
 	jp EnableAutoTextBoxDrawing
-; 0x48228
 
 CeladonMart3Texts: ; 48228 (12:4228)
 	dw CeladonMart3Text1, CeladonMart3Text2, CeladonMart3Text3, CeladonMart3Text4, CeladonMart3Text5, CeladonMart3Text6, CeladonMart3Text7, CeladonMart3Text8, CeladonMart3Text9, CeladonMart3Text10, CeladonMart3Text11, CeladonMart3Text12, CeladonMart3Text13, CeladonMart3Text14, CeladonMart3Text15, CeladonMart3Text16, CeladonMart3Text17
@@ -74026,22 +72735,18 @@ CeladonMart3Text1: ; 4824a (12:424a)
 TM18PreReceiveText: ; 48278 (12:4278)
 	TX_FAR _TM18PreReceiveText
 	db "@"
-; 0x48278 + 5 bytes
 
 ReceivedTM18Text: ; 4827d (12:427d)
 	TX_FAR _ReceivedTM18Text ; 0x9c85a
 	db $0B, "@"
-; 0x48283
 
 TM18ExplanationText: ; 48283 (12:4283)
 	TX_FAR _TM18ExplanationText
 	db "@"
-; 0x48283 + 5 bytes
 
 TM18NoRoomText: ; 48288 (12:4288)
 	TX_FAR _TM18NoRoomText
 	db "@"
-; 0x48288 + 5 bytes
 
 CeladonMart3Text2: ; 4828d (12:428d)
 	TX_FAR _CeladonMart3Text2
@@ -74139,7 +72844,6 @@ CeladonMart4_h: ; 0x4834a to 0x48356 (12 bytes) (bank=12) (id=125)
 
 CeladonMart4Script: ; 48356 (12:4356)
 	jp EnableAutoTextBoxDrawing
-; 0x48359
 
 CeladonMart4Texts: ; 48359 (12:4359)
 	dw CeladonMart4Text1, CeladonMart4Text2, CeladonMart4Text3, CeladonMart4Text4
@@ -74190,9 +72894,7 @@ CeladonMartRoof_h: ; 0x483c9 to 0x483d5 (12 bytes) (bank=12) (id=126)
 
 CeladonMartRoofScript: ; 483d5 (12:43d5)
 	jp EnableAutoTextBoxDrawing
-; 0x483d8
 
-; known jump sources: 4856d (12:456d)
 Func_483d8: ; 483d8 (12:43d8)
 	xor a
 	ld [$cd37], a
@@ -74229,7 +72931,6 @@ Func_483d8: ; 483d8 (12:43d8)
 Unknown_48408: ; 48408 (12:4408)
 INCBIN "baserom.gbc",$48408,$4840c - $48408
 
-; known jump sources: 4858a (12:458a)
 Func_4840c: ; 4840c (12:440c)
 	ld hl, $d730
 	set 6, [hl]
@@ -74325,17 +73026,14 @@ Func_4840c: ; 4840c (12:440c)
 	ld hl, Unknown_4852c ; $452c
 	jp PrintText
 
-; known jump sources: 4847b (12:447b), 4849f (12:449f), 484c3 (12:44c3)
 RemoveItemByIDBank12: ; 484e6 (12:44e6)
 	ld b, BANK(RemoveItemByID)
 	ld hl, RemoveItemByID
 	jp Bankswitch ; indirect jump to RemoveItemByID (17f37 (5:7f37))
-; 484ee (12:44ee)
 
 UnnamedText_484ee: ; 484ee (12:44ee)
 	TX_FAR _UnnamedText_484ee
 	db "@"
-; 0x484ee + 5 bytes
 
 Unknown_484f3: ; 484f3 (12:44f3)
 INCBIN "baserom.gbc",$484f3,$484f9 - $484f3
@@ -74361,7 +73059,6 @@ INCBIN "baserom.gbc",$48526,$4852c - $48526
 Unknown_4852c: ; 4852c (12:452c)
 INCBIN "baserom.gbc",$4852c,$48532 - $4852c
 
-; known jump sources: 4844b (12:444b)
 Func_48532: ; 48532 (12:4532)
 	ld hl, $cc5b
 	xor a
@@ -74384,7 +73081,7 @@ Func_48532: ; 48532 (12:4532)
 	inc [hl]
 	pop hl
 	jr .asm_48538
-; 4855b (12:455b)
+
 CeladonMartRoofTexts: ; 4855b (12:455b)
 	dw CeladonMartRoofText1, CeladonMartRoofText2, CeladonMartRoofText5, CeladonMartRoofText5, CeladonMartRoofText5, CeladonMartRoofText6
 
@@ -74417,13 +73114,11 @@ CeladonMartRoofText2: ; 4856c (12:456c)
 CeladonMartRoofText3: ; 48598 (12:4598)
 	TX_FAR _UnnamedText_48598
 	db "@"
-; 0x48598 + 5 bytes
 
 CeladonMartRoofText4: ; 4859d (12:459d)
 UnnamedText_4859d: ; 4859d (12:459d)
 	TX_FAR _UnnamedText_4859d
 	db "@"
-; 0x4859d + 5 bytes
 
 CeladonMartRoofText5: ; 485a2 (12:45a2)
 	db $f5
@@ -74477,7 +73172,6 @@ CeladonMartElevatorScript: ; 48600 (12:4600)
 	inc a
 	ld [$cc3c], a
 	ret
-; 0x4861c
 
 CeladonMartElevatorScript_Unknown4861c: ; 4861c (12:461c)
 INCBIN "baserom.gbc",$4861c,$48631 - $4861c
@@ -74489,7 +73183,6 @@ Func_48631: ; 48631 (12:4631)
 	ld de, $cc5b
 	ld bc, $000a
 	jp CopyData
-; 0x48643
 
 Unknown_48643: ; 48643 (12:4643)
 INCBIN "baserom.gbc",$48643,$4864a - $48643
@@ -74501,7 +73194,6 @@ Func_48654: ; 48654 (12:4654)
 	ld b, BANK(Func_7bf15)
 	ld hl, Func_7bf15
 	jp Bankswitch
-; 0x4865c
 
 CeladonMartElevatorTexts: ; 4865c (12:465c)
 	dw CeladonMartElevatorText1
@@ -74543,16 +73235,13 @@ CeladonMansion1_h: ; 0x48688 to 0x48694 (12 bytes) (bank=12) (id=128)
 
 CeladonMansion1Script: ; 48694 (12:4694)
 	jp EnableAutoTextBoxDrawing
-; 0x48697
 
 CeladonMansion1Texts: ; 48697 (12:4697)
 	dw CeladonMansion1Text1, CeladonMansion1Text2, CeladonMansion1Text3, CeladonMansion1Text4, CeladonMansion1Text5
-;0x486a1
 
 Func_486a1: ; 486a1 (12:46a1)
 	call PlayCry
 	jp TextScriptEnd
-; 0x486a7
 
 CeladonMansion1Text1: ; 486a7 (12:46a7)
 	TX_FAR _CeladonMansion1Text1
@@ -74569,14 +73258,12 @@ CeladonMansion1Text3: ; 486b6 (12:46b6)
 	db $8
 	ld a, $4
 	jp Func_486a1
-; 0x486c0
 
 CeladonMansion1Text4: ; 486c0 (12:46c0)
 	TX_FAR _CeladonMansion1Text4
 	db $8
 	ld a, $f
 	jp Func_486a1
-; 0x486ca
 
 CeladonMansion1Text5: ; 486ca (12:46ca)
 	TX_FAR _CeladonMansion1Text5
@@ -74622,7 +73309,6 @@ CeladonMansion2_h: ; 0x4872e to 0x4873a (12 bytes) (bank=12) (id=129)
 CeladonMansion2Script: ; 4873a (12:473a)
 	call EnableAutoTextBoxDrawing
 	ret
-; 0x4873e
 
 CeladonMansion2Texts: ; 4873e (12:473e)
 	dw CeladonMansion2Text1
@@ -74664,7 +73350,6 @@ CeladonMansion3_h: ; 0x48784 to 0x48790 (12 bytes) (bank=12) (id=130)
 
 CeladonMansion3Script: ; 48790 (12:4790)
 	jp EnableAutoTextBoxDrawing
-; 0x48793
 
 CeladonMansion3Texts: ; 48793 (12:4793)
 	dw ProgrammerText
@@ -74709,7 +73394,6 @@ DirectorText: ; 487b2 (12:47b2)
 .GameDesigner ; 487d0 (12:47d0)
 	TX_FAR _GameDesignerText
 	db "@"
-; 0x487d5
 
 .CompletedDexText
 	TX_FAR _CompletedDexText ; 0x9d0ad
@@ -74721,7 +73405,6 @@ DirectorText: ; 487b2 (12:47b2)
 	ld a, $1
 	ld [$cc3c], a
 	jp TextScriptEnd
-; 0x487eb
 
 GameFreakPCText1: ; 487eb (12:47eb)
 	TX_FAR _CeladonMansion3Text5
@@ -74779,7 +73462,6 @@ CeladonMansion4_h: ; 0x4885f to 0x4886b (12 bytes) (bank=12) (id=131)
 
 CeladonMansion4Script: ; 4886b (12:486b)
 	jp EnableAutoTextBoxDrawing
-; 0x4886e
 
 CeladonMansion4Texts: ; 4886e (12:486e)
 	dw CeladonMansion4Text1
@@ -74820,7 +73502,6 @@ CeladonPokecenter_h: ; 0x488ac to 0x488b8 (12 bytes) (bank=12) (id=133)
 CeladonPokecenterScript: ; 488b8 (12:48b8)
 	call Func_22fa
 	jp EnableAutoTextBoxDrawing
-; 0x488be
 
 CeladonPokecenterTexts: ; 488be (12:48be)
 	dw CeladonPokecenterText1, CeladonPokecenterText2, CeladonPokecenterText3, CeladonPokecenterText4
@@ -74878,7 +73559,6 @@ CeladonGymScript: ; 4890a (12:490a)
 	call ExecuteCurMapScriptInTable
 	ld [W_CELADONGYMCURSCRIPT], a
 	ret
-; 0x48927
 
 CeladonGymScript_Unknown48927: ; 48927 (12:4927)
 	ld hl, Gym4CityName ; $4930
@@ -74891,7 +73571,6 @@ Gym4CityName: ; 48930 (12:4930)
 Gym4LeaderName: ; 4893d (12:493d)
 	db "ERIKA@"
 
-; known jump sources: 4895b (12:495b), 489a3 (12:49a3)
 Func_48943: ; 48943 (12:4943)
 	xor a
 	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
@@ -74907,7 +73586,6 @@ INCBIN "baserom.gbc",$4894e,$48956 - $4894e
 	ld a, $f0
 	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
 
-; known jump sources: 48a1d (12:4a1d)
 Func_48963: ; 48963 (12:4963)
 	ld a, $9
 	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
@@ -74938,7 +73616,7 @@ Func_48963: ; 48963 (12:4963)
 	ld hl, $d77d
 	set 0, [hl]
 	jp Func_48943
-; 489a6 (12:49a6)
+
 CeladonGymTexts: ; 489a6 (12:49a6)
 	dw CeladonGymText1, CeladonGymText2, CeladonGymText3, CeladonGymText4, CeladonGymText5, CeladonGymText6, CeladonGymText7, CeladonGymText8, CeladonGymText9, TM21Text, TM21NoRoomText
 
@@ -74951,7 +73629,6 @@ CeladonGymTrainerHeader0: ; 489bc (12:49bc)
 	dw CeladonGymAfterBattleText2 ; 0x4a95 TextAfterBattle
 	dw CeladonGymEndBattleText2 ; 0x4a90 TextEndBattle
 	dw CeladonGymEndBattleText2 ; 0x4a90 TextEndBattle
-; 0x489c8
 
 CeladonGymTrainerHeader2: ; 489c8 (12:49c8)
 	db $3 ; flag's bit
@@ -74961,7 +73638,6 @@ CeladonGymTrainerHeader2: ; 489c8 (12:49c8)
 	dw CeladonGymAfterBattleText3 ; 0x4aae TextAfterBattle
 	dw CeladonGymEndBattleText3 ; 0x4aa9 TextEndBattle
 	dw CeladonGymEndBattleText3 ; 0x4aa9 TextEndBattle
-; 0x489d4
 
 CeladonGymTrainerHeader3: ; 489d4 (12:49d4)
 	db $4 ; flag's bit
@@ -74971,7 +73647,6 @@ CeladonGymTrainerHeader3: ; 489d4 (12:49d4)
 	dw CeladonGymAfterBattleText4 ; 0x4ac7 TextAfterBattle
 	dw CeladonGymEndBattleText4 ; 0x4ac2 TextEndBattle
 	dw CeladonGymEndBattleText4 ; 0x4ac2 TextEndBattle
-; 0x489e0
 
 CeladonGymTrainerHeader4: ; 489e0 (12:49e0)
 	db $5 ; flag's bit
@@ -74981,7 +73656,6 @@ CeladonGymTrainerHeader4: ; 489e0 (12:49e0)
 	dw CeladonGymAfterBattleText5 ; 0x4ae0 TextAfterBattle
 	dw CeladonGymEndBattleText5 ; 0x4adb TextEndBattle
 	dw CeladonGymEndBattleText5 ; 0x4adb TextEndBattle
-; 0x489ec
 
 CeladonGymTrainerHeader5: ; 489ec (12:49ec)
 	db $6 ; flag's bit
@@ -74991,7 +73665,6 @@ CeladonGymTrainerHeader5: ; 489ec (12:49ec)
 	dw CeladonGymAfterBattleText6 ; 0x4af9 TextAfterBattle
 	dw CeladonGymEndBattleText6 ; 0x4af4 TextEndBattle
 	dw CeladonGymEndBattleText6 ; 0x4af4 TextEndBattle
-; 0x489f8
 
 CeladonGymTrainerHeader6: ; 489f8 (12:49f8)
 	db $7 ; flag's bit
@@ -75001,7 +73674,6 @@ CeladonGymTrainerHeader6: ; 489f8 (12:49f8)
 	dw CeladonGymAfterBattleText7 ; 0x4b12 TextAfterBattle
 	dw CeladonGymEndBattleText7 ; 0x4b0d TextEndBattle
 	dw CeladonGymEndBattleText7 ; 0x4b0d TextEndBattle
-; 0x48a04
 
 CeladonGymTrainerHeader7: ; 48a04 (12:4a04)
 	db $8 ; flag's bit
@@ -75011,7 +73683,6 @@ CeladonGymTrainerHeader7: ; 48a04 (12:4a04)
 	dw CeladonGymAfterBattleText8 ; 0x4b2b TextAfterBattle
 	dw CeladonGymEndBattleText8 ; 0x4b26 TextEndBattle
 	dw CeladonGymEndBattleText8 ; 0x4b26 TextEndBattle
-; 0x48a10
 
 db $ff
 
@@ -75053,35 +73724,29 @@ CeladonGymText1: ; 48a11 (12:4a11)
 UnnamedText_48a5e: ; 48a5e (12:4a5e)
 	TX_FAR _UnnamedText_48a5e
 	db "@"
-; 0x48a5e + 5 bytes
 
 UnnamedText_48a63: ; 48a63 (12:4a63)
 	TX_FAR _UnnamedText_48a63
 	db "@"
-; 0x48a63 + 5 bytes
 
 UnnamedText_48a68: ; 48a68 (12:4a68)
 	TX_FAR _UnnamedText_48a68
 	db "@"
-; 0x48a68 + 5 bytes
 
 CeladonGymText9: ; 48a6d (12:4a6d)
 UnnamedText_48a6d: ; 48a6d (12:4a6d)
 	TX_FAR _UnnamedText_48a6d
 	db "@"
-; 0x48a6d + 5 bytes
 
 TM21Text: ; 48a72 (12:4a72)
 	TX_FAR _ReceivedTM21Text ; 0x9d50c
 	db $0B
 	TX_FAR _TM21ExplanationText ; 0x9d520
 	db "@"
-; 0x48a7c
 
 TM21NoRoomText: ; 48a7c (12:4a7c)
 	TX_FAR _TM21NoRoomText
 	db "@"
-; 0x48a7c + 5 bytes
 
 CeladonGymText2: ; 48a81 (12:4a81)
 	db $08 ; asm
@@ -75092,17 +73757,14 @@ CeladonGymText2: ; 48a81 (12:4a81)
 CeladonGymBattleText2: ; 48a8b (12:4a8b)
 	TX_FAR _CeladonGymBattleText2
 	db "@"
-; 0x48a8b + 5 bytes
 
 CeladonGymEndBattleText2: ; 48a90 (12:4a90)
 	TX_FAR _CeladonGymEndBattleText2
 	db "@"
-; 0x48a90 + 5 bytes
 
 CeladonGymAfterBattleText2: ; 48a95 (12:4a95)
 	TX_FAR _CeladonGymAfterBattleText2
 	db "@"
-; 0x48a95 + 5 bytes
 
 CeladonGymText3: ; 48a9a (12:4a9a)
 	db $08 ; asm
@@ -75113,17 +73775,14 @@ CeladonGymText3: ; 48a9a (12:4a9a)
 CeladonGymBattleText3: ; 48aa4 (12:4aa4)
 	TX_FAR _CeladonGymBattleText3
 	db "@"
-; 0x48aa4 + 5 bytes
 
 CeladonGymEndBattleText3: ; 48aa9 (12:4aa9)
 	TX_FAR _CeladonGymEndBattleText3
 	db "@"
-; 0x48aa9 + 5 bytes
 
 CeladonGymAfterBattleText3: ; 48aae (12:4aae)
 	TX_FAR _CeladonGymAfterBattleText3
 	db "@"
-; 0x48aae + 5 bytes
 
 CeladonGymText4: ; 48ab3 (12:4ab3)
 	db $08 ; asm
@@ -75134,17 +73793,14 @@ CeladonGymText4: ; 48ab3 (12:4ab3)
 CeladonGymBattleText4: ; 48abd (12:4abd)
 	TX_FAR _CeladonGymBattleText4
 	db "@"
-; 0x48abd + 5 bytes
 
 CeladonGymEndBattleText4: ; 48ac2 (12:4ac2)
 	TX_FAR _CeladonGymEndBattleText4
 	db "@"
-; 0x48ac2 + 5 bytes
 
 CeladonGymAfterBattleText4: ; 48ac7 (12:4ac7)
 	TX_FAR _CeladonGymAfterBattleText4
 	db "@"
-; 0x48ac7 + 5 bytes
 
 CeladonGymText5: ; 48acc (12:4acc)
 	db $08 ; asm
@@ -75155,17 +73811,14 @@ CeladonGymText5: ; 48acc (12:4acc)
 CeladonGymBattleText5: ; 48ad6 (12:4ad6)
 	TX_FAR _CeladonGymBattleText5
 	db "@"
-; 0x48ad6 + 5 bytes
 
 CeladonGymEndBattleText5: ; 48adb (12:4adb)
 	TX_FAR _CeladonGymEndBattleText5
 	db "@"
-; 0x48adb + 5 bytes
 
 CeladonGymAfterBattleText5: ; 48ae0 (12:4ae0)
 	TX_FAR _CeladonGymAfterBattleText5
 	db "@"
-; 0x48ae0 + 5 bytes
 
 CeladonGymText6: ; 48ae5 (12:4ae5)
 	db $08 ; asm
@@ -75176,17 +73829,14 @@ CeladonGymText6: ; 48ae5 (12:4ae5)
 CeladonGymBattleText6: ; 48aef (12:4aef)
 	TX_FAR _CeladonGymBattleText6
 	db "@"
-; 0x48aef + 5 bytes
 
 CeladonGymEndBattleText6: ; 48af4 (12:4af4)
 	TX_FAR _CeladonGymEndBattleText6
 	db "@"
-; 0x48af4 + 5 bytes
 
 CeladonGymAfterBattleText6: ; 48af9 (12:4af9)
 	TX_FAR _CeladonGymAfterBattleText6
 	db "@"
-; 0x48af9 + 5 bytes
 
 CeladonGymText7: ; 48afe (12:4afe)
 	db $08 ; asm
@@ -75197,17 +73847,14 @@ CeladonGymText7: ; 48afe (12:4afe)
 CeladonGymBattleText7: ; 48b08 (12:4b08)
 	TX_FAR _CeladonGymBattleText7
 	db "@"
-; 0x48b08 + 5 bytes
 
 CeladonGymEndBattleText7: ; 48b0d (12:4b0d)
 	TX_FAR _CeladonGymEndBattleText7
 	db "@"
-; 0x48b0d + 5 bytes
 
 CeladonGymAfterBattleText7: ; 48b12 (12:4b12)
 	TX_FAR _CeladonGymAfterBattleText7
 	db "@"
-; 0x48b12 + 5 bytes
 
 CeladonGymText8: ; 48b17 (12:4b17)
 	db $08 ; asm
@@ -75218,17 +73865,14 @@ CeladonGymText8: ; 48b17 (12:4b17)
 CeladonGymBattleText8: ; 48b21 (12:4b21)
 	TX_FAR _CeladonGymBattleText8
 	db "@"
-; 0x48b21 + 5 bytes
 
 CeladonGymEndBattleText8: ; 48b26 (12:4b26)
 	TX_FAR _CeladonGymEndBattleText8
 	db "@"
-; 0x48b26 + 5 bytes
 
 CeladonGymAfterBattleText8: ; 48b2b (12:4b2b)
 	TX_FAR _CeladonGymAfterBattleText8
 	db "@"
-; 0x48b2b + 5 bytes
 
 CeladonGymObject: ; 0x48b30 (size=84)
 	db $3 ; border tile
@@ -75271,7 +73915,6 @@ CeladonGameCornerScript: ; 48bbd (12:4bbd)
 	ld hl, CeladonGameCornerScripts
 	ld a, [W_CELADONGAMECORNERCURSCRIPT]
 	jp CallFunctionInTable
-; 0x48bcf
 
 Unknown_48bcf: ; 48bcf (12:4bcf)
 INCBIN "baserom.gbc",$48bcf,$48bec - $48bcf
@@ -75298,11 +73941,9 @@ CeladonGameCornerScripts: ; 48c12 (12:4c12)
 
 CeladonGameCornerScript0: ; 48c18 (12:4c18)
 	ret
-; 0x48c19
 
 CeladonGameCornerScript1: ; 48c19 (12:4c19)
 INCBIN "baserom.gbc",$48c19,$48c5a - $48c19
-; 0x48c5a
 
 INCBIN "baserom.gbc",$48c5a,$48c69 - $48c5a
 
@@ -75378,32 +74019,26 @@ CeladonGameCornerText2: ; 48ca9 (12:4ca9)
 UnnamedText_48d22: ; 48d22 (12:4d22)
 	TX_FAR _UnnamedText_48d22
 	db "@"
-; 0x48d27
 
 UnnamedText_48d27: ; 48d27 (12:4d27)
 	TX_FAR _UnnamedText_48d27
 	db "@"
-; 0x48d2c
 
 UnnamedText_48d2c: ; 48d2c (12:4d2c)
 	TX_FAR _UnnamedText_48d2c
 	db "@"
-; 0x48d31
 
 UnnamedText_48d31: ; 48d31 (12:4d31)
 	TX_FAR _UnnamedText_48d31
 	db "@"
-; 0x48d36
 
 UnnamedText_48d36: ; 48d36 (12:4d36)
 	TX_FAR _UnnamedText_48d36
 	db "@"
-; 0x48d3b
 
 UnnamedText_48d3b: ; 48d3b (12:4d3b)
 	TX_FAR _UnnamedText_48d3b
 	db "@"
-; 0x48d40
 
 CeladonGameCornerText3: ; 48d40 (12:4d40)
 	TX_FAR _CeladonGameCornerText3
@@ -75456,7 +74091,6 @@ CeladonGameCornerText5: ; 48d4a (12:4d4a)
 UnnamedText_48d9c: ; 48d9c (12:4d9c)
 	TX_FAR _UnnamedText_48d9c
 	db "@"
-; 0x48d9c + 5 bytes
 
 Received10CoinsText: ; 48da1 (12:4da1)
 	TX_FAR _Received10CoinsText ; 0x9daa9
@@ -75465,12 +74099,10 @@ Received10CoinsText: ; 48da1 (12:4da1)
 UnnamedText_48da7: ; 48da7 (12:4da7)
 	TX_FAR _UnnamedText_48da7
 	db "@"
-; 0x48da7 + 5 bytes
 
 UnnamedText_48dac: ; 48dac (12:4dac)
 	TX_FAR _UnnamedText_48dac
 	db "@"
-; 0x48dac + 5 bytes
 
 CeladonGameCornerText6: ; 48db1 (12:4db1)
 	TX_FAR _CeladonGameCornerText6
@@ -75490,12 +74122,10 @@ CeladonGameCornerText7: ; 48db6 (12:4db6)
 UnnamedText_48dca: ; 48dca (12:4dca)
 	TX_FAR _UnnamedText_48dca
 	db "@"
-; 0x48dca + 5 bytes
 
 UnnamedText_48dcf: ; 48dcf (12:4dcf)
 	TX_FAR _UnnamedText_48dcf
 	db "@"
-; 0x48dcf + 5 bytes
 
 CeladonGameCornerText8: ; 48dd4 (12:4dd4)
 	TX_FAR _CeladonGameCornerText8
@@ -75542,22 +74172,18 @@ CeladonGameCornerText9: ; 48dd9 (12:4dd9)
 UnnamedText_48e26: ; 48e26 (12:4e26)
 	TX_FAR _UnnamedText_48e26
 	db "@"
-; 0x48e26 + 5 bytes
 
 Received20CoinsText: ; 48e2b (12:4e2b)
 	TX_FAR _Received20CoinsText ; 0x9dc4f
 	db $0B, "@"
-; 0x48e31
 
 UnnamedText_48e31: ; 48e31 (12:4e31)
 	TX_FAR _UnnamedText_48e31
 	db "@"
-; 0x48e31 + 5 bytes
 
 UnnamedText_48e36: ; 48e36 (12:4e36)
 	TX_FAR _UnnamedText_48e36
 	db "@"
-; 0x48e36 + 5 bytes
 
 CeladonGameCornerText10: ; 48e3b (12:4e3b)
 	db $08 ; asm
@@ -75600,22 +74226,18 @@ CeladonGameCornerText10: ; 48e3b (12:4e3b)
 UnnamedText_48e88: ; 48e88 (12:4e88)
 	TX_FAR _UnnamedText_48e88
 	db "@"
-; 0x48e88 + 5 bytes
 
 UnnamedText_48e8d: ; 48e8d (12:4e8d)
 	TX_FAR _UnnamedText_48e8d ; 0x9dceb
 	db $0B, "@"
-; 0x48e93
 
 UnnamedText_48e93: ; 48e93 (12:4e93)
 	TX_FAR _UnnamedText_48e93
 	db "@"
-; 0x48e93 + 5 bytes
 
 UnnamedText_48e98: ; 48e98 (12:4e98)
 	TX_FAR _UnnamedText_48e98
 	db "@"
-; 0x48e98 + 5 bytes
 
 CeladonGameCornerText11: ; 48e9d (12:4e9d)
 	db $08 ; asm
@@ -75642,17 +74264,14 @@ CeladonGameCornerText11: ; 48e9d (12:4e9d)
 UnnamedText_48ece: ; 48ece (12:4ece)
 	TX_FAR _UnnamedText_48ece
 	db "@"
-; 0x48ece + 5 bytes
 
 UnnamedText_48ed3: ; 48ed3 (12:4ed3)
 	TX_FAR _UnnamedText_48ed3
 	db "@"
-; 0x48ed3 + 5 bytes
 
 CeladonGameCornerText13: ; 48ed8 (12:4ed8)
 	TX_FAR _UnnamedText_48ed8
 	db "@"
-; 0x48ed8 + 5 bytes
 
 CeladonGameCornerText12: ; 48edd (12:4edd)
 	db $08 ; asm
@@ -75680,12 +74299,10 @@ UnnamedText_48f09: ; 48f09 (12:4f09)
 	call PlaySound
 	call WaitForSoundToFinish
 	jp TextScriptEnd
-; 0x48f19
 
 UnnamedText_48f19: ; 48f19 (12:4f19)
 	TX_FAR _UnnamedText_48f19
 	db "@"
-; 0x48f19 + 5 bytes
 
 Func_48f1e: ; 48f1e (12:4f1e)
 	ld hl, $d730
@@ -75730,7 +74347,6 @@ Func_48f1e: ; 48f1e (12:4f1e)
 	ld hl, $d730
 	res 6, [hl]
 	ret
-; 0x48f7a
 
 GameCornerMoneyText: ; 48f7a (12:4f7a)
 	db "MONEY@"
@@ -75750,7 +74366,6 @@ Has9990Coins: ; 48f95 (12:4f95)
 	ld a, $90
 	ld [$ff00+$a1], a
 	jp HasEnoughCoins
-; 0x48fa0
 
 CeladonGameCornerObject: ; 0x48fa0 (size=99)
 	db $f ; border tile
@@ -75794,7 +74409,6 @@ CeladonMart5_h: ; 0x4905d to 0x49069 (12 bytes) (bank=12) (id=136)
 
 CeladonMart5Script: ; 49069 (12:5069)
 	jp EnableAutoTextBoxDrawing
-; 0x4906c
 
 CeladonMart5Texts: ; 4906c (12:506c)
 	dw CeladonMart5Text1, CeladonMart5Text2, CeladonMart5Text3, CeladonMart5Text4, CeladonMart5Text5
@@ -75846,7 +74460,6 @@ CeladonPrizeRoom_h: ; 0x490e4 to 0x490f0 (12 bytes) (bank=12) (id=137)
 
 CeladonPrizeRoomScript: ; 490f0 (12:50f0)
 	jp EnableAutoTextBoxDrawing
-; 0x490f3
 
 CeladonPrizeRoomTexts: ; 490f3 (12:50f3)
 	dw CeladonPrizeRoomText1, CeladonPrizeRoomText2, CeladonPrizeRoomText3, CeladonPrizeRoomText3, CeladonPrizeRoomText3
@@ -75896,7 +74509,6 @@ CeladonDiner_h: ; 0x49145 to 0x49151 (12 bytes) (bank=12) (id=138)
 CeladonDinerScript: ; 49151 (12:5151)
 	call EnableAutoTextBoxDrawing
 	ret
-; 0x49155
 
 CeladonDinerTexts: ; 49155 (12:5155)
 	dw CeladonDinerText1, CeladonDinerText2, CeladonDinerText3, CeladonDinerText4, CeladonDinerText5
@@ -75945,22 +74557,18 @@ CeladonDinerText5: ; 49173 (12:5173)
 UnnamedText_491a7: ; 491a7 (12:51a7)
 	TX_FAR _UnnamedText_491a7
 	db "@"
-; 0x491a7 + 5 bytes
 
 ReceivedCoinCaseText: ; 491ac (12:51ac)
 	TX_FAR _ReceivedCoinCaseText ; 0x9e07a
 	db $11, "@"
-; 0x491b2
 
 CoinCaseNoRoomText: ; 491b2 (12:51b2)
 	TX_FAR _CoinCaseNoRoomText
 	db "@"
-; 0x491b2 + 5 bytes
 
 UnnamedText_491b7: ; 491b7 (12:51b7)
 	TX_FAR _UnnamedText_491b7
 	db "@"
-; 0x491b7 + 5 bytes
 
 CeladonDinerObject: ; 0x491bc (size=50)
 	db $f ; border tile
@@ -75996,7 +74604,6 @@ CeladonHouse_h: ; 0x49202 to 0x4920e (12 bytes) (bank=12) (id=139)
 CeladonHouseScript: ; 4920e (12:520e)
 	call EnableAutoTextBoxDrawing
 	ret
-; 0x49212
 
 CeladonHouseTexts: ; 49212 (12:5212)
 	dw CeladonHouseText1, CeladonHouseText2, CeladonHouseText3
@@ -76044,7 +74651,6 @@ CeladonHotel_h: ; 0x4925d to 0x49269 (12 bytes) (bank=12) (id=140)
 
 CeladonHotelScript: ; 49269 (12:5269)
 	jp EnableAutoTextBoxDrawing
-; 0x4926c
 
 CeladonHotelTexts: ; 4926c (12:526c)
 	dw CeladonHotelText1, CeladonHotelText2, CeladonHotelText3
@@ -76093,7 +74699,6 @@ MtMoonPokecenter_h: ; 0x492c3 to 0x492cf (12 bytes) (bank=12) (id=68)
 MtMoonPokecenterScript: ; 492cf (12:52cf)
 	call Func_22fa
 	jp EnableAutoTextBoxDrawing
-; 0x492d5
 
 MtMoonPokecenterTexts: ; 492d5 (12:52d5)
 	dw MtMoonPokecenterText1, MtMoonPokecenterText2, MtMoonPokecenterText3, MtMoonPokecenterText4, MtMoonPokecenterText5, MtMoonPokecenterText6
@@ -76164,22 +74769,18 @@ MtMoonPokecenterText4: ; 492ec (12:52ec)
 UnnamedText_4935c: ; 4935c (12:535c)
 	TX_FAR _UnnamedText_4935c
 	db "@"
-; 0x4935c + 5 bytes
 
 UnnamedText_49361: ; 49361 (12:5361)
 	TX_FAR _UnnamedText_49361
 	db "@"
-; 0x49361 + 5 bytes
 
 UnnamedText_49366: ; 49366 (12:5366)
 	TX_FAR _UnnamedText_49366
 	db "@"
-; 0x49366 + 5 bytes
 
 UnnamedText_4936b: ; 4936b (12:536b)
 	TX_FAR _UnnamedText_4936b
 	db "@"
-; 0x4936b + 5 bytes
 
 MtMoonPokecenterText5: ; 49370 (12:5370)
 	TX_FAR _MtMoonPokecenterText5
@@ -76220,7 +74821,6 @@ RockTunnelPokecenter_h: ; 0x493ae to 0x493ba (12 bytes) (id=81)
 RockTunnelPokecenterScript: ; 493ba (12:53ba)
 	call Func_22fa
 	jp EnableAutoTextBoxDrawing
-; 0x493c0
 
 RockTunnelPokecenterTexts: ; 493c0 (12:53c0)
 	dw RockTunnelPokecenterText1, RockTunnelPokecenterText2, RockTunnelPokecenterText3, RockTunnelPokecenterText4
@@ -76268,7 +74868,6 @@ Route11Gate_h: ; 0x49400 to 0x4940c (12 bytes) (id=84)
 
 Route11GateScript: ; 4940c (12:540c)
 	jp EnableAutoTextBoxDrawing
-; 0x4940f
 
 Route11GateTexts: ; 4940f (12:540f)
 	dw Route11GateText1
@@ -76309,7 +74908,6 @@ Route11GateUpstairs_h: ; 0x49448 to 0x49454 (12 bytes) (id=86)
 
 Route11GateUpstairsScript: ; 49454 (12:5454)
 	jp DisableAutoTextBoxDrawing
-; 0x49457
 
 Route11GateUpstairsTexts: ; 49457 (12:5457)
 	dw Route11GateUpstairsText1, Route11GateUpstairsText2, Route11GateUpstairsText3, Route11GateUpstairsText4
@@ -76351,12 +74949,10 @@ Route11GateUpstairsText2: ; 4946c (12:546c)
 	call PrintText
 .asm_494a1
 	jr asm_49469 ; 0x494a1 $c6
-; 0x494a3
 
 UnnamedText_494a3: ; 494a3 (12:54a3)
 	TX_FAR _UnnamedText_494a3
 	db "@"
-; 0x494a3 + 5 bytes
 
 Route11GateUpstairsText3: ; 494a8 (12:54a8)
 	db $08 ; asm
@@ -76375,23 +74971,19 @@ Route11GateUpstairsText3: ; 494a8 (12:54a8)
 UnnamedText_494c4: ; 494c4 (12:54c4)
 	TX_FAR _UnnamedText_494c4
 	db "@"
-; 0x494c4 + 5 bytes
 
 UnnamedText_494c9: ; 494c9 (12:54c9)
 	TX_FAR _UnnamedText_494c9
 	db "@"
-; 0x494c9 + 5 bytes
 
 Route11GateUpstairsText4: ; 494ce (12:54ce)
 	db $8
 	ld hl, UnnamedText_494d5 ; $54d5
 	jp Unnamed_55c9
-; 0x494d5
 
 UnnamedText_494d5: ; 494d5 (12:54d5)
 	TX_FAR _UnnamedText_494d5
 	db "@"
-; 0x494d5 + 5 bytes
 
 Route11GateUpstairsObject: ; 0x494da (size=30)
 	db $a ; border tile
@@ -76420,7 +75012,6 @@ Route12Gate_h: ; 0x494f8 to 0x49504 (12 bytes) (id=87)
 
 Route12GateScript: ; 49504 (12:5504)
 	jp EnableAutoTextBoxDrawing
-; 0x49507
 
 Route12GateTexts: ; 49507 (12:5507)
 	dw Route12GateText1
@@ -76464,7 +75055,6 @@ Route12GateUpstairs_h: ; 0x49554 to 0x49560 (12 bytes) (id=195)
 
 Route12GateUpstairsScript: ; 49560 (12:5560)
 	jp DisableAutoTextBoxDrawing
-; 0x49563
 
 Route12GateUpstairsTexts: ; 49563 (12:5563)
 	dw Route12GateUpstairsText1, Route12GateUpstairsText2, Route12GateUpstairsText3
@@ -76497,22 +75087,18 @@ Route12GateUpstairsText1: ; 49569 (12:5569)
 TM39PreReceiveText: ; 4959c (12:559c)
 	TX_FAR _TM39PreReceiveText
 	db "@"
-; 0x4959c + 5 bytes
 
 ReceivedTM39Text: ; 495a1 (12:55a1)
 	TX_FAR _ReceivedTM39Text ; 0x8c8c6
 	db $0B, "@"
-; 0x495a7
 
 TM39ExplanationText: ; 495a7 (12:55a7)
 	TX_FAR _TM39ExplanationText
 	db "@"
-; 0x495a7 + 5 bytes
 
 TM39NoRoomText: ; 495ac (12:55ac)
 	TX_FAR _TM39NoRoomText
 	db "@"
-; 0x495ac + 5 bytes
 
 Route12GateUpstairsText2: ; 495b1 (12:55b1)
 	db $08 ; asm
@@ -76522,18 +75108,15 @@ Route12GateUpstairsText2: ; 495b1 (12:55b1)
 UnnamedText_495b8: ; 495b8 (12:55b8)
 	TX_FAR _UnnamedText_495b8 ; 0x8c95a
 	db "@"
-; 0x495bd
 
 Route12GateUpstairsText3: ; 495bd (12:55bd)
 	db $8
 	ld hl, UnnamedText_495c4
 	jp Unnamed_55c9
-; 0x495c4
 
 UnnamedText_495c4: ; 495c4 (12:55c4)
 	TX_FAR _UnnamedText_495c4
 	db "@"
-; 0x495c4 + 5 bytes
 
 Unnamed_55c9: ; 495c9 (12:55c9)
 	ld a, [$c109]
@@ -76547,7 +75130,6 @@ Unnamed_55c9: ; 495c9 (12:55c9)
 .asm_495d8
 	ld [$cc3c], a
 	jp TextScriptEnd
-; 0x495de
 
 Route12GateUpstairsObject: ; 0x495de (size=24)
 	db $a ; border tile
@@ -76575,7 +75157,6 @@ Route15Gate_h: ; 0x495f6 to 0x49602 (12 bytes) (id=184)
 
 Route15GateScript: ; 49602 (12:5602)
 	jp EnableAutoTextBoxDrawing
-; 0x49605
 
 Route15GateTexts: ; 49605 (12:5605)
 	dw Route15GateText1
@@ -76648,23 +75229,19 @@ Route15GateUpstairsText1: ; 49651 (12:5651)
 	call PrintText
 .asm_49689
 	jp TextScriptEnd
-; 0x4968c
 
 UnnamedText_4968c: ; 4968c (12:568c)
 	TX_FAR _UnnamedText_4968c
 	db "@"
-; 0x4968c + 5 bytes
 
 Route15GateUpstairsText2: ; 49691 (12:5691)
 	db $8
 	ld hl, UnnamedText_49698
 	jp Unnamed_55c9
-; 0x49698
 
 UnnamedText_49698: ; 49698 (12:5698)
 	TX_FAR _UnnamedText_49698
 	db "@"
-; 0x49698 + 5 bytes
 
 Route15GateUpstairsObject: ; 4969d (12:569d)
 	db $a ; border tile
@@ -76696,7 +75273,6 @@ Route16GateMapScript: ; 496be (12:56be)
 	ld a, [W_ROUTE16GATECURSCRIPT]
 	ld hl, Route16GateMapScripts
 	jp CallFunctionInTable
-; 0x496cf
 
 Route16GateMapScripts: ; 496cf (12:56cf)
 	dw Route16GateMapScript0
@@ -76733,16 +75309,14 @@ Route16GateMapScript0: ; 496d7 (12:56d7)
 	ld a, $2
 	ld [W_ROUTE16GATECURSCRIPT], a
 	ret
-; 0x49714
 
 Unknown_49714: ; 49714 (12:5714)
 INCBIN "baserom.gbc",$49714,$49755 - $49714
 
-; known jump sources: 496d7 (12:56d7), 4988f (12:588f)
 Func_49755: ; 49755 (12:5755)
 	ld b, $6
 	jp IsItemInBag
-; 4975a (12:575a)
+
 Route16GateMapTexts: ; 4975a (12:575a)
 	dw Route16GateMapText1, Route16GateMapText2, Route16GateMapText3
 
@@ -76762,17 +75336,14 @@ Route16GateMapText1: ; 49760 (12:5760)
 UnnamedText_49777: ; 49777 (12:5777)
 	TX_FAR _UnnamedText_49777
 	db "@"
-; 0x49777 + 5 bytes
 
 UnnamedText_4977c: ; 4977c (12:577c)
 	TX_FAR _UnnamedText_4977c
 	db "@"
-; 0x4977c + 5 bytes
 
 Route16GateMapText3: ; 49781 (12:5781)
 	TX_FAR _UnnamedText_49781
 	db "@"
-; 0x49781 + 5 bytes
 
 Route16GateMapText2: ; 49786 (12:5786)
 	TX_FAR _Route16GateMapText2
@@ -76822,7 +75393,6 @@ Route16GateUpstairs_h: ; 0x497ff to 0x4980b (12 bytes) (id=187)
 
 Route16GateUpstairsScript: ; 4980b (12:580b)
 	jp DisableAutoTextBoxDrawing
-; 0x4980e
 
 Route16GateUpstairsTexts: ; 4980e (12:580e)
 	dw Route16GateUpstairsText1, Route16GateUpstairsText2, Route16GateUpstairsText3, Route16GateUpstairsText4
@@ -76836,7 +75406,6 @@ Route16GateUpstairsText1: ; 49816 (12:5816)
 UnnamedText_49820: ; 49820 (12:5820)
 	TX_FAR _UnnamedText_49820
 	db "@"
-; 0x49820 + 5 bytes
 
 Route16GateUpstairsText2: ; 49825 (12:5825)
 	db $08 ; asm
@@ -76847,29 +75416,24 @@ Route16GateUpstairsText2: ; 49825 (12:5825)
 UnnamedText_4982f: ; 4982f (12:582f)
 	TX_FAR _UnnamedText_4982f
 	db "@"
-; 0x4982f + 5 bytes
 
 Route16GateUpstairsText3: ; 49834 (12:5834)
 	db $8
 	ld hl, UnnamedText_4983b
 	jp Unnamed_55c9
-; 0x4983b
 
 UnnamedText_4983b: ; 4983b (12:583b)
 	TX_FAR _UnnamedText_4983b
 	db "@"
-; 0x4983b + 5 bytes
 
 Route16GateUpstairsText4: ; 49840 (12:5840)
 	db $8
 	ld hl, UnnamedText_49847 ; $5847
 	jp Unnamed_55c9
-; 0x49847
 
 UnnamedText_49847: ; 49847 (12:5847)
 	TX_FAR _UnnamedText_49847
 	db "@"
-; 0x49847 + 5 bytes
 
 Route16GateUpstairsObject: ; 0x4984c (size=30)
 	db $a ; border tile
@@ -76903,7 +75467,6 @@ Route18GateScript: ; 49876 (12:5876)
 	ld a, [W_ROUTE18GATECURSCRIPT]
 	ld hl, Route18GateScripts
 	jp CallFunctionInTable
-; 0x49887
 
 Route18GateScripts: ; 49887 (12:5887)
 	dw Route18GateScript0
@@ -76940,7 +75503,6 @@ Route18GateScript0: ; 4988f (12:588f)
 	ld a, $2
 	ld [W_ROUTE18GATECURSCRIPT], a
 	ret
-; 0x498cc
 
 Unknown_498cc: ; 498cc (12:58cc)
 INCBIN "baserom.gbc",$498cc,$4990d - $498cc
@@ -76964,17 +75526,14 @@ Route18GateText1: ; 49911 (12:5911)
 UnnamedText_49928: ; 49928 (12:5928)
 	TX_FAR _UnnamedText_49928
 	db "@"
-; 0x4992d
 
 UnnamedText_4992d: ; 4992d (12:592d)
 	TX_FAR _UnnamedText_4992d
 	db "@"
-; 0x49932
 
 Route18GateText2: ; 49932 (12:5932)
 	TX_FAR _UnnamedText_49932
 	db "@"
-; 0x49937
 
 Route18GateObject: ; 0x49937 (size=50)
 	db $a ; border tile
@@ -77008,7 +75567,6 @@ Route18GateUpstairs_h: ; 0x49969 to 0x49975 (12 bytes) (id=191)
 
 Route18GateUpstairsScript: ; 49975 (12:5975)
 	jp DisableAutoTextBoxDrawing
-; 0x49978
 
 Route18GateUpstairsTexts: ; 49978 (12:5978)
 	dw Route18GateUpstairsText1, Route18GateUpstairsText2, Route18GateUpstairsText3
@@ -77025,23 +75583,19 @@ Route18GateUpstairsText2: ; 4998c (12:598c)
 	db $8
 	ld hl, UnnamedText_49993 ; $5993
 	jp Unnamed_55c9
-; 0x49993
 
 UnnamedText_49993: ; 49993 (12:5993)
 	TX_FAR _UnnamedText_49993
 	db "@"
-; 0x49993 + 5 bytes
 
 Route18GateUpstairsText3: ; 49998 (12:5998)
 	db $8
 	ld hl, UnnamedText_4999f ; $599f
 	jp Unnamed_55c9
-; 0x4999f
 
 UnnamedText_4999f: ; 4999f (12:599f)
 	TX_FAR _UnnamedText_4999f
 	db "@"
-; 0x4999f + 5 bytes
 
 Route18GateUpstairsObject: ; 0x499a4 (size=24)
 	db $a ; border tile
@@ -77075,7 +75629,6 @@ MtMoon1Script: ; 499c8 (12:59c8)
 	call ExecuteCurMapScriptInTable
 	ld [W_MTMOON1CURSCRIPT], a
 	ret
-; 0x499db
 
 Unknown_59db: ; 499db (12:59db)
 INCBIN "baserom.gbc",$499db,$499e1 - $499db
@@ -77092,7 +75645,6 @@ MtMoon1TrainerHeader0: ; 499fd (12:59fd)
 	dw MtMoon1AfterBattleText2 ; 0x5aa2 TextAfterBattle
 	dw MtMoon1EndBattleText2 ; 0x5a9d TextEndBattle
 	dw MtMoon1EndBattleText2 ; 0x5a9d TextEndBattle
-; 0x49a09
 
 MtMoon1TrainerHeader2: ; 49a09 (12:5a09)
 	db $2 ; flag's bit
@@ -77102,7 +75654,6 @@ MtMoon1TrainerHeader2: ; 49a09 (12:5a09)
 	dw MtMoon1AfterBattleText3 ; 0x5ab1 TextAfterBattle
 	dw MtMoon1EndBattleText3 ; 0x5aac TextEndBattle
 	dw MtMoon1EndBattleText3 ; 0x5aac TextEndBattle
-; 0x49a15
 
 MtMoon1TrainerHeader3: ; 49a15 (12:5a15)
 	db $3 ; flag's bit
@@ -77112,7 +75663,6 @@ MtMoon1TrainerHeader3: ; 49a15 (12:5a15)
 	dw MtMoon1AfterBattleText4 ; 0x5ac0 TextAfterBattle
 	dw MtMoon1EndBattleText4 ; 0x5abb TextEndBattle
 	dw MtMoon1EndBattleText4 ; 0x5abb TextEndBattle
-; 0x49a21
 
 MtMoon1TrainerHeader4: ; 49a21 (12:5a21)
 	db $4 ; flag's bit
@@ -77122,7 +75672,6 @@ MtMoon1TrainerHeader4: ; 49a21 (12:5a21)
 	dw MtMoon1AfterBattleText5 ; 0x5acf TextAfterBattle
 	dw MtMoon1EndBattleText5 ; 0x5aca TextEndBattle
 	dw MtMoon1EndBattleText5 ; 0x5aca TextEndBattle
-; 0x49a2d
 
 MtMoon1TrainerHeader5: ; 49a2d (12:5a2d)
 	db $5 ; flag's bit
@@ -77132,7 +75681,6 @@ MtMoon1TrainerHeader5: ; 49a2d (12:5a2d)
 	dw MtMoon1AfterBattleText6 ; 0x5ade TextAfterBattle
 	dw MtMoon1EndBattleText6 ; 0x5ad9 TextEndBattle
 	dw MtMoon1EndBattleText6 ; 0x5ad9 TextEndBattle
-; 0x49a39
 
 MtMoon1TrainerHeader6: ; 49a39 (12:5a39)
 	db $6 ; flag's bit
@@ -77142,7 +75690,6 @@ MtMoon1TrainerHeader6: ; 49a39 (12:5a39)
 	dw MtMoon1AfterBattleText7 ; 0x5aed TextAfterBattle
 	dw MtMoon1EndBattleText7 ; 0x5ae8 TextEndBattle
 	dw MtMoon1EndBattleText7 ; 0x5ae8 TextEndBattle
-; 0x49a45
 
 MtMoon1TrainerHeader7: ; 49a45 (12:5a45)
 	db $7 ; flag's bit
@@ -77152,7 +75699,6 @@ MtMoon1TrainerHeader7: ; 49a45 (12:5a45)
 	dw MtMoon1AfterBattleText8 ; 0x5afc TextAfterBattle
 	dw MtMoon1EndBattleText8 ; 0x5af7 TextEndBattle
 	dw MtMoon1EndBattleText8 ; 0x5af7 TextEndBattle
-; 0x49a51
 
 db $ff
 
@@ -77201,107 +75747,86 @@ MtMoon1Text7: ; 49a8e (12:5a8e)
 MtMoon1BattleText2: ; 49a98 (12:5a98)
 	TX_FAR _MtMoon1BattleText2
 	db "@"
-; 0x49a98 + 5 bytes
 
 MtMoon1EndBattleText2: ; 49a9d (12:5a9d)
 	TX_FAR _MtMoon1EndBattleText2
 	db "@"
-; 0x49a9d + 5 bytes
 
 MtMoon1AfterBattleText2: ; 49aa2 (12:5aa2)
 	TX_FAR _MtMoon1AfterBattleText2
 	db "@"
-; 0x49aa2 + 5 bytes
 
 MtMoon1BattleText3: ; 49aa7 (12:5aa7)
 	TX_FAR _MtMoon1BattleText3
 	db "@"
-; 0x49aa7 + 5 bytes
 
 MtMoon1EndBattleText3: ; 49aac (12:5aac)
 	TX_FAR _MtMoon1EndBattleText3
 	db "@"
-; 0x49aac + 5 bytes
 
 MtMoon1AfterBattleText3: ; 49ab1 (12:5ab1)
 	TX_FAR _MtMoon1AfterBattleText3
 	db "@"
-; 0x49ab1 + 5 bytes
 
 MtMoon1BattleText4: ; 49ab6 (12:5ab6)
 	TX_FAR _MtMoon1BattleText4
 	db "@"
-; 0x49ab6 + 5 bytes
 
 MtMoon1EndBattleText4: ; 49abb (12:5abb)
 	TX_FAR _MtMoon1EndBattleText4
 	db "@"
-; 0x49abb + 5 bytes
 
 MtMoon1AfterBattleText4: ; 49ac0 (12:5ac0)
 	TX_FAR _MtMoon1AfterBattleText4
 	db "@"
-; 0x49ac0 + 5 bytes
 
 MtMoon1BattleText5: ; 49ac5 (12:5ac5)
 	TX_FAR _MtMoon1BattleText5
 	db "@"
-; 0x49ac5 + 5 bytes
 
 MtMoon1EndBattleText5: ; 49aca (12:5aca)
 	TX_FAR _MtMoon1EndBattleText5
 	db "@"
-; 0x49aca + 5 bytes
 
 MtMoon1AfterBattleText5: ; 49acf (12:5acf)
 	TX_FAR _MtMoon1AfterBattleText5
 	db "@"
-; 0x49acf + 5 bytes
 
 MtMoon1BattleText6: ; 49ad4 (12:5ad4)
 	TX_FAR _MtMoon1BattleText6
 	db "@"
-; 0x49ad4 + 5 bytes
 
 MtMoon1EndBattleText6: ; 49ad9 (12:5ad9)
 	TX_FAR _MtMoon1EndBattleText6
 	db "@"
-; 0x49ad9 + 5 bytes
 
 MtMoon1AfterBattleText6: ; 49ade (12:5ade)
 	TX_FAR _MtMoon1AfterBattleText6
 	db "@"
-; 0x49ade + 5 bytes
 
 MtMoon1BattleText7: ; 49ae3 (12:5ae3)
 	TX_FAR _MtMoon1BattleText7
 	db "@"
-; 0x49ae3 + 5 bytes
 
 MtMoon1EndBattleText7: ; 49ae8 (12:5ae8)
 	TX_FAR _MtMoon1EndBattleText7
 	db "@"
-; 0x49ae8 + 5 bytes
 
 MtMoon1AfterBattleText7: ; 49aed (12:5aed)
 	TX_FAR _MtMoon1AfterBattleText7
 	db "@"
-; 0x49aed + 5 bytes
 
 MtMoon1BattleText8: ; 49af2 (12:5af2)
 	TX_FAR _MtMoon1BattleText8
 	db "@"
-; 0x49af2 + 5 bytes
 
 MtMoon1EndBattleText8: ; 49af7 (12:5af7)
 	TX_FAR _MtMoon1EndBattleText8
 	db "@"
-; 0x49af7 + 5 bytes
 
 MtMoon1AfterBattleText8: ; 49afc (12:5afc)
 	TX_FAR _MtMoon1AfterBattleText8
 	db "@"
-; 0x49afc + 5 bytes
 
 MtMoon1Text14: ; 49b01 (12:5b01)
 	TX_FAR _MtMoon1Text14
@@ -77373,12 +75898,10 @@ MtMoon3Script: ; 49d0b (12:5d0b)
 	ld hl, $d72e
 	res 4, [hl]
 	ret
-; 0x49d37
 
 Unknown_49d37: ; 49d37 (12:5d37)
 INCBIN "baserom.gbc",$49d37,$49d58 - $49d37
 
-; known jump sources: 49d9f (12:5d9f)
 Func_49d58: ; 49d58 (12:5d58)
 	xor a
 	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
@@ -77403,7 +75926,6 @@ INCBIN "baserom.gbc",$49d63,$49d6f - $49d63
 	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
 	jp DisplayTextID
 
-; known jump sources: 49d74 (12:5d74), 49d7c (12:5d7c), 49d84 (12:5d84)
 Func_49d91: ; 49d91 (12:5d91)
 	ld a, [$d7f6]
 	and $c0
@@ -77482,7 +76004,7 @@ INCBIN "baserom.gbc",$49df9,$49dfb - $49df9
 	ld [W_MTMOON3CURSCRIPT], a
 	ld [W_CURMAPSCRIPT], a
 	ret
-; 49e34 (12:5e34)
+
 MtMoon3Texts: ; 49e34 (12:5e34)
 	dw MtMoon3Text1, MtMoon3Text2, MtMoon3Text3, MtMoon3Text4, MtMoon3Text5, MtMoon3Text6, MtMoon3Text7, Predef5CText, Predef5CText, Unnamed_49f99
 
@@ -77495,7 +76017,6 @@ MtMoon3TrainerHeader0: ; 49e48 (12:5e48)
 	dw MtMoon3AfterBattleText2 ; 0x5fa9 TextAfterBattle
 	dw MtMoon3EndBattleText2 ; 0x5fa4 TextEndBattle
 	dw MtMoon3EndBattleText2 ; 0x5fa4 TextEndBattle
-; 0x49e54
 
 MtMoon3TrainerHeader2: ; 49e54 (12:5e54)
 	db $3 ; flag's bit
@@ -77505,7 +76026,6 @@ MtMoon3TrainerHeader2: ; 49e54 (12:5e54)
 	dw MtMoon3AfterBattleText3 ; 0x5fb8 TextAfterBattle
 	dw MtMoon3EndBattleText3 ; 0x5fb3 TextEndBattle
 	dw MtMoon3EndBattleText3 ; 0x5fb3 TextEndBattle
-; 0x49e60
 
 MtMoon3TrainerHeader3: ; 49e60 (12:5e60)
 	db $4 ; flag's bit
@@ -77515,7 +76035,6 @@ MtMoon3TrainerHeader3: ; 49e60 (12:5e60)
 	dw MtMoon3AfterBattleText4 ; 0x5fc7 TextAfterBattle
 	dw MtMoon3EndBattleText4 ; 0x5fc2 TextEndBattle
 	dw MtMoon3EndBattleText4 ; 0x5fc2 TextEndBattle
-; 0x49e6c
 
 MtMoon3TrainerHeader4: ; 49e6c (12:5e6c)
 	db $5 ; flag's bit
@@ -77525,7 +76044,6 @@ MtMoon3TrainerHeader4: ; 49e6c (12:5e6c)
 	dw MtMoon3AfterBattleText5 ; 0x5fd6 TextAfterBattle
 	dw MtMoon3EndBattleText5 ; 0x5fd1 TextEndBattle
 	dw MtMoon3EndBattleText5 ; 0x5fd1 TextEndBattle
-; 0x49e78
 
 db $ff
 
@@ -77615,7 +76133,6 @@ MtMoon3Text6: ; 49ee9 (12:5ee9)
 UnnamedText_49f24: ; 49f24 (12:5f24)
 	TX_FAR _UnnamedText_49f24
 	db "@"
-; 0x49f24 + 5 bytes
 
 MtMoon3Text7: ; 49f29 (12:5f29)
 	db $08 ; asm
@@ -77646,48 +76163,39 @@ MtMoon3Text7: ; 49f29 (12:5f29)
 UnnamedText_49f64: ; 49f64 (12:5f64)
 	TX_FAR _UnnamedText_49f64
 	db "@"
-; 0x49f64 + 5 bytes
 
 Unnamed_49f69: ; 49f69 (12:5f69)
 	ld hl, UnnamedText_49f6f
 	jp PrintText
-; 0x49f6f
 
 UnnamedText_49f6f: ; 49f6f (12:5f6f)
 	TX_FAR _UnnamedText_49f6f ; 0x80995
 	db $11, $d, "@"
-; 0x49f76
 
 Unnamed_49f76: ; 49f76 (12:5f76)
 	ld hl, UnnamedText_49f7f
 	call PrintText
 	jp TextScriptEnd
-; 0x49f7f
 
 UnnamedText_49f7f: ; 49f7f (12:5f7f)
 	TX_FAR _UnnamedText_49f7f ; 0x809a8
 	db $d, "@"
-; 0x49f85
 
 UnnamedText_49f85: ; 49f85 (12:5f85)
 	TX_FAR _UnnamedText_49f85
 	db "@"
-; 0x49f85 + 5 bytes
 
 UnnamedText_49f8a: ; 49f8a (12:5f8a)
 	TX_FAR _UnnamedText_49f8a
 	db "@"
-; 0x49f8a + 5 bytes
 
 UnnamedText_49f8f: ; 49f8f (12:5f8f)
 	TX_FAR _UnnamedText_49f8f
 	db "@"
-; 0x49f8f + 5 bytes
 
 UnnamedText_49f94: ; 49f94 (12:5f94)
 	TX_FAR _UnnamedText_49f94
 	db "@"
-; 0x49f94 + 5 bytes
 
 Unnamed_49f99: ; 49f99 (12:5f99)
 INCBIN "baserom.gbc",$49f99,$49f9f - $49f99
@@ -77695,62 +76203,50 @@ INCBIN "baserom.gbc",$49f99,$49f9f - $49f99
 MtMoon3BattleText2: ; 49f9f (12:5f9f)
 	TX_FAR _MtMoon3BattleText2
 	db "@"
-; 0x49f9f + 5 bytes
 
 MtMoon3EndBattleText2: ; 49fa4 (12:5fa4)
 	TX_FAR _MtMoon3EndBattleText2
 	db "@"
-; 0x49fa4 + 5 bytes
 
 MtMoon3AfterBattleText2: ; 49fa9 (12:5fa9)
 	TX_FAR _MtMoon3AfterBattleText2
 	db "@"
-; 0x49fa9 + 5 bytes
 
 MtMoon3BattleText3: ; 49fae (12:5fae)
 	TX_FAR _MtMoon3BattleText3
 	db "@"
-; 0x49fae + 5 bytes
 
 MtMoon3EndBattleText3: ; 49fb3 (12:5fb3)
 	TX_FAR _MtMoon3EndBattleText3
 	db "@"
-; 0x49fb3 + 5 bytes
 
 MtMoon3AfterBattleText3: ; 49fb8 (12:5fb8)
 	TX_FAR _MtMoon3AfterBattleText3
 	db "@"
-; 0x49fb8 + 5 bytes
 
 MtMoon3BattleText4: ; 49fbd (12:5fbd)
 	TX_FAR _MtMoon3BattleText4
 	db "@"
-; 0x49fbd + 5 bytes
 
 MtMoon3EndBattleText4: ; 49fc2 (12:5fc2)
 	TX_FAR _MtMoon3EndBattleText4
 	db "@"
-; 0x49fc2 + 5 bytes
 
 MtMoon3AfterBattleText4: ; 49fc7 (12:5fc7)
 	TX_FAR _MtMoon3AfterBattleText4
 	db "@"
-; 0x49fc7 + 5 bytes
 
 MtMoon3BattleText5: ; 49fcc (12:5fcc)
 	TX_FAR _MtMoon3BattleText5
 	db "@"
-; 0x49fcc + 5 bytes
 
 MtMoon3EndBattleText5: ; 49fd1 (12:5fd1)
 	TX_FAR _MtMoon3EndBattleText5
 	db "@"
-; 0x49fd1 + 5 bytes
 
 MtMoon3AfterBattleText5: ; 49fd6 (12:5fd6)
 	TX_FAR _MtMoon3AfterBattleText5
 	db "@"
-; 0x49fd6 + 5 bytes
 
 MtMoon3Object: ; 0x49fdb (size=102)
 	db $3 ; border tile
@@ -77793,7 +76289,6 @@ SafariZoneWest_h: ; 0x4a1a9 to 0x4a1b5 (12 bytes) (id=219)
 
 SafariZoneWestScript: ; 4a1b5 (12:61b5)
 	jp EnableAutoTextBoxDrawing
-; 0x4a1b8
 
 SafariZoneWestTexts: ; 4a1b8 (12:61b8)
 	dw Predef5CText, Predef5CText, Predef5CText, Predef5CText, SafariZoneWestText5, SafariZoneWestText6, SafariZoneWestText7, SafariZoneWestText8
@@ -77862,7 +76357,6 @@ SafariZoneSecretHouse_h: ; 0x4a30b to 0x4a317 (12 bytes) (id=222)
 
 SafariZoneSecretHouseScript: ; 4a317 (12:6317)
 	jp EnableAutoTextBoxDrawing
-; 0x4a31a
 
 SafariZoneSecretHouseTexts: ; 4a31a (12:631a)
 	dw SafariZoneSecretHouseText1
@@ -77895,22 +76389,18 @@ SafariZoneSecretHouseText1: ; 4a31c (12:631c)
 UnnamedText_4a350: ; 4a350 (12:6350)
 	TX_FAR _UnnamedText_4a350
 	db "@"
-; 0x4a350 + 5 bytes
 
 ReceivedHM03Text: ; 4a355 (12:6355)
 	TX_FAR _ReceivedHM03Text ; 0x85943
 	db $0B, "@"
-; 0x4a35b
 
 HM03ExplanationText: ; 4a35b (12:635b)
 	TX_FAR _HM03ExplanationText
 	db "@"
-; 0x4a35b + 5 bytes
 
 HM03NoRoomText: ; 4a360 (12:6360)
 	TX_FAR _HM03NoRoomText
 	db "@"
-; 0x4a360 + 5 bytes
 
 SafariZoneSecretHouseObject: ; 0x4a365 (size=26)
 	db $17 ; border tile
@@ -78064,7 +76554,6 @@ BattleCenterMScript: ; 4fd10 (13:7d10)
 	ld a, $c
 	ld [$c119], a
 	ret
-; 0x4fd4c
 
 BattleCenterMTexts: ; 4fd4c (13:7d4c)
 	dw BattleCenterMText1
@@ -78096,7 +76585,6 @@ TradeCenterM_h: ; 0x4fd71 to 0x4fd7d (12 bytes) (id=240)
 
 TradeCenterMScript: ; 4fd7d (13:7d7d)
 	jp BattleCenterMScript
-; 0x4fd80
 
 TradeCenterMTexts: ; 4fd80 (13:7d80)
 	dw TradeCenterMText1
@@ -78118,7 +76606,6 @@ TradeCenterMObject: ; 0x4fd87 (size=10)
 TradeCenterMBlocks: ; 4fd91 (13:7d91)
 	INCBIN "maps/tradecenterm.blk"
 
-; known jump sources: 3e59 (0:3e59)
 Func_4fda5: ; 4fda5 (13:7da5)
 	call EnableAutoTextBoxDrawing
 	xor a
@@ -78173,7 +76660,6 @@ Func_4fda5: ; 4fda5 (13:7da5)
 	scf
 	ret
 
-; known jump sources: 4fdcc (13:7dcc), 4fe01 (13:7e01)
 Func_4fe11: ; 4fe11 (13:7e11)
 	ld a, [$cf91]
 	push af
@@ -78199,12 +76685,10 @@ INCBIN "baserom.gbc",$4fe39,$4fe3f - $4fe39
 UnnamedText_4fe3f: ; 4fe3f (13:7e3f)
 	TX_FAR _UnnamedText_4fe3f
 	db "@"
-; 0x4fe3f + 5 bytes
 
 UnnamedText_4fe44: ; 4fe44 (13:7e44)
 	TX_FAR _UnnamedText_4fe44
 	db "@"
-; 0x4fe44 + 5 bytes
 
 GetPredefPointer: ; 4fe49 (13:7e49)
 ; stores hl in $CC4F,$CC50
@@ -78649,7 +77133,6 @@ IndigoPlateau_h: ; 0x5091e to 0x50935 (23 bytes) (id=9)
 
 IndigoPlateauScript: ; 50935 (14:4935)
 	ret
-; 0x50936
 
 IndigoPlateauTexts: ; 50936 (14:4936)
 IndigoPlateauObject: ; 0x50936 (size=20)
@@ -78767,7 +77250,6 @@ SaffronCityBlocks: ; 50a98 (14:4a98)
 
 SaffronCityScript: ; 50c00 (14:4c00)
 	jp EnableAutoTextBoxDrawing
-; 0x50c03
 
 SaffronCityTexts: ; 50c03 (14:4c03)
 	dw SaffronCityText1, SaffronCityText2, SaffronCityText3, SaffronCityText4, SaffronCityText5, SaffronCityText6, SaffronCityText7, SaffronCityText8, SaffronCityText9, SaffronCityText10, SaffronCityText11, SaffronCityText12, SaffronCityText13, SaffronCityText14, SaffronCityText15, SaffronCityText16, SaffronCityText17, SaffronCityText18, MartSignText, SaffronCityText20, SaffronCityText21, SaffronCityText22, PokeCenterSignText, SaffronCityText24, SaffronCityText25
@@ -78876,9 +77358,7 @@ Route20Script: ; 50ca9 (14:4ca9)
 	call ExecuteCurMapScriptInTable
 	ld [W_ROUTE20CURSCRIPT], a
 	ret
-; 0x50cc6
 
-; known jump sources: 50cb0 (14:4cb0)
 Func_50cc6: ; 50cc6 (14:4cc6)
 	ld a, [$d880]
 	and $3
@@ -78916,13 +77396,11 @@ INCBIN "baserom.gbc",$50ce8,$50cef - $50ce8
 	call Func_50d14
 	ret
 
-; known jump sources: 50cd1 (14:4cd1), 50cd6 (14:4cd6), 50cf9 (14:4cf9), 50cfe (14:4cfe)
 Func_50d0c: ; 50d0c (14:4d0c)
 	ld [$cc4d], a
 	ld a, $15
 	jp Predef ; indirect jump to AddMissableObject (f1c8 (3:71c8))
 
-; known jump sources: 50ce2 (14:4ce2), 50d03 (14:4d03), 50d08 (14:4d08)
 Func_50d14: ; 50d14 (14:4d14)
 	ld [$cc4d], a
 	ld a, $11
@@ -78943,7 +77421,6 @@ Route20TrainerHeader0: ; 50d3a (14:4d3a)
 	dw Route20AfterBattleText1 ; 0x4e21 TextAfterBattle
 	dw Route20EndBattleText1 ; 0x4e1c TextEndBattle
 	dw Route20EndBattleText1 ; 0x4e1c TextEndBattle
-; 0x50d46
 
 Route20TrainerHeader2: ; 50d46 (14:4d46)
 	db $2 ; flag's bit
@@ -78953,7 +77430,6 @@ Route20TrainerHeader2: ; 50d46 (14:4d46)
 	dw Route20AfterBattleText2 ; 0x4e30 TextAfterBattle
 	dw Route20EndBattleText2 ; 0x4e2b TextEndBattle
 	dw Route20EndBattleText2 ; 0x4e2b TextEndBattle
-; 0x50d52
 
 Route20TrainerHeader3: ; 50d52 (14:4d52)
 	db $3 ; flag's bit
@@ -78963,7 +77439,6 @@ Route20TrainerHeader3: ; 50d52 (14:4d52)
 	dw Route20AfterBattleText3 ; 0x4e3f TextAfterBattle
 	dw Route20EndBattleText3 ; 0x4e3a TextEndBattle
 	dw Route20EndBattleText3 ; 0x4e3a TextEndBattle
-; 0x50d5e
 
 Route20TrainerHeader4: ; 50d5e (14:4d5e)
 	db $4 ; flag's bit
@@ -78973,7 +77448,6 @@ Route20TrainerHeader4: ; 50d5e (14:4d5e)
 	dw Route20AfterBattleText4 ; 0x4e4e TextAfterBattle
 	dw Route20EndBattleText4 ; 0x4e49 TextEndBattle
 	dw Route20EndBattleText4 ; 0x4e49 TextEndBattle
-; 0x50d6a
 
 Route20TrainerHeader5: ; 50d6a (14:4d6a)
 	db $5 ; flag's bit
@@ -78983,7 +77457,6 @@ Route20TrainerHeader5: ; 50d6a (14:4d6a)
 	dw Route20AfterBattleText5 ; 0x4e5d TextAfterBattle
 	dw Route20EndBattleText5 ; 0x4e58 TextEndBattle
 	dw Route20EndBattleText5 ; 0x4e58 TextEndBattle
-; 0x50d76
 
 Route20TrainerHeader6: ; 50d76 (14:4d76)
 	db $6 ; flag's bit
@@ -78993,7 +77466,6 @@ Route20TrainerHeader6: ; 50d76 (14:4d76)
 	dw Route20AfterBattleText6 ; 0x4e6c TextAfterBattle
 	dw Route20EndBattleText6 ; 0x4e67 TextEndBattle
 	dw Route20EndBattleText6 ; 0x4e67 TextEndBattle
-; 0x50d82
 
 Route20TrainerHeader7: ; 50d82 (14:4d82)
 	db $7 ; flag's bit
@@ -79003,7 +77475,6 @@ Route20TrainerHeader7: ; 50d82 (14:4d82)
 	dw Route20AfterBattleText7 ; 0x4e7b TextAfterBattle
 	dw Route20EndBattleText7 ; 0x4e76 TextEndBattle
 	dw Route20EndBattleText7 ; 0x4e76 TextEndBattle
-; 0x50d8e
 
 Route20TrainerHeader8: ; 50d8e (14:4d8e)
 	db $8 ; flag's bit
@@ -79013,7 +77484,6 @@ Route20TrainerHeader8: ; 50d8e (14:4d8e)
 	dw Route20AfterBattleText8 ; 0x4e8a TextAfterBattle
 	dw Route20EndBattleText8 ; 0x4e85 TextEndBattle
 	dw Route20EndBattleText8 ; 0x4e85 TextEndBattle
-; 0x50d9a
 
 Route20TrainerHeader9: ; 50d9a (14:4d9a)
 	db $9 ; flag's bit
@@ -79023,7 +77493,6 @@ Route20TrainerHeader9: ; 50d9a (14:4d9a)
 	dw Route20AfterBattleText9 ; 0x4e99 TextAfterBattle
 	dw Route20EndBattleText9 ; 0x4e94 TextEndBattle
 	dw Route20EndBattleText9 ; 0x4e94 TextEndBattle
-; 0x50da6
 
 Route20TrainerHeader10: ; 50da6 (14:4da6)
 	db $a ; flag's bit
@@ -79033,7 +77502,6 @@ Route20TrainerHeader10: ; 50da6 (14:4da6)
 	dw Route20AfterBattleText10 ; 0x4ea8 TextAfterBattle
 	dw Route20EndBattleText10 ; 0x4ea3 TextEndBattle
 	dw Route20EndBattleText10 ; 0x4ea3 TextEndBattle
-; 0x50db2
 
 db $ff
 
@@ -79100,152 +77568,122 @@ Route20Text10: ; 50e0d (14:4e0d)
 Route20BattleText1: ; 50e17 (14:4e17)
 	TX_FAR _Route20BattleText1
 	db "@"
-; 0x50e17 + 5 bytes
 
 Route20EndBattleText1: ; 50e1c (14:4e1c)
 	TX_FAR _Route20EndBattleText1
 	db "@"
-; 0x50e1c + 5 bytes
 
 Route20AfterBattleText1: ; 50e21 (14:4e21)
 	TX_FAR _Route20AfterBattleText1
 	db "@"
-; 0x50e21 + 5 bytes
 
 Route20BattleText2: ; 50e26 (14:4e26)
 	TX_FAR _Route20BattleText2
 	db "@"
-; 0x50e26 + 5 bytes
 
 Route20EndBattleText2: ; 50e2b (14:4e2b)
 	TX_FAR _Route20EndBattleText2
 	db "@"
-; 0x50e2b + 5 bytes
 
 Route20AfterBattleText2: ; 50e30 (14:4e30)
 	TX_FAR _Route20AfterBattleText2
 	db "@"
-; 0x50e30 + 5 bytes
 
 Route20BattleText3: ; 50e35 (14:4e35)
 	TX_FAR _Route20BattleText3
 	db "@"
-; 0x50e35 + 5 bytes
 
 Route20EndBattleText3: ; 50e3a (14:4e3a)
 	TX_FAR _Route20EndBattleText3
 	db "@"
-; 0x50e3a + 5 bytes
 
 Route20AfterBattleText3: ; 50e3f (14:4e3f)
 	TX_FAR _Route20AfterBattleText3
 	db "@"
-; 0x50e3f + 5 bytes
 
 Route20BattleText4: ; 50e44 (14:4e44)
 	TX_FAR _Route20BattleText4
 	db "@"
-; 0x50e44 + 5 bytes
 
 Route20EndBattleText4: ; 50e49 (14:4e49)
 	TX_FAR _Route20EndBattleText4
 	db "@"
-; 0x50e49 + 5 bytes
 
 Route20AfterBattleText4: ; 50e4e (14:4e4e)
 	TX_FAR _Route20AfterBattleText4
 	db "@"
-; 0x50e4e + 5 bytes
 
 Route20BattleText5: ; 50e53 (14:4e53)
 	TX_FAR _Route20BattleText5
 	db "@"
-; 0x50e53 + 5 bytes
 
 Route20EndBattleText5: ; 50e58 (14:4e58)
 	TX_FAR _Route20EndBattleText5
 	db "@"
-; 0x50e58 + 5 bytes
 
 Route20AfterBattleText5: ; 50e5d (14:4e5d)
 	TX_FAR _Route20AfterBattleText5
 	db "@"
-; 0x50e5d + 5 bytes
 
 Route20BattleText6: ; 50e62 (14:4e62)
 	TX_FAR _Route20BattleText6
 	db "@"
-; 0x50e62 + 5 bytes
 
 Route20EndBattleText6: ; 50e67 (14:4e67)
 	TX_FAR _Route20EndBattleText6
 	db "@"
-; 0x50e67 + 5 bytes
 
 Route20AfterBattleText6: ; 50e6c (14:4e6c)
 	TX_FAR _Route20AfterBattleText6
 	db "@"
-; 0x50e6c + 5 bytes
 
 Route20BattleText7: ; 50e71 (14:4e71)
 	TX_FAR _Route20BattleText7
 	db "@"
-; 0x50e71 + 5 bytes
 
 Route20EndBattleText7: ; 50e76 (14:4e76)
 	TX_FAR _Route20EndBattleText7
 	db "@"
-; 0x50e76 + 5 bytes
 
 Route20AfterBattleText7: ; 50e7b (14:4e7b)
 	TX_FAR _Route20AfterBattleText7
 	db "@"
-; 0x50e7b + 5 bytes
 
 Route20BattleText8: ; 50e80 (14:4e80)
 	TX_FAR _Route20BattleText8
 	db "@"
-; 0x50e80 + 5 bytes
 
 Route20EndBattleText8: ; 50e85 (14:4e85)
 	TX_FAR _Route20EndBattleText8
 	db "@"
-; 0x50e85 + 5 bytes
 
 Route20AfterBattleText8: ; 50e8a (14:4e8a)
 	TX_FAR _Route20AfterBattleText8
 	db "@"
-; 0x50e8a + 5 bytes
 
 Route20BattleText9: ; 50e8f (14:4e8f)
 	TX_FAR _Route20BattleText9
 	db "@"
-; 0x50e8f + 5 bytes
 
 Route20EndBattleText9: ; 50e94 (14:4e94)
 	TX_FAR _Route20EndBattleText9
 	db "@"
-; 0x50e94 + 5 bytes
 
 Route20AfterBattleText9: ; 50e99 (14:4e99)
 	TX_FAR _Route20AfterBattleText9
 	db "@"
-; 0x50e99 + 5 bytes
 
 Route20BattleText10: ; 50e9e (14:4e9e)
 	TX_FAR _Route20BattleText10
 	db "@"
-; 0x50e9e + 5 bytes
 
 Route20EndBattleText10: ; 50ea3 (14:4ea3)
 	TX_FAR _Route20EndBattleText10
 	db "@"
-; 0x50ea3 + 5 bytes
 
 Route20AfterBattleText10: ; 50ea8 (14:4ea8)
 	TX_FAR _Route20AfterBattleText10
 	db "@"
-; 0x50ea8 + 5 bytes
 
 Route20Text12: ; 50ead (14:4ead)
 Route20Text11: ; 50ead (14:4ead)
@@ -79257,21 +77695,18 @@ Route22Script: ; 50eb2 (14:4eb2)
 	ld hl, Route22Scripts
 	ld a, [W_ROUTE22CURSCRIPT]
 	jp CallFunctionInTable
-; 0x50ebe
 
 Route22Scripts: ; 50ebe (14:4ebe)
 	dw Route22Script0, Route22Script1, Route22Script2, Route22Script3
 
 INCBIN "baserom.gbc",$50ec6,$50ece - $50ec6
 
-; known jump sources: 510e4 (14:50e4)
 Func_50ece: ; 50ece (14:4ece)
 	xor a
 	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
 	ld [W_ROUTE22CURSCRIPT], a
 	ret
 
-; known jump sources: 510d0 (14:50d0)
 Func_50ed6: ; 50ed6 (14:4ed6)
 	ld a, [W_RIVALSTARTER] ; $d715
 	ld b, a
@@ -79286,7 +77721,6 @@ Func_50ed6: ; 50ed6 (14:4ed6)
 	ld [W_TRAINERNO], a ; $d05d
 	ret
 
-; known jump sources: 50f59 (14:4f59), 5107e (14:507e)
 Func_50ee6: ; 50ee6 (14:4ee6)
 	ld de, Unknown_50efb ; $4efb
 	ld a, [$cf0d]
@@ -79352,7 +77786,6 @@ Route22Script0: ; 50f00 (14:4f00)
 	ld a, $1
 	ld [W_ROUTE22CURSCRIPT], a
 	ret
-; 0x50f62
 
 Route22Script1: ; 50f62 (14:4f62)
 	ld a, [$d730]
@@ -79390,7 +77823,6 @@ Route22Script1: ; 50f62 (14:4f62)
 	ld a, $2
 	ld [W_ROUTE22CURSCRIPT], a
 	ret
-; 0x50faf
 
 Unknown_50faf: ; 50faf (14:4faf)
 INCBIN "baserom.gbc",$50faf,$50fb5 - $50faf
@@ -79435,7 +77867,6 @@ Route22Script2: ; 50fb5 (14:4fb5)
 	ld a, $3
 	ld [W_ROUTE22CURSCRIPT], a
 	ret
-; 0x51008
 
 Func_51008: ; 51008 (14:5008)
 	ld de, Unknown_51017 ; $5017
@@ -79447,7 +77878,6 @@ asm_51010
 	ld a, $1
 	ld [H_SPRITEHEIGHT], a
 	jp MoveSprite
-; 0x51017
 
 Unknown_51017: ; 51017 (14:5017)
 INCBIN "baserom.gbc",$51017,$5101f - $51017
@@ -79472,9 +77902,7 @@ Route22Script3: ; 5102a (14:502a)
 	ld a, $0
 	ld [W_ROUTE22CURSCRIPT], a
 	ret
-; 0x5104e
 
-; known jump sources: 50f29 (14:4f29)
 Func_5104e: ; 5104e (14:504e)
 	ld a, $2
 	ld [$cd4f], a
@@ -79585,12 +78013,10 @@ INCBIN "baserom.gbc",$510d9,$510df - $510d9
 	ld [W_ROUTE22CURSCRIPT], a
 	ret
 
-; known jump sources: 5112f (14:512f)
 Func_5113d: ; 5113d (14:513d)
 	ld de, Unknown_5114c ; $514c
 	jr asm_51145
 
-; known jump sources: 51134 (14:5134)
 Func_51142: ; 51142 (14:5142)
 	ld de, Unknown_5114d ; $514d
 asm_51145: ; 51145 (14:5145)
@@ -79619,7 +78045,7 @@ INCBIN "baserom.gbc",$5114d,$51151 - $5114d
 	ld a, $7
 	ld [W_ROUTE22CURSCRIPT], a
 	ret
-; 51175 (14:5175)
+
 Route22Texts: ; 51175 (14:5175)
 	dw Route22Text1, Route22Text2, Route22Text3
 
@@ -79654,42 +78080,34 @@ Route22Text2: ; 51194 (14:5194)
 UnnamedText_511ad: ; 511ad (14:51ad)
 	TX_FAR _UnnamedText_511ad
 	db "@"
-; 0x511ad + 5 bytes
 
 UnnamedText_511b2: ; 511b2 (14:51b2)
 	TX_FAR _UnnamedText_511b2
 	db "@"
-; 0x511b2 + 5 bytes
 
 UnnamedText_511b7: ; 511b7 (14:51b7)
 	TX_FAR _UnnamedText_511b7
 	db "@"
-; 0x511b7 + 5 bytes
 
 UnnamedText_511bc: ; 511bc (14:51bc)
 	TX_FAR _UnnamedText_511bc
 	db "@"
-; 0x511bc + 5 bytes
 
 UnnamedText_511c1: ; 511c1 (14:51c1)
 	TX_FAR _UnnamedText_511c1
 	db "@"
-; 0x511c1 + 5 bytes
 
 UnnamedText_511c6: ; 511c6 (14:51c6)
 	TX_FAR _UnnamedText_511c6
 	db "@"
-; 0x511c6 + 5 bytes
 
 UnnamedText_511cb: ; 511cb (14:51cb)
 	TX_FAR _UnnamedText_511cb
 	db "@"
-; 0x511cb + 5 bytes
 
 UnnamedText_511d0: ; 511d0 (14:51d0)
 	TX_FAR _UnnamedText_511d0
 	db "@"
-; 0x511d0 + 5 bytes
 
 Route22Text3: ; 511d5 (14:51d5)
 	TX_FAR _Route22Text3
@@ -79701,9 +78119,7 @@ Route23Script: ; 511da (14:51da)
 	ld hl, Route23Scripts
 	ld a, [W_ROUTE23CURSCRIPT]
 	jp CallFunctionInTable
-; 0x511e9
 
-; known jump sources: 511da (14:51da)
 Func_511e9: ; 511e9 (14:51e9)
 	ld hl, $d126
 	bit 6, [hl]
@@ -79723,7 +78139,7 @@ Func_511e9: ; 511e9 (14:51e9)
 	ld [$cc4d], a
 	ld a, $11
 	jp Predef ; indirect jump to RemoveMissableObject (f1d7 (3:71d7))
-; 51213 (14:5213)
+
 Route23Scripts: ; 51213 (14:5213)
 	dw Route23Script0, Route23Script1, Route23Script2
 
@@ -79763,12 +78179,10 @@ Route23Script0: ; 51219 (14:5219)
 	xor a
 	ld [H_CURRENTPRESSEDBUTTONS], a
 	ret
-; 0x51255
 
 Unknown_51255: ; 51255 (14:5255)
 INCBIN "baserom.gbc",$51255,$5125d - $51255
 
-; known jump sources: 5124b (14:524b), 51349 (14:5349)
 Func_5125d: ; 5125d (14:525d)
 	ld hl, Unknown_51276 ; $5276
 	ld a, [W_WHICHTRADE] ; $cd3d
@@ -79800,7 +78214,6 @@ BadgeList: ; 51284 (14:5284)
 	db "THUNDERBADGE@"
 	db "CASCADEBADGE@"
 
-; known jump sources: 51365 (14:5365)
 Func_512d8: ; 512d8 (14:52d8)
 	ld a, $1
 	ld [$cd38], a
@@ -79810,7 +78223,7 @@ Func_512d8: ; 512d8 (14:52d8)
 	ld [$c109], a
 	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
 	jp Func_3486
-; 512ec (14:52ec)
+
 Route23Script1: ; 512ec (14:52ec)
 	ld a, [$cd38]
 	and a
@@ -79819,7 +78232,6 @@ Route23Script2: ; 512f1 (14:52f1)
 	ld a, $0
 	ld [W_ROUTE23CURSCRIPT], a
 	ret
-; 0x512f7
 
 Route23Texts: ; 512f7 (14:52f7)
 	dw Route23Text1, Route23Text2, Route23Text3, Route23Text4, Route23Text5, Route23Text6, Route23Text7, Route23Text8
@@ -79865,9 +78277,7 @@ Route23Text7: ; 5133d (14:533d)
 	ld a, $0
 	call Func_51346
 	jp TextScriptEnd
-; 0x51346
 
-; known jump sources: 5130a (14:530a), 51313 (14:5313), 5131c (14:531c), 51325 (14:5325), 5132e (14:532e), 51337 (14:5337), 51340 (14:5340)
 Func_51346: ; 51346 (14:5346)
 	ld [W_WHICHTRADE], a ; $cd3d
 	call Func_5125d
@@ -79911,7 +78321,6 @@ INCBIN "baserom.gbc",$5139e,$513a3 - $5139e
 UnnamedText_513a3: ; 513a3 (14:53a3)
 	TX_FAR _UnnamedText_513a3
 	db "@"
-; 0x513a3 + 5 bytes
 
 Route23Text8: ; 513a8 (14:53a8)
 	TX_FAR _Route23Text8
@@ -79925,9 +78334,7 @@ Route24Script: ; 513ad (14:53ad)
 	call ExecuteCurMapScriptInTable
 	ld [W_ROUTE24CURSCRIPT], a
 	ret
-; 0x513c0
 
-; known jump sources: 51427 (14:5427)
 Func_513c0: ; 513c0 (14:53c0)
 	xor a
 	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
@@ -79981,7 +78388,7 @@ INCBIN "baserom.gbc",$5140e,$51422 - $5140e
 	ld [W_ROUTE24CURSCRIPT], a
 	ld [W_CURMAPSCRIPT], a
 	ret
-; 5144b (14:544b)
+
 Route24Texts: ; 5144b (14:544b)
 	dw Route24Text1, Route24Text2, Route24Text3, Route24Text4, Route24Text5, Route24Text6, Route24Text7, Predef5CText
 
@@ -79994,7 +78401,6 @@ Route24TrainerHeader0: ; 5145b (14:545b)
 	dw Route24AfterBattleText1 ; 0x557b TextAfterBattle
 	dw Route24EndBattleText1 ; 0x5576 TextEndBattle
 	dw Route24EndBattleText1 ; 0x5576 TextEndBattle
-; 0x51467
 
 Route24TrainerHeader2: ; 51467 (14:5467)
 	db $3 ; flag's bit
@@ -80004,7 +78410,6 @@ Route24TrainerHeader2: ; 51467 (14:5467)
 	dw Route24AfterBattleText2 ; 0x558a TextAfterBattle
 	dw Route24EndBattleText2 ; 0x5585 TextEndBattle
 	dw Route24EndBattleText2 ; 0x5585 TextEndBattle
-; 0x51473
 
 Route24TrainerHeader3: ; 51473 (14:5473)
 	db $4 ; flag's bit
@@ -80014,7 +78419,6 @@ Route24TrainerHeader3: ; 51473 (14:5473)
 	dw Route24AfterBattleText3 ; 0x5599 TextAfterBattle
 	dw Route24EndBattleText3 ; 0x5594 TextEndBattle
 	dw Route24EndBattleText3 ; 0x5594 TextEndBattle
-; 0x5147f
 
 Route24TrainerHeader4: ; 5147f (14:547f)
 	db $5 ; flag's bit
@@ -80024,7 +78428,6 @@ Route24TrainerHeader4: ; 5147f (14:547f)
 	dw Route24AfterBattleText4 ; 0x55a8 TextAfterBattle
 	dw Route24EndBattleText4 ; 0x55a3 TextEndBattle
 	dw Route24EndBattleText4 ; 0x55a3 TextEndBattle
-; 0x5148b
 
 Route24TrainerHeader5: ; 5148b (14:548b)
 	db $6 ; flag's bit
@@ -80034,7 +78437,6 @@ Route24TrainerHeader5: ; 5148b (14:548b)
 	dw Route24AfterBattleText5 ; 0x55b7 TextAfterBattle
 	dw Route24EndBattleText5 ; 0x55b2 TextEndBattle
 	dw Route24EndBattleText5 ; 0x55b2 TextEndBattle
-; 0x51497
 
 Route24TrainerHeader6: ; 51497 (14:5497)
 	db $7 ; flag's bit
@@ -80044,7 +78446,6 @@ Route24TrainerHeader6: ; 51497 (14:5497)
 	dw Route24AfterBattleText6 ; 0x55c6 TextAfterBattle
 	dw Route24EndBattleText6 ; 0x55c1 TextEndBattle
 	dw Route24EndBattleText6 ; 0x55c1 TextEndBattle
-; 0x514a3
 
 db $ff
 
@@ -80092,14 +78493,12 @@ Route24Text1: ; 514a4 (14:54a4)
 	ld hl, $d7f0
 	set 1, [hl]
 	jp TextScriptEnd
-; 0x51510
 
 UnnamedText_51510: ; 51510 (14:5510)
 	TX_FAR _UnnamedText_51510 ; 0x92721
 	db $0B
 	TX_FAR _UnnamedText_51515 ; 0x92755
 	db "@"
-; 0x5151a
 
 UnnamedText_5151a: ; 5151a (14:551a)
 	TX_FAR _UnnamedText_5151a ; 0x92779
@@ -80108,22 +78507,18 @@ UnnamedText_5151a: ; 5151a (14:551a)
 UnnamedText_51521: ; 51521 (14:5521)
 	TX_FAR _UnnamedText_51521
 	db "@"
-; 0x51521 + 5 bytes
 
 UnnamedText_51526: ; 51526 (14:5526)
 	TX_FAR _UnnamedText_51526
 	db "@"
-; 0x51526 + 5 bytes
 
 UnnamedText_5152b: ; 5152b (14:552b)
 	TX_FAR _UnnamedText_5152b
 	db "@"
-; 0x5152b + 5 bytes
 
 UnnamedText_51530: ; 51530 (14:5530)
 	TX_FAR _UnnamedText_51530
 	db "@"
-; 0x51530 + 5 bytes
 
 Route24Text2: ; 51535 (14:5535)
 	db $08 ; asm
@@ -80164,92 +78559,74 @@ Route24Text7: ; 51567 (14:5567)
 Route24BattleText1: ; 51571 (14:5571)
 	TX_FAR _Route24BattleText1
 	db "@"
-; 0x51571 + 5 bytes
 
 Route24EndBattleText1: ; 51576 (14:5576)
 	TX_FAR _Route24EndBattleText1
 	db "@"
-; 0x51576 + 5 bytes
 
 Route24AfterBattleText1: ; 5157b (14:557b)
 	TX_FAR _Route24AfterBattleText1
 	db "@"
-; 0x5157b + 5 bytes
 
 Route24BattleText2: ; 51580 (14:5580)
 	TX_FAR _Route24BattleText2
 	db "@"
-; 0x51580 + 5 bytes
 
 Route24EndBattleText2: ; 51585 (14:5585)
 	TX_FAR _Route24EndBattleText2
 	db "@"
-; 0x51585 + 5 bytes
 
 Route24AfterBattleText2: ; 5158a (14:558a)
 	TX_FAR _Route24AfterBattleText2
 	db "@"
-; 0x5158a + 5 bytes
 
 Route24BattleText3: ; 5158f (14:558f)
 	TX_FAR _Route24BattleText3
 	db "@"
-; 0x5158f + 5 bytes
 
 Route24EndBattleText3: ; 51594 (14:5594)
 	TX_FAR _Route24EndBattleText3
 	db "@"
-; 0x51594 + 5 bytes
 
 Route24AfterBattleText3: ; 51599 (14:5599)
 	TX_FAR _Route24AfterBattleText3
 	db "@"
-; 0x51599 + 5 bytes
 
 Route24BattleText4: ; 5159e (14:559e)
 	TX_FAR _Route24BattleText4
 	db "@"
-; 0x5159e + 5 bytes
 
 Route24EndBattleText4: ; 515a3 (14:55a3)
 	TX_FAR _Route24EndBattleText4
 	db "@"
-; 0x515a3 + 5 bytes
 
 Route24AfterBattleText4: ; 515a8 (14:55a8)
 	TX_FAR _Route24AfterBattleText4
 	db "@"
-; 0x515a8 + 5 bytes
 
 Route24BattleText5: ; 515ad (14:55ad)
 	TX_FAR _Route24BattleText5
 	db "@"
-; 0x515ad + 5 bytes
 
 Route24EndBattleText5: ; 515b2 (14:55b2)
 	TX_FAR _Route24EndBattleText5
 	db "@"
-; 0x515b2 + 5 bytes
 
 Route24AfterBattleText5: ; 515b7 (14:55b7)
 	TX_FAR _Route24AfterBattleText5
 	db "@"
-; 0x515b7 + 5 bytes
 
 Route24BattleText6: ; 515bc (14:55bc)
 	TX_FAR _Route24BattleText6
 	db "@"
-; 0x515bc + 5 bytes
 
 Route24EndBattleText6: ; 515c1 (14:55c1)
 	TX_FAR _Route24EndBattleText6
 	db "@"
-; 0x515c1 + 5 bytes
 
 Route24AfterBattleText6: ; 515c6 (14:55c6)
 	TX_FAR _Route24AfterBattleText6
 	db "@"
-; 0x515c6 + 5 bytes
 
 Route25Script: ; 515cb (14:55cb)
 	call Unknown_515e1
@@ -80260,7 +78637,6 @@ Route25Script: ; 515cb (14:55cb)
 	call ExecuteCurMapScriptInTable
 	ld [W_ROUTE25CURSCRIPT], a
 	ret
-; 0x515e1
 
 Unknown_515e1: ; 515e1 (14:55e1)
 	ld hl, $d126
@@ -80309,7 +78685,6 @@ Route25TrainerHeader0: ; 5163e (14:563e)
 	dw Route25AfterBattleText1 ; 0x570f TextAfterBattle
 	dw Route25EndBattleText1 ; 0x570a TextEndBattle
 	dw Route25EndBattleText1 ; 0x570a TextEndBattle
-; 0x5164a
 
 Route25TrainerHeader2: ; 5164a (14:564a)
 	db $2 ; flag's bit
@@ -80319,7 +78694,6 @@ Route25TrainerHeader2: ; 5164a (14:564a)
 	dw Route25AfterBattleText2 ; 0x571e TextAfterBattle
 	dw Route25EndBattleText2 ; 0x5719 TextEndBattle
 	dw Route25EndBattleText2 ; 0x5719 TextEndBattle
-; 0x51656
 
 Route25TrainerHeader3: ; 51656 (14:5656)
 	db $3 ; flag's bit
@@ -80329,7 +78703,6 @@ Route25TrainerHeader3: ; 51656 (14:5656)
 	dw Route25AfterBattleText3 ; 0x572d TextAfterBattle
 	dw Route25EndBattleText3 ; 0x5728 TextEndBattle
 	dw Route25EndBattleText3 ; 0x5728 TextEndBattle
-; 0x51662
 
 Route25TrainerHeader4: ; 51662 (14:5662)
 	db $4 ; flag's bit
@@ -80339,7 +78712,6 @@ Route25TrainerHeader4: ; 51662 (14:5662)
 	dw Route25AfterBattleText4 ; 0x573c TextAfterBattle
 	dw Route25EndBattleText4 ; 0x5737 TextEndBattle
 	dw Route25EndBattleText4 ; 0x5737 TextEndBattle
-; 0x5166e
 
 Route25TrainerHeader5: ; 5166e (14:566e)
 	db $5 ; flag's bit
@@ -80349,7 +78721,6 @@ Route25TrainerHeader5: ; 5166e (14:566e)
 	dw Route25AfterBattleText5 ; 0x574b TextAfterBattle
 	dw Route25EndBattleText5 ; 0x5746 TextEndBattle
 	dw Route25EndBattleText5 ; 0x5746 TextEndBattle
-; 0x5167a
 
 Route25TrainerHeader6: ; 5167a (14:567a)
 	db $6 ; flag's bit
@@ -80359,7 +78730,6 @@ Route25TrainerHeader6: ; 5167a (14:567a)
 	dw Route25AfterBattleText6 ; 0x575a TextAfterBattle
 	dw Route25EndBattleText6 ; 0x5755 TextEndBattle
 	dw Route25EndBattleText6 ; 0x5755 TextEndBattle
-; 0x51686
 
 Route25TrainerHeader7: ; 51686 (14:5686)
 	db $7 ; flag's bit
@@ -80369,7 +78739,6 @@ Route25TrainerHeader7: ; 51686 (14:5686)
 	dw Route25AfterBattleText7 ; 0x5769 TextAfterBattle
 	dw Route25EndBattleText7 ; 0x5764 TextEndBattle
 	dw Route25EndBattleText7 ; 0x5764 TextEndBattle
-; 0x51692
 
 Route25TrainerHeader8: ; 51692 (14:5692)
 	db $8 ; flag's bit
@@ -80379,7 +78748,6 @@ Route25TrainerHeader8: ; 51692 (14:5692)
 	dw Route25AfterBattleText8 ; 0x5778 TextAfterBattle
 	dw Route25EndBattleText8 ; 0x5773 TextEndBattle
 	dw Route25EndBattleText8 ; 0x5773 TextEndBattle
-; 0x5169e
 
 Route25TrainerHeader9: ; 5169e (14:569e)
 	db $9 ; flag's bit
@@ -80389,7 +78757,6 @@ Route25TrainerHeader9: ; 5169e (14:569e)
 	dw Route25AfterBattleText9 ; 0x5787 TextAfterBattle
 	dw Route25EndBattleText9 ; 0x5782 TextEndBattle
 	dw Route25EndBattleText9 ; 0x5782 TextEndBattle
-; 0x516aa
 
 db $ff
 
@@ -80450,137 +78817,110 @@ Route25Text9: ; 516fb (14:56fb)
 Route25BattleText1: ; 51705 (14:5705)
 	TX_FAR _Route25BattleText1
 	db "@"
-; 0x51705 + 5 bytes
 
 Route25EndBattleText1: ; 5170a (14:570a)
 	TX_FAR _Route25EndBattleText1
 	db "@"
-; 0x5170a + 5 bytes
 
 Route25AfterBattleText1: ; 5170f (14:570f)
 	TX_FAR _Route25AfterBattleText1
 	db "@"
-; 0x5170f + 5 bytes
 
 Route25BattleText2: ; 51714 (14:5714)
 	TX_FAR _Route25BattleText2
 	db "@"
-; 0x51714 + 5 bytes
 
 Route25EndBattleText2: ; 51719 (14:5719)
 	TX_FAR _Route25EndBattleText2
 	db "@"
-; 0x51719 + 5 bytes
 
 Route25AfterBattleText2: ; 5171e (14:571e)
 	TX_FAR _Route25AfterBattleText2
 	db "@"
-; 0x5171e + 5 bytes
 
 Route25BattleText3: ; 51723 (14:5723)
 	TX_FAR _Route25BattleText3
 	db "@"
-; 0x51723 + 5 bytes
 
 Route25EndBattleText3: ; 51728 (14:5728)
 	TX_FAR _Route25EndBattleText3
 	db "@"
-; 0x51728 + 5 bytes
 
 Route25AfterBattleText3: ; 5172d (14:572d)
 	TX_FAR _Route25AfterBattleText3
 	db "@"
-; 0x5172d + 5 bytes
 
 Route25BattleText4: ; 51732 (14:5732)
 	TX_FAR _Route25BattleText4
 	db "@"
-; 0x51732 + 5 bytes
 
 Route25EndBattleText4: ; 51737 (14:5737)
 	TX_FAR _Route25EndBattleText4
 	db "@"
-; 0x51737 + 5 bytes
 
 Route25AfterBattleText4: ; 5173c (14:573c)
 	TX_FAR _Route25AfterBattleText4
 	db "@"
-; 0x5173c + 5 bytes
 
 Route25BattleText5: ; 51741 (14:5741)
 	TX_FAR _Route25BattleText5
 	db "@"
-; 0x51741 + 5 bytes
 
 Route25EndBattleText5: ; 51746 (14:5746)
 	TX_FAR _Route25EndBattleText5
 	db "@"
-; 0x51746 + 5 bytes
 
 Route25AfterBattleText5: ; 5174b (14:574b)
 	TX_FAR _Route25AfterBattleText5
 	db "@"
-; 0x5174b + 5 bytes
 
 Route25BattleText6: ; 51750 (14:5750)
 	TX_FAR _Route25BattleText6
 	db "@"
-; 0x51750 + 5 bytes
 
 Route25EndBattleText6: ; 51755 (14:5755)
 	TX_FAR _Route25EndBattleText6
 	db "@"
-; 0x51755 + 5 bytes
 
 Route25AfterBattleText6: ; 5175a (14:575a)
 	TX_FAR _Route25AfterBattleText6
 	db "@"
-; 0x5175a + 5 bytes
 
 Route25BattleText7: ; 5175f (14:575f)
 	TX_FAR _Route25BattleText7
 	db "@"
-; 0x5175f + 5 bytes
 
 Route25EndBattleText7: ; 51764 (14:5764)
 	TX_FAR _Route25EndBattleText7
 	db "@"
-; 0x51764 + 5 bytes
 
 Route25AfterBattleText7: ; 51769 (14:5769)
 	TX_FAR _Route25AfterBattleText7
 	db "@"
-; 0x51769 + 5 bytes
 
 Route25BattleText8: ; 5176e (14:576e)
 	TX_FAR _Route25BattleText8
 	db "@"
-; 0x5176e + 5 bytes
 
 Route25EndBattleText8: ; 51773 (14:5773)
 	TX_FAR _Route25EndBattleText8
 	db "@"
-; 0x51773 + 5 bytes
 
 Route25AfterBattleText8: ; 51778 (14:5778)
 	TX_FAR _Route25AfterBattleText8
 	db "@"
-; 0x51778 + 5 bytes
 
 Route25BattleText9: ; 5177d (14:577d)
 	TX_FAR _Route25BattleText9
 	db "@"
-; 0x5177d + 5 bytes
 
 Route25EndBattleText9: ; 51782 (14:5782)
 	TX_FAR _Route25EndBattleText9
 	db "@"
-; 0x51782 + 5 bytes
 
 Route25AfterBattleText9: ; 51787 (14:5787)
 	TX_FAR _Route25AfterBattleText9
 	db "@"
-; 0x51787 + 5 bytes
 
 Route25Text11: ; 5178c (14:578c)
 	TX_FAR _Route25Text11
@@ -80610,13 +78950,11 @@ VictoryRoad2Script: ; 5179d (14:579d)
 	call ExecuteCurMapScriptInTable
 	ld [W_VICTORYROAD2CURSCRIPT], a
 	ret
-; 0x517c4
 
 VictoryRoad2Script_Unknown517c4: ; 517c4 (14:57c4)
 	ld hl, $d869
 	res 7, [hl]
 
-; known jump sources: 517ae (14:57ae)
 Func_517c9: ; 517c9 (14:57c9)
 	ld a, [$d7ee]
 	bit 0, a
@@ -80632,7 +78970,6 @@ Func_517c9: ; 517c9 (14:57c9)
 	ld a, $1d
 	ld bc, $70b
 
-; known jump sources: 517d6 (14:57d6)
 Func_517e2: ; 517e2 (14:57e2)
 	ld [$d09f], a
 	ld a, $17
@@ -80676,7 +79013,6 @@ VictoryRoad2TrainerHeader0: ; 51835 (14:5835)
 	dw VictoryRoad2AfterBattleText1 ; 0x58d4 TextAfterBattle
 	dw VictoryRoad2EndBattleText1 ; 0x58cf TextEndBattle
 	dw VictoryRoad2EndBattleText1 ; 0x58cf TextEndBattle
-; 0x51841
 
 VictoryRoad2TrainerHeader2: ; 51841 (14:5841)
 	db $2 ; flag's bit
@@ -80686,7 +79022,6 @@ VictoryRoad2TrainerHeader2: ; 51841 (14:5841)
 	dw VictoryRoad2AfterBattleText2 ; 0x58e3 TextAfterBattle
 	dw VictoryRoad2EndBattleText2 ; 0x58de TextEndBattle
 	dw VictoryRoad2EndBattleText2 ; 0x58de TextEndBattle
-; 0x5184d
 
 VictoryRoad2TrainerHeader3: ; 5184d (14:584d)
 	db $3 ; flag's bit
@@ -80696,7 +79031,6 @@ VictoryRoad2TrainerHeader3: ; 5184d (14:584d)
 	dw VictoryRoad2AfterBattleText3 ; 0x58f2 TextAfterBattle
 	dw VictoryRoad2EndBattleText3 ; 0x58ed TextEndBattle
 	dw VictoryRoad2EndBattleText3 ; 0x58ed TextEndBattle
-; 0x51859
 
 VictoryRoad2TrainerHeader4: ; 51859 (14:5859)
 	db $4 ; flag's bit
@@ -80706,7 +79040,6 @@ VictoryRoad2TrainerHeader4: ; 51859 (14:5859)
 	dw VictoryRoad2AfterBattleText4 ; 0x5901 TextAfterBattle
 	dw VictoryRoad2EndBattleText4 ; 0x58fc TextEndBattle
 	dw VictoryRoad2EndBattleText4 ; 0x58fc TextEndBattle
-; 0x51865
 
 VictoryRoad2TrainerHeader5: ; 51865 (14:5865)
 	db $5 ; flag's bit
@@ -80716,7 +79049,6 @@ VictoryRoad2TrainerHeader5: ; 51865 (14:5865)
 	dw VictoryRoad2AfterBattleText5 ; 0x5910 TextAfterBattle
 	dw VictoryRoad2EndBattleText5 ; 0x590b TextEndBattle
 	dw VictoryRoad2EndBattleText5 ; 0x590b TextEndBattle
-; 0x51871
 
 VictoryRoad2TrainerHeader6: ; 51871 (14:5871)
 	db $6 ; flag's bit
@@ -80726,7 +79058,6 @@ VictoryRoad2TrainerHeader6: ; 51871 (14:5871)
 	dw VictoryRoad2BattleText6 ; 0x58ba TextAfterBattle
 	dw VictoryRoad2BattleText6 ; 0x58ba TextEndBattle
 	dw VictoryRoad2BattleText6 ; 0x58ba TextEndBattle
-; 0x5187d
 
 db $ff
 
@@ -80773,82 +79104,66 @@ VictoryRoad2BattleText6: ; 518ba (14:58ba)
 	call PlayCry
 	call WaitForSoundToFinish
 	jp TextScriptEnd
-; 0x518ca
 
 VictoryRoad2BattleText1: ; 518ca (14:58ca)
 	TX_FAR _VictoryRoad2BattleText1
 	db "@"
-; 0x518ca + 5 bytes
 
 VictoryRoad2EndBattleText1: ; 518cf (14:58cf)
 	TX_FAR _VictoryRoad2EndBattleText1
 	db "@"
-; 0x518cf + 5 bytes
 
 VictoryRoad2AfterBattleText1: ; 518d4 (14:58d4)
 	TX_FAR _VictoryRoad2AfterBattleText1
 	db "@"
-; 0x518d4 + 5 bytes
 
 VictoryRoad2BattleText2: ; 518d9 (14:58d9)
 	TX_FAR _VictoryRoad2BattleText2
 	db "@"
-; 0x518d9 + 5 bytes
 
 VictoryRoad2EndBattleText2: ; 518de (14:58de)
 	TX_FAR _VictoryRoad2EndBattleText2
 	db "@"
-; 0x518de + 5 bytes
 
 VictoryRoad2AfterBattleText2: ; 518e3 (14:58e3)
 	TX_FAR _VictoryRoad2AfterBattleText2
 	db "@"
-; 0x518e3 + 5 bytes
 
 VictoryRoad2BattleText3: ; 518e8 (14:58e8)
 	TX_FAR _VictoryRoad2BattleText3
 	db "@"
-; 0x518e8 + 5 bytes
 
 VictoryRoad2EndBattleText3: ; 518ed (14:58ed)
 	TX_FAR _VictoryRoad2EndBattleText3
 	db "@"
-; 0x518ed + 5 bytes
 
 VictoryRoad2AfterBattleText3: ; 518f2 (14:58f2)
 	TX_FAR _VictoryRoad2AfterBattleText3
 	db "@"
-; 0x518f2 + 5 bytes
 
 VictoryRoad2BattleText4: ; 518f7 (14:58f7)
 	TX_FAR _VictoryRoad2BattleText4
 	db "@"
-; 0x518f7 + 5 bytes
 
 VictoryRoad2EndBattleText4: ; 518fc (14:58fc)
 	TX_FAR _VictoryRoad2EndBattleText4
 	db "@"
-; 0x518fc + 5 bytes
 
 VictoryRoad2AfterBattleText4: ; 51901 (14:5901)
 	TX_FAR _VictoryRoad2AfterBattleText4
 	db "@"
-; 0x51901 + 5 bytes
 
 VictoryRoad2BattleText5: ; 51906 (14:5906)
 	TX_FAR _VictoryRoad2BattleText5
 	db "@"
-; 0x51906 + 5 bytes
 
 VictoryRoad2EndBattleText5: ; 5190b (14:590b)
 	TX_FAR _VictoryRoad2EndBattleText5
 	db "@"
-; 0x5190b + 5 bytes
 
 VictoryRoad2AfterBattleText5: ; 51910 (14:5910)
 	TX_FAR _VictoryRoad2AfterBattleText5
 	db "@"
-; 0x51910 + 5 bytes
 
 VictoryRoad2Object: ; 0x51915 (size=154)
 	db $7d ; border tile
@@ -80902,7 +79217,6 @@ MtMoon2_h: ; 0x51a36 to 0x51a42 (12 bytes) (id=60)
 MtMoon2Script: ; 51a42 (14:5a42)
 	call EnableAutoTextBoxDrawing
 	ret
-; 0x51a46
 
 MtMoon2Texts: ; 51a46 (14:5a46)
 	dw MtMoonText1
@@ -80910,7 +79224,6 @@ MtMoon2Texts: ; 51a46 (14:5a46)
 MtMoonText1: ; 51a48 (14:5a48)
 	TX_FAR _UnnamedText_51a48
 	db "@"
-; 0x51a48 + 5 bytes
 
 MtMoon2Object: ; 0x51a4d (size=68)
 	db $3 ; border tile
@@ -80959,7 +79272,6 @@ SilphCo7Script: ; 51b61 (14:5b61)
 	call ExecuteCurMapScriptInTable
 	ld [W_SILPHCO7CURSCRIPT], a
 	ret
-; 0x51b77
 
 SilphCo7Script_Unknown51b77: ; 51b77 (14:5b77)
 	ld hl, $d126
@@ -81001,7 +79313,6 @@ SilphCo7Script_Unknown51b77: ; 51b77 (14:5b77)
 Unknown_51bc1: ; 51bc1 (14:5bc1)
 INCBIN "baserom.gbc",$51bc1,$51bc8 - $51bc1
 
-; known jump sources: 51b82 (14:5b82)
 Func_51bc8: ; 51bc8 (14:5bc8)
 	push hl
 	ld hl, $d73f
@@ -81038,7 +79349,6 @@ Func_51bc8: ; 51bc8 (14:5bc8)
 	ld [$FF00+$e0], a
 	ret
 
-; known jump sources: 51b85 (14:5b85)
 Func_51bf4: ; 51bf4 (14:5bf4)
 	ld hl, $d830
 	ld a, [$FF00+$e0]
@@ -81057,12 +79367,10 @@ Func_51bf4: ; 51bf4 (14:5bf4)
 	set 6, [hl]
 	ret
 
-; known jump sources: 51ccd (14:5ccd)
 Func_51c0c: ; 51c0c (14:5c0c)
 	xor a
 	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
 
-; known jump sources: 51c75 (14:5c75), 51cc5 (14:5cc5), 51d17 (14:5d17), 51d3c (14:5d3c)
 Func_51c10: ; 51c10 (14:5c10)
 	ld [W_SILPHCO7CURSCRIPT], a
 	ld [W_CURMAPSCRIPT], a
@@ -81196,7 +79504,7 @@ INCBIN "baserom.gbc",$51d1d,$51d25 - $51d1d
 	xor a
 	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
 	jp Func_51c10
-; 51d3f (14:5d3f)
+
 SilphCo7Texts: ; 51d3f (14:5d3f)
 	dw SilphCo7Text1, SilphCo7Text2, SilphCo7Text3, SilphCo7Text4, SilphCo7Text5, SilphCo7Text6, SilphCo7Text7, SilphCo7Text8, SilphCo7Text9, Predef5CText, Predef5CText, Predef5CText, SilphCo7Text13, SilphCo7Text14, SilphCo7Text15
 
@@ -81209,7 +79517,6 @@ SilphCo7TrainerHeader0: ; 51d5d (14:5d5d)
 	dw SilphCo7AfterBattleText1 ; 0x5e64 TextAfterBattle
 	dw SilphCo7EndBattleText1 ; 0x5e5f TextEndBattle
 	dw SilphCo7EndBattleText1 ; 0x5e5f TextEndBattle
-; 0x51d69
 
 SilphCo7TrainerHeader2: ; 51d69 (14:5d69)
 	db $6 ; flag's bit
@@ -81219,7 +79526,6 @@ SilphCo7TrainerHeader2: ; 51d69 (14:5d69)
 	dw SilphCo7AfterBattleText2 ; 0x5e7d TextAfterBattle
 	dw SilphCo7EndBattleText2 ; 0x5e78 TextEndBattle
 	dw SilphCo7EndBattleText2 ; 0x5e78 TextEndBattle
-; 0x51d75
 
 SilphCo7TrainerHeader3: ; 51d75 (14:5d75)
 	db $7 ; flag's bit
@@ -81229,7 +79535,6 @@ SilphCo7TrainerHeader3: ; 51d75 (14:5d75)
 	dw SilphCo7AfterBattleText3 ; 0x5e96 TextAfterBattle
 	dw SilphCo7EndBattleText3 ; 0x5e91 TextEndBattle
 	dw SilphCo7EndBattleText3 ; 0x5e91 TextEndBattle
-; 0x51d81
 
 SilphCo7TrainerHeader4: ; 51d81 (14:5d81)
 	db $8 ; flag's bit
@@ -81239,7 +79544,6 @@ SilphCo7TrainerHeader4: ; 51d81 (14:5d81)
 	dw SilphCo7AfterBattleText4 ; 0x5eaf TextAfterBattle
 	dw SilphCo7EndBattleText4 ; 0x5eaa TextEndBattle
 	dw SilphCo7EndBattleText4 ; 0x5eaa TextEndBattle
-; 0x51d8d
 
 db $ff
 
@@ -81278,22 +79582,18 @@ SilphCo7Text1: ; 51d8e (14:5d8e)
 UnnamedText_51dd3: ; 51dd3 (14:5dd3)
 	TX_FAR _UnnamedText_51dd3
 	db "@"
-; 0x51dd3 + 5 bytes
 
 UnnamedText_51dd8: ; 51dd8 (14:5dd8)
 	TX_FAR _UnnamedText_51dd8
 	db "@"
-; 0x51dd8 + 5 bytes
 
 UnnamedText_51ddd: ; 51ddd (14:5ddd)
 	TX_FAR _UnnamedText_51ddd
 	db "@"
-; 0x51ddd + 5 bytes
 
 UnnamedText_51de2: ; 51de2 (14:5de2)
 	TX_FAR _UnnamedText_51de2
 	db "@"
-; 0x51de2 + 5 bytes
 
 SilphCo7Text2: ; 51de7 (14:5de7)
 	db $8
@@ -81308,17 +79608,14 @@ SilphCo7Text2: ; 51de7 (14:5de7)
 	call PrintText
 .asm_e4d89 ; 0x51dfd
 	jp TextScriptEnd
-; 0x51e00
 
 UnnamedText_51e00: ; 51e00 (14:5e00)
 	TX_FAR _UnnamedText_51e00
 	db "@"
-; 0x51e00 + 5 bytes
 
 UnnamedText_51e05: ; 51e05 (14:5e05)
 	TX_FAR _UnnamedText_51e05
 	db "@"
-; 0x51e05 + 5 bytes
 
 SilphCo7Text3: ; 51e0a (14:5e0a)
 	db $08 ; asm
@@ -81337,12 +79634,10 @@ SilphCo7Text3: ; 51e0a (14:5e0a)
 UnnamedText_51e23: ; 51e23 (14:5e23)
 	TX_FAR _UnnamedText_51e23
 	db "@"
-; 0x51e23 + 5 bytes
 
 UnnamedText_51e28: ; 51e28 (14:5e28)
 	TX_FAR _UnnamedText_51e28
 	db "@"
-; 0x51e28 + 5 bytes
 
 SilphCo7Text4: ; 51e2d (14:5e2d)
 	db $08 ; asm
@@ -81361,12 +79656,10 @@ SilphCo7Text4: ; 51e2d (14:5e2d)
 UnnamedText_51e46: ; 51e46 (14:5e46)
 	TX_FAR _UnnamedText_51e46
 	db "@"
-; 0x51e46 + 5 bytes
 
 UnnamedText_51e4b: ; 51e4b (14:5e4b)
 	TX_FAR _UnnamedText_51e4b
 	db "@"
-; 0x51e4b + 5 bytes
 
 SilphCo7Text5: ; 51e50 (14:5e50)
 	db $08 ; asm
@@ -81377,17 +79670,14 @@ SilphCo7Text5: ; 51e50 (14:5e50)
 SilphCo7BattleText1: ; 51e5a (14:5e5a)
 	TX_FAR _SilphCo7BattleText1
 	db "@"
-; 0x51e5a + 5 bytes
 
 SilphCo7EndBattleText1: ; 51e5f (14:5e5f)
 	TX_FAR _SilphCo7EndBattleText1
 	db "@"
-; 0x51e5f + 5 bytes
 
 SilphCo7AfterBattleText1: ; 51e64 (14:5e64)
 	TX_FAR _SilphCo7AfterBattleText1
 	db "@"
-; 0x51e64 + 5 bytes
 
 SilphCo7Text6: ; 51e69 (14:5e69)
 	db $08 ; asm
@@ -81398,17 +79688,14 @@ SilphCo7Text6: ; 51e69 (14:5e69)
 SilphCo7BattleText2: ; 51e73 (14:5e73)
 	TX_FAR _SilphCo7BattleText2
 	db "@"
-; 0x51e73 + 5 bytes
 
 SilphCo7EndBattleText2: ; 51e78 (14:5e78)
 	TX_FAR _SilphCo7EndBattleText2
 	db "@"
-; 0x51e78 + 5 bytes
 
 SilphCo7AfterBattleText2: ; 51e7d (14:5e7d)
 	TX_FAR _SilphCo7AfterBattleText2
 	db "@"
-; 0x51e7d + 5 bytes
 
 SilphCo7Text7: ; 51e82 (14:5e82)
 	db $08 ; asm
@@ -81419,17 +79706,14 @@ SilphCo7Text7: ; 51e82 (14:5e82)
 SilphCo7BattleText3: ; 51e8c (14:5e8c)
 	TX_FAR _SilphCo7BattleText3
 	db "@"
-; 0x51e8c + 5 bytes
 
 SilphCo7EndBattleText3: ; 51e91 (14:5e91)
 	TX_FAR _SilphCo7EndBattleText3
 	db "@"
-; 0x51e91 + 5 bytes
 
 SilphCo7AfterBattleText3: ; 51e96 (14:5e96)
 	TX_FAR _SilphCo7AfterBattleText3
 	db "@"
-; 0x51e96 + 5 bytes
 
 SilphCo7Text8: ; 51e9b (14:5e9b)
 	db $08 ; asm
@@ -81440,17 +79724,14 @@ SilphCo7Text8: ; 51e9b (14:5e9b)
 SilphCo7BattleText4: ; 51ea5 (14:5ea5)
 	TX_FAR _SilphCo7BattleText4
 	db "@"
-; 0x51ea5 + 5 bytes
 
 SilphCo7EndBattleText4: ; 51eaa (14:5eaa)
 	TX_FAR _SilphCo7EndBattleText4
 	db "@"
-; 0x51eaa + 5 bytes
 
 SilphCo7AfterBattleText4: ; 51eaf (14:5eaf)
 	TX_FAR _SilphCo7AfterBattleText4
 	db "@"
-; 0x51eaf + 5 bytes
 
 SilphCo7Text9: ; 51eb4 (14:5eb4)
 	db $08 ; asm
@@ -81461,27 +79742,22 @@ SilphCo7Text9: ; 51eb4 (14:5eb4)
 UnnamedText_51ebe: ; 51ebe (14:5ebe)
 	TX_FAR _UnnamedText_51ebe
 	db "@"
-; 0x51ebe + 5 bytes
 
 SilphCo7Text13: ; 51ec3 (14:5ec3)
 	TX_FAR _UnnamedText_51ec3
 	db "@"
-; 0x51ec3 + 5 bytes
 
 SilphCo7Text14: ; 51ec8 (14:5ec8)
 	TX_FAR _UnnamedText_51ec8
 	db "@"
-; 0x51ec8 + 5 bytes
 
 UnnamedText_51ecd: ; 51ecd (14:5ecd)
 	TX_FAR _UnnamedText_51ecd
 	db "@"
-; 0x51ecd + 5 bytes
 
 SilphCo7Text15: ; 51ed2 (14:5ed2)
 	TX_FAR _UnnamedText_51ed2
 	db "@"
-; 0x51ed2 + 5 bytes
 
 SilphCo7Object: ; 0x51ed7 (size=128)
 	db $2e ; border tile
@@ -81537,7 +79813,6 @@ Mansion2Script: ; 51fd8 (14:5fd8)
 	call ExecuteCurMapScriptInTable
 	ld [W_MANSION2CURSCRIPT], a
 	ret
-; 0x51fee
 
 Mansion2Script_Unknown51fee: ; 51fee (14:5fee)
 	ld hl, $d126
@@ -81569,7 +79844,6 @@ Mansion2Script_Unknown51fee: ; 51fee (14:5fee)
 	call Func_5202f
 	ret
 
-; known jump sources: 52002 (14:6002), 5200a (14:600a), 52012 (14:6012), 5201b (14:601b), 52023 (14:6023), 5202b (14:602b), 52218 (14:6218), 52220 (14:6220), 52229 (14:6229), 52231 (14:6231), 523e3 (14:63e3), 523eb (14:63eb), 523f3 (14:63f3), 523fb (14:63fb), 52404 (14:6404), 5240c (14:640c), 52414 (14:6414), 5241c (14:641c)
 Func_5202f: ; 5202f (14:602f)
 	ld [$d09f], a
 	ld a, $17
@@ -81592,7 +79866,6 @@ Mansion2TrainerHeader0: ; 52057 (14:6057)
 	dw Mansion2AfterBattleText1 ; 0x6078 TextAfterBattle
 	dw Mansion2EndBattleText1 ; 0x6073 TextEndBattle
 	dw Mansion2EndBattleText1 ; 0x6073 TextEndBattle
-; 0x52063
 
 db $ff
 
@@ -81605,17 +79878,14 @@ Mansion2Text1: ; 52064 (14:6064)
 Mansion2BattleText1: ; 5206e (14:606e)
 	TX_FAR _Mansion2BattleText1
 	db "@"
-; 0x5206e + 5 bytes
 
 Mansion2EndBattleText1: ; 52073 (14:6073)
 	TX_FAR _Mansion2EndBattleText1
 	db "@"
-; 0x52073 + 5 bytes
 
 Mansion2AfterBattleText1: ; 52078 (14:6078)
 	TX_FAR _Mansion2AfterBattleText1
 	db "@"
-; 0x52078 + 5 bytes
 
 Mansion2Text3: ; 5207d (14:607d)
 	TX_FAR _Mansion2Text3
@@ -81653,22 +79923,18 @@ Mansion2Text5: ; 52087 (14:6087)
 	call PrintText
 .asm_520bf
 	jp TextScriptEnd
-; 0x520c2
 
 UnnamedText_520c2: ; 520c2 (14:60c2)
 	TX_FAR _UnnamedText_520c2
 	db "@"
-; 0x520c2 + 5 bytes
 
 UnnamedText_520c7: ; 520c7 (14:60c7)
 	TX_FAR _UnnamedText_520c7
 	db "@"
-; 0x520c7 + 5 bytes
 
 UnnamedText_520cc: ; 520cc (14:60cc)
 	TX_FAR _UnnamedText_520cc
 	db "@"
-; 0x520cc + 5 bytes
 
 Mansion2Object: ; 0x520d1 (size=63)
 	db $1 ; border tile
@@ -81713,7 +79979,6 @@ Mansion3Script: ; 521ee (14:61ee)
 	call ExecuteCurMapScriptInTable
 	ld [W_MANSION3CURSCRIPT], a
 	ret
-; 0x52204
 
 Unnamed_52204: ; 52204 (14:6204)
 	ld hl, $d126
@@ -81757,7 +80022,6 @@ INCBIN "baserom.gbc",$52235,$5223b - $52235
 Unknown_52254: ; 52254 (14:6254)
 INCBIN "baserom.gbc",$52254,$5225b - $52254
 
-; known jump sources: 5223e (14:623e)
 Func_5225b: ; 5225b (14:625b)
 	xor a
 	ld [$d71e], a
@@ -81781,7 +80045,7 @@ Func_5225b: ; 5225b (14:625b)
 	ld a, $6
 	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
 	jp DisplayTextID
-; 5228a (14:628a)
+
 Mansion3Texts: ; 5228a (14:628a)
 	dw Mansion3Text1, Mansion3Text2, Predef5CText, Predef5CText, Mansion3Text5, Mansion3Text6
 
@@ -81794,7 +80058,6 @@ Mansion3TrainerHeader0: ; 52296 (14:6296)
 	dw Mansion3AfterBattleText1 ; 0x62cd TextAfterBattle
 	dw Mansion3EndBattleText1 ; 0x62c8 TextEndBattle
 	dw Mansion3EndBattleText1 ; 0x62c8 TextEndBattle
-; 0x522a2
 
 Mansion3TrainerHeader2: ; 522a2 (14:62a2)
 	db $2 ; flag's bit
@@ -81804,7 +80067,6 @@ Mansion3TrainerHeader2: ; 522a2 (14:62a2)
 	dw Mansion3AfterBattleText2 ; 0x62dc TextAfterBattle
 	dw Mansion3EndBattleText2 ; 0x62d7 TextEndBattle
 	dw Mansion3EndBattleText2 ; 0x62d7 TextEndBattle
-; 0x522ae
 
 db $ff
 
@@ -81823,32 +80085,26 @@ Mansion3Text2: ; 522b9 (14:62b9)
 Mansion3BattleText1: ; 522c3 (14:62c3)
 	TX_FAR _Mansion3BattleText1
 	db "@"
-; 0x522c3 + 5 bytes
 
 Mansion3EndBattleText1: ; 522c8 (14:62c8)
 	TX_FAR _Mansion3EndBattleText1
 	db "@"
-; 0x522c8 + 5 bytes
 
 Mansion3AfterBattleText1: ; 522cd (14:62cd)
 	TX_FAR _Mansion3AfterBattleText1
 	db "@"
-; 0x522cd + 5 bytes
 
 Mansion3BattleText2: ; 522d2 (14:62d2)
 	TX_FAR _Mansion3BattleText2
 	db "@"
-; 0x522d2 + 5 bytes
 
 Mansion3EndBattleText2: ; 522d7 (14:62d7)
 	TX_FAR _Mansion3EndBattleText2
 	db "@"
-; 0x522d7 + 5 bytes
 
 Mansion3AfterBattleText2: ; 522dc (14:62dc)
 	TX_FAR _Mansion3AfterBattleText2
 	db "@"
-; 0x522dc + 5 bytes
 
 Mansion3Text5: ; 522e1 (14:62e1)
 	TX_FAR _Mansion3Text5
@@ -81896,7 +80152,6 @@ Mansion4Script: ; 523b9 (14:63b9)
 	call ExecuteCurMapScriptInTable
 	ld [W_MANSION4CURSCRIPT], a
 	ret
-; 0x523cf
 
 Unknown_523cf: ; 523cf (14:63cf)
 	ld hl, $d126
@@ -81957,7 +80212,6 @@ Mansion4TrainerHeader0: ; 52448 (14:6448)
 	dw Mansion4AfterBattleText1 ; 0x647f TextAfterBattle
 	dw Mansion4EndBattleText1 ; 0x647a TextEndBattle
 	dw Mansion4EndBattleText1 ; 0x647a TextEndBattle
-; 0x52454
 
 Mansion4TrainerHeader2: ; 52454 (14:6454)
 	db $2 ; flag's bit
@@ -81967,7 +80221,6 @@ Mansion4TrainerHeader2: ; 52454 (14:6454)
 	dw Mansion4AfterBattleText2 ; 0x648e TextAfterBattle
 	dw Mansion4EndBattleText2 ; 0x6489 TextEndBattle
 	dw Mansion4EndBattleText2 ; 0x6489 TextEndBattle
-; 0x52460
 
 db $ff
 
@@ -81986,32 +80239,26 @@ Mansion4Text2: ; 5246b (14:646b)
 Mansion4BattleText1: ; 52475 (14:6475)
 	TX_FAR _Mansion4BattleText1
 	db "@"
-; 0x52475 + 5 bytes
 
 Mansion4EndBattleText1: ; 5247a (14:647a)
 	TX_FAR _Mansion4EndBattleText1
 	db "@"
-; 0x5247a + 5 bytes
 
 Mansion4AfterBattleText1: ; 5247f (14:647f)
 	TX_FAR _Mansion4AfterBattleText1
 	db "@"
-; 0x5247f + 5 bytes
 
 Mansion4BattleText2: ; 52484 (14:6484)
 	TX_FAR _Mansion4BattleText2
 	db "@"
-; 0x52484 + 5 bytes
 
 Mansion4EndBattleText2: ; 52489 (14:6489)
 	TX_FAR _Mansion4EndBattleText2
 	db "@"
-; 0x52489 + 5 bytes
 
 Mansion4AfterBattleText2: ; 5248e (14:648e)
 	TX_FAR _Mansion4AfterBattleText2
 	db "@"
-; 0x5248e + 5 bytes
 
 Mansion4Text7: ; 52493 (14:6493)
 	TX_FAR _Mansion4Text7
@@ -82041,7 +80288,6 @@ Mansion4Object: ; 0x52498 (size=69)
 Mansion4Blocks: ; 524dd (14:64dd)
 	INCBIN "maps/mansion4.blk"
 
-; known jump sources: 3ef4d (f:6f4d)
 Func_525af: ; 525af (14:65af)
 	ld a, [$FF00+$d7]
 	ld [$d0d4], a
@@ -82083,7 +80329,6 @@ Func_525af: ; 525af (14:65af)
 	ld b, BANK(Func_90c6)
 	jp Bankswitch ; indirect jump to Func_90c6 (90c6 (2:50c6))
 
-; known jump sources: 3f9b6 (f:79b6)
 Func_52601: ; 52601 (14:6601)
 	ld hl, W_ENEMYMONSTATUS ; $cfe9
 	ld de, W_PLAYERMOVETYPE ; $cfd5
@@ -82093,7 +80338,6 @@ Func_52601: ; 52601 (14:6601)
 	ld hl, W_PLAYERMONSTATUS ; $d018
 	ld de, W_ENEMYMOVETYPE ; $cfcf
 
-; known jump sources: 5260a (14:660a)
 Func_52613: ; 52613 (14:6613)
 	ld a, [hl]
 	and a
@@ -82145,7 +80389,6 @@ Func_52613: ; 52613 (14:6613)
 	ld b, BANK(Func_3dc51)
 	jp Bankswitch ; indirect jump to Func_3dc51 (3dc51 (f:5c51))
 
-; known jump sources: fb88 (3:7b88)
 Func_52673: ; 52673 (14:6673)
 	ld hl, Unknown_526e3 ; $66e3
 	ld a, [W_CURMAP] ; $d35e
@@ -82214,14 +80457,11 @@ INCBIN "baserom.gbc",$526e3,$526f3 - $526e3
 UnnamedText_526f3: ; 526f3 (14:66f3)
 	TX_FAR _UnnamedText_526f3
 	db "@"
-; 0x526f3 + 5 bytes
 
 UnnamedText_526f8: ; 526f8 (14:66f8)
 	TX_FAR _UnnamedText_526f8
 	db "@"
-; 0x526f8 + 5 bytes
 
-; known jump sources: 526a3 (14:66a3)
 Func_526fd: ; 526fd (14:66fd)
 	ld a, [W_YCOORD] ; $d361
 	ld d, a
@@ -82245,7 +80485,7 @@ Func_526fd: ; 526fd (14:66fd)
 .asm_52719
 	inc e
 	ret
-; 5271b (14:671b)
+
 CeladonPrizeMenu: ; 5271b (14:671b)
 	ld b,COIN_CASE
 	call IsItemInBag
@@ -82309,7 +80549,7 @@ GetPrizeMenuId: ; 5278e (14:678e)
 ; prize-texts has been selected
 ; using the text ID (stored in [$FF8C])
 ; load the three prizes at $D13D-$D13F
-; load the three prices ar $D141-$D146
+; load the three prices at $D141-$D146
 ; display the three prizes' names
 ; (distinguishing between Pokemon names
 ; and Items (specifically TMs) names)
@@ -82654,57 +80894,48 @@ INCBIN "baserom.gbc",$52996,$529e9 - $52996
 UnnamedText_529e9: ; 529e9 (14:69e9)
 	TX_FAR _UnnamedText_529e9
 	db "@"
-; 0x529e9 + 5 bytes
 
 INCBIN "baserom.gbc",$529ee,$529f4 - $529ee
 
 UnnamedText_529f4: ; 529f4 (14:69f4)
 	TX_FAR _UnnamedText_529f4
 	db "@"
-; 0x529f4 + 5 bytes
 
 UnnamedText_529f9: ; 529f9 (14:69f9)
 	TX_FAR _UnnamedText_529f9
 	db "@"
-; 0x529f9 + 5 bytes
 
 UnnamedText_529fe: ; 529fe (14:69fe)
 	TX_FAR _UnnamedText_529fe
 	db "@"
-; 0x529fe + 5 bytes
 
 UnnamedText_52a03: ; 52a03 (14:6a03)
 	TX_FAR _UnnamedText_52a03
 	db "@"
-; 0x52a03 + 5 bytes
 
 INCBIN "baserom.gbc",$52a08,$52a10 - $52a08
 
 UnnamedText_52a10: ; 52a10 (14:6a10)
 	TX_FAR _UnnamedText_52a10
 	db "@"
-; 0x52a10 + 5 bytes
 
 INCBIN "baserom.gbc",$52a15,$52a1d - $52a15
 
 UnnamedText_52a1d: ; 52a1d (14:6a1d)
 	TX_FAR _UnnamedText_52a1d
 	db "@"
-; 0x52a1d + 5 bytes
 
 INCBIN "baserom.gbc",$52a22,$52a2a - $52a22
 
 UnnamedText_52a2a: ; 52a2a (14:6a2a)
 	TX_FAR _UnnamedText_52a2a
 	db "@"
-; 0x52a2a + 5 bytes
 
 INCBIN "baserom.gbc",$52a2f,$52a3d - $52a2f
 
 UnnamedText_52a3d: ; 52a3d (14:6a3d)
 	TX_FAR _UnnamedText_52a3d
 	db "@"
-; 0x52a3d + 5 bytes
 
 SECTION "bank15",ROMX,BANK[$15]
 
@@ -83227,7 +81458,6 @@ DayCareMBlocks: ; 5522f (15:522f)
 FuchsiaHouse3Blocks: ; 5523f (15:523f)
 	INCBIN "maps/fuchsiahouse3.blk"
 
-; known jump sources: 3c61d (f:461d), 3c63b (f:463b)
 Func_5524f: ; 5524f (15:524f)
 	ld a, [W_ISLINKBATTLE] ; $d12b
 	cp $4
@@ -83237,7 +81467,6 @@ Func_5524f: ; 5524f (15:524f)
 	xor a
 	ld [W_WHICHPOKEMON], a ; $cf92
 
-; known jump sources: 5544d (15:544d)
 Func_5525f: ; 5525f (15:525f)
 	inc hl
 	ld a, [hli]
@@ -83504,7 +81733,6 @@ Func_5525f: ; 5525f (15:525f)
 	pop af
 	ld [W_CURENEMYLVL], a ; $d127
 
-; known jump sources: 55262 (15:5262), 55277 (15:5277), 55356 (15:5356)
 Func_55436: ; 55436 (15:5436)
 	ld a, [W_NUMINPARTY] ; $d163
 	ld b, a
@@ -83534,7 +81762,6 @@ Func_55436: ; 55436 (15:5436)
 	ld a, $10
 	jp Predef ; indirect jump to HandleBitArray (f666 (3:7666))
 
-; known jump sources: 55255 (15:5255)
 Func_5546c: ; 5546c (15:546c)
 	ld a, [W_PLAYERMONSALIVEFLAGS]
 	ld b, a
@@ -83568,7 +81795,6 @@ Func_5546c: ; 5546c (15:546c)
 	jr nz, .asm_55488
 	ret
 
-; known jump sources: 552d1 (15:52d1), 552dd (15:52dd)
 Func_5549f: ; 5549f (15:549f)
 	ld a, [$FF00+$97]
 	ld b, a
@@ -83605,14 +81831,12 @@ INCBIN "baserom.gbc",$554d4,$554d8 - $554d4
 UnnamedText_554d8: ; 554d8 (15:54d8)
 	TX_FAR _UnnamedText_554d8 ; 0x89bee
 	db "@"
-; 0x554dd
 
 Unknown_554dd: ; 554dd (15:54dd)
 INCBIN "baserom.gbc",$554dd,$554e3 - $554dd
 
 Route2Script: ; 554e3 (15:54e3)
 	jp EnableAutoTextBoxDrawing
-; 0x554e6
 
 Route2Texts: ; 554e6 (15:54e6)
 	dw Predef5CText, Predef5CText, Route2Text3, Route2Text4
@@ -83633,7 +81857,6 @@ Route3Script: ; 554f8 (15:54f8)
 	call ExecuteCurMapScriptInTable
 	ld [W_ROUTE3CURSCRIPT], a
 	ret
-; 0x5550b
 
 Unknown_5550b: ; 5550b (15:550b)
 INCBIN "baserom.gbc",$5550b,$55511 - $5550b
@@ -83650,7 +81873,6 @@ Route3TrainerHeader0: ; 55525 (15:5525)
 	dw Route3AfterBattleText1 ; 0x559f TextAfterBattle
 	dw Route3EndBattleText1 ; 0x559a TextEndBattle
 	dw Route3EndBattleText1 ; 0x559a TextEndBattle
-; 0x55531
 
 Route3TrainerHeader2: ; 55531 (15:5531)
 	db $3 ; flag's bit
@@ -83660,7 +81882,6 @@ Route3TrainerHeader2: ; 55531 (15:5531)
 	dw Route3AfterBattleText2 ; 0x55b8 TextAfterBattle
 	dw Route3EndBattleText2 ; 0x55b3 TextEndBattle
 	dw Route3EndBattleText2 ; 0x55b3 TextEndBattle
-; 0x5553d
 
 Route3TrainerHeader3: ; 5553d (15:553d)
 	db $4 ; flag's bit
@@ -83670,7 +81891,6 @@ Route3TrainerHeader3: ; 5553d (15:553d)
 	dw Route3AfterBattleText3 ; 0x55d1 TextAfterBattle
 	dw Route3EndBattleText3 ; 0x55cc TextEndBattle
 	dw Route3EndBattleText3 ; 0x55cc TextEndBattle
-; 0x55549
 
 Route3TrainerHeader4: ; 55549 (15:5549)
 	db $5 ; flag's bit
@@ -83680,7 +81900,6 @@ Route3TrainerHeader4: ; 55549 (15:5549)
 	dw Route3AfterBattleText4 ; 0x55ea TextAfterBattle
 	dw Route3EndBattleText4 ; 0x55e5 TextEndBattle
 	dw Route3EndBattleText4 ; 0x55e5 TextEndBattle
-; 0x55555
 
 Route3TrainerHeader5: ; 55555 (15:5555)
 	db $6 ; flag's bit
@@ -83690,7 +81909,6 @@ Route3TrainerHeader5: ; 55555 (15:5555)
 	dw Route3AfterBattleText5 ; 0x5603 TextAfterBattle
 	dw Route3EndBattleText5 ; 0x55fe TextEndBattle
 	dw Route3EndBattleText5 ; 0x55fe TextEndBattle
-; 0x55561
 
 Route3TrainerHeader6: ; 55561 (15:5561)
 	db $7 ; flag's bit
@@ -83700,7 +81918,6 @@ Route3TrainerHeader6: ; 55561 (15:5561)
 	dw Route3AfterBattleText6 ; 0x561c TextAfterBattle
 	dw Route3EndBattleText6 ; 0x5617 TextEndBattle
 	dw Route3EndBattleText6 ; 0x5617 TextEndBattle
-; 0x5556d
 
 Route3TrainerHeader7: ; 5556d (15:556d)
 	db $8 ; flag's bit
@@ -83710,7 +81927,6 @@ Route3TrainerHeader7: ; 5556d (15:556d)
 	dw Route3AfterBattleText7 ; 0x5635 TextAfterBattle
 	dw Route3EndBattleText7 ; 0x5630 TextEndBattle
 	dw Route3EndBattleText7 ; 0x5630 TextEndBattle
-; 0x55579
 
 Route3TrainerHeader8: ; 55579 (15:5579)
 	db $9 ; flag's bit
@@ -83720,7 +81936,6 @@ Route3TrainerHeader8: ; 55579 (15:5579)
 	dw Route3AfterBattleText8 ; 0x564e TextAfterBattle
 	dw Route3EndBattleText8 ; 0x5649 TextEndBattle
 	dw Route3EndBattleText8 ; 0x5649 TextEndBattle
-; 0x55585
 
 db $ff
 
@@ -83737,17 +81952,14 @@ Route3Text2: ; 5558b (15:558b)
 Route3BattleText1: ; 55595 (15:5595)
 	TX_FAR _Route3BattleText1
 	db "@"
-; 0x55595 + 5 bytes
 
 Route3EndBattleText1: ; 5559a (15:559a)
 	TX_FAR _Route3EndBattleText1
 	db "@"
-; 0x5559a + 5 bytes
 
 Route3AfterBattleText1: ; 5559f (15:559f)
 	TX_FAR _Route3AfterBattleText1
 	db "@"
-; 0x5559f + 5 bytes
 
 Route3Text3: ; 555a4 (15:55a4)
 	db $08 ; asm
@@ -83758,17 +81970,14 @@ Route3Text3: ; 555a4 (15:55a4)
 Route3BattleText2: ; 555ae (15:55ae)
 	TX_FAR _Route3BattleText2
 	db "@"
-; 0x555ae + 5 bytes
 
 Route3EndBattleText2: ; 555b3 (15:55b3)
 	TX_FAR _Route3EndBattleText2
 	db "@"
-; 0x555b3 + 5 bytes
 
 Route3AfterBattleText2: ; 555b8 (15:55b8)
 	TX_FAR _Route3AfterBattleText2
 	db "@"
-; 0x555b8 + 5 bytes
 
 Route3Text4: ; 555bd (15:55bd)
 	db $08 ; asm
@@ -83779,17 +81988,14 @@ Route3Text4: ; 555bd (15:55bd)
 Route3BattleText3: ; 555c7 (15:55c7)
 	TX_FAR _Route3BattleText3
 	db "@"
-; 0x555c7 + 5 bytes
 
 Route3EndBattleText3: ; 555cc (15:55cc)
 	TX_FAR _Route3EndBattleText3
 	db "@"
-; 0x555cc + 5 bytes
 
 Route3AfterBattleText3: ; 555d1 (15:55d1)
 	TX_FAR _Route3AfterBattleText3
 	db "@"
-; 0x555d1 + 5 bytes
 
 Route3Text5: ; 555d6 (15:55d6)
 	db $08 ; asm
@@ -83800,17 +82006,14 @@ Route3Text5: ; 555d6 (15:55d6)
 Route3BattleText4: ; 555e0 (15:55e0)
 	TX_FAR _Route3BattleText4
 	db "@"
-; 0x555e0 + 5 bytes
 
 Route3EndBattleText4: ; 555e5 (15:55e5)
 	TX_FAR _Route3EndBattleText4
 	db "@"
-; 0x555e5 + 5 bytes
 
 Route3AfterBattleText4: ; 555ea (15:55ea)
 	TX_FAR _Route3AfterBattleText4
 	db "@"
-; 0x555ea + 5 bytes
 
 Route3Text6: ; 555ef (15:55ef)
 	db $08 ; asm
@@ -83821,17 +82024,14 @@ Route3Text6: ; 555ef (15:55ef)
 Route3BattleText5: ; 555f9 (15:55f9)
 	TX_FAR _Route3BattleText5
 	db "@"
-; 0x555f9 + 5 bytes
 
 Route3EndBattleText5: ; 555fe (15:55fe)
 	TX_FAR _Route3EndBattleText5
 	db "@"
-; 0x555fe + 5 bytes
 
 Route3AfterBattleText5: ; 55603 (15:5603)
 	TX_FAR _Route3AfterBattleText5
 	db "@"
-; 0x55603 + 5 bytes
 
 Route3Text7: ; 55608 (15:5608)
 	db $08 ; asm
@@ -83842,17 +82042,14 @@ Route3Text7: ; 55608 (15:5608)
 Route3BattleText6: ; 55612 (15:5612)
 	TX_FAR _Route3BattleText6
 	db "@"
-; 0x55612 + 5 bytes
 
 Route3EndBattleText6: ; 55617 (15:5617)
 	TX_FAR _Route3EndBattleText6
 	db "@"
-; 0x55617 + 5 bytes
 
 Route3AfterBattleText6: ; 5561c (15:561c)
 	TX_FAR _Route3AfterBattleText6
 	db "@"
-; 0x5561c + 5 bytes
 
 Route3Text8: ; 55621 (15:5621)
 	db $08 ; asm
@@ -83863,17 +82060,14 @@ Route3Text8: ; 55621 (15:5621)
 Route3BattleText7: ; 5562b (15:562b)
 	TX_FAR _Route3BattleText7
 	db "@"
-; 0x5562b + 5 bytes
 
 Route3EndBattleText7: ; 55630 (15:5630)
 	TX_FAR _Route3EndBattleText7
 	db "@"
-; 0x55630 + 5 bytes
 
 Route3AfterBattleText7: ; 55635 (15:5635)
 	TX_FAR _Route3AfterBattleText7
 	db "@"
-; 0x55635 + 5 bytes
 
 Route3Text9: ; 5563a (15:563a)
 	db $08 ; asm
@@ -83884,17 +82078,14 @@ Route3Text9: ; 5563a (15:563a)
 Route3BattleText8: ; 55644 (15:5644)
 	TX_FAR _Route3BattleText8
 	db "@"
-; 0x55644 + 5 bytes
 
 Route3EndBattleText8: ; 55649 (15:5649)
 	TX_FAR _Route3EndBattleText8
 	db "@"
-; 0x55649 + 5 bytes
 
 Route3AfterBattleText8: ; 5564e (15:564e)
 	TX_FAR _Route3AfterBattleText8
 	db "@"
-; 0x5564e + 5 bytes
 
 Route3Text10: ; 55653 (15:5653)
 	TX_FAR _Route3Text10
@@ -83908,7 +82099,6 @@ Route4Script: ; 55658 (15:5658)
 	call ExecuteCurMapScriptInTable
 	ld [W_ROUTE4CURSCRIPT], a
 	ret
-; 0x5566b
 
 Unknown_5566b: ; 5566b (15:566b)
 INCBIN "baserom.gbc",$5566b,$55671 - $5566b
@@ -83925,7 +82115,6 @@ Route4TrainerHeader0: ; 5567d (15:567d)
 	dw Route4AfterBattleText1 ; 0x56a3 TextAfterBattle
 	dw Route4EndBattleText1 ; 0x569e TextEndBattle
 	dw Route4EndBattleText1 ; 0x569e TextEndBattle
-; 0x55689
 
 db $ff
 
@@ -83942,17 +82131,14 @@ Route4Text2: ; 5568f (15:568f)
 Route4BattleText1: ; 55699 (15:5699)
 	TX_FAR _Route4BattleText1
 	db "@"
-; 0x55699 + 5 bytes
 
 Route4EndBattleText1: ; 5569e (15:569e)
 	TX_FAR _Route4EndBattleText1
 	db "@"
-; 0x5569e + 5 bytes
 
 Route4AfterBattleText1: ; 556a3 (15:56a3)
 	TX_FAR _Route4AfterBattleText1
 	db "@"
-; 0x556a3 + 5 bytes
 
 Route4Text5: ; 556a8 (15:56a8)
 	TX_FAR _Route4Text5
@@ -83964,7 +82150,6 @@ Route4Text6: ; 556ad (15:56ad)
 
 Route5Script: ; 556b2 (15:56b2)
 	jp EnableAutoTextBoxDrawing
-; 0x556b5
 
 Route5Texts: ; 556b5 (15:56b5)
 	dw Route5Text1
@@ -83981,7 +82166,6 @@ Route9Script: ; 556bc (15:56bc)
 	call ExecuteCurMapScriptInTable
 	ld [W_ROUTE9CURSCRIPT], a
 	ret
-; 0x556cf
 
 Unknown_556cf: ; 556cf (15:56cf)
 INCBIN "baserom.gbc",$556cf,$556d5 - $556cf
@@ -83998,7 +82182,6 @@ Route9TrainerHeader0: ; 556eb (15:56eb)
 	dw Route9AfterBattleText1 ; 0x579c TextAfterBattle
 	dw Route9EndBattleText1 ; 0x5797 TextEndBattle
 	dw Route9EndBattleText1 ; 0x5797 TextEndBattle
-; 0x556f7
 
 Route9TrainerHeader2: ; 556f7 (15:56f7)
 	db $2 ; flag's bit
@@ -84008,7 +82191,6 @@ Route9TrainerHeader2: ; 556f7 (15:56f7)
 	dw Route9AfterBattleText2 ; 0x57ab TextAfterBattle
 	dw Route9EndBattleText2 ; 0x57a6 TextEndBattle
 	dw Route9EndBattleText2 ; 0x57a6 TextEndBattle
-; 0x55703
 
 Route9TrainerHeader3: ; 55703 (15:5703)
 	db $3 ; flag's bit
@@ -84018,7 +82200,6 @@ Route9TrainerHeader3: ; 55703 (15:5703)
 	dw Route9AfterBattleText3 ; 0x57ba TextAfterBattle
 	dw Route9EndBattleText3 ; 0x57b5 TextEndBattle
 	dw Route9EndBattleText3 ; 0x57b5 TextEndBattle
-; 0x5570f
 
 Route9TrainerHeader4: ; 5570f (15:570f)
 	db $4 ; flag's bit
@@ -84028,7 +82209,6 @@ Route9TrainerHeader4: ; 5570f (15:570f)
 	dw Route9AfterBattleText4 ; 0x57c9 TextAfterBattle
 	dw Route9EndBattleText4 ; 0x57c4 TextEndBattle
 	dw Route9EndBattleText4 ; 0x57c4 TextEndBattle
-; 0x5571b
 
 Route9TrainerHeader5: ; 5571b (15:571b)
 	db $5 ; flag's bit
@@ -84038,7 +82218,6 @@ Route9TrainerHeader5: ; 5571b (15:571b)
 	dw Route9AfterBattleText5 ; 0x57d8 TextAfterBattle
 	dw Route9EndBattleText5 ; 0x57d3 TextEndBattle
 	dw Route9EndBattleText5 ; 0x57d3 TextEndBattle
-; 0x55727
 
 Route9TrainerHeader6: ; 55727 (15:5727)
 	db $6 ; flag's bit
@@ -84048,7 +82227,6 @@ Route9TrainerHeader6: ; 55727 (15:5727)
 	dw Route9AfterBattleText6 ; 0x57e7 TextAfterBattle
 	dw Route9EndBattleText6 ; 0x57e2 TextEndBattle
 	dw Route9EndBattleText6 ; 0x57e2 TextEndBattle
-; 0x55733
 
 Route9TrainerHeader7: ; 55733 (15:5733)
 	db $7 ; flag's bit
@@ -84058,7 +82236,6 @@ Route9TrainerHeader7: ; 55733 (15:5733)
 	dw Route9AfterBattleText7 ; 0x57f6 TextAfterBattle
 	dw Route9EndBattleText7 ; 0x57f1 TextEndBattle
 	dw Route9EndBattleText7 ; 0x57f1 TextEndBattle
-; 0x5573f
 
 Route9TrainerHeader8: ; 5573f (15:573f)
 	db $8 ; flag's bit
@@ -84068,7 +82245,6 @@ Route9TrainerHeader8: ; 5573f (15:573f)
 	dw Route9AfterBattleText8 ; 0x5805 TextAfterBattle
 	dw Route9EndBattleText8 ; 0x5800 TextEndBattle
 	dw Route9EndBattleText8 ; 0x5800 TextEndBattle
-; 0x5574b
 
 Route9TrainerHeader9: ; 5574b (15:574b)
 	db $9 ; flag's bit
@@ -84078,7 +82254,6 @@ Route9TrainerHeader9: ; 5574b (15:574b)
 	dw Route9AfterBattleText9 ; 0x5814 TextAfterBattle
 	dw Route9EndBattleText9 ; 0x580f TextEndBattle
 	dw Route9EndBattleText9 ; 0x580f TextEndBattle
-; 0x55757
 
 db $ff
 
@@ -84128,142 +82303,114 @@ Route9Text9: ; 55788 (15:5788)
 asm_8be3d: ; 5578c (15:578c)
 	call TalkToTrainer
 	jp TextScriptEnd
-; 0x55792
 
 Route9BattleText1: ; 55792 (15:5792)
 	TX_FAR _Route9BattleText1
 	db "@"
-; 0x55792 + 5 bytes
 
 Route9EndBattleText1: ; 55797 (15:5797)
 	TX_FAR _Route9EndBattleText1
 	db "@"
-; 0x55797 + 5 bytes
 
 Route9AfterBattleText1: ; 5579c (15:579c)
 	TX_FAR _Route9AfterBattleText1
 	db "@"
-; 0x5579c + 5 bytes
 
 Route9BattleText2: ; 557a1 (15:57a1)
 	TX_FAR _Route9BattleText2
 	db "@"
-; 0x557a1 + 5 bytes
 
 Route9EndBattleText2: ; 557a6 (15:57a6)
 	TX_FAR _Route9EndBattleText2
 	db "@"
-; 0x557a6 + 5 bytes
 
 Route9AfterBattleText2: ; 557ab (15:57ab)
 	TX_FAR _Route9AfterBattleText2
 	db "@"
-; 0x557ab + 5 bytes
 
 Route9BattleText3: ; 557b0 (15:57b0)
 	TX_FAR _Route9BattleText3
 	db "@"
-; 0x557b0 + 5 bytes
 
 Route9EndBattleText3: ; 557b5 (15:57b5)
 	TX_FAR _Route9EndBattleText3
 	db "@"
-; 0x557b5 + 5 bytes
 
 Route9AfterBattleText3: ; 557ba (15:57ba)
 	TX_FAR _Route9AfterBattleText3
 	db "@"
-; 0x557ba + 5 bytes
 
 Route9BattleText4: ; 557bf (15:57bf)
 	TX_FAR _Route9BattleText4
 	db "@"
-; 0x557bf + 5 bytes
 
 Route9EndBattleText4: ; 557c4 (15:57c4)
 	TX_FAR _Route9EndBattleText4
 	db "@"
-; 0x557c4 + 5 bytes
 
 Route9AfterBattleText4: ; 557c9 (15:57c9)
 	TX_FAR _Route9AfterBattleText4
 	db "@"
-; 0x557c9 + 5 bytes
 
 Route9BattleText5: ; 557ce (15:57ce)
 	TX_FAR _Route9BattleText5
 	db "@"
-; 0x557ce + 5 bytes
 
 Route9EndBattleText5: ; 557d3 (15:57d3)
 	TX_FAR _Route9EndBattleText5
 	db "@"
-; 0x557d3 + 5 bytes
 
 Route9AfterBattleText5: ; 557d8 (15:57d8)
 	TX_FAR _Route9AfterBattleText5
 	db "@"
-; 0x557d8 + 5 bytes
 
 Route9BattleText6: ; 557dd (15:57dd)
 	TX_FAR _Route9BattleText6
 	db "@"
-; 0x557dd + 5 bytes
 
 Route9EndBattleText6: ; 557e2 (15:57e2)
 	TX_FAR _Route9EndBattleText6
 	db "@"
-; 0x557e2 + 5 bytes
 
 Route9AfterBattleText6: ; 557e7 (15:57e7)
 	TX_FAR _Route9AfterBattleText6
 	db "@"
-; 0x557e7 + 5 bytes
 
 Route9BattleText7: ; 557ec (15:57ec)
 	TX_FAR _Route9BattleText7
 	db "@"
-; 0x557ec + 5 bytes
 
 Route9EndBattleText7: ; 557f1 (15:57f1)
 	TX_FAR _Route9EndBattleText7
 	db "@"
-; 0x557f1 + 5 bytes
 
 Route9AfterBattleText7: ; 557f6 (15:57f6)
 	TX_FAR _Route9AfterBattleText7
 	db "@"
-; 0x557f6 + 5 bytes
 
 Route9BattleText8: ; 557fb (15:57fb)
 	TX_FAR _Route9BattleText8
 	db "@"
-; 0x557fb + 5 bytes
 
 Route9EndBattleText8: ; 55800 (15:5800)
 	TX_FAR _Route9EndBattleText8
 	db "@"
-; 0x55800 + 5 bytes
 
 Route9AfterBattleText8: ; 55805 (15:5805)
 	TX_FAR _Route9AfterBattleText8
 	db "@"
-; 0x55805 + 5 bytes
 
 Route9BattleText9: ; 5580a (15:580a)
 	TX_FAR _Route9BattleText9
 	db "@"
-; 0x5580a + 5 bytes
 
 Route9EndBattleText9: ; 5580f (15:580f)
 	TX_FAR _Route9EndBattleText9
 	db "@"
-; 0x5580f + 5 bytes
 
 Route9AfterBattleText9: ; 55814 (15:5814)
 	TX_FAR _Route9AfterBattleText9
 	db "@"
-; 0x55814 + 5 bytes
 
 Route9Text11: ; 55819 (15:5819)
 	TX_FAR _Route9Text11
@@ -84277,7 +82424,6 @@ Route13Script: ; 5581e (15:581e)
 	call ExecuteCurMapScriptInTable
 	ld [W_ROUTE13CURSCRIPT], a
 	ret
-; 0x55831
 
 Route13Script_Unknown55831: ; 55831 (15:5831)
 INCBIN "baserom.gbc",$55831,$55837 - $55831
@@ -84294,7 +82440,6 @@ Route13TrainerHeader0: ; 55851 (15:5851)
 	dw Route13AfterBattleText2 ; 0x58de TextAfterBattle
 	dw Route13EndBattleText2 ; 0x58d9 TextEndBattle
 	dw Route13EndBattleText2 ; 0x58d9 TextEndBattle
-; 0x5585d
 
 Route13TrainerHeader2: ; 5585d (15:585d)
 	db $2 ; flag's bit
@@ -84304,7 +82449,6 @@ Route13TrainerHeader2: ; 5585d (15:585d)
 	dw Route13AfterBattleText3 ; 0x58f7 TextAfterBattle
 	dw Route13EndBattleText3 ; 0x58f2 TextEndBattle
 	dw Route13EndBattleText3 ; 0x58f2 TextEndBattle
-; 0x55869
 
 Route13TrainerHeader3: ; 55869 (15:5869)
 	db $3 ; flag's bit
@@ -84314,7 +82458,6 @@ Route13TrainerHeader3: ; 55869 (15:5869)
 	dw Route13AfterBattleText4 ; 0x5910 TextAfterBattle
 	dw Route13EndBattleText4 ; 0x590b TextEndBattle
 	dw Route13EndBattleText4 ; 0x590b TextEndBattle
-; 0x55875
 
 Route13TrainerHeader4: ; 55875 (15:5875)
 	db $4 ; flag's bit
@@ -84324,7 +82467,6 @@ Route13TrainerHeader4: ; 55875 (15:5875)
 	dw Route13AfterBattleText5 ; 0x5929 TextAfterBattle
 	dw Route13EndBattleText5 ; 0x5924 TextEndBattle
 	dw Route13EndBattleText5 ; 0x5924 TextEndBattle
-; 0x55881
 
 Route13TrainerHeader5: ; 55881 (15:5881)
 	db $5 ; flag's bit
@@ -84334,7 +82476,6 @@ Route13TrainerHeader5: ; 55881 (15:5881)
 	dw Route13AfterBattleText6 ; 0x5942 TextAfterBattle
 	dw Route13EndBattleText6 ; 0x593d TextEndBattle
 	dw Route13EndBattleText6 ; 0x593d TextEndBattle
-; 0x5588d
 
 Route13TrainerHeader6: ; 5588d (15:588d)
 	db $6 ; flag's bit
@@ -84344,7 +82485,6 @@ Route13TrainerHeader6: ; 5588d (15:588d)
 	dw Route13AfterBattleText7 ; 0x595b TextAfterBattle
 	dw Route13EndBattleText7 ; 0x5956 TextEndBattle
 	dw Route13EndBattleText7 ; 0x5956 TextEndBattle
-; 0x55899
 
 Route13TrainerHeader7: ; 55899 (15:5899)
 	db $7 ; flag's bit
@@ -84354,7 +82494,6 @@ Route13TrainerHeader7: ; 55899 (15:5899)
 	dw Route13AfterBattleText8 ; 0x5974 TextAfterBattle
 	dw Route13EndBattleText8 ; 0x596f TextEndBattle
 	dw Route13EndBattleText8 ; 0x596f TextEndBattle
-; 0x558a5
 
 Route13TrainerHeader8: ; 558a5 (15:58a5)
 	db $8 ; flag's bit
@@ -84364,7 +82503,6 @@ Route13TrainerHeader8: ; 558a5 (15:58a5)
 	dw Route13AfterBattleText9 ; 0x598d TextAfterBattle
 	dw Route13EndBattleText9 ; 0x5988 TextEndBattle
 	dw Route13EndBattleText9 ; 0x5988 TextEndBattle
-; 0x558b1
 
 Route13TrainerHeader9: ; 558b1 (15:58b1)
 	db $9 ; flag's bit
@@ -84374,7 +82512,6 @@ Route13TrainerHeader9: ; 558b1 (15:58b1)
 	dw Route13AfterBattleText10 ; 0x59a6 TextAfterBattle
 	dw Route13EndBattleText10 ; 0x59a1 TextEndBattle
 	dw Route13EndBattleText10 ; 0x59a1 TextEndBattle
-; 0x558bd
 
 Route13TrainerHeader10: ; 558bd (15:58bd)
 	db $a ; flag's bit
@@ -84384,7 +82521,6 @@ Route13TrainerHeader10: ; 558bd (15:58bd)
 	dw Route13AfterBattleText11 ; 0x59bf TextAfterBattle
 	dw Route13EndBattleText11 ; 0x59ba TextEndBattle
 	dw Route13EndBattleText11 ; 0x59ba TextEndBattle
-; 0x558c9
 
 db $ff
 
@@ -84397,17 +82533,14 @@ Route13Text1: ; 558ca (15:58ca)
 Route13BattleText2: ; 558d4 (15:58d4)
 	TX_FAR _Route13BattleText2
 	db "@"
-; 0x558d4 + 5 bytes
 
 Route13EndBattleText2: ; 558d9 (15:58d9)
 	TX_FAR _Route13EndBattleText2
 	db "@"
-; 0x558d9 + 5 bytes
 
 Route13AfterBattleText2: ; 558de (15:58de)
 	TX_FAR _Route13AfterBattleText2
 	db "@"
-; 0x558de + 5 bytes
 
 Route13Text2: ; 558e3 (15:58e3)
 	db $08 ; asm
@@ -84418,17 +82551,14 @@ Route13Text2: ; 558e3 (15:58e3)
 Route13BattleText3: ; 558ed (15:58ed)
 	TX_FAR _Route13BattleText3
 	db "@"
-; 0x558ed + 5 bytes
 
 Route13EndBattleText3: ; 558f2 (15:58f2)
 	TX_FAR _Route13EndBattleText3
 	db "@"
-; 0x558f2 + 5 bytes
 
 Route13AfterBattleText3: ; 558f7 (15:58f7)
 	TX_FAR _Route13AfterBattleText3
 	db "@"
-; 0x558f7 + 5 bytes
 
 Route13Text3: ; 558fc (15:58fc)
 	db $08 ; asm
@@ -84439,17 +82569,14 @@ Route13Text3: ; 558fc (15:58fc)
 Route13BattleText4: ; 55906 (15:5906)
 	TX_FAR _Route13BattleText4
 	db "@"
-; 0x55906 + 5 bytes
 
 Route13EndBattleText4: ; 5590b (15:590b)
 	TX_FAR _Route13EndBattleText4
 	db "@"
-; 0x5590b + 5 bytes
 
 Route13AfterBattleText4: ; 55910 (15:5910)
 	TX_FAR _Route13AfterBattleText4
 	db "@"
-; 0x55910 + 5 bytes
 
 Route13Text4: ; 55915 (15:5915)
 	db $08 ; asm
@@ -84460,17 +82587,14 @@ Route13Text4: ; 55915 (15:5915)
 Route13BattleText5: ; 5591f (15:591f)
 	TX_FAR _Route13BattleText5
 	db "@"
-; 0x5591f + 5 bytes
 
 Route13EndBattleText5: ; 55924 (15:5924)
 	TX_FAR _Route13EndBattleText5
 	db "@"
-; 0x55924 + 5 bytes
 
 Route13AfterBattleText5: ; 55929 (15:5929)
 	TX_FAR _Route13AfterBattleText5
 	db "@"
-; 0x55929 + 5 bytes
 
 Route13Text5: ; 5592e (15:592e)
 	db $08 ; asm
@@ -84481,17 +82605,14 @@ Route13Text5: ; 5592e (15:592e)
 Route13BattleText6: ; 55938 (15:5938)
 	TX_FAR _Route13BattleText6
 	db "@"
-; 0x55938 + 5 bytes
 
 Route13EndBattleText6: ; 5593d (15:593d)
 	TX_FAR _Route13EndBattleText6
 	db "@"
-; 0x5593d + 5 bytes
 
 Route13AfterBattleText6: ; 55942 (15:5942)
 	TX_FAR _Route13AfterBattleText6
 	db "@"
-; 0x55942 + 5 bytes
 
 Route13Text6: ; 55947 (15:5947)
 	db $08 ; asm
@@ -84502,17 +82623,14 @@ Route13Text6: ; 55947 (15:5947)
 Route13BattleText7: ; 55951 (15:5951)
 	TX_FAR _Route13BattleText7
 	db "@"
-; 0x55951 + 5 bytes
 
 Route13EndBattleText7: ; 55956 (15:5956)
 	TX_FAR _Route13EndBattleText7
 	db "@"
-; 0x55956 + 5 bytes
 
 Route13AfterBattleText7: ; 5595b (15:595b)
 	TX_FAR _Route13AfterBattleText7
 	db "@"
-; 0x5595b + 5 bytes
 
 Route13Text7: ; 55960 (15:5960)
 	db $08 ; asm
@@ -84523,17 +82641,14 @@ Route13Text7: ; 55960 (15:5960)
 Route13BattleText8: ; 5596a (15:596a)
 	TX_FAR _Route13BattleText8
 	db "@"
-; 0x5596a + 5 bytes
 
 Route13EndBattleText8: ; 5596f (15:596f)
 	TX_FAR _Route13EndBattleText8
 	db "@"
-; 0x5596f + 5 bytes
 
 Route13AfterBattleText8: ; 55974 (15:5974)
 	TX_FAR _Route13AfterBattleText8
 	db "@"
-; 0x55974 + 5 bytes
 
 Route13Text8: ; 55979 (15:5979)
 	db $08 ; asm
@@ -84544,17 +82659,14 @@ Route13Text8: ; 55979 (15:5979)
 Route13BattleText9: ; 55983 (15:5983)
 	TX_FAR _Route13BattleText9
 	db "@"
-; 0x55983 + 5 bytes
 
 Route13EndBattleText9: ; 55988 (15:5988)
 	TX_FAR _Route13EndBattleText9
 	db "@"
-; 0x55988 + 5 bytes
 
 Route13AfterBattleText9: ; 5598d (15:598d)
 	TX_FAR _Route13AfterBattleText9
 	db "@"
-; 0x5598d + 5 bytes
 
 Route13Text9: ; 55992 (15:5992)
 	db $08 ; asm
@@ -84565,17 +82677,14 @@ Route13Text9: ; 55992 (15:5992)
 Route13BattleText10: ; 5599c (15:599c)
 	TX_FAR _Route13BattleText10
 	db "@"
-; 0x5599c + 5 bytes
 
 Route13EndBattleText10: ; 559a1 (15:59a1)
 	TX_FAR _Route13EndBattleText10
 	db "@"
-; 0x559a1 + 5 bytes
 
 Route13AfterBattleText10: ; 559a6 (15:59a6)
 	TX_FAR _Route13AfterBattleText10
 	db "@"
-; 0x559a6 + 5 bytes
 
 Route13Text10: ; 559ab (15:59ab)
 	db $08 ; asm
@@ -84586,17 +82695,14 @@ Route13Text10: ; 559ab (15:59ab)
 Route13BattleText11: ; 559b5 (15:59b5)
 	TX_FAR _Route13BattleText11
 	db "@"
-; 0x559b5 + 5 bytes
 
 Route13EndBattleText11: ; 559ba (15:59ba)
 	TX_FAR _Route13EndBattleText11
 	db "@"
-; 0x559ba + 5 bytes
 
 Route13AfterBattleText11: ; 559bf (15:59bf)
 	TX_FAR _Route13AfterBattleText11
 	db "@"
-; 0x559bf + 5 bytes
 
 Route13Text11: ; 559c4 (15:59c4)
 	TX_FAR _Route13Text11
@@ -84618,7 +82724,6 @@ Route14Script: ; 559d3 (15:59d3)
 	call ExecuteCurMapScriptInTable
 	ld [W_ROUTE14CURSCRIPT], a
 	ret
-; 0x559e6
 
 Unknown_559e6: ; 559e6 (15:59e6)
 INCBIN "baserom.gbc",$559e6,$559ec - $559e6
@@ -84635,7 +82740,6 @@ Route14TrainerHeader0: ; 55a02 (15:5a02)
 	dw Route14AfterBattleText1 ; 0x5a8f TextAfterBattle
 	dw Route14EndBattleText1 ; 0x5a8a TextEndBattle
 	dw Route14EndBattleText1 ; 0x5a8a TextEndBattle
-; 0x55a0e
 
 Route14TrainerHeader1: ; 55a0e (15:5a0e)
 	db $2 ; flag's bit
@@ -84645,7 +82749,6 @@ Route14TrainerHeader1: ; 55a0e (15:5a0e)
 	dw Route14AfterBattleText2 ; 0x5aa8 TextAfterBattle
 	dw Route14EndBattleText2 ; 0x5aa3 TextEndBattle
 	dw Route14EndBattleText2 ; 0x5aa3 TextEndBattle
-; 0x55a1a
 
 Route14TrainerHeader2: ; 55a1a (15:5a1a)
 	db $3 ; flag's bit
@@ -84655,7 +82758,6 @@ Route14TrainerHeader2: ; 55a1a (15:5a1a)
 	dw Route14AfterBattleText3 ; 0x5ac1 TextAfterBattle
 	dw Route14EndBattleText3 ; 0x5abc TextEndBattle
 	dw Route14EndBattleText3 ; 0x5abc TextEndBattle
-; 0x55a26
 
 Route14TrainerHeader3: ; 55a26 (15:5a26)
 	db $4 ; flag's bit
@@ -84665,7 +82767,6 @@ Route14TrainerHeader3: ; 55a26 (15:5a26)
 	dw Route14AfterBattleText4 ; 0x5ada TextAfterBattle
 	dw Route14EndBattleText4 ; 0x5ad5 TextEndBattle
 	dw Route14EndBattleText4 ; 0x5ad5 TextEndBattle
-; 0x55a32
 
 Route14TrainerHeader4: ; 55a32 (15:5a32)
 	db $5 ; flag's bit
@@ -84675,7 +82776,6 @@ Route14TrainerHeader4: ; 55a32 (15:5a32)
 	dw Route14AfterBattleText5 ; 0x5af3 TextAfterBattle
 	dw Route14EndBattleText5 ; 0x5aee TextEndBattle
 	dw Route14EndBattleText5 ; 0x5aee TextEndBattle
-; 0x55a3e
 
 Route14TrainerHeader5: ; 55a3e (15:5a3e)
 	db $6 ; flag's bit
@@ -84685,7 +82785,6 @@ Route14TrainerHeader5: ; 55a3e (15:5a3e)
 	dw Route14AfterBattleText6 ; 0x5b0c TextAfterBattle
 	dw Route14EndBattleText6 ; 0x5b07 TextEndBattle
 	dw Route14EndBattleText6 ; 0x5b07 TextEndBattle
-; 0x55a4a
 
 Route14TrainerHeader6: ; 55a4a (15:5a4a)
 	db $7 ; flag's bit
@@ -84695,7 +82794,6 @@ Route14TrainerHeader6: ; 55a4a (15:5a4a)
 	dw Route14AfterBattleText7 ; 0x5b25 TextAfterBattle
 	dw Route14EndBattleText7 ; 0x5b20 TextEndBattle
 	dw Route14EndBattleText7 ; 0x5b20 TextEndBattle
-; 0x55a56
 
 Route14TrainerHeader7: ; 55a56 (15:5a56)
 	db $8 ; flag's bit
@@ -84705,7 +82803,6 @@ Route14TrainerHeader7: ; 55a56 (15:5a56)
 	dw Route14AfterBattleText8 ; 0x5b3e TextAfterBattle
 	dw Route14EndBattleText8 ; 0x5b39 TextEndBattle
 	dw Route14EndBattleText8 ; 0x5b39 TextEndBattle
-; 0x55a62
 
 Route14TrainerHeader8: ; 55a62 (15:5a62)
 	db $9 ; flag's bit
@@ -84715,7 +82812,6 @@ Route14TrainerHeader8: ; 55a62 (15:5a62)
 	dw Route14AfterBattleText9 ; 0x5b57 TextAfterBattle
 	dw Route14EndBattleText9 ; 0x5b52 TextEndBattle
 	dw Route14EndBattleText9 ; 0x5b52 TextEndBattle
-; 0x55a6e
 
 Route14TrainerHeader9: ; 55a6e (15:5a6e)
 	db $a ; flag's bit
@@ -84725,7 +82821,6 @@ Route14TrainerHeader9: ; 55a6e (15:5a6e)
 	dw Route14AfterBattleText10 ; 0x5b70 TextAfterBattle
 	dw Route14EndBattleText10 ; 0x5b6b TextEndBattle
 	dw Route14EndBattleText10 ; 0x5b6b TextEndBattle
-; 0x55a7a
 
 db $ff
 
@@ -84738,17 +82833,14 @@ Route14Text1: ; 55a7b (15:5a7b)
 Route14BattleText1: ; 55a85 (15:5a85)
 	TX_FAR _Route14BattleText1
 	db "@"
-; 0x55a85 + 5 bytes
 
 Route14EndBattleText1: ; 55a8a (15:5a8a)
 	TX_FAR _Route14EndBattleText1
 	db "@"
-; 0x55a8a + 5 bytes
 
 Route14AfterBattleText1: ; 55a8f (15:5a8f)
 	TX_FAR _Route14AfterBattleText1
 	db "@"
-; 0x55a8f + 5 bytes
 
 Route14Text2: ; 55a94 (15:5a94)
 	db $08 ; asm
@@ -84759,17 +82851,14 @@ Route14Text2: ; 55a94 (15:5a94)
 Route14BattleText2: ; 55a9e (15:5a9e)
 	TX_FAR _Route14BattleText2
 	db "@"
-; 0x55a9e + 5 bytes
 
 Route14EndBattleText2: ; 55aa3 (15:5aa3)
 	TX_FAR _Route14EndBattleText2
 	db "@"
-; 0x55aa3 + 5 bytes
 
 Route14AfterBattleText2: ; 55aa8 (15:5aa8)
 	TX_FAR _Route14AfterBattleText2
 	db "@"
-; 0x55aa8 + 5 bytes
 
 Route14Text3: ; 55aad (15:5aad)
 	db $08 ; asm
@@ -84780,17 +82869,14 @@ Route14Text3: ; 55aad (15:5aad)
 Route14BattleText3: ; 55ab7 (15:5ab7)
 	TX_FAR _Route14BattleText3
 	db "@"
-; 0x55ab7 + 5 bytes
 
 Route14EndBattleText3: ; 55abc (15:5abc)
 	TX_FAR _Route14EndBattleText3
 	db "@"
-; 0x55abc + 5 bytes
 
 Route14AfterBattleText3: ; 55ac1 (15:5ac1)
 	TX_FAR _Route14AfterBattleText3
 	db "@"
-; 0x55ac1 + 5 bytes
 
 Route14Text4: ; 55ac6 (15:5ac6)
 	db $08 ; asm
@@ -84801,17 +82887,14 @@ Route14Text4: ; 55ac6 (15:5ac6)
 Route14BattleText4: ; 55ad0 (15:5ad0)
 	TX_FAR _Route14BattleText4
 	db "@"
-; 0x55ad0 + 5 bytes
 
 Route14EndBattleText4: ; 55ad5 (15:5ad5)
 	TX_FAR _Route14EndBattleText4
 	db "@"
-; 0x55ad5 + 5 bytes
 
 Route14AfterBattleText4: ; 55ada (15:5ada)
 	TX_FAR _Route14AfterBattleText4
 	db "@"
-; 0x55ada + 5 bytes
 
 Route14Text5: ; 55adf (15:5adf)
 	db $08 ; asm
@@ -84822,17 +82905,14 @@ Route14Text5: ; 55adf (15:5adf)
 Route14BattleText5: ; 55ae9 (15:5ae9)
 	TX_FAR _Route14BattleText5
 	db "@"
-; 0x55ae9 + 5 bytes
 
 Route14EndBattleText5: ; 55aee (15:5aee)
 	TX_FAR _Route14EndBattleText5
 	db "@"
-; 0x55aee + 5 bytes
 
 Route14AfterBattleText5: ; 55af3 (15:5af3)
 	TX_FAR _Route14AfterBattleText5
 	db "@"
-; 0x55af3 + 5 bytes
 
 Route14Text6: ; 55af8 (15:5af8)
 	db $08 ; asm
@@ -84843,17 +82923,14 @@ Route14Text6: ; 55af8 (15:5af8)
 Route14BattleText6: ; 55b02 (15:5b02)
 	TX_FAR _Route14BattleText6
 	db "@"
-; 0x55b02 + 5 bytes
 
 Route14EndBattleText6: ; 55b07 (15:5b07)
 	TX_FAR _Route14EndBattleText6
 	db "@"
-; 0x55b07 + 5 bytes
 
 Route14AfterBattleText6: ; 55b0c (15:5b0c)
 	TX_FAR _Route14AfterBattleText6
 	db "@"
-; 0x55b0c + 5 bytes
 
 Route14Text7: ; 55b11 (15:5b11)
 	db $08 ; asm
@@ -84864,17 +82941,14 @@ Route14Text7: ; 55b11 (15:5b11)
 Route14BattleText7: ; 55b1b (15:5b1b)
 	TX_FAR _Route14BattleText7
 	db "@"
-; 0x55b1b + 5 bytes
 
 Route14EndBattleText7: ; 55b20 (15:5b20)
 	TX_FAR _Route14EndBattleText7
 	db "@"
-; 0x55b20 + 5 bytes
 
 Route14AfterBattleText7: ; 55b25 (15:5b25)
 	TX_FAR _Route14AfterBattleText7
 	db "@"
-; 0x55b25 + 5 bytes
 
 Route14Text8: ; 55b2a (15:5b2a)
 	db $08 ; asm
@@ -84885,17 +82959,14 @@ Route14Text8: ; 55b2a (15:5b2a)
 Route14BattleText8: ; 55b34 (15:5b34)
 	TX_FAR _Route14BattleText8
 	db "@"
-; 0x55b34 + 5 bytes
 
 Route14EndBattleText8: ; 55b39 (15:5b39)
 	TX_FAR _Route14EndBattleText8
 	db "@"
-; 0x55b39 + 5 bytes
 
 Route14AfterBattleText8: ; 55b3e (15:5b3e)
 	TX_FAR _Route14AfterBattleText8
 	db "@"
-; 0x55b3e + 5 bytes
 
 Route14Text9: ; 55b43 (15:5b43)
 	db $08 ; asm
@@ -84906,17 +82977,14 @@ Route14Text9: ; 55b43 (15:5b43)
 Route14BattleText9: ; 55b4d (15:5b4d)
 	TX_FAR _Route14BattleText9
 	db "@"
-; 0x55b4d + 5 bytes
 
 Route14EndBattleText9: ; 55b52 (15:5b52)
 	TX_FAR _Route14EndBattleText9
 	db "@"
-; 0x55b52 + 5 bytes
 
 Route14AfterBattleText9: ; 55b57 (15:5b57)
 	TX_FAR _Route14AfterBattleText9
 	db "@"
-; 0x55b57 + 5 bytes
 
 Route14Text10: ; 55b5c (15:5b5c)
 	db $08 ; asm
@@ -84927,17 +82995,14 @@ Route14Text10: ; 55b5c (15:5b5c)
 Route14BattleText10: ; 55b66 (15:5b66)
 	TX_FAR _Route14BattleText10
 	db "@"
-; 0x55b66 + 5 bytes
 
 Route14EndBattleText10: ; 55b6b (15:5b6b)
 	TX_FAR _Route14EndBattleText10
 	db "@"
-; 0x55b6b + 5 bytes
 
 Route14AfterBattleText10: ; 55b70 (15:5b70)
 	TX_FAR _Route14AfterBattleText10
 	db "@"
-; 0x55b70 + 5 bytes
 
 Route14Text11: ; 55b75 (15:5b75)
 	TX_FAR _Route14Text11
@@ -84951,7 +83016,6 @@ Route17Script: ; 55b7a (15:5b7a)
 	call ExecuteCurMapScriptInTable
 	ld [W_ROUTE17CURSCRIPT], a
 	ret
-; 0x55b8d
 
 Route17_Unknown55b8d: ; 55b8d (15:5b8d)
 INCBIN "baserom.gbc",$55b8d,$55b93 - $55b8d
@@ -84968,7 +83032,6 @@ Route17TrainerHeader0: ; 55bb3 (15:5bb3)
 	dw Route17AfterBattleText1 ; 0x5c40 TextAfterBattle
 	dw Route17EndBattleText1 ; 0x5c3b TextEndBattle
 	dw Route17EndBattleText1 ; 0x5c3b TextEndBattle
-; 0x55bbf
 
 Route17TrainerHeader1: ; 55bbf (15:5bbf)
 	db $2 ; flag's bit
@@ -84978,7 +83041,6 @@ Route17TrainerHeader1: ; 55bbf (15:5bbf)
 	dw Route17AfterBattleText2 ; 0x5c59 TextAfterBattle
 	dw Route17EndBattleText2 ; 0x5c54 TextEndBattle
 	dw Route17EndBattleText2 ; 0x5c54 TextEndBattle
-; 0x55bcb
 
 Route17TrainerHeader2: ; 55bcb (15:5bcb)
 	db $3 ; flag's bit
@@ -84988,7 +83050,6 @@ Route17TrainerHeader2: ; 55bcb (15:5bcb)
 	dw Route17AfterBattleText3 ; 0x5c72 TextAfterBattle
 	dw Route17EndBattleText3 ; 0x5c6d TextEndBattle
 	dw Route17EndBattleText3 ; 0x5c6d TextEndBattle
-; 0x55bd7
 
 Route17TrainerHeader3: ; 55bd7 (15:5bd7)
 	db $4 ; flag's bit
@@ -84998,7 +83059,6 @@ Route17TrainerHeader3: ; 55bd7 (15:5bd7)
 	dw Route17AfterBattleText4 ; 0x5c8b TextAfterBattle
 	dw Route17EndBattleText4 ; 0x5c86 TextEndBattle
 	dw Route17EndBattleText4 ; 0x5c86 TextEndBattle
-; 0x55be3
 
 Route17TrainerHeader4: ; 55be3 (15:5be3)
 	db $5 ; flag's bit
@@ -85008,7 +83068,6 @@ Route17TrainerHeader4: ; 55be3 (15:5be3)
 	dw Route17AfterBattleText5 ; 0x5ca4 TextAfterBattle
 	dw Route17EndBattleText5 ; 0x5c9f TextEndBattle
 	dw Route17EndBattleText5 ; 0x5c9f TextEndBattle
-; 0x55bef
 
 Route17TrainerHeader5: ; 55bef (15:5bef)
 	db $6 ; flag's bit
@@ -85018,7 +83077,6 @@ Route17TrainerHeader5: ; 55bef (15:5bef)
 	dw Route17AfterBattleText6 ; 0x5cbd TextAfterBattle
 	dw Route17EndBattleText6 ; 0x5cb8 TextEndBattle
 	dw Route17EndBattleText6 ; 0x5cb8 TextEndBattle
-; 0x55bfb
 
 Route17TrainerHeader6: ; 55bfb (15:5bfb)
 	db $7 ; flag's bit
@@ -85028,7 +83086,6 @@ Route17TrainerHeader6: ; 55bfb (15:5bfb)
 	dw Route17AfterBattleText7 ; 0x5cd6 TextAfterBattle
 	dw Route17EndBattleText7 ; 0x5cd1 TextEndBattle
 	dw Route17EndBattleText7 ; 0x5cd1 TextEndBattle
-; 0x55c07
 
 Route17TrainerHeader7: ; 55c07 (15:5c07)
 	db $8 ; flag's bit
@@ -85038,7 +83095,6 @@ Route17TrainerHeader7: ; 55c07 (15:5c07)
 	dw Route17AfterBattleText8 ; 0x5cef TextAfterBattle
 	dw Route17EndBattleText8 ; 0x5cea TextEndBattle
 	dw Route17EndBattleText8 ; 0x5cea TextEndBattle
-; 0x55c13
 
 Route17TrainerHeader8: ; 55c13 (15:5c13)
 	db $9 ; flag's bit
@@ -85048,7 +83104,6 @@ Route17TrainerHeader8: ; 55c13 (15:5c13)
 	dw Route17AfterBattleText9 ; 0x5d08 TextAfterBattle
 	dw Route17EndBattleText9 ; 0x5d03 TextEndBattle
 	dw Route17EndBattleText9 ; 0x5d03 TextEndBattle
-; 0x55c1f
 
 Route17TrainerHeader9: ; 55c1f (15:5c1f)
 	db $a ; flag's bit
@@ -85058,7 +83113,6 @@ Route17TrainerHeader9: ; 55c1f (15:5c1f)
 	dw Route17AfterBattleText10 ; 0x5d21 TextAfterBattle
 	dw Route17EndBattleText10 ; 0x5d1c TextEndBattle
 	dw Route17EndBattleText10 ; 0x5d1c TextEndBattle
-; 0x55c2b
 
 db $ff
 
@@ -85071,17 +83125,14 @@ Route17Text1: ; 55c2c (15:5c2c)
 Route17BattleText1: ; 55c36 (15:5c36)
 	TX_FAR _Route17BattleText1
 	db "@"
-; 0x55c36 + 5 bytes
 
 Route17EndBattleText1: ; 55c3b (15:5c3b)
 	TX_FAR _Route17EndBattleText1
 	db "@"
-; 0x55c3b + 5 bytes
 
 Route17AfterBattleText1: ; 55c40 (15:5c40)
 	TX_FAR _Route17AfterBattleText1
 	db "@"
-; 0x55c40 + 5 bytes
 
 Route17Text2: ; 55c45 (15:5c45)
 	db $08 ; asm
@@ -85092,17 +83143,14 @@ Route17Text2: ; 55c45 (15:5c45)
 Route17BattleText2: ; 55c4f (15:5c4f)
 	TX_FAR _Route17BattleText2
 	db "@"
-; 0x55c4f + 5 bytes
 
 Route17EndBattleText2: ; 55c54 (15:5c54)
 	TX_FAR _Route17EndBattleText2
 	db "@"
-; 0x55c54 + 5 bytes
 
 Route17AfterBattleText2: ; 55c59 (15:5c59)
 	TX_FAR _Route17AfterBattleText2
 	db "@"
-; 0x55c59 + 5 bytes
 
 Route17Text3: ; 55c5e (15:5c5e)
 	db $08 ; asm
@@ -85113,17 +83161,14 @@ Route17Text3: ; 55c5e (15:5c5e)
 Route17BattleText3: ; 55c68 (15:5c68)
 	TX_FAR _Route17BattleText3
 	db "@"
-; 0x55c68 + 5 bytes
 
 Route17EndBattleText3: ; 55c6d (15:5c6d)
 	TX_FAR _Route17EndBattleText3
 	db "@"
-; 0x55c6d + 5 bytes
 
 Route17AfterBattleText3: ; 55c72 (15:5c72)
 	TX_FAR _Route17AfterBattleText3
 	db "@"
-; 0x55c72 + 5 bytes
 
 Route17Text4: ; 55c77 (15:5c77)
 	db $08 ; asm
@@ -85134,17 +83179,14 @@ Route17Text4: ; 55c77 (15:5c77)
 Route17BattleText4: ; 55c81 (15:5c81)
 	TX_FAR _Route17BattleText4
 	db "@"
-; 0x55c81 + 5 bytes
 
 Route17EndBattleText4: ; 55c86 (15:5c86)
 	TX_FAR _Route17EndBattleText4
 	db "@"
-; 0x55c86 + 5 bytes
 
 Route17AfterBattleText4: ; 55c8b (15:5c8b)
 	TX_FAR _Route17AfterBattleText4
 	db "@"
-; 0x55c8b + 5 bytes
 
 Route17Text5: ; 55c90 (15:5c90)
 	db $08 ; asm
@@ -85155,17 +83197,14 @@ Route17Text5: ; 55c90 (15:5c90)
 Route17BattleText5: ; 55c9a (15:5c9a)
 	TX_FAR _Route17BattleText5
 	db "@"
-; 0x55c9a + 5 bytes
 
 Route17EndBattleText5: ; 55c9f (15:5c9f)
 	TX_FAR _Route17EndBattleText5
 	db "@"
-; 0x55c9f + 5 bytes
 
 Route17AfterBattleText5: ; 55ca4 (15:5ca4)
 	TX_FAR _Route17AfterBattleText5
 	db "@"
-; 0x55ca4 + 5 bytes
 
 Route17Text6: ; 55ca9 (15:5ca9)
 	db $08 ; asm
@@ -85176,17 +83215,14 @@ Route17Text6: ; 55ca9 (15:5ca9)
 Route17BattleText6: ; 55cb3 (15:5cb3)
 	TX_FAR _Route17BattleText6
 	db "@"
-; 0x55cb3 + 5 bytes
 
 Route17EndBattleText6: ; 55cb8 (15:5cb8)
 	TX_FAR _Route17EndBattleText6
 	db "@"
-; 0x55cb8 + 5 bytes
 
 Route17AfterBattleText6: ; 55cbd (15:5cbd)
 	TX_FAR _Route17AfterBattleText6
 	db "@"
-; 0x55cbd + 5 bytes
 
 Route17Text7: ; 55cc2 (15:5cc2)
 	db $08 ; asm
@@ -85197,17 +83233,14 @@ Route17Text7: ; 55cc2 (15:5cc2)
 Route17BattleText7: ; 55ccc (15:5ccc)
 	TX_FAR _Route17BattleText7
 	db "@"
-; 0x55ccc + 5 bytes
 
 Route17EndBattleText7: ; 55cd1 (15:5cd1)
 	TX_FAR _Route17EndBattleText7
 	db "@"
-; 0x55cd1 + 5 bytes
 
 Route17AfterBattleText7: ; 55cd6 (15:5cd6)
 	TX_FAR _Route17AfterBattleText7
 	db "@"
-; 0x55cd6 + 5 bytes
 
 Route17Text8: ; 55cdb (15:5cdb)
 	db $08 ; asm
@@ -85218,17 +83251,14 @@ Route17Text8: ; 55cdb (15:5cdb)
 Route17BattleText8: ; 55ce5 (15:5ce5)
 	TX_FAR _Route17BattleText8
 	db "@"
-; 0x55ce5 + 5 bytes
 
 Route17EndBattleText8: ; 55cea (15:5cea)
 	TX_FAR _Route17EndBattleText8
 	db "@"
-; 0x55cea + 5 bytes
 
 Route17AfterBattleText8: ; 55cef (15:5cef)
 	TX_FAR _Route17AfterBattleText8
 	db "@"
-; 0x55cef + 5 bytes
 
 Route17Text9: ; 55cf4 (15:5cf4)
 	db $08 ; asm
@@ -85239,17 +83269,14 @@ Route17Text9: ; 55cf4 (15:5cf4)
 Route17BattleText9: ; 55cfe (15:5cfe)
 	TX_FAR _Route17BattleText9
 	db "@"
-; 0x55cfe + 5 bytes
 
 Route17EndBattleText9: ; 55d03 (15:5d03)
 	TX_FAR _Route17EndBattleText9
 	db "@"
-; 0x55d03 + 5 bytes
 
 Route17AfterBattleText9: ; 55d08 (15:5d08)
 	TX_FAR _Route17AfterBattleText9
 	db "@"
-; 0x55d08 + 5 bytes
 
 Route17Text10: ; 55d0d (15:5d0d)
 	db $08 ; asm
@@ -85260,17 +83287,14 @@ Route17Text10: ; 55d0d (15:5d0d)
 Route17BattleText10: ; 55d17 (15:5d17)
 	TX_FAR _Route17BattleText10
 	db "@"
-; 0x55d17 + 5 bytes
 
 Route17EndBattleText10: ; 55d1c (15:5d1c)
 	TX_FAR _Route17EndBattleText10
 	db "@"
-; 0x55d1c + 5 bytes
 
 Route17AfterBattleText10: ; 55d21 (15:5d21)
 	TX_FAR _Route17AfterBattleText10
 	db "@"
-; 0x55d21 + 5 bytes
 
 Route17Text11: ; 55d26 (15:5d26)
 	TX_FAR _Route17Text11
@@ -85304,7 +83328,6 @@ Route19Script: ; 55d44 (15:5d44)
 	call ExecuteCurMapScriptInTable
 	ld [W_ROUTE19CURSCRIPT], a
 	ret
-; 0x55d57
 
 Route19_Unknown55d57: ; 55d57 (15:5d57)
 INCBIN "baserom.gbc",$55d57,$55d5d - $55d57
@@ -85321,7 +83344,6 @@ Route19TrainerHeader0: ; 55d73 (15:5d73)
 	dw Route19AfterBattleText1 ; 0x5e5a TextAfterBattle
 	dw Route19EndBattleText1 ; 0x5e55 TextEndBattle
 	dw Route19EndBattleText1 ; 0x5e55 TextEndBattle
-; 0x55d7f
 
 Route19TrainerHeader1: ; 55d7f (15:5d7f)
 	db $2 ; flag's bit
@@ -85331,7 +83353,6 @@ Route19TrainerHeader1: ; 55d7f (15:5d7f)
 	dw Route19AfterBattleText2 ; 0x5e69 TextAfterBattle
 	dw Route19EndBattleText2 ; 0x5e64 TextEndBattle
 	dw Route19EndBattleText2 ; 0x5e64 TextEndBattle
-; 0x55d8b
 
 Route19TrainerHeader2: ; 55d8b (15:5d8b)
 	db $3 ; flag's bit
@@ -85341,7 +83362,6 @@ Route19TrainerHeader2: ; 55d8b (15:5d8b)
 	dw Route19AfterBattleText3 ; 0x5e78 TextAfterBattle
 	dw Route19EndBattleText3 ; 0x5e73 TextEndBattle
 	dw Route19EndBattleText3 ; 0x5e73 TextEndBattle
-; 0x55d97
 
 Route19TrainerHeader3: ; 55d97 (15:5d97)
 	db $4 ; flag's bit
@@ -85351,7 +83371,6 @@ Route19TrainerHeader3: ; 55d97 (15:5d97)
 	dw Route19AfterBattleText4 ; 0x5e87 TextAfterBattle
 	dw Route19EndBattleText4 ; 0x5e82 TextEndBattle
 	dw Route19EndBattleText4 ; 0x5e82 TextEndBattle
-; 0x55da3
 
 Route19TrainerHeader4: ; 55da3 (15:5da3)
 	db $5 ; flag's bit
@@ -85361,7 +83380,6 @@ Route19TrainerHeader4: ; 55da3 (15:5da3)
 	dw Route19AfterBattleText5 ; 0x5e96 TextAfterBattle
 	dw Route19EndBattleText5 ; 0x5e91 TextEndBattle
 	dw Route19EndBattleText5 ; 0x5e91 TextEndBattle
-; 0x55daf
 
 Route19TrainerHeader5: ; 55daf (15:5daf)
 	db $6 ; flag's bit
@@ -85371,7 +83389,6 @@ Route19TrainerHeader5: ; 55daf (15:5daf)
 	dw Route19AfterBattleText6 ; 0x5ea5 TextAfterBattle
 	dw Route19EndBattleText6 ; 0x5ea0 TextEndBattle
 	dw Route19EndBattleText6 ; 0x5ea0 TextEndBattle
-; 0x55dbb
 
 Route19TrainerHeader6: ; 55dbb (15:5dbb)
 	db $7 ; flag's bit
@@ -85381,7 +83398,6 @@ Route19TrainerHeader6: ; 55dbb (15:5dbb)
 	dw Route19AfterBattleText7 ; 0x5eb4 TextAfterBattle
 	dw Route19EndBattleText7 ; 0x5eaf TextEndBattle
 	dw Route19EndBattleText7 ; 0x5eaf TextEndBattle
-; 0x55dc7
 
 Route19TrainerHeader7: ; 55dc7 (15:5dc7)
 	db $8 ; flag's bit
@@ -85391,7 +83407,6 @@ Route19TrainerHeader7: ; 55dc7 (15:5dc7)
 	dw Route19AfterBattleText8 ; 0x5ec3 TextAfterBattle
 	dw Route19EndBattleText8 ; 0x5ebe TextEndBattle
 	dw Route19EndBattleText8 ; 0x5ebe TextEndBattle
-; 0x55dd3
 
 Route19TrainerHeader8: ; 55dd3 (15:5dd3)
 	db $9 ; flag's bit
@@ -85401,7 +83416,6 @@ Route19TrainerHeader8: ; 55dd3 (15:5dd3)
 	dw Route19AfterBattleText9 ; 0x5ed2 TextAfterBattle
 	dw Route19EndBattleText9 ; 0x5ecd TextEndBattle
 	dw Route19EndBattleText9 ; 0x5ecd TextEndBattle
-; 0x55ddf
 
 Route19TrainerHeader9: ; 55ddf (15:5ddf)
 	db $a ; flag's bit
@@ -85411,7 +83425,6 @@ Route19TrainerHeader9: ; 55ddf (15:5ddf)
 	dw Route19AfterBattleText10 ; 0x5ee1 TextAfterBattle
 	dw Route19EndBattleText10 ; 0x5edc TextEndBattle
 	dw Route19EndBattleText10 ; 0x5edc TextEndBattle
-; 0x55deb
 
 db $ff
 
@@ -85478,152 +83491,122 @@ Route19Text10: ; 55e46 (15:5e46)
 Route19BattleText1: ; 55e50 (15:5e50)
 	TX_FAR _Route19BattleText1
 	db "@"
-; 0x55e50 + 5 bytes
 
 Route19EndBattleText1: ; 55e55 (15:5e55)
 	TX_FAR _Route19EndBattleText1
 	db "@"
-; 0x55e55 + 5 bytes
 
 Route19AfterBattleText1: ; 55e5a (15:5e5a)
 	TX_FAR _Route19AfterBattleText1
 	db "@"
-; 0x55e5a + 5 bytes
 
 Route19BattleText2: ; 55e5f (15:5e5f)
 	TX_FAR _Route19BattleText2
 	db "@"
-; 0x55e5f + 5 bytes
 
 Route19EndBattleText2: ; 55e64 (15:5e64)
 	TX_FAR _Route19EndBattleText2
 	db "@"
-; 0x55e64 + 5 bytes
 
 Route19AfterBattleText2: ; 55e69 (15:5e69)
 	TX_FAR _Route19AfterBattleText2
 	db "@"
-; 0x55e69 + 5 bytes
 
 Route19BattleText3: ; 55e6e (15:5e6e)
 	TX_FAR _Route19BattleText3
 	db "@"
-; 0x55e6e + 5 bytes
 
 Route19EndBattleText3: ; 55e73 (15:5e73)
 	TX_FAR _Route19EndBattleText3
 	db "@"
-; 0x55e73 + 5 bytes
 
 Route19AfterBattleText3: ; 55e78 (15:5e78)
 	TX_FAR _Route19AfterBattleText3
 	db "@"
-; 0x55e78 + 5 bytes
 
 Route19BattleText4: ; 55e7d (15:5e7d)
 	TX_FAR _Route19BattleText4
 	db "@"
-; 0x55e7d + 5 bytes
 
 Route19EndBattleText4: ; 55e82 (15:5e82)
 	TX_FAR _Route19EndBattleText4
 	db "@"
-; 0x55e82 + 5 bytes
 
 Route19AfterBattleText4: ; 55e87 (15:5e87)
 	TX_FAR _Route19AfterBattleText4
 	db "@"
-; 0x55e87 + 5 bytes
 
 Route19BattleText5: ; 55e8c (15:5e8c)
 	TX_FAR _Route19BattleText5
 	db "@"
-; 0x55e8c + 5 bytes
 
 Route19EndBattleText5: ; 55e91 (15:5e91)
 	TX_FAR _Route19EndBattleText5
 	db "@"
-; 0x55e91 + 5 bytes
 
 Route19AfterBattleText5: ; 55e96 (15:5e96)
 	TX_FAR _Route19AfterBattleText5
 	db "@"
-; 0x55e96 + 5 bytes
 
 Route19BattleText6: ; 55e9b (15:5e9b)
 	TX_FAR _Route19BattleText6
 	db "@"
-; 0x55e9b + 5 bytes
 
 Route19EndBattleText6: ; 55ea0 (15:5ea0)
 	TX_FAR _Route19EndBattleText6
 	db "@"
-; 0x55ea0 + 5 bytes
 
 Route19AfterBattleText6: ; 55ea5 (15:5ea5)
 	TX_FAR _Route19AfterBattleText6
 	db "@"
-; 0x55ea5 + 5 bytes
 
 Route19BattleText7: ; 55eaa (15:5eaa)
 	TX_FAR _Route19BattleText7
 	db "@"
-; 0x55eaa + 5 bytes
 
 Route19EndBattleText7: ; 55eaf (15:5eaf)
 	TX_FAR _Route19EndBattleText7
 	db "@"
-; 0x55eaf + 5 bytes
 
 Route19AfterBattleText7: ; 55eb4 (15:5eb4)
 	TX_FAR _Route19AfterBattleText7
 	db "@"
-; 0x55eb4 + 5 bytes
 
 Route19BattleText8: ; 55eb9 (15:5eb9)
 	TX_FAR _Route19BattleText8
 	db "@"
-; 0x55eb9 + 5 bytes
 
 Route19EndBattleText8: ; 55ebe (15:5ebe)
 	TX_FAR _Route19EndBattleText8
 	db "@"
-; 0x55ebe + 5 bytes
 
 Route19AfterBattleText8: ; 55ec3 (15:5ec3)
 	TX_FAR _Route19AfterBattleText8
 	db "@"
-; 0x55ec3 + 5 bytes
 
 Route19BattleText9: ; 55ec8 (15:5ec8)
 	TX_FAR _Route19BattleText9
 	db "@"
-; 0x55ec8 + 5 bytes
 
 Route19EndBattleText9: ; 55ecd (15:5ecd)
 	TX_FAR _Route19EndBattleText9
 	db "@"
-; 0x55ecd + 5 bytes
 
 Route19AfterBattleText9: ; 55ed2 (15:5ed2)
 	TX_FAR _Route19AfterBattleText9
 	db "@"
-; 0x55ed2 + 5 bytes
 
 Route19BattleText10: ; 55ed7 (15:5ed7)
 	TX_FAR _Route19BattleText10
 	db "@"
-; 0x55ed7 + 5 bytes
 
 Route19EndBattleText10: ; 55edc (15:5edc)
 	TX_FAR _Route19EndBattleText10
 	db "@"
-; 0x55edc + 5 bytes
 
 Route19AfterBattleText10: ; 55ee1 (15:5ee1)
 	TX_FAR _Route19AfterBattleText10
 	db "@"
-; 0x55ee1 + 5 bytes
 
 Route19Text11: ; 55ee6 (15:5ee6)
 	TX_FAR _Route19Text11
@@ -85637,7 +83620,6 @@ Route21Script: ; 55eeb (15:5eeb)
 	call ExecuteCurMapScriptInTable
 	ld [W_ROUTE21CURSCRIPT], a
 	ret
-; 0x55efe
 
 Route21_Unknown55efe: ; 55efe (15:5efe)
 INCBIN "baserom.gbc",$55efe,$55f04 - $55efe
@@ -85654,7 +83636,6 @@ Route21TrainerHeader0: ; 55f16 (15:5f16)
 	dw Route21AfterBattleText1 ; 0x5fe7 TextAfterBattle
 	dw Route21EndBattleText1 ; 0x5fe2 TextEndBattle
 	dw Route21EndBattleText1 ; 0x5fe2 TextEndBattle
-; 0x55f22
 
 Route21TrainerHeader1: ; 55f22 (15:5f22)
 	db $2 ; flag's bit
@@ -85664,7 +83645,6 @@ Route21TrainerHeader1: ; 55f22 (15:5f22)
 	dw Route21AfterBattleText2 ; 0x5ff6 TextAfterBattle
 	dw Route21EndBattleText2 ; 0x5ff1 TextEndBattle
 	dw Route21EndBattleText2 ; 0x5ff1 TextEndBattle
-; 0x55f2e
 
 Route21TrainerHeader2: ; 55f2e (15:5f2e)
 	db $3 ; flag's bit
@@ -85674,7 +83654,6 @@ Route21TrainerHeader2: ; 55f2e (15:5f2e)
 	dw Route21AfterBattleText3 ; 0x6005 TextAfterBattle
 	dw Route21EndBattleText3 ; 0x6000 TextEndBattle
 	dw Route21EndBattleText3 ; 0x6000 TextEndBattle
-; 0x55f3a
 
 Route21TrainerHeader3: ; 55f3a (15:5f3a)
 	db $4 ; flag's bit
@@ -85684,7 +83663,6 @@ Route21TrainerHeader3: ; 55f3a (15:5f3a)
 	dw Route21AfterBattleText4 ; 0x6014 TextAfterBattle
 	dw Route21EndBattleText4 ; 0x600f TextEndBattle
 	dw Route21EndBattleText4 ; 0x600f TextEndBattle
-; 0x55f46
 
 Route21TrainerHeader4: ; 55f46 (15:5f46)
 	db $5 ; flag's bit
@@ -85694,7 +83672,6 @@ Route21TrainerHeader4: ; 55f46 (15:5f46)
 	dw Route21AfterBattleText5 ; 0x6023 TextAfterBattle
 	dw Route21EndBattleText5 ; 0x601e TextEndBattle
 	dw Route21EndBattleText5 ; 0x601e TextEndBattle
-; 0x55f52
 
 Route21TrainerHeader5: ; 55f52 (15:5f52)
 	db $6 ; flag's bit
@@ -85704,7 +83681,6 @@ Route21TrainerHeader5: ; 55f52 (15:5f52)
 	dw Route21AfterBattleText6 ; 0x6032 TextAfterBattle
 	dw Route21EndBattleText6 ; 0x602d TextEndBattle
 	dw Route21EndBattleText6 ; 0x602d TextEndBattle
-; 0x55f5e
 
 Route21TrainerHeader6: ; 55f5e (15:5f5e)
 	db $7 ; flag's bit
@@ -85714,7 +83690,6 @@ Route21TrainerHeader6: ; 55f5e (15:5f5e)
 	dw Route21AfterBattleText7 ; 0x6041 TextAfterBattle
 	dw Route21EndBattleText7 ; 0x603c TextEndBattle
 	dw Route21EndBattleText7 ; 0x603c TextEndBattle
-; 0x55f6a
 
 Route21TrainerHeader7: ; 55f6a (15:5f6a)
 	db $8 ; flag's bit
@@ -85724,7 +83699,6 @@ Route21TrainerHeader7: ; 55f6a (15:5f6a)
 	dw Route21AfterBattleText8 ; 0x6050 TextAfterBattle
 	dw Route21EndBattleText8 ; 0x604b TextEndBattle
 	dw Route21EndBattleText8 ; 0x604b TextEndBattle
-; 0x55f76
 
 Route21TrainerHeader8: ; 55f76 (15:5f76)
 	db $9 ; flag's bit
@@ -85734,7 +83708,6 @@ Route21TrainerHeader8: ; 55f76 (15:5f76)
 	dw Route21AfterBattleText9 ; 0x605f TextAfterBattle
 	dw Route21EndBattleText9 ; 0x605a TextEndBattle
 	dw Route21EndBattleText9 ; 0x605a TextEndBattle
-; 0x55f82
 
 db $ff
 
@@ -85795,137 +83768,110 @@ Route21Text9: ; 55fd3 (15:5fd3)
 Route21BattleText1: ; 55fdd (15:5fdd)
 	TX_FAR _Route21BattleText1
 	db "@"
-; 0x55fdd + 5 bytes
 
 Route21EndBattleText1: ; 55fe2 (15:5fe2)
 	TX_FAR _Route21EndBattleText1
 	db "@"
-; 0x55fe2 + 5 bytes
 
 Route21AfterBattleText1: ; 55fe7 (15:5fe7)
 	TX_FAR _Route21AfterBattleText1
 	db "@"
-; 0x55fe7 + 5 bytes
 
 Route21BattleText2: ; 55fec (15:5fec)
 	TX_FAR _Route21BattleText2
 	db "@"
-; 0x55fec + 5 bytes
 
 Route21EndBattleText2: ; 55ff1 (15:5ff1)
 	TX_FAR _Route21EndBattleText2
 	db "@"
-; 0x55ff1 + 5 bytes
 
 Route21AfterBattleText2: ; 55ff6 (15:5ff6)
 	TX_FAR _Route21AfterBattleText2
 	db "@"
-; 0x55ff6 + 5 bytes
 
 Route21BattleText3: ; 55ffb (15:5ffb)
 	TX_FAR _Route21BattleText3
 	db "@"
-; 0x55ffb + 5 bytes
 
 Route21EndBattleText3: ; 56000 (15:6000)
 	TX_FAR _Route21EndBattleText3
 	db "@"
-; 0x56000 + 5 bytes
 
 Route21AfterBattleText3: ; 56005 (15:6005)
 	TX_FAR _Route21AfterBattleText3
 	db "@"
-; 0x56005 + 5 bytes
 
 Route21BattleText4: ; 5600a (15:600a)
 	TX_FAR _Route21BattleText4
 	db "@"
-; 0x5600a + 5 bytes
 
 Route21EndBattleText4: ; 5600f (15:600f)
 	TX_FAR _Route21EndBattleText4
 	db "@"
-; 0x5600f + 5 bytes
 
 Route21AfterBattleText4: ; 56014 (15:6014)
 	TX_FAR _Route21AfterBattleText4
 	db "@"
-; 0x56014 + 5 bytes
 
 Route21BattleText5: ; 56019 (15:6019)
 	TX_FAR _Route21BattleText5
 	db "@"
-; 0x56019 + 5 bytes
 
 Route21EndBattleText5: ; 5601e (15:601e)
 	TX_FAR _Route21EndBattleText5
 	db "@"
-; 0x5601e + 5 bytes
 
 Route21AfterBattleText5: ; 56023 (15:6023)
 	TX_FAR _Route21AfterBattleText5
 	db "@"
-; 0x56023 + 5 bytes
 
 Route21BattleText6: ; 56028 (15:6028)
 	TX_FAR _Route21BattleText6
 	db "@"
-; 0x56028 + 5 bytes
 
 Route21EndBattleText6: ; 5602d (15:602d)
 	TX_FAR _Route21EndBattleText6
 	db "@"
-; 0x5602d + 5 bytes
 
 Route21AfterBattleText6: ; 56032 (15:6032)
 	TX_FAR _Route21AfterBattleText6
 	db "@"
-; 0x56032 + 5 bytes
 
 Route21BattleText7: ; 56037 (15:6037)
 	TX_FAR _Route21BattleText7
 	db "@"
-; 0x56037 + 5 bytes
 
 Route21EndBattleText7: ; 5603c (15:603c)
 	TX_FAR _Route21EndBattleText7
 	db "@"
-; 0x5603c + 5 bytes
 
 Route21AfterBattleText7: ; 56041 (15:6041)
 	TX_FAR _Route21AfterBattleText7
 	db "@"
-; 0x56041 + 5 bytes
 
 Route21BattleText8: ; 56046 (15:6046)
 	TX_FAR _Route21BattleText8
 	db "@"
-; 0x56046 + 5 bytes
 
 Route21EndBattleText8: ; 5604b (15:604b)
 	TX_FAR _Route21EndBattleText8
 	db "@"
-; 0x5604b + 5 bytes
 
 Route21AfterBattleText8: ; 56050 (15:6050)
 	TX_FAR _Route21AfterBattleText8
 	db "@"
-; 0x56050 + 5 bytes
 
 Route21BattleText9: ; 56055 (15:6055)
 	TX_FAR _Route21BattleText9
 	db "@"
-; 0x56055 + 5 bytes
 
 Route21EndBattleText9: ; 5605a (15:605a)
 	TX_FAR _Route21EndBattleText9
 	db "@"
-; 0x5605a + 5 bytes
 
 Route21AfterBattleText9: ; 5605f (15:605f)
 	TX_FAR _Route21AfterBattleText9
 	db "@"
-; 0x5605f + 5 bytes
 
 VermilionHouse2_h: ; 0x56064 to 0x56070 (12 bytes) (id=163)
 	db $08 ; tileset
@@ -85937,7 +83883,6 @@ VermilionHouse2_h: ; 0x56064 to 0x56070 (12 bytes) (id=163)
 
 VermilionHouse2Script: ; 56070 (15:6070)
 	jp EnableAutoTextBoxDrawing
-; 0x56073
 
 VermilionHouse2Texts: ; 56073 (15:6073)
 	dw VermilionHouse2Text1
@@ -85975,29 +83920,24 @@ asm_5dd95 ; 0x560ab
 UnnamedText_560b1: ; 560b1 (15:60b1)
 	TX_FAR _UnnamedText_560b1
 	db "@"
-; 0x560b1 + 5 bytes
 
 UnnamedText_560b6: ; 560b6 (15:60b6)
 	TX_FAR _UnnamedText_560b6 ; 0x9c554
 	db $0B
 	TX_FAR _UnnamedText_560bb ; 0x9c5a4
 	db "@"
-; 0x560c0
 
 UnnamedText_560c0: ; 560c0 (15:60c0)
 	TX_FAR _UnnamedText_560c0
 	db "@"
-; 0x560c0 + 5 bytes
 
 UnnamedText_560c5: ; 560c5 (15:60c5)
 	TX_FAR _UnnamedText_560c5
 	db "@"
-; 0x560c5 + 5 bytes
 
 UnnamedText_560ca: ; 560ca (15:60ca)
 	TX_FAR _UnnamedText_560ca
 	db "@"
-; 0x560ca + 5 bytes
 
 VermilionHouse2Object: ; 0x560cf (size=26)
 	db $a ; border tile
@@ -86025,7 +83965,6 @@ CeladonMart2_h: ; 0x560e9 to 0x560f5 (12 bytes) (id=123)
 
 CeladonMart2Script: ; 560f5 (15:60f5)
 	jp EnableAutoTextBoxDrawing
-; 0x560f8
 
 CeladonMart2Texts: ; 560f8 (15:60f8)
 	dw CeladonMart2Text1, CeladonMart2Text2, CeladonMart2Text3, CeladonMart2Text4, CeladonMart2Text5
@@ -86077,7 +84016,6 @@ FuchsiaHouse3_h: ; 0x56170 to 0x5617c (12 bytes) (id=164)
 
 FuchsiaHouse3Script: ; 5617c (15:617c)
 	jp EnableAutoTextBoxDrawing
-; 0x5617f
 
 FuchsiaHouse3Texts: ; 5617f (15:617f)
 	dw FuchsiaHouse3Text1
@@ -86115,29 +84053,24 @@ asm_1b09c ; 0x561b7
 UnnamedText_561bd: ; 561bd (15:61bd)
 	TX_FAR _UnnamedText_561bd
 	db "@"
-; 0x561bd + 5 bytes
 
 UnnamedText_561c2: ; 561c2 (15:61c2)
 	TX_FAR _UnnamedText_561c2 ; 0xa06e8
 	db $0B, "@"
-; 0x561c8
 
 INCBIN "baserom.gbc",$561c8,$56212 - $561c8
 
 UnnamedText_56212: ; 56212 (15:6212)
 	TX_FAR _UnnamedText_56212
 	db "@"
-; 0x56212 + 5 bytes
 
 UnnamedText_56217: ; 56217 (15:6217)
 	TX_FAR _UnnamedText_56217
 	db "@"
-; 0x56217 + 5 bytes
 
 UnnamedText_5621c: ; 5621c (15:621c)
 	TX_FAR _UnnamedText_5621c
 	db "@"
-; 0x5621c + 5 bytes
 
 FuchsiaHouse3Object: ; 0x56221 (size=34)
 	db $c ; border tile
@@ -86167,7 +84100,6 @@ DayCareM_h: ; 0x56243 to 0x5624f (12 bytes) (id=72)
 
 DayCareMScript: ; 5624f (15:624f)
 	jp EnableAutoTextBoxDrawing
-; 0x56252
 
 DayCareMTexts: ; 56252 (15:6252)
 	dw DayCareMText1
@@ -86227,7 +84159,6 @@ DayCareMText1: ; 56254 (15:6254)
 	call PlayCry
 	ld hl, UnnamedText_5641e
 	jp Unnamed_56409
-; 0x562e1
 
 Unnamed_562e1: ; 562e1 (15:62e1)
 INCBIN "baserom.gbc",$562e1,$56409 - $562e1
@@ -86235,79 +84166,64 @@ INCBIN "baserom.gbc",$562e1,$56409 - $562e1
 Unnamed_56409: ; 56409 (15:6409)
 	call PrintText
 	jp TextScriptEnd
-; 0x5640f
 
 UnnamedText_5640f: ; 5640f (15:640f)
 	TX_FAR _UnnamedText_5640f
 	db "@"
-; 0x5640f + 5 bytes
 
 UnnamedText_56414: ; 56414 (15:6414)
 	TX_FAR _UnnamedText_56414
 	db "@"
-; 0x56414 + 5 bytes
 
 UnnamedText_56419: ; 56419 (15:6419)
 	TX_FAR _UnnamedText_56419
 	db "@"
-; 0x56419 + 5 bytes
 
 UnnamedText_5641e: ; 5641e (15:641e)
 	TX_FAR _UnnamedText_5641e
 	db "@"
-; 0x5641e + 5 bytes
 
 UnnamedText_56423: ; 56423 (15:6423)
 	TX_FAR _UnnamedText_56423
 	db "@"
-; 0x56423 + 5 bytes
 
 UnnamedText_56428: ; 56428 (15:6428)
 	TX_FAR _UnnamedText_56428
 	db "@"
-; 0x56428 + 5 bytes
 
 UnnamedText_5642d: ; 5642d (15:642d)
 	TX_FAR _UnnamedText_5642d
 	db "@"
-; 0x5642d + 5 bytes
 
 UnnamedText_56432: ; 56432 (15:6432)
 	TX_FAR _UnnamedText_56432
 	db "@"
-; 0x56432 + 5 bytes
 
 UnnamedText_56437: ; 56437 (15:6437)
 	TX_FAR _UnnamedText_56437 ; 0x8c000
 UnnamedText_5643b: ; 5643b (15:643b)
 	TX_FAR _UnnamedText_5643b ; 0x8c013
 	db "@"
-; 0x5643b + 5 bytes
 
 UnnamedText_56440: ; 56440 (15:6440)
 	TX_FAR _UnnamedText_56440
 	db "@"
-; 0x56440 + 5 bytes
 
 UnnamedText_56445: ; 56445 (15:6445)
 	TX_FAR _UnnamedText_56445
 	db "@"
-; 0x56445 + 5 bytes
 
 UnnamedText_5644a: ; 5644a (15:644a)
 	TX_FAR _UnnamedText_5644a
 	db "@"
-; 0x5644a + 5 bytes
 
 UnnamedText_5644f: ; 5644f (15:644f)
 	TX_FAR _UnnamedText_5644f
 	db "@"
-; 0x5644f + 5 bytes
 
 UnnamedText_56454: ; 56454 (15:6454)
 	TX_FAR _UnnamedText_56454
 	db "@"
-; 0x56454 + 5 bytes
 
 DayCareMObject: ; 0x56459 (size=26)
 	db $a ; border tile
@@ -86335,7 +84251,6 @@ Route12House_h: ; 0x56473 to 0x5647f (12 bytes) (id=189)
 
 Route12HouseScript: ; 5647f (15:647f)
 	jp EnableAutoTextBoxDrawing
-; 0x56482
 
 Route12HouseTexts: ; 56482 (15:6482)
 	dw Route12HouseText1
@@ -86373,29 +84288,24 @@ asm_df984 ; 0x564ba
 UnnamedText_564c0: ; 564c0 (15:64c0)
 	TX_FAR _UnnamedText_564c0
 	db "@"
-; 0x564c0 + 5 bytes
 
 UnnamedText_564c5: ; 564c5 (15:64c5)
 	TX_FAR _UnnamedText_564c5 ; 0x8ca00
 	db $0B
 	TX_FAR _UnnamedText_564ca ; 0x8ca4f
 	db "@"
-; 0x564c5 + 10 bytes = 0x564cf
 
 UnnamedText_564cf: ; 564cf (15:64cf)
 	TX_FAR _UnnamedText_564cf
 	db "@"
-; 0x564cf + 5 bytes
 
 UnnamedText_564d4: ; 564d4 (15:64d4)
 	TX_FAR _UnnamedText_564d4
 	db "@"
-; 0x564d4 + 5 bytes
 
 UnnamedText_564d9: ; 564d9 (15:64d9)
 	TX_FAR _UnnamedText_564d9
 	db "@"
-; 0x564d9 + 5 bytes
 
 Route12HouseObject: ; 0x564de (size=26)
 	db $a ; border tile
@@ -86430,7 +84340,6 @@ SilphCo8Script: ; 56504 (15:6504)
 	call ExecuteCurMapScriptInTable
 	ld [W_SILPHCO8CURSCRIPT], a
 	ret
-; 0x5651a
 
 SilphCo8_Unknown5651a: ; 5651a (15:651a)
 	ld hl, $d126
@@ -86452,7 +84361,6 @@ SilphCo8_Unknown5651a: ; 5651a (15:651a)
 Unknown_5653e: ; 5653e (15:653e)
 INCBIN "baserom.gbc",$5653e,$56541 - $5653e
 
-; known jump sources: 56525 (15:6525)
 Func_56541: ; 56541 (15:6541)
 	push hl
 	ld hl, $d73f
@@ -86489,7 +84397,6 @@ Func_56541: ; 56541 (15:6541)
 	ld [$FF00+$e0], a
 	ret
 
-; known jump sources: 56528 (15:6528)
 Func_5656d: ; 5656d (15:656d)
 	ld a, [$FF00+$e0]
 	and a
@@ -86513,7 +84420,6 @@ SilphCo8TrainerHeader0: ; 56585 (15:6585)
 	dw SilphCo8AfterBattleText1 ; 0x65f0 TextAfterBattle
 	dw SilphCo8EndBattleText1 ; 0x65eb TextEndBattle
 	dw SilphCo8EndBattleText1 ; 0x65eb TextEndBattle
-; 0x56591
 
 SilphCo8TrainerHeader1: ; 56591 (15:6591)
 	db $3 ; flag's bit
@@ -86523,7 +84429,6 @@ SilphCo8TrainerHeader1: ; 56591 (15:6591)
 	dw SilphCo8AfterBattleText2 ; 0x65ff TextAfterBattle
 	dw SilphCo8EndBattleText2 ; 0x65fa TextEndBattle
 	dw SilphCo8EndBattleText2 ; 0x65fa TextEndBattle
-; 0x5659d
 
 SilphCo8TrainerHeader2: ; 5659d (15:659d)
 	db $4 ; flag's bit
@@ -86533,7 +84438,6 @@ SilphCo8TrainerHeader2: ; 5659d (15:659d)
 	dw SilphCo8AfterBattleText3 ; 0x660e TextAfterBattle
 	dw SilphCo8EndBattleText3 ; 0x6609 TextEndBattle
 	dw SilphCo8EndBattleText3 ; 0x6609 TextEndBattle
-; 0x565a9
 
 db $ff
 
@@ -86551,12 +84455,10 @@ asm_a468f ; 0x565b8
 UnnamedText_565be: ; 565be (15:65be)
 	TX_FAR _UnnamedText_565be
 	db "@"
-; 0x565be + 5 bytes
 
 UnnamedText_565c3: ; 565c3 (15:65c3)
 	TX_FAR _UnnamedText_565c3
 	db "@"
-; 0x565c3 + 5 bytes
 
 SilphCo8Text2: ; 565c8 (15:65c8)
 	db $08 ; asm
@@ -86579,47 +84481,38 @@ SilphCo8Text4: ; 565dc (15:65dc)
 SilphCo8BattleText1: ; 565e6 (15:65e6)
 	TX_FAR _SilphCo8BattleText1
 	db "@"
-; 0x565e6 + 5 bytes
 
 SilphCo8EndBattleText1: ; 565eb (15:65eb)
 	TX_FAR _SilphCo8EndBattleText1
 	db "@"
-; 0x565eb + 5 bytes
 
 SilphCo8AfterBattleText1: ; 565f0 (15:65f0)
 	TX_FAR _SilphCo8AfterBattleText1
 	db "@"
-; 0x565f0 + 5 bytes
 
 SilphCo8BattleText2: ; 565f5 (15:65f5)
 	TX_FAR _SilphCo8BattleText2
 	db "@"
-; 0x565f5 + 5 bytes
 
 SilphCo8EndBattleText2: ; 565fa (15:65fa)
 	TX_FAR _SilphCo8EndBattleText2
 	db "@"
-; 0x565fa + 5 bytes
 
 SilphCo8AfterBattleText2: ; 565ff (15:65ff)
 	TX_FAR _SilphCo8AfterBattleText2
 	db "@"
-; 0x565ff + 5 bytes
 
 SilphCo8BattleText3: ; 56604 (15:6604)
 	TX_FAR _SilphCo8BattleText3
 	db "@"
-; 0x56604 + 5 bytes
 
 SilphCo8EndBattleText3: ; 56609 (15:6609)
 	TX_FAR _SilphCo8EndBattleText3
 	db "@"
-; 0x56609 + 5 bytes
 
 SilphCo8AfterBattleText3: ; 5660e (15:660e)
 	TX_FAR _SilphCo8AfterBattleText3
 	db "@"
-; 0x5660e + 5 bytes
 
 SilphCo8Object: ; 0x56613 (size=90)
 	db $2e ; border tile
@@ -86725,7 +84618,6 @@ DisplayDiploma: ; 566e2 (15:66e2)
 	call Func_3dbe
 	call Delay3
 	jp GBPalNormal
-; 0x56777
 
 Func_56777: ; 56777 (15:6777)
 	ld hl, $d158
@@ -86764,7 +84656,6 @@ DiplomaCongrats:
 DiplomaGameFreak:
 	db "GAME FREAK@"
 
-; known jump sources: 3303 (0:3303)
 Func_567f9: ; 567f9 (15:67f9)
 	ld hl, $c100
 	ld de, $4
@@ -86802,7 +84693,6 @@ Func_56819: ; 56819 (15:6819)
 	ld a, [hl]
 	ld [$d133], a
 	ret
-; 0x5683d
 
 Func_5683d: ; 5683d (15:683d)
 	ld hl, $c100
@@ -86841,9 +84731,7 @@ Func_5685d: ; 5685d (15:685d)
 	ld a, [$d133]
 	ld [hl], a
 	ret
-; 0x56881
 
-; known jump sources: 32d4 (0:32d4)
 TrainerWalkUpToPlayer: ; 56881 (15:6881)
 	ld a, [$cf13]
 	swap a
@@ -86917,7 +84805,6 @@ TrainerWalkUpToPlayer: ; 56881 (15:6881)
 	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
 	jp MoveSprite_
 
-; known jump sources: 56804 (15:6804), 56848 (15:6848)
 Func_56903: ; 56903 (15:6903)
 	push de
 	add hl, de
@@ -87116,7 +85003,6 @@ CheckPlayerIsInFrontOfSprite: ; 569e3 (15:69e3)
 .done
 	ld [W_TRAINERSPRITEOFFSET], a ; $cd3d
 	ret
-; 56a4b (15:6a4b)
 
 SECTION "bank16",ROMX,BANK[$16]
 
@@ -87603,7 +85489,6 @@ Route18Blocks: ; 58c9c (16:4c9c)
 
 INCBIN "baserom.gbc",$58d7d,$58d99 - $58d7d
 
-; known jump sources: 3c0fc (f:40fc)
 Func_58d99: ; 58d99 (16:4d99)
 	ld a, [W_ISINBATTLE] ; $d057
 	dec a
@@ -87673,7 +85558,6 @@ Func_58d99: ; 58d99 (16:4d99)
 	ld hl, UnnamedText_58e3b ; $4e3b
 	call PrintText
 
-; known jump sources: 58dbe (16:4dbe)
 Func_58e29: ; 58e29 (16:4e29)
 	xor a
 	ld [$c0f1], a
@@ -87684,38 +85568,31 @@ Func_58e29: ; 58e29 (16:4e29)
 	jp WaitForSoundToFinish
 asm_58e3a: ; 58e3a (16:4e3a)
 	ret
-; 58e3b (16:4e3b)
+
 UnnamedText_58e3b: ; 58e3b (16:4e3b)
 	TX_FAR _UnnamedText_58e3b
 	db "@"
-; 0x58e3b + 5 bytes
 
 UnnamedText_58e40: ; 58e40 (16:4e40)
 	TX_FAR _UnnamedText_58e40
 	db "@"
-; 0x58e40 + 5 bytes
 
 UnnamedText_58e45: ; 58e45 (16:4e45)
 	TX_FAR _UnnamedText_58e45
 	db "@"
-; 0x58e45 + 5 bytes
 
 UnnamedText_58e4a: ; 58e4a (16:4e4a)
 	TX_FAR _UnnamedText_58e4a
 	db "@"
-; 0x58e4a + 5 bytes
 
 UnnamedText_58e4f: ; 58e4f (16:4e4f)
 	TX_FAR _UnnamedText_58e4f
 	db "@"
-; 0x58e4f + 5 bytes
 
 UnnamedText_58e54: ; 58e54 (16:4e54)
 	TX_FAR _UnnamedText_58e54
 	db "@"
-; 0x58e54 + 5 bytes
 
-; known jump sources: 3cc96 (f:4c96)
 Func_58e59: ; 58e59 (16:4e59)
 	ld hl, W_ENEMYMONCURHP ; $cfe6
 	ld a, [hli]
@@ -87778,14 +85655,11 @@ INCBIN "baserom.gbc",$58ec3,$58ec8 - $58ec3
 .asm_58ec8
 	ld hl, UnnamedText_58ecc ; $4ecc
 	ret
-; 58ecc (16:4ecc)
 
 UnnamedText_58ecc: ; 58ecc (16:4ecc)
 	TX_FAR _UnnamedText_58ecc
 	db "@"
-; 0x58ecc + 5 bytes
 
-; known jump sources: 3d1bf (f:51bf)
 Func_58ed1: ; 58ed1 (16:4ed1)
 	ld hl, Unknown_58ed7 ; $4ed7
 	jp PrintText
@@ -87796,9 +85670,7 @@ INCBIN "baserom.gbc",$58ed7,$58f3e - $58ed7
 UnnamedText_58f3e: ; 58f3e (16:4f3e)
 	TX_FAR _UnnamedText_58f3e
 	db "@"
-; 0x58f3e + 5 bytes
 
-; known jump sources: f64c (3:764c), 55350 (15:5350)
 Func_58f43: ; 58f43 (16:4f43)
 	ld a, [$cf98]
 	ld [$d0b5], a
@@ -87826,7 +85698,6 @@ Func_58f43: ; 58f43 (16:4f43)
 	dec d
 	ret
 
-; known jump sources: de9a (3:5e9a), e88c (3:688c), f431 (3:7431), 12c94 (4:6c94), 55312 (15:5312), 58f4f (16:4f4f)
 ; calculates the amount of experience needed for level d
 CalcExperience: ; 58f6a (16:4f6a)
 	ld a, [W_MONHGROWTHRATE]
@@ -87932,7 +85803,6 @@ CalcExperience: ; 58f6a (16:4f6a)
 	ld [H_MULTIPLICAND], a
 	ret
 
-; known jump sources: 58f76 (16:4f76), 58f9c (16:4f9c)
 ; calculates d*d
 CalcDSquared: ; 59010 (16:5010)
 	xor a
@@ -87956,7 +85826,6 @@ db $65,$8F,$64,$8C ; medium slow: 6/5 n^3 - 15 n^2 + 100 n - 140
 db $45,$00,$00,$00 ; fast:        4/5 n^3
 db $54,$00,$00,$00 ; slow:        5/4 n^3
 
-; no known jump sources
 Func_59035 ; 0x59035
 	ld hl, UnnamedText_59091 ; $5091
 	call PrintText
@@ -88003,27 +85872,22 @@ Func_59035 ; 0x59035
 .asm_5908e
 	ld [$ff00+$db], a
 	ret
-; 0x59091
 
 UnnamedText_59091: ; 59091 (16:5091)
 	TX_FAR _UnnamedText_59091
 	db "@"
-; 0x59091 + 5 bytes
 
 UnnamedText_59096: ; 59096 (16:5096)
 	TX_FAR _UnnamedText_59096
 	db "@"
-; 0x59096 + 5 bytes
 
 UnnamedText_5909b: ; 5909b (16:509b)
 	TX_FAR _UnnamedText_5909b
 	db "@"
-; 0x5909b + 5 bytes
 
 UnnamedText_590a0: ; 590a0 (16:50a0)
 	TX_FAR _UnnamedText_590a0
 	db "@"
-; 0x590a0 + 5 bytes
 
 Unknown_590a5: ; 590a5 (16:50a5)
 INCBIN "baserom.gbc",$590a5,$590ab - $590a5
@@ -88031,7 +85895,6 @@ INCBIN "baserom.gbc",$590a5,$590ab - $590a5
 UnnamedText_590ab: ; 590ab (16:50ab)
 	TX_FAR _UnnamedText_590ab
 	db "@"
-; 0x590ab + 5 bytes
 
 Route6Script: ; 590b0 (16:50b0)
 	call EnableAutoTextBoxDrawing
@@ -88041,7 +85904,6 @@ Route6Script: ; 590b0 (16:50b0)
 	call ExecuteCurMapScriptInTable
 	ld [W_ROUTE6CURSCRIPT], a
 	ret
-; 0x590c3
 
 Route6_Unknown590c3: ; 590c3 (16:50c3)
 INCBIN "baserom.gbc",$590c3,$590c9 - $590c3
@@ -88058,7 +85920,6 @@ Route6TrainerHeader0: ; 590d7 (16:50d7)
 	dw Route6AfterBattleText1 ; 0x5134 TextAfterBattle
 	dw Route6EndBattleText1 ; 0x512f TextEndBattle
 	dw Route6EndBattleText1 ; 0x512f TextEndBattle
-; 0x590e3
 
 Route6TrainerHeader1: ; 590e3 (16:50e3)
 	db $2 ; flag's bit
@@ -88068,7 +85929,6 @@ Route6TrainerHeader1: ; 590e3 (16:50e3)
 	dw Route6AfterBattleText1 ; 0x5134 TextAfterBattle
 	dw Route6EndBattleText2 ; 0x5148 TextEndBattle
 	dw Route6EndBattleText2 ; 0x5148 TextEndBattle
-; 0x590ef
 
 Route6TrainerHeader2: ; 590ef (16:50ef)
 	db $3 ; flag's bit
@@ -88078,7 +85938,6 @@ Route6TrainerHeader2: ; 590ef (16:50ef)
 	dw Route6AfterBattleText3 ; 0x5161 TextAfterBattle
 	dw Route6EndBattleText3 ; 0x515c TextEndBattle
 	dw Route6EndBattleText3 ; 0x515c TextEndBattle
-; 0x590fb
 
 Route6TrainerHeader3: ; 590fb (16:50fb)
 	db $4 ; flag's bit
@@ -88088,7 +85947,6 @@ Route6TrainerHeader3: ; 590fb (16:50fb)
 	dw Route6AfterBattleText4 ; 0x517a TextAfterBattle
 	dw Route6EndBattleText4 ; 0x5175 TextEndBattle
 	dw Route6EndBattleText4 ; 0x5175 TextEndBattle
-; 0x59107
 
 Route6TrainerHeader4: ; 59107 (16:5107)
 	db $5 ; flag's bit
@@ -88098,7 +85956,6 @@ Route6TrainerHeader4: ; 59107 (16:5107)
 	dw Route6AfterBattleText5 ; 0x5193 TextAfterBattle
 	dw Route6EndBattleText5 ; 0x518e TextEndBattle
 	dw Route6EndBattleText5 ; 0x518e TextEndBattle
-; 0x59113
 
 Route6TrainerHeader5: ; 59113 (16:5113)
 	db $6 ; flag's bit
@@ -88108,7 +85965,6 @@ Route6TrainerHeader5: ; 59113 (16:5113)
 	dw Route6AfterBattleText6 ; 0x51ac TextAfterBattle
 	dw Route6EndBattleText6 ; 0x51a7 TextEndBattle
 	dw Route6EndBattleText6 ; 0x51a7 TextEndBattle
-; 0x5911e
 
 db $ff
 
@@ -88117,22 +85973,18 @@ Route6Text1: ; 59120 (16:5120)
 	ld hl, Route6TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
-; 0x5912a
 
 Route6BattleText1: ; 5912a (16:512a)
 	TX_FAR _Route6BattleText1
 	db "@"
-; 0x5912a + 5 bytes
 
 Route6EndBattleText1: ; 5912f (16:512f)
 	TX_FAR _Route6EndBattleText1
 	db "@"
-; 0x5912f + 5 bytes
 
 Route6AfterBattleText1: ; 59134 (16:5134)
 	TX_FAR _Route6AfterBattleText1
 	db "@"
-; 0x59134 + 5 bytes
 
 Route6Text2: ; 59139 (16:5139)
 	db $08 ; asm
@@ -88143,12 +85995,10 @@ Route6Text2: ; 59139 (16:5139)
 Route6BattleText2: ; 59143 (16:5143)
 	TX_FAR _Route6BattleText2
 	db "@"
-; 0x59143 + 5 bytes
 
 Route6EndBattleText2: ; 59148 (16:5148)
 	TX_FAR _Route6EndBattleText2
 	db "@"
-; 0x59148 + 5 bytes
 
 Route6Text3: ; 5914d (16:514d)
 	db $08 ; asm
@@ -88159,17 +86009,14 @@ Route6Text3: ; 5914d (16:514d)
 Route6BattleText3: ; 59157 (16:5157)
 	TX_FAR _Route6BattleText3
 	db "@"
-; 0x59157 + 5 bytes
 
 Route6EndBattleText3: ; 5915c (16:515c)
 	TX_FAR _Route6EndBattleText3
 	db "@"
-; 0x5915c + 5 bytes
 
 Route6AfterBattleText3: ; 59161 (16:5161)
 	TX_FAR _Route6AfterBattleText3
 	db "@"
-; 0x59161 + 5 bytes
 
 Route6Text4: ; 59166 (16:5166)
 	db $08 ; asm
@@ -88180,17 +86027,14 @@ Route6Text4: ; 59166 (16:5166)
 Route6BattleText4: ; 59170 (16:5170)
 	TX_FAR _Route6BattleText4
 	db "@"
-; 0x59170 + 5 bytes
 
 Route6EndBattleText4: ; 59175 (16:5175)
 	TX_FAR _Route6EndBattleText4
 	db "@"
-; 0x59175 + 5 bytes
 
 Route6AfterBattleText4: ; 5917a (16:517a)
 	TX_FAR _Route6AfterBattleText4
 	db "@"
-; 0x5917a + 5 bytes
 
 Route6Text5: ; 5917f (16:517f)
 	db $08 ; asm
@@ -88201,17 +86045,14 @@ Route6Text5: ; 5917f (16:517f)
 Route6BattleText5: ; 59189 (16:5189)
 	TX_FAR _Route6BattleText5
 	db "@"
-; 0x59189 + 5 bytes
 
 Route6EndBattleText5: ; 5918e (16:518e)
 	TX_FAR _Route6EndBattleText5
 	db "@"
-; 0x5918e + 5 bytes
 
 Route6AfterBattleText5: ; 59193 (16:5193)
 	TX_FAR _Route6AfterBattleText5
 	db "@"
-; 0x59193 + 5 bytes
 
 Route6Text6: ; 59198 (16:5198)
 	db $08 ; asm
@@ -88222,17 +86063,14 @@ Route6Text6: ; 59198 (16:5198)
 Route6BattleText6: ; 591a2 (16:51a2)
 	TX_FAR _Route6BattleText6
 	db "@"
-; 0x591a2 + 5 bytes
 
 Route6EndBattleText6: ; 591a7 (16:51a7)
 	TX_FAR _Route6EndBattleText6
 	db "@"
-; 0x591a7 + 5 bytes
 
 Route6AfterBattleText6: ; 591ac (16:51ac)
 	TX_FAR _Route6AfterBattleText6
 	db "@"
-; 0x591ac + 5 bytes
 
 Route6Text7: ; 591b1 (16:51b1)
 	TX_FAR _Route6Text7
@@ -88246,7 +86084,6 @@ Route8Script: ; 591b6 (16:51b6)
 	call ExecuteCurMapScriptInTable
 	ld [W_ROUTE8CURSCRIPT], a
 	ret
-; 0x591c9
 
 Route8_Unknown591c9: ; 591c9 (16:51c9)
 INCBIN "baserom.gbc",$591c9,$591cf - $591c9
@@ -88263,7 +86100,6 @@ Route8TrainerHeader0: ; 591e3 (16:51e3)
 	dw Route8AfterBattleText1 ; 0x5264 TextAfterBattle
 	dw Route8EndBattleText1 ; 0x525f TextEndBattle
 	dw Route8EndBattleText1 ; 0x525f TextEndBattle
-; 0x591ef
 
 Route8TrainerHeader1: ; 591ef (16:51ef)
 	db $2 ; flag's bit
@@ -88273,7 +86109,6 @@ Route8TrainerHeader1: ; 591ef (16:51ef)
 	dw Route8AfterBattleText2 ; 0x527d TextAfterBattle
 	dw Route8EndBattleText2 ; 0x5278 TextEndBattle
 	dw Route8EndBattleText2 ; 0x5278 TextEndBattle
-; 0x591fb
 
 Route8TrainerHeader2: ; 591fb (16:51fb)
 	db $3 ; flag's bit
@@ -88283,7 +86118,6 @@ Route8TrainerHeader2: ; 591fb (16:51fb)
 	dw Route8AfterBattleText3 ; 0x5296 TextAfterBattle
 	dw Route8EndBattleText3 ; 0x5291 TextEndBattle
 	dw Route8EndBattleText3 ; 0x5291 TextEndBattle
-; 0x59207
 
 Route8TrainerHeader3: ; 59207 (16:5207)
 	db $4 ; flag's bit
@@ -88293,7 +86127,6 @@ Route8TrainerHeader3: ; 59207 (16:5207)
 	dw Route8AfterBattleText4 ; 0x52af TextAfterBattle
 	dw Route8EndBattleText4 ; 0x52aa TextEndBattle
 	dw Route8EndBattleText4 ; 0x52aa TextEndBattle
-; 0x59213
 
 Route8TrainerHeader4: ; 59213 (16:5213)
 	db $5 ; flag's bit
@@ -88303,7 +86136,6 @@ Route8TrainerHeader4: ; 59213 (16:5213)
 	dw Route8AfterBattleText5 ; 0x52c8 TextAfterBattle
 	dw Route8EndBattleText5 ; 0x52c3 TextEndBattle
 	dw Route8EndBattleText5 ; 0x52c3 TextEndBattle
-; 0x5921f
 
 Route8TrainerHeader5: ; 5921f (16:521f)
 	db $6 ; flag's bit
@@ -88313,7 +86145,6 @@ Route8TrainerHeader5: ; 5921f (16:521f)
 	dw Route8AfterBattleText6 ; 0x52e1 TextAfterBattle
 	dw Route8EndBattleText6 ; 0x52dc TextEndBattle
 	dw Route8EndBattleText6 ; 0x52dc TextEndBattle
-; 0x5922b
 
 Route8TrainerHeader6: ; 5922b (16:522b)
 	db $7 ; flag's bit
@@ -88323,7 +86154,6 @@ Route8TrainerHeader6: ; 5922b (16:522b)
 	dw Route8AfterBattleText7 ; 0x52fa TextAfterBattle
 	dw Route8EndBattleText7 ; 0x52f5 TextEndBattle
 	dw Route8EndBattleText7 ; 0x52f5 TextEndBattle
-; 0x59237
 
 Route8TrainerHeader7: ; 59237 (16:5237)
 	db $8 ; flag's bit
@@ -88333,7 +86163,6 @@ Route8TrainerHeader7: ; 59237 (16:5237)
 	dw Route8AfterBattleText8 ; 0x5313 TextAfterBattle
 	dw Route8EndBattleText8 ; 0x530e TextEndBattle
 	dw Route8EndBattleText8 ; 0x530e TextEndBattle
-; 0x59243
 
 Route8TrainerHeader8: ; 59243 (16:5243)
 	db $9 ; flag's bit
@@ -88343,7 +86172,6 @@ Route8TrainerHeader8: ; 59243 (16:5243)
 	dw Route8AfterBattleText9 ; 0x532c TextAfterBattle
 	dw Route8EndBattleText9 ; 0x5327 TextEndBattle
 	dw Route8EndBattleText9 ; 0x5327 TextEndBattle
-; 0x5924e
 
 db $ff
 
@@ -88352,22 +86180,18 @@ Route8Text1: ; 59250 (16:5250)
 	ld hl, Route8TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
-; 0x5925a
 
 Route8BattleText1: ; 5925a (16:525a)
 	TX_FAR _Route8BattleText1
 	db "@"
-; 0x5925f
 
 Route8EndBattleText1: ; 5925f (16:525f)
 	TX_FAR _Route8EndBattleText1
 	db "@"
-; 0x5925f + 5 bytes
 
 Route8AfterBattleText1: ; 59264 (16:5264)
 	TX_FAR _Route8AfterBattleText1
 	db "@"
-; 0x59264 + 5 bytes
 
 Route8Text2: ; 59269 (16:5269)
 	db $08 ; asm
@@ -88378,17 +86202,14 @@ Route8Text2: ; 59269 (16:5269)
 Route8BattleText2: ; 59273 (16:5273)
 	TX_FAR _Route8BattleText2
 	db "@"
-; 0x59273 + 5 bytes
 
 Route8EndBattleText2: ; 59278 (16:5278)
 	TX_FAR _Route8EndBattleText2
 	db "@"
-; 0x59278 + 5 bytes
 
 Route8AfterBattleText2: ; 5927d (16:527d)
 	TX_FAR _Route8AfterBattleText2
 	db "@"
-; 0x5927d + 5 bytes
 
 Route8Text3: ; 59282 (16:5282)
 	db $08 ; asm
@@ -88399,17 +86220,14 @@ Route8Text3: ; 59282 (16:5282)
 Route8BattleText3: ; 5928c (16:528c)
 	TX_FAR _Route8BattleText3
 	db "@"
-; 0x5928c + 5 bytes
 
 Route8EndBattleText3: ; 59291 (16:5291)
 	TX_FAR _Route8EndBattleText3
 	db "@"
-; 0x59291 + 5 bytes
 
 Route8AfterBattleText3: ; 59296 (16:5296)
 	TX_FAR _Route8AfterBattleText3
 	db "@"
-; 0x59296 + 5 bytes
 
 Route8Text4: ; 5929b (16:529b)
 	db $08 ; asm
@@ -88420,17 +86238,14 @@ Route8Text4: ; 5929b (16:529b)
 Route8BattleText4: ; 592a5 (16:52a5)
 	TX_FAR _Route8BattleText4
 	db "@"
-; 0x592a5 + 5 bytes
 
 Route8EndBattleText4: ; 592aa (16:52aa)
 	TX_FAR _Route8EndBattleText4
 	db "@"
-; 0x592aa + 5 bytes
 
 Route8AfterBattleText4: ; 592af (16:52af)
 	TX_FAR _Route8AfterBattleText4
 	db "@"
-; 0x592af + 5 bytes
 
 Route8Text5: ; 592b4 (16:52b4)
 	db $08 ; asm
@@ -88441,17 +86256,14 @@ Route8Text5: ; 592b4 (16:52b4)
 Route8BattleText5: ; 592be (16:52be)
 	TX_FAR _Route8BattleText5
 	db "@"
-; 0x592be + 5 bytes
 
 Route8EndBattleText5: ; 592c3 (16:52c3)
 	TX_FAR _Route8EndBattleText5
 	db "@"
-; 0x592c3 + 5 bytes
 
 Route8AfterBattleText5: ; 592c8 (16:52c8)
 	TX_FAR _Route8AfterBattleText5
 	db "@"
-; 0x592c8 + 5 bytes
 
 Route8Text6: ; 592cd (16:52cd)
 	db $08 ; asm
@@ -88462,17 +86274,14 @@ Route8Text6: ; 592cd (16:52cd)
 Route8BattleText6: ; 592d7 (16:52d7)
 	TX_FAR _Route8BattleText6
 	db "@"
-; 0x592d7 + 5 bytes
 
 Route8EndBattleText6: ; 592dc (16:52dc)
 	TX_FAR _Route8EndBattleText6
 	db "@"
-; 0x592dc + 5 bytes
 
 Route8AfterBattleText6: ; 592e1 (16:52e1)
 	TX_FAR _Route8AfterBattleText6
 	db "@"
-; 0x592e1 + 5 bytes
 
 Route8Text7: ; 592e6 (16:52e6)
 	db $08 ; asm
@@ -88483,17 +86292,14 @@ Route8Text7: ; 592e6 (16:52e6)
 Route8BattleText7: ; 592f0 (16:52f0)
 	TX_FAR _Route8BattleText7
 	db "@"
-; 0x592f0 + 5 bytes
 
 Route8EndBattleText7: ; 592f5 (16:52f5)
 	TX_FAR _Route8EndBattleText7
 	db "@"
-; 0x592f5 + 5 bytes
 
 Route8AfterBattleText7: ; 592fa (16:52fa)
 	TX_FAR _Route8AfterBattleText7
 	db "@"
-; 0x592fa + 5 bytes
 
 Route8Text8: ; 592ff (16:52ff)
 	db $08 ; asm
@@ -88504,17 +86310,14 @@ Route8Text8: ; 592ff (16:52ff)
 Route8BattleText8: ; 59309 (16:5309)
 	TX_FAR _Route8BattleText8
 	db "@"
-; 0x59309 + 5 bytes
 
 Route8EndBattleText8: ; 5930e (16:530e)
 	TX_FAR _Route8EndBattleText8
 	db "@"
-; 0x5930e + 5 bytes
 
 Route8AfterBattleText8: ; 59313 (16:5313)
 	TX_FAR _Route8AfterBattleText8
 	db "@"
-; 0x59313 + 5 bytes
 
 Route8Text9: ; 59318 (16:5318)
 	db $08 ; asm
@@ -88525,17 +86328,14 @@ Route8Text9: ; 59318 (16:5318)
 Route8BattleText9: ; 59322 (16:5322)
 	TX_FAR _Route8BattleText9
 	db "@"
-; 0x59322 + 5 bytes
 
 Route8EndBattleText9: ; 59327 (16:5327)
 	TX_FAR _Route8EndBattleText9
 	db "@"
-; 0x59327 + 5 bytes
 
 Route8AfterBattleText9: ; 5932c (16:532c)
 	TX_FAR _Route8AfterBattleText9
 	db "@"
-; 0x5932c + 5 bytes
 
 Route8Text10: ; 59331 (16:5331)
 	TX_FAR _Route8Text10
@@ -88549,7 +86349,6 @@ Route10Script: ; 59336 (16:5336)
 	call ExecuteCurMapScriptInTable
 	ld [W_ROUTE10CURSCRIPT], a
 	ret
-; 0x59349
 
 Route10_Unknown59349: ; 59349 (16:5349)
 INCBIN "baserom.gbc",$59349,$5934f - $59349
@@ -88566,7 +86365,6 @@ Route10TrainerHeader0: ; 59363 (16:5363)
 	dw Route10AfterBattleText1 ; 0x53c0 TextAfterBattle
 	dw Route10EndBattleText1 ; 0x53bb TextEndBattle
 	dw Route10EndBattleText1 ; 0x53bb TextEndBattle
-; 0x5936f
 
 Route10TrainerHeader1: ; 5936f (16:536f)
 	db $2 ; flag's bit
@@ -88576,7 +86374,6 @@ Route10TrainerHeader1: ; 5936f (16:536f)
 	dw Route10AfterBattleText2 ; 0x53d9 TextAfterBattle
 	dw Route10EndBattleText2 ; 0x53d4 TextEndBattle
 	dw Route10EndBattleText2 ; 0x53d4 TextEndBattle
-; 0x5937b
 
 Route10TrainerHeader2: ; 5937b (16:537b)
 	db $3 ; flag's bit
@@ -88586,7 +86383,6 @@ Route10TrainerHeader2: ; 5937b (16:537b)
 	dw Route10AfterBattleText3 ; 0x53f2 TextAfterBattle
 	dw Route10EndBattleText3 ; 0x53ed TextEndBattle
 	dw Route10EndBattleText3 ; 0x53ed TextEndBattle
-; 0x59387
 
 Route10TrainerHeader3: ; 59387 (16:5387)
 	db $4 ; flag's bit
@@ -88596,7 +86392,6 @@ Route10TrainerHeader3: ; 59387 (16:5387)
 	dw Route10AfterBattleText4 ; 0x540b TextAfterBattle
 	dw Route10EndBattleText4 ; 0x5406 TextEndBattle
 	dw Route10EndBattleText4 ; 0x5406 TextEndBattle
-; 0x59393
 
 Route10TrainerHeader4: ; 59393 (16:5393)
 	db $5 ; flag's bit
@@ -88606,7 +86401,6 @@ Route10TrainerHeader4: ; 59393 (16:5393)
 	dw Route10AfterBattleText5 ; 0x5424 TextAfterBattle
 	dw Route10EndBattleText5 ; 0x541f TextEndBattle
 	dw Route10EndBattleText5 ; 0x541f TextEndBattle
-; 0x5939f
 
 Route10TrainerHeader5: ; 5939f (16:539f)
 	db $6 ; flag's bit
@@ -88616,7 +86410,6 @@ Route10TrainerHeader5: ; 5939f (16:539f)
 	dw Route10AfterBattleText6 ; 0x543d TextAfterBattle
 	dw Route10EndBattleText6 ; 0x5438 TextEndBattle
 	dw Route10EndBattleText6 ; 0x5438 TextEndBattle
-; 0x593ab
 
 db $ff
 
@@ -88629,17 +86422,14 @@ Route10Text1: ; 593ac (16:53ac)
 Route10BattleText1: ; 593b6 (16:53b6)
 	TX_FAR _Route10BattleText1
 	db "@"
-; 0x593b6 + 5 bytes
 
 Route10EndBattleText1: ; 593bb (16:53bb)
 	TX_FAR _Route10EndBattleText1
 	db "@"
-; 0x593bb + 5 bytes
 
 Route10AfterBattleText1: ; 593c0 (16:53c0)
 	TX_FAR _Route10AfterBattleText1
 	db "@"
-; 0x593c0 + 5 bytes
 
 Route10Text2: ; 593c5 (16:53c5)
 	db $08 ; asm
@@ -88650,17 +86440,14 @@ Route10Text2: ; 593c5 (16:53c5)
 Route10BattleText2: ; 593cf (16:53cf)
 	TX_FAR _Route10BattleText2
 	db "@"
-; 0x593cf + 5 bytes
 
 Route10EndBattleText2: ; 593d4 (16:53d4)
 	TX_FAR _Route10EndBattleText2
 	db "@"
-; 0x593d4 + 5 bytes
 
 Route10AfterBattleText2: ; 593d9 (16:53d9)
 	TX_FAR _Route10AfterBattleText2
 	db "@"
-; 0x593d9 + 5 bytes
 
 Route10Text3: ; 593de (16:53de)
 	db $08 ; asm
@@ -88671,17 +86458,14 @@ Route10Text3: ; 593de (16:53de)
 Route10BattleText3: ; 593e8 (16:53e8)
 	TX_FAR _Route10BattleText3
 	db "@"
-; 0x593e8 + 5 bytes
 
 Route10EndBattleText3: ; 593ed (16:53ed)
 	TX_FAR _Route10EndBattleText3
 	db "@"
-; 0x593ed + 5 bytes
 
 Route10AfterBattleText3: ; 593f2 (16:53f2)
 	TX_FAR _Route10AfterBattleText3
 	db "@"
-; 0x593f2 + 5 bytes
 
 Route10Text4: ; 593f7 (16:53f7)
 	db $08 ; asm
@@ -88692,17 +86476,14 @@ Route10Text4: ; 593f7 (16:53f7)
 Route10BattleText4: ; 59401 (16:5401)
 	TX_FAR _Route10BattleText4
 	db "@"
-; 0x59401 + 5 bytes
 
 Route10EndBattleText4: ; 59406 (16:5406)
 	TX_FAR _Route10EndBattleText4
 	db "@"
-; 0x59406 + 5 bytes
 
 Route10AfterBattleText4: ; 5940b (16:540b)
 	TX_FAR _Route10AfterBattleText4
 	db "@"
-; 0x5940b + 5 bytes
 
 Route10Text5: ; 59410 (16:5410)
 	db $08 ; asm
@@ -88713,17 +86494,14 @@ Route10Text5: ; 59410 (16:5410)
 Route10BattleText5: ; 5941a (16:541a)
 	TX_FAR _Route10BattleText5
 	db "@"
-; 0x5941a + 5 bytes
 
 Route10EndBattleText5: ; 5941f (16:541f)
 	TX_FAR _Route10EndBattleText5
 	db "@"
-; 0x5941f + 5 bytes
 
 Route10AfterBattleText5: ; 59424 (16:5424)
 	TX_FAR _Route10AfterBattleText5
 	db "@"
-; 0x59424 + 5 bytes
 
 Route10Text6: ; 59429 (16:5429)
 	db $08 ; asm
@@ -88734,17 +86512,14 @@ Route10Text6: ; 59429 (16:5429)
 Route10BattleText6: ; 59433 (16:5433)
 	TX_FAR _Route10BattleText6
 	db "@"
-; 0x59433 + 5 bytes
 
 Route10EndBattleText6: ; 59438 (16:5438)
 	TX_FAR _Route10EndBattleText6
 	db "@"
-; 0x59438 + 5 bytes
 
 Route10AfterBattleText6: ; 5943d (16:543d)
 	TX_FAR _Route10AfterBattleText6
 	db "@"
-; 0x5943d + 5 bytes
 
 Route10Text9: ; 59442 (16:5442)
 Route10Text7: ; 59442 (16:5442)
@@ -88763,7 +86538,6 @@ Route11Script: ; 5944c (16:544c)
 	call ExecuteCurMapScriptInTable
 	ld [W_ROUTE11CURSCRIPT], a
 	ret
-; 0x5945f
 
 Route11_Unknown5945f: ; 5945f (16:545f)
 	dw CheckFightingMapTrainers
@@ -88782,7 +86556,6 @@ Route11TrainerHeader0: ; 5947b (16:547b)
 	dw Route11AfterBattleText1 ; 0x5508 TextAfterBattle
 	dw Route11EndBattleText1 ; 0x5503 TextEndBattle
 	dw Route11EndBattleText1 ; 0x5503 TextEndBattle
-; 0x59487
 
 Route11TrainerHeader1: ; 59487 (16:5487)
 	db $2 ; flag's bit
@@ -88792,7 +86565,6 @@ Route11TrainerHeader1: ; 59487 (16:5487)
 	dw Route11AfterBattleText2 ; 0x5521 TextAfterBattle
 	dw Route11EndBattleText2 ; 0x551c TextEndBattle
 	dw Route11EndBattleText2 ; 0x551c TextEndBattle
-; 0x59493
 
 Route11TrainerHeader2: ; 59493 (16:5493)
 	db $3 ; flag's bit
@@ -88802,7 +86574,6 @@ Route11TrainerHeader2: ; 59493 (16:5493)
 	dw Route11AfterBattleText3 ; 0x553a TextAfterBattle
 	dw Route11EndBattleText3 ; 0x5535 TextEndBattle
 	dw Route11EndBattleText3 ; 0x5535 TextEndBattle
-; 0x5949f
 
 Route11TrainerHeader3: ; 5949f (16:549f)
 	db $4 ; flag's bit
@@ -88812,7 +86583,6 @@ Route11TrainerHeader3: ; 5949f (16:549f)
 	dw Route11AfterBattleText4 ; 0x5553 TextAfterBattle
 	dw Route11EndBattleText4 ; 0x554e TextEndBattle
 	dw Route11EndBattleText4 ; 0x554e TextEndBattle
-; 0x594ab
 
 Route11TrainerHeader4: ; 594ab (16:54ab)
 	db $5 ; flag's bit
@@ -88822,7 +86592,6 @@ Route11TrainerHeader4: ; 594ab (16:54ab)
 	dw Route11AfterBattleText5 ; 0x556c TextAfterBattle
 	dw Route11EndBattleText5 ; 0x5567 TextEndBattle
 	dw Route11EndBattleText5 ; 0x5567 TextEndBattle
-; 0x594b7
 
 Route11TrainerHeader5: ; 594b7 (16:54b7)
 	db $6 ; flag's bit
@@ -88832,7 +86601,6 @@ Route11TrainerHeader5: ; 594b7 (16:54b7)
 	dw Route11AfterBattleText6 ; 0x5585 TextAfterBattle
 	dw Route11EndBattleText6 ; 0x5580 TextEndBattle
 	dw Route11EndBattleText6 ; 0x5580 TextEndBattle
-; 0x594c3
 
 Route11TrainerHeader6: ; 594c3 (16:54c3)
 	db $7 ; flag's bit
@@ -88842,7 +86610,6 @@ Route11TrainerHeader6: ; 594c3 (16:54c3)
 	dw Route11AfterBattleText7 ; 0x559e TextAfterBattle
 	dw Route11EndBattleText7 ; 0x5599 TextEndBattle
 	dw Route11EndBattleText7 ; 0x5599 TextEndBattle
-; 0x594cf
 
 Route11TrainerHeader7: ; 594cf (16:54cf)
 	db $8 ; flag's bit
@@ -88852,7 +86619,6 @@ Route11TrainerHeader7: ; 594cf (16:54cf)
 	dw Route11AfterBattleText8 ; 0x55b7 TextAfterBattle
 	dw Route11EndBattleText8 ; 0x55b2 TextEndBattle
 	dw Route11EndBattleText8 ; 0x55b2 TextEndBattle
-; 0x594db
 
 Route11TrainerHeader8: ; 594db (16:54db)
 	db $9 ; flag's bit
@@ -88862,7 +86628,6 @@ Route11TrainerHeader8: ; 594db (16:54db)
 	dw Route11AfterBattleText9 ; 0x55d0 TextAfterBattle
 	dw Route11EndBattleText9 ; 0x55cb TextEndBattle
 	dw Route11EndBattleText9 ; 0x55cb TextEndBattle
-; 0x594e7
 
 Route11TrainerHeader9: ; 594e7 (16:54e7)
 	db $a ; flag's bit
@@ -88872,7 +86637,6 @@ Route11TrainerHeader9: ; 594e7 (16:54e7)
 	dw Route11AfterBattleText10 ; 0x55e9 TextAfterBattle
 	dw Route11EndBattleText10 ; 0x55e4 TextEndBattle
 	dw Route11EndBattleText10 ; 0x55e4 TextEndBattle
-; 0x594f3
 
 db $ff
 
@@ -88881,22 +86645,18 @@ UnnamedText_594f4: ; 594f4 (16:54f4)
 	ld hl, Route11TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
-; 0x594fe
 
 Route11BattleText1: ; 594fe (16:54fe)
 	TX_FAR _Route11BattleText1
 	db "@"
-; 0x594fe + 5 bytes
 
 Route11EndBattleText1: ; 59503 (16:5503)
 	TX_FAR _Route11EndBattleText1
 	db "@"
-; 0x59503 + 5 bytes
 
 Route11AfterBattleText1: ; 59508 (16:5508)
 	TX_FAR _Route11AfterBattleText1
 	db "@"
-; 0x59508 + 5 bytes
 
 Route11Text2: ; 5950d (16:550d)
 	db $08 ; asm
@@ -88907,17 +86667,14 @@ Route11Text2: ; 5950d (16:550d)
 Route11BattleText2: ; 59517 (16:5517)
 	TX_FAR _Route11BattleText2
 	db "@"
-; 0x59517 + 5 bytes
 
 Route11EndBattleText2: ; 5951c (16:551c)
 	TX_FAR _Route11EndBattleText2
 	db "@"
-; 0x5951c + 5 bytes
 
 Route11AfterBattleText2: ; 59521 (16:5521)
 	TX_FAR _Route11AfterBattleText2
 	db "@"
-; 0x59521 + 5 bytes
 
 Route11Text3: ; 59526 (16:5526)
 	db $08 ; asm
@@ -88928,17 +86685,14 @@ Route11Text3: ; 59526 (16:5526)
 Route11BattleText3: ; 59530 (16:5530)
 	TX_FAR _Route11BattleText3
 	db "@"
-; 0x59530 + 5 bytes
 
 Route11EndBattleText3: ; 59535 (16:5535)
 	TX_FAR _Route11EndBattleText3
 	db "@"
-; 0x59535 + 5 bytes
 
 Route11AfterBattleText3: ; 5953a (16:553a)
 	TX_FAR _Route11AfterBattleText3
 	db "@"
-; 0x5953a + 5 bytes
 
 Route11Text4: ; 5953f (16:553f)
 	db $08 ; asm
@@ -88949,17 +86703,14 @@ Route11Text4: ; 5953f (16:553f)
 Route11BattleText4: ; 59549 (16:5549)
 	TX_FAR _Route11BattleText4
 	db "@"
-; 0x59549 + 5 bytes
 
 Route11EndBattleText4: ; 5954e (16:554e)
 	TX_FAR _Route11EndBattleText4
 	db "@"
-; 0x5954e + 5 bytes
 
 Route11AfterBattleText4: ; 59553 (16:5553)
 	TX_FAR _Route11AfterBattleText4
 	db "@"
-; 0x59553 + 5 bytes
 
 Route11Text5: ; 59558 (16:5558)
 	db $08 ; asm
@@ -88970,17 +86721,14 @@ Route11Text5: ; 59558 (16:5558)
 Route11BattleText5: ; 59562 (16:5562)
 	TX_FAR _Route11BattleText5
 	db "@"
-; 0x59562 + 5 bytes
 
 Route11EndBattleText5: ; 59567 (16:5567)
 	TX_FAR _Route11EndBattleText5
 	db "@"
-; 0x59567 + 5 bytes
 
 Route11AfterBattleText5: ; 5956c (16:556c)
 	TX_FAR _Route11AfterBattleText5
 	db "@"
-; 0x5956c + 5 bytes
 
 Route11Text6: ; 59571 (16:5571)
 	db $08 ; asm
@@ -88991,17 +86739,14 @@ Route11Text6: ; 59571 (16:5571)
 Route11BattleText6: ; 5957b (16:557b)
 	TX_FAR _Route11BattleText6
 	db "@"
-; 0x5957b + 5 bytes
 
 Route11EndBattleText6: ; 59580 (16:5580)
 	TX_FAR _Route11EndBattleText6
 	db "@"
-; 0x59580 + 5 bytes
 
 Route11AfterBattleText6: ; 59585 (16:5585)
 	TX_FAR _Route11AfterBattleText6
 	db "@"
-; 0x59585 + 5 bytes
 
 Route11Text7: ; 5958a (16:558a)
 	db $08 ; asm
@@ -89012,17 +86757,14 @@ Route11Text7: ; 5958a (16:558a)
 Route11BattleText7: ; 59594 (16:5594)
 	TX_FAR _Route11BattleText7
 	db "@"
-; 0x59594 + 5 bytes
 
 Route11EndBattleText7: ; 59599 (16:5599)
 	TX_FAR _Route11EndBattleText7
 	db "@"
-; 0x59599 + 5 bytes
 
 Route11AfterBattleText7: ; 5959e (16:559e)
 	TX_FAR _Route11AfterBattleText7
 	db "@"
-; 0x5959e + 5 bytes
 
 Route11Text8: ; 595a3 (16:55a3)
 	db $08 ; asm
@@ -89033,17 +86775,14 @@ Route11Text8: ; 595a3 (16:55a3)
 Route11BattleText8: ; 595ad (16:55ad)
 	TX_FAR _Route11BattleText8
 	db "@"
-; 0x595ad + 5 bytes
 
 Route11EndBattleText8: ; 595b2 (16:55b2)
 	TX_FAR _Route11EndBattleText8
 	db "@"
-; 0x595b2 + 5 bytes
 
 Route11AfterBattleText8: ; 595b7 (16:55b7)
 	TX_FAR _Route11AfterBattleText8
 	db "@"
-; 0x595b7 + 5 bytes
 
 Route11Text9: ; 595bc (16:55bc)
 	db $08 ; asm
@@ -89054,17 +86793,14 @@ Route11Text9: ; 595bc (16:55bc)
 Route11BattleText9: ; 595c6 (16:55c6)
 	TX_FAR _Route11BattleText9
 	db "@"
-; 0x595c6 + 5 bytes
 
 Route11EndBattleText9: ; 595cb (16:55cb)
 	TX_FAR _Route11EndBattleText9
 	db "@"
-; 0x595cb + 5 bytes
 
 Route11AfterBattleText9: ; 595d0 (16:55d0)
 	TX_FAR _Route11AfterBattleText9
 	db "@"
-; 0x595d0 + 5 bytes
 
 Route11Text10: ; 595d5 (16:55d5)
 	db $08 ; asm
@@ -89075,17 +86811,14 @@ Route11Text10: ; 595d5 (16:55d5)
 Route11BattleText10: ; 595df (16:55df)
 	TX_FAR _Route11BattleText10
 	db "@"
-; 0x595df + 5 bytes
 
 Route11EndBattleText10: ; 595e4 (16:55e4)
 	TX_FAR _Route11EndBattleText10
 	db "@"
-; 0x595e4 + 5 bytes
 
 Route11AfterBattleText10: ; 595e9 (16:55e9)
 	TX_FAR _Route11AfterBattleText10
 	db "@"
-; 0x595e9 + 5 bytes
 
 Route11Text11: ; 595ee (16:55ee)
 	TX_FAR _Route11Text11
@@ -89148,7 +86881,7 @@ INCBIN "baserom.gbc",$59611,$59619 - $59611
 	ld [W_ROUTE12CURSCRIPT], a
 	ld [W_CURMAPSCRIPT], a
 	ret
-; 59675 (16:5675)
+
 Route12Texts: ; 59675 (16:5675)
 	dw Route12Text1, Route12Text2, Route12Text3, Route12Text4, Route12Text5, Route12Text6, Route12Text7, Route12Text8, Predef5CText, Predef5CText, Route12Text11, Route12Text12, Route12Text13, Route12Text14
 
@@ -89161,7 +86894,6 @@ Route12TrainerHeader0: ; 59691 (16:5691)
 	dw Route12AfterBattleText1 ; 0x5709 TextAfterBattle
 	dw Route12EndBattleText1 ; 0x5704 TextEndBattle
 	dw Route12EndBattleText1 ; 0x5704 TextEndBattle
-; 0x5969d
 
 Route12TrainerHeader1: ; 5969d (16:569d)
 	db $3 ; flag's bit
@@ -89171,7 +86903,6 @@ Route12TrainerHeader1: ; 5969d (16:569d)
 	dw Route12AfterBattleText2 ; 0x5722 TextAfterBattle
 	dw Route12EndBattleText2 ; 0x571d TextEndBattle
 	dw Route12EndBattleText2 ; 0x571d TextEndBattle
-; 0x596a9
 
 Route12TrainerHeader2: ; 596a9 (16:56a9)
 	db $4 ; flag's bit
@@ -89181,7 +86912,6 @@ Route12TrainerHeader2: ; 596a9 (16:56a9)
 	dw Route12AfterBattleText3 ; 0x573b TextAfterBattle
 	dw Route12EndBattleText3 ; 0x5736 TextEndBattle
 	dw Route12EndBattleText3 ; 0x5736 TextEndBattle
-; 0x596b5
 
 Route12TrainerHeader3: ; 596b5 (16:56b5)
 	db $5 ; flag's bit
@@ -89191,7 +86921,6 @@ Route12TrainerHeader3: ; 596b5 (16:56b5)
 	dw Route12AfterBattleText4 ; 0x5754 TextAfterBattle
 	dw Route12EndBattleText4 ; 0x574f TextEndBattle
 	dw Route12EndBattleText4 ; 0x574f TextEndBattle
-; 0x596c1
 
 Route12TrainerHeader4: ; 596c1 (16:56c1)
 	db $6 ; flag's bit
@@ -89201,7 +86930,6 @@ Route12TrainerHeader4: ; 596c1 (16:56c1)
 	dw Route12AfterBattleText5 ; 0x576d TextAfterBattle
 	dw Route12EndBattleText5 ; 0x5768 TextEndBattle
 	dw Route12EndBattleText5 ; 0x5768 TextEndBattle
-; 0x596cd
 
 Route12TrainerHeader5: ; 596cd (16:56cd)
 	db $7 ; flag's bit
@@ -89211,7 +86939,6 @@ Route12TrainerHeader5: ; 596cd (16:56cd)
 	dw Route12AfterBattleText6 ; 0x5786 TextAfterBattle
 	dw Route12EndBattleText6 ; 0x5781 TextEndBattle
 	dw Route12EndBattleText6 ; 0x5781 TextEndBattle
-; 0x596d9
 
 Route12TrainerHeader6: ; 596d9 (16:56d9)
 	db $8 ; flag's bit
@@ -89221,7 +86948,6 @@ Route12TrainerHeader6: ; 596d9 (16:56d9)
 	dw Route12AfterBattleText7 ; 0x579f TextAfterBattle
 	dw Route12EndBattleText7 ; 0x579a TextEndBattle
 	dw Route12EndBattleText7 ; 0x579a TextEndBattle
-; 0x596e5
 
 db $ff
 
@@ -89233,13 +86959,11 @@ Route12Text13: ; 596eb (16:56eb)
 UnnamedText_596eb: ; 596eb (16:56eb)
 	TX_FAR _UnnamedText_596eb
 	db "@"
-; 0x596eb + 5 bytes
 
 Route12Text14: ; 596f0 (16:56f0)
 UnnamedText_596f0: ; 596f0 (16:56f0)
 	TX_FAR _UnnamedText_596f0
 	db "@"
-; 0x596f0 + 5 bytes
 
 Route12Text2: ; 596f5 (16:56f5)
 	db $08 ; asm
@@ -89250,17 +86974,14 @@ Route12Text2: ; 596f5 (16:56f5)
 Route12BattleText1: ; 596ff (16:56ff)
 	TX_FAR _Route12BattleText1
 	db "@"
-; 0x596ff + 5 bytes
 
 Route12EndBattleText1: ; 59704 (16:5704)
 	TX_FAR _Route12EndBattleText1
 	db "@"
-; 0x59704 + 5 bytes
 
 Route12AfterBattleText1: ; 59709 (16:5709)
 	TX_FAR _Route12AfterBattleText1
 	db "@"
-; 0x59709 + 5 bytes
 
 Route12Text3: ; 5970e (16:570e)
 	db $08 ; asm
@@ -89271,17 +86992,14 @@ Route12Text3: ; 5970e (16:570e)
 Route12BattleText2: ; 59718 (16:5718)
 	TX_FAR _Route12BattleText2
 	db "@"
-; 0x59718 + 5 bytes
 
 Route12EndBattleText2: ; 5971d (16:571d)
 	TX_FAR _Route12EndBattleText2
 	db "@"
-; 0x5971d + 5 bytes
 
 Route12AfterBattleText2: ; 59722 (16:5722)
 	TX_FAR _Route12AfterBattleText2
 	db "@"
-; 0x59722 + 5 bytes
 
 Route12Text4: ; 59727 (16:5727)
 	db $08 ; asm
@@ -89292,17 +87010,14 @@ Route12Text4: ; 59727 (16:5727)
 Route12BattleText3: ; 59731 (16:5731)
 	TX_FAR _Route12BattleText3
 	db "@"
-; 0x59731 + 5 bytes
 
 Route12EndBattleText3: ; 59736 (16:5736)
 	TX_FAR _Route12EndBattleText3
 	db "@"
-; 0x59736 + 5 bytes
 
 Route12AfterBattleText3: ; 5973b (16:573b)
 	TX_FAR _Route12AfterBattleText3
 	db "@"
-; 0x5973b + 5 bytes
 
 Route12Text5: ; 59740 (16:5740)
 	db $08 ; asm
@@ -89313,17 +87028,14 @@ Route12Text5: ; 59740 (16:5740)
 Route12BattleText4: ; 5974a (16:574a)
 	TX_FAR _Route12BattleText4
 	db "@"
-; 0x5974a + 5 bytes
 
 Route12EndBattleText4: ; 5974f (16:574f)
 	TX_FAR _Route12EndBattleText4
 	db "@"
-; 0x5974f + 5 bytes
 
 Route12AfterBattleText4: ; 59754 (16:5754)
 	TX_FAR _Route12AfterBattleText4
 	db "@"
-; 0x59754 + 5 bytes
 
 Route12Text6: ; 59759 (16:5759)
 	db $08 ; asm
@@ -89334,17 +87046,14 @@ Route12Text6: ; 59759 (16:5759)
 Route12BattleText5: ; 59763 (16:5763)
 	TX_FAR _Route12BattleText5
 	db "@"
-; 0x59763 + 5 bytes
 
 Route12EndBattleText5: ; 59768 (16:5768)
 	TX_FAR _Route12EndBattleText5
 	db "@"
-; 0x59768 + 5 bytes
 
 Route12AfterBattleText5: ; 5976d (16:576d)
 	TX_FAR _Route12AfterBattleText5
 	db "@"
-; 0x5976d + 5 bytes
 
 Route12Text7: ; 59772 (16:5772)
 	db $08 ; asm
@@ -89355,17 +87064,14 @@ Route12Text7: ; 59772 (16:5772)
 Route12BattleText6: ; 5977c (16:577c)
 	TX_FAR _Route12BattleText6
 	db "@"
-; 0x5977c + 5 bytes
 
 Route12EndBattleText6: ; 59781 (16:5781)
 	TX_FAR _Route12EndBattleText6
 	db "@"
-; 0x59781 + 5 bytes
 
 Route12AfterBattleText6: ; 59786 (16:5786)
 	TX_FAR _Route12AfterBattleText6
 	db "@"
-; 0x59786 + 5 bytes
 
 Route12Text8: ; 5978b (16:578b)
 	db $08 ; asm
@@ -89376,17 +87082,14 @@ Route12Text8: ; 5978b (16:578b)
 Route12BattleText7: ; 59795 (16:5795)
 	TX_FAR _Route12BattleText7
 	db "@"
-; 0x59795 + 5 bytes
 
 Route12EndBattleText7: ; 5979a (16:579a)
 	TX_FAR _Route12EndBattleText7
 	db "@"
-; 0x5979a + 5 bytes
 
 Route12AfterBattleText7: ; 5979f (16:579f)
 	TX_FAR _Route12AfterBattleText7
 	db "@"
-; 0x5979f + 5 bytes
 
 Route12Text11: ; 597a4 (16:57a4)
 	TX_FAR _Route12Text11
@@ -89404,7 +87107,6 @@ Route15Script: ; 597ae (16:57ae)
 	call ExecuteCurMapScriptInTable
 	ld [W_ROUTE15CURSCRIPT], a
 	ret
-; 0x597c1
 
 Route15_Unknown597c1: ; 597c1 (16:57c1)
 INCBIN "baserom.gbc",$597c1,$597c7 - $597c1
@@ -89421,7 +87123,6 @@ Route15TrainerHeader0: ; 597df (16:57df)
 	dw Route15AfterBattleText1 ; 0x58a2 TextAfterBattle
 	dw Route15EndBattleText1 ; 0x589d TextEndBattle
 	dw Route15EndBattleText1 ; 0x589d TextEndBattle
-; 0x597eb
 
 Route15TrainerHeader1: ; 597eb (16:57eb)
 	db $2 ; flag's bit
@@ -89431,7 +87132,6 @@ Route15TrainerHeader1: ; 597eb (16:57eb)
 	dw Route15AfterBattleText2 ; 0x58b1 TextAfterBattle
 	dw Route15EndBattleText2 ; 0x58ac TextEndBattle
 	dw Route15EndBattleText2 ; 0x58ac TextEndBattle
-; 0x597f7
 
 Route15TrainerHeader2: ; 597f7 (16:57f7)
 	db $3 ; flag's bit
@@ -89441,7 +87141,6 @@ Route15TrainerHeader2: ; 597f7 (16:57f7)
 	dw Route15AfterBattleText3 ; 0x58c0 TextAfterBattle
 	dw Route15EndBattleText3 ; 0x58bb TextEndBattle
 	dw Route15EndBattleText3 ; 0x58bb TextEndBattle
-; 0x59803
 
 Route15TrainerHeader3: ; 59803 (16:5803)
 	db $4 ; flag's bit
@@ -89451,7 +87150,6 @@ Route15TrainerHeader3: ; 59803 (16:5803)
 	dw Route15AfterBattleText4 ; 0x58cf TextAfterBattle
 	dw Route15EndBattleText4 ; 0x58ca TextEndBattle
 	dw Route15EndBattleText4 ; 0x58ca TextEndBattle
-; 0x5980f
 
 Route15TrainerHeader4: ; 5980f (16:580f)
 	db $5 ; flag's bit
@@ -89461,7 +87159,6 @@ Route15TrainerHeader4: ; 5980f (16:580f)
 	dw Route15AfterBattleText5 ; 0x58de TextAfterBattle
 	dw Route15EndBattleText5 ; 0x58d9 TextEndBattle
 	dw Route15EndBattleText5 ; 0x58d9 TextEndBattle
-; 0x5981b
 
 Route15TrainerHeader5: ; 5981b (16:581b)
 	db $6 ; flag's bit
@@ -89471,7 +87168,6 @@ Route15TrainerHeader5: ; 5981b (16:581b)
 	dw Route15AfterBattleText6 ; 0x58ed TextAfterBattle
 	dw Route15EndBattleText6 ; 0x58e8 TextEndBattle
 	dw Route15EndBattleText6 ; 0x58e8 TextEndBattle
-; 0x59827
 
 Route15TrainerHeader6: ; 59827 (16:5827)
 	db $7 ; flag's bit
@@ -89481,7 +87177,6 @@ Route15TrainerHeader6: ; 59827 (16:5827)
 	dw Route15AfterBattleText7 ; 0x58fc TextAfterBattle
 	dw Route15EndBattleText7 ; 0x58f7 TextEndBattle
 	dw Route15EndBattleText7 ; 0x58f7 TextEndBattle
-; 0x59833
 
 Route15TrainerHeader7: ; 59833 (16:5833)
 	db $8 ; flag's bit
@@ -89491,7 +87186,6 @@ Route15TrainerHeader7: ; 59833 (16:5833)
 	dw Route15AfterBattleText8 ; 0x590b TextAfterBattle
 	dw Route15EndBattleText8 ; 0x5906 TextEndBattle
 	dw Route15EndBattleText8 ; 0x5906 TextEndBattle
-; 0x5983f
 
 Route15TrainerHeader8: ; 5983f (16:583f)
 	db $9 ; flag's bit
@@ -89501,7 +87195,6 @@ Route15TrainerHeader8: ; 5983f (16:583f)
 	dw Route15AfterBattleText9 ; 0x591a TextAfterBattle
 	dw Route15EndBattleText9 ; 0x5915 TextEndBattle
 	dw Route15EndBattleText9 ; 0x5915 TextEndBattle
-; 0x5984b
 
 Route15TrainerHeader9: ; 5984b (16:584b)
 	db $a ; flag's bit
@@ -89511,7 +87204,6 @@ Route15TrainerHeader9: ; 5984b (16:584b)
 	dw Route15AfterBattleText10 ; 0x5929 TextAfterBattle
 	dw Route15EndBattleText10 ; 0x5924 TextEndBattle
 	dw Route15EndBattleText10 ; 0x5924 TextEndBattle
-; 0x59857
 
 db $ff
 
@@ -89566,157 +87258,126 @@ Route15Text10: ; 5988e (16:588e)
 asm_33cb7: ; 59892 (16:5892)
 	call TalkToTrainer
 	jp TextScriptEnd
-; 0x59898
 
 Route15BattleText1: ; 59898 (16:5898)
 	TX_FAR _Route15BattleText1
 	db "@"
-; 0x59898 + 5 bytes
 
 Route15EndBattleText1: ; 5989d (16:589d)
 	TX_FAR _Route15EndBattleText1
 	db "@"
-; 0x5989d + 5 bytes
 
 Route15AfterBattleText1: ; 598a2 (16:58a2)
 	TX_FAR _Route15AfterBattleText1
 	db "@"
-; 0x598a2 + 5 bytes
 
 Route15BattleText2: ; 598a7 (16:58a7)
 	TX_FAR _Route15BattleText2
 	db "@"
-; 0x598a7 + 5 bytes
 
 Route15EndBattleText2: ; 598ac (16:58ac)
 	TX_FAR _Route15EndBattleText2
 	db "@"
-; 0x598ac + 5 bytes
 
 Route15AfterBattleText2: ; 598b1 (16:58b1)
 	TX_FAR _Route15AfterBattleText2
 	db "@"
-; 0x598b1 + 5 bytes
 
 Route15BattleText3: ; 598b6 (16:58b6)
 	TX_FAR _Route15BattleText3
 	db "@"
-; 0x598b6 + 5 bytes
 
 Route15EndBattleText3: ; 598bb (16:58bb)
 	TX_FAR _Route15EndBattleText3
 	db "@"
-; 0x598bb + 5 bytes
 
 Route15AfterBattleText3: ; 598c0 (16:58c0)
 	TX_FAR _Route15AfterBattleText3
 	db "@"
-; 0x598c0 + 5 bytes
 
 Route15BattleText4: ; 598c5 (16:58c5)
 	TX_FAR _Route15BattleText4
 	db "@"
-; 0x598c5 + 5 bytes
 
 Route15EndBattleText4: ; 598ca (16:58ca)
 	TX_FAR _Route15EndBattleText4
 	db "@"
-; 0x598ca + 5 bytes
 
 Route15AfterBattleText4: ; 598cf (16:58cf)
 	TX_FAR _Route15AfterBattleText4
 	db "@"
-; 0x598cf + 5 bytes
 
 Route15BattleText5: ; 598d4 (16:58d4)
 	TX_FAR _Route15BattleText5
 	db "@"
-; 0x598d4 + 5 bytes
 
 Route15EndBattleText5: ; 598d9 (16:58d9)
 	TX_FAR _Route15EndBattleText5
 	db "@"
-; 0x598d9 + 5 bytes
 
 Route15AfterBattleText5: ; 598de (16:58de)
 	TX_FAR _Route15AfterBattleText5
 	db "@"
-; 0x598de + 5 bytes
 
 Route15BattleText6: ; 598e3 (16:58e3)
 	TX_FAR _Route15BattleText6
 	db "@"
-; 0x598e3 + 5 bytes
 
 Route15EndBattleText6: ; 598e8 (16:58e8)
 	TX_FAR _Route15EndBattleText6
 	db "@"
-; 0x598e8 + 5 bytes
 
 Route15AfterBattleText6: ; 598ed (16:58ed)
 	TX_FAR _Route15AfterBattleText6
 	db "@"
-; 0x598ed + 5 bytes
 
 Route15BattleText7: ; 598f2 (16:58f2)
 	TX_FAR _Route15BattleText7
 	db "@"
-; 0x598f2 + 5 bytes
 
 Route15EndBattleText7: ; 598f7 (16:58f7)
 	TX_FAR _Route15EndBattleText7
 	db "@"
-; 0x598f7 + 5 bytes
 
 Route15AfterBattleText7: ; 598fc (16:58fc)
 	TX_FAR _Route15AfterBattleText7
 	db "@"
-; 0x598fc + 5 bytes
 
 Route15BattleText8: ; 59901 (16:5901)
 	TX_FAR _Route15BattleText8
 	db "@"
-; 0x59901 + 5 bytes
 
 Route15EndBattleText8: ; 59906 (16:5906)
 	TX_FAR _Route15EndBattleText8
 	db "@"
-; 0x59906 + 5 bytes
 
 Route15AfterBattleText8: ; 5990b (16:590b)
 	TX_FAR _Route15AfterBattleText8
 	db "@"
-; 0x5990b + 5 bytes
 
 Route15BattleText9: ; 59910 (16:5910)
 	TX_FAR _Route15BattleText9
 	db "@"
-; 0x59910 + 5 bytes
 
 Route15EndBattleText9: ; 59915 (16:5915)
 	TX_FAR _Route15EndBattleText9
 	db "@"
-; 0x59915 + 5 bytes
 
 Route15AfterBattleText9: ; 5991a (16:591a)
 	TX_FAR _Route15AfterBattleText9
 	db "@"
-; 0x5991a + 5 bytes
 
 Route15BattleText10: ; 5991f (16:591f)
 	TX_FAR _Route15BattleText10
 	db "@"
-; 0x5991f + 5 bytes
 
 Route15EndBattleText10: ; 59924 (16:5924)
 	TX_FAR _Route15EndBattleText10
 	db "@"
-; 0x59924 + 5 bytes
 
 Route15AfterBattleText10: ; 59929 (16:5929)
 	TX_FAR _Route15AfterBattleText10
 	db "@"
-; 0x59929 + 5 bytes
 
 Route15Text12: ; 5992e (16:592e)
 	TX_FAR _Route15Text12
@@ -89730,9 +87391,7 @@ Route16Script: ; 59933 (16:5933)
 	call ExecuteCurMapScriptInTable
 	ld [W_ROUTE16CURSCRIPT], a
 	ret
-; 0x59946
 
-; known jump sources: 59994 (16:5994)
 Func_59946: ; 59946 (16:5946)
 	xor a
 	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
@@ -89782,7 +87441,7 @@ INCBIN "baserom.gbc",$59951,$59959 - $59951
 	ld [W_ROUTE16CURSCRIPT], a
 	ld [W_CURMAPSCRIPT], a
 	ret
-; 599b9 (16:59b9)
+
 Route16Texts: ; 599b9 (16:59b9)
 	dw Route16Text1, Route16Text2, Route16Text3, Route16Text4, Route16Text5, Route16Text6, Route16Text7, Route16Text8, Route16Text9, Route16Text10, Route16Text11
 
@@ -89795,7 +87454,6 @@ Route16TrainerHeader0: ; 599cf (16:59cf)
 	dw Route16AfterBattleText1 ; 0x5a2c TextAfterBattle
 	dw Route16EndBattleText1 ; 0x5a27 TextEndBattle
 	dw Route16EndBattleText1 ; 0x5a27 TextEndBattle
-; 0x599db
 
 Route16TrainerHeader1: ; 599db (16:59db)
 	db $2 ; flag's bit
@@ -89805,7 +87463,6 @@ Route16TrainerHeader1: ; 599db (16:59db)
 	dw Route16AfterBattleText2 ; 0x5a45 TextAfterBattle
 	dw Route16EndBattleText2 ; 0x5a40 TextEndBattle
 	dw Route16EndBattleText2 ; 0x5a40 TextEndBattle
-; 0x599e7
 
 Route16TrainerHeader2: ; 599e7 (16:59e7)
 	db $3 ; flag's bit
@@ -89815,7 +87472,6 @@ Route16TrainerHeader2: ; 599e7 (16:59e7)
 	dw Route16AfterBattleText3 ; 0x5a5e TextAfterBattle
 	dw Route16EndBattleText3 ; 0x5a59 TextEndBattle
 	dw Route16EndBattleText3 ; 0x5a59 TextEndBattle
-; 0x599f3
 
 Route16TrainerHeader3: ; 599f3 (16:59f3)
 	db $4 ; flag's bit
@@ -89825,7 +87481,6 @@ Route16TrainerHeader3: ; 599f3 (16:59f3)
 	dw Route16AfterBattleText4 ; 0x5a77 TextAfterBattle
 	dw Route16EndBattleText4 ; 0x5a72 TextEndBattle
 	dw Route16EndBattleText4 ; 0x5a72 TextEndBattle
-; 0x599ff
 
 Route16TrainerHeader4: ; 599ff (16:59ff)
 	db $5 ; flag's bit
@@ -89835,7 +87490,6 @@ Route16TrainerHeader4: ; 599ff (16:59ff)
 	dw Route16AfterBattleText5 ; 0x5a90 TextAfterBattle
 	dw Route16EndBattleText5 ; 0x5a8b TextEndBattle
 	dw Route16EndBattleText5 ; 0x5a8b TextEndBattle
-; 0x59a0b
 
 Route16TrainerHeader5: ; 59a0b (16:5a0b)
 	db $6 ; flag's bit
@@ -89845,7 +87499,6 @@ Route16TrainerHeader5: ; 59a0b (16:5a0b)
 	dw Route16AfterBattleText6 ; 0x5aa9 TextAfterBattle
 	dw Route16EndBattleText6 ; 0x5aa4 TextEndBattle
 	dw Route16EndBattleText6 ; 0x5aa4 TextEndBattle
-; 0x59a17
 
 db $ff
 
@@ -89858,17 +87511,14 @@ Route16Text1: ; 59a18 (16:5a18)
 Route16BattleText1: ; 59a22 (16:5a22)
 	TX_FAR _Route16BattleText1
 	db "@"
-; 0x59a22 + 5 bytes
 
 Route16EndBattleText1: ; 59a27 (16:5a27)
 	TX_FAR _Route16EndBattleText1
 	db "@"
-; 0x59a27 + 5 bytes
 
 Route16AfterBattleText1: ; 59a2c (16:5a2c)
 	TX_FAR _Route16AfterBattleText1
 	db "@"
-; 0x59a2c + 5 bytes
 
 Route16Text2: ; 59a31 (16:5a31)
 	db $08 ; asm
@@ -89879,17 +87529,14 @@ Route16Text2: ; 59a31 (16:5a31)
 Route16BattleText2: ; 59a3b (16:5a3b)
 	TX_FAR _Route16BattleText2
 	db "@"
-; 0x59a3b + 5 bytes
 
 Route16EndBattleText2: ; 59a40 (16:5a40)
 	TX_FAR _Route16EndBattleText2
 	db "@"
-; 0x59a40 + 5 bytes
 
 Route16AfterBattleText2: ; 59a45 (16:5a45)
 	TX_FAR _Route16AfterBattleText2
 	db "@"
-; 0x59a45 + 5 bytes
 
 Route16Text3: ; 59a4a (16:5a4a)
 	db $08 ; asm
@@ -89900,17 +87547,14 @@ Route16Text3: ; 59a4a (16:5a4a)
 Route16BattleText3: ; 59a54 (16:5a54)
 	TX_FAR _Route16BattleText3
 	db "@"
-; 0x59a54 + 5 bytes
 
 Route16EndBattleText3: ; 59a59 (16:5a59)
 	TX_FAR _Route16EndBattleText3
 	db "@"
-; 0x59a59 + 5 bytes
 
 Route16AfterBattleText3: ; 59a5e (16:5a5e)
 	TX_FAR _Route16AfterBattleText3
 	db "@"
-; 0x59a5e + 5 bytes
 
 Route16Text4: ; 59a63 (16:5a63)
 	db $08 ; asm
@@ -89921,17 +87565,14 @@ Route16Text4: ; 59a63 (16:5a63)
 Route16BattleText4: ; 59a6d (16:5a6d)
 	TX_FAR _Route16BattleText4
 	db "@"
-; 0x59a6d + 5 bytes
 
 Route16EndBattleText4: ; 59a72 (16:5a72)
 	TX_FAR _Route16EndBattleText4
 	db "@"
-; 0x59a72 + 5 bytes
 
 Route16AfterBattleText4: ; 59a77 (16:5a77)
 	TX_FAR _Route16AfterBattleText4
 	db "@"
-; 0x59a77 + 5 bytes
 
 Route16Text5: ; 59a7c (16:5a7c)
 	db $08 ; asm
@@ -89942,17 +87583,14 @@ Route16Text5: ; 59a7c (16:5a7c)
 Route16BattleText5: ; 59a86 (16:5a86)
 	TX_FAR _Route16BattleText5
 	db "@"
-; 0x59a86 + 5 bytes
 
 Route16EndBattleText5: ; 59a8b (16:5a8b)
 	TX_FAR _Route16EndBattleText5
 	db "@"
-; 0x59a8b + 5 bytes
 
 Route16AfterBattleText5: ; 59a90 (16:5a90)
 	TX_FAR _Route16AfterBattleText5
 	db "@"
-; 0x59a90 + 5 bytes
 
 Route16Text6: ; 59a95 (16:5a95)
 	db $08 ; asm
@@ -89963,17 +87601,14 @@ Route16Text6: ; 59a95 (16:5a95)
 Route16BattleText6: ; 59a9f (16:5a9f)
 	TX_FAR _Route16BattleText6
 	db "@"
-; 0x59a9f + 5 bytes
 
 Route16EndBattleText6: ; 59aa4 (16:5aa4)
 	TX_FAR _Route16EndBattleText6
 	db "@"
-; 0x59aa4 + 5 bytes
 
 Route16AfterBattleText6: ; 59aa9 (16:5aa9)
 	TX_FAR _Route16AfterBattleText6
 	db "@"
-; 0x59aa9 + 5 bytes
 
 Route16Text7: ; 59aae (16:5aae)
 	TX_FAR _Route16Text7
@@ -89982,12 +87617,10 @@ Route16Text7: ; 59aae (16:5aae)
 Route16Text10: ; 59ab3 (16:5ab3)
 	TX_FAR _UnnamedText_59ab3
 	db "@"
-; 0x59ab3 + 5 bytes
 
 Route16Text11: ; 59ab8 (16:5ab8)
 	TX_FAR _UnnamedText_59ab8
 	db "@"
-; 0x59ab8 + 5 bytes
 
 Route16Text8: ; 59abd (16:5abd)
 	TX_FAR _Route16Text8
@@ -90005,7 +87638,6 @@ Route18Script: ; 59ac7 (16:5ac7)
 	call ExecuteCurMapScriptInTable
 	ld [W_ROUTE18CURSCRIPT], a
 	ret
-; 0x59ada
 
 Route18_Unknown59ada: ; 59ada (16:5ada)
 INCBIN "baserom.gbc",$59ada,$59ae0 - $59ada
@@ -90022,7 +87654,6 @@ Route18TrainerHeader0: ; 59aea (16:5aea)
 	dw Route18AfterBattleText1 ; 0x5b23 TextAfterBattle
 	dw Route18EndBattleText1 ; 0x5b1e TextEndBattle
 	dw Route18EndBattleText1 ; 0x5b1e TextEndBattle
-; 0x59af6
 
 Route18TrainerHeader1: ; 59af6 (16:5af6)
 	db $2 ; flag's bit
@@ -90032,7 +87663,6 @@ Route18TrainerHeader1: ; 59af6 (16:5af6)
 	dw Route18AfterBattleText2 ; 0x5b3c TextAfterBattle
 	dw Route18EndBattleText2 ; 0x5b37 TextEndBattle
 	dw Route18EndBattleText2 ; 0x5b37 TextEndBattle
-; 0x59b02
 
 Route18TrainerHeader2: ; 59b02 (16:5b02)
 	db $3 ; flag's bit
@@ -90042,7 +87672,6 @@ Route18TrainerHeader2: ; 59b02 (16:5b02)
 	dw Route18AfterBattleText3 ; 0x5b55 TextAfterBattle
 	dw Route18EndBattleText3 ; 0x5b50 TextEndBattle
 	dw Route18EndBattleText3 ; 0x5b50 TextEndBattle
-; 0x59b0e
 
 db $ff
 
@@ -90055,17 +87684,14 @@ Route18Text1: ; 59b0f (16:5b0f)
 Route18BattleText1: ; 59b19 (16:5b19)
 	TX_FAR _Route18BattleText1
 	db "@"
-; 0x59b19 + 5 bytes
 
 Route18EndBattleText1: ; 59b1e (16:5b1e)
 	TX_FAR _Route18EndBattleText1
 	db "@"
-; 0x59b1e + 5 bytes
 
 Route18AfterBattleText1: ; 59b23 (16:5b23)
 	TX_FAR _Route18AfterBattleText1
 	db "@"
-; 0x59b23 + 5 bytes
 
 Route18Text2: ; 59b28 (16:5b28)
 	db $08 ; asm
@@ -90076,17 +87702,14 @@ Route18Text2: ; 59b28 (16:5b28)
 Route18BattleText2: ; 59b32 (16:5b32)
 	TX_FAR _Route18BattleText2
 	db "@"
-; 0x59b32 + 5 bytes
 
 Route18EndBattleText2: ; 59b37 (16:5b37)
 	TX_FAR _Route18EndBattleText2
 	db "@"
-; 0x59b37 + 5 bytes
 
 Route18AfterBattleText2: ; 59b3c (16:5b3c)
 	TX_FAR _Route18AfterBattleText2
 	db "@"
-; 0x59b3c + 5 bytes
 
 Route18Text3: ; 59b41 (16:5b41)
 	db $08 ; asm
@@ -90097,17 +87720,14 @@ Route18Text3: ; 59b41 (16:5b41)
 Route18BattleText3: ; 59b4b (16:5b4b)
 	TX_FAR _Route18BattleText3
 	db "@"
-; 0x59b4b + 5 bytes
 
 Route18EndBattleText3: ; 59b50 (16:5b50)
 	TX_FAR _Route18EndBattleText3
 	db "@"
-; 0x59b50 + 5 bytes
 
 Route18AfterBattleText3: ; 59b55 (16:5b55)
 	TX_FAR _Route18AfterBattleText3
 	db "@"
-; 0x59b55 + 5 bytes
 
 Route18Text4: ; 59b5a (16:5b5a)
 	TX_FAR _Route18Text4
@@ -90127,9 +87747,7 @@ FanClub_h: ; 0x59b64 to 0x59b70 (12 bytes) (id=90)
 
 FanClubScript: ; 59b70 (16:5b70)
 	jp EnableAutoTextBoxDrawing
-; 0x59b73
 
-; known jump sources: 59c1d (16:5c1d)
 Func_59b73: ; 59b73 (16:5b73)
 	ld a, [$d771]
 	bit 1, a
@@ -90139,7 +87757,7 @@ Func_59b73: ; 59b73 (16:5b73)
 	ret nz
 	ld b, $2d
 	jp IsItemInBag
-; 59b84 (16:5b84)
+
 FanClubTexts: ; 59b84 (16:5b84)
 	dw FanClubText1, FanClubText2, FanClubText3, FanClubText4, FanClubText5, FanClubText6, FanClubText7, FanClubText8
 
@@ -90164,12 +87782,10 @@ asm_64f01 ; 0x59bb4
 UnnamedText_59bb7: ; 59bb7 (16:5bb7)
 	TX_FAR _UnnamedText_59bb7
 	db "@"
-; 0x59bb7 + 5 bytes
 
 UnnamedText_59bbc: ; 59bbc (16:5bbc)
 	TX_FAR _UnnamedText_59bbc
 	db "@"
-; 0x59bbc + 5 bytes
 
 FanClubText2: ; 59bc1 (16:5bc1)
 	db $08 ; asm
@@ -90192,12 +87808,10 @@ asm_59625 ; 0x59be1
 UnnamedText_59be4: ; 59be4 (16:5be4)
 	TX_FAR _UnnamedText_59be4
 	db "@"
-; 0x59be4 + 5 bytes
 
 UnnamedText_59be9: ; 59be9 (16:5be9)
 	TX_FAR _UnnamedText_59be9
 	db "@"
-; 0x59be9 + 5 bytes
 
 FanClubText3: ; 59bee (16:5bee)
 	db $8
@@ -90207,12 +87821,10 @@ FanClubText3: ; 59bee (16:5bee)
 	call PlayCry
 	call WaitForSoundToFinish
 	jp TextScriptEnd
-; 0x59c00
 
 UnnamedText_59c00: ; 59c00 (16:5c00)
 	TX_FAR _UnnamedText_59c00
 	db "@"
-; 0x59c00 + 5 bytes
 
 FanClubText4: ; 59c05 (16:5c05)
 	db $08 ; asm
@@ -90226,7 +87838,6 @@ FanClubText4: ; 59c05 (16:5c05)
 UnnamedText_59c17: ; 59c17 (16:5c17)
 	TX_FAR _UnnamedText_59c17
 	db "@"
-; 0x59c17 + 5 bytes
 
 FanClubText5: ; 59c1c (16:5c1c)
 	db $08 ; asm
@@ -90265,34 +87876,28 @@ asm_d3c26 ; 0x59c62
 UnnamedText_59c65: ; 59c65 (16:5c65)
 	TX_FAR _UnnamedText_59c65
 	db "@"
-; 0x59c65 + 5 bytes
 
 UnnamedText_59c6a: ; 59c6a (16:5c6a)
 	TX_FAR _UnnamedText_59c6a
 	db "@"
-; 0x59c6a + 5 bytes
 
 ReceivedBikeVoucherText: ; 59c6f (16:5c6f)
 	TX_FAR _ReceivedBikeVoucherText ; 0x9a82e
 	db $11
 	TX_FAR _UnnamedText_59c74 ; 0x9a844
 	db "@"
-; 0x59c6f + 10 bytes = 0x59c79
 
 UnnamedText_59c79: ; 59c79 (16:5c79)
 	TX_FAR _UnnamedText_59c79
 	db "@"
-; 0x59c79 + 5 bytes
 
 UnnamedText_59c7e: ; 59c7e (16:5c7e)
 	TX_FAR _UnnamedText_59c7e
 	db "@"
-; 0x59c7e + 5 bytes
 
 UnnamedText_59c83: ; 59c83 (16:5c83)
 	TX_FAR _UnnamedText_59c83
 	db "@"
-; 0x59c83 + 5 bytes
 
 FanClubText6: ; 59c88 (16:5c88)
 	TX_FAR _FanClubText6
@@ -90349,12 +87954,10 @@ SilphCo2Script: ; 59cf1 (16:5cf1)
 	call ExecuteCurMapScriptInTable
 	ld [W_SILPHCO2CURSCRIPT], a
 	ret
-; 0x59d07
 
 SilphCo2_Unknown59d07: ; 59d07 (16:5d07)
 INCBIN "baserom.gbc",$59d07,$59d43 - $59d07
 
-; known jump sources: 59f7c (16:5f7c), 5a15a (16:615a)
 Func_59d43: ; 59d43 (16:5d43)
 	push hl
 	ld hl, $d73f
@@ -90408,7 +88011,6 @@ SilphCo2TrainerHeader0: ; 59d90 (16:5d90)
 	dw SilphCo2AfterBattleText1 ; 0x5e34 TextAfterBattle
 	dw SilphCo2EndBattleText1 ; 0x5e2f TextEndBattle
 	dw SilphCo2EndBattleText1 ; 0x5e2f TextEndBattle
-; 0x59d9c
 
 SilphCo2TrainerHeader1: ; 59d9c (16:5d9c)
 	db $3 ; flag's bit
@@ -90418,7 +88020,6 @@ SilphCo2TrainerHeader1: ; 59d9c (16:5d9c)
 	dw SilphCo2AfterBattleText2 ; 0x5e43 TextAfterBattle
 	dw SilphCo2EndBattleText2 ; 0x5e3e TextEndBattle
 	dw SilphCo2EndBattleText2 ; 0x5e3e TextEndBattle
-; 0x59da8
 
 SilphCo2TrainerHeader2: ; 59da8 (16:5da8)
 	db $4 ; flag's bit
@@ -90428,7 +88029,6 @@ SilphCo2TrainerHeader2: ; 59da8 (16:5da8)
 	dw SilphCo2AfterBattleText3 ; 0x5e52 TextAfterBattle
 	dw SilphCo2EndBattleText3 ; 0x5e4d TextEndBattle
 	dw SilphCo2EndBattleText3 ; 0x5e4d TextEndBattle
-; 0x59db4
 
 SilphCo2TrainerHeader3: ; 59db4 (16:5db4)
 	db $5 ; flag's bit
@@ -90438,7 +88038,6 @@ SilphCo2TrainerHeader3: ; 59db4 (16:5db4)
 	dw SilphCo2AfterBattleText4 ; 0x5e61 TextAfterBattle
 	dw SilphCo2EndBattleText4 ; 0x5e5c TextEndBattle
 	dw SilphCo2EndBattleText4 ; 0x5e5c TextEndBattle
-; 0x59dc0
 
 db $ff
 
@@ -90466,22 +88065,18 @@ asm_2c1e0 ; 0x59de7
 UnnamedText_59ded: ; 59ded (16:5ded)
 	TX_FAR _UnnamedText_59ded
 	db "@"
-; 0x59ded + 5 bytes
 
 ReceivedTM36Text: ; 59df2 (16:5df2)
 	TX_FAR _ReceivedTM36Text ; 0x824ba
 	db $0B, "@"
-; 0x59df2 + 6 bytes = 0x59df8
 
 TM36ExplanationText: ; 59df8 (16:5df8)
 	TX_FAR _TM36ExplanationText
 	db "@"
-; 0x59df8 + 5 bytes
 
 TM36NoRoomText: ; 59dfd (16:5dfd)
 	TX_FAR _TM36NoRoomText
 	db "@"
-; 0x59dfd + 5 bytes
 
 SilphCo2Text2: ; 59e02 (16:5e02)
 	db $08 ; asm
@@ -90510,62 +88105,50 @@ SilphCo2Text5: ; 59e20 (16:5e20)
 SilphCo2BattleText1: ; 59e2a (16:5e2a)
 	TX_FAR _SilphCo2BattleText1
 	db "@"
-; 0x59e2a + 5 bytes
 
 SilphCo2EndBattleText1: ; 59e2f (16:5e2f)
 	TX_FAR _SilphCo2EndBattleText1
 	db "@"
-; 0x59e2f + 5 bytes
 
 SilphCo2AfterBattleText1: ; 59e34 (16:5e34)
 	TX_FAR _SilphCo2AfterBattleText1
 	db "@"
-; 0x59e34 + 5 bytes
 
 SilphCo2BattleText2: ; 59e39 (16:5e39)
 	TX_FAR _SilphCo2BattleText2
 	db "@"
-; 0x59e39 + 5 bytes
 
 SilphCo2EndBattleText2: ; 59e3e (16:5e3e)
 	TX_FAR _SilphCo2EndBattleText2
 	db "@"
-; 0x59e3e + 5 bytes
 
 SilphCo2AfterBattleText2: ; 59e43 (16:5e43)
 	TX_FAR _SilphCo2AfterBattleText2
 	db "@"
-; 0x59e43 + 5 bytes
 
 SilphCo2BattleText3: ; 59e48 (16:5e48)
 	TX_FAR _SilphCo2BattleText3
 	db "@"
-; 0x59e48 + 5 bytes
 
 SilphCo2EndBattleText3: ; 59e4d (16:5e4d)
 	TX_FAR _SilphCo2EndBattleText3
 	db "@"
-; 0x59e4d + 5 bytes
 
 SilphCo2AfterBattleText3: ; 59e52 (16:5e52)
 	TX_FAR _SilphCo2AfterBattleText3
 	db "@"
-; 0x59e52 + 5 bytes
 
 SilphCo2BattleText4: ; 59e57 (16:5e57)
 	TX_FAR _SilphCo2BattleText4
 	db "@"
-; 0x59e57 + 5 bytes
 
 SilphCo2EndBattleText4: ; 59e5c (16:5e5c)
 	TX_FAR _SilphCo2EndBattleText4
 	db "@"
-; 0x59e5c + 5 bytes
 
 SilphCo2AfterBattleText4: ; 59e61 (16:5e61)
 	TX_FAR _SilphCo2AfterBattleText4
 	db "@"
-; 0x59e61 + 5 bytes
 
 SilphCo2Object: ; 0x59e66 (size=98)
 	db $2e ; border tile
@@ -90617,7 +88200,6 @@ SilphCo3Script: ; 59f5b (16:5f5b)
 	call ExecuteCurMapScriptInTable
 	ld [W_SILPHCO3CURSCRIPT], a
 	ret
-; 0x59f71
 
 SilphCo3Script_Unknown59f71: ; 59f71 (16:5f71)
 	ld hl, $d126
@@ -90649,7 +88231,6 @@ SilphCo3Script_Unknown59f71: ; 59f71 (16:5f71)
 Unknown_59fa8: ; 59fa8 (16:5fa8)
 INCBIN "baserom.gbc",$59fa8,$59fad - $59fa8
 
-; known jump sources: 59f7f (16:5f7f)
 Func_59fad: ; 59fad (16:5fad)
 	ld hl, $d828
 	ld a, [$FF00+$e0]
@@ -90678,7 +88259,6 @@ SilphCo3TrainerHeader0: ; 59fcc (16:5fcc)
 	dw SilphCo3AfterBattleText1 ; 0x6017 TextAfterBattle
 	dw SilphCo3EndBattleText1 ; 0x6012 TextEndBattle
 	dw SilphCo3EndBattleText1 ; 0x6012 TextEndBattle
-; 0x59fd8
 
 SilphCo3TrainerHeader1: ; 59fd8 (16:5fd8)
 	db $3 ; flag's bit
@@ -90688,7 +88268,6 @@ SilphCo3TrainerHeader1: ; 59fd8 (16:5fd8)
 	dw SilphCo3AfterBattleText2 ; 0x6030 TextAfterBattle
 	dw SilphCo3EndBattleText2 ; 0x602b TextEndBattle
 	dw SilphCo3EndBattleText2 ; 0x602b TextEndBattle
-; 0x59fe4
 
 db $ff
 
@@ -90706,12 +88285,10 @@ asm_8c56f ; 0x59ff3
 UnnamedText_59ff9: ; 59ff9 (16:5ff9)
 	TX_FAR _UnnamedText_59ff9
 	db "@"
-; 0x59ff9 + 5 bytes
 
 UnnamedText_59ffe: ; 59ffe (16:5ffe)
 	TX_FAR _UnnamedText_59ffe
 	db "@"
-; 0x59ffe + 5 bytes
 
 SilphCo3Text2: ; 5a003 (16:6003)
 	db $08 ; asm
@@ -90722,17 +88299,14 @@ SilphCo3Text2: ; 5a003 (16:6003)
 SilphCo3BattleText1: ; 5a00d (16:600d)
 	TX_FAR _SilphCo3BattleText1
 	db "@"
-; 0x5a00d + 5 bytes
 
 SilphCo3EndBattleText1: ; 5a012 (16:6012)
 	TX_FAR _SilphCo3EndBattleText1
 	db "@"
-; 0x5a012 + 5 bytes
 
 SilphCo3AfterBattleText1: ; 5a017 (16:6017)
 	TX_FAR _SilphCo3AfterBattleText1
 	db "@"
-; 0x5a017 + 5 bytes
 
 SilphCo3Text3: ; 5a01c (16:601c)
 	db $08 ; asm
@@ -90743,17 +88317,14 @@ SilphCo3Text3: ; 5a01c (16:601c)
 SilphCo3BattleText2: ; 5a026 (16:6026)
 	TX_FAR _SilphCo3BattleText2
 	db "@"
-; 0x5a026 + 5 bytes
 
 SilphCo3EndBattleText2: ; 5a02b (16:602b)
 	TX_FAR _SilphCo3EndBattleText2
 	db "@"
-; 0x5a02b + 5 bytes
 
 SilphCo3AfterBattleText2: ; 5a030 (16:6030)
 	TX_FAR _SilphCo3AfterBattleText2
 	db "@"
-; 0x5a030 + 5 bytes
 
 SilphCo3Object: ; 0x5a035 (size=113)
 	db $2e ; border tile
@@ -90810,7 +88381,6 @@ SilphCo10Script: ; 5a139 (16:6139)
 	call ExecuteCurMapScriptInTable
 	ld [W_SILPHCO10CURSCRIPT], a
 	ret
-; 0x5a14f
 
 SilphCo10Script_Unknown5a14f: ; 5a14f (16:614f)
 	ld hl, $d126
@@ -90832,7 +88402,6 @@ SilphCo10Script_Unknown5a14f: ; 5a14f (16:614f)
 Unknown_5a173: ; 5a173 (16:6173)
 INCBIN "baserom.gbc",$5a173,$5a176 - $5a173
 
-; known jump sources: 5a15d (16:615d)
 Func_5a176: ; 5a176 (16:6176)
 	ld a, [$FF00+$e0]
 	and a
@@ -90856,7 +88425,6 @@ SilphCo10TrainerHeader0: ; 5a192 (16:6192)
 	dw SilphCo10AfterBattleText1 ; 0x61e7 TextAfterBattle
 	dw SilphCo10EndBattleText1 ; 0x61e2 TextEndBattle
 	dw SilphCo10EndBattleText1 ; 0x61e2 TextEndBattle
-; 0x5a19e
 
 SilphCo10TrainerHeader1: ; 5a19e (16:619e)
 	db $2 ; flag's bit
@@ -90866,7 +88434,6 @@ SilphCo10TrainerHeader1: ; 5a19e (16:619e)
 	dw SilphCo10AfterBattleText2 ; 0x61f6 TextAfterBattle
 	dw SilphCo10EndBattleText2 ; 0x61f1 TextEndBattle
 	dw SilphCo10EndBattleText2 ; 0x61f1 TextEndBattle
-; 0x5a1aa
 
 db $ff
 
@@ -90896,42 +88463,34 @@ asm_cf85f ; 0x5a1cd
 UnnamedText_5a1d3: ; 5a1d3 (16:61d3)
 	TX_FAR _UnnamedText_5a1d3
 	db "@"
-; 0x5a1d3 + 5 bytes
 
 UnnamedText_5a1d8: ; 5a1d8 (16:61d8)
 	TX_FAR _UnnamedText_5a1d8
 	db "@"
-; 0x5a1d8 + 5 bytes
 
 SilphCo10BattleText1: ; 5a1dd (16:61dd)
 	TX_FAR _SilphCo10BattleText1
 	db "@"
-; 0x5a1dd + 5 bytes
 
 SilphCo10EndBattleText1: ; 5a1e2 (16:61e2)
 	TX_FAR _SilphCo10EndBattleText1
 	db "@"
-; 0x5a1e2 + 5 bytes
 
 SilphCo10AfterBattleText1: ; 5a1e7 (16:61e7)
 	TX_FAR _SilphCo10AfterBattleText1
 	db "@"
-; 0x5a1e7 + 5 bytes
 
 SilphCo10BattleText2: ; 5a1ec (16:61ec)
 	TX_FAR _SilphCo10BattleText2
 	db "@"
-; 0x5a1ec + 5 bytes
 
 SilphCo10EndBattleText2: ; 5a1f1 (16:61f1)
 	TX_FAR _SilphCo10EndBattleText2
 	db "@"
-; 0x5a1f1 + 5 bytes
 
 SilphCo10AfterBattleText2: ; 5a1f6 (16:61f6)
 	TX_FAR _SilphCo10AfterBattleText2
 	db "@"
-; 0x5a1f6 + 5 bytes
 
 SilphCo10Object: ; 0x5a1fb (size=95)
 	db $2e ; border tile
@@ -90982,7 +88541,6 @@ LanceScript: ; 5a2ae (16:62ae)
 	call ExecuteCurMapScriptInTable
 	ld [W_LANCECURSCRIPT], a
 	ret
-; 0x5a2c4
 
 LanceScript_Unknown5a2c4: ; 5a2c4 (16:62c4)
 	ld hl, $d126
@@ -90999,7 +88557,6 @@ LanceScript_Unknown5a2c4: ; 5a2c4 (16:62c4)
 	ld a, $72
 	ld b, $73
 
-; known jump sources: 5a2d7 (16:62d7)
 Func_5a2de: ; 5a2de (16:62de)
 	push bc
 	ld [$d09f], a
@@ -91010,12 +88567,10 @@ Func_5a2de: ; 5a2de (16:62de)
 	ld [$d09f], a
 	ld bc, $603
 
-; known jump sources: 5a2e5 (16:62e5)
 Func_5a2f0: ; 5a2f0 (16:62f0)
 	ld a, $17
 	jp Predef ; indirect jump to Func_ee9e (ee9e (3:6e9e))
 
-; known jump sources: 5a351 (16:6351)
 Func_5a2f5: ; 5a2f5 (16:62f5)
 	xor a
 	ld [W_LANCECURSCRIPT], a
@@ -91091,7 +88646,7 @@ Func_5a382: ; 5a382 (16:6382)
 	ld [W_LANCECURSCRIPT], a
 	ld [W_CURMAPSCRIPT], a
 	ret
-; 5a395 (16:6395)
+
 LanceTexts: ; 5a395 (16:6395)
 	dw LanceText1
 
@@ -91104,7 +88659,6 @@ LanceTrainerHeader0: ; 5a397 (16:6397)
 	dw LanceAfterBattleText ; 0x63b8 TextAfterBattle
 	dw LanceEndBattleText ; 0x63b3 TextEndBattle
 	dw LanceEndBattleText ; 0x63b3 TextEndBattle
-; 0x5a3a3
 
 db $ff
 
@@ -91117,12 +88671,10 @@ LanceText1: ; 5a3a4 (16:63a4)
 LanceBeforeBattleText: ; 5a3ae (16:63ae)
 	TX_FAR _LanceBeforeBattleText
 	db "@"
-; 0x5a3ae + 5 bytes
 
 LanceEndBattleText: ; 5a3b3 (16:63b3)
 	TX_FAR _LanceEndBattleText
 	db "@"
-; 0x5a3b3 + 5 bytes
 
 LanceAfterBattleText: ; 5a3b8 (16:63b8)
 	TX_FAR _LanceAfterBattleText ; 0x85e9e
@@ -91130,7 +88682,6 @@ LanceAfterBattleText: ; 5a3b8 (16:63b8)
 	ld hl, $d866
 	set 6, [hl]
 	jp TextScriptEnd
-; 0x5a3c5
 
 LanceObject: ; 0x5a3c5 (size=36)
 	db $3 ; border tile
@@ -91166,7 +88717,6 @@ HallofFameRoomScript: ; 5a49e (16:649e)
 	ld hl, HallofFameRoomScripts
 	ld a, [W_HALLOFFAMEROOMCURSCRIPT]
 	jp CallFunctionInTable
-; 0x5a4aa
 
 INCBIN "baserom.gbc",$5a4aa,$5a4b2 - $5a4aa
 
@@ -91218,7 +88768,6 @@ HallofFameRoomScript2: ; 5a4bb (16:64bb)
 	jr nz, .asm_5a4ff ; 0x5a505 $f8
 	call WaitForTextScrollButtonPress
 	jp InitGame
-; 0x5a50d
 
 HallofFameRoomScript0: ; 5a50d (16:650d)
 	ld a, $ff
@@ -91232,7 +88781,6 @@ HallofFameRoomScript0: ; 5a50d (16:650d)
 	ld a, $1
 	ld [W_HALLOFFAMEROOMCURSCRIPT], a
 	ret
-; 0x5a528
 
 RLEMovement5a528: ; 5a528 (16:6528)
 	db $40,$5
@@ -91267,7 +88815,6 @@ HallofFameRoomScript1: ; 5a52b (16:652b)
 	ld a, $2
 	ld [W_HALLOFFAMEROOMCURSCRIPT], a
 	ret
-; 0x5a56a
 
 HallofFameRoomTexts: ; 5a56a (16:656a)
 	dw HallofFameRoomText1
@@ -91295,7 +88842,6 @@ HallofFameRoomObject: ; 0x5a571 (size=26)
 HallofFameRoomBlocks: ; 5a58b (16:658b)
 	INCBIN "maps/halloffameroom.blk"
 
-; known jump sources: 1e142 (7:6142)
 RemoveGuardDrink: ; 5a59f (16:659f)
 	ld hl, GuardDrinksList
 .drinkLoop
@@ -91393,7 +88939,6 @@ RedsHouse2FObject: ; 0x5c0d0 ?
 	dw $C6EF + 4 + (4 + 6) * 0 + 3
 	db 1,7
 
-; known jump sources: 1d178 (7:5178)
 Func_5c0dc: ; 5c0dc (17:40dc)
 	ld a, $4b
 	ld [W_OWNEDPOKEMON], a ; $d2f7
@@ -91402,7 +88947,7 @@ Func_5c0dc: ; 5c0dc (17:40dc)
 	xor a
 	ld [W_OWNEDPOKEMON], a ; $d2f7
 	ret
-; 5c0eb (17:40eb)
+
 MuseumF1_h: ; 0x5c0eb to 0x5c0f7 (12 bytes) (id=52)
 	db $0a ; tileset
 	db MUSEUM_1F_HEIGHT, MUSEUM_1F_WIDTH ; dimensions (y, x)
@@ -91419,7 +88964,6 @@ MuseumF1Script: ; 5c0f7 (17:40f7)
 	ld hl, MuseumF1Scripts
 	ld a, [W_MUSEUMF1CURSCRIPT]
 	jp CallFunctionInTable
-; 0x5c109
 
 MuseumF1Scripts: ; 5c109 (17:4109)
 	dw MuseumF1Script0, MuseumF1Script1
@@ -91440,11 +88984,9 @@ MuseumF1Script0: ; 5c10d (17:410d)
 	ld a, $1
 	ld [$ff00+$8c], a
 	jp DisplayTextID
-; 0x5c12a
 
 MuseumF1Script1: ; 5c12a (17:412a)
 	ret
-; 0x5c12b
 
 MuseumF1Texts: ; 5c12b (17:412b)
 	dw MuseumF1Text1, MuseumF1Text2, MuseumF1Text3, MuseumF1Text4, MuseumF1Text5
@@ -91553,52 +89095,42 @@ asm_d1144: ; 5c211 (17:4211)
 	call PrintText
 asm_d1145: ; 5c217 (17:4217)
 	jp TextScriptEnd
-; 0x5c21a
 
 UnnamedText_5c21a: ; 5c21a (17:421a)
 	TX_FAR _UnnamedText_5c21a
 	db "@"
-; 0x5c21a + 5 bytes
 
 UnnamedText_5c21f: ; 5c21f (17:421f)
 	TX_FAR _UnnamedText_5c21f
 	db "@"
-; 0x5c21f + 5 bytes
 
 UnnamedText_5c224: ; 5c224 (17:4224)
 	TX_FAR _UnnamedText_5c224
 	db "@"
-; 0x5c224 + 5 bytes
 
 UnnamedText_5c229: ; 5c229 (17:4229)
 	TX_FAR _UnnamedText_5c229
 	db "@"
-; 0x5c229 + 5 bytes
 
 UnnamedText_5c22e: ; 5c22e (17:422e)
 	TX_FAR _UnnamedText_5c22e
 	db "@"
-; 0x5c22e + 5 bytes
 
 UnnamedText_5c233: ; 5c233 (17:4233)
 	TX_FAR _UnnamedText_5c233
 	db "@"
-; 0x5c233 + 5 bytes
 
 UnnamedText_5c238: ; 5c238 (17:4238)
 	TX_FAR _UnnamedText_5c238
 	db "@"
-; 0x5c238 + 5 bytes
 
 UnnamedText_5c23d: ; 5c23d (17:423d)
 	TX_FAR _UnnamedText_5c23d
 	db "@"
-; 0x5c23d + 5 bytes
 
 UnnamedText_5c242: ; 5c242 (17:4242)
 	TX_FAR _UnnamedText_5c242
 	db "@"
-; 0x5c242 + 5 bytes
 
 MuseumF1Text2: ; 5c247 (17:4247)
 	db $08 ; asm
@@ -91609,7 +89141,6 @@ MuseumF1Text2: ; 5c247 (17:4247)
 UnnamedText_5c251: ; 5c251 (17:4251)
 	TX_FAR _UnnamedText_5c251
 	db "@"
-; 0x5c251 + 5 bytes
 
 MuseumF1Text3: ; 5c256 (17:4256)
 	db $08 ; asm
@@ -91641,22 +89172,18 @@ MuseumF1Text3: ; 5c256 (17:4256)
 UnnamedText_5c28e: ; 5c28e (17:428e)
 	TX_FAR _UnnamedText_5c28e
 	db "@"
-; 0x5c28e + 5 bytes
 
 ReceivedOldAmberText: ; 5c293 (17:4293)
 	TX_FAR _ReceivedOldAmberText ; 0x96790
 	db $0B, "@"
-; 0x5c293 + 6 bytes = 0x5c299
 
 UnnamedText_5c299: ; 5c299 (17:4299)
 	TX_FAR _UnnamedText_5c299
 	db "@"
-; 0x5c299 + 5 bytes
 
 UnnamedText_5c29e: ; 5c29e (17:429e)
 	TX_FAR _UnnamedText_5c29e
 	db "@"
-; 0x5c29e + 5 bytes
 
 MuseumF1Text4: ; 5c2a3 (17:42a3)
 	db $08 ; asm
@@ -91667,7 +89194,6 @@ MuseumF1Text4: ; 5c2a3 (17:42a3)
 UnnamedText_5c2ad: ; 5c2ad (17:42ad)
 	TX_FAR _UnnamedText_5c2ad
 	db "@"
-; 0x5c2ad + 5 bytes
 
 MuseumF1Text5: ; 5c2b2 (17:42b2)
 	db $08 ; asm
@@ -91678,7 +89204,6 @@ MuseumF1Text5: ; 5c2b2 (17:42b2)
 UnnamedText_5c2bc: ; 5c2bc (17:42bc)
 	TX_FAR _UnnamedText_5c2bc
 	db "@"
-; 0x5c2bc + 5 bytes
 
 MuseumF1Object: ; 0x5c2c1 (size=74)
 	db $a ; border tile
@@ -91716,7 +89241,6 @@ MuseumF2_h: ; 0x5c30b to 0x5c317 (12 bytes) (id=53)
 
 MuseumF2Script: ; 5c317 (17:4317)
 	jp EnableAutoTextBoxDrawing
-; 0x5c31a
 
 MuseumF2Texts: ; 5c31a (17:431a)
 	dw MuseumF2Text1, MuseumF2Text2, MuseumF2Text3, MuseumF2Text4, MuseumF2Text5, MuseumF2Text6, MuseumF2Text7
@@ -91789,7 +89313,6 @@ PewterGymScript: ; 5c387 (17:4387)
 	call ExecuteCurMapScriptInTable
 	ld [W_PEWTERGYMCURSCRIPT], a
 	ret
-; 0x5c3a4
 
 PewterGymScript_Unknown5c3a4: ; 5c3a4 (17:43a4)
 	ld hl, Gym1CityName ; $43ad
@@ -91802,7 +89325,6 @@ Gym1CityName: ; 5c3ad (17:43ad)
 Gym1LeaderName: ; 5c3b9 (17:43b9)
 	db "BROCK@"
 
-; known jump sources: 5c3d7 (17:43d7), 5c432 (17:4432)
 Func_5c3bf: ; 5c3bf (17:43bf)
 	xor a
 	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
@@ -91818,7 +89340,6 @@ INCBIN "baserom.gbc",$5c3ca,$5c3d2 - $5c3ca
 	ld a, $f0
 	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
 
-; known jump sources: 5c45a (17:445a)
 Func_5c3df: ; 5c3df (17:43df)
 	ld a, $4
 	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
@@ -91857,7 +89378,7 @@ Func_5c3df: ; 5c3df (17:43df)
 	ld hl, $d755
 	set 2, [hl]
 	jp Func_5c3bf
-; 5c435 (17:4435)
+
 PewterGymTexts: ; 5c435 (17:4435)
 	dw PewterGymText1, PewterGymText2, PewterGymText3, PewterGymText4, PewterGymText5, PewterGymText6
 
@@ -91870,7 +89391,6 @@ PewterGymTrainerHeader0: ; 5c441 (17:4441)
 	dw PewterGymAfterBattleText1 ; 0x44da TextAfterBattle
 	dw PewterGymEndBattleText1 ; 0x44d5 TextEndBattle
 	dw PewterGymEndBattleText1 ; 0x44d5 TextEndBattle
-; 0x5c44d
 
 db $ff
 
@@ -91914,24 +89434,20 @@ PewterGymText1: ; 5c44e (17:444e)
 UnnamedText_5c49e: ; 5c49e (17:449e)
 	TX_FAR _UnnamedText_5c49e
 	db "@"
-; 0x5c49e + 5 bytes
 
 UnnamedText_5c4a3: ; 5c4a3 (17:44a3)
 	TX_FAR _UnnamedText_5c4a3
 	db "@"
-; 0x5c4a3 + 5 bytes
 
 PewterGymText4: ; 5c4a8 (17:44a8)
 	TX_FAR _TM34PreReceiveText
 	db "@"
-; 0x5c4a8 + 5 bytes
 
 PewterGymText5: ; 5c4ad (17:44ad)
 	TX_FAR _ReceivedTM34Text ; 0x980ad
 	db $0B
 	TX_FAR _TM34ExplanationText ; 0x980c0
 	db "@"
-; 0x5c4ad + 10 bytes = 0x5c4b7
 
 PewterGymText6: ; 5c4b7 (17:44b7)
 	TX_FAR _TM34NoRoomText
@@ -91942,7 +89458,6 @@ UnnamedText_5c4bc: ; 5c4bc (17:44bc)
 	db $0B
 	TX_FAR _UnnamedText_5c4c1 ; 0x98232
 	db "@"
-; 0x5c4c6
 
 PewterGymText2: ; 5c4c6 (17:44c6)
 	db $08 ; asm
@@ -91953,17 +89468,14 @@ PewterGymText2: ; 5c4c6 (17:44c6)
 PewterGymBattleText1: ; 5c4d0 (17:44d0)
 	TX_FAR _PewterGymBattleText1
 	db "@"
-; 0x5c4d0 + 5 bytes
 
 PewterGymEndBattleText1: ; 5c4d5 (17:44d5)
 	TX_FAR _PewterGymEndBattleText1
 	db "@"
-; 0x5c4d5 + 5 bytes
 
 PewterGymAfterBattleText1: ; 5c4da (17:44da)
 	TX_FAR _PewterGymAfterBattleText1
 	db "@"
-; 0x5c4da + 5 bytes
 
 PewterGymText3: ; 5c4df (17:44df)
 	db $08 ; asm
@@ -91995,27 +89507,22 @@ PewterGymText3: ; 5c4df (17:44df)
 UnnamedText_5c515: ; 5c515 (17:4515)
 	TX_FAR _UnnamedText_5c515
 	db "@"
-; 0x5c515 + 5 bytes
 
 UnnamedText_5c51a: ; 5c51a (17:451a)
 	TX_FAR _UnnamedText_5c51a
 	db "@"
-; 0x5c51a + 5 bytes
 
 UnnamedText_5c51f: ; 5c51f (17:451f)
 	TX_FAR _UnnamedText_5c51f
 	db "@"
-; 0x5c51f + 5 bytes
 
 UnnamedText_5c524: ; 5c524 (17:4524)
 	TX_FAR _UnnamedText_5c524
 	db "@"
-; 0x5c524 + 5 bytes
 
 UnnamedText_5c529: ; 5c529 (17:4529)
 	TX_FAR _UnnamedText_5c529
 	db "@"
-; 0x5c529 + 5 bytes
 
 PewterGymObject: ; 0x5c52e (size=42)
 	db $3 ; border tile
@@ -92049,7 +89556,6 @@ PewterPokecenter_h: ; 0x5c57b to 0x5c587 (12 bytes) (id=58)
 PewterPokecenterScript: ; 5c587 (17:4587)
 	call Func_22fa
 	jp EnableAutoTextBoxDrawing
-; 0x5c58d
 
 PewterPokecenterTexts: ; 5c58d (17:458d)
 	dw PewterPokecenterText1, PewterPokecenterText2, PewterPokecenterText3, PewterPokecenterText4
@@ -92109,12 +89615,10 @@ PewterPokecenterText3: ; 5c59b (17:459b)
 	call DelayFrames
 	call Func_2307
 	jp TextScriptEnd
-; 0x5c603
 
 PewterPokecenterText5: ; 5c603 (17:4603)
 	TX_FAR _PewterPokecenterText5 ; 0x98744
 	db "@"
-; 0x5c603 + 5 bytes = 0x5c608
 
 Unknown_5c608: ; 5c608 (17:4608)
 db $30, $38, $34, $3c
@@ -92152,7 +89656,6 @@ CeruleanPokecenter_h: ; 0x5c639 to 0x5c645 (12 bytes) (id=64)
 CeruleanPokecenterScript: ; 5c645 (17:4645)
 	call Func_22fa
 	jp EnableAutoTextBoxDrawing
-; 0x5c64b
 
 CeruleanPokecenterTexts: ; 5c64b (17:464b)
 	dw CeruleanPokecenterText1, CeruleanPokecenterText2, CeruleanPokecenterText3, CeruleanPokecenterText4
@@ -92213,7 +89716,6 @@ CeruleanGymScript: ; 5c6b3 (17:46b3)
 	call ExecuteCurMapScriptInTable
 	ld [W_CERULEANGYMCURSCRIPT], a
 	ret
-; 0x5c6d0
 
 CeruleanGymScript_Unknown5c6d0: ; 5c6d0 (17:46d0)
 	ld hl, Gym2CityName ; $46d9
@@ -92226,7 +89728,6 @@ Gym2CityName: ; 5c6d9 (17:46d9)
 Gym2LeaderName: ; 5c6e7 (17:46e7)
 	db "MISTY@"
 
-; known jump sources: 5c705 (17:4705), 5c747 (17:4747)
 Func_5c6ed: ; 5c6ed (17:46ed)
 	xor a
 	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
@@ -92242,7 +89743,6 @@ INCBIN "baserom.gbc",$5c6f8,$5c700 - $5c6f8
 	ld a, $f0
 	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
 
-; known jump sources: 5c77d (17:477d)
 Func_5c70d: ; 5c70d (17:470d)
 	ld a, $5
 	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
@@ -92271,7 +89771,7 @@ Func_5c70d: ; 5c70d (17:470d)
 	set 2, [hl]
 	set 3, [hl]
 	jp Func_5c6ed
-; 5c74a (17:474a)
+
 CeruleanGymTexts: ; 5c74a (17:474a)
 	dw CeruleanGymText1, CeruleanGymText2, CeruleanGymText3, CeruleanGymText4, CeruleanGymText5, CeruleanGymText6, CeruleanGymText7
 
@@ -92284,7 +89784,6 @@ CeruleanGymTrainerHeader0: ; 5c758 (17:4758)
 	dw CeruleanGymAfterBattleText1 ; 0x47f3 TextAfterBattle
 	dw CeruleanGymEndBattleText1 ; 0x47ee TextEndBattle
 	dw CeruleanGymEndBattleText1 ; 0x47ee TextEndBattle
-; 0x5c764
 
 CeruleanGymTrainerHeader1: ; 5c764 (17:4764)
 	db $3 ; flag's bit
@@ -92294,7 +89793,6 @@ CeruleanGymTrainerHeader1: ; 5c764 (17:4764)
 	dw CeruleanGymAfterBattleText2 ; 0x480c TextAfterBattle
 	dw CeruleanGymEndBattleText2 ; 0x4807 TextEndBattle
 	dw CeruleanGymEndBattleText2 ; 0x4807 TextEndBattle
-; 0x5c770
 
 db $ff
 
@@ -92337,33 +89835,27 @@ CeruleanGymText1: ; 5c771 (17:4771)
 UnnamedText_5c7be: ; 5c7be (17:47be)
 	TX_FAR _UnnamedText_5c7be
 	db "@"
-; 0x5c7be + 5 bytes
 
 UnnamedText_5c7c3: ; 5c7c3 (17:47c3)
 	TX_FAR _UnnamedText_5c7c3
 	db "@"
-; 0x5c7c3 + 5 bytes
 
 CeruleanGymText5: ; 5c7c8 (17:47c8)
 	TX_FAR _UnnamedText_5c7c8
 	db "@"
-; 0x5c7c8 + 5 bytes
 
 CeruleanGymText6: ; 5c7cd (17:47cd)
 ReceivedTM11Text: ; 5c7cd (17:47cd)
 	TX_FAR _ReceivedTM11Text ; 0x98b7d
 	db $0B, "@"
-; 0x5c7cd + 6 bytes = 0x5c7d3
 
 CeruleanGymText7: ; 5c7d3 (17:47d3)
 	TX_FAR _UnnamedText_5c7d3
 	db "@"
-; 0x5c7d3 + 5 bytes
 
 UnnamedText_5c7d8: ; 5c7d8 (17:47d8)
 	TX_FAR _UnnamedText_5c7d8 ; 0x98bb0
 	db $11, $6, "@"
-; 0x5c7d8 + 7 bytes = 0x5c7df
 
 CeruleanGymText2: ; 5c7df (17:47df)
 	db $08 ; asm
@@ -92374,17 +89866,14 @@ CeruleanGymText2: ; 5c7df (17:47df)
 CeruleanGymBattleText1: ; 5c7e9 (17:47e9)
 	TX_FAR _CeruleanGymBattleText1
 	db "@"
-; 0x5c7e9 + 5 bytes
 
 CeruleanGymEndBattleText1: ; 5c7ee (17:47ee)
 	TX_FAR _CeruleanGymEndBattleText1
 	db "@"
-; 0x5c7ee + 5 bytes
 
 CeruleanGymAfterBattleText1: ; 5c7f3 (17:47f3)
 	TX_FAR _CeruleanGymAfterBattleText1
 	db "@"
-; 0x5c7f3 + 5 bytes
 
 CeruleanGymText3: ; 5c7f8 (17:47f8)
 	db $08 ; asm
@@ -92395,17 +89884,14 @@ CeruleanGymText3: ; 5c7f8 (17:47f8)
 CeruleanGymBattleText2: ; 5c802 (17:4802)
 	TX_FAR _CeruleanGymBattleText2
 	db "@"
-; 0x5c802 + 5 bytes
 
 CeruleanGymEndBattleText2: ; 5c807 (17:4807)
 	TX_FAR _CeruleanGymEndBattleText2
 	db "@"
-; 0x5c807 + 5 bytes
 
 CeruleanGymAfterBattleText2: ; 5c80c (17:480c)
 	TX_FAR _CeruleanGymAfterBattleText2
 	db "@"
-; 0x5c80c + 5 bytes
 
 CeruleanGymText4: ; 5c811 (17:4811)
 	db $08 ; asm
@@ -92424,12 +89910,10 @@ CeruleanGymText4: ; 5c811 (17:4811)
 UnnamedText_5c82a: ; 5c82a (17:482a)
 	TX_FAR _UnnamedText_5c82a
 	db "@"
-; 0x5c82a + 5 bytes
 
 UnnamedText_5c82f: ; 5c82f (17:482f)
 	TX_FAR _UnnamedText_5c82f
 	db "@"
-; 0x5c82f + 5 bytes
 
 CeruleanGymObject: ; 0x5c834 (size=50)
 	db $3 ; border tile
@@ -92463,7 +89947,6 @@ CeruleanMart_h: ; 0x5c889 to 0x5c895 (12 bytes) (id=67)
 
 CeruleanMartScript: ; 5c895 (17:4895)
 	jp EnableAutoTextBoxDrawing
-; 0x5c898
 
 CeruleanMartTexts: ; 5c898 (17:4898)
 	dw CeruleanMartText1, CeruleanMartText2, CeruleanMartText3
@@ -92505,7 +89988,6 @@ LavenderPokecenter_h: ; 0x5c8ce to 0x5c8da (12 bytes) (id=141)
 LavenderPokecenterScript: ; 5c8da (17:48da)
 	call Func_22fa
 	jp EnableAutoTextBoxDrawing
-; 0x5c8e0
 
 LavenderPokecenterTexts: ; 5c8e0 (17:48e0)
 	dw LavenderPokecenterText1, LavenderPokecenterText2, LavenderPokecenterText3, LavenderPokecenterText4
@@ -92553,7 +90035,6 @@ LavenderMart_h: ; 0x5c920 to 0x5c92c (12 bytes) (id=150)
 
 LavenderMartScript: ; 5c92c (17:492c)
 	jp EnableAutoTextBoxDrawing
-; 0x5c92f
 
 LavenderMartTexts: ; 5c92f (17:492f)
 	dw LavenderMartText1, LavenderMartText2, LavenderMartText3
@@ -92579,12 +90060,10 @@ LavenderMartText3: ; 5c93a (17:493a)
 UnnamedText_5c953: ; 5c953 (17:4953)
 	TX_FAR _UnnamedText_5c953
 	db "@"
-; 0x5c953 + 5 bytes
 
 UnnamedText_5c958: ; 5c958 (17:4958)
 	TX_FAR _UnnamedText_5c958
 	db "@"
-; 0x5c958 + 5 bytes
 
 LavenderMartObject: ; 0x5c95d (size=38)
 	db $0 ; border tile
@@ -92615,7 +90094,6 @@ VermilionPokecenter_h: ; 0x5c983 to 0x5c98f (12 bytes) (id=89)
 VermilionPokecenterScript: ; 5c98f (17:498f)
 	call Func_22fa
 	jp EnableAutoTextBoxDrawing
-; 0x5c995
 
 VermilionPokecenterTexts: ; 5c995 (17:4995)
 	dw VermilionPokecenterText1, VermilionPokecenterText2, VermilionPokecenterText3, VermilionPokecenterText4
@@ -92663,7 +90141,6 @@ VermilionMart_h: ; 0x5c9d5 to 0x5c9e1 (12 bytes) (id=91)
 
 VermilionMartScript: ; 5c9e1 (17:49e1)
 	jp EnableAutoTextBoxDrawing
-; 0x5c9e4
 
 VermilionMartTexts: ; 5c9e4 (17:49e4)
 	dw VermilionMartText1, VermilionMartText2, VermilionMartText3
@@ -92719,7 +90196,6 @@ VermilionGymScript: ; 5ca26 (17:4a26)
 	call ExecuteCurMapScriptInTable
 	ld [W_VERMILIONGYMCURSCRIPT], a
 	ret
-; 0x5ca4c
 
 VermilionGymScript_Unknown5ca4c: ; 5ca4c (17:4a4c)
 	ld hl, Gym3CityName ; $4a55
@@ -92732,7 +90208,6 @@ Gym3CityName: ; 5ca55 (17:4a55)
 Gym3LeaderName: ; 5ca64 (17:4a64)
 	db "LT.SURGE@"
 
-; known jump sources: 5ca36 (17:4a36)
 Func_5ca6d: ; 5ca6d (17:4a6d)
 	ld a, [$d773]
 	bit 0, a
@@ -92749,7 +90224,6 @@ Func_5ca6d: ; 5ca6d (17:4a6d)
 	ld a, $17
 	jp Predef ; indirect jump to Func_ee9e (ee9e (3:6e9e))
 
-; known jump sources: 5caa2 (17:4aa2), 5cae5 (17:4ae5)
 Func_5ca8a: ; 5ca8a (17:4a8a)
 	xor a
 	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
@@ -92765,7 +90239,6 @@ INCBIN "baserom.gbc",$5ca95,$5ca9d - $5ca95
 	ld a, $f0
 	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
 
-; known jump sources: 5cb29 (17:4b29)
 Func_5caaa: ; 5caaa (17:4aaa)
 	ld a, $6
 	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
@@ -92794,7 +90267,7 @@ Func_5caaa: ; 5caaa (17:4aaa)
 	or $1c
 	ld [$d773], a
 	jp Func_5ca8a
-; 5cae8 (17:4ae8)
+
 VermilionGymTexts: ; 5cae8 (17:4ae8)
 	dw VermilionGymText1, VermilionGymText2, VermilionGymText3, VermilionGymText4, VermilionGymText5, VermilionGymText6, VermilionGymText7, VermilionGymText8
 
@@ -92807,7 +90280,6 @@ VermilionGymTrainerHeader0: ; 5caf8 (17:4af8)
 	dw VermilionGymAfterBattleText1 ; 0x4ba4 TextAfterBattle
 	dw VermilionGymEndBattleText1 ; 0x4b9f TextEndBattle
 	dw VermilionGymEndBattleText1 ; 0x4b9f TextEndBattle
-; 0x5cb04
 
 VermilionGymTrainerHeader1: ; 5cb04 (17:4b04)
 	db $3 ; flag's bit
@@ -92817,7 +90289,6 @@ VermilionGymTrainerHeader1: ; 5cb04 (17:4b04)
 	dw VermilionGymAfterBattleText2 ; 0x4bbd TextAfterBattle
 	dw VermilionGymEndBattleText2 ; 0x4bb8 TextEndBattle
 	dw VermilionGymEndBattleText2 ; 0x4bb8 TextEndBattle
-; 0x5cb10
 
 VermilionGymTrainerHeader2: ; 5cb10 (17:4b10)
 	db $4 ; flag's bit
@@ -92827,7 +90298,6 @@ VermilionGymTrainerHeader2: ; 5cb10 (17:4b10)
 	dw VermilionGymAfterBattleText3 ; 0x4bd6 TextAfterBattle
 	dw VermilionGymEndBattleText3 ; 0x4bd1 TextEndBattle
 	dw VermilionGymEndBattleText3 ; 0x4bd1 TextEndBattle
-; 0x5cb1c
 
 db $ff
 
@@ -92871,24 +90341,20 @@ VermilionGymText1: ; 5cb1d (17:4b1d)
 UnnamedText_5cb6d: ; 5cb6d (17:4b6d)
 	TX_FAR _UnnamedText_5cb6d
 	db "@"
-; 0x5cb6d + 5 bytes
 
 UnnamedText_5cb72: ; 5cb72 (17:4b72)
 	TX_FAR _UnnamedText_5cb72
 	db "@"
-; 0x5cb72 + 5 bytes
 
 VermilionGymText6: ; 5cb77 (17:4b77)
 	TX_FAR _UnnamedText_5cb77
 	db "@"
-; 0x5cb77 + 5 bytes
 
 VermilionGymText7: ; 5cb7c (17:4b7c)
 	TX_FAR _ReceivedTM24Text ; 0x9c0e0
 	db $11
 	TX_FAR _TM24ExplanationText ; 0x9c0f5
 	db "@"
-; 0x5cb7c + 10 bytes = 0x5cb86
 
 VermilionGymText8: ; 5cb86 (17:4b86)
 	TX_FAR _TM24NoRoomText
@@ -92907,17 +90373,14 @@ VermilionGymText2: ; 5cb90 (17:4b90)
 VermilionGymBattleText1: ; 5cb9a (17:4b9a)
 	TX_FAR _VermilionGymBattleText1
 	db "@"
-; 0x5cb9a + 5 bytes
 
 VermilionGymEndBattleText1: ; 5cb9f (17:4b9f)
 	TX_FAR _VermilionGymEndBattleText1
 	db "@"
-; 0x5cb9f + 5 bytes
 
 VermilionGymAfterBattleText1: ; 5cba4 (17:4ba4)
 	TX_FAR _VermilionGymAfterBattleText1
 	db "@"
-; 0x5cba4 + 5 bytes
 
 VermilionGymText3: ; 5cba9 (17:4ba9)
 	db $08 ; asm
@@ -92928,17 +90391,14 @@ VermilionGymText3: ; 5cba9 (17:4ba9)
 VermilionGymBattleText2: ; 5cbb3 (17:4bb3)
 	TX_FAR _VermilionGymBattleText2
 	db "@"
-; 0x5cbb3 + 5 bytes
 
 VermilionGymEndBattleText2: ; 5cbb8 (17:4bb8)
 	TX_FAR _VermilionGymEndBattleText2
 	db "@"
-; 0x5cbb8 + 5 bytes
 
 VermilionGymAfterBattleText2: ; 5cbbd (17:4bbd)
 	TX_FAR _VermilionGymAfterBattleText2
 	db "@"
-; 0x5cbbd + 5 bytes
 
 VermilionGymText4: ; 5cbc2 (17:4bc2)
 	db $08 ; asm
@@ -92949,17 +90409,14 @@ VermilionGymText4: ; 5cbc2 (17:4bc2)
 VermilionGymBattleText3: ; 5cbcc (17:4bcc)
 	TX_FAR _VermilionGymBattleText3
 	db "@"
-; 0x5cbcc + 5 bytes
 
 VermilionGymEndBattleText3: ; 5cbd1 (17:4bd1)
 	TX_FAR _VermilionGymEndBattleText3
 	db "@"
-; 0x5cbd1 + 5 bytes
 
 VermilionGymAfterBattleText3: ; 5cbd6 (17:4bd6)
 	TX_FAR _VermilionGymAfterBattleText3
 	db "@"
-; 0x5cbd6 + 5 bytes
 
 VermilionGymText5: ; 5cbdb (17:4bdb)
 	db $08 ; asm
@@ -92978,12 +90435,10 @@ VermilionGymText5: ; 5cbdb (17:4bdb)
 UnnamedText_5cbf4: ; 5cbf4 (17:4bf4)
 	TX_FAR _UnnamedText_5cbf4
 	db "@"
-; 0x5cbf4 + 5 bytes
 
 UnnamedText_5cbf9: ; 5cbf9 (17:4bf9)
 	TX_FAR _UnnamedText_5cbf9
 	db "@"
-; 0x5cbf9 + 5 bytes
 
 VermilionGymObject: ; 0x5cbfe (size=58)
 	db $3 ; border tile
@@ -93018,7 +90473,6 @@ CopycatsHouseF2_h: ; 0x5cc65 to 0x5cc71 (12 bytes) (id=176)
 
 CopycatsHouseF2Script: ; 5cc71 (17:4c71)
 	jp EnableAutoTextBoxDrawing
-; 0x5cc74
 
 CopycatsHouseF2Texts: ; 5cc74 (17:4c74)
 	dw CopycatsHouseF2Text1, CopycatsHouseF2Text2, CopycatsHouseF2Text3, CopycatsHouseF2Text4, CopycatsHouseF2Text5, CopycatsHouseF2Text6, CopycatsHouseF2Text7
@@ -93063,12 +90517,10 @@ CopycatsHouseF2Text1: ; 5cc82 (17:4c82)
 UnnamedText_5ccd4: ; 5ccd4 (17:4cd4)
 	TX_FAR _UnnamedText_5ccd4
 	db "@"
-; 0x5ccd4 + 5 bytes
 
 TM31PreReceiveText: ; 5ccd9 (17:4cd9)
 	TX_FAR _TM31PreReceiveText
 	db "@"
-; 0x5ccd9 + 5 bytes
 
 ReceivedTM31Text: ; 5ccde (17:4cde)
 	TX_FAR _ReceivedTM31Text ; 0xa1675
@@ -93076,17 +90528,14 @@ ReceivedTM31Text: ; 5ccde (17:4cde)
 TM31ExplanationText1: ; 5cce3 (17:4ce3)
 	TX_FAR _TM31ExplanationText1 ; 0xa1689
 	db $d, "@"
-; 0x5cce9
 
 TM31ExplanationText2: ; 5cce9 (17:4ce9)
 	TX_FAR _TM31ExplanationText2 ; 0xa16c5
 	db "@"
-; 0x5cce9 + 5 bytes = 0x5ccee
 
 TM31NoRoomText: ; 5ccee (17:4cee)
 	TX_FAR _TM31NoRoomText ; 0xa1733
 	db $d, "@"
-; 0x5ccf4
 
 CopycatsHouseF2Text2: ; 5ccf4 (17:4cf4)
 	TX_FAR _CopycatsHouseF2Text2
@@ -93116,12 +90565,10 @@ CopycatsHouseF2Text7: ; 5cd03 (17:4d03)
 UnnamedText_5cd17: ; 5cd17 (17:4d17)
 	TX_FAR _UnnamedText_5cd17
 	db "@"
-; 0x5cd17 + 5 bytes
 
 UnnamedText_5cd1c: ; 5cd1c (17:4d1c)
 	TX_FAR _UnnamedText_5cd1c
 	db "@"
-; 0x5cd1c + 5 bytes
 
 CopycatsHouseF2Object: ; 0x5cd21 (size=48)
 	db $a ; border tile
@@ -93159,7 +90606,6 @@ FightingDojoScript: ; 5cd5d (17:4d5d)
 	call ExecuteCurMapScriptInTable
 	ld [W_FIGHTINGDOJOCURSCRIPT], a
 	ret
-; 0x5cd70
 
 INCBIN "baserom.gbc",$5cd70,$5cd7b - $5cd70
 
@@ -93178,7 +90624,6 @@ FightingDojoTrainerHeader0: ; 5ce13 (17:4e13)
 	dw FightingDojoAfterBattleText1 ; 0x4eb6 TextAfterBattle
 	dw FightingDojoEndBattleText1 ; 0x4eb1 TextEndBattle
 	dw FightingDojoEndBattleText1 ; 0x4eb1 TextEndBattle
-; 0x5ce1f
 
 FightingDojoTrainerHeader1: ; 5ce1f (17:4e1f)
 	db $3 ; flag's bit
@@ -93188,7 +90633,6 @@ FightingDojoTrainerHeader1: ; 5ce1f (17:4e1f)
 	dw FightingDojoAfterBattleText2 ; 0x4ecf TextAfterBattle
 	dw FightingDojoEndBattleText2 ; 0x4eca TextEndBattle
 	dw FightingDojoEndBattleText2 ; 0x4eca TextEndBattle
-; 0x5ce2b
 
 FightingDojoTrainerHeader2: ; 5ce2b (17:4e2b)
 	db $4 ; flag's bit
@@ -93198,7 +90642,6 @@ FightingDojoTrainerHeader2: ; 5ce2b (17:4e2b)
 	dw FightingDojoAfterBattleText3 ; 0x4ee8 TextAfterBattle
 	dw FightingDojoEndBattleText3 ; 0x4ee3 TextEndBattle
 	dw FightingDojoEndBattleText3 ; 0x4ee3 TextEndBattle
-; 0x5ce37
 
 FightingDojoTrainerHeader3: ; 5ce37 (17:4e37)
 	db $5 ; flag's bit
@@ -93208,7 +90651,6 @@ FightingDojoTrainerHeader3: ; 5ce37 (17:4e37)
 	dw FightingDojoAfterBattleText4 ; 0x4f01 TextAfterBattle
 	dw FightingDojoEndBattleText4 ; 0x4efc TextEndBattle
 	dw FightingDojoEndBattleText4 ; 0x4efc TextEndBattle
-; 0x5ce43
 
 db $ff
 
@@ -93248,22 +90690,18 @@ FightingDojoText1: ; 5ce44 (17:4e44)
 UnnamedText_5ce8e: ; 5ce8e (17:4e8e)
 	TX_FAR _UnnamedText_5ce8e
 	db "@"
-; 0x5ce8e + 5 bytes
 
 UnnamedText_5ce93: ; 5ce93 (17:4e93)
 	TX_FAR _UnnamedText_5ce93
 	db "@"
-; 0x5ce93 + 5 bytes
 
 FightingDojoText8: ; 5ce98 (17:4e98)
 	TX_FAR _UnnamedText_5ce98
 	db "@"
-; 0x5ce98 + 5 bytes
 
 UnnamedText_5ce9d: ; 5ce9d (17:4e9d)
 	TX_FAR _UnnamedText_5ce9d
 	db "@"
-; 0x5ce9d + 5 bytes
 
 FightingDojoText2: ; 5cea2 (17:4ea2)
 	db $08 ; asm
@@ -93274,17 +90712,14 @@ FightingDojoText2: ; 5cea2 (17:4ea2)
 FightingDojoBattleText1: ; 5ceac (17:4eac)
 	TX_FAR _FightingDojoBattleText1
 	db "@"
-; 0x5ceac + 5 bytes
 
 FightingDojoEndBattleText1: ; 5ceb1 (17:4eb1)
 	TX_FAR _FightingDojoEndBattleText1
 	db "@"
-; 0x5ceb1 + 5 bytes
 
 FightingDojoAfterBattleText1: ; 5ceb6 (17:4eb6)
 	TX_FAR _FightingDojoAfterBattleText1
 	db "@"
-; 0x5ceb6 + 5 bytes
 
 FightingDojoText3: ; 5cebb (17:4ebb)
 	db $08 ; asm
@@ -93295,17 +90730,14 @@ FightingDojoText3: ; 5cebb (17:4ebb)
 FightingDojoBattleText2: ; 5cec5 (17:4ec5)
 	TX_FAR _FightingDojoBattleText2
 	db "@"
-; 0x5cec5 + 5 bytes
 
 FightingDojoEndBattleText2: ; 5ceca (17:4eca)
 	TX_FAR _FightingDojoEndBattleText2
 	db "@"
-; 0x5ceca + 5 bytes
 
 FightingDojoAfterBattleText2: ; 5cecf (17:4ecf)
 	TX_FAR _FightingDojoAfterBattleText2
 	db "@"
-; 0x5cecf + 5 bytes
 
 FightingDojoText4: ; 5ced4 (17:4ed4)
 	db $08 ; asm
@@ -93316,17 +90748,14 @@ FightingDojoText4: ; 5ced4 (17:4ed4)
 FightingDojoBattleText3: ; 5cede (17:4ede)
 	TX_FAR _FightingDojoBattleText3
 	db "@"
-; 0x5cede + 5 bytes
 
 FightingDojoEndBattleText3: ; 5cee3 (17:4ee3)
 	TX_FAR _FightingDojoEndBattleText3
 	db "@"
-; 0x5cee3 + 5 bytes
 
 FightingDojoAfterBattleText3: ; 5cee8 (17:4ee8)
 	TX_FAR _FightingDojoAfterBattleText3
 	db "@"
-; 0x5cee8 + 5 bytes
 
 FightingDojoText5: ; 5ceed (17:4eed)
 	db $08 ; asm
@@ -93337,17 +90766,14 @@ FightingDojoText5: ; 5ceed (17:4eed)
 FightingDojoBattleText4: ; 5cef7 (17:4ef7)
 	TX_FAR _FightingDojoBattleText4
 	db "@"
-; 0x5cef7 + 5 bytes
 
 FightingDojoEndBattleText4: ; 5cefc (17:4efc)
 	TX_FAR _FightingDojoEndBattleText4
 	db "@"
-; 0x5cefc + 5 bytes
 
 FightingDojoAfterBattleText4: ; 5cf01 (17:4f01)
 	TX_FAR _FightingDojoAfterBattleText4
 	db "@"
-; 0x5cf01 + 5 bytes
 
 FightingDojoText6: ; 5cf06 (17:4f06)
 ; Hitmonlee Poké Ball
@@ -93387,7 +90813,6 @@ FightingDojoText6: ; 5cf06 (17:4f06)
 WantHitmonleeText: ; 5cf49 (17:4f49)
 	TX_FAR _WantHitmonleeText
 	db "@"
-; 0x5cf49 + 5 bytes
 
 FightingDojoText7: ; 5cf4e (17:4f4e)
 ; Hitmonchan Poké Ball
@@ -93427,12 +90852,10 @@ FightingDojoText7: ; 5cf4e (17:4f4e)
 WantHitmonchanText: ; 5cf91 (17:4f91)
 	TX_FAR _WantHitmonchanText
 	db "@"
-; 0x5cf91 + 5 bytes
 
 OtherHitmonText: ; 5cf96 (17:4f96)
 	TX_FAR _OtherHitmonText
 	db "@"
-; 0x5cf96 + 5 bytes
 
 FightingDojoObject: ; 0x5cf9b (size=72)
 	db $3 ; border tile
@@ -93479,7 +90902,7 @@ SaffronGymScript: ; 5d00d (17:500d)
 	call ExecuteCurMapScriptInTable
 	ld [W_SAFFRONGYMCURSCRIPT], a
 	ret
-; 0x5d02a
+
 .extra
 	ld hl, Gym6CityName ; $5033
 	ld de, Gym6LeaderName ; $5040
@@ -93491,7 +90914,6 @@ Gym6CityName: ; 5d033 (17:5033)
 Gym6LeaderName: ; 5d040 (17:5040)
 	db "SABRINA@"
 
-; known jump sources: 5d060 (17:5060), 5d0a8 (17:50a8)
 Func_5d048: ; 5d048 (17:5048)
 	xor a
 	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
@@ -93507,7 +90929,6 @@ INCBIN "baserom.gbc",$5d053,$5d05b - $5d053
 	ld a, $f0
 	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
 
-; known jump sources: 5d124 (17:5124)
 Func_5d068: ; 5d068 (17:5068)
 	ld a, $a
 	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
@@ -93538,7 +90959,7 @@ Func_5d068: ; 5d068 (17:5068)
 	ld hl, $d7b4
 	set 0, [hl]
 	jp Func_5d048
-; 5d0ab (17:50ab)
+
 SaffronGymTexts: ; 5d0ab (17:50ab)
 	dw SaffronGymText1, SaffronGymText2, SaffronGymText3, SaffronGymText4, SaffronGymText5, SaffronGymText6, SaffronGymText7, SaffronGymText8, SaffronGymText9, SaffronGymText10, SaffronGymText11, SaffronGymText12
 
@@ -93551,7 +90972,6 @@ SaffronGymTrainerHeader0: ; 5d0c3 (17:50c3)
 	dw SaffronGymAfterBattleText1 ; 0x51fa TextAfterBattle
 	dw SaffronGymEndBattleText1 ; 0x51f5 TextEndBattle
 	dw SaffronGymEndBattleText1 ; 0x51f5 TextEndBattle
-; 0x5d0cf
 
 SaffronGymTrainerHeader1: ; 5d0cf (17:50cf)
 	db $3 ; flag's bit
@@ -93561,7 +90981,6 @@ SaffronGymTrainerHeader1: ; 5d0cf (17:50cf)
 	dw SaffronGymAfterBattleText2 ; 0x5209 TextAfterBattle
 	dw SaffronGymEndBattleText2 ; 0x5204 TextEndBattle
 	dw SaffronGymEndBattleText2 ; 0x5204 TextEndBattle
-; 0x5d0db
 
 SaffronGymTrainerHeader2: ; 5d0db (17:50db)
 	db $4 ; flag's bit
@@ -93571,7 +90990,6 @@ SaffronGymTrainerHeader2: ; 5d0db (17:50db)
 	dw SaffronGymAfterBattleText3 ; 0x5218 TextAfterBattle
 	dw SaffronGymEndBattleText3 ; 0x5213 TextEndBattle
 	dw SaffronGymEndBattleText3 ; 0x5213 TextEndBattle
-; 0x5d0e7
 
 SaffronGymTrainerHeader3: ; 5d0e7 (17:50e7)
 	db $5 ; flag's bit
@@ -93581,7 +90999,6 @@ SaffronGymTrainerHeader3: ; 5d0e7 (17:50e7)
 	dw SaffronGymAfterBattleText4 ; 0x5227 TextAfterBattle
 	dw SaffronGymEndBattleText4 ; 0x5222 TextEndBattle
 	dw SaffronGymEndBattleText4 ; 0x5222 TextEndBattle
-; 0x5d0f3
 
 SaffronGymTrainerHeader4: ; 5d0f3 (17:50f3)
 	db $6 ; flag's bit
@@ -93591,7 +91008,6 @@ SaffronGymTrainerHeader4: ; 5d0f3 (17:50f3)
 	dw SaffronGymAfterBattleText5 ; 0x5236 TextAfterBattle
 	dw SaffronGymEndBattleText5 ; 0x5231 TextEndBattle
 	dw SaffronGymEndBattleText5 ; 0x5231 TextEndBattle
-; 0x5d0ff
 
 SaffronGymTrainerHeader5: ; 5d0ff (17:50ff)
 	db $7 ; flag's bit
@@ -93601,7 +91017,6 @@ SaffronGymTrainerHeader5: ; 5d0ff (17:50ff)
 	dw SaffronGymAfterBattleText6 ; 0x5245 TextAfterBattle
 	dw SaffronGymEndBattleText6 ; 0x5240 TextEndBattle
 	dw SaffronGymEndBattleText6 ; 0x5240 TextEndBattle
-; 0x5d10b
 
 SaffronGymTrainerHeader6: ; 5d10b (17:510b)
 	db $8 ; flag's bit
@@ -93611,7 +91026,6 @@ SaffronGymTrainerHeader6: ; 5d10b (17:510b)
 	dw SaffronGymAfterBattleText7 ; 0x5254 TextAfterBattle
 	dw SaffronGymEndBattleText7 ; 0x524f TextEndBattle
 	dw SaffronGymEndBattleText7 ; 0x524f TextEndBattle
-; 0x5d117
 
 db $ff
 
@@ -93652,24 +91066,20 @@ SaffronGymText1: ; 5d118 (17:5118)
 UnnamedText_5d162: ; 5d162 (17:5162)
 	TX_FAR _UnnamedText_5d162
 	db "@"
-; 0x5d162 + 5 bytes
 
 UnnamedText_5d167: ; 5d167 (17:5167)
 	TX_FAR _UnnamedText_5d167 ; 0xa1c73
 	db $11 ; play same sound as red giving oak parcel
 	db $6 ; wait for keypress
 	db "@"
-; 0x5d16e
 
 UnnamedText_5d16e: ; 5d16e (17:516e)
 	TX_FAR _UnnamedText_5d16e
 	db "@"
-; 0x5d16e + 5 bytes
 
 SaffronGymText10: ; 5d173 (17:5173)
 	TX_FAR _UnnamedText_5d173
 	db "@"
-; 0x5d173 + 5 bytes
 
 SaffronGymText11: ; 5d178 (17:5178)
 	TX_FAR ReceivedTM46Text
@@ -93680,7 +91090,6 @@ SaffronGymText11: ; 5d178 (17:5178)
 SaffronGymText12: ; 5d182 (17:5182)
 	TX_FAR _TM46NoRoomText ; pack full
 	db "@"
-; 0x5d182 + 5 bytes
 
 SaffronGymText2: ; 5d187 (17:5187)
 	db $08 ; asm
@@ -93741,117 +91150,94 @@ SaffronGymText9: ; 5d1cd (17:51cd)
 UnnamedText_5d1e6: ; 5d1e6 (17:51e6)
 	TX_FAR _UnnamedText_5d1e6
 	db "@"
-; 0x5d1e6 + 5 bytes
 
 UnnamedText_5d1eb: ; 5d1eb (17:51eb)
 	TX_FAR _UnnamedText_5d1eb
 	db "@"
-; 0x5d1eb + 5 bytes
 
 SaffronGymBattleText1: ; 5d1f0 (17:51f0)
 	TX_FAR _SaffronGymBattleText1
 	db "@"
-; 0x5d1f0 + 5 bytes
 
 SaffronGymEndBattleText1: ; 5d1f5 (17:51f5)
 	TX_FAR _SaffronGymEndBattleText1
 	db "@"
-; 0x5d1f5 + 5 bytes
 
 SaffronGymAfterBattleText1: ; 5d1fa (17:51fa)
 	TX_FAR _SaffronGymAfterBattleText1
 	db "@"
-; 0x5d1fa + 5 bytes
 
 SaffronGymBattleText2: ; 5d1ff (17:51ff)
 	TX_FAR _SaffronGymBattleText2
 	db "@"
-; 0x5d1ff + 5 bytes
 
 SaffronGymEndBattleText2: ; 5d204 (17:5204)
 	TX_FAR _SaffronGymEndBattleText2
 	db "@"
-; 0x5d204 + 5 bytes
 
 SaffronGymAfterBattleText2: ; 5d209 (17:5209)
 	TX_FAR _SaffronGymAfterBattleText2
 	db "@"
-; 0x5d209 + 5 bytes
 
 SaffronGymBattleText3: ; 5d20e (17:520e)
 	TX_FAR _SaffronGymBattleText3
 	db "@"
-; 0x5d20e + 5 bytes
 
 SaffronGymEndBattleText3: ; 5d213 (17:5213)
 	TX_FAR _SaffronGymEndBattleText3
 	db "@"
-; 0x5d213 + 5 bytes
 
 SaffronGymAfterBattleText3: ; 5d218 (17:5218)
 	TX_FAR _SaffronGymAfterBattleText3
 	db "@"
-; 0x5d218 + 5 bytes
 
 SaffronGymBattleText4: ; 5d21d (17:521d)
 	TX_FAR _SaffronGymBattleText4
 	db "@"
-; 0x5d21d + 5 bytes
 
 SaffronGymEndBattleText4: ; 5d222 (17:5222)
 	TX_FAR _SaffronGymEndBattleText4
 	db "@"
-; 0x5d222 + 5 bytes
 
 SaffronGymAfterBattleText4: ; 5d227 (17:5227)
 	TX_FAR _SaffronGymAfterBattleText4
 	db "@"
-; 0x5d227 + 5 bytes
 
 SaffronGymBattleText5: ; 5d22c (17:522c)
 	TX_FAR _SaffronGymBattleText5
 	db "@"
-; 0x5d22c + 5 bytes
 
 SaffronGymEndBattleText5: ; 5d231 (17:5231)
 	TX_FAR _SaffronGymEndBattleText5
 	db "@"
-; 0x5d231 + 5 bytes
 
 SaffronGymAfterBattleText5: ; 5d236 (17:5236)
 	TX_FAR _SaffronGymAfterBattleText5
 	db "@"
-; 0x5d236 + 5 bytes
 
 SaffronGymBattleText6: ; 5d23b (17:523b)
 	TX_FAR _SaffronGymBattleText6
 	db "@"
-; 0x5d23b + 5 bytes
 
 SaffronGymEndBattleText6: ; 5d240 (17:5240)
 	TX_FAR _SaffronGymEndBattleText6
 	db "@"
-; 0x5d240 + 5 bytes
 
 SaffronGymAfterBattleText6: ; 5d245 (17:5245)
 	TX_FAR _SaffronGymAfterBattleText6
 	db "@"
-; 0x5d245 + 5 bytes
 
 SaffronGymBattleText7: ; 5d24a (17:524a)
 	TX_FAR _SaffronGymBattleText7
 	db "@"
-; 0x5d24a + 5 bytes
 
 SaffronGymEndBattleText7: ; 5d24f (17:524f)
 	TX_FAR _SaffronGymEndBattleText7
 	db "@"
-; 0x5d24f + 5 bytes
 
 SaffronGymAfterBattleText7: ; 5d254 (17:5254)
 	TX_FAR _SaffronGymAfterBattleText7
 	db "@"
-; 0x5d254 + 5 bytes
 
 SaffronGymObject: ; 0x5d259 (size=330)
 	db $2e ; border tile
@@ -93950,7 +91336,6 @@ SaffronMart_h: ; 0x5d3fd to 0x5d409 (12 bytes) (id=180)
 
 SaffronMartScript: ; 5d409 (17:5409)
 	jp EnableAutoTextBoxDrawing
-; 0x5d40c
 
 SaffronMartTexts: ; 5d40c (17:540c)
 	dw SaffronMartText1, SaffronMartText2, SaffronMartText3
@@ -94002,7 +91387,6 @@ SilphCo1Script: ; 5d44e (17:544e)
 	ld [$cc4d], a
 	ld a, $15
 	jp Predef
-; 0x5d469
 
 SilphCo1Texts: ; 5d469 (17:5469)
 	dw SilphCo1Text1
@@ -94047,7 +91431,6 @@ SaffronPokecenter_h: ; 0x5d529 to 0x5d535 (12 bytes) (id=182)
 SaffronPokecenterScript: ; 5d535 (17:5535)
 	call Func_22fa
 	jp EnableAutoTextBoxDrawing
-; 0x5d53b
 
 SaffronPokecenterTexts: ; 5d53b (17:553b)
 	dw SaffronPokecenterText1, SaffronPokecenterText2, SaffronPokecenterText3, SaffronPokecenterText4
@@ -94095,7 +91478,6 @@ ViridianForestexit_h: ; 0x5d57b to 0x5d587 (12 bytes) (id=47)
 
 ViridianForestexitScript: ; 5d587 (17:5587)
 	jp EnableAutoTextBoxDrawing
-; 0x5d58a
 
 ViridianForestexitTexts: ; 5d58a (17:558a)
 	dw ViridianForestexitText1, ViridianForestexitText2
@@ -94139,7 +91521,6 @@ Route2Gate_h: ; 0x5d5c8 to 0x5d5d4 (12 bytes) (id=49)
 
 Route2GateScript: ; 5d5d4 (17:55d4)
 	jp EnableAutoTextBoxDrawing
-; 0x5d5d7
 
 Route2GateTexts: ; 5d5d7 (17:55d7)
 	dw Route2GateText1, Route2GateText2
@@ -94175,7 +91556,6 @@ Route2GateText1: ; 5d5db (17:55db)
 UnnamedText_5d616: ; 5d616 (17:5616)
 	TX_FAR _UnnamedText_5d616
 	db "@"
-; 0x5d616 + 5 bytes
 
 Route2GateText2: ; 5d61b (17:561b)
 	TX_FAR _Route2GateText2
@@ -94212,7 +91592,6 @@ ViridianForestEntrance_h: ; 0x5d650 to 0x5d65c (12 bytes) (id=50)
 
 ViridianForestEntranceScript: ; 5d65c (17:565c)
 	jp EnableAutoTextBoxDrawing
-; 0x5d65f
 
 ViridianForestEntranceTexts: ; 5d65f (17:565f)
 	dw ViridianForestEntranceText1, ViridianForestEntranceText2
@@ -94258,7 +91637,6 @@ UndergroundTunnelEntranceRoute5Script: ; 5d6a9 (17:56a9)
 	ld a, $10
 	ld [$d365], a
 	ret
-; 0x5d6af
 
 UndergroundTunnelEntranceRoute5_5d6af: ; 5d6af (17:56af)
 	db $50
@@ -94305,7 +91683,6 @@ UndergroundTunnelEntranceRoute6Script: ; 5d6ef (17:56ef)
 	ld a, $11
 	ld [$d365], a
 	jp EnableAutoTextBoxDrawing
-; 0x5d6f7
 
 UndergroundTunnelEntranceRoute6Texts: ; 5d6f7 (17:56f7)
 	dw UndergroundTunnelEntranceRoute6Text1
@@ -94346,7 +91723,6 @@ UndergroundPathEntranceRoute7Script: ; 5d72c (17:572c)
 	ld a, $12
 	ld [$d365], a
 	jp EnableAutoTextBoxDrawing
-; 0x5d734
 
 UndergroundPathEntranceRoute7Texts: ; 5d734 (17:5734)
 	dw UndergroundPathEntranceRoute7Text1
@@ -94379,22 +91755,18 @@ INCBIN "baserom.gbc",$5d75d,$5d773 - $5d75d
 UnnamedText_5d773: ; 5d773 (17:5773)
 	TX_FAR _UnnamedText_5d773
 	db "@"
-; 0x5d773 + 5 bytes
 
 UnnamedText_5d778: ; 5d778 (17:5778)
 	TX_FAR _UnnamedText_5d778
 	db "@"
-; 0x5d778 + 5 bytes
 
 UnnamedText_5d77d: ; 5d77d (17:577d)
 	TX_FAR _UnnamedText_5d77d
 	db "@"
-; 0x5d77d + 5 bytes
 
 UnnamedText_5d782: ; 5d782 (17:5782)
 	TX_FAR _UnnamedText_5d782
 	db "@"
-; 0x5d782 + 5 bytes
 
 INCBIN "baserom.gbc",$5d787,$5d7af - $5d787
 
@@ -94415,7 +91787,6 @@ SilphCo9Script: ; 5d7bb (17:57bb)
 	call ExecuteCurMapScriptInTable
 	ld [W_SILPHCO9CURSCRIPT], a
 	ret
-; 0x5d7d1
 
 SilphCo9Script_Unknown5d7d1: ; 5d7d1 (17:57d1)
 	ld hl, $d126
@@ -94467,7 +91838,6 @@ SilphCo9Script_Unknown5d7d1: ; 5d7d1 (17:57d1)
 Unknown_5d82e: ; 5d82e (17:582e)
 INCBIN "baserom.gbc",$5d82e,$5d837 - $5d82e
 
-; known jump sources: 5d7dc (17:57dc)
 Func_5d837: ; 5d837 (17:5837)
 	push hl
 	ld hl, $d73f
@@ -94504,7 +91874,6 @@ Func_5d837: ; 5d837 (17:5837)
 	ld [$FF00+$e0], a
 	ret
 
-; known jump sources: 5d7df (17:57df)
 Func_5d863: ; 5d863 (17:5863)
 	ld hl, $d834
 	ld a, [$FF00+$e0]
@@ -94545,7 +91914,6 @@ SilphCo9TrainerHeader0: ; 5d893 (17:5893)
 	dw SilphCo9AfterBattleText1 ; 0x591c TextAfterBattle
 	dw SilphCo9EndBattleText1 ; 0x5917 TextEndBattle
 	dw SilphCo9EndBattleText1 ; 0x5917 TextEndBattle
-; 0x5d89f
 
 SilphCo9TrainerHeader1: ; 5d89f (17:589f)
 	db $3 ; flag's bit
@@ -94555,7 +91923,6 @@ SilphCo9TrainerHeader1: ; 5d89f (17:589f)
 	dw SilphCo9AfterBattleText2 ; 0x592b TextAfterBattle
 	dw SilphCo9EndBattleText2 ; 0x5926 TextEndBattle
 	dw SilphCo9EndBattleText2 ; 0x5926 TextEndBattle
-; 0x5d8ab
 
 SilphCo9TrainerHeader2: ; 5d8ab (17:58ab)
 	db $4 ; flag's bit
@@ -94565,7 +91932,6 @@ SilphCo9TrainerHeader2: ; 5d8ab (17:58ab)
 	dw SilphCo9AfterBattleText3 ; 0x593a TextAfterBattle
 	dw SilphCo9EndBattleText3 ; 0x5935 TextEndBattle
 	dw SilphCo9EndBattleText3 ; 0x5935 TextEndBattle
-; 0x5d8b7
 
 db $ff
 
@@ -94593,17 +91959,14 @@ SilphCo9Text1: ; 5d8b8 (17:58b8)
 UnnamedText_5d8e5: ; 5d8e5 (17:58e5)
 	TX_FAR _UnnamedText_5d8e5
 	db "@"
-; 0x5d8e5 + 5 bytes
 
 UnnamedText_5d8ea: ; 5d8ea (17:58ea)
 	TX_FAR _UnnamedText_5d8ea
 	db "@"
-; 0x5d8ea + 5 bytes
 
 UnnamedText_5d8ef: ; 5d8ef (17:58ef)
 	TX_FAR _UnnamedText_5d8ef
 	db "@"
-; 0x5d8ef + 5 bytes
 
 SilphCo9Text2: ; 5d8f4 (17:58f4)
 	db $08 ; asm
@@ -94626,47 +91989,38 @@ SilphCo9Text4: ; 5d908 (17:5908)
 SilphCo9BattleText1: ; 5d912 (17:5912)
 	TX_FAR _SilphCo9BattleText1
 	db "@"
-; 0x5d912 + 5 bytes
 
 SilphCo9EndBattleText1: ; 5d917 (17:5917)
 	TX_FAR _SilphCo9EndBattleText1
 	db "@"
-; 0x5d917 + 5 bytes
 
 SilphCo9AfterBattleText1: ; 5d91c (17:591c)
 	TX_FAR _SilphCo9AfterBattleText1
 	db "@"
-; 0x5d91c + 5 bytes
 
 SilphCo9BattleText2: ; 5d921 (17:5921)
 	TX_FAR _SilphCo9BattleText2
 	db "@"
-; 0x5d921 + 5 bytes
 
 SilphCo9EndBattleText2: ; 5d926 (17:5926)
 	TX_FAR _SilphCo9EndBattleText2
 	db "@"
-; 0x5d926 + 5 bytes
 
 SilphCo9AfterBattleText2: ; 5d92b (17:592b)
 	TX_FAR _SilphCo9AfterBattleText2
 	db "@"
-; 0x5d92b + 5 bytes
 
 SilphCo9BattleText3: ; 5d930 (17:5930)
 	TX_FAR _SilphCo9BattleText3
 	db "@"
-; 0x5d930 + 5 bytes
 
 SilphCo9EndBattleText3: ; 5d935 (17:5935)
 	TX_FAR _SilphCo9EndBattleText3
 	db "@"
-; 0x5d935 + 5 bytes
 
 SilphCo9AfterBattleText3: ; 5d93a (17:593a)
 	TX_FAR _SilphCo9AfterBattleText3
 	db "@"
-; 0x5d93a + 5 bytes
 
 SilphCo9Object: ; 0x5d93f (size=74)
 	db $2e ; border tile
@@ -94716,7 +92070,6 @@ VictoryRoad1Script: ; 5da0a (17:5a0a)
 	call ExecuteCurMapScriptInTable
 	ld [W_VICTORYROAD1CURSCRIPT], a
 	ret
-; 0x5da27
 .next
 	ld a, [$d869]
 	bit 7, a
@@ -94756,7 +92109,6 @@ VictoryRoad1TrainerHeader0: ; 5da6d (17:5a6d)
 	dw VictoryRoad1AfterBattleText1 ; 0x5aa4 TextAfterBattle
 	dw VictoryRoad1EndBattleText1 ; 0x5a9f TextEndBattle
 	dw VictoryRoad1EndBattleText1 ; 0x5a9f TextEndBattle
-; 0x5da79
 
 VictoryRoad1TrainerHeader1: ; 5da79 (17:5a79)
 	db $2 ; flag's bit
@@ -94766,7 +92118,6 @@ VictoryRoad1TrainerHeader1: ; 5da79 (17:5a79)
 	dw VictoryRoad1AfterBattleText2 ; 0x5ab3 TextAfterBattle
 	dw VictoryRoad1EndBattleText2 ; 0x5aae TextEndBattle
 	dw VictoryRoad1EndBattleText2 ; 0x5aae TextEndBattle
-; 0x5da85
 
 db $ff
 
@@ -94785,32 +92136,26 @@ VictoryRoad1Text2: ; 5da90 (17:5a90)
 VictoryRoad1BattleText1: ; 5da9a (17:5a9a)
 	TX_FAR _VictoryRoad1BattleText1
 	db "@"
-; 0x5da9a + 5 bytes
 
 VictoryRoad1EndBattleText1: ; 5da9f (17:5a9f)
 	TX_FAR _VictoryRoad1EndBattleText1
 	db "@"
-; 0x5da9f + 5 bytes
 
 VictoryRoad1AfterBattleText1: ; 5daa4 (17:5aa4)
 	TX_FAR _VictoryRoad1AfterBattleText1
 	db "@"
-; 0x5daa4 + 5 bytes
 
 VictoryRoad1BattleText2: ; 5daa9 (17:5aa9)
 	TX_FAR _VictoryRoad1BattleText2
 	db "@"
-; 0x5daa9 + 5 bytes
 
 VictoryRoad1EndBattleText2: ; 5daae (17:5aae)
 	TX_FAR _VictoryRoad1EndBattleText2
 	db "@"
-; 0x5daae + 5 bytes
 
 VictoryRoad1AfterBattleText2: ; 5dab3 (17:5ab3)
 	TX_FAR _VictoryRoad1AfterBattleText2
 	db "@"
-; 0x5dab3 + 5 bytes
 
 VictoryRoad1Object: ; 0x5dab8 (size=76)
 	db $7d ; border tile
@@ -94839,7 +92184,6 @@ VictoryRoad1Object: ; 0x5dab8 (size=76)
 VictoryRoad1Blocks: ; 5db04 (17:5b04)
 	INCBIN "maps/victoryroad1.blk"
 
-; known jump sources: 3aeaa (e:6eaa)
 ; updates the types of a party mon (pointed to in hl) to the ones of the mon specified in $d11e
 SetPartyMonTypes: ; 5db5e (17:5b5e)
 	call Load16BitRegisters
@@ -94861,14 +92205,12 @@ INCBIN "baserom.gbc",$5db79,$5db81 - $5db79
 UnnamedText_5db81: ; 5db81 (17:5b81)
 	TX_FAR _UnnamedText_5db81
 	db "@"
-; 0x5db81 + 5 bytes
 
 INCBIN "baserom.gbc",$5db86,$5dba8 - $5db86
 
 UnnamedText_5dba8: ; 5dba8 (17:5ba8)
 	TX_FAR _UnnamedText_5dba8
 	db "@"
-; 0x5dba8 + 5 bytes
 
 	ld a, $b7
 	ld [$cf91], a
@@ -94877,11 +92219,10 @@ UnnamedText_5dba8: ; 5dba8 (17:5ba8)
 	ld a, $9
 	call Func_3ef5
 	ret
-; 5dbbe (17:5bbe)
+
 UnnamedText_5dbbe: ; 5dbbe (17:5bbe)
 	TX_FAR _UnnamedText_5dbbe
 	db "@"
-; 0x5dbbe + 5 bytes
 
 	ld a, $b6
 	ld [$cf91], a
@@ -94890,13 +92231,11 @@ UnnamedText_5dbbe: ; 5dbbe (17:5bbe)
 	ld a, $b
 	call Func_3ef5
 	ret
-; 5dbd4 (17:5bd4)
+
 UnnamedText_5dbd4: ; 5dbd4 (17:5bd4)
 	TX_FAR _UnnamedText_5dbd4
 	db "@"
-; 0x5dbd4 + 5 bytes
 
-; known jump sources: 5dbb2 (17:5bb2), 5dbc8 (17:5bc8)
 Func_5dbd9: ; 5dbd9 (17:5bd9)
 	ld a, $1
 	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
@@ -94991,12 +92330,10 @@ Unknown_5dc2a: ; 5dc2a (17:5c2a)
 UnnamedText_5dc9e: ; 5dc9e (17:5c9e)
 	TX_FAR _UnnamedText_5dc9e
 	db "@"
-; 0x5dc9e + 5 bytes
 
 UnnamedText_5dca3: ; 5dca3 (17:5ca3)
 	TX_FAR _UnnamedText_5dca3
 	db "@"
-; 0x5dca3 + 5 bytes
 
 HowToLinkText: ; 5dca8 (17:5ca8)
 	db "HOW TO LINK",$4e,"COLOSSEUM",$4e,"TRADE CENTER",$4e,"STOP READING@"
@@ -95009,29 +92346,24 @@ PointerTable_5dcd8: ; 5dcd8 (17:5cd8)
 UnnamedText_5dcde: ; 5dcde (17:5cde)
 	TX_FAR _UnnamedText_5dcde
 	db "@"
-; 0x5dcde + 5 bytes
 
 UnnamedText_5dce3: ; 5dce3 (17:5ce3)
 	TX_FAR _UnnamedText_5dce3
 	db "@"
-; 0x5dce3 + 5 bytes
 
 UnnamedText_5dce8: ; 5dce8 (17:5ce8)
 	TX_FAR _UnnamedText_5dce8
 	db "@"
-; 0x5dce8 + 5 bytes
 
 INCBIN "baserom.gbc",$5dced,$5dda2 - $5dced
 
 UnnamedText_5dda2: ; 5dda2 (17:5da2)
 	TX_FAR _UnnamedText_5dda2
 	db "@"
-; 0x5dda2 + 5 bytes
 
 UnnamedText_5dda7: ; 5dda7 (17:5da7)
 	TX_FAR _UnnamedText_5dda7
 	db "@"
-; 0x5dda7 + 5 bytes
 
 StatusAilmentText:
 	db " SLP",$4e
@@ -95051,27 +92383,22 @@ PointerTable_5ddcc: ; 5ddcc (17:5ddc)
 UnnamedText_5ddd6: ; 5ddd6 (17:5dd6)
 	TX_FAR _UnnamedText_5ddd6
 	db "@"
-; 0x5ddd6 + 5 bytes
 
 UnnamedText_5dddb: ; 5dddb (17:5ddb)
 	TX_FAR _UnnamedText_5dddb
 	db "@"
-; 0x5dddb + 5 bytes
 
 UnnamedText_5dde0: ; 5dde0 (17:5de0)
 	TX_FAR _UnnamedText_5dde0
 	db "@"
-; 0x5dde0 + 5 bytes
 
 UnnamedText_5dde5: ; 5dde5 (17:5de5)
 	TX_FAR _UnnamedText_5dde5
 	db "@"
-; 0x5dde5 + 5 bytes
 
 UnnamedText_5ddea: ; 5ddea (17:5dea)
 	TX_FAR _UnnamedText_5ddea
 	db "@"
-; 0x5ddea + 5 bytes
 
 Unknown_5ddef: ; 5ddef (17:5def)
 	call EnableAutoTextBoxDrawing
@@ -95081,7 +92408,6 @@ Unknown_5ddef: ; 5ddef (17:5def)
 UnnamedText_5ddf7: ; 5ddf7 (17:5df7)
 	TX_FAR _UnnamedText_5ddf7
 	db "@"
-; 0x5ddf7 + 5 bytes
 
 	call EnableAutoTextBoxDrawing
 	ld a, [W_WHICHTRADE] ; $cd3d
@@ -95160,11 +92486,10 @@ INCBIN "baserom.gbc",$5de7d,$5decd - $5de7d
 	call PlaySound
 	call WaitForSoundToFinish
 	jp TextScriptEnd
-; 5dedb (17:5edb)
+
 UnnamedText_5dedb: ; 5dedb (17:5edb)
 	TX_FAR _UnnamedText_5dedb
 	db "@"
-; 0x5dedb + 5 bytes
 
 INCBIN "baserom.gbc",$5dee0,$5def4 - $5dee0
 	call WaitForSoundToFinish
@@ -95179,7 +92504,7 @@ INCBIN "baserom.gbc",$5df02,$5df07 - $5df02
 	call PlaySound
 	call WaitForSoundToFinish
 	jp TextScriptEnd
-; 5df15 (17:5f15)
+
 SECTION "bank18",ROMX,BANK[$18]
 
 ViridianForestBlocks: ; 60000 (18:4000)
@@ -95204,7 +92529,6 @@ PokemonTower1_h: ; 0x60420 to 0x6042c (12 bytes) (id=142)
 
 PokemonTower1Script: ; 6042c (18:442c)
 	jp EnableAutoTextBoxDrawing
-; 0x6042f
 
 PokemonTower1Texts: ; 6042f (18:442f)
 	dw PokemonTower1Text1, PokemonTower1Text2, PokemonTower1Text3, PokemonTower1Text4, PokemonTower1Text5
@@ -95267,16 +92591,14 @@ PokemonTower2Script: ; 604f2 (18:44f2)
 	ld hl, PokemonTower2Scripts
 	ld a, [W_POKEMONTOWER2CURSCRIPT]
 	jp CallFunctionInTable
-; 0x604fe
 
-; known jump sources: 60568 (18:4568)
 Func_604fe: ; 604fe (18:44fe)
 	xor a
 	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
 	ld [W_POKEMONTOWER2CURSCRIPT], a
 	ld [W_CURMAPSCRIPT], a
 	ret
-; 60509 (18:4509)
+
 PokemonTower2Scripts: ; 60509 (18:4509)
 	dw PokemonTower2Script0, PokemonTower2Script1, PokemonTower2Script2
 
@@ -95318,7 +92640,6 @@ PokemonTower2Script0: ; 6050f (18:450f)
 	ld [H_CURRENTPRESSEDBUTTONS], a
 	ld [H_NEWLYPRESSEDBUTTONS], a
 	ret
-; 0x6055e
 
 Unknown_6055e: ; 6055e (18:455e)
 INCBIN "baserom.gbc",$6055e,$60563 - $6055e
@@ -95353,7 +92674,6 @@ PokemonTower2Script1: ; 60563 (18:4563)
 	ld [W_POKEMONTOWER2CURSCRIPT], a
 	ld [W_CURMAPSCRIPT], a
 	ret
-; 0x605a9
 
 Unknown_605a9: ; 605a9 (18:45a9)
 INCBIN "baserom.gbc",$605a9,$605b2 - $605a9
@@ -95376,7 +92696,6 @@ PokemonTower2Script2: ; 605bb (18:45bb)
 	ld [W_POKEMONTOWER2CURSCRIPT], a
 	ld [W_CURMAPSCRIPT], a
 	ret
-; 0x605db
 
 PokemonTower2Texts: ; 605db (18:45db)
 	dw PokemonTower2Text1, PokemonTower2Text2
@@ -95426,22 +92745,18 @@ PokemonTower2Text1: ; 605df (18:45df)
 UnnamedText_6062d: ; 6062d (18:462d)
 	TX_FAR _UnnamedText_6062d
 	db "@"
-; 0x6062d + 5 bytes
 
 UnnamedText_60632: ; 60632 (18:4632)
 	TX_FAR _UnnamedText_60632
 	db "@"
-; 0x60632 + 5 bytes
 
 UnnamedText_60637: ; 60637 (18:4637)
 	TX_FAR _UnnamedText_60637
 	db "@"
-; 0x60637 + 5 bytes
 
 UnnamedText_6063c: ; 6063c (18:463c)
 	TX_FAR _UnnamedText_6063c
 	db "@"
-; 0x6063c + 5 bytes
 
 PokemonTower2Text2: ; 60641 (18:4641)
 	TX_FAR _PokemonTower2Text2
@@ -95483,7 +92798,6 @@ PokemonTower3Script: ; 606cc (18:46cc)
 	call ExecuteCurMapScriptInTable
 	ld [W_POKEMONTOWER3CURSCRIPT], a
 	ret
-; 0x606df
 
 Unknown_606df: ; 606df (18:46df)
 INCBIN "baserom.gbc",$606df,$606e5 - $606df
@@ -95500,7 +92814,6 @@ PokemonTower3TrainerHeader0: ; 606ed (18:46ed)
 	dw PokemonTower3AfterBattleText1 ; 0x473a TextAfterBattle
 	dw PokemonTower3EndBattleText1 ; 0x4735 TextEndBattle
 	dw PokemonTower3EndBattleText1 ; 0x4735 TextEndBattle
-; 0x606f9
 
 PokemonTower3TrainerHeader1: ; 606f9 (18:46f9)
 	db $2 ; flag's bit
@@ -95510,7 +92823,6 @@ PokemonTower3TrainerHeader1: ; 606f9 (18:46f9)
 	dw PokemonTower3AfterBattleText2 ; 0x4749 TextAfterBattle
 	dw PokemonTower3EndBattleText2 ; 0x4744 TextEndBattle
 	dw PokemonTower3EndBattleText2 ; 0x4744 TextEndBattle
-; 0x60705
 
 PokemonTower3TrainerHeader2: ; 60705 (18:4705)
 	db $3 ; flag's bit
@@ -95520,7 +92832,6 @@ PokemonTower3TrainerHeader2: ; 60705 (18:4705)
 	dw PokemonTower3AfterBattleText3 ; 0x4758 TextAfterBattle
 	dw PokemonTower3EndBattleText3 ; 0x4753 TextEndBattle
 	dw PokemonTower3EndBattleText3 ; 0x4753 TextEndBattle
-; 0x60711
 db $ff
 
 PokemonTower3Text1: ; 60712 (18:4712)
@@ -95544,47 +92855,38 @@ PokemonTower3Text3: ; 60726 (18:4726)
 PokemonTower3BattleText1: ; 60730 (18:4730)
 	TX_FAR _PokemonTower3BattleText1
 	db "@"
-; 0x60730 + 5 bytes
 
 PokemonTower3EndBattleText1: ; 60735 (18:4735)
 	TX_FAR _PokemonTower3EndBattleText1
 	db "@"
-; 0x60735 + 5 bytes
 
 PokemonTower3AfterBattleText1: ; 6073a (18:473a)
 	TX_FAR _PokemonTower3AfterBattleText1
 	db "@"
-; 0x6073a + 5 bytes
 
 PokemonTower3BattleText2: ; 6073f (18:473f)
 	TX_FAR _PokemonTower3BattleText2
 	db "@"
-; 0x6073f + 5 bytes
 
 PokemonTower3EndBattleText2: ; 60744 (18:4744)
 	TX_FAR _PokemonTower3EndBattleText2
 	db "@"
-; 0x60744 + 5 bytes
 
 PokemonTower3AfterBattleText2: ; 60749 (18:4749)
 	TX_FAR _PokemonTower3AfterBattleText2
 	db "@"
-; 0x60749 + 5 bytes
 
 PokemonTower3BattleText3: ; 6074e (18:474e)
 	TX_FAR _PokemonTower3BattleText3
 	db "@"
-; 0x6074e + 5 bytes
 
 PokemonTower3EndBattleText3: ; 60753 (18:4753)
 	TX_FAR _PokemonTower3EndBattleText3
 	db "@"
-; 0x60753 + 5 bytes
 
 PokemonTower3AfterBattleText3: ; 60758 (18:4758)
 	TX_FAR _PokemonTower3AfterBattleText3
 	db "@"
-; 0x60758 + 5 bytes
 
 PokemonTower3Object: ; 0x6075d (size=51)
 	db $1 ; border tile
@@ -95624,7 +92926,6 @@ PokemonTower4Script: ; 607f6 (18:47f6)
 	call ExecuteCurMapScriptInTable
 	ld [W_POKEMONTOWER4CURSCRIPT], a
 	ret
-; 0x60809
 
 PokemonTower4Script_Unknown60809: ; 60809 (18:4809)
 INCBIN "baserom.gbc",$60809,$6080f - $60809
@@ -95641,7 +92942,6 @@ PokemonTower4TrainerHeader0: ; 6081b (18:481b)
 	dw PokemonTower4AfterBattleText1 ; 0x4868 TextAfterBattle
 	dw PokemonTower4EndBattleText1 ; 0x4863 TextEndBattle
 	dw PokemonTower4EndBattleText1 ; 0x4863 TextEndBattle
-; 0x60827
 
 PokemonTower4TrainerHeader1: ; 60827 (18:4827)
 	db $2 ; flag's bit
@@ -95651,7 +92951,6 @@ PokemonTower4TrainerHeader1: ; 60827 (18:4827)
 	dw PokemonTower4AfterBattleText2 ; 0x4877 TextAfterBattle
 	dw PokemonTower4EndBattleText2 ; 0x4872 TextEndBattle
 	dw PokemonTower4EndBattleText2 ; 0x4872 TextEndBattle
-; 0x60833
 
 PokemonTower4TrainerHeader2: ; 60833 (18:4833)
 	db $3 ; flag's bit
@@ -95661,7 +92960,6 @@ PokemonTower4TrainerHeader2: ; 60833 (18:4833)
 	dw PokemonTower4AfterBattleText3 ; 0x4886 TextAfterBattle
 	dw PokemonTower4EndBattleText3 ; 0x4881 TextEndBattle
 	dw PokemonTower4EndBattleText3 ; 0x4881 TextEndBattle
-; 0x6083f
 
 db $ff
 
@@ -95686,47 +92984,38 @@ PokemonTower4Text3: ; 60854 (18:4854)
 PokemonTower4BattleText1: ; 6085e (18:485e)
 	TX_FAR _PokemonTower4BattleText1
 	db "@"
-; 0x6085e + 5 bytes
 
 PokemonTower4EndBattleText1: ; 60863 (18:4863)
 	TX_FAR _PokemonTower4EndBattleText1
 	db "@"
-; 0x60863 + 5 bytes
 
 PokemonTower4AfterBattleText1: ; 60868 (18:4868)
 	TX_FAR _PokemonTower4AfterBattleText1
 	db "@"
-; 0x60868 + 5 bytes
 
 PokemonTower4BattleText2: ; 6086d (18:486d)
 	TX_FAR _PokemonTower4BattleText2
 	db "@"
-; 0x6086d + 5 bytes
 
 PokemonTower4EndBattleText2: ; 60872 (18:4872)
 	TX_FAR _PokemonTower4EndBattleText2
 	db "@"
-; 0x60872 + 5 bytes
 
 PokemonTower4AfterBattleText2: ; 60877 (18:4877)
 	TX_FAR _PokemonTower4AfterBattleText2
 	db "@"
-; 0x60877 + 5 bytes
 
 PokemonTower4BattleText3: ; 6087c (18:487c)
 	TX_FAR _PokemonTower4BattleText3
 	db "@"
-; 0x6087c + 5 bytes
 
 PokemonTower4EndBattleText3: ; 60881 (18:4881)
 	TX_FAR _PokemonTower4EndBattleText3
 	db "@"
-; 0x60881 + 5 bytes
 
 PokemonTower4AfterBattleText3: ; 60886 (18:4886)
 	TX_FAR _PokemonTower4AfterBattleText3
 	db "@"
-; 0x60886 + 5 bytes
 
 PokemonTower4Object: ; 0x6088b (size=65)
 	db $1 ; border tile
@@ -95768,7 +93057,6 @@ PokemonTower5Script: ; 60932 (18:4932)
 	call ExecuteCurMapScriptInTable
 	ld [W_POKEMONTOWER5CURSCRIPT], a
 	ret
-; 0x60945
 
 PokemonTower5Script_Unknown60945: ; 60945 (18:4945)
 INCBIN "baserom.gbc",$60945,$6094b - $60945
@@ -95819,7 +93107,6 @@ PokemonTower5TrainerHeader0: ; 609a9 (18:49a9)
 	dw PokemonTower5AfterBattleText1 ; 0x49f3 TextAfterBattle
 	dw PokemonTower5EndBattleText1 ; 0x49ee TextEndBattle
 	dw PokemonTower5EndBattleText1 ; 0x49ee TextEndBattle
-; 0x609b5
 
 PokemonTower5TrainerHeader1: ; 609b5 (18:49b5)
 	db $3 ; flag's bit
@@ -95829,7 +93116,6 @@ PokemonTower5TrainerHeader1: ; 609b5 (18:49b5)
 	dw PokemonTower5AfterBattleText2 ; 0x4a0c TextAfterBattle
 	dw PokemonTower5EndBattleText2 ; 0x4a07 TextEndBattle
 	dw PokemonTower5EndBattleText2 ; 0x4a07 TextEndBattle
-; 0x609c1
 
 PokemonTower5TrainerHeader2: ; 609c1 (18:49c1)
 	db $4 ; flag's bit
@@ -95839,7 +93125,6 @@ PokemonTower5TrainerHeader2: ; 609c1 (18:49c1)
 	dw PokemonTower5AfterBattleText3 ; 0x4a25 TextAfterBattle
 	dw PokemonTower5EndBattleText3 ; 0x4a20 TextEndBattle
 	dw PokemonTower5EndBattleText3 ; 0x4a20 TextEndBattle
-; 0x609cd
 
 PokemonTower5TrainerHeader3: ; 609cd (18:49cd)
 	db $5 ; flag's bit
@@ -95849,7 +93134,6 @@ PokemonTower5TrainerHeader3: ; 609cd (18:49cd)
 	dw PokemonTower5AfterBattleText4 ; 0x4a3e TextAfterBattle
 	dw PokemonTower5EndBattleText4 ; 0x4a39 TextEndBattle
 	dw PokemonTower5EndBattleText4 ; 0x4a39 TextEndBattle
-; 0x609d9
 
 db $ff
 
@@ -95866,17 +93150,14 @@ PokemonTower5Text2: ; 609df (18:49df)
 PokemonTower5BattleText1: ; 609e9 (18:49e9)
 	TX_FAR _PokemonTower5BattleText1
 	db "@"
-; 0x609e9 + 5 bytes
 
 PokemonTower5EndBattleText1: ; 609ee (18:49ee)
 	TX_FAR _PokemonTower5EndBattleText1
 	db "@"
-; 0x609ee + 5 bytes
 
 PokemonTower5AfterBattleText1: ; 609f3 (18:49f3)
 	TX_FAR _PokemonTower5AfterBattleText1
 	db "@"
-; 0x609f3 + 5 bytes
 
 PokemonTower5Text3: ; 609f8 (18:49f8)
 	db $08 ; asm
@@ -95887,17 +93168,14 @@ PokemonTower5Text3: ; 609f8 (18:49f8)
 PokemonTower5BattleText2: ; 60a02 (18:4a02)
 	TX_FAR _PokemonTower5BattleText2
 	db "@"
-; 0x60a02 + 5 bytes
 
 PokemonTower5EndBattleText2: ; 60a07 (18:4a07)
 	TX_FAR _PokemonTower5EndBattleText2
 	db "@"
-; 0x60a07 + 5 bytes
 
 PokemonTower5AfterBattleText2: ; 60a0c (18:4a0c)
 	TX_FAR _PokemonTower5AfterBattleText2
 	db "@"
-; 0x60a0c + 5 bytes
 
 PokemonTower5Text4: ; 60a11 (18:4a11)
 	db $08 ; asm
@@ -95908,17 +93186,14 @@ PokemonTower5Text4: ; 60a11 (18:4a11)
 PokemonTower5BattleText3: ; 60a1b (18:4a1b)
 	TX_FAR _PokemonTower5BattleText3
 	db "@"
-; 0x60a1b + 5 bytes
 
 PokemonTower5EndBattleText3: ; 60a20 (18:4a20)
 	TX_FAR _PokemonTower5EndBattleText3
 	db "@"
-; 0x60a20 + 5 bytes
 
 PokemonTower5AfterBattleText3: ; 60a25 (18:4a25)
 	TX_FAR _PokemonTower5AfterBattleText3
 	db "@"
-; 0x60a25 + 5 bytes
 
 PokemonTower5Text5: ; 60a2a (18:4a2a)
 	db $08 ; asm
@@ -95929,22 +93204,18 @@ PokemonTower5Text5: ; 60a2a (18:4a2a)
 PokemonTower5BattleText4: ; 60a34 (18:4a34)
 	TX_FAR _PokemonTower5BattleText4
 	db "@"
-; 0x60a34 + 5 bytes
 
 PokemonTower5EndBattleText4: ; 60a39 (18:4a39)
 	TX_FAR _PokemonTower5EndBattleText4
 	db "@"
-; 0x60a39 + 5 bytes
 
 PokemonTower5AfterBattleText4: ; 60a3e (18:4a3e)
 	TX_FAR _PokemonTower5AfterBattleText4
 	db "@"
-; 0x60a3e + 5 bytes
 
 PokemonTower5Text7: ; 60a43 (18:4a43)
 	TX_FAR _UnnamedText_60a43
 	db "@"
-; 0x60a43 + 5 bytes
 
 PokemonTower5Object: ; 0x60a48 (size=65)
 	db $1 ; border tile
@@ -95986,9 +93257,7 @@ PokemonTower6Script: ; 60aef (18:4aef)
 	call ExecuteCurMapScriptInTable
 	ld [W_POKEMONTOWER6CURSCRIPT], a
 	ret
-; 0x60b02
 
-; known jump sources: 60b4d (18:4b4d)
 Func_60b02: ; 60b02 (18:4b02)
 	xor a
 	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
@@ -96074,7 +93343,6 @@ PokemonTower6TrainerHeader0: ; 60bbf (18:4bbf)
 	dw PokemonTower6AfterBattleText1 ; 0x4c33 TextAfterBattle
 	dw PokemonTower6EndBattleText1 ; 0x4c2e TextEndBattle
 	dw PokemonTower6EndBattleText1 ; 0x4c2e TextEndBattle
-; 0x60bcb
 
 PokemonTower6TrainerHeader1: ; 60bcb (18:4bcb)
 	db $2 ; flag's bit
@@ -96084,7 +93352,6 @@ PokemonTower6TrainerHeader1: ; 60bcb (18:4bcb)
 	dw PokemonTower6AfterBattleText2 ; 0x4c42 TextAfterBattle
 	dw PokemonTower6EndBattleText2 ; 0x4c3d TextEndBattle
 	dw PokemonTower6EndBattleText2 ; 0x4c3d TextEndBattle
-; 0x60bd7
 
 PokemonTower6TrainerHeader2: ; 60bd7 (18:4bd7)
 	db $3 ; flag's bit
@@ -96094,7 +93361,6 @@ PokemonTower6TrainerHeader2: ; 60bd7 (18:4bd7)
 	dw PokemonTower6AfterBattleText3 ; 0x4c51 TextAfterBattle
 	dw PokemonTower6EndBattleText3 ; 0x4c4c TextEndBattle
 	dw PokemonTower6EndBattleText3 ; 0x4c4c TextEndBattle
-; 0x60be3
 
 db $ff
 
@@ -96128,67 +93394,54 @@ PokemonTower6Text7: ; 60c02 (18:4c02)
 	ld hl, UnnamedText_60c24
 	call PrintText
 	jp TextScriptEnd
-; 0x60c1f
 
 UnnamedText_60c1f: ; 60c1f (18:4c1f)
 	TX_FAR _UnnamedText_60c1f
 	db "@"
-; 0x60c1f + 5 bytes
 
 UnnamedText_60c24: ; 60c24 (18:4c24)
 	TX_FAR _UnnamedText_60c24
 	db "@"
-; 0x60c24 + 5 bytes
 
 PokemonTower6BattleText1: ; 60c29 (18:4c29)
 	TX_FAR _PokemonTower6BattleText1
 	db "@"
-; 0x60c29 + 5 bytes
 
 PokemonTower6EndBattleText1: ; 60c2e (18:4c2e)
 	TX_FAR _PokemonTower6EndBattleText1
 	db "@"
-; 0x60c2e + 5 bytes
 
 PokemonTower6AfterBattleText1: ; 60c33 (18:4c33)
 	TX_FAR _PokemonTower6AfterBattleText1
 	db "@"
-; 0x60c33 + 5 bytes
 
 PokemonTower6BattleText2: ; 60c38 (18:4c38)
 	TX_FAR _PokemonTower6BattleText2
 	db "@"
-; 0x60c38 + 5 bytes
 
 PokemonTower6EndBattleText2: ; 60c3d (18:4c3d)
 	TX_FAR _PokemonTower6EndBattleText2
 	db "@"
-; 0x60c3d + 5 bytes
 
 PokemonTower6AfterBattleText2: ; 60c42 (18:4c42)
 	TX_FAR _PokemonTower6AfterBattleText2
 	db "@"
-; 0x60c42 + 5 bytes
 
 PokemonTower6BattleText3: ; 60c47 (18:4c47)
 	TX_FAR _PokemonTower6BattleText3
 	db "@"
-; 0x60c47 + 5 bytes
 
 PokemonTower6EndBattleText3: ; 60c4c (18:4c4c)
 	TX_FAR _PokemonTower6EndBattleText3
 	db "@"
-; 0x60c4c + 5 bytes
 
 PokemonTower6AfterBattleText3: ; 60c51 (18:4c51)
 	TX_FAR _PokemonTower6AfterBattleText3
 	db "@"
-; 0x60c51 + 5 bytes
 
 PokemonTower6Text6: ; 60c56 (18:4c56)
 	TX_FAR _UnnamedText_60c56
 	db "@"
-; 0x60c56 + 5 bytes
 
 PokemonTower6Object: ; 0x60c5b (size=58)
 	db $1 ; border tile
@@ -96231,9 +93484,7 @@ PokemonTower7Script: ; 60d05 (18:4d05)
 	call ExecuteCurMapScriptInTable
 	ld [W_POKEMONTOWER7CURSCRIPT], a
 	ret
-; 0x60d18
 
-; known jump sources: 60d37 (18:4d37)
 Func_60d18: ; 60d18 (18:4d18)
 	xor a
 	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
@@ -96303,7 +93554,6 @@ INCBIN "baserom.gbc",$60d23,$60d2d - $60d23
 	ld [W_CURMAPSCRIPT], a
 	ret
 
-; known jump sources: 60d4a (18:4d4a)
 Func_60db6: ; 60db6 (18:4db6)
 	ld hl, Unknown_60de3 ; $4de3
 	ld a, [$cf13]
@@ -96351,7 +93601,6 @@ PokemonTower7TrainerHeader0: ; 60e47 (18:4e47)
 	dw PokemonTower7AfterBattleText1 ; 0x4ed3 TextAfterBattle
 	dw PokemonTower7EndBattleText1 ; 0x4ece TextEndBattle
 	dw PokemonTower7EndBattleText1 ; 0x4ece TextEndBattle
-; 0x60e53
 
 PokemonTower7TrainerHeader1: ; 60e53 (18:4e53)
 	db $2 ; flag's bit
@@ -96361,7 +93610,6 @@ PokemonTower7TrainerHeader1: ; 60e53 (18:4e53)
 	dw PokemonTower7AfterBattleText2 ; 0x4ee2 TextAfterBattle
 	dw PokemonTower7EndBattleText2 ; 0x4edd TextEndBattle
 	dw PokemonTower7EndBattleText2 ; 0x4edd TextEndBattle
-; 0x60e5f
 
 PokemonTower7TrainerHeader2: ; 60e5f (18:4e5f)
 	db $3 ; flag's bit
@@ -96371,7 +93619,6 @@ PokemonTower7TrainerHeader2: ; 60e5f (18:4e5f)
 	dw PokemonTower7AfterBattleText3 ; 0x4ef1 TextAfterBattle
 	dw PokemonTower7EndBattleText3 ; 0x4eec TextEndBattle
 	dw PokemonTower7EndBattleText3 ; 0x4eec TextEndBattle
-; 0x60e6b
 
 db $ff
 
@@ -96421,52 +93668,42 @@ PokemonTower7Text4: ; 60e8a (18:4e8a)
 UnnamedText_60ec4: ; 60ec4 (18:4ec4)
 	TX_FAR _UnnamedText_60ec4
 	db "@"
-; 0x60ec4 + 5 bytes
 
 PokemonTower7BattleText1: ; 60ec9 (18:4ec9)
 	TX_FAR _PokemonTower7BattleText1
 	db "@"
-; 0x60ec9 + 5 bytes
 
 PokemonTower7EndBattleText1: ; 60ece (18:4ece)
 	TX_FAR _PokemonTower7EndBattleText1
 	db "@"
-; 0x60ece + 5 bytes
 
 PokemonTower7AfterBattleText1: ; 60ed3 (18:4ed3)
 	TX_FAR _PokemonTower7AfterBattleText1
 	db "@"
-; 0x60ed3 + 5 bytes
 
 PokemonTower7BattleText2: ; 60ed8 (18:4ed8)
 	TX_FAR _PokemonTower7BattleText2
 	db "@"
-; 0x60ed8 + 5 bytes
 
 PokemonTower7EndBattleText2: ; 60edd (18:4edd)
 	TX_FAR _PokemonTower7EndBattleText2
 	db "@"
-; 0x60edd + 5 bytes
 
 PokemonTower7AfterBattleText2: ; 60ee2 (18:4ee2)
 	TX_FAR _PokemonTower7AfterBattleText2
 	db "@"
-; 0x60ee2 + 5 bytes
 
 PokemonTower7BattleText3: ; 60ee7 (18:4ee7)
 	TX_FAR _PokemonTower7BattleText3
 	db "@"
-; 0x60ee7 + 5 bytes
 
 PokemonTower7EndBattleText3: ; 60eec (18:4eec)
 	TX_FAR _PokemonTower7EndBattleText3
 	db "@"
-; 0x60eec + 5 bytes
 
 PokemonTower7AfterBattleText3: ; 60ef1 (18:4ef1)
 	TX_FAR _PokemonTower7AfterBattleText3
 	db "@"
-; 0x60ef1 + 5 bytes
 
 PokemonTower7Object: ; 0x60ef6 (size=42)
 	db $1 ; border tile
@@ -96498,7 +93735,6 @@ CeladonMart1_h: ; 0x60f7a to 0x60f86 (12 bytes) (id=122)
 
 CeladonMart1Script: ; 60f86 (18:4f86)
 	jp EnableAutoTextBoxDrawing
-; 0x60f89
 
 CeladonMart1Texts: ; 60f89 (18:4f89)
 	dw CeladonMart1Text1, CeladonMart1Text2, CeladonMart1Text3
@@ -96544,7 +93780,6 @@ CeladonMart1Object: ; 0x60f9e (size=64)
 CeladonMart1Blocks: ; 60fde (18:4fde)
 	INCBIN "maps/celadonmart1.blk"
 
-; known jump sources: 75d88 (1d:5d88)
 GiveFossilToCinnabarLab: ; 61006 (18:5006)
 	ld hl, $d730
 	set 6, [hl]
@@ -96622,29 +93857,23 @@ GiveFossilToCinnabarLab: ; 61006 (18:5006)
 	ld hl, UnnamedText_610bd
 	call PrintText
 	ret
-; 610ae (18:50ae)
 
 UnnamedText_610ae: ; 610ae (18:50ae)
 	TX_FAR _UnnamedText_610ae
 	db "@"
-; 0x610ae + 5 bytes
 
 UnnamedText_610b3: ; 610b3 (18:50b3)
 	TX_FAR _UnnamedText_610b3
 	db "@"
-; 0x610b3 + 5 bytes
 
 UnnamedText_610b8: ; 610b8 (18:50b8)
 	TX_FAR _UnnamedText_610b8
 	db "@"
-; 0x610b8 + 5 bytes
 
 UnnamedText_610bd: ; 610bd (18:50bd)
 	TX_FAR _UnnamedText_610bd
 	db "@"
-; 0x610bd + 5 bytes
 
-; known jump sources: 6103f (18:503f)
 Func_610c2: ; 610c2 (18:50c2)
 	ld hl, $cc5b
 	xor a
@@ -96668,7 +93897,6 @@ Func_610c2: ; 610c2 (18:50c2)
 	pop hl
 	jr .asm_610c8
 
-; known jump sources: 61074 (18:5074), 75ded (1d:5ded)
 ; loads the names of the fossil item and the resulting mon
 LoadFossilItemAndMonName: ; 610eb (18:50eb)
 	ld a, [W_FOSSILMON]
@@ -96679,7 +93907,6 @@ LoadFossilItemAndMonName: ; 610eb (18:50eb)
 	ld [$d11e], a
 	call GetItemName
 	ret
-; 61101 (18:5101)
 
 ViridianForest_h: ; 0x61101 to 0x6110d (12 bytes) (id=51)
 	db $03 ; tileset
@@ -96697,7 +93924,6 @@ ViridianForestScript: ; 6110d (18:510d)
 	call ExecuteCurMapScriptInTable
 	ld [W_VIRIDIANFORESTCURSCRIPT], a
 	ret
-; 0x61120
 
 ViridianForestScript_Unknown61120: ; 61120 (18:5120)
 INCBIN "baserom.gbc",$61120,$61126 - $61120
@@ -96714,7 +93940,6 @@ ViridianForestTrainerHeader0: ; 61142 (18:5142)
 	dw ViridianForestAfterBattleText1 ; 0x5194 TextAfterBattle
 	dw ViridianForestEndBattleText1 ; 0x518f TextEndBattle
 	dw ViridianForestEndBattleText1 ; 0x518f TextEndBattle
-; 0x6114e
 
 ViridianForestTrainerHeader1: ; 6114e (18:514e)
 	db $3 ; flag's bit
@@ -96724,7 +93949,6 @@ ViridianForestTrainerHeader1: ; 6114e (18:514e)
 	dw ViridianForestAfterBattleText2 ; 0x51a3 TextAfterBattle
 	dw ViridianForestEndBattleText2 ; 0x519e TextEndBattle
 	dw ViridianForestEndBattleText2 ; 0x519e TextEndBattle
-; 0x6115a
 
 ViridianForestTrainerHeader2: ; 6115a (18:515a)
 	db $4 ; flag's bit
@@ -96734,7 +93958,6 @@ ViridianForestTrainerHeader2: ; 6115a (18:515a)
 	dw ViridianForestAfterBattleText3 ; 0x51b2 TextAfterBattle
 	dw ViridianForestEndBattleText3 ; 0x51ad TextEndBattle
 	dw ViridianForestEndBattleText3 ; 0x51ad TextEndBattle
-; 0x61166
 
 db $ff
 
@@ -96763,12 +93986,10 @@ ViridianForestText4: ; 61180 (18:5180)
 ViridianForestBattleText1: ; 6118a (18:518a)
 	TX_FAR _ViridianForestBattleText1
 	db "@"
-; 0x6118a + 5 bytes
 
 ViridianForestEndBattleText1: ; 6118f (18:518f)
 	TX_FAR _ViridianForestEndBattleText1
 	db "@"
-; 0x6118f + 5 bytes
 
 ViridianForestAfterBattleText1: ; 61194 (18:5194)
 	;TX_FAR _ViridianForestAfterBattleText1
@@ -96776,17 +93997,14 @@ ViridianForestAfterBattleText1: ; 61194 (18:5194)
 	dw _ViridianForestAfterBattleText1
 	db BANK(_ViridianForestAfterBattleText1)
 	db "@"
-; 0x61194 + 5 bytes
 
 ViridianForestBattleText2: ; 61199 (18:5199)
 	TX_FAR _ViridianForestBattleText2
 	db "@"
-; 0x61199 + 5 bytes
 
 ViridianForestEndBattleText2: ; 6119e (18:519e)
 	TX_FAR _ViridianForestEndBattleText2
 	db "@"
-; 0x6119e + 5 bytes
 
 ViridianForestAfterBattleText2: ; 611a3 (18:51a3)
 	;TX_FAR _ViridianForestAfterBattleText2
@@ -96794,17 +94012,14 @@ ViridianForestAfterBattleText2: ; 611a3 (18:51a3)
 	dw _ViridianForestAfterBattleText2
 	db BANK(_ViridianForestAfterBattleText2)
 	db "@"
-; 0x611a3 + 5 bytes
 
 ViridianForestBattleText3: ; 611a8 (18:51a8)
 	TX_FAR _ViridianForestBattleText3
 	db "@"
-; 0x611a8 + 5 bytes
 
 ViridianForestEndBattleText3: ; 611ad (18:51ad)
 	TX_FAR _ViridianForestEndBattleText3
 	db "@"
-; 0x611ad + 5 bytes
 
 ViridianForestAfterBattleText3: ; 611b2 (18:51b2)
 	;TX_FAR _ViridianForestAfterBattleText3
@@ -96812,7 +94027,6 @@ ViridianForestAfterBattleText3: ; 611b2 (18:51b2)
 	dw _ViridianForestAfterBattleText3
 	db BANK(_ViridianForestAfterBattleText3)
 	db "@"
-; 0x611b2 + 5 bytes
 
 ViridianForestText8: ; 611b7 (18:51b7)
 	TX_FAR _ViridianForestText8
@@ -96890,7 +94104,6 @@ SSAnne1_h: ; 0x61259 to 0x61265 (12 bytes) (id=95)
 SSAnne1Script: ; 61265 (18:5265)
 	call EnableAutoTextBoxDrawing
 	ret
-; 0x61269
 
 SSAnne1Texts: ; 61269 (18:5269)
 	dw SSAnne1Text1, SSAnne1Text2
@@ -96954,21 +94167,18 @@ SSAnne2Script: ; 6139f (18:539f)
 	ld hl, SSAnne2Scripts
 	ld a, [W_SSANNE2CURSCRIPT]
 	jp CallFunctionInTable
-; 0x613ab
 
-; known jump sources: 61472 (18:5472)
 Func_613ab: ; 613ab (18:53ab)
 	xor a
 	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
 	ld [W_SSANNE2CURSCRIPT], a
 	ret
-; 613b3 (18:53b3)
+
 SSAnne2Scripts: ; 613b3 (18:53b3)
 	dw SSAnne2Script0, SSAnne2Script1, SSAnne2Script2, SSAnne2Script3, SSAnne2Script4
 
 SSAnne2Script4: ; 613bd (18:53bd)
 	ret
-; 0x613be
 
 SSAnne2Script0: ; 613be (18:53be)
 	ld hl, Unknown_61411 ; $5411
@@ -97006,7 +94216,6 @@ SSAnne2Script0: ; 613be (18:53be)
 	ld a, $1
 	ld [W_SSANNE2CURSCRIPT], a
 	ret
-; 0x6140c
 
 Unknown_6140c: ; 6140c (18:540c)
 INCBIN "baserom.gbc",$6140c,$6140d - $6140c
@@ -97017,7 +94226,6 @@ INCBIN "baserom.gbc",$6140d,$61411 - $6140d
 Unknown_61411: ; 61411 (18:5411)
 INCBIN "baserom.gbc",$61411,$61416 - $61411
 
-; known jump sources: 61436 (18:5436), 61464 (18:5464), 61475 (18:5475)
 Func_61416: ; 61416 (18:5416)
 	ld a, [W_XCOORD] ; $d362
 	cp $25
@@ -97033,7 +94241,7 @@ Func_61416: ; 61416 (18:5416)
 	ld a, $2
 	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
 	jp Func_34a6
-; 61430 (18:5430)
+
 SSAnne2Script1: ; 61430 (18:5430)
 	ld a, [$d730]
 	bit 0, a
@@ -97068,7 +94276,6 @@ SSAnne2Script1: ; 61430 (18:5430)
 	ld a, $2
 	ld [W_SSANNE2CURSCRIPT], a
 	ret
-; 0x6146d
 
 SSAnne2Script2: ; 6146d (18:546d)
 	ld a, [$d057]
@@ -97103,7 +94310,6 @@ SSAnne2Script2: ; 6146d (18:546d)
 	ld a, $3
 	ld [W_SSANNE2CURSCRIPT], a
 	ret
-; 0x614b7
 
 Unknown_614b7: ; 614b7 (18:54b7)
 INCBIN "baserom.gbc",$614b7,$614b9 - $614b7
@@ -97125,7 +94331,6 @@ SSAnne2Script3: ; 614be (18:54be)
 	ld a, $4
 	ld [W_SSANNE2CURSCRIPT], a
 	ret
-; 0x614db
 
 SSAnne2Texts: ; 614db (18:54db)
 	dw SSAnne2Text1, SSAnne2Text2, SSAnne2Text3
@@ -97145,27 +94350,22 @@ SSAnne2Text2: ; 614e6 (18:54e6)
 	ld de, SSAnneRivalWonText
 	call PreBattleSaveRegisters
 	jp TextScriptEnd
-; 0x61500
 
 SSAnneRivalBeforeBattleText: ; 61500 (18:5500)
 	TX_FAR _SSAnneRivalBeforeBattleText
 	db "@"
-; 0x61500 + 5 bytes
 
 SSAnneRivalDefeatedText: ; 61505 (18:5505)
 	TX_FAR _SSAnneRivalDefeatedText
 	db "@"
-; 0x61505 + 5 bytes
 
 SSAnneRivalWonText: ; 6150a (18:550a)
 	TX_FAR _SSAnneRivalWonText
 	db "@"
-; 0x6150a + 5 bytes
 
 SSAnne2Text3: ; 6150f (18:550f)
 	TX_FAR _SSAnneRivalCaptainText
 	db "@"
-; 0x6150f + 5 bytes
 
 SSAnne2Object: ; 0x61514 (size=90)
 	db $c ; border tile
@@ -97211,7 +94411,6 @@ SSAnne4_h: ; 0x61622 to 0x6162e (12 bytes) (id=98)
 
 SSAnne4Script: ; 6162e (18:562e)
 	jp EnableAutoTextBoxDrawing
-; 0x61631
 
 SSAnne4Texts: ; 61631 (18:5631)
 	db "@"
@@ -97258,7 +94457,6 @@ SSAnne5Script: ; 616ae (18:56ae)
 	call ExecuteCurMapScriptInTable
 	ld [W_SSANNE5CURSCRIPT], a
 	ret
-; 0x616c1
 
 SSAnne5Script_Unknown616c1: ; 616c1 (18:56c1)
 INCBIN "baserom.gbc",$616c1,$616c7 - $616c1
@@ -97275,7 +94473,6 @@ SSAnneTrainerHeader0: ; 616d1 (18:56d1)
 	dw SSAnneAfterBattleText1 ; 0x570d TextAfterBattle
 	dw SSAnneEndBattleText1 ; 0x5708 TextEndBattle
 	dw SSAnneEndBattleText1 ; 0x5708 TextEndBattle
-; 0x616dd
 
 SSAnneTrainerHeader1: ; 616dd (18:56dd)
 	db $5 ; flag's bit
@@ -97285,7 +94482,6 @@ SSAnneTrainerHeader1: ; 616dd (18:56dd)
 	dw SSAnneAfterBattleText2 ; 0x5726 TextAfterBattle
 	dw SSAnneEndBattleText2 ; 0x5721 TextEndBattle
 	dw SSAnneEndBattleText2 ; 0x5721 TextEndBattle
-; 0x616e9
 
 db $ff
 
@@ -97310,17 +94506,14 @@ SSAnne5Text4: ; 616f9 (18:56f9)
 SSAnneBattleText1: ; 61703 (18:5703)
 	TX_FAR _SSAnneBattleText1
 	db "@"
-; 0x61703 + 5 bytes
 
 SSAnneEndBattleText1: ; 61708 (18:5708)
 	TX_FAR _SSAnneEndBattleText1
 	db "@"
-; 0x61708 + 5 bytes
 
 SSAnneAfterBattleText1: ; 6170d (18:570d)
 	TX_FAR _SSAnneAfterBattleText1
 	db "@"
-; 0x6170d + 5 bytes
 
 SSAnne5Text5: ; 61712 (18:5712)
 	db $08 ; asm
@@ -97331,17 +94524,14 @@ SSAnne5Text5: ; 61712 (18:5712)
 SSAnneBattleText2: ; 6171c (18:571c)
 	TX_FAR _SSAnneBattleText2
 	db "@"
-; 0x6171c + 5 bytes
 
 SSAnneEndBattleText2: ; 61721 (18:5721)
 	TX_FAR _SSAnneEndBattleText2
 	db "@"
-; 0x61721 + 5 bytes
 
 SSAnneAfterBattleText2: ; 61726 (18:5726)
 	TX_FAR _SSAnneAfterBattleText2
 	db "@"
-; 0x61726 + 5 bytes
 
 SSAnne5Object: ; 0x6172b (size=54)
 	db $23 ; border tile
@@ -97377,7 +94567,6 @@ SSAnne6_h: ; 0x617a7 to 0x617b3 (12 bytes) (id=100)
 SSAnne6Script: ; 617b3 (18:57b3)
 	call EnableAutoTextBoxDrawing
 	ret
-; 0x617b7
 
 SSAnne6Texts: ; 617b7 (18:57b7)
 	dw SSAnne6Text1, SSAnne6Text2, SSAnne6Text3, SSAnne6Text4, SSAnne6Text5, SSAnne6Text6, SSAnne6Text7
@@ -97429,22 +94618,18 @@ SSAnne6Text7: ; 617e3 (18:57e3)
 UnnamedText_61807: ; 61807 (18:5807)
 	TX_FAR _UnnamedText_61807
 	db "@"
-; 0x61807 + 5 bytes
 
 UnnamedText_6180c: ; 6180c (18:580c)
 	TX_FAR _UnnamedText_6180c
 	db "@"
-; 0x6180c + 5 bytes
 
 UnnamedText_61811: ; 61811 (18:5811)
 	TX_FAR _UnnamedText_61811
 	db "@"
-; 0x61811 + 5 bytes
 
 UnnamedText_61816: ; 61816 (18:5816)
 	TX_FAR _UnnamedText_61816
 	db "@"
-; 0x61816 + 5 bytes
 
 SSAnne6Object: ; 0x6181b (size=54)
 	db $c ; border tile
@@ -97480,7 +94665,6 @@ SSAnne7_h: ; 0x61889 to 0x61895 (12 bytes) (id=101)
 SSAnne7Script: ; 61895 (18:5895)
 	call SSAnne7Script_Unknown6189b
 	jp EnableAutoTextBoxDrawing
-; 0x6189b
 
 SSAnne7Script_Unknown6189b: ; 6189b (18:589b)
 	ld a, [$d803]
@@ -97489,7 +94673,7 @@ SSAnne7Script_Unknown6189b: ; 6189b (18:589b)
 	ld hl, $d72d
 	set 5, [hl]
 	ret
-; 618a7 (18:58a7)
+
 SSAnne7Texts: ; 618a7 (18:58a7)
 	dw SSAnne7Text1, SSAnne7Text2, SSAnne7Text3
 
@@ -97548,27 +94732,22 @@ SSAnne7RubText: ; 618ec (18:58ec)
 	ld hl, $d72d
 	res 5, [hl]
 	jp TextScriptEnd
-; 0x61927
 
 ReceivingHM01Text: ; 61927 (18:5927)
 	TX_FAR _ReceivingHM01Text
 	db "@"
-; 0x61927 + 5 bytes
 
 ReceivedHM01Text: ; 6192c (18:592c)
 	TX_FAR _ReceivedHM01Text ; 0x8140d
 	db $11, "@"
-; 0x6192c + 6 bytes = 0x61932
 
 UnnamedText_61932: ; 61932 (18:5932)
 	TX_FAR _UnnamedText_61932
 	db "@"
-; 0x61932 + 5 bytes
 
 HM01NoRoomText: ; 61937 (18:5937)
 	TX_FAR _HM01NoRoomText
 	db "@"
-; 0x61937 + 5 bytes
 
 SSAnne7Text2: ; 6193c (18:593c)
 	TX_FAR _SSAnne7Text2
@@ -97613,7 +94792,6 @@ SSAnne8Script: ; 61976 (18:5976)
 	call ExecuteCurMapScriptInTable
 	ld [W_SSANNE8CURSCRIPT], a
 	ret
-; 0x61989
 
 SSAnne8Script_Unknown61989: ; 61989 (18:5989)
 INCBIN "baserom.gbc",$61989,$6198f - $61989
@@ -97630,7 +94808,6 @@ SSAnne8TrainerHeader0: ; 619a5 (18:59a5)
 	dw SSAnne8AfterBattleText1 ; 0x5a15 TextAfterBattle
 	dw SSAnne8EndBattleText1 ; 0x5a10 TextEndBattle
 	dw SSAnne8EndBattleText1 ; 0x5a10 TextEndBattle
-; 0x619b1
 
 SSAnne8TrainerHeader1: ; 619b1 (18:59b1)
 	db $2 ; flag's bit
@@ -97640,7 +94817,6 @@ SSAnne8TrainerHeader1: ; 619b1 (18:59b1)
 	dw SSAnne8AfterBattleText2 ; 0x5a24 TextAfterBattle
 	dw SSAnne8EndBattleText2 ; 0x5a1f TextEndBattle
 	dw SSAnne8EndBattleText2 ; 0x5a1f TextEndBattle
-; 0x619bd
 
 SSAnne8TrainerHeader2: ; 619bd (18:59bd)
 	db $3 ; flag's bit
@@ -97650,7 +94826,6 @@ SSAnne8TrainerHeader2: ; 619bd (18:59bd)
 	dw SSAnne8AfterBattleText3 ; 0x5a33 TextAfterBattle
 	dw SSAnne8EndBattleText3 ; 0x5a2e TextEndBattle
 	dw SSAnne8EndBattleText3 ; 0x5a2e TextEndBattle
-; 0x619c9
 
 SSAnne8TrainerHeader3: ; 619c9 (18:59c9)
 	db $4 ; flag's bit
@@ -97660,7 +94835,6 @@ SSAnne8TrainerHeader3: ; 619c9 (18:59c9)
 	dw SSAnne8AfterBattleText4 ; 0x5a42 TextAfterBattle
 	dw SSAnne8EndBattleText4 ; 0x5a3d TextEndBattle
 	dw SSAnne8EndBattleText4 ; 0x5a3d TextEndBattle
-; 0x619d5
 
 db $ff
 
@@ -97698,62 +94872,50 @@ SSAnne8Text8: ; 619fe (18:59fe)
 SSAnne8BattleText1: ; 61a0b (18:5a0b)
 	TX_FAR _SSAnne8BattleText1
 	db "@"
-; 0x61a0b + 5 bytes
 
 SSAnne8EndBattleText1: ; 61a10 (18:5a10)
 	TX_FAR _SSAnne8EndBattleText1
 	db "@"
-; 0x61a10 + 5 bytes
 
 SSAnne8AfterBattleText1: ; 61a15 (18:5a15)
 	TX_FAR _SSAnne8AfterBattleText1
 	db "@"
-; 0x61a15 + 5 bytes
 
 SSAnne8BattleText2: ; 61a1a (18:5a1a)
 	TX_FAR _SSAnne8BattleText2
 	db "@"
-; 0x61a1a + 5 bytes
 
 SSAnne8EndBattleText2: ; 61a1f (18:5a1f)
 	TX_FAR _SSAnne8EndBattleText2
 	db "@"
-; 0x61a1f + 5 bytes
 
 UnnamedText_61a24: ; 61a24 (18:5a24)
 	TX_FAR _UnnamedText_61a24
 	db "@"
-; 0x61a24 + 5 bytes
 
 SSAnne8BattleText3: ; 61a29 (18:5a29)
 	TX_FAR _SSAnne8BattleText3
 	db "@"
-; 0x61a29 + 5 bytes
 
 SSAnne8EndBattleText3: ; 61a2e (18:5a2e)
 	TX_FAR _SSAnne8EndBattleText3
 	db "@"
-; 0x61a2e + 5 bytes
 
 SSAnne8AfterBattleText3: ; 61a33 (18:5a33)
 	TX_FAR _SSAnne8AfterBattleText3
 	db "@"
-; 0x61a33 + 5 bytes
 
 SSAnne8BattleText4: ; 61a38 (18:5a38)
 	TX_FAR _SSAnne8BattleText4
 	db "@"
-; 0x61a38 + 5 bytes
 
 SSAnne8EndBattleText4: ; 61a3d (18:5a3d)
 	TX_FAR _SSAnne8EndBattleText4
 	db "@"
-; 0x61a3d + 5 bytes
 
 SSAnne8AfterBattleText4: ; 61a42 (18:5a42)
 	TX_FAR _SSAnne8AfterBattleText4
 	db "@"
-; 0x61a42 + 5 bytes
 
 SSAnne8Text5: ; 61a47 (18:5a47)
 	TX_FAR _SSAnne8Text5
@@ -97831,7 +94993,6 @@ SSAnne9Script: ; 61b4b (18:5b4b)
 	call ExecuteCurMapScriptInTable
 	ld [W_SSANNE9CURSCRIPT], a
 	ret
-; 0x61b64
 
 SSAnne9Script_Unknown61b64: ; 61b64 (18:5b64)
 INCBIN "baserom.gbc",$61b64,$61b6a - $61b64
@@ -97848,7 +95009,6 @@ SSAnne9TrainerHeader0: ; 61b84 (18:5b84)
 	dw SSAnne9AfterBattleText1 ; 0x5c5b TextAfterBattle
 	dw SSAnne9EndBattleText1 ; 0x5c56 TextEndBattle
 	dw SSAnne9EndBattleText1 ; 0x5c56 TextEndBattle
-; 0x61b90
 
 SSAnne9TrainerHeader1: ; 61b90 (18:5b90)
 	db $2 ; flag's bit
@@ -97858,7 +95018,6 @@ SSAnne9TrainerHeader1: ; 61b90 (18:5b90)
 	dw SSAnne9AfterBattleText2 ; 0x5c6a TextAfterBattle
 	dw SSAnne9EndBattleText2 ; 0x5c65 TextEndBattle
 	dw SSAnne9EndBattleText2 ; 0x5c65 TextEndBattle
-; 0x61b9c
 
 SSAnne9TrainerHeader2: ; 61b9c (18:5b9c)
 	db $3 ; flag's bit
@@ -97868,7 +95027,6 @@ SSAnne9TrainerHeader2: ; 61b9c (18:5b9c)
 	dw SSAnne9AfterBattleText3 ; 0x5c79 TextAfterBattle
 	dw SSAnne9EndBattleText3 ; 0x5c74 TextEndBattle
 	dw SSAnne9EndBattleText3 ; 0x5c74 TextEndBattle
-; 0x61ba8
 
 SSAnne9TrainerHeader3: ; 61ba8 (18:5ba8)
 	db $4 ; flag's bit
@@ -97878,7 +95036,6 @@ SSAnne9TrainerHeader3: ; 61ba8 (18:5ba8)
 	dw SSAnne9AfterBattleText4 ; 0x5c88 TextAfterBattle
 	dw SSAnne9EndBattleText4 ; 0x5c83 TextEndBattle
 	dw SSAnne9EndBattleText4 ; 0x5c83 TextEndBattle
-; 0x61bb4
 
 
 db $ff
@@ -97920,7 +95077,6 @@ SSAnne9Text5: ; 61bdd (18:5bdd)
 UnnamedText_61bf2: ; 61bf2 (18:5bf2)
 	TX_FAR _UnnamedText_61bf2
 	db "@"
-; 0x61bf2 + 5 bytes
 
 SSAnne9Text7: ; 61bf7 (18:5bf7)
 	db $08 ; asm
@@ -97931,7 +95087,6 @@ SSAnne9Text7: ; 61bf7 (18:5bf7)
 UnnamedText_61c01: ; 61c01 (18:5c01)
 	TX_FAR _UnnamedText_61c01
 	db "@"
-; 0x61c01 + 5 bytes
 
 SSAnne9Text8: ; 61c06 (18:5c06)
 	db $08 ; asm
@@ -97942,7 +95097,6 @@ SSAnne9Text8: ; 61c06 (18:5c06)
 UnnamedText_61c10: ; 61c10 (18:5c10)
 	TX_FAR _UnnamedText_61c10
 	db "@"
-; 0x61c10 + 5 bytes
 
 SSAnne9Text10: ; 61c15 (18:5c15)
 	db $08 ; asm
@@ -97953,7 +95107,6 @@ SSAnne9Text10: ; 61c15 (18:5c15)
 UnnamedText_61c1f: ; 61c1f (18:5c1f)
 	TX_FAR _UnnamedText_61c1f
 	db "@"
-; 0x61c1f + 5 bytes
 
 SSAnne9Text11: ; 61c24 (18:5c24)
 	db $08 ; asm
@@ -97964,7 +95117,6 @@ SSAnne9Text11: ; 61c24 (18:5c24)
 UnnamedText_61c2e: ; 61c2e (18:5c2e)
 	TX_FAR _UnnamedText_61c2e
 	db "@"
-; 0x61c2e + 5 bytes
 
 SSAnne9Text12: ; 61c33 (18:5c33)
 	db $08 ; asm
@@ -97975,7 +95127,6 @@ SSAnne9Text12: ; 61c33 (18:5c33)
 UnnamedText_61c3d: ; 61c3d (18:5c3d)
 	TX_FAR _UnnamedText_61c3d
 	db "@"
-; 0x61c3d + 5 bytes
 
 SSAnne9Text13: ; 61c42 (18:5c42)
 	db $08 ; asm
@@ -97986,67 +95137,54 @@ SSAnne9Text13: ; 61c42 (18:5c42)
 UnnamedText_61c4c: ; 61c4c (18:5c4c)
 	TX_FAR _UnnamedText_61c4c
 	db "@"
-; 0x61c4c + 5 bytes
 
 SSAnne9BattleText1: ; 61c51 (18:5c51)
 	TX_FAR _SSAnne9BattleText1
 	db "@"
-; 0x61c51 + 5 bytes
 
 SSAnne9EndBattleText1: ; 61c56 (18:5c56)
 	TX_FAR _SSAnne9EndBattleText1
 	db "@"
-; 0x61c56 + 5 bytes
 
 SSAnne9AfterBattleText1: ; 61c5b (18:5c5b)
 	TX_FAR _SSAnne9AfterBattleText1
 	db "@"
-; 0x61c5b + 5 bytes
 
 SSAnne9BattleText2: ; 61c60 (18:5c60)
 	TX_FAR _SSAnne9BattleText2
 	db "@"
-; 0x61c60 + 5 bytes
 
 SSAnne9EndBattleText2: ; 61c65 (18:5c65)
 	TX_FAR _SSAnne9EndBattleText2
 	db "@"
-; 0x61c65 + 5 bytes
 
 SSAnne9AfterBattleText2: ; 61c6a (18:5c6a)
 	TX_FAR _SSAnne9AfterBattleText2
 	db "@"
-; 0x61c6a + 5 bytes
 
 SSAnne9BattleText3: ; 61c6f (18:5c6f)
 	TX_FAR _SSAnne9BattleText3
 	db "@"
-; 0x61c6f + 5 bytes
 
 SSAnne9EndBattleText3: ; 61c74 (18:5c74)
 	TX_FAR _SSAnne9EndBattleText3
 	db "@"
-; 0x61c74 + 5 bytes
 
 SSAnne9AfterBattleText3: ; 61c79 (18:5c79)
 	TX_FAR _SSAnne9AfterBattleText3
 	db "@"
-; 0x61c79 + 5 bytes
 
 SSAnne9BattleText4: ; 61c7e (18:5c7e)
 	TX_FAR _SSAnne9BattleText4
 	db "@"
-; 0x61c7e + 5 bytes
 
 SSAnne9EndBattleText4: ; 61c83 (18:5c83)
 	TX_FAR _SSAnne9EndBattleText4
 	db "@"
-; 0x61c83 + 5 bytes
 
 SSAnne9AfterBattleText4: ; 61c88 (18:5c88)
 	TX_FAR _SSAnne9AfterBattleText4
 	db "@"
-; 0x61c88 + 5 bytes
 
 SSAnne9Object: ; 0x61c8d (size=188)
 	db $c ; border tile
@@ -98112,7 +95250,6 @@ SSAnne10Script: ; 61d55 (18:5d55)
 	call ExecuteCurMapScriptInTable
 	ld [W_SSANNE10CURSCRIPT], a
 	ret
-; 0x61d68
 
 SSAnne10Script_Unknown61d68: ; 61d68 (18:5d68)
 INCBIN "baserom.gbc",$61d68,$61d6e - $61d68
@@ -98129,7 +95266,6 @@ SSAnne10TrainerHeader0: ; 61d84 (18:5d84)
 	dw SSAnne10AfterBattleText1 ; 0x5e20 TextAfterBattle
 	dw SSAnne10EndBattleText1 ; 0x5e1b TextEndBattle
 	dw SSAnne10EndBattleText1 ; 0x5e1b TextEndBattle
-; 0x61d90
 
 SSAnne10TrainerHeader1: ; 61d90 (18:5d90)
 	db $2 ; flag's bit
@@ -98139,7 +95275,6 @@ SSAnne10TrainerHeader1: ; 61d90 (18:5d90)
 	dw SSAnne10AfterBattleText2 ; 0x5e2f TextAfterBattle
 	dw SSAnne10EndBattleText2 ; 0x5e2a TextEndBattle
 	dw SSAnne10EndBattleText2 ; 0x5e2a TextEndBattle
-; 0x61d9c
 
 SSAnne10TrainerHeader2: ; 61d9c (18:5d9c)
 	db $3 ; flag's bit
@@ -98149,7 +95284,6 @@ SSAnne10TrainerHeader2: ; 61d9c (18:5d9c)
 	dw SSAnne10AfterBattleText3 ; 0x5e3e TextAfterBattle
 	dw SSAnne10EndBattleText3 ; 0x5e39 TextEndBattle
 	dw SSAnne10EndBattleText3 ; 0x5e39 TextEndBattle
-; 0x61da8
 
 SSAnne10TrainerHeader3: ; 61da8 (18:5da8)
 	db $4 ; flag's bit
@@ -98159,7 +95293,6 @@ SSAnne10TrainerHeader3: ; 61da8 (18:5da8)
 	dw SSAnne10AfterBattleText4 ; 0x5e4d TextAfterBattle
 	dw SSAnne10EndBattleText4 ; 0x5e48 TextEndBattle
 	dw SSAnne10EndBattleText4 ; 0x5e48 TextEndBattle
-; 0x61db4
 
 SSAnne10TrainerHeader4: ; 61db4 (18:5db4)
 	db $5 ; flag's bit
@@ -98169,7 +95302,6 @@ SSAnne10TrainerHeader4: ; 61db4 (18:5db4)
 	dw SSAnne10AfterBattleText5 ; 0x5e5c TextAfterBattle
 	dw SSAnne10EndBattleText5 ; 0x5e57 TextEndBattle
 	dw SSAnne10EndBattleText5 ; 0x5e57 TextEndBattle
-; 0x61dc0
 
 SSAnne10TrainerHeader5: ; 61dc0 (18:5dc0)
 	db $6 ; flag's bit
@@ -98179,7 +95311,6 @@ SSAnne10TrainerHeader5: ; 61dc0 (18:5dc0)
 	dw SSAnne10AfterBattleText6 ; 0x5e6b TextAfterBattle
 	dw SSAnne10EndBattleText6 ; 0x5e66 TextEndBattle
 	dw SSAnne10EndBattleText6 ; 0x5e66 TextEndBattle
-; 0x61dcc
 
 db $ff
 
@@ -98229,92 +95360,74 @@ SSAnne10Text8: ; 61e09 (18:5e09)
 SSAnne10BattleText1: ; 61e16 (18:5e16)
 	TX_FAR _SSAnne10BattleText1
 	db "@"
-; 0x61e16 + 5 bytes
 
 SSAnne10EndBattleText1: ; 61e1b (18:5e1b)
 	TX_FAR _SSAnne10EndBattleText1
 	db "@"
-; 0x61e1b + 5 bytes
 
 SSAnne10AfterBattleText1: ; 61e20 (18:5e20)
 	TX_FAR _SSAnne10AfterBattleText1
 	db "@"
-; 0x61e20 + 5 bytes
 
 SSAnne10BattleText2: ; 61e25 (18:5e25)
 	TX_FAR _SSAnne10BattleText2
 	db "@"
-; 0x61e25 + 5 bytes
 
 SSAnne10EndBattleText2: ; 61e2a (18:5e2a)
 	TX_FAR _SSAnne10EndBattleText2
 	db "@"
-; 0x61e2a + 5 bytes
 
 SSAnne10AfterBattleText2: ; 61e2f (18:5e2f)
 	TX_FAR _SSAnne10AfterBattleText2
 	db "@"
-; 0x61e2f + 5 bytes
 
 SSAnne10BattleText3: ; 61e34 (18:5e34)
 	TX_FAR _SSAnne10BattleText3
 	db "@"
-; 0x61e34 + 5 bytes
 
 SSAnne10EndBattleText3: ; 61e39 (18:5e39)
 	TX_FAR _SSAnne10EndBattleText3
 	db "@"
-; 0x61e39 + 5 bytes
 
 SSAnne10AfterBattleText3: ; 61e3e (18:5e3e)
 	TX_FAR _SSAnne10AfterBattleText3
 	db "@"
-; 0x61e3e + 5 bytes
 
 SSAnne10BattleText4: ; 61e43 (18:5e43)
 	TX_FAR _SSAnne10BattleText4
 	db "@"
-; 0x61e43 + 5 bytes
 
 SSAnne10EndBattleText4: ; 61e48 (18:5e48)
 	TX_FAR _SSAnne10EndBattleText4
 	db "@"
-; 0x61e48 + 5 bytes
 
 SSAnne10AfterBattleText4: ; 61e4d (18:5e4d)
 	TX_FAR _SSAnne10AfterBattleText4
 	db "@"
-; 0x61e4d + 5 bytes
 
 SSAnne10BattleText5: ; 61e52 (18:5e52)
 	TX_FAR _SSAnne10BattleText5
 	db "@"
-; 0x61e52 + 5 bytes
 
 SSAnne10EndBattleText5: ; 61e57 (18:5e57)
 	TX_FAR _SSAnne10EndBattleText5
 	db "@"
-; 0x61e57 + 5 bytes
 
 SSAnne10AfterBattleText5: ; 61e5c (18:5e5c)
 	TX_FAR _SSAnne10AfterBattleText5
 	db "@"
-; 0x61e5c + 5 bytes
 
 SSAnne10BattleText6: ; 61e61 (18:5e61)
 	TX_FAR _SSAnne10BattleText6
 	db "@"
-; 0x61e61 + 5 bytes
 
 SSAnne10EndBattleText6: ; 61e66 (18:5e66)
 	TX_FAR _SSAnne10EndBattleText6
 	db "@"
-; 0x61e66 + 5 bytes
 
 SSAnne10AfterBattleText6: ; 61e6b (18:5e6b)
 	TX_FAR _SSAnne10AfterBattleText6
 	db "@"
-; 0x61e6b + 5 bytes
 
 SSAnne10Text7: ; 61e70 (18:5e70)
 	TX_FAR _SSAnne10Text7
@@ -98372,7 +95485,6 @@ UndergroundPathNS_h: ; 0x61f1a to 0x61f26 (12 bytes) (id=119)
 
 UndergroundPathNSScript: ; 61f26 (18:5f26)
 	jp EnableAutoTextBoxDrawing
-; 0x61f29
 
 UndergroundPathNSTexts: ; 61f29 (18:5f29)
 	db "@"
@@ -98402,7 +95514,6 @@ UndergroundPathWE_h: ; 0x61f3e to 0x61f4a (12 bytes) (id=121)
 
 UndergroundPathWEScript: ; 61f4a (18:5f4a)
 	jp EnableAutoTextBoxDrawing
-; 0x61f4d
 
 UndergroundPathWETexts: ; 61f4d (18:5f4d)
 	db "@"
@@ -98432,7 +95543,6 @@ DiglettsCave_h: ; 0x61f62 to 0x61f6e (12 bytes) (id=197)
 
 DiglettsCaveScript: ; 61f6e (18:5f6e)
 	jp EnableAutoTextBoxDrawing
-; 0x61f71
 
 DiglettsCaveTexts: ; 61f71 (18:5f71)
 	db "@"
@@ -98472,7 +95582,6 @@ SilphCo11Script: ; 620fa (18:60fa)
 	call ExecuteCurMapScriptInTable
 	ld [W_SILPHCO11CURSCRIPT], a
 	ret
-; 0x62110
 
 SilphCo11Script_Unknown62110: ; 62110 (18:6110)
 	ld hl, $d126
@@ -98494,7 +95603,6 @@ SilphCo11Script_Unknown62110: ; 62110 (18:6110)
 Unknown_62134: ; 62134 (18:6134)
 INCBIN "baserom.gbc",$62134,$62137 - $62134
 
-; known jump sources: 6211b (18:611b)
 Func_62137: ; 62137 (18:6137)
 	push hl
 	ld hl, $d73f
@@ -98531,7 +95639,6 @@ Func_62137: ; 62137 (18:6137)
 	ld [$FF00+$e0], a
 	ret
 
-; known jump sources: 6211e (18:611e)
 Func_62163: ; 62163 (18:6163)
 	ld a, [$FF00+$e0]
 	and a
@@ -98540,7 +95647,6 @@ Func_62163: ; 62163 (18:6163)
 	set 0, [hl]
 	ret
 
-; known jump sources: 62252 (18:6252)
 Func_6216d: ; 6216d (18:616d)
 	ld hl, Unknown_6219b ; $619b
 .asm_62170
@@ -98572,12 +95678,10 @@ INCBIN "baserom.gbc",$62194,$6219b - $62194
 Unknown_6219b: ; 6219b (18:619b)
 INCBIN "baserom.gbc",$6219b,$621c4 - $6219b
 
-; known jump sources: 6222c (18:622c)
 Func_621c4: ; 621c4 (18:61c4)
 	xor a
 	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
 
-; known jump sources: 6220e (18:620e), 62267 (18:6267), 62290 (18:6290), 622b4 (18:62b4)
 Func_621c8: ; 621c8 (18:61c8)
 	ld [W_SILPHCO11CURSCRIPT], a
 	ld [W_CURMAPSCRIPT], a
@@ -98614,7 +95718,6 @@ INCBIN "baserom.gbc",$62211,$62216 - $62211
 Unknown_62216: ; 62216 (18:6216)
 INCBIN "baserom.gbc",$62216,$6221a - $62216
 
-; known jump sources: 62240 (18:6240), 62288 (18:6288)
 Func_6221a: ; 6221a (18:621a)
 	ld [$d528], a
 	ld a, $3
@@ -98685,7 +95788,7 @@ Func_6221a: ; 6221a (18:621a)
 	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
 	ld a, $5
 	jp Func_621c8
-; 622b7 (18:62b7)
+
 SilphCo11Texts: ; 622b7 (18:62b7)
 	dw SilphCo11Text1, SilphCo11Text2, SilphCo11Text3, SilphCo11Text4, SilphCo11Text5, SilphCo11Text6
 
@@ -98698,7 +95801,6 @@ SilphCo11TrainerHeader0: ; 622c3 (18:62c3)
 	dw SilphCo11AfterBattleText1 ; 0x634e TextAfterBattle
 	dw SilphCo11EndBattleText1 ; 0x6349 TextEndBattle
 	dw SilphCo11EndBattleText1 ; 0x6349 TextEndBattle
-; 0x622cf
 
 SilphCo11TrainerHeader1: ; 622cf (18:62cf)
 	db $5 ; flag's bit
@@ -98708,7 +95810,6 @@ SilphCo11TrainerHeader1: ; 622cf (18:62cf)
 	dw SilphCo11AfterBattleText2 ; 0x6367 TextAfterBattle
 	dw SilphCo11EndBattleText2 ; 0x6362 TextEndBattle
 	dw SilphCo11EndBattleText2 ; 0x6362 TextEndBattle
-; 0x622db
 
 db $ff
 
@@ -98740,22 +95841,18 @@ SilphCo11Text1: ; 622dc (18:62dc)
 SilphCoPresidentText: ; 62311 (18:6311)
 	TX_FAR _SilphCoPresidentText
 	db "@"
-; 0x62311 + 5 bytes
 
 ReceivedSilphCoMasterBallText: ; 62316 (18:6316)
 	TX_FAR _ReceivedSilphCoMasterBallText ; 0x84f63
 	db $11, "@"
-; 0x62316 + 6 bytes = 0x6231c
 
 UnnamedText_6231c: ; 6231c (18:631c)
 	TX_FAR _UnnamedText_6231c
 	db "@"
-; 0x6231c + 5 bytes
 
 SilphCoMasterBallNoRoomText: ; 62321 (18:6321)
 	TX_FAR _SilphCoMasterBallNoRoomText
 	db "@"
-; 0x62321 + 5 bytes
 
 SilphCo11Text2: ; 62326 (18:6326)
 	TX_FAR _SilphCo11Text2
@@ -98768,12 +95865,10 @@ SilphCo11Text3: ; 6232b (18:632b)
 UnnamedText_62330: ; 62330 (18:6330)
 	TX_FAR _UnnamedText_62330
 	db "@"
-; 0x62330 + 5 bytes
 
 SilphCo11Text6: ; 62335 (18:6335)
 	TX_FAR _UnnamedText_62335
 	db "@"
-; 0x62335 + 5 bytes
 
 SilphCo11Text4: ; 6233a (18:633a)
 	db $08 ; asm
@@ -98784,17 +95879,14 @@ SilphCo11Text4: ; 6233a (18:633a)
 SilphCo11BattleText1: ; 62344 (18:6344)
 	TX_FAR _SilphCo11BattleText1
 	db "@"
-; 0x62344 + 5 bytes
 
 SilphCo11EndBattleText1: ; 62349 (18:6349)
 	TX_FAR _SilphCo11EndBattleText1
 	db "@"
-; 0x62349 + 5 bytes
 
 SilphCo11AfterBattleText1: ; 6234e (18:634e)
 	TX_FAR _SilphCo11AfterBattleText1
 	db "@"
-; 0x6234e + 5 bytes
 
 SilphCo11Text5: ; 62353 (18:6353)
 	db $08 ; asm
@@ -98805,17 +95897,14 @@ SilphCo11Text5: ; 62353 (18:6353)
 SilphCo11BattleText2: ; 6235d (18:635d)
 	TX_FAR _SilphCo11BattleText2
 	db "@"
-; 0x6235d + 5 bytes
 
 SilphCo11EndBattleText2: ; 62362 (18:6362)
 	TX_FAR _SilphCo11EndBattleText2
 	db "@"
-; 0x62362 + 5 bytes
 
 SilphCo11AfterBattleText2: ; 62367 (18:6367)
 	TX_FAR _SilphCo11AfterBattleText2
 	db "@"
-; 0x62367 + 5 bytes
 
 UnknownText_6236c: ; 6236c (18:636c)
 	db $8
@@ -98824,12 +95913,10 @@ UnknownText_6236c: ; 6236c (18:636c)
 	ld a, PORYGON
 	call DisplayPokedex
 	jp TextScriptEnd
-; 0x6237b
 
 UnnamedText_6237b: ; 6237b (18:637b)
 	TX_FAR _UnnamedText_6237b
 	db "@"
-; 0x6237b + 5 bytes
 
 SilphCo11Object: ; 0x62380 (size=72)
 	db $d ; border tile
@@ -98902,79 +95989,64 @@ GymStatues: ; 62419 (18:6419)
 UnnamedText_62453: ; 62453 (18:6453)
 	TX_FAR _UnnamedText_62453
 	db "@"
-; 0x62453 + 5 bytes
 
 UnnamedText_62458: ; 62458 (18:6458)
 	TX_FAR _UnnamedText_62458
 	db "@"
-; 0x62458 + 5 bytes
 
 INCBIN "baserom.gbc",$6245d,$624a3 - $6245d
 
 UnnamedText_624a3: ; 624a3 (18:64a3)
 	TX_FAR _UnnamedText_624a3
 	db "@"
-; 0x624a3 + 5 bytes
 
 UnnamedText_624a8: ; 624a8 (18:64a8)
 	TX_FAR _UnnamedText_624a8
 	db "@"
-; 0x624a8 + 5 bytes
 
 UnnamedText_624ad: ; 624ad (18:64ad)
 	TX_FAR _UnnamedText_624ad
 	db "@"
-; 0x624ad + 5 bytes
 
 UnnamedText_624b2: ; 624b2 (18:64b2)
 	TX_FAR _UnnamedText_624b2
 	db "@"
-; 0x624b2 + 5 bytes
 
 UnnamedText_624b7: ; 624b7 (18:64b7)
 	TX_FAR _UnnamedText_624b7
 	db "@"
-; 0x624b7 + 5 bytes
 
 UnnamedText_624bc: ; 624bc (18:64bc)
 	TX_FAR _UnnamedText_624bc
 	db "@"
-; 0x624bc + 5 bytes
 
 UnnamedText_624c1: ; 624c1 (18:64c1)
 	TX_FAR _UnnamedText_624c1
 	db "@"
-; 0x624c1 + 5 bytes
 
 UnnamedText_624c6: ; 624c6 (18:64c6)
 	TX_FAR _UnnamedText_624c6
 	db "@"
-; 0x624c6 + 5 bytes
 
 UnnamedText_624cb: ; 624cb (18:64cb)
 	TX_FAR _UnnamedText_624cb
 	db "@"
-; 0x624cb + 5 bytes
 
 UnnamedText_624d0: ; 624d0 (18:64d0)
 	TX_FAR _UnnamedText_624d0
 	db "@"
-; 0x624d0 + 5 bytes
 
 UnnamedText_624d5: ; 624d5 (18:64d5)
 	TX_FAR _UnnamedText_624d5
 	db "@"
-; 0x624d5 + 5 bytes
 
 UnnamedText_624da: ; 624da (18:64da)
 	TX_FAR _UnnamedText_624da
 	db "@"
-; 0x624da + 5 bytes
 
 UnnamedText_624df: ; 624df (18:64df)
 	TX_FAR _UnnamedText_624df
 	db "@"
-; 0x624df + 5 bytes
 
 UnnamedText_624e4: ; 624e4 (18:64e4)
 	db $8
@@ -98986,29 +96058,24 @@ UnnamedText_624e4: ; 624e4 (18:64e4)
 .asm_624f2
 	call PrintText
 	jp TextScriptEnd
-; 0x624f8
 
 UnnamedText_624f8: ; 624f8 (18:64f8)
 	TX_FAR _UnnamedText_624f8
 	db "@"
-; 0x624f8 + 5 bytes
 
 UnnamedText_624fd: ; 624fd (18:64fd)
 	TX_FAR _UnnamedText_624fd
 	db "@"
-; 0x624fd + 5 bytes
 
 UnnamedText_62502: ; 62502 (18:6502)
 	TX_FAR _UnnamedText_62502
 	db "@"
-; 0x62502 + 5 bytes
 
 INCBIN "baserom.gbc",$62507,$62511 - $62507
 
 UnnamedText_62511: ; 62511 (18:6511)
 	TX_FAR _UnnamedText_62511
 	db "@"
-; 0x62511 + 5 bytes
 
 	ld a, [$c109]
 	cp $4
@@ -99094,7 +96161,6 @@ DecrementPP: ; 68000 (1a:4000)
 	                     ; based on the move chosen.
 	dec [hl]             ; Decrement PP
 	ret
-; 0x6802f
 
 Version_GFX: ; 6802f (1a:402f)
 IF _RED
@@ -99160,7 +96226,6 @@ Tset0B_Block: ; 6fef0 (1b:7ef0)
 
 SECTION "bank1C",ROMX,BANK[$1C]
 
-; known jump sources: 70044 (1c:4044)
 Func_70000: ; 70000 (1c:4000)
 	ld a, $f9
 	ld [rOBP0], a ; $FF00+$48
@@ -99187,7 +96252,6 @@ Func_70000: ; 70000 (1c:4000)
 	ld bc, $10
 	jp CopyData
 
-; known jump sources: 418c4 (10:58c4)
 Func_70044: ; 70044 (1c:4044)
 	call Func_70000
 	ld a, $c2
@@ -99301,7 +96365,6 @@ INCBIN "baserom.gbc",$700ee,$700f2 - $700ee
 Unknown_700f2: ; 700f2 (1c:40f2)
 INCBIN "baserom.gbc",$700f2,$7011f - $700f2
 
-; known jump sources: 700d5 (1c:40d5)
 Func_7011f: ; 7011f (1c:411f)
 	ld b, $8
 .asm_70121
@@ -99351,7 +96414,6 @@ GameFreakShootingStarOAMData: ; 70180 (1c:4180)
 FallingStar: ; 70190 (1c:4190)
 INCBIN "gfx/falling_star.2bpp"
 
-; known jump sources: 74061 (1d:4061)
 Func_701a0: ; 701a0 (1c:41a0)
 	call Func_70423
 	call ClearScreen
@@ -99450,7 +96512,6 @@ Func_701a0: ; 701a0 (1c:41a0)
 HallOfFameText: ; 7026b (1c:426b)
 	db "HALL OF FAME@"
 
-; known jump sources: 70217 (1c:4217), 70259 (1c:4259)
 Func_70278: ; 70278 (1c:4278)
 	call ClearScreen
 	ld a, $d0
@@ -99505,7 +96566,6 @@ Func_70278: ; 70278 (1c:4278)
 	jr nz, .asm_702d5
 	ret
 
-; known jump sources: 7021a (1c:421a)
 Func_702e1: ; 702e1 (1c:42e1)
 	ld a, [$cd3e]
 	ld hl, W_PARTYMON1NAME ; $d2b5
@@ -99513,7 +96573,6 @@ Func_702e1: ; 702e1 (1c:42e1)
 	call Func_702f0
 	jp Func_70404
 
-; known jump sources: 702ea (1c:42ea), 7666d (1d:666d)
 Func_702f0: ; 702f0 (1c:42f0)
 	FuncCoord 0, 2 ; $c3c8
 	ld hl, Coord
@@ -99544,7 +96603,6 @@ Func_702f0: ; 702f0 (1c:42f0)
 HoFMonInfoText: ; 70329 (1c:4329)
 	db "LEVEL/",$4e,"TYPE1/",$4e,"TYPE2/@"
 
-; known jump sources: 70298 (1c:4298)
 Func_7033e: ; 7033e (1c:433e)
 	ld de, Unknown_72ede ; $6ede
 	ld a, $4
@@ -99564,7 +96622,6 @@ Func_7033e: ; 7033e (1c:433e)
 	call InterlaceMergeSpriteBuffers
 	ld c, $1
 
-; known jump sources: 702b8 (1c:42b8), 702ce (1c:42ce)
 Func_7036d: ; 7036d (1c:436d)
 	ld b, $0
 	FuncCoord 12, 5 ; $c410
@@ -99572,7 +96629,6 @@ Func_7036d: ; 7036d (1c:436d)
 	ld a, $31
 	jp Predef ; indirect jump to Func_79dda (79dda (1e:5dda))
 
-; known jump sources: 7025c (1c:425c)
 Func_70377: ; 70377 (1c:4377)
 	ld hl, $d747
 	set 3, [hl]
@@ -99621,7 +96677,6 @@ Func_70377: ; 70377 (1c:4377)
 	call Func_703e2
 	ld hl, $cc5d
 
-; known jump sources: 703d6 (1c:43d6), 703dc (1c:43dc)
 Func_703e2: ; 703e2 (1c:43e2)
 	call PrintText
 	ld c, $78
@@ -99636,14 +96691,11 @@ HoFMoneyText: ; 703f4 (1c:43f4)
 UnnamedText_703fa: ; 703fa (1c:43fa)
 	TX_FAR _UnnamedText_703fa
 	db "@"
-; 0x703fa + 5 bytes
 
 UnnamedText_703ff: ; 703ff (1c:43ff)
 	TX_FAR _UnnamedText_703ff
 	db "@"
-; 0x703ff + 5 bytes
 
-; known jump sources: 702ed (1c:42ed)
 Func_70404: ; 70404 (1c:4404)
 	ld hl, $cc5b
 	ld bc, $10
@@ -99659,7 +96711,6 @@ Func_70404: ; 70404 (1c:4404)
 	ld bc, $b
 	jp CopyData
 
-; known jump sources: 701a0 (1c:41a0), 7025f (1c:425f)
 Func_70423: ; 70423 (1c:4423)
 	ld a, $a
 	ld [$cfc8], a
@@ -99668,7 +96719,6 @@ Func_70423: ; 70423 (1c:4423)
 	ld [$cfc7], a
 	jp GBFadeOut2
 
-; known jump sources: 7027 (1:7027)
 Func_70433: ; 70433 (1c:4433)
 	ld de, PokeCenterHealBall ; $44b7
 	ld hl, $87c0
@@ -99739,7 +96789,6 @@ INCBIN "gfx/pokecenter_ball.2bpp"
 Unknown_704d7: ; 704d7 (1c:44d7)
 INCBIN "baserom.gbc",$704d7,$704f3 - $704d7
 
-; known jump sources: 7049f (1c:449f), 708f3 (1c:48f3)
 Func_704f3: ; 704f3 (1c:44f3)
 	ld b, $8
 .asm_704f5
@@ -99752,7 +96801,6 @@ Func_704f3: ; 704f3 (1c:44f3)
 	jr nz, .asm_704f5
 	ret
 
-; known jump sources: 70454 (1c:4454), 7046e (1c:446e)
 Func_70503: ; 70503 (1c:4503)
 	ld a, [de]
 	inc de
@@ -99768,7 +96816,6 @@ Func_70503: ; 70503 (1c:4503)
 	ld [hli], a
 	ret
 
-; known jump sources: 3de (0:3de)
 Func_70510: ; 70510 (1c:4510)
 	call Func_706ef
 	ld a, $ec
@@ -99836,7 +96883,6 @@ Func_70510: ; 70510 (1c:4510)
 Unknown_70592: ; 70592 (1c:4592)
 INCBIN "baserom.gbc",$70592,$705aa - $70592
 
-; known jump sources: 70537 (1c:4537), 70563 (1c:4563)
 Func_705aa: ; 705aa (1c:45aa)
 	ld hl, W_WHICHTRADE ; $cd3d
 	ld a, $10
@@ -99847,7 +96893,6 @@ Func_705aa: ; 705aa (1c:45aa)
 	ld [hl], a
 	jp Func_70755
 
-; known jump sources: 994 (0:994)
 _DoFlyOrTeleportAwayGraphics: ; 705ba (1c:45ba)
 	call Func_706ef
 	call Func_70787
@@ -99929,7 +96974,6 @@ INCBIN "baserom.gbc",$7064f,$70667 - $7064f
 Unknown_70667: ; 70667 (1c:4667)
 INCBIN "baserom.gbc",$70667,$7067d - $70667
 
-; known jump sources: 705c5 (1c:45c5)
 Func_7067d: ; 7067d (1c:467d)
 	ld a, $ff
 	ld [$cfcb], a
@@ -99950,7 +96994,6 @@ Func_7067d: ; 7067d (1c:467d)
 	ld [$cfcb], a
 	jp Func_70772
 
-; known jump sources: 7058a (1c:458a), 7061e (1c:461e), 70633 (1c:4633), 70646 (1c:4646), 706d4 (1c:46d4)
 Func_706ae: ; 706ae (1c:46ae)
 	ld a, [$cd3f]
 	xor $1
@@ -99975,7 +97018,6 @@ Func_706ae: ; 706ae (1c:46ae)
 	jr nz, Func_706ae
 	ret
 
-; known jump sources: 70575 (1c:4575), 70610 (1c:4610)
 Func_706d7: ; 706d7 (1c:46d7)
 	ld de, BirdSprite ; $4d80
 	ld hl, $8000
@@ -99986,7 +97028,6 @@ Func_706d7: ; 706d7 (1c:46d7)
 	ld bc, (BANK(BirdSprite) << 8) + $0c
 	jp CopyVideoData
 
-; known jump sources: 70510 (1c:4510), 705ba (1c:45ba)
 Func_706ef: ; 706ef (1c:46ef)
 	ld a, [$c102]
 	ld [$cd50], a
@@ -100008,7 +97049,6 @@ Func_706ef: ; 706ef (1c:46ef)
 Unknown_70713: ; 70713 (1c:4713)
 INCBIN "baserom.gbc",$70713,$70717 - $70713
 
-; known jump sources: 70730 (1c:4730), 70755 (1c:4755)
 Func_70717: ; 70717 (1c:4717)
 	ld a, [hl]
 	ld [$c102], a
@@ -100022,7 +97062,6 @@ Func_70717: ; 70717 (1c:4717)
 	pop hl
 	ret
 
-; known jump sources: 70555 (1c:4555), 7060b (1c:460b), 70753 (1c:4753)
 Func_70730: ; 70730 (1c:4730)
 	call Func_70717
 	ld a, [W_WHICHTRADE] ; $cd3d
@@ -100043,7 +97082,6 @@ Func_70730: ; 70730 (1c:4730)
 	call DelayFrames
 	jr Func_70730
 
-; known jump sources: 705b7 (1c:45b7), 705da (1c:45da), 70770 (1c:4770)
 Func_70755: ; 70755 (1c:4755)
 	call Func_70717
 	ld a, [W_WHICHTRADE] ; $cd3d
@@ -100060,7 +97098,6 @@ Func_70755: ; 70755 (1c:4755)
 	call DelayFrames
 	jr Func_70755
 
-; known jump sources: 7055b (1c:455b), 705ec (1c:45ec), 7064c (1c:464c), 706ab (1c:46ab)
 Func_70772: ; 70772 (1c:4772)
 	ld a, [$cd4f]
 	ld [$c104], a
@@ -100068,7 +97105,6 @@ Func_70772: ; 70772 (1c:4772)
 	ld [$c102], a
 	ret
 
-; known jump sources: 705b3 (1c:45b3), 705d6 (1c:45d6)
 Func_7077f: ; 7077f (1c:477f)
 	ld a, [$cf1b]
 	xor $1
@@ -100076,7 +97112,6 @@ Func_7077f: ; 7077f (1c:477f)
 	inc a
 	ret
 
-; known jump sources: 77e (0:77e), 7053f (1c:453f), 705bd (1c:45bd), 705dd (1c:45dd)
 Func_70787: ; 70787 (1c:4787)
 	ld b, $0
 	ld hl, Unknown_707a9 ; $47a9
@@ -100107,7 +97142,6 @@ Func_70787: ; 70787 (1c:4787)
 Unknown_707a9: ; 707a9 (1c:47a9)
 INCBIN "baserom.gbc",$707a9,$707b6 - $707a9
 
-; known jump sources: e2ad (3:62ad)
 Func_707b6: ; 707b6 (1c:47b6)
 	ld c, $a
 	call DelayFrames
@@ -100172,27 +97206,23 @@ Func_707b6: ; 707b6 (1c:47b6)
 	call LoadFontTilePatterns
 	ret
 
-; known jump sources: 70801 (1c:4801), 70807 (1c:4807)
 Func_70842: ; 70842 (1c:4842)
 	ld a, [hl]
 	xor $1
 	ld [hl], a
 	ret
-; 70847 (1c:4847)
+
 UnnamedText_70847: ; 70847 (1c:4847)
 	TX_FAR _UnnamedText_70847
 	db "@"
-; 0x70847 + 5 bytes
 
 UnnamedText_7084c: ; 7084c (1c:484c)
 	TX_FAR _UnnamedText_7084c
 	db "@"
-; 0x7084c + 5 bytes
 
 UnnamedText_70851: ; 70851 (1c:4851)
 	TX_FAR _UnnamedText_70851
 	db "@"
-; 0x70851 + 5 bytes
 
 Unknown_70856: ; 70856 (1c:4856)
 INCBIN "baserom.gbc",$70856,$70866 - $70856
@@ -100200,7 +97230,6 @@ INCBIN "baserom.gbc",$70856,$70866 - $70856
 Unknown_70866: ; 70866 (1c:4866)
 INCBIN "baserom.gbc",$70866,$7087e - $70866
 
-; known jump sources: 3a3 (0:3a3)
 _HandleMidJump: ; 7087e (1c:487e)
 	ld a, [$d714]
 	ld c, a
@@ -100236,7 +97265,6 @@ _HandleMidJump: ; 7087e (1c:487e)
 Unknown_708ba: ; 708ba (1c:48ba)
 INCBIN "baserom.gbc",$708ba,$708ca - $708ba
 
-; known jump sources: 58e20 (16:4e20)
 Func_708ca: ; 708ca (1c:48ca)
 	ld a, $e4
 	ld [rOBP1], a ; $FF00+$49
@@ -100285,7 +97313,6 @@ Func_708ca: ; 708ca (1c:48ca)
 	call Delay3
 	jp CleanLCD_OAM
 
-; known jump sources: 708ce (1c:48ce), 70908 (1c:4908)
 Func_7092a: ; 7092a (1c:492a)
 	ld de, $9000
 	ld hl, $8000
@@ -100325,7 +97352,6 @@ Func_7092a: ; 7092a (1c:492a)
 	jr nz, .asm_70948
 	ret
 
-; known jump sources: 3ec52 (f:6c52)
 Func_7096d: ; 7096d (1c:496d)
 	ld a, $1
 	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
@@ -100389,7 +97415,6 @@ Func_7096d: ; 7096d (1c:496d)
 Unknown_709d2: ; 709d2 (1c:49d2)
 INCBIN "baserom.gbc",$709d2,$709e2 - $709d2
 
-; known jump sources: 709c0 (1c:49c0)
 Func_709e2: ; 709e2 (1c:49e2)
 	ld a, [W_CUROPPONENT] ; $d059
 	cp $c8
@@ -100400,7 +97425,6 @@ Func_709e2: ; 709e2 (1c:49e2)
 	set 0, c
 	ret
 
-; known jump sources: 709c3 (1c:49c3)
 Func_709ef: ; 709ef (1c:49ef)
 	ld hl, W_PARTYMON1_HP ; $d16c
 .asm_709f2
@@ -100429,7 +97453,6 @@ Func_709ef: ; 709ef (1c:49ef)
 	ld [$cd47], a
 	ret
 
-; known jump sources: 709c6 (1c:49c6)
 Func_70a19: ; 70a19 (1c:4a19)
 	ld a, [W_CURMAP] ; $d35e
 	ld e, a
@@ -100466,7 +97489,6 @@ INCBIN "baserom.gbc",$70a3f,$70a44 - $70a3f
 Unknown_70a44: ; 70a44 (1c:4a44)
 INCBIN "baserom.gbc",$70a44,$70a4d - $70a44
 
-; known jump sources: 709b3 (1c:49b3)
 Func_70a4d: ; 70a4d (1c:4a4d)
 	ld hl, $8ff0
 	ld de, BattleTransitionTile ; $4a59
@@ -100476,7 +97498,6 @@ Func_70a4d: ; 70a4d (1c:4a4d)
 BattleTransitionTile: ; 70a59 (1c:4a59)
 INCBIN "gfx/battle_transition.2bpp"
 
-; known jump sources: 70a9f (1c:4a9f), 70bc2 (1c:4bc2), 70c0a (1c:4c0a), 70ca7 (1c:4ca7), 70cd5 (1c:4cd5), 70d4d (1c:4d4d)
 Func_70a69: ; 70a69 (1c:4a69)
 	ld a, $ff
 	ld [rBGP], a ; $FF00+$47
@@ -100516,7 +97537,6 @@ Func_70a69: ; 70a69 (1c:4a69)
 	ld [$d09a], a
 	ret
 
-; known jump sources: 70a78 (1c:4a78)
 Func_70aaa: ; 70aaa (1c:4aaa)
 	ld a, $7
 	ld [W_WHICHTRADE], a ; $cd3d
@@ -100547,7 +97567,6 @@ Func_70aaa: ; 70aaa (1c:4aaa)
 	jr nz, .asm_70abd
 	ret
 
-; known jump sources: 70ab7 (1c:4ab7), 70ac0 (1c:4ac0), 70ac7 (1c:4ac7), 70acf (1c:4acf), 70ad6 (1c:4ad6)
 Func_70ae0: ; 70ae0 (1c:4ae0)
 	push bc
 .asm_70ae1
@@ -100567,7 +97586,6 @@ Func_70ae0: ; 70ae0 (1c:4ae0)
 	pop bc
 	ret
 
-; known jump sources: 70a92 (1c:4a92)
 Func_70af9: ; 70af9 (1c:4af9)
 	ld bc, $ffec
 	ld de, $14
@@ -100635,7 +97653,6 @@ Func_70af9: ; 70af9 (1c:4af9)
 	ld [$d09f], a
 	jr .asm_70b1c
 
-; known jump sources: 70b6f (1c:4b6f), 70cff (1c:4cff)
 Func_70b5d: ; 70b5d (1c:4b5d)
 	ld hl, Unknown_70b72 ; $4b72
 .asm_70b60
@@ -100728,7 +97745,6 @@ INCBIN "baserom.gbc",$70b72,$70b7f - $70b72
 	ld c, $a
 	jp DelayFrames
 
-; known jump sources: 70b8e (1c:4b8e), 70b9a (1c:4b9a), 70bd9 (1c:4bd9), 70be5 (1c:4be5)
 Func_70c12: ; 70c12 (1c:4c12)
 	ld a, c
 	ld [W_WHICHTRADE], a ; $cd3d
@@ -100761,7 +97777,6 @@ Func_70c12: ; 70c12 (1c:4c12)
 	jr nz, .asm_70c3a
 	ret
 
-; known jump sources: 70ba6 (1c:4ba6), 70bb2 (1c:4bb2), 70bf1 (1c:4bf1), 70bfd (1c:4bfd)
 Func_70c3f: ; 70c3f (1c:4c3f)
 	ld a, c
 	ld [W_WHICHTRADE], a ; $cd3d
@@ -100838,7 +97853,6 @@ Func_70c3f: ; 70c3f (1c:4c3f)
 	jr nz, .asm_70c89
 	jp Func_70a69
 
-; known jump sources: 70c8d (1c:4c8d), 70c91 (1c:4c91)
 Func_70caa: ; 70caa (1c:4caa)
 	ld c, $a
 .asm_70cac
@@ -100872,7 +97886,6 @@ Func_70caa: ; 70caa (1c:4caa)
 	jr nz, .asm_70cbf
 	jp Func_70a69
 
-; known jump sources: 70cc3 (1c:4cc3), 70cc7 (1c:4cc7)
 Func_70cd8: ; 70cd8 (1c:4cd8)
 	ld c, $9
 	ld de, $28
@@ -100885,7 +97898,6 @@ Func_70cd8: ; 70cd8 (1c:4cd8)
 
 INCBIN "baserom.gbc",$70ce4,$70cfd - $70ce4
 
-; known jump sources: 70d24 (1c:4d24)
 Func_70cfd: ; 70cfd (1c:4cfd)
 	ld b, $3
 	call Func_70b5d
@@ -100895,7 +97907,6 @@ Func_70cfd: ; 70cfd (1c:4cfd)
 
 INCBIN "baserom.gbc",$70d06,$70d19 - $70d06
 
-; known jump sources: 70aeb (1c:4aeb), 70c00 (1c:4c00), 70c94 (1c:4c94), 70cca (1c:4cca), 70d46 (1c:4d46)
 Func_70d19: ; 70d19 (1c:4d19)
 	ld a, $1
 	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
@@ -100930,7 +97941,6 @@ Func_70d19: ; 70d19 (1c:4d19)
 	jr nz, .asm_70d2f
 	jp Func_70a69
 
-; known jump sources: 70d34 (1c:4d34), 70d3a (1c:4d3a)
 Func_70d50: ; 70d50 (1c:4d50)
 	ld [W_WHICHTRADE], a ; $cd3d
 	ld a, [hli]
@@ -100997,7 +98007,6 @@ asm_70dc5
 
 INCBIN "baserom.gbc",$70dfe,$70e3e - $70dfe
 
-; known jump sources: d974 (3:5974)
 Func_70e3e: ; 70e3e (1c:4e3e)
 	call Func_7109b
 	ld hl, $cfcb
@@ -101028,7 +98037,6 @@ Func_70e3e: ; 70e3e (1c:4e3e)
 	pop af
 	jr asm_70e92
 
-; known jump sources: 70efe (1c:4efe), 70f0e (1c:4f0e)
 Func_70e7e: ; 70e7e (1c:4e7e)
 	ld hl, W_SCREENTILESBUFFER
 	ld bc, $114
@@ -101158,7 +98166,6 @@ TownMapOrder: ; 70f11 (1c:4f11)
 TownMapCursor: ; 70f40 (1c:4f40)
 INCBIN "gfx/town_map_cursor.1bpp"
 
-; known jump sources: 4010a (10:410a)
 Func_70f60: ; 70f60 (1c:4f60)
 	call Func_7109b
 	ld hl, $cfcb
@@ -101185,7 +98192,6 @@ Func_70f60: ; 70f60 (1c:4f60)
 MonsNestText: ; 70f89 (1c:4f89)
 	db "'s NEST@"
 
-; known jump sources: 30b3 (0:30b3)
 Func_70f90: ; 70f90 (1c:4f90)
 	call CleanLCD_OAM
 	call Func_7109b
@@ -101215,7 +98221,6 @@ Func_70f90: ; 70f90 (1c:4f90)
 	FuncCoord 18, 0 ; $c3b2
 	ld de, Coord
 
-; known jump sources: 7104f (1c:504f), 71055 (1c:5055), 71065 (1c:5065)
 Func_70fd6: ; 70fd6 (1c:4fd6)
 	ld a, $7f
 	ld [de], a
@@ -101307,7 +98312,6 @@ Func_70fd6: ; 70fd6 (1c:4fd6)
 ToText: ; 7106d (1c:506d)
 	db "To@"
 
-; known jump sources: 70fb4 (1c:4fb4)
 Func_71070: ; 71070 (1c:5070)
 	ld hl, W_WHICHTRADE ; $cd3d
 	ld [hl], $ff
@@ -101335,7 +98339,6 @@ Func_71070: ; 71070 (1c:5070)
 TownMapUpArrow: ; 71093 (1c:5093)
 INCBIN "gfx/up_arrow.1bpp"
 
-; known jump sources: 70e3e (1c:4e3e), 70f60 (1c:4f60), 70f93 (1c:4f93)
 Func_7109b: ; 7109b (1c:509b)
 	call GBPalWhiteOutWithDelay3
 	call ClearScreen
@@ -101385,12 +98388,11 @@ Func_7109b: ; 7109b (1c:509b)
 	inc a
 	ld [$d09b], a
 	ret
-; 71100 (1c:5100)
+
 CompressedMap: ; 71100 (1c:5100)
 ; you can decompress this file with the redrle program in the extras/ dir
 	INCBIN "gfx/town_map.rle"
 
-; known jump sources: 70eeb (1c:4eeb), 70f82 (1c:4f82)
 Func_711ab: ; 711ab (1c:51ab)
 	xor a
 	ld [$d09b], a
@@ -101402,7 +98404,6 @@ Func_711ab: ; 711ab (1c:51ab)
 	call UpdateSprites
 	jp GoPAL_SET_CF1C
 
-; known jump sources: 70e53 (1c:4e53), 70fcd (1c:4fcd), 70fe8 (1c:4fe8), 7123b (1c:523b)
 Func_711c4: ; 711c4 (1c:51c4)
 	push af
 	ld a, b
@@ -101427,7 +98428,6 @@ Func_711c4: ; 711c4 (1c:51c4)
 	ld bc, $a0
 	jp CopyData
 
-; known jump sources: 70f6b (1c:4f6b)
 Func_711ef: ; 711ef (1c:51ef)
 	ld b, BANK(Func_e9cb)
 	ld hl, Func_e9cb
@@ -101482,7 +98482,6 @@ Func_711ef: ; 711ef (1c:51ef)
 AreaUnknownText: ; 7124a (1c:524a)
 	db " AREA UNKNOWN@"
 
-; known jump sources: 70e9a (1c:4e9a), 711d2 (1c:51d2), 71212 (1c:5212)
 Func_71258: ; 71258 (1c:5258)
 	push af
 	and $f0
@@ -101499,7 +98498,6 @@ Func_71258: ; 71258 (1c:5258)
 	ld [hli], a
 	ret
 
-; known jump sources: 711d5 (1c:51d5)
 Func_7126d: ; 7126d (1c:526d)
 	ld a, [$cd5b]
 	and a
@@ -101507,7 +98505,6 @@ Func_7126d: ; 7126d (1c:526d)
 	jr z, Func_71279
 	ld hl, $c380
 
-; known jump sources: 70ea5 (1c:4ea5), 71274 (1c:5274)
 Func_71279: ; 71279 (1c:5279)
 	push hl
 	ld hl, $fcfc
@@ -101516,7 +98513,6 @@ Func_71279: ; 71279 (1c:5279)
 	ld c, l
 	pop hl
 
-; known jump sources: 718da (1c:58da)
 Func_71281: ; 71281 (1c:5281)
 	ld de, $202
 .asm_71284
@@ -101548,7 +98544,6 @@ Func_71281: ; 71281 (1c:5281)
 	jr nz, .asm_71284
 	ret
 
-; known jump sources: 718d5 (1c:58d5)
 Func_712a6: ; 712a6 (1c:52a6)
 	xor a
 	ld [$cd5c], a
@@ -101587,7 +98582,6 @@ Func_712a6: ; 712a6 (1c:52a6)
 	jr nz, .asm_712ad
 	ret
 
-; known jump sources: 711f7 (1c:51f7)
 Func_712d9: ; 712d9 (1c:52d9)
 	ld de, $cee9
 .asm_712dc
@@ -101610,7 +98604,6 @@ Func_712d9: ; 712d9 (1c:52d9)
 	inc hl
 	jr .asm_712e4
 
-; known jump sources: 70e95 (1c:4e95), 711cd (1c:51cd), 71209 (1c:5209)
 Func_712f1: ; 712f1 (1c:52f1)
 	cp $25
 	jr c, .asm_71304
@@ -101638,7 +98631,7 @@ Func_712f1: ; 712f1 (1c:52f1)
 	ld h, [hl]
 	ld l, a
 	ret
-; 71313 (1c:5313)
+
 ExternalMapEntries: ; 71313 (1c:5313)
 	EMAP $2,$B,PalletTownName
 	EMAP $2,$8,ViridianCityName
@@ -101852,7 +98845,6 @@ PowerPlantName: ; 716b2 (1c:56b2)
 MonNestIcon: ; 716be (1c:56be)
 	INCBIN "gfx/mon_nest_icon.1bpp"
 
-; known jump sources: 70ec8 (1c:4ec8)
 Func_716c6: ; 716c6 (1c:56c6)
 	ld a, [W_SUBANIMTRANSFORM] ; $d08b
 	inc a
@@ -101880,7 +98872,6 @@ Func_716c6: ; 716c6 (1c:56c6)
 	ld [W_SUBANIMTRANSFORM], a ; $d08b
 	jp DelayFrame
 
-; known jump sources: 6608 (1:6608)
 Func_716f7: ; 716f7 (1c:56f7)
 	xor a
 	ld [W_CURMENUITEMID], a ; $cc26
@@ -101888,7 +98879,6 @@ Func_716f7: ; 716f7 (1c:56f7)
 	inc a
 	jr asm_7170a
 
-; known jump sources: 3ae5 (0:3ae5)
 Func_716ff: ; 716ff (1c:56ff)
 	ld hl, $cf1f
 	ld a, [W_CURMENUITEMID] ; $cc26
@@ -101961,12 +98951,10 @@ asm_7170a: ; 7170a (1c:570a)
 Unknown_71769: ; 71769 (1c:5769)
 INCBIN "baserom.gbc",$71769,$7176c - $71769
 
-; known jump sources: 65b5 (1:65b5), 41214 (10:5214)
 Func_7176c: ; 7176c (1c:576c)
 	ld hl, Unknown_717c0 ; $57c0
 	ld a, $1c
 
-; known jump sources: 707d1 (1c:47d1)
 Func_71771: ; 71771 (1c:5771)
 	ld bc, $0
 .asm_71774
@@ -101996,7 +98984,6 @@ Func_71771: ; 71771 (1c:5771)
 	jr nz, .asm_71774
 	ret
 
-; known jump sources: 12ce0 (4:6ce0)
 Func_71791: ; 71791 (1c:5791)
 	call DisableLCD
 	ld hl, Unknown_717c0 ; $57c0
@@ -102035,7 +99022,6 @@ Func_71791: ; 71791 (1c:5791)
 Unknown_717c0: ; 717c0 (1c:57c0)
 INCBIN "baserom.gbc",$717c0,$71868 - $717c0
 
-; known jump sources: 12d1d (4:6d1d)
 Func_71868: ; 71868 (1c:5868)
 	push hl
 	push de
@@ -102054,7 +99040,6 @@ Func_71868: ; 71868 (1c:5868)
 	pop hl
 	ret
 
-; known jump sources: 6916 (1:6916), 4150a (10:550a)
 Func_71882: ; 71882 (1c:5882)
 	xor a
 	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
@@ -102086,7 +99071,6 @@ asm_718c3: ; 718c3 (1c:58c3)
 	ld bc, $60
 	jp CopyData
 
-; known jump sources: 71875 (1c:5875), 71888 (1c:5888)
 Func_718e9: ; 718e9 (1c:58e9)
 	ld [$d11e], a
 	ld a, $3a
@@ -102108,7 +99092,7 @@ Func_718e9: ; 718e9 (1c:58e9)
 	srl a
 	srl a
 	ret
-; 7190d (1c:590d)
+
 MonOverworldData: ; 7190d (1c:590d)
 	dn SPRITE_GRASS, SPRITE_GRASS			;Bulbasaur/Ivysaur
 	dn SPRITE_GRASS, SPRITE_MON				;Venusaur/Charmander
@@ -102358,7 +99342,6 @@ Function71c07: ; 71c07 (1c:5c07)
 	ld [$cd12],a
 	ret
 
-; known jump sources: 71c13 (1c:5c13), 71c8d (1c:5c8d)
 Func_71ca2: ; 71ca2 (1c:5ca2)
 	call GBPalWhiteOutWithDelay3
 	call Func_3dbe
@@ -102372,7 +99355,6 @@ Func_71ca2: ; 71ca2 (1c:5ca2)
 	ld hl, LoadWildData
 	jp Bankswitch ; indirect jump to LoadWildData (ceb8 (3:4eb8))
 
-; known jump sources: 71c57 (1c:5c57)
 Func_71cc1: ; 71cc1 (1c:5cc1)
 	ld hl, W_WHICHTRADE ; $cd3d
 	ld a, [$cd0f]
@@ -102403,7 +99385,6 @@ Func_71cc1: ; 71cc1 (1c:5cc1)
 	ld de, $cd59
 	jp CopyData
 
-; known jump sources: 71cde (1c:5cde), 71ce7 (1c:5ce7), 71ced (1c:5ced), 71d02 (1c:5d02)
 Func_71d11: ; 71d11 (1c:5d11)
 	push hl
 	push bc
@@ -102412,7 +99393,6 @@ Func_71d11: ; 71d11 (1c:5d11)
 	pop hl
 	ret
 
-; known jump sources: 71c7f (1c:5c7f)
 Func_71d19: ; 71d19 (1c:5d19)
 	ld hl, W_PARTYMON1NAME ; $d2b5
 	ld bc, $b
@@ -102433,7 +99413,6 @@ Func_71d19: ; 71d19 (1c:5d19)
 	ld bc, $2
 	jp CopyData
 
-; known jump sources: 71d1f (1c:5d1f), 71d31 (1c:5d31), 71d43 (1c:5d43)
 Func_71d4f: ; 71d4f (1c:5d4f)
 	ld a, [W_NUMINPARTY] ; $d163
 	dec a
@@ -102451,7 +99430,6 @@ INCBIN "baserom.gbc",$71d64,$71d88 - $71d64
 UnnamedText_71d88: ; 71d88 (1c:5d88)
 	TX_FAR _UnnamedText_71d88
 	db "@"
-; 0x71d88 + 5 bytes
 
 UnnamedText_71d8d: ; 71d8d (1c:5d8d)
 	TX_FAR _UnnamedText_71d8d ; 0xa80bc
@@ -102460,79 +99438,63 @@ UnnamedText_71d8d: ; 71d8d (1c:5d8d)
 UnnamedText_71d94: ; 71d94 (1c:5d94)
 	TX_FAR _UnnamedText_71d94
 	db "@"
-; 0x71d94 + 5 bytes
 
 UnnamedText_71d99: ; 71d99 (1c:5d99)
 	TX_FAR _UnnamedText_71d99
 	db "@"
-; 0x71d99 + 5 bytes
 
 UnnamedText_71d9e: ; 71d9e (1c:5d9e)
 	TX_FAR _UnnamedText_71d9e
 	db "@"
-; 0x71d9e + 5 bytes
 
 UnnamedText_71da3: ; 71da3 (1c:5da3)
 	TX_FAR _UnnamedText_71da3
 	db "@"
-; 0x71da3 + 5 bytes
 
 UnnamedText_71da8: ; 71da8 (1c:5da8)
 	TX_FAR _UnnamedText_71da8
 	db "@"
-; 0x71da8 + 5 bytes
 
 UnnamedText_71dad: ; 71dad (1c:5dad)
 	TX_FAR _UnnamedText_71dad
 	db "@"
-; 0x71dad + 5 bytes
 
 UnnamedText_71db2: ; 71db2 (1c:5db2)
 	TX_FAR _UnnamedText_71db2
 	db "@"
-; 0x71db2 + 5 bytes
 
 UnnamedText_71db7: ; 71db7 (1c:5db7)
 	TX_FAR _UnnamedText_71db7
 	db "@"
-; 0x71db7 + 5 bytes
 
 UnnamedText_71dbc: ; 71dbc (1c:5dbc)
 	TX_FAR _UnnamedText_71dbc
 	db "@"
-; 0x71dbc + 5 bytes
 
 UnnamedText_71dc1: ; 71dc1 (1c:5dc1)
 	TX_FAR _UnnamedText_71dc1
 	db "@"
-; 0x71dc1 + 5 bytes
 
 UnnamedText_71dc6: ; 71dc6 (1c:5dc6)
 	TX_FAR _UnnamedText_71dc6
 	db "@"
-; 0x71dc6 + 5 bytes
 
 UnnamedText_71dcb: ; 71dcb (1c:5dcb)
 	TX_FAR _UnnamedText_71dcb
 	db "@"
-; 0x71dcb + 5 bytes
 
 UnnamedText_71dd0: ; 71dd0 (1c:5dd0)
 	TX_FAR _UnnamedText_71dd0
 	db "@"
-; 0x71dd0 + 5 bytes
 
 UnnamedText_71dd5: ; 71dd5 (1c:5dd5)
 	TX_FAR _UnnamedText_71dd5
 	db "@"
-; 0x71dd5 + 5 bytes
 
 UnnamedText_71dda: ; 71dda (1c:5dda)
 	TX_FAR _UnnamedText_71dda
 	db "@"
-; 0x71dda + 5 bytes
 
-; known jump sources: 3df6 (0:3df6)
 Func_71ddf: ; 71ddf (1c:5ddf)
 	call Load16BitRegisters
 	ld a, b
@@ -102560,7 +99522,6 @@ Func_71ddf: ; 71ddf (1c:5ddf)
 	ld de, $cf2d
 	ld bc, $10
 	call CopyData
-; 71e12 (1c:5e12)
 	ld a, [W_PLAYERBATTSTATUS3]
 	ld hl, W_PLAYERMONID        ; player Pokemon ID
 	call DeterminePaletteID
@@ -102768,14 +99729,12 @@ Func_71f9d: ; 71f9d (1c:5f9d)
 	ld a, [hl]
 	ret
 
-; known jump sources: 12cf3 (4:6cf3)
 Func_71fb6: ; 71fb6 (1c:5fb6)
 	ld hl, Unknown_722f4 ; $62f4
 	ld de, $cf2e
 	ld bc, $30
 	jp CopyData
 
-; known jump sources: 71dec (1c:5dec)
 Func_71fc2: ; 71fc2 (1c:5fc2)
 	ld hl, $cf1f
 	ld a, [$cf2d]
@@ -102801,7 +99760,7 @@ Func_71fc2: ; 71fc2 (1c:5fc2)
 	pop de
 	ld [hl], e
 	ret
-; 71feb (1c:5feb)
+
 SendSGBPacket: ; 71feb (1c:5feb)
 ;check number of packets
 	ld a,[hl]
@@ -102869,7 +99828,6 @@ SendSGBPacket: ; 71feb (1c:5feb)
 ; else send 16 more bytes
 	jr .loop2\@
 
-; known jump sources: 1fd6 (0:1fd6)
 Func_7202b: ; 7202b (1c:602b)
 	xor a
 	ld [$cf1b], a
@@ -102904,7 +99862,6 @@ Func_7202b: ; 7202b (1c:602b)
 	ld hl, PalPacket_72538 ; $6538
 	jp SendSGBPacket
 
-; known jump sources: 72040 (1c:6040)
 Func_72075: ; 72075 (1c:6075)
 	ld hl, Unknown_72089 ; $6089
 	ld c, $9
@@ -102925,7 +99882,6 @@ Func_72075: ; 72075 (1c:6075)
 Unknown_72089: ; 72089 (1c:6089)
 INCBIN "baserom.gbc",$72089,$7209b - $72089
 
-; known jump sources: 7202f (1c:602f)
 Func_7209b: ; 7209b (1c:609b)
 	ld hl, PalPacket_724f8 ; $64f8
 	di
@@ -102977,13 +99933,11 @@ Func_7209b: ; 7209b (1c:609b)
 	scf
 	ret
 
-; known jump sources: 720f8 (1c:60f8), 720fd (1c:60fd)
 Func_72102: ; 72102 (1c:6102)
 	ld hl, PalPacket_724e8 ; $64e8
 	call SendSGBPacket
 	jp Wait7000
 
-; known jump sources: 7204f (1c:604f), 7205c (1c:605c), 72069 (1c:6069)
 Func_7210b: ; 7210b (1c:610b)
 	di
 	push de
@@ -103022,7 +99976,7 @@ Func_7210b: ; 7210b (1c:610b)
 	ld [rBGP], a ; $FF00+$47
 	ei
 	ret
-; 7214a (1c:614a)
+
 Wait7000: ; 7214a (1c:614a)
 ; each loop takes about 10 cycles so this routine actually loops through 70000
 ; cycles.
@@ -103052,7 +100006,6 @@ Func_72156: ; 72156 (1c:6156)
 	pop hl
 	jp SendSGBPacket
 
-; known jump sources: 7215d (1c:615d)
 Func_7216d: ; 7216d (1c:616d)
 	ld a, $80
 	ld [$FF00+$68], a
@@ -103075,11 +100028,9 @@ Func_7216d: ; 7216d (1c:616d)
 	jr nz, .asm_72174
 	ret
 
-; known jump sources: 72161 (1c:6161)
 Func_72187: ; 72187 (1c:6187)
 	ret
 
-; known jump sources: 7211d (1c:611d)
 Func_72188: ; 72188 (1c:6188)
 	ld b, $80
 .asm_7218a
@@ -103578,7 +100529,6 @@ IF _BLUE
 	INCBIN "gfx/blue/sgbborder.2bpp"
 ENDC
 
-; known jump sources: 4a9 (0:4a9), 5b04 (1:5b04)
 LoadSAV: ; 735e8 (1c:75e8)
 ;(if carry -> write
 ;"the file data is destroyed")
@@ -103612,7 +100562,6 @@ FileDataDestroyedText: ; 7361e (1c:761e)
 	TX_FAR _FileDataDestroyedText
 	db "@"
 
-; known jump sources: 735f1 (1c:75f1)
 LoadSAVCheckSum: ; 73623 (1c:7623)
 	ld a, $a
 	ld [$0], a
@@ -103658,7 +100607,6 @@ LoadSAVCheckSum: ; 73623 (1c:7623)
 	and a
 	jp SAVGoodChecksum
 
-; known jump sources: 735f6 (1c:75f6)
 LoadSAVCheckSum1: ; 73690 (1c:7690)
 	ld a, $a
 	ld [$0], a
@@ -103679,7 +100627,6 @@ LoadSAVCheckSum1: ; 73690 (1c:7690)
 	and a
 	jp SAVGoodChecksum
 
-; known jump sources: 735fb (1c:75fb)
 LoadSAVCheckSum2: ; 736bd (1c:76bd)
 	ld a, $a
 	ld [$0], a
@@ -103704,11 +100651,9 @@ LoadSAVCheckSum2: ; 736bd (1c:76bd)
 	and a
 	jp SAVGoodChecksum
 
-; known jump sources: 7364f (1c:764f), 736ab (1c:76ab), 736d8 (1c:76d8)
 SAVBadCheckSum: ; 736f7 (1c:76f7)
 	scf
 
-; known jump sources: 7368d (1c:768d), 736ba (1c:76ba), 736f4 (1c:76f4)
 SAVGoodChecksum: ; 736f8 (1c:76f8)
 	ld a, $0
 	ld [$6000], a
@@ -103784,7 +100729,6 @@ OlderFileWillBeErasedText: ; 73787 (1c:7787)
 	TX_FAR _OlderFileWillBeErasedText
 	db "@"
 
-; known jump sources: 7384d (1c:784d)
 SaveSAVtoSRAM0: ; 7378c (1c:778c)
 	ld a, $a
 	ld [$0], a
@@ -103818,7 +100762,6 @@ SaveSAVtoSRAM0: ; 7378c (1c:778c)
 	ld [$0], a
 	ret
 
-; known jump sources: 73850 (1c:7850)
 SaveSAVtoSRAM1: ; 737e2 (1c:77e2)
 ; stored pokémon
 	ld a, $a
@@ -103839,7 +100782,6 @@ SaveSAVtoSRAM1: ; 737e2 (1c:77e2)
 	ld [$0], a
 	ret
 
-; known jump sources: 73853 (1c:7853)
 SaveSAVtoSRAM2: ; 7380f (1c:780f)
 	ld a, $a
 	ld [$0], a
@@ -103863,7 +100805,6 @@ SaveSAVtoSRAM2: ; 7380f (1c:780f)
 	ld [$0], a
 	ret
 
-; known jump sources: 7245 (1:7245), 5a4fa (16:64fa), 738f7 (1c:78f7)
 SaveSAVtoSRAM: ; 73848 (1c:7848)
 	ld a, $2
 	ld [$d088], a
@@ -103871,7 +100812,6 @@ SaveSAVtoSRAM: ; 73848 (1c:7848)
 	call SaveSAVtoSRAM1
 	jp SaveSAVtoSRAM2
 
-; known jump sources: 73636 (1c:7636), 73647 (1c:7647), 736a3 (1c:76a3), 736d0 (1c:76d0), 737d4 (1c:77d4), 73801 (1c:7801), 7383a (1c:783a), 73870 (1c:7870), 7392e (1c:792e), 73a75 (1c:7a75)
 SAVCheckSum: ; 73856 (1c:7856)
 ;Check Sum (result[1 byte] is complemented)
 	ld d, $0
@@ -103887,7 +100827,6 @@ SAVCheckSum: ; 73856 (1c:7856)
 	cpl
 	ret
 
-; known jump sources: 73934 (1c:7934), 73a7b (1c:7a7b)
 Func_73863: ; 73863 (1c:7863)
 	ld hl, $a000
 	ld de, $ba4d
@@ -103905,7 +100844,6 @@ Func_73863: ; 73863 (1c:7863)
 	jr nz, .asm_7386b
 	ret
 
-; known jump sources: 738cd (1c:78cd), 738e0 (1c:78e0)
 Func_7387b: ; 7387b (1c:787b)
 	ld hl, Unknown_73895 ; $7895
 	ld a, [$d5a0]
@@ -103928,7 +100866,6 @@ Func_7387b: ; 7387b (1c:787b)
 Unknown_73895: ; 73895 (1c:7895)
 INCBIN "baserom.gbc",$73895,$738a1 - $73895
 
-; known jump sources: 216b8 (8:56b8)
 Func_738a1: ; 738a1 (1c:78a1)
 	ld hl, UnnamedText_73909 ; $7909
 	call PrintText
@@ -103974,13 +100911,11 @@ Func_738a1: ; 738a1 (1c:78a1)
 	call PlaySoundWaitForCurrent
 	call WaitForSoundToFinish
 	ret
-; 73909 (1c:7909)
+
 UnnamedText_73909: ; 73909 (1c:7909)
 	TX_FAR _UnnamedText_73909
 	db "@"
-; 0x73909 + 5 bytes
 
-; known jump sources: 738d5 (1c:78d5), 738e6 (1c:78e6)
 Func_7390e: ; 7390e (1c:790e)
 	push hl
 	ld a, $a
@@ -104006,7 +100941,6 @@ Func_7390e: ; 7390e (1c:790e)
 	ld [$0], a
 	ret
 
-; known jump sources: 738b7 (1c:78b7)
 Func_7393f: ; 7393f (1c:793f)
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
@@ -104083,11 +101017,10 @@ Func_7393f: ; 7393f (1c:793f)
 	ld a, $1
 	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
 	ret
-; 739d4 (1c:79d4)
+
 UnnamedText_739d4: ; 739d4 (1c:79d4)
 	TX_FAR _UnnamedText_739d4
 	db "@"
-; 0x739d4 + 5 bytes
 
 BoxNames: ; 739d9 (1c:79d9)
 	db "BOX 1",$4e
@@ -104106,7 +101039,6 @@ BoxNames: ; 739d9 (1c:79d9)
 BoxNoText: ; 73a21 (1c:7a21)
 	db "BOX No.@"
 
-; known jump sources: 738b4 (1c:78b4)
 Func_73a29: ; 73a29 (1c:7a29)
 	ld a, $a
 	ld [$0], a
@@ -104123,7 +101055,6 @@ Func_73a29: ; 73a29 (1c:7a29)
 	ld [$0], a
 	ret
 
-; known jump sources: 73a38 (1c:7a38), 73a40 (1c:7a40)
 Func_73a4b: ; 73a4b (1c:7a4b)
 	ld hl, $a000
 	call Func_73a7f
@@ -104144,7 +101075,6 @@ Func_73a4b: ; 73a4b (1c:7a4b)
 	call Func_73863
 	ret
 
-; known jump sources: 73a4e (1c:7a4e), 73a54 (1c:7a54), 73a5a (1c:7a5a), 73a60 (1c:7a60), 73a66 (1c:7a66), 73a6c (1c:7a6c)
 Func_73a7f: ; 73a7f (1c:7a7f)
 	xor a
 	ld [hli], a
@@ -104152,7 +101082,6 @@ Func_73a7f: ; 73a7f (1c:7a7f)
 	ld [hl], a
 	ret
 
-; known jump sources: 739b4 (1c:79b4)
 Func_73a84: ; 73a84 (1c:7a84)
 	ld hl, W_WHICHTRADE ; $cd3d
 	push hl
@@ -104179,7 +101108,6 @@ Func_73a84: ; 73a84 (1c:7a84)
 	ld [hl], a
 	ret
 
-; known jump sources: 73a97 (1c:7a97), 73a9f (1c:7a9f)
 Func_73ab8: ; 73ab8 (1c:7ab8)
 	ld a, [$a000]
 	ld [hli], a
@@ -104229,7 +101157,6 @@ SAVCheckRandomID: ;$7ad1
 	ld [$0000],a
 	ret
 
-; known jump sources: 7024e (1c:424e)
 Func_73b0d: ; 73b0d (1c:7b0d)
 	ld a, [$d5a2]
 	dec a
@@ -104253,7 +101180,6 @@ Func_73b0d: ; 73b0d (1c:7b0d)
 	ld bc, $60
 	jr CopyToSRAM0
 
-; known jump sources: 765be (1d:65be)
 Func_73b3f: ; 73b3f (1c:7b3f)
 	ld hl, $a598
 	ld bc, $60
@@ -104275,7 +101201,6 @@ CopyToSRAM0: ; 73b51 (1c:7b51)
 	ld [$0], a
 	ret
 
-; known jump sources: 1c9bb (7:49bb)
 Func_73b6a: ; 73b6a (1c:7b6a)
 	ld a, $a
 	ld [$0], a
@@ -104294,7 +101219,6 @@ Func_73b6a: ; 73b6a (1c:7b6a)
 	ld [$0], a
 	ret
 
-; known jump sources: 73b75 (1c:7b75), 73b7a (1c:7b7a), 73b7f (1c:7b7f), 73b84 (1c:7b84)
 PadSRAM_FF: ; 73b8f (1c:7b8f)
 	ld [$4000], a
 	ld hl, $a000
@@ -104322,7 +101246,6 @@ FuchsiaPokecenterBlocks: ; 74030 (1d:4030)
 CeruleanHouse2Blocks: ; 7404c (1d:404c)
 	INCBIN "maps/ceruleanhouse2.blk"
 
-; known jump sources: 5a4c8 (16:64c8)
 Func_7405c: ; 7405c (1d:405c)
 	ld b, BANK(Func_701a0)
 	ld hl, Func_701a0
@@ -104361,7 +101284,6 @@ Func_7405c: ; 7405c (1d:405c)
 	ld [$cd3e], a
 	jp Func_7418e
 
-; known jump sources: 741d5 (1d:41d5), 741e6 (1d:41e6), 74226 (1d:4226)
 Func_740ba: ; 740ba (1d:40ba)
 	ld hl, Unknown_74160 ; $4160
 	ld b, $4
@@ -104373,7 +101295,7 @@ Func_740ba: ; 740ba (1d:40ba)
 	dec b
 	jr nz, .asm_740bf
 	ret
-; 740cb (1d:40cb)
+
 Func40CB: ; 740cb (1d:40cb)
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED],a
@@ -104456,7 +101378,6 @@ Unknown_74140: ; 74140 (1d:4140)
 	ld b, a
 	ret
 
-; known jump sources: 74143 (1d:4143), 7414a (1d:414a), 74155 (1d:4155)
 Func_74152: ; 74152 (1d:4152)
 	ld a, [$FF00+$44]
 	cp l
@@ -104481,7 +101402,6 @@ Unknown_74164: ; 74164 (1d:4164)
 	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
 	jp Delay3
 
-; known jump sources: 74075 (1d:4075), 7407e (1d:407e), 74178 (1d:4178)
 Func_74171: ; 74171 (1d:4171)
 	ld [hl], $0
 	inc hl
@@ -104492,12 +101412,11 @@ Func_74171: ; 74171 (1d:4171)
 	jr nz, Func_74171
 	ret
 
-; known jump sources: 7408f (1d:408f), 74095 (1d:4095)
 Func_7417b: ; 7417b (1d:417b)
 	ld bc, $50
 	ld a, $7e
 	jp FillMemory
-; 74183 (1d:4183)
+
 Unknown_74183: ; 74183 (1d:4183)
 	FuncCoord 0, 4 ; $c3f0
 	ld hl, Coord
@@ -104505,7 +101424,6 @@ Unknown_74183: ; 74183 (1d:4183)
 	ld a, $7f
 	jp FillMemory
 
-; known jump sources: 740b7 (1d:40b7)
 Func_7418e: ; 7418e (1d:418e)
 	ld de, Unknown_74243 ; $4243
 	push de
@@ -104857,7 +101775,6 @@ PrintStatusAilment: ; 747de (1d:47de)
 	ld [hli], a
 	ld [hl], "R"
 	ret
-; 7481f (1d:481f)
 
 Unknown_7481f: ; 7481f (1d:481f)
 	ld hl, HiddenItemCoords
@@ -104903,7 +101820,6 @@ Unknown_7481f: ; 7481f (1d:481f)
 	jr c, .asm_74824 ; 0x74867 $bb
 	scf
 	ret
-; 0x7486b
 
 Unknown_7486b: ; 7486b (1d:486b)
 	sub $5
@@ -104911,7 +101827,6 @@ Unknown_7486b: ; 7486b (1d:486b)
 	ret c
 	xor a
 	ret
-; 0x74872
 
 Unnamed_ASM_74872: ; 74872 (1d:4872)
 ; code similar to this appears in a lot of banks; this particular
@@ -104952,21 +101867,18 @@ ViridianGymScript: ; 748a3 (1d:48a3)
 	call ExecuteCurMapScriptInTable
 	ld [W_VIRIDIANGYMCURSCRIPT], a
 	ret
-; 0x748bf
 
 Gym8CityName: ; 748bf (1d:48bf)
 	db "VIRIDIAN CITY@"
 Gym8LeaderName: ; 748cd (1d:48cd)
 	db "GIOVANNI@"
 
-; known jump sources: 7498d (1d:498d), 749e9 (1d:49e9)
 Func_748d6: ; 748d6 (1d:48d6)
 	xor a
 	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
 	ld [W_VIRIDIANGYMCURSCRIPT], a
 	ld [W_CURMAPSCRIPT], a
 	ret
-; 748e1 (1d:48e1)
 
 Unknown_748e1: ; 748e1 (1d:48e1)
 	dw Func_748eb
@@ -105087,7 +101999,6 @@ Func_7496b: ; 7496b (1d:496b)
 	ld b, BANK(Func_44fd7)
 	ld hl, Func_44fd7
 	jp Bankswitch ; indirect jump to Func_44fd7 (44fd7 (11:4fd7))
-; 74988
 
 Func_74988: ; 74988 (1d:4988)
 	ld a, [W_ISINBATTLE] ; $d057
@@ -105095,7 +102006,6 @@ Func_74988: ; 74988 (1d:4988)
 	jp z, Func_748d6
 	ld a, $f0
 	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
-; 74995 (1d:4995)
 Unknown_74995: ; 74995 (1d:4995)
 	ld a, $c
 	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
@@ -105134,7 +102044,7 @@ Unknown_74995: ; 74995 (1d:4995)
 	set 1, [hl]
 	set 7, [hl]
 	jp Func_748d6
-; 749ec (1d:49ec)
+
 ViridianGymTexts: ; 749ec (1d:49ec)
 	dw ViridianGymText1, ViridianGymText2, ViridianGymText3, ViridianGymText4, ViridianGymText5, ViridianGymText6, ViridianGymText7, ViridianGymText8, ViridianGymText9, ViridianGymText10, Predef5CText, ViridianGymText12, ViridianGymText13, ViridianGymText14
 
@@ -105147,7 +102057,6 @@ ViridianGymTrainerHeader0: ; 74a08 (1d:4a08)
 	dw ViridianGymAfterBattleText1 ; 0x4b07 TextAfterBattle
 	dw ViridianGymEndBattleText1 ; 0x4b02 TextEndBattle
 	dw ViridianGymEndBattleText1 ; 0x4b02 TextEndBattle
-; 0x74a14
 
 ViridianGymTrainerHeader1: ; 74a14 (1d:4a14)
 	db $3 ; flag's bit
@@ -105157,7 +102066,6 @@ ViridianGymTrainerHeader1: ; 74a14 (1d:4a14)
 	dw ViridianGymAfterBattleText2 ; 0x4b20 TextAfterBattle
 	dw ViridianGymEndBattleText2 ; 0x4b1b TextEndBattle
 	dw ViridianGymEndBattleText2 ; 0x4b1b TextEndBattle
-; 0x74a20
 
 ViridianGymTrainerHeader2: ; 74a20 (1d:4a20)
 	db $4 ; flag's bit
@@ -105167,7 +102075,6 @@ ViridianGymTrainerHeader2: ; 74a20 (1d:4a20)
 	dw ViridianGymAfterBattleText3 ; 0x4b39 TextAfterBattle
 	dw ViridianGymEndBattleText3 ; 0x4b34 TextEndBattle
 	dw ViridianGymEndBattleText3 ; 0x4b34 TextEndBattle
-; 0x74a2c
 
 ViridianGymTrainerHeader3: ; 74a2c (1d:4a2c)
 	db $5 ; flag's bit
@@ -105177,7 +102084,6 @@ ViridianGymTrainerHeader3: ; 74a2c (1d:4a2c)
 	dw ViridianGymAfterBattleText4 ; 0x4b52 TextAfterBattle
 	dw ViridianGymEndBattleText4 ; 0x4b4d TextEndBattle
 	dw ViridianGymEndBattleText4 ; 0x4b4d TextEndBattle
-; 0x74a38
 
 ViridianGymTrainerHeader4: ; 74a38 (1d:4a38)
 	db $6 ; flag's bit
@@ -105187,7 +102093,6 @@ ViridianGymTrainerHeader4: ; 74a38 (1d:4a38)
 	dw ViridianGymAfterBattleText5 ; 0x4b6b TextAfterBattle
 	dw ViridianGymEndBattleText5 ; 0x4b66 TextEndBattle
 	dw ViridianGymEndBattleText5 ; 0x4b66 TextEndBattle
-; 0x74a44
 
 ViridianGymTrainerHeader5: ; 74a44 (1d:4a44)
 	db $7 ; flag's bit
@@ -105197,7 +102102,6 @@ ViridianGymTrainerHeader5: ; 74a44 (1d:4a44)
 	dw ViridianGymAfterBattleText6 ; 0x4b84 TextAfterBattle
 	dw ViridianGymEndBattleText6 ; 0x4b7f TextEndBattle
 	dw ViridianGymEndBattleText6 ; 0x4b7f TextEndBattle
-; 0x74a50
 
 ViridianGymTrainerHeader6: ; 74a50 (1d:4a50)
 	db $8 ; flag's bit
@@ -105207,7 +102111,6 @@ ViridianGymTrainerHeader6: ; 74a50 (1d:4a50)
 	dw ViridianGymAfterBattleText7 ; 0x4b9d TextAfterBattle
 	dw ViridianGymEndBattleText7 ; 0x4b98 TextEndBattle
 	dw ViridianGymEndBattleText7 ; 0x4b98 TextEndBattle
-; 0x74a5c
 
 ViridianGymTrainerHeader7: ; 74a5c (1d:4a5c)
 	db $9 ; flag's bit
@@ -105217,7 +102120,6 @@ ViridianGymTrainerHeader7: ; 74a5c (1d:4a5c)
 	dw ViridianGymAfterBattleText8 ; 0x4bb6 TextAfterBattle
 	dw ViridianGymEndBattleText8 ; 0x4bb1 TextEndBattle
 	dw ViridianGymEndBattleText8 ; 0x4bb1 TextEndBattle
-; 0x74a68
 
 db $ff
 
@@ -105268,22 +102170,18 @@ ViridianGymText1: ; 74a69 (1d:4a69)
 UnnamedText_74ace: ; 74ace (1d:4ace)
 	TX_FAR _UnnamedText_74ace
 	db "@"
-; 0x74ace + 5 bytes
 
 UnnamedText_74ad3: ; 74ad3 (1d:4ad3)
 	TX_FAR _UnnamedText_74ad3
 	db $0b, "@"
-; 0x74ad9
 
 UnnamedText_74ad9: ; 74ad9 (1d:4ad9)
 	TX_FAR _UnnamedText_74ad9
 	db $0d, "@"
-; 0x74add
 
 ViridianGymText12: ; 74adf (1d:4adf)
 	TX_FAR _ViridianGymText12
 	db "@"
-; 0x74adf + 5 bytes
 
 ViridianGymText13: ; 74ae4 (1d:4ae4)
 	TX_FAR _ReceivedTM27Text
@@ -105296,7 +102194,6 @@ TM27ExplanationText: ; 74ae9 (1d:4ae9)
 ViridianGymText14: ; 74aee (1d:4aee)
 	TX_FAR _TM27NoRoomText
 	db "@"
-; 0x74aee + 5 bytes
 
 ViridianGymText2: ; 74af3 (1d:4af3)
 	db $08 ; asm
@@ -105307,17 +102204,14 @@ ViridianGymText2: ; 74af3 (1d:4af3)
 ViridianGymBattleText1: ; 74afd (1d:4afd)
 	TX_FAR _ViridianGymBattleText1
 	db "@"
-; 0x74afd + 5 bytes
 
 ViridianGymEndBattleText1: ; 74b02 (1d:4b02)
 	TX_FAR _ViridianGymEndBattleText1
 	db "@"
-; 0x74b02 + 5 bytes
 
 ViridianGymAfterBattleText1: ; 74b07 (1d:4b07)
 	TX_FAR _ViridianGymAfterBattleText1
 	db "@"
-; 0x74b07 + 5 bytes
 
 ViridianGymText3: ; 74b0c (1d:4b0c)
 	db $08 ; asm
@@ -105328,17 +102222,14 @@ ViridianGymText3: ; 74b0c (1d:4b0c)
 ViridianGymBattleText2: ; 74b16 (1d:4b16)
 	TX_FAR _ViridianGymBattleText2
 	db "@"
-; 0x74b16 + 5 bytes
 
 ViridianGymEndBattleText2: ; 74b1b (1d:4b1b)
 	TX_FAR _ViridianGymEndBattleText2
 	db "@"
-; 0x74b1b + 5 bytes
 
 ViridianGymAfterBattleText2: ; 74b20 (1d:4b20)
 	TX_FAR _ViridianGymAfterBattleText2
 	db "@"
-; 0x74b20 + 5 bytes
 
 ViridianGymText4: ; 74b25 (1d:4b25)
 	db $08 ; asm
@@ -105349,17 +102240,14 @@ ViridianGymText4: ; 74b25 (1d:4b25)
 ViridianGymBattleText3: ; 74b2f (1d:4b2f)
 	TX_FAR _ViridianGymBattleText3
 	db "@"
-; 0x74b2f + 5 bytes
 
 ViridianGymEndBattleText3: ; 74b34 (1d:4b34)
 	TX_FAR _ViridianGymEndBattleText3
 	db "@"
-; 0x74b34 + 5 bytes
 
 ViridianGymAfterBattleText3: ; 74b39 (1d:4b39)
 	TX_FAR _ViridianGymAfterBattleText3
 	db "@"
-; 0x74b39 + 5 bytes
 
 ViridianGymText5: ; 74b3e (1d:4b3e)
 	db $08 ; asm
@@ -105370,17 +102258,14 @@ ViridianGymText5: ; 74b3e (1d:4b3e)
 ViridianGymBattleText4: ; 74b48 (1d:4b48)
 	TX_FAR _ViridianGymBattleText4
 	db "@"
-; 0x74b48 + 5 bytes
 
 ViridianGymEndBattleText4: ; 74b4d (1d:4b4d)
 	TX_FAR _ViridianGymEndBattleText4
 	db "@"
-; 0x74b4d + 5 bytes
 
 ViridianGymAfterBattleText4: ; 74b52 (1d:4b52)
 	TX_FAR _ViridianGymAfterBattleText4
 	db "@"
-; 0x74b52 + 5 bytes
 
 ViridianGymText6: ; 74b57 (1d:4b57)
 	db $08 ; asm
@@ -105391,17 +102276,14 @@ ViridianGymText6: ; 74b57 (1d:4b57)
 ViridianGymBattleText5: ; 74b61 (1d:4b61)
 	TX_FAR _ViridianGymBattleText5
 	db "@"
-; 0x74b61 + 5 bytes
 
 ViridianGymEndBattleText5: ; 74b66 (1d:4b66)
 	TX_FAR _ViridianGymEndBattleText5
 	db "@"
-; 0x74b66 + 5 bytes
 
 ViridianGymAfterBattleText5: ; 74b6b (1d:4b6b)
 	TX_FAR _ViridianGymAfterBattleText5
 	db "@"
-; 0x74b6b + 5 bytes
 
 ViridianGymText7: ; 74b70 (1d:4b70)
 	db $08 ; asm
@@ -105412,17 +102294,14 @@ ViridianGymText7: ; 74b70 (1d:4b70)
 ViridianGymBattleText6: ; 74b7a (1d:4b7a)
 	TX_FAR _ViridianGymBattleText6
 	db "@"
-; 0x74b7a + 5 bytes
 
 ViridianGymEndBattleText6: ; 74b7f (1d:4b7f)
 	TX_FAR _ViridianGymEndBattleText6
 	db "@"
-; 0x74b7f + 5 bytes
 
 ViridianGymAfterBattleText6: ; 74b84 (1d:4b84)
 	TX_FAR _ViridianGymAfterBattleText6
 	db "@"
-; 0x74b84 + 5 bytes
 
 ViridianGymText8: ; 74b89 (1d:4b89)
 	db $08 ; asm
@@ -105433,17 +102312,14 @@ ViridianGymText8: ; 74b89 (1d:4b89)
 ViridianGymBattleText7: ; 74b93 (1d:4b93)
 	TX_FAR _ViridianGymBattleText7
 	db "@"
-; 0x74b93 + 5 bytes
 
 ViridianGymEndBattleText7: ; 74b98 (1d:4b98)
 	TX_FAR _ViridianGymEndBattleText7
 	db "@"
-; 0x74b98 + 5 bytes
 
 ViridianGymAfterBattleText7: ; 74b9d (1d:4b9d)
 	TX_FAR _ViridianGymAfterBattleText7
 	db "@"
-; 0x74b9d + 5 bytes
 
 ViridianGymText9: ; 74ba2 (1d:4ba2)
 	db $08 ; asm
@@ -105454,17 +102330,14 @@ ViridianGymText9: ; 74ba2 (1d:4ba2)
 ViridianGymBattleText8: ; 74bac (1d:4bac)
 	TX_FAR _ViridianGymBattleText8
 	db "@"
-; 0x74bac + 5 bytes
 
 ViridianGymEndBattleText8: ; 74bb1 (1d:4bb1)
 	TX_FAR _ViridianGymEndBattleText8
 	db "@"
-; 0x74bb1 + 5 bytes
 
 ViridianGymAfterBattleText8: ; 74bb6 (1d:4bb6)
 	TX_FAR _ViridianGymAfterBattleText8
 	db "@"
-; 0x74bb6 + 5 bytes
 
 ViridianGymText10: ; 74bbb (1d:4bbb)
 	db $08 ; asm
@@ -105483,12 +102356,10 @@ ViridianGymText10: ; 74bbb (1d:4bbb)
 UnnamedText_74bd4: ; 74bd4 (1d:4bd4)
 	TX_FAR _UnnamedText_74bd4
 	db "@"
-; 0x74bd4 + 5 bytes
 
 UnnamedText_74bd9: ; 74bd9 (1d:4bd9)
 	TX_FAR _UnnamedText_74bd9
 	db "@"
-; 0x74bd9 + 5 bytes
 
 ViridianGymObject: ; 0x74bde (size=105)
 	db $3 ; border tile
@@ -105532,7 +102403,6 @@ PewterMartScript: ; 74cad (1d:4cad)
 	ld a, $1
 	ld [$cf0c], a
 	ret
-; 0x74cb6
 
 PewterMartTexts: ; 74cb6 (1d:4cb6)
 	dw PewterMartText1, PewterMartText2, PewterMartText3
@@ -105546,7 +102416,6 @@ PewterMartText2: ; 74cbc (1d:4cbc)
 UnnamedText_74cc6: ; 74cc6 (1d:4cc6)
 	TX_FAR _UnnamedText_74cc6
 	db "@"
-; 0x74cc6 + 5 bytes
 
 PewterMartText3: ; 74ccb (1d:4ccb)
 	db $08 ; asm
@@ -105557,7 +102426,6 @@ PewterMartText3: ; 74ccb (1d:4ccb)
 UnnamedText_74cd5: ; 74cd5 (1d:4cd5)
 	TX_FAR _UnnamedText_74cd5
 	db "@"
-; 0x74cd5 + 5 bytes
 
 PewterMartObject: ; 0x74cda (size=38)
 	db $0 ; border tile
@@ -105587,7 +102455,6 @@ UnknownDungeon1_h: ; 0x74d00 to 0x74d0c (12 bytes) (id=228)
 
 UnknownDungeon1Script: ; 74d0c (1d:4d0c)
 	jp EnableAutoTextBoxDrawing
-; 0x74d0f
 
 UnknownDungeon1Texts: ; 74d0f (1d:4d0f)
 	dw Predef5CText, Predef5CText, Predef5CText
@@ -105641,7 +102508,6 @@ CeruleanHouse2Script: ; 74e09 (1d:4e09)
 	dec a
 	ld [$cc3c], a
 	ret
-; 0x74e13
 
 CeruleanHouse2Texts: ; 74e13 (1d:4e13)
 	dw CeruleanHouse2Text1
@@ -105688,7 +102554,6 @@ CeruleanHouse2Text1: ; 74e15 (1d:4e15)
 	ld hl, UnnamedText_74e81
 	call PrintText
 	jp TextScriptEnd
-; 0x74e6d
 
 UnnamedText_74e6d: ; 74e6d (1d:4e6d)
 db $8,BOULDERBADGE,CASCADEBADGE,THUNDERBADGE,RAINBOWBADGE,SOULBADGE,MARSHBADGE,VOLCANOBADGE,EARTHBADGE,$FF
@@ -105696,17 +102561,14 @@ db $8,BOULDERBADGE,CASCADEBADGE,THUNDERBADGE,RAINBOWBADGE,SOULBADGE,MARSHBADGE,V
 UnnamedText_74e77: ; 74e77 (1d:4e77)
 	TX_FAR _UnnamedText_74e77
 	db "@"
-; 0x74e77 + 5 bytes
 
 UnnamedText_74e7c: ; 74e7c (1d:4e7c)
 	TX_FAR _UnnamedText_74e7c
 	db "@"
-; 0x74e7c + 5 bytes
 
 UnnamedText_74e81: ; 74e81 (1d:4e81)
 	TX_FAR _UnnamedText_74e81
 	db "@"
-; 0x74e81 + 5 bytes
 
 Unknown_74e86: ; 74e86 (1d:4e86)
 dw UnnamedText_74e96
@@ -105721,42 +102583,34 @@ dw UnnamedText_74eb9
 UnnamedText_74e96: ; 74e96 (1d:4e96)
 	TX_FAR _UnnamedText_74e96
 	db "@"
-; 0x74e96 + 5 bytes
 
 UnnamedText_74e9b: ; 74e9b (1d:4e9b)
 	TX_FAR _UnnamedText_74e9b
 	db "@"
-; 0x74e9b + 5 bytes
 
 UnnamedText_74ea0: ; 74ea0 (1d:4ea0)
 	TX_FAR _UnnamedText_74ea0
 	db "@"
-; 0x74ea0 + 5 bytes
 
 UnnamedText_74ea5: ; 74ea5 (1d:4ea5)
 	TX_FAR _UnnamedText_74ea5
 	db "@"
-; 0x74ea5 + 5 bytes
 
 UnnamedText_74eaa: ; 74eaa (1d:4eaa)
 	TX_FAR _UnnamedText_74eaa
 	db "@"
-; 0x74eaa + 5 bytes
 
 UnnamedText_74eaf: ; 74eaf (1d:4eaf)
 	TX_FAR _UnnamedText_74eaf
 	db "@"
-; 0x74eaf + 5 bytes
 
 UnnamedText_74eb4: ; 74eb4 (1d:4eb4)
 	TX_FAR _UnnamedText_74eb4
 	db "@"
-; 0x74eb4 + 5 bytes
 
 UnnamedText_74eb9: ; 74eb9 (1d:4eb9)
 	TX_FAR _UnnamedText_74eb9
 	db "@"
-; 0x74eb9 + 5 bytes
 
 CeruleanHouse2Object: ; 0x74ebe (size=34)
 	db $c ; border tile
@@ -105859,11 +102713,10 @@ Unknown_74ee0: ; 74ee0 (1d:4ee0)
 .asm_74f93
 	ld hl, UnnamedText_74fe2
 	jp PrintText
-; 74f99 (1d:4f99)
+
 UnnamedText_74f99: ; 74f99 (1d:4f99)
 	TX_FAR _UnnamedText_74f99
 	db "@"
-; 0x74f99 + 5 bytes
 
 Unnamed_74f9e: ; 74f9e (1d:4f9e)
 	db "FRESH WATER",$4E
@@ -105878,22 +102731,18 @@ Unnamed_74fc3: ; 74fc3 (1d:4fc3)
 UnnamedText_74fd3: ; 74fd3 (1d:4fd3)
 	TX_FAR _UnnamedText_74fd3
 	db "@"
-; 0x74fd3 + 5 bytes
 
 UnnamedText_74fd8: ; 74fd8 (1d:4fd8)
 	TX_FAR _UnnamedText_74fd8
 	db "@"
-; 0x74fd8 + 5 bytes
 
 UnnamedText_74fdd: ; 74fdd (1d:4fdd)
 	TX_FAR _UnnamedText_74fdd
 	db "@"
-; 0x74fdd + 5 bytes
 
 UnnamedText_74fe2: ; 74fe2 (1d:4fe2)
 	TX_FAR _UnnamedText_74fe2
 	db "@"
-; 0x74fe2 + 5 bytes
 
 Unknown_74fe7: ; 74fe7 (1d:4fe7)
 	ld hl, VendingPrices
@@ -105929,7 +102778,6 @@ FuchsiaHouse1_h: ; 0x7500c to 0x75018 (12 bytes) (id=153)
 FuchsiaHouse1Script: ; 75018 (1d:5018)
 	call EnableAutoTextBoxDrawing
 	ret
-; 0x7501c
 
 FuchsiaHouse1Texts: ; 7501c (1d:501c)
 	dw FuchsiaHouse1Text1, FuchsiaHouse1Text2, FuchsiaHouse1Text3
@@ -105975,7 +102823,6 @@ FuchsiaPokecenter_h: ; 0x75057 to 0x75063 (12 bytes) (id=154)
 FuchsiaPokecenterScript: ; 75063 (1d:5063)
 	call Func_22fa
 	jp EnableAutoTextBoxDrawing
-; 0x75069
 
 FuchsiaPokecenterTexts: ; 75069 (1d:5069)
 	dw FuchsiaPokecenterText1, FuchsiaPokecenterText2, FuchsiaPokecenterText3, FuchsiaPokecenterText4
@@ -106023,7 +102870,6 @@ FuchsiaHouse2_h: ; 0x750a9 to 0x750b5 (12 bytes) (id=155)
 
 FuchsiaHouse2Script: ; 750b5 (1d:50b5)
 	jp EnableAutoTextBoxDrawing
-; 0x750b8
 
 FuchsiaHouse2Texts: ; 750b8 (1d:50b8)
 	dw FuchsiaHouse2Text1, Predef5CText, BoulderText, FuchsiaHouse2Text4, FuchsiaHouse2Text5
@@ -106084,17 +102930,14 @@ FuchsiaHouse2Text1: ; 750c2 (1d:50c2)
 WardenGibberishText1: ; 75135 (1d:5135)
 	TX_FAR _WardenGibberishText1
 	db "@"
-; 0x75135 + 5 bytes
 
 WardenGibberishText2: ; 7513a (1d:513a)
 	TX_FAR _WardenGibberishText2
 	db "@"
-; 0x7513a + 5 bytes
 
 WardenGibberishText3: ; 7513f (1d:513f)
 	TX_FAR _WardenGibberishText3
 	db "@"
-; 0x7513f + 5 bytes
 
 WardenTeethText1: ; 75144 (1d:5144)
 	TX_FAR _WardenTeethText1
@@ -106103,27 +102946,22 @@ WardenTeethText1: ; 75144 (1d:5144)
 WardenTeethText2: ; 75149 (1d:5149)
 	TX_FAR _WardenTeethText2
 	db "@"
-; 0x75149 + 5 bytes
 
 WardenThankYouText: ; 7514e (1d:514e)
 	TX_FAR _WardenThankYouText
 	db "@"
-; 0x7514e + 5 bytes
 
 ReceivedHM04Text: ; 75153 (1d:5153)
 	TX_FAR _ReceivedHM04Text ; 0x9e5a2
 	db $0B, "@"
-; 0x75153 + 6 bytes = 0x75159
 
 HM04ExplanationText: ; 75159 (1d:5159)
 	TX_FAR _HM04ExplanationText
 	db "@"
-; 0x75159 + 5 bytes
 
 HM04NoRoomText: ; 7515e (1d:515e)
 	TX_FAR _HM04NoRoomText
 	db "@"
-; 0x7515e + 5 bytes
 
 FuchsiaHouse2Text5: ; 75163 (1d:5163)
 FuchsiaHouse2Text4: ; 75163 (1d:5163)
@@ -106140,12 +102978,10 @@ FuchsiaHouse2Text4: ; 75163 (1d:5163)
 UnnamedText_75176: ; 75176 (1d:5176)
 	TX_FAR _UnnamedText_75176
 	db "@"
-; 0x75176 + 5 bytes
 
 UnnamedText_7517b: ; 7517b (1d:517b)
 	TX_FAR _UnnamedText_7517b
 	db "@"
-; 0x7517b + 5 bytes
 
 FuchsiaHouse2Object: ; 0x75180 (size=45)
 	db $17 ; border tile
@@ -106183,7 +103019,6 @@ SafariZoneEntranceScript: ; 751cd (1d:51cd)
 	ld hl, SafariZoneEntranceScripts
 	ld a, [W_SAFARIZONEENTRANCECURSCRIPT]
 	jp CallFunctionInTable
-; 0x751d9
 
 SafariZoneEntranceScripts: ; 751d9 (1d:51d9)
 	dw SafariZoneEntranceScript0, SafariZoneEntranceScript1, SafariZoneEntranceScript2, SafariZoneEntranceScript3, SafariZoneEntranceScript4, SafariZoneEntranceScript5, SafariZoneEntranceScript6
@@ -106216,7 +103051,6 @@ SafariZoneEntranceScript0: ; 751e7 (1d:51e7)
 	ld a, $1
 	ld [W_SAFARIZONEENTRANCECURSCRIPT], a
 	ret
-; 0x75221
 
 Unknown_75221: ; 75221 (1d:5221)
 db $2, $3, $2, $4, $ff
@@ -106235,7 +103069,6 @@ SafariZoneEntranceScript2: ; 7522a (1d:522a)
 	ld a, $ff
 	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
 	ret
-; 0x75240
 
 SafariZoneEntranceScript3: ; 75240 (1d:5240)
 	call Unknown_752b4
@@ -106245,7 +103078,6 @@ SafariZoneEntranceScript3: ; 75240 (1d:5240)
 	ld a, $5
 	ld [W_SAFARIZONEENTRANCECURSCRIPT], a
 	ret
-; 0x7524e
 
 SafariZoneEntranceScript5: ; 7524e (1d:524e)
 	ld a, $4
@@ -106275,7 +103107,6 @@ SafariZoneEntranceScript5: ; 7524e (1d:524e)
 	call DisplayTextID
 .asm_75286
 	ret
-; 0x75287
 
 SafariZoneEntranceScript4: ; 75287 (1d:5287)
 	call Unknown_752b4
@@ -106285,7 +103116,6 @@ SafariZoneEntranceScript4: ; 75287 (1d:5287)
 	ld a, $0
 	ld [W_SAFARIZONEENTRANCECURSCRIPT], a
 	ret
-; 0x75295
 
 SafariZoneEntranceScript6: ; 75295 (1d:5295)
 	call Unknown_752b4
@@ -106294,7 +103124,6 @@ SafariZoneEntranceScript6: ; 75295 (1d:5295)
 	ld a, [$cf0d]
 	ld [W_SAFARIZONEENTRANCECURSCRIPT], a
 	ret
-; 0x752a3
 
 Unknown_752a3: ; 752a3 (1d:52a3)
 	push af
@@ -106305,12 +103134,12 @@ Unknown_752a3: ; 752a3 (1d:52a3)
 	pop af
 	call FillMemory
 	jp Func_3486
-; 752b4 (1d:52b4)
+
 Unknown_752b4: ; 752b4 (1d:52b4)
 	ld a, [$cd38]
 	and a
 	ret
-; 752b9 (1d:52b9)
+
 SafariZoneEntranceTexts: ; 752b9 (1d:52b9)
 	dw SafariZoneEntranceText1, SafariZoneEntranceText2, SafariZoneEntranceText3, SafariZoneEntranceText4, SafariZoneEntranceText5, SafariZoneEntranceText6
 
@@ -106322,7 +103151,6 @@ SafariZoneEntranceText1: ; 752c5 (1d:52c5)
 SafariZoneEntranceText4: ; 752ca (1d:52ca)
 	TX_FAR UnnamedText_9e6e4 ; 0x9e6e4
 	db $8
-; 0x752cf
 	ld a, $13
 	ld [$d125], a
 	call DisplayTextBoxID
@@ -106384,7 +103212,6 @@ SafariZoneEntranceText4: ; 752ca (1d:52ca)
 	ld [W_SAFARIZONEENTRANCECURSCRIPT], a
 .asm_75358
 	jp TextScriptEnd
-; 0x7535b
 
 UnnamedText_7535b: ; 7535b (1d:535b)
 	TX_FAR UnnamedText_9e747 ; 0x9e747
@@ -106393,17 +103220,14 @@ UnnamedText_7535b: ; 7535b (1d:535b)
 UnnamedText_75360: ; 75360 (1d:5360)
 	TX_FAR _UnnamedText_75360
 	db "@"
-; 0x75360 + 5 bytes
 
 UnnamedText_75365: ; 75365 (1d:5365)
 	TX_FAR _UnnamedText_75365
 	db "@"
-; 0x75365 + 5 bytes
 
 UnnamedText_7536a: ; 7536a (1d:536a)
 	TX_FAR _UnnamedText_7536a
 	db "@"
-; 0x7536a + 5 bytes
 
 SafariZoneEntranceText5: ; 7536f (1d:536f)
 	TX_FAR UnnamedText_9e814 ; 0x9e814
@@ -106439,22 +103263,18 @@ SafariZoneEntranceText5: ; 7536f (1d:536f)
 	ld a, $6
 	ld [W_SAFARIZONEENTRANCECURSCRIPT], a
 	jp TextScriptEnd
-; 0x753bb
 
 UnnamedText_753bb: ; 753bb (1d:53bb)
 	TX_FAR _UnnamedText_753bb
 	db "@"
-; 0x753bb + 5 bytes
 
 UnnamedText_753c0: ; 753c0 (1d:53c0)
 	TX_FAR _UnnamedText_753c0
 	db "@"
-; 0x753c0 + 5 bytes
 
 SafariZoneEntranceText6: ; 753c5 (1d:53c5)
 	TX_FAR _UnnamedText_753c5
 	db "@"
-; 0x753c5 + 5 bytes
 
 SafariZoneEntranceText2: ; 753ca (1d:53ca)
 	db $08 ; asm
@@ -106473,17 +103293,14 @@ SafariZoneEntranceText2: ; 753ca (1d:53ca)
 UnnamedText_753e6: ; 753e6 (1d:53e6)
 	TX_FAR _UnnamedText_753e6
 	db "@"
-; 0x753e6 + 5 bytes
 
 UnnamedText_753eb: ; 753eb (1d:53eb)
 	TX_FAR _UnnamedText_753eb
 	db "@"
-; 0x753eb + 5 bytes
 
 UnnamedText_753f0: ; 753f0 (1d:53f0)
 	TX_FAR _UnnamedText_753f0
 	db "@"
-; 0x753f0 + 5 bytes
 
 SafariZoneEntranceObject: ; 0x753f5 (size=48)
 	db $a ; border tile
@@ -106526,7 +103343,6 @@ FuchsiaGymScript: ; 7543d (1d:543d)
 	call ExecuteCurMapScriptInTable
 	ld [W_FUCHSIAGYMCURSCRIPT], a
 	ret
-; 0x75453
 
 FuchsiaGymScript_Unknown75453: ; 75453 (1d:5453)
 	ld hl, $D126
@@ -106543,21 +103359,18 @@ Gym5CityName: ; 75465 (1d:5465)
 Gym5LeaderName: ; 75472 (1d:5472)
 	db "KOGA@"
 
-; known jump sources: 7548f (1d:548f), 754d2 (1d:54d2)
 Func_75477: ; 75477 (1d:5477)
 	xor a
 	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
 	ld [W_FUCHSIAGYMCURSCRIPT], a
 	ld [W_CURMAPSCRIPT], a
 	ret
-; 75482 (1d:5482)
 
 Unknown_75482: ; 75482 (1d:5482)
 	dw CheckFightingMapTrainers
 	dw Func_324c
 	dw EndTrainerBattle
 	dw Func_7548a
-; 7548a (1d:548a)
 
 Func_7548a: ; 7548a (1d:548a)
 	ld a, [W_ISINBATTLE] ; $d057
@@ -106565,7 +103378,6 @@ Func_7548a: ; 7548a (1d:548a)
 	jp z, Func_75477
 	ld a, $f0
 	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
-; 75497 (1d:5497)
 Unknown_75497: ; 75497 (1d:5497)
 	ld a, $9
 	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
@@ -106594,7 +103406,7 @@ Unknown_75497: ; 75497 (1d:5497)
 	or $fc
 	ld [$d792], a
 	jp Func_75477
-; 754d5 (1d:54d5)
+
 FuchsiaGymTexts: ; 754d5 (1d:54d5)
 	dw FuchsiaGymText1, FuchsiaGymText2, FuchsiaGymText3, FuchsiaGymText4, FuchsiaGymText5, FuchsiaGymText6, FuchsiaGymText7, FuchsiaGymText8, FuchsiaGymText9, FuchsiaGymText10, FuchsiaGymText11
 
@@ -106607,7 +103419,6 @@ FuchsiaGymTrainerHeader0: ; 754eb (1d:54eb)
 	dw FuchsiaGymAfterBattleText1 ; 0x55b8 TextAfterBattle
 	dw FuchsiaGymEndBattleText1 ; 0x55b3 TextEndBattle
 	dw FuchsiaGymEndBattleText1 ; 0x55b3 TextEndBattle
-; 0x754f7
 
 FuchsiaGymTrainerHeader2: ; 754f7 (1d:54f7)
 	db $3 ; flag's bit
@@ -106617,7 +103428,6 @@ FuchsiaGymTrainerHeader2: ; 754f7 (1d:54f7)
 	dw FuchsiaGymAfterBattleText2 ; 0x55d1 TextAfterBattle
 	dw FuchsiaGymEndBattleText2 ; 0x55cc TextEndBattle
 	dw FuchsiaGymEndBattleText2 ; 0x55cc TextEndBattle
-; 0x75503
 
 FuchsiaGymTrainerHeader3: ; 75503 (1d:5503)
 	db $4 ; flag's bit
@@ -106627,7 +103437,6 @@ FuchsiaGymTrainerHeader3: ; 75503 (1d:5503)
 	dw FuchsiaGymAfterBattleText3 ; 0x55ea TextAfterBattle
 	dw FuchsiaGymEndBattleText3 ; 0x55e5 TextEndBattle
 	dw FuchsiaGymEndBattleText3 ; 0x55e5 TextEndBattle
-; 0x7550f
 
 FuchsiaGymTrainerHeader4: ; 7550f (1d:550f)
 	db $5 ; flag's bit
@@ -106637,7 +103446,6 @@ FuchsiaGymTrainerHeader4: ; 7550f (1d:550f)
 	dw FuchsiaGymAfterBattleText4 ; 0x5603 TextAfterBattle
 	dw FuchsiaGymEndBattleText4 ; 0x55fe TextEndBattle
 	dw FuchsiaGymEndBattleText4 ; 0x55fe TextEndBattle
-; 0x7551b
 
 FuchsiaGymTrainerHeader5: ; 7551b (1d:551b)
 	db $6 ; flag's bit
@@ -106647,7 +103455,6 @@ FuchsiaGymTrainerHeader5: ; 7551b (1d:551b)
 	dw FuchsiaGymAfterBattleText5 ; 0x561c TextAfterBattle
 	dw FuchsiaGymEndBattleText5 ; 0x5617 TextEndBattle
 	dw FuchsiaGymEndBattleText5 ; 0x5617 TextEndBattle
-; 0x75527
 
 FuchsiaGymTrainerHeader6: ; 75527 (1d:5527)
 	db $7 ; flag's bit
@@ -106657,7 +103464,6 @@ FuchsiaGymTrainerHeader6: ; 75527 (1d:5527)
 	dw FuchsiaGymAfterBattleText6 ; 0x5635 TextAfterBattle
 	dw FuchsiaGymEndBattleText6 ; 0x5630 TextEndBattle
 	dw FuchsiaGymEndBattleText6 ; 0x5630 TextEndBattle
-; 0x75533
 
 db $ff
 
@@ -106700,22 +103506,18 @@ FuchsiaGymText1: ; 75534 (1d:5534)
 UnnamedText_75581: ; 75581 (1d:5581)
 	TX_FAR _UnnamedText_75581
 	db "@"
-; 0x75581 + 5 bytes
 
 UnnamedText_75586: ; 75586 (1d:5586)
 	TX_FAR _UnnamedText_75586
 	db "@"
-; 0x75586 + 5 bytes
 
 UnnamedText_7558b: ; 7558b (1d:558b)
 	TX_FAR _UnnamedText_7558b
 	db "@"
-; 0x7558b + 5 bytes
 
 FuchsiaGymText9: ; 75590 (1d:5590)
 	TX_FAR _UnnamedText_75590
 	db "@"
-; 0x75590 + 5 bytes
 
 FuchsiaGymText10: ; 75595 (1d:5595)
 	TX_FAR _ReceivedTM06Text ; 0xa00eb
@@ -106724,12 +103526,10 @@ FuchsiaGymText10: ; 75595 (1d:5595)
 TM06ExplanationText: ; 7559a (1d:559a)
 	TX_FAR _TM06ExplanationText
 	db "@"
-; 0x7559a + 5 bytes
 
 FuchsiaGymText11: ; 7559f (1d:559f)
 	TX_FAR _TM06NoRoomText
 	db "@"
-; 0x7559f + 5 bytes
 
 FuchsiaGymText2: ; 755a4 (1d:55a4)
 	db $08 ; asm
@@ -106740,17 +103540,14 @@ FuchsiaGymText2: ; 755a4 (1d:55a4)
 FuchsiaGymBattleText1: ; 755ae (1d:55ae)
 	TX_FAR _FuchsiaGymBattleText1
 	db "@"
-; 0x755ae + 5 bytes
 
 FuchsiaGymEndBattleText1: ; 755b3 (1d:55b3)
 	TX_FAR _FuchsiaGymEndBattleText1
 	db "@"
-; 0x755b3 + 5 bytes
 
 FuchsiaGymAfterBattleText1: ; 755b8 (1d:55b8)
 	TX_FAR _FuchsiaGymAfterBattleText1
 	db "@"
-; 0x755b8 + 5 bytes
 
 FuchsiaGymText3: ; 755bd (1d:55bd)
 	db $08 ; asm
@@ -106761,17 +103558,14 @@ FuchsiaGymText3: ; 755bd (1d:55bd)
 FuchsiaGymBattleText2: ; 755c7 (1d:55c7)
 	TX_FAR _FuchsiaGymBattleText2
 	db "@"
-; 0x755c7 + 5 bytes
 
 FuchsiaGymEndBattleText2: ; 755cc (1d:55cc)
 	TX_FAR _FuchsiaGymEndBattleText2
 	db "@"
-; 0x755cc + 5 bytes
 
 FuchsiaGymAfterBattleText2: ; 755d1 (1d:55d1)
 	TX_FAR _FuchsiaGymAfterBattleText2
 	db "@"
-; 0x755d1 + 5 bytes
 
 FuchsiaGymText4: ; 755d6 (1d:55d6)
 	db $08 ; asm
@@ -106782,17 +103576,14 @@ FuchsiaGymText4: ; 755d6 (1d:55d6)
 FuchsiaGymBattleText3: ; 755e0 (1d:55e0)
 	TX_FAR _FuchsiaGymBattleText3
 	db "@"
-; 0x755e0 + 5 bytes
 
 FuchsiaGymEndBattleText3: ; 755e5 (1d:55e5)
 	TX_FAR _FuchsiaGymEndBattleText3
 	db "@"
-; 0x755e5 + 5 bytes
 
 FuchsiaGymAfterBattleText3: ; 755ea (1d:55ea)
 	TX_FAR _FuchsiaGymAfterBattleText3
 	db "@"
-; 0x755ea + 5 bytes
 
 FuchsiaGymText5: ; 755ef (1d:55ef)
 	db $08 ; asm
@@ -106803,17 +103594,14 @@ FuchsiaGymText5: ; 755ef (1d:55ef)
 FuchsiaGymBattleText4: ; 755f9 (1d:55f9)
 	TX_FAR _FuchsiaGymBattleText4
 	db "@"
-; 0x755f9 + 5 bytes
 
 FuchsiaGymEndBattleText4: ; 755fe (1d:55fe)
 	TX_FAR _FuchsiaGymEndBattleText4
 	db "@"
-; 0x755fe + 5 bytes
 
 FuchsiaGymAfterBattleText4: ; 75603 (1d:5603)
 	TX_FAR _FuchsiaGymAfterBattleText4
 	db "@"
-; 0x75603 + 5 bytes
 
 FuchsiaGymText6: ; 75608 (1d:5608)
 	db $08 ; asm
@@ -106824,17 +103612,14 @@ FuchsiaGymText6: ; 75608 (1d:5608)
 FuchsiaGymBattleText5: ; 75612 (1d:5612)
 	TX_FAR _FuchsiaGymBattleText5
 	db "@"
-; 0x75612 + 5 bytes
 
 FuchsiaGymEndBattleText5: ; 75617 (1d:5617)
 	TX_FAR _FuchsiaGymEndBattleText5
 	db "@"
-; 0x75617 + 5 bytes
 
 FuchsiaGymAfterBattleText5: ; 7561c (1d:561c)
 	TX_FAR _FuchsiaGymAfterBattleText5
 	db "@"
-; 0x7561c + 5 bytes
 
 FuchsiaGymText7: ; 75621 (1d:5621)
 	db $08 ; asm
@@ -106845,17 +103630,14 @@ FuchsiaGymText7: ; 75621 (1d:5621)
 FuchsiaGymBattleText6: ; 7562b (1d:562b)
 	TX_FAR _FuchsiaGymBattleText6
 	db "@"
-; 0x7562b + 5 bytes
 
 FuchsiaGymEndBattleText6: ; 75630 (1d:5630)
 	TX_FAR _FuchsiaGymEndBattleText6
 	db "@"
-; 0x75630 + 5 bytes
 
 FuchsiaGymAfterBattleText6: ; 75635 (1d:5635)
 	TX_FAR _FuchsiaGymAfterBattleText6
 	db "@"
-; 0x75635 + 5 bytes
 
 FuchsiaGymText8: ; 7563a (1d:563a)
 	db $08 ; asm
@@ -106871,12 +103653,10 @@ FuchsiaGymText8: ; 7563a (1d:563a)
 UnnamedText_7564e: ; 7564e (1d:564e)
 	TX_FAR _UnnamedText_7564e
 	db "@"
-; 0x7564e + 5 bytes
 
 UnnamedText_75653: ; 75653 (1d:5653)
 	TX_FAR _UnnamedText_75653
 	db "@"
-; 0x75653 + 5 bytes
 
 FuchsiaGymObject: ; 0x75658 (size=82)
 	db $3 ; border tile
@@ -106915,7 +103695,6 @@ FuchsiaMeetingRoom_h: ; 0x756d7 to 0x756e3 (12 bytes) (id=158)
 FuchsiaMeetingRoomScript: ; 756e3 (1d:56e3)
 	call EnableAutoTextBoxDrawing
 	ret
-; 0x756e7
 
 FuchsiaMeetingRoomTexts: ; 756e7 (1d:56e7)
 	dw FuchsiaMeetingRoomText1, FuchsiaMeetingRoomText2, FuchsiaMeetingRoomText3
@@ -106967,7 +103746,6 @@ CinnabarGymScript: ; 7574a (1d:574a)
 	ld hl, CinnabarGymScripts
 	ld a, [W_CINNABARGYMCURSCRIPT]
 	jp CallFunctionInTable
-; 0x75759
 
 CinnabarGymScript_Unknown75759: ; 75759 (1d:5759)
 	ld hl, $D126
@@ -106999,12 +103777,12 @@ Unknown_75792: ; 75792 (1d:5792)
 	ld [W_CURMAPSCRIPT], a
 	ld [$da38], a
 	ret
-; 757a0 (1d:57a0)
+
 Unknown_757a0: ; 757a0 (1d:57a0)
 	ld a, [H_DOWNARROWBLINKCNT2] ; $FF00+$8c
 	ld [W_TRAINERHEADERFLAGBIT], a
 	ret
-; 757a6 (1d:57a6)
+
 CinnabarGymScripts: ; 757a6 (1d:57a6)
 	dw CinnabarGymScript0, CinnabarGymScript1, CinnabarGymScript2, CinnabarGymScript3
 
@@ -107029,7 +103807,6 @@ CinnabarGymScript0: ; 757ae (1d:57ae)
 	ld [W_CINNABARGYMCURSCRIPT], a
 	ld [W_CURMAPSCRIPT], a
 	ret
-; 0x757d7
 
 Unknown_757d7: ; 757d7 (1d:57d7)
 INCBIN "baserom.gbc",$757d7,$757da - $757d7
@@ -107047,12 +103824,11 @@ CinnabarGymScript1: ; 757dc (1d:57dc)
 	ld [W_TRAINERHEADERFLAGBIT], a
 	ld [$ff00+$8c], a
 	jp DisplayTextID
-; 0x757f1
 
 Unknown_757f1: ; 757f1 (1d:57f1)
 	ld a, $10
 	jp Predef ; indirect jump to HandleBitArray (f666 (3:7666))
-; 757f6 (1d:57f6)
+
 CinnabarGymScript2: ; 757f6 (1d:57f6)
 	ld a, [$d057]
 	cp $ff
@@ -107091,7 +103867,6 @@ CinnabarGymScript2: ; 757f6 (1d:57f6)
 	ld [W_CINNABARGYMCURSCRIPT], a
 	ld [W_CURMAPSCRIPT], a
 	ret
-; 0x7584a
 
 CinnabarGymScript3: ; 7584a (1d:584a)
 	ld a, [$d057]
@@ -107131,7 +103906,6 @@ Unknown_75857: ; 75857 (1d:5857)
 	ld hl, $d126
 	set 5, [hl]
 	jp Unknown_75792
-; 0x7589f
 
 CinnabarGymTexts: ; 7589f (1d:589f)
 	dw CinnabarGymText1, CinnabarGymText2, CinnabarGymText3, CinnabarGymText4, CinnabarGymText5, CinnabarGymText6, CinnabarGymText7, CinnabarGymText8, CinnabarGymText9
@@ -107158,7 +103932,7 @@ Unknown_758b7: ; 758b7 (1d:58b7)
 	ld [W_CINNABARGYMCURSCRIPT], a
 	ld [W_CURMAPSCRIPT], a
 	jp TextScriptEnd
-; 758df (1d:58df)
+
 CinnabarGymText1: ; 758df (1d:58df)
 	db $8
 	ld a, [$d79a]
@@ -107182,12 +103956,10 @@ CinnabarGymText1: ; 758df (1d:58df)
 	ld a, $7
 	ld [$d05c], a
 	jp Unknown_758b7
-; 0x75914
 
 UnnamedText_75914: ; 75914 (1d:5914)
 	TX_FAR _UnnamedText_75914
 	db "@"
-; 0x75914 + 5 bytes
 
 UnnamedText_75919: ; 75919 (1d:5919)
 	TX_FAR UnnamedText_a08c7
@@ -107198,24 +103970,20 @@ UnnamedText_75919: ; 75919 (1d:5919)
 UnnamedText_75920: ; 75920 (1d:5920)
 	TX_FAR _UnnamedText_75920
 	db "@"
-; 0x75920 + 5 bytes
 
 UnnamedText_75925: ; 75925 (1d:5925)
 	TX_FAR _UnnamedText_75925
 	db "@"
-; 0x75925 + 5 bytes
 
 ReceivedTM38Text: ; 7592a (1d:592a)
 	TX_FAR _ReceivedTM38Text ; 0xa09a8
 	db $0B
 	TX_FAR _TM38ExplanationText
 	db "@"
-; 0x75934
 
 TM38NoRoomText: ; 75934 (1d:5934)
 	TX_FAR _TM38NoRoomText
 	db "@"
-; 0x75934 + 5 bytes
 
 CinnabarGymText2: ; 75939 (1d:5939)
 	db $08 ; asm
@@ -107237,17 +104005,14 @@ CinnabarGymText2: ; 75939 (1d:5939)
 UnnamedText_7595f: ; 7595f (1d:595f)
 	TX_FAR _UnnamedText_7595f
 	db "@"
-; 0x7595f + 5 bytes
 
 UnnamedText_75964: ; 75964 (1d:5964)
 	TX_FAR _UnnamedText_75964
 	db "@"
-; 0x75964 + 5 bytes
 
 UnnamedText_75969: ; 75969 (1d:5969)
 	TX_FAR _UnnamedText_75969
 	db "@"
-; 0x75969 + 5 bytes
 
 CinnabarGymText3: ; 7596e (1d:596e)
 	db $08 ; asm
@@ -107269,17 +104034,14 @@ CinnabarGymText3: ; 7596e (1d:596e)
 UnnamedText_75994: ; 75994 (1d:5994)
 	TX_FAR _UnnamedText_75994
 	db "@"
-; 0x75994 + 5 bytes
 
 UnnamedText_75999: ; 75999 (1d:5999)
 	TX_FAR _UnnamedText_75999
 	db "@"
-; 0x75999 + 5 bytes
 
 UnnamedText_7599e: ; 7599e (1d:599e)
 	TX_FAR _UnnamedText_7599e
 	db "@"
-; 0x7599e + 5 bytes
 
 CinnabarGymText4: ; 759a3 (1d:59a3)
 	db $08 ; asm
@@ -107301,17 +104063,14 @@ CinnabarGymText4: ; 759a3 (1d:59a3)
 UnnamedText_759c9: ; 759c9 (1d:59c9)
 	TX_FAR _UnnamedText_759c9
 	db "@"
-; 0x759c9 + 5 bytes
 
 UnnamedText_759ce: ; 759ce (1d:59ce)
 	TX_FAR _UnnamedText_759ce
 	db "@"
-; 0x759ce + 5 bytes
 
 UnnamedText_759d3: ; 759d3 (1d:59d3)
 	TX_FAR _UnnamedText_759d3
 	db "@"
-; 0x759d3 + 5 bytes
 
 CinnabarGymText5: ; 759d8 (1d:59d8)
 	db $08 ; asm
@@ -107333,17 +104092,14 @@ CinnabarGymText5: ; 759d8 (1d:59d8)
 UnnamedText_759fe: ; 759fe (1d:59fe)
 	TX_FAR _UnnamedText_759fe
 	db "@"
-; 0x759fe + 5 bytes
 
 UnnamedText_75a03: ; 75a03 (1d:5a03)
 	TX_FAR _UnnamedText_75a03
 	db "@"
-; 0x75a03 + 5 bytes
 
 UnnamedText_75a08: ; 75a08 (1d:5a08)
 	TX_FAR _UnnamedText_75a08
 	db "@"
-; 0x75a08 + 5 bytes
 
 CinnabarGymText6: ; 75a0d (1d:5a0d)
 	db $08 ; asm
@@ -107365,12 +104121,10 @@ CinnabarGymText6: ; 75a0d (1d:5a0d)
 UnnamedText_75a33: ; 75a33 (1d:5a33)
 	TX_FAR _UnnamedText_75a33
 	db "@"
-; 0x75a33 + 5 bytes
 
 UnnamedText_75a38: ; 75a38 (1d:5a38)
 	TX_FAR _UnnamedText_75a38
 	db "@"
-; 0x75a38 + 5 bytes
 
 UnnamedText_75a3d: ; 75a3d (1d:5a3d)
 	TX_FAR _UnnamedText_75a3d
@@ -107397,17 +104151,14 @@ CinnabarGymText7: ; 75a42 (1d:5a42)
 UnnamedText_75a68: ; 75a68 (1d:5a68)
 	TX_FAR _UnnamedText_75a68
 	db "@"
-; 0x75a68 + 5 bytes
 
 UnnamedText_75a6d: ; 75a6d (1d:5a6d)
 	TX_FAR _UnnamedText_75a6d
 	db "@"
-; 0x75a6d + 5 bytes
 
 UnnamedText_75a72: ; 75a72 (1d:5a72)
 	TX_FAR _UnnamedText_75a72
 	db "@"
-; 0x75a72 + 5 bytes
 
 CinnabarGymText8: ; 75a77 (1d:5a77)
 	db $08 ; asm
@@ -107429,17 +104180,14 @@ CinnabarGymText8: ; 75a77 (1d:5a77)
 UnnamedText_75a9d: ; 75a9d (1d:5a9d)
 	TX_FAR _UnnamedText_75a9d
 	db "@"
-; 0x75a9d + 5 bytes
 
 UnnamedText_75aa2: ; 75aa2 (1d:5aa2)
 	TX_FAR _UnnamedText_75aa2
 	db "@"
-; 0x75aa2 + 5 bytes
 
 UnnamedText_75aa7: ; 75aa7 (1d:5aa7)
 	TX_FAR _UnnamedText_75aa7
 	db "@"
-; 0x75aa7 + 5 bytes
 
 CinnabarGymText9: ; 75aac (1d:5aac)
 	db $08 ; asm
@@ -107457,12 +104205,10 @@ CinnabarGymText9: ; 75aac (1d:5aac)
 UnnamedText_75ac2: ; 75ac2 (1d:5ac2)
 	TX_FAR _UnnamedText_75ac2
 	db "@"
-; 0x75ac2 + 5 bytes
 
 UnnamedText_75ac7: ; 75ac7 (1d:5ac7)
 	TX_FAR _UnnamedText_75ac7
 	db "@"
-; 0x75ac7 + 5 bytes
 
 CinnabarGymObject: ; 0x75acc (size=90)
 	db $2e ; border tile
@@ -107502,7 +104248,6 @@ Lab1_h: ; 0x75b80 to 0x75b8c (12 bytes) (id=167)
 Lab1Script: ; 75b8c (1d:5b8c)
 	call EnableAutoTextBoxDrawing
 	ret
-; 0x75b90
 
 Lab1Texts: ; 75b90 (1d:5b90)
 	dw Lab1Text1, Lab1Text2, Lab1Text3, Lab1Text4, Lab1Text5
@@ -107566,7 +104311,6 @@ Lab2_h: ; 0x75c15 to 0x75c21 (12 bytes) (id=168)
 
 Lab2Script: ; 75c21 (1d:5c21)
 	jp EnableAutoTextBoxDrawing
-; 0x75c24
 
 Lab2Texts: ; 75c24 (1d:5c24)
 	dw Lab2Text1, Lab2Text2, Lab2Text3
@@ -107621,7 +104365,6 @@ Lab3_h: ; 0x75c7b to 0x75c87 (12 bytes) (id=169)
 
 Lab3Script: ; 75c87 (1d:5c87)
 	jp EnableAutoTextBoxDrawing
-; 0x75c8a
 
 Lab3Texts: ; 75c8a (1d:5c8a)
 	dw Lab3Text1, Lab3Text2, Lab3Text3, Lab3Text4, Lab3Text5
@@ -107654,22 +104397,18 @@ Lab3Text1: ; 75c94 (1d:5c94)
 TM35PreReceiveText: ; 75cc8 (1d:5cc8)
 	TX_FAR _TM35PreReceiveText
 	db "@"
-; 0x75cc8 + 5 bytes
 
 ReceivedTM35Text: ; 75ccd (1d:5ccd)
 	TX_FAR _ReceivedTM35Text ; 0xa0f48
 	db $0B, "@"
-; 0x75cd3
 
 TM35ExplanationText: ; 75cd3 (1d:5cd3)
 	TX_FAR _TM35ExplanationText
 	db "@"
-; 0x75cd3 + 5 bytes
 
 TM35NoRoomText: ; 75cd8 (1d:5cd8)
 	TX_FAR _TM35NoRoomText
 	db "@"
-; 0x75cd8 + 5 bytes
 
 Lab3Text2: ; 75cdd (1d:5cdd)
 	TX_FAR _Lab3Text2
@@ -107717,7 +104456,6 @@ Lab4_h: ; 0x75d25 to 0x75d31 (12 bytes) (id=170)
 
 Lab4Script: ; 75d31 (1d:5d31)
 	jp EnableAutoTextBoxDrawing
-; 0x75d34
 
 Lab4Texts: ; 75d34 (1d:5d34)
 	dw Lab4Text1, Lab4Text2
@@ -107800,27 +104538,22 @@ Lab4Text1: ; 75d6c (1d:5d6c)
 	res 1, [hl]
 	res 2, [hl]
 	jr .asm_75d93 ; 0x75dc4 $cd
-; 0x75dc6
 
 UnnamedText_75dc6: ; 75dc6 (1d:5dc6)
 	TX_FAR _UnnamedText_75dc6
 	db "@"
-; 0x75dc6 + 5 bytes
 
 UnnamedText_75dcb: ; 75dcb (1d:5dcb)
 	TX_FAR _UnnamedText_75dcb
 	db "@"
-; 0x75dcb + 5 bytes
 
 UnnamedText_75dd0: ; 75dd0 (1d:5dd0)
 	TX_FAR _UnnamedText_75dd0
 	db "@"
-; 0x75dd0 + 5 bytes
 
 UnnamedText_75dd5: ; 75dd5 (1d:5dd5)
 	TX_FAR _UnnamedText_75dd5
 	db "@"
-; 0x75dd5 + 5 bytes
 
 Lab4Text2: ; 75dda (1d:5dda)
 	db $08 ; asm
@@ -107834,7 +104567,6 @@ LoadFossilItemAndMonNameBank1D: ; 75de8 (1d:5de8)
 	ld b, BANK(LoadFossilItemAndMonName)
 	ld hl, LoadFossilItemAndMonName
 	jp Bankswitch
-; 0x75df0
 
 Lab4Object: ; 0x75df0 (size=32)
 	db $17 ; border tile
@@ -107867,7 +104599,6 @@ CinnabarPokecenter_h: ; 0x75e20 to 0x75e2c (12 bytes) (id=171)
 CinnabarPokecenterScript: ; 75e2c (1d:5e2c)
 	call Func_22fa
 	jp EnableAutoTextBoxDrawing
-; 0x75e32
 
 CinnabarPokecenterTexts: ; 75e32 (1d:5e32)
 	dw CinnabarPokecenterText1, CinnabarPokecenterText2, CinnabarPokecenterText3, CinnabarPokecenterText4
@@ -107915,7 +104646,6 @@ CinnabarMart_h: ; 0x75e72 to 0x75e7e (12 bytes) (id=172)
 
 CinnabarMartScript: ; 75e7e (1d:5e7e)
 	jp EnableAutoTextBoxDrawing
-; 0x75e81
 
 CinnabarMartTexts: ; 75e81 (1d:5e81)
 	dw CinnabarMartText1, CinnabarMartText2, CinnabarMartText3
@@ -107956,7 +104686,6 @@ CopycatsHouseF1_h: ; 0x75eb7 to 0x75ec3 (12 bytes) (id=175)
 
 CopycatsHouseF1Script: ; 75ec3 (1d:5ec3)
 	jp EnableAutoTextBoxDrawing
-; 0x75ec6
 
 CopycatsHouseF1Texts: ; 75ec6 (1d:5ec6)
 	dw CopycatsHouseF1Text1, CopycatsHouseF1Text2, CopycatsHouseF1Text3
@@ -108031,7 +104760,6 @@ GaryScripts: ; 75f31 (1d:5f31)
 
 GaryScript0: ; 75f47 (1d:5f47)
 	ret
-; 0x75f48
 
 GaryScript1: ; 75f48 (1d:5f48)
 	ld a, $ff
@@ -108261,22 +104989,18 @@ GaryText1: ; 760e0 (1d:60e0)
 UnnamedText_760f4: ; 760f4 (1d:60f4)
 	TX_FAR _UnnamedText_760f4
 	db "@"
-; 0x760f4 + 5 bytes
 
 UnnamedText_760f9: ; 760f9 (1d:60f9)
 	TX_FAR _UnnamedText_760f9
 	db "@"
-; 0x760f9 + 5 bytes
 
 UnnamedText_760fe: ; 760fe (1d:60fe)
 	TX_FAR _UnnamedText_760fe
 	db "@"
-; 0x760fe + 5 bytes
 
 UnnamedText_76103: ; 76103 (1d:6103)
 	TX_FAR _UnnamedText_76103
 	db "@"
-; 0x76103 + 5 bytes
 
 GaryText2: ; 76108 (1d:6108)
 	TX_FAR _GaryText2
@@ -108290,22 +105014,18 @@ GaryText3: ; 7610d (1d:610d)
 	ld hl, UnnamedText_76120
 	call PrintText
 	jp TextScriptEnd
-; 0x76120
 
 UnnamedText_76120: ; 76120 (1d:6120)
 	TX_FAR _UnnamedText_76120
 	db "@"
-; 0x76120 + 5 bytes
 
 GaryText4: ; 76125 (1d:6125)
 	TX_FAR _UnnamedText_76125
 	db "@"
-; 0x76125 + 5 bytes
 
 GaryText5: ; 7612a (1d:612a)
 	TX_FAR _UnnamedText_7612a
 	db "@"
-; 0x7612a + 5 bytes
 
 GaryObject: ; 0x7612f (size=48)
 	db $3 ; border tile
@@ -108348,7 +105068,6 @@ LoreleiScript: ; 7617b (1d:617b)
 	call ExecuteCurMapScriptInTable
 	ld [W_LORELEICURSCRIPT], a
 	ret
-; 0x76191
 
 LoreleiScript_Unknown76191: ; 76191 (1d:6191)
 	ld hl, $d126
@@ -108370,12 +105089,10 @@ LoreleiScript_Unknown76191: ; 76191 (1d:6191)
 	ld a, $17
 	jp Predef ; indirect jump to Func_ee9e (ee9e (3:6e9e))
 
-; known jump sources: 76247 (1d:6247)
 Func_761b6: ; 761b6 (1d:61b6)
 	xor a
 	ld [W_LORELEICURSCRIPT], a
 	ret
-; 761bb (1d:61bb)
 
 Unknown_761bb: ; 761bb (1d:61bb)
 dw Func_761e2
@@ -108453,7 +105170,7 @@ Func_7623f: ; 7623f (1d:623f)
 	ld a, $1
 	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
 	jp DisplayTextID
-; 76251 (1d:6251)
+
 LoreleiTexts: ; 76251 (1d:6251)
 	dw LoreleiText1, LoreleiText2
 
@@ -108466,7 +105183,6 @@ LoreleiTrainerHeader0: ; 76255 (1d:6255)
 	dw LoreleiAfterBattleText ; 0x6276 TextAfterBattle
 	dw LoreleiEndBattleText ; 0x6271 TextEndBattle
 	dw LoreleiEndBattleText ; 0x6271 TextEndBattle
-; 0x76261
 
 db $ff
 
@@ -108479,22 +105195,18 @@ LoreleiText1: ; 76262 (1d:6262)
 LoreleiBeforeBattleText: ; 7626c (1d:626c)
 	TX_FAR _LoreleiBeforeBattleText
 	db "@"
-; 0x7626c + 5 bytes
 
 LoreleiEndBattleText: ; 76271 (1d:6271)
 	TX_FAR _LoreleiEndBattleText
 	db "@"
-; 0x76271 + 5 bytes
 
 LoreleiAfterBattleText: ; 76276 (1d:6276)
 	TX_FAR _LoreleiAfterBattleText
 	db "@"
-; 0x76276 + 5 bytes
 
 LoreleiText2: ; 7627b (1d:627b)
 	TX_FAR _UnnamedText_7627b
 	db "@"
-; 0x7627b + 5 bytes
 
 LoreleiObject: ; 0x76280 (size=44)
 	db $3 ; border tile
@@ -108536,7 +105248,6 @@ BrunoScript: ; 762d6 (1d:62d6)
 	call ExecuteCurMapScriptInTable
 	ld [W_BRUNOCURSCRIPT], a
 	ret
-; 0x762ec
 
 BrunoScript_Unknown762ec: ; 762ec (1d:62ec)
 	ld hl, $d126
@@ -108551,19 +105262,16 @@ BrunoScript_Unknown762ec: ; 762ec (1d:62ec)
 .asm_76300
 	ld a, $24
 
-; known jump sources: 762fd (1d:62fd)
 Func_76302: ; 76302 (1d:6302)
 	ld [$d09f], a
 	ld bc, $2
 	ld a, $17
 	jp Predef ; indirect jump to Func_ee9e (ee9e (3:6e9e))
 
-; known jump sources: 7639e (1d:639e)
 Func_7630d: ; 7630d (1d:630d)
 	xor a
 	ld [W_BRUNOCURSCRIPT], a
 	ret
-; 76312 (1d:6312)
 
 Unknown_76312: ; 76312 (1d:6312)
 dw Func_76339
@@ -108643,7 +105351,7 @@ Func_76396: ; 76396 (1d:6396)
 	ld a, $1
 	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
 	jp DisplayTextID
-; 763a8 (1d:63a8)
+
 BrunoTexts: ; 763a8 (1d:63a8)
 	dw BrunoText1, BrunoText2
 
@@ -108656,7 +105364,6 @@ BrunoTrainerHeader0: ; 763ac (1d:63ac)
 	dw BrunoAfterBattleText ; 0x63cd TextAfterBattle
 	dw BrunoEndBattleText ; 0x63c8 TextEndBattle
 	dw BrunoEndBattleText ; 0x63c8 TextEndBattle
-; 0x763b8
 
 db $ff
 
@@ -108669,22 +105376,18 @@ BrunoText1: ; 763b9 (1d:63b9)
 BrunoBeforeBattleText: ; 763c3 (1d:63c3)
 	TX_FAR _BrunoBeforeBattleText
 	db "@"
-; 0x763c3 + 5 bytes
 
 BrunoEndBattleText: ; 763c8 (1d:63c8)
 	TX_FAR _BrunoEndBattleText
 	db "@"
-; 0x763c8 + 5 bytes
 
 BrunoAfterBattleText: ; 763cd (1d:63cd)
 	TX_FAR _BrunoAfterBattleText
 	db "@"
-; 0x763cd + 5 bytes
 
 BrunoText2: ; 763d2 (1d:63d2)
 	TX_FAR _UnnamedText_763d2
 	db "@"
-; 0x763d2 + 5 bytes
 
 BrunoObject: ; 0x763d7 (size=44)
 	db $3 ; border tile
@@ -108726,7 +105429,6 @@ AgathaScript: ; 7642d (1d:642d)
 	call ExecuteCurMapScriptInTable
 	ld [W_AGATHACURSCRIPT], a
 	ret
-; 0x76443
 
 AgathaScript_Unknown76443: ; 76443 (1d:6443)
 	ld hl, $d126
@@ -108741,19 +105443,16 @@ AgathaScript_Unknown76443: ; 76443 (1d:6443)
 .asm_76457
 	ld a, $3b
 
-; known jump sources: 76454 (1d:6454)
 Func_76459: ; 76459 (1d:6459)
 	ld [$d09f], a
 	ld bc, $2
 	ld a, $17
 	jp Predef ; indirect jump to Func_ee9e (ee9e (3:6e9e))
 
-; known jump sources: 764f5 (1d:64f5)
 Func_76464: ; 76464 (1d:6464)
 	xor a
 	ld [W_AGATHACURSCRIPT], a
 	ret
-; 76469 (1d:6469)
 
 Unknown_76469: ; 76469 (1d:6469)
 dw Func_76490
@@ -108836,7 +105535,7 @@ Func_764ed: ; 764ed (1d:64ed)
 	ld a, $1
 	ld [W_GARYCURSCRIPT], a
 	ret
-; 76505 (1d:6505)
+
 AgathaTexts: ; 76505 (1d:6505)
 	dw AgathaText1, AgathaText2
 
@@ -108849,7 +105548,6 @@ AgathaTrainerHeader0: ; 76509 (1d:6509)
 	dw AgathaAfterBattleText ; 0x652a TextAfterBattle
 	dw AgathaEndBattleText ; 0x6525 TextEndBattle
 	dw AgathaEndBattleText ; 0x6525 TextEndBattle
-; 0x76515
 
 db $ff
 
@@ -108862,22 +105560,18 @@ AgathaText1: ; 76516 (1d:6516)
 AgathaBeforeBattleText: ; 76520 (1d:6520)
 	TX_FAR _AgathaBeforeBattleText
 	db "@"
-; 0x76520 + 5 bytes
 
 AgathaEndBattleText: ; 76525 (1d:6525)
 	TX_FAR _AgathaEndBattleText
 	db "@"
-; 0x76525 + 5 bytes
 
 AgathaAfterBattleText: ; 7652a (1d:652a)
 	TX_FAR _AgathaAfterBattleText
 	db "@"
-; 0x7652a + 5 bytes
 
 AgathaText2: ; 7652f (1d:652f)
 	TX_FAR _AgathaText2
 	db "@"
-; 0x7652f + 5 bytes
 
 AgathaObject: ; 0x76534 (size=44)
 	db $0 ; border tile
@@ -109026,7 +105720,6 @@ HallOfFameNoText: ; 76670 (1d:6670)
 UnnamedText_76683: ; 76683 (1d:6683)
 	TX_FAR _UnnamedText_76683
 	db "@"
-; 0x76683 + 5 bytes
 
 HiddenItems: ; 76688 (1d:6688)
 	ld hl, HiddenItemCoords
@@ -109768,7 +106461,6 @@ Pointer4DCF: ; 78dcf (1e:4dcf)
 	jr nz, .asm_78e01
 	ret
 
-; known jump sources: 78d65 (1e:4d65)
 Func_78e23: ; 78e23 (1e:4e23)
 	ld a, [$cf1b]
 	and a
@@ -109796,7 +106488,7 @@ Func_78e23: ; 78e23 (1e:4e23)
 	ld a, $6c
 	ld [rOBP1], a ; $FF00+$49
 	ret
-; 78e53 (1e:4e53)
+
 PlaySubanimation: ; 78e53 (1e:4e53)
 	ld a,[W_ANIMSOUNDID]
 	cp a,$FF
@@ -110457,13 +107149,11 @@ INCBIN "baserom.gbc",$791f9,$791fc - $791f9
 
 INCBIN "baserom.gbc",$79207,$79209 - $79207
 
-; known jump sources: 78de0 (1e:4de0)
 Func_79209: ; 79209 (1e:5209)
 	ld a, $21
 	jp Predef ; indirect jump to Func_480ff (480ff (12:40ff))
 	ld b, $8
 
-; known jump sources: 78de8 (1e:4de8), 78dfb (1e:4dfb)
 Func_79210: ; 79210 (1e:5210)
 	ld a, $24
 	jp Predef ; indirect jump to Func_48125 (48125 (12:4125))
@@ -110490,7 +107180,6 @@ Func_79210: ; 79210 (1e:5210)
 	jr nz, .asm_79228
 	ret
 
-; known jump sources: 79232 (1e:5232), 7923f (1e:523f)
 Func_79246: ; 79246 (1e:5246)
 	ld hl, W_OAMBUFFER
 .asm_79249
@@ -110519,7 +107208,6 @@ Func_79246: ; 79246 (1e:5246)
 
 INCBIN "baserom.gbc",$7927a,$79297 - $7927a
 
-; known jump sources: 7975d (1e:575d)
 Func_79297: ; 79297 (1e:5297)
 	xor a
 	call Func_79842
@@ -110536,21 +107224,18 @@ Func_79297: ; 79297 (1e:5297)
 	jr nz, .asm_7929b
 	ret
 
-; known jump sources: 79762 (1e:5762)
 Func_792af: ; 792af (1e:52af)
 	ld e, $8
 	ld a, $3
 	ld [W_SUBANIMTRANSFORM], a ; $d08b
 	jp Func_795f8
 
-; known jump sources: 3c226 (f:4226)
 Func_792b9: ; 792b9 (1e:52b9)
 	ld hl, Func_792af ; $52af
 	jp CallWithTurnFlipped
 
 INCBIN "baserom.gbc",$792bf,$79329 - $792bf
 
-; known jump sources: 7952a (1e:552a), 797fa (1e:57fa)
 Func_79329: ; 79329 (1e:5329)
 	ld a, e
 	add $8
@@ -110566,7 +107251,6 @@ Func_79329: ; 79329 (1e:5329)
 	ld l, e
 	ld h, d
 
-; known jump sources: 79eaa (1e:5eaa), 79eb7 (1e:5eb7), 79ef8 (1e:5ef8), 79f05 (1e:5f05), 79f12 (1e:5f12), 79f1f (1e:5f1f)
 Func_79339: ; 79339 (1e:5339)
 	ld de, $4
 .asm_7933c
@@ -110588,7 +107272,6 @@ Func_79339: ; 79339 (1e:5339)
 	ld l, e
 	ld h, d
 
-; known jump sources: 79ee5 (1e:5ee5)
 Func_79352: ; 79352 (1e:5352)
 	ld de, $4
 .asm_79355
@@ -110608,7 +107291,6 @@ Func_79352: ; 79352 (1e:5352)
 	jr nz, .asm_79355
 	ret
 
-; known jump sources: 78df3 (1e:4df3)
 Func_79369: ; 79369 (1e:5369)
 	ld hl, Func_7936f ; $536f
 	jp CallWithTurnFlipped
@@ -110630,7 +107312,6 @@ Func_7936f: ; 7936f (1e:536f)
 	pop af
 	ret
 
-; known jump sources: 7976b (1e:576b)
 Func_79389: ; 79389 (1e:5389)
 	ld a, [W_PLAYERMONID]
 	ld [$ceea], a
@@ -110640,7 +107321,6 @@ Func_79389: ; 79389 (1e:5389)
 
 INCBIN "baserom.gbc",$79398,$7939e - $79398
 
-; known jump sources: 7937b (1e:537b), 79421 (1e:5421), 795c1 (1e:55c1), 7976e (1e:576e)
 Func_7939e: ; 7939e (1e:539e)
 	xor a
 	call Func_79842
@@ -110760,7 +107440,6 @@ INCBIN "baserom.gbc",$79476,$794a1 - $79476
 	ld c, $2
 	jp DelayFrame
 
-; known jump sources: 794bc (1e:54bc), 794c5 (1e:54c5)
 Func_794d4: ; 794d4 (1e:54d4)
 	ld c, $7
 .asm_794d6
@@ -110801,7 +107480,6 @@ Func_794d4: ; 794d4 (1e:54d4)
 	call Func_79517
 	jp AnimationCleanOAM
 
-; known jump sources: 79511 (1e:5511)
 Func_79517: ; 79517 (1e:5517)
 	push bc
 	xor a
@@ -110853,7 +107531,6 @@ Func_79517: ; 79517 (1e:5517)
 
 INCBIN "baserom.gbc",$79566,$7959f - $79566
 
-; known jump sources: 79768 (1e:5768)
 Func_7959f: ; 7959f (1e:559f)
 	ld hl, $c6e8
 	push hl
@@ -110879,7 +107556,6 @@ Func_7959f: ; 7959f (1e:559f)
 Unknown_795c4: ; 795c4 (1e:55c4)
 INCBIN "baserom.gbc",$795c4,$795f8 - $795c4
 
-; known jump sources: 792b6 (1e:52b6)
 Func_795f8: ; 795f8 (1e:55f8)
 	ld a, [H_WHOSETURN] ; $FF00+$f3
 	and a
@@ -110924,7 +107600,6 @@ Func_795f8: ; 795f8 (1e:55f8)
 	jr nz, .asm_79607
 	ret
 
-; known jump sources: 79616 (1e:5616)
 Func_79633: ; 79633 (1e:5633)
 	ld a, [hl]
 	add $7
@@ -110933,7 +107608,6 @@ Func_79633: ; 79633 (1e:5633)
 	ld a, $7f
 	ret
 
-; known jump sources: 79611 (1e:5611)
 Func_7963c: ; 7963c (1e:563c)
 	ld a, [hl]
 	sub $7
@@ -110944,7 +107618,6 @@ Func_7963c: ; 7963c (1e:563c)
 
 INCBIN "baserom.gbc",$79645,$79652 - $79645
 
-; known jump sources: 795bb (1e:55bb)
 Func_79652: ; 79652 (1e:5652)
 	ld a, [H_WHOSETURN] ; $FF00+$f3
 	and a
@@ -110995,15 +107668,12 @@ Func_796e0: ; 796e0 (1e:56e0)
 .asm_79739
 	call Func_79652
 	jp Func_7939e
-; 0x7973f
 
 CopySlowbroSpriteData: ; 7973f (1e:573f)
 	ld bc, $0010
 	ld a, BANK(SlowbroSprite)
 	jp FarCopyData2
-; 0x79747
 
-; known jump sources: 3e295 (f:6295)
 Func_79747: ; 79747 (1e:5747)
 	ld a, [H_WHOSETURN] ; $FF00+$f3
 	and a
@@ -111032,7 +107702,6 @@ Func_79771: ; 79771 (1e:5771)
 	call Func_792af
 	call Func_796e0
 	jp Func_7939e
-; 0x7977a
 
 Func_7977a: ; 7977a (1e:577a)
 	ld c, $5
@@ -111043,7 +107712,6 @@ Func_7977a: ; 7977a (1e:577a)
 	dec c
 	jr nz, .asm_7977c ; 0x79782 $f8
 	jp Func_7939e
-; 0x79787
 
 Func_79787: ; 79787 (1e:5787)
 	ld a, [$cfe5]
@@ -111051,7 +107719,6 @@ Func_79787: ; 79787 (1e:5787)
 	ld a, [W_PLAYERMONID]
 	ld [$cee9], a
 
-; known jump sources: 708ee (1c:48ee), 79395 (1e:5395)
 Func_79793: ; 79793 (1e:5793)
 	ld a, [H_WHOSETURN] ; $FF00+$f3
 	and a
@@ -111092,7 +107759,6 @@ Func_79793: ; 79793 (1e:5793)
 	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
 	jp Delay3
 
-; known jump sources: 79441 (1e:5441)
 Func_797e8: ; 797e8 (1e:57e8)
 	push bc
 	push de
@@ -111110,7 +107776,6 @@ Func_797e8: ; 797e8 (1e:57e8)
 	jr nz, .asm_797fa
 	ret
 
-; known jump sources: 792a6 (1e:52a6), 79373 (1e:5373), 793f9 (1e:53f9), 794cc (1e:54cc)
 Func_79801: ; 79801 (1e:5801)
 	ld a, [H_WHOSETURN] ; $FF00+$f3
 	and a
@@ -111120,7 +107785,6 @@ Func_79801: ; 79801 (1e:5801)
 .asm_7980a
 	ld a, $65
 
-; known jump sources: 79049 (1e:5049), 7941e (1e:541e), 79808 (1e:5808)
 Func_7980c: ; 7980c (1e:580c)
 	push hl
 	push de
@@ -111136,7 +107800,6 @@ Func_7980c: ; 7980c (1e:580c)
 	pop hl
 	ret
 
-; known jump sources: 7929b (1e:529b), 793a2 (1e:53a2), 797c9 (1e:57c9)
 Func_79820: ; 79820 (1e:5820)
 	push de
 	ld a, [H_WHOSETURN] ; $FF00+$f3
@@ -111164,7 +107827,6 @@ Func_79820: ; 79820 (1e:5820)
 	pop de
 	ret
 
-; known jump sources: 79298 (1e:5298), 7939f (1e:539f), 79409 (1e:5409), 797c6 (1e:57c6), 79de2 (1e:5de2)
 Func_79842: ; 79842 (1e:5842)
 	ld hl, Unknown_79aea ; $5aea
 	ld e, a
@@ -111193,7 +107855,6 @@ asm_7985b: ; 7985b (1e:585b)
 	jr nz, asm_7985b
 	ret
 
-; known jump sources: 78f7d (1e:4f7d), 794e7 (1e:54e7), 79866 (1e:5866)
 Func_79862: ; 79862 (1e:5862)
 	ld a, [hli]
 	ld [hld], a
@@ -111424,7 +108085,6 @@ MoveSoundTable: ; 798bc (1e:58bc)
 	db $a1,$00,$80
 	db $a1,$00,$80
 
-; known jump sources: 792a0 (1e:52a0), 793a5 (1e:53a5), 7940d (1e:540d), 797cc (1e:57cc)
 Func_79aae: ; 79aae (1e:5aae)
 	ld a, [H_WHOSETURN] ; $FF00+$f3
 	and a
@@ -111435,7 +108095,6 @@ Func_79aae: ; 79aae (1e:5aae)
 	ld [H_DOWNARROWBLINKCNT1], a ; $FF00+$8b
 	jr asm_79acb
 
-; known jump sources: 3cd11 (f:4d11), 3cd2c (f:4d2c), 3f09a (f:709a), 3f0af (f:70af)
 Func_79aba: ; 79aba (1e:5aba)
 	call Load16BitRegisters
 	ld a, [$cd6c]
@@ -111449,7 +108108,6 @@ asm_79acb: ; 79acb (1e:5acb)
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
 
-; known jump sources: 79de6 (1e:5de6)
 Func_79ace: ; 79ace (1e:5ace)
 	push hl
 .asm_79acf
@@ -111484,7 +108142,6 @@ INCBIN "baserom.gbc",$79b02,$79b1b - $79b02
 Unknown_79b1b: ; 79b1b (1e:5b1b)
 INCBIN "baserom.gbc",$79b1b,$79dda - $79b1b
 
-; known jump sources: 41846 (10:5846), 70374 (1c:4374)
 Func_79dda: ; 79dda (1e:5dda)
 	call Load16BitRegisters
 	ld a, c
@@ -111554,7 +108211,6 @@ TossBallAnimation: ; 79e16 (1e:5e16)
 	ld [W_ANIMATIONID],a
 	jp PlayAnimation
 
-; known jump sources: 78ddb (1e:4ddb), 78de3 (1e:4de3), 78df0 (1e:4df0), 78df6 (1e:4df6)
 Func_79e6a: ; 79e6a (1e:5e6a)
 	call WaitForSoundToFinish
 	ld a, [$d05b]
@@ -111579,7 +108235,6 @@ Func_79e6a: ; 79e6a (1e:5e6a)
 	ld a, c
 	jp PlaySound
 
-; known jump sources: efdb (3:6fdb)
 Func_79e96: ; 79e96 (1e:5e96)
 	ld a, [$cd4d]
 	cp $52
@@ -111625,7 +108280,6 @@ Func_79e96: ; 79e96 (1e:5e96)
 	jr nz, .asm_79eca
 	ret
 
-; known jump sources: 79ecd (1e:5ecd), 79ed5 (1e:5ed5), 79f2d (1e:5f2d)
 Func_79eed: ; 79eed (1e:5eed)
 	push bc
 	ld hl, $c391
@@ -111657,7 +108311,6 @@ Func_79eed: ; 79eed (1e:5eed)
 	jr nz, Func_79eed
 	ret
 
-; known jump sources: 79ed0 (1e:5ed0), 79ed8 (1e:5ed8)
 Func_79f30: ; 79f30 (1e:5f30)
 	ld hl, $c390
 	ld de, $cee9
@@ -111672,7 +108325,6 @@ Func_79f30: ; 79f30 (1e:5f30)
 	ld bc, $8
 	jp CopyData
 
-; known jump sources: f2c0 (3:72c0)
 Func_79f54: ; 79f54 (1e:5f54)
 	ld a, $1
 	ld [$cd50], a
@@ -111705,7 +108357,6 @@ Func_79f54: ; 79f54 (1e:5f54)
 	ld [$cfcb], a
 	jp LoadPlayerSpriteGraphics
 
-; known jump sources: 79f74 (1e:5f74)
 Func_79f92: ; 79f92 (1e:5f92)
 	ld a, [$c109]
 	ld hl, Unknown_79fb0 ; $5fb0
@@ -111731,7 +108382,6 @@ Func_79f92: ; 79f92 (1e:5f92)
 Unknown_79fb0: ; 79fb0 (1e:5fb0)
 INCBIN "baserom.gbc",$79fb0,$79fc0 - $79fb0
 
-; known jump sources: 1dbb4 (7:5bb4), 79f66 (1e:5f66)
 Func_79fc0: ; 79fc0 (1e:5fc0)
 	ld hl, $8fc0
 	ld c, $4
@@ -111747,7 +108397,6 @@ Func_79fc0: ; 79fc0 (1e:5fc0)
 	jr nz, .asm_79fc5
 	ret
 
-; known jump sources: 79fc7 (1e:5fc7)
 Func_79fd4: ; 79fd4 (1e:5fd4)
 	ld de, RedFishingTiles ; $5fdd
 	ld bc, (BANK(RedFishingTiles) << 8) + $01
@@ -111894,7 +108543,6 @@ INCBIN "baserom.gbc",$7b068,$7bc85 - $7b068
 Unknown_7bc85: ; 7bc85 (1e:7c85)
 INCBIN "baserom.gbc",$7bc85,$7bde9 - $7bc85
 
-; known jump sources: 3adf7 (e:6df7)
 Func_7bde9: ; 7bde9 (1e:7de9)
 	push hl
 	push de
@@ -111990,12 +108638,10 @@ Func_7bde9: ; 7bde9 (1e:7de9)
 	ld a, [$cee9]
 	jr .asm_7be81
 
-; known jump sources: 7be1b (1e:7e1b), 7be5d (1e:7e5d), 7be94 (1e:7e94)
 Func_7beb4: ; 7beb4 (1e:7eb4)
 	ld b, $b
 	jp GoPAL_SET
 
-; known jump sources: 7be27 (1e:7e27), 7be3f (1e:7e3f)
 Func_7beb9: ; 7beb9 (1e:7eb9)
 	call GetMonHeader
 	FuncCoord 7, 2 ; $c3cf
@@ -112012,7 +108658,6 @@ asm_7bec2: ; 7bec2 (1e:7ec2)
 	jr nz, asm_7bec2
 	ret
 
-; known jump sources: 7be7b (1e:7e7b), 7bec7 (1e:7ec7), 7becf (1e:7ecf)
 Func_7bed6: ; 7bed6 (1e:7ed6)
 	push bc
 	xor a
@@ -112058,7 +108703,6 @@ asm_7befa: ; 7befa (1e:7efa)
 	scf
 	ret
 
-; known jump sources: 4582f (11:582f)
 Func_7bf15: ; 7bf15 (1e:7f15)
 	ld de, $ffe0
 	call Func_7bf64
@@ -112100,7 +108744,6 @@ Func_7bf15: ; 7bf15 (1e:7f15)
 	call UpdateSprites
 	jp Func_2307
 
-; known jump sources: 7bf18 (1e:7f18), 7bf1e (1e:7f1e)
 Func_7bf64: ; 7bf64 (1e:7f64)
 	ld hl, $d527
 	ld a, [hld]
@@ -112129,7 +108772,6 @@ Func_7bf64: ; 7bf64 (1e:7f64)
 	ld [hl], a
 	jp Delay3
 
-; known jump sources: 3819 (0:3819)
 GetMachinePrice: ; 7bf86 (1e:7f86)
 	ld a, [$cf91]
 	sub TM_01
@@ -114009,46 +110651,37 @@ SECTION "bank20",ROMX,BANK[$20]
 
 UnnamedText_80000: ; 80000 (20:4000)
 	db $0, "Bingo!@@"
-; 0xa80009
 
 _UnnamedText_526f3: ; 80009 (20:4009)
 	db $0, $4f
 	db "The CARD KEY", $55
 	db "opened the door!", $57
-; 0x80009 + 32 bytes
 
 _UnnamedText_526f8: ; 80029 (20:4029)
 	db $0, "Darn! It needs a", $4f
 	db "CARD KEY!", $57
-; 0x80029 + 28 bytes
 
 _UnnamedText_33cf: ; 80045 (20:4045)
 	TX_RAM $cd6d
 	db $0, ": @@"
-; 0xa8004d
 
 _UnnamedText_70847: ; 8004d (20:404d)
 	db $0, "Not even a nibble!", $58
-; 0x8004d + 20 bytes
 
 _UnnamedText_7084c: ; 80061 (20:4061)
 	db $0, "Looks like there's", $4f
 	db "nothing here.", $58
-; 0x80061 + 33 bytes
 
 _UnnamedText_70851: ; 80082 (20:4082)
 	db $0, "Oh!", $4f
 	db "It's a bite!", $58
-; 0x80082 + 17 bytes
 
 _UnnamedText_24db: ; 80093 (20:4093)
 	db $0, "!", $57
-; 0x80093 + 3 bytes
 
 _UnnamedText_24e0: ; 80096 (20:4096)
 	db $0, "Ground rose up", $4f
 	db "somewhere!", $57
-; 0x80096 + 27 bytes
 
 _BoulderText: ; 800b1 (20:40b1)
 	db $0, "This requires", $4f
@@ -114068,19 +110701,16 @@ _FoundItemText: ; 80119 (20:4119)
 	db "@"
 	TX_RAM $cf4b
 	db $0, "!@@"
-; 0x8012a
 
 _NoMoreRoomForItemText: ; 8012a (20:412a)
 	db $0, "No more room for", $4f
 	db "items!", $57
-; 0x8012a + 25 bytes
 
 _UnnamedText_59091: ; 80143 (20:4143)
 	db $0, "Hi! Remember me?", $4f
 	db "I'm PROF.OAK's", $55
 	db "AIDE!", $51
 	db "If you caught @"
-; 0x80143 + 52 bytes
 
 UnnamedText_80177: ; 80177 (20:4177)
 	TX_NUM $ffdb, 1, 3
@@ -114097,13 +110727,11 @@ UnnamedText_80177: ; 80177 (20:4177)
 	TX_NUM $ffdb, 1, 3
 	db $0, " kinds of", $55
 	db "#MON?", $57
-; 0x801e4
 
 _UnnamedText_59096: ; 801e4 (20:41e4)
 	db $0, "Let's see...", $4f
 	db "Uh-oh! You have", $55
 	db "caught only @"
-; 0x801e4 + 42 bytes
 
 UnnamedText_8020e: ; 8020e (20:420e)
 	TX_NUM $ffdd, 1, 3
@@ -114116,7 +110744,6 @@ UnnamedText_8020e: ; 8020e (20:420e)
 	db "@"
 	TX_RAM $cc5b
 	db $0, ".", $57
-; 0x80250
 
 _UnnamedText_5909b: ; 80250 (20:4250)
 	db $0, "Oh. I see.", $51
@@ -114127,12 +110754,10 @@ _UnnamedText_5909b: ; 80250 (20:4250)
 	db "for @"
 	TX_RAM $cc5b
 	db $0, ".", $57
-; 0x8028c
 
 _UnnamedText_590a0: ; 8028c (20:428c)
 	db $0, "Great! You have", $4f
 	db "caught @"
-; 0x8028c + 25 bytes
 
 UnnamedText_802a5: ; 802a5 (20:42a5)
 	TX_NUM $ffdd, 1, 3
@@ -114140,26 +110765,22 @@ UnnamedText_802a5: ; 802a5 (20:42a5)
 	db "of #MON!", $55
 	db "Congratulations!", $51
 	db "Here you go!", $58
-; 0x802a5 + 52 bytes = 0x802d9
 
 UnnamedText_802d9: ; 802d9 (20:42d9)
 	db $0, $52, " got the", $4f
 	db "@"
 	TX_RAM $cc5b
 	db $0, "!@@"
-; 0xa802ec
 
 _UnnamedText_590ab: ; 802ec (20:42ec)
 	db $0, "Oh! I see you", $4f
 	db "don't have any", $55
 	db "room for the", $55
 	db "@"
-; 0x802ec + 43 bytes
 
 UnnamedText_80317: ; 80317 (20:4317)
 	TX_RAM $cc5b
 	db $0, ".", $57
-; 0x80317 + 6 bytes = 0x8031d
 
 _ViridianForestText1: ; 8031d (20:431d)
 	db $0, "I came here with", $4f
@@ -114171,47 +110792,39 @@ _ViridianForestBattleText1: ; 80359 (20:4359)
 	db $0, "Hey! You have", $4f
 	db "#MON! Come on!", $55
 	db "Let's battle'em!", $57
-; 0x80359 + 46 bytes
 
 _ViridianForestEndBattleText1: ; 80387 (20:4387)
 	db $0, "No!", $4f
 	db "CATERPIE can't", $55
 	db "cut it!", $58
-; 0x80387 + 27 bytes
 
 _ViridianForestAfterBattleText1: ; 803a2 (20:43a2)
 	db $0, "Ssh! You'll scare", $4f
 	db "the bugs away!", $57
-; 0x803a2 + 33 bytes
 
 _ViridianForestBattleText2: ; 803c3 (20:43c3)
 	db $0, "Yo! You can't jam", $4f
 	db "out if you're a", $55
 	db "#MON trainer!", $57
-; 0x803c3 + 47 bytes
 
 _ViridianForestEndBattleText2: ; 803f2 (20:43f2)
 	db $0, "Huh?", $4f
 	db "I ran out of", $55
 	db "#MON!", $58
-; 0x803f2 + 25 bytes
 
 _ViridianForestAfterBattleText2: ; 8040b (20:440b)
 	db $0, "Darn! I'm going", $4f
 	db "to catch some", $55
 	db "stronger ones!", $57
-; 0x8040b + 45 bytes
 
 _ViridianForestBattleText3: ; 80438 (20:4438)
 	db $0, "Hey, wait up!", $4f
 	db "What's the hurry?", $57
-; 0x80438 + 32 bytes
 
 _ViridianForestEndBattleText3: ; 80458 (20:4458)
 	db $0, "I", $4f
 	db "give! You're good", $55
 	db "at this!", $58
-; 0x80458 + 29 bytes
 
 _ViridianForestAfterBattleText3: ; 80475 (20:4475)
 	db $0, "Sometimes, you", $4f
@@ -114220,7 +110833,6 @@ _ViridianForestAfterBattleText3: ; 80475 (20:4475)
 	db "I'm looking for", $4f
 	db "the stuff I", $55
 	db "dropped!", $57
-; 0x80475 + 82 bytes
 
 _ViridianForestText8: ; 804c7 (20:44c7)
 	db $0, "I ran out of #", $4f
@@ -114273,116 +110885,95 @@ _MtMoon1BattleText2: ; 80692 (20:4692)
 	db $0, "WHOA! You shocked", $4f
 	db "me! Oh, you're", $55
 	db "just a kid!", $57
-; 0x80692 + 45 bytes
 
 _MtMoon1EndBattleText2: ; 806bf (20:46bf)
 	db $0, "Wow!", $4f
 	db "Shocked again!", $58
-; 0x806bf + 21 bytes
 
 _MtMoon1AfterBattleText2: ; 806d4 (20:46d4)
 	db $0, "Kids like you", $4f
 	db "shouldn't be", $55
 	db "here!", $57
-; 0x806d4 + 33 bytes
 
 _MtMoon1BattleText3: ; 806f5 (20:46f5)
 	db $0, "Did you come to", $4f
 	db "explore too?", $57
-; 0x806f5 + 30 bytes
 
 _MtMoon1EndBattleText3: ; 80713 (20:4713)
 	db $0, "Losing", $4f
 	db "stinks!", $58
-; 0x80713 + 16 bytes
 
 _MtMoon1AfterBattleText3: ; 80723 (20:4723)
 	db $0, "I came down here", $4f
 	db "to show off to", $55
 	db "girls.", $57
-; 0x80723 + 40 bytes
 
 _MtMoon1BattleText4: ; 8074b (20:474b)
 	db $0, "Wow! It's way", $4f
 	db "bigger in here", $55
 	db "than I thought!", $57
-; 0x8074b + 45 bytes
 
 _MtMoon1EndBattleText4: ; 80778 (20:4778)
 	db $0, "Oh!", $4f
 	db "I lost it!", $58
-; 0x80778 + 16 bytes
 
 _MtMoon1AfterBattleText4: ; 80788 (20:4788)
 	db $0, "How do you get", $4f
 	db "out of here?", $57
-; 0x80788 + 29 bytes
 
 _MtMoon1BattleText5: ; 807a5 (20:47a5)
 	db $0, "What! Don't sneak", $4f
 	db "up on me!", $57
-; 0x807a5 + 28 bytes
 
 _MtMoon1EndBattleText5: ; 807c1 (20:47c1)
 	db $0, "My", $4f
 	db "#MON won't do!", $58
-; 0x807c1 + 18 bytes
 
 _MtMoon1AfterBattleText5: ; 807d3 (20:47d3)
 	db $0, "I have to find", $4f
 	db "stronger #MON.", $57
-; 0x807d3 + 31 bytes
 
 _MtMoon1BattleText6: ; 807f2 (20:47f2)
 	db $0, "What? I'm waiting", $4f
 	db "for my friends to", $55
 	db "find me here.", $57
-; 0x807f2 + 50 bytes
 
 _MtMoon1EndBattleText6: ; 80824 (20:4824)
 	db $0, "I lost?", $58
-; 0x80824 + 9 bytes
 
 _MtMoon1AfterBattleText6: ; 8082d (20:482d)
 	db $0, "I heard there are", $4f
 	db "some very rare", $55
 	db "fossils here.", $57
-; 0x8082d + 48 bytes
 
 _MtMoon1BattleText7: ; 8085d (20:485d)
 	db $0, "Suspicious men", $4f
 	db "are in the cave.", $55
 	db "What about you?", $57
-; 0x8085d + 49 bytes
 
 _MtMoon1EndBattleText7: ; 8088e (20:488e)
 	db $0, "You", $4f
 	db "got me!", $58
-; 0x8088e + 13 bytes
 
 _MtMoon1AfterBattleText7: ; 8089b (20:489b)
 	db $0, "I saw them! I'm", $4f
 	db "sure they're from", $55
 	db "TEAM ROCKET!", $57
-; 0x8089b + 46 bytes
 
 _MtMoon1BattleText8: ; 808c9 (20:48c9)
 	db $0, "Go through this", $4f
 	db "cave to get to", $55
 	db "CERULEAN CITY!", $57
-; 0x808c9 + 47 bytes
 
 _MtMoon1EndBattleText8: ; 808f8 (20:48f8)
 	db $0, "I", $4f
 	db "lost.", $58
-; 0x808f8 + 9 bytes
 
 _MtMoon1AfterBattleText8: ; 80901 (20:4901)
 	db $0, "ZUBAT is tough!", $4f
 	db "But, it can be", $55
 	db "useful if you", $55
 	db "catch one.", $57
-; 0x80901 + 57 bytes
 
 _MtMoon1Text14: ; 8093a (20:493a)
 	db $0, "Beware! ZUBAT is", $4f
@@ -114390,47 +110981,39 @@ _MtMoon1Text14: ; 8093a (20:493a)
 
 _UnnamedText_51a48: ; 8095c (20:495c)
 	db $0, $57
-; 0x8095c + 2 bytes
 
 _UnnamedText_49f24: ; 8095e (20:495e)
 	db $0, "You want the", $4f
 	db "DOME FOSSIL?", $57
-; 0x8095e + 27 bytes
 
 _UnnamedText_49f64: ; 80979 (20:4979)
 	db $0, "You want the", $4f
 	db "HELIX FOSSIL?", $57
-; 0x80979 + 28 bytes
 
 _UnnamedText_49f6f: ; 80995 (20:4995)
 	db $0, $52, " got the", $4f
 	db "@"
 	TX_RAM $cf4b
 	db $0, "!@@"
-; 0x809a8
 
 _UnnamedText_49f7f: ; 809a8 (20:49a8)
 	db $0, "Look, you've got", $4f
 	db "no room for this.@@"
-; 0x809cc
 
 _UnnamedText_49f85: ; 809cc (20:49cc)
 	db $0, "Hey, stop!", $51
 	db "I found these", $4f
 	db "fossils! They're", $55
 	db "both mine!", $57
-; 0x809cc + 53 bytes
 
 _UnnamedText_49f8a: ; 80a01 (20:4a01)
 	db $0, "OK!", $4f
 	db "I'll share!", $58
-; 0x80a01 + 16 bytes
 
 _UnnamedText_49f8f: ; 80a11 (20:4a11)
 	db $0, "We'll each take", $4f
 	db "one!", $55
 	db "No being greedy!", $57
-; 0x80a11 + 38 bytes
 
 _UnnamedText_49f94: ; 80a37 (20:4a37)
 	db $0, "Far away, on", $4f
@@ -114440,81 +111023,67 @@ _UnnamedText_49f94: ; 80a37 (20:4a37)
 	db "They do research", $4f
 	db "on regenerating", $55
 	db "fossils.", $57
-; 0x80a37 + 92 bytes
 
 UnnamedText_80a93: ; 80a93 (20:4a93)
 	db $0, "All right. Then", $4f
 	db "this is mine!@@"
-; 0x80ab3
 
 _MtMoon3BattleText2: ; 80ab3 (20:4ab3)
 	db $0, "TEAM ROCKET will", $4f
 	db "find the fossils,", $55
 	db "revive and sell", $55
 	db "them for cash!", $57
-; 0x80ab3 + 67 bytes
 
 _MtMoon3EndBattleText2: ; 80af6 (20:4af6)
 	db $0, "Urgh!", $4f
 	db "Now I'm mad!", $58
-; 0x80af6 + 19 bytes
 
 _MtMoon3AfterBattleText2: ; 80b09 (20:4b09)
 	db $0, "You made me mad!", $4f
 	db "TEAM ROCKET will", $55
 	db "blacklist you!", $57
-; 0x80b09 + 50 bytes
 
 _MtMoon3BattleText3: ; 80b3b (20:4b3b)
 	db $0, "We, TEAM ROCKET,", $4f
 	db "are #MON", $55
 	db "gangsters!", $57
-; 0x80b3b + 38 bytes
 
 _MtMoon3EndBattleText3: ; 80b61 (20:4b61)
 	db $0, "I blew", $4f
 	db "it!", $58
-; 0x80b61 + 12 bytes
 
 _MtMoon3AfterBattleText3: ; 80b6d (20:4b6d)
 	db $0, "Darn it all! My", $4f
 	db "associates won't", $55
 	db "stand for this!", $57
-; 0x80b6d + 49 bytes
 
 _MtMoon3BattleText4: ; 80b9e (20:4b9e)
 	db $0, "We're pulling a", $4f
 	db "big job here!", $55
 	db "Get lost, kid!", $57
-; 0x80b9e + 45 bytes
 
 _MtMoon3EndBattleText4: ; 80bcb (20:4bcb)
 	db $0, "So, you", $4f
 	db "are good.", $58
-; 0x80bcb + 19 bytes
 
 _MtMoon3AfterBattleText4: ; 80bde (20:4bde)
 	db $0, "If you find a", $4f
 	db "fossil, give it", $55
 	db "to me and scram!", $57
-; 0x80bde + 48 bytes
 
 _MtMoon3BattleText5: ; 80c0e (20:4c0e)
 	db $0, "Little kids", $4f
 	db "should leave", $55
 	db "grown-ups alone!", $57
-; 0x80c0e + 43 bytes
 
 _MtMoon3EndBattleText5: ; 80c39 (20:4c39)
 	db $0, "I'm", $4f
 	db "steamed!", $58
-; 0x80c39 + 13 bytes
 
 _MtMoon3AfterBattleText5: ; 80c46 (20:4c46)
 	db $0, "#MON lived", $4f
 	db "here long before", $55
 	db "people came.", $57
-; 0x80c46 + 42 bytes
 
 _SSAnne1Text1: ; 80c70 (20:4c70)
 	db $0, "Bonjour!", $4f
@@ -114556,21 +111125,18 @@ _SSAnneRivalBeforeBattleText: ; 80d9a (20:4d9a)
 	db "are everywhere!", $51
 	db "Crawl around in", $4f
 	db "grassy areas!", $57
-; 0x80d9a + 189 bytes
 
 _SSAnneRivalDefeatedText: ; 80e57 (20:4e57)
 	db $0, "Humph!", $51
 	db "At least you're", $4f
 	db "raising your", $55
 	db "#MON!", $58
-; 0x80e57 + 42 bytes
 
 _SSAnneRivalWonText: ; 80e81 (20:4e81)
 	db $0, $52, "! What are", $4f
 	db "you, seasick?", $51
 	db "You should shape", $4f
 	db "up, pal!", $58
-; 0x80e81 + 53 bytes
 
 _SSAnneRivalCaptainText: ; 80eb6 (20:4eb6)
 	db $0, $53, ": I heard", $4f
@@ -114582,7 +111148,6 @@ _SSAnneRivalCaptainText: ; 80eb6 (20:4eb6)
 	db "really useful!", $51
 	db "You should go see", $4f
 	db "him! Smell ya!", $57
-; 0x80eb6 + 149 bytes
 
 _SSAnne3Text1: ; 80f4b (20:4f4b)
 	db $0, "Our CAPTAIN is a", $4f
@@ -114608,35 +111173,29 @@ _SSAnneBattleText1: ; 8100b (20:500b)
 	db $0, "Hey matey!", $51
 	db "Let's do a little", $4f
 	db "jig!", $57
-; 0x8100b + 34 bytes
 
 _SSAnneEndBattleText1: ; 8102d (20:502d)
 	db $0, "You're", $4f
 	db "impressive!", $58
-; 0x8102d + 19 bytes
 
 _SSAnneAfterBattleText1: ; 81040 (20:5040)
 	db $0, "How many kinds of", $4f
 	db "#MON do you", $55
 	db "think there are?", $57
-; 0x81040 + 48 bytes
 
 _SSAnneBattleText2: ; 81070 (20:5070)
 	db $0, "Ahoy there!", $4f
 	db "Are you seasick?", $57
-; 0x81070 + 30 bytes
 
 _SSAnneEndBattleText2: ; 8108e (20:508e)
 	db $0, "I was", $4f
 	db "just careless!", $58
-; 0x8108e + 22 bytes
 
 _SSAnneAfterBattleText2: ; 810a4 (20:50a4)
 	db $0, "My Pa said there", $4f
 	db "are 100 kinds of", $55
 	db "#MON. I think", $55
 	db "there are more.", $57
-; 0x810a4 + 65 bytes
 
 _SSAnne6Text1: ; 810e5 (20:50e5)
 	db $0, "You, mon petit!", $4f
@@ -114674,26 +111233,22 @@ _UnnamedText_61807: ; 81203 (20:5203)
 	db $0, "Er-hem! Indeed I", $4f
 	db "am le CHEF!", $51
 	db "Le main course is", $58
-; 0x81203 + 48 bytes
 
 _UnnamedText_6180c: ; 81233 (20:5233)
 	db $0, "Salmon du Salad!", $51
 	db "Les guests may", $4f
 	db "gripe it's fish", $55
 	db "again, however!", $57
-; 0x81233 + 64 bytes
 
 _UnnamedText_61811: ; 81273 (20:5273)
 	db $0, "Eels au Barbecue!", $51
 	db "Les guests will", $4f
 	db "mutiny, I fear.", $57
-; 0x81273 + 51 bytes
 
 _UnnamedText_61816: ; 812a6 (20:52a6)
 	db $0, "Prime Beef Steak!", $51
 	db "But, have I enough", $4f
 	db "fillets du beef?", $57
-; 0x812a6 + 55 bytes
 
 _SSAnne7RubText: ; 812dd (20:52dd)
 	db $0, "CAPTAIN: Ooargh...", $4f
@@ -114704,7 +111259,6 @@ _SSAnne7RubText: ; 812dd (20:52dd)
 	db "back!", $51
 	db "Rub-rub...", $4f
 	db "Rub-rub...@@"
-; 0x81347
 
 _ReceivingHM01Text: ; 81347 (20:5347)
 	db $0, "CAPTAIN: Whew!", $4f
@@ -114720,26 +111274,22 @@ _ReceivingHM01Text: ; 81347 (20:5347)
 	db "#MON and you", $55
 	db "can see it CUT", $55
 	db "any time!", $58
-; 0x81347 + 198 bytes
 
 _ReceivedHM01Text: ; 8140d (20:540d)
 	db $0, $52, " got", $4f
 	db "@"
 	TX_RAM $cf4b
 	db $0, "!@@"
-; 0x8141c
 
 _UnnamedText_61932: ; 8141c (20:541c)
 	db $0, "CAPTAIN: Whew!", $51
 	db "Now that I'm not", $4f
 	db "sick any more, I", $55
 	db "guess it's time.", $57
-; 0x8141c + 65 bytes
 
 _HM01NoRoomText: ; 8145d (20:545d)
 	db $0, "Oh no! You have", $4f
 	db "no room for this!", $57
-; 0x8145d + 35 bytes
 
 _SSAnne7Text2: ; 81480 (20:5480)
 	db $0, "Yuck! Shouldn't", $4f
@@ -114760,61 +111310,50 @@ _SSAnne8BattleText1: ; 814f1 (20:54f1)
 	db "on my journeys!", $51
 	db "My #MON are my", $4f
 	db "only friends!", $57
-; 0x814f1 + 61 bytes
 
 _SSAnne8EndBattleText1: ; 8152e (20:552e)
 	db $0, "My, my", $4f
 	db "friends...", $58
-; 0x8152e + 19 bytes
 
 _SSAnne8AfterBattleText1: ; 81541 (20:5541)
 	db $0, "You should be", $4f
 	db "nice to friends!", $57
-; 0x81541 + 32 bytes
 
 _SSAnne8BattleText2: ; 81561 (20:5561)
 	db $0, "You pup! How dare", $4f
 	db "you barge in!", $57
-; 0x81561 + 33 bytes
 
 _SSAnne8EndBattleText2: ; 81582 (20:5582)
 	db $0, "Humph!", $4f
 	db "You rude child!", $58
-; 0x81582 + 24 bytes
 
 _UnnamedText_61a24: ; 8159a (20:559a)
 	db $0, "I wish to be left", $4f
 	db "alone! Get out!", $57
-; 0x8159a + 35 bytes
 
 _SSAnne8BattleText3: ; 815bd (20:55bd)
 	db $0, "I love #MON!", $4f
 	db "Do you?", $57
-; 0x815bd + 22 bytes
 
 _SSAnne8EndBattleText3: ; 815d3 (20:55d3)
 	db $0, "Wow! ", $4f
 	db "You're great!", $58
-; 0x815d3 + 20 bytes
 
 _SSAnne8AfterBattleText3: ; 815e7 (20:55e7)
 	db $0, "Let me be your", $4f
 	db "friend, OK?", $51
 	db "Then we can trade", $4f
 	db "#MON!", $57
-; 0x815e7 + 52 bytes
 
 _SSAnne8BattleText4: ; 8161b (20:561b)
 	db $0, "I collected these", $4f
 	db "#MON from all", $55
 	db "around the world!", $57
-; 0x8161b + 51 bytes
 
 _SSAnne8EndBattleText4: ; 8164e (20:564e)
 	db $0, "Oh no!", $4f
 	db "I went around the", $55
 	db "world for these!", $58
-; 0x8164e + 43 bytes
 
 _SSAnne8AfterBattleText4: ; 81679 (20:5679)
 	db $0, "You hurt my poor", $4f
@@ -114822,7 +111361,6 @@ _SSAnne8AfterBattleText4: ; 81679 (20:5679)
 	db "I demand that you", $4f
 	db "heal them at a", $55
 	db "#MON CENTER!", $57
-; 0x81679 + 78 bytes
 
 _SSAnne8Text5: ; 816c7 (20:56c7)
 	db $0, "Waiter, I would", $4f
@@ -114854,19 +111392,16 @@ _UnnamedText_61bf2: ; 81799 (20:5799)
 	db "like this one!", $51
 	db "It was something", $4f
 	db "like this!", $58
-; 0x81799 + 92 bytes
 
 _UnnamedText_61c01: ; 817f5 (20:57f5)
 	db $0, "Ah yes, I have", $4f
 	db "seen some #MON", $55
 	db "ferry people", $55
 	db "across the water!", $57
-; 0x817f5 + 62 bytes
 
 _UnnamedText_61c10: ; 81833 (20:5833)
 	db $0, "#MON can CUT", $4f
 	db "down small bushes.", $57
-; 0x81833 + 33 bytes
 
 _UnnamedText_61c1f: ; 81854 (20:5854)
 	db $0, "Have you gone to", $4f
@@ -114874,89 +111409,73 @@ _UnnamedText_61c1f: ; 81854 (20:5854)
 	db "in FUCHSIA CITY?", $51
 	db "It had many rare", $4f
 	db "kinds of #MON!!", $57
-; 0x81854 + 84 bytes
 
 _UnnamedText_61c2e: ; 818a8 (20:58a8)
 	db $0, "Me and my Daddy", $4f
 	db "think the SAFARI", $55
 	db "ZONE is awesome!", $57
-; 0x818a8 + 51 bytes
 
 _UnnamedText_61c3d: ; 818db (20:58db)
 	db $0, "The CAPTAIN looked", $4f
 	db "really sick and", $55
 	db "pale!", $57
-; 0x818db + 42 bytes
 
 _UnnamedText_61c4c: ; 81905 (20:5905)
 	db $0, "I hear many people", $4f
 	db "get seasick!", $57
-; 0x81905 + 33 bytes
 
 _SSAnne9BattleText1: ; 81926 (20:5926)
 	db $0, "Competing against", $4f
 	db "the young keeps", $55
 	db "me youthful.", $57
-; 0x81926 + 48 bytes
 
 _SSAnne9EndBattleText1: ; 81956 (20:5956)
 	db $0, "Good", $4f
 	db "fight! Ah, I feel", $55
 	db "young again!", $58
-; 0x81956 + 37 bytes
 
 _SSAnne9AfterBattleText1: ; 8197b (20:597b)
 	db $0, "15 years ago, I", $4f
 	db "would have won!", $57
-; 0x8197b + 33 bytes
 
 _SSAnne9BattleText2: ; 8199c (20:599c)
 	db $0, "Check out what I", $4f
 	db "fished up!", $57
-; 0x8199c + 29 bytes
 
 _SSAnne9EndBattleText2: ; 819b9 (20:59b9)
 	db $0, "I'm", $4f
 	db "all out!", $58
-; 0x819b9 + 13 bytes
 
 _SSAnne9AfterBattleText2: ; 819c6 (20:59c6)
 	db $0, "Party?", $51
 	db "The cruise ship's", $4f
 	db "party should be", $55
 	db "over by now.", $57
-; 0x819c6 + 54 bytes
 
 _SSAnne9BattleText3: ; 819fc (20:59fc)
 	db $0, "Which do you like,", $4f
 	db "a strong or a", $55
 	db "rare #MON?", $57
-; 0x819fc + 45 bytes
 
 _SSAnne9EndBattleText3: ; 81a29 (20:5a29)
 	db $0, "I must", $4f
 	db "salute you!", $58
-; 0x81a29 + 20 bytes
 
 _SSAnne9AfterBattleText3: ; 81a3d (20:5a3d)
 	db $0, "I prefer strong", $4f
 	db "and rare #MON.", $57
-; 0x81a3d + 32 bytes
 
 _SSAnne9BattleText4: ; 81a5d (20:5a5d)
 	db $0, "I never saw you", $4f
 	db "at the party.", $57
-; 0x81a5d + 31 bytes
 
 _SSAnne9EndBattleText4: ; 81a7c (20:5a7c)
 	db $0, "Take", $4f
 	db "it easy!", $58
-; 0x81a7c + 15 bytes
 
 _SSAnne9AfterBattleText4: ; 81a8b (20:5a8b)
 	db $0, "Oh, I adore your", $4f
 	db "strong #MON!", $57
-; 0x81a8b + 31 bytes
 
 _SSAnne10Text8: ; 81aaa (20:5aaa)
 	db $0, "MACHOKE: Gwoh!", $4f
@@ -114966,101 +111485,83 @@ _SSAnne10BattleText1: ; 81ac3 (20:5ac3)
 	db $0, "You know what they", $4f
 	db "say about sailors", $55
 	db "and fighting!", $57
-; 0x81ac3 + 52 bytes
 
 _SSAnne10EndBattleText1: ; 81af7 (20:5af7)
 	db $0, "Right!", $4f
 	db "Good fight, mate!", $58
-; 0x81af7 + 26 bytes
 
 _SSAnne10AfterBattleText1: ; 81b11 (20:5b11)
 	db $0, "Haha! Want to be", $4f
 	db "a sailor, mate?", $57
-; 0x81b11 + 34 bytes
 
 _SSAnne10BattleText2: ; 81b33 (20:5b33)
 	db $0, "My sailor's pride", $4f
 	db "is at stake!", $57
-; 0x81b33 + 31 bytes
 
 _SSAnne10EndBattleText2: ; 81b52 (20:5b52)
 	db $0, "Your", $4f
 	db "spirit sank me!", $58
-; 0x81b52 + 22 bytes
 
 _SSAnne10AfterBattleText2: ; 81b68 (20:5b68)
 	db $0, "Did you see the", $4f
 	db "FISHING GURU in", $55
 	db "VERMILION CITY?", $57
-; 0x81b68 + 49 bytes
 
 _SSAnne10BattleText3: ; 81b99 (20:5b99)
 	db $0, "Us sailors have", $4f
 	db "#MON too!", $57
-; 0x81b99 + 27 bytes
 
 _SSAnne10EndBattleText3: ; 81bb4 (20:5bb4)
 	db $0, "OK, ", $4f
 	db "you're not bad.", $58
-; 0x81bb4 + 21 bytes
 
 _SSAnne10AfterBattleText3: ; 81bc9 (20:5bc9)
 	db $0, "We caught all our", $4f
 	db "#MON while", $55
 	db "out at sea!", $57
-; 0x81bc9 + 42 bytes
 
 _SSAnne10BattleText4: ; 81bf3 (20:5bf3)
 	db $0, "I like feisty", $4f
 	db "kids like you!@@"
-; 0x81bf3 + 31 bytes
 
 _SSAnne10EndBattleText4: ; 81c12 (20:5c12)
 	db $0, "Argh!", $4f
 	db "Lost it!", $58
-; 0x81c12 + 16 bytes
 
 _SSAnne10AfterBattleText4: ; 81c22 (20:5c22)
 	db $0, "Sea #MON live", $4f
 	db "in deep water.", $55
 	db "You'll need a ROD!", $57
-; 0x81c22 + 48 bytes
 
 _SSAnne10BattleText5: ; 81c52 (20:5c52)
 	db $0, "Matey, you're", $4f
 	db "walking the plank", $55
 	db "if you lose!", $57
-; 0x81c52 + 45 bytes
 
 _SSAnne10EndBattleText5: ; 81c7f (20:5c7f)
 	db $0, "Argh!", $4f
 	db "Beaten by a kid!", $58
-; 0x81c7f + 24 bytes
 
 _SSAnne10AfterBattleText5: ; 81c97 (20:5c97)
 	db $0, "Jellyfish some-", $4f
 	db "times drift into", $55
 	db "the ship.", $57
-; 0x81c97 + 44 bytes
 
 _SSAnne10BattleText6: ; 81cc3 (20:5cc3)
 	db $0, "Hello stranger!", $4f
 	db "Stop and chat!", $51
 	db "All my #MON", $4f
 	db "are from the sea!", $57
-; 0x81cc3 + 62 bytes
 
 _SSAnne10EndBattleText6: ; 81d01 (20:5d01)
 	db $0, "Darn!", $4f
 	db "I let that one", $55
 	db "get away!", $58
-; 0x81d01 + 32 bytes
 
 _SSAnne10AfterBattleText6: ; 81d21 (20:5d21)
 	db $0, "I was going to", $4f
 	db "make you my", $55
 	db "assistant too!", $57
-; 0x81d21 + 43 bytes
 
 _SSAnne10Text7: ; 81d4c (20:5d4c)
 	db $0, "My buddy, MACHOKE,", $4f
@@ -115072,206 +111573,168 @@ _SSAnne10Text7: ; 81d4c (20:5d4c)
 _VictoryRoad3BattleText2: ; 81d9b (20:5d9b)
 	db $0, "I heard rumors of", $4f
 	db "a child prodigy!", $57
-; 0x81d9b + 36 bytes
 
 _VictoryRoad3EndBattleText2: ; 81dbf (20:5dbf)
 	db $0, "The", $4f
 	db "rumors were true!", $58
-; 0x81dbf + 23 bytes
 
 _VictoryRoad3AfterBattleText2: ; 81dd6 (20:5dd6)
 	db $0, "You beat GIOVANNI", $4f
 	db "of TEAM ROCKET?", $57
-; 0x81dd6 + 35 bytes
 
 _VictoryRoad3BattleText3: ; 81df9 (20:5df9)
 	db $0, "I'll show you just", $4f
 	db "how good you are!", $57
-; 0x81df9 + 37 bytes
 
 _VictoryRoad3EndBattleText3: ; 81e1e (20:5e1e)
 	db $0, "I'm", $4f
 	db "furious!", $58
-; 0x81e1e + 13 bytes
 
 _VictoryRoad3AfterBattleText3: ; 81e2b (20:5e2b)
 	db $0, "You showed me just", $4f
 	db "how good I was!", $57
-; 0x81e2b + 36 bytes
 
 _VictoryRoad3BattleText4: ; 81e4f (20:5e4f)
 	db $0, "Only the chosen", $4f
 	db "can pass here!", $57
-; 0x81e4f + 32 bytes
 
 _VictoryRoad3EndBattleText4: ; 81e6f (20:5e6f)
 	db $0, "I", $4f
 	db "don't believe it!", $58
-; 0x81e6f + 20 bytes
 
 _VictoryRoad3AfterBattleText4: ; 81e83 (20:5e83)
 	db $0, "All trainers here", $4f
 	db "are headed to the", $55
 	db "#MON LEAGUE!", $55
 	db "Be careful!", $57
-; 0x81e83 + 62 bytes
 
 _VictoryRoad3BattleText5: ; 81ec1 (20:5ec1)
 	db $0, "Trainers live to", $4f
 	db "seek stronger", $55
 	db "opponents!", $57
-; 0x81ec1 + 43 bytes
 
 _VictoryRoad3EndBattleText5: ; 81eec (20:5eec)
 	db $0, "Oh!", $4f
 	db "So strong!", $58
-; 0x81eec + 16 bytes
 
 _VictoryRoad3AfterBattleText5: ; 81efc (20:5efc)
 	db $0, "By fighting tough", $4f
 	db "battles, you get", $55
 	db "stronger!", $57
-; 0x81efc + 46 bytes
 
 _RocketHideout1EndBattleText6: ; 81f2a (20:5f2a)
 	db $0, "Why...?@@"
-; 0x81f34
 
 _RocketHideout1BattleText2: ; 81f34 (20:5f34)
 	db $0, "Who are you? How", $4f
 	db "did you get here?", $57
-; 0x81f34 + 36 bytes
 
 _RocketHideout1EndBattleText2: ; 81f58 (20:5f58)
 	db $0, "Oww!", $4f
 	db "Beaten!", $58
-; 0x81f58 + 14 bytes
 
 _RocketHideout1AfterBattleTxt2: ; 81f66 (20:5f66)
 	db $0, "Are you dissing", $4f
 	db "TEAM ROCKET?", $57
-; 0x81f66 + 30 bytes
 
 _RocketHideout1BattleText3: ; 81f84 (20:5f84)
 	db $0, "You broke into", $4f
 	db "our operation?", $57
-; 0x81f84 + 31 bytes
 
 _RocketHideout1EndBattleText3: ; 81fa3 (20:5fa3)
 	db $0, "Burnt!", $58
-; 0x81fa3 + 8 bytes
 
 _RocketHideout1AfterBattleTxt3: ; 81fab (20:5fab)
 	db $0, "You're not going", $4f
 	db "to get away with", $55
 	db "this, brat!", $57
-; 0x81fab + 46 bytes
 
 _RocketHideout1BattleText4: ; 81fd9 (20:5fd9)
 	db $0, "Intruder alert!", $57
-; 0x81fd9 + 17 bytes
 
 _RocketHideout1EndBattleText4: ; 81fea (20:5fea)
 	db $0, "I", $4f
 	db "can't do it!", $58
-; 0x81fea + 15 bytes
 
 _RocketHideout1AfterBattleTxt4: ; 81ff9 (20:5ff9)
 	db $0, "SILPH SCOPE?", $4f
 	db "I don't know", $55
 	db "where it is!", $57
-; 0x81ff9 + 39 bytes
 
 _RocketHideout1BattleText5: ; 82020 (20:6020)
 	db $0, "Why did you come", $4f
 	db "here?", $57
-; 0x82020 + 24 bytes
 
 _RocketHideout1EndBattleText5: ; 82038 (20:6038)
 	db $0, "This", $4f
 	db "won't do!", $58
-; 0x82038 + 15 bytes
 
 _RocketHideout1AfterBattleTxt5: ; 82047 (20:6047)
 	db $0, "OK, I'll talk!", $4f
 	db "Take the elevator", $55
 	db "to see my BOSS!", $57
-; 0x82047 + 49 bytes
 
 _RocketHideout1BattleText6: ; 82078 (20:6078)
 	db $0, "Are you lost, you", $4f
 	db "little rat?", $57
-; 0x82078 + 31 bytes
 
 _RocketHideout1AfterBattleTxt6: ; 82097 (20:6097)
 	db $0, "Uh-oh, that fight", $4f
 	db "opened the door!", $57
-; 0x82097 + 36 bytes
 
 _RocketHideout2BattleText2: ; 820bb (20:60bb)
 	db $0, "BOSS said you can", $4f
 	db "see GHOSTs with", $55
 	db "the SILPH SCOPE!", $57
-; 0x820bb + 52 bytes
 
 _RocketHideout2EndBattleText2: ; 820ef (20:60ef)
 	db $0, "I", $4f
 	db "surrender!", $58
-; 0x820ef + 14 bytes
 
 _RocketHideout2AfterBattleTxt2: ; 820fd (20:60fd)
 	db $0, "The TEAM ROCKET", $4f
 	db "HQ has 4 basement", $55
 	db "floors. Can you", $55
 	db "reach the BOSS?", $57
-; 0x820fd + 67 bytes
 
 _RocketHideout3BattleText2: ; 82140 (20:6140)
 	db $0, "Stop meddling in", $4f
 	db "TEAM ROCKET's", $55
 	db "affairs!", $57
-; 0x82140 + 40 bytes
 
 _RocketHideout3EndBattleText2: ; 82168 (20:6168)
 	db $0, "Oof!", $4f
 	db "Taken down!", $58
-; 0x82168 + 18 bytes
 
 _RocketHideout3AfterBattleTxt2: ; 8217a (20:617a)
 	db $0, "SILPH SCOPE?", $4f
 	db "The machine the", $55
 	db "BOSS stole. It's", $55
 	db "here somewhere.", $57
-; 0x8217a + 62 bytes
 
 _RocketHideout3BattleTxt: ; 821b8 (20:61b8)
 	db $0, "We got word from", $4f
 	db "upstairs that you", $55
 	db "were coming!", $57
-; 0x821b8 + 49 bytes
 
 _RocketHideout3EndBattleText3: ; 821e9 (20:61e9)
 	db $0, "What?", $4f
 	db "I lost? No!", $58
-; 0x821e9 + 19 bytes
 
 _RocketHideout3AfterBattleText3: ; 821fc (20:61fc)
 	db $0, "Go ahead and go!", $4f
 	db "But, you need the", $55
 	db "LIFT KEY to run", $55
 	db "the elevator!", $57
-; 0x821fc + 66 bytes
 
 _UnnamedText_4557a: ; 8223e (20:623e)
 	db $0, "So! I must say, I", $4f
 	db "am impressed you", $55
 	db "got here!", $57
-; 0x8223e + 46 bytes
 
 _UnnamedText_4557f: ; 8226c (20:626c)
 	db $0, "WHAT!", $4f
 	db "This cannot be!", $58
-; 0x8226c + 23 bytes
 
 _UnnamedText_45584: ; 82283 (20:6283)
 	db $0, "I see that you", $4f
@@ -115285,59 +111748,48 @@ _UnnamedText_45584: ; 82283 (20:6283)
 	db "aside this time!", $51
 	db "I hope we meet", $4f
 	db "again...", $57
-; 0x82283 + 163 bytes
 
 _RocketHideout4BattleText2: ; 82326 (20:6326)
 	db $0, "I know you! You", $4f
 	db "ruined our plans", $55
 	db "at MT.MOON!", $57
-; 0x82326 + 46 bytes
 
 _RocketHideout4EndBattleText2: ; 82354 (20:6354)
 	db $0, "Burned", $4f
 	db "again!", $58
-; 0x82354 + 15 bytes
 
 _RocketHideout4AfterBattleText2: ; 82363 (20:6363)
 	db $0, "Do you have", $4f
 	db "something against", $55
 	db "TEAM ROCKET?", $57
-; 0x82363 + 44 bytes
 
 _RocketHideout4BattleText3: ; 8238f (20:638f)
 	db $0, "How can you not", $4f
 	db "see the beauty of", $55
 	db "our evil?", $57
-; 0x8238f + 45 bytes
 
 _RocketHideout4EndBattleText3: ; 823bc (20:63bc)
 	db $0, "Ayaya!", $58
-; 0x823bc + 8 bytes
 
 _RocketHideout4AfterBattleText3: ; 823c4 (20:63c4)
 	db $0, "BOSS! I'm sorry I", $4f
 	db "failed you!", $57
-; 0x823c4 + 30 bytes
 
 _RocketHideout4BattleText4: ; 823e2 (20:63e2)
 	db $0, "The elevator", $4f
 	db "doesn't work? Who", $55
 	db "has the LIFT KEY?", $57
-; 0x823e2 + 49 bytes
 
 _RocketHideout4EndBattleText4: ; 82413 (20:6413)
 	db $0, "No!", $58
-; 0x82413 + 5 bytes
 
 _UnnamedText_455ec: ; 82418 (20:6418)
 	db $0, "Oh no! I dropped", $4f
 	db "the LIFT KEY!", $57
-; 0x82418 + 32 bytes
 
 _UnnamedText_4578b: ; 82438 (20:6438)
 	db $0, "It appears to", $4f
 	db "need a key.@@"
-; 0xa82454
 
 _UnnamedText_59ded: ; 82454 (20:6454)
 	db $0, "Eeek!", $4f
@@ -115347,14 +111799,12 @@ _UnnamedText_59ded: ; 82454 (20:6454)
 	db "I thought...", $55
 	db "I'm sorry. Here,", $55
 	db "please take this!", $58
-; 0x82454 + 102 bytes
 
 _ReceivedTM36Text: ; 824ba (20:64ba)
 	db $0, $52, " got", $4f
 	db "@"
 	TX_RAM $cf4b
 	db $0, "!@@"
-; 0x824c9
 
 _TM36ExplanationText: ; 824c9 (20:64c9)
 	db $0, "TM36 is", $4f
@@ -115363,53 +111813,43 @@ _TM36ExplanationText: ; 824c9 (20:64c9)
 	db "the #MON that", $55
 	db "uses it faints!", $55
 	db "Be careful.", $57
-; 0x824c9 + 83 bytes
 
 _TM36NoRoomText: ; 8251c (20:651c)
 	db $0, "You don't have any", $4f
 	db "room for this.", $57
-; 0x8251c + 34 bytes
 
 _SilphCo2BattleText1: ; 8253e (20:653e)
 	db $0, "Help! I'm a SILPH", $4f
 	db "employee.", $57
-; 0x8253e + 28 bytes
 
 _SilphCo2EndBattleText1: ; 8255a (20:655a)
 	db $0, "How", $4f
 	db "did you know I", $55
 	db "was a ROCKET?", $58
-; 0x8255a + 34 bytes
 
 _SilphCo2AfterBattleText1: ; 8257c (20:657c)
 	db $0, "I work for both", $4f
 	db "SILPH and TEAM", $55
 	db "ROCKET!", $57
-; 0x8257c + 40 bytes
 
 _SilphCo2BattleText2: ; 825a4 (20:65a4)
 	db $0, "It's off limits", $4f
 	db "here! Go home!", $57
-; 0x825a4 + 31 bytes
 
 _SilphCo2EndBattleText2: ; 825c3 (20:65c3)
 	db $0, "You're", $4f
 	db "good.", $58
-; 0x825c3 + 13 bytes
 
 _SilphCo2AfterBattleText2: ; 825d0 (20:65d0)
 	db $0, "Can you solve the", $4f
 	db "maze in here?", $57
-; 0x825d0 + 33 bytes
 
 _SilphCo2BattleText3: ; 825f1 (20:65f1)
 	db $0, "No kids are", $4f
 	db "allowed in here!", $57
-; 0x825f1 + 30 bytes
 
 _SilphCo2EndBattleText3: ; 8260f (20:660f)
 	db $0, "Tough!", $58
-; 0x8260f + 8 bytes
 
 _SilphCo2AfterBattleText3: ; 82617 (20:6617)
 	db $0, "Diamond shaped", $4f
@@ -115417,60 +111857,49 @@ _SilphCo2AfterBattleText3: ; 82617 (20:6617)
 	db "teleport blocks!", $51
 	db "They're hi-tech", $4f
 	db "transporters!", $57
-; 0x82617 + 72 bytes
 
 _SilphCo2BattleText4: ; 8265f (20:665f)
 	db $0, "Hey kid! What are", $4f
 	db "you doing here?", $57
-; 0x8265f + 35 bytes
 
 _SilphCo2EndBattleText4: ; 82682 (20:6682)
 	db $0, "I goofed!", $58
-; 0x82682 + 11 bytes
 
 _SilphCo2AfterBattleText4: ; 8268d (20:668d)
 	db $0, "SILPH CO. will", $4f
 	db "be merged with", $55
 	db "TEAM ROCKET!", $57
-; 0x8268d + 44 bytes
 
 _UnnamedText_59ff9: ; 826b9 (20:66b9)
 	db $0, "I work for SILPH.", $4f
 	db "What should I do?", $57
-; 0x826b9 + 37 bytes
 
 _UnnamedText_59ffe: ; 826de (20:66de)
 	db $0, $52, "! You and", $4f
 	db "your #MON", $55
 	db "saved us!", $57
-; 0x826de + 32 bytes
 
 _SilphCo3BattleText1: ; 826fe (20:66fe)
 	db $0, "Quit messing with", $4f
 	db "us, kid!", $57
-; 0x826fe + 28 bytes
 
 _SilphCo3EndBattleText1: ; 8271a (20:671a)
 	db $0, "I give", $4f
 	db "up!", $58
-; 0x8271a + 12 bytes
 
 _SilphCo3AfterBattleText1: ; 82726 (20:6726)
 	db $0, "A hint? You can", $4f
 	db "open doors with a", $55
 	db "CARD KEY!", $57
-; 0x82726 + 45 bytes
 
 _SilphCo3BattleText2: ; 82753 (20:6753)
 	db $0, "I support TEAM", $4f
 	db "ROCKET more than", $55
 	db "I support SILPH!", $57
-; 0x82753 + 50 bytes
 
 _SilphCo3EndBattleText2: ; 82785 (20:6785)
 	db $0, "You", $4f
 	db "really got me!", $58
-; 0x82785 + 20 bytes
 
 _SilphCo3AfterBattleText2: ; 82799 (20:6799)
 	db $0, "Humph...", $51
@@ -115478,145 +111907,119 @@ _SilphCo3AfterBattleText2: ; 82799 (20:6799)
 	db "that if I helped", $55
 	db "them, they'd let", $55
 	db "me study #MON!", $57
-; 0x82799 + 75 bytes
 
 _UnnamedText_19de0: ; 827e4 (20:67e4)
 	db $0, "Sssh! Can't you", $4f
 	db "see I'm hiding?", $57
-; 0x827e4 + 31 bytes
 
 _UnnamedText_19de5: ; 82803 (20:6803)
 	db $0, "Huh? TEAM ROCKET", $4f
 	db "is gone?", $57
-; 0x82803 + 27 bytes
 
 _SilphCo4BattleText2: ; 8281e (20:681e)
 	db $0, "TEAM ROCKET has", $4f
 	db "taken command of", $55
 	db "SILPH CO.!", $57
-; 0x8281e + 45 bytes
 
 _SilphCo4EndBattleText2: ; 8284b (20:684b)
 	db $0, "Arrgh!", $58
-; 0x8284b + 8 bytes
 
 _SilphCo4AfterBattleText2: ; 82853 (20:6853)
 	db $0, "Fwahahaha!", $4f
 	db "My BOSS has been", $55
 	db "after this place!", $57
-; 0x82853 + 47 bytes
 
 _SilphCo4BattleText3: ; 82882 (20:6882)
 	db $0, "My #MON are my", $4f
 	db "loyal soldiers!", $57
-; 0x82882 + 32 bytes
 
 _SilphCo4EndBattleText3: ; 828a2 (20:68a2)
 	db $0, "Darn!", $4f
 	db "You weak #MON!", $58
-; 0x828a2 + 22 bytes
 
 _SilphCo4AfterBattleText3: ; 828b8 (20:68b8)
 	db $0, "The doors are", $4f
 	db "electronically", $55
 	db "locked! A CARD", $55
 	db "KEY opens them!", $57
-; 0x828b8 + 61 bytes
 
 _SilphCo4BattleText4: ; 828f5 (20:68f5)
 	db $0, "Intruder spotted!", $57
-; 0x828f5 + 19 bytes
 
 _SilphCo4EndBattleText4: ; 82908 (20:6908)
 	db $0, "Who", $4f
 	db "are you?", $58
-; 0x82908 + 14 bytes
 
 _SilphCo4AfterBattleText4: ; 82916 (20:6916)
 	db $0, "I better tell the", $4f
 	db "BOSS on 11F!", $57
-; 0x82916 + 32 bytes
 
 _UnnamedText_1a010: ; 82936 (20:6936)
 	db $0, "TEAM ROCKET is", $4f
 	db "in an uproar over", $55
 	db "some intruder.", $55
 	db "That's you right?", $57
-; 0x82936 + 66 bytes
 
 _UnnamedText_1a015: ; 82978 (20:6978)
 	db $0, "TEAM ROCKET took", $4f
 	db "off! You're our", $55
 	db "hero! Thank you!", $57
-; 0x82978 + 50 bytes
 
 _SilphCo5BattleText2: ; 829aa (20:69aa)
 	db $0, "I heard a kid was", $4f
 	db "wandering around.", $57
-; 0x829aa + 37 bytes
 
 _SilphCo5EndBattleText2: ; 829cf (20:69cf)
 	db $0, "Boom!", $58
-; 0x829cf + 7 bytes
 
 _SilphCo5AfterBattleText2: ; 829d6 (20:69d6)
 	db $0, "It's not smart", $4f
 	db "to pick a fight", $55
 	db "with TEAM ROCKET!", $57
-; 0x829d6 + 49 bytes
 
 _SilphCo5BattleText3: ; 82a07 (20:6a07)
 	db $0, "We study #", $4f
 	db "BALL technology", $55
 	db "on this floor!", $57
-; 0x82a07 + 43 bytes
 
 _SilphCo5EndBattleText3: ; 82a32 (20:6a32)
 	db $0, "Dang!", $4f
 	db "Blast it!", $58
-; 0x82a32 + 17 bytes
 
 _SilphCo5AfterBattleText3: ; 82a43 (20:6a43)
 	db $0, "We worked on the", $4f
 	db "ultimate #", $55
 	db "BALL which would", $55
 	db "catch anything!", $57
-; 0x82a43 + 62 bytes
 
 _SilphCo5BattleText4: ; 82a81 (20:6a81)
 	db $0, "Whaaat? There", $4f
 	db "shouldn't be any", $55
 	db "children here?", $57
-; 0x82a81 + 46 bytes
 
 SECTION "bank21",ROMX,BANK[$21]
 
 _SilphCo5EndBattleText4: ; 84000 (21:4000)
 	db $0, "Oh", $4f
 	db "goodness!", $58
-; 0x84000 + 14 bytes
 
 _SilphCo5AfterBattleText4: ; 8400e (21:400e)
 	db $0, "You're only on 5F.", $4f
 	db "It's a long way", $55
 	db "to my BOSS!", $57
-; 0x8400e + 46 bytes
 
 _SilphCo5BattleText5: ; 8403c (21:403c)
 	db $0, "Show TEAM ROCKET", $4f
 	db "a little respect!", $57
-; 0x8403c + 36 bytes
 
 _SilphCo5EndBattleText5: ; 84060 (21:4060)
 	db $0, "Cough...", $4f
 	db "Cough...", $58
-; 0x84060 + 19 bytes
 
 _SilphCo5AfterBattleText5: ; 84073 (21:4073)
 	db $0, "Which reminds me.", $51
 	db "KOFFING evolves", $4f
 	db "into WEEZING!", $57
-; 0x84073 + 49 bytes
 
 _SilphCo5Text9: ; 840a4 (21:40a4)
 	db $0, "It's a #MON", $4f
@@ -115644,74 +112047,61 @@ _UnnamedText_1a24a: ; 84176 (21:4176)
 	db $0, "The ROCKETs came", $4f
 	db "and took over the", $55
 	db "building!", $57
-; 0x84176 + 46 bytes
 
 _UnnamedText_1a24f: ; 841a4 (21:41a4)
 	db $0, "Well, better get", $4f
 	db "back to work!", $57
-; 0x841a4 + 32 bytes
 
 _UnnamedText_1a261: ; 841c4 (21:41c4)
 	db $0, "Oh dear, oh dear.", $4f
 	db "Help me please!", $57
-; 0x841c4 + 35 bytes
 
 _UnnamedText_1a266: ; 841e7 (21:41e7)
 	db $0, "We got engaged!", $4f
 	db "Heheh!", $57
-; 0x841e7 + 24 bytes
 
 _UnnamedText_1a278: ; 841ff (21:41ff)
 	db $0, "Look at him! He's", $4f
 	db "such a coward!", $57
-; 0x841ff + 33 bytes
 
 _UnnamedText_1a27d: ; 84220 (21:4220)
 	db $0, "I feel so sorry", $4f
 	db "for him, I have", $55
 	db "to marry him!", $57
-; 0x84220 + 47 bytes
 
 _UnnamedText_1a28f: ; 8424f (21:424f)
 	db $0, "TEAM ROCKET is", $4f
 	db "trying to conquer", $55
 	db "the world with", $55
 	db "#MON!", $57
-; 0x8424f + 55 bytes
 
 _UnnamedText_1a294: ; 84286 (21:4286)
 	db $0, "TEAM ROCKET ran", $4f
 	db "because of you!", $57
-; 0x84286 + 33 bytes
 
 _UnnamedText_1a2a6: ; 842a7 (21:42a7)
 	db $0, "They must have", $4f
 	db "targeted SILPH", $55
 	db "for our #MON", $55
 	db "products.", $57
-; 0x842a7 + 54 bytes
 
 _UnnamedText_1a2ab: ; 842dd (21:42dd)
 	db $0, "Come work for", $4f
 	db "SILPH when you", $55
 	db "get older!", $57
-; 0x842dd + 41 bytes
 
 _SilphCo6BattleText2: ; 84306 (21:4306)
 	db $0, "I am one of the 4", $4f
 	db "ROCKET BROTHERS!", $57
-; 0x84306 + 36 bytes
 
 _SilphCo6EndBattleText2: ; 8432a (21:432a)
 	db $0, "Flame", $4f
 	db "out!", $58
-; 0x8432a + 12 bytes
 
 _SilphCo6AfterBattleText2: ; 84336 (21:4336)
 	db $0, "No matter!", $4f
 	db "My brothers will", $55
 	db "avenge me!", $57
-; 0x84336 + 40 bytes
 
 _SilphCo6BattleText3: ; 8435e (21:435e)
 	db $0, "That rotten", $4f
@@ -115719,33 +112109,27 @@ _SilphCo6BattleText3: ; 8435e (21:435e)
 	db "He shouldn't have", $4f
 	db "sent me to the", $55
 	db "TIKSI BRANCH!", $57
-; 0x8435e + 70 bytes
 
 _SilphCo6EndBattleText3: ; 843a4 (21:43a4)
 	db $0, "Shoot!", $58
-; 0x843a4 + 8 bytes
 
 _SilphCo6AfterBattleText3: ; 843ac (21:43ac)
 	db $0, "TIKSI BRANCH?", $4f
 	db "It's in Russian", $55
 	db "no man's land!", $57
-; 0x843ac + 44 bytes
 
 _SilphCo6BattleText4: ; 843d8 (21:43d8)
 	db $0, "You dare betray", $4f
 	db "TEAM ROCKET?", $57
-; 0x843d8 + 30 bytes
 
 _SilphCo6EndBattleText4: ; 843f6 (21:43f6)
 	db $0, "You", $4f
 	db "traitor!", $58
-; 0x843f6 + 14 bytes
 
 _SilphCo6AfterBattleText4: ; 84404 (21:4404)
 	db $0, "If you stand for", $4f
 	db "justice, you", $55
 	db "betray evil!", $57
-; 0x84404 + 44 bytes
 
 _UnnamedText_51dd3: ; 84430 (21:4430)
 	db $0, "Oh! Hi! You're", $4f
@@ -115755,7 +112139,6 @@ _UnnamedText_51dd3: ; 84430 (21:4430)
 	db "I want you to", $4f
 	db "have this #MON", $55
 	db "for saving us.", $58
-; 0x84430 + 110 bytes
 
 _UnnamedText_51dd8: ; 8449e (21:449e)
 	db $0, "It's LAPRAS. It's", $4f
@@ -115770,128 +112153,106 @@ _UnnamedText_51dd8: ; 8449e (21:449e)
 	db "It's a good", $4f
 	db "swimmer. It'll", $55
 	db "give you a lift!", $57
-; 0x8449e + 188 bytes
 
 _UnnamedText_51ddd: ; 8455a (21:455a)
 	db $0, "TEAM ROCKET's", $4f
 	db "BOSS went to the", $55
 	db "boardroom! Is our", $55
 	db "PRESIDENT OK?", $57
-; 0x8455a + 63 bytes
 
 _UnnamedText_51de2: ; 84599 (21:4599)
 	db $0, "Saved at last!", $4f
 	db "Thank you!", $57
-; 0x84599 + 27 bytes
 
 _UnnamedText_51e00: ; 845b4 (21:45b4)
 	db $0, "TEAM ROCKET was", $4f
 	db "after the MASTER", $55
 	db "BALL which will", $55
 	db "catch any #MON!", $57
-; 0x845b4 + 66 bytes
 
 _UnnamedText_51e05: ; 845f6 (21:45f6)
 	db $0, "We canceled the", $4f
 	db "MASTER BALL", $55
 	db "project because", $55
 	db "of TEAM ROCKET.", $57
-; 0x845f6 + 61 bytes
 
 _UnnamedText_51e23: ; 84633 (21:4633)
 	db $0, "It would be bad", $4f
 	db "if TEAM ROCKET", $55
 	db "took over SILPH", $55
 	db "or our #MON!", $57
-; 0x84633 + 61 bytes
 
 _UnnamedText_51e28: ; 84670 (21:4670)
 	db $0, "Wow! You chased", $4f
 	db "off TEAM ROCKET", $55
 	db "all by yourself?", $57
-; 0x84670 + 50 bytes
 
 _UnnamedText_51e46: ; 846a2 (21:46a2)
 	db $0, "You! It's really", $4f
 	db "dangerous here!", $55
 	db "You came to save", $55
 	db "me? You can't!", $57
-; 0x846a2 + 64 bytes
 
 _UnnamedText_51e4b: ; 846e2 (21:46e2)
 	db $0, "Safe at last!", $4f
 	db "Oh thank you!", $57
-; 0x846e2 + 29 bytes
 
 _SilphCo7BattleText1: ; 846ff (21:46ff)
 	db $0, "Oh ho! I smell a", $4f
 	db "little rat!", $57
-; 0x846ff + 30 bytes
 
 _SilphCo7EndBattleText1: ; 8471d (21:471d)
 	db $0, "Lights", $4f
 	db "out!", $58
-; 0x8471d + 13 bytes
 
 _SilphCo7AfterBattleText1: ; 8472a (21:472a)
 	db $0, "You won't find my", $4f
 	db "BOSS by just", $55
 	db "scurrying around!", $57
-; 0x8472a + 49 bytes
 
 _SilphCo7BattleText2: ; 8475b (21:475b)
 	db $0, "Heheh!", $51
 	db "You mistook me for", $4f
 	db "a SILPH worker?", $57
-; 0x8475b + 43 bytes
 
 _SilphCo7EndBattleText2: ; 84786 (21:4786)
 	db $0, "I'm", $4f
 	db "done!", $58
-; 0x84786 + 10 bytes
 
 _SilphCo7AfterBattleText2: ; 84790 (21:4790)
 	db $0, "Despite your age,", $4f
 	db "you are a skilled", $55
 	db "trainer!", $57
-; 0x84790 + 46 bytes
 
 _SilphCo7BattleText3: ; 847be (21:47be)
 	db $0, "I am one of the 4", $4f
 	db "ROCKET BROTHERS!", $57
-; 0x847be + 36 bytes
 
 _SilphCo7EndBattleText3: ; 847e2 (21:47e2)
 	db $0, "Aack!", $4f
 	db "Brothers, I lost!", $58
-; 0x847e2 + 25 bytes
 
 _SilphCo7AfterBattleText3: ; 847fb (21:47fb)
 	db $0, "Doesn't matter.", $4f
 	db "My brothers will", $55
 	db "repay the favor!", $57
-; 0x847fb + 50 bytes
 
 _SilphCo7BattleText4: ; 8482d (21:482d)
 	db $0, "A child intruder?", $4f
 	db "That must be you!", $57
-; 0x8482d + 37 bytes
 
 _SilphCo7EndBattleText4: ; 84852 (21:4852)
 	db $0, "Fine!", $4f
 	db "I lost!", $58
-; 0x84852 + 15 bytes
 
 _SilphCo7AfterBattleText4: ; 84861 (21:4861)
 	db $0, "Go on home", $4f
 	db "before my BOSS", $55
 	db "gets ticked off!", $57
-; 0x84861 + 44 bytes
 
 _UnnamedText_51ebe: ; 8488d (21:488d)
 	db $0, $53, ": What", $4f
 	db "kept you ", $52, "?", $57
-; 0x8488d + 21 bytes
 
 _UnnamedText_51ec3: ; 848a2 (21:48a2)
 	db $0, $53, ": Hahaha!", $4f
@@ -115906,13 +112267,11 @@ _UnnamedText_51ec3: ; 848a2 (21:48a2)
 	db "SAFFRON, so I", $55
 	db "decided to see if", $55
 	db "you got better!", $57
-; 0x848a2 + 168 bytes
 
 _UnnamedText_51ec8: ; 8494a (21:494a)
 	db $0, "Oh ho!", $4f
 	db "So, you are ready", $55
 	db "for BOSS ROCKET!", $58
-; 0x8494a + 43 bytes
 
 _UnnamedText_51ecd: ; 84975 (21:4975)
 	db $0, $53, ": How can", $4f
@@ -115920,7 +112279,6 @@ _UnnamedText_51ecd: ; 84975 (21:4975)
 	db "You're not good", $4f
 	db "enough to play", $55
 	db "with us big boys!", $58
-; 0x84975 + 72 bytes
 
 _UnnamedText_51ed2: ; 849bd (21:49bd)
 	db $0, "Well, ", $52, "!", $51
@@ -115942,170 +112300,138 @@ _UnnamedText_51ed2: ; 849bd (21:49bd)
 	db "good luck to you!", $55
 	db "Don't sweat it!", $55
 	db "Smell ya!", $57
-; 0x849bd + 263 bytes
 
 _UnnamedText_565be: ; 84ac4 (21:4ac4)
 	db $0, "I wonder if SILPH", $4f
 	db "is finished...", $57
-; 0x84ac4 + 34 bytes
 
 _UnnamedText_565c3: ; 84ae6 (21:4ae6)
 	db $0, "Thanks for saving", $4f
 	db "us!", $57
-; 0x84ae6 + 23 bytes
 
 _SilphCo8BattleText1: ; 84afd (21:4afd)
 	db $0, "That's as far as", $4f
 	db "you'll go!", $57
-; 0x84afd + 27 bytes
 
 _SilphCo8EndBattleText1: ; 84b18 (21:4b18)
 	db $0, "Not", $4f
 	db "enough grit!", $58
-; 0x84b18 + 18 bytes
 
 _SilphCo8AfterBattleText1: ; 84b2a (21:4b2a)
 	db $0, "If you don't turn", $4f
 	db "back, I'll call", $55
 	db "for backup!", $57
-; 0x84b2a + 45 bytes
 
 _SilphCo8BattleText2: ; 84b57 (21:4b57)
 	db $0, "You're causing us", $4f
 	db "problems!", $57
-; 0x84b57 + 28 bytes
 
 _SilphCo8EndBattleText2: ; 84b73 (21:4b73)
 	db $0, "Huh?", $4f
 	db "I lost?", $58
-; 0x84b73 + 14 bytes
 
 _SilphCo8AfterBattleText2: ; 84b81 (21:4b81)
 	db $0, "So, what do you", $4f
 	db "think of SILPH", $55
 	db "BUILDING's maze?", $57
-; 0x84b81 + 48 bytes
 
 _SilphCo8BattleText3: ; 84bb1 (21:4bb1)
 	db $0, "I am one of the 4", $4f
 	db "ROCKET BROTHERS!", $57
-; 0x84bb1 + 36 bytes
 
 _SilphCo8EndBattleText3: ; 84bd5 (21:4bd5)
 	db $0, "Whoo!", $4f
 	db "Oh brothers!", $58
-; 0x84bd5 + 20 bytes
 
 _SilphCo8AfterBattleText3: ; 84be9 (21:4be9)
 	db $0, "I'll leave you up", $4f
 	db "to my brothers!", $57
-; 0x84be9 + 34 bytes
 
 _UnnamedText_5d8e5: ; 84c0b (21:4c0b)
 	db $0, "You look tired!", $4f
 	db "You should take a", $55
 	db "quick nap!", $58
-; 0x84c0b + 46 bytes
 
 _UnnamedText_5d8ea: ; 84c39 (21:4c39)
 	db $0, "Don't give up!", $57
-; 0x84c39 + 15 bytes
 
 _UnnamedText_5d8ef: ; 84c48 (21:4c48)
 	db $0, "Thank you so", $4f
 	db "much!", $57
-; 0x84c48 + 20 bytes
 
 _SilphCo9BattleText1: ; 84c5c (21:4c5c)
 	db $0, "Your #MON seem", $4f
 	db "to adore you, kid!", $57
-; 0x84c5c + 35 bytes
 
 _SilphCo9EndBattleText1: ; 84c7f (21:4c7f)
 	db $0, "Ghaaah!", $58
-; 0x84c7f + 9 bytes
 
 _SilphCo9AfterBattleText1: ; 84c88 (21:4c88)
 	db $0, "If I had started", $4f
 	db "as a trainer at", $55
 	db "your age...", $57
-; 0x84c88 + 46 bytes
 
 _SilphCo9BattleText2: ; 84cb6 (21:4cb6)
 	db $0, "Your #MON have", $4f
 	db "weak points! I", $55
 	db "can nail them!", $57
-; 0x84cb6 + 46 bytes
 
 _SilphCo9EndBattleText2: ; 84ce4 (21:4ce4)
 	db $0, "You", $4f
 	db "hammered me!", $58
-; 0x84ce4 + 18 bytes
 
 _SilphCo9AfterBattleText2: ; 84cf6 (21:4cf6)
 	db $0, "Exploiting weak", $4f
 	db "spots does work!", $55
 	db "Think about", $55
 	db "element types!", $57
-; 0x84cf6 + 61 bytes
 
 _SilphCo9BattleText3: ; 84d33 (21:4d33)
 	db $0, "I am one of the 4", $4f
 	db "ROCKET BROTHERS!", $57
-; 0x84d33 + 36 bytes
 
 _SilphCo9EndBattleText3: ; 84d57 (21:4d57)
 	db $0, "Warg!", $4f
 	db "Brothers, I lost!", $58
-; 0x84d57 + 25 bytes
 
 _SilphCo9AfterBattleText3: ; 84d70 (21:4d70)
 	db $0, "My brothers will", $4f
 	db "avenge me!", $57
-; 0x84d70 + 29 bytes
 
 _UnnamedText_5a1d3: ; 84d8d (21:4d8d)
 	db $0, "Waaaaa!", $55
 	db "I'm scared!", $57
-; 0x84d8d + 20 bytes
 
 _UnnamedText_5a1d8: ; 84da1 (21:4da1)
 	db $0, "Please keep quiet", $4f
 	db "about my crying!", $57
-; 0x84da1 + 36 bytes
 
 _SilphCo10BattleText1: ; 84dc5 (21:4dc5)
 	db $0, "Welcome to the", $4f
 	db "10F! So good of", $55
 	db "you to join me!", $57
-; 0x84dc5 + 48 bytes
 
 _SilphCo10EndBattleText1: ; 84df5 (21:4df5)
 	db $0, "I'm", $4f
 	db "stunned!", $58
-; 0x84df5 + 13 bytes
 
 _SilphCo10AfterBattleText1: ; 84e02 (21:4e02)
 	db $0, "Nice try, but the", $4f
 	db "boardroom is up", $55
 	db "one more floor!", $57
-; 0x84e02 + 51 bytes
 
 _SilphCo10BattleText2: ; 84e35 (21:4e35)
 	db $0, "Enough of your", $4f
 	db "silly games!", $57
-; 0x84e35 + 29 bytes
 
 _SilphCo10EndBattleText2: ; 84e52 (21:4e52)
 	db $0, "No", $4f
 	db "continues left!", $58
-; 0x84e52 + 20 bytes
 
 _SilphCo10AfterBattleText2: ; 84e66 (21:4e66)
 	db $0, "Are you satisfied", $4f
 	db "with beating me?", $55
 	db "Then go on home!", $57
-; 0x84e66 + 53 bytes
 
 _SilphCoPresidentText: ; 84e9b (21:4e9b)
 	db $0, "PRESIDENT: Thank", $4f
@@ -116122,14 +112448,12 @@ _SilphCoPresidentText: ; 84e9b (21:4e9b)
 	db "anything!", $51
 	db "Here, maybe this", $4f
 	db "will do!", $58
-; 0x84e9b + 200 bytes
 
 _ReceivedSilphCoMasterBallText: ; 84f63 (21:4f63)
 	db $0, $52, " got a", $4f
 	db "@"
 	TX_RAM $cf4b
 	db $0, "!@@"
-; 0x84f74
 
 _UnnamedText_6231c: ; 84f74 (21:4f74)
 	db $0, "PRESIDENT: You", $4f
@@ -116144,12 +112468,10 @@ _UnnamedText_6231c: ; 84f74 (21:4f74)
 	db "You should be", $4f
 	db "quiet about using", $55
 	db "it, though.", $57
-; 0x84f74 + 159 bytes
 
 _SilphCoMasterBallNoRoomText: ; 85013 (21:5013)
 	db $0, "You have no", $4f
 	db "room for this.", $57
-; 0x85013 + 28 bytes
 
 _SilphCo11Text2: ; 8502f (21:502f)
 	db $0, "SECRETARY: Thank", $4f
@@ -116174,7 +112496,6 @@ _SilphCo11Text3: ; 85075 (21:5075)
 _UnnamedText_62330: ; 85119 (21:5119)
 	db $0, "Arrgh!!", $4f
 	db "I lost again!?", $58
-; 0x85119 + 24 bytes
 
 _UnnamedText_62335: ; 85131 (21:5131)
 	db $0, "Blast it all!", $4f
@@ -116188,61 +112509,50 @@ _UnnamedText_62335: ; 85131 (21:5131)
 	db "for TEAM ROCKET!", $51
 	db "I must go, but I", $4f
 	db "shall return!", $57
-; 0x85131 + 165 bytes
 
 _SilphCo11BattleText1: ; 851d6 (21:51d6)
 	db $0, "Stop right there!", $4f
 	db "Don't you move!", $57
-; 0x851d6 + 34 bytes
 
 _SilphCo11EndBattleText1: ; 851f8 (21:51f8)
 	db $0, "Don't...", $4f
 	db "Please!", $58
-; 0x851f8 + 17 bytes
 
 _SilphCo11AfterBattleText1: ; 85209 (21:5209)
 	db $0, "So, you want to", $4f
 	db "see my BOSS?", $57
-; 0x85209 + 30 bytes
 
 _SilphCo11BattleText2: ; 85227 (21:5227)
 	db $0, "Halt! Do you have", $4f
 	db "an appointment", $55
 	db "with my BOSS?", $57
-; 0x85227 + 48 bytes
 
 _SilphCo11EndBattleText2: ; 85257 (21:5257)
 	db $0, "Gaah!", $4f
 	db "Demolished!", $58
-; 0x85257 + 19 bytes
 
 _SilphCo11AfterBattleText2: ; 8526a (21:526a)
 	db $0, "Watch your step,", $4f
 	db "my BOSS likes his", $55
 	db "#MON tough!", $57
-; 0x8526a + 48 bytes
 
 _UnnamedText_6237b: ; 8529a (21:529a)
 	db $0, "The monitor has", $4f
 	db "#MON on it!", $57
-; 0x8529a + 29 bytes
 
 _Mansion2BattleText1: ; 852b7 (21:52b7)
 	db $0, "I can't get out!", $4f
 	db "This old place is", $55
 	db "one big puzzle!", $57
-; 0x852b7 + 51 bytes
 
 _Mansion2EndBattleText1: ; 852ea (21:52ea)
 	db $0, "Oh no!", $4f
 	db "My bag of loot!", $58
-; 0x852ea + 24 bytes
 
 _Mansion2AfterBattleText1: ; 85302 (21:5302)
 	db $0, "Switches open and", $4f
 	db "close alternating", $55
 	db "sets of doors!", $57
-; 0x85302 + 52 bytes
 
 _Mansion2Text3: ; 85336 (21:5336)
 	db $0, "Diary: July 5", $4f
@@ -116261,45 +112571,36 @@ _Mansion2Text4: ; 85389 (21:5389)
 _UnnamedText_520c2: ; 853c7 (21:53c7)
 	db $0, "A secret switch!", $51
 	db "Press it?", $57
-; 0x853c7 + 28 bytes
 
 _UnnamedText_520c7: ; 853e3 (21:53e3)
 	db $0, "Who wouldn't?", $58
-; 0x853e3 + 14 bytes
 
 _UnnamedText_520cc: ; 853f1 (21:53f1)
 	db $0, "Not quite yet!", $57
-; 0x853f1 + 16 bytes
 
 _Mansion3BattleText1: ; 85401 (21:5401)
 	db $0, "This place is", $4f
 	db "like, huge!", $57
-; 0x85401 + 27 bytes
 
 _Mansion3EndBattleText1: ; 8541c (21:541c)
 	db $0, "Ayah!", $58
-; 0x8541c + 7 bytes
 
 _Mansion3AfterBattleText1: ; 85423 (21:5423)
 	db $0, "I wonder where", $4f
 	db "my partner went.", $57
-; 0x85423 + 33 bytes
 
 _Mansion3BattleText2: ; 85444 (21:5444)
 	db $0, "My mentor once", $4f
 	db "lived here.", $57
-; 0x85444 + 28 bytes
 
 _Mansion3EndBattleText2: ; 85460 (21:5460)
 	db $0, "Whew!", $4f
 	db "Overwhelming!", $58
-; 0x85460 + 21 bytes
 
 _Mansion3AfterBattleText2: ; 85475 (21:5475)
 	db $0, "So, you're stuck?", $4f
 	db "Try jumping off", $55
 	db "over there!", $57
-; 0x85475 + 46 bytes
 
 _Mansion3Text5: ; 854a3 (21:54a3)
 	db $0, "Diary: Feb. 6", $4f
@@ -116310,32 +112611,26 @@ _Mansion3Text5: ; 854a3 (21:54a3)
 _Mansion4BattleText1: ; 854df (21:54df)
 	db $0, "Uh-oh. Where am", $4f
 	db "I now?", $57
-; 0x854df + 24 bytes
 
 _Mansion4EndBattleText1: ; 854f7 (21:54f7)
 	db $0, "Awooh!", $58
-; 0x854f7 + 8 bytes
 
 _Mansion4AfterBattleText1: ; 854ff (21:54ff)
 	db $0, "You can find stuff", $4f
 	db "lying around.", $57
-; 0x854ff + 34 bytes
 
 _Mansion4BattleText2: ; 85521 (21:5521)
 	db $0, "This place is", $4f
 	db "ideal for a lab.", $57
-; 0x85521 + 32 bytes
 
 _Mansion4EndBattleText2: ; 85541 (21:5541)
 	db $0, "What", $4f
 	db "was that for?", $58
-; 0x85541 + 20 bytes
 
 _Mansion4AfterBattleText2: ; 85555 (21:5555)
 	db $0, "I like it here!", $4f
 	db "It's conducive to", $55
 	db "my studies!", $57
-; 0x85555 + 46 bytes
 
 _Mansion4Text7: ; 85583 (21:5583)
 	db $0, "Diary; Sept. 1", $4f
@@ -116437,14 +112732,12 @@ _UnnamedText_4a350: ; 858a4 (21:58a4)
 	db "campaign prize.", $51
 	db "Congratulations!", $4f
 	db "You have won!", $58
-; 0x858a4 + 159 bytes
 
 _ReceivedHM03Text: ; 85943 (21:5943)
 	db $0, $52, " received", $4f
 	db "@"
 	TX_RAM $cf4b
 	db $0, "!@@"
-; 0x85957
 
 _HM03ExplanationText: ; 85957 (21:5957)
 	db $0, "HM03 is SURF!", $51
@@ -116458,13 +112751,11 @@ _HM03ExplanationText: ; 85957 (21:5957)
 	db "You're super lucky", $4f
 	db "for winning this", $55
 	db "fabulous prize!", $57
-; 0x85957 + 171 bytes
 
 _HM03NoRoomText: ; 85a02 (21:5a02)
 	db $0, "You don't have", $4f
 	db "room for this", $55
 	db "fabulous prize!", $57
-; 0x85a02 + 45 bytes
 
 _SafariZoneRestHouse2Text1: ; 85a2f (21:5a2f)
 	db $0, "Tossing ROCKs at", $4f
@@ -116523,39 +112814,32 @@ _SafariZoneRestHouse4Text3: ; 85c17 (21:5c17)
 
 _UnknownDungeon3MewtwoText: ; 85c72 (21:5c72)
 	db $0, "Mew!@@"
-; 0x85c79
 
 _VictoryRoad1BattleText1: ; 85c79 (21:5c79)
 	db $0, "I wonder if you", $4f
 	db "are good enough", $55
 	db "for me!", $57
-; 0x85c79 + 41 bytes
 
 _VictoryRoad1EndBattleText1: ; 85ca2 (21:5ca2)
 	db $0, "I", $4f
 	db "lost out!", $58
-; 0x85ca2 + 13 bytes
 
 _VictoryRoad1AfterBattleText1: ; 85caf (21:5caf)
 	db $0, "I never wanted to", $4f
 	db "lose to anybody!", $57
-; 0x85caf + 36 bytes
 
 _VictoryRoad1BattleText2: ; 85cd3 (21:5cd3)
 	db $0, "I can see you're", $4f
 	db "good! Let me see", $55
 	db "exactly how good!", $57
-; 0x85cd3 + 52 bytes
 
 _VictoryRoad1EndBattleText2: ; 85d07 (21:5d07)
 	db $0, "I", $4f
 	db "had a chance...", $58
-; 0x85d07 + 19 bytes
 
 _VictoryRoad1AfterBattleText2: ; 85d1a (21:5d1a)
 	db $0, "I concede, you're", $4f
 	db "better than me!", $57
-; 0x85d1a + 34 bytes
 
 _LanceBeforeBattleText: ; 85d3c (21:5d3c)
 	db $0, "Ah! I heard about", $4f
@@ -116578,14 +112862,12 @@ _LanceBeforeBattleText: ; 85d3c (21:5d3c)
 	db "Your LEAGUE", $4f
 	db "challenge ends", $55
 	db "with me, ", $52, "!", $57
-; 0x85d3c + 296 bytes
 
 _LanceEndBattleText: ; 85e64 (21:5e64)
 	db $0, "That's it!", $51
 	db "I hate to admit", $4f
 	db "it, but you are a", $55
 	db "#MON master!", $58
-; 0x85e64 + 58 bytes
 
 _LanceAfterBattleText: ; 85e9e (21:5e9e)
 	db $0, "I still can't", $4f
@@ -116608,7 +112890,6 @@ _LanceAfterBattleText: ; 85e9e (21:5e9e)
 	db "He is the real", $4f
 	db "#MON LEAGUE", $55
 	db "champion!@@"
-; 0x85e9e + 279 bytes = 0x85fb5
 
 _HallofFameRoomText1: ; 85fb5 (21:5fb5)
 	db $0, "OAK: Er-hem!", $4f
@@ -116659,7 +112940,6 @@ _UnnamedText_760f4: ; 860e1 (21:60e1)
 	db "I am the most", $4f
 	db "powerful trainer", $55
 	db "in the world!", $57
-; 0x860e1 + 346 bytes
 
 _UnnamedText_760f9: ; 8623b (21:623b)
 	db $0, "NO!", $4f
@@ -116671,7 +112951,6 @@ _UnnamedText_760f9: ; 8623b (21:623b)
 	db "My reign is over", $4f
 	db "already?", $55
 	db "It's not fair!", $58
-; 0x8623b + 121 bytes
 
 _UnnamedText_760fe: ; 862b4 (21:62b4)
 	db $0, "Hahaha!", $4f
@@ -116684,7 +112963,6 @@ _UnnamedText_760fe: ; 862b4 (21:62b4)
 	db "#MON genius!", $51
 	db "Nice try, loser!", $4f
 	db "Hahaha!", $58
-; 0x862b4 + 123 bytes
 
 _UnnamedText_76103: ; 8632f (21:632f)
 	db $0, "Why?", $4f
@@ -116697,7 +112975,6 @@ _UnnamedText_76103: ; 8632f (21:632f)
 	db "LEAGUE champion!", $51
 	db "Although I don't", $4f
 	db "like to admit it.", $57
-; 0x8632f + 146 bytes
 
 _GaryText2: ; 863c1 (21:63c1)
 	db $0, "OAK: ", $52, "!", $57
@@ -116716,7 +112993,6 @@ _UnnamedText_76120: ; 863ca (21:63ca)
 	db $0, "!", $51
 	db $52, ", you have", $4f
 	db "come of age!", $57
-; 0xa86463
 
 _UnnamedText_76125: ; 86463 (21:6463)
 	db $0, "OAK: ", $53, "! I'm", $4f
@@ -116737,7 +113013,6 @@ _UnnamedText_76125: ; 86463 (21:6463)
 	db "Without them, you", $4f
 	db "will never become", $55
 	db "a champ again!", $57
-; 0x86463 + 260 bytes
 
 _UnnamedText_7612a: ; 86567 (21:6567)
 	db $0, "OAK: ", $52, "!", $51
@@ -116750,7 +113025,6 @@ _UnnamedText_7612a: ; 86567 (21:6567)
 	db "is marvelous!", $51
 	db $52, "!", $4f
 	db "Come with me!", $57
-; 0x86567 + 136 bytes
 
 _LoreleiBeforeBattleText: ; 865ef (21:65ef)
 	db $0, "Welcome to", $4f
@@ -116768,12 +113042,10 @@ _LoreleiBeforeBattleText: ; 865ef (21:65ef)
 	db "frozen solid!", $51
 	db "Hahaha!", $4f
 	db "Are you ready?", $57
-; 0x865ef + 213 bytes
 
 _LoreleiEndBattleText: ; 866c4 (21:66c4)
 	db $0, "How", $4f
 	db "dare you!", $58
-; 0x866c4 + 15 bytes
 
 _LoreleiAfterBattleText: ; 866d3 (21:66d3)
 	db $0, "You're better", $4f
@@ -116782,12 +113054,10 @@ _LoreleiAfterBattleText: ; 866d3 (21:66d3)
 	db "You only got a", $4f
 	db "taste of #MON", $55
 	db "LEAGUE power!", $57
-; 0x866d3 + 86 bytes
 
 _UnnamedText_7627b: ; 86729 (21:6729)
 	db $0, "Someone's voice:", $4f
 	db "Don't run away!", $57
-; 0x86729 + 32 bytes
 
 _BrunoBeforeBattleText: ; 86749 (21:6749)
 	db $0, "I am BRUNO of", $4f
@@ -116804,23 +113074,19 @@ _BrunoBeforeBattleText: ; 86749 (21:6749)
 	db "down with our", $55
 	db "superior power!", $51
 	db "Hoo hah!", $57
-; 0x86749 + 188 bytes
 
 _BrunoEndBattleText: ; 86805 (21:6805)
 	db $0, "Why?", $4f
 	db "How could I lose?", $58
-; 0x86805 + 24 bytes
 
 _BrunoAfterBattleText: ; 8681d (21:681d)
 	db $0, "My job is done!", $4f
 	db "Go face your next", $55
 	db "challenge!", $57
-; 0x8681d + 46 bytes
 
 _UnnamedText_763d2: ; 8684b (21:684b)
 	db $0, "Someone's voice:", $4f
 	db "Don't run away!", $57
-; 0x8684b + 32 bytes
 
 _AgathaBeforeBattleText: ; 8686b (21:686b)
 	db $0, "I am AGATHA of", $4f
@@ -116840,13 +113106,11 @@ _AgathaBeforeBattleText: ; 8686b (21:686b)
 	db $52, "! I'll show", $4f
 	db "you how a real", $55
 	db "trainer fights!", $57
-; 0x8686b + 261 bytes
 
 _AgathaEndBattleText: ; 86970 (21:6970)
 	db $0, "Oh ho!", $4f
 	db "You're something", $55
 	db "special, child!", $58
-; 0x86970 + 40 bytes
 
 _AgathaAfterBattleText: ; 86998 (21:6998)
 	db $0, "You win! I see", $4f
@@ -116855,121 +113119,99 @@ _AgathaAfterBattleText: ; 86998 (21:6998)
 	db "I have nothing", $4f
 	db "else to say! Run", $55
 	db "along now, child!", $57
-; 0x86998 + 101 bytes
 
 _AgathaText2: ; 869fd (21:69fd)
 	db $0, "Someone's voice:", $4f
 	db "Don't run away!", $57
-; 0x869fd + 32 bytes
 
 _RockTunnel2BattleText2: ; 86a1d (21:6a1d)
 	db $0, "Hikers leave twigs", $4f
 	db "as trail markers.", $57
-; 0x86a1d + 38 bytes
 
 _RockTunnel2EndBattleText2: ; 86a43 (21:6a43)
 	db $0, "Ohhh!", $4f
 	db "I did my best!", $58
-; 0x86a43 + 22 bytes
 
 _RockTunnel2AfterBattleText2: ; 86a59 (21:6a59)
 	db $0, "I want to go ", $4f
 	db "home!", $57
-; 0x86a59 + 21 bytes
 
 _RockTunnel2BattleText3: ; 86a6e (21:6a6e)
 	db $0, "Hahaha! Can you", $4f
 	db "beat my power?", $57
-; 0x86a6e + 32 bytes
 
 _RockTunnel2EndBattleText3: ; 86a8e (21:6a8e)
 	db $0, "Oops!", $4f
 	db "Out-muscled!", $58
-; 0x86a8e + 20 bytes
 
 _RockTunnel2AfterBattleText3: ; 86aa2 (21:6aa2)
 	db $0, "I go for power", $4f
 	db "because I hate", $55
 	db "thinking!", $57
-; 0x86aa2 + 41 bytes
 
 _RockTunnel2BattleText4: ; 86acb (21:6acb)
 	db $0, "You have a", $4f
 	db "#DEX?", $55
 	db "I want one too!", $57
-; 0x86acb + 34 bytes
 
 _RockTunnel2EndBattleText4: ; 86aed (21:6aed)
 	db $0, "Shoot!", $4f
 	db "I'm so jealous!", $58
-; 0x86aed + 23 bytes
 
 _RockTunnel2AfterBattleText4: ; 86b04 (21:6b04)
 	db $0, "When you finish", $4f
 	db "your #DEX, can", $55
 	db "I have it?", $57
-; 0x86b04 + 43 bytes
 
 _RockTunnel2BattleText5: ; 86b2f (21:6b2f)
 	db $0, "Do you know about", $4f
 	db "costume players?", $57
-; 0x86b2f + 36 bytes
 
 _RockTunnel2EndBattleText5: ; 86b53 (21:6b53)
 	db $0, "Well,", $4f
 	db "that's that.", $58
-; 0x86b53 + 19 bytes
 
 _RockTunnel2AfterBattleText5: ; 86b66 (21:6b66)
 	db $0, "Costume players", $4f
 	db "dress up as", $55
 	db "#MON for fun.", $57
-; 0x86b66 + 43 bytes
 
 _RockTunnel2BattleText6: ; 86b91 (21:6b91)
 	db $0, "My #MON", $4f
 	db "techniques will", $55
 	db "leave you crying!", $57
-; 0x86b91 + 43 bytes
 
 _RockTunnel2EndBattleText6: ; 86bbc (21:6bbc)
 	db $0, "I give!", $4f
 	db "You're a better", $55
 	db "technician!", $58
-; 0x86bbc + 36 bytes
 
 _RockTunnel2AfterBattleText6: ; 86be0 (21:6be0)
 	db $0, "In mountains,", $4f
 	db "you'll often find", $55
 	db "rock-type #MON.", $57
-; 0x86be0 + 48 bytes
 
 _RockTunnel2BattleText7: ; 86c10 (21:6c10)
 	db $0, "I don't often", $4f
 	db "come here, but I", $55
 	db "will fight you.", $57
-; 0x86c10 + 47 bytes
 
 _RockTunnel2EndBattleText7: ; 86c3f (21:6c3f)
 	db $0, "Oh!", $4f
 	db "I lost!", $58
-; 0x86c3f + 13 bytes
 
 _RockTunnel2AfterBattleText7: ; 86c4c (21:6c4c)
 	db $0, "I like tiny", $4f
 	db "#MON, big ones", $55
 	db "are too scary!", $57
-; 0x86c4c + 43 bytes
 
 _RockTunnel2BattleText8: ; 86c77 (21:6c77)
 	db $0, "Hit me with your", $4f
 	db "best shot!", $57
-; 0x86c77 + 29 bytes
 
 _RockTunnel2EndBattleText8: ; 86c94 (21:6c94)
 	db $0, "Fired", $4f
 	db "away!", $58
-; 0x86c94 + 13 bytes
 
 SECTION "bank22",ROMX,BANK[$22]
 
@@ -116977,22 +113219,18 @@ _RockTunnel2AfterBattleText8: ; 88000 (22:4000)
 	db $0, "I'll raise my", $4f
 	db "#MON to beat", $55
 	db "yours, kid!", $57
-; 0x88000 + 39 bytes
 
 _RockTunnel2BattleText9: ; 88027 (22:4027)
 	db $0, "I draw #MON", $4f
 	db "when I'm home.", $57
-; 0x88027 + 27 bytes
 
 _RockTunnel2EndBattleText9: ; 88042 (22:4042)
 	db $0, "Whew!", $4f
 	db "I'm exhausted!", $58
-; 0x88042 + 21 bytes
 
 _RockTunnel2AfterBattleText9: ; 88057 (22:4057)
 	db $0, "I'm an artist,", $4f
 	db "not a fighter.", $57
-; 0x88057 + 30 bytes
 
 _SeafoamIslands5BattleText2: ; 88075 (22:4075)
 	db $0, "Gyaoo!@@"
@@ -117027,14 +113265,12 @@ _UnnamedText_4160c: ; 880ef (22:40ef)
 	db "to @"
 	TX_RAM $d887
 	db $0, ".", $57
-; 0x88103
 
 _UnnamedText_41623: ; 88103 (22:4103)
 	db $0, "For ", $52, "'s", $4f
 	db "@"
 	TX_RAM $cf4b
 	db $0, ",", $57
-; 0x88112
 
 _UnnamedText_41628: ; 88112 (22:4112)
 	TX_RAM $d887
@@ -117042,7 +113278,6 @@ _UnnamedText_41628: ; 88112 (22:4112)
 	db "@"
 	TX_RAM $cd6d
 	db $0, ".", $57
-; 0x88124
 
 _UnnamedText_41642: ; 88124 (22:4124)
 	TX_RAM $d887
@@ -117053,23 +113288,19 @@ _UnnamedText_41647: ; 8813b (22:413b)
 	TX_RAM $cd6d
 	db $0, " is", $4f
 	db "transferred.", $57
-; 0x8813b + 21 bytes
 
 _UnnamedText_41655: ; 88150 (22:4150)
 	db $0, "Take good care of", $4f
 	db "@"
-; 0x88150 + 20 bytes
 
 UnnamedText_88164: ; 88164 (22:4164)
 	TX_RAM $cd6d
 	db $0, ".", $57
-; 0x8816a
 
 _UnnamedText_4166c: ; 8816a (22:416a)
 	TX_RAM $d887
 	db $0, " will", $4f
 	db "trade @"
-; 0x8816a + 17 bytes
 
 UnnamedText_8817b: ; 8817b (22:417b)
 	TX_RAM $cd6d
@@ -117080,58 +113311,46 @@ _UnnamedText_41671: ; 88180 (22:4180)
 	db "@"
 	TX_RAM $cf4b
 	db $0, ".", $57
-; 0x8818f
 
 _UnnamedText_37390: ; 8818f (22:418f)
 	db $0, "A slot machine!", $4f
 	db "Want to play?", $57
-; 0x8818f + 31 bytes
 
 _UnnamedText_37467: ; 881ae (22:41ae)
 	db $0, "Darn!", $4f
 	db "Ran out of coins!", $57
-; 0x881ae + 25 bytes
 
 _UnnamedText_3746c: ; 881c7 (22:41c7)
 	db $0, "Bet how many", $4f
 	db "coins?", $57
-; 0x881c7 + 21 bytes
 
 _UnnamedText_37471: ; 881dc (22:41dc)
 	db $0, "Start!", $57
-; 0x881dc + 8 bytes
 
 _UnnamedText_37476: ; 881e4 (22:41e4)
 	db $0, "Not enough", $4f
 	db "coins!", $58
-; 0x881e4 + 19 bytes
 
 _UnnamedText_3747b: ; 881f7 (22:41f7)
 	db $0, "One more ", $4f
 	db "go?", $57
-; 0x881f7 + 15 bytes
 
 _UnnamedText_37673: ; 88206 (22:4206)
 	db $0, " lined up!", $4f
 	db "Scored @"
-; 0x88206 + 20 bytes
 
 UnnamedText_8821a: ; 8821a (22:421a)
 	TX_RAM $cf4b
 	db $0, " coins!", $57
-; 0x88226
 
 _UnnamedText_3769d: ; 88226 (22:4226)
 	db $0, "Not this time!", $58
-; 0x88226 + 16 bytes
 
 UnnamedText_88236: ; 88236 (22:4236)
 	db $0, "Yeah!@@"
-; 0x8823e
 
 _UnnamedText_703fa: ; 8823e (22:423e)
 	db $0, "#DEX   Seen:@"
-; 0x8823e + 14 bytes
 
 UnnamedText_8824c: ; 8824c (22:424c)
 	TX_NUM $cc5b, 1, 3
@@ -117139,32 +113358,27 @@ UnnamedText_8824c: ; 8824c (22:424c)
 	db "         Owned:@"
 	TX_NUM $cc5c, 1, 3
 	db "@"
-; 0x88267
 
 _UnnamedText_703ff: ; 88267 (22:4267)
 	db $0, "#DEX Rating", $6d, $57
-; 0x88267 + 14 bytes
 
 _UnnamedText_62453: ; 88275 (22:4275)
 	TX_RAM W_GYMCITYNAME
 	db $0, $4f
 	db "#MON GYM", $55
 	db "LEADER: @"
-; 0x88275 + 23 bytes
 
 UnnamedText_8828c: ; 8828c (22:428c)
 	TX_RAM W_GYMLEADERNAME
 	db $0, $51
 	db "WINNING TRAINERS:", $4f
 	db $53, $57
-; 0x882a5
 
 _UnnamedText_62458: ; 882a5 (22:42a5)
 	TX_RAM W_GYMCITYNAME
 	db $0, $4f
 	db "#MON GYM", $55
 	db "LEADER: @"
-; 0x882a5 + 23 bytes
 
 UnnamedText_882bc: ; 882bc (22:42bc)
 	TX_RAM W_GYMLEADERNAME
@@ -117172,14 +113386,12 @@ UnnamedText_882bc: ; 882bc (22:42bc)
 	db "WINNING TRAINERS:", $4f
 	db $53, $55
 	db $52, $57
-; 0x882d7
 
 _UnnamedText_624a3: ; 882d7 (22:42d7)
 	db $0, "#MON CENTERs", $4f
 	db "heal your tired,", $55
 	db "hurt or fainted", $55
 	db "#MON!", $57
-; 0x882d7 + 53 bytes
 
 _UnnamedText_624a8: ; 8830c (22:430c)
 	db $0, "Yawn!", $51
@@ -117188,50 +113400,42 @@ _UnnamedText_624a8: ; 8830c (22:430c)
 	db "get drowsy...", $51
 	db "...Me too...", $4f
 	db "Snore...", $57
-; 0x8830c + 71 bytes
 
 _UnnamedText_624ad: ; 88353 (22:4353)
 	db $0, "BILL has lots of", $4f
 	db "#MON!", $51
 	db "He collects rare", $4f
 	db "ones too!", $57
-; 0x88353 + 51 bytes
 
 _UnnamedText_624b2: ; 88386 (22:4386)
 	db $0, "CUBONEs wear", $4f
 	db "skulls, right?", $51
 	db "People will pay a", $4f
 	db "lot for one!", $57
-; 0x88386 + 60 bytes
 
 _UnnamedText_624b7: ; 883c2 (22:43c2)
 	db $0, "If you have too", $4f
 	db "many #MON, you", $55
 	db "should store them", $55
 	db "via PC!", $57
-; 0x883c2 + 58 bytes
 
 _UnnamedText_624bc: ; 883fc (22:43fc)
 	db $0, "I heard that", $4f
 	db "GHOSTs haunt", $55
 	db "LAVENDER TOWN!", $57
-; 0x883fc + 42 bytes
 
 _UnnamedText_624c1: ; 88426 (22:4426)
 	db $0, "I wish I could", $4f
 	db "catch #MON.", $57
-; 0x88426 + 28 bytes
 
 _UnnamedText_624c6: ; 88442 (22:4442)
 	db $0, "I'm tired from", $4f
 	db "all the fun...", $57
-; 0x88442 + 30 bytes
 
 _UnnamedText_624cb: ; 88460 (22:4460)
 	db $0, "SILPH's manager", $4f
 	db "is hiding in the", $55
 	db "SAFARI ZONE.", $57
-; 0x88460 + 46 bytes
 
 _UnnamedText_624d0: ; 8848e (22:448e)
 	db $0, "It is true that a", $4f
@@ -117245,13 +113449,11 @@ _UnnamedText_624d0: ; 8848e (22:448e)
 	db "So, there is no", $4f
 	db "universally", $55
 	db "strong #MON.", $57
-; 0x8848e + 163 bytes
 
 _UnnamedText_624d5: ; 88531 (22:4531)
 	db $0, "If I had a BIKE,", $4f
 	db "I would go to", $55
 	db "CYCLING ROAD!", $57
-; 0x88531 + 46 bytes
 
 _UnnamedText_624da: ; 8855f (22:455f)
 	db $0, "If you're studying ", $4f
@@ -117259,7 +113461,6 @@ _UnnamedText_624da: ; 8855f (22:455f)
 	db "the SAFARI ZONE.", $51
 	db "It has all sorts", $4f
 	db "of rare #MON.", $57
-; 0x8855f + 80 bytes
 
 _UnnamedText_624df: ; 885af (22:45af)
 	db $0, "#MON can still", $4f
@@ -117269,64 +113470,53 @@ _UnnamedText_624df: ; 885af (22:45af)
 	db "Evolution can wait", $4f
 	db "until new moves", $55
 	db "have been learned.", $57
-; 0x885af + 114 bytes
 
 _UnnamedText_624f8: ; 88621 (22:4621)
 	db $0, "It would be great", $4f
 	db "if the ELITE FOUR", $55
 	db "came and stomped", $55
 	db "TEAM ROCKET!", $57
-; 0x88621 + 67 bytes
 
 _UnnamedText_624fd: ; 88664 (22:4664)
 	db $0, "TEAM ROCKET took", $4f
 	db "off! We can go", $55
 	db "out safely again!", $55
 	db "That's great!", $57
-; 0x88664 + 64 bytes
 
 _UnnamedText_62502: ; 886a4 (22:46a4)
 	db $0, "My sis brought me", $4f
 	db "on this vacation!", $57
-; 0x886a4 + 37 bytes
 
 _UnnamedText_62511: ; 886c9 (22:46c9)
 	db $0, "Crammed full of", $4f
 	db "#MON books!", $57
-; 0x886c9 + 29 bytes
 
 _UnnamedText_1e953: ; 886e6 (22:46e6)
 	db $0, "A shiny new", $4f
 	db "BICYCLE!", $57
-; 0x886e6 + 22 bytes
 
 _UnnamedText_1e960: ; 886fc (22:46fc)
 	db $0, "Push START to", $4f
 	db "open the MENU!", $57
-; 0x886fc + 30 bytes
 
 _UnnamedText_1e97e: ; 8871a (22:471a)
 	db $0, "The SAVE option is", $4f
 	db "on the MENU", $55
 	db "screen.", $57
-; 0x8871a + 40 bytes
 
 _UnnamedText_1e983: ; 88742 (22:4742)
 	db $0, "All #MON types", $4f
 	db "have strong and", $55
 	db "weak points", $55
 	db "against others.", $57
-; 0x88742 + 60 bytes
 
 _UnnamedText_1ea0d: ; 8877e (22:477e)
 	db $0, "PA: Ding-dong!", $51
 	db "Time's up!", $58
-; 0x8877e + 26 bytes
 
 _UnnamedText_1ea12: ; 88798 (22:4798)
 	db $0, "PA: Your SAFARI", $4f
 	db "GAME is over!", $57
-; 0x88798 + 31 bytes
 
 _UnnamedText_1ea5b: ; 887b7 (22:47b7)
 	db $0, "#MON Quiz!", $51
@@ -117341,80 +113531,66 @@ _UnnamedText_1ea5b: ; 887b7 (22:47b7)
 	db "GYM LEADER...", $51
 	db "Then get it right!", $4f
 	db "Here we go!", $58
-; 0x887b7 + 182 bytes
 
 _UnnamedText_1ea6c: ; 8886d (22:486d)
 	db $0, "CATERPIE evolves", $4f
 	db "into BUTTERFREE?", $57
-; 0x8886d + 35 bytes
 
 _UnnamedText_1ea71: ; 88890 (22:4890)
 	db $0, "There are 9", $4f
 	db "certified #MON", $55
 	db "LEAGUE BADGEs?", $57
-; 0x88890 + 43 bytes
 
 _UnnamedText_1ea76: ; 888bb (22:48bb)
 	db $0, "POLIWAG evolves 3", $4f
 	db "times?", $57
-; 0x888bb + 26 bytes
 
 _UnnamedText_1ea7b: ; 888d5 (22:48d5)
 	db $0, "Are thunder moves", $4f
 	db "effective against", $55
 	db "ground element-", $55
 	db "type #MON?", $57
-; 0x888d5 + 64 bytes
 
 _UnnamedText_1ea80: ; 88915 (22:4915)
 	db $0, "#MON of the", $4f
 	db "same kind and", $55
 	db "level are not", $55
 	db "identical?", $57
-; 0x88915 + 52 bytes
 
 _UnnamedText_1ea85: ; 88949 (22:4949)
 	db $0, "TM28 contains", $4f
 	db "TOMBSTONER?", $57
-; 0x88949 + 27 bytes
 
 _UnnamedText_1eae3: ; 88964 (22:4964)
 	db $0, "You're absolutely", $4f
 	db "correct!", $51
 	db "Go on through!@@"
-; 0x8898f
 
 _UnnamedText_1eb05: ; 8898f (22:498f)
 	db $0, "Sorry! Bad call!", $58
-; 0x8898f + 18 bytes
 
 _UnnamedText_1eb69: ; 889a1 (22:49a1)
 	db $0, "#MON magazines!", $51
 	db "#MON notebooks!", $51
 	db "#MON graphs!", $57
-; 0x889a1 + 46 bytes
 
 _UnnamedText_1ebdd: ; 889cf (22:49cf)
 	db $0, "TELEPORTER is", $4f
 	db "displayed on the", $55
 	db "PC monitor.", $57
-; 0x889cf + 44 bytes
 
 _UnnamedText_1ebe2: ; 889fb (22:49fb)
 	db $0, $52, " initiated", $4f
 	db "TELEPORTER's Cell", $55
 	db "Separator!@@"
-; 0x88a25
 
 _UnnamedText_1ec7f: ; 88a25 (22:4a25)
 	db $0, "BILL's favorite", $4f
 	db "#MON list!", $58
-; 0x88a25 + 27 bytes
 
 _UnnamedText_1ecaa: ; 88a40 (22:4a40)
 	db $0, "Which #MON do", $4f
 	db "you want to see?", $57
-; 0x88a40 + 32 bytes
 
 _UnnamedText_1ecbd: ; 88a60 (22:4a60)
 	db $0, "There's an e-mail", $4f
@@ -117435,36 +113611,29 @@ _UnnamedText_1ecbd: ; 88a60 (22:4a60)
 	db "PS: PROF.OAK,", $4f
 	db "please visit us!", $55
 	db "...", $57
-; 0x88a60 + 251 bytes
 
 _UnnamedText_2ff32: ; 88b5b (22:4b5b)
 	db $0, "A COIN CASE is", $4f
 	db "required!", $57
-; 0x88b5b + 26 bytes
 
 _UnnamedText_2ff37: ; 88b75 (22:4b75)
 	db $0, "You don't have", $4f
 	db "any coins!", $57
-; 0x88b75 + 26 bytes
 
 _UnnamedText_37e79: ; 88b8f (22:4b8f)
 	db $0, "OUT OF ORDER", $4f
 	db "This is broken.", $57
-; 0x88b8f + 30 bytes
 
 _UnnamedText_37e7e: ; 88bad (22:4bad)
 	db $0, "OUT TO LUNCH", $4f
 	db "This is reserved.", $57
-; 0x88bad + 32 bytes
 
 _UnnamedText_37e83: ; 88bcd (22:4bcd)
 	db $0, "Someone's keys!", $4f
 	db "They'll be back.", $57
-; 0x88bcd + 32 bytes
 
 _UnnamedText_21865: ; 88bed (22:4bed)
 	db $0, "Just a moment.", $57
-; 0x88bed + 16 bytes
 
 UnnamedText_88bfd: ; 88bfd (22:4bfd)
 	db $0, "It's a pamphlet", $4f
@@ -117476,16 +113645,13 @@ UnnamedText_88bfd: ; 88bfd (22:4bfd)
 	db "HMs that can be", $55
 	db "used repeatedly.", $51
 	db "SILPH CO.@@"
-; 0x88c6f
 
 _UnnamedText_529e9: ; 88c6f (22:4c6f)
 	db $0, "Turn the page?", $57
-; 0x88c6f + 16 bytes
 
 UnnamedText_88c7f: ; 88c7f (22:4c7f)
 	db $0, "GIRL: Hey! Don't", $4f
 	db "look at my notes!@@"
-; 0x88ca3
 
 _UnnamedText_529f4: ; 88ca3 (22:4ca3)
 	db $0, "Looked at the", $4f
@@ -117500,7 +113666,6 @@ _UnnamedText_529f4: ; 88ca3 (22:4ca3)
 	db "and make #MON", $55
 	db "fight are called", $55
 	db "#MON trainers.", $58
-; 0x88ca3 + 163 bytes
 
 _UnnamedText_529f9: ; 88d46 (22:4d46)
 	db $0, "Second page...", $51
@@ -117511,7 +113676,6 @@ _UnnamedText_529f9: ; 88d46 (22:4d46)
 	db "Poison, burns and", $4f
 	db "other damage are", $55
 	db "effective!", $58
-; 0x88d46 + 119 bytes
 
 _UnnamedText_529fe: ; 88dbd (22:4dbd)
 	db $0, "Third page...", $51
@@ -117522,7 +113686,6 @@ _UnnamedText_529fe: ; 88dbd (22:4dbd)
 	db "Battles are", $4f
 	db "constantly fought", $55
 	db "at #MON GYMs.", $58
-; 0x88dbd + 111 bytes
 
 _UnnamedText_52a03: ; 88e2c (22:4e2c)
 	db $0, "Fourth page...", $51
@@ -117535,33 +113698,27 @@ _UnnamedText_52a03: ; 88e2c (22:4e2c)
 	db "right to face...", $51
 	db "The ELITE FOUR of", $4f
 	db "#MON LEAGUE!", $58
-; 0x88e2c + 149 bytes
 
 _UnnamedText_52a10: ; 88ec1 (22:4ec1)
 	db $0, "Enemies on every", $4f
 	db "side!", $57
-; 0x88ec1 + 24 bytes
 
 _UnnamedText_52a1d: ; 88ed9 (22:4ed9)
 	db $0, "What goes around", $4f
 	db "comes around!", $57
-; 0x88ed9 + 32 bytes
 
 _UnnamedText_52a2a: ; 88ef9 (22:4ef9)
 	db $0, "FIGHTING DOJO", $57
-; 0x88ef9 + 15 bytes
 
 _UnnamedText_52a3d: ; 88f08 (22:4f08)
 	db $0, "INDIGO PLATEAU", $4f
 	db "#MON LEAGUE HQ", $57
-; 0x88f08 + 31 bytes
 
 _UnnamedText_5db81: ; 88f27 (22:4f27)
 	db $0, $52, " is", $4f
 	db "playing the SNES!", $55
 	db "...Okay!", $55
 	db "It's time to go!", $57
-; 0x88f27 + 49 bytes
 
 _UnnamedText_5dba8: ; 88f58 (22:4f58)
 	db $0, "Looked into the", $4f
@@ -117569,30 +113726,25 @@ _UnnamedText_5dba8: ; 88f58 (22:4f58)
 	db "A large, shining", $4f
 	db "bird is flying", $55
 	db "toward the sea.", $57
-; 0x88f58 + 79 bytes
 
 _UnnamedText_5dbbe: ; 88fa7 (22:4fa7)
 	db $0, "AERODACTYL Fossil", $4f
 	db "A primitive and", $55
 	db "rare #MON.", $57
-; 0x88fa7 + 46 bytes
 
 _UnnamedText_5dbd4: ; 88fd5 (22:4fd5)
 	db $0, "KABUTOPS Fossil", $4f
 	db "A primitive and", $55
 	db "rare #MON.", $57
-; 0x88fd5 + 44 bytes
 
 _UnnamedText_5dc9e: ; 89001 (22:5001)
 	db $0, "TRAINER TIPS", $51
 	db "Using a Game Link", $4f
 	db "Cable", $58
-; 0x89001 + 38 bytes
 
 _UnnamedText_5dca3: ; 89027 (22:5027)
 	db $0, "Which heading do", $4f
 	db "you want to read?", $57
-; 0x89027 + 36 bytes
 
 _UnnamedText_5dcde: ; 8904b (22:504b)
 	db $0, "When you have", $4f
@@ -117602,31 +113754,26 @@ _UnnamedText_5dcde: ; 8904b (22:504b)
 	db "the attendant on", $55
 	db "the right in any", $55
 	db "#MON CENTER.", $58
-; 0x8904b + 114 bytes
 
 _UnnamedText_5dce3: ; 890bd (22:50bd)
 	db $0, "COLOSSEUM lets", $4f
 	db "you play against", $55
 	db "a friend.", $58
-; 0x890bd + 43 bytes
 
 _UnnamedText_5dce8: ; 890e8 (22:50e8)
 	db $0, "TRADE CENTER is", $4f
 	db "used for trading", $55
 	db "#MON.", $58
-; 0x890e8 + 40 bytes
 
 _UnnamedText_5dda2: ; 89110 (22:5110)
 	db $0, "The blackboard", $4f
 	db "describes #MON", $55
 	db "STATUS changes", $55
 	db "during battles.", $58
-; 0x89110 + 62 bytes
 
 _UnnamedText_5dda7: ; 8914e (22:514e)
 	db $0, "Which heading do", $4f
 	db "you want to read?", $57
-; 0x8914e + 36 bytes
 
 _UnnamedText_5ddd6: ; 89172 (22:5172)
 	db $0, "A #MON can't", $4f
@@ -117637,7 +113784,6 @@ _UnnamedText_5ddd6: ; 89172 (22:5172)
 	db "battles.", $51
 	db "Use AWAKENING to", $4f
 	db "wake them up!", $58
-; 0x89172 + 108 bytes
 
 _UnnamedText_5dddb: ; 891de (22:51de)
 	db $0, "When poisoned, a", $4f
@@ -117647,7 +113793,6 @@ _UnnamedText_5dddb: ; 891de (22:51de)
 	db "after battles.", $51
 	db "Use an ANTIDOTE", $4f
 	db "to cure poison!", $58
-; 0x891de + 109 bytes
 
 _UnnamedText_5dde0: ; 8924b (22:524b)
 	db $0, "Paralysis could", $4f
@@ -117657,7 +113802,6 @@ _UnnamedText_5dde0: ; 8924b (22:524b)
 	db "after battles.", $51
 	db "Use PARLYZ HEAL", $4f
 	db "for treatment!", $58
-; 0x8924b + 106 bytes
 
 _UnnamedText_5dde5: ; 892b5 (22:52b5)
 	db $0, "A burn reduces", $4f
@@ -117668,7 +113812,6 @@ _UnnamedText_5dde5: ; 892b5 (22:52b5)
 	db "after battles.", $51
 	db "Use BURN HEAL to", $4f
 	db "cure a burn!", $58
-; 0x892b5 + 122 bytes
 
 _UnnamedText_5ddea: ; 8932f (22:532f)
 	db $0, "If frozen, a", $4f
@@ -117679,12 +113822,10 @@ _UnnamedText_5ddea: ; 8932f (22:532f)
 	db "battle ends.", $51
 	db "Use ICE HEAL to", $4f
 	db "thaw out #MON!", $58
-; 0x8932f + 120 bytes
 
 _UnnamedText_5ddf7: ; 893a7 (22:53a7)
 	db $0, "Nope, there's", $4f
 	db "only trash here.", $57
-; 0x893a7 + 31 bytes
 
 UnnamedText_893c6: ; 893c6 (22:53c6)
 	db $0, "Hey! There's a", $4f
@@ -117693,143 +113834,119 @@ UnnamedText_893c6: ; 893c6 (22:53c6)
 	db "Turn it on!", $51
 	db "The 1st electric", $4f
 	db "lock opened!@@"
-; 0x89418
 
 _UnnamedText_5dedb: ; 89418 (22:5418)
 	db $0, "Hey! There's", $4f
 	db "another switch", $55
 	db "under the trash!", $55
 	db "Turn it on!", $58
-; 0x89418 + 57 bytes
 
 UnnamedText_89451: ; 89451 (22:5451)
 	db $0, "The 2nd electric", $4f
 	db "lock opened!", $51
 	db "The motorized door", $4f
 	db "opened!@@"
-; 0x89451 + 59 bytes = 0x8948c
 
 UnnamedText_8948c: ; 8948c (22:548c)
 	db $0, "Nope! There's", $4f
 	db "only trash here.", $55
 	db "Hey! The electric", $55
 	db "locks were reset!@@"
-; 0x8948c + 68 bytes = 0x894d0
 
 UnnamedText_894d0: ; 894d0 (22:54d0)
 	db $0, $52, " found", $4f
 	db "@"
 	TX_RAM $cd6d
 	db $0, "!@@"
-; 0x894e1
 
 _UnnamedText_76794: ; 894e1 (22:54e1)
 	db $0, "But, ", $52, " has", $4f
 	db "no more room for", $55
 	db "other items!", $57
-; 0x894e1 + 42 bytes
 
 _FoundHiddenCoinsText: ; 8950b (22:550b)
 	db $0, $52, " found", $4f
 	db "@"
 	db $2, $a0, $ff, $c2 ; XXX $2
 	db $0, " coins!@@"
-; 0x89523
 
 _FoundHiddenCoins2Text: ; 89523 (22:5523)
 	db $0, $52, " found", $4f
 	db "@"
 	db $2, $a0, $ff, $c2 ; XXX $2 probably coins
 	db $0, " coins!@@"
-; 0x8953a
 
 _DroppedHiddenCoinsText: ; 8953b (22:553b)
 	db $0, $51
 	db "Oops! Dropped", $4f
 	db "some coins!", $57
-; 0x8953b + 28 bytes
 
 _UnnamedText_fbd9: ; 89557 (22:5557)
 	db $0, "INDIGO PLATEAU", $58
-; 0x89557 + 16 bytes
 
 _UnnamedText_fbde: ; 89567 (22:5567)
 	db $0, "The ultimate goal", $4f
 	db "of trainers!", $55
 	db "#MON LEAGUE HQ", $57
-; 0x89567 + 47 bytes
 
 _UnnamedText_fbe3: ; 89596 (22:5596)
 	db $0, "The highest", $4f
 	db "#MON authority", $55
 	db "#MON LEAGUE HQ", $57
-; 0x89596 + 43 bytes
 
 _UnnamedText_fc03: ; 895c1 (22:55c1)
 	db $0, "Crammed full of", $4f
 	db "#MON books!", $57
-; 0x895c1 + 29 bytes
 
 _UnnamedText_fc08: ; 895de (22:55de)
 	db $0, "It's a sculpture", $4f
 	db "of DIGLETT.", $57
-; 0x895de + 29 bytes
 
 _UnnamedText_fc0d: ; 895fb (22:55fb)
 	db $0, "This is an", $4f
 	db "elevator.", $57
-; 0x895fb + 22 bytes
 
 UnnamedText_89611: ; 89611 (22:5611)
 	db $0, "A TOWN MAP.@@"
-; 0x89611 + 14 bytes = 0x8961f
 
 _UnnamedText_fc45: ; 8961f (22:561f)
 	db $0, "Wow! Tons of", $4f
 	db "#MON stuff!", $57
-; 0x8961f + 26 bytes
 
 _UnnamedText_3c1a8: ; 89639 (22:5639)
 	db $0, "PA: Ding-dong!", $51
 	db "You are out of", $4f
 	db "SAFARI BALLs!", $58
-; 0x89639 + 45 bytes
 
 _UnnamedText_3c229: ; 89666 (22:5666)
 	db $0, "Wild @"
 	TX_RAM W_ENEMYMONNAME
 	db $0, $4f
 	db "ran!", $58
-; 0x89666 + 17 bytes = 0x89677
 
 _UnnamedText_3c22e: ; 89677 (22:5677)
 	db $0, "Enemy @"
 	TX_RAM W_ENEMYMONNAME
 	db $0, $4f
 	db "ran!", $58
-; 0x89677 + 18 bytes = 0x89689
 
 _HurtByPoisonText: ; 89689 (22:5689)
 	db $0, $5a, "'s", $4f
 	db "hurt by poison!", $58
-; 0x89689 + 20 bytes
 
 _HurtByBurnText: ; 8969d (22:569d)
 	db $0, $5a, "'s", $4f
 	db "hurt by the burn!", $58
-; 0x8969d + 22 bytes
 
 _HurtByLeechSeedText: ; 896b3 (22:56b3)
 	db $0, "LEECH SEED saps", $4f
 	db $5a, "!", $58
-; 0x896b3 + 20 bytes
 
 _UnnamedText_3c63e: ; 896c7 (22:56c7)
 	db $0, "Enemy @"
 	TX_RAM W_ENEMYMONNAME
 	db $0, $4f
 	db "fainted!", $58
-; 0x896c7 + 22 bytes = 0x896dd
 
 _MoneyForWinningText: ; 896dd (22:56dd)
 	db $0, $52, " got ¥@"
@@ -117837,43 +113954,36 @@ _MoneyForWinningText: ; 896dd (22:56dd)
 	db $2, $79, $d0, $c3
 	db $0, $4f
 	db "for winning!", $58
-; 0x896f9
 
 _TrainerDefeatedText: ; 896f9 (22:56f9)
 	db $0, $52, " defeated", $4f
 	db "@"
 	TX_RAM $d04a ; 0x89706
 	db $0, "!", $58
-; 0x896f9 + 19 bytes = 0x8970c
 
 _PlayerMonFaintedText: ; 8970c (22:570c)
 	TX_RAM W_PLAYERMONNAME
 	db $0, $4f
 	db "fainted!", $58
-; 0x8970c + 14 bytes
 
 _UnnamedText_3c7d3: ; 8971a (22:571a)
 	db $0, "Use next #MON?", $57
-; 0x8971a + 16 bytes
 
 _Sony1WinText: ; 8972a (22:572a)
 	db $0, $53, ": Yeah! Am", $4f
 	db "I great or what?", $58
-; 0x8972a + 30 bytes
 
 _PlayerBlackedOutText2: ; 89748 (22:5748)
 	db $0, $52, " is out of", $4f
 	db "useable #MON!", $51
 	db $52, " blacked", $4f
 	db "out!", $58
-; 0x89748 + 42 bytes
 
 _LinkBattleLostText: ; 89772 (22:5772)
 	db $0, $52, " lost to", $4f
 	db "@"
 	TX_RAM $d04a ; 0x8977e
 	db $0, "!", $58
-; 0x89772 + 18 bytes = 0x89784
 
 _TrainerAboutToUseText: ; 89784 (22:5784)
 	db 1
@@ -117896,48 +114006,39 @@ _TrainerSentOutText: ; 897b4 (22:57b4)
 _UnnamedText_3cab4: ; 897c9 (22:57c9)
 	db $0, "There's no will", $4f
 	db "to fight!", $58
-; 0x897c9 + 26 bytes
 
 _UnnamedText_3cb97: ; 897e3 (22:57e3)
 	db $0, "Can't escape!", $58
-; 0x897e3 + 14 bytes
 
 _UnnamedText_3cb9c: ; 897f1 (22:57f1)
 	db $0, "No! There's no", $4f
 	db "running from a", $55
 	db "trainer battle!", $58
-; 0x897f1 + 46 bytes
 
 _UnnamedText_3cba1: ; 8981f (22:581f)
 	db $0, "Got away safely!", $58
-; 0x8981f + 18 bytes
 
 ItemsCantBeUsedHere_: ; 89831 (22:5831)
 	db $0, "Items can't be", $4f
 	db "used here.", $58
-; 0x89831 + 26 bytes
 
 _UnnamedText_3d1f5: ; 8984b (22:584b)
 	TX_RAM W_PLAYERMONNAME
 	db $0, " is", $4f
 	db "already out!", $58
-; 0x8984b + 21 bytes
 
 _MoveNoPPText: ; 89860 (22:5860)
 	db $0, "No PP left for", $4f
 	db "this move!", $58
-; 0x89860 + 27 bytes
 
 _MoveDisabledText: ; 8987b (22:587b)
 	db $0, "The move is", $4f
 	db "disabled!", $58
-; 0x8987b + 23 bytes
 
 _UnnamedText_3d430: ; 89892 (22:5892)
 	TX_RAM W_PLAYERMONNAME
 	db $0, " has no", $4f
 	db "moves left!", $57
-; 0x89892 + 24 bytes
 
 _MultiHitText: ; 898aa (22:58aa)
 	db 0,"Hit the enemy",$4F,"@"
@@ -118017,156 +114118,125 @@ _CantMoveText: ; 89a1b (22:5a1b)
 _UnnamedText_3daa8: ; 89a29 (22:5a29)
 	db $0, $5a, "'s", $4f
 	db "@"
-; 0x89a29 + 5 bytes
 
 UnnamedText_89a2e: ; 89a2e (22:5a2e)
 	TX_RAM $cd6d
 	db $0, " is", $55
 	db "disabled!", $58
-; 0x89a2e + 18 bytes = 0x89a40
 
 UnnamedText_89a40: ; 89a40 (22:5a40)
 	db $0, $5a, "@@"
-; 0x89a40 + 4 bytes = 0x89a44
 
 UnnamedText_89a44: ; 89a44 (22:5a44)
 	db $0, $4f
 	db "used @@"
-; 0x89a44 + 9 bytes = 0x89a4d
 
 UnnamedText_89a4d: ; 89a4d (22:5a4d)
 	db $0, $4f
 	db "used @@"
-; 0x89a4d + 9 bytes = 0x89a56
 
 UnnamedText_89a56: ; 89a56 (22:5a56)
 	db $0, "instead,", $55
 	db "@@"
-; 0x89a56 + 12 bytes = 0x89a62
 
 UnnamedText_89a62: ; 89a62 (22:5a62)
 	TX_RAM $cf4b
 	db $0, "@"
-; 0x89a62 + 5 bytes = 0x89a67
 
 _UnnamedText_3db6c: ; 89a67 (22:5a67)
 	db $0, "!", $57
-; 0x89a67 + 3 bytes
 
 _UnnamedText_3db71: ; 89a6a (22:5a6a)
 	db $0, "!", $57
-; 0x89a6a + 3 bytes
 
 _UnnamedText_3db76: ; 89a6d (22:5a6d)
 	db $0, "!", $57
-; 0x89a6d + 3 bytes
 
 _UnnamedText_3db7b: ; 89a70 (22:5a70)
 	db $0, "!", $57
-; 0x89a70 + 3 bytes
 
 _UnnamedText_3db80: ; 89a73 (22:5a73)
 	db $0, "!", $57
-; 0x89a73 + 3 bytes
 
 _UnnamedText_3dc42: ; 89a76 (22:5a76)
 	db $0, $5a, "'s", $4f
 	db "attack missed!", $58
-; 0x89a76 + 19 bytes
 
 _UnnamedText_3dc47: ; 89a89 (22:5a89)
 	db $0, $5a, $4f
 	db "kept going and", $55
 	db "crashed!", $58
-; 0x89a89 + 27 bytes
 
 _UnnamedText_3dc4c: ; 89aa4 (22:5aa4)
 	db $0, $59, "'s", $4f
 	db "unaffected!", $58
-; 0x89aa4 + 16 bytes
 
 _UnnamedText_3dc57: ; 89ab4 (22:5ab4)
 	db $0, "It doesn't affect", $4f
 	db $59, "!", $58
-; 0x89ab4 + 21 bytes
 
 _UnnamedText_3dc7e: ; 89ac9 (22:5ac9)
 	db $0, "Critical hit!", $58
-; 0x89ac9 + 15 bytes
 
 _UnnamedText_3dc83: ; 89ad8 (22:5ad8)
 	db $0, "One-hit KO!", $58
-; 0x89ad8 + 13 bytes
 
 _UnnamedText_3ddb6: ; 89ae5 (22:5ae5)
 	TX_RAM W_PLAYERMONNAME
 	db $0, " is", $4f
 	db "loafing around.", $58
-; 0x89ae5 + 24 bytes
 
 _UnnamedText_3ddbb: ; 89afd (22:5afd)
 	TX_RAM W_PLAYERMONNAME
 	db $0, " began", $4f
 	db "to nap!", $58
-; 0x89afd + 19 bytes
 
 _UnnamedText_3ddc0: ; 89b10 (22:5b10)
 	TX_RAM W_PLAYERMONNAME
 	db $0, " won't", $4f
 	db "obey!", $58
-; 0x89b10 + 16 bytes
 
 _UnnamedText_3ddc5: ; 89b20 (22:5b20)
 	TX_RAM W_PLAYERMONNAME
 	db $0, " turned", $4f
 	db "away!", $58
-; 0x89b20 + 18 bytes
 
 _UnnamedText_3ddca: ; 89b32 (22:5b32)
 	TX_RAM W_PLAYERMONNAME
 	db $0, $4f
 	db "ignored orders!", $58
-; 0x89b32 + 21 bytes
 
 _SubstituteTookDamageText: ; 89b47 (22:5b47)
 	db $0, "The SUBSTITUTE", $4f
 	db "took damage for", $55
 	db $59, "!", $58
-; 0x89b47 + 35 bytes
 
 _SubstituteBrokeText: ; 89b6a (22:5b6a)
 	db $0, $59, "'s", $4f
 	db "SUBSTITUTE broke!", $58
-; 0x89b6a + 22 bytes
 
 _BuildingRageText: ; 89b80 (22:5b80)
 	db $0, $5a, "'s", $4f
 	db "RAGE is building!", $58
-; 0x89b80 + 22 bytes
 
 _MirrorMoveFailedText: ; 89b96 (22:5b96)
 	db $0, "The MIRROR MOVE", $4e, "failed!", $58
-; 0x89b96 + 25 bytes
 
 _UnnamedText_3e887: ; 89baf (22:5baf)
 	db $0, "Hit @"
-; 0x89baf + 6 bytes
 
 UnnamedText_89bb5: ; 89bb5 (22:5bb5)
 	TX_NUM $cd05, 1, 1
 	db $0, " times!", $58
-; 0x89bb5 + 13 bytes = 0x89bc2
 
 UnnamedText_89bc2: ; 89bc2 (22:5bc2)
 	TX_RAM $cd6d
 	db $0, " gained", $4f
 	db "@@"
-; 0x89bc2 + 14 bytes = 0x89bd0
 
 UnnamedText_89bd0: ; 89bd0 (22:5bd0)
 	db $0, "with EXP.ALL,", $55
 	db "@@"
-; 0x89bd0 + 17 bytes = 0x89be1
 
 UnnamedText_89be1: ; 89be1 (22:5be1)
 	db $0, "a boosted", $55
@@ -118174,7 +114244,6 @@ UnnamedText_89be1: ; 89be1 (22:5be1)
 _UnnamedText_554d8: ; 89bee (22:5bee)
 	TX_NUM $cf4b, 2, 4
 	db $0, " EXP. Points!", $58
-; 0x89be1 + 32 bytes = 0x89c01
 
 UnnamedText_89c01: ; 89c01 (22:5c01)
 	TX_RAM $cd6d
@@ -118182,14 +114251,12 @@ UnnamedText_89c01: ; 89c01 (22:5c01)
 	db "to level @"
 	TX_NUM $d127, 1, 3
 	db $0, "!@@"
-; 0x89c01 + 28 bytes = 0x89c1d
 
 _UnnamedText_58e3b: ; 89c1d (22:5c1d)
 	db $0, "Wild @"
 	TX_RAM W_ENEMYMONNAME
 	db $0, $4f
 	db "appeared!", $58
-; 0x89c1d + 22 bytes
 
 _UnnamedText_58e40: ; 89c33 (22:5c33)
 	db $0, "The hooked", $4f
@@ -118197,89 +114264,71 @@ _UnnamedText_58e40: ; 89c33 (22:5c33)
 	TX_RAM W_ENEMYMONNAME
 	db $0, $55
 	db "attacked!", $58
-; 0x89c33 + 28 bytes
 
 _UnnamedText_58e45: ; 89c4f (22:5c4f)
 	TX_RAM W_ENEMYMONNAME
 	db $0, $4f
 	db "appeared!", $58
-; 0x89c4f + 15 bytes
 
 _UnnamedText_58e4a: ; 89c5e (22:5c5e)
 	TX_RAM $d04a
 	db $0, " wants", $4f
 	db "to fight!", $58
-; 0x89c5e + 21 bytes
 
 _UnnamedText_58e4f: ; 89c73 (22:5c73)
 	db $0, "SILPH SCOPE", $4f
 	db "unveiled the", $55
 	db "GHOST's identity!", $58
-; 0x89c73 + 43 bytes
 
 _UnnamedText_58e54: ; 89c9e (22:5c9e)
 	db $0, "Darn! The GHOST", $4f
 	db "can't be ID'd!", $58
-; 0x89c9e + 30 bytes
 
 UnknownText_89cbc: ; 89cbc (22:5cbc)
 	db $0, "Go! @@"
-; 0x89cbc + 7 bytes
 	db $0, "Do it! @@"
-; 0x89cc3 + 10 bytes
 	db $0, "Get'm! @@"
-; 0x89ccd + 9 bytes
 
 UnknownText_89cd6: ; 89cd6 (22:5cd6)
 	db $0, "The enemy's weak!", $4f
 	db "Get'm! @@"
-; 0x89cd6 + 26 bytes
 
 _UnnamedText_58ecc: ; 89cf0 (22:5cf0)
 	TX_RAM W_PLAYERMONNAME
 	db $0, "!", $57
-; 0x89cf0 + 6 bytes
 	TX_RAM W_PLAYERMONNAME
 	db $0, " @@"
 	db $0, "enough!@@"
-; 0x89cf0 + 23 bytes
 
 _UnnamedText_89d07: ; 89d07 (22:5d07)
 	db $0, "OK!@@"
-; 0x8d907 + 6
 
 UnknownText_89d0d: ; 89d0d (22:5d0d)
 	db $0, "good!@@"
-; 0x89d0d + 8 bytes
 
 _UnnamedText_58f3e: ; 89d15 (22:5d15)
 	db $0, $4f
 	db "Come back!", $57
-; 0x89d15 + 13 bytes
 
 _UnnamedText_2fb8e: ; 89d22 (22:5d22)
 	db $0, "It's super", $4f
 	db "effective!", $58
-; 0x89d22 + 22 bytes
 
 _UnnamedText_2fb93: ; 89d38 (22:5d38)
 	db $0, "It's not very", $4f
 	db "effective...", $58
-; 0x89d38 + 27 bytes
 
 SafariZoneEatingText: ; 89d53 (22:5d53)
 	db $0, "Wild @"
 	TX_RAM W_ENEMYMONNAME
 	db $0, $4f
 	db "is eating!", $58
-; 0x89d53 + 23 bytes
 
 SafariZoneAngryText: ; 89d6a (22:5d6a)
 	db $0, "Wild @"
 	TX_RAM W_ENEMYMONNAME
 	db $0, $4f
 	db "is angry!", $58
-; 0x89d6a + 22 bytes
 
 ; money related
 ; XXX $2 BCD macro
@@ -118293,36 +114342,29 @@ _UnnamedText_1386b: ; 89d80 (22:5d80)
 _UnnamedText_1c9c1: ; 89d96 (22:5d96)
 	db $0, "Clear all saved", $4f
 	db "data?", $57
-; 0x89d96 + 23 bytes
 
 _UnnamedText_1ca14: ; 89dad (22:5dad)
 	db $0, "Which floor do", $4f
 	db "you want? ", $57
-; 0x89dad + 27 bytes
 
 _PartyMenuNormalText: ; 89dc8 (22:5dc8)
 	db $0, "Choose a #MON.", $57
-; 0x89dc8 + 16 bytes
 
 _PartyMenuItemUseText: ; 89dd8 (22:5dd8)
 	db $0, "Use item on which", $4f
 	db "#MON?", $57
-; 0x89dd8 + 25 bytes
 
 _PartyMenuBattleText: ; 89df1 (22:5df1)
 	db $0, "Bring out which", $4f
 	db "#MON?", $57
-; 0x89df1 + 23 bytes
 
 _PartyMenuUseTMText: ; 89e08 (22:5e08)
 	db $0, "Use TM on which", $4f
 	db "#MON?", $57
-; 0x89e08 + 23 bytes
 
 _PartyMenuSwapMonText: ; 89e1f (22:5e1f)
 	db $0, "Move #MON", $4f
 	db "where?", $57
-; 0x89e1f + 18 bytes
 
 _PotionText: ; 89e31 (22:5e31)
 	TX_RAM $cd6d
@@ -118330,49 +114372,41 @@ _PotionText: ; 89e31 (22:5e31)
 	db "recovered by @"
 	TX_NUM W_HPBARHPDIFFERENCE, 2, 3
 	db $0, "!", $57
-; 0x89e31 + 26 bytes
 
 _AntidoteText: ; 89e4b (22:5e4b)
 	TX_RAM $cd6d
 	db $0, " was", $4f
 	db "cured of poison!", $57
-; 0x89e4b + 26 bytes
 
 _ParlyzHealText: ; 89e65 (22:5e65)
 	TX_RAM $cd6d
 	db $0, "'s", $4f
 	db "rid of paralysis!", $57
-; 0x89e65 + 24 bytes
 
 _BurnHealText: ; 89e7d (22:5e7d)
 	TX_RAM $cd6d
 	db $0, "'s", $4f
 	db "burn was healed!", $57
-; 0x89e7d + 23 bytes
 
 _IceHealText: ; 89e94 (22:5e94)
 	TX_RAM $cd6d
 	db $0, " was", $4f
 	db "defrosted!", $57
-; 0x89e94 + 20 bytes
 
 _AwakeningText: ; 89ea8 (22:5ea8)
 	TX_RAM $cd6d
 	db $0, $4f
 	db "woke up!", $57
-; 0x89ea8 + 14 bytes
 
 _FullHealText: ; 89eb6 (22:5eb6)
 	TX_RAM $cd6d
 	db $0, "'s", $4f
 	db "health returned!", $57
-; 0x89eb6 + 23 bytes
 
 _ReviveText: ; 89ecd (22:5ecd)
 	TX_RAM $cd6d
 	db $0, $4f
 	db "is revitalized!", $57
-; 0x89ecd + 21 bytes
 
 _RareCandyText: ; 89ee2 (22:5ee2)
 	TX_RAM $cd6d
@@ -118380,122 +114414,99 @@ _RareCandyText: ; 89ee2 (22:5ee2)
 	db "to level @"
 	TX_NUM $d127, $1,$3
 	db $0, "!@@"
-; 0x89ee2 + 28 bytes
 
 _UnnamedText_17f23: ; 89efe (22:5efe)
 	db $0, $52, " turned on", $4f
 	db "the PC.", $58
-; 0x89efe + 21 bytes
 
 _UnnamedText_17f28: ; 89f13 (22:5f13)
 	db $0, "Accessed BILL's", $4f
 	db "PC.", $51
 	db "Accessed #MON", $4f
 	db "Storage System.", $58
-; 0x89f13 + 50 bytes
 
 _UnnamedText_17f2d: ; 89f45 (22:5f45)
 	db $0, "Accessed someone's", $4f
 	db "PC.", $51
 	db "Accessed #MON", $4f
 	db "Storage System.", $58
-; 0x89f45 + 53 bytes
 
 _UnnamedText_17f32: ; 89f7a (22:5f7a)
 	db $0, "Accessed my PC.", $51
 	db "Accessed Item", $4f
 	db "Storage System.", $58
-; 0x89f7a + 47 bytes
 
 _UnnamedText_7b22: ; 89fa9 (22:5fa9)
 	db $0, $52, " turned on", $4f
 	db "the PC.", $58
-; 0x89fa9 + 21 bytes
 
 _UnnamedText_7b27: ; 89fbe (22:5fbe)
 	db $0, "What do you want", $4f
 	db "to do?", $57
-; 0x89fbe + 25 bytes
 
 _UnnamedText_7b2c: ; 89fd7 (22:5fd7)
 	db $0, "What do you want", $4f
 	db "to deposit?", $57
-; 0x89fd7 + 30 bytes
 
 _UnnamedText_7b31: ; 89ff5 (22:5ff5)
 	db $0, "How many?", $57
-; 0x89ff5 + 11 bytes
 
 _UnnamedText_7b36: ; 8a000 (22:6000)
 	TX_RAM $cd6d
 	db $0, " was", $4f
 	db "stored via PC.", $58
-; 0x8a000 + 24 bytes
 
 _UnnamedText_7b3b: ; 8a018 (22:6018)
 	db $0, "You have nothing", $4f
 	db "to deposit.", $58
-; 0x8a018 + 30 bytes
 
 _UnnamedText_7b40: ; 8a036 (22:6036)
 	db $0, "No room left to", $4f
 	db "store items.", $58
-; 0x8a036 + 30 bytes
 
 _UnnamedText_7b45: ; 8a054 (22:6054)
 	db $0, "What do you want", $4f
 	db "to withdraw?", $57
-; 0x8a054 + 31 bytes
 
 _UnnamedText_7b4a: ; 8a073 (22:6073)
 	db $0, "How many?", $57
-; 0x8a073 + 11 bytes
 
 _UnnamedText_7b4f: ; 8a07e (22:607e)
 	db $0, "Withdrew", $4f
 	db "@"
 	TX_RAM $cd6d
 	db $0, ".", $58
-; 0x8a07e + 17 bytes
 
 _UnnamedText_7b54: ; 8a08f (22:608f)
 	db $0, "There is nothing", $4f
 	db "stored.", $58
-; 0x8a08f + 26 bytes
 
 _UnnamedText_7b59: ; 8a0a9 (22:60a9)
 	db $0, "You can't carry", $4f
 	db "any more items.", $58
-; 0x8a0a9 + 32 bytes
 
 _UnnamedText_7b5e: ; 8a0c9 (22:60c9)
 	db $0, "What do you want", $4f
 	db "to toss away?", $57
-; 0x8a0c9 + 32 bytes
 
 _UnnamedText_7b63: ; 8a0e9 (22:60e9)
 	db $0, "How many?", $57
-; 0x8a0e9 + 11 bytes
 
 _UnnamedText_76683: ; 8a0f4 (22:60f4)
 	db $0, "Accessed #MON", $4f
 	db "LEAGUE's site.", $51
 	db "Accessed the HALL", $4f
 	db "OF FAME List.", $58
-; 0x8a0f4 + 61 bytes
 
 _UnnamedText_217e9: ; 8a131 (22:6131)
 	db $0, "Switch on!", $58
-; 0x8a131 + 12 bytes
 
 _UnnamedText_217ee: ; 8a13d (22:613d)
 	db $0, "What?", $57
-; 0x8a13d + 7 bytes
 
 _UnnamedText_217f3: ; 8a144 (22:6144)
 	db $0, "Deposit which", $4f
 	db "#MON?", $57
-; 0x8a144 + 21 bytes
 
 _UnnamedText_217f8: ; 8a159 (22:6159)
 	TX_RAM $cf4b
@@ -118508,58 +114519,48 @@ _UnnamedText_217f8: ; 8a159 (22:6159)
 _UnnamedText_217fd: ; 8a177 (22:6177)
 	db $0, "You can't deposit", $4f
 	db "the last #MON!", $58
-; 0x8a177 + 33 bytes
 
 _UnnamedText_21802: ; 8a198 (22:6198)
 	db $0, "Oops! This Box is", $4f
 	db "full of #MON.", $58
-; 0x8a198 + 33 bytes
 
 _UnnamedText_21807: ; 8a1b9 (22:61b9)
 	TX_RAM $cf4b
 	db $0, " is", $4f
 	db "taken out.", $55
 	db "Got @"
-; 0x8a1b9 + 24 bytes
 UnknownText_8a1d1: ; 8a1d1 (22:61d1)
 	TX_RAM $cf4b
 	db $0, ".", $58
-; 0x8a1d1 + 6 bytes
 
 _UnnamedText_2180c: ; 8a1d7 (22:61d7)
 	db $0, "What? There are", $4f
 	db "no #MON here!", $58
-; 0x8a1d7 + 31 bytes
 
 _UnnamedText_21811: ; 8a1f6 (22:61f6)
 	db $0, "You can't take", $4f
 	db "any more #MON.", $51
 	db "Deposit #MON", $4f
 	db "first.", $58
-; 0x8a1f6 + 50 bytes
 
 _UnnamedText_21816: ; 8a228 (22:6228)
 	db $0, "Release which", $4f
 	db "#MON?", $57
-; 0x8a228 + 21 bytes
 
 _UnnamedText_2181b: ; 8a23d (22:623d)
 	db $0, "Once released,", $4f
 	db "@"
-; 0x8a23d + 17 bytes
 
 UnknownText_8a24e: ; 8a24e (22:624e)
 	TX_RAM $cf4b
 	db $0, " is", $55
 	db "gone forever. OK?", $57
-; 0x8a24e + 26 bytes
 
 _UnnamedText_21820: ; 8a268 (22:6268)
 	TX_RAM $cf4b
 	db $0, " was", $4f
 	db "released outside.", $55
 	db "Bye @"
-; 0x8a268 + 32 bytes
 
 _UnnamedText_8a288: ; 8a288 (22:6288)
 	TX_RAM $cf4b
@@ -118602,34 +114603,28 @@ _OhFineThenText: ; 8a34c (22:634c)
 _UnnamedText_1e93b: ; 8a35d (22:635d)
 	db $0, "Want to get your", $4f
 	db "#DEX rated?", $57
-; 0x8a35d + 30 bytes
 
 _UnnamedText_1e940: ; 8a37b (22:637b)
 	db $0, "Closed link to", $4f
 	db "PROF.OAK's PC.@@"
-; 0x8a37b + 31 bytes
 
 _UnnamedText_1e946: ; 8a39a (22:639a)
 	db $0, "Accessed PROF.", $4f
 	db "OAK's PC.", $51
 	db "Accessed #DEX", $4f
 	db "Rating System.", $58
-; 0x8a39a + 54 bytes
 
 _UnnamedText_5d43: ; 8a3d0 (22:63d0)
 	db $0, "Where would you", $4f
 	db "like to go?", $57
-; 0x8a3d0 + 29 bytes
 
 _UnnamedText_5d48: ; 8a3ed (22:63ed)
 	db $0, "OK, please wait", $4f
 	db "just a moment.", $57
-; 0x8a3ed + 32 bytes
 
 _UnnamedText_5d4d: ; 8a40d (22:640d)
 	db $0, "The link was", $4f
 	db "canceled.", $57
-; 0x8a40d + 24 bytes
 
 INCLUDE "text/oakspeech.tx"
 
@@ -118637,35 +114632,29 @@ _UnnamedText_6557: ; 8a605 (22:6605)
 	db $0, "Do you want to", $4f
 	db "give a nickname", $55
 	db "to @"
-; 0x8a605 + 36 bytes
 
 UnknownText_8a629: ; 8a629 (22:6629)
 	TX_RAM $cd6d
 	db $0, "?", $57
-; 0x8a629 + 6 bytes
 
 _UnnamedText_699f: ; 8a62f (22:662f)
 	db $0, "Right! So your", $4f
 	db "name is ", $52, "!", $58
-; 0x8a62f + 27 bytes
 
 _UnnamedText_69e7: ; 8a64a (22:664a)
 	db $0, "That's right! I", $4f
 	db "remember now! His", $55
 	db "name is ", $53, "!", $58
-; 0x8a64a + 45 bytes
 
 _SSAnne8AfterBattleText2: ; 8a677 (22:6677)
 	TX_RAM $cd3f
 	db $0, " and", $4f
 	db "@"
-; 0x8a677 + 10 bytes
 
 UnknownText_8a681: ; 8a681 (22:6681)
 	TX_RAM $cd6d
 	db $0, " will", $55
 	db "be traded.", $57
-; 0x8a681 + 21 bytes
 
 _Char00Text: ; 8a696 (22:6696)
 	TX_NUM $FF8C,1,2
@@ -118708,7 +114697,6 @@ _UnnamedText_5d616: ; 8a7fc (22:67fc)
 	db $0, "The HM FLASH", $4f
 	db "lights even the", $55
 	db "darkest dungeons.", $57
-; 0x8a7fc + 48 bytes
 
 _Route2GateText2: ; 8a82c (22:682c)
 	db $0, "Once a #MON", $4f
@@ -118750,23 +114738,19 @@ _UnnamedText_4935c: ; 8a976 (22:6976)
 	db "a swell MAGIKARP", $55
 	db "for just ¥500!", $55
 	db "What do you say?", $57
-; 0x8a976 + 118 bytes
 
 _UnnamedText_49361: ; 8a9ec (22:69ec)
 	db $0, "No? I'm only", $4f
 	db "doing this as a", $55
 	db "favor to you!", $57
-; 0x8a9ec + 43 bytes
 
 _UnnamedText_49366: ; 8aa17 (22:6a17)
 	db $0, "You'll need more", $4f
 	db "money than that!", $57
-; 0x8aa17 + 34 bytes
 
 _UnnamedText_4936b: ; 8aa39 (22:6a39)
 	db $0, "MAN: Well, I don't", $4f
 	db "give refunds!", $57
-; 0x8aa39 + 33 bytes
 
 _MtMoonPokecenterText5: ; 8aa5a (22:6a5a)
 	db $0, $57
@@ -118777,7 +114761,6 @@ _UnnamedText_1dfe7: ; 8aa5c (22:6a5c)
 	db "though!", $51
 	db "Oh wait there,", $4f
 	db "the road's closed.", $57
-; 0x8aa5c + 77 bytes
 
 _UnnamedText_8aaa9: ; 8aaa9 (22:6aa9)
 	db $0, "Whoa, boy!", $4f
@@ -118786,7 +114769,6 @@ _UnnamedText_8aaa9: ; 8aaa9 (22:6aa9)
 	db "Huh? I can have", $55
 	db "this drink?", $55
 	db "Gee, thanks!@@"
-; 0x8aaa9 + 70 bytes
 
 _UnnamedText_1dff1: ; 8aaef (22:6aef)
 	db $0, $51
@@ -118801,44 +114783,36 @@ _UnnamedText_1dff1: ; 8aaef (22:6aef)
 	db "through. I'll", $55
 	db "share this with", $55
 	db "the other guards!", $57
-; 0x8aaef + 133 bytes
 
 _UnnamedText_1dff6: ; 8ab74 (22:6b74)
 	db $0, "Hi, thanks for", $4f
 	db "the cool drinks!", $57
-; 0x8ab74 + 33 bytes
 
 _UnnamedText_5640f: ; 8ab95 (22:6b95)
 	db $0, "I run a DAYCARE.", $4f
 	db "Would you like me", $55
 	db "to raise one of", $55
 	db "your #MON?", $57
-; 0x8ab95 + 63 bytes
 
 _UnnamedText_56414: ; 8abd4 (22:6bd4)
 	db $0, "Which #MON", $4f
 	db "should I raise?", $58
-; 0x8abd4 + 28 bytes
 
 _UnnamedText_56419: ; 8abf0 (22:6bf0)
 	db $0, "Fine, I'll look", $4f
 	db "after @"
-; 0x8abf0 + 23 bytes
 
 UnknownText_8ac07: ; 8ac07 (22:6c07)
 	TX_RAM $cd6d
 	db $0, $55
 	db "for a while.", $58
-; 0x8ac07 + 18 bytes
 
 _UnnamedText_5641e: ; 8ac19 (22:6c19)
 	db $0, "Come see me in", $4f
 	db "a while.", $57
-; 0x8ac19 + 25 bytes
 
 _UnnamedText_56423: ; 8ac32 (22:6c32)
 	db $0, "Your @"
-; 0x8ac32 + 7 bytes
 
 UnknownText_8ac39: ; 8ac39 (22:6c39)
 	TX_RAM $cd6d
@@ -118846,86 +114820,70 @@ UnknownText_8ac39: ; 8ac39 (22:6c39)
 	db "has grown a lot!", $51
 	db "By level, it's", $4f
 	db "grown by @"
-; 0x8ac39 + 46 bytes
 
 UnknownText_8ac67: ; 8ac67 (22:6c67)
 	TX_NUM $cd3e,$1,$3
 	db $0, "!", $51
 	db "Aren't I great?", $58
-; 0x8ac67 + 22 bytes
 
 _UnnamedText_56428: ; 8ac7d (22:6c7d)
 	db $0, "You owe me ¥@"
-; 0x8ac7d + 14 bytes
 
 ;XXX
-; 0x8ac8b
 db $2, $3f, $cd, $c2
 
 UnknownText_8ac8f: ; 8ac8f (22:6c8f)
 	db $0, $4f
 	db "for the return", $55
 	db "of this #MON.", $57
-; 0x8ac8f + 31 bytes
 
 _UnnamedText_5642d: ; 8acae (22:6cae)
 	db $0, $52, " got", $4f
 	db "@"
-; 0x8acae + 8 bytes
 
 UnknownText_8acb6: ; 8acb6 (22:6cb6)
 	TX_RAM $da49
 	db $0, " back!", $57
-; 0x8acb6 + 11 bytes
 
 _UnnamedText_56432: ; 8acc1 (22:6cc1)
 	db $0, "Back already?", $4f
 	db "Your @"
-; 0x8acc1 + 21 bytes
 
 UnknownText_8acd6: ; 8acd6 (22:6cd6)
 	TX_RAM $cd6d
 	db $0, $55
 	db "needs some more", $55
 	db "time with me.", $58
-; 0x8acd6 + 35 bytes
 
 SECTION "bank23",ROMX,BANK[$23]
 
 _UnnamedText_56437: ; 8c000 (23:4000)
 	db $0, "All right then,", $4f
 	db "@@"
-; 0x8c000 + 19 bytes
 
 _UnnamedText_5643b: ; 8c013 (23:4013)
 	db $0, "come again.", $57
-; 0x8c013 + 13 bytes
 
 _UnnamedText_56440: ; 8c020 (23:4020)
 	db $0, "You have no room", $4f
 	db "for this #MON!", $57
-; 0x8c020 + 33 bytes
 
 _UnnamedText_56445: ; 8c041 (23:4041)
 	db $0, "You only have one", $4f
 	db "#MON with you.", $57
-; 0x8c041 + 34 bytes
 
 _UnnamedText_5644a: ; 8c063 (23:4063)
 	db $0, "I can't accept a", $4f
 	db "#MON that", $55
 	db "knows an HM move.", $57
-; 0x8c063 + 45 bytes
 
 _UnnamedText_5644f: ; 8c090 (23:4090)
 	db $0, "Thank you! Here's", $4f
 	db "your #MON!", $58
-; 0x8c090 + 29 bytes
 
 _UnnamedText_56454: ; 8c0ad (23:40ad)
 	db $0, "Hey, you don't", $4f
 	db "have enough ¥!", $57
-; 0x8c0ad + 30 bytes
 
 _UndergroundTunnelEntranceRoute6Text1: ; 8c0cb (23:40cb)
 	db $0, "People often lose", $4f
@@ -118944,20 +114902,17 @@ _UnnamedText_5d773: ; 8c132 (23:4132)
 	db "There are so many", $4f
 	db "rough looking", $55
 	db "people there.", $57
-; 0x8c132 + 99 bytes
 
 _UnnamedText_5d778: ; 8c195 (23:4195)
 	db $0, "TEAM ROCKET had a", $4f
 	db "secret hideout in", $55
 	db "CELADON CITY?", $57
-; 0x8c195 + 51 bytes
 
 _UnnamedText_5d77d: ; 8c1c8 (23:41c8)
 	db $0, "You're here to", $4f
 	db "shop in CELADON?", $51
 	db "Just step outside", $4f
 	db "and head west!", $57
-; 0x8c1c8 + 65 bytes
 
 _UnnamedText_5d782: ; 8c209 (23:4209)
 	db $0, "The UNDERGROUND", $4f
@@ -118968,7 +114923,6 @@ _UnnamedText_5d782: ; 8c209 (23:4209)
 	db "to CERULEAN, go", $55
 	db "to the building", $55
 	db "across the road.", $57
-; 0x8c209 + 132 bytes
 
 _UndergroundPathEntranceRoute8Text1: ; 8c28d (23:428d)
 	db $0, "The dept. store", $4f
@@ -118990,112 +114944,91 @@ _RockTunnelPokecenterText3: ; 8c316 (23:4316)
 _UnnamedText_44588: ; 8c33a (23:433a)
 	db $0, "This tunnel goes", $4f
 	db "a long way, kid!", $57
-; 0x8c33a + 35 bytes
 
 _UnnamedText_4458d: ; 8c35d (23:435d)
 	db $0, "Doh!", $4f
 	db "You win!", $58
-; 0x8c35d + 15 bytes
 
 _UnnamedText_44592: ; 8c36c (23:436c)
 	db $0, "Watch for ONIX!", $4f
 	db "It can put the", $55
 	db "squeeze on you!", $57
-; 0x8c36c + 48 bytes
 
 _UnnamedText_44597: ; 8c39c (23:439c)
 	db $0, "Hmm. Maybe I'm", $4f
 	db "lost in here...", $57
-; 0x8c39c + 31 bytes
 
 _UnnamedText_4459c: ; 8c3bb (23:43bb)
 	db $0, "Ease up!", $4f
 	db "What am I doing?", $55
 	db "Which way is out?", $58
-; 0x8c3bb + 45 bytes
 
 _UnnamedText_445a1: ; 8c3e8 (23:43e8)
 	db $0, "That sleeping", $4f
 	db "#MON on ROUTE", $55
 	db "12 forced me to", $55
 	db "take this detour.", $57
-; 0x8c3e8 + 63 bytes
 
 _UnnamedText_445a6: ; 8c427 (23:4427)
 	db $0, "Outsiders like", $4f
 	db "you need to show", $55
 	db "me some respect!", $57
-; 0x8c427 + 50 bytes
 
 _UnnamedText_445ab: ; 8c459 (23:4459)
 	db $0, "I give!", $58
-; 0x8c459 + 9 bytes
 
 _UnnamedText_445b0: ; 8c462 (23:4462)
 	db $0, "You're talented", $4f
 	db "enough to hike!", $57
-; 0x8c462 + 32 bytes
 
 _UnnamedText_445b5: ; 8c482 (23:4482)
 	db $0, "#MON fight!", $4f
 	db "Ready, go!", $57
-; 0x8c482 + 24 bytes
 
 _UnnamedText_445ba: ; 8c49a (23:449a)
 	db $0, "Game", $4f
 	db "over!", $58
-; 0x8c49a + 12 bytes
 
 _UnnamedText_445bf: ; 8c4a6 (23:44a6)
 	db $0, "Oh well, I'll get", $4f
 	db "a ZUBAT as I go!", $57
-; 0x8c4a6 + 35 bytes
 
 _UnnamedText_445c4: ; 8c4c9 (23:44c9)
 	db $0, "Eek! Don't try", $4f
 	db "anything funny in", $55
 	db "the dark!", $57
-; 0x8c4c9 + 43 bytes
 
 _UnnamedText_445c9: ; 8c4f4 (23:44f4)
 	db $0, "It", $4f
 	db "was too dark!", $58
-; 0x8c4f4 + 18 bytes
 
 _UnnamedText_445ce: ; 8c506 (23:4506)
 	db $0, "I saw a MACHOP", $4f
 	db "in this tunnel!", $57
-; 0x8c506 + 32 bytes
 
 _UnnamedText_445d3: ; 8c526 (23:4526)
 	db $0, "I came this far", $4f
 	db "for #MON!", $57
-; 0x8c526 + 27 bytes
 
 _UnnamedText_445d8: ; 8c541 (23:4541)
 	db $0, "I'm", $4f
 	db "out of #MON!", $58
-; 0x8c541 + 17 bytes
 
 _UnnamedText_445dd: ; 8c552 (23:4552)
 	db $0, "You looked cute", $4f
 	db "and harmless!", $57
-; 0x8c552 + 31 bytes
 
 _UnnamedText_445e2: ; 8c571 (23:4571)
 	db $0, "You have #MON!", $4f
 	db "Let's start!", $57
-; 0x8c571 + 28 bytes
 
 _UnnamedText_445e7: ; 8c58d (23:458d)
 	db $0, "You", $4f
 	db "play hard!", $58
-; 0x8c58d + 16 bytes
 
 _UnnamedText_445ec: ; 8c59d (23:459d)
 	db $0, "Whew! I'm all", $4f
 	db "sweaty now!", $57
-; 0x8c59d + 26 bytes
 
 _RockTunnel1Text8: ; 8c5b7 (23:45b7)
 	db $0, "ROCK TUNNEL", $4f
@@ -119104,11 +115037,9 @@ _RockTunnel1Text8: ; 8c5b7 (23:45b7)
 
 _VoltorbBattleText: ; 8c5e2 (23:45e2)
 	db $0, "Bzzzt!", $57
-; 0x8c5e2 + 8 bytes
 
 _ZapdosBattleText: ; 8c5ea (23:45ea)
 	db $0, "Gyaoo!@@"
-; 0x8c5ea + 9 bytes
 
 _Route11GateText1: ; 8c5f3 (23:45f3)
 	db $0, "When you catch", $4f
@@ -119132,21 +115063,18 @@ _UnnamedText_494a3: ; 8c689 (23:4689)
 	db "It can't pinpoint", $4f
 	db "it, so you have", $55
 	db "to look yourself!", $57
-; 0x8c689 + 146 bytes
 
 _UnnamedText_494c4: ; 8c71b (23:471b)
 	db $0, "Looked into the", $4f
 	db "binoculars.", $51
 	db "A big #MON is", $4f
 	db "asleep on a road!", $57
-; 0x8c71b + 61 bytes
 
 _UnnamedText_494c9: ; 8c758 (23:4758)
 	db $0, "Looked into the", $4f
 	db "binoculars.", $51
 	db "It's a beautiful", $4f
 	db "view!", $57
-; 0x8c758 + 51 bytes
 
 _UnnamedText_494d5: ; 8c78b (23:478b)
 	db $0, "Looked into the", $4f
@@ -119156,7 +115084,6 @@ _UnnamedText_494d5: ; 8c78b (23:478b)
 	db "CITY to LAVENDER", $55
 	db "is by way of the", $55
 	db "ROCK TUNNEL.", $57
-; 0x8c78b + 110 bytes
 
 _DiglettsCaveEntranceRoute11Text1: ; 8c7f9 (23:47f9)
 	db $0, "What a surprise!", $4f
@@ -119176,12 +115103,10 @@ _TM39PreReceiveText: ; 8c86b (23:486b)
 	db "You can have this", $4f
 	db "TM. I don't need", $55
 	db "it any more...", $58
-; 0x8c86b + 91 bytes
 
 _ReceivedTM39Text: ; 8c8c6 (23:48c6)
 	db $0, $52, " received", $4f
 	db "TM39!@@"
-; 0x8c8c6 + 19 bytes
 
 _TM39ExplanationText: ; 8c8d9 (23:48d9)
 	db $0, "TM39 is a move", $4f
@@ -119190,24 +115115,20 @@ _TM39ExplanationText: ; 8c8d9 (23:48d9)
 	db "so use it during", $55
 	db "battles you can't", $55
 	db "afford to lose.", $57
-; 0x8c8d9 + 99 bytes
 
 _TM39NoRoomText: ; 8c93c (23:493c)
 	db $0, "You don't have", $4f
 	db "room for this.", $57
-; 0x8c93c + 30 bytes
 
 _UnnamedText_495b8: ; 8c95a (23:495a)
 	db $0, "Looked into the", $4f
 	db "binoculars.", $51
 	db "A man fishing!", $57
-; 0x8c95a + 44 bytes
 
 _UnnamedText_495c4: ; 8c986 (23:4986)
 	db $0, "Looked into the", $4f
 	db "binoculars.", $51
 	db "It's #MON TOWER!", $57
-; 0x8c986 + 45 bytes
 
 _UnnamedText_564c0: ; 8c9b3 (23:49b3)
 	db $0, "I'm the FISHING", $4f
@@ -119216,7 +115137,6 @@ _UnnamedText_564c0: ; 8c9b3 (23:49b3)
 	db "fishing!", $51
 	db "Do you like to", $4f
 	db "fish?", $57
-; 0x8c9b3 + 77 bytes
 
 _UnnamedText_564c5: ; 8ca00 (23:4a00)
 	db $0, "Grand! I like", $4f
@@ -119225,12 +115145,10 @@ _UnnamedText_564c5: ; 8ca00 (23:4a00)
 	db "fish, young one!", $51
 	db $52, " received", $4f
 	db "a @"
-; 0x8ca00 + 72 bytes
 
 UnknownText_8ca48: ; 8ca48 (23:4a48)
 	TX_RAM $cf4b
 	db $0, "!@@"
-; 0x8ca48 + 7 bytes
 
 _UnnamedText_564ca: ; 8ca4f (23:4a4f)
 	db $0, $51
@@ -119240,12 +115158,10 @@ _UnnamedText_564ca: ; 8ca4f (23:4a4f)
 	db "rivers, go out", $55
 	db "and land the big", $55
 	db "one!", $57
-; 0x8ca4f + 82 bytes
 
 _UnnamedText_564cf: ; 8caa1 (23:4aa1)
 	db $0, "Oh... That's so", $4f
 	db "disappointing...", $57
-; 0x8caa1 + 33 bytes
 
 _UnnamedText_564d4: ; 8cac2 (23:4ac2)
 	db $0, "Hello there,", $4f
@@ -119257,14 +115173,12 @@ _UnnamedText_564d4: ; 8cac2 (23:4ac2)
 	db "of #MON.", $51
 	db "Try fishing", $4f
 	db "wherever you can!", $57
-; 0x8cac2 + 118 bytes
 
 _UnnamedText_564d9: ; 8cb38 (23:4b38)
 	db $0, "Oh no!", $51
 	db "I had a gift for", $4f
 	db "you, but you have", $55
 	db "no room for it!", $57
-; 0x8cb38 + 59 bytes
 
 _Route15GateText1: ; 8cb73 (23:4b73)
 	db $0, "Are you working", $4f
@@ -119285,32 +115199,27 @@ _UnnamedText_4968c: ; 8cbac (23:4bac)
 	db "If you don't need", $4f
 	db "it, you should ", $55
 	db "store it via PC.", $57
-; 0x8cbac + 185 bytes
 
 _UnnamedText_49698: ; 8cc65 (23:4c65)
 	db $0, "Looked into the", $4f
 	db "binoculars.", $51
 	db "It looks like a", $4f
 	db "small island!", $57
-; 0x8cc65 + 59 bytes
 
 _UnnamedText_49777: ; 8cca0 (23:4ca0)
 	db $0, "No pedestrians", $4f
 	db "are allowed on", $55
 	db "CYCLING ROAD!", $57
-; 0x8cca0 + 45 bytes
 
 _UnnamedText_4977c: ; 8cccd (23:4ccd)
 	db $0, "CYCLING ROAD is a", $4f
 	db "downhill course", $55
 	db "by the sea. It's", $55
 	db "a great ride.", $57
-; 0x8cccd + 65 bytes
 
 _UnnamedText_49781: ; 8cd0e (23:4d0e)
 	db $0, "Excuse me! Wait", $4f
 	db "up please!", $57
-; 0x8cd0e + 28 bytes
 
 _Route16GateMapText2: ; 8cd2a (23:4d2a)
 	db $0, "How'd you get in?", $4f
@@ -119320,26 +115229,22 @@ _UnnamedText_49820: ; 8cd49 (23:4d49)
 	db $0, "I'm going for a", $4f
 	db "ride with my girl", $55
 	db "friend!", $57
-; 0x8cd49 + 42 bytes
 
 _UnnamedText_4982f: ; 8cd73 (23:4d73)
 	db $0, "We're going", $4f
 	db "riding together!", $57
-; 0x8cd73 + 29 bytes
 
 _UnnamedText_4983b: ; 8cd90 (23:4d90)
 	db $0, "Looked into the", $4f
 	db "binoculars.", $51
 	db "It's CELADON DEPT.", $4f
 	db "STORE!", $57
-; 0x8cd90 + 54 bytes
 
 _UnnamedText_49847: ; 8cdc6 (23:4dc6)
 	db $0, "Looked into the", $4f
 	db "binoculars.", $51
 	db "There's a long", $4f
 	db "path over water!", $57
-; 0x8cdc6 + 60 bytes
 
 _Route16HouseText3: ; 8ce02 (23:4e02)
 	db $0, "Oh, you found my", $4f
@@ -119348,12 +115253,10 @@ _Route16HouseText3: ; 8ce02 (23:4e02)
 	db "anyone I'm here.", $55
 	db "I'll make it up", $55
 	db "to you with this!", $58
-; 0x8ce02 + 100 bytes
 
 _ReceivedHM02Text: ; 8ce66 (23:4e66)
 	db $0, $52, " received", $4f
 	db "HM02!@@"
-; 0x8ce66 + 19 bytes
 
 _HM02ExplanationText: ; 8ce79 (23:4e79)
 	db $0, "HM02 is FLY.", $4f
@@ -119361,45 +115264,37 @@ _HM02ExplanationText: ; 8ce79 (23:4e79)
 	db "back to any town.", $51
 	db "Put it to good", $4f
 	db "use!", $57
-; 0x8ce79 + 69 bytes
 
 _HM02NoRoomText: ; 8cebe (23:4ebe)
 	db $0, "You don't have any", $4f
 	db "room for this.", $57
-; 0x8cebe + 34 bytes
 
 _UnnamedText_1e652: ; 8cee0 (23:4ee0)
 	db $0, "FEAROW: Kyueen!", $57
-; 0x8cee0 + 17 bytes
 
 _UnnamedText_49928: ; 8cef1 (23:4ef1)
 	db $0, "You need a BICYCLE", $4f
 	db "for CYCLING ROAD!", $57
-; 0x8cef1 + 38 bytes
 
 _UnnamedText_4992d: ; 8cf17 (23:4f17)
 	db $0, "CYCLING ROAD is", $4f
 	db "all uphill from", $55
 	db "here.", $57
-; 0x8cf17 + 39 bytes
 
 _UnnamedText_49932: ; 8cf3e (23:4f3e)
 	db $0, "Excuse me!", $57
-; 0x8cf3e + 12 bytes
 
 _UnnamedText_49993: ; 8cf4a (23:4f4a)
 	db $0, "Looked into the", $4f
 	db "binoculars.", $51
 	db "PALLET TOWN is in", $4f
 	db "the west!", $57
-; 0x8cf4a + 57 bytes
 
 _UnnamedText_4999f: ; 8cf83 (23:4f83)
 	db $0, "Looked into the", $4f
 	db "binoculars.", $51
 	db "There are people", $4f
 	db "swimming!", $57
-; 0x8cf83 + 56 bytes
 
 _UnnamedText_1e704: ; 8cfbb (23:4fbb)
 	db $0, "Only truly skilled", $4f
@@ -119407,107 +115302,88 @@ _UnnamedText_1e704: ; 8cfbb (23:4fbb)
 	db "allowed through.", $51
 	db "You don't have the", $4f
 	db "BOULDERBADGE yet!@@"
-; 0x8d012
 
 _UnnamedText_1e715: ; 8d012 (23:5012)
 	db $0, $51
 	db "The rules are", $4f
 	db "rules. I can't", $55
 	db "let you pass.", $57
-; 0x8d012 + 44 bytes
 
 _UnnamedText_1e71a: ; 8d03e (23:503e)
 	db $0, "Oh! That is the", $4f
 	db "BOULDERBADGE!", $55
 	db "Go right ahead!@@"
-; 0x8d03e + 48 bytes
 
 _VictoryRoad2BattleText6: ; 8d06e (23:506e)
 	db $0, "Gyaoo!@@"
-; 0x8d06e + 9 bytes
 
 _VictoryRoad2BattleText1: ; 8d077 (23:5077)
 	db $0, "VICTORY ROAD is", $4f
 	db "the final test", $55
 	db "for trainers!", $57
-; 0x8d077 + 46 bytes
 
 _VictoryRoad2EndBattleText1: ; 8d0a5 (23:50a5)
 	db $0, "Aiyah!", $58
-; 0x8d0a5 + 8 bytes
 
 _VictoryRoad2AfterBattleText1: ; 8d0ad (23:50ad)
 	db $0, "If you get stuck,", $4f
 	db "try moving some", $55
 	db "boulders around!", $57
-; 0x8d0ad + 52 bytes
 
 _VictoryRoad2BattleText2: ; 8d0e1 (23:50e1)
 	db $0, "Ah, so you wish", $4f
 	db "to challenge the", $55
 	db "ELITE FOUR?", $57
-; 0x8d0e1 + 46 bytes
 
 _VictoryRoad2EndBattleText2: ; 8d10f (23:510f)
 	db $0, "You", $4f
 	db "got me!", $58
-; 0x8d10f + 13 bytes
 
 _VictoryRoad2AfterBattleText2: ; 8d11c (23:511c)
 	db $0, $53, " also came", $4f
 	db "through here!", $57
-; 0x8d11c + 27 bytes
 
 _VictoryRoad2BattleText3: ; 8d137 (23:5137)
 	db $0, "Come on!", $4f
 	db "I'll whip you!", $57
-; 0x8d137 + 24 bytes
 
 _VictoryRoad2EndBattleText3: ; 8d14f (23:514f)
 	db $0, "I got", $4f
 	db "whipped!", $58
-; 0x8d14f + 16 bytes
 
 _VictoryRoad2AfterBattleText3: ; 8d15f (23:515f)
 	db $0, "You earned the", $4f
 	db "right to be on", $55
 	db "VICTORY ROAD!", $57
-; 0x8d15f + 45 bytes
 
 _VictoryRoad2BattleText4: ; 8d18c (23:518c)
 	db $0, "If you can get", $4f
 	db "through here, you", $55
 	db "can go meet the", $55
 	db "ELITE FOUR!", $57
-; 0x8d18c + 62 bytes
 
 _VictoryRoad2EndBattleText4: ; 8d1ca (23:51ca)
 	db $0, "No!", $4f
 	db "Unbelievable!", $58
-; 0x8d1ca + 19 bytes
 
 _VictoryRoad2AfterBattleText4: ; 8d1dd (23:51dd)
 	db $0, "I can beat you", $4f
 	db "when it comes to", $55
 	db "knowledge about", $55
 	db "#MON!", $57
-; 0x8d1dd + 55 bytes
 
 _VictoryRoad2BattleText5: ; 8d214 (23:5214)
 	db $0, "Is VICTORY ROAD", $4f
 	db "too tough?", $57
-; 0x8d214 + 28 bytes
 
 _VictoryRoad2EndBattleText5: ; 8d230 (23:5230)
 	db $0, "Well", $4f
 	db "done!", $58
-; 0x8d230 + 12 bytes
 
 _VictoryRoad2AfterBattleText5: ; 8d23c (23:523c)
 	db $0, "Many trainers give", $4f
 	db "up the challenge", $55
 	db "here.", $57
-; 0x8d23c + 43 bytes
 
 _UnnamedText_1e865: ; 8d267 (23:5267)
 	db $0, "Hiya! I'm a", $4f
@@ -119525,7 +115401,6 @@ _UnnamedText_1e865: ; 8d267 (23:5267)
 	db "a #MON!", $51
 	db "So, how about it?", $4f
 	db "Help me out here!", $57
-; 0x8d267 + 222 bytes
 
 _UnnamedText_1e86a: ; 8d345 (23:5345)
 	db $0, "When I'm in the", $4f
@@ -119533,7 +115408,6 @@ _UnnamedText_1e86a: ; 8d345 (23:5345)
 	db "my PC and run the", $55
 	db "Cell Separation", $55
 	db "System!", $57
-; 0x8d345 + 76 bytes
 
 _UnnamedText_1e86f: ; 8d391 (23:5391)
 	db $0, "No!? Come on, you", $4f
@@ -119542,7 +115416,6 @@ _UnnamedText_1e86f: ; 8d391 (23:5391)
 	db "What do you say,", $4f
 	db "chief? Please?", $55
 	db "OK? All right!", $58
-; 0x8d391 + 100 bytes
 
 _BillThankYouText: ; 8d3f5 (23:53f5)
 	db $0, "BILL: Yeehah!", $4f
@@ -119556,19 +115429,16 @@ _BillThankYouText: ; 8d3f5 (23:53f5)
 	db "I've got to thank", $4f
 	db "you... Oh here,", $55
 	db "maybe this'll do.", $58
-; 0x8d3f5 + 164 bytes
 
 _SSTicketReceivedText: ; 8d499 (23:5499)
 	db $0, $52, " received", $4f
 	db "an @"
 	TX_RAM $cf4b
 	db $0, "!@@"
-; 0x8d4b0
 
 _SSTicketNoRoomText: ; 8d4b0 (23:54b0)
 	db $0, "You've got too", $4f
 	db "much stuff, bud!", $57
-; 0x8d4b0 + 32 bytes
 
 _UnnamedText_1e8cb: ; 8d4d0 (23:54d0)
 	db $0, "That cruise ship,", $4f
@@ -119582,14 +115452,12 @@ _UnnamedText_1e8cb: ; 8d4d0 (23:54d0)
 	db "fancy do's. Why", $55
 	db "don't you go", $55
 	db "instead of me?", $57
-; 0x8d4d0 + 175 bytes
 
 _UnnamedText_1e8da: ; 8d57f (23:557f)
 	db $0, "BILL: Look, bud,", $4f
 	db "just check out", $55
 	db "some of my rare", $55
 	db "#MON on my PC!", $57
-; 0x8d57f + 64 bytes
 
 _Route1ViridianMartSampleText: ; 8d5bf (23:55bf)
 	db $0, "Hi! I work at a", $4f
@@ -119601,28 +115469,23 @@ _Route1ViridianMartSampleText: ; 8d5bf (23:55bf)
 	db "I know, I'll give", $4f
 	db "you a sample!", $55
 	db "Here you go!", $58
-; 0x8d5bf + 132 bytes
 
 _UnnamedText_1cae8: ; 8d643 (23:5643)
 	db $0, $52, " got", $4f
 	db "@"
-; 0x8d643 + 8 bytes
 
 UnknownText_8d64b: ; 8d64b (23:564b)
 	TX_RAM $cf4b
 	db $0, "!@@"
-; 0x8d64b + 7 bytes
 
 _UnnamedText_1caee: ; 8d652 (23:5652)
 	db $0, "We also carry", $4f
 	db "# BALLs for", $55
 	db "catching #MON!", $57
-; 0x8d652 + 42 bytes
 
 _UnnamedText_1caf3: ; 8d67c (23:567c)
 	db $0, "You have too much", $4f
 	db "stuff with you!", $57
-; 0x8d67c + 35 bytes
 
 _Route1Text2: ; 8d69f (23:569f)
 	db $0, "See those ledges", $4f
@@ -119658,133 +115521,109 @@ _Route3Text1: ; 8d779 (23:5779)
 _Route3BattleText1: ; 8d7d5 (23:57d5)
 	db $0, "Hey! I met you in", $4f
 	db "VIRIDIAN FOREST!", $57
-; 0x8d7d5 + 36 bytes
 
 _Route3EndBattleText1: ; 8d7f9 (23:57f9)
 	db $0, "You", $4f
 	db "beat me again!", $58
-; 0x8d7f9 + 20 bytes
 
 _Route3AfterBattleText1: ; 8d80d (23:580d)
 	db $0, "There are other", $4f
 	db "kinds of #MON", $55
 	db "than those found", $55
 	db "in the forest!", $57
-; 0x8d80d + 63 bytes
 
 _Route3BattleText2: ; 8d84c (23:584c)
 	db $0, "Hi! I like shorts!", $4f
 	db "They're comfy and", $55
 	db "easy to wear!", $57
-; 0x8d84c + 51 bytes
 
 _Route3EndBattleText2: ; 8d87f (23:587f)
 	db $0, "I don't", $4f
 	db "believe it!", $58
-; 0x8d87f + 20 bytes
 
 _Route3AfterBattleText2: ; 8d893 (23:5893)
 	db $0, "Are you storing", $4f
 	db "your #MON on", $55
 	db "PC? Each BOX can", $55
 	db "hold 20 #MON!", $57
-; 0x8d893 + 61 bytes
 
 _Route3BattleText3: ; 8d8d0 (23:58d0)
 	db $0, "You looked at me,", $4f
 	db "didn't you?", $57
-; 0x8d8d0 + 30 bytes
 
 _Route3EndBattleText3: ; 8d8ee (23:58ee)
 	db $0, "You're", $4f
 	db "mean!", $58
-; 0x8d8ee + 13 bytes
 
 _Route3AfterBattleText3: ; 8d8fb (23:58fb)
 	db $0, "Quit staring if", $4f
 	db "you don't want to", $55
 	db "fight!", $57
-; 0x8d8fb + 41 bytes
 
 _Route3BattleText4: ; 8d924 (23:5924)
 	db $0, "Are you a trainer?", $4f
 	db "Let's fight!", $57
-; 0x8d924 + 32 bytes
 
 _Route3EndBattleText4: ; 8d944 (23:5944)
 	db $0, "If I", $4f
 	db "had new #MON I", $55
 	db "would've won!", $58
-; 0x8d944 + 34 bytes
 
 _Route3AfterBattleText4: ; 8d966 (23:5966)
 	db $0, "If a #MON BOX", $4f
 	db "on the PC gets", $55
 	db "full, just switch", $55
 	db "to another BOX!", $57
-; 0x8d966 + 64 bytes
 
 _Route3BattleText5: ; 8d9a6 (23:59a6)
 	db $0, "That look you", $4f
 	db "gave me, it's so", $55
 	db "intriguing!", $57
-; 0x8d9a6 + 43 bytes
 
 _Route3EndBattleText5: ; 8d9d1 (23:59d1)
 	db $0, "Be nice!", $58
-; 0x8d9d1 + 10 bytes
 
 _Route3AfterBattleText5: ; 8d9db (23:59db)
 	db $0, "Avoid fights by", $4f
 	db "not letting", $55
 	db "people see you!", $57
-; 0x8d9db + 45 bytes
 
 _Route3BattleText6: ; 8da08 (23:5a08)
 	db $0, "Hey! You're not", $4f
 	db "wearing shorts!", $57
-; 0x8da08 + 32 bytes
 
 _Route3EndBattleText6: ; 8da28 (23:5a28)
 	db $0, "Lost!", $4f
 	db "Lost! Lost!", $58
-; 0x8da28 + 19 bytes
 
 _Route3AfterBattleText6: ; 8da3b (23:5a3b)
 	db $0, "I always wear", $4f
 	db "shorts, even in", $55
 	db "winter!", $57
-; 0x8da3b + 39 bytes
 
 _Route3BattleText7: ; 8da62 (23:5a62)
 	db $0, "You can fight my", $4f
 	db "new #MON!", $57
-; 0x8da62 + 28 bytes
 
 _Route3EndBattleText7: ; 8da7e (23:5a7e)
 	db $0, "Done", $4f
 	db "like dinner!", $58
-; 0x8da7e + 19 bytes
 
 _Route3AfterBattleText7: ; 8da91 (23:5a91)
 	db $0, "Trained #MON", $4f
 	db "are stronger than", $55
 	db "the wild ones!", $57
-; 0x8da91 + 47 bytes
 
 _Route3BattleText8: ; 8dac0 (23:5ac0)
 	db $0, "Eek! Did you", $4f
 	db "touch me?", $57
-; 0x8dac0 + 24 bytes
 
 _Route3EndBattleText8: ; 8dad8 (23:5ad8)
 	db $0, "That's it?", $58
-; 0x8dad8 + 11 bytes
 
 _Route3AfterBattleText8: ; 8dae3 (23:5ae3)
 	db $0, "ROUTE 4 is at the", $4f
 	db "foot of MT.MOON.", $57
-; 0x8dae3 + 36 bytes
 
 _Route3Text10: ; 8db07 (23:5b07)
 	db $0, "ROUTE 3", $4f
@@ -119798,12 +115637,10 @@ _Route4Text1: ; 8db1e (23:5b1e)
 _Route4BattleText1: ; 8db4b (23:5b4b)
 	db $0, "I came to get my", $4f
 	db "mushroom #MON!", $57
-; 0x8db4b + 33 bytes
 
 _Route4EndBattleText1: ; 8db6c (23:5b6c)
 	db $0, "Oh! My cute", $4f
 	db "mushroom #MON!", $58
-; 0x8db6c + 28 bytes
 
 _Route4AfterBattleText1: ; 8db88 (23:5b88)
 	db $0, "There might not", $4f
@@ -119811,7 +115648,6 @@ _Route4AfterBattleText1: ; 8db88 (23:5b88)
 	db "mushrooms here.", $51
 	db "I think I got", $4f
 	db "them all.", $57
-; 0x8db88 + 69 bytes
 
 _Route4Text5: ; 8dbcd (23:5bcd)
 	db $0, "MT.MOON", $4f
@@ -119831,93 +115667,76 @@ _Route6BattleText1: ; 8dc38 (23:5c38)
 	db $0, "Who's there?", $4f
 	db "Quit listening in", $55
 	db "on us!", $57
-; 0x8dc38 + 38 bytes
 
 _Route6EndBattleText1: ; 8dc5e (23:5c5e)
 	db $0, "I", $4f
 	db "just can't win!", $58
-; 0x8dc5e + 18 bytes
 
 _Route6AfterBattleText1: ; 8dc70 (23:5c70)
 	db $0, "Whisper...", $4f
 	db "whisper...", $57
-; 0x8dc70 + 23 bytes
 
 _Route6BattleText2: ; 8dc87 (23:5c87)
 	db $0, "Excuse me! This", $4f
 	db "is a private", $55
 	db "conversation!", $57
-; 0x8dc87 + 44 bytes
 
 _Route6EndBattleText2: ; 8dcb3 (23:5cb3)
 	db $0, "Ugh!", $4f
 	db "I hate losing!", $58
-; 0x8dcb3 + 21 bytes
 
 _Route6BattleText3: ; 8dcc8 (23:5cc8)
 	db $0, "There aren't many", $4f
 	db "bugs out here.", $57
-; 0x8dcc8 + 33 bytes
 
 _Route6EndBattleText3: ; 8dce9 (23:5ce9)
 	db $0, "No!", $4f
 	db "You're kidding!", $58
-; 0x8dce9 + 20 bytes
 
 _Route6AfterBattleText3: ; 8dcfd (23:5cfd)
 	db $0, "I like bugs, so", $4f
 	db "I'm going back to", $55
 	db "VIRIDIAN FOREST.", $57
-; 0x8dcfd + 51 bytes
 
 _Route6BattleText4: ; 8dd30 (23:5d30)
 	db $0, "Huh? You want", $4f
 	db "to talk to me?", $57
-; 0x8dd30 + 30 bytes
 
 _Route6EndBattleText4: ; 8dd4e (23:5d4e)
 	db $0, "I", $4f
 	db "didn't start it!", $58
-; 0x8dd4e + 19 bytes
 
 _Route6AfterBattleText4: ; 8dd61 (23:5d61)
 	db $0, "I should carry", $4f
 	db "more #MON with", $55
 	db "me for safety.", $57
-; 0x8dd61 + 46 bytes
 
 _Route6BattleText5: ; 8dd8f (23:5d8f)
 	db $0, "Me? Well, OK.", $4f
 	db "I'll play!", $57
-; 0x8dd8f + 25 bytes
 
 _Route6EndBattleText5: ; 8dda8 (23:5da8)
 	db $0, "Just", $4f
 	db "didn't work!", $58
-; 0x8dda8 + 18 bytes
 
 _Route6AfterBattleText5: ; 8ddba (23:5dba)
 	db $0, "I want to get", $4f
 	db "stronger! What's", $55
 	db "your secret?", $57
-; 0x8ddba + 44 bytes
 
 _Route6BattleText6: ; 8dde6 (23:5de6)
 	db $0, "I've never seen", $4f
 	db "you around!", $55
 	db "Are you good?", $57
-; 0x8dde6 + 42 bytes
 
 _Route6EndBattleText6: ; 8de10 (23:5e10)
 	db $0, "You", $4f
 	db "are too good!", $58
-; 0x8de10 + 19 bytes
 
 _Route6AfterBattleText6: ; 8de23 (23:5e23)
 	db $0, "Are my #MON", $4f
 	db "weak? Or, am I", $55
 	db "just bad?", $57
-; 0x8de23 + 38 bytes
 
 _Route6Text7: ; 8de49 (23:5e49)
 	db $0, "UNDERGROUND PATH", $4f
@@ -119933,149 +115752,122 @@ _Route8BattleText1: ; 8dea9 (23:5ea9)
 	db $0, "You look good at", $4f
 	db "#MON, but", $55
 	db "how's your chem?", $57
-; 0x8dea9 + 44 bytes
 
 _Route8EndBattleText1: ; 8ded5 (23:5ed5)
 	db $0, "Ow!", $4f
 	db "Meltdown!", $58
-; 0x8ded5 + 15 bytes
 
 _Route8AfterBattleText1: ; 8dee4 (23:5ee4)
 	db $0, "I am better at", $4f
 	db "school than this!", $57
-; 0x8dee4 + 34 bytes
 
 _Route8BattleText2: ; 8df06 (23:5f06)
 	db $0, "All right! Let's", $4f
 	db "roll the dice!", $57
-; 0x8df06 + 32 bytes
 
 _Route8EndBattleText2: ; 8df26 (23:5f26)
 	db $0, "Drat!", $4f
 	db "Came up short!", $58
-; 0x8df26 + 22 bytes
 
 _Route8AfterBattleText2: ; 8df3c (23:5f3c)
 	db $0, "Lady Luck's not", $4f
 	db "with me today!", $57
-; 0x8df3c + 31 bytes
 
 _Route8BattleText3: ; 8df5b (23:5f5b)
 	db $0, "You need strategy", $4f
 	db "to win at this!", $57
-; 0x8df5b + 35 bytes
 
 _Route8EndBattleText3: ; 8df7e (23:5f7e)
 	db $0, "It's", $4f
 	db "not logical!", $58
-; 0x8df7e + 18 bytes
 
 _Route8AfterBattleText3: ; 8df90 (23:5f90)
 	db $0, "Go with GRIMER", $4f
 	db "first...and...", $55
 	db "...and...then...", $57
-; 0x8df90 + 48 bytes
 
 _Route8BattleText4: ; 8dfc0 (23:5fc0)
 	db $0, "I like NIDORAN, so", $4f
 	db "I collect them!", $57
-; 0x8dfc0 + 36 bytes
 
 _Route8EndBattleText4: ; 8dfe4 (23:5fe4)
 	db $0, "Why? Why??", $58
-; 0x8dfe4 + 12 bytes
 
 _Route8AfterBattleText4: ; 8dff0 (23:5ff0)
 	db $0, "When #MON grow", $4f
 	db "up they get ugly!", $55
 	db "They shouldn't", $55
 	db "evolve!", $57
-; 0x8dff0 + 56 bytes
 
 _Route8BattleText5: ; 8e028 (23:6028)
 	db $0, "School is fun, but", $4f
 	db "so are #MON.", $57
-; 0x8e028 + 33 bytes
 
 _Route8EndBattleText5: ; 8e049 (23:6049)
 	db $0, "I'll", $4f
 	db "stay with school.", $58
-; 0x8e049 + 23 bytes
 
 _Route8AfterBattleText5: ; 8e060 (23:6060)
 	db $0, "We're stuck here", $4f
 	db "because of the", $55
 	db "gates at SAFFRON.", $57
-; 0x8e060 + 50 bytes
 
 _Route8BattleText6: ; 8e092 (23:6092)
 	db $0, "MEOWTH is so cute,", $4f
 	db "meow, meow, meow!", $57
-; 0x8e092 + 38 bytes
 
 _Route8EndBattleText6: ; 8e0b8 (23:60b8)
 	db $0, "Meow!", $58
-; 0x8e0b8 + 7 bytes
 
 _Route8AfterBattleText6: ; 8e0bf (23:60bf)
 	db $0, "I think PIDGEY", $4f
 	db "and RATTATA", $55
 	db "are cute too!", $57
-; 0x8e0bf + 42 bytes
 
 _Route8BattleText7: ; 8e0e9 (23:60e9)
 	db $0, "We must look", $4f
 	db "silly standing", $55
 	db "here like this!", $57
-; 0x8e0e9 + 45 bytes
 
 _Route8EndBattleText7: ; 8e116 (23:6116)
 	db $0, "Look what", $4f
 	db "you did!", $58
-; 0x8e116 + 20 bytes
 
 _Route8AfterBattleText7: ; 8e12a (23:612a)
 	db $0, "SAFFRON's gate", $4f
 	db "keeper won't let", $55
 	db "us through.", $55
 	db "He's so mean!", $57
-; 0x8e12a + 56 bytes
 
 _Route8BattleText8: ; 8e162 (23:6162)
 	db $0, "I'm a rambling,", $4f
 	db "gambling dude!", $57
-; 0x8e162 + 31 bytes
 
 _Route8EndBattleText8: ; 8e181 (23:6181)
 	db $0, "Missed", $4f
 	db "the big score!", $58
-; 0x8e181 + 23 bytes
 
 _Route8AfterBattleText8: ; 8e198 (23:6198)
 	db $0, "Gambling and", $4f
 	db "#MON are like", $55
 	db "eating peanuts!", $55
 	db "Just can't stop!", $57
-; 0x8e198 + 60 bytes
 
 _Route8BattleText9: ; 8e1d4 (23:61d4)
 	db $0, "What's a cute,", $4f
 	db "round and fluffy", $55
 	db "#MON?", $57
-; 0x8e1d4 + 38 bytes
 
 _Route8EndBattleText9: ; 8e1fa (23:61fa)
 	db $0, "Stop!", $51
 	db "Don't be so mean", $4f
 	db "to my CLEFAIRY!", $58
-; 0x8e1fa + 39 bytes
 
 _Route8AfterBattleText9: ; 8e221 (23:6221)
 	db $0, "I heard that", $4f
 	db "CLEFAIRY evolves", $55
 	db "when it's exposed", $55
 	db "to a MOON STONE.", $57
-; 0x8e221 + 65 bytes
 
 _Route8Text10: ; 8e262 (23:6262)
 	db $0, "UNDERGROUND PATH", $4f
@@ -120086,151 +115878,124 @@ _Route9BattleText1: ; 8e291 (23:6291)
 	db $0, "You have #MON", $4f
 	db "with you!", $55
 	db "You're mine!", $57
-; 0x8e291 + 37 bytes
 
 _Route9EndBattleText1: ; 8e2b6 (23:62b6)
 	db $0, "You", $4f
 	db "deceived me!", $58
-; 0x8e2b6 + 18 bytes
 
 _Route9AfterBattleText1: ; 8e2c8 (23:62c8)
 	db $0, "You need light to", $4f
 	db "get through that", $55
 	db "dark tunnel ahead.", $57
-; 0x8e2c8 + 55 bytes
 
 _Route9BattleText2: ; 8e2ff (23:62ff)
 	db $0, "Who's that walking", $4f
 	db "with those good", $55
 	db "looking #MON?", $57
-; 0x8e2ff + 49 bytes
 
 _Route9EndBattleText2: ; 8e330 (23:6330)
 	db $0, "Out", $4f
 	db "like a light!", $58
-; 0x8e330 + 19 bytes
 
 _Route9AfterBattleText2: ; 8e343 (23:6343)
 	db $0, "Keep walking!", $57
-; 0x8e343 + 15 bytes
 
 _Route9BattleText3: ; 8e352 (23:6352)
 	db $0, "I'm taking ROCK", $4f
 	db "TUNNEL to go to", $55
 	db "LAVENDER...", $57
-; 0x8e352 + 44 bytes
 
 _Route9EndBattleText3: ; 8e37e (23:637e)
 	db $0, "Can't", $4f
 	db "measure up!", $58
-; 0x8e37e + 18 bytes
 
 _Route9AfterBattleText3: ; 8e390 (23:6390)
 	db $0, "Are you off to", $4f
 	db "ROCK TUNNEL too?", $57
-; 0x8e390 + 33 bytes
 
 _Route9BattleText4: ; 8e3b1 (23:63b1)
 	db $0, "Don't you dare", $4f
 	db "condescend me!", $57
-; 0x8e3b1 + 30 bytes
 
 _Route9EndBattleText4: ; 8e3cf (23:63cf)
 	db $0, "No!", $4f
 	db "You're too much!", $58
-; 0x8e3cf + 21 bytes
 
 _Route9AfterBattleText4: ; 8e3e4 (23:63e4)
 	db $0, "You're obviously", $4f
 	db "talented! Good", $55
 	db "luck to you!", $57
-; 0x8e3e4 + 45 bytes
 
 _Route9BattleText5: ; 8e411 (23:6411)
 	db $0, "Bwahaha!", $4f
 	db "Great! I was", $55
 	db "bored, eh!", $57
-; 0x8e411 + 34 bytes
 
 _Route9EndBattleText5: ; 8e433 (23:6433)
 	db $0, "Keep it", $4f
 	db "coming, eh!", $51
 	db "Oh wait. I'm out", $4f
 	db "of #MON!", $58
-; 0x8e433 + 46 bytes
 
 _Route9AfterBattleText5: ; 8e461 (23:6461)
 	db $0, "You sure had guts", $4f
 	db "standing up to me", $55
 	db "there, eh?", $57
-; 0x8e461 + 48 bytes
 
 _Route9BattleText6: ; 8e491 (23:6491)
 	db $0, "Hahaha!", $4f
 	db "Aren't you a", $55
 	db "little toughie!", $57
-; 0x8e491 + 37 bytes
 
 _Route9EndBattleText6: ; 8e4b6 (23:64b6)
 	db $0, "What's", $4f
 	db "that?", $58
-; 0x8e4b6 + 13 bytes
 
 _Route9AfterBattleText6: ; 8e4c3 (23:64c3)
 	db $0, "Hahaha! Kids", $4f
 	db "should be tough!", $57
-; 0x8e4c3 + 31 bytes
 
 _Route9BattleText7: ; 8e4e2 (23:64e2)
 	db $0, "I got up early", $4f
 	db "every day to", $55
 	db "raise my #MON", $55
 	db "from cocoons!", $57
-; 0x8e4e2 + 57 bytes
 
 _Route9EndBattleText7: ; 8e51b (23:651b)
 	db $0, "WHAT?", $51
 	db "What a total", $4f
 	db "waste of time!", $58
-; 0x8e51b + 35 bytes
 
 _Route9AfterBattleText7: ; 8e53e (23:653e)
 	db $0, "I have to collect", $4f
 	db "more than bugs to", $55
 	db "get stronger...", $57
-; 0x8e53e + 53 bytes
 
 _Route9BattleText8: ; 8e573 (23:6573)
 	db $0, "Hahahaha!", $4f
 	db "Come on, dude!", $57
-; 0x8e573 + 26 bytes
 
 _Route9EndBattleText8: ; 8e58d (23:658d)
 	db $0, "Hahahaha!", $4f
 	db "You beat me fair!", $58
-; 0x8e58d + 29 bytes
 
 _Route9AfterBattleText8: ; 8e5aa (23:65aa)
 	db $0, "Hahahaha!", $4f
 	db "Us hearty guys", $55
 	db "always laugh!", $57
-; 0x8e5aa + 40 bytes
 
 _Route9BattleText9: ; 8e5d2 (23:65d2)
 	db $0, "Go, my super bug", $4f
 	db "#MON!", $57
-; 0x8e5d2 + 24 bytes
 
 _Route9EndBattleText9: ; 8e5ea (23:65ea)
 	db $0, "My", $4f
 	db "bugs...", $58
-; 0x8e5ea + 12 bytes
 
 _Route9AfterBattleText9: ; 8e5f6 (23:65f6)
 	db $0, "If you don't like", $4f
 	db "bug #MON, you", $55
 	db "bug me!", $57
-; 0x8e5f6 + 40 bytes
 
 _Route9Text11: ; 8e61e (23:661e)
 	db $0, "ROUTE 9", $4f
@@ -120242,93 +116007,76 @@ _Route10BattleText1: ; 8e642 (23:6642)
 	db "#MANIAC too?", $55
 	db "Want to see my", $55
 	db "collection?", $57
-; 0x8e642 + 56 bytes
 
 _Route10EndBattleText1: ; 8e67a (23:667a)
 	db $0, "Humph.", $4f
 	db "I'm not angry!", $58
-; 0x8e67a + 22 bytes
 
 _Route10AfterBattleText1: ; 8e690 (23:6690)
 	db $0, "I have more rare", $4f
 	db "#MON at home!", $57
-; 0x8e690 + 32 bytes
 
 _Route10BattleText2: ; 8e6b0 (23:66b0)
 	db $0, "Ha-hahah-ah-ha!", $57
-; 0x8e6b0 + 17 bytes
 
 _Route10EndBattleText2: ; 8e6c1 (23:66c1)
 	db $0, "Ha-haha!", $4f
 	db "Not laughing!", $55
 	db "Ha-hay fever!", $55
 	db "Haha-ha-choo!", $58
-; 0x8e6c1 + 52 bytes
 
 _Route10AfterBattleText2: ; 8e6f5 (23:66f5)
 	db $0, "Haha-ha-choo!", $4f
 	db "Ha-choo!", $55
 	db "Snort! Snivel!", $57
-; 0x8e6f5 + 39 bytes
 
 _Route10BattleText3: ; 8e71c (23:671c)
 	db $0, "Hi kid, want to", $4f
 	db "see my #MON?", $57
-; 0x8e71c + 30 bytes
 
 _Route10EndBattleText3: ; 8e73a (23:673a)
 	db $0, "Oh no!", $4f
 	db "My #MON!", $58
-; 0x8e73a + 17 bytes
 
 _Route10AfterBattleText3: ; 8e74b (23:674b)
 	db $0, "I don't like you", $4f
 	db "for beating me!", $57
-; 0x8e74b + 33 bytes
 
 _Route10BattleText4: ; 8e76c (23:676c)
 	db $0, "I've been to a", $4f
 	db "#MON GYM a few", $55
 	db "times. But, I", $55
 	db "lost each time.", $57
-; 0x8e76c + 60 bytes
 
 _Route10EndBattleText4: ; 8e7a8 (23:67a8)
 	db $0, "Ohh!", $4f
 	db "Blew it again!", $58
-; 0x8e7a8 + 21 bytes
 
 _Route10AfterBattleText4: ; 8e7bd (23:67bd)
 	db $0, "I noticed some", $4f
 	db "#MANIACs", $55
 	db "prowling around.", $57
-; 0x8e7bd + 42 bytes
 
 _Route10BattleText5: ; 8e7e7 (23:67e7)
 	db $0, "Ah! This mountain", $4f
 	db "air is delicious!", $57
-; 0x8e7e7 + 37 bytes
 
 _Route10EndBattleText5: ; 8e80c (23:680c)
 	db $0, "That", $4f
 	db "cleared my head!", $58
-; 0x8e80c + 23 bytes
 
 _Route10AfterBattleText5: ; 8e823 (23:6823)
 	db $0, "I feel bloated on", $4f
 	db "mountain air!", $57
-; 0x8e823 + 33 bytes
 
 _Route10BattleText6: ; 8e844 (23:6844)
 	db $0, "I'm feeling a bit", $4f
 	db "faint from this", $55
 	db "tough hike.", $57
-; 0x8e844 + 46 bytes
 
 _Route10EndBattleText6: ; 8e872 (23:6872)
 	db $0, "I'm", $4f
 	db "not up to it!", $58
-; 0x8e872 + 18 bytes
 
 _Route10AfterBattleText6: ; 8e884 (23:6884)
 	db $0, "The #MON here", $4f
@@ -120336,7 +116084,6 @@ _Route10AfterBattleText6: ; 8e884 (23:6884)
 	db "There should be a", $55
 	db "pink one with a", $55
 	db "floral pattern!", $57
-; 0x8e884 + 80 bytes
 
 _Route10Text9: ; 8e8d4 (23:68d4)
 _Route10Text7: ; 8e8d4 (23:68d4)
@@ -120347,122 +116094,99 @@ _Route10Text10: ; 8e8e1 (23:68e1)
 
 _Route11BattleText1: ; 8e8ee (23:68ee)
 	db $0, "Win, lose or draw!", $57
-; 0x8e8ee + 20 bytes
 
 _Route11EndBattleText1: ; 8e902 (23:6902)
 	db $0, "Atcha!", $4f
 	db "Didn't go my way!", $58
-; 0x8e902 + 25 bytes
 
 _Route11AfterBattleText1: ; 8e91b (23:691b)
 	db $0, "#MON is life!", $4f
 	db "And to live is to", $55
 	db "gamble!", $57
-; 0x8e91b + 41 bytes
 
 _Route11BattleText2: ; 8e944 (23:6944)
 	db $0, "Competition! I", $4f
 	db "can't get enough!", $57
-; 0x8e944 + 33 bytes
 
 _Route11EndBattleText2: ; 8e965 (23:6965)
 	db $0, "I had", $4f
 	db "a chance!", $58
-; 0x8e965 + 17 bytes
 
 _Route11AfterBattleText2: ; 8e976 (23:6976)
 	db $0, "You can't be a", $4f
 	db "coward in the", $55
 	db "world of #MON!", $57
-; 0x8e976 + 44 bytes
 
 _Route11BattleText3: ; 8e9a2 (23:69a2)
 	db $0, "Let's go, but", $4f
 	db "don't cheat!", $57
-; 0x8e9a2 + 26 bytes
 
 _Route11EndBattleText3: ; 8e9bc (23:69bc)
 	db $0, "Huh?", $4f
 	db "That's not right!", $58
-; 0x8e9bc + 23 bytes
 
 _Route11AfterBattleText3: ; 8e9d3 (23:69d3)
 	db $0, "I did my best! I", $4f
 	db "have no regrets!", $57
-; 0x8e9d3 + 35 bytes
 
 _Route11BattleText4: ; 8e9f6 (23:69f6)
 	db $0, "Careful!", $4f
 	db "I'm laying down", $55
 	db "some cables!", $57
-; 0x8e9f6 + 38 bytes
 
 _Route11EndBattleText4: ; 8ea1c (23:6a1c)
 	db $0, "That", $4f
 	db "was electric!", $58
-; 0x8ea1c + 20 bytes
 
 _Route11AfterBattleText4: ; 8ea30 (23:6a30)
 	db $0, "Spread the word", $4f
 	db "to save energy!", $57
-; 0x8ea30 + 33 bytes
 
 _Route11BattleText5: ; 8ea51 (23:6a51)
 	db $0, "I just became a", $4f
 	db "trainer! But, I", $55
 	db "think I can win!", $57
-; 0x8ea51 + 50 bytes
 
 _Route11EndBattleText5: ; 8ea83 (23:6a83)
 	db $0, "My", $4f
 	db "#MON couldn't!", $58
-; 0x8ea83 + 18 bytes
 
 _Route11AfterBattleText5: ; 8ea95 (23:6a95)
 	db $0, "What do you want?", $4f
 	db "Leave me alone!", $57
-; 0x8ea95 + 35 bytes
 
 _Route11BattleText6: ; 8eab8 (23:6ab8)
 	db $0, "Fwahaha! I have", $4f
 	db "never lost!", $57
-; 0x8eab8 + 29 bytes
 
 _Route11EndBattleText6: ; 8ead5 (23:6ad5)
 	db $0, "My", $4f
 	db "first loss!", $58
-; 0x8ead5 + 16 bytes
 
 _Route11AfterBattleText6: ; 8eae5 (23:6ae5)
 	db $0, "Luck of the draw!", $4f
 	db "Just luck!", $57
-; 0x8eae5 + 30 bytes
 
 _Route11BattleText7: ; 8eb03 (23:6b03)
 	db $0, "I have never won", $4f
 	db "before...", $57
-; 0x8eb03 + 28 bytes
 
 _Route11EndBattleText7: ; 8eb1f (23:6b1f)
 	db $0, "I saw", $4f
 	db "this coming...", $58
-; 0x8eb1f + 22 bytes
 
 _Route11AfterBattleText7: ; 8eb35 (23:6b35)
 	db $0, "It's just luck.", $4f
 	db "Luck of the draw.", $57
-; 0x8eb35 + 34 bytes
 
 _Route11BattleText8: ; 8eb57 (23:6b57)
 	db $0, "I'm the best in", $4f
 	db "my class!", $57
-; 0x8eb57 + 26 bytes
 
 _Route11EndBattleText8: ; 8eb71 (23:6b71)
 	db $0, "Darn!", $4f
 	db "I need to make my", $55
 	db "#MON stronger!", $58
-; 0x8eb71 + 40 bytes
 
 _Route11AfterBattleText8: ; 8eb99 (23:6b99)
 	db $0, "There's a fat", $4f
@@ -120471,39 +116195,32 @@ _Route11AfterBattleText8: ; 8eb99 (23:6b99)
 	db "the mountains.", $51
 	db "It's strong if", $4f
 	db "you can get it.", $57
-; 0x8eb99 + 85 bytes
 
 _Route11BattleText9: ; 8ebee (23:6bee)
 	db $0, "Watch out for", $4f
 	db "live wires!", $57
-; 0x8ebee + 27 bytes
 
 SECTION "bank24",ROMX,BANK[$24]
 
 _Route11EndBattleText9: ; 90000 (24:4000)
 	db $0, "Whoa!", $4f
 	db "You spark plug!", $58
-; 0x90000 + 23 bytes
 
 _Route11AfterBattleText9: ; 90017 (24:4017)
 	db $0, "Well, better get", $4f
 	db "back to work.", $57
-; 0x90017 + 32 bytes
 
 _Route11BattleText10: ; 90037 (24:4037)
 	db $0, "My #MON should", $4f
 	db "be ready by now!", $57
-; 0x90037 + 33 bytes
 
 _Route11EndBattleText10: ; 90058 (24:4058)
 	db $0, "Too", $4f
 	db "much, too young!", $58
-; 0x90058 + 22 bytes
 
 _Route11AfterBattleText10: ; 9006e (24:406e)
 	db $0, "I better go find", $4f
 	db "stronger ones!", $57
-; 0x9006e + 33 bytes
 
 _Route11Text11: ; 9008f (24:408f)
 	db $0, "DIGLETT's CAVE", $57
@@ -120516,126 +116233,103 @@ _UnnamedText_596eb: ; 900bf (24:40bf)
 	db $0, "SNORLAX woke up!", $51
 	db "It attacked in a", $4f
 	db "grumpy rage!", $57
-; 0x900bf + 48 bytes
 
 _UnnamedText_596f0: ; 900ef (24:40ef)
 	db $0, "SNORLAX calmed", $4f
 	db "down! With a big", $55
 	db "yawn, it returned", $55
 	db "to the mountains!", $57
-; 0x900ef + 69 bytes
 
 _Route12BattleText1: ; 90134 (24:4134)
 	db $0, "Yeah! I got a", $4f
 	db "bite, here!", $57
-; 0x90134 + 27 bytes
 
 _Route12EndBattleText1: ; 9014f (24:414f)
 	db $0, "Tch!", $4f
 	db "Just a small fry!", $58
-; 0x9014f + 24 bytes
 
 _Route12AfterBattleText1: ; 90167 (24:4167)
 	db $0, "Hang on! My line's", $4f
 	db "snagged!", $57
-; 0x90167 + 28 bytes
 
 _Route12BattleText2: ; 90183 (24:4183)
 	db $0, "Be patient!", $4f
 	db "Fishing is a", $55
 	db "waiting game!", $57
-; 0x90183 + 40 bytes
 
 _Route12EndBattleText2: ; 901ab (24:41ab)
 	db $0, "That", $4f
 	db "one got away!", $58
-; 0x901ab + 20 bytes
 
 _Route12AfterBattleText2: ; 901bf (24:41bf)
 	db $0, "With a better ROD,", $4f
 	db "I could catch", $55
 	db "better #MON!", $57
-; 0x901bf + 47 bytes
 
 _Route12BattleText3: ; 901ee (24:41ee)
 	db $0, "Have you found a", $4f
 	db "MOON STONE?", $57
-; 0x901ee + 30 bytes
 
 _Route12EndBattleText3: ; 9020c (24:420c)
 	db $0, "Oww!", $58
-; 0x9020c + 6 bytes
 
 _Route12AfterBattleText3: ; 90212 (24:4212)
 	db $0, "I could have made", $4f
 	db "my #MON evolve", $55
 	db "with MOON STONE!", $57
-; 0x90212 + 51 bytes
 
 _Route12BattleText4: ; 90245 (24:4245)
 	db $0, "Electricity is my", $4f
 	db "specialty!", $57
-; 0x90245 + 30 bytes
 
 _Route12EndBattleText4: ; 90263 (24:4263)
 	db $0, "Unplugged!", $58
-; 0x90263 + 12 bytes
 
 _Route12AfterBattleText4: ; 9026f (24:426f)
 	db $0, "Water conducts", $4f
 	db "electricity, so", $55
 	db "you should zap", $55
 	db "sea #MON!", $57
-; 0x9026f + 57 bytes
 
 _Route12BattleText5: ; 902a8 (24:42a8)
 	db $0, "The FISHING FOOL", $4f
 	db "vs. #MON KID!", $57
-; 0x902a8 + 32 bytes
 
 _Route12EndBattleText5: ; 902c8 (24:42c8)
 	db $0, "Too", $4f
 	db "much!", $58
-; 0x902c8 + 11 bytes
 
 _Route12AfterBattleText5: ; 902d3 (24:42d3)
 	db $0, "You beat me at", $4f
 	db "#MON, but I'm", $55
 	db "good at fishing!", $57
-; 0x902d3 + 46 bytes
 
 _Route12BattleText6: ; 90301 (24:4301)
 	db $0, "I'd rather be", $4f
 	db "working!", $57
-; 0x90301 + 23 bytes
 
 _Route12EndBattleText6: ; 90318 (24:4318)
 	db $0, "It's", $4f
 	db "not easy...", $58
-; 0x90318 + 17 bytes
 
 _Route12AfterBattleText6: ; 90329 (24:4329)
 	db $0, "It's all right.", $4f
 	db "Losing doesn't", $55
 	db "bug me any more.", $57
-; 0x90329 + 47 bytes
 
 _Route12BattleText7: ; 90358 (24:4358)
 	db $0, "You never know", $4f
 	db "what you could", $55
 	db "catch!", $57
-; 0x90358 + 38 bytes
 
 _Route12EndBattleText7: ; 9037e (24:437e)
 	db $0, "Lost", $4f
 	db "it!", $58
-; 0x9037e + 10 bytes
 
 _Route12AfterBattleText7: ; 90388 (24:4388)
 	db $0, "I catch MAGIKARP", $4f
 	db "all the time, but", $55
 	db "they're so weak!", $57
-; 0x90388 + 52 bytes
 
 _Route12Text11: ; 903bc (24:43bc)
 	db $0, "ROUTE 12 ", $4f
@@ -120647,161 +116341,131 @@ _Route12Text12: ; 903d9 (24:43d9)
 _Route13BattleText2: ; 903ed (24:43ed)
 	db $0, "My bird #MON", $4f
 	db "want to scrap!", $57
-; 0x903ed + 29 bytes
 
 _Route13EndBattleText2: ; 9040a (24:440a)
 	db $0, "My", $4f
 	db "bird combo lost?", $58
-; 0x9040a + 21 bytes
 
 _Route13AfterBattleText2: ; 9041f (24:441f)
 	db $0, "My #MON look", $4f
 	db "happy even though", $55
 	db "they lost.", $57
-; 0x9041f + 43 bytes
 
 _Route13BattleText3: ; 9044a (24:444a)
 	db $0, "I'm told I'm good", $4f
 	db "for a kid!", $57
-; 0x9044a + 28 bytes
 
 _Route13EndBattleText3: ; 90466 (24:4466)
 	db $0, "Ohh!", $4f
 	db "I lost!", $58
-; 0x90466 + 14 bytes
 
 _Route13AfterBattleText3: ; 90474 (24:4474)
 	db $0, "I want to become", $4f
 	db "a good trainer.", $55
 	db "I'll train hard.", $57
-; 0x90474 + 50 bytes
 
 _Route13BattleText4: ; 904a6 (24:44a6)
 	db $0, "Wow! Your BADGEs", $4f
 	db "are too cool!", $57
-; 0x904a6 + 32 bytes
 
 _Route13EndBattleText4: ; 904c6 (24:44c6)
 	db $0, "Not", $4f
 	db "enough!", $58
-; 0x904c6 + 13 bytes
 
 _Route13AfterBattleText4: ; 904d3 (24:44d3)
 	db $0, "You got those", $4f
 	db "BADGEs from GYM", $55
 	db "LEADERs. I know!", $57
-; 0x904d3 + 48 bytes
 
 _Route13BattleText5: ; 90503 (24:4503)
 	db $0, "My cute #MON", $4f
 	db "wish to make your", $55
 	db "acquaintance.", $57
-; 0x90503 + 46 bytes
 
 _Route13EndBattleText5: ; 90531 (24:4531)
 	db $0, "Wow!", $4f
 	db "You totally won!", $58
-; 0x90531 + 23 bytes
 
 _Route13AfterBattleText5: ; 90548 (24:4548)
 	db $0, "You have to make", $4f
 	db "#MON fight to", $55
 	db "toughen them up!", $57
-; 0x90548 + 49 bytes
 
 _Route13BattleText6: ; 90579 (24:4579)
 	db $0, "I found CARBOS in", $4f
 	db "a cave once.", $57
-; 0x90579 + 32 bytes
 
 _Route13EndBattleText6: ; 90599 (24:4599)
 	db $0, "Just", $4f
 	db "messed up!", $58
-; 0x90599 + 17 bytes
 
 _Route13AfterBattleText6: ; 905aa (24:45aa)
 	db $0, "CARBOS boosted", $4f
 	db "the SPEED of my", $55
 	db "#MON.", $57
-; 0x905aa + 38 bytes
 
 _Route13BattleText7: ; 905d0 (24:45d0)
 	db $0, "The wind's blowing", $4f
 	db "my way!", $57
-; 0x905d0 + 27 bytes
 
 _Route13EndBattleText7: ; 905eb (24:45eb)
 	db $0, "The", $4f
 	db "wind turned!", $58
-; 0x905eb + 18 bytes
 
 _Route13AfterBattleText7: ; 905fd (24:45fd)
 	db $0, "I'm beat. I guess", $4f
 	db "I'll FLY home.", $57
-; 0x905fd + 32 bytes
 
 _Route13BattleText8: ; 9061d (24:461d)
 	db $0, "Sure, I'll play", $4f
 	db "with you!", $57
-; 0x9061d + 26 bytes
 
 _Route13EndBattleText8: ; 90637 (24:4637)
 	db $0, "Oh!", $4f
 	db "You little brute!", $58
-; 0x90637 + 23 bytes
 
 _Route13AfterBattleText8: ; 9064e (24:464e)
 	db $0, "I wonder which is", $4f
 	db "stronger, male or", $55
 	db "female #MON?", $57
-; 0x9064e + 50 bytes
 
 _Route13BattleText9: ; 90680 (24:4680)
 	db $0, "Do you want to", $4f
 	db "#MON with me?", $57
-; 0x90680 + 30 bytes
 
 _Route13EndBattleText9: ; 9069e (24:469e)
 	db $0, "It's over", $4f
 	db "already?", $58
-; 0x9069e + 19 bytes
 
 _Route13AfterBattleText9: ; 906b1 (24:46b1)
 	db $0, "I don't know", $4f
 	db "anything about", $55
 	db "#MON. I just", $55
 	db "like cool ones!", $57
-; 0x906b1 + 57 bytes
 
 _Route13BattleText10: ; 906ea (24:46ea)
 	db $0, "What're you", $4f
 	db "lookin' at?", $57
-; 0x906ea + 24 bytes
 
 _Route13EndBattleText10: ; 90702 (24:4702)
 	db $0, "Dang!", $4f
 	db "Stripped gears!", $58
-; 0x90702 + 23 bytes
 
 _Route13AfterBattleText10: ; 90719 (24:4719)
 	db $0, "Get lost!", $57
-; 0x90719 + 11 bytes
 
 _Route13BattleText11: ; 90724 (24:4724)
 	db $0, "I always go with", $4f
 	db "bird #MON!", $57
-; 0x90724 + 29 bytes
 
 _Route13EndBattleText11: ; 90741 (24:4741)
 	db $0, "Out", $4f
 	db "of power!", $58
-; 0x90741 + 15 bytes
 
 _Route13AfterBattleText11: ; 90750 (24:4750)
 	db $0, "I wish I could", $4f
 	db "fly like PIDGEY", $55
 	db "and PIDGEOTTO...", $57
-; 0x90750 + 49 bytes
 
 _Route13Text11: ; 90781 (24:4781)
 	db $0, "TRAINER TIPS", $51
@@ -120823,144 +116487,118 @@ _Route14BattleText1: ; 9080d (24:480d)
 	db $0, "You need to use", $4f
 	db "TMs to teach good", $55
 	db "moves to #MON!", $57
-; 0x9080d + 50 bytes
 
 _Route14EndBattleText1: ; 9083f (24:483f)
 	db $0, "Not", $4f
 	db "good enough!", $58
-; 0x9083f + 18 bytes
 
 _Route14AfterBattleText1: ; 90851 (24:4851)
 	db $0, "You have some HMs", $4f
 	db "right? #MON", $55
 	db "can't ever forget", $55
 	db "those moves.", $57
-; 0x90851 + 61 bytes
 
 _Route14BattleText2: ; 9088e (24:488e)
 	db $0, "My bird #MON", $4f
 	db "should be ready", $55
 	db "for battle.", $57
-; 0x9088e + 42 bytes
 
 _Route14EndBattleText2: ; 908b8 (24:48b8)
 	db $0, "Not", $4f
 	db "ready yet!", $58
-; 0x908b8 + 16 bytes
 
 _Route14AfterBattleText2: ; 908c8 (24:48c8)
 	db $0, "They need to learn", $4f
 	db "better moves.", $57
-; 0x908c8 + 34 bytes
 
 _Route14BattleText3: ; 908ea (24:48ea)
 	db $0, "TMs are on sale", $4f
 	db "in CELADON!", $55
 	db "But, only a few", $55
 	db "people have HMs!", $57
-; 0x908ea + 62 bytes
 
 _Route14EndBattleText3: ; 90928 (24:4928)
 	db $0, "Aww,", $4f
 	db "bummer!", $58
-; 0x90928 + 14 bytes
 
 _Route14AfterBattleText3: ; 90936 (24:4936)
 	db $0, "Teach #MON", $4f
 	db "moves of the same", $55
 	db "element type for", $55
 	db "more power.", $57
-; 0x90936 + 59 bytes
 
 _Route14BattleText4: ; 90971 (24:4971)
 	db $0, "Have you taught", $4f
 	db "your bird #MON", $55
 	db "how to FLY?", $57
-; 0x90971 + 44 bytes
 
 _Route14EndBattleText4: ; 9099d (24:499d)
 	db $0, "Shot", $4f
 	db "down in flames!", $58
-; 0x9099d + 22 bytes
 
 _Route14AfterBattleText4: ; 909b3 (24:49b3)
 	db $0, "Bird #MON are", $4f
 	db "my true love!", $57
-; 0x909b3 + 29 bytes
 
 _Route14BattleText5: ; 909d0 (24:49d0)
 	db $0, "Have you heard of", $4f
 	db "the legendary", $55
 	db "#MON?", $57
-; 0x909d0 + 39 bytes
 
 _Route14EndBattleText5: ; 909f7 (24:49f7)
 	db $0, "Why?", $4f
 	db "Why'd I lose?", $58
-; 0x909f7 + 19 bytes
 
 _Route14AfterBattleText5: ; 90a0a (24:4a0a)
 	db $0, "The 3 legendary", $4f
 	db "#MON are all", $55
 	db "birds of prey.", $57
-; 0x90a0a + 45 bytes
 
 _Route14BattleText6: ; 90a37 (24:4a37)
 	db $0, "I'm not into it,", $4f
 	db "but OK! Let's go!", $57
-; 0x90a37 + 34 bytes
 
 _Route14EndBattleText6: ; 90a59 (24:4a59)
 	db $0, "I", $4f
 	db "knew it!", $58
-; 0x90a59 + 12 bytes
 
 _Route14AfterBattleText6: ; 90a65 (24:4a65)
 	db $0, "Winning, losing,", $4f
 	db "it doesn't matter", $55
 	db "in the long run!", $57
-; 0x90a65 + 52 bytes
 
 _Route14BattleText7: ; 90a99 (24:4a99)
 	db $0, "C'mon, c'mon.", $4f
 	db "Let's go, let's", $55
 	db "go, let's go!", $57
-; 0x90a99 + 40 bytes
 
 _Route14EndBattleText7: ; 90ac1 (24:4ac1)
 	db $0, "Arrg!", $4f
 	db "Lost! Get lost!", $58
-; 0x90ac1 + 23 bytes
 
 _Route14AfterBattleText7: ; 90ad8 (24:4ad8)
 	db $0, "What, what, what?", $4f
 	db "What do you want?", $57
-; 0x90ad8 + 37 bytes
 
 _Route14BattleText8: ; 90afd (24:4afd)
 	db $0, "Perfect! I need to", $4f
 	db "burn some time!", $57
-; 0x90afd + 36 bytes
 
 _Route14EndBattleText8: ; 90b21 (24:4b21)
 	db $0, "What?", $4f
 	db "You!?", $58
-; 0x90b21 + 13 bytes
 
 _Route14AfterBattleText8: ; 90b2e (24:4b2e)
 	db $0, "Raising #MON", $4f
 	db "is a drag, man.", $57
-; 0x90b2e + 30 bytes
 
 _Route14BattleText9: ; 90b4c (24:4b4c)
 	db $0, "We ride out here", $4f
 	db "because there's", $55
 	db "more room!", $57
-; 0x90b4c + 44 bytes
 
 _Route14EndBattleText9: ; 90b78 (24:4b78)
 	db $0, "Wipe out!", $58
-; 0x90b78 + 11 bytes
 
 _Route14AfterBattleText9: ; 90b83 (24:4b83)
 	db $0, "It's cool you", $4f
@@ -120968,23 +116606,19 @@ _Route14AfterBattleText9: ; 90b83 (24:4b83)
 	db "so strong!", $51
 	db "Might is right!", $4f
 	db "And you know it!", $57
-; 0x90b83 + 73 bytes
 
 _Route14BattleText10: ; 90bcc (24:4bcc)
 	db $0, "#MON fight?", $4f
 	db "Cool! Rumble!", $57
-; 0x90bcc + 27 bytes
 
 _Route14EndBattleText10: ; 90be7 (24:4be7)
 	db $0, "Blown", $4f
 	db "away!", $58
-; 0x90be7 + 13 bytes
 
 _Route14AfterBattleText10: ; 90bf4 (24:4bf4)
 	db $0, "You know who'd", $4f
 	db "win, you and me", $55
 	db "one on one!", $57
-; 0x90bf4 + 43 bytes
 
 _Route14Text11: ; 90c1f (24:4c1f)
 	db $0, "ROUTE 14", $4f
@@ -120995,12 +116629,10 @@ _Route15BattleText1: ; 90c3e (24:4c3e)
 	db $0, "Let me try out the", $4f
 	db "#MON I just", $55
 	db "got in a trade!", $57
-; 0x90c3e + 48 bytes
 
 _Route15EndBattleText1: ; 90c6e (24:4c6e)
 	db $0, "Not", $4f
 	db "good enough!", $58
-; 0x90c6e + 18 bytes
 
 _Route15AfterBattleText1: ; 90c80 (24:4c80)
 	db $0, "You can't change", $4f
@@ -121009,153 +116641,125 @@ _Route15AfterBattleText1: ; 90c80 (24:4c80)
 	db "get in a trade.", $51
 	db "Only the Original", $4f
 	db "Trainer can.", $57
-; 0x90c80 + 93 bytes
 
 _Route15BattleText2: ; 90cdd (24:4cdd)
 	db $0, "You look gentle,", $4f
 	db "so I think I can", $55
 	db "beat you!", $57
-; 0x90cdd + 45 bytes
 
 _Route15EndBattleText2: ; 90d0a (24:4d0a)
 	db $0, "No,", $4f
 	db "wrong!", $58
-; 0x90d0a + 12 bytes
 
 _Route15AfterBattleText2: ; 90d16 (24:4d16)
 	db $0, "I'm afraid of", $4f
 	db "BIKERs, they look", $55
 	db "so ugly and mean!", $57
-; 0x90d16 + 50 bytes
 
 _Route15BattleText3: ; 90d48 (24:4d48)
 	db $0, "When I whistle, I", $4f
 	db "can summon bird", $55
 	db "#MON!", $57
-; 0x90d48 + 41 bytes
 
 _Route15EndBattleText3: ; 90d71 (24:4d71)
 	db $0, "Ow!", $4f
 	db "That's tragic!", $58
-; 0x90d71 + 19 bytes
 
 _Route15AfterBattleText3: ; 90d84 (24:4d84)
 	db $0, "Maybe I'm not cut", $4f
 	db "out for battles.", $57
-; 0x90d84 + 35 bytes
 
 _Route15BattleText4: ; 90da7 (24:4da7)
 	db $0, "Hmm? My birds are", $4f
 	db "shivering! You're", $55
 	db "good, aren't you?", $57
-; 0x90da7 + 53 bytes
 
 _Route15EndBattleText4: ; 90ddc (24:4ddc)
 	db $0, "Just", $4f
 	db "as I thought!", $58
-; 0x90ddc + 20 bytes
 
 _Route15AfterBattleText4: ; 90df0 (24:4df0)
 	db $0, "Did you know moves", $4f
 	db "like EARTHQUAKE", $55
 	db "don't have any", $55
 	db "effect on birds?", $57
-; 0x90df0 + 67 bytes
 
 _Route15BattleText5: ; 90e33 (24:4e33)
 	db $0, "Oh, you're a", $4f
 	db "little cutie!", $57
-; 0x90e33 + 27 bytes
 
 _Route15EndBattleText5: ; 90e4e (24:4e4e)
 	db $0, "You looked", $4f
 	db "so cute too!", $58
-; 0x90e4e + 25 bytes
 
 _Route15AfterBattleText5: ; 90e67 (24:4e67)
 	db $0, "I forgive you!", $4f
 	db "I can take it!", $57
-; 0x90e67 + 31 bytes
 
 _Route15BattleText6: ; 90e86 (24:4e86)
 	db $0, "I raise #MON", $4f
 	db "because I live", $55
 	db "alone!", $57
-; 0x90e86 + 36 bytes
 
 _Route15EndBattleText6: ; 90eaa (24:4eaa)
 	db $0, "I didn't", $4f
 	db "ask for this!", $58
-; 0x90eaa + 23 bytes
 
 _Route15AfterBattleText6: ; 90ec1 (24:4ec1)
 	db $0, "I just like going", $4f
 	db "home to be with", $55
 	db "my #MON!", $57
-; 0x90ec1 + 44 bytes
 
 _Route15BattleText7: ; 90eed (24:4eed)
 	db $0, "Hey kid! C'mon!", $4f
 	db "I just got these!", $57
-; 0x90eed + 34 bytes
 
 _Route15EndBattleText7: ; 90f0f (24:4f0f)
 	db $0, "Why", $4f
 	db "not?", $58
-; 0x90f0f + 10 bytes
 
 _Route15AfterBattleText7: ; 90f19 (24:4f19)
 	db $0, "You only live", $4f
 	db "once, so I live", $55
 	db "as an outlaw!", $55
 	db "TEAM ROCKET RULES!", $57
-; 0x90f19 + 64 bytes
 
 _Route15BattleText8: ; 90f59 (24:4f59)
 	db $0, "Fork over all your", $4f
 	db "cash when you", $55
 	db "lose to me, kid!", $57
-; 0x90f59 + 51 bytes
 
 _Route15EndBattleText8: ; 90f8c (24:4f8c)
 	db $0, "That", $4f
 	db "can't be true!", $58
-; 0x90f8c + 20 bytes
 
 _Route15AfterBattleText8: ; 90fa0 (24:4fa0)
 	db $0, "I was just joking", $4f
 	db "about the money!", $57
-; 0x90fa0 + 36 bytes
 
 _Route15BattleText9: ; 90fc4 (24:4fc4)
 	db $0, "What's cool?", $4f
 	db "Trading #MON!", $57
-; 0x90fc4 + 27 bytes
 
 _Route15EndBattleText9: ; 90fdf (24:4fdf)
 	db $0, "I", $4f
 	db "said trade!", $58
-; 0x90fdf + 15 bytes
 
 _Route15AfterBattleText9: ; 90fee (24:4fee)
 	db $0, "I trade #MON", $4f
 	db "with my friends!", $57
-; 0x90fee + 31 bytes
 
 _Route15BattleText10: ; 9100d (24:500d)
 	db $0, "Want to play with", $4f
 	db "my #MON?", $57
-; 0x9100d + 28 bytes
 
 _Route15EndBattleText10: ; 91029 (24:5029)
 	db $0, "I was", $4f
 	db "too impatient!", $58
-; 0x91029 + 22 bytes
 
 _Route15AfterBattleText10: ; 9103f (24:503f)
 	db $0, "I'll go train with", $4f
 	db "weaker people.@@"
-; 0x9103f + 34 bytes + 1
 
 _Route15Text12: ; 91062 (24:5062)
 	db $0, "ROUTE 15", $4f
@@ -121164,95 +116768,77 @@ _Route15Text12: ; 91062 (24:5062)
 
 _Route16BattleText1: ; 91081 (24:5081)
 	db $0, "What do you want?", $57
-; 0x91081 + 19 bytes
 
 _Route16EndBattleText1: ; 91094 (24:5094)
 	db $0, "Don't you", $4f
 	db "dare laugh!", $58
-; 0x91094 + 22 bytes
 
 _Route16AfterBattleText1: ; 910aa (24:50aa)
 	db $0, "We like just", $4f
 	db "hanging here,", $55
 	db "what's it to you?", $57
-; 0x910aa + 45 bytes
 
 _Route16BattleText2: ; 910d7 (24:50d7)
 	db $0, "Nice BIKE!", $4f
 	db "Hand it over!", $57
-; 0x910d7 + 26 bytes
 
 _Route16EndBattleText2: ; 910f1 (24:50f1)
 	db $0, "Knock", $4f
 	db "out!", $58
-; 0x910f1 + 12 bytes
 
 _Route16AfterBattleText2: ; 910fd (24:50fd)
 	db $0, "Forget it, who", $4f
 	db "needs your BIKE!", $57
-; 0x910fd + 33 bytes
 
 _Route16BattleText3: ; 9111e (24:511e)
 	db $0, "Come out and play,", $4f
 	db "little mouse!", $57
-; 0x9111e + 34 bytes
 
 _Route16EndBattleText3: ; 91140 (24:5140)
 	db $0, "You", $4f
 	db "little rat!", $58
-; 0x91140 + 17 bytes
 
 _Route16AfterBattleText3: ; 91151 (24:5151)
 	db $0, "I hate losing!", $4f
 	db "Get away from me!", $57
-; 0x91151 + 34 bytes
 
 _Route16BattleText4: ; 91173 (24:5173)
 	db $0, "Hey, you just", $4f
 	db "bumped me!", $57
-; 0x91173 + 26 bytes
 
 _Route16EndBattleText4: ; 9118d (24:518d)
 	db $0, "Kaboom!", $58
-; 0x9118d + 9 bytes
 
 _Route16AfterBattleText4: ; 91196 (24:5196)
 	db $0, "You can also get", $4f
 	db "to FUCHSIA from", $55
 	db "VERMILION using a", $55
 	db "coastal road.", $57
-; 0x91196 + 66 bytes
 
 _Route16BattleText5: ; 911d8 (24:51d8)
 	db $0, "I'm feeling", $4f
 	db "hungry and mean!", $57
-; 0x911d8 + 29 bytes
 
 _Route16EndBattleText5: ; 911f5 (24:51f5)
 	db $0, "Bad,", $4f
 	db "bad, bad!", $58
-; 0x911f5 + 16 bytes
 
 _Route16AfterBattleText5: ; 91205 (24:5205)
 	db $0, "I like my #MON", $4f
 	db "ferocious! They", $55
 	db "tear up enemies!", $57
-; 0x91205 + 49 bytes
 
 _Route16BattleText6: ; 91236 (24:5236)
 	db $0, "Sure, I'll go!", $57
-; 0x91236 + 15 bytes
 
 _Route16EndBattleText6: ; 91245 (24:5245)
 	db $0, "Don't make", $4f
 	db "me mad!", $58
-; 0x91245 + 19 bytes
 
 _Route16AfterBattleText6: ; 91258 (24:5258)
 	db $0, "I like harassing", $4f
 	db "people with my", $55
 	db "vicious #MON!", $57
-; 0x91258 + 47 bytes
 
 _Route16Text7: ; 91287 (24:5287)
 	db $0, "A sleeping #MON", $4f
@@ -121262,13 +116848,11 @@ _UnnamedText_59ab3: ; 912a8 (24:52a8)
 	db $0, "SNORLAX woke up!", $51
 	db "It attacked in a", $4f
 	db "grumpy rage!", $57
-; 0x912a8 + 48 bytes
 
 _UnnamedText_59ab8: ; 912d8 (24:52d8)
 	db $0, "With a big yawn,", $4f
 	db "SNORLAX returned", $55
 	db "to the mountains!", $57
-; 0x912d8 + 53 bytes
 
 _Route16Text8: ; 9130d (24:530d)
 	db $0, "Enjoy the slope!", $4f
@@ -121282,151 +116866,121 @@ _Route16Text9: ; 9132c (24:532c)
 _Route17BattleText1: ; 91352 (24:5352)
 	db $0, "There's no money", $4f
 	db "in fighting kids!", $57
-; 0x91352 + 35 bytes
 
 _Route17EndBattleText1: ; 91375 (24:5375)
 	db $0, "Burned", $4f
 	db "out!", $58
-; 0x91375 + 13 bytes
 
 _Route17AfterBattleText1: ; 91382 (24:5382)
 	db $0, "Good stuff is", $4f
 	db "lying around on", $55
 	db "CYCLING ROAD!", $57
-; 0x91382 + 45 bytes
 
 _Route17BattleText2: ; 913af (24:53af)
 	db $0, "What do you want,", $4f
 	db "kiddo?", $57
-; 0x913af + 26 bytes
 
 _Route17EndBattleText2: ; 913c9 (24:53c9)
 	db $0, "Whoo!", $58
-; 0x913c9 + 7 bytes
 
 _Route17AfterBattleText2: ; 913d0 (24:53d0)
 	db $0, "I could belly-", $4f
 	db "bump you outta", $55
 	db "here!", $57
-; 0x913d0 + 37 bytes
 
 _Route17BattleText3: ; 913f5 (24:53f5)
 	db $0, "You heading to", $4f
 	db "FUCHSIA?", $57
-; 0x913f5 + 25 bytes
 
 _Route17EndBattleText3: ; 9140e (24:540e)
 	db $0, "Crash and", $4f
 	db "burn!", $58
-; 0x9140e + 17 bytes
 
 _Route17AfterBattleText3: ; 9141f (24:541f)
 	db $0, "I love racing", $4f
 	db "downhill!", $57
-; 0x9141f + 25 bytes
 
 _Route17BattleText4: ; 91438 (24:5438)
 	db $0, "We're BIKERs!", $4f
 	db "Highway stars!", $57
-; 0x91438 + 29 bytes
 
 _Route17EndBattleText4: ; 91455 (24:5455)
 	db $0, "Smoked!", $58
-; 0x91455 + 9 bytes
 
 _Route17AfterBattleText4: ; 9145e (24:545e)
 	db $0, "Are you looking", $4f
 	db "for adventure?", $57
-; 0x9145e + 32 bytes
 
 _Route17BattleText5: ; 9147e (24:547e)
 	db $0, "Let VOLTORB", $4f
 	db "electrify you!", $57
-; 0x9147e + 28 bytes
 
 _Route17EndBattleText5: ; 9149a (24:549a)
 	db $0, "Grounded", $4f
 	db "out!", $58
-; 0x9149a + 15 bytes
 
 _Route17AfterBattleText5: ; 914a9 (24:54a9)
 	db $0, "I got my VOLTORB", $4f
 	db "at the abandoned", $55
 	db "POWER PLANT.", $57
-; 0x914a9 + 48 bytes
 
 _Route17BattleText6: ; 914d9 (24:54d9)
 	db $0, "My #MON won't", $4f
 	db "evolve! Why?", $57
-; 0x914d9 + 27 bytes
 
 _Route17EndBattleText6: ; 914f4 (24:54f4)
 	db $0, "Why,", $4f
 	db "you!", $58
-; 0x914f4 + 11 bytes
 
 _Route17AfterBattleText6: ; 914ff (24:54ff)
 	db $0, "Maybe some #MON", $4f
 	db "need element", $55
 	db "STONEs to evolve.", $57
-; 0x914ff + 48 bytes
 
 _Route17BattleText7: ; 9152f (24:552f)
 	db $0, "I need a little", $4f
 	db "exercise!", $57
-; 0x9152f + 27 bytes
 
 _Route17EndBattleText7: ; 9154a (24:554a)
 	db $0, "Whew!", $4f
 	db "Good workout!", $58
-; 0x9154a + 21 bytes
 
 _Route17AfterBattleText7: ; 9155f (24:555f)
 	db $0, "I'm sure I lost", $4f
 	db "weight there!", $57
-; 0x9155f + 30 bytes
 
 _Route17BattleText8: ; 9157d (24:557d)
 	db $0, "Be a rebel!", $57
-; 0x9157d + 13 bytes
 
 _Route17EndBattleText8: ; 9158a (24:558a)
 	db $0, "Aaaargh!", $58
-; 0x9158a + 10 bytes
 
 _Route17AfterBattleText8: ; 91594 (24:5594)
 	db $0, "Be ready to fight", $4f
 	db "for your beliefs!", $57
-; 0x91594 + 37 bytes
 
 _Route17BattleText9: ; 915b9 (24:55b9)
 	db $0, "Nice BIKE!", $4f
 	db "How's it handle?", $57
-; 0x915b9 + 28 bytes
 
 _Route17EndBattleText9: ; 915d5 (24:55d5)
 	db $0, "Shoot!", $58
-; 0x915d5 + 8 bytes
 
 _Route17AfterBattleText9: ; 915dd (24:55dd)
 	db $0, "The slope makes", $4f
 	db "it hard to steer!", $57
-; 0x915dd + 35 bytes
 
 _Route17BattleText10: ; 91600 (24:5600)
 	db $0, "Get lost kid!", $4f
 	db "I'm bushed!", $57
-; 0x91600 + 26 bytes
 
 _Route17EndBattleText10: ; 9161a (24:561a)
 	db $0, "Are you", $4f
 	db "satisfied?", $58
-; 0x9161a + 20 bytes
 
 _Route17AfterBattleText10: ; 9162e (24:562e)
 	db $0, "I need to catch", $4f
 	db "a few Zs!", $57
-; 0x9162e + 27 bytes
 
 _Route17Text11: ; 91649 (24:5649)
 	db $0, "It's a notice!", $51
@@ -121468,48 +117022,39 @@ _Route18BattleText1: ; 917a1 (24:57a1)
 	db $0, "I always check", $4f
 	db "every grassy area", $55
 	db "for new #MON.", $57
-; 0x917a1 + 48 bytes
 
 _Route18EndBattleText1: ; 917d1 (24:57d1)
 	db $0, "Tch!", $58
-; 0x917d1 + 6 bytes
 
 _Route18AfterBattleText1: ; 917d7 (24:57d7)
 	db $0, "I wish I had a", $4f
 	db "BIKE!", $57
-; 0x917d7 + 22 bytes
 
 _Route18BattleText2: ; 917ed (24:57ed)
 	db $0, "Kurukkoo!", $4f
 	db "How do you like", $55
 	db "my bird call?", $57
-; 0x917ed + 41 bytes
 
 _Route18EndBattleText2: ; 91816 (24:5816)
 	db $0, "I", $4f
 	db "had to bug you!", $58
-; 0x91816 + 19 bytes
 
 _Route18AfterBattleText2: ; 91829 (24:5829)
 	db $0, "I also collect sea", $4f
 	db "#MON on", $55
 	db "weekends!", $57
-; 0x91829 + 38 bytes
 
 _Route18BattleText3: ; 9184f (24:584f)
 	db $0, "This is my turf!", $4f
 	db "Get out of here!", $57
-; 0x9184f + 35 bytes
 
 _Route18EndBattleText3: ; 91872 (24:5872)
 	db $0, "Darn!", $58
-; 0x91872 + 7 bytes
 
 _Route18AfterBattleText3: ; 91879 (24:5879)
 	db $0, "This is my fave", $4f
 	db "#MON hunting", $55
 	db "area!", $57
-; 0x91879 + 36 bytes
 
 _Route18Text4: ; 9189d (24:589d)
 	db $0, "ROUTE 18", $4f
@@ -121524,154 +117069,124 @@ _Route18Text5: ; 918c3 (24:58c3)
 _Route19BattleText1: ; 918eb (24:58eb)
 	db $0, "Have to warm up", $4f
 	db "before my swim!", $57
-; 0x918eb + 33 bytes
 
 _Route19EndBattleText1: ; 9190c (24:590c)
 	db $0, "All", $4f
 	db "warmed up!", $58
-; 0x9190c + 16 bytes
 
 _Route19AfterBattleText1: ; 9191c (24:591c)
 	db $0, "Thanks, kid! I'm", $4f
 	db "ready for a swim!", $57
-; 0x9191c + 35 bytes
 
 _Route19BattleText2: ; 9193f (24:593f)
 	db $0, "Wait! You'll have", $4f
 	db "a heart attack!", $57
-; 0x9193f + 34 bytes
 
 _Route19EndBattleText2: ; 91961 (24:5961)
 	db $0, "Ooh!", $4f
 	db "That's chilly!", $58
-; 0x91961 + 20 bytes
 
 _Route19AfterBattleText2: ; 91975 (24:5975)
 	db $0, "Watch out for", $4f
 	db "TENTACOOL!", $57
-; 0x91975 + 26 bytes
 
 _Route19BattleText3: ; 9198f (24:598f)
 	db $0, "I love swimming!", $4f
 	db "What about you?", $57
-; 0x9198f + 34 bytes
 
 _Route19EndBattleText3: ; 919b1 (24:59b1)
 	db $0, "Belly", $4f
 	db "flop!", $58
-; 0x919b1 + 13 bytes
 
 _Route19AfterBattleText3: ; 919be (24:59be)
 	db $0, "I can beat #MON", $4f
 	db "at swimming!", $57
-; 0x919be + 30 bytes
 
 _Route19BattleText4: ; 919dc (24:59dc)
 	db $0, "What's beyond the", $4f
 	db "horizon?", $57
-; 0x919dc + 27 bytes
 
 _Route19EndBattleText4: ; 919f7 (24:59f7)
 	db $0, "Glub!", $58
-; 0x919f7 + 7 bytes
 
 _Route19AfterBattleText4: ; 919fe (24:59fe)
 	db $0, "I see a couple of", $4f
 	db "islands!", $57
-; 0x919fe + 28 bytes
 
 _Route19BattleText5: ; 91a1a (24:5a1a)
 	db $0, "I tried diving", $4f
 	db "for #MON, but", $55
 	db "it was a no go!", $57
-; 0x91a1a + 46 bytes
 
 _Route19EndBattleText5: ; 91a48 (24:5a48)
 	db $0, "Help!", $58
-; 0x91a48 + 7 bytes
 
 _Route19AfterBattleText5: ; 91a4f (24:5a4f)
 	db $0, "You have to fish", $4f
 	db "for sea #MON!", $57
-; 0x91a4f + 32 bytes
 
 _Route19BattleText6: ; 91a6f (24:5a6f)
 	db $0, "I look at the", $4f
 	db "sea to forget!", $57
-; 0x91a6f + 30 bytes
 
 _Route19EndBattleText6: ; 91a8d (24:5a8d)
 	db $0, "Ooh!", $4f
 	db "Traumatic!", $58
-; 0x91a8d + 17 bytes
 
 _Route19AfterBattleText6: ; 91a9e (24:5a9e)
 	db $0, "I'm looking at the", $4f
 	db "sea to forget!", $57
-; 0x91a9e + 34 bytes
 
 _Route19BattleText7: ; 91ac0 (24:5ac0)
 	db $0, "Oh, I just love", $4f
 	db "your ride! Can I", $55
 	db "have it if I win?", $57
-; 0x91ac0 + 52 bytes
 
 _Route19EndBattleText7: ; 91af4 (24:5af4)
 	db $0, "Oh!", $4f
 	db "I lost!", $58
-; 0x91af4 + 13 bytes
 
 _Route19AfterBattleText7: ; 91b01 (24:5b01)
 	db $0, "It's still a long", $4f
 	db "way to go to", $55
 	db "SEAFOAM ISLANDS.", $57
-; 0x91b01 + 48 bytes
 
 _Route19BattleText8: ; 91b31 (24:5b31)
 	db $0, "Swimming's great!", $4f
 	db "Sunburns aren't!", $57
-; 0x91b31 + 34 bytes
 
 _Route19EndBattleText8: ; 91b53 (24:5b53)
 	db $0, "Shocker!", $58
-; 0x91b53 + 10 bytes
 
 _Route19AfterBattleText8: ; 91b5d (24:5b5d)
 	db $0, "My boy friend", $4f
 	db "wanted to swim to", $55
 	db "SEAFOAM ISLANDS.", $57
-; 0x91b5d + 50 bytes
 
 _Route19BattleText9: ; 91b8f (24:5b8f)
 	db $0, "These waters are", $4f
 	db "treacherous!", $57
-; 0x91b8f + 31 bytes
 
 _Route19EndBattleText9: ; 91bae (24:5bae)
 	db $0, "Ooh!", $4f
 	db "Dangerous!", $58
-; 0x91bae + 17 bytes
 
 _Route19AfterBattleText9: ; 91bbf (24:5bbf)
 	db $0, "I got a cramp!", $4f
 	db "Glub, glub...", $57
-; 0x91bbf + 30 bytes
 
 _Route19BattleText10: ; 91bdd (24:5bdd)
 	db $0, "I swam here, but", $4f
 	db "I'm tired.", $57
-; 0x91bdd + 28 bytes
 
 _Route19EndBattleText10: ; 91bf9 (24:5bf9)
 	db $0, "I'm", $4f
 	db "exhausted...", $58
-; 0x91bf9 + 17 bytes
 
 _Route19AfterBattleText10: ; 91c0a (24:5c0a)
 	db $0, "LAPRAS is so big,", $4f
 	db "it must keep you", $55
 	db "dry on water.", $57
-; 0x91c0a + 50 bytes
 
 _Route19Text11: ; 91c3c (24:5c3c)
 	db $0, "SEA ROUTE 19", $4f
@@ -121681,154 +117196,124 @@ _Route19Text11: ; 91c3c (24:5c3c)
 _Route20BattleText1: ; 91c69 (24:5c69)
 	db $0, "The water is", $4f
 	db "shallow here.", $57
-; 0x91c69 + 28 bytes
 
 _Route20EndBattleText1: ; 91c85 (24:5c85)
 	db $0, "Splash!", $58
-; 0x91c85 + 9 bytes
 
 _Route20AfterBattleText1: ; 91c8e (24:5c8e)
 	db $0, "I wish I could", $4f
 	db "ride my #MON.", $57
-; 0x91c8e + 30 bytes
 
 _Route20BattleText2: ; 91cac (24:5cac)
 	db $0, "SEAFOAM is a", $4f
 	db "quiet getaway!", $57
-; 0x91cac + 29 bytes
 
 _Route20EndBattleText2: ; 91cc9 (24:5cc9)
 	db $0, "Quit it!", $58
-; 0x91cc9 + 10 bytes
 
 _Route20AfterBattleText2: ; 91cd3 (24:5cd3)
 	db $0, "There's a huge", $4f
 	db "cavern underneath", $55
 	db "this island.", $57
-; 0x91cd3 + 46 bytes
 
 _Route20BattleText3: ; 91d01 (24:5d01)
 	db $0, "I love floating", $4f
 	db "with the fishes!", $57
-; 0x91d01 + 34 bytes
 
 _Route20EndBattleText3: ; 91d23 (24:5d23)
 	db $0, "Yowch!", $58
-; 0x91d23 + 8 bytes
 
 _Route20AfterBattleText3: ; 91d2b (24:5d2b)
 	db $0, "Want to float", $4f
 	db "with me?", $57
-; 0x91d2b + 24 bytes
 
 _Route20BattleText4: ; 91d43 (24:5d43)
 	db $0, "Are you on", $4f
 	db "vacation too?", $57
-; 0x91d43 + 26 bytes
 
 _Route20EndBattleText4: ; 91d5d (24:5d5d)
 	db $0, "No", $4f
 	db "mercy at all!", $58
-; 0x91d5d + 18 bytes
 
 _Route20AfterBattleText4: ; 91d6f (24:5d6f)
 	db $0, "SEAFOAM used to", $4f
 	db "be one island!", $57
-; 0x91d6f + 32 bytes
 
 _Route20BattleText5: ; 91d8f (24:5d8f)
 	db $0, "Check out my buff", $4f
 	db "physique!", $57
-; 0x91d8f + 29 bytes
 
 _Route20EndBattleText5: ; 91dac (24:5dac)
 	db $0, "Wimpy!", $58
-; 0x91dac + 8 bytes
 
 _Route20AfterBattleText5: ; 91db4 (24:5db4)
 	db $0, "I should've been", $4f
 	db "buffing up my", $55
 	db "#MON, not me!", $57
-; 0x91db4 + 45 bytes
 
 _Route20BattleText6: ; 91de1 (24:5de1)
 	db $0, "Why are you", $4f
 	db "riding a #MON?", $55
 	db "Can't you swim?", $57
-; 0x91de1 + 43 bytes
 
 _Route20EndBattleText6: ; 91e0c (24:5e0c)
 	db $0, "Ouch!", $4f
 	db "Torpedoed!", $58
-; 0x91e0c + 18 bytes
 
 _Route20AfterBattleText6: ; 91e1e (24:5e1e)
 	db $0, "Riding a #MON", $4f
 	db "sure looks fun!", $57
-; 0x91e1e + 31 bytes
 
 _Route20BattleText7: ; 91e3d (24:5e3d)
 	db $0, "I rode my bird", $4f
 	db "#MON here!", $57
-; 0x91e3d + 27 bytes
 
 _Route20EndBattleText7: ; 91e58 (24:5e58)
 	db $0, "Oh", $4f
 	db "no!", $58
-; 0x91e58 + 8 bytes
 
 _Route20AfterBattleText7: ; 91e60 (24:5e60)
 	db $0, "My birds can't", $4f
 	db "FLY me back!", $57
-; 0x91e60 + 28 bytes
 
 _Route20BattleText8: ; 91e7c (24:5e7c)
 	db $0, "My boy friend gave", $4f
 	db "me big pearls!", $57
-; 0x91e7c + 35 bytes
 
 _Route20EndBattleText8: ; 91e9f (24:5e9f)
 	db $0, "Don't", $4f
 	db "touch my pearls!", $58
-; 0x91e9f + 23 bytes
 
 _Route20AfterBattleText8: ; 91eb6 (24:5eb6)
 	db $0, "Will my pearls", $4f
 	db "grow bigger", $55
 	db "inside CLOYSTER?", $57
-; 0x91eb6 + 45 bytes
 
 _Route20BattleText9: ; 91ee3 (24:5ee3)
 	db $0, "I swam here from", $4f
 	db "CINNABAR ISLAND!", $57
-; 0x91ee3 + 35 bytes
 
 _Route20EndBattleText9: ; 91f06 (24:5f06)
 	db $0, "I'm", $4f
 	db "so disappointed!", $58
-; 0x91f06 + 21 bytes
 
 _Route20AfterBattleText9: ; 91f1b (24:5f1b)
 	db $0, "#MON have", $4f
 	db "taken over an", $55
 	db "abandoned mansion", $55
 	db "on CINNABAR!", $57
-; 0x91f1b + 56 bytes
 
 _Route20BattleText10: ; 91f53 (24:5f53)
 	db $0, "CINNABAR, in the", $4f
 	db "west, has a LAB", $55
 	db "for #MON.", $57
-; 0x91f53 + 44 bytes
 
 _Route20EndBattleText10: ; 91f7f (24:5f7f)
 	db $0, "Wait!", $58
-; 0x91f7f + 7 bytes
 
 _Route20AfterBattleText10: ; 91f86 (24:5f86)
 	db $0, "CINNABAR is a ", $4f
 	db "volcanic island!", $57
-; 0x91f86 + 33 bytes
 
 _Route20Text12: ; 91fa7 (24:5fa7)
 _Route20Text11: ; 91fa7 (24:5fa7)
@@ -121838,139 +117323,112 @@ _Route21BattleText1: ; 91fb8 (24:5fb8)
 	db $0, "You want to know", $4f
 	db "if the fish are", $55
 	db "biting?", $57
-; 0x91fb8 + 42 bytes
 
 _Route21EndBattleText1: ; 91fe2 (24:5fe2)
 	db $0, "Dang!", $58
-; 0x91fe2 + 7 bytes
 
 _Route21AfterBattleText1: ; 91fe9 (24:5fe9)
 	db $0, "I can't catch", $4f
 	db "anything good!", $57
-; 0x91fe9 + 29 bytes
 
 _Route21BattleText2: ; 92006 (24:6006)
 	db $0, "I got a big haul!", $4f
 	db "Wanna go for it?", $57
-; 0x92006 + 36 bytes
 
 _Route21EndBattleText2: ; 9202a (24:602a)
 	db $0, "Darn", $4f
 	db "MAGIKARP!", $58
-; 0x9202a + 16 bytes
 
 _Route21AfterBattleText2: ; 9203a (24:603a)
 	db $0, "I seem to only", $4f
 	db "catch MAGIKARP!", $57
-; 0x9203a + 32 bytes
 
 _Route21BattleText3: ; 9205a (24:605a)
 	db $0, "The sea cleanses", $4f
 	db "my body and soul!", $57
-; 0x9205a + 36 bytes
 
 _Route21EndBattleText3: ; 9207e (24:607e)
 	db $0, "Ayah!", $58
-; 0x9207e + 7 bytes
 
 _Route21AfterBattleText3: ; 92085 (24:6085)
 	db $0, "I like the", $4f
 	db "mountains too!", $57
-; 0x92085 + 27 bytes
 
 _Route21BattleText4: ; 920a0 (24:60a0)
 	db $0, "What's wrong with", $4f
 	db "me swimming?", $57
-; 0x920a0 + 31 bytes
 
 _Route21EndBattleText4: ; 920bf (24:60bf)
 	db $0, "Cheap", $4f
 	db "shot!", $58
-; 0x920bf + 13 bytes
 
 _Route21AfterBattleText4: ; 920cc (24:60cc)
 	db $0, "I look like what?", $4f
 	db "A studded inner", $55
 	db "tube? Get lost!", $57
-; 0x920cc + 51 bytes
 
 _Route21BattleText5: ; 920ff (24:60ff)
 	db $0, "I caught all my", $4f
 	db "#MON at sea!", $57
-; 0x920ff + 30 bytes
 
 _Route21EndBattleText5: ; 9211d (24:611d)
 	db $0, "Diver!!", $4f
 	db "Down!!", $58
-; 0x9211d + 16 bytes
 
 _Route21AfterBattleText5: ; 9212d (24:612d)
 	db $0, "Where'd you catch", $4f
 	db "your #MON?", $57
-; 0x9212d + 29 bytes
 
 _Route21BattleText6: ; 9214a (24:614a)
 	db $0, "Right now, I'm in", $4f
 	db "a triathlon meet!", $57
-; 0x9214a + 36 bytes
 
 _Route21EndBattleText6: ; 9216e (24:616e)
 	db $0, "Pant...", $4f
 	db "pant...pant...", $58
-; 0x9216e + 24 bytes
 
 _Route21AfterBattleText6: ; 92186 (24:6186)
 	db $0, "I'm beat!", $4f
 	db "But, I still have", $55
 	db "the bike race and", $55
 	db "marathon left!", $57
-; 0x92186 + 61 bytes
 
 _Route21BattleText7: ; 921c3 (24:61c3)
 	db $0, "Ahh! Feel the sun", $4f
 	db "and the wind!", $57
-; 0x921c3 + 33 bytes
 
 _Route21EndBattleText7: ; 921e4 (24:61e4)
 	db $0, "Yow!", $4f
 	db "I lost!", $58
-; 0x921e4 + 14 bytes
 
 _Route21AfterBattleText7: ; 921f2 (24:61f2)
 	db $0, "I'm sunburnt to a", $4f
 	db "crisp!", $57
-; 0x921f2 + 25 bytes
 
 _Route21BattleText8: ; 9220b (24:620b)
 	db $0, "Hey, don't scare", $4f
 	db "away the fish!", $57
-; 0x9220b + 32 bytes
 
 _Route21EndBattleText8: ; 9222b (24:622b)
 	db $0, "Sorry!", $4f
 	db "I didn't mean it!", $58
-; 0x9222b + 25 bytes
 
 _Route21AfterBattleText8: ; 92244 (24:6244)
 	db $0, "I was just angry", $4f
 	db "that I couldn't", $55
 	db "catch anything.", $57
-; 0x92244 + 49 bytes
 
 _Route21BattleText9: ; 92275 (24:6275)
 	db $0, "Keep me company", $4f
 	db "'til I get a hit!", $57
-; 0x92275 + 34 bytes
 
 _Route21EndBattleText9: ; 92297 (24:6297)
 	db $0, "That", $4f
 	db "burned some time.", $58
-; 0x92297 + 24 bytes
 
 _Route21AfterBattleText9: ; 922af (24:62af)
 	db $0, "Oh wait! I got a", $4f
 	db "bite! Yeah!", $57
-; 0x922af + 30 bytes
 
 _UnnamedText_511ad: ; 922cd (24:62cd)
 	db $0, $53, ": Hey!", $4f
@@ -121985,7 +117443,6 @@ _UnnamedText_511ad: ; 922cd (24:62cd)
 	db "By the way, did", $4f
 	db "your #MON", $55
 	db "get any stronger?", $57
-; 0x922cd + 162 bytes
 
 _UnnamedText_511b2: ; 9236f (24:636f)
 	db $0, "I heard #MON", $4f
@@ -121997,13 +117454,11 @@ _UnnamedText_511b2: ; 9236f (24:636f)
 	db "You should quit", $4f
 	db "dawdling and get", $55
 	db "a move on!", $57
-; 0x9236f + 133 bytes
 
 _UnnamedText_511b7: ; 923f4 (24:63f4)
 	db $0, "Awww!", $4f
 	db "You just lucked", $55
 	db "out!", $58
-; 0x923f4 + 28 bytes
 
 _UnnamedText_511bc: ; 92410 (24:6410)
 	db $0, $53, ": What?", $4f
@@ -122011,7 +117466,6 @@ _UnnamedText_511bc: ; 92410 (24:6410)
 	db "#MON?", $51
 	db "You should catch", $55
 	db "some more too!", $58
-; 0x92410 + 64 bytes
 
 _UnnamedText_511c1: ; 92450 (24:6450)
 	db $0, $53, ": What?", $4f
@@ -122028,7 +117482,6 @@ _UnnamedText_511c1: ; 92450 (24:6450)
 	db "warm up for", $55
 	db "#MON LEAGUE!", $51
 	db "Come on!", $57
-; 0x92450 + 182 bytes
 
 _UnnamedText_511c6: ; 92506 (24:6506)
 	db $0, "That loosened me", $4f
@@ -122039,13 +117492,11 @@ _UnnamedText_511c6: ; 92506 (24:6506)
 	db "But hey, you know", $4f
 	db "that! I'm out of", $55
 	db "here. Smell ya!", $57
-; 0x92506 + 125 bytes
 
 _UnnamedText_511cb: ; 92583 (24:6583)
 	db $0, "What!?", $51
 	db "I was just", $4f
 	db "careless!", $58
-; 0x92583 + 29 bytes
 
 _UnnamedText_511d0: ; 925a0 (24:65a0)
 	db $0, $53, ": Hahaha!", $4f
@@ -122055,7 +117506,6 @@ _UnnamedText_511d0: ; 925a0 (24:65a0)
 	db "good as me, pal!", $51
 	db "Go train some", $4f
 	db "more! You loser!", $58
-; 0x925a0 + 102 bytes
 
 _Route22Text3: ; 92606 (24:6606)
 	db $0, "#MON LEAGUE", $4f
@@ -122065,14 +117515,12 @@ UnknownText_9261e: ; 9261e (24:661e)
 	db $0, "You can pass here", $4f
 	db "only if you have", $55
 	db "the @"
-; 0x9261e + 41 bytes
 
 UnknownText_92647: ; 92647 (24:6647)
 	TX_RAM $cd6d
 	db $0, "!", $51
 	db "You don't have the", $4f
 	db "@"
-; 0x92647 + 25 bytes (0x92660)
 
 UnknownText_92660: ; 92660 (24:6660)
 	TX_RAM $cd6d
@@ -122080,31 +117528,26 @@ UnknownText_92660: ; 92660 (24:6660)
 	db "You have to have", $4f
 	db "it to get to", $55
 	db "#MON LEAGUE!@@"
-; 0x92660 + 54 bytes
 
 UnknownText_92696: ; 92696 (24:6696)
 	db $0, "You can pass here", $4f
 	db "only if you have", $55
 	db "the @"
-; 0x92696 + 41 bytes
 
 UnknownText_926bf: ; 926bf (24:66bf)
 	TX_RAM $cd6d
 	db $0, "!", $51
 	db "Oh! That is the", $4f
 	db "@"
-; 0x926bf + 23 bytes
 
 UnknownText_926d6: ; 926d6 (24:66d6)
 	TX_RAM $cd6d
 	db $0, "!@@"
-; 0x926d6 + 7 bytes
 
 _UnnamedText_513a3: ; 926dd (24:66dd)
 	db $0, $51
 	db "OK then! Please,", $4f
 	db "go right ahead!", $57
-; 0x926dd + 35 bytes
 
 _Route23Text8: ; 92700 (24:6700)
 	db $0, "VICTORY ROAD GATE", $4f
@@ -122114,28 +117557,23 @@ _UnnamedText_51510: ; 92721 (24:6721)
 	db $0, "Congratulations!", $4f
 	db "You beat our 5", $55
 	db "contest trainers!@@"
-; 0x92721 + 52 bytes
 
 _UnnamedText_51515: ; 92755 (24:6755)
 	db $0, $51
 	db "You just earned a", $4f
 	db "fabulous prize!", $58
-; 0x92755 + 36 bytes
 
 _UnnamedText_5151a: ; 92779 (24:6779)
 	db $0, $52, " received", $4f
 	db "a @"
-; 0x92779 + 15 bytes
 
 UnknownText_92788: ; 92788 (24:6788)
 	TX_RAM $cf4b
 	db $0, "!@@"
-; 0x92788 + 7 bytes
 
 _UnnamedText_51521: ; 9278f (24:678f)
 	db $0, "You don't have", $4f
 	db "any room!", $57
-; 0x9278f + 25 bytes
 
 _UnnamedText_51526: ; 927a8 (24:67a8)
 	db $0, "By the way, would", $4f
@@ -122154,97 +117592,79 @@ _UnnamedText_51526: ; 927a8 (24:67a8)
 	db "I'll make you an", $4f
 	db "offer you can't", $55
 	db "refuse!", $57
-; 0x927a8 + 226 bytes
 
 _UnnamedText_5152b: ; 9288a (24:688a)
 	db $0, "Arrgh!", $4f
 	db "You are good!", $58
-; 0x9288a + 22 bytes
 
 _UnnamedText_51530: ; 928a0 (24:68a0)
 	db $0, "With your ability,", $4f
 	db "you could become", $55
 	db "a top leader in", $55
 	db "TEAM ROCKET!", $57
-; 0x928a0 + 66 bytes
 
 _Route24BattleText1: ; 928e2 (24:68e2)
 	db $0, "I saw your feat", $4f
 	db "from the grass!", $57
-; 0x928e2 + 33 bytes
 
 SECTION "bank25",ROMX,BANK[$25]
 
 _Route24EndBattleText1: ; 94000 (25:4000)
 	db $0, "I", $4f
 	db "thought not!", $58
-; 0x94000 + 16 bytes
 
 _Route24AfterBattleText1: ; 94010 (25:4010)
 	db $0, "I hid because the", $4f
 	db "people on the", $55
 	db "bridge scared me!", $57
-; 0x94010 + 51 bytes
 
 _Route24BattleText2: ; 94043 (25:4043)
 	db $0, "OK! I'm No. 5!", $4f
 	db "I'll stomp you!", $57
-; 0x94043 + 30 bytes
 
 _Route24EndBattleText2: ; 94061 (25:4061)
 	db $0, "Whoa!", $4f
 	db "Too much!", $58
-; 0x94061 + 17 bytes
 
 _Route24AfterBattleText2: ; 94072 (25:4072)
 	db $0, "I did my best, I", $4f
 	db "have no regrets!", $57
-; 0x94072 + 35 bytes
 
 _Route24BattleText3: ; 94095 (25:4095)
 	db $0, "I'm No. 4!", $4f
 	db "Getting tired?", $57
-; 0x94095 + 26 bytes
 
 _Route24EndBattleText3: ; 940af (25:40af)
 	db $0, "I lost", $4f
 	db "too!", $58
-; 0x940af + 13 bytes
 
 _Route24AfterBattleText3: ; 940bc (25:40bc)
 	db $0, "I did my best, so", $4f
 	db "I've no regrets!", $57
-; 0x940bc + 35 bytes
 
 _Route24BattleText4: ; 940df (25:40df)
 	db $0, "Here's No. 3!", $4f
 	db "I won't be easy!", $57
-; 0x940df + 30 bytes
 
 _Route24EndBattleText4: ; 940fd (25:40fd)
 	db $0, "Ow!", $4f
 	db "Stomped flat!", $58
-; 0x940fd + 19 bytes
 
 _Route24AfterBattleText4: ; 94110 (25:4110)
 	db $0, "I did my best, I", $4f
 	db "have no regrets!", $57
-; 0x94110 + 35 bytes
 
 _Route24BattleText5: ; 94133 (25:4133)
 	db $0, "I'm second!", $4f
 	db "Now it's serious!", $57
-; 0x94133 + 29 bytes
 
 _Route24EndBattleText5: ; 94150 (25:4150)
 	db $0, "How could I", $4f
 	db "lose?", $58
-; 0x94150 + 19 bytes
 
 _Route24AfterBattleText5: ; 94163 (25:4163)
 	db $0, "I did my best, I", $4f
 	db "have no regrets!", $57
-; 0x94163 + 35 bytes
 
 _Route24BattleText6: ; 94186 (25:4186)
 	db $0, "This is NUGGET", $4f
@@ -122253,169 +117673,139 @@ _Route24BattleText6: ; 94186 (25:4186)
 	db "a fabulous prize!", $51
 	db "Think you got", $4f
 	db "what it takes?", $57
-; 0x94186 + 98 bytes
 
 _Route24EndBattleText6: ; 941e8 (25:41e8)
 	db $0, "Whoo!", $4f
 	db "Good stuff!", $58
-; 0x941e8 + 19 bytes
 
 _Route24AfterBattleText6: ; 941fb (25:41fb)
 	db $0, "I did my best, I", $4f
 	db "have no regrets!", $57
-; 0x941fb + 35 bytes
 
 _Route25BattleText1: ; 9421e (25:421e)
 	db $0, "Local trainers", $4f
 	db "come here to", $55
 	db "practice!", $57
-; 0x9421e + 39 bytes
 
 _Route25EndBattleText1: ; 94245 (25:4245)
 	db $0, "You're", $4f
 	db "decent.", $58
-; 0x94245 + 15 bytes
 
 _Route25AfterBattleText1: ; 94254 (25:4254)
 	db $0, "All #MON have", $4f
 	db "weaknesses. It's", $55
 	db "best to raise", $55
 	db "different kinds.", $57
-; 0x94254 + 62 bytes
 
 _Route25BattleText2: ; 94292 (25:4292)
 	db $0, "Dad took me to a", $4f
 	db "great party on", $55
 	db "S.S.ANNE at", $55
 	db "VERMILION CITY!", $57
-; 0x94292 + 61 bytes
 
 _Route25EndBattleText2: ; 942cf (25:42cf)
 	db $0, "I'm", $4f
 	db "not mad!", $58
-; 0x942cf + 13 bytes
 
 _Route25AfterBattleText2: ; 942dc (25:42dc)
 	db $0, "On S.S.ANNE, I", $4f
 	db "saw trainers from", $55
 	db "around the world.", $57
-; 0x942dc + 52 bytes
 
 _Route25BattleText3: ; 94310 (25:4310)
 	db $0, "I'm a cool guy.", $4f
 	db "I've got a girl", $55
 	db "friend!", $57
-; 0x94310 + 39 bytes
 
 _Route25EndBattleText3: ; 94337 (25:4337)
 	db $0, "Aww,", $4f
 	db "darn...", $58
-; 0x94337 + 14 bytes
 
 _Route25AfterBattleText3: ; 94345 (25:4345)
 	db $0, "Oh well. My girl", $4f
 	db "will cheer me up.", $57
-; 0x94345 + 36 bytes
 
 _Route25BattleText4: ; 94369 (25:4369)
 	db $0, "Hi! My boy", $4f
 	db "friend is cool!", $57
-; 0x94369 + 28 bytes
 
 _Route25EndBattleText4: ; 94385 (25:4385)
 	db $0, "I was in", $4f
 	db "bad condition!", $58
-; 0x94385 + 25 bytes
 
 _Route25AfterBattleText4: ; 9439e (25:439e)
 	db $0, "I wish my guy was", $4f
 	db "as good as you!", $57
-; 0x9439e + 35 bytes
 
 _Route25BattleText5: ; 943c1 (25:43c1)
 	db $0, "I knew I had to", $4f
 	db "fight you!", $57
-; 0x943c1 + 28 bytes
 
 _Route25EndBattleText5: ; 943dd (25:43dd)
 	db $0, "I knew", $4f
 	db "I'd lose too!", $58
-; 0x943dd + 21 bytes
 
 _Route25AfterBattleText5: ; 943f2 (25:43f2)
 	db $0, "If your #MON", $4f
 	db "gets confused or", $55
 	db "falls asleep,", $55
 	db "switch it!", $57
-; 0x943f2 + 56 bytes
 
 _Route25BattleText6: ; 9442a (25:442a)
 	db $0, "My friend has a", $4f
 	db "cute #MON.", $55
 	db "I'm so jealous!", $57
-; 0x9442a + 43 bytes
 
 _Route25EndBattleText6: ; 94455 (25:4455)
 	db $0, "I'm", $4f
 	db "not so jealous!", $58
-; 0x94455 + 20 bytes
 
 _Route25AfterBattleText6: ; 94469 (25:4469)
 	db $0, "You came from MT.", $4f
 	db "MOON? May I have", $55
 	db "a CLEFAIRY?", $57
-; 0x94469 + 48 bytes
 
 _Route25BattleText7: ; 94499 (25:4499)
 	db $0, "I just got down", $4f
 	db "from MT.MOON,", $55
 	db "but I'm ready!", $57
-; 0x94499 + 45 bytes
 
 _Route25EndBattleText7: ; 944c6 (25:44c6)
 	db $0, "You", $4f
 	db "worked hard!", $58
-; 0x944c6 + 18 bytes
 
 _Route25AfterBattleText7: ; 944d8 (25:44d8)
 	db $0, "Drat!", $4f
 	db "A ZUBAT bit me", $55
 	db "back in there.", $57
-; 0x944d8 + 37 bytes
 
 _Route25BattleText8: ; 944fd (25:44fd)
 	db $0, "I'm off to see a", $4f
 	db "#MON collector", $55
 	db "at the cape!", $57
-; 0x944fd + 45 bytes
 
 _Route25EndBattleText8: ; 9452a (25:452a)
 	db $0, "You", $4f
 	db "got me.", $58
-; 0x9452a + 13 bytes
 
 _Route25AfterBattleText8: ; 94537 (25:4537)
 	db $0, "The collector has", $4f
 	db "many rare kinds", $55
 	db "of #MON.", $57
-; 0x94537 + 44 bytes
 
 _Route25BattleText9: ; 94563 (25:4563)
 	db $0, "You're going to", $4f
 	db "see BILL? First,", $55
 	db "let's fight!", $57
-; 0x94563 + 45 bytes
 
 _Route25EndBattleText9: ; 94590 (25:4590)
 	db $0, "You're", $4f
 	db "something.", $58
-; 0x94590 + 18 bytes
 
 _Route25AfterBattleText9: ; 945a2 (25:45a2)
 	db $0, "The trail below", $4f
 	db "is a shortcut to", $55
 	db "CERULEAN CITY.", $57
-; 0x945a2 + 49 bytes
 
 _Route25Text11: ; 945d3 (25:45d3)
 	db $0, "SEA COTTAGE", $4f
@@ -122424,348 +117814,279 @@ _Route25Text11: ; 945d3 (25:45d3)
 _FileDataDestroyedText: ; 945f1 (25:45f1)
 	db $0, "The file data is", $4f
 	db "destroyed!", $58
-; 0x945f1 + 29 bytes
 
 _WouldYouLikeToSaveText: ; 9460e (25:460e)
 	db $0, "Would you like to", $4f
 	db "SAVE the game?", $57
-; 0x9460e + 34 bytes
 
 _GameSavedText: ; 94630 (25:4630)
 	db $0, $52, " saved", $4f
 	db "the game!", $57
-; 0x94630 + 19 bytes
 
 _OlderFileWillBeErasedText: ; 94643 (25:4643)
 	db $0, "The older file", $4f
 	db "will be erased to", $55
 	db "save. Okay?", $57
-; 0x94643 + 46 bytes
 
 _UnnamedText_73909: ; 94671 (25:4671)
 	db $0, "When you change a", $4f
 	db "#MON BOX, data", $55
 	db "will be saved.", $51
 	db "Is that okay?", $57
-; 0x94671 + 63 bytes
 
 _UnnamedText_739d4: ; 946b0 (25:46b0)
 	db $0, "Choose a", $4f
 	db $4a, " BOX.@@"
-; 0x946b0 + 17 bytes
 
 _UnnamedText_3af3e: ; 946c2 (25:46c2)
 	TX_RAM $cf4b
 	db $0, " evolved", $57
-; 0x946c2 + 13 bytes
 
 _UnnamedText_3af43: ; 946cf (25:46cf)
 	db $0, $4f
 	db "into @"
-; 0x946cf + 8 bytes
 
 UnknownText_946d7: ; 946d7 (25:46d7)
 	TX_RAM $cd6d
 	db $0, "!", $57
-; 0x946d7 + 6 bytes
 
 _UnnamedText_3af48: ; 946dd (25:46dd)
 	db $0, "Huh? @"
-; 0x946dd + 7 bytes
 
 UnknownText_946e4: ; 946e4 (25:46e4)
 	TX_RAM $cf4b
 	db $0, $4f
 	db "stopped evolving!", $58
-; 0x946e4 + 23 bytes
 
 _UnnamedText_3af4d: ; 946fb (25:46fb)
 	db $0, "What? @"
-; 0x946fb + 8 bytes
 
 UnknownText_94703: ; 94703 (25:4703)
 	TX_RAM $cf4b
 	db $0, $4f
 	db "is evolving!", $57
-; 0x94703 + 18 bytes
 
 _UnnamedText_3f245: ; 94715 (25:4715)
 	db $0, $59, $4f
 	db "fell asleep!", $58
-; 0x94715 + 16 bytes
 
 _UnnamedText_3f24a: ; 94725 (25:4725)
 	db $0, $59, "'s", $4f
 	db "already asleep!", $58
-; 0x94725 + 20 bytes
 
 _UnnamedText_3f2df: ; 94739 (25:4739)
 	db $0, $59, $4f
 	db "was poisoned!", $58
-; 0x94739 + 17 bytes
 
 _UnnamedText_3f2e4: ; 9474a (25:474a)
 	db $0, $59, "'s", $4f
 	db "badly poisoned!", $58
-; 0x9474a + 20 bytes
 
 _UnnamedText_3f3d8: ; 9475e (25:475e)
 	db $0, $59, $4f
 	db "was burned!", $58
-; 0x9475e + 15 bytes
 
 _UnnamedText_3f3dd: ; 9476d (25:476d)
 	db $0, $59, $4f
 	db "was frozen solid!", $58
-; 0x9476d + 21 bytes
 
 _UnnamedText_3f423: ; 94782 (25:4782)
 	db $0, "Fire defrosted", $4f
 	db $59, "!", $58
-; 0x94782 + 19 bytes
 
 UnknownText_94795: ; 94795 (25:4795)
 	db $0, $5a, "'s", $4f
 	db "@"
-; 0x94795 + 5 bytes
 
 UnknownText_9479a: ; 9479a (25:479a)
 	TX_RAM $cf4b
 	db $0, "@@"
-; 0x9479a + 6 bytes
 
 UnknownText_947a0: ; 947a0 (25:47a0)
 	db $0, $4c, "greatly@@"
-; 0x947a0 + 11 bytes
 
 _UnnamedText_3f547: ; 947ab (25:47ab)
 	db $0, " rose!", $58
-; 0x947ab + 8 bytes
 
 UnknownText_947b3: ; 947b3 (25:47b3)
 	db $0, $59, "'s", $4f
 	db "@"
-; 0x947b3 + 5 bytes
 
 UnknownText_947b8: ; 947b8 (25:47b8)
 	TX_RAM $cf4b
 	db $0, "@@"
-; 0x947b8 + 6 bytes
 
 UnknownText_947be: ; 947be (25:47be)
 	db $0, $4c, "greatly@@"
-; 0x947be + 11 bytes
 
 _UnnamedText_3f683: ; 947c9 (25:47c9)
 	db $0, " fell!", $58
-; 0x947c9 + 8 bytes
 
 _UnnamedText_3f802: ; 947d1 (25:47d1)
 	db $0, $5a, $4f
 	db "ran from battle!", $58
-; 0x947d1 + 20 bytes
 
 _UnnamedText_3f807: ; 947e5 (25:47e5)
 	db $0, $59, $4f
 	db "ran away scared!", $58
-; 0x947e5 + 20 bytes
 
 _UnnamedText_3f80c: ; 947f9 (25:47f9)
 	db $0, $59, $4f
 	db "was blown away!", $58
-; 0x947f9 + 19 bytes
 
 UnnamedText_9480c: ; 9480c (25:480c)
 	db $0, $5a, "@@"
-; 0x9480c + 4 bytes
 
 _UnnamedText_3f8f9: ; 94810 (25:4810)
 	db $0, $4f
 	db "made a whirlwind!", $58
-; 0x94810 + 20 bytes
 
 _UnnamedText_3f8fe: ; 94824 (25:4824)
 	db $0, $4f
 	db "took in sunlight!", $58
-; 0x94824 + 20 bytes
 
 _UnnamedText_3f903: ; 94838 (25:4838)
 	db $0, $4f
 	db "lowered its head!", $58
-; 0x94838 + 20 bytes
 
 _UnnamedText_3f908: ; 9484c (25:484c)
 	db $0, $4f
 	db "is glowing!", $58
-; 0x9484c + 14 bytes
 
 _UnnamedText_3f90d: ; 9485a (25:485a)
 	db $0, $4f
 	db "flew up high!", $58
-; 0x9485a + 16 bytes
 
 _UnnamedText_3f912: ; 9486a (25:486a)
 	db $0, $4f
 	db "dug a hole!", $58
-; 0x9486a + 14 bytes
 
 _UnnamedText_3f9a1: ; 94878 (25:4878)
 	db $0, $59, $4f
 	db "became confused!", $58
-; 0x94878 + 20 bytes
 
 _UnnamedText_3fa77: ; 9488c (25:488c)
 	db $0, $5a, $4f
 	db "learned", $55
 	db "@"
-; 0x9488c + 12 bytes
 
 UnnamedText_94898: ; 94898 (25:4898)
 	TX_RAM $cd6d
 	db $0, "!", $58
-; 0x94898 + 6 bytes
 
 _UnnamedText_3fb09: ; 9489e (25:489e)
 	db $0, $59, "'s", $4f
 	db "@"
-; 0x9489e + 5 bytes
 
 UnnamedText_948a3: ; 948a3 (25:48a3)
 	TX_RAM $cd6d
 	db $0, " was", $55
 	db "disabled!", $58
-; 0x948a3 + 19 bytes
 
 _UnnamedText_3fb3e: ; 948b6 (25:48b6)
 	db $0, "Nothing happened!", $58
-; 0x948b6 + 19 bytes
 
 _UnnamedText_3fb49: ; 948c9 (25:48c9)
 	db $0, "No effect!", $58
-; 0x948c9 + 12 bytes
 
 _UnnamedText_3fb59: ; 948d5 (25:48d5)
 	db $0, "But, it failed! ", $58
-; 0x948d5 + 18 bytes
 
 _UnnamedText_3fb64: ; 948e7 (25:48e7)
 	db $0, "It didn't affect", $4f
 	db $59, "!", $58
-; 0x948e7 + 20 bytes
 
 _UnnamedText_3fb69: ; 948fb (25:48fb)
 	db $0, $59, $4f
 	db "is unaffected!", $58
-; 0x948fb + 18 bytes
 
 _UnnamedText_3fb74: ; 9490d (25:490d)
 	db $0, $59, "'s", $4f
 	db "paralyzed! It may", $55
 	db "not attack!", $58
-; 0x9490d + 34 bytes
 
 _UnnamedText_17e1d: ; 9492f (25:492f)
 	db $0, "It created a", $4f
 	db "SUBSTITUTE!", $58
-; 0x9492f + 26 bytes
 
 _UnnamedText_17e22: ; 94949 (25:4949)
 	db $0, $5a, $4f
 	db "has a SUBSTITUTE!", $58
-; 0x94949 + 21 bytes
 
 _UnnamedText_17e27: ; 9495e (25:495e)
 	db $0, "Too weak to make", $4f
 	db "a SUBSTITUTE!", $58
-; 0x9495e + 32 bytes
 
 _UnnamedText_2ff04: ; 9497e (25:497e)
 	db $0, "Coins scattered", $4f
 	db "everywhere!", $58
-; 0x9497e + 29 bytes
 
 _UnnamedText_27fb3: ; 9499b (25:499b)
 	db $0, $5a, "'s", $4f
 	db "getting pumped!", $58
-; 0x9499b + 20 bytes
 
 _UnnamedText_2bef2: ; 949af (25:49af)
 	db $0, $59, $4f
 	db "was seeded!", $58
-; 0x949af + 15 bytes
 
 _UnnamedText_2bef7: ; 949be (25:49be)
 	db $0, $59, $4f
 	db "evaded attack!", $58
-; 0x949be + 18 bytes
 
 _UnnamedText_1399e: ; 949d0 (25:49d0)
 	db $0, $5a, "'s", $4f
 	db "hit with recoil!", $58
-; 0x949d0 + 21 bytes
 
 _UnnamedText_139cd: ; 949e5 (25:49e5)
 	db $0, "Converted type to", $4f
 	db $59, "'s!", $58
-; 0x949e5 + 23 bytes
 
 _UnnamedText_13a53: ; 949fc (25:49fc)
 	db $0, "All STATUS changes", $4f
 	db "are eliminated!", $58
-; 0x949fc + 36 bytes
 
 _UnnamedText_3baa2: ; 94a20 (25:4a20)
 	db $0, $5a, $4f
 	db "started sleeping!", $57
-; 0x94a20 + 21 bytes
 
 _UnnamedText_3baa7: ; 94a35 (25:4a35)
 	db $0, $5a, $4f
 	db "fell asleep and", $55
 	db "became healthy!", $57
-; 0x94a35 + 35 bytes
 
 _UnnamedText_3baac: ; 94a58 (25:4a58)
 	db $0, $5a, $4f
 	db "regained health!", $58
-; 0x94a58 + 20 bytes
 
 _UnnamedText_3bb92: ; 94a6c (25:4a6c)
 	db $0, $5a, $4f
 	db "transformed into", $55
 	db "@"
-; 0x94a6c + 21 bytes
 
 UnnamedText_94a81: ; 94a81 (25:4a81)
 	TX_RAM $cd6d
 	db $0, "!", $58
-; 0x94a81 + 6 bytes
 
 _UnnamedText_3bbd7: ; 94a87 (25:4a87)
 	db $0, $5a, "'s", $4f
 	db "protected against", $55
 	db "special attacks!", $58
-; 0x94a87 + 39 bytes
 
 _UnnamedText_3bbdc: ; 94aae (25:4aae)
 	db $0, $5a, $4f
 	db "gained armor!", $58
-; 0x94aae + 17 bytes
 
 _UnnamedText_33f52: ; 94abf (25:4abf)
 	db $0, $5a, "'s", $4f
 	db "shrouded in mist!", $58
-; 0x94abf + 22 bytes
 
 _UnnamedText_78dc: ; 94ad5 (25:4ad5)
 	db $0, "Sucked health from", $4f
 	db $59, "!", $58
-; 0x94ad5 + 23 bytes
 
 _UnnamedText_78e1: ; 94aec (25:4aec)
 	db $0, $59, "'s", $4f
 	db "dream was eaten!", $58
-; 0x94aec + 21 bytes
 
 _BattleCenterMText1: ; 94b01 (25:4b01)
 	db $0, "!", $57
@@ -122780,7 +118101,6 @@ _OaksLabGaryText1: ; 94d5b (25:4d5b)
 	db $0, $53, ": Yo", $4f
 	db $52, "! Gramps", $55
 	db "isn't around!", $57
-; 0x94d5b + 30 bytes
 
 _OaksLabText40: ; 94d79 (25:4d79)
 	db $0, $53, ": Heh, I", $4f
@@ -122788,75 +118108,63 @@ _OaksLabText40: ; 94d79 (25:4d79)
 	db "greedy like you!", $51
 	db "Go ahead and", $4f
 	db "choose, ", $52, "!", $57
-; 0x94d79 + 68 bytes
 
 _OaksLabText41: ; 94dbd (25:4dbd)
 	db $0, $53, ": My", $4f
 	db "#MON looks a", $55
 	db "lot stronger.", $57
-; 0x94dbd + 34 bytes
 
 _OaksLabText39: ; 94ddf (25:4ddf)
 	db $0
 	db "Those are #", $4f
 	db "BALLs. They", $55
 	db "contain #MON!", $57
-; 0x94e06
 
 _OaksLabCharmanderText: ; 94e06 (25:4e06)
 	db $0, "So! You want the", $4f
 	db "fire #MON,", $55
 	db "CHARMANDER?", $57
-; 0x94e2f
 
 _OaksLabSquirtleText: ; 94e2f (25:4e2f)
 	db $0, "So! You want the", $4f
 	db "water #MON,", $55
 	db "SQUIRTLE?", $57
-; 0x94e57
 
 _OaksLabBulbasaurText: ; 94e57 (25:4e57)
 	db $0, "So! You want the", $4f
 	db "plant #MON,", $55
 	db "BULBASAUR?", $57
-; 0x94e80
 
 _OaksLabMonEnergeticText: ; 94e80 (25:4e80)
 	db $0, "This #MON is", $4f
 	db "really energetic!", $58
-; 0x94ea0
 
 _OaksLabReceivedMonText: ; 94ea0 (25:4ea0)
 	db $0, $52, " received", $4f
 	db "a @"
 	TX_RAM $cd6d
 	db $0, "!@@"
-; 0x94eb6
 
 _OaksLabLastMonText: ; 94eb6 (25:4eb6)
 	db $0, "That's PROF.OAK's", $4f
 	db "last #MON!", $57
-; 0x94ed2
 
 _UnnamedText_1d2f0: ; 94ed2 (25:4ed2)
 	db $0, "OAK: Now, ", $52, ",", $4f
 	db "which #MON do", $55
 	db "you want?", $57
-; 0x94ef8
 
 _UnnamedText_1d2f5: ; 94ef8 (25:4ef8)
 	db $0, "OAK: If a wild", $4f
 	db "#MON appears,", $55
 	db "your #MON can", $55
 	db "fight against it!", $57
-; 0x94f36
 
 _UnnamedText_1d2fa: ; 94f36 (25:4f36)
 	db $0, "OAK: ", $52, ",", $4f
 	db "raise your young", $55
 	db "#MON by making", $55
 	db "it fight!", $57
-; 0x94f36 + 51 bytes
 
 _OaksLabDeliverParcelText1: ; 94f69 (25:4f69)
 	db $0, "OAK: Oh, ", $52, "!", $51
@@ -122871,7 +118179,6 @@ _OaksLabDeliverParcelText1: ; 94f69 (25:4f69)
 	db "something for me?", $51
 	db $52, " delivered", $4f
 	db "OAK's PARCEL.@@"
-; 0x94f69 + 166 bytes
 
 _OaksLabDeliverParcelText2: ; 9500f (25:500f)
 	db $0, $51
@@ -122879,13 +118186,11 @@ _OaksLabDeliverParcelText2: ; 9500f (25:500f)
 	db "custom # BALL", $55
 	db "I ordered!", $55
 	db "Thank you!", $57
-; 0x9500f + 54 bytes
 
 _OaksLabAroundWorldText: ; 95045 (25:5045)
 	db $0, "#MON around the", $4f
 	db "world wait for", $55
 	db "you, ", $52, "!", $57
-; 0x95045 + 40 bytes
 
 _OaksLabGivePokeballsText1: ; 9506d (25:506d)
 	db $0, "OAK: You can't get", $4f
@@ -122898,7 +118203,6 @@ _OaksLabGivePokeballsText1: ; 9506d (25:506d)
 	db "#MON.", $51
 	db $52, " got 5", $4f
 	db "# BALLs!@@"
-; 0x9506d + 133 bytes
 
 _OaksLabGivePokeballsText2: ; 950f2 (25:50f2)
 	db $0, $51
@@ -122913,7 +118217,6 @@ _OaksLabGivePokeballsText2: ; 950f2 (25:50f2)
 	db "A healthy #MON", $4f
 	db "could escape. You", $55
 	db "have to be lucky!", $57
-; 0x950f2 + 172 bytes
 
 _OaksLabPleaseVisitText: ; 9519e (25:519e)
 	db $0, "OAK: Come see me", $4f
@@ -122921,7 +118224,6 @@ _OaksLabPleaseVisitText: ; 9519e (25:519e)
 	db "I want to know how", $4f
 	db "your #DEX is", $55
 	db "coming along.", $57
-; 0x9519e + 75 bytes
 
 _UnnamedText_1d31d: ; 951e9 (25:51e9)
 	db $0, "OAK: Good to see ", $4f
@@ -122929,13 +118231,11 @@ _UnnamedText_1d31d: ; 951e9 (25:51e9)
 	db "#DEX coming? ", $55
 	db "Here, let me take", $55
 	db "a look!", $58
-; 0x951e9 + 77 bytes
 
 _UnnamedText_1d32c: ; 95236 (25:5236)
 	db $0, "It's encyclopedia-", $4f
 	db "like, but the", $55
 	db "pages are blank!", $57
-; 0x95236 + 50 bytes
 
 _OaksLabText8: ; 95268 (25:5268)
 	db $0, "?", $57
@@ -122947,13 +118247,11 @@ _UnnamedText_1d340: ; 9526b (25:526b)
 	db "Many #MON", $4f
 	db "trainers hold him", $55
 	db "in high regard!", $57
-; 0x9526b + 80 bytes
 
 _OaksLabRivalWaitingText: ; 952bb (25:52bb)
 	db $0, $53, ": Gramps!", $4f
 	db "I'm fed up with", $55
 	db "waiting!", $57
-; 0x952bb + 36 bytes
 
 _OaksLabChooseMonText: ; 952df (25:52df)
 	db $0, "OAK: ", $53, "?", $4f
@@ -122974,39 +118272,32 @@ _OaksLabChooseMonText: ; 952df (25:52df)
 	db "have only 3 left,", $55
 	db "but you can have", $55
 	db "one! Choose!", $57
-; 0x952df + 253 bytes
 
 _OaksLabRivalInterjectionText: ; 953dc (25:53dc)
 	db $0, $53, ": Hey!", $4f
 	db "Gramps! What", $55
 	db "about me?", $57
-; 0x953dc + 32 bytes
 
 _OaksLabBePatientText: ; 953fc (25:53fc)
 	db $0, "OAK: Be patient!", $4f
 	db $53, ", you can", $55
 	db "have one too!", $57
-; 0x953fc + 43 bytes
 
 _OaksLabLeavingText: ; 95427 (25:5427)
 	db $0, "OAK: Hey! Don't go", $4f
 	db "away yet!", $57
-; 0x95427 + 29 bytes
 
 _OaksLabRivalPickingMonText: ; 95444 (25:5444)
 	db $0, $53, ": I'll take", $4f
 	db "this one, then!", $57
-; 0x95444 + 29 bytes
 
 _OaksLabRivalReceivedMonText: ; 95461 (25:5461)
 	db $0, $53, " received", $4f
 	db "a @"
-; 0x95470
 
 UnnamedText_95470: ; 95470 (25:5470)
 	TX_RAM $cd6d
 	db $0, "!@@"
-; 0x95470 + 7 bytes
 
 _OaksLabRivalChallengeText: ; 95477 (25:5477)
 	db $0, $53, ": Wait", $4f
@@ -123015,19 +118306,16 @@ _OaksLabRivalChallengeText: ; 95477 (25:5477)
 	db "our #MON!", $51
 	db "Come on, I'll take", $4f
 	db "you on!", $57
-; 0x95477 + 63 bytes
 
 _UnnamedText_1d3be: ; 954b6 (25:54b6)
 	db $0, "WHAT?", $4f
 	db "Unbelievable!", $55
 	db "I picked the", $55
 	db "wrong #MON!", $58
-; 0x954b6 + 46 bytes
 
 _UnnamedText_1d3c3: ; 954e4 (25:54e4)
 	db $0, $53, ": Yeah! Am", $4f
 	db "I great or what?", $58
-; 0x954e4 + 30 bytes
 
 _OaksLabRivalToughenUpText: ; 95502 (25:5502)
 	db $0, $53, ": Okay!", $4f
@@ -123036,22 +118324,18 @@ _OaksLabRivalToughenUpText: ; 95502 (25:5502)
 	db "toughen it up!", $51
 	db $52, "! Gramps!", $4f
 	db "Smell you later!", $57
-; 0x95502 + 79 bytes
 
 _OaksLabText21: ; 95551 (25:5551)
 	db $0, $53, ": Gramps!", $57
-; 0x95551 + 12 bytes
 
 _OaksLabText22: ; 9555d (25:555d)
 	db $0, $53, ": What did", $4f
 	db "you call me for?", $57
-; 0x9555d + 30 bytes
 
 _OaksLabText23: ; 9557b (25:557b)
 	db $0, "OAK: Oh right! I", $4f
 	db "have a request", $55
 	db "of you two.", $57
-; 0x9557b + 45 bytes
 
 _OaksLabText24: ; 955a8 (25:55a8)
 	db $0, "On the desk there", $4f
@@ -123063,7 +118347,6 @@ _OaksLabText24: ; 955a8 (25:55a8)
 	db "seen or caught!", $51
 	db "It's a hi-tech", $4f
 	db "encyclopedia!", $57
-; 0x955a8 + 130 bytes
 
 _OaksLabText25: ; 9562a (25:562a)
 	db $0, "OAK: ", $52, " and", $4f
@@ -123071,7 +118354,6 @@ _OaksLabText25: ; 9562a (25:562a)
 	db "these with you!", $51
 	db $52, " got", $4f
 	db "#DEX from OAK!@@"
-; 0x9562a + 58 bytes
 
 _OaksLabText26: ; 95664 (25:5664)
 	db $0, "To make a complete", $4f
@@ -123089,7 +118371,6 @@ _OaksLabText26: ; 95664 (25:5664)
 	db "This is a great", $4f
 	db "undertaking in", $55
 	db "#MON history!", $57
-; 0x95664 + 221 bytes
 
 _OaksLabText27: ; 95741 (25:5741)
 	db $0, $53, ": Alright", $4f
@@ -123104,65 +118385,55 @@ _OaksLabText27: ; 95741 (25:5741)
 	db "I'll tell her not", $4f
 	db "to lend you one,", $55
 	db $52, "! Hahaha!", $57
-; 0x95741 + 170 bytes
 
 _UnnamedText_1d405: ; 957eb (25:57eb)
 	db $0, "I study #MON as", $4f
 	db "PROF.OAK's AIDE.", $57
-; 0x957eb + 33 bytes
 
 _UnnamedText_441cc: ; 9580c (25:580c)
 	db $0, "#DEX comp-", $4f
 	db "letion is:", $51
 	db "@"
-; 0x9580c + 24 bytes
 
 UnnamedText_95824: ; 95824 (25:5824)
 	TX_NUM $ffdb, 1, 3
 	db $0, " #MON seen", $4f
 	db "@"
-; 0x95835
 
 UnnamedText_95835: ; 95835 (25:5835)
 	TX_NUM $ffdc, 1, 3
 	db $0, " #MON owned", $51
 	db "PROF.OAK's", $4f
 	db "Rating:", $58
-; 0x95858
 
 _UnnamedText_44201: ; 95858 (25:5858)
 	db $0, "You still have", $4f
 	db "lots to do.", $55
 	db "Look for #MON", $55
 	db "in grassy areas!", $57
-; 0x95858 + 59 bytes
 
 _UnnamedText_44206: ; 95893 (25:5893)
 	db $0, "You're on the", $4f
 	db "right track! ", $55
 	db "Get a FLASH HM", $55
 	db "from my AIDE!", $57
-; 0x95893 + 57 bytes
 
 _UnnamedText_4420b: ; 958cc (25:58cc)
 	db $0, "You still need", $4f
 	db "more #MON!", $55
 	db "Try to catch", $55
 	db "other species!", $57
-; 0x958cc + 55 bytes
 
 _UnnamedText_44210: ; 95903 (25:5903)
 	db $0, "Good, you're", $4f
 	db "trying hard!", $55
 	db "Get an ITEMFINDER", $55
 	db "from my AIDE!", $57
-; 0x95903 + 58 bytes
 
 _UnnamedText_44215: ; 9593d (25:593d)
 	db $0, "Looking good!", $4f
 	db "Go find my AIDE", $55
 	db "when you get 50!", $57
-; 0x9593d + 48 bytes
 
 _UnnamedText_4421a: ; 9596d (25:596d)
 	db $0, "You finally got at", $4f
@@ -123170,68 +118441,57 @@ _UnnamedText_4421a: ; 9596d (25:596d)
 	db "Be sure to get", $55
 	db "EXP.ALL from my", $55
 	db "AIDE!", $57
-; 0x9596d + 75 bytes
 
 _UnnamedText_4421f: ; 959b8 (25:59b8)
 	db $0, "Ho! This is geting", $4f
 	db "even better!", $57
-; 0x959b8 + 33 bytes
 
 _UnnamedText_44224: ; 959d9 (25:59d9)
 	db $0, "Very good!", $4f
 	db "Go fish for some", $55
 	db "marine #MON!", $57
-; 0x959d9 + 42 bytes
 
 _UnnamedText_44229: ; 95a03 (25:5a03)
 	db $0, "Wonderful!", $4f
 	db "Do you like to", $55
 	db "collect things?", $57
-; 0x95a03 + 43 bytes
 
 _UnnamedText_4422e: ; 95a2e (25:5a2e)
 	db $0, "I'm impressed!", $4f
 	db "It must have been", $55
 	db "difficult to do!", $57
-; 0x95a2e + 50 bytes
 
 _UnnamedText_44233: ; 95a60 (25:5a60)
 	db $0, "You finally got at", $4f
 	db "least 100 species!", $55
 	db "I can't believe", $55
 	db "how good you are!", $57
-; 0x95a60 + 72 bytes
 
 _UnnamedText_44238: ; 95aa8 (25:5aa8)
 	db $0, "You even have the", $4f
 	db "evolved forms of", $55
 	db "#MON! Super!", $57
-; 0x95aa8 + 49 bytes
 
 _UnnamedText_4423d: ; 95ad9 (25:5ad9)
 	db $0, "Excellent! Trade", $4f
 	db "with friends to", $55
 	db "get some more!", $57
-; 0x95ad9 + 49 bytes
 
 _UnnamedText_44242: ; 95b0a (25:5b0a)
 	db $0, "Outstanding!", $4f
 	db "You've become a", $55
 	db "real pro at this!", $57
-; 0x95b0a + 47 bytes
 
 _UnnamedText_44247: ; 95b39 (25:5b39)
 	db $0, "I have nothing", $4f
 	db "left to say!", $55
 	db "You're the", $55
 	db "authority now!", $57
-; 0x95b39 + 54 bytes
 
 _UnnamedText_4424c: ; 95b6f (25:5b6f)
 	db $0, "Your #DEX is", $4f
 	db "entirely complete!", $55
 	db "Congratulations!", $57
-; 0x95b6f + 50 bytes
 
 _ViridianPokeCenterText2: ; 95ba1 (25:5ba1)
 _ViridianPokeCenterText1: ; 95ba1 (25:5ba1)
@@ -123254,7 +118514,6 @@ _ViridianMartText1: ; 95c36 (25:5c36)
 _ViridianMartText4: ; 95c58 (25:5c58)
 	db $0, "Hey! You came from", $4f
 	db "PALLET TOWN?", $57
-; 0x95c58 + 33 bytes
 
 ViridianMartParcelQuestText: ; 95c79 (25:5c79)
 	db $0, "You know PROF.", $4f
@@ -123264,7 +118523,6 @@ ViridianMartParcelQuestText: ; 95c79 (25:5c79)
 	db "to him?", $51
 	db $52, " got", $4f
 	db "OAK's PARCEL!@@"
-; 0x95c79 + 92 bytes
 
 _ViridianMartText2: ; 95cd5 (25:5cd5)
 	db $0, "This shop sells", $4f
@@ -123299,7 +118557,6 @@ _ViridianHouseText2: ; 95dc7 (25:5dc7)
 
 _UnnamedText_1d5b1: ; 95de1 (25:5de1)
 	db $0, "SPEARY: Tetweet!", $57
-; 0x95de1 + 18 bytes
 
 _ViridianHouseText4: ; 95df3 (25:5df3)
 	db $0, "SPEAROW", $4f
@@ -123320,7 +118577,6 @@ _UnnamedText_74ace: ; 95e09 (25:5e09)
 	db "shall face", $55
 	db "GIOVANNI, the", $55
 	db "greatest trainer!", $57
-; 0x95e09 + 204 bytes
 
 _UnnamedText_74ad3: ; 95ed5 (25:5ed5)
 	db $0, "Ha!", $4f
@@ -123329,7 +118585,6 @@ _UnnamedText_74ad3: ; 95ed5 (25:5ed5)
 	db "You have won!", $55
 	db "As proof, here is", $55
 	db "the EARTHBADGE!@@"
-; 0x95ed5 + 85 bytes
 
 _UnnamedText_74ad9: ; 95f2b (25:5f2b)
 	db $0, "Having lost, I", $4f
@@ -123343,7 +118598,6 @@ _UnnamedText_74ad9: ; 95f2b (25:5f2b)
 	db "Let us meet again", $4f
 	db "some day!", $55
 	db "Farewell!@@"
-; 0x95f2b + 160 bytes
 
 _ViridianGymText12: ; 95fcc (25:5fcc)
 	db $0, "The EARTHBADGE", $4f
@@ -123358,12 +118612,10 @@ _ViridianGymText12: ; 95fcc (25:5fcc)
 	db "It is my gift for", $4f
 	db "your #MON", $55
 	db "LEAGUE challenge!", $57
-; 0x95fcc + 182 bytes
 
 _ReceivedTM27Text: ; 96082 (25:6082)
 	db $0, $52, " received", $4f
 	db "TM27!@@"
-; 0x96082 + 19 bytes
 
 _TM27ExplanationText: ; 96095 (25:6095)
 	db $0, $51
@@ -123374,143 +118626,117 @@ _TM27ExplanationText: ; 96095 (25:6095)
 	db "I made it when I", $4f
 	db "ran the GYM here,", $55
 	db "too long ago...", $57
-; 0x96095 + 111 bytes
 
 _TM27NoRoomText: ; 96104 (25:6104)
 	db $0, "You do not have", $4f
 	db "space for this!", $57
-; 0x96104 + 33 bytes
 
 _ViridianGymBattleText1: ; 96125 (25:6125)
 	db $0, "Heh! You must be", $4f
 	db "running out of", $55
 	db "steam by now!", $57
-; 0x96125 + 47 bytes
 
 _ViridianGymEndBattleText1: ; 96154 (25:6154)
 	db $0, "I", $4f
 	db "ran out of gas!", $58
-; 0x96154 + 19 bytes
 
 _ViridianGymAfterBattleText1: ; 96167 (25:6167)
 	db $0, "You need power to", $4f
 	db "keep up with our", $55
 	db "GYM LEADER!", $57
-; 0x96167 + 48 bytes
 
 _ViridianGymBattleText2: ; 96197 (25:6197)
 	db $0, "Rrrroar! I'm", $4f
 	db "working myself", $55
 	db "into a rage!", $57
-; 0x96197 + 41 bytes
 
 _ViridianGymEndBattleText2: ; 961c0 (25:61c0)
 	db $0, "Wargh!", $58
-; 0x961c0 + 8 bytes
 
 _ViridianGymAfterBattleText2: ; 961c8 (25:61c8)
 	db $0, "I'm still not", $4f
 	db "worthy!", $57
-; 0x961c8 + 22 bytes
 
 _ViridianGymBattleText3: ; 961de (25:61de)
 	db $0, "#MON and I, we", $4f
 	db "make wonderful", $55
 	db "music together!", $57
-; 0x961de + 47 bytes
 
 _ViridianGymEndBattleText3: ; 9620d (25:620d)
 	db $0, "You are in", $4f
 	db "perfect harmony!", $58
-; 0x9620d + 29 bytes
 
 _ViridianGymAfterBattleText3: ; 9622a (25:622a)
 	db $0, "Do you know the", $4f
 	db "identity of our", $55
 	db "GYM LEADER?", $57
-; 0x9622a + 45 bytes
 
 _ViridianGymBattleText4: ; 96257 (25:6257)
 	db $0, "Karate is the", $4f
 	db "ultimate form of", $55
 	db "martial arts!", $57
-; 0x96257 + 46 bytes
 
 _ViridianGymEndBattleText4: ; 96285 (25:6285)
 	db $0, "Atcho!", $58
-; 0x96285 + 8 bytes
 
 _ViridianGymAfterBattleText4: ; 9628d (25:628d)
 	db $0, "If my #MON", $4f
 	db "were as good at", $55
 	db "Karate as I...", $57
-; 0x9628d + 43 bytes
 
 _ViridianGymBattleText5: ; 962b8 (25:62b8)
 	db $0, "The truly talented", $4f
 	db "win with style!", $57
-; 0x962b8 + 36 bytes
 
 _ViridianGymEndBattleText5: ; 962dc (25:62dc)
 	db $0, "I", $4f
 	db "lost my grip!", $58
-; 0x962dc + 17 bytes
 
 _ViridianGymAfterBattleText5: ; 962ed (25:62ed)
 	db $0, "The LEADER will", $4f
 	db "scold me!", $57
-; 0x962ed + 27 bytes
 
 _ViridianGymBattleText6: ; 96308 (25:6308)
 	db $0, "I'm the KARATE", $4f
 	db "KING! Your fate", $55
 	db "rests with me!", $57
-; 0x96308 + 46 bytes
 
 _ViridianGymEndBattleText6: ; 96336 (25:6336)
 	db $0, "Ayah!", $58
-; 0x96336 + 7 bytes
 
 _ViridianGymAfterBattleText6: ; 9633d (25:633d)
 	db $0, "#MON LEAGUE?", $4f
 	db "You? Don't get", $55
 	db "cocky!", $57
-; 0x9633d + 35 bytes
 
 _ViridianGymBattleText7: ; 96360 (25:6360)
 	db $0, "Your #MON will", $4f
 	db "cower at the", $55
 	db "crack of my whip!", $57
-; 0x96360 + 47 bytes
 
 _ViridianGymEndBattleText7: ; 9638f (25:638f)
 	db $0, "Yowch!", $4f
 	db "Whiplash!", $58
-; 0x9638f + 18 bytes
 
 _ViridianGymAfterBattleText7: ; 963a1 (25:63a1)
 	db $0, "Wait! I was just", $4f
 	db "careless!", $57
-; 0x963a1 + 28 bytes
 
 _ViridianGymBattleText8: ; 963bd (25:63bd)
 	db $0, "VIRIDIAN GYM was", $4f
 	db "closed for a long", $55
 	db "time, but now our", $55
 	db "LEADER is back!", $57
-; 0x963bd + 70 bytes
 
 _ViridianGymEndBattleText8: ; 96403 (25:6403)
 	db $0, "I", $4f
 	db "was beaten?", $58
-; 0x96403 + 15 bytes
 
 _ViridianGymAfterBattleText8: ; 96412 (25:6412)
 	db $0, "You can go onto", $4f
 	db "#MON LEAGUE", $55
 	db "only by defeating", $55
 	db "our GYM LEADER!", $57
-; 0x96412 + 63 bytes
 
 _UnnamedText_74bd4: ; 96451 (25:6451)
 	db $0, "Yo! Champ in", $4f
@@ -123525,34 +118751,28 @@ _UnnamedText_74bd4: ; 96451 (25:6451)
 	db "trainers here", $55
 	db "like ground-type", $55
 	db "#MON!", $57
-; 0x96451 + 170 bytes
 
 _UnnamedText_74bd9: ; 964fb (25:64fb)
 	db $0, "Blow me away!", $4f
 	db "GIOVANNI was the", $55
 	db "GYM LEADER here?", $57
-; 0x964fb + 49 bytes
 
 _UnnamedText_5c21a: ; 9652c (25:652c)
 	db $0, "Come again!", $57
-; 0x9652c + 13 bytes
 
 _UnnamedText_5c21f: ; 96539 (25:6539)
 	db $0, "It's ¥50 for a", $4f
 	db "child's ticket.", $51
 	db "Would you like to", $4f
 	db "come in?", $57
-; 0x96539 + 57 bytes
 
 _UnnamedText_5c224: ; 96572 (25:6572)
 	db $0, "Right, ¥50!", $4f
 	db "Thank you!", $57
-; 0x96572 + 24 bytes
 
 _UnnamedText_5c229: ; 9658a (25:658a)
 	db $0, "You don't have", $4f
 	db "enough money.", $58
-; 0x9658a + 29 bytes
 
 _UnnamedText_5c22e: ; 965a7 (25:65a7)
 	db $0, "You can't sneak", $4f
@@ -123560,7 +118780,6 @@ _UnnamedText_5c22e: ; 965a7 (25:65a7)
 	db "Oh, whatever!", $4f
 	db "Do you know what", $55
 	db "AMBER is?", $57
-; 0x965a7 + 74 bytes
 
 _UnnamedText_5c233: ; 965f1 (25:65f1)
 	db $0, "There's a lab", $4f
@@ -123568,28 +118787,23 @@ _UnnamedText_5c233: ; 965f1 (25:65f1)
 	db "to resurrect", $55
 	db "ancient #MON", $55
 	db "from AMBER.", $57
-; 0x965f1 + 69 bytes
 
 _UnnamedText_5c238: ; 96636 (25:6636)
 	db $0, "AMBER is fossil-", $4f
 	db "ized tree sap.", $57
-; 0x96636 + 33 bytes
 
 _UnnamedText_5c23d: ; 96657 (25:6657)
 	db $0, "Please go to the", $4f
 	db "other side!", $57
-; 0x96657 + 30 bytes
 
 _UnnamedText_5c242: ; 96675 (25:6675)
 	db $0, "Take plenty of", $4f
 	db "time to look!", $57
-; 0x96675 + 30 bytes
 
 _UnnamedText_5c251: ; 96693 (25:6693)
 	db $0, "That is one", $4f
 	db "magnificent", $55
 	db "fossil!", $57
-; 0x96693 + 33 bytes
 
 _UnnamedText_5c28e: ; 966b4 (25:66b4)
 	db $0, "Ssh! I think that", $4f
@@ -123607,34 +118821,28 @@ _UnnamedText_5c28e: ; 966b4 (25:66b4)
 	db "Take this to a", $4f
 	db "#MON LAB and", $55
 	db "get it examined!", $58
-; 0x966b4 + 220 bytes
 
 _ReceivedOldAmberText: ; 96790 (25:6790)
 	db $0, $52, " received", $4f
 	db "OLD AMBER!@@"
-; 0x96790 + 24 bytes
 
 _UnnamedText_5c299: ; 967a8 (25:67a8)
 	db $0, "Ssh! Get the OLD", $4f
 	db "AMBER checked!", $57
-; 0x967a8 + 33 bytes
 
 _UnnamedText_5c29e: ; 967c9 (25:67c9)
 	db $0, "You don't have", $4f
 	db "space for this!", $57
-; 0x967c9 + 31 bytes
 
 _UnnamedText_5c2ad: ; 967e8 (25:67e8)
 	db $0, "We are proud of 2", $4f
 	db "fossils of very", $55
 	db "rare, prehistoric", $55
 	db "#MON!", $57
-; 0x967e8 + 59 bytes
 
 _UnnamedText_5c2bc: ; 96823 (25:6823)
 	db $0, "The AMBER is", $4f
 	db "clear and gold!", $57
-; 0x96823 + 30 bytes
 
 _MuseumF2Text1: ; 96841 (25:6841)
 	db $0, "MOON STONE?", $51
@@ -123685,7 +118893,6 @@ _UnnamedText_5c49e: ; 9697a (25:697a)
 	db "to challenge me?", $55
 	db "Fine then! Show", $55
 	db "me your best!", $57
-; 0x9697a + 190 bytes
 
 SECTION "bank26",ROMX,BANK[$26]
 
@@ -123699,17 +118906,14 @@ _UnnamedText_5c4a3: ; 98000 (26:4000)
 	db "Go to the GYM in", $4f
 	db "CERULEAN and test", $55
 	db "your abilities!", $57
-; 0x98000 + 146 bytes
 
 _TM34PreReceiveText: ; 98092 (26:4092)
 	db $0, "Wait! Take this", $4f
 	db "with you!", $57
-; 0x98092 + 27 bytes
 
 _ReceivedTM34Text: ; 980ad (26:40ad)
 	db $0, $52, " received", $4f
 	db "TM34!@@"
-; 0x980c0
 
 _TM34ExplanationText: ; 980c0 (26:40c0)
 	db $0, $51
@@ -123729,12 +118933,10 @@ _TM34ExplanationText: ; 980c0 (26:40c0)
 	db "absorb damage in", $55
 	db "battle then pay", $55
 	db "it back double!", $57
-; 0x980c0 + 235 bytes
 
 _TM34NoRoomText: ; 981ab (26:41ab)
 	db $0, "You don't have", $4f
 	db "room for this!", $57
-; 0x981ab + 30 bytes
 
 _UnnamedText_5c4bc: ; 981c9 (26:41c9)
 	db $0, "I took", $4f
@@ -123744,7 +118946,6 @@ _UnnamedText_5c4bc: ; 981c9 (26:41c9)
 	db "the BOULDERBADGE!", $51
 	db $52, " received", $4f
 	db "the BOULDERBADGE!@@"
-; 0x98232
 
 _UnnamedText_5c4c1: ; 98232 (26:4232)
 	db $0, $51
@@ -123757,7 +118958,6 @@ _UnnamedText_5c4c1: ; 98232 (26:4232)
 	db "The technique", $4f
 	db "FLASH can now be", $55
 	db "used any time!", $58
-; 0x98232 + 124 bytes
 
 _PewterGymBattleText1: ; 982ae (26:42ae)
 	db $0, "Stop right there,", $4f
@@ -123765,20 +118965,17 @@ _PewterGymBattleText1: ; 982ae (26:42ae)
 	db "You're still light", $4f
 	db "years from facing", $55
 	db "BROCK!", $57
-; 0x982ae + 67 bytes
 
 _PewterGymEndBattleText1: ; 982f1 (26:42f1)
 	db $0, "Darn!", $51
 	db "Light years isn't", $4f
 	db "time! It measures", $55
 	db "distance!", $58
-; 0x982f1 + 52 bytes
 
 _PewterGymAfterBattleText1: ; 98325 (26:4325)
 	db $0, "You're pretty hot,", $4f
 	db "but not as hot", $55
 	db "as BROCK!", $57
-; 0x98325 + 44 bytes
 
 _UnnamedText_5c515: ; 98351 (26:4351)
 	db $0, "Hiya! I can tell", $4f
@@ -123790,12 +118987,10 @@ _UnnamedText_5c515: ; 98351 (26:4351)
 	db "you how to win!", $51
 	db "Let me take you", $4f
 	db "to the top!", $57
-; 0x98351 + 139 bytes
 
 _UnnamedText_5c51a: ; 983dc (26:43dc)
 	db $0, "All right! Let's", $4f
 	db "get happening!", $58
-; 0x983dc + 32 bytes
 
 _UnnamedText_5c51f: ; 983fc (26:43fc)
 	db $0, "The 1st #MON", $4f
@@ -123806,19 +119001,16 @@ _UnnamedText_5c51f: ; 983fc (26:43fc)
 	db "order of #MON,", $55
 	db "matches could be", $55
 	db "made easier!", $57
-; 0x983fc + 122 bytes
 
 _UnnamedText_5c524: ; 98476 (26:4476)
 	db $0, "It's a free", $4f
 	db "service! Let's", $55
 	db "get happening!", $58
-; 0x98476 + 41 bytes
 
 _UnnamedText_5c529: ; 9849f (26:449f)
 	db $0, "Just as I thought!", $4f
 	db "You're #MON", $55
 	db "champ material!", $57
-; 0x9849f + 47 bytes
 
 _PewterHouse1Text1: ; 984ce (26:44ce)
 	db $0, "NIDORAN: Bowbow!@@"
@@ -123847,7 +119039,6 @@ _UnnamedText_74cc6: ; 985ac (26:45ac)
 	db "fish #MON!", $51
 	db "It's totally weak", $4f
 	db "and it cost ¥500!", $57
-; 0x985ac + 96 bytes
 
 _UnnamedText_74cd5: ; 9860c (26:460c)
 	db $0, "Good things can", $4f
@@ -123855,7 +119046,6 @@ _UnnamedText_74cd5: ; 9860c (26:460c)
 	db "raise #MON", $55
 	db "diligently, even", $55
 	db "the weak ones!", $57
-; 0x9860c + 74 bytes
 
 _PewterHouse2Text1: ; 98656 (26:4656)
 	db $0, "#MON learn new", $4f
@@ -123883,7 +119073,6 @@ _PewterPokecenterText1: ; 98704 (26:4704)
 _PewterPokecenterText5: ; 98744 (26:4744)
 	db $0, "JIGGLYPUFF: Puu", $4f
 	db "pupuu!", $57
-; 0x9875c
 
 _UnnamedText_1d6ab: ; 9875c (26:475c)
 	db $0, "Those miserable", $4f
@@ -123896,7 +119085,6 @@ _UnnamedText_1d6ab: ; 9875c (26:475c)
 	db "DIG holes!", $51
 	db "That cost me a", $4f
 	db "bundle, it did!", $57
-; 0x9875c + 134 bytes
 
 _UnnamedText_1d6b0: ; 987e2 (26:47e2)
 	db $0, "I figure what's", $4f
@@ -123904,7 +119092,6 @@ _UnnamedText_1d6b0: ; 987e2 (26:47e2)
 	db "I decided to teach", $4f
 	db "DIGLETT how to", $55
 	db "DIG without a TM!", $57
-; 0x987e2 + 82 bytes
 
 _CeruleanHouseTrashedText2: ; 98834 (26:4834)
 	db $0, "TEAM ROCKET must", $4f
@@ -123957,14 +119144,12 @@ _UnnamedText_5c7be: ; 989c1 (26:49c1)
 	db "all-out offensive", $55
 	db "with water-type", $55
 	db "#MON!", $57
-; 0x989c1 + 186 bytes
 
 _UnnamedText_5c7c3: ; 98a7b (26:4a7b)
 	db $0, "TM11 teaches", $4f
 	db "BUBBLEBEAM!", $51
 	db "Use it on an", $4f
 	db "aquatic #MON!", $57
-; 0x98a7b + 53 bytes
 
 _UnnamedText_5c7c8: ; 98ab0 (26:4ab0)
 	db $0, "The CASCADEBADGE", $4f
@@ -123980,17 +119165,14 @@ _UnnamedText_5c7c8: ; 98ab0 (26:4ab0)
 	db "open new paths!", $51
 	db "You can also have", $4f
 	db "my favorite TM!", $57
-; 0x98ab0 + 205 bytes
 
 _ReceivedTM11Text: ; 98b7d (26:4b7d)
 	db $0, $52, " received", $4f
 	db "TM11!@@"
-; 0x98b90
 
 _UnnamedText_5c7d3: ; 98b90 (26:4b90)
 	db $0, "You better make", $4f
 	db "room for this!", $57
-; 0x98b90 + 32 bytes
 
 _UnnamedText_5c7d8: ; 98bb0 (26:4bb0)
 	db $0, "Wow!", $4f
@@ -123999,43 +119181,36 @@ _UnnamedText_5c7d8: ; 98bb0 (26:4bb0)
 	db "You can have the", $4f
 	db "CASCADEBADGE to", $55
 	db "show you beat me!@@"
-; 0x98c05
 
 _CeruleanGymBattleText1: ; 98c05 (26:4c05)
 	db $0, "I'm more than good", $4f
 	db "enough for you!", $51
 	db "MISTY can wait!", $57
-; 0x98c05 + 51 bytes
 
 _CeruleanGymEndBattleText1: ; 98c38 (26:4c38)
 	db $0, "You", $4f
 	db "overwhelmed me!", $58
-; 0x98c38 + 21 bytes
 
 _CeruleanGymAfterBattleText1: ; 98c4d (26:4c4d)
 	db $0, "You have to face", $4f
 	db "other trainers to", $55
 	db "find out how good", $55
 	db "you really are.", $57
-; 0x98c4d + 70 bytes
 
 _CeruleanGymBattleText2: ; 98c93 (26:4c93)
 	db $0, "Splash!", $51
 	db "I'm first up!", $4f
 	db "Let's do it!", $57
-; 0x98c93 + 34 bytes
 
 _CeruleanGymEndBattleText2: ; 98cb5 (26:4cb5)
 	db $0, "That", $4f
 	db "can't be!", $58
-; 0x98cb5 + 15 bytes
 
 _CeruleanGymAfterBattleText2: ; 98cc4 (26:4cc4)
 	db $0, "MISTY is going to", $4f
 	db "keep improving!", $51
 	db "She won't lose to", $4f
 	db "someone like you!", $57
-; 0x98cc4 + 70 bytes
 
 _UnnamedText_5c82a: ; 98d0a (26:4d0a)
 	db $0, "Yo! Champ in", $4f
@@ -124049,7 +119224,6 @@ _UnnamedText_5c82a: ; 98d0a (26:4d0a)
 	db "plant #MON!", $51
 	db "Or, zap them with", $4f
 	db "electricity!", $57
-; 0x98d0a + 166 bytes
 
 _UnnamedText_5c82f: ; 98db0 (26:4db0)
 	db $0, "You beat MISTY!", $4f
@@ -124057,41 +119231,34 @@ _UnnamedText_5c82f: ; 98db0 (26:4db0)
 	db "You and me kid,", $4f
 	db "we make a pretty", $55
 	db "darn good team!", $57
-; 0x98db0 + 83 bytes
 
 _UnnamedText_1d810: ; 98e03 (26:4e03)
 	db $0, "Hi! Welcome to", $4f
 	db "our BIKE SHOP.", $51
 	db "Have we got just", $4f
 	db "the BIKE for you!", $58
-; 0x98e03 + 66 bytes
 
 _UnnamedText_1d815: ; 98e45 (26:4e45)
 	db $0, "It's a cool BIKE!", $4f
 	db "Do you want it?", $57
-; 0x98e45 + 34 bytes
 
 _UnnamedText_1d81a: ; 98e67 (26:4e67)
 	db $0, "Sorry! You can't", $4f
 	db "afford it!", $58
-; 0x98e67 + 28 bytes
 
 _UnnamedText_1d81f: ; 98e83 (26:4e83)
 	db $0, "Oh, that's...", $51
 	db "A BIKE VOUCHER!", $51
 	db "OK! Here you go!", $58
-; 0x98e83 + 47 bytes
 
 _UnnamedText_1d824: ; 98eb2 (26:4eb2)
 	db $0, $52, " exchanged", $4f
 	db "the BIKE VOUCHER", $55
 	db "for a BICYCLE.@@"
-; 0x98ee0
 
 _UnnamedText_1d82a: ; 98ee0 (26:4ee0)
 	db $0, "Come back again", $4f
 	db "some time!", $57
-; 0x98ee0 + 28 bytes
 
 _UnnamedText_1d82f: ; 98efc (26:4efc)
 	db $0, "How do you like", $4f
@@ -124099,12 +119266,10 @@ _UnnamedText_1d82f: ; 98efc (26:4efc)
 	db "You can take it", $4f
 	db "on CYCLING ROAD", $55
 	db "and in caves!", $57
-; 0x98efc + 81 bytes
 
 _UnnamedText_1d834: ; 98f4d (26:4f4d)
 	db $0, "You better make", $4f
 	db "room for this!", $57
-; 0x98f4d + 32 bytes
 
 _UnnamedText_1d843: ; 98f6d (26:4f6d)
 	db $0, "A plain city BIKE", $4f
@@ -124113,18 +119278,15 @@ _UnnamedText_1d843: ; 98f6d (26:4f6d)
 	db "You can't put a", $4f
 	db "shopping basket", $55
 	db "on an MTB!", $57
-; 0x98f6d + 84 bytes
 
 _UnnamedText_1d85c: ; 98fc1 (26:4fc1)
 	db $0, "These BIKEs are", $4f
 	db "cool, but they're", $55
 	db "way expensive!", $57
-; 0x98fc1 + 49 bytes
 
 _UnnamedText_1d861: ; 98ff2 (26:4ff2)
 	db $0, "Wow. Your BIKE is", $4f
 	db "really cool!", $57
-; 0x98ff2 + 32 bytes
 
 _CeruleanMartText2: ; 99012 (26:5012)
 	db $0, "Use REPEL to keep", $4f
@@ -124150,19 +119312,16 @@ _UnnamedText_74e77: ; 990c9 (26:50c9)
 	db "at least one.", $51
 	db "Those BADGEs have", $4f
 	db "amazing secrets!", $58
-; 0x990c9 + 113 bytes
 
 _UnnamedText_74e7c: ; 9913a (26:513a)
 	db $0, "Now then...", $51
 	db "Which of the 8", $4f
 	db "BADGEs should I", $55
 	db "describe?", $57
-; 0x9913a + 54 bytes
 
 _UnnamedText_74e81: ; 99170 (26:5170)
 	db $0, "Come visit me any", $4f
 	db "time you wish.", $57
-; 0x99170 + 34 bytes
 
 _UnnamedText_74e96: ; 99192 (26:5192)
 	db $0, "The ATTACK of all", $4f
@@ -124171,7 +119330,6 @@ _UnnamedText_74e96: ; 99192 (26:5192)
 	db "It also lets you", $4f
 	db "use FLASH any", $55
 	db "time you desire.", $58
-; 0x99192 + 96 bytes
 
 _UnnamedText_74e9b: ; 991f2 (26:51f2)
 	db $0, "#MON up to L30", $4f
@@ -124181,7 +119339,6 @@ _UnnamedText_74e9b: ; 991f2 (26:51f2)
 	db "It also lets you", $4f
 	db "use CUT outside", $55
 	db "of battle.", $58
-; 0x991f2 + 107 bytes
 
 _UnnamedText_74ea0: ; 9925d (26:525d)
 	db $0, "The SPEED of all", $4f
@@ -124190,7 +119347,6 @@ _UnnamedText_74ea0: ; 9925d (26:525d)
 	db "It also lets you", $4f
 	db "use FLY outside", $55
 	db "of battle.", $58
-; 0x9925d + 91 bytes
 
 _UnnamedText_74ea5: ; 992b8 (26:52b8)
 	db $0, "#MON up to L50", $4f
@@ -124200,7 +119356,6 @@ _UnnamedText_74ea5: ; 992b8 (26:52b8)
 	db "It also lets you", $4f
 	db "use STRENGTH out-", $55
 	db "side of battle.", $58
-; 0x992b8 + 114 bytes
 
 _UnnamedText_74eaa: ; 9932a (26:532a)
 	db $0, "The DEFENSE of all", $4f
@@ -124209,25 +119364,21 @@ _UnnamedText_74eaa: ; 9932a (26:532a)
 	db "It also lets you", $4f
 	db "use SURF outside", $55
 	db "of battle.", $58
-; 0x9932a + 94 bytes
 
 _UnnamedText_74eaf: ; 99388 (26:5388)
 	db $0, "#MON up to L70", $4f
 	db "will obey you.", $51
 	db "Any higher, they", $4f
 	db "become unruly!", $58
-; 0x99388 + 63 bytes
 
 _UnnamedText_74eb4: ; 993c7 (26:53c7)
 	db $0, "Your #MON's", $4f
 	db "SPECIAL abilities", $55
 	db "increase a bit.", $58
-; 0x993c7 + 46 bytes
 
 _UnnamedText_74eb9: ; 993f5 (26:53f5)
 	db $0, "All #MON will", $4f
 	db "obey you!", $58
-; 0x993f5 + 25 bytes
 
 _LavenderPokecenterText4: ; 9940e (26:540e)
 _LavenderPokecenterText2: ; 9940e (26:540e)
@@ -124277,14 +119428,12 @@ _UnnamedText_6062d: ; 9957b (26:557b)
 	db "I can at least", $4f
 	db "make them faint!", $55
 	db "Let's go, pal!", $57
-; 0x9957b + 106 bytes
 
 _UnnamedText_60632: ; 995e5 (26:55e5)
 	db $0, "What?", $4f
 	db "You stinker!", $51
 	db "I took it easy on", $4f
 	db "you too!", $58
-; 0x995e5 + 47 bytes
 
 _UnnamedText_60637: ; 99614 (26:5614)
 	db $0, $53, ": Well,", $4f
@@ -124292,7 +119441,6 @@ _UnnamedText_60637: ; 99614 (26:5614)
 	db "wimpy #MON!", $51
 	db "Toughen them up a", $4f
 	db "bit more!", $58
-; 0x99614 + 67 bytes
 
 _UnnamedText_6063c: ; 99657 (26:5657)
 	db $0, "How's your #DEX", $4f
@@ -124308,7 +119456,6 @@ _UnnamedText_6063c: ; 99657 (26:5657)
 	db "I've got a lot to", $55
 	db "accomplish, pal!", $51
 	db "Smell ya later!", $57
-; 0x99657 + 195 bytes
 
 _PokemonTower2Text2: ; 9971a (26:571a)
 	db $0, "Even we could not", $4f
@@ -124321,94 +119468,76 @@ _PokemonTower2Text2: ; 9971a (26:571a)
 _PokemonTower3BattleText1: ; 99776 (26:5776)
 	db $0, "Urrg...Awaa...", $4f
 	db "Huhu...graa..", $57
-; 0x99776 + 30 bytes
 
 _PokemonTower3EndBattleText1: ; 99794 (26:5794)
 	db $0, "Hwa!", $4f
 	db "I'm saved!", $58
-; 0x99794 + 16 bytes
 
 _PokemonTower3AfterBattleText1: ; 997a4 (26:57a4)
 	db $0, "The GHOSTs can be", $4f
 	db "identified by the", $55
 	db "SILPH SCOPE.", $57
-; 0x997a4 + 50 bytes
 
 _PokemonTower3BattleText2: ; 997d6 (26:57d6)
 	db $0, "Kekeke....", $4f
 	db "Kwaaah!", $57
-; 0x997d6 + 20 bytes
 
 _PokemonTower3EndBattleText2: ; 997ea (26:57ea)
 	db $0, "Hmm?", $4f
 	db "What am I doing?", $58
-; 0x997ea + 23 bytes
 
 _PokemonTower3AfterBattleText2: ; 99801 (26:5801)
 	db $0, "Sorry! I was", $4f
 	db "possessed!", $57
-; 0x99801 + 25 bytes
 
 _PokemonTower3BattleText3: ; 9981a (26:581a)
 	db $0, "Be gone!", $4f
 	db "Evil spirit!", $57
-; 0x9981a + 23 bytes
 
 _PokemonTower3EndBattleText3: ; 99831 (26:5831)
 	db $0, "Whew!", $4f
 	db "The spirit left!", $58
-; 0x99831 + 24 bytes
 
 _PokemonTower3AfterBattleText3: ; 99849 (26:5849)
 	db $0, "My friends were", $4f
 	db "possessed too!", $57
-; 0x99849 + 32 bytes
 
 _PokemonTower4BattleText1: ; 99869 (26:5869)
 	db $0, "GHOST! No!", $4f
 	db "Kwaaah!", $57
-; 0x99869 + 20 bytes
 
 _PokemonTower4EndBattleText1: ; 9987d (26:587d)
 	db $0, "Where", $4f
 	db "is the GHOST?", $58
-; 0x9987d + 21 bytes
 
 _PokemonTower4AfterBattleText1: ; 99892 (26:5892)
 	db $0, "I must have been", $4f
 	db "dreaming...", $57
-; 0x99892 + 30 bytes
 
 _PokemonTower4BattleText2: ; 998b0 (26:58b0)
 	db $0, "Be cursed with", $4f
 	db "me! Kwaaah!", $57
-; 0x998b0 + 28 bytes
 
 _PokemonTower4EndBattleText2: ; 998cc (26:58cc)
 	db $0, "What!", $58
-; 0x998cc + 7 bytes
 
 _PokemonTower4AfterBattleText2: ; 998d3 (26:58d3)
 	db $0, "We can't crack", $4f
 	db "the identity of", $55
 	db "the GHOSTs.", $57
-; 0x998d3 + 43 bytes
 
 _PokemonTower4BattleText3: ; 998fe (26:58fe)
 	db $0, "Huhuhu...", $4f
 	db "Beat me not!", $57
-; 0x998fe + 24 bytes
 
 _PokemonTower4EndBattleText3: ; 99916 (26:5916)
 	db $0, "Huh?", $4f
 	db "Who? What?", $58
-; 0x99916 + 17 bytes
 
 _PokemonTower4AfterBattleText3: ; 99927 (26:5927)
 	db $0, "May the departed", $4f
 	db "souls of #MON", $55
 	db "rest in peace...", $57
-; 0x99927 + 49 bytes
 
 _PokemonTower5Text1: ; 99958 (26:5958)
 	db $0, "Come, child! I", $4f
@@ -124419,126 +119548,101 @@ _PokemonTower5Text1: ; 99958 (26:5958)
 _PokemonTower5BattleText1: ; 9999f (26:599f)
 	db $0, "Give...me...", $4f
 	db "your...soul...", $57
-; 0x9999f + 29 bytes
 
 _PokemonTower5EndBattleText1: ; 999bc (26:59bc)
 	db $0, "Gasp!", $58
-; 0x999bc + 7 bytes
 
 _PokemonTower5AfterBattleText1: ; 999c3 (26:59c3)
 	db $0, "I was under", $4f
 	db "possession!", $57
-; 0x999c3 + 25 bytes
 
 _PokemonTower5BattleText2: ; 999dc (26:59dc)
 	db $0, "You...shall...", $4f
 	db "join...us...", $57
-; 0x999dc + 29 bytes
 
 _PokemonTower5EndBattleText2: ; 999f9 (26:59f9)
 	db $0, "What", $4f
 	db "a nightmare!", $58
-; 0x999f9 + 19 bytes
 
 _PokemonTower5AfterBattleText2: ; 99a0c (26:5a0c)
 	db $0, "I was possessed!", $57
-; 0x99a0c + 18 bytes
 
 _PokemonTower5BattleText3: ; 99a1e (26:5a1e)
 	db $0, "Zombies!", $57
-; 0x99a1e + 10 bytes
 
 _PokemonTower5EndBattleText3: ; 99a28 (26:5a28)
 	db $0, "Ha?", $58
-; 0x99a28 + 5 bytes
 
 _PokemonTower5AfterBattleText3: ; 99a2d (26:5a2d)
 	db $0, "I regained my", $4f
 	db "senses!", $57
-; 0x99a2d + 23 bytes
 
 _PokemonTower5BattleText4: ; 99a44 (26:5a44)
 	db $0, "Urgah...", $4f
 	db "Urff....", $57
-; 0x99a44 + 19 bytes
 
 _PokemonTower5EndBattleText4: ; 99a57 (26:5a57)
 	db $0, "Whoo!", $58
-; 0x99a57 + 7 bytes
 
 _PokemonTower5AfterBattleText4: ; 99a5e (26:5a5e)
 	db $0, "I fell to evil", $4f
 	db "spirits despite", $55
 	db "my training!", $57
-; 0x99a5e + 45 bytes
 
 _UnnamedText_60a43: ; 99a8b (26:5a8b)
 	db $0, "Entered purified,", $4f
 	db "protected zone!", $51
 	db $52, "'s #MON", $4f
 	db "are fully healed!", $57
-; 0x99a8b + 61 bytes
 
 _UnnamedText_60c1f: ; 99ac8 (26:5ac8)
 	db $0, "The GHOST was the", $4f
 	db "restless soul of", $55
 	db "CUBONE's mother!", $57
-; 0x99ac8 + 52 bytes
 
 _UnnamedText_60c24: ; 99afc (26:5afc)
 	db $0, "The mother's soul", $4f
 	db "was calmed.", $51
 	db "It departed to", $4f
 	db "the afterlife!", $57
-; 0x99afc + 60 bytes
 
 _PokemonTower6BattleText1: ; 99b38 (26:5b38)
 	db $0, "Give...me...", $4f
 	db "blood...", $57
-; 0x99b38 + 23 bytes
 
 _PokemonTower6EndBattleText1: ; 99b4f (26:5b4f)
 	db $0, "Groan!", $58
-; 0x99b4f + 8 bytes
 
 _PokemonTower6AfterBattleText1: ; 99b57 (26:5b57)
 	db $0, "I feel anemic and", $4f
 	db "weak...", $57
-; 0x99b57 + 27 bytes
 
 _PokemonTower6BattleText2: ; 99b72 (26:5b72)
 	db $0, "Urff... Kwaah!", $57
-; 0x99b72 + 16 bytes
 
 _PokemonTower6EndBattleText2: ; 99b82 (26:5b82)
 	db $0, "Some-", $4f
 	db "thing fell out!", $58
-; 0x99b82 + 23 bytes
 
 _PokemonTower6AfterBattleText2: ; 99b99 (26:5b99)
 	db $0, "Hair didn't fall", $4f
 	db "out! It was an", $55
 	db "evil spirit!", $57
-; 0x99b99 + 45 bytes
 
 _PokemonTower6BattleText3: ; 99bc6 (26:5bc6)
 	db $0, "Ke..ke...ke...", $4f
 	db "ke..ke...ke!!", $57
-; 0x99bc6 + 30 bytes
 
 _PokemonTower6EndBattleText3: ; 99be4 (26:5be4)
 	db $0, "Keee!", $58
-; 0x99be4 + 7 bytes
 
 _PokemonTower6AfterBattleText3: ; 99beb (26:5beb)
 	db $0, "What's going on", $4f
 	db "here?", $57
-; 0x99beb + 22 bytes
 
 _UnnamedText_60c56: ; 99c01 (26:5c01)
 	db $0, "Be gone...", $4f
 	db "Intruders...", $57
-; 0x99c01 + 25 bytes
 
 _UnnamedText_60ec4: ; 99c1a (26:5c1a)
 	db $0, "MR.FUJI: Heh? You", $4f
@@ -124559,21 +119663,17 @@ _UnnamedText_60ec4: ; 99c1a (26:5c1a)
 	db "home, #MON", $55
 	db "HOUSE at the foot", $55
 	db "of this tower.", $57
-; 0x99c1a + 279 bytes
 
 _PokemonTower7BattleText1: ; 99d31 (26:5d31)
 	db $0, "What do you want?", $4f
 	db "Why are you here?", $57
-; 0x99d31 + 37 bytes
 
 _PokemonTower7EndBattleText1: ; 99d56 (26:5d56)
 	db $0, "I give up!", $58
-; 0x99d56 + 12 bytes
 
 _PokemonTower7AfterBattleText1: ; 99d62 (26:5d62)
 	db $0, "I'm not going to", $4f
 	db "forget this!", $57
-; 0x99d62 + 30 bytes
 
 _PokemonTower7BattleText2: ; 99d80 (26:5d80)
 	db $0, "This old guy came", $4f
@@ -124582,12 +119682,10 @@ _PokemonTower7BattleText2: ; 99d80 (26:5d80)
 	db "useless #MON!", $51
 	db "We're talking it", $4f
 	db "over as adults!", $57
-; 0x99d80 + 97 bytes
 
 _PokemonTower7EndBattleText2: ; 99de1 (26:5de1)
 	db $0, "Please!", $4f
 	db "No more!", $58
-; 0x99de1 + 18 bytes
 
 _PokemonTower7AfterBattleText2: ; 99df3 (26:5df3)
 	db $0, "#MON are only", $4f
@@ -124595,34 +119693,28 @@ _PokemonTower7AfterBattleText2: ; 99df3 (26:5df3)
 	db "money!", $51
 	db "Stay out of our", $4f
 	db "business!", $57
-; 0x99df3 + 64 bytes
 
 _PokemonTower7BattleText3: ; 99e33 (26:5e33)
 	db $0, "You're not saving", $4f
 	db "anyone, kid!", $57
-; 0x99e33 + 31 bytes
 
 _PokemonTower7EndBattleText3: ; 99e52 (26:5e52)
 	db $0, "Don't", $4f
 	db "fight us ROCKETs!", $58
-; 0x99e52 + 24 bytes
 
 _PokemonTower7AfterBattleText3: ; 99e6a (26:5e6a)
 	db $0, "You're not getting", $4f
 	db "away with this!", $57
-; 0x99e6a + 35 bytes
 
 _UnnamedText_1d8d1: ; 99e8d (26:5e8d)
 	db $0, "That's odd, MR.FUJI", $4f
 	db "isn't here.", $55
 	db "Where'd he go?", $57
-; 0x99e8d + 45 bytes
 
 _UnnamedText_1d8d6: ; 99eba (26:5eba)
 	db $0, "MR.FUJI had been", $4f
 	db "praying alone for", $55
 	db "CUBONE's mother.", $57
-; 0x99eba + 52 bytes
 
 _UnnamedText_1d8f4: ; 99eee (26:5eee)
 	db $0, "This is really", $4f
@@ -124631,13 +119723,11 @@ _UnnamedText_1d8f4: ; 99eee (26:5eee)
 	db "He looks after", $4f
 	db "abandoned and", $55
 	db "orphaned #MON!", $57
-; 0x99eee + 93 bytes
 
 _UnnamedText_1d8f9: ; 99f4b (26:5f4b)
 	db $0, "It's so warm!", $4f
 	db "#MON are so", $55
 	db "nice to hug!", $57
-; 0x99f4b + 39 bytes
 
 _LavenderHouse1Text3: ; 99f72 (26:5f72)
 	db $0, "PSYDUCK: Gwappa!@@"
@@ -124653,14 +119743,12 @@ _UnnamedText_1d94c: ; 99f97 (26:5f97)
 	db "#MON.", $51
 	db "I think this may", $4f
 	db "help your quest.", $58
-; 0x99f97 + 100 bytes
 
 _ReceivedFluteText: ; 99ffb (26:5ffb)
 	db $0, $52, " received", $4f
 	db "a @"
 	TX_RAM $cf4b
 	db $0, "!@@"
-; 0x9a011
 
 _FluteExplanationText: ; 9a011 (26:6011)
 	db $0, $51
@@ -124670,17 +119758,14 @@ _FluteExplanationText: ; 9a011 (26:6011)
 	db "spring awake.", $51
 	db "It works on all", $4f
 	db "sleeping #MON.", $57
-; 0x9a011 + 88 bytes
 
 _FluteNoRoomText: ; 9a069 (26:6069)
 	db $0, "You must make", $4f
 	db "room for this!", $57
-; 0x9a069 + 30 bytes
 
 _MrFujiAfterFluteText: ; 9a087 (26:6087)
 	db $0, "MR.FUJI: Has my", $4f
 	db "FLUTE helped you?", $57
-; 0x9a087 + 35 bytes
 
 _LavenderHouse1Text6: ; 9a0aa (26:60aa)
 	db $0, "#MON Monthly", $4f
@@ -124708,7 +119793,6 @@ _UnnamedText_5c953: ; 9a1b4 (26:61b4)
 	db $0, "You know REVIVE?", $4f
 	db "It revives any", $55
 	db "fainted #MON!", $57
-; 0x9a1b4 + 47 bytes
 
 _UnnamedText_5c958: ; 9a1e3 (26:61e3)
 	db $0, "I found a NUGGET", $4f
@@ -124716,7 +119800,6 @@ _UnnamedText_5c958: ; 9a1e3 (26:61e3)
 	db "I thought it was", $4f
 	db "useless, but it", $55
 	db "sold for ¥5000!", $57
-; 0x9a1e3 + 85 bytes
 
 _LavenderHouse2Text1: ; 9a238 (26:6238)
 	db $0, "CUBONE: Kyarugoo!@@"
@@ -124729,7 +119812,6 @@ _UnnamedText_1d9dc: ; 9a24c (26:624c)
 	db "It was killed", $4f
 	db "trying to escape", $55
 	db "from TEAM ROCKET!", $57
-; 0x9a24c + 109 bytes
 
 _UnnamedText_1d9e1: ; 9a2b9 (26:62b9)
 	db $0, "The GHOST of", $4f
@@ -124738,7 +119820,6 @@ _UnnamedText_1d9e1: ; 9a2b9 (26:62b9)
 	db "Someone must have", $4f
 	db "soothed its", $55
 	db "restless soul!", $57
-; 0x9a2b9 + 79 bytes
 
 _UnnamedText_1dab3: ; 9a308 (26:6308)
 	db $0, "Hello, hello!", $4f
@@ -124747,12 +119828,10 @@ _UnnamedText_1dab3: ; 9a308 (26:6308)
 	db "Want me to rate", $4f
 	db "the nicknames of", $55
 	db "your #MON?", $57
-; 0x9a308 + 89 bytes
 
 _UnnamedText_1dab8: ; 9a361 (26:6361)
 	db $0, "Which #MON", $4f
 	db "should I look at?", $58
-; 0x9a361 + 30 bytes
 
 _UnnamedText_1dabd: ; 9a37f (26:637f)
 	TX_RAM $cd6d
@@ -124763,30 +119842,25 @@ _UnnamedText_1dabd: ; 9a37f (26:637f)
 	db "like me to give", $55
 	db "it a nicer name?", $51
 	db "How about it?", $57
-; 0x9a37f + 102 bytes
 
 _UnnamedText_1dac2: ; 9a3e5 (26:63e5)
 	db $0, "Fine! What should", $4f
 	db "we name it?", $58
-; 0x9a3e5 + 31 bytes
 
 _UnnamedText_1dac7: ; 9a404 (26:6404)
 	db $0, "OK! This #MON", $4f
 	db "has been renamed", $55
 	db "@"
-; 0x9a404 + 33 bytes
 
 UnnamedText_9a425: ; 9a425 (26:6425)
 	TX_RAM $cee9
 	db $0, "!", $51
 	db "That's a better", $4f
 	db "name than before!", $57
-; 0x9a44c
 
 _UnnamedText_1dacc: ; 9a44c (26:644c)
 	db $0, "Fine! Come any", $4f
 	db "time you like!", $57
-; 0x9a44c + 31 bytes
 
 _UnnamedText_1dad1: ; 9a46b (26:646b)
 	TX_RAM $cd6d
@@ -124797,7 +119871,6 @@ _UnnamedText_1dad1: ; 9a46b (26:646b)
 	db "@"
 	TX_RAM $cd6d
 	db $0, "!", $57
-; 0x9a4b2
 
 _VermilionPokecenterText2: ; 9a4b2 (26:64b2)
 _VermilionPokecenterText1: ; 9a4b2 (26:64b2)
@@ -124821,35 +119894,29 @@ _UnnamedText_59bb7: ; 9a572 (26:6572)
 	db $0, "Won't you admire", $4f
 	db "my PIKACHU's", $55
 	db "adorable tail?", $57
-; 0x9a572 + 44 bytes
 
 _UnnamedText_59bbc: ; 9a59e (26:659e)
 	db $0, "Humph! My PIKACHU", $4f
 	db "is twice as cute", $55
 	db "as that one!", $57
-; 0x9a59e + 49 bytes
 
 _UnnamedText_59be4: ; 9a5cf (26:65cf)
 	db $0, "I just love my", $4f
 	db "SEEL!", $51
 	db "It squeals when I", $4f
 	db "hug it!", $57
-; 0x9a5cf + 48 bytes
 
 _UnnamedText_59be9: ; 9a5ff (26:65ff)
 	db $0, "Oh dear!", $51
 	db "My SEEL is far", $4f
 	db "more attractive!", $57
-; 0x9a5ff + 42 bytes
 
 _UnnamedText_59c00: ; 9a629 (26:6629)
 	db $0, "PIKACHU: Chu!", $4f
 	db "Pikachu!", $57
-; 0x9a629 + 24 bytes
 
 _UnnamedText_59c17: ; 9a641 (26:6641)
 	db $0, "SEEL: Kyuoo!", $57
-; 0x9a641 + 14 bytes
 
 _UnnamedText_59c65: ; 9a64f (26:664f)
 	db $0, "I chair the", $4f
@@ -124863,7 +119930,6 @@ _UnnamedText_59c65: ; 9a64f (26:664f)
 	db "Did you come", $4f
 	db "visit to hear", $55
 	db "about my #MON?", $57
-; 0x9a64f + 145 bytes
 
 _UnnamedText_59c6a: ; 9a6e0 (26:66e0)
 	db $0, "Good!", $4f
@@ -124889,14 +119955,12 @@ _UnnamedText_59c6a: ; 9a6e0 (26:66e0)
 	db "Thanks for hearing", $4f
 	db "me out! I want", $55
 	db "you to have this!", $58
-; 0x9a6e0 + 334 bytes
 
 _ReceivedBikeVoucherText: ; 9a82e (26:682e)
 	db $0, $52, " received", $4f
 	db "a @"
 	TX_RAM $cf4b
 	db $0, "!@@"
-; 0x9a844
 
 _UnnamedText_59c74: ; 9a844 (26:6844)
 	db $0, $51
@@ -124909,13 +119973,11 @@ _UnnamedText_59c74: ; 9a844 (26:6844)
 	db "BICYCLE!", $51
 	db "I hope you like", $4f
 	db "cycling!", $57
-; 0x9a844 + 127 bytes
 
 _UnnamedText_59c79: ; 9a8c3 (26:68c3)
 	db $0, "Oh. Come back", $4f
 	db "when you want to", $55
 	db "hear my story!", $57
-; 0x9a8c3 + 47 bytes
 
 _UnnamedText_59c7e: ; 9a8f2 (26:68f2)
 	db $0, "Hello, ", $52, "!", $51
@@ -124923,12 +119985,10 @@ _UnnamedText_59c7e: ; 9a8f2 (26:68f2)
 	db "me about my", $55
 	db "#MON again?", $51
 	db "No? Too bad!", $57
-; 0x9a8f2 + 65 bytes
 
 _UnnamedText_59c83: ; 9a933 (26:6933)
 	db $0, "Make room for", $4f
 	db "this!", $57
-; 0x9a933 + 21 bytes
 
 _FanClubText6: ; 9a948 (26:6948)
 	db $0, "Our Chairman is", $4f
@@ -124980,7 +120040,6 @@ _UnnamedText_5cb6d: ; 9aaa5 (26:6aa5)
 	db "paralysis!", $51
 	db "The same as I'll", $4f
 	db "do to you!", $57
-; 0x9aaa5 + 214 bytes
 
 SECTION "bank27",ROMX,BANK[$27]
 
@@ -124992,7 +120051,6 @@ _UnnamedText_5cb72: ; 9c000 (27:4000)
 	db "But, it's useless", $4f
 	db "against ground-", $55
 	db "type #MON!", $57
-; 0x9c000 + 105 bytes
 
 _UnnamedText_5cb77: ; 9c069 (27:4069)
 	db $0, "The THUNDERBADGE", $4f
@@ -125003,14 +120061,12 @@ _UnnamedText_5cb77: ; 9c069 (27:4069)
 	db "time, kid!", $51
 	db "You're special,", $4f
 	db "kid! Take this!", $57
-; 0x9c069 + 119 bytes
 
 _ReceivedTM24Text: ; 9c0e0 (27:40e0)
 	db $0, $52, " received ", $4f
 	db "@"
 	TX_RAM $cf4b
 	db $0, "!@@"
-; 0x9c0f5
 
 _TM24ExplanationText: ; 9c0f5 (27:40f5)
 	db $0, $51
@@ -125018,12 +120074,10 @@ _TM24ExplanationText: ; 9c0f5 (27:40f5)
 	db "THUNDERBOLT!", $51
 	db "Teach it to an", $4f
 	db "electric #MON!", $57
-; 0x9c0f5 + 59 bytes
 
 _TM24NoRoomText: ; 9c130 (27:4130)
 	db $0, "Yo kid, make room", $4f
 	db "in your pack!", $57
-; 0x9c130 + 33 bytes
 
 _ReceivedThunderbadgeText: ; 9c151 (27:4151)
 	db $0, "Whoa!", $51
@@ -125031,52 +120085,43 @@ _ReceivedThunderbadgeText: ; 9c151 (27:4151)
 	db "deal, kid!", $51
 	db "Fine then, take", $4f
 	db "the THUNDERBADGE!", $58
-; 0x9c151 + 67 bytes
 
 _VermilionGymBattleText1: ; 9c194 (27:4194)
 	db $0, "When I was in the", $4f
 	db "Army, LT.SURGE", $55
 	db "was my strict CO!", $57
-; 0x9c194 + 52 bytes
 
 _VermilionGymEndBattleText1: ; 9c1c8 (27:41c8)
 	db $0, "Stop!", $4f
 	db "You're very good!", $58
-; 0x9c1c8 + 24 bytes
 
 _VermilionGymAfterBattleText1: ; 9c1e0 (27:41e0)
 	db $0, "The door won't", $4f
 	db "open?", $51
 	db "LT.SURGE always", $4f
 	db "was cautious!", $57
-; 0x9c1e0 + 51 bytes
 
 _VermilionGymBattleText2: ; 9c213 (27:4213)
 	db $0, "I'm a lightweight,", $4f
 	db "but I'm good with", $55
 	db "electricity!", $57
-; 0x9c213 + 49 bytes
 
 _VermilionGymEndBattleText2: ; 9c244 (27:4244)
 	db $0, "Fried!", $58
-; 0x9c244 + 8 bytes
 
 _VermilionGymAfterBattleText2: ; 9c24c (27:424c)
 	db $0, "OK, I'll talk!", $51
 	db "LT.SURGE said he", $4f
 	db "hid door switches", $55
 	db "inside something!", $57
-; 0x9c24c + 68 bytes
 
 _VermilionGymBattleText3: ; 9c290 (27:4290)
 	db $0, "This is no place", $4f
 	db "for kids!", $57
-; 0x9c290 + 28 bytes
 
 _VermilionGymEndBattleText3: ; 9c2ac (27:42ac)
 	db $0, "Wow!", $4f
 	db "Surprised me!", $58
-; 0x9c2ac + 20 bytes
 
 _VermilionGymAfterBattleText3: ; 9c2c0 (27:42c0)
 	db $0, "LT.SURGE set up", $4f
@@ -125086,7 +120131,6 @@ _VermilionGymAfterBattleText3: ; 9c2c0 (27:42c0)
 	db "1st lock, the 2nd", $55
 	db "lock is right", $55
 	db "next to it!", $57
-; 0x9c2c0 + 107 bytes
 
 _UnnamedText_5cbf4: ; 9c32b (27:432b)
 	db $0, "Yo! Champ in", $4f
@@ -125107,12 +120151,10 @@ _UnnamedText_5cbf4: ; 9c32b (27:432b)
 	db "You'll have to", $4f
 	db "break a code to", $55
 	db "get to him!", $57
-; 0x9c32b + 254 bytes
 
 _UnnamedText_5cbf9: ; 9c429 (27:4429)
 	db $0, "Whew! That match", $4f
 	db "was electric!", $57
-; 0x9c429 + 32 bytes
 
 _VermilionHouse1Text1: ; 9c449 (27:4449)
 	db $0, "I'm getting my", $4f
@@ -125134,7 +120176,6 @@ _VermilionHouse1Text3: ; 9c49c (27:449c)
 
 _UnnamedText_1dcc1: ; 9c50e (27:450e)
 	db $0, $57
-; 0x9c50e + 2 bytes
 
 _UnnamedText_560b1: ; 9c510 (27:4510)
 	db $0, "I'm the FISHING", $4f
@@ -125143,7 +120184,6 @@ _UnnamedText_560b1: ; 9c510 (27:4510)
 	db "fishing!", $51
 	db "Do you like to", $4f
 	db "fish?", $57
-; 0x9c510 + 68 bytes
 
 _UnnamedText_560b6: ; 9c554 (27:4554)
 	db $0, "Grand! I like", $4f
@@ -125154,7 +120194,6 @@ _UnnamedText_560b6: ; 9c554 (27:4554)
 	db "an @"
 	TX_RAM $cf4b
 	db $0, "!@@"
-; 0x9c5a4
 
 _UnnamedText_560bb: ; 9c5a4 (27:45a4)
 	db $0, $51
@@ -125164,25 +120203,21 @@ _UnnamedText_560bb: ; 9c5a4 (27:45a4)
 	db "rivers, go out", $55
 	db "and land the big", $55
 	db "one, young one!", $57
-; 0x9c5a4 + 93 bytes
 
 _UnnamedText_560c0: ; 9c601 (27:4601)
 	db $0, "Oh... That's so", $4f
 	db "disappointing...", $57
-; 0x9c601 + 33 bytes
 
 _UnnamedText_560c5: ; 9c622 (27:4622)
 	db $0, "Hello there,", $4f
 	db $52, "!", $51
 	db "How are the fish", $4f
 	db "biting?", $57
-; 0x9c622 + 42 bytes
 
 _UnnamedText_560ca: ; 9c64c (27:464c)
 	db $0, "Oh no!", $51
 	db "You have no room", $4f
 	db "for my gift!", $57
-; 0x9c64c + 38 bytes
 
 _CeladonMart1Text1: ; 9c672 (27:4672)
 	db $0, "Hello! Welcome to", $4f
@@ -125231,26 +120266,22 @@ _TM18PreReceiveText: ; 9c814 (27:4814)
 	db "Not done yet?", $4f
 	db "This might be", $55
 	db "useful!", $58
-; 0x9c814 + 70 bytes
 
 _ReceivedTM18Text: ; 9c85a (27:485a)
 	db $0, $52, " received", $4f
 	db "@"
 	TX_RAM $cf4b
 	db $0, "!@@"
-; 0x9c86e
 
 _TM18ExplanationText: ; 9c86e (27:486e)
 	db $0, "TM18 is COUNTER!", $4f
 	db "Not like the one", $55
 	db "I'm leaning on,", $55
 	db "mind you!", $57
-; 0x9c86e + 60 bytes
 
 _TM18NoRoomText: ; 9c8aa (27:48aa)
 	db $0, "Your pack is full", $4f
 	db "of items!", $57
-; 0x9c8aa + 29 bytes
 
 _CeladonMart3Text2: ; 9c8c7 (27:48c7)
 	db $0, "Captured #MON", $4f
@@ -125333,7 +120364,6 @@ _CeladonMart4Text4: ; 9cb56 (27:4b56)
 _UnnamedText_484ee: ; 9cbb5 (27:4bb5)
 	db $0, "Give her which", $4f
 	db "drink?", $57
-; 0x9cbb5 + 23 bytes
 
 UnnamedText_9cbcc: ; 9cbcc (27:4bcc)
 	db $0, "Yay!", $51
@@ -125341,14 +120371,12 @@ UnnamedText_9cbcc: ; 9cbcc (27:4bcc)
 	db "Thank you!", $51
 	db "You can have this", $4f
 	db "from me!@@"
-; 0x9cc06
 
 UnnamedText_9cc06: ; 9cc06 (27:4c06)
 	db $0, $52, " received", $4f
 	db "@"
 	TX_RAM $cf4b
 	db $0, "!@@"
-; 0x9cc1a
 
 UnnamedText_9cc1a: ; 9cc1a (27:4c1a)
 	db $0, $51
@@ -125358,7 +120386,6 @@ UnnamedText_9cc1a: ; 9cc1a (27:4c1a)
 	db "ICE BEAM!", $51
 	db "It can freeze the", $4f
 	db "target sometimes!@@"
-; 0x9cc5a
 
 UnnamedText_9cc5a: ; 9cc5a (27:4c5a)
 	db $0, "Yay!", $51
@@ -125366,14 +120393,12 @@ UnnamedText_9cc5a: ; 9cc5a (27:4c5a)
 	db "Thank you!", $51
 	db "You can have this", $4f
 	db "from me!@@"
-; 0x9cc91
 
 UnnamedText_9cc91: ; 9cc91 (27:4c91)
 	db $0, $52, " received", $4f
 	db "@"
 	TX_RAM $cf4b
 	db $0, "!@@"
-; 0x9cca4
 
 UnnamedText_9cca5: ; 9cca5 (27:4ca5)
 	db $0, $51
@@ -125383,7 +120408,6 @@ UnnamedText_9cca5: ; 9cca5 (27:4ca5)
 	db "ROCK SLIDE!", $51
 	db "It can spook the", $4f
 	db "target sometimes!@@"
-; 0x9cce6
 
 UnnamedText_9cce6: ; 9cce6 (27:4ce6)
 	db $0, "Yay!", $51
@@ -125391,29 +120415,24 @@ UnnamedText_9cce6: ; 9cce6 (27:4ce6)
 	db "Thank you!", $51
 	db "You can have this", $4f
 	db "from me!@@"
-; 0x9cd1d
 
 ReceivedTM49Text: ; 9cd1d (27:4d1d)
 	db $0, $52, " received", $4f
 	db "TM49!@@"
-; 0x9cd30
 
 UnnamedText_9cd30: ; 9cd30 (27:4d30)
 	db $0, $51
 	db "TM49 contains", $4f
 	db "TRI ATTACK!@@"
-; 0x9cd4d
 
 UnnamedText_9cd4d: ; 9cd4d (27:4d4d)
 	db $0, "You don't have", $4f
 	db "space for this!@@"
-; 0x9cd6d
 
 UnnamedText_9cd6d: ; 9cd6d (27:4d6d)
 	db $0, "No thank you!", $4f
 	db "I'm not thirsty", $55
 	db "after all!@@"
-; 0x9cd97
 
 _CeladonMartRoofText1: ; 9cd97 (27:4d97)
 	db $0, "My sister is a", $4f
@@ -125427,14 +120446,12 @@ _UnnamedText_48598: ; 9cdee (27:4dee)
 	db $0, "I'm thirsty!", $4f
 	db "I want something", $55
 	db "to drink!", $57
-; 0x9cdee + 40 bytes
 
 _UnnamedText_4859d: ; 9ce16 (27:4e16)
 	db $0, "I'm thirsty!", $4f
 	db "I want something", $55
 	db "to drink!", $51
 	db "Give her a drink?", $57
-; 0x9ce16 + 58 bytes
 
 _CeladonMartRoofText6: ; 9ce50 (27:4e50)
 	db $0, "ROOFTOP SQUARE:", $4f
@@ -125443,27 +120460,22 @@ _CeladonMartRoofText6: ; 9ce50 (27:4e50)
 _UnnamedText_74f99: ; 9ce72 (27:4e72)
 	db $0, "A vending machine!", $4f
 	db "Here's the menu!", $58
-; 0x9ce72 + 36 bytes
 
 _UnnamedText_74fd3: ; 9ce96 (27:4e96)
 	db $0, "Oops, not enough", $4f
 	db "money!", $57
-; 0x9ce96 + 25 bytes
 
 _UnnamedText_74fd8: ; 9ceaf (27:4eaf)
 	TX_RAM $cf4b
 	db $0, $4f
 	db "popped out!", $57
-; 0x9ceaf + 17 bytes
 
 _UnnamedText_74fdd: ; 9cec0 (27:4ec0)
 	db $0, "There's no more", $4f
 	db "room for stuff!", $57
-; 0x9cec0 + 32 bytes
 
 _UnnamedText_74fe2: ; 9cee0 (27:4ee0)
 	db $0, "Not thirsty!", $57
-; 0x9cee0 + 14 bytes
 
 _CeladonMansion1Text1: ; 9ceee (27:4eee)
 	db $0, "MEOWTH: Meow!@@"
@@ -125516,7 +120528,6 @@ _GameDesignerText: ; 9d03a (27:503a)
 	db "but don't quit!", $51
 	db "When you finish,", $4f
 	db "come tell me!", $57
-; 0x9d03a + 115 bytes
 
 _CompletedDexText: ; 9d0ad (27:50ad)
 	db $0, "Wow! Excellent!", $4f
@@ -125524,7 +120535,6 @@ _CompletedDexText: ; 9d0ad (27:50ad)
 	db "your #DEX!", $55
 	db "Congratulations!", $55
 	db "...@@"
-; 0x9d0ed
 
 _CeladonMansion3Text5: ; 9d0ed (27:50ed)
 	db $0, "It's the game", $4f
@@ -125589,7 +120599,6 @@ _UnnamedText_48a5e: ; 9d28f (27:528f)
 	db "challenge me.", $51
 	db "Very well, but I", $4f
 	db "shall not lose.", $57
-; 0x9d28f + 307 bytes
 
 _UnnamedText_48a63: ; 9d3c2 (27:53c2)
 	db $0, "Oh!", $4f
@@ -125598,7 +120607,6 @@ _UnnamedText_48a63: ; 9d3c2 (27:53c2)
 	db "strong.", $51
 	db "I must confer you", $4f
 	db "the RAINBOWBADGE.", $58
-; 0x9d3c2 + 86 bytes
 
 _UnnamedText_48a68: ; 9d418 (27:5418)
 	db $0, "You are cataloging", $4f
@@ -125608,7 +120616,6 @@ _UnnamedText_48a68: ; 9d418 (27:5418)
 	db "collect #MON", $55
 	db "if they were", $55
 	db "unattractive.", $57
-; 0x9d418 + 105 bytes
 
 _UnnamedText_48a6d: ; 9d481 (27:5481)
 	db $0, "The RAINBOWBADGE", $4f
@@ -125620,14 +120627,12 @@ _UnnamedText_48a6d: ; 9d481 (27:5481)
 	db "out of battle.", $51
 	db "Please also take", $4f
 	db "this with you.", $57
-; 0x9d481 + 139 bytes
 
 _ReceivedTM21Text: ; 9d50c (27:550c)
 	db $0, $52, " received", $4f
 	db "@"
 	TX_RAM $cf4b
 	db $0, "!@@"
-; 0x9d520
 
 _TM21ExplanationText: ; 9d520 (27:5520)
 	db $0, $51
@@ -125637,39 +120642,32 @@ _TM21ExplanationText: ; 9d520 (27:5520)
 	db "it inflicts is", $55
 	db "drained to heal", $55
 	db "your #MON!", $57
-; 0x9d520 + 86 bytes
 
 _TM21NoRoomText: ; 9d576 (27:5576)
 	db $0, "You should make", $4f
 	db "room for this.", $57
-; 0x9d576 + 32 bytes
 
 _CeladonGymBattleText2: ; 9d596 (27:5596)
 	db $0, "Hey!", $51
 	db "You are not", $4f
 	db "allowed in here!", $57
-; 0x9d596 + 35 bytes
 
 _CeladonGymEndBattleText2: ; 9d5b9 (27:55b9)
 	db $0, "You're", $4f
 	db "too rough!", $58
-; 0x9d5b9 + 18 bytes
 
 _CeladonGymAfterBattleText2: ; 9d5cb (27:55cb)
 	db $0, "Bleaah!", $4f
 	db "I hope ERIKA", $55
 	db "wipes you out!", $57
-; 0x9d5cb + 37 bytes
 
 _CeladonGymBattleText3: ; 9d5f0 (27:55f0)
 	db $0, "I was getting", $4f
 	db "bored.", $57
-; 0x9d5f0 + 22 bytes
 
 _CeladonGymEndBattleText3: ; 9d606 (27:5606)
 	db $0, "My", $4f
 	db "makeup!", $58
-; 0x9d606 + 12 bytes
 
 _CeladonGymAfterBattleText3: ; 9d612 (27:5612)
 	db $0, "Grass-type #MON", $4f
@@ -125678,34 +120676,28 @@ _CeladonGymAfterBattleText3: ; 9d612 (27:5612)
 	db "They also have an", $4f
 	db "edge on rock and", $55
 	db "ground #MON!", $57
-; 0x9d612 + 99 bytes
 
 _CeladonGymBattleText4: ; 9d675 (27:5675)
 	db $0, "Aren't you the", $4f
 	db "peeping Tom?", $57
-; 0x9d675 + 28 bytes
 
 _CeladonGymEndBattleText4: ; 9d691 (27:5691)
 	db $0, "I'm", $4f
 	db "in shock!", $58
-; 0x9d691 + 14 bytes
 
 _CeladonGymAfterBattleText4: ; 9d69f (27:569f)
 	db $0, "Oh, you weren't", $4f
 	db "peeping? We get a", $55
 	db "lot of gawkers!", $57
-; 0x9d69f + 50 bytes
 
 _CeladonGymBattleText5: ; 9d6d1 (27:56d1)
 	db $0, "Look at my grass", $4f
 	db "#MON!", $51
 	db "They're so easy", $4f
 	db "to raise!", $57
-; 0x9d6d1 + 49 bytes
 
 _CeladonGymEndBattleText5: ; 9d702 (27:5702)
 	db $0, "No!", $58
-; 0x9d702 + 5 bytes
 
 _CeladonGymAfterBattleText5: ; 9d707 (27:5707)
 	db $0, "We only use grass-", $4f
@@ -125714,43 +120706,36 @@ _CeladonGymAfterBattleText5: ; 9d707 (27:5707)
 	db "We also use them", $4f
 	db "for making flower", $55
 	db "arrangements!", $57
-; 0x9d707 + 91 bytes
 
 _CeladonGymBattleText6: ; 9d762 (27:5762)
 	db $0, "Don't bring any", $4f
 	db "bugs or fire", $55
 	db "#MON in here!", $57
-; 0x9d762 + 43 bytes
 
 _CeladonGymEndBattleText6: ; 9d78d (27:578d)
 	db $0, "Oh!", $4f
 	db "You!", $58
-; 0x9d78d + 10 bytes
 
 _CeladonGymAfterBattleText6: ; 9d797 (27:5797)
 	db $0, "Our LEADER, ERIKA,", $4f
 	db "might be quiet,", $55
 	db "but she's also", $55
 	db "very skilled!", $57
-; 0x9d797 + 64 bytes
 
 _CeladonGymBattleText7: ; 9d7d7 (27:57d7)
 	db $0, "Pleased to meet", $4f
 	db "you. My hobby is", $55
 	db "#MON training.", $57
-; 0x9d7d7 + 49 bytes
 
 _CeladonGymEndBattleText7: ; 9d808 (27:5808)
 	db $0, "Oh!", $4f
 	db "Splendid!", $58
-; 0x9d808 + 15 bytes
 
 _CeladonGymAfterBattleText7: ; 9d817 (27:5817)
 	db $0, "I have a blind", $4f
 	db "date coming up.", $55
 	db "I have to learn", $55
 	db "to be polite.", $57
-; 0x9d817 + 62 bytes
 
 _CeladonGymBattleText8: ; 9d855 (27:5855)
 	db $0, "Welcome to", $4f
@@ -125758,19 +120743,16 @@ _CeladonGymBattleText8: ; 9d855 (27:5855)
 	db "You better not", $4f
 	db "underestimate", $55
 	db "girl power!", $57
-; 0x9d855 + 66 bytes
 
 _CeladonGymEndBattleText8: ; 9d897 (27:5897)
 	db $0, "Oh!", $4f
 	db "Beaten!", $58
-; 0x9d897 + 13 bytes
 
 _CeladonGymAfterBattleText8: ; 9d8a4 (27:58a4)
 	db $0, "I didn't bring my", $4f
 	db "best #MON!", $51
 	db "Wait 'til next", $4f
 	db "time!", $57
-; 0x9d8a4 + 49 bytes
 
 _CeladonGameCornerText1: ; 9d8d5 (27:58d5)
 	db $0, "Welcome!", $51
@@ -125787,32 +120769,26 @@ _UnnamedText_48d22: ; 9d91a (27:591a)
 	db "It's ¥1000 for 50", $4f
 	db "coins. Would you", $55
 	db "like some?", $57
-; 0x9d91a + 106 bytes
 
 _UnnamedText_48d27: ; 9d984 (27:5984)
 	db $0, "Thanks! Here are", $4f
 	db "your 50 coins!", $57
-; 0x9d984 + 33 bytes
 
 _UnnamedText_48d2c: ; 9d9a5 (27:59a5)
 	db $0, "No? Please come", $4f
 	db "play sometime!", $57
-; 0x9d9a5 + 32 bytes
 
 _UnnamedText_48d31: ; 9d9c5 (27:59c5)
 	db $0, "You can't afford", $4f
 	db "the coins!", $57
-; 0x9d9c5 + 28 bytes
 
 _UnnamedText_48d36: ; 9d9e1 (27:59e1)
 	db $0, "Oops! Your COIN", $4f
 	db "CASE is full.", $57
-; 0x9d9e1 + 31 bytes
 
 _UnnamedText_48d3b: ; 9da00 (27:5a00)
 	db $0, "You don't have a", $4f
 	db "COIN CASE!", $57
-; 0x9da00 + 28 bytes
 
 _CeladonGameCornerText3: ; 9da1c (27:5a1c)
 	db $0, "Keep this quiet.", $51
@@ -125828,22 +120804,18 @@ _CeladonGameCornerText4: ; 9da61 (27:5a61)
 _UnnamedText_48d9c: ; 9da8e (27:5a8e)
 	db $0, "Kid, do you want", $4f
 	db "to play?", $58
-; 0x9da8e + 27 bytes
 
 _Received10CoinsText: ; 9daa9 (27:5aa9)
 	db $0, $52, " received", $4f
 	db "10 coins!@@"
-; 0x9dac0
 
 _UnnamedText_48da7: ; 9dac0 (27:5ac0)
 	db $0, "You don't need my", $4f
 	db "coins!", $57
-; 0x9dac0 + 25 bytes
 
 _UnnamedText_48dac: ; 9dad9 (27:5ad9)
 	db $0, "Wins seem to come", $4f
 	db "and go.", $57
-; 0x9dad9 + 27 bytes
 
 _CeladonGameCornerText6: ; 9daf4 (27:5af4)
 	db $0, "I'm having a", $4f
@@ -125861,7 +120833,6 @@ _UnnamedText_48dca: ; 9db11 (27:5b11)
 	db "She might appear", $4f
 	db "docile, but don't", $55
 	db "be fooled!", $57
-; 0x9db11 + 155 bytes
 
 _UnnamedText_48dcf: ; 9dbac (27:5bac)
 	db $0, "They offer rare", $4f
@@ -125870,7 +120841,6 @@ _UnnamedText_48dcf: ; 9dbac (27:5bac)
 	db "your coins.", $51
 	db "But, I just can't", $4f
 	db "seem to win!", $57
-; 0x9dbac + 90 bytes
 
 _CeladonGameCornerText8: ; 9dc06 (27:5c06)
 	db $0, "Games are scary!", $4f
@@ -125880,74 +120850,61 @@ _CeladonGameCornerText8: ; 9dc06 (27:5c06)
 _UnnamedText_48e26: ; 9dc33 (27:5c33)
 	db $0, "What's up? Want", $4f
 	db "some coins?", $58
-; 0x9dc33 + 28 bytes
 
 _Received20CoinsText: ; 9dc4f (27:5c4f)
 	db $0, $52, " received", $4f
 	db "20 coins!@@"
-; 0x9dc66
 
 _UnnamedText_48e31: ; 9dc66 (27:5c66)
 	db $0, "You have lots of", $4f
 	db "coins!", $57
-; 0x9dc66 + 25 bytes
 
 _UnnamedText_48e36: ; 9dc7f (27:5c7f)
 	db $0, "Darn! I need more", $4f
 	db "coins for the", $55
 	db "#MON I want!", $57
-; 0x9dc7f + 46 bytes
 
 _UnnamedText_48e88: ; 9dcad (27:5cad)
 	db $0, "Hey, what? You're", $4f
 	db "throwing me off!", $55
 	db "Here are some", $55
 	db "coins, shoo!", $58
-; 0x9dcad + 62 bytes
 
 _UnnamedText_48e8d: ; 9dceb (27:5ceb)
 	db $0, $52, " received", $4f
 	db "20 coins!@@"
-; 0x9dd02
 
 _UnnamedText_48e93: ; 9dd02 (27:5d02)
 	db $0, "You've got your", $4f
 	db "own coins!", $57
-; 0x9dd02 + 27 bytes
 
 _UnnamedText_48e98: ; 9dd1d (27:5d1d)
 	db $0, "The trick is to", $4f
 	db "watch the reels", $55
 	db "closely!", $57
-; 0x9dd1d + 42 bytes
 
 _UnnamedText_48ece: ; 9dd47 (27:5d47)
 	db $0, "I'm guarding this", $4f
 	db "poster!", $55
 	db "Go away, or else!", $57
-; 0x9dd47 + 44 bytes
 
 _UnnamedText_48ed3: ; 9dd73 (27:5d73)
 	db $0, "Dang!", $58
-; 0x9dd73 + 7 bytes
 
 _UnnamedText_48ed8: ; 9dd7a (27:5d7a)
 	db $0, "Our hideout might", $4f
 	db "be discovered! I", $55
 	db "better tell BOSS!", $57
-; 0x9dd7a + 54 bytes
 
 _UnnamedText_48f09: ; 9ddb0 (27:5db0)
 	db $0, "Hey!", $51
 	db "A switch behind", $4f
 	db "the poster!?", $55
 	db "Let's push it!@@"
-; 0x9dde2
 
 _UnnamedText_48f19: ; 9dde2 (27:5de2)
 	db $0, "Oops! Forgot the", $4f
 	db "COIN CASE!", $57
-; 0x9dde2 + 29 bytes
 
 _CeladonMart5Text1: ; 9ddff (27:5dff)
 	db $0, "#MON ability", $4f
@@ -126013,25 +120970,21 @@ _UnnamedText_491a7: ; 9e003 (27:6003)
 	db "Here! I won't be", $4f
 	db "needing this any-", $55
 	db "more!", $58
-; 0x9e003 + 119 bytes
 
 _ReceivedCoinCaseText: ; 9e07a (27:607a)
 	db $0, $52, " received", $4f
 	db "a @"
 	TX_RAM $cf4b
 	db $0, "!@@"
-; 0x9e090
 
 _CoinCaseNoRoomText: ; 9e090 (27:6090)
 	db $0, "Make room for", $4f
 	db "this!", $57
-; 0x9e090 + 21 bytes
 
 _UnnamedText_491b7: ; 9e0a5 (27:60a5)
 	db $0, "I always thought", $4f
 	db "I was going to", $55
 	db "win it back...", $57
-; 0x9e0a5 + 48 bytes
 
 _CeladonHouseText1: ; 9e0d5 (27:60d5)
 	db $0, "Hehehe! The slots", $4f
@@ -126124,29 +121077,24 @@ _WardenGibberishText1: ; 9e444 (27:6444)
 	db "Ha lof ha feef ee", $4f
 	db "hafahi ho. Heff", $55
 	db "hee fwee!", $57
-; 0x9e444 + 71 bytes
 
 _WardenGibberishText2: ; 9e48b (27:648b)
 	db $0, "Ah howhee ho hoo!", $4f
 	db "Eef ee hafahi ho!", $57
-; 0x9e48b + 37 bytes
 
 _WardenGibberishText3: ; 9e4b0 (27:64b0)
 	db $0, "Ha? He ohay heh", $4f
 	db "ha hoo ee haheh!", $57
-; 0x9e4b0 + 34 bytes
 
 _WardenTeethText1: ; 9e4d2 (27:64d2)
 	db $0, $52, " gave the", $4f
 	db "GOLD TEETH to the", $55
 	db "WARDEN!@@"
-; 0x9e4f9
 
 _WardenTeethText2: ; 9e4f9 (27:64f9)
 	db $0, $51
 	db "The WARDEN popped", $4f
 	db "in his teeth!", $58
-; 0x9e4f9 + 34 bytes
 
 _WardenThankYouText: ; 9e51b (27:651b)
 	db $0, "WARDEN: Thanks,", $4f
@@ -126158,14 +121106,12 @@ _WardenThankYouText: ; 9e51b (27:651b)
 	db "Let me give you", $55
 	db "something for", $55
 	db "your trouble.", $58
-; 0x9e51b + 135 bytes
 
 _ReceivedHM04Text: ; 9e5a2 (27:65a2)
 	db $0, $52, " received", $4f
 	db "@"
 	TX_RAM $cf4b
 	db $0, "!@@"
-; 0x9e5b6
 
 _HM04ExplanationText: ; 9e5b6 (27:65b6)
 	db $0, "WARDEN: HM04", $4f
@@ -126181,22 +121127,18 @@ _HM04ExplanationText: ; 9e5b6 (27:65b6)
 	db "win an HM!", $51
 	db "I hear it's the", $4f
 	db "rare SURF HM.", $57
-; 0x9e5b6 + 196 bytes
 
 _HM04NoRoomText: ; 9e67a (27:667a)
 	db $0, "Your pack is", $4f
 	db "stuffed full!", $57
-; 0x9e67a + 28 bytes
 
 _UnnamedText_75176: ; 9e696 (27:6696)
 	db $0, "#MON photos", $4f
 	db "and fossils.", $57
-; 0x9e696 + 26 bytes
 
 _UnnamedText_7517b: ; 9e6b0 (27:66b0)
 	db $0, "Old #MON", $4f
 	db "merchandise.", $57
-; 0x9e6b0 + 23 bytes
 
 _SafariZoneEntranceText1: ; 9e6c7 (27:66c7)
 	db $0, "Welcome to the", $4f
@@ -126209,7 +121151,6 @@ UnnamedText_9e6e4: ; 9e6e4 (27:66e4)
 	db "want in the park!", $51
 	db "Would you like to", $4f
 	db "join the hunt?@@"
-; 0x9e747
 
 UnnamedText_9e747: ; 9e747 (27:6747)
 	db $0, "That'll be ¥500", $4f
@@ -126219,7 +121160,6 @@ UnnamedText_9e747: ; 9e747 (27:6747)
 	db "here.", $51
 	db $52, " received", $4f
 	db "30 SAFARI BALLs!@@"
-; 0x9e79f
 
 _UnnamedText_75360: ; 9e79f (27:679f)
 	db $0, $51
@@ -126227,42 +121167,34 @@ _UnnamedText_75360: ; 9e79f (27:679f)
 	db "the PA when you", $55
 	db "run out of time", $55
 	db "or SAFARI BALLs!", $57
-; 0x9e79f + 68 bytes
 
 _UnnamedText_75365: ; 9e7e3 (27:67e3)
 	db $0, "OK! Please come", $4f
 	db "again!", $57
-; 0x9e7e3 + 24 bytes
 
 _UnnamedText_7536a: ; 9e7fb (27:67fb)
 	db $0, "Oops! Not enough", $4f
 	db "money!", $57
-; 0x9e7fb + 25 bytes
 
 UnnamedText_9e814: ; 9e814 (27:6814)
 	db $0, "Leaving early?@@"
-; 0x9e825
 
 _UnnamedText_753bb: ; 9e825 (27:6825)
 	db $0, "Please return any", $4f
 	db "SAFARI BALLs you", $55
 	db "have left.", $57
-; 0x9e825 + 47 bytes
 
 _UnnamedText_753c0: ; 9e854 (27:6854)
 	db $0, "Good Luck!", $57
-; 0x9e854 + 12 bytes
 
 _UnnamedText_753c5: ; 9e860 (27:6860)
 	db $0, "Did you get a", $4f
 	db "good haul?", $55
 	db "Come again!", $57
-; 0x9e860 + 38 bytes
 
 _UnnamedText_753e6: ; 9e886 (27:6886)
 	db $0, "Hi! Is it your", $4f
 	db "first time here?", $57
-; 0x9e886 + 33 bytes
 
 _UnnamedText_753eb: ; 9e8a7 (27:68a7)
 	db $0, "SAFARI ZONE has 4", $4f
@@ -126281,12 +121213,10 @@ _UnnamedText_753eb: ; 9e8a7 (27:68a7)
 	db "#MON BOX so", $55
 	db "there's room for", $55
 	db "new #MON!", $57
-; 0x9e8a7 + 236 bytes
 
 _UnnamedText_753f0: ; 9e993 (27:6993)
 	db $0, "Sorry, you're a", $4f
 	db "regular here!", $57
-; 0x9e993 + 30 bytes
 
 _UnnamedText_75581: ; 9e9b1 (27:69b1)
 	db $0, "KOGA: Fwahahaha!", $51
@@ -126301,7 +121231,6 @@ _UnnamedText_75581: ; 9e9b1 (27:69b1)
 	db "the despair of", $55
 	db "poison and sleep", $55
 	db "techniques!", $57
-; 0x9e9b1 + 181 bytes
 
 _UnnamedText_75586: ; 9ea66 (27:6a66)
 	db $0, "Humph!", $4f
@@ -126309,7 +121238,6 @@ _UnnamedText_75586: ; 9ea66 (27:6a66)
 	db "your worth!", $51
 	db "Here! Take the", $4f
 	db "SOULBADGE!", $58
-; 0x9ea66 + 62 bytes
 
 SECTION "bank28",ROMX,BANK[$28]
 
@@ -126321,7 +121249,6 @@ _UnnamedText_7558b: ; a0000 (28:4000)
 	db "progresses!", $51
 	db "It will surely", $4f
 	db "terrorize foes!", $57
-; 0xa0000 + 105 bytes
 
 _UnnamedText_75590: ; a0069 (28:4069)
 	db $0, "Now that you have", $4f
@@ -126334,7 +121261,6 @@ _UnnamedText_75590: ; a0069 (28:4069)
 	db "battle!", $51
 	db "Ah! Take this", $4f
 	db "too!", $57
-; 0xa0069 + 130 bytes
 
 _ReceivedTM06Text: ; a00eb (28:40eb)
 	db $0, $52, " received", $4f
@@ -126349,12 +121275,10 @@ _TM06ExplanationText: ; a00ff (28:40ff)
 	db "It is a secret", $4f
 	db "technique over", $55
 	db "400 years old!", $57
-; 0xa00ff + 68 bytes
 
 _TM06NoRoomText: ; a0143 (28:4143)
 	db $0, "Make space for", $4f
 	db "this, child!", $57
-; 0xa0143 + 29 bytes
 
 _FuchsiaGymBattleText1: ; a0160 (28:4160)
 	db $0, "Strength isn't", $4f
@@ -126364,66 +121288,55 @@ _FuchsiaGymBattleText1: ; a0160 (28:4160)
 	db "I'll show you how", $4f
 	db "strategy can beat", $55
 	db "brute strength!", $57
-; 0xa0160 + 98 bytes
 
 _FuchsiaGymEndBattleText1: ; a01c2 (28:41c2)
 	db $0, "What?", $4f
 	db "Extraordinary!", $58
-; 0xa01c2 + 22 bytes
 
 _FuchsiaGymAfterBattleText1: ; a01d8 (28:41d8)
 	db $0, "So, you mix brawn", $4f
 	db "with brains?", $55
 	db "Good strategy!", $57
-; 0xa01d8 + 47 bytes
 
 _FuchsiaGymBattleText2: ; a0207 (28:4207)
 	db $0, "I wanted to become", $4f
 	db "a ninja, so I", $55
 	db "joined this GYM!", $57
-; 0xa0207 + 51 bytes
 
 _FuchsiaGymEndBattleText2: ; a023a (28:423a)
 	db $0, "I'm done", $4f
 	db "for!", $58
-; 0xa023a + 14 bytes
 
 _FuchsiaGymAfterBattleText2: ; a0248 (28:4248)
 	db $0, "I will keep on", $4f
 	db "training under", $55
 	db "KOGA, my ninja", $55
 	db "master!", $57
-; 0xa0248 + 54 bytes
 
 _FuchsiaGymBattleText3: ; a027e (28:427e)
 	db $0, "Let's see you", $4f
 	db "beat my special", $55
 	db "techniques!", $57
-; 0xa027e + 42 bytes
 
 _FuchsiaGymEndBattleText3: ; a02a8 (28:42a8)
 	db $0, "You", $4f
 	db "had me fooled!", $58
-; 0xa02a8 + 20 bytes
 
 _FuchsiaGymAfterBattleText3: ; a02bc (28:42bc)
 	db $0, "I like poison and", $4f
 	db "sleep techniques,", $55
 	db "as they linger", $55
 	db "after battle!", $57
-; 0xa02bc + 66 bytes
 
 _FuchsiaGymBattleText4: ; a02fe (28:42fe)
 	db $0, "Stop right there!", $51
 	db "Our invisible", $4f
 	db "walls have you", $55
 	db "frustrated?", $57
-; 0xa02fe + 60 bytes
 
 _FuchsiaGymEndBattleText4: ; a033a (28:433a)
 	db $0, "Whoa!", $4f
 	db "He's got it!", $58
-; 0xa033a + 19 bytes
 
 _FuchsiaGymAfterBattleText4: ; a034d (28:434d)
 	db $0, "You impressed me!", $4f
@@ -126431,7 +121344,6 @@ _FuchsiaGymAfterBattleText4: ; a034d (28:434d)
 	db "Look very closely", $4f
 	db "for gaps in the", $55
 	db "invisible walls!", $57
-; 0xa034d + 84 bytes
 
 _FuchsiaGymBattleText5: ; a03a1 (28:43a1)
 	db $0, "I also study the", $4f
@@ -126440,16 +121352,13 @@ _FuchsiaGymBattleText5: ; a03a1 (28:43a1)
 	db "Ninja have a long", $4f
 	db "history of using", $55
 	db "animals!", $57
-; 0xa03a1 + 97 bytes
 
 _FuchsiaGymEndBattleText5: ; a0402 (28:4402)
 	db $0, "Awoo!", $58
-; 0xa0402 + 7 bytes
 
 _FuchsiaGymAfterBattleText5: ; a0409 (28:4409)
 	db $0, "I still have much", $4f
 	db "to learn!", $57
-; 0xa0409 + 29 bytes
 
 _FuchsiaGymBattleText6: ; a0426 (28:4426)
 	db $0, "Master KOGA comes", $4f
@@ -126457,12 +121366,10 @@ _FuchsiaGymBattleText6: ; a0426 (28:4426)
 	db "of ninjas!", $51
 	db "What did you", $4f
 	db "descend from?", $57
-; 0xa0426 + 74 bytes
 
 _FuchsiaGymEndBattleText6: ; a0470 (28:4470)
 	db $0, "Dropped", $4f
 	db "my balls!", $58
-; 0xa0470 + 19 bytes
 
 _FuchsiaGymAfterBattleText6: ; a0483 (28:4483)
 	db $0, "Where there is", $4f
@@ -126471,7 +121378,6 @@ _FuchsiaGymAfterBattleText6: ; a0483 (28:4483)
 	db "Light and shadow!", $4f
 	db "Which do you", $55
 	db "choose?", $57
-; 0xa0483 + 79 bytes
 
 _UnnamedText_7564e: ; a04d2 (28:44d2)
 	db $0, "Yo! Champ in", $4f
@@ -126485,13 +121391,11 @@ _UnnamedText_7564e: ; a04d2 (28:44d2)
 	db "You have to find", $4f
 	db "gaps in the walls", $55
 	db "to reach him!", $57
-; 0xa04d2 + 162 bytes
 
 _UnnamedText_75653: ; a0574 (28:4574)
 	db $0, "It's amazing how", $4f
 	db "ninja can terrify", $55
 	db "even now!", $57
-; 0xa0574 + 45 bytes
 
 _FuchsiaMeetingRoomText1: ; a05a1 (28:45a1)
 	db $0, "We nicknamed the", $4f
@@ -126522,7 +121426,6 @@ _UnnamedText_561bd: ; a0695 (28:4695)
 	db "fishing!", $51
 	db "Do you like to", $4f
 	db "fish?", $57
-; 0xa0695 + 83 bytes
 
 _UnnamedText_561c2: ; a06e8 (28:46e8)
 	db $0, "Grand! I like", $4f
@@ -126533,54 +121436,44 @@ _UnnamedText_561c2: ; a06e8 (28:46e8)
 	db "a @"
 	TX_RAM $cf4b
 	db $0, "!@@"
-; 0xa0737
 
 _UnnamedText_56212: ; a0737 (28:4737)
 	db $0, "Oh... That's so", $4f
 	db "disappointing...", $57
-; 0xa0737 + 33 bytes
 
 _UnnamedText_56217: ; a0758 (28:4758)
 	db $0, "Hello there,", $4f
 	db $52, "!", $51
 	db "How are the fish", $4f
 	db "biting?", $57
-; 0xa0758 + 42 bytes
 
 _UnnamedText_5621c: ; a0782 (28:4782)
 	db $0, "Oh no!", $51
 	db "You have no room", $4f
 	db "for my gift!", $57
-; 0xa0782 + 38 bytes
 
 _Mansion1BattleText2: ; a07a8 (28:47a8)
 	db $0, "Who are you? There", $4f
 	db "shouldn't be", $55
 	db "anyone here.", $57
-; 0xa07a8 + 45 bytes
 
 _Mansion1EndBattleText2: ; a07d5 (28:47d5)
 	db $0, "Ouch!", $58
-; 0xa07d5 + 7 bytes
 
 _Mansion1AfterBattleText2: ; a07dc (28:47dc)
 	db $0, "A key? I don't", $4f
 	db "know what you're", $55
 	db "talking about.", $57
-; 0xa07dc + 46 bytes
 
 _UnnamedText_44395: ; a080a (28:480a)
 	db $0, "A secret switch!", $51
 	db "Press it?", $57
-; 0xa080a + 28 bytes
 
 _UnnamedText_4439a: ; a0826 (28:4826)
 	db $0, "Who wouldn't?", $58
-; 0xa0826 + 14 bytes
 
 _UnnamedText_4439f: ; a0834 (28:4834)
 	db $0, "Not quite yet!", $57
-; 0xa0834 + 16 bytes
 
 _UnnamedText_75914: ; a0844 (28:4844)
 	db $0, "Hah!", $51
@@ -126592,14 +121485,12 @@ _UnnamedText_75914: ; a0844 (28:4844)
 	db "all challengers!", $51
 	db "Hah! You better", $4f
 	db "have BURN HEAL!", $57
-; 0xa0844 + 131 bytes
 
 UnnamedText_a08c7: ; a08c7 (28:48c7)
 	db $0, "I have", $4f
 	db "burnt out!", $51
 	db "You have earned", $4f
 	db "the VOLCANOBADGE!@@"
-; 0xa08fd
 
 _UnnamedText_75920: ; a08fd (28:48fd)
 	db $0, "FIRE BLAST is the", $4f
@@ -126607,7 +121498,6 @@ _UnnamedText_75920: ; a08fd (28:48fd)
 	db "technique!", $51
 	db "Don't waste it on", $4f
 	db "water #MON!", $57
-; 0xa08fd + 73 bytes
 
 _UnnamedText_75925: ; a0946 (28:4946)
 	db $0, "Hah!", $51
@@ -126617,14 +121507,12 @@ _UnnamedText_75925: ; a0946 (28:4946)
 	db "of your #MON!", $51
 	db "Here, you can", $4f
 	db "have this too!", $57
-; 0xa0946 + 98 bytes
 
 _ReceivedTM38Text: ; a09a8 (28:49a8)
 	db $0, $52, " received", $4f
 	db "@"
 	TX_RAM $cf4b
 	db $0, "!@@"
-; 0xa09bc
 
 _TM38ExplanationText: ; a09bc (28:49bc)
 	db $0, $51
@@ -126635,23 +121523,19 @@ _TM38ExplanationText: ; a09bc (28:49bc)
 	db "CHARMELEON or", $4f
 	db "PONYTA would be", $55
 	db "good bets!", $57
-; 0xa09bc + 98 bytes
 
 _TM38NoRoomText: ; a0a1e (28:4a1e)
 	db $0, "Make room for my", $4f
 	db "gift!", $57
-; 0xa0a1e + 24 bytes
 
 _UnnamedText_7595f: ; a0a36 (28:4a36)
 	db $0, "Do you know how", $4f
 	db "hot #MON fire", $55
 	db "breath can get?", $57
-; 0xa0a36 + 47 bytes
 
 _UnnamedText_75964: ; a0a65 (28:4a65)
 	db $0, "Yow!", $4f
 	db "Hot, hot, hot!", $58
-; 0xa0a65 + 21 bytes
 
 _UnnamedText_75969: ; a0a7a (28:4a7a)
 	db $0, "Fire, or to be", $4f
@@ -126659,66 +121543,54 @@ _UnnamedText_75969: ; a0a7a (28:4a7a)
 	db "combustion...", $51
 	db "Blah, blah, blah,", $4f
 	db "blah...", $57
-; 0xa0a7a + 70 bytes
 
 _UnnamedText_75994: ; a0ac0 (28:4ac0)
 	db $0, "I was a thief, but", $4f
 	db "I became straight", $55
 	db "as a trainer!", $57
-; 0xa0ac0 + 52 bytes
 
 _UnnamedText_75999: ; a0af4 (28:4af4)
 	db $0, "I", $4f
 	db "surrender!", $58
-; 0xa0af4 + 14 bytes
 
 _UnnamedText_7599e: ; a0b02 (28:4b02)
 	db $0, "I can't help", $4f
 	db "stealing other", $55
 	db "people's #MON!", $57
-; 0xa0b02 + 42 bytes
 
 _UnnamedText_759c9: ; a0b2c (28:4b2c)
 	db $0, "You can't win!", $4f
 	db "I have studied", $55
 	db "#MON totally!", $57
-; 0xa0b2c + 44 bytes
 
 _UnnamedText_759ce: ; a0b58 (28:4b58)
 	db $0, "Waah!", $4f
 	db "My studies!", $58
-; 0xa0b58 + 19 bytes
 
 _UnnamedText_759d3: ; a0b6b (28:4b6b)
 	db $0, "My theories are", $4f
 	db "too complicated", $55
 	db "for you!", $57
-; 0xa0b6b + 42 bytes
 
 _UnnamedText_759fe: ; a0b95 (28:4b95)
 	db $0, "I just like using", $4f
 	db "fire #MON!", $57
-; 0xa0b95 + 30 bytes
 
 _UnnamedText_75a03: ; a0bb3 (28:4bb3)
 	db $0, "Too hot", $4f
 	db "to handle!", $58
-; 0xa0bb3 + 20 bytes
 
 _UnnamedText_75a08: ; a0bc7 (28:4bc7)
 	db $0, "I wish there was", $4f
 	db "a thief #MON!", $55
 	db "I'd use that!", $57
-; 0xa0bc7 + 45 bytes
 
 _UnnamedText_75a33: ; a0bf4 (28:4bf4)
 	db $0, "I know why BLAINE", $4f
 	db "became a trainer!", $57
-; 0xa0bf4 + 37 bytes
 
 _UnnamedText_75a38: ; a0c19 (28:4c19)
 	db $0, "Ow!", $58
-; 0xa0c19 + 5 bytes
 
 _UnnamedText_75a3d: ; a0c1e (28:4c1e)
 	db $0, "BLAINE was lost", $4f
@@ -126728,40 +121600,33 @@ _UnnamedText_75a3d: ; a0c1e (28:4c1e)
 	db "Its light enabled", $4f
 	db "BLAINE to find", $55
 	db "his way down!", $57
-; 0xa0c1e + 114 bytes
 
 _UnnamedText_75a68: ; a0c90 (28:4c90)
 	db $0, "I've been to many", $4f
 	db "GYMs, but this is", $55
 	db "my favorite!", $57
-; 0xa0c90 + 49 bytes
 
 _UnnamedText_75a6d: ; a0cc1 (28:4cc1)
 	db $0, "Yowza!", $4f
 	db "Too hot!", $58
-; 0xa0cc1 + 17 bytes
 
 _UnnamedText_75a72: ; a0cd2 (28:4cd2)
 	db $0, "Us fire #MON", $4f
 	db "fans like PONYTA", $55
 	db "and NINETALES!", $57
-; 0xa0cd2 + 46 bytes
 
 _UnnamedText_75a9d: ; a0d00 (28:4d00)
 	db $0, "Fire is weak", $4f
 	db "against H2O!", $57
-; 0xa0d00 + 27 bytes
 
 _UnnamedText_75aa2: ; a0d1b (28:4d1b)
 	db $0, "Oh!", $4f
 	db "Snuffed out!", $58
-; 0xa0d1b + 18 bytes
 
 _UnnamedText_75aa7: ; a0d2d (28:4d2d)
 	db $0, "Water beats fire!", $4f
 	db "But, fire melts", $55
 	db "ice #MON!", $57
-; 0xa0d2d + 45 bytes
 
 _UnnamedText_75ac2: ; a0d5a (28:4d5a)
 	db $0, "Yo! Champ in", $4f
@@ -126773,12 +121638,10 @@ _UnnamedText_75ac2: ; a0d5a (28:4d5a)
 	db "with water!", $51
 	db "You better take", $4f
 	db "some BURN HEALs!", $57
-; 0xa0d5a + 127 bytes
 
 _UnnamedText_75ac7: ; a0dd9 (28:4dd9)
 	db $0, $52, "! You beat", $4f
 	db "that fire brand!", $57
-; 0xa0dd9 + 30 bytes
 
 _Lab1Text1: ; a0df7 (28:4df7)
 	db $0, "We study #MON", $4f
@@ -126817,14 +121680,12 @@ _TM35PreReceiveText: ; a0f09 (28:4f09)
 	db "I made a cool TM!", $51
 	db "It can cause all", $4f
 	db "kinds of fun!", $58
-; 0xa0f09 + 63 bytes
 
 _ReceivedTM35Text: ; a0f48 (28:4f48)
 	db $0, $52, " received ", $4f
 	db "@"
 	TX_RAM $cf4b
 	db $0, "!@@"
-; 0xa0f5d
 
 _TM35ExplanationText: ; a0f5d (28:4f5d)
 	db $0, "Tch-tch-tch!", $4f
@@ -126834,12 +121695,10 @@ _TM35ExplanationText: ; a0f5d (28:4f5d)
 	db "#MON's brain", $55
 	db "into using moves", $55
 	db "it doesn't know!", $57
-; 0xa0f5d + 106 bytes
 
 _TM35NoRoomText: ; a0fc7 (28:4fc7)
 	db $0, "Your pack is", $4f
 	db "crammed full!", $57
-; 0xa0fc7 + 28 bytes
 
 _Lab3Text2: ; a0fe3 (28:4fe3)
 	db $0, "EEVEE can evolve", $4f
@@ -126874,36 +121733,30 @@ _UnnamedText_75dc6: ; a10e8 (28:50e8)
 	db "#MON fossils!", $51
 	db "You! Have you a", $4f
 	db "fossil for me?", $58
-; 0xa10e8 + 93 bytes
 
 _UnnamedText_75dcb: ; a1145 (28:5145)
 	db $0, "No! Is too bad!", $57
-; 0xa1145 + 17 bytes
 
 _UnnamedText_75dd0: ; a1156 (28:5156)
 	db $0, "I take a little", $4f
 	db "time!", $51
 	db "You go for walk a", $4f
 	db "little while!", $57
-; 0xa1156 + 55 bytes
 
 _UnnamedText_75dd5: ; a118d (28:518d)
 	db $0, "Where were you?", $51
 	db "Your fossil is", $4f
 	db "back to life!", $51
 	db "It was @"
-; 0xa118d + 54 bytes
 
 UnnamedText_a11c3: ; a11c3 (28:51c3)
 	TX_RAM $cf4b
 	db $0, $4f
 	db "like I think!", $58
-; 0xa11d6
 
 _UnnamedText_610ae: ; a11d6 (28:51d6)
 	db $0, "Oh! That is", $4f
 	db "@"
-; 0xa11d6 + 14 bytes
 
 UnnamedText_a11e4: ; a11e4 (28:51e4)
 	TX_RAM $cd6d
@@ -126918,7 +121771,6 @@ UnnamedText_a11e4: ; a11e4 (28:51e4)
 	db "Machine will make", $55
 	db "that #MON live", $55
 	db "again!", $57
-; 0xa1259
 
 _UnnamedText_610b3: ; a1259 (28:5259)
 	db $0, "So! You hurry and", $4f
@@ -126927,19 +121779,16 @@ _UnnamedText_610b3: ; a1259 (28:5259)
 	db "over @"
 	TX_RAM $cd6d
 	db $0, "!", $58
-; 0xa128f
 
 _UnnamedText_610b8: ; a128f (28:528f)
 	db $0, "I take a little", $4f
 	db "time!", $51
 	db "You go for walk a", $4f
 	db "little while!", $57
-; 0xa128f + 55 bytes
 
 _UnnamedText_610bd: ; a12c6 (28:52c6)
 	db $0, "Aiyah! You come", $4f
 	db "again!", $57
-; 0xa12c6 + 24 bytes
 
 _CinnabarPokecenterText2: ; a12de (28:52de)
 _CinnabarPokecenterText1: ; a12de (28:52de)
@@ -127018,7 +121867,6 @@ _UnnamedText_5ccd4: ; a15ad (28:55ad)
 	db "Quit mimicking?", $51
 	db "But, that's my", $4f
 	db "favorite hobby!", $58
-; 0xa15ad + 137 bytes
 
 _TM31PreReceiveText: ; a1636 (28:5636)
 	db $0, "Oh wow!", $4f
@@ -127027,14 +121875,12 @@ _TM31PreReceiveText: ; a1636 (28:5636)
 	db "Thank you!", $51
 	db "You can have", $4f
 	db "this, then!", $58
-; 0xa1636 + 63 bytes
 
 _ReceivedTM31Text: ; a1675 (28:5675)
 	db $0, $52, " received", $4f
 	db "@"
 	TX_RAM $cf4b
 	db $0, "!@@"
-; 0xa1689
 
 _TM31ExplanationText1: ; a1689 (28:5689)
 	db $0, $51
@@ -127042,7 +121888,6 @@ _TM31ExplanationText1: ; a1689 (28:5689)
 	db "favorite, MIMIC!", $51
 	db "Use it on a good", $4f
 	db "#MON!@@"
-; 0xa16c5
 
 _TM31ExplanationText2: ; a16c5 (28:56c5)
 	db $0, $52, ": Hi!", $4f
@@ -127053,12 +121898,10 @@ _TM31ExplanationText2: ; a16c5 (28:56c5)
 	db "my every move?", $51
 	db "COPYCAT: You bet!", $4f
 	db "It's a scream!", $57
-; 0xa16c5 + 110 bytes
 
 _TM31NoRoomText: ; a1733 (28:5733)
 	db $0, "Don't you want", $4f
 	db "this?@@"
-; 0xa1749
 
 _CopycatsHouseF2Text2: ; a1749 (28:5749)
 	db $0, "DODUO: Giiih!", $51
@@ -127085,11 +121928,9 @@ _UnnamedText_5cd17: ; a17ef (28:57ef)
 	db "dolls!", $55
 	db "Favorite #MON:", $55
 	db "CLEFAIRY!", $57
-; 0xa17ef + 83 bytes
 
 _UnnamedText_5cd1c: ; a1842 (28:5842)
 	db $0, "Huh? Can't see!", $57
-; 0xa1842 + 16 bytes
 
 _UnnamedText_5ce8e: ; a1852 (28:5852)
 	db $0, "Grunt!", $51
@@ -127100,12 +121941,10 @@ _UnnamedText_5ce8e: ; a1852 (28:5852)
 	db "challenge us?", $55
 	db "Expect no mercy!", $51
 	db "Fwaaa!", $57
-; 0xa1852 + 104 bytes
 
 _UnnamedText_5ce93: ; a18ba (28:58ba)
 	db $0, "Hwa!", $4f
 	db "Arrgh! Beaten!", $58
-; 0xa18ba + 21 bytes
 
 _UnnamedText_5ce98: ; a18cf (28:58cf)
 	db $0, "Indeed, I have", $4f
@@ -127119,98 +121958,81 @@ _UnnamedText_5ce98: ; a18cf (28:58cf)
 	db "fighting #MON!", $51
 	db "Choose whichever", $4f
 	db "one you like!", $57
-; 0xa18cf + 163 bytes
 
 _UnnamedText_5ce9d: ; a1972 (28:5972)
 	db $0, "Ho!", $51
 	db "Stay and train at", $4f
 	db "Karate with us!", $57
-; 0xa1972 + 39 bytes
 
 _FightingDojoBattleText1: ; a1999 (28:5999)
 	db $0, "Hoargh! Take your", $4f
 	db "shoes off!", $57
-; 0xa1999 + 30 bytes
 
 _FightingDojoEndBattleText1: ; a19b7 (28:59b7)
 	db $0, "I give", $4f
 	db "up!", $58
-; 0xa19b7 + 12 bytes
 
 _FightingDojoAfterBattleText1: ; a19c3 (28:59c3)
 	db $0, "You wait 'til you", $4f
 	db "see our Master!", $51
 	db "I'm a small fry", $4f
 	db "compared to him!", $57
-; 0xa19c3 + 66 bytes
 
 _FightingDojoBattleText2: ; a1a05 (28:5a05)
 	db $0, "I hear you're", $4f
 	db "good! Show me!", $57
-; 0xa1a05 + 29 bytes
 
 _FightingDojoEndBattleText2: ; a1a22 (28:5a22)
 	db $0, "Judge!", $4f
 	db "1 point!", $58
-; 0xa1a22 + 17 bytes
 
 _FightingDojoAfterBattleText2: ; a1a33 (28:5a33)
 	db $0, "Our Master is a", $4f
 	db "pro fighter!", $57
-; 0xa1a33 + 30 bytes
 
 _FightingDojoBattleText3: ; a1a51 (28:5a51)
 	db $0, "Nothing tough", $4f
 	db "frightens me!", $51
 	db "I break boulders", $4f
 	db "for training!", $57
-; 0xa1a51 + 60 bytes
 
 _FightingDojoEndBattleText3: ; a1a8d (28:5a8d)
 	db $0, "Yow!", $4f
 	db "Stubbed fingers!", $58
-; 0xa1a8d + 23 bytes
 
 _FightingDojoAfterBattleText3: ; a1aa4 (28:5aa4)
 	db $0, "The only thing", $4f
 	db "that frightens us", $55
 	db "is psychic power!", $57
-; 0xa1aa4 + 52 bytes
 
 _FightingDojoBattleText4: ; a1ad8 (28:5ad8)
 	db $0, "Hoohah!", $51
 	db "You're trespassing", $4f
 	db "in our FIGHTING", $55
 	db "DOJO!", $57
-; 0xa1ad8 + 49 bytes
 
 _FightingDojoEndBattleText4: ; a1b09 (28:5b09)
 	db $0, "Oof!", $4f
 	db "I give up!", $58
-; 0xa1b09 + 17 bytes
 
 _FightingDojoAfterBattleText4: ; a1b1a (28:5b1a)
 	db $0, "The prime fighters", $4f
 	db "across the land", $55
 	db "train here.", $57
-; 0xa1b1a + 48 bytes
 
 _WantHitmonleeText: ; a1b4a (28:5b4a)
 	db $0, "You want the", $4f
 	db "hard kicking", $55
 	db "HITMONLEE?", $57
-; 0xa1b4a + 38 bytes
 
 _WantHitmonchanText: ; a1b70 (28:5b70)
 	db $0, "You want the", $4f
 	db "piston punching", $55
 	db "HITMONCHAN?", $57
-; 0xa1b70 + 42 bytes
 
 _OtherHitmonText: ; a1b9a (28:5b9a)
 	db $0, "Better not get", $4f
 	db "greedy...", $57
-; 0xa1b9a + 26 bytes
 
 _UnnamedText_5d162: ; a1bb4 (28:5bb4)
 	db $0, "I had a vision of", $4f
@@ -127225,7 +122047,6 @@ _UnnamedText_5d162: ; a1bb4 (28:5bb4)
 	db "ing, but if you", $55
 	db "wish, I will show", $55
 	db "you my powers!", $57
-; 0xa1bb4 + 191 bytes
 
 _UnnamedText_5d167: ; a1c73 (28:5c73)
 	db $0, "I'm", $4f
@@ -127237,14 +122058,12 @@ _UnnamedText_5d167: ; a1c73 (28:5c73)
 	db "to win!", $51
 	db "You earned the", $4f
 	db "MARSHBADGE!@@"
-; 0xa1cdc
 
 _UnnamedText_5d16e: ; a1cdc (28:5cdc)
 	db $0, "Everyone has", $4f
 	db "psychic power!", $55
 	db "People just don't", $55
 	db "realize it!", $57
-; 0xa1cdc + 58 bytes
 
 _UnnamedText_5d173: ; a1d16 (28:5d16)
 	db $0, "The MARSHBADGE", $4f
@@ -127259,12 +122078,10 @@ _UnnamedText_5d173: ; a1d16 (28:5d16)
 	db "much!", $51
 	db "Wait, please take", $4f
 	db "this TM with you!", $57
-; 0xa1d16 + 183 bytes
 
 ReceivedTM46Text: ; a1dcd (28:5dcd)
 	db $0, $52, " received", $4f
 	db "TM46!@@"
-; 0xa1de0
 
 _TM46ExplanationText: ; a1de0 (28:5de0)
 	db $0, $51
@@ -127272,12 +122089,10 @@ _TM46ExplanationText: ; a1de0 (28:5de0)
 	db "It uses powerful", $55
 	db "psychic waves to", $55
 	db "inflict damage!", $57
-; 0xa1de0 + 69 bytes
 
 _TM46NoRoomText: ; a1e25 (28:5e25)
 	db $0, "Your pack is full", $4f
 	db "of other items!", $57
-; 0xa1e25 + 35 bytes
 
 _UnnamedText_5d1e6: ; a1e48 (28:5e48)
 	db $0, "Yo! Champ in", $4f
@@ -127291,7 +122106,6 @@ _UnnamedText_5d1e6: ; a1e48 (28:5e48)
 	db "They get creamed", $4f
 	db "before they can", $55
 	db "even aim a punch!", $57
-; 0xa1e48 + 168 bytes
 
 _UnnamedText_5d1eb: ; a1ef0 (28:5ef0)
 	db $0, "Psychic power,", $4f
@@ -127299,18 +122113,15 @@ _UnnamedText_5d1eb: ; a1ef0 (28:5ef0)
 	db "If I had that,", $4f
 	db "I'd make a bundle", $55
 	db "at the slots!", $57
-; 0xa1ef0 + 67 bytes
 
 _SaffronGymBattleText1: ; a1f33 (28:5f33)
 	db $0, "SABRINA is younger", $4f
 	db "than I, but I", $55
 	db "respect her!", $57
-; 0xa1f33 + 47 bytes
 
 _SaffronGymEndBattleText1: ; a1f62 (28:5f62)
 	db $0, "Not", $4f
 	db "good enough!", $58
-; 0xa1f62 + 18 bytes
 
 _SaffronGymAfterBattleText1: ; a1f74 (28:5f74)
 	db $0, "In a battle of", $4f
@@ -127320,23 +122131,19 @@ _SaffronGymAfterBattleText1: ; a1f74 (28:5f74)
 	db "If you wish", $4f
 	db "to beat SABRINA,", $55
 	db "focus on winning!", $57
-; 0xa1f74 + 108 bytes
 
 _SaffronGymBattleText2: ; a1fe0 (28:5fe0)
 	db $0, "Does our unseen", $4f
 	db "power scare you?", $57
-; 0xa1fe0 + 34 bytes
 
 _SaffronGymEndBattleText2: ; a2002 (28:6002)
 	db $0, "I never", $4f
 	db "foresaw this!", $58
-; 0xa2002 + 23 bytes
 
 _SaffronGymAfterBattleText2: ; a2019 (28:6019)
 	db $0, "Psychic #MON", $4f
 	db "fear only ghosts", $55
 	db "and bugs!", $57
-; 0xa2019 + 41 bytes
 
 _SaffronGymBattleText3: ; a2042 (28:6042)
 	db $0, "#MON take on", $4f
@@ -127344,52 +122151,43 @@ _SaffronGymBattleText3: ; a2042 (28:6042)
 	db "their trainers.", $51
 	db "Your #MON must", $4f
 	db "be tough, then!", $57
-; 0xa2042 + 79 bytes
 
 _SaffronGymEndBattleText3: ; a2091 (28:6091)
 	db $0, "I knew", $4f
 	db "it!", $58
-; 0xa2091 + 12 bytes
 
 _SaffronGymAfterBattleText3: ; a209d (28:609d)
 	db $0, "I must teach", $4f
 	db "better techniques", $55
 	db "to my #MON!", $57
-; 0xa209d + 44 bytes
 
 _SaffronGymBattleText4: ; a20c9 (28:60c9)
 	db $0, "You know that", $4f
 	db "power alone isn't", $55
 	db "enough!", $57
-; 0xa20c9 + 40 bytes
 
 _SaffronGymEndBattleText4: ; a20f1 (28:60f1)
 	db $0, "I don't", $4f
 	db "believe this!", $58
-; 0xa20f1 + 22 bytes
 
 _SaffronGymAfterBattleText4: ; a2107 (28:6107)
 	db $0, "SABRINA just wiped", $4f
 	db "out the KARATE", $55
 	db "MASTER next door!", $57
-; 0xa2107 + 53 bytes
 
 _SaffronGymBattleText5: ; a213c (28:613c)
 	db $0, "You and I, our", $4f
 	db "#MON shall", $55
 	db "fight!", $57
-; 0xa213c + 34 bytes
 
 _SaffronGymEndBattleText5: ; a215e (28:615e)
 	db $0, "I lost", $4f
 	db "after all!", $58
-; 0xa215e + 19 bytes
 
 _SaffronGymAfterBattleText5: ; a2171 (28:6171)
 	db $0, "I knew that this", $4f
 	db "was going to take", $55
 	db "place.", $57
-; 0xa2171 + 43 bytes
 
 _SaffronGymBattleText6: ; a219c (28:619c)
 	db $0, "SABRINA is young,", $4f
@@ -127397,12 +122195,10 @@ _SaffronGymBattleText6: ; a219c (28:619c)
 	db "our LEADER!", $51
 	db "You won't reach", $4f
 	db "her easily!", $57
-; 0xa219c + 72 bytes
 
 _SaffronGymEndBattleText6: ; a21e4 (28:61e4)
 	db $0, "I lost", $4f
 	db "my concentration!", $58
-; 0xa21e4 + 26 bytes
 
 _SaffronGymAfterBattleText6: ; a21fe (28:61fe)
 	db $0, "There used to be", $4f
@@ -127413,7 +122209,6 @@ _SaffronGymAfterBattleText6: ; a21fe (28:61fe)
 	db "its GYM status", $55
 	db "when we went and", $55
 	db "creamed them!", $57
-; 0xa21fe + 121 bytes
 
 _SaffronGymBattleText7: ; a2277 (28:6277)
 	db $0, "SAFFRON #MON", $4f
@@ -127422,17 +122217,14 @@ _SaffronGymBattleText7: ; a2277 (28:6277)
 	db "You want to see", $4f
 	db "SABRINA!", $55
 	db "I can tell!", $57
-; 0xa2277 + 83 bytes
 
 _SaffronGymEndBattleText7: ; a22ca (28:62ca)
 	db $0, "Arrrgh!", $58
-; 0xa22ca + 9 bytes
 
 _SaffronGymAfterBattleText7: ; a22d3 (28:62d3)
 	db $0, "That's right! I", $4f
 	db "used telepathy to", $55
 	db "read your mind!", $57
-; 0xa22d3 + 50 bytes
 
 _SaffronHouse1Text1: ; a2305 (28:6305)
 	db $0, "Thank you for", $4f
@@ -127489,52 +122281,43 @@ _TM29PreReceiveText: ; a24fe (28:64fe)
 	db $0, "...Wait! Don't", $4f
 	db "say a word!", $51
 	db "You wanted this!", $58
-; 0xa24fe + 44 bytes
 
 _ReceivedTM29Text: ; a252a (28:652a)
 	db $0, $52, " received", $4f
 	db "@"
 	TX_RAM $cf4b
 	db $0, "!@@"
-; 0xa253e
 
 _TM29ExplanationText: ; a253e (28:653e)
 	db $0, "TM29 is PSYCHIC!", $51
 	db "It can lower the", $4f
 	db "target's SPECIAL", $55
 	db "abilities.", $57
-; 0xa253e + 62 bytes
 
 _TM29NoRoomText: ; a257c (28:657c)
 	db $0, "Where do you plan", $4f
 	db "to put this?", $57
-; 0xa257c + 32 bytes
 
 _PokemartGreetingText: ; a259c (28:659c)
 	db $0, "Hi there!", $4e, "May I help you?", $57
-; 0xa259c + 27 bytes
 
 _PokemonFaintedText: ; a25b7 (28:65b7)
 	TX_RAM $cd6d
 	db $0, $4f
 	db "fainted!", $57
-; 0xa25b7 + 14 bytes
 
 _PlayerBlackedOutText: ; a25c5 (28:65c5)
 	db $0, $52, " is out of", $4f
 	db "useable #MON!", $51
 	db $52, " blacked", $4f
 	db "out!", $58
-; 0xa25c5 + 42 bytes
 
 _RepelWoreOffText: ; a25ef (28:65ef)
 	db $0, "REPEL's effect", $4f
 	db "wore off.", $57
-; 0xa25ef + 25 bytes
 
 _PokemartBuyingGreetingText: ; a2608 (28:6608)
 	db $0, "Take your time.", $57
-; 0xa2608 + 17 bytes
 
 _PokemartTellBuyPrice: ; a2619 (28:6619)
 	TX_RAM $cf4b
@@ -127543,97 +122326,79 @@ _PokemartTellBuyPrice: ; a2619 (28:6619)
 	db "¥@"
 	db $2, $9f, $ff, $c3
 	db $0, ". OK?", $57
-; 0xa2639
 
 _PokemartBoughtItemText: ; a2639 (28:6639)
 	db $0, "Here you are!", $4f
 	db "Thank you!", $58
-; 0xa2639 + 26 bytes
 
 _PokemartNotEnoughMoneyText: ; a2653 (28:6653)
 	db $0, "You don't have", $4f
 	db "enough money.", $58
-; 0xa2653 + 29 bytes
 
 _PokemartItemBagFullText: ; a2670 (28:6670)
 	db $0, "You can't carry", $4f
 	db "any more items.", $58
-; 0xa2670 + 32 bytes
 
 _PokemonSellingGreetingText: ; a2690 (28:6690)
 	db $0, "What would you", $4f
 	db "like to sell?", $57
-; 0xa2690 + 30 bytes
 
 _PokemartTellSellPrice: ; a26ae (28:66ae)
 	db $0, "I can pay you", $4f
 	db "¥@"
 	db $2, $9f, $ff, $c3 ; XXX
 	db $0, " for that.", $57
-; 0xa26cf
 
 _PokemartItemBagEmptyText: ; a26cf (28:66cf)
 	db $0, "You don't have", $4f
 	db "anything to sell.", $58
-; 0xa26cf + 33 bytes
 
 _PokemartUnsellableItemText: ; a26f0 (28:66f0)
 	db $0, "I can't put a", $4f
 	db "price on that.", $58
-; 0xa26f0 + 29 bytes
 
 _PokemartThankYouText: ; a270d (28:670d)
 	db $0, "Thank you!", $57
-; 0xa270d + 12 bytes
 
 _PokemartAnythingElseText: ; a2719 (28:6719)
 	db $0, "Is there anything", $4f
 	db "else I can do?", $57
-; 0xa2719 + 34 bytes
 
 UnnamedText_a273b: ; a273b (28:673b)
 	TX_RAM $d036
 	db $0, " learned", $4f
 	db "@"
-; 0xa2749
 
 UnnamedText_a2749: ; a2749 (28:6749)
 	TX_RAM $cf4b
 	db $0, "!@@"
-; 0xa2750
 
 _UnnamedText_6fb4: ; a2750 (28:6750)
 	db $0, "Which move should", $4e, "be forgotten?", $57
-; 0xa2750 + 33 bytes
 
 _UnnamedText_6fb9: ; a2771 (28:6771)
 	db $0, "Abandon learning", $4f
 	db "@"
-; 0xa2771 + 19 bytes
 
 UnnamedText_a2784: ; a2784 (28:6784)
 	TX_RAM $cf4b
 	db $0, "?", $57
-; 0xa278a
 
 _UnnamedText_6fbe: ; a278a (28:678a)
 	TX_RAM $d036
 	db $0, $4f
 	db "did not learn", $55
 	db "@"
-; 0xa278a + 20 bytes
 
 UnnamedText_a279e: ; a279e (28:679e)
 	TX_RAM $cf4b
 	db $0, "!", $58
-; 0xa27a4
 
 _UnnamedText_6fc3: ; a27a4 (28:67a4)
 	TX_RAM $d036
 	db $0, " is", $4f
 	db "trying to learn", $55
 	db "@"
-; 0xa27a4 + 25 bytes
 
 UnnamedText_a27bd: ; a27bd (28:67bd)
 	TX_RAM $cf4b
@@ -127646,25 +122411,20 @@ UnnamedText_a27bd: ; a27bd (28:67bd)
 	db "Delete an older", $4f
 	db "move to make room", $55
 	db "for @"
-; 0xa2813
 
 UnnamedText_a2813: ; a2813 (28:6813)
 	TX_RAM $cf4b
 	db $0, "?", $57
-; 0xa2819
 
 _UnnamedText_6fc8: ; a2819 (28:6819)
 	db $0, "1, 2 and...@@"
-; 0xa2827
 
 _UnnamedText_6fd7: ; a2827 (28:6827)
 	db $0, " Poof!@@"
-; 0xa2830
 
 _UnnamedText_6fdc: ; a2830 (28:6830)
 	db $0, $51
 	db "@"
-; 0xa2830 + 3 bytes
 
 UnnamedText_a2833: ; a2833 (28:6833)
 	TX_RAM $d036
@@ -127673,12 +122433,10 @@ UnnamedText_a2833: ; a2833 (28:6833)
 	TX_RAM $cd6d
 	db $0, "!", $51
 	db "And...", $58
-; 0xa284d
 
 _UnnamedText_6fe1: ; a284d (28:684d)
 	db $0, "HM techniques", $4f
 	db "can't be deleted!", $58
-; 0xa284d + 32 bytes
 
 _PokemonCenterWelcomeText: ; a286d (28:686d)
 	db $0, "Welcome to our", $4f
@@ -127686,47 +122444,39 @@ _PokemonCenterWelcomeText: ; a286d (28:686d)
 	db "We heal your", $4f
 	db "#MON back to", $55
 	db "perfect health!", $58
-; 0xa286d + 71 bytes
 
 _ShallWeHealYourPokemonText: ; a28b4 (28:68b4)
 	db $0, "Shall we heal your", $4f
 	db "#MON?", $57
-; 0xa28b4 + 26 bytes
 
 _NeedYourPokemonText: ; a28ce (28:68ce)
 	db $0, "OK. We'll need", $4f
 	db "your #MON.", $57
-; 0xa28ce + 26 bytes
 
 _PokemonFightingFitText: ; a28e8 (28:68e8)
 	db $0, "Thank you!", $4f
 	db "Your #MON are", $55
 	db "fighting fit!", $58
-; 0xa28e8 + 40 bytes
 
 _PokemonCenterFarewellText: ; a2910 (28:6910)
 	db $0, "We hope to see", $4f
 	db "you again!", $57
-; 0xa2910 + 27 bytes
 
 _UnnamedText_72b3: ; a292b (28:692b)
 	db $0, "This area is", $4f
 	db "reserved for 2", $55
 	db "friends who are", $55
 	db "linked by cable.", $57
-; 0xa292b + 62 bytes
 
 _UnnamedText_72b8: ; a2969 (28:6969)
 	db $0, "Welcome to the", $4f
 	db "Cable Club!", $57
-; 0xa2969 + 28 bytes
 
 _UnnamedText_72bd: ; a2985 (28:6985)
 	db $0, "Please apply here.", $51
 	db "Before opening", $4f
 	db "the link, we have", $55
 	db "to save the game.", $57
-; 0xa2985 + 71 bytes
 
 UnnamedText_a29cc: ; a29cc (28:69cc)
 	db $0, "Please wait.@@"
@@ -127739,90 +122489,74 @@ _UnnamedText_72c8: ; a29db (28:69db)
 	db "Please contact", $4f
 	db "your friend and", $55
 	db "come again!", $57
-; 0xa29db + 92 bytes
 
 SECTION "bank29",ROMX,BANK[$29]
 
 _UnnamedText_72cd: ; a4000 (29:4000)
 	db $0, "Please come again!", $57
-; 0xa4000 + 20 bytes
 
 _UnnamedText_72d2: ; a4014 (29:4014)
 	db $0, "We're making", $4f
 	db "preparations.", $55
 	db "Please wait.", $57
-; 0xa4014 + 40 bytes
 
 UnnamedText_a403c: ; a403c (29:403c)
 	TX_RAM $cd6d
 	db $0, " used", $4f
 	db "STRENGTH.@@"
-; 0xa4051
 
 _UnnamedText_cdbb: ; a4051 (29:4051)
 	TX_RAM $cd6d
 	db $0, " can", $4f
 	db "move boulders.", $58
-; 0xa4051 + 24 bytes
 
 _UnnamedText_cdfa: ; a4069 (29:4069)
 	db $0, "The current is", $4f
 	db "much too fast!", $58
-; 0xa4069 + 31 bytes
 
 _UnnamedText_cdff: ; a4088 (29:4088)
 	db $0, "Cycling is fun!", $4f
 	db "Forget SURFing!", $58
-; 0xa4088 + 33 bytes
 
 _FlashLightsAreaText: ; a40a9 (29:40a9)
 	db $0, "A blinding FLASH", $4f
 	db "lights the area!", $58
-; 0xa40a9 + 35 bytes
 
 _WarpToLastPokemonCenterText: ; a40cc (29:40cc)
 	db $0, "Warp to the last", $4f
 	db "#MON CENTER.", $57
-; 0xa40cc + 31 bytes
 
 _CannotUseTeleportNowText: ; a40eb (29:40eb)
 	TX_RAM $cd6d
 	db $0, " can't", $4f
 	db "use TELEPORT now.", $58
-; 0xa40eb + 28 bytes
 
 _CannotFlyHereText: ; a4107 (29:4107)
 	TX_RAM $cd6d
 	db $0, " can't", $4f
 	db "FLY here.", $58
-; 0xa4107 + 20 bytes
 
 _NotHealthyEnoughText: ; a411b (29:411b)
 	db $0, "Not healthy", $4f
 	db "enough.", $58
-; 0xa411b + 21 bytes
 
 _NewBadgeRequiredText: ; a4130 (29:4130)
 	db $0, "No! A new BADGE", $4f
 	db "is required.", $58
-; 0xa4130 + 30 bytes
 
 _CannotUseItemsHereText: ; a414e (29:414e)
 	db $0, "You can't use items", $4f
 	db "here.", $58
-; 0xa414e + 26 bytes
 
 _CannotGetOffHereText: ; a4168 (29:4168)
 	db $0, "You can't get off", $4f
 	db "here.", $58
-; 0xa4168 + 24 bytes
 
 UnnamedText_a4180: ; a4180 (29:4180)
 	db $0, $52, " got", $4f
 	db "@"
 	TX_RAM $cd6d
 	db $0, "!@@"
-; 0xa418f
 
 _UnnamedText_4fe3f: ; a418f (29:418f)
 	db $0, "There's no more", $4f
@@ -127843,7 +122577,6 @@ _UnnamedText_4fe44: ; a41d6 (29:41d6)
 	db "accept any more!", $51
 	db "Change the BOX at", $4f
 	db "a #MON CENTER!", $57
-; 0xa41d6 + 111 bytes
 
 INCLUDE "text/mapPalletTown.tx"
 
@@ -127861,23 +122594,19 @@ _UnnamedText_19122: ; a4437 (29:4437)
 	db "is always closed.", $51
 	db "I wonder who the", $4f
 	db "LEADER is?", $57
-; 0xa4437 + 61 bytes
 
 _UnnamedText_19127: ; a4474 (29:4474)
 	db $0, "VIRIDIAN GYM's", $4f
 	db "LEADER returned!", $57
-; 0xa4474 + 32 bytes
 
 _UnnamedText_1914d: ; a4494 (29:4494)
 	db $0, "You want to know", $4f
 	db "about the 2 kinds", $55
 	db "of caterpillar", $55
 	db "#MON?", $57
-; 0xa4494 + 57 bytes
 
 _UnnamedText_19152: ; a44cd (29:44cd)
 	db $0, "Oh, OK then!", $57
-; 0xa44cd + 14 bytes
 
 _UnnamedText_19157: ; a44db (29:44db)
 	db $0, "CATERPIE has no", $4f
@@ -127885,14 +122614,12 @@ _UnnamedText_19157: ; a44db (29:44db)
 	db "WEEDLE does.", $51
 	db "Watch out for its", $4f
 	db "POISON STING!", $57
-; 0xa44db + 74 bytes
 
 _UnnamedText_19175: ; a4525 (29:4525)
 	db $0, "Oh Grandpa! Don't", $4f
 	db "be so mean!", $55
 	db "He hasn't had his", $55
 	db "coffee yet.", $57
-; 0xa4525 + 59 bytes
 
 _UnnamedText_1917a: ; a4560 (29:4560)
 	db $0, "When I go shop in", $4f
@@ -127900,14 +122627,12 @@ _UnnamedText_1917a: ; a4560 (29:4560)
 	db "have to take the", $55
 	db "winding trail in", $55
 	db "VIRIDIAN FOREST.", $57
-; 0xa4560 + 85 bytes
 
 _UnnamedText_19191: ; a45b5 (29:45b5)
 	db $0, "You can't go", $4f
 	db "through here!", $51
 	db "This is private", $4f
 	db "property!", $57
-; 0xa45b5 + 53 bytes
 
 _UnnamedText_191ca: ; a45ea (29:45ea)
 	db $0, "Yawn!", $4f
@@ -127922,23 +122647,19 @@ _UnnamedText_191ca: ; a45ea (29:45ea)
 	db "This is spooky!", $4f
 	db "Here, you can", $55
 	db "have this TM.", $58
-; 0xa45ea + 176 bytes
 
 _ReceivedTM42Text: ; a469a (29:469a)
 	db $0, $52, " received", $4f
 	db "TM42!@@"
-; 0xa46ad
 
 _TM42Explanation: ; a46ad (29:46ad)
 	db $0, "TM42 contains", $4f
 	db "DREAM EATER...", $55
 	db "...Snore...", $57
-; 0xa46ad + 42 bytes
 
 _TM42NoRoomText: ; a46d7 (29:46d7)
 	db $0, "You have too much", $4f
 	db "stuff already.", $57
-; 0xa46d7 + 34 bytes
 
 _UnnamedText_1920a: ; a46f9 (29:46f9)
 	db $0, "Ahh, I've had my", $4f
@@ -127948,7 +122669,6 @@ _UnnamedText_1920a: ; a46f9 (29:46f9)
 	db "through!", $51
 	db "Are you in a", $4f
 	db "hurry?", $57
-; 0xa46f9 + 91 bytes
 
 _UnnamedText_1920f: ; a4754 (29:4754)
 	db $0, "I see you're using", $4f
@@ -127962,18 +122682,15 @@ _UnnamedText_1920f: ; a4754 (29:4754)
 	db "#MON?", $51
 	db "I'll show you", $4f
 	db "how to then.", $57
-; 0xa4754 + 146 bytes
 
 _UnnamedText_19214: ; a47e6 (29:47e6)
 	db $0, "Time is money...", $4f
 	db "Go along then.", $57
-; 0xa47e6 + 33 bytes
 
 _UnnamedText_19219: ; a4807 (29:4807)
 	db $0, "First, you need", $4f
 	db "to weaken the", $55
 	db "target #MON.", $57
-; 0xa4807 + 44 bytes
 
 _ViridianCityText8: ; a4833 (29:4833)
 	db $0, "VIRIDIAN CITY ", $4f
@@ -128007,7 +122724,6 @@ _ViridianCityText13: ; a4949 (29:4949)
 _ViridianCityText14: ; a4961 (29:4961)
 	db $0, "The GYM's doors", $4f
 	db "are locked...", $57
-; 0xa4961 + 30 bytes
 
 _PewterCityText1: ; a497f (29:497f)
 	db $0, "It's rumored that", $4f
@@ -128030,19 +122746,16 @@ _PewterCityText2: ; a49e0 (29:49e0)
 _UnnamedText_193f1: ; a4a56 (29:4a56)
 	db $0, "Did you check out", $4f
 	db "the MUSEUM?", $57
-; 0xa4a56 + 31 bytes
 
 _UnnamedText_193f6: ; a4a75 (29:4a75)
 	db $0, "Weren't those", $4f
 	db "fossils from MT.", $55
 	db "MOON amazing?", $57
-; 0xa4a75 + 45 bytes
 
 _UnnamedText_193fb: ; a4aa2 (29:4aa2)
 	db $0, "Really?", $4f
 	db "You absolutely", $55
 	db "have to go!", $57
-; 0xa4aa2 + 36 bytes
 
 _UnnamedText_19400: ; a4ac6 (29:4ac6)
 	db $0, "It's right here!", $4f
@@ -128050,24 +122763,20 @@ _UnnamedText_19400: ; a4ac6 (29:4ac6)
 	db "to get in, but", $55
 	db "it's worth it!", $55
 	db "See you around!", $57
-; 0xa4ac6 + 78 bytes
 
 _UnnamedText_19427: ; a4b14 (29:4b14)
 	db $0, "Psssst!", $4f
 	db "Do you know what", $55
 	db "I'm doing?", $57
-; 0xa4b14 + 36 bytes
 
 _UnnamedText_1942c: ; a4b38 (29:4b38)
 	db $0, "That's right!", $4f
 	db "It's hard work!", $57
-; 0xa4b38 + 29 bytes
 
 _UnnamedText_19431: ; a4b55 (29:4b55)
 	db $0, "I'm spraying REPEL", $4f
 	db "to keep #MON", $55
 	db "out of my garden!", $57
-; 0xa4b55 + 50 bytes
 
 _UnnamedText_1945d: ; a4b87 (29:4b87)
 	db $0, "You're a trainer", $4f
@@ -128075,13 +122784,11 @@ _UnnamedText_1945d: ; a4b87 (29:4b87)
 	db "looking for new", $55
 	db "challengers!", $55
 	db "Follow me!", $57
-; 0xa4b87 + 71 bytes
 
 _UnnamedText_19462: ; a4bce (29:4bce)
 	db $0, "If you have the", $4f
 	db "right stuff, go", $55
 	db "take on BROCK!", $57
-; 0xa4bce + 48 bytes
 
 _PewterCityText6: ; a4bfe (29:4bfe)
 	db $0, "TRAINER TIPS", $51
@@ -128128,19 +122835,16 @@ _UnnamedText_19668: ; a4d2b (29:4d2b)
 	db "Here, let me see", $4f
 	db "what you caught,", $55
 	db $52, "!", $57
-; 0xa4d2b + 147 bytes
 
 _UnnamedText_1966d: ; a4dbe (29:4dbe)
 	db $0, "Hey!", $4f
 	db "Take it easy!", $55
 	db "You won already!", $58
-; 0xa4dbe + 37 bytes
 
 _UnnamedText_19672: ; a4de3 (29:4de3)
 	db $0, "Heh!", $4f
 	db "You're no match", $55
 	db "for my genius!", $58
-; 0xa4de3 + 36 bytes
 
 _UnnamedText_19677: ; a4e07 (29:4e07)
 	db $0, $53, ": Hey,", $4f
@@ -128164,7 +122868,6 @@ _UnnamedText_19677: ; a4e07 (29:4e07)
 	db "Well, I better", $4f
 	db "get rolling!", $55
 	db "Smell ya later!", $57
-; 0xa4e07 + 288 bytes
 
 _UnnamedText_196d9: ; a4f27 (29:4f27)
 	db $0, "Hey! Stay out!", $4f
@@ -128173,36 +122876,30 @@ _UnnamedText_196d9: ; a4f27 (29:4f27)
 	db "I'm an innocent", $4f
 	db "bystander! Don't", $55
 	db "you believe me?", $57
-; 0xa4f27 + 91 bytes
 
 _ReceivedTM28Text: ; a4f82 (29:4f82)
 	db $0, $52, " recovered", $4f
 	db "TM28!@@"
-; 0xa4f96
 
 _ReceivedTM28Text2: ; a4f96 (29:4f96)
 	db $0, $51
 	db "I better get", $4f
 	db "moving! Bye!@@"
-; 0xa4fb3
 
 _TM28NoRoomText: ; a4fb3 (29:4fb3)
 	db $0, "Make room for", $4f
 	db "this!", $51
 	db "I can't run until", $4f
 	db "I give it to you!", $57
-; 0xa4fb3 + 56 bytes
 
 _UnnamedText_196ee: ; a4feb (29:4feb)
 	db $0, "Stop!", $4f
 	db "I give up! I'll", $55
 	db "leave quietly!", $58
-; 0xa4feb + 37 bytes
 
 _UnnamedText_196f3: ; a5010 (29:5010)
 	db $0, "OK! I'll return", $4f
 	db "the TM I stole!", $58
-; 0xa5010 + 32 bytes
 
 _CeruleanCityText3: ; a5030 (29:5030)
 	db $0, "You're a trainer", $4f
@@ -128239,13 +122936,11 @@ _UnnamedText_19730: ; a5188 (29:5188)
 	db "Use SONICBOOM!", $55
 	db "Come on, SLOWBRO", $55
 	db "pay attention!", $57
-; 0xa5188 + 61 bytes
 
 _UnnamedText_19735: ; a51c5 (29:51c5)
 	db $0, "SLOWBRO punch!", $4f
 	db "No! You blew it", $55
 	db "again!", $57
-; 0xa51c5 + 39 bytes
 
 _UnnamedText_1973a: ; a51ec (29:51ec)
 	db $0, "SLOWBRO, WITHDRAW!", $4f
@@ -128256,27 +122951,22 @@ _UnnamedText_1973a: ; a51ec (29:51ec)
 	db "obedience depends", $55
 	db "on your abilities", $55
 	db "as a trainer!", $57
-; 0xa51ec + 127 bytes
 
 _UnnamedText_1976f: ; a526b (29:526b)
 	db $0, "SLOWBRO took a", $4f
 	db "snooze...", $57
-; 0xa526b + 26 bytes
 
 _UnnamedText_19774: ; a5285 (29:5285)
 	db $0, "SLOWBRO is", $4f
 	db "loafing around...", $57
-; 0xa5285 + 30 bytes
 
 _UnnamedText_19779: ; a52a3 (29:52a3)
 	db $0, "SLOWBRO turned", $4f
 	db "away...", $57
-; 0xa52a3 + 24 bytes
 
 _UnnamedText_1977e: ; a52bb (29:52bb)
 	db $0, "SLOWBRO", $4f
 	db "ignored orders...", $57
-; 0xa52bb + 27 bytes
 
 _CeruleanCityText9: ; a52d6 (29:52d6)
 	db $0, "I want a bright", $4f
@@ -128323,12 +123013,10 @@ _CeruleanCityText17: ; a5445 (29:5445)
 _UnnamedText_4413c: ; a5482 (29:5482)
 	db $0, "Do you believe in", $4f
 	db "GHOSTs?", $57
-; 0xa5482 + 27 bytes
 
 _UnnamedText_44141: ; a549d (29:549d)
 	db $0, "Really? So there", $4f
 	db "are believers...", $57
-; 0xa549d + 35 bytes
 
 _UnnamedText_44146: ; a54c0 (29:54c0)
 	db $0, "Hahaha, I guess", $4f
@@ -128336,7 +123024,6 @@ _UnnamedText_44146: ; a54c0 (29:54c0)
 	db "That white hand", $4f
 	db "on your shoulder,", $55
 	db "it's not real.", $57
-; 0xa54c0 + 70 bytes
 
 _LavenderTownText2: ; a5506 (29:5506)
 	db $0, "This town is known", $4f
@@ -128385,33 +123072,28 @@ _UnnamedText_198a7: ; a56b5 (29:56b5)
 	db $0, "Did you see S.S.", $4f
 	db "ANNE moored in", $55
 	db "the harbor?", $57
-; 0xa56b5 + 45 bytes
 
 _UnnamedText_198ac: ; a56e2 (29:56e2)
 	db $0, "So, S.S.ANNE has", $4f
 	db "departed!", $51
 	db "She'll be back in", $4f
 	db "about a year.", $57
-; 0xa56e2 + 59 bytes
 
 _SSAnneWelcomeText4: ; a571d (29:571d)
 	db $0, "Welcome to S.S.", $4f
 	db "ANNE!", $57
-; 0xa571d + 23 bytes
 
 _SSAnneWelcomeText9: ; a5734 (29:5734)
 	db $0, "Welcome to S.S.", $4f
 	db "ANNE!", $51
 	db "Excuse me, do you", $4f
 	db "have a ticket?", $58
-; 0xa5734 + 56 bytes
 
 _SSAnneFlashedTicketText: ; a576c (29:576c)
 	db $0, $52, " flashed", $4f
 	db "the S.S.TICKET!", $51
 	db "Great! Welcome to", $4f
 	db "S.S.ANNE!", $57
-; 0xa576c + 55 bytes
 
 _SSAnneNoTicketText: ; a57a3 (29:57a3)
 	db $0, $52, " doesn't", $4f
@@ -128420,11 +123102,9 @@ _SSAnneNoTicketText: ; a57a3 (29:57a3)
 	db "Sorry!", $51
 	db "You need a ticket", $4f
 	db "to get aboard.", $57
-; 0xa57a3 + 78 bytes
 
 _SSAnneNotHereText: ; a57f1 (29:57f1)
 	db $0, "The ship set sail.", $57
-; 0xa57f1 + 20 bytes
 
 _VermilionCityText4: ; a5805 (29:5805)
 	db $0, "I'm putting up a", $4f
@@ -128511,14 +123191,12 @@ _TM41PreText: ; a5afd (29:5afd)
 	db "chance to talk!", $51
 	db "Here's a gift for", $4f
 	db "dropping by!", $58
-; 0xa5afd + 93 bytes
 
 _ReceivedTM41Text: ; a5b5a (29:5b5a)
 	db $0, $52, " received", $4f
 	db "@"
 	TX_RAM $cf4b
 	db $0, "!@@"
-; 0xa5b6e
 
 _TM41ExplanationText: ; a5b6e (29:5b6e)
 	db $0, "TM41 teaches", $4f
@@ -128527,12 +123205,10 @@ _TM41ExplanationText: ; a5b6e (29:5b6e)
 	db "can use it!", $51
 	db "That #MON is", $4f
 	db "CHANSEY!", $57
-; 0xa5b6e + 74 bytes
 
 _TM41NoRoomText: ; a5bb8 (29:5bb8)
 	db $0, "Oh, your pack is", $4f
 	db "full of items!", $57
-; 0xa5bb8 + 33 bytes
 
 _CeladonCityText6: ; a5bd9 (29:5bd9)
 	db $0, "This is my trusted", $4f
@@ -128661,13 +123337,11 @@ _FuchsiaCityChanseyText: ; a6050 (29:6050)
 	db $0, "Name: CHANSEY", $51
 	db "Catching one is", $4f
 	db "all up to chance.", $58
-; 0xa6050 + 49 bytes
 
 _FuchsiaCityVoltorbText: ; a6081 (29:6081)
 	db $0, "Name: VOLTORB", $51
 	db "The very image of", $4f
 	db "a # BALL.", $58
-; 0xa6081 + 43 bytes
 
 _FuchsiaCityKangaskhanText: ; a60ac (29:60ac)
 	db $0, "Name: KANGASKHAN", $51
@@ -128675,42 +123349,35 @@ _FuchsiaCityKangaskhanText: ; a60ac (29:60ac)
 	db "that raises its", $55
 	db "young in a pouch", $55
 	db "on its belly.", $58
-; 0xa60ac + 81 bytes
 
 _FuchsiaCitySlowpokeText: ; a60fd (29:60fd)
 	db $0, "Name: SLOWPOKE", $51
 	db "Friendly and very", $4f
 	db "slow moving.", $58
-; 0xa60fd + 47 bytes
 
 _FuchsiaCityLaprasText: ; a612c (29:612c)
 	db $0, "Name: LAPRAS", $51
 	db "A.K.A. the king", $4f
 	db "of the seas.", $58
-; 0xa612c + 43 bytes
 
 _FuchsiaCityOmanyteText: ; a6157 (29:6157)
 	db $0, "Name: OMANYTE", $51
 	db "A #MON that", $4f
 	db "was resurrected", $55
 	db "from a fossil.", $58
-; 0xa6157 + 58 bytes
 
 _FuchsiaCityKabutoText: ; a6191 (29:6191)
 	db $0, "Name: KABUTO", $51
 	db "A #MON that", $4f
 	db "was resurrected", $55
 	db "from a fossil.", $58
-; 0xa6191 + 57 bytes
 
 _UnnamedText_19b2a: ; a61ca (29:61ca)
 	db $0, "...", $57
-; 0xa61ca + 5 bytes
 
 _CinnabarIslandText8: ; a61cf (29:61cf)
 	db $0, "The door is", $4f
 	db "locked...", $57
-; 0xa61cf + 23 bytes
 
 _CinnabarIslandText1: ; a61e6 (29:61e6)
 	db $0, "CINNABAR GYM's", $4f
@@ -129027,7 +123694,6 @@ _ItemUseNotYoursToUseText: ; a6ad0 (29:6ad0)
 _ItemUseNoEffectText: ; a6ae9 (29:6ae9)
 	db $0, "It won't have any", $4f
 	db "effect.", $58
-; 0xa6ae9 + 26 bytes = 0xa6b03
 
 _ThrowBallAtTrainerMonText1: ; a6b03 (29:6b03)
 	db $0, "The trainer", $4f
@@ -129102,7 +123768,6 @@ _UnnamedText_2fe3b: ; a8088 (2a:4088)
 _UnnamedText_71d88: ; a809a (2a:409a)
 	db $0, "Okay, connect the", $4f
 	db "cable like so!", $58
-; 0xa809a + 34 bytes
 
 _UnnamedText_71d8d: ; a80bc (2a:40bc)
 	db $0, $52, " traded", $4f
@@ -129126,23 +123791,19 @@ _UnnamedText_71d94: ; a80d8 (2a:40d8)
 _UnnamedText_71d99: ; a810b (2a:410b)
 	db $0, "Awww!", $4f
 	db "Oh well...", $57
-; 0xa810b + 18 bytes
 
 _UnnamedText_71d9e: ; a811d (2a:411d)
 	db $0, "What? That's not", $4f
 	db "@"
-; 0xa811d + 18 bytes
 
 UnnamedText_a812f: ; a812f (2a:412f)
 	TX_RAM $cd13
 	db $0, "!", $51
 	db "If you get one,", $4f
 	db "come back here!", $57
-; 0xa8155
 
 _UnnamedText_71da3: ; a8155 (2a:4155)
 	db $0, "Hey thanks!", $57
-; 0xa8155 + 13 bytes
 
 _UnnamedText_71da8: ; a8162 (2a:4162)
 	db $0, "Isn't my old", $4f
@@ -129163,7 +123824,6 @@ _UnnamedText_71dad: ; a817c (2a:417c)
 _UnnamedText_71db2: ; a81b5 (2a:41b5)
 	db $0, "Well, if you", $4f
 	db "don't want to...", $57
-; 0xa81b5 + 30 bytes
 
 _UnnamedText_71db7: ; a81d3 (2a:41d3)
 	db $0, "Hmmm? This isn't", $4f
@@ -129172,11 +123832,9 @@ _UnnamedText_71db7: ; a81d3 (2a:41d3)
 	db $0, ".", $51
 	db "Think of me when", $4f
 	db "you get one.", $57
-; 0xa8209
 
 _UnnamedText_71dbc: ; a8209 (2a:4209)
 	db $0, "Thanks!", $57
-; 0xa8209 + 9 bytes
 
 _UnnamedText_71dc1: ; a8212 (2a:4212)
 	db $0, "The @"
@@ -129184,7 +123842,6 @@ _UnnamedText_71dc1: ; a8212 (2a:4212)
 	db $0, " you", $4f
 	db "traded to me", $51
 	db "went and evolved!", $57
-; 0xa8240
 
 _UnnamedText_71dc6: ; a8240 (2a:4240)
 	db $0, "Hi! Do you have", $4f
@@ -129195,11 +123852,9 @@ _UnnamedText_71dc6: ; a8240 (2a:4240)
 	db "for @"
 	TX_RAM $cd1e
 	db $0, "?", $57
-; 0xa8274
 
 _UnnamedText_71dcb: ; a8274 (2a:4274)
 	db $0, "That's too bad.", $57
-; 0xa8274 + 16 bytes
 
 _UnnamedText_71dd0: ; a8284 (2a:4284)
 	db $0, "...This is no", $4f
@@ -129208,11 +123863,9 @@ _UnnamedText_71dd0: ; a8284 (2a:4284)
 	db $0, ".", $51
 	db "If you get one,", $4f
 	db "trade it with me!", $57
-; 0xa82bc
 
 _UnnamedText_71dd5: ; a82bc (2a:42bc)
 	db $0, "Thanks pal!", $57
-; 0xa82bc + 13 bytes
 
 _UnnamedText_71dda: ; a82c9 (2a:42c9)
 	db $0, "How is my old", $4f
@@ -129223,7 +123876,6 @@ _UnnamedText_71dda: ; a82c9 (2a:42c9)
 	TX_RAM $cd13
 	db $0, " is", $4f
 	db "doing great!", $57
-; 0xa82f8
 
 _UnnamedText_ef7d ; a82f8 (2a:42f8)
 	db $0, "There isn't", $4f
