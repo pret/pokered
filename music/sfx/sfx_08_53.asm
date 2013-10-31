@@ -1,15 +1,7 @@
 SFX_08_53_Ch1: ; 20519 (8:4519)
-	note D_, 9
-	note E_, 16
-	note D#, 4
-	note D_, 5
-	rest 5
-	note D_, 3
-	note D_, 7
-	unknownmusic0xf2
-	note D_, 4
-	note D_, 16
-	unknownmusic0xf2
-	note D_, 3
+	unknownnoise0x20 8, 79, 51
+	unknownnoise0x20 4, 196, 34
+	unknownnoise0x20 6, 242, 35
+	unknownnoise0x20 15, 242, 34
 	endchannel
 ; 0x20526

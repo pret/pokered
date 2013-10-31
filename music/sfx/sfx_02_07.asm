@@ -1,9 +1,5 @@
 SFX_02_07_Ch1: ; 8324 (2:4324)
-	note D_, 2
-	note E_, 2
-	note D_, 12
-	note D_, 1
-	note F#, 2
-	note D_, 11
+	unknownnoise0x20 1, 65, 43
+	unknownnoise0x20 0, 97, 42
 	endchannel
 ; 0x832b

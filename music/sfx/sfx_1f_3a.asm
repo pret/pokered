@@ -1,10 +1,10 @@
 SFX_1f_3a_Ch1: ; 7e850 (1f:6850)
-	unknownmusic0xf8
+	executemusic
 	tempo 1, 0
 	stereopanning 119
 	vibrato 6, 2, 6
 	duty 2
-	unknownmusic0xe8
+	togglecall
 	notetype 4, 11, 1
 	octave 3
 	note G#, 2
@@ -17,7 +17,7 @@ SFX_1f_3a_Ch1: ; 7e850 (1f:6850)
 
 
 SFX_1f_3a_Ch2: ; 7e867 (1f:6867)
-	unknownmusic0xf8
+	executemusic
 	vibrato 8, 2, 7
 	duty 2
 	notetype 4, 12, 1
@@ -31,7 +31,7 @@ SFX_1f_3a_Ch2: ; 7e867 (1f:6867)
 
 
 SFX_1f_3a_Ch3: ; 7e877 (1f:6877)
-	unknownmusic0xf8
+	executemusic
 	notetype 4, 1, 0
 	octave 4
 	note B_, 1

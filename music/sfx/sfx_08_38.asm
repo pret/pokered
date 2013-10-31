@@ -1,88 +1,34 @@
 SFX_08_38_Ch1: ; 20a65 (8:4a65)
 	dutycycle 240
-	note D_, 16
-	unknownmusic0xf7
-	note G#, 1
-	note C_, 7
-	note D_, 11
-	octave 2
-	note G#, 5
-	note C_, 7
-	note D_, 16
-	notetype 7, 9, 0
-	note C_, 7
-	note D_, 9
-	notetype 5, 9, 0
-	note C_, 7
-	note D_, 7
-	rest 5
-	note G#, 9
-	note C_, 7
-	note D_, 6
-	notetype 3, 7, 0
-	note C_, 7
-	note D_, 5
-	notetype 3, 6, 0
-	note C_, 7
-	note D_, 9
-	rest 2
-	note E_, 1
-	note C_, 7
+	unknownsfx0x20 15, 247, 128, 6
+	unknownsfx0x20 10, 230, 132, 6
+	unknownsfx0x20 15, 215, 144, 6
+	unknownsfx0x20 8, 213, 144, 6
+	unknownsfx0x20 6, 196, 136, 6
+	unknownsfx0x20 5, 211, 112, 6
+	unknownsfx0x20 4, 211, 96, 6
+	unknownsfx0x20 8, 193, 64, 6
 	endchannel
 
 
 SFX_08_38_Ch2: ; 20a88 (8:4a88)
 	dutycycle 5
-	note D_, 16
-	note B_, 8
-	note E_, 2
-	note C_, 7
-	note D_, 11
-	note A_, 7
-	note E_, 3
-	note C_, 7
-	note D_, 16
-	note A#, 8
-	note F_, 2
-	note C_, 7
-	note D_, 9
-	note A#, 6
-	note F_, 2
-	note C_, 7
-	note D_, 7
-	note A_, 5
-	note E_, 8
-	note C_, 7
-	note D_, 6
-	note A#, 4
-	note D#, 2
-	note C_, 7
-	note D_, 5
-	note A_, 4
-	note D_, 3
-	note C_, 7
-	note D_, 9
-	note G_, 2
-	note C_, 2
-	note C_, 7
+	unknownsfx0x20 15, 183, 65, 6
+	unknownsfx0x20 10, 150, 66, 6
+	unknownsfx0x20 15, 167, 81, 6
+	unknownsfx0x20 8, 165, 81, 6
+	unknownsfx0x20 6, 148, 71, 6
+	unknownsfx0x20 5, 163, 49, 6
+	unknownsfx0x20 4, 147, 34, 6
+	unknownsfx0x20 8, 113, 1, 6
 	endchannel
 
 
 SFX_08_38_Ch3: ; 20aab (8:4aab)
-	note D_, 16
-	octave 4
-	note D#, 13
-	note D_, 11
-	rest 8
-	note E_, 13
-	note D_, 11
-	rest 8
-	note D#, 13
-	note D_, 13
-	note B_, 8
-	note E_, 13
-	note D_, 16
-	note A#, 3
-	note F_, 13
+	unknownnoise0x20 15, 228, 60
+	unknownnoise0x20 10, 199, 76
+	unknownnoise0x20 10, 199, 60
+	unknownnoise0x20 12, 183, 76
+	unknownnoise0x20 15, 162, 92
 	endchannel
 ; 0x20abb

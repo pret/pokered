@@ -3,7 +3,7 @@ Music_Surfing_Ch1: ; 7fa19 (1f:7a19)
 	stereopanning 119
 	duty 3
 	vibrato 12, 3, 4
-	unknownmusic0xe8
+	togglecall
 	notetype 12, 11, 5
 	rest 6
 	octave 2

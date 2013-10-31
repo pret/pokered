@@ -273,6 +273,8 @@ W_LISTMENUID EQU $CF94 ; ID used by DisplayListMenuID
 
 W_WALKCOUNTER EQU $CFC5 ; walk animation counter
 
+W_CURCHANNELPOINTER EQU $CFC7 ; (the current music channel pointer - $4000) / 3
+
 W_ENEMYMOVENUM      EQU $CFCC
 W_ENEMYMOVEEFFECT   EQU $CFCD
 W_ENEMYMOVEPOWER    EQU $CFCE
@@ -3416,6 +3418,24 @@ mutedsnare2	EQU $11
 mutedsnare3	EQU $12
 mutedsnare4	EQU $13
 
+unknownsfx0x10: MACRO
+	db $10
+	db \1
+ENDM
+
+unknownsfx0x20: MACRO
+	db $20 | \1
+	db \2
+	db \3
+	db \4
+ENDM
+
+unknownnoise0x20: MACRO
+	db $20 | \1
+	db \2
+	db \3
+ENDM
+
 ;format: note pitch, length (in 16ths)
 note: MACRO
 	db (\1 << 4) | (\2 - 1)
@@ -3446,12 +3466,8 @@ octave: MACRO
 	db $E8 - \1
 ENDM
 
-unknownmusic0xe8: MACRO
+togglecall: MACRO
 	db $E8
-ENDM
-
-unknownmusic0xe9: MACRO
-	db $E9
 ENDM
 
 ;format: vibrato delay, rate, depth
@@ -3483,57 +3499,13 @@ unknownmusic0xee: MACRO
 	db \1
 ENDM
 
-unknownmusic0xef: MACRO
-	db $EF
-ENDM
-
 stereopanning: MACRO
 	db $F0
 	db \1
 ENDM
 
-unknownmusic0xf1: MACRO
-	db $F1
-ENDM
-
-unknownmusic0xf2: MACRO
-	db $F2
-ENDM
-
-unknownmusic0xf3: MACRO
-	db $F3
-ENDM
-
-unknownmusic0xf4: MACRO
-	db $F4
-ENDM
-
-unknownmusic0xf5: MACRO
-	db $F5
-ENDM
-
-unknownmusic0xf6: MACRO
-	db $F6
-ENDM
-
-unknownmusic0xf7: MACRO
-	db $F7
-ENDM
-
-unknownmusic0xf8: MACRO
+executemusic: MACRO
 	db $F8
-ENDM
-
-unknownmusic0xf9: MACRO
-	db $F9
-ENDM
-
-unknownmusic0xfa: MACRO
-	db $FA
-ENDM
-
-unknownmusic0xfb: MACRO
-	db $FB
 ENDM
 
 dutycycle: MACRO

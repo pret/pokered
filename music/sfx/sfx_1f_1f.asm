@@ -1,98 +1,38 @@
 SFX_1f_1f_Ch1: ; 7cad0 (1f:4ad0)
 	dutycycle 204
-	note D_, 5
-	unknownmusic0xf1
-	note C_, 1
-	note C_, 8
-	note D_, 5
-	octave 7
-	note G#, 1
-	note C_, 8
-	note D_, 5
-	notetype 1, 4, 0
-	note C_, 8
-	note D_, 5
-	octave 7
-	note E_, 1
-	note C_, 8
-	note D_, 5
-	unknownmusic0xf1
-	note G#, 1
-	note C_, 8
-	note D_, 5
-	notetype 1, 0, 0
-	note C_, 8
-	note D_, 5
-	unknownmusic0xf1
-	note C_, 2
-	note C_, 8
-	note D_, 5
-	notetype 1, 8, 2
-	note C_, 8
-	note D_, 5
-	rest 2
-	note E_, 3
-	note C_, 8
-	note D_, 9
-	note B_, 2
-	note E_, 2
-	note C_, 8
+	unknownsfx0x20 4, 241, 0, 7
+	unknownsfx0x20 4, 225, 128, 7
+	unknownsfx0x20 4, 209, 64, 7
+	unknownsfx0x20 4, 225, 64, 7
+	unknownsfx0x20 4, 241, 128, 7
+	unknownsfx0x20 4, 209, 0, 7
+	unknownsfx0x20 4, 241, 1, 7
+	unknownsfx0x20 4, 209, 130, 7
+	unknownsfx0x20 4, 193, 66, 7
+	unknownsfx0x20 8, 177, 65, 7
 	endchannel
 
 
 SFX_1f_1f_Ch2: ; 7cafb (1f:4afb)
 	dutycycle 68
-	note D_, 13
-	note C_, 9
-	note C_, 1
-	note C_, 1
-	note D_, 5
-	unknownmusic0xf1
-	note C_, 2
-	note C_, 8
-	note D_, 5
-	octave 7
-	note G#, 3
-	note C_, 8
-	note D_, 5
-	notetype 1, 4, 1
-	note C_, 8
-	note D_, 5
-	octave 7
-	note E_, 2
-	note C_, 8
-	note D_, 5
-	unknownmusic0xf1
-	note G#, 3
-	note C_, 8
-	note D_, 9
-	notetype 1, 0, 1
-	note C_, 8
+	unknownsfx0x20 12, 8, 0, 0
+	unknownsfx0x20 4, 241, 1, 7
+	unknownsfx0x20 4, 225, 130, 7
+	unknownsfx0x20 4, 209, 65, 7
+	unknownsfx0x20 4, 225, 65, 7
+	unknownsfx0x20 4, 241, 130, 7
+	unknownsfx0x20 8, 209, 1, 7
 	endchannel
 
 
 SFX_1f_1f_Ch3: ; 7cb1a (1f:4b1a)
-	note D_, 16
-	note C_, 9
-	note C_, 1
-	note D_, 5
-	note C_, 9
-	note C_, 1
-	note D_, 5
-	notetype 1, 4, 12
-	note D_, 5
-	note B_, 2
-	note D_, 13
-	note D_, 5
-	notetype 1, 3, 12
-	note D_, 5
-	note B_, 2
-	note D#, 13
-	note D_, 5
-	rest 2
-	note D_, 13
-	note D_, 9
-	note A#, 2
-	note E_, 13
+	unknownnoise0x20 15, 8, 0
+	unknownnoise0x20 4, 8, 0
+	unknownnoise0x20 4, 209, 76
+	unknownnoise0x20 4, 177, 44
+	unknownnoise0x20 4, 209, 60
+	unknownnoise0x20 4, 177, 60
+	unknownnoise0x20 4, 193, 44
+	unknownnoise0x20 8, 161, 76
 	endchannel
 ; 0x7cb33

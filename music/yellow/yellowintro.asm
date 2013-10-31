@@ -1,4 +1,4 @@
-Music_IntroBattle_Ch1: ; 7f65c (1f:765c)
+Music_YellowIntro_Ch1: ; 7f65c (1f:765c)
 	tempo 0, 116
 	stereopanning 119
 	duty 3
@@ -100,7 +100,7 @@ Music_IntroBattle_Ch1: ; 7f65c (1f:765c)
 	endchannel
 
 
-Music_IntroBattle_Ch2: ; 7f6d3 (1f:76d3)
+Music_YellowIntro_Ch2: ; 7f6d3 (1f:76d3)
 	duty 2
 	vibrato 6, 1, 5
 	notetype 12, 12, 2
@@ -203,7 +203,7 @@ Music_IntroBattle_Ch2: ; 7f6d3 (1f:76d3)
 	endchannel
 
 
-Music_IntroBattle_Ch3: ; 7f749 (1f:7749)
+Music_YellowIntro_Ch3: ; 7f749 (1f:7749)
 	notetype 12, 1, 0
 	octave 4
 	note E_, 1

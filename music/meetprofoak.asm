@@ -2,7 +2,7 @@ Music_MeetProfOak_Ch1: ; af59 (2:6f59)
 	tempo 0, 112
 	stereopanning 119
 	duty 3
-	unknownmusic0xe8
+	togglecall
 	notetype 12, 11, 4
 	octave 3
 	note F#, 1

@@ -1,5 +1,5 @@
 SFX_08_75_Ch1: ; 208e0 (8:48e0)
-	unknownmusic0xf8
+	executemusic
 	vibrato 10, 2, 4
 	duty 2
 	notetype 10, 8, 7
@@ -14,7 +14,7 @@ SFX_08_75_Ch1: ; 208e0 (8:48e0)
 
 
 SFX_08_75_Ch2: ; 208f0 (8:48f0)
-	unknownmusic0xf8
+	executemusic
 	vibrato 10, 2, 3
 	duty 2
 	notetype 11, 6, 7

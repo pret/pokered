@@ -1,50 +1,19 @@
 SFX_02_50_Ch1: ; 85ee (2:45ee)
-	note D_, 3
-	unknownmusic0xf1
-	note C#, 3
-	note D_, 3
-	note C_, 1
-	note C_, 1
-	note D_, 3
-	note A#, 2
-	note C#, 3
-	note D_, 3
-	note C_, 1
-	note C_, 1
-	note D_, 3
-	notetype 1, 1, 2
-	note D_, 3
-	note C_, 1
-	note C_, 1
-	note D_, 3
-	note G#, 2
-	note C#, 3
-	note D_, 3
-	note C_, 1
-	note C_, 1
-	note D_, 3
-	note B_, 2
-	note C#, 3
-	note D_, 3
-	note C_, 1
-	note C_, 1
-	note D_, 3
-	note F#, 2
-	note C#, 3
-	note D_, 3
-	note C_, 1
-	note C_, 1
-	note D_, 3
-	note A_, 2
-	note C#, 3
-	note D_, 3
-	note C_, 1
-	note C_, 1
-	note D_, 3
-	note E_, 2
-	note C#, 3
-	note D_, 3
-	note C_, 1
-	note C_, 1
+	unknownnoise0x20 2, 241, 18
+	unknownnoise0x20 2, 0, 0
+	unknownnoise0x20 2, 161, 18
+	unknownnoise0x20 2, 0, 0
+	unknownnoise0x20 2, 209, 18
+	unknownnoise0x20 2, 0, 0
+	unknownnoise0x20 2, 129, 18
+	unknownnoise0x20 2, 0, 0
+	unknownnoise0x20 2, 177, 18
+	unknownnoise0x20 2, 0, 0
+	unknownnoise0x20 2, 97, 18
+	unknownnoise0x20 2, 0, 0
+	unknownnoise0x20 2, 145, 18
+	unknownnoise0x20 2, 0, 0
+	unknownnoise0x20 2, 65, 18
+	unknownnoise0x20 2, 0, 0
 	endchannel
 ; 0x861f

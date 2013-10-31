@@ -3,7 +3,7 @@ Music_Vermilion_Ch1: ; b9eb (2:79eb)
 	stereopanning 119
 	duty 3
 	vibrato 12, 3, 4
-	unknownmusic0xe8
+	togglecall
 
 Music_Vermilion_branch_b9f6:
 	notetype 12, 11, 5

@@ -172,7 +172,7 @@ Music_Routes4: ; 82d5 (2:42d5)
 	db CH3
 	dw Music_Routes4_Ch4
 
-; Route 3, Indigo Plateau
+; Route 23, Indigo Plateau
 Music_IndigoPlateau: ; 82f1 (2:42f1)
 	db ( $C0 | CH0 )
 	dw Music_IndigoPlateau_Ch1

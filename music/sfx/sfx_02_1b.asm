@@ -1,45 +1,22 @@
 SFX_02_1b_Ch1: ; 8a0d (2:4a0d)
 	dutycycle 240
-	note D_, 5
-	unknownmusic0xf3
-	octave 8
-	note C_, 7
-	note D_, 16
-	octave 4
-	note E_, 1
-	note C_, 7
-	note D_, 9
-	rest 2
-	note D_, 1
-	note C_, 7
+	unknownsfx0x20 4, 243, 224, 6
+	unknownsfx0x20 15, 228, 64, 6
+	unknownsfx0x20 8, 193, 32, 6
 	endchannel
 
 
 SFX_02_1b_Ch2: ; 8a1c (2:4a1c)
 	dutycycle 10
-	note D_, 4
-	rest 4
-	note G#, 4
-	note C_, 7
-	note D_, 15
-	note B_, 5
-	note C_, 3
-	note C_, 7
-	note D_, 9
-	note A#, 2
-	note C_, 2
-	note C_, 7
+	unknownsfx0x20 3, 195, 131, 6
+	unknownsfx0x20 14, 180, 2, 6
+	unknownsfx0x20 8, 161, 1, 6
 	endchannel
 
 
 SFX_02_1b_Ch3: ; 8a2b (2:4a2b)
-	note D_, 5
-	notetype 3, 5, 12
-	note D_, 16
-	octave 2
-	note E_, 13
-	note D_, 9
-	note B_, 2
-	note F_, 13
+	unknownnoise0x20 4, 211, 92
+	unknownnoise0x20 15, 230, 76
+	unknownnoise0x20 8, 177, 92
 	endchannel
 ; 0x8a35

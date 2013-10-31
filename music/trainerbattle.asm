@@ -3,7 +3,7 @@ Music_TrainerBattle_Ch1: ; 22919 (8:6919)
 	stereopanning 119
 	duty 3
 	vibrato 6, 3, 4
-	unknownmusic0xe8
+	togglecall
 	notetype 12, 11, 2
 	rest 8
 	octave 3

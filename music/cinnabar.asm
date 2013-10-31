@@ -3,7 +3,7 @@ Music_Cinnabar_Ch1: ; b86d (2:786d)
 	stereopanning 119
 	duty 3
 	vibrato 12, 3, 4
-	unknownmusic0xe8
+	togglecall
 
 Music_Cinnabar_branch_b878:
 	notetype 12, 11, 5

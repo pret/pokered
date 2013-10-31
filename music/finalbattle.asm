@@ -3,7 +3,7 @@ Music_FinalBattle_Ch1: ; 233a6 (8:73a6)
 	stereopanning 119
 	duty 3
 	vibrato 6, 3, 4
-	unknownmusic0xe8
+	togglecall
 	notetype 12, 11, 2
 	octave 3
 	note F#, 1

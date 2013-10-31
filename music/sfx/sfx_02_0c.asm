@@ -1,6 +1,4 @@
 SFX_02_0c_Ch1: ; 833b (2:433b)
-	note D_, 1
-	note A#, 2
-	note C#, 1
+	unknownnoise0x20 0, 161, 16
 	endchannel
 ; 0x833f

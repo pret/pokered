@@ -1,9 +1,5 @@
 SFX_08_60_Ch1: ; 205be (8:45be)
-	note D_, 13
-	unknownmusic0xf1
-	note F_, 5
-	note D_, 9
-	unknownmusic0xf1
-	note F#, 5
+	unknownnoise0x20 12, 241, 84
+	unknownnoise0x20 8, 241, 100
 	endchannel
 ; 0x205c5

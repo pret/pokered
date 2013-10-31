@@ -1,22 +1,10 @@
 SFX_1f_4a_Ch1: ; 7c55d (1f:455d)
 	duty 2
-	note C#, 1
-	note D_, 13
-	note D_, 5
-	unknownmusic0xf2
-	note C_, 1
-	note C_, 6
-	note C#, 1
-	note D_, 3
-	note D_, 3
-	unknownmusic0xf1
-	note C_, 1
-	note C_, 6
-	note C#, 1
-	note C_, 9
-	note D_, 2
-	note C_, 1
-	note C_, 1
-	note C_, 1
+	unknownsfx0x10 44
+	unknownsfx0x20 4, 242, 0, 5
+	unknownsfx0x10 34
+	unknownsfx0x20 2, 241, 0, 5
+	unknownsfx0x10 8
+	unknownsfx0x20 1, 0, 0, 0
 	endchannel
 ; 0x7c572

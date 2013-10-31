@@ -1,24 +1,10 @@
 SFX_08_77_Ch1: ; 20412 (8:4412)
 	duty 0
-	note D_, 1
-	notetype 2, 0, 0
-	note C_, 8
-	note D_, 1
-	notetype 2, 4, 0
-	note C_, 8
-	note D_, 1
-	notetype 2, 8, 0
-	note C_, 8
-	note D_, 1
-	notetype 2, 12, 0
-	note C_, 8
-	note D_, 11
-	octave 7
-	octave 8
-	note C_, 8
-	note D_, 2
-	note C_, 1
-	note C_, 1
-	note C_, 1
+	unknownsfx0x20 0, 210, 0, 7
+	unknownsfx0x20 0, 210, 64, 7
+	unknownsfx0x20 0, 210, 128, 7
+	unknownsfx0x20 0, 210, 192, 7
+	unknownsfx0x20 10, 225, 224, 7
+	unknownsfx0x20 1, 0, 0, 0
 	endchannel
 ; 0x2042d

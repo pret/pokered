@@ -1,18 +1,8 @@
 SFX_02_5c_Ch1: ; 8452 (2:4452)
-	note D_, 3
-	unknownmusic0xf1
-	note F_, 5
-	note D_, 13
-	note G_, 2
-	note D_, 4
-	note D_, 3
-	note B_, 2
-	note F_, 5
-	note D_, 13
-	note F#, 2
-	note D_, 4
-	note D_, 7
-	note E_, 2
-	note F_, 5
+	unknownnoise0x20 2, 241, 84
+	unknownnoise0x20 12, 113, 35
+	unknownnoise0x20 2, 177, 84
+	unknownnoise0x20 12, 97, 35
+	unknownnoise0x20 6, 65, 84
 	endchannel
 ; 0x8462

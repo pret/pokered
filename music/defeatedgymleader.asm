@@ -3,7 +3,7 @@ Music_DefeatedGymLeader_Ch1: ; 23cad (8:7cad)
 	stereopanning 119
 	duty 3
 	vibrato 18, 3, 1
-	unknownmusic0xe8
+	togglecall
 	tempo 0, 112
 	notetype 12, 10, 6
 	octave 4

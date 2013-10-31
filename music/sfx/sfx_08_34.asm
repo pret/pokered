@@ -1,53 +1,25 @@
 SFX_08_34_Ch1: ; 212c2 (8:52c2)
 	dutycycle 240
-	note D_, 14
-	unknownmusic0xf1
-	note C#, 2
-	note C_, 6
-	note D_, 14
-	octave 7
-	note C#, 6
-	note C_, 6
-	note D_, 14
-	octave 7
-	note C#, 2
-	note C_, 6
-	note D_, 9
-	notetype 1, 1, 1
-	note C_, 6
+	unknownsfx0x20 13, 241, 17, 5
+	unknownsfx0x20 13, 225, 21, 5
+	unknownsfx0x20 13, 225, 17, 5
+	unknownsfx0x20 8, 209, 17, 5
 	endchannel
 
 
 SFX_08_34_Ch2: ; 212d5 (8:52d5)
 	dutycycle 21
-	note D_, 13
-	octave 7
-	note C_, 13
-	note C_, 6
-	note D_, 13
-	notetype 1, 1, 0
-	note C_, 6
-	note D_, 15
-	rest 2
-	note C_, 13
-	note C_, 6
-	note D_, 9
-	rest 2
-	note C_, 11
-	note C_, 6
+	unknownsfx0x20 12, 225, 12, 5
+	unknownsfx0x20 12, 209, 16, 5
+	unknownsfx0x20 14, 193, 12, 5
+	unknownsfx0x20 8, 193, 10, 5
 	endchannel
 
 
 SFX_08_34_Ch3: ; 212e8 (8:52e8)
-	note D_, 15
-	unknownmusic0xf2
-	note F#, 6
-	note D_, 14
-	octave 6
-	note F_, 6
-	note D_, 15
-	notetype 2, 5, 6
-	note D_, 9
-	notetype 1, 6, 6
+	unknownnoise0x20 14, 242, 101
+	unknownnoise0x20 13, 226, 85
+	unknownnoise0x20 14, 210, 86
+	unknownnoise0x20 8, 209, 102
 	endchannel
 ; 0x212f5

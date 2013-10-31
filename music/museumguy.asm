@@ -2,7 +2,7 @@ Music_MuseumGuy_Ch1: ; adae (2:6dae)
 	tempo 0, 128
 	stereopanning 119
 	duty 2
-	unknownmusic0xe8
+	togglecall
 	notetype 12, 11, 1
 	octave 3
 	note B_, 2

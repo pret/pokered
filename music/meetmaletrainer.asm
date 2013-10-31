@@ -3,7 +3,7 @@ Music_MeetMaleTrainer_Ch1: ; 7f77b (1f:777b)
 	stereopanning 119
 	duty 3
 	vibrato 20, 3, 3
-	unknownmusic0xe8
+	togglecall
 	notetype 12, 11, 4
 	octave 3
 	note C#, 1

@@ -3,7 +3,7 @@ Music_Pokecenter_Ch1: ; be56 (2:7e56)
 	stereopanning 119
 	duty 3
 	vibrato 10, 2, 2
-	unknownmusic0xe8
+	togglecall
 
 Music_Pokecenter_branch_be61:
 	notetype 12, 10, 3

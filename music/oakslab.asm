@@ -3,7 +3,7 @@ Music_OaksLab_Ch1: ; 7eeb9 (1f:6eb9)
 	stereopanning 119
 	duty 3
 	vibrato 16, 1, 2
-	unknownmusic0xe8
+	togglecall
 	notetype 12, 11, 3
 	octave 2
 	note B_, 1

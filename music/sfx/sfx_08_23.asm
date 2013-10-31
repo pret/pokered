@@ -1,75 +1,30 @@
 SFX_08_23_Ch1: ; 20b99 (8:4b99)
 	dutycycle 241
-	note D_, 5
-	unknownmusic0xf7
-	rest 1
-	note C_, 8
-	note D_, 13
-	octave 2
-	rest 3
-	note C_, 8
-	note D_, 7
-	note B_, 6
-	note G#, 1
-	note C_, 7
-	note D_, 5
-	rest 5
-	note G_, 1
-	note C_, 7
-	note D_, 5
-	note B_, 6
-	note F#, 1
-	note C_, 7
-	note D_, 9
-	rest 2
-	note E_, 1
-	note C_, 7
+	unknownsfx0x20 4, 247, 192, 7
+	unknownsfx0x20 12, 230, 194, 7
+	unknownsfx0x20 6, 181, 128, 6
+	unknownsfx0x20 4, 196, 112, 6
+	unknownsfx0x20 4, 181, 96, 6
+	unknownsfx0x20 8, 193, 64, 6
 	endchannel
 
 
 SFX_08_23_Ch2: ; 20bb4 (8:4bb4)
 	dutycycle 204
-	note D_, 4
-	rest 8
-	note G#, 2
-	note C_, 8
-	note D_, 13
-	note B_, 7
-	note G#, 1
-	note C_, 8
-	note D_, 7
-	note A#, 6
-	note E_, 2
-	note C_, 7
-	note D_, 5
-	rest 5
-	note D#, 3
-	note C_, 7
-	note D_, 7
-	note B_, 6
-	note D_, 2
-	note C_, 7
-	note D_, 9
-	note A#, 2
-	note C_, 3
-	note C_, 7
+	unknownsfx0x20 3, 199, 129, 7
+	unknownsfx0x20 12, 182, 128, 7
+	unknownsfx0x20 6, 165, 65, 6
+	unknownsfx0x20 4, 196, 50, 6
+	unknownsfx0x20 6, 181, 33, 6
+	unknownsfx0x20 8, 161, 2, 6
 	endchannel
 
 
 SFX_08_23_Ch3: ; 20bcf (8:4bcf)
-	note D_, 4
-	octave 4
-	note D#, 13
-	note D_, 13
-	notetype 6, 2, 12
-	note D_, 5
-	octave 4
-	note D#, 13
-	note D_, 9
-	note B_, 8
-	note F_, 13
-	note D_, 16
-	rest 3
-	note F_, 14
+	unknownnoise0x20 3, 228, 60
+	unknownnoise0x20 12, 214, 44
+	unknownnoise0x20 4, 228, 60
+	unknownnoise0x20 8, 183, 92
+	unknownnoise0x20 15, 194, 93
 	endchannel
 ; 0x20bdf

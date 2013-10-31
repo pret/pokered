@@ -2,7 +2,7 @@ Music_Dungeon1_Ch1: ; 7ded1 (1f:5ed1)
 	tempo 0, 144
 	stereopanning 119
 	duty 3
-	unknownmusic0xe8
+	togglecall
 	vibrato 10, 1, 4
 	notetype 12, 4, 13
 	rest 8

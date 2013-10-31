@@ -3,7 +3,7 @@ Music_Credits_Ch1: ; 7fc1f (1f:7c1f)
 	stereopanning 119
 	duty 3
 	vibrato 8, 3, 4
-	unknownmusic0xe8
+	togglecall
 	notetype 12, 11, 5
 	octave 4
 	note E_, 6

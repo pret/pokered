@@ -1,55 +1,23 @@
 SFX_02_54_Ch1: ; 866d (2:466d)
 	duty 2
-	note D_, 16
-	stereopanning 0
-	note C_, 6
-	note D_, 5
-	note C_, 1
-	note C_, 1
-	note C_, 1
-	note D_, 16
-	stereopanning 0
-	note C_, 6
-	note D_, 16
-	stereopanning 0
-	note C_, 6
-	note D_, 16
-	stereopanning 0
-	note C_, 6
-	note D_, 16
-	stereopanning 0
-	note C_, 6
-	note D_, 16
-	unknownmusic0xf2
-	note C_, 1
-	note C_, 6
+	unknownsfx0x20 15, 240, 0, 5
+	unknownsfx0x20 4, 0, 0, 0
+	unknownsfx0x20 15, 240, 0, 5
+	unknownsfx0x20 15, 240, 0, 5
+	unknownsfx0x20 15, 240, 0, 5
+	unknownsfx0x20 15, 240, 0, 5
+	unknownsfx0x20 15, 242, 0, 5
 	endchannel
 
 
 SFX_02_54_Ch2: ; 868c (2:468c)
 	duty 3
-	note D_, 16
-	stereopanning 130
-	note C_, 5
-	note D_, 5
-	note C_, 1
-	note C_, 1
-	note C_, 1
-	note D_, 16
-	stereopanning 130
-	note C_, 5
-	note D_, 16
-	stereopanning 130
-	note C_, 5
-	note D_, 16
-	stereopanning 130
-	note C_, 5
-	note D_, 16
-	stereopanning 130
-	note C_, 5
-	note D_, 16
-	unknownmusic0xf2
-	note G#, 3
-	note C_, 5
+	unknownsfx0x20 15, 240, 130, 4
+	unknownsfx0x20 4, 0, 0, 0
+	unknownsfx0x20 15, 240, 130, 4
+	unknownsfx0x20 15, 240, 130, 4
+	unknownsfx0x20 15, 240, 130, 4
+	unknownsfx0x20 15, 240, 130, 4
+	unknownsfx0x20 15, 242, 130, 4
 	endchannel
 ; 0x86ab

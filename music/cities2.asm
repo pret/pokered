@@ -3,7 +3,7 @@ Music_Cities2_Ch1: ; b504 (2:7504)
 	stereopanning 119
 	duty 3
 	vibrato 8, 3, 2
-	unknownmusic0xe8
+	togglecall
 	notetype 12, 11, 6
 	rest 8
 	octave 3

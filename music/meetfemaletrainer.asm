@@ -2,7 +2,7 @@ Music_MeetFemaleTrainer_Ch1: ; 7f6f9 (1f:76f9)
 	tempo 0, 124
 	stereopanning 119
 	duty 1
-	unknownmusic0xe8
+	togglecall
 	notetype 12, 11, 2
 	octave 3
 	note G#, 6

@@ -2,7 +2,7 @@ Music_SafariZone_Ch1: ; bc2e (2:7c2e)
 	tempo 0, 132
 	stereopanning 119
 	vibrato 6, 3, 4
-	unknownmusic0xe8
+	togglecall
 	duty 2
 	notetype 12, 9, 2
 	octave 3

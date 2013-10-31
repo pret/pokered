@@ -1,9 +1,9 @@
 SFX_08_46_Ch1: ; 23a13 (8:7a13)
-	unknownmusic0xf8
+	executemusic
 	tempo 1, 0
 	stereopanning 119
 	duty 3
-	unknownmusic0xe8
+	togglecall
 	notetype 6, 11, 2
 	octave 3
 	note E_, 2
@@ -23,7 +23,7 @@ SFX_08_46_Ch1: ; 23a13 (8:7a13)
 
 
 SFX_08_46_Ch2: ; 23a2e (8:7a2e)
-	unknownmusic0xf8
+	executemusic
 	duty 2
 	notetype 6, 12, 2
 	octave 4
@@ -45,7 +45,7 @@ SFX_08_46_Ch2: ; 23a2e (8:7a2e)
 
 
 SFX_08_46_Ch3: ; 23a44 (8:7a44)
-	unknownmusic0xf8
+	executemusic
 	notetype 6, 1, 0
 	octave 4
 	note B_, 2
