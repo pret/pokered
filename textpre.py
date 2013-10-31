@@ -262,6 +262,12 @@ chars = {
 
 preprocessor.chars = chars
 
+from extras.pokemontools.crystal import (
+	callchannel,
+	loopchannel,
+)
+
 config = configuration.Config()
-processor = preprocessor.Preprocessor(config, [])
+macros = [callchannel, loopchannel]
+processor = preprocessor.Preprocessor(config, macros)
 processor.preprocess()

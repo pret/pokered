@@ -4,7 +4,7 @@ TEXTFILES := $(shell find ./ -type f -name '*.asm')
 
 all: pokered.gbc
 
-pokered.o: pokered.tx main.tx constants.tx music.tx wram.tx ${TEXTFILES:.asm=.tx}
+pokered.o: pokered.tx main.tx constants.tx wram.tx ${TEXTFILES:.asm=.tx}
 	rgbasm -o pokered.o pokered.tx
 	
 pokeblue.o: pokeblue.tx main.tx constants.tx music.tx wram.tx ${TEXTFILES:.asm=.tx}
