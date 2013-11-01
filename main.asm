@@ -5150,13 +5150,13 @@ UpdateMovingBgTiles: ; 1ebe (0:1ebe)
 	ret
 
 FlowerTilePattern1: ; 1f19 (0:1f19)
-INCBIN "gfx/tilesets/flower/flower1.2bpp"
+	INCBIN "gfx/tilesets/flower/flower1.2bpp"
 
 FlowerTilePattern2: ; 1f29 (0:1f29)
-INCBIN "gfx/tilesets/flower/flower2.2bpp"
+	INCBIN "gfx/tilesets/flower/flower2.2bpp"
 
 FlowerTilePattern3: ; 1f39 (0:1f39)
-INCBIN "gfx/tilesets/flower/flower3.2bpp"
+	INCBIN "gfx/tilesets/flower/flower3.2bpp"
 
 SoftReset: ; 1f49 (0:1f49)
 	call StopAllSounds
@@ -11985,7 +11985,7 @@ Func_4d72: ; 4d72 (1:4d72)
 	ret
 
 DiagonalLines: ; 4d85 (1:4d85)
-INCBIN "gfx/diagonal_lines.2bpp"
+	INCBIN "gfx/diagonal_lines.2bpp"
 
 INCBIN "baserom.gbc",$4da5,$4de1 - $4da5
 
@@ -29307,7 +29307,7 @@ DrawBadges: ; ea03 (3:6a03)
 	db $20, $28, $30, $38, $40, $48, $50, $58
 
 GymLeaderFaceAndBadgeTileGraphics: ; ea9e (3:6a9e)
-INCBIN "gfx/badges.2bpp"
+	INCBIN "gfx/badges.2bpp"
 
 Func_ee9e: ; ee9e (3:6e9e)
 	call Load16BitRegisters
@@ -31472,31 +31472,31 @@ HpBarAndStatusGraphics: ; 11ea0 (4:5ea0)
 	INCBIN "gfx/hp_bar_and_status.2bpp"
 
 BattleHudTiles1: ; 12080 (4:6080)
-INCBIN "gfx/battle_hud1.1bpp"
+	INCBIN "gfx/battle_hud1.1bpp"
 
 BattleHudTiles2: ; 12098 (4:6098)
-INCBIN "gfx/battle_hud2.1bpp"
+	INCBIN "gfx/battle_hud2.1bpp"
 
 BattleHudTiles3: ; 120b0 (4:60b0)
-INCBIN "gfx/battle_hud3.1bpp"
+	INCBIN "gfx/battle_hud3.1bpp"
 
 NintendoCopyrightLogoGraphics: ; 120c8 (4:60c8)
-INCBIN "gfx/copyright.2bpp"
+	INCBIN "gfx/copyright.2bpp"
 
 GamefreakLogoGraphics: ; 121f8 (4:61f8)
-INCBIN "gfx/gamefreak.2bpp"
+	INCBIN "gfx/gamefreak.2bpp"
 
 TextBoxGraphics: ; 12288 (4:6288)
 	INCBIN "gfx/text_box.2bpp"
 
 PokedexTileGraphics: ; 12488 (4:6488)
-INCBIN "gfx/pokedex.2bpp"
+	INCBIN "gfx/pokedex.2bpp"
 
 WorldMapTileGraphics: ; 125a8 (4:65a8)
-INCBIN "gfx/town_map.2bpp"
+	INCBIN "gfx/town_map.2bpp"
 
 PlayerCharacterTitleGraphics: ; 126a8 (4:66a8)
-INCBIN "gfx/player_title.2bpp"
+	INCBIN "gfx/player_title.2bpp"
 
 Func_128d8: ; 128d8 (4:68d8)
 	ld a, [W_YCOORD] ; $d361
@@ -34830,7 +34830,7 @@ Unknown_17caf: ; 17caf (5:7caf)
 INCBIN "baserom.gbc",$17caf,$17cb5 - $17caf
 
 EmotionBubbles: ; 17cb5 (5:7cb5)
-INCBIN "gfx/emotion_bubbles.2bpp"
+	INCBIN "gfx/emotion_bubbles.2bpp"
 
 Func_17d7d: ; 17d7d (5:7d7d)
 	ld a, [W_PLAYERMONACCURACYMOD] ; $cd1e
@@ -38854,7 +38854,7 @@ Func_1a6f0: ; 1a6f0 (6:66f0)
 	ret
 
 LedgeHoppingShadow: ; 1a708 (6:6708)
-INCBIN "gfx/ledge_hopping_shadow.1bpp"
+	INCBIN "gfx/ledge_hopping_shadow.1bpp"
 
 Unknown_1a710: ; 1a710 (6:6710)
 INCBIN "baserom.gbc",$1a710,$1a718 - $1a710
@@ -47064,16 +47064,16 @@ UnnamedText_2fb93: ; 2fb93 (b:7b93)
 	db "@"
 
 TrainerInfoTextBoxTileGraphics: ; 2fb98 (b:7b98)
-INCBIN "gfx/trainer_info.2bpp"
+	INCBIN "gfx/trainer_info.2bpp"
 
 BlankLeaderNames: ; 2fc28 (b:7c28)
-INCBIN "gfx/blank_leader_names.2bpp"
+	INCBIN "gfx/blank_leader_names.2bpp"
 
 CircleTile: ; 2fd88 (b:7d88)
-INCBIN "gfx/circle_tile.2bpp"
+	INCBIN "gfx/circle_tile.2bpp"
 
 BadgeNumbersTileGraphics: ; 2fd98 (b:7d98)
-INCBIN "gfx/badge_numbers.2bpp"
+	INCBIN "gfx/badge_numbers.2bpp"
 
 Func_2fe18: ; 2fe18 (b:7e18)
 	ld a, [W_WHICHPOKEMON] ; $cf92
@@ -47724,7 +47724,7 @@ UnnamedText_3769d: ; 3769d (d:769d)
 INCBIN "baserom.gbc",$376a2,$378f5 - $376a2
 
 SlotMachineMap: ; 378f5 (d:78f5)
-INCBIN "gfx/tilemaps/slotmachine.map"
+	INCBIN "gfx/tilemaps/slotmachine.map"
 
 INCBIN "baserom.gbc",$379e5,$37af1 - $379e5
 
@@ -56203,15 +56203,15 @@ Func_3a948: ; 3a948 (e:6948)
 
 ; four tiles: pokeball, black pokeball (status ailment), crossed out pokeball (faited) and pokeball slot (no mon)
 PokeballTileGraphics: ; 3a97e (e:697e)
-INCBIN "gfx/pokeball.2bpp"
+	INCBIN "gfx/pokeball.2bpp"
 
 ; tiles for gameboy and link cable graphics used for trading sequence animation
 TradingAnimationGraphics: ; 3a9be (e:69be)
-INCBIN "gfx/trade.2bpp"
+	INCBIN "gfx/trade.2bpp"
 
 ; 4 tiles for actual wire transfer animation (pokeball wandering inside wire)
 TradingAnimationGraphics2: ; 3acce (e:6cce)
-INCBIN "gfx/trade2.2bpp"
+	INCBIN "gfx/trade2.2bpp"
 
 Func_3ad0e: ; 3ad0e (e:6d0e)
 	ld hl, $ccd3
@@ -70642,10 +70642,10 @@ Unknown_41950: ; 41950 (10:5950)
 INCBIN "baserom.gbc",$41950,$41959 - $41950
 
 GameFreakIntro: ; 41959 (10:5959)
-INCBIN "gfx/gamefreak_intro.2bpp"
+	INCBIN "gfx/gamefreak_intro.2bpp"
 
 FightIntroBackMon: ; 41a99 (10:5a99)
-INCBIN "gfx/intro_fight.2bpp"
+	INCBIN "gfx/intro_fight.2bpp"
 
 FightIntroFrontMon: ; 42099 (10:6099)
 
@@ -72154,7 +72154,7 @@ INCBIN "baserom.gbc",$45083,$45087 - $45083
 
 ; these tiles are the animation for the tiles that push the player in dungeons like Rocket HQ
 SpinnerArrowAnimTiles: ; 45087 (11:5087)
-INCBIN "gfx/spinner_arrow.2bpp"
+	INCBIN "gfx/spinner_arrow.2bpp"
 
 RocketHideout2Texts: ; 450c7 (11:50c7)
 	dw RocketHideout2Text1, Predef5CText, Predef5CText, Predef5CText, Predef5CText
@@ -98778,7 +98778,7 @@ GameFreakShootingStarOAMData: ; 70180 (1c:4180)
 	db $08,$A8,$A1,$30
 
 FallingStar: ; 70190 (1c:4190)
-INCBIN "gfx/falling_star.2bpp"
+	INCBIN "gfx/falling_star.2bpp"
 
 Func_701a0: ; 701a0 (1c:41a0)
 	call Func_70423
@@ -99150,7 +99150,7 @@ Func_70433: ; 70433 (1c:4433)
 	jp UpdateSprites
 
 PokeCenterHealBall: ; 704b7 (1c:44b7)
-INCBIN "gfx/pokecenter_ball.2bpp"
+	INCBIN "gfx/pokecenter_ball.2bpp"
 
 Unknown_704d7: ; 704d7 (1c:44d7)
 INCBIN "baserom.gbc",$704d7,$704f3 - $704d7
@@ -99862,7 +99862,7 @@ Func_70a4d: ; 70a4d (1c:4a4d)
 	jp CopyVideoData
 
 BattleTransitionTile: ; 70a59 (1c:4a59)
-INCBIN "gfx/battle_transition.2bpp"
+	INCBIN "gfx/battle_transition.2bpp"
 
 Func_70a69: ; 70a69 (1c:4a69)
 	ld a, $ff
@@ -100530,7 +100530,7 @@ TownMapOrder: ; 70f11 (1c:4f11)
 	db POWER_PLANT
 
 TownMapCursor: ; 70f40 (1c:4f40)
-INCBIN "gfx/town_map_cursor.1bpp"
+	INCBIN "gfx/town_map_cursor.1bpp"
 
 Func_70f60: ; 70f60 (1c:4f60)
 	call Func_7109b
@@ -100703,7 +100703,7 @@ Func_71070: ; 71070 (1c:5070)
 	ret
 
 TownMapUpArrow: ; 71093 (1c:5093)
-INCBIN "gfx/up_arrow.1bpp"
+	INCBIN "gfx/up_arrow.1bpp"
 
 Func_7109b: ; 7109b (1c:509b)
 	call GBPalWhiteOutWithDelay3
@@ -108689,10 +108689,10 @@ dw AnimationTileset1
 db $FF
 
 AnimationTileset1: ; 781fe (1e:41fe)
-INCBIN "gfx/attack_anim_1.2bpp"
+	INCBIN "gfx/attack_anim_1.2bpp"
 
 AnimationTileset2: ; 786ee (1e:46ee)
-INCBIN "gfx/attack_anim_2.2bpp"
+	INCBIN "gfx/attack_anim_2.2bpp"
 
 IF _RED
 	INCBIN "gfx/red/slotmachine2.2bpp"
@@ -110768,7 +110768,7 @@ Func_79fd4: ; 79fd4 (1e:5fd4)
 	jp CopyVideoData
 
 RedFishingTiles: ; 79fdd (1e:5fdd)
-INCBIN "gfx/red_fishing.2bpp"
+	INCBIN "gfx/red_fishing.2bpp"
 
 Unknown_7a07d: ; 7a07d (1e:607d)
 INCBIN "baserom.gbc",$7a07d,$7a76d - $7a07d
