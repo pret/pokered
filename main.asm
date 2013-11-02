@@ -15035,7 +15035,7 @@ INCBIN "baserom.gbc",$64ca,$64ea - $64ca
 Func_64ea: ; 64ea (1:64ea)
 	ret
 
-Func_64eb: ; 64eb (1:64eb)
+AskForMonNickname: ; 64eb (1:64eb)
 	call SaveScreenTilesToBuffer1
 	call Load16BitRegisters
 	push hl
@@ -15044,11 +15044,11 @@ Func_64eb: ; 64eb (1:64eb)
 	ld hl, W_SCREENTILESBUFFER
 	ld b, $4
 	ld c, $b
-	call z, ClearScreenArea
+	call z, ClearScreenArea ; only if in wild batle
 	ld a, [$cf91]
 	ld [$d11e], a
 	call GetMonName
-	ld hl, UnnamedText_6557 ; $6557
+	ld hl, DoYouWantToNicknameText ; $6557
 	call PrintText
 	FuncCoord 14, 7 ; $c43a
 	ld hl, Coord
@@ -15084,12 +15084,13 @@ Func_64eb: ; 64eb (1:64eb)
 	ld d, h
 	ld e, l
 	ld hl, $cd6d
-	ld bc, $b
+	ld bc, $000b
 	jp CopyData
+; 0x6557
 
-UnnamedText_6557: ; 6557 (1:6557)
-	TX_FAR _UnnamedText_6557
-	db "@"
+DoYouWantToNicknameText: ; 0x6557
+	TX_FAR _DoYouWantToNicknameText
+	db $50
 
 Func_655c: ; 655c (1:655c)
 	ld hl, $cee9
@@ -35027,8 +35028,8 @@ BillsPC: ; 17ee4 (5:7ee4)
 	ld hl, UnnamedText_17f28 ;accessed bill's pc
 .printText
 	call PrintText
-	ld b, BANK(Func_214c2)
-	ld hl, Func_214c2
+	ld b, BANK(BillsPC_)
+	ld hl, BillsPC_
 	call Bankswitch
 ReloadMainMenu: ; 17f06 (5:7f06)
 	xor a
@@ -44142,6 +44143,7 @@ LogOffPCText: ; 214ba (8:54ba)
 	db "LOG OFF@"
 
 Func_214c2: ; 214c2 (8:54c2)
+BillsPC_: ; 0x214c2
 	ld hl, $d730
 	set 6, [hl]
 	xor a
@@ -44153,13 +44155,14 @@ Func_214c2: ; 214c2 (8:54c2)
 	push af
 	ld a, [W_FLAGS_CD60]
 	bit 3, a
-	jr nz, Func_214e8
+	jr nz, BillsPCMenu
 	ld a, $99
 	call PlaySound
-	ld hl, UnnamedText_217e9 ; $57e9
+	ld hl, SwitchOnText
 	call PrintText
 
 Func_214e8: ; 214e8 (8:54e8)
+BillsPCMenu:
 	ld a, [$ccd3]
 	ld [W_CURMENUITEMID], a ; $cc26
 	ld hl, $9780
@@ -44193,7 +44196,7 @@ Func_214e8: ; 214e8 (8:54e8)
 	ld [hli], a
 	ld [hl], a
 	ld [W_PLAYERMONNUMBER], a ; $cc2f
-	ld hl, UnnamedText_217ee ; $57ee
+	ld hl, WhatText
 	call PrintText
 	FuncCoord 9, 14 ; $c4c1
 	ld hl, Coord
@@ -44224,18 +44227,18 @@ Func_214e8: ; 214e8 (8:54e8)
 	call Delay3
 	call HandleMenuInput
 	bit 1, a
-	jp nz, Func_21588
+	jp nz, Func_21588 ; b button
 	call PlaceUnfilledArrowMenuCursor
 	ld a, [W_CURMENUITEMID] ; $cc26
 	ld [$ccd3], a
 	and a
-	jp z, Func_21618
+	jp z, Func_21618 ; withdraw
 	cp $1
-	jp z, Func_215ac
+	jp z, Func_215ac ; deposit
 	cp $2
-	jp z, Func_21673
+	jp z, Func_21673 ; release
 	cp $3
-	jp z, Func_216b3
+	jp z, Func_216b3 ; change box
 
 Func_21588: ; 21588 (8:5588)
 	ld a, [W_FLAGS_CD60]
@@ -44256,25 +44259,26 @@ Func_21588: ; 21588 (8:5588)
 	ret
 
 Func_215ac: ; 215ac (8:55ac)
+BillsPCDeposit:
 	ld a, [W_NUMINPARTY] ; $d163
 	dec a
 	jr nz, .asm_215bb
-	ld hl, UnnamedText_217fd ; $57fd
+	ld hl, CantDepositLastMonText
 	call PrintText
-	jp Func_214e8
+	jp BillsPCMenu
 .asm_215bb
 	ld a, [W_NUMINBOX] ; $da80
 	cp $14
 	jr nz, .asm_215cb
-	ld hl, UnnamedText_21802 ; $5802
+	ld hl, BoxFullText ; $5802
 	call PrintText
-	jp Func_214e8
+	jp BillsPCMenu
 .asm_215cb
 	ld hl, W_NUMINPARTY ; $d163
 	call Func_216be
-	jp c, Func_214e8
+	jp c, BillsPCMenu
 	call Func_2174b
-	jp nc, Func_214e8
+	jp nc, BillsPCMenu
 	ld a, [$cf91]
 	call GetCryData
 	call PlaySoundWaitForCurrent
@@ -44300,22 +44304,22 @@ Func_215ac: ; 215ac (8:55ac)
 .asm_2160c
 	ld [hli], a
 	ld [hl], $50
-	ld hl, UnnamedText_217f8 ; $57f8
+	ld hl, MonWasStoredText ; $57f8
 	call PrintText
-	jp Func_214e8
+	jp BillsPCMenu
 
 Func_21618: ; 21618 (8:5618)
 	ld a, [W_NUMINBOX] ; $da80
 	and a
 	jr nz, .asm_21627
-	ld hl, UnnamedText_2180c ; $580c
+	ld hl, NoMonText ; $580c
 	call PrintText
 	jp Func_214e8
 .asm_21627
 	ld a, [W_NUMINPARTY] ; $d163
 	cp $6
 	jr nz, .asm_21637
-	ld hl, UnnamedText_21811 ; $5811
+	ld hl, CantTakeMonText ; $5811
 	call PrintText
 	jp Func_214e8
 .asm_21637
@@ -44337,7 +44341,7 @@ Func_21618: ; 21618 (8:5618)
 	ld [$cf95], a
 	call RemovePokemon
 	call WaitForSoundToFinish
-	ld hl, UnnamedText_21807 ; $5807
+	ld hl, MonIsTakenOutText ; $5807
 	call PrintText
 	jp Func_214e8
 
@@ -44345,14 +44349,14 @@ Func_21673: ; 21673 (8:5673)
 	ld a, [W_NUMINBOX] ; $da80
 	and a
 	jr nz, .asm_21682
-	ld hl, UnnamedText_2180c ; $580c
+	ld hl, NoMonText ; $580c
 	call PrintText
 	jp Func_214e8
 .asm_21682
 	ld hl, W_NUMINBOX ; $da80
 	call Func_216be
 	jp c, Func_214e8
-	ld hl, UnnamedText_2181b ; $581b
+	ld hl, OnceReleasedText ; $581b
 	call PrintText
 	call YesNoChoice
 	ld a, [W_CURMENUITEMID] ; $cc26
@@ -44364,7 +44368,7 @@ Func_21673: ; 21673 (8:5673)
 	call WaitForSoundToFinish
 	ld a, [$cf91]
 	call PlayCry
-	ld hl, UnnamedText_21820 ; $5820
+	ld hl, MonWasReleasedText ; $5820
 	call PrintText
 	jp Func_214e8
 
@@ -44511,53 +44515,65 @@ WithdrawPCText: ; 217d3 (8:57d3)
 StatsCancelPCText: ; 217dc (8:57dc)
 	db "STATS",$4e,"CANCEL@"
 
-UnnamedText_217e9: ; 217e9 (8:57e9)
-	TX_FAR _UnnamedText_217e9
-	db "@"
+SwitchOnText: ; 0x217e9
+	TX_FAR _SwitchOnText
+	db $50
+; 0x217e9 + 5 bytes
 
-UnnamedText_217ee: ; 217ee (8:57ee)
-	TX_FAR _UnnamedText_217ee
-	db "@"
+WhatText: ; 0x217ee
+	TX_FAR _WhatText
+	db $50
+; 0x217ee + 5 bytes
 
-UnnamedText_217f3: ; 217f3 (8:57f3)
-	TX_FAR _UnnamedText_217f3
-	db "@"
+DepositWhichMonText: ; 0x217f3
+	TX_FAR _DepositWhichMonText
+	db $50
+; 0x217f3 + 5 bytes
 
-UnnamedText_217f8: ; 217f8 (8:57f8)
-	TX_FAR _UnnamedText_217f8
-	db "@"
+MonWasStoredText: ; 0x217f8
+	TX_FAR _MonWasStoredText
+	db $50
+; 0x217f8 + 5 bytes
 
-UnnamedText_217fd: ; 217fd (8:57fd)
-	TX_FAR _UnnamedText_217fd
-	db "@"
+CantDepositLastMonText: ; 0x217fd
+	TX_FAR _CantDepositLastMonText
+	db $50
+; 0x217fd + 5 bytes
 
-UnnamedText_21802: ; 21802 (8:5802)
-	TX_FAR _UnnamedText_21802
-	db "@"
+BoxFullText: ; 0x21802
+	TX_FAR _BoxFullText
+	db $50
+; 0x21802 + 5 bytes
 
-UnnamedText_21807: ; 21807 (8:5807)
-	TX_FAR _UnnamedText_21807
-	db "@"
+MonIsTakenOutText: ; 0x21807
+	TX_FAR _MonIsTakenOutText
+	db $50
+; 0x21807 + 5 bytes
 
-UnnamedText_2180c: ; 2180c (8:580c)
-	TX_FAR _UnnamedText_2180c
-	db "@"
+NoMonText: ; 0x2180c
+	TX_FAR _NoMonText
+	db $50
+; 0x2180c + 5 bytes
 
-UnnamedText_21811: ; 21811 (8:5811)
-	TX_FAR _UnnamedText_21811
-	db "@"
+CantTakeMonText: ; 0x21811
+	TX_FAR _CantTakeMonText
+	db $50
+; 0x21811 + 5 bytes
 
-UnnamedText_21816: ; 21816 (8:5816)
-	TX_FAR _UnnamedText_21816
-	db "@"
+ReleaseWhichMonText: ; 0x21816
+	TX_FAR _ReleaseWhichMonText
+	db $50
+; 0x21816 + 5 bytes
 
-UnnamedText_2181b: ; 2181b (8:581b)
-	TX_FAR _UnnamedText_2181b
-	db "@"
+OnceReleasedText: ; 0x2181b
+	TX_FAR _OnceReleasedText
+	db $50
+; 0x2181b + 5 bytes
 
-UnnamedText_21820: ; 21820 (8:5820)
-	TX_FAR _UnnamedText_21820
-	db "@"
+MonWasReleasedText: ; 0x21820
+	TX_FAR _MonWasReleasedText
+	db $50
+; 0x21820 + 5 bytes
 
 	ld a, [$ff00+$aa]
 	cp $1
@@ -56019,28 +56035,29 @@ AIBattleUseItemText: ; 3a844 (e:6844)
 	db "@"
 
 Func_3a849: ; 3a849 (e:6849)
-	call Func_3a85d
-	call Func_3a869
+DrawAllPokeballs: ; 0x3a849
+	call LoadPartyPokeballGfx
+	call SetupOwnPartyPokeballs
 	ld a, [W_ISINBATTLE] ; $d057
 	dec a
-	ret z
-	jp Func_3a887
+	ret z ; return if wild pokémon
+	jp SetupEnemyPartyPokeballs
 
-Func_3a857: ; 3a857 (e:6857)
-	call Func_3a85d
-	jp Func_3a887
+DrawEnemyPokeballs: ; 0x3a857
+	call LoadPartyPokeballGfx
+	jp SetupEnemyPartyPokeballs
 
-Func_3a85d: ; 3a85d (e:685d)
+LoadPartyPokeballGfx: ; 3a85d (e:685d)
 	ld de, PokeballTileGraphics ; $697e
 	ld hl, $8310
 	ld bc, (BANK(PokeballTileGraphics) << 8) + $04
 	jp CopyVideoData
 
-Func_3a869: ; 3a869 (e:6869)
+SetupOwnPartyPokeballs: ; 3a869 (e:6869)
 	call Func_3a902
-	ld hl, W_PARTYMON1_NUM ; $d16b (aliases: W_PARTYMON1DATA)
+	ld hl, W_PARTYMON1DATA
 	ld de, W_NUMINPARTY ; $d163
-	call Func_3a8a6
+	call SetupPokeballs
 	ld a, $60
 	ld hl, W_BASECOORDX ; $d081
 	ld [hli], a
@@ -56050,11 +56067,11 @@ Func_3a869: ; 3a869 (e:6869)
 	ld hl, W_OAMBUFFER
 	jp Func_3a8e1
 
-Func_3a887: ; 3a887 (e:6887)
+SetupEnemyPartyPokeballs: ; 3a887 (e:6887)
 	call Func_3a919
-	ld hl, W_WATERRATE ; $d8a4
+	ld hl, $d8a4
 	ld de, W_ENEMYMONCOUNT ; $d89c
-	call Func_3a8a6
+	call SetupPokeballs
 	ld hl, W_BASECOORDX ; $d081
 	ld a, $48
 	ld [hli], a
@@ -56064,53 +56081,53 @@ Func_3a887: ; 3a887 (e:6887)
 	ld hl, $c318
 	jp Func_3a8e1
 
-Func_3a8a6: ; 3a8a6 (e:68a6)
+SetupPokeballs: ; 0x3a8a6
 	ld a, [de]
 	push af
-	ld de, $cee9
-	ld c, $6
-	ld a, $34
-.asm_3a8af
+	ld de, W_BUFFER
+	ld c, $6 ; max num of partymons
+	ld a, $34 ; empty pokeball
+.emptyloop
 	ld [de], a
 	inc de
 	dec c
-	jr nz, .asm_3a8af
+	jr nz, .emptyloop ; 0x3a8b2 $fb
 	pop af
-	ld de, $cee9
-.asm_3a8b8
+	ld de, W_BUFFER
+.monloop
 	push af
-	call Func_3a8c2
+	call PickPokeball
 	inc de
 	pop af
 	dec a
-	jr nz, .asm_3a8b8
+	jr nz, .monloop
 	ret
 
-Func_3a8c2: ; 3a8c2 (e:68c2)
+PickPokeball: ; 3a8c2 (e:68c2)
 	inc hl
 	ld a, [hli]
 	and a
-	jr nz, .asm_3a8cd
+	jr nz, .alive
 	ld a, [hl]
 	and a
-	ld b, $33
-	jr z, .asm_3a8d8
-.asm_3a8cd
+	ld b, $33 ; crossed ball (fainted)
+	jr z, .done_fainted
+.alive
 	inc hl
 	inc hl
-	ld a, [hl]
+	ld a, [hl] ; status
 	and a
-	ld b, $32
-	jr nz, .asm_3a8da
-	dec b
-	jr .asm_3a8da
-.asm_3a8d8
+	ld b, $32 ; black ball (status)
+	jr nz, .done
+	dec b ; regular ball
+	jr .done
+.done_fainted
 	inc hl
 	inc hl
-.asm_3a8da
+.done
 	ld a, b
 	ld [de], a
-	ld bc, $28
+	ld bc, $0028 ; rest of mon struct
 	add hl, bc
 	ret
 
@@ -56179,10 +56196,10 @@ asm_3a930: ; 3a930 (e:6930)
 	ret
 
 Func_3a948: ; 3a948 (e:6948)
-	call Func_3a85d
+	call LoadPartyPokeballGfx
 	ld hl, W_PARTYMON1_NUM ; $d16b (aliases: W_PARTYMON1DATA)
 	ld de, W_NUMINPARTY ; $d163
-	call Func_3a8a6
+	call SetupPokeballs
 	ld hl, W_BASECOORDX ; $d081
 	ld a, $50
 	ld [hli], a
@@ -56193,7 +56210,7 @@ Func_3a948: ; 3a948 (e:6948)
 	call Func_3a8e1
 	ld hl, W_WATERRATE ; $d8a4
 	ld de, W_ENEMYMONCOUNT ; $d89c
-	call Func_3a8a6
+	call SetupPokeballs
 	ld hl, W_BASECOORDX ; $d081
 	ld a, $50
 	ld [hli], a
@@ -59898,7 +59915,7 @@ Func_3c50f: ; 3c50f (f:450f)
 Func_3c525: ; 3c525 (f:4525)
 	xor a
 	ld [$ccf0], a
-	call Func_3c567
+	call FaintEnemyPokemon
 	call AnyPokemonAliveCheck
 	ld a, d
 	and a
@@ -59928,24 +59945,24 @@ Func_3c525: ; 3c525 (f:4525)
 	ld [$cd6a], a
 	jp MainInBattleLoop
 
-Func_3c567: ; 3c567 (f:4567)
+FaintEnemyPokemon ; 0x3c567
 	call ReadPlayerMonCurHPAndStatus
 	ld a, [W_ISINBATTLE] ; $d057
 	dec a
-	jr z, .asm_3c57f
+	jr z, .wild
 	ld a, [W_ENEMYMONNUMBER] ; $cfe8
-	ld hl, W_WATERMONS ; $d8a5 (aliases: W_ENEMYMON1HP)
-	ld bc, $2c
+	ld hl, W_ENEMYMON1HP
+	ld bc, $2c ; mon struct len
 	call AddNTimes
 	xor a
 	ld [hli], a
 	ld [hl], a
-.asm_3c57f
+.wild
 	ld hl, W_PLAYERBATTSTATUS1 ; $d062
 	res 2, [hl]
 	xor a
 	ld [W_NUMHITS], a ; $d074
-	ld hl, $d065
+	ld hl, $d065 ; enemy statuses
 	ld [hli], a
 	ld [hli], a
 	ld [hli], a
@@ -59967,56 +59984,56 @@ Func_3c567: ; 3c567 (f:4567)
 	call ClearScreenArea
 	ld a, [W_ISINBATTLE] ; $d057
 	dec a
-	jr z, .asm_3c5d3
+	jr z, .wild_win
 	xor a
 	ld [$c0f1], a
 	ld [$c0f2], a
-	ld a, $9e
+	ld a, $9e ; SFX_FALL?
 	call PlaySoundWaitForCurrent
-.asm_3c5c2
+.sfxwait
 	ld a, [$c02a]
 	cp $9e
-	jr z, .asm_3c5c2
-	ld a, $95
+	jr z, .sfxwait
+	ld a, $95 ; SFX_DROP
 	call PlaySound
 	call WaitForSoundToFinish
-	jr .asm_3c5db
-.asm_3c5d3
+	jr .sfxplayed
+.wild_win
 	call Func_3c643
 	ld a, (Music_DefeatedWildMon - $4000) / 3
 	call Func_3c6ee
-.asm_3c5db
+.sfxplayed
 	ld hl, W_PLAYERMONCURHP ; $d015
 	ld a, [hli]
 	or [hl]
-	jr nz, .asm_3c5eb
+	jr nz, .playermonnotfaint
 	ld a, [$ccf0]
 	and a
-	jr nz, .asm_3c5eb
+	jr nz, .playermonnotfaint
 	call Func_3c741
-.asm_3c5eb
+.playermonnotfaint
 	call AnyPokemonAliveCheck
 	ld a, d
 	and a
 	ret z
-	ld hl, UnnamedText_3c63e ; $463e
+	ld hl, EnemyMonFainted ; $463e
 	call PrintText
 	call Func_3ee94
 	call SaveScreenTilesToBuffer1
 	xor a
 	ld [$cf0b], a
-	ld b, $4b
+	ld b, EXP__ALL
 	call IsItemInBag
 	push af
-	jr z, .asm_3c614
+	jr z, .no_exp_all
 	ld hl, $d002
 	ld b, $7
-.asm_3c60e
+.exp_all_loop
 	srl [hl]
 	inc hl
 	dec b
-	jr nz, .asm_3c60e
-.asm_3c614
+	jr nz, .exp_all_loop
+.no_exp_all
 	xor a
 	ld [$cc5b], a
 	ld hl, Func_5524f
@@ -60039,9 +60056,10 @@ Func_3c567: ; 3c567 (f:4567)
 	ld b, BANK(Func_5524f)
 	jp Bankswitch ; indirect jump to Func_5524f (5524f (15:524f))
 
-UnnamedText_3c63e: ; 3c63e (f:463e)
-	TX_FAR _UnnamedText_3c63e
+EnemyMonFainted: ; 0x3c63e
+	TX_FAR _EnemyMonFainted
 	db "@"
+; 0x3c63e + 5 bytes
 
 Func_3c643: ; 3c643 (f:4643)
 	xor a
@@ -60072,8 +60090,8 @@ Func_3c664: ; 3c664 (f:4664)
 	ld hl, $cf1e
 	ld e, $30
 	call Func_3ce90
-	ld hl, Func_3a857
-	ld b, BANK(Func_3a857)
+	ld hl, DrawEnemyPokeballs
+	ld b, BANK(DrawEnemyPokeballs)
 	call Bankswitch ; indirect jump to Func_3a857 (3a857 (e:6857))
 	ld a, [W_ISLINKBATTLE] ; $d12b
 	cp $4
@@ -60158,7 +60176,7 @@ HandlePlayerMonFainted: ; 3c700 (f:4700)
 	ld a, [hli]
 	or [hl]
 	jr nz, .enemyMonNotFainted
-	call Func_3c567
+	call FaintEnemyPokemon
 	ld a, [W_ISINBATTLE] ; $d057
 	dec a
 	ret z            ; if wild encounter, battle is over
@@ -116348,7 +116366,7 @@ _HurtByLeechSeedText: ; 896b3 (22:56b3)
 	db $0, "LEECH SEED saps", $4f
 	db $5a, "!", $58
 
-_UnnamedText_3c63e: ; 896c7 (22:56c7)
+_EnemyMonFainted: ; 0x896c7
 	db $0, "Enemy @"
 	TX_RAM W_ENEMYMONNAME
 	db $0, $4f
@@ -116904,17 +116922,17 @@ _UnnamedText_76683: ; 8a0f4 (22:60f4)
 	db "Accessed the HALL", $4f
 	db "OF FAME List.", $58
 
-_UnnamedText_217e9: ; 8a131 (22:6131)
+_SwitchOnText: ; 0x8a131
 	db $0, "Switch on!", $58
 
-_UnnamedText_217ee: ; 8a13d (22:613d)
+_WhatText: ; 0x8a13d
 	db $0, "What?", $57
 
-_UnnamedText_217f3: ; 8a144 (22:6144)
+_DepositWhichMonText: ; 0x8a144
 	db $0, "Deposit which", $4f
 	db "#MON?", $57
 
-_UnnamedText_217f8: ; 8a159 (22:6159)
+_MonWasStoredText: ; 0x8a159
 	TX_RAM $cf4b
 	db $0, " was", $4f
 	db "stored in Box @"
@@ -116922,15 +116940,15 @@ _UnnamedText_217f8: ; 8a159 (22:6159)
 	db $0, ".", $58
 ; 30 bytes
 
-_UnnamedText_217fd: ; 8a177 (22:6177)
+_CantDepositLastMonText: ; 0x8a177
 	db $0, "You can't deposit", $4f
 	db "the last #MON!", $58
 
-_UnnamedText_21802: ; 8a198 (22:6198)
+_BoxFullText: ; 0x8a198
 	db $0, "Oops! This Box is", $4f
 	db "full of #MON.", $58
 
-_UnnamedText_21807: ; 8a1b9 (22:61b9)
+_MonIsTakenOutText: ; 0x8a1b9
 	TX_RAM $cf4b
 	db $0, " is", $4f
 	db "taken out.", $55
@@ -116939,30 +116957,30 @@ UnknownText_8a1d1: ; 8a1d1 (22:61d1)
 	TX_RAM $cf4b
 	db $0, ".", $58
 
-_UnnamedText_2180c: ; 8a1d7 (22:61d7)
+_NoMonText: ; 0x8a1d7
 	db $0, "What? There are", $4f
 	db "no #MON here!", $58
 
-_UnnamedText_21811: ; 8a1f6 (22:61f6)
+_CantTakeMonText: ; 0x8a1f6
 	db $0, "You can't take", $4f
 	db "any more #MON.", $51
 	db "Deposit #MON", $4f
 	db "first.", $58
 
-_UnnamedText_21816: ; 8a228 (22:6228)
+_ReleaseWhichMonText: ; 0x8a228
 	db $0, "Release which", $4f
 	db "#MON?", $57
 
-_UnnamedText_2181b: ; 8a23d (22:623d)
+_OnceReleasedText: ; 0x8a23d
 	db $0, "Once released,", $4f
 	db "@"
 
-UnknownText_8a24e: ; 8a24e (22:624e)
+MonIsGoneForeverText: ; 0x8a24e
 	TX_RAM $cf4b
 	db $0, " is", $55
 	db "gone forever. OK?", $57
 
-_UnnamedText_21820: ; 8a268 (22:6268)
+_MonWasReleasedText: ; 0x8a268
 	TX_RAM $cf4b
 	db $0, " was", $4f
 	db "released outside.", $55
@@ -117034,7 +117052,7 @@ _UnnamedText_5d4d: ; 8a40d (22:640d)
 
 INCLUDE "text/oakspeech.tx"
 
-_UnnamedText_6557: ; 8a605 (22:6605)
+_DoYouWantToNicknameText: ; 0x8a605
 	db $0, "Do you want to", $4f
 	db "give a nickname", $55
 	db "to @"

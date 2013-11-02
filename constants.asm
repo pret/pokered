@@ -259,6 +259,8 @@ W_HPBARDELTA   EQU $CEEF
 
 W_HPBARHPDIFFERENCE EQU $CEFD
 
+W_BUFFER EQU $CEE9 ; used for temporary things
+
 W_ANIMSOUNDID EQU $CF07 ; sound ID during battle animations
 
 ; movement byte 2 of current sprite
