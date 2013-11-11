@@ -2867,7 +2867,7 @@ Func_12e7: ; 12e7 (0:12e7)
 	ld hl, $d728
 	res 0, [hl]
 	ret
-; 12ed (0:12ed)
+
 ;appears to be called twice inside function $C38B
 ;if $d700,$d11a == $1 then biking
 ;if $d700,$d11a == $2 then surfing
@@ -3056,7 +3056,6 @@ LoadFrontSpriteByMonIndex: ; 1389 (0:1389)
 	ld [H_LOADEDROMBANK], a
 	ld [$2000], a
 	ret
-; 13d0 (0:13d0)
 
 ; plays the cry of a pokemon
 ; INPUT:
@@ -3660,7 +3659,6 @@ InterlaceMergeSpriteBuffers: ; 16ea (0:16ea)
 	ld a, [H_LOADEDROMBANK]
 	ld b, a
 	jp CopyVideoData
-; 172f (0:172f)
 
 Tset0B_Coll: ; 172f (0:172f)
 	INCBIN "gfx/tilesets/0b.tilecoll"
@@ -3903,7 +3901,7 @@ InitScreenTileBufferTransferParameters: ; 18fc (0:18fc)
 	ld a, e
 	ld [H_VBCOPYBGSRC], a ; $FF00+$c1
 	ret
-; 190f (0:190f)
+
 ClearScreen: ; 190f (0:190f)
 ; clears all tiles in the tilemap,
 ; then wait three frames
@@ -5165,7 +5163,6 @@ SoftReset: ; 1f49 (0:1f49)
 	call DelayFrames
 	;fall through
 
-; 1f54 (0:1f54)
 ; initialization code
 ; explanation for %11100011 (value stored in rLCDC)
 ; * LCD enabled
@@ -5279,7 +5276,6 @@ StopAllSounds: ; 200e (0:200e)
 	ld [$cfca], a
 	dec a
 	jp PlaySound
-; 2024 (0:2024)
 
 VBlankHandler: ; 2024 (0:2024)
 	push af
@@ -5978,7 +5974,6 @@ UpdateSprites: ; 2429 (0:2429)
 	ld [H_LOADEDROMBANK], a
 	ld [$2000], a
 	ret
-; 2442 (0:2442)
 
 ; mart inventories are below
 ; they are texts
@@ -6751,7 +6746,6 @@ Func_28cb: ; 28cb (0:28cb)
 	ld [$c0ee], a
 	jp PlaySound
 
-; 2920 (0:2920)
 ; this function is used to display sign messages, sprite dialog, etc.
 ; INPUT: [$ff8c] = sprite ID or text ID
 DisplayTextID: ; 2920 (0:2920)
@@ -8114,7 +8108,6 @@ ReadTrainerHeaderInfo: ; 3193 (0:3193)
 HandleBitArray_Bank0: ; 31c7 (0:31c7)
 	ld a, $10
 	jp Predef ; indirect jump to HandleBitArray (f666 (3:7666))
-; 31cc (0:31cc)
 
 ; direct talking to a trainer (rather than getting seen by one)
 TalkToTrainer: ; 31cc (0:31cc)
@@ -8875,7 +8868,6 @@ CalcDifference: ; 3633 (0:3633)
 	add $1
 	scf
 	ret
-; 363a (0:363a)
 
 MoveSprite: ; 363a (0:363a)
 ; move the sprite [$FF8C] with the movement pointed to by de
@@ -8932,7 +8924,7 @@ Func_366b: ; 366b (0:366b)
 .asm_367e
 	pop hl
 	ret
-; 3680 (0:3680)
+
 ; copies the tile patterns for letters and numbers into VRAM
 LoadFontTilePatterns: ; 3680 (0:3680)
 	ld a,[rLCDC]
@@ -9046,7 +9038,6 @@ LoadScreenTilesFromBuffer1: ; 3725 (0:3725)
 	ld a, $1
 	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
 	ret
-; 3739 (0:3739)
 
 DelayFrames: ; 3739 (0:3739)
 ; wait n frames, where n is the value in c
@@ -9079,7 +9070,6 @@ WaitForSoundToFinish: ; 3748 (0:3748)
 	jr nz, .asm_374f
 	pop hl
 	ret
-; 375d (0:375d)
 
 NamePointers: ; 375d (0:375d)
 	dw MonsterNames
@@ -9227,7 +9217,6 @@ CopyString: ; 3829 (0:3829)
 	cp "@"
 	jr nz, CopyString
 	ret
-; 3831 (0:3831)
 
 ; this function is used when lower button sensitivity is wanted (e.g. menus)
 ; OUTPUT: [$ffb5] = pressed buttons in usual format
@@ -9326,7 +9315,6 @@ ManualTextScroll: ; 3898 (0:3898)
 .inLinkBattle
 	ld c, $41
 	jp DelayFrames
-; 38ac (0:38ac)
 
 ; function to do multiplication
 ; all values are big endian
@@ -9691,7 +9679,6 @@ SkipFixedLengthTextEntries: ; 3a7d (0:3a7d)
 	dec a
 	jr nz, .skipLoop
 	ret
-; 3a87 (0:3a87)
 
 AddNTimes: ; 3a87 (0:3a87)
 ; add bc to hl a times
@@ -10410,7 +10397,6 @@ Func_3e08: ; 3e08 (0:3e08)
 	call LoadPlayerSpriteGraphics
 	call LoadFontTilePatterns
 	jp UpdateSprites
-; 3e2e (0:3e2e)
 
 GiveItem: ; 3e2e (0:3e2e)
 ; Give player quantity c of item b, and copy item name to $cf4b.
@@ -10740,7 +10726,7 @@ Func_40b0: ; 40b0 (1:40b0)
 	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
 	ld a, $7
 	jp Predef ; indirect jump to HealParty (f6a5 (3:76a5))
-; 4112 (1:4112)
+
 MewPicFront: ; 4112 (1:4112)
 	INCBIN "pic/bmon/mew.pic"
 MewPicBack: ; 4205 (1:4205)
@@ -10877,7 +10863,6 @@ Func_42dd: ; 42dd (1:42dd)
 	ld a, BANK(PokemonLogoGraphics)
 	call FarCopyData2          ; second chunk
 	ld hl, Version_GFX ; $402f
-; 4335 (1:4335)
 IF _RED
 	ld de,$9600 ; where to put redgreenversion.2bpp in the VRAM
 	ld bc,$50 ; how big that file is
@@ -10939,7 +10924,6 @@ db $41,$42,$43,$42,$44,$42,$45,$46,$47,$48,$49,$4A,$4B,$4C,$4D,$4E ; ©'95.'96.'
 	call SaveScreenTilesToBuffer2
 	call LoadScreenTilesFromBuffer2
 	call EnableLCD
-; 4398 (1:4398)
 IF _RED
 	ld a,CHARMANDER ; which Pokemon to show first on the title screen
 ENDC
@@ -11249,7 +11233,6 @@ PrintGameVersionOnTitleScreen: ; 4598 (1:4598)
 	ld hl, Coord
 	ld de, VersionOnTitleScreenText ; $45a1
 	jp PlaceString
-; 45a1 (1:45a1)
 
 ; these point to special tiles specifically loaded for that purpose ad are no usual text
 VersionOnTitleScreenText: ; 45a1 (1:45a1)
@@ -14594,7 +14577,6 @@ Func_60ca: ; 60ca (1:60ca)
 	ld de, W_RIVALNAME ; $d34a
 	ld bc, $b
 	jp CopyData
-; 6115 (1:6115)
 
 OakSpeech: ; 6115 (1:6115)
 	ld a,$FF
@@ -15086,7 +15068,6 @@ AskForMonNickname: ; 64eb (1:64eb)
 	ld hl, $cd6d
 	ld bc, $000b
 	jp CopyData
-; 0x6557
 
 DoYouWantToNicknameText: ; 0x6557
 	TX_FAR _DoYouWantToNicknameText
@@ -15608,7 +15589,7 @@ Func_69ec: ; 69ec (1:69ec)
 	ld de, $67d
 	ld a, $ff
 	jr asm_6a19
-; 6a12 (1:6a12)
+
 Unnamed_6a12: ; 6a12 (1:6a12)
 	FuncCoord 5, 4 ; $c3f5
 	ld hl, Coord
@@ -15746,7 +15727,6 @@ Func_6ad6: ; 6ad6 (1:6ad6)
 	ld de, $cd6d
 	ld bc, $14
 	jp CopyData
-; 6af2 (1:6af2)
 IF _RED
 DefaultNamesPlayerList: ; 6af2 (1:6af2)
 	db "NEW NAME@RED@ASH@JACK@"
@@ -17510,7 +17490,7 @@ Function_76e1: ; 0x76e1, 1:36e1
 	add hl, de
 	ld de, PokemonMenuEntries ; $77c2
 	jp PlaceString
-; 778d (1:778d)
+
 FieldMoveNames: ; 778d (1:778d)
 	db "CUT@"
 	db "FLY@"
@@ -20882,7 +20862,7 @@ Func_c35f: ; c35f (3:435f)
 	dec c
 	jr nz, .asm_c368
 	ret
-; c38b (3:438b)
+
 CheckForceBikeOrSurf: ; c38b (3:438b)
 	ld hl, $D732
 	bit 5, [hl]
@@ -21432,9 +21412,7 @@ Func_c754: ; c754 (3:4754)
 	inc d
 .asm_c765
 	ld e, a
-; c766 (3:4766)
 	ld hl, TilesetsHeadPtr
-
 	add hl, de
 	ld de, $d52b
 	ld c, $b
@@ -21524,7 +21502,7 @@ Func_c8de: ; c8de (3:48de)
 	ld a, $50
 	ld [hl], a
 	ret
-; c8f5 (3:48f5)
+
 ; data for default hidden/shown
 ; objects for each map ($00-$F8)
 
@@ -28951,7 +28929,7 @@ Func_e7a4: ; e7a4 (3:67a4)
 	dec b
 	jr nz, .asm_e8b1
 	ret
-; e8b8 (3:68b8)
+
 ; checks if the tile in front of the player is a shore or water tile
 ; used for surfing and fishing
 ; unsets carry if it is, sets carry if not
@@ -28984,7 +28962,6 @@ WaterTilesets: ; e8e0 (3:68e0)
 	db $00,$03,$05,$07,$0d,$0e,$11,$16,$17
 	db $ff ; terminator
 
-; 68EA 0xe8ea
 ReadSuperRodData: ; e8ea (3:68ea)
 ; return e = 2 if no fish on this map
 ; return e = 1 if a bite, bc = level,species
@@ -29241,7 +29218,6 @@ DrawBadges: ; ea03 (3:6a03)
 	ld de, $cd49 + 4
 ;	call .DrawBadgeRow
 ;	ret
-; ea4c
 
 .DrawBadgeRow ; ea4c (3:6a4c)
 ; Draw 4 badges.
@@ -30557,7 +30533,6 @@ _HandleBitArray: ; f669 (3:7669)
 	pop hl
 	ld c, a
 	ret
-; f6a5 (3:76a5)
 
 HealParty: ; f6a5 (3:76a5)
 	ld hl, W_PARTYMON1
@@ -31577,7 +31552,7 @@ Func_12924: ; 12924 (4:6924)
 	pop hl
 	pop de
 	ret
-; 12953 (4:6953)
+
 ; Predef 0x37
 StatusScreen: ; 12953 (4:6953)
 	call LoadMonData
@@ -32024,7 +31999,7 @@ Func_12ccb: ; 12ccb (4:6ccb)
 	dec c
 	jr nz, Func_12ccb
 	ret
-; 12cd2 (4:6cd2)
+
 ; [$D07D] = menu type / message ID
 ; if less than $F0, it is a menu type
 ; menu types:
@@ -32392,7 +32367,7 @@ Func_13074: ; 13074 (4:7074)
 	ld a, $2
 	ld [hl], a
 	ret
-; 13095 (4:7095)
+
 StartMenu_Pokedex: ; 13095 (4:7095)
 	ld a,$29
 	call Predef
@@ -33308,7 +33283,6 @@ TMToMove: ; 13763 (4:7763)
 	ld a, [hl]
 	ld [$d11e], a
 	ret
-; 13773 (4:7773)
 
 TechnicalMachines: ; 13773 (4:7773)
 	db MEGA_PUNCH
@@ -33669,7 +33643,7 @@ Func_13a58: ; 13a58 (4:7a58)
 	ld de, $d04a
 	ld bc, $d
 	jp CopyData
-; 13a8f (4:7a8f)
+
 GenRandom_: ; 13a8f (4:7a8f)
 ; generate a random 16-bit integer and store it at $FFD3,$FFD4
 	ld a,[rDIV]
@@ -33777,7 +33751,7 @@ LoadPokedexTilePatterns: ; 17840 (5:7840)
 	ld de,PokeballTileGraphics ; $697e
 	ld hl,$9720
 	ld bc,(BANK(PokeballTileGraphics) << 8) + $01
-	jp CopyVideoData ; load pokeball tile for marking cought mons
+	jp CopyVideoData ; load pokeball tile for marking caught mons
 
 ; Loads tile patterns for map's sprites.
 ; For outside maps, it loads one of several fixed sets of sprites.
@@ -34856,7 +34830,7 @@ Func_17d7d: ; 17d7d (5:7d7d)
 	xor a
 	ld [W_ISLINKBATTLE], a ; $d12b
 	jp Func_2307
-; 17dad (5:7dad)
+
 SubstituteEffectHandler: ; 17dad (5:7dad)
 	ld c, 50
 	call DelayFrames		
@@ -35672,7 +35646,7 @@ Func_18e36: ; 18e36 (6:4e36)
 	ld [H_NEWLYPRESSEDBUTTONS], a
 	ld [H_CURRENTPRESSEDBUTTONS], a
 	ret
-; 18e5b (6:4e5b)
+
 PalletTownScript: ; 18e5b (6:4e5b)
 	ld a,[$D74B]
 	bit 4,a
@@ -44517,63 +44491,51 @@ StatsCancelPCText: ; 217dc (8:57dc)
 
 SwitchOnText: ; 0x217e9
 	TX_FAR _SwitchOnText
-	db $50
-; 0x217e9 + 5 bytes
+	db "@"
 
 WhatText: ; 0x217ee
 	TX_FAR _WhatText
-	db $50
-; 0x217ee + 5 bytes
+	db "@"
 
 DepositWhichMonText: ; 0x217f3
 	TX_FAR _DepositWhichMonText
-	db $50
-; 0x217f3 + 5 bytes
+	db "@"
 
 MonWasStoredText: ; 0x217f8
 	TX_FAR _MonWasStoredText
-	db $50
-; 0x217f8 + 5 bytes
+	db "@"
 
 CantDepositLastMonText: ; 0x217fd
 	TX_FAR _CantDepositLastMonText
-	db $50
-; 0x217fd + 5 bytes
+	db "@"
 
 BoxFullText: ; 0x21802
 	TX_FAR _BoxFullText
-	db $50
-; 0x21802 + 5 bytes
+	db "@"
 
 MonIsTakenOutText: ; 0x21807
 	TX_FAR _MonIsTakenOutText
-	db $50
-; 0x21807 + 5 bytes
+	db "@"
 
 NoMonText: ; 0x2180c
 	TX_FAR _NoMonText
-	db $50
-; 0x2180c + 5 bytes
+	db "@"
 
 CantTakeMonText: ; 0x21811
 	TX_FAR _CantTakeMonText
-	db $50
-; 0x21811 + 5 bytes
+	db "@"
 
 ReleaseWhichMonText: ; 0x21816
 	TX_FAR _ReleaseWhichMonText
-	db $50
-; 0x21816 + 5 bytes
+	db "@"
 
 OnceReleasedText: ; 0x2181b
 	TX_FAR _OnceReleasedText
-	db $50
-; 0x2181b + 5 bytes
+	db "@"
 
 MonWasReleasedText: ; 0x21820
 	TX_FAR _MonWasReleasedText
-	db $50
-; 0x21820 + 5 bytes
+	db "@"
 
 	ld a, [$ff00+$aa]
 	cp $1
@@ -60059,7 +60021,6 @@ FaintEnemyPokemon ; 0x3c567
 EnemyMonFainted: ; 0x3c63e
 	TX_FAR _EnemyMonFainted
 	db "@"
-; 0x3c63e + 5 bytes
 
 Func_3c643: ; 3c643 (f:4643)
 	xor a
@@ -67469,7 +67430,7 @@ Func_3fbbc: ; 3fbbc (f:7bbc)
 	pop de
 	pop hl
 	ret
-; 3fbc8 (f:7bc8)
+
 SECTION "bank10",ROMX,BANK[$10]
 
 DisplayPokedexMenu_: ; 40000 (10:4000)
@@ -111184,8 +111145,6 @@ TechnicalMachinePrices: ; 7bfa7 (1e:7fa7)
 	db $55, $52, $54, $52, $41
 	db $21, $12, $42, $25, $24
 	db $22, $52, $24, $34, $42
-; 7bfc0
-
 
 SECTION "bank1F",ROMX,BANK[$1F]
 
@@ -116938,7 +116897,6 @@ _MonWasStoredText: ; 0x8a159
 	db "stored in Box @"
 	TX_RAM $cd3d
 	db $0, ".", $58
-; 30 bytes
 
 _CantDepositLastMonText: ; 0x8a177
 	db $0, "You can't deposit", $4f
@@ -117022,7 +116980,6 @@ _OopsYouDontHaveEnoughRoomText: ; 8a329 (22:6329)
 
 _OhFineThenText: ; 8a34c (22:634c)
 	db 0,"Oh, fine then.@@"
-;635d
 
 _UnnamedText_1e93b: ; 8a35d (22:635d)
 	db $0, "Want to get your", $4f
