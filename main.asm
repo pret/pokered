@@ -29664,6 +29664,8 @@ Func_f113: ; f113 (3:7113)
 	add hl, bc
 	ld a, [hli]                ; load missable objects pointer in hl
 	ld h, [hl]
+
+Func_f132: ; f132 (3:7132)
 	ld l, a
 	push hl
 	ld de, MapHS00             ; calculate difference between out pointer and the base pointer
@@ -31035,6 +31037,7 @@ Func_f929: ; f929 (3:7929)
 	ld [$FF00+$9d], a
 	ret
 
+Unknown_f9a0: ; f9a0 (3:79a0)
 INCBIN "baserom.gbc",$f9a0,$f9dc - $f9a0
 
 Func_f9dc: ; f9dc (3:79dc)
@@ -47714,6 +47717,7 @@ IF _BLUE
 	INCBIN "gfx/blue/slotmachine1.2bpp"
 ENDC
 
+Unknown_37ca1: ; 37ca1 (d:7ca1)
 INCBIN "baserom.gbc",$37ca1,$37d41 - $37ca1
 
 _Multiply: ; 37d41 (d:7d41)
@@ -69568,10 +69572,12 @@ Func_410e2: ; 410e2 (10:50e2)
 	ld a, [$cd3e]
 	ld [$cd5f], a
 	ld de, Unknown_41138 ; $5138
-	jr .asm_41102
+	jr Func_41102
 
+Unknown_410f3: ; 410f3 (10:50f3)
 INCBIN "baserom.gbc",$410f3,$41102 - $410f3
-.asm_41102
+
+Func_41102: ; 41102 (10:5102)
 	ld a, [W_OPTIONS] ; $d355
 	push af
 	ld a, [$FF00+$af]
@@ -79102,109 +79108,116 @@ PredefPointers: ; 4fe79 (13:7e79)
 	db BANK(LoadMonBackSprite) ; dbw macro gives an error for some reason
 	dw LoadMonBackSprite
 	dbw BANK(Func_79aba),Func_79aba
-	dbw $03,$7132
+	dbw BANK(Func_f132),Func_f132
 HealPartyPredef: ; 4fe8e (13:7e8e)
 	dbw BANK(HealParty),HealParty
 MoveAnimationPredef: ; 4fe91 (13:7e91)
 	dbw BANK(MoveAnimation),MoveAnimation; 08 play move animation
 	dbw BANK(Func_f71e),Func_f71e
 	dbw BANK(Func_f71e),Func_f71e
-	dbw $03,$781D
-	dbw $03,$7836
+	dbw BANK(Func_f81d),Func_f81d
+	dbw BANK(Func_f836),Func_f836
 	dbw BANK(Func_f71e),Func_f71e
 	dbw BANK(Func_f71e),Func_f71e
 	db BANK(InitializePlayerData)
     dw InitializePlayerData
-	dbw $03,$7666
-	dbw $03,$71D7
-	dbw $03,$71A6
-	dbw $03,$469C
-	dbw $0F,$4A83
-	dbw $03,$71C8
-	dbw $03,$71C8
-	dbw $03,$6E9E
+	dbw BANK(HandleBitArray),HandleBitArray
+	db BANK(RemoveMissableObject)
+	dw RemoveMissableObject
+	db BANK(IsMissableObjectHidden)
+	dw IsMissableObjectHidden
+	dbw BANK(Func_c69c),Func_c69c
+	db BANK(AnyPokemonAliveCheck)
+	dw AnyPokemonAliveCheck
+	db BANK(AddMissableObject)
+	dw AddMissableObject
+	db BANK(AddMissableObject)
+	dw AddMissableObject
+	dbw BANK(Func_ee9e),Func_ee9e
 	db BANK(InitializePlayerData)
     dw InitializePlayerData
-	dbw $03,$4754
-	dbw $0E,$6F5B
-	dbw $01,$6E43
-	dbw $03,$78A5; 1C, used in Pokémon Tower
-	dbw $03,$3EB5
-	dbw $03,$3E2E
-	dbw $12,$40EB
-	dbw $03,$78BA
-	dbw $12,$40FF
-	dbw $03,$7929
-	dbw $03,$79A0
-	dbw $12,$4125
-	dbw $03,$7A1D
-	dbw $03,$79DC
-	dbw $01,$5AB0
-	dbw $0F,$6D02
-	dbw $10,$4000
-	dbw $0E,$6D1C
-	dbw $1C,$778C
-	dbw $0F,$6F18
-	dbw $01,$5A5F
+	dbw BANK(Func_c754),Func_c754
+	dbw BANK(Func_3af5b),Func_3af5b
+	dbw BANK(Func_6e43),Func_6e43
+	dbw BANK(Func_f8a5),Func_f8a5; 1C, used in Pokémon Tower
+	dbw $03,Func_3eb5 ; for these two, the bank number is actually 0
+	dbw $03,GiveItem
+	dbw BANK(Func_480eb),Func_480eb
+	dbw BANK(Func_f8ba),Func_f8ba
+	dbw BANK(Func_480ff),Func_480ff
+	dbw BANK(Func_f929),Func_f929
+	dbw BANK(Unknown_f9a0),Unknown_f9a0
+	dbw BANK(Func_48125),Func_48125
+	dbw BANK(UpdateHPBar),UpdateHPBar
+	dbw BANK(Func_f9dc),Func_f9dc
+	dbw BANK(Unknown_5ab0),Unknown_5ab0
+	dbw BANK(Func_3ed02),Func_3ed02
+	db BANK(DisplayPokedexMenu_)
+	dw DisplayPokedexMenu_
+	dbw BANK(Func_3ad1c),Func_3ad1c
+	dbw BANK(SaveSAVtoSRAM0),SaveSAVtoSRAM0
+	dbw BANK(Func_3ef18),Func_3ef18
+	dbw BANK(Func_5a5f),Func_5a5f
 	dbw BANK(DrawBadges), DrawBadges
-	dbw $10,$50F3
-	dbw $1C,$496D
-	dbw $1E,$5DDA
-	dbw $10,$5682
-	dbw $1E,$5869
-	dbw $1C,$4B5D
-	dbw $03,$4586
-StatusScreenPredef: ; 4ff1b (13:7f1b)
+	dbw BANK(Unknown_410f3),Unknown_410f3
+	dbw BANK(Func_7096d),Func_7096d
+	dbw BANK(Func_79dda),Func_79dda
+	dbw BANK(PlayIntro),PlayIntro
+	dbw BANK(Unknown_79869),Unknown_79869
+	dbw BANK(Func_70b5d),Func_70b5d
+	dbw BANK(Func_c586),Func_c586
 	dbw BANK(StatusScreen),StatusScreen ; 37 0x12953
-StatusSceren2Predef: ; 4ff1e (13:7f1e)
 	dbw BANK(StatusScreen2),StatusScreen2 ; 38
-	dbw $10,$50E2
-	dbw $15,$690F
-	dbw $10,$5010
-Predef3BPredef: ; 4ff2a (13:7f2a)
+	dbw BANK(Func_410e2),Func_410e2
+	db BANK(CheckEngagePlayer)
+	dw CheckEngagePlayer
+	dbw BANK(IndexToPokedex),IndexToPokedex
 	dbw BANK(Predef3B),Predef3B; 3B display pic?
-	dbw $03,$6F54
-	dbw $10,$42D1
-	dbw $0E,$6FB8
-	dbw $1C,$770A
-	dbw $1C,$602B
-	dbw $03,$7113
-	dbw $17,$5B5E
-	dbw $04,$773E
-	dbw $04,$7763
-	dbw $1C,$5DDF
-	dbw $17,$40DC; 46 load dex screen
-	dbw $03,$72E5
-	dbw $03,$7A1D
-	dbw $0F,$4DEC
-	dbw $1C,$4F60
-	dbw $09,$7D6B
-	dbw $05,$7C47; 4C player exclamation
-	dbw $01,$5AAF; return immediately
-	dbw $01,$64EB
-	dbw $0D,$7CA1
-	dbw $1C,$780F
-	dbw $1C,$76BD
-	dbw $1C,$75E8
-	dbw $1C,$77E2
-Predef54Predef: ; 4ff75 (13:7f75)
+	dbw BANK(Func_ef54),Func_ef54
+	dbw BANK(ShowPokedexData),ShowPokedexData
+	dbw BANK(WriteMonMoves),WriteMonMoves
+	dbw BANK(SaveSAV),SaveSAV
+	dbw BANK(Func_7202b),Func_7202b
+	dbw BANK(Func_f113),Func_f113
+	dbw BANK(SetPartyMonTypes),SetPartyMonTypes
+	db BANK(TestMonMoveCompatibility)
+	dw TestMonMoveCompatibility
+	dbw BANK(TMToMove),TMToMove
+	dbw BANK(Func_71ddf),Func_71ddf
+	dbw BANK(Func_5c0dc),Func_5c0dc; 46 load dex screen
+	db BANK(_AddPokemonToParty)
+	dw _AddPokemonToParty
+	dbw BANK(UpdateHPBar),UpdateHPBar
+	dbw BANK(Func_3cdec),Func_3cdec
+	dbw BANK(Func_70f60),Func_70f60
+	dbw BANK(Func_27d6b),Func_27d6b
+	dbw BANK(Func_17c47),Func_17c47; 4C player exclamation
+	dbw BANK(Func_5aaf),Func_5aaf; return immediately
+	db BANK(AskForMonNickname)
+	dw AskForMonNickname
+	dbw BANK(Unknown_37ca1),Unknown_37ca1
+	dbw BANK(SaveSAVtoSRAM2),SaveSAVtoSRAM2
+	dbw BANK(LoadSAVCheckSum2),LoadSAVCheckSum2
+	dbw BANK(LoadSAV),LoadSAV
+	dbw BANK(SaveSAVtoSRAM1),SaveSAVtoSRAM1
 	dbw BANK(Predef54),Predef54 ; 54 initiate trade
-	dbw $1D,$405C
-	dbw $11,$4169
-	dbw $1E,$45BA
-	dbw $1E,$4510
-	dbw $03,$45BE
-	dbw $03,$460B
-	dbw $03,$4D99
-	dbw $01,$4DE1
-	dbw $09,$7D98
-LoadMovePPsPredef:
+	dbw BANK(Func_7405c),Func_7405c
+	dbw BANK(DisplayDexRating),DisplayDexRating
+	db $1E ; uses wrong bank number
+	dw _DoFlyOrTeleportAwayGraphics
+	db $1E ; uses wrong bank number
+	dw Func_70510
+	dbw BANK(Func_c5be),Func_c5be
+	dbw BANK(Func_c60b),Func_c60b
+	dbw BANK(Func_cd99),Func_cd99
+	dbw BANK(PickupItem),PickupItem
+	dbw BANK(Func_27d98),Func_27d98
 	dbw BANK(LoadMovePPs),LoadMovePPs
 DrawHPBarPredef: ; 4ff96 (13:7f96)
-	dbw $04,$68EF ; 5F draw HP bar
-	dbw $04,$68F6
-	dbw $07,$49C6
-	dbw $16,$5035
+	dbw BANK(Func_128ef),Func_128ef ; 5F draw HP bar
+	dbw BANK(Func_128f6),Func_128f6
+	dbw BANK(Func_1c9c6),Func_1c9c6
+	dbw BANK(Func_59035),Func_59035
 
 SECTION "bank14",ROMX,BANK[$14]
 
@@ -110207,6 +110220,7 @@ Func_79862: ; 79862 (1e:5862)
 	jr nz, Func_79862
 	ret
 
+Unknown_79869: ; 79869 (1e:5869)
 INCBIN "baserom.gbc",$79869,$7986f - $79869
 
 Func586F: ; 7986f (1e:586f)
