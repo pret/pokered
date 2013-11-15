@@ -13798,7 +13798,7 @@ Func_5a5f: ; 5a5f (1:5a5f)
 Func_5aaf: ; 5aaf (1:5aaf)
 	ret
 
-Unknown_5ab0:
+Func_5ab0:
 	call Load16BitRegisters
 
 Func_5ab3: ; 5ab3 (1:5ab3)
@@ -31037,8 +31037,48 @@ Func_f929: ; f929 (3:7929)
 	ld [$FF00+$9d], a
 	ret
 
-Unknown_f9a0: ; f9a0 (3:79a0)
-INCBIN "baserom.gbc",$f9a0,$f9dc - $f9a0
+Func_f9a0: ; f9a0 (3:79a0)
+	ld a, [$ff95]
+	ld [$cd37], a
+	dec a
+	ld de, $ccd3
+	ld hl, $cc97
+	add l
+	ld l, a
+	jr nc, .asm_f9b1
+	inc h
+.asm_f9b1
+	ld a, [hld]
+	call Func_f9bf
+	ld [de], a
+	inc de
+	ld a, [$ff95]
+	dec a
+	ld [$ff95], a
+	jr nz, .asm_f9b1
+	ret
+
+Func_f9bf: ; f9bf (3:79bf)
+	push hl
+	ld b, a
+	ld hl, Unknown_f9d2
+.asm_f9c4
+	ld a, [hli]
+	cp $ff
+	jr z, .asm_f9d0
+	cp b
+	jr z, .asm_f9cf
+	inc hl
+	jr .asm_f9c4
+.asm_f9cf
+	ld a, [hl]
+.asm_f9d0
+	pop hl
+	ret
+
+Unknown_f9d2: ; f9d2 (3:79d2)
+	;db $40, $40, $00, $80, $80, $20, $c0, $10, $ff, $c9
+INCBIN "baserom.gbc",$f9d2,$f9dc - $f9d2
 
 Func_f9dc: ; f9dc (3:79dc)
 	call Load16BitRegisters
@@ -47717,8 +47757,58 @@ IF _BLUE
 	INCBIN "gfx/blue/slotmachine1.2bpp"
 ENDC
 
-Unknown_37ca1: ; 37ca1 (d:7ca1)
-INCBIN "baserom.gbc",$37ca1,$37d41 - $37ca1
+Func_37ca1: ; 37ca1 (d:7ca1)
+	ld hl, $ccd3
+	ld a, [$cd38]
+	dec a
+	ld [$cd38], a
+	ld d, $0
+	ld e, a
+	add hl, de
+	ld d, h
+	ld e, l
+	ld hl, Unknown_37ce6
+	ld a, [$d12f]
+	add a
+	ld b, $0
+	ld c, a
+	add hl, bc
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	ld a, [W_YCOORD]
+	ld b, a
+	ld a, [W_XCOORD]
+	ld c, a
+.asm_37cc7
+	ld a, [hli]
+	cp b
+	jr nz, .asm_37ce1
+	ld a, [hli]
+	cp c
+	jr nz, .asm_37ce2
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+.asm_37cd2
+	ld a, [hli]
+	cp $ff
+	ret z
+	ld [de], a
+	inc de
+	ld a, [$cd38]
+	inc a
+	ld [$cd38], a
+	jr .asm_37cd2
+.asm_37ce1
+	inc hl
+.asm_37ce2
+	inc hl
+	inc hl
+	jr .asm_37cc7
+
+Unknown_37ce6: ; 37ce6 (d:7ce6)
+INCBIN "baserom.gbc",$37ce6,$37d41 - $37ce6
 
 _Multiply: ; 37d41 (d:7d41)
 	ld a, $8
@@ -69567,15 +69657,19 @@ PokedexOrder: ; 41024 (10:5024)
 	db DEX_VICTREEBEL
 
 Func_410e2: ; 410e2 (10:50e2)
-	ld a, [W_WHICHTRADE] ; $cd3d
+	ld a, [W_TRAINERSPRITEOFFSET] ; $cd3d
 	ld [$cd5e], a
-	ld a, [$cd3e]
+	ld a, [W_TRAINERENGAGEDISTANCE]
 	ld [$cd5f], a
 	ld de, Unknown_41138 ; $5138
 	jr Func_41102
 
-Unknown_410f3: ; 410f3 (10:50f3)
-INCBIN "baserom.gbc",$410f3,$41102 - $410f3
+Func_410f3: ; 410f3 (10:50f3)
+	ld a, [W_TRAINERENGAGEDISTANCE]
+	ld [$cd5e], a
+	ld a, [W_TRAINERSPRITEOFFSET]
+	ld [$cd5f], a
+	ld de, Unknown_41149
 
 Func_41102: ; 41102 (10:5102)
 	ld a, [W_OPTIONS] ; $d355
@@ -69617,7 +69711,10 @@ Func_41102: ; 41102 (10:5102)
 	ret
 
 Unknown_41138: ; 41138 (10:5138)
-INCBIN "baserom.gbc",$41138,$4115f - $41138
+INCBIN "baserom.gbc",$41138,$41149 - $41138
+
+Unknown_41149: ; 41149 (10:5149)
+INCBIN "baserom.gbc",$41149,$4115f - $41149
 
 Unknown_4115f: ; 4115f (10:515f)
 INCBIN "baserom.gbc",$4115f,$41181 - $4115f
@@ -79146,11 +79243,11 @@ MoveAnimationPredef: ; 4fe91 (13:7e91)
 	dbw BANK(Func_f8ba),Func_f8ba
 	dbw BANK(Func_480ff),Func_480ff
 	dbw BANK(Func_f929),Func_f929
-	dbw BANK(Unknown_f9a0),Unknown_f9a0
+	dbw BANK(Func_f9a0),Func_f9a0
 	dbw BANK(Func_48125),Func_48125
 	dbw BANK(UpdateHPBar),UpdateHPBar
 	dbw BANK(Func_f9dc),Func_f9dc
-	dbw BANK(Unknown_5ab0),Unknown_5ab0
+	dbw BANK(Func_5ab0),Func_5ab0
 	dbw BANK(Func_3ed02),Func_3ed02
 	db BANK(DisplayPokedexMenu_)
 	dw DisplayPokedexMenu_
@@ -79159,11 +79256,11 @@ MoveAnimationPredef: ; 4fe91 (13:7e91)
 	dbw BANK(Func_3ef18),Func_3ef18
 	dbw BANK(Func_5a5f),Func_5a5f
 	dbw BANK(DrawBadges), DrawBadges
-	dbw BANK(Unknown_410f3),Unknown_410f3
+	dbw BANK(Func_410f3),Func_410f3
 	dbw BANK(Func_7096d),Func_7096d
 	dbw BANK(Func_79dda),Func_79dda
 	dbw BANK(PlayIntro),PlayIntro
-	dbw BANK(Unknown_79869),Unknown_79869
+	dbw BANK(Func_79869),Func_79869
 	dbw BANK(Func_70b5d),Func_70b5d
 	dbw BANK(Func_c586),Func_c586
 	dbw BANK(StatusScreen),StatusScreen ; 37 0x12953
@@ -79195,7 +79292,7 @@ MoveAnimationPredef: ; 4fe91 (13:7e91)
 	dbw BANK(Func_5aaf),Func_5aaf; return immediately
 	db BANK(AskForMonNickname)
 	dw AskForMonNickname
-	dbw BANK(Unknown_37ca1),Unknown_37ca1
+	dbw BANK(Func_37ca1),Func_37ca1
 	dbw BANK(SaveSAVtoSRAM2),SaveSAVtoSRAM2
 	dbw BANK(LoadSAVCheckSum2),LoadSAVCheckSum2
 	dbw BANK(LoadSAV),LoadSAV
@@ -110220,8 +110317,11 @@ Func_79862: ; 79862 (1e:5862)
 	jr nz, Func_79862
 	ret
 
-Unknown_79869: ; 79869 (1e:5869)
-INCBIN "baserom.gbc",$79869,$7986f - $79869
+Func_79869: ; 79869 (1e:5869)
+	ld a, b
+	call Func586F
+	ld b, a
+	ret
 
 Func586F: ; 7986f (1e:586f)
 	ld hl,MoveSoundTable
