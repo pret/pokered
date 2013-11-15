@@ -11970,7 +11970,35 @@ Func_4d72: ; 4d72 (1:4d72)
 DiagonalLines: ; 4d85 (1:4d85)
 	INCBIN "gfx/diagonal_lines.2bpp"
 
-INCBIN "baserom.gbc",$4da5,$4de1 - $4da5
+INCBIN "baserom.gbc",$4da5,$4da6 - $4da5
+
+Func_4da6: ; 4da6 (1:4da6)
+	call GBPalNormal
+	ld a, $80
+	ld [W_OBTAINEDBADGES], a
+	ld hl, W_FLAGS_D733
+	set 0, [hl]
+	ld hl, W_NUMINPARTY
+	xor a
+	ld [hli], a
+	dec a
+	ld [hl], a
+	ld a, $1
+	ld [$cf91], a
+	ld a, $14
+	ld [W_CURENEMYLVL], a
+	xor a
+	ld [$cc49], a
+	ld [W_CURMAP], a
+	call AddPokemonToParty
+	ld a, $1
+	ld [W_CUROPPONENT], a
+	ld a, $2c
+	call Predef
+	ld a, $1
+	ld [$cfcb], a
+	ld [H_AUTOBGTRANSFERENABLED], a
+	jr Func_4da6
 
 PickupItem: ; 4de1 (1:4de1)
 	call EnableAutoTextBoxDrawing
@@ -12115,7 +12143,16 @@ UpdatePlayerSprite: ; 4e31 (1:4e31)
 	ld [$c207], a
 	ret
 
-INCBIN "baserom.gbc",$4ec7,$4ed1 - $4ec7
+Func_4ec7: ; 4ec7 (1:4ec7)
+	push bc
+	push af
+	ld a, [$ffda]
+	ld c, a
+	pop af
+	add c
+	ld l, a
+	pop bc
+	ret
 
 Func_4ed1: ; 4ed1 (1:4ed1)
 	ld a, [H_CURRENTSPRITEOFFSET]
@@ -14215,7 +14252,31 @@ Func_5db5: ; 5db5 (1:5db5)
 	ld c, $1e
 	jp DelayFrames
 
-INCBIN "baserom.gbc",$5def,$5e2f - $5def
+Func_5def: ; 5def (1:5def)
+	xor a
+	ld [H_AUTOBGTRANSFERENABLED], a
+	ld hl, $c3a4
+	ld b, $8
+	ld c, $e
+	call TextBoxBorder
+	call LoadTextBoxTilePatterns
+	call UpdateSprites
+	ld hl, $c3cd
+	ld de, SaveScreenInfoText
+	call PlaceString
+	ld hl, $c3d4
+	ld de, W_PLAYERNAME
+	call PlaceString
+	ld hl, $c401
+	call Func_5e2f
+	ld hl, $c428
+	call Func_5e42
+	ld hl, $c44d
+	call Func_5e55
+	ld a, $1
+	ld [H_AUTOBGTRANSFERENABLED], a
+	ld c, $1e
+	jp DelayFrames
 
 Func_5e2f: ; 5e2f (1:5e2f)
 	push hl
@@ -15012,7 +15073,22 @@ Map0fFlyWarp: ; 64be (1:64be)
 Map15FlyWarp: ; 64c4 (1:64c4)
 	FLYWARP_DATA 10,20,11
 
-INCBIN "baserom.gbc",$64ca,$64ea - $64ca
+Func_64ca: ; 64ca (1:64ca)
+	ld de, Unknown_64df
+.asm_64cd
+	ld a, [de]
+	cp $ff
+	ret z
+	ld [$cf91], a
+	inc de
+	ld a, [de]
+	ld [W_CURENEMYLVL], a
+	inc de
+	call AddPokemonToParty
+	jr .asm_64cd
+
+Unknown_64df: ; 64df (1:64df)
+INCBIN "baserom.gbc",$64df,$64ea - $64df
 
 Func_64ea: ; 64ea (1:64ea)
 	ret
@@ -15071,7 +15147,7 @@ AskForMonNickname: ; 64eb (1:64eb)
 
 DoYouWantToNicknameText: ; 0x6557
 	TX_FAR _DoYouWantToNicknameText
-	db $50
+	db "@"
 
 Func_655c: ; 655c (1:655c)
 	ld hl, $cee9
@@ -15141,10 +15217,12 @@ Func_6596: ; 6596 (1:6596)
 .asm_65ed
 	call Func_676f
 	call GBPalNormal
+.asm_65f3
 	ld a, [$ceea]
 	and a
 	jr nz, .asm_662d
 	call Func_680e
+.asm_65fc
 	call PlaceMenuCursor
 .asm_65ff
 	ld a, [W_CURMENUITEMID] ; $cc26
@@ -15158,7 +15236,7 @@ Func_6596: ; 6596 (1:6596)
 	ld a, [H_NEWLYPRESSEDBUTTONS]
 	and a
 	jr z, .asm_65ff
-	ld hl, .unknown_665e ; $665e
+	ld hl, .unknownPointerTable_665e ; $665e
 .asm_661a
 	sla a
 	jr c, .asm_6624
@@ -15198,13 +15276,29 @@ Func_6596: ; 6596 (1:6596)
 	ld b, BANK(Func_3ee5b)
 	jp Bankswitch ; indirect jump to Func_3ee5b (3ee5b (f:6e5b))
 
-.unknown_665e: ; 665e (1:665e)
-INCBIN "baserom.gbc",$665e,$667e - $665e
+.unknownPointerTable_665e: ; 665e (1:665e)
+	dw .asm_65fc
+	dw .asm_673e
+	dw .asm_65fc
+	dw .asm_672c
+	dw .asm_65fc
+	dw .asm_6718
+	dw .asm_65fc
+	dw .asm_6702
+	dw .asm_65f3
+	dw .asm_668c
+	dw .asm_65ed
+	dw .asm_6683
+	dw .asm_65f3
+	dw .asm_66f6
+	dw .asm_65f3
+	dw .asm_6692
 
 .asm_667e
 	pop de
 	ld de, .asm_65ed ; $65ed
 	push de
+.asm_6683
 	ld a, [$ceeb]
 	xor $1
 	ld [$ceeb], a
@@ -15213,6 +15307,7 @@ INCBIN "baserom.gbc",$665e,$667e - $665e
 	ld a, $1
 	ld [$ceea], a
 	ret
+.asm_6692
 	ld a, [W_CURMENUITEMID] ; $cc26
 	cp $5
 	jr nz, .asm_66a0
@@ -15267,6 +15362,7 @@ INCBIN "baserom.gbc",$665e,$667e - $665e
 	ld a, $90
 	call PlaySound
 	ret
+.asm_66f6
 	ld a, [$cee9]
 	and a
 	ret z
@@ -15274,31 +15370,32 @@ INCBIN "baserom.gbc",$665e,$667e - $665e
 	dec hl
 	ld [hl], $50
 	ret
+.asm_6702
 	ld a, [W_CURMENUITEMID] ; $cc26
 	cp $6
 	ret z
 	ld a, [W_TOPMENUITEMX] ; $cc25
 	cp $11
-	jp z, Func_6714
+	jp z, .asm_6714
 	inc a
 	inc a
-	jr asm_6755
-
-Func_6714: ; 6714 (1:6714)
+	jr .asm_6755
+.asm_6714
 	ld a, $1
-	jr asm_6755
+	jr .asm_6755
+.asm_6718
 	ld a, [W_CURMENUITEMID] ; $cc26
 	cp $6
 	ret z
 	ld a, [W_TOPMENUITEMX] ; $cc25
 	dec a
-	jp z, Func_6728
+	jp z, .asm_6728
 	dec a
-	jr asm_6755
-
-Func_6728: ; 6728 (1:6728)
+	jr .asm_6755
+.asm_6728
 	ld a, $11
-	jr asm_6755
+	jr .asm_6755
+.asm_672c
 	ld a, [W_CURMENUITEMID] ; $cc26
 	dec a
 	ld [W_CURMENUITEMID], a ; $cc26
@@ -15307,7 +15404,8 @@ Func_6728: ; 6728 (1:6728)
 	ld a, $6
 	ld [W_CURMENUITEMID], a ; $cc26
 	ld a, $1
-	jr asm_6755
+	jr .asm_6755
+.asm_673e
 	ld a, [W_CURMENUITEMID] ; $cc26
 	inc a
 	ld [W_CURMENUITEMID], a ; $cc26
@@ -15315,23 +15413,23 @@ Func_6728: ; 6728 (1:6728)
 	jr nz, .asm_6750
 	ld a, $1
 	ld [W_CURMENUITEMID], a ; $cc26
-	jr asm_6755
+	jr .asm_6755
 .asm_6750
 	cp $6
 	ret nz
 	ld a, $1
-asm_6755: ; 6755 (1:6755)
+.asm_6755
 	ld [W_TOPMENUITEMX], a ; $cc25
 	jp EraseMenuCursor
 
 Func_675b: ; 675b (1:675b)
-	ld de, Unknown_6767 ; $6767
+	ld de, ED_Tile
 	ld hl, $8f00
 	ld bc, $1
 	jp CopyVideoDataDouble
 
-Unknown_6767: ; 6767 (1:6767)
-INCBIN "baserom.gbc",$6767,$676f - $6767
+ED_Tile: ; 6767 (1:6767)
+	INCBIN "gfx/ED_tile.1bpp"
 
 Func_676f: ; 676f (1:676f)
 	xor a
@@ -34791,14 +34889,14 @@ Func_17c47: ; 17c47 (5:7c47)
 	ld a, [$cd50]
 	ld c, a
 	ld b, $0
-	ld hl, Unknown_17caf ; $7caf
+	ld hl, EmotionBubblesPointerTable ; $7caf
 	add hl, bc
 	add hl, bc
 	ld e, [hl]
 	inc hl
 	ld d, [hl]
 	ld hl, $8f80
-	ld bc, (BANK(Unknown_17caf) << 8) + $04
+	ld bc, (BANK(EmotionBubblesPointerTable) << 8) + $04
 	call CopyVideoData
 	ld a, [$cfcb]
 	push af
@@ -34834,7 +34932,7 @@ Func_17c47: ; 17c47 (5:7c47)
 	ld a, [hl]
 	add $8
 	ld c, a
-	ld de, EmotionBubbles ; $7cb5
+	ld de, EmotionBubblesOAM ; $7cb5
 	xor a
 	call WriteOAMBlock
 	ld c, $3c
@@ -34844,10 +34942,16 @@ Func_17c47: ; 17c47 (5:7c47)
 	call DelayFrame
 	jp UpdateSprites
 
-Unknown_17caf: ; 17caf (5:7caf)
-INCBIN "baserom.gbc",$17caf,$17cb5 - $17caf
+EmotionBubblesPointerTable: ; 17caf (5:7caf)
+	dw EmotionBubbles
+	dw EmotionBubbles + $40
+	dw EmotionBubbles + $80
 
-EmotionBubbles: ; 17cb5 (5:7cb5)
+EmotionBubblesOAM: ; 17cb5 (5:7cb5)
+	db $F8,$00,$F9,$00
+	db $FA,$00,$FB,$00
+
+EmotionBubbles: ; 17cbd (5:7cbd)
 	INCBIN "gfx/emotion_bubbles.2bpp"
 
 Func_17d7d: ; 17d7d (5:7d7d)
