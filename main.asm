@@ -71285,7 +71285,7 @@ Mansion1Script: ; 442af (11:42af)
 	call Mansion1Subscript1
 	call EnableAutoTextBoxDrawing
 	ld hl, Mansion1TrainerHeaders
-	ld de, Unknown_44326 ; $4326
+	ld de, Mansion1ScriptPointers
 	ld a, [W_MANSION1CURSCRIPT]
 	call ExecuteCurMapScriptInTable
 	ld [W_MANSION1CURSCRIPT], a
@@ -71330,10 +71330,20 @@ asm_44310: ; 44310 (11:4310)
 	call Predef ; indirect jump to Func_ee9e (ee9e (3:6e9e))
 	ret
 
-INCBIN "baserom.gbc",$44316,$44326 - $44316
+Func_44316: ; 44316 (11:4316)
+	ld a, [$c109]
+	cp $4
+	ret nz
+	xor a
+	ld [H_CURRENTPRESSEDBUTTONS], a
+	ld a, $4
+	ld [H_SPRITEHEIGHT], a
+	jp DisplayTextID
 
-Unknown_44326: ; 44326 (11:4326)
-INCBIN "baserom.gbc",$44326,$4432c - $44326
+Mansion1ScriptPointers: ; 44326 (11:4326)
+	dw CheckFightingMapTrainers
+	dw Func_324c
+	dw EndTrainerBattle
 
 Mansion1Texts: ; 4432c (11:432c)
 	dw Mansion1Text1, Predef5CText, Predef5CText, Mansion1Text4
@@ -71451,159 +71461,206 @@ RockTunnel1_h: ; 0x444d0 to 0x444dc (12 bytes) (bank=11) (id=82)
 
 RockTunnel1Script: ; 444dc (11:44dc)
 	call EnableAutoTextBoxDrawing
-	ld hl, Unnamed_44505 ; $4505
-	ld de, Unnamed_444ef ; $44ef
+	ld hl, RockTunnel1TrainerHeaders
+	ld de, RockTunnel1ScriptPointers
 	ld a, [W_ROCKTUNNEL1CURSCRIPT]
 	call ExecuteCurMapScriptInTable
 	ld [W_ROCKTUNNEL1CURSCRIPT], a
 	ret
 
-Unnamed_444ef: ; 444ef (11:44ef)
-INCBIN "baserom.gbc",$444ef,$444f5 - $444ef
+RockTunnel1ScriptPointers: ; 444ef (11:44ef)
+	dw CheckFightingMapTrainers
+	dw Func_324c
+	dw EndTrainerBattle
 
 RockTunnel1Texts: ; 444f5 (11:44f5)
 	dw RockTunnel1Text1, RockTunnel1Text2, RockTunnel1Text3, RockTunnel1Text4, RockTunnel1Text5, RockTunnel1Text6, RockTunnel1Text7, RockTunnel1Text8
 
-Unnamed_44505: ; 44505 (11:4505)
-INCBIN "baserom.gbc",$44505,$44511 - $44505
+RockTunnel1TrainerHeaders: ; 44505 (11:4505)
+RockTunnel1TrainerHeader1: ; 44505 (11:4505)
+	db $1 ; flag's bit
+	db ($4 << 4) ; trainer's view range
+	dw $d7d2 ; flag's byte
+	dw RockTunnel1BattleText1 ; 0x4588 TextBeforeBattle
+	dw RockTunnel1AfterBattleText1 ; 0x4592 TextAfterBattle
+	dw RockTunnel1EndBattleText1 ; 0x458d TextEndBattle
+	dw RockTunnel1EndBattleText1 ; 0x458d TextEndBattle
 
-Unknown_44511: ; 44511 (11:4511)
-INCBIN "baserom.gbc",$44511,$4451d - $44511
+RockTunnel1TrainerHeader2: ; 44511 (11:4511)
+	db $2 ; flag's bit
+	db ($4 << 4) ; trainer's view range
+	dw $d7d2 ; flag's byte
+	dw RockTunnel1BattleText2 ; 0x4597 TextBeforeBattle
+	dw RockTunnel1AfterBattleText2 ; 0x45a1 TextAfterBattle
+	dw RockTunnel1EndBattleText2 ; 0x459c TextEndBattle
+	dw RockTunnel1EndBattleText2 ; 0x459c TextEndBattle
 
-Unknown_4451d: ; 4451d (11:451d)
-INCBIN "baserom.gbc",$4451d,$44529 - $4451d
+RockTunnel1TrainerHeader3: ; 4451d (11:451d)
+	db $3 ; flag's bit
+	db ($3 << 4) ; trainer's view range
+	dw $d7d2 ; flag's byte
+	dw RockTunnel1BattleText3 ; 0x45a6 TextBeforeBattle
+	dw RockTunnel1AfterBattleText3 ; 0x45b0 TextAfterBattle
+	dw RockTunnel1EndBattleText3 ; 0x45ab TextEndBattle
+	dw RockTunnel1EndBattleText3 ; 0x45ab TextEndBattle
 
-Unknown_44529: ; 44529 (11:4529)
-INCBIN "baserom.gbc",$44529,$44535 - $44529
+RockTunnel1TrainerHeader4: ; 44529 (11:4529)
+	db $4 ; flag's bit
+	db ($3 << 4) ; trainer's view range
+	dw $d7d2 ; flag's byte
+	dw RockTunnel1BattleText4 ; 0x45b5 TextBeforeBattle
+	dw RockTunnel1AfterBattleText4 ; 0x45bf TextAfterBattle
+	dw RockTunnel1EndBattleText4 ; 0x45ba TextEndBattle
+	dw RockTunnel1EndBattleText4; 0x45ba TextEndBattle
 
-Unknown_44535: ; 44535 (11:4535)
-INCBIN "baserom.gbc",$44535,$44541 - $44535
+RockTunnel1TrainerHeader5: ; 44535 (11:4535)
+	db $5 ; flag's bit
+	db ($4 << 4) ; trainer's view range
+	dw $d7d2 ; flag's byte
+	dw RockTunnel1BattleText5 ; 0x45c4 TextBeforeBattle
+	dw RockTunnel1AfterBattleText5 ; 0x45ce TextAfterBattle
+	dw RockTunnel1EndBattleText5 ; 0x45c9 TextEndBattle
+	dw RockTunnel1EndBattleText5 ; 0x45c9 TextEndBattle
 
-Unknown_44541: ; 44541 (11:4541)
-INCBIN "baserom.gbc",$44541,$4454d - $44541
+RockTunnel1TrainerHeader6: ; 44541 (11:4541)
+	db $6 ; flag's bit
+	db ($4 << 4) ; trainer's view range
+	dw $d7d2 ; flag's byte
+	dw RockTunnel1BattleText6 ; 0x45d3 TextBeforeBattle
+	dw RockTunnel1AfterBattleText6 ; 0x45dd TextAfterBattle
+	dw RockTunnel1EndBattleText6 ; 0x45d8 TextEndBattle
+	dw RockTunnel1EndBattleText6 ; 0x45d8 TextEndBattle
 
-Unknown_4454d: ; 4454d (11:454d)
-INCBIN "baserom.gbc",$4454d,$4455a - $4454d
+RockTunnel1TrainerHeader7: ; 4454d (11:454d)
+	db $7 ; flag's bit
+	db ($4 << 4) ; trainer's view range
+	dw $d7d2 ; flag's byte
+	dw RockTunnel1BattleText7; 0x45e2 TextBeforeBattle
+	dw RockTunnel1AfterBattleText7 ; 0x45ec TextAfterBattle
+	dw RockTunnel1EndBattleText7 ; 0x45e7 TextEndBattle
+	dw RockTunnel1EndBattleText7 ; 0x45e7 TextEndBattle
+
+db $ff
 
 RockTunnel1Text1: ; 4455a (11:455a)
 	db $8
-	ld hl, Unnamed_44505 ; $4505
+	ld hl, RockTunnel1TrainerHeader1 ; $4505
 	jr asm_0c916 ; 0x4455e $22
 
 RockTunnel1Text2: ; 44560 (11:4560)
 	db $8
-	ld hl, Unknown_44511 ; $4511
+	ld hl, RockTunnel1TrainerHeader2 ; $4511
 	jr asm_0c916 ; 0x44564 $1c
 
 RockTunnel1Text3: ; 44566 (11:4566)
 	db $8
-	ld hl, Unknown_4451d ; $451d
+	ld hl, RockTunnel1TrainerHeader3 ; $451d
 	jr asm_0c916 ; 0x4456a $16
 
 RockTunnel1Text4: ; 4456c (11:456c)
 	db $8
-	ld hl, Unknown_44529 ; $4529
+	ld hl, RockTunnel1TrainerHeader4 ; $4529
 	jr asm_0c916 ; 0x44570 $10
 
 RockTunnel1Text5: ; 44572 (11:4572)
 	db $8
-	ld hl, Unknown_44535 ; $4535
+	ld hl, RockTunnel1TrainerHeader5 ; $4535
 	jr asm_0c916 ; 0x44576 $a
 
 RockTunnel1Text6: ; 44578 (11:4578)
 	db $8
-	ld hl, Unknown_44541 ; $4541
+	ld hl, RockTunnel1TrainerHeader6 ; $4541
 	jr asm_0c916 ; 0x4457c $4
 
 RockTunnel1Text7: ; 4457e (11:457e)
 	db $8
-	ld hl, Unknown_4454d ; $454d
+	ld hl, RockTunnel1TrainerHeader7 ; $454d
 asm_0c916: ; 44582 (11:4582)
 	call TalkToTrainer
 	jp TextScriptEnd
 
-UnnamedText_44588: ; 44588 (11:4588)
-	TX_FAR _UnnamedText_44588
+RockTunnel1BattleText1: ; 44588 (11:4588)
+	TX_FAR _RockTunnel1BattleText1
 	db "@"
 
-UnnamedText_4458d: ; 4458d (11:458d)
-	TX_FAR _UnnamedText_4458d
+RockTunnel1EndBattleText1: ; 4458d (11:458d)
+	TX_FAR _RockTunnel1EndBattleText1
 	db "@"
 
-UnnamedText_44592: ; 44592 (11:4592)
-	TX_FAR _UnnamedText_44592
+RockTunnel1AfterBattleText1: ; 44592 (11:4592)
+	TX_FAR _RockTunnel1AfterBattleText1
 	db "@"
 
-UnnamedText_44597: ; 44597 (11:4597)
-	TX_FAR _UnnamedText_44597
+RockTunnel1BattleText2: ; 44597 (11:4597)
+	TX_FAR _RockTunnel1BattleText2
 	db "@"
 
-UnnamedText_4459c: ; 4459c (11:459c)
-	TX_FAR _UnnamedText_4459c
+RockTunnel1EndBattleText2: ; 4459c (11:459c)
+	TX_FAR _RockTunnel1EndBattleText2
 	db "@"
 
-UnnamedText_445a1: ; 445a1 (11:45a1)
-	TX_FAR _UnnamedText_445a1
+RockTunnel1AfterBattleText2: ; 445a1 (11:45a1)
+	TX_FAR _RockTunnel1AfterBattleText2
 	db "@"
 
-UnnamedText_445a6: ; 445a6 (11:45a6)
-	TX_FAR _UnnamedText_445a6
+RockTunnel1BattleText3: ; 445a6 (11:45a6)
+	TX_FAR _RockTunnel1BattleText3
 	db "@"
 
-UnnamedText_445ab: ; 445ab (11:45ab)
-	TX_FAR _UnnamedText_445ab
+RockTunnel1EndBattleText3: ; 445ab (11:45ab)
+	TX_FAR _RockTunnel1EndBattleText3
 	db "@"
 
-UnnamedText_445b0: ; 445b0 (11:45b0)
-	TX_FAR _UnnamedText_445b0
+RockTunnel1AfterBattleText3: ; 445b0 (11:45b0)
+	TX_FAR _RockTunnel1AfterBattleText3
 	db "@"
 
-UnnamedText_445b5: ; 445b5 (11:45b5)
-	TX_FAR _UnnamedText_445b5
+RockTunnel1BattleText4: ; 445b5 (11:45b5)
+	TX_FAR _RockTunnel1BattleText4
 	db "@"
 
-UnnamedText_445ba: ; 445ba (11:45ba)
-	TX_FAR _UnnamedText_445ba
+RockTunnel1EndBattleText4: ; 445ba (11:45ba)
+	TX_FAR _RockTunnel1EndBattleText4
 	db "@"
 
-UnnamedText_445bf: ; 445bf (11:45bf)
-	TX_FAR _UnnamedText_445bf
+RockTunnel1AfterBattleText4: ; 445bf (11:45bf)
+	TX_FAR _RockTunnel1AfterBattleText4
 	db "@"
 
-UnnamedText_445c4: ; 445c4 (11:45c4)
-	TX_FAR _UnnamedText_445c4
+RockTunnel1BattleText5: ; 445c4 (11:45c4)
+	TX_FAR _RockTunnel1BattleText5
 	db "@"
 
-UnnamedText_445c9: ; 445c9 (11:45c9)
-	TX_FAR _UnnamedText_445c9
+RockTunnel1EndBattleText5: ; 445c9 (11:45c9)
+	TX_FAR _RockTunnel1EndBattleText5
 	db "@"
 
-UnnamedText_445ce: ; 445ce (11:45ce)
-	TX_FAR _UnnamedText_445ce
+RockTunnel1AfterBattleText5: ; 445ce (11:45ce)
+	TX_FAR _RockTunnel1AfterBattleText5
 	db "@"
 
-UnnamedText_445d3: ; 445d3 (11:45d3)
-	TX_FAR _UnnamedText_445d3
+RockTunnel1BattleText6: ; 445d3 (11:45d3)
+	TX_FAR _RockTunnel1BattleText6
 	db "@"
 
-UnnamedText_445d8: ; 445d8 (11:45d8)
-	TX_FAR _UnnamedText_445d8
+RockTunnel1EndBattleText6: ; 445d8 (11:45d8)
+	TX_FAR _RockTunnel1EndBattleText6
 	db "@"
 
-UnnamedText_445dd: ; 445dd (11:45dd)
-	TX_FAR _UnnamedText_445dd
+RockTunnel1AfterBattleText6: ; 445dd (11:45dd)
+	TX_FAR _RockTunnel1AfterBattleText6
 	db "@"
 
-UnnamedText_445e2: ; 445e2 (11:45e2)
-	TX_FAR _UnnamedText_445e2
+RockTunnel1BattleText7: ; 445e2 (11:45e2)
+	TX_FAR _RockTunnel1BattleText7
 	db "@"
 
-UnnamedText_445e7: ; 445e7 (11:45e7)
-	TX_FAR _UnnamedText_445e7
+RockTunnel1EndBattleText7: ; 445e7 (11:45e7)
+	TX_FAR _RockTunnel1EndBattleText7
 	db "@"
 
-UnnamedText_445ec: ; 445ec (11:45ec)
-	TX_FAR _UnnamedText_445ec
+RockTunnel1AfterBattleText7: ; 445ec (11:45ec)
+	TX_FAR _RockTunnel1AfterBattleText7
 	db "@"
 
 RockTunnel1Text8: ; 445f1 (11:45f1)
@@ -71787,7 +71844,7 @@ VictoryRoad3Script: ; 44980 (11:4980)
 	call VictoryRoad3Script_Unknown44996
 	call EnableAutoTextBoxDrawing
 	ld hl, VictoryRoad3TrainerHeaders
-	ld de, Unknown_449b1 ; $49b1
+	ld de, VictoryRoad3ScriptPointers
 	ld a, [W_VICTORYROAD3CURSCRIPT]
 	call ExecuteCurMapScriptInTable
 	ld [W_VICTORYROAD3CURSCRIPT], a
@@ -71807,8 +71864,12 @@ VictoryRoad3Script_Unknown44996: ; 44996 (11:4996)
 	ld a, $17
 	jp Predef ; indirect jump to Func_ee9e (ee9e (3:6e9e))
 
-Unknown_449b1: ; 449b1 (11:49b1)
-INCBIN "baserom.gbc",$449b1,$449b7 - $449b1
+VictoryRoad3ScriptPointers: ; 449b1 (11:49b1)
+	dw Func_449b7
+	dw Func_324c
+	dw EndTrainerBattle
+
+Func_449b7: ; 449b7 (11:49b7)
 	ld hl, W_FLAGS_CD60
 	bit 7, [hl]
 	res 7, [hl]
@@ -72015,20 +72076,44 @@ RocketHideout1_h: ; 0x44bbe to 0x44bca (12 bytes) (bank=11) (id=199)
 	dw RocketHideout1Object ; objects
 
 RocketHideout1Script: ; 44bca (11:4bca)
-	call Unknown_44be0
+	call Func_44be0
 	call EnableAutoTextBoxDrawing
 	ld hl, RocketHideout1TrainerHeaders
-	ld de, Unknown_44c0e ; $4c0e
+	ld de, RocketHideout1ScriptPointers
 	ld a, [W_ROCKETHIDEOUT1CURSCRIPT]
 	call ExecuteCurMapScriptInTable
 	ld [W_ROCKETHIDEOUT1CURSCRIPT], a
 	ret
 
-Unknown_44be0: ; 44be0 (11:4be0)
-INCBIN "baserom.gbc",$44be0,$44c0e - $44be0
+Func_44be0: ; 44be0 (11:4be0)
+	ld hl, $d126
+	bit 5, [hl]
+	res 5, [hl]
+	ret z
+	ld a, [$d815]
+	bit 7, a
+	jr nz, .asm_44c01
+	bit 5, a
+	jr nz, .asm_44bf7
+	ld a, $54
+	jr .asm_44c03
+.asm_44bf7
+	ld a, $ad
+	call $23b1
+	ld hl, $d815
+	bit 7, [hl]
+.asm_44c01
+	ld a, $e
+.asm_44c03
+	ld [$d09f], a
+	ld bc, $080c
+	ld a, $17
+	jp Predef
 
-Unknown_44c0e: ; 44c0e (11:4c0e)
-INCBIN "baserom.gbc",$44c0e,$44c14 - $44c0e
+RocketHideout1ScriptPointers: ; 44c0e (11:4c0e)
+	dw CheckFightingMapTrainers
+	dw Func_324c
+	dw EndTrainerBattle
 
 RocketHideout1Texts: ; 44c14 (11:4c14)
 	dw RocketHideout1Text1, RocketHideout1Text2, RocketHideout1Text3, RocketHideout1Text4, RocketHideout1Text5, Predef5CText, Predef5CText
@@ -72220,14 +72305,255 @@ RocketHideout2_h: ; 0x44e1b to 0x44e27 (12 bytes) (bank=11) (id=200)
 RocketHideout2Script: ; 44e27 (11:4e27)
 	call EnableAutoTextBoxDrawing
 	ld hl, RocketHideout2TrainerHeaders
-	ld de, RocketHideout2_Unknown44e3a
+	ld de, RocketHideout2ScriptPointers
 	ld a, [W_ROCKETHIDEOUT2CURSCRIPT]
 	call ExecuteCurMapScriptInTable
 	ld [W_ROCKETHIDEOUT2CURSCRIPT], a
 	ret
 
-RocketHideout2_Unknown44e3a: ; 44e3a (11:4e3a)
-INCBIN "baserom.gbc",$44e3a,$44fd7 - $44e3a
+RocketHideout2ScriptPointers: ; 44e3a (11:4e3a)
+	dw Func_44e42
+	dw Func_324c
+	dw EndTrainerBattle
+	dw Func_44fc2
+
+Func_44e42: ; 44e42 (11:4e42)
+	ld a, [W_YCOORD]
+	ld b, a
+	ld a, [W_XCOORD]
+	ld c, a
+	ld hl, RocketHideout2ArrowTilePlayerMovement
+	call Func_3442
+	cp $ff
+	jp z, CheckFightingMapTrainers
+	ld hl, $d736
+	set 7, [hl]
+	call Func_3486
+	ld a, $a7
+	call PlaySound
+	ld a, $ff
+	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld a, $3
+	ld [W_CURMAPSCRIPT], a
+	ret
+
+;format:
+;db y,x
+;dw pointer to movement
+RocketHideout2ArrowTilePlayerMovement: ; 44e6d (11:4e6d)
+	db $9,$4
+	dw RocketHideout2ArrowMovement1
+	db $b,$4
+	dw RocketHideout2ArrowMovement2
+	db $f,$4
+	dw RocketHideout2ArrowMovement3
+	db $10,$4
+	dw RocketHideout2ArrowMovement4
+	db $13,$4
+	dw RocketHideout2ArrowMovement1
+	db $16,$4
+	dw RocketHideout2ArrowMovement5
+	db $e,$5
+	dw RocketHideout2ArrowMovement6
+	db $16,$6
+	dw RocketHideout2ArrowMovement7
+	db $18,$6
+	dw RocketHideout2ArrowMovement8
+	db $9,$8
+	dw RocketHideout2ArrowMovement9
+	db $c,$8
+	dw RocketHideout2ArrowMovement10
+	db $f,$8
+	dw RocketHideout2ArrowMovement8
+	db $13,$8
+	dw RocketHideout2ArrowMovement9
+	db $17,$8
+	dw RocketHideout2ArrowMovement11
+	db $e,$9
+	dw RocketHideout2ArrowMovement12
+	db $16,$9
+	dw RocketHideout2ArrowMovement12
+	db $9,$a
+	dw RocketHideout2ArrowMovement13
+	db $a,$a
+	dw RocketHideout2ArrowMovement14
+	db $f,$a
+	dw RocketHideout2ArrowMovement15
+	db $11,$a
+	dw RocketHideout2ArrowMovement16
+	db $13,$a
+	dw RocketHideout2ArrowMovement17
+	db $19,$a
+	dw RocketHideout2ArrowMovement2
+	db $e,$b
+	dw RocketHideout2ArrowMovement18
+	db $10,$b
+	dw RocketHideout2ArrowMovement19
+	db $12,$b
+	dw RocketHideout2ArrowMovement12
+	db $9,$c
+	dw RocketHideout2ArrowMovement20
+	db $b,$c
+	dw RocketHideout2ArrowMovement21
+	db $d,$c
+	dw RocketHideout2ArrowMovement22
+	db $11,$c
+	dw RocketHideout2ArrowMovement23
+	db $a,$d
+	dw RocketHideout2ArrowMovement24
+	db $c,$d
+	dw RocketHideout2ArrowMovement25
+	db $10,$d
+	dw RocketHideout2ArrowMovement26
+	db $12,$d
+	dw RocketHideout2ArrowMovement27
+	db $13,$d
+	dw RocketHideout2ArrowMovement28
+	db $16,$d
+	dw RocketHideout2ArrowMovement29
+	db $17,$d
+	dw RocketHideout2ArrowMovement30
+	db $11,$e
+	dw RocketHideout2ArrowMovement31
+	db $10,$f
+	dw RocketHideout2ArrowMovement12
+	db $e,$10
+	dw RocketHideout2ArrowMovement32
+	db $10,$10
+	dw RocketHideout2ArrowMovement33
+	db $12,$10
+	dw RocketHideout2ArrowMovement34
+	db $a,$11
+	dw RocketHideout2ArrowMovement35
+	db $b,$11
+	dw RocketHideout2ArrowMovement36
+	db $FF
+
+;format: direction, count
+;right:	$10
+;left:	$20
+;up:	$40
+;down:	$80
+;each list is read starting from the $FF and working backwards
+RocketHideout2ArrowMovement1: ; 44f1a (11:4f1a)
+	db $20,$02,$FF
+
+RocketHideout2ArrowMovement2: ; 44f1d (11:4f1d)
+	db $10,$04,$FF
+
+RocketHideout2ArrowMovement3: ; 44f20 (11:4f20)
+	db $40,$04,$10,$04,$FF
+
+RocketHideout2ArrowMovement4: ; 44f25 (11:4f25)
+	db $40,$04,$10,$04,$40,$01,$FF
+
+RocketHideout2ArrowMovement5: ; 44f2c (11:4f2c)
+	db $20,$02,$40,$03,$FF
+
+RocketHideout2ArrowMovement6: ; 44f31 (11:4f31)
+	db $80,$02,$10,$04,$FF
+
+RocketHideout2ArrowMovement7: ; 44f36 (11:4f36)
+	db $40,$02,$FF
+
+RocketHideout2ArrowMovement8: ; 44f39 (11:4f39)
+	db $40,$04,$FF
+
+RocketHideout2ArrowMovement9: ; 44f3c (11:4f3c)
+	db $20,$06,$FF
+
+RocketHideout2ArrowMovement10: ; 44f3f (11:4f3f)
+	db $40,$01,$FF
+
+RocketHideout2ArrowMovement11: ; 44f42 (11:4f42)
+	db $20,$06,$40,$04,$FF
+
+RocketHideout2ArrowMovement12: ; 44f47 (11:4f47)
+	db $80,$02,$FF
+
+RocketHideout2ArrowMovement13: ; 44f4a (11:4f4a)
+	db $20,$08,$FF
+
+RocketHideout2ArrowMovement14: ; 44f4d (11:4f4d)
+	db $20,$08,$40,$01,$FF
+
+RocketHideout2ArrowMovement15: ; 44f52 (11:4f52)
+	db $20,$08,$40,$06,$FF
+
+RocketHideout2ArrowMovement16: ; 44f57 (11:4f57)
+	db $40,$02,$10,$04,$FF
+
+RocketHideout2ArrowMovement17: ; 44f5c (11:4f5c)
+	db $40,$02,$10,$04,$40,$02,$FF
+
+RocketHideout2ArrowMovement18: ; 44f63 (11:4f63)
+	db $80,$02,$10,$04,$80,$02,$FF
+
+RocketHideout2ArrowMovement19: ; 44f6a (11:4f6a)
+	db $80,$02,$10,$04,$FF
+
+RocketHideout2ArrowMovement20: ; 44f6f (11:4f6f)
+	db $20,$0A,$FF
+
+RocketHideout2ArrowMovement21: ; 44f72 (11:4f72)
+	db $20,$0A,$40,$02,$FF
+
+RocketHideout2ArrowMovement22: ; 44f77 (11:4f77)
+	db $20,$0A,$40,$04,$FF
+
+RocketHideout2ArrowMovement23: ; 44f7c (11:4f7c)
+	db $40,$02,$10,$02,$FF
+
+RocketHideout2ArrowMovement24: ; 44f81 (11:4f81)
+	db $10,$01,$80,$02,$FF
+
+RocketHideout2ArrowMovement25: ; 44f86 (11:4f86)
+	db $10,$01,$FF
+
+RocketHideout2ArrowMovement26: ; 44f89 (11:4f89)
+	db $80,$02,$10,$02,$FF
+
+RocketHideout2ArrowMovement27: ; 44f8e (11:4f8e)
+	db $80,$02,$20,$02,$FF
+
+RocketHideout2ArrowMovement28: ; 44f93 (11:4f93)
+	db $40,$02,$10,$04,$40,$02,$20,$03,$FF
+
+RocketHideout2ArrowMovement29: ; 44f9c (11:4f9c)
+	db $80,$02,$20,$04,$FF
+
+RocketHideout2ArrowMovement30: ; 44fa1 (11:4fa1)
+	db $20,$06,$40,$04,$20,$05,$FF
+
+RocketHideout2ArrowMovement31: ; 44fa8 (11:4fa8)
+	db $40,$02,$FF
+
+RocketHideout2ArrowMovement32: ; 44fab (11:4fab)
+	db $40,$01,$FF
+
+RocketHideout2ArrowMovement33: ; 44fae (11:4fae)
+	db $40,$03,$FF
+
+RocketHideout2ArrowMovement34: ; 44fb1 (11:4fb1)
+	db $40,$05,$FF
+
+RocketHideout2ArrowMovement35: ; 44fb4 (11:4fb4)
+	db $10,$01,$80,$02,$20,$04,$FF
+
+RocketHideout2ArrowMovement36: ; 44fbb (11:4fbb)
+	db $20,$0A,$40,$02,$20,$05,$FF
+
+Func_44fc2: ; 44fc2 (11:4fc2)
+	ld a, [$cd38]
+	and a
+	jr nz, Func_44fd7
+	xor a
+	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld hl, $d736
+	res 7, [hl]
+	ld a, $0
+	ld [W_CURMAPSCRIPT], a
+	ret
 
 Func_44fd7: ; 44fd7 (11:4fd7)
 	ld a, [$c102]
@@ -74852,7 +75178,7 @@ Mansion1HiddenObjects: ; 46f2b (11:6f2b)
 	db $10,$08,MOON_STONE
 	dbw BANK(HiddenItems),HiddenItems
 	db $05,$02,$04 ; XXX, y, x
-	dbw $11,$4316
+	dbw BANK(Func_44316),Func_44316
 	db $FF
 Mansion2HiddenObjects: ; 46f38 (11:6f38)
 	db $0b,$02,$04 ; XXX, y, x
@@ -104480,7 +104806,7 @@ Func_748eb: ; 748eb (1d:48eb)
 	ld b, a
 	ld a, [W_XCOORD] ; $d362
 	ld c, a
-	ld hl, Unknown_74916
+	ld hl, ViridianGymArrowTilePlayerMovement
 	call Func_3442
 	cp $ff
 	jp z, CheckFightingMapTrainers
@@ -104495,81 +104821,76 @@ Func_748eb: ; 748eb (1d:48eb)
 	ld [W_CURMAPSCRIPT], a
 	ret
 
-Unknown_74916: ; 74916 (1d:4916)
-dw $130b
-dw Unknown_74947
-dw $1301
-dw Unknown_7494a
-dw $1202
-dw Unknown_7494d
-dw $0b02
-dw Unknown_74950
-dw $100a
-dw Unknown_74953
-dw $0406
-dw Unknown_74956
-dw $050d
-dw Unknown_74959
-dw $040e
-dw Unknown_7495c
-dw $000f
-dw Unknown_7495f
-dw $010f
-dw Unknown_74962
-dw $0d10
-dw Unknown_74965
-dw $0d11
-dw Unknown_74968
-db $FF
+;format:
+;db y,x
+;dw pointer to movement
+ViridianGymArrowTilePlayerMovement: ; 74916 (1d:4916)
+	db $b,$13
+	dw ViridianGymArrowMovement1
+	db $1,$13
+	dw ViridianGymArrowMovement2
+	db $2,$12
+	dw ViridianGymArrowMovement3
+	db $2,$b
+	dw ViridianGymArrowMovement4
+	db $a,$10
+	dw ViridianGymArrowMovement5
+	db $6,$4
+	dw ViridianGymArrowMovement6
+	db $d,$5
+	dw ViridianGymArrowMovement7
+	db $e,$4
+	dw ViridianGymArrowMovement8
+	db $f,$0
+	dw ViridianGymArrowMovement9
+	db $f,$1
+	dw ViridianGymArrowMovement10
+	db $10,$d
+	dw ViridianGymArrowMovement11
+	db $11,$d
+	dw ViridianGymArrowMovement12
+	db $FF
 
-Unknown_74947: ; 74947 (1d:4947)
-db $40
-db $09
-db $FF
-Unknown_7494a: ; 7494a (1d:494a)
-db $20
-db $08
-db $FF
-Unknown_7494d: ; 7494d (1d:494d)
-db $80
-db $09
-db $FF
-Unknown_74950: ; 74950 (1d:4950)
-db $10
-db $06
-db $FF
-Unknown_74953: ; 74953 (1d:4953)
-db $80
-db $02
-db $FF
-Unknown_74956: ; 74956 (1d:4956)
-db $80
-db $07
-db $FF
-Unknown_74959: ; 74959 (1d:4959)
-db $10
-db $08
-db $FF
-Unknown_7495c: ; 7495c (1d:495c)
-db $10
-db $09
-db $FF
-Unknown_7495f: ; 7495f (1d:495f)
-db $40
-db $08
-db $FF
-Unknown_74962: ; 74962 (1d:4962)
-db $40
-db $06
-db $FF
-Unknown_74965: ; 74965 (1d:4965)
-db $20
-db $06
-db $FF
-Unknown_74968: ; 74968 (1d:4968)
-db $20
-db $0C
-db $FF
+;format: direction, count
+;right:	$10
+;left:	$20
+;up:	$40
+;down:	$80
+ViridianGymArrowMovement1: ; 74947 (1d:4947)
+	db $40,$09,$FF
+
+ViridianGymArrowMovement2: ; 7494a (1d:494a)
+	db $20,$08,$FF
+
+ViridianGymArrowMovement3: ; 7494d (1d:494d)
+	db $80,$09,$FF
+
+ViridianGymArrowMovement4: ; 74950 (1d:4950)
+	db $10,$06,$FF
+
+ViridianGymArrowMovement5: ; 74953 (1d:4953)
+	db $80,$02,$FF
+
+ViridianGymArrowMovement6: ; 74956 (1d:4956)
+	db $80,$07,$FF
+
+ViridianGymArrowMovement7: ; 74959 (1d:4959)
+	db $10,$08,$FF
+
+ViridianGymArrowMovement8: ; 7495c (1d:495c)
+	db $10,$09,$FF
+
+ViridianGymArrowMovement9: ; 7495f (1d:495f)
+	db $40,$08,$FF
+
+ViridianGymArrowMovement10: ; 74962 (1d:4962)
+	db $40,$06,$FF
+
+ViridianGymArrowMovement11: ; 74965 (1d:4965)
+	db $20,$06,$FF
+
+ViridianGymArrowMovement12: ; 74968 (1d:4968)
+	db $20,$0C,$FF
 
 Func_7496b: ; 7496b (1d:496b)
 	ld a, [$cd38]
@@ -117568,92 +117889,92 @@ _RockTunnelPokecenterText3: ; 8c316 (23:4316)
 	db $0, "I sold a useless", $4f
 	db "NUGGET for ¥5000!", $57
 
-_UnnamedText_44588: ; 8c33a (23:433a)
+_RockTunnel1BattleText1: ; 8c33a (23:433a)
 	db $0, "This tunnel goes", $4f
 	db "a long way, kid!", $57
 
-_UnnamedText_4458d: ; 8c35d (23:435d)
+_RockTunnel1EndBattleText1: ; 8c35d (23:435d)
 	db $0, "Doh!", $4f
 	db "You win!", $58
 
-_UnnamedText_44592: ; 8c36c (23:436c)
+_RockTunnel1AfterBattleText1: ; 8c36c (23:436c)
 	db $0, "Watch for ONIX!", $4f
 	db "It can put the", $55
 	db "squeeze on you!", $57
 
-_UnnamedText_44597: ; 8c39c (23:439c)
+_RockTunnel1BattleText2: ; 8c39c (23:439c)
 	db $0, "Hmm. Maybe I'm", $4f
 	db "lost in here...", $57
 
-_UnnamedText_4459c: ; 8c3bb (23:43bb)
+_RockTunnel1EndBattleText2: ; 8c3bb (23:43bb)
 	db $0, "Ease up!", $4f
 	db "What am I doing?", $55
 	db "Which way is out?", $58
 
-_UnnamedText_445a1: ; 8c3e8 (23:43e8)
+_RockTunnel1AfterBattleText2: ; 8c3e8 (23:43e8)
 	db $0, "That sleeping", $4f
 	db "#MON on ROUTE", $55
 	db "12 forced me to", $55
 	db "take this detour.", $57
 
-_UnnamedText_445a6: ; 8c427 (23:4427)
+_RockTunnel1BattleText3: ; 8c427 (23:4427)
 	db $0, "Outsiders like", $4f
 	db "you need to show", $55
 	db "me some respect!", $57
 
-_UnnamedText_445ab: ; 8c459 (23:4459)
+_RockTunnel1EndBattleText3: ; 8c459 (23:4459)
 	db $0, "I give!", $58
 
-_UnnamedText_445b0: ; 8c462 (23:4462)
+_RockTunnel1AfterBattleText3: ; 8c462 (23:4462)
 	db $0, "You're talented", $4f
 	db "enough to hike!", $57
 
-_UnnamedText_445b5: ; 8c482 (23:4482)
+_RockTunnel1BattleText4: ; 8c482 (23:4482)
 	db $0, "#MON fight!", $4f
 	db "Ready, go!", $57
 
-_UnnamedText_445ba: ; 8c49a (23:449a)
+_RockTunnel1EndBattleText4: ; 8c49a (23:449a)
 	db $0, "Game", $4f
 	db "over!", $58
 
-_UnnamedText_445bf: ; 8c4a6 (23:44a6)
+_RockTunnel1AfterBattleText4: ; 8c4a6 (23:44a6)
 	db $0, "Oh well, I'll get", $4f
 	db "a ZUBAT as I go!", $57
 
-_UnnamedText_445c4: ; 8c4c9 (23:44c9)
+_RockTunnel1BattleText5: ; 8c4c9 (23:44c9)
 	db $0, "Eek! Don't try", $4f
 	db "anything funny in", $55
 	db "the dark!", $57
 
-_UnnamedText_445c9: ; 8c4f4 (23:44f4)
+_RockTunnel1EndBattleText5: ; 8c4f4 (23:44f4)
 	db $0, "It", $4f
 	db "was too dark!", $58
 
-_UnnamedText_445ce: ; 8c506 (23:4506)
+_RockTunnel1AfterBattleText5: ; 8c506 (23:4506)
 	db $0, "I saw a MACHOP", $4f
 	db "in this tunnel!", $57
 
-_UnnamedText_445d3: ; 8c526 (23:4526)
+_RockTunnel1BattleText6: ; 8c526 (23:4526)
 	db $0, "I came this far", $4f
 	db "for #MON!", $57
 
-_UnnamedText_445d8: ; 8c541 (23:4541)
+_RockTunnel1EndBattleText6: ; 8c541 (23:4541)
 	db $0, "I'm", $4f
 	db "out of #MON!", $58
 
-_UnnamedText_445dd: ; 8c552 (23:4552)
+_RockTunnel1AfterBattleText6: ; 8c552 (23:4552)
 	db $0, "You looked cute", $4f
 	db "and harmless!", $57
 
-_UnnamedText_445e2: ; 8c571 (23:4571)
+_RockTunnel1BattleText7: ; 8c571 (23:4571)
 	db $0, "You have #MON!", $4f
 	db "Let's start!", $57
 
-_UnnamedText_445e7: ; 8c58d (23:458d)
+_RockTunnel1EndBattleText7: ; 8c58d (23:458d)
 	db $0, "You", $4f
 	db "play hard!", $58
 
-_UnnamedText_445ec: ; 8c59d (23:459d)
+_RockTunnel1AfterBattleText7: ; 8c59d (23:459d)
 	db $0, "Whew! I'm all", $4f
 	db "sweaty now!", $57
 
