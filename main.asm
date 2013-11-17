@@ -29626,11 +29626,12 @@ Func_f04c: ; f04c (3:704c)
 asm_f055: ; f055 (3:7055)
 	call Func_f068
 	ld a, $9
-	ld de, Unknown_f060 ; $7060
+	ld de, UnknownOAM_f060 ; $7060
 	jp WriteOAMBlock
 
-Unknown_f060: ; f060 (3:7060)
-INCBIN "baserom.gbc",$f060,$f068 - $f060
+UnknownOAM_f060: ; f060 (3:7060)
+	db $FC,$10,$FD,$10
+	db $FE,$10,$FF,$10
 
 Func_f068: ; f068 (3:7068)
 	ld hl, $c104
@@ -38971,15 +38972,16 @@ Func_1a6f0: ; 1a6f0 (6:66f0)
 	call CopyVideoDataDouble
 	ld a, $9
 	ld bc, $5448
-	ld de, Unknown_1a710 ; $6710
+	ld de, LedgeHoppingShadowOAM ; $6710
 	call WriteOAMBlock
 	ret
 
 LedgeHoppingShadow: ; 1a708 (6:6708)
 	INCBIN "gfx/ledge_hopping_shadow.1bpp"
 
-Unknown_1a710: ; 1a710 (6:6710)
-INCBIN "baserom.gbc",$1a710,$1a718 - $1a710
+LedgeHoppingShadowOAM: ; 1a710 (6:6710)
+	db $FF,$10,$FF,$20
+	db $FF,$40,$FF,$60
 
 SECTION "bank7",ROMX,BANK[$7]
 
@@ -69979,7 +69981,7 @@ INCBIN "baserom.gbc",$41217,$4123b - $41217
 .asm_412e7
 	push bc
 	xor a
-	ld de, Unknown_4132e ; $532e
+	ld de, UnknownOAM_4132e ; $532e
 	call WriteOAMBlock
 	ld a, [$d09f]
 	xor $1
@@ -70015,8 +70017,11 @@ INCBIN "baserom.gbc",$41217,$4123b - $41217
 	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
 	ret
 
-Unknown_4132e: ; 4132e (10:532e)
-INCBIN "baserom.gbc",$4132e,$41336 - $4132e
+UnknownOAM_4132e: ; 4132e (10:532e)
+	db $7E,$00,$7E,$20
+	db $7E,$40,$7E,$60
+
+Func_41336: ; 41336 (10:5336)
 	ld a, $ac
 	call Func_41676
 	call Func_415c8
@@ -70312,7 +70317,7 @@ Func_41525: ; 41525 (10:5525)
 	ret
 
 Func_41558: ; 41558 (10:5558)
-	ld hl, Unknown_41574 ; $5574
+	ld hl, OAMPointers_41574 ; $5574
 	ld c, $4
 	xor a
 .asm_4155e
@@ -70336,8 +70341,31 @@ Func_41558: ; 41558 (10:5558)
 	jr nz, .asm_4155e
 	ret
 
-Unknown_41574: ; 41574 (10:5574)
-INCBIN "baserom.gbc",$41574,$415a4 - $41574
+OAMPointers_41574: ; 41574 (10:5574)
+	dw UnknownOAM_41584
+	db $08,$08
+	dw UnknownOAM_4158c
+	db $18,$08
+	dw UnknownOAM_41594
+	db $08,$18
+	dw UnknownOAM_4159c
+	db $18,$18
+
+UnknownOAM_41584: ; 41584 (10:5584)
+	db $38,$10,$39,$10
+	db $3A,$10,$3B,$10
+
+UnknownOAM_4158c: ; 4158c (10:558c)
+	db $39,$30,$38,$30
+	db $3B,$30,$3A,$30
+
+UnknownOAM_41594: ; 41594 (10:5594)
+	db $3A,$50,$3B,$50
+	db $38,$50,$39,$50
+
+UnknownOAM_4159c: ; 4159c (10:559c)
+	db $3B,$70,$3A,$70
+	db $39,$70,$38,$70
 
 Func_415a4: ; 415a4 (10:55a4)
 	ld [$cf91], a
