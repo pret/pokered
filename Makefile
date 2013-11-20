@@ -2,7 +2,7 @@
 
 TEXTFILES := $(shell find ./ -type f -name '*.asm')
 
-all: pokered.gbc
+all: pokered.gbc pokeblue.gbc
 
 pokered.o: pokered.tx main.tx constants.tx wram.tx ${TEXTFILES:.asm=.tx}
 	rgbasm -o pokered.o pokered.tx
@@ -29,4 +29,6 @@ pokeblue.gbc: pokeblue.o
 clean:
 	rm -f pokered.o pokered.gbc pokeblue.o pokeblue.gbc redrle $(TEXTFILES:.asm=.tx)
 
-more: pokered.gbc pokeblue.gbc
+red: pokered.gbc
+
+blue: pokeblue.gbc
