@@ -72436,112 +72436,178 @@ RocketHideout2ArrowTilePlayerMovement: ; 44e6d (11:4e6d)
 ;down:	$80
 ;each list is read starting from the $FF and working backwards
 RocketHideout2ArrowMovement1: ; 44f1a (11:4f1a)
-	db $20,$02,$FF
+	db $20,$02
+	db $FF
 
 RocketHideout2ArrowMovement2: ; 44f1d (11:4f1d)
-	db $10,$04,$FF
+	db $10,$04
+	db $FF
 
 RocketHideout2ArrowMovement3: ; 44f20 (11:4f20)
-	db $40,$04,$10,$04,$FF
+	db $40,$04
+	db $10,$04
+	db $FF
 
 RocketHideout2ArrowMovement4: ; 44f25 (11:4f25)
-	db $40,$04,$10,$04,$40,$01,$FF
+	db $40,$04
+	db $10,$04
+	db $40,$01
+	db $FF
 
 RocketHideout2ArrowMovement5: ; 44f2c (11:4f2c)
-	db $20,$02,$40,$03,$FF
+	db $20,$02
+	db $40,$03
+	db $FF
 
 RocketHideout2ArrowMovement6: ; 44f31 (11:4f31)
-	db $80,$02,$10,$04,$FF
+	db $80,$02
+	db $10,$04
+	db $FF
 
 RocketHideout2ArrowMovement7: ; 44f36 (11:4f36)
-	db $40,$02,$FF
+	db $40,$02
+	db $FF
 
 RocketHideout2ArrowMovement8: ; 44f39 (11:4f39)
-	db $40,$04,$FF
+	db $40,$04
+	db $FF
 
 RocketHideout2ArrowMovement9: ; 44f3c (11:4f3c)
-	db $20,$06,$FF
+	db $20,$06
+	db $FF
 
 RocketHideout2ArrowMovement10: ; 44f3f (11:4f3f)
-	db $40,$01,$FF
+	db $40,$01
+	db $FF
 
 RocketHideout2ArrowMovement11: ; 44f42 (11:4f42)
-	db $20,$06,$40,$04,$FF
+	db $20,$06
+	db $40,$04
+	db $FF
 
 RocketHideout2ArrowMovement12: ; 44f47 (11:4f47)
-	db $80,$02,$FF
+	db $80,$02
+	db $FF
 
 RocketHideout2ArrowMovement13: ; 44f4a (11:4f4a)
-	db $20,$08,$FF
+	db $20,$08
+	db $FF
 
 RocketHideout2ArrowMovement14: ; 44f4d (11:4f4d)
-	db $20,$08,$40,$01,$FF
+	db $20,$08
+	db $40,$01
+	db $FF
 
 RocketHideout2ArrowMovement15: ; 44f52 (11:4f52)
-	db $20,$08,$40,$06,$FF
+	db $20,$08
+	db $40,$06
+	db $FF
 
 RocketHideout2ArrowMovement16: ; 44f57 (11:4f57)
-	db $40,$02,$10,$04,$FF
+	db $40,$02
+	db $10,$04
+	db $FF
 
 RocketHideout2ArrowMovement17: ; 44f5c (11:4f5c)
-	db $40,$02,$10,$04,$40,$02,$FF
+	db $40,$02
+	db $10,$04
+	db $40,$02
+	db $FF
 
 RocketHideout2ArrowMovement18: ; 44f63 (11:4f63)
-	db $80,$02,$10,$04,$80,$02,$FF
+	db $80,$02
+	db $10,$04
+	db $80,$02
+	db $FF
 
 RocketHideout2ArrowMovement19: ; 44f6a (11:4f6a)
-	db $80,$02,$10,$04,$FF
+	db $80,$02
+	db $10,$04
+	db $FF
 
 RocketHideout2ArrowMovement20: ; 44f6f (11:4f6f)
-	db $20,$0A,$FF
+	db $20,$0A
+	db $FF
 
 RocketHideout2ArrowMovement21: ; 44f72 (11:4f72)
-	db $20,$0A,$40,$02,$FF
+	db $20,$0A
+	db $40,$02
+	db $FF
 
 RocketHideout2ArrowMovement22: ; 44f77 (11:4f77)
-	db $20,$0A,$40,$04,$FF
+	db $20,$0A
+	db $40,$04
+	db $FF
 
 RocketHideout2ArrowMovement23: ; 44f7c (11:4f7c)
-	db $40,$02,$10,$02,$FF
+	db $40,$02
+	db $10,$02
+	db $FF
 
 RocketHideout2ArrowMovement24: ; 44f81 (11:4f81)
-	db $10,$01,$80,$02,$FF
+	db $10,$01
+	db $80,$02
+	db $FF
 
 RocketHideout2ArrowMovement25: ; 44f86 (11:4f86)
-	db $10,$01,$FF
+	db $10,$01
+	db $FF
 
 RocketHideout2ArrowMovement26: ; 44f89 (11:4f89)
-	db $80,$02,$10,$02,$FF
+	db $80,$02
+	db $10,$02
+	db $FF
 
 RocketHideout2ArrowMovement27: ; 44f8e (11:4f8e)
-	db $80,$02,$20,$02,$FF
+	db $80,$02
+	db $20,$02
+	db $FF
 
 RocketHideout2ArrowMovement28: ; 44f93 (11:4f93)
-	db $40,$02,$10,$04,$40,$02,$20,$03,$FF
+	db $40,$02
+	db $10,$04
+	db $40,$02
+	db $20,$03
+	db $FF
 
 RocketHideout2ArrowMovement29: ; 44f9c (11:4f9c)
-	db $80,$02,$20,$04,$FF
+	db $80,$02
+	db $20,$04
+	db $FF
 
 RocketHideout2ArrowMovement30: ; 44fa1 (11:4fa1)
-	db $20,$06,$40,$04,$20,$05,$FF
+	db $20,$06
+	db $40,$04
+	db $20,$05
+	db $FF
 
 RocketHideout2ArrowMovement31: ; 44fa8 (11:4fa8)
-	db $40,$02,$FF
+	db $40,$02
+	db $FF
 
 RocketHideout2ArrowMovement32: ; 44fab (11:4fab)
-	db $40,$01,$FF
+	db $40,$01
+	db $FF
 
 RocketHideout2ArrowMovement33: ; 44fae (11:4fae)
-	db $40,$03,$FF
+	db $40,$03
+	db $FF
 
 RocketHideout2ArrowMovement34: ; 44fb1 (11:4fb1)
-	db $40,$05,$FF
+	db $40,$05
+	db $FF
 
 RocketHideout2ArrowMovement35: ; 44fb4 (11:4fb4)
-	db $10,$01,$80,$02,$20,$04,$FF
+	db $10,$01
+	db $80,$02
+	db $20,$04
+	db $FF
 
 RocketHideout2ArrowMovement36: ; 44fbb (11:4fbb)
-	db $20,$0A,$40,$02,$20,$05,$FF
+	db $20,$0A
+	db $40,$02
+	db $20,$05
+	db $FF
 
 Func_44fc2: ; 44fc2 (11:4fc2)
 	ld a, [$cd38]
@@ -72769,14 +72835,151 @@ RocketHideout3_h: ; 0x45219 to 0x45225 (12 bytes) (bank=11) (id=201)
 RocketHideout3Script: ; 45225 (11:5225)
 	call EnableAutoTextBoxDrawing
 	ld hl, RocketHideout3TrainerHeaders
-	ld de, RocketHideout3Script_Unknown45238
+	ld de, RocketHideout3ScriptPointers
 	ld a, [W_ROCKETHIDEOUT3CURSCRIPT]
 	call ExecuteCurMapScriptInTable
 	ld [W_ROCKETHIDEOUT3CURSCRIPT], a
 	ret
 
-RocketHideout3Script_Unknown45238: ; 45238 (11:5238)
-INCBIN "baserom.gbc",$45238,$452fa - $45238
+RocketHideout3ScriptPointers: ; 45238 (11:5238)
+	dw RocketHideout3Script1
+	dw Func_324c
+	dw EndTrainerBattle
+	dw RocketHideout3Script4
+
+RocketHideout3Script1: ; 45240 (11:5240)
+	ld a, [W_YCOORD]
+	ld b, a
+	ld a, [W_XCOORD]
+	ld c, a
+	ld hl, RocketHideout3ArrowTilePlayerMovement
+	call Func_3442
+	cp $ff
+	jp z, CheckFightingMapTrainers
+	ld hl, $d736
+	set 7, [hl]
+	call Func_3486
+	ld a, $a7
+	call PlaySound
+	ld a, $ff
+	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld a, $3
+	ld [W_CURMAPSCRIPT], a
+	ret
+
+;format:
+;db y,x
+;dw pointer to movement
+RocketHideout3ArrowTilePlayerMovement: ; 4526b (11:526b)
+	db $d,$a
+	dw RocketHideout3ArrowMovement6
+	db $13,$a
+	dw RocketHideout3ArrowMovement1
+	db $12,$b
+	dw RocketHideout3ArrowMovement2
+	db $b,$c
+	dw RocketHideout3ArrowMovement3
+	db $11,$c
+	dw RocketHideout3ArrowMovement4
+	db $14,$c
+	dw RocketHideout3ArrowMovement5
+	db $10,$d
+	dw RocketHideout3ArrowMovement6
+	db $b,$e
+	dw RocketHideout3ArrowMovement7
+	db $f,$e
+	dw RocketHideout3ArrowMovement6
+	db $11,$e
+	dw RocketHideout3ArrowMovement8
+	db $13,$e
+	dw RocketHideout3ArrowMovement9
+	db $10,$f
+	dw RocketHideout3ArrowMovement7
+	db $12,$f
+	dw RocketHideout3ArrowMovement10
+	db $d,$10
+	dw RocketHideout3ArrowMovement11
+	db $c,$11
+	dw RocketHideout3ArrowMovement10
+	db $10,$12
+	dw RocketHideout3ArrowMovement12
+	db $FF
+
+;format: direction, count
+;right:	$10
+;left:	$20
+;up:	$40
+;down:	$80
+;each list is read starting from the $FF and working backwards
+RocketHideout3ArrowMovement1: ; 452ac (11:52ac)
+	db $10,$04
+	db $40,$04
+	db $10,$04
+	db $FF
+
+RocketHideout3ArrowMovement2: ; 452b3 (11:52b3)
+	db $80,$04
+	db $10,$04
+	db $FF
+
+RocketHideout3ArrowMovement3: ; 452b8 (11:52b8)
+	db $20,$02
+	db $FF
+
+RocketHideout3ArrowMovement4: ; 452bb (11:52bb)
+	db $10,$04
+	db $40,$02
+	db $10,$02
+	db $FF
+
+RocketHideout3ArrowMovement5: ; 452c2 (11:52c2)
+	db $10,$04
+	db $40,$02
+	db $10,$02
+	db $40,$03
+	db $FF
+
+RocketHideout3ArrowMovement6: ; 452cb (11:52cb)
+	db $10,$04
+	db $FF
+
+RocketHideout3ArrowMovement7: ; 452ce (11:52ce)
+	db $10,$02
+	db $FF
+
+RocketHideout3ArrowMovement8: ; 452d1 (11:52d1)
+	db $10,$04
+	db $40,$02
+	db $FF
+
+RocketHideout3ArrowMovement9: ; 452d6 (11:52d6)
+	db $10,$04
+	db $40,$04
+	db $FF
+
+RocketHideout3ArrowMovement10: ; 452db (11:52db)
+	db $80,$04
+	db $FF
+
+RocketHideout3ArrowMovement11: ; 452de (11:52de)
+	db $40,$02
+	db $FF
+
+RocketHideout3ArrowMovement12: ; 452e1 (11:52e1)
+	db $40,$01
+	db $FF
+
+RocketHideout3Script4 ; 452e4 (11:452e4)
+	ld a, [$cd38]
+	and a
+	jp nz, Func_44fd7
+	xor a
+	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld hl, $d736
+	res 7, [hl]
+	ld a, $0
+	ld [W_CURMAPSCRIPT], a
+	ret
 
 RocketHideout3Texts: ; 452fa (11:52fa)
 	dw RocketHideout3Text1, RocketHideout3Text2, Predef5CText, Predef5CText
@@ -72872,20 +73075,85 @@ RocketHideout4_h: ; 0x45451 to 0x4545d (12 bytes) (bank=11) (id=202)
 	dw RocketHideout4Object ; objects
 
 RocketHideout4Script: ; 4545d (11:545d)
-	call Unnamed_45473
+	call Func_45473
 	call EnableAutoTextBoxDrawing
 	ld hl, RocketHideout4TrainerHeader0
-	ld de, Unknown_454ae ; $54ae
+	ld de, RocketHideout4ScriptPointers
 	ld a, [W_ROCKETHIDEOUT4CURSCRIPT]
 	call ExecuteCurMapScriptInTable
 	ld [W_ROCKETHIDEOUT4CURSCRIPT], a
 	ret
 
-Unnamed_45473: ; 45473 (11:5473)
-INCBIN "baserom.gbc",$45473,$454ae - $45473
+Func_45473: ; 45473 (11:5473)
+	ld hl, $d126
+	bit 5, [hl]
+	res 5, [hl]
+	ret z
+	ld a, [$d81b]
+	bit 5, a
+	jr nz, .asm_45496
+	and $c
+	cp $c
+	jr z, .asm_4548c
+	ld a, $2d
+	jr .asm_45498
+.asm_4548c
+	ld a, $ad
+	call PlaySound
+	ld hl, $d81b
+	set 5, [hl]
+.asm_45496
+	ld a, $e
+.asm_45498
+	ld [$d09f], a
+	ld bc, $050c
+	ld a, $17
+	jp Predef
 
-Unknown_454ae: ; 454ae (11:54ae)
-INCBIN "baserom.gbc",$454ae,$45501 - $454ae
+Func_454a3: ; 454a3 (11:54a3)
+	xor a
+	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [W_ROCKETHIDEOUT4CURSCRIPT], a
+	ld [W_CURMAPSCRIPT], a
+	ret
+
+RocketHideout4ScriptPointers: ; 454ae (11:54ae)c
+	dw CheckFightingMapTrainers
+	dw Func_324c
+	dw EndTrainerBattle
+	dw RocketHideout4Script4
+
+RocketHideout4Script4: ; 454b6 (11:54b6)
+	ld a, [W_ISINBATTLE]
+	cp $ff
+	jp z, Func_454a3
+	call UpdateSprites
+	ld a, $f0
+	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld hl, $d81b
+	set 7, [hl]
+	ld a, $a
+	ld [H_SPRITEHEIGHT], a
+	call DisplayTextID
+	call GBFadeIn1
+	ld a, $83
+	ld [$cc4d], a
+	ld a, $11
+	call Predef
+	ld a, $87
+	ld [$cc4d], a
+	ld a, $15
+	call Predef
+	call UpdateSprites
+	call GBFadeOut1
+	xor a
+	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld hl, $d126
+	set 5, [hl]
+	ld a, $0
+	ld [W_ROCKETHIDEOUT4CURSCRIPT], a
+	ld [W_CURMAPSCRIPT], a
+	ret
 
 RocketHideout4Texts: ; 45501 (11:5501)
 	dw RocketHideout4Text1, RocketHideout4Text2, RocketHideout4Text3, RocketHideout4Text4, Predef5CText, Predef5CText, Predef5CText, Predef5CText, Predef5CText, RocketHideout4Text10
@@ -73664,14 +73932,16 @@ UnknownDungeon3_h: ; 0x45ee4 to 0x45ef0 (12 bytes) (bank=11) (id=227)
 UnknownDungeon3Script: ; 45ef0 (11:5ef0)
 	call EnableAutoTextBoxDrawing
 	ld hl, UnknownDungeon3TrainerHeaders
-	ld de, UnknownDungeon3Script_Unknown45f03
+	ld de, UnknownDungeon3ScriptPointers
 	ld a, [W_UNKNOWNDUNGEON3CURSCRIPT]
 	call ExecuteCurMapScriptInTable
 	ld [W_UNKNOWNDUNGEON3CURSCRIPT], a
 	ret
 
-UnknownDungeon3Script_Unknown45f03: ; 45f03 (11:5f03)
-INCBIN "baserom.gbc",$45f03,$45f09 - $45f03
+UnknownDungeon3ScriptPointers: ; 45f03 (11:5f03)
+	dw CheckFightingMapTrainers
+	dw Func_324c
+	dw EndTrainerBattle
 
 UnknownDungeon3Texts: ; 45f09 (11:5f09)
 	dw UnknownDungeon3Text1, Predef5CText, Predef5CText
@@ -73732,14 +74002,16 @@ RockTunnel2_h: ; 0x45fdf to 0x45feb (12 bytes) (bank=11) (id=232)
 RockTunnel2Script: ; 45feb (11:5feb)
 	call EnableAutoTextBoxDrawing
 	ld hl, RockTunnel2TrainerHeaders
-	ld de, RockTunnel2Script_Unknown45ffe
+	ld de, RockTunnel2ScriptPointers
 	ld a, [W_ROCKTUNNEL2CURSCRIPT]
 	call ExecuteCurMapScriptInTable
 	ld [W_ROCKTUNNEL2CURSCRIPT], a
 	ret
 
-RockTunnel2Script_Unknown45ffe: ; 45ffe (11:5ffe)
-INCBIN "baserom.gbc",$45ffe,$46004 - $45ffe
+RockTunnel2ScriptPointers: ; 45ffe (11:5ffe)
+	dw CheckFightingMapTrainers
+	dw Func_324c
+	dw EndTrainerBattle
 
 RockTunnel2Texts: ; 46004 (11:6004)
 	dw RockTunnel2Text1, RockTunnel2Text2, RockTunnel2Text3, RockTunnel2Text4, RockTunnel2Text5, RockTunnel2Text6, RockTunnel2Text7, RockTunnel2Text8
@@ -76458,16 +76730,16 @@ CeladonGymScript: ; 4890a (12:490a)
 	ld hl, $d126
 	bit 6, [hl]
 	res 6, [hl]
-	call nz, CeladonGymScript_Unknown48927
+	call nz, CeladonGymScript_48927
 	call EnableAutoTextBoxDrawing
 	ld hl, CeladonGymTrainerHeaders
-	ld de, Unknown_4894e ; $494e
+	ld de, CeladonGymScriptPointers
 	ld a, [W_CELADONGYMCURSCRIPT]
 	call ExecuteCurMapScriptInTable
 	ld [W_CELADONGYMCURSCRIPT], a
 	ret
 
-CeladonGymScript_Unknown48927: ; 48927 (12:4927)
+CeladonGymScript_48927: ; 48927 (12:4927)
 	ld hl, Gym4CityName ; $4930
 	ld de, Gym4LeaderName ; $493d
 	jp LoadGymLeaderAndCityName
@@ -76485,8 +76757,13 @@ Func_48943: ; 48943 (12:4943)
 	ld [W_CURMAPSCRIPT], a
 	ret
 
-Unknown_4894e: ; 4894e (12:494e)
-INCBIN "baserom.gbc",$4894e,$48956 - $4894e
+CeladonGymScriptPointers: ; 4894e (12:494e)
+	dw CheckFightingMapTrainers
+	dw Func_324c
+	dw EndTrainerBattle
+	dw CeladonGymScript4
+
+CeladonGymScript4: ; 48956 (12:4956)
 	ld a, [W_ISINBATTLE] ; $d057
 	cp $ff
 	jp z, Func_48943
@@ -78530,14 +78807,16 @@ MtMoon1_h: ; 0x499bc to 0x499c8 (12 bytes) (id=59)
 MtMoon1Script: ; 499c8 (12:59c8)
 	call EnableAutoTextBoxDrawing
 	ld hl, MtMoon1TrainerHeader0
-	ld de, Unknown_59db
+	ld de, MtMoon1ScriptPointers
 	ld a, [W_MTMOON1CURSCRIPT]
 	call ExecuteCurMapScriptInTable
 	ld [W_MTMOON1CURSCRIPT], a
 	ret
 
-Unknown_59db: ; 499db (12:59db)
-INCBIN "baserom.gbc",$499db,$499e1 - $499db
+MtMoon1ScriptPointers: ; 499db (12:59db)
+	dw CheckFightingMapTrainers
+	dw Func_324c
+	dw EndTrainerBattle
 
 MtMoon1Texts: ; 499e1 (12:59e1)
 	dw MtMoon1Text1, MtMoon1Text2, MtMoon1Text3, MtMoon1Text4, MtMoon1Text5, MtMoon1Text6, MtMoon1Text7, Predef5CText, Predef5CText, Predef5CText, Predef5CText, Predef5CText, Predef5CText, MtMoon1Text14
@@ -78787,14 +79066,14 @@ MtMoon3_h: ; 0x49cff to 0x49d0b (12 bytes) (id=61)
 MtMoon3Script: ; 49d0b (12:5d0b)
 	call EnableAutoTextBoxDrawing
 	ld hl, MtMoon3TrainerHeader0 ; $5e48
-	ld de, Unknown_49d63 ; $5d63
+	ld de, MtMoon3ScriptPointers
 	ld a, [W_MTMOON3CURSCRIPT]
 	call ExecuteCurMapScriptInTable
 	ld [W_MTMOON3CURSCRIPT], a
 	ld a, [$d7f6]
 	bit 1, a
 	ret z
-	ld hl, Unknown_49d37 ; $5d37
+	ld hl, CoordsData_49d37
 	call ArePlayerCoordsInArray
 	jr nc, .asm_49d31 ; 0x49d29 $6
 	ld hl, $d72e
@@ -78805,8 +79084,24 @@ MtMoon3Script: ; 49d0b (12:5d0b)
 	res 4, [hl]
 	ret
 
-Unknown_49d37: ; 49d37 (12:5d37)
-INCBIN "baserom.gbc",$49d37,$49d58 - $49d37
+CoordsData_49d37: ; 49d37 (12:5d37)
+	db $05,$0B
+	db $05,$0C
+	db $05,$0D
+	db $05,$0E
+	db $06,$0B
+	db $06,$0C
+	db $06,$0D
+	db $06,$0E
+	db $07,$0B
+	db $07,$0C
+	db $07,$0D
+	db $07,$0E
+	db $08,$0B
+	db $08,$0C
+	db $08,$0D
+	db $08,$0E
+	db $FF
 
 Func_49d58: ; 49d58 (12:5d58)
 	xor a
@@ -78815,8 +79110,15 @@ Func_49d58: ; 49d58 (12:5d58)
 	ld [W_CURMAPSCRIPT], a
 	ret
 
-Unknown_49d63: ; 49d63 (12:5d63)
-INCBIN "baserom.gbc",$49d63,$49d6f - $49d63
+MtMoon3ScriptPointers: ; 49d63 (12:5d63)
+	dw MtMoon3Script1
+	dw Func_324c
+	dw EndTrainerBattle
+	dw MtMoon3Script4
+	dw MtMoon3Script5
+	dw MtMoon3Script6
+
+MtMoon3Script1: ; 49d6f (12:5d6f)
 	ld a, [$d7f6]
 	bit 1, a
 	jp nz, Func_49d91
@@ -78837,6 +79139,8 @@ Func_49d91: ; 49d91 (12:5d91)
 	and $c0
 	jp z, CheckFightingMapTrainers
 	ret
+
+MtMoon3Script4: ; 49d9a (12:5d9a)
 	ld a, [W_ISINBATTLE] ; $d057
 	cp $ff
 	jp z, Func_49d58
@@ -78850,19 +79154,21 @@ Func_49d91: ; 49d91 (12:5d91)
 	ld [W_MTMOON3CURSCRIPT], a
 	ld [W_CURMAPSCRIPT], a
 	ret
+
+MtMoon3Script5: ; 49dba (12:5dba)
 	ld a, $1
 	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
 	call SetSpriteMovementBytesToFF
-	ld hl, Unknown_49dea ; $5dea
+	ld hl, CoordsData_49dea
 	call ArePlayerCoordsInArray
 	jr c, .asm_49dd7
-	ld hl, Unknown_49df1 ; $5df1
+	ld hl, CoordsData_49df1
 	call ArePlayerCoordsInArray
 	jp nc, CheckFightingMapTrainers
-	ld de, Unknown_49df9 ; $5df9
+	ld de, MovementData_49df9
 	jr .asm_49dda
 .asm_49dd7
-	ld de, Unknown_49df8 ; $5df8
+	ld de, MovementData_49df8
 .asm_49dda
 	ld a, $1
 	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
@@ -78872,17 +79178,26 @@ Func_49d91: ; 49d91 (12:5d91)
 	ld [W_CURMAPSCRIPT], a
 	ret
 
-Unknown_49dea: ; 49dea (12:5dea)
-INCBIN "baserom.gbc",$49dea,$49df1 - $49dea
+CoordsData_49dea: ; 49dea (12:5dea)
+	db $07,$0C
+	db $06,$0B
+	db $05,$0C
+	db $FF
 
-Unknown_49df1: ; 49df1 (12:5df1)
-INCBIN "baserom.gbc",$49df1,$49df8 - $49df1
+CoordsData_49df1: ; 49df1 (12:5df1)
+	db $07,$0D
+	db $06,$0E
+	db $05,$0E
+	db $FF
 
-Unknown_49df8: ; 49df8 (12:5df8)
-INCBIN "baserom.gbc",$49df8,$49df9 - $49df8
+MovementData_49df8: ; 49df8 (12:5df8)
+	db $C0
 
-Unknown_49df9: ; 49df9 (12:5df9)
-INCBIN "baserom.gbc",$49df9,$49dfb - $49df9
+MovementData_49df9: ; 49df9 (12:5df9)
+	db $40
+	db $FF
+
+MtMoon3Script6: ; 49dfb (12:5dfb)
 	ld a, [$d730]
 	bit 0, a
 	ret nz
@@ -80266,7 +80581,7 @@ Route20Script: ; 50ca9 (14:4ca9)
 	call nz, Func_50cc6
 	call EnableAutoTextBoxDrawing
 	ld hl, Route20TrainerHeader0 ; $4d3a
-	ld de, Unknown_50d1c ; $4d1c
+	ld de, Route20ScriptPointers
 	ld a, [W_ROUTE20CURSCRIPT]
 	call ExecuteCurMapScriptInTable
 	ld [W_ROUTE20CURSCRIPT], a
@@ -80281,7 +80596,7 @@ Func_50cc6: ; 50cc6 (14:4cc6)
 	call Func_50d0c
 	ld a, $d8
 	call Func_50d0c
-	ld hl, .unknown_50ce8 ; $4ce8
+	ld hl, .MissableObjectIDs ; $4ce8
 .asm_50cdc
 	ld a, [hli]
 	cp $ff
@@ -80291,8 +80606,8 @@ Func_50cc6: ; 50cc6 (14:4cc6)
 	pop hl
 	jr .asm_50cdc
 
-.unknown_50ce8: ; 50ce8 (14:4ce8)
-INCBIN "baserom.gbc",$50ce8,$50cef - $50ce8
+.MissableObjectIDs: ; 50ce8 (14:4ce8)
+	db $D9,$DA,$DB,$DC,$DF,$E0,$FF
 
 .asm_50cef
 	ld a, [$d881]
@@ -80319,8 +80634,10 @@ Func_50d14: ; 50d14 (14:4d14)
 	ld a, $11
 	jp Predef ; indirect jump to RemoveMissableObject (f1d7 (3:71d7))
 
-Unknown_50d1c: ; 50d1c (14:4d1c)
-INCBIN "baserom.gbc",$50d1c,$50d22 - $50d1c
+Route20ScriptPointers: ; 50d1c (14:4d1c)
+	dw CheckFightingMapTrainers
+	dw Func_324c
+	dw EndTrainerBattle
 
 Route20Texts: ; 50d22 (14:4d22)
 	dw Route20Text1, Route20Text2, Route20Text3, Route20Text4, Route20Text5, Route20Text6, Route20Text7, Route20Text8, Route20Text9, Route20Text10, Route20Text11, Route20Text12
@@ -81204,14 +81521,14 @@ Func_51346: ; 51346 (14:5346)
 	ld a, c
 	and a
 	jr nz, .asm_5136e
-	ld hl, Unknown_5138e ; $538e
+	ld hl, VictoryRoadGuardText1 ; $538e
 	call PrintText
 	call Func_512d8
 	ld a, $1
 	ld [W_ROUTE23CURSCRIPT], a
 	ret
 .asm_5136e
-	ld hl, Unknown_5139e ; $539e
+	ld hl, VictoryRoadGuardText2 ; $539e
 	call PrintText
 	ld a, [W_WHICHTRADE] ; $cd3d
 	ld c, a
@@ -81225,13 +81542,17 @@ Func_51346: ; 51346 (14:5346)
 
 INCBIN "baserom.gbc",$51388,$5138e - $51388
 
-Unknown_5138e: ; 5138e (14:538e)
-INCBIN "baserom.gbc",$5138e,$5139e - $5138e
+VictoryRoadGuardText1: ; 5138e (14:538e)
+	TX_FAR _VictoryRoadGuardText1
+	db $08 ; asm
+	ld a, $a5
+	call PlaySoundWaitForCurrent
+	call WaitForSoundToFinish
+	jp TextScriptEnd
 
-Unknown_5139e: ; 5139e (14:539e)
-INCBIN "baserom.gbc",$5139e,$513a3 - $5139e
-
-UnnamedText_513a3: ; 513a3 (14:53a3)
+VictoryRoadGuardText2: ; 5139e (14:539e)
+	TX_FAR _VictoryRoadGuardText2
+	db $b
 	TX_FAR _UnnamedText_513a3
 	db "@"
 
@@ -81242,7 +81563,7 @@ Route23Text8: ; 513a8 (14:53a8)
 Route24Script: ; 513ad (14:53ad)
 	call EnableAutoTextBoxDrawing
 	ld hl, Route24TrainerHeaders
-	ld de, Unknown_513cb ; $53cb
+	ld de, Route24ScriptPointers
 	ld a, [W_ROUTE24CURSCRIPT]
 	call ExecuteCurMapScriptInTable
 	ld [W_ROUTE24CURSCRIPT], a
@@ -81255,7 +81576,7 @@ Func_513c0: ; 513c0 (14:53c0)
 	ld [W_CURMAPSCRIPT], a
 	ret
 
-Unknown_513cb: ; 513cb (14:53cb)
+Route24ScriptPointers: ; 513cb (14:53cb)
 INCBIN "baserom.gbc",$513cb,$513d5 - $513cb
 	ld a, [$d7ef]
 	bit 0, a
@@ -81545,7 +81866,7 @@ Route25Script: ; 515cb (14:55cb)
 	call Unknown_515e1
 	call EnableAutoTextBoxDrawing
 	ld hl, Route25TrainerHeaders
-	ld de, Unknown_51622 ; $5622
+	ld de, Route25ScriptPointers
 	ld a, [W_ROUTE25CURSCRIPT]
 	call ExecuteCurMapScriptInTable
 	ld [W_ROUTE25CURSCRIPT], a
@@ -81583,8 +81904,10 @@ Unknown_515e1: ; 515e1 (14:55e1)
 	ld a, $15
 	jp Predef ; indirect jump to AddMissableObject (f1c8 (3:71c8))
 
-Unknown_51622: ; 51622 (14:5622)
-INCBIN "baserom.gbc",$51622,$51628 - $51622
+Route25ScriptPointers: ; 51622 (14:5622)
+	dw CheckFightingMapTrainers
+	dw Func_324c
+	dw EndTrainerBattle
 
 Route25Texts: ; 51628 (14:5628)
 	dw Route25Text1, Route25Text2, Route25Text3, Route25Text4, Route25Text5, Route25Text6, Route25Text7, Route25Text8, Route25Text9, Predef5CText, Route25Text11
@@ -81851,20 +82174,20 @@ VictoryRoad2Script: ; 5179d (14:579d)
 	ld hl, $d126
 	bit 6, [hl]
 	res 6, [hl]
-	call nz, VictoryRoad2Script_Unknown517c4
+	call nz, VictoryRoad2Script_517c4
 	ld hl, $d126
 	bit 5, [hl]
 	res 5, [hl]
 	call nz, Func_517c9
 	call EnableAutoTextBoxDrawing
 	ld hl, VictoryRoad2TrainerHeaders
-	ld de, Unknown_517eb ; $57eb
+	ld de, VictoryRoad2ScriptPointers
 	ld a, [W_VICTORYROAD2CURSCRIPT]
 	call ExecuteCurMapScriptInTable
 	ld [W_VICTORYROAD2CURSCRIPT], a
 	ret
 
-VictoryRoad2Script_Unknown517c4: ; 517c4 (14:57c4)
+VictoryRoad2Script_517c4: ; 517c4 (14:57c4)
 	ld hl, $d869
 	res 7, [hl]
 
@@ -81889,9 +82212,13 @@ Func_517e2: ; 517e2 (14:57e2)
 	call Predef ; indirect jump to Func_ee9e (ee9e (3:6e9e))
 	ret
 
-Unknown_517eb: ; 517eb (14:57eb)
-INCBIN "baserom.gbc",$517eb,$517f1 - $517eb
-	ld hl, Unknown_51816 ; $5816
+VictoryRoad2ScriptPointers: ; 517eb (14:57eb)
+	dw VictoryRoad2Script1
+	dw Func_324c
+	dw EndTrainerBattle
+
+VictoryRoad2Script1: ; 517f1 (14:57f1)
+	ld hl, CoordsData_51816 ; $5816
 	call CheckBoulderCoords
 	jp nc, CheckFightingMapTrainers
 	ld hl, $d7ee
@@ -81911,8 +82238,10 @@ INCBIN "baserom.gbc",$517eb,$517f1 - $517eb
 	set 5, [hl]
 	ret
 
-Unknown_51816: ; 51816 (14:5816)
-INCBIN "baserom.gbc",$51816,$5181b - $51816
+CoordsData_51816: ; 51816 (14:5816)
+	db $10,$01
+	db $10,$09
+	db $FF
 
 VictoryRoad2Texts: ; 5181b (14:581b)
 	dw VictoryRoad2Text1, VictoryRoad2Text2, VictoryRoad2Text3, VictoryRoad2Text4, VictoryRoad2Text5, VictoryRoad2Text6, Predef5CText, Predef5CText, Predef5CText, Predef5CText, BoulderText, BoulderText, BoulderText
@@ -82177,16 +82506,16 @@ SilphCo7_h: ; 0x51b55 to 0x51b61 (12 bytes) (id=212)
 	dw SilphCo7Object ; objects
 
 SilphCo7Script: ; 51b61 (14:5b61)
-	call SilphCo7Script_Unknown51b77
+	call SilphCo7Script_51b77
 	call EnableAutoTextBoxDrawing
 	ld hl, SilphCo7TrainerHeaders
-	ld de, Unknown_51c17 ; $5c17
+	ld de, SilphCo7ScriptPointers
 	ld a, [W_SILPHCO7CURSCRIPT]
 	call ExecuteCurMapScriptInTable
 	ld [W_SILPHCO7CURSCRIPT], a
 	ret
 
-SilphCo7Script_Unknown51b77: ; 51b77 (14:5b77)
+SilphCo7Script_51b77: ; 51b77 (14:5b77)
 	ld hl, $d126
 	bit 5, [hl]
 	res 5, [hl]
@@ -82289,12 +82618,19 @@ Func_51c10: ; 51c10 (14:5c10)
 	ld [W_CURMAPSCRIPT], a
 	ret
 
-Unknown_51c17: ; 51c17 (14:5c17)
-INCBIN "baserom.gbc",$51c17,$51c23 - $51c17
+SilphCo7ScriptPointers: ; 51c17 (14:5c17)
+	dw SilphCo7Script1
+	dw Func_324c
+	dw EndTrainerBattle
+	dw SilphCo7Script4
+	dw SilphCo7Script5
+	dw SilphCo7Script6
+
+SilphCo7Script1: ; 51c23 (14:5c23)
 	ld a, [$d82f]
 	bit 0, a
 	jp nz, CheckFightingMapTrainers
-	ld hl, Unknown_51c78 ; $5c78
+	ld hl, CoordsData_51c78
 	call ArePlayerCoordsInArray
 	jp nc, CheckFightingMapTrainers
 	xor a
@@ -82315,7 +82651,7 @@ INCBIN "baserom.gbc",$51c17,$51c23 - $51c17
 	ld a, $9
 	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
 	call SetSpriteMovementBytesToFF
-	ld de, Unknown_51c7d ; $5c7d
+	ld de, MovementData_51c7d
 	ld a, [W_WHICHTRADE] ; $cd3d
 	ld [$cf0d], a
 	cp $1
@@ -82328,11 +82664,15 @@ INCBIN "baserom.gbc",$51c17,$51c23 - $51c17
 	ld a, $3
 	jp Func_51c10
 
-Unknown_51c78: ; 51c78 (14:5c78)
-INCBIN "baserom.gbc",$51c78,$51c7d - $51c78
+CoordsData_51c78: ; 51c78 (14:5c78)
+	db $02,$03
+	db $03,$03
+	db $FF
 
-Unknown_51c7d: ; 51c7d (14:5c7d)
-INCBIN "baserom.gbc",$51c7d,$51c82 - $51c7d
+MovementData_51c7d: ; 51c7d (14:5c7d)
+	db $40,$40,$40,$40,$FF
+
+SilphCo7Script4: ; 51c82 (14:5c82)
 	ld a, [$d730]
 	bit 0, a
 	ret nz
@@ -82366,6 +82706,8 @@ INCBIN "baserom.gbc",$51c7d,$51c82 - $51c7d
 	ld [W_TRAINERNO], a ; $d05d
 	ld a, $4
 	jp Func_51c10
+
+SilphCo7Script5: ; 51cc8 (14:5cc8)
 	ld a, [W_ISINBATTLE] ; $d057
 	cp $ff
 	jp z, Func_51c0c
@@ -82389,11 +82731,11 @@ INCBIN "baserom.gbc",$51c7d,$51c82 - $51c7d
 	ld b, BANK(Music_RivalAlternateStart)
 	ld hl, Music_RivalAlternateStart
 	call Bankswitch ; indirect jump to Music_RivalAlternateStart (9b47 (2:5b47))
-	ld de, Unknown_51d1d ; $5d1d
+	ld de, MovementData_51d1d
 	ld a, [$cf0d]
 	cp $1
 	jr nz, .asm_51d0e
-	ld de, Unknown_51d1a ; $5d1a
+	ld de, MovementData_51d1a
 .asm_51d0e
 	ld a, $9
 	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
@@ -82401,11 +82743,13 @@ INCBIN "baserom.gbc",$51c7d,$51c82 - $51c7d
 	ld a, $5
 	jp Func_51c10
 
-Unknown_51d1a: ; 51d1a (14:5d1a)
-INCBIN "baserom.gbc",$51d1a,$51d1d - $51d1a
+MovementData_51d1a: ; 51d1a (14:5d1a)
+	db $C0,$C0,$FF
 
-Unknown_51d1d: ; 51d1d (14:5d1d)
-INCBIN "baserom.gbc",$51d1d,$51d25 - $51d1d
+MovementData_51d1d: ; 51d1d (14:5d1d)
+	db $80,$40,$40,$C0,$C0,$C0,$00,$FF
+
+SilphCo7Script6: ; 51d25 (14:5d25)
 	ld a, [$d730]
 	bit 0, a
 	ret nz
@@ -82721,7 +83065,7 @@ Mansion2Script: ; 51fd8 (14:5fd8)
 	call Mansion2Script_Unknown51fee
 	call EnableAutoTextBoxDrawing
 	ld hl, Mansion2TrainerHeaders
-	ld de, Unknown_52047 ; $6047
+	ld de, Mansion2ScriptPointers
 	ld a, [W_MANSION2CURSCRIPT]
 	call ExecuteCurMapScriptInTable
 	ld [W_MANSION2CURSCRIPT], a
@@ -82762,10 +83106,20 @@ Func_5202f: ; 5202f (14:602f)
 	ld a, $17
 	jp Predef ; indirect jump to Func_ee9e (ee9e (3:6e9e))
 
-INCBIN "baserom.gbc",$52037,$52047 - $52037
+Func_52037: ; 52037 (14:6037)
+	ld a, [$c109]
+	cp $4
+	ret nz
+	xor a
+	ld [H_CURRENTPRESSEDBUTTONS], a
+	ld a, $5
+	ld [H_SPRITEHEIGHT], a
+	jp DisplayTextID
 
-Unknown_52047: ; 52047 (14:6047)
-INCBIN "baserom.gbc",$52047,$5204d - $52047
+Mansion2ScriptPointers: ; 52047 (14:6047)
+	dw CheckFightingMapTrainers
+	dw Func_324c
+	dw EndTrainerBattle
 
 Mansion2Texts: ; 5204d (14:604d)
 	dw Mansion2Text1, Predef5CText, Mansion2Text3, Mansion2Text4, Mansion2Text5
@@ -82884,16 +83238,16 @@ Mansion3_h: ; 0x521e2 to 0x521ee (12 bytes) (id=215)
 	dw Mansion3Object ; objects
 
 Mansion3Script: ; 521ee (14:61ee)
-	call Unnamed_52204
+	call Mansion3Script_52204
 	call EnableAutoTextBoxDrawing
 	ld hl, Mansion3TrainerHeader0
-	ld de, Unknown_52235 ; $6235
+	ld de, Mansion3ScriptPointers
 	ld a, [W_MANSION3CURSCRIPT]
 	call ExecuteCurMapScriptInTable
 	ld [W_MANSION3CURSCRIPT], a
 	ret
 
-Unnamed_52204: ; 52204 (14:6204)
+Mansion3Script_52204: ; 52204 (14:6204)
 	ld hl, $d126
 	bit 5, [hl]
 	res 5, [hl]
@@ -82917,9 +83271,13 @@ Unnamed_52204: ; 52204 (14:6204)
 	call Func_5202f
 	ret
 
-Unknown_52235: ; 52235 (14:6235)
-INCBIN "baserom.gbc",$52235,$5223b - $52235
-	ld hl, Unknown_52254 ; $6254
+Mansion3ScriptPointers: ; 52235 (14:6235)
+	dw Mansion3Script1
+	dw Func_324c
+	dw EndTrainerBattle
+
+Mansion3Script1: ; 5223b (14:623b)
+	ld hl, CoordsData_52254
 	call Func_5225b
 	ld a, [$d71e]
 	and a
@@ -82932,8 +83290,11 @@ INCBIN "baserom.gbc",$52235,$5223b - $52235
 	ld [$d71d], a
 	ret
 
-Unknown_52254: ; 52254 (14:6254)
-INCBIN "baserom.gbc",$52254,$5225b - $52254
+CoordsData_52254: ; 52254 (14:6254)
+	db $0E,$10
+	db $0E,$11
+	db $0E,$13
+	db $FF
 
 Func_5225b: ; 5225b (14:625b)
 	xor a
@@ -83060,7 +83421,7 @@ Mansion4Script: ; 523b9 (14:63b9)
 	call Unknown_523cf
 	call EnableAutoTextBoxDrawing
 	ld hl, Mansion4TrainerHeader0
-	ld de, Unknown_52430 ; $6430
+	ld de, Mansion4ScriptPointers
 	ld a, [W_MANSION4CURSCRIPT]
 	call ExecuteCurMapScriptInTable
 	ld [W_MANSION4CURSCRIPT], a
@@ -83110,11 +83471,13 @@ Unknown_523cf: ; 523cf (14:63cf)
 	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
 	jp DisplayTextID
 
-Unknown_52430: ; 52430 (14:6430)
-INCBIN "baserom.gbc",$52430,$52436 - $52430
+Mansion4ScriptPointers: ; 52430 (14:6430)
+	dw CheckFightingMapTrainers
+	dw Func_324c
+	dw EndTrainerBattle
 
 Mansion4Texts: ; 52436 (14:6436)
-INCBIN "baserom.gbc",$52436,$52448 - $52436
+	dw Mansion4Text1, Mansion4Text2, Predef5CText, Predef5CText, Predef5CText, Predef5CText, Mansion4Text7, Predef5CText, Mansion3Text6
 
 Mansion4TrainerHeaders: ; 52448 (14:6448)
 Mansion4TrainerHeader0: ; 52448 (14:6448)
@@ -84765,14 +85128,16 @@ Route2Text4: ; 554f3 (15:54f3)
 Route3Script: ; 554f8 (15:54f8)
 	call EnableAutoTextBoxDrawing
 	ld hl, Route3TrainerHeader0
-	ld de, Unknown_5550b
+	ld de, Route3ScriptPointers
 	ld a, [W_ROUTE3CURSCRIPT]
 	call ExecuteCurMapScriptInTable
 	ld [W_ROUTE3CURSCRIPT], a
 	ret
 
-Unknown_5550b: ; 5550b (15:550b)
-INCBIN "baserom.gbc",$5550b,$55511 - $5550b
+Route3ScriptPointers: ; 5550b (15:550b)
+	dw CheckFightingMapTrainers
+	dw Func_324c
+	dw EndTrainerBattle
 
 Route3Texts: ; 55511 (15:5511)
 	dw Route3Text1, Route3Text2, Route3Text3, Route3Text4, Route3Text5, Route3Text6, Route3Text7, Route3Text8, Route3Text9, Route3Text10
@@ -85007,14 +85372,16 @@ Route3Text10: ; 55653 (15:5653)
 Route4Script: ; 55658 (15:5658)
 	call EnableAutoTextBoxDrawing
 	ld hl, Route4TrainerHeaders
-	ld de, Unknown_5566b
+	ld de, Route4ScriptPointers
 	ld a, [W_ROUTE4CURSCRIPT]
 	call ExecuteCurMapScriptInTable
 	ld [W_ROUTE4CURSCRIPT], a
 	ret
 
-Unknown_5566b: ; 5566b (15:566b)
-INCBIN "baserom.gbc",$5566b,$55671 - $5566b
+Route4ScriptPointers: ; 5566b (15:566b)
+	dw CheckFightingMapTrainers
+	dw Func_324c
+	dw EndTrainerBattle
 
 Route4Texts: ; 55671 (15:5671)
 	dw Route4Text1, Route4Text2, Predef5CText, PokeCenterSignText, Route4Text5, Route4Text6
@@ -85074,14 +85441,16 @@ Route5Text1: ; 556b7 (15:56b7)
 Route9Script: ; 556bc (15:56bc)
 	call EnableAutoTextBoxDrawing
 	ld hl, Route9TrainerHeaders
-	ld de, Unknown_556cf
+	ld de, Route9ScriptPointers
 	ld a, [W_ROUTE9CURSCRIPT]
 	call ExecuteCurMapScriptInTable
 	ld [W_ROUTE9CURSCRIPT], a
 	ret
 
-Unknown_556cf: ; 556cf (15:56cf)
-INCBIN "baserom.gbc",$556cf,$556d5 - $556cf
+Route9ScriptPointers: ; 556cf (15:56cf)
+	dw CheckFightingMapTrainers
+	dw Func_324c
+	dw EndTrainerBattle
 
 Route9Texts: ; 556d5 (15:56d5)
 	dw Route9Text1, Route9Text2, Route9Text3, Route9Text4, Route9Text5, Route9Text6, Route9Text7, Route9Text8, Route9Text9, Predef5CText, Route9Text11
@@ -85332,14 +85701,16 @@ Route9Text11: ; 55819 (15:5819)
 Route13Script: ; 5581e (15:581e)
 	call EnableAutoTextBoxDrawing
 	ld hl, Route13TrainerHeaders
-	ld de, Route13Script_Unknown55831
+	ld de, Route13ScriptPointers
 	ld a, [W_ROUTE13CURSCRIPT]
 	call ExecuteCurMapScriptInTable
 	ld [W_ROUTE13CURSCRIPT], a
 	ret
 
-Route13Script_Unknown55831: ; 55831 (15:5831)
-INCBIN "baserom.gbc",$55831,$55837 - $55831
+Route13ScriptPointers: ; 55831 (15:5831)
+	dw CheckFightingMapTrainers
+	dw Func_324c
+	dw EndTrainerBattle
 
 Route13Texts: ; 55837 (15:5837)
 	dw Route13Text1, Route13Text2, Route13Text3, Route13Text4, Route13Text5, Route13Text6, Route13Text7, Route13Text8, Route13Text9, Route13Text10, Route13Text11, Route13Text12, Route13Text13
@@ -85632,14 +86003,16 @@ Route13Text13: ; 559ce (15:59ce)
 Route14Script: ; 559d3 (15:59d3)
 	call EnableAutoTextBoxDrawing
 	ld hl, Route14TrainerHeaders
-	ld de, Unknown_559e6
+	ld de, Route14ScriptPointers
 	ld a, [W_ROUTE14CURSCRIPT]
 	call ExecuteCurMapScriptInTable
 	ld [W_ROUTE14CURSCRIPT], a
 	ret
 
-Unknown_559e6: ; 559e6 (15:59e6)
-INCBIN "baserom.gbc",$559e6,$559ec - $559e6
+Route14ScriptPointers: ; 559e6 (15:59e6)
+	dw CheckFightingMapTrainers
+	dw Func_324c
+	dw EndTrainerBattle
 
 Route14Texts: ; 559ec (15:59ec)
 	dw Route14Text1, Route14Text2, Route14Text3, Route14Text4, Route14Text5, Route14Text6, Route14Text7, Route14Text8, Route14Text9, Route14Text10, Route14Text11
@@ -85924,14 +86297,16 @@ Route14Text11: ; 55b75 (15:5b75)
 Route17Script: ; 55b7a (15:5b7a)
 	call EnableAutoTextBoxDrawing
 	ld hl, Route17TrainerHeaders
-	ld de, Route17_Unknown55b8d
+	ld de, Route17ScriptPointers
 	ld a, [W_ROUTE17CURSCRIPT]
 	call ExecuteCurMapScriptInTable
 	ld [W_ROUTE17CURSCRIPT], a
 	ret
 
-Route17_Unknown55b8d: ; 55b8d (15:5b8d)
-INCBIN "baserom.gbc",$55b8d,$55b93 - $55b8d
+Route17ScriptPointers: ; 55b8d (15:5b8d)
+	dw CheckFightingMapTrainers
+	dw Func_324c
+	dw EndTrainerBattle
 
 Route17Texts: ; 55b93 (15:5b93)
 	dw Route17Text1, Route17Text2, Route17Text3, Route17Text4, Route17Text5, Route17Text6, Route17Text7, Route17Text8, Route17Text9, Route17Text10, Route17Text11, Route17Text12, Route17Text13, Route17Text14, Route17Text15, Route17Text16
@@ -86236,14 +86611,16 @@ Route17Text16: ; 55d3f (15:5d3f)
 Route19Script: ; 55d44 (15:5d44)
 	call EnableAutoTextBoxDrawing
 	ld hl, Route19TrainerHeaders
-	ld de, Route19_Unknown55d57
+	ld de, Route19ScriptPointers
 	ld a, [W_ROUTE19CURSCRIPT]
 	call ExecuteCurMapScriptInTable
 	ld [W_ROUTE19CURSCRIPT], a
 	ret
 
-Route19_Unknown55d57: ; 55d57 (15:5d57)
-INCBIN "baserom.gbc",$55d57,$55d5d - $55d57
+Route19ScriptPointers: ; 55d57 (15:5d57)
+	dw CheckFightingMapTrainers
+	dw Func_324c
+	dw EndTrainerBattle
 
 Route19Texts: ; 55d5d (15:5d5d)
 	dw Route19Text1, Route19Text2, Route19Text3, Route19Text4, Route19Text5, Route19Text6, Route19Text7, Route19Text8, Route19Text9, Route19Text10, Route19Text11
@@ -86528,14 +86905,16 @@ Route19Text11: ; 55ee6 (15:5ee6)
 Route21Script: ; 55eeb (15:5eeb)
 	call EnableAutoTextBoxDrawing
 	ld hl, Route21TrainerHeaders
-	ld de, Route21_Unknown55efe
+	ld de, Route21ScriptPointers
 	ld a, [W_ROUTE21CURSCRIPT]
 	call ExecuteCurMapScriptInTable
 	ld [W_ROUTE21CURSCRIPT], a
 	ret
 
-Route21_Unknown55efe: ; 55efe (15:5efe)
-INCBIN "baserom.gbc",$55efe,$55f04 - $55efe
+Route21ScriptPointers: ; 55efe (15:5efe)
+	dw CheckFightingMapTrainers
+	dw Func_324c
+	dw EndTrainerBattle
 
 Route21Texts: ; 55f04 (15:5f04)
 	dw Route21Text1, Route21Text2, Route21Text3, Route21Text4, Route21Text5, Route21Text6, Route21Text7, Route21Text8, Route21Text9
@@ -87248,7 +87627,7 @@ SilphCo8Script: ; 56504 (15:6504)
 	call SilphCo8_Unknown5651a
 	call EnableAutoTextBoxDrawing
 	ld hl, SilphCo8TrainerHeader0
-	ld de, Unknown_56577 ; $6577
+	ld de, SilphCo8ScriptPointers
 	ld a, [W_SILPHCO8CURSCRIPT]
 	call ExecuteCurMapScriptInTable
 	ld [W_SILPHCO8CURSCRIPT], a
@@ -87318,8 +87697,10 @@ Func_5656d: ; 5656d (15:656d)
 	set 0, [hl]
 	ret
 
-Unknown_56577: ; 56577 (15:6577)
-INCBIN "baserom.gbc",$56577,$5657d - $56577
+SilphCo8ScriptPointers: ; 56577 (15:6577)
+	dw CheckFightingMapTrainers
+	dw Func_324c
+	dw EndTrainerBattle
 
 SilphCo8Texts: ; 5657d (15:657d)
 	dw SilphCo8Text1, SilphCo8Text2, SilphCo8Text3, SilphCo8Text4
@@ -88812,14 +89193,16 @@ UnnamedText_590ab: ; 590ab (16:50ab)
 Route6Script: ; 590b0 (16:50b0)
 	call EnableAutoTextBoxDrawing
 	ld hl, Route6TrainerHeaders
-	ld de, Route6_Unknown590c3
+	ld de, Route6ScriptPointers
 	ld a, [W_ROUTE6CURSCRIPT]
 	call ExecuteCurMapScriptInTable
 	ld [W_ROUTE6CURSCRIPT], a
 	ret
 
-Route6_Unknown590c3: ; 590c3 (16:50c3)
-INCBIN "baserom.gbc",$590c3,$590c9 - $590c3
+Route6ScriptPointers: ; 590c3 (16:50c3)
+	dw CheckFightingMapTrainers
+	dw Func_324c
+	dw EndTrainerBattle
 
 Route6Texts: ; 590c9 (16:50c9)
 	dw Route6Text1, Route6Text2, Route6Text3, Route6Text4, Route6Text5, Route6Text6, Route6Text7
@@ -88992,14 +89375,16 @@ Route6Text7: ; 591b1 (16:51b1)
 Route8Script: ; 591b6 (16:51b6)
 	call EnableAutoTextBoxDrawing
 	ld hl, Route8TrainerHeaders
-	ld de, Route8_Unknown591c9
+	ld de, Route8ScriptPointers
 	ld a, [W_ROUTE8CURSCRIPT]
 	call ExecuteCurMapScriptInTable
 	ld [W_ROUTE8CURSCRIPT], a
 	ret
 
-Route8_Unknown591c9: ; 591c9 (16:51c9)
-INCBIN "baserom.gbc",$591c9,$591cf - $591c9
+Route8ScriptPointers: ; 591c9 (16:51c9)
+	dw CheckFightingMapTrainers
+	dw Func_324c
+	dw EndTrainerBattle
 
 Route8Texts: ; 591cf (16:51cf)
 	dw Route8Text1, Route8Text2, Route8Text3, Route8Text4, Route8Text5, Route8Text6, Route8Text7, Route8Text8, Route8Text9, Route8Text10
@@ -89257,14 +89642,16 @@ Route8Text10: ; 59331 (16:5331)
 Route10Script: ; 59336 (16:5336)
 	call EnableAutoTextBoxDrawing
 	ld hl, Route10TrainerHeaders
-	ld de, Route10_Unknown59349
+	ld de, Route10ScriptPointers
 	ld a, [W_ROUTE10CURSCRIPT]
 	call ExecuteCurMapScriptInTable
 	ld [W_ROUTE10CURSCRIPT], a
 	ret
 
-Route10_Unknown59349: ; 59349 (16:5349)
-INCBIN "baserom.gbc",$59349,$5934f - $59349
+Route10ScriptPointers: ; 59349 (16:5349)
+	dw CheckFightingMapTrainers
+	dw Func_324c
+	dw EndTrainerBattle
 
 Route10Texts: ; 5934f (16:534f)
 	dw Route10Text1, Route10Text2, Route10Text3, Route10Text4, Route10Text5, Route10Text6, Route10Text7, PokeCenterSignText, Route10Text9, Route10Text10
@@ -89446,13 +89833,13 @@ Route10Text10: ; 59447 (16:5447)
 Route11Script: ; 5944c (16:544c)
 	call EnableAutoTextBoxDrawing
 	ld hl, Route11TrainerHeaders
-	ld de, Route11_Unknown5945f
+	ld de, Route11ScriptPointers
 	ld a, [W_ROUTE11CURSCRIPT]
 	call ExecuteCurMapScriptInTable
 	ld [W_ROUTE11CURSCRIPT], a
 	ret
 
-Route11_Unknown5945f: ; 5945f (16:545f)
+Route11ScriptPointers: ; 5945f (16:545f)
 	dw CheckFightingMapTrainers
 	dw Func_324c
 	dw EndTrainerBattle
@@ -89740,21 +90127,26 @@ Route11Text11: ; 595ee (16:55ee)
 Route12Script: ; 595f3 (16:55f3)
 	call EnableAutoTextBoxDrawing
 	ld hl, Route12TrainerHeaders
-	ld de, .unknown_59611 ; $5611
+	ld de, Route12ScriptPointers
 	ld a, [W_ROUTE12CURSCRIPT]
 	call ExecuteCurMapScriptInTable
 	ld [W_ROUTE12CURSCRIPT], a
 	ret
-.asm_59606
+
+Route12Script_59606: ; 59606 (16:5606)
 	xor a
 	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
 	ld [W_ROUTE12CURSCRIPT], a
 	ld [W_CURMAPSCRIPT], a
 	ret
 
-.unknown_59611: ; 59611 (16:5611)
-INCBIN "baserom.gbc",$59611,$59619 - $59611
+Route12ScriptPointers: ; 59611 (16:5611)
+	dw Route12Script1
+	dw Func_324c
+	dw EndTrainerBattle
+	dw Route12Script4
 
+Route12Script1: ; 59619 (16:5619)
 	ld hl, $d7d8
 	bit 7, [hl]
 	jp nz, CheckFightingMapTrainers
@@ -89776,9 +90168,11 @@ INCBIN "baserom.gbc",$59611,$59619 - $59611
 	ld [W_ROUTE12CURSCRIPT], a
 	ld [W_CURMAPSCRIPT], a
 	ret
+
+Route12Script4: ; 5964c (16:564c)
 	ld a, [W_ISINBATTLE] ; $d057
 	cp $ff
-	jr z, .asm_59606
+	jr z, Route12Script_59606
 	call UpdateSprites
 	ld a, [$cf0b]
 	cp $2
@@ -90015,14 +90409,16 @@ Route12Text12: ; 597a9 (16:57a9)
 Route15Script: ; 597ae (16:57ae)
 	call EnableAutoTextBoxDrawing
 	ld hl, Route15TrainerHeaders
-	ld de, Route15_Unknown597c1
+	ld de, Route15ScriptPointers
 	ld a, [W_ROUTE15CURSCRIPT]
 	call ExecuteCurMapScriptInTable
 	ld [W_ROUTE15CURSCRIPT], a
 	ret
 
-Route15_Unknown597c1: ; 597c1 (16:57c1)
-INCBIN "baserom.gbc",$597c1,$597c7 - $597c1
+Route15ScriptPointers: ; 597c1 (16:57c1)
+	dw CheckFightingMapTrainers
+	dw Func_324c
+	dw EndTrainerBattle
 
 Route15Texts: ; 597c7 (16:57c7)
 	dw Route15Text1, Route15Text2, Route15Text3, Route15Text4, Route15Text5, Route15Text6, Route15Text7, Route15Text8, Route15Text9, Route15Text10, Predef5CText, Route15Text12
@@ -90299,7 +90695,7 @@ Route15Text12: ; 5992e (16:592e)
 Route16Script: ; 59933 (16:5933)
 	call EnableAutoTextBoxDrawing
 	ld hl, Route16TrainerHeaders
-	ld de, Unknown_59951 ; $5951
+	ld de, Route16ScriptPointers
 	ld a, [W_ROUTE16CURSCRIPT]
 	call ExecuteCurMapScriptInTable
 	ld [W_ROUTE16CURSCRIPT], a
@@ -90312,8 +90708,13 @@ Func_59946: ; 59946 (16:5946)
 	ld [W_CURMAPSCRIPT], a
 	ret
 
-Unknown_59951: ; 59951 (16:5951)
-INCBIN "baserom.gbc",$59951,$59959 - $59951
+Route16ScriptPointers: ; 59951 (16:5951)
+	dw Route16Script1
+	dw Func_324c
+	dw EndTrainerBattle
+	dw Route16Script4
+
+Route16Script1: ; 59959 (16:5959)
 	ld hl, $d7e0
 	bit 1, [hl]
 	jp nz, CheckFightingMapTrainers
@@ -90336,6 +90737,8 @@ INCBIN "baserom.gbc",$59951,$59959 - $59951
 	ld [W_ROUTE16CURSCRIPT], a
 	ld [W_CURMAPSCRIPT], a
 	ret
+
+Route16Script4: ; 5998f (16:598f)
 	ld a, [W_ISINBATTLE] ; $d057
 	cp $ff
 	jp z, Func_59946
@@ -90546,14 +90949,16 @@ Route16Text9: ; 59ac2 (16:5ac2)
 Route18Script: ; 59ac7 (16:5ac7)
 	call EnableAutoTextBoxDrawing
 	ld hl, Route18TrainerHeaders
-	ld de, Route18_Unknown59ada
+	ld de, Route18ScriptPointers
 	ld a, [W_ROUTE18CURSCRIPT]
 	call ExecuteCurMapScriptInTable
 	ld [W_ROUTE18CURSCRIPT], a
 	ret
 
-Route18_Unknown59ada: ; 59ada (16:5ada)
-INCBIN "baserom.gbc",$59ada,$59ae0 - $59ada
+Route18ScriptPointers: ; 59ada (16:5ada)
+	dw CheckFightingMapTrainers
+	dw Func_324c
+	dw EndTrainerBattle
 
 Route18Texts: ; 59ae0 (16:5ae0)
 	dw Route18Text1, Route18Text2, Route18Text3, Route18Text4, Route18Text5
@@ -90859,17 +91264,44 @@ SilphCo2_h: ; 0x59ce5 to 0x59cf1 (12 bytes) (id=207)
 	dw SilphCo2Object ; objects
 
 SilphCo2Script: ; 59cf1 (16:5cf1)
-	call SilphCo2_Unknown59d07
+	call SilphCo2Script_59d07
 	call EnableAutoTextBoxDrawing
 	ld hl, SilphCo2TrainerHeaders
-	ld de, Unknown_59d80 ; $5d80
+	ld de, SilphCo2ScriptPointers
 	ld a, [W_SILPHCO2CURSCRIPT]
 	call ExecuteCurMapScriptInTable
 	ld [W_SILPHCO2CURSCRIPT], a
 	ret
 
-SilphCo2_Unknown59d07: ; 59d07 (16:5d07)
-INCBIN "baserom.gbc",$59d07,$59d43 - $59d07
+SilphCo2Script_59d07: ; 59d07 (16:5d07)
+	ld hl, $d126
+	bit 5, [hl]
+	res 5, [hl]
+	ret z
+	ld hl, Unknown_59d3e
+	call Func_59d43
+	call Func_59d6f
+	ld a, [$d826]
+	bit 5, a
+	jr nz, .asm_59d2e
+	push af
+	ld a, $54
+	ld [$d09f], a
+	ld bc, $0202
+	ld a, $17
+	call Predef
+	pop af
+.asm_59d2e
+	bit 6, a
+	ret nz
+	ld a, $54
+	ld [$d09f], a
+	ld bc, $0502
+	ld a, $17
+	jp Predef
+
+Unknown_59d3e: ; 59d3e (16:5d3e)
+INCBIN "baserom.gbc",$59d3e,$59d43 - $59d3e
 
 Func_59d43: ; 59d43 (16:5d43)
 	push hl
@@ -90907,10 +91339,23 @@ Func_59d43: ; 59d43 (16:5d43)
 	ld [$FF00+$e0], a
 	ret
 
-INCBIN "baserom.gbc",$59d6f,$59d80 - $59d6f
+Func_59d6f: ; 59d6f (16:5d6f)
+	ld hl, $d826
+	ld a, [$ffe0]
+	and a
+	ret z
+	cp $1
+	jr nz, .asm_59d7d
+	set 5, [hl]
+	ret
+.asm_59d7d
+	set 6, [hl]
+	ret
 
-Unknown_59d80: ; 59d80 (16:5d80)
-INCBIN "baserom.gbc",$59d80,$59d86 - $59d80
+SilphCo2ScriptPointers: ; 59d80 (16:5d80)
+	dw CheckFightingMapTrainers
+	dw Func_324c
+	dw EndTrainerBattle
 
 SilphCo2Texts: ; 59d86 (16:5d86)
 	dw SilphCo2Text1, SilphCo2Text2, SilphCo2Text3, SilphCo2Text4, SilphCo2Text5
@@ -91105,16 +91550,16 @@ SilphCo3_h: ; 0x59f4f to 0x59f5b (12 bytes) (id=208)
 	dw SilphCo3Object ; objects
 
 SilphCo3Script: ; 59f5b (16:5f5b)
-	call SilphCo3Script_Unknown59f71
+	call SilphCo3Script_59f71
 	call EnableAutoTextBoxDrawing
 	ld hl, SilphCo3TrainerHeaders
-	ld de, Unknown_59fbe ; $5fbe
+	ld de, SilphCo3ScriptPointers
 	ld a, [W_SILPHCO3CURSCRIPT]
 	call ExecuteCurMapScriptInTable
 	ld [W_SILPHCO3CURSCRIPT], a
 	ret
 
-SilphCo3Script_Unknown59f71: ; 59f71 (16:5f71)
+SilphCo3Script_59f71: ; 59f71 (16:5f71)
 	ld hl, $d126
 	bit 5, [hl]
 	res 5, [hl]
@@ -91157,8 +91602,10 @@ Func_59fad: ; 59fad (16:5fad)
 	set 1, [hl]
 	ret
 
-Unknown_59fbe: ; 59fbe (16:5fbe)
-INCBIN "baserom.gbc",$59fbe,$59fc4 - $59fbe
+SilphCo3ScriptPointers: ; 59fbe (16:5fbe)
+	dw CheckFightingMapTrainers
+	dw Func_324c
+	dw EndTrainerBattle
 
 SilphCo3Texts: ; 59fc4 (16:5fc4)
 	dw SilphCo3Text1, SilphCo3Text2, SilphCo3Text3, Predef5CText
@@ -91286,16 +91733,16 @@ SilphCo10_h: ; 0x5a12d to 0x5a139 (12 bytes) (id=234)
 	dw SilphCo10Object ; objects
 
 SilphCo10Script: ; 5a139 (16:6139)
-	call SilphCo10Script_Unknown5a14f
+	call SilphCo10Script_5a14f
 	call EnableAutoTextBoxDrawing
 	ld hl, SilphCo10TrainerHeaders
-	ld de, Unknown_5a180 ; $6180
+	ld de, SilphCo10ScriptPointers
 	ld a, [W_SILPHCO10CURSCRIPT]
 	call ExecuteCurMapScriptInTable
 	ld [W_SILPHCO10CURSCRIPT], a
 	ret
 
-SilphCo10Script_Unknown5a14f: ; 5a14f (16:614f)
+SilphCo10Script_5a14f: ; 5a14f (16:614f)
 	ld hl, $d126
 	bit 5, [hl]
 	res 5, [hl]
@@ -91323,8 +91770,10 @@ Func_5a176: ; 5a176 (16:6176)
 	set 0, [hl]
 	ret
 
-Unknown_5a180: ; 5a180 (16:6180)
-INCBIN "baserom.gbc",$5a180,$5a186 - $5a180
+SilphCo10ScriptPointers: ; 5a180 (16:6180)
+	dw CheckFightingMapTrainers
+	dw Func_324c
+	dw EndTrainerBattle
 
 SilphCo10Texts: ; 5a186 (16:6186)
 	dw SilphCo10Text1, SilphCo10Text2, SilphCo10Text3, Predef5CText, Predef5CText, Predef5CText
@@ -91367,9 +91816,9 @@ SilphCo10Text3: ; 5a1bf (16:61bf)
 	ld a, [$d838]
 	bit 7, a
 	ld hl, UnnamedText_5a1d8
-	jr nz, asm_cf85f ; 0x5a1c8
+	jr nz, .asm_cf85f
 	ld hl, UnnamedText_5a1d3
-asm_cf85f ; 0x5a1cd
+.asm_cf85f
 	call PrintText
 	jp TextScriptEnd
 
@@ -91446,16 +91895,16 @@ Lance_h: ; 0x5a2a2 to 0x5a2ae (12 bytes) (id=113)
 	dw LanceObject ; objects
 
 LanceScript: ; 5a2ae (16:62ae)
-	call LanceScript_Unknown5a2c4
+	call LanceScript_5a2c4
 	call EnableAutoTextBoxDrawing
 	ld hl, LanceTrainerHeaders
-	ld de, Unknown_5a2fa ; $62fa
+	ld de, LanceScriptPointers
 	ld a, [W_LANCECURSCRIPT]
 	call ExecuteCurMapScriptInTable
 	ld [W_LANCECURSCRIPT], a
 	ret
 
-LanceScript_Unknown5a2c4: ; 5a2c4 (16:62c4)
+LanceScript_5a2c4: ; 5a2c4 (16:62c4)
 	ld hl, $d126
 	bit 5, [hl]
 	res 5, [hl]
@@ -91489,12 +91938,21 @@ Func_5a2f5: ; 5a2f5 (16:62f5)
 	ld [W_LANCECURSCRIPT], a
 	ret
 
-Unknown_5a2fa: ; 5a2fa (16:62fa)
-INCBIN "baserom.gbc",$5a2fa,$5a305 - $5a2fa
+LanceScriptPointers: ; 5a2fa (16:62fa)
+	dw LanceScript1
+	dw Func_324c
+	dw LanceScript3
+	dw LanceScript4
+	dw LanceScript5
+
+LanceScript5: ; 5a304 (16:6304)
+	ret
+
+LanceScript1: ; 5a305 (16:6305)
 	ld a, [$d866]
 	bit 6, a
 	ret nz
-	ld hl, .unknown_5a33e ; $633e
+	ld hl, CoordsData_5a33e ; $633e
 	call ArePlayerCoordsInArray
 	jp nc, CheckFightingMapTrainers
 	xor a
@@ -91507,7 +91965,7 @@ INCBIN "baserom.gbc",$5a2fa,$5a305 - $5a2fa
 	jp DisplayTextID
 .asm_5a325
 	cp $5
-	jr z, .asm_5a35b
+	jr z, Func_5a35b
 	ld hl, $d866
 	bit 7, [hl]
 	set 7, [hl]
@@ -91516,11 +91974,12 @@ INCBIN "baserom.gbc",$5a2fa,$5a305 - $5a2fa
 	set 5, [hl]
 	ld a, $ad
 	call PlaySound
-	jp LanceScript_Unknown5a2c4
+	jp LanceScript_5a2c4
 
-.unknown_5a33e: ; 5a33e (16:633e)
+CoordsData_5a33e: ; 5a33e (16:633e)
 INCBIN "baserom.gbc",$5a33e,$5a349 - $5a33e
 
+LanceScript3: ; 5a349 (16:6349)
 	call EndTrainerBattle
 	ld a, [W_ISINBATTLE] ; $d057
 	cp $ff
@@ -91528,7 +91987,8 @@ INCBIN "baserom.gbc",$5a33e,$5a349 - $5a33e
 	ld a, $1
 	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
 	jp DisplayTextID
-.asm_5a35b
+
+Func_5a35b: ; 5a35b (16:635b)
 	ld a, $ff
 	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
 	ld hl, $ccd3
@@ -91549,7 +92009,7 @@ db $80, $07
 db $20, $06
 db $FF
 
-Func_5a382: ; 5a382 (16:6382)
+LanceScript4: ; 5a382 (16:6382)
 	ld a, [$cd38]
 	and a
 	ret nz
@@ -92221,7 +92681,7 @@ PewterGymScript: ; 5c387 (17:4387)
 	call nz, PewterGymScript_Unknown5c3a4
 	call EnableAutoTextBoxDrawing
 	ld hl, PewterGymTrainerHeaders
-	ld de, Unknown_5c3ca ; $43ca
+	ld de, PewterGymScriptPointers
 	ld a, [W_PEWTERGYMCURSCRIPT]
 	call ExecuteCurMapScriptInTable
 	ld [W_PEWTERGYMCURSCRIPT], a
@@ -92245,8 +92705,13 @@ Func_5c3bf: ; 5c3bf (17:43bf)
 	ld [W_CURMAPSCRIPT], a
 	ret
 
-Unknown_5c3ca: ; 5c3ca (17:43ca)
-INCBIN "baserom.gbc",$5c3ca,$5c3d2 - $5c3ca
+PewterGymScriptPointers: ; 5c3ca (17:43ca)
+	dw CheckFightingMapTrainers
+	dw Func_324c
+	dw EndTrainerBattle
+	dw PewterGymScript4
+
+PewterGymScript4: ; 5c3d2 (17:43d2)
 	ld a, [W_ISINBATTLE] ; $d057
 	cp $ff
 	jp z, Func_5c3bf
@@ -92621,16 +93086,16 @@ CeruleanGymScript: ; 5c6b3 (17:46b3)
 	ld hl, $d126
 	bit 6, [hl]
 	res 6, [hl]
-	call nz, CeruleanGymScript_Unknown5c6d0
+	call nz, CeruleanGymScript_5c6d0
 	call EnableAutoTextBoxDrawing
 	ld hl, CeruleanGymTrainerHeaders
-	ld de, Unknown_5c6f8 ; $46f8
+	ld de, CeruleanGymScriptPointers
 	ld a, [W_CERULEANGYMCURSCRIPT]
 	call ExecuteCurMapScriptInTable
 	ld [W_CERULEANGYMCURSCRIPT], a
 	ret
 
-CeruleanGymScript_Unknown5c6d0: ; 5c6d0 (17:46d0)
+CeruleanGymScript_5c6d0: ; 5c6d0 (17:46d0)
 	ld hl, Gym2CityName ; $46d9
 	ld de, Gym2LeaderName ; $46e7
 	jp LoadGymLeaderAndCityName
@@ -92648,8 +93113,13 @@ Func_5c6ed: ; 5c6ed (17:46ed)
 	ld [W_CURMAPSCRIPT], a
 	ret
 
-Unknown_5c6f8: ; 5c6f8 (17:46f8)
-INCBIN "baserom.gbc",$5c6f8,$5c700 - $5c6f8
+CeruleanGymScriptPointers: ; 5c6f8 (17:46f8)
+	dw CheckFightingMapTrainers
+	dw Func_324c
+	dw EndTrainerBattle
+	dw CeruleanGymScript4
+
+CeruleanGymScript4: ; 5c700 (17:4700)
 	ld a, [W_ISINBATTLE] ; $d057
 	cp $ff
 	jp z, Func_5c6ed
@@ -93097,20 +93567,20 @@ VermilionGymScript: ; 5ca26 (17:4a26)
 	bit 5, [hl]
 	res 5, [hl]
 	push hl
-	call nz, VermilionGymScript_Unknown5ca4c
+	call nz, VermilionGymScript_5ca4c
 	pop hl
 	bit 6, [hl]
 	res 6, [hl]
-	call nz, Func_5ca6d
+	call nz, VermilionGymScript_5ca6d
 	call EnableAutoTextBoxDrawing
 	ld hl, VermilionGymTrainerHeader0
-	ld de, Unknown_5ca95 ; $4a95
+	ld de, VermilionGymScriptPointers
 	ld a, [W_VERMILIONGYMCURSCRIPT]
 	call ExecuteCurMapScriptInTable
 	ld [W_VERMILIONGYMCURSCRIPT], a
 	ret
 
-VermilionGymScript_Unknown5ca4c: ; 5ca4c (17:4a4c)
+VermilionGymScript_5ca4c: ; 5ca4c (17:4a4c)
 	ld hl, Gym3CityName ; $4a55
 	ld de, Gym3LeaderName ; $4a64
 	jp LoadGymLeaderAndCityName
@@ -93121,7 +93591,7 @@ Gym3CityName: ; 5ca55 (17:4a55)
 Gym3LeaderName: ; 5ca64 (17:4a64)
 	db "LT.SURGE@"
 
-Func_5ca6d: ; 5ca6d (17:4a6d)
+VermilionGymScript_5ca6d: ; 5ca6d (17:4a6d)
 	ld a, [$d773]
 	bit 0, a
 	jr nz, .asm_5ca78
@@ -93137,18 +93607,23 @@ Func_5ca6d: ; 5ca6d (17:4a6d)
 	ld a, $17
 	jp Predef ; indirect jump to Func_ee9e (ee9e (3:6e9e))
 
-Func_5ca8a: ; 5ca8a (17:4a8a)
+VermilionGymScript_5ca8a: ; 5ca8a (17:4a8a)
 	xor a
 	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
 	ld [W_VERMILIONGYMCURSCRIPT], a
 	ld [W_CURMAPSCRIPT], a
 	ret
 
-Unknown_5ca95: ; 5ca95 (17:4a95)
-INCBIN "baserom.gbc",$5ca95,$5ca9d - $5ca95
+VermilionGymScriptPointers: ; 5ca95 (17:4a95)
+	dw CheckFightingMapTrainers
+	dw Func_324c
+	dw EndTrainerBattle
+	dw VermilionGymScript4
+
+VermilionGymScript4: ; 5ca9d (17:4a9d)
 	ld a, [W_ISINBATTLE] ; $d057
 	cp $ff
-	jp z, Func_5ca8a
+	jp z, VermilionGymScript_5ca8a
 	ld a, $f0
 	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
 
@@ -93179,7 +93654,7 @@ Func_5caaa: ; 5caaa (17:4aaa)
 	ld a, [$d773]
 	or $1c
 	ld [$d773], a
-	jp Func_5ca8a
+	jp VermilionGymScript_5ca8a
 
 VermilionGymTexts: ; 5cae8 (17:4ae8)
 	dw VermilionGymText1, VermilionGymText2, VermilionGymText3, VermilionGymText4, VermilionGymText5, VermilionGymText6, VermilionGymText7, VermilionGymText8
@@ -93514,16 +93989,88 @@ FightingDojo_h: ; 0x5cd51 to 0x5cd5d (12 bytes) (id=177)
 FightingDojoScript: ; 5cd5d (17:4d5d)
 	call EnableAutoTextBoxDrawing
 	ld hl, FightingDojoTrainerHeaders
-	ld de, Unknown_5cd7b ; $4d7b
+	ld de, FightingDojoScriptPointers
 	ld a, [W_FIGHTINGDOJOCURSCRIPT]
 	call ExecuteCurMapScriptInTable
 	ld [W_FIGHTINGDOJOCURSCRIPT], a
 	ret
 
-INCBIN "baserom.gbc",$5cd70,$5cd7b - $5cd70
+FightingDojoScript_5cd70: ; 5cd70 (17:4d70)
+	xor a
+	ld [$cd6b], a
+	ld [$d642], a
+	ld [$da39], a
+	ret
 
-Unknown_5cd7b: ; 5cd7b (17:4d7b)
-INCBIN "baserom.gbc",$5cd7b,$5ce03 - $5cd7b
+FightingDojoScriptPointers: ; 5cd7b (17:4d7b)
+	dw FightingDojoScript1
+	dw Func_324c
+	dw EndTrainerBattle
+	dw FightingDojoScript4
+
+FightingDojoScript1: ; 5cd83 (17:4d83)
+	ld a, [$d7b1]
+	bit 0, a
+	ret nz
+	call CheckFightingMapTrainers
+	ld a, [W_TRAINERHEADERFLAGBIT]
+	and a
+	ret nz
+	ld a, [$d7b1]
+	bit 1, a
+	ret nz
+	xor a
+	ld [H_CURRENTPRESSEDBUTTONS], a
+	ld [$cf0d], a
+	ld a, [W_YCOORD]
+	cp $3
+	ret nz
+	ld a, [W_XCOORD]
+	cp $4
+	ret nz
+	ld a, $1
+	ld [$cf0d], a
+	ld a, $1
+	ld [$d528], a
+	ld a, $1
+	ld [$ff8c], a
+	ld a, $8
+	ld [$ff8d], a
+	call $34a6
+	ld a, $1
+	ld [$ff8c], a
+	call $2920
+	ret
+
+FightingDojoScript4: ; 5cdc6 (17:4dc6)
+	ld a, [$d057]
+	cp $ff
+	jp z, $4d70
+	ld a, [$cf0d]
+	and a
+	jr z, .asm_5cde4
+	ld a, $1
+	ld [$d528], a
+	ld a, $1
+	ld [$ff8c], a
+	ld a, $8
+	ld [$ff8d], a
+	call $34a6
+
+.asm_5cde4
+	ld a, $f0
+	ld [$cd6b], a
+	ld a, [$d7b1]
+	or $3e
+	ld [$d7b1], a
+	ld a, $8
+	ld [$ff8c], a
+	call $2920
+	xor a
+	ld [$cd6b], a
+	ld [$d642], a
+	ld [$da39], a
+	ret
 
 FightingDojoTexts: ; 5ce03 (17:4e03)
 	dw FightingDojoText1, FightingDojoText2, FightingDojoText3, FightingDojoText4, FightingDojoText5, FightingDojoText6, FightingDojoText7, FightingDojoText8
@@ -93809,8 +94356,8 @@ SaffronGymScript: ; 5d00d (17:500d)
 	res 6, [hl]
 	call nz, .extra
 	call EnableAutoTextBoxDrawing
-	ld hl, SaffronGymTrainerHeader0 ; $50c3
-	ld de, Unknown_5d053 ; $5053
+	ld hl, SaffronGymTrainerHeader0
+	ld de, SaffronGymScriptPointers
 	ld a, [W_SAFFRONGYMCURSCRIPT]
 	call ExecuteCurMapScriptInTable
 	ld [W_SAFFRONGYMCURSCRIPT], a
@@ -93834,8 +94381,13 @@ Func_5d048: ; 5d048 (17:5048)
 	ld [W_CURMAPSCRIPT], a
 	ret
 
-Unknown_5d053: ; 5d053 (17:5053)
-INCBIN "baserom.gbc",$5d053,$5d05b - $5d053
+SaffronGymScriptPointers: ; 5d053 (17:5053)
+	dw CheckFightingMapTrainers
+	dw Func_324c
+	dw EndTrainerBattle
+	dw SaffronGymScript4
+
+SaffronGymScript4: ; 5d05b (17:505b)
 	ld a, [W_ISINBATTLE] ; $d057
 	cp $ff
 	jp z, Func_5d048
@@ -94692,16 +95244,16 @@ SilphCo9_h: ; 0x5d7af to 0x5d7bb (12 bytes) (id=233)
 	dw SilphCo9Object ; objects
 
 SilphCo9Script: ; 5d7bb (17:57bb)
-	call SilphCo9Script_Unknown5d7d1
+	call SilphCo9Script_5d7d1
 	call EnableAutoTextBoxDrawing
 	ld hl, SilphCo9TrainerHeaders
-	ld de, Unknown_5d885 ; $5885
+	ld de, SilphCo9ScriptPointers
 	ld a, [W_SILPHCO9CURSCRIPT]
 	call ExecuteCurMapScriptInTable
 	ld [W_SILPHCO9CURSCRIPT], a
 	ret
 
-SilphCo9Script_Unknown5d7d1: ; 5d7d1 (17:57d1)
+SilphCo9Script_5d7d1: ; 5d7d1 (17:57d1)
 	ld hl, $d126
 	bit 5, [hl]
 	res 5, [hl]
@@ -94812,8 +95364,10 @@ Func_5d863: ; 5d863 (17:5863)
 	set 3, [hl]
 	ret
 
-Unknown_5d885: ; 5d885 (17:5885)
-INCBIN "baserom.gbc",$5d885,$5d88b - $5d885
+SilphCo9ScriptPointers: ; 5d885 (17:5885)
+	dw CheckFightingMapTrainers
+	dw Func_324c
+	dw EndTrainerBattle
 
 SilphCo9Texts: ; 5d88b (17:588b)
 	dw SilphCo9Text1, SilphCo9Text2, SilphCo9Text3, SilphCo9Text4
@@ -94978,7 +95532,7 @@ VictoryRoad1Script: ; 5da0a (17:5a0a)
 	call nz, .next
 	call EnableAutoTextBoxDrawing
 	ld hl, VictoryRoad1TrainerHeaders
-	ld de, Unknown_5da3a ; $5a3a
+	ld de, VictoryRoad1ScriptPointers
 	ld a, [W_VICTORYROAD1CURSCRIPT]
 	call ExecuteCurMapScriptInTable
 	ld [W_VICTORYROAD1CURSCRIPT], a
@@ -94993,12 +95547,16 @@ VictoryRoad1Script: ; 5da0a (17:5a0a)
 	ld a, $17
 	jp Predef ; indirect jump to Func_ee9e (ee9e (3:6e9e))
 
-Unknown_5da3a: ; 5da3a (17:5a3a)
-INCBIN "baserom.gbc",$5da3a,$5da40 - $5da3a
+VictoryRoad1ScriptPointers: ; 5da3a (17:5a3a)
+	dw VictoryRoad1Script1
+	dw Func_324c
+	dw EndTrainerBattle
+
+VictoryRoad1Script1: ; 5da40 (17:5a40)
 	ld a, [$d869]
 	bit 7, a
 	jp nz, CheckFightingMapTrainers
-	ld hl, Unknown_5da5c ; $5a5c
+	ld hl, CoordsData_5da5c ; $5a5c
 	call CheckBoulderCoords
 	jp nc, CheckFightingMapTrainers
 	ld hl, $d126
@@ -95007,8 +95565,8 @@ INCBIN "baserom.gbc",$5da3a,$5da40 - $5da3a
 	set 7, [hl]
 	ret
 
-Unknown_5da5c: ; 5da5c (17:5a5c)
-INCBIN "baserom.gbc",$5da5c,$5da5f - $5da5c
+CoordsData_5da5c: ; 5da5c (17:5a5c)
+	db $0D,$11,$FF
 
 VictoryRoad1Texts: ; 5da5f (17:5a5f)
 	dw VictoryRoad1Text1, VictoryRoad1Text2, Predef5CText, Predef5CText, BoulderText, BoulderText, BoulderText
@@ -95113,13 +95671,32 @@ SetPartyMonTypes: ; 5db5e (17:5b5e)
 	ld [hl], a
 	ret
 
-INCBIN "baserom.gbc",$5db79,$5db81 - $5db79
+Func_5db79: ; 5db79 (17:5b79)
+	call EnableAutoTextBoxDrawing
+	ld a, $4
+	jp Func_3ef5
 
 UnnamedText_5db81: ; 5db81 (17:5b81)
 	TX_FAR _UnnamedText_5db81
 	db "@"
 
-INCBIN "baserom.gbc",$5db86,$5dba8 - $5db86
+Func_5db86: ; 5db86 (17:5b86)
+	call EnableAutoTextBoxDrawing
+	ld a, $3
+	jp Func_3ef5
+
+Func_5db8e: ; 5db8e (17:5b8e)
+	db $fc
+	ld a, [$c109]
+	cp $4
+	ret nz
+	call EnableAutoTextBoxDrawing
+	ld a, $a
+	call Func_3ef5
+	ld a, ARTICUNO
+	ld [$cf91], a
+	call PlayCry
+	jp Func_5dbd9
 
 UnnamedText_5dba8: ; 5dba8 (17:5ba8)
 	TX_FAR _UnnamedText_5dba8
@@ -95193,21 +95770,21 @@ Unknown_5dc2a: ; 5dc2a (17:5c2a)
 	ld hl, UnnamedText_5dc9e
 	call PrintText
 	xor a
-	ld [$d07c], a
-	ld [$cc26], a
-	ld [$cc2a], a
+	ld [W_ANIMATIONID], a
+	ld [W_CURMENUITEMID], a
+	ld [W_OLDMENUITEMID], a
 	ld a, $3
-	ld [$cc29], a
+	ld [W_MENUWATCHEDKEYS], a
 	ld a, $3
-	ld [$cc28], a
+	ld [W_MAXMENUITEMID], a
 	ld a, $2
-	ld [$cc24], a
+	ld [W_TOPMENUITEMY], a
 	ld a, $1
-	ld [$cc25], a
+	ld [W_TOPMENUITEMX], a
 .asm_5c51
 	ld hl, $d730
 	set 6, [hl]
-	ld hl, $c3a0
+	ld hl, W_SCREENTILESBUFFER
 	ld b, $8
 	ld c, $d
 	call TextBoxBorder
@@ -95219,7 +95796,7 @@ Unknown_5dc2a: ; 5dc2a (17:5c2a)
 	call HandleMenuInput
 	bit 1, a
 	jr nz, .asm_5dc93 ; 0x5dc74 $1d
-	ld a, [$cc26]
+	ld a, [W_CURMENUITEMID]
 	cp $3
 	jr z, .asm_5dc93 ; 0x5dc7b $16
 	ld hl, $d730
@@ -95706,14 +96283,16 @@ PokemonTower3_h: ; 0x606c0 to 0x606cc (12 bytes) (id=144)
 PokemonTower3Script: ; 606cc (18:46cc)
 	call EnableAutoTextBoxDrawing
 	ld hl, PokemonTower3TrainerHeaders
-	ld de, Unknown_606df
+	ld de, PokemonTower3ScriptPointers
 	ld a, [W_POKEMONTOWER3CURSCRIPT]
 	call ExecuteCurMapScriptInTable
 	ld [W_POKEMONTOWER3CURSCRIPT], a
 	ret
 
-Unknown_606df: ; 606df (18:46df)
-INCBIN "baserom.gbc",$606df,$606e5 - $606df
+PokemonTower3ScriptPointers: ; 606df (18:46df)
+	dw CheckFightingMapTrainers
+	dw Func_324c
+	dw EndTrainerBattle
 
 PokemonTower3Texts: ; 606e5 (18:46e5)
 	dw PokemonTower3Text1, PokemonTower3Text2, PokemonTower3Text3, Predef5CText
@@ -95834,14 +96413,16 @@ PokemonTower4_h: ; 0x607ea to 0x607f6 (12 bytes) (id=145)
 PokemonTower4Script: ; 607f6 (18:47f6)
 	call EnableAutoTextBoxDrawing
 	ld hl, PokemonTower4TrainerHeaders
-	ld de, PokemonTower4Script_Unknown60809
+	ld de, PokemonTower4ScriptPointers
 	ld a, [W_POKEMONTOWER4CURSCRIPT]
 	call ExecuteCurMapScriptInTable
 	ld [W_POKEMONTOWER4CURSCRIPT], a
 	ret
 
-PokemonTower4Script_Unknown60809: ; 60809 (18:4809)
-INCBIN "baserom.gbc",$60809,$6080f - $60809
+PokemonTower4ScriptPointers: ; 60809 (18:4809)
+	dw CheckFightingMapTrainers
+	dw Func_324c
+	dw EndTrainerBattle
 
 PokemonTower4Texts: ; 6080f (18:480f)
 	dw PokemonTower4Text1, PokemonTower4Text2, PokemonTower4Text3, Predef5CText, Predef5CText, Predef5CText
@@ -95965,15 +96546,19 @@ PokemonTower5_h: ; 0x60926 to 0x60932 (12 bytes) (id=146)
 PokemonTower5Script: ; 60932 (18:4932)
 	call EnableAutoTextBoxDrawing
 	ld hl, PokemonTower5TrainerHeaders
-	ld de, PokemonTower5Script_Unknown60945
+	ld de, PokemonTower5ScriptPointers
 	ld a, [W_POKEMONTOWER5CURSCRIPT]
 	call ExecuteCurMapScriptInTable
 	ld [W_POKEMONTOWER5CURSCRIPT], a
 	ret
 
-PokemonTower5Script_Unknown60945: ; 60945 (18:4945)
-INCBIN "baserom.gbc",$60945,$6094b - $60945
-	ld hl, Unknown_60992 ; $4992
+PokemonTower5ScriptPointers: ; 60945 (18:4945)
+	dw PokemonTower5Script1
+	dw Func_324c
+	dw EndTrainerBattle
+
+PokemonTower5Script1: ; 6094b (18:494b)
+	ld hl, CoordsData_60992 ; $4992
 	call ArePlayerCoordsInArray
 	jr c, .asm_60960
 	ld hl, $d72e
@@ -96005,8 +96590,12 @@ INCBIN "baserom.gbc",$60945,$6094b - $60945
 	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
 	ret
 
-Unknown_60992: ; 60992 (18:4992)
-INCBIN "baserom.gbc",$60992,$6099b - $60992
+CoordsData_60992: ; 60992 (18:4992)
+	db $08,$0A
+	db $08,$0B
+	db $09,$0A
+	db $09,$0B
+	db $FF
 
 PokemonTower5Texts: ; 6099b (18:499b)
 	dw PokemonTower5Text1, PokemonTower5Text2, PokemonTower5Text3, PokemonTower5Text4, PokemonTower5Text5, Predef5CText, PokemonTower5Text7
@@ -96165,7 +96754,7 @@ PokemonTower6_h: ; 0x60ae3 to 0x60aef (12 bytes) (id=147)
 PokemonTower6Script: ; 60aef (18:4aef)
 	call EnableAutoTextBoxDrawing
 	ld hl, PokemonTower6TrainerHeaders
-	ld de, Unknown_60b0d ; $4b0d
+	ld de, PokemonTower6ScriptPointers
 	ld a, [W_POKEMONTOWER6CURSCRIPT]
 	call ExecuteCurMapScriptInTable
 	ld [W_POKEMONTOWER6CURSCRIPT], a
@@ -96178,12 +96767,18 @@ Func_60b02: ; 60b02 (18:4b02)
 	ld [W_CURMAPSCRIPT], a
 	ret
 
-Unknown_60b0d: ; 60b0d (18:4b0d)
-INCBIN "baserom.gbc",$60b0d,$60b17 - $60b0d
+PokemonTower6ScriptPointers: ; 60b0d (18:4b0d)
+	dw PokemonTower6Script1
+	dw Func_324c
+	dw EndTrainerBattle
+	dw PokemonTower6Script4
+	dw PokemonTower6Script5
+
+PokemonTower6Script1: ; 60b17 (18:4b17)
 	ld a, [$d768]
 	bit 7, a
 	jp nz, CheckFightingMapTrainers
-	ld hl, Unknown_60b45 ; $4b45
+	ld hl, CoordsData_60b45 ; $4b45
 	call ArePlayerCoordsInArray
 	jp nc, CheckFightingMapTrainers
 	xor a
@@ -96200,8 +96795,10 @@ INCBIN "baserom.gbc",$60b0d,$60b17 - $60b0d
 	ld [W_CURMAPSCRIPT], a
 	ret
 
-Unknown_60b45: ; 60b45 (18:4b45)
-INCBIN "baserom.gbc",$60b45,$60b48 - $60b45
+CoordsData_60b45: ; 60b45 (18:4b45)
+	db $10,$0A,$FF
+
+PokemonTower6Script5: ; 60b48 (18:4b48)
 	ld a, [W_ISINBATTLE] ; $d057
 	cp $ff
 	jp z, Func_60b02
@@ -96242,7 +96839,15 @@ INCBIN "baserom.gbc",$60b45,$60b48 - $60b45
 	ld [W_CURMAPSCRIPT], a
 	ret
 
-INCBIN "baserom.gbc",$60ba1,$60bb1 - $60ba1
+PokemonTower6Script4: ; 60ba1 (18:4ba1)
+	ld a, [$cd38]
+	and a
+	ret nz
+	call Delay3
+	xor a
+	ld [W_POKEMONTOWER6CURSCRIPT], a
+	ld [W_CURMAPSCRIPT], a
+	ret
 
 PokemonTower6Texts: ; 60bb1 (18:4bb1)
 	dw PokemonTower6Text1, PokemonTower6Text2, PokemonTower6Text3, Predef5CText, Predef5CText, PokemonTower6Text6, PokemonTower6Text7
@@ -96392,7 +96997,7 @@ PokemonTower7_h: ; 0x60cf9 to 0x60d05 (12 bytes) (id=148)
 PokemonTower7Script: ; 60d05 (18:4d05)
 	call EnableAutoTextBoxDrawing
 	ld hl, PokemonTower7TrainerHeaders
-	ld de, Unknown_60d23 ; $4d23
+	ld de, PokemonTower7ScriptPointers
 	ld a, [W_POKEMONTOWER7CURSCRIPT]
 	call ExecuteCurMapScriptInTable
 	ld [W_POKEMONTOWER7CURSCRIPT], a
@@ -96405,8 +97010,14 @@ Func_60d18: ; 60d18 (18:4d18)
 	ld [W_CURMAPSCRIPT], a
 	ret
 
-Unknown_60d23: ; 60d23 (18:4d23)
-INCBIN "baserom.gbc",$60d23,$60d2d - $60d23
+PokemonTower7ScriptPointers: ; 60d23 (18:4d23)
+	dw CheckFightingMapTrainers
+	dw Func_324c
+	dw PokemonTower7Script3
+	dw PokemonTower7Script4
+	dw PokemonTower7Script5
+
+PokemonTower7Script3: ; 60d23 (18:4d23)
 	ld hl, W_FLAGS_CD60
 	res 0, [hl]
 	ld a, [W_ISINBATTLE] ; $d057
@@ -96423,6 +97034,8 @@ INCBIN "baserom.gbc",$60d23,$60d2d - $60d23
 	ld [W_POKEMONTOWER7CURSCRIPT], a
 	ld [W_CURMAPSCRIPT], a
 	ret
+
+PokemonTower7Script4: ; 60d56 (18:4d56)
 	ld a, [$d730]
 	bit 0, a
 	ret nz
@@ -96446,6 +97059,8 @@ INCBIN "baserom.gbc",$60d23,$60d2d - $60d23
 	ld [W_POKEMONTOWER7CURSCRIPT], a
 	ld [W_CURMAPSCRIPT], a
 	ret
+
+PokemonTower7Script5: ; 60d86 (18:4d86)
 	ld a, $ff
 	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
 	ld a, $43
@@ -96468,7 +97083,7 @@ INCBIN "baserom.gbc",$60d23,$60d2d - $60d23
 	ret
 
 Func_60db6: ; 60db6 (18:4db6)
-	ld hl, Unknown_60de3 ; $4de3
+	ld hl, CoordsData_60de3 ; $4de3
 	ld a, [$cf13]
 	dec a
 	swap a
@@ -96499,8 +97114,49 @@ Func_60db6: ; 60db6 (18:4db6)
 	inc hl
 	jr .asm_60dcb
 
-Unknown_60de3: ; 60de3 (18:4de3)
-INCBIN "baserom.gbc",$60de3,$60e3f - $60de3
+CoordsData_60de3: ; 60de3 (18:4de3)
+	db $0C,$09
+	dw MovementData_60e13
+	db $0B,$0A
+	dw MovementData_60e1b
+	db $0B,$0B
+	dw MovementData_60e22
+	db $0B,$0C
+	dw MovementData_60e22
+	db $0A,$0C
+	dw MovementData_60e28
+	db $09,$0B
+	dw MovementData_60e30
+	db $09,$0A
+	dw MovementData_60e22
+	db $09,$09
+	dw MovementData_60e22
+	db $08,$09
+	dw MovementData_60e37
+	db $07,$0A
+	dw MovementData_60e22
+	db $07,$0B
+	dw MovementData_60e22
+	db $07,$0C
+	dw MovementData_60e22
+
+MovementData_60e13: ; 60e13
+	db $C0,$00,$00,$00,$00,$00,$80,$FF
+
+MovementData_60e1b: ; 60e1b
+	db $00,$C0,$00,$00,$00,$00,$FF
+
+MovementData_60e22: ; 60e22
+	db $00,$00,$00,$00,$00,$FF
+
+MovementData_60e28: ; 60e28
+	db $80,$00,$00,$00,$00,$00,$00,$FF
+
+MovementData_60e30: ; 60e30
+	db $00,$00,$00,$80,$00,$00,$FF
+
+MovementData_60e37: ; 60e37
+	db $C0,$00,$00,$00,$00,$00,$00,$FF
 
 PokemonTower7Texts: ; 60e3f (18:4e3f)
 	dw PokemonTower7Text1, PokemonTower7Text2, PokemonTower7Text3, PokemonTower7Text4
@@ -96832,14 +97488,16 @@ ViridianForest_h: ; 0x61101 to 0x6110d (12 bytes) (id=51)
 ViridianForestScript: ; 6110d (18:510d)
 	call EnableAutoTextBoxDrawing
 	ld hl, ViridianForestTrainerHeaders
-	ld de, ViridianForestScript_Unknown61120
+	ld de, ViridianForestScriptPointers
 	ld a, [W_VIRIDIANFORESTCURSCRIPT]
 	call ExecuteCurMapScriptInTable
 	ld [W_VIRIDIANFORESTCURSCRIPT], a
 	ret
 
-ViridianForestScript_Unknown61120: ; 61120 (18:5120)
-INCBIN "baserom.gbc",$61120,$61126 - $61120
+ViridianForestScriptPointers: ; 61120 (18:5120)
+	dw CheckFightingMapTrainers
+	dw Func_324c
+	dw EndTrainerBattle
 
 ViridianForestTexts: ; 61126 (18:5126)
 	dw ViridianForestText1, ViridianForestText2, ViridianForestText3, ViridianForestText4, Predef5CText, Predef5CText, Predef5CText, ViridianForestText8, ViridianForestText9, ViridianForestText10, ViridianForestText11, ViridianForestText12, ViridianForestText13, ViridianForestText14
@@ -97094,7 +97752,7 @@ SSAnne2Script4: ; 613bd (18:53bd)
 	ret
 
 SSAnne2Script0: ; 613be (18:53be)
-	ld hl, Unknown_61411 ; $5411
+	ld hl, CoordsData_61411 ; $5411
 	call ArePlayerCoordsInArray
 	ret nc
 	ld a, $ff
@@ -97120,24 +97778,24 @@ SSAnne2Script0: ; 613be (18:53be)
 	ld a, [$ff00+$db]
 	cp $2
 	jr nz, .asm_61400 ; 0x613f9 $5
-	ld de, Unknown_6140c ; $540c
+	ld de, MovementData_6140c ; $540c
 	jr .asm_61403 ; 0x613fe $3
 .asm_61400
-	ld de, Unknown_6140d ; $540d
+	ld de, MovementData_6140d ; $540d
 .asm_61403
 	call MoveSprite
 	ld a, $1
 	ld [W_SSANNE2CURSCRIPT], a
 	ret
 
-Unknown_6140c: ; 6140c (18:540c)
-INCBIN "baserom.gbc",$6140c,$6140d - $6140c
+MovementData_6140c: ; 6140c (18:540c)
+	db $00
 
-Unknown_6140d: ; 6140d (18:540d)
-INCBIN "baserom.gbc",$6140d,$61411 - $6140d
+MovementData_6140d: ; 6140d (18:540d)
+	db $00,$00,$00,$FF
 
-Unknown_61411: ; 61411 (18:5411)
-INCBIN "baserom.gbc",$61411,$61416 - $61411
+CoordsData_61411: ; 61411 (18:5411)
+	db $08,$24,$08,$25,$FF
 
 Func_61416: ; 61416 (18:5416)
 	ld a, [W_XCOORD] ; $d362
@@ -97206,10 +97864,10 @@ SSAnne2Script2: ; 6146d (18:546d)
 	ld a, [$d362]
 	cp $25
 	jr nz, .asm_61497 ; 0x61490 $5
-	ld de, Unknown_614b9 ; $54b9
+	ld de, MovementData_614b9 ; $54b9
 	jr .asm_6149a ; 0x61495 $3
 .asm_61497
-	ld de, Unknown_614b7 ; $54b7
+	ld de, MovementData_614b7 ; $54b7
 .asm_6149a
 	ld a, $2
 	ld [$ff00+$8c], a
@@ -97224,11 +97882,11 @@ SSAnne2Script2: ; 6146d (18:546d)
 	ld [W_SSANNE2CURSCRIPT], a
 	ret
 
-Unknown_614b7: ; 614b7 (18:54b7)
-INCBIN "baserom.gbc",$614b7,$614b9 - $614b7
+MovementData_614b7: ; 614b7 (18:54b7)
+	db $C0,$00
 
-Unknown_614b9: ; 614b9 (18:54b9)
-INCBIN "baserom.gbc",$614b9,$614be - $614b9
+MovementData_614b9: ; 614b9 (18:54b9)
+	db $00,$00,$00,$00,$FF
 
 SSAnne2Script3: ; 614be (18:54be)
 	ld a, [$d730]
@@ -97365,14 +98023,16 @@ SSAnne5_h: ; 0x616a2 to 0x616ae (12 bytes) (id=99)
 SSAnne5Script: ; 616ae (18:56ae)
 	call EnableAutoTextBoxDrawing
 	ld hl, SSAnneTrainerHeader0 ; $56d1
-	ld de, SSAnne5Script_Unknown616c1
+	ld de, SSAnne5ScriptPointers
 	ld a, [W_SSANNE5CURSCRIPT]
 	call ExecuteCurMapScriptInTable
 	ld [W_SSANNE5CURSCRIPT], a
 	ret
 
-SSAnne5Script_Unknown616c1: ; 616c1 (18:56c1)
-INCBIN "baserom.gbc",$616c1,$616c7 - $616c1
+SSAnne5ScriptPointers: ; 616c1 (18:56c1)
+	dw CheckFightingMapTrainers
+	dw Func_324c
+	dw EndTrainerBattle
 
 SSAnne5Texts: ; 616c7 (18:56c7)
 	dw SSAnne5Text1, SSAnne5Text2, SSAnne5Text3, SSAnne5Text4, SSAnne5Text5
@@ -97576,10 +98236,10 @@ SSAnne7_h: ; 0x61889 to 0x61895 (12 bytes) (id=101)
 	dw SSAnne7Object ; objects
 
 SSAnne7Script: ; 61895 (18:5895)
-	call SSAnne7Script_Unknown6189b
+	call SSAnne7Script_6189b
 	jp EnableAutoTextBoxDrawing
 
-SSAnne7Script_Unknown6189b: ; 6189b (18:589b)
+SSAnne7Script_6189b: ; 6189b (18:589b)
 	ld a, [$d803]
 	bit 1, a
 	ret nz
@@ -97700,14 +98360,16 @@ SSAnne8_h: ; 0x6196a to 0x61976 (12 bytes) (id=102)
 SSAnne8Script: ; 61976 (18:5976)
 	call EnableAutoTextBoxDrawing
 	ld hl, SSAnne8TrainerHeaders
-	ld de, SSAnne8Script_Unknown61989
+	ld de, SSAnne8ScriptPointers
 	ld a, [W_SSANNE8CURSCRIPT]
 	call ExecuteCurMapScriptInTable
 	ld [W_SSANNE8CURSCRIPT], a
 	ret
 
-SSAnne8Script_Unknown61989: ; 61989 (18:5989)
-INCBIN "baserom.gbc",$61989,$6198f - $61989
+SSAnne8ScriptPointers: ; 61989 (18:5989)
+	dw CheckFightingMapTrainers
+	dw Func_324c
+	dw EndTrainerBattle
 
 SSAnne8Texts: ; 6198f (18:598f)
 	dw SSAnne8Text1, SSAnne8Text2, SSAnne8Text3, SSAnne8Text4, SSAnne8Text5, SSAnne8Text6, SSAnne8Text7, SSAnne8Text8, SSAnne8Text9, Predef5CText, SSAnne8Text11
@@ -97901,14 +98563,16 @@ SSAnne9Script: ; 61b4b (18:5b4b)
 	xor a
 	ld [$cc3c], a
 	ld hl, SSAnne9TrainerHeaders
-	ld de, SSAnne9Script_Unknown61b64
+	ld de, SSAnne9ScriptPointers
 	ld a, [W_SSANNE9CURSCRIPT]
 	call ExecuteCurMapScriptInTable
 	ld [W_SSANNE9CURSCRIPT], a
 	ret
 
-SSAnne9Script_Unknown61b64: ; 61b64 (18:5b64)
-INCBIN "baserom.gbc",$61b64,$61b6a - $61b64
+SSAnne9ScriptPointers: ; 61b64 (18:5b64)
+	dw CheckFightingMapTrainers
+	dw Func_324c
+	dw EndTrainerBattle
 
 SSAnne9Texts: ; 61b6a (18:5b6a)
 	dw SSAnne9Text1, SSAnne9Text2, SSAnne9Text3, SSAnne9Text4, SSAnne9Text5, Predef5CText, SSAnne9Text7, SSAnne9Text8, Predef5CText, SSAnne9Text10, SSAnne9Text11, SSAnne9Text12, SSAnne9Text13
@@ -98158,14 +98822,16 @@ SSAnne10_h: ; 0x61d49 to 0x61d55 (12 bytes) (id=104)
 SSAnne10Script: ; 61d55 (18:5d55)
 	call EnableAutoTextBoxDrawing
 	ld hl, SSAnne10TrainerHeaders
-	ld de, SSAnne10Script_Unknown61d68
+	ld de, SSAnne10ScriptPointers
 	ld a, [W_SSANNE10CURSCRIPT]
 	call ExecuteCurMapScriptInTable
 	ld [W_SSANNE10CURSCRIPT], a
 	ret
 
-SSAnne10Script_Unknown61d68: ; 61d68 (18:5d68)
-INCBIN "baserom.gbc",$61d68,$61d6e - $61d68
+SSAnne10ScriptPointers: ; 61d68 (18:5d68)
+	dw CheckFightingMapTrainers
+	dw Func_324c
+	dw EndTrainerBattle
 
 SSAnne10Texts: ; 61d6e (18:5d6e)
 	dw SSAnne10Text1, SSAnne10Text2, SSAnne10Text3, SSAnne10Text4, SSAnne10Text5, SSAnne10Text6, SSAnne10Text7, SSAnne10Text8, Predef5CText, Predef5CText, Predef5CText
@@ -98487,16 +99153,16 @@ SilphCo11_h: ; 0x620ee to 0x620fa (12 bytes) (id=235)
 	dw SilphCo11Object ; objects
 
 SilphCo11Script: ; 620fa (18:60fa)
-	call SilphCo11Script_Unknown62110
+	call SilphCo11Script_62110
 	call EnableAutoTextBoxDrawing
 	ld hl, SilphCo11TrainerHeaders
-	ld de, Unknown_621cf ; $61cf
+	ld de, SilphCo11ScriptPointers
 	ld a, [W_SILPHCO11CURSCRIPT]
 	call ExecuteCurMapScriptInTable
 	ld [W_SILPHCO11CURSCRIPT], a
 	ret
 
-SilphCo11Script_Unknown62110: ; 62110 (18:6110)
+SilphCo11Script_62110: ; 62110 (18:6110)
 	ld hl, $d126
 	bit 5, [hl]
 	res 5, [hl]
@@ -98600,12 +99266,19 @@ Func_621c8: ; 621c8 (18:61c8)
 	ld [W_CURMAPSCRIPT], a
 	ret
 
-Unknown_621cf: ; 621cf (18:61cf)
-INCBIN "baserom.gbc",$621cf,$621db - $621cf
+SilphCo11ScriptPointers: ; 621cf (18:61cf)
+	dw SilphCo11Script1
+	dw Func_324c
+	dw EndTrainerBattle
+	dw SilphCo11Script4
+	dw SilphCo11Script5
+	dw SilphCo11Script6
+
+SilphCo11Script1: ; 621db (18:61db)
 	ld a, [$d838]
 	bit 7, a
 	ret nz
-	ld hl, Unknown_62211 ; $6211
+	ld hl, CoordsData_62211 ; $6211
 	call ArePlayerCoordsInArray
 	jp nc, CheckFightingMapTrainers
 	ld a, [W_WHICHTRADE] ; $cd3d
@@ -98620,16 +99293,18 @@ INCBIN "baserom.gbc",$621cf,$621db - $621cf
 	ld a, $3
 	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
 	call SetSpriteMovementBytesToFF
-	ld de, Unknown_62216 ; $6216
+	ld de, MovementData_62216 ; $6216
 	call MoveSprite
 	ld a, $3
 	jp Func_621c8
 
-Unknown_62211: ; 62211 (18:6211)
-INCBIN "baserom.gbc",$62211,$62216 - $62211
+CoordsData_62211: ; 62211 (18:6211)
+	db $0D,$06
+	db $0C,$07
+	db $FF
 
-Unknown_62216: ; 62216 (18:6216)
-INCBIN "baserom.gbc",$62216,$6221a - $62216
+MovementData_62216: ; 62216 (18:6216)
+	db $00,$00,$00,$FF
 
 Func_6221a: ; 6221a (18:621a)
 	ld [$d528], a
@@ -98638,6 +99313,8 @@ Func_6221a: ; 6221a (18:621a)
 	ld a, b
 	ld [$FF00+$8d], a
 	jp Func_34a6
+
+SilphCo11Script6: ; 62227 (18:6227)
 	ld a, [W_ISINBATTLE] ; $d057
 	cp $ff
 	jp z, Func_621c4
@@ -98667,6 +99344,8 @@ Func_6221a: ; 6221a (18:621a)
 	xor a
 	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
 	jp Func_621c8
+
+SilphCo11Script4: ; 6226a (18:626a)
 	ld a, [$d730]
 	bit 0, a
 	ret nz
@@ -98687,6 +99366,8 @@ Func_6221a: ; 6221a (18:621a)
 	call Delay3
 	ld a, $4
 	jp Func_621c8
+
+SilphCo11Script5: ; 62293 (18:6293)
 	ld hl, $d72d
 	set 6, [hl]
 	set 7, [hl]
@@ -98984,7 +99665,12 @@ UnnamedText_62502: ; 62502 (18:6502)
 	TX_FAR _UnnamedText_62502
 	db "@"
 
-INCBIN "baserom.gbc",$62507,$62511 - $62507
+	ret
+	db "@"
+	
+	call EnableAutoTextBoxDrawing
+	ld a, $e
+	jp Func_3ef5
 
 UnnamedText_62511: ; 62511 (18:6511)
 	TX_FAR _UnnamedText_62511
@@ -103609,17 +104295,16 @@ SaveSAV: ;$770a
 	call DelayFrames
 	ld hl,GameSavedText
 	call PrintText
-	ld a,$b6        ;sound for saved game?
-	call $3740      ;sound-related
-	call $3748      ;sound-related
+	ld a,$b6        ;sound for saved game
+	call PlaySoundWaitForCurrent
+	call WaitForSoundToFinish
 	ld c,$1e
 	jp DelayFrames
 
 NowSavingString:
 	db "Now saving...@"
 
-SaveSAVConfirm:
-;$7768
+SaveSAVConfirm: ; $7768
 	call PrintText
 	FuncCoord 0, 7
 	ld hl,Coord
@@ -120459,7 +121144,7 @@ _Route22Text3: ; 92606 (24:6606)
 	db $0, "#MON LEAGUE", $4f
 	db "Front Gate", $57
 
-UnknownText_9261e: ; 9261e (24:661e)
+_VictoryRoadGuardText1: ; 9261e (24:661e)
 	db $0, "You can pass here", $4f
 	db "only if you have", $55
 	db "the @"
@@ -120477,7 +121162,7 @@ UnknownText_92660: ; 92660 (24:6660)
 	db "it to get to", $55
 	db "#MON LEAGUE!@@"
 
-UnknownText_92696: ; 92696 (24:6696)
+_VictoryRoadGuardText2: ; 92696 (24:6696)
 	db $0, "You can pass here", $4f
 	db "only if you have", $55
 	db "the @"
