@@ -15104,9 +15104,18 @@ Map0fFlyWarp: ; 64be (1:64be)
 Map15FlyWarp: ; 64c4 (1:64c4)
 	FLYWARP_DATA 10,20,11
 
-Func_64ca: ; 64ca (1:64ca)
-	ld de, Unknown_64df
-.asm_64cd
+; This function appears to never be used.
+; It is likely a debugging feature to give the player Tsunekazu Ishihara's
+; favorite Pokemon. This is indicated by the overpowered Exeggutor, which
+; Ishihara (president of Creatures Inc.) said was his favorite Pokemon in an ABC
+; interview on February 8, 2000.
+; "Exeggutor is my favorite. That's because I was always using this character
+; while I was debugging the program."
+; http://www.ign.com/articles/2000/02/09/abc-news-pokamon-chat-transcript
+
+SetIshiharaTeam: ; 64ca (1:64ca)
+	ld de, IshiharaTeam
+.loop
 	ld a, [de]
 	cp $ff
 	ret z
@@ -15116,10 +15125,15 @@ Func_64ca: ; 64ca (1:64ca)
 	ld [W_CURENEMYLVL], a
 	inc de
 	call AddPokemonToParty
-	jr .asm_64cd
+	jr .loop
 
-Unknown_64df: ; 64df (1:64df)
-INCBIN "baserom.gbc",$64df,$64ea - $64df
+IshiharaTeam: ; 64df (1:64df)
+	db EXEGGUTOR,90
+	db MEW,20
+	db JOLTEON,56
+	db DUGTRIO,56
+	db ARTICUNO,57
+	db $FF
 
 Func_64ea: ; 64ea (1:64ea)
 	ret
