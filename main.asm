@@ -14877,7 +14877,7 @@ Func_62ff: ; 62ff (1:62ff)
 	ld [W_CURMAP], a ; $d35e
 	ld a, [$d71e]
 	ld c, a
-	ld hl, Unknown_63bf ; $63bf
+	ld hl, SpecialCaseMapsWithFlyWarpData ; $63bf
 	ld de, $0
 	ld a, $6
 	ld [$d12f], a
@@ -14897,7 +14897,7 @@ Func_62ff: ; 62ff (1:62ff)
 	ld e, a
 	jr .asm_6376
 .asm_6388
-	ld hl, Unknown_63d8 ; $63d8
+	ld hl, SpecialCaseFlyWarpData ; $63d8
 	add hl, de
 	jr .asm_63a4
 .asm_638e
@@ -14936,11 +14936,43 @@ Func_62ff: ; 62ff (1:62ff)
 	ld [$d42f], a
 	ret
 
-Unknown_63bf: ; 63bf (1:63bf)
-INCBIN "baserom.gbc",$63bf,$63d8 - $63bf
+SpecialCaseMapsWithFlyWarpData: ; 63bf (1:63bf)
+; List of maps and their corresponing FlyWarp ids
+; These are used for falling down holes
+	db $9f,$01 ; SeafoamIslands2, flywarp data 1
+	db $9f,$02 ; SeafoamIslands2, flywarp data 2
+	db $A0,$01 ; SeafoamIslands3, flywarp data 1
+	db $A0,$02 ; SeafoamIslands3, flywarp data 2
+	db $A1,$01 ; SeafoamIslands3, flywarp data 1
+	db $A1,$02 ; SeafoamIslands4, flywarp data 2
+	db $A2,$01 ; SeafoamIslands5, flywarp data 1
+	db $A2,$02 ; SeafoamIslands5, flywarp data 2
+	db $C2,$02 ; VictoryRoad2, flywarp data 1
+	db $A5,$01 ; Mansion1, flywarp data 1
+	db $A5,$02 ; Mansion1, flywarp data 2
+	db $D6,$03 ; Mansion2, flywarp data 3
+	db $FF ; terminate list
 
-Unknown_63d8: ; 63d8 (1:63d8)
-INCBIN "baserom.gbc",$63d8,$6420 - $63d8
+SpecialCaseFlyWarpData: ; 63d8 (1:63d8)
+; These are the FlyWarp points for maps in which you fall down
+; holes.  The items in SpecialCaseMapsWithFlyWarpData are paired
+; with the corresponding items in this list.
+; Original Format:
+;   [Event Displacement][Y-block][X-block][Y-sub_block][X-sub_block]
+; Macro Format:
+;   FLYWARP_DATA [Map Width][Y-pos][X-pos]
+	FLYWARP_DATA SEAFOAM_ISLANDS_2_WIDTH,7,18
+	FLYWARP_DATA SEAFOAM_ISLANDS_2_WIDTH,7,23
+	FLYWARP_DATA SEAFOAM_ISLANDS_3_WIDTH,7,19
+	FLYWARP_DATA SEAFOAM_ISLANDS_3_WIDTH,7,22
+	FLYWARP_DATA SEAFOAM_ISLANDS_4_WIDTH,7,18
+	FLYWARP_DATA SEAFOAM_ISLANDS_4_WIDTH,7,19
+	FLYWARP_DATA SEAFOAM_ISLANDS_5_WIDTH,14,4
+	FLYWARP_DATA SEAFOAM_ISLANDS_5_WIDTH,14,5
+	FLYWARP_DATA VICTORY_ROAD_2_WIDTH,16,22
+	FLYWARP_DATA MANSION_1_WIDTH,14,16
+	FLYWARP_DATA MANSION_1_WIDTH,14,16
+	FLYWARP_DATA MANSION_2_WIDTH,14,18
 
 FirstMapWarpSpec: ; 6420 (1:6420)
 	db REDS_HOUSE_2F ; RedsHouse2F
