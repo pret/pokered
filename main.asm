@@ -15391,13 +15391,14 @@ asm_6755: ; 6755 (1:6755)
 	jp EraseMenuCursor
 
 Func_675b: ; 675b (1:675b)
-	ld de, Unknown_6767 ; $6767
+	ld de, EDpic ; $6767
 	ld hl, $8f00
 	ld bc, $1
 	jp CopyVideoDataDouble
 
-Unknown_6767: ; 6767 (1:6767)
-INCBIN "baserom.gbc",$6767,$676f - $6767
+EDpic: ; 6767 (1:6767)
+; The 2bpp graphics for the "ED" symbol in the nicknaming screen
+	INCBIN "gfx/ed_symbol.2bpp"
 
 Func_676f: ; 676f (1:676f)
 	xor a
