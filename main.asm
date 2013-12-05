@@ -58,7 +58,7 @@ EnableLCD: ; 007b (0:007b)
 
 CleanLCD_OAM: ; 0082 (0:0082)
 	xor a
-	ld hl,W_OAMBUFFER
+	ld hl,wOAMBuffer
 	ld b,$a0
 .loop
 	ld [hli],a
@@ -68,7 +68,7 @@ CleanLCD_OAM: ; 0082 (0:0082)
 
 ResetLCD_OAM: ; 008d (0:008d)
 	ld a,$a0
-	ld hl,W_OAMBUFFER
+	ld hl,wOAMBuffer
 	ld de,$0004
 	ld b,$28
 .loop
@@ -444,7 +444,7 @@ HandleMidJump: ; 039e (0:039e)
 ; this is jumped to immediately after loading a save / starting a new game / loading a new map
 EnterMap: ; 03a6 (0:03a6)
 	ld a,$ff
-	ld [W_JOYPADFORBIDDENBUTTONSMASK],a
+	ld [wJoypadForbiddenButtonsMask],a
 	call LoadMapData ; load map data
 	ld b,BANK(Func_c335)
 	ld hl,Func_c335
@@ -480,7 +480,7 @@ EnterMap: ; 03a6 (0:03a6)
 	set 5,[hl]
 	set 6,[hl]
 	xor a
-	ld [W_JOYPADFORBIDDENBUTTONSMASK],a
+	ld [wJoypadForbiddenButtonsMask],a
 
 OverworldLoop: ; 03ff (0:03ff)
 	call DelayFrame
@@ -545,7 +545,7 @@ OverworldLoopLessDelay: ; 0402 (0:0402)
 	ld a,$35
 	call Predef ; check what is in front of the player
 	call UpdateSprites ; move sprites
-	ld a,[W_FLAGS_CD60]
+	ld a,[wFlags_0xcd60]
 	bit 2,a
 	jr nz,.checkForOpponent
 	bit 0,a
@@ -578,7 +578,7 @@ OverworldLoopLessDelay: ; 0402 (0:0402)
 	jp nz,.newBattle
 	jp OverworldLoop
 .noDirectionButtonsPressed
-	ld hl,W_FLAGS_CD60
+	ld hl,wFlags_0xcd60
 	res 2,[hl]
 	call UpdateSprites ; move sprites
 	ld a,$01
@@ -659,7 +659,7 @@ OverworldLoopLessDelay: ; 0402 (0:0402)
 	ld a,$08
 	ld [$d528],a
 .oddLoop
-	ld hl,W_FLAGS_CD60
+	ld hl,wFlags_0xcd60
 	set 2,[hl]
 	ld hl,$cc4b
 	dec [hl]
@@ -706,7 +706,7 @@ OverworldLoopLessDelay: ; 0402 (0:0402)
 .noSpinning
 	call UpdateSprites ; move sprites
 .moveAhead2
-	ld hl,W_FLAGS_CD60
+	ld hl,wFlags_0xcd60
 	res 2,[hl]
 	ld a,[$d700]
 	dec a ; riding a bike?
@@ -1817,7 +1817,7 @@ LoadCurrentMapView: ; 0caa (0:0caa)
 	ld e,a
 	ld a,[$d360]
 	ld d,a
-	ld hl,W_SCREENTILESBACKBUFFER
+	ld hl,wTileMapBackup
 	ld b,$05
 .rowLoop ; each loop iteration fills in one row of tile blocks
 	push hl
@@ -1859,7 +1859,7 @@ LoadCurrentMapView: ; 0caa (0:0caa)
 .noCarry2
 	dec b
 	jr nz,.rowLoop
-	ld hl,W_SCREENTILESBACKBUFFER
+	ld hl,wTileMapBackup
 	ld bc,$0000
 .adjustForYCoordWithinTileBlock
 	ld a,[W_YBLOCKCOORD]
@@ -1874,7 +1874,7 @@ LoadCurrentMapView: ; 0caa (0:0caa)
 	ld bc,$0002
 	add hl,bc
 .copyToVisibleAreaBuffer
-	ld de,W_SCREENTILESBUFFER ; base address for the tiles that are directly transfered to VRAM during V-blank
+	ld de,wTileMap ; base address for the tiles that are directly transfered to VRAM during V-blank
 	ld b,$12
 .rowLoop2
 	ld c,$14
@@ -2159,7 +2159,7 @@ ScheduleNorthRowRedraw: ; 0e91 (0:0e91)
 	ret
 
 ScheduleRowRedrawHelper: ; 0ea6 (0:0ea6)
-	ld de,W_SCREENEDGETILES
+	ld de,wScreenEdgeTiles
 	ld c,$28
 .loop
 	ld a,[hli]
@@ -2209,7 +2209,7 @@ ScheduleEastColumnRedraw: ; 0ed3 (0:0ed3)
 	ret
 
 ScheduleColumnRedrawHelper: ; 0ef2 (0:0ef2)
-	ld de,W_SCREENEDGETILES
+	ld de,wScreenEdgeTiles
 	ld c,$12
 .loop
 	ld a,[hli]
@@ -2335,7 +2335,7 @@ GetJoypadStateOverworld: ; 0f4d (0:0f4d)
 	ld [$cd3a],a
 	ld [$cd38],a
 	ld [$ccd3],a
-	ld [W_JOYPADFORBIDDENBUTTONSMASK],a
+	ld [wJoypadForbiddenButtonsMask],a
 	ld [H_CURRENTPRESSEDBUTTONS],a
 	ld hl,$d736
 	ld a,[hl]
@@ -2421,7 +2421,7 @@ RunMapScript: ; 101b (0:101b)
 	ld b, BANK(Func_f225)
 	ld hl, Func_f225
 	call Bankswitch ; check if the player is pushing a boulder
-	ld a,[W_FLAGS_CD60]
+	ld a,[wFlags_0xcd60]
 	bit 1,a ; is the player pushing a boulder?
 	jr z,.afterBoulderEffect
 	ld b, BANK(Func_f2b5)
@@ -2794,7 +2794,7 @@ LoadMapData: ; 1241 (0:1241)
 	call LoadTilesetTilePatternData
 	call LoadCurrentMapView
 ; copy current map view to VRAM
-	ld hl,W_SCREENTILESBUFFER
+	ld hl,wTileMap
 	ld de,$9800
 	ld b,$12
 .vramCopyLoop
@@ -3122,7 +3122,7 @@ PartyMenuInit: ; 1420 (0:1420)
 	xor a
 	ld [$cc49],a
 	ld [$cc37],a
-	ld hl,W_TOPMENUITEMY
+	ld hl,wTopMenuItemY
 	inc a
 	ld [hli],a ; top menu item Y
 	xor a
@@ -3162,7 +3162,7 @@ HandlePartyMenuInput: ; 145a (0:145a)
 	ld b,a
 	xor a
 	ld [$d09b],a
-	ld a,[W_CURMENUITEMID]
+	ld a,[wCurrentMenuItem]
 	ld [$cc2b],a
 	ld hl,$d730
 	res 6,[hl] ; turn on letter printing delay
@@ -3176,7 +3176,7 @@ HandlePartyMenuInput: ; 145a (0:145a)
 	ld a,[W_NUMINPARTY]
 	and a
 	jr z,.noPokemonChosen
-	ld a,[W_CURMENUITEMID]
+	ld a,[wCurrentMenuItem]
 	ld [$cf92],a
 	ld hl,W_PARTYMON1
 	ld b,0
@@ -3205,7 +3205,7 @@ HandlePartyMenuInput: ; 145a (0:145a)
 	call RedrawPartyMenu
 	jr HandlePartyMenuInput
 .handleSwap
-	ld a,[W_CURMENUITEMID]
+	ld a,[wCurrentMenuItem]
 	ld [$cf92],a
 	ld b, BANK(Func_13613)
 	ld hl, Func_13613
@@ -3878,15 +3878,15 @@ ClearScreenArea: ; 18c4 (0:18c4)
 CopyScreenTileBufferToVRAM: ; 18d6 (0:18d6)
 	ld c, $6
 	ld hl, $0000
-	ld de, W_SCREENTILESBUFFER
+	ld de, wTileMap
 	call InitScreenTileBufferTransferParameters
 	call DelayFrame
 	ld hl, $600
-	ld de, W_SCREENTILESBUFFER + 20 * 6 ; $c418
+	ld de, wTileMap + 20 * 6 ; $c418
 	call InitScreenTileBufferTransferParameters
 	call DelayFrame
 	ld hl, $c00
-	ld de, W_SCREENTILESBUFFER + 20 * 12 ; $c490
+	ld de, wTileMap + 20 * 12 ; $c490
 	call InitScreenTileBufferTransferParameters
 	jp DelayFrame
 
@@ -3909,7 +3909,7 @@ ClearScreen: ; 190f (0:190f)
 ; then wait three frames
 	ld bc,$0168 ; tilemap size
 	inc b
-	ld hl,W_SCREENTILESBUFFER ; TILEMAP_START
+	ld hl,wTileMap ; TILEMAP_START
 	ld a,$7F    ; $7F is blank tile
 .loop
 	ld [hli],a
@@ -4709,7 +4709,7 @@ RedrawExposedScreenEdge: ; 1d01 (0:1d01)
 	dec b
 	jr nz,.redrawRow
 .redrawColumn
-	ld hl,W_SCREENEDGETILES
+	ld hl,wScreenEdgeTiles
 	ld a,[H_SCREENEDGEREDRAWADDR]
 	ld e,a
 	ld a,[H_SCREENEDGEREDRAWADDR + 1]
@@ -4738,7 +4738,7 @@ RedrawExposedScreenEdge: ; 1d01 (0:1d01)
 	ld [H_SCREENEDGEREDRAW],a
 	ret
 .redrawRow
-	ld hl,W_SCREENEDGETILES
+	ld hl,wScreenEdgeTiles
 	ld a,[H_SCREENEDGEREDRAWADDR]
 	ld e,a
 	ld a,[H_SCREENEDGEREDRAWADDR + 1]
@@ -4772,7 +4772,7 @@ RedrawExposedScreenEdge: ; 1d01 (0:1d01)
 	ret
 
 ; This function automatically transfers tile number data from the tile map at
-; C3A0 to VRAM during V-blank. Note that it only transfers one third of the
+; wTileMap to VRAM during V-blank. Note that it only transfers one third of the
 ; background per V-blank. It cycles through which third it draws.
 ; This transfer is turned off when walking around the map, but is turned
 ; on when talking to sprites, battling, using menus, etc. This is because
@@ -6682,12 +6682,12 @@ StoreSpriteOutputPointer: ; 2897 (0:2897)
 	ret
 
 ResetPlayerSpriteData: ; 28a6 (0:28a6)
-	ld hl, $c100
+	ld hl, wSpriteStateData1
 	call ResetPlayerSpriteData_ClearSpriteData
-	ld hl, $c200
+	ld hl, wSpriteStateData2
 	call ResetPlayerSpriteData_ClearSpriteData
 	ld a, $1
-	ld [$c100], a
+	ld [wSpriteStateData1], a
 	ld [$c20e], a
 	ld hl, $c104
 	ld [hl], $3c     ; set Y screen pos
@@ -7021,10 +7021,10 @@ RedisplayStartMenu: ; 2adf (0:2adf)
 .checkIfUpPressed
 	bit 6,a ; was Up pressed?
 	jr z,.checkIfDownPressed
-	ld a,[W_CURMENUITEMID] ; menu selection
+	ld a,[wCurrentMenuItem] ; menu selection
 	and a
 	jr nz,.loop
-	ld a,[W_OLDMENUITEMID]
+	ld a,[wLastMenuItem]
 	and a
 	jr nz,.loop
 ; if the player pressed tried to go past the top item, wrap around to the bottom
@@ -7034,7 +7034,7 @@ RedisplayStartMenu: ; 2adf (0:2adf)
 	jr nz,.wrapMenuItemId
 	dec a ; there are only 6 menu items without the pokedex
 .wrapMenuItemId
-	ld [W_CURMENUITEMID],a
+	ld [wCurrentMenuItem],a
 	call EraseMenuCursor
 	jr .loop
 .checkIfDownPressed
@@ -7043,7 +7043,7 @@ RedisplayStartMenu: ; 2adf (0:2adf)
 ; if the player pressed tried to go past the bottom item, wrap around to the top
 	ld a,[$d74b]
 	bit 5,a ; does the player have the pokedex?
-	ld a,[W_CURMENUITEMID]
+	ld a,[wCurrentMenuItem]
 	ld c,7 ; there are 7 menu items with the pokedex
 	jr nz,.checkIfPastBottom
 	dec c ; there are only 6 menu items without the pokedex
@@ -7052,20 +7052,20 @@ RedisplayStartMenu: ; 2adf (0:2adf)
 	jr nz,.loop
 ; the player went past the bottom, so wrap to the top
 	xor a
-	ld [W_CURMENUITEMID],a
+	ld [wCurrentMenuItem],a
 	call EraseMenuCursor
 	jr .loop
 .buttonPressed ; A, B, or Start button pressed
 	call PlaceUnfilledArrowMenuCursor
-	ld a,[W_CURMENUITEMID]
+	ld a,[wCurrentMenuItem]
 	ld [$cc2d],a ; save current menu item ID
 	ld a,b
 	and a,%00001010 ; was the Start button or B button pressed?
 	jp nz,CloseStartMenu
-	call SaveScreenTilesToBuffer2 ; copy background from W_SCREENTILESBUFFER to W_SCREENTILESBACKBUFFER2
+	call SaveScreenTilesToBuffer2 ; copy background from wTileMap to wTileMapBackup2
 	ld a,[$d74b]
 	bit 5,a ; does the player have the pokedex?
-	ld a,[W_CURMENUITEMID]
+	ld a,[wCurrentMenuItem]
 	jr nz,.displayMenuItem
 	inc a ; adjust position to account for missing pokedex menu item
 .displayMenuItem
@@ -7176,7 +7176,7 @@ AddItemToInventory: ; 2bcf (0:2bcf)
 	ret
 
 ; INPUT:
-; [W_LISTMENUID] = list menu ID
+; [wListMenuID] = list menu ID
 ; [$cf8b] = address of the list (2 bytes)
 DisplayListMenuID: ; 2be6 (0:2be6)
 	xor a
@@ -7210,7 +7210,7 @@ DisplayListMenuID: ; 2be6 (0:2be6)
 	FuncCoord 4,2 ; coordinates of upper left corner of menu text box
 	ld hl,Coord
 	ld de,$090e ; height and width of menu text box
-	ld a,[W_LISTMENUID]
+	ld a,[wListMenuID]
 	and a ; is it a PC pokemon list?
 	jr nz,.skipMovingSprites
 	call UpdateSprites ; move sprites
@@ -7222,13 +7222,13 @@ DisplayListMenuID: ; 2be6 (0:2be6)
 	jr c,.setMenuVariables
 	ld a,2 ; max menu item ID is 2 if the list has at least 2 entries
 .setMenuVariables
-	ld [W_MAXMENUITEMID],a
+	ld [wMaxMenuItem],a
 	ld a,4
-	ld [W_TOPMENUITEMY],a
+	ld [wTopMenuItemY],a
 	ld a,5
-	ld [W_TOPMENUITEMX],a
+	ld [wTopMenuItemX],a
 	ld a,%00000111 ; A button, B button, Select button
-	ld [W_MENUWATCHEDKEYS],a
+	ld [wMenuWatchedKeys],a
 	ld c,10
 	call DelayFrames
 
@@ -7249,12 +7249,12 @@ DisplayListMenuIDLoop: ; 2c53 (0:2c53)
 	ld c,80
 	call DelayFrames
 	xor a
-	ld [W_CURMENUITEMID],a
+	ld [wCurrentMenuItem],a
 	ld hl,Coord
 	ld a,l
-	ld [W_MENUCURSORLOCATION],a
+	ld [wMenuCursorLocation],a
 	ld a,h
-	ld [W_MENUCURSORLOCATION + 1],a
+	ld [wMenuCursorLocation + 1],a
 	jr .buttonAPressed
 .notOldManBattle
 	call LoadGBPal
@@ -7265,16 +7265,16 @@ DisplayListMenuIDLoop: ; 2c53 (0:2c53)
 	bit 0,a ; was the A button pressed?
 	jp z,.checkOtherKeys
 .buttonAPressed
-	ld a,[W_CURMENUITEMID]
+	ld a,[wCurrentMenuItem]
 	call PlaceUnfilledArrowMenuCursor
 	ld a,$01
 	ld [$d12e],a
 	ld [$d12d],a
 	xor a
 	ld [$cc37],a
-	ld a,[W_CURMENUITEMID]
+	ld a,[wCurrentMenuItem]
 	ld c,a
-	ld a,[W_LISTSCROLLOFFSET]
+	ld a,[wListScrollOffset]
 	add c
 	ld c,a
 	ld a,[$d12a] ; number of list entries
@@ -7285,7 +7285,7 @@ DisplayListMenuIDLoop: ; 2c53 (0:2c53)
 	jp c,ExitListMenu ; if so, exit the menu
 	ld a,c
 	ld [$cf92],a
-	ld a,[W_LISTMENUID]
+	ld a,[wListMenuID]
 	cp a,ITEMLISTMENU
 	jr nz,.skipMultiplying
 ; if it's an item menu
@@ -7300,13 +7300,13 @@ DisplayListMenuIDLoop: ; 2c53 (0:2c53)
 	add hl,bc
 	ld a,[hl]
 	ld [$cf91],a
-	ld a,[W_LISTMENUID]
+	ld a,[wListMenuID]
 	and a ; is it a PC pokemon list?
 	jr z,.pokemonList
 	push hl
 	call GetItemPrice
 	pop hl
-	ld a,[W_LISTMENUID]
+	ld a,[wListMenuID]
 	cp a,ITEMLISTMENU
 	jr nz,.skipGettingQuantity
 ; if it's an item menu
@@ -7335,7 +7335,7 @@ DisplayListMenuIDLoop: ; 2c53 (0:2c53)
 	call CopyStringToCF4B ; copy name to $cf4b
 	ld a,$01
 	ld [$d12e],a
-	ld a,[W_CURMENUITEMID]
+	ld a,[wCurrentMenuItem]
 	ld [$d12d],a
 	xor a
 	ld [$ffb7],a ; joypad state update flag
@@ -7349,7 +7349,7 @@ DisplayListMenuIDLoop: ; 2c53 (0:2c53)
 	jp nz,HandleItemListSwapping ; if so, allow the player to swap menu entries
 	ld b,a
 	bit 7,b ; was Down pressed?
-	ld hl,W_LISTSCROLLOFFSET
+	ld hl,wListScrollOffset
 	jr z,.upPressed
 .downPressed
 	ld a,[hl]
@@ -7373,7 +7373,7 @@ DisplayChooseQuantityMenu: ; 2d57 (0:2d57)
 	ld hl,Coord
 	ld b,1 ; height
 	ld c,3 ; width
-	ld a,[W_LISTMENUID]
+	ld a,[wListMenuID]
 	cp a,PRICEDITEMLISTMENU
 	jr nz,.drawTextBox
 ; text box dimensions/coordinates for quantity and price
@@ -7385,7 +7385,7 @@ DisplayChooseQuantityMenu: ; 2d57 (0:2d57)
 	call TextBoxBorder
 	FuncCoord 16,10
 	ld hl,Coord
-	ld a,[W_LISTMENUID]
+	ld a,[wListMenuID]
 	cp a,PRICEDITEMLISTMENU
 	jr nz,.printInitialQuantity
 	FuncCoord 8,10
@@ -7431,7 +7431,7 @@ DisplayChooseQuantityMenu: ; 2d57 (0:2d57)
 .handleNewQuantity
 	FuncCoord 17,10
 	ld hl,Coord
-	ld a,[W_LISTMENUID]
+	ld a,[wListMenuID]
 	cp a,PRICEDITEMLISTMENU
 	jr nz,.printQuantity
 .printPrice
@@ -7502,7 +7502,7 @@ SpacesBetweenQuantityAndPriceText: ; 2e34 (0:2e34)
 	db "      @"
 
 ExitListMenu: ; 2e3b (0:2e3b)
-	ld a,[W_CURMENUITEMID]
+	ld a,[wCurrentMenuItem]
 	ld [$d12d],a
 	ld a,$02
 	ld [$d12e],a
@@ -7528,9 +7528,9 @@ PrintListMenuEntries: ; 2e5a (0:2e5a)
 	ld a,[$cf8c]
 	ld d,a
 	inc de ; de = beginning of list entries
-	ld a,[W_LISTSCROLLOFFSET]
+	ld a,[wListScrollOffset]
 	ld c,a
-	ld a,[W_LISTMENUID]
+	ld a,[wListMenuID]
 	cp a,ITEMLISTMENU
 	ld a,c
 	jr nz,.skipMultiplying
@@ -7559,7 +7559,7 @@ PrintListMenuEntries: ; 2e5a (0:2e5a)
 	push hl
 	push hl
 	push de
-	ld a,[W_LISTMENUID]
+	ld a,[wListMenuID]
 	and a
 	jr z,.pokemonPCMenu
 	cp a,$01
@@ -7581,7 +7581,7 @@ PrintListMenuEntries: ; 2e5a (0:2e5a)
 	ld a,4
 	sub b
 	ld b,a
-	ld a,[W_LISTSCROLLOFFSET]
+	ld a,[wListScrollOffset]
 	add b
 	call GetPartyMonName
 	pop hl
@@ -7607,7 +7607,7 @@ PrintListMenuEntries: ; 2e5a (0:2e5a)
 	ld c,$a3 ; no leading zeroes, right-aligned, print currency symbol, 3 bytes
 	call PrintBCDNumber
 .skipPrintingItemPrice
-	ld a,[W_LISTMENUID]
+	ld a,[wListMenuID]
 	and a
 	jr nz,.skipPrintingPokemonLevel
 .printPokemonLevel
@@ -7628,7 +7628,7 @@ PrintListMenuEntries: ; 2e5a (0:2e5a)
 	ld a,$04
 	sub b
 	ld b,a
-	ld a,[W_LISTSCROLLOFFSET]
+	ld a,[wListScrollOffset]
 	add b
 	ld [hl],a
 	call LoadMonData ; load pokemon info
@@ -7649,7 +7649,7 @@ PrintListMenuEntries: ; 2e5a (0:2e5a)
 	pop hl
 	pop de
 	inc de
-	ld a,[W_LISTMENUID]
+	ld a,[wListMenuID]
 	cp a,ITEMLISTMENU
 	jr nz,.nextListEntry
 .printItemQuantity
@@ -8056,17 +8056,17 @@ ExecuteCurMapScriptInTable: ; 3160 (0:3160)
 
 LoadGymLeaderAndCityName: ; 317f (0:317f)
 	push de
-	ld de, W_GYMCITYNAME
+	ld de, wGymCityName
 	ld bc, $11
 	call CopyData   ; load city name
 	pop hl
-	ld de, W_GYMLEADERNAME
+	ld de, wGymLeaderName
 	ld bc, $b
 	jp CopyData     ; load gym leader name
 
 ; reads specific information from trainer header (pointed to at W_TRAINERHEADERPTR)
 ; a: offset in header data
-;    0 -> flag's bit (into W_TRAINERHEADERFLAGBIT)
+;    0 -> flag's bit (into wTrainerHeaderFlagBit)
 ;    2 -> flag's byte ptr (into hl)
 ;    4 -> before battle text (into hl)
 ;    6 -> after battle text (into hl)
@@ -8085,7 +8085,7 @@ ReadTrainerHeaderInfo: ; 3193 (0:3193)
 	and a
 	jr nz, .nonZeroOffset
 	ld a, [hl]
-	ld [W_TRAINERHEADERFLAGBIT], a  ; store flag's bit
+	ld [wTrainerHeaderFlagBit], a  ; store flag's bit
 	jr .done
 .nonZeroOffset
 	cp $2
@@ -8123,7 +8123,7 @@ TalkToTrainer: ; 31cc (0:31cc)
 	call ReadTrainerHeaderInfo     ; read flag's bit
 	ld a, $2
 	call ReadTrainerHeaderInfo     ; read flag's byte ptr
-	ld a, [W_TRAINERHEADERFLAGBIT]
+	ld a, [wTrainerHeaderFlagBit]
 	ld c, a
 	ld b, $2
 	call HandleBitArray_Bank0      ; read trainer's flag
@@ -8146,7 +8146,7 @@ TalkToTrainer: ; 31cc (0:31cc)
 	call PreBattleSaveRegisters
 	ld hl, W_FLAGS_D733
 	set 4, [hl]                    ; activate map script index override (index is set below)
-	ld hl, W_FLAGS_CD60
+	ld hl, wFlags_0xcd60
 	bit 0, [hl]                    ; test if player is already being engaged by another trainer
 	ret nz
 	call EngageMapTrainer
@@ -8162,7 +8162,7 @@ CheckFightingMapTrainers: ; 3219 (0:3219)
 	jr nz, .trainerEngaging
 	xor a
 	ld [$cf13], a
-	ld [W_TRAINERHEADERFLAGBIT], a
+	ld [wTrainerHeaderFlagBit], a
 	ret
 .trainerEngaging
 	ld hl, W_FLAGS_D733
@@ -8173,7 +8173,7 @@ CheckFightingMapTrainers: ; 3219 (0:3219)
 	ld a, $4c
 	call Predef
 	ld a, BTN_RIGHT | BTN_LEFT | BTN_UP | BTN_DOWN
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	xor a
 	ldh [$b4], a
 	call TrainerWalkUpToPlayer_Bank0
@@ -8185,14 +8185,14 @@ Func_324c: ; 324c (0:324c)
 	ld a, [$d730]
 	and $1
 	ret nz
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ld a, [$cf13]
 	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
 	call DisplayTextID
 
 Func_325d: ; 325d (0:325d)
 	xor a
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	call InitBattleEnemyParameters
 	ld hl, $d72d
 	set 6, [hl]
@@ -8209,14 +8209,14 @@ EndTrainerBattle: ; 3275 (0:3275)
 	set 6, [hl]
 	ld hl, $d72d
 	res 7, [hl]
-	ld hl, W_FLAGS_CD60
+	ld hl, wFlags_0xcd60
 	res 0, [hl]                  ; player is no longer engaged by any trainer
 	ld a, [W_ISINBATTLE] ; $d057
 	cp $ff
 	jp z, ResetButtonPressedAndMapScript
 	ld a, $2
 	call ReadTrainerHeaderInfo
-	ld a, [W_TRAINERHEADERFLAGBIT]
+	ld a, [wTrainerHeaderFlagBit]
 	ld c, a
 	ld b, $1
 	call HandleBitArray_Bank0   ; flag trainer as fought
@@ -8240,7 +8240,7 @@ EndTrainerBattle: ; 3275 (0:3275)
 
 ResetButtonPressedAndMapScript: ; 32c1 (0:32c1)
 	xor a
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ld [H_CURRENTPRESSEDBUTTONS], a
 	ld [H_NEWLYPRESSEDBUTTONS], a
 	ld [H_NEWLYRELEASEDBUTTONS], a
@@ -8255,11 +8255,11 @@ TrainerWalkUpToPlayer_Bank0: ; 32cf (0:32cf)
 
 ; sets opponent type and mon set/lvl based on the engaging trainer data
 InitBattleEnemyParameters: ; 32d7 (0:32d7)
-	ld a, [W_ENGAGEDTRAINERCLASS]
+	ld a, [wEngagedTrainerClass]
 	ld [W_CUROPPONENT], a ; $d059
 	ld [W_ENEMYMONORTRAINERCLASS], a
 	cp $c8
-	ld a, [W_ENGAGEDTRAINERSETNUM] ; $cd2e
+	ld a, [wEngagedTrainerSet] ; $cd2e
 	jr c, .noTrainer
 	ld [W_TRAINERNO], a ; $d05d
 	ret
@@ -8294,13 +8294,13 @@ CheckForEngagingTrainers: ; 3306 (0:3306)
 	call StoreTrainerHeaderPointer   ; set trainer header pointer to current trainer
 	ld a, [de]
 	ld [$cf13], a                     ; store trainer flag's bit
-	ld [W_TRAINERHEADERFLAGBIT], a
+	ld [wTrainerHeaderFlagBit], a
 	cp $ff
 	ret z
 	ld a, $2
 	call ReadTrainerHeaderInfo       ; read trainer flag's byte ptr
 	ld b, $2
-	ld a, [W_TRAINERHEADERFLAGBIT]
+	ld a, [wTrainerHeaderFlagBit]
 	ld c, a
 	call HandleBitArray_Bank0        ; read trainer flag
 	ld a, c
@@ -8314,15 +8314,15 @@ CheckForEngagingTrainers: ; 3306 (0:3306)
 	inc hl
 	ld a, [hl]                       ; read trainer engage distance
 	pop hl
-	ld [W_TRAINERENGAGEDISTANCE], a
+	ld [wTrainerEngageDistance], a
 	ld a, [$cf13]
 	swap a
-	ld [W_TRAINERSPRITEOFFSET], a ; $cd3d
+	ld [wTrainerSpriteOffset], a ; $cd3d
 	ld a, $39
 	call Predef ; indirect jump to CheckEngagePlayer (5690f (15:690f))
 	pop de
 	pop hl
-	ld a, [W_TRAINERSPRITEOFFSET] ; $cd3d
+	ld a, [wTrainerSpriteOffset] ; $cd3d
 	and a
 	ret nz        ; break if the trainer is engaging
 .trainerAlreadyFought
@@ -8357,9 +8357,9 @@ EngageMapTrainer: ; 336a (0:336a)
 	ld e, a
 	add hl, de     ; seek to engaged trainer data
 	ld a, [hli]    ; load trainer class
-	ld [W_ENGAGEDTRAINERCLASS], a
+	ld [wEngagedTrainerClass], a
 	ld a, [hl]     ; load trainer mon set
-	ld [W_ENEMYMONATTACKMOD], a ; $cd2e
+	ld [wEnemyMonAttackMod], a ; $cd2e
 	jp PlayTrainerMusic
 
 Func_3381: ; 3381 (0:3381)
@@ -8415,7 +8415,7 @@ Func_33d4: ; 33d4 (0:33d4)
 	jp TextScriptEnd
 
 Func_33dd: ; 33dd (0:33dd)
-	ld a, [W_FLAGS_CD60]
+	ld a, [wFlags_0xcd60]
 	bit 0, a
 	ret nz
 	call EngageMapTrainer
@@ -8423,7 +8423,7 @@ Func_33dd: ; 33dd (0:33dd)
 	ret
 
 PlayTrainerMusic: ; 33e8 (0:33e8)
-	ld a, [W_ENGAGEDTRAINERCLASS]
+	ld a, [wEngagedTrainerClass]
 	cp $c8 + SONY1
 	ret z
 	cp $c8 + SONY2
@@ -8440,7 +8440,7 @@ PlayTrainerMusic: ; 33e8 (0:33e8)
 	ld a, BANK(Music_MeetEvilTrainer)
 	ld [$c0ef], a
 	ld [$c0f0], a
-	ld a, [W_ENGAGEDTRAINERCLASS]
+	ld a, [wEngagedTrainerClass]
 	ld b, a
 	ld hl, EvilTrainerList
 .evilTrainerListLoop
@@ -8665,7 +8665,7 @@ asm_3502: ; 3502 (0:3502)
 ; hl: output list
 DecodeRLEList: ; 350c (0:350c)
 	xor a
-	ld [W_RLEBYTECOUNTER], a     ; count written bytes here
+	ld [wRLEByteCount], a     ; count written bytes here
 .listLoop
 	ld a, [de]
 	cp $ff
@@ -8675,9 +8675,9 @@ DecodeRLEList: ; 350c (0:350c)
 	ld a, [de]
 	ld b, $0
 	ld c, a                      ; number of bytes to be written
-	ld a, [W_RLEBYTECOUNTER]
+	ld a, [wRLEByteCount]
 	add c
-	ld [W_RLEBYTECOUNTER], a     ; update total number of written bytes
+	ld [wRLEByteCount], a     ; update total number of written bytes
 	ld a, [H_DOWNARROWBLINKCNT1] ; $FF00+$8b
 	call FillMemory              ; write a c-times to output
 	inc de
@@ -8685,7 +8685,7 @@ DecodeRLEList: ; 350c (0:350c)
 .endOfList
 	ld a, $ff
 	ld [hl], a                   ; write final $ff
-	ld a, [W_RLEBYTECOUNTER]
+	ld a, [wRLEByteCount]
 	inc a                        ; include sentinel in counting
 	ret
 
@@ -8909,7 +8909,7 @@ MoveSprite_: ; 363d (0:363d)
 	ld [$CD3B],a
 	ld [$CCD3],a
 	dec a
-	ld [W_JOYPADFORBIDDENBUTTONSMASK],a
+	ld [wJoypadForbiddenButtonsMask],a
 	ld [$CD3A],a
 	ret
 
@@ -9008,8 +9008,8 @@ UncompressSpriteFromDE: ; 36eb (0:36eb)
 	jp UncompressSpriteData
 
 SaveScreenTilesToBuffer2: ; 36f4 (0:36f4)
-	ld hl, W_SCREENTILESBUFFER
-	ld de, W_SCREENTILESBACKBUFFER2
+	ld hl, wTileMap
+	ld de, wTileMapBackup2
 	ld bc, $168
 	call CopyData
 	ret
@@ -9020,27 +9020,27 @@ LoadScreenTilesFromBuffer2: ; 3701 (0:3701)
 	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
 	ret
 
-; loads screen tiles stored in W_SCREENTILESBACKBUFFER2 but leaves H_AUTOBGTRANSFERENABLED disabled
+; loads screen tiles stored in wTileMapBackup2 but leaves H_AUTOBGTRANSFERENABLED disabled
 LoadScreenTilesFromBuffer2DisableBGTransfer: ; 3709 (0:3709)
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
-	ld hl, W_SCREENTILESBACKBUFFER2
-	ld de, W_SCREENTILESBUFFER
+	ld hl, wTileMapBackup2
+	ld de, wTileMap
 	ld bc, $168
 	call CopyData
 	ret
 
 SaveScreenTilesToBuffer1: ; 3719 (0:3719)
-	ld hl, W_SCREENTILESBUFFER
-	ld de, W_SCREENTILESBACKBUFFER
+	ld hl, wTileMap
+	ld de, wTileMapBackup
 	ld bc, $168
 	jp CopyData
 
 LoadScreenTilesFromBuffer1: ; 3725 (0:3725)
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
-	ld hl, W_SCREENTILESBACKBUFFER
-	ld de, W_SCREENTILESBUFFER
+	ld hl, wTileMapBackup
+	ld de, wTileMap
 	ld bc, $168
 	call CopyData
 	ld a, $1
@@ -9174,7 +9174,7 @@ GetName: ; 376b (0:376b)
 GetItemPrice: ; 37df (0:37df)
 	ld a, [H_LOADEDROMBANK]
 	push af
-	ld a, [W_LISTMENUID] ; $cf94
+	ld a, [wListMenuID] ; $cf94
 	cp $1
 	ld a, $1
 	jr nz, .asm_37ed
@@ -9434,7 +9434,7 @@ CopyDataUntil: ; 3913 (0:3913)
 	ret
 
 ; Function to remove a pokemon from the party or the current box.
-; W_WHICHPOKEMON determines the pokemon.
+; wWhichPokemon determines the pokemon.
 ; [$cf95] == 0 specifies the party.
 ; [$cf95] != 0 specifies the current box.
 RemovePokemon: ; 391f (0:391f)
@@ -9789,7 +9789,7 @@ HandleMenuInputPokemonSelection: ; 3ac2 (0:3ac2)
 	ld hl,Coord
 	call HandleDownArrowBlinkTiming ; blink down arrow (if any)
 	pop hl
-	ld a,[W_MENUJOYPADPOLLCOUNT]
+	ld a,[wMenuJoypadPollCount]
 	dec a
 	jr z,.giveUpWaiting
 	jr .loop2
@@ -9800,7 +9800,7 @@ HandleMenuInputPokemonSelection: ; 3ac2 (0:3ac2)
 	pop af
 	ld [H_DOWNARROWBLINKCNT1],a ; restore previous values
 	xor a
-	ld [W_MENUWRAPPINGENABLED],a ; disable menu wrapping
+	ld [wMenuWrappingEnabled],a ; disable menu wrapping
 	ret
 .keyPressed
 	xor a
@@ -9810,40 +9810,40 @@ HandleMenuInputPokemonSelection: ; 3ac2 (0:3ac2)
 	bit 6,a ; pressed Up key?
 	jr z,.checkIfDownPressed
 .upPressed
-	ld a,[W_CURMENUITEMID] ; selected menu item
+	ld a,[wCurrentMenuItem] ; selected menu item
 	and a ; already at the top of the menu?
 	jr z,.alreadyAtTop
 .notAtTop
 	dec a
-	ld [W_CURMENUITEMID],a ; move selected menu item up one space
+	ld [wCurrentMenuItem],a ; move selected menu item up one space
 	jr .checkOtherKeys
 .alreadyAtTop
-	ld a,[W_MENUWRAPPINGENABLED]
+	ld a,[wMenuWrappingEnabled]
 	and a ; is wrapping around enabled?
 	jr z,.noWrappingAround
-	ld a,[W_MAXMENUITEMID]
-	ld [W_CURMENUITEMID],a ; wrap to the bottom of the menu
+	ld a,[wMaxMenuItem]
+	ld [wCurrentMenuItem],a ; wrap to the bottom of the menu
 	jr .checkOtherKeys
 .checkIfDownPressed
 	bit 7,a
 	jr z,.checkOtherKeys
 .downPressed
-	ld a,[W_CURMENUITEMID]
+	ld a,[wCurrentMenuItem]
 	inc a
 	ld c,a
-	ld a,[W_MAXMENUITEMID]
+	ld a,[wMaxMenuItem]
 	cp c
 	jr nc,.notAtBottom
 .alreadyAtBottom
-	ld a,[W_MENUWRAPPINGENABLED]
+	ld a,[wMenuWrappingEnabled]
 	and a ; is wrapping around enabled?
 	jr z,.noWrappingAround
 	ld c,$00 ; wrap from bottom to top
 .notAtBottom
 	ld a,c
-	ld [W_CURMENUITEMID],a
+	ld [wCurrentMenuItem],a
 .checkOtherKeys
-	ld a,[W_MENUWATCHEDKEYS]
+	ld a,[wMenuWatchedKeys]
 	and b ; does the menu care about any of the pressed keys?
 	jp z,.loop1
 .checkIfAButtonOrBButtonPressed
@@ -9852,7 +9852,7 @@ HandleMenuInputPokemonSelection: ; 3ac2 (0:3ac2)
 	jr z,.skipPlayingSound
 .AButtonOrBButtonPressed
 	push hl
-	ld hl,W_FLAGS_CD60
+	ld hl,wFlags_0xcd60
 	bit 5,[hl]
 	pop hl
 	jr nz,.skipPlayingSound
@@ -9864,7 +9864,7 @@ HandleMenuInputPokemonSelection: ; 3ac2 (0:3ac2)
 	pop af
 	ld [H_DOWNARROWBLINKCNT1],a ; restore previous values
 	xor a
-	ld [W_MENUWRAPPINGENABLED],a ; disable menu wrapping
+	ld [wMenuWrappingEnabled],a ; disable menu wrapping
 	ld a,[$ffb5]
 	ret
 .noWrappingAround
@@ -9874,22 +9874,22 @@ HandleMenuInputPokemonSelection: ; 3ac2 (0:3ac2)
 	jr .checkIfAButtonOrBButtonPressed
 
 PlaceMenuCursor: ; 3b7c (0:3b7c)
-	ld a,[W_TOPMENUITEMY]
+	ld a,[wTopMenuItemY]
 	and a ; is the y coordinate 0?
 	jr z,.adjustForXCoord
-	ld hl,W_SCREENTILESBUFFER
+	ld hl,wTileMap
 	ld bc,20 ; screen width
 .topMenuItemLoop
 	add hl,bc
 	dec a
 	jr nz,.topMenuItemLoop
 .adjustForXCoord
-	ld a,[W_TOPMENUITEMX]
+	ld a,[wTopMenuItemX]
 	ld b,$00
 	ld c,a
 	add hl,bc
 	push hl
-	ld a,[W_OLDMENUITEMID]
+	ld a,[wLastMenuItem]
 	and a ; was the previous menu id 0?
 	jr z,.checkForArrow1
 	push af
@@ -9911,11 +9911,11 @@ PlaceMenuCursor: ; 3b7c (0:3b7c)
 	cp a,"▶" ; was an arrow next to the previously selected menu item?
 	jr nz,.skipClearingArrow
 .clearArrow
-	ld a,[W_TILEBEHINDCURSOR]
+	ld a,[wTileBehindCursor]
 	ld [hl],a
 .skipClearingArrow
 	pop hl
-	ld a,[W_CURMENUITEMID]
+	ld a,[wCurrentMenuItem]
 	and a
 	jr z,.checkForArrow2
 	push af
@@ -9936,16 +9936,16 @@ PlaceMenuCursor: ; 3b7c (0:3b7c)
 	ld a,[hl]
 	cp a,"▶" ; has the right arrow already been placed?
 	jr z,.skipSavingTile ; if so, don't lose the saved tile
-	ld [W_TILEBEHINDCURSOR],a ; save tile before overwriting with right arrow
+	ld [wTileBehindCursor],a ; save tile before overwriting with right arrow
 .skipSavingTile
 	ld a,"▶" ; place right arrow
 	ld [hl],a
 	ld a,l
-	ld [W_MENUCURSORLOCATION],a
+	ld [wMenuCursorLocation],a
 	ld a,h
-	ld [W_MENUCURSORLOCATION + 1],a
-	ld a,[W_CURMENUITEMID]
-	ld [W_OLDMENUITEMID],a
+	ld [wMenuCursorLocation + 1],a
+	ld a,[wCurrentMenuItem]
+	ld [wLastMenuItem],a
 	ret
 
 ; This is used to mark a menu cursor other than the one currently being
@@ -9954,9 +9954,9 @@ PlaceMenuCursor: ; 3b7c (0:3b7c)
 ; this is used to mark the item that was first chosen to be swapped.
 PlaceUnfilledArrowMenuCursor: ; 3bec (0:3bec)
 	ld b,a
-	ld a,[W_MENUCURSORLOCATION]
+	ld a,[wMenuCursorLocation]
 	ld l,a
-	ld a,[W_MENUCURSORLOCATION + 1]
+	ld a,[wMenuCursorLocation + 1]
 	ld h,a
 	ld [hl],$ec ; outline of right arrow
 	ld a,b
@@ -9964,9 +9964,9 @@ PlaceUnfilledArrowMenuCursor: ; 3bec (0:3bec)
 
 ; Replaces the menu cursor with a blank space.
 EraseMenuCursor: ; 3bf9 (0:3bf9)
-	ld a,[W_MENUCURSORLOCATION]
+	ld a,[wMenuCursorLocation]
 	ld l,a
-	ld a,[W_MENUCURSORLOCATION + 1]
+	ld a,[wMenuCursorLocation + 1]
 	ld h,a
 	ld [hl]," "
 	ret
@@ -10706,7 +10706,7 @@ Func_40b0: ; 40b0 (1:40b0)
 	ld [$cf10], a
 	ld [H_CURRENTPRESSEDBUTTONS], a
 	ld [$cc57], a
-	ld [W_FLAGS_CD60], a
+	ld [wFlags_0xcd60], a
 	ld [$FF00+$9f], a
 	ld [$FF00+$a0], a
 	ld [$FF00+$a1], a
@@ -10737,7 +10737,7 @@ Func_40b0: ; 40b0 (1:40b0)
 	res 3, [hl]
 	set 6, [hl]
 	ld a, $ff
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ld a, $7
 	jp Predef ; indirect jump to HealParty (f6a5 (3:76a5))
 ; 4112 (1:4112)
@@ -10947,7 +10947,7 @@ IF _BLUE
 	ld a,SQUIRTLE ; which Pokemon to show first on the title screen
 ENDC
 
-	ld [W_WHICHTRADE], a ; $cd3d
+	ld [wWhichTrade], a ; $cd3d
 	call Func_4524
 	ld a, $9b
 	call Func_4533
@@ -11037,7 +11037,7 @@ INCBIN "baserom.gbc",$43db,$43ea - $43db
 	call Func_4496
 	jr .asm_443b
 .asm_4459
-	ld a, [W_WHICHTRADE] ; $cd3d
+	ld a, [wWhichTrade] ; $cd3d
 	call PlayCry
 	call WaitForSoundToFinish
 	call GBPalWhiteOutWithDelay3
@@ -11076,7 +11076,7 @@ Func_4496: ; 4496 (1:4496)
 	ld hl, TitleMons ; $4588
 	add hl, bc
 	ld a, [hl]
-	ld hl, W_WHICHTRADE ; $cd3d
+	ld hl, wWhichTrade ; $cd3d
 	cp [hl]
 	jr z, .asm_449b
 	ld [hl], a
@@ -11118,8 +11118,8 @@ Func_44dd: ; 44dd (1:44dd)
 	call FarCopyData2
 	call CleanLCD_OAM
 	xor a
-	ld [W_WHICHTRADE], a ; $cd3d
-	ld hl, W_OAMBUFFER
+	ld [wWhichTrade], a ; $cd3d
+	ld hl, wOAMBuffer
 	ld de, $605a
 	ld b, $7
 .asm_44fa
@@ -11132,10 +11132,10 @@ Func_44dd: ; 44dd (1:44dd)
 	ld [hli], a
 	add $8
 	ld e, a
-	ld a, [W_WHICHTRADE] ; $cd3d
+	ld a, [wWhichTrade] ; $cd3d
 	ld [hli], a
 	inc a
-	ld [W_WHICHTRADE], a ; $cd3d
+	ld [wWhichTrade], a ; $cd3d
 	inc hl
 	dec c
 	jr nz, .asm_44fd
@@ -11535,7 +11535,7 @@ UnusedNames: ; 4a92 (1:4a92)
 
 INCBIN "baserom.gbc",$4b09,$4b0f - $4b09
 
-; calculates the OAM data for all currently visible sprites and writes it to W_OAMBUFFER
+; calculates the OAM data for all currently visible sprites and writes it to wOAMBuffer
 PrepareOAMData: ; 4b0f (1:4b0f)
 	ld a, [$cfcb]
 	dec a
@@ -11597,7 +11597,7 @@ PrepareOAMData: ; 4b0f (1:4b0f)
 	call Func_4bd1
 	ld a, [$FF00+$90]
 	ld e, a
-	ld d, $c3                ; W_OAMBUFFER+x is buffer for OAM data
+	ld d, $c3                ; wOAMBuffer+x is buffer for OAM data
 .spriteTilesLoop             ; loops 4 times for the 4 tiles a sprite consists of
 	ld a, [$FF00+$92]        ; temp for sprite Y position
 	add $10                  ; Y=16 is top of screen (Y=0 is invisible)
@@ -12041,13 +12041,13 @@ NoMoreRoomForItemText: ; 4e2c (1:4e2c)
 	db "@"
 
 UpdatePlayerSprite: ; 4e31 (1:4e31)
-	ld a, [$c200]
+	ld a, [wSpriteStateData2]
 	and a
 	jr z, .asm_4e41
 	cp $ff
 	jr z, .asm_4e4a
 	dec a
-	ld [$c200], a
+	ld [wSpriteStateData2], a
 	jr .asm_4e4a
 .asm_4e41
 	FuncCoord 8, 9 ; $c45c
@@ -12143,7 +12143,7 @@ Func_4ed1: ; 4ed1 (1:4ed1)
 	add l
 	ld l, a
 	ld a, [hl]        ; read movement byte 2
-	ld [W_CURSPRITEMOVEMENT2], a
+	ld [wCurSpriteMovement2], a
 	ld h, $c1
 	ld a, [H_CURRENTSPRITEOFFSET]
 	ld l, a
@@ -12214,7 +12214,7 @@ Func_4ed1: ; 4ed1 (1:4ed1)
 	call GenRandom
 .asm_4f5f
 	ld b, a
-	ld a, [W_CURSPRITEMOVEMENT2]
+	ld a, [wCurSpriteMovement2]
 	cp $d0
 	jr z, .moveDown    ; movement byte 2 = $d0 forces down
 	cp $d1
@@ -12226,7 +12226,7 @@ Func_4ed1: ; 4ed1 (1:4ed1)
 	ld a, b
 	cp $40             ; a < $40: down (or left)
 	jr nc, .notDown
-	ld a, [W_CURSPRITEMOVEMENT2]
+	ld a, [wCurSpriteMovement2]
 	cp $2
 	jr z, .moveLeft    ; movement byte 2 = $2 only allows left or right
 .moveDown
@@ -12239,7 +12239,7 @@ Func_4ed1: ; 4ed1 (1:4ed1)
 .notDown
 	cp $80             ; $40 <= a < $80: up (or right)
 	jr nc, .notUp
-	ld a, [W_CURSPRITEMOVEMENT2]
+	ld a, [wCurSpriteMovement2]
 	cp $2
 	jr z, .moveRight   ; movement byte 2 = $2 only allows left or right
 .moveUp
@@ -12251,7 +12251,7 @@ Func_4ed1: ; 4ed1 (1:4ed1)
 .notUp
 	cp $c0             ; $80 <= a < $c0: left (or up)
 	jr nc, .notLeft
-	ld a, [W_CURSPRITEMOVEMENT2]
+	ld a, [wCurSpriteMovement2]
 	cp $1
 	jr z, .moveUp      ; movement byte 2 = $1 only allows up or down
 .moveLeft
@@ -12261,7 +12261,7 @@ Func_4ed1: ; 4ed1 (1:4ed1)
 	ld bc, $208
 	jr TryWalking
 .notLeft              ; $c0 <= a: right (or down)
-	ld a, [W_CURSPRITEMOVEMENT2]
+	ld a, [wCurSpriteMovement2]
 	cp $1
 	jr z, .moveDown    ; movement byte 2 = $1 only allows up or down
 .moveRight
@@ -12724,13 +12724,13 @@ getTileSpriteStandsOn: ; 5207 (1:5207)
 	add $14         ; screen X tile + 20
 	ld d, $0
 	ld e, a
-	ld hl, W_SCREENTILESBUFFER
+	ld hl, wTileMap
 	add hl, bc
 	add hl, bc
 	add hl, bc
 	add hl, bc
 	add hl, bc
-	add hl, de     ; W_SCREENTILESBUFFER + 20*(screen Y tile + 1) + screen X tile
+	add hl, de     ; wTileMap + 20*(screen Y tile + 1) + screen X tile
 	ret
 
 ; loads [de+a] into a
@@ -12825,7 +12825,7 @@ Func_52b7: ; 52b7 (1:52b7)
 	ld a, $6
 	ld b, a
 asm_52ba: ; 52ba (1:52ba)
-	ld hl, $c100
+	ld hl, wSpriteStateData1
 	ld a, [H_CURRENTSPRITEOFFSET]
 	add l
 	add b
@@ -12833,7 +12833,7 @@ asm_52ba: ; 52ba (1:52ba)
 	ret
 
 Func_52c3: ; 52c3 (1:52c3)
-	ld hl, $c200
+	ld hl, wSpriteStateData2
 	ld a, [H_CURRENTSPRITEOFFSET]
 	add $e
 	ld l, a
@@ -12841,7 +12841,7 @@ Func_52c3: ; 52c3 (1:52c3)
 	dec a
 	swap a
 	ld b, a
-	ld hl, $c100
+	ld hl, wSpriteStateData1
 	ld a, [H_CURRENTSPRITEOFFSET]
 	add $9
 	ld l, a
@@ -12860,7 +12860,7 @@ Func_52c3: ; 52c3 (1:52c3)
 	ld b, a
 	ld [$FF00+$e9], a
 	call Func_5301
-	ld hl, $c100
+	ld hl, wSpriteStateData1
 	ld a, [H_CURRENTSPRITEOFFSET]
 	add $2
 	ld l, a
@@ -12933,7 +12933,7 @@ Func_5317: ; 5317 (1:5317)
 	ld [hli], a
 	dec b
 	jr nz, .asm_535d
-	ld hl, W_SCREENTILESBACKBUFFER
+	ld hl, wTileMapBackup
 	ld a, $fd
 	ld [hli], a
 	ld [hli], a
@@ -13005,7 +13005,7 @@ Func_5317: ; 5317 (1:5317)
 	ld a, $8
 	ld [rIE], a ; $FF00+$ff
 	ld hl, $d141
-	ld de, W_SCREENTILESBACKBUFFER2
+	ld de, wTileMapBackup2
 	ld bc, $11
 	call Func_216f
 	ld a, $fe
@@ -13016,7 +13016,7 @@ Func_5317: ; 5317 (1:5317)
 	call Func_216f
 	ld a, $fe
 	ld [de], a
-	ld hl, W_SCREENTILESBACKBUFFER
+	ld hl, wTileMapBackup
 	ld de, $c5d0
 	ld bc, $c8
 	call Func_216f
@@ -13027,7 +13027,7 @@ Func_5317: ; 5317 (1:5317)
 	ld a, [$FF00+$aa]
 	cp $2
 	jr z, .asm_5431
-	ld hl, W_SCREENTILESBACKBUFFER2
+	ld hl, wTileMapBackup2
 .asm_5415
 	ld a, [hli]
 	and a
@@ -13080,7 +13080,7 @@ Func_5317: ; 5317 (1:5317)
 	ld a, b
 	or c
 	jr nz, .asm_5456
-	ld de, W_SCREENTILESBACKBUFFER
+	ld de, wTileMapBackup
 	ld hl, W_PARTYMON1_NUM ; $d16b (aliases: W_PARTYMON1DATA)
 	ld c, $2
 .asm_546a
@@ -13518,7 +13518,7 @@ Func_57d6:
 	jp Func_57a2
 
 Func_57f2:
-	ld hl, $c3a0
+	ld hl, wTileMap
 	ld b, $6
 	ld c, $12
 	call Func_5ab3
@@ -14020,7 +14020,7 @@ Func_5c0a: ; 5c0a (1:5c0a)
 	xor a
 	ld [$cd37], a
 	ld [$d72d], a
-	ld hl, W_TOPMENUITEMY ; $cc24
+	ld hl, wTopMenuItemY ; $cc24
 	ld a, $7
 	ld [hli], a
 	ld a, $6
@@ -14040,7 +14040,7 @@ Func_5c0a: ; 5c0a (1:5c0a)
 	add a
 	add a
 	ld b, a
-	ld a, [W_CURMENUITEMID] ; $cc26
+	ld a, [wCurrentMenuItem] ; $cc26
 	add b
 	add $d0
 	ld [$cc42], a
@@ -14076,7 +14076,7 @@ Func_5c0a: ; 5c0a (1:5c0a)
 	ld a, b
 	ld [$cc42], a
 	and $3
-	ld [W_CURMENUITEMID], a ; $cc26
+	ld [wCurrentMenuItem], a ; $cc26
 .asm_5ca1
 	ld a, [$FF00+$aa]
 	cp $2
@@ -14092,7 +14092,7 @@ Func_5c0a: ; 5c0a (1:5c0a)
 	ld a, [$cc42]
 	and $8
 	jr nz, .asm_5ccc
-	ld a, [W_CURMENUITEMID] ; $cc26
+	ld a, [wCurrentMenuItem] ; $cc26
 	cp $2
 	jr z, .asm_5ccc
 	ld c, d
@@ -14117,12 +14117,12 @@ Func_5c0a: ; 5c0a (1:5c0a)
 	ld a, [$cc42]
 	and $8
 	jr nz, .asm_5d2d
-	ld a, [W_CURMENUITEMID] ; $cc26
+	ld a, [wCurrentMenuItem] ; $cc26
 	cp $2
 	jr z, .asm_5d2d
 	xor a
 	ld [$d700], a
-	ld a, [W_CURMENUITEMID] ; $cc26
+	ld a, [wCurrentMenuItem] ; $cc26
 	and a
 	ld a, $f0
 	jr nz, .asm_5cfc
@@ -14141,7 +14141,7 @@ Func_5c0a: ; 5c0a (1:5c0a)
 	ld c, $14
 	call DelayFrames
 	xor a
-	ld [W_MENUJOYPADPOLLCOUNT], a ; $cc34
+	ld [wMenuJoypadPollCount], a ; $cc34
 	ld [$cc42], a
 	inc a
 	ld [W_ISLINKBATTLE], a ; $d12b
@@ -14149,7 +14149,7 @@ Func_5c0a: ; 5c0a (1:5c0a)
 	jr Func_5d5f
 .asm_5d2d
 	xor a
-	ld [W_MENUJOYPADPOLLCOUNT], a ; $cc34
+	ld [wMenuJoypadPollCount], a ; $cc34
 	call Delay3
 	call Func_72d7
 	ld hl, UnnamedText_5d4d ; $5d4d
@@ -14246,7 +14246,7 @@ Func_5e2f: ; 5e2f (1:5e2f)
 
 Func_5e42: ; 5e42 (1:5e42)
 	push hl
-	ld hl, W_OWNEDPOKEMON ; $d2f7
+	ld hl, wPokedexOwned ; $d2f7
 	ld b, $13
 	call CountSetBits
 	pop hl
@@ -14303,16 +14303,16 @@ DisplayOptionMenu: ; 5e8a (1:5e8a)
 	ld de,OptionMenuCancelText
 	call PlaceString
 	xor a
-	ld [W_CURMENUITEMID],a
-	ld [W_OLDMENUITEMID],a
+	ld [wCurrentMenuItem],a
+	ld [wLastMenuItem],a
 	inc a
 	ld [$d358],a
 	ld [$cd40],a
 	ld a,3 ; text speed cursor Y coordinate
-	ld [W_TOPMENUITEMY],a
+	ld [wTopMenuItemY],a
 	call SetCursorPositionsFromOptions
 	ld a,[$cd3d] ; text speed cursor X coordinate
-	ld [W_TOPMENUITEMX],a
+	ld [wTopMenuItemX],a
 	ld a,$01
 	ld [H_AUTOBGTRANSFERENABLED],a ; enable auto background transfer
 	call Delay3
@@ -14331,7 +14331,7 @@ DisplayOptionMenu: ; 5e8a (1:5e8a)
 	jr nz,.exitMenu
 	bit 0,b ; A button pressed?
 	jr z,.checkDirectionKeys
-	ld a,[W_TOPMENUITEMY]
+	ld a,[wTopMenuItemY]
 	cp a,16 ; is the cursor on Cancel?
 	jr nz,.loop
 .exitMenu
@@ -14339,11 +14339,11 @@ DisplayOptionMenu: ; 5e8a (1:5e8a)
 	call PlaySound ; play sound
 	ret
 .eraseOldMenuCursor
-	ld [W_TOPMENUITEMX],a
+	ld [wTopMenuItemX],a
 	call EraseMenuCursor
 	jp .loop
 .checkDirectionKeys
-	ld a,[W_TOPMENUITEMY]
+	ld a,[wTopMenuItemY]
 	bit 7,b ; Down pressed?
 	jr nz,.downPressed
 	bit 6,b ; Up pressed?
@@ -14389,9 +14389,9 @@ DisplayOptionMenu: ; 5e8a (1:5e8a)
 	inc hl
 .updateMenuVariables
 	add b
-	ld [W_TOPMENUITEMY],a
+	ld [wTopMenuItemY],a
 	ld a,[hl]
-	ld [W_TOPMENUITEMX],a
+	ld [wTopMenuItemX],a
 	call PlaceUnfilledArrowMenuCursor
 	jp .loop
 .cursorInBattleAnimation
@@ -14573,7 +14573,7 @@ Func_60ca: ; 60ca (1:60ca)
 	ld bc, $d8a
 	xor a
 	call FillMemory
-	ld hl, $c100
+	ld hl, wSpriteStateData1
 	ld bc, $200
 	xor a
 	call FillMemory
@@ -15041,7 +15041,7 @@ AskForMonNickname: ; 64eb (1:64eb)
 	push hl
 	ld a, [W_ISINBATTLE] ; $d057
 	dec a
-	ld hl, W_SCREENTILESBUFFER
+	ld hl, wTileMap
 	ld b, $4
 	ld c, $b
 	call z, ClearScreenArea ; only if in wild batle
@@ -15057,7 +15057,7 @@ AskForMonNickname: ; 64eb (1:64eb)
 	ld [$d125], a
 	call DisplayTextBoxID
 	pop hl
-	ld a, [W_CURMENUITEMID] ; $cc26
+	ld a, [wCurrentMenuItem] ; $cc26
 	and a
 	jr nz, .asm_654c
 	ld a, [$cfcb]
@@ -15107,7 +15107,7 @@ Func_655c: ; 655c (1:655c)
 	jr z, .asm_6594
 	ld hl, W_PARTYMON1NAME ; $d2b5
 	ld bc, $b
-	ld a, [W_WHICHPOKEMON] ; $cf92
+	ld a, [wWhichPokemon] ; $cf92
 	call AddNTimes
 	ld e, l
 	ld d, h
@@ -15141,15 +15141,15 @@ Func_6596: ; 6596 (1:6596)
 	call TextBoxBorder
 	call Func_68f8
 	ld a, $3
-	ld [W_TOPMENUITEMY], a ; $cc24
+	ld [wTopMenuItemY], a ; $cc24
 	ld a, $1
-	ld [W_TOPMENUITEMX], a ; $cc25
-	ld [W_OLDMENUITEMID], a ; $cc2a
-	ld [W_CURMENUITEMID], a ; $cc26
+	ld [wTopMenuItemX], a ; $cc25
+	ld [wLastMenuItem], a ; $cc2a
+	ld [wCurrentMenuItem], a ; $cc26
 	ld a, $ff
-	ld [W_MENUWATCHEDKEYS], a ; $cc29
+	ld [wMenuWatchedKeys], a ; $cc29
 	ld a, $7
-	ld [W_MAXMENUITEMID], a ; $cc28
+	ld [wMaxMenuItem], a ; $cc28
 	ld a, $50
 	ld [$cf4b], a
 	xor a
@@ -15166,13 +15166,13 @@ Func_6596: ; 6596 (1:6596)
 	call Func_680e
 	call PlaceMenuCursor
 .asm_65ff
-	ld a, [W_CURMENUITEMID] ; $cc26
+	ld a, [wCurrentMenuItem] ; $cc26
 	push af
 	ld b, BANK(Func_716f7)
 	ld hl, Func_716f7
 	call Bankswitch ; indirect jump to Func_716f7 (716f7 (1c:56f7))
 	pop af
-	ld [W_CURMENUITEMID], a ; $cc26
+	ld [wCurrentMenuItem], a ; $cc26
 	call GetJoypadStateLowSensitivity
 	ld a, [H_NEWLYPRESSEDBUTTONS]
 	and a
@@ -15232,21 +15232,21 @@ INCBIN "baserom.gbc",$665e,$667e - $665e
 	ld a, $1
 	ld [$ceea], a
 	ret
-	ld a, [W_CURMENUITEMID] ; $cc26
+	ld a, [wCurrentMenuItem] ; $cc26
 	cp $5
 	jr nz, .asm_66a0
-	ld a, [W_TOPMENUITEMX] ; $cc25
+	ld a, [wTopMenuItemX] ; $cc25
 	cp $11
 	jr z, .asm_668c
 .asm_66a0
-	ld a, [W_CURMENUITEMID] ; $cc26
+	ld a, [wCurrentMenuItem] ; $cc26
 	cp $6
 	jr nz, .asm_66ae
-	ld a, [W_TOPMENUITEMX] ; $cc25
+	ld a, [wTopMenuItemX] ; $cc25
 	cp $1
 	jr z, .asm_667e
 .asm_66ae
-	ld hl, W_MENUCURSORLOCATION ; $cc30
+	ld hl, wMenuCursorLocation ; $cc30
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
@@ -15293,10 +15293,10 @@ INCBIN "baserom.gbc",$665e,$667e - $665e
 	dec hl
 	ld [hl], $50
 	ret
-	ld a, [W_CURMENUITEMID] ; $cc26
+	ld a, [wCurrentMenuItem] ; $cc26
 	cp $6
 	ret z
-	ld a, [W_TOPMENUITEMX] ; $cc25
+	ld a, [wTopMenuItemX] ; $cc25
 	cp $11
 	jp z, Func_6714
 	inc a
@@ -15306,10 +15306,10 @@ INCBIN "baserom.gbc",$665e,$667e - $665e
 Func_6714: ; 6714 (1:6714)
 	ld a, $1
 	jr asm_6755
-	ld a, [W_CURMENUITEMID] ; $cc26
+	ld a, [wCurrentMenuItem] ; $cc26
 	cp $6
 	ret z
-	ld a, [W_TOPMENUITEMX] ; $cc25
+	ld a, [wTopMenuItemX] ; $cc25
 	dec a
 	jp z, Func_6728
 	dec a
@@ -15318,29 +15318,29 @@ Func_6714: ; 6714 (1:6714)
 Func_6728: ; 6728 (1:6728)
 	ld a, $11
 	jr asm_6755
-	ld a, [W_CURMENUITEMID] ; $cc26
+	ld a, [wCurrentMenuItem] ; $cc26
 	dec a
-	ld [W_CURMENUITEMID], a ; $cc26
+	ld [wCurrentMenuItem], a ; $cc26
 	and a
 	ret nz
 	ld a, $6
-	ld [W_CURMENUITEMID], a ; $cc26
+	ld [wCurrentMenuItem], a ; $cc26
 	ld a, $1
 	jr asm_6755
-	ld a, [W_CURMENUITEMID] ; $cc26
+	ld a, [wCurrentMenuItem] ; $cc26
 	inc a
-	ld [W_CURMENUITEMID], a ; $cc26
+	ld [wCurrentMenuItem], a ; $cc26
 	cp $7
 	jr nz, .asm_6750
 	ld a, $1
-	ld [W_CURMENUITEMID], a ; $cc26
+	ld [wCurrentMenuItem], a ; $cc26
 	jr asm_6755
 .asm_6750
 	cp $6
 	ret nz
 	ld a, $1
 asm_6755: ; 6755 (1:6755)
-	ld [W_TOPMENUITEMX], a ; $cc25
+	ld [wTopMenuItemX], a ; $cc25
 	jp EraseMenuCursor
 
 Func_675b: ; 675b (1:675b)
@@ -15428,9 +15428,9 @@ Func_680e: ; 680e (1:680e)
 	jr nz, .asm_6867
 	call EraseMenuCursor
 	ld a, $11
-	ld [W_TOPMENUITEMX], a ; $cc25
+	ld [wTopMenuItemX], a ; $cc25
 	ld a, $5
-	ld [W_CURMENUITEMID], a ; $cc26
+	ld [wCurrentMenuItem], a ; $cc26
 	ld a, [$d07d]
 	cp $2
 	ld a, $9
@@ -15529,7 +15529,7 @@ Func_695d: ; 695d (1:695d)
 	call Unnamed_6a12
 	ld de, DefaultNamesPlayer ; $6aa8
 	call Func_6a6c
-	ld a, [W_CURMENUITEMID] ; $cc26
+	ld a, [wCurrentMenuItem] ; $cc26
 	and a
 	jr z, .asm_697a
 	ld hl, DefaultNamesPlayerList ; $6af2
@@ -15562,7 +15562,7 @@ Func_69a4: ; 69a4 (1:69a4)
 	call Unnamed_6a12 ; 0x69a4 call 0x6a12
 	ld de, DefaultNamesRival
 	call Func_6a6c
-	ld a, [W_CURMENUITEMID] ; $cc26
+	ld a, [wCurrentMenuItem] ; $cc26
 	and a
 	jr z, .asm_69c1
 	ld hl, DefaultNamesRivalList
@@ -15593,7 +15593,7 @@ UnnamedText_69e7: ; 69e7 (1:69e7)
 
 Func_69ec: ; 69ec (1:69ec)
 	push de
-	ld hl, W_SCREENTILESBUFFER
+	ld hl, wTileMap
 	ld bc, $c0b
 	call ClearScreenArea
 	ld c, $a
@@ -15684,7 +15684,7 @@ asm_6a19: ; 6a19 (1:6a19)
 
 Func_6a6c: ; 6a6c (1:6a6c)
 	push de
-	ld hl, W_SCREENTILESBUFFER
+	ld hl, wTileMap
 	ld b, $a
 	ld c, $9
 	call TextBoxBorder
@@ -15698,15 +15698,15 @@ Func_6a6c: ; 6a6c (1:6a6c)
 	call PlaceString
 	call UpdateSprites
 	xor a
-	ld [W_CURMENUITEMID], a ; $cc26
-	ld [W_OLDMENUITEMID], a ; $cc2a
+	ld [wCurrentMenuItem], a ; $cc26
+	ld [wLastMenuItem], a ; $cc2a
 	inc a
-	ld [W_TOPMENUITEMX], a ; $cc25
-	ld [W_MENUWATCHEDKEYS], a ; $cc29
+	ld [wTopMenuItemX], a ; $cc25
+	ld [wMenuWatchedKeys], a ; $cc29
 	inc a
-	ld [W_TOPMENUITEMY], a ; $cc24
+	ld [wTopMenuItemY], a ; $cc24
 	inc a
-	ld [W_MAXMENUITEMID], a ; $cc28
+	ld [wMaxMenuItem], a ; $cc28
 	jp HandleMenuInput
 
 .namestring ; 6aa3 (1:6aa3)
@@ -15783,7 +15783,7 @@ SubtractAmountPaidFromMoney_: ; 6b21 (1:6b21)
 	ret
 
 HandleItemListSwapping: ; 6b44 (1:6b44)
-	ld a,[W_LISTMENUID]
+	ld a,[wListMenuID]
 	cp a,ITEMLISTMENU
 	jp nz,DisplayListMenuIDLoop ; only rearrange item list menus
 	push hl
@@ -15792,9 +15792,9 @@ HandleItemListSwapping: ; 6b44 (1:6b44)
 	ld h,[hl]
 	ld l,a
 	inc hl ; hl = beginning of list entries
-	ld a,[W_CURMENUITEMID]
+	ld a,[wCurrentMenuItem]
 	ld b,a
-	ld a,[W_LISTSCROLLOFFSET]
+	ld a,[wListScrollOffset]
 	add b
 	add a
 	ld c,a
@@ -15808,20 +15808,20 @@ HandleItemListSwapping: ; 6b44 (1:6b44)
 	and a ; has the first item to swap already been chosen?
 	jr nz,.swapItems
 ; if not, set the currently selected item as the first item
-	ld a,[W_CURMENUITEMID]
+	ld a,[wCurrentMenuItem]
 	inc a
 	ld b,a
-	ld a,[W_LISTSCROLLOFFSET] ; index of top (visible) menu item within the list
+	ld a,[wListScrollOffset] ; index of top (visible) menu item within the list
 	add b
 	ld [$cc35],a ; ID of item chosen for swapping (counts from 1)
 	ld c,20
 	call DelayFrames
 	jp DisplayListMenuIDLoop
 .swapItems
-	ld a,[W_CURMENUITEMID]
+	ld a,[wCurrentMenuItem]
 	inc a
 	ld b,a
-	ld a,[W_LISTSCROLLOFFSET]
+	ld a,[wListScrollOffset]
 	add b
 	ld b,a
 	ld a,[$cc35] ; ID of item chosen for swapping (counts from 1)
@@ -15840,9 +15840,9 @@ HandleItemListSwapping: ; 6b44 (1:6b44)
 	inc hl ; hl = beginning of list entries
 	ld d,h
 	ld e,l ; de = beginning of list entries
-	ld a,[W_CURMENUITEMID]
+	ld a,[wCurrentMenuItem]
 	ld b,a
-	ld a,[W_LISTSCROLLOFFSET]
+	ld a,[wListScrollOffset]
 	add b
 	add a
 	ld c,a
@@ -15904,7 +15904,7 @@ HandleItemListSwapping: ; 6b44 (1:6b44)
 	ld [$d12a],a ; update number of items variable
 	cp a,1
 	jr nz,.skipSettingMaxMenuItemID
-	ld [W_MAXMENUITEMID],a ; if the number of items is only one now, update the max menu item ID
+	ld [wMaxMenuItem],a ; if the number of items is only one now, update the max menu item ID
 .skipSettingMaxMenuItemID
 	dec de
 	ld h,d
@@ -15923,8 +15923,8 @@ HandleItemListSwapping: ; 6b44 (1:6b44)
 	jr .moveItemsUpLoop
 .afterMovingItemsUp
 	xor a
-	ld [W_LISTSCROLLOFFSET],a
-	ld [W_CURMENUITEMID],a
+	ld [wListScrollOffset],a
+	ld [wCurrentMenuItem],a
 .done
 	xor a
 	ld [$cc35],a ; 0 means no item is currently being swapped
@@ -15933,15 +15933,15 @@ HandleItemListSwapping: ; 6b44 (1:6b44)
 	jp DisplayListMenuIDLoop
 
 DisplayPokemartDialogue_: ; 6c20 (1:6c20)
-	ld a,[W_LISTSCROLLOFFSET]
+	ld a,[wListScrollOffset]
 	ld [$d07e],a
 	call UpdateSprites ; move sprites
 	xor a
 	ld [$cf0a],a ; flag that is set if something is sold or bought
 .loop
 	xor a
-	ld [W_LISTSCROLLOFFSET],a
-	ld [W_CURMENUITEMID],a
+	ld [wListScrollOffset],a
+	ld [wCurrentMenuItem],a
 	ld [$cc2f],a
 	inc a
 	ld [$cf93],a
@@ -15991,9 +15991,9 @@ DisplayPokemartDialogue_: ; 6c20 (1:6c20)
 	ld [$cf8c],a
 	xor a
 	ld [$cf93],a
-	ld [W_CURMENUITEMID],a
+	ld [wCurrentMenuItem],a
 	ld a,ITEMLISTMENU
-	ld [W_LISTMENUID],a
+	ld [wListMenuID],a
 	call DisplayListMenuID
 	jp c,.returnToMainPokemartMenu ; if the player closed the menu
 .confirmItemSale ; if the player is trying to sell a specific item
@@ -16005,7 +16005,7 @@ DisplayPokemartDialogue_: ; 6c20 (1:6c20)
 	call IsItemHM
 	jr c,.unsellableItem
 	ld a,PRICEDITEMLISTMENU
-	ld [W_LISTMENUID],a
+	ld [wListMenuID],a
 	ld [$ff8e],a ; halve prices when selling
 	call DisplayChooseQuantityMenu
 	inc a
@@ -16067,11 +16067,11 @@ DisplayPokemartDialogue_: ; 6c20 (1:6c20)
 	ld a,h
 	ld [$cf8c],a
 	xor a
-	ld [W_CURMENUITEMID],a
+	ld [wCurrentMenuItem],a
 	inc a
 	ld [$cf93],a
 	inc a ; a = 2 (PRICEDITEMLISTMENU)
-	ld [W_LISTMENUID],a
+	ld [wListMenuID],a
 	call DisplayListMenuID
 	jr c,.returnToMainPokemartMenu ; if the player closed the menu
 	ld a,$63
@@ -16146,7 +16146,7 @@ DisplayPokemartDialogue_: ; 6c20 (1:6c20)
 	ld [$cfcb],a
 	call UpdateSprites ; move sprites
 	ld a,[$d07e]
-	ld [W_LISTSCROLLOFFSET],a
+	ld [wListScrollOffset],a
 	ret
 
 PokemartBuyingGreetingText: ; 6e0c (1:6e0c)
@@ -16195,7 +16195,7 @@ PokemartAnythingElseText: ; 6e3e (1:6e3e)
 
 Func_6e43: ; 6e43 (1:6e43)
 	call SaveScreenTilesToBuffer1
-	ld a, [W_WHICHPOKEMON] ; $cf92
+	ld a, [wWhichPokemon] ; $cf92
 	ld hl, W_PARTYMON1NAME ; $d2b5
 	call GetPartyMonName
 	ld hl, $cd6d
@@ -16206,7 +16206,7 @@ Func_6e43: ; 6e43 (1:6e43)
 Func_6e5b: ; 6e5b (1:6e5b)
 	ld hl, W_PARTYMON1_MOVE1 ; $d173
 	ld bc, $2c
-	ld a, [W_WHICHPOKEMON] ; $cf92
+	ld a, [wWhichPokemon] ; $cf92
 	call AddNTimes
 	ld d, h
 	ld e, l
@@ -16251,9 +16251,9 @@ Func_6e5b: ; 6e5b (1:6e5b)
 	ld a, [W_ISINBATTLE] ; $d057
 	and a
 	jp z, Func_6efe
-	ld a, [W_WHICHPOKEMON] ; $cf92
+	ld a, [wWhichPokemon] ; $cf92
 	ld b, a
-	ld a, [W_PLAYERMONNUMBER] ; $cc2f
+	ld a, [wPlayerMonNumber] ; $cc2f
 	cp b
 	jp nz, Func_6efe
 	ld h, d
@@ -16277,7 +16277,7 @@ Func_6eda: ; 6eda (1:6eda)
 	ld a, $14
 	ld [$d125], a
 	call DisplayTextBoxID
-	ld a, [W_CURMENUITEMID] ; $cc26
+	ld a, [wCurrentMenuItem] ; $cc26
 	and a
 	jp nz, Func_6e5b
 	ld hl, UnnamedText_6fbe ; $6fbe
@@ -16302,7 +16302,7 @@ Func_6f07: ; 6f07 (1:6f07)
 	ld [$d125], a
 	call DisplayTextBoxID
 	pop hl
-	ld a, [W_CURMENUITEMID] ; $cc26
+	ld a, [wCurrentMenuItem] ; $cc26
 	rra
 	ret c
 	ld bc, $fffc
@@ -16334,7 +16334,7 @@ Func_6f07: ; 6f07 (1:6f07)
 	ld a, [$FF00+$f6]
 	res 2, a
 	ld [$FF00+$f6], a
-	ld hl, W_TOPMENUITEMY ; $cc24
+	ld hl, wTopMenuItemY ; $cc24
 	ld a, $8
 	ld [hli], a
 	ld a, $5
@@ -16359,7 +16359,7 @@ Func_6f07: ; 6f07 (1:6f07)
 	bit 1, a
 	jr nz, .asm_6fab
 	push hl
-	ld a, [W_CURMENUITEMID] ; $cc26
+	ld a, [wCurrentMenuItem] ; $cc26
 	ld c, a
 	ld b, $0
 	add hl, bc
@@ -16437,7 +16437,7 @@ DisplayPokemonCenterDialogue_: ; 6fe6 (1:6fe6)
 	call PrintText
 .skipShallWeHealYourPokemon
 	call YesNoChoicePokeCenter ; yes/no menu
-	ld a, [W_CURMENUITEMID]
+	ld a, [wCurrentMenuItem]
 	and a
 	jr nz, .declinedHealing ; if the player chose No
 	call Unknown_7078
@@ -16558,7 +16558,7 @@ DisplayTextIDInit: ; 7096 (1:7096)
 .skipDrawingTextBoxBorder
 	ld hl,$cfc4
 	set 0,[hl]
-	ld hl,W_FLAGS_CD60
+	ld hl,wFlags_0xcd60
 	bit 4,[hl]
 	res 4,[hl]
 	jr nz,.skipMovingSprites
@@ -16972,7 +16972,7 @@ GetTextBoxIDText: ; 7367 (1:7367)
 ; hl = address of upper left corner of text box
 GetAddressOfScreenCoords: ; 7375 (1:7375)
 	push bc
-	ld hl,W_SCREENTILESBUFFER
+	ld hl,wTileMap
 	ld bc,20
 .loop ; loop to add d rows to the base address
 	ld a,d
@@ -17165,16 +17165,16 @@ Function_74ea: ; 0x74ea, 1:34ea
 	ld [$d125], a
 	call DisplayTextBoxID
 	ld a, $3
-	ld [W_MENUWATCHEDKEYS], a ; $cc29
+	ld [wMenuWatchedKeys], a ; $cc29
 	ld a, $2
-	ld [W_MAXMENUITEMID], a ; $cc28
+	ld [wMaxMenuItem], a ; $cc28
 	ld a, $1
-	ld [W_TOPMENUITEMY], a ; $cc24
+	ld [wTopMenuItemY], a ; $cc24
 	ld a, $1
-	ld [W_TOPMENUITEMX], a ; $cc25
+	ld [wTopMenuItemX], a ; $cc25
 	xor a
-	ld [W_CURMENUITEMID], a ; $cc26
-	ld [W_OLDMENUITEMID], a ; $cc2a
+	ld [wCurrentMenuItem], a ; $cc26
+	ld [wLastMenuItem], a ; $cc2a
 	ld [$cc37], a
 	ld a, [$d730]
 	res 6, a
@@ -17191,17 +17191,17 @@ Function_74ea: ; 0x74ea, 1:34ea
 .asm_7539
 	ld a, $1
 	ld [$d12e], a
-	ld a, [W_CURMENUITEMID] ; $cc26
+	ld a, [wCurrentMenuItem] ; $cc26
 	ld [$d12d], a
 	ld b, a
-	ld a, [W_MAXMENUITEMID] ; $cc28
+	ld a, [wMaxMenuItem] ; $cc28
 	cp b
 	jr z, .asm_754c
 	ret
 .asm_754c
 	ld a, $2
 	ld [$d12e], a
-	ld a, [W_CURMENUITEMID] ; $cc26
+	ld a, [wCurrentMenuItem] ; $cc26
 	ld [$d12d], a
 	scf
 	ret
@@ -17215,15 +17215,15 @@ DisplayYesNoTextBox: ; 7559 (1:7559)
 	ld [$d12d], a
 	ld [$d12e], a
 	ld a, $3
-	ld [W_MENUWATCHEDKEYS], a ; $cc29
+	ld [wMenuWatchedKeys], a ; $cc29
 	ld a, $1
-	ld [W_MAXMENUITEMID], a ; $cc28
+	ld [wMaxMenuItem], a ; $cc28
 	ld a, b
-	ld [W_TOPMENUITEMY], a ; $cc24
+	ld [wTopMenuItemY], a ; $cc24
 	ld a, c
-	ld [W_TOPMENUITEMX], a ; $cc25
+	ld [wTopMenuItemX], a ; $cc25
 	xor a
-	ld [W_OLDMENUITEMID], a ; $cc2a
+	ld [wLastMenuItem], a ; $cc2a
 	ld [$cc37], a
 	push hl
 	ld hl, $d12c
@@ -17232,7 +17232,7 @@ DisplayYesNoTextBox: ; 7559 (1:7559)
 	jr z, .asm_758d
 	inc a
 .asm_758d
-	ld [W_CURMENUITEMID], a ; $cc26
+	ld [wCurrentMenuItem], a ; $cc26
 	pop hl
 	push hl
 	push hl
@@ -17284,10 +17284,10 @@ DisplayYesNoTextBox: ; 7559 (1:7559)
 	jr nz, .asm_7603
 	xor a
 	ld [$d12c], a
-	ld a, [W_FLAGS_CD60]
+	ld a, [wFlags_0xcd60]
 	push af
 	push hl
-	ld hl, W_FLAGS_CD60
+	ld hl, wFlags_0xcd60
 	bit 5, [hl]
 	set 5, [hl]
 	pop hl
@@ -17297,7 +17297,7 @@ DisplayYesNoTextBox: ; 7559 (1:7559)
 	jr nz, .asm_75f0
 	pop af
 	pop hl
-	ld [W_FLAGS_CD60], a
+	ld [wFlags_0xcd60], a
 	ld a, $90
 	call PlaySound
 	jr .asm_760f
@@ -17309,7 +17309,7 @@ DisplayYesNoTextBox: ; 7559 (1:7559)
 	bit 1, a
 	jr nz, .asm_7627
 .asm_760f
-	ld a, [W_CURMENUITEMID] ; $cc26
+	ld a, [wCurrentMenuItem] ; $cc26
 	ld [$d12d], a
 	and a
 	jr nz, .asm_7627
@@ -17322,7 +17322,7 @@ DisplayYesNoTextBox: ; 7559 (1:7559)
 	ret
 .asm_7627
 	ld a, $1
-	ld [W_CURMENUITEMID], a ; $cc26
+	ld [wCurrentMenuItem], a ; $cc26
 	ld [$d12d], a
 	ld a, $2
 	ld [$d12e], a
@@ -17404,7 +17404,7 @@ MenuStrings: ; 7671 (1:7671)
 
 Function_76e1: ; 0x76e1, 1:36e1
 	xor a
-	ld hl, W_WHICHTRADE ; $cd3d
+	ld hl, wWhichTrade ; $cd3d
 	ld [hli], a
 	ld [hli], a
 	ld [hli], a
@@ -17468,7 +17468,7 @@ Function_76e1: ; 0x76e1, 1:36e1
 	jr nz, .asm_7747
 	xor a
 	ld [$cd41], a
-	ld de, W_WHICHTRADE ; $cd3d
+	ld de, wWhichTrade ; $cd3d
 .asm_7752
 	push hl
 	ld hl, FieldMoveNames ; $778d
@@ -17528,14 +17528,14 @@ PokemonMenuEntries: ; 77c2 (1:77c2)
 	db "CANCEL@"
 
 Func_77d6: ; 77d6 (1:77d6)
-	ld a, [W_WHICHPOKEMON] ; $cf92
+	ld a, [wWhichPokemon] ; $cf92
 	ld hl, W_PARTYMON1_MOVE1 ; $d173
 	ld bc, $2c
 	call AddNTimes
 	ld d, h
 	ld e, l
 	ld c, $5
-	ld hl, W_WHICHTRADE ; $cd3d
+	ld hl, wWhichTrade ; $cd3d
 .asm_77e9
 	push hl
 .asm_77ea
@@ -17604,7 +17604,7 @@ Func_783f: ; 783f (1:783f)
 	ld de, W_ENEMYMONMAXHP ; $cff4
 
 Func_7861: ; 7861 (1:7861)
-	ld bc, W_HPBAROLDHP+1
+	ld bc, wHPBarOldHP+1
 	ld a, [hli]
 	ld [bc], a
 	ld a, [hl]
@@ -17621,12 +17621,12 @@ Func_7861: ; 7861 (1:7861)
 	ld b, [hl]
 	add b
 	ld [hld], a
-	ld [W_HPBARNEWHP], a
+	ld [wHPBarNewHP], a
 	ld a, [W_DAMAGE] ; $d0d7
 	ld b, [hl]
 	adc b
 	ld [hli], a
-	ld [W_HPBARNEWHP+1], a
+	ld [wHPBarNewHP+1], a
 	jr c, .asm_7890
 	ld a, [hld]
 	ld b, a
@@ -17642,11 +17642,11 @@ Func_7861: ; 7861 (1:7861)
 .asm_7890
 	ld a, [de]
 	ld [hld], a
-	ld [W_HPBARNEWHP], a
+	ld [wHPBarNewHP], a
 	dec de
 	ld a, [de]
 	ld [hli], a
-	ld [W_HPBARNEWHP+1], a
+	ld [wHPBarNewHP+1], a
 	inc de
 .asm_789c
 	ld a, [H_WHOSETURN] ; $FF00+$f3
@@ -17659,7 +17659,7 @@ Func_7861: ; 7861 (1:7861)
 	ld hl, Coord
 	xor a
 .asm_78aa
-	ld [W_LISTMENUID], a ; $cf94
+	ld [wListMenuID], a ; $cf94
 	ld a, $48
 	call Predef ; indirect jump to UpdateHPBar (fa1d (3:7a1d))
 	ld a, $0
@@ -17699,7 +17699,7 @@ Func_78e6: ; 78e6 (1:78e6)
 	xor a
 	ld [$cc2c], a
 	ld [$ccd3], a
-	ld a, [W_FLAGS_CD60]
+	ld a, [wFlags_0xcd60]
 	bit 3, a
 	jr nz, Func_790c
 	ld a, $99
@@ -17709,11 +17709,11 @@ Func_78e6: ; 78e6 (1:78e6)
 
 Func_790c: ; 790c (1:790c)
 	ld a, [$ccd3]
-	ld [W_CURMENUITEMID], a ; $cc26
-	ld hl, W_FLAGS_CD60
+	ld [wCurrentMenuItem], a ; $cc26
+	ld hl, wFlags_0xcd60
 	set 5, [hl]
 	call LoadScreenTilesFromBuffer2
-	ld hl, W_SCREENTILESBUFFER
+	ld hl, wTileMap
 	ld b, $8
 	ld c, $e
 	call TextBoxBorder
@@ -17722,7 +17722,7 @@ Func_790c: ; 790c (1:790c)
 	ld hl, Coord
 	ld de, PlayersPCMenuEntries ; $7af5
 	call PlaceString
-	ld hl, W_TOPMENUITEMY ; $cc24
+	ld hl, wTopMenuItemY ; $cc24
 	ld a, $2
 	ld [hli], a
 	dec a
@@ -17735,17 +17735,17 @@ Func_790c: ; 790c (1:790c)
 	ld [hli], a
 	xor a
 	ld [hl], a
-	ld hl, W_LISTSCROLLOFFSET ; $cc36
+	ld hl, wListScrollOffset ; $cc36
 	ld [hli], a
 	ld [hl], a
-	ld [W_PLAYERMONNUMBER], a ; $cc2f
+	ld [wPlayerMonNumber], a ; $cc2f
 	ld hl, UnnamedText_7b27 ; $7b27
 	call PrintText
 	call HandleMenuInput
 	bit 1, a
 	jp nz, Func_796d
 	call PlaceUnfilledArrowMenuCursor
-	ld a, [W_CURMENUITEMID] ; $cc26
+	ld a, [wCurrentMenuItem] ; $cc26
 	ld [$ccd3], a
 	and a
 	jp z, Func_7a12
@@ -17755,18 +17755,18 @@ Func_790c: ; 790c (1:790c)
 	jp z, Func_7a8f
 
 Func_796d: ; 796d (1:796d)
-	ld a, [W_FLAGS_CD60]
+	ld a, [wFlags_0xcd60]
 	bit 3, a
 	jr nz, .asm_797c
 	ld a, $9a
 	call PlaySound
 	call WaitForSoundToFinish
 .asm_797c
-	ld hl, W_FLAGS_CD60
+	ld hl, wFlags_0xcd60
 	res 5, [hl]
 	call LoadScreenTilesFromBuffer2
 	xor a
-	ld [W_LISTSCROLLOFFSET], a ; $cc36
+	ld [wListScrollOffset], a ; $cc36
 	ld [$cc2c], a
 	ld hl, $d730
 	res 6, [hl]
@@ -17776,8 +17776,8 @@ Func_796d: ; 796d (1:796d)
 
 Func_7995: ; 7995 (1:7995)
 	xor a
-	ld [W_CURMENUITEMID], a ; $cc26
-	ld [W_LISTSCROLLOFFSET], a ; $cc36
+	ld [wCurrentMenuItem], a ; $cc26
+	ld [wListScrollOffset], a ; $cc36
 	ld a, [W_NUMBAGITEMS] ; $d31d
 	and a
 	jr nz, Func_79ab
@@ -17796,7 +17796,7 @@ Func_79ab: ; 79ab (1:79ab)
 	xor a
 	ld [$cf93], a
 	ld a, $3
-	ld [W_LISTMENUID], a ; $cf94
+	ld [wListMenuID], a ; $cf94
 	call DisplayListMenuID
 	jp c, Func_790c
 	call IsKeyItem
@@ -17830,8 +17830,8 @@ Func_79ab: ; 79ab (1:79ab)
 
 Func_7a12: ; 7a12 (1:7a12)
 	xor a
-	ld [W_CURMENUITEMID], a ; $cc26
-	ld [W_LISTSCROLLOFFSET], a ; $cc36
+	ld [wCurrentMenuItem], a ; $cc26
+	ld [wListScrollOffset], a ; $cc36
 	ld a, [W_NUMBOXITEMS] ; $d53a
 	and a
 	jr nz, Func_7a28
@@ -17850,7 +17850,7 @@ Func_7a28: ; 7a28 (1:7a28)
 	xor a
 	ld [$cf93], a
 	ld a, $3
-	ld [W_LISTMENUID], a ; $cf94
+	ld [wListMenuID], a ; $cf94
 	call DisplayListMenuID
 	jp c, Func_790c
 	call IsKeyItem
@@ -17884,8 +17884,8 @@ Func_7a28: ; 7a28 (1:7a28)
 
 Func_7a8f: ; 7a8f (1:7a8f)
 	xor a
-	ld [W_CURMENUITEMID], a ; $cc26
-	ld [W_LISTSCROLLOFFSET], a ; $cc36
+	ld [wCurrentMenuItem], a ; $cc26
+	ld [wListScrollOffset], a ; $cc36
 	ld a, [W_NUMBOXITEMS] ; $d53a
 	and a
 	jr nz, Func_7aa5
@@ -17904,7 +17904,7 @@ Func_7aa5: ; 7aa5 (1:7aa5)
 	xor a
 	ld [$cf93], a
 	ld a, $3
-	ld [W_LISTMENUID], a ; $cf94
+	ld [wListMenuID], a ; $cf94
 	push hl
 	call DisplayListMenuID
 	pop hl
@@ -18003,7 +18003,7 @@ _RemovePokemon: ; 7b68 (1:7b68)
 	ld a, [hl]
 	dec a
 	ld [hli], a
-	ld a, [W_WHICHPOKEMON] ; $cf92
+	ld a, [wWhichPokemon] ; $cf92
 	ld c, a
 	ld b, $0
 	add hl, bc
@@ -18024,9 +18024,9 @@ _RemovePokemon: ; 7b68 (1:7b68)
 	ld hl, $dd2a
 	ld d, $13
 .asm_7b97
-	ld a, [W_WHICHPOKEMON] ; $cf92
+	ld a, [wWhichPokemon] ; $cf92
 	call SkipFixedLengthTextEntries
-	ld a, [W_WHICHPOKEMON] ; $cf92
+	ld a, [wWhichPokemon] ; $cf92
 	cp d
 	jr nz, .asm_7ba6
 	ld [hl], $ff
@@ -18051,7 +18051,7 @@ _RemovePokemon: ; 7b68 (1:7b68)
 	ld hl, W_BOXMON1DATA
 	ld bc, $21
 .asm_7bcd
-	ld a, [W_WHICHPOKEMON] ; $cf92
+	ld a, [wWhichPokemon] ; $cf92
 	call AddNTimes
 	ld d, h
 	ld e, l
@@ -18075,13 +18075,13 @@ _RemovePokemon: ; 7b68 (1:7b68)
 	ld hl, $de06
 .asm_7bfa
 	ld bc, $b
-	ld a, [W_WHICHPOKEMON] ; $cf92
+	ld a, [wWhichPokemon] ; $cf92
 	call AddNTimes
 	ld d, h
 	ld e, l
 	ld bc, $b
 	add hl, bc
-	ld bc, W_OWNEDPOKEMON ; $d2f7
+	ld bc, wPokedexOwned ; $d2f7
 	ld a, [$cf95]
 	and a
 	jr z, .asm_7c15
@@ -20051,7 +20051,7 @@ _GetJoypadState: ; c000 (3:4000)
 	jr nz, DiscardButtonPresses
 	ld a, [H_OLDPRESSEDBUTTONS]
 	ld [H_CURRENTPRESSEDBUTTONS], a
-	ld a, [W_JOYPADFORBIDDENBUTTONSMASK]
+	ld a, [wJoypadForbiddenButtonsMask]
 	and a
 	ret z
 	cpl
@@ -20846,7 +20846,7 @@ Func_c335: ; c335 (3:4335)
 	ld hl, $d73f
 	ld [hli], a
 	ld [hl], a
-	ld hl, W_WHICHTRADE ; $cd3d
+	ld hl, wWhichTrade ; $cd3d
 	ld bc, $1e
 	call FillMemory
 	ret
@@ -21081,7 +21081,7 @@ Func_c52f: ; c52f (3:452f)
 	ret c
 	cp $e2
 	ret nc
-	ld hl, W_SCREENTILESBUFFER
+	ld hl, wTileMap
 	ld b, $3
 	ld c, $7
 	call TextBoxBorder
@@ -21317,7 +21317,7 @@ Func_c69c: ; c69c (3:469c)
 	ld a, [$d13b]
 	and $3
 	jp nz, .asm_c74f
-	ld [W_WHICHPOKEMON], a ; $cf92
+	ld [wWhichPokemon], a ; $cf92
 	ld hl, W_PARTYMON1_STATUS ; $d16f
 	ld de, W_PARTYMON1 ; $d164
 .asm_c6be
@@ -21350,11 +21350,11 @@ Func_c69c: ; c69c (3:469c)
 	ld a, [de]
 	ld [$d11e], a
 	push de
-	ld a, [W_WHICHPOKEMON] ; $cf92
+	ld a, [wWhichPokemon] ; $cf92
 	ld hl, W_PARTYMON1NAME ; $d2b5
 	call GetPartyMonName
 	xor a
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	call EnableAutoTextBoxDrawing
 	ld a, $d0
 	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
@@ -21372,7 +21372,7 @@ Func_c69c: ; c69c (3:469c)
 	ld bc, $2c
 	add hl, bc
 	push hl
-	ld hl, W_WHICHPOKEMON ; $cf92
+	ld hl, wWhichPokemon ; $cf92
 	inc [hl]
 	pop hl
 	jr .asm_c6be
@@ -22293,8 +22293,8 @@ RemoveItemFromInventory_: ; ce74 (3:4e74)
 	jr nz,.loop
 ; update menu info
 	xor a
-	ld [W_LISTSCROLLOFFSET],a
-	ld [W_CURMENUITEMID],a
+	ld [wListScrollOffset],a
+	ld [wCurrentMenuItem],a
 	ld [$cc2c],a
 	ld [$d07e],a
 	pop hl
@@ -22304,7 +22304,7 @@ RemoveItemFromInventory_: ; ce74 (3:4e74)
 	ld [$d12a],a
 	cp a,2
 	jr c,.done
-	ld [W_MAXMENUITEMID],a
+	ld [wMaxMenuItem],a
 	jr .done
 .skipMovingUpSlots
 	pop hl
@@ -26755,7 +26755,7 @@ ItemUseSurfboard: ; d9b4 (3:59b4)
 	xor a
 	ld [$d700],a ; change player state to walking
 	dec a
-	ld [W_JOYPADFORBIDDENBUTTONSMASK],a
+	ld [wJoypadForbiddenButtonsMask],a
 	call Func_2307 ; play walking music
 	jp LoadWalkingPlayerSpriteGraphics
 ; uses a simulated button press to make the player move forward
@@ -26931,7 +26931,7 @@ ItemUseMedicine: ; dabb (3:5abb)
 	ld [hl],a ; remove the status ailment in the party data
 	ld a,b
 	ld [$d07d],a ; the message to display for the item used
-	ld a,[W_PLAYERMONNUMBER]
+	ld a,[wPlayerMonNumber]
 	cp d ; is pokemon the item was used on active in battle?
 	jp nz,.doneHealing
 ; if it is active in battle
@@ -26953,10 +26953,10 @@ ItemUseMedicine: ; dabb (3:5abb)
 	inc hl ; hl = address of current HP
 	ld a,[hli]
 	ld b,a
-	ld [W_HPBAROLDHP+1],a
+	ld [wHPBarOldHP+1],a
 	ld a,[hl]
 	ld c,a
-	ld [W_HPBAROLDHP],a ; current HP stored at $ceeb (2 bytes, big-endian)
+	ld [wHPBarOldHP],a ; current HP stored at $ceeb (2 bytes, big-endian)
 	or b
 	jr nz,.notFainted
 .fainted
@@ -27037,14 +27037,14 @@ ItemUseMedicine: ; dabb (3:5abb)
 	ld bc,32
 	add hl,bc ; hl now points to max HP
 	ld a,[hli]
-	ld [W_HPBARMAXHP+1],a
+	ld [wHPBarMaxHP+1],a
 	ld a,[hl]
-	ld [W_HPBARMAXHP],a ; max HP stored at $cee9 (2 bytes, big-endian)
+	ld [wHPBarMaxHP],a ; max HP stored at $cee9 (2 bytes, big-endian)
 	ld a,[$d152]
 	and a ; using Softboiled?
 	jp z,.notUsingSoftboiled2
 ; if using softboiled
-	ld hl,W_HPBARMAXHP
+	ld hl,wHPBarMaxHP
 	ld a,[hli]
 	push af
 	ld a,[hli]
@@ -27061,7 +27061,7 @@ ItemUseMedicine: ; dabb (3:5abb)
 	ld [$ceea],a
 	ld [H_DIVIDEND],a
 	ld a,[hl]
-	ld [W_HPBARMAXHP],a
+	ld [wHPBarMaxHP],a
 	ld [H_DIVIDEND + 1],a
 	ld a,5
 	ld [H_DIVISOR],a
@@ -27074,17 +27074,17 @@ ItemUseMedicine: ; dabb (3:5abb)
 	push af
 	ld b,a
 	ld a,[hl]
-	ld [W_HPBAROLDHP],a
+	ld [wHPBarOldHP],a
 	sub b
 	ld [hld],a
-	ld [W_HPBARNEWHP],a
+	ld [wHPBarNewHP],a
 	ld a,[H_QUOTIENT + 2]
 	ld b,a
 	ld a,[hl]
-	ld [W_HPBAROLDHP+1],a
+	ld [wHPBarOldHP+1],a
 	sbc b
 	ld [hl],a
-	ld [W_HPBARNEWHP+1],a
+	ld [wHPBarNewHP+1],a
 	FuncCoord 4, 1 ; $c3b8
 	ld hl,Coord
 	ld a,[$cf92]
@@ -27136,9 +27136,9 @@ ItemUseMedicine: ; dabb (3:5abb)
 	ld a,[hl]
 	add b
 	ld [hld],a
-	ld [W_HPBARNEWHP],a
+	ld [wHPBarNewHP],a
 	ld a,[hl]
-	ld [W_HPBARNEWHP+1],a
+	ld [wHPBarNewHP+1],a
 	jr nc,.noCarry
 	inc [hl]
 	ld a,[hl]
@@ -27174,22 +27174,22 @@ ItemUseMedicine: ; dabb (3:5abb)
 	ld a,[hli]
 	srl a
 	ld [de],a
-	ld [W_HPBARNEWHP+1],a
+	ld [wHPBarNewHP+1],a
 	ld a,[hl]
 	rr a
 	inc de
 	ld [de],a
-	ld [W_HPBARNEWHP],a
+	ld [wHPBarNewHP],a
 	dec de
 	jr .doneHealingPartyHP
 .setCurrentHPToMaxHp
 	ld a,[hli]
 	ld [de],a
-	ld [W_HPBARNEWHP+1],a
+	ld [wHPBarNewHP+1],a
 	inc de
 	ld a,[hl]
 	ld [de],a
-	ld [W_HPBARNEWHP],a
+	ld [wHPBarNewHP],a
 	dec de
 .doneHealingPartyHP ; done updating the pokemon's current HP in the party data structure
 	ld a,[$cf91]
@@ -27203,7 +27203,7 @@ ItemUseMedicine: ; dabb (3:5abb)
 	ld h,d
 	ld l,e
 	pop de
-	ld a,[W_PLAYERMONNUMBER]
+	ld a,[wPlayerMonNumber]
 	cp d ; is pokemon the item was used on active in battle?
 	jr nz,.calculateHPBarCoords
 ; copy party HP to in-battle HP
@@ -28081,7 +28081,7 @@ ItemUsePPRestore: ; e31e (3:631e)
 	cp a,ELIXER
 	jp nc,.useElixir ; if Elixir or Max Elixir
 	ld a,$02
-	ld [W_MOVEMENUTYPE],a
+	ld [wMoveMenuType],a
 	ld hl,RaisePPWhichTechniqueText
 	ld a,[$cd3d]
 	cp a,ETHER ; is it a PP Up?
@@ -28136,7 +28136,7 @@ ItemUsePPRestore: ; e31e (3:631e)
 .afterRestoringPP ; after using a (Max) Ether/Elixir
 	ld a,[$cf92]
 	ld b,a
-	ld a,[W_PLAYERMONNUMBER]
+	ld a,[wPlayerMonNumber]
 	cp b ; is the pokemon whose PP was restored active in battle?
 	jr nz,.skipUpdatingInBattleData
 	ld hl,W_PARTYMON1_MOVE1PP
@@ -28204,7 +28204,7 @@ ItemUsePPRestore: ; e31e (3:631e)
 	dec [hl]
 	dec [hl]
 	xor a
-	ld hl,W_CURMENUITEMID
+	ld hl,wCurrentMenuItem
 	ld [hli],a
 	ld [hl],a ; zero the counter for number of moves that had their PP restored
 	ld b,4
@@ -28223,7 +28223,7 @@ ItemUsePPRestore: ; e31e (3:631e)
 	ld hl,$cc27 ; counter for number of moves that had their PP restored
 	inc [hl]
 .nextMove
-	ld hl,W_CURMENUITEMID
+	ld hl,wCurrentMenuItem
 	inc [hl]
 	pop bc
 	dec b
@@ -28297,7 +28297,7 @@ ItemUseTMHM: ; e479 (3:6479)
 	ld a,$14
 	ld [$d125],a
 	call DisplayTextBoxID ; yes/no menu
-	ld a,[W_CURMENUITEMID]
+	ld a,[wCurrentMenuItem]
 	and a
 	jr z,.useMachine
 	ld a,2
@@ -28522,7 +28522,7 @@ RestoreBonusPP: ; e606 (3:6606)
 	dec a ; using a PP Up?
 	jr nz,.skipMenuItemIDCheck
 ; if using a PP Up, check if this is the move it's being used on
-	ld a,[W_CURMENUITEMID]
+	ld a,[wCurrentMenuItem]
 	inc a
 	cp b
 	jr nz,.nextMove
@@ -28588,7 +28588,7 @@ AddBonusPP: ; e642 (3:6642)
 ; 02: current box
 ; 03: daycare
 ; 04: player's in-battle pokemon
-; [W_CURMENUITEMID] = move index
+; [wCurrentMenuItem] = move index
 ; OUTPUT:
 ; [$d11e] = max PP
 GetMaxPP: ; e677 (3:6677)
@@ -28656,7 +28656,7 @@ GetSelectedMoveOffset: ; e6e3 (3:66e3)
 	call AddNTimes
 
 GetSelectedMoveOffset2: ; e6e9 (3:66e9)
-	ld a,[W_CURMENUITEMID]
+	ld a,[wCurrentMenuItem]
 	ld c,a
 	ld b,0
 	add hl,bc
@@ -29463,7 +29463,7 @@ asm_ef82: ; ef82 (3:6f82)
 	ld [$cd4d], a
 	ld a, $1
 	ld [$cd6a], a
-	ld a, [W_WHICHPOKEMON] ; $cf92
+	ld a, [wWhichPokemon] ; $cf92
 	ld hl, W_PARTYMON1NAME ; $d2b5
 	call GetPartyMonName
 	ld hl, $d730
@@ -29881,7 +29881,7 @@ Func_f225: ; f225 (3:7225)
 	ld a, [$d728]
 	bit 0, a
 	ret z
-	ld a, [W_FLAGS_CD60]
+	ld a, [wFlags_0xcd60]
 	bit 1, a
 	ret nz
 	xor a
@@ -29902,7 +29902,7 @@ Func_f225: ; f225 (3:7225)
 	ld a, [hl]
 	cp $10
 	jp nz, Func_f2dd
-	ld hl, W_FLAGS_CD60
+	ld hl, wFlags_0xcd60
 	bit 6, [hl]
 	set 6, [hl]
 	ret z
@@ -29945,7 +29945,7 @@ Func_f225: ; f225 (3:7225)
 	call MoveSprite
 	ld a, $a8
 	call PlaySound
-	ld hl, W_FLAGS_CD60
+	ld hl, wFlags_0xcd60
 	set 1, [hl]
 	ret
 
@@ -29969,7 +29969,7 @@ Func_f2b5: ; f2b5 (3:72b5)
 	ld b, BANK(Func_79f54)
 	call Bankswitch ; indirect jump to Func_79f54 (79f54 (1e:5f54))
 	call DiscardButtonPresses
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	call Func_f2dd
 	set 7, [hl]
 	ld a, [$d718]
@@ -29980,7 +29980,7 @@ Func_f2b5: ; f2b5 (3:72b5)
 	jp PlaySound
 
 Func_f2dd: ; f2dd (3:72dd)
-	ld hl, W_FLAGS_CD60
+	ld hl, wFlags_0xcd60
 	res 1, [hl]
 	res 6, [hl]
 	ret
@@ -30072,7 +30072,7 @@ _AddPokemonToParty: ; f2e5 (3:72e5)
 	dec a
 	ld c, a
 	ld b, $2
-	ld hl, W_OWNEDPOKEMON ; $d2f7
+	ld hl, wPokedexOwned ; $d2f7
 	call _HandleBitArray
 	ld a, c
 	ld [$d153], a
@@ -30083,7 +30083,7 @@ _AddPokemonToParty: ; f2e5 (3:72e5)
 	push bc
 	call _HandleBitArray
 	pop bc
-	ld hl, W_SEENPOKEMON ; $d30a
+	ld hl, wPokedexSeen ; $d30a
 	call _HandleBitArray
 	pop hl
 	push hl
@@ -30311,11 +30311,11 @@ _AddEnemyMonToPlayerParty: ; f49d (3:749d)
 	dec a
 	ld c, a
 	ld b, $1
-	ld hl, W_OWNEDPOKEMON
+	ld hl, wPokedexOwned
 	push bc
 	call _HandleBitArray ; add to owned pokemon
 	pop bc
-	ld hl, W_SEENPOKEMON
+	ld hl, wPokedexSeen
 	call _HandleBitArray ; add to seen pokemon
 	and a
 	ret                  ; return success
@@ -30383,7 +30383,7 @@ Func_f51e: ; f51e (3:751e)
 	ld hl, W_PARTYMON1DATA ; $d16b
 	ld bc, W_PARTYMON2DATA - W_PARTYMON1DATA ; $2c
 .asm_f591
-	ld a, [W_WHICHPOKEMON] ; $cf92
+	ld a, [wWhichPokemon] ; $cf92
 	call AddNTimes
 .asm_f597
 	push hl
@@ -30430,7 +30430,7 @@ Func_f51e: ; f51e (3:751e)
 	jr z, .asm_f5ec
 	ld hl, W_PARTYMON1OT ; $d273
 .asm_f5e6
-	ld a, [W_WHICHPOKEMON] ; $cf92
+	ld a, [wWhichPokemon] ; $cf92
 	call SkipFixedLengthTextEntries
 .asm_f5ec
 	ld bc, $b
@@ -30460,7 +30460,7 @@ Func_f51e: ; f51e (3:751e)
 	jr z, .asm_f62a
 	ld hl, W_PARTYMON1NAME ; $d2b5
 .asm_f624
-	ld a, [W_WHICHPOKEMON] ; $cf92
+	ld a, [wWhichPokemon] ; $cf92
 	call SkipFixedLengthTextEntries
 .asm_f62a
 	ld bc, $b
@@ -30992,7 +30992,7 @@ Func_f929: ; f929 (3:7929)
 	ld d, a
 	ld a, [$c106]
 	ld e, a
-	ld hl, $c100
+	ld hl, wSpriteStateData1
 	ld a, [H_DIVIDEND] ; $FF00+$95 (aliases: H_PRODUCT, H_PASTLEADINGZEROES, H_QUOTIENT)
 	add l
 	add $4
@@ -31111,7 +31111,7 @@ UpdateHPBar_CalcNumberOfHPBarPixels: ; f9df (3:79df)
 ; predef $48
 UpdateHPBar: ; fa1d (3:7a1d)
 	push hl
-	ld hl, W_HPBAROLDHP
+	ld hl, wHPBarOldHP
 	ld a, [hli]
 	ld c, a      ; old HP into bc
 	ld a, [hli]
@@ -31124,9 +31124,9 @@ UpdateHPBar: ; fa1d (3:7a1d)
 	push bc
 	call UpdateHPBar_CalcHPDifference
 	ld a, e
-	ld [W_HPBARHPDIFFERENCE+1], a
+	ld [wHPBarHPDifference+1], a
 	ld a, d
-	ld [W_HPBARHPDIFFERENCE], a
+	ld [wHPBarHPDifference], a
 	pop bc
 	pop de
 	call UpdateHPBar_CompareNewHPToOldHP
@@ -31135,26 +31135,26 @@ UpdateHPBar: ; fa1d (3:7a1d)
 	jr c, .HPdecrease
 	ld a, $1
 .HPdecrease
-	ld [W_HPBARDELTA], a
+	ld [wHPBarDelta], a
 	call Load16BitRegisters
-	ld a, [W_HPBARNEWHP]
+	ld a, [wHPBarNewHP]
 	ld e, a
-	ld a, [W_HPBARNEWHP+1]
+	ld a, [wHPBarNewHP+1]
 	ld d, a
 .animateHPBarLoop
 	push de
-	ld a, [W_HPBAROLDHP]
+	ld a, [wHPBarOldHP]
 	ld c, a
-	ld a, [W_HPBAROLDHP+1]
+	ld a, [wHPBarOldHP+1]
 	ld b, a
 	call UpdateHPBar_CompareNewHPToOldHP
 	jr z, .animateHPBarDone
 	jr nc, .HPIncrease
 	dec bc        ; subtract 1 HP
 	ld a, c
-	ld [W_HPBARNEWHP], a
+	ld [wHPBarNewHP], a
 	ld a, b
-	ld [W_HPBARNEWHP+1], a
+	ld [wHPBarNewHP+1], a
 	call UpdateHPBar_CalcOldNewHPBarPixels
 	ld a, e
 	sub d         ; calc pixel difference
@@ -31162,9 +31162,9 @@ UpdateHPBar: ; fa1d (3:7a1d)
 .HPIncrease
 	inc bc        ; add 1 HP
 	ld a, c
-	ld [W_HPBARNEWHP], a
+	ld [wHPBarNewHP], a
 	ld a, b
-	ld [W_HPBARNEWHP+1], a
+	ld [wHPBarNewHP+1], a
 	call UpdateHPBar_CalcOldNewHPBarPixels
 	ld a, d
 	sub e         ; calc pixel difference
@@ -31174,18 +31174,18 @@ UpdateHPBar: ; fa1d (3:7a1d)
 	jr z, .noPixelDifference
 	call UpdateHPBar_AnimateHPBar
 .noPixelDifference
-	ld a, [W_HPBARNEWHP]
-	ld [W_HPBAROLDHP], a
-	ld a, [W_HPBARNEWHP+1]
-	ld [W_HPBAROLDHP+1], a
+	ld a, [wHPBarNewHP]
+	ld [wHPBarOldHP], a
+	ld a, [wHPBarNewHP+1]
+	ld [wHPBarOldHP+1], a
 	pop de
 	jr .animateHPBarLoop
 .animateHPBarDone
 	pop de
 	ld a, e
-	ld [W_HPBAROLDHP], a
+	ld [wHPBarOldHP], a
 	ld a, d
-	ld [W_HPBAROLDHP+1], a
+	ld [wHPBarOldHP+1], a
 	or e
 	jr z, .monFainted
 	call UpdateHPBar_CalcOldNewHPBarPixels
@@ -31209,7 +31209,7 @@ UpdateHPBar_AnimateHPBar: ; fab1 (3:7ab1)
 	ld c, $2
 	call DelayFrames
 	pop de
-	ld a, [W_HPBARDELTA] ; +1 or -1
+	ld a, [wHPBarDelta] ; +1 or -1
 	add e
 	cp $31
 	jr nc, .barFilledUp
@@ -31266,12 +31266,12 @@ UpdateHPBar_CalcHPDifference: ; fad7 (3:7ad7)
 UpdateHPBar_PrintHPNumber: ; faf5 (3:7af5)
 	push af
 	push de
-	ld a, [W_LISTMENUID] ; $cf94
+	ld a, [wListMenuID] ; $cf94
 	and a
 	jr z, .asm_fb2d
-	ld a, [W_HPBAROLDHP]
+	ld a, [wHPBarOldHP]
 	ld [$cef1], a
-	ld a, [W_HPBAROLDHP+1]
+	ld a, [wHPBarOldHP+1]
 	ld [$cef0], a
 	push hl
 	ld a, [$FF00+$f6]
@@ -31304,7 +31304,7 @@ UpdateHPBar_PrintHPNumber: ; faf5 (3:7af5)
 ; e: old pixels
 UpdateHPBar_CalcOldNewHPBarPixels: ; fb30 (3:7b30)
 	push hl
-	ld hl, W_HPBARMAXHP
+	ld hl, wHPBarMaxHP
 	ld a, [hli]  ; max HP into de
 	ld e, a
 	ld a, [hli]
@@ -31525,7 +31525,7 @@ Func_128f6: ; 128f6 (4:68f6)
 	call Load16BitRegisters
 	ld a, $2
 asm_128fb: ; 128fb (4:68fb)
-	ld [W_LISTMENUID], a ; $cf94
+	ld [wListMenuID], a ; $cf94
 	push hl
 	ld a, [$cf99]
 	ld b, a
@@ -31719,7 +31719,7 @@ StatusScreen: ; 12953 (4:6953)
 	ld a, [$cc49]
 	cp $3
 	ret z
-	ld a, [W_WHICHPOKEMON]
+	ld a, [wWhichPokemon]
 	jp SkipFixedLengthTextEntries
 
 Unknown_12a95: ; 12a95 (4:6a95)
@@ -31881,7 +31881,7 @@ StatusScreen2: ; 12b57 (4:6b57)
 	push bc
 	push hl
 	push de
-	ld hl, W_CURMENUITEMID
+	ld hl, wCurrentMenuItem
 	ld a, [hl]
 	push af
 	ld a, b
@@ -32443,7 +32443,7 @@ StartMenu_Pokemon: ; 130a9 (4:70a9)
 	dec c
 	jr .adjustMenuVariablesLoop
 .storeMenuVariables
-	ld hl,W_TOPMENUITEMY
+	ld hl,wTopMenuItemY
 	ld a,c
 	ld [hli],a ; top menu item Y
 	ld a,[$fff7]
@@ -32464,9 +32464,9 @@ StartMenu_Pokemon: ; 130a9 (4:70a9)
 	bit 1,a ; was the B button pressed?
 	jp nz,.loop
 ; if the B button wasn't pressed
-	ld a,[W_MAXMENUITEMID]
+	ld a,[wMaxMenuItem]
 	ld b,a
-	ld a,[W_CURMENUITEMID] ; menu selection
+	ld a,[wCurrentMenuItem] ; menu selection
 	cp b
 	jp z,.exitMenu ; if the player chose Cancel
 	dec b
@@ -32718,11 +32718,11 @@ StartMenu_Item: ; 13302 (4:7302)
 	xor a
 	ld [$cf93],a
 	ld a,ITEMLISTMENU
-	ld [W_LISTMENUID],a
+	ld [wListMenuID],a
 	ld a,[$cc2c]
-	ld [W_CURMENUITEMID],a
+	ld [wCurrentMenuItem],a
 	call DisplayListMenuID
-	ld a,[W_CURMENUITEMID]
+	ld a,[wCurrentMenuItem]
 	ld [$cc2c],a
 	jr nc,.choseItem
 .exitMenu
@@ -32751,7 +32751,7 @@ StartMenu_Item: ; 13302 (4:7302)
 	ld a,$06 ; use/toss menu
 	ld [$d125],a
 	call DisplayTextBoxID
-	ld hl,W_TOPMENUITEMY
+	ld hl,wTopMenuItemY
 	ld a,11
 	ld [hli],a ; top menu item Y
 	ld a,14
@@ -32785,7 +32785,7 @@ StartMenu_Item: ; 13302 (4:7302)
 	call PrintText
 	jp ItemMenuLoop
 .notBicycle2
-	ld a,[W_CURMENUITEMID]
+	ld a,[wCurrentMenuItem]
 	and a
 	jr nz,.tossItem
 .useItem
@@ -33128,15 +33128,15 @@ StartMenu_Option: ; 135f6 (4:75f6)
 
 Func_13613: ; 13613 (4:7613)
 	call Func_13653
-	ld a, [W_WHICHTRADE] ; $cd3d
+	ld a, [wWhichTrade] ; $cd3d
 	call Func_13625
-	ld a, [W_CURMENUITEMID] ; $cc26
+	ld a, [wCurrentMenuItem] ; $cc26
 	call Func_13625
 	jp RedrawPartyMenu_
 
 Func_13625: ; 13625 (4:7625)
 	push af
-	ld hl, W_SCREENTILESBUFFER
+	ld hl, wTileMap
 	ld bc, $28
 	call AddNTimes
 	ld c, $28
@@ -33146,7 +33146,7 @@ Func_13625: ; 13625 (4:7625)
 	dec c
 	jr nz, .asm_13633
 	pop af
-	ld hl, W_OAMBUFFER
+	ld hl, wOAMBuffer
 	ld bc, $10
 	call AddNTimes
 	ld de, $4
@@ -33164,7 +33164,7 @@ Func_13653: ; 13653 (4:7653)
 	ld a, [$cc35]
 	and a
 	jr nz, .asm_13661
-	ld a, [W_WHICHPOKEMON] ; $cf92
+	ld a, [wWhichPokemon] ; $cf92
 	inc a
 	ld [$cc35], a
 	ret
@@ -33174,8 +33174,8 @@ Func_13653: ; 13653 (4:7653)
 	ld a, [$cc35]
 	dec a
 	ld b, a
-	ld a, [W_CURMENUITEMID] ; $cc26
-	ld [W_WHICHTRADE], a ; $cd3d
+	ld a, [wCurrentMenuItem] ; $cc26
+	ld [wWhichTrade], a ; $cd3d
 	cp b
 	jr nz, .asm_1367b
 	xor a
@@ -33190,7 +33190,7 @@ Func_13653: ; 13653 (4:7653)
 	ld hl, W_PARTYMON1 ; $d164
 	ld d, h
 	ld e, l
-	ld a, [W_CURMENUITEMID] ; $cc26
+	ld a, [wCurrentMenuItem] ; $cc26
 	add l
 	ld l, a
 	jr nc, .asm_1368e
@@ -33210,7 +33210,7 @@ Func_13653: ; 13653 (4:7653)
 	ld [de], a
 	ld hl, W_PARTYMON1_NUM ; $d16b (aliases: W_PARTYMON1DATA)
 	ld bc, $2c
-	ld a, [W_CURMENUITEMID] ; $cc26
+	ld a, [wCurrentMenuItem] ; $cc26
 	call AddNTimes
 	push hl
 	ld de, $cc97
@@ -33229,7 +33229,7 @@ Func_13653: ; 13653 (4:7653)
 	ld bc, $2c
 	call CopyData
 	ld hl, W_PARTYMON1OT ; $d273
-	ld a, [W_CURMENUITEMID] ; $cc26
+	ld a, [wCurrentMenuItem] ; $cc26
 	call SkipFixedLengthTextEntries
 	push hl
 	ld de, $cc97
@@ -33247,7 +33247,7 @@ Func_13653: ; 13653 (4:7653)
 	ld bc, $b
 	call CopyData
 	ld hl, W_PARTYMON1NAME ; $d2b5
-	ld a, [W_CURMENUITEMID] ; $cc26
+	ld a, [wCurrentMenuItem] ; $cc26
 	call SkipFixedLengthTextEntries
 	push hl
 	ld de, $cc97
@@ -33265,7 +33265,7 @@ Func_13653: ; 13653 (4:7653)
 	ld bc, $b
 	call CopyData
 	ld a, [$cc35]
-	ld [W_WHICHTRADE], a ; $cd3d
+	ld [wWhichTrade], a ; $cd3d
 	xor a
 	ld [$cc35], a
 	ld [$d07d], a
@@ -33432,7 +33432,7 @@ Func_137aa: ; 137aa (4:77aa)
 	ld [hli], a
 	ld [hli], a
 	ld [hl], a
-	ld [W_LISTSCROLLOFFSET], a ; $cc36
+	ld [wListScrollOffset], a ; $cc36
 	ld hl, $d060
 	ld b, $18
 .asm_1383e
@@ -33589,28 +33589,28 @@ Func_1392c: ; 1392c (4:792c)
 	inc c
 .asm_13958
 	ld a, [hli]
-	ld [W_HPBARMAXHP+1], a
+	ld [wHPBarMaxHP+1], a
 	ld a, [hl]
-	ld [W_HPBARMAXHP], a
+	ld [wHPBarMaxHP], a
 	push bc
 	ld bc, $fff2
 	add hl, bc
 	pop bc
 	ld a, [hl]
-	ld [W_HPBAROLDHP], a
+	ld [wHPBarOldHP], a
 	sub c
 	ld [hld], a
-	ld [W_HPBARNEWHP], a
+	ld [wHPBarNewHP], a
 	ld a, [hl]
-	ld [W_HPBAROLDHP+1], a
+	ld [wHPBarOldHP+1], a
 	sbc b
 	ld [hl], a
-	ld [W_HPBARNEWHP+1], a
+	ld [wHPBarNewHP+1], a
 	jr nc, .asm_13982
 	xor a
 	ld [hli], a
 	ld [hl], a
-	ld hl, W_HPBARNEWHP
+	ld hl, wHPBarNewHP
 	ld [hli], a
 	ld [hl], a
 .asm_13982
@@ -33624,7 +33624,7 @@ Func_1392c: ; 1392c (4:792c)
 	ld hl, Coord
 	xor a
 .asm_13990
-	ld [W_LISTMENUID], a ; $cf94
+	ld [wListMenuID], a ; $cf94
 	ld a, $48
 	call Predef ; indirect jump to UpdateHPBar (fa1d (3:7a1d))
 	ld hl, UnnamedText_1399e ; $799e
@@ -33793,7 +33793,7 @@ InitMapSprites: ; 1785b (5:785b)
 	call InitOutsideMapSprites
 	ret c ; return if the map is an outside map (already handled by above call)
 ; if the map is an inside map (i.e. mapID >= $25)
-	ld hl,$c100
+	ld hl,wSpriteStateData1
 	ld de,$c20d
 ; Loop to copy picture ID's from $C1X0 to $C2XD for LoadMapSpriteTilePatterns.
 .copyPictureIDLoop
@@ -33838,12 +33838,12 @@ LoadMapSpriteTilePatterns: ; 17871 (5:7871)
 .checkIfAlreadyLoadedLoop
 	ld a,e
 	and a,$f0
-	ld b,a ; b = offset of the $c200 sprite slot being checked against
+	ld b,a ; b = offset of the wSpriteStateData2 sprite slot being checked against
 	ld a,l
-	and a,$f0 ; a = offset of current $c200 sprite slot
+	and a,$f0 ; a = offset of current wSpriteStateData2 sprite slot
 	cp b ; done checking all previous sprite slots?
 	jr z,.notAlreadyLoaded
-	ld a,[de] ; picture ID of the $c200 sprite slot being checked against
+	ld a,[de] ; picture ID of the wSpriteStateData2 sprite slot being checked against
 	cp [hl] ; do the picture ID's match?
 	jp z,.alreadyLoaded
 	ld a,e
@@ -33990,7 +33990,7 @@ LoadMapSpriteTilePatterns: ; 17871 (5:7871)
 .alreadyLoaded ; if the current picture ID has already had its tile patterns loaded
 	inc de
 	ld a,[de] ; a = VRAM slot for the current picture ID (from $C2YE)
-	ld [hl],a ; store VRAM slot in current $c200 sprite slot (at $C2XE)
+	ld [hl],a ; store VRAM slot in current wSpriteStateData2 sprite slot (at $C2XE)
 .nextSpriteSlot
 	ld a,l
 	add a,$10
@@ -34834,18 +34834,18 @@ EmotionBubbles: ; 17cb5 (5:7cb5)
 	INCBIN "gfx/emotion_bubbles.2bpp"
 
 Func_17d7d: ; 17d7d (5:7d7d)
-	ld a, [W_PLAYERMONACCURACYMOD] ; $cd1e
+	ld a, [wPlayerMonAccuracyMod] ; $cd1e
 	cp $86
 	jr z, .asm_17d8d
 	cp $92
 	ret nz
-	ld a, [W_PLAYERMONEVASIONMOD] ; $cd1f
+	ld a, [wPlayerMonEvasionMod] ; $cd1f
 	cp $8f
 	ret nz
 .asm_17d8d
 	ld a, [W_NUMINPARTY] ; $d163
 	dec a
-	ld [W_WHICHPOKEMON], a ; $cf92
+	ld [wWhichPokemon], a ; $cf92
 	ld a, $1
 	ld [$ccd4], a
 	ld a, $32
@@ -34861,13 +34861,13 @@ SubstituteEffectHandler: ; 17dad (5:7dad)
 	ld c, 50
 	call DelayFrames		
 	ld hl, W_PLAYERMONMAXHP		
-	ld de, W_PLAYERSUBSITUTEHP
+	ld de, wPlayerSubstituteHP
 	ld bc, W_PLAYERBATTSTATUS2
 	ld a, [$ff00+$f3]  ;whose turn?
 	and a
 	jr z, .notEnemy
 	ld hl, W_ENEMYMONMAXHP
-	ld de, W_ENEMYSUBSITUTEHP
+	ld de, wEnemySubstituteHP
 	ld bc, W_ENEMYBATTSTATUS2
 .notEnemy
 	ld a, [bc]                    ;load flags
@@ -34936,13 +34936,13 @@ UnnamedText_17e27: ; 17e27 (5:7e27)
 	db "@"
 
 ActivatePC: ; 17e2c (5:7e2c)
-	call SaveScreenTilesToBuffer2  ;XXX: copy background from W_SCREENTILESBUFFER to W_SCREENTILESBACKBUFFER2
+	call SaveScreenTilesToBuffer2  ;XXX: copy background from wTileMap to wTileMapBackup2
 	ld a, $99
 	call PlaySound  ;XXX: play sound or stop music
 	ld hl, UnnamedText_17f23  ;player turned on PC
 	call PrintText
 	call WaitForSoundToFinish  ;XXX: wait for sound to be done
-	ld hl, W_FLAGS_CD60
+	ld hl, wFlags_0xcd60
 	set 3, [hl]
 	call LoadScreenTilesFromBuffer2  ;XXX: restore saved screen
 	call Delay3
@@ -34950,15 +34950,15 @@ PCMainMenu: ; 17e48 (5:7e48)
 	ld b, BANK(Func_213c8)
 	ld hl, Func_213c8
 	call Bankswitch
-	ld hl, W_FLAGS_CD60
+	ld hl, wFlags_0xcd60
 	set 5, [hl]
 	call HandleMenuInput
 	bit 1, a              ;if player pressed B
 	jp nz, LogOff
-	ld a, [W_MAXMENUITEMID]
+	ld a, [wMaxMenuItem]
 	cp a, 2
 	jr nz, .next ;if not 2 menu items (not counting log off) (2 occurs before you get the pokedex)
-	ld a, [W_CURMENUITEMID]
+	ld a, [wCurrentMenuItem]
 	and a
 	jp z, BillsPC    ;if current menu item id is 0, it's bills pc
 	cp a, 1
@@ -34967,7 +34967,7 @@ PCMainMenu: ; 17e48 (5:7e48)
 .next
 	cp a, 3
 	jr nz, .next2 ;if not 3 menu items (not counting log off) (3 occurs after you get the pokedex, before you beat the pokemon league)
-	ld a, [W_CURMENUITEMID]
+	ld a, [wCurrentMenuItem]
 	and a
 	jp z, BillsPC    ;if current menu item id is 0, it's bills pc
 	cp a, 1
@@ -34976,7 +34976,7 @@ PCMainMenu: ; 17e48 (5:7e48)
 	jp z, OaksPC     ;if current menu item id is 2, it's oaks pc
 	jp LogOff        ;otherwise, it's 3, and you're logging off
 .next2
-	ld a, [W_CURMENUITEMID]
+	ld a, [wCurrentMenuItem]
 	and a
 	jp z, BillsPC    ;if current menu item id is 0, it's bills pc
 	cp a, 1
@@ -34987,7 +34987,7 @@ PCMainMenu: ; 17e48 (5:7e48)
 	jp z, PKMNLeague ;if current menu item id is 3, it's pkmnleague
 	jp LogOff        ;otherwise, it's 4, and you're logging off
 .playersPC
-	ld hl, W_FLAGS_CD60
+	ld hl, wFlags_0xcd60
 	res 5, [hl]
 	set 3, [hl]
 	ld a, $9B
@@ -35041,7 +35041,7 @@ LogOff: ; 17f13 (5:7f13)
 	ld a, $9A
 	call PlaySound  ;XXX: play sound or stop music
 	call WaitForSoundToFinish  ;XXX: wait for sound to be done
-	ld hl, W_FLAGS_CD60
+	ld hl, wFlags_0xcd60
 	res 3, [hl]
 	res 5, [hl]
 	ret
@@ -35084,7 +35084,7 @@ RemoveItemByID: ; 17f37 (5:7f37)
 	ld a, $1
 	ld [$cf96], a
 	ld a, [$FF00+$dc]
-	ld [W_WHICHPOKEMON], a ; $cf92
+	ld [wWhichPokemon], a ; $cf92
 	ld hl, W_NUMBAGITEMS ; $d31d
 	jp RemoveItemFromInventory
 
@@ -35706,7 +35706,7 @@ PalletTownScript1: ; 18e81 (6:4e81)
 	ld a, (Music_MeetProfOak - $4000) / 3 ; “oak appears” music
 	call PlayMusic ; plays music
 	ld a,$FC
-	ld [W_JOYPADFORBIDDENBUTTONSMASK],a
+	ld [wJoypadForbiddenButtonsMask],a
 	ld hl,$D74B
 	set 7,[hl]
 
@@ -35722,7 +35722,7 @@ PalletTownScript2: ; 18eb2 (6:4eb2)
 	ld [$FF8C],a
 	call DisplayTextID
 	ld a,$FF
-	ld [W_JOYPADFORBIDDENBUTTONSMASK],a
+	ld [wJoypadForbiddenButtonsMask],a
 	ld a,0
 	ld [$CC4D],a
 	ld a,$15
@@ -35758,7 +35758,7 @@ PalletTownScript3: ; 18ed2 (6:4ed2)
 	ld [$FF8C],a
 	call MoveSprite
 	ld a,$FF
-	ld [W_JOYPADFORBIDDENBUTTONSMASK],a
+	ld [wJoypadForbiddenButtonsMask],a
 
 	; trigger the next script
 	ld a,3
@@ -35774,12 +35774,12 @@ PalletTownScript4: ; 18f12 (6:4f12)
 	ld a,1
 	ld [$CF0D],a
 	ld a,$FC
-	ld [W_JOYPADFORBIDDENBUTTONSMASK],a
+	ld [wJoypadForbiddenButtonsMask],a
 	ld a,1
 	ld [$FF8C],a
 	call DisplayTextID
 	ld a,$FF
-	ld [W_JOYPADFORBIDDENBUTTONSMASK],a
+	ld [wJoypadForbiddenButtonsMask],a
 	ld a,1
 	ld [$CF13],a
 	xor a
@@ -35963,7 +35963,7 @@ ViridianCityScript1: ; 19062 (6:5062)
 	ld a, [$c235]
 	ld [$ff00+$ee], a
 	xor a
-	ld [W_LISTSCROLLOFFSET], a
+	ld [wListScrollOffset], a
 
 	; set up battle for Old Man
 	ld a, $1
@@ -35988,13 +35988,13 @@ ViridianCityScript2: ; 1908f (6:508f)
 	call UpdateSprites
 	call Delay3
 	xor a
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ld a, $f
 	ld [$ff00+$8c], a
 	call DisplayTextID
 	xor a
 	ld [W_BATTLETYPE], a
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ld a, $0
 	ld [W_VIRIDIANCITYCURSCRIPT], a
 	ret
@@ -36016,7 +36016,7 @@ Function190cf: ; 190cf (6:50cf)
 	ld [$ccd3], a
 	xor a
 	ld [$c109], a
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ret
 
 ViridianCityTexts: ; 190e4 (6:50e4)
@@ -36241,7 +36241,7 @@ Function1925e: ; 1925e (6:525e)
 	call ArePlayerCoordsInArray
 	ret nc
 	ld a, $f0
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ld a, $5
 	ld [$ff00+$8c], a
 	jp DisplayTextID
@@ -36266,7 +36266,7 @@ PewterCityScript1: ; 19280 (6:5280)
 	ld [$ff00+$8d], a
 	call Func_34b9
 	call Func_2307
-	ld hl, W_FLAGS_CD60
+	ld hl, wFlags_0xcd60
 	set 4, [hl]
 	ld a, $d
 	ld [$ff00+$8c], a
@@ -36314,7 +36314,7 @@ PewterCityScript3: ; 192e9 (6:52e9)
 	ld a, $15
 	call Predef
 	xor a
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ld a, $0
 	ld [W_PEWTERCITYCURSCRIPT], a
 	ret
@@ -36332,7 +36332,7 @@ PewterCityScript4: ; 19305 (6:5305)
 	ld [$ff00+$8d], a
 	call Func_34b9
 	call Func_2307
-	ld hl, W_FLAGS_CD60
+	ld hl, wFlags_0xcd60
 	set 4, [hl]
 	ld a, $e
 	ld [$ff00+$8c], a
@@ -36380,7 +36380,7 @@ PewterCityScript6: ; 1936f (6:536f)
 	ld a, $15
 	call Predef
 	xor a
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ld a, $0
 	ld [W_PEWTERCITYCURSCRIPT], a
 	ret
@@ -36529,7 +36529,7 @@ CeruleanCityScript: ; 19480 (6:5480)
 
 CeruleanCity_Unknown1948c: ; 1948c (6:548c)
 	xor a
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ld [W_CERULEANCITYCURSCRIPT], a
 	ld a, $5
 	ld [$cc4d], a
@@ -36548,14 +36548,14 @@ CeruleanCityScript4: ; 194a7 (6:54a7)
 	cp $ff
 	jp z, CeruleanCity_Unknown1948c
 	ld a, $f0
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ld hl, $d75b
 	set 7, [hl]
 	ld a, $2
 	ld [$ff00+$8c], a
 	call DisplayTextID
 	xor a
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ld [W_CERULEANCITYCURSCRIPT], a
 	ret
 
@@ -36601,7 +36601,7 @@ CeruleanCityScript0: ; 194c8 (6:54c8)
 	xor a
 	ld [H_CURRENTPRESSEDBUTTONS], a
 	ld a, $f0
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ld a, [$d362]
 	cp $14
 	jr z, .asm_19535 ; 0x19526 $d
@@ -36649,7 +36649,7 @@ CeruleanCityScript1: ; 19567 (6:5567)
 	bit 0, a
 	ret nz
 	xor a
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ld a, $1
 	ld [$ff00+$8c], a
 	call DisplayTextID
@@ -36691,7 +36691,7 @@ CeruleanCityScript2: ; 195b1 (6:55b1)
 	jp z, CeruleanCity_Unknown1948c
 	call CeruleanCityFunction1955d
 	ld a, $f0
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ld hl, $d75a
 	set 0, [hl]
 	ld a, $1
@@ -36736,7 +36736,7 @@ CeruleanCityScript3: ; 19610 (6:5610)
 	ld a, $11
 	call Predef
 	xor a
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	call Func_2307
 	ld a, $0
 	ld [W_CERULEANCITYCURSCRIPT], a
@@ -37040,7 +37040,7 @@ VermilionCityScript4: ; 19826 (6:5826)
 
 VermilionCityScript2: ; 19833 (6:5833)
 	ld a, $ff
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ld a, $40
 	ld [$ccd3], a
 	ld [$ccd4], a
@@ -37056,7 +37056,7 @@ VermilionCityScript3: ; 1984e (6:584e)
 	and a
 	ret nz
 	xor a
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ld [H_CURRENTPRESSEDBUTTONS], a
 	ld a, $0
 	ld [W_VERMILIONCITYCURSCRIPT], a
@@ -37610,7 +37610,7 @@ VermilionHouse3Texts: ; 19c15 (6:5c15)
 VermilionHouse3Text1: ; 19c17 (6:5c17)
 	db $08 ; asm
 	ld a, $4
-	ld [W_WHICHTRADE], a
+	ld [wWhichTrade], a
 	ld a, $54
 	call Predef
 	jp TextScriptEnd
@@ -38470,7 +38470,7 @@ Func_1a3e0: ; 1a3e0 (6:63e0)
 	call Func_1a609
 	jr nc, .asm_1a406
 	ld a, $fc
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ld hl, $d736
 	set 1, [hl]
 	ld a, $1
@@ -38542,7 +38542,7 @@ Func_1a44c: ; 1a44c (6:644c)
 	ld hl, W_FLAGS_D733
 	set 1, [hl]
 	ld a, $fc
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ret
 
 Func_1a485: ; 1a485 (6:6485)
@@ -38735,7 +38735,7 @@ Func_1a5e7: ; 1a5e7 (6:65e7)
 	cp $94
 	ret z
 	ld hl, Unknown_1a605 ; $6605
-	ld a, [W_ENGAGEDTRAINERCLASS]
+	ld a, [wEngagedTrainerClass]
 	ld b, a
 .asm_1a5f4
 	ld a, [hli]
@@ -38826,7 +38826,7 @@ Func_1a672: ; 1a672 (6:6672)
 	and e
 	ret z
 	ld a, $ff
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ld hl, $d736
 	set 6, [hl]
 	call Func_3486
@@ -39200,7 +39200,7 @@ Func_1c98a: ; 1c98a (7:498a)
 	ld a, $14
 	ld [$d125], a
 	call DisplayTextBoxID
-	ld a, [W_CURMENUITEMID] ; $cc26
+	ld a, [wCurrentMenuItem] ; $cc26
 	and a
 	jp z, InitGame
 	ld b, BANK(Func_73b6a)
@@ -39220,23 +39220,23 @@ Func_1c9c6: ; 1c9c6 (7:49c6)
 	ld [$cf8b], a
 	ld a, h
 	ld [$cf8c], a
-	ld a, [W_LISTSCROLLOFFSET] ; $cc36
+	ld a, [wListScrollOffset] ; $cc36
 	push af
 	xor a
-	ld [W_CURMENUITEMID], a ; $cc26
-	ld [W_LISTSCROLLOFFSET], a ; $cc36
+	ld [wCurrentMenuItem], a ; $cc26
+	ld [wListScrollOffset], a ; $cc36
 	ld [$cf93], a
 	ld a, $4
-	ld [W_LISTMENUID], a ; $cf94
+	ld [wListMenuID], a ; $cf94
 	call DisplayListMenuID
 	pop bc
 	ld a, b
-	ld [W_LISTSCROLLOFFSET], a ; $cc36
+	ld [wListScrollOffset], a ; $cc36
 	ret c
 	ld hl, $d126
 	set 7, [hl]
 	ld hl, $cc5b
-	ld a, [W_WHICHPOKEMON] ; $cf92
+	ld a, [wWhichPokemon] ; $cf92
 	add a
 	ld d, $0
 	ld e, a
@@ -39300,7 +39300,7 @@ CinnabarIslandScript0: ; 1ca38 (7:4a38)
 	call Func_3486
 	xor a
 	ld [$c109], a
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ld a, $1
 	ld [W_CINNABARISLANDCURSCRIPT], a
 	ret
@@ -39514,7 +39514,7 @@ OaksLabScript4: ; 1cbd2 (7:4bd2)
 
 OaksLabScript5: ; 1cbfd (7:4bfd)
 	ld a, $fc
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ld a, $11
 	ld [$ff00+$8c], a
 	call DisplayTextID
@@ -39533,7 +39533,7 @@ OaksLabScript5: ; 1cbfd (7:4bfd)
 	ld hl, $d74b
 	set 1, [hl]
 	xor a
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 
 	ld a, $6
 	ld [W_OAKSLABCURSCRIPT], a
@@ -39656,7 +39656,7 @@ OaksLabScript9: ; 1cd00 (7:4d00)
 	bit 0, a
 	ret nz
 	ld a, $fc
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ld a, $1
 	ld [$ff00+$8c], a
 	ld a, $4
@@ -39698,7 +39698,7 @@ OaksLabScript9: ; 1cd00 (7:4d00)
 	ld hl, $d74b
 	set 2, [hl]
 	xor a
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 
 	ld a, $a
 	ld [W_OAKSLABCURSCRIPT], a
@@ -39774,7 +39774,7 @@ OaksLabScript11: ; 1cdb9 (7:4db9)
 	set 6, [hl]
 	set 7, [hl]
 	xor a
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ld a, $8
 	ld [$d528], a
 
@@ -39784,7 +39784,7 @@ OaksLabScript11: ; 1cdb9 (7:4db9)
 
 OaksLabScript12: ; 1ce03 (7:4e03)
 	ld a, $f0
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ld a, $8
 	ld [$d528], a
 	call UpdateSprites
@@ -39845,7 +39845,7 @@ OaksLabScript14: ; 1ce6d (7:4e6d)
 	ld a, $11
 	call Predef
 	xor a
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	call Func_2307 ; reset to map music
 	ld a, $12
 	ld [W_OAKSLABCURSCRIPT], a
@@ -39926,7 +39926,7 @@ OaksLabScript16: ; 1cf12 (7:4f12)
 	call EnableAutoTextBoxDrawing
 	call Func_2307
 	ld a, $fc
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	call Function1CEFD
 	ld a, $16
 	ld [$ff00+$8c], a
@@ -40021,7 +40021,7 @@ OaksLabScript17: ; 1cfd4 (7:4fd4)
 	ld a, $5
 	ld [W_PALLETTOWNCURSCRIPT], a
 	xor a
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 
 	ld a, $12
 	ld [W_OAKSLABCURSCRIPT], a
@@ -40280,7 +40280,7 @@ asm_1d1e5: ; 1d1e5 (7:51e5)
 	ld hl, $d72e
 	set 3, [hl]
 	ld a, $fc
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ld a, $8
 	ld [W_OAKSLABCURSCRIPT], a
 OaksLabMonChoiceEnd: ; 1d21f (7:521f)
@@ -41017,7 +41017,7 @@ CeruleanHouseText1: ; 1d6fd (7:56fd)
 CeruleanHouseText2: ; 1d702 (7:5702)
 	db $08 ; asm
 	ld a, $6
-	ld [W_WHICHTRADE], a
+	ld [wWhichTrade], a
 	ld a, $54
 	call Predef
 	jp TextScriptEnd
@@ -41100,7 +41100,7 @@ BikeShopText1: ; 1d745 (7:5745)
 	ld [$cc25], a
 	ld hl, $d730
 	set 6, [hl]
-	ld hl, W_SCREENTILESBUFFER
+	ld hl, wTileMap
 	ld b, $4
 	ld c, $f
 	call TextBoxBorder
@@ -41640,7 +41640,7 @@ VermilionDockScript: ; 1db52 (7:5b52)
 	ld [$c206], a
 	ld [$cd3b], a
 	dec a
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ret
 .asm_1db8d
 	bit 5, [hl]
@@ -41648,14 +41648,14 @@ VermilionDockScript: ; 1db52 (7:5b52)
 	ld a, [$cd38]
 	and a
 	ret nz
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	set 5, [hl]
 	ret
 
 VermilionDock_1db9b: ; 1db9b (7:5b9b)
 	set 2, [hl]
 	ld a, $ff
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ld [$c0ee], a
 	call PlaySound
 	ld c, BANK(Music_Surfing)
@@ -42114,7 +42114,7 @@ Route2HouseText1: ; 1def4 (7:5ef4)
 Route2HouseText2: ; 1def9 (7:5ef9)
 	db $08 ; asm
 	ld a, $1
-	ld [W_WHICHTRADE], a
+	ld [wWhichTrade], a
 	ld a, $54
 	call Predef
 	jp TextScriptEnd
@@ -42204,7 +42204,7 @@ Route5GateScript1: ; 1df94 (7:5f94)
 	ret nz
 	call Delay3
 	xor a
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ld [W_ROUTE5GATECURSCRIPT], a
 	ret
 
@@ -42349,7 +42349,7 @@ Route6GateScript1: ; 1e091 (7:6091)
 	ret nz
 	call Delay3
 	xor a
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ld [W_ROUTE6GATECURSCRIPT], a
 	ret
 
@@ -42466,7 +42466,7 @@ Route7GateScript1: ; 1e16c (7:616c)
 	ret nz
 	call Delay3
 	xor a
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ld [W_ROUTE7GATECURSCRIPT], a
 	ld [W_CURMAPSCRIPT], a
 	ret
@@ -42569,7 +42569,7 @@ Route8GateScript1: ; 1e231 (7:6231)
 	ret nz
 	call Delay3
 	xor a
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ld [W_ROUTE8GATECURSCRIPT], a
 	ret
 
@@ -43013,7 +43013,7 @@ Func_1e6ba: ; 1e6ba (7:66ba)
 	ld a, $80
 	ld [$ccd3], a
 	ld [$c109], a
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	jp Func_3486
 
 Route22GateScript1: ; 1e6cd (7:66cd)
@@ -43021,7 +43021,7 @@ Route22GateScript1: ; 1e6cd (7:66cd)
 	and a
 	ret nz
 	xor a
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	call Delay3
 	ld a, $0
 	ld [W_ROUTE22GATECURSCRIPT], a
@@ -43145,7 +43145,7 @@ BillsHouseScript2: ; 1e7a6 (7:67a6)
 	ld hl, $d7f2
 	set 6, [hl]
 	xor a
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ld a, $3
 	ld [W_BILLSHOUSECURSCRIPT], a
 	ret
@@ -43155,7 +43155,7 @@ BillsHouseScript3: ; 1e7c5 (7:67c5)
 	bit 3, a
 	ret z
 	ld a, $f0
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ld a, $2
 	ld [$cf13], a
 	ld a, $c
@@ -43189,7 +43189,7 @@ BillsHouseScript4: ; 1e80d (7:680d)
 	bit 0, a
 	ret nz
 	xor a
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ld hl, $d7f2
 	set 5, [hl]
 	ld hl, $d7f1
@@ -43331,7 +43331,7 @@ Func_1e915: ; 1e915 (7:6915)
 	ld hl, UnnamedText_1e93b ; $693b
 	call PrintText
 	call YesNoChoice
-	ld a, [W_CURMENUITEMID] ; $cc26
+	ld a, [wCurrentMenuItem] ; $cc26
 	and a
 	jr nz, .asm_1e932
 	ld a, $56
@@ -43446,7 +43446,7 @@ asm_1e9b0: ; 1e9b0 (7:69b0)
 
 Func_1e9ed: ; 1e9ed (7:69ed)
 	xor a
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ld hl, Unknown_1e9f7 ; $69f7
 	jp PrintText
 
@@ -43480,7 +43480,7 @@ UnnamedText_1ea12: ; 1ea12 (7:6a12)
 INCBIN "baserom.gbc",$1ea25,$1ea26 - $1ea25
 	xor a
 	ld [$da38], a
-	ld a, [W_WHICHTRADE] ; $cd3d
+	ld a, [wWhichTrade] ; $cd3d
 	push af
 	and $f
 	ld [$FF00+$db], a
@@ -43551,7 +43551,7 @@ Func_1ea92: ; 1ea92 (7:6a92)
 	call YesNoChoice
 	ld a, [$FF00+$dc]
 	ld c, a
-	ld a, [W_CURMENUITEMID] ; $cc26
+	ld a, [wCurrentMenuItem] ; $cc26
 	cp c
 	jr nz, .asm_1eab8
 	ld hl, $d126
@@ -43759,7 +43759,7 @@ INCBIN "baserom.gbc",$1ec05,$1ec06 - $1ec05
 .asm_1ec2d
 	ld hl, $d730
 	set 6, [hl]
-	ld hl, $c3a0
+	ld hl, wTileMap
 	ld b, $a
 	ld c, $9
 	call TextBoxBorder
@@ -44039,24 +44039,24 @@ Func_213c8: ; 213c8 (8:53c8)
 	ld a, [$d5a2]
 	and a
 	jr nz, .asm_213f3
-	ld hl, W_SCREENTILESBUFFER
+	ld hl, wTileMap
 	ld b, $8
 	ld c, $e
 	jr .asm_213fa
 .asm_213ea
-	ld hl, W_SCREENTILESBUFFER
+	ld hl, wTileMap
 	ld b, $6
 	ld c, $e
 	jr .asm_213fa
 .asm_213f3
-	ld hl, W_SCREENTILESBUFFER
+	ld hl, wTileMap
 	ld b, $a
 	ld c, $e
 .asm_213fa
 	call TextBoxBorder
 	call UpdateSprites
 	ld a, $3
-	ld [W_MAXMENUITEMID], a ; $cc28
+	ld [wMaxMenuItem], a ; $cc28
 	ld a, [$d7f1]
 	bit 0, a
 	jr nz, .asm_21414
@@ -44089,7 +44089,7 @@ Func_213c8: ; 213c8 (8:53c8)
 	and a
 	jr z, .asm_2145a
 	ld a, $4
-	ld [W_MAXMENUITEMID], a ; $cc28
+	ld [wMaxMenuItem], a ; $cc28
 	FuncCoord 2, 8 ; $c442
 	ld hl, Coord
 	ld de, PKMNLeaguePCText ; $54b2
@@ -44105,21 +44105,21 @@ Func_213c8: ; 213c8 (8:53c8)
 	jr .asm_2146d
 .asm_21462
 	ld a, $2
-	ld [W_MAXMENUITEMID], a ; $cc28
+	ld [wMaxMenuItem], a ; $cc28
 	FuncCoord 2, 6 ; $c41a
 	ld hl, Coord
 	ld de, LogOffPCText ; $54ba
 .asm_2146d
 	call PlaceString
 	ld a, $3
-	ld [W_MENUWATCHEDKEYS], a ; $cc29
+	ld [wMenuWatchedKeys], a ; $cc29
 	ld a, $2
-	ld [W_TOPMENUITEMY], a ; $cc24
+	ld [wTopMenuItemY], a ; $cc24
 	ld a, $1
-	ld [W_TOPMENUITEMX], a ; $cc25
+	ld [wTopMenuItemX], a ; $cc25
 	xor a
-	ld [W_CURMENUITEMID], a ; $cc26
-	ld [W_OLDMENUITEMID], a ; $cc2a
+	ld [wCurrentMenuItem], a ; $cc26
+	ld [wLastMenuItem], a ; $cc2a
 	ld a, $1
 	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
 	ret
@@ -44151,9 +44151,9 @@ BillsPC_: ; 0x214c2
 	inc a               ; MONSTER_NAME
 	ld [W_LISTTYPE], a
 	call LoadHpBarAndStatusTilePatterns
-	ld a, [W_LISTSCROLLOFFSET] ; $cc36
+	ld a, [wListScrollOffset] ; $cc36
 	push af
-	ld a, [W_FLAGS_CD60]
+	ld a, [wFlags_0xcd60]
 	bit 3, a
 	jr nz, BillsPCMenu
 	ld a, $99
@@ -44164,13 +44164,13 @@ BillsPC_: ; 0x214c2
 Func_214e8: ; 214e8 (8:54e8)
 BillsPCMenu:
 	ld a, [$ccd3]
-	ld [W_CURMENUITEMID], a ; $cc26
+	ld [wCurrentMenuItem], a ; $cc26
 	ld hl, $9780
 	ld de, PokeballTileGraphics ; $697e
 	ld bc, (BANK(PokeballTileGraphics) << 8) + $01
 	call CopyVideoData
 	call LoadScreenTilesFromBuffer2DisableBGTransfer
-	ld hl, W_SCREENTILESBUFFER
+	ld hl, wTileMap
 	ld b, $a
 	ld c, $c
 	call TextBoxBorder
@@ -44178,7 +44178,7 @@ BillsPCMenu:
 	ld hl, Coord
 	ld de, BillsPCMenuText ; $56e1
 	call PlaceString
-	ld hl, W_TOPMENUITEMY ; $cc24
+	ld hl, wTopMenuItemY ; $cc24
 	ld a, $2
 	ld [hli], a
 	dec a
@@ -44192,10 +44192,10 @@ BillsPCMenu:
 	xor a
 	ld [hli], a
 	ld [hli], a
-	ld hl, W_LISTSCROLLOFFSET ; $cc36
+	ld hl, wListScrollOffset ; $cc36
 	ld [hli], a
 	ld [hl], a
-	ld [W_PLAYERMONNUMBER], a ; $cc2f
+	ld [wPlayerMonNumber], a ; $cc2f
 	ld hl, WhatText
 	call PrintText
 	FuncCoord 9, 14 ; $c4c1
@@ -44229,7 +44229,7 @@ BillsPCMenu:
 	bit 1, a
 	jp nz, Func_21588 ; b button
 	call PlaceUnfilledArrowMenuCursor
-	ld a, [W_CURMENUITEMID] ; $cc26
+	ld a, [wCurrentMenuItem] ; $cc26
 	ld [$ccd3], a
 	and a
 	jp z, Func_21618 ; withdraw
@@ -44241,7 +44241,7 @@ BillsPCMenu:
 	jp z, Func_216b3 ; change box
 
 Func_21588: ; 21588 (8:5588)
-	ld a, [W_FLAGS_CD60]
+	ld a, [wFlags_0xcd60]
 	bit 3, a
 	jr nz, .asm_2159a
 	call LoadTextBoxTilePatterns
@@ -44249,11 +44249,11 @@ Func_21588: ; 21588 (8:5588)
 	call PlaySound
 	call WaitForSoundToFinish
 .asm_2159a
-	ld hl, W_FLAGS_CD60
+	ld hl, wFlags_0xcd60
 	res 5, [hl]
 	call LoadScreenTilesFromBuffer2
 	pop af
-	ld [W_LISTSCROLLOFFSET], a ; $cc36
+	ld [wListScrollOffset], a ; $cc36
 	ld hl, $d730
 	res 6, [hl]
 	ret
@@ -44289,7 +44289,7 @@ BillsPCDeposit:
 	ld [$cf95], a
 	call RemovePokemon
 	call WaitForSoundToFinish
-	ld hl, W_WHICHTRADE ; $cd3d
+	ld hl, wWhichTrade ; $cd3d
 	ld a, [$d5a0]
 	and $7f
 	cp $9
@@ -44328,7 +44328,7 @@ Func_21618: ; 21618 (8:5618)
 	jp c, Func_214e8
 	call Func_2174b
 	jp nc, Func_214e8
-	ld a, [W_WHICHPOKEMON] ; $cf92
+	ld a, [wWhichPokemon] ; $cf92
 	ld hl, $de06
 	call GetPartyMonName
 	ld a, [$cf91]
@@ -44359,7 +44359,7 @@ Func_21673: ; 21673 (8:5673)
 	ld hl, OnceReleasedText ; $581b
 	call PrintText
 	call YesNoChoice
-	ld a, [W_CURMENUITEMID] ; $cc26
+	ld a, [wCurrentMenuItem] ; $cc26
 	and a
 	jr nz, .asm_21682
 	inc a
@@ -44385,13 +44385,13 @@ Func_216be: ; 216be (8:56be)
 	ld [$cf8c], a
 	xor a
 	ld [$cf93], a
-	ld [W_LISTMENUID], a ; $cf94
+	ld [wListMenuID], a ; $cf94
 	inc a                ; MONSTER_NAME
 	ld [W_LISTTYPE], a
 	ld a, [$cc2b]
-	ld [W_CURMENUITEMID], a ; $cc26
+	ld [wCurrentMenuItem], a ; $cc26
 	call DisplayListMenuID
-	ld a, [W_CURMENUITEMID] ; $cc26
+	ld a, [wCurrentMenuItem] ; $cc26
 	ld [$cc2b], a
 	ret
 
@@ -44453,7 +44453,7 @@ Func_2174b: ; 2174b (8:574b)
 	ld hl, Coord
 	ld de, StatsCancelPCText ; $57dc
 	call PlaceString
-	ld hl, W_TOPMENUITEMY ; $cc24
+	ld hl, wTopMenuItemY ; $cc24
 	ld a, $c
 	ld [hli], a
 	ld a, $a
@@ -44467,16 +44467,16 @@ Func_2174b: ; 2174b (8:574b)
 	ld [hli], a
 	xor a
 	ld [hl], a
-	ld hl, W_LISTSCROLLOFFSET ; $cc36
+	ld hl, wListScrollOffset ; $cc36
 	ld [hli], a
 	ld [hl], a
-	ld [W_PLAYERMONNUMBER], a ; $cc2f
+	ld [wPlayerMonNumber], a ; $cc2f
 	ld [$cc2b], a
 .asm_2178f
 	call HandleMenuInput
 	bit 1, a
 	jr nz, .asm_2179f
-	ld a, [W_CURMENUITEMID] ; $cc26
+	ld a, [wCurrentMenuItem] ; $cc26
 	and a
 	jr z, .asm_217a1
 	dec a
@@ -47092,7 +47092,7 @@ BadgeNumbersTileGraphics: ; 2fd98 (b:7d98)
 	INCBIN "gfx/badge_numbers.2bpp"
 
 Func_2fe18: ; 2fe18 (b:7e18)
-	ld a, [W_WHICHPOKEMON] ; $cf92
+	ld a, [wWhichPokemon] ; $cf92
 	ld hl, W_PARTYMON1_MOVE1 ; $d173
 	ld bc, $2c
 	call AddNTimes
@@ -47637,7 +47637,7 @@ Unknown_372a0: ; 372a0 (d:72a0)
 INCBIN "baserom.gbc",$372a0,$372ac - $372a0
 
 Func_372ac: ; 372ac (d:72ac)
-	ld a, [W_WHICHTRADE] ; $cd3d
+	ld a, [wWhichTrade] ; $cd3d
 	cp $b0
 	jr z, .asm_372ba
 	cp $b1
@@ -55546,7 +55546,7 @@ TrainerAI: ; 3a52e (e:652e)
 	add hl,bc
 	add hl,bc
 	add hl,bc
-	ld a,[W_AICOUNT]
+	ld a,[wAICount]
 	and a
 	ret z ; if no AI uses left, we're done here
 	inc hl
@@ -55554,7 +55554,7 @@ TrainerAI: ; 3a52e (e:652e)
 	jr nz,.getpointer
 	dec hl
 	ld a,[hli]
-	ld [W_AICOUNT],a
+	ld [wAICount],a
 .getpointer
 	ld a,[hli]
 	ld h,[hl]
@@ -55741,7 +55741,7 @@ GenericAI: ; 3a693 (e:6693)
 ; end of individual trainer AI routines
 
 DecrementAICount: ; 3a695 (e:6695)
-	ld hl,W_AICOUNT
+	ld hl,wAICount
 	dec [hl]
 	scf
 	ret
@@ -55755,7 +55755,7 @@ AIUseFullRestore: ; 3a6a0 (e:66a0)
 	call AICureStatus
 	ld a,FULL_RESTORE
 	ld [$CF05],a
-	ld de,W_HPBAROLDHP
+	ld de,wHPBarOldHP
 	ld hl,$CFE7
 	ld a,[hld]
 	ld [de],a
@@ -55767,11 +55767,11 @@ AIUseFullRestore: ; 3a6a0 (e:66a0)
 	ld a,[hld]
 	ld [de],a
 	inc de
-	ld [W_HPBARMAXHP],a
+	ld [wHPBarMaxHP],a
 	ld [$CFE7],a
 	ld a,[hl]
 	ld [de],a
-	ld [W_HPBARMAXHP+1],a
+	ld [wHPBarMaxHP+1],a
 	ld [W_ENEMYMONCURHP],a
 	jr Function6718
 
@@ -55798,17 +55798,17 @@ AIRecoverHP: ; 3a6da (e:66da)
 	ld [$CF05],a
 	ld hl,$CFE7
 	ld a,[hl]
-	ld [W_HPBAROLDHP],a
+	ld [wHPBarOldHP],a
 	add b
 	ld [hld],a
-	ld [W_HPBARNEWHP],a
+	ld [wHPBarNewHP],a
 	ld a,[hl]
-	ld [W_HPBAROLDHP+1],a
-	ld [W_HPBARNEWHP+1],a
+	ld [wHPBarOldHP+1],a
+	ld [wHPBarNewHP+1],a
 	jr nc,.next
 	inc a
 	ld [hl],a
-	ld [W_HPBARNEWHP+1],a
+	ld [wHPBarNewHP+1],a
 .next
 	inc hl
 	ld a,[hld]
@@ -55816,22 +55816,22 @@ AIRecoverHP: ; 3a6da (e:66da)
 	ld de,$CFF5
 	ld a,[de]
 	dec de
-	ld [W_HPBARMAXHP],a
+	ld [wHPBarMaxHP],a
 	sub b
 	ld a,[hli]
 	ld b,a
 	ld a,[de]
-	ld [W_HPBARMAXHP+1],a
+	ld [wHPBarMaxHP+1],a
 	sbc b
 	jr nc,Function6718
 	inc de
 	ld a,[de]
 	dec de
 	ld [hld],a
-	ld [W_HPBARNEWHP],a
+	ld [wHPBarNewHP],a
 	ld a,[de]
 	ld [hl],a
-	ld [W_HPBARNEWHP+1],a
+	ld [wHPBarNewHP+1],a
 	; fallthrough
 
 Function6718: ; 3a718 (e:6718)
@@ -56064,7 +56064,7 @@ SetupOwnPartyPokeballs: ; 3a869 (e:6869)
 	ld [hl], a
 	ld a, $8
 	ld [$cd3e], a
-	ld hl, W_OAMBUFFER
+	ld hl, wOAMBuffer
 	jp Func_3a8e1
 
 SetupEnemyPartyPokeballs: ; 3a887 (e:6887)
@@ -56084,7 +56084,7 @@ SetupEnemyPartyPokeballs: ; 3a887 (e:6887)
 SetupPokeballs: ; 0x3a8a6
 	ld a, [de]
 	push af
-	ld de, W_BUFFER
+	ld de, wBuffer
 	ld c, $6 ; max num of partymons
 	ld a, $34 ; empty pokeball
 .emptyloop
@@ -56093,7 +56093,7 @@ SetupPokeballs: ; 0x3a8a6
 	dec c
 	jr nz, .emptyloop ; 0x3a8b2 $fb
 	pop af
-	ld de, W_BUFFER
+	ld de, wBuffer
 .monloop
 	push af
 	call PickPokeball
@@ -56206,7 +56206,7 @@ Func_3a948: ; 3a948 (e:6948)
 	ld [hl], $40
 	ld a, $8
 	ld [$cd3e], a
-	ld hl, W_OAMBUFFER
+	ld hl, wOAMBuffer
 	call Func_3a8e1
 	ld hl, W_WATERRATE ; $d8a4
 	ld de, W_ENEMYMONCOUNT ; $d89c
@@ -56234,7 +56234,7 @@ Func_3ad0e: ; 3ad0e (e:6d0e)
 	ld hl, $ccd3
 	xor a
 	ld [hl], a
-	ld a, [W_WHICHPOKEMON] ; $cf92
+	ld a, [wWhichPokemon] ; $cf92
 	ld c, a
 	ld b, $1
 	call Func_3b057
@@ -56245,14 +56245,14 @@ Func_3ad1c: ; 3ad1c (e:6d1c)
 	xor a
 	ld [$d121], a
 	dec a
-	ld [W_WHICHPOKEMON], a ; $cf92
+	ld [wWhichPokemon], a ; $cf92
 	push hl
 	push bc
 	push de
 	ld hl, W_NUMINPARTY ; $d163
 	push hl
 asm_3ad2e: ; 3ad2e (e:6d2e)
-	ld hl, W_WHICHPOKEMON ; $cf92
+	ld hl, wWhichPokemon ; $cf92
 	inc [hl]
 	pop hl
 	inc hl
@@ -56261,7 +56261,7 @@ asm_3ad2e: ; 3ad2e (e:6d2e)
 	jp z, Func_3aede
 	ld [$cee9], a
 	push hl
-	ld a, [W_WHICHPOKEMON] ; $cf92
+	ld a, [wWhichPokemon] ; $cf92
 	ld c, a
 	ld hl, $ccd3
 	ld b, $2
@@ -56338,7 +56338,7 @@ Func_3ad71: ; 3ad71 (e:6d71)
 	push hl
 	ld a, [hl]
 	ld [$ceea], a
-	ld a, [W_WHICHPOKEMON] ; $cf92
+	ld a, [wWhichPokemon] ; $cf92
 	ld hl, W_PARTYMON1NAME ; $d2b5
 	call GetPartyMonName
 	call CopyStringToCF4B
@@ -56348,7 +56348,7 @@ Func_3ad71: ; 3ad71 (e:6d71)
 	call DelayFrames
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
-	ld hl, W_SCREENTILESBUFFER
+	ld hl, wTileMap
 	ld bc, $c14
 	call ClearScreenArea
 	ld a, $1
@@ -56403,7 +56403,7 @@ Func_3ad71: ; 3ad71 (e:6d71)
 	ld de, $cfba
 	ld b, $1
 	call CalcStats
-	ld a, [W_WHICHPOKEMON] ; $cf92
+	ld a, [wWhichPokemon] ; $cf92
 	ld hl, W_PARTYMON1_NUM ; $d16b (aliases: W_PARTYMON1DATA)
 	ld bc, $2c
 	call AddNTimes
@@ -56450,11 +56450,11 @@ Func_3ad71: ; 3ad71 (e:6d71)
 	dec a
 	ld c, a
 	ld b, $1
-	ld hl, W_OWNEDPOKEMON ; $d2f7
+	ld hl, wPokedexOwned ; $d2f7
 	push bc
 	call Func_3b057
 	pop bc
-	ld hl, W_SEENPOKEMON ; $d30a
+	ld hl, wPokedexSeen ; $d30a
 	call Func_3b057
 	pop de
 	pop hl
@@ -56507,7 +56507,7 @@ Func_3aef7: ; 3aef7 (e:6ef7)
 	ret nz
 	cp $50
 	jr nz, .asm_3af0e
-	ld a, [W_WHICHPOKEMON] ; $cf92
+	ld a, [wWhichPokemon] ; $cf92
 	ld bc, $b
 	ld hl, W_PARTYMON1NAME ; $d2b5
 	call AddNTimes
@@ -56579,7 +56579,7 @@ Func_3af5b: ; 3af5b (e:6f5b)
 	and a
 	jr nz, .asm_3af96
 	ld hl, W_PARTYMON1_MOVE1 ; $d173
-	ld a, [W_WHICHPOKEMON] ; $cf92
+	ld a, [wWhichPokemon] ; $cf92
 	ld bc, $2c
 	call AddNTimes
 .asm_3af96
@@ -56641,7 +56641,7 @@ WriteMonMoves: ; 3afb8 (e:6fb8)
 	ld a, [$cee9]
 	and a
 	jr z, .skipMinLevelCheck
-	ld a, [W_WHICHTRADE] ; $cd3d (min move level)
+	ld a, [wWhichTrade] ; $cd3d (min move level)
 	cp b
 	jr nc, .nextMove2 ; min level >= move level
 .skipMinLevelCheck
@@ -58944,26 +58944,26 @@ Func_3b9ec: ; 3b9ec (e:79ec)
 	pop hl
 .asm_3ba37
 	ld a, [hld]
-	ld [W_HPBARMAXHP], a
+	ld [wHPBarMaxHP], a
 	ld c, a
 	ld a, [hl]
-	ld [W_HPBARMAXHP+1], a
+	ld [wHPBarMaxHP+1], a
 	ld b, a
 	jr z, .asm_3ba47
 	srl b
 	rr c
 .asm_3ba47
 	ld a, [de]
-	ld [W_HPBAROLDHP], a
+	ld [wHPBarOldHP], a
 	add c
 	ld [de], a
-	ld [W_HPBARNEWHP], a
+	ld [wHPBarNewHP], a
 	dec de
 	ld a, [de]
-	ld [W_HPBAROLDHP+1], a
+	ld [wHPBarOldHP+1], a
 	adc b
 	ld [de], a
-	ld [W_HPBARNEWHP+1], a
+	ld [wHPBarNewHP+1], a
 	inc hl
 	inc de
 	ld a, [de]
@@ -58975,11 +58975,11 @@ Func_3b9ec: ; 3b9ec (e:79ec)
 	jr c, .asm_3ba6f
 	ld a, [hli]
 	ld [de], a
-	ld [W_HPBARNEWHP+1], a
+	ld [wHPBarNewHP+1], a
 	inc de
 	ld a, [hl]
 	ld [de], a
-	ld [W_HPBARNEWHP], a
+	ld [wHPBarNewHP], a
 .asm_3ba6f
 	ld hl, Func_3fba8 ; $7ba8
 	call BankswitchEtoF
@@ -58993,7 +58993,7 @@ Func_3b9ec: ; 3b9ec (e:79ec)
 	ld hl, Coord
 	xor a
 .asm_3ba83
-	ld [W_LISTMENUID], a ; $cf94
+	ld [wListMenuID], a ; $cf94
 	ld a, $48
 	call Predef ; indirect jump to UpdateHPBar (fa1d (3:7a1d))
 	ld hl, Func_3cd5a ; $4d5a
@@ -59030,7 +59030,7 @@ Func_3bab1: ; 3bab1 (e:7ab1)
 	ld hl, $cfe5
 	ld de, W_PLAYERMONID
 	ld bc, W_PLAYERBATTSTATUS3 ; $d064
-	ld [W_PLAYERMOVELISTINDEX], a ; $cc2e
+	ld [wPlayerMoveListIndex], a ; $cc2e
 	ld a, [W_PLAYERBATTSTATUS1] ; $d062
 .asm_3bad1
 	bit 6, a
@@ -59132,8 +59132,8 @@ Func_3bab1: ; 3bab1 (e:7ab1)
 	ld hl, $cd26
 	ld de, $cd12
 	call Func_3bb7d
-	ld hl, W_ENEMYMONATTACKMOD ; $cd2e
-	ld de, W_PLAYERMONATTACKMOD ; $cd1a
+	ld hl, wEnemyMonStatMods ; $cd2e
+	ld de, wPlayerMonStatMods ; $cd1a
 	call Func_3bb7d
 	ld hl, UnnamedText_3bb92 ; $7b92
 	jp PrintText
@@ -59246,7 +59246,7 @@ Func_3c04c: ; 3c04c (f:404c)
 	ld a, b
 	or c
 	jr nz, .asm_3c06f
-	ld hl, W_SCREENTILESBUFFER
+	ld hl, wTileMap
 	ld de, $9800
 	ld b, $12
 .asm_3c07f
@@ -59427,16 +59427,16 @@ UnnamedText_3c1a8: ; 3c1a8 (f:41a8)
 
 Func_3c1ad: ; 3c1ad (f:41ad)
 	xor a
-	ld [W_WHICHPOKEMON], a ; $cf92
+	ld [wWhichPokemon], a ; $cf92
 .asm_3c1b1
 	call Func_3ca97
 	jr nz, .asm_3c1bc
-	ld hl, W_WHICHPOKEMON ; $cf92
+	ld hl, wWhichPokemon ; $cf92
 	inc [hl]
 	jr .asm_3c1b1
 .asm_3c1bc
-	ld a, [W_WHICHPOKEMON] ; $cf92
-	ld [W_PLAYERMONNUMBER], a ; $cc2f
+	ld a, [wWhichPokemon] ; $cf92
+	ld [wPlayerMonNumber], a ; $cc2f
 	inc a
 	ld hl, W_NUMINPARTY ; $d163
 	ld c, a
@@ -59451,7 +59451,7 @@ Func_3c1ad: ; 3c1ad (f:41ad)
 	ld a, $9
 	call Func_3c8df
 	call SaveScreenTilesToBuffer1
-	ld a, [W_WHICHPOKEMON] ; $cf92
+	ld a, [wWhichPokemon] ; $cf92
 	ld c, a
 	ld b, $1
 	push bc
@@ -59573,32 +59573,32 @@ MainInBattleLoop: ; 3c233 (f:4233)
 	ld a, [hl]
 	cp $76
 	jr nz, .asm_3c2dd ; 0x3c2d8 $3
-	ld [W_PLAYERSELECTEDMOVE], a
+	ld [wPlayerSelectedMove], a
 .asm_3c2dd
 	ld hl, Function674B
 	ld b, BANK(Function674B)
 	call Bankswitch
 .noLinkBattle
-	ld a, [W_PLAYERSELECTEDMOVE]
+	ld a, [wPlayerSelectedMove]
 	cp QUICK_ATTACK
 	jr nz, .playerDidNotUseQuickAttack
-	ld a, [W_ENEMYSELECTEDMOVE]
+	ld a, [wEnemySelectedMove]
 	cp QUICK_ATTACK
 	jr z, .compareSpeed  ; both used Quick Attack
 	jp .playerMovesFirst ; player used Quick Attack
 .playerDidNotUseQuickAttack
-	ld a, [W_ENEMYSELECTEDMOVE]
+	ld a, [wEnemySelectedMove]
 	cp QUICK_ATTACK
 	jr z, .enemyMovesFirst
-	ld a, [W_PLAYERSELECTEDMOVE]
+	ld a, [wPlayerSelectedMove]
 	cp COUNTER
 	jr nz, .playerDidNotUseCounter
-	ld a, [W_ENEMYSELECTEDMOVE]
+	ld a, [wEnemySelectedMove]
 	cp COUNTER
 	jr z, .compareSpeed ; both used Counter
 	jr .enemyMovesFirst ; player used Counter
 .playerDidNotUseCounter
-	ld a, [W_ENEMYSELECTEDMOVE]
+	ld a, [wEnemySelectedMove]
 	cp COUNTER
 	jr z, .playerMovesFirst
 .compareSpeed
@@ -59769,10 +59769,10 @@ HandlePoisonBurnLeechSeed_DecreaseOwnHP: ; 3c43d (f:443d)
 	ld bc, $e      ; skip to max HP
 	add hl, bc
 	ld a, [hli]    ; load max HP
-	ld [W_HPBARMAXHP+1], a
+	ld [wHPBarMaxHP+1], a
 	ld b, a
 	ld a, [hl]
-	ld [W_HPBARMAXHP], a
+	ld [wHPBarMaxHP], a
 	ld c, a
 	srl b
 	rr c
@@ -59809,21 +59809,21 @@ HandlePoisonBurnLeechSeed_DecreaseOwnHP: ; 3c43d (f:443d)
 	pop hl
 	inc hl
 	ld a, [hl]    ; subtract total damage from current HP
-	ld [W_HPBAROLDHP], a
+	ld [wHPBarOldHP], a
 	sub c
 	ld [hld], a
-	ld [W_HPBARNEWHP], a
+	ld [wHPBarNewHP], a
 	ld a, [hl]
-	ld [W_HPBAROLDHP+1], a
+	ld [wHPBarOldHP+1], a
 	sbc b
 	ld [hl], a
-	ld [W_HPBARNEWHP+1], a
+	ld [wHPBarNewHP+1], a
 	jr nc, .noOverkill
 	xor a         ; overkill: zero HP
 	ld [hli], a
 	ld [hl], a
-	ld [W_HPBARNEWHP], a
-	ld [W_HPBARNEWHP+1], a
+	ld [wHPBarNewHP], a
+	ld [wHPBarNewHP+1], a
 .noOverkill
 	call UpdateCurMonHPBar
 	pop hl
@@ -59839,36 +59839,36 @@ HandlePoisonBurnLeechSeed_IncreaseEnemyHP: ; 3c4a3 (f:44a3)
 	ld hl, W_PLAYERMONMAXHP ; $d023
 .playersTurn
 	ld a, [hli]
-	ld [W_HPBARMAXHP+1], a
+	ld [wHPBarMaxHP+1], a
 	ld a, [hl]
-	ld [W_HPBARMAXHP], a
+	ld [wHPBarMaxHP], a
 	ld de, $fff2
 	add hl, de           ; skip back fomr max hp to current hp
 	ld a, [hl]
-	ld [W_HPBAROLDHP], a ; add bc to current HP
+	ld [wHPBarOldHP], a ; add bc to current HP
 	add c
 	ld [hld], a
-	ld [W_HPBARNEWHP], a
+	ld [wHPBarNewHP], a
 	ld a, [hl]
-	ld [W_HPBAROLDHP+1], a
+	ld [wHPBarOldHP+1], a
 	adc b
 	ld [hli], a
-	ld [W_HPBARNEWHP+1], a
-	ld a, [W_HPBARMAXHP]
+	ld [wHPBarNewHP+1], a
+	ld a, [wHPBarMaxHP]
 	ld c, a
 	ld a, [hld]
 	sub c
-	ld a, [W_HPBARMAXHP+1]
+	ld a, [wHPBarMaxHP+1]
 	ld b, a
 	ld a, [hl]
 	sbc b
 	jr c, .noOverfullHeal
 	ld a, b                ; overfull heal, set HP to max HP
 	ld [hli], a
-	ld [W_HPBARNEWHP+1], a
+	ld [wHPBarNewHP+1], a
 	ld a, c
 	ld [hl], a
-	ld [W_HPBARNEWHP], a
+	ld [wHPBarNewHP], a
 .noOverfullHeal
 	ld a, [H_WHOSETURN] ; $FF00+$f3
 	xor $1
@@ -59892,7 +59892,7 @@ UpdateCurMonHPBar: ; 3c4f6 (f:44f6)
 	xor a
 .playersTurn
 	push bc
-	ld [W_LISTMENUID], a ; $cf94
+	ld [wListMenuID], a ; $cf94
 	ld a, $48
 	call Predef ; indirect jump to UpdateHPBar (fa1d (3:7a1d))
 	pop bc
@@ -59979,7 +59979,7 @@ FaintEnemyPokemon ; 0x3c567
 	FuncCoord 12, 6 ; $c424
 	ld de, Coord
 	call Func_3c893
-	ld hl, W_SCREENTILESBUFFER
+	ld hl, wTileMap
 	ld bc, $40b
 	call ClearScreenArea
 	ld a, [W_ISINBATTLE] ; $d057
@@ -60196,7 +60196,7 @@ HandlePlayerMonFainted: ; 3c700 (f:4700)
 	jp MainInBattleLoop
 
 Func_3c741: ; 3c741 (f:4741)
-	ld a, [W_PLAYERMONNUMBER] ; $cc2f
+	ld a, [wPlayerMonNumber] ; $cc2f
 	ld c, a
 	ld hl, W_PLAYERMONSALIVEFLAGS ; clear fainted mon's alive flag
 	ld b, $0
@@ -60261,7 +60261,7 @@ Func_3c79b: ; 3c79b (f:479b)
 	and a
 	ret
 .asm_3c7c4
-	ld a, [W_CURMENUITEMID] ; $cc26
+	ld a, [wCurrentMenuItem] ; $cc26
 	and a
 	jr z, .asm_3c7ad
 	ld hl, W_PARTYMON1_SPEED ; $d193
@@ -60294,8 +60294,8 @@ Func_3c7d8: ; 3c7d8 (f:47d8)
 	xor a
 	ld [$cd6a], a
 	call CleanLCD_OAM
-	ld a, [W_WHICHPOKEMON] ; $cf92
-	ld [W_PLAYERMONNUMBER], a ; $cc2f
+	ld a, [wWhichPokemon] ; $cf92
+	ld [wPlayerMonNumber], a ; $cc2f
 	ld c, a
 	ld hl, W_PLAYERMONSALIVEFLAGS
 	ld b, $1
@@ -60327,7 +60327,7 @@ HandlePlayerBlackOut: ; 3c837 (f:4837)
 	ld a, [W_CUROPPONENT] ; $d059
 	cp $c8 + SONY1
 	jr nz, .notSony1Battle
-	ld hl, W_SCREENTILESBUFFER  ; sony 1 battle
+	ld hl, wTileMap  ; sony 1 battle
 	ld bc, $815
 	call ClearScreenArea
 	call Func_3ed12
@@ -60487,7 +60487,7 @@ Func_3c92a: ; 3c92a (f:492a)
 	ld [hli],a
 	ld [hl],a
 	dec a
-	ld [W_AICOUNT],a
+	ld [wAICount],a
 	ld hl,W_PLAYERBATTSTATUS1
 	res 5,[hl]
 	FuncCoord 18, 0 ; $c3b2
@@ -60597,7 +60597,7 @@ Func_3c92a: ; 3c92a (f:492a)
 	call LoadScreenTilesFromBuffer1
 .next4
 	call CleanLCD_OAM
-	ld hl,W_SCREENTILESBUFFER
+	ld hl,wTileMap
 	ld bc,$040B
 	call ClearScreenArea
 	ld b,1
@@ -60656,7 +60656,7 @@ AnyPokemonAliveCheck: ; 3ca83 (f:4a83)
 	ret
 
 Func_3ca97: ; 3ca97 (f:4a97)
-	ld a, [W_WHICHPOKEMON] ; $cf92
+	ld a, [wWhichPokemon] ; $cf92
 	ld hl, W_PARTYMON1_HP ; $d16c
 	ld bc, $2c
 	call AddNTimes
@@ -60769,7 +60769,7 @@ Func_3cab9: ; 3cab9 (f:4ab9)
 	xor a
 	ld [$cd6a], a
 	ld a, $f
-	ld [W_PLAYERMOVELISTINDEX], a ; $cc2e
+	ld [wPlayerMoveListIndex], a ; $cc2e
 	call Func_3d605
 	call LoadScreenTilesFromBuffer1
 	ld a, [$cc3e]
@@ -60801,7 +60801,7 @@ UnnamedText_3cba1: ; 3cba1 (f:4ba1)
 	db "@"
 
 Func_3cba6: ; 3cba6 (f:4ba6)
-	ld a, [W_WHICHPOKEMON] ; $cf92
+	ld a, [wWhichPokemon] ; $cf92
 	ld bc, $2c
 	ld hl, W_PARTYMON1_NUM ; $d16b (aliases: W_PARTYMON1DATA)
 	call AddNTimes
@@ -60823,7 +60823,7 @@ Func_3cba6: ; 3cba6 (f:4ba6)
 	ld [$d0b5], a
 	call GetMonHeader
 	ld hl, W_PARTYMON1NAME ; $d2b5
-	ld a, [W_PLAYERMONNUMBER] ; $cc2f
+	ld a, [wPlayerMonNumber] ; $cc2f
 	call SkipFixedLengthTextEntries
 	ld de, W_PLAYERMONNAME
 	ld bc, $b
@@ -60836,7 +60836,7 @@ Func_3cba6: ; 3cba6 (f:4ba6)
 	call Func_3ee19
 	ld a, $7
 	ld b, $8
-	ld hl, W_PLAYERMONATTACKMOD ; $cd1a
+	ld hl, wPlayerMonAttackMod ; $cd1a
 .asm_3cc0e
 	ld [hli], a
 	dec b
@@ -60844,7 +60844,7 @@ Func_3cba6: ; 3cba6 (f:4ba6)
 	ret
 
 Func_3cc13: ; 3cc13 (f:4c13)
-	ld a, [W_WHICHPOKEMON] ; $cf92
+	ld a, [wWhichPokemon] ; $cf92
 	ld bc, $2c
 	ld hl, W_WATERRATE ; $d8a4
 	call AddNTimes
@@ -60866,7 +60866,7 @@ Func_3cc13: ; 3cc13 (f:4c13)
 	ld [$d0b5], a
 	call GetMonHeader
 	ld hl, $d9ee
-	ld a, [W_WHICHPOKEMON] ; $cf92
+	ld a, [wWhichPokemon] ; $cf92
 	call SkipFixedLengthTextEntries
 	ld de, W_ENEMYMONNAME
 	ld bc, $b
@@ -60887,12 +60887,12 @@ Func_3cc13: ; 3cc13 (f:4c13)
 	jr nz, .asm_3cc79
 	ld a, $7
 	ld b, $8
-	ld hl, W_ENEMYMONATTACKMOD ; $cd2e
+	ld hl, wEnemyMonStatMods ; $cd2e
 .asm_3cc86
 	ld [hli], a
 	dec b
 	jr nz, .asm_3cc86
-	ld a, [W_WHICHPOKEMON] ; $cf92
+	ld a, [wWhichPokemon] ; $cf92
 	ld [W_ENEMYMONNUMBER], a ; $cfe8
 	ret
 
@@ -60986,7 +60986,7 @@ Func_3cd3a: ; 3cd3a (f:4d3a)
 
 ; reads player's current mon's HP into W_PLAYERMONCURHP
 ReadPlayerMonCurHPAndStatus: ; 3cd43 (f:4d43)
-	ld a, [W_PLAYERMONNUMBER] ; $cc2f
+	ld a, [wPlayerMonNumber] ; $cc2f
 	ld hl, W_PARTYMON1_HP ; $d16c
 	ld bc, W_PARTYMON2_HP - W_PARTYMON1_HP ; $2c
 	call AddNTimes
@@ -61072,7 +61072,7 @@ Func_3cd60: ; 3cd60 (f:4d60)
 Func_3cdec: ; 3cdec (f:4dec)
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
-	ld hl, W_SCREENTILESBUFFER
+	ld hl, wTileMap
 	ld bc, $40c
 	call ClearScreenArea
 	ld hl, Func_3a919
@@ -61152,7 +61152,7 @@ Func_3cdec: ; 3cdec (f:4dec)
 
 Func_3ce7f: ; 3ce7f (f:4e7f)
 	xor a
-	ld [W_LISTMENUID], a ; $cf94
+	ld [wListMenuID], a ; $cf94
 	FuncCoord 2, 2 ; $c3ca
 	ld hl, Coord
 	call DrawHPBar
@@ -61246,12 +61246,12 @@ OldManName: ; 3cf12 (f:4f12)
 
 RegularBattleMenu: ; 3cf1a (f:4f1a)
 	ld a, [$cc2d]
-	ld [W_CURMENUITEMID], a ; $cc26
-	ld [W_OLDMENUITEMID], a ; $cc2a
+	ld [wCurrentMenuItem], a ; $cc26
+	ld [wLastMenuItem], a ; $cc2a
 	sub $2
 	jr c, .leftcolumn
-	ld [W_CURMENUITEMID], a ; $cc26
-	ld [W_OLDMENUITEMID], a ; $cc2a
+	ld [wCurrentMenuItem], a ; $cc26
+	ld [wLastMenuItem], a ; $cc2a
 	jr .rightcolumn
 .leftcolumn
 	ld a, [W_BATTLETYPE] ; $d05a
@@ -61276,7 +61276,7 @@ RegularBattleMenu: ; 3cf1a (f:4f1a)
 	call PrintNumber
 	ld b, $1
 .notsafari
-	ld hl, W_TOPMENUITEMY ; $cc24
+	ld hl, wTopMenuItemY ; $cc24
 	ld a, $e
 	ld [hli], a
 	ld a, b
@@ -61313,7 +61313,7 @@ RegularBattleMenu: ; 3cf1a (f:4f1a)
 	call PrintNumber
 	ld b, $d
 .notsafarirightcolumn
-	ld hl, W_TOPMENUITEMY ; $cc24
+	ld hl, wTopMenuItemY ; $cc24
 	ld a, $e
 	ld [hli], a
 	ld a, b
@@ -61327,14 +61327,14 @@ RegularBattleMenu: ; 3cf1a (f:4f1a)
 	call HandleMenuInput
 	bit 5, a
 	jr nz, .leftcolumn
-	ld a, [W_CURMENUITEMID] ; $cc26
+	ld a, [wCurrentMenuItem] ; $cc26
 	add $2 ; if we're in the right column, the actual id is +2
-	ld [W_CURMENUITEMID], a ; $cc26
+	ld [wCurrentMenuItem], a ; $cc26
 .selection
 	call PlaceUnfilledArrowMenuCursor
 	ld a, [W_BATTLETYPE] ; $d05a
 	cp $2
-	ld a, [W_CURMENUITEMID] ; $cc26
+	ld a, [wCurrentMenuItem] ; $cc26
 	ld [$cc2d], a
 	jr z, .asm_3cfd0
 	cp $1
@@ -61407,11 +61407,11 @@ asm_3d00e: ; 3d00e (f:500e)
 	xor a
 	ld [$cf93], a
 	ld a, $3
-	ld [W_LISTMENUID], a ; $cf94
+	ld [wListMenuID], a ; $cf94
 	ld a, [$cc2c]
-	ld [W_CURMENUITEMID], a ; $cc26
+	ld [wCurrentMenuItem], a ; $cc26
 	call DisplayListMenuID
-	ld a, [W_CURMENUITEMID] ; $cc26
+	ld a, [wCurrentMenuItem] ; $cc26
 	ld [$cc2c], a
 	ld a, $0
 	ld [$cc37], a
@@ -61428,7 +61428,7 @@ asm_3d05f: ; 3d05f (f:505f)
 	call Func_3ee5b
 	call CleanLCD_OAM
 	xor a
-	ld [W_CURMENUITEMID], a ; $cc26
+	ld [wCurrentMenuItem], a ; $cc26
 	ld a, [W_BATTLETYPE] ; $d05a
 	cp $2
 	jr z, .asm_3d09c
@@ -61513,7 +61513,7 @@ Func_3d119: ; 3d119 (f:5119)
 	ld a, $c
 	ld [$d125], a
 	call DisplayTextBoxID
-	ld hl, W_TOPMENUITEMY ; $cc24
+	ld hl, wTopMenuItemY ; $cc24
 	ld a, $c
 	ld [hli], a
 	ld [hli], a
@@ -61530,7 +61530,7 @@ Func_3d119: ; 3d119 (f:5119)
 	bit 1, a
 	jr nz, Func_3d105
 	call PlaceUnfilledArrowMenuCursor
-	ld a, [W_CURMENUITEMID] ; $cc26
+	ld a, [wCurrentMenuItem] ; $cc26
 	cp $2
 	jr z, asm_3d0f0
 	and a
@@ -61564,9 +61564,9 @@ Func_3d119: ; 3d119 (f:5119)
 .asm_3d187
 	jp Func_3d0e0
 .asm_3d18a
-	ld a, [W_PLAYERMONNUMBER] ; $cc2f
+	ld a, [wPlayerMonNumber] ; $cc2f
 	ld d, a
-	ld a, [W_WHICHPOKEMON] ; $cf92
+	ld a, [wWhichPokemon] ; $cf92
 	cp d
 	jr nz, .asm_3d19d
 	ld hl, UnnamedText_3d1f5 ; $51f5
@@ -61591,8 +61591,8 @@ Func_3d1ba: ; 3d1ba (f:51ba)
 	ld c, $32
 	call DelayFrames
 	call Func_3ccfa
-	ld a, [W_WHICHPOKEMON] ; $cf92
-	ld [W_PLAYERMONNUMBER], a ; $cc2f
+	ld a, [wWhichPokemon] ; $cf92
+	ld [wPlayerMonNumber], a ; $cc2f
 	ld c, a
 	ld b, $1
 	push bc
@@ -61607,7 +61607,7 @@ Func_3d1ba: ; 3d1ba (f:51ba)
 	call Func_3cc91
 	call SaveScreenTilesToBuffer1
 	ld a, $2
-	ld [W_CURMENUITEMID], a ; $cc26
+	ld [wCurrentMenuItem], a ; $cc26
 	and a
 	ret
 
@@ -61618,7 +61618,7 @@ UnnamedText_3d1f5: ; 3d1f5 (f:51f5)
 Func_3d1fa: ; 3d1fa (f:51fa)
 	call LoadScreenTilesFromBuffer1
 	ld a, $3
-	ld [W_CURMENUITEMID], a ; $cc26
+	ld [wCurrentMenuItem], a ; $cc26
 	ld hl, W_PLAYERMONSPEED
 	ld de, W_ENEMYMONSPEED
 	call Func_3cab9
@@ -61631,7 +61631,7 @@ Func_3d1fa: ; 3d1fa (f:51fa)
 	jp InitBattleMenu
 
 MoveSelectionMenu: ; 3d219 (f:5219)
-	ld a, [W_MOVEMENUTYPE]
+	ld a, [wMoveMenuType]
 	dec a
 	jr z, .mimicmenu
 	dec a
@@ -61697,7 +61697,7 @@ MoveSelectionMenu: ; 3d219 (f:5219)
 	ld a, $7
 	jr .menuset
 .relearnmenu
-	ld a, [W_WHICHPOKEMON] ; $cf92
+	ld a, [wWhichPokemon] ; $cf92
 	ld hl, W_PARTYMON1_MOVE1 ; $d173
 	ld bc, $2c
 	call AddNTimes
@@ -61713,25 +61713,25 @@ MoveSelectionMenu: ; 3d219 (f:5219)
 	ld b, $5
 	ld a, $7
 .menuset
-	ld hl, W_TOPMENUITEMY ; $cc24
+	ld hl, wTopMenuItemY ; $cc24
 	ld [hli], a
 	ld a, b
-	ld [hli], a ; W_TOPMENUITEMX
-	ld a, [W_MOVEMENUTYPE]
+	ld [hli], a ; wTopMenuItemX
+	ld a, [wMoveMenuType]
 	cp $1
 	jr z, .selectedmoveknown
 	ld a, $1
 	jr nc, .selectedmoveknown
-	ld a, [W_PLAYERMOVELISTINDEX] ; $cc2e
+	ld a, [wPlayerMoveListIndex] ; $cc2e
 	inc a
 .selectedmoveknown
-	ld [hli], a ; W_CURMENUITEMID
-	inc hl ; W_TILEBEHINDCURSOR untouched
+	ld [hli], a ; wCurrentMenuItem
+	inc hl ; wTileBehindCursor untouched
 	ld a, [$cd6c]
 	inc a
 	inc a
-	ld [hli], a ; W_MAXMENUITEMID
-	ld a, [W_MOVEMENUTYPE]
+	ld [hli], a ; wMaxMenuItem
+	ld a, [wMoveMenuType]
 	dec a
 	ld b, $c1 ; can't use B
 	jr z, .matchedkeyspicked
@@ -61748,17 +61748,17 @@ MoveSelectionMenu: ; 3d219 (f:5219)
 	ld b, $ff
 .matchedkeyspicked
 	ld a, b
-	ld [hli], a ; W_MENUWATCHEDKEYS
-	ld a, [W_MOVEMENUTYPE]
+	ld [hli], a ; wMenuWatchedKeys
+	ld a, [wMoveMenuType]
 	cp $1
 	jr z, .movelistindex1
-	ld a, [W_PLAYERMOVELISTINDEX] ; $cc2e
+	ld a, [wPlayerMoveListIndex] ; $cc2e
 	inc a
 .movelistindex1
-	ld [hl], a ; W_OLDMENUITEMID
+	ld [hl], a ; wLastMenuItem
 
 Func_3d2fe: ; 3d2fe (f:52fe)
-	ld a, [W_MOVEMENUTYPE]
+	ld a, [wMoveMenuType]
 	and a
 	jr z, .battleselect
 	dec a
@@ -61798,11 +61798,11 @@ Func_3d2fe: ; 3d2fe (f:52fe)
 	push af
 	xor a
 	ld [$cc35], a
-	ld a, [W_CURMENUITEMID] ; $cc26
+	ld a, [wCurrentMenuItem] ; $cc26
 	dec a
-	ld [W_CURMENUITEMID], a ; $cc26
+	ld [wCurrentMenuItem], a ; $cc26
 	ld b, a
-	ld a, [W_MOVEMENUTYPE]
+	ld a, [wMoveMenuType]
 	dec a ; if not mimic
 	jr nz, .nob
 	pop af
@@ -61810,7 +61810,7 @@ Func_3d2fe: ; 3d2fe (f:52fe)
 .nob
 	dec a
 	ld a, b
-	ld [W_PLAYERMOVELISTINDEX], a ; $cc2e
+	ld [wPlayerMoveListIndex], a ; $cc2e
 	jr nz, .moveselected
 	pop af
 	ret
@@ -61818,7 +61818,7 @@ Func_3d2fe: ; 3d2fe (f:52fe)
 	pop af
 	ret nz
 	ld hl, W_PLAYERMONPP ; $d02d
-	ld a, [W_CURMENUITEMID] ; $cc26
+	ld a, [wCurrentMenuItem] ; $cc26
 	ld c, a
 	ld b, $0
 	add hl, bc
@@ -61835,13 +61835,13 @@ Func_3d2fe: ; 3d2fe (f:52fe)
 	bit 3, a ; transformed
 	jr nz, .dummy ; game freak derp
 .dummy
-	ld a, [W_CURMENUITEMID] ; $cc26
+	ld a, [wCurrentMenuItem] ; $cc26
 	ld hl, W_PLAYERMONMOVES
 	ld c, a
 	ld b, $0
 	add hl, bc
 	ld a, [hl]
-	ld [W_PLAYERSELECTEDMOVE], a ; $ccdc
+	ld [wPlayerSelectedMove], a ; $ccdc
 	xor a
 	ret
 .disabled
@@ -61866,17 +61866,17 @@ WhichTechniqueString: ; 3d3b8 (f:53b8)
 	db "WHICH TECHNIQUE?@"
 
 Func_3d3c9: ; 3d3c9 (f:53c9)
-	ld a, [W_CURMENUITEMID] ; $cc26
+	ld a, [wCurrentMenuItem] ; $cc26
 	and a
 	jp nz, Func_3d2fe
 	call EraseMenuCursor
 	ld a, [$cd6c]
 	inc a
-	ld [W_CURMENUITEMID], a ; $cc26
+	ld [wCurrentMenuItem], a ; $cc26
 	jp Func_3d2fe
 
 Func_3d3dd: ; 3d3dd (f:53dd)
-	ld a, [W_CURMENUITEMID] ; $cc26
+	ld a, [wCurrentMenuItem] ; $cc26
 	ld b, a
 	ld a, [$cd6c]
 	inc a
@@ -61885,12 +61885,12 @@ Func_3d3dd: ; 3d3dd (f:53dd)
 	jp nz, Func_3d2fe
 	call EraseMenuCursor
 	ld a, $1
-	ld [W_CURMENUITEMID], a ; $cc26
+	ld [wCurrentMenuItem], a ; $cc26
 	jp Func_3d2fe
 
 Func_3d3f5: ; 3d3f5 (f:53f5)
 	ld a, $a5
-	ld [W_PLAYERSELECTEDMOVE], a ; $ccdc
+	ld [wPlayerSelectedMove], a ; $ccdc
 	ld a, [W_PLAYERDISABLEDMOVE] ; $d06d
 	and a
 	ld hl, W_PLAYERMONPP ; $d02d
@@ -61947,7 +61947,7 @@ Func_3d435: ; 3d435 (f:5435)
 	swap a
 	and $f
 	ld b, a
-	ld a, [W_CURMENUITEMID] ; $cc26
+	ld a, [wCurrentMenuItem] ; $cc26
 	cp b
 	jr nz, .asm_3d463
 	ld a, [hl]
@@ -61965,13 +61965,13 @@ Func_3d435: ; 3d435 (f:5435)
 	ld a, [hl]
 	and $f
 	ld b, a
-	ld a, [W_CURMENUITEMID] ; $cc26
+	ld a, [wCurrentMenuItem] ; $cc26
 	swap a
 	add b
 	ld [hl], a
 .asm_3d474
 	ld hl, W_PARTYMON1_MOVE1 ; $d173
-	ld a, [W_PLAYERMONNUMBER] ; $cc2f
+	ld a, [wPlayerMonNumber] ; $cc2f
 	ld bc, $2c
 	call AddNTimes
 	push hl
@@ -61994,7 +61994,7 @@ Func_3d493: ; 3d493 (f:5493)
 	ld d, h
 	ld e, l
 	pop hl
-	ld a, [W_CURMENUITEMID] ; $cc26
+	ld a, [wCurrentMenuItem] ; $cc26
 	dec a
 	ld c, a
 	ld b, $0
@@ -62006,7 +62006,7 @@ Func_3d493: ; 3d493 (f:5493)
 	ld [de], a
 	ret
 asm_3d4ad: ; 3d4ad (f:54ad)
-	ld a, [W_CURMENUITEMID] ; $cc26
+	ld a, [wCurrentMenuItem] ; $cc26
 	ld [$cc35], a
 	jp MoveSelectionMenu
 
@@ -62024,7 +62024,7 @@ Func_3d4b6: ; 3d4b6 (f:54b6)
 	swap a
 	and $f
 	ld b, a
-	ld a, [W_CURMENUITEMID] ; $cc26
+	ld a, [wCurrentMenuItem] ; $cc26
 	cp b
 	jr nz, .asm_3d4df
 	FuncCoord 1, 10 ; $c469
@@ -62033,25 +62033,25 @@ Func_3d4b6: ; 3d4b6 (f:54b6)
 	call PlaceString
 	jr .asm_3d54e
 .asm_3d4df
-	ld hl, W_CURMENUITEMID ; $cc26
+	ld hl, wCurrentMenuItem ; $cc26
 	dec [hl]
 	xor a
 	ld [H_WHOSETURN], a ; $FF00+$f3
 	ld hl, W_PLAYERMONMOVES
-	ld a, [W_CURMENUITEMID] ; $cc26
+	ld a, [wCurrentMenuItem] ; $cc26
 	ld c, a
 	ld b, $0
 	add hl, bc
 	ld a, [hl]
-	ld [W_PLAYERSELECTEDMOVE], a ; $ccdc
-	ld a, [W_PLAYERMONNUMBER] ; $cc2f
-	ld [W_WHICHPOKEMON], a ; $cf92
+	ld [wPlayerSelectedMove], a ; $ccdc
+	ld a, [wPlayerMonNumber] ; $cc2f
+	ld [wWhichPokemon], a ; $cf92
 	ld a, $4
 	ld [$cc49], a
 	ld hl, GetMaxPP
 	ld b, BANK(GetMaxPP)
 	call Bankswitch ; indirect jump to GetMaxPP (e677 (3:6677))
-	ld hl, W_CURMENUITEMID ; $cc26
+	ld hl, wCurrentMenuItem ; $cc26
 	ld c, [hl]
 	inc [hl]
 	ld b, $0
@@ -62172,7 +62172,7 @@ SelectEnemyMove: ; 3d564 (f:5564)
 .moveChosen
 	ld a, b
 	dec a
-	ld [W_ENEMYMOVELISTINDEX], a
+	ld [wEnemyMoveListIndex], a
 	ld a, [W_ENEMYDISABLEDMOVE]
 	swap a
 	and $f
@@ -62183,7 +62183,7 @@ SelectEnemyMove: ; 3d564 (f:5564)
 	and a
 	jr z, .chooseRandomMove ; move non-existant, try again
 .done
-	ld [W_ENEMYSELECTEDMOVE], a
+	ld [wEnemySelectedMove], a
 	ret
 .asm_3d601
 	ld a, $a5
@@ -62192,23 +62192,23 @@ SelectEnemyMove: ; 3d564 (f:5564)
 Func_3d605: ; 3d605 (f:5605)
 	ld a, $ff
 	ld [$cc3e], a
-	ld a, [W_PLAYERMOVELISTINDEX] ; $cc2e
+	ld a, [wPlayerMoveListIndex] ; $cc2e
 	cp $f
 	jr z, .asm_3d630
 	ld a, [$cd6a]
 	and a
 	jr nz, .asm_3d629
-	ld a, [W_PLAYERSELECTEDMOVE] ; $ccdc
+	ld a, [wPlayerSelectedMove] ; $ccdc
 	cp $a5
 	ld b, $e
 	jr z, .asm_3d62f
 	dec b
 	inc a
 	jr z, .asm_3d62f
-	ld a, [W_PLAYERMOVELISTINDEX] ; $cc2e
+	ld a, [wPlayerMoveListIndex] ; $cc2e
 	jr .asm_3d630
 .asm_3d629
-	ld a, [W_WHICHPOKEMON] ; $cf92
+	ld a, [wWhichPokemon] ; $cf92
 	add $4
 	ld b, a
 .asm_3d62f
@@ -62241,7 +62241,7 @@ Func_3d605: ; 3d605 (f:5605)
 Func_3d65e: ; 3d65e (f:565e)
 	xor a
 	ld [H_WHOSETURN], a ; $FF00+$f3
-	ld a, [W_PLAYERSELECTEDMOVE] ; $ccdc
+	ld a, [wPlayerSelectedMove] ; $ccdc
 	inc a
 	jp z, Function580A
 	xor a
@@ -62795,7 +62795,7 @@ CantMoveText: ; 3da83 (f:5a83)
 	db "@"
 
 Func_3da88: ; 3da88 (f:5a88)
-	ld hl, W_PLAYERSELECTEDMOVE ; $ccdc
+	ld hl, wPlayerSelectedMove ; $ccdc
 	ld de, W_PLAYERBATTSTATUS1 ; $d062
 	ld a, [H_WHOSETURN] ; $FF00+$f3
 	and a
@@ -63088,7 +63088,7 @@ Func_3dc88: ; 3dc88 (f:5c88)
 .asm_3dc97
 	ld hl, W_PARTYMON1_OTID ; $d177
 	ld bc, $2c
-	ld a, [W_PLAYERMONNUMBER] ; $cc2f
+	ld a, [wPlayerMonNumber] ; $cc2f
 	call AddNTimes
 	ld a, [W_PLAYERIDHI] ; $d359
 	cp [hl]
@@ -63183,7 +63183,7 @@ Func_3dc88: ; 3dc88 (f:5c88)
 	ld a, [$ccee]
 	and a
 	jr nz, .asm_3dd20
-	ld a, [W_PLAYERSELECTEDMOVE] ; $ccdc
+	ld a, [wPlayerSelectedMove] ; $ccdc
 	cp $a5
 	jr z, .asm_3dd20
 	ld hl, W_PLAYERMONPP ; $d02d
@@ -63204,7 +63204,7 @@ Func_3dc88: ; 3dc88 (f:5c88)
 	add b
 	pop hl
 	push af
-	ld a, [W_CURMENUITEMID] ; $cc26
+	ld a, [wCurrentMenuItem] ; $cc26
 	ld c, a
 	ld b, $0
 	add hl, bc
@@ -63216,9 +63216,9 @@ Func_3dc88: ; 3dc88 (f:5c88)
 	jr z, .asm_3dd20
 	ld a, $1
 	ld [$cced], a
-	ld a, [W_MAXMENUITEMID] ; $cc28
+	ld a, [wMaxMenuItem] ; $cc28
 	ld b, a
-	ld a, [W_CURMENUITEMID] ; $cc26
+	ld a, [wCurrentMenuItem] ; $cc26
 	ld c, a
 .asm_3dd86
 	call GenRandomInBattle
@@ -63227,7 +63227,7 @@ Func_3dc88: ; 3dc88 (f:5c88)
 	jr nc, .asm_3dd86
 	cp c
 	jr z, .asm_3dd86
-	ld [W_CURMENUITEMID], a ; $cc26
+	ld [wCurrentMenuItem], a ; $cc26
 	ld hl, W_PLAYERMONPP ; $d02d
 	ld e, a
 	ld d, $0
@@ -63235,13 +63235,13 @@ Func_3dc88: ; 3dc88 (f:5c88)
 	ld a, [hl]
 	and a
 	jr z, .asm_3dd86
-	ld a, [W_CURMENUITEMID] ; $cc26
+	ld a, [wCurrentMenuItem] ; $cc26
 	ld c, a
 	ld b, $0
 	ld hl, W_PLAYERMONMOVES
 	add hl, bc
 	ld a, [hl]
-	ld [W_PLAYERSELECTEDMOVE], a ; $ccdc
+	ld [wPlayerSelectedMove], a ; $ccdc
 	call GetCurrentMove
 
 Func_3ddb0: ; 3ddb0 (f:5db0)
@@ -63310,7 +63310,7 @@ CalculateDamage: ; 3ddcf (f:5dcf)
 	ld c, a
 	push bc
 	ld hl, $d18f
-	ld a, [W_PLAYERMONNUMBER]
+	ld a, [wPlayerMonNumber]
 	ld bc, $002c
 	call AddNTimes
 	pop bc
@@ -63340,7 +63340,7 @@ CalculateDamage: ; 3ddcf (f:5dcf)
 	ld c, a
 	push bc
 	ld hl, $d195
-	ld a, [W_PLAYERMONNUMBER]
+	ld a, [wPlayerMonNumber]
 	ld bc, $002c
 	call AddNTimes					
 	pop bc
@@ -63403,7 +63403,7 @@ Func_3de75: ; 3de75 (f:5e75)
 	and a
 	jr z, .asm_3deef
 	ld hl, W_PARTYMON1_DEFENSE ; $d191
-	ld a, [W_PLAYERMONNUMBER] ; $cc2f
+	ld a, [wPlayerMonNumber] ; $cc2f
 	ld bc, $2c
 	call AddNTimes
 	ld a, [hli]
@@ -63431,7 +63431,7 @@ Func_3de75: ; 3de75 (f:5e75)
 	and a
 	jr z, .asm_3deef
 	ld hl, W_PARTYMON1_SPECIAL ; $d195
-	ld a, [W_PLAYERMONNUMBER] ; $cc2f
+	ld a, [wPlayerMonNumber] ; $cc2f
 	ld bc, $2c
 	call AddNTimes
 	ld a, [hli]
@@ -63727,14 +63727,14 @@ HandleCounterMove: ; 3e093 (f:6093)
 	ld a,[H_WHOSETURN] ; whose turn
 	and a
 ; player's turn
-	ld hl,W_ENEMYSELECTEDMOVE
+	ld hl,wEnemySelectedMove
 	ld de,W_ENEMYMOVEPOWER
-	ld a,[W_PLAYERSELECTEDMOVE]
+	ld a,[wPlayerSelectedMove]
 	jr z,.next
 ; enemy's turn
-	ld hl,W_PLAYERSELECTEDMOVE
+	ld hl,wPlayerSelectedMove
 	ld de,W_PLAYERMOVEPOWER
-	ld a,[W_ENEMYSELECTEDMOVE]
+	ld a,[wEnemySelectedMove]
 .next
 	cp a,COUNTER
 	ret nz ; return if not using Counter
@@ -63857,25 +63857,25 @@ ApplyDamageToEnemyPokemon: ; 3e142 (f:6142)
 	bit 4,a ; does the enemy have a substitute?
 	jp nz,AttackSubstitute
 ; subtract the damage from the pokemon's current HP
-; also, save the current HP at W_HPBAROLDHP
+; also, save the current HP at wHPBarOldHP
 	ld a,[hld]
 	ld b,a
 	ld a,[W_ENEMYMONCURHP + 1]
-	ld [W_HPBAROLDHP],a
+	ld [wHPBarOldHP],a
 	sub b
 	ld [W_ENEMYMONCURHP + 1],a
 	ld a,[hl]
 	ld b,a
 	ld a,[W_ENEMYMONCURHP]
-	ld [W_HPBAROLDHP+1],a
+	ld [wHPBarOldHP+1],a
 	sbc b
 	ld [W_ENEMYMONCURHP],a
 	jr nc,.animateHpBar
 ; if more damage was done than the current HP, zero the HP and set the damage
 ; equal to how much HP the pokemon had before the attack
-	ld a,[W_HPBAROLDHP+1]
+	ld a,[wHPBarOldHP+1]
 	ld [hli],a
-	ld a,[W_HPBAROLDHP]
+	ld a,[wHPBarOldHP]
 	ld [hl],a
 	xor a
 	ld hl,W_ENEMYMONCURHP
@@ -63884,14 +63884,14 @@ ApplyDamageToEnemyPokemon: ; 3e142 (f:6142)
 .animateHpBar
 	ld hl,W_ENEMYMONMAXHP
 	ld a,[hli]
-	ld [W_HPBARMAXHP+1],a
+	ld [wHPBarMaxHP+1],a
 	ld a,[hl]
-	ld [W_HPBARMAXHP],a
+	ld [wHPBarMaxHP],a
 	ld hl,W_ENEMYMONCURHP
 	ld a,[hli]
-	ld [W_HPBARNEWHP+1],a
+	ld [wHPBarNewHP+1],a
 	ld a,[hl]
-	ld [W_HPBARNEWHP],a
+	ld [wHPBarNewHP],a
 	FuncCoord 2, 2 ; $c3ca
 	ld hl,Coord
 	xor a
@@ -63978,40 +63978,40 @@ ApplyDamageToPlayerPokemon: ; 3e200 (f:6200)
 	bit 4,a ; does the player have a substitute?
 	jp nz,AttackSubstitute
 ; subtract the damage from the pokemon's current HP
-; also, save the current HP at W_HPBAROLDHP and the new HP at W_HPBARNEWHP
+; also, save the current HP at wHPBarOldHP and the new HP at wHPBarNewHP
 	ld a,[hld]
 	ld b,a
 	ld a,[W_PLAYERMONCURHP + 1]
-	ld [W_HPBAROLDHP],a
+	ld [wHPBarOldHP],a
 	sub b
 	ld [W_PLAYERMONCURHP + 1],a
-	ld [W_HPBARNEWHP],a
+	ld [wHPBarNewHP],a
 	ld b,[hl]
 	ld a,[W_PLAYERMONCURHP]
-	ld [W_HPBAROLDHP+1],a
+	ld [wHPBarOldHP+1],a
 	sbc b
 	ld [W_PLAYERMONCURHP],a
-	ld [W_HPBARNEWHP+1],a
+	ld [wHPBarNewHP+1],a
 	jr nc,.animateHpBar
 ; if more damage was done than the current HP, zero the HP and set the damage
 ; equal to how much HP the pokemon had before the attack
-	ld a,[W_HPBAROLDHP+1]
+	ld a,[wHPBarOldHP+1]
 	ld [hli],a
-	ld a,[W_HPBAROLDHP]
+	ld a,[wHPBarOldHP]
 	ld [hl],a
 	xor a
 	ld hl,W_PLAYERMONCURHP
 	ld [hli],a
 	ld [hl],a
-	ld hl,W_HPBARNEWHP
+	ld hl,wHPBarNewHP
 	ld [hli],a
 	ld [hl],a
 .animateHpBar
 	ld hl,W_PLAYERMONMAXHP
 	ld a,[hli]
-	ld [W_HPBARMAXHP+1],a
+	ld [wHPBarMaxHP+1],a
 	ld a,[hl]
-	ld [W_HPBARMAXHP],a
+	ld [wHPBarMaxHP],a
 	FuncCoord 10, 9 ; $c45e
 	ld hl,Coord
 	ld a,$01
@@ -64025,13 +64025,13 @@ AttackSubstitute: ; 3e25e (f:625e)
 	ld hl,SubstituteTookDamageText
 	call PrintText
 ; values for player turn
-	ld de,W_ENEMYSUBSITUTEHP
+	ld de,wEnemySubstituteHP
 	ld bc,W_ENEMYBATTSTATUS2
 	ld a,[H_WHOSETURN]
 	and a
 	jr z,.applyDamageToSubstitute
 ; values for enemy turn
-	ld de,W_PLAYERSUBSITUTEHP
+	ld de,wPlayerSubstituteHP
 	ld bc,W_PLAYERBATTSTATUS2
 .applyDamageToSubstitute
 	ld hl,W_DAMAGE
@@ -64081,14 +64081,14 @@ SubstituteBrokeText: ; 3e2b1 (f:62b1)
 HandleBuildingRage: ; 3e2b6 (f:62b6)
 ; values for the player turn
 	ld hl,W_ENEMYBATTSTATUS2
-	ld de,W_ENEMYMONATTACKMOD
+	ld de,wEnemyMonStatMods
 	ld bc,W_ENEMYMOVENUM
 	ld a,[H_WHOSETURN]
 	and a
 	jr z,.next
 ; values for the enemy turn
 	ld hl,W_PLAYERBATTSTATUS2
-	ld de,W_PLAYERMONATTACKMOD
+	ld de,wPlayerMonStatMods
 	ld bc,W_PLAYERMOVENUM
 .next
 	bit 6,[hl] ; is the pokemon being attacked under the effect of Rage?
@@ -64131,13 +64131,13 @@ MirrorMoveCopyMove: ; 3e2fd (f:62fd)
 	and a
 ; values for player turn
 	ld a,[$ccf2]
-	ld hl,W_PLAYERSELECTEDMOVE
+	ld hl,wPlayerSelectedMove
 	ld de,W_PLAYERMOVENUM
 	jr z,.next
 ; values for enemy turn
 	ld a,[$ccf1]
 	ld de,W_ENEMYMOVENUM
-	ld hl,W_ENEMYSELECTEDMOVE
+	ld hl,wEnemySelectedMove
 .next
 	ld [hl],a
 	cp a,MIRROR_MOVE ; did the target pokemon also use Mirror Move?
@@ -64180,13 +64180,13 @@ MetronomePickMove: ; 3e348 (f:6348)
 	call PlayMoveAnimation ; play Metronome's animation
 ; values for player turn
 	ld de,W_PLAYERMOVENUM
-	ld hl,W_PLAYERSELECTEDMOVE
+	ld hl,wPlayerSelectedMove
 	ld a,[H_WHOSETURN]
 	and a
 	jr z,.pickMoveLoop
 ; values for enemy turn
 	ld de,W_ENEMYMOVENUM
-	ld hl,W_ENEMYSELECTEDMOVE
+	ld hl,wEnemySelectedMove
 ; loop to pick a random number in the range [1, $a5) to be the move used by Metronome
 .pickMoveLoop
 	call GenRandomInBattle ; random number
@@ -64208,12 +64208,12 @@ IncrementMovePP: ; 3e373 (f:6373)
 ; values for player turn
 	ld hl,W_PLAYERMONPP
 	ld de,W_PARTYMON1_MOVE1PP
-	ld a,[W_PLAYERMOVELISTINDEX]
+	ld a,[wPlayerMoveListIndex]
 	jr z,.next
 ; values for enemy turn
 	ld hl,W_ENEMYMONPP
 	ld de,$d8c1 ; enemy party pokemon 1 PP
-	ld a,[W_ENEMYMOVELISTINDEX]
+	ld a,[wEnemyMoveListIndex]
 .next
 	ld b,$00
 	ld c,a
@@ -64224,7 +64224,7 @@ IncrementMovePP: ; 3e373 (f:6373)
 	add hl,bc
 	ld a,[H_WHOSETURN]
 	and a
-	ld a,[W_PLAYERMONNUMBER] ; value for player turn
+	ld a,[wPlayerMonNumber] ; value for player turn
 	jr z,.next2
 	ld a,[W_ENEMYMONNUMBER] ; value for enemy turn
 .next2
@@ -64600,16 +64600,16 @@ CalcHitChance: ; 3e624 (f:6624)
 	ld hl,W_PLAYERMOVEACCURACY
 	ld a,[H_WHOSETURN]
 	and a
-	ld a,[W_PLAYERMONACCURACYMOD]
+	ld a,[wPlayerMonAccuracyMod]
 	ld b,a
-	ld a,[W_ENEMYMONEVASIONMOD]
+	ld a,[wEnemyMonEvasionMod]
 	ld c,a
 	jr z,.next
 ; values for enemy turn
 	ld hl,W_ENEMYMOVEACCURACY
-	ld a,[W_ENEMYMONACCURACYMOD]
+	ld a,[wEnemyMonAccuracyMod]
 	ld b,a
-	ld a,[W_PLAYERMONEVASIONMOD]
+	ld a,[wPlayerMonEvasionMod]
 	ld c,a
 .next
 	ld a,$0e
@@ -64699,7 +64699,7 @@ Func_3e687: ; 3e687 (f:6687)
 	ret
 
 Func_3e6bc: ; 3e6bc (f:66bc)
-	ld a, [W_ENEMYSELECTEDMOVE] ; $ccdd
+	ld a, [wEnemySelectedMove] ; $ccdd
 	inc a
 	jp z, Func_3e88c
 	call Function5811
@@ -65063,7 +65063,7 @@ Func_3e9aa: ; 3e9aa (f:69aa)
 	ld a, [$ccef]
 	and a
 	jr z, .asm_3e9bf
-	ld hl, W_ENEMYSELECTEDMOVE ; $ccdd
+	ld hl, wEnemySelectedMove ; $ccdd
 	cp [hl]
 	jr nz, .asm_3e9bf
 	call Func_3da88
@@ -65207,7 +65207,7 @@ GetCurrentMove: ; 3eabe (f:6abe)
 	and a
 	jp z, .player
 	ld de, W_ENEMYMOVENUM ; $cfcc
-	ld a, [W_ENEMYSELECTEDMOVE] ; $ccdd
+	ld a, [wEnemySelectedMove] ; $ccdd
 	jr .selected
 .player
 	ld de, W_PLAYERMOVENUM ; $cfd2
@@ -65215,7 +65215,7 @@ GetCurrentMove: ; 3eabe (f:6abe)
 	bit 0, a
 	ld a, [$ccd9]
 	jr nz, .selected
-	ld a, [W_PLAYERSELECTEDMOVE] ; $ccdc
+	ld a, [wPlayerSelectedMove] ; $ccdc
 .selected
 	ld [$d0b5], a
 	dec a
@@ -65283,14 +65283,14 @@ Func_3eb01: ; 3eb01 (f:6b01)
 	jr .asm_3eb86
 .asm_3eb65
 	ld hl, W_ENEMYMON1HP ; $d8a5 (aliases: W_WATERMONS)
-	ld a, [W_WHICHPOKEMON] ; $cf92
+	ld a, [wWhichPokemon] ; $cf92
 	ld bc, $2c
 	call AddNTimes
 	ld a, [hli]
 	ld [W_ENEMYMONCURHP], a ; $cfe6
 	ld a, [hli]
 	ld [$cfe7], a
-	ld a, [W_WHICHPOKEMON] ; $cf92
+	ld a, [wWhichPokemon] ; $cf92
 	ld [W_ENEMYMONNUMBER], a ; $cfe8
 	inc hl
 	ld a, [hl]
@@ -65312,7 +65312,7 @@ Func_3eb01: ; 3eb01 (f:6b01)
 	cp $2
 	jr nz, .asm_3ebb0
 	ld hl, $d8ac
-	ld a, [W_WHICHPOKEMON] ; $cf92
+	ld a, [wWhichPokemon] ; $cf92
 	ld bc, $2c
 	call AddNTimes
 	ld bc, $4
@@ -65373,7 +65373,7 @@ Func_3eb01: ; 3eb01 (f:6b01)
 	dec a
 	ld c, a
 	ld b, $1
-	ld hl, W_SEENPOKEMON ; $d30a
+	ld hl, wPokedexSeen ; $d30a
 	ld a, $10
 	call Predef ; indirect jump to HandleBitArray (f666 (3:7666))
 	ld hl, W_ENEMYMONLEVEL ; $cff3
@@ -65382,7 +65382,7 @@ Func_3eb01: ; 3eb01 (f:6b01)
 	call CopyData
 	ld a, $7
 	ld b, $8
-	ld hl, W_ENEMYMONATTACKMOD ; $cd2e
+	ld hl, wEnemyMonStatMods ; $cd2e
 .asm_3ec2d
 	ld [hli], a
 	dec b
@@ -65394,7 +65394,7 @@ Func_3ec32: ; 3ec32 (f:6c32)
 	cp $4
 	jr nz, .asm_3ec4d
 	xor a
-	ld [W_MENUJOYPADPOLLCOUNT], a ; $cc34
+	ld [wMenuJoypadPollCount], a ; $cc34
 	ld hl, Func_372d6
 	ld b, BANK(Func_372d6)
 	call Bankswitch ; indirect jump to Func_372d6 (372d6 (d:72d6))
@@ -65450,7 +65450,7 @@ Func_3ec92: ; 3ec92 (f:6c92)
 	call UncompressSpriteFromDE
 	ld a, $3
 	call Predef ; indirect jump to ScaleSpriteByTwo (2fe40 (b:7e40))
-	ld hl, W_OAMBUFFER
+	ld hl, wOAMBuffer
 	xor a
 	ld [H_DOWNARROWBLINKCNT1], a ; $FF00+$8b
 	ld b, $7
@@ -65624,11 +65624,11 @@ Func_3eda5: ; 3eda5 (f:6da5)
 	ld a, c
 	ld hl, W_PLAYERMONATK
 	ld de, $cd12
-	ld bc, W_PLAYERMONATTACKMOD ; $cd1a
+	ld bc, wPlayerMonAttackMod ; $cd1a
 	jr z, .asm_3edc0
 	ld hl, W_ENEMYMONATTACK
 	ld de, $cd26
-	ld bc, W_ENEMYMONATTACKMOD ; $cd2e
+	ld bc, wEnemyMonStatMods ; $cd2e
 .asm_3edc0
 	add c
 	ld c, a
@@ -65900,7 +65900,7 @@ asm_3ef3d: ; 3ef3d (f:6f3d)
 	ld [W_ENEMYMONID], a
 	ld [$FF00+$e1], a
 	dec a
-	ld [W_AICOUNT], a ; $ccdf
+	ld [wAICount], a ; $ccdf
 	FuncCoord 12, 0 ; $c3ac
 	ld hl, Coord
 	ld a, $1
@@ -66472,7 +66472,7 @@ CheckDefrost: ; 3f3e2 (f:73e2)
 	ret nz
 	ld [W_PLAYERMONSTATUS], a
 	ld hl, $d16f
-	ld a, [W_PLAYERMONNUMBER]
+	ld a, [wPlayerMonNumber]
 	ld bc, $002c
 	call AddNTimes
 	xor a
@@ -66486,12 +66486,12 @@ UnnamedText_3f423: ; 3f423 (f:7423)
 	db "@"
 
 Func_3f428: ; 3f428 (f:7428)
-	ld hl, W_PLAYERMONATTACKMOD ; $cd1a
+	ld hl, wPlayerMonStatMods ; $cd1a
 	ld de, W_PLAYERMOVEEFFECT ; $cfd3
 	ld a, [H_WHOSETURN] ; $FF00+$f3
 	and a
 	jr z, .asm_3f439
-	ld hl, W_ENEMYMONATTACKMOD ; $cd2e
+	ld hl, wEnemyMonStatMods ; $cd2e
 	ld de, W_ENEMYMOVEEFFECT ; $cfcd
 .asm_3f439
 	ld a, [de]
@@ -66663,13 +66663,13 @@ UnnamedText_3f547: ; 3f547 (f:7547)
 	TX_FAR _UnnamedText_3f547
 	db "@"
 
-	ld hl, W_ENEMYMONATTACKMOD ; $cd2e
+	ld hl, wEnemyMonStatMods ; $cd2e
 	ld de, W_PLAYERMOVEEFFECT ; $cfd3
 	ld bc, W_ENEMYBATTSTATUS1 ; $d067
 	ld a, [H_WHOSETURN] ; $FF00+$f3
 	and a
 	jr z, .asm_3f572
-	ld hl, W_PLAYERMONATTACKMOD ; $cd1a
+	ld hl, wPlayerMonStatMods ; $cd1a
 	ld de, W_ENEMYMOVEEFFECT ; $cfcd
 	ld bc, W_PLAYERBATTSTATUS1 ; $d062
 	ld a, [W_ISLINKBATTLE] ; $d12b
@@ -67110,13 +67110,13 @@ UnnamedText_3f80c: ; 3f80c (f:780c)
 	ld a, b
 	call Func_3fbb9
 	ld a, [de]
-	ld [W_WHICHTRADE], a ; $cd3d
+	ld [wWhichTrade], a ; $cd3d
 	ld hl, Unknown_3f8c8 ; $78c8
 	jp PrintText
 
 Unknown_3f8c8: ; 3f8c8 (f:78c8)
 INCBIN "baserom.gbc",$3f8c8,$3f8cd - $3f8c8
-	ld a, [W_WHICHTRADE] ; $cd3d
+	ld a, [wWhichTrade] ; $cd3d
 	cp $d
 	ld hl, UnnamedText_3f8f9 ; $78f9
 	jr z, .asm_3f8f8
@@ -67476,12 +67476,12 @@ DisplayPokedexMenu_: ; 40000 (10:4000)
 	call GBPalWhiteOut
 	call ClearScreen
 	call UpdateSprites ; move sprites
-	ld a,[W_LISTSCROLLOFFSET]
+	ld a,[wListScrollOffset]
 	push af
 	xor a
-	ld [W_CURMENUITEMID],a
-	ld [W_LISTSCROLLOFFSET],a
-	ld [W_OLDMENUITEMID],a
+	ld [wCurrentMenuItem],a
+	ld [wListScrollOffset],a
+	ld [wLastMenuItem],a
 	inc a
 	ld [$d11e],a
 	ld [$ffb7],a
@@ -67492,7 +67492,7 @@ DisplayPokedexMenu_: ; 40000 (10:4000)
 	ld b,BANK(LoadPokedexTilePatterns)
 	call Bankswitch
 .doPokemonListMenu
-	ld hl,W_TOPMENUITEMY
+	ld hl,wTopMenuItemY
 	ld a,3
 	ld [hli],a ; top menu item Y
 	xor a
@@ -67509,13 +67509,13 @@ DisplayPokedexMenu_: ; 40000 (10:4000)
 .exitPokedex
 	xor a
 	ld [$cc37],a
-	ld [W_CURMENUITEMID],a
-	ld [W_OLDMENUITEMID],a
+	ld [wCurrentMenuItem],a
+	ld [wLastMenuItem],a
 	ld [$ffb7],a
 	ld [$cd3a],a
 	ld [$cd3b],a
 	pop af
-	ld [W_LISTSCROLLOFFSET],a
+	ld [wListScrollOffset],a
 	call GBPalWhiteOutWithDelay3
 	call GoPAL_SET_CF1C
 	jp ReloadMapData
@@ -67535,12 +67535,12 @@ DisplayPokedexMenu_: ; 40000 (10:4000)
 ; 02: the pokemon has not been seen yet or the player pressed the B button
 HandlePokedexSideMenu: ; 4006d (10:406d)
 	call PlaceUnfilledArrowMenuCursor
-	ld a,[W_CURMENUITEMID]
+	ld a,[wCurrentMenuItem]
 	push af
 	ld b,a
-	ld a,[W_OLDMENUITEMID]
+	ld a,[wLastMenuItem]
 	push af
-	ld a,[W_LISTSCROLLOFFSET]
+	ld a,[wListScrollOffset]
 	push af
 	add b
 	inc a
@@ -67549,12 +67549,12 @@ HandlePokedexSideMenu: ; 4006d (10:406d)
 	push af
 	ld a,[$cd3d]
 	push af
-	ld hl,W_SEENPOKEMON
+	ld hl,wPokedexSeen
 	call IsPokemonBitSet
 	ld b,2
 	jr z,.exitSideMenu
 	call PokedexToIndex
-	ld hl,W_TOPMENUITEMY
+	ld hl,wTopMenuItemY
 	ld a,10
 	ld [hli],a ; top menu item Y
 	ld a,15
@@ -67573,7 +67573,7 @@ HandlePokedexSideMenu: ; 4006d (10:406d)
 	bit 1,a ; was the B button pressed?
 	ld b,2
 	jr nz,.buttonBPressed
-	ld a,[W_CURMENUITEMID]
+	ld a,[wCurrentMenuItem]
 	and a
 	jr z,.choseData
 	dec a
@@ -67588,11 +67588,11 @@ HandlePokedexSideMenu: ; 4006d (10:406d)
 	pop af
 	ld [$d11e],a
 	pop af
-	ld [W_LISTSCROLLOFFSET],a
+	ld [wListScrollOffset],a
 	pop af
-	ld [W_OLDMENUITEMID],a
+	ld [wLastMenuItem],a
 	pop af
-	ld [W_CURMENUITEMID],a
+	ld [wCurrentMenuItem],a
 	push bc
 	FuncCoord 0,3
 	ld hl,Coord
@@ -67649,7 +67649,7 @@ HandlePokedexListMenu: ; 40111 (10:4111)
 	FuncCoord 14,9
 	ld hl,Coord
 	call DrawPokedexVerticalLine
-	ld hl,W_SEENPOKEMON
+	ld hl,wPokedexSeen
 	ld b,19
 	call CountSetBits
 	ld de,$d11e
@@ -67657,7 +67657,7 @@ HandlePokedexListMenu: ; 40111 (10:4111)
 	ld hl,Coord
 	ld bc,$0103
 	call PrintNumber ; print number of seen pokemon
-	ld hl,W_OWNEDPOKEMON
+	ld hl,wPokedexOwned
 	ld b,19
 	call CountSetBits
 	ld de,$d11e
@@ -67682,7 +67682,7 @@ HandlePokedexListMenu: ; 40111 (10:4111)
 	ld de,PokedexMenuItemsText
 	call PlaceString
 ; find the highest pokedex number among the pokemon the player has seen
-	ld hl,W_SEENPOKEMON + 18
+	ld hl,wPokedexSeen + 18
 	ld b,153
 .maxSeenPokemonLoop
 	ld a,[hld]
@@ -67706,7 +67706,7 @@ HandlePokedexListMenu: ; 40111 (10:4111)
 	call ClearScreenArea
 	FuncCoord 1,3
 	ld hl,Coord
-	ld a,[W_LISTSCROLLOFFSET]
+	ld a,[wListScrollOffset]
 	ld [$d11e],a
 	ld d,7
 	ld a,[$cd3d]
@@ -67714,7 +67714,7 @@ HandlePokedexListMenu: ; 40111 (10:4111)
 	jr nc,.printPokemonLoop
 	ld d,a
 	dec a
-	ld [W_MAXMENUITEMID],a
+	ld [wMaxMenuItem],a
 ; loop to print pokemon pokedex numbers and names
 ; if the player has owned the pokemon, it puts a pokeball beside the name
 .printPokemonLoop
@@ -67733,7 +67733,7 @@ HandlePokedexListMenu: ; 40111 (10:4111)
 	add hl,de
 	dec hl
 	push hl
-	ld hl,W_OWNEDPOKEMON
+	ld hl,wPokedexOwned
 	call IsPokemonBitSet
 	pop hl
 	ld a," "
@@ -67742,7 +67742,7 @@ HandlePokedexListMenu: ; 40111 (10:4111)
 .writeTile
 	ld [hl],a ; put a pokeball next to pokemon that the player has owned
 	push hl
-	ld hl,W_SEENPOKEMON
+	ld hl,wPokedexSeen
 	call IsPokemonBitSet
 	jr nz,.getPokemonName ; if the player has seen the pokemon
 	ld de,.dashedLine ; print a dashed line in place of the name if the player hasn't seen the pokemon
@@ -67775,11 +67775,11 @@ HandlePokedexListMenu: ; 40111 (10:4111)
 	bit 6,a ; was Up pressed?
 	jr z,.checkIfDownPressed
 .upPressed ; scroll up one row
-	ld a,[W_LISTSCROLLOFFSET]
+	ld a,[wListScrollOffset]
 	and a
 	jp z,.loop
 	dec a
-	ld [W_LISTSCROLLOFFSET],a
+	ld [wListScrollOffset],a
 	jp .loop
 .checkIfDownPressed
 	bit 7,a ; was Down pressed?
@@ -67790,11 +67790,11 @@ HandlePokedexListMenu: ; 40111 (10:4111)
 	jp c,.loop
 	sub a,7
 	ld b,a
-	ld a,[W_LISTSCROLLOFFSET]
+	ld a,[wListScrollOffset]
 	cp b
 	jp z,.loop
 	inc a
-	ld [W_LISTSCROLLOFFSET],a
+	ld [wListScrollOffset],a
 	jp .loop
 .checkIfRightPressed
 	bit 4,a ; was Right pressed?
@@ -67805,25 +67805,25 @@ HandlePokedexListMenu: ; 40111 (10:4111)
 	jp c,.loop
 	sub a,6
 	ld b,a
-	ld a,[W_LISTSCROLLOFFSET]
+	ld a,[wListScrollOffset]
 	add a,7
-	ld [W_LISTSCROLLOFFSET],a
+	ld [wListScrollOffset],a
 	cp b
 	jp c,.loop
 	dec b
 	ld a,b
-	ld [W_LISTSCROLLOFFSET],a
+	ld [wListScrollOffset],a
 	jp .loop
 .checkIfLeftPressed ; scroll up 7 rows
 	bit 5,a ; was Left pressed?
 	jr z,.buttonAPressed
 .leftPressed
-	ld a,[W_LISTSCROLLOFFSET]
+	ld a,[wListScrollOffset]
 	sub a,7
-	ld [W_LISTSCROLLOFFSET],a
+	ld [wListScrollOffset],a
 	jp nc,.loop
 	xor a
-	ld [W_LISTSCROLLOFFSET],a
+	ld [wListScrollOffset],a
 	jp .loop
 .buttonAPressed
 	scf
@@ -67972,7 +67972,7 @@ ShowPokedexDataInternal: ; 402e2 (10:42e2)
 	ld de,$d11e
 	ld bc,$8103
 	call PrintNumber ; print pokedex number
-	ld hl,W_OWNEDPOKEMON
+	ld hl,wPokedexOwned
 	call IsPokemonBitSet
 	pop af
 	ld [$d11e],a
@@ -69602,7 +69602,7 @@ PokedexOrder: ; 41024 (10:5024)
 	db DEX_VICTREEBEL
 
 Func_410e2: ; 410e2 (10:50e2)
-	ld a, [W_WHICHTRADE] ; $cd3d
+	ld a, [wWhichTrade] ; $cd3d
 	ld [$cd5e], a
 	ld a, [$cd3e]
 	ld [$cd5f], a
@@ -69672,7 +69672,7 @@ Func_41191: ; 41191 (10:5191)
 	jp DelayFrames
 
 Func_41196: ; 41196 (10:5196)
-	ld hl, W_SCREENTILESBUFFER
+	ld hl, wTileMap
 	ld bc, $168
 	ld a, $7f
 	jp FillMemory
@@ -69707,7 +69707,7 @@ Func_41196: ; 41196 (10:5196)
 	call EnableLCD
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
-	ld a, [W_WHICHTRADE] ; $cd3d
+	ld a, [wWhichTrade] ; $cd3d
 	ld [$d11e], a
 	call GetMonName
 	ld hl, $cd6d
@@ -69749,7 +69749,7 @@ INCBIN "baserom.gbc",$41217,$4123b - $41217
 	ld b, $98
 	call CopyScreenTileBufferToVRAM
 	call ClearScreen
-	ld a, [W_WHICHTRADE] ; $cd3d
+	ld a, [wWhichTrade] ; $cd3d
 	call Func_415a4
 	ld a, $7e
 .asm_41273
@@ -69767,7 +69767,7 @@ INCBIN "baserom.gbc",$41217,$4123b - $41217
 	call Func_41676
 	ld a, $aa
 	call Func_41676
-	ld a, [W_WHICHTRADE] ; $cd3d
+	ld a, [wWhichTrade] ; $cd3d
 	call PlayCry
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
@@ -70101,7 +70101,7 @@ Func_41505: ; 41505 (10:5505)
 	call Func_41558
 
 Func_41510: ; 41510 (10:5510)
-	ld hl, W_OAMBUFFER
+	ld hl, wOAMBuffer
 	ld c, $14
 .asm_41515
 	ld a, [W_BASECOORDY] ; $d082
@@ -70439,7 +70439,7 @@ AnimateIntroNidorino: ; 41793 (10:5793)
 	jr AnimateIntroNidorino
 
 Func_417ae: ; 417ae (10:57ae)
-	ld hl, W_OAMBUFFER
+	ld hl, wOAMBuffer
 	ld a, [$d09f]
 	ld d, a
 .asm_417b5
@@ -70458,7 +70458,7 @@ Func_417ae: ; 417ae (10:57ae)
 	ret
 
 Func_417c7: ; 417c7 (10:57c7)
-	ld hl, W_OAMBUFFER
+	ld hl, wOAMBuffer
 	ld d, $0
 .asm_417cc
 	push bc
@@ -70622,7 +70622,7 @@ Func_4188a: ; 4188a (10:588a)
 
 Func_418e9: ; 418e9 (10:58e9)
 	call Func_417f0
-	ld hl, W_SCREENTILESBUFFER
+	ld hl, wTileMap
 	ld c, $50
 	call Func_41807
 	FuncCoord 0, 14 ; $c4b8
@@ -70870,12 +70870,12 @@ LavenderTownText9: ; 44164 (11:4164)
 	db "@"
 
 DisplayDexRating: ; 44169 (11:4169)
-	ld hl, W_SEENPOKEMON
+	ld hl, wPokedexSeen
 	ld b, $13
 	call CountSetBits
 	ld a, [$D11E] ; result of CountSetBits (seen count)
 	ld [$FFDB], a
-	ld hl, W_OWNEDPOKEMON
+	ld hl, wPokedexOwned
 	ld b, $13
 	call CountSetBits
 	ld a, [$D11E] ; result of CountSetBits (own count)
@@ -71464,7 +71464,7 @@ SeafoamIslands1Script: ; 447e9 (11:47e9)
 	call EnableAutoTextBoxDrawing
 	ld hl, $d7e7
 	set 0, [hl]
-	ld hl, W_FLAGS_CD60
+	ld hl, wFlags_0xcd60
 	bit 7, [hl]
 	res 7, [hl]
 	jr z, .asm_4483b ; 0x447f8 $41
@@ -71613,14 +71613,14 @@ VictoryRoad3Script_Unknown44996: ; 44996 (11:4996)
 
 Unknown_449b1: ; 449b1 (11:49b1)
 INCBIN "baserom.gbc",$449b1,$449b7 - $449b1
-	ld hl, W_FLAGS_CD60
+	ld hl, wFlags_0xcd60
 	bit 7, [hl]
 	res 7, [hl]
 	jp z, .asm_449fe
 	ld hl, .unknown_449f9 ; $49f9
 	call CheckBoulderCoords
 	jp nc, .asm_449fe
-	ld a, [W_WHICHTRADE] ; $cd3d
+	ld a, [wWhichTrade] ; $cd3d
 	cp $1
 	jr nz, .asm_449dc
 	ld hl, $d126
@@ -71650,7 +71650,7 @@ INCBIN "baserom.gbc",$449f9,$449fe - $449f9
 	ld [$d71d], a
 	ld hl, .unknown_449f9 ; $49f9
 	call Func_46981
-	ld a, [W_WHICHTRADE] ; $cd3d
+	ld a, [wWhichTrade] ; $cd3d
 	cp $1
 	jr nz, .asm_44a1b
 	ld hl, $d72d
@@ -73481,7 +73481,7 @@ SeafoamIslands2_h: ; 0x46309 to 0x46315 (12 bytes) (bank=11) (id=159)
 
 SeafoamIslands2Script: ; 46315 (11:6315)
 	call EnableAutoTextBoxDrawing
-	ld hl, W_FLAGS_CD60
+	ld hl, wFlags_0xcd60
 	bit 7, [hl]
 	res 7, [hl]
 	jr z, .asm_46362 ; 0x4631f $41
@@ -73567,7 +73567,7 @@ SeafoamIslands3_h: ; 0x46445 to 0x46451 (12 bytes) (bank=11) (id=160)
 
 SeafoamIslands3Script: ; 46451 (11:6451)
 	call EnableAutoTextBoxDrawing
-	ld hl, W_FLAGS_CD60
+	ld hl, wFlags_0xcd60
 	bit 7, [hl]
 	res 7, [hl]
 	jr z, .asm_4649e ; 0x4645b $41
@@ -73653,7 +73653,7 @@ SeafoamIslands4_h: ; 0x46581 to 0x4658d (12 bytes) (bank=11) (id=161)
 
 SeafoamIslands4Script: ; 4658d (11:658d)
 	call EnableAutoTextBoxDrawing
-	ld hl, W_FLAGS_CD60
+	ld hl, wFlags_0xcd60
 	bit 7, [hl]
 	res 7, [hl]
 	jr z, .asm_465dc ; 0x46597 $43
@@ -73849,7 +73849,7 @@ SeafoamIslands5Script1: ; 46807 (11:6807)
 	and a
 	ret nz
 	xor a
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ld a, $0
 	ld [W_SEAFOAMISLANDS5CURSCRIPT], a
 	ret
@@ -73930,7 +73930,7 @@ Func_46981: ; 46981 (11:6981)
 	ret nz
 	call ArePlayerCoordsInArray
 	ret nc
-	ld a, [W_WHICHTRADE] ; $cd3d
+	ld a, [wWhichTrade] ; $cd3d
 	ld [$d71e], a
 	ld hl, $d72d
 	set 4, [hl]
@@ -73965,7 +73965,7 @@ Func_469a0: ; 469a0 (11:69a0)
 	ld h, [hl]
 	ld l, a
 	push hl
-	ld hl, W_WHICHTRADE ; $cd3d
+	ld hl, wWhichTrade ; $cd3d
 	xor a
 	ld [hli], a
 	ld [hli], a
@@ -73995,7 +73995,7 @@ Func_469a0: ; 469a0 (11:69a0)
 	jr .asm_469ce
 .asm_469f0
 	ld a, [hli]
-	ld [W_WHICHTRADE], a ; $cd3d
+	ld [wWhichTrade], a ; $cd3d
 	ld a, [hli]
 	ld [$cd3e], a
 	ld a, [hli]
@@ -75322,16 +75322,16 @@ Func_4840c: ; 4840c (12:440c)
 	ld hl, UnnamedText_484ee ; $44ee
 	call PrintText
 	xor a
-	ld [W_CURMENUITEMID], a ; $cc26
+	ld [wCurrentMenuItem], a ; $cc26
 	ld a, $3
-	ld [W_MENUWATCHEDKEYS], a ; $cc29
+	ld [wMenuWatchedKeys], a ; $cc29
 	ld a, [$cd37]
 	dec a
-	ld [W_MAXMENUITEMID], a ; $cc28
+	ld [wMaxMenuItem], a ; $cc28
 	ld a, $2
-	ld [W_TOPMENUITEMY], a ; $cc24
+	ld [wTopMenuItemY], a ; $cc24
 	ld a, $1
-	ld [W_TOPMENUITEMX], a ; $cc25
+	ld [wTopMenuItemX], a ; $cc25
 	ld a, [$cd37]
 	dec a
 	ld bc, $2
@@ -75340,7 +75340,7 @@ Func_4840c: ; 4840c (12:440c)
 	dec l
 	ld b, l
 	ld c, $c
-	ld hl, W_SCREENTILESBUFFER
+	ld hl, wTileMap
 	call TextBoxBorder
 	call UpdateSprites
 	call Func_48532
@@ -75350,7 +75350,7 @@ Func_4840c: ; 4840c (12:440c)
 	bit 1, a
 	ret nz
 	ld hl, $cc5b
-	ld a, [W_CURMENUITEMID] ; $cc26
+	ld a, [wCurrentMenuItem] ; $cc26
 	ld d, $0
 	ld e, a
 	add hl, de
@@ -75762,8 +75762,8 @@ DirectorText: ; 487b2 (12:47b2)
 	db $08 ; asm
 
 	; check pokédex
-	ld hl, WPokedexOwned
-	ld b, WPokedexOwnedEnd-WPokedexOwned
+	ld hl, wPokedexOwned
+	ld b, wPokedexOwnedEnd - wPokedexOwned
 	call CountSetBits
 	ld a, [$d11e]
 	cp 150
@@ -75958,7 +75958,7 @@ Gym4LeaderName: ; 4893d (12:493d)
 
 Func_48943: ; 48943 (12:4943)
 	xor a
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ld [W_CELADONGYMCURSCRIPT], a
 	ld [W_CURMAPSCRIPT], a
 	ret
@@ -75969,7 +75969,7 @@ INCBIN "baserom.gbc",$4894e,$48956 - $4894e
 	cp $ff
 	jp z, Func_48943
 	ld a, $f0
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 
 Func_48963: ; 48963 (12:4963)
 	ld a, $9
@@ -77125,7 +77125,7 @@ MtMoonPokecenterText4: ; 492ec (12:52ec)
 	call GivePokemon
 	jr nc, .asm_49359 ; 0x49324
 	xor a
-	ld [W_WHICHTRADE], a
+	ld [wWhichTrade], a
 	ld [$cd3f], a
 	ld a, $5
 	ld [$cd3e], a
@@ -77299,7 +77299,7 @@ Route11GateUpstairsTexts: ; 49457 (12:5457)
 Route11GateUpstairsText1: ; 4945f (12:545f)
 	db $08 ; asm
 	xor a
-	ld [W_WHICHTRADE], a
+	ld [wWhichTrade], a
 	ld a, $54
 	call Predef
 asm_49469: ; 49469 (12:5469)
@@ -77958,7 +77958,7 @@ Route18GateUpstairsTexts: ; 49978 (12:5978)
 Route18GateUpstairsText1: ; 4997e (12:597e)
 	db $08 ; asm
 	ld a, $5
-	ld [W_WHICHTRADE], a
+	ld [wWhichTrade], a
 	ld a, $54
 	call Predef
 	jp TextScriptEnd
@@ -78288,7 +78288,7 @@ INCBIN "baserom.gbc",$49d37,$49d58 - $49d37
 
 Func_49d58: ; 49d58 (12:5d58)
 	xor a
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ld [W_MTMOON3CURSCRIPT], a
 	ld [W_CURMAPSCRIPT], a
 	ret
@@ -78323,7 +78323,7 @@ Func_49d91: ; 49d91 (12:5d91)
 	ld hl, $d7f6
 	set 1, [hl]
 	xor a
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ld a, $0
 	ld [W_MTMOON3CURSCRIPT], a
 	ld [W_CURMAPSCRIPT], a
@@ -78365,7 +78365,7 @@ INCBIN "baserom.gbc",$49df9,$49dfb - $49df9
 	bit 0, a
 	ret nz
 	ld a, $f0
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ld a, $1
 	ld [$cc3c], a
 	ld a, $a
@@ -78383,7 +78383,7 @@ INCBIN "baserom.gbc",$49df9,$49dfb - $49df9
 	ld a, $11
 	call Predef ; indirect jump to RemoveMissableObject (f1d7 (3:71d7))
 	xor a
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ld a, $0
 	ld [W_MTMOON3CURSCRIPT], a
 	ld [W_CURMAPSCRIPT], a
@@ -79053,7 +79053,7 @@ Func_4fe11: ; 4fe11 (13:7e11)
 	ld a, [$d11e]
 	dec a
 	ld c, a
-	ld hl, W_OWNEDPOKEMON ; $d2f7
+	ld hl, wPokedexOwned ; $d2f7
 	ld b, $1
 	ld a, $10
 	call Predef ; indirect jump to HandleBitArray (f666 (3:7666))
@@ -80087,7 +80087,7 @@ INCBIN "baserom.gbc",$50ec6,$50ece - $50ec6
 
 Func_50ece: ; 50ece (14:4ece)
 	xor a
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ld [W_ROUTE22CURSCRIPT], a
 	ret
 
@@ -80132,7 +80132,7 @@ Route22Script0: ; 50f00 (14:4f00)
 	xor a
 	ld [H_CURRENTPRESSEDBUTTONS], a
 	ld a, $f0
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ld a, $2
 	ld [$d528], a
 	ld a, [$d7eb]
@@ -80190,7 +80190,7 @@ Route22Script1: ; 50f62 (14:4f62)
 	ld [$ff00+$8c], a
 	call Func_34a6
 	xor a
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ld a, $1
 	ld [$ff00+$8c], a
 	call DisplayTextID
@@ -80228,7 +80228,7 @@ Route22Script2: ; 50fb5 (14:4fb5)
 	ld [$ff00+$8c], a
 	call Func_34a6
 	ld a, $f0
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ld hl, $d7eb
 	set 5, [hl]
 	ld a, $1
@@ -80274,7 +80274,7 @@ Route22Script3: ; 5102a (14:502a)
 	bit 0, a
 	ret nz
 	xor a
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ld a, $22
 	ld [$cc4d], a
 	ld a, $11
@@ -80333,7 +80333,7 @@ Func_5104e: ; 5104e (14:504e)
 	ld [$FF00+$8d], a
 	call Func_34a6
 	xor a
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ld a, $2
 	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
 	call DisplayTextID
@@ -80373,7 +80373,7 @@ INCBIN "baserom.gbc",$510d9,$510df - $510d9
 	ld [$FF00+$8d], a
 	call Func_34a6
 	ld a, $f0
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ld hl, $d7eb
 	set 6, [hl]
 	ld a, $2
@@ -80417,7 +80417,7 @@ INCBIN "baserom.gbc",$5114d,$51151 - $5114d
 	bit 0, a
 	ret nz
 	xor a
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ld a, $23
 	ld [$cc4d], a
 	ld a, $11
@@ -80569,7 +80569,7 @@ INCBIN "baserom.gbc",$51255,$5125d - $51255
 
 Func_5125d: ; 5125d (14:525d)
 	ld hl, Unknown_51276 ; $5276
-	ld a, [W_WHICHTRADE] ; $cd3d
+	ld a, [wWhichTrade] ; $cd3d
 	ld c, a
 	ld b, $0
 	add hl, bc
@@ -80605,7 +80605,7 @@ Func_512d8: ; 512d8 (14:52d8)
 	ld [$ccd3], a
 	xor a
 	ld [$c109], a
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	jp Func_3486
 
 Route23Script1: ; 512ec (14:52ec)
@@ -80663,9 +80663,9 @@ Route23Text7: ; 5133d (14:533d)
 	jp TextScriptEnd
 
 Func_51346: ; 51346 (14:5346)
-	ld [W_WHICHTRADE], a ; $cd3d
+	ld [wWhichTrade], a ; $cd3d
 	call Func_5125d
-	ld a, [W_WHICHTRADE] ; $cd3d
+	ld a, [wWhichTrade] ; $cd3d
 	inc a
 	ld c, a
 	ld b, $2
@@ -80684,7 +80684,7 @@ Func_51346: ; 51346 (14:5346)
 .asm_5136e
 	ld hl, Unknown_5139e ; $539e
 	call PrintText
-	ld a, [W_WHICHTRADE] ; $cd3d
+	ld a, [wWhichTrade] ; $cd3d
 	ld c, a
 	ld b, $1
 	ld hl, $d7ed
@@ -80721,7 +80721,7 @@ Route24Script: ; 513ad (14:53ad)
 
 Func_513c0: ; 513c0 (14:53c0)
 	xor a
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ld [W_ROUTE24CURSCRIPT], a
 	ld [W_CURMAPSCRIPT], a
 	ret
@@ -80760,14 +80760,14 @@ INCBIN "baserom.gbc",$5140e,$51422 - $5140e
 	jp z, Func_513c0
 	call UpdateSprites
 	ld a, $f0
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ld hl, $d7ef
 	set 1, [hl]
 	ld a, $1
 	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
 	call DisplayTextID
 	xor a
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ld a, $0
 	ld [W_ROUTE24CURSCRIPT], a
 	ld [W_CURMAPSCRIPT], a
@@ -81366,7 +81366,7 @@ INCBIN "baserom.gbc",$517eb,$517f1 - $517eb
 	call CheckBoulderCoords
 	jp nc, CheckFightingMapTrainers
 	ld hl, $d7ee
-	ld a, [W_WHICHTRADE] ; $cd3d
+	ld a, [wWhichTrade] ; $cd3d
 	cp $2
 	jr z, .asm_5180b
 	bit 0, [hl]
@@ -81753,7 +81753,7 @@ Func_51bf4: ; 51bf4 (14:5bf4)
 
 Func_51c0c: ; 51c0c (14:5c0c)
 	xor a
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 
 Func_51c10: ; 51c10 (14:5c10)
 	ld [W_SILPHCO7CURSCRIPT], a
@@ -81771,7 +81771,7 @@ INCBIN "baserom.gbc",$51c17,$51c23 - $51c17
 	xor a
 	ld [H_CURRENTPRESSEDBUTTONS], a
 	ld a, $f0
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ld a, $4
 	ld [$d528], a
 	ld a, $ff
@@ -81787,7 +81787,7 @@ INCBIN "baserom.gbc",$51c17,$51c23 - $51c17
 	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
 	call SetSpriteMovementBytesToFF
 	ld de, Unknown_51c7d ; $5c7d
-	ld a, [W_WHICHTRADE] ; $cd3d
+	ld a, [wWhichTrade] ; $cd3d
 	ld [$cf0d], a
 	cp $1
 	jr z, .asm_51c6c
@@ -81808,7 +81808,7 @@ INCBIN "baserom.gbc",$51c7d,$51c82 - $51c7d
 	bit 0, a
 	ret nz
 	xor a
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ld a, $d
 	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
 	call DisplayTextID
@@ -81841,7 +81841,7 @@ INCBIN "baserom.gbc",$51c7d,$51c82 - $51c7d
 	cp $ff
 	jp z, Func_51c0c
 	ld a, $f0
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ld hl, $d82f
 	set 0, [hl]
 	ld a, $4
@@ -81886,7 +81886,7 @@ INCBIN "baserom.gbc",$51d1d,$51d25 - $51d1d
 	call Predef ; indirect jump to RemoveMissableObject (f1d7 (3:71d7))
 	call Func_2307
 	xor a
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	jp Func_51c10
 
 SilphCo7Texts: ; 51d3f (14:5d3f)
@@ -82414,7 +82414,7 @@ Func_5225b: ; 5225b (14:625b)
 	ret nz
 	call ArePlayerCoordsInArray
 	ret nc
-	ld a, [W_WHICHTRADE] ; $cd3d
+	ld a, [wWhichTrade] ; $cd3d
 	ld [$d71e], a
 	ld hl, $d72d
 	set 4, [hl]
@@ -82683,11 +82683,11 @@ Func_525af: ; 525af (14:65af)
 	ld [hli], a
 	ld [hli], a
 	ld [hl], a
-	ld [W_LISTSCROLLOFFSET], a ; $cc36
+	ld [wListScrollOffset], a ; $cc36
 	ld [$d05e], a
 	ld [W_PLAYERMONID], a
 	ld [W_PLAYERMONSALIVEFLAGS], a
-	ld [W_PLAYERMONNUMBER], a ; $cc2f
+	ld [wPlayerMonNumber], a ; $cc2f
 	ld [$d078], a
 	ld [$d35d], a
 	ld hl, $cf1d
@@ -83849,7 +83849,7 @@ Func_5524f: ; 5524f (15:524f)
 	call Func_5546c
 	ld hl, W_PARTYMON1_NUM ; $d16b (aliases: W_PARTYMON1DATA)
 	xor a
-	ld [W_WHICHPOKEMON], a ; $cf92
+	ld [wWhichPokemon], a ; $cf92
 
 Func_5525f: ; 5525f (15:525f)
 	inc hl
@@ -83858,7 +83858,7 @@ Func_5525f: ; 5525f (15:525f)
 	jp z, Func_55436
 	push hl
 	ld hl, W_PLAYERMONSALIVEFLAGS
-	ld a, [W_WHICHPOKEMON] ; $cf92
+	ld a, [wWhichPokemon] ; $cf92
 	ld c, a
 	ld b, $2
 	ld a, $10
@@ -83951,7 +83951,7 @@ Func_5525f: ; 5525f (15:525f)
 .asm_552f8
 	inc hl
 	push hl
-	ld a, [W_WHICHPOKEMON] ; $cf92
+	ld a, [wWhichPokemon] ; $cf92
 	ld c, a
 	ld b, $0
 	ld hl, W_PARTYMON1 ; $d164
@@ -83986,7 +83986,7 @@ Func_5525f: ; 5525f (15:525f)
 	dec hl
 .asm_5532e
 	push hl
-	ld a, [W_WHICHPOKEMON] ; $cf92
+	ld a, [wWhichPokemon] ; $cf92
 	ld hl, W_PARTYMON1NAME ; $d2b5
 	call GetPartyMonName
 	ld hl, Unknown_554b2 ; $54b2
@@ -84046,9 +84046,9 @@ Func_5525f: ; 5525f (15:525f)
 	ld a, [hl]
 	adc b
 	ld [hl], a
-	ld a, [W_PLAYERMONNUMBER] ; $cc2f
+	ld a, [wPlayerMonNumber] ; $cc2f
 	ld b, a
-	ld a, [W_WHICHPOKEMON] ; $cf92
+	ld a, [wWhichPokemon] ; $cf92
 	cp b
 	jr nz, .asm_553f7
 	ld de, W_PLAYERMONCURHP ; $d015
@@ -84108,7 +84108,7 @@ Func_5525f: ; 5525f (15:525f)
 	ld a, $1a
 	call Predef ; indirect jump to Func_3af5b (3af5b (e:6f5b))
 	ld hl, $ccd3
-	ld a, [W_WHICHPOKEMON] ; $cf92
+	ld a, [wWhichPokemon] ; $cf92
 	ld c, a
 	ld b, $1
 	ld a, $10
@@ -84120,11 +84120,11 @@ Func_5525f: ; 5525f (15:525f)
 Func_55436: ; 55436 (15:5436)
 	ld a, [W_NUMINPARTY] ; $d163
 	ld b, a
-	ld a, [W_WHICHPOKEMON] ; $cf92
+	ld a, [wWhichPokemon] ; $cf92
 	inc a
 	cp b
 	jr z, .asm_55450
-	ld [W_WHICHPOKEMON], a ; $cf92
+	ld [wWhichPokemon], a ; $cf92
 	ld bc, $2c
 	ld hl, W_PARTYMON1_NUM ; $d16b (aliases: W_PARTYMON1DATA)
 	call AddNTimes
@@ -84133,7 +84133,7 @@ Func_55436: ; 55436 (15:5436)
 	ld hl, W_PLAYERMONSALIVEFLAGS
 	xor a
 	ld [hl], a
-	ld a, [W_PLAYERMONNUMBER] ; $cc2f
+	ld a, [wPlayerMonNumber] ; $cc2f
 	ld c, a
 	ld b, $1
 	push bc
@@ -86944,7 +86944,7 @@ DisplayDiploma: ; 566e2 (15:66e2)
 	ld bc, $0010
 	ld a, BANK(CircleTile)
 	call FarCopyData2
-	ld hl, W_SCREENTILESBUFFER
+	ld hl, wTileMap
 	ld bc, $1012
 	ld a, $27
 	call Predef
@@ -87041,7 +87041,7 @@ DiplomaGameFreak:
 	db "GAME FREAK@"
 
 Func_567f9: ; 567f9 (15:67f9)
-	ld hl, $c100
+	ld hl, wSpriteStateData1
 	ld de, $4
 	ld a, [$cf13]
 	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
@@ -87060,7 +87060,7 @@ Func_567f9: ; 567f9 (15:67f9)
 	ret
 
 Func_56819: ; 56819 (15:6819)
-	ld hl, $c100
+	ld hl, wSpriteStateData1
 	ld de, $0004
 	ld a, [$cf13]
 	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
@@ -87079,7 +87079,7 @@ Func_56819: ; 56819 (15:6819)
 	ret
 
 Func_5683d: ; 5683d (15:683d)
-	ld hl, $c100
+	ld hl, wSpriteStateData1
 	ld de, $4
 	ld a, [$cf13]
 	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
@@ -87098,7 +87098,7 @@ Func_5683d: ; 5683d (15:683d)
 	ret
 
 Func_5685d: ; 5685d (15:685d)
-	ld hl, $c100
+	ld hl, wSpriteStateData1
 	ld de, $0004
 	ld a, [$cf13]
 	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
@@ -87119,9 +87119,9 @@ Func_5685d: ; 5685d (15:685d)
 TrainerWalkUpToPlayer: ; 56881 (15:6881)
 	ld a, [$cf13]
 	swap a
-	ld [W_TRAINERSPRITEOFFSET], a ; $cd3d
+	ld [wTrainerSpriteOffset], a ; $cd3d
 	call ReadTrainerScreenPosition
-	ld a, [W_TRAINERFACINGDIR]
+	ld a, [wTrainerFacingDirection]
 	and a
 	jr z, .facingDown
 	cp $4
@@ -87130,7 +87130,7 @@ TrainerWalkUpToPlayer: ; 56881 (15:6881)
 	jr z, .facingLeft
 	jr .facingRight
 .facingDown
-	ld a, [W_TRAINERSCREENYPOS]
+	ld a, [wTrainerScreenY]
 	ld b, a
 	ld a, $3c           ; (fixed) player screen Y pos
 	call CalcDifference
@@ -87143,7 +87143,7 @@ TrainerWalkUpToPlayer: ; 56881 (15:6881)
 	ld b, a           ; a = direction to go to
 	jr .writeWalkScript
 .facingUp
-	ld a, [W_TRAINERSCREENYPOS]
+	ld a, [wTrainerScreenY]
 	ld b, a
 	ld a, $3c           ; (fixed) player screen Y pos
 	call CalcDifference
@@ -87156,7 +87156,7 @@ TrainerWalkUpToPlayer: ; 56881 (15:6881)
 	ld a, $40           ; a = direction to go to
 	jr .writeWalkScript
 .facingRight
-	ld a, [W_TRAINERSCREENXPOS]
+	ld a, [wTrainerScreenX]
 	ld b, a
 	ld a, $40           ; (fixed) player screen X pos
 	call CalcDifference
@@ -87204,22 +87204,22 @@ Func_56903: ; 56903 (15:6903)
 CheckEngagePlayer: ; 5690f (15:690f)
 	push hl
 	push de
-	ld a, [W_TRAINERSPRITEOFFSET] ; $cd3d
+	ld a, [wTrainerSpriteOffset] ; $cd3d
 	add $2
 	ld d, $0
 	ld e, a
-	ld hl, $c100
+	ld hl, wSpriteStateData1
 	add hl, de
 	ld a, [hl]             ; c1x2: sprite image index
 	sub $ff
 	jr nz, .spriteOnScreen ; test if sprite is on screen
 	jp .noEngage
 .spriteOnScreen
-	ld a, [W_TRAINERSPRITEOFFSET] ; $cd3d
+	ld a, [wTrainerSpriteOffset] ; $cd3d
 	add $9
 	ld d, $0
 	ld e, a
-	ld hl, $c100
+	ld hl, wSpriteStateData1
 	add hl, de
 	ld a, [hl]             ; c1x9: facing direction
 	ld [$cd3f], a
@@ -87258,34 +87258,34 @@ CheckEngagePlayer: ; 5690f (15:690f)
 	jp .noEngage
 .engage
 	call CheckPlayerIsInFrontOfSprite
-	ld a, [W_TRAINERSPRITEOFFSET] ; $cd3d
+	ld a, [wTrainerSpriteOffset] ; $cd3d
 	and a
 	jr z, .noEngage
-	ld hl, W_FLAGS_CD60
+	ld hl, wFlags_0xcd60
 	set 0, [hl]
 	call EngageMapTrainer
 	ld a, $ff
 .noEngage: ; 56988 (15:6988)
-	ld [W_TRAINERSPRITEOFFSET], a ; $cd3d
+	ld [wTrainerSpriteOffset], a ; $cd3d
 	pop de
 	pop hl
 	ret
 
 ; reads trainer's Y position to $cd40 and X position to $cd41
 ReadTrainerScreenPosition: ; 5698e (15:698e)
-	ld a, [W_TRAINERSPRITEOFFSET] ; $cd3d
+	ld a, [wTrainerSpriteOffset] ; $cd3d
 	add $4
 	ld d, $0
 	ld e, a
-	ld hl, $c100
+	ld hl, wSpriteStateData1
 	add hl, de
 	ld a, [hl]
 	ld [$cd40], a
-	ld a, [W_TRAINERSPRITEOFFSET] ; $cd3d
+	ld a, [wTrainerSpriteOffset] ; $cd3d
 	add $6
 	ld d, $0
 	ld e, a
-	ld hl, $c100
+	ld hl, wSpriteStateData1
 	add hl, de
 	ld a, [hl]
 	ld [$cd41], a
@@ -87296,7 +87296,7 @@ ReadTrainerScreenPosition: ; 5698e (15:698e)
 ; a: distance player to sprite
 CheckSpriteCanSeePlayer: ; 569af (15:69af)
 	ld b, a
-	ld a, [W_TRAINERENGAGEDISTANCE]  ; sprite line of sight (engage distance)
+	ld a, [wTrainerEngageDistance]  ; sprite line of sight (engage distance)
 	cp b
 	jr nc, .checkIfLinedUp
 	jr .notInLine         ; player too far away
@@ -87334,11 +87334,11 @@ CheckPlayerIsInFrontOfSprite: ; 569e3 (15:69e3)
 	ld a, [W_CURMAP] ; $d35e
 	cp POWER_PLANT
 	jp z, .engage       ; XXX not sure why bypass this for power plant (maybe to get voltorb fake items to work?)
-	ld a, [W_TRAINERSPRITEOFFSET] ; $cd3d
+	ld a, [wTrainerSpriteOffset] ; $cd3d
 	add $4
 	ld d, $0
 	ld e, a
-	ld hl, $c100
+	ld hl, wSpriteStateData1
 	add hl, de
 	ld a, [hl]          ; c1x4 (sprite screen Y pos)
 	cp $fc
@@ -87346,11 +87346,11 @@ CheckPlayerIsInFrontOfSprite: ; 569e3 (15:69e3)
 	ld a, $c
 .notOnTopmostTile
 	ld [$cd40], a
-	ld a, [W_TRAINERSPRITEOFFSET] ; $cd3d
+	ld a, [wTrainerSpriteOffset] ; $cd3d
 	add $6
 	ld d, $0
 	ld e, a
-	ld hl, $c100
+	ld hl, wSpriteStateData1
 	add hl, de
 	ld a, [hl]          ; c1x6 (sprite screen X pos)
 	ld [$cd41], a
@@ -87385,7 +87385,7 @@ CheckPlayerIsInFrontOfSprite: ; 569e3 (15:69e3)
 .noEngage
 	xor a
 .done
-	ld [W_TRAINERSPRITEOFFSET], a ; $cd3d
+	ld [wTrainerSpriteOffset], a ; $cd3d
 	ret
 
 SECTION "bank16",ROMX,BANK[$16]
@@ -89218,7 +89218,7 @@ Route12Script: ; 595f3 (16:55f3)
 	ret
 .asm_59606
 	xor a
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ld [W_ROUTE12CURSCRIPT], a
 	ld [W_CURMAPSCRIPT], a
 	ret
@@ -89778,7 +89778,7 @@ Route16Script: ; 59933 (16:5933)
 
 Func_59946: ; 59946 (16:5946)
 	xor a
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ld [W_ROUTE16CURSCRIPT], a
 	ld [W_CURMAPSCRIPT], a
 	ret
@@ -90970,7 +90970,7 @@ INCBIN "baserom.gbc",$5a2fa,$5a305 - $5a2fa
 	jp nc, CheckFightingMapTrainers
 	xor a
 	ld [H_CURRENTPRESSEDBUTTONS], a
-	ld a, [W_WHICHTRADE] ; $cd3d
+	ld a, [wWhichTrade] ; $cd3d
 	cp $3
 	jr nc, .asm_5a325
 	ld a, $1
@@ -91001,7 +91001,7 @@ INCBIN "baserom.gbc",$5a33e,$5a349 - $5a33e
 	jp DisplayTextID
 .asm_5a35b
 	ld a, $ff
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ld hl, $ccd3
 	ld de, RLEList_5a379
 	call DecodeRLEList
@@ -91026,7 +91026,7 @@ Func_5a382: ; 5a382 (16:6382)
 	ret nz
 	call Delay3
 	xor a
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ld [W_LANCECURSCRIPT], a
 	ld [W_CURMAPSCRIPT], a
 	ret
@@ -91115,7 +91115,7 @@ HallofFameRoomScript2: ; 5a4bb (16:64bb)
 	ld a, [$d358]
 	push af
 	xor a
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ld a, $55
 	call Predef
 	pop af
@@ -91155,7 +91155,7 @@ HallofFameRoomScript2: ; 5a4bb (16:64bb)
 
 HallofFameRoomScript0: ; 5a50d (16:650d)
 	ld a, $ff
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ld hl, $ccd3
 	ld de, RLEMovement5a528
 	call DecodeRLEList
@@ -91184,14 +91184,14 @@ HallofFameRoomScript1: ; 5a52b (16:652b)
 	call Func_34a6
 	call Delay3
 	xor a
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	inc a
 	ld [$d528], a
 	ld a, $1
 	ld [$ff00+$8c], a
 	call DisplayTextID
 	ld a, $ff
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ld a, $8
 	ld [$cc4d], a
 	ld a, $11
@@ -91325,11 +91325,11 @@ RedsHouse2FObject: ; 0x5c0d0 ?
 
 Func_5c0dc: ; 5c0dc (17:40dc)
 	ld a, $4b
-	ld [W_OWNEDPOKEMON], a ; $d2f7
+	ld [wPokedexOwned], a ; $d2f7
 	ld a, $3d
 	call Predef ; indirect jump to ShowPokedexData (402d1 (10:42d1))
 	xor a
-	ld [W_OWNEDPOKEMON], a ; $d2f7
+	ld [wPokedexOwned], a ; $d2f7
 	ret
 
 MuseumF1_h: ; 0x5c0eb to 0x5c0f7 (12 bytes) (id=52)
@@ -91711,7 +91711,7 @@ Gym1LeaderName: ; 5c3b9 (17:43b9)
 
 Func_5c3bf: ; 5c3bf (17:43bf)
 	xor a
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ld [W_PEWTERGYMCURSCRIPT], a
 	ld [W_CURMAPSCRIPT], a
 	ret
@@ -91722,7 +91722,7 @@ INCBIN "baserom.gbc",$5c3ca,$5c3d2 - $5c3ca
 	cp $ff
 	jp z, Func_5c3bf
 	ld a, $f0
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 
 Func_5c3df: ; 5c3df (17:43df)
 	ld a, $4
@@ -92114,7 +92114,7 @@ Gym2LeaderName: ; 5c6e7 (17:46e7)
 
 Func_5c6ed: ; 5c6ed (17:46ed)
 	xor a
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ld [W_CERULEANGYMCURSCRIPT], a
 	ld [W_CURMAPSCRIPT], a
 	ret
@@ -92125,7 +92125,7 @@ INCBIN "baserom.gbc",$5c6f8,$5c700 - $5c6f8
 	cp $ff
 	jp z, Func_5c6ed
 	ld a, $f0
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 
 Func_5c70d: ; 5c70d (17:470d)
 	ld a, $5
@@ -92610,7 +92610,7 @@ Func_5ca6d: ; 5ca6d (17:4a6d)
 
 Func_5ca8a: ; 5ca8a (17:4a8a)
 	xor a
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ld [W_VERMILIONGYMCURSCRIPT], a
 	ld [W_CURMAPSCRIPT], a
 	ret
@@ -92621,7 +92621,7 @@ INCBIN "baserom.gbc",$5ca95,$5ca9d - $5ca95
 	cp $ff
 	jp z, Func_5ca8a
 	ld a, $f0
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 
 Func_5caaa: ; 5caaa (17:4aaa)
 	ld a, $6
@@ -93300,7 +93300,7 @@ Gym6LeaderName: ; 5d040 (17:5040)
 
 Func_5d048: ; 5d048 (17:5048)
 	xor a
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ld [W_SAFFRONGYMCURSCRIPT], a
 	ld [W_CURMAPSCRIPT], a
 	ret
@@ -93311,7 +93311,7 @@ INCBIN "baserom.gbc",$5d053,$5d05b - $5d053
 	cp $ff
 	jp z, Func_5d048
 	ld a, $f0
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 
 Func_5d068: ; 5d068 (17:5068)
 	ld a, $a
@@ -94031,7 +94031,7 @@ UndergroundTunnelEntranceRoute5Texts: ; 5d6b0 (17:56b0)
 UndergroundTunnelEntranceRoute5Text1: ; 5d6b2 (17:56b2)
 	db $08 ; asm
 	ld a, $9
-	ld [W_WHICHTRADE], a
+	ld [wWhichTrade], a
 	ld a, $54
 	call Predef
 	ld hl, UndergroundTunnelEntranceRoute5_5d6af
@@ -94678,7 +94678,7 @@ Unknown_5dc2a: ; 5dc2a (17:5c2a)
 .asm_5c51
 	ld hl, $d730
 	set 6, [hl]
-	ld hl, $c3a0
+	ld hl, wTileMap
 	ld b, $8
 	ld c, $d
 	call TextBoxBorder
@@ -94794,7 +94794,7 @@ UnnamedText_5ddf7: ; 5ddf7 (17:5df7)
 	db "@"
 
 	call EnableAutoTextBoxDrawing
-	ld a, [W_WHICHTRADE] ; $cd3d
+	ld a, [wWhichTrade] ; $cd3d
 	ld [$cd5b], a
 	ld a, [$d773]
 	bit 0, a
@@ -94978,7 +94978,7 @@ PokemonTower2Script: ; 604f2 (18:44f2)
 
 Func_604fe: ; 604fe (18:44fe)
 	xor a
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ld [W_POKEMONTOWER2CURSCRIPT], a
 	ld [W_CURMAPSCRIPT], a
 	ret
@@ -95033,7 +95033,7 @@ PokemonTower2Script1: ; 60563 (18:4563)
 	cp $ff
 	jp z, Func_604fe
 	ld a, $f0
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ld hl, $d764
 	set 7, [hl]
 	ld a, $1
@@ -95074,7 +95074,7 @@ PokemonTower2Script2: ; 605bb (18:45bb)
 	ld a, $11
 	call Predef
 	xor a
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	call Func_2307
 	ld a, $0
 	ld [W_POKEMONTOWER2CURSCRIPT], a
@@ -95460,7 +95460,7 @@ INCBIN "baserom.gbc",$60945,$6094b - $60945
 	xor a
 	ld [H_CURRENTPRESSEDBUTTONS], a
 	ld a, $f0
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ld hl, $d72e
 	set 4, [hl]
 	ld a, $7
@@ -95473,7 +95473,7 @@ INCBIN "baserom.gbc",$60945,$6094b - $60945
 	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
 	call DisplayTextID
 	xor a
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ret
 
 Unknown_60992: ; 60992 (18:4992)
@@ -95644,7 +95644,7 @@ PokemonTower6Script: ; 60aef (18:4aef)
 
 Func_60b02: ; 60b02 (18:4b02)
 	xor a
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ld [W_POKEMONTOWER6CURSCRIPT], a
 	ld [W_CURMAPSCRIPT], a
 	ret
@@ -95677,13 +95677,13 @@ INCBIN "baserom.gbc",$60b45,$60b48 - $60b45
 	cp $ff
 	jp z, Func_60b02
 	ld a, $ff
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ld a, [$d72d]
 	bit 6, a
 	ret nz
 	call UpdateSprites
 	ld a, $f0
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ld a, [$cf0b]
 	and a
 	jr nz, .asm_60b82
@@ -95693,7 +95693,7 @@ INCBIN "baserom.gbc",$60b45,$60b48 - $60b45
 	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
 	call DisplayTextID
 	xor a
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ld a, $0
 	ld [W_POKEMONTOWER6CURSCRIPT], a
 	ld [W_CURMAPSCRIPT], a
@@ -95871,21 +95871,21 @@ PokemonTower7Script: ; 60d05 (18:4d05)
 
 Func_60d18: ; 60d18 (18:4d18)
 	xor a
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ld [W_POKEMONTOWER7CURSCRIPT], a
 	ld [W_CURMAPSCRIPT], a
 	ret
 
 Unknown_60d23: ; 60d23 (18:4d23)
 INCBIN "baserom.gbc",$60d23,$60d2d - $60d23
-	ld hl, W_FLAGS_CD60
+	ld hl, wFlags_0xcd60
 	res 0, [hl]
 	ld a, [W_ISINBATTLE] ; $d057
 	cp $ff
 	jp z, Func_60d18
 	call EndTrainerBattle
 	ld a, $f0
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ld a, [$cf13]
 	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
 	call DisplayTextID
@@ -95909,16 +95909,16 @@ INCBIN "baserom.gbc",$60d23,$60d2d - $60d23
 	ld a, $11
 	call Predef ; indirect jump to RemoveMissableObject (f1d7 (3:71d7))
 	xor a
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ld [$cf13], a
-	ld [W_TRAINERHEADERFLAGBIT], a
+	ld [wTrainerHeaderFlagBit], a
 	ld [$da38], a
 	ld a, $0
 	ld [W_POKEMONTOWER7CURSCRIPT], a
 	ld [W_CURMAPSCRIPT], a
 	ret
 	ld a, $ff
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ld a, $43
 	ld [$cc4d], a
 	ld a, $11
@@ -96168,16 +96168,16 @@ GiveFossilToCinnabarLab: ; 61006 (18:5006)
 	ld hl, $d730
 	set 6, [hl]
 	xor a
-	ld [W_CURMENUITEMID], a ; $cc26
+	ld [wCurrentMenuItem], a ; $cc26
 	ld a, $3
-	ld [W_MENUWATCHEDKEYS], a ; $cc29
+	ld [wMenuWatchedKeys], a ; $cc29
 	ld a, [$cd37]
 	dec a
-	ld [W_MAXMENUITEMID], a ; $cc28
+	ld [wMaxMenuItem], a ; $cc28
 	ld a, $2
-	ld [W_TOPMENUITEMY], a ; $cc24
+	ld [wTopMenuItemY], a ; $cc24
 	ld a, $1
-	ld [W_TOPMENUITEMX], a ; $cc25
+	ld [wTopMenuItemX], a ; $cc25
 	ld a, [$cd37]
 	dec a
 	ld bc, $2
@@ -96186,7 +96186,7 @@ GiveFossilToCinnabarLab: ; 61006 (18:5006)
 	dec l
 	ld b, l
 	ld c, $d
-	ld hl, W_SCREENTILESBUFFER
+	ld hl, wTileMap
 	call TextBoxBorder
 	call UpdateSprites
 	call Func_610c2
@@ -96196,7 +96196,7 @@ GiveFossilToCinnabarLab: ; 61006 (18:5006)
 	bit 1, a
 	jr nz, .asm_610a7
 	ld hl, $cc5b
-	ld a, [W_CURMENUITEMID] ; $cc26
+	ld a, [wCurrentMenuItem] ; $cc26
 	ld d, $0
 	ld e, a
 	add hl, de
@@ -96221,7 +96221,7 @@ GiveFossilToCinnabarLab: ; 61006 (18:5006)
 	ld hl, UnnamedText_610ae
 	call PrintText
 	call YesNoChoice
-	ld a, [W_CURMENUITEMID] ; $cc26
+	ld a, [wCurrentMenuItem] ; $cc26
 	and a
 	jr nz, .asm_610a7
 	ld hl, UnnamedText_610b3
@@ -96554,7 +96554,7 @@ SSAnne2Script: ; 6139f (18:539f)
 
 Func_613ab: ; 613ab (18:53ab)
 	xor a
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ld [W_SSANNE2CURSCRIPT], a
 	ret
 
@@ -96587,7 +96587,7 @@ SSAnne2Script0: ; 613be (18:53be)
 	xor a
 	ld [H_CURRENTPRESSEDBUTTONS], a
 	ld a, $f0
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ld a, [$ff00+$db]
 	cp $2
 	jr nz, .asm_61400 ; 0x613f9 $5
@@ -96632,7 +96632,7 @@ SSAnne2Script1: ; 61430 (18:5430)
 	ret nz
 	call Func_61416
 	xor a
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ld a, $2
 	ld [$ff00+$8c], a
 	call DisplayTextID
@@ -96667,7 +96667,7 @@ SSAnne2Script2: ; 6146d (18:546d)
 	jp z, Func_613ab
 	call Func_61416
 	ld a, $f0
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ld a, $3
 	ld [$ff00+$8c], a
 	call DisplayTextID
@@ -96706,7 +96706,7 @@ SSAnne2Script3: ; 614be (18:54be)
 	bit 0, a
 	ret nz
 	xor a
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ld a, $71
 	ld [$cc4d], a
 	ld a, $11
@@ -98064,7 +98064,7 @@ INCBIN "baserom.gbc",$6219b,$621c4 - $6219b
 
 Func_621c4: ; 621c4 (18:61c4)
 	xor a
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 
 Func_621c8: ; 621c8 (18:61c8)
 	ld [W_SILPHCO11CURSCRIPT], a
@@ -98079,12 +98079,12 @@ INCBIN "baserom.gbc",$621cf,$621db - $621cf
 	ld hl, Unknown_62211 ; $6211
 	call ArePlayerCoordsInArray
 	jp nc, CheckFightingMapTrainers
-	ld a, [W_WHICHTRADE] ; $cd3d
+	ld a, [wWhichTrade] ; $cd3d
 	ld [$cf0d], a
 	xor a
 	ld [H_CURRENTPRESSEDBUTTONS], a
 	ld a, $f0
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ld a, $3
 	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
 	call DisplayTextID
@@ -98124,7 +98124,7 @@ Func_6221a: ; 6221a (18:621a)
 .asm_62240
 	call Func_6221a
 	ld a, $f0
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ld a, $6
 	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
 	call DisplayTextID
@@ -98136,7 +98136,7 @@ Func_6221a: ; 6221a (18:621a)
 	ld hl, $d838
 	set 7, [hl]
 	xor a
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	jp Func_621c8
 	ld a, [$d730]
 	bit 0, a
@@ -98169,7 +98169,7 @@ Func_6221a: ; 6221a (18:621a)
 	call EngageMapTrainer
 	call InitBattleEnemyParameters
 	xor a
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ld a, $5
 	jp Func_621c8
 
@@ -98632,7 +98632,7 @@ Func_70000: ; 70000 (1c:4000)
 	ld bc, $40
 	call CopyData
 	ld hl, GameFreakShootingStarOAMData ; $4180
-	ld de, W_OAMBUFFER
+	ld de, wOAMBuffer
 	ld bc, $10
 	jp CopyData
 
@@ -98640,7 +98640,7 @@ Func_70044: ; 70044 (1c:4044)
 	call Func_70000
 	ld a, $c2
 	call PlaySound
-	ld hl, W_OAMBUFFER
+	ld hl, wOAMBuffer
 	ld bc, $a004
 .asm_70052
 	push hl
@@ -98668,7 +98668,7 @@ Func_70044: ; 70044 (1c:4044)
 .asm_70070
 	cp b
 	jr nz, .asm_70052
-	ld hl, W_OAMBUFFER
+	ld hl, wOAMBuffer
 	ld c, $4
 	ld de, $4
 .asm_7007b
@@ -98686,7 +98686,7 @@ Func_70044: ; 70044 (1c:4044)
 	ret c
 	dec b
 	jr nz, .asm_70083
-	ld de, W_OAMBUFFER
+	ld de, wOAMBuffer
 	ld a, $18
 .asm_70098
 	push af
@@ -98697,7 +98697,7 @@ Func_70044: ; 70044 (1c:4044)
 	dec a
 	jr nz, .asm_70098
 	xor a
-	ld [W_WHICHTRADE], a ; $cd3d
+	ld [wWhichTrade], a ; $cd3d
 	ld hl, Unknown_700f2 ; $40f2
 	ld c, $6
 .asm_700af
@@ -98722,16 +98722,16 @@ Func_70044: ; 70044 (1c:4044)
 	inc hl
 	dec c
 	jr nz, .asm_700ba
-	ld a, [W_WHICHTRADE] ; $cd3d
+	ld a, [wWhichTrade] ; $cd3d
 	cp $18
 	jr z, .asm_700d5
 	add $6
-	ld [W_WHICHTRADE], a ; $cd3d
+	ld [wWhichTrade], a ; $cd3d
 .asm_700d5
 	call Func_7011f
 	push af
 	ld hl, $c310
-	ld de, W_OAMBUFFER
+	ld de, wOAMBuffer
 	ld bc, $50
 	call CopyData
 	pop af
@@ -98753,7 +98753,7 @@ Func_7011f: ; 7011f (1c:411f)
 	ld b, $8
 .asm_70121
 	ld hl, $c35c
-	ld a, [W_WHICHTRADE] ; $cd3d
+	ld a, [wWhichTrade] ; $cd3d
 	ld de, $fffc
 	ld c, a
 .asm_7012b
@@ -98845,7 +98845,7 @@ Func_701a0: ; 701a0 (1c:41a0)
 	inc c
 	push hl
 	push bc
-	ld [W_WHICHTRADE], a ; $cd3d
+	ld [wWhichTrade], a ; $cd3d
 	ld a, c
 	ld [$cd3e], a
 	ld hl, W_PARTYMON1_LEVEL ; $d18c
@@ -98881,7 +98881,7 @@ Func_701a0: ; 701a0 (1c:41a0)
 	ld [hl], $ff
 	call Func_73b0d
 	xor a
-	ld [W_WHICHTRADE], a ; $cd3d
+	ld [wWhichTrade], a ; $cd3d
 	inc a
 	ld [$cd40], a
 	call Func_70278
@@ -98902,7 +98902,7 @@ Func_70278: ; 70278 (1c:4278)
 	ld [$FF00+$af], a
 	ld a, $c0
 	ld [$FF00+$ae], a
-	ld a, [W_WHICHTRADE] ; $cd3d
+	ld a, [wWhichTrade] ; $cd3d
 	ld [$cf91], a
 	ld [$d0b5], a
 	ld [$cfd9], a
@@ -98975,13 +98975,13 @@ Func_702f0: ; 702f0 (1c:42f0)
 	FuncCoord 8, 7 ; $c434
 	ld hl, Coord
 	call PrintLevelCommon
-	ld a, [W_WHICHTRADE] ; $cd3d
+	ld a, [wWhichTrade] ; $cd3d
 	ld [$d0b5], a
 	FuncCoord 3, 9 ; $c457
 	ld hl, Coord
 	ld a, $4b
 	call Predef ; indirect jump to Func_27d6b (27d6b (9:7d6b))
-	ld a, [W_WHICHTRADE] ; $cd3d
+	ld a, [wWhichTrade] ; $cd3d
 	jp PlayCry
 
 HoFMonInfoText: ; 70329 (1c:4329)
@@ -99085,7 +99085,7 @@ Func_70404: ; 70404 (1c:4404)
 	ld bc, $10
 	ld a, [$cd3e]
 	call AddNTimes
-	ld a, [W_WHICHTRADE] ; $cd3d
+	ld a, [wWhichTrade] ; $cd3d
 	ld [hli], a
 	ld a, [$cd3f]
 	ld [hli], a
@@ -99225,7 +99225,7 @@ Func_70510: ; 70510 (1c:4510)
 	ld a, b
 	and a
 	jr nz, .asm_7055b
-	ld hl, W_WHICHTRADE ; $cd3d
+	ld hl, wWhichTrade ; $cd3d
 	xor a
 	ld [hli], a
 	inc a
@@ -99253,7 +99253,7 @@ Func_70510: ; 70510 (1c:4510)
 	call Func_706d7
 	ld a, $a4
 	call PlaySound
-	ld hl, W_WHICHTRADE ; $cd3d
+	ld hl, wWhichTrade ; $cd3d
 	xor a
 	ld [hli], a
 	ld a, $c
@@ -99268,7 +99268,7 @@ Unknown_70592: ; 70592 (1c:4592)
 INCBIN "baserom.gbc",$70592,$705aa - $70592
 
 Func_705aa: ; 705aa (1c:45aa)
-	ld hl, W_WHICHTRADE ; $cd3d
+	ld hl, wWhichTrade ; $cd3d
 	ld a, $10
 	ld [hli], a
 	ld a, $3c
@@ -99288,7 +99288,7 @@ _DoFlyOrTeleportAwayGraphics: ; 705ba (1c:45ba)
 .asm_705c8
 	ld a, $9f
 	call PlaySound
-	ld hl, W_WHICHTRADE ; $cd3d
+	ld hl, wWhichTrade ; $cd3d
 	ld a, $f0
 	ld [hli], a
 	ld a, $ec
@@ -99311,7 +99311,7 @@ _DoFlyOrTeleportAwayGraphics: ; 705ba (1c:45ba)
 	ld a, [$d732]
 	bit 6, a
 	jr z, .asm_70610
-	ld hl, W_WHICHTRADE ; $cd3d
+	ld hl, wWhichTrade ; $cd3d
 	ld a, $10
 	ld [hli], a
 	ld a, $ff
@@ -99324,7 +99324,7 @@ _DoFlyOrTeleportAwayGraphics: ; 705ba (1c:45ba)
 	jr .asm_705c8
 .asm_70610
 	call Func_706d7
-	ld hl, W_WHICHTRADE ; $cd3d
+	ld hl, wWhichTrade ; $cd3d
 	ld a, $ff
 	ld [hli], a
 	ld a, $8
@@ -99333,7 +99333,7 @@ _DoFlyOrTeleportAwayGraphics: ; 705ba (1c:45ba)
 	call Func_706ae
 	ld a, $a4
 	call PlaySound
-	ld hl, W_WHICHTRADE ; $cd3d
+	ld hl, wWhichTrade ; $cd3d
 	xor a
 	ld [hli], a
 	ld a, $c
@@ -99366,7 +99366,7 @@ Func_7067d: ; 7067d (1c:467d)
 	ld a, [$c306]
 	ld [$c30e], a
 	ld a, $a0
-	ld [W_OAMBUFFER], a
+	ld [wOAMBuffer], a
 	ld [$c304], a
 	ld c, $2
 	call DelayFrames
@@ -99384,7 +99384,7 @@ Func_706ae: ; 706ae (1c:46ae)
 	ld [$cd3f], a
 	ld [$c102], a
 	call Delay3
-	ld a, [W_WHICHTRADE] ; $cd3d
+	ld a, [wWhichTrade] ; $cd3d
 	cp $ff
 	jr z, .asm_706cd
 	ld hl, $c104
@@ -99448,7 +99448,7 @@ Func_70717: ; 70717 (1c:4717)
 
 Func_70730: ; 70730 (1c:4730)
 	call Func_70717
-	ld a, [W_WHICHTRADE] ; $cd3d
+	ld a, [wWhichTrade] ; $cd3d
 	ld c, a
 	and $3
 	jr nz, .asm_70743
@@ -99458,7 +99458,7 @@ Func_70730: ; 70730 (1c:4730)
 .asm_70743
 	ld a, [$cd3e]
 	add c
-	ld [W_WHICHTRADE], a ; $cd3d
+	ld [wWhichTrade], a ; $cd3d
 	ld c, a
 	ld a, [$cd3f]
 	cp c
@@ -99468,7 +99468,7 @@ Func_70730: ; 70730 (1c:4730)
 
 Func_70755: ; 70755 (1c:4755)
 	call Func_70717
-	ld a, [W_WHICHTRADE] ; $cd3d
+	ld a, [wWhichTrade] ; $cd3d
 	ld c, a
 	ld a, [$c104]
 	add c
@@ -99548,7 +99548,7 @@ Func_707b6: ; 707b6 (1c:47b6)
 	call CopyData
 	ld c, $64
 	call DelayFrames
-	ld a, [W_WHICHTRADE] ; $cd3d
+	ld a, [wWhichTrade] ; $cd3d
 	and a
 	ld hl, UnnamedText_70847 ; $4847
 	jr z, .asm_70836
@@ -99643,7 +99643,7 @@ _HandleMidJump: ; 7087e (1c:487e)
 	ld hl, $d730
 	res 7, [hl]
 	xor a
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ret
 
 Unknown_708ba: ; 708ba (1c:48ba)
@@ -99706,7 +99706,7 @@ Func_7092a: ; 7092a (1c:492a)
 	ld [W_BASECOORDY], a ; $d082
 	ld a, $70
 	ld [W_BASECOORDX], a ; $d081
-	ld hl, W_OAMBUFFER
+	ld hl, wOAMBuffer
 	ld bc, $606
 	ld d, $8
 .asm_70948
@@ -99923,8 +99923,8 @@ Func_70a69: ; 70a69 (1c:4a69)
 
 Func_70aaa: ; 70aaa (1c:4aaa)
 	ld a, $7
-	ld [W_WHICHTRADE], a ; $cd3d
-	ld hl, W_SCREENTILESBUFFER
+	ld [wWhichTrade], a ; $cd3d
+	ld hl, wTileMap
 	ld c, $11
 	ld de, $14
 	call Func_70ae0
@@ -99957,13 +99957,13 @@ Func_70ae0: ; 70ae0 (1c:4ae0)
 	ld [hl], $ff
 	add hl, de
 	push bc
-	ld a, [W_WHICHTRADE] ; $cd3d
+	ld a, [wWhichTrade] ; $cd3d
 	dec a
 	jr nz, .asm_70af0
 	call Func_70d19
 	ld a, $7
 .asm_70af0
-	ld [W_WHICHTRADE], a ; $cd3d
+	ld [wWhichTrade], a ; $cd3d
 	pop bc
 	dec c
 	jr nz, .asm_70ae1
@@ -100106,7 +100106,7 @@ INCBIN "baserom.gbc",$70b72,$70b7f - $70b72
 	call Func_70c12
 	FuncCoord 0, 1 ; $c3b4
 	ld hl, Coord
-	ld de, W_SCREENTILESBUFFER
+	ld de, wTileMap
 	ld bc, $28
 	call Func_70c12
 	FuncCoord 18, 0 ; $c3b2
@@ -100117,7 +100117,7 @@ INCBIN "baserom.gbc",$70b72,$70b7f - $70b72
 	call Func_70c3f
 	FuncCoord 1, 0 ; $c3a1
 	ld hl, Coord
-	ld de, W_SCREENTILESBUFFER
+	ld de, wTileMap
 	ld bc, $2
 	call Func_70c3f
 	call Func_70d19
@@ -100131,7 +100131,7 @@ INCBIN "baserom.gbc",$70b72,$70b7f - $70b72
 
 Func_70c12: ; 70c12 (1c:4c12)
 	ld a, c
-	ld [W_WHICHTRADE], a ; $cd3d
+	ld [wWhichTrade], a ; $cd3d
 	ld a, b
 	ld [$cd3e], a
 	ld c, $8
@@ -100143,7 +100143,7 @@ Func_70c12: ; 70c12 (1c:4c12)
 	call CopyData
 	pop hl
 	pop de
-	ld a, [W_WHICHTRADE] ; $cd3d
+	ld a, [wWhichTrade] ; $cd3d
 	ld c, a
 	ld a, [$cd3e]
 	ld b, a
@@ -100163,7 +100163,7 @@ Func_70c12: ; 70c12 (1c:4c12)
 
 Func_70c3f: ; 70c3f (1c:4c3f)
 	ld a, c
-	ld [W_WHICHTRADE], a ; $cd3d
+	ld [wWhichTrade], a ; $cd3d
 	ld a, b
 	ld [$cd3e], a
 	ld c, $9
@@ -100191,7 +100191,7 @@ Func_70c3f: ; 70c3f (1c:4c3f)
 	jr nz, .asm_70c4e
 	pop hl
 	pop de
-	ld a, [W_WHICHTRADE] ; $cd3d
+	ld a, [wWhichTrade] ; $cd3d
 	ld c, a
 	ld a, [$cd3e]
 	ld b, a
@@ -100210,7 +100210,7 @@ Func_70c3f: ; 70c3f (1c:4c3f)
 	jr nz, .asm_70c77
 	ret
 	ld c, $12
-	ld hl, W_SCREENTILESBUFFER
+	ld hl, wTileMap
 	FuncCoord 1, 17 ; $c4f5
 	ld de, Coord
 	xor a
@@ -100247,7 +100247,7 @@ Func_70caa: ; 70caa (1c:4caa)
 	jr nz, .asm_70cac
 	ret
 	ld c, $14
-	ld hl, W_SCREENTILESBUFFER
+	ld hl, wTileMap
 	FuncCoord 19, 1 ; $c3c7
 	ld de, Coord
 	xor a
@@ -100326,7 +100326,7 @@ Func_70d19: ; 70d19 (1c:4d19)
 	jp Func_70a69
 
 Func_70d50: ; 70d50 (1c:4d50)
-	ld [W_WHICHTRADE], a ; $cd3d
+	ld [wWhichTrade], a ; $cd3d
 	ld a, [hli]
 	ld [$cd3e], a
 	ld a, [hli]
@@ -100362,7 +100362,7 @@ asm_70dc5
 	dec c
 	jr nz, .asm_70dc9
 	pop hl
-	ld a, [W_WHICHTRADE] ; $cd3d
+	ld a, [wWhichTrade] ; $cd3d
 	and a
 	ld bc, $14
 	jr z, .asm_70de5
@@ -100408,8 +100408,8 @@ Func_70e3e: ; 70e3e (1c:4e3e)
 	ld hl, Coord
 	ld de, $cd6d
 	call PlaceString
-	ld hl, W_OAMBUFFER
-	ld de, W_SCREENTILESBACKBUFFER
+	ld hl, wOAMBuffer
+	ld de, wTileMapBackup
 	ld bc, $10
 	call CopyData
 	ld hl, $8040
@@ -100417,16 +100417,16 @@ Func_70e3e: ; 70e3e (1c:4e3e)
 	ld bc, (BANK(TownMapCursor) << 8) + $04
 	call CopyVideoDataDouble
 	xor a
-	ld [W_WHICHTRADE], a ; $cd3d
+	ld [wWhichTrade], a ; $cd3d
 	pop af
 	jr asm_70e92
 
 Func_70e7e: ; 70e7e (1c:4e7e)
-	ld hl, W_SCREENTILESBUFFER
+	ld hl, wTileMap
 	ld bc, $114
 	call ClearScreenArea
 	ld hl, TownMapOrder ; $4f11
-	ld a, [W_WHICHTRADE] ; $cd3d
+	ld a, [wWhichTrade] ; $cd3d
 	ld c, a
 	ld b, $0
 	add hl, bc
@@ -100480,22 +100480,22 @@ asm_70e92: ; 70e92 (1c:4e92)
 	ld [hl], a
 	ret
 .asm_70ef2
-	ld a, [W_WHICHTRADE] ; $cd3d
+	ld a, [wWhichTrade] ; $cd3d
 	inc a
 	cp $2f
 	jr nz, .asm_70efb
 	xor a
 .asm_70efb
-	ld [W_WHICHTRADE], a ; $cd3d
+	ld [wWhichTrade], a ; $cd3d
 	jp Func_70e7e
 .asm_70f01
-	ld a, [W_WHICHTRADE] ; $cd3d
+	ld a, [wWhichTrade] ; $cd3d
 	dec a
 	cp $ff
 	jr nz, .asm_70f0b
 	ld a, $2e
 .asm_70f0b
-	ld [W_WHICHTRADE], a ; $cd3d
+	ld [wWhichTrade], a ; $cd3d
 	jp Func_70e7e
 
 TownMapOrder: ; 70f11 (1c:4f11)
@@ -100595,7 +100595,7 @@ Func_70f90: ; 70f90 (1c:4f90)
 	push af
 	ld [hl], $ff
 	push hl
-	ld hl, W_SCREENTILESBUFFER
+	ld hl, wTileMap
 	ld de, ToText ; $506d
 	call PlaceString
 	ld a, [W_CURMAP] ; $d35e
@@ -100697,7 +100697,7 @@ ToText: ; 7106d (1c:506d)
 	db "To@"
 
 Func_71070: ; 71070 (1c:5070)
-	ld hl, W_WHICHTRADE ; $cd3d
+	ld hl, wWhichTrade ; $cd3d
 	ld [hl], $ff
 	inc hl
 	ld a, [$d70b]
@@ -100727,7 +100727,7 @@ Func_7109b: ; 7109b (1c:509b)
 	call GBPalWhiteOutWithDelay3
 	call ClearScreen
 	call UpdateSprites
-	ld hl, W_SCREENTILESBUFFER
+	ld hl, wTileMap
 	ld b, $12
 	ld c, $12
 	call TextBoxBorder
@@ -100742,7 +100742,7 @@ Func_7109b: ; 7109b (1c:509b)
 	ld bc, $8
 	ld a, BANK(MonNestIcon)
 	call FarCopyDataDouble
-	ld hl, W_SCREENTILESBUFFER
+	ld hl, wTileMap
 	ld de, CompressedMap ; $5100
 .asm_710d3
 	ld a, [de]
@@ -100807,8 +100807,8 @@ Func_711c4: ; 711c4 (1c:51c4)
 	inc de
 	cp $50
 	jr nz, .asm_711dc
-	ld hl, W_OAMBUFFER
-	ld de, W_SCREENTILESBACKBUFFER
+	ld hl, wOAMBuffer
+	ld de, wTileMapBackup
 	ld bc, $a0
 	jp CopyData
 
@@ -100817,7 +100817,7 @@ Func_711ef: ; 711ef (1c:51ef)
 	ld hl, Func_e9cb
 	call Bankswitch ; indirect jump to Func_e9cb (e9cb (3:69cb))
 	call Func_712d9
-	ld hl, W_OAMBUFFER
+	ld hl, wOAMBuffer
 	ld de, $cee9
 .asm_71200
 	ld a, [de]
@@ -100858,8 +100858,8 @@ Func_711ef: ; 711ef (1c:51ef)
 	ld b, $0
 	call Func_711c4
 .asm_7123e
-	ld hl, W_OAMBUFFER
-	ld de, W_SCREENTILESBACKBUFFER
+	ld hl, wOAMBuffer
+	ld de, wTileMapBackup
 	ld bc, $a0
 	jp CopyData
 
@@ -101236,14 +101236,14 @@ Func_716c6: ; 716c6 (1c:56c6)
 	jr z, .asm_716e1
 	cp $32
 	jr nz, .asm_716f1
-	ld hl, W_SCREENTILESBACKBUFFER
-	ld de, W_OAMBUFFER
+	ld hl, wTileMapBackup
+	ld de, wOAMBuffer
 	ld bc, $90
 	call CopyData
 	xor a
 	jr .asm_716f1
 .asm_716e1
-	ld hl, W_OAMBUFFER
+	ld hl, wOAMBuffer
 	ld b, $24
 	ld de, $4
 .asm_716e9
@@ -101258,14 +101258,14 @@ Func_716c6: ; 716c6 (1c:56c6)
 
 Func_716f7: ; 716f7 (1c:56f7)
 	xor a
-	ld [W_CURMENUITEMID], a ; $cc26
+	ld [wCurrentMenuItem], a ; $cc26
 	ld b, a
 	inc a
 	jr asm_7170a
 
 Func_716ff: ; 716ff (1c:56ff)
 	ld hl, $cf1f
-	ld a, [W_CURMENUITEMID] ; $cc26
+	ld a, [wCurrentMenuItem] ; $cc26
 	ld c, a
 	ld b, $0
 	add hl, bc
@@ -101296,7 +101296,7 @@ asm_7170a: ; 7170a (1c:570a)
 .asm_7172c
 	push bc
 	ld hl, $cc5b
-	ld de, W_OAMBUFFER
+	ld de, wOAMBuffer
 	ld bc, $60
 	call CopyData
 	pop bc
@@ -101306,7 +101306,7 @@ asm_7170a: ; 7170a (1c:570a)
 	push bc
 	ld hl, $c302
 	ld bc, $10
-	ld a, [W_CURMENUITEMID] ; $cc26
+	ld a, [wCurrentMenuItem] ; $cc26
 	call AddNTimes
 	ld c, $40
 	ld a, [hl]
@@ -101450,7 +101450,7 @@ asm_718c3: ; 718c3 (1c:58c3)
 .asm_718da
 	call Func_71281
 .asm_718dd
-	ld hl, W_OAMBUFFER
+	ld hl, wOAMBuffer
 	ld de, $cc5b
 	ld bc, $60
 	jp CopyData
@@ -101559,10 +101559,10 @@ MonOverworldSprites:
 	INCBIN "gfx/mon_ow_sprites.2bpp"
 
 Predef54: ; 71ad9 (1c:5ad9)
-; trigger the trade offer/action specified by W_WHICHTRADE
+; trigger the trade offer/action specified by wWhichTrade
 	call SaveScreenTilesToBuffer2
 	ld hl,TradeMons
-	ld a,[W_WHICHTRADE]
+	ld a,[wWhichTrade]
 	ld b,a
 	swap a
 	sub b
@@ -101596,7 +101596,7 @@ Predef54: ; 71ad9 (1c:5ad9)
 	ld de,$cd1e
 	call Function71b6a
 	ld hl,$d737
-	ld a,[W_WHICHTRADE]
+	ld a,[wWhichTrade]
 	ld c,a
 	ld b,$2
 	ld a,$10
@@ -101680,7 +101680,7 @@ Function71c07: ; 71c07 (1c:5c07)
 	ld a,[hl]
 	ld [$d127],a
 	ld hl,$d737
-	ld a,[W_WHICHTRADE]
+	ld a,[wWhichTrade]
 	ld c,a
 	ld b,$1
 	ld a,$10
@@ -101740,14 +101740,14 @@ Func_71ca2: ; 71ca2 (1c:5ca2)
 	jp Bankswitch ; indirect jump to LoadWildData (ceb8 (3:4eb8))
 
 Func_71cc1: ; 71cc1 (1c:5cc1)
-	ld hl, W_WHICHTRADE ; $cd3d
+	ld hl, wWhichTrade ; $cd3d
 	ld a, [$cd0f]
 	ld [hli], a
 	ld a, [$cd34]
 	ld [hl], a
 	ld hl, W_PARTYMON1OT ; $d273
 	ld bc, $b
-	ld a, [W_WHICHPOKEMON] ; $cf92
+	ld a, [wWhichPokemon] ; $cf92
 	call AddNTimes
 	ld de, $cd41
 	ld bc, $b
@@ -101759,7 +101759,7 @@ Func_71cc1: ; 71cc1 (1c:5cc1)
 	call Func_71d11
 	ld hl, W_PARTYMON1_OTID ; $d177
 	ld bc, $2c
-	ld a, [W_WHICHPOKEMON] ; $cf92
+	ld a, [wWhichPokemon] ; $cf92
 	call AddNTimes
 	ld de, $cd4c
 	ld bc, $2
@@ -102973,13 +102973,13 @@ LoadSAVCheckSum: ; 73623 (1c:7623)
 	ld bc, $b
 	call CopyData
 	ld hl, $a5a3
-	ld de, W_OWNEDPOKEMON ; $d2f7
+	ld de, wPokedexOwned ; $d2f7
 	ld bc, $789
 	call CopyData
 	ld hl, W_CURMAPTILESET ; $d367
 	set 7, [hl]
 	ld hl, $ad2c
-	ld de, $c100
+	ld de, wSpriteStateData1
 	ld bc, $200
 	call CopyData
 	ld a, [$b522]
@@ -103029,7 +103029,7 @@ LoadSAVCheckSum2: ; 736bd (1c:76bd)
 	ld bc, $194
 	call CopyData
 	ld hl, $a5a3
-	ld de, W_OWNEDPOKEMON ; $d2f7
+	ld de, wPokedexOwned ; $d2f7
 	ld bc, $26
 	call CopyData
 	and a
@@ -103123,11 +103123,11 @@ SaveSAVtoSRAM0: ; 7378c (1c:778c)
 	ld de, $a598
 	ld bc, $b
 	call CopyData
-	ld hl, W_OWNEDPOKEMON ; $d2f7
+	ld hl, wPokedexOwned ; $d2f7
 	ld de, $a5a3
 	ld bc, $789
 	call CopyData
-	ld hl, $c100 ; OAM?
+	ld hl, wSpriteStateData1 ; OAM?
 	ld de, $ad2c
 	ld bc, $200
 	call CopyData
@@ -103176,7 +103176,7 @@ SaveSAVtoSRAM2: ; 7380f (1c:780f)
 	ld de, $af2c
 	ld bc, $194
 	call CopyData
-	ld hl, W_OWNEDPOKEMON ; pokédex only
+	ld hl, wPokedexOwned ; pokédex only
 	ld de, $a5a3
 	ld bc, $26
 	call CopyData
@@ -103254,7 +103254,7 @@ Func_738a1: ; 738a1 (1c:78a1)
 	ld hl, UnnamedText_73909 ; $7909
 	call PrintText
 	call YesNoChoice
-	ld a, [W_CURMENUITEMID] ; $cc26
+	ld a, [wCurrentMenuItem] ; $cc26
 	and a
 	ret nz
 	ld hl, $d5a0
@@ -103274,14 +103274,14 @@ Func_738a1: ; 738a1 (1c:78a1)
 	ld d, h
 	ld hl, W_NUMINBOX ; $da80
 	call Func_7390e
-	ld a, [W_CURMENUITEMID] ; $cc26
+	ld a, [wCurrentMenuItem] ; $cc26
 	set 7, a
 	ld [$d5a0], a
 	call Func_7387b
 	ld de, W_NUMINBOX ; $da80
 	call Func_7390e
 	ld hl, W_MAPTEXTPTR ; $d36c
-	ld de, W_WHICHTRADE ; $cd3d
+	ld de, wWhichTrade ; $cd3d
 	ld a, [hli]
 	ld [de], a
 	inc de
@@ -103289,7 +103289,7 @@ Func_738a1: ; 738a1 (1c:78a1)
 	ld [de], a
 	call Func_3f05
 	call SaveSAVtoSRAM
-	ld hl, W_WHICHTRADE ; $cd3d
+	ld hl, wWhichTrade ; $cd3d
 	call Func_3f0f
 	ld a, $b6
 	call PlaySoundWaitForCurrent
@@ -103329,20 +103329,20 @@ Func_7393f: ; 7393f (1c:793f)
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
 	ld a, $3
-	ld [W_MENUWATCHEDKEYS], a ; $cc29
+	ld [wMenuWatchedKeys], a ; $cc29
 	ld a, $b
-	ld [W_MAXMENUITEMID], a ; $cc28
+	ld [wMaxMenuItem], a ; $cc28
 	ld a, $1
-	ld [W_TOPMENUITEMY], a ; $cc24
+	ld [wTopMenuItemY], a ; $cc24
 	ld a, $c
-	ld [W_TOPMENUITEMX], a ; $cc25
+	ld [wTopMenuItemX], a ; $cc25
 	xor a
 	ld [$cc37], a
 	ld a, [$d5a0]
 	and $7f
-	ld [W_CURMENUITEMID], a ; $cc26
-	ld [W_OLDMENUITEMID], a ; $cc2a
-	ld hl, W_SCREENTILESBUFFER
+	ld [wCurrentMenuItem], a ; $cc26
+	ld [wLastMenuItem], a ; $cc2a
+	ld hl, wTileMap
 	ld b, $2
 	ld c, $9
 	call TextBoxBorder
@@ -103383,7 +103383,7 @@ Func_7393f: ; 7393f (1c:793f)
 	call Func_73a84
 	FuncCoord 18, 1 ; $c3c6
 	ld hl, Coord
-	ld de, W_WHICHTRADE ; $cd3d
+	ld de, wWhichTrade ; $cd3d
 	ld bc, $14
 	ld a, $c
 .asm_739c2
@@ -103467,7 +103467,7 @@ Func_73a7f: ; 73a7f (1c:7a7f)
 	ret
 
 Func_73a84: ; 73a84 (1c:7a84)
-	ld hl, W_WHICHTRADE ; $cd3d
+	ld hl, wWhichTrade ; $cd3d
 	push hl
 	ld a, $a
 	ld [$0], a
@@ -103567,7 +103567,7 @@ Func_73b0d: ; 73b0d (1c:7b0d)
 Func_73b3f: ; 73b3f (1c:7b3f)
 	ld hl, $a598
 	ld bc, $60
-	ld a, [W_WHICHTRADE] ; $cd3d
+	ld a, [wWhichTrade] ; $cd3d
 	call AddNTimes
 	ld de, $cc5b
 	ld bc, $60
@@ -103648,7 +103648,7 @@ Func_7405c: ; 7405c (1d:405c)
 	ld bc, $10
 	ld a, $ff
 	call FillMemory
-	ld hl, W_SCREENTILESBUFFER
+	ld hl, wTileMap
 	call Func_7417b
 	FuncCoord 0, 14 ; $c4b8
 	ld hl, Coord
@@ -103664,7 +103664,7 @@ Func_7405c: ; 7405c (1d:405c)
 	ld c, $80
 	call DelayFrames
 	xor a
-	ld [W_WHICHTRADE], a ; $cd3d
+	ld [wWhichTrade], a ; $cd3d
 	ld [$cd3e], a
 	jp Func_7418e
 
@@ -104259,7 +104259,7 @@ Gym8LeaderName: ; 748cd (1d:48cd)
 
 Func_748d6: ; 748d6 (1d:48d6)
 	xor a
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ld [W_VIRIDIANGYMCURSCRIPT], a
 	ld [W_CURMAPSCRIPT], a
 	ret
@@ -104287,7 +104287,7 @@ Func_748eb: ; 748eb (1d:48eb)
 	ld a, $a7
 	call PlaySound
 	ld a, $ff
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ld a, $4
 	ld [W_CURMAPSCRIPT], a
 	ret
@@ -104373,7 +104373,7 @@ Func_7496b: ; 7496b (1d:496b)
 	and a
 	jr nz, .asm_74980
 	xor a
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ld hl, $d736
 	res 7, [hl]
 	ld a, $0
@@ -104389,7 +104389,7 @@ Func_74988: ; 74988 (1d:4988)
 	cp $ff
 	jp z, Func_748d6
 	ld a, $f0
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 Unknown_74995: ; 74995 (1d:4995)
 	ld a, $c
 	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
@@ -104901,8 +104901,8 @@ CeruleanHouse2Text1: ; 74e15 (1d:4e15)
 	ld hl, UnnamedText_74e77
 	call PrintText
 	xor a
-	ld [W_CURMENUITEMID], a
-	ld [W_LISTSCROLLOFFSET], a
+	ld [wCurrentMenuItem], a
+	ld [wListScrollOffset], a
 .asm_74e23
 	ld hl, UnnamedText_74e7c
 	call PrintText
@@ -104917,7 +104917,7 @@ CeruleanHouse2Text1: ; 74e15 (1d:4e15)
 	ld [$cf93], a
 	ld [$cc35], a
 	ld a, SPECIALLISTMENU
-	ld [W_LISTMENUID], a
+	ld [wListMenuID], a
 	call DisplayListMenuID
 	jr c, .asm_74e60 ; 0x74e49 $15
 	ld hl, Unknown_74e86
@@ -104934,7 +104934,7 @@ CeruleanHouse2Text1: ; 74e15 (1d:4e15)
 	jr .asm_74e23 ; 0x74e5e $c3
 .asm_74e60
 	xor a
-	ld [W_LISTSCROLLOFFSET], a
+	ld [wListScrollOffset], a
 	ld hl, UnnamedText_74e81
 	call PrintText
 	jp TextScriptEnd
@@ -105021,16 +105021,16 @@ Unknown_74ee0: ; 74ee0 (1d:4ee0)
 	ld [$d125], a
 	call DisplayTextBoxID
 	xor a
-	ld [W_CURMENUITEMID], a ; $cc26
-	ld [W_OLDMENUITEMID], a ; $cc2a
+	ld [wCurrentMenuItem], a ; $cc26
+	ld [wLastMenuItem], a ; $cc2a
 	ld a, $3
-	ld [W_MENUWATCHEDKEYS], a ; $cc29
+	ld [wMenuWatchedKeys], a ; $cc29
 	ld a, $3
-	ld [W_MAXMENUITEMID], a ; $cc28
+	ld [wMaxMenuItem], a ; $cc28
 	ld a, $5
-	ld [W_TOPMENUITEMY], a ; $cc24
+	ld [wTopMenuItemY], a ; $cc24
 	ld a, $1
-	ld [W_TOPMENUITEMX], a ; $cc25
+	ld [wTopMenuItemX], a ; $cc25
 	ld hl, $d730
 	set 6, [hl]
 	FuncCoord 0, 3 ; $c3dc
@@ -105052,7 +105052,7 @@ Unknown_74ee0: ; 74ee0 (1d:4ee0)
 	call HandleMenuInput
 	bit 1, a
 	jr nz, .asm_74f93
-	ld a, [W_CURMENUITEMID] ; $cc26
+	ld a, [wCurrentMenuItem] ; $cc26
 	cp $3
 	jr z, .asm_74f93
 	xor a
@@ -105415,7 +105415,7 @@ SafariZoneEntranceScript0: ; 751e7 (1d:51e7)
 	ld [$ff00+$8c], a
 	call DisplayTextID
 	ld a, $ff
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	xor a
 	ld [H_CURRENTPRESSEDBUTTONS], a
 	ld a, $c
@@ -105431,7 +105431,7 @@ SafariZoneEntranceScript0: ; 751e7 (1d:51e7)
 	ld c, $1
 	call Unknown_752a3
 	ld a, $f0
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ld a, $1
 	ld [W_SAFARIZONEENTRANCECURSCRIPT], a
 	ret
@@ -105445,20 +105445,20 @@ SafariZoneEntranceScript1: ; 75226 (1d:5226)
 SafariZoneEntranceScript2: ; 7522a (1d:522a)
 	xor a
 	ld [H_CURRENTPRESSEDBUTTONS], a
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	call UpdateSprites
 	ld a, $4
 	ld [$ff00+$8c], a
 	call DisplayTextID
 	ld a, $ff
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ret
 
 SafariZoneEntranceScript3: ; 75240 (1d:5240)
 	call Unknown_752b4
 	ret nz
 	xor a
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ld a, $5
 	ld [W_SAFARIZONEENTRANCECURSCRIPT], a
 	ret
@@ -105473,7 +105473,7 @@ SafariZoneEntranceScript5: ; 7524e (1d:524e)
 	res 7, [hl]
 	call UpdateSprites
 	ld a, $f0
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ld a, $6
 	ld [$ff00+$8c], a
 	call DisplayTextID
@@ -105496,7 +105496,7 @@ SafariZoneEntranceScript4: ; 75287 (1d:5287)
 	call Unknown_752b4
 	ret nz
 	xor a
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ld a, $0
 	ld [W_SAFARIZONEENTRANCECURSCRIPT], a
 	ret
@@ -105745,7 +105745,7 @@ Gym5LeaderName: ; 75472 (1d:5472)
 
 Func_75477: ; 75477 (1d:5477)
 	xor a
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ld [W_FUCHSIAGYMCURSCRIPT], a
 	ld [W_CURMAPSCRIPT], a
 	ret
@@ -105761,7 +105761,7 @@ Func_7548a: ; 7548a (1d:548a)
 	cp $ff
 	jp z, Func_75477
 	ld a, $f0
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 Unknown_75497: ; 75497 (1d:5497)
 	ld a, $9
 	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
@@ -106156,7 +106156,7 @@ Gym7LeaderName: ; 7578b (1d:578b)
 
 Unknown_75792: ; 75792 (1d:5792)
 	xor a
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ld [W_CINNABARGYMCURSCRIPT], a
 	ld [W_CURMAPSCRIPT], a
 	ld [$da38], a
@@ -106164,7 +106164,7 @@ Unknown_75792: ; 75792 (1d:5792)
 
 Unknown_757a0: ; 757a0 (1d:57a0)
 	ld a, [H_DOWNARROWBLINKCNT2] ; $FF00+$8c
-	ld [W_TRAINERHEADERFLAGBIT], a
+	ld [wTrainerHeaderFlagBit], a
 	ret
 
 CinnabarGymScripts: ; 757a6 (1d:57a6)
@@ -106203,9 +106203,9 @@ CinnabarGymScript1: ; 757dc (1d:57dc)
 	bit 0, a
 	ret nz
 	xor a
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ld a, [$da38]
-	ld [W_TRAINERHEADERFLAGBIT], a
+	ld [wTrainerHeaderFlagBit], a
 	ld [$ff00+$8c], a
 	jp DisplayTextID
 
@@ -106217,7 +106217,7 @@ CinnabarGymScript2: ; 757f6 (1d:57f6)
 	ld a, [$d057]
 	cp $ff
 	jp z, Unknown_75792
-	ld a, [W_TRAINERHEADERFLAGBIT]
+	ld a, [wTrainerHeaderFlagBit]
 	ld [$ff00+$db], a
 	ld c, a
 	ld b, $2
@@ -106231,13 +106231,13 @@ CinnabarGymScript2: ; 757f6 (1d:57f6)
 	call PlaySound
 	call WaitForSoundToFinish
 .asm_7581b
-	ld a, [W_TRAINERHEADERFLAGBIT]
+	ld a, [wTrainerHeaderFlagBit]
 	ld [$ff00+$db], a
 	ld c, a
 	ld b, $1
 	ld hl, $d79a
 	call Unknown_757f1
-	ld a, [W_TRAINERHEADERFLAGBIT]
+	ld a, [wTrainerHeaderFlagBit]
 	sub $2
 	ld c, a
 	ld b, $1
@@ -106245,7 +106245,7 @@ CinnabarGymScript2: ; 757f6 (1d:57f6)
 	call Unknown_757f1
 	call Func_3ead
 	xor a
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ld [$da38], a
 	ld a, $0
 	ld [W_CINNABARGYMCURSCRIPT], a
@@ -106257,7 +106257,7 @@ CinnabarGymScript3: ; 7584a (1d:584a)
 	cp $ff
 	jp z, Unknown_75792
 	ld a, $f0
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 Unknown_75857: ; 75857 (1d:5857)
 	ld a, $a
 	ld [$ff00+$8c], a
@@ -106705,13 +106705,13 @@ Lab2Text1: ; 75c2a (1d:5c2a)
 Lab2Text2: ; 75c2f (1d:5c2f)
 	db $8
 	ld a, $7
-	ld [W_WHICHTRADE], a
+	ld [wWhichTrade], a
 	jr asm_78552 ; 0x75c35 $6
 
 Lab2Text3: ; 75c37 (1d:5c37)
 	db $8
 	ld a, $8
-	ld [W_WHICHTRADE], a
+	ld [wWhichTrade], a
 asm_78552: ; 75c3d (1d:5c3d)
 	ld a, $54
 	call Predef
@@ -106941,7 +106941,7 @@ UnnamedText_75dd5: ; 75dd5 (1d:5dd5)
 Lab4Text2: ; 75dda (1d:5dda)
 	db $08 ; asm
 	ld a, $3
-	ld [W_WHICHTRADE], a
+	ld [wWhichTrade], a
 	ld a, $54
 	call Predef
 	jp TextScriptEnd
@@ -107124,7 +107124,7 @@ GaryScript: ; 75f1d (1d:5f1d)
 
 Function75f29: ; 75f29 (1d:5f29)
 	xor a
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ld [W_GARYCURSCRIPT], a
 	ret
 
@@ -107146,7 +107146,7 @@ GaryScript0: ; 75f47 (1d:5f47)
 
 GaryScript1: ; 75f48 (1d:5f48)
 	ld a, $ff
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ld hl, $ccd3
 	ld de, RLEMovement75f63
 	call DecodeRLEList
@@ -107169,7 +107169,7 @@ GaryScript2: ; 75f6a (1d:5f6a)
 	ret nz
 	call Delay3
 	xor a
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ld hl, $d355
 	res 7, [hl]
 	ld a, $1
@@ -107215,7 +107215,7 @@ GaryScript3: ; 75fbb (1d:5fbb)
 	ld hl, $d867
 	set 1, [hl]
 	ld a, $f0
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ld a, $1
 	ld [$ff00+$8c], a
 	call Function760c8
@@ -107321,7 +107321,7 @@ GaryScript8: ; 76083 (1d:6083)
 
 GaryScript9: ; 76099 (1d:6099)
 	ld a, $ff
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ld hl, $ccd3
 	ld de, RLEMovement760b4
 	call DecodeRLEList
@@ -107342,17 +107342,17 @@ GaryScript10: ; 760b9 (1d:60b9)
 	and a
 	ret nz
 	xor a
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ld a, $0
 	ld [W_GARYCURSCRIPT], a
 	ret
 
 Function760c8; 0x760c8
 	ld a, $f0
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	call DisplayTextID
 	ld a, $ff
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ret
 
 GaryTexts: ; 760d6 (1d:60d6)
@@ -107511,7 +107511,7 @@ Func_761e2: ; 761e2 (1d:61e2)
 	ld [H_CURRENTPRESSEDBUTTONS], a
 	ld [$ccd3], a
 	ld [$cd38], a
-	ld a, [W_WHICHTRADE] ; $cd3d
+	ld a, [wWhichTrade] ; $cd3d
 	cp $3
 	jr c, .asm_76206
 	ld hl, $d863
@@ -107541,7 +107541,7 @@ Func_7622c: ; 7622c (1d:622c)
 	ret nz
 	call Delay3
 	xor a
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ld [W_LORELEICURSCRIPT], a
 	ld [W_CURMAPSCRIPT], a
 	ret
@@ -107691,7 +107691,7 @@ Func_76339: ; 76339 (1d:6339)
 	ld [H_CURRENTPRESSEDBUTTONS], a
 	ld [$ccd3], a
 	ld [$cd38], a
-	ld a, [W_WHICHTRADE] ; $cd3d
+	ld a, [wWhichTrade] ; $cd3d
 	cp $3
 	jr c, .asm_7635d
 	ld hl, $d864
@@ -107721,7 +107721,7 @@ Func_76383: ; 76383 (1d:6383)
 	ret nz
 	call Delay3
 	xor a
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ld [W_BRUNOCURSCRIPT], a
 	ld [W_CURMAPSCRIPT], a
 	ret
@@ -107872,7 +107872,7 @@ Func_76490: ; 76490 (1d:6490)
 	ld [H_CURRENTPRESSEDBUTTONS], a
 	ld [$ccd3], a
 	ld [$cd38], a
-	ld a, [W_WHICHTRADE] ; $cd3d
+	ld a, [wWhichTrade] ; $cd3d
 	cp $3
 	jr c, .asm_764b4
 	ld hl, $d865
@@ -107902,7 +107902,7 @@ Func_764da: ; 764da (1d:64da)
 	ret nz
 	call Delay3
 	xor a
-	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
+	ld [wJoypadForbiddenButtonsMask], a
 	ld [W_AGATHACURSCRIPT], a
 	ld [W_CURMAPSCRIPT], a
 	ret
@@ -108493,7 +108493,7 @@ DrawFrameBlock: ; 78000 (1e:4000)
 	jr z,.resetFrameBlockDestAddr
 	call AnimationCleanOAM
 .resetFrameBlockDestAddr
-	ld hl,W_OAMBUFFER ; OAM buffer
+	ld hl,wOAMBuffer ; OAM buffer
 	ld a,l
 	ld [W_FBDESTADDR + 1],a
 	ld a,h
@@ -108542,7 +108542,7 @@ PlayAnimation: ; 780f1 (1e:40f1)
 	ld a,[hli]
 	cp a,$FF ; is there a sound to play?
 	jr z,.skipPlayingSound
-	ld [W_ANIMSOUNDID],a ; store sound
+	ld [wAnimSoundID],a ; store sound
 	push hl
 	push de
 	call Func586F
@@ -108571,7 +108571,7 @@ PlayAnimation: ; 780f1 (1e:40f1)
 	rla
 	ld [$D09F],a ; tile select
 	ld a,[hli] ; sound
-	ld [W_ANIMSOUNDID],a ; store sound
+	ld [wAnimSoundID],a ; store sound
 	ld a,[hli] ; subanimation ID
 	ld c,l
 	ld b,h
@@ -108873,13 +108873,13 @@ Func_78e23: ; 78e23 (1e:4e23)
 	ret
 
 PlaySubanimation: ; 78e53 (1e:4e53)
-	ld a,[W_ANIMSOUNDID]
+	ld a,[wAnimSoundID]
 	cp a,$FF
 	jr z,.skipPlayingSound
 	call Func586F
 	call PlaySound ; play sound effect
 .skipPlayingSound
-	ld hl,W_OAMBUFFER ; base address of OAM buffer
+	ld hl,wOAMBuffer ; base address of OAM buffer
 	ld a,l
 	ld [W_FBDESTADDR + 1],a
 	ld a,h
@@ -109231,7 +109231,7 @@ Func504C: ; 7904c (1e:504c)
 ; if it's the end of the animation, make the ball jump up
 	ld de,BallMoveDistances1
 .loop
-	ld hl,W_OAMBUFFER ; OAM buffer
+	ld hl,wOAMBuffer ; OAM buffer
 	ld bc,4
 .innerLoop
 	ld a,[de]
@@ -109262,7 +109262,7 @@ db $ff ; terminator
 Func507C ; 507C
 	ld de,BallMoveDistances2
 .loop
-	ld hl,W_OAMBUFFER ; OAM buffer
+	ld hl,wOAMBuffer ; OAM buffer
 	ld bc,4
 .innerLoop
 	ld a,[de]
@@ -109302,7 +109302,7 @@ db $ff ; terminator
 ; this function copies the current musical note graphic
 ; so that there are two musical notes flying towards the defending pokemon
 DoGrowlSpecialEffects: ; 790bc (1e:50bc)
-	ld hl,W_OAMBUFFER ; OAM buffer
+	ld hl,wOAMBuffer ; OAM buffer
 	ld de,$c310
 	ld bc,$10
 	call CopyData ; copy the musical note graphic
@@ -109564,7 +109564,7 @@ Func_79210: ; 79210 (1e:5210)
 	ret
 
 Func_79246: ; 79246 (1e:5246)
-	ld hl, W_OAMBUFFER
+	ld hl, wOAMBuffer
 .asm_79249
 	ld a, [W_BASECOORDY] ; $d082
 	ld [hli], a
@@ -109759,7 +109759,7 @@ INCBIN "baserom.gbc",$793b1,$793f9 - $793b1
 .asm_79447
 	push hl
 	ld c, $3
-	ld de, W_OAMBUFFER
+	ld de, wOAMBuffer
 .asm_7944d
 	ld a, [hl]
 	cp $ff
@@ -109870,7 +109870,7 @@ Func_79517: ; 79517 (1e:5517)
 	call LoadAnimationTileset
 	pop bc
 	ld d, $7a
-	ld hl, W_OAMBUFFER
+	ld hl, wOAMBuffer
 	push bc
 	ld a, [W_BASECOORDY] ; $d082
 	ld e, a
@@ -109884,7 +109884,7 @@ Func_79517: ; 79517 (1e:5517)
 	ld [$d08a], a
 .asm_79538
 	push bc
-	ld hl, W_OAMBUFFER
+	ld hl, wOAMBuffer
 .asm_7953c
 	ld a, [W_BASECOORDY] ; $d082
 	add $8
@@ -110152,7 +110152,7 @@ Func_797e8: ; 797e8 (1e:57e8)
 	xor a
 	ld e, a
 	ld [W_BASECOORDX], a ; $d081
-	ld hl, W_OAMBUFFER
+	ld hl, wOAMBuffer
 .asm_797fa
 	call Func_79329
 	dec c
@@ -110174,7 +110174,7 @@ Func_7980c: ; 7980c (1e:580c)
 	push bc
 	ld e, a
 	ld d, $0
-	ld hl, W_SCREENTILESBUFFER
+	ld hl, wTileMap
 	add hl, de
 	ld bc, $707
 	call ClearScreenArea
@@ -110193,7 +110193,7 @@ Func_79820: ; 79820 (1e:5820)
 .asm_7982a
 	ld a, $c
 .asm_7982c
-	ld hl, W_SCREENTILESBUFFER
+	ld hl, wTileMap
 	ld e, a
 	ld d, $0
 	add hl, de
@@ -115787,25 +115787,25 @@ _UnnamedText_703ff: ; 88267 (22:4267)
 	db $0, "#DEX Rating", $6d, $57
 
 _UnnamedText_62453: ; 88275 (22:4275)
-	TX_RAM W_GYMCITYNAME
+	TX_RAM wGymCityName
 	db $0, $4f
 	db "#MON GYM", $55
 	db "LEADER: @"
 
 UnnamedText_8828c: ; 8828c (22:428c)
-	TX_RAM W_GYMLEADERNAME
+	TX_RAM wGymLeaderName
 	db $0, $51
 	db "WINNING TRAINERS:", $4f
 	db $53, $57
 
 _UnnamedText_62458: ; 882a5 (22:42a5)
-	TX_RAM W_GYMCITYNAME
+	TX_RAM wGymCityName
 	db $0, $4f
 	db "#MON GYM", $55
 	db "LEADER: @"
 
 UnnamedText_882bc: ; 882bc (22:42bc)
-	TX_RAM W_GYMLEADERNAME
+	TX_RAM wGymLeaderName
 	db $0, $51
 	db "WINNING TRAINERS:", $4f
 	db $53, $55
@@ -116794,7 +116794,7 @@ _PotionText: ; 89e31 (22:5e31)
 	TX_RAM $cd6d
 	db $0, $4f
 	db "recovered by @"
-	TX_NUM W_HPBARHPDIFFERENCE, 2, 3
+	TX_NUM wHPBarHPDifference, 2, 3
 	db $0, "!", $57
 
 _AntidoteText: ; 89e4b (22:5e4b)
