@@ -10965,14 +10965,14 @@ ENDC
 
 .TitleScreenPokemonLogoYScrolls: ; 43db (1:43db)
 ; Controls the bouncing effect of the Pokemon logo on the title screen
-	db $FC,$10  ; y scroll amount ($FC means -4), number of times to scroll
-	db $03,$04
-	db $FD,$04
-	db $02,$02
-	db $FE,$02
-	db $01,$02
-	db $FF,$02
-	db $00      ; terminate list with $00
+	db -4,16  ; y scroll amount, number of times to scroll
+	db 3,4
+	db -3,4
+	db 2,2
+	db -2,2
+	db 1,2
+	db -1,2
+	db 0      ; terminate list with 0
 
 .ScrollTitleScreenPokemonLogo
 ; Scrolls the Pokemon logo on the title screen to create the bouncing effect
