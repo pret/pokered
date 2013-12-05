@@ -6840,8 +6840,8 @@ DisplayTextID: ; 2920 (0:2920)
 	jp z,FuncTX_SlotMachine
 	cp a,$f6   ; cable connection NPC in Pokemon Center
 	jr nz,.notSpecialCase
-	ld hl, Unknown_71c5
-	ld b, BANK(Unknown_71c5)
+	ld hl, CableClubNPC
+	ld b, BANK(CableClubNPC)
 	call Bankswitch
 	jr AfterDisplayingTextID
 .notSpecialCase
@@ -16712,15 +16712,15 @@ PrintStartMenuItem: ; 71bb (1:71bb)
 	add hl,de
 	ret
 
-Unknown_71c5: ; 71c5 (1:71c5)
-	ld hl, UnnamedText_72b8 ; $72b8
+CableClubNPC: ; 71c5 (1:71c5)
+	ld hl, CableClubNPCText1 ; $72b8
 	call PrintText
 	ld a, [$d74b]
 	bit 5, a
 	jp nz, Unknown_71e1
 	ld c, $3c
 	call DelayFrames
-	ld hl, UnnamedText_72d2 ; $72d2
+	ld hl, CableClubNPCText6 ; $72d2
 	call PrintText
 	jp Func_7298
 
@@ -16759,7 +16759,7 @@ Unknown_71e1: ; 71e1 (1:71e1)
 	call Func_22ed
 	ld c, $32
 	call DelayFrames
-	ld hl, UnnamedText_72bd ; $72bd
+	ld hl, CableClubNPCText2 ; $72bd
 	call PrintText
 	xor a
 	ld [$cc34], a
@@ -16775,7 +16775,7 @@ Unknown_71e1: ; 71e1 (1:71e1)
 	call WaitForSoundToFinish
 	ld a, $b6
 	call PlaySoundWaitForCurrent
-	ld hl, UnnamedText_72c2 ; $72c2
+	ld hl, CableClubNPCText3 ; $72c2
 	call PrintText
 	ld hl, $cc47
 	ld a, $3
@@ -16799,16 +16799,16 @@ Unknown_71e1: ; 71e1 (1:71e1)
 	dec b
 	jr nz, .asm_7273 ; 0x727a $f7
 	call Func_72d7
-	ld hl, UnnamedText_72c8 ; $72c8
+	ld hl, CableClubNPCText4 ; $72c8
 	call PrintText
 	jr Func_7298 ; 0x7285 $11
 .asm_7287
-	ld hl, UnnamedText_72b3 ; $72b3
+	ld hl, CableClubNPCText7 ; $72b3
 	call PrintText
 	jr Func_7298 ; 0x728d $9
 .asm_728f
 	call Func_72d7
-	ld hl, UnnamedText_72cd ; $72cd
+	ld hl, CableClubNPCText5 ; $72cd
 	call PrintText
 	; fall through
 
@@ -16831,32 +16831,32 @@ Func_72a8: ; 72a8 (1:72a8)
 	ld b, BANK(Func_5c0a)
 	jp Bankswitch
 
-UnnamedText_72b3: ; 72b3 (1:72b3)
-	TX_FAR _UnnamedText_72b3
+CableClubNPCText7: ; 72b3 (1:72b3)
+	TX_FAR _CableClubNPCText7
 	db "@"
 
-UnnamedText_72b8: ; 72b8 (1:72b8)
-	TX_FAR _UnnamedText_72b8
+CableClubNPCText1: ; 72b8 (1:72b8)
+	TX_FAR _CableClubNPCText1
 	db "@"
 
-UnnamedText_72bd: ; 72bd (1:72bd)
-	TX_FAR _UnnamedText_72bd
+CableClubNPCText2: ; 72bd (1:72bd)
+	TX_FAR _CableClubNPCText2
 	db "@"
 
-UnnamedText_72c2: ; 72c2 (1:72c2)
-	TX_FAR UnnamedText_a29cc
+CableClubNPCText3: ; 72c2 (1:72c2)
+	TX_FAR _CableClubNPCText3
 	db $a, "@"
 
-UnnamedText_72c8: ; 72c8 (1:72c8)
-	TX_FAR _UnnamedText_72c8
+CableClubNPCText4: ; 72c8 (1:72c8)
+	TX_FAR _CableClubNPCText4
 	db "@"
 
-UnnamedText_72cd: ; 72cd (1:72cd)
-	TX_FAR _UnnamedText_72cd
+CableClubNPCText5: ; 72cd (1:72cd)
+	TX_FAR _CableClubNPCText5
 	db "@"
 
-UnnamedText_72d2: ; 72d2 (1:72d2)
-	TX_FAR _UnnamedText_72d2
+CableClubNPCText6: ; 72d2 (1:72d2)
+	TX_FAR _CableClubNPCText6
 	db "@"
 
 Func_72d7: ; 72d7 (1:72d7)
@@ -124878,26 +124878,26 @@ _PokemonCenterFarewellText: ; a2910 (28:6910)
 	db $0, "We hope to see", $4f
 	db "you again!", $57
 
-_UnnamedText_72b3: ; a292b (28:692b)
+_CableClubNPCText7: ; a292b (28:692b)
 	db $0, "This area is", $4f
 	db "reserved for 2", $55
 	db "friends who are", $55
 	db "linked by cable.", $57
 
-_UnnamedText_72b8: ; a2969 (28:6969)
+_CableClubNPCText1: ; a2969 (28:6969)
 	db $0, "Welcome to the", $4f
 	db "Cable Club!", $57
 
-_UnnamedText_72bd: ; a2985 (28:6985)
+_CableClubNPCText2: ; a2985 (28:6985)
 	db $0, "Please apply here.", $51
 	db "Before opening", $4f
 	db "the link, we have", $55
 	db "to save the game.", $57
 
-UnnamedText_a29cc: ; a29cc (28:69cc)
+_CableClubNPCText3: ; a29cc (28:69cc)
 	db $0, "Please wait.@@"
 
-_UnnamedText_72c8: ; a29db (28:69db)
+_CableClubNPCText4: ; a29db (28:69db)
 	db $0, "The link has been", $4f
 	db "closed because of", $55
 	db "inactivity.", $51
@@ -124907,10 +124907,10 @@ _UnnamedText_72c8: ; a29db (28:69db)
 
 SECTION "bank29",ROMX,BANK[$29]
 
-_UnnamedText_72cd: ; a4000 (29:4000)
+_CableClubNPCText5: ; a4000 (29:4000)
 	db $0, "Please come again!", $57
 
-_UnnamedText_72d2: ; a4014 (29:4014)
+_CableClubNPCText6: ; a4014 (29:4014)
 	db $0, "We're making", $4f
 	db "preparations.", $55
 	db "Please wait.", $57
