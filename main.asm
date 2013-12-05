@@ -14824,20 +14824,20 @@ Func_62ff: ; 62ff (1:62ff)
 	ld a, [$d72d]
 	cp $ef
 	jr nz, .asm_6314
-	ld hl, Unknown_6428 ; $6428
+	ld hl, BattleCenterMWarpSpec1 ; $6428
 	ld a, [$FF00+$aa]
 	cp $2
 	jr z, .asm_6334
-	ld hl, Unknown_6430 ; $6430
+	ld hl, BattleCenterMWarpSpec2 ; $6430
 	jr .asm_6334
 .asm_6314
 	cp $f0
 	jr nz, .asm_6326
-	ld hl, Unknown_6438 ; $6438
+	ld hl, TradeCenterMWarpSpec1 ; $6438
 	ld a, [$FF00+$aa]
 	cp $2
 	jr z, .asm_6334
-	ld hl, Unknown_6440 ; $6440
+	ld hl, TradeCenterMWarpSpec2 ; $6440
 	jr .asm_6334
 .asm_6326
 	ld a, [$d732]
@@ -14845,7 +14845,7 @@ Func_62ff: ; 62ff (1:62ff)
 	jr nz, .asm_6346
 	bit 2, a
 	jr nz, .asm_6346
-	ld hl, FirstMapSpec ; $6420
+	ld hl, FirstMapWarpSpec ; $6420
 .asm_6334
 	ld de, W_CURMAP ; $d35e
 	ld c, $7
@@ -14942,26 +14942,50 @@ INCBIN "baserom.gbc",$63bf,$63d8 - $63bf
 Unknown_63d8: ; 63d8 (1:63d8)
 INCBIN "baserom.gbc",$63d8,$6420 - $63d8
 
-FirstMapSpec: ; 6420 (1:6420)
+FirstMapWarpSpec: ; 6420 (1:6420)
 	db REDS_HOUSE_2F ; RedsHouse2F
 ; Original Format:
 ;   [Event Displacement][Y-block][X-block][Y-sub_block][X-sub_block]
 ; Macro Format:
 ;   FLYWARP_DATA [Map Width][Y-pos][X-pos]
 	FLYWARP_DATA 4,6,3
-	db $04 ;Tileset_id
+	db $04 ; Tileset_id
 
-Unknown_6428: ; 6428 (1:6428)
-INCBIN "baserom.gbc",$6428,$6430 - $6428
+BattleCenterMWarpSpec1: ; 6428 (1:6428)
+	db BATTLE_CENTER ; BattleCenterM
+; Original Format:
+;   [Event Displacement][Y-block][X-block][Y-sub_block][X-sub_block]
+; Macro Format:
+;   FLYWARP_DATA [Map Width][Y-pos][X-pos]
+	FLYWARP_DATA BATTLE_CENTER_WIDTH,4,3
+	db $15 ; Tileset_id
 
-Unknown_6430: ; 6430 (1:6430)
-INCBIN "baserom.gbc",$6430,$6438 - $6430
+BattleCenterMWarpSpec2: ; 6430 (1:6430)
+	db BATTLE_CENTER ; BattleCenterM
+; Original Format:
+;   [Event Displacement][Y-block][X-block][Y-sub_block][X-sub_block]
+; Macro Format:
+;   FLYWARP_DATA [Map Width][Y-pos][X-pos]
+	FLYWARP_DATA BATTLE_CENTER_WIDTH,4,6
+	db $15 ; Tileset_id
 
-Unknown_6438: ; 6438 (1:6438)
-INCBIN "baserom.gbc",$6438,$6440 - $6438
+TradeCenterMWarpSpec1: ; 6438 (1:6438)
+	db TRADE_CENTER ; TradeCenterM
+; Original Format:
+;   [Event Displacement][Y-block][X-block][Y-sub_block][X-sub_block]
+; Macro Format:
+;   FLYWARP_DATA [Map Width][Y-pos][X-pos]
+	FLYWARP_DATA TRADE_CENTER_WIDTH,4,3
+	db $15 ; Tileset_id
 
-Unknown_6440: ; 6440 (1:6440)
-INCBIN "baserom.gbc",$6440,$6448 - $6440
+TradeCenterMWarpSpec2: ; 6440 (1:6440)
+	db TRADE_CENTER ; TradeCenterM
+; Original Format:
+;   [Event Displacement][Y-block][X-block][Y-sub_block][X-sub_block]
+; Macro Format:
+;   FLYWARP_DATA [Map Width][Y-pos][X-pos]
+	FLYWARP_DATA TRADE_CENTER_WIDTH,4,6
+	db $15 ; Tileset_id
 
 FlyWarpDataPtr: ; 6448 (1:6448)
 	db $00,0
