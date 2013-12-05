@@ -10946,8 +10946,8 @@ ENDC
 	call GBPalNormal
 	ld a, $e4
 	ld [rOBP0], a ; $FF00+$48
-	ld bc, $ffaf
-	ld hl, .unknown_43db ; $43db
+	ld bc, $ffaf ; background scroll Y
+	ld hl, .TitleScreenPokemonLogoYScrolls ; $43db
 .asm_43c6
 	ld a, [hli]
 	and a
@@ -10960,19 +10960,29 @@ ENDC
 .asm_43d4
 	ld a, [hli]
 	ld e, a
-	call .asm_43ea
+	call .ScrollTitleScreenPokemonLogo
 	jr .asm_43c6
 
-.unknown_43db: ; 43db (1:43db)
-INCBIN "baserom.gbc",$43db,$43ea - $43db
+.TitleScreenPokemonLogoYScrolls: ; 43db (1:43db)
+; Controls the bouncing effect of the Pokemon logo on the title screen
+	db $FC,$10  ; y scroll amount ($FC means -4), number of times to scroll
+	db $03,$04
+	db $FD,$04
+	db $02,$02
+	db $FE,$02
+	db $01,$02
+	db $FF,$02
+	db $00      ; terminate list with $00
 
-.asm_43ea
+.ScrollTitleScreenPokemonLogo
+; Scrolls the Pokemon logo on the title screen to create the bouncing effect
+; Scrolls d pixels e times
 	call DelayFrame
 	ld a, [bc]
 	add d
 	ld [bc], a
 	dec e
-	jr nz, .asm_43ea
+	jr nz, .ScrollTitleScreenPokemonLogo
 	ret
 .asm_43f4
 	call LoadScreenTilesFromBuffer1
