@@ -6831,9 +6831,9 @@ DisplayTextID: ; 2920 (0:2920)
 	jp z,FuncTX_PokemonCenterPC
 	cp a,$f5   ; Vending Machine
 	jr nz,.notVendingMachine
-	ld b,BANK(Unknown_74ee0)
-	ld hl,Unknown_74ee0
-	call Bankswitch
+	ld b,BANK(VendingMachineMenu)
+	ld hl,VendingMachineMenu
+	call Bankswitch 	; jump banks to vending machine routine
 	jr AfterDisplayingTextID
 .notVendingMachine
 	cp a,$f7   ; slot machine
@@ -105009,8 +105009,8 @@ CeruleanHouse2Object: ; 0x74ebe (size=34)
 	EVENT_DISP $4, $7, $2
 	EVENT_DISP $4, $7, $3
 
-Unknown_74ee0: ; 74ee0 (1d:4ee0)
-	ld hl, UnnamedText_74f99
+VendingMachineMenu: ; 74ee0 (1d:4ee0)
+	ld hl, VendingMachineText1
 	call PrintText
 	ld a, $13
 	ld [$d125], a
@@ -105036,11 +105036,11 @@ Unknown_74ee0: ; 74ee0 (1d:4ee0)
 	call UpdateSprites
 	FuncCoord 2, 5 ; $c406
 	ld hl, Coord
-	ld de, Unnamed_74f9e
+	ld de, VendingMachineText2
 	call PlaceString
 	FuncCoord 9, 6 ; $c421
 	ld hl, Coord
-	ld de, Unnamed_74fc3
+	ld de, VendingMachineText3
 	call PlaceString
 	ld hl, $d730
 	res 6, [hl]
@@ -105056,18 +105056,18 @@ Unknown_74ee0: ; 74ee0 (1d:4ee0)
 	ld a, $2
 	ld [$FF00+$a0], a
 	call HasEnoughMoney
-	jr nc, .asm_74f54
-	ld hl, UnnamedText_74fd3
-	jp PrintText
-.asm_74f54
+	jr nc, .enoughMoney
+	ld hl, VendingMachineText4
+	jp PrintText ; 	exits here if not enough money
+.enoughMoney
 	call Unknown_74fe7
-	ld a, [$FF00+$db]
+	ld a, [$FF00+$db] 	; selected refreshment item id
 	ld b, a
 	ld c, 1
 	call GiveItem
 	jr nc, .BagFull
-	ld b, $3c
-.asm_74f63
+	ld b, $3c ; number of times to play the "brrrrr" sound
+.playDeliverySound ; 0x74f63
 	ld c, $2
 	call DelayFrames
 	push bc
@@ -105075,8 +105075,9 @@ Unknown_74ee0: ; 74ee0 (1d:4ee0)
 	call PlaySound
 	pop bc
 	dec b
-	jr nz, .asm_74f63
-	ld hl, UnnamedText_74fd8
+	jr nz, .playDeliverySound
+.asm_74f72
+	ld hl, VendingMachineText5
 	call PrintText
 	ld hl, $ffde
 	ld de, W_PLAYERMONEY1 ; $d349
@@ -105087,40 +105088,40 @@ Unknown_74ee0: ; 74ee0 (1d:4ee0)
 	ld [$d125], a
 	jp DisplayTextBoxID
 .BagFull
-	ld hl, UnnamedText_74fdd
+	ld hl, VendingMachineText6
 	jp PrintText
 .asm_74f93
-	ld hl, UnnamedText_74fe2
+	ld hl, VendingMachineText7
 	jp PrintText
 
-UnnamedText_74f99: ; 74f99 (1d:4f99)
-	TX_FAR _UnnamedText_74f99
+VendingMachineText1: ; 74f99 (1d:4f99)
+	TX_FAR _VendingMachineText1
 	db "@"
 
-Unnamed_74f9e: ; 74f9e (1d:4f9e)
+VendingMachineText2: ; 74f9e (1d:4f9e)
 	db "FRESH WATER",$4E
 	db "SODA POP",$4E
 	db "LEMONADE",$4E
 	db "CANCEL@"
-Unnamed_74fc3: ; 74fc3 (1d:4fc3)
+VendingMachineText3: ; 74fc3 (1d:4fc3)
 	db "¥200",$4E
 	db "¥300",$4E
 	db "¥350",$4E,"@"
 
-UnnamedText_74fd3: ; 74fd3 (1d:4fd3)
-	TX_FAR _UnnamedText_74fd3
+VendingMachineText4: ; 74fd3 (1d:4fd3)
+	TX_FAR _VendingMachineText4
 	db "@"
 
-UnnamedText_74fd8: ; 74fd8 (1d:4fd8)
-	TX_FAR _UnnamedText_74fd8
+VendingMachineText5: ; 74fd8 (1d:4fd8)
+	TX_FAR _VendingMachineText5
 	db "@"
 
-UnnamedText_74fdd: ; 74fdd (1d:4fdd)
-	TX_FAR _UnnamedText_74fdd
+VendingMachineText6: ; 74fdd (1d:4fdd)
+	TX_FAR _VendingMachineText6
 	db "@"
 
-UnnamedText_74fe2: ; 74fe2 (1d:4fe2)
-	TX_FAR _UnnamedText_74fe2
+VendingMachineText7: ; 74fe2 (1d:4fe2)
+	TX_FAR _VendingMachineText7
 	db "@"
 
 Unknown_74fe7: ; 74fe7 (1d:4fe7)
@@ -122872,24 +122873,24 @@ _CeladonMartRoofText6: ; 9ce50 (27:4e50)
 	db $0, "ROOFTOP SQUARE:", $4f
 	db "VENDING MACHINES", $57
 
-_UnnamedText_74f99: ; 9ce72 (27:4e72)
+_VendingMachineText1: ; 9ce72 (27:4e72)
 	db $0, "A vending machine!", $4f
 	db "Here's the menu!", $58
 
-_UnnamedText_74fd3: ; 9ce96 (27:4e96)
+_VendingMachineText4: ; 9ce96 (27:4e96)
 	db $0, "Oops, not enough", $4f
 	db "money!", $57
 
-_UnnamedText_74fd8: ; 9ceaf (27:4eaf)
+_VendingMachineText5: ; 9ceaf (27:4eaf)
 	TX_RAM $cf4b
 	db $0, $4f
 	db "popped out!", $57
 
-_UnnamedText_74fdd: ; 9cec0 (27:4ec0)
+_VendingMachineText6: ; 9cec0 (27:4ec0)
 	db $0, "There's no more", $4f
 	db "room for stuff!", $57
 
-_UnnamedText_74fe2: ; 9cee0 (27:4ee0)
+_VendingMachineText7: ; 9cee0 (27:4ee0)
 	db $0, "Not thirsty!", $57
 
 _CeladonMansion1Text1: ; 9ceee (27:4eee)
