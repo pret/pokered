@@ -1,32 +1,54 @@
+PYTHON := python
 .SUFFIXES: .asm .tx .o .gbc
+.PHONY: all clean red blue
+.SECONDEXPANSION:
 
-TEXTFILES := $(shell find ./ -type f -name '*.asm')
 
-all: pokered.gbc
+RED_OBJS  := pokered.o
+BLUE_OBJS := pokeblue.o
 
-pokered.o: pokered.tx main.tx constants.tx wram.tx ${TEXTFILES:.asm=.tx}
-	rgbasm -o pokered.o pokered.tx
-	
-pokeblue.o: pokeblue.tx main.tx constants.tx music.tx wram.tx ${TEXTFILES:.asm=.tx}
-	rgbasm -o pokeblue.o pokeblue.tx
+OBJS := $(RED_OBJS) $(BLUE_OBJS)
+
+ROMS := pokered.gbc pokeblue.gbc
+
+# generate dependencies for each object
+$(shell $(foreach obj, $(OBJS), \
+	$(eval $(obj:.o=)_DEPENDENCIES := $(shell $(PYTHON) extras/pokemontools/scan_includes.py $(obj:.o=.asm))) \
+))
+
+
+all: $(ROMS)
+red:  pokered.gbc
+blue: pokeblue.gbc
 
 redrle: extras/redtools/redrle.c
 	${CC} -o $@ $>
 
-.asm.tx:
-	python preprocessor.py < $< > $@
+clean:
+	rm -f $(ROMS)
+	rm -f $(OBJS)
+	find -iname '*.tx' -delete
+	rm -f redrle
 
-pokered.gbc: pokered.o
-	rgblink -o $@ $*.o
+
+baserom.gbc: ;
+	@echo "Wait! Need baserom.gbc first. Check README and INSTALL for details." && false
+
+%.asm: ;
+
+.asm.tx:
+	$(PYTHON) preprocessor.py < $< > $@
+
+$(OBJS): $$*.tx $$(patsubst %.asm, %.tx, $$($$*_DEPENDENCIES))
+	rgbasm -o $@ $(@:.o=.tx)
+
+pokered.gbc: $(RED_OBJS)
+	rgblink -n $*.sym -m $*.map -o $@ $^
 	rgbfix -jsv -k 01 -l 0x33 -m 0x13 -p 0 -r 03 -t "POKEMON RED" $@
 	cmp baserom.gbc $@
-	
-pokeblue.gbc: pokeblue.o
-	rgblink -o $@ $*.o
+
+pokeblue.gbc: $(BLUE_OBJS)
+	rgblink -n $*.sym -m $*.map -o $@ $^
 	rgbfix -jsv -k 01 -l 0x33 -m 0x13 -p 0 -r 03 -t "POKEMON BLUE" $@
 	cmp blue.gbc $@
 
-clean:
-	rm -f pokered.o pokered.gbc pokeblue.o pokeblue.gbc redrle $(TEXTFILES:.asm=.tx)
-
-more: pokered.gbc pokeblue.gbc
