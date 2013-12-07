@@ -4,6 +4,8 @@ PYTHON := python
 .SECONDEXPANSION:
 
 
+TEXTQUEUE :=
+
 RED_OBJS  := pokered.o
 BLUE_OBJS := pokeblue.o
 
@@ -13,9 +15,11 @@ ROMS := pokered.gbc pokeblue.gbc
 
 # generate dependencies for each object
 $(shell $(foreach obj, $(OBJS), \
-	$(eval $(obj:.o=)_DEPENDENCIES := $(shell $(PYTHON) extras/pokemontools/scan_includes.py $(obj:.o=.asm))) \
+	$(eval $(obj:.o=)_DEPENDENCIES := $(shell $(PYTHON) extras/pokemontools/scan_includes.py $(obj:.o=.asm) | sed s/globals.asm//g)) \
 ))
-
+$(shell $(foreach obj, $(OBJS), \
+	$(eval ALL_DEPENDENCIES := $(ALL_DEPENDENCIES) $($(obj:.o=)_DEPENDENCIES)) \
+))
 
 all: $(ROMS)
 red:  pokered.gbc
@@ -27,6 +31,7 @@ redrle: extras/redtools/redrle.c
 clean:
 	rm -f $(ROMS)
 	rm -f $(OBJS)
+	rm -f globals.asm
 	find -iname '*.tx' -delete
 	rm -f redrle
 
@@ -35,20 +40,26 @@ baserom.gbc: ;
 	@echo "Wait! Need baserom.gbc first. Check README and INSTALL for details." && false
 
 %.asm: ;
-
 .asm.tx:
-	$(PYTHON) preprocessor.py < $< > $@
+	$(eval TEXTQUEUE := $(TEXTQUEUE) $<)
+	@rm -f $@
 
-$(OBJS): $$*.tx $$(patsubst %.asm, %.tx, $$($$*_DEPENDENCIES))
-	rgbasm -o $@ $(@:.o=.tx)
+globals.asm: $(ALL_DEPENDENCIES:.asm=.tx) $(OBJS:.o=.tx)
+	@touch $@
+	@$(PYTHON) prequeue.py $(TEXTQUEUE)
+globals.tx: globals.asm
+	@cp $< $@
 
-pokered.gbc: $(RED_OBJS)
-	rgblink -n $*.sym -m $*.map -o $@ $^
+$(OBJS): $$*.tx $$($$*_DEPENDENCIES$:.asm=.tx)
+	rgbasm -o $@ $*.tx
+
+pokered.gbc: globals.tx $(RED_OBJS)
+	rgblink -n $*.sym -m $*.map -o $@ $(RED_OBJS)
 	rgbfix -jsv -k 01 -l 0x33 -m 0x13 -p 0 -r 03 -t "POKEMON RED" $@
 	cmp baserom.gbc $@
 
-pokeblue.gbc: $(BLUE_OBJS)
-	rgblink -n $*.sym -m $*.map -o $@ $^
+pokeblue.gbc: globals.tx $(BLUE_OBJS)
+	rgblink -n $*.sym -m $*.map -o $@ $(BLUE_OBJS)
 	rgbfix -jsv -k 01 -l 0x33 -m 0x13 -p 0 -r 03 -t "POKEMON BLUE" $@
 	cmp blue.gbc $@
 

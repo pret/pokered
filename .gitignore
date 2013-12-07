@@ -1,3 +1,6 @@
+# global label defs are generated
+globals.asm
+
 # precompiled python
 *.pyc
 
