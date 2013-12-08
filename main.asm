@@ -490,7 +490,7 @@ OverworldLoopLessDelay: ; 0402 (0:0402)
 	ld a,[$d736]
 	bit 6,a ; jumping down a ledge?
 	call nz, HandleMidJump
-	ld a,[W_WALKCOUNTER]
+	ld a,[wWalkCounter]
 	and a
 	jp nz,.moveAhead ; if the player sprite has not yet completed the walking animation
 	call GetJoypadStateOverworld ; get joypad state (which is possibly simulated)
@@ -694,7 +694,7 @@ OverworldLoopLessDelay: ; 0402 (0:0402)
 	jp c,OverworldLoop
 .noCollision
 	ld a,$08
-	ld [W_WALKCOUNTER],a
+	ld [wWalkCounter],a
 	jr .moveAhead2
 .moveAhead
 	ld a,[$d736]
@@ -717,7 +717,7 @@ OverworldLoopLessDelay: ; 0402 (0:0402)
 	call BikeSpeedup ; if riding a bike and not jumping a ledge
 .normalPlayerSpriteAdvancement
 	call AdvancePlayerSprite
-	ld a,[W_WALKCOUNTER]
+	ld a,[wWalkCounter]
 	and a
 	jp nz,CheckMapConnections ; it seems like this check will never succeed (the other place where CheckMapConnections is run works)
 ; walking animation finished
@@ -1214,12 +1214,12 @@ HandleBlackOut: ; 0931 (0:0931)
 	jp Func_5d5f
 
 StopMusic: ; 0951 (0:0951)
-	ld [W_CURCHANNELPOINTER],a
+	ld [wMusicChannelPointer],a
 	ld a,$ff
 	ld [$c0ee],a
 	call PlaySound
 .waitLoop
-	ld a,[W_CURCHANNELPOINTER]
+	ld a,[wMusicChannelPointer]
 	and a
 	jr nz,.waitLoop
 	jp StopAllSounds
@@ -1902,7 +1902,7 @@ AdvancePlayerSprite: ; 0d27 (0:0d27)
 	ld b,a
 	ld a,[$c105] ; delta X
 	ld c,a
-	ld hl,W_WALKCOUNTER ; walking animation counter
+	ld hl,wWalkCounter ; walking animation counter
 	dec [hl]
 	jr nz,.afterUpdateMapCoords
 ; if it's the end of the animation, update the player's map coordinates
@@ -1913,7 +1913,7 @@ AdvancePlayerSprite: ; 0d27 (0:0d27)
 	add c
 	ld [W_XCOORD],a
 .afterUpdateMapCoords
-	ld a,[W_WALKCOUNTER] ; walking animation counter
+	ld a,[wWalkCounter] ; walking animation counter
 	cp a,$07
 	jp nz,.scrollBackgroundAndSprites
 ; if this is the first iteration of the animation
@@ -2781,7 +2781,7 @@ LoadMapData: ; 1241 (0:1241)
 	ld [$d526],a
 	ld [$ffaf],a
 	ld [$ffae],a
-	ld [W_WALKCOUNTER],a
+	ld [wWalkCounter],a
 	ld [$d119],a
 	ld [$d11a],a
 	ld [$d3a8],a
@@ -5271,7 +5271,7 @@ StopAllSounds: ; 200e (0:200e)
 	ld [$c0ef], a
 	ld [$c0f0], a
 	xor a
-	ld [W_CURCHANNELPOINTER], a
+	ld [wMusicChannelPointer], a
 	ld [$c0ee], a
 	ld [$cfca], a
 	dec a
@@ -5825,7 +5825,7 @@ asm_2324: ; 2324 (0:2324)
 	ret z
 .asm_2351
 	ld a, c
-	ld [W_CURCHANNELPOINTER], a
+	ld [wMusicChannelPointer], a
 	ld a, b
 	ld [$cfca], a
 	ld [$c0ee], a
@@ -5883,7 +5883,7 @@ PlayMusic: ; 23a1 (0:23a1)
 	ld b, a
 	ld [$c0ee], a
 	xor a
-	ld [W_CURCHANNELPOINTER], a
+	ld [wMusicChannelPointer], a
 	ld a, c
 	ld [$c0ef], a
 	ld [$c0f0], a
@@ -5904,7 +5904,7 @@ PlaySound: ; 23b1 (0:23b1)
 	ld [$c02c], a
 	ld [$c02d], a
 .asm_23c8
-	ld a, [W_CURCHANNELPOINTER]
+	ld a, [wMusicChannelPointer]
 	and a
 	jr z, .asm_23e3
 	ld a, [$c0ee]
@@ -5916,7 +5916,7 @@ PlaySound: ; 23b1 (0:23b1)
 	cp $ff
 	jr nz, .asm_2414
 	xor a
-	ld [W_CURCHANNELPOINTER], a
+	ld [wMusicChannelPointer], a
 .asm_23e3
 	xor a
 	ld [$c0ee], a
@@ -5949,11 +5949,11 @@ PlaySound: ; 23b1 (0:23b1)
 .asm_2414
 	ld a, b
 	ld [$cfca], a
-	ld a, [W_CURCHANNELPOINTER]
+	ld a, [wMusicChannelPointer]
 	ld [$cfc8], a
 	ld [$cfc9], a
 	ld a, b
-	ld [W_CURCHANNELPOINTER], a
+	ld [wMusicChannelPointer], a
 .asm_2425
 	pop bc
 	pop de
@@ -6698,7 +6698,7 @@ ResetPlayerSpriteData_ClearSpriteData: ; 28c4 (0:28c4)
 	jp FillMemory
 
 Func_28cb: ; 28cb (0:28cb)
-	ld a, [W_CURCHANNELPOINTER]
+	ld a, [wMusicChannelPointer]
 	and a
 	jr nz, .asm_28dc
 	ld a, [$d72c]
@@ -6733,10 +6733,10 @@ Func_28cb: ; 28cb (0:28cb)
 	ld [$FF00+$24], a
 	ret
 .asm_2903
-	ld a, [W_CURCHANNELPOINTER]
+	ld a, [wMusicChannelPointer]
 	ld b, a
 	xor a
-	ld [W_CURCHANNELPOINTER], a
+	ld [wMusicChannelPointer], a
 	ld a, $ff
 	ld [$c0ee], a
 	call PlaySound
@@ -7119,7 +7119,7 @@ SubtractAmountPaidFromMoney: ; 2b96 (0:2b96)
 
 ; adds the amount the player sold to their money
 AddAmountSoldToMoney: ; 2b9e (0:2b9e)
-	ld de,W_PLAYERMONEY1
+	ld de,wPlayerMoney + 2
 	ld hl,$ffa1 ; total price of items
 	ld c,3 ; length of money in bytes
 	ld a,$0b
@@ -7133,7 +7133,7 @@ AddAmountSoldToMoney: ; 2b9e (0:2b9e)
 
 ; function to remove an item (in varying quantities) from the player's bag or PC box
 ; INPUT:
-; HL = address of inventory (either W_NUMBAGITEMS or W_NUMBOXITEMS)
+; HL = address of inventory (either wNumBagItems or wNumBoxItems)
 ; [$CF92] = index (within the inventory) of the item to remove
 ; [$CF96] = quantity to remove
 RemoveItemFromInventory: ; 2bbb (0:2bbb)
@@ -7150,7 +7150,7 @@ RemoveItemFromInventory: ; 2bbb (0:2bbb)
 
 ; function to add an item (in varying quantities) to the player's bag or PC box
 ; INPUT:
-; HL = address of inventory (either W_NUMBAGITEMS or W_NUMBOXITEMS)
+; HL = address of inventory (either wNumBagItems or wNumBoxItems)
 ; [$CF91] = item ID
 ; [$CF96] = item quantity
 ; sets carry flag if successful, unsets carry flag if unsuccessful
@@ -7909,7 +7909,7 @@ UseItem: ; 30bc (0:30bc)
 
 ; confirms the item toss and then tosses the item
 ; INPUT:
-; hl = address of inventory (either W_NUMBAGITEMS or W_NUMBOXITEMS)
+; hl = address of inventory (either wNumBagItems or wNumBoxItems)
 ; [$cf91] = item ID
 ; [$cf92] = index of item within inventory
 ; [$cf96] = quantity to toss
@@ -8427,7 +8427,7 @@ PlayTrainerMusic: ; 33e8 (0:33e8)
 	and a
 	ret nz
 	xor a
-	ld [W_CURCHANNELPOINTER], a
+	ld [wMusicChannelPointer], a
 	ld a, $ff
 	call PlaySound      ; stop music
 	ld a, BANK(Music_MeetEvilTrainer)
@@ -8767,7 +8767,7 @@ Func_359e: ; 359e (0:359e)
 ; sets carry flag if not enough money
 ; sets zero flag if amounts match exactly
 HasEnoughMoney: ; 35a6 (0:35a6)
-	ld de, W_PLAYERMONEY3 ; $d347
+	ld de, wPlayerMoney ; $d347
 	ld hl, $ff9f
 	ld c, $3
 	jp StringCmp
@@ -8776,7 +8776,7 @@ HasEnoughMoney: ; 35a6 (0:35a6)
 ; sets carry flag if not enough coins
 ; sets zero flag if amounts match exactly
 HasEnoughCoins: ; 35b1 (0:35b1)
-	ld de, W_PLAYERCOINS1
+	ld de, wPlayerCoins
 	ld hl, $ffa0
 	ld c, $2
 	jp StringCmp
@@ -10406,7 +10406,7 @@ GiveItem: ; 3e2e (0:3e2e)
 	ld [$cf91], a
 	ld a, c
 	ld [$cf96], a
-	ld hl,W_NUMBAGITEMS
+	ld hl,wNumBagItems
 	call AddItemToInventory
 	ret nc
 	call GetItemName ; $2fcf
@@ -10698,11 +10698,11 @@ Func_40b0: ; 40b0 (1:40b0)
 	ld [$FF00+$a1], a
 	call HasEnoughMoney
 	jr c, .asm_40ff
-	ld a, [W_PLAYERMONEY3] ; $d347
+	ld a, [wPlayerMoney] ; $d347
 	ld [$FF00+$9f], a
-	ld a, [W_PLAYERMONEY2] ; $d348
+	ld a, [wPlayerMoney + 1] ; $d348
 	ld [$FF00+$a0], a
-	ld a, [W_PLAYERMONEY1] ; $d349
+	ld a, [wPlayerMoney + 2] ; $d349
 	ld [$FF00+$a1], a
 	xor a
 	ld [$FF00+$a2], a
@@ -10712,11 +10712,11 @@ Func_40b0: ; 40b0 (1:40b0)
 	ld a, $d
 	call Predef ; indirect jump to Func_f71e (f71e (3:771e))
 	ld a, [$FF00+$a2]
-	ld [W_PLAYERMONEY3], a ; $d347
+	ld [wPlayerMoney], a ; $d347
 	ld a, [$FF00+$a3]
-	ld [W_PLAYERMONEY2], a ; $d348
+	ld [wPlayerMoney + 1], a ; $d348
 	ld a, [$FF00+$a4]
-	ld [W_PLAYERMONEY1], a ; $d349
+	ld [wPlayerMoney + 2], a ; $d349
 .asm_40ff
 	ld hl, $d732
 	set 2, [hl]
@@ -12073,7 +12073,7 @@ UpdatePlayerSprite: ; 4e31 (1:4e31)
 .asm_4e50
 	call Func_4c70
 	ld h, $c1
-	ld a, [W_WALKCOUNTER] ; $cfc5
+	ld a, [wWalkCounter] ; $cfc5
 	and a
 	jr nz, .asm_4e90
 	ld a, [$d528]
@@ -12189,7 +12189,7 @@ Func_4ed1: ; 4ed1 (1:4ed1)
 	jp z, UpdateSpriteMovementDelay  ; c1x1 == 2
 	cp $3
 	jp z, UpdateSpriteInWalkingAnimation  ; c1x1 == 3
-	ld a, [W_WALKCOUNTER] ; $cfc5
+	ld a, [wWalkCounter] ; $cfc5
 	and a
 	ret nz           ; don't do anything yet if player is currently moving (redundant, already tested in CheckSpriteAvailability)
 	call InitializeSpriteScreenPosition
@@ -12571,7 +12571,7 @@ CheckSpriteAvailability: ; 50dc (1:50dc)
 	jr .done
 .spriteVisible
 	ld c, a
-	ld a, [W_WALKCOUNTER] ; $cfc5
+	ld a, [wWalkCounter] ; $cfc5
 	and a
 	jr nz, .done           ; if player is currently walking, we're done
 	call UpdateSpriteImage
@@ -13126,7 +13126,7 @@ Func_5317: ; 5317 (1:5317)
 	pop hl
 	jr .asm_546a
 .asm_5489
-	ld hl, W_PARTYMON6_MOVE4PP ; $d267
+	ld hl, W_PARTYMON6DATA + W_PARTYMON1_MOVE4PP - W_PARTYMON1DATA ; $d267
 	dec c
 	jr nz, .asm_546a
 	ld de, $c5d0
@@ -13728,7 +13728,7 @@ Func_5849:
 	ld a, [hl]
 	ld [$cd3e], a
 	ld a, $a
-	ld [W_CURCHANNELPOINTER], a
+	ld [wMusicChannelPointer], a
 	ld a, $2
 	ld [$c0f0], a
 	ld a, $e5
@@ -13825,7 +13825,7 @@ Func_5a5f: ; 5a5f (1:5a5f)
 	ld [W_ISLINKBATTLE], a ; $d12b
 	ld [$FF00+$b5], a
 	ld a, $a
-	ld [W_CURCHANNELPOINTER], a
+	ld [wMusicChannelPointer], a
 	ld a, BANK(Music_Celadon)
 	ld [$c0f0], a
 	ld a, (Music_Celadon - $4000) / 3
@@ -14741,7 +14741,7 @@ Function61BC: ; 61bc (1:61bc)
 	ld [$C0EF],a
 	ld [$C0F0],a
 	ld a,$A
-	ld [W_CURCHANNELPOINTER],a
+	ld [wMusicChannelPointer],a
 	ld a,$FF
 	ld [$C0EE],a
 	call PlaySound ; stop music
@@ -15889,12 +15889,12 @@ TextTerminator_6b20: ; 6b20 (1:6b20)
 ; subtracts the amount the player paid from their money
 ; sets carry flag if there is enough money and unsets carry flag if not
 SubtractAmountPaidFromMoney_: ; 6b21 (1:6b21)
-	ld de,W_PLAYERMONEY3
+	ld de,wPlayerMoney
 	ld hl,$ff9f ; total price of items
 	ld c,3 ; length of money in bytes
 	call StringCmp
 	ret c
-	ld de,W_PLAYERMONEY1
+	ld de,wPlayerMoney + 2
 	ld hl,$ffa1 ; total price of items
 	ld c,3 ; length of money in bytes
 	ld a,$0c
@@ -16096,7 +16096,7 @@ DisplayPokemartDialogue_: ; 6c20 (1:6c20)
 	ld hl, Func_39bd5
 	ld b, BANK(Func_39bd5)
 	call Bankswitch
-	ld a,[W_NUMBAGITEMS]
+	ld a,[wNumBagItems]
 	and a
 	jp z,.bagEmpty
 	ld hl,PokemonSellingGreetingText
@@ -16107,7 +16107,7 @@ DisplayPokemartDialogue_: ; 6c20 (1:6c20)
 	ld a,$13
 	ld [$d125],a
 	call DisplayTextBoxID ; draw money text box
-	ld hl,W_NUMBAGITEMS
+	ld hl,wNumBagItems
 	ld a,l
 	ld [$cf8b],a
 	ld a,h
@@ -16156,7 +16156,7 @@ DisplayPokemartDialogue_: ; 6c20 (1:6c20)
 	ld [$cf0a],a
 .skipSettingFlag1
 	call AddAmountSoldToMoney
-	ld hl,W_NUMBAGITEMS
+	ld hl,wNumBagItems
 	call RemoveItemFromInventory
 	jp .sellMenuLoop
 .unsellableItem
@@ -16225,7 +16225,7 @@ DisplayPokemartDialogue_: ; 6c20 (1:6c20)
 .buyItem
 	call .isThereEnoughMoney
 	jr c,.notEnoughMoney
-	ld hl,W_NUMBAGITEMS
+	ld hl,wNumBagItems
 	call AddItemToInventory
 	jr nc,.bagFull
 	call SubtractAmountPaidFromMoney
@@ -16250,7 +16250,7 @@ DisplayPokemartDialogue_: ; 6c20 (1:6c20)
 	call PrintText
 	jp .loop
 .isThereEnoughMoney
-	ld de,W_PLAYERMONEY3
+	ld de,wPlayerMoney
 	ld hl,$ff9f ; item price
 	ld c,3 ; length of money in bytes
 	jp StringCmp
@@ -16575,7 +16575,7 @@ DisplayPokemonCenterDialogue_: ; 6fe6 (1:6fe6)
 	ld hl, Func_70433
 	call Bankswitch ; do the healing machine animation
 	xor a
-	ld [W_CURCHANNELPOINTER], a
+	ld [wMusicChannelPointer], a
 	ld a, [$c0f0]
 	ld [$c0ef], a
 	ld a, [$d35b]
@@ -17268,7 +17268,7 @@ JapanesePokedexMenu: ; 74a1 (1:74a1)
 	call ClearScreenArea
 	FuncCoord 12, 1 ; $c3c0
 	ld hl, Coord
-	ld de, W_PLAYERMONEY3 ; $d347
+	ld de, wPlayerMoney ; $d347
 	ld c, $a3
 	call PrintBCDNumber
 	ld hl, $d730
@@ -17901,7 +17901,7 @@ Func_7995: ; 7995 (1:7995)
 	xor a
 	ld [wCurrentMenuItem], a ; $cc26
 	ld [wListScrollOffset], a ; $cc36
-	ld a, [W_NUMBAGITEMS] ; $d31d
+	ld a, [wNumBagItems] ; $d31d
 	and a
 	jr nz, Func_79ab
 	ld hl, UnnamedText_7b3b ; $7b3b
@@ -17911,7 +17911,7 @@ Func_7995: ; 7995 (1:7995)
 Func_79ab: ; 79ab (1:79ab)
 	ld hl, UnnamedText_7b2c ; $7b2c
 	call PrintText
-	ld hl, W_NUMBAGITEMS ; $d31d
+	ld hl, wNumBagItems ; $d31d
 	ld a, l
 	ld [$cf8b], a
 	ld a, h
@@ -17934,14 +17934,14 @@ Func_79ab: ; 79ab (1:79ab)
 	cp $ff
 	jp z, Func_79ab
 .asm_79e7
-	ld hl, W_NUMBOXITEMS ; $d53a
+	ld hl, wNumBoxItems ; $d53a
 	call AddItemToInventory
 	jr c, .asm_79f8
 	ld hl, UnnamedText_7b40 ; $7b40
 	call PrintText
 	jp Func_79ab
 .asm_79f8
-	ld hl, W_NUMBAGITEMS ; $d31d
+	ld hl, wNumBagItems ; $d31d
 	call RemoveItemFromInventory
 	call WaitForSoundToFinish
 	ld a, $ab
@@ -17955,7 +17955,7 @@ Func_7a12: ; 7a12 (1:7a12)
 	xor a
 	ld [wCurrentMenuItem], a ; $cc26
 	ld [wListScrollOffset], a ; $cc36
-	ld a, [W_NUMBOXITEMS] ; $d53a
+	ld a, [wNumBoxItems] ; $d53a
 	and a
 	jr nz, Func_7a28
 	ld hl, UnnamedText_7b54 ; $7b54
@@ -17965,7 +17965,7 @@ Func_7a12: ; 7a12 (1:7a12)
 Func_7a28: ; 7a28 (1:7a28)
 	ld hl, UnnamedText_7b45 ; $7b45
 	call PrintText
-	ld hl, W_NUMBOXITEMS ; $d53a
+	ld hl, wNumBoxItems ; $d53a
 	ld a, l
 	ld [$cf8b], a
 	ld a, h
@@ -17988,14 +17988,14 @@ Func_7a28: ; 7a28 (1:7a28)
 	cp $ff
 	jp z, Func_7a28
 .asm_7a64
-	ld hl, W_NUMBAGITEMS ; $d31d
+	ld hl, wNumBagItems ; $d31d
 	call AddItemToInventory
 	jr c, .asm_7a75
 	ld hl, UnnamedText_7b59 ; $7b59
 	call PrintText
 	jp Func_7a28
 .asm_7a75
-	ld hl, W_NUMBOXITEMS ; $d53a
+	ld hl, wNumBoxItems ; $d53a
 	call RemoveItemFromInventory
 	call WaitForSoundToFinish
 	ld a, $ab
@@ -18009,7 +18009,7 @@ Func_7a8f: ; 7a8f (1:7a8f)
 	xor a
 	ld [wCurrentMenuItem], a ; $cc26
 	ld [wListScrollOffset], a ; $cc36
-	ld a, [W_NUMBOXITEMS] ; $d53a
+	ld a, [wNumBoxItems] ; $d53a
 	and a
 	jr nz, Func_7aa5
 	ld hl, UnnamedText_7b54 ; $7b54
@@ -18019,7 +18019,7 @@ Func_7a8f: ; 7a8f (1:7a8f)
 Func_7aa5: ; 7aa5 (1:7aa5)
 	ld hl, UnnamedText_7b5e ; $7b5e
 	call PrintText
-	ld hl, W_NUMBOXITEMS ; $d53a
+	ld hl, wNumBoxItems ; $d53a
 	ld a, l
 	ld [$cf8b], a
 	ld a, h
@@ -18362,7 +18362,7 @@ INCLUDE "music/sfx/sfx_02_36.asm"
 
 PlayBattleMusic: ; 0x90c6
 	xor a
-	ld [W_CURCHANNELPOINTER], a
+	ld [wMusicChannelPointer], a
 	ld [$d083], a
 	dec a
 	ld [$c0ee], a
@@ -20115,7 +20115,7 @@ Music_Cities1AlternateTempo: ; 0x9b81
 	ld [$cfc8], a
 	ld [$cfc9], a
 	ld a, $ff
-	ld [W_CURCHANNELPOINTER], a
+	ld [wMusicChannelPointer], a
 	ld c, $64
 	call DelayFrames
 	ld c, BANK(Music_Cities1)
@@ -22282,7 +22282,7 @@ UnnamedText_cdff: ; cdff (3:4dff)
 
 ; function to add an item (in varying quantities) to the player's bag or PC box
 ; INPUT:
-; hl = address of inventory (either W_NUMBAGITEMS or W_NUMBOXITEMS)
+; hl = address of inventory (either wNumBagItems or wNumBoxItems)
 ; [$CF91] = item ID
 ; [$CF96] = item quantity
 ; sets carry flag if successful, unsets carry flag if unsuccessful
@@ -22294,10 +22294,10 @@ AddItemToInventory_: ; ce04 (3:4e04)
 	push hl
 	push hl
 	ld d,50 ; PC box can hold 50 items
-	ld a,W_NUMBAGITEMS & $FF
+	ld a,wNumBagItems & $FF
 	cp l
 	jr nz,.checkIfInventoryFull
-	ld a,W_NUMBAGITEMS >> 8
+	ld a,wNumBagItems >> 8
 	cp h
 	jr nz,.checkIfInventoryFull
 ; if the destination is the bag
@@ -22376,7 +22376,7 @@ AddItemToInventory_: ; ce04 (3:4e04)
 
 ; function to remove an item (in varying quantities) from the player's bag or PC box
 ; INPUT:
-; hl = address of inventory (either W_NUMBAGITEMS or W_NUMBOXITEMS)
+; hl = address of inventory (either wNumBagItems or wNumBoxItems)
 ; [$CF92] = index (within the inventory) of the item to remove
 ; [$CF96] = quantity to remove
 RemoveItemFromInventory_: ; ce74 (3:4e74)
@@ -26943,7 +26943,7 @@ ItemUseEvoStone: ; da5b (3:5a5b)
 	jr z,.noEffect
 	pop af
 	ld [$cf92],a
-	ld hl,W_NUMBAGITEMS
+	ld hl,wNumBagItems
 	ld a,1 ; remove 1 stone
 	ld [$cf96],a
 	jp RemoveItemFromInventory
@@ -28512,7 +28512,7 @@ PrintItemUseTextAndRemoveItem: ; e563 (3:6563)
 	call WaitForTextScrollButtonPress ; wait for button press
 
 RemoveUsedItem: ; e571 (3:6571)
-	ld hl,W_NUMBAGITEMS
+	ld hl,wNumBagItems
 	ld a,1 ; one item
 	ld [$cf96],a ; store quantity
 	jp RemoveItemFromInventory
@@ -28784,7 +28784,7 @@ GetSelectedMoveOffset2: ; e6e9 (3:66e9)
 
 ; confirms the item toss and then tosses the item
 ; INPUT:
-; hl = address of inventory (either W_NUMBAGITEMS or W_NUMBOXITEMS)
+; hl = address of inventory (either wNumBagItems or wNumBoxItems)
 ; [$cf91] = item ID
 ; [$cf92] = index of item within inventory
 ; [$cf96] = quantity to toss
@@ -29026,7 +29026,7 @@ Func_e7a4: ; e7a4 (3:67a4)
 	ld de, W_BOXMON1DATA
 	ld bc, $c
 	call CopyData
-	ld hl, W_PLAYERIDHI ; $d359
+	ld hl, wPlayerID ; $d359
 	ld a, [hli]
 	ld [de], a
 	inc de
@@ -30290,10 +30290,10 @@ _AddPokemonToParty: ; f2e5 (3:72e5)
 	ld a, $3e
 	call Predef ; indirect jump to WriteMonMoves (3afb8 (e:6fb8))
 	pop de
-	ld a, [W_PLAYERIDHI]  ; set trainer ID to player ID
+	ld a, [wPlayerID]  ; set trainer ID to player ID
 	inc de
 	ld [de], a
-	ld a, [W_PLAYERIDLO]
+	ld a, [wPlayerID + 1]
 	inc de
 	ld [de], a
 	push de
@@ -30971,21 +30971,21 @@ Func_f839: ; f839 (3:7839)
 InitializePlayerData: ; f850 (3:7850)
 	call GenRandom
 	ld a, [H_RAND2]
-	ld [W_PLAYERIDHI], a          ; set player trainer id
+	ld [wPlayerID], a          ; set player trainer id
 	call GenRandom
 	ld a, [H_RAND1]
-	ld [W_PLAYERIDLO], a
+	ld [wPlayerID + 1], a
 	ld a, $ff
 	ld [$d71b], a                 ; XXX what's this?
 	ld hl, W_NUMINPARTY ; $d163
 	call InitializeEmptyList      ; no party mons
 	ld hl, W_NUMINBOX ; $da80
 	call InitializeEmptyList      ; no boxed mons
-	ld hl, W_NUMBAGITEMS ; $d31d
+	ld hl, wNumBagItems ; $d31d
 	call InitializeEmptyList      ; no items
-	ld hl, W_NUMBOXITEMS ; $d53a
+	ld hl, wNumBoxItems ; $d53a
 	call InitializeEmptyList      ; no boxed items
-	ld hl, W_PLAYERMONEY2 ; $d348
+	ld hl, wPlayerMoney + 1 ; $d348
 	ld a, $30
 	ld [hld], a                   ; set money to 00 30 00 (3000)
 	xor a
@@ -30996,7 +30996,7 @@ InitializePlayerData: ; f850 (3:7850)
 	ld hl, W_OBTAINEDBADGES ; $d356
 	ld [hli], a                   ; no badges obtained
 	ld [hl], a                    ; XXX what's this?
-	ld hl, W_PLAYERCOINS1 ; $d5a4
+	ld hl, wPlayerCoins ; $d5a4
 	ld [hli], a                   ; no coins
 	ld [hl], a
 	ld hl, W_GAMEPROGRESSFLAGS ; $d5f0
@@ -31014,7 +31014,7 @@ InitializeEmptyList: ; f8a0 (3:78a0)
 
 Func_f8a5: ; f8a5 (3:78a5)
 	call Load16BitRegisters
-	ld hl, W_NUMBAGITEMS ; $d31d
+	ld hl, wNumBagItems ; $d31d
 .asm_f8ab
 	inc hl
 	ld a, [hli]
@@ -32869,7 +32869,7 @@ StartMenu_Item: ; 13302 (4:7302)
 	call PrintText
 	jr .exitMenu
 .notInLinkBattle
-	ld bc,W_NUMBAGITEMS
+	ld bc,wNumBagItems
 	ld hl,$cf8b
 	ld a,c
 	ld [hli],a
@@ -32999,7 +32999,7 @@ StartMenu_Item: ; 13302 (4:7302)
 	inc a
 	jr z,.tossZeroItems
 .skipAskingQuantity
-	ld hl,W_NUMBAGITEMS
+	ld hl,wNumBagItems
 	call TossItem
 .tossZeroItems
 	jp ItemMenuLoop
@@ -33175,7 +33175,7 @@ DrawTrainerInfo: ; 1349a (4:749a)
 	call PlaceString
 	FuncCoord 8,4
 	ld hl,Coord
-	ld de,W_PLAYERMONEY3
+	ld de,wPlayerMoney
 	ld c,$e3
 	call PrintBCDNumber
 	FuncCoord 9,6
@@ -33563,7 +33563,7 @@ Func_137aa: ; 137aa (4:77aa)
 	inc hl
 	or [hl]
 	jr z, .asm_1380a
-	ld de, W_PLAYERMONEY1 ; $d349
+	ld de, wPlayerMoney + 2 ; $d349
 	ld c, $3
 	ld a, $b
 	call Predef ; indirect jump to Func_f81d (f81d (3:781d))
@@ -35228,7 +35228,7 @@ UnnamedText_17f32: ; 17f32 (5:7f32)
 
 ; removes one of the specified item ID [$FFdb] from bag (if existent)
 RemoveItemByID: ; 17f37 (5:7f37)
-	ld hl, W_BAGITEM01 ; $d31e
+	ld hl, wBagItems ; $d31e
 	ld a, [$FF00+$db]
 	ld b, a
 	xor a
@@ -35249,7 +35249,7 @@ RemoveItemByID: ; 17f37 (5:7f37)
 	ld [$cf96], a
 	ld a, [$FF00+$dc]
 	ld [wWhichPokemon], a ; $cf92
-	ld hl, W_NUMBAGITEMS ; $d31d
+	ld hl, wNumBagItems ; $d31d
 	jp RemoveItemFromInventory
 
 SECTION "bank6",ROMX,BANK[$6]
@@ -40363,7 +40363,7 @@ OaksLabScript18: ; 1d009 (7:5009)
 	ret
 
 Function1D00A: ; 1d00a (7:500a)
-	ld hl, W_BAGITEM01
+	ld hl, wBagItems
 	ld bc, $0000
 .asm_1d010
 	ld a, [hli]
@@ -43837,7 +43837,7 @@ asm_1e9ab: ; 1e9ab (7:69ab)
 asm_1e9b0: ; 1e9b0 (7:69b0)
 	call EnableAutoTextBoxDrawing
 	xor a
-	ld [W_CURCHANNELPOINTER], a
+	ld [wMusicChannelPointer], a
 	dec a
 	call PlaySound
 	ld c, BANK(SFX_02_5f)
@@ -54990,7 +54990,7 @@ Func_39bd5: ; 39bd5 (e:5bd5)
 .asm_39c02
 	cp $2
 	jr nz, .asm_39c10
-	ld hl, W_NUMBAGITEMS ; $d31d
+	ld hl, wNumBagItems ; $d31d
 	ld de, ItemNames ; $472b
 	ld a, $4
 	jr .asm_39c18
@@ -60597,7 +60597,7 @@ TrainerBattleVictory: ; 3c696 (f:4696)
 	call Func_3381
 	ld hl, MoneyForWinningText ; $46e4
 	call PrintText
-	ld de, W_PLAYERMONEY1 ; $d349
+	ld de, wPlayerMoney + 2 ; $d349
 	ld hl, $d07b
 	ld c, $3
 	ld a, $b
@@ -61101,7 +61101,7 @@ AnyPokemonAliveCheck: ; 3ca83 (f:4a83)
 	ld e, a
 	xor a
 	ld hl, W_PARTYMON1_HP ; $d16c
-	ld bc, W_PARTYMON2_HP - W_PARTYMON1_HP - 1  ; $2b
+	ld bc, W_PARTYMON2DATA - W_PARTYMON1DATA - 1
 .partyMonsLoop
 	or [hl]
 	inc hl
@@ -61445,7 +61445,7 @@ Func_3cd3a: ; 3cd3a (f:4d3a)
 ReadPlayerMonCurHPAndStatus: ; 3cd43 (f:4d43)
 	ld a, [wPlayerMonNumber] ; $cc2f
 	ld hl, W_PARTYMON1_HP ; $d16c
-	ld bc, W_PARTYMON2_HP - W_PARTYMON1_HP ; $2c
+	ld bc, W_PARTYMON2DATA - W_PARTYMON1DATA
 	call AddNTimes
 	ld d, h
 	ld e, l
@@ -61853,7 +61853,7 @@ asm_3d00e: ; 3d00e (f:500e)
 	db $01, $04, $32, $ff
 
 .asm_3d031
-	ld hl, W_NUMBAGITEMS ; $d31d
+	ld hl, wNumBagItems ; $d31d
 	ld a, l
 	ld [$cf8b], a
 	ld a, h
@@ -63545,11 +63545,11 @@ Func_3dc88: ; 3dc88 (f:5c88)
 	ld bc, $2c
 	ld a, [wPlayerMonNumber] ; $cc2f
 	call AddNTimes
-	ld a, [W_PLAYERIDHI] ; $d359
+	ld a, [wPlayerID] ; $d359
 	cp [hl]
 	jr nz, .asm_3dcb1
 	inc hl
-	ld a, [W_PLAYERIDLO] ; $d35a
+	ld a, [wPlayerID + 1] ; $d35a
 	cp [hl]
 	jp z, Func_3ddb0
 .asm_3dcb1
@@ -84902,7 +84902,7 @@ PrintPrizePrice: ; 5287a (14:687a)
 	call PlaceString
 	FuncCoord 13,1
 	ld hl,Coord
-	ld de,W_PLAYERCOINS1
+	ld de,wPlayerCoins
 	ld c,%10000010
 	call PrintBCDNumber
 	ret
@@ -84982,7 +84982,7 @@ HandlePrizeChoice: ; 528c6 (14:68c6)
 .SubtractCoins ; 14:692C
 	call LoadCoinsToSubtract
 	ld hl,$FFA1
-	ld de,W_PLAYERCOINS2
+	ld de,wPlayerCoins + 1
 	ld c,$02 ; how many bytes
 	ld a,$0C
 	call Predef ; subtract coins (BCD daa operations)
@@ -85702,11 +85702,11 @@ Func_5525f: ; 5525f (15:525f)
 	add hl, de
 	ld b, [hl]
 	inc hl
-	ld a, [W_PLAYERIDHI] ; $d359
+	ld a, [wPlayerID] ; $d359
 	cp b
 	jr nz, .asm_552d1
 	ld b, [hl]
-	ld a, [W_PLAYERIDLO] ; $d35a
+	ld a, [wPlayerID + 1] ; $d35a
 	cp b
 	ld a, $0
 	jr z, .asm_552d6
@@ -101536,7 +101536,7 @@ Func_70377: ; 70377 (1c:4377)
 	call PlaceString
 	FuncCoord 4, 10 ; $c46c
 	ld hl, Coord
-	ld de, W_PLAYERMONEY3 ; $d347
+	ld de, wPlayerMoney ; $d347
 	ld c, $a3
 	call PrintBCDNumber
 	ld hl, UnnamedText_703fa ; $43fa
@@ -101584,7 +101584,7 @@ Func_70423: ; 70423 (1c:4423)
 	ld [$cfc8], a
 	ld [$cfc9], a
 	ld a, $ff
-	ld [W_CURCHANNELPOINTER], a
+	ld [wMusicChannelPointer], a
 	jp GBFadeOut2
 
 Func_70433: ; 70433 (1c:4433)
@@ -101605,12 +101605,12 @@ Func_70433: ; 70433 (1c:4433)
 	ld de, Unknown_704d7 ; $44d7
 	call Func_70503
 	ld a, $4
-	ld [W_CURCHANNELPOINTER], a
+	ld [wMusicChannelPointer], a
 	ld a, $ff
 	ld [$c0ee], a
 	call PlaySound
 .asm_70464
-	ld a, [W_CURCHANNELPOINTER]
+	ld a, [wMusicChannelPointer]
 	and a
 	jr nz, .asm_70464
 	ld a, [W_NUMINPARTY] ; $d163
@@ -102112,7 +102112,7 @@ _HandleMidJump: ; 7087e (1c:487e)
 	ld [$c104], a
 	ret
 .asm_70895
-	ld a, [W_WALKCOUNTER] ; $cfc5
+	ld a, [wWalkCounter] ; $cfc5
 	cp $0
 	ret nz
 	call UpdateSprites
@@ -107577,7 +107577,7 @@ Func_74ee0: ; 74ee0 (1d:4ee0)
 	ld hl, UnnamedText_74fd8
 	call PrintText
 	ld hl, $ffde
-	ld de, W_PLAYERMONEY1 ; $d349
+	ld de, wPlayerMoney + 2 ; $d349
 	ld c, $3
 	ld a, $c
 	call Predef ; indirect jump to Func_f836 (f836 (3:7836))
@@ -110850,10 +110850,10 @@ HiddenCoins: ; 76799 (1d:6799)
 	ld a, $10
 	call Predef
 	call EnableAutoTextBoxDrawing
-	ld a, [W_PLAYERCOINS1]
+	ld a, [wPlayerCoins]
 	cp $99
 	jr nz, .RoomInCoinCase
-	ld a, [W_PLAYERCOINS2]
+	ld a, [wPlayerCoins + 1]
 	cp $99
 	jr nz, .RoomInCoinCase
 	ld a, $2c
