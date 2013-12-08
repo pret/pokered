@@ -946,41 +946,101 @@ W_CURMAP: ; d35e
 
 	ds 2
 
-W_YCOORD EQU $D361 ; player’s position on the current map
-W_XCOORD EQU $D362
-W_YBLOCKCOORD EQU $D363 ; player's y position (by block)
-W_XBLOCKCOORD EQU $D364
+W_YCOORD: ; d361
+; player’s position on the current map
+	ds 1
 
-W_CURMAPTILESET EQU $D367
-W_CURMAPHEIGHT  EQU $D368 ; blocks
-W_CURMAPWIDTH   EQU $D369 ; blocks
+W_XCOORD: ; d362
+	ds 1
 
-W_MAPDATAPTR EQU $D36A
-W_MAPTEXTPTR EQU $D36C
-W_MAPSCRIPTPTR EQU $D36E
-W_MAPCONNECTIONS EQU $D370 ; connection byte
-W_MAPCONN1PTR EQU $D371
-W_MAPCONN2PTR EQU $D37C
-W_MAPCONN3PTR EQU $D387
-W_MAPCONN4PTR EQU $D392
+W_YBLOCKCOORD: ; d363
+; player's y position (by block)
+	ds 1
 
-W_SPRITESET EQU $D39D ; sprite set for the current map (11 sprite picture ID's)
-W_SPRITESETID EQU $D3A8 ; sprite set ID for the current map
+W_XBLOCKCOORD: ; d364
+	ds 3
 
-W_NUMSPRITES EQU $D4E1 ; number of sprites on the current map
+W_CURMAPTILESET: ; d367
+	ds 1
 
+W_CURMAPHEIGHT: ; d368
+; blocks
+	ds 1
+
+W_CURMAPWIDTH: ; d369
+; blocks
+	ds 1
+
+W_MAPDATAPTR: ; d36a
+	ds 2
+
+W_MAPTEXTPTR: ; d36c
+	ds 2
+
+W_MAPSCRIPTPTR: ; d36e
+	ds 2
+
+W_MAPCONNECTIONS: ; d370
+; connection byte
+	ds 1
+
+W_MAPCONN1PTR: ; d371
+	ds 2
+	ds 9
+
+W_MAPCONN2PTR: ; d37c
+	ds 2
+	ds 9
+
+W_MAPCONN3PTR: ; d387
+	ds 2
+	ds 9
+
+W_MAPCONN4PTR: ; d392
+	ds 2
+	ds 9
+
+W_SPRITESET: ; d39d
+; sprite set for the current map (11 sprite picture ID's)
+	ds 11
+
+W_SPRITESETID: ; d3a8
+; sprite set ID for the current map
+	ds 1
+
+	ds 312
+
+W_NUMSPRITES: ; d4e1
+; number of sprites on the current map
 ; two bytes per sprite (movement byte 2 , text ID)
-W_MAPSPRITEDATA EQU $D4e4
+	ds 3
 
+W_MAPSPRITEDATA: ; d4e4
 ; two bytes per sprite (trainer class/item ID , trainer set ID)
-W_MAPSPRITEEXTRADATA EQU $D504
+	ds 32
 
-W_TILESETBANK             EQU $D52B
-W_TILESETBLOCKSPTR        EQU $D52C ; maps blocks (4x4 tiles) to it's tiles
-W_TILESETGFXPTR           EQU $D52E
-W_TILESETCOLLISIONPTR     EQU $D530 ; list of all walkable tiles
-W_TILESETTALKINGOVERTILES EQU $D532 ; 3 bytes
-W_GRASSTILE               EQU $D535
+W_MAPSPRITEEXTRADATA: ; d504
+	ds 39
+
+W_TILESETBANK: ; d52b
+	ds 1
+
+W_TILESETBLOCKSPTR: ; d52c
+; maps blocks (4x4 tiles) to tiles
+	ds 2
+
+W_TILESETGFXPTR: ; d52e
+	ds 2
+
+W_TILESETCOLLISIONPTR: ; d530
+; list of all walkable tiles
+	ds 2
+
+W_TILESETTALKINGOVERTILES: ; d532
+	ds 3
+
+W_GRASSTILE: ; d535
+	ds 1
 
 
 SECTION "Items", WRAMX[$d53a], BANK[1]
