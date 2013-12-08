@@ -18,7 +18,7 @@ $(shell $(foreach obj, $(OBJS), \
 	$(eval $(obj:.o=)_DEPENDENCIES := $(shell $(PYTHON) extras/pokemontools/scan_includes.py $(obj:.o=.asm) | sed s/globals.asm//g)) \
 ))
 $(shell $(foreach obj, $(OBJS), \
-	$(eval ALL_DEPENDENCIES := $(ALL_DEPENDENCIES) $($(obj:.o=)_DEPENDENCIES)) \
+	$(eval ALL_DEPENDENCIES += $($(obj:.o=)_DEPENDENCIES)) \
 ))
 
 all: $(ROMS)
