@@ -50,7 +50,7 @@ globals.asm: $(ALL_DEPENDENCIES:.asm=.tx) $(OBJS:.o=.tx)
 globals.tx: globals.asm
 	@cp $< $@
 
-$(OBJS): $$*.tx $$($$*_DEPENDENCIES$:.asm=.tx)
+$(OBJS): $$*.tx $$(patsubst %.asm, %.tx, $$($$*_DEPENDENCIES))
 	rgbasm -o $@ $*.tx
 
 pokered.gbc: globals.tx $(RED_OBJS)
