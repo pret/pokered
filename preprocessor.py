@@ -279,7 +279,9 @@ def setup_processor():
 
 def main():
     processor = setup_processor()
-    processor.preprocess()
+    output = processor.preprocess()
+    processor.update_globals()
+    return output
 
 if __name__ == '__main__':
     main()
