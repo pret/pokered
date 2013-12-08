@@ -1319,59 +1319,112 @@ W_PLAYERSTARTER: ; d717
 
 	ds 27
 
+
+W_FLAGS_D733: ; d733
 ; bit 4: use variable [W_CURMAPSCRIPT] instead of the provided index for next frame's map script (used to start battle when talking to trainers)
-W_FLAGS_D733 EQU $D733
+	ds 340
 
+W_GRASSRATE: ; d887
+	ds 1
 
-W_GRASSRATE EQU $D887
-W_GRASSMONS EQU $D888
-W_WATERRATE EQU $D8A4 ; OVERLOADED
-W_WATERMONS EQU $D8A5 ; OVERLOADED
+W_GRASSMONS: ; d888
+	ds 20
 
-W_ENEMYMONCOUNT  EQU $D89C
+wEnemyPartyCount: ; d89c
+	ds 1
+wEnemyPartyMons: ; d89d
+	ds 6
+	ds 1 ; end
 
-W_ENEMYMON1HP EQU $D8A5 ; 16 bits
+; Overload enemy party data
+W_WATERRATE EQU $d8a4
+W_WATERMONS EQU $d8a5
 
-W_ENEMYMON1MOVE3 EQU $D8AE
+wEnemyMons:
 
-W_ENEMYMON2MOVE3 EQU $D8DA
+wEnemyMon1: ; d8a4
+wEnemyMon1Species: ; d8a4
+	ds 1
+W_ENEMYMON1HP: ; d8a5
+	ds 2
 
-W_ENEMYMON3MOVE3 EQU $D906
+	ds 7
 
-W_ENEMYMON4MOVE3 EQU $D932
+W_ENEMYMON1MOVE3: ; d8ae
+	ds 44
+W_ENEMYMON2MOVE3: ; d8da
+	ds 44
+W_ENEMYMON3MOVE3: ; d906
+	ds 44
+W_ENEMYMON4MOVE3: ; d932
+	ds 44
+W_ENEMYMON5MOVE3: ; d95e
+	ds 44
+W_ENEMYMON6MOVE3: ; d98a
+	ds 34
 
-W_ENEMYMON5MOVE3 EQU $D95E
+W_ENEMYMON1OT: ; d9ac
+	ds 11
+W_ENEMYMON2OT: ; d9b7
+	ds 11
+W_ENEMYMON3OT: ; d9c2
+	ds 11
+W_ENEMYMON4OT: ; d9cd
+	ds 11
+W_ENEMYMON5OT: ; d9d8
+	ds 11
+W_ENEMYMON6OT: ; d9e3
+	ds 11
 
-W_ENEMYMON6MOVE3 EQU $D98A
+W_ENEMYMON1NAME: ; d9ee
+	ds 11
+W_ENEMYMON2NAME: ; d9f9
+	ds 11
+W_ENEMYMON3NAME: ; da04
+	ds 11
+W_ENEMYMON4NAME: ; da0f
+	ds 11
+W_ENEMYMON5NAME: ; da1a
+	ds 11
+W_ENEMYMON6NAME: ; da25
+	ds 11
 
-W_ENEMYMON1OT    EQU $D9AC
-W_ENEMYMON2OT    EQU $D9B7
-W_ENEMYMON3OT    EQU $D9C2
-W_ENEMYMON4OT    EQU $D9CD
-W_ENEMYMON5OT    EQU $D9D8
-W_ENEMYMON6OT    EQU $D9E3
+W_TRAINERHEADERPTR: ; da30
+	ds 2
 
-W_ENEMYMON1NAME     EQU $D9EE
-W_ENEMYMON2NAME     EQU $D9F9
-W_ENEMYMON3NAME     EQU $DA04
-W_ENEMYMON4NAME     EQU $DA0F
-W_ENEMYMON5NAME     EQU $DA1A
-W_ENEMYMON6NAME     EQU $DA25 ; to $da2f
-W_TRAINERHEADERPTR  EQU $DA30
+	ds 7
 
+W_CURMAPSCRIPT: ; da39
 ; index of current map script, mostly used as index for function pointer array
 ; mostly copied from map-specific map script pointer and wirtten back later
-W_CURMAPSCRIPT      EQU $DA39
+	ds 1
 
-W_PLAYTIMEHOURS     EQU $DA40 ; two bytes
-W_PLAYTIMEMINUTES   EQU $DA42 ; two bytes
-W_PLAYTIMESECONDS   EQU $DA44 ; one byte
-W_PLAYTIMEFRAMES    EQU $DA45 ; one byte
+	ds 6
 
-W_NUMSAFARIBALLS EQU $DA47
+W_PLAYTIMEHOURS: ; da40
+	ds 2
+W_PLAYTIMEMINUTES: ; da42
+	ds 2
+W_PLAYTIMESECONDS: ; da44
+	ds 1
+W_PLAYTIMEFRAMES: ; da45
+	ds 1
 
+	ds 1
+
+W_NUMSAFARIBALLS: ; da47
+	ds 1
+
+	ds 56
+
+W_NUMINBOX: ; da80
 ; number of mons in current box
-W_NUMINBOX    EQU $DA80
-W_BOXMON1DATA EQU $DA96
-W_BOXMON2DATA EQU $DAB7
+	ds 22
+
+W_BOXMON1DATA: ; da96
+	ds 33
+W_BOXMON2DATA: ; dab7
+	ds 33 * 19
+
+; dd2a
 

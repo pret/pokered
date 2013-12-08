@@ -11282,7 +11282,7 @@ LoadMonData_: ; 45b6 (1:45b6)
 	ld a,[$cc49]
 	cp a,$01
 	jr c,.getMonEntry
-	ld hl,$d8a4 ; enemy pokemon 1 data
+	ld hl,wEnemyMons ; enemy pokemon 1 data
 	jr z,.getMonEntry
 	cp a,$02
 	ld hl,W_BOXMON1DATA ; box pokemon 1 data
@@ -13088,7 +13088,7 @@ Func_5317: ; 5317 (1:5317)
 	inc de
 	dec c
 	jr nz, .asm_5446
-	ld de, W_ENEMYMONCOUNT ; $d89c
+	ld de, wEnemyPartyCount ; $d89c
 	ld bc, $194
 .asm_5456
 	ld a, [hli]
@@ -13266,7 +13266,7 @@ Func_5530
 	ld hl, Func_39bd5
 	ld b, $e
 	call Bankswitch
-	ld hl, $d8a4
+	ld hl, wEnemyMons
 	call Func_57d6
 	jp .asm_565b
 .asm_55b0
@@ -13677,7 +13677,7 @@ Func_5849:
 	ld de, $cd4e
 	ld bc, $000b
 	call CopyData
-	ld hl, $d8a4
+	ld hl, wEnemyMons
 	ld a, [$cd3e]
 	ld bc, $002c
 	call AddNTimes
@@ -13707,7 +13707,7 @@ Func_5849:
 	add hl, de
 	ld a, [hl]
 	ld [$cf91], a
-	ld hl, $d8a4
+	ld hl, wEnemyMons
 	ld a, c
 	ld bc, $002c
 	call AddNTimes
@@ -30109,7 +30109,7 @@ _AddPokemonToParty: ; f2e5 (3:72e5)
 	ld a, [$cc49]
 	and $f
 	jr z, .asm_f2f2
-	ld de, W_ENEMYMONCOUNT ; $d89c
+	ld de, wEnemyPartyCount ; $d89c
 .asm_f2f2
 	ld a, [de]
 	inc a
@@ -30158,7 +30158,7 @@ _AddPokemonToParty: ; f2e5 (3:72e5)
 	ld a, [$cc49]
 	and $f
 	jr z, .asm_f34c
-	ld hl, W_WATERRATE ; $d8a4
+	ld hl, wEnemyMons ; $d8a4
 .asm_f34c
 	ld a, [$FF00+$e4]
 	dec a
@@ -54969,7 +54969,7 @@ Func_39bd5: ; 39bd5 (e:5bd5)
 	ld a, [$d11b]
 	cp $1
 	jr nz, .asm_39be6
-	ld hl, W_ENEMYMONCOUNT ; $d89c
+	ld hl, wEnemyPartyCount ; $d89c
 	ld de, $d9ac
 	ld a, $6
 	jr .asm_39c18
@@ -55040,10 +55040,10 @@ ReadTrainer: ; 39c53 (e:5c53)
 	and a
 	ret nz
 
-; set [W_ENEMYMONCOUNT] to 0, [$D89D] to FF
+; set [wEnemyPartyCount] to 0, [$D89D] to FF
 ; XXX first is total enemy pokemon?
 ; XXX second is species of first pokemon?
-	ld hl,W_ENEMYMONCOUNT
+	ld hl,wEnemyPartyCount
 	xor a
 	ld [hli],a
 	dec a
@@ -56303,7 +56303,7 @@ Function6718: ; 3a718 (e:6718)
 	jp DecrementAICount
 
 Function672A: ; 3a72a (e:672a)
-	ld a,[W_ENEMYMONCOUNT]
+	ld a,[wEnemyPartyCount]
 	ld c,a
 	ld hl,W_ENEMYMON1HP
 
@@ -56527,8 +56527,8 @@ SetupOwnPartyPokeballs: ; 3a869 (e:6869)
 
 SetupEnemyPartyPokeballs: ; 3a887 (e:6887)
 	call Func_3a919
-	ld hl, $d8a4
-	ld de, W_ENEMYMONCOUNT ; $d89c
+	ld hl, wEnemyMons
+	ld de, wEnemyPartyCount ; $d89c
 	call SetupPokeballs
 	ld hl, W_BASECOORDX ; $d081
 	ld a, $48
@@ -56666,8 +56666,8 @@ Func_3a948: ; 3a948 (e:6948)
 	ld [$cd3e], a
 	ld hl, wOAMBuffer
 	call Func_3a8e1
-	ld hl, W_WATERRATE ; $d8a4
-	ld de, W_ENEMYMONCOUNT ; $d89c
+	ld hl, wEnemyMons ; $d8a4
+	ld de, wEnemyPartyCount ; $d89c
 	call SetupPokeballs
 	ld hl, W_BASECOORDX ; $d081
 	ld a, $50
@@ -59813,7 +59813,7 @@ Func_3c11e: ; 3c11e (f:411e)
 	ld [$cd6a], a
 	inc a
 	ld [$d11d], a
-	ld hl, W_WATERMONS ; $d8a5 (aliases: W_ENEMYMON1HP)
+	ld hl, W_ENEMYMON1HP ; $d8a5
 	ld bc, $2b
 	ld d, $3
 .asm_3c134
@@ -60527,10 +60527,10 @@ Func_3c643: ; 3c643 (f:4643)
 	ret
 
 Func_3c64f: ; 3c64f (f:464f)
-	ld a, [W_ENEMYMONCOUNT] ; $d89c
+	ld a, [wEnemyPartyCount] ; $d89c
 	ld b, a
 	xor a
-	ld hl, W_WATERMONS ; $d8a5 (aliases: W_ENEMYMON1HP)
+	ld hl, W_ENEMYMON1HP ; $d8a5
 	ld de, $2c
 .asm_3c65a
 	or [hl]
@@ -61303,7 +61303,7 @@ Func_3cba6: ; 3cba6 (f:4ba6)
 Func_3cc13: ; 3cc13 (f:4c13)
 	ld a, [wWhichPokemon] ; $cf92
 	ld bc, $2c
-	ld hl, W_WATERRATE ; $d8a4
+	ld hl, wEnemyMons ; $d8a4
 	call AddNTimes
 	ld de, $cfe5
 	ld bc, $c
