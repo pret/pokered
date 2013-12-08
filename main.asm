@@ -21210,7 +21210,7 @@ Func_c52f: ; c52f (3:452f)
 	call TextBoxBorder
 	FuncCoord 1, 1 ; $c3b5
 	ld hl, Coord
-	ld de, W_SAFARITIMER1 ; $d70d
+	ld de, wSafariSteps ; $d70d
 	ld bc, $203
 	call PrintNumber
 	FuncCoord 4, 1 ; $c3b8
@@ -43819,17 +43819,17 @@ Func_1e988: ; 1e988 (7:6988)
 	jr asm_1e9ab
 
 Func_1e997: ; 1e997 (7:6997)
-	ld a, [W_SAFARITIMER1] ; $d70d
+	ld a, [wSafariSteps] ; $d70d
 	ld b, a
-	ld a, [W_SAFARITIMER2] ; $d70e
+	ld a, [wSafariSteps + 1] ; $d70e
 	ld c, a
 	or b
 	jr z, asm_1e9b0
 	dec bc
 	ld a, b
-	ld [W_SAFARITIMER1], a ; $d70d
+	ld [wSafariSteps], a ; $d70d
 	ld a, c
-	ld [W_SAFARITIMER2], a ; $d70e
+	ld [wSafariSteps + 1], a ; $d70e
 asm_1e9ab: ; 1e9ab (7:69ab)
 	xor a
 	ld [$da46], a
@@ -108087,10 +108087,10 @@ SafariZoneEntranceText4: ; 752ca (1d:52ca)
 	call PrintText
 	ld a, $1e
 	ld [$da47], a
-	ld a, $1
-	ld [$d70d], a
-	ld a, $f6
-	ld [$d70e], a
+	ld a, 502 / $100
+	ld [wSafariSteps], a
+	ld a, 502 % $100
+	ld [wSafariSteps + 1], a
 	ld a, $40
 	ld c, $3
 	call Func_752a3
