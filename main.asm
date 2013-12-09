@@ -261,7 +261,7 @@ MapHeaderPointers: ; 01ae (0:01ae)
 	dw UndergroundTunnelEntranceRoute6_h ; unused
 	dw Route7Gate_h
 	dw UndergroundPathEntranceRoute7_h
-	dw $575d
+	dw UndergroundPathEntranceRoute7Copy_h
 	dw Route8Gate_h
 	dw UndergroundPathEntranceRoute8_h ;id=80
 	dw RockTunnelPokecenter_h
@@ -11515,8 +11515,7 @@ UnusedNames: ; 4a92 (1:4a92)
 	db "キャプテン@"
 	db "プチマスター@"
 	db "マスター@"
-
-INCBIN "baserom.gbc",$4b09,$4b0f - $4b09
+	db "エクセレント"
 
 ; calculates the OAM data for all currently visible sprites and writes it to W_OAMBUFFER
 PrepareOAMData: ; 4b0f (1:4b0f)
@@ -11970,7 +11969,8 @@ Func_4d72: ; 4d72 (1:4d72)
 DiagonalLines: ; 4d85 (1:4d85)
 	INCBIN "gfx/diagonal_lines.2bpp"
 
-INCBIN "baserom.gbc",$4da5,$4da6 - $4da5
+Func_4da5: ; 4da5 (1:4da5)
+	ret
 
 Func_4da6: ; 4da6 (1:4da6)
 	call GBPalNormal
@@ -16563,7 +16563,7 @@ DisplayPokemonCenterDialogue_: ; 6fe6 (1:6fe6)
 	ld a, [W_CURMENUITEMID]
 	and a
 	jr nz, .declinedHealing ; if the player chose No
-	call Unknown_7078
+	call Func_7078
 	call LoadScreenTilesFromBuffer1 ; restore screen
 	ld hl, NeedYourPokemonText
 	call PrintText
@@ -16618,7 +16618,7 @@ PokemonCenterFarewellText: ; 7072 (1:7072)
 	TX_FAR _PokemonCenterFarewellText
 	db "@"
 
-Unknown_7078: ; 7078 (1:7078)
+Func_7078: ; 7078 (1:7078)
 	push hl
 	ld hl, SafariZoneRestHouses
 	ld a, [W_CURMAP]
@@ -20779,10 +20779,10 @@ MapHeaderBanks: ; c23d (3:423d)
 	db BANK(DayCareM_h)
 	db BANK(Route6Gate_h)
 	db BANK(UndergroundTunnelEntranceRoute6_h)
-	db $17 ;FREEZE
+	db BANK(UndergroundTunnelEntranceRoute6_h) ;FREEZE
 	db BANK(Route7Gate_h)
 	db BANK(UndergroundPathEntranceRoute7_h)
-	db $17 ;FREEZE
+	db BANK(UndergroundPathEntranceRoute7Copy_h) ;FREEZE
 	db BANK(Route8Gate_h)
 	db BANK(UndergroundPathEntranceRoute8_h)
 	db BANK(RockTunnelPokecenter_h)
@@ -20877,7 +20877,7 @@ MapHeaderBanks: ; c23d (3:423d)
 	db BANK(Lab4_h)
 	db BANK(CinnabarPokecenter_h)
 	db BANK(CinnabarMart_h)
-	db $1D
+	db BANK(CinnabarMart_h)
 	db BANK(IndigoPlateauLobby_h)
 	db BANK(CopycatsHouseF1_h)
 	db BANK(CopycatsHouseF2_h)
@@ -36079,10 +36079,10 @@ ViridianCityScriptPointers: ; 18ffd (6:4ffd)
 	dw ViridianCityScript3
 
 ViridianCityScript0: ; 19005 (6:5005)
-	call Function1900b
-	jp Function1903d
+	call ViridianCityScript_1900b
+	jp ViridianCityScript_1903d
 
-Function1900b: ; 1900b (6:500b)
+ViridianCityScript_1900b: ; 1900b (6:500b)
 	ld a, [$d74c]
 	bit 0, a
 	ret nz
@@ -36104,12 +36104,12 @@ Function1900b: ; 1900b (6:500b)
 	call DisplayTextID
 	xor a
 	ld [H_CURRENTPRESSEDBUTTONS], a
-	call Function190cf
+	call ViridianCityScript_190cf
 	ld a, $3
 	ld [W_VIRIDIANCITYCURSCRIPT], a
 	ret
 
-Function1903d: ; 1903d (6:503d)
+ViridianCityScript_1903d: ; 1903d (6:503d)
 	ld a, [$d74b]
 	bit 5, a
 	ret nz
@@ -36124,7 +36124,7 @@ Function1903d: ; 1903d (6:503d)
 	call DisplayTextID
 	xor a
 	ld [H_CURRENTPRESSEDBUTTONS], a
-	call Function190cf
+	call ViridianCityScript_190cf
 	ld a, $3
 	ld [W_VIRIDIANCITYCURSCRIPT], a
 	ret
@@ -36149,7 +36149,7 @@ ViridianCityScript1: ; 19062 (6:5062)
 	ld a, WEEDLE
 	ld [W_CUROPPONENT], a
 	ld a, $2
-	ld [W_VIRIDIANCITYCURSCRIPT], a ; XXX what is this
+	ld [W_VIRIDIANCITYCURSCRIPT], a
 	ret
 
 ViridianCityScript2: ; 1908f (6:508f)
@@ -36184,7 +36184,7 @@ ViridianCityScript3: ; 190c1 (6:50c1)
 	ld [W_VIRIDIANCITYCURSCRIPT], a
 	ret
 
-Function190cf: ; 190cf (6:50cf)
+ViridianCityScript_190cf: ; 190cf (6:50cf)
 	call Func_3486
 	ld a, $1
 	ld [$cd38], a
@@ -36293,7 +36293,7 @@ ViridianCityText5: ; 1917f (6:517f)
 	db $08 ; asm
 	ld hl, UnnamedText_19191
 	call PrintText
-	call Function190cf
+	call ViridianCityScript_190cf
 	ld a, $3
 	ld [W_VIRIDIANCITYCURSCRIPT], a
 	jp TextScriptEnd
@@ -36420,10 +36420,10 @@ PewterCityScript0: ; 19251 (6:5251)
 	ld [W_MUSEUMF1CURSCRIPT], a
 	ld hl, $d754
 	res 0, [hl]
-	call Function1925e
+	call PewterCityScript_1925e
 	ret
 
-Function1925e: ; 1925e (6:525e)
+PewterCityScript_1925e: ; 1925e (6:525e)
 	ld a, [$d755]
 	bit 7, a
 	ret nz
@@ -36642,9 +36642,7 @@ UnnamedText_193fb: ; 193fb (6:53fb)
 	db "@"
 
 PewterCityText13: ; 19400 (6:5400)
-
-UnnamedText_19400: ; 19400 (6:5400)
-	TX_FAR _UnnamedText_19400
+	TX_FAR _PewterCityText13
 	db "@"
 
 PewterCityText4: ; 19405 (6:5405)
@@ -36730,7 +36728,7 @@ CeruleanCityScript: ; 19480 (6:5480)
 	ld a, [W_CERULEANCITYCURSCRIPT]
 	jp CallFunctionInTable
 
-CeruleanCity_Unknown1948c: ; 1948c (6:548c)
+CeruleanCityScript_1948c: ; 1948c (6:548c)
 	xor a
 	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
 	ld [W_CERULEANCITYCURSCRIPT], a
@@ -36749,7 +36747,7 @@ CeruleanCityScriptPointers: ; 1949d (6:549d)
 CeruleanCityScript4: ; 194a7 (6:54a7)
 	ld a, [W_ISINBATTLE]
 	cp $ff
-	jp z, CeruleanCity_Unknown1948c
+	jp z, CeruleanCityScript_1948c
 	ld a, $f0
 	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
 	ld hl, $d75b
@@ -36840,7 +36838,7 @@ CeruleanCityCoords2: ; 19554 (6:5554)
 CeruleanCityMovement1: ; 19559 (6:5559)
 	db $00,$00,$00,$FF
 
-CeruleanCityFunction1955d: ; 1955d (6:555d)
+CeruleanCityScript_1955d: ; 1955d (6:555d)
 	ld a,1
 	ld [$ff8c],a
 	xor a
@@ -36883,7 +36881,7 @@ CeruleanCityScript1: ; 19567 (6:5567)
 
 	xor a
 	ld [H_CURRENTPRESSEDBUTTONS], a
-	call CeruleanCityFunction1955d
+	call CeruleanCityScript_1955d
 	ld a, $2
 	ld [W_CERULEANCITYCURSCRIPT], a
 	ret
@@ -36891,8 +36889,8 @@ CeruleanCityScript1: ; 19567 (6:5567)
 CeruleanCityScript2: ; 195b1 (6:55b1)
 	ld a, [$d057]
 	cp $ff
-	jp z, CeruleanCity_Unknown1948c
-	call CeruleanCityFunction1955d
+	jp z, CeruleanCityScript_1948c
+	call CeruleanCityScript_1955d
 	ld a, $f0
 	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
 	ld hl, $d75a
@@ -37992,7 +37990,7 @@ SilphCo4_h: ; 0x19cff to 0x19d0b (12 bytes) (bank=6) (id=209)
 	dw SilphCo4Object ; objects
 
 SilphCo4Script: ; 19d0b (6:5d0b)
-	call SilphCo4Script_Unknown19d21
+	call SilphCo4Script_19d21
 	call EnableAutoTextBoxDrawing
 	ld hl, SilphCo4TrainerHeaders
 	ld de, SilphCo4ScriptPointers
@@ -38001,14 +37999,14 @@ SilphCo4Script: ; 19d0b (6:5d0b)
 	ld [W_SILPHCO4CURSCRIPT], a
 	ret
 
-SilphCo4Script_Unknown19d21: ; 19d21 (6:5d21)
+SilphCo4Script_19d21: ; 19d21 (6:5d21)
 	ld hl, $d126
 	bit 5, [hl]
 	res 5, [hl]
 	ret z
 	ld hl, SilphCo4Data19d58
-	call SilphCo4Function19d5d
-	call SilphCo4Function19d89
+	call SilphCo4Script_19d5d
+	call SilphCo4Script_19d89
 	ld a, [$d82a]
 	bit 0, a
 	jr nz, .asm_19d48
@@ -38031,7 +38029,7 @@ SilphCo4Script_Unknown19d21: ; 19d21 (6:5d21)
 SilphCo4Data19d58: ; 19d58 (6:5d58)
 	db $06, $02, $04, $06, $ff
 
-SilphCo4Function19d5d: ; 19d5d (6:5d5d)
+SilphCo4Script_19d5d: ; 19d5d (6:5d5d)
 	push hl
 	ld hl, $d73f
 	ld a, [hli]
@@ -38067,7 +38065,7 @@ SilphCo4Function19d5d: ; 19d5d (6:5d5d)
 	ld [$ff00+$e0], a
 	ret
 
-SilphCo4Function19d89: ; 19d89 (6:5d89)
+SilphCo4Script_19d89: ; 19d89 (6:5d89)
 	ld hl, $d82a
 	ld a, [$ff00+$e0]
 	and a
@@ -38128,7 +38126,7 @@ SilphCo4Text1: ; 19dd3 (6:5dd3)
 	db $08 ; asm
 	ld hl, UnnamedText_19de0 ; $5de0
 	ld de, UnnamedText_19de5 ; $5de5
-	call Unnamed_622f
+	call SilphCo6Script_1a22f
 	jp TextScriptEnd
 
 UnnamedText_19de0: ; 19de0 (6:5de0)
@@ -38237,7 +38235,7 @@ SilphCo5_h: ; 0x19f2b to 0x19f37 (12 bytes) (bank=6) (id=210)
 	dw SilphCo5Object ; objects
 
 SilphCo5Script: ; 19f37 (6:5f37)
-	call Unnamed_19f4d
+	call SilphCo5Script_19f4d
 	call EnableAutoTextBoxDrawing
 	ld hl, SilphCo5TrainerHeaders
 	ld de, SilphCo5ScriptPointers
@@ -38246,14 +38244,14 @@ SilphCo5Script: ; 19f37 (6:5f37)
 	ld [W_SILPHCO5CURSCRIPT], a
 	ret
 
-Unnamed_19f4d: ; 19f4d (6:5f4d)
+SilphCo5Script_19f4d: ; 19f4d (6:5f4d)
 	ld hl, $d126
 	bit 5, [hl]
 	res 5, [hl]
 	ret z
 	ld hl, SilphCo5Coords
-	call SilphCo4Function19d5d
-	call SilphCo5Function19f9e
+	call SilphCo4Script_19d5d
+	call SilphCo5Script_19f9e
 	ld a, [$d82c]
 	bit 0, a
 	jr nz, .asm_19f74 ; 0x19f63 $f
@@ -38286,7 +38284,7 @@ Unnamed_19f4d: ; 19f4d (6:5f4d)
 SilphCo5Coords: ; 19f97 (6:5f97) ; coords?
 	db $02, $03, $06, $03, $05, $07, $ff
 
-SilphCo5Function19f9e: ; 19f9e (6:5f9e)
+SilphCo5Script_19f9e: ; 19f9e (6:5f9e)
 	ld hl, $d82c
 	ld a, [$ff00+$e0]
 	and a
@@ -38365,7 +38363,7 @@ SilphCo5Text1: ; 1a003 (6:6003)
 	db $08 ; asm
 	ld hl, UnnamedText_1a010 ; $6010
 	ld de, UnnamedText_1a015 ; $6015
-	call Unnamed_622f
+	call SilphCo6Script_1a22f
 	jp TextScriptEnd
 
 UnnamedText_1a010: ; 1a010 (6:6010)
@@ -38508,7 +38506,7 @@ SilphCo6_h: ; 0x1a19d to 0x1a1a9 (12 bytes) (bank=6) (id=211)
 	dw SilphCo6Object ; objects
 
 SilphCo6Script: ; 1a1a9 (6:61a9)
-	call Unnamed_1a1bf
+	call SilphCo6Script_1a1bf
 	call EnableAutoTextBoxDrawing
 	ld hl, SilphCo6TrainerHeaders
 	ld de, SilphCo6ScriptPointers
@@ -38517,14 +38515,14 @@ SilphCo6Script: ; 1a1a9 (6:61a9)
 	ld [W_SILPHCO6CURSCRIPT], a
 	ret
 
-Unnamed_1a1bf: ; 1a1bf (6:61bf)
+SilphCo6Script_1a1bf: ; 1a1bf (6:61bf)
 	ld hl, $d126
 	bit 5, [hl]
 	res 5, [hl]
 	ret z
 	ld hl, SilphCo6Coords1
-	call SilphCo4Function19d5d
-	call Unknown_1a1e6
+	call SilphCo4Script_19d5d
+	call SilphCo6Script_1a1e6
 	ld a, [$d82e]
 	bit 7, a
 	ret nz
@@ -38538,7 +38536,7 @@ SilphCo6Coords1: ; 1a1e3 (6:61e3)
 	db $06, $02
 	db $ff
 
-Unknown_1a1e6: ; 1a1e6 (6:61e6)
+SilphCo6Script_1a1e6: ; 1a1e6 (6:61e6)
 	ld a, [$ff00+$e0]
 	and a
 	ret z
@@ -38593,7 +38591,7 @@ SilphCo6TrainerHeader3: ; 1a222 (6:6222)
 
 	db $ff
 
-Unnamed_622f: ; 1a22f (6:622f)
+SilphCo6Script_1a22f: ; 1a22f (6:622f)
 	ld a, [$d838]
 	bit 7, a
 	jr nz, .asm_1a238 ; 0x1a234 $2
@@ -38608,7 +38606,7 @@ SilphCo6Text1: ; 1a23d (6:623d)
 	db $08 ; asm
 	ld hl, UnnamedText_1a24a
 	ld de, UnnamedText_1a24f
-	call Unnamed_622f
+	call SilphCo6Script_1a22f
 	jp TextScriptEnd
 
 UnnamedText_1a24a: ; 1a24a (6:624a)
@@ -38623,7 +38621,7 @@ SilphCo6Text2: ; 1a254 (6:6254)
 	db $08 ; asm
 	ld hl, UnnamedText_1a261
 	ld de, UnnamedText_1a266
-	call Unnamed_622f
+	call SilphCo6Script_1a22f
 	jp TextScriptEnd
 
 UnnamedText_1a261: ; 1a261 (6:6261)
@@ -38638,7 +38636,7 @@ SilphCo6Text3: ; 1a26b (6:626b)
 	db $08 ; asm
 	ld hl, UnnamedText_1a278
 	ld de, UnnamedText_1a27d
-	call Unnamed_622f
+	call SilphCo6Script_1a22f
 	jp TextScriptEnd
 
 UnnamedText_1a278: ; 1a278 (6:6278)
@@ -38653,7 +38651,7 @@ SilphCo6Text4: ; 1a282 (6:6282)
 	db $08 ; asm
 	ld hl, UnnamedText_1a28f
 	ld de, UnnamedText_1a294
-	call Unnamed_622f
+	call SilphCo6Script_1a22f
 	jp TextScriptEnd
 
 UnnamedText_1a28f: ; 1a28f (6:628f)
@@ -38668,7 +38666,7 @@ SilphCo6Text5: ; 1a299 (6:6299)
 	db $08 ; asm
 	ld hl, UnnamedText_1a2a6
 	ld de, UnnamedText_1a2ab
-	call Unnamed_622f
+	call SilphCo6Script_1a22f
 	jp TextScriptEnd
 
 UnnamedText_1a2a6: ; 1a2a6 (6:62a6)
@@ -39033,31 +39031,35 @@ RLEList_1a5da: ; 1a5da (6:65da)
 	db $C0, $03
 	db $FF
 
+; XXX why would this function want to return on POKEMONTOWER_7?
 Func_1a5e7: ; 1a5e7 (6:65e7)
 	ld a, [W_CURMAP] ; $d35e
-	cp $94
+	cp POKEMONTOWER_7
 	ret z
-	ld hl, Unknown_1a605 ; $6605
+	ld hl, RivalIDs ; $6605
 	ld a, [W_ENGAGEDTRAINERCLASS]
 	ld b, a
-.asm_1a5f4
+.loop
 	ld a, [hli]
 	cp $ff
-	jr z, .asm_1a5fd
+	jr z, .notRival
 	cp b
 	ret z
-	jr .asm_1a5f4
-.asm_1a5fd
+	jr .loop
+.notRival
 	ld a, [$cf13]
 	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
 	jp SetSpriteMovementBytesToFF
 
-Unknown_1a605: ; 1a605 (6:6605)
-INCBIN "baserom.gbc",$1a605,$1a609 - $1a605
+RivalIDs: ; 1a605 (6:6605)
+	db SONY1 + $c8
+	db SONY2 + $c8
+	db SONY3 + $c8
+	db $ff
 
 Func_1a609: ; 1a609 (6:6609)
 	push de
-	ld hl, Unknown_1a62c ; $662c
+	ld hl, TilesetArray_1a62c ; $662c
 	ld a, [W_CURMAPTILESET] ; $d367
 	ld de, $3
 	call IsInArray
@@ -39082,8 +39084,67 @@ Func_1a609: ; 1a609 (6:6609)
 	and a
 	ret
 
-Unknown_1a62c: ; 1a62c (6:662c)
-INCBIN "baserom.gbc",$1a62c,$1a672 - $1a62c
+TilesetArray_1a62c: ; 1a62c (6:662c)
+	db $00
+	dw UnknownTilesetData1a654
+	db $03
+	dw UnknownTilesetData1a657
+	db $02
+	dw UnknownTilesetData1a659
+	db $08
+	dw UnknownTilesetData1a65b
+	db $09
+	dw UnknownTilesetData1a65d
+	db $0a
+	dw UnknownTilesetData1a65d
+	db $0c
+	dw UnknownTilesetData1a65d
+	db $0d
+	dw UnknownTilesetData1a65f
+	db $12
+	dw UnknownTilesetData1a661
+	db $13
+	dw UnknownTilesetData1a665
+	db $14
+	dw UnknownTilesetData1a669
+	db $16
+	dw UnknownTilesetData1a66b
+	db $17
+	dw UnknownTilesetData1a66f
+	db $ff
+
+UnknownTilesetData1a654: ; 1a654 (6:6654)
+	db $1B,$58,$00
+
+UnknownTilesetData1a657: ; 1a657 (6:6657)
+	db $3a,$00
+
+UnknownTilesetData1a659: ; 1a659 (6:6659)
+	db $5e,$00
+
+UnknownTilesetData1a65b: ; 1a65b (6:665b)
+	db $54,$00
+
+UnknownTilesetData1a65d: ; 1a65d (6:665d)
+	db $3b,$00
+
+UnknownTilesetData1a65f: ; 1a65f (6:665f)
+	db $1e,$00
+
+UnknownTilesetData1a661: ; 1a661 (6:6661)
+	db $1c,$38,$1a,$00
+
+UnknownTilesetData1a665: ; 1a665 (6:6665)
+	db $1a,$1c,$53,$00
+
+UnknownTilesetData1a669: ; 1a669 (6:6669)
+	db $34,$00
+
+UnknownTilesetData1a66b: ; 1a66b (6:666b)
+	db $43,$58,$1b,$00
+
+UnknownTilesetData1a66f: ; 1a66f (6:666f)
+	db $3b,$1b,$00
 
 Func_1a672: ; 1a672 (6:6672)
 	ld a, [$d736]
@@ -39101,7 +39162,7 @@ Func_1a672: ; 1a672 (6:6672)
 	ld c, a
 	ld a, [$cfc6]
 	ld d, a
-	ld hl, Unknown_1a6cf ; $66cf
+	ld hl, DataTable_1a6cf ; $66cf
 .asm_1a691
 	ld a, [hli]
 	cp $ff
@@ -39143,8 +39204,16 @@ Func_1a672: ; 1a672 (6:6672)
 	call PlaySound
 	ret
 
-Unknown_1a6cf: ; 1a6cf (6:66cf)
-INCBIN "baserom.gbc",$1a6cf,$1a6f0 - $1a6cf
+DataTable_1a6cf: ; 1a6cf (6:66cf)
+	db $00,$2C,$37,$80
+	db $00,$39,$36,$80
+	db $00,$39,$37,$80
+	db $08,$2C,$27,$20
+	db $08,$39,$27,$20
+	db $0C,$2C,$0D,$10
+	db $0C,$2C,$1D,$10
+	db $0C,$39,$0D,$10
+	db $FF
 
 Func_1a6f0: ; 1a6f0 (6:66f0)
 	ld hl, $8ff0
@@ -40080,7 +40149,7 @@ OaksLabScript11: ; 1cdb9 (7:4db9)
 	ret nz
 
 	; define which team rival uses, and fight it
-	ld a, SONY1 + 200
+	ld a, SONY1 + $C8
 	ld [W_CUROPPONENT], a
 	ld a, [W_RIVALSTARTER]
 	cp SQUIRTLE
@@ -40217,7 +40286,7 @@ OaksLabScript15: ; 1ceb0 (7:4eb0)
 	ld a, $15
 	ld [$ff00+$8c], a
 	call DisplayTextID
-	call Unknown_1d02b
+	call Func_1d02b
 	ld a, $2a
 	ld [$cc4d], a
 	ld a, $15
@@ -40382,7 +40451,7 @@ Function1D00A: ; 1d00a (7:500a)
 	ld [$cf96], a
 	jp RemoveItemFromInventory
 
-Unknown_1d02b: ; 1d02b (7:502b)
+Func_1d02b: ; 1d02b (7:502b)
 	ld a, $7c
 	ld [$ff00+$eb], a
 	ld a, $8
@@ -41820,14 +41889,14 @@ NameRater_h: ; 0x1da06 to 0x1da12 (12 bytes) (bank=7) (id=229)
 NameRaterScript: ; 1da12 (7:5a12)
 	jp EnableAutoTextBoxDrawing
 
-Unknown_1da15: ; 1da15 (7:5a15)
+Func_1da15: ; 1da15 (7:5a15)
 	call PrintText
 	call YesNoChoice
 	ld a, [$cc26]
 	and a
 	ret
 
-Unknown_1da20: ; 1da20 (7:5a20)
+Func_1da20: ; 1da20 (7:5a20)
 	ld hl, $d273
 	ld bc, $000b
 	ld a, [$cf92]
@@ -41863,7 +41932,7 @@ NameRaterText1: ; 1da56 (7:5a56)
 	db $8
 	call SaveScreenTilesToBuffer2
 	ld hl, UnnamedText_1dab3
-	call Unknown_1da15
+	call Func_1da15
 	jr nz, .asm_1daae ; 0x1da60 $4c
 	ld hl, UnnamedText_1dab8
 	call PrintText
@@ -41879,11 +41948,11 @@ NameRaterText1: ; 1da56 (7:5a56)
 	pop af
 	jr c, .asm_1daae ; 0x1da80 $2c
 	call GetPartyMonName2
-	call Unknown_1da20
+	call Func_1da20
 	ld hl, UnnamedText_1dad1
 	jr c, .asm_1daa8 ; 0x1da8b $1b
 	ld hl, UnnamedText_1dabd
-	call Unknown_1da15
+	call Func_1da15
 	jr nz, .asm_1daae ; 0x1da93 $19
 	ld hl, UnnamedText_1dac2
 	call PrintText
@@ -42724,7 +42793,7 @@ Route6GateScript0: ; 1e04e (7:604e)
 	ld a, $2
 	ld [$ff00+$8c], a
 	call DisplayTextID
-	call Unknown_1e0a1
+	call Func_1e0a1
 	ld a, $1
 	ld [W_ROUTE6GATECURSCRIPT], a
 	ret
@@ -42749,7 +42818,7 @@ Route6GateScript1: ; 1e091 (7:6091)
 	ld [W_ROUTE6GATECURSCRIPT], a
 	ret
 
-Unknown_1e0a1: ; 1e0a1 (7:60a1)
+Func_1e0a1: ; 1e0a1 (7:60a1)
 	ld hl, $d730
 	set 7, [hl]
 	ld a, $80
@@ -82705,7 +82774,7 @@ Route24AfterBattleText6: ; 515c6 (14:55c6)
 	db "@"
 
 Route25Script: ; 515cb (14:55cb)
-	call Unknown_515e1
+	call Route25Script_515e1
 	call EnableAutoTextBoxDrawing
 	ld hl, Route25TrainerHeaders
 	ld de, Route25ScriptPointers
@@ -82714,7 +82783,7 @@ Route25Script: ; 515cb (14:55cb)
 	ld [W_ROUTE25CURSCRIPT], a
 	ret
 
-Unknown_515e1: ; 515e1 (14:55e1)
+Route25Script_515e1: ; 515e1 (14:55e1)
 	ld hl, $d126
 	bit 6, [hl]
 	res 6, [hl]
@@ -84305,7 +84374,7 @@ Mansion4_h: ; 0x523ad to 0x523b9 (12 bytes) (id=216)
 	dw Mansion4Object ; objects
 
 Mansion4Script: ; 523b9 (14:63b9)
-	call Unknown_523cf
+	call Mansion4Script_523cf
 	call EnableAutoTextBoxDrawing
 	ld hl, Mansion4TrainerHeader0
 	ld de, Mansion4ScriptPointers
@@ -84314,7 +84383,7 @@ Mansion4Script: ; 523b9 (14:63b9)
 	ld [W_MANSION4CURSCRIPT], a
 	ret
 
-Unknown_523cf: ; 523cf (14:63cf)
+Mansion4Script_523cf: ; 523cf (14:63cf)
 	ld hl, $d126
 	bit 5, [hl]
 	res 5, [hl]
@@ -93337,6 +93406,7 @@ PewterPokecenterBlocks: ; 5c064 (17:4064)
 	INCBIN "maps/pewterpokecenter.blk"
 
 UndergroundTunnelEntranceRoute7Blocks: ; 5c080 (17:4080)
+UndergroundTunnelEntranceRoute7CopyBlocks: ; 5c080 (17:4080)
 UndergroundTunnelEntranceRoute6Blocks: ; 5c080 (17:4080)
 UndergroundTunnelEntranceRoute5Blocks: ; 5c080 (17:4080)
 	INCBIN "maps/undergroundtunnelentranceroute5.blk"
@@ -96373,7 +96443,22 @@ UndergroundPathEntranceRoute7Object: ; 0x5d73b (size=34)
 	EVENT_DISP $4, $7, $4
 	EVENT_DISP $4, $4, $4 ; UNDERGROUND_PATH_WE
 
-INCBIN "baserom.gbc",$5d75d,$5d773 - $5d75d
+UndergroundPathEntranceRoute7Copy_h: ; 5d75d (17:575d)
+	db $0c ; tileset
+	db PATH_ENTRANCE_ROUTE_7_HEIGHT, PATH_ENTRANCE_ROUTE_7_WIDTH ; dimensions (y, x)
+	dw UndergroundTunnelEntranceRoute7CopyBlocks, UndergroundPathEntranceRoute7CopyTextPointers, UndergroundPathEntranceRoute7CopyScript ; blocks, texts, scripts
+	db $00 ; connections
+
+	dw UndergroundPathEntranceRoute7CopyObject ; objects
+
+UndergroundPathEntranceRoute7CopyScript: ; 5d769 (17:5769)
+	ld a, $12
+	ld [$d365], a
+	ret
+
+UndergroundPathEntranceRoute7CopyTextPointers: ; 5d76f (17:576f)
+	dw UnnamedText_5d773
+	dw UnnamedText_5d77d
 
 UnnamedText_5d773: ; 5d773 (17:5773)
 	TX_FAR _UnnamedText_5d773
@@ -96391,7 +96476,24 @@ UnnamedText_5d782: ; 5d782 (17:5782)
 	TX_FAR _UnnamedText_5d782
 	db "@"
 
-INCBIN "baserom.gbc",$5d787,$5d7af - $5d787
+UndergroundPathEntranceRoute7CopyObject: ; 5d787 (17:5787)
+	db $a ; border tile
+
+	db $3 ; warps
+	db $7, $3, $5, $ff
+	db $7, $4, $5, $ff
+	db $4, $4, $0, UNDERGROUND_PATH_WE
+
+	db $0 ; signs
+
+	db $2 ; people
+	db SPRITE_GIRL, $2 + 4, $3 + 4, $ff, $ff, $1 ; person
+	db SPRITE_FAT_BALD_GUY, $4 + 4, $2 + 4, $ff, $ff, $2 ; person
+
+	; warp-to
+	EVENT_DISP $4, $7, $3
+	EVENT_DISP $4, $7, $4
+	EVENT_DISP $4, $4, $4 ; UNDERGROUND_PATH_WE
 
 SilphCo9_h: ; 0x5d7af to 0x5d7bb (12 bytes) (id=233)
 	db $16 ; tileset
@@ -106166,7 +106268,7 @@ Func40CB: ; 740cb (1d:40cb)
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED],a
 	call SaveScreenTilesToBuffer1
-	call Unknown_74183
+	call Func_74183
 
 	; display the next monster from CreditsMons
 	ld hl,$CD3E
@@ -106183,27 +106285,27 @@ Func40CB: ; 740cb (1d:40cb)
 	call GetMonHeader
 	call LoadFrontSpriteByMonIndex
 	ld hl,$980C
-	call Unknown_74164
+	call Func_74164
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED],a
 	call LoadScreenTilesFromBuffer1
 	ld hl,$9800
-	call Unknown_74164
+	call Func_74164
 	ld a,$A7
 	ld [$FF4B],a
 	ld hl,$9C00
-	call Unknown_74164
-	call Unknown_74183
+	call Func_74164
+	call Func_74183
 	ld a,$FC
 	ld [$FF47],a
 	ld bc,7
 .next
-	call Unknown_74140
+	call Func_74140
 	dec c
 	jr nz,.next
 	ld c,$14
 .next2
-	call Unknown_74140
+	call Func_74140
 	ld a,[$FF4B]
 	sub 8
 	ld [$FF4B],a
@@ -106232,7 +106334,7 @@ CreditsMons: ; 74131 (1d:4131)
 	db NIDOKING
 	db PARASECT
 
-Unknown_74140: ; 74140 (1d:4140)
+Func_74140: ; 74140 (1d:4140)
 	ld h, b
 	ld l, $20
 	call Func_74152
@@ -106259,7 +106361,7 @@ Func_74152: ; 74152 (1d:4152)
 Unknown_74160: ; 74160 (1d:4160)
 INCBIN "baserom.gbc",$74160,$74164 - $74160
 
-Unknown_74164: ; 74164 (1d:4164)
+Func_74164: ; 74164 (1d:4164)
 	ld a, l
 	ld [H_AUTOBGTRANSFERDEST], a ; $FF00+$bc
 	ld a, h
@@ -106283,7 +106385,7 @@ Func_7417b: ; 7417b (1d:417b)
 	ld a, $7e
 	jp FillMemory
 
-Unknown_74183: ; 74183 (1d:4183)
+Func_74183: ; 74183 (1d:4183)
 	FuncCoord 0, 4 ; $c3f0
 	ld hl, Coord
 	ld bc, $c8
@@ -106298,7 +106400,7 @@ Func_7418e: ; 7418e (1d:418e)
 	FuncCoord 9, 6 ; $c421
 	ld hl, Coord
 	push hl
-	call Unknown_74183
+	call Func_74183
 	pop hl
 .asm_7419b
 	ld a, [de]
@@ -106368,7 +106470,7 @@ Func_7418e: ; 7418e (1d:418e)
 .asm_74201
 	ld c, $10
 	call DelayFrames
-	call Unknown_74183
+	call Func_74183
 	pop de
 	ld de, TheEndGfx
 	ld hl, $9600
@@ -106669,7 +106771,7 @@ Unknown_7481f: ; 7481f (1d:481f)
 	inc hl
 	jr nz, .asm_74824 ; 0x74845 $dd
 	ld a, [$d361]
-	call Unknown_7486b
+	call Func_7486b
 	cp d
 	jr nc, .asm_74824 ; 0x7484e $d4
 	ld a, [$d361]
@@ -106677,7 +106779,7 @@ Unknown_7481f: ; 7481f (1d:481f)
 	cp d
 	jr c, .asm_74824 ; 0x74856 $cc
 	ld a, [$d362]
-	call Unknown_7486b
+	call Func_7486b
 	cp e
 	jr nc, .asm_74824 ; 0x7485f $c3
 	ld a, [$d362]
@@ -106687,7 +106789,7 @@ Unknown_7481f: ; 7481f (1d:481f)
 	scf
 	ret
 
-Unknown_7486b: ; 7486b (1d:486b)
+Func_7486b: ; 7486b (1d:486b)
 	sub $5
 	cp $f0
 	ret c
@@ -107558,7 +107660,7 @@ Func_74ee0: ; 74ee0 (1d:4ee0)
 	ld hl, UnnamedText_74fd3
 	jp PrintText
 .asm_74f54
-	call Unknown_74fe7
+	call Func_74fe7
 	ld a, [$FF00+$db]
 	ld b, a
 	ld c, 1
@@ -107621,7 +107723,7 @@ UnnamedText_74fe2: ; 74fe2 (1d:4fe2)
 	TX_FAR _UnnamedText_74fe2
 	db "@"
 
-Unknown_74fe7: ; 74fe7 (1d:4fe7)
+Func_74fe7: ; 74fe7 (1d:4fe7)
 	ld hl, VendingPrices
 	ld a, [$cc26]
 	add a
@@ -108663,7 +108765,7 @@ CinnabarGymScript_Unknown75759: ; 75759 (1d:5759)
 	bit 6, [hl]
 	res 6, [hl]
 	push hl
-	call nz, CinnabarGymScript_Unknown75772
+	call nz, CinnabarGymScript_75772
 	pop hl
 	bit 5, [hl]
 	res 5, [hl]
@@ -108671,7 +108773,7 @@ CinnabarGymScript_Unknown75759: ; 75759 (1d:5759)
 	ld hl, $D79B
 	res 7, [hl]
 	ret
-CinnabarGymScript_Unknown75772: ; 75772 (1d:5772)
+CinnabarGymScript_75772: ; 75772 (1d:5772)
 	ld hl, Gym7CityName
 	ld de, Gym7LeaderName
 	jp LoadGymLeaderAndCityName
@@ -108681,7 +108783,7 @@ Gym7CityName: ; 7577b (1d:577b)
 Gym7LeaderName: ; 7578b (1d:578b)
 	db "BLAINE@"
 
-Unknown_75792: ; 75792 (1d:5792)
+CinnabarGymScript_75792: ; 75792 (1d:5792)
 	xor a
 	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
 	ld [W_CINNABARGYMCURSCRIPT], a
@@ -108689,7 +108791,7 @@ Unknown_75792: ; 75792 (1d:5792)
 	ld [$da38], a
 	ret
 
-Unknown_757a0: ; 757a0 (1d:57a0)
+CinnabarGymScript_757a0: ; 757a0 (1d:57a0)
 	ld a, [H_DOWNARROWBLINKCNT2] ; $FF00+$8c
 	ld [W_TRAINERHEADERFLAGBIT], a
 	ret
@@ -108739,20 +108841,20 @@ CinnabarGymScript1: ; 757dc (1d:57dc)
 	ld [$ff00+$8c], a
 	jp DisplayTextID
 
-Unknown_757f1: ; 757f1 (1d:57f1)
+Func_757f1: ; 757f1 (1d:57f1)
 	ld a, $10
 	jp Predef ; indirect jump to HandleBitArray (f666 (3:7666))
 
 CinnabarGymScript2: ; 757f6 (1d:57f6)
 	ld a, [$d057]
 	cp $ff
-	jp z, Unknown_75792
+	jp z, CinnabarGymScript_75792
 	ld a, [W_TRAINERHEADERFLAGBIT]
 	ld [$ff00+$db], a
 	ld c, a
 	ld b, $2
 	ld hl, $d79a
-	call Unknown_757f1
+	call Func_757f1
 	ld a, c
 	and a
 	jr nz, .asm_7581b ; 0x7580e $b
@@ -108766,13 +108868,13 @@ CinnabarGymScript2: ; 757f6 (1d:57f6)
 	ld c, a
 	ld b, $1
 	ld hl, $d79a
-	call Unknown_757f1
+	call Func_757f1
 	ld a, [W_TRAINERHEADERFLAGBIT]
 	sub $2
 	ld c, a
 	ld b, $1
 	ld hl, $d79c
-	call Unknown_757f1
+	call Func_757f1
 	call Func_3ead
 	xor a
 	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
@@ -108785,7 +108887,7 @@ CinnabarGymScript2: ; 757f6 (1d:57f6)
 CinnabarGymScript3: ; 7584a (1d:584a)
 	ld a, [$d057]
 	cp $ff
-	jp z, Unknown_75792
+	jp z, CinnabarGymScript_75792
 	ld a, $f0
 	ld [W_JOYPADFORBIDDENBUTTONSMASK], a
 Unknown_75857: ; 75857 (1d:5857)
@@ -108819,7 +108921,7 @@ Unknown_75857: ; 75857 (1d:5857)
 	set 0, [hl]
 	ld hl, $d126
 	set 5, [hl]
-	jp Unknown_75792
+	jp CinnabarGymScript_75792
 
 CinnabarGymTextPointers: ; 7589f (1d:589f)
 	dw CinnabarGymText1
@@ -108909,7 +109011,7 @@ TM38NoRoomText: ; 75934 (1d:5934)
 
 CinnabarGymText2: ; 75939 (1d:5939)
 	db $08 ; asm
-	call Unknown_757a0
+	call CinnabarGymScript_757a0
 	ld a, [$d79a]
 	bit 2, a
 	jr nz, .asm_46bb4 ; 0x75942
@@ -108938,7 +109040,7 @@ UnnamedText_75969: ; 75969 (1d:5969)
 
 CinnabarGymText3: ; 7596e (1d:596e)
 	db $08 ; asm
-	call Unknown_757a0
+	call CinnabarGymScript_757a0
 	ld a, [$d79a]
 	bit 3, a
 	jr nz, .asm_4b406 ; 0x75977
@@ -108967,7 +109069,7 @@ UnnamedText_7599e: ; 7599e (1d:599e)
 
 CinnabarGymText4: ; 759a3 (1d:59a3)
 	db $08 ; asm
-	call Unknown_757a0
+	call CinnabarGymScript_757a0
 	ld a, [$d79a]
 	bit 4, a
 	jr nz, .asm_c0673 ; 0x759ac
@@ -108996,7 +109098,7 @@ UnnamedText_759d3: ; 759d3 (1d:59d3)
 
 CinnabarGymText5: ; 759d8 (1d:59d8)
 	db $08 ; asm
-	call Unknown_757a0
+	call CinnabarGymScript_757a0
 	ld a, [$d79a]
 	bit 5, a
 	jr nz, .asm_5cfd7 ; 0x759e1
@@ -109025,7 +109127,7 @@ UnnamedText_75a08: ; 75a08 (1d:5a08)
 
 CinnabarGymText6: ; 75a0d (1d:5a0d)
 	db $08 ; asm
-	call Unknown_757a0
+	call CinnabarGymScript_757a0
 	ld a, [$d79a]
 	bit 6, a
 	jr nz, .asm_776b4 ; 0x75a16
@@ -109054,7 +109156,7 @@ UnnamedText_75a3d: ; 75a3d (1d:5a3d)
 
 CinnabarGymText7: ; 75a42 (1d:5a42)
 	db $08 ; asm
-	call Unknown_757a0
+	call CinnabarGymScript_757a0
 	ld a, [$d79a]
 	bit 7, a
 	jr nz, .asm_2f755 ; 0x75a4b
@@ -109083,7 +109185,7 @@ UnnamedText_75a72: ; 75a72 (1d:5a72)
 
 CinnabarGymText8: ; 75a77 (1d:5a77)
 	db $08 ; asm
-	call Unknown_757a0
+	call CinnabarGymScript_757a0
 	ld a, [$d79b]
 	bit 0, a
 	jr nz, .asm_d87be ; 0x75a80
@@ -109392,7 +109494,7 @@ Lab4TextPointers: ; 75d34 (1d:5d34)
 	dw Lab4Text1
 	dw Lab4Text2
 
-Unknown_75d38: ; 75d38 (1d:5d38)
+Func_75d38: ; 75d38 (1d:5d38)
 	xor a
 	ld [$cd37], a
 	ld de, $cc5b
@@ -109435,7 +109537,7 @@ Lab4Text1: ; 75d6c (1d:5d6c)
 	jr nz, .asm_75d96 ; 0x75d72 $22
 	ld hl, UnnamedText_75dc6
 	call PrintText
-	call Unknown_75d38
+	call Func_75d38
 	ld a, [$cd37]
 	and a
 	jr z, .asm_75d8d ; 0x75d81 $a
@@ -110586,7 +110688,7 @@ Unknown_7657e: ; XXX: make better (has to do with the hall of fame on the PC) ; 
 	ld b, BANK(Func_73b3f)
 	ld hl, Func_73b3f
 	call Bankswitch
-	call Unknown_765e5
+	call Func_765e5
 	pop bc
 	jr c, .second
 	ld hl, $CD41
@@ -110605,11 +110707,12 @@ Unknown_7657e: ; XXX: make better (has to do with the hall of fame on the PC) ; 
 	call ClearScreen
 	call GoPAL_SET_CF1C
 	jp GBPalNormal
-Unknown_765e5: ; 765e5 (1d:65e5)
+
+Func_765e5: ; 765e5 (1d:65e5)
 	ld c, 6
 .third
 	push bc
-	call Unknown_76610
+	call Func_76610
 	call WaitForTextScrollButtonPress
 	ld a, [H_CURRENTPRESSEDBUTTONS]
 	bit 1, a
@@ -110630,8 +110733,9 @@ Unknown_765e5: ; 765e5 (1d:65e5)
 .fifth
 	pop bc
 	scf 
-	ret 
-Unknown_76610: ; 76610 (1d:6610)
+	ret
+
+Func_76610: ; 76610 (1d:6610)
 	call GBPalWhiteOutWithDelay3
 	call ClearScreen
 	ld hl, $CC5B
@@ -127755,7 +127859,7 @@ _UnnamedText_193fb: ; a4aa2 (29:4aa2)
 	db "You absolutely", $55
 	db "have to go!", $57
 
-_UnnamedText_19400: ; a4ac6 (29:4ac6)
+_PewterCityText13: ; a4ac6 (29:4ac6)
 	db $0, "It's right here!", $4f
 	db "You have to pay", $55
 	db "to get in, but", $55
