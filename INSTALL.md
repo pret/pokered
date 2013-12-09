@@ -8,10 +8,11 @@ A base rom of Pokémon Red is required to assemble **pokered.gbc**.
 
 # Linux
 
-	sudo apt-get install make gcc bison git python python-setuptools
-	sudo easy_install pip
+Linux dependencies. OSX users already have these after installing Xcode.
 
-Install rgbds, a Game Boy ROM assembler.
+	sudo apt-get install make gcc bison git python python-setuptools
+
+Install **rgbds**, a Game Boy assembler:
 
 	git clone git://github.com/bentley/rgbds.git
 	cd rgbds
@@ -20,7 +21,7 @@ Install rgbds, a Game Boy ROM assembler.
 
 	cd ..
 
-Set up the pokered repository.
+Set up the pokered repository:
 
 	git clone git://github.com/iimarckus/pokered.git
 	cd pokered
@@ -28,15 +29,14 @@ Set up the pokered repository.
 	git submodule init
 	git submodule update
 
-	cd extras
-	pip install -r requirements.txt
-	cd ..
+	sudo easy_install pip
+	pip install -r extras/requirements.txt
 
 Put your base rom in the pokered repository. Name it "baserom.gbc".
 
 	make red
 
-This should take about 10-15 seconds. Subsequent compiles are faster.
+This should take about 10-15 seconds. Subsequent builds are faster.
 
 
 To build Pokémon Blue:
@@ -46,7 +46,7 @@ To build Pokémon Blue:
 
 # OSX
 
-Download and install Xcode. Then follow the Linux instructions.
+Download and install **Xcode**. Then follow the Linux instructions.
 
 
 # Windows
