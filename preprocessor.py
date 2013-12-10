@@ -1,9 +1,16 @@
 # -*- coding: utf-8 -*-
 
 import extras.pokemontools.preprocessor as preprocessor
+
 import extras.pokemontools.configuration as configuration
+config = configuration.Config()
 
 import sys
+
+from extras.pokemontools.crystal import (
+    callchannel,
+    loopchannel,
+)
 
 chars = {
 "ガ": 0x05,
@@ -260,14 +267,21 @@ chars = {
 "9": 0xFF,
 }
 
-preprocessor.chars = chars
+def load_pokered_macros():
+    macros = [callchannel, loopchannel]
+    return macros
 
-from extras.pokemontools.crystal import (
-	callchannel,
-	loopchannel,
-)
+def setup_processor():
+    preprocessor.chars = chars
+    macros = load_pokered_macros()
+    processor = preprocessor.Preprocessor(config, macros)
+    return processor
 
-config = configuration.Config()
-macros = [callchannel, loopchannel]
-processor = preprocessor.Preprocessor(config, macros)
-processor.preprocess()
+def main():
+    processor = setup_processor()
+    output = processor.preprocess()
+    processor.update_globals()
+    return output
+
+if __name__ == '__main__':
+    main()
