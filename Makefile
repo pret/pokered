@@ -32,7 +32,7 @@ clean:
 	rm -f $(ROMS)
 	rm -f $(OBJS)
 	rm -f globals.asm
-	find -iname '*.tx' -delete
+	@echo "removing *.tx" && rm -f $(shell find . -iname '*.tx' -printf '"%p" ')
 	rm -f redrle
 
 
