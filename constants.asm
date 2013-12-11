@@ -72,6 +72,8 @@ INCLUDE "constants/palette_constants.asm"
 INCLUDE "constants/map_constants.asm"
 INCLUDE "constants/map_dimensions.asm"
 
+INCLUDE "constants/slotmachine_constants.asm"
+
 ; Evolution types
 EV_LEVEL EQU 1
 EV_ITEM  EQU 2
