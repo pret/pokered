@@ -71,3 +71,6 @@ LEECH_SEED_EFFECT          EQU $54
 SPLASH_EFFECT              EQU $55
 DISABLE_EFFECT             EQU $56
 
+; fixed damage constants
+SONICBOOM_DAMAGE   EQU 20
+DRAGON_RAGE_DAMAGE EQU 40

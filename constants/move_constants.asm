@@ -177,4 +177,3 @@ ULTRATOSS_ANIM EQU $C6 ; toss Ultra Ball or Master Ball
 HIDEPIC_ANIM EQU $C8 ; monster disappears
 ROCK_ANIM EQU $C9 ; throw rock
 BAIT_ANIM EQU $CA ; throw bait
-
