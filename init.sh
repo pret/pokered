@@ -4,6 +4,8 @@
 git clone git://github.com/bentley/rgbds.git && \
 cd rgbds && \
 make && \
+mkdir -p /usr/local/man/man1 && \
+mkdir -p /usr/local/man/man7 && \
 sudo make install && \
 cd .. && \
 rm -rf rgbds
@@ -12,5 +14,5 @@ rm -rf rgbds
 git submodule init && \
 git submodule update && \
 sudo easy_install pip && \
-pip install -r extras/requirements.txt
+sudo pip install -r extras/requirements.txt
 
