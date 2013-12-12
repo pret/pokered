@@ -4,8 +4,7 @@
 git clone git://github.com/bentley/rgbds.git && \
 cd rgbds && \
 make && \
-mkdir -p /usr/local/man/man1 && \
-mkdir -p /usr/local/man/man7 && \
+sudo mkdir -p /usr/local/man/man{1,7} && \
 sudo make install && \
 cd .. && \
 rm -rf rgbds
