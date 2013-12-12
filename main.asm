@@ -73244,7 +73244,7 @@ VictoryRoad3_h: ; 0x44974 to 0x44980 (12 bytes) (bank=11) (id=198)
 	dw VictoryRoad3Object ; objects
 
 VictoryRoad3Script: ; 44980 (11:4980)
-	call VictoryRoad3Script_Unknown44996
+	call VictoryRoad3Script_44996
 	call EnableAutoTextBoxDrawing
 	ld hl, VictoryRoad3TrainerHeaders
 	ld de, VictoryRoad3ScriptPointers
@@ -73253,7 +73253,7 @@ VictoryRoad3Script: ; 44980 (11:4980)
 	ld [W_VICTORYROAD3CURSCRIPT], a
 	ret
 
-VictoryRoad3Script_Unknown44996: ; 44996 (11:4996)
+VictoryRoad3Script_44996: ; 44996 (11:4996)
 	ld hl, $d126
 	bit 5, [hl]
 	res 5, [hl]
@@ -74782,7 +74782,7 @@ RocketHideoutElevatorScript: ; 45710 (11:5710)
 	bit 5, [hl]
 	res 5, [hl]
 	push hl
-	call nz, RocketHideoutElevatorScript_Unknown4572c
+	call nz, RocketHideoutElevatorScript_4572c
 	pop hl
 	bit 7, [hl]
 	res 7, [hl]
@@ -74793,8 +74793,22 @@ RocketHideoutElevatorScript: ; 45710 (11:5710)
 	ld [$cc3c], a
 	ret
 
-RocketHideoutElevatorScript_Unknown4572c: ; 4572c (11:572c)
-INCBIN "baserom.gbc",$4572c,$45741 - $4572c
+RocketHideoutElevatorScript_4572c: ; 4572c (11:572c)
+        ld hl, $d3af
+        ld a, [$d73b]
+        ld b, a
+        ld a, [$d73c]
+        ld c, a
+        call RocketHideoutElevatorScript_4573a
+
+RocketHideoutElevatorScript_4573a: ; 4573a (11:573a)
+        inc hl
+        inc hl
+        ld a, b
+        ld [hli], a
+        ld a, c
+        ld [hli], a
+        ret
 
 Func_45741: ; 45741 (11:5741)
 	ld hl, Unknown_45754 ; $5754
@@ -74873,7 +74887,7 @@ SilphCoElevatorScript: ; 457c0 (11:57c0)
 	bit 5, [hl]
 	res 5, [hl]
 	push hl
-	call nz, SilphCoElevatorScript_Unknown457dc
+	call nz, SilphCoElevatorScript_457dc
 	pop hl
 	bit 7, [hl]
 	res 7, [hl]
@@ -74884,7 +74898,7 @@ SilphCoElevatorScript: ; 457c0 (11:57c0)
 	ld [$cc3c], a
 	ret
 
-SilphCoElevatorScript_Unknown457dc: ; 457dc (11:57dc)
+SilphCoElevatorScript_457dc: ; 457dc (11:57dc)
 	ld hl, $d3af
 	ld a, [$d73b]
 	ld b, a
@@ -76012,7 +76026,41 @@ SeafoamIslands4Script1: ; 46639 (11:6639)
 	ret
 
 SeafoamIslands4Script2: ; 46644 (11:6644)
-INCBIN "baserom.gbc",$46644,$4668f - $46644
+	ld a, [$d880]
+	and $3
+	cp $3
+	ret z
+	ld a, [W_XCOORD]
+	cp $12
+	jr z, .asm_4665e
+	cp $13
+	ld a, $0
+	jr nz, .asm_4667b
+	ld de, RLEData_4667f
+	jr .asm_46661
+.asm_4665e
+	ld de, RLEData_46688
+.asm_46661
+	ld hl, $ccd3
+	call DecodeRLEList
+	dec a
+	ld [$cd38], a
+	xor a
+	ld [$c206], a
+	ld hl, $d730
+	set 7, [hl]
+	ld hl, W_FLAGS_D733
+	set 2, [hl]
+	ld a, $3
+.asm_4667b
+	ld [W_SEAFOAMISLANDS4CURSCRIPT], a
+	ret
+
+RLEData_4667f: ; 4667f (11:667f)
+	db $80,$06,$10,$02,$80,$04,$20,$01,$FF
+
+RLEData_46688: ; 46688 (11:6688)
+	db $80,$06,$10,$02,$80,$04,$FF
 
 SeafoamIslands4Script3: ; 4668f (11:668f)
 	ld a, [$cd38]
@@ -77928,7 +77976,7 @@ CeladonMartElevatorScript: ; 48600 (12:4600)
 	bit 5, [hl]
 	res 5, [hl]
 	push hl
-	call nz, CeladonMartElevatorScript_Unknown4861c
+	call nz, CeladonMartElevatorScript_4861c
 	pop hl
 	bit 7, [hl]
 	res 7, [hl]
@@ -77939,8 +77987,22 @@ CeladonMartElevatorScript: ; 48600 (12:4600)
 	ld [$cc3c], a
 	ret
 
-CeladonMartElevatorScript_Unknown4861c: ; 4861c (12:461c)
-INCBIN "baserom.gbc",$4861c,$48631 - $4861c
+CeladonMartElevatorScript_4861c: ; 4861c (12:461c)
+	ld hl, $d3af
+	ld a, [$d73b]
+	ld b, a
+	ld a, [$d73c]
+	ld c, a
+	call CeladonMartElevatorScript_4862a
+
+CeladonMartElevatorScript_4862a: ; 4862a (12:462a)
+	inc hl
+	inc hl
+	ld a, b
+	ld [hli], a
+	ld a, c
+	ld [hli], a
+	ret
 
 Func_48631: ; 48631 (12:4631)
 	ld hl, Unknown_48643 ; $4643
@@ -85028,7 +85090,7 @@ Mansion2_h: ; 0x51fcc to 0x51fd8 (12 bytes) (id=214)
 	dw Mansion2Object ; objects
 
 Mansion2Script: ; 51fd8 (14:5fd8)
-	call Mansion2Script_Unknown51fee
+	call Mansion2Script_51fee
 	call EnableAutoTextBoxDrawing
 	ld hl, Mansion2TrainerHeaders
 	ld de, Mansion2ScriptPointers
@@ -85037,7 +85099,7 @@ Mansion2Script: ; 51fd8 (14:5fd8)
 	ld [W_MANSION2CURSCRIPT], a
 	ret
 
-Mansion2Script_Unknown51fee: ; 51fee (14:5fee)
+Mansion2Script_51fee: ; 51fee (14:5fee)
 	ld hl, $d126
 	bit 5, [hl]
 	res 5, [hl]
@@ -95005,7 +95067,7 @@ PewterGymScript: ; 5c387 (17:4387)
 	ld hl, $d126
 	bit 6, [hl]
 	res 6, [hl]
-	call nz, PewterGymScript_Unknown5c3a4
+	call nz, PewterGymScript_5c3a4
 	call EnableAutoTextBoxDrawing
 	ld hl, PewterGymTrainerHeaders
 	ld de, PewterGymScriptPointers
@@ -95014,7 +95076,7 @@ PewterGymScript: ; 5c387 (17:4387)
 	ld [W_PEWTERGYMCURSCRIPT], a
 	ret
 
-PewterGymScript_Unknown5c3a4: ; 5c3a4 (17:43a4)
+PewterGymScript_5c3a4: ; 5c3a4 (17:43a4)
 	ld hl, Gym1CityName ; $43ad
 	ld de, Gym1LeaderName ; $43b9
 	jp LoadGymLeaderAndCityName
@@ -109503,7 +109565,7 @@ FuchsiaGym_h: ; 0x75431 to 0x7543d (12 bytes) (id=157)
 	dw FuchsiaGymObject ; objects
 
 FuchsiaGymScript: ; 7543d (1d:543d)
-	call FuchsiaGymScript_Unknown75453
+	call FuchsiaGymScript_75453
 	call EnableAutoTextBoxDrawing
 	ld hl, FuchsiaGymTrainerHeaders
 	ld de, FuchsiaGymScriptPointers
@@ -109512,7 +109574,7 @@ FuchsiaGymScript: ; 7543d (1d:543d)
 	ld [W_FUCHSIAGYMCURSCRIPT], a
 	ret
 
-FuchsiaGymScript_Unknown75453: ; 75453 (1d:5453)
+FuchsiaGymScript_75453: ; 75453 (1d:5453)
 	ld hl, $D126
 	bit 6, [hl]
 	res 6, [hl]
@@ -109921,13 +109983,13 @@ CinnabarGym_h: ; 0x7573e to 0x7574a (12 bytes) (id=166)
 	dw CinnabarGymObject ; objects
 
 CinnabarGymScript: ; 7574a (1d:574a)
-	call CinnabarGymScript_Unknown75759
+	call CinnabarGymScript_75759
 	call EnableAutoTextBoxDrawing
 	ld hl, CinnabarGymScriptPointers
 	ld a, [W_CINNABARGYMCURSCRIPT]
 	jp CallFunctionInTable
 
-CinnabarGymScript_Unknown75759: ; 75759 (1d:5759)
+CinnabarGymScript_75759: ; 75759 (1d:5759)
 	ld hl, $D126
 	bit 6, [hl]
 	res 6, [hl]
@@ -111272,7 +111334,7 @@ Lorelei_h: ; 0x7616f to 0x7617b (12 bytes) (id=245)
 	dw LoreleiObject ; objects
 
 LoreleiScript: ; 7617b (1d:617b)
-	call LoreleiScript_Unknown76191
+	call LoreleiScript_76191
 	call EnableAutoTextBoxDrawing
 	ld hl, LoreleiTrainerHeaders
 	ld de, LoreleiScriptPointers
@@ -111281,7 +111343,7 @@ LoreleiScript: ; 7617b (1d:617b)
 	ld [W_LORELEICURSCRIPT], a
 	ret
 
-LoreleiScript_Unknown76191: ; 76191 (1d:6191)
+LoreleiScript_76191: ; 76191 (1d:6191)
 	ld hl, $d126
 	bit 5, [hl]
 	res 5, [hl]
@@ -111457,7 +111519,7 @@ Bruno_h: ; 0x762ca to 0x762d6 (12 bytes) (id=246)
 	dw BrunoObject ; objects
 
 BrunoScript: ; 762d6 (1d:62d6)
-	call BrunoScript_Unknown762ec
+	call BrunoScript_762ec
 	call EnableAutoTextBoxDrawing
 	ld hl, BrunoTrainerHeaders
 	ld de, BrunoScriptPointers
@@ -111466,7 +111528,7 @@ BrunoScript: ; 762d6 (1d:62d6)
 	ld [W_BRUNOCURSCRIPT], a
 	ret
 
-BrunoScript_Unknown762ec: ; 762ec (1d:62ec)
+BrunoScript_762ec: ; 762ec (1d:62ec)
 	ld hl, $d126
 	bit 5, [hl]
 	res 5, [hl]
