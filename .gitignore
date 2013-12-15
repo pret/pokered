@@ -1,3 +1,6 @@
+# global label defs are generated
+globals.asm
+
 # precompiled python
 *.pyc
 
@@ -9,6 +12,11 @@
 
 # roms
 *.gbc
+*.gb
+
+# rgbds extras
+*.map
+*.sym
 
 # generated
 *.tx
@@ -20,13 +28,9 @@
 *.json
 
 # for any of the poor souls with save game files in their working directory
-baserom.sgm
-baserom.sav
-pokered.sgm
-pokered.sav
-
-baserom.sys
-pokered.sys
+*.sgm
+*.sav
+*.sys
 
 # for vim configuration
 # url: http://www.vim.org/scripts/script.php?script_id=441
