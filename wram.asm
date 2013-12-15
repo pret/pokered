@@ -321,7 +321,7 @@ wWalkCounter: ; cfc5
 
 	ds 1
 
-wMusicChannelPointer: ; cfc7
+wMusicHeaderPointer: ; cfc7
 ; (the current music channel address - $4000) / 3
 	ds 1
 
