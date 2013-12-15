@@ -6831,17 +6831,17 @@ DisplayTextID: ; 2920 (0:2920)
 	jp z,FuncTX_PokemonCenterPC
 	cp a,$f5   ; Vending Machine
 	jr nz,.notVendingMachine
-	ld b,BANK(Func_74ee0)
-	ld hl,Func_74ee0
-	call Bankswitch
+	ld b,BANK(VendingMachineMenu)
+	ld hl,VendingMachineMenu
+	call Bankswitch 	; jump banks to vending machine routine
 	jr AfterDisplayingTextID
 .notVendingMachine
 	cp a,$f7   ; slot machine
 	jp z,FuncTX_SlotMachine
 	cp a,$f6   ; cable connection NPC in Pokemon Center
 	jr nz,.notSpecialCase
-	ld hl, Func_71c5
-	ld b, BANK(Func_71c5)
+	ld hl, CableClubNPC
+	ld b, BANK(CableClubNPC)
 	call Bankswitch
 	jr AfterDisplayingTextID
 .notSpecialCase
@@ -10947,8 +10947,8 @@ ENDC
 	call GBPalNormal
 	ld a, $e4
 	ld [rOBP0], a ; $FF00+$48
-	ld bc, $ffaf
-	ld hl, .unknown_43db ; $43db
+	ld bc, $ffaf ; background scroll Y
+	ld hl, .TitleScreenPokemonLogoYScrolls ; $43db
 .asm_43c6
 	ld a, [hli]
 	and a
@@ -10961,19 +10961,29 @@ ENDC
 .asm_43d4
 	ld a, [hli]
 	ld e, a
-	call .asm_43ea
+	call .ScrollTitleScreenPokemonLogo
 	jr .asm_43c6
 
-.unknown_43db: ; 43db (1:43db)
-INCBIN "baserom.gbc",$43db,$43ea - $43db
+.TitleScreenPokemonLogoYScrolls: ; 43db (1:43db)
+; Controls the bouncing effect of the Pokemon logo on the title screen
+	db -4,16  ; y scroll amount, number of times to scroll
+	db 3,4
+	db -3,4
+	db 2,2
+	db -2,2
+	db 1,2
+	db -1,2
+	db 0      ; terminate list with 0
 
-.asm_43ea
+.ScrollTitleScreenPokemonLogo
+; Scrolls the Pokemon logo on the title screen to create the bouncing effect
+; Scrolls d pixels e times
 	call DelayFrame
 	ld a, [bc]
 	add d
 	ld [bc], a
 	dec e
-	jr nz, .asm_43ea
+	jr nz, .ScrollTitleScreenPokemonLogo
 	ret
 .asm_43f4
 	call LoadScreenTilesFromBuffer1
@@ -16823,15 +16833,15 @@ PrintStartMenuItem: ; 71bb (1:71bb)
 	add hl,de
 	ret
 
-Func_71c5: ; 71c5 (1:71c5)
-	ld hl, UnnamedText_72b8 ; $72b8
+CableClubNPC: ; 71c5 (1:71c5)
+	ld hl, CableClubNPCText1 ; $72b8
 	call PrintText
 	ld a, [$d74b]
 	bit 5, a
 	jp nz, Func_71e1
 	ld c, $3c
 	call DelayFrames
-	ld hl, UnnamedText_72d2 ; $72d2
+	ld hl, CableClubNPCText6 ; $72d2
 	call PrintText
 	jp Func_7298
 
@@ -16870,7 +16880,7 @@ Func_71e1: ; 71e1 (1:71e1)
 	call Func_22ed
 	ld c, $32
 	call DelayFrames
-	ld hl, UnnamedText_72bd ; $72bd
+	ld hl, CableClubNPCText2 ; $72bd
 	call PrintText
 	xor a
 	ld [$cc34], a
@@ -16886,7 +16896,7 @@ Func_71e1: ; 71e1 (1:71e1)
 	call WaitForSoundToFinish
 	ld a, $b6
 	call PlaySoundWaitForCurrent
-	ld hl, UnnamedText_72c2 ; $72c2
+	ld hl, CableClubNPCText3 ; $72c2
 	call PrintText
 	ld hl, $cc47
 	ld a, $3
@@ -16910,16 +16920,16 @@ Func_71e1: ; 71e1 (1:71e1)
 	dec b
 	jr nz, .asm_7273 ; 0x727a $f7
 	call Func_72d7
-	ld hl, UnnamedText_72c8 ; $72c8
+	ld hl, CableClubNPCText4 ; $72c8
 	call PrintText
 	jr Func_7298 ; 0x7285 $11
 .asm_7287
-	ld hl, UnnamedText_72b3 ; $72b3
+	ld hl, CableClubNPCText7 ; $72b3
 	call PrintText
 	jr Func_7298 ; 0x728d $9
 .asm_728f
 	call Func_72d7
-	ld hl, UnnamedText_72cd ; $72cd
+	ld hl, CableClubNPCText5 ; $72cd
 	call PrintText
 	; fall through
 
@@ -16942,32 +16952,32 @@ Func_72a8: ; 72a8 (1:72a8)
 	ld b, BANK(Func_5c0a)
 	jp Bankswitch
 
-UnnamedText_72b3: ; 72b3 (1:72b3)
-	TX_FAR _UnnamedText_72b3
+CableClubNPCText7: ; 72b3 (1:72b3)
+	TX_FAR _CableClubNPCText7
 	db "@"
 
-UnnamedText_72b8: ; 72b8 (1:72b8)
-	TX_FAR _UnnamedText_72b8
+CableClubNPCText1: ; 72b8 (1:72b8)
+	TX_FAR _CableClubNPCText1
 	db "@"
 
-UnnamedText_72bd: ; 72bd (1:72bd)
-	TX_FAR _UnnamedText_72bd
+CableClubNPCText2: ; 72bd (1:72bd)
+	TX_FAR _CableClubNPCText2
 	db "@"
 
-UnnamedText_72c2: ; 72c2 (1:72c2)
-	TX_FAR UnnamedText_a29cc
+CableClubNPCText3: ; 72c2 (1:72c2)
+	TX_FAR _CableClubNPCText3
 	db $a, "@"
 
-UnnamedText_72c8: ; 72c8 (1:72c8)
-	TX_FAR _UnnamedText_72c8
+CableClubNPCText4: ; 72c8 (1:72c8)
+	TX_FAR _CableClubNPCText4
 	db "@"
 
-UnnamedText_72cd: ; 72cd (1:72cd)
-	TX_FAR _UnnamedText_72cd
+CableClubNPCText5: ; 72cd (1:72cd)
+	TX_FAR _CableClubNPCText5
 	db "@"
 
-UnnamedText_72d2: ; 72d2 (1:72d2)
-	TX_FAR _UnnamedText_72d2
+CableClubNPCText6: ; 72d2 (1:72d2)
+	TX_FAR _CableClubNPCText6
 	db "@"
 
 Func_72d7: ; 72d7 (1:72d7)
@@ -110179,8 +110189,8 @@ CeruleanHouse2Object: ; 0x74ebe (size=34)
 	EVENT_DISP $4, $7, $2
 	EVENT_DISP $4, $7, $3
 
-Func_74ee0: ; 74ee0 (1d:4ee0)
-	ld hl, UnnamedText_74f99
+VendingMachineMenu: ; 74ee0 (1d:4ee0)
+	ld hl, VendingMachineText1
 	call PrintText
 	ld a, $13
 	ld [$d125], a
@@ -110226,18 +110236,18 @@ Func_74ee0: ; 74ee0 (1d:4ee0)
 	ld a, $2
 	ld [$FF00+$a0], a
 	call HasEnoughMoney
-	jr nc, .asm_74f54
-	ld hl, UnnamedText_74fd3
+	jr nc, .enoughMoney
+	ld hl, VendingMachineText4
 	jp PrintText
-.asm_74f54
+.enoughMoney
 	call Func_74fe7
 	ld a, [$FF00+$db]
 	ld b, a
 	ld c, 1
 	call GiveItem
 	jr nc, .BagFull
-	ld b, $3c
-.asm_74f63
+	ld b, $3c ; number of times to play the "brrrrr" sound
+.playDeliverySound ; 0x74f63
 	ld c, $2
 	call DelayFrames
 	push bc
@@ -110245,8 +110255,9 @@ Func_74ee0: ; 74ee0 (1d:4ee0)
 	call PlaySound
 	pop bc
 	dec b
-	jr nz, .asm_74f63
-	ld hl, UnnamedText_74fd8
+	jr nz, .playDeliverySound
+.asm_74f72
+	ld hl, VendingMachineText5
 	call PrintText
 	ld hl, $ffde
 	ld de, wPlayerMoney + 2 ; $d349
@@ -110257,14 +110268,14 @@ Func_74ee0: ; 74ee0 (1d:4ee0)
 	ld [$d125], a
 	jp DisplayTextBoxID
 .BagFull
-	ld hl, UnnamedText_74fdd
+	ld hl, VendingMachineText6
 	jp PrintText
 .asm_74f93
-	ld hl, UnnamedText_74fe2
+	ld hl, VendingMachineText7
 	jp PrintText
 
-UnnamedText_74f99: ; 74f99 (1d:4f99)
-	TX_FAR _UnnamedText_74f99
+VendingMachineText1: ; 74f99 (1d:4f99)
+	TX_FAR _VendingMachineText1
 	db "@"
 
 DrinkText: ; 74f9e (1d:4f9e)
@@ -110272,25 +110283,26 @@ DrinkText: ; 74f9e (1d:4f9e)
 	db "SODA POP",$4E
 	db "LEMONADE",$4E
 	db "CANCEL@"
+
 DrinkPriceText: ; 74fc3 (1d:4fc3)
 	db "¥200",$4E
 	db "¥300",$4E
 	db "¥350",$4E,"@"
 
-UnnamedText_74fd3: ; 74fd3 (1d:4fd3)
-	TX_FAR _UnnamedText_74fd3
+VendingMachineText4: ; 74fd3 (1d:4fd3)
+	TX_FAR _VendingMachineText4
 	db "@"
 
-UnnamedText_74fd8: ; 74fd8 (1d:4fd8)
-	TX_FAR _UnnamedText_74fd8
+VendingMachineText5: ; 74fd8 (1d:4fd8)
+	TX_FAR _VendingMachineText5
 	db "@"
 
-UnnamedText_74fdd: ; 74fdd (1d:4fdd)
-	TX_FAR _UnnamedText_74fdd
+VendingMachineText6: ; 74fdd (1d:4fdd)
+	TX_FAR _VendingMachineText6
 	db "@"
 
-UnnamedText_74fe2: ; 74fe2 (1d:4fe2)
-	TX_FAR _UnnamedText_74fe2
+VendingMachineText7: ; 74fe2 (1d:4fe2)
+	TX_FAR _VendingMachineText7
 	db "@"
 
 Func_74fe7: ; 74fe7 (1d:4fe7)
@@ -128435,24 +128447,24 @@ _CeladonMartRoofText6: ; 9ce50 (27:4e50)
 	db $0, "ROOFTOP SQUARE:", $4f
 	db "VENDING MACHINES", $57
 
-_UnnamedText_74f99: ; 9ce72 (27:4e72)
+_VendingMachineText1: ; 9ce72 (27:4e72)
 	db $0, "A vending machine!", $4f
 	db "Here's the menu!", $58
 
-_UnnamedText_74fd3: ; 9ce96 (27:4e96)
+_VendingMachineText4: ; 9ce96 (27:4e96)
 	db $0, "Oops, not enough", $4f
 	db "money!", $57
 
-_UnnamedText_74fd8: ; 9ceaf (27:4eaf)
+_VendingMachineText5: ; 9ceaf (27:4eaf)
 	TX_RAM $cf4b
 	db $0, $4f
 	db "popped out!", $57
 
-_UnnamedText_74fdd: ; 9cec0 (27:4ec0)
+_VendingMachineText6: ; 9cec0 (27:4ec0)
 	db $0, "There's no more", $4f
 	db "room for stuff!", $57
 
-_UnnamedText_74fe2: ; 9cee0 (27:4ee0)
+_VendingMachineText7: ; 9cee0 (27:4ee0)
 	db $0, "Not thirsty!", $57
 
 _CeladonMansion1Text1: ; 9ceee (27:4eee)
@@ -130440,26 +130452,26 @@ _PokemonCenterFarewellText: ; a2910 (28:6910)
 	db $0, "We hope to see", $4f
 	db "you again!", $57
 
-_UnnamedText_72b3: ; a292b (28:692b)
+_CableClubNPCText7: ; a292b (28:692b)
 	db $0, "This area is", $4f
 	db "reserved for 2", $55
 	db "friends who are", $55
 	db "linked by cable.", $57
 
-_UnnamedText_72b8: ; a2969 (28:6969)
+_CableClubNPCText1: ; a2969 (28:6969)
 	db $0, "Welcome to the", $4f
 	db "Cable Club!", $57
 
-_UnnamedText_72bd: ; a2985 (28:6985)
+_CableClubNPCText2: ; a2985 (28:6985)
 	db $0, "Please apply here.", $51
 	db "Before opening", $4f
 	db "the link, we have", $55
 	db "to save the game.", $57
 
-UnnamedText_a29cc: ; a29cc (28:69cc)
+_CableClubNPCText3: ; a29cc (28:69cc)
 	db $0, "Please wait.@@"
 
-_UnnamedText_72c8: ; a29db (28:69db)
+_CableClubNPCText4: ; a29db (28:69db)
 	db $0, "The link has been", $4f
 	db "closed because of", $55
 	db "inactivity.", $51
@@ -130469,10 +130481,10 @@ _UnnamedText_72c8: ; a29db (28:69db)
 
 SECTION "bank29",ROMX,BANK[$29]
 
-_UnnamedText_72cd: ; a4000 (29:4000)
+_CableClubNPCText5: ; a4000 (29:4000)
 	db $0, "Please come again!", $57
 
-_UnnamedText_72d2: ; a4014 (29:4014)
+_CableClubNPCText6: ; a4014 (29:4014)
 	db $0, "We're making", $4f
 	db "preparations.", $55
 	db "Please wait.", $57
