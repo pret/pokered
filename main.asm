@@ -29819,18 +29819,18 @@ Func_f068: ; f068 (3:7068)
 	ld b, a
 	inc hl
 	ld a, [hli]
-	ld c, a
+	ld c, a ; bc holds ypos/xpos of player's sprite
 	inc hl
 	inc hl
-	ld a, [hl]
+	ld a, [hl] ; a holds direction of player (00: down, 04: up, 08: left, 0C: right)
 	srl a
 	ld e, a
-	ld d, $0
+	ld d, $0 ; de holds direction (00: down, 02: up, 04: left, 06: right)
 	ld a, [$cd50]
 	and a
-	ld hl, Unknown_f08f ; $708f
+	ld hl, CutTreeAnimationOffsets ; $708f
 	jr z, .asm_f084
-	ld hl, Unknown_f097 ; $7097
+	ld hl, CutTreeAnimationOffsets2 ; $7097
 .asm_f084
 	add hl, de
 	ld e, [hl]
@@ -29844,11 +29844,21 @@ Func_f068: ; f068 (3:7068)
 	ld c, a
 	ret
 
-Unknown_f08f: ; f08f (3:708f)
-INCBIN "baserom.gbc",$f08f,$f097 - $f08f
+CutTreeAnimationOffsets: ; f08f (3:708f)
+; Each pair represents the x and y pixels offsets from the player of where the cut tree animation should be drawn
+	db  8, 36 ; player is facing down
+	db  8,  4 ; player is facing up
+	db -8, 20 ; player is facing left
+	db 24, 20 ; player is facing right
 
-Unknown_f097: ; f097 (3:7097)
-INCBIN "baserom.gbc",$f097,$f09f - $f097
+CutTreeAnimationOffsets2: ; f097 (3:7097)
+; Not sure if these ever get used. CutTreeAnimationOffsets only seems to be used.
+; Each pair represents the x and y pixels offsets from the player of where the cut tree animation should be drawn
+; These offsets represent 2 blocks away from the player
+	db  8,  52 ; player is facing down
+	db  8, -12 ; player is facing up
+	db -24, 20 ; player is facing left
+	db 40,  20 ; player is facing right
 
 Func_f09f: ; f09f (3:709f)
 	push de
