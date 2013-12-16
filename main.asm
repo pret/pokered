@@ -29741,7 +29741,7 @@ asm_ef82: ; ef82 (3:6f82)
 	ld a, $ff
 	ld [$cfcb], a
 	call Func_eff7
-	ld de, Unknown_f100 ; $7100
+	ld de, CutTreeBlockSwaps ; $7100
 	call Func_f09f
 	call Func_eedc
 	ld b, BANK(Func_79e96)
@@ -29932,8 +29932,19 @@ Func_f09f: ; f09f (3:709f)
 	ld [hl], a
 	ret
 
-Unknown_f100: ; f100 (3:7100)
-INCBIN "baserom.gbc",$f100,$f113 - $f100
+CutTreeBlockSwaps: ; f100 (3:7100)
+; first byte = tileset block containing the cut tree
+; second byte = corresponding tileset block after the cut animation happens
+	db $32, $6D
+	db $33, $6C 
+	db $34, $6F 
+	db $35, $4C 
+	db $60, $6E 
+	db $0B, $0A 
+	db $3C, $35 
+	db $3F, $35
+	db $3D, $36 
+	db $FF ; list terminator 
 
 Func_f113: ; f113 (3:7113)
 	ld a, [W_CURMAP] ; $d35e
