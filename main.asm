@@ -17546,7 +17546,7 @@ Func_76e1: ; 76e1 (1:36e1)
 	ld [hli], a
 	ld [hli], a
 	ld [hl], $c
-	call Func_77d6
+	call GetMonFieldMoves
 	ld a, [$cd41]
 	and a
 	jr nz, .asm_770f
@@ -17662,7 +17662,7 @@ PokemonMenuEntries: ; 77c2 (1:77c2)
 	db "SWITCH",$4E
 	db "CANCEL@"
 
-Func_77d6: ; 77d6 (1:77d6)
+GetMonFieldMoves: ; 77d6 (1:77d6)
 	ld a, [wWhichPokemon] ; $cf92
 	ld hl, W_PARTYMON1_MOVE1 ; $d173
 	ld bc, $2c
