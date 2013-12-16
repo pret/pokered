@@ -64759,7 +64759,7 @@ UnnamedText_3db80: ; 3db80 (f:5b80)
 
 Func_3db85: ; 3db85 (f:5b85)
 	push bc
-	ld a, [$d11e]
+	ld a, [$d11e] ; move number
 	ld c, a
 	ld b, $0
 	ld hl, Unknown_3dba3 ; $5ba3
@@ -66438,7 +66438,7 @@ CalcHitChance: ; 3e624 (f:6624)
 ; loop to do the calculations, the first iteration multiplies by the accuracy ratio and the second iteration multiplies by the evasion ratio
 .loop
 	push bc
-	ld hl,Unknown_3f6cb  ; $76cb ; stat modifier ratios
+	ld hl, StatModifierRatios  ; $76cb ; stat modifier ratios
 	dec b
 	sla b
 	ld c,b
@@ -67462,7 +67462,7 @@ Func_3eda5: ; 3eda5 (f:6da5)
 .asm_3edd4
 	pop bc
 	push hl
-	ld hl, Unknown_3f6cb ; $76cb
+	ld hl, StatModifierRatios ; $76cb
 	dec b
 	sla b
 	ld c, b
@@ -68457,7 +68457,7 @@ Func_3f428: ; 3f428 (f:7428)
 .asm_3f48a
 	push hl
 	push bc
-	ld hl, Unknown_3f6cb ; $76cb
+	ld hl, StatModifierRatios ; $76cb
 	dec b
 	sla b
 	ld c, b
@@ -68669,7 +68669,7 @@ Func_3f54c: ; 3f54c (f:754c)
 .asm_3f5ef
 	push hl
 	push bc
-	ld hl, Unknown_3f6cb ; $76cb
+	ld hl, StatModifierRatios ; $76cb
 	dec b
 	sla b
 	ld c, b
@@ -68793,8 +68793,21 @@ StatsTextStrings: ; 3f69f (f:769f)
 	db "ACCURACY@"
 	db "EVADE@"
 
-Unknown_3f6cb: ; 3f6cb (f:76cb)
-INCBIN "baserom.gbc",$3f6cb,$3f6e5 - $3f6cb
+StatModifierRatios: ; 3f6cb (f:76cb)
+; first byte is numerator, second byte is denominator
+	db 25, 100  ; 0.25
+	db 28, 100  ; 0.28
+	db 33, 100  ; 0.33
+	db 40, 100  ; 0.40
+	db 50, 100  ; 0.50
+	db 66, 100  ; 0.66
+	db  1,   1  ; 1.00
+	db 15,  10  ; 1.50
+	db  2,   1  ; 2.00
+	db 25,  10  ; 2.50
+	db  3,   1  ; 3.00
+	db 35,  10  ; 3.50
+	db  4,   1  ; 4.00
 
 Func_3f6e5: ; 3f6e5 (f:76e5)
 	ld hl, W_PLAYERBATTSTATUS1
