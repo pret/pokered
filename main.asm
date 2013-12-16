@@ -17676,12 +17676,12 @@ Func_77d6: ; 77d6 (1:77d6)
 .asm_77ea
 	dec c
 	jr z, .asm_7821
-	ld a, [de]
+	ld a, [de] ; de is RAM address of move
 	and a
 	jr z, .asm_7821
 	ld b, a
-	inc de
-	ld hl, Unknown_7823 ; $7823
+	inc de ; go to next move
+	ld hl, FieldMoveDisplayData ; $7823
 .asm_77f6
 	ld a, [hli]
 	cp $ff
@@ -17714,8 +17714,24 @@ Func_77d6: ; 77d6 (1:77d6)
 	pop hl
 	ret
 
-Unknown_7823: ; 7823 (1:7823)
-INCBIN "baserom.gbc",$7823,$783f - $7823
+; Format: [Move id], [list priority], [leftmost tile]
+; Move id = id of move
+; List priority = lower number means higher priority when field moves are displayed
+;                 these priorities must be unique
+; Leftmost tile = -1 + tile column in which the first letter of the move's name should be displayed
+;                 "SOFTBOILED" is $08 because it has 4 more letters than "SURF", for example, whose value is $0C
+FieldMoveDisplayData: ; 7823 (1:7823)
+	db CUT, $01, $0C
+	db FLY, $02, $0C 
+	db $B4, $03, $0C ; unused field move
+	db SURF, $04, $0C 
+	db STRENGTH, $05, $0A 
+	db FLASH, $06, $0C 
+	db DIG, $07, $0C 
+	db TELEPORT, $08, $0A 
+	db SOFTBOILED, $09, $08 
+	db $ff ; list terminator
+
 
 Func_783f: ; 783f (1:783f)
 	ld hl, W_DAMAGE ; $d0d7
