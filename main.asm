@@ -57952,7 +57952,7 @@ Func_3a8e1: ; 3a8e1 (e:68e1)
 	ret
 
 Func_3a902: ; 3a902 (e:6902)
-	ld hl, Unknown_3a916 ; $6916
+	ld hl, PlayerBattleHUDGraphicsTiles ; $6916
 	ld de, $cd3f
 	ld bc, $3
 	call CopyData
@@ -57961,8 +57961,11 @@ Func_3a902: ; 3a902 (e:6902)
 	ld de, rIE ; $ffff
 	jr Func_3a930
 
-Unknown_3a916: ; 3a916 (e:6916)
-INCBIN "baserom.gbc",$3a916,$3a919 - $3a916
+PlayerBattleHUDGraphicsTiles: ; 3a916 (e:6916)
+; The tile numbers for specific parts of the battle display for the player's pokemon
+	db $73 ; unused ($73 is hardcoded into the routine that uses these bytes)
+	db $77 ; lower-right corner tile of the HUD
+	db $6F ; lower-left triangle tile of the HUD
 
 Func_3a919: ; 3a919 (e:6919)
 	ld hl, Unknown_3a92d ; $692d
