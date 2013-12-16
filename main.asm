@@ -57968,7 +57968,7 @@ PlayerBattleHUDGraphicsTiles: ; 3a916 (e:6916)
 	db $6F ; lower-left triangle tile of the HUD
 
 Func_3a919: ; 3a919 (e:6919)
-	ld hl, Unknown_3a92d ; $692d
+	ld hl, EnemyBattleHUDGraphicsTiles ; $692d
 	ld de, $cd3f
 	ld bc, $3
 	call CopyData
@@ -57977,8 +57977,11 @@ Func_3a919: ; 3a919 (e:6919)
 	ld de, $1
 	jr Func_3a930
 
-Unknown_3a92d: ; 3a92d (e:692d)
-INCBIN "baserom.gbc",$3a92d,$3a930 - $3a92d
+EnemyBattleHUDGraphicsTiles: ; 3a92d (e:692d)
+; The tile numbers for specific parts of the battle display for the enemy
+	db $73 ; unused ($73 is hardcoded in the routine that uses these bytes)
+	db $74 ; lower-left corner tile of the HUD
+	db $78 ; lower-right triangle tile of the HUD
 
 Func_3a930: ; 3a930 (e:6930)
 	ld [hl], $73
