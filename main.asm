@@ -72505,12 +72505,12 @@ PlayIntroScene: ; 4169d (10:569d)
 	call PlaySound
 	xor a
 	ld [$d09f], a
-	ld de, Unknown_41910
+	ld de, IntroNidorinoAnimation1
 	call AnimateIntroNidorino
 ; hop
 	ld a, $ba
 	call PlaySound
-	ld de, Unknown_4191b
+	ld de, IntroNidorinoAnimation2
 	call AnimateIntroNidorino
 	ld c, $a
 	call CheckForUserInterruption
@@ -72519,12 +72519,12 @@ PlayIntroScene: ; 4169d (10:569d)
 ; hip
 	ld a, $b9
 	call PlaySound
-	ld de, Unknown_41910
+	ld de, IntroNidorinoAnimation1
 	call AnimateIntroNidorino
 ; hop
 	ld a, $ba
 	call PlaySound
-	ld de, Unknown_4191b
+	ld de, IntroNidorinoAnimation2
 	call AnimateIntroNidorino
 	ld c, $1e
 	call CheckForUserInterruption
@@ -72553,7 +72553,7 @@ PlayIntroScene: ; 4169d (10:569d)
 	call PlaySound
 	ld a, $24
 	ld [$d09f], a
-	ld de, Unknown_41926
+	ld de, IntroNidorinoAnimation3
 	call AnimateIntroNidorino
 	ld c, $1e
 	call CheckForUserInterruption
@@ -72572,12 +72572,12 @@ PlayIntroScene: ; 4169d (10:569d)
 	call PlaySound
 	xor a
 	ld [$d09f], a
-	ld de, Unknown_41931 ; $5931
+	ld de, IntroNidorinoAnimation4 ; $5931
 	call AnimateIntroNidorino
 ; hop
 	ld a, $ba
 	call PlaySound
-	ld de, Unknown_4193c ; $593c
+	ld de, IntroNidorinoAnimation5 ; $593c
 	call AnimateIntroNidorino
 	ld c, $14
 	call CheckForUserInterruption
@@ -72585,7 +72585,7 @@ PlayIntroScene: ; 4169d (10:569d)
 
 	ld a, $24
 	ld [$d09f], a
-	ld de, Unknown_41947 ; $5947
+	ld de, IntroNidorinoAnimation6 ; $5947
 	call AnimateIntroNidorino
 	ld c, $1e
 	call CheckForUserInterruption
@@ -72596,7 +72596,7 @@ PlayIntroScene: ; 4169d (10:569d)
 	call PlaySound
 	ld a, $48
 	ld [$d09f], a
-	ld de, Unknown_41950 ; $5950
+	ld de, IntroNidorinoAnimation7 ; $5950
 	jp AnimateIntroNidorino
 
 AnimateIntroNidorino: ; 41793 (10:5793)
@@ -72820,26 +72820,74 @@ Func_418e9: ; 418e9 (10:58e9)
 
 INCBIN "baserom.gbc",$4190c,$41910 - $4190c
 
-Unknown_41910: ; 41910 (10:5910)
-INCBIN "baserom.gbc",$41910,$4191b - $41910
+IntroNidorinoAnimation1: ; 41910 (10:5910)
+; This is a sequence of pixel movements for part of the Nidorino animation. This 
+; list describes how Nidorino should hop.
+; First byte is y movement, second byte is x movement
+	db  0, 0
+	db -2, 2
+	db -1, 2
+	db  1, 2
+	db  2, 2
+	db $50 ; list terminator 
 
-Unknown_4191b: ; 4191b (10:591b)
-INCBIN "baserom.gbc",$4191b,$41926 - $4191b
+IntroNidorinoAnimation2: ; 4191b (10:591b)
+; This is a sequence of pixel movements for part of the Nidorino animation.
+; First byte is y movement, second byte is x movement
+	db  0,  0
+	db -2, -2
+	db -1, -2
+	db  1, -2
+	db  2, -2
+	db $50 ; list terminator
 
-Unknown_41926: ; 41926 (10:5926)
-INCBIN "baserom.gbc",$41926,$41931 - $41926
+IntroNidorinoAnimation3: ; 41926 (10:5926)
+; This is a sequence of pixel movements for part of the Nidorino animation.
+; First byte is y movement, second byte is x movement
+	db   0, 0
+	db -12, 6
+	db  -8, 6
+	db   8, 6
+	db  12, 6
+	db $50 ; list terminator 
 
-Unknown_41931: ; 41931 (10:5931)
-INCBIN "baserom.gbc",$41931,$4193c - $41931
+IntroNidorinoAnimation4: ; 41931 (10:5931)
+; This is a sequence of pixel movements for part of the Nidorino animation.
+; First byte is y movement, second byte is x movement
+	db  0,  0
+	db -8, -4
+	db -4, -4
+	db  4, -4
+	db  8, -4
+	db $50 ; list terminator
 
-Unknown_4193c: ; 4193c (10:593c)
-INCBIN "baserom.gbc",$4193c,$41947 - $4193c
+IntroNidorinoAnimation5: ; 4193c (10:593c)
+; This is a sequence of pixel movements for part of the Nidorino animation.
+; First byte is y movement, second byte is x movement
+	db  0, 0
+	db -8, 4
+	db -4, 4
+	db  4, 4
+	db  8, 4
+	db $50 ; list terminator
 
-Unknown_41947: ; 41947 (10:5947)
-INCBIN "baserom.gbc",$41947,$41950 - $41947
+IntroNidorinoAnimation6: ; 41947 (10:5947)
+; This is a sequence of pixel movements for part of the Nidorino animation.
+; First byte is y movement, second byte is x movement
+	db 0, 0
+	db 2, 0
+	db 2, 0
+	db 0, 0
+	db $50 ; list terminator
 
-Unknown_41950: ; 41950 (10:5950)
-INCBIN "baserom.gbc",$41950,$41959 - $41950
+IntroNidorinoAnimation7: ; 41950 (10:5950)
+; This is a sequence of pixel movements for part of the Nidorino animation.
+; First byte is y movement, second byte is x movement
+	db -8, -16
+	db -7, -14
+	db -6, -12
+	db -4, -10
+	db $50 ; list terminator 
 
 GameFreakIntro: ; 41959 (10:5959)
 	INCBIN "gfx/gamefreak_intro.2bpp"
