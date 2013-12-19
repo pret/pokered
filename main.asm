@@ -3290,8 +3290,7 @@ PrintLevelCommon: ; 1523 (0:1523)
 	ld b,$41 ; no leading zeroes, left-aligned, one byte
 	jp PrintNumber
 
-; XXX does anything call this?
-Unknown152E: ; 152e (0:152e)
+Func_152e: ; 152e (0:152e)
 	ld hl,$d0dc
 	ld c,a
 	ld b,0
@@ -4682,7 +4681,7 @@ GetRowColAddressBgMap: ; 1cdd (0:1cdd)
 ClearBgMap: ; 1cf0 (0:1cf0)
 	ld a," "
 	jr .next
-	ld a,l ; XXX does anything call this?
+	ld a,l
 .next
 	ld de,$400 ; size of VRAM background map
 	ld l,e
@@ -5363,7 +5362,6 @@ DelayFrame: ; 20af (0:20af)
 	ld a,[H_VBLANKOCCURRED]
 	and a
 	jr nz,.halt
-
 	ret
 
 ; These routines manage gradual fading
@@ -6352,22 +6350,22 @@ ReadNextInputByte: ; 268b (0:268b)
 
 ; the nth item is 2^n - 1
 LengthEncodingOffsetList: ; 269f (0:269f)
-	dw $0001
-	dw $0003
-	dw $0007
-	dw $000F
-	dw $001F
-	dw $003F
-	dw $007F
-	dw $00FF
-	dw $01FF
-	dw $03FF
-	dw $07FF
-	dw $0FFF
-	dw $1FFF
-	dw $3FFF
-	dw $7FFF
-	dw $FFFF
+	dw %0000000000000001
+	dw %0000000000000011
+	dw %0000000000000111
+	dw %0000000000001111
+	dw %0000000000011111
+	dw %0000000000111111
+	dw %0000000001111111
+	dw %0000000011111111
+	dw %0000000111111111
+	dw %0000001111111111
+	dw %0000011111111111
+	dw %0000111111111111
+	dw %0001111111111111
+	dw %0011111111111111
+	dw %0111111111111111
+	dw %1111111111111111
 
 ; unpacks the sprite data depending on the unpack mode
 UnpackSprite: ; 26bf (0:26bf)
@@ -10750,7 +10748,7 @@ MewBaseStats: ; 425b (1:425b)
 
 	dw MewPicFront
 	dw MewPicBack
-	
+
 	; attacks known at lvl 0
 	db POUND
 	db 0
@@ -10758,7 +10756,7 @@ MewBaseStats: ; 425b (1:425b)
 	db 0
 
 	db 3 ; growth rate
-	
+
 	; include learnset directly
 	db %11111111
 	db %11111111
@@ -13211,7 +13209,7 @@ Func_551c:
 	ld h, [hl]
 	ld l, a
 	jp [hl]
-	
+
 Func_5530
 	call ClearScreen
 	call Func_5ae6
@@ -13514,7 +13512,7 @@ Func_57a2:
 	ld hl, $c4e2
 	ld de, CancelTextString
 	jp PlaceString
-	
+
 CancelTextString:
 	db "CANCEL@"
 
@@ -17115,15 +17113,9 @@ GetAddressOfScreenCoords: ; 7375 (1:7375)
 ; 00: text box ID
 ; 01-02: function address
 TextBoxFunctionTable: ; 7387 (1:7387)
-	db $13
-	dw $74ba
-
-	db $15
-	dw $74ea
-
-	db $04
-	dw $76e1
-
+	dbw $13, Func_74ba
+	dbw $15, Func_74ea
+	dbw $04, Func_76e1
 	db $ff ; terminator
 
 ; Format:
@@ -17258,6 +17250,7 @@ JapanesePokedexMenu: ; 74a1 (1:74a1)
 	db "ぶんぷをみる",$4E
 	db "キャンセル@"
 
+Func_74ba: ; 74ba (1:74ba)
 	ld hl, $d730
 	set 6, [hl]
 	ld a, $f
@@ -17277,10 +17270,10 @@ JapanesePokedexMenu: ; 74a1 (1:74a1)
 	res 6, [hl]
 	ret
 
-CurrencyString: ; 74e2 (1:34e2)
+CurrencyString: ; 74e2 (1:74e2)
 	db "      ¥@"
 
-Func_74ea: ; 74ea (1:34ea)
+Func_74ea: ; 74ea (1:74ea)
 	ld a, [$d730]
 	set 6, a
 	ld [$d730], a
@@ -18755,7 +18748,7 @@ Music2_notetype: ; 0x92e4
 	sla a
 	ld d, a
 	; fall through
-	
+
 	; if channel 3, store high nibble as volume
 	; else, store volume (high nibble) and fade (low nibble)
 .notChannel3
@@ -18777,7 +18770,7 @@ Music2_togglecall: ; 0x9323
 	xor $1
 	ld [hl], a ; flip bit 0 of $c02e (toggle returning from call)
 	jp Music2_endchannel
-	
+
 Music2_vibrato: ; 0x9335
 	cp $ea ; is this command a vibrato?
 	jr nz, Music2_pitchbend ; no
@@ -18811,7 +18804,7 @@ Music2_vibrato: ; 0x9335
 	or d
 	ld [hl], a ; store depth as both high and low nibbles
 	jp Music2_endchannel
-	
+
 Music2_pitchbend: ; 0x936d
 	cp $eb ; is this command a pitchbend?
 	jr nz, Music2_duty ; no
@@ -18842,7 +18835,7 @@ Music2_pitchbend: ; 0x936d
 	call Music2_GetNextMusicByte
 	ld d, a
 	jp Music2_notelength
-	
+
 Music2_duty: ; 0x93a5
 	cp $ec ; is this command a duty?
 	jr nz, Music2_tempo ; no
@@ -18855,7 +18848,7 @@ Music2_duty: ; 0x93a5
 	add hl, bc
 	ld [hl], a ; store duty
 	jp Music2_endchannel
-	
+
 Music2_tempo: ; 0x93ba
 	cp $ed ; is this command a tempo?
 	jr nz, Music2_unknownmusic0xee ; no
@@ -18884,7 +18877,7 @@ Music2_tempo: ; 0x93ba
 	ld [$c0d5], a
 .musicChannelDone
 	jp Music2_endchannel
-	
+
 Music2_unknownmusic0xee: ; 0x93fa
 	cp $ee ; is this command an unknownmusic0xee?
 	jr nz, Music2_unknownmusic0xef ; no
@@ -18909,7 +18902,7 @@ Music2_unknownmusic0xef ; 0x9407
 	ld [$c02d], a
 .skip
 	jp Music2_endchannel
-	
+
 Music2_dutycycle: ; 0x9426
 	cp $fc ; is this command a dutycycle?
 	jr nz, Music2_stereopanning ; no
@@ -18926,14 +18919,14 @@ Music2_dutycycle: ; 0x9426
 	add hl, bc
 	set 6, [hl] ; set dutycycle flag
 	jp Music2_endchannel
-	
+
 Music2_stereopanning: ; 0x9444
 	cp $f0 ; is this command a stereopanning?
 	jr nz, Music2_executemusic ; no
 	call Music2_GetNextMusicByte ; yes
 	ld [$ff00+$24], a ; store stereopanning
 	jp Music2_endchannel
-	
+
 Music2_executemusic: ; 0x9450
 	cp $f8 ; is this command an executemusic?
 	jr nz, Music2_octave ; no
@@ -18942,7 +18935,7 @@ Music2_executemusic: ; 0x9450
 	add hl, bc
 	set 0, [hl]
 	jp Music2_endchannel
-	
+
 Music2_octave: ; 0x945f
 	and $f0
 	cp $e0 ; is this command an octave?
@@ -19109,7 +19102,7 @@ Music2_notelength: ; 0x950a
 	jr z, Music2_notepitch
 	pop hl
 	ret
-	
+
 Music2_notepitch: ; 0x9568
 	pop af
 	and $f0
@@ -31799,7 +31792,7 @@ OldAmberSprite: ; 11300 (4:5300)
 	INCBIN "gfx/sprites/old_amber.2bpp" ; was $11300
 LyingOldManSprite: ; 11340 (4:5340)
 	INCBIN "gfx/sprites/lying_old_man.2bpp" ; was $11340
-	
+
 PokemonLogoGraphics: ; 11380 (4:5380)
 	INCBIN "gfx/pokemon_logo.2bpp"
 FontGraphics: ; 11a80 (4:5a80)
@@ -34478,7 +34471,7 @@ ReadSpriteSheetData: ; 17971 (5:7971)
 ; sets carry if the map is a city or route, unsets carry if not
 InitOutsideMapSprites: ; 1797b (5:797b)
 	ld a,[W_CURMAP]
-	cp a,$25 ; is the map a city or a route (map ID less than $25)?
+	cp a,REDS_HOUSE_1F ; is the map a city or a route (map ID less than $25)?
 	ret nc ; if not, return
 	ld hl,MapSpriteSets
 	add l
@@ -35310,8 +35303,8 @@ Func_17d7d: ; 17d7d (5:7d7d)
 
 SubstituteEffectHandler: ; 17dad (5:7dad)
 	ld c, 50
-	call DelayFrames		
-	ld hl, W_PLAYERMONMAXHP		
+	call DelayFrames
+	ld hl, W_PLAYERMONMAXHP
 	ld de, wPlayerSubstituteHP
 	ld bc, W_PLAYERBATTSTATUS2
 	ld a, [$ff00+$f3]  ;whose turn?
@@ -35462,8 +35455,8 @@ PKMNLeague: ; 17ed2 (5:7ed2)
 	ld a, $9B
 	call PlaySound  ;XXX: play sound or stop music
 	call WaitForSoundToFinish  ;XXX: wait for sound to be done
-	ld b, BANK(Unknown_7657e)
-	ld hl, Unknown_7657e
+	ld b, BANK(Func_7657e)
+	ld hl, Func_7657e
 	call Bankswitch
 	jr ReloadMainMenu
 BillsPC: ; 17ee4 (5:7ee4)
@@ -39397,7 +39390,7 @@ DoorTileIDPointers: ; 1a62c (6:662c)
 	db $16
 	dw Tileset16DoorTileIDs
 	db $17
-	dw UnknownTilesetData1a66f
+	dw Tileset17DoorTileIDs
 	db $ff
 
 Tileset00DoorTileIDs: ; 1a654 (6:6654)
@@ -39430,7 +39423,7 @@ Tileset14DoorTileIDs: ; 1a669 (6:6669)
 Tileset16DoorTileIDs: ; 1a66b (6:666b)
 	db $43,$58,$1b,$00
 
-UnknownTilesetData1a66f: ; 1a66f (6:666f)
+Tileset17DoorTileIDs: ; 1a66f (6:666f)
 	db $3b,$1b,$00
 
 Func_1a672: ; 1a672 (6:6672)
@@ -39615,9 +39608,8 @@ Route1Object: ; 0x1c0e5 (size=19)
 	db SPRITE_BUG_CATCHER, $18 + 4, $5 + 4, $fe, $1, $1 ; person
 	db SPRITE_BUG_CATCHER, $d + 4, $f + 4, $fe, $2, $2 ; person
 
-; XXX what is this?
-Unknown_1c0f8: ; 1c0f8 (7:40f8)
-	db $12, $c7, $7, $2
+	; warp-to (unused)
+	EVENT_DISP $4, $7, $2
 
 Route1Blocks: ; 1c0fc (7:40fc)
 	INCBIN "maps/route1.blk"
@@ -40074,7 +40066,7 @@ OaksLab_h: ; 0x1cb02 to 0x1cb0e (12 bytes) (bank=7) (id=40)
 OaksLabScript: ; 1cb0e (7:4b0e)
 	ld a, [$d74b]
 	bit 6, a
-	call nz, Unknown_1d076
+	call nz, OaksLabScript_1d076
 	ld a, $1
 	ld [$cf0c], a
 	xor a
@@ -40778,7 +40770,7 @@ OaksLabScript_1d02b: ; 1d02b (7:502b)
 	call Func_32f9
 	ret
 
-Unknown_1d076: ; 1d076 (7:5076)
+OaksLabScript_1d076: ; 1d076 (7:5076)
 	ld hl, OaksLabTextPointers + $36 ; $50b8 ; starts at OaksLabText28
 	ld a, l
 	ld [W_MAPTEXTPTR], a
@@ -40868,7 +40860,7 @@ OaksLabText2: ; 1d102 (7:5102)
 	ld [$cd3e], a
 	ld a, $b0
 	ld b, $2
-	jr asm_1d133 ; 0x1d111 $20
+	jr OaksLabScript_1d133 ; 0x1d111 $20
 
 OaksLabText30: ; 1d113 (7:5113)
 OaksLabText3: ; 1d113 (7:5113)
@@ -40879,7 +40871,7 @@ OaksLabText3: ; 1d113 (7:5113)
 	ld [$cd3e], a
 	ld a, $b1
 	ld b, $3
-	jr asm_1d133 ; 0x1d122 $f
+	jr OaksLabScript_1d133 ; 0x1d122 $f
 
 OaksLabText31: ; 1d124 (7:5124)
 OaksLabText4: ; 1d124 (7:5124)
@@ -40891,16 +40883,16 @@ OaksLabText4: ; 1d124 (7:5124)
 	ld a, $99
 	ld b, $4
 
-asm_1d133: ; 1d133 (7:5133)
+OaksLabScript_1d133: ; 1d133 (7:5133)
 	ld [$cf91], a
 	ld [$d11e], a
 	ld a, b
 	ld [$cf13], a
 	ld a, [$d74b]
 	bit 2, a
-	jp nz, Unknown_1d22d
+	jp nz, OaksLabScript_1d22d
 	bit 1, a
-	jr nz, asm_1d157 ; 0x1d147 $e
+	jr nz, OaksLabScript_1d157 ; 0x1d147 $e
 	ld hl, OaksLabText39
 	call PrintText
 	jp TextScriptEnd
@@ -40909,7 +40901,7 @@ OaksLabText39: ; 1d152 (7:5152)
 	TX_FAR _OaksLabText39
 	db "@"
 
-asm_1d157: ; 1d157 (7:5157)
+OaksLabScript_1d157: ; 1d157 (7:5157)
 	ld a, $5
 	ld [$ff00+$8c], a
 	ld a, $9
@@ -41018,7 +41010,7 @@ OaksLabReceivedMonText: ; 1d227 (7:5227)
 	TX_FAR _OaksLabReceivedMonText ; 0x94ea0
 	db $11, "@"
 
-Unknown_1d22d: ; 1d22d (7:522d)
+OaksLabScript_1d22d: ; 1d22d (7:522d)
 	ld a, $5
 	ld [$ff00+$8c], a
 	ld a, $9
@@ -44367,7 +44359,7 @@ UnnamedText_1eae3: ; 1eae3 (7:6ae3)
 	db $0b
 	TX_FAR _UnnamedText_1eae3
 	db $06,$08
-	
+
 	ld a, [$FF00+$e0]
 	ld c, a
 	ld b, $2
@@ -44627,7 +44619,7 @@ Music8_Channel3DutyPointers: ; 20361 (1f:4361)
 	dw SFX_08_40_Ch1 ; unused
 	dw SFX_08_40_Ch1 ; unused
 	dw SFX_08_40_Ch1 ; unused
-	
+
 Music8_Channel3Duty1: ; 20373 (8:4373)
 	db $02,$46,$8A,$CE,$FF,$FE,$ED,$DC,$CB,$A9,$87,$65,$44,$33,$22,$11
 
@@ -45751,7 +45743,7 @@ Music8_notetype: ; 21a65 (8:5a65)
 	sla a
 	ld d, a
 	; fall through
-	
+
 	; if channel 3, store high nibble as volume
 	; else, store volume (high nibble) and fade (low nibble)
 .notChannel3
@@ -45773,7 +45765,7 @@ Music8_togglecall: ; 21aa4 (8:5aa4)
 	xor $1
 	ld [hl], a ; flip bit 0 of $c02e (toggle returning from call)
 	jp Music8_endchannel
-	
+
 Music8_vibrato: ; 21ab6 (8:5ab6)
 	cp $ea ; is this command a vibrato?
 	jr nz, Music8_pitchbend ; no
@@ -45807,7 +45799,7 @@ Music8_vibrato: ; 21ab6 (8:5ab6)
 	or d
 	ld [hl], a ; store depth as both high and low nibbles
 	jp Music8_endchannel
-	
+
 Music8_pitchbend: ; 21aee (8:5aee)
 	cp $eb ; is this command a pitchbend?
 	jr nz, Music8_duty ; no
@@ -45838,7 +45830,7 @@ Music8_pitchbend: ; 21aee (8:5aee)
 	call Music8_GetNextMusicByte
 	ld d, a
 	jp Music8_notelength
-	
+
 Music8_duty: ; 21b26 (8:5b26)
 	cp $ec ; is this command a duty?
 	jr nz, Music8_tempo ; no
@@ -45851,7 +45843,7 @@ Music8_duty: ; 21b26 (8:5b26)
 	add hl, bc
 	ld [hl], a ; store duty
 	jp Music8_endchannel
-	
+
 Music8_tempo: ; 21b3b (8:5b3b)
 	cp $ed ; is this command a tempo?
 	jr nz, Music8_unknownmusic0xee ; no
@@ -45880,14 +45872,14 @@ Music8_tempo: ; 21b3b (8:5b3b)
 	ld [$c0d5], a
 .musicChannelDone
 	jp Music8_endchannel
-	
+
 Music8_unknownmusic0xee: ; 21b7b (8:5b7b)
 	cp $ee ; is this command an unknownmusic0xee?
 	jr nz, Music8_unknownmusic0xef ; no
 	call Music8_GetNextMusicByte ; yes
 	ld [$c004], a ; store first param
 	jp Music8_endchannel
-	
+
 ; this appears to never be used
 Music8_unknownmusic0xef: ; 21b88 (8:5b88)
 	cp $ef ; is this command an unknownmusic0xef?
@@ -45905,7 +45897,7 @@ Music8_unknownmusic0xef: ; 21b88 (8:5b88)
 	ld [$c02d], a
 .skip
 	jp Music8_endchannel
-	
+
 Music8_dutycycle: ; 21ba7 (8:5ba7)
 	cp $fc ; is this command a dutycycle?
 	jr nz, Music8_stereopanning ; no
@@ -45922,14 +45914,14 @@ Music8_dutycycle: ; 21ba7 (8:5ba7)
 	add hl, bc
 	set 6, [hl] ; set dutycycle flag
 	jp Music8_endchannel
-	
+
 Music8_stereopanning: ; 21bc5 (8:5bc5)
 	cp $f0 ; is this command a stereopanning?
 	jr nz, Music8_executemusic ; no
 	call Music8_GetNextMusicByte ; yes
 	ld [$FF00+$24], a
 	jp Music8_endchannel
-	
+
 Music8_executemusic: ; 21bd1 (8:5bd1)
 	cp $f8 ; is this command an executemusic?
 	jr nz, Music8_octave ; no
@@ -45938,7 +45930,7 @@ Music8_executemusic: ; 21bd1 (8:5bd1)
 	add hl, bc
 	set 0, [hl]
 	jp Music8_endchannel
-	
+
 Music8_octave: ; 21be0 (8:5be0)
 	and $f0
 	cp $e0 ; is this command an octave?
@@ -45950,7 +45942,7 @@ Music8_octave: ; 21be0 (8:5be0)
 	and $f
 	ld [hl], a ; store low nibble as octave
 	jp Music8_endchannel
-	
+
 Music8_unknownsfx0x20: ; 21bf3
 	cp $20 ; is this command an unknownsfx0x20?
 	jr nz, Music8_unknownsfx0x10 ; no
@@ -45995,7 +45987,7 @@ Music8_unknownsfx0x20: ; 21bf3
 	pop de
 	call Func_21dcc
 	ret
-	
+
 Music8_unknownsfx0x10: ; 21c40 (8:5c40)
 	ld a, c
 	cp CH4
@@ -46011,7 +46003,7 @@ Music8_unknownsfx0x10: ; 21c40 (8:5c40)
 	call Music8_GetNextMusicByte ; yes
 	ld [$FF00+$10], a
 	jp Music8_endchannel
-	
+
 Music8_note: ; 21c5c (8:5c5c)
 	ld a, c
 	cp CH3
@@ -46030,7 +46022,7 @@ Music8_note: ; 21c5c (8:5c5c)
 	push de
 	push bc
 	jr asm_21c7e
-	
+
 Music8_dnote: ; 21c76 (8:5c76)
 	ld a, d
 	and $f
@@ -46105,7 +46097,7 @@ Music8_notelength: ; 21c8b (8:5c8b)
 	jr z, Music8_notepitch
 	pop hl
 	ret
-	
+
 Music8_notepitch: ; 21ce9 (8:5ce9)
 	pop af
 	and $f0
@@ -49840,7 +49832,7 @@ BulbasaurBaseStats: ; 383de (e:43de)
 
 	dw BulbasaurPicFront
 	dw BulbasaurPicBack
-	
+
 	; attacks known at lvl 0
 	db TACKLE
 	db GROWL
@@ -49848,7 +49840,7 @@ BulbasaurBaseStats: ; 383de (e:43de)
 	db 0
 
 	db 3 ; growth rate
-	
+
 	; learnset
 	db %10100100
 	db %00000011
@@ -49877,7 +49869,7 @@ IvysaurBaseStats: ; 383fa (e:43fa)
 
 	dw IvysaurPicFront
 	dw IvysaurPicBack
-	
+
 	; attacks known at lvl 0
 	db TACKLE
 	db GROWL
@@ -49885,7 +49877,7 @@ IvysaurBaseStats: ; 383fa (e:43fa)
 	db 0
 
 	db 3 ; growth rate
-	
+
 	; learnset
 	db %10100100
 	db %00000011
@@ -49914,7 +49906,7 @@ VenusaurBaseStats: ; 38416 (e:4416)
 
 	dw VenusaurPicFront
 	dw VenusaurPicBack
-	
+
 	; attacks known at lvl 0
 	db TACKLE
 	db GROWL
@@ -49922,7 +49914,7 @@ VenusaurBaseStats: ; 38416 (e:4416)
 	db VINE_WHIP
 
 	db 3 ; growth rate
-	
+
 	; learnset
 	db %10100100
 	db %01000011
@@ -49951,7 +49943,7 @@ CharmanderBaseStats: ; 38432 (e:4432)
 
 	dw CharmanderPicFront
 	dw CharmanderPicBack
-	
+
 	; attacks known at lvl 0
 	db SCRATCH
 	db GROWL
@@ -49959,7 +49951,7 @@ CharmanderBaseStats: ; 38432 (e:4432)
 	db 0
 
 	db 3 ; growth rate
-	
+
 	; learnset
 	db %10110101
 	db %00000011
@@ -49988,7 +49980,7 @@ CharmeleonBaseStats: ; 3844e (e:444e)
 
 	dw CharmeleonPicFront
 	dw CharmeleonPicBack
-	
+
 	; attacks known at lvl 0
 	db SCRATCH
 	db GROWL
@@ -49996,7 +49988,7 @@ CharmeleonBaseStats: ; 3844e (e:444e)
 	db 0
 
 	db 3 ; growth rate
-	
+
 	; learnset
 	db %10110101
 	db %00000011
@@ -50025,7 +50017,7 @@ CharizardBaseStats: ; 3846a (e:446a)
 
 	dw CharizardPicFront
 	dw CharizardPicBack
-	
+
 	; attacks known at lvl 0
 	db SCRATCH
 	db GROWL
@@ -50033,7 +50025,7 @@ CharizardBaseStats: ; 3846a (e:446a)
 	db LEER
 
 	db 3 ; growth rate
-	
+
 	; learnset
 	db %10110101
 	db %01000011
@@ -50062,7 +50054,7 @@ SquirtleBaseStats: ; 38486 (e:4486)
 
 	dw SquirtlePicFront
 	dw SquirtlePicBack
-	
+
 	; attacks known at lvl 0
 	db TACKLE
 	db TAIL_WHIP
@@ -50070,7 +50062,7 @@ SquirtleBaseStats: ; 38486 (e:4486)
 	db 0
 
 	db 3 ; growth rate
-	
+
 	; learnset
 	db %10110001
 	db %00111111
@@ -50099,7 +50091,7 @@ WartortleBaseStats: ; 384a2 (e:44a2)
 
 	dw WartortlePicFront
 	dw WartortlePicBack
-	
+
 	; attacks known at lvl 0
 	db TACKLE
 	db TAIL_WHIP
@@ -50107,7 +50099,7 @@ WartortleBaseStats: ; 384a2 (e:44a2)
 	db 0
 
 	db 3 ; growth rate
-	
+
 	; learnset
 	db %10110001
 	db %00111111
@@ -50136,7 +50128,7 @@ BlastoiseBaseStats: ; 384be (e:44be)
 
 	dw BlastoisePicFront
 	dw BlastoisePicBack
-	
+
 	; attacks known at lvl 0
 	db TACKLE
 	db TAIL_WHIP
@@ -50144,7 +50136,7 @@ BlastoiseBaseStats: ; 384be (e:44be)
 	db WATER_GUN
 
 	db 3 ; growth rate
-	
+
 	; learnset
 	db %10110001
 	db %01111111
@@ -50173,7 +50165,7 @@ CaterpieBaseStats: ; 384da (e:44da)
 
 	dw CaterpiePicFront
 	dw CaterpiePicBack
-	
+
 	; attacks known at lvl 0
 	db TACKLE
 	db STRING_SHOT
@@ -50181,7 +50173,7 @@ CaterpieBaseStats: ; 384da (e:44da)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %00000000
 	db %00000000
@@ -50210,7 +50202,7 @@ MetapodBaseStats: ; 384f6 (e:44f6)
 
 	dw MetapodPicFront
 	dw MetapodPicBack
-	
+
 	; attacks known at lvl 0
 	db HARDEN
 	db 0
@@ -50218,7 +50210,7 @@ MetapodBaseStats: ; 384f6 (e:44f6)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %00000000
 	db %00000000
@@ -50247,7 +50239,7 @@ ButterfreeBaseStats: ; 38512 (e:4512)
 
 	dw ButterfreePicFront
 	dw ButterfreePicBack
-	
+
 	; attacks known at lvl 0
 	db CONFUSION
 	db 0
@@ -50255,7 +50247,7 @@ ButterfreeBaseStats: ; 38512 (e:4512)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %00101010
 	db %01000011
@@ -50284,7 +50276,7 @@ WeedleBaseStats: ; 3852e (e:452e)
 
 	dw WeedlePicFront
 	dw WeedlePicBack
-	
+
 	; attacks known at lvl 0
 	db POISON_STING
 	db STRING_SHOT
@@ -50292,7 +50284,7 @@ WeedleBaseStats: ; 3852e (e:452e)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %00000000
 	db %00000000
@@ -50321,7 +50313,7 @@ KakunaBaseStats: ; 3854a (e:454a)
 
 	dw KakunaPicFront
 	dw KakunaPicBack
-	
+
 	; attacks known at lvl 0
 	db HARDEN
 	db 0
@@ -50329,7 +50321,7 @@ KakunaBaseStats: ; 3854a (e:454a)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %00000000
 	db %00000000
@@ -50358,7 +50350,7 @@ BeedrillBaseStats: ; 38566 (e:4566)
 
 	dw BeedrillPicFront
 	dw BeedrillPicBack
-	
+
 	; attacks known at lvl 0
 	db FURY_ATTACK
 	db 0
@@ -50366,7 +50358,7 @@ BeedrillBaseStats: ; 38566 (e:4566)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %00100100
 	db %01000011
@@ -50395,7 +50387,7 @@ PidgeyBaseStats: ; 38582 (e:4582)
 
 	dw PidgeyPicFront
 	dw PidgeyPicBack
-	
+
 	; attacks known at lvl 0
 	db GUST
 	db 0
@@ -50403,7 +50395,7 @@ PidgeyBaseStats: ; 38582 (e:4582)
 	db 0
 
 	db 3 ; growth rate
-	
+
 	; learnset
 	db %00101010
 	db %00000011
@@ -50432,7 +50424,7 @@ PidgeottoBaseStats: ; 3859e (e:459e)
 
 	dw PidgeottoPicFront
 	dw PidgeottoPicBack
-	
+
 	; attacks known at lvl 0
 	db GUST
 	db SAND_ATTACK
@@ -50440,7 +50432,7 @@ PidgeottoBaseStats: ; 3859e (e:459e)
 	db 0
 
 	db 3 ; growth rate
-	
+
 	; learnset
 	db %00101010
 	db %00000011
@@ -50469,7 +50461,7 @@ PidgeotBaseStats: ; 385ba (e:45ba)
 
 	dw PidgeotPicFront
 	dw PidgeotPicBack
-	
+
 	; attacks known at lvl 0
 	db GUST
 	db SAND_ATTACK
@@ -50477,7 +50469,7 @@ PidgeotBaseStats: ; 385ba (e:45ba)
 	db 0
 
 	db 3 ; growth rate
-	
+
 	; learnset
 	db %00101010
 	db %01000011
@@ -50506,7 +50498,7 @@ RattataBaseStats: ; 385d6 (e:45d6)
 
 	dw RattataPicFront
 	dw RattataPicBack
-	
+
 	; attacks known at lvl 0
 	db TACKLE
 	db TAIL_WHIP
@@ -50514,7 +50506,7 @@ RattataBaseStats: ; 385d6 (e:45d6)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %10100000
 	db %00101111
@@ -50543,7 +50535,7 @@ RaticateBaseStats: ; 385f2 (e:45f2)
 
 	dw RaticatePicFront
 	dw RaticatePicBack
-	
+
 	; attacks known at lvl 0
 	db TACKLE
 	db TAIL_WHIP
@@ -50551,7 +50543,7 @@ RaticateBaseStats: ; 385f2 (e:45f2)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %10100000
 	db %01111111
@@ -50580,7 +50572,7 @@ SpearowBaseStats: ; 3860e (e:460e)
 
 	dw SpearowPicFront
 	dw SpearowPicBack
-	
+
 	; attacks known at lvl 0
 	db PECK
 	db GROWL
@@ -50588,7 +50580,7 @@ SpearowBaseStats: ; 3860e (e:460e)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %00101010
 	db %00000011
@@ -50617,7 +50609,7 @@ FearowBaseStats: ; 3862a (e:462a)
 
 	dw FearowPicFront
 	dw FearowPicBack
-	
+
 	; attacks known at lvl 0
 	db PECK
 	db GROWL
@@ -50625,7 +50617,7 @@ FearowBaseStats: ; 3862a (e:462a)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %00101010
 	db %01000011
@@ -50654,7 +50646,7 @@ EkansBaseStats: ; 38646 (e:4646)
 
 	dw EkansPicFront
 	dw EkansPicBack
-	
+
 	; attacks known at lvl 0
 	db WRAP
 	db LEER
@@ -50662,7 +50654,7 @@ EkansBaseStats: ; 38646 (e:4646)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %10100000
 	db %00000011
@@ -50691,7 +50683,7 @@ ArbokBaseStats: ; 38662 (e:4662)
 
 	dw ArbokPicFront
 	dw ArbokPicBack
-	
+
 	; attacks known at lvl 0
 	db WRAP
 	db LEER
@@ -50699,7 +50691,7 @@ ArbokBaseStats: ; 38662 (e:4662)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %10100000
 	db %01000011
@@ -50728,7 +50720,7 @@ PikachuBaseStats: ; 3867e (e:467e)
 
 	dw PikachuPicFront
 	dw PikachuPicBack
-	
+
 	; attacks known at lvl 0
 	db THUNDERSHOCK
 	db GROWL
@@ -50736,7 +50728,7 @@ PikachuBaseStats: ; 3867e (e:467e)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %10110001
 	db %10000011
@@ -50765,7 +50757,7 @@ RaichuBaseStats: ; 3869a (e:469a)
 
 	dw RaichuPicFront
 	dw RaichuPicBack
-	
+
 	; attacks known at lvl 0
 	db THUNDERSHOCK
 	db GROWL
@@ -50773,7 +50765,7 @@ RaichuBaseStats: ; 3869a (e:469a)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %10110001
 	db %11000011
@@ -50802,7 +50794,7 @@ SandshrewBaseStats: ; 386b6 (e:46b6)
 
 	dw SandshrewPicFront
 	dw SandshrewPicBack
-	
+
 	; attacks known at lvl 0
 	db SCRATCH
 	db 0
@@ -50810,7 +50802,7 @@ SandshrewBaseStats: ; 386b6 (e:46b6)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %10100100
 	db %00000011
@@ -50839,7 +50831,7 @@ SandslashBaseStats: ; 386d2 (e:46d2)
 
 	dw SandslashPicFront
 	dw SandslashPicBack
-	
+
 	; attacks known at lvl 0
 	db SCRATCH
 	db SAND_ATTACK
@@ -50847,7 +50839,7 @@ SandslashBaseStats: ; 386d2 (e:46d2)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %10100100
 	db %01000011
@@ -50876,7 +50868,7 @@ NidoranFBaseStats: ; 386ee (e:46ee)
 
 	dw NidoranFPicFront
 	dw NidoranFPicBack
-	
+
 	; attacks known at lvl 0
 	db GROWL
 	db TACKLE
@@ -50884,7 +50876,7 @@ NidoranFBaseStats: ; 386ee (e:46ee)
 	db 0
 
 	db 3 ; growth rate
-	
+
 	; learnset
 	db %10100000
 	db %00100011
@@ -50913,7 +50905,7 @@ NidorinaBaseStats: ; 3870a (e:470a)
 
 	dw NidorinaPicFront
 	dw NidorinaPicBack
-	
+
 	; attacks known at lvl 0
 	db GROWL
 	db TACKLE
@@ -50921,7 +50913,7 @@ NidorinaBaseStats: ; 3870a (e:470a)
 	db 0
 
 	db 3 ; growth rate
-	
+
 	; learnset
 	db %11100000
 	db %00111111
@@ -50950,7 +50942,7 @@ NidoqueenBaseStats: ; 38726 (e:4726)
 
 	dw NidoqueenPicFront
 	dw NidoqueenPicBack
-	
+
 	; attacks known at lvl 0
 	db TACKLE
 	db SCRATCH
@@ -50958,7 +50950,7 @@ NidoqueenBaseStats: ; 38726 (e:4726)
 	db BODY_SLAM
 
 	db 3 ; growth rate
-	
+
 	; learnset
 	db %11110001
 	db %11111111
@@ -50987,7 +50979,7 @@ NidoranMBaseStats: ; 38742 (e:4742)
 
 	dw NidoranMPicFront
 	dw NidoranMPicBack
-	
+
 	; attacks known at lvl 0
 	db LEER
 	db TACKLE
@@ -50995,7 +50987,7 @@ NidoranMBaseStats: ; 38742 (e:4742)
 	db 0
 
 	db 3 ; growth rate
-	
+
 	; learnset
 	db %11100000
 	db %00100011
@@ -51024,7 +51016,7 @@ NidorinoBaseStats: ; 3875e (e:475e)
 
 	dw NidorinoPicFront
 	dw NidorinoPicBack
-	
+
 	; attacks known at lvl 0
 	db LEER
 	db TACKLE
@@ -51032,7 +51024,7 @@ NidorinoBaseStats: ; 3875e (e:475e)
 	db 0
 
 	db 3 ; growth rate
-	
+
 	; learnset
 	db %11100000
 	db %00111111
@@ -51061,7 +51053,7 @@ NidokingBaseStats: ; 3877a (e:477a)
 
 	dw NidokingPicFront
 	dw NidokingPicBack
-	
+
 	; attacks known at lvl 0
 	db TACKLE
 	db HORN_ATTACK
@@ -51069,7 +51061,7 @@ NidokingBaseStats: ; 3877a (e:477a)
 	db THRASH
 
 	db 3 ; growth rate
-	
+
 	; learnset
 	db %11110001
 	db %11111111
@@ -51098,7 +51090,7 @@ ClefairyBaseStats: ; 38796 (e:4796)
 
 	dw ClefairyPicFront
 	dw ClefairyPicBack
-	
+
 	; attacks known at lvl 0
 	db POUND
 	db GROWL
@@ -51106,7 +51098,7 @@ ClefairyBaseStats: ; 38796 (e:4796)
 	db 0
 
 	db 4 ; growth rate
-	
+
 	; learnset
 	db %10110001
 	db %00111111
@@ -51135,7 +51127,7 @@ ClefableBaseStats: ; 387b2 (e:47b2)
 
 	dw ClefablePicFront
 	dw ClefablePicBack
-	
+
 	; attacks known at lvl 0
 	db SING
 	db DOUBLESLAP
@@ -51143,7 +51135,7 @@ ClefableBaseStats: ; 387b2 (e:47b2)
 	db METRONOME
 
 	db 4 ; growth rate
-	
+
 	; learnset
 	db %10110001
 	db %01111111
@@ -51172,7 +51164,7 @@ VulpixBaseStats: ; 387ce (e:47ce)
 
 	dw VulpixPicFront
 	dw VulpixPicBack
-	
+
 	; attacks known at lvl 0
 	db EMBER
 	db TAIL_WHIP
@@ -51180,7 +51172,7 @@ VulpixBaseStats: ; 387ce (e:47ce)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %10100000
 	db %00000011
@@ -51209,7 +51201,7 @@ NinetalesBaseStats: ; 387ea (e:47ea)
 
 	dw NinetalesPicFront
 	dw NinetalesPicBack
-	
+
 	; attacks known at lvl 0
 	db EMBER
 	db TAIL_WHIP
@@ -51217,7 +51209,7 @@ NinetalesBaseStats: ; 387ea (e:47ea)
 	db ROAR
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %10100000
 	db %01000011
@@ -51246,7 +51238,7 @@ JigglypuffBaseStats: ; 38806 (e:4806)
 
 	dw JigglypuffPicFront
 	dw JigglypuffPicBack
-	
+
 	; attacks known at lvl 0
 	db SING
 	db 0
@@ -51254,7 +51246,7 @@ JigglypuffBaseStats: ; 38806 (e:4806)
 	db 0
 
 	db 4 ; growth rate
-	
+
 	; learnset
 	db %10110001
 	db %00111111
@@ -51283,7 +51275,7 @@ WigglytuffBaseStats: ; 38822 (e:4822)
 
 	dw WigglytuffPicFront
 	dw WigglytuffPicBack
-	
+
 	; attacks known at lvl 0
 	db SING
 	db DISABLE
@@ -51291,7 +51283,7 @@ WigglytuffBaseStats: ; 38822 (e:4822)
 	db DOUBLESLAP
 
 	db 4 ; growth rate
-	
+
 	; learnset
 	db %10110001
 	db %01111111
@@ -51320,7 +51312,7 @@ ZubatBaseStats: ; 3883e (e:483e)
 
 	dw ZubatPicFront
 	dw ZubatPicBack
-	
+
 	; attacks known at lvl 0
 	db LEECH_LIFE
 	db 0
@@ -51328,7 +51320,7 @@ ZubatBaseStats: ; 3883e (e:483e)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %00101010
 	db %00000011
@@ -51357,7 +51349,7 @@ GolbatBaseStats: ; 3885a (e:485a)
 
 	dw GolbatPicFront
 	dw GolbatPicBack
-	
+
 	; attacks known at lvl 0
 	db LEECH_LIFE
 	db SCREECH
@@ -51365,7 +51357,7 @@ GolbatBaseStats: ; 3885a (e:485a)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %00101010
 	db %01000011
@@ -51394,7 +51386,7 @@ OddishBaseStats: ; 38876 (e:4876)
 
 	dw OddishPicFront
 	dw OddishPicBack
-	
+
 	; attacks known at lvl 0
 	db ABSORB
 	db 0
@@ -51402,7 +51394,7 @@ OddishBaseStats: ; 38876 (e:4876)
 	db 0
 
 	db 3 ; growth rate
-	
+
 	; learnset
 	db %00100100
 	db %00000011
@@ -51431,7 +51423,7 @@ GloomBaseStats: ; 38892 (e:4892)
 
 	dw GloomPicFront
 	dw GloomPicBack
-	
+
 	; attacks known at lvl 0
 	db ABSORB
 	db POISONPOWDER
@@ -51439,7 +51431,7 @@ GloomBaseStats: ; 38892 (e:4892)
 	db 0
 
 	db 3 ; growth rate
-	
+
 	; learnset
 	db %00100100
 	db %00000011
@@ -51468,7 +51460,7 @@ VileplumeBaseStats: ; 388ae (e:48ae)
 
 	dw VileplumePicFront
 	dw VileplumePicBack
-	
+
 	; attacks known at lvl 0
 	db STUN_SPORE
 	db SLEEP_POWDER
@@ -51476,7 +51468,7 @@ VileplumeBaseStats: ; 388ae (e:48ae)
 	db PETAL_DANCE
 
 	db 3 ; growth rate
-	
+
 	; learnset
 	db %10100100
 	db %01000011
@@ -51505,7 +51497,7 @@ ParasBaseStats: ; 388ca (e:48ca)
 
 	dw ParasPicFront
 	dw ParasPicBack
-	
+
 	; attacks known at lvl 0
 	db SCRATCH
 	db 0
@@ -51513,7 +51505,7 @@ ParasBaseStats: ; 388ca (e:48ca)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %10100100
 	db %00000011
@@ -51542,7 +51534,7 @@ ParasectBaseStats: ; 388e6 (e:48e6)
 
 	dw ParasectPicFront
 	dw ParasectPicBack
-	
+
 	; attacks known at lvl 0
 	db SCRATCH
 	db STUN_SPORE
@@ -51550,7 +51542,7 @@ ParasectBaseStats: ; 388e6 (e:48e6)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %10100100
 	db %01000011
@@ -51579,7 +51571,7 @@ VenonatBaseStats: ; 38902 (e:4902)
 
 	dw VenonatPicFront
 	dw VenonatPicBack
-	
+
 	; attacks known at lvl 0
 	db TACKLE
 	db DISABLE
@@ -51587,7 +51579,7 @@ VenonatBaseStats: ; 38902 (e:4902)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %00100000
 	db %00000011
@@ -51616,7 +51608,7 @@ VenomothBaseStats: ; 3891e (e:491e)
 
 	dw VenomothPicFront
 	dw VenomothPicBack
-	
+
 	; attacks known at lvl 0
 	db TACKLE
 	db DISABLE
@@ -51624,7 +51616,7 @@ VenomothBaseStats: ; 3891e (e:491e)
 	db LEECH_LIFE
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %00101010
 	db %01000011
@@ -51653,7 +51645,7 @@ DiglettBaseStats: ; 3893a (e:493a)
 
 	dw DiglettPicFront
 	dw DiglettPicBack
-	
+
 	; attacks known at lvl 0
 	db SCRATCH
 	db 0
@@ -51661,7 +51653,7 @@ DiglettBaseStats: ; 3893a (e:493a)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %10100000
 	db %00000011
@@ -51690,7 +51682,7 @@ DugtrioBaseStats: ; 38956 (e:4956)
 
 	dw DugtrioPicFront
 	dw DugtrioPicBack
-	
+
 	; attacks known at lvl 0
 	db SCRATCH
 	db GROWL
@@ -51698,7 +51690,7 @@ DugtrioBaseStats: ; 38956 (e:4956)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %10100000
 	db %01000011
@@ -51727,7 +51719,7 @@ MeowthBaseStats: ; 38972 (e:4972)
 
 	dw MeowthPicFront
 	dw MeowthPicBack
-	
+
 	; attacks known at lvl 0
 	db SCRATCH
 	db GROWL
@@ -51735,7 +51727,7 @@ MeowthBaseStats: ; 38972 (e:4972)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %10100000
 	db %10001111
@@ -51764,7 +51756,7 @@ PersianBaseStats: ; 3898e (e:498e)
 
 	dw PersianPicFront
 	dw PersianPicBack
-	
+
 	; attacks known at lvl 0
 	db SCRATCH
 	db GROWL
@@ -51772,7 +51764,7 @@ PersianBaseStats: ; 3898e (e:498e)
 	db SCREECH
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %10100000
 	db %11001111
@@ -51801,7 +51793,7 @@ PsyduckBaseStats: ; 389aa (e:49aa)
 
 	dw PsyduckPicFront
 	dw PsyduckPicBack
-	
+
 	; attacks known at lvl 0
 	db SCRATCH
 	db 0
@@ -51809,7 +51801,7 @@ PsyduckBaseStats: ; 389aa (e:49aa)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %10110001
 	db %10111111
@@ -51838,7 +51830,7 @@ GolduckBaseStats: ; 389c6 (e:49c6)
 
 	dw GolduckPicFront
 	dw GolduckPicBack
-	
+
 	; attacks known at lvl 0
 	db SCRATCH
 	db TAIL_WHIP
@@ -51846,7 +51838,7 @@ GolduckBaseStats: ; 389c6 (e:49c6)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %10110001
 	db %11111111
@@ -51875,7 +51867,7 @@ MankeyBaseStats: ; 389e2 (e:49e2)
 
 	dw MankeyPicFront
 	dw MankeyPicBack
-	
+
 	; attacks known at lvl 0
 	db SCRATCH
 	db LEER
@@ -51883,7 +51875,7 @@ MankeyBaseStats: ; 389e2 (e:49e2)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %10110001
 	db %10000011
@@ -51912,7 +51904,7 @@ PrimeapeBaseStats: ; 389fe (e:49fe)
 
 	dw PrimeapePicFront
 	dw PrimeapePicBack
-	
+
 	; attacks known at lvl 0
 	db SCRATCH
 	db LEER
@@ -51920,7 +51912,7 @@ PrimeapeBaseStats: ; 389fe (e:49fe)
 	db FURY_SWIPES
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %10110001
 	db %11000011
@@ -51949,7 +51941,7 @@ GrowlitheBaseStats: ; 38a1a (e:4a1a)
 
 	dw GrowlithePicFront
 	dw GrowlithePicBack
-	
+
 	; attacks known at lvl 0
 	db BITE
 	db ROAR
@@ -51957,7 +51949,7 @@ GrowlitheBaseStats: ; 38a1a (e:4a1a)
 	db 0
 
 	db 5 ; growth rate
-	
+
 	; learnset
 	db %10100000
 	db %00000011
@@ -51986,7 +51978,7 @@ ArcanineBaseStats: ; 38a36 (e:4a36)
 
 	dw ArcaninePicFront
 	dw ArcaninePicBack
-	
+
 	; attacks known at lvl 0
 	db ROAR
 	db EMBER
@@ -51994,7 +51986,7 @@ ArcanineBaseStats: ; 38a36 (e:4a36)
 	db TAKE_DOWN
 
 	db 5 ; growth rate
-	
+
 	; learnset
 	db %10100000
 	db %01000011
@@ -52023,7 +52015,7 @@ PoliwagBaseStats: ; 38a52 (e:4a52)
 
 	dw PoliwagPicFront
 	dw PoliwagPicBack
-	
+
 	; attacks known at lvl 0
 	db BUBBLE
 	db 0
@@ -52031,7 +52023,7 @@ PoliwagBaseStats: ; 38a52 (e:4a52)
 	db 0
 
 	db 3 ; growth rate
-	
+
 	; learnset
 	db %10100000
 	db %00111111
@@ -52060,7 +52052,7 @@ PoliwhirlBaseStats: ; 38a6e (e:4a6e)
 
 	dw PoliwhirlPicFront
 	dw PoliwhirlPicBack
-	
+
 	; attacks known at lvl 0
 	db BUBBLE
 	db HYPNOSIS
@@ -52068,7 +52060,7 @@ PoliwhirlBaseStats: ; 38a6e (e:4a6e)
 	db 0
 
 	db 3 ; growth rate
-	
+
 	; learnset
 	db %10110001
 	db %00111111
@@ -52097,7 +52089,7 @@ PoliwrathBaseStats: ; 38a8a (e:4a8a)
 
 	dw PoliwrathPicFront
 	dw PoliwrathPicBack
-	
+
 	; attacks known at lvl 0
 	db HYPNOSIS
 	db WATER_GUN
@@ -52105,7 +52097,7 @@ PoliwrathBaseStats: ; 38a8a (e:4a8a)
 	db BODY_SLAM
 
 	db 3 ; growth rate
-	
+
 	; learnset
 	db %10110001
 	db %01111111
@@ -52134,7 +52126,7 @@ AbraBaseStats: ; 38aa6 (e:4aa6)
 
 	dw AbraPicFront
 	dw AbraPicBack
-	
+
 	; attacks known at lvl 0
 	db TELEPORT
 	db 0
@@ -52142,7 +52134,7 @@ AbraBaseStats: ; 38aa6 (e:4aa6)
 	db 0
 
 	db 3 ; growth rate
-	
+
 	; learnset
 	db %10110001
 	db %00000011
@@ -52171,7 +52163,7 @@ KadabraBaseStats: ; 38ac2 (e:4ac2)
 
 	dw KadabraPicFront
 	dw KadabraPicBack
-	
+
 	; attacks known at lvl 0
 	db TELEPORT
 	db CONFUSION
@@ -52179,7 +52171,7 @@ KadabraBaseStats: ; 38ac2 (e:4ac2)
 	db 0
 
 	db 3 ; growth rate
-	
+
 	; learnset
 	db %10110001
 	db %00000011
@@ -52208,7 +52200,7 @@ AlakazamBaseStats: ; 38ade (e:4ade)
 
 	dw AlakazamPicFront
 	dw AlakazamPicBack
-	
+
 	; attacks known at lvl 0
 	db TELEPORT
 	db CONFUSION
@@ -52216,7 +52208,7 @@ AlakazamBaseStats: ; 38ade (e:4ade)
 	db 0
 
 	db 3 ; growth rate
-	
+
 	; learnset
 	db %10110001
 	db %01000011
@@ -52245,7 +52237,7 @@ MachopBaseStats: ; 38afa (e:4afa)
 
 	dw MachopPicFront
 	dw MachopPicBack
-	
+
 	; attacks known at lvl 0
 	db KARATE_CHOP
 	db 0
@@ -52253,7 +52245,7 @@ MachopBaseStats: ; 38afa (e:4afa)
 	db 0
 
 	db 3 ; growth rate
-	
+
 	; learnset
 	db %10110001
 	db %00000011
@@ -52282,7 +52274,7 @@ MachokeBaseStats: ; 38b16 (e:4b16)
 
 	dw MachokePicFront
 	dw MachokePicBack
-	
+
 	; attacks known at lvl 0
 	db KARATE_CHOP
 	db LOW_KICK
@@ -52290,7 +52282,7 @@ MachokeBaseStats: ; 38b16 (e:4b16)
 	db 0
 
 	db 3 ; growth rate
-	
+
 	; learnset
 	db %10110001
 	db %00000011
@@ -52319,7 +52311,7 @@ MachampBaseStats: ; 38b32 (e:4b32)
 
 	dw MachampPicFront
 	dw MachampPicBack
-	
+
 	; attacks known at lvl 0
 	db KARATE_CHOP
 	db LOW_KICK
@@ -52327,7 +52319,7 @@ MachampBaseStats: ; 38b32 (e:4b32)
 	db 0
 
 	db 3 ; growth rate
-	
+
 	; learnset
 	db %10110001
 	db %01000011
@@ -52356,7 +52348,7 @@ BellsproutBaseStats: ; 38b4e (e:4b4e)
 
 	dw BellsproutPicFront
 	dw BellsproutPicBack
-	
+
 	; attacks known at lvl 0
 	db VINE_WHIP
 	db GROWTH
@@ -52364,7 +52356,7 @@ BellsproutBaseStats: ; 38b4e (e:4b4e)
 	db 0
 
 	db 3 ; growth rate
-	
+
 	; learnset
 	db %00100100
 	db %00000011
@@ -52393,7 +52385,7 @@ WeepinbellBaseStats: ; 38b6a (e:4b6a)
 
 	dw WeepinbellPicFront
 	dw WeepinbellPicBack
-	
+
 	; attacks known at lvl 0
 	db VINE_WHIP
 	db GROWTH
@@ -52401,7 +52393,7 @@ WeepinbellBaseStats: ; 38b6a (e:4b6a)
 	db 0
 
 	db 3 ; growth rate
-	
+
 	; learnset
 	db %00100100
 	db %00000011
@@ -52430,7 +52422,7 @@ VictreebelBaseStats: ; 38b86 (e:4b86)
 
 	dw VictreebelPicFront
 	dw VictreebelPicBack
-	
+
 	; attacks known at lvl 0
 	db SLEEP_POWDER
 	db STUN_SPORE
@@ -52438,7 +52430,7 @@ VictreebelBaseStats: ; 38b86 (e:4b86)
 	db RAZOR_LEAF
 
 	db 3 ; growth rate
-	
+
 	; learnset
 	db %10100100
 	db %01000011
@@ -52467,7 +52459,7 @@ TentacoolBaseStats: ; 38ba2 (e:4ba2)
 
 	dw TentacoolPicFront
 	dw TentacoolPicBack
-	
+
 	; attacks known at lvl 0
 	db ACID
 	db 0
@@ -52475,7 +52467,7 @@ TentacoolBaseStats: ; 38ba2 (e:4ba2)
 	db 0
 
 	db 5 ; growth rate
-	
+
 	; learnset
 	db %00100100
 	db %00111111
@@ -52504,7 +52496,7 @@ TentacruelBaseStats: ; 38bbe (e:4bbe)
 
 	dw TentacruelPicFront
 	dw TentacruelPicBack
-	
+
 	; attacks known at lvl 0
 	db ACID
 	db SUPERSONIC
@@ -52512,7 +52504,7 @@ TentacruelBaseStats: ; 38bbe (e:4bbe)
 	db 0
 
 	db 5 ; growth rate
-	
+
 	; learnset
 	db %00100100
 	db %01111111
@@ -52541,7 +52533,7 @@ GeodudeBaseStats: ; 38bda (e:4bda)
 
 	dw GeodudePicFront
 	dw GeodudePicBack
-	
+
 	; attacks known at lvl 0
 	db TACKLE
 	db 0
@@ -52549,7 +52541,7 @@ GeodudeBaseStats: ; 38bda (e:4bda)
 	db 0
 
 	db 3 ; growth rate
-	
+
 	; learnset
 	db %10100001
 	db %00000011
@@ -52578,7 +52570,7 @@ GravelerBaseStats: ; 38bf6 (e:4bf6)
 
 	dw GravelerPicFront
 	dw GravelerPicBack
-	
+
 	; attacks known at lvl 0
 	db TACKLE
 	db DEFENSE_CURL
@@ -52586,7 +52578,7 @@ GravelerBaseStats: ; 38bf6 (e:4bf6)
 	db 0
 
 	db 3 ; growth rate
-	
+
 	; learnset
 	db %10100001
 	db %00000011
@@ -52615,7 +52607,7 @@ GolemBaseStats: ; 38c12 (e:4c12)
 
 	dw GolemPicFront
 	dw GolemPicBack
-	
+
 	; attacks known at lvl 0
 	db TACKLE
 	db DEFENSE_CURL
@@ -52623,7 +52615,7 @@ GolemBaseStats: ; 38c12 (e:4c12)
 	db 0
 
 	db 3 ; growth rate
-	
+
 	; learnset
 	db %10110001
 	db %01000011
@@ -52652,7 +52644,7 @@ PonytaBaseStats: ; 38c2e (e:4c2e)
 
 	dw PonytaPicFront
 	dw PonytaPicBack
-	
+
 	; attacks known at lvl 0
 	db EMBER
 	db 0
@@ -52660,7 +52652,7 @@ PonytaBaseStats: ; 38c2e (e:4c2e)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %11100000
 	db %00000011
@@ -52689,7 +52681,7 @@ RapidashBaseStats: ; 38c4a (e:4c4a)
 
 	dw RapidashPicFront
 	dw RapidashPicBack
-	
+
 	; attacks known at lvl 0
 	db EMBER
 	db TAIL_WHIP
@@ -52697,7 +52689,7 @@ RapidashBaseStats: ; 38c4a (e:4c4a)
 	db GROWL
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %11100000
 	db %01000011
@@ -52726,7 +52718,7 @@ SlowpokeBaseStats: ; 38c66 (e:4c66)
 
 	dw SlowpokePicFront
 	dw SlowpokePicBack
-	
+
 	; attacks known at lvl 0
 	db CONFUSION
 	db 0
@@ -52734,7 +52726,7 @@ SlowpokeBaseStats: ; 38c66 (e:4c66)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %10100000
 	db %10111111
@@ -52763,7 +52755,7 @@ SlowbroBaseStats: ; 38c82 (e:4c82)
 
 	dw SlowbroPicFront
 	dw SlowbroPicBack
-	
+
 	; attacks known at lvl 0
 	db CONFUSION
 	db DISABLE
@@ -52771,7 +52763,7 @@ SlowbroBaseStats: ; 38c82 (e:4c82)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %10110001
 	db %11111111
@@ -52800,7 +52792,7 @@ MagnemiteBaseStats: ; 38c9e (e:4c9e)
 
 	dw MagnemitePicFront
 	dw MagnemitePicBack
-	
+
 	; attacks known at lvl 0
 	db TACKLE
 	db 0
@@ -52808,7 +52800,7 @@ MagnemiteBaseStats: ; 38c9e (e:4c9e)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %00100000
 	db %00000011
@@ -52837,7 +52829,7 @@ MagnetonBaseStats: ; 38cba (e:4cba)
 
 	dw MagnetonPicFront
 	dw MagnetonPicBack
-	
+
 	; attacks known at lvl 0
 	db TACKLE
 	db SONICBOOM
@@ -52845,7 +52837,7 @@ MagnetonBaseStats: ; 38cba (e:4cba)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %00100000
 	db %01000011
@@ -52874,7 +52866,7 @@ FarfetchdBaseStats: ; 38cd6 (e:4cd6)
 
 	dw FarfetchdPicFront
 	dw FarfetchdPicBack
-	
+
 	; attacks known at lvl 0
 	db PECK
 	db SAND_ATTACK
@@ -52882,7 +52874,7 @@ FarfetchdBaseStats: ; 38cd6 (e:4cd6)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %10101110
 	db %00000011
@@ -52911,7 +52903,7 @@ DoduoBaseStats: ; 38cf2 (e:4cf2)
 
 	dw DoduoPicFront
 	dw DoduoPicBack
-	
+
 	; attacks known at lvl 0
 	db PECK
 	db 0
@@ -52919,7 +52911,7 @@ DoduoBaseStats: ; 38cf2 (e:4cf2)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %10101000
 	db %00000011
@@ -52948,7 +52940,7 @@ DodrioBaseStats: ; 38d0e (e:4d0e)
 
 	dw DodrioPicFront
 	dw DodrioPicBack
-	
+
 	; attacks known at lvl 0
 	db PECK
 	db GROWL
@@ -52956,7 +52948,7 @@ DodrioBaseStats: ; 38d0e (e:4d0e)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %10101000
 	db %01000011
@@ -52985,7 +52977,7 @@ SeelBaseStats: ; 38d2a (e:4d2a)
 
 	dw SeelPicFront
 	dw SeelPicBack
-	
+
 	; attacks known at lvl 0
 	db HEADBUTT
 	db 0
@@ -52993,7 +52985,7 @@ SeelBaseStats: ; 38d2a (e:4d2a)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %11100000
 	db %10111111
@@ -53022,7 +53014,7 @@ DewgongBaseStats: ; 38d46 (e:4d46)
 
 	dw DewgongPicFront
 	dw DewgongPicBack
-	
+
 	; attacks known at lvl 0
 	db HEADBUTT
 	db GROWL
@@ -53030,7 +53022,7 @@ DewgongBaseStats: ; 38d46 (e:4d46)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %11100000
 	db %11111111
@@ -53059,7 +53051,7 @@ GrimerBaseStats: ; 38d62 (e:4d62)
 
 	dw GrimerPicFront
 	dw GrimerPicBack
-	
+
 	; attacks known at lvl 0
 	db POUND
 	db DISABLE
@@ -53067,7 +53059,7 @@ GrimerBaseStats: ; 38d62 (e:4d62)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %10100000
 	db %00000000
@@ -53096,7 +53088,7 @@ MukBaseStats: ; 38d7e (e:4d7e)
 
 	dw MukPicFront
 	dw MukPicBack
-	
+
 	; attacks known at lvl 0
 	db POUND
 	db DISABLE
@@ -53104,7 +53096,7 @@ MukBaseStats: ; 38d7e (e:4d7e)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %10100000
 	db %01000000
@@ -53133,7 +53125,7 @@ ShellderBaseStats: ; 38d9a (e:4d9a)
 
 	dw ShellderPicFront
 	dw ShellderPicBack
-	
+
 	; attacks known at lvl 0
 	db TACKLE
 	db WITHDRAW
@@ -53141,7 +53133,7 @@ ShellderBaseStats: ; 38d9a (e:4d9a)
 	db 0
 
 	db 5 ; growth rate
-	
+
 	; learnset
 	db %00100000
 	db %00111111
@@ -53170,7 +53162,7 @@ CloysterBaseStats: ; 38db6 (e:4db6)
 
 	dw CloysterPicFront
 	dw CloysterPicBack
-	
+
 	; attacks known at lvl 0
 	db WITHDRAW
 	db SUPERSONIC
@@ -53178,7 +53170,7 @@ CloysterBaseStats: ; 38db6 (e:4db6)
 	db AURORA_BEAM
 
 	db 5 ; growth rate
-	
+
 	; learnset
 	db %00100000
 	db %01111111
@@ -53207,7 +53199,7 @@ GastlyBaseStats: ; 38dd2 (e:4dd2)
 
 	dw GastlyPicFront
 	dw GastlyPicBack
-	
+
 	; attacks known at lvl 0
 	db LICK
 	db CONFUSE_RAY
@@ -53215,7 +53207,7 @@ GastlyBaseStats: ; 38dd2 (e:4dd2)
 	db 0
 
 	db 3 ; growth rate
-	
+
 	; learnset
 	db %00100000
 	db %00000000
@@ -53244,7 +53236,7 @@ HaunterBaseStats: ; 38dee (e:4dee)
 
 	dw HaunterPicFront
 	dw HaunterPicBack
-	
+
 	; attacks known at lvl 0
 	db LICK
 	db CONFUSE_RAY
@@ -53252,7 +53244,7 @@ HaunterBaseStats: ; 38dee (e:4dee)
 	db 0
 
 	db 3 ; growth rate
-	
+
 	; learnset
 	db %00100000
 	db %00000000
@@ -53281,7 +53273,7 @@ GengarBaseStats: ; 38e0a (e:4e0a)
 
 	dw GengarPicFront
 	dw GengarPicBack
-	
+
 	; attacks known at lvl 0
 	db LICK
 	db CONFUSE_RAY
@@ -53289,7 +53281,7 @@ GengarBaseStats: ; 38e0a (e:4e0a)
 	db 0
 
 	db 3 ; growth rate
-	
+
 	; learnset
 	db %10110001
 	db %01000011
@@ -53318,7 +53310,7 @@ OnixBaseStats: ; 38e26 (e:4e26)
 
 	dw OnixPicFront
 	dw OnixPicBack
-	
+
 	; attacks known at lvl 0
 	db TACKLE
 	db SCREECH
@@ -53326,7 +53318,7 @@ OnixBaseStats: ; 38e26 (e:4e26)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %10100000
 	db %00000011
@@ -53355,7 +53347,7 @@ DrowzeeBaseStats: ; 38e42 (e:4e42)
 
 	dw DrowzeePicFront
 	dw DrowzeePicBack
-	
+
 	; attacks known at lvl 0
 	db POUND
 	db HYPNOSIS
@@ -53363,7 +53355,7 @@ DrowzeeBaseStats: ; 38e42 (e:4e42)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %10110001
 	db %00000011
@@ -53392,7 +53384,7 @@ HypnoBaseStats: ; 38e5e (e:4e5e)
 
 	dw HypnoPicFront
 	dw HypnoPicBack
-	
+
 	; attacks known at lvl 0
 	db POUND
 	db HYPNOSIS
@@ -53400,7 +53392,7 @@ HypnoBaseStats: ; 38e5e (e:4e5e)
 	db CONFUSION
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %10110001
 	db %01000011
@@ -53429,7 +53421,7 @@ KrabbyBaseStats: ; 38e7a (e:4e7a)
 
 	dw KrabbyPicFront
 	dw KrabbyPicBack
-	
+
 	; attacks known at lvl 0
 	db BUBBLE
 	db LEER
@@ -53437,7 +53429,7 @@ KrabbyBaseStats: ; 38e7a (e:4e7a)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %10100100
 	db %00111111
@@ -53466,7 +53458,7 @@ KinglerBaseStats: ; 38e96 (e:4e96)
 
 	dw KinglerPicFront
 	dw KinglerPicBack
-	
+
 	; attacks known at lvl 0
 	db BUBBLE
 	db LEER
@@ -53474,7 +53466,7 @@ KinglerBaseStats: ; 38e96 (e:4e96)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %10100100
 	db %01111111
@@ -53503,7 +53495,7 @@ VoltorbBaseStats: ; 38eb2 (e:4eb2)
 
 	dw VoltorbPicFront
 	dw VoltorbPicBack
-	
+
 	; attacks known at lvl 0
 	db TACKLE
 	db SCREECH
@@ -53511,7 +53503,7 @@ VoltorbBaseStats: ; 38eb2 (e:4eb2)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %00100000
 	db %00000001
@@ -53540,7 +53532,7 @@ ElectrodeBaseStats: ; 38ece (e:4ece)
 
 	dw ElectrodePicFront
 	dw ElectrodePicBack
-	
+
 	; attacks known at lvl 0
 	db TACKLE
 	db SCREECH
@@ -53548,7 +53540,7 @@ ElectrodeBaseStats: ; 38ece (e:4ece)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %00100000
 	db %01000001
@@ -53577,7 +53569,7 @@ ExeggcuteBaseStats: ; 38eea (e:4eea)
 
 	dw ExeggcutePicFront
 	dw ExeggcutePicBack
-	
+
 	; attacks known at lvl 0
 	db BARRAGE
 	db HYPNOSIS
@@ -53585,7 +53577,7 @@ ExeggcuteBaseStats: ; 38eea (e:4eea)
 	db 0
 
 	db 5 ; growth rate
-	
+
 	; learnset
 	db %00100000
 	db %00000011
@@ -53614,7 +53606,7 @@ ExeggutorBaseStats: ; 38f06 (e:4f06)
 
 	dw ExeggutorPicFront
 	dw ExeggutorPicBack
-	
+
 	; attacks known at lvl 0
 	db BARRAGE
 	db HYPNOSIS
@@ -53622,7 +53614,7 @@ ExeggutorBaseStats: ; 38f06 (e:4f06)
 	db 0
 
 	db 5 ; growth rate
-	
+
 	; learnset
 	db %00100000
 	db %01000011
@@ -53651,7 +53643,7 @@ CuboneBaseStats: ; 38f22 (e:4f22)
 
 	dw CubonePicFront
 	dw CubonePicBack
-	
+
 	; attacks known at lvl 0
 	db BONE_CLUB
 	db GROWL
@@ -53659,7 +53651,7 @@ CuboneBaseStats: ; 38f22 (e:4f22)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %10110001
 	db %00111111
@@ -53688,7 +53680,7 @@ MarowakBaseStats: ; 38f3e (e:4f3e)
 
 	dw MarowakPicFront
 	dw MarowakPicBack
-	
+
 	; attacks known at lvl 0
 	db BONE_CLUB
 	db GROWL
@@ -53696,7 +53688,7 @@ MarowakBaseStats: ; 38f3e (e:4f3e)
 	db FOCUS_ENERGY
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %10110001
 	db %01111111
@@ -53725,7 +53717,7 @@ HitmonleeBaseStats: ; 38f5a (e:4f5a)
 
 	dw HitmonleePicFront
 	dw HitmonleePicBack
-	
+
 	; attacks known at lvl 0
 	db DOUBLE_KICK
 	db MEDITATE
@@ -53733,7 +53725,7 @@ HitmonleeBaseStats: ; 38f5a (e:4f5a)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %10110001
 	db %00000011
@@ -53762,7 +53754,7 @@ HitmonchanBaseStats: ; 38f76 (e:4f76)
 
 	dw HitmonchanPicFront
 	dw HitmonchanPicBack
-	
+
 	; attacks known at lvl 0
 	db COMET_PUNCH
 	db AGILITY
@@ -53770,7 +53762,7 @@ HitmonchanBaseStats: ; 38f76 (e:4f76)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %10110001
 	db %00000011
@@ -53799,7 +53791,7 @@ LickitungBaseStats: ; 38f92 (e:4f92)
 
 	dw LickitungPicFront
 	dw LickitungPicBack
-	
+
 	; attacks known at lvl 0
 	db WRAP
 	db SUPERSONIC
@@ -53807,7 +53799,7 @@ LickitungBaseStats: ; 38f92 (e:4f92)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %10110101
 	db %01111111
@@ -53836,7 +53828,7 @@ KoffingBaseStats: ; 38fae (e:4fae)
 
 	dw KoffingPicFront
 	dw KoffingPicBack
-	
+
 	; attacks known at lvl 0
 	db TACKLE
 	db SMOG
@@ -53844,7 +53836,7 @@ KoffingBaseStats: ; 38fae (e:4fae)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %00100000
 	db %00000000
@@ -53873,7 +53865,7 @@ WeezingBaseStats: ; 38fca (e:4fca)
 
 	dw WeezingPicFront
 	dw WeezingPicBack
-	
+
 	; attacks known at lvl 0
 	db TACKLE
 	db SMOG
@@ -53881,7 +53873,7 @@ WeezingBaseStats: ; 38fca (e:4fca)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %00100000
 	db %01000000
@@ -53910,7 +53902,7 @@ RhyhornBaseStats: ; 38fe6 (e:4fe6)
 
 	dw RhyhornPicFront
 	dw RhyhornPicBack
-	
+
 	; attacks known at lvl 0
 	db HORN_ATTACK
 	db 0
@@ -53918,7 +53910,7 @@ RhyhornBaseStats: ; 38fe6 (e:4fe6)
 	db 0
 
 	db 5 ; growth rate
-	
+
 	; learnset
 	db %11100000
 	db %00000011
@@ -53947,7 +53939,7 @@ RhydonBaseStats: ; 39002 (e:5002)
 
 	dw RhydonPicFront
 	dw RhydonPicBack
-	
+
 	; attacks known at lvl 0
 	db HORN_ATTACK
 	db STOMP
@@ -53955,7 +53947,7 @@ RhydonBaseStats: ; 39002 (e:5002)
 	db FURY_ATTACK
 
 	db 5 ; growth rate
-	
+
 	; learnset
 	db %11110001
 	db %11111111
@@ -53984,7 +53976,7 @@ ChanseyBaseStats: ; 3901e (e:501e)
 
 	dw ChanseyPicFront
 	dw ChanseyPicBack
-	
+
 	; attacks known at lvl 0
 	db POUND
 	db DOUBLESLAP
@@ -53992,7 +53984,7 @@ ChanseyBaseStats: ; 3901e (e:501e)
 	db 0
 
 	db 4 ; growth rate
-	
+
 	; learnset
 	db %10110001
 	db %01111111
@@ -54021,7 +54013,7 @@ TangelaBaseStats: ; 3903a (e:503a)
 
 	dw TangelaPicFront
 	dw TangelaPicBack
-	
+
 	; attacks known at lvl 0
 	db CONSTRICT
 	db BIND
@@ -54029,7 +54021,7 @@ TangelaBaseStats: ; 3903a (e:503a)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %10100100
 	db %01000011
@@ -54058,7 +54050,7 @@ KangaskhanBaseStats: ; 39056 (e:5056)
 
 	dw KangaskhanPicFront
 	dw KangaskhanPicBack
-	
+
 	; attacks known at lvl 0
 	db COMET_PUNCH
 	db RAGE
@@ -54066,7 +54058,7 @@ KangaskhanBaseStats: ; 39056 (e:5056)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %10110001
 	db %01111111
@@ -54095,7 +54087,7 @@ HorseaBaseStats: ; 39072 (e:5072)
 
 	dw HorseaPicFront
 	dw HorseaPicBack
-	
+
 	; attacks known at lvl 0
 	db BUBBLE
 	db 0
@@ -54103,7 +54095,7 @@ HorseaBaseStats: ; 39072 (e:5072)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %00100000
 	db %00111111
@@ -54132,7 +54124,7 @@ SeadraBaseStats: ; 3908e (e:508e)
 
 	dw SeadraPicFront
 	dw SeadraPicBack
-	
+
 	; attacks known at lvl 0
 	db BUBBLE
 	db SMOKESCREEN
@@ -54140,7 +54132,7 @@ SeadraBaseStats: ; 3908e (e:508e)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %00100000
 	db %01111111
@@ -54169,7 +54161,7 @@ GoldeenBaseStats: ; 390aa (e:50aa)
 
 	dw GoldeenPicFront
 	dw GoldeenPicBack
-	
+
 	; attacks known at lvl 0
 	db PECK
 	db TAIL_WHIP
@@ -54177,7 +54169,7 @@ GoldeenBaseStats: ; 390aa (e:50aa)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %01100000
 	db %00111111
@@ -54206,7 +54198,7 @@ SeakingBaseStats: ; 390c6 (e:50c6)
 
 	dw SeakingPicFront
 	dw SeakingPicBack
-	
+
 	; attacks known at lvl 0
 	db PECK
 	db TAIL_WHIP
@@ -54214,7 +54206,7 @@ SeakingBaseStats: ; 390c6 (e:50c6)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %01100000
 	db %01111111
@@ -54243,7 +54235,7 @@ StaryuBaseStats: ; 390e2 (e:50e2)
 
 	dw StaryuPicFront
 	dw StaryuPicBack
-	
+
 	; attacks known at lvl 0
 	db TACKLE
 	db 0
@@ -54251,7 +54243,7 @@ StaryuBaseStats: ; 390e2 (e:50e2)
 	db 0
 
 	db 5 ; growth rate
-	
+
 	; learnset
 	db %00100000
 	db %00111111
@@ -54280,7 +54272,7 @@ StarmieBaseStats: ; 390fe (e:50fe)
 
 	dw StarmiePicFront
 	dw StarmiePicBack
-	
+
 	; attacks known at lvl 0
 	db TACKLE
 	db WATER_GUN
@@ -54288,7 +54280,7 @@ StarmieBaseStats: ; 390fe (e:50fe)
 	db 0
 
 	db 5 ; growth rate
-	
+
 	; learnset
 	db %00100000
 	db %01111111
@@ -54317,7 +54309,7 @@ MrMimeBaseStats: ; 3911a (e:511a)
 
 	dw MrMimePicFront
 	dw MrMimePicBack
-	
+
 	; attacks known at lvl 0
 	db CONFUSION
 	db BARRIER
@@ -54325,7 +54317,7 @@ MrMimeBaseStats: ; 3911a (e:511a)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %10110001
 	db %01000011
@@ -54354,7 +54346,7 @@ ScytherBaseStats: ; 39136 (e:5136)
 
 	dw ScytherPicFront
 	dw ScytherPicBack
-	
+
 	; attacks known at lvl 0
 	db QUICK_ATTACK
 	db 0
@@ -54362,7 +54354,7 @@ ScytherBaseStats: ; 39136 (e:5136)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %00100100
 	db %01000011
@@ -54391,7 +54383,7 @@ JynxBaseStats: ; 39152 (e:5152)
 
 	dw JynxPicFront
 	dw JynxPicBack
-	
+
 	; attacks known at lvl 0
 	db POUND
 	db LOVELY_KISS
@@ -54399,7 +54391,7 @@ JynxBaseStats: ; 39152 (e:5152)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %10110001
 	db %01111111
@@ -54428,7 +54420,7 @@ ElectabuzzBaseStats: ; 3916e (e:516e)
 
 	dw ElectabuzzPicFront
 	dw ElectabuzzPicBack
-	
+
 	; attacks known at lvl 0
 	db QUICK_ATTACK
 	db LEER
@@ -54436,7 +54428,7 @@ ElectabuzzBaseStats: ; 3916e (e:516e)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %10110001
 	db %01000011
@@ -54465,7 +54457,7 @@ MagmarBaseStats: ; 3918a (e:518a)
 
 	dw MagmarPicFront
 	dw MagmarPicBack
-	
+
 	; attacks known at lvl 0
 	db EMBER
 	db 0
@@ -54473,7 +54465,7 @@ MagmarBaseStats: ; 3918a (e:518a)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %10110001
 	db %01000011
@@ -54502,7 +54494,7 @@ PinsirBaseStats: ; 391a6 (e:51a6)
 
 	dw PinsirPicFront
 	dw PinsirPicBack
-	
+
 	; attacks known at lvl 0
 	db VICEGRIP
 	db 0
@@ -54510,7 +54502,7 @@ PinsirBaseStats: ; 391a6 (e:51a6)
 	db 0
 
 	db 5 ; growth rate
-	
+
 	; learnset
 	db %10100100
 	db %01000011
@@ -54539,7 +54531,7 @@ TaurosBaseStats: ; 391c2 (e:51c2)
 
 	dw TaurosPicFront
 	dw TaurosPicBack
-	
+
 	; attacks known at lvl 0
 	db TACKLE
 	db 0
@@ -54547,7 +54539,7 @@ TaurosBaseStats: ; 391c2 (e:51c2)
 	db 0
 
 	db 5 ; growth rate
-	
+
 	; learnset
 	db %11100000
 	db %01110011
@@ -54576,7 +54568,7 @@ MagikarpBaseStats: ; 391de (e:51de)
 
 	dw MagikarpPicFront
 	dw MagikarpPicBack
-	
+
 	; attacks known at lvl 0
 	db SPLASH
 	db 0
@@ -54584,7 +54576,7 @@ MagikarpBaseStats: ; 391de (e:51de)
 	db 0
 
 	db 5 ; growth rate
-	
+
 	; learnset
 	db %00000000
 	db %00000000
@@ -54613,7 +54605,7 @@ GyaradosBaseStats: ; 391fa (e:51fa)
 
 	dw GyaradosPicFront
 	dw GyaradosPicBack
-	
+
 	; attacks known at lvl 0
 	db BITE
 	db DRAGON_RAGE
@@ -54621,7 +54613,7 @@ GyaradosBaseStats: ; 391fa (e:51fa)
 	db HYDRO_PUMP
 
 	db 5 ; growth rate
-	
+
 	; learnset
 	db %10100000
 	db %01111111
@@ -54650,7 +54642,7 @@ LaprasBaseStats: ; 39216 (e:5216)
 
 	dw LaprasPicFront
 	dw LaprasPicBack
-	
+
 	; attacks known at lvl 0
 	db WATER_GUN
 	db GROWL
@@ -54658,7 +54650,7 @@ LaprasBaseStats: ; 39216 (e:5216)
 	db 0
 
 	db 5 ; growth rate
-	
+
 	; learnset
 	db %11100000
 	db %01111111
@@ -54687,7 +54679,7 @@ DittoBaseStats: ; 39232 (e:5232)
 
 	dw DittoPicFront
 	dw DittoPicBack
-	
+
 	; attacks known at lvl 0
 	db TRANSFORM
 	db 0
@@ -54695,7 +54687,7 @@ DittoBaseStats: ; 39232 (e:5232)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %00000000
 	db %00000000
@@ -54724,7 +54716,7 @@ EeveeBaseStats: ; 3924e (e:524e)
 
 	dw EeveePicFront
 	dw EeveePicBack
-	
+
 	; attacks known at lvl 0
 	db TACKLE
 	db SAND_ATTACK
@@ -54732,7 +54724,7 @@ EeveeBaseStats: ; 3924e (e:524e)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %10100000
 	db %00000011
@@ -54761,7 +54753,7 @@ VaporeonBaseStats: ; 3926a (e:526a)
 
 	dw VaporeonPicFront
 	dw VaporeonPicBack
-	
+
 	; attacks known at lvl 0
 	db TACKLE
 	db SAND_ATTACK
@@ -54769,7 +54761,7 @@ VaporeonBaseStats: ; 3926a (e:526a)
 	db WATER_GUN
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %10100000
 	db %01111111
@@ -54798,7 +54790,7 @@ JolteonBaseStats: ; 39286 (e:5286)
 
 	dw JolteonPicFront
 	dw JolteonPicBack
-	
+
 	; attacks known at lvl 0
 	db TACKLE
 	db SAND_ATTACK
@@ -54806,7 +54798,7 @@ JolteonBaseStats: ; 39286 (e:5286)
 	db THUNDERSHOCK
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %10100000
 	db %01000011
@@ -54835,7 +54827,7 @@ FlareonBaseStats: ; 392a2 (e:52a2)
 
 	dw FlareonPicFront
 	dw FlareonPicBack
-	
+
 	; attacks known at lvl 0
 	db TACKLE
 	db SAND_ATTACK
@@ -54843,7 +54835,7 @@ FlareonBaseStats: ; 392a2 (e:52a2)
 	db EMBER
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %10100000
 	db %01000011
@@ -54872,7 +54864,7 @@ PorygonBaseStats: ; 392be (e:52be)
 
 	dw PorygonPicFront
 	dw PorygonPicBack
-	
+
 	; attacks known at lvl 0
 	db TACKLE
 	db SHARPEN
@@ -54880,7 +54872,7 @@ PorygonBaseStats: ; 392be (e:52be)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %00100000
 	db %01110011
@@ -54909,7 +54901,7 @@ OmanyteBaseStats: ; 392da (e:52da)
 
 	dw OmanytePicFront
 	dw OmanytePicBack
-	
+
 	; attacks known at lvl 0
 	db WATER_GUN
 	db WITHDRAW
@@ -54917,7 +54909,7 @@ OmanyteBaseStats: ; 392da (e:52da)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %10100000
 	db %00111111
@@ -54946,7 +54938,7 @@ OmastarBaseStats: ; 392f6 (e:52f6)
 
 	dw OmastarPicFront
 	dw OmastarPicBack
-	
+
 	; attacks known at lvl 0
 	db WATER_GUN
 	db WITHDRAW
@@ -54954,7 +54946,7 @@ OmastarBaseStats: ; 392f6 (e:52f6)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %11100000
 	db %01111111
@@ -54983,7 +54975,7 @@ KabutoBaseStats: ; 39312 (e:5312)
 
 	dw KabutoPicFront
 	dw KabutoPicBack
-	
+
 	; attacks known at lvl 0
 	db SCRATCH
 	db HARDEN
@@ -54991,7 +54983,7 @@ KabutoBaseStats: ; 39312 (e:5312)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %10100000
 	db %00111111
@@ -55020,7 +55012,7 @@ KabutopsBaseStats: ; 3932e (e:532e)
 
 	dw KabutopsPicFront
 	dw KabutopsPicBack
-	
+
 	; attacks known at lvl 0
 	db SCRATCH
 	db HARDEN
@@ -55028,7 +55020,7 @@ KabutopsBaseStats: ; 3932e (e:532e)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %10110110
 	db %01111111
@@ -55057,7 +55049,7 @@ AerodactylBaseStats: ; 3934a (e:534a)
 
 	dw AerodactylPicFront
 	dw AerodactylPicBack
-	
+
 	; attacks known at lvl 0
 	db WING_ATTACK
 	db AGILITY
@@ -55065,7 +55057,7 @@ AerodactylBaseStats: ; 3934a (e:534a)
 	db 0
 
 	db 5 ; growth rate
-	
+
 	; learnset
 	db %00101010
 	db %01000011
@@ -55094,7 +55086,7 @@ SnorlaxBaseStats: ; 39366 (e:5366)
 
 	dw SnorlaxPicFront
 	dw SnorlaxPicBack
-	
+
 	; attacks known at lvl 0
 	db HEADBUTT
 	db AMNESIA
@@ -55102,7 +55094,7 @@ SnorlaxBaseStats: ; 39366 (e:5366)
 	db 0
 
 	db 5 ; growth rate
-	
+
 	; learnset
 	db %10110001
 	db %11111111
@@ -55131,7 +55123,7 @@ ArticunoBaseStats: ; 39382 (e:5382)
 
 	dw ArticunoPicFront
 	dw ArticunoPicBack
-	
+
 	; attacks known at lvl 0
 	db PECK
 	db ICE_BEAM
@@ -55139,7 +55131,7 @@ ArticunoBaseStats: ; 39382 (e:5382)
 	db 0
 
 	db 5 ; growth rate
-	
+
 	; learnset
 	db %00101010
 	db %01111111
@@ -55168,7 +55160,7 @@ ZapdosBaseStats: ; 3939e (e:539e)
 
 	dw ZapdosPicFront
 	dw ZapdosPicBack
-	
+
 	; attacks known at lvl 0
 	db THUNDERSHOCK
 	db DRILL_PECK
@@ -55176,7 +55168,7 @@ ZapdosBaseStats: ; 3939e (e:539e)
 	db 0
 
 	db 5 ; growth rate
-	
+
 	; learnset
 	db %00101010
 	db %01000011
@@ -55205,7 +55197,7 @@ MoltresBaseStats: ; 393ba (e:53ba)
 
 	dw MoltresPicFront
 	dw MoltresPicBack
-	
+
 	; attacks known at lvl 0
 	db PECK
 	db FIRE_SPIN
@@ -55213,7 +55205,7 @@ MoltresBaseStats: ; 393ba (e:53ba)
 	db 0
 
 	db 5 ; growth rate
-	
+
 	; learnset
 	db %00101010
 	db %01000011
@@ -55242,7 +55234,7 @@ DratiniBaseStats: ; 393d6 (e:53d6)
 
 	dw DratiniPicFront
 	dw DratiniPicBack
-	
+
 	; attacks known at lvl 0
 	db WRAP
 	db LEER
@@ -55250,7 +55242,7 @@ DratiniBaseStats: ; 393d6 (e:53d6)
 	db 0
 
 	db 5 ; growth rate
-	
+
 	; learnset
 	db %10100000
 	db %00111111
@@ -55279,7 +55271,7 @@ DragonairBaseStats: ; 393f2 (e:53f2)
 
 	dw DragonairPicFront
 	dw DragonairPicBack
-	
+
 	; attacks known at lvl 0
 	db WRAP
 	db LEER
@@ -55287,7 +55279,7 @@ DragonairBaseStats: ; 393f2 (e:53f2)
 	db 0
 
 	db 5 ; growth rate
-	
+
 	; learnset
 	db %11100000
 	db %00111111
@@ -55316,7 +55308,7 @@ DragoniteBaseStats: ; 3940e (e:540e)
 
 	dw DragonitePicFront
 	dw DragonitePicBack
-	
+
 	; attacks known at lvl 0
 	db WRAP
 	db LEER
@@ -55324,7 +55316,7 @@ DragoniteBaseStats: ; 3940e (e:540e)
 	db AGILITY
 
 	db 5 ; growth rate
-	
+
 	; learnset
 	db %11100010
 	db %01111111
@@ -55353,7 +55345,7 @@ MewtwoBaseStats: ; 3942a (e:542a)
 
 	dw MewtwoPicFront
 	dw MewtwoPicBack
-	
+
 	; attacks known at lvl 0
 	db CONFUSION
 	db DISABLE
@@ -55361,7 +55353,7 @@ MewtwoBaseStats: ; 3942a (e:542a)
 	db PSYCHIC_M
 
 	db 5 ; growth rate
-	
+
 	; learnset
 	db %10110001
 	db %11111111
@@ -64209,9 +64201,9 @@ Func_3d83a: ; 3d83a (f:583a)
 	dec a
 	ret nz
 	ld a,[W_CURMAP]
-	cp a,$8E ; Lavender Town
+	cp a,POKEMONTOWER_1
 	jr c,.next
-	cp a,$95 ; Pokémon Tower
+	cp a,LAVENDER_HOUSE_1
 	jr nc,.next
 	ld b,SILPH_SCOPE
 	call IsItemInBag ; $3493
@@ -65088,7 +65080,7 @@ CalculateDamage: ; 3ddcf (f:5dcf)
 	ld hl, $d195
 	ld a, [wPlayerMonNumber]
 	ld bc, $002c
-	call AddNTimes					
+	call AddNTimes
 	pop bc
 .next3
 	ld a, [hli]  ;HL: when this was taken
@@ -65317,7 +65309,7 @@ MoreCalculateDamage: ; 3df65 (f:5f65)
 	ld [hl], c
 	ld b, 4
 	call Divide    ;*divide by defender defense stat
-	ld [hl], $32		
+	ld [hl], $32
 	ld b, 4
 	call Divide      ;divide above result by 50
 	ld hl, W_DAMAGE  ;[stuff below I never got to, was only interested in stuff above]
@@ -72914,6 +72906,9 @@ ViridianPokecenterBlocks: ; 440df (11:40df)
 	INCBIN "maps/viridianpokecenter.blk"
 
 SafariZoneRestHouse1Blocks: ; 440fb (11:40fb)
+SafariZoneRestHouse2Blocks: ; 440fb (11:40fb)
+SafariZoneRestHouse3Blocks: ; 440fb (11:40fb)
+SafariZoneRestHouse4Blocks: ; 440fb (11:40fb)
 	INCBIN "maps/safarizoneresthouse1.blk"
 
 LavenderTownScript: ; 4410b (11:410b)
@@ -74625,78 +74620,78 @@ SpinnerArrowTilePointers1: ; 45023 (11:5023)
 	db 1                           ;number of tiles to copy?
 	db BANK(SpinnerArrowAnimTiles) ;bank of tileset graphics
 	dw $9200                       ;where to load in VRAM
-	
+
 	dw SpinnerArrowAnimTiles + $10
 	db 1
 	db BANK(SpinnerArrowAnimTiles)
 	dw $9210
-	
+
 	dw SpinnerArrowAnimTiles + $20
 	db 1
 	db BANK(SpinnerArrowAnimTiles)
 	dw $9300
-	
+
 	dw SpinnerArrowAnimTiles + $30
 	db 1
 	db BANK(SpinnerArrowAnimTiles)
 	dw $9310
-	
+
 	dw Tset16_GFX + $200
 	db 1
 	db BANK(Tset16_GFX)
 	dw $9200
-	
+
 	dw Tset16_GFX + $210
 	db 1
 	db BANK(Tset16_GFX)
 	dw $9210
-	
+
 	dw Tset16_GFX + $300
 	db 1
 	db BANK(Tset16_GFX)
 	dw $9300
-	
+
 	dw Tset16_GFX + $310
 	db 1
 	db BANK(Tset16_GFX)
 	dw $9310
-	
+
 SpinnerArrowTilePointers2: ; 45053 (11:5053)
 	dw SpinnerArrowAnimTiles + $10
 	db 1
 	db BANK(SpinnerArrowAnimTiles)
 	dw $93C0
-	
+
 	dw SpinnerArrowAnimTiles + $30
 	db 1
 	db BANK(SpinnerArrowAnimTiles)
 	dw $93D0
-	
+
 	dw SpinnerArrowAnimTiles
 	db 1
 	db BANK(SpinnerArrowAnimTiles)
 	dw $94C0
-	
+
 	dw SpinnerArrowAnimTiles + $20
 	db 1
 	db BANK(SpinnerArrowAnimTiles)
 	dw $94D0
-	
+
 	dw Tset05_GFX + $3C0
 	db 1
 	db BANK(Tset16_GFX)
 	dw $93C0
-	
+
 	dw Tset05_GFX + $3D0
 	db 1
 	db BANK(Tset16_GFX)
 	dw $93D0
-	
+
 	dw Tset05_GFX + $4C0
 	db 1
 	db BANK(Tset16_GFX)
 	dw $94C0
-	
+
 	dw Tset05_GFX + $4D0
 	db 1
 	db BANK(Tset16_GFX)
@@ -75738,7 +75733,7 @@ SafariZoneRestHouse1Object: ; 0x45cfe (size=32)
 SafariZoneRestHouse2_h: ; 0x45d1e to 0x45d2a (12 bytes) (bank=11) (id=223)
 	db $0c ; tileset
 	db SAFARI_ZONE_REST_HOUSE_2_HEIGHT, SAFARI_ZONE_REST_HOUSE_2_WIDTH ; dimensions (y, x)
-	dw $40fb, SafariZoneRestHouse2TextPointers, SafariZoneRestHouse2Script ; blocks, texts, scripts
+	dw SafariZoneRestHouse2Blocks, SafariZoneRestHouse2TextPointers, SafariZoneRestHouse2Script ; blocks, texts, scripts
 	db $00 ; connections
 
 	dw SafariZoneRestHouse2Object ; objects
@@ -75785,7 +75780,7 @@ SafariZoneRestHouse2Object: ; 0x45d43 (size=38)
 SafariZoneRestHouse3_h: ; 0x45d69 to 0x45d75 (12 bytes) (bank=11) (id=224)
 	db $0c ; tileset
 	db SAFARI_ZONE_REST_HOUSE_3_HEIGHT, SAFARI_ZONE_REST_HOUSE_3_WIDTH ; dimensions (y, x)
-	dw $40fb, SafariZoneRestHouse3TextPointers, SafariZoneRestHouse3Script ; blocks, texts, scripts
+	dw SafariZoneRestHouse3Blocks, SafariZoneRestHouse3TextPointers, SafariZoneRestHouse3Script ; blocks, texts, scripts
 	db $00 ; connections
 
 	dw SafariZoneRestHouse3Object ; objects
@@ -75832,7 +75827,7 @@ SafariZoneRestHouse3Object: ; 0x45d8e (size=38)
 SafariZoneRestHouse4_h: ; 0x45db4 to 0x45dc0 (12 bytes) (bank=11) (id=225)
 	db $0c ; tileset
 	db SAFARI_ZONE_REST_HOUSE_4_HEIGHT, SAFARI_ZONE_REST_HOUSE_4_WIDTH ; dimensions (y, x)
-	dw $40fb, SafariZoneRestHouse4TextPointers, SafariZoneRestHouse4Script ; blocks, texts, scripts
+	dw SafariZoneRestHouse4Blocks, SafariZoneRestHouse4TextPointers, SafariZoneRestHouse4Script ; blocks, texts, scripts
 	db $00 ; connections
 
 	dw SafariZoneRestHouse4Object ; objects
@@ -83407,7 +83402,7 @@ Route22ScriptPointers: ; 50ebe (14:4ebe)
 	dw Route22Script4
 	dw Route22Script5
 	dw Route22Script6
-	dw $4Ed5
+	dw Route22Script7
 
 Func_50ece: ; 50ece (14:4ece)
 	xor a
@@ -83527,13 +83522,13 @@ Route22Script1: ; 50f62 (14:4f62)
 	call PreBattleSaveRegisters
 	ld a, $e1
 	ld [$d059], a
-	ld hl, Unknown_50faf ; $4faf
+	ld hl, StarterMons_50faf ; $4faf
 	call Func_50ed6
 	ld a, $2
 	ld [W_ROUTE22CURSCRIPT], a
 	ret
 
-Unknown_50faf: ; 50faf (14:4faf)
+StarterMons_50faf: ; 50faf (14:4faf)
 	db SQUIRTLE,$04
 	db BULBASAUR,$05
 	db CHARMANDER,$06
@@ -83674,13 +83669,13 @@ Route22Script4: ; 51087 (14:5087)
 	call PreBattleSaveRegisters
 	ld a, $f2
 	ld [W_CUROPPONENT], a ; $d059
-	ld hl, Unknown_510d9 ; $50d9
+	ld hl, StarterMons_510d9 ; $50d9
 	call Func_50ed6
 	ld a, $5
 	ld [W_ROUTE22CURSCRIPT], a
 	ret
 
-Unknown_510d9: ; 510d9 (14:50d9)
+StarterMons_510d9: ; 510d9 (14:50d9)
 	db SQUIRTLE,$0a
 	db BULBASAUR,$0b
 	db CHARMANDER,$0c
@@ -86192,9 +86187,9 @@ Func_525af: ; 525af (14:65af)
 	inc a
 	ld [$ccd9], a
 	ld a, [W_CURMAP] ; $d35e
-	cp $d9
+	cp SAFARI_ZONE_EAST
 	jr c, .asm_525f9
-	cp $dd
+	cp SAFARI_ZONE_REST_HOUSE_1
 	jr nc, .asm_525f9
 	ld a, $2
 	ld [W_BATTLETYPE], a ; $d05a
@@ -90854,16 +90849,16 @@ DiplomaTextPointersAndCoords: ; 56784 (15:6784)
 
 DiplomaText:
 	db $70,"Diploma",$70,"@"
-	
+
 DiplomaPlayer:
 	db "Player@"
-	
+
 DiplomaEmptyText:
 	db "@"
-	
+
 DiplomaCongrats:
 	db "Congrats! This",$4e,"diploma certifies",$4e,"that you have",$4e,"completed your",$4e,"#DEX.@"
-	
+
 DiplomaGameFreak:
 	db "GAME FREAK@"
 
@@ -91705,9 +91700,9 @@ Func_58d99: ; 58d99 (16:4d99)
 	dec a
 	jr nz, .asm_58dbe
 	ld a, [W_CURMAP] ; $d35e
-	cp $90
+	cp POKEMONTOWER_3
 	jr c, .asm_58daa
-	cp $95
+	cp LAVENDER_HOUSE_1
 	jr c, .asm_58dd8
 .asm_58daa
 	ld a, [W_ENEMYMONID]
@@ -99152,7 +99147,7 @@ StatusAilmentText2: ; 5ddbb (17:5dbb)
 	db " BRN",$4e
 	db " FRZ",$4e
 	db " QUIT@@"
-	
+
 PointerTable_5ddcc: ; 5ddcc (17:5ddc)
 	dw UnnamedText_5ddd6
 	dw UnnamedText_5dddb
@@ -99309,7 +99304,10 @@ ViridianForestBlocks: ; 60000 (18:4000)
 UndergroundPathNSBlocks: ; 60198 (18:4198)
 	INCBIN "maps/undergroundpathns.blk"
 
-	INCBIN "maps/unusedblocks601f8.blk"
+UndergroundPathWEBlocks: ; 601f4 (18:41f4)
+	INCBIN "maps/undergroundpathwe.blk"
+
+	INCBIN "maps/unusedblocks60258.blk"
 
 SSAnne10Blocks: ; 603c0 (18:43c0)
 SSAnne9Blocks: ; 603c0 (18:43c0)
@@ -102489,7 +102487,7 @@ UndergroundPathNSObject: ; 0x61f2a (size=20)
 UndergroundPathWE_h: ; 0x61f3e to 0x61f4a (12 bytes) (id=121)
 	db $0b ; tileset
 	db UNDERGROUND_PATH_WE_HEIGHT, UNDERGROUND_PATH_WE_WIDTH ; dimensions (y, x)
-	dw $41f4, UndergroundPathWETextPointers, UndergroundPathWEScript ; blocks, texts, scripts
+	dw UndergroundPathWEBlocks, UndergroundPathWETextPointers, UndergroundPathWEScript ; blocks, texts, scripts
 	db $00 ; connections
 
 	dw UndergroundPathWEObject ; objects
@@ -103117,7 +103115,7 @@ UnnamedText_62502: ; 62502 (18:6502)
 
 	ret
 	db "@"
-	
+
 	call EnableAutoTextBoxDrawing
 	ld a, $e
 	jp Func_3ef5
@@ -106699,7 +106697,7 @@ Func_71b6a: ; 71b6a (1c:5b6a)
 TradeMons: ; 71b7b (1c:5b7b)
 ; givemonster, getmonster, textstring, nickname (11 bytes), 14 bytes total
 	db NIDORINO,  NIDORINA,  0,"TERRY@@@@@@"
-	db ABRA,      MR_MIME,  0,"MARCEL@@@@@"
+	db ABRA,      MR_MIME,   0,"MARCEL@@@@@"
 	db BUTTERFREE,BEEDRILL,  2,"CHIKUCHIKU@"
 	db PONYTA,    SEEL,      0,"SAILOR@@@@@"
 	db SPEAROW,   FARFETCH_D,2,"DUX@@@@@@@@"
@@ -107606,7 +107604,7 @@ PalPacket_72458: ; 72458 (1c:6458)
 
 PalPacket_72468: ; 72468 (1c:6468)
 	db $51,$15,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00
-	
+
 PalPacket_72478: ; 72478 (1c:6478)
 	db $51,$1A,$00,$1B,$00,$1C,$00,$1D,$00,$00,$00,$00,$00,$00,$00,$00
 
@@ -107639,7 +107637,7 @@ PalPacket_72508: ; 72508 (1c:6508)
 
 PalPacket_72518: ; 72518 (1c:6518)
 	db $A1,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00
-	
+
 PalPacket_72528: ; 72528 (1c:6528)
 	db $B9,$01,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00
 
@@ -109538,7 +109536,7 @@ ViridianGymScript3: ; 74988 (1d:4988)
 	jp z, Func_748d6
 	ld a, $f0
 	ld [wJoypadForbiddenButtonsMask], a
-Unknown_74995: ; 74995 (1d:4995)
+ViridianGymScript3_74995: ; 74995 (1d:4995)
 	ld a, $c
 	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
 	call DisplayTextID
@@ -109675,7 +109673,7 @@ ViridianGymText1: ; 74a69 (1d:4a69)
 	jr z, .asm_6de66 ; 0x74a6f
 	bit 0, a
 	jr nz, .asm_9fc95 ; 0x74a73
-	call z, Unknown_74995
+	call z, ViridianGymScript3_74995
 	call DisableWaitingAfterTextDisplay
 	jr .asm_6dff7 ; 0x74a7b
 .asm_9fc95 ; 0x74a7d
@@ -110949,7 +110947,7 @@ FuchsiaGymScript3: ; 7548a (1d:548a)
 	jp z, Func_75477
 	ld a, $f0
 	ld [wJoypadForbiddenButtonsMask], a
-Unknown_75497: ; 75497 (1d:5497)
+FuchsiaGymScript3_75497: ; 75497 (1d:5497)
 	ld a, $9
 	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
 	call DisplayTextID
@@ -111055,7 +111053,7 @@ FuchsiaGymText1: ; 75534 (1d:5534)
 	jr z, .asm_181b6 ; 0x7553a
 	bit 0, a
 	jr nz, .asm_adc3b ; 0x7553e
-	call z, Unknown_75497
+	call z, FuchsiaGymScript3_75497
 	call DisableWaitingAfterTextDisplay
 	jr .asm_e84c6 ; 0x75546
 .asm_adc3b ; 0x75548
@@ -111460,7 +111458,7 @@ CinnabarGymScript3: ; 7584a (1d:584a)
 	jp z, CinnabarGymScript_75792
 	ld a, $f0
 	ld [wJoypadForbiddenButtonsMask], a
-Unknown_75857: ; 75857 (1d:5857)
+CinnabarGymScript3_75857: ; 75857 (1d:5857)
 	ld a, $a
 	ld [$ff00+$8c], a
 	call DisplayTextID
@@ -111507,7 +111505,7 @@ CinnabarGymTextPointers: ; 7589f (1d:589f)
 	dw ReceivedTM38Text
 	dw TM38NoRoomText
 
-Unknown_758b7: ; 758b7 (1d:58b7)
+Func_758b7: ; 758b7 (1d:58b7)
 	ld a, [H_DOWNARROWBLINKCNT2] ; $FF00+$8c
 	ld [$cf13], a
 	call EngageMapTrainer
@@ -111534,7 +111532,7 @@ CinnabarGymText1: ; 758df (1d:58df)
 	jr z, .asm_d9332 ; 0x758e5 $16
 	bit 0, a
 	jr nz, .asm_3012f ; 0x758e9 $9
-	call z, Unknown_75857
+	call z, CinnabarGymScript3_75857
 	call DisableWaitingAfterTextDisplay
 	jp TextScriptEnd
 .asm_3012f ; 0x758f4
@@ -111549,7 +111547,7 @@ CinnabarGymText1: ; 758df (1d:58df)
 	call PreBattleSaveRegisters
 	ld a, $7
 	ld [$d05c], a
-	jp Unknown_758b7
+	jp Func_758b7
 
 UnnamedText_75914: ; 75914 (1d:5914)
 	TX_FAR _UnnamedText_75914
@@ -111590,7 +111588,7 @@ CinnabarGymText2: ; 75939 (1d:5939)
 	ld hl, UnnamedText_75964
 	ld de, UnnamedText_75964 ; $5964 XXX
 	call PreBattleSaveRegisters
-	jp Unknown_758b7
+	jp Func_758b7
 .asm_46bb4 ; 0x75956
 	ld hl, UnnamedText_75969
 	call PrintText
@@ -111619,7 +111617,7 @@ CinnabarGymText3: ; 7596e (1d:596e)
 	ld hl, UnnamedText_75999
 	ld de, UnnamedText_75999 ; $5999 XXX
 	call PreBattleSaveRegisters
-	jp Unknown_758b7
+	jp Func_758b7
 .asm_4b406 ; 0x7598b
 	ld hl, UnnamedText_7599e
 	call PrintText
@@ -111648,7 +111646,7 @@ CinnabarGymText4: ; 759a3 (1d:59a3)
 	ld hl, UnnamedText_759ce
 	ld de, UnnamedText_759ce ; $59ce XXX
 	call PreBattleSaveRegisters
-	jp Unknown_758b7
+	jp Func_758b7
 .asm_c0673 ; 0x759c0
 	ld hl, UnnamedText_759d3
 	call PrintText
@@ -111677,7 +111675,7 @@ CinnabarGymText5: ; 759d8 (1d:59d8)
 	ld hl, UnnamedText_75a03
 	ld de, UnnamedText_75a03 ; $5a03 XXX
 	call PreBattleSaveRegisters
-	jp Unknown_758b7
+	jp Func_758b7
 .asm_5cfd7 ; 0x759f5
 	ld hl, UnnamedText_75a08
 	call PrintText
@@ -111706,7 +111704,7 @@ CinnabarGymText6: ; 75a0d (1d:5a0d)
 	ld hl, UnnamedText_75a38
 	ld de, UnnamedText_75a38
 	call PreBattleSaveRegisters
-	jp Unknown_758b7
+	jp Func_758b7
 .asm_776b4 ; 0x75a2a
 	ld hl, UnnamedText_75a3d
 	call PrintText
@@ -111735,7 +111733,7 @@ CinnabarGymText7: ; 75a42 (1d:5a42)
 	ld hl, UnnamedText_75a6d
 	ld de, UnnamedText_75a6d
 	call PreBattleSaveRegisters
-	jp Unknown_758b7
+	jp Func_758b7
 .asm_2f755 ; 0x75a5f
 	ld hl, UnnamedText_75a72
 	call PrintText
@@ -111764,7 +111762,7 @@ CinnabarGymText8: ; 75a77 (1d:5a77)
 	ld hl, UnnamedText_75aa2
 	ld de, UnnamedText_75aa2 ; $5aa2 XXX
 	call PreBattleSaveRegisters
-	jp Unknown_758b7
+	jp Func_758b7
 .asm_d87be ; 0x75a94
 	ld hl, UnnamedText_75aa7
 	call PrintText
@@ -113229,7 +113227,7 @@ AgathaObject: ; 0x76534 (size=44)
 AgathaBlocks: ; 76560 (1d:6560)
 	INCBIN "maps/agatha.blk"
 
-Unknown_7657e: ; XXX: make better (has to do with the hall of fame on the PC) ; 0x7657e
+Func_7657e: ; XXX: make better (has to do with the hall of fame on the PC) ; 0x7657e
 	ld hl, UnnamedText_76683
 	call PrintText
 	ld hl, $D730
@@ -113358,7 +113356,7 @@ UnnamedText_76683: ; 76683 (1d:6683)
 
 HiddenItems: ; 76688 (1d:6688)
 	ld hl, HiddenItemCoords
-	call Label76857
+	call Func_76857
 	ld [$cd41], a
 	ld hl, $d6f0
 	ld a, [$cd41]
@@ -113475,7 +113473,7 @@ HiddenCoins: ; 76799 (1d:6799)
 	and a
 	ret z
 	ld hl, HiddenCoinCoords
-	call Label76857
+	call Func_76857
 	ld [$cd41], a
 	ld hl, $d6fe
 	ld a, [$cd41]
@@ -113565,7 +113563,7 @@ DroppedHiddenCoinsText: ; 7684d (1d:684d)
 	TX_FAR _DroppedHiddenCoinsText
 	db "@"
 
-Label76857: ; 76857 (1d:6857)
+Func_76857: ; 76857 (1d:6857)
 	ld a, [$cd40]
 	ld d, a
 	ld a, [$cd41]
@@ -113768,7 +113766,7 @@ PlayAnimation: ; 780f1 (1e:40f1)
 	ld l,a
 	ld h,0
 	add hl,hl
-	ld de,Unknown_7a07d  ; $607d ; animation command stream pointers
+	ld de,AttackAnimationPointers  ; $607d ; animation command stream pointers
 	add hl,de
 	ld a,[hli]
 	ld h,[hl]
@@ -113814,7 +113812,7 @@ PlayAnimation: ; 780f1 (1e:40f1)
 	jp [hl] ; jump to special effect function
 .playSubanimation
 	ld c,a
-	and a,63
+	and a,%00111111
 	ld [W_SUBANIMFRAMEDELAY],a
 	xor a
 	sla c
@@ -113830,7 +113828,7 @@ PlayAnimation: ; 780f1 (1e:40f1)
 	ld l,a
 	ld h,0
 	add hl,hl
-	ld de,Unknown_7a76d  ; $676d ; subanimation pointer table
+	ld de,SubanimationPointers
 	add hl,de
 	ld a,l
 	ld [W_SUBANIMADDRPTR],a
@@ -114162,7 +114160,7 @@ PlaySubanimation: ; 78e53 (1e:4e53)
 	push hl
 	ld c,[hl] ; frame block ID
 	ld b,0
-	ld hl,PointerTable_7af74
+	ld hl,FrameBlockPointers
 	add hl,bc
 	add hl,bc
 	ld a,[hli]
@@ -114174,7 +114172,7 @@ PlaySubanimation: ; 78e53 (1e:4e53)
 	push hl
 	ld e,[hl] ; base coordinate ID
 	ld d,0
-	ld hl,Unknown_7bc85  ; $7c85 ; base coordinate table
+	ld hl,FrameBlockBaseCoords  ; $7c85 ; base coordinate table
 	add hl,de
 	add hl,de
 	ld a,[hli]
@@ -114777,7 +114775,7 @@ AnimationFlashScreen: ; 791be (1e:51be)
 	ld [rBGP],a ; restore initial palette
 	ret
 
-	ld bc, Unknown_7af6f
+	ld bc, $6f6f
 	jr .asm_791fc
 
 	ld bc, $f9f4
@@ -115787,6 +115785,7 @@ Func_7986f: ; 7986f (1e:586f)
 .done
 	ld a,b
 	ret
+
 IsCryMove: ; 798ad (1e:58ad)
 ; set carry if the move animation involves playing a monster cry
 	ld a,[W_ANIMATIONID]
@@ -116338,143 +116337,3626 @@ Func_79fd4: ; 79fd4 (1e:5fd4)
 RedFishingTiles: ; 79fdd (1e:5fdd)
 	INCBIN "gfx/red_fishing.2bpp"
 
-Unknown_7a07d: ; 7a07d (1e:607d)
-INCBIN "baserom.gbc",$7a07d,$7a76d - $7a07d
+AttackAnimationPointers: ; 7a07d (1e:607d)
+	dw PoundAnim
+	dw KarateChopAnim
+	dw DoubleSlapAnim
+	dw CometPunchAnim
+	dw MegaPunchAnim
+	dw PayDayAnim
+	dw FirePunchAnim
+	dw IcePunchAnim
+	dw ThunderPunchAnim
+	dw ScratchAnim
+	dw VicegripAnim
+	dw GuillotineAnim
+	dw RazorWindAnim
+	dw SwordsDanceAnim
+	dw CutAnim
+	dw GustAnim
+	dw WingAttackAnim
+	dw WhirlwindAnim
+	dw FlyAnim
+	dw BindAnim
+	dw SlamAnim
+	dw VineWhipAnim
+	dw StompAnim
+	dw DoubleKickAnim
+	dw MegaKickAnim
+	dw JumpKickAnim
+	dw RollingKickAnim
+	dw SandAttackAnim
+	dw HeatButtAnim
+	dw HornAttackAnim
+	dw FuryAttackAnim
+	dw HornDrillAnim
+	dw TackleAnim
+	dw BodySlamAnim
+	dw WrapAnim
+	dw TakeDownAnim
+	dw ThrashAnim
+	dw DoubleEdgeAnim
+	dw TailWhipAnim
+	dw PoisonStingAnim
+	dw TwineedleAnim
+	dw PinMissileAnim
+	dw LeerAnim
+	dw BiteAnim
+	dw GrowlAnim
+	dw RoarAnim
+	dw SingAnim
+	dw SupersonicAnim
+	dw SonicBoomAnim
+	dw DisableAnim
+	dw AcidAnim
+	dw EmberAnim
+	dw FlamethrowerAnim
+	dw MistAnim
+	dw WaterGunAnim
+	dw HydroPumpAnim
+	dw SurfAnim
+	dw IceBeamAnim
+	dw BlizzardAnim
+	dw PsyBeamAnim
+	dw BubbleBeamAnim
+	dw AuroraBeamAnim
+	dw HyperBeamAnim
+	dw PeckAnim
+	dw DrillPeckAnim
+	dw SubmissionAnim
+	dw LowKickAnim
+	dw CounterAnim
+	dw SeismicTossAnim
+	dw StrengthAnim
+	dw AbsorbAnim
+	dw MegaDrainAnim
+	dw LeechSeedAnim
+	dw GrowthAnim
+	dw RazorLearAnim
+	dw SolarBeamAnim
+	dw PoisonPowderAnim
+	dw StunSporeAnim
+	dw SleepPowderAnim
+	dw PedalDanceAnim
+	dw StringShotAnim
+	dw DragonRageAnim
+	dw FireSpinAnim
+	dw ThunderShockAnim
+	dw ThunderBoldAnim
+	dw ThunderWaveAnim
+	dw ThunderAnim
+	dw RockThrowAnim
+	dw EarthquakeAnim
+	dw FissureAnim
+	dw DigAnim
+	dw ToxicAnim
+	dw ConfusionAnim
+	dw PsychicAnim
+	dw HypnosisAnim
+	dw MeditateAnim
+	dw AgilityAnim
+	dw QuickAttackAnim
+	dw RageAnim
+	dw TeleportAnim
+	dw NightShadeAnim
+	dw MimicAnim
+	dw ScreechAnim
+	dw DoubleTeamAnim
+	dw RecoverAnim
+	dw HardenAnim
+	dw MinimizeAnim
+	dw SmokeScreenAnim
+	dw ConfuseRayAnim
+	dw WithdrawAnim
+	dw DefenseCurlAnim
+	dw BarrierAnim
+	dw LightScreenAnim
+	dw HazeAnim
+	dw ReflectAnim
+	dw FocusEnergyAnim
+	dw BideAnim
+	dw MetronomeAnim
+	dw MirrorMoveAnim
+	dw SelfdestructAnim
+	dw EggBombAnim
+	dw LickAnim
+	dw SmogAnim
+	dw SludgeAnim
+	dw BoneClubAnim
+	dw FireBlastAnim
+	dw WaterfallAnim
+	dw ClampAnim
+	dw SwiftAnim
+	dw SkullBashAnim
+	dw SpikeCannonAnim
+	dw ConstrictAnim
+	dw AmnesiaAnim
+	dw KinesisAnim
+	dw SoftboiledAnim
+	dw HiJumpKickAnim
+	dw GlareAnim
+	dw DreamEaterAnim
+	dw PoisonGasAnim
+	dw BarrageAnim
+	dw LeechLifeAnim
+	dw LovelyKissAnim
+	dw SkyAttackAnim
+	dw TransformAnim
+	dw BubbleAnim
+	dw DizzyPunchAnim
+	dw SporeAnim
+	dw FlashAnim
+	dw PsywaveAnim
+	dw SplashAnim
+	dw AcidArmorAnim
+	dw CrabHammerAnim
+	dw ExplosionAnim
+	dw FurySwipesAnim
+	dw BonemerangAnim
+	dw RestAnim
+	dw RockSlideAnim
+	dw HyperFangAnim
+	dw SharpenAnim
+	dw ConversionAnim
+	dw TriAttackAnim
+	dw SuperFangAnim
+	dw SlashAnim
+	dw SubstituteAnim
+	dw StruggleAnim
+	dw ShowPicAnim
+	dw EnemyFlashAnim
+	dw PlayerFlashAnim
+	dw EnemyHUDShakeAnim
+	dw TradeBallDropAnim
+	dw TradeBallAppear1Anim
+	dw TradeBallAppear2Anim
+	dw TradeBallPoofAnim
+	dw XStatItemAnim
+	dw XStatItemAnim
+	dw ShrinkingSquareAnim
+	dw ShrinkingSquareAnim
+	dw XStatItemBlackAnim
+	dw XStatItemBlackAnim
+	dw ShrinkingSquareBlackAnim
+	dw ShrinkingSquareBlackAnim
+	dw UnusedAnim
+	dw UnusedAnim
+	dw ParalyzeAnim
+	dw ParalyzeAnim
+	dw PoisonAnim
+	dw PoisonAnim
+	dw SleepPlayerAnim
+	dw SleepEnemyAnim
+	dw ConfusedPlayerAnim
+	dw ConfusedEnemyAnim
+	dw FaintAnim
+	dw BallTossAnim
+	dw BallShakeAnim
+	dw BallPoofAnim
+	dw BallBlockAnim
+	dw GreatTossAnim
+	dw UltraTossAnim
+	dw ShakeScreenAnim
+	dw HidePicAnim
+	dw ThrowRockAnim
+	dw ThrowBaitAnim
+	dw ZigZagScreenAnim
 
-Unknown_7a76d: ; 7a76d (1e:676d)
-INCBIN "baserom.gbc",$7a76d,$7af6f - $7a76d
+; each animation is a list of subanimations and special effects
+; if first byte < $56
+;	db tileset_and_delay, sound_id, subanimation_id
+; if first byte >= $D8
+;	db special_effect_id, sound_id
+; $FF terminated
+ZigZagScreenAnim: ; 7a213 (1e:6213)
+	db $D8,$FF
+	db $FF
 
-Unknown_7af6f: ; 7af6f (1e:6f6f)
-INCBIN "baserom.gbc",$7af6f,$7af74 - $7af6f
+PoundAnim: ; 7a216 (1e:6216)
+StruggleAnim: ; 7a216 (1e:6216)
+	db $08,$00,$01
+	db $FF
 
-PointerTable_7af74: ; 7af74 (1e:6f74)
-	dw $7de7
-	dw $7068
-	dw $708d
-	dw $70ce
-	dw $70df
-	dw $70f0
-	dw $7101
-	dw $7132
-	dw $7173
-	dw $71b4
-	dw $71e5
-	dw $7216
-	dw $7227
-	dw $7238
-	dw $7259
-	dw $726a
-	dw $727b
-	dw $729c
-	dw $72bd
-	dw $72ca
-	dw $72db
-	dw $72fc
-	dw $732d
-	dw $734e
-	dw $735f
-	dw $7364
-	dw $736d
-	dw $7376
-	dw $737f
-	dw $7388
-	dw $7391
-	dw $73ab
-	dw $73b4
-	dw $73cd
-	dw $73fe
-	dw $744b
-	dw $745c
-	dw $7465
-	dw $7496
-	dw $74a7
-	dw $74bc
-	dw $74d5
-	dw $74e6
-	dw $74f7
-	dw $7500
-	dw $7505
-	dw $7526
-	dw $7547
-	dw $7558
-	dw $7569
-	dw $756e
-	dw $758b
-	dw $75a8
-	dw $75ad
-	dw $75c6
-	dw $75d7
-	dw $75e8
-	dw $75f9
-	dw $760a
-	dw $761b
-	dw $7630
-	dw $7649
-	dw $7666
-	dw $7687
-	dw $76a8
-	dw $76b5
-	dw $76c6
-	dw $76f3
-	dw $7720
-	dw $7731
-	dw $7742
-	dw $7753
-	dw $7764
-	dw $7775
-	dw $785a
-	dw $786b
-	dw $787c
-	dw $788d
-	dw $789e
-	dw $78bf
-	dw $78f0
-	dw $7911
-	dw $7932
-	dw $7943
-	dw $7950
-	dw $7961
-	dw $796e
-	dw $7987
-	dw $79ac
-	dw $79c9
-	dw $79ce
-	dw $79ff
-	dw $7a10
-	dw $7a31
-	dw $7a5e
-	dw $7a9b
-	dw $7aac
-	dw $7acd
-	dw $7afe
-	dw $7b3f
-	dw $7b58
-	dw $7b71
-	dw $7b8a
-	dw $7b93
-	dw $7b98
-	dw $7ba9
-	dw $7bae
-	dw $7bcf
-	dw $7bf0
-	dw $7c11
-	dw $7c1a
-	dw $7c2b
-	dw $7c3c
-	dw $77b6
-	dw $77f7
-	dw $7828
-	dw $7849
-	dw $739a
-	dw $7c4d
-	dw $7c6a
-	dw $7c7b
-	dw $7c80
+KarateChopAnim: ; 7a21a (1e:621a)
+	db $08,$01,$03
+	db $FF
 
-INCBIN "baserom.gbc",$7b068,$7bc85 - $7b068
+DoubleSlapAnim: ; 7a21e (1e:621e)
+	db $05,$02,$01
+	db $05,$02,$01
+	db $FF
 
-Unknown_7bc85: ; 7bc85 (1e:7c85)
-INCBIN "baserom.gbc",$7bc85,$7bde9 - $7bc85
+CometPunchAnim: ; 7a225 (1e:6225)
+	db $04,$03,$02
+	db $04,$03,$02
+	db $FF
+
+MegaPunchAnim: ; 7a22c (1e:622c)
+	db $46,$04,$04
+	db $FF
+
+PayDayAnim: ; 7a230 (1e:6230)
+	db $08,$00,$01
+	db $04,$05,$52
+	db $FF
+
+FirePunchAnim: ; 7a237 (1e:6237)
+	db $06,$06,$02
+	db $46,$FF,$11
+	db $FF
+
+IcePunchAnim: ; 7a23e (1e:623e)
+	db $06,$07,$02
+	db $10,$FF,$2F
+	db $FF
+
+ThunderPunchAnim: ; 7a245 (1e:6245)
+	db $06,$08,$02
+	db $FD,$FF
+	db $46,$FF,$2B
+	db $FC,$FF
+	db $FF
+
+ScratchAnim: ; 7a250 (1e:6250)
+	db $06,$09,$0F
+	db $FF
+
+VicegripAnim: ; 7a254 (1e:6254)
+	db $08,$0A,$2A
+	db $FF
+
+GuillotineAnim: ; 7a258 (1e:6258)
+	db $06,$0B,$2A
+	db $FF
+
+RazorWindAnim: ; 7a25c (1e:625c)
+	db $04,$0C,$16
+	db $FF
+
+SwordsDanceAnim: ; 7a260 (1e:6260)
+	db $46,$0D,$18
+	db $46,$0D,$18
+	db $46,$0D,$18
+	db $FF
+
+CutAnim: ; 7a26a (1e:626a)
+	db $FE,$0E
+	db $04,$FF,$16
+	db $FF
+
+GustAnim: ; 7a270 (1e:6270)
+	db $46,$0F,$10
+	db $06,$FF,$02
+	db $FF
+
+WingAttackAnim: ; 7a277 (1e:6277)
+	db $46,$10,$04
+	db $FF
+
+WhirlwindAnim: ; 7a27b (1e:627b)
+	db $46,$11,$10
+	db $DB,$FF
+	db $FF
+
+FlyAnim: ; 7a281 (1e:6281)
+	db $46,$12,$04
+	db $DD,$FF
+	db $FF
+
+BindAnim: ; 7a287 (1e:6287)
+	db $04,$13,$23
+	db $04,$13,$23
+	db $FF
+
+SlamAnim: ; 7a28e (1e:628e)
+	db $06,$14,$02
+	db $FF
+
+VineWhipAnim: ; 7a292 (1e:6292)
+	db $01,$15,$16
+	db $08,$FF,$01
+	db $FF
+
+StompAnim: ; 7a299 (1e:6299)
+	db $48,$16,$05
+	db $FF
+
+DoubleKickAnim: ; 7a29d (1e:629d)
+	db $08,$17,$01
+	db $08,$17,$01
+	db $FF
+
+MegaKickAnim: ; 7a2a4 (1e:62a4)
+	db $46,$18,$04
+	db $FF
+
+JumpKickAnim: ; 7a2a8 (1e:62a8)
+	db $46,$19,$04
+	db $FF
+
+RollingKickAnim: ; 7a2ac (1e:62ac)
+	db $FE,$1A
+	db $46,$FF,$04
+	db $FF
+
+SandAttackAnim: ; 7a2b2 (1e:62b2)
+	db $46,$1B,$28
+	db $FF
+
+HeatButtAnim: ; 7a2b6 (1e:62b6)
+	db $46,$1C,$05
+	db $FF
+
+HornAttackAnim: ; 7a2ba (1e:62ba)
+	db $06,$1D,$45
+	db $46,$FF,$05
+	db $FF
+
+FuryAttackAnim: ; 7a2c1 (1e:62c1)
+	db $02,$1E,$46
+	db $02,$FF,$46
+	db $FF
+
+HornDrillAnim: ; 7a2c8 (1e:62c8)
+	db $42,$1F,$05
+	db $42,$FF,$05
+	db $42,$FF,$05
+	db $42,$FF,$05
+	db $42,$FF,$05
+	db $FF
+
+TackleAnim: ; 7a2d8 (1e:62d8)
+	db $F2,$48
+	db $F1,$FF
+	db $FF
+
+BodySlamAnim: ; 7a2dd (1e:62dd)
+	db $F2,$48
+	db $FE,$FF
+	db $FE,$FF
+	db $F1,$FF
+	db $FF
+
+WrapAnim: ; 7a2e6 (1e:62e6)
+	db $04,$22,$23
+	db $04,$22,$23
+	db $04,$22,$23
+	db $FF
+
+TakeDownAnim: ; 7a2f0 (1e:62f0)
+	db $F2,$48
+	db $FE,$23
+	db $F1,$FF
+	db $FF
+
+ThrashAnim: ; 7a2f7 (1e:62f7)
+	db $46,$24,$04
+	db $FF
+
+DoubleEdgeAnim: ; 7a2fb (1e:62fb)
+	db $F0,$48
+	db $06,$FF,$2D
+	db $FC,$FF
+	db $F2,$FF
+	db $FE,$25
+	db $F1,$FF
+	db $FF
+
+TailWhipAnim: ; 7a309 (1e:6309)
+	db $F2,$84
+	db $E1,$FF
+	db $F1,$84
+	db $E1,$FF
+	db $F2,$84
+	db $E1,$FF
+	db $F1,$84
+	db $FF
+
+PoisonStingAnim: ; 7a318 (1e:6318)
+	db $06,$27,$00
+	db $FF
+
+TwineedleAnim: ; 7a31c (1e:631c)
+	db $05,$28,$01
+	db $05,$28,$01
+	db $FF
+
+PinMissileAnim: ; 7a323 (1e:6323)
+	db $03,$29,$01
+	db $FF
+
+LeerAnim: ; 7a327 (1e:6327)
+	db $FD,$48
+	db $FE,$2A
+	db $FE,$2A
+	db $FC,$FF
+	db $FF
+
+BiteAnim: ; 7a330 (1e:6330)
+	db $08,$2B,$02
+	db $FF
+
+GrowlAnim: ; 7a334 (1e:6334)
+	db $46,$2C,$12
+	db $FF
+
+RoarAnim: ; 7a338 (1e:6338)
+	db $46,$2D,$15
+	db $46,$2D,$15
+	db $46,$2D,$15
+	db $FF
+
+SingAnim: ; 7a342 (1e:6342)
+	db $46,$2E,$12
+	db $50,$FF,$40
+	db $50,$FF,$40
+	db $FF
+
+SupersonicAnim: ; 7a34c (1e:634c)
+	db $06,$2F,$31
+	db $FF
+
+SonicBoomAnim: ; 7a350 (1e:6350)
+	db $46,$2D,$15
+	db $46,$2D,$15
+	db $46,$0F,$10
+	db $46,$FF,$05
+	db $FF
+
+DisableAnim: ; 7a35d (1e:635d)
+	db $FD,$48
+	db $FE,$2A
+	db $FE,$2A
+	db $FC,$FF
+	db $FF
+
+AcidAnim: ; 7a366 (1e:6366)
+	db $46,$32,$13
+	db $46,$32,$14
+	db $FF
+
+EmberAnim: ; 7a36d (1e:636d)
+	db $46,$33,$11
+	db $FF
+
+FlamethrowerAnim: ; 7a371 (1e:6371)
+	db $46,$34,$1F
+	db $46,$34,$0C
+	db $46,$34,$0D
+	db $FF
+
+MistAnim: ; 7a37b (1e:637b)
+	db $F0,$FF
+	db $FA,$38
+	db $FC,$FF
+	db $FF
+
+WaterGunAnim: ; 7a382 (1e:6382)
+	db $06,$36,$2C
+	db $FF
+
+HydroPumpAnim: ; 7a386 (1e:6386)
+	db $06,$37,$1A
+	db $06,$37,$1A
+	db $FF
+
+SurfAnim: ; 7a38d (1e:638d)
+	db $FA,$38
+	db $06,$37,$1A
+	db $FF
+
+IceBeamAnim: ; 7a393 (1e:6393)
+	db $03,$39,$2E
+	db $10,$FF,$2F
+	db $FF
+
+BlizzardAnim: ; 7a39a (1e:639a)
+	db $04,$3A,$38
+	db $04,$37,$38
+	db $FF
+
+PsyBeamAnim: ; 7a3a1 (1e:63a1)
+	db $03,$3B,$2E
+	db $F8,$FF
+	db $FF
+
+BubbleBeamAnim: ; 7a3a7 (1e:63a7)
+	db $12,$3C,$35
+	db $FF
+
+AuroraBeamAnim: ; 7a3ab (1e:63ab)
+	db $03,$3D,$2E
+	db $E1,$FF
+	db $E1,$FF
+	db $FF
+
+HyperBeamAnim: ; 7a3b3 (1e:63b3)
+	db $FD,$48
+	db $E2,$FF
+	db $02,$3E,$2E
+	db $FE,$FF
+	db $FE,$FF
+	db $46,$04,$04
+	db $FC,$FF
+	db $FF
+
+PeckAnim: ; 7a3c4 (1e:63c4)
+	db $08,$3F,$01
+	db $FF
+
+DrillPeckAnim: ; 7a3c8 (1e:63c8)
+	db $46,$40,$04
+	db $FF
+
+SubmissionAnim: ; 7a3cc (1e:63cc)
+	db $F4,$41
+	db $06,$FF,$01
+	db $DD,$FF
+	db $FF
+
+LowKickAnim: ; 7a3d4 (1e:63d4)
+	db $F4,$42
+	db $46,$FF,$04
+	db $DD,$FF
+	db $FF
+
+CounterAnim: ; 7a3dc (1e:63dc)
+	db $F4,$43
+	db $46,$FF,$04
+	db $DD,$FF
+	db $FF
+
+SeismicTossAnim: ; 7a3e4 (1e:63e4)
+	db $DE,$FF
+	db $41,$8B,$4E
+	db $DF,$FF
+	db $F4,$FF
+	db $42,$44,$4F
+	db $E1,$FF
+	db $E1,$FF
+	db $DD,$FF
+	db $41,$44,$50
+	db $DC,$FF
+	db $FB,$FF
+	db $FF
+
+StrengthAnim: ; 7a3fe (1e:63fe)
+	db $F2,$48
+	db $F1,$FF
+	db $46,$06,$04
+	db $FF
+
+AbsorbAnim: ; 7a406 (1e:6406)
+	db $F0,$46
+	db $06,$FF,$21
+	db $06,$FF,$22
+	db $FC,$FF
+	db $FF
+
+MegaDrainAnim: ; 7a411 (1e:6411)
+	db $F0,$47
+	db $FE,$FF
+	db $06,$FF,$21
+	db $06,$FF,$22
+	db $FE,$FF
+	db $FC,$FF
+	db $FF
+
+LeechSeedAnim: ; 7a420 (1e:6420)
+	db $46,$48,$1B
+	db $55,$4D,$1C
+	db $FF
+
+GrowthAnim: ; 7a427 (1e:6427)
+	db $F0,$49
+	db $E2,$FF
+	db $FC,$FF
+	db $FF
+
+RazorLearAnim: ; 7a42e (1e:642e)
+	db $E7,$4A
+	db $41,$80,$44
+	db $01,$0C,$16
+	db $FF
+
+SolarBeamAnim: ; 7a437 (1e:6437)
+	db $06,$4B,$2E
+	db $06,$FF,$01
+	db $FF
+
+PoisonPowderAnim: ; 7a43e (1e:643e)
+	db $06,$4C,$36
+	db $FF
+
+StunSporeAnim: ; 7a442 (1e:6442)
+	db $06,$4D,$36
+	db $FF
+
+SleepPowderAnim: ; 7a446 (1e:6446)
+	db $06,$4E,$36
+	db $FF
+
+PedalDanceAnim: ; 7a44a (1e:644a)
+	db $F0,$4F
+	db $E6,$FF
+	db $FC,$FF
+	db $FF
+
+StringShotAnim: ; 7a451 (1e:6451)
+	db $08,$50,$37
+	db $FF
+
+DragonRageAnim: ; 7a455 (1e:6455)
+	db $46,$51,$1F
+	db $46,$FF,$0C
+	db $46,$FF,$0D
+	db $46,$FF,$0E
+	db $FF
+
+FireSpinAnim: ; 7a462 (1e:6462)
+	db $46,$52,$0C
+	db $46,$FF,$0D
+	db $46,$FF,$0E
+	db $FF
+
+ThunderShockAnim: ; 7a46c (1e:646c)
+	db $42,$53,$29
+	db $FF
+
+ThunderBoldAnim: ; 7a470 (1e:6470)
+	db $41,$54,$29
+	db $41,$54,$29
+	db $FF
+
+ThunderWaveAnim: ; 7a477 (1e:6477)
+	db $42,$55,$29
+	db $02,$FF,$23
+	db $04,$FF,$23
+	db $FF
+
+ThunderAnim: ; 7a481 (1e:6481)
+	db $FD,$56
+	db $FE,$FF
+	db $46,$FF,$2B
+	db $FE,$FF
+	db $42,$54,$29
+	db $FC,$FF
+	db $FF
+
+RockThrowAnim: ; 7a490 (1e:6490)
+	db $04,$57,$30
+	db $FF
+
+EarthquakeAnim: ; 7a494 (1e:6494)
+	db $FB,$58
+	db $FB,$58
+	db $FF
+
+FissureAnim: ; 7a499 (1e:6499)
+	db $FE,$59
+	db $FB,$FF
+	db $FE,$59
+	db $FB,$FF
+	db $FF
+
+DigAnim: ; 7a4a2 (1e:64a2)
+	db $46,$5A,$04
+	db $F7,$FF
+	db $FF
+
+ToxicAnim: ; 7a4a8 (1e:64a8)
+	db $FA,$38
+	db $46,$5B,$14
+	db $FF
+
+ConfusionAnim: ; 7a4ae (1e:64ae)
+	db $F8,$5C
+	db $FF
+
+PsychicAnim: ; 7a4b1 (1e:64b1)
+	db $F8,$5D
+	db $D8,$FF
+	db $FF
+
+HypnosisAnim: ; 7a4b6 (1e:64b6)
+	db $F8,$5E
+	db $FF
+
+MeditateAnim: ; 7a4b9 (1e:64b9)
+	db $F0,$5F
+	db $46,$FF,$43
+	db $FE,$FF
+	db $FC,$FF
+	db $FF
+
+AgilityAnim: ; 7a4c3 (1e:64c3)
+	db $F0,$60
+	db $FC,$FF
+	db $FF
+
+QuickAttackAnim: ; 7a4c8 (1e:64c8)
+	db $F4,$61
+	db $46,$FF,$04
+	db $DD,$FF
+	db $FF
+
+RageAnim: ; 7a4d0 (1e:64d0)
+	db $06,$62,$01
+	db $FF
+
+TeleportAnim: ; 7a4d4 (1e:64d4)
+	db $EE,$63
+	db $ED,$FF
+	db $FF
+
+NightShadeAnim: ; 7a4d9 (1e:64d9)
+	db $F8,$5C
+	db $D8,$FF
+	db $FF
+
+MimicAnim: ; 7a4de (1e:64de)
+	db $46,$65,$21
+	db $46,$65,$22
+	db $FF
+
+ScreechAnim: ; 7a4e5 (1e:64e5)
+	db $46,$66,$12
+	db $FF
+
+DoubleTeamAnim: ; 7a4e9 (1e:64e9)
+	db $FD,$FF
+	db $E1,$FF
+	db $E1,$FF
+	db $FE,$FF
+	db $FE,$FF
+	db $FC,$FF
+	db $DA,$67
+	db $DD,$FF
+	db $46,$6F,$33
+	db $FF
+
+RecoverAnim: ; 7a4fd (1e:64fd)
+	db $F3,$68
+	db $F0,$FF
+	db $E2,$FF
+	db $FC,$FF
+	db $FF
+
+HardenAnim: ; 7a506 (1e:6506)
+	db $F0,$69
+	db $46,$FF,$43
+	db $FE,$FF
+	db $FC,$FF
+	db $FF
+
+MinimizeAnim: ; 7a510 (1e:6510)
+	db $F0,$6A
+	db $E2,$FF
+	db $EA,$FF
+	db $FC,$FF
+	db $FF
+
+SmokeScreenAnim: ; 7a519 (1e:6519)
+	db $46,$6B,$28
+	db $04,$FF,$0A
+	db $F9,$FF
+	db $E1,$FF
+	db $E1,$FF
+	db $FD,$FF
+	db $E1,$FF
+	db $E1,$FF
+	db $E1,$FF
+	db $E1,$FF
+	db $E1,$FF
+	db $E1,$FF
+	db $F9,$FF
+	db $E1,$FF
+	db $FC,$FF
+	db $FF
+
+ConfuseRayAnim: ; 7a53a (1e:653a)
+	db $FD,$6C
+	db $46,$FF,$3E
+	db $FC,$FF
+	db $FF
+
+WithdrawAnim: ; 7a542 (1e:6542)
+	db $F0,$6E
+	db $F6,$FF
+	db $06,$FF,$51
+	db $FC,$FF
+	db $DD,$FF
+	db $FF
+
+DefenseCurlAnim: ; 7a54e (1e:654e)
+	db $F0,$6E
+	db $06,$FF,$43
+	db $FE,$FF
+	db $FC,$FF
+	db $FF
+
+BarrierAnim: ; 7a558 (1e:6558)
+	db $46,$6F,$33
+	db $46,$6F,$33
+	db $FF
+
+LightScreenAnim: ; 7a55f (1e:655f)
+	db $F0,$FF
+	db $46,$70,$33
+	db $46,$70,$33
+	db $FC,$FF
+	db $FF
+
+HazeAnim: ; 7a56a (1e:656a)
+	db $F9,$FF
+	db $FA,$38
+	db $FC,$FF
+	db $FF
+
+ReflectAnim: ; 7a571 (1e:6571)
+	db $FD,$FF
+	db $46,$72,$33
+	db $46,$72,$33
+	db $FC,$FF
+	db $FF
+
+FocusEnergyAnim: ; 7a57c (1e:657c)
+	db $E2,$73
+	db $FF
+
+BideAnim: ; 7a57f (1e:657f)
+	db $46,$74,$04
+	db $FF
+
+MetronomeAnim: ; 7a583 (1e:6583)
+	db $F2,$84
+	db $E1,$FF
+	db $F1,$84
+	db $E1,$FF
+	db $F2,$84
+	db $E1,$FF
+	db $F1,$84
+	db $FF
+
+MirrorMoveAnim: ; 7a592 (1e:6592)
+	db $08,$76,$01
+	db $FF
+
+SelfdestructAnim: ; 7a596 (1e:6596)
+	db $43,$77,$34
+	db $FF
+
+EggBombAnim: ; 7a59a (1e:659a)
+	db $44,$78,$41
+	db $44,$78,$42
+	db $FF
+
+LickAnim: ; 7a5a1 (1e:65a1)
+	db $46,$7B,$14
+	db $FF
+
+SmogAnim: ; 7a5a5 (1e:65a5)
+	db $F9,$48
+	db $46,$7A,$19
+	db $FC,$FF
+	db $FF
+
+SludgeAnim: ; 7a5ad (1e:65ad)
+	db $46,$7B,$13
+	db $46,$7B,$14
+	db $FF
+
+BoneClubAnim: ; 7a5b4 (1e:65b4)
+	db $08,$7C,$02
+	db $FF
+
+FireBlastAnim: ; 7a5b8 (1e:65b8)
+	db $46,$7D,$1F
+	db $46,$FF,$20
+	db $46,$FF,$20
+	db $46,$FF,$0C
+	db $46,$FF,$0D
+	db $FF
+
+WaterfallAnim: ; 7a5c8 (1e:65c8)
+	db $F6,$48
+	db $06,$37,$1A
+	db $08,$FF,$02
+	db $F7,$FF
+	db $FF
+
+ClampAnim: ; 7a5d3 (1e:65d3)
+	db $08,$7F,$2A
+	db $06,$83,$23
+	db $06,$83,$23
+	db $FF
+
+SwiftAnim: ; 7a5dd (1e:65dd)
+	db $43,$80,$3F
+	db $FF
+
+SkullBashAnim: ; 7a5e1 (1e:65e1)
+	db $46,$81,$05
+	db $FF
+
+SpikeCannonAnim: ; 7a5e5 (1e:65e5)
+	db $44,$82,$04
+	db $FF
+
+ConstrictAnim: ; 7a5e9 (1e:65e9)
+	db $06,$83,$23
+	db $06,$83,$23
+	db $06,$83,$23
+	db $FF
+
+AmnesiaAnim: ; 7a5f3 (1e:65f3)
+	db $08,$84,$25
+	db $08,$84,$25
+	db $FF
+
+KinesisAnim: ; 7a5fa (1e:65fa)
+	db $08,$85,$01
+	db $FF
+
+SoftboiledAnim: ; 7a5fe (1e:65fe)
+	db $E5,$48
+	db $08,$86,$4C
+	db $F0,$FF
+	db $E2,$FF
+	db $FC,$FF
+	db $DD,$FF
+	db $FF
+
+HiJumpKickAnim: ; 7a6 (1e:660c)
+	db $46,$87,$04
+	db $FF
+
+GlareAnim: ; 7a610 (1e:6610)
+	db $FD,$48
+	db $FE,$88
+	db $FE,$FF
+	db $FC,$FF
+	db $FF
+
+DreamEaterAnim: ; 7a619 (1e:6619)
+	db $F8,$89
+	db $FD,$89
+	db $08,$89,$02
+	db $FC,$FF
+	db $FF
+
+PoisonGasAnim: ; 7a623 (1e:6623)
+	db $46,$8A,$19
+	db $FF
+
+BarrageAnim: ; 7a627 (1e:6627)
+	db $43,$8B,$41
+	db $05,$FF,$55
+	db $FF
+
+LeechLifeAnim: ; 7a62e (1e:662e)
+	db $08,$8C,$02
+	db $FE,$FF
+	db $06,$FF,$21
+	db $06,$FF,$22
+	db $FE,$FF
+	db $FF
+
+LovelyKissAnim: ; 7a63c (1e:663c)
+	db $06,$8D,$12
+	db $FF
+
+SkyAttackAnim: ; 7a640 (1e:6640)
+	db $EE,$8E
+	db $ED,$FF
+	db $46,$87,$04
+	db $DD,$FF
+	db $FF
+
+TransformAnim: ; 7a64a (1e:664a)
+	db $46,$8F,$21
+	db $44,$8F,$22
+	db $08,$FF,$47
+	db $E8,$FF
+	db $FF
+
+BubbleAnim: ; 7a656 (1e:6656)
+	db $16,$90,$35
+	db $FF
+
+DizzyPunchAnim: ; 7a65a (1e:665a)
+	db $06,$91,$17
+	db $06,$91,$17
+	db $06,$91,$17
+	db $06,$02,$02
+	db $FF
+
+SporeAnim: ; 7a667 (1e:6667)
+	db $06,$92,$36
+	db $FF
+
+FlashAnim: ; 7a66b (1e:666b)
+	db $F0,$48
+	db $FE,$88
+	db $FE,$FF
+	db $FC,$FF
+	db $FF
+
+PsywaveAnim: ; 7a674 (1e:6674)
+	db $06,$2F,$31
+	db $D8,$5C
+	db $FF
+
+SplashAnim: ; 7a67a (1e:667a)
+	db $EB,$95
+	db $FF
+
+AcidArmorAnim: ; 7a67d (1e:667d)
+	db $E9,$96
+	db $FF
+
+CrabHammerAnim: ; 7a680 (1e:6680)
+	db $46,$97,$05
+	db $06,$FF,$2A
+	db $FF
+
+ExplosionAnim: ; 7a687 (1e:6687)
+	db $43,$98,$34
+	db $FF
+
+FurySwipesAnim: ; 7a68b (1e:668b)
+	db $04,$99,$0F
+	db $FF
+
+BonemerangAnim: ; 7a68f (1e:668f)
+	db $06,$9A,$02
+	db $FF
+
+RestAnim: ; 7a693 (1e:6693)
+	db $10,$9B,$3A
+	db $10,$9B,$3A
+	db $FF
+
+RockSlideAnim: ; 7a69a (1e:669a)
+	db $04,$9C,$1D
+	db $03,$9C,$1E
+	db $46,$9D,$04
+	db $FF
+
+HyperFangAnim: ; 7a6a4 (1e:66a4)
+	db $06,$9D,$02
+	db $FF
+
+SharpenAnim: ; 7a6a8 (1e:66a8)
+	db $F0,$9E
+	db $46,$FF,$43
+	db $FE,$FF
+	db $FC,$FF
+	db $FF
+
+ConversionAnim: ; 7a6b2 (1e:66b2)
+	db $FE,$9F
+	db $46,$FF,$21
+	db $46,$FF,$22
+	db $FE,$FF
+	db $FF
+
+TriAttackAnim: ; 7a6bd (1e:66bd)
+	db $FE,$A0
+	db $46,$FF,$4D
+	db $FE,$FF
+	db $FF
+
+SuperFangAnim: ; 7a6c5 (1e:66c5)
+	db $FD,$48
+	db $46,$A1,$04
+	db $FC,$FF
+	db $FF
+
+SlashAnim: ; 7a6cd (1e:66cd)
+	db $06,$A2,$0F
+	db $FF
+
+SubstituteAnim: ; 7a6d1 (1e:66d1)
+	db $F4,$A3
+	db $08,$FF,$47
+	db $D9,$FF
+	db $FF
+
+BallTossAnim: ; 7a6d9 (1e:66d9)
+	db $03,$FF,$06
+	db $FF
+
+GreatTossAnim: ; 7a6dd (1e:66dd)
+	db $03,$FF,$07
+	db $FF
+
+UltraTossAnim: ; 7a6e1 (1e:66e1)
+	db $02,$FF,$08
+	db $FF
+
+BallShakeAnim: ; 7a6e5 (1e:66e5)
+	db $04,$FF,$09
+	db $FF
+
+BallPoofAnim: ; 7a6e9 (1e:66e9)
+	db $04,$FF,$0A
+	db $FF
+
+ShowPicAnim: ; 7a6ed (1e:66ed)
+	db $DC,$FF
+	db $FF
+
+HidePicAnim: ; 7a6f0 (1e:66f0)
+	db $DF,$FF
+	db $FF
+
+EnemyFlashAnim: ; 7a6f3 (1e:66f3)
+	db $DD,$FF
+	db $FF
+
+PlayerFlashAnim: ; 7a6f6 (1e:66f6)
+	db $F5,$FF
+	db $FF
+
+EnemyHUDShakeAnim: ; 7a6f9 (1e:66f9)
+	db $E4,$FF
+	db $FF
+
+TradeBallDropAnim: ; 7a6fc (1e:66fc)
+	db $86,$FF,$48
+	db $FF
+
+TradeBallAppear1Anim: ; 7a700 (1e:6700)
+	db $84,$FF,$49
+	db $FF
+
+TradeBallAppear2Anim: ; 7a704 (1e:6704)
+	db $86,$FF,$4A
+	db $FF
+
+TradeBallPoofAnim: ; 7a708 (1e:6708)
+	db $86,$FF,$4B
+	db $FF
+
+XStatItemAnim: ; 7a7c0 (1e:670c)
+	db $F0,$FF
+	db $E2,$FF
+	db $FC,$FF
+	db $FF
+
+ShrinkingSquareAnim: ; 7a713 (1e:6713)
+	db $F0,$FF
+	db $46,$FF,$43
+	db $FC,$FF
+	db $FF
+
+XStatItemBlackAnim: ; 7a71b (1e:671b)
+	db $F9,$FF
+	db $E2,$FF
+	db $FC,$FF
+	db $FF
+
+ShrinkingSquareBlackAnim: ; 7a722 (1e:6722)
+	db $F9,$FF
+	db $46,$FF,$43
+	db $FC,$FF
+	db $FF
+
+UnusedAnim: ; 7a72a (1e:672a)
+	db $F0,$FF
+	db $EC,$FF
+	db $FC,$FF
+	db $FF
+
+ParalyzeAnim: ; 7a731 (1e:6731)
+	db $04,$13,$24
+	db $04,$13,$24
+	db $FF
+
+PoisonAnim: ; 7a738 (1e:6738)
+	db $08,$13,$27
+	db $08,$13,$27
+	db $FF
+
+SleepPlayerAnim: ; 7a73f (1e:673f)
+	db $10,$9B,$3A
+	db $10,$9B,$3A
+	db $FF
+
+SleepEnemyAnim: ; 7a746 (1e:6746)
+	db $10,$9B,$3B
+	db $10,$9B,$3B
+	db $FF
+
+ConfusedPlayerAnim: ; 7a74d (1e:674d)
+	db $08,$84,$25
+	db $08,$84,$25
+	db $FF
+
+ConfusedEnemyAnim: ; 7a754 (1e:6754)
+	db $08,$84,$26
+	db $08,$84,$26
+	db $FF
+
+BallBlockAnim: ; 7a75b (1e:675b)
+	db $03,$FF,$0B
+	db $FF
+
+FaintAnim: ; 7a75f (1e:675f)
+	db $F6,$5A
+	db $FF
+
+ShakeScreenAnim: ; 7a762 (1e:6762)
+	db $FB,$FF
+	db $FF
+
+ThrowRockAnim: ; 7a765 (1e:6765)
+	db $03,$8B,$53
+	db $FF
+
+ThrowBaitAnim: ; 7a769 (1e:6769)
+	db $03,$8B,$54
+	db $FF
+
+SubanimationPointers: ; 7a76d (1e:676d)
+	dw Subanimation00
+	dw Subanimation01
+	dw Subanimation02
+	dw Subanimation03
+	dw Subanimation04
+	dw Subanimation05
+	dw Subanimation06
+	dw Subanimation07
+	dw Subanimation08
+	dw Subanimation09
+	dw Subanimation0a
+	dw Subanimation0b
+	dw Subanimation0c
+	dw Subanimation0d
+	dw Subanimation0e
+	dw Subanimation0f
+	dw Subanimation10
+	dw Subanimation11
+	dw Subanimation12
+	dw Subanimation13
+	dw Subanimation14
+	dw Subanimation15
+	dw Subanimation16
+	dw Subanimation17
+	dw Subanimation18
+	dw Subanimation19
+	dw Subanimation1a
+	dw Subanimation1b
+	dw Subanimation1c
+	dw Subanimation1d
+	dw Subanimation1e
+	dw Subanimation1f
+	dw Subanimation20
+	dw Subanimation21
+	dw Subanimation22
+	dw Subanimation23
+	dw Subanimation24
+	dw Subanimation25
+	dw Subanimation26
+	dw Subanimation27
+	dw Subanimation28
+	dw Subanimation29
+	dw Subanimation2a
+	dw Subanimation2b
+	dw Subanimation2c
+	dw Subanimation2d
+	dw Subanimation2e
+	dw Subanimation2f
+	dw Subanimation30
+	dw Subanimation31
+	dw Subanimation32
+	dw Subanimation33
+	dw Subanimation34
+	dw Subanimation35
+	dw Subanimation36
+	dw Subanimation37
+	dw Subanimation38
+	dw Subanimation39
+	dw Subanimation3a
+	dw Subanimation3b
+	dw Subanimation3c
+	dw Subanimation3d
+	dw Subanimation3e
+	dw Subanimation3f
+	dw Subanimation40
+	dw Subanimation41
+	dw Subanimation42
+	dw Subanimation43
+	dw Subanimation44
+	dw Subanimation45
+	dw Subanimation46
+	dw Subanimation47
+	dw Subanimation48
+	dw Subanimation49
+	dw Subanimation4a
+	dw Subanimation4b
+	dw Subanimation4c
+	dw Subanimation4d
+	dw Subanimation4e
+	dw Subanimation4f
+	dw Subanimation50
+	dw Subanimation51
+	dw Subanimation52
+	dw Subanimation53
+	dw Subanimation54
+	dw Subanimation55
+
+Subanimation04: ; 7a819 (1e:6819)
+	db $43
+	db $02,$1a,$00
+	db $02,$10,$00
+	db $02,$03,$00
+
+Subanimation05: ; 7a823 (1e:6823)
+	db $41
+	db $02,$10,$00
+
+Subanimation08: ; 7a827 (1e:6827)
+	db $0b
+	db $03,$30,$00
+	db $03,$44,$00
+	db $03,$94,$00
+	db $03,$60,$00
+	db $03,$76,$00
+	db $03,$9f,$00
+	db $03,$8d,$00
+	db $03,$a0,$00
+	db $03,$1a,$00
+	db $03,$a1,$00
+	db $03,$34,$00
+
+Subanimation07: ; 7a849 (1e:6849)
+	db $0b
+	db $03,$30,$00
+	db $03,$a2,$00
+	db $03,$31,$00
+	db $03,$a3,$00
+	db $03,$32,$00
+	db $03,$a4,$00
+	db $03,$92,$00
+	db $03,$a5,$00
+	db $03,$15,$00
+	db $03,$a6,$00
+	db $03,$34,$00
+
+Subanimation06: ; 7a86b (1e:686b)
+	db $0b
+	db $03,$30,$00
+	db $03,$a2,$00
+	db $03,$93,$00
+	db $03,$61,$00
+	db $03,$73,$00
+	db $03,$a7,$00
+	db $03,$33,$00
+	db $03,$a8,$00
+	db $03,$0e,$00
+	db $03,$a9,$00
+	db $03,$34,$00
+
+Subanimation09: ; 7a88d (1e:688d)
+	db $04
+	db $03,$21,$04
+	db $04,$21,$04
+	db $03,$21,$04
+	db $05,$21,$04
+
+Subanimation0a: ; 7a89a (1e:689a)
+	db $46
+	db $06,$1b,$00
+	db $07,$1b,$00
+	db $08,$36,$00
+	db $09,$36,$00
+	db $0a,$15,$00
+	db $0a,$15,$00
+
+Subanimation0b: ; 7a8ad (1e:68ad)
+	db $04
+	db $01,$2d,$00
+	db $03,$2f,$00
+	db $03,$35,$00
+	db $03,$4d,$00
+
+Subanimation55: ; 7a8ba (1e:68ba)
+	db $41
+	db $01,$9d,$00
+
+Subanimation11: ; 7a8be (1e:68be)
+	db $4c
+	db $0b,$26,$00
+	db $0c,$26,$00
+	db $0b,$26,$00
+	db $0c,$26,$00
+	db $0b,$28,$00
+	db $0c,$28,$00
+	db $0b,$28,$00
+	db $0c,$28,$00
+	db $0b,$27,$00
+	db $0c,$27,$00
+	db $0b,$27,$00
+	db $0c,$27,$00
+
+Subanimation2b: ; 7a8e3 (1e:68e3)
+	db $4b
+	db $0d,$03,$03
+	db $0e,$03,$03
+	db $0f,$03,$00
+	db $0d,$11,$00
+	db $0d,$11,$00
+	db $0d,$37,$00
+	db $0d,$37,$00
+	db $10,$21,$00
+	db $10,$21,$00
+	db $11,$1b,$00
+	db $11,$1b,$00
+
+Subanimation2c: ; 7a905 (1e:6905)
+	db $4c
+	db $12,$01,$00
+	db $12,$0f,$00
+	db $12,$1b,$00
+	db $12,$25,$00
+	db $13,$38,$00
+	db $13,$38,$02
+	db $14,$38,$00
+	db $14,$38,$02
+	db $15,$38,$00
+	db $15,$38,$00
+	db $16,$38,$00
+	db $16,$38,$00
+
+Subanimation12: ; 7a92a (1e:692a)
+	db $69
+	db $17,$30,$00
+	db $17,$39,$00
+	db $17,$3a,$00
+	db $17,$3b,$00
+	db $17,$3c,$00
+	db $17,$3d,$00
+	db $17,$3e,$00
+	db $17,$3f,$00
+	db $17,$1f,$00
+
+Subanimation00: ; 7a946 (1e:6946)
+	db $41
+	db $01,$17,$00
+
+Subanimation01: ; 7a94a (1e:694a)
+	db $42
+	db $01,$0f,$00
+	db $01,$1d,$00
+
+Subanimation02: ; 7a951 (1e:6951)
+	db $43
+	db $01,$12,$00
+	db $01,$15,$00
+	db $01,$1c,$00
+
+Subanimation03: ; 7a95b (1e:695b)
+	db $44
+	db $01,$0b,$00
+	db $01,$11,$00
+	db $01,$18,$00
+	db $01,$1d,$00
+
+Subanimation0c: ; 7a968 (1e:6968)
+	db $43
+	db $0c,$20,$00
+	db $0c,$21,$00
+	db $0c,$23,$00
+
+Subanimation0d: ; 7a972 (1e:6972)
+	db $46
+	db $0c,$20,$02
+	db $0c,$15,$00
+	db $0c,$21,$02
+	db $0c,$17,$00
+	db $0c,$23,$02
+	db $0c,$19,$00
+
+Subanimation0e: ; 7a985 (1e:6985)
+	db $49
+	db $0c,$20,$02
+	db $0c,$15,$02
+	db $0c,$07,$00
+	db $0c,$21,$02
+	db $0c,$17,$02
+	db $0c,$09,$00
+	db $0c,$23,$02
+	db $0c,$19,$02
+	db $0c,$0c,$00
+
+Subanimation1f: ; 7a9a1 (1e:69a1)
+	db $85
+	db $0c,$30,$03
+	db $0c,$40,$03
+	db $0c,$41,$03
+	db $0c,$42,$03
+	db $0c,$21,$00
+
+Subanimation2e: ; 7a9b1 (1e:69b1)
+	db $2e
+	db $18,$43,$02
+	db $75,$52,$04
+	db $19,$43,$02
+	db $75,$63,$04
+	db $1a,$43,$02
+	db $75,$4d,$04
+	db $1b,$43,$02
+	db $75,$97,$04
+	db $1c,$43,$02
+	db $75,$98,$04
+	db $1d,$43,$02
+	db $75,$58,$04
+	db $1e,$43,$02
+	db $75,$1b,$00
+
+Subanimation2f: ; 7a9dc (1e:69dc)
+	db $44
+	db $1f,$24,$00
+	db $20,$20,$00
+	db $21,$1a,$00
+	db $22,$15,$00
+
+Subanimation30: ; 7a9e9 (1e:69e9)
+	db $52
+	db $23,$00,$02
+	db $23,$02,$02
+	db $23,$04,$00
+	db $23,$07,$02
+	db $23,$02,$02
+	db $23,$04,$00
+	db $23,$0e,$02
+	db $23,$02,$02
+	db $23,$0c,$00
+	db $25,$07,$00
+	db $25,$0e,$00
+	db $25,$15,$00
+	db $24,$24,$02
+	db $23,$1c,$02
+	db $23,$23,$00
+	db $23,$21,$02
+	db $24,$28,$00
+	db $24,$28,$00
+
+Subanimation0f: ; 7aa20 (1e:6a20)
+	db $4c
+	db $26,$0e,$02
+	db $26,$16,$02
+	db $26,$1c,$00
+	db $27,$0e,$02
+	db $27,$16,$02
+	db $27,$1c,$00
+	db $28,$0e,$02
+	db $28,$16,$02
+	db $28,$1c,$00
+	db $29,$0e,$02
+	db $29,$16,$02
+	db $29,$1c,$00
+
+Subanimation16: ; 7aa45 (1e:6a45)
+	db $4c
+	db $2a,$05,$00
+	db $2b,$05,$02
+	db $2b,$0c,$02
+	db $2a,$11,$04
+	db $2b,$11,$02
+	db $2b,$17,$02
+	db $2a,$1b,$04
+	db $2b,$1b,$02
+	db $2b,$20,$02
+	db $2a,$2f,$04
+	db $2c,$00,$02
+	db $2c,$00,$00
+
+Subanimation10: ; 7aa6a (1e:6a6a)
+	db $88
+	db $2d,$44,$00
+	db $2e,$45,$00
+	db $2d,$46,$00
+	db $2e,$47,$00
+	db $2d,$48,$00
+	db $2e,$49,$00
+	db $2d,$2f,$00
+	db $2e,$1a,$00
+
+Subanimation31: ; 7aa83 (1e:6a83)
+	db $2a
+	db $2f,$46,$00
+	db $2f,$4a,$00
+	db $2f,$4b,$00
+	db $2f,$4c,$00
+	db $2f,$4d,$00
+	db $2f,$4e,$00
+	db $2f,$4f,$00
+	db $2f,$50,$00
+	db $2f,$2e,$00
+	db $2f,$51,$00
+
+Subanimation13: ; 7aaa2 (1e:6aa2)
+	db $86
+	db $30,$31,$00
+	db $30,$32,$00
+	db $30,$92,$00
+	db $30,$0e,$00
+	db $30,$0f,$00
+	db $30,$10,$00
+
+Subanimation14: ; 7aab5 (1e:6ab5)
+	db $49
+	db $30,$10,$00
+	db $30,$10,$03
+	db $31,$1c,$04
+	db $31,$21,$04
+	db $31,$26,$00
+	db $30,$10,$02
+	db $31,$1d,$04
+	db $31,$22,$04
+	db $31,$27,$00
+
+Subanimation41: ; 7aad1 (1e:6ad1)
+	db $85
+	db $03,$31,$00
+	db $03,$32,$00
+	db $03,$92,$00
+	db $03,$0e,$00
+	db $03,$10,$00
+
+Subanimation42: ; 7aae1 (1e:6ae1)
+	db $43
+	db $48,$08,$00
+	db $49,$08,$00
+	db $5a,$08,$00
+
+Subanimation15: ; 7aaeb (1e:6aeb)
+	db $22
+	db $35,$52,$00
+	db $35,$53,$00
+
+Subanimation17: ; 7aaf2 (1e:6af2)
+	db $44
+	db $36,$54,$00
+	db $36,$55,$00
+	db $37,$56,$00
+	db $37,$57,$00
+
+Subanimation18: ; 7aaff (1e:6aff)
+	db $a4
+	db $36,$54,$00
+	db $36,$55,$00
+	db $37,$56,$00
+	db $37,$57,$00
+
+Subanimation40: ; 7ab0c (1e:6b0c)
+	db $46
+	db $17,$54,$00
+	db $17,$55,$00
+	db $17,$0e,$00
+	db $17,$56,$00
+	db $17,$57,$00
+	db $17,$13,$00
+
+Subanimation19: ; 7ab1f (1e:6b1f)
+	db $8c
+	db $38,$31,$00
+	db $39,$31,$00
+	db $38,$32,$00
+	db $39,$32,$00
+	db $38,$92,$00
+	db $39,$92,$00
+	db $38,$0e,$00
+	db $39,$0e,$00
+	db $38,$0f,$00
+	db $39,$0f,$00
+	db $38,$10,$00
+	db $39,$10,$00
+
+Subanimation1a: ; 7ab44 (1e:6b44)
+	db $50
+	db $3a,$08,$00
+	db $3b,$08,$00
+	db $3c,$08,$00
+	db $3d,$08,$00
+	db $3e,$08,$00
+	db $3f,$08,$00
+	db $3e,$08,$00
+	db $3f,$08,$00
+	db $3a,$0b,$00
+	db $3b,$0b,$00
+	db $3c,$0b,$00
+	db $3d,$0b,$00
+	db $3e,$0b,$00
+	db $3f,$0b,$00
+	db $3e,$0b,$00
+	db $3f,$0b,$00
+
+Subanimation1b: ; 7ab75 (1e:6b75)
+	db $84
+	db $40,$31,$00
+	db $40,$32,$00
+	db $40,$92,$00
+	db $40,$15,$00
+
+Subanimation1c: ; 7ab82 (1e:6b82)
+	db $43
+	db $41,$58,$00
+	db $41,$59,$00
+	db $41,$21,$00
+
+Subanimation1d: ; 7ab8c (1e:6b8c)
+	db $af
+	db $24,$9a,$00
+	db $23,$1b,$02
+	db $24,$22,$00
+	db $23,$16,$02
+	db $23,$1d,$02
+	db $24,$98,$00
+	db $25,$2c,$04
+	db $25,$2a,$04
+	db $25,$99,$04
+	db $25,$62,$04
+	db $25,$99,$04
+	db $25,$62,$04
+	db $25,$99,$04
+	db $25,$62,$04
+	db $25,$99,$03
+
+Subanimation1e: ; 7abba (1e:6bba)
+	db $01
+	db $25,$75,$00
+
+Subanimation20: ; 7abbe (1e:6bbe)
+	db $42
+	db $42,$07,$00
+	db $43,$07,$00
+
+Subanimation21: ; 7abc5 (1e:6bc5)
+	db $43
+	db $44,$00,$00
+	db $45,$08,$00
+	db $46,$10,$02
+
+Subanimation22: ; 7abcf (1e:6bcf)
+	db $8b
+	db $47,$10,$00
+	db $47,$56,$00
+	db $47,$07,$00
+	db $47,$aa,$00
+	db $47,$ab,$00
+	db $47,$ac,$00
+	db $47,$ad,$00
+	db $47,$ae,$00
+	db $47,$af,$00
+	db $47,$89,$00
+	db $47,$b0,$00
+
+Subanimation2d: ; 7abf1 (1e:6bf1)
+	db $66
+	db $44,$64,$00
+	db $45,$65,$00
+	db $46,$66,$00
+	db $47,$66,$00
+	db $47,$66,$00
+	db $47,$66,$00
+
+Subanimation39: ; 7ac04 (1e:6c04)
+	db $61
+	db $47,$67,$00
+
+Subanimation4e: ; 7ac08 (1e:6c08)
+	db $41
+	db $71,$0f,$03
+
+Subanimation4f: ; 7ac0c (1e:6c0c)
+	db $47
+	db $71,$0f,$00
+	db $71,$08,$00
+	db $71,$01,$00
+	db $71,$95,$00
+	db $72,$95,$00
+	db $73,$95,$00
+	db $74,$95,$00
+
+Subanimation50: ; 7ac22 (1e:6c22)
+	db $48
+	db $74,$95,$00
+	db $73,$95,$00
+	db $72,$95,$00
+	db $71,$95,$00
+	db $71,$01,$00
+	db $71,$08,$00
+	db $71,$0f,$00
+	db $71,$16,$00
+
+Subanimation29: ; 7ac3b (1e:6c3b)
+	db $5d
+	db $48,$0f,$00
+	db $4a,$68,$03
+	db $4b,$2a,$03
+	db $49,$0f,$00
+	db $4a,$68,$03
+	db $4b,$2a,$00
+	db $4c,$6a,$03
+	db $4d,$69,$03
+	db $49,$6b,$00
+	db $4c,$6a,$03
+	db $4d,$69,$00
+	db $4a,$68,$03
+	db $4b,$2a,$03
+	db $49,$6c,$00
+	db $4a,$68,$03
+	db $4b,$2a,$00
+	db $4c,$6a,$03
+	db $4d,$69,$03
+	db $49,$6d,$00
+	db $4c,$6a,$03
+	db $4d,$2a,$00
+	db $4a,$68,$03
+	db $4b,$2a,$03
+	db $49,$0f,$00
+	db $4a,$68,$03
+	db $4b,$2a,$00
+	db $4c,$6a,$03
+	db $4d,$2a,$03
+	db $49,$6b,$00
+
+Subanimation2a: ; 7ac93 (1e:6c93)
+	db $44
+	db $4e,$2b,$00
+	db $4f,$2b,$00
+	db $50,$2b,$00
+	db $50,$2b,$00
+
+Subanimation23: ; 7aca0 (1e:6ca0)
+	db $42
+	db $51,$2d,$00
+	db $51,$6e,$00
+
+Subanimation24: ; 7aca7 (1e:6ca7)
+	db $a2
+	db $51,$2d,$00
+	db $51,$6e,$00
+
+Subanimation25: ; 7acae (1e:6cae)
+	db $62
+	db $52,$71,$00
+	db $52,$72,$00
+
+Subanimation26: ; 7acb5 (1e:6cb5)
+	db $02
+	db $52,$01,$00
+	db $52,$2c,$00
+
+Subanimation3a: ; 7acbc (1e:6cbc)
+	db $63
+	db $53,$71,$00
+	db $53,$7f,$00
+	db $53,$81,$00
+
+Subanimation3b: ; 7acc6 (1e:6cc6)
+	db $03
+	db $53,$01,$00
+	db $53,$15,$00
+	db $53,$2c,$00
+
+Subanimation27: ; 7acd0 (1e:6cd0)
+	db $a2
+	db $54,$01,$00
+	db $54,$2c,$00
+
+Subanimation28: ; 7acd7 (1e:6cd7)
+	db $23
+	db $55,$73,$03
+	db $56,$73,$03
+	db $57,$73,$00
+
+Subanimation32: ; 7ace1 (1e:6ce1)
+	db $63
+	db $47,$74,$00
+	db $47,$43,$00
+	db $47,$75,$00
+
+Subanimation33: ; 7aceb (1e:6ceb)
+	db $26
+	db $58,$76,$00
+	db $34,$76,$00
+	db $58,$76,$00
+	db $34,$76,$00
+	db $58,$76,$00
+	db $34,$76,$00
+
+Subanimation3c: ; 7acfe (1e:6cfe)
+	db $67
+	db $59,$79,$03
+	db $59,$7b,$03
+	db $59,$77,$03
+	db $59,$7a,$03
+	db $59,$78,$03
+	db $59,$7c,$03
+	db $59,$76,$00
+
+Subanimation3d: ; 7ad14 (1e:6d14)
+	db $08
+	db $3a,$4d,$00
+	db $3b,$4d,$00
+	db $3c,$4d,$00
+	db $3d,$4d,$00
+	db $3e,$4d,$00
+	db $3f,$4d,$00
+	db $3e,$4d,$00
+	db $3f,$4d,$00
+
+Subanimation34: ; 7ad2d (1e:6d2d)
+	db $35
+	db $48,$7d,$00
+	db $49,$7d,$00
+	db $5a,$7d,$00
+	db $48,$30,$00
+	db $49,$30,$00
+	db $5a,$30,$00
+	db $48,$7e,$00
+	db $49,$7e,$00
+	db $5a,$7e,$00
+	db $48,$7f,$00
+	db $49,$7f,$00
+	db $5a,$7f,$00
+	db $48,$80,$00
+	db $49,$80,$00
+	db $5a,$80,$00
+	db $48,$81,$00
+	db $49,$81,$00
+	db $5a,$81,$00
+	db $48,$82,$00
+	db $49,$82,$00
+	db $5a,$82,$00
+
+Subanimation35: ; 7ad6d (1e:6d6d)
+	db $24
+	db $5b,$83,$03
+	db $5c,$84,$03
+	db $5d,$85,$03
+	db $5e,$09,$00
+
+Subanimation36: ; 7ad7a (1e:6d7a)
+	db $48
+	db $5f,$2a,$00
+	db $5f,$00,$00
+	db $60,$2a,$00
+	db $60,$00,$00
+	db $61,$2a,$00
+	db $61,$00,$00
+	db $62,$2a,$00
+	db $62,$00,$00
+
+Subanimation37: ; 7ad93 (1e:6d93)
+	db $2a
+	db $63,$89,$00
+	db $64,$75,$00
+	db $63,$76,$00
+	db $65,$0d,$00
+	db $65,$86,$00
+	db $65,$12,$00
+	db $65,$87,$00
+	db $65,$17,$00
+	db $65,$88,$00
+	db $65,$1a,$00
+
+Subanimation38: ; 7adb2 (1e:6db2)
+	db $50
+	db $66,$8a,$00
+	db $66,$33,$00
+	db $66,$2e,$00
+	db $67,$24,$03
+	db $66,$01,$04
+	db $66,$10,$04
+	db $66,$1d,$04
+	db $67,$28,$03
+	db $66,$2a,$04
+	db $66,$0e,$04
+	db $66,$1b,$04
+	db $67,$26,$03
+	db $66,$03,$04
+	db $66,$12,$04
+	db $66,$1e,$04
+	db $67,$29,$00
+
+Subanimation3e: ; 7ade3 (1e:6de3)
+	db $92
+	db $02,$31,$00
+	db $34,$31,$00
+	db $02,$31,$00
+	db $02,$32,$00
+	db $34,$32,$00
+	db $02,$32,$00
+	db $02,$92,$00
+	db $34,$92,$00
+	db $02,$92,$00
+	db $02,$0e,$00
+	db $34,$0e,$00
+	db $02,$0e,$00
+	db $02,$0f,$00
+	db $34,$0f,$00
+	db $02,$0f,$00
+	db $02,$10,$00
+	db $34,$10,$00
+	db $02,$10,$00
+
+Subanimation3f: ; 7ae1a (1e:6e1a)
+	db $72
+	db $68,$4b,$00
+	db $68,$8c,$00
+	db $68,$20,$00
+	db $68,$1c,$00
+	db $68,$19,$00
+	db $68,$14,$00
+	db $68,$76,$00
+	db $68,$8d,$00
+	db $68,$15,$00
+	db $68,$10,$00
+	db $68,$0c,$00
+	db $68,$06,$00
+	db $68,$8e,$00
+	db $68,$8f,$00
+	db $68,$90,$00
+	db $68,$26,$00
+	db $68,$23,$00
+	db $68,$1f,$00
+
+Subanimation44: ; 7ae51 (1e:6e51)
+	db $2c
+	db $69,$4b,$00
+	db $69,$8c,$00
+	db $69,$20,$00
+	db $69,$1c,$00
+	db $69,$19,$00
+	db $69,$14,$00
+	db $69,$76,$00
+	db $69,$8d,$00
+	db $69,$15,$00
+	db $69,$10,$00
+	db $69,$0c,$00
+	db $69,$06,$00
+
+Subanimation43: ; 7ae76 (1e:6e76)
+	db $a3
+	db $6a,$07,$00
+	db $6b,$0f,$00
+	db $6c,$17,$00
+
+Subanimation45: ; 7ae80 (1e:6e80)
+	db $24
+	db $6d,$8b,$00
+	db $6d,$84,$00
+	db $6d,$63,$00
+	db $6d,$8c,$00
+
+Subanimation46: ; 7ae8d (1e:6e8d)
+	db $26
+	db $6d,$8b,$00
+	db $6d,$84,$00
+	db $6d,$63,$00
+	db $6d,$8c,$00
+	db $6d,$0a,$00
+	db $6d,$89,$00
+
+Subanimation47: ; 7aea0 (1e:6ea0)
+	db $23
+	db $06,$82,$00
+	db $07,$82,$00
+	db $08,$96,$00
+
+Subanimation48: ; 7aeaa (1e:6eaa)
+	db $06
+	db $03,$41,$04
+	db $03,$48,$04
+	db $04,$48,$04
+	db $03,$48,$04
+	db $05,$48,$04
+	db $03,$48,$03
+
+Subanimation49: ; 7aebd (1e:6ebd)
+	db $04
+	db $04,$48,$04
+	db $03,$48,$04
+	db $05,$48,$04
+	db $03,$48,$03
+
+Subanimation4a: ; 7aeca (1e:6eca)
+	db $01
+	db $04,$84,$03
+
+Subanimation4b: ; 7aece (1e:6ece)
+	db $03
+	db $06,$72,$00
+	db $07,$72,$00
+	db $08,$72,$00
+
+Subanimation4c: ; 7aed8 (1e:6ed8)
+	db $68
+	db $6f,$30,$00
+	db $6e,$30,$00
+	db $70,$30,$00
+	db $6e,$30,$00
+	db $6f,$30,$00
+	db $6e,$30,$00
+	db $70,$30,$00
+	db $6e,$30,$00
+
+Subanimation4d: ; 7aef1 (1e:6ef1)
+	db $26
+	db $32,$4b,$00
+	db $33,$4f,$00
+	db $32,$20,$00
+	db $33,$16,$00
+	db $32,$19,$00
+	db $33,$0d,$00
+
+Subanimation51: ; 7af04 (1e:6f04)
+	db $a6
+	db $76,$1b,$00
+	db $34,$1b,$00
+	db $76,$1b,$00
+	db $34,$1b,$00
+	db $76,$1b,$00
+	db $34,$1b,$00
+
+Subanimation52: ; 7af17 (1e:6f17)
+	db $47
+	db $77,$25,$00
+	db $77,$9b,$00
+	db $77,$1a,$00
+	db $77,$9c,$00
+	db $77,$2f,$00
+	db $77,$50,$00
+	db $77,$8c,$00
+
+Subanimation53: ; 7af2d (1e:6f2d)
+	db $0c
+	db $78,$30,$00
+	db $78,$a2,$00
+	db $78,$93,$00
+	db $78,$61,$00
+	db $78,$73,$00
+	db $78,$a7,$00
+	db $78,$33,$00
+	db $78,$a8,$00
+	db $78,$0e,$00
+	db $78,$a9,$00
+	db $78,$34,$00
+	db $01,$9e,$00
+
+Subanimation54: ; 7af52 (1e:6f52)
+	db $0b
+	db $79,$30,$00
+	db $79,$a2,$00
+	db $79,$93,$00
+	db $79,$61,$00
+	db $79,$73,$00
+	db $79,$a7,$00
+	db $79,$33,$00
+	db $79,$a8,$00
+	db $79,$0e,$00
+	db $79,$a9,$00
+	db $79,$34,$00
+
+FrameBlockPointers: ; 7af74 (1e:6f74)
+	dw FrameBlock00
+	dw FrameBlock01
+	dw FrameBlock02
+	dw FrameBlock03
+	dw FrameBlock04
+	dw FrameBlock05
+	dw FrameBlock06
+	dw FrameBlock07
+	dw FrameBlock08
+	dw FrameBlock09
+	dw FrameBlock0a
+	dw FrameBlock0b
+	dw FrameBlock0c
+	dw FrameBlock0d
+	dw FrameBlock0e
+	dw FrameBlock0f
+	dw FrameBlock10
+	dw FrameBlock11
+	dw FrameBlock12
+	dw FrameBlock13
+	dw FrameBlock14
+	dw FrameBlock15
+	dw FrameBlock16
+	dw FrameBlock17
+	dw FrameBlock18
+	dw FrameBlock19
+	dw FrameBlock1a
+	dw FrameBlock1b
+	dw FrameBlock1c
+	dw FrameBlock1d
+	dw FrameBlock1e
+	dw FrameBlock1f
+	dw FrameBlock20
+	dw FrameBlock21
+	dw FrameBlock22
+	dw FrameBlock23
+	dw FrameBlock24
+	dw FrameBlock25
+	dw FrameBlock26
+	dw FrameBlock27
+	dw FrameBlock28
+	dw FrameBlock29
+	dw FrameBlock2a
+	dw FrameBlock2b
+	dw FrameBlock2c
+	dw FrameBlock2d
+	dw FrameBlock2e
+	dw FrameBlock2f
+	dw FrameBlock30
+	dw FrameBlock31
+	dw FrameBlock32
+	dw FrameBlock33
+	dw FrameBlock34
+	dw FrameBlock35
+	dw FrameBlock36
+	dw FrameBlock37
+	dw FrameBlock38
+	dw FrameBlock39
+	dw FrameBlock3a
+	dw FrameBlock3b
+	dw FrameBlock3c
+	dw FrameBlock3d
+	dw FrameBlock3e
+	dw FrameBlock3f
+	dw FrameBlock40
+	dw FrameBlock41
+	dw FrameBlock42
+	dw FrameBlock43
+	dw FrameBlock44
+	dw FrameBlock45
+	dw FrameBlock46
+	dw FrameBlock47
+	dw FrameBlock48
+	dw FrameBlock49
+	dw FrameBlock4a
+	dw FrameBlock4b
+	dw FrameBlock4c
+	dw FrameBlock4d
+	dw FrameBlock4e
+	dw FrameBlock4f
+	dw FrameBlock50
+	dw FrameBlock51
+	dw FrameBlock52
+	dw FrameBlock53
+	dw FrameBlock54
+	dw FrameBlock55
+	dw FrameBlock56
+	dw FrameBlock57
+	dw FrameBlock58
+	dw FrameBlock59
+	dw FrameBlock5a
+	dw FrameBlock5b
+	dw FrameBlock5c
+	dw FrameBlock5d
+	dw FrameBlock5e
+	dw FrameBlock5f
+	dw FrameBlock60
+	dw FrameBlock61
+	dw FrameBlock62
+	dw FrameBlock63
+	dw FrameBlock64
+	dw FrameBlock65
+	dw FrameBlock66
+	dw FrameBlock67
+	dw FrameBlock68
+	dw FrameBlock69
+	dw FrameBlock6a
+	dw FrameBlock6b
+	dw FrameBlock6c
+	dw FrameBlock6d
+	dw FrameBlock6e
+	dw FrameBlock6f
+	dw FrameBlock70
+	dw FrameBlock71
+	dw FrameBlock72
+	dw FrameBlock73
+	dw FrameBlock74
+	dw FrameBlock75
+	dw FrameBlock76
+	dw FrameBlock77
+	dw FrameBlock78
+	dw FrameBlock79
+
+FrameBlock01: ; 7b068 (1e:7068)
+	db $09
+	db $00,$00,$2c,$00
+	db $00,$08,$2d,$00
+	db $00,$10,$2c,$20
+	db $08,$00,$3c,$00
+	db $08,$08,$3d,$00
+	db $08,$10,$3c,$20
+	db $10,$00,$2c,$40
+	db $10,$08,$2d,$40
+	db $10,$10,$2c,$60
+
+FrameBlock02: ; 7b08d (1e:708d)
+	db $10
+	db $00,$00,$20,$00
+	db $00,$08,$21,$00
+	db $00,$10,$21,$20
+	db $00,$18,$20,$20
+	db $08,$00,$30,$00
+	db $08,$08,$31,$00
+	db $08,$10,$31,$20
+	db $08,$18,$30,$20
+	db $10,$00,$30,$40
+	db $10,$08,$31,$40
+	db $10,$10,$31,$60
+	db $10,$18,$30,$60
+	db $18,$00,$20,$40
+	db $18,$08,$21,$40
+	db $18,$10,$21,$60
+	db $18,$18,$20,$60
+
+FrameBlock03: ; 7b0ce (1e:70ce)
+	db $04
+	db $00,$00,$02,$00
+	db $00,$08,$02,$20
+	db $08,$00,$12,$00
+	db $08,$08,$12,$20
+
+FrameBlock04: ; 7b0df (1e:70df)
+	db $04
+	db $00,$00,$06,$00
+	db $00,$08,$07,$00
+	db $08,$00,$16,$00
+	db $08,$08,$17,$00
+
+FrameBlock05: ; 7b0f0 (1e:70f0)
+	db $04
+	db $00,$00,$07,$20
+	db $00,$08,$06,$20
+	db $08,$00,$17,$20
+	db $08,$08,$16,$20
+
+FrameBlock06: ; 7b101 (1e:7101)
+	db $0c
+	db $00,$08,$23,$00
+	db $08,$00,$32,$00
+	db $08,$08,$33,$00
+	db $00,$10,$23,$20
+	db $08,$10,$33,$20
+	db $08,$18,$32,$20
+	db $10,$00,$32,$40
+	db $10,$08,$33,$40
+	db $18,$08,$23,$40
+	db $10,$10,$33,$60
+	db $10,$18,$32,$60
+	db $18,$10,$23,$60
+
+FrameBlock07: ; 7b132 (1e:7132)
+	db $10
+	db $00,$00,$20,$00
+	db $00,$08,$21,$00
+	db $08,$00,$30,$00
+	db $08,$08,$31,$00
+	db $00,$10,$21,$20
+	db $00,$18,$20,$20
+	db $08,$10,$31,$20
+	db $08,$18,$30,$20
+	db $10,$00,$30,$40
+	db $10,$08,$31,$40
+	db $18,$00,$20,$40
+	db $18,$08,$21,$40
+	db $10,$10,$31,$60
+	db $10,$18,$30,$60
+	db $18,$10,$21,$60
+	db $18,$18,$20,$60
+
+FrameBlock08: ; 7b173 (1e:7173)
+	db $10
+	db $00,$00,$20,$00
+	db $00,$08,$21,$00
+	db $08,$00,$30,$00
+	db $08,$08,$31,$00
+	db $00,$18,$21,$20
+	db $00,$20,$20,$20
+	db $08,$18,$31,$20
+	db $08,$20,$30,$20
+	db $18,$00,$30,$40
+	db $18,$08,$31,$40
+	db $20,$00,$20,$40
+	db $20,$08,$21,$40
+	db $18,$18,$31,$60
+	db $18,$20,$30,$60
+	db $20,$18,$21,$60
+	db $20,$20,$20,$60
+
+FrameBlock09: ; 7b1b4 (1e:71b4)
+	db $0c
+	db $00,$00,$24,$00
+	db $00,$08,$25,$00
+	db $08,$00,$34,$00
+	db $00,$18,$25,$20
+	db $00,$20,$24,$20
+	db $08,$20,$34,$20
+	db $18,$00,$34,$40
+	db $20,$00,$24,$40
+	db $20,$08,$25,$40
+	db $18,$20,$34,$60
+	db $20,$18,$25,$60
+	db $20,$20,$24,$60
+
+FrameBlock0a: ; 7b1e5 (1e:71e5)
+	db $0c
+	db $00,$00,$24,$00
+	db $00,$08,$25,$00
+	db $08,$00,$34,$00
+	db $00,$20,$25,$20
+	db $00,$28,$24,$20
+	db $08,$28,$34,$20
+	db $20,$00,$34,$40
+	db $28,$00,$24,$40
+	db $28,$08,$25,$40
+	db $20,$28,$34,$60
+	db $28,$20,$25,$60
+	db $28,$28,$24,$60
+
+FrameBlock0b: ; 7b216 (1e:7216)
+	db $04
+	db $00,$00,$05,$00
+	db $00,$08,$05,$20
+	db $08,$00,$15,$00
+	db $08,$08,$15,$20
+
+FrameBlock0c: ; 7b227 (1e:7227)
+	db $04
+	db $00,$00,$04,$00
+	db $00,$08,$04,$20
+	db $08,$00,$14,$00
+	db $08,$08,$14,$20
+
+FrameBlock0d: ; 7b238 (1e:7238)
+	db $08
+	db $00,$00,$0c,$00
+	db $00,$08,$0d,$00
+	db $08,$00,$1c,$00
+	db $08,$08,$1d,$00
+	db $10,$00,$1d,$60
+	db $10,$08,$1c,$60
+	db $18,$00,$0d,$60
+	db $18,$08,$0c,$60
+
+FrameBlock0e: ; 7b259 (1e:7259)
+	db $04
+	db $20,$00,$0c,$00
+	db $20,$08,$0d,$00
+	db $28,$00,$1c,$00
+	db $28,$08,$1d,$00
+
+FrameBlock0f: ; 7b26a (1e:726a)
+	db $04
+	db $30,$00,$1d,$60
+	db $30,$08,$1c,$60
+	db $38,$00,$0d,$60
+	db $38,$08,$0c,$60
+
+FrameBlock10: ; 7b27b (1e:727b)
+	db $08
+	db $00,$00,$0e,$00
+	db $00,$08,$0f,$00
+	db $08,$00,$1e,$00
+	db $08,$08,$1f,$00
+	db $00,$10,$0f,$20
+	db $00,$18,$0e,$20
+	db $08,$10,$1f,$20
+	db $08,$18,$1e,$20
+
+FrameBlock11: ; 7b29c (1e:729c)
+	db $08
+	db $00,$00,$0e,$00
+	db $00,$08,$0f,$00
+	db $08,$00,$1e,$00
+	db $08,$08,$1f,$00
+	db $00,$20,$0f,$20
+	db $00,$28,$0e,$20
+	db $08,$20,$1f,$20
+	db $08,$28,$1e,$20
+
+FrameBlock12: ; 7b2bd (1e:72bd)
+	db $03
+	db $00,$00,$37,$00
+	db $08,$10,$37,$00
+	db $00,$20,$37,$00
+
+FrameBlock13: ; 7b2ca (1e:72ca)
+	db $04
+	db $00,$00,$36,$00
+	db $00,$08,$36,$20
+	db $08,$00,$36,$40
+	db $08,$08,$36,$60
+
+FrameBlock14: ; 7b2db (1e:72db)
+	db $08
+	db $00,$10,$28,$00
+	db $00,$18,$28,$20
+	db $08,$10,$38,$00
+	db $08,$18,$38,$20
+	db $00,$20,$36,$00
+	db $00,$28,$36,$20
+	db $08,$20,$36,$40
+	db $08,$28,$36,$60
+
+FrameBlock15: ; 7b2fc (1e:72fc)
+	db $0c
+	db $00,$00,$28,$00
+	db $00,$08,$28,$20
+	db $08,$00,$38,$00
+	db $08,$08,$38,$20
+	db $00,$10,$29,$00
+	db $00,$18,$29,$20
+	db $08,$10,$39,$00
+	db $08,$18,$39,$20
+	db $00,$20,$28,$00
+	db $00,$28,$28,$20
+	db $08,$20,$38,$00
+	db $08,$28,$38,$20
+
+FrameBlock16: ; 7b32d (1e:732d)
+	db $08
+	db $00,$00,$29,$00
+	db $00,$08,$29,$20
+	db $08,$00,$39,$00
+	db $08,$08,$39,$20
+	db $00,$20,$29,$00
+	db $00,$28,$29,$20
+	db $08,$20,$39,$00
+	db $08,$28,$39,$20
+
+FrameBlock17: ; 7b34e (1e:734e)
+	db $04
+	db $00,$00,$08,$00
+	db $00,$08,$09,$00
+	db $08,$00,$18,$00
+	db $08,$08,$19,$00
+
+FrameBlock18: ; 7b35f (1e:735f)
+	db $01
+	db $18,$00,$45,$60
+
+FrameBlock19: ; 7b364 (1e:7364)
+	db $02
+	db $18,$08,$45,$00
+	db $10,$08,$46,$60
+
+FrameBlock1a: ; 7b36d (1e:736d)
+	db $02
+	db $10,$10,$45,$60
+	db $18,$10,$46,$00
+
+FrameBlock1b: ; 7b376 (1e:7376)
+	db $02
+	db $10,$18,$45,$00
+	db $08,$18,$46,$60
+
+FrameBlock1c: ; 7b37f (1e:737f)
+	db $02
+	db $08,$20,$45,$60
+	db $10,$20,$46,$00
+
+FrameBlock1d: ; 7b388 (1e:7388)
+	db $02
+	db $08,$28,$45,$00
+	db $00,$28,$46,$60
+
+FrameBlock1e: ; 7b391 (1e:7391)
+	db $02
+	db $00,$30,$45,$60
+	db $08,$30,$46,$00
+
+FrameBlock75: ; 7b39a (1e:739a)
+	db $04
+	db $00,$00,$43,$00
+	db $00,$08,$43,$20
+	db $08,$00,$22,$00
+	db $08,$08,$43,$60
+
+FrameBlock1f: ; 7b3ab (1e:73ab)
+	db $02
+	db $00,$00,$03,$00
+	db $00,$30,$03,$20
+
+FrameBlock20: ; 7b3b4 (1e:73b4)
+	db $06
+	db $00,$00,$03,$00
+	db $00,$30,$03,$20
+	db $08,$08,$03,$00
+	db $08,$28,$03,$20
+	db $08,$00,$13,$00
+	db $08,$30,$13,$20
+
+FrameBlock21: ; 7b3cd (1e:73cd)
+	db $0c
+	db $00,$00,$03,$00
+	db $00,$30,$03,$20
+	db $08,$08,$03,$00
+	db $08,$28,$03,$20
+	db $08,$00,$13,$00
+	db $08,$30,$13,$20
+	db $10,$10,$03,$00
+	db $10,$20,$03,$20
+	db $10,$08,$13,$00
+	db $10,$28,$13,$20
+	db $10,$00,$03,$00
+	db $10,$30,$03,$20
+
+FrameBlock22: ; 7b3fe (1e:73fe)
+	db $13
+	db $00,$00,$03,$00
+	db $08,$00,$13,$00
+	db $10,$00,$03,$00
+	db $18,$00,$13,$00
+	db $08,$08,$03,$00
+	db $10,$08,$13,$00
+	db $18,$08,$03,$00
+	db $10,$10,$03,$00
+	db $18,$10,$13,$00
+	db $18,$18,$03,$00
+	db $10,$20,$03,$20
+	db $18,$20,$13,$20
+	db $08,$28,$03,$20
+	db $10,$28,$13,$20
+	db $18,$28,$03,$20
+	db $00,$30,$03,$20
+	db $08,$30,$13,$20
+	db $10,$30,$03,$20
+	db $18,$30,$13,$20
+
+FrameBlock23: ; 7b44b (1e:744b)
+	db $04
+	db $00,$00,$0a,$00
+	db $00,$08,$0b,$00
+	db $08,$00,$1a,$00
+	db $08,$08,$1b,$00
+
+FrameBlock24: ; 7b45c (1e:745c)
+	db $02
+	db $08,$00,$0a,$00
+	db $08,$08,$0b,$00
+
+FrameBlock25: ; 7b465 (1e:7465)
+	db $0c
+	db $10,$00,$0a,$00
+	db $10,$08,$0b,$00
+	db $18,$00,$1a,$00
+	db $18,$08,$1b,$00
+	db $00,$10,$0a,$00
+	db $00,$18,$0b,$00
+	db $08,$10,$1a,$00
+	db $08,$18,$1b,$00
+	db $08,$20,$0a,$00
+	db $08,$28,$0b,$00
+	db $10,$20,$1a,$00
+	db $10,$28,$1b,$00
+
+FrameBlock26: ; 7b496 (1e:7496)
+	db $04
+	db $00,$10,$44,$00
+	db $00,$18,$44,$20
+	db $08,$10,$44,$40
+	db $08,$18,$44,$60
+
+FrameBlock27: ; 7b4a7 (1e:74a7)
+	db $05
+	db $08,$08,$44,$00
+	db $08,$10,$44,$20
+	db $10,$08,$44,$40
+	db $10,$10,$44,$60
+	db $00,$18,$47,$00
+
+FrameBlock28: ; 7b4bc (1e:74bc)
+	db $06
+	db $10,$00,$44,$00
+	db $10,$08,$44,$20
+	db $18,$00,$44,$40
+	db $18,$08,$44,$60
+	db $08,$10,$47,$00
+	db $02,$16,$47,$00
+
+FrameBlock29: ; 7b4d5 (1e:74d5)
+	db $04
+	db $18,$00,$47,$00
+	db $12,$06,$47,$00
+	db $0c,$0c,$47,$00
+	db $06,$12,$47,$00
+
+FrameBlock2a: ; 7b4e6 (1e:74e6)
+	db $04
+	db $00,$00,$44,$00
+	db $00,$08,$44,$20
+	db $08,$00,$44,$40
+	db $08,$08,$44,$60
+
+FrameBlock2b: ; 7b4f7 (1e:74f7)
+	db $02
+	db $06,$02,$47,$00
+	db $00,$08,$47,$00
+
+FrameBlock2c: ; 7b500 (1e:7500)
+	db $01
+	db $a0,$00,$4d,$00
+
+FrameBlock2d: ; 7b505 (1e:7505)
+	db $08
+	db $00,$00,$26,$00
+	db $00,$08,$27,$00
+	db $08,$00,$36,$00
+	db $08,$08,$37,$00
+	db $10,$00,$28,$00
+	db $10,$08,$29,$00
+	db $18,$00,$38,$00
+	db $18,$08,$39,$00
+
+FrameBlock2e: ; 7b526 (1e:7526)
+	db $08
+	db $00,$00,$27,$20
+	db $00,$08,$26,$20
+	db $08,$00,$37,$20
+	db $08,$08,$36,$20
+	db $10,$00,$29,$20
+	db $10,$08,$28,$20
+	db $18,$00,$39,$20
+	db $18,$08,$38,$20
+
+FrameBlock2f: ; 7b547 (1e:7547)
+	db $04
+	db $00,$00,$0c,$00
+	db $00,$08,$0d,$00
+	db $08,$00,$0c,$40
+	db $08,$08,$0d,$40
+
+FrameBlock30: ; 7b558 (1e:7558)
+	db $04
+	db $00,$00,$44,$00
+	db $00,$08,$44,$20
+	db $08,$00,$44,$40
+	db $08,$08,$44,$60
+
+FrameBlock31: ; 7b569 (1e:7569)
+	db $01
+	db $00,$00,$45,$00
+
+FrameBlock32: ; 7b56e (1e:756e)
+	db $07
+	db $00,$00,$4d,$00
+	db $00,$08,$2f,$00
+	db $00,$10,$4d,$20
+	db $08,$00,$4e,$00
+	db $08,$08,$07,$00
+	db $08,$10,$4e,$20
+	db $10,$08,$3f,$00
+
+FrameBlock33: ; 7b58b (1e:758b)
+	db $07
+	db $00,$08,$3f,$40
+	db $08,$00,$4e,$40
+	db $08,$08,$07,$40
+	db $08,$10,$4e,$60
+	db $10,$00,$4d,$40
+	db $10,$08,$2f,$40
+	db $10,$10,$4d,$60
+
+FrameBlock34: ; 7b5a8 (1e:75a8)
+	db $01
+	db $a0,$00,$00,$10
+
+FrameBlock35: ; 7b5ad (1e:75ad)
+	db $06
+	db $00,$00,$2a,$00
+	db $00,$08,$2b,$00
+	db $08,$00,$3a,$00
+	db $10,$00,$3a,$40
+	db $18,$00,$2a,$40
+	db $18,$08,$2b,$40
+
+FrameBlock36: ; 7b5c6 (1e:75c6)
+	db $04
+	db $00,$00,$00,$00
+	db $00,$08,$01,$00
+	db $08,$00,$10,$00
+	db $08,$08,$11,$00
+
+FrameBlock37: ; 7b5d7 (1e:75d7)
+	db $04
+	db $00,$00,$01,$a0
+	db $00,$08,$00,$a0
+	db $08,$00,$11,$a0
+	db $08,$08,$10,$a0
+
+FrameBlock38: ; 7b5e8 (1e:75e8)
+	db $04
+	db $00,$00,$0a,$00
+	db $00,$08,$0b,$00
+	db $08,$00,$1a,$00
+	db $08,$08,$1b,$00
+
+FrameBlock39: ; 7b5f9 (1e:75f9)
+	db $04
+	db $00,$00,$0b,$20
+	db $00,$08,$0a,$20
+	db $08,$00,$1b,$20
+	db $08,$08,$1a,$20
+
+FrameBlock3a: ; 7b60a (1e:760a)
+	db $04
+	db $20,$00,$05,$00
+	db $20,$08,$05,$20
+	db $28,$00,$15,$00
+	db $28,$08,$15,$20
+
+FrameBlock3b: ; 7b61b (1e:761b)
+	db $05
+	db $18,$00,$04,$00
+	db $18,$08,$04,$20
+	db $20,$00,$14,$00
+	db $20,$08,$14,$20
+	db $28,$04,$41,$00
+
+FrameBlock3c: ; 7b630 (1e:7630)
+	db $06
+	db $10,$00,$05,$00
+	db $10,$08,$05,$20
+	db $18,$00,$15,$00
+	db $18,$08,$15,$20
+	db $20,$04,$42,$00
+	db $28,$04,$42,$00
+
+FrameBlock3d: ; 7b649 (1e:7649)
+	db $07
+	db $08,$00,$04,$00
+	db $08,$08,$04,$20
+	db $10,$00,$14,$00
+	db $10,$08,$14,$20
+	db $18,$04,$41,$00
+	db $20,$04,$41,$00
+	db $28,$04,$41,$00
+
+FrameBlock3e: ; 7b666 (1e:7666)
+	db $08
+	db $00,$00,$05,$00
+	db $00,$08,$05,$20
+	db $08,$00,$15,$00
+	db $08,$08,$15,$20
+	db $10,$04,$42,$00
+	db $18,$04,$42,$00
+	db $20,$04,$42,$00
+	db $28,$04,$42,$00
+
+FrameBlock3f: ; 7b687 (1e:7687)
+	db $08
+	db $00,$00,$04,$00
+	db $00,$08,$04,$20
+	db $08,$00,$14,$00
+	db $08,$08,$14,$20
+	db $10,$04,$41,$00
+	db $18,$04,$41,$00
+	db $20,$04,$41,$00
+	db $28,$04,$41,$00
+
+FrameBlock40: ; 7b6a8 (1e:76a8)
+	db $03
+	db $00,$00,$3d,$00
+	db $00,$08,$3d,$00
+	db $08,$08,$3d,$00
+
+FrameBlock41: ; 7b6b5 (1e:76b5)
+	db $04
+	db $00,$00,$06,$00
+	db $00,$08,$06,$20
+	db $08,$00,$16,$00
+	db $08,$08,$17,$00
+
+FrameBlock42: ; 7b6c6 (1e:76c6)
+	db $0b
+	db $00,$10,$42,$00
+	db $08,$00,$42,$00
+	db $08,$08,$42,$00
+	db $08,$10,$42,$00
+	db $08,$18,$42,$00
+	db $08,$20,$42,$00
+	db $10,$10,$42,$00
+	db $18,$08,$42,$00
+	db $18,$18,$42,$00
+	db $20,$00,$42,$00
+	db $20,$20,$42,$00
+
+FrameBlock43: ; 7b6f3 (1e:76f3)
+	db $0b
+	db $00,$10,$41,$00
+	db $08,$00,$41,$00
+	db $08,$08,$41,$00
+	db $08,$10,$41,$00
+	db $08,$18,$41,$00
+	db $08,$20,$41,$00
+	db $10,$10,$41,$00
+	db $18,$08,$41,$00
+	db $18,$18,$41,$00
+	db $20,$00,$41,$00
+	db $20,$20,$41,$00
+
+FrameBlock44: ; 7b720 (1e:7720)
+	db $04
+	db $00,$00,$49,$00
+	db $00,$28,$49,$00
+	db $28,$00,$49,$00
+	db $28,$28,$49,$00
+
+FrameBlock45: ; 7b731 (1e:7731)
+	db $04
+	db $00,$00,$49,$00
+	db $00,$18,$49,$00
+	db $18,$00,$49,$00
+	db $18,$18,$49,$00
+
+FrameBlock46: ; 7b742 (1e:7742)
+	db $04
+	db $00,$00,$49,$00
+	db $00,$08,$49,$00
+	db $08,$00,$49,$00
+	db $08,$08,$49,$00
+
+FrameBlock47: ; 7b753 (1e:7753)
+	db $04
+	db $00,$00,$43,$00
+	db $00,$08,$43,$20
+	db $08,$00,$43,$40
+	db $08,$08,$43,$60
+
+FrameBlock48: ; 7b764 (1e:7764)
+	db $04
+	db $08,$08,$33,$00
+	db $08,$10,$33,$20
+	db $10,$08,$33,$40
+	db $10,$10,$33,$60
+
+FrameBlock49: ; 7b775 (1e:7775)
+	db $10
+	db $00,$00,$22,$00
+	db $00,$08,$23,$00
+	db $00,$10,$23,$20
+	db $00,$18,$22,$20
+	db $08,$00,$32,$00
+	db $08,$08,$43,$00
+	db $08,$10,$43,$20
+	db $08,$18,$32,$20
+	db $10,$00,$32,$40
+	db $10,$08,$43,$40
+	db $10,$10,$43,$60
+	db $10,$18,$32,$60
+	db $18,$00,$22,$40
+	db $18,$08,$23,$40
+	db $18,$10,$23,$60
+	db $18,$18,$22,$60
+
+FrameBlock71: ; 7b7b6 (1e:77b6)
+	db $10
+	db $00,$00,$22,$00
+	db $00,$08,$3b,$00
+	db $00,$10,$23,$20
+	db $00,$18,$22,$20
+	db $08,$00,$32,$00
+	db $08,$08,$43,$00
+	db $08,$10,$43,$20
+	db $08,$18,$32,$20
+	db $10,$00,$32,$40
+	db $10,$08,$43,$40
+	db $10,$10,$43,$60
+	db $10,$18,$32,$60
+	db $18,$00,$22,$40
+	db $18,$08,$23,$40
+	db $18,$10,$23,$60
+	db $18,$18,$22,$60
+
+FrameBlock72: ; 7b7f7 (1e:77f7)
+	db $0c
+	db $00,$00,$32,$00
+	db $00,$08,$43,$00
+	db $00,$10,$43,$20
+	db $00,$18,$32,$20
+	db $08,$00,$32,$40
+	db $08,$08,$43,$40
+	db $08,$10,$43,$60
+	db $08,$18,$32,$60
+	db $10,$00,$22,$40
+	db $10,$08,$23,$40
+	db $10,$10,$23,$60
+	db $10,$18,$22,$60
+
+FrameBlock73: ; 7b828 (1e:7828)
+	db $08
+	db $00,$00,$32,$40
+	db $00,$08,$43,$40
+	db $00,$10,$43,$60
+	db $00,$18,$32,$60
+	db $08,$00,$22,$40
+	db $08,$08,$23,$40
+	db $08,$10,$23,$60
+	db $08,$18,$22,$60
+
+FrameBlock74: ; 7b849 (1e:7849)
+	db $04
+	db $00,$00,$22,$40
+	db $00,$08,$23,$40
+	db $00,$10,$23,$60
+	db $00,$18,$22,$60
+
+FrameBlock4a: ; 7b85a (1e:785a)
+	db $04
+	db $08,$18,$4c,$20
+	db $20,$08,$4b,$00
+	db $30,$20,$4c,$00
+	db $18,$30,$4b,$40
+
+FrameBlock4b: ; 7b86b (1e:786b)
+	db $04
+	db $00,$18,$4c,$00
+	db $20,$00,$4b,$40
+	db $38,$20,$4c,$20
+	db $18,$38,$4b,$00
+
+FrameBlock4c: ; 7b87c (1e:787c)
+	db $04
+	db $10,$08,$4a,$40
+	db $30,$10,$4a,$00
+	db $28,$30,$4a,$20
+	db $08,$28,$4a,$60
+
+FrameBlock4d: ; 7b88d (1e:788d)
+	db $04
+	db $08,$00,$4a,$20
+	db $38,$08,$4a,$60
+	db $30,$38,$4a,$40
+	db $00,$30,$4a,$00
+
+FrameBlock4e: ; 7b89e (1e:789e)
+	db $08
+	db $00,$30,$44,$00
+	db $00,$38,$44,$20
+	db $08,$30,$44,$40
+	db $08,$38,$44,$60
+	db $26,$0a,$44,$00
+	db $26,$12,$44,$20
+	db $2e,$0a,$44,$40
+	db $2e,$12,$44,$60
+
+FrameBlock4f: ; 7b8bf (1e:78bf)
+	db $0c
+	db $0e,$22,$44,$00
+	db $0e,$2a,$44,$20
+	db $16,$22,$44,$40
+	db $16,$2a,$44,$60
+	db $06,$32,$47,$00
+	db $00,$38,$47,$00
+	db $1a,$16,$44,$00
+	db $1a,$1e,$44,$20
+	db $22,$16,$44,$40
+	db $22,$1e,$44,$60
+	db $30,$08,$47,$00
+	db $2a,$0e,$47,$00
+
+FrameBlock50: ; 7b8f0 (1e:78f0)
+	db $08
+	db $06,$32,$47,$00
+	db $00,$38,$47,$00
+	db $12,$26,$47,$00
+	db $0c,$2c,$47,$00
+	db $1e,$1a,$47,$00
+	db $18,$20,$47,$00
+	db $2a,$0e,$47,$00
+	db $24,$14,$47,$00
+
+FrameBlock51: ; 7b911 (1e:7911)
+	db $08
+	db $00,$00,$35,$20
+	db $08,$00,$35,$40
+	db $10,$00,$35,$00
+	db $18,$00,$35,$60
+	db $00,$40,$35,$00
+	db $08,$40,$35,$60
+	db $10,$40,$35,$20
+	db $18,$40,$35,$40
+
+FrameBlock52: ; 7b932 (1e:7932)
+	db $04
+	db $00,$00,$2a,$00
+	db $00,$08,$2b,$00
+	db $08,$00,$3a,$00
+	db $08,$08,$3b,$00
+
+FrameBlock53: ; 7b943 (1e:7943)
+	db $03
+	db $00,$00,$3f,$00
+	db $00,$08,$3f,$00
+	db $08,$06,$3f,$00
+
+FrameBlock54: ; 7b950 (1e:7950)
+	db $04
+	db $00,$00,$0e,$00
+	db $00,$08,$0e,$20
+	db $08,$00,$0f,$00
+	db $08,$08,$0f,$20
+
+FrameBlock55: ; 7b961 (1e:7961)
+	db $03
+	db $10,$00,$2c,$00
+	db $10,$08,$3c,$00
+	db $10,$10,$2d,$00
+
+FrameBlock56: ; 7b96e (1e:796e)
+	db $06
+	db $10,$10,$31,$00
+	db $10,$18,$31,$00
+	db $08,$10,$2c,$00
+	db $08,$18,$3c,$00
+	db $08,$20,$2d,$00
+	db $10,$20,$2d,$00
+
+FrameBlock57: ; 7b987 (1e:7987)
+	db $09
+	db $08,$20,$31,$00
+	db $10,$20,$31,$00
+	db $08,$28,$31,$00
+	db $10,$28,$31,$00
+	db $00,$20,$2c,$00
+	db $00,$28,$3c,$00
+	db $00,$30,$2d,$00
+	db $08,$30,$2d,$00
+	db $10,$30,$2d,$00
+
+FrameBlock58: ; 7b9ac (1e:79ac)
+	db $07
+	db $00,$00,$46,$00
+	db $08,$02,$47,$00
+	db $10,$03,$48,$00
+	db $18,$04,$48,$00
+	db $20,$05,$48,$00
+	db $28,$05,$48,$00
+	db $30,$05,$48,$00
+
+FrameBlock59: ; 7b9c9 (1e:79c9)
+	db $01
+	db $00,$00,$42,$00
+
+FrameBlock5a: ; 7b9ce (1e:79ce)
+	db $0c
+	db $00,$00,$24,$00
+	db $00,$08,$25,$00
+	db $08,$00,$34,$00
+	db $00,$10,$25,$20
+	db $00,$18,$24,$20
+	db $08,$18,$34,$20
+	db $10,$00,$34,$40
+	db $18,$00,$24,$40
+	db $18,$08,$25,$40
+	db $10,$18,$34,$60
+	db $18,$10,$25,$60
+	db $18,$18,$24,$60
+
+FrameBlock5b: ; 7b9ff (1e:79ff)
+	db $04
+	db $00,$00,$43,$00
+	db $00,$08,$43,$20
+	db $08,$00,$43,$40
+	db $08,$08,$43,$60
+
+FrameBlock5c: ; 7ba10 (1e:7a10)
+	db $08
+	db $00,$00,$49,$00
+	db $02,$08,$49,$00
+	db $18,$00,$49,$00
+	db $10,$10,$49,$00
+	db $08,$00,$43,$00
+	db $08,$08,$43,$20
+	db $10,$00,$43,$40
+	db $10,$08,$43,$60
+
+FrameBlock5d: ; 7ba31 (1e:7a31)
+	db $0b
+	db $00,$00,$49,$00
+	db $18,$02,$49,$00
+	db $14,$10,$49,$00
+	db $08,$00,$43,$00
+	db $00,$08,$43,$20
+	db $10,$00,$43,$40
+	db $10,$08,$43,$60
+	db $04,$08,$43,$00
+	db $04,$10,$43,$20
+	db $0c,$08,$43,$40
+	db $0c,$10,$43,$60
+
+FrameBlock5e: ; 7ba5e (1e:7a5e)
+	db $0f
+	db $00,$08,$49,$00
+	db $08,$10,$49,$00
+	db $20,$00,$49,$00
+	db $08,$00,$43,$00
+	db $08,$08,$43,$20
+	db $10,$00,$43,$40
+	db $10,$08,$43,$60
+	db $10,$10,$43,$00
+	db $10,$18,$43,$20
+	db $18,$10,$43,$40
+	db $18,$18,$43,$60
+	db $20,$08,$43,$00
+	db $20,$10,$43,$20
+	db $28,$08,$43,$40
+	db $28,$10,$43,$60
+
+FrameBlock5f: ; 7ba9b (1e:7a9b)
+	db $04
+	db $00,$00,$49,$00
+	db $00,$10,$49,$00
+	db $00,$20,$49,$00
+	db $00,$30,$49,$00
+
+FrameBlock60: ; 7baac (1e:7aac)
+	db $08
+	db $00,$00,$49,$00
+	db $00,$10,$49,$00
+	db $00,$20,$49,$00
+	db $00,$30,$49,$00
+	db $08,$08,$49,$00
+	db $08,$18,$49,$00
+	db $08,$28,$49,$00
+	db $08,$38,$49,$00
+
+FrameBlock61: ; 7bacd (1e:7acd)
+	db $0c
+	db $00,$00,$49,$00
+	db $00,$10,$49,$00
+	db $00,$20,$49,$00
+	db $00,$30,$49,$00
+	db $08,$08,$49,$00
+	db $08,$18,$49,$00
+	db $08,$28,$49,$00
+	db $08,$38,$49,$00
+	db $10,$00,$49,$00
+	db $10,$10,$49,$00
+	db $10,$20,$49,$00
+	db $10,$30,$49,$00
+
+FrameBlock62: ; 7bafe (1e:7afe)
+	db $0f
+	db $00,$00,$49,$00
+	db $00,$10,$49,$00
+	db $00,$20,$49,$00
+	db $00,$30,$49,$00
+	db $08,$08,$49,$00
+	db $08,$18,$49,$00
+	db $08,$28,$49,$00
+	db $08,$38,$49,$00
+	db $10,$00,$49,$00
+	db $10,$10,$49,$00
+	db $10,$20,$49,$00
+	db $10,$30,$49,$00
+	db $18,$08,$49,$00
+	db $18,$18,$49,$00
+	db $18,$28,$49,$00
+	db $18,$38,$49,$00 ; unused
+
+FrameBlock63: ; 7bb3f (1e:7b3f)
+	db $06
+	db $10,$00,$26,$00
+	db $10,$08,$27,$00
+	db $08,$10,$26,$00
+	db $08,$18,$27,$00
+	db $00,$20,$26,$00
+	db $00,$28,$27,$00
+
+FrameBlock64: ; 7bb58 (1e:7b58)
+	db $06
+	db $18,$00,$27,$00
+	db $10,$08,$26,$00
+	db $10,$10,$27,$00
+	db $08,$18,$26,$00
+	db $08,$20,$27,$00
+	db $00,$28,$26,$00
+
+FrameBlock65: ; 7bb71 (1e:7b71)
+	db $06
+	db $00,$00,$1c,$00
+	db $00,$08,$1d,$00
+	db $10,$00,$1c,$00
+	db $10,$08,$1d,$00
+	db $20,$00,$1c,$00
+	db $20,$08,$1d,$00
+
+FrameBlock66: ; 7bb8a (1e:7b8a)
+	db $02
+	db $00,$00,$03,$00
+	db $08,$00,$13,$00
+
+FrameBlock67: ; 7bb93 (1e:7b93)
+	db $01
+	db $00,$00,$03,$00
+
+FrameBlock68: ; 7bb98 (1e:7b98)
+	db $04
+	db $00,$00,$03,$00
+	db $00,$08,$03,$20
+	db $08,$00,$13,$00
+	db $08,$08,$13,$20
+
+FrameBlock69: ; 7bba9 (1e:7ba9)
+	db $01
+	db $00,$00,$06,$00
+
+FrameBlock6a: ; 7bbae (1e:7bae)
+	db $08
+	db $00,$00,$2e,$00
+	db $00,$30,$2e,$20
+	db $30,$00,$2e,$40
+	db $30,$30,$2e,$60
+	db $00,$18,$2f,$00
+	db $30,$18,$2f,$40
+	db $18,$00,$3e,$00
+	db $18,$30,$3e,$20
+
+FrameBlock6b: ; 7bbcf (1e:7bcf)
+	db $08
+	db $00,$00,$2e,$00
+	db $00,$20,$2e,$20
+	db $20,$00,$2e,$40
+	db $20,$20,$2e,$60
+	db $00,$10,$2f,$00
+	db $20,$10,$2f,$40
+	db $10,$00,$3e,$00
+	db $10,$20,$3e,$20
+
+FrameBlock6c: ; 7bbf0 (1e:7bf0)
+	db $08
+	db $00,$00,$2e,$00
+	db $00,$10,$2e,$20
+	db $10,$00,$2e,$40
+	db $10,$10,$2e,$60
+	db $00,$08,$2f,$00
+	db $10,$08,$2f,$40
+	db $08,$00,$3e,$00
+	db $08,$10,$3e,$20
+
+FrameBlock6d: ; 7bc11 (1e:7c11)
+	db $02
+	db $00,$00,$1e,$00
+	db $00,$08,$1f,$00
+
+FrameBlock6e: ; 7bc1a (1e:7c1a)
+	db $04
+	db $00,$00,$48,$00
+	db $00,$08,$48,$20
+	db $08,$00,$12,$00
+	db $08,$08,$12,$20
+
+FrameBlock6f: ; 7bc2b (1e:7c2b)
+	db $04
+	db $00,$00,$4a,$00
+	db $00,$08,$07,$00
+	db $08,$00,$16,$00
+	db $08,$08,$17,$00
+
+FrameBlock70: ; 7bc3c (1e:7c3c)
+	db $04
+	db $00,$00,$07,$20
+	db $00,$08,$4a,$20
+	db $08,$00,$17,$20
+	db $08,$08,$16,$20
+
+FrameBlock76: ; 7bc4d (1e:7c4d)
+	db $07
+	db $00,$10,$2f,$00
+	db $01,$08,$2f,$00
+	db $01,$18,$2f,$00
+	db $02,$00,$2e,$00
+	db $02,$20,$2e,$20
+	db $0a,$00,$3e,$00
+	db $0a,$20,$3e,$20
+
+FrameBlock77: ; 7bc6a (1e:7c6a)
+	db $04
+	db $00,$02,$4b,$00
+	db $00,$0a,$4c,$00
+	db $08,$00,$4c,$60
+	db $08,$08,$4b,$60
+
+FrameBlock78: ; 7bc7b (1e:7c7b)
+	db $01
+	db $00,$00,$4d,$00
+
+FrameBlock79: ; 7bc80 (1e:7c80)
+	db $01
+	db $00,$00,$4e,$00
+
+FrameBlockBaseCoords: ; 7bc85 (1e:7c85)
+	db $10,$68
+	db $10,$70
+	db $10,$78
+	db $10,$80
+	db $10,$88
+	db $10,$90
+	db $10,$98
+	db $18,$68
+	db $18,$70
+	db $18,$78
+	db $34,$28
+	db $18,$80
+	db $18,$88
+	db $18,$98
+	db $20,$68
+	db $20,$70
+	db $20,$78
+	db $20,$80
+	db $20,$88
+	db $20,$90
+	db $20,$98
+	db $28,$68
+	db $28,$70
+	db $28,$78
+	db $28,$80
+	db $28,$88
+	db $30,$68
+	db $30,$70
+	db $30,$78
+	db $30,$80
+	db $30,$90
+	db $30,$98
+	db $38,$68
+	db $38,$78
+	db $38,$80
+	db $38,$88
+	db $40,$68
+	db $40,$70
+	db $40,$78
+	db $40,$80
+	db $40,$88
+	db $40,$98
+	db $10,$60
+	db $18,$60
+	db $20,$60
+	db $28,$60
+	db $30,$60
+	db $40,$60
+	db $58,$28
+	db $43,$38
+	db $33,$48
+	db $20,$58
+	db $32,$78
+	db $58,$58
+	db $2C,$6C
+	db $34,$80
+	db $48,$70
+	db $42,$36
+	db $38,$44
+	db $40,$52
+	db $48,$60
+	db $3E,$6E
+	db $28,$7C
+	db $28,$8A
+	db $50,$3C
+	db $48,$50
+	db $40,$64
+	db $38,$38
+	db $50,$30
+	db $50,$38
+	db $50,$40
+	db $50,$48
+	db $50,$50
+	db $48,$58
+	db $50,$44
+	db $48,$48
+	db $48,$4C
+	db $40,$50
+	db $40,$54
+	db $38,$58
+	db $38,$5C
+	db $30,$64
+	db $48,$40
+	db $48,$39
+	db $24,$88
+	db $24,$70
+	db $1C,$70
+	db $1C,$88
+	db $34,$68
+	db $34,$88
+	db $68,$50
+	db $60,$50
+	db $68,$60
+	db $58,$50
+	db $60,$60
+	db $68,$40
+	db $40,$40
+	db $38,$40
+	db $0B,$60
+	db $44,$48
+	db $40,$14
+	db $48,$1C
+	db $50,$24
+	db $4C,$24
+	db $10,$62
+	db $12,$62
+	db $12,$60
+	db $20,$72
+	db $22,$72
+	db $22,$70
+	db $28,$62
+	db $50,$0A
+	db $52,$0A
+	db $38,$30
+	db $40,$48
+	db $30,$48
+	db $40,$30
+	db $30,$40
+	db $38,$48
+	db $40,$4A
+	db $48,$4B
+	db $50,$4C
+	db $58,$4D
+	db $60,$4D
+	db $68,$4D
+	db $38,$10
+	db $50,$10
+	db $38,$28
+	db $48,$18
+	db $40,$20
+	db $48,$20
+	db $40,$3C
+	db $38,$50
+	db $28,$64
+	db $1C,$90
+	db $24,$80
+	db $2C,$70
+	db $30,$38
+	db $10,$50
+	db $3C,$40
+	db $40,$58
+	db $30,$58
+	db $58,$48
+	db $50,$58
+	db $48,$68
+	db $40,$18
+	db $28,$58
+	db $40,$38
+	db $48,$38
+	db $08,$70
+	db $44,$1C
+	db $3C,$58
+	db $38,$60
+	db $08,$60
+	db $38,$70
+	db $38,$6C
+	db $38,$64
+	db $1C,$74
+	db $2E,$74
+	db $34,$50
+	db $2F,$60
+	db $31,$70
+	db $4C,$30
+	db $3B,$40
+	db $2D,$50
+	db $26,$60
+	db $2D,$70
+	db $28,$50
+	db $1E,$60
+	db $29,$70
+	db $16,$60
+	db $14,$58
+	db $12,$54
+	db $14,$50
+	db $18,$4C
+	db $1C,$48
+	db $48,$28
+
+FrameBlock00: ; 7bde7 (1e:7de7)
+	db $00,$00
 
 Func_7bde9: ; 7bde9 (1e:7de9)
 	push hl
@@ -116770,7 +120252,7 @@ Music1f_Channel3DutyPointers: ; 7c361 (1f:4361)
 	dw SFX_1f_3f_Ch1 ; unused
 	dw SFX_1f_3f_Ch1 ; unused
 	dw SFX_1f_3f_Ch1 ; unused
-	
+
 Music1f_Channel3Duty1: ; 7c373 (1f:4373)
 	db $02,$46,$8A,$CE,$FF,$FE,$ED,$DC,$CB,$A9,$87,$65,$44,$33,$22,$11
 
@@ -117275,7 +120757,7 @@ Music1f_notetype: ; 7d358 (1f:5358)
 	sla a
 	ld d, a
 	; fall through
-	
+
 	; if channel 3, store high nibble as volume
 	; else, store volume (high nibble) and fade (low nibble)
 .notChannel3
@@ -117297,7 +120779,7 @@ Music1f_togglecall: ; 7d397 (1f:5397)
 	xor $1
 	ld [hl], a ; flip bit 0 of $c02e (toggle returning from call)
 	jp Music1f_endchannel
-	
+
 Music1f_vibrato: ; 7d3a9 (1f:53a9)
 	cp $ea ; is this command a vibrato?
 	jr nz, Music1f_pitchbend ; no
@@ -117331,7 +120813,7 @@ Music1f_vibrato: ; 7d3a9 (1f:53a9)
 	or d
 	ld [hl], a ; store depth as both high and low nibbles
 	jp Music1f_endchannel
-	
+
 Music1f_pitchbend: ; 7d3e1 (1f:53e1)
 	cp $eb ; is this command a pitchbend?
 	jr nz, Music1f_duty ; no
@@ -117362,7 +120844,7 @@ Music1f_pitchbend: ; 7d3e1 (1f:53e1)
 	call Music1f_GetNextMusicByte
 	ld d, a
 	jp Music1f_notelength
-	
+
 Music1f_duty: ; 7d419 (1f:5419)
 	cp $ec ; is this command a duty?
 	jr nz, Music1f_tempo ; no
@@ -117375,7 +120857,7 @@ Music1f_duty: ; 7d419 (1f:5419)
 	add hl, bc
 	ld [hl], a ; store duty
 	jp Music1f_endchannel
-	
+
 Music1f_tempo: ; 7d42e (1f:542e)
 	cp $ed ; is this command a tempo?
 	jr nz, Music1f_unknownmusic0xee ; no
@@ -117404,14 +120886,14 @@ Music1f_tempo: ; 7d42e (1f:542e)
 	ld [$c0d5], a
 .musicChannelDone
 	jp Music1f_endchannel
-	
+
 Music1f_unknownmusic0xee: ; 7d46e (1f:546e)
 	cp $ee ; is this command an unknownmusic0xee?
 	jr nz, Music1f_unknownmusic0xef ; no
 	call Music1f_GetNextMusicByte ; yes
 	ld [$c004], a ; store first param
 	jp Music1f_endchannel
-	
+
 ; this appears to never be used
 Music1f_unknownmusic0xef: ; 7d47b (1f:547b)
 	cp $ef ; is this command an unknownmusic0xef?
@@ -117429,7 +120911,7 @@ Music1f_unknownmusic0xef: ; 7d47b (1f:547b)
 	ld [$c02d], a
 .skip
 	jp Music1f_endchannel
-	
+
 Music1f_dutycycle: ; 7d49a (1f:549a)
 	cp $fc ; is this command a dutycycle?
 	jr nz, Music1f_stereopanning ; no
@@ -117446,14 +120928,14 @@ Music1f_dutycycle: ; 7d49a (1f:549a)
 	add hl, bc
 	set 6, [hl] ; set duty flag
 	jp Music1f_endchannel
-	
+
 Music1f_stereopanning: ; 7d4b8 (1f:54b8)
 	cp $f0 ; is this command a stereopanning?
 	jr nz, Music1f_executemusic ; no
 	call Music1f_GetNextMusicByte ; yes
 	ld [$FF00+$24], a ; store stereopanning
 	jp Music1f_endchannel
-	
+
 Music1f_executemusic: ; 7d4c4 (1f:54c4)
 	cp $f8 ; is this command an executemusic?
 	jr nz, Music1f_octave ; no
@@ -117462,7 +120944,7 @@ Music1f_executemusic: ; 7d4c4 (1f:54c4)
 	add hl, bc
 	set 0, [hl]
 	jp Music1f_endchannel
-	
+
 Music1f_octave: ; 7d4d3 (1f:54d3)
 	and $f0
 	cp $e0 ; is this command an octave?
@@ -117474,7 +120956,7 @@ Music1f_octave: ; 7d4d3 (1f:54d3)
 	and $f
 	ld [hl], a ; store low nibble as octave
 	jp Music1f_endchannel
-	
+
 Music1f_unknownsfx0x20: ; 7d4e6 (1f:54e6)
 	cp $20 ; is this command an unknownsfx0x20?
 	jr nz, Music1f_unknownsfx0x10 ; no
@@ -117519,7 +121001,7 @@ Music1f_unknownsfx0x20: ; 7d4e6 (1f:54e6)
 	pop de
 	call Func_7d6bf
 	ret
-	
+
 Music1f_unknownsfx0x10 ; 7d533 (1f:5533)
 	ld a, c
 	cp CH4
@@ -117535,7 +121017,7 @@ Music1f_unknownsfx0x10 ; 7d533 (1f:5533)
 	call Music1f_GetNextMusicByte ; yes
 	ld [$FF00+$10], a
 	jp Music1f_endchannel
-	
+
 Music1f_note: ; 7d54f (1f:554f)
 	ld a, c
 	cp CH3
@@ -117554,7 +121036,7 @@ Music1f_note: ; 7d54f (1f:554f)
 	push de
 	push bc
 	jr asm_7d571
-	
+
 Music1f_dnote: ; 7d569 (1f:5569)
 	ld a, d
 	and $f
@@ -117629,7 +121111,7 @@ Music1f_notelength: ; 7d57e (1f:557e)
 	jr z, Music1f_notepitch
 	pop hl
 	ret
-	
+
 Music1f_notepitch: ; 7d5dc (1f:55dc)
 	pop af
 	and $f0
@@ -122258,7 +125740,7 @@ _UnnamedText_58e54: ; 89c9e (22:5c9e)
 
 _UnnamedText_58eae: ; 89cbc (22:5cbc)
 	db $0, "Go! @@"
-	
+
 _UnnamedText_58eb5: ; 89cc3 (22:5cc3)
 	db $0, "Do it! @@"
 
