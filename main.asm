@@ -104377,7 +104377,7 @@ Func_707b6: ; 707b6 (1c:47b6)
 	ld a, [$c102]
 	ld c, a
 	ld b, $0
-	ld hl, Unknown_70856 ; $4856
+	ld hl, FishingRodGfxProperties ; $4856
 	add hl, bc
 	ld de, $c39c
 	ld bc, $4
@@ -104444,8 +104444,16 @@ UnnamedText_70851: ; 70851 (1c:4851)
 	TX_FAR _UnnamedText_70851
 	db "@"
 
-Unknown_70856: ; 70856 (1c:4856)
-INCBIN "baserom.gbc",$70856,$70866 - $70856
+FishingRodGfxProperties: ; 70856 (1c:4856)
+; specicies how the fishing rod should be drawn on the screen
+; first byte = screen y coordinate
+; second byte = screen x coordinate
+; third byte = tile number
+; fourth byte = sprite properties
+	db $5B, $4C, $FD, $00 ; player facing down
+	db $44, $4C, $FD, $00 ; player facing up
+	db $50, $40, $FE, $00 ; player facing left
+	db $50, $58, $FE, $20 ; player facing right ($20 means "horizontally flip the tile")
 
 Unknown_70866: ; 70866 (1c:4866)
 INCBIN "baserom.gbc",$70866,$7087e - $70866
