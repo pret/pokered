@@ -10567,10 +10567,10 @@ PointerTable_3f22: ; 3f22 (0:3f22)
 	dw $6cbd
 	dw $5bbe
 	dw $5ba8
-	dw $5bd4
-	dw $6453
-	dw $6458
-	dw $6511
+	dw KabutopsFossilText                   ; id = 0B
+	dw GymStatueText1                       ; id = 0C
+	dw GymStatueText2                       ; id = 0D
+	dw BookcaseText                         ; id = 0E
 	dw ViridianCityPokecenterBenchGuyText   ; id = 0F
 	dw PewterCityPokecenterBenchGuyText     ; id = 10
 	dw CeruleanCityPokecenterBenchGuyText   ; id = 11
@@ -10580,7 +10580,7 @@ PointerTable_3f22: ; 3f22 (0:3f22)
 	dw CeladonCityHotelText                 ; id = 15
 	dw FuchsiaCityPokecenterBenchGuyText    ; id = 16
 	dw CinnabarIslandPokecenterBenchGuyText ; id = 17
-	dw SaffronCityPokecenterBenchGuyText    : id = 18
+	dw SaffronCityPokecenterBenchGuyText    ; id = 18
 	dw MtMoonPokecenterBenchGuyText         ; id = 19
 	dw RockTunnelPokecenterBenchGuyText     ; id = 1A
 	dw $64c1
@@ -98419,8 +98419,8 @@ UnnamedText_5dbbe: ; 5dbbe (17:5bbe)
 	call Func_3ef5
 	ret
 
-UnnamedText_5dbd4: ; 5dbd4 (17:5bd4)
-	TX_FAR _UnnamedText_5dbd4
+KabutopsFossilText: ; 5dbd4 (17:5bd4)
+	TX_FAR _KabutopsFossilText
 	db "@"
 
 Func_5dbd9: ; 5dbd9 (17:5bd9)
@@ -102481,12 +102481,12 @@ GymStatues: ; 62419 (18:6419)
 	db VIRIDIAN_GYM, %10000000
 	db $ff
 
-UnnamedText_62453: ; 62453 (18:6453)
-	TX_FAR _UnnamedText_62453
+GymStatueText1: ; 62453 (18:6453)
+	TX_FAR _GymStatueText1
 	db "@"
 
-UnnamedText_62458: ; 62458 (18:6458)
-	TX_FAR _UnnamedText_62458
+GymStatueText2: ; 62458 (18:6458)
+	TX_FAR _GymStatueText2
 	db "@"
 
 Func_6245d: ; 6245d (18:645d)
@@ -102610,12 +102610,12 @@ CeladonCityHotelText: ; 62502 (18:6502)
 	ld a, $e
 	jp Func_3ef5
 
-UnnamedText_62511: ; 62511 (18:6511)
-	TX_FAR _UnnamedText_62511
+BookcaseText: ; 62511 (18:6511)
+	TX_FAR _BookcaseText
 	db "@"
 
 	ld a, [$c109]
-	cp $4
+	cp $4 ; check to see if player is facing up
 	ret nz
 	call EnableAutoTextBoxDrawing
 	ld a, $1
@@ -120832,25 +120832,21 @@ UnnamedText_8824c: ; 8824c (22:424c)
 _UnnamedText_703ff: ; 88267 (22:4267)
 	db $0, "#DEX Rating", $6d, $57
 
-_UnnamedText_62453: ; 88275 (22:4275)
+_GymStatueText1: ; 88275 (22:4275)
 	TX_RAM wGymCityName
 	db $0, $4f
 	db "#MON GYM", $55
 	db "LEADER: @"
-
-UnnamedText_8828c: ; 8828c (22:428c)
 	TX_RAM wGymLeaderName
 	db $0, $51
 	db "WINNING TRAINERS:", $4f
 	db $53, $57
 
-_UnnamedText_62458: ; 882a5 (22:42a5)
+_GymStatueText2: ; 882a5 (22:42a5)
 	TX_RAM wGymCityName
 	db $0, $4f
 	db "#MON GYM", $55
 	db "LEADER: @"
-
-UnnamedText_882bc: ; 882bc (22:42bc)
 	TX_RAM wGymLeaderName
 	db $0, $51
 	db "WINNING TRAINERS:", $4f
@@ -121202,7 +121198,7 @@ _UnnamedText_5dbbe: ; 88fa7 (22:4fa7)
 	db "A primitive and", $55
 	db "rare #MON.", $57
 
-_UnnamedText_5dbd4: ; 88fd5 (22:4fd5)
+_KabutopsFossilText: ; 88fd5 (22:4fd5)
 	db $0, "KABUTOPS Fossil", $4f
 	db "A primitive and", $55
 	db "rare #MON.", $57
