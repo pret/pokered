@@ -102529,19 +102529,19 @@ PokeCenterMapIDList: ; 6247e (18:647e)
 	db $FF
 
 ViridianCityPokecenterBenchGuyText: ; 624a3 (18:64a3)
-	TX_FAR _ViridianCityPokecenterBenchGuyText
+	TX_FAR _ViridianCityPokecenterGuyText
 	db "@"
 
 PewterCityPokecenterBenchGuyText: ; 624a8 (18:64a8)
-	TX_FAR _PewterCityPokecenterBenchGuyText
+	TX_FAR _PewterCityPokecenterGuyText
 	db "@"
 
 CeruleanCityPokecenterBenchGuyText: ; 624ad (18:64ad)
-	TX_FAR _CeruleanCityPokecenterBenchGuyText
+	TX_FAR _CeruleanPokecenterGuyText
 	db "@"
 
 LavenderCityPokecenterBenchGuyText: ; 624b2 (18:64b2)
-	TX_FAR _LavenderCityPokecenterBenchGuyText
+	TX_FAR _LavenderPokecenterGuyText
 	db "@"
 
 MtMoonPokecenterBenchGuyText: ; 624b7 (18:64b7)
@@ -102549,7 +102549,7 @@ MtMoonPokecenterBenchGuyText: ; 624b7 (18:64b7)
 	db "@"
 
 RockTunnelPokecenterBenchGuyText: ; 624bc (18:64bc)
-	TX_FAR _RockTunnelPokecenterBenchGuyText
+	TX_FAR _RockTunnelPokecenterGuyText
 	db "@"
 
 UnnamedText_624c1: ; 624c1 (18:64c1)
@@ -102565,19 +102565,19 @@ UnnamedText_624cb: ; 624cb (18:64cb)
 	db "@"
 
 VermilionCityPokecenterBenchGuyText: ; 624d0 (18:64d0)
-	TX_FAR _VermilionCityPokecenterBenchGuyText
+	TX_FAR _VermilionPokecenterGuyText
 	db "@"
 
 CeladonCityPokecenterBenchGuyText: ; 624d5 (18:64d5)
-	TX_FAR _CeladonCityPokecenterBenchGuyText
+	TX_FAR _CeladonCityPokecenterGuyText
 	db "@"
 
 FuchsiaCityPokecenterBenchGuyText: ; 624da (18:64da)
-	TX_FAR _FuchsiaCityPokecenterBenchGuyText
+	TX_FAR _FuchsiaCityPokecenterGuyText
 	db "@"
 
 CinnabarIslandPokecenterBenchGuyText: ; 624df (18:64df)
-	TX_FAR _CinnabarIslandPokecenterBenchGuyText
+	TX_FAR _CinnabarPokecenterGuyText
 	db "@"
 
 SaffronCityPokecenterBenchGuyText: ; 624e4 (18:64e4)
@@ -102592,11 +102592,11 @@ SaffronCityPokecenterBenchGuyText: ; 624e4 (18:64e4)
 	jp TextScriptEnd
 
 SaffronCityPokecenterBenchGuyText1: ; 624f8 (18:64f8)
-	TX_FAR _SaffronCityPokecenterBenchGuyText1
+	TX_FAR _SaffronCityPokecenterGuyText1
 	db "@"
 
 SaffronCityPokecenterBenchGuyText2: ; 624fd (18:64fd)
-	TX_FAR _SaffronCityPokecenterBenchGuyText2
+	TX_FAR _SaffronCityPokecenterGuyText2
 	db "@"
 
 CeladonCityHotelText: ; 62502 (18:6502)
@@ -120853,13 +120853,13 @@ _GymStatueText2: ; 882a5 (22:42a5)
 	db $53, $55
 	db $52, $57
 
-_ViridianCityPokecenterBenchGuyText: ; 882d7 (22:42d7)
+_ViridianCityPokecenterGuyText: ; 882d7 (22:42d7)
 	db $0, "#MON CENTERs", $4f
 	db "heal your tired,", $55
 	db "hurt or fainted", $55
 	db "#MON!", $57
 
-_PewterCityPokecenterBenchGuyText: ; 8830c (22:430c)
+_PewterCityPokecenterGuyText: ; 8830c (22:430c)
 	db $0, "Yawn!", $51
 	db "When JIGGLYPUFF", $4f
 	db "sings, #MON", $55
@@ -120867,13 +120867,13 @@ _PewterCityPokecenterBenchGuyText: ; 8830c (22:430c)
 	db "...Me too...", $4f
 	db "Snore...", $57
 
-_CeruleanCityPokecenterBenchGuyText: ; 88353 (22:4353)
+_CeruleanPokecenterGuyText: ; 88353 (22:4353)
 	db $0, "BILL has lots of", $4f
 	db "#MON!", $51
 	db "He collects rare", $4f
 	db "ones too!", $57
 
-__LavenderCityPokecenterBenchGuyText: ; 88386 (22:4386)
+_LavenderPokecenterGuyText: ; 88386 (22:4386)
 	db $0, "CUBONEs wear", $4f
 	db "skulls, right?", $51
 	db "People will pay a", $4f
@@ -120885,7 +120885,7 @@ _MtMoonPokecenterBenchGuyText: ; 883c2 (22:43c2)
 	db "should store them", $55
 	db "via PC!", $57
 
-_RockTunnelPokecenterBenchGuyText: ; 883fc (22:43fc)
+_RockTunnelPokecenterGuyText: ; 883fc (22:43fc)
 	db $0, "I heard that", $4f
 	db "GHOSTs haunt", $55
 	db "LAVENDER TOWN!", $57
@@ -120903,7 +120903,7 @@ _UnnamedText_624cb: ; 88460 (22:4460)
 	db "is hiding in the", $55
 	db "SAFARI ZONE.", $57
 
-_VermilionCityPokecenterBenchGuyText: ; 8848e (22:448e)
+_VermilionPokecenterGuyText: ; 8848e (22:448e)
 	db $0, "It is true that a", $4f
 	db "higher level", $55
 	db "#MON will be", $55
@@ -120916,19 +120916,19 @@ _VermilionCityPokecenterBenchGuyText: ; 8848e (22:448e)
 	db "universally", $55
 	db "strong #MON.", $57
 
-_CeladonCityPokecenterBenchGuyText: ; 88531 (22:4531)
+_CeladonCityPokecenterGuyText: ; 88531 (22:4531)
 	db $0, "If I had a BIKE,", $4f
 	db "I would go to", $55
 	db "CYCLING ROAD!", $57
 
-_FuchsiaCityPokecenterBenchGuyText: ; 8855f (22:455f)
+_FuchsiaCityPokecenterGuyText: ; 8855f (22:455f)
 	db $0, "If you're studying ", $4f
 	db "#MON, visit", $55
 	db "the SAFARI ZONE.", $51
 	db "It has all sorts", $4f
 	db "of rare #MON.", $57
 
-_CinnabarIslandPokecenterBenchGuyText: ; 885af (22:45af)
+_CinnabarPokecenterGuyText: ; 885af (22:45af)
 	db $0, "#MON can still", $4f
 	db "learn techniques", $55
 	db "after canceling", $55
@@ -120937,13 +120937,13 @@ _CinnabarIslandPokecenterBenchGuyText: ; 885af (22:45af)
 	db "until new moves", $55
 	db "have been learned.", $57
 
-_SaffronCityPokecenterBenchGuyText1: ; 88621 (22:4621)
+_SaffronCityPokecenterGuyText1: ; 88621 (22:4621)
 	db $0, "It would be great", $4f
 	db "if the ELITE FOUR", $55
 	db "came and stomped", $55
 	db "TEAM ROCKET!", $57
 
-_SaffronCityPokecenterBenchGuyText2: ; 88664 (22:4664)
+_SaffronCityPokecenterGuyText2: ; 88664 (22:4664)
 	db $0, "TEAM ROCKET took", $4f
 	db "off! We can go", $55
 	db "out safely again!", $55
@@ -120953,7 +120953,7 @@ _CeladonCityHotelText: ; 886a4 (22:46a4)
 	db $0, "My sis brought me", $4f
 	db "on this vacation!", $57
 
-_UnnamedText_62511: ; 886c9 (22:46c9)
+_BookcaseText: ; 886c9 (22:46c9)
 	db $0, "Crammed full of", $4f
 	db "#MON books!", $57
 
