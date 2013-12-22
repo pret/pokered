@@ -9076,8 +9076,8 @@ NamePointers: ; 375d (0:375d)
 	dw MoveNames
 	dw UnusedNames
 	dw ItemNames
-	dw $D273 ; player's OT names list
-	dw $D9AC ; enemy's OT names list
+	dw W_PARTYMON1OT ; player's OT names list
+	dw W_ENEMYMON1OT ; enemy's OT names list
 	dw TrainerNames
 
 GetName: ; 376b (0:376b)
@@ -10571,18 +10571,18 @@ PointerTable_3f22: ; 3f22 (0:3f22)
 	dw $6453
 	dw $6458
 	dw $6511
-	dw $64a3
-	dw $64a8
-	dw $64ad
-	dw $64b2
-	dw $64d0
-	dw $64d5
-	dw $6502
-	dw $64da
-	dw $64df
-	dw $64e4
-	dw $64b7
-	dw $64bc
+	dw ViridianCityPokecenterBenchGuyText   ; id = 0F
+	dw PewterCityPokecenterBenchGuyText     ; id = 10
+	dw CeruleanCityPokecenterBenchGuyText   ; id = 11
+	dw LavenderCityPokecenterBenchGuyText   ; id = 12
+	dw VermilionCityPokecenterBenchGuyText  ; id = 13
+	dw CeladonCityPokecenterBenchGuyText    ; id = 14
+	dw CeladonCityHotelText                 ; id = 15
+	dw FuchsiaCityPokecenterBenchGuyText    ; id = 16
+	dw CinnabarIslandPokecenterBenchGuyText ; id = 17
+	dw SaffronCityPokecenterBenchGuyText    : id = 18
+	dw MtMoonPokecenterBenchGuyText         ; id = 19
+	dw RockTunnelPokecenterBenchGuyText     ; id = 1A
 	dw $64c1
 	dw $64c6
 	dw $64cb
@@ -13667,7 +13667,7 @@ Func_5849:
 	jp Func_5a18
 .asm_58fd
 	ld a, [$cd3d]
-	ld hl, $d273
+	ld hl, W_PARTYMON1OT ; OT names of player
 	call SkipFixedLengthTextEntries
 	ld de, $cd41
 	ld bc, $000b
@@ -13683,7 +13683,7 @@ Func_5849:
 	ld a, [hl]
 	ld [$cd4d], a
 	ld a, [$cd3e]
-	ld hl, $d9ac
+	ld hl, W_ENEMYMON1OT ; OT names of other player
 	call SkipFixedLengthTextEntries
 	ld de, $cd4e
 	ld bc, $000b
@@ -30290,7 +30290,7 @@ _AddPokemonToParty: ; f2e5 (3:72e5)
 	ld a, [$cc49]
 	and $f
 	jr z, .asm_f315
-	ld hl, $d9ac
+	ld hl, W_ENEMYMON1OT
 .asm_f315
 	ld a, [$FF00+$e4]
 	dec a
@@ -42076,7 +42076,7 @@ Func_1da15: ; 1da15 (7:5a15)
 	ret
 
 Func_1da20: ; 1da20 (7:5a20)
-	ld hl, $d273
+	ld hl, W_PARTYMON1OT
 	ld bc, $000b
 	ld a, [$cf92]
 	call AddNTimes
@@ -56144,7 +56144,7 @@ Func_39bd5: ; 39bd5 (e:5bd5)
 	cp $1
 	jr nz, .asm_39be6
 	ld hl, wEnemyPartyCount ; $d89c
-	ld de, $d9ac
+	ld de, W_ENEMYMON1OT ; $d9ac OT names of other player
 	ld a, $6
 	jr .asm_39c18
 .asm_39be6
@@ -102528,28 +102528,28 @@ PokeCenterMapIDList: ; 6247e (18:647e)
 	db ROCK_TUNNEL_POKECENTER,$08,$1A
 	db $FF
 
-UnnamedText_624a3: ; 624a3 (18:64a3)
-	TX_FAR _UnnamedText_624a3
+ViridianCityPokecenterBenchGuyText: ; 624a3 (18:64a3)
+	TX_FAR _ViridianCityPokecenterBenchGuyText
 	db "@"
 
-UnnamedText_624a8: ; 624a8 (18:64a8)
-	TX_FAR _UnnamedText_624a8
+PewterCityPokecenterBenchGuyText: ; 624a8 (18:64a8)
+	TX_FAR _PewterCityPokecenterBenchGuyText
 	db "@"
 
-UnnamedText_624ad: ; 624ad (18:64ad)
-	TX_FAR _UnnamedText_624ad
+CeruleanCityPokecenterBenchGuyText: ; 624ad (18:64ad)
+	TX_FAR _CeruleanCityPokecenterBenchGuyText
 	db "@"
 
-UnnamedText_624b2: ; 624b2 (18:64b2)
-	TX_FAR _UnnamedText_624b2
+LavenderCityPokecenterBenchGuyText: ; 624b2 (18:64b2)
+	TX_FAR _LavenderCityPokecenterBenchGuyText
 	db "@"
 
-UnnamedText_624b7: ; 624b7 (18:64b7)
-	TX_FAR _UnnamedText_624b7
+MtMoonPokecenterBenchGuyText: ; 624b7 (18:64b7)
+	TX_FAR _MtMoonPokecenterBenchGuyText
 	db "@"
 
-UnnamedText_624bc: ; 624bc (18:64bc)
-	TX_FAR _UnnamedText_624bc
+RockTunnelPokecenterBenchGuyText: ; 624bc (18:64bc)
+	TX_FAR _RockTunnelPokecenterBenchGuyText
 	db "@"
 
 UnnamedText_624c1: ; 624c1 (18:64c1)
@@ -102564,43 +102564,43 @@ UnnamedText_624cb: ; 624cb (18:64cb)
 	TX_FAR _UnnamedText_624cb
 	db "@"
 
-UnnamedText_624d0: ; 624d0 (18:64d0)
-	TX_FAR _UnnamedText_624d0
+VermilionCityPokecenterBenchGuyText: ; 624d0 (18:64d0)
+	TX_FAR _VermilionCityPokecenterBenchGuyText
 	db "@"
 
-UnnamedText_624d5: ; 624d5 (18:64d5)
-	TX_FAR _UnnamedText_624d5
+CeladonCityPokecenterBenchGuyText: ; 624d5 (18:64d5)
+	TX_FAR _CeladonCityPokecenterBenchGuyText
 	db "@"
 
-UnnamedText_624da: ; 624da (18:64da)
-	TX_FAR _UnnamedText_624da
+FuchsiaCityPokecenterBenchGuyText: ; 624da (18:64da)
+	TX_FAR _FuchsiaCityPokecenterBenchGuyText
 	db "@"
 
-UnnamedText_624df: ; 624df (18:64df)
-	TX_FAR _UnnamedText_624df
+CinnabarIslandPokecenterBenchGuyText: ; 624df (18:64df)
+	TX_FAR _CinnabarIslandPokecenterBenchGuyText
 	db "@"
 
-UnnamedText_624e4: ; 624e4 (18:64e4)
+SaffronCityPokecenterBenchGuyText: ; 624e4 (18:64e4)
 	db $8
 	ld a, [$d838]
 	bit 7, a
-	ld hl, UnnamedText_624fd
+	ld hl, SaffronCityPokecenterBenchGuyText2
 	jr nz, .asm_624f2 ; 0x624ed $3
-	ld hl, UnnamedText_624f8
+	ld hl, SaffronCityPokecenterBenchGuyText1
 .asm_624f2
 	call PrintText
 	jp TextScriptEnd
 
-UnnamedText_624f8: ; 624f8 (18:64f8)
-	TX_FAR _UnnamedText_624f8
+SaffronCityPokecenterBenchGuyText1: ; 624f8 (18:64f8)
+	TX_FAR _SaffronCityPokecenterBenchGuyText1
 	db "@"
 
-UnnamedText_624fd: ; 624fd (18:64fd)
-	TX_FAR _UnnamedText_624fd
+SaffronCityPokecenterBenchGuyText2: ; 624fd (18:64fd)
+	TX_FAR _SaffronCityPokecenterBenchGuyText2
 	db "@"
 
-UnnamedText_62502: ; 62502 (18:6502)
-	TX_FAR _UnnamedText_62502
+CeladonCityHotelText: ; 62502 (18:6502)
+	TX_FAR _CeladonCityHotelText
 	db "@"
 
 	ret
@@ -120857,13 +120857,13 @@ UnnamedText_882bc: ; 882bc (22:42bc)
 	db $53, $55
 	db $52, $57
 
-_UnnamedText_624a3: ; 882d7 (22:42d7)
+_ViridianCityPokecenterBenchGuyText: ; 882d7 (22:42d7)
 	db $0, "#MON CENTERs", $4f
 	db "heal your tired,", $55
 	db "hurt or fainted", $55
 	db "#MON!", $57
 
-_UnnamedText_624a8: ; 8830c (22:430c)
+_PewterCityPokecenterBenchGuyText: ; 8830c (22:430c)
 	db $0, "Yawn!", $51
 	db "When JIGGLYPUFF", $4f
 	db "sings, #MON", $55
@@ -120871,25 +120871,25 @@ _UnnamedText_624a8: ; 8830c (22:430c)
 	db "...Me too...", $4f
 	db "Snore...", $57
 
-_UnnamedText_624ad: ; 88353 (22:4353)
+_CeruleanCityPokecenterBenchGuyText: ; 88353 (22:4353)
 	db $0, "BILL has lots of", $4f
 	db "#MON!", $51
 	db "He collects rare", $4f
 	db "ones too!", $57
 
-_UnnamedText_624b2: ; 88386 (22:4386)
+__LavenderCityPokecenterBenchGuyText: ; 88386 (22:4386)
 	db $0, "CUBONEs wear", $4f
 	db "skulls, right?", $51
 	db "People will pay a", $4f
 	db "lot for one!", $57
 
-_UnnamedText_624b7: ; 883c2 (22:43c2)
+_MtMoonPokecenterBenchGuyText: ; 883c2 (22:43c2)
 	db $0, "If you have too", $4f
 	db "many #MON, you", $55
 	db "should store them", $55
 	db "via PC!", $57
 
-_UnnamedText_624bc: ; 883fc (22:43fc)
+_RockTunnelPokecenterBenchGuyText: ; 883fc (22:43fc)
 	db $0, "I heard that", $4f
 	db "GHOSTs haunt", $55
 	db "LAVENDER TOWN!", $57
@@ -120907,7 +120907,7 @@ _UnnamedText_624cb: ; 88460 (22:4460)
 	db "is hiding in the", $55
 	db "SAFARI ZONE.", $57
 
-_UnnamedText_624d0: ; 8848e (22:448e)
+_VermilionCityPokecenterBenchGuyText: ; 8848e (22:448e)
 	db $0, "It is true that a", $4f
 	db "higher level", $55
 	db "#MON will be", $55
@@ -120920,19 +120920,19 @@ _UnnamedText_624d0: ; 8848e (22:448e)
 	db "universally", $55
 	db "strong #MON.", $57
 
-_UnnamedText_624d5: ; 88531 (22:4531)
+_CeladonCityPokecenterBenchGuyText: ; 88531 (22:4531)
 	db $0, "If I had a BIKE,", $4f
 	db "I would go to", $55
 	db "CYCLING ROAD!", $57
 
-_UnnamedText_624da: ; 8855f (22:455f)
+_FuchsiaCityPokecenterBenchGuyText: ; 8855f (22:455f)
 	db $0, "If you're studying ", $4f
 	db "#MON, visit", $55
 	db "the SAFARI ZONE.", $51
 	db "It has all sorts", $4f
 	db "of rare #MON.", $57
 
-_UnnamedText_624df: ; 885af (22:45af)
+_CinnabarIslandPokecenterBenchGuyText: ; 885af (22:45af)
 	db $0, "#MON can still", $4f
 	db "learn techniques", $55
 	db "after canceling", $55
@@ -120941,19 +120941,19 @@ _UnnamedText_624df: ; 885af (22:45af)
 	db "until new moves", $55
 	db "have been learned.", $57
 
-_UnnamedText_624f8: ; 88621 (22:4621)
+_SaffronCityPokecenterBenchGuyText1: ; 88621 (22:4621)
 	db $0, "It would be great", $4f
 	db "if the ELITE FOUR", $55
 	db "came and stomped", $55
 	db "TEAM ROCKET!", $57
 
-_UnnamedText_624fd: ; 88664 (22:4664)
+_SaffronCityPokecenterBenchGuyText2: ; 88664 (22:4664)
 	db $0, "TEAM ROCKET took", $4f
 	db "off! We can go", $55
 	db "out safely again!", $55
 	db "That's great!", $57
 
-_UnnamedText_62502: ; 886a4 (22:46a4)
+_CeladonCityHotelText: ; 886a4 (22:46a4)
 	db $0, "My sis brought me", $4f
 	db "on this vacation!", $57
 
