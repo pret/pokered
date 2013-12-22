@@ -10557,16 +10557,16 @@ Func_3f0f: ; 3f0f (0:3f0f)
 	ret
 
 PointerTable_3f22: ; 3f22 (0:3f22)
-	dw $66ee
-	dw $66f8
-	dw $5b8e
-	dw $5b81
-	dw $6960
-	dw $697e
-	dw $6983
-	dw $6cbd
-	dw $5bbe
-	dw $5ba8
+	dw CardKeySuccessText                   ; id = 01
+	dw CardKeyFailText                      ; id = 02
+	dw Route15UpstairsLeftBinoculars        ; id = 03
+	dw RedBedroomSNESText                   ; id = 04
+	dw UnnamedText_1e960                    ; id = 05
+	dw UnnamedText_1e97e                    ; id = 06
+	dw UnnamedText_1e983                    ; id = 07
+	dw OakLabEmailText                      ; id = 08
+	dw AerodactylFossilText                 ; id = 09
+	dw Route15UpstairsBinocularsText        ; id = 0A
 	dw KabutopsFossilText                   ; id = 0B
 	dw GymStatueText1                       ; id = 0C
 	dw GymStatueText2                       ; id = 0D
@@ -10583,46 +10583,46 @@ PointerTable_3f22: ; 3f22 (0:3f22)
 	dw SaffronCityPokecenterBenchGuyText    ; id = 18
 	dw MtMoonPokecenterBenchGuyText         ; id = 19
 	dw RockTunnelPokecenterBenchGuyText     ; id = 1A
-	dw $64c1
-	dw $64c6
-	dw $64cb
+	dw UnnamedText_624c1                    ; id = 1B
+	dw UnnamedText_624c6                    ; id = 1C
+	dw UnnamedText_624cb                    ; id = 1D
 	dw $6508
 	dw $6529
-	dw $69aa
-	dw $5ced
-	dw $5865
+	dw ViridianSchoolNotebook               ; id = 20
+	dw ViridianSchoolBlackboard             ; id = 21
+	dw UnnamedText_21865                    ; id = 22
 	dw $5878
-	dw FoundHiddenItemText
-	dw HiddenItemBagFullText
-	dw $5df7
-	dw $6a3d
-	dw $7e79
-	dw $7e7e
-	dw $7e83
-	dw FoundHiddenCoinsText
-	dw DroppedHiddenCoinsText
-	dw $6bdd
-	dw $6be2
-	dw $6c05
-	dw $6b69
-	dw $6a25
-	dw $7f37
-	dw $7f32
-	dw $5c29
-	dw $69a4
-	dw $6a2a
-	dw $6a10
-	dw $6a1d
-	dw $6953
-	dw $7bbf
-	dw $5ec8
-	dw $5edb
-	dw $5eef
-	dw $5f02
-	dw $7c12
-	dw $7be8
-	dw $7c0d
-	dw $7c45
+	dw FoundHiddenItemText                  ; id = 24
+	dw HiddenItemBagFullText                ; id = 25
+	dw VermilionGymTrashText            ; id = 26
+	dw IndigoPlateauHQText                  ; id = 27
+	dw GameCornerOutOfOrderText             ; id = 28
+	dw GameCornerOutToLunchText             ; id = 29
+	dw GameCornerSomeonesKeysText           ; id = 2A
+	dw FoundHiddenCoinsText                 ; id = 2B
+	dw DroppedHiddenCoinsText               ; id = 2C
+	dw BillsHouseMonitorText                ; id = 2D
+	dw BillsHouseInitiatedText              ; id = 2E
+	dw BillsHousePokemonList                ; id = 2F
+	dw UnnamedText_1eb69                    ; id = 30
+	dw CinnabarGymQuiz                      ; id = 31
+	dw GameCornerNoCoinsText                ; id = 32
+	dw GameCornerCoinCaseText               ; id = 33
+	dw LinkCableHelp                        ; id = 34
+	dw TMNotebook                           ; id = 35
+	dw FightingDojoText                     ; id = 36
+	dw UnnamedText_52a10                    ; id = 37
+	dw UnnamedText_52a1d                    ; id = 38
+	dw NewBicycleText                       ; id = 39
+	dw IndigoPlateauStatues                 ; id = 3A
+	dw VermilionGymTrashSuccesText1         ; id = 3B
+	dw VermilionGymTrashSuccesText2         ; id = 3C
+	dw VermilionGymTrashSuccesText3         ; id = 3D
+	dw VermilionGymTrashFailText            ; id = 3E
+	dw TownMapText                          ; id = 3F
+	dw UnnamedText_fbe8                     ; id = 40
+	dw UnnamedText_fc0d                     ; id = 41
+	dw UnnamedText_fc45                     ; id = 42
 
 SECTION "bank1",ROMX,BANK[$1]
 
@@ -31710,29 +31710,29 @@ BookshelfTileIDs: ; fb8b (3:7b8b)
 	db $0D,$36,$40
 	db $FF
 
-UnnamedText_fbbf: ; fbbf (3:7bbf)
+IndigoPlateauStatues: ; fbbf (3:7bbf)
 	db $08 ; asm
-	ld hl, UnnamedText_fbd9
+	ld hl, IndigoPlateauStatuesText1
 	call PrintText
 	ld a, [W_XCOORD]
 	bit 0, a
-	ld hl, UnnamedText_fbde
+	ld hl, IndigoPlateauStatuesText2
 	jr nz, .asm_fbd3
-	ld hl, UnnamedText_fbe3
+	ld hl, IndigoPlateauStatuesText3
 .asm_fbd3
 	call PrintText
 	jp TextScriptEnd
 
-UnnamedText_fbd9: ; fbd9 (3:7bd9)
-	TX_FAR _UnnamedText_fbd9
+IndigoPlateauStatuesText1: ; fbd9 (3:7bd9)
+	TX_FAR _IndigoPlateauStatuesText1
 	db "@"
 
-UnnamedText_fbde: ; fbde (3:7bde)
-	TX_FAR _UnnamedText_fbde
+IndigoPlateauStatuesText2: ; fbde (3:7bde)
+	TX_FAR _IndigoPlateauStatuesText2
 	db "@"
 
-UnnamedText_fbe3: ; fbe3 (3:7be3)
-	TX_FAR _UnnamedText_fbe3
+IndigoPlateauStatuesText3: ; fbe3 (3:7be3)
+	TX_FAR _IndigoPlateauStatuesText3
 	db "@"
 
 UnnamedText_fbe8: ; fbe8 (3:7be8)
@@ -44025,8 +44025,8 @@ UnnamedText_1e946: ; 1e946 (7:6946)
 	ld a, $39
 	jp Func_3ef5
 
-UnnamedText_1e953: ; 1e953 (7:6953)
-	TX_FAR _UnnamedText_1e953
+NewBicycleText: ; 1e953 (7:6953)
+	TX_FAR _NewBicycleText
 	db "@"
 
 	call EnableAutoTextBoxDrawing
@@ -44145,7 +44145,7 @@ UnnamedText_1ea12: ; 1ea12 (7:6a12)
 	ld a, $31
 	jp Func_3ef5
 
-UnnamedText_1ea25: ; 1ea25 (7:6a25)
+CinnabarGymQuiz: ; 1ea25 (7:6a25)
 	db $08 ; asm
 	xor a
 	ld [$da38], a
@@ -44157,14 +44157,14 @@ UnnamedText_1ea25: ; 1ea25 (7:6a25)
 	and $f0
 	swap a
 	ld [$FF00+$dc], a
-	ld hl, UnnamedText_1ea5b ; $6a5b
+	ld hl, CinnabarGymQuizIntroText ; $6a5b
 	call PrintText
 	ld a, [$FF00+$db]
 	dec a
 	add a
 	ld d, $0
 	ld e, a
-	ld hl, PointerTable_1ea60 ; $6a60
+	ld hl, CinnabarQuizQuestions ; $6a60
 	add hl, de
 	ld a, [hli]
 	ld h, [hl]
@@ -44175,40 +44175,40 @@ UnnamedText_1ea25: ; 1ea25 (7:6a25)
 	call Func_1ea92
 	jp TextScriptEnd
 
-UnnamedText_1ea5b: ; 1ea5b (7:6a5b)
-	TX_FAR _UnnamedText_1ea5b
+CinnabarGymQuizIntroText: ; 1ea5b (7:6a5b)
+	TX_FAR _CinnabarGymQuizIntroText
 	db "@"
 
-PointerTable_1ea60: ; 1ea60 (7:6a60)
-	dw UnnamedText_1ea6c
-	dw UnnamedText_1ea71
-	dw UnnamedText_1ea76
-	dw UnnamedText_1ea7b
-	dw UnnamedText_1ea80
-	dw UnnamedText_1ea85
+CinnabarQuizQuestions: ; 1ea60 (7:6a60)
+	dw CinnabarQuizQuestionsText1
+	dw CinnabarQuizQuestionsText2
+	dw CinnabarQuizQuestionsText3
+	dw CinnabarQuizQuestionsText4
+	dw CinnabarQuizQuestionsText5
+	dw CinnabarQuizQuestionsText6
 
-UnnamedText_1ea6c: ; 1ea6c (7:6a6c)
-	TX_FAR _UnnamedText_1ea6c
+CinnabarQuizQuestionsText1: ; 1ea6c (7:6a6c)
+	TX_FAR _CinnabarQuizQuestionsText1
 	db "@"
 
-UnnamedText_1ea71: ; 1ea71 (7:6a71)
-	TX_FAR _UnnamedText_1ea71
+CinnabarQuizQuestionsText2: ; 1ea71 (7:6a71)
+	TX_FAR _CinnabarQuizQuestionsText2
 	db "@"
 
-UnnamedText_1ea76: ; 1ea76 (7:6a76)
-	TX_FAR _UnnamedText_1ea76
+CinnabarQuizQuestionsText3: ; 1ea76 (7:6a76)
+	TX_FAR _CinnabarQuizQuestionsText3
 	db "@"
 
-UnnamedText_1ea7b: ; 1ea7b (7:6a7b)
-	TX_FAR _UnnamedText_1ea7b
+CinnabarQuizQuestionsText4: ; 1ea7b (7:6a7b)
+	TX_FAR _CinnabarQuizQuestionsText4
 	db "@"
 
-UnnamedText_1ea80: ; 1ea80 (7:6a80)
-	TX_FAR _UnnamedText_1ea80
+CinnabarQuizQuestionsText5: ; 1ea80 (7:6a80)
+	TX_FAR _CinnabarQuizQuestionsText5
 	db "@"
 
-UnnamedText_1ea85: ; 1ea85 (7:6a85)
-	TX_FAR _UnnamedText_1ea85
+CinnabarQuizQuestionsText6: ; 1ea85 (7:6a85)
+	TX_FAR _CinnabarQuizQuestionsText6
 	db "@"
 
 Func_1ea8a: ; 1ea8a (7:6a8a)
@@ -44227,7 +44227,7 @@ Func_1ea92: ; 1ea92 (7:6a92)
 	set 5, [hl]
 	ld a, [$FF00+$db]
 	ld [$FF00+$e0], a
-	ld hl, UnnamedText_1eae3 ; $6ae3
+	ld hl, CinnabarGymQuizCorrectText ; $6ae3
 	call PrintText
 	ld a, [$FF00+$e0]
 	ld c, a
@@ -44239,7 +44239,7 @@ Func_1ea92: ; 1ea92 (7:6a92)
 	ld a, $a5
 	call PlaySound
 	call WaitForSoundToFinish
-	ld hl, UnnamedText_1eb05 ; $6b05
+	ld hl, CinnabarGymQuizIncorrectText ; $6b05
 	call PrintText
 	ld a, [$FF00+$db]
 	add $2
@@ -44256,9 +44256,9 @@ Func_1ea92: ; 1ea92 (7:6a92)
 	ld [$da38], a
 	ret
 
-UnnamedText_1eae3: ; 1eae3 (7:6ae3)
+CinnabarGymQuizCorrectText: ; 1eae3 (7:6ae3)
 	db $0b
-	TX_FAR _UnnamedText_1eae3
+	TX_FAR _CinnabarGymQuizCorrectText
 	db $06,$08
 	
 	ld a, [$FF00+$e0]
@@ -44274,8 +44274,8 @@ UnnamedText_1eae3: ; 1eae3 (7:6ae3)
 	call WaitForSoundToFinish
 	jp TextScriptEnd
 
-UnnamedText_1eb05: ; 1eb05 (7:6b05)
-	TX_FAR _UnnamedText_1eb05
+CinnabarGymQuizIncorrectText: ; 1eb05 (7:6b05)
+	TX_FAR _CinnabarGymQuizIncorrectText
 	db "@"
 
 Func_1eb0a: ; 1eb0a (7:6b0a)
@@ -44388,12 +44388,12 @@ UnnamedText_1eb69: ; 1eb69 (7:6b69)
 	call Func_3ef5
 	ret
 
-UnnamedText_1ebdd: ; 1ebdd (7:6bdd)
-	TX_FAR _UnnamedText_1ebdd
+BillsHouseMonitorText: ; 1ebdd (7:6bdd)
+	TX_FAR _BillsHouseMonitorText
 	db "@"
 
-UnnamedText_1ebe2: ; 1ebe2 (7:6be2)
-	TX_FAR _UnnamedText_1ebe2
+BillsHouseInitiatedText: ; 1ebe2 (7:6be2)
+	TX_FAR _BillsHouseInitiatedText
 	db $06
 	db $08 ; asm
 	ld a, $ff
@@ -44408,10 +44408,10 @@ UnnamedText_1ebe2: ; 1ebe2 (7:6be2)
 	call DelayFrames
 	jp TextScriptEnd
 
-UnnamedText_1ec05: ; 1ec05 (7:6c05)
+BillsHousePokemonList: ; 1ec05 (7:6c05)
 	db $08 ; asm
 	call SaveScreenTilesToBuffer1
-	ld hl, UnnamedText_1ec7f
+	ld hl, BillsHousePokemonListText1
 	call PrintText
 	xor a
 	ld [$d07c], a
@@ -44435,7 +44435,7 @@ UnnamedText_1ec05: ; 1ec05 (7:6c05)
 	ld hl, $c3ca
 	ld de, BillsMonListText
 	call PlaceString
-	ld hl, UnnamedText_1ecaa
+	ld hl, BillsHousePokemonListText2
 	call PrintText
 	call SaveScreenTilesToBuffer2
 	call HandleMenuInput
@@ -44443,13 +44443,13 @@ UnnamedText_1ec05: ; 1ec05 (7:6c05)
 	jr nz, .asm_1ec74
 	ld a, [$cc26]
 	add $66
-	cp $66
+	cp EEVEE
 	jr z, .asm_1ec6c
-	cp $67
+	cp FLAREON
 	jr z, .asm_1ec6c
-	cp $68
+	cp JOLTEON
 	jr z, .asm_1ec6c
-	cp $69
+	cp VAPOREON
 	jr z, .asm_1ec6c
 	jr .asm_1ec74
 .asm_1ec6c
@@ -44462,15 +44462,15 @@ UnnamedText_1ec05: ; 1ec05 (7:6c05)
 	call LoadScreenTilesFromBuffer2
 	jp TextScriptEnd
 
-UnnamedText_1ec7f: ; 1ec7f (7:6c7f)
-	TX_FAR _UnnamedText_1ec7f
+BillsHousePokemonListText1: ; 1ec7f (7:6c7f)
+	TX_FAR _BillsHousePokemonListText1
 	db "@"
 
 BillsMonListText: ; 1ec84 (7:6c84)
 	db "EEVEE",$4e,"FLAREON",$4e,"JOLTEON",$4e,"VAPOREON",$4e,"CANCEL@"
 
-UnnamedText_1ecaa: ; 1ecaa (7:6caa)
-	TX_FAR _UnnamedText_1ecaa
+BillsHousePokemonListText2: ; 1ecaa (7:6caa)
+	TX_FAR _BillsHousePokemonListText2
 	db "@"
 
 Func_1ecaf: ; 1ecaf (7:6caf)
@@ -44481,8 +44481,8 @@ Func_1ecaf: ; 1ecaf (7:6caf)
 	ld a, $8
 	jp Func_3ef5
 
-UnnamedText_1ecbd: ; 1ecbd (7:6cbd)
-	TX_FAR _UnnamedText_1ecbd
+OakLabEmailText: ; 1ecbd (7:6cbd)
+	TX_FAR _OakLabEmailText
 	db "@"
 
 SECTION "bank8",ROMX,BANK[$8]
@@ -47930,12 +47930,12 @@ Func_2ff09 ; 2ff09 (b:7f09)
 	ld [$cd3d], a
 	ret
 
-UnnamedText_2ff32: ; 2ff32 (b:7f32)
-	TX_FAR _UnnamedText_2ff32
+GameCornerCoinCaseText: ; 2ff32 (b:7f32)
+	TX_FAR _GameCornerCoinCaseText
 	db "@"
 
-UnnamedText_2ff37: ; 2ff37 (b:7f37)
-	TX_FAR _UnnamedText_2ff37
+GameCornerNoCoinsText: ; 2ff37 (b:7f37)
+	TX_FAR _GameCornerNoCoinsText
 	db "@"
 
 SECTION "bankC",ROMX,BANK[$C]
@@ -49533,16 +49533,16 @@ Func_37e2d: ; 37e2d (d:7e2d)
 	call Func_3ef5
 	ret
 
-UnnamedText_37e79: ; 37e79 (d:7e79)
-	TX_FAR _UnnamedText_37e79
+GameCornerOutOfOrderText: ; 37e79 (d:7e79)
+	TX_FAR _GameCornerOutOfOrderText
 	db "@"
 
-UnnamedText_37e7e: ; 37e7e (d:7e7e)
-	TX_FAR _UnnamedText_37e7e
+GameCornerOutToLunchText: ; 37e7e (d:7e7e)
+	TX_FAR _GameCornerOutToLunchText
 	db "@"
 
-UnnamedText_37e83: ; 37e83 (d:7e83)
-	TX_FAR _UnnamedText_37e83
+GameCornerSomeonesKeysText: ; 37e83 (d:7e83)
+	TX_FAR _GameCornerSomeonesKeysText
 	db "@"
 
 SECTION "bankE",ROMX,BANK[$E]
@@ -86139,16 +86139,14 @@ SilphCoMapList: ; 526e3 (14:66e3)
 	db SILPH_CO_11F
 	db $FF
 
-UnnamedText_526ee: ; 526ee (14:66ee)
-	TX_FAR _UnnamedText_526ee
+CardKeySuccessText: ; 526ee (14:66ee)
+	TX_FAR _CardKeySuccessText1
 	db $0b
-
-UnnamedText_526f3: ; 526f3 (14:66f3)
-	TX_FAR _UnnamedText_526f3
+	TX_FAR _CardKeySuccessText2
 	db "@"
 
-UnnamedText_526f8: ; 526f8 (14:66f8)
-	TX_FAR _UnnamedText_526f8
+CardKeyFailText: ; 526f8 (14:66f8)
+	TX_FAR _CardKeyFailText
 	db "@"
 
 Func_526fd: ; 526fd (14:66fd)
@@ -86585,63 +86583,63 @@ Func_52996: ; 52996 (14:6996)
 	ld a, [wTrainerSpriteOffset]
 	jp Func_3ef5
 
-UnnamedText_529a4: ; 529a4 (14:69a4)
-	TX_FAR UnnamedText_88bfd
+TMNotebook: ; 529a4 (14:69a4)
+	TX_FAR TMNotebookText
 	db $0d
 	db "@"
 
-UnnamedText_529aa: ; 529aa (14:69aa)
+ViridianSchoolNotebook: ; 529aa (14:69aa)
 	db $08 ; asm
-	ld hl, UnnamedText_529f4
+	ld hl, ViridianSchoolNotebookText1
 	call PrintText
-	call Func_529db
-	jr nz, .asm_529d8
-	ld hl, UnnamedText_529f9
+	call TurnPageSchoolNotebook
+	jr nz, .doneReading
+	ld hl, ViridianSchoolNotebookText2
 	call PrintText
-	call Func_529db
-	jr nz, .asm_529d8
-	ld hl, UnnamedText_529fe
+	call TurnPageSchoolNotebook
+	jr nz, .doneReading
+	ld hl, ViridianSchoolNotebookText3
 	call PrintText
-	call Func_529db
-	jr nz, .asm_529d8
-	ld hl, UnnamedText_52a03
+	call TurnPageSchoolNotebook
+	jr nz, .doneReading
+	ld hl, ViridianSchoolNotebookText4
 	call PrintText
-	ld hl, UnnamedText_529ee
+	ld hl, ViridianSchoolNotebookText5
 	call PrintText
-.asm_529d8
+.doneReading
 	jp TextScriptEnd
 
-Func_529db: ; 529db (14:69db)
-	ld hl, UnnamedText_529e9
+TurnPageSchoolNotebook: ; 529db (14:69db)
+	ld hl, TurnPageText
 	call PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
 	ret
 
-UnnamedText_529e9: ; 529e9 (14:69e9)
-	TX_FAR _UnnamedText_529e9
+TurnPageText: ; 529e9 (14:69e9)
+	TX_FAR _TurnPageText
 	db "@"
 
-UnnamedText_529ee: ; 529ee (14:69ee)
-	TX_FAR _UnnamedText_529ee
+ViridianSchoolNotebookText5: ; 529ee (14:69ee)
+	TX_FAR _ViridianSchoolNotebookText5
 	db $0d
 	db "@"
 
-UnnamedText_529f4: ; 529f4 (14:69f4)
-	TX_FAR _UnnamedText_529f4
+ViridianSchoolNotebookText1: ; 529f4 (14:69f4)
+	TX_FAR _ViridianSchoolNotebookText1
 	db "@"
 
-UnnamedText_529f9: ; 529f9 (14:69f9)
-	TX_FAR _UnnamedText_529f9
+ViridianSchoolNotebookText2: ; 529f9 (14:69f9)
+	TX_FAR _ViridianSchoolNotebookText2
 	db "@"
 
-UnnamedText_529fe: ; 529fe (14:69fe)
-	TX_FAR _UnnamedText_529fe
+ViridianSchoolNotebookText3: ; 529fe (14:69fe)
+	TX_FAR _ViridianSchoolNotebookText3
 	db "@"
 
-UnnamedText_52a03: ; 52a03 (14:6a03)
-	TX_FAR _UnnamedText_52a03
+ViridianSchoolNotebookText4: ; 52a03 (14:6a03)
+	TX_FAR _ViridianSchoolNotebookText4
 	db "@"
 
 Func_52a08: ; 52a08 (14:6a08)
@@ -86667,8 +86665,8 @@ Func_52a22: ; 52a22 (14:6a22)
 	ld a, $36
 	jp Func_3ef5
 
-UnnamedText_52a2a: ; 52a2a (14:6a2a)
-	TX_FAR _UnnamedText_52a2a
+FightingDojoText: ; 52a2a (14:6a2a)
+	TX_FAR _FightingDojoText
 	db "@"
 
 Func_52a2f: ; 52a2f (14:6a2f)
@@ -86679,8 +86677,8 @@ Func_52a2f: ; 52a2f (14:6a2f)
 	ld a, $27
 	jp Func_3ef5
 
-UnnamedText_52a3d: ; 52a3d (14:6a3d)
-	TX_FAR _UnnamedText_52a3d
+IndigoPlateauHQText: ; 52a3d (14:6a3d)
+	TX_FAR _IndigoPlateauHQText
 	db "@"
 
 SECTION "bank15",ROMX,BANK[$15]
@@ -98373,8 +98371,8 @@ Func_5db79: ; 5db79 (17:5b79)
 	ld a, $4
 	jp Func_3ef5
 
-UnnamedText_5db81: ; 5db81 (17:5b81)
-	TX_FAR _UnnamedText_5db81
+RedBedroomSNESText: ; 5db81 (17:5b81)
+	TX_FAR _RedBedroomSNESText
 	db "@"
 
 Func_5db86: ; 5db86 (17:5b86)
@@ -98382,38 +98380,38 @@ Func_5db86: ; 5db86 (17:5b86)
 	ld a, $3
 	jp Func_3ef5
 
-Func_5db8e: ; 5db8e (17:5b8e)
+Route15UpstairsLeftBinoculars: ; 5db8e (17:5b8e)
 	db $fc
 	ld a, [$c109]
-	cp $4
+	cp $4 ; i
 	ret nz
 	call EnableAutoTextBoxDrawing
-	ld a, $a
+	ld a, $a ; text id Route15UpstairsBinocularsText
 	call Func_3ef5
 	ld a, ARTICUNO
 	ld [$cf91], a
 	call PlayCry
-	jp Func_5dbd9
+	jp DisplayMonFrontSpriteInBox
 
-UnnamedText_5dba8: ; 5dba8 (17:5ba8)
-	TX_FAR _UnnamedText_5dba8
+Route15UpstairsBinocularsText: ; 5dba8 (17:5ba8)
+	TX_FAR _Route15UpstairsBinocularsText
 	db "@"
 
 	ld a, $b7
 	ld [$cf91], a
-	call Func_5dbd9
+	call DisplayMonFrontSpriteInBox
 	call EnableAutoTextBoxDrawing
 	ld a, $9
 	call Func_3ef5
 	ret
 
-UnnamedText_5dbbe: ; 5dbbe (17:5bbe)
-	TX_FAR _UnnamedText_5dbbe
+AerodactylFossilText: ; 5dbbe (17:5bbe)
+	TX_FAR _AerodactylFossilText
 	db "@"
 
 	ld a, $b6
 	ld [$cf91], a
-	call Func_5dbd9
+	call DisplayMonFrontSpriteInBox
 	call EnableAutoTextBoxDrawing
 	ld a, $b
 	call Func_3ef5
@@ -98423,7 +98421,9 @@ KabutopsFossilText: ; 5dbd4 (17:5bd4)
 	TX_FAR _KabutopsFossilText
 	db "@"
 
-Func_5dbd9: ; 5dbd9 (17:5bd9)
+DisplayMonFrontSpriteInBox: ; 5dbd9 (17:5bd9)
+; Displays a pokemon's front sprite in a pop-up window.
+; [$cf91] = pokemon interal id number
 	ld a, $1
 	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
 	call Delay3
@@ -98460,10 +98460,10 @@ Func_5dc1a: ; 5dc1a (17:5c1a)
 	call Func_3ef5
 	ret
 
-UnnamedText_5dc29: ; 5dc29 (17:5c29)
+LinkCableHelp: ; 5dc29 (17:5c29)
 	db $08 ; asm
 	call SaveScreenTilesToBuffer1
-	ld hl, UnnamedText_5dc9e
+	ld hl, LinkCableHelpText1
 	call PrintText
 	xor a
 	ld [W_ANIMATIONID], a
@@ -98487,7 +98487,7 @@ UnnamedText_5dc29: ; 5dc29 (17:5c29)
 	ld hl, $c3ca
 	ld de, HowToLinkText
 	call PlaceString
-	ld hl, UnnamedText_5dca3
+	ld hl, LinkCableHelpText2
 	call PrintText
 	call HandleMenuInput
 	bit 1, a
@@ -98497,7 +98497,7 @@ UnnamedText_5dc29: ; 5dc29 (17:5c29)
 	jr z, .asm_5dc93 ; 0x5dc7b $16
 	ld hl, $d730
 	res 6, [hl]
-	ld hl, PointerTable_5dcd8
+	ld hl, LinkCableInfoTexts
 	add a
 	ld d, $0
 	ld e, a
@@ -98513,38 +98513,38 @@ UnnamedText_5dc29: ; 5dc29 (17:5c29)
 	call LoadScreenTilesFromBuffer1
 	jp TextScriptEnd
 
-UnnamedText_5dc9e: ; 5dc9e (17:5c9e)
-	TX_FAR _UnnamedText_5dc9e
+LinkCableHelpText1: ; 5dc9e (17:5c9e)
+	TX_FAR _LinkCableHelpText1
 	db "@"
 
-UnnamedText_5dca3: ; 5dca3 (17:5ca3)
-	TX_FAR _UnnamedText_5dca3
+LinkCableHelpText2: ; 5dca3 (17:5ca3)
+	TX_FAR _LinkCableHelpText2
 	db "@"
 
 HowToLinkText: ; 5dca8 (17:5ca8)
 	db "HOW TO LINK",$4e,"COLOSSEUM",$4e,"TRADE CENTER",$4e,"STOP READING@"
 
-PointerTable_5dcd8: ; 5dcd8 (17:5cd8)
-	dw UnnamedText_5dcde
-	dw UnnamedText_5dce3
-	dw UnnamedText_5dce8
+LinkCableInfoTexts: ; 5dcd8 (17:5cd8)
+	dw LinkCableInfoText1
+	dw LinkCableInfoText2
+	dw LinkCableInfoText3
 
-UnnamedText_5dcde: ; 5dcde (17:5cde)
-	TX_FAR _UnnamedText_5dcde
+LinkCableInfoText1: ; 5dcde (17:5cde)
+	TX_FAR _LinkCableInfoText1
 	db "@"
 
-UnnamedText_5dce3: ; 5dce3 (17:5ce3)
-	TX_FAR _UnnamedText_5dce3
+LinkCableInfoText2: ; 5dce3 (17:5ce3)
+	TX_FAR _LinkCableInfoText2
 	db "@"
 
-UnnamedText_5dce8: ; 5dce8 (17:5ce8)
-	TX_FAR _UnnamedText_5dce8
+LinkCableInfoText3: ; 5dce8 (17:5ce8)
+	TX_FAR _LinkCableInfoText3
 	db "@"
 
-UnnamedText_5dced: ; 5dced (17:5ced)
+ViridianSchoolBlackboard: ; 5dced (17:5ced)
 	db $08 ; asm
 	call SaveScreenTilesToBuffer1
-	ld hl, UnnamedText_5dda2
+	ld hl, ViridianSchoolBlackboardText1
 	call PrintText
 	xor a
 	ld [W_ANIMATIONID], a
@@ -98570,11 +98570,11 @@ UnnamedText_5dced: ; 5dced (17:5ced)
 	ld hl, $c3ce
 	ld de, StatusAilmentText2
 	call PlaceString
-	ld hl, UnnamedText_5dda7
+	ld hl, ViridianSchoolBlackboardText2
 	call PrintText
 	call HandleMenuInput
 	bit 1, a
-	jr nz, .asm_5dd97
+	jr nz, .exitBlackboard
 	bit 4, a
 	jr z, .asm_5dd5c
 	ld a, $2
@@ -98604,10 +98604,10 @@ UnnamedText_5dced: ; 5dced (17:5ced)
 	ld a, [W_ANIMATIONID]
 	add b
 	cp $5
-	jr z, .asm_5dd97
+	jr z, .exitBlackboard
 	ld hl, $d730
 	res 6, [hl]
-	ld hl, PointerTable_5ddcc
+	ld hl, ViridianBlackboardStatusPointers
 	add a
 	ld d, $0
 	ld e, a
@@ -98617,18 +98617,18 @@ UnnamedText_5dced: ; 5dced (17:5ced)
 	ld l, a
 	call PrintText
 	jp .asm_5dd15
-.asm_5dd97
+.exitBlackboard
 	ld hl, $d730
 	res 6, [hl]
 	call LoadScreenTilesFromBuffer1
 	jp TextScriptEnd
 
-UnnamedText_5dda2: ; 5dda2 (17:5da2)
-	TX_FAR _UnnamedText_5dda2
+ViridianSchoolBlackboardText1: ; 5dda2 (17:5da2)
+	TX_FAR _ViridianSchoolBlackboardText1
 	db "@"
 
-UnnamedText_5dda7: ; 5dda7 (17:5da7)
-	TX_FAR _UnnamedText_5dda7
+ViridianSchoolBlackboardText2: ; 5dda7 (17:5da7)
+	TX_FAR _ViridianSchoolBlackboardText2
 	db "@"
 
 StatusAilmentText1: ; 5ddac (17:5dac)
@@ -98641,31 +98641,31 @@ StatusAilmentText2: ; 5ddbb (17:5dbb)
 	db " FRZ",$4e
 	db " QUIT@@"
 	
-PointerTable_5ddcc: ; 5ddcc (17:5ddc)
-	dw UnnamedText_5ddd6
-	dw UnnamedText_5dddb
-	dw UnnamedText_5dde0
-	dw UnnamedText_5dde5
-	dw UnnamedText_5ddea
+ViridianBlackboardStatusPointers: ; 5ddcc (17:5ddc)
+	dw ViridianBlackboardSleepText
+	dw ViridianBlackboardPoisonText
+	dw ViridianBlackbaordPrlzText
+	dw ViridianBlackboardBurnText
+	dw ViridianBlackboardFrozenText
 
-UnnamedText_5ddd6: ; 5ddd6 (17:5dd6)
-	TX_FAR _UnnamedText_5ddd6
+ViridianBlackboardSleepText: ; 5ddd6 (17:5dd6)
+	TX_FAR _ViridianBlackboardSleepText
 	db "@"
 
-UnnamedText_5dddb: ; 5dddb (17:5ddb)
-	TX_FAR _UnnamedText_5dddb
+ViridianBlackboardPoisonText: ; 5dddb (17:5ddb)
+	TX_FAR _ViridianBlackboardPoisonText
 	db "@"
 
-UnnamedText_5dde0: ; 5dde0 (17:5de0)
-	TX_FAR _UnnamedText_5dde0
+ViridianBlackbaordPrlzText: ; 5dde0 (17:5de0)
+	TX_FAR _ViridianBlackbaordPrlzText
 	db "@"
 
-UnnamedText_5dde5: ; 5dde5 (17:5de5)
-	TX_FAR _UnnamedText_5dde5
+ViridianBlackboardBurnText: ; 5dde5 (17:5de5)
+	TX_FAR _ViridianBlackboardBurnText
 	db "@"
 
-UnnamedText_5ddea: ; 5ddea (17:5dea)
-	TX_FAR _UnnamedText_5ddea
+ViridianBlackboardFrozenText: ; 5ddea (17:5dea)
+	TX_FAR _ViridianBlackboardFrozenText
 	db "@"
 
 Func_5ddef: ; 5ddef (17:5def)
@@ -98673,8 +98673,8 @@ Func_5ddef: ; 5ddef (17:5def)
 	ld a, $26
 	jp Func_3ef5
 
-UnnamedText_5ddf7: ; 5ddf7 (17:5df7)
-	TX_FAR _UnnamedText_5ddf7
+VermilionGymTrashText: ; 5ddf7 (17:5df7)
+	TX_FAR _VermilionGymTrashText
 	db "@"
 
 	call EnableAutoTextBoxDrawing
@@ -98750,8 +98750,8 @@ UnnamedText_5ddf7: ; 5ddf7 (17:5df7)
 Unknown_5de7d: ; 5de7d (17:5e7d)
 INCBIN "baserom.gbc",$5de7d,$5dec8 - $5de7d
 
-UnnamedText_5dec8: ; 5dec8 (17:5ec8)
-	TX_FAR _UnnamedText_5dec8
+VermilionGymTrashSuccesText1: ; 5dec8 (17:5ec8)
+	TX_FAR _VermilionGymTrashSuccesText1
 	db $08 ; asm
 	call WaitForSoundToFinish
 	ld a, $9d
@@ -98759,8 +98759,8 @@ UnnamedText_5dec8: ; 5dec8 (17:5ec8)
 	call WaitForSoundToFinish
 	jp TextScriptEnd
 
-UnnamedText_5dedb: ; 5dedb (17:5edb)
-	TX_FAR _UnnamedText_5dedb
+VermilionGymTrashSuccesText2: ; 5dedb (17:5edb)
+	TX_FAR _VermilionGymTrashSuccesText2
 	db "@"
 
 UnnamedText_5dee0: ; 5dee0 (17:5ee0)
@@ -98771,8 +98771,8 @@ UnnamedText_5dee0: ; 5dee0 (17:5ee0)
 	call WaitForSoundToFinish
 	jp TextScriptEnd
 
-UnnamedText_5deef: ; 5deef (17:5eef)
-	TX_FAR _UnnamedText_5deef
+VermilionGymTrashSuccesText3: ; 5deef (17:5eef)
+	TX_FAR _VermilionGymTrashSuccesText3
 	db $08 ; asm
 	call WaitForSoundToFinish
 	ld a, $ad
@@ -98780,8 +98780,8 @@ UnnamedText_5deef: ; 5deef (17:5eef)
 	call WaitForSoundToFinish
 	jp TextScriptEnd
 
-UnnamedText_5df02: ; 5df02 (17:5f02)
-	TX_FAR _UnnamedText_5df02
+VermilionGymTrashFailText: ; 5df02 (17:5f02)
+	TX_FAR _VermilionGymTrashFailText
 	db $08 ; asm
 	call WaitForSoundToFinish
 	ld a, $a5
@@ -118119,15 +118119,15 @@ INCLUDE "music/credits.asm"
 
 SECTION "bank20",ROMX,BANK[$20]
 
-_UnnamedText_526ee: ; 80000 (20:4000)
+_CardKeySuccessText1: ; 80000 (20:4000)
 	db $0, "Bingo!@@"
 
-_UnnamedText_526f3: ; 80009 (20:4009)
+_CardKeySuccessText2: ; 80009 (20:4009)
 	db $0, $4f
 	db "The CARD KEY", $55
 	db "opened the door!", $57
 
-_UnnamedText_526f8: ; 80029 (20:4029)
+_CardKeyFailText: ; 80029 (20:4029)
 	db $0, "Darn! It needs a", $4f
 	db "CARD KEY!", $57
 
@@ -120957,7 +120957,7 @@ _BookcaseText: ; 886c9 (22:46c9)
 	db $0, "Crammed full of", $4f
 	db "#MON books!", $57
 
-_UnnamedText_1e953: ; 886e6 (22:46e6)
+_NewBicycleText: ; 886e6 (22:46e6)
 	db $0, "A shiny new", $4f
 	db "BICYCLE!", $57
 
@@ -120984,7 +120984,7 @@ _UnnamedText_1ea12: ; 88798 (22:4798)
 	db $0, "PA: Your SAFARI", $4f
 	db "GAME is over!", $57
 
-_UnnamedText_1ea5b: ; 887b7 (22:47b7)
+_CinnabarGymQuizIntroText: ; 887b7 (22:47b7)
 	db $0, "#MON Quiz!", $51
 	db "Get it right and", $4f
 	db "the door opens to", $55
@@ -120998,41 +120998,41 @@ _UnnamedText_1ea5b: ; 887b7 (22:47b7)
 	db "Then get it right!", $4f
 	db "Here we go!", $58
 
-_UnnamedText_1ea6c: ; 8886d (22:486d)
+_CinnabarQuizQuestionsText1: ; 8886d (22:486d)
 	db $0, "CATERPIE evolves", $4f
 	db "into BUTTERFREE?", $57
 
-_UnnamedText_1ea71: ; 88890 (22:4890)
+_CinnabarQuizQuestionsText2: ; 88890 (22:4890)
 	db $0, "There are 9", $4f
 	db "certified #MON", $55
 	db "LEAGUE BADGEs?", $57
 
-_UnnamedText_1ea76: ; 888bb (22:48bb)
+_CinnabarQuizQuestionsText3: ; 888bb (22:48bb)
 	db $0, "POLIWAG evolves 3", $4f
 	db "times?", $57
 
-_UnnamedText_1ea7b: ; 888d5 (22:48d5)
+_CinnabarQuizQuestionsText4: ; 888d5 (22:48d5)
 	db $0, "Are thunder moves", $4f
 	db "effective against", $55
 	db "ground element-", $55
 	db "type #MON?", $57
 
-_UnnamedText_1ea80: ; 88915 (22:4915)
+_CinnabarQuizQuestionsText5: ; 88915 (22:4915)
 	db $0, "#MON of the", $4f
 	db "same kind and", $55
 	db "level are not", $55
 	db "identical?", $57
 
-_UnnamedText_1ea85: ; 88949 (22:4949)
+_CinnabarQuizQuestionsText6: ; 88949 (22:4949)
 	db $0, "TM28 contains", $4f
 	db "TOMBSTONER?", $57
 
-_UnnamedText_1eae3: ; 88964 (22:4964)
+_CinnabarGymQuizCorrectText: ; 88964 (22:4964)
 	db $0, "You're absolutely", $4f
 	db "correct!", $51
 	db "Go on through!@@"
 
-_UnnamedText_1eb05: ; 8898f (22:498f)
+_CinnabarGymQuizIncorrectText: ; 8898f (22:498f)
 	db $0, "Sorry! Bad call!", $58
 
 _UnnamedText_1eb69: ; 889a1 (22:49a1)
@@ -121040,25 +121040,25 @@ _UnnamedText_1eb69: ; 889a1 (22:49a1)
 	db "#MON notebooks!", $51
 	db "#MON graphs!", $57
 
-_UnnamedText_1ebdd: ; 889cf (22:49cf)
+_BillsHouseMonitorText: ; 889cf (22:49cf)
 	db $0, "TELEPORTER is", $4f
 	db "displayed on the", $55
 	db "PC monitor.", $57
 
-_UnnamedText_1ebe2: ; 889fb (22:49fb)
+_BillsHouseInitiatedText: ; 889fb (22:49fb)
 	db $0, $52, " initiated", $4f
 	db "TELEPORTER's Cell", $55
 	db "Separator!@@"
 
-_UnnamedText_1ec7f: ; 88a25 (22:4a25)
+_BillsHousePokemonListText1: ; 88a25 (22:4a25)
 	db $0, "BILL's favorite", $4f
 	db "#MON list!", $58
 
-_UnnamedText_1ecaa: ; 88a40 (22:4a40)
+_BillsHousePokemonListText2: ; 88a40 (22:4a40)
 	db $0, "Which #MON do", $4f
 	db "you want to see?", $57
 
-_UnnamedText_1ecbd: ; 88a60 (22:4a60)
+_OakLabEmailText: ; 88a60 (22:4a60)
 	db $0, "There's an e-mail", $4f
 	db "message here!", $51
 	db "...", $51
@@ -121078,30 +121078,30 @@ _UnnamedText_1ecbd: ; 88a60 (22:4a60)
 	db "please visit us!", $55
 	db "...", $57
 
-_UnnamedText_2ff32: ; 88b5b (22:4b5b)
+_GameCornerCoinCaseText: ; 88b5b (22:4b5b)
 	db $0, "A COIN CASE is", $4f
 	db "required!", $57
 
-_UnnamedText_2ff37: ; 88b75 (22:4b75)
+_GameCornerNoCoinsText: ; 88b75 (22:4b75)
 	db $0, "You don't have", $4f
 	db "any coins!", $57
 
-_UnnamedText_37e79: ; 88b8f (22:4b8f)
+_GameCornerOutOfOrderText: ; 88b8f (22:4b8f)
 	db $0, "OUT OF ORDER", $4f
 	db "This is broken.", $57
 
-_UnnamedText_37e7e: ; 88bad (22:4bad)
+_GameCornerOutToLunchText: ; 88bad (22:4bad)
 	db $0, "OUT TO LUNCH", $4f
 	db "This is reserved.", $57
 
-_UnnamedText_37e83: ; 88bcd (22:4bcd)
+_GameCornerSomeonesKeysText: ; 88bcd (22:4bcd)
 	db $0, "Someone's keys!", $4f
 	db "They'll be back.", $57
 
 _UnnamedText_21865: ; 88bed (22:4bed)
 	db $0, "Just a moment.", $57
 
-UnnamedText_88bfd: ; 88bfd (22:4bfd)
+TMNotebookText: ; 88bfd (22:4bfd)
 	db $0, "It's a pamphlet", $4f
 	db "on TMs.", $51
 	db "...", $51
@@ -121112,14 +121112,14 @@ UnnamedText_88bfd: ; 88bfd (22:4bfd)
 	db "used repeatedly.", $51
 	db "SILPH CO.@@"
 
-_UnnamedText_529e9: ; 88c6f (22:4c6f)
+_TurnPageText: ; 88c6f (22:4c6f)
 	db $0, "Turn the page?", $57
 
-_UnnamedText_529ee: ; 88c7f (22:4c7f)
+_ViridianSchoolNotebookText5: ; 88c7f (22:4c7f)
 	db $0, "GIRL: Hey! Don't", $4f
 	db "look at my notes!@@"
 
-_UnnamedText_529f4: ; 88ca3 (22:4ca3)
+_ViridianSchoolNotebookText1: ; 88ca3 (22:4ca3)
 	db $0, "Looked at the", $4f
 	db "notebook!", $51
 	db "First page...", $51
@@ -121133,7 +121133,7 @@ _UnnamedText_529f4: ; 88ca3 (22:4ca3)
 	db "fight are called", $55
 	db "#MON trainers.", $58
 
-_UnnamedText_529f9: ; 88d46 (22:4d46)
+_ViridianSchoolNotebookText2: ; 88d46 (22:4d46)
 	db $0, "Second page...", $51
 	db "A healthy #MON", $4f
 	db "may be hard to", $55
@@ -121143,7 +121143,7 @@ _UnnamedText_529f9: ; 88d46 (22:4d46)
 	db "other damage are", $55
 	db "effective!", $58
 
-_UnnamedText_529fe: ; 88dbd (22:4dbd)
+_ViridianSchoolNotebookText3: ; 88dbd (22:4dbd)
 	db $0, "Third page...", $51
 	db "#MON trainers", $4f
 	db "seek others to", $55
@@ -121153,7 +121153,7 @@ _UnnamedText_529fe: ; 88dbd (22:4dbd)
 	db "constantly fought", $55
 	db "at #MON GYMs.", $58
 
-_UnnamedText_52a03: ; 88e2c (22:4e2c)
+_ViridianSchoolNotebookText4: ; 88e2c (22:4e2c)
 	db $0, "Fourth page...", $51
 	db "The goal for", $4f
 	db "#MON trainers", $55
@@ -121173,27 +121173,27 @@ _UnnamedText_52a1d: ; 88ed9 (22:4ed9)
 	db $0, "What goes around", $4f
 	db "comes around!", $57
 
-_UnnamedText_52a2a: ; 88ef9 (22:4ef9)
+_FightingDojoText: ; 88ef9 (22:4ef9)
 	db $0, "FIGHTING DOJO", $57
 
-_UnnamedText_52a3d: ; 88f08 (22:4f08)
+_IndigoPlateauHQText: ; 88f08 (22:4f08)
 	db $0, "INDIGO PLATEAU", $4f
 	db "#MON LEAGUE HQ", $57
 
-_UnnamedText_5db81: ; 88f27 (22:4f27)
+_RedBedroomSNESText: ; 88f27 (22:4f27)
 	db $0, $52, " is", $4f
 	db "playing the SNES!", $55
 	db "...Okay!", $55
 	db "It's time to go!", $57
 
-_UnnamedText_5dba8: ; 88f58 (22:4f58)
+_Route15UpstairsBinocularsText: ; 88f58 (22:4f58)
 	db $0, "Looked into the", $4f
 	db "binoculars...", $51
 	db "A large, shining", $4f
 	db "bird is flying", $55
 	db "toward the sea.", $57
 
-_UnnamedText_5dbbe: ; 88fa7 (22:4fa7)
+_AerodactylFossilText: ; 88fa7 (22:4fa7)
 	db $0, "AERODACTYL Fossil", $4f
 	db "A primitive and", $55
 	db "rare #MON.", $57
@@ -121203,16 +121203,16 @@ _KabutopsFossilText: ; 88fd5 (22:4fd5)
 	db "A primitive and", $55
 	db "rare #MON.", $57
 
-_UnnamedText_5dc9e: ; 89001 (22:5001)
+_LinkCableHelpText1: ; 89001 (22:5001)
 	db $0, "TRAINER TIPS", $51
 	db "Using a Game Link", $4f
 	db "Cable", $58
 
-_UnnamedText_5dca3: ; 89027 (22:5027)
+_LinkCableHelpText2: ; 89027 (22:5027)
 	db $0, "Which heading do", $4f
 	db "you want to read?", $57
 
-_UnnamedText_5dcde: ; 8904b (22:504b)
+_LinkCableInfoText1: ; 8904b (22:504b)
 	db $0, "When you have", $4f
 	db "linked your GAME", $55
 	db "BOY with another", $55
@@ -121221,27 +121221,27 @@ _UnnamedText_5dcde: ; 8904b (22:504b)
 	db "the right in any", $55
 	db "#MON CENTER.", $58
 
-_UnnamedText_5dce3: ; 890bd (22:50bd)
+_LinkCableInfoText2: ; 890bd (22:50bd)
 	db $0, "COLOSSEUM lets", $4f
 	db "you play against", $55
 	db "a friend.", $58
 
-_UnnamedText_5dce8: ; 890e8 (22:50e8)
+_LinkCableInfoText3: ; 890e8 (22:50e8)
 	db $0, "TRADE CENTER is", $4f
 	db "used for trading", $55
 	db "#MON.", $58
 
-_UnnamedText_5dda2: ; 89110 (22:5110)
+_ViridianSchoolBlackboardText1: ; 89110 (22:5110)
 	db $0, "The blackboard", $4f
 	db "describes #MON", $55
 	db "STATUS changes", $55
 	db "during battles.", $58
 
-_UnnamedText_5dda7: ; 8914e (22:514e)
+_ViridianSchoolBlackboardText2: ; 8914e (22:514e)
 	db $0, "Which heading do", $4f
 	db "you want to read?", $57
 
-_UnnamedText_5ddd6: ; 89172 (22:5172)
+_ViridianBlackboardSleepText: ; 89172 (22:5172)
 	db $0, "A #MON can't", $4f
 	db "attack if it's", $55
 	db "asleep!", $51
@@ -121251,7 +121251,7 @@ _UnnamedText_5ddd6: ; 89172 (22:5172)
 	db "Use AWAKENING to", $4f
 	db "wake them up!", $58
 
-_UnnamedText_5dddb: ; 891de (22:51de)
+_ViridianBlackboardPoisonText: ; 891de (22:51de)
 	db $0, "When poisoned, a", $4f
 	db "#MON's health", $55
 	db "steadily drops.", $51
@@ -121260,7 +121260,7 @@ _UnnamedText_5dddb: ; 891de (22:51de)
 	db "Use an ANTIDOTE", $4f
 	db "to cure poison!", $58
 
-_UnnamedText_5dde0: ; 8924b (22:524b)
+_ViridianBlackbaordPrlzText: ; 8924b (22:524b)
 	db $0, "Paralysis could", $4f
 	db "make #MON", $55
 	db "moves misfire!", $51
@@ -121269,7 +121269,7 @@ _UnnamedText_5dde0: ; 8924b (22:524b)
 	db "Use PARLYZ HEAL", $4f
 	db "for treatment!", $58
 
-_UnnamedText_5dde5: ; 892b5 (22:52b5)
+_ViridianBlackboardBurnText: ; 892b5 (22:52b5)
 	db $0, "A burn reduces", $4f
 	db "power and speed.", $55
 	db "It also causes", $55
@@ -121279,7 +121279,7 @@ _UnnamedText_5dde5: ; 892b5 (22:52b5)
 	db "Use BURN HEAL to", $4f
 	db "cure a burn!", $58
 
-_UnnamedText_5ddea: ; 8932f (22:532f)
+_ViridianBlackboardFrozenText: ; 8932f (22:532f)
 	db $0, "If frozen, a", $4f
 	db "#MON becomes", $55
 	db "totally immobile!", $51
@@ -121289,11 +121289,11 @@ _UnnamedText_5ddea: ; 8932f (22:532f)
 	db "Use ICE HEAL to", $4f
 	db "thaw out #MON!", $58
 
-_UnnamedText_5ddf7: ; 893a7 (22:53a7)
+_VermilionGymTrashText: ; 893a7 (22:53a7)
 	db $0, "Nope, there's", $4f
 	db "only trash here.", $57
 
-_UnnamedText_5dec8: ; 893c6 (22:53c6)
+_VermilionGymTrashSuccesText1: ; 893c6 (22:53c6)
 	db $0, "Hey! There's a", $4f
 	db "switch under the", $55
 	db "trash!", $55
@@ -121301,19 +121301,19 @@ _UnnamedText_5dec8: ; 893c6 (22:53c6)
 	db "The 1st electric", $4f
 	db "lock opened!@@"
 
-_UnnamedText_5dedb: ; 89418 (22:5418)
+_VermilionGymTrashSuccesText2: ; 89418 (22:5418)
 	db $0, "Hey! There's", $4f
 	db "another switch", $55
 	db "under the trash!", $55
 	db "Turn it on!", $58
 
-_UnnamedText_5deef: ; 89451 (22:5451)
+_VermilionGymTrashSuccesText3: ; 89451 (22:5451)
 	db $0, "The 2nd electric", $4f
 	db "lock opened!", $51
 	db "The motorized door", $4f
 	db "opened!@@"
 
-_UnnamedText_5df02: ; 8948c (22:548c)
+_VermilionGymTrashFailText: ; 8948c (22:548c)
 	db $0, "Nope! There's", $4f
 	db "only trash here.", $55
 	db "Hey! The electric", $55
@@ -121347,15 +121347,15 @@ _DroppedHiddenCoinsText: ; 8953b (22:553b)
 	db "Oops! Dropped", $4f
 	db "some coins!", $57
 
-_UnnamedText_fbd9: ; 89557 (22:5557)
+_IndigoPlateauStatuesText1: ; 89557 (22:5557)
 	db $0, "INDIGO PLATEAU", $58
 
-_UnnamedText_fbde: ; 89567 (22:5567)
+_IndigoPlateauStatuesText2: ; 89567 (22:5567)
 	db $0, "The ultimate goal", $4f
 	db "of trainers!", $55
 	db "#MON LEAGUE HQ", $57
 
-_UnnamedText_fbe3: ; 89596 (22:5596)
+_IndigoPlateauStatuesText3: ; 89596 (22:5596)
 	db $0, "The highest", $4f
 	db "#MON authority", $55
 	db "#MON LEAGUE HQ", $57
