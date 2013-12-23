@@ -3290,8 +3290,7 @@ PrintLevelCommon: ; 1523 (0:1523)
 	ld b,$41 ; no leading zeroes, left-aligned, one byte
 	jp PrintNumber
 
-; XXX does anything call this?
-Unknown152E: ; 152e (0:152e)
+Func_152e: ; 152e (0:152e)
 	ld hl,$d0dc
 	ld c,a
 	ld b,0
@@ -4682,7 +4681,7 @@ GetRowColAddressBgMap: ; 1cdd (0:1cdd)
 ClearBgMap: ; 1cf0 (0:1cf0)
 	ld a," "
 	jr .next
-	ld a,l ; XXX does anything call this?
+	ld a,l
 .next
 	ld de,$400 ; size of VRAM background map
 	ld l,e
@@ -5363,7 +5362,6 @@ DelayFrame: ; 20af (0:20af)
 	ld a,[H_VBLANKOCCURRED]
 	and a
 	jr nz,.halt
-
 	ret
 
 ; These routines manage gradual fading
@@ -6352,22 +6350,22 @@ ReadNextInputByte: ; 268b (0:268b)
 
 ; the nth item is 2^n - 1
 LengthEncodingOffsetList: ; 269f (0:269f)
-	dw $0001
-	dw $0003
-	dw $0007
-	dw $000F
-	dw $001F
-	dw $003F
-	dw $007F
-	dw $00FF
-	dw $01FF
-	dw $03FF
-	dw $07FF
-	dw $0FFF
-	dw $1FFF
-	dw $3FFF
-	dw $7FFF
-	dw $FFFF
+	dw %0000000000000001
+	dw %0000000000000011
+	dw %0000000000000111
+	dw %0000000000001111
+	dw %0000000000011111
+	dw %0000000000111111
+	dw %0000000001111111
+	dw %0000000011111111
+	dw %0000000111111111
+	dw %0000001111111111
+	dw %0000011111111111
+	dw %0000111111111111
+	dw %0001111111111111
+	dw %0011111111111111
+	dw %0111111111111111
+	dw %1111111111111111
 
 ; unpacks the sprite data depending on the unpack mode
 UnpackSprite: ; 26bf (0:26bf)
@@ -9076,8 +9074,8 @@ NamePointers: ; 375d (0:375d)
 	dw MoveNames
 	dw UnusedNames
 	dw ItemNames
-	dw $D273 ; player's OT names list
-	dw $D9AC ; enemy's OT names list
+	dw W_PARTYMON1OT ; player's OT names list
+	dw W_ENEMYMON1OT ; enemy's OT names list
 	dw TrainerNames
 
 GetName: ; 376b (0:376b)
@@ -10557,72 +10555,72 @@ Func_3f0f: ; 3f0f (0:3f0f)
 	ret
 
 PointerTable_3f22: ; 3f22 (0:3f22)
-	dw $66ee
-	dw $66f8
-	dw $5b8e
-	dw $5b81
-	dw $6960
-	dw $697e
-	dw $6983
-	dw $6cbd
-	dw $5bbe
-	dw $5ba8
-	dw $5bd4
-	dw $6453
-	dw $6458
-	dw $6511
-	dw $64a3
-	dw $64a8
-	dw $64ad
-	dw $64b2
-	dw $64d0
-	dw $64d5
-	dw $6502
-	dw $64da
-	dw $64df
-	dw $64e4
-	dw $64b7
-	dw $64bc
-	dw $64c1
-	dw $64c6
-	dw $64cb
+	dw CardKeySuccessText                   ; id = 01
+	dw CardKeyFailText                      ; id = 02
+	dw Route15UpstairsLeftBinoculars        ; id = 03
+	dw RedBedroomSNESText                   ; id = 04
+	dw UnnamedText_1e960                    ; id = 05
+	dw UnnamedText_1e97e                    ; id = 06
+	dw UnnamedText_1e983                    ; id = 07
+	dw OakLabEmailText                      ; id = 08
+	dw AerodactylFossilText                 ; id = 09
+	dw Route15UpstairsBinocularsText        ; id = 0A
+	dw KabutopsFossilText                   ; id = 0B
+	dw GymStatueText1                       ; id = 0C
+	dw GymStatueText2                       ; id = 0D
+	dw BookcaseText                         ; id = 0E
+	dw ViridianCityPokecenterBenchGuyText   ; id = 0F
+	dw PewterCityPokecenterBenchGuyText     ; id = 10
+	dw CeruleanCityPokecenterBenchGuyText   ; id = 11
+	dw LavenderCityPokecenterBenchGuyText   ; id = 12
+	dw VermilionCityPokecenterBenchGuyText  ; id = 13
+	dw CeladonCityPokecenterBenchGuyText    ; id = 14
+	dw CeladonCityHotelText                 ; id = 15
+	dw FuchsiaCityPokecenterBenchGuyText    ; id = 16
+	dw CinnabarIslandPokecenterBenchGuyText ; id = 17
+	dw SaffronCityPokecenterBenchGuyText    ; id = 18
+	dw MtMoonPokecenterBenchGuyText         ; id = 19
+	dw RockTunnelPokecenterBenchGuyText     ; id = 1A
+	dw UnnamedText_624c1                    ; id = 1B
+	dw UnnamedText_624c6                    ; id = 1C
+	dw UnnamedText_624cb                    ; id = 1D
 	dw $6508
 	dw $6529
-	dw $69aa
-	dw $5ced
-	dw $5865
+	dw ViridianSchoolNotebook               ; id = 20
+	dw ViridianSchoolBlackboard             ; id = 21
+	dw UnnamedText_21865                    ; id = 22
 	dw $5878
-	dw FoundHiddenItemText
-	dw HiddenItemBagFullText
-	dw $5df7
-	dw $6a3d
-	dw $7e79
-	dw $7e7e
-	dw $7e83
-	dw FoundHiddenCoinsText
-	dw DroppedHiddenCoinsText
-	dw $6bdd
-	dw $6be2
-	dw $6c05
-	dw $6b69
-	dw $6a25
-	dw $7f37
-	dw $7f32
-	dw $5c29
-	dw $69a4
-	dw $6a2a
-	dw $6a10
-	dw $6a1d
-	dw $6953
-	dw $7bbf
-	dw $5ec8
-	dw $5edb
-	dw $5eef
-	dw $5f02
-	dw $7c12
-	dw $7be8
-	dw $7c0d
-	dw $7c45
+	dw FoundHiddenItemText                  ; id = 24
+	dw HiddenItemBagFullText                ; id = 25
+	dw VermilionGymTrashText                ; id = 26
+	dw IndigoPlateauHQText                  ; id = 27
+	dw GameCornerOutOfOrderText             ; id = 28
+	dw GameCornerOutToLunchText             ; id = 29
+	dw GameCornerSomeonesKeysText           ; id = 2A
+	dw FoundHiddenCoinsText                 ; id = 2B
+	dw DroppedHiddenCoinsText               ; id = 2C
+	dw BillsHouseMonitorText                ; id = 2D
+	dw BillsHouseInitiatedText              ; id = 2E
+	dw BillsHousePokemonList                ; id = 2F
+	dw UnnamedText_1eb69                    ; id = 30
+	dw CinnabarGymQuiz                      ; id = 31
+	dw GameCornerNoCoinsText                ; id = 32
+	dw GameCornerCoinCaseText               ; id = 33
+	dw LinkCableHelp                        ; id = 34
+	dw TMNotebook                           ; id = 35
+	dw FightingDojoText                     ; id = 36
+	dw UnnamedText_52a10                    ; id = 37
+	dw UnnamedText_52a1d                    ; id = 38
+	dw NewBicycleText                       ; id = 39
+	dw IndigoPlateauStatues                 ; id = 3A
+	dw VermilionGymTrashSuccesText1         ; id = 3B
+	dw VermilionGymTrashSuccesText2         ; id = 3C
+	dw VermilionGymTrashSuccesText3         ; id = 3D
+	dw VermilionGymTrashFailText            ; id = 3E
+	dw TownMapText                          ; id = 3F
+	dw UnnamedText_fbe8                     ; id = 40
+	dw UnnamedText_fc0d                     ; id = 41
+	dw UnnamedText_fc45                     ; id = 42
 
 SECTION "bank1",ROMX,BANK[$1]
 
@@ -10750,7 +10748,7 @@ MewBaseStats: ; 425b (1:425b)
 
 	dw MewPicFront
 	dw MewPicBack
-	
+
 	; attacks known at lvl 0
 	db POUND
 	db 0
@@ -10758,7 +10756,7 @@ MewBaseStats: ; 425b (1:425b)
 	db 0
 
 	db 3 ; growth rate
-	
+
 	; include learnset directly
 	db %11111111
 	db %11111111
@@ -13221,7 +13219,7 @@ Func_551c:
 	ld h, [hl]
 	ld l, a
 	jp [hl]
-	
+
 Func_5530
 	call ClearScreen
 	call Func_5ae6
@@ -13524,7 +13522,7 @@ Func_57a2:
 	ld hl, $c4e2
 	ld de, CancelTextString
 	jp PlaceString
-	
+
 CancelTextString:
 	db "CANCEL@"
 
@@ -13667,7 +13665,7 @@ Func_5849:
 	jp Func_5a18
 .asm_58fd
 	ld a, [$cd3d]
-	ld hl, $d273
+	ld hl, W_PARTYMON1OT ; OT names of player
 	call SkipFixedLengthTextEntries
 	ld de, $cd41
 	ld bc, $000b
@@ -13683,7 +13681,7 @@ Func_5849:
 	ld a, [hl]
 	ld [$cd4d], a
 	ld a, [$cd3e]
-	ld hl, $d9ac
+	ld hl, W_ENEMYMON1OT ; OT names of other player
 	call SkipFixedLengthTextEntries
 	ld de, $cd4e
 	ld bc, $000b
@@ -17125,15 +17123,9 @@ GetAddressOfScreenCoords: ; 7375 (1:7375)
 ; 00: text box ID
 ; 01-02: function address
 TextBoxFunctionTable: ; 7387 (1:7387)
-	db $13
-	dw $74ba
-
-	db $15
-	dw $74ea
-
-	db $04
-	dw $76e1
-
+	dbw $13, Func_74ba
+	dbw $15, Func_74ea
+	dbw $04, Func_76e1
 	db $ff ; terminator
 
 ; Format:
@@ -17268,6 +17260,7 @@ JapanesePokedexMenu: ; 74a1 (1:74a1)
 	db "ぶんぷをみる",$4E
 	db "キャンセル@"
 
+Func_74ba: ; 74ba (1:74ba)
 	ld hl, $d730
 	set 6, [hl]
 	ld a, $f
@@ -17287,10 +17280,10 @@ JapanesePokedexMenu: ; 74a1 (1:74a1)
 	res 6, [hl]
 	ret
 
-CurrencyString: ; 74e2 (1:34e2)
+CurrencyString: ; 74e2 (1:74e2)
 	db "      ¥@"
 
-Func_74ea: ; 74ea (1:34ea)
+Func_74ea: ; 74ea (1:74ea)
 	ld a, [$d730]
 	set 6, a
 	ld [$d730], a
@@ -17546,7 +17539,7 @@ Func_76e1: ; 76e1 (1:36e1)
 	ld [hli], a
 	ld [hli], a
 	ld [hl], $c
-	call Func_77d6
+	call GetMonFieldMoves
 	ld a, [$cd41]
 	and a
 	jr nz, .asm_770f
@@ -17662,7 +17655,7 @@ PokemonMenuEntries: ; 77c2 (1:77c2)
 	db "SWITCH",$4E
 	db "CANCEL@"
 
-Func_77d6: ; 77d6 (1:77d6)
+GetMonFieldMoves: ; 77d6 (1:77d6)
 	ld a, [wWhichPokemon] ; $cf92
 	ld hl, W_PARTYMON1_MOVE1 ; $d173
 	ld bc, $2c
@@ -17676,12 +17669,12 @@ Func_77d6: ; 77d6 (1:77d6)
 .asm_77ea
 	dec c
 	jr z, .asm_7821
-	ld a, [de]
+	ld a, [de] ; de is RAM address of move
 	and a
 	jr z, .asm_7821
 	ld b, a
-	inc de
-	ld hl, Unknown_7823 ; $7823
+	inc de ; go to next move
+	ld hl, FieldMoveDisplayData ; $7823
 .asm_77f6
 	ld a, [hli]
 	cp $ff
@@ -17714,8 +17707,24 @@ Func_77d6: ; 77d6 (1:77d6)
 	pop hl
 	ret
 
-Unknown_7823: ; 7823 (1:7823)
-INCBIN "baserom.gbc",$7823,$783f - $7823
+; Format: [Move id], [list priority], [leftmost tile]
+; Move id = id of move
+; List priority = lower number means higher priority when field moves are displayed
+;                 these priorities must be unique
+; Leftmost tile = -1 + tile column in which the first letter of the move's name should be displayed
+;                 "SOFTBOILED" is $08 because it has 4 more letters than "SURF", for example, whose value is $0C
+FieldMoveDisplayData: ; 7823 (1:7823)
+	db CUT, $01, $0C
+	db FLY, $02, $0C 
+	db $B4, $03, $0C ; unused field move
+	db SURF, $04, $0C 
+	db STRENGTH, $05, $0A 
+	db FLASH, $06, $0C 
+	db DIG, $07, $0C 
+	db TELEPORT, $08, $0A 
+	db SOFTBOILED, $09, $08 
+	db $ff ; list terminator
+
 
 Func_783f: ; 783f (1:783f)
 	ld hl, W_DAMAGE ; $d0d7
@@ -18273,31 +18282,37 @@ INCLUDE "music/sfx/sfx_02_12.asm"
 INCLUDE "music/sfx/sfx_02_13.asm"
 
 Music2_Channel3DutyPointers: ; 0x8361
+	dw Music2_Channel3Duty0
 	dw Music2_Channel3Duty1
 	dw Music2_Channel3Duty2
 	dw Music2_Channel3Duty3
 	dw Music2_Channel3Duty4
-	dw Music2_Channel3Duty5
-	dw SFX_02_3f_Ch1 ; unused
+	dw Music2_Channel3Duty5 ; used in the Lavender Town theme
 	dw SFX_02_3f_Ch1 ; unused
 	dw SFX_02_3f_Ch1 ; unused
 	dw SFX_02_3f_Ch1 ; unused
 
-Music2_Channel3Duty1: ; 0x8373
+; these are the definitions for the channel 3 instruments
+; each instrument definition is made up of 32 points (nibbles) that form
+; the graph of the wave
+; the current instrument is copied to $FF30
+Music2_Channel3Duty0: ; 0x8373
 	db $02,$46,$8A,$CE,$FF,$FE,$ED,$DC,$CB,$A9,$87,$65,$44,$33,$22,$11
 
-Music2_Channel3Duty2: ; 0x8383
+Music2_Channel3Duty1: ; 0x8383
 	db $02,$46,$8A,$CE,$EF,$FF,$FE,$EE,$DD,$CB,$A9,$87,$65,$43,$22,$11
 
-Music2_Channel3Duty3: ; 0x8393
+Music2_Channel3Duty2: ; 0x8393
 	db $13,$69,$BD,$EE,$EE,$FF,$FF,$ED,$DE,$FF,$FF,$EE,$EE,$DB,$96,$31
 
-Music2_Channel3Duty4: ; 0x83a3
+Music2_Channel3Duty3: ; 0x83a3
 	db $02,$46,$8A,$CD,$EF,$FE,$DE,$FF,$EE,$DC,$BA,$98,$76,$54,$32,$10
 
-Music2_Channel3Duty5: ; 0x83b3
+Music2_Channel3Duty4: ; 0x83b3
 	db $01,$23,$45,$67,$8A,$CD,$EE,$F7,$7F,$EE,$DC,$A8,$76,$54,$32,$10
 
+; duty 5 reads from sfx data
+Music2_Channel3Duty5: ; 0x83c3
 INCLUDE "music/sfx/sfx_02_3f.asm"
 INCLUDE "music/sfx/sfx_02_5e.asm"
 INCLUDE "music/sfx/sfx_02_56.asm"
@@ -18765,7 +18780,7 @@ Music2_notetype: ; 0x92e4
 	sla a
 	ld d, a
 	; fall through
-	
+
 	; if channel 3, store high nibble as volume
 	; else, store volume (high nibble) and fade (low nibble)
 .notChannel3
@@ -18787,7 +18802,7 @@ Music2_togglecall: ; 0x9323
 	xor $1
 	ld [hl], a ; flip bit 0 of $c02e (toggle returning from call)
 	jp Music2_endchannel
-	
+
 Music2_vibrato: ; 0x9335
 	cp $ea ; is this command a vibrato?
 	jr nz, Music2_pitchbend ; no
@@ -18821,7 +18836,7 @@ Music2_vibrato: ; 0x9335
 	or d
 	ld [hl], a ; store depth as both high and low nibbles
 	jp Music2_endchannel
-	
+
 Music2_pitchbend: ; 0x936d
 	cp $eb ; is this command a pitchbend?
 	jr nz, Music2_duty ; no
@@ -18852,7 +18867,7 @@ Music2_pitchbend: ; 0x936d
 	call Music2_GetNextMusicByte
 	ld d, a
 	jp Music2_notelength
-	
+
 Music2_duty: ; 0x93a5
 	cp $ec ; is this command a duty?
 	jr nz, Music2_tempo ; no
@@ -18865,7 +18880,7 @@ Music2_duty: ; 0x93a5
 	add hl, bc
 	ld [hl], a ; store duty
 	jp Music2_endchannel
-	
+
 Music2_tempo: ; 0x93ba
 	cp $ed ; is this command a tempo?
 	jr nz, Music2_unknownmusic0xee ; no
@@ -18894,7 +18909,7 @@ Music2_tempo: ; 0x93ba
 	ld [$c0d5], a
 .musicChannelDone
 	jp Music2_endchannel
-	
+
 Music2_unknownmusic0xee: ; 0x93fa
 	cp $ee ; is this command an unknownmusic0xee?
 	jr nz, Music2_unknownmusic0xef ; no
@@ -18919,7 +18934,7 @@ Music2_unknownmusic0xef ; 0x9407
 	ld [$c02d], a
 .skip
 	jp Music2_endchannel
-	
+
 Music2_dutycycle: ; 0x9426
 	cp $fc ; is this command a dutycycle?
 	jr nz, Music2_stereopanning ; no
@@ -18936,14 +18951,14 @@ Music2_dutycycle: ; 0x9426
 	add hl, bc
 	set 6, [hl] ; set dutycycle flag
 	jp Music2_endchannel
-	
+
 Music2_stereopanning: ; 0x9444
 	cp $f0 ; is this command a stereopanning?
 	jr nz, Music2_executemusic ; no
 	call Music2_GetNextMusicByte ; yes
 	ld [$ff00+$24], a ; store stereopanning
 	jp Music2_endchannel
-	
+
 Music2_executemusic: ; 0x9450
 	cp $f8 ; is this command an executemusic?
 	jr nz, Music2_octave ; no
@@ -18952,7 +18967,7 @@ Music2_executemusic: ; 0x9450
 	add hl, bc
 	set 0, [hl]
 	jp Music2_endchannel
-	
+
 Music2_octave: ; 0x945f
 	and $f0
 	cp $e0 ; is this command an octave?
@@ -19119,7 +19134,7 @@ Music2_notelength: ; 0x950a
 	jr z, Music2_notepitch
 	pop hl
 	ret
-	
+
 Music2_notepitch: ; 0x9568
 	pop af
 	and $f0
@@ -29725,7 +29740,7 @@ asm_ef82: ; ef82 (3:6f82)
 	ld a, $ff
 	ld [$cfcb], a
 	call Func_eff7
-	ld de, Unknown_f100 ; $7100
+	ld de, CutTreeBlockSwaps ; $7100
 	call Func_f09f
 	call Func_eedc
 	ld b, BANK(Func_79e96)
@@ -29803,18 +29818,18 @@ Func_f068: ; f068 (3:7068)
 	ld b, a
 	inc hl
 	ld a, [hli]
-	ld c, a
+	ld c, a ; bc holds ypos/xpos of player's sprite
 	inc hl
 	inc hl
-	ld a, [hl]
+	ld a, [hl] ; a holds direction of player (00: down, 04: up, 08: left, 0C: right)
 	srl a
 	ld e, a
-	ld d, $0
+	ld d, $0 ; de holds direction (00: down, 02: up, 04: left, 06: right)
 	ld a, [$cd50]
 	and a
-	ld hl, Unknown_f08f ; $708f
+	ld hl, CutTreeAnimationOffsets ; $708f
 	jr z, .asm_f084
-	ld hl, Unknown_f097 ; $7097
+	ld hl, CutTreeAnimationOffsets2 ; $7097
 .asm_f084
 	add hl, de
 	ld e, [hl]
@@ -29828,11 +29843,21 @@ Func_f068: ; f068 (3:7068)
 	ld c, a
 	ret
 
-Unknown_f08f: ; f08f (3:708f)
-INCBIN "baserom.gbc",$f08f,$f097 - $f08f
+CutTreeAnimationOffsets: ; f08f (3:708f)
+; Each pair represents the x and y pixels offsets from the player of where the cut tree animation should be drawn
+	db  8, 36 ; player is facing down
+	db  8,  4 ; player is facing up
+	db -8, 20 ; player is facing left
+	db 24, 20 ; player is facing right
 
-Unknown_f097: ; f097 (3:7097)
-INCBIN "baserom.gbc",$f097,$f09f - $f097
+CutTreeAnimationOffsets2: ; f097 (3:7097)
+; Not sure if these ever get used. CutTreeAnimationOffsets only seems to be used.
+; Each pair represents the x and y pixels offsets from the player of where the cut tree animation should be drawn
+; These offsets represent 2 blocks away from the player
+	db  8,  52 ; player is facing down
+	db  8, -12 ; player is facing up
+	db -24, 20 ; player is facing left
+	db 40,  20 ; player is facing right
 
 Func_f09f: ; f09f (3:709f)
 	push de
@@ -29906,8 +29931,19 @@ Func_f09f: ; f09f (3:709f)
 	ld [hl], a
 	ret
 
-Unknown_f100: ; f100 (3:7100)
-INCBIN "baserom.gbc",$f100,$f113 - $f100
+CutTreeBlockSwaps: ; f100 (3:7100)
+; first byte = tileset block containing the cut tree
+; second byte = corresponding tileset block after the cut animation happens
+	db $32, $6D
+	db $33, $6C 
+	db $34, $6F 
+	db $35, $4C 
+	db $60, $6E 
+	db $0B, $0A 
+	db $3C, $35 
+	db $3F, $35
+	db $3D, $36 
+	db $FF ; list terminator 
 
 Func_f113: ; f113 (3:7113)
 	ld a, [W_CURMAP] ; $d35e
@@ -30253,7 +30289,7 @@ _AddPokemonToParty: ; f2e5 (3:72e5)
 	ld a, [$cc49]
 	and $f
 	jr z, .asm_f315
-	ld hl, $d9ac
+	ld hl, W_ENEMYMON1OT
 .asm_f315
 	ld a, [$FF00+$e4]
 	dec a
@@ -31673,29 +31709,29 @@ BookshelfTileIDs: ; fb8b (3:7b8b)
 	db $0D,$36,$40
 	db $FF
 
-UnnamedText_fbbf: ; fbbf (3:7bbf)
+IndigoPlateauStatues: ; fbbf (3:7bbf)
 	db $08 ; asm
-	ld hl, UnnamedText_fbd9
+	ld hl, IndigoPlateauStatuesText1
 	call PrintText
 	ld a, [W_XCOORD]
 	bit 0, a
-	ld hl, UnnamedText_fbde
+	ld hl, IndigoPlateauStatuesText2
 	jr nz, .asm_fbd3
-	ld hl, UnnamedText_fbe3
+	ld hl, IndigoPlateauStatuesText3
 .asm_fbd3
 	call PrintText
 	jp TextScriptEnd
 
-UnnamedText_fbd9: ; fbd9 (3:7bd9)
-	TX_FAR _UnnamedText_fbd9
+IndigoPlateauStatuesText1: ; fbd9 (3:7bd9)
+	TX_FAR _IndigoPlateauStatuesText1
 	db "@"
 
-UnnamedText_fbde: ; fbde (3:7bde)
-	TX_FAR _UnnamedText_fbde
+IndigoPlateauStatuesText2: ; fbde (3:7bde)
+	TX_FAR _IndigoPlateauStatuesText2
 	db "@"
 
-UnnamedText_fbe3: ; fbe3 (3:7be3)
-	TX_FAR _UnnamedText_fbe3
+IndigoPlateauStatuesText3: ; fbe3 (3:7be3)
+	TX_FAR _IndigoPlateauStatuesText3
 	db "@"
 
 UnnamedText_fbe8: ; fbe8 (3:7be8)
@@ -31809,7 +31845,7 @@ OldAmberSprite: ; 11300 (4:5300)
 	INCBIN "gfx/sprites/old_amber.2bpp" ; was $11300
 LyingOldManSprite: ; 11340 (4:5340)
 	INCBIN "gfx/sprites/lying_old_man.2bpp" ; was $11340
-	
+
 PokemonLogoGraphics: ; 11380 (4:5380)
 	INCBIN "gfx/pokemon_logo.2bpp"
 FontGraphics: ; 11a80 (4:5a80)
@@ -33866,7 +33902,7 @@ Func_13870: ; 13870 (4:7870)
 	jr nc, .asm_13912
 	ld a, [H_RAND2] ; $FF00+$d4
 	ld b, a
-	ld hl, Unknown_13918 ; $7918
+	ld hl, WildMonEncounterSlotChances ; $7918
 .asm_138d0
 	ld a, [hli]
 	cp b
@@ -33912,8 +33948,21 @@ Func_13870: ; 13870 (4:7870)
 	xor a
 	ret
 
-Unknown_13918: ; 13918 (4:7918)
-INCBIN "baserom.gbc",$13918,$1392c - $13918
+WildMonEncounterSlotChances: ; 13918 (4:7918)
+; There are 10 slots for wild pokemon, and this is the table that defines how common each of
+; those 10 slots is. A random number is generated and then the first byte of each pair in this 
+; table is compared against that random number. If the random number is less than or equal 
+; to the first byte, then that slot is chosen.  The second byte is double the slot number.
+	db $32, $00 ; 51/256 = 19.9% chance of slot 0
+	db $65, $02 ; 51/256 = 19.9% chance of slot 1
+	db $8C, $04 ; 39/256 = 15.2% chance of slot 2
+	db $A5, $06 ; 25/256 =  9.8% chance of slot 3
+	db $BE, $08 ; 25/256 =  9.8% chance of slot 4
+	db $D7, $0A ; 25/256 =  9.8% chance of slot 5
+	db $E4, $0C ; 13/256 =  5.1% chance of slot 6
+	db $F1, $0E ; 13/256 =  5.1% chance of slot 7
+	db $FC, $10 ; 11/256 =  4.3% chance of slot 8
+	db $FF, $12 ;  3/256 =  1.2% chance of slot 9
 
 Func_1392c: ; 1392c (4:792c)
 	ld a, [H_WHOSETURN] ; $FF00+$f3
@@ -34121,7 +34170,7 @@ Func_13a58: ; 13a58 (4:7a58)
 	call GetName
 	ld hl, $cd6d
 .asm_13a86
-	ld de, $d04a
+	ld de, W_TRAINERNAME
 	ld bc, $d
 	jp CopyData
 
@@ -34488,7 +34537,7 @@ ReadSpriteSheetData: ; 17971 (5:7971)
 ; sets carry if the map is a city or route, unsets carry if not
 InitOutsideMapSprites: ; 1797b (5:797b)
 	ld a,[W_CURMAP]
-	cp a,$25 ; is the map a city or a route (map ID less than $25)?
+	cp a,REDS_HOUSE_1F ; is the map a city or a route (map ID less than $25)?
 	ret nc ; if not, return
 	ld hl,MapSpriteSets
 	add l
@@ -35320,8 +35369,8 @@ Func_17d7d: ; 17d7d (5:7d7d)
 
 SubstituteEffectHandler: ; 17dad (5:7dad)
 	ld c, 50
-	call DelayFrames		
-	ld hl, W_PLAYERMONMAXHP		
+	call DelayFrames
+	ld hl, W_PLAYERMONMAXHP
 	ld de, wPlayerSubstituteHP
 	ld bc, W_PLAYERBATTSTATUS2
 	ld a, [$ff00+$f3]  ;whose turn?
@@ -35472,8 +35521,8 @@ PKMNLeague: ; 17ed2 (5:7ed2)
 	ld a, $9B
 	call PlaySound  ;XXX: play sound or stop music
 	call WaitForSoundToFinish  ;XXX: wait for sound to be done
-	ld b, BANK(Unknown_7657e)
-	ld hl, Unknown_7657e
+	ld b, BANK(Func_7657e)
+	ld hl, Func_7657e
 	call Bankswitch
 	jr ReloadMainMenu
 BillsPC: ; 17ee4 (5:7ee4)
@@ -35556,23 +35605,8 @@ CeladonCity_h: ; 18000 (6:4000)
 	db CELADON_CITY_HEIGHT, CELADON_CITY_WIDTH ; dimensions (y, x)
 	dw CeladonCityBlocks, CeladonCityTextPointers, CeladonCityScript ; blocks, texts, scripts
 	db WEST | EAST ; connections
-
-	; connections data
-
-	db ROUTE_16
-	dw $4B95, $C7C1 ; pointers (connected, current) (strip)
-	db $09, $14 ; bigness, width
-	db $F8, $27 ; alignments (y, x)
-	dw $C716 ; window
-
-	db ROUTE_7
-	dw $4051, $C7DD ; pointers (connected, current) (strip)
-	db $09, $0A ; bigness, width
-	db $F8, $00 ; alignments (y, x)
-	dw $C6F9 ; window
-
-	; end connections data
-
+	WEST_MAP_CONNECTION ROUTE_16, ROUTE_16_WIDTH, 4, 0, ROUTE_16_HEIGHT, Route16Blocks, CELADON_CITY_WIDTH
+	EAST_MAP_CONNECTION ROUTE_7, ROUTE_7_WIDTH, 4, 0, ROUTE_7_HEIGHT, Route7Blocks, CELADON_CITY_WIDTH
 	dw CeladonCityObject ; objects
 
 CeladonCityObject: ; 0x18022 (size=189)
@@ -35638,22 +35672,8 @@ PalletTown_h: ; 182a1 (6:42a1)
 	db PALLET_TOWN_HEIGHT, PALLET_TOWN_WIDTH ; dimensions
 	dw PalletTownBlocks, PalletTownTextPointers, PalletTownScript
 	db NORTH | SOUTH ; connections
-
-	db ROUTE_1
-	dw Route1Blocks + ((ROUTE_1_WIDTH * 15) + 0) ;y, x Strip Starting Point
-	dw $C6EB + 0 ;Strip X-Offset to current map
-	db ROUTE_1_WIDTH ;"Bigness" (Unsure) ;Something to do with MapData
-	db ROUTE_1_WIDTH ;"Map Width" (Unsure) ;Something to do with TileSet
-	db (ROUTE_1_HEIGHT * 2) - 1 ;Player's new Y-Coordinates
-	db (0 * -2) ;Player's new X-Coordinates
-	dw $C6E9 + ROUTE_1_HEIGHT * (ROUTE_1_WIDTH + 6) ;New UL Block Pos (Window)
-
-	db ROUTE_21
-	dw Route21Blocks,$C7AB ; pointers
-	db $0A,$0A ; bigness, width
-	db $00,$00 ; alignments
-	dw $C6F9 ; window
-
+	NORTH_MAP_CONNECTION ROUTE_1, ROUTE_1_WIDTH, ROUTE_1_HEIGHT, 0, 0, ROUTE_1_WIDTH, Route1Blocks
+	SOUTH_MAP_CONNECTION ROUTE_21, ROUTE_21_WIDTH, 0, 0, ROUTE_21_WIDTH, Route21Blocks, PALLET_TOWN_WIDTH, PALLET_TOWN_HEIGHT
 	dw PalletTownObject
 
 PalletTownObject: ; 0x182c3 (size=58)
@@ -35688,32 +35708,9 @@ ViridianCity_h: ; 0x18357 to 0x18384 (45 bytes) (bank=6) (id=1)
 	db VIRIDIAN_CITY_HEIGHT, VIRIDIAN_CITY_WIDTH ; dimensions (y, x)
 	dw ViridianCityBlocks, ViridianCityTextPointers, ViridianCityScript ; blocks, texts, scripts
 	db NORTH | SOUTH | WEST ; connections
-
-	; connections data
-
-	db ROUTE_2
-	dw Route2Blocks + (ROUTE_2_HEIGHT - 3) * ROUTE_2_WIDTH ; connection strip location
-	dw $C6EB + 5 ; current map position
-	db ROUTE_2_WIDTH, ROUTE_2_WIDTH ; bigness, width
-	db (ROUTE_2_HEIGHT * 2) - 1, (5 * -2) ; alignments (y, x)
-	dw $C6E9 + ROUTE_2_HEIGHT * (ROUTE_2_WIDTH + 6) ; window
-
-	db ROUTE_1
-	dw Route1Blocks ; connection strip location
-	dw $C6EB + (VIRIDIAN_CITY_HEIGHT + 3) * (VIRIDIAN_CITY_WIDTH + 6) + 5 ; current map position
-	db ROUTE_1_WIDTH, ROUTE_1_WIDTH ; bigness, width
-	db 0, (5 * -2) ; alignments (y, x)
-	dw $C6EF + ROUTE_1_WIDTH ; window
-
-	db ROUTE_22
-	dw Route22Blocks - 3 + (ROUTE_22_WIDTH) ; connection strip location
-	dw $C6E8 + (VIRIDIAN_CITY_WIDTH + 6) * (4 + 3) ; current map position
-	db ROUTE_22_HEIGHT, ROUTE_22_WIDTH ; bigness, width
-	db (4 * -2), (ROUTE_22_WIDTH * 2) - 1 ; alignments (y, x)
-	dw $C6EE + 2 * ROUTE_22_WIDTH ; window
-
-	; end connections data
-
+	NORTH_MAP_CONNECTION ROUTE_2, ROUTE_2_WIDTH, ROUTE_2_HEIGHT, 5, 0, ROUTE_2_WIDTH, Route2Blocks
+	SOUTH_MAP_CONNECTION ROUTE_1, ROUTE_1_WIDTH, 5, 0, ROUTE_1_WIDTH, Route1Blocks, VIRIDIAN_CITY_WIDTH, VIRIDIAN_CITY_HEIGHT
+	WEST_MAP_CONNECTION ROUTE_22, ROUTE_22_WIDTH, 4, 0, ROUTE_22_HEIGHT, Route22Blocks, VIRIDIAN_CITY_WIDTH
 	dw ViridianCityObject ; objects
 
 ViridianCityObject: ; 0x18384 (size=104)
@@ -35758,25 +35755,8 @@ PewterCity_h: ; 0x18554 to 0x18576 (34 bytes) (bank=6) (id=2)
 	db PEWTER_CITY_HEIGHT, PEWTER_CITY_WIDTH ; dimensions (y, x)
 	dw PewterCityBlocks, PewterCityTextPointers, PewterCityScript ; blocks, texts, scripts
 	db SOUTH | EAST ; connections
-
-	; connections data
-
-	db ROUTE_2
-	dw Route2Blocks ; connection strip location
-	dw $C6EB + (PEWTER_CITY_HEIGHT + 3) * (PEWTER_CITY_WIDTH + 6) + 5 ; current map position
-	db ROUTE_2_WIDTH, ROUTE_2_WIDTH ; bigness, width
-	db 0, (5 * -2) ; alignments (y, x)
-	dw $C6EF + ROUTE_2_WIDTH ; window
-
-	db ROUTE_3
-	dw Route3Blocks + (ROUTE_3_WIDTH * 0) ; connection strip location
-	dw $C6E5 + (PEWTER_CITY_WIDTH + 6) * (4 + 4) ; current map position
-	db ROUTE_3_HEIGHT, ROUTE_3_WIDTH ; bigness, width
-	db (4 * -2), 0 ; alignments (y, x)
-	dw $C6EF + ROUTE_3_WIDTH ; window
-
-	; end connections data
-
+	SOUTH_MAP_CONNECTION ROUTE_2, ROUTE_2_WIDTH, 5, 0, ROUTE_2_WIDTH, Route2Blocks, PEWTER_CITY_WIDTH, PEWTER_CITY_HEIGHT
+	EAST_MAP_CONNECTION ROUTE_3, ROUTE_3_WIDTH, 4, 0, ROUTE_3_HEIGHT, Route3Blocks, PEWTER_CITY_WIDTH
 	dw PewterCityObject ; objects
 
 	db $0
@@ -35826,39 +35806,10 @@ CeruleanCity_h: ; 0x1874e to 0x18786 (56 bytes) (bank=6) (id=3)
 	db CERULEAN_CITY_HEIGHT, CERULEAN_CITY_WIDTH ; dimensions (y, x)
 	dw CeruleanCityBlocks, CeruleanCityTextPointers, CeruleanCityScript ; blocks, texts, scripts
 	db NORTH | SOUTH | WEST | EAST ; connections
-
-	; connections data
-
-	db ROUTE_24
-	dw Route24Blocks + (ROUTE_24_HEIGHT - 3) * ROUTE_24_WIDTH ; connection strip location
-	dw $C6EB + 5 ; current map position
-	db ROUTE_24_WIDTH, ROUTE_24_WIDTH ; bigness, width
-	db (ROUTE_24_HEIGHT * 2) - 1, (5 * -2) ; alignments (y, x)
-	dw $C6E9 + ROUTE_24_HEIGHT * (ROUTE_24_WIDTH + 6) ; window
-
-	db ROUTE_5
-	dw Route5Blocks ; connection strip location
-	dw $C6EB + (CERULEAN_CITY_HEIGHT + 3) * (CERULEAN_CITY_WIDTH + 6) + 5 ; current map position
-	db ROUTE_5_WIDTH, ROUTE_5_WIDTH ; bigness, width
-	db 0, (5 * -2) ; alignments (y, x)
-	dw $C6EF + ROUTE_5_WIDTH ; window
-
-	db ROUTE_4
-	dw Route4Blocks - 3 + (ROUTE_4_WIDTH) ; connection strip location
-	dw $C6E8 + (CERULEAN_CITY_WIDTH + 6) * (4 + 3) ; current map position
-	db ROUTE_4_HEIGHT, ROUTE_4_WIDTH ; bigness, width
-	db (4 * -2), (ROUTE_4_WIDTH * 2) - 1 ; alignments (y, x)
-	dw $C6EE + 2 * ROUTE_4_WIDTH ; window
-
-	db ROUTE_9
-	dw Route9Blocks + (ROUTE_9_WIDTH * 0) ; connection strip location
-	dw $C6E5 + (CERULEAN_CITY_WIDTH + 6) * (4 + 4) ; current map position
-	db ROUTE_9_HEIGHT, ROUTE_9_WIDTH ; bigness, width
-	db (4 * -2), 0 ; alignments (y, x)
-	dw $C6EF + ROUTE_9_WIDTH ; window
-
-	; end connections data
-
+	NORTH_MAP_CONNECTION ROUTE_24, ROUTE_24_WIDTH, ROUTE_24_HEIGHT, 5, 0, ROUTE_24_WIDTH, Route24Blocks
+	SOUTH_MAP_CONNECTION ROUTE_5, ROUTE_5_WIDTH, 5, 0, ROUTE_5_WIDTH, Route5Blocks, CERULEAN_CITY_WIDTH, CERULEAN_CITY_HEIGHT
+	WEST_MAP_CONNECTION ROUTE_4, ROUTE_4_WIDTH, 4, 0, ROUTE_4_HEIGHT, Route4Blocks, CERULEAN_CITY_WIDTH
+	EAST_MAP_CONNECTION ROUTE_9, ROUTE_9_WIDTH, 4, 0, ROUTE_9_HEIGHT, Route9Blocks, CERULEAN_CITY_WIDTH
 	dw CeruleanCityObject ; objects
 
 CeruleanCityObject: ; 0x18786 (size=170)
@@ -35917,25 +35868,8 @@ VermilionCity_h: ; 0x18998 to 0x189ba (34 bytes) (bank=6) (id=5)
 	db VERMILION_CITY_HEIGHT, VERMILION_CITY_WIDTH ; dimensions (y, x)
 	dw VermilionCityBlocks, VermilionCityTextPointers, VermilionCityScript ; blocks, texts, scripts
 	db NORTH | EAST ; connections
-
-	; connections data
-
-	db ROUTE_6
-	dw Route6Blocks + (ROUTE_6_HEIGHT - 3) * ROUTE_6_WIDTH ; connection strip location
-	dw $C6EB + 5 ; current map position
-	db ROUTE_6_WIDTH, ROUTE_6_WIDTH ; bigness, width
-	db (ROUTE_6_HEIGHT * 2) - 1, (5 * -2) ; alignments (y, x)
-	dw $C6E9 + ROUTE_6_HEIGHT * (ROUTE_6_WIDTH + 6) ; window
-
-	db ROUTE_11
-	dw Route11Blocks + (ROUTE_11_WIDTH * 0) ; connection strip location
-	dw $C6E5 + (VERMILION_CITY_WIDTH + 6) * (4 + 4) ; current map position
-	db ROUTE_11_HEIGHT, ROUTE_11_WIDTH ; bigness, width
-	db (4 * -2), 0 ; alignments (y, x)
-	dw $C6EF + ROUTE_11_WIDTH ; window
-
-	; end connections data
-
+	NORTH_MAP_CONNECTION ROUTE_6, ROUTE_6_WIDTH, ROUTE_6_HEIGHT, 5, 0, ROUTE_6_WIDTH, Route6Blocks
+	EAST_MAP_CONNECTION ROUTE_11, ROUTE_11_WIDTH, 4, 0, ROUTE_11_HEIGHT, Route11Blocks, VERMILION_CITY_WIDTH
 	dw VermilionCityObject ; objects
 
 VermilionCityObject: ; 0x189ba (size=133)
@@ -35988,32 +35922,9 @@ FuchsiaCity_h: ; 0x18ba7 to 0x18bd4 (45 bytes) (bank=6) (id=7)
 	db FUCHSIA_CITY_HEIGHT, FUCHSIA_CITY_WIDTH ; dimensions (y, x)
 	dw FuchsiaCityBlocks, FuchsiaCityTextPointers, FuchsiaCityScript ; blocks, texts, scripts
 	db SOUTH | WEST | EAST ; connections
-
-	; connections data
-
-	db ROUTE_19
-	dw Route19Blocks ; connection strip location
-	dw $C6EB + (FUCHSIA_CITY_HEIGHT + 3) * (FUCHSIA_CITY_WIDTH + 6) + 5 ; current map position
-	db ROUTE_19_WIDTH, ROUTE_19_WIDTH ; bigness, width
-	db 0, (5 * -2) ; alignments (y, x)
-	dw $C6EF + ROUTE_19_WIDTH ; window
-
-	db ROUTE_18
-	dw Route18Blocks - 3 + (ROUTE_18_WIDTH) ; connection strip location
-	dw $C6E8 + (FUCHSIA_CITY_WIDTH + 6) * (4 + 3) ; current map position
-	db ROUTE_18_HEIGHT, ROUTE_18_WIDTH ; bigness, width
-	db (4 * -2), (ROUTE_18_WIDTH * 2) - 1 ; alignments (y, x)
-	dw $C6EE + 2 * ROUTE_18_WIDTH ; window
-
-	db ROUTE_15
-	dw Route15Blocks + (ROUTE_15_WIDTH * 0) ; connection strip location
-	dw $C6E5 + (FUCHSIA_CITY_WIDTH + 6) * (4 + 4) ; current map position
-	db ROUTE_15_HEIGHT, ROUTE_15_WIDTH ; bigness, width
-	db (4 * -2), 0 ; alignments (y, x)
-	dw $C6EF + ROUTE_15_WIDTH ; window
-
-	; end connections data
-
+	SOUTH_MAP_CONNECTION ROUTE_19, ROUTE_19_WIDTH, 5, 0, ROUTE_19_WIDTH, Route19Blocks, FUCHSIA_CITY_WIDTH, FUCHSIA_CITY_HEIGHT
+	WEST_MAP_CONNECTION ROUTE_18, ROUTE_18_WIDTH, 4, 0, ROUTE_18_HEIGHT, Route18Blocks, FUCHSIA_CITY_WIDTH
+	EAST_MAP_CONNECTION ROUTE_15, ROUTE_15_WIDTH, 4, 0, ROUTE_15_HEIGHT, Route15Blocks, FUCHSIA_CITY_WIDTH
 	dw FuchsiaCityObject ; objects
 
 FuchsiaCityObject: ; 0x18bd4 (size=178)
@@ -38153,11 +38064,8 @@ BluesHouseObject: ; 19bce (6:5bce)
 	db $41,4+3,4+3,$FF,$FF,ITEM|3,0 ; Daisy, walking around
 
 	; warp-to
-	dw $C712
-	db 7,2
-
-	dw $C712
-	db 7,3
+	EVENT_DISP BLUES_HOUSE_WIDTH, 7, 2
+	EVENT_DISP BLUES_HOUSE_WIDTH, 7, 3
 
 BluesHouseBlocks: ; 19bf6 (6:5bf6)
 	INCBIN "maps/blueshouse.blk"
@@ -38167,7 +38075,6 @@ VermilionHouse3_h: ; 0x19c06 to 0x19c12 (12 bytes) (bank=6) (id=196)
 	db VERMILION_HOUSE_3_HEIGHT, VERMILION_HOUSE_3_WIDTH ; dimensions (y, x)
 	dw VermilionHouse3Blocks, VermilionHouse3TextPointers, VermilionHouse3Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw VermilionHouse3Object ; objects
 
 VermilionHouse3Script: ; 19c12 (6:5c12)
@@ -38197,8 +38104,8 @@ VermilionHouse3Object: ; 0x19c25 (size=26)
 	db SPRITE_LITTLE_GIRL, $5 + 4, $3 + 4, $ff, $d1, $1 ; person
 
 	; warp-to
-	EVENT_DISP $4, $7, $2
-	EVENT_DISP $4, $7, $3
+	EVENT_DISP VERMILION_HOUSE_3_WIDTH, $7, $2
+	EVENT_DISP VERMILION_HOUSE_3_WIDTH, $7, $3
 
 VermilionHouse3Blocks: ; 19c3f (6:5c3f)
 	INCBIN "maps/vermilionhouse3.blk"
@@ -38208,7 +38115,6 @@ IndigoPlateauLobby_h: ; 0x19c4f to 0x19c5b (12 bytes) (bank=6) (id=174)
 	db INDIGO_PLATEAU_LOBBY_HEIGHT, INDIGO_PLATEAU_LOBBY_WIDTH ; dimensions (y, x)
 	dw IndigoPlateauLobbyBlocks, IndigoPlateauLobbyTextPointers, IndigoPlateauLobbyScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw IndigoPlateauLobbyObject ; objects
 
 IndigoPlateauLobbyScript: ; 19c5b (6:5c5b)
@@ -38283,7 +38189,6 @@ SilphCo4_h: ; 0x19cff to 0x19d0b (12 bytes) (bank=6) (id=209)
 	db SILPH_CO_4F_HEIGHT, SILPH_CO_4F_WIDTH ; dimensions (y, x)
 	dw SilphCo4Blocks, SilphCo4TextPointers, SilphCo4Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw SilphCo4Object ; objects
 
 SilphCo4Script: ; 19d0b (6:5d0b)
@@ -38528,7 +38433,6 @@ SilphCo5_h: ; 0x19f2b to 0x19f37 (12 bytes) (bank=6) (id=210)
 	db SILPH_CO_5F_HEIGHT, SILPH_CO_5F_WIDTH ; dimensions (y, x)
 	dw SilphCo5Blocks, SilphCo5TextPointers, SilphCo5Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw SilphCo5Object ; objects
 
 SilphCo5Script: ; 19f37 (6:5f37)
@@ -38799,7 +38703,6 @@ SilphCo6_h: ; 0x1a19d to 0x1a1a9 (12 bytes) (bank=6) (id=211)
 	db SILPH_CO_6F_HEIGHT, SILPH_CO_6F_WIDTH ; dimensions (y, x)
 	dw SilphCo6Blocks, SilphCo6TextPointers, SilphCo6Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw SilphCo6Object ; objects
 
 SilphCo6Script: ; 1a1a9 (6:61a9)
@@ -39407,7 +39310,7 @@ DoorTileIDPointers: ; 1a62c (6:662c)
 	db $16
 	dw Tileset16DoorTileIDs
 	db $17
-	dw UnknownTilesetData1a66f
+	dw Tileset17DoorTileIDs
 	db $ff
 
 Tileset00DoorTileIDs: ; 1a654 (6:6654)
@@ -39440,7 +39343,7 @@ Tileset14DoorTileIDs: ; 1a669 (6:6669)
 Tileset16DoorTileIDs: ; 1a66b (6:666b)
 	db $43,$58,$1b,$00
 
-UnknownTilesetData1a66f: ; 1a66f (6:666f)
+Tileset17DoorTileIDs: ; 1a66f (6:666f)
 	db $3b,$1b,$00
 
 Func_1a672: ; 1a672 (6:6672)
@@ -39537,25 +39440,8 @@ CinnabarIsland_h: ; 0x1c000 to 0x1c022 (34 bytes) (bank=7) (id=8)
 	db CINNABAR_ISLAND_HEIGHT, CINNABAR_ISLAND_WIDTH ; dimensions (y, x)
 	dw CinnabarIslandBlocks, CinnabarIslandTextPointers, CinnabarIslandScript ; blocks, texts, scripts
 	db NORTH | EAST ; connections
-
-	; connections data
-
-	db ROUTE_21
-	dw Route21Blocks + (ROUTE_21_HEIGHT - 3) * ROUTE_21_WIDTH ; connection strip location
-	dw $C6EB + 0 ; current map position
-	db ROUTE_21_WIDTH, ROUTE_21_WIDTH ; bigness, width
-	db (ROUTE_21_HEIGHT * 2) - 1, (0 * -2) ; alignments (y, x)
-	dw $C6E9 + ROUTE_21_HEIGHT * (ROUTE_21_WIDTH + 6) ; window
-
-	db ROUTE_20
-	dw Route20Blocks + (ROUTE_20_WIDTH * 0) ; connection strip location
-	dw $C6E5 + (CINNABAR_ISLAND_WIDTH + 6) * (0 + 4) ; current map position
-	db ROUTE_20_HEIGHT, ROUTE_20_WIDTH ; bigness, width
-	db (0 * -2), 0 ; alignments (y, x)
-	dw $C6EF + ROUTE_20_WIDTH ; window
-
-	; end connections data
-
+	NORTH_MAP_CONNECTION ROUTE_21, ROUTE_21_WIDTH, ROUTE_21_HEIGHT, 0, 0, ROUTE_21_WIDTH, Route21Blocks
+	EAST_MAP_CONNECTION ROUTE_20, ROUTE_20_WIDTH, 0, 0, ROUTE_20_HEIGHT, Route20Blocks, CINNABAR_ISLAND_WIDTH
 	dw CinnabarIslandObject ; objects
 
 CinnabarIslandObject: ; 0x1c022 (size=71)
@@ -39594,23 +39480,8 @@ Route1_h: ; 0x1c0c3 to 0x1c0e5 (34 bytes) (bank=7) (id=12)
 	db ROUTE_1_HEIGHT, ROUTE_1_WIDTH ; dimensions (y, x)
 	dw Route1Blocks, Route1TextPointers, Route1Script ; blocks, texts, scripts
 	db NORTH | SOUTH ; connections
-
-	; connections data
-
-	db VIRIDIAN_CITY
-	dw ViridianCityBlocks + (VIRIDIAN_CITY_HEIGHT - 3) * VIRIDIAN_CITY_WIDTH + 2, $c6e8 ; pointers (connected, current) (strip)
-	db $10, $14 ; bigness, width
-	db $23, $0a ; alignments (y, x)
-	dw $c8bd ; window
-
-	db PALLET_TOWN
-	dw PalletTownBlocks, $c83b ; pointers (connected, current) (strip)
-	db $0a, $0a ; bigness, width
-	db $00, $00 ; alignments (y, x)
-	dw $c6f9 ; window
-
-	; end connections data
-
+	NORTH_MAP_CONNECTION VIRIDIAN_CITY, VIRIDIAN_CITY_WIDTH, VIRIDIAN_CITY_HEIGHT, -3, 2, VIRIDIAN_CITY_WIDTH - 4, ViridianCityBlocks
+	SOUTH_MAP_CONNECTION PALLET_TOWN, PALLET_TOWN_WIDTH, 0, 0, PALLET_TOWN_WIDTH, PalletTownBlocks, ROUTE_1_WIDTH, ROUTE_1_HEIGHT
 	dw Route1Object ; objects
 
 Route1Object: ; 0x1c0e5 (size=19)
@@ -39625,9 +39496,8 @@ Route1Object: ; 0x1c0e5 (size=19)
 	db SPRITE_BUG_CATCHER, $18 + 4, $5 + 4, $fe, $1, $1 ; person
 	db SPRITE_BUG_CATCHER, $d + 4, $f + 4, $fe, $2, $2 ; person
 
-; XXX what is this?
-Unknown_1c0f8: ; 1c0f8 (7:40f8)
-	db $12, $c7, $7, $2
+	; warp-to (unused)
+	EVENT_DISP $4, $7, $2
 
 Route1Blocks: ; 1c0fc (7:40fc)
 	INCBIN "maps/route1.blk"
@@ -40078,13 +39948,12 @@ OaksLab_h: ; 0x1cb02 to 0x1cb0e (12 bytes) (bank=7) (id=40)
 	db OAKS_LAB_HEIGHT, OAKS_LAB_WIDTH ; dimensions (y, x)
 	dw OaksLabBlocks, OaksLabTextPointers, OaksLabScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw OaksLabObject ; objects
 
 OaksLabScript: ; 1cb0e (7:4b0e)
 	ld a, [$d74b]
 	bit 6, a
-	call nz, Unknown_1d076
+	call nz, OaksLabScript_1d076
 	ld a, $1
 	ld [$cf0c], a
 	xor a
@@ -40788,7 +40657,7 @@ OaksLabScript_1d02b: ; 1d02b (7:502b)
 	call Func_32f9
 	ret
 
-Unknown_1d076: ; 1d076 (7:5076)
+OaksLabScript_1d076: ; 1d076 (7:5076)
 	ld hl, OaksLabTextPointers + $36 ; $50b8 ; starts at OaksLabText28
 	ld a, l
 	ld [W_MAPTEXTPTR], a
@@ -40878,7 +40747,7 @@ OaksLabText2: ; 1d102 (7:5102)
 	ld [$cd3e], a
 	ld a, $b0
 	ld b, $2
-	jr asm_1d133 ; 0x1d111 $20
+	jr OaksLabScript_1d133 ; 0x1d111 $20
 
 OaksLabText30: ; 1d113 (7:5113)
 OaksLabText3: ; 1d113 (7:5113)
@@ -40889,7 +40758,7 @@ OaksLabText3: ; 1d113 (7:5113)
 	ld [$cd3e], a
 	ld a, $b1
 	ld b, $3
-	jr asm_1d133 ; 0x1d122 $f
+	jr OaksLabScript_1d133 ; 0x1d122 $f
 
 OaksLabText31: ; 1d124 (7:5124)
 OaksLabText4: ; 1d124 (7:5124)
@@ -40901,16 +40770,16 @@ OaksLabText4: ; 1d124 (7:5124)
 	ld a, $99
 	ld b, $4
 
-asm_1d133: ; 1d133 (7:5133)
+OaksLabScript_1d133: ; 1d133 (7:5133)
 	ld [$cf91], a
 	ld [$d11e], a
 	ld a, b
 	ld [$cf13], a
 	ld a, [$d74b]
 	bit 2, a
-	jp nz, Unknown_1d22d
+	jp nz, OaksLabScript_1d22d
 	bit 1, a
-	jr nz, asm_1d157 ; 0x1d147 $e
+	jr nz, OaksLabScript_1d157 ; 0x1d147 $e
 	ld hl, OaksLabText39
 	call PrintText
 	jp TextScriptEnd
@@ -40919,7 +40788,7 @@ OaksLabText39: ; 1d152 (7:5152)
 	TX_FAR _OaksLabText39
 	db "@"
 
-asm_1d157: ; 1d157 (7:5157)
+OaksLabScript_1d157: ; 1d157 (7:5157)
 	ld a, $5
 	ld [$ff00+$8c], a
 	ld a, $9
@@ -41028,7 +40897,7 @@ OaksLabReceivedMonText: ; 1d227 (7:5227)
 	TX_FAR _OaksLabReceivedMonText ; 0x94ea0
 	db $11, "@"
 
-Unknown_1d22d: ; 1d22d (7:522d)
+OaksLabScript_1d22d: ; 1d22d (7:522d)
 	ld a, $5
 	ld [$ff00+$8c], a
 	ld a, $9
@@ -41357,7 +41226,6 @@ ViridianMart_h: ; 0x1d462 to 0x1d46e (12 bytes) (bank=7) (id=42)
 	db VIRIDIAN_MART_HEIGHT, VIRIDIAN_MART_WIDTH ; dimensions (y, x)
 	dw ViridianMartBlocks, ViridianMartTextPointers, ViridianMartScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw ViridianMartObject ; objects
 
 ViridianMartScript: ; 1d46e (7:546e)
@@ -41482,7 +41350,6 @@ School_h: ; 0x1d540 to 0x1d54c (12 bytes) (bank=7) (id=43)
 	db VIRIDIAN_SCHOOL_HEIGHT, VIRIDIAN_SCHOOL_WIDTH ; dimensions (y, x)
 	dw SchoolBlocks, SchoolTextPointers, SchoolScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw SchoolObject ; objects
 
 SchoolScript: ; 1d54c (7:554c)
@@ -41522,7 +41389,6 @@ ViridianHouse_h: ; 0x1d57d to 0x1d589 (12 bytes) (bank=7) (id=44)
 	db VIRIDIAN_HOUSE_HEIGHT, VIRIDIAN_HOUSE_WIDTH ; dimensions (y, x)
 	dw ViridianHouseBlocks, ViridianHouseTextPointers, ViridianHouseScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw ViridianHouseObject ; objects
 
 	db $0
@@ -41585,7 +41451,6 @@ PewterHouse1_h: ; 0x1d5e7 to 0x1d5f3 (12 bytes) (bank=7) (id=55)
 	db PEWTER_HOUSE_1_HEIGHT, PEWTER_HOUSE_1_WIDTH ; dimensions (y, x)
 	dw PewterHouse1Blocks, PewterHouse1TextPointers, PewterHouse1Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw PewterHouse1Object ; objects
 
 PewterHouse1Script: ; 1d5f3 (7:55f3)
@@ -41635,7 +41500,6 @@ PewterHouse2_h: ; 0x1d63c to 0x1d648 (12 bytes) (bank=7) (id=57)
 	db PEWTER_HOUSE_2_HEIGHT, PEWTER_HOUSE_2_WIDTH ; dimensions (y, x)
 	dw PewterHouse2Blocks, PewterHouse2TextPointers, PewterHouse2Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw PewterHouse2Object ; objects
 
 PewterHouse2Script: ; 1d648 (7:5648)
@@ -41675,7 +41539,6 @@ CeruleanHouseTrashed_h: ; 0x1d679 to 0x1d685 (12 bytes) (bank=7) (id=62)
 	db TRASHED_HOUSE_HEIGHT, TRASHED_HOUSE_WIDTH ; dimensions (y, x)
 	dw CeruleanHouseTrashedBlocks, CeruleanHouseTrashedTextPointers, CeruleanHouseTrashedScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw CeruleanHouseTrashedObject ; objects
 
 CeruleanHouseTrashedScript: ; 1d685 (7:5685)
@@ -41744,7 +41607,6 @@ CeruleanHouse_h: ; 0x1d6ea to 0x1d6f6 (12 bytes) (bank=7) (id=63)
 	db CERULEAN_HOUSE_HEIGHT, CERULEAN_HOUSE_WIDTH ; dimensions (y, x)
 	dw CeruleanHouseBlocks, CeruleanHouseTextPointers, CeruleanHouseScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw CeruleanHouseObject ; objects
 
 CeruleanHouseScript: ; 1d6f6 (7:56f6)
@@ -41788,7 +41650,6 @@ BikeShop_h: ; 0x1d730 to 0x1d73c (12 bytes) (bank=7) (id=66)
 	db BIKE_SHOP_HEIGHT, BIKE_SHOP_WIDTH ; dimensions (y, x)
 	dw BikeShopBlocks, BikeShopTextPointers, BikeShopScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw BikeShopObject ; objects
 
 BikeShopScript: ; 1d73c (7:573c)
@@ -41971,7 +41832,6 @@ LavenderHouse1_h: ; 0x1d89c to 0x1d8a8 (12 bytes) (bank=7) (id=149)
 	db LAVENDER_HOUSE_1_HEIGHT, LAVENDER_HOUSE_1_WIDTH ; dimensions (y, x)
 	dw LavenderHouse1Blocks, LavenderHouse1TextPointers, LavenderHouse1Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw LavenderHouse1Object ; objects
 
 LavenderHouse1Script: ; 1d8a8 (7:58a8)
@@ -42117,7 +41977,6 @@ LavenderHouse2_h: ; 0x1d9a2 to 0x1d9ae (12 bytes) (bank=7) (id=151)
 	db LAVENDER_HOUSE_2_HEIGHT, LAVENDER_HOUSE_2_WIDTH ; dimensions (y, x)
 	dw LavenderHouse2Blocks, LavenderHouse2TextPointers, LavenderHouse2Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw LavenderHouse2Object ; objects
 
 LavenderHouse2Script: ; 1d9ae (7:59ae)
@@ -42179,7 +42038,6 @@ NameRater_h: ; 0x1da06 to 0x1da12 (12 bytes) (bank=7) (id=229)
 	db NAME_RATERS_HOUSE_HEIGHT, NAME_RATERS_HOUSE_WIDTH ; dimensions (y, x)
 	dw NameRaterBlocks, NameRaterTextPointers, NameRaterScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw NameRaterObject ; objects
 
 NameRaterScript: ; 1da12 (7:5a12)
@@ -42193,7 +42051,7 @@ Func_1da15: ; 1da15 (7:5a15)
 	ret
 
 Func_1da20: ; 1da20 (7:5a20)
-	ld hl, $d273
+	ld hl, W_PARTYMON1OT
 	ld bc, $000b
 	ld a, [$cf92]
 	call AddNTimes
@@ -42313,7 +42171,6 @@ VermilionHouse1_h: ; 0x1daf0 to 0x1dafc (12 bytes) (bank=7) (id=93)
 	db VERMILION_HOUSE_1_HEIGHT, VERMILION_HOUSE_1_WIDTH ; dimensions (y, x)
 	dw VermilionHouse1Blocks, VermilionHouse1TextPointers, VermilionHouse1Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw VermilionHouse1Object ; objects
 
 VermilionHouse1Script: ; 1dafc (7:5afc)
@@ -42364,7 +42221,6 @@ VermilionDock_h: ; 0x1db46 to 0x1db52 (12 bytes) (bank=7) (id=94)
 	db VERMILION_DOCK_HEIGHT, VERMILION_DOCK_WIDTH ; dimensions (y, x)
 	dw VermilionDockBlocks, VermilionDockTextPointers, VermilionDockScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw VermilionDockObject ; objects
 
 VermilionDockScript: ; 1db52 (7:5b52)
@@ -42601,7 +42457,6 @@ CeladonMansion5_h: ; 0x1dd2e to 0x1dd3a (12 bytes) (bank=7) (id=132)
 	db CELADON_MANSION_5_HEIGHT, CELADON_MANSION_5_WIDTH ; dimensions (y, x)
 	dw CeladonMansion5Blocks, CeladonMansion5TextPointers, CeladonMansion5Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw CeladonMansion5Object ; objects
 
 CeladonMansion5Script: ; 1dd3a (7:5d3a)
@@ -42649,7 +42504,6 @@ FuchsiaMart_h: ; 0x1dd7c to 0x1dd88 (12 bytes) (bank=7) (id=152)
 	db FUCHSIA_MART_HEIGHT, FUCHSIA_MART_WIDTH ; dimensions (y, x)
 	dw FuchsiaMartBlocks, FuchsiaMartTextPointers, FuchsiaMartScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw FuchsiaMartObject ; objects
 
 FuchsiaMartScript: ; 1dd88 (7:5d88)
@@ -42694,7 +42548,6 @@ SaffronHouse1_h: ; 0x1ddd1 to 0x1dddd (12 bytes) (bank=7) (id=179)
 	db SAFFRON_HOUSE_1_HEIGHT, SAFFRON_HOUSE_1_WIDTH ; dimensions (y, x)
 	dw SaffronHouse1Blocks, SaffronHouse1TextPointers, SaffronHouse1Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw SaffronHouse1Object ; objects
 
 SaffronHouse1Script: ; 1dddd (7:5ddd)
@@ -42749,7 +42602,6 @@ SaffronHouse2_h: ; 0x1de30 to 0x1de3c (12 bytes) (bank=7) (id=183)
 	db SAFFRON_HOUSE_2_HEIGHT, SAFFRON_HOUSE_2_WIDTH ; dimensions (y, x)
 	dw SaffronHouse2Blocks, SaffronHouse2TextPointers, SaffronHouse2Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw SaffronHouse2Object ; objects
 
 SaffronHouse2Script: ; 1de3c (7:5e3c)
@@ -42820,7 +42672,6 @@ DiglettsCaveRoute2_h: ; 0x1dea4 to 0x1deb0 (12 bytes) (bank=7) (id=46)
 	db DIGLETTS_CAVE_EXIT_HEIGHT, DIGLETTS_CAVE_EXIT_WIDTH ; dimensions (y, x)
 	dw DiglettsCaveRoute2Blocks, DiglettsCaveRoute2TextPointers, DiglettsCaveRoute2Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw DiglettsCaveRoute2Object ; objects
 
 DiglettsCaveRoute2Script: ; 1deb0 (7:5eb0)
@@ -42858,7 +42709,6 @@ Route2House_h: ; 0x1dee1 to 0x1deed (12 bytes) (bank=7) (id=48)
 	db ROUTE_2_HOUSE_HEIGHT, ROUTE_2_HOUSE_WIDTH ; dimensions (y, x)
 	dw Route2HouseBlocks, Route2HouseTextPointers, Route2HouseScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw Route2HouseObject ; objects
 
 Route2HouseScript: ; 1deed (7:5eed)
@@ -42902,7 +42752,6 @@ Route5Gate_h: ; 0x1df27 to 0x1df33 (12 bytes) (bank=7) (id=70)
 	db ROUTE_5_GATE_HEIGHT, ROUTE_5_GATE_WIDTH ; dimensions (y, x)
 	dw Route5GateBlocks, Route5GateTextPointers, Route5GateScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw Route5GateObject ; objects
 
 Route5GateScript: ; 1df33 (7:5f33)
@@ -43055,7 +42904,6 @@ Route6Gate_h: ; 0x1e031 to 0x1e03d (12 bytes) (bank=7) (id=73)
 	db ROUTE_6_GATE_HEIGHT, ROUTE_6_GATE_WIDTH ; dimensions (y, x)
 	dw Route6GateBlocks, Route6GateTextPointers, Route6GateScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw Route6GateObject ; objects
 
 Route6GateScript: ; 1e03d (7:603d)
@@ -43159,7 +43007,6 @@ Route7Gate_h: ; 0x1e0f4 to 0x1e100 (12 bytes) (bank=7) (id=76)
 	db ROUTE_7_GATE_HEIGHT, ROUTE_7_GATE_WIDTH ; dimensions (y, x)
 	dw Route7GateBlocks, Route7GateTextPointers, Route7GateScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw Route7GateObject ; objects
 
 Route7GateScript: ; 1e100 (7:6100)
@@ -43266,7 +43113,6 @@ Route8Gate_h: ; 0x1e1bb to 0x1e1c7 (12 bytes) (bank=7) (id=79)
 	db ROUTE_8_GATE_HEIGHT, ROUTE_8_GATE_WIDTH ; dimensions (y, x)
 	dw Route8GateBlocks, Route8GateTextPointers, Route8GateScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw Route8GateObject ; objects
 
 Route8GateScript: ; 1e1c7 (7:61c7)
@@ -43370,7 +43216,6 @@ UndergroundPathEntranceRoute8_h: ; 0x1e27d to 0x1e289 (12 bytes) (bank=7) (id=80
 	db PATH_ENTRANCE_ROUTE_8_HEIGHT, PATH_ENTRANCE_ROUTE_8_WIDTH ; dimensions (y, x)
 	dw UndergroundPathEntranceRoute8Blocks, UndergroundPathEntranceRoute8TextPointers, UndergroundPathEntranceRoute8Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw UndergroundPathEntranceRoute8Object ; objects
 
 UndergroundPathEntranceRoute8Script: ; 1e289 (7:6289)
@@ -43381,10 +43226,8 @@ UndergroundPathEntranceRoute8Script: ; 1e289 (7:6289)
 UndergroundPathEntranceRoute8TextPointers: ; 1e291 (7:6291)
 	dw UndergroundPathEntranceRoute8Text1
 
-;XXX wtf? syntax error
 UndergroundPathEntranceRoute8Text1: ; 1e293 (7:6293)
-	db $17, $8d, $42, $23
-	;TX_FAR _UndergroundPathEntranceRoute8Text1
+	TX_FAR _UndergroundPathEntRoute8Text1
 	db "@"
 
 UndergroundPathEntranceRoute8Object: ; 0x1e298 (size=34)
@@ -43410,7 +43253,6 @@ PowerPlant_h: ; 0x1e2ba to 0x1e2c6 (12 bytes) (bank=7) (id=83)
 	db POWER_PLANT_HEIGHT, POWER_PLANT_WIDTH ; dimensions (y, x)
 	dw PowerPlantBlocks, PowerPlantTextPointers, PowerPlantScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw PowerPlantObject ; objects
 
 PowerPlantScript: ; 1e2c6 (7:62c6)
@@ -43629,7 +43471,6 @@ DiglettsCaveEntranceRoute11_h: ; 0x1e5ae to 0x1e5ba (12 bytes) (bank=7) (id=85)
 	db DIGLETTS_CAVE_ENTRANCE_HEIGHT, DIGLETTS_CAVE_ENTRANCE_WIDTH ; dimensions (y, x)
 	dw DiglettsCaveEntranceRoute11Blocks, DiglettsCaveEntranceRoute11TextPointers, DiglettsCaveEntranceRoute11Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw DiglettsCaveEntranceRoute11Object ; objects
 
 DiglettsCaveEntranceRoute11Script: ; 1e5ba (7:65ba)
@@ -43641,10 +43482,8 @@ DiglettsCaveEntranceRoute11Script: ; 1e5ba (7:65ba)
 DiglettsCaveEntranceRoute11TextPointers: ; 1e5c3 (7:65c3)
 	dw DiglettsCaveEntranceRoute11Text1
 
-; XXX wtf? syntax error
 DiglettsCaveEntranceRoute11Text1: ; 1e5c5 (7:65c5)
-	db $17, $f9, $47, $23
-	;TX_FAR _DiglettsCaveEntranceRoute11Text1
+	TX_FAR _DiglettsCaveEntRoute11Text1
 	db "@"
 
 DiglettsCaveEntranceRoute11Object: ; 0x1e5ca (size=34)
@@ -43670,7 +43509,6 @@ Route16House_h: ; 0x1e5ec to 0x1e5f8 (12 bytes) (bank=7) (id=188)
 	db ROUTE_16_HOUSE_HEIGHT, ROUTE_16_HOUSE_WIDTH ; dimensions (y, x)
 	dw Route16HouseBlocks, Route16HouseTextPointers, Route16HouseScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw Route16HouseObject ; objects
 
 Route16HouseScript: ; 1e5f8 (7:65f8)
@@ -43752,7 +43590,6 @@ Route22Gate_h: ; 0x1e677 to 0x1e683 (12 bytes) (bank=7) (id=193)
 	db ROUTE_22_GATE_HEIGHT, ROUTE_22_GATE_WIDTH ; dimensions (y, x)
 	dw Route22GateBlocks, Route22GateTextPointers, Route22GateScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw Route22GateObject ; objects
 
 Route22GateScript: ; 1e683 (7:6683)
@@ -43876,7 +43713,6 @@ BillsHouse_h: ; 0x1e75e to 0x1e76a (12 bytes) (bank=7) (id=88)
 	db BILLS_HOUSE_HEIGHT, BILLS_HOUSE_WIDTH ; dimensions (y, x)
 	dw BillsHouseBlocks, BillsHouseTextPointers, BillsHouseScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw BillsHouseObject ; objects
 
 BillsHouseScript: ; 1e76a (7:676a)
@@ -44142,8 +43978,8 @@ UnnamedText_1e946: ; 1e946 (7:6946)
 	ld a, $39
 	jp Func_3ef5
 
-UnnamedText_1e953: ; 1e953 (7:6953)
-	TX_FAR _UnnamedText_1e953
+NewBicycleText: ; 1e953 (7:6953)
+	TX_FAR _NewBicycleText
 	db "@"
 
 	call EnableAutoTextBoxDrawing
@@ -44262,7 +44098,7 @@ UnnamedText_1ea12: ; 1ea12 (7:6a12)
 	ld a, $31
 	jp Func_3ef5
 
-UnnamedText_1ea25: ; 1ea25 (7:6a25)
+CinnabarGymQuiz: ; 1ea25 (7:6a25)
 	db $08 ; asm
 	xor a
 	ld [$da38], a
@@ -44274,14 +44110,14 @@ UnnamedText_1ea25: ; 1ea25 (7:6a25)
 	and $f0
 	swap a
 	ld [$FF00+$dc], a
-	ld hl, UnnamedText_1ea5b ; $6a5b
+	ld hl, CinnabarGymQuizIntroText ; $6a5b
 	call PrintText
 	ld a, [$FF00+$db]
 	dec a
 	add a
 	ld d, $0
 	ld e, a
-	ld hl, PointerTable_1ea60 ; $6a60
+	ld hl, CinnabarQuizQuestions ; $6a60
 	add hl, de
 	ld a, [hli]
 	ld h, [hl]
@@ -44292,40 +44128,40 @@ UnnamedText_1ea25: ; 1ea25 (7:6a25)
 	call Func_1ea92
 	jp TextScriptEnd
 
-UnnamedText_1ea5b: ; 1ea5b (7:6a5b)
-	TX_FAR _UnnamedText_1ea5b
+CinnabarGymQuizIntroText: ; 1ea5b (7:6a5b)
+	TX_FAR _CinnabarGymQuizIntroText
 	db "@"
 
-PointerTable_1ea60: ; 1ea60 (7:6a60)
-	dw UnnamedText_1ea6c
-	dw UnnamedText_1ea71
-	dw UnnamedText_1ea76
-	dw UnnamedText_1ea7b
-	dw UnnamedText_1ea80
-	dw UnnamedText_1ea85
+CinnabarQuizQuestions: ; 1ea60 (7:6a60)
+	dw CinnabarQuizQuestionsText1
+	dw CinnabarQuizQuestionsText2
+	dw CinnabarQuizQuestionsText3
+	dw CinnabarQuizQuestionsText4
+	dw CinnabarQuizQuestionsText5
+	dw CinnabarQuizQuestionsText6
 
-UnnamedText_1ea6c: ; 1ea6c (7:6a6c)
-	TX_FAR _UnnamedText_1ea6c
+CinnabarQuizQuestionsText1: ; 1ea6c (7:6a6c)
+	TX_FAR _CinnabarQuizQuestionsText1
 	db "@"
 
-UnnamedText_1ea71: ; 1ea71 (7:6a71)
-	TX_FAR _UnnamedText_1ea71
+CinnabarQuizQuestionsText2: ; 1ea71 (7:6a71)
+	TX_FAR _CinnabarQuizQuestionsText2
 	db "@"
 
-UnnamedText_1ea76: ; 1ea76 (7:6a76)
-	TX_FAR _UnnamedText_1ea76
+CinnabarQuizQuestionsText3: ; 1ea76 (7:6a76)
+	TX_FAR _CinnabarQuizQuestionsText3
 	db "@"
 
-UnnamedText_1ea7b: ; 1ea7b (7:6a7b)
-	TX_FAR _UnnamedText_1ea7b
+CinnabarQuizQuestionsText4: ; 1ea7b (7:6a7b)
+	TX_FAR _CinnabarQuizQuestionsText4
 	db "@"
 
-UnnamedText_1ea80: ; 1ea80 (7:6a80)
-	TX_FAR _UnnamedText_1ea80
+CinnabarQuizQuestionsText5: ; 1ea80 (7:6a80)
+	TX_FAR _CinnabarQuizQuestionsText5
 	db "@"
 
-UnnamedText_1ea85: ; 1ea85 (7:6a85)
-	TX_FAR _UnnamedText_1ea85
+CinnabarQuizQuestionsText6: ; 1ea85 (7:6a85)
+	TX_FAR _CinnabarQuizQuestionsText6
 	db "@"
 
 Func_1ea8a: ; 1ea8a (7:6a8a)
@@ -44344,7 +44180,7 @@ Func_1ea92: ; 1ea92 (7:6a92)
 	set 5, [hl]
 	ld a, [$FF00+$db]
 	ld [$FF00+$e0], a
-	ld hl, UnnamedText_1eae3 ; $6ae3
+	ld hl, CinnabarGymQuizCorrectText ; $6ae3
 	call PrintText
 	ld a, [$FF00+$e0]
 	ld c, a
@@ -44356,7 +44192,7 @@ Func_1ea92: ; 1ea92 (7:6a92)
 	ld a, $a5
 	call PlaySound
 	call WaitForSoundToFinish
-	ld hl, UnnamedText_1eb05 ; $6b05
+	ld hl, CinnabarGymQuizIncorrectText ; $6b05
 	call PrintText
 	ld a, [$FF00+$db]
 	add $2
@@ -44373,11 +44209,11 @@ Func_1ea92: ; 1ea92 (7:6a92)
 	ld [$da38], a
 	ret
 
-UnnamedText_1eae3: ; 1eae3 (7:6ae3)
+CinnabarGymQuizCorrectText: ; 1eae3 (7:6ae3)
 	db $0b
-	TX_FAR _UnnamedText_1eae3
+	TX_FAR _CinnabarGymQuizCorrectText
 	db $06,$08
-	
+
 	ld a, [$FF00+$e0]
 	ld c, a
 	ld b, $2
@@ -44391,8 +44227,8 @@ UnnamedText_1eae3: ; 1eae3 (7:6ae3)
 	call WaitForSoundToFinish
 	jp TextScriptEnd
 
-UnnamedText_1eb05: ; 1eb05 (7:6b05)
-	TX_FAR _UnnamedText_1eb05
+CinnabarGymQuizIncorrectText: ; 1eb05 (7:6b05)
+	TX_FAR _CinnabarGymQuizIncorrectText
 	db "@"
 
 Func_1eb0a: ; 1eb0a (7:6b0a)
@@ -44437,7 +44273,7 @@ Func_1eb0a: ; 1eb0a (7:6b0a)
 	ret
 
 CinnabarGymGateCoords: ; 1eb48 (7:6b48)
-	; format: x-coord, y-coord, direction, buffer
+	; format: x-coord, y-coord, direction, padding
 	; direction: $54 = horizontal gate, $5f = vertical gate
 	db $09,$03,$54,$00
 	db $06,$03,$54,$00
@@ -44505,12 +44341,12 @@ UnnamedText_1eb69: ; 1eb69 (7:6b69)
 	call Func_3ef5
 	ret
 
-UnnamedText_1ebdd: ; 1ebdd (7:6bdd)
-	TX_FAR _UnnamedText_1ebdd
+BillsHouseMonitorText: ; 1ebdd (7:6bdd)
+	TX_FAR _BillsHouseMonitorText
 	db "@"
 
-UnnamedText_1ebe2: ; 1ebe2 (7:6be2)
-	TX_FAR _UnnamedText_1ebe2
+BillsHouseInitiatedText: ; 1ebe2 (7:6be2)
+	TX_FAR _BillsHouseInitiatedText
 	db $06
 	db $08 ; asm
 	ld a, $ff
@@ -44525,10 +44361,10 @@ UnnamedText_1ebe2: ; 1ebe2 (7:6be2)
 	call DelayFrames
 	jp TextScriptEnd
 
-UnnamedText_1ec05: ; 1ec05 (7:6c05)
+BillsHousePokemonList: ; 1ec05 (7:6c05)
 	db $08 ; asm
 	call SaveScreenTilesToBuffer1
-	ld hl, UnnamedText_1ec7f
+	ld hl, BillsHousePokemonListText1
 	call PrintText
 	xor a
 	ld [$d07c], a
@@ -44552,7 +44388,7 @@ UnnamedText_1ec05: ; 1ec05 (7:6c05)
 	ld hl, $c3ca
 	ld de, BillsMonListText
 	call PlaceString
-	ld hl, UnnamedText_1ecaa
+	ld hl, BillsHousePokemonListText2
 	call PrintText
 	call SaveScreenTilesToBuffer2
 	call HandleMenuInput
@@ -44560,13 +44396,13 @@ UnnamedText_1ec05: ; 1ec05 (7:6c05)
 	jr nz, .asm_1ec74
 	ld a, [$cc26]
 	add $66
-	cp $66
+	cp EEVEE
 	jr z, .asm_1ec6c
-	cp $67
+	cp FLAREON
 	jr z, .asm_1ec6c
-	cp $68
+	cp JOLTEON
 	jr z, .asm_1ec6c
-	cp $69
+	cp VAPOREON
 	jr z, .asm_1ec6c
 	jr .asm_1ec74
 .asm_1ec6c
@@ -44579,15 +44415,15 @@ UnnamedText_1ec05: ; 1ec05 (7:6c05)
 	call LoadScreenTilesFromBuffer2
 	jp TextScriptEnd
 
-UnnamedText_1ec7f: ; 1ec7f (7:6c7f)
-	TX_FAR _UnnamedText_1ec7f
+BillsHousePokemonListText1: ; 1ec7f (7:6c7f)
+	TX_FAR _BillsHousePokemonListText1
 	db "@"
 
 BillsMonListText: ; 1ec84 (7:6c84)
 	db "EEVEE",$4e,"FLAREON",$4e,"JOLTEON",$4e,"VAPOREON",$4e,"CANCEL@"
 
-UnnamedText_1ecaa: ; 1ecaa (7:6caa)
-	TX_FAR _UnnamedText_1ecaa
+BillsHousePokemonListText2: ; 1ecaa (7:6caa)
+	TX_FAR _BillsHousePokemonListText2
 	db "@"
 
 Func_1ecaf: ; 1ecaf (7:6caf)
@@ -44598,8 +44434,8 @@ Func_1ecaf: ; 1ecaf (7:6caf)
 	ld a, $8
 	jp Func_3ef5
 
-UnnamedText_1ecbd: ; 1ecbd (7:6cbd)
-	TX_FAR _UnnamedText_1ecbd
+OakLabEmailText: ; 1ecbd (7:6cbd)
+	TX_FAR _OakLabEmailText
 	db "@"
 
 SECTION "bank8",ROMX,BANK[$8]
@@ -44627,30 +44463,34 @@ INCLUDE "music/sfx/sfx_08_11.asm"
 INCLUDE "music/sfx/sfx_08_12.asm"
 INCLUDE "music/sfx/sfx_08_13.asm"
 
-Music8_Channel3DutyPointers: ; 20361 (1f:4361)
+Music8_Channel3DutyPointers: ; 20361 (8:4361)
+	dw Music8_Channel3Duty0
 	dw Music8_Channel3Duty1
 	dw Music8_Channel3Duty2
 	dw Music8_Channel3Duty3
 	dw Music8_Channel3Duty4
-	dw Music8_Channel3Duty5
 	dw SFX_08_40_Ch1 ; unused
 	dw SFX_08_40_Ch1 ; unused
 	dw SFX_08_40_Ch1 ; unused
 	dw SFX_08_40_Ch1 ; unused
-	
-Music8_Channel3Duty1: ; 20373 (8:4373)
+
+; these are the definitions for the channel 3 instruments
+; each instrument definition is made up of 32 points (nibbles) that form
+; the graph of the wave
+; the current instrument is copied to $FF30
+Music8_Channel3Duty0: ; 20373 (8:4373)
 	db $02,$46,$8A,$CE,$FF,$FE,$ED,$DC,$CB,$A9,$87,$65,$44,$33,$22,$11
 
-Music8_Channel3Duty2: ; 20383 (8:4383)
+Music8_Channel3Duty1: ; 20383 (8:4383)
 	db $02,$46,$8A,$CE,$EF,$FF,$FE,$EE,$DD,$CB,$A9,$87,$65,$43,$22,$11
 
-Music8_Channel3Duty3: ; 20393 (8:4393)
+Music8_Channel3Duty2: ; 20393 (8:4393)
 	db $13,$69,$BD,$EE,$EE,$FF,$FF,$ED,$DE,$FF,$FF,$EE,$EE,$DB,$96,$31
 
-Music8_Channel3Duty4: ; 203a3 (8:43a3)
+Music8_Channel3Duty3: ; 203a3 (8:43a3)
 	db $02,$46,$8A,$CD,$EF,$FE,$DE,$FF,$EE,$DC,$BA,$98,$76,$54,$32,$10
 
-Music8_Channel3Duty5: ; 203b3 (8:43b3)
+Music8_Channel3Duty4: ; 203b3 (8:43b3)
 	db $01,$23,$45,$67,$8A,$CD,$EE,$F7,$7F,$EE,$DC,$A8,$76,$54,$32,$10
 
 INCLUDE "music/sfx/sfx_08_40.asm"
@@ -45761,7 +45601,7 @@ Music8_notetype: ; 21a65 (8:5a65)
 	sla a
 	ld d, a
 	; fall through
-	
+
 	; if channel 3, store high nibble as volume
 	; else, store volume (high nibble) and fade (low nibble)
 .notChannel3
@@ -45783,7 +45623,7 @@ Music8_togglecall: ; 21aa4 (8:5aa4)
 	xor $1
 	ld [hl], a ; flip bit 0 of $c02e (toggle returning from call)
 	jp Music8_endchannel
-	
+
 Music8_vibrato: ; 21ab6 (8:5ab6)
 	cp $ea ; is this command a vibrato?
 	jr nz, Music8_pitchbend ; no
@@ -45817,7 +45657,7 @@ Music8_vibrato: ; 21ab6 (8:5ab6)
 	or d
 	ld [hl], a ; store depth as both high and low nibbles
 	jp Music8_endchannel
-	
+
 Music8_pitchbend: ; 21aee (8:5aee)
 	cp $eb ; is this command a pitchbend?
 	jr nz, Music8_duty ; no
@@ -45848,7 +45688,7 @@ Music8_pitchbend: ; 21aee (8:5aee)
 	call Music8_GetNextMusicByte
 	ld d, a
 	jp Music8_notelength
-	
+
 Music8_duty: ; 21b26 (8:5b26)
 	cp $ec ; is this command a duty?
 	jr nz, Music8_tempo ; no
@@ -45861,7 +45701,7 @@ Music8_duty: ; 21b26 (8:5b26)
 	add hl, bc
 	ld [hl], a ; store duty
 	jp Music8_endchannel
-	
+
 Music8_tempo: ; 21b3b (8:5b3b)
 	cp $ed ; is this command a tempo?
 	jr nz, Music8_unknownmusic0xee ; no
@@ -45890,14 +45730,14 @@ Music8_tempo: ; 21b3b (8:5b3b)
 	ld [$c0d5], a
 .musicChannelDone
 	jp Music8_endchannel
-	
+
 Music8_unknownmusic0xee: ; 21b7b (8:5b7b)
 	cp $ee ; is this command an unknownmusic0xee?
 	jr nz, Music8_unknownmusic0xef ; no
 	call Music8_GetNextMusicByte ; yes
 	ld [$c004], a ; store first param
 	jp Music8_endchannel
-	
+
 ; this appears to never be used
 Music8_unknownmusic0xef: ; 21b88 (8:5b88)
 	cp $ef ; is this command an unknownmusic0xef?
@@ -45915,7 +45755,7 @@ Music8_unknownmusic0xef: ; 21b88 (8:5b88)
 	ld [$c02d], a
 .skip
 	jp Music8_endchannel
-	
+
 Music8_dutycycle: ; 21ba7 (8:5ba7)
 	cp $fc ; is this command a dutycycle?
 	jr nz, Music8_stereopanning ; no
@@ -45932,14 +45772,14 @@ Music8_dutycycle: ; 21ba7 (8:5ba7)
 	add hl, bc
 	set 6, [hl] ; set dutycycle flag
 	jp Music8_endchannel
-	
+
 Music8_stereopanning: ; 21bc5 (8:5bc5)
 	cp $f0 ; is this command a stereopanning?
 	jr nz, Music8_executemusic ; no
 	call Music8_GetNextMusicByte ; yes
 	ld [$FF00+$24], a
 	jp Music8_endchannel
-	
+
 Music8_executemusic: ; 21bd1 (8:5bd1)
 	cp $f8 ; is this command an executemusic?
 	jr nz, Music8_octave ; no
@@ -45948,7 +45788,7 @@ Music8_executemusic: ; 21bd1 (8:5bd1)
 	add hl, bc
 	set 0, [hl]
 	jp Music8_endchannel
-	
+
 Music8_octave: ; 21be0 (8:5be0)
 	and $f0
 	cp $e0 ; is this command an octave?
@@ -45960,7 +45800,7 @@ Music8_octave: ; 21be0 (8:5be0)
 	and $f
 	ld [hl], a ; store low nibble as octave
 	jp Music8_endchannel
-	
+
 Music8_unknownsfx0x20: ; 21bf3
 	cp $20 ; is this command an unknownsfx0x20?
 	jr nz, Music8_unknownsfx0x10 ; no
@@ -46005,7 +45845,7 @@ Music8_unknownsfx0x20: ; 21bf3
 	pop de
 	call Func_21dcc
 	ret
-	
+
 Music8_unknownsfx0x10: ; 21c40 (8:5c40)
 	ld a, c
 	cp CH4
@@ -46021,7 +45861,7 @@ Music8_unknownsfx0x10: ; 21c40 (8:5c40)
 	call Music8_GetNextMusicByte ; yes
 	ld [$FF00+$10], a
 	jp Music8_endchannel
-	
+
 Music8_note: ; 21c5c (8:5c5c)
 	ld a, c
 	cp CH3
@@ -46040,7 +45880,7 @@ Music8_note: ; 21c5c (8:5c5c)
 	push de
 	push bc
 	jr asm_21c7e
-	
+
 Music8_dnote: ; 21c76 (8:5c76)
 	ld a, d
 	and $f
@@ -46115,7 +45955,7 @@ Music8_notelength: ; 21c8b (8:5c8b)
 	jr z, Music8_notepitch
 	pop hl
 	ret
-	
+
 Music8_notepitch: ; 21ce9 (8:5ce9)
 	pop af
 	and $f0
@@ -47405,50 +47245,50 @@ TrainerNamePointers: ; 27e64 (9:7e64)
 	dw YoungsterName
 	dw BugCatcherName
 	dw LassName
-	dw $D04A
+	dw W_TRAINERNAME
 	dw JrTrainerMName
 	dw JrTrainerFName
 	dw PokemaniacName
 	dw SuperNerdName
-	dw $D04A
-	dw $D04A
+	dw W_TRAINERNAME
+	dw W_TRAINERNAME
 	dw BurglarName
 	dw EngineerName
 	dw JugglerXName
-	dw $D04A
+	dw W_TRAINERNAME
 	dw SwimmerName
-	dw $D04A
-	dw $D04A
+	dw W_TRAINERNAME
+	dw W_TRAINERNAME
 	dw BeautyName
-	dw $D04A
+	dw W_TRAINERNAME
 	dw RockerName
 	dw JugglerName
-	dw $D04A
-	dw $D04A
+	dw W_TRAINERNAME
+	dw W_TRAINERNAME
 	dw BlackbeltName
-	dw $D04A
+	dw W_TRAINERNAME
 	dw ProfOakName
 	dw ChiefName
 	dw ScientistName
-	dw $D04A
+	dw W_TRAINERNAME
 	dw RocketName
 	dw CooltrainerMName
 	dw CooltrainerFName
-	dw $D04A
-	dw $D04A
-	dw $D04A
-	dw $D04A
-	dw $D04A
-	dw $D04A
-	dw $D04A
-	dw $D04A
-	dw $D04A
-	dw $D04A
-	dw $D04A
-	dw $D04A
-	dw $D04A
-	dw $D04A
-	dw $D04A
+	dw W_TRAINERNAME
+	dw W_TRAINERNAME
+	dw W_TRAINERNAME
+	dw W_TRAINERNAME
+	dw W_TRAINERNAME
+	dw W_TRAINERNAME
+	dw W_TRAINERNAME
+	dw W_TRAINERNAME
+	dw W_TRAINERNAME
+	dw W_TRAINERNAME
+	dw W_TRAINERNAME
+	dw W_TRAINERNAME
+	dw W_TRAINERNAME
+	dw W_TRAINERNAME
+	dw W_TRAINERNAME
 
 YoungsterName: ; 27ec2 (9:7ec2)
 	db "YOUNGSTER@"
@@ -48047,12 +47887,12 @@ Func_2ff09 ; 2ff09 (b:7f09)
 	ld [$cd3d], a
 	ret
 
-UnnamedText_2ff32: ; 2ff32 (b:7f32)
-	TX_FAR _UnnamedText_2ff32
+GameCornerCoinCaseText: ; 2ff32 (b:7f32)
+	TX_FAR _GameCornerCoinCaseText
 	db "@"
 
-UnnamedText_2ff37: ; 2ff37 (b:7f37)
-	TX_FAR _UnnamedText_2ff37
+GameCornerNoCoinsText: ; 2ff37 (b:7f37)
+	TX_FAR _GameCornerNoCoinsText
 	db "@"
 
 SECTION "bankC",ROMX,BANK[$C]
@@ -49650,16 +49490,16 @@ Func_37e2d: ; 37e2d (d:7e2d)
 	call Func_3ef5
 	ret
 
-UnnamedText_37e79: ; 37e79 (d:7e79)
-	TX_FAR _UnnamedText_37e79
+GameCornerOutOfOrderText: ; 37e79 (d:7e79)
+	TX_FAR _GameCornerOutOfOrderText
 	db "@"
 
-UnnamedText_37e7e: ; 37e7e (d:7e7e)
-	TX_FAR _UnnamedText_37e7e
+GameCornerOutToLunchText: ; 37e7e (d:7e7e)
+	TX_FAR _GameCornerOutToLunchText
 	db "@"
 
-UnnamedText_37e83: ; 37e83 (d:7e83)
-	TX_FAR _UnnamedText_37e83
+GameCornerSomeonesKeysText: ; 37e83 (d:7e83)
+	TX_FAR _GameCornerSomeonesKeysText
 	db "@"
 
 SECTION "bankE",ROMX,BANK[$E]
@@ -49850,7 +49690,7 @@ BulbasaurBaseStats: ; 383de (e:43de)
 
 	dw BulbasaurPicFront
 	dw BulbasaurPicBack
-	
+
 	; attacks known at lvl 0
 	db TACKLE
 	db GROWL
@@ -49858,7 +49698,7 @@ BulbasaurBaseStats: ; 383de (e:43de)
 	db 0
 
 	db 3 ; growth rate
-	
+
 	; learnset
 	db %10100100
 	db %00000011
@@ -49887,7 +49727,7 @@ IvysaurBaseStats: ; 383fa (e:43fa)
 
 	dw IvysaurPicFront
 	dw IvysaurPicBack
-	
+
 	; attacks known at lvl 0
 	db TACKLE
 	db GROWL
@@ -49895,7 +49735,7 @@ IvysaurBaseStats: ; 383fa (e:43fa)
 	db 0
 
 	db 3 ; growth rate
-	
+
 	; learnset
 	db %10100100
 	db %00000011
@@ -49924,7 +49764,7 @@ VenusaurBaseStats: ; 38416 (e:4416)
 
 	dw VenusaurPicFront
 	dw VenusaurPicBack
-	
+
 	; attacks known at lvl 0
 	db TACKLE
 	db GROWL
@@ -49932,7 +49772,7 @@ VenusaurBaseStats: ; 38416 (e:4416)
 	db VINE_WHIP
 
 	db 3 ; growth rate
-	
+
 	; learnset
 	db %10100100
 	db %01000011
@@ -49961,7 +49801,7 @@ CharmanderBaseStats: ; 38432 (e:4432)
 
 	dw CharmanderPicFront
 	dw CharmanderPicBack
-	
+
 	; attacks known at lvl 0
 	db SCRATCH
 	db GROWL
@@ -49969,7 +49809,7 @@ CharmanderBaseStats: ; 38432 (e:4432)
 	db 0
 
 	db 3 ; growth rate
-	
+
 	; learnset
 	db %10110101
 	db %00000011
@@ -49998,7 +49838,7 @@ CharmeleonBaseStats: ; 3844e (e:444e)
 
 	dw CharmeleonPicFront
 	dw CharmeleonPicBack
-	
+
 	; attacks known at lvl 0
 	db SCRATCH
 	db GROWL
@@ -50006,7 +49846,7 @@ CharmeleonBaseStats: ; 3844e (e:444e)
 	db 0
 
 	db 3 ; growth rate
-	
+
 	; learnset
 	db %10110101
 	db %00000011
@@ -50035,7 +49875,7 @@ CharizardBaseStats: ; 3846a (e:446a)
 
 	dw CharizardPicFront
 	dw CharizardPicBack
-	
+
 	; attacks known at lvl 0
 	db SCRATCH
 	db GROWL
@@ -50043,7 +49883,7 @@ CharizardBaseStats: ; 3846a (e:446a)
 	db LEER
 
 	db 3 ; growth rate
-	
+
 	; learnset
 	db %10110101
 	db %01000011
@@ -50072,7 +49912,7 @@ SquirtleBaseStats: ; 38486 (e:4486)
 
 	dw SquirtlePicFront
 	dw SquirtlePicBack
-	
+
 	; attacks known at lvl 0
 	db TACKLE
 	db TAIL_WHIP
@@ -50080,7 +49920,7 @@ SquirtleBaseStats: ; 38486 (e:4486)
 	db 0
 
 	db 3 ; growth rate
-	
+
 	; learnset
 	db %10110001
 	db %00111111
@@ -50109,7 +49949,7 @@ WartortleBaseStats: ; 384a2 (e:44a2)
 
 	dw WartortlePicFront
 	dw WartortlePicBack
-	
+
 	; attacks known at lvl 0
 	db TACKLE
 	db TAIL_WHIP
@@ -50117,7 +49957,7 @@ WartortleBaseStats: ; 384a2 (e:44a2)
 	db 0
 
 	db 3 ; growth rate
-	
+
 	; learnset
 	db %10110001
 	db %00111111
@@ -50146,7 +49986,7 @@ BlastoiseBaseStats: ; 384be (e:44be)
 
 	dw BlastoisePicFront
 	dw BlastoisePicBack
-	
+
 	; attacks known at lvl 0
 	db TACKLE
 	db TAIL_WHIP
@@ -50154,7 +49994,7 @@ BlastoiseBaseStats: ; 384be (e:44be)
 	db WATER_GUN
 
 	db 3 ; growth rate
-	
+
 	; learnset
 	db %10110001
 	db %01111111
@@ -50183,7 +50023,7 @@ CaterpieBaseStats: ; 384da (e:44da)
 
 	dw CaterpiePicFront
 	dw CaterpiePicBack
-	
+
 	; attacks known at lvl 0
 	db TACKLE
 	db STRING_SHOT
@@ -50191,7 +50031,7 @@ CaterpieBaseStats: ; 384da (e:44da)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %00000000
 	db %00000000
@@ -50220,7 +50060,7 @@ MetapodBaseStats: ; 384f6 (e:44f6)
 
 	dw MetapodPicFront
 	dw MetapodPicBack
-	
+
 	; attacks known at lvl 0
 	db HARDEN
 	db 0
@@ -50228,7 +50068,7 @@ MetapodBaseStats: ; 384f6 (e:44f6)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %00000000
 	db %00000000
@@ -50257,7 +50097,7 @@ ButterfreeBaseStats: ; 38512 (e:4512)
 
 	dw ButterfreePicFront
 	dw ButterfreePicBack
-	
+
 	; attacks known at lvl 0
 	db CONFUSION
 	db 0
@@ -50265,7 +50105,7 @@ ButterfreeBaseStats: ; 38512 (e:4512)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %00101010
 	db %01000011
@@ -50294,7 +50134,7 @@ WeedleBaseStats: ; 3852e (e:452e)
 
 	dw WeedlePicFront
 	dw WeedlePicBack
-	
+
 	; attacks known at lvl 0
 	db POISON_STING
 	db STRING_SHOT
@@ -50302,7 +50142,7 @@ WeedleBaseStats: ; 3852e (e:452e)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %00000000
 	db %00000000
@@ -50331,7 +50171,7 @@ KakunaBaseStats: ; 3854a (e:454a)
 
 	dw KakunaPicFront
 	dw KakunaPicBack
-	
+
 	; attacks known at lvl 0
 	db HARDEN
 	db 0
@@ -50339,7 +50179,7 @@ KakunaBaseStats: ; 3854a (e:454a)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %00000000
 	db %00000000
@@ -50368,7 +50208,7 @@ BeedrillBaseStats: ; 38566 (e:4566)
 
 	dw BeedrillPicFront
 	dw BeedrillPicBack
-	
+
 	; attacks known at lvl 0
 	db FURY_ATTACK
 	db 0
@@ -50376,7 +50216,7 @@ BeedrillBaseStats: ; 38566 (e:4566)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %00100100
 	db %01000011
@@ -50405,7 +50245,7 @@ PidgeyBaseStats: ; 38582 (e:4582)
 
 	dw PidgeyPicFront
 	dw PidgeyPicBack
-	
+
 	; attacks known at lvl 0
 	db GUST
 	db 0
@@ -50413,7 +50253,7 @@ PidgeyBaseStats: ; 38582 (e:4582)
 	db 0
 
 	db 3 ; growth rate
-	
+
 	; learnset
 	db %00101010
 	db %00000011
@@ -50442,7 +50282,7 @@ PidgeottoBaseStats: ; 3859e (e:459e)
 
 	dw PidgeottoPicFront
 	dw PidgeottoPicBack
-	
+
 	; attacks known at lvl 0
 	db GUST
 	db SAND_ATTACK
@@ -50450,7 +50290,7 @@ PidgeottoBaseStats: ; 3859e (e:459e)
 	db 0
 
 	db 3 ; growth rate
-	
+
 	; learnset
 	db %00101010
 	db %00000011
@@ -50479,7 +50319,7 @@ PidgeotBaseStats: ; 385ba (e:45ba)
 
 	dw PidgeotPicFront
 	dw PidgeotPicBack
-	
+
 	; attacks known at lvl 0
 	db GUST
 	db SAND_ATTACK
@@ -50487,7 +50327,7 @@ PidgeotBaseStats: ; 385ba (e:45ba)
 	db 0
 
 	db 3 ; growth rate
-	
+
 	; learnset
 	db %00101010
 	db %01000011
@@ -50516,7 +50356,7 @@ RattataBaseStats: ; 385d6 (e:45d6)
 
 	dw RattataPicFront
 	dw RattataPicBack
-	
+
 	; attacks known at lvl 0
 	db TACKLE
 	db TAIL_WHIP
@@ -50524,7 +50364,7 @@ RattataBaseStats: ; 385d6 (e:45d6)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %10100000
 	db %00101111
@@ -50553,7 +50393,7 @@ RaticateBaseStats: ; 385f2 (e:45f2)
 
 	dw RaticatePicFront
 	dw RaticatePicBack
-	
+
 	; attacks known at lvl 0
 	db TACKLE
 	db TAIL_WHIP
@@ -50561,7 +50401,7 @@ RaticateBaseStats: ; 385f2 (e:45f2)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %10100000
 	db %01111111
@@ -50590,7 +50430,7 @@ SpearowBaseStats: ; 3860e (e:460e)
 
 	dw SpearowPicFront
 	dw SpearowPicBack
-	
+
 	; attacks known at lvl 0
 	db PECK
 	db GROWL
@@ -50598,7 +50438,7 @@ SpearowBaseStats: ; 3860e (e:460e)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %00101010
 	db %00000011
@@ -50627,7 +50467,7 @@ FearowBaseStats: ; 3862a (e:462a)
 
 	dw FearowPicFront
 	dw FearowPicBack
-	
+
 	; attacks known at lvl 0
 	db PECK
 	db GROWL
@@ -50635,7 +50475,7 @@ FearowBaseStats: ; 3862a (e:462a)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %00101010
 	db %01000011
@@ -50664,7 +50504,7 @@ EkansBaseStats: ; 38646 (e:4646)
 
 	dw EkansPicFront
 	dw EkansPicBack
-	
+
 	; attacks known at lvl 0
 	db WRAP
 	db LEER
@@ -50672,7 +50512,7 @@ EkansBaseStats: ; 38646 (e:4646)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %10100000
 	db %00000011
@@ -50701,7 +50541,7 @@ ArbokBaseStats: ; 38662 (e:4662)
 
 	dw ArbokPicFront
 	dw ArbokPicBack
-	
+
 	; attacks known at lvl 0
 	db WRAP
 	db LEER
@@ -50709,7 +50549,7 @@ ArbokBaseStats: ; 38662 (e:4662)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %10100000
 	db %01000011
@@ -50738,7 +50578,7 @@ PikachuBaseStats: ; 3867e (e:467e)
 
 	dw PikachuPicFront
 	dw PikachuPicBack
-	
+
 	; attacks known at lvl 0
 	db THUNDERSHOCK
 	db GROWL
@@ -50746,7 +50586,7 @@ PikachuBaseStats: ; 3867e (e:467e)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %10110001
 	db %10000011
@@ -50775,7 +50615,7 @@ RaichuBaseStats: ; 3869a (e:469a)
 
 	dw RaichuPicFront
 	dw RaichuPicBack
-	
+
 	; attacks known at lvl 0
 	db THUNDERSHOCK
 	db GROWL
@@ -50783,7 +50623,7 @@ RaichuBaseStats: ; 3869a (e:469a)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %10110001
 	db %11000011
@@ -50812,7 +50652,7 @@ SandshrewBaseStats: ; 386b6 (e:46b6)
 
 	dw SandshrewPicFront
 	dw SandshrewPicBack
-	
+
 	; attacks known at lvl 0
 	db SCRATCH
 	db 0
@@ -50820,7 +50660,7 @@ SandshrewBaseStats: ; 386b6 (e:46b6)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %10100100
 	db %00000011
@@ -50849,7 +50689,7 @@ SandslashBaseStats: ; 386d2 (e:46d2)
 
 	dw SandslashPicFront
 	dw SandslashPicBack
-	
+
 	; attacks known at lvl 0
 	db SCRATCH
 	db SAND_ATTACK
@@ -50857,7 +50697,7 @@ SandslashBaseStats: ; 386d2 (e:46d2)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %10100100
 	db %01000011
@@ -50886,7 +50726,7 @@ NidoranFBaseStats: ; 386ee (e:46ee)
 
 	dw NidoranFPicFront
 	dw NidoranFPicBack
-	
+
 	; attacks known at lvl 0
 	db GROWL
 	db TACKLE
@@ -50894,7 +50734,7 @@ NidoranFBaseStats: ; 386ee (e:46ee)
 	db 0
 
 	db 3 ; growth rate
-	
+
 	; learnset
 	db %10100000
 	db %00100011
@@ -50923,7 +50763,7 @@ NidorinaBaseStats: ; 3870a (e:470a)
 
 	dw NidorinaPicFront
 	dw NidorinaPicBack
-	
+
 	; attacks known at lvl 0
 	db GROWL
 	db TACKLE
@@ -50931,7 +50771,7 @@ NidorinaBaseStats: ; 3870a (e:470a)
 	db 0
 
 	db 3 ; growth rate
-	
+
 	; learnset
 	db %11100000
 	db %00111111
@@ -50960,7 +50800,7 @@ NidoqueenBaseStats: ; 38726 (e:4726)
 
 	dw NidoqueenPicFront
 	dw NidoqueenPicBack
-	
+
 	; attacks known at lvl 0
 	db TACKLE
 	db SCRATCH
@@ -50968,7 +50808,7 @@ NidoqueenBaseStats: ; 38726 (e:4726)
 	db BODY_SLAM
 
 	db 3 ; growth rate
-	
+
 	; learnset
 	db %11110001
 	db %11111111
@@ -50997,7 +50837,7 @@ NidoranMBaseStats: ; 38742 (e:4742)
 
 	dw NidoranMPicFront
 	dw NidoranMPicBack
-	
+
 	; attacks known at lvl 0
 	db LEER
 	db TACKLE
@@ -51005,7 +50845,7 @@ NidoranMBaseStats: ; 38742 (e:4742)
 	db 0
 
 	db 3 ; growth rate
-	
+
 	; learnset
 	db %11100000
 	db %00100011
@@ -51034,7 +50874,7 @@ NidorinoBaseStats: ; 3875e (e:475e)
 
 	dw NidorinoPicFront
 	dw NidorinoPicBack
-	
+
 	; attacks known at lvl 0
 	db LEER
 	db TACKLE
@@ -51042,7 +50882,7 @@ NidorinoBaseStats: ; 3875e (e:475e)
 	db 0
 
 	db 3 ; growth rate
-	
+
 	; learnset
 	db %11100000
 	db %00111111
@@ -51071,7 +50911,7 @@ NidokingBaseStats: ; 3877a (e:477a)
 
 	dw NidokingPicFront
 	dw NidokingPicBack
-	
+
 	; attacks known at lvl 0
 	db TACKLE
 	db HORN_ATTACK
@@ -51079,7 +50919,7 @@ NidokingBaseStats: ; 3877a (e:477a)
 	db THRASH
 
 	db 3 ; growth rate
-	
+
 	; learnset
 	db %11110001
 	db %11111111
@@ -51108,7 +50948,7 @@ ClefairyBaseStats: ; 38796 (e:4796)
 
 	dw ClefairyPicFront
 	dw ClefairyPicBack
-	
+
 	; attacks known at lvl 0
 	db POUND
 	db GROWL
@@ -51116,7 +50956,7 @@ ClefairyBaseStats: ; 38796 (e:4796)
 	db 0
 
 	db 4 ; growth rate
-	
+
 	; learnset
 	db %10110001
 	db %00111111
@@ -51145,7 +50985,7 @@ ClefableBaseStats: ; 387b2 (e:47b2)
 
 	dw ClefablePicFront
 	dw ClefablePicBack
-	
+
 	; attacks known at lvl 0
 	db SING
 	db DOUBLESLAP
@@ -51153,7 +50993,7 @@ ClefableBaseStats: ; 387b2 (e:47b2)
 	db METRONOME
 
 	db 4 ; growth rate
-	
+
 	; learnset
 	db %10110001
 	db %01111111
@@ -51182,7 +51022,7 @@ VulpixBaseStats: ; 387ce (e:47ce)
 
 	dw VulpixPicFront
 	dw VulpixPicBack
-	
+
 	; attacks known at lvl 0
 	db EMBER
 	db TAIL_WHIP
@@ -51190,7 +51030,7 @@ VulpixBaseStats: ; 387ce (e:47ce)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %10100000
 	db %00000011
@@ -51219,7 +51059,7 @@ NinetalesBaseStats: ; 387ea (e:47ea)
 
 	dw NinetalesPicFront
 	dw NinetalesPicBack
-	
+
 	; attacks known at lvl 0
 	db EMBER
 	db TAIL_WHIP
@@ -51227,7 +51067,7 @@ NinetalesBaseStats: ; 387ea (e:47ea)
 	db ROAR
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %10100000
 	db %01000011
@@ -51256,7 +51096,7 @@ JigglypuffBaseStats: ; 38806 (e:4806)
 
 	dw JigglypuffPicFront
 	dw JigglypuffPicBack
-	
+
 	; attacks known at lvl 0
 	db SING
 	db 0
@@ -51264,7 +51104,7 @@ JigglypuffBaseStats: ; 38806 (e:4806)
 	db 0
 
 	db 4 ; growth rate
-	
+
 	; learnset
 	db %10110001
 	db %00111111
@@ -51293,7 +51133,7 @@ WigglytuffBaseStats: ; 38822 (e:4822)
 
 	dw WigglytuffPicFront
 	dw WigglytuffPicBack
-	
+
 	; attacks known at lvl 0
 	db SING
 	db DISABLE
@@ -51301,7 +51141,7 @@ WigglytuffBaseStats: ; 38822 (e:4822)
 	db DOUBLESLAP
 
 	db 4 ; growth rate
-	
+
 	; learnset
 	db %10110001
 	db %01111111
@@ -51330,7 +51170,7 @@ ZubatBaseStats: ; 3883e (e:483e)
 
 	dw ZubatPicFront
 	dw ZubatPicBack
-	
+
 	; attacks known at lvl 0
 	db LEECH_LIFE
 	db 0
@@ -51338,7 +51178,7 @@ ZubatBaseStats: ; 3883e (e:483e)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %00101010
 	db %00000011
@@ -51367,7 +51207,7 @@ GolbatBaseStats: ; 3885a (e:485a)
 
 	dw GolbatPicFront
 	dw GolbatPicBack
-	
+
 	; attacks known at lvl 0
 	db LEECH_LIFE
 	db SCREECH
@@ -51375,7 +51215,7 @@ GolbatBaseStats: ; 3885a (e:485a)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %00101010
 	db %01000011
@@ -51404,7 +51244,7 @@ OddishBaseStats: ; 38876 (e:4876)
 
 	dw OddishPicFront
 	dw OddishPicBack
-	
+
 	; attacks known at lvl 0
 	db ABSORB
 	db 0
@@ -51412,7 +51252,7 @@ OddishBaseStats: ; 38876 (e:4876)
 	db 0
 
 	db 3 ; growth rate
-	
+
 	; learnset
 	db %00100100
 	db %00000011
@@ -51441,7 +51281,7 @@ GloomBaseStats: ; 38892 (e:4892)
 
 	dw GloomPicFront
 	dw GloomPicBack
-	
+
 	; attacks known at lvl 0
 	db ABSORB
 	db POISONPOWDER
@@ -51449,7 +51289,7 @@ GloomBaseStats: ; 38892 (e:4892)
 	db 0
 
 	db 3 ; growth rate
-	
+
 	; learnset
 	db %00100100
 	db %00000011
@@ -51478,7 +51318,7 @@ VileplumeBaseStats: ; 388ae (e:48ae)
 
 	dw VileplumePicFront
 	dw VileplumePicBack
-	
+
 	; attacks known at lvl 0
 	db STUN_SPORE
 	db SLEEP_POWDER
@@ -51486,7 +51326,7 @@ VileplumeBaseStats: ; 388ae (e:48ae)
 	db PETAL_DANCE
 
 	db 3 ; growth rate
-	
+
 	; learnset
 	db %10100100
 	db %01000011
@@ -51515,7 +51355,7 @@ ParasBaseStats: ; 388ca (e:48ca)
 
 	dw ParasPicFront
 	dw ParasPicBack
-	
+
 	; attacks known at lvl 0
 	db SCRATCH
 	db 0
@@ -51523,7 +51363,7 @@ ParasBaseStats: ; 388ca (e:48ca)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %10100100
 	db %00000011
@@ -51552,7 +51392,7 @@ ParasectBaseStats: ; 388e6 (e:48e6)
 
 	dw ParasectPicFront
 	dw ParasectPicBack
-	
+
 	; attacks known at lvl 0
 	db SCRATCH
 	db STUN_SPORE
@@ -51560,7 +51400,7 @@ ParasectBaseStats: ; 388e6 (e:48e6)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %10100100
 	db %01000011
@@ -51589,7 +51429,7 @@ VenonatBaseStats: ; 38902 (e:4902)
 
 	dw VenonatPicFront
 	dw VenonatPicBack
-	
+
 	; attacks known at lvl 0
 	db TACKLE
 	db DISABLE
@@ -51597,7 +51437,7 @@ VenonatBaseStats: ; 38902 (e:4902)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %00100000
 	db %00000011
@@ -51626,7 +51466,7 @@ VenomothBaseStats: ; 3891e (e:491e)
 
 	dw VenomothPicFront
 	dw VenomothPicBack
-	
+
 	; attacks known at lvl 0
 	db TACKLE
 	db DISABLE
@@ -51634,7 +51474,7 @@ VenomothBaseStats: ; 3891e (e:491e)
 	db LEECH_LIFE
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %00101010
 	db %01000011
@@ -51663,7 +51503,7 @@ DiglettBaseStats: ; 3893a (e:493a)
 
 	dw DiglettPicFront
 	dw DiglettPicBack
-	
+
 	; attacks known at lvl 0
 	db SCRATCH
 	db 0
@@ -51671,7 +51511,7 @@ DiglettBaseStats: ; 3893a (e:493a)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %10100000
 	db %00000011
@@ -51700,7 +51540,7 @@ DugtrioBaseStats: ; 38956 (e:4956)
 
 	dw DugtrioPicFront
 	dw DugtrioPicBack
-	
+
 	; attacks known at lvl 0
 	db SCRATCH
 	db GROWL
@@ -51708,7 +51548,7 @@ DugtrioBaseStats: ; 38956 (e:4956)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %10100000
 	db %01000011
@@ -51737,7 +51577,7 @@ MeowthBaseStats: ; 38972 (e:4972)
 
 	dw MeowthPicFront
 	dw MeowthPicBack
-	
+
 	; attacks known at lvl 0
 	db SCRATCH
 	db GROWL
@@ -51745,7 +51585,7 @@ MeowthBaseStats: ; 38972 (e:4972)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %10100000
 	db %10001111
@@ -51774,7 +51614,7 @@ PersianBaseStats: ; 3898e (e:498e)
 
 	dw PersianPicFront
 	dw PersianPicBack
-	
+
 	; attacks known at lvl 0
 	db SCRATCH
 	db GROWL
@@ -51782,7 +51622,7 @@ PersianBaseStats: ; 3898e (e:498e)
 	db SCREECH
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %10100000
 	db %11001111
@@ -51811,7 +51651,7 @@ PsyduckBaseStats: ; 389aa (e:49aa)
 
 	dw PsyduckPicFront
 	dw PsyduckPicBack
-	
+
 	; attacks known at lvl 0
 	db SCRATCH
 	db 0
@@ -51819,7 +51659,7 @@ PsyduckBaseStats: ; 389aa (e:49aa)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %10110001
 	db %10111111
@@ -51848,7 +51688,7 @@ GolduckBaseStats: ; 389c6 (e:49c6)
 
 	dw GolduckPicFront
 	dw GolduckPicBack
-	
+
 	; attacks known at lvl 0
 	db SCRATCH
 	db TAIL_WHIP
@@ -51856,7 +51696,7 @@ GolduckBaseStats: ; 389c6 (e:49c6)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %10110001
 	db %11111111
@@ -51885,7 +51725,7 @@ MankeyBaseStats: ; 389e2 (e:49e2)
 
 	dw MankeyPicFront
 	dw MankeyPicBack
-	
+
 	; attacks known at lvl 0
 	db SCRATCH
 	db LEER
@@ -51893,7 +51733,7 @@ MankeyBaseStats: ; 389e2 (e:49e2)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %10110001
 	db %10000011
@@ -51922,7 +51762,7 @@ PrimeapeBaseStats: ; 389fe (e:49fe)
 
 	dw PrimeapePicFront
 	dw PrimeapePicBack
-	
+
 	; attacks known at lvl 0
 	db SCRATCH
 	db LEER
@@ -51930,7 +51770,7 @@ PrimeapeBaseStats: ; 389fe (e:49fe)
 	db FURY_SWIPES
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %10110001
 	db %11000011
@@ -51959,7 +51799,7 @@ GrowlitheBaseStats: ; 38a1a (e:4a1a)
 
 	dw GrowlithePicFront
 	dw GrowlithePicBack
-	
+
 	; attacks known at lvl 0
 	db BITE
 	db ROAR
@@ -51967,7 +51807,7 @@ GrowlitheBaseStats: ; 38a1a (e:4a1a)
 	db 0
 
 	db 5 ; growth rate
-	
+
 	; learnset
 	db %10100000
 	db %00000011
@@ -51996,7 +51836,7 @@ ArcanineBaseStats: ; 38a36 (e:4a36)
 
 	dw ArcaninePicFront
 	dw ArcaninePicBack
-	
+
 	; attacks known at lvl 0
 	db ROAR
 	db EMBER
@@ -52004,7 +51844,7 @@ ArcanineBaseStats: ; 38a36 (e:4a36)
 	db TAKE_DOWN
 
 	db 5 ; growth rate
-	
+
 	; learnset
 	db %10100000
 	db %01000011
@@ -52033,7 +51873,7 @@ PoliwagBaseStats: ; 38a52 (e:4a52)
 
 	dw PoliwagPicFront
 	dw PoliwagPicBack
-	
+
 	; attacks known at lvl 0
 	db BUBBLE
 	db 0
@@ -52041,7 +51881,7 @@ PoliwagBaseStats: ; 38a52 (e:4a52)
 	db 0
 
 	db 3 ; growth rate
-	
+
 	; learnset
 	db %10100000
 	db %00111111
@@ -52070,7 +51910,7 @@ PoliwhirlBaseStats: ; 38a6e (e:4a6e)
 
 	dw PoliwhirlPicFront
 	dw PoliwhirlPicBack
-	
+
 	; attacks known at lvl 0
 	db BUBBLE
 	db HYPNOSIS
@@ -52078,7 +51918,7 @@ PoliwhirlBaseStats: ; 38a6e (e:4a6e)
 	db 0
 
 	db 3 ; growth rate
-	
+
 	; learnset
 	db %10110001
 	db %00111111
@@ -52107,7 +51947,7 @@ PoliwrathBaseStats: ; 38a8a (e:4a8a)
 
 	dw PoliwrathPicFront
 	dw PoliwrathPicBack
-	
+
 	; attacks known at lvl 0
 	db HYPNOSIS
 	db WATER_GUN
@@ -52115,7 +51955,7 @@ PoliwrathBaseStats: ; 38a8a (e:4a8a)
 	db BODY_SLAM
 
 	db 3 ; growth rate
-	
+
 	; learnset
 	db %10110001
 	db %01111111
@@ -52144,7 +51984,7 @@ AbraBaseStats: ; 38aa6 (e:4aa6)
 
 	dw AbraPicFront
 	dw AbraPicBack
-	
+
 	; attacks known at lvl 0
 	db TELEPORT
 	db 0
@@ -52152,7 +51992,7 @@ AbraBaseStats: ; 38aa6 (e:4aa6)
 	db 0
 
 	db 3 ; growth rate
-	
+
 	; learnset
 	db %10110001
 	db %00000011
@@ -52181,7 +52021,7 @@ KadabraBaseStats: ; 38ac2 (e:4ac2)
 
 	dw KadabraPicFront
 	dw KadabraPicBack
-	
+
 	; attacks known at lvl 0
 	db TELEPORT
 	db CONFUSION
@@ -52189,7 +52029,7 @@ KadabraBaseStats: ; 38ac2 (e:4ac2)
 	db 0
 
 	db 3 ; growth rate
-	
+
 	; learnset
 	db %10110001
 	db %00000011
@@ -52218,7 +52058,7 @@ AlakazamBaseStats: ; 38ade (e:4ade)
 
 	dw AlakazamPicFront
 	dw AlakazamPicBack
-	
+
 	; attacks known at lvl 0
 	db TELEPORT
 	db CONFUSION
@@ -52226,7 +52066,7 @@ AlakazamBaseStats: ; 38ade (e:4ade)
 	db 0
 
 	db 3 ; growth rate
-	
+
 	; learnset
 	db %10110001
 	db %01000011
@@ -52255,7 +52095,7 @@ MachopBaseStats: ; 38afa (e:4afa)
 
 	dw MachopPicFront
 	dw MachopPicBack
-	
+
 	; attacks known at lvl 0
 	db KARATE_CHOP
 	db 0
@@ -52263,7 +52103,7 @@ MachopBaseStats: ; 38afa (e:4afa)
 	db 0
 
 	db 3 ; growth rate
-	
+
 	; learnset
 	db %10110001
 	db %00000011
@@ -52292,7 +52132,7 @@ MachokeBaseStats: ; 38b16 (e:4b16)
 
 	dw MachokePicFront
 	dw MachokePicBack
-	
+
 	; attacks known at lvl 0
 	db KARATE_CHOP
 	db LOW_KICK
@@ -52300,7 +52140,7 @@ MachokeBaseStats: ; 38b16 (e:4b16)
 	db 0
 
 	db 3 ; growth rate
-	
+
 	; learnset
 	db %10110001
 	db %00000011
@@ -52329,7 +52169,7 @@ MachampBaseStats: ; 38b32 (e:4b32)
 
 	dw MachampPicFront
 	dw MachampPicBack
-	
+
 	; attacks known at lvl 0
 	db KARATE_CHOP
 	db LOW_KICK
@@ -52337,7 +52177,7 @@ MachampBaseStats: ; 38b32 (e:4b32)
 	db 0
 
 	db 3 ; growth rate
-	
+
 	; learnset
 	db %10110001
 	db %01000011
@@ -52366,7 +52206,7 @@ BellsproutBaseStats: ; 38b4e (e:4b4e)
 
 	dw BellsproutPicFront
 	dw BellsproutPicBack
-	
+
 	; attacks known at lvl 0
 	db VINE_WHIP
 	db GROWTH
@@ -52374,7 +52214,7 @@ BellsproutBaseStats: ; 38b4e (e:4b4e)
 	db 0
 
 	db 3 ; growth rate
-	
+
 	; learnset
 	db %00100100
 	db %00000011
@@ -52403,7 +52243,7 @@ WeepinbellBaseStats: ; 38b6a (e:4b6a)
 
 	dw WeepinbellPicFront
 	dw WeepinbellPicBack
-	
+
 	; attacks known at lvl 0
 	db VINE_WHIP
 	db GROWTH
@@ -52411,7 +52251,7 @@ WeepinbellBaseStats: ; 38b6a (e:4b6a)
 	db 0
 
 	db 3 ; growth rate
-	
+
 	; learnset
 	db %00100100
 	db %00000011
@@ -52440,7 +52280,7 @@ VictreebelBaseStats: ; 38b86 (e:4b86)
 
 	dw VictreebelPicFront
 	dw VictreebelPicBack
-	
+
 	; attacks known at lvl 0
 	db SLEEP_POWDER
 	db STUN_SPORE
@@ -52448,7 +52288,7 @@ VictreebelBaseStats: ; 38b86 (e:4b86)
 	db RAZOR_LEAF
 
 	db 3 ; growth rate
-	
+
 	; learnset
 	db %10100100
 	db %01000011
@@ -52477,7 +52317,7 @@ TentacoolBaseStats: ; 38ba2 (e:4ba2)
 
 	dw TentacoolPicFront
 	dw TentacoolPicBack
-	
+
 	; attacks known at lvl 0
 	db ACID
 	db 0
@@ -52485,7 +52325,7 @@ TentacoolBaseStats: ; 38ba2 (e:4ba2)
 	db 0
 
 	db 5 ; growth rate
-	
+
 	; learnset
 	db %00100100
 	db %00111111
@@ -52514,7 +52354,7 @@ TentacruelBaseStats: ; 38bbe (e:4bbe)
 
 	dw TentacruelPicFront
 	dw TentacruelPicBack
-	
+
 	; attacks known at lvl 0
 	db ACID
 	db SUPERSONIC
@@ -52522,7 +52362,7 @@ TentacruelBaseStats: ; 38bbe (e:4bbe)
 	db 0
 
 	db 5 ; growth rate
-	
+
 	; learnset
 	db %00100100
 	db %01111111
@@ -52551,7 +52391,7 @@ GeodudeBaseStats: ; 38bda (e:4bda)
 
 	dw GeodudePicFront
 	dw GeodudePicBack
-	
+
 	; attacks known at lvl 0
 	db TACKLE
 	db 0
@@ -52559,7 +52399,7 @@ GeodudeBaseStats: ; 38bda (e:4bda)
 	db 0
 
 	db 3 ; growth rate
-	
+
 	; learnset
 	db %10100001
 	db %00000011
@@ -52588,7 +52428,7 @@ GravelerBaseStats: ; 38bf6 (e:4bf6)
 
 	dw GravelerPicFront
 	dw GravelerPicBack
-	
+
 	; attacks known at lvl 0
 	db TACKLE
 	db DEFENSE_CURL
@@ -52596,7 +52436,7 @@ GravelerBaseStats: ; 38bf6 (e:4bf6)
 	db 0
 
 	db 3 ; growth rate
-	
+
 	; learnset
 	db %10100001
 	db %00000011
@@ -52625,7 +52465,7 @@ GolemBaseStats: ; 38c12 (e:4c12)
 
 	dw GolemPicFront
 	dw GolemPicBack
-	
+
 	; attacks known at lvl 0
 	db TACKLE
 	db DEFENSE_CURL
@@ -52633,7 +52473,7 @@ GolemBaseStats: ; 38c12 (e:4c12)
 	db 0
 
 	db 3 ; growth rate
-	
+
 	; learnset
 	db %10110001
 	db %01000011
@@ -52662,7 +52502,7 @@ PonytaBaseStats: ; 38c2e (e:4c2e)
 
 	dw PonytaPicFront
 	dw PonytaPicBack
-	
+
 	; attacks known at lvl 0
 	db EMBER
 	db 0
@@ -52670,7 +52510,7 @@ PonytaBaseStats: ; 38c2e (e:4c2e)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %11100000
 	db %00000011
@@ -52699,7 +52539,7 @@ RapidashBaseStats: ; 38c4a (e:4c4a)
 
 	dw RapidashPicFront
 	dw RapidashPicBack
-	
+
 	; attacks known at lvl 0
 	db EMBER
 	db TAIL_WHIP
@@ -52707,7 +52547,7 @@ RapidashBaseStats: ; 38c4a (e:4c4a)
 	db GROWL
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %11100000
 	db %01000011
@@ -52736,7 +52576,7 @@ SlowpokeBaseStats: ; 38c66 (e:4c66)
 
 	dw SlowpokePicFront
 	dw SlowpokePicBack
-	
+
 	; attacks known at lvl 0
 	db CONFUSION
 	db 0
@@ -52744,7 +52584,7 @@ SlowpokeBaseStats: ; 38c66 (e:4c66)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %10100000
 	db %10111111
@@ -52773,7 +52613,7 @@ SlowbroBaseStats: ; 38c82 (e:4c82)
 
 	dw SlowbroPicFront
 	dw SlowbroPicBack
-	
+
 	; attacks known at lvl 0
 	db CONFUSION
 	db DISABLE
@@ -52781,7 +52621,7 @@ SlowbroBaseStats: ; 38c82 (e:4c82)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %10110001
 	db %11111111
@@ -52810,7 +52650,7 @@ MagnemiteBaseStats: ; 38c9e (e:4c9e)
 
 	dw MagnemitePicFront
 	dw MagnemitePicBack
-	
+
 	; attacks known at lvl 0
 	db TACKLE
 	db 0
@@ -52818,7 +52658,7 @@ MagnemiteBaseStats: ; 38c9e (e:4c9e)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %00100000
 	db %00000011
@@ -52847,7 +52687,7 @@ MagnetonBaseStats: ; 38cba (e:4cba)
 
 	dw MagnetonPicFront
 	dw MagnetonPicBack
-	
+
 	; attacks known at lvl 0
 	db TACKLE
 	db SONICBOOM
@@ -52855,7 +52695,7 @@ MagnetonBaseStats: ; 38cba (e:4cba)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %00100000
 	db %01000011
@@ -52884,7 +52724,7 @@ FarfetchdBaseStats: ; 38cd6 (e:4cd6)
 
 	dw FarfetchdPicFront
 	dw FarfetchdPicBack
-	
+
 	; attacks known at lvl 0
 	db PECK
 	db SAND_ATTACK
@@ -52892,7 +52732,7 @@ FarfetchdBaseStats: ; 38cd6 (e:4cd6)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %10101110
 	db %00000011
@@ -52921,7 +52761,7 @@ DoduoBaseStats: ; 38cf2 (e:4cf2)
 
 	dw DoduoPicFront
 	dw DoduoPicBack
-	
+
 	; attacks known at lvl 0
 	db PECK
 	db 0
@@ -52929,7 +52769,7 @@ DoduoBaseStats: ; 38cf2 (e:4cf2)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %10101000
 	db %00000011
@@ -52958,7 +52798,7 @@ DodrioBaseStats: ; 38d0e (e:4d0e)
 
 	dw DodrioPicFront
 	dw DodrioPicBack
-	
+
 	; attacks known at lvl 0
 	db PECK
 	db GROWL
@@ -52966,7 +52806,7 @@ DodrioBaseStats: ; 38d0e (e:4d0e)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %10101000
 	db %01000011
@@ -52995,7 +52835,7 @@ SeelBaseStats: ; 38d2a (e:4d2a)
 
 	dw SeelPicFront
 	dw SeelPicBack
-	
+
 	; attacks known at lvl 0
 	db HEADBUTT
 	db 0
@@ -53003,7 +52843,7 @@ SeelBaseStats: ; 38d2a (e:4d2a)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %11100000
 	db %10111111
@@ -53032,7 +52872,7 @@ DewgongBaseStats: ; 38d46 (e:4d46)
 
 	dw DewgongPicFront
 	dw DewgongPicBack
-	
+
 	; attacks known at lvl 0
 	db HEADBUTT
 	db GROWL
@@ -53040,7 +52880,7 @@ DewgongBaseStats: ; 38d46 (e:4d46)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %11100000
 	db %11111111
@@ -53069,7 +52909,7 @@ GrimerBaseStats: ; 38d62 (e:4d62)
 
 	dw GrimerPicFront
 	dw GrimerPicBack
-	
+
 	; attacks known at lvl 0
 	db POUND
 	db DISABLE
@@ -53077,7 +52917,7 @@ GrimerBaseStats: ; 38d62 (e:4d62)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %10100000
 	db %00000000
@@ -53106,7 +52946,7 @@ MukBaseStats: ; 38d7e (e:4d7e)
 
 	dw MukPicFront
 	dw MukPicBack
-	
+
 	; attacks known at lvl 0
 	db POUND
 	db DISABLE
@@ -53114,7 +52954,7 @@ MukBaseStats: ; 38d7e (e:4d7e)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %10100000
 	db %01000000
@@ -53143,7 +52983,7 @@ ShellderBaseStats: ; 38d9a (e:4d9a)
 
 	dw ShellderPicFront
 	dw ShellderPicBack
-	
+
 	; attacks known at lvl 0
 	db TACKLE
 	db WITHDRAW
@@ -53151,7 +52991,7 @@ ShellderBaseStats: ; 38d9a (e:4d9a)
 	db 0
 
 	db 5 ; growth rate
-	
+
 	; learnset
 	db %00100000
 	db %00111111
@@ -53180,7 +53020,7 @@ CloysterBaseStats: ; 38db6 (e:4db6)
 
 	dw CloysterPicFront
 	dw CloysterPicBack
-	
+
 	; attacks known at lvl 0
 	db WITHDRAW
 	db SUPERSONIC
@@ -53188,7 +53028,7 @@ CloysterBaseStats: ; 38db6 (e:4db6)
 	db AURORA_BEAM
 
 	db 5 ; growth rate
-	
+
 	; learnset
 	db %00100000
 	db %01111111
@@ -53217,7 +53057,7 @@ GastlyBaseStats: ; 38dd2 (e:4dd2)
 
 	dw GastlyPicFront
 	dw GastlyPicBack
-	
+
 	; attacks known at lvl 0
 	db LICK
 	db CONFUSE_RAY
@@ -53225,7 +53065,7 @@ GastlyBaseStats: ; 38dd2 (e:4dd2)
 	db 0
 
 	db 3 ; growth rate
-	
+
 	; learnset
 	db %00100000
 	db %00000000
@@ -53254,7 +53094,7 @@ HaunterBaseStats: ; 38dee (e:4dee)
 
 	dw HaunterPicFront
 	dw HaunterPicBack
-	
+
 	; attacks known at lvl 0
 	db LICK
 	db CONFUSE_RAY
@@ -53262,7 +53102,7 @@ HaunterBaseStats: ; 38dee (e:4dee)
 	db 0
 
 	db 3 ; growth rate
-	
+
 	; learnset
 	db %00100000
 	db %00000000
@@ -53291,7 +53131,7 @@ GengarBaseStats: ; 38e0a (e:4e0a)
 
 	dw GengarPicFront
 	dw GengarPicBack
-	
+
 	; attacks known at lvl 0
 	db LICK
 	db CONFUSE_RAY
@@ -53299,7 +53139,7 @@ GengarBaseStats: ; 38e0a (e:4e0a)
 	db 0
 
 	db 3 ; growth rate
-	
+
 	; learnset
 	db %10110001
 	db %01000011
@@ -53328,7 +53168,7 @@ OnixBaseStats: ; 38e26 (e:4e26)
 
 	dw OnixPicFront
 	dw OnixPicBack
-	
+
 	; attacks known at lvl 0
 	db TACKLE
 	db SCREECH
@@ -53336,7 +53176,7 @@ OnixBaseStats: ; 38e26 (e:4e26)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %10100000
 	db %00000011
@@ -53365,7 +53205,7 @@ DrowzeeBaseStats: ; 38e42 (e:4e42)
 
 	dw DrowzeePicFront
 	dw DrowzeePicBack
-	
+
 	; attacks known at lvl 0
 	db POUND
 	db HYPNOSIS
@@ -53373,7 +53213,7 @@ DrowzeeBaseStats: ; 38e42 (e:4e42)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %10110001
 	db %00000011
@@ -53402,7 +53242,7 @@ HypnoBaseStats: ; 38e5e (e:4e5e)
 
 	dw HypnoPicFront
 	dw HypnoPicBack
-	
+
 	; attacks known at lvl 0
 	db POUND
 	db HYPNOSIS
@@ -53410,7 +53250,7 @@ HypnoBaseStats: ; 38e5e (e:4e5e)
 	db CONFUSION
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %10110001
 	db %01000011
@@ -53439,7 +53279,7 @@ KrabbyBaseStats: ; 38e7a (e:4e7a)
 
 	dw KrabbyPicFront
 	dw KrabbyPicBack
-	
+
 	; attacks known at lvl 0
 	db BUBBLE
 	db LEER
@@ -53447,7 +53287,7 @@ KrabbyBaseStats: ; 38e7a (e:4e7a)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %10100100
 	db %00111111
@@ -53476,7 +53316,7 @@ KinglerBaseStats: ; 38e96 (e:4e96)
 
 	dw KinglerPicFront
 	dw KinglerPicBack
-	
+
 	; attacks known at lvl 0
 	db BUBBLE
 	db LEER
@@ -53484,7 +53324,7 @@ KinglerBaseStats: ; 38e96 (e:4e96)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %10100100
 	db %01111111
@@ -53513,7 +53353,7 @@ VoltorbBaseStats: ; 38eb2 (e:4eb2)
 
 	dw VoltorbPicFront
 	dw VoltorbPicBack
-	
+
 	; attacks known at lvl 0
 	db TACKLE
 	db SCREECH
@@ -53521,7 +53361,7 @@ VoltorbBaseStats: ; 38eb2 (e:4eb2)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %00100000
 	db %00000001
@@ -53550,7 +53390,7 @@ ElectrodeBaseStats: ; 38ece (e:4ece)
 
 	dw ElectrodePicFront
 	dw ElectrodePicBack
-	
+
 	; attacks known at lvl 0
 	db TACKLE
 	db SCREECH
@@ -53558,7 +53398,7 @@ ElectrodeBaseStats: ; 38ece (e:4ece)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %00100000
 	db %01000001
@@ -53587,7 +53427,7 @@ ExeggcuteBaseStats: ; 38eea (e:4eea)
 
 	dw ExeggcutePicFront
 	dw ExeggcutePicBack
-	
+
 	; attacks known at lvl 0
 	db BARRAGE
 	db HYPNOSIS
@@ -53595,7 +53435,7 @@ ExeggcuteBaseStats: ; 38eea (e:4eea)
 	db 0
 
 	db 5 ; growth rate
-	
+
 	; learnset
 	db %00100000
 	db %00000011
@@ -53624,7 +53464,7 @@ ExeggutorBaseStats: ; 38f06 (e:4f06)
 
 	dw ExeggutorPicFront
 	dw ExeggutorPicBack
-	
+
 	; attacks known at lvl 0
 	db BARRAGE
 	db HYPNOSIS
@@ -53632,7 +53472,7 @@ ExeggutorBaseStats: ; 38f06 (e:4f06)
 	db 0
 
 	db 5 ; growth rate
-	
+
 	; learnset
 	db %00100000
 	db %01000011
@@ -53661,7 +53501,7 @@ CuboneBaseStats: ; 38f22 (e:4f22)
 
 	dw CubonePicFront
 	dw CubonePicBack
-	
+
 	; attacks known at lvl 0
 	db BONE_CLUB
 	db GROWL
@@ -53669,7 +53509,7 @@ CuboneBaseStats: ; 38f22 (e:4f22)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %10110001
 	db %00111111
@@ -53698,7 +53538,7 @@ MarowakBaseStats: ; 38f3e (e:4f3e)
 
 	dw MarowakPicFront
 	dw MarowakPicBack
-	
+
 	; attacks known at lvl 0
 	db BONE_CLUB
 	db GROWL
@@ -53706,7 +53546,7 @@ MarowakBaseStats: ; 38f3e (e:4f3e)
 	db FOCUS_ENERGY
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %10110001
 	db %01111111
@@ -53735,7 +53575,7 @@ HitmonleeBaseStats: ; 38f5a (e:4f5a)
 
 	dw HitmonleePicFront
 	dw HitmonleePicBack
-	
+
 	; attacks known at lvl 0
 	db DOUBLE_KICK
 	db MEDITATE
@@ -53743,7 +53583,7 @@ HitmonleeBaseStats: ; 38f5a (e:4f5a)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %10110001
 	db %00000011
@@ -53772,7 +53612,7 @@ HitmonchanBaseStats: ; 38f76 (e:4f76)
 
 	dw HitmonchanPicFront
 	dw HitmonchanPicBack
-	
+
 	; attacks known at lvl 0
 	db COMET_PUNCH
 	db AGILITY
@@ -53780,7 +53620,7 @@ HitmonchanBaseStats: ; 38f76 (e:4f76)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %10110001
 	db %00000011
@@ -53809,7 +53649,7 @@ LickitungBaseStats: ; 38f92 (e:4f92)
 
 	dw LickitungPicFront
 	dw LickitungPicBack
-	
+
 	; attacks known at lvl 0
 	db WRAP
 	db SUPERSONIC
@@ -53817,7 +53657,7 @@ LickitungBaseStats: ; 38f92 (e:4f92)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %10110101
 	db %01111111
@@ -53846,7 +53686,7 @@ KoffingBaseStats: ; 38fae (e:4fae)
 
 	dw KoffingPicFront
 	dw KoffingPicBack
-	
+
 	; attacks known at lvl 0
 	db TACKLE
 	db SMOG
@@ -53854,7 +53694,7 @@ KoffingBaseStats: ; 38fae (e:4fae)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %00100000
 	db %00000000
@@ -53883,7 +53723,7 @@ WeezingBaseStats: ; 38fca (e:4fca)
 
 	dw WeezingPicFront
 	dw WeezingPicBack
-	
+
 	; attacks known at lvl 0
 	db TACKLE
 	db SMOG
@@ -53891,7 +53731,7 @@ WeezingBaseStats: ; 38fca (e:4fca)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %00100000
 	db %01000000
@@ -53920,7 +53760,7 @@ RhyhornBaseStats: ; 38fe6 (e:4fe6)
 
 	dw RhyhornPicFront
 	dw RhyhornPicBack
-	
+
 	; attacks known at lvl 0
 	db HORN_ATTACK
 	db 0
@@ -53928,7 +53768,7 @@ RhyhornBaseStats: ; 38fe6 (e:4fe6)
 	db 0
 
 	db 5 ; growth rate
-	
+
 	; learnset
 	db %11100000
 	db %00000011
@@ -53957,7 +53797,7 @@ RhydonBaseStats: ; 39002 (e:5002)
 
 	dw RhydonPicFront
 	dw RhydonPicBack
-	
+
 	; attacks known at lvl 0
 	db HORN_ATTACK
 	db STOMP
@@ -53965,7 +53805,7 @@ RhydonBaseStats: ; 39002 (e:5002)
 	db FURY_ATTACK
 
 	db 5 ; growth rate
-	
+
 	; learnset
 	db %11110001
 	db %11111111
@@ -53994,7 +53834,7 @@ ChanseyBaseStats: ; 3901e (e:501e)
 
 	dw ChanseyPicFront
 	dw ChanseyPicBack
-	
+
 	; attacks known at lvl 0
 	db POUND
 	db DOUBLESLAP
@@ -54002,7 +53842,7 @@ ChanseyBaseStats: ; 3901e (e:501e)
 	db 0
 
 	db 4 ; growth rate
-	
+
 	; learnset
 	db %10110001
 	db %01111111
@@ -54031,7 +53871,7 @@ TangelaBaseStats: ; 3903a (e:503a)
 
 	dw TangelaPicFront
 	dw TangelaPicBack
-	
+
 	; attacks known at lvl 0
 	db CONSTRICT
 	db BIND
@@ -54039,7 +53879,7 @@ TangelaBaseStats: ; 3903a (e:503a)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %10100100
 	db %01000011
@@ -54068,7 +53908,7 @@ KangaskhanBaseStats: ; 39056 (e:5056)
 
 	dw KangaskhanPicFront
 	dw KangaskhanPicBack
-	
+
 	; attacks known at lvl 0
 	db COMET_PUNCH
 	db RAGE
@@ -54076,7 +53916,7 @@ KangaskhanBaseStats: ; 39056 (e:5056)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %10110001
 	db %01111111
@@ -54105,7 +53945,7 @@ HorseaBaseStats: ; 39072 (e:5072)
 
 	dw HorseaPicFront
 	dw HorseaPicBack
-	
+
 	; attacks known at lvl 0
 	db BUBBLE
 	db 0
@@ -54113,7 +53953,7 @@ HorseaBaseStats: ; 39072 (e:5072)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %00100000
 	db %00111111
@@ -54142,7 +53982,7 @@ SeadraBaseStats: ; 3908e (e:508e)
 
 	dw SeadraPicFront
 	dw SeadraPicBack
-	
+
 	; attacks known at lvl 0
 	db BUBBLE
 	db SMOKESCREEN
@@ -54150,7 +53990,7 @@ SeadraBaseStats: ; 3908e (e:508e)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %00100000
 	db %01111111
@@ -54179,7 +54019,7 @@ GoldeenBaseStats: ; 390aa (e:50aa)
 
 	dw GoldeenPicFront
 	dw GoldeenPicBack
-	
+
 	; attacks known at lvl 0
 	db PECK
 	db TAIL_WHIP
@@ -54187,7 +54027,7 @@ GoldeenBaseStats: ; 390aa (e:50aa)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %01100000
 	db %00111111
@@ -54216,7 +54056,7 @@ SeakingBaseStats: ; 390c6 (e:50c6)
 
 	dw SeakingPicFront
 	dw SeakingPicBack
-	
+
 	; attacks known at lvl 0
 	db PECK
 	db TAIL_WHIP
@@ -54224,7 +54064,7 @@ SeakingBaseStats: ; 390c6 (e:50c6)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %01100000
 	db %01111111
@@ -54253,7 +54093,7 @@ StaryuBaseStats: ; 390e2 (e:50e2)
 
 	dw StaryuPicFront
 	dw StaryuPicBack
-	
+
 	; attacks known at lvl 0
 	db TACKLE
 	db 0
@@ -54261,7 +54101,7 @@ StaryuBaseStats: ; 390e2 (e:50e2)
 	db 0
 
 	db 5 ; growth rate
-	
+
 	; learnset
 	db %00100000
 	db %00111111
@@ -54290,7 +54130,7 @@ StarmieBaseStats: ; 390fe (e:50fe)
 
 	dw StarmiePicFront
 	dw StarmiePicBack
-	
+
 	; attacks known at lvl 0
 	db TACKLE
 	db WATER_GUN
@@ -54298,7 +54138,7 @@ StarmieBaseStats: ; 390fe (e:50fe)
 	db 0
 
 	db 5 ; growth rate
-	
+
 	; learnset
 	db %00100000
 	db %01111111
@@ -54327,7 +54167,7 @@ MrMimeBaseStats: ; 3911a (e:511a)
 
 	dw MrMimePicFront
 	dw MrMimePicBack
-	
+
 	; attacks known at lvl 0
 	db CONFUSION
 	db BARRIER
@@ -54335,7 +54175,7 @@ MrMimeBaseStats: ; 3911a (e:511a)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %10110001
 	db %01000011
@@ -54364,7 +54204,7 @@ ScytherBaseStats: ; 39136 (e:5136)
 
 	dw ScytherPicFront
 	dw ScytherPicBack
-	
+
 	; attacks known at lvl 0
 	db QUICK_ATTACK
 	db 0
@@ -54372,7 +54212,7 @@ ScytherBaseStats: ; 39136 (e:5136)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %00100100
 	db %01000011
@@ -54401,7 +54241,7 @@ JynxBaseStats: ; 39152 (e:5152)
 
 	dw JynxPicFront
 	dw JynxPicBack
-	
+
 	; attacks known at lvl 0
 	db POUND
 	db LOVELY_KISS
@@ -54409,7 +54249,7 @@ JynxBaseStats: ; 39152 (e:5152)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %10110001
 	db %01111111
@@ -54438,7 +54278,7 @@ ElectabuzzBaseStats: ; 3916e (e:516e)
 
 	dw ElectabuzzPicFront
 	dw ElectabuzzPicBack
-	
+
 	; attacks known at lvl 0
 	db QUICK_ATTACK
 	db LEER
@@ -54446,7 +54286,7 @@ ElectabuzzBaseStats: ; 3916e (e:516e)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %10110001
 	db %01000011
@@ -54475,7 +54315,7 @@ MagmarBaseStats: ; 3918a (e:518a)
 
 	dw MagmarPicFront
 	dw MagmarPicBack
-	
+
 	; attacks known at lvl 0
 	db EMBER
 	db 0
@@ -54483,7 +54323,7 @@ MagmarBaseStats: ; 3918a (e:518a)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %10110001
 	db %01000011
@@ -54512,7 +54352,7 @@ PinsirBaseStats: ; 391a6 (e:51a6)
 
 	dw PinsirPicFront
 	dw PinsirPicBack
-	
+
 	; attacks known at lvl 0
 	db VICEGRIP
 	db 0
@@ -54520,7 +54360,7 @@ PinsirBaseStats: ; 391a6 (e:51a6)
 	db 0
 
 	db 5 ; growth rate
-	
+
 	; learnset
 	db %10100100
 	db %01000011
@@ -54549,7 +54389,7 @@ TaurosBaseStats: ; 391c2 (e:51c2)
 
 	dw TaurosPicFront
 	dw TaurosPicBack
-	
+
 	; attacks known at lvl 0
 	db TACKLE
 	db 0
@@ -54557,7 +54397,7 @@ TaurosBaseStats: ; 391c2 (e:51c2)
 	db 0
 
 	db 5 ; growth rate
-	
+
 	; learnset
 	db %11100000
 	db %01110011
@@ -54586,7 +54426,7 @@ MagikarpBaseStats: ; 391de (e:51de)
 
 	dw MagikarpPicFront
 	dw MagikarpPicBack
-	
+
 	; attacks known at lvl 0
 	db SPLASH
 	db 0
@@ -54594,7 +54434,7 @@ MagikarpBaseStats: ; 391de (e:51de)
 	db 0
 
 	db 5 ; growth rate
-	
+
 	; learnset
 	db %00000000
 	db %00000000
@@ -54623,7 +54463,7 @@ GyaradosBaseStats: ; 391fa (e:51fa)
 
 	dw GyaradosPicFront
 	dw GyaradosPicBack
-	
+
 	; attacks known at lvl 0
 	db BITE
 	db DRAGON_RAGE
@@ -54631,7 +54471,7 @@ GyaradosBaseStats: ; 391fa (e:51fa)
 	db HYDRO_PUMP
 
 	db 5 ; growth rate
-	
+
 	; learnset
 	db %10100000
 	db %01111111
@@ -54660,7 +54500,7 @@ LaprasBaseStats: ; 39216 (e:5216)
 
 	dw LaprasPicFront
 	dw LaprasPicBack
-	
+
 	; attacks known at lvl 0
 	db WATER_GUN
 	db GROWL
@@ -54668,7 +54508,7 @@ LaprasBaseStats: ; 39216 (e:5216)
 	db 0
 
 	db 5 ; growth rate
-	
+
 	; learnset
 	db %11100000
 	db %01111111
@@ -54697,7 +54537,7 @@ DittoBaseStats: ; 39232 (e:5232)
 
 	dw DittoPicFront
 	dw DittoPicBack
-	
+
 	; attacks known at lvl 0
 	db TRANSFORM
 	db 0
@@ -54705,7 +54545,7 @@ DittoBaseStats: ; 39232 (e:5232)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %00000000
 	db %00000000
@@ -54734,7 +54574,7 @@ EeveeBaseStats: ; 3924e (e:524e)
 
 	dw EeveePicFront
 	dw EeveePicBack
-	
+
 	; attacks known at lvl 0
 	db TACKLE
 	db SAND_ATTACK
@@ -54742,7 +54582,7 @@ EeveeBaseStats: ; 3924e (e:524e)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %10100000
 	db %00000011
@@ -54771,7 +54611,7 @@ VaporeonBaseStats: ; 3926a (e:526a)
 
 	dw VaporeonPicFront
 	dw VaporeonPicBack
-	
+
 	; attacks known at lvl 0
 	db TACKLE
 	db SAND_ATTACK
@@ -54779,7 +54619,7 @@ VaporeonBaseStats: ; 3926a (e:526a)
 	db WATER_GUN
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %10100000
 	db %01111111
@@ -54808,7 +54648,7 @@ JolteonBaseStats: ; 39286 (e:5286)
 
 	dw JolteonPicFront
 	dw JolteonPicBack
-	
+
 	; attacks known at lvl 0
 	db TACKLE
 	db SAND_ATTACK
@@ -54816,7 +54656,7 @@ JolteonBaseStats: ; 39286 (e:5286)
 	db THUNDERSHOCK
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %10100000
 	db %01000011
@@ -54845,7 +54685,7 @@ FlareonBaseStats: ; 392a2 (e:52a2)
 
 	dw FlareonPicFront
 	dw FlareonPicBack
-	
+
 	; attacks known at lvl 0
 	db TACKLE
 	db SAND_ATTACK
@@ -54853,7 +54693,7 @@ FlareonBaseStats: ; 392a2 (e:52a2)
 	db EMBER
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %10100000
 	db %01000011
@@ -54882,7 +54722,7 @@ PorygonBaseStats: ; 392be (e:52be)
 
 	dw PorygonPicFront
 	dw PorygonPicBack
-	
+
 	; attacks known at lvl 0
 	db TACKLE
 	db SHARPEN
@@ -54890,7 +54730,7 @@ PorygonBaseStats: ; 392be (e:52be)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %00100000
 	db %01110011
@@ -54919,7 +54759,7 @@ OmanyteBaseStats: ; 392da (e:52da)
 
 	dw OmanytePicFront
 	dw OmanytePicBack
-	
+
 	; attacks known at lvl 0
 	db WATER_GUN
 	db WITHDRAW
@@ -54927,7 +54767,7 @@ OmanyteBaseStats: ; 392da (e:52da)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %10100000
 	db %00111111
@@ -54956,7 +54796,7 @@ OmastarBaseStats: ; 392f6 (e:52f6)
 
 	dw OmastarPicFront
 	dw OmastarPicBack
-	
+
 	; attacks known at lvl 0
 	db WATER_GUN
 	db WITHDRAW
@@ -54964,7 +54804,7 @@ OmastarBaseStats: ; 392f6 (e:52f6)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %11100000
 	db %01111111
@@ -54993,7 +54833,7 @@ KabutoBaseStats: ; 39312 (e:5312)
 
 	dw KabutoPicFront
 	dw KabutoPicBack
-	
+
 	; attacks known at lvl 0
 	db SCRATCH
 	db HARDEN
@@ -55001,7 +54841,7 @@ KabutoBaseStats: ; 39312 (e:5312)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %10100000
 	db %00111111
@@ -55030,7 +54870,7 @@ KabutopsBaseStats: ; 3932e (e:532e)
 
 	dw KabutopsPicFront
 	dw KabutopsPicBack
-	
+
 	; attacks known at lvl 0
 	db SCRATCH
 	db HARDEN
@@ -55038,7 +54878,7 @@ KabutopsBaseStats: ; 3932e (e:532e)
 	db 0
 
 	db 0 ; growth rate
-	
+
 	; learnset
 	db %10110110
 	db %01111111
@@ -55067,7 +54907,7 @@ AerodactylBaseStats: ; 3934a (e:534a)
 
 	dw AerodactylPicFront
 	dw AerodactylPicBack
-	
+
 	; attacks known at lvl 0
 	db WING_ATTACK
 	db AGILITY
@@ -55075,7 +54915,7 @@ AerodactylBaseStats: ; 3934a (e:534a)
 	db 0
 
 	db 5 ; growth rate
-	
+
 	; learnset
 	db %00101010
 	db %01000011
@@ -55104,7 +54944,7 @@ SnorlaxBaseStats: ; 39366 (e:5366)
 
 	dw SnorlaxPicFront
 	dw SnorlaxPicBack
-	
+
 	; attacks known at lvl 0
 	db HEADBUTT
 	db AMNESIA
@@ -55112,7 +54952,7 @@ SnorlaxBaseStats: ; 39366 (e:5366)
 	db 0
 
 	db 5 ; growth rate
-	
+
 	; learnset
 	db %10110001
 	db %11111111
@@ -55141,7 +54981,7 @@ ArticunoBaseStats: ; 39382 (e:5382)
 
 	dw ArticunoPicFront
 	dw ArticunoPicBack
-	
+
 	; attacks known at lvl 0
 	db PECK
 	db ICE_BEAM
@@ -55149,7 +54989,7 @@ ArticunoBaseStats: ; 39382 (e:5382)
 	db 0
 
 	db 5 ; growth rate
-	
+
 	; learnset
 	db %00101010
 	db %01111111
@@ -55178,7 +55018,7 @@ ZapdosBaseStats: ; 3939e (e:539e)
 
 	dw ZapdosPicFront
 	dw ZapdosPicBack
-	
+
 	; attacks known at lvl 0
 	db THUNDERSHOCK
 	db DRILL_PECK
@@ -55186,7 +55026,7 @@ ZapdosBaseStats: ; 3939e (e:539e)
 	db 0
 
 	db 5 ; growth rate
-	
+
 	; learnset
 	db %00101010
 	db %01000011
@@ -55215,7 +55055,7 @@ MoltresBaseStats: ; 393ba (e:53ba)
 
 	dw MoltresPicFront
 	dw MoltresPicBack
-	
+
 	; attacks known at lvl 0
 	db PECK
 	db FIRE_SPIN
@@ -55223,7 +55063,7 @@ MoltresBaseStats: ; 393ba (e:53ba)
 	db 0
 
 	db 5 ; growth rate
-	
+
 	; learnset
 	db %00101010
 	db %01000011
@@ -55252,7 +55092,7 @@ DratiniBaseStats: ; 393d6 (e:53d6)
 
 	dw DratiniPicFront
 	dw DratiniPicBack
-	
+
 	; attacks known at lvl 0
 	db WRAP
 	db LEER
@@ -55260,7 +55100,7 @@ DratiniBaseStats: ; 393d6 (e:53d6)
 	db 0
 
 	db 5 ; growth rate
-	
+
 	; learnset
 	db %10100000
 	db %00111111
@@ -55289,7 +55129,7 @@ DragonairBaseStats: ; 393f2 (e:53f2)
 
 	dw DragonairPicFront
 	dw DragonairPicBack
-	
+
 	; attacks known at lvl 0
 	db WRAP
 	db LEER
@@ -55297,7 +55137,7 @@ DragonairBaseStats: ; 393f2 (e:53f2)
 	db 0
 
 	db 5 ; growth rate
-	
+
 	; learnset
 	db %11100000
 	db %00111111
@@ -55326,7 +55166,7 @@ DragoniteBaseStats: ; 3940e (e:540e)
 
 	dw DragonitePicFront
 	dw DragonitePicBack
-	
+
 	; attacks known at lvl 0
 	db WRAP
 	db LEER
@@ -55334,7 +55174,7 @@ DragoniteBaseStats: ; 3940e (e:540e)
 	db AGILITY
 
 	db 5 ; growth rate
-	
+
 	; learnset
 	db %11100010
 	db %01111111
@@ -55363,7 +55203,7 @@ MewtwoBaseStats: ; 3942a (e:542a)
 
 	dw MewtwoPicFront
 	dw MewtwoPicBack
-	
+
 	; attacks known at lvl 0
 	db CONFUSION
 	db DISABLE
@@ -55371,7 +55211,7 @@ MewtwoBaseStats: ; 3942a (e:542a)
 	db PSYCHIC_M
 
 	db 5 ; growth rate
-	
+
 	; learnset
 	db %10110001
 	db %11111111
@@ -56261,7 +56101,7 @@ Func_39bd5: ; 39bd5 (e:5bd5)
 	cp $1
 	jr nz, .asm_39be6
 	ld hl, wEnemyPartyCount ; $d89c
-	ld de, $d9ac
+	ld de, W_ENEMYMON1OT ; $d9ac OT names of other player
 	ld a, $6
 	jr .asm_39c18
 .asm_39be6
@@ -57902,7 +57742,7 @@ Func_3a8e1: ; 3a8e1 (e:68e1)
 	ret
 
 Func_3a902: ; 3a902 (e:6902)
-	ld hl, Unknown_3a916 ; $6916
+	ld hl, PlayerBattleHUDGraphicsTiles ; $6916
 	ld de, $cd3f
 	ld bc, $3
 	call CopyData
@@ -57911,11 +57751,14 @@ Func_3a902: ; 3a902 (e:6902)
 	ld de, rIE ; $ffff
 	jr Func_3a930
 
-Unknown_3a916: ; 3a916 (e:6916)
-INCBIN "baserom.gbc",$3a916,$3a919 - $3a916
+PlayerBattleHUDGraphicsTiles: ; 3a916 (e:6916)
+; The tile numbers for specific parts of the battle display for the player's pokemon
+	db $73 ; unused ($73 is hardcoded into the routine that uses these bytes)
+	db $77 ; lower-right corner tile of the HUD
+	db $6F ; lower-left triangle tile of the HUD
 
 Func_3a919: ; 3a919 (e:6919)
-	ld hl, Unknown_3a92d ; $692d
+	ld hl, EnemyBattleHUDGraphicsTiles ; $692d
 	ld de, $cd3f
 	ld bc, $3
 	call CopyData
@@ -57924,8 +57767,11 @@ Func_3a919: ; 3a919 (e:6919)
 	ld de, $1
 	jr Func_3a930
 
-Unknown_3a92d: ; 3a92d (e:692d)
-INCBIN "baserom.gbc",$3a92d,$3a930 - $3a92d
+EnemyBattleHUDGraphicsTiles: ; 3a92d (e:692d)
+; The tile numbers for specific parts of the battle display for the enemy
+	db $73 ; unused ($73 is hardcoded in the routine that uses these bytes)
+	db $74 ; lower-left corner tile of the HUD
+	db $78 ; lower-right triangle tile of the HUD
 
 Func_3a930: ; 3a930 (e:6930)
 	ld [hl], $73
@@ -64219,9 +64065,9 @@ Func_3d83a: ; 3d83a (f:583a)
 	dec a
 	ret nz
 	ld a,[W_CURMAP]
-	cp a,$8E ; Lavender Town
+	cp a,POKEMONTOWER_1
 	jr c,.next
-	cp a,$95 ; Pokémon Tower
+	cp a,LAVENDER_HOUSE_1
 	jr nc,.next
 	ld b,SILPH_SCOPE
 	call IsItemInBag ; $3493
@@ -64703,7 +64549,7 @@ UnnamedText_3db80: ; 3db80 (f:5b80)
 
 Func_3db85: ; 3db85 (f:5b85)
 	push bc
-	ld a, [$d11e]
+	ld a, [$d11e] ; move number
 	ld c, a
 	ld b, $0
 	ld hl, Unknown_3dba3 ; $5ba3
@@ -65098,7 +64944,7 @@ CalculateDamage: ; 3ddcf (f:5dcf)
 	ld hl, $d195
 	ld a, [wPlayerMonNumber]
 	ld bc, $002c
-	call AddNTimes					
+	call AddNTimes
 	pop bc
 .next3
 	ld a, [hli]  ;HL: when this was taken
@@ -65327,7 +65173,7 @@ MoreCalculateDamage: ; 3df65 (f:5f65)
 	ld [hl], c
 	ld b, 4
 	call Divide    ;*divide by defender defense stat
-	ld [hl], $32		
+	ld [hl], $32
 	ld b, 4
 	call Divide      ;divide above result by 50
 	ld hl, W_DAMAGE  ;[stuff below I never got to, was only interested in stuff above]
@@ -66382,7 +66228,7 @@ CalcHitChance: ; 3e624 (f:6624)
 ; loop to do the calculations, the first iteration multiplies by the accuracy ratio and the second iteration multiplies by the evasion ratio
 .loop
 	push bc
-	ld hl,Unknown_3f6cb  ; $76cb ; stat modifier ratios
+	ld hl, StatModifierRatios  ; $76cb ; stat modifier ratios
 	dec b
 	sla b
 	ld c,b
@@ -67406,7 +67252,7 @@ Func_3eda5: ; 3eda5 (f:6da5)
 .asm_3edd4
 	pop bc
 	push hl
-	ld hl, Unknown_3f6cb ; $76cb
+	ld hl, StatModifierRatios ; $76cb
 	dec b
 	sla b
 	ld c, b
@@ -68401,7 +68247,7 @@ Func_3f428: ; 3f428 (f:7428)
 .asm_3f48a
 	push hl
 	push bc
-	ld hl, Unknown_3f6cb ; $76cb
+	ld hl, StatModifierRatios ; $76cb
 	dec b
 	sla b
 	ld c, b
@@ -68613,7 +68459,7 @@ Func_3f54c: ; 3f54c (f:754c)
 .asm_3f5ef
 	push hl
 	push bc
-	ld hl, Unknown_3f6cb ; $76cb
+	ld hl, StatModifierRatios ; $76cb
 	dec b
 	sla b
 	ld c, b
@@ -68737,8 +68583,21 @@ StatsTextStrings: ; 3f69f (f:769f)
 	db "ACCURACY@"
 	db "EVADE@"
 
-Unknown_3f6cb: ; 3f6cb (f:76cb)
-INCBIN "baserom.gbc",$3f6cb,$3f6e5 - $3f6cb
+StatModifierRatios: ; 3f6cb (f:76cb)
+; first byte is numerator, second byte is denominator
+	db 25, 100  ; 0.25
+	db 28, 100  ; 0.28
+	db 33, 100  ; 0.33
+	db 40, 100  ; 0.40
+	db 50, 100  ; 0.50
+	db 66, 100  ; 0.66
+	db  1,   1  ; 1.00
+	db 15,  10  ; 1.50
+	db  2,   1  ; 2.00
+	db 25,  10  ; 2.50
+	db  3,   1  ; 3.00
+	db 35,  10  ; 3.50
+	db  4,   1  ; 4.00
 
 Func_3f6e5: ; 3f6e5 (f:76e5)
 	ld hl, W_PLAYERBATTSTATUS1
@@ -72436,12 +72295,12 @@ PlayIntroScene: ; 4169d (10:569d)
 	call PlaySound
 	xor a
 	ld [$d09f], a
-	ld de, Unknown_41910
+	ld de, IntroNidorinoAnimation1
 	call AnimateIntroNidorino
 ; hop
 	ld a, $ba
 	call PlaySound
-	ld de, Unknown_4191b
+	ld de, IntroNidorinoAnimation2
 	call AnimateIntroNidorino
 	ld c, $a
 	call CheckForUserInterruption
@@ -72450,12 +72309,12 @@ PlayIntroScene: ; 4169d (10:569d)
 ; hip
 	ld a, $b9
 	call PlaySound
-	ld de, Unknown_41910
+	ld de, IntroNidorinoAnimation1
 	call AnimateIntroNidorino
 ; hop
 	ld a, $ba
 	call PlaySound
-	ld de, Unknown_4191b
+	ld de, IntroNidorinoAnimation2
 	call AnimateIntroNidorino
 	ld c, $1e
 	call CheckForUserInterruption
@@ -72484,7 +72343,7 @@ PlayIntroScene: ; 4169d (10:569d)
 	call PlaySound
 	ld a, $24
 	ld [$d09f], a
-	ld de, Unknown_41926
+	ld de, IntroNidorinoAnimation3
 	call AnimateIntroNidorino
 	ld c, $1e
 	call CheckForUserInterruption
@@ -72503,12 +72362,12 @@ PlayIntroScene: ; 4169d (10:569d)
 	call PlaySound
 	xor a
 	ld [$d09f], a
-	ld de, Unknown_41931 ; $5931
+	ld de, IntroNidorinoAnimation4 ; $5931
 	call AnimateIntroNidorino
 ; hop
 	ld a, $ba
 	call PlaySound
-	ld de, Unknown_4193c ; $593c
+	ld de, IntroNidorinoAnimation5 ; $593c
 	call AnimateIntroNidorino
 	ld c, $14
 	call CheckForUserInterruption
@@ -72516,7 +72375,7 @@ PlayIntroScene: ; 4169d (10:569d)
 
 	ld a, $24
 	ld [$d09f], a
-	ld de, Unknown_41947 ; $5947
+	ld de, IntroNidorinoAnimation6 ; $5947
 	call AnimateIntroNidorino
 	ld c, $1e
 	call CheckForUserInterruption
@@ -72527,7 +72386,7 @@ PlayIntroScene: ; 4169d (10:569d)
 	call PlaySound
 	ld a, $48
 	ld [$d09f], a
-	ld de, Unknown_41950 ; $5950
+	ld de, IntroNidorinoAnimation7 ; $5950
 	jp AnimateIntroNidorino
 
 AnimateIntroNidorino: ; 41793 (10:5793)
@@ -72751,26 +72610,74 @@ Func_418e9: ; 418e9 (10:58e9)
 
 INCBIN "baserom.gbc",$4190c,$41910 - $4190c
 
-Unknown_41910: ; 41910 (10:5910)
-INCBIN "baserom.gbc",$41910,$4191b - $41910
+IntroNidorinoAnimation1: ; 41910 (10:5910)
+; This is a sequence of pixel movements for part of the Nidorino animation. This 
+; list describes how Nidorino should hop.
+; First byte is y movement, second byte is x movement
+	db  0, 0
+	db -2, 2
+	db -1, 2
+	db  1, 2
+	db  2, 2
+	db $50 ; list terminator 
 
-Unknown_4191b: ; 4191b (10:591b)
-INCBIN "baserom.gbc",$4191b,$41926 - $4191b
+IntroNidorinoAnimation2: ; 4191b (10:591b)
+; This is a sequence of pixel movements for part of the Nidorino animation.
+; First byte is y movement, second byte is x movement
+	db  0,  0
+	db -2, -2
+	db -1, -2
+	db  1, -2
+	db  2, -2
+	db $50 ; list terminator
 
-Unknown_41926: ; 41926 (10:5926)
-INCBIN "baserom.gbc",$41926,$41931 - $41926
+IntroNidorinoAnimation3: ; 41926 (10:5926)
+; This is a sequence of pixel movements for part of the Nidorino animation.
+; First byte is y movement, second byte is x movement
+	db   0, 0
+	db -12, 6
+	db  -8, 6
+	db   8, 6
+	db  12, 6
+	db $50 ; list terminator 
 
-Unknown_41931: ; 41931 (10:5931)
-INCBIN "baserom.gbc",$41931,$4193c - $41931
+IntroNidorinoAnimation4: ; 41931 (10:5931)
+; This is a sequence of pixel movements for part of the Nidorino animation.
+; First byte is y movement, second byte is x movement
+	db  0,  0
+	db -8, -4
+	db -4, -4
+	db  4, -4
+	db  8, -4
+	db $50 ; list terminator
 
-Unknown_4193c: ; 4193c (10:593c)
-INCBIN "baserom.gbc",$4193c,$41947 - $4193c
+IntroNidorinoAnimation5: ; 4193c (10:593c)
+; This is a sequence of pixel movements for part of the Nidorino animation.
+; First byte is y movement, second byte is x movement
+	db  0, 0
+	db -8, 4
+	db -4, 4
+	db  4, 4
+	db  8, 4
+	db $50 ; list terminator
 
-Unknown_41947: ; 41947 (10:5947)
-INCBIN "baserom.gbc",$41947,$41950 - $41947
+IntroNidorinoAnimation6: ; 41947 (10:5947)
+; This is a sequence of pixel movements for part of the Nidorino animation.
+; First byte is y movement, second byte is x movement
+	db 0, 0
+	db 2, 0
+	db 2, 0
+	db 0, 0
+	db $50 ; list terminator
 
-Unknown_41950: ; 41950 (10:5950)
-INCBIN "baserom.gbc",$41950,$41959 - $41950
+IntroNidorinoAnimation7: ; 41950 (10:5950)
+; This is a sequence of pixel movements for part of the Nidorino animation.
+; First byte is y movement, second byte is x movement
+	db -8, -16
+	db -7, -14
+	db -6, -12
+	db -4, -10
+	db $50 ; list terminator 
 
 GameFreakIntro: ; 41959 (10:5959)
 	INCBIN "gfx/gamefreak_intro.2bpp"
@@ -72857,32 +72764,9 @@ LavenderTown_h: ; 0x44000 to 0x4402d (45 bytes) (bank=11) (id=4)
 	db LAVENDER_TOWN_HEIGHT, LAVENDER_TOWN_WIDTH ; dimensions (y, x)
 	dw LavenderTownBlocks, LavenderTownTextPointers, LavenderTownScript ; blocks, texts, scripts
 	db NORTH | SOUTH | WEST ; connections
-
-	; connections data
-
-	db ROUTE_10
-	dw Route10Blocks + (ROUTE_10_HEIGHT - 3) * ROUTE_10_WIDTH ; connection strip location
-	dw $C6EB + 0 ; current map position
-	db ROUTE_10_WIDTH, ROUTE_10_WIDTH ; bigness, width
-	db (ROUTE_10_HEIGHT * 2) - 1, (0 * -2) ; alignments (y, x)
-	dw $C6E9 + ROUTE_10_HEIGHT * (ROUTE_10_WIDTH + 6) ; window
-
-	db ROUTE_12
-	dw Route12Blocks ; connection strip location
-	dw $C6EB + (LAVENDER_TOWN_HEIGHT + 3) * (LAVENDER_TOWN_WIDTH + 6) + 0 ; current map position
-	db ROUTE_12_WIDTH, ROUTE_12_WIDTH ; bigness, width
-	db 0, (0 * -2) ; alignments (y, x)
-	dw $C6EF + ROUTE_12_WIDTH ; window
-
-	db ROUTE_8
-	dw Route8Blocks - 3 + (ROUTE_8_WIDTH) ; connection strip location
-	dw $C6E8 + (LAVENDER_TOWN_WIDTH + 6) * (0 + 3) ; current map position
-	db ROUTE_8_HEIGHT, ROUTE_8_WIDTH ; bigness, width
-	db (0 * -2), (ROUTE_8_WIDTH * 2) - 1 ; alignments (y, x)
-	dw $C6EE + 2 * ROUTE_8_WIDTH ; window
-
-	; end connections data
-
+	NORTH_MAP_CONNECTION ROUTE_10, ROUTE_10_WIDTH, ROUTE_10_HEIGHT, 0, 0, ROUTE_10_WIDTH, Route10Blocks
+	SOUTH_MAP_CONNECTION ROUTE_12, ROUTE_12_WIDTH, 0, 0, ROUTE_12_WIDTH, Route12Blocks, LAVENDER_TOWN_WIDTH, LAVENDER_TOWN_HEIGHT
+	WEST_MAP_CONNECTION ROUTE_8, ROUTE_8_WIDTH, 0, 0, ROUTE_8_HEIGHT, Route8Blocks, LAVENDER_TOWN_WIDTH
 	dw LavenderTownObject ; objects
 
 LavenderTownObject: ; 0x4402d (size=88)
@@ -72924,6 +72808,9 @@ ViridianPokecenterBlocks: ; 440df (11:40df)
 	INCBIN "maps/viridianpokecenter.blk"
 
 SafariZoneRestHouse1Blocks: ; 440fb (11:40fb)
+SafariZoneRestHouse2Blocks: ; 440fb (11:40fb)
+SafariZoneRestHouse3Blocks: ; 440fb (11:40fb)
+SafariZoneRestHouse4Blocks: ; 440fb (11:40fb)
 	INCBIN "maps/safarizoneresthouse1.blk"
 
 LavenderTownScript: ; 4410b (11:410b)
@@ -73152,10 +73039,9 @@ UnnamedText_4424c: ; 4424c (11:424c)
 
 ViridianPokecenter_h: ; 0x44251 to 0x4425d (12 bytes) (bank=11) (id=41)
 	db $06 ; tileset
-	db $04, $07 ; dimensions (y, x)
+	db VIRIDIAN_POKECENTER_HEIGHT, VIRIDIAN_POKECENTER_WIDTH ; dimensions (y, x)
 	dw ViridianPokecenterBlocks, ViridianPokecenterTextPointers, ViridianPokeCenterScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw ViridianPokecenterObject ; objects
 
 ViridianPokeCenterScript: ; 4425d (11:425d)
@@ -73206,7 +73092,6 @@ Mansion1_h: ; 0x442a3 to 0x442af (12 bytes) (bank=11) (id=165)
 	db MANSION_1_HEIGHT, MANSION_1_WIDTH ; dimensions (y, x)
 	dw Mansion1Blocks, Mansion1TextPointers, Mansion1Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw Mansion1Object ; objects
 
 Mansion1Script: ; 442af (11:42af)
@@ -73387,7 +73272,6 @@ RockTunnel1_h: ; 0x444d0 to 0x444dc (12 bytes) (bank=11) (id=82)
 	db ROCK_TUNNEL_1_HEIGHT, ROCK_TUNNEL_1_WIDTH ; dimensions (y, x)
 	dw RockTunnel1Blocks, RockTunnel1TextPointers, RockTunnel1Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw RockTunnel1Object ; objects
 
 RockTunnel1Script: ; 444dc (11:44dc)
@@ -73648,7 +73532,6 @@ SeafoamIslands1_h: ; 0x447dd to 0x447e9 (12 bytes) (bank=11) (id=192)
 	db SEAFOAM_ISLANDS_1_HEIGHT, SEAFOAM_ISLANDS_1_WIDTH ; dimensions (y, x)
 	dw SeafoamIslands1Blocks, SeafoamIslands1TextPointers, SeafoamIslands1Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw SeafoamIslands1Object ; objects
 
 SeafoamIslands1Script: ; 447e9 (11:47e9)
@@ -73741,7 +73624,6 @@ SSAnne3_h: ; 0x44926 to 0x44932 (12 bytes) (bank=11) (id=97)
 	db SS_ANNE_3_HEIGHT, SS_ANNE_3_WIDTH ; dimensions (y, x)
 	dw SSAnne3Blocks, SSAnne3TextPointers, SSAnne3Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw SSAnne3Object ; objects
 
 SSAnne3Script: ; 44932 (11:4932)
@@ -73778,7 +73660,6 @@ VictoryRoad3_h: ; 0x44974 to 0x44980 (12 bytes) (bank=11) (id=198)
 	db VICTORY_ROAD_3_HEIGHT, VICTORY_ROAD_3_WIDTH ; dimensions (y, x)
 	dw VictoryRoad3Blocks, VictoryRoad3TextPointers, VictoryRoad3Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw VictoryRoad3Object ; objects
 
 VictoryRoad3Script: ; 44980 (11:4980)
@@ -74024,7 +73905,6 @@ RocketHideout1_h: ; 0x44bbe to 0x44bca (12 bytes) (bank=11) (id=199)
 	db ROCKET_HIDEOUT_1_HEIGHT, ROCKET_HIDEOUT_1_WIDTH ; dimensions (y, x)
 	dw RocketHideout1Blocks, RocketHideout1TextPointers, RocketHideout1Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw RocketHideout1Object ; objects
 
 RocketHideout1Script: ; 44bca (11:4bca)
@@ -74257,7 +74137,6 @@ RocketHideout2_h: ; 0x44e1b to 0x44e27 (12 bytes) (bank=11) (id=200)
 	db ROCKET_HIDEOUT_2_HEIGHT, ROCKET_HIDEOUT_2_WIDTH ; dimensions (y, x)
 	dw RocketHideout2Blocks, RocketHideout2TextPointers, RocketHideout2Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw RocketHideout2Object ; objects
 
 RocketHideout2Script: ; 44e27 (11:4e27)
@@ -74635,78 +74514,78 @@ SpinnerArrowTilePointers1: ; 45023 (11:5023)
 	db 1                           ;number of tiles to copy?
 	db BANK(SpinnerArrowAnimTiles) ;bank of tileset graphics
 	dw $9200                       ;where to load in VRAM
-	
+
 	dw SpinnerArrowAnimTiles + $10
 	db 1
 	db BANK(SpinnerArrowAnimTiles)
 	dw $9210
-	
+
 	dw SpinnerArrowAnimTiles + $20
 	db 1
 	db BANK(SpinnerArrowAnimTiles)
 	dw $9300
-	
+
 	dw SpinnerArrowAnimTiles + $30
 	db 1
 	db BANK(SpinnerArrowAnimTiles)
 	dw $9310
-	
+
 	dw Tset16_GFX + $200
 	db 1
 	db BANK(Tset16_GFX)
 	dw $9200
-	
+
 	dw Tset16_GFX + $210
 	db 1
 	db BANK(Tset16_GFX)
 	dw $9210
-	
+
 	dw Tset16_GFX + $300
 	db 1
 	db BANK(Tset16_GFX)
 	dw $9300
-	
+
 	dw Tset16_GFX + $310
 	db 1
 	db BANK(Tset16_GFX)
 	dw $9310
-	
+
 SpinnerArrowTilePointers2: ; 45053 (11:5053)
 	dw SpinnerArrowAnimTiles + $10
 	db 1
 	db BANK(SpinnerArrowAnimTiles)
 	dw $93C0
-	
+
 	dw SpinnerArrowAnimTiles + $30
 	db 1
 	db BANK(SpinnerArrowAnimTiles)
 	dw $93D0
-	
+
 	dw SpinnerArrowAnimTiles
 	db 1
 	db BANK(SpinnerArrowAnimTiles)
 	dw $94C0
-	
+
 	dw SpinnerArrowAnimTiles + $20
 	db 1
 	db BANK(SpinnerArrowAnimTiles)
 	dw $94D0
-	
+
 	dw Tset05_GFX + $3C0
 	db 1
 	db BANK(Tset16_GFX)
 	dw $93C0
-	
+
 	dw Tset05_GFX + $3D0
 	db 1
 	db BANK(Tset16_GFX)
 	dw $93D0
-	
+
 	dw Tset05_GFX + $4C0
 	db 1
 	db BANK(Tset16_GFX)
 	dw $94C0
-	
+
 	dw Tset05_GFX + $4D0
 	db 1
 	db BANK(Tset16_GFX)
@@ -74790,7 +74669,6 @@ RocketHideout3_h: ; 0x45219 to 0x45225 (12 bytes) (bank=11) (id=201)
 	db ROCKET_HIDEOUT_3_HEIGHT, ROCKET_HIDEOUT_3_WIDTH ; dimensions (y, x)
 	dw RocketHideout3Blocks, RocketHideout3TextPointers, RocketHideout3Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw RocketHideout3Object ; objects
 
 RocketHideout3Script: ; 45225 (11:5225)
@@ -75002,10 +74880,7 @@ RocketHideout3EndBattleText3: ; 45343 (11:5343)
 	db "@"
 
 RocketHideout3AfterBattleText3: ; 45348 (11:5348)
-	;TX_FAR _RocketHideout3AfterBattleText3
-	db $17
-	dw _RocketHideout3AfterBattleText3
-	db BANK(_RocketHideout3AfterBattleText3)
+	TX_FAR _RocketHide3AfterBattleText3
 	db "@"
 
 RocketHideout3Object: ; 0x4534d (size=50)
@@ -75035,7 +74910,6 @@ RocketHideout4_h: ; 0x45451 to 0x4545d (12 bytes) (bank=11) (id=202)
 	db ROCKET_HIDEOUT_4_HEIGHT, ROCKET_HIDEOUT_4_WIDTH ; dimensions (y, x)
 	dw RocketHideout4Blocks, RocketHideout4TextPointers, RocketHideout4Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw RocketHideout4Object ; objects
 
 RocketHideout4Script: ; 4545d (11:545d)
@@ -75217,10 +75091,7 @@ RocketHideout4EndBattleText2: ; 45598 (11:5598)
 	db "@"
 
 RocketHideout4AfterBattleText2: ; 4559d (11:559d)
-	;TX_FAR _RocketHideout4AfterBattleText2
-	db $17
-	dw _RocketHideout4AfterBattleText2
-	db BANK(_RocketHideout4AfterBattleText2)
+	TX_FAR _RocketHide4AfterBattleText2
 	db "@"
 
 RocketHideout4Text3: ; 455a2 (11:55a2)
@@ -75238,10 +75109,7 @@ RocketHideout4EndBattleText3: ; 455b1 (11:55b1)
 	db "@"
 
 RocketHideout4AfterBattleText3: ; 455b6 (11:55b6)
-	;TX_FAR _RocketHideout4AfterBattleText3
-	db $17
-	dw _RocketHideout4AfterBattleText3
-	db BANK(_RocketHideout4AfterBattleText3)
+	TX_FAR _RocketHide4AfterBattleText3
 	db "@"
 
 RocketHideout4Text4: ; 455bb (11:55bb)
@@ -75311,7 +75179,6 @@ RocketHideoutElevator_h: ; 0x45704 to 0x45710 (12 bytes) (bank=11) (id=203)
 	db ROCKET_HIDEOUT_ELEVATOR_HEIGHT, ROCKET_HIDEOUT_ELEVATOR_WIDTH ; dimensions (y, x)
 	dw RocketHideoutElevatorBlocks, RocketHideoutElevatorTextPointers, RocketHideoutElevatorScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw RocketHideoutElevatorObject ; objects
 
 RocketHideoutElevatorScript: ; 45710 (11:5710)
@@ -75416,7 +75283,6 @@ SilphCoElevator_h: ; 0x457b4 to 0x457c0 (12 bytes) (bank=11) (id=236)
 	db SILPH_CO_ELEVATOR_HEIGHT, SILPH_CO_ELEVATOR_WIDTH ; dimensions (y, x)
 	dw SilphCoElevatorBlocks, SilphCoElevatorTextPointers, SilphCoElevatorScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw SilphCoElevatorObject ; objects
 
 SilphCoElevatorScript: ; 457c0 (11:57c0)
@@ -75509,7 +75375,6 @@ SafariZoneEast_h: ; 0x4585f to 0x4586b (12 bytes) (bank=11) (id=217)
 	db SAFARI_ZONE_EAST_HEIGHT, SAFARI_ZONE_EAST_WIDTH ; dimensions (y, x)
 	dw SafariZoneEastBlocks, SafariZoneEastTextPointers, SafariZoneEastScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw SafariZoneEastObject ; objects
 
 SafariZoneEastScript: ; 4586b (11:586b)
@@ -75572,7 +75437,6 @@ SafariZoneNorth_h: ; 0x4599f to 0x459ab (12 bytes) (bank=11) (id=218)
 	db SAFARI_ZONE_NORTH_HEIGHT, SAFARI_ZONE_NORTH_WIDTH ; dimensions (y, x)
 	dw SafariZoneNorthBlocks, SafariZoneNorthTextPointers, SafariZoneNorthScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw SafariZoneNorthObject ; objects
 
 SafariZoneNorthScript: ; 459ab (11:59ab)
@@ -75651,7 +75515,6 @@ SafariZoneCenter_h: ; 0x45ba6 to 0x45bb2 (12 bytes) (bank=11) (id=220)
 	db SAFARI_ZONE_CENTER_HEIGHT, SAFARI_ZONE_CENTER_WIDTH ; dimensions (y, x)
 	dw SafariZoneCenterBlocks, SafariZoneCenterTextPointers, SafariZoneCenterScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw SafariZoneCenterObject ; objects
 
 SafariZoneCenterScript: ; 45bb2 (11:5bb2)
@@ -75710,7 +75573,6 @@ SafariZoneRestHouse1_h: ; 0x45ce1 to 0x45ced (12 bytes) (bank=11) (id=221)
 	db SAFARI_ZONE_REST_HOUSE_1_HEIGHT, SAFARI_ZONE_REST_HOUSE_1_WIDTH ; dimensions (y, x)
 	dw SafariZoneRestHouse1Blocks, SafariZoneRestHouse1TextPointers, SafariZoneRestHouse1Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw SafariZoneRestHouse1Object ; objects
 
 SafariZoneRestHouse1Script: ; 45ced (11:5ced)
@@ -75748,9 +75610,8 @@ SafariZoneRestHouse1Object: ; 0x45cfe (size=32)
 SafariZoneRestHouse2_h: ; 0x45d1e to 0x45d2a (12 bytes) (bank=11) (id=223)
 	db $0c ; tileset
 	db SAFARI_ZONE_REST_HOUSE_2_HEIGHT, SAFARI_ZONE_REST_HOUSE_2_WIDTH ; dimensions (y, x)
-	dw $40fb, SafariZoneRestHouse2TextPointers, SafariZoneRestHouse2Script ; blocks, texts, scripts
+	dw SafariZoneRestHouse2Blocks, SafariZoneRestHouse2TextPointers, SafariZoneRestHouse2Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw SafariZoneRestHouse2Object ; objects
 
 SafariZoneRestHouse2Script: ; 45d2a (11:5d2a)
@@ -75795,9 +75656,8 @@ SafariZoneRestHouse2Object: ; 0x45d43 (size=38)
 SafariZoneRestHouse3_h: ; 0x45d69 to 0x45d75 (12 bytes) (bank=11) (id=224)
 	db $0c ; tileset
 	db SAFARI_ZONE_REST_HOUSE_3_HEIGHT, SAFARI_ZONE_REST_HOUSE_3_WIDTH ; dimensions (y, x)
-	dw $40fb, SafariZoneRestHouse3TextPointers, SafariZoneRestHouse3Script ; blocks, texts, scripts
+	dw SafariZoneRestHouse3Blocks, SafariZoneRestHouse3TextPointers, SafariZoneRestHouse3Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw SafariZoneRestHouse3Object ; objects
 
 SafariZoneRestHouse3Script: ; 45d75 (11:5d75)
@@ -75842,9 +75702,8 @@ SafariZoneRestHouse3Object: ; 0x45d8e (size=38)
 SafariZoneRestHouse4_h: ; 0x45db4 to 0x45dc0 (12 bytes) (bank=11) (id=225)
 	db $0c ; tileset
 	db SAFARI_ZONE_REST_HOUSE_4_HEIGHT, SAFARI_ZONE_REST_HOUSE_4_WIDTH ; dimensions (y, x)
-	dw $40fb, SafariZoneRestHouse4TextPointers, SafariZoneRestHouse4Script ; blocks, texts, scripts
+	dw SafariZoneRestHouse4Blocks, SafariZoneRestHouse4TextPointers, SafariZoneRestHouse4Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw SafariZoneRestHouse4Object ; objects
 
 SafariZoneRestHouse4Script: ; 45dc0 (11:5dc0)
@@ -75891,7 +75750,6 @@ UnknownDungeon2_h: ; 0x45dff to 0x45e0b (12 bytes) (bank=11) (id=226)
 	db UNKNOWN_DUNGEON_2_HEIGHT, UNKNOWN_DUNGEON_2_WIDTH ; dimensions (y, x)
 	dw UnknownDungeon2Blocks, UnknownDungeon2TextPointers, UnknownDungeon2Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw UnknownDungeon2Object ; objects
 
 UnknownDungeon2Script: ; 45e0b (11:5e0b)
@@ -75936,7 +75794,6 @@ UnknownDungeon3_h: ; 0x45ee4 to 0x45ef0 (12 bytes) (bank=11) (id=227)
 	db UNKNOWN_DUNGEON_3_HEIGHT, UNKNOWN_DUNGEON_3_WIDTH ; dimensions (y, x)
 	dw UnknownDungeon3Blocks, UnknownDungeon3TextPointers, UnknownDungeon3Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw UnknownDungeon3Object ; objects
 
 UnknownDungeon3Script: ; 45ef0 (11:5ef0)
@@ -76008,7 +75865,6 @@ RockTunnel2_h: ; 0x45fdf to 0x45feb (12 bytes) (bank=11) (id=232)
 	db ROCK_TUNNEL_2_HEIGHT, ROCK_TUNNEL_2_WIDTH ; dimensions (y, x)
 	dw RockTunnel2Blocks, RockTunnel2TextPointers, RockTunnel2Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw RockTunnel2Object ; objects
 
 RockTunnel2Script: ; 45feb (11:5feb)
@@ -76289,7 +76145,6 @@ SeafoamIslands2_h: ; 0x46309 to 0x46315 (12 bytes) (bank=11) (id=159)
 	db SEAFOAM_ISLANDS_2_HEIGHT, SEAFOAM_ISLANDS_2_WIDTH ; dimensions (y, x)
 	dw SeafoamIslands2Blocks, SeafoamIslands2TextPointers, SeafoamIslands2Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw SeafoamIslands2Object ; objects
 
 SeafoamIslands2Script: ; 46315 (11:6315)
@@ -76376,7 +76231,6 @@ SeafoamIslands3_h: ; 0x46445 to 0x46451 (12 bytes) (bank=11) (id=160)
 	db SEAFOAM_ISLANDS_3_HEIGHT, SEAFOAM_ISLANDS_3_WIDTH ; dimensions (y, x)
 	dw SeafoamIslands3Blocks, SeafoamIslands3TextPointers, SeafoamIslands3Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw SeafoamIslands3Object ; objects
 
 SeafoamIslands3Script: ; 46451 (11:6451)
@@ -76463,7 +76317,6 @@ SeafoamIslands4_h: ; 0x46581 to 0x4658d (12 bytes) (bank=11) (id=161)
 	db SEAFOAM_ISLANDS_4_HEIGHT, SEAFOAM_ISLANDS_4_WIDTH ; dimensions (y, x)
 	dw SeafoamIslands4Blocks, SeafoamIslands4TextPointers, SeafoamIslands4Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw SeafoamIslands4Object ; objects
 
 SeafoamIslands4Script: ; 4658d (11:658d)
@@ -76654,7 +76507,6 @@ SeafoamIslands5_h: ; 0x4678d to 0x46799 (12 bytes) (bank=11) (id=162)
 	db SEAFOAM_ISLANDS_5_HEIGHT, SEAFOAM_ISLANDS_5_WIDTH ; dimensions (y, x)
 	dw SeafoamIslands5Blocks, SeafoamIslands5TextPointers, SeafoamIslands5Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw SeafoamIslands5Object ; objects
 
 SeafoamIslands5Script: ; 46799 (11:6799)
@@ -77777,27 +77629,10 @@ SECTION "bank12",ROMX,BANK[$12]
 Route7_h: ; 0x48000 to 0x48022 (34 bytes) (bank=12) (id=18)
 	db $00 ; tileset
 	db ROUTE_7_HEIGHT, ROUTE_7_WIDTH ; dimensions (y, x)
-	dw Route7Blocks, $4155, Route7Script ; blocks, texts, scripts
+	dw Route7Blocks, Route7TextPointers, Route7Script ; blocks, texts, scripts
 	db WEST | EAST ; connections
-
-	; connections data
-
-	db CELADON_CITY
-	dw CeladonCityBlocks - 3 + (CELADON_CITY_WIDTH * 2) ; connection strip location
-	dw $C6E8 + (ROUTE_7_WIDTH + 6) * (-3 + 3) ; current map position
-	db $f, CELADON_CITY_WIDTH ; bigness, width
-	db (-4 * -2), (CELADON_CITY_WIDTH * 2) - 1 ; alignments (y, x)
-	dw $C6EE + 2 * CELADON_CITY_WIDTH ; window
-
-	db SAFFRON_CITY
-	dw SaffronCityBlocks + (SAFFRON_CITY_WIDTH) ; connection strip location
-	dw $C6E5 + (ROUTE_7_WIDTH + 6) * (-3 + 4) ; current map position
-	db $f, SAFFRON_CITY_WIDTH ; bigness, width
-	db (-4 * -2), 0 ; alignments (y, x)
-	dw $C6EF + SAFFRON_CITY_WIDTH ; window
-
-	; end connections data
-
+	WEST_MAP_CONNECTION CELADON_CITY, CELADON_CITY_WIDTH, -3, 1, CELADON_CITY_HEIGHT - 3, CeladonCityBlocks, ROUTE_7_WIDTH
+	EAST_MAP_CONNECTION SAFFRON_CITY, SAFFRON_CITY_WIDTH, -3, 1, SAFFRON_CITY_HEIGHT - 3, SaffronCityBlocks, ROUTE_7_WIDTH
 	dw Route7Object ; objects
 
 Route7Object: ; 0x48022 (size=47)
@@ -77910,8 +77745,8 @@ Func_4813f: ; 4813f (12:413f)
 Route7Script: ; 48152 (12:4152)
 	jp EnableAutoTextBoxDrawing
 
-; XXX
-	db $57, $41
+Route7TextPointers: ; 48155 (12:4155)
+	dw Route7Text1
 
 Route7Text1: ; 48157 (12:4157)
 	TX_FAR _Route7Text1
@@ -77919,7 +77754,7 @@ Route7Text1: ; 48157 (12:4157)
 
 RedsHouse1F_h: ; 4815c (12:415c)
 	db $01 ; tileset
-	db $04,$04 ; dimensions
+	db REDS_HOUSE_1F_HEIGHT, REDS_HOUSE_1F_WIDTH ; dimensions
 	dw RedsHouse1FBlocks, RedsHouse1FTextPointers, RedsHouse1FScript
 	db 0 ; no connections
 	dw RedsHouse1FObject
@@ -78009,15 +77844,9 @@ RedsHouse1FObject: ; 481e4 (12:41e4)
 	db $33,4+4,5+4,$FF,$D2,1 ; Mom
 
 	; warp-to
-
-	dw $C6EF + 4 + (4 + 6) * (3) + 1
-	db 7,2
-
-	dw $C6EF + 4 + (4 + 6) * (3) + 1
-	db 7,3
-
-	dw $C6EF + 4 + (4 + 6) * (0) + 3
-	db 1,7
+	EVENT_DISP REDS_HOUSE_1F_WIDTH, 7, 2
+	EVENT_DISP REDS_HOUSE_1F_WIDTH, 7, 3
+	EVENT_DISP REDS_HOUSE_1F_WIDTH, 1, 7
 
 RedsHouse1FBlocks: ; 48209 (12:4209)
 	INCBIN "maps/redshouse1f.blk"
@@ -78027,7 +77856,6 @@ CeladonMart3_h: ; 0x48219 to 0x48225 (12 bytes) (bank=12) (id=124)
 	db CELADON_MART_3_HEIGHT, CELADON_MART_3_WIDTH ; dimensions (y, x)
 	dw CeladonMart3Blocks, CeladonMart3TextPointers, CeladonMart3Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw CeladonMart3Object ; objects
 
 CeladonMart3Script: ; 48225 (12:4225)
@@ -78182,7 +78010,6 @@ CeladonMart4_h: ; 0x4834a to 0x48356 (12 bytes) (bank=12) (id=125)
 	db CELADON_MART_4_HEIGHT, CELADON_MART_4_WIDTH ; dimensions (y, x)
 	dw CeladonMart4Blocks, CeladonMart4TextPointers, CeladonMart4Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw CeladonMart4Object ; objects
 
 CeladonMart4Script: ; 48356 (12:4356)
@@ -78235,7 +78062,6 @@ CeladonMartRoof_h: ; 0x483c9 to 0x483d5 (12 bytes) (bank=12) (id=126)
 	db CELADON_MART_ROOF_HEIGHT, CELADON_MART_ROOF_WIDTH ; dimensions (y, x)
 	dw CeladonMartRoofBlocks, CeladonMartRoofTextPointers, CeladonMartRoofScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw CeladonMartRoofObject ; objects
 
 CeladonMartRoofScript: ; 483d5 (12:43d5)
@@ -78529,7 +78355,6 @@ CeladonMartElevator_h: ; 0x485f4 to 0x48600 (12 bytes) (bank=12) (id=127)
 	db CELADON_MART_ELEVATOR_HEIGHT, CELADON_MART_ELEVATOR_WIDTH ; dimensions (y, x)
 	dw CeladonMartElevatorBlocks, CeladonMartElevatorTextPointers, CeladonMartElevatorScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw CeladonMartElevatorObject ; objects
 
 CeladonMartElevatorScript: ; 48600 (12:4600)
@@ -78619,7 +78444,6 @@ CeladonMansion1_h: ; 0x48688 to 0x48694 (12 bytes) (bank=12) (id=128)
 	db CELADON_MANSION_1_HEIGHT, CELADON_MANSION_1_WIDTH ; dimensions (y, x)
 	dw CeladonMansion1Blocks, CeladonMansion1TextPointers, CeladonMansion1Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw CeladonMansion1Object ; objects
 
 CeladonMansion1Script: ; 48694 (12:4694)
@@ -78696,7 +78520,6 @@ CeladonMansion2_h: ; 0x4872e to 0x4873a (12 bytes) (bank=12) (id=129)
 	db CELADON_MANSION_2_HEIGHT, CELADON_MANSION_2_WIDTH ; dimensions (y, x)
 	dw CeladonMansion2Blocks, CeladonMansion2TextPointers, CeladonMansion2Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw CeladonMansion2Object ; objects
 
 CeladonMansion2Script: ; 4873a (12:473a)
@@ -78738,7 +78561,6 @@ CeladonMansion3_h: ; 0x48784 to 0x48790 (12 bytes) (bank=12) (id=130)
 	db CELADON_MANSION_3_HEIGHT, CELADON_MANSION_3_WIDTH ; dimensions (y, x)
 	dw CeladonMansion3Blocks, CeladonMansion3TextPointers, CeladonMansion3Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw CeladonMansion3Object ; objects
 
 CeladonMansion3Script: ; 48790 (12:4790)
@@ -78850,7 +78672,6 @@ CeladonMansion4_h: ; 0x4885f to 0x4886b (12 bytes) (bank=12) (id=131)
 	db CELADON_MANSION_4_HEIGHT, CELADON_MANSION_4_WIDTH ; dimensions (y, x)
 	dw CeladonMansion4Blocks, CeladonMansion4TextPointers, CeladonMansion4Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw CeladonMansion4Object ; objects
 
 CeladonMansion4Script: ; 4886b (12:486b)
@@ -78889,7 +78710,6 @@ CeladonPokecenter_h: ; 0x488ac to 0x488b8 (12 bytes) (bank=12) (id=133)
 	db CELADON_POKECENTER_HEIGHT, CELADON_POKECENTER_WIDTH ; dimensions (y, x)
 	dw CeladonPokecenterBlocks, CeladonPokecenterTextPointers, CeladonPokecenterScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw CeladonPokecenterObject ; objects
 
 CeladonPokecenterScript: ; 488b8 (12:48b8)
@@ -78940,7 +78760,6 @@ CeladonGym_h: ; 0x488fe to 0x4890a (12 bytes) (bank=12) (id=134)
 	db CELADON_GYM_HEIGHT, CELADON_GYM_WIDTH ; dimensions (y, x)
 	dw CeladonGymBlocks, CeladonGymTextPointers, CeladonGymScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw CeladonGymObject ; objects
 
 CeladonGymScript: ; 4890a (12:490a)
@@ -79316,7 +79135,6 @@ CeladonGameCorner_h: ; 0x48bb1 to 0x48bbd (12 bytes) (bank=12) (id=135)
 	db GAME_CORNER_HEIGHT, GAME_CORNER_WIDTH ; dimensions (y, x)
 	dw CeladonGameCornerBlocks, CeladonGameCornerTextPointers, CeladonGameCornerScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw CeladonGameCornerObject ; objects
 
 CeladonGameCornerScript: ; 48bbd (12:4bbd)
@@ -79893,7 +79711,6 @@ CeladonMart5_h: ; 0x4905d to 0x49069 (12 bytes) (bank=12) (id=136)
 	db CELADON_MART_5_HEIGHT, CELADON_MART_5_WIDTH ; dimensions (y, x)
 	dw CeladonMart5Blocks, CeladonMart5TextPointers, CeladonMart5Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw CeladonMart5Object ; objects
 
 CeladonMart5Script: ; 49069 (12:5069)
@@ -79948,7 +79765,6 @@ CeladonPrizeRoom_h: ; 0x490e4 to 0x490f0 (12 bytes) (bank=12) (id=137)
 	db CELADONPRIZE_ROOM_HEIGHT, CELADONPRIZE_ROOM_WIDTH ; dimensions (y, x)
 	dw CeladonPrizeRoomBlocks, CeladonPrizeRoomTextPointers, CeladonPrizeRoomScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw CeladonPrizeRoomObject ; objects
 
 CeladonPrizeRoomScript: ; 490f0 (12:50f0)
@@ -80000,7 +79816,6 @@ CeladonDiner_h: ; 0x49145 to 0x49151 (12 bytes) (bank=12) (id=138)
 	db CELADON_DINER_HEIGHT, CELADON_DINER_WIDTH ; dimensions (y, x)
 	dw CeladonDinerBlocks, CeladonDinerTextPointers, CeladonDinerScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw CeladonDinerObject ; objects
 
 CeladonDinerScript: ; 49151 (12:5151)
@@ -80099,7 +79914,6 @@ CeladonHouse_h: ; 0x49202 to 0x4920e (12 bytes) (bank=12) (id=139)
 	db CELADON_HOUSE_HEIGHT, CELADON_HOUSE_WIDTH ; dimensions (y, x)
 	dw CeladonHouseBlocks, CeladonHouseTextPointers, CeladonHouseScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw CeladonHouseObject ; objects
 
 CeladonHouseScript: ; 4920e (12:520e)
@@ -80149,7 +79963,6 @@ CeladonHotel_h: ; 0x4925d to 0x49269 (12 bytes) (bank=12) (id=140)
 	db CELADONHOTEL_HEIGHT, CELADONHOTEL_WIDTH ; dimensions (y, x)
 	dw CeladonHotelBlocks, CeladonHotelTextPointers, CeladonHotelScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw CeladonHotelObject ; objects
 
 CeladonHotelScript: ; 49269 (12:5269)
@@ -80198,7 +80011,6 @@ MtMoonPokecenter_h: ; 0x492c3 to 0x492cf (12 bytes) (bank=12) (id=68)
 	db MT_MOON_POKECENTER_HEIGHT, MT_MOON_POKECENTER_WIDTH ; dimensions (y, x)
 	dw MtMoonPokecenterBlocks, MtMoonPokecenterTextPointers, MtMoonPokecenterScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw MtMoonPokecenterObject ; objects
 
 MtMoonPokecenterScript: ; 492cf (12:52cf)
@@ -80325,7 +80137,6 @@ RockTunnelPokecenter_h: ; 0x493ae to 0x493ba (12 bytes) (id=81)
 	db ROCK_TUNNEL_POKECENTER_HEIGHT, ROCK_TUNNEL_POKECENTER_WIDTH ; dimensions (y, x)
 	dw RockTunnelPokecenterBlocks, RockTunnelPokecenterTextPointers, RockTunnelPokecenterScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw RockTunnelPokecenterObject ; objects
 
 RockTunnelPokecenterScript: ; 493ba (12:53ba)
@@ -80376,7 +80187,6 @@ Route11Gate_h: ; 0x49400 to 0x4940c (12 bytes) (id=84)
 	db ROUTE_11_GATE_1F_HEIGHT, ROUTE_11_GATE_1F_WIDTH ; dimensions (y, x)
 	dw Route11GateBlocks, Route11GateTextPointers, Route11GateScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw Route11GateObject ; objects
 
 Route11GateScript: ; 4940c (12:540c)
@@ -80416,7 +80226,6 @@ Route11GateUpstairs_h: ; 0x49448 to 0x49454 (12 bytes) (id=86)
 	db ROUTE_11_GATE_2F_HEIGHT, ROUTE_11_GATE_2F_WIDTH ; dimensions (y, x)
 	dw Route11GateUpstairsBlocks, Route11GateUpstairsTextPointers, Route11GateUpstairsScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw Route11GateUpstairsObject ; objects
 
 Route11GateUpstairsScript: ; 49454 (12:5454)
@@ -80523,7 +80332,6 @@ Route12Gate_h: ; 0x494f8 to 0x49504 (12 bytes) (id=87)
 	db ROUTE_12_GATE_HEIGHT, ROUTE_12_GATE_WIDTH ; dimensions (y, x)
 	dw Route12GateBlocks, Route12GateTextPointers, Route12GateScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw Route12GateObject ; objects
 
 Route12GateScript: ; 49504 (12:5504)
@@ -80566,7 +80374,6 @@ Route12GateUpstairs_h: ; 0x49554 to 0x49560 (12 bytes) (id=195)
 	db ROUTE_12_GATE_2F_HEIGHT, ROUTE_12_GATE_2F_WIDTH ; dimensions (y, x)
 	dw Route12GateUpstairsBlocks, Route12GateUpstairsTextPointers, Route12GateUpstairsScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw Route12GateUpstairsObject ; objects
 
 Route12GateUpstairsScript: ; 49560 (12:5560)
@@ -80670,7 +80477,6 @@ Route15Gate_h: ; 0x495f6 to 0x49602 (12 bytes) (id=184)
 	db ROUTE_15_GATE_1F_HEIGHT, ROUTE_15_GATE_1F_WIDTH ; dimensions (y, x)
 	dw Route15GateBlocks, Route15GateTextPointers, Route15GateScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw Route15GateObject ; objects
 
 Route15GateScript: ; 49602 (12:5602)
@@ -80709,7 +80515,6 @@ Route15GateUpstairs_h: ; 4963e (12:563e)
 	db $0c ; tileset
 	db ROUTE_15_GATE_2F_HEIGHT, ROUTE_15_GATE_2F_WIDTH ; dimensions (y, x)
 	dw Route15GateUpstairsBlocks, Route15GateUpstairsTextPointers, Route15GateUpstairsScript ; blocks, texts, scripts
-	;dw 40db, 564d, 564a ; blocks, texts, scripts
 	db $00 ; connections
 	dw Route15GateUpstairsObject ; objects
 
@@ -80781,7 +80586,6 @@ Route16GateMap_h: ; 0x496b2 to 0x496be (12 bytes) (id=186)
 	db ROUTE_16_GATE_1F_HEIGHT, ROUTE_16_GATE_1F_WIDTH ; dimensions (y, x)
 	dw Route16GateMapBlocks, Route16GateMapTextPointers, Route16GateMapScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw Route16GateMapObject ; objects
 
 Route16GateMapScript: ; 496be (12:56be)
@@ -80945,7 +80749,6 @@ Route16GateUpstairs_h: ; 0x497ff to 0x4980b (12 bytes) (id=187)
 	db ROUTE_16_GATE_2F_HEIGHT, ROUTE_16_GATE_2F_WIDTH ; dimensions (y, x)
 	dw Route16GateUpstairsBlocks, Route16GateUpstairsTextPointers, Route16GateUpstairsScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw Route16GateUpstairsObject ; objects
 
 Route16GateUpstairsScript: ; 4980b (12:580b)
@@ -81017,7 +80820,6 @@ Route18Gate_h: ; 0x4986a to 0x49876 (12 bytes) (id=190)
 	db ROUTE_18_GATE_1F_HEIGHT, ROUTE_18_GATE_1F_WIDTH ; dimensions (y, x)
 	dw Route18GateBlocks, Route18GateTextPointers, Route18GateScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw Route18GateObject ; objects
 
 Route18GateScript: ; 49876 (12:5876)
@@ -81160,7 +80962,6 @@ Route18GateUpstairs_h: ; 0x49969 to 0x49975 (12 bytes) (id=191)
 	db ROUTE_18_GATE_2F_HEIGHT, ROUTE_18_GATE_2F_WIDTH ; dimensions (y, x)
 	dw Route18GateUpstairsBlocks, Route18GateUpstairsTextPointers, Route18GateUpstairsScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw Route18GateUpstairsObject ; objects
 
 Route18GateUpstairsScript: ; 49975 (12:5975)
@@ -81218,7 +81019,6 @@ MtMoon1_h: ; 0x499bc to 0x499c8 (12 bytes) (id=59)
 	db MT_MOON_1_HEIGHT, MT_MOON_1_WIDTH ; dimensions (y, x)
 	dw MtMoon1Blocks, MtMoon1TextPointers, MtMoon1Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw MtMoon1Object ; objects
 
 MtMoon1Script: ; 499c8 (12:59c8)
@@ -81490,7 +81290,6 @@ MtMoon3_h: ; 0x49cff to 0x49d0b (12 bytes) (id=61)
 	db MT_MOON_3_HEIGHT, MT_MOON_3_WIDTH ; dimensions (y, x)
 	dw MtMoon3Blocks, MtMoon3TextPointers, MtMoon3Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw MtMoon3Object ; objects
 
 MtMoon3Script: ; 49d0b (12:5d0b)
@@ -81944,7 +81743,6 @@ SafariZoneWest_h: ; 0x4a1a9 to 0x4a1b5 (12 bytes) (id=219)
 	db SAFARI_ZONE_WEST_HEIGHT, SAFARI_ZONE_WEST_WIDTH ; dimensions (y, x)
 	dw SafariZoneWestBlocks, SafariZoneWestTextPointers, SafariZoneWestScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw SafariZoneWestObject ; objects
 
 SafariZoneWestScript: ; 4a1b5 (12:61b5)
@@ -82019,7 +81817,6 @@ SafariZoneSecretHouse_h: ; 0x4a30b to 0x4a317 (12 bytes) (id=222)
 	db SAFARI_ZONE_SECRET_HOUSE_HEIGHT, SAFARI_ZONE_SECRET_HOUSE_WIDTH ; dimensions (y, x)
 	dw SafariZoneSecretHouseBlocks, SafariZoneSecretHouseTextPointers, SafariZoneSecretHouseScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw SafariZoneSecretHouseObject ; objects
 
 SafariZoneSecretHouseScript: ; 4a317 (12:6317)
@@ -82187,7 +81984,6 @@ BattleCenterM_h: ; 0x4fd04 to 0x4fd10 (12 bytes) (id=239)
 	db BATTLE_CENTER_HEIGHT, BATTLE_CENTER_WIDTH ; dimensions (y, x)
 	dw BattleCenterMBlocks, BattleCenterMTextPointers, BattleCenterMScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw BattleCenterMObject ; objects
 
 BattleCenterMScript: ; 4fd10 (13:7d10)
@@ -82247,7 +82043,6 @@ TradeCenterM_h: ; 0x4fd71 to 0x4fd7d (12 bytes) (id=240)
 	db TRADE_CENTER_HEIGHT, TRADE_CENTER_WIDTH ; dimensions (y, x)
 	dw TradeCenterMBlocks, TradeCenterMTextPointers, TradeCenterMScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw TradeCenterMObject ; objects
 
 TradeCenterMScript: ; 4fd7d (13:7d7d)
@@ -82544,25 +82339,8 @@ Route22_h: ; 0x50000 to 0x50022 (34 bytes) (id=33)
 	db ROUTE_22_HEIGHT, ROUTE_22_WIDTH ; dimensions (y, x)
 	dw Route22Blocks, Route22TextPointers, Route22Script ; blocks, texts, scripts
 	db NORTH | EAST ; connections
-
-	; connections data
-
-	db ROUTE_23
-	dw Route23Blocks + (ROUTE_23_HEIGHT - 3) * ROUTE_23_WIDTH ; connection strip location
-	dw $C6EB + 0 ; current map position
-	db ROUTE_23_WIDTH, ROUTE_23_WIDTH ; bigness, width
-	db (ROUTE_23_HEIGHT * 2) - 1, (0 * -2) ; alignments (y, x)
-	dw $C6E9 + ROUTE_23_HEIGHT * (ROUTE_23_WIDTH + 6) ; window
-
-	db VIRIDIAN_CITY
-	dw ViridianCityBlocks + (VIRIDIAN_CITY_WIDTH) ; connection strip location
-	dw $C6E5 + (ROUTE_22_WIDTH + 6) * (-3 + 4) ; current map position
-	db $f, VIRIDIAN_CITY_WIDTH ; bigness, width
-	db (-4 * -2), 0 ; alignments (y, x)
-	dw $C6EF + VIRIDIAN_CITY_WIDTH ; window
-
-	; end connections data
-
+	NORTH_MAP_CONNECTION ROUTE_23, ROUTE_23_WIDTH, ROUTE_23_HEIGHT, 0, 0, ROUTE_23_WIDTH, Route23Blocks
+	EAST_MAP_CONNECTION VIRIDIAN_CITY, VIRIDIAN_CITY_WIDTH, -3, 1, VIRIDIAN_CITY_HEIGHT - 3, ViridianCityBlocks, ROUTE_22_WIDTH
 	dw Route22Object ; objects
 
 Route22Object: ; 0x50022 (size=27)
@@ -82589,25 +82367,8 @@ Route20_h: ; 0x500f1 to 0x50113 (34 bytes) (id=31)
 	db ROUTE_20_HEIGHT, ROUTE_20_WIDTH ; dimensions (y, x)
 	dw Route20Blocks, Route20TextPointers, Route20Script ; blocks, texts, scripts
 	db WEST | EAST ; connections
-
-	; connections data
-
-	db CINNABAR_ISLAND
-	dw CinnabarIslandBlocks - 3 + (CINNABAR_ISLAND_WIDTH) ; connection strip location
-	dw $C6E8 + (ROUTE_20_WIDTH + 6) * (0 + 3) ; current map position
-	db CINNABAR_ISLAND_HEIGHT, CINNABAR_ISLAND_WIDTH ; bigness, width
-	db (0 * -2), (CINNABAR_ISLAND_WIDTH * 2) - 1 ; alignments (y, x)
-	dw $C6EE + 2 * CINNABAR_ISLAND_WIDTH ; window
-
-	db ROUTE_19
-	dw Route19Blocks + (ROUTE_19_WIDTH * 15) ; connection strip location
-	dw $C6E5 + (ROUTE_20_WIDTH + 6) * (-3 + 4) ; current map position
-	db $c, ROUTE_19_WIDTH ; bigness, width
-	db (-18 * -2), 0 ; alignments (y, x)
-	dw $C6EF + ROUTE_19_WIDTH ; window
-
-	; end connections data
-
+	WEST_MAP_CONNECTION CINNABAR_ISLAND, CINNABAR_ISLAND_WIDTH, 0, 0, CINNABAR_ISLAND_HEIGHT, CinnabarIslandBlocks, ROUTE_20_WIDTH
+	EAST_MAP_CONNECTION ROUTE_19, ROUTE_19_WIDTH, -3, 15, ROUTE_19_HEIGHT - 15, Route19Blocks, ROUTE_20_WIDTH
 	dw Route20Object ; objects
 
 Route20Object: ; 0x50113 (size=106)
@@ -82645,25 +82406,8 @@ Route23_h: ; 0x5033f to 0x50361 (34 bytes) (id=34)
 	db ROUTE_23_HEIGHT, ROUTE_23_WIDTH ; dimensions (y, x)
 	dw Route23Blocks, Route23TextPointers, Route23Script ; blocks, texts, scripts
 	db NORTH | SOUTH ; connections
-
-	; connections data
-
-	db INDIGO_PLATEAU
-	dw IndigoPlateauBlocks + (INDIGO_PLATEAU_HEIGHT - 3) * INDIGO_PLATEAU_WIDTH ; connection strip location
-	dw $C6EB + 0 ; current map position
-	db INDIGO_PLATEAU_WIDTH, INDIGO_PLATEAU_WIDTH ; bigness, width
-	db (INDIGO_PLATEAU_HEIGHT * 2) - 1, (0 * -2) ; alignments (y, x)
-	dw $C6E9 + INDIGO_PLATEAU_HEIGHT * (INDIGO_PLATEAU_WIDTH + 6) ; window
-
-	db ROUTE_22
-	dw Route22Blocks ; connection strip location
-	dw $C6EB + (ROUTE_23_HEIGHT + 3) * (ROUTE_23_WIDTH + 6) + 0 ; current map position
-	db $d, ROUTE_22_WIDTH ; bigness, width
-	db 0, (0 * -2) ; alignments (y, x)
-	dw $C6EF + ROUTE_22_WIDTH ; window
-
-	; end connections data
-
+	NORTH_MAP_CONNECTION INDIGO_PLATEAU, INDIGO_PLATEAU_WIDTH, INDIGO_PLATEAU_HEIGHT, 0, 0, INDIGO_PLATEAU_WIDTH, IndigoPlateauBlocks
+	SOUTH_MAP_CONNECTION ROUTE_22, ROUTE_22_WIDTH, 0, 0, ROUTE_22_WIDTH - 7, Route22Blocks, ROUTE_23_WIDTH, ROUTE_23_HEIGHT
 	dw Route23Object ; objects
 
 Route23Object: ; 0x50361 (size=81)
@@ -82701,25 +82445,8 @@ Route24_h: ; 0x50682 to 0x506a4 (34 bytes) (id=35)
 	db ROUTE_24_HEIGHT, ROUTE_24_WIDTH ; dimensions (y, x)
 	dw Route24Blocks, Route24TextPointers, Route24Script ; blocks, texts, scripts
 	db SOUTH | EAST ; connections
-
-	; connections data
-
-	db CERULEAN_CITY
-	dw CeruleanCityBlocks + 2 ; connection strip location
-	dw $C6EB + (ROUTE_24_HEIGHT + 3) * (ROUTE_24_WIDTH + 6) + -3 ; current map position
-	db $10, CERULEAN_CITY_WIDTH ; bigness, width
-	db 0, (-5 * -2) ; alignments (y, x)
-	dw $C6EF + CERULEAN_CITY_WIDTH ; window
-
-	db ROUTE_25
-	dw Route25Blocks + (ROUTE_25_WIDTH * 0) ; connection strip location
-	dw $C6E5 + (ROUTE_24_WIDTH + 6) * (0 + 4) ; current map position
-	db ROUTE_25_HEIGHT, ROUTE_25_WIDTH ; bigness, width
-	db (0 * -2), 0 ; alignments (y, x)
-	dw $C6EF + ROUTE_25_WIDTH ; window
-
-	; end connections data
-
+	SOUTH_MAP_CONNECTION CERULEAN_CITY, CERULEAN_CITY_WIDTH, -3, 2, CERULEAN_CITY_WIDTH - 4, CeruleanCityBlocks, ROUTE_24_WIDTH, ROUTE_24_HEIGHT
+	EAST_MAP_CONNECTION ROUTE_25, ROUTE_25_WIDTH, 0, 0, ROUTE_25_HEIGHT, Route25Blocks, ROUTE_24_WIDTH
 	dw Route24Object ; objects
 
 Route24Object: ; 0x506a4 (size=67)
@@ -82747,18 +82474,7 @@ Route25_h: ; 0x5079b to 0x507b2 (23 bytes) (id=36)
 	db ROUTE_25_HEIGHT, ROUTE_25_WIDTH ; dimensions (y, x)
 	dw Route25Blocks, Route25TextPointers, Route25Script ; blocks, texts, scripts
 	db WEST ; connections
-
-	; connections data
-
-	db ROUTE_24
-	dw Route24Blocks - 3 + (ROUTE_24_WIDTH) ; connection strip location
-	dw $C6E8 + (ROUTE_25_WIDTH + 6) * (0 + 3) ; current map position
-	db $c, ROUTE_24_WIDTH ; bigness, width
-	db (0 * -2), (ROUTE_24_WIDTH * 2) - 1 ; alignments (y, x)
-	dw $C6EE + 2 * ROUTE_24_WIDTH ; window
-
-	; end connections data
-
+	WEST_MAP_CONNECTION ROUTE_24, ROUTE_24_WIDTH, 0, 0, ROUTE_24_HEIGHT - 6, Route24Blocks, ROUTE_25_WIDTH
 	dw Route25Object ; objects
 
 Route25Object: ; 0x507b2 (size=94)
@@ -82793,18 +82509,7 @@ IndigoPlateau_h: ; 0x5091e to 0x50935 (23 bytes) (id=9)
 	db INDIGO_PLATEAU_HEIGHT, INDIGO_PLATEAU_WIDTH ; dimensions (y, x)
 	dw IndigoPlateauBlocks, IndigoPlateauTextPointers, IndigoPlateauScript ; blocks, texts, scripts
 	db SOUTH ; connections
-
-	; connections data
-
-	db ROUTE_23
-	dw Route23Blocks ; connection strip location
-	dw $C6EB + (INDIGO_PLATEAU_HEIGHT + 3) * (INDIGO_PLATEAU_WIDTH + 6) + 0 ; current map position
-	db ROUTE_23_WIDTH, ROUTE_23_WIDTH ; bigness, width
-	db 0, (0 * -2) ; alignments (y, x)
-	dw $C6EF + ROUTE_23_WIDTH ; window
-
-	; end connections data
-
+	SOUTH_MAP_CONNECTION ROUTE_23, ROUTE_23_WIDTH, 0, 0, ROUTE_23_WIDTH, Route23Blocks, INDIGO_PLATEAU_WIDTH, INDIGO_PLATEAU_HEIGHT
 	dw IndigoPlateauObject ; objects
 
 IndigoPlateauScript: ; 50935 (14:4935)
@@ -82834,39 +82539,10 @@ SaffronCity_h: ; 0x509a4 to 0x509dc (56 bytes) (id=10)
 	db SAFFRON_CITY_HEIGHT, SAFFRON_CITY_WIDTH ; dimensions (y, x)
 	dw SaffronCityBlocks, SaffronCityTextPointers, SaffronCityScript ; blocks, texts, scripts
 	db NORTH | SOUTH | WEST | EAST ; connections
-
-	; connections data
-
-	db ROUTE_5
-	dw Route5Blocks + (ROUTE_5_HEIGHT - 3) * ROUTE_5_WIDTH ; connection strip location
-	dw $C6EB + 5 ; current map position
-	db ROUTE_5_WIDTH, ROUTE_5_WIDTH ; bigness, width
-	db (ROUTE_5_HEIGHT * 2) - 1, (5 * -2) ; alignments (y, x)
-	dw $C6E9 + ROUTE_5_HEIGHT * (ROUTE_5_WIDTH + 6) ; window
-
-	db ROUTE_6
-	dw Route6Blocks ; connection strip location
-	dw $C6EB + (SAFFRON_CITY_HEIGHT + 3) * (SAFFRON_CITY_WIDTH + 6) + 5 ; current map position
-	db ROUTE_6_WIDTH, ROUTE_6_WIDTH ; bigness, width
-	db 0, (5 * -2) ; alignments (y, x)
-	dw $C6EF + ROUTE_6_WIDTH ; window
-
-	db ROUTE_7
-	dw Route7Blocks - 3 + (ROUTE_7_WIDTH) ; connection strip location
-	dw $C6E8 + (SAFFRON_CITY_WIDTH + 6) * (4 + 3) ; current map position
-	db ROUTE_7_HEIGHT, ROUTE_7_WIDTH ; bigness, width
-	db (4 * -2), (ROUTE_7_WIDTH * 2) - 1 ; alignments (y, x)
-	dw $C6EE + 2 * ROUTE_7_WIDTH ; window
-
-	db ROUTE_8
-	dw Route8Blocks + (ROUTE_8_WIDTH * 0) ; connection strip location
-	dw $C6E5 + (SAFFRON_CITY_WIDTH + 6) * (4 + 4) ; current map position
-	db ROUTE_8_HEIGHT, ROUTE_8_WIDTH ; bigness, width
-	db (4 * -2), 0 ; alignments (y, x)
-	dw $C6EF + ROUTE_8_WIDTH ; window
-
-	; end connections data
-
+	NORTH_MAP_CONNECTION ROUTE_5, ROUTE_5_WIDTH, ROUTE_5_HEIGHT, 5, 0, ROUTE_5_WIDTH, Route5Blocks
+	SOUTH_MAP_CONNECTION ROUTE_6, ROUTE_6_WIDTH, 5, 0, ROUTE_6_WIDTH, Route6Blocks, SAFFRON_CITY_WIDTH, SAFFRON_CITY_HEIGHT
+	WEST_MAP_CONNECTION ROUTE_7, ROUTE_7_WIDTH, 4, 0, ROUTE_7_HEIGHT, Route7Blocks, SAFFRON_CITY_WIDTH
+	EAST_MAP_CONNECTION ROUTE_8, ROUTE_8_WIDTH, 4, 0, ROUTE_8_HEIGHT, Route8Blocks, SAFFRON_CITY_WIDTH
 	dw SaffronCityObject ; objects
 
 SaffronCityObject: ; 0x509dc (size=188)
@@ -83417,7 +83093,7 @@ Route22ScriptPointers: ; 50ebe (14:4ebe)
 	dw Route22Script4
 	dw Route22Script5
 	dw Route22Script6
-	dw $4Ed5
+	dw Route22Script7
 
 Func_50ece: ; 50ece (14:4ece)
 	xor a
@@ -83537,13 +83213,13 @@ Route22Script1: ; 50f62 (14:4f62)
 	call PreBattleSaveRegisters
 	ld a, $e1
 	ld [$d059], a
-	ld hl, Unknown_50faf ; $4faf
+	ld hl, StarterMons_50faf ; $4faf
 	call Func_50ed6
 	ld a, $2
 	ld [W_ROUTE22CURSCRIPT], a
 	ret
 
-Unknown_50faf: ; 50faf (14:4faf)
+StarterMons_50faf: ; 50faf (14:4faf)
 	db SQUIRTLE,$04
 	db BULBASAUR,$05
 	db CHARMANDER,$06
@@ -83684,13 +83360,13 @@ Route22Script4: ; 51087 (14:5087)
 	call PreBattleSaveRegisters
 	ld a, $f2
 	ld [W_CUROPPONENT], a ; $d059
-	ld hl, Unknown_510d9 ; $50d9
+	ld hl, StarterMons_510d9 ; $50d9
 	call Func_50ed6
 	ld a, $5
 	ld [W_ROUTE22CURSCRIPT], a
 	ret
 
-Unknown_510d9: ; 510d9 (14:50d9)
+StarterMons_510d9: ; 510d9 (14:50d9)
 	db SQUIRTLE,$0a
 	db BULBASAUR,$0b
 	db CHARMANDER,$0c
@@ -84732,7 +84408,6 @@ VictoryRoad2_h: ; 0x51791 to 0x5179d (12 bytes) (id=194)
 	db VICTORY_ROAD_2_HEIGHT, VICTORY_ROAD_2_WIDTH ; dimensions (y, x)
 	dw VictoryRoad2Blocks, VictoryRoad2TextPointers, VictoryRoad2Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw VictoryRoad2Object ; objects
 
 VictoryRoad2Script: ; 5179d (14:579d)
@@ -85030,7 +84705,6 @@ MtMoon2_h: ; 0x51a36 to 0x51a42 (12 bytes) (id=60)
 	db MT_MOON_2_HEIGHT, MT_MOON_2_WIDTH ; dimensions (y, x)
 	dw MtMoon2Blocks, MtMoon2TextPointers, MtMoon2Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw MtMoon2Object ; objects
 
 MtMoon2Script: ; 51a42 (14:5a42)
@@ -85079,7 +84753,6 @@ SilphCo7_h: ; 0x51b55 to 0x51b61 (12 bytes) (id=212)
 	db SILPH_CO_7F_HEIGHT, SILPH_CO_7F_WIDTH ; dimensions (y, x)
 	dw SilphCo7Blocks, SilphCo7TextPointers, SilphCo7Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw SilphCo7Object ; objects
 
 SilphCo7Script: ; 51b61 (14:5b61)
@@ -85649,7 +85322,6 @@ Mansion2_h: ; 0x51fcc to 0x51fd8 (12 bytes) (id=214)
 	db MANSION_2_HEIGHT, MANSION_2_WIDTH ; dimensions (y, x)
 	dw Mansion2Blocks, Mansion2TextPointers, Mansion2Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw Mansion2Object ; objects
 
 Mansion2Script: ; 51fd8 (14:5fd8)
@@ -85829,7 +85501,6 @@ Mansion3_h: ; 0x521e2 to 0x521ee (12 bytes) (id=215)
 	db MANSION_3_HEIGHT, MANSION_3_WIDTH ; dimensions (y, x)
 	dw Mansion3Blocks, Mansion3TextPointers, Mansion3Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw Mansion3Object ; objects
 
 Mansion3Script: ; 521ee (14:61ee)
@@ -86014,7 +85685,6 @@ Mansion4_h: ; 0x523ad to 0x523b9 (12 bytes) (id=216)
 	db MANSION_4_HEIGHT, MANSION_4_WIDTH ; dimensions (y, x)
 	dw Mansion4Blocks, Mansion4TextPointers, Mansion4Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw Mansion4Object ; objects
 
 Mansion4Script: ; 523b9 (14:63b9)
@@ -86202,9 +85872,9 @@ Func_525af: ; 525af (14:65af)
 	inc a
 	ld [$ccd9], a
 	ld a, [W_CURMAP] ; $d35e
-	cp $d9
+	cp SAFARI_ZONE_EAST
 	jr c, .asm_525f9
-	cp $dd
+	cp SAFARI_ZONE_REST_HOUSE_1
 	jr nc, .asm_525f9
 	ld a, $2
 	ld [W_BATTLETYPE], a ; $d05a
@@ -86348,16 +86018,14 @@ SilphCoMapList: ; 526e3 (14:66e3)
 	db SILPH_CO_11F
 	db $FF
 
-UnnamedText_526ee: ; 526ee (14:66ee)
-	TX_FAR _UnnamedText_526ee
+CardKeySuccessText: ; 526ee (14:66ee)
+	TX_FAR _CardKeySuccessText1
 	db $0b
-
-UnnamedText_526f3: ; 526f3 (14:66f3)
-	TX_FAR _UnnamedText_526f3
+	TX_FAR _CardKeySuccessText2
 	db "@"
 
-UnnamedText_526f8: ; 526f8 (14:66f8)
-	TX_FAR _UnnamedText_526f8
+CardKeyFailText: ; 526f8 (14:66f8)
+	TX_FAR _CardKeyFailText
 	db "@"
 
 Func_526fd: ; 526fd (14:66fd)
@@ -86794,63 +86462,63 @@ Func_52996: ; 52996 (14:6996)
 	ld a, [wTrainerSpriteOffset]
 	jp Func_3ef5
 
-UnnamedText_529a4: ; 529a4 (14:69a4)
-	TX_FAR UnnamedText_88bfd
+TMNotebook: ; 529a4 (14:69a4)
+	TX_FAR TMNotebookText
 	db $0d
 	db "@"
 
-UnnamedText_529aa: ; 529aa (14:69aa)
+ViridianSchoolNotebook: ; 529aa (14:69aa)
 	db $08 ; asm
-	ld hl, UnnamedText_529f4
+	ld hl, ViridianSchoolNotebookText1
 	call PrintText
-	call Func_529db
-	jr nz, .asm_529d8
-	ld hl, UnnamedText_529f9
+	call TurnPageSchoolNotebook
+	jr nz, .doneReading
+	ld hl, ViridianSchoolNotebookText2
 	call PrintText
-	call Func_529db
-	jr nz, .asm_529d8
-	ld hl, UnnamedText_529fe
+	call TurnPageSchoolNotebook
+	jr nz, .doneReading
+	ld hl, ViridianSchoolNotebookText3
 	call PrintText
-	call Func_529db
-	jr nz, .asm_529d8
-	ld hl, UnnamedText_52a03
+	call TurnPageSchoolNotebook
+	jr nz, .doneReading
+	ld hl, ViridianSchoolNotebookText4
 	call PrintText
-	ld hl, UnnamedText_529ee
+	ld hl, ViridianSchoolNotebookText5
 	call PrintText
-.asm_529d8
+.doneReading
 	jp TextScriptEnd
 
-Func_529db: ; 529db (14:69db)
-	ld hl, UnnamedText_529e9
+TurnPageSchoolNotebook: ; 529db (14:69db)
+	ld hl, TurnPageText
 	call PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
 	ret
 
-UnnamedText_529e9: ; 529e9 (14:69e9)
-	TX_FAR _UnnamedText_529e9
+TurnPageText: ; 529e9 (14:69e9)
+	TX_FAR _TurnPageText
 	db "@"
 
-UnnamedText_529ee: ; 529ee (14:69ee)
-	TX_FAR _UnnamedText_529ee
+ViridianSchoolNotebookText5: ; 529ee (14:69ee)
+	TX_FAR _ViridianSchoolNotebookText5
 	db $0d
 	db "@"
 
-UnnamedText_529f4: ; 529f4 (14:69f4)
-	TX_FAR _UnnamedText_529f4
+ViridianSchoolNotebookText1: ; 529f4 (14:69f4)
+	TX_FAR _ViridianSchoolNotebookText1
 	db "@"
 
-UnnamedText_529f9: ; 529f9 (14:69f9)
-	TX_FAR _UnnamedText_529f9
+ViridianSchoolNotebookText2: ; 529f9 (14:69f9)
+	TX_FAR _ViridianSchoolNotebookText2
 	db "@"
 
-UnnamedText_529fe: ; 529fe (14:69fe)
-	TX_FAR _UnnamedText_529fe
+ViridianSchoolNotebookText3: ; 529fe (14:69fe)
+	TX_FAR _ViridianSchoolNotebookText3
 	db "@"
 
-UnnamedText_52a03: ; 52a03 (14:6a03)
-	TX_FAR _UnnamedText_52a03
+ViridianSchoolNotebookText4: ; 52a03 (14:6a03)
+	TX_FAR _ViridianSchoolNotebookText4
 	db "@"
 
 Func_52a08: ; 52a08 (14:6a08)
@@ -86876,8 +86544,8 @@ Func_52a22: ; 52a22 (14:6a22)
 	ld a, $36
 	jp Func_3ef5
 
-UnnamedText_52a2a: ; 52a2a (14:6a2a)
-	TX_FAR _UnnamedText_52a2a
+FightingDojoText: ; 52a2a (14:6a2a)
+	TX_FAR _FightingDojoText
 	db "@"
 
 Func_52a2f: ; 52a2f (14:6a2f)
@@ -86888,8 +86556,8 @@ Func_52a2f: ; 52a2f (14:6a2f)
 	ld a, $27
 	jp Func_3ef5
 
-UnnamedText_52a3d: ; 52a3d (14:6a3d)
-	TX_FAR _UnnamedText_52a3d
+IndigoPlateauHQText: ; 52a3d (14:6a3d)
+	TX_FAR _IndigoPlateauHQText
 	db "@"
 
 SECTION "bank15",ROMX,BANK[$15]
@@ -86897,30 +86565,10 @@ SECTION "bank15",ROMX,BANK[$15]
 Route2_h: ; 54000 (15:4000)
 	db 00 ; Tileset
 	db ROUTE_2_HEIGHT,ROUTE_2_WIDTH ;Height,Width blocks (1 block = 4x4 tiles)
-	dw Route2Blocks ;Map-Pointer
-	dw Route2TextPointers ;Maps text pointer
-	dw Route2Script ;Maps script pointer
+	dw Route2Blocks, Route2TextPointers, Route2Script
 	db NORTH | SOUTH ;Connection Byte
-
-	;Connection data
-	db PEWTER_CITY ;Map
-	dw $4714 ;y, x Strip Starting Point
-	dw $C6E8 ;Strip X-Offset to current map
-	db 16 ;"Bigness" (Unsure) ;Something to do with MapData
-	db 20 ;"Map Width" (Unsure) ;Something to do with TileSet
-	db 35 ;Player's new Y-Coordinates
-	db 10 ;Player's new X-Coordinates
-	dw $C8BD ;New UL Block Pos (Window)
-
-	db VIRIDIAN_CITY ;Map
-	dw $43EE ;y, x Strip Starting Point
-	dw $C958 ;Strip X-Offset to current map
-	db 16 ;"Bigness" (Unsure) ;Something to do with MapData
-	db 20 ;"Map Width" (Unsure) ;Something to do with TileSet
-	db 0 ;Player's new Y-Coordinates
-	db 10 ;Player's new X-Coordinates
-	dw $C703 ;New UL Block Pos (Window)
-
+	NORTH_MAP_CONNECTION PEWTER_CITY, PEWTER_CITY_WIDTH, PEWTER_CITY_HEIGHT, -3, 2, PEWTER_CITY_WIDTH - 4, PewterCityBlocks
+	SOUTH_MAP_CONNECTION VIRIDIAN_CITY, VIRIDIAN_CITY_WIDTH, -3, 2, VIRIDIAN_CITY_WIDTH - 4, ViridianCityBlocks, ROUTE_2_WIDTH, ROUTE_2_HEIGHT
 	dw Route2Object ;Object Data Pointer
 
 Route2Object: ; 0x54022 (size=72)
@@ -86965,25 +86613,8 @@ Route3_h: ; 0x541e6 to 0x54208 (34 bytes) (id=14)
 	db ROUTE_3_HEIGHT, ROUTE_3_WIDTH ; dimensions (y, x)
 	dw Route3Blocks, Route3TextPointers, Route3Script ; blocks, texts, scripts
 	db NORTH | WEST ; connections
-
-	; connections data
-
-	db ROUTE_4
-	dw Route4Blocks + (ROUTE_4_HEIGHT - 3) * ROUTE_4_WIDTH ; connection strip location
-	dw $C6EB + 25 ; current map position
-	db $d, ROUTE_4_WIDTH ; bigness, width
-	db (ROUTE_4_HEIGHT * 2) - 1, (25 * -2) ; alignments (y, x)
-	dw $C6E9 + ROUTE_4_HEIGHT * (ROUTE_4_WIDTH + 6) ; window
-
-	db PEWTER_CITY
-	dw PewterCityBlocks - 3 + (PEWTER_CITY_WIDTH * 2) ; connection strip location
-	dw $C6E8 + (ROUTE_3_WIDTH + 6) * (-3 + 3) ; current map position
-	db $f, PEWTER_CITY_WIDTH ; bigness, width
-	db (-4 * -2), (PEWTER_CITY_WIDTH * 2) - 1 ; alignments (y, x)
-	dw $C6EE + 2 * PEWTER_CITY_WIDTH ; window
-
-	; end connections data
-
+	NORTH_MAP_CONNECTION ROUTE_4, ROUTE_4_WIDTH, ROUTE_4_HEIGHT, 25, 0, ROUTE_4_WIDTH - 32, Route4Blocks
+	WEST_MAP_CONNECTION PEWTER_CITY, PEWTER_CITY_WIDTH, -3, 1, PEWTER_CITY_HEIGHT - 3, PewterCityBlocks, ROUTE_3_WIDTH
 	dw Route3Object ; objects
 
 Route3Object: ; 0x54208 (size=77)
@@ -87013,25 +86644,8 @@ Route4_h: ; 0x54390 to 0x543b2 (34 bytes) (id=15)
 	db ROUTE_4_HEIGHT, ROUTE_4_WIDTH ; dimensions (y, x)
 	dw Route4Blocks, Route4TextPointers, Route4Script; blocks, texts, scripts
 	db SOUTH | EAST ; connections
-
-	; connections data
-
-	db ROUTE_3
-	dw Route3Blocks + 22 ; connection strip location
-	dw $C6EB + (ROUTE_4_HEIGHT + 3) * (ROUTE_4_WIDTH + 6) + -3 ; current map position
-	db $d, ROUTE_3_WIDTH ; bigness, width
-	db 0, (-25 * -2) ; alignments (y, x)
-	dw $C6EF + ROUTE_3_WIDTH ; window
-
-	db CERULEAN_CITY
-	dw CeruleanCityBlocks + (CERULEAN_CITY_WIDTH) ; connection strip location
-	dw $C6E5 + (ROUTE_4_WIDTH + 6) * (-3 + 4) ; current map position
-	db $f, CERULEAN_CITY_WIDTH ; bigness, width
-	db (-4 * -2), 0 ; alignments (y, x)
-	dw $C6EF + CERULEAN_CITY_WIDTH ; window
-
-	; end connections data
-
+	SOUTH_MAP_CONNECTION ROUTE_3, ROUTE_3_WIDTH, -3, 22, ROUTE_3_WIDTH - 22, Route3Blocks, ROUTE_4_WIDTH, ROUTE_4_HEIGHT
+	EAST_MAP_CONNECTION CERULEAN_CITY, CERULEAN_CITY_WIDTH, -3, 1, CERULEAN_CITY_HEIGHT - 3, CeruleanCityBlocks, ROUTE_4_WIDTH
 	dw Route4Object ; objects
 
 Route4Object: ; 0x543b2 (size=58)
@@ -87065,25 +86679,8 @@ Route5_h: ; 0x54581 to 0x545a3 (34 bytes) (id=16)
 	db ROUTE_5_HEIGHT, ROUTE_5_WIDTH ; dimensions (y, x)
 	dw Route5Blocks, Route5TextPointers, Route5Script ; blocks, texts, scripts
 	db NORTH | SOUTH ; connections
-
-	; connections data
-
-	db CERULEAN_CITY
-	dw CeruleanCityBlocks + (CERULEAN_CITY_HEIGHT - 3) * CERULEAN_CITY_WIDTH + 2 ; connection strip location
-	dw $C6EB + -3 ; current map position
-	db $10, CERULEAN_CITY_WIDTH ; bigness, width
-	db (CERULEAN_CITY_HEIGHT * 2) - 1, (-5 * -2) ; alignments (y, x)
-	dw $C6E9 + CERULEAN_CITY_HEIGHT * (CERULEAN_CITY_WIDTH + 6) ; window
-
-	db SAFFRON_CITY
-	dw SaffronCityBlocks + 2 ; connection strip location
-	dw $C6EB + (ROUTE_5_HEIGHT + 3) * (ROUTE_5_WIDTH + 6) + -3 ; current map position
-	db $10, SAFFRON_CITY_WIDTH ; bigness, width
-	db 0, (-5 * -2) ; alignments (y, x)
-	dw $C6EF + SAFFRON_CITY_WIDTH ; window
-
-	; end connections data
-
+	NORTH_MAP_CONNECTION CERULEAN_CITY, CERULEAN_CITY_WIDTH, CERULEAN_CITY_HEIGHT, -3, 2, CERULEAN_CITY_WIDTH - 4, CeruleanCityBlocks
+	SOUTH_MAP_CONNECTION SAFFRON_CITY, SAFFRON_CITY_WIDTH, -3, 2, SAFFRON_CITY_WIDTH - 4, SaffronCityBlocks, ROUTE_5_WIDTH, ROUTE_5_HEIGHT
 	dw Route5Object ; objects
 
 Route5Object: ; 0x545a3 (size=47)
@@ -87116,25 +86713,8 @@ Route9_h: ; 0x54686 to 0x546a8 (34 bytes) (id=20)
 	db ROUTE_9_HEIGHT, ROUTE_9_WIDTH ; dimensions (y, x)
 	dw Route9Blocks, Route9TextPointers, Route9Script ; blocks, texts, scripts
 	db WEST | EAST ; connections
-
-	; connections data
-
-	db CERULEAN_CITY
-	dw CeruleanCityBlocks - 3 + (CERULEAN_CITY_WIDTH * 2) ; connection strip location
-	dw $C6E8 + (ROUTE_9_WIDTH + 6) * (-3 + 3) ; current map position
-	db $f, CERULEAN_CITY_WIDTH ; bigness, width
-	db (-4 * -2), (CERULEAN_CITY_WIDTH * 2) - 1 ; alignments (y, x)
-	dw $C6EE + 2 * CERULEAN_CITY_WIDTH ; window
-
-	db ROUTE_10
-	dw Route10Blocks + (ROUTE_10_WIDTH * 0) ; connection strip location
-	dw $C6E5 + (ROUTE_9_WIDTH + 6) * (0 + 4) ; current map position
-	db $c, ROUTE_10_WIDTH ; bigness, width
-	db (0 * -2), 0 ; alignments (y, x)
-	dw $C6EF + ROUTE_10_WIDTH ; window
-
-	; end connections data
-
+	WEST_MAP_CONNECTION CERULEAN_CITY, CERULEAN_CITY_WIDTH, -3, 1, CERULEAN_CITY_HEIGHT - 3, CeruleanCityBlocks, ROUTE_9_WIDTH
+	EAST_MAP_CONNECTION ROUTE_10, ROUTE_10_WIDTH, 0, 0, ROUTE_10_HEIGHT - 24, Route10Blocks, ROUTE_9_WIDTH
 	dw Route9Object ; objects
 
 Route9Object: ; 0x546a8 (size=86)
@@ -87165,25 +86745,8 @@ Route13_h: ; 0x5480c to 0x5482e (34 bytes) (id=24)
 	db ROUTE_13_HEIGHT, ROUTE_13_WIDTH ; dimensions (y, x)
 	dw Route13Blocks, Route13TextPointers, Route13Script ; blocks, texts, scripts
 	db NORTH | WEST ; connections
-
-	; connections data
-
-	db ROUTE_12
-	dw Route12Blocks + (ROUTE_12_HEIGHT - 3) * ROUTE_12_WIDTH ; connection strip location
-	dw $C6EB + 20 ; current map position
-	db ROUTE_12_WIDTH, ROUTE_12_WIDTH ; bigness, width
-	db (ROUTE_12_HEIGHT * 2) - 1, (20 * -2) ; alignments (y, x)
-	dw $C6E9 + ROUTE_12_HEIGHT * (ROUTE_12_WIDTH + 6) ; window
-
-	db ROUTE_14
-	dw Route14Blocks - 3 + (ROUTE_14_WIDTH) ; connection strip location
-	dw $C6E8 + (ROUTE_13_WIDTH + 6) * (0 + 3) ; current map position
-	db $c, ROUTE_14_WIDTH ; bigness, width
-	db (0 * -2), (ROUTE_14_WIDTH * 2) - 1 ; alignments (y, x)
-	dw $C6EE + 2 * ROUTE_14_WIDTH ; window
-
-	; end connections data
-
+	NORTH_MAP_CONNECTION ROUTE_12, ROUTE_12_WIDTH, ROUTE_12_HEIGHT, 20, 0, ROUTE_12_WIDTH, Route12Blocks
+	WEST_MAP_CONNECTION ROUTE_14, ROUTE_14_WIDTH, 0, 0, ROUTE_14_HEIGHT - 15, Route14Blocks, ROUTE_13_WIDTH
 	dw Route13Object ; objects
 
 Route13Object: ; 0x5482e (size=93)
@@ -87216,25 +86779,8 @@ Route14_h: ; 0x54999 to 0x549bb (34 bytes) (id=25)
 	db ROUTE_14_HEIGHT, ROUTE_14_WIDTH ; dimensions (y, x)
 	dw Route14Blocks, Route14TextPointers, Route14Script ; blocks, texts, scripts
 	db WEST | EAST ; connections
-
-	; connections data
-
-	db ROUTE_15
-	dw Route15Blocks - 3 + (ROUTE_15_WIDTH) ; connection strip location
-	dw $C6E8 + (ROUTE_14_WIDTH + 6) * (18 + 3) ; current map position
-	db ROUTE_15_HEIGHT, ROUTE_15_WIDTH ; bigness, width
-	db (18 * -2), (ROUTE_15_WIDTH * 2) - 1 ; alignments (y, x)
-	dw $C6EE + 2 * ROUTE_15_WIDTH ; window
-
-	db ROUTE_13
-	dw Route13Blocks + (ROUTE_13_WIDTH * 0) ; connection strip location
-	dw $C6E5 + (ROUTE_14_WIDTH + 6) * (0 + 4) ; current map position
-	db ROUTE_13_HEIGHT, ROUTE_13_WIDTH ; bigness, width
-	db (0 * -2), 0 ; alignments (y, x)
-	dw $C6EF + ROUTE_13_WIDTH ; window
-
-	; end connections data
-
+	WEST_MAP_CONNECTION ROUTE_15, ROUTE_15_WIDTH, 18, 0, ROUTE_15_HEIGHT, Route15Blocks, ROUTE_14_WIDTH
+	EAST_MAP_CONNECTION ROUTE_13, ROUTE_13_WIDTH, 0, 0, ROUTE_13_HEIGHT, Route13Blocks, ROUTE_14_WIDTH
 	dw Route14Object ; objects
 
 Route14Object: ; 0x549bb (size=87)
@@ -87265,25 +86811,8 @@ Route17_h: ; 0x54b20 to 0x54b42 (34 bytes) (id=28)
 	db ROUTE_17_HEIGHT, ROUTE_17_WIDTH ; dimensions (y, x)
 	dw Route17Blocks, Route17TextPointers, Route17Script ; blocks, texts, scripts
 	db NORTH | SOUTH ; connections
-
-	; connections data
-
-	db ROUTE_16
-	dw Route16Blocks + (ROUTE_16_HEIGHT - 3) * ROUTE_16_WIDTH ; connection strip location
-	dw $C6EB + 0 ; current map position
-	db $d, ROUTE_16_WIDTH ; bigness, width
-	db (ROUTE_16_HEIGHT * 2) - 1, (0 * -2) ; alignments (y, x)
-	dw $C6E9 + ROUTE_16_HEIGHT * (ROUTE_16_WIDTH + 6) ; window
-
-	db ROUTE_18
-	dw Route18Blocks ; connection strip location
-	dw $C6EB + (ROUTE_17_HEIGHT + 3) * (ROUTE_17_WIDTH + 6) + 0 ; current map position
-	db $d, ROUTE_18_WIDTH ; bigness, width
-	db 0, (0 * -2) ; alignments (y, x)
-	dw $C6EF + ROUTE_18_WIDTH ; window
-
-	; end connections data
-
+	NORTH_MAP_CONNECTION ROUTE_16, ROUTE_16_WIDTH, ROUTE_16_HEIGHT, 0, 0, ROUTE_16_WIDTH - 7, Route16Blocks
+	SOUTH_MAP_CONNECTION ROUTE_18, ROUTE_18_WIDTH, 0, 0, ROUTE_18_WIDTH - 12, Route18Blocks, ROUTE_17_WIDTH, ROUTE_17_HEIGHT
 	dw Route17Object ; objects
 
 Route17Object: ; 0x54b42 (size=102)
@@ -87319,25 +86848,8 @@ Route19_h: ; 0x54e78 to 0x54e9a (34 bytes) (id=30)
 	db ROUTE_19_HEIGHT, ROUTE_19_WIDTH ; dimensions (y, x)
 	dw Route19Blocks, Route19TextPointers, Route19Script ; blocks, texts, scripts
 	db NORTH | WEST ; connections
-
-	; connections data
-
-	db FUCHSIA_CITY
-	dw FuchsiaCityBlocks + (FUCHSIA_CITY_HEIGHT - 3) * FUCHSIA_CITY_WIDTH + 2 ; connection strip location
-	dw $C6EB + -3 ; current map position
-	db $10, FUCHSIA_CITY_WIDTH ; bigness, width
-	db (FUCHSIA_CITY_HEIGHT * 2) - 1, (-5 * -2) ; alignments (y, x)
-	dw $C6E9 + FUCHSIA_CITY_HEIGHT * (FUCHSIA_CITY_WIDTH + 6) ; window
-
-	db ROUTE_20
-	dw Route20Blocks - 3 + (ROUTE_20_WIDTH) ; connection strip location
-	dw $C6E8 + (ROUTE_19_WIDTH + 6) * (18 + 3) ; current map position
-	db ROUTE_20_HEIGHT, ROUTE_20_WIDTH ; bigness, width
-	db (18 * -2), (ROUTE_20_WIDTH * 2) - 1 ; alignments (y, x)
-	dw $C6EE + 2 * ROUTE_20_WIDTH ; window
-
-	; end connections data
-
+	NORTH_MAP_CONNECTION FUCHSIA_CITY, FUCHSIA_CITY_WIDTH, FUCHSIA_CITY_HEIGHT, -3, 2, FUCHSIA_CITY_WIDTH - 4, FuchsiaCityBlocks
+	WEST_MAP_CONNECTION ROUTE_20, ROUTE_20_WIDTH, 18, 0, ROUTE_20_HEIGHT, Route20Blocks, ROUTE_19_WIDTH
 	dw Route19Object ; objects
 
 Route19Object: ; 0x54e9a (size=87)
@@ -87368,25 +86880,8 @@ Route21_h: ; 0x54fff to 0x55021 (34 bytes) (id=32)
 	db ROUTE_21_HEIGHT, ROUTE_21_WIDTH ; dimensions (y, x)
 	dw Route21Blocks, Route21TextPointers, Route21Script ; blocks, texts, scripts
 	db NORTH | SOUTH ; connections
-
-	; connections data
-
-	db PALLET_TOWN
-	dw PalletTownBlocks + (PALLET_TOWN_HEIGHT - 3) * PALLET_TOWN_WIDTH ; connection strip location
-	dw $C6EB + 0 ; current map position
-	db PALLET_TOWN_WIDTH, PALLET_TOWN_WIDTH ; bigness, width
-	db (PALLET_TOWN_HEIGHT * 2) - 1, (0 * -2) ; alignments (y, x)
-	dw $C6E9 + PALLET_TOWN_HEIGHT * (PALLET_TOWN_WIDTH + 6) ; window
-
-	db CINNABAR_ISLAND
-	dw CinnabarIslandBlocks ; connection strip location
-	dw $C6EB + (ROUTE_21_HEIGHT + 3) * (ROUTE_21_WIDTH + 6) + 0 ; current map position
-	db CINNABAR_ISLAND_WIDTH, CINNABAR_ISLAND_WIDTH ; bigness, width
-	db 0, (0 * -2) ; alignments (y, x)
-	dw $C6EF + CINNABAR_ISLAND_WIDTH ; window
-
-	; end connections data
-
+	NORTH_MAP_CONNECTION PALLET_TOWN, PALLET_TOWN_WIDTH, PALLET_TOWN_HEIGHT, 0, 0, PALLET_TOWN_WIDTH, PalletTownBlocks
+	SOUTH_MAP_CONNECTION CINNABAR_ISLAND, CINNABAR_ISLAND_WIDTH, 0, 0, CINNABAR_ISLAND_WIDTH, CinnabarIslandBlocks, ROUTE_21_WIDTH, ROUTE_21_HEIGHT
 	dw Route21Object ; objects
 
 Route21Object: ; 0x55021 (size=76)
@@ -89942,7 +89437,6 @@ VermilionHouse2_h: ; 0x56064 to 0x56070 (12 bytes) (id=163)
 	db VERMILION_HOUSE_2_HEIGHT, VERMILION_HOUSE_2_WIDTH ; dimensions (y, x)
 	dw VermilionHouse2Blocks, VermilionHouse2TextPointers, VermilionHouse2Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw VermilionHouse2Object ; objects
 
 VermilionHouse2Script: ; 56070 (15:6070)
@@ -90024,7 +89518,6 @@ CeladonMart2_h: ; 0x560e9 to 0x560f5 (12 bytes) (id=123)
 	db CELADON_MART_2_HEIGHT, CELADON_MART_2_WIDTH ; dimensions (y, x)
 	dw CeladonMart2Blocks, CeladonMart2TextPointers, CeladonMart2Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw CeladonMart2Object ; objects
 
 CeladonMart2Script: ; 560f5 (15:60f5)
@@ -90079,7 +89572,6 @@ FuchsiaHouse3_h: ; 0x56170 to 0x5617c (12 bytes) (id=164)
 	db FUCHSIA_HOUSE_3_HEIGHT, FUCHSIA_HOUSE_3_WIDTH ; dimensions (y, x)
 	dw FuchsiaHouse3Blocks, FuchsiaHouse3TextPointers, FuchsiaHouse3Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw FuchsiaHouse3Object ; objects
 
 FuchsiaHouse3Script: ; 5617c (15:617c)
@@ -90163,7 +89655,6 @@ DayCareM_h: ; 0x56243 to 0x5624f (12 bytes) (id=72)
 	db DAYCAREM_HEIGHT, DAYCAREM_WIDTH ; dimensions (y, x)
 	dw DayCareMBlocks, DayCareMTextPointers, DayCareMScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw DayCareMObject ; objects
 
 DayCareMScript: ; 5624f (15:624f)
@@ -90462,7 +89953,6 @@ Route12House_h: ; 0x56473 to 0x5647f (12 bytes) (id=189)
 	db ROUTE_12_HOUSE_HEIGHT, ROUTE_12_HOUSE_WIDTH ; dimensions (y, x)
 	dw Route12HouseBlocks, Route12HouseTextPointers, Route12HouseScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw Route12HouseObject ; objects
 
 Route12HouseScript: ; 5647f (15:647f)
@@ -90544,7 +90034,6 @@ SilphCo8_h: ; 0x564f8 to 0x56504 (12 bytes) (id=213)
 	db SILPH_CO_8F_HEIGHT, SILPH_CO_8F_WIDTH ; dimensions (y, x)
 	dw SilphCo8Blocks, SilphCo8TextPointers, SilphCo8Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw SilphCo8Object ; objects
 
 SilphCo8Script: ; 56504 (15:6504)
@@ -90864,16 +90353,16 @@ DiplomaTextPointersAndCoords: ; 56784 (15:6784)
 
 DiplomaText:
 	db $70,"Diploma",$70,"@"
-	
+
 DiplomaPlayer:
 	db "Player@"
-	
+
 DiplomaEmptyText:
 	db "@"
-	
+
 DiplomaCongrats:
 	db "Congrats! This",$4e,"diploma certifies",$4e,"that you have",$4e,"completed your",$4e,"#DEX.@"
-	
+
 DiplomaGameFreak:
 	db "GAME FREAK@"
 
@@ -91232,25 +90721,8 @@ Route6_h: ; 0x58000 to 0x58022 (34 bytes) (id=17)
 	db ROUTE_6_HEIGHT, ROUTE_6_WIDTH ; dimensions (y, x)
 	dw Route6Blocks, Route6TextPointers, Route6Script ; blocks, texts, scripts
 	db NORTH | SOUTH ; connections
-
-	; connections data
-
-	db SAFFRON_CITY
-	dw SaffronCityBlocks + (SAFFRON_CITY_HEIGHT - 3) * SAFFRON_CITY_WIDTH + 2 ; connection strip location
-	dw $C6EB + -3 ; current map position
-	db $10, SAFFRON_CITY_WIDTH ; bigness, width
-	db (SAFFRON_CITY_HEIGHT * 2) - 1, (-5 * -2) ; alignments (y, x)
-	dw $C6E9 + SAFFRON_CITY_HEIGHT * (SAFFRON_CITY_WIDTH + 6) ; window
-
-	db VERMILION_CITY
-	dw VermilionCityBlocks + 2 ; connection strip location
-	dw $C6EB + (ROUTE_6_HEIGHT + 3) * (ROUTE_6_WIDTH + 6) + -3 ; current map position
-	db $10, VERMILION_CITY_WIDTH ; bigness, width
-	db 0, (-5 * -2) ; alignments (y, x)
-	dw $C6EF + VERMILION_CITY_WIDTH ; window
-
-	; end connections data
-
+	NORTH_MAP_CONNECTION SAFFRON_CITY, SAFFRON_CITY_WIDTH, SAFFRON_CITY_HEIGHT, -3, 2, SAFFRON_CITY_WIDTH - 4, SaffronCityBlocks
+	SOUTH_MAP_CONNECTION VERMILION_CITY, VERMILION_CITY_WIDTH, -3, 2, VERMILION_CITY_WIDTH - 4, VermilionCityBlocks, ROUTE_6_WIDTH, ROUTE_6_HEIGHT
 	dw Route6Object ; objects
 
 Route6Object: ; 0x58022 (size=87)
@@ -91287,25 +90759,8 @@ Route8_h: ; 0x5812d to 0x5814f (34 bytes) (id=19)
 	db ROUTE_8_HEIGHT, ROUTE_8_WIDTH ; dimensions (y, x)
 	dw Route8Blocks, Route8TextPointers, Route8Script ; blocks, texts, scripts
 	db WEST | EAST ; connections
-
-	; connections data
-
-	db SAFFRON_CITY
-	dw SaffronCityBlocks - 3 + (SAFFRON_CITY_WIDTH * 2) ; connection strip location
-	dw $C6E8 + (ROUTE_8_WIDTH + 6) * (-3 + 3) ; current map position
-	db $f, SAFFRON_CITY_WIDTH ; bigness, width
-	db (-4 * -2), (SAFFRON_CITY_WIDTH * 2) - 1 ; alignments (y, x)
-	dw $C6EE + 2 * SAFFRON_CITY_WIDTH ; window
-
-	db LAVENDER_TOWN
-	dw LavenderTownBlocks + (LAVENDER_TOWN_WIDTH * 0) ; connection strip location
-	dw $C6E5 + (ROUTE_8_WIDTH + 6) * (0 + 4) ; current map position
-	db LAVENDER_TOWN_HEIGHT, LAVENDER_TOWN_WIDTH ; bigness, width
-	db (0 * -2), 0 ; alignments (y, x)
-	dw $C6EF + LAVENDER_TOWN_WIDTH ; window
-
-	; end connections data
-
+	WEST_MAP_CONNECTION SAFFRON_CITY, SAFFRON_CITY_WIDTH, -3, 1, SAFFRON_CITY_HEIGHT - 3, SaffronCityBlocks, ROUTE_8_WIDTH
+	EAST_MAP_CONNECTION LAVENDER_TOWN, LAVENDER_TOWN_WIDTH, 0, 0, LAVENDER_TOWN_HEIGHT, LavenderTownBlocks, ROUTE_8_WIDTH
 	dw Route8Object ; objects
 
 Route8Object: ; 0x5814f (size=119)
@@ -91347,25 +90802,8 @@ Route10_h: ; 0x582d4 to 0x582f6 (34 bytes) (id=21)
 	db ROUTE_10_HEIGHT, ROUTE_10_WIDTH ; dimensions (y, x)
 	dw Route10Blocks, Route10TextPointers, Route10Script ; blocks, texts, scripts
 	db SOUTH | WEST ; connections
-
-	; connections data
-
-	db LAVENDER_TOWN
-	dw LavenderTownBlocks ; connection strip location
-	dw $C6EB + (ROUTE_10_HEIGHT + 3) * (ROUTE_10_WIDTH + 6) + 0 ; current map position
-	db LAVENDER_TOWN_WIDTH, LAVENDER_TOWN_WIDTH ; bigness, width
-	db 0, (0 * -2) ; alignments (y, x)
-	dw $C6EF + LAVENDER_TOWN_WIDTH ; window
-
-	db ROUTE_9
-	dw Route9Blocks - 3 + (ROUTE_9_WIDTH) ; connection strip location
-	dw $C6E8 + (ROUTE_10_WIDTH + 6) * (0 + 3) ; current map position
-	db ROUTE_9_HEIGHT, ROUTE_9_WIDTH ; bigness, width
-	db (0 * -2), (ROUTE_9_WIDTH * 2) - 1 ; alignments (y, x)
-	dw $C6EE + 2 * ROUTE_9_WIDTH ; window
-
-	; end connections data
-
+	SOUTH_MAP_CONNECTION LAVENDER_TOWN, LAVENDER_TOWN_WIDTH, 0, 0, LAVENDER_TOWN_WIDTH, LavenderTownBlocks, ROUTE_10_WIDTH, ROUTE_10_HEIGHT
+	WEST_MAP_CONNECTION ROUTE_9, ROUTE_9_WIDTH, 0, 0, ROUTE_9_HEIGHT, Route9Blocks, ROUTE_10_WIDTH
 	dw Route10Object ; objects
 
 Route10Object: ; 0x582f6 (size=96)
@@ -91405,25 +90843,8 @@ Route11_h: ; 0x584be to 0x584e0 (34 bytes) (id=22)
 	db ROUTE_11_HEIGHT, ROUTE_11_WIDTH ; dimensions (y, x)
 	dw Route11Blocks, Route11TextPointers, Route11Script ; blocks, texts, scripts
 	db WEST | EAST ; connections
-
-	; connections data
-
-	db VERMILION_CITY
-	dw VermilionCityBlocks - 3 + (VERMILION_CITY_WIDTH * 2) ; connection strip location
-	dw $C6E8 + (ROUTE_11_WIDTH + 6) * (-3 + 3) ; current map position
-	db $f, VERMILION_CITY_WIDTH ; bigness, width
-	db (-4 * -2), (VERMILION_CITY_WIDTH * 2) - 1 ; alignments (y, x)
-	dw $C6EE + 2 * VERMILION_CITY_WIDTH ; window
-
-	db ROUTE_12
-	dw Route12Blocks + (ROUTE_12_WIDTH * 24) ; connection strip location
-	dw $C6E5 + (ROUTE_11_WIDTH + 6) * (-3 + 4) ; current map position
-	db $f, ROUTE_12_WIDTH ; bigness, width
-	db (-27 * -2), 0 ; alignments (y, x)
-	dw $C6EF + ROUTE_12_WIDTH ; window
-
-	; end connections data
-
+	WEST_MAP_CONNECTION VERMILION_CITY, VERMILION_CITY_WIDTH, -3, 1, VERMILION_CITY_HEIGHT - 3, VermilionCityBlocks, ROUTE_11_WIDTH
+	EAST_MAP_CONNECTION ROUTE_12, ROUTE_12_WIDTH, -3, 24, ROUTE_12_HEIGHT - 39, Route12Blocks, ROUTE_11_WIDTH
 	dw Route11Object ; objects
 
 Route11Object: ; 0x584e0 (size=127)
@@ -91466,32 +90887,9 @@ Route12_h: ; 0x5866d to 0x5869a (45 bytes) (id=23)
 	db ROUTE_12_HEIGHT, ROUTE_12_WIDTH ; dimensions (y, x)
 	dw Route12Blocks, Route12TextPointers, Route12Script ; blocks, texts, scripts
 	db NORTH | SOUTH | WEST ; connections
-
-	; connections data
-
-	db LAVENDER_TOWN
-	dw LavenderTownBlocks + (LAVENDER_TOWN_HEIGHT - 3) * LAVENDER_TOWN_WIDTH ; connection strip location
-	dw $C6EB + 0 ; current map position
-	db LAVENDER_TOWN_WIDTH, LAVENDER_TOWN_WIDTH ; bigness, width
-	db (LAVENDER_TOWN_HEIGHT * 2) - 1, (0 * -2) ; alignments (y, x)
-	dw $C6E9 + LAVENDER_TOWN_HEIGHT * (LAVENDER_TOWN_WIDTH + 6) ; window
-
-	db ROUTE_13
-	dw Route13Blocks + 17 ; connection strip location
-	dw $C6EB + (ROUTE_12_HEIGHT + 3) * (ROUTE_12_WIDTH + 6) + -3 ; current map position
-	db $d, ROUTE_13_WIDTH ; bigness, width
-	db 0, (-20 * -2) ; alignments (y, x)
-	dw $C6EF + ROUTE_13_WIDTH ; window
-
-	db ROUTE_11
-	dw Route11Blocks - 3 + (ROUTE_11_WIDTH) ; connection strip location
-	dw $C6E8 + (ROUTE_12_WIDTH + 6) * (27 + 3) ; current map position
-	db ROUTE_11_HEIGHT, ROUTE_11_WIDTH ; bigness, width
-	db (27 * -2), (ROUTE_11_WIDTH * 2) - 1 ; alignments (y, x)
-	dw $C6EE + 2 * ROUTE_11_WIDTH ; window
-
-	; end connections data
-
+	NORTH_MAP_CONNECTION LAVENDER_TOWN, LAVENDER_TOWN_WIDTH, LAVENDER_TOWN_HEIGHT, 0, 0, LAVENDER_TOWN_WIDTH, LavenderTownBlocks
+	SOUTH_MAP_CONNECTION ROUTE_13, ROUTE_13_WIDTH, -3, 17, ROUTE_13_WIDTH - 17, Route13Blocks, ROUTE_12_WIDTH, ROUTE_12_HEIGHT
+	WEST_MAP_CONNECTION ROUTE_11, ROUTE_11_WIDTH, 27, 0, ROUTE_11_HEIGHT, Route11Blocks, ROUTE_12_WIDTH
 	dw Route12Object ; objects
 
 Route12Object: ; 0x5869a (size=118)
@@ -91533,25 +90931,8 @@ Route15_h: ; 0x5892c to 0x5894e (34 bytes) (id=26)
 	db ROUTE_15_HEIGHT, ROUTE_15_WIDTH ; dimensions (y, x)
 	dw Route15Blocks, Route15TextPointers, Route15Script ; blocks, texts, scripts
 	db WEST | EAST ; connections
-
-	; connections data
-
-	db FUCHSIA_CITY
-	dw FuchsiaCityBlocks - 3 + (FUCHSIA_CITY_WIDTH * 2) ; connection strip location
-	dw $C6E8 + (ROUTE_15_WIDTH + 6) * (-3 + 3) ; current map position
-	db $f, FUCHSIA_CITY_WIDTH ; bigness, width
-	db (-4 * -2), (FUCHSIA_CITY_WIDTH * 2) - 1 ; alignments (y, x)
-	dw $C6EE + 2 * FUCHSIA_CITY_WIDTH ; window
-
-	db ROUTE_14
-	dw Route14Blocks + (ROUTE_14_WIDTH * 15) ; connection strip location
-	dw $C6E5 + (ROUTE_15_WIDTH + 6) * (-3 + 4) ; current map position
-	db $c, ROUTE_14_WIDTH ; bigness, width
-	db (-18 * -2), 0 ; alignments (y, x)
-	dw $C6EF + ROUTE_14_WIDTH ; window
-
-	; end connections data
-
+	WEST_MAP_CONNECTION FUCHSIA_CITY, FUCHSIA_CITY_WIDTH, -3, 1, FUCHSIA_CITY_HEIGHT - 3, FuchsiaCityBlocks, ROUTE_15_WIDTH
+	EAST_MAP_CONNECTION ROUTE_14, ROUTE_14_WIDTH, -3, 15, ROUTE_14_HEIGHT - 15, Route14Blocks, ROUTE_15_WIDTH
 	dw Route15Object ; objects
 
 Route15Object: ; 0x5894e (size=126)
@@ -91593,25 +90974,8 @@ Route16_h: ; 0x58ada to 0x58afc (34 bytes) (id=27)
 	db ROUTE_16_HEIGHT, ROUTE_16_WIDTH ; dimensions (y, x)
 	dw Route16Blocks, Route16TextPointers, Route16Script ; blocks, texts, scripts
 	db SOUTH | EAST ; connections
-
-	; connections data
-
-	db ROUTE_17
-	dw Route17Blocks ; connection strip location
-	dw $C6EB + (ROUTE_16_HEIGHT + 3) * (ROUTE_16_WIDTH + 6) + 0 ; current map position
-	db ROUTE_17_WIDTH, ROUTE_17_WIDTH ; bigness, width
-	db 0, (0 * -2) ; alignments (y, x)
-	dw $C6EF + ROUTE_17_WIDTH ; window
-
-	db CELADON_CITY
-	dw CeladonCityBlocks + (CELADON_CITY_WIDTH) ; connection strip location
-	dw $C6E5 + (ROUTE_16_WIDTH + 6) * (-3 + 4) ; current map position
-	db $f, CELADON_CITY_WIDTH ; bigness, width
-	db (-4 * -2), 0 ; alignments (y, x)
-	dw $C6EF + CELADON_CITY_WIDTH ; window
-
-	; end connections data
-
+	SOUTH_MAP_CONNECTION ROUTE_17, ROUTE_17_WIDTH, 0, 0, ROUTE_17_WIDTH, Route17Blocks, ROUTE_16_WIDTH, ROUTE_16_HEIGHT
+	EAST_MAP_CONNECTION CELADON_CITY, CELADON_CITY_WIDTH, -3, 1, CELADON_CITY_HEIGHT - 3, CeladonCityBlocks, ROUTE_16_WIDTH
 	dw Route16Object ; objects
 
 Route16Object: ; 0x58afc (size=136)
@@ -91660,25 +91024,8 @@ Route18_h: ; 0x58c38 to 0x58c5a (34 bytes) (id=29)
 	db ROUTE_18_HEIGHT, ROUTE_18_WIDTH ; dimensions (y, x)
 	dw Route18Blocks, Route18TextPointers, Route18Script ; blocks, texts, scripts
 	db NORTH | EAST ; connections
-
-	; connections data
-
-	db ROUTE_17
-	dw Route17Blocks + (ROUTE_17_HEIGHT - 3) * ROUTE_17_WIDTH ; connection strip location
-	dw $C6EB + 0 ; current map position
-	db ROUTE_17_WIDTH, ROUTE_17_WIDTH ; bigness, width
-	db (ROUTE_17_HEIGHT * 2) - 1, (0 * -2) ; alignments (y, x)
-	dw $C6E9 + ROUTE_17_HEIGHT * (ROUTE_17_WIDTH + 6) ; window
-
-	db FUCHSIA_CITY
-	dw FuchsiaCityBlocks + (FUCHSIA_CITY_WIDTH) ; connection strip location
-	dw $C6E5 + (ROUTE_18_WIDTH + 6) * (-3 + 4) ; current map position
-	db $f, FUCHSIA_CITY_WIDTH ; bigness, width
-	db (-4 * -2), 0 ; alignments (y, x)
-	dw $C6EF + FUCHSIA_CITY_WIDTH ; window
-
-	; end connections data
-
+	NORTH_MAP_CONNECTION ROUTE_17, ROUTE_17_WIDTH, ROUTE_17_HEIGHT, 0, 0, ROUTE_17_WIDTH, Route17Blocks
+	EAST_MAP_CONNECTION FUCHSIA_CITY, FUCHSIA_CITY_WIDTH, -3, 1, FUCHSIA_CITY_HEIGHT - 3, FuchsiaCityBlocks, ROUTE_18_WIDTH
 	dw Route18Object ; objects
 
 Route18Object: ; 0x58c5a (size=66)
@@ -91715,9 +91062,9 @@ Func_58d99: ; 58d99 (16:4d99)
 	dec a
 	jr nz, .asm_58dbe
 	ld a, [W_CURMAP] ; $d35e
-	cp $90
+	cp POKEMONTOWER_3
 	jr c, .asm_58daa
-	cp $95
+	cp LAVENDER_HOUSE_1
 	jr c, .asm_58dd8
 .asm_58daa
 	ld a, [W_ENEMYMONID]
@@ -94126,7 +93473,6 @@ FanClub_h: ; 0x59b64 to 0x59b70 (12 bytes) (id=90)
 	db POKEMON_FAN_CLUB_HEIGHT, POKEMON_FAN_CLUB_WIDTH ; dimensions (y, x)
 	dw FanClubBlocks, FanClubTextPointers, FanClubScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw FanClubObject ; objects
 
 FanClubScript: ; 59b70 (16:5b70)
@@ -94333,7 +93679,6 @@ SilphCo2_h: ; 0x59ce5 to 0x59cf1 (12 bytes) (id=207)
 	db SILPH_CO_2F_HEIGHT, SILPH_CO_2F_WIDTH ; dimensions (y, x)
 	dw SilphCo2Blocks, SilphCo2TextPointers, SilphCo2Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw SilphCo2Object ; objects
 
 SilphCo2Script: ; 59cf1 (16:5cf1)
@@ -94623,7 +93968,6 @@ SilphCo3_h: ; 0x59f4f to 0x59f5b (12 bytes) (id=208)
 	db SILPH_CO_3F_HEIGHT, SILPH_CO_3F_WIDTH ; dimensions (y, x)
 	dw SilphCo3Blocks, SilphCo3TextPointers, SilphCo3Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw SilphCo3Object ; objects
 
 SilphCo3Script: ; 59f5b (16:5f5b)
@@ -94809,7 +94153,6 @@ SilphCo10_h: ; 0x5a12d to 0x5a139 (12 bytes) (id=234)
 	db SILPH_CO_10F_HEIGHT, SILPH_CO_10F_WIDTH ; dimensions (y, x)
 	dw SilphCo10Blocks, SilphCo10TextPointers, SilphCo10Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw SilphCo10Object ; objects
 
 SilphCo10Script: ; 5a139 (16:6139)
@@ -94976,7 +94319,6 @@ Lance_h: ; 0x5a2a2 to 0x5a2ae (12 bytes) (id=113)
 	db LANCES_ROOM_HEIGHT, LANCES_ROOM_WIDTH ; dimensions (y, x)
 	dw LanceBlocks, LanceTextPointers, LanceScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw LanceObject ; objects
 
 LanceScript: ; 5a2ae (16:62ae)
@@ -95172,7 +94514,6 @@ HallofFameRoom_h: ; 0x5a492 to 0x5a49e (12 bytes) (id=118)
 	db HALL_OF_FAME_HEIGHT, HALL_OF_FAME_WIDTH ; dimensions (y, x)
 	dw HallofFameRoomBlocks, HallofFameRoomTextPointers, HallofFameRoomScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw HallofFameRoomObject ; objects
 
 HallofFameRoomScript: ; 5a49e (16:649e)
@@ -95368,9 +94709,9 @@ ViridianForestexitBlocks: ; 5c090 (17:4090)
 
 RedsHouse2F_h: ; 5c0a4 (17:40a4)
 	db $04 ; tileset
-	db $04,$04 ; dimensions
+	db REDS_HOUSE_2F_HEIGHT, REDS_HOUSE_2F_WIDTH ; dimensions
 	dw RedsHouse2FBlocks, RedsHouse2FTextPointers, RedsHouse2FScript
-	db 0 ; no connections
+	db $00 ; no connections
 	dw RedsHouse2FObject
 
 RedsHouse2FScript: ; 5c0b0 (17:40b0)
@@ -95402,14 +94743,14 @@ RedsHouse2FObject: ; 0x5c0d0 ?
 	db $0A ; border tile
 
 	db 1 ; warps
-	db 1,7,2,$25
+	db 1, 7, 2, REDS_HOUSE_1F
 
 	db 0 ; signs
 
 	db 0 ; people
 
-	dw $C6EF + 4 + (4 + 6) * 0 + 3
-	db 1,7
+	; warp-to
+	EVENT_DISP REDS_HOUSE_2F_WIDTH, 1, 7
 
 Func_5c0dc: ; 5c0dc (17:40dc)
 	ld a, $4b
@@ -95425,7 +94766,6 @@ MuseumF1_h: ; 0x5c0eb to 0x5c0f7 (12 bytes) (id=52)
 	db MUSEUM_1F_HEIGHT, MUSEUM_1F_WIDTH ; dimensions (y, x)
 	dw MuseumF1Blocks, MuseumF1TextPointers, MuseumF1Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw MuseumF1Object ; objects
 
 MuseumF1Script: ; 5c0f7 (17:40f7)
@@ -95713,7 +95053,6 @@ MuseumF2_h: ; 0x5c30b to 0x5c317 (12 bytes) (id=53)
 	db MUSEUM_2F_HEIGHT, MUSEUM_2F_WIDTH ; dimensions (y, x)
 	dw MuseumF2Blocks, MuseumF2TextPointers, MuseumF2Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw MuseumF2Object ; objects
 
 MuseumF2Script: ; 5c317 (17:4317)
@@ -95781,7 +95120,6 @@ PewterGym_h: ; 0x5c37b to 0x5c387 (12 bytes) (id=54)
 	db PEWTER_GYM_HEIGHT, PEWTER_GYM_WIDTH ; dimensions (y, x)
 	dw PewterGymBlocks, PewterGymTextPointers, PewterGymScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw PewterGymObject ; objects
 
 PewterGymScript: ; 5c387 (17:4387)
@@ -96043,7 +95381,6 @@ PewterPokecenter_h: ; 0x5c57b to 0x5c587 (12 bytes) (id=58)
 	db PEWTER_POKECENTER_HEIGHT, PEWTER_POKECENTER_WIDTH ; dimensions (y, x)
 	dw PewterPokecenterBlocks, PewterPokecenterTextPointers, PewterPokecenterScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw PewterPokecenterObject ; objects
 
 PewterPokecenterScript: ; 5c587 (17:4587)
@@ -96146,7 +95483,6 @@ CeruleanPokecenter_h: ; 0x5c639 to 0x5c645 (12 bytes) (id=64)
 	db CERULEAN_POKECENTER_HEIGHT, CERULEAN_POKECENTER_WIDTH ; dimensions (y, x)
 	dw CeruleanPokecenterBlocks, CeruleanPokecenterTextPointers, CeruleanPokecenterScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw CeruleanPokecenterObject ; objects
 
 CeruleanPokecenterScript: ; 5c645 (17:4645)
@@ -96200,7 +95536,6 @@ CeruleanGym_h: ; 0x5c6a7 to 0x5c6b3 (12 bytes) (id=65)
 	db CERULEAN_GYM_HEIGHT, CERULEAN_GYM_WIDTH ; dimensions (y, x)
 	dw CeruleanGymBlocks, CeruleanGymTextPointers, CeruleanGymScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw CeruleanGymObject ; objects
 
 CeruleanGymScript: ; 5c6b3 (17:46b3)
@@ -96452,7 +95787,6 @@ CeruleanMart_h: ; 0x5c889 to 0x5c895 (12 bytes) (id=67)
 	db CERULEAN_MART_HEIGHT, CERULEAN_MART_WIDTH ; dimensions (y, x)
 	dw CeruleanMartBlocks, CeruleanMartTextPointers, CeruleanMartScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw CeruleanMartObject ; objects
 
 CeruleanMartScript: ; 5c895 (17:4895)
@@ -96494,7 +95828,6 @@ LavenderPokecenter_h: ; 0x5c8ce to 0x5c8da (12 bytes) (id=141)
 	db LAVENDER_POKECENTER_HEIGHT, LAVENDER_POKECENTER_WIDTH ; dimensions (y, x)
 	dw LavenderPokecenterBlocks, LavenderPokecenterTextPointers, LavenderPokecenterScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw LavenderPokecenterObject ; objects
 
 LavenderPokecenterScript: ; 5c8da (17:48da)
@@ -96545,7 +95878,6 @@ LavenderMart_h: ; 0x5c920 to 0x5c92c (12 bytes) (id=150)
 	db LAVENDER_MART_HEIGHT, LAVENDER_MART_WIDTH ; dimensions (y, x)
 	dw LavenderMartBlocks, LavenderMartTextPointers, LavenderMartScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw LavenderMartObject ; objects
 
 LavenderMartScript: ; 5c92c (17:492c)
@@ -96605,7 +95937,6 @@ VermilionPokecenter_h: ; 0x5c983 to 0x5c98f (12 bytes) (id=89)
 	db VERMILION_POKECENTER_HEIGHT, VERMILION_POKECENTER_WIDTH ; dimensions (y, x)
 	dw VermilionPokecenterBlocks, VermilionPokecenterTextPointers, VermilionPokecenterScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw VermilionPokecenterObject ; objects
 
 VermilionPokecenterScript: ; 5c98f (17:498f)
@@ -96656,7 +95987,6 @@ VermilionMart_h: ; 0x5c9d5 to 0x5c9e1 (12 bytes) (id=91)
 	db VERMILION_MART_HEIGHT, VERMILION_MART_WIDTH ; dimensions (y, x)
 	dw VermilionMartBlocks, VermilionMartTextPointers, VermilionMartScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw VermilionMartObject ; objects
 
 VermilionMartScript: ; 5c9e1 (17:49e1)
@@ -96698,7 +96028,6 @@ VermilionGym_h: ; 0x5ca1a to 0x5ca26 (12 bytes) (id=92)
 	db VERMILION_GYM_HEIGHT, VERMILION_GYM_WIDTH ; dimensions (y, x)
 	dw VermilionGymBlocks, VermilionGymTextPointers, VermilionGymScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw VermilionGymObject ; objects
 
 VermilionGymScript: ; 5ca26 (17:4a26)
@@ -97002,7 +96331,6 @@ CopycatsHouseF2_h: ; 0x5cc65 to 0x5cc71 (12 bytes) (id=176)
 	db COPYCATS_HOUSE_2F_HEIGHT, COPYCATS_HOUSE_2F_WIDTH ; dimensions (y, x)
 	dw CopycatsHouseF2Blocks, CopycatsHouseF2TextPointers, CopycatsHouseF2Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw CopycatsHouseF2Object ; objects
 
 CopycatsHouseF2Script: ; 5cc71 (17:4c71)
@@ -97135,7 +96463,6 @@ FightingDojo_h: ; 0x5cd51 to 0x5cd5d (12 bytes) (id=177)
 	db FIGHTINGDOJO_HEIGHT, FIGHTINGDOJO_WIDTH ; dimensions (y, x)
 	dw FightingDojoBlocks, FightingDojoTextPointers, FightingDojoScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw FightingDojoObject ; objects
 
 FightingDojoScript: ; 5cd5d (17:4d5d)
@@ -97506,7 +96833,6 @@ SaffronGym_h: ; 0x5d001 to 0x5d00d (12 bytes) (id=178)
 	db SAFFRON_GYM_HEIGHT, SAFFRON_GYM_WIDTH ; dimensions (y, x)
 	dw SaffronGymBlocks, SaffronGymTextPointers, SaffronGymScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw SaffronGymObject ; objects
 
 SaffronGymScript: ; 5d00d (17:500d)
@@ -97966,7 +97292,6 @@ SaffronMart_h: ; 0x5d3fd to 0x5d409 (12 bytes) (id=180)
 	db SAFFRON_MART_HEIGHT, SAFFRON_MART_WIDTH ; dimensions (y, x)
 	dw SaffronMartBlocks, SaffronMartTextPointers, SaffronMartScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw SaffronMartObject ; objects
 
 SaffronMartScript: ; 5d409 (17:5409)
@@ -98008,7 +97333,6 @@ SilphCo1_h: ; 0x5d442 to 0x5d44e (12 bytes) (id=181)
 	db SILPH_CO_1F_HEIGHT, SILPH_CO_1F_WIDTH ; dimensions (y, x)
 	dw SilphCo1Blocks, SilphCo1TextPointers, SilphCo1Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw SilphCo1Object ; objects
 
 SilphCo1Script: ; 5d44e (17:544e)
@@ -98062,7 +97386,6 @@ SaffronPokecenter_h: ; 0x5d529 to 0x5d535 (12 bytes) (id=182)
 	db SAFFRON_POKECENTER_HEIGHT, SAFFRON_POKECENTER_WIDTH ; dimensions (y, x)
 	dw SaffronPokecenterBlocks, SaffronPokecenterTextPointers, SaffronPokecenterScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw SaffronPokecenterObject ; objects
 
 SaffronPokecenterScript: ; 5d535 (17:5535)
@@ -98113,7 +97436,6 @@ ViridianForestexit_h: ; 0x5d57b to 0x5d587 (12 bytes) (id=47)
 	db VIRIDIAN_FOREST_EXIT_HEIGHT, VIRIDIAN_FOREST_EXIT_WIDTH ; dimensions (y, x)
 	dw ViridianForestexitBlocks, ViridianForestexitTextPointers, ViridianForestexitScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw ViridianForestexitObject ; objects
 
 ViridianForestexitScript: ; 5d587 (17:5587)
@@ -98157,7 +97479,6 @@ Route2Gate_h: ; 0x5d5c8 to 0x5d5d4 (12 bytes) (id=49)
 	db ROUTE_2_GATE_HEIGHT, ROUTE_2_GATE_WIDTH ; dimensions (y, x)
 	dw Route2GateBlocks, Route2GateTextPointers, Route2GateScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw Route2GateObject ; objects
 
 Route2GateScript: ; 5d5d4 (17:55d4)
@@ -98229,7 +97550,6 @@ ViridianForestEntrance_h: ; 0x5d650 to 0x5d65c (12 bytes) (id=50)
 	db VIRIDIAN_FOREST_ENTRANCE_HEIGHT, VIRIDIAN_FOREST_ENTRANCE_WIDTH ; dimensions (y, x)
 	dw ViridianForestEntranceBlocks, ViridianForestEntranceTextPointers, ViridianForestEntranceScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw ViridianForestEntranceObject ; objects
 
 ViridianForestEntranceScript: ; 5d65c (17:565c)
@@ -98273,7 +97593,6 @@ UndergroundTunnelEntranceRoute5_h: ; 0x5d69d to 0x5d6a9 (12 bytes) (id=71)
 	db PATH_ENTRANCE_ROUTE_5_HEIGHT, PATH_ENTRANCE_ROUTE_5_WIDTH ; dimensions (y, x)
 	dw UndergroundTunnelEntranceRoute5Blocks, UndergroundTunnelEntranceRoute5TextPointers, UndergroundTunnelEntranceRoute5Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw UndergroundTunnelEntranceRoute5Object ; objects
 
 UndergroundTunnelEntranceRoute5Script: ; 5d6a9 (17:56a9)
@@ -98319,7 +97638,6 @@ UndergroundTunnelEntranceRoute6_h: ; 0x5d6e3 to 0x5d6ef (12 bytes) (id=74)
 	db PATH_ENTRANCE_ROUTE_6_HEIGHT, PATH_ENTRANCE_ROUTE_6_WIDTH ; dimensions (y, x)
 	dw UndergroundTunnelEntranceRoute6Blocks, UndergroundTunnelEntranceRoute6TextPointers, UndergroundTunnelEntranceRoute6Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw UndergroundTunnelEntranceRoute6Object ; objects
 
 UndergroundTunnelEntranceRoute6Script: ; 5d6ef (17:56ef)
@@ -98330,10 +97648,8 @@ UndergroundTunnelEntranceRoute6Script: ; 5d6ef (17:56ef)
 UndergroundTunnelEntranceRoute6TextPointers: ; 5d6f7 (17:56f7)
 	dw UndergroundTunnelEntranceRoute6Text1
 
-;XXX wtf? syntax error on TX_FAR?
 UndergroundTunnelEntranceRoute6Text1: ; 5d6f9 (17:56f9)
-	db $17, $cb, $40, $23
-	;TX_FAR _UndergroundTunnelEntranceRoute6Text1 ; $cb, $40, $23
+	TX_FAR _UndergrdTunnelEntRoute6Text1
 	db "@"
 
 UndergroundTunnelEntranceRoute6Object: ; 0x5d6fe (size=34)
@@ -98359,7 +97675,6 @@ UndergroundPathEntranceRoute7_h: ; 0x5d720 to 0x5d72c (12 bytes) (id=77)
 	db PATH_ENTRANCE_ROUTE_7_HEIGHT, PATH_ENTRANCE_ROUTE_7_WIDTH ; dimensions (y, x)
 	dw UndergroundTunnelEntranceRoute7Blocks, UndergroundPathEntranceRoute7TextPointers, UndergroundPathEntranceRoute7Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw UndergroundPathEntranceRoute7Object ; objects
 
 UndergroundPathEntranceRoute7Script: ; 5d72c (17:572c)
@@ -98371,8 +97686,7 @@ UndergroundPathEntranceRoute7TextPointers: ; 5d734 (17:5734)
 	dw UndergroundPathEntranceRoute7Text1
 
 UndergroundPathEntranceRoute7Text1: ; 5d736 (17:5736)
-	db $17, $ff, $40, $23
-	;TX_FAR _UndergroundPathEntranceRoute7Text1
+	TX_FAR _UndergroundPathEntRoute7Text1
 	db "@"
 
 UndergroundPathEntranceRoute7Object: ; 0x5d73b (size=34)
@@ -98398,7 +97712,6 @@ UndergroundPathEntranceRoute7Copy_h: ; 5d75d (17:575d)
 	db PATH_ENTRANCE_ROUTE_7_HEIGHT, PATH_ENTRANCE_ROUTE_7_WIDTH ; dimensions (y, x)
 	dw UndergroundTunnelEntranceRoute7CopyBlocks, UndergroundPathEntranceRoute7CopyTextPointers, UndergroundPathEntranceRoute7CopyScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw UndergroundPathEntranceRoute7CopyObject ; objects
 
 UndergroundPathEntranceRoute7CopyScript: ; 5d769 (17:5769)
@@ -98450,7 +97763,6 @@ SilphCo9_h: ; 0x5d7af to 0x5d7bb (12 bytes) (id=233)
 	db SILPH_CO_9F_HEIGHT, SILPH_CO_9F_WIDTH ; dimensions (y, x)
 	dw SilphCo9Blocks, SilphCo9TextPointers, SilphCo9Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw SilphCo9Object ; objects
 
 SilphCo9Script: ; 5d7bb (17:57bb)
@@ -98735,7 +98047,6 @@ VictoryRoad1_h: ; 0x5d9fe to 0x5da0a (12 bytes) (id=108)
 	db VICTORY_ROAD_1_HEIGHT, VICTORY_ROAD_1_WIDTH ; dimensions (y, x)
 	dw VictoryRoad1Blocks, VictoryRoad1TextPointers, VictoryRoad1Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw VictoryRoad1Object ; objects
 
 VictoryRoad1Script: ; 5da0a (17:5a0a)
@@ -98895,8 +98206,8 @@ Func_5db79: ; 5db79 (17:5b79)
 	ld a, $4
 	jp Func_3ef5
 
-UnnamedText_5db81: ; 5db81 (17:5b81)
-	TX_FAR _UnnamedText_5db81
+RedBedroomSNESText: ; 5db81 (17:5b81)
+	TX_FAR _RedBedroomSNESText
 	db "@"
 
 Func_5db86: ; 5db86 (17:5b86)
@@ -98904,48 +98215,50 @@ Func_5db86: ; 5db86 (17:5b86)
 	ld a, $3
 	jp Func_3ef5
 
-Func_5db8e: ; 5db8e (17:5b8e)
+Route15UpstairsLeftBinoculars: ; 5db8e (17:5b8e)
 	db $fc
 	ld a, [$c109]
-	cp $4
+	cp $4 ; i
 	ret nz
 	call EnableAutoTextBoxDrawing
-	ld a, $a
+	ld a, $a ; text id Route15UpstairsBinocularsText
 	call Func_3ef5
 	ld a, ARTICUNO
 	ld [$cf91], a
 	call PlayCry
-	jp Func_5dbd9
+	jp DisplayMonFrontSpriteInBox
 
-UnnamedText_5dba8: ; 5dba8 (17:5ba8)
-	TX_FAR _UnnamedText_5dba8
+Route15UpstairsBinocularsText: ; 5dba8 (17:5ba8)
+	TX_FAR _Route15UpstairsBinocularsText
 	db "@"
 
 	ld a, $b7
 	ld [$cf91], a
-	call Func_5dbd9
+	call DisplayMonFrontSpriteInBox
 	call EnableAutoTextBoxDrawing
 	ld a, $9
 	call Func_3ef5
 	ret
 
-UnnamedText_5dbbe: ; 5dbbe (17:5bbe)
-	TX_FAR _UnnamedText_5dbbe
+AerodactylFossilText: ; 5dbbe (17:5bbe)
+	TX_FAR _AerodactylFossilText
 	db "@"
 
 	ld a, $b6
 	ld [$cf91], a
-	call Func_5dbd9
+	call DisplayMonFrontSpriteInBox
 	call EnableAutoTextBoxDrawing
 	ld a, $b
 	call Func_3ef5
 	ret
 
-UnnamedText_5dbd4: ; 5dbd4 (17:5bd4)
-	TX_FAR _UnnamedText_5dbd4
+KabutopsFossilText: ; 5dbd4 (17:5bd4)
+	TX_FAR _KabutopsFossilText
 	db "@"
 
-Func_5dbd9: ; 5dbd9 (17:5bd9)
+DisplayMonFrontSpriteInBox: ; 5dbd9 (17:5bd9)
+; Displays a pokemon's front sprite in a pop-up window.
+; [$cf91] = pokemon interal id number
 	ld a, $1
 	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
 	call Delay3
@@ -98982,10 +98295,10 @@ Func_5dc1a: ; 5dc1a (17:5c1a)
 	call Func_3ef5
 	ret
 
-UnnamedText_5dc29: ; 5dc29 (17:5c29)
+LinkCableHelp: ; 5dc29 (17:5c29)
 	db $08 ; asm
 	call SaveScreenTilesToBuffer1
-	ld hl, UnnamedText_5dc9e
+	ld hl, LinkCableHelpText1
 	call PrintText
 	xor a
 	ld [W_ANIMATIONID], a
@@ -99009,7 +98322,7 @@ UnnamedText_5dc29: ; 5dc29 (17:5c29)
 	ld hl, $c3ca
 	ld de, HowToLinkText
 	call PlaceString
-	ld hl, UnnamedText_5dca3
+	ld hl, LinkCableHelpText2
 	call PrintText
 	call HandleMenuInput
 	bit 1, a
@@ -99019,7 +98332,7 @@ UnnamedText_5dc29: ; 5dc29 (17:5c29)
 	jr z, .asm_5dc93 ; 0x5dc7b $16
 	ld hl, $d730
 	res 6, [hl]
-	ld hl, PointerTable_5dcd8
+	ld hl, LinkCableInfoTexts
 	add a
 	ld d, $0
 	ld e, a
@@ -99035,38 +98348,38 @@ UnnamedText_5dc29: ; 5dc29 (17:5c29)
 	call LoadScreenTilesFromBuffer1
 	jp TextScriptEnd
 
-UnnamedText_5dc9e: ; 5dc9e (17:5c9e)
-	TX_FAR _UnnamedText_5dc9e
+LinkCableHelpText1: ; 5dc9e (17:5c9e)
+	TX_FAR _LinkCableHelpText1
 	db "@"
 
-UnnamedText_5dca3: ; 5dca3 (17:5ca3)
-	TX_FAR _UnnamedText_5dca3
+LinkCableHelpText2: ; 5dca3 (17:5ca3)
+	TX_FAR _LinkCableHelpText2
 	db "@"
 
 HowToLinkText: ; 5dca8 (17:5ca8)
 	db "HOW TO LINK",$4e,"COLOSSEUM",$4e,"TRADE CENTER",$4e,"STOP READING@"
 
-PointerTable_5dcd8: ; 5dcd8 (17:5cd8)
-	dw UnnamedText_5dcde
-	dw UnnamedText_5dce3
-	dw UnnamedText_5dce8
+LinkCableInfoTexts: ; 5dcd8 (17:5cd8)
+	dw LinkCableInfoText1
+	dw LinkCableInfoText2
+	dw LinkCableInfoText3
 
-UnnamedText_5dcde: ; 5dcde (17:5cde)
-	TX_FAR _UnnamedText_5dcde
+LinkCableInfoText1: ; 5dcde (17:5cde)
+	TX_FAR _LinkCableInfoText1
 	db "@"
 
-UnnamedText_5dce3: ; 5dce3 (17:5ce3)
-	TX_FAR _UnnamedText_5dce3
+LinkCableInfoText2: ; 5dce3 (17:5ce3)
+	TX_FAR _LinkCableInfoText2
 	db "@"
 
-UnnamedText_5dce8: ; 5dce8 (17:5ce8)
-	TX_FAR _UnnamedText_5dce8
+LinkCableInfoText3: ; 5dce8 (17:5ce8)
+	TX_FAR _LinkCableInfoText3
 	db "@"
 
-UnnamedText_5dced: ; 5dced (17:5ced)
+ViridianSchoolBlackboard: ; 5dced (17:5ced)
 	db $08 ; asm
 	call SaveScreenTilesToBuffer1
-	ld hl, UnnamedText_5dda2
+	ld hl, ViridianSchoolBlackboardText1
 	call PrintText
 	xor a
 	ld [W_ANIMATIONID], a
@@ -99092,11 +98405,11 @@ UnnamedText_5dced: ; 5dced (17:5ced)
 	ld hl, $c3ce
 	ld de, StatusAilmentText2
 	call PlaceString
-	ld hl, UnnamedText_5dda7
+	ld hl, ViridianSchoolBlackboardText2
 	call PrintText
 	call HandleMenuInput
 	bit 1, a
-	jr nz, .asm_5dd97
+	jr nz, .exitBlackboard
 	bit 4, a
 	jr z, .asm_5dd5c
 	ld a, $2
@@ -99126,10 +98439,10 @@ UnnamedText_5dced: ; 5dced (17:5ced)
 	ld a, [W_ANIMATIONID]
 	add b
 	cp $5
-	jr z, .asm_5dd97
+	jr z, .exitBlackboard
 	ld hl, $d730
 	res 6, [hl]
-	ld hl, PointerTable_5ddcc
+	ld hl, ViridianBlackboardStatusPointers
 	add a
 	ld d, $0
 	ld e, a
@@ -99139,18 +98452,18 @@ UnnamedText_5dced: ; 5dced (17:5ced)
 	ld l, a
 	call PrintText
 	jp .asm_5dd15
-.asm_5dd97
+.exitBlackboard
 	ld hl, $d730
 	res 6, [hl]
 	call LoadScreenTilesFromBuffer1
 	jp TextScriptEnd
 
-UnnamedText_5dda2: ; 5dda2 (17:5da2)
-	TX_FAR _UnnamedText_5dda2
+ViridianSchoolBlackboardText1: ; 5dda2 (17:5da2)
+	TX_FAR _ViridianSchoolBlackboardText1
 	db "@"
 
-UnnamedText_5dda7: ; 5dda7 (17:5da7)
-	TX_FAR _UnnamedText_5dda7
+ViridianSchoolBlackboardText2: ; 5dda7 (17:5da7)
+	TX_FAR _ViridianSchoolBlackboardText2
 	db "@"
 
 StatusAilmentText1: ; 5ddac (17:5dac)
@@ -99162,32 +98475,32 @@ StatusAilmentText2: ; 5ddbb (17:5dbb)
 	db " BRN",$4e
 	db " FRZ",$4e
 	db " QUIT@@"
-	
-PointerTable_5ddcc: ; 5ddcc (17:5ddc)
-	dw UnnamedText_5ddd6
-	dw UnnamedText_5dddb
-	dw UnnamedText_5dde0
-	dw UnnamedText_5dde5
-	dw UnnamedText_5ddea
 
-UnnamedText_5ddd6: ; 5ddd6 (17:5dd6)
-	TX_FAR _UnnamedText_5ddd6
+ViridianBlackboardStatusPointers: ; 5ddcc (17:5ddc)
+	dw ViridianBlackboardSleepText
+	dw ViridianBlackboardPoisonText
+	dw ViridianBlackbaordPrlzText
+	dw ViridianBlackboardBurnText
+	dw ViridianBlackboardFrozenText
+
+ViridianBlackboardSleepText: ; 5ddd6 (17:5dd6)
+	TX_FAR _ViridianBlackboardSleepText
 	db "@"
 
-UnnamedText_5dddb: ; 5dddb (17:5ddb)
-	TX_FAR _UnnamedText_5dddb
+ViridianBlackboardPoisonText: ; 5dddb (17:5ddb)
+	TX_FAR _ViridianBlackboardPoisonText
 	db "@"
 
-UnnamedText_5dde0: ; 5dde0 (17:5de0)
-	TX_FAR _UnnamedText_5dde0
+ViridianBlackbaordPrlzText: ; 5dde0 (17:5de0)
+	TX_FAR _ViridianBlackbaordPrlzText
 	db "@"
 
-UnnamedText_5dde5: ; 5dde5 (17:5de5)
-	TX_FAR _UnnamedText_5dde5
+ViridianBlackboardBurnText: ; 5dde5 (17:5de5)
+	TX_FAR _ViridianBlackboardBurnText
 	db "@"
 
-UnnamedText_5ddea: ; 5ddea (17:5dea)
-	TX_FAR _UnnamedText_5ddea
+ViridianBlackboardFrozenText: ; 5ddea (17:5dea)
+	TX_FAR _ViridianBlackboardFrozenText
 	db "@"
 
 Func_5ddef: ; 5ddef (17:5def)
@@ -99195,8 +98508,8 @@ Func_5ddef: ; 5ddef (17:5def)
 	ld a, $26
 	jp Func_3ef5
 
-UnnamedText_5ddf7: ; 5ddf7 (17:5df7)
-	TX_FAR _UnnamedText_5ddf7
+VermilionGymTrashText: ; 5ddf7 (17:5df7)
+	TX_FAR _VermilionGymTrashText
 	db "@"
 
 	call EnableAutoTextBoxDrawing
@@ -99272,8 +98585,8 @@ UnnamedText_5ddf7: ; 5ddf7 (17:5df7)
 Unknown_5de7d: ; 5de7d (17:5e7d)
 INCBIN "baserom.gbc",$5de7d,$5dec8 - $5de7d
 
-UnnamedText_5dec8: ; 5dec8 (17:5ec8)
-	TX_FAR _UnnamedText_5dec8
+VermilionGymTrashSuccesText1: ; 5dec8 (17:5ec8)
+	TX_FAR _VermilionGymTrashSuccesText1
 	db $08 ; asm
 	call WaitForSoundToFinish
 	ld a, $9d
@@ -99281,8 +98594,8 @@ UnnamedText_5dec8: ; 5dec8 (17:5ec8)
 	call WaitForSoundToFinish
 	jp TextScriptEnd
 
-UnnamedText_5dedb: ; 5dedb (17:5edb)
-	TX_FAR _UnnamedText_5dedb
+VermilionGymTrashSuccesText2: ; 5dedb (17:5edb)
+	TX_FAR _VermilionGymTrashSuccesText2
 	db "@"
 
 UnnamedText_5dee0: ; 5dee0 (17:5ee0)
@@ -99293,8 +98606,8 @@ UnnamedText_5dee0: ; 5dee0 (17:5ee0)
 	call WaitForSoundToFinish
 	jp TextScriptEnd
 
-UnnamedText_5deef: ; 5deef (17:5eef)
-	TX_FAR _UnnamedText_5deef
+VermilionGymTrashSuccesText3: ; 5deef (17:5eef)
+	TX_FAR _VermilionGymTrashSuccesText3
 	db $08 ; asm
 	call WaitForSoundToFinish
 	ld a, $ad
@@ -99302,8 +98615,8 @@ UnnamedText_5deef: ; 5deef (17:5eef)
 	call WaitForSoundToFinish
 	jp TextScriptEnd
 
-UnnamedText_5df02: ; 5df02 (17:5f02)
-	TX_FAR _UnnamedText_5df02
+VermilionGymTrashFailText: ; 5df02 (17:5f02)
+	TX_FAR _VermilionGymTrashFailText
 	db $08 ; asm
 	call WaitForSoundToFinish
 	ld a, $a5
@@ -99319,7 +98632,10 @@ ViridianForestBlocks: ; 60000 (18:4000)
 UndergroundPathNSBlocks: ; 60198 (18:4198)
 	INCBIN "maps/undergroundpathns.blk"
 
-	INCBIN "maps/unusedblocks601f8.blk"
+UndergroundPathWEBlocks: ; 601f4 (18:41f4)
+	INCBIN "maps/undergroundpathwe.blk"
+
+	INCBIN "maps/unusedblocks60258.blk"
 
 SSAnne10Blocks: ; 603c0 (18:43c0)
 SSAnne9Blocks: ; 603c0 (18:43c0)
@@ -99330,7 +98646,6 @@ PokemonTower1_h: ; 0x60420 to 0x6042c (12 bytes) (id=142)
 	db POKEMONTOWER_1_HEIGHT, POKEMONTOWER_1_WIDTH ; dimensions (y, x)
 	dw PokemonTower1Blocks, PokemonTower1TextPointers, PokemonTower1Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw PokemonTower1Object ; objects
 
 PokemonTower1Script: ; 6042c (18:442c)
@@ -99393,7 +98708,6 @@ PokemonTower2_h: ; 0x604e6 to 0x604f2 (12 bytes) (id=143)
 	db POKEMONTOWER_2_HEIGHT, POKEMONTOWER_2_WIDTH ; dimensions (y, x)
 	dw PokemonTower2Blocks, PokemonTower2TextPointers, PokemonTower2Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw PokemonTower2Object ; objects
 
 PokemonTower2Script: ; 604f2 (18:44f2)
@@ -99602,7 +98916,6 @@ PokemonTower3_h: ; 0x606c0 to 0x606cc (12 bytes) (id=144)
 	db POKEMONTOWER_3_HEIGHT, POKEMONTOWER_3_WIDTH ; dimensions (y, x)
 	dw PokemonTower3Blocks, PokemonTower3TextPointers, PokemonTower3Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw PokemonTower3Object ; objects
 
 PokemonTower3Script: ; 606cc (18:46cc)
@@ -99735,7 +99048,6 @@ PokemonTower4_h: ; 0x607ea to 0x607f6 (12 bytes) (id=145)
 	db POKEMONTOWER_4_HEIGHT, POKEMONTOWER_4_WIDTH ; dimensions (y, x)
 	dw PokemonTower4Blocks, PokemonTower4TextPointers, PokemonTower4Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw PokemonTower4Object ; objects
 
 PokemonTower4Script: ; 607f6 (18:47f6)
@@ -99873,7 +99185,6 @@ PokemonTower5_h: ; 0x60926 to 0x60932 (12 bytes) (id=146)
 	db POKEMONTOWER_5_HEIGHT, POKEMONTOWER_5_WIDTH ; dimensions (y, x)
 	dw PokemonTower5Blocks, PokemonTower5TextPointers, PokemonTower5Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw PokemonTower5Object ; objects
 
 PokemonTower5Script: ; 60932 (18:4932)
@@ -100087,7 +99398,6 @@ PokemonTower6_h: ; 0x60ae3 to 0x60aef (12 bytes) (id=147)
 	db POKEMONTOWER_6_HEIGHT, POKEMONTOWER_6_WIDTH ; dimensions (y, x)
 	dw PokemonTower6Blocks, PokemonTower6TextPointers, PokemonTower6Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw PokemonTower6Object ; objects
 
 PokemonTower6Script: ; 60aef (18:4aef)
@@ -100336,7 +99646,6 @@ PokemonTower7_h: ; 0x60cf9 to 0x60d05 (12 bytes) (id=148)
 	db POKEMONTOWER_7_HEIGHT, POKEMONTOWER_7_WIDTH ; dimensions (y, x)
 	dw PokemonTower7Blocks, PokemonTower7TextPointers, PokemonTower7Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw PokemonTower7Object ; objects
 
 PokemonTower7Script: ; 60d05 (18:4d05)
@@ -100647,7 +99956,6 @@ CeladonMart1_h: ; 0x60f7a to 0x60f86 (12 bytes) (id=122)
 	db CELADON_MART_1_HEIGHT, CELADON_MART_1_WIDTH ; dimensions (y, x)
 	dw CeladonMart1Blocks, CeladonMart1TextPointers, CeladonMart1Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw CeladonMart1Object ; objects
 
 CeladonMart1Script: ; 60f86 (18:4f86)
@@ -100832,7 +100140,6 @@ ViridianForest_h: ; 0x61101 to 0x6110d (12 bytes) (id=51)
 	db VIRIDIAN_FOREST_HEIGHT, VIRIDIAN_FOREST_WIDTH ; dimensions (y, x)
 	dw ViridianForestBlocks, ViridianForestTextPointers, ViridianForestScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw ViridianForestObject ; objects
 
 ViridianForestScript: ; 6110d (18:510d)
@@ -100926,10 +100233,7 @@ ViridianForestEndBattleText1: ; 6118f (18:518f)
 	db "@"
 
 ViridianForestAfterBattleText1: ; 61194 (18:5194)
-	;TX_FAR _ViridianForestAfterBattleText1
-	db $17
-	dw _ViridianForestAfterBattleText1
-	db BANK(_ViridianForestAfterBattleText1)
+	TX_FAR _ViridianFrstAfterBattleText1
 	db "@"
 
 ViridianForestBattleText2: ; 61199 (18:5199)
@@ -100941,10 +100245,7 @@ ViridianForestEndBattleText2: ; 6119e (18:519e)
 	db "@"
 
 ViridianForestAfterBattleText2: ; 611a3 (18:51a3)
-	;TX_FAR _ViridianForestAfterBattleText2
-	db $17
-	dw _ViridianForestAfterBattleText2
-	db BANK(_ViridianForestAfterBattleText2)
+	TX_FAR _ViridianFrstAfterBattleText2
 	db "@"
 
 ViridianForestBattleText3: ; 611a8 (18:51a8)
@@ -100956,10 +100257,7 @@ ViridianForestEndBattleText3: ; 611ad (18:51ad)
 	db "@"
 
 ViridianForestAfterBattleText3: ; 611b2 (18:51b2)
-	;TX_FAR _ViridianForestAfterBattleText3
-	db $17
-	dw _ViridianForestAfterBattleText3
-	db BANK(_ViridianForestAfterBattleText3)
+	TX_FAR _ViridianFrstAfterBattleText3
 	db "@"
 
 ViridianForestText8: ; 611b7 (18:51b7)
@@ -101032,7 +100330,6 @@ SSAnne1_h: ; 0x61259 to 0x61265 (12 bytes) (id=95)
 	db SS_ANNE_1_HEIGHT, SS_ANNE_1_WIDTH ; dimensions (y, x)
 	dw SSAnne1Blocks, SSAnne1TextPointers, SSAnne1Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw SSAnne1Object ; objects
 
 SSAnne1Script: ; 61265 (18:5265)
@@ -101094,7 +100391,6 @@ SSAnne2_h: ; 0x61393 to 0x6139f (12 bytes) (id=96)
 	db SS_ANNE_2_HEIGHT, SS_ANNE_2_WIDTH ; dimensions (y, x)
 	dw SSAnne2Blocks, SSAnne2TextPointers, SSAnne2Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw SSAnne2Object ; objects
 
 SSAnne2Script: ; 6139f (18:539f)
@@ -101103,7 +100399,7 @@ SSAnne2Script: ; 6139f (18:539f)
 	ld a, [W_SSANNE2CURSCRIPT]
 	jp CallFunctionInTable
 
-Func_613ab: ; 613ab (18:53ab)
+SSAnne2Script_613ab: ; 613ab (18:53ab)
 	xor a
 	ld [wJoypadForbiddenButtonsMask], a
 	ld [W_SSANNE2CURSCRIPT], a
@@ -101219,7 +100515,7 @@ SSAnne2Script1: ; 61430 (18:5430)
 SSAnne2Script2: ; 6146d (18:546d)
 	ld a, [$d057]
 	cp $ff
-	jp z, Func_613ab
+	jp z, SSAnne2Script_613ab
 	call Func_61416
 	ld a, $f0
 	ld [wJoypadForbiddenButtonsMask], a
@@ -101347,7 +100643,6 @@ SSAnne4_h: ; 0x61622 to 0x6162e (12 bytes) (id=98)
 	db SS_ANNE_4_HEIGHT, SS_ANNE_4_WIDTH ; dimensions (y, x)
 	dw SSAnne4Blocks, SSAnne4TextPointers, SSAnne4Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw SSAnne4Object ; objects
 
 SSAnne4Script: ; 6162e (18:562e)
@@ -101387,7 +100682,6 @@ SSAnne5_h: ; 0x616a2 to 0x616ae (12 bytes) (id=99)
 	db SS_ANNE_5_HEIGHT, SS_ANNE_5_WIDTH ; dimensions (y, x)
 	dw SSAnne5Blocks, SSAnne5TextPointers, SSAnne5Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw SSAnne5Object ; objects
 
 SSAnne5Script: ; 616ae (18:56ae)
@@ -101508,7 +100802,6 @@ SSAnne6_h: ; 0x617a7 to 0x617b3 (12 bytes) (id=100)
 	db SS_ANNE_6_HEIGHT, SS_ANNE_6_WIDTH ; dimensions (y, x)
 	dw SSAnne6Blocks, SSAnne6TextPointers, SSAnne6Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw SSAnne6Object ; objects
 
 SSAnne6Script: ; 617b3 (18:57b3)
@@ -101612,7 +100905,6 @@ SSAnne7_h: ; 0x61889 to 0x61895 (12 bytes) (id=101)
 	db SS_ANNE_7_HEIGHT, SS_ANNE_7_WIDTH ; dimensions (y, x)
 	dw SSAnne7Blocks, SSAnne7TextPointers, SSAnne7Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw SSAnne7Object ; objects
 
 SSAnne7Script: ; 61895 (18:5895)
@@ -101736,7 +101028,6 @@ SSAnne8_h: ; 0x6196a to 0x61976 (12 bytes) (id=102)
 	db SS_ANNE_8_HEIGHT, SS_ANNE_8_WIDTH ; dimensions (y, x)
 	dw SSAnne8Blocks, SSAnne8TextPointers, SSAnne8Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw SSAnne8Object ; objects
 
 SSAnne8Script: ; 61976 (18:5976)
@@ -101946,7 +101237,6 @@ SSAnne9_h: ; 0x61b3f to 0x61b4b (12 bytes) (id=103)
 	db SS_ANNE_9_HEIGHT, SS_ANNE_9_WIDTH ; dimensions (y, x)
 	dw SSAnne9Blocks, SSAnne9TextPointers, SSAnne9Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw SSAnne9Object ; objects
 
 SSAnne9Script: ; 61b4b (18:5b4b)
@@ -102219,7 +101509,6 @@ SSAnne10_h: ; 0x61d49 to 0x61d55 (12 bytes) (id=104)
 	db SS_ANNE_10_HEIGHT, SS_ANNE_10_WIDTH ; dimensions (y, x)
 	dw SSAnne10Blocks, SSAnne10TextPointers, SSAnne10Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw SSAnne10Object ; objects
 
 SSAnne10Script: ; 61d55 (18:5d55)
@@ -102472,7 +101761,6 @@ UndergroundPathNS_h: ; 0x61f1a to 0x61f26 (12 bytes) (id=119)
 	db UNDERGROUND_PATH_NS_HEIGHT, UNDERGROUND_PATH_NS_WIDTH ; dimensions (y, x)
 	dw UndergroundPathNSBlocks, UndergroundPathNSTextPointers, UndergroundPathNSScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw UndergroundPathNSObject ; objects
 
 UndergroundPathNSScript: ; 61f26 (18:5f26)
@@ -102499,9 +101787,8 @@ UndergroundPathNSObject: ; 0x61f2a (size=20)
 UndergroundPathWE_h: ; 0x61f3e to 0x61f4a (12 bytes) (id=121)
 	db $0b ; tileset
 	db UNDERGROUND_PATH_WE_HEIGHT, UNDERGROUND_PATH_WE_WIDTH ; dimensions (y, x)
-	dw $41f4, UndergroundPathWETextPointers, UndergroundPathWEScript ; blocks, texts, scripts
+	dw UndergroundPathWEBlocks, UndergroundPathWETextPointers, UndergroundPathWEScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw UndergroundPathWEObject ; objects
 
 UndergroundPathWEScript: ; 61f4a (18:5f4a)
@@ -102530,7 +101817,6 @@ DiglettsCave_h: ; 0x61f62 to 0x61f6e (12 bytes) (id=197)
 	db DIGLETTS_CAVE_HEIGHT, DIGLETTS_CAVE_WIDTH ; dimensions (y, x)
 	dw DiglettsCaveBlocks, DiglettsCaveTextPointers, DiglettsCaveScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw DiglettsCaveObject ; objects
 
 DiglettsCaveScript: ; 61f6e (18:5f6e)
@@ -102562,7 +101848,6 @@ SilphCo11_h: ; 0x620ee to 0x620fa (12 bytes) (id=235)
 	db SILPH_CO_11F_HEIGHT, SILPH_CO_11F_WIDTH ; dimensions (y, x)
 	dw SilphCo11Blocks, SilphCo11TextPointers, SilphCo11Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw SilphCo11Object ; objects
 
 SilphCo11Script: ; 620fa (18:60fa)
@@ -103003,12 +102288,12 @@ GymStatues: ; 62419 (18:6419)
 	db VIRIDIAN_GYM, %10000000
 	db $ff
 
-UnnamedText_62453: ; 62453 (18:6453)
-	TX_FAR _UnnamedText_62453
+GymStatueText1: ; 62453 (18:6453)
+	TX_FAR _GymStatueText1
 	db "@"
 
-UnnamedText_62458: ; 62458 (18:6458)
-	TX_FAR _UnnamedText_62458
+GymStatueText2: ; 62458 (18:6458)
+	TX_FAR _GymStatueText2
 	db "@"
 
 Func_6245d: ; 6245d (18:645d)
@@ -103050,28 +102335,28 @@ PokeCenterMapIDList: ; 6247e (18:647e)
 	db ROCK_TUNNEL_POKECENTER,$08,$1A
 	db $FF
 
-UnnamedText_624a3: ; 624a3 (18:64a3)
-	TX_FAR _UnnamedText_624a3
+ViridianCityPokecenterBenchGuyText: ; 624a3 (18:64a3)
+	TX_FAR _ViridianCityPokecenterGuyText
 	db "@"
 
-UnnamedText_624a8: ; 624a8 (18:64a8)
-	TX_FAR _UnnamedText_624a8
+PewterCityPokecenterBenchGuyText: ; 624a8 (18:64a8)
+	TX_FAR _PewterCityPokecenterGuyText
 	db "@"
 
-UnnamedText_624ad: ; 624ad (18:64ad)
-	TX_FAR _UnnamedText_624ad
+CeruleanCityPokecenterBenchGuyText: ; 624ad (18:64ad)
+	TX_FAR _CeruleanPokecenterGuyText
 	db "@"
 
-UnnamedText_624b2: ; 624b2 (18:64b2)
-	TX_FAR _UnnamedText_624b2
+LavenderCityPokecenterBenchGuyText: ; 624b2 (18:64b2)
+	TX_FAR _LavenderPokecenterGuyText
 	db "@"
 
-UnnamedText_624b7: ; 624b7 (18:64b7)
-	TX_FAR _UnnamedText_624b7
+MtMoonPokecenterBenchGuyText: ; 624b7 (18:64b7)
+	TX_FAR _MtMoonPokecenterBenchGuyText
 	db "@"
 
-UnnamedText_624bc: ; 624bc (18:64bc)
-	TX_FAR _UnnamedText_624bc
+RockTunnelPokecenterBenchGuyText: ; 624bc (18:64bc)
+	TX_FAR _RockTunnelPokecenterGuyText
 	db "@"
 
 UnnamedText_624c1: ; 624c1 (18:64c1)
@@ -103086,58 +102371,58 @@ UnnamedText_624cb: ; 624cb (18:64cb)
 	TX_FAR _UnnamedText_624cb
 	db "@"
 
-UnnamedText_624d0: ; 624d0 (18:64d0)
-	TX_FAR _UnnamedText_624d0
+VermilionCityPokecenterBenchGuyText: ; 624d0 (18:64d0)
+	TX_FAR _VermilionPokecenterGuyText
 	db "@"
 
-UnnamedText_624d5: ; 624d5 (18:64d5)
-	TX_FAR _UnnamedText_624d5
+CeladonCityPokecenterBenchGuyText: ; 624d5 (18:64d5)
+	TX_FAR _CeladonCityPokecenterGuyText
 	db "@"
 
-UnnamedText_624da: ; 624da (18:64da)
-	TX_FAR _UnnamedText_624da
+FuchsiaCityPokecenterBenchGuyText: ; 624da (18:64da)
+	TX_FAR _FuchsiaCityPokecenterGuyText
 	db "@"
 
-UnnamedText_624df: ; 624df (18:64df)
-	TX_FAR _UnnamedText_624df
+CinnabarIslandPokecenterBenchGuyText: ; 624df (18:64df)
+	TX_FAR _CinnabarPokecenterGuyText
 	db "@"
 
-UnnamedText_624e4: ; 624e4 (18:64e4)
-	db $8
+SaffronCityPokecenterBenchGuyText: ; 624e4 (18:64e4)
+	db $8 ; asm
 	ld a, [$d838]
 	bit 7, a
-	ld hl, UnnamedText_624fd
+	ld hl, SaffronCityPokecenterBenchGuyText2
 	jr nz, .asm_624f2 ; 0x624ed $3
-	ld hl, UnnamedText_624f8
+	ld hl, SaffronCityPokecenterBenchGuyText1
 .asm_624f2
 	call PrintText
 	jp TextScriptEnd
 
-UnnamedText_624f8: ; 624f8 (18:64f8)
-	TX_FAR _UnnamedText_624f8
+SaffronCityPokecenterBenchGuyText1: ; 624f8 (18:64f8)
+	TX_FAR _SaffronCityPokecenterGuyText1
 	db "@"
 
-UnnamedText_624fd: ; 624fd (18:64fd)
-	TX_FAR _UnnamedText_624fd
+SaffronCityPokecenterBenchGuyText2: ; 624fd (18:64fd)
+	TX_FAR _SaffronCityPokecenterGuyText2
 	db "@"
 
-UnnamedText_62502: ; 62502 (18:6502)
-	TX_FAR _UnnamedText_62502
+CeladonCityHotelText: ; 62502 (18:6502)
+	TX_FAR _CeladonCityHotelText
 	db "@"
 
 	ret
 	db "@"
-	
+
 	call EnableAutoTextBoxDrawing
 	ld a, $e
 	jp Func_3ef5
 
-UnnamedText_62511: ; 62511 (18:6511)
-	TX_FAR _UnnamedText_62511
+BookcaseText: ; 62511 (18:6511)
+	TX_FAR _BookcaseText
 	db "@"
 
 	ld a, [$c109]
-	cp $4
+	cp $4 ; check to see if player is facing up
 	ret nz
 	call EnableAutoTextBoxDrawing
 	ld a, $1
@@ -104260,7 +103545,7 @@ Func_707b6: ; 707b6 (1c:47b6)
 	ld a, [$c102]
 	ld c, a
 	ld b, $0
-	ld hl, Unknown_70856 ; $4856
+	ld hl, FishingRodGfxProperties ; $4856
 	add hl, bc
 	ld de, $c39c
 	ld bc, $4
@@ -104327,8 +103612,16 @@ UnnamedText_70851: ; 70851 (1c:4851)
 	TX_FAR _UnnamedText_70851
 	db "@"
 
-Unknown_70856: ; 70856 (1c:4856)
-INCBIN "baserom.gbc",$70856,$70866 - $70856
+FishingRodGfxProperties: ; 70856 (1c:4856)
+; specicies how the fishing rod should be drawn on the screen
+; first byte = screen y coordinate
+; second byte = screen x coordinate
+; third byte = tile number
+; fourth byte = sprite properties
+	db $5B, $4C, $FD, $00 ; player facing down
+	db $44, $4C, $FD, $00 ; player facing up
+	db $50, $40, $FE, $00 ; player facing left
+	db $50, $58, $FE, $20 ; player facing right ($20 means "horizontally flip the tile")
 
 Unknown_70866: ; 70866 (1c:4866)
 INCBIN "baserom.gbc",$70866,$7087e - $70866
@@ -106709,7 +106002,7 @@ Func_71b6a: ; 71b6a (1c:5b6a)
 TradeMons: ; 71b7b (1c:5b7b)
 ; givemonster, getmonster, textstring, nickname (11 bytes), 14 bytes total
 	db NIDORINO,  NIDORINA,  0,"TERRY@@@@@@"
-	db ABRA,      MR_MIME,  0,"MARCEL@@@@@"
+	db ABRA,      MR_MIME,   0,"MARCEL@@@@@"
 	db BUTTERFREE,BEEDRILL,  2,"CHIKUCHIKU@"
 	db PONYTA,    SEEL,      0,"SAILOR@@@@@"
 	db SPEAROW,   FARFETCH_D,2,"DUX@@@@@@@@"
@@ -107616,7 +106909,7 @@ PalPacket_72458: ; 72458 (1c:6458)
 
 PalPacket_72468: ; 72468 (1c:6468)
 	db $51,$15,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00
-	
+
 PalPacket_72478: ; 72478 (1c:6478)
 	db $51,$1A,$00,$1B,$00,$1C,$00,$1D,$00,$00,$00,$00,$00,$00,$00,$00
 
@@ -107649,7 +106942,7 @@ PalPacket_72508: ; 72508 (1c:6508)
 
 PalPacket_72518: ; 72518 (1c:6518)
 	db $A1,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00
-	
+
 PalPacket_72528: ; 72528 (1c:6528)
 	db $B9,$01,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00
 
@@ -109401,7 +108694,6 @@ ViridianGym_h: ; 0x74897 to 0x748a3 (12 bytes) (id=45)
 	db VIRIDIAN_GYM_HEIGHT, VIRIDIAN_GYM_WIDTH ; dimensions (y, x)
 	dw ViridianGymBlocks, ViridianGymTextPointers, ViridianGymScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw ViridianGymObject ; objects
 
 ViridianGymScript: ; 748a3 (1d:48a3)
@@ -109548,7 +108840,7 @@ ViridianGymScript3: ; 74988 (1d:4988)
 	jp z, Func_748d6
 	ld a, $f0
 	ld [wJoypadForbiddenButtonsMask], a
-Unknown_74995: ; 74995 (1d:4995)
+ViridianGymScript3_74995: ; 74995 (1d:4995)
 	ld a, $c
 	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
 	call DisplayTextID
@@ -109685,7 +108977,7 @@ ViridianGymText1: ; 74a69 (1d:4a69)
 	jr z, .asm_6de66 ; 0x74a6f
 	bit 0, a
 	jr nz, .asm_9fc95 ; 0x74a73
-	call z, Unknown_74995
+	call z, ViridianGymScript3_74995
 	call DisableWaitingAfterTextDisplay
 	jr .asm_6dff7 ; 0x74a7b
 .asm_9fc95 ; 0x74a7d
@@ -109950,7 +109242,6 @@ PewterMart_h: ; 0x74ca1 to 0x74cad (12 bytes) (id=56)
 	db PEWTER_MART_HEIGHT, PEWTER_MART_WIDTH ; dimensions (y, x)
 	dw PewterMartBlocks, PewterMartTextPointers, PewterMartScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw PewterMartObject ; objects
 
 PewterMartScript: ; 74cad (1d:4cad)
@@ -110007,7 +109298,6 @@ UnknownDungeon1_h: ; 0x74d00 to 0x74d0c (12 bytes) (id=228)
 	db UNKNOWN_DUNGEON_1_HEIGHT, UNKNOWN_DUNGEON_1_WIDTH ; dimensions (y, x)
 	dw UnknownDungeon1Blocks, UnknownDungeon1TextPointers, UnknownDungeon1Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw UnknownDungeon1Object ; objects
 
 UnknownDungeon1Script: ; 74d0c (1d:4d0c)
@@ -110058,7 +109348,6 @@ CeruleanHouse2_h: ; 0x74dfd to 0x74e09 (12 bytes) (id=230)
 	db CERULEAN_HOUSE_2_HEIGHT, CERULEAN_HOUSE_2_WIDTH ; dimensions (y, x)
 	dw CeruleanHouse2Blocks, CeruleanHouse2TextPointers, CeruleanHouse2Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw CeruleanHouse2Object ; objects
 
 CeruleanHouse2Script: ; 74e09 (1d:4e09)
@@ -110333,7 +109622,6 @@ FuchsiaHouse1_h: ; 0x7500c to 0x75018 (12 bytes) (id=153)
 	db FUCHSIA_HOUSE_1_HEIGHT, FUCHSIA_HOUSE_1_WIDTH ; dimensions (y, x)
 	dw FuchsiaHouse1Blocks, FuchsiaHouse1TextPointers, FuchsiaHouse1Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw FuchsiaHouse1Object ; objects
 
 FuchsiaHouse1Script: ; 75018 (1d:5018)
@@ -110380,7 +109668,6 @@ FuchsiaPokecenter_h: ; 0x75057 to 0x75063 (12 bytes) (id=154)
 	db FUCHSIA_POKECENTER_HEIGHT, FUCHSIA_POKECENTER_WIDTH ; dimensions (y, x)
 	dw FuchsiaPokecenterBlocks, FuchsiaPokecenterTextPointers, FuchsiaPokecenterScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw FuchsiaPokecenterObject ; objects
 
 FuchsiaPokecenterScript: ; 75063 (1d:5063)
@@ -110431,7 +109718,6 @@ FuchsiaHouse2_h: ; 0x750a9 to 0x750b5 (12 bytes) (id=155)
 	db FUCHSIA_HOUSE_2_HEIGHT, FUCHSIA_HOUSE_2_WIDTH ; dimensions (y, x)
 	dw FuchsiaHouse2Blocks, FuchsiaHouse2TextPointers, FuchsiaHouse2Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw FuchsiaHouse2Object ; objects
 
 FuchsiaHouse2Script: ; 750b5 (1d:50b5)
@@ -110581,7 +109867,6 @@ SafariZoneEntrance_h: ; 0x751c1 to 0x751cd (12 bytes) (id=156)
 	db SAFARIZONEENTRANCE_HEIGHT, SAFARIZONEENTRANCE_WIDTH ; dimensions (y, x)
 	dw SafariZoneEntranceBlocks, SafariZoneEntranceTextPointers, SafariZoneEntranceScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw SafariZoneEntranceObject ; objects
 
 SafariZoneEntranceScript: ; 751cd (1d:51cd)
@@ -110914,7 +110199,6 @@ FuchsiaGym_h: ; 0x75431 to 0x7543d (12 bytes) (id=157)
 	db FUCHSIA_GYM_HEIGHT, FUCHSIA_GYM_WIDTH ; dimensions (y, x)
 	dw FuchsiaGymBlocks, FuchsiaGymTextPointers, FuchsiaGymScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw FuchsiaGymObject ; objects
 
 FuchsiaGymScript: ; 7543d (1d:543d)
@@ -110961,7 +110245,7 @@ FuchsiaGymScript3: ; 7548a (1d:548a)
 	jp z, Func_75477
 	ld a, $f0
 	ld [wJoypadForbiddenButtonsMask], a
-Unknown_75497: ; 75497 (1d:5497)
+FuchsiaGymScript3_75497: ; 75497 (1d:5497)
 	ld a, $9
 	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
 	call DisplayTextID
@@ -111067,7 +110351,7 @@ FuchsiaGymText1: ; 75534 (1d:5534)
 	jr z, .asm_181b6 ; 0x7553a
 	bit 0, a
 	jr nz, .asm_adc3b ; 0x7553e
-	call z, Unknown_75497
+	call z, FuchsiaGymScript3_75497
 	call DisableWaitingAfterTextDisplay
 	jr .asm_e84c6 ; 0x75546
 .asm_adc3b ; 0x75548
@@ -111282,7 +110566,6 @@ FuchsiaMeetingRoom_h: ; 0x756d7 to 0x756e3 (12 bytes) (id=158)
 	db FUCHSIAMEETINGROOM_HEIGHT, FUCHSIAMEETINGROOM_WIDTH ; dimensions (y, x)
 	dw FuchsiaMeetingRoomBlocks, FuchsiaMeetingRoomTextPointers, FuchsiaMeetingRoomScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw FuchsiaMeetingRoomObject ; objects
 
 FuchsiaMeetingRoomScript: ; 756e3 (1d:56e3)
@@ -111332,7 +110615,6 @@ CinnabarGym_h: ; 0x7573e to 0x7574a (12 bytes) (id=166)
 	db CINNABAR_GYM_HEIGHT, CINNABAR_GYM_WIDTH ; dimensions (y, x)
 	dw CinnabarGymBlocks, CinnabarGymTextPointers, CinnabarGymScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw CinnabarGymObject ; objects
 
 CinnabarGymScript: ; 7574a (1d:574a)
@@ -111472,7 +110754,7 @@ CinnabarGymScript3: ; 7584a (1d:584a)
 	jp z, CinnabarGymScript_75792
 	ld a, $f0
 	ld [wJoypadForbiddenButtonsMask], a
-Unknown_75857: ; 75857 (1d:5857)
+CinnabarGymScript3_75857: ; 75857 (1d:5857)
 	ld a, $a
 	ld [$ff00+$8c], a
 	call DisplayTextID
@@ -111519,7 +110801,7 @@ CinnabarGymTextPointers: ; 7589f (1d:589f)
 	dw ReceivedTM38Text
 	dw TM38NoRoomText
 
-Unknown_758b7: ; 758b7 (1d:58b7)
+Func_758b7: ; 758b7 (1d:58b7)
 	ld a, [H_DOWNARROWBLINKCNT2] ; $FF00+$8c
 	ld [$cf13], a
 	call EngageMapTrainer
@@ -111546,7 +110828,7 @@ CinnabarGymText1: ; 758df (1d:58df)
 	jr z, .asm_d9332 ; 0x758e5 $16
 	bit 0, a
 	jr nz, .asm_3012f ; 0x758e9 $9
-	call z, Unknown_75857
+	call z, CinnabarGymScript3_75857
 	call DisableWaitingAfterTextDisplay
 	jp TextScriptEnd
 .asm_3012f ; 0x758f4
@@ -111561,7 +110843,7 @@ CinnabarGymText1: ; 758df (1d:58df)
 	call PreBattleSaveRegisters
 	ld a, $7
 	ld [$d05c], a
-	jp Unknown_758b7
+	jp Func_758b7
 
 UnnamedText_75914: ; 75914 (1d:5914)
 	TX_FAR _UnnamedText_75914
@@ -111602,7 +110884,7 @@ CinnabarGymText2: ; 75939 (1d:5939)
 	ld hl, UnnamedText_75964
 	ld de, UnnamedText_75964 ; $5964 XXX
 	call PreBattleSaveRegisters
-	jp Unknown_758b7
+	jp Func_758b7
 .asm_46bb4 ; 0x75956
 	ld hl, UnnamedText_75969
 	call PrintText
@@ -111631,7 +110913,7 @@ CinnabarGymText3: ; 7596e (1d:596e)
 	ld hl, UnnamedText_75999
 	ld de, UnnamedText_75999 ; $5999 XXX
 	call PreBattleSaveRegisters
-	jp Unknown_758b7
+	jp Func_758b7
 .asm_4b406 ; 0x7598b
 	ld hl, UnnamedText_7599e
 	call PrintText
@@ -111660,7 +110942,7 @@ CinnabarGymText4: ; 759a3 (1d:59a3)
 	ld hl, UnnamedText_759ce
 	ld de, UnnamedText_759ce ; $59ce XXX
 	call PreBattleSaveRegisters
-	jp Unknown_758b7
+	jp Func_758b7
 .asm_c0673 ; 0x759c0
 	ld hl, UnnamedText_759d3
 	call PrintText
@@ -111689,7 +110971,7 @@ CinnabarGymText5: ; 759d8 (1d:59d8)
 	ld hl, UnnamedText_75a03
 	ld de, UnnamedText_75a03 ; $5a03 XXX
 	call PreBattleSaveRegisters
-	jp Unknown_758b7
+	jp Func_758b7
 .asm_5cfd7 ; 0x759f5
 	ld hl, UnnamedText_75a08
 	call PrintText
@@ -111718,7 +111000,7 @@ CinnabarGymText6: ; 75a0d (1d:5a0d)
 	ld hl, UnnamedText_75a38
 	ld de, UnnamedText_75a38
 	call PreBattleSaveRegisters
-	jp Unknown_758b7
+	jp Func_758b7
 .asm_776b4 ; 0x75a2a
 	ld hl, UnnamedText_75a3d
 	call PrintText
@@ -111747,7 +111029,7 @@ CinnabarGymText7: ; 75a42 (1d:5a42)
 	ld hl, UnnamedText_75a6d
 	ld de, UnnamedText_75a6d
 	call PreBattleSaveRegisters
-	jp Unknown_758b7
+	jp Func_758b7
 .asm_2f755 ; 0x75a5f
 	ld hl, UnnamedText_75a72
 	call PrintText
@@ -111776,7 +111058,7 @@ CinnabarGymText8: ; 75a77 (1d:5a77)
 	ld hl, UnnamedText_75aa2
 	ld de, UnnamedText_75aa2 ; $5aa2 XXX
 	call PreBattleSaveRegisters
-	jp Unknown_758b7
+	jp Func_758b7
 .asm_d87be ; 0x75a94
 	ld hl, UnnamedText_75aa7
 	call PrintText
@@ -111847,7 +111129,6 @@ Lab1_h: ; 0x75b80 to 0x75b8c (12 bytes) (id=167)
 	db CINNABAR_LAB_1_HEIGHT, CINNABAR_LAB_1_WIDTH ; dimensions (y, x)
 	dw Lab1Blocks, Lab1TextPointers, Lab1Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw Lab1Object ; objects
 
 Lab1Script: ; 75b8c (1d:5b8c)
@@ -111915,7 +111196,6 @@ Lab2_h: ; 0x75c15 to 0x75c21 (12 bytes) (id=168)
 	db CINNABAR_LAB_2_HEIGHT, CINNABAR_LAB_2_WIDTH ; dimensions (y, x)
 	dw Lab2Blocks, Lab2TextPointers, Lab2Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw Lab2Object ; objects
 
 Lab2Script: ; 75c21 (1d:5c21)
@@ -111971,7 +111251,6 @@ Lab3_h: ; 0x75c7b to 0x75c87 (12 bytes) (id=169)
 	db CINNABAR_LAB_3_HEIGHT, CINNABAR_LAB_3_WIDTH ; dimensions (y, x)
 	dw Lab3Blocks, Lab3TextPointers, Lab3Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw Lab3Object ; objects
 
 Lab3Script: ; 75c87 (1d:5c87)
@@ -112066,7 +111345,6 @@ Lab4_h: ; 0x75d25 to 0x75d31 (12 bytes) (id=170)
 	db CINNABAR_LAB_4_HEIGHT, CINNABAR_LAB_4_WIDTH ; dimensions (y, x)
 	dw Lab4Blocks, Lab4TextPointers, Lab4Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw Lab4Object ; objects
 
 Lab4Script: ; 75d31 (1d:5d31)
@@ -112212,7 +111490,6 @@ CinnabarPokecenter_h: ; 0x75e20 to 0x75e2c (12 bytes) (id=171)
 	db CINNABAR_POKECENTER_HEIGHT, CINNABAR_POKECENTER_WIDTH ; dimensions (y, x)
 	dw CinnabarPokecenterBlocks, CinnabarPokecenterTextPointers, CinnabarPokecenterScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw CinnabarPokecenterObject ; objects
 
 CinnabarPokecenterScript: ; 75e2c (1d:5e2c)
@@ -112263,7 +111540,6 @@ CinnabarMart_h: ; 0x75e72 to 0x75e7e (12 bytes) (id=172)
 	db CINNABAR_MART_HEIGHT, CINNABAR_MART_WIDTH ; dimensions (y, x)
 	dw CinnabarMartBlocks, CinnabarMartTextPointers, CinnabarMartScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw CinnabarMartObject ; objects
 
 CinnabarMartScript: ; 75e7e (1d:5e7e)
@@ -112305,7 +111581,6 @@ CopycatsHouseF1_h: ; 0x75eb7 to 0x75ec3 (12 bytes) (id=175)
 	db COPYCATS_HOUSE_1F_HEIGHT, COPYCATS_HOUSE_1F_WIDTH ; dimensions (y, x)
 	dw CopycatsHouseF1Blocks, CopycatsHouseF1TextPointers, CopycatsHouseF1Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw CopycatsHouseF1Object ; objects
 
 CopycatsHouseF1Script: ; 75ec3 (1d:5ec3)
@@ -112353,10 +111628,9 @@ CopycatsHouseF1Object: ; 0x75ee3 (size=46)
 
 Gary_h: ; 75f11 (1d:5f11)
 	db $7 ;tileset
-	db $4, $4 ;Height, Width
+	db CHAMPIONS_ROOM_HEIGHT, CHAMPIONS_ROOM_WIDTH ; Height, Width
 	dw GaryBlocks, GaryTextPointers, GaryScript
 	db $0 ;No Connections
-
 	dw GaryObject
 
 GaryScript: ; 75f1d (1d:5f1d)
@@ -112686,7 +111960,6 @@ Lorelei_h: ; 0x7616f to 0x7617b (12 bytes) (id=245)
 	db LORELEIS_ROOM_HEIGHT, LORELEIS_ROOM_WIDTH ; dimensions (y, x)
 	dw LoreleiBlocks, LoreleiTextPointers, LoreleiScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw LoreleiObject ; objects
 
 LoreleiScript: ; 7617b (1d:617b)
@@ -112871,7 +112144,6 @@ Bruno_h: ; 0x762ca to 0x762d6 (12 bytes) (id=246)
 	db BRUNOS_ROOM_HEIGHT, BRUNOS_ROOM_WIDTH ; dimensions (y, x)
 	dw BrunoBlocks, BrunoTextPointers, BrunoScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw BrunoObject ; objects
 
 BrunoScript: ; 762d6 (1d:62d6)
@@ -113057,7 +112329,6 @@ Agatha_h: ; 0x76421 to 0x7642d (12 bytes) (id=247)
 	db AGATHAS_ROOM_HEIGHT, AGATHAS_ROOM_WIDTH ; dimensions (y, x)
 	dw AgathaBlocks, AgathaTextPointers, AgathaScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw AgathaObject ; objects
 
 AgathaScript: ; 7642d (1d:642d)
@@ -113241,7 +112512,7 @@ AgathaObject: ; 0x76534 (size=44)
 AgathaBlocks: ; 76560 (1d:6560)
 	INCBIN "maps/agatha.blk"
 
-Unknown_7657e: ; XXX: make better (has to do with the hall of fame on the PC) ; 0x7657e
+Func_7657e: ; XXX: make better (has to do with the hall of fame on the PC) ; 0x7657e
 	ld hl, UnnamedText_76683
 	call PrintText
 	ld hl, $D730
@@ -113370,7 +112641,7 @@ UnnamedText_76683: ; 76683 (1d:6683)
 
 HiddenItems: ; 76688 (1d:6688)
 	ld hl, HiddenItemCoords
-	call Label76857
+	call Func_76857
 	ld [$cd41], a
 	ld hl, $d6f0
 	ld a, [$cd41]
@@ -113487,7 +112758,7 @@ HiddenCoins: ; 76799 (1d:6799)
 	and a
 	ret z
 	ld hl, HiddenCoinCoords
-	call Label76857
+	call Func_76857
 	ld [$cd41], a
 	ld hl, $d6fe
 	ld a, [$cd41]
@@ -113577,7 +112848,7 @@ DroppedHiddenCoinsText: ; 7684d (1d:684d)
 	TX_FAR _DroppedHiddenCoinsText
 	db "@"
 
-Label76857: ; 76857 (1d:6857)
+Func_76857: ; 76857 (1d:6857)
 	ld a, [$cd40]
 	ld d, a
 	ld a, [$cd41]
@@ -113780,7 +113051,7 @@ PlayAnimation: ; 780f1 (1e:40f1)
 	ld l,a
 	ld h,0
 	add hl,hl
-	ld de,Unknown_7a07d  ; $607d ; animation command stream pointers
+	ld de,AttackAnimationPointers  ; $607d ; animation command stream pointers
 	add hl,de
 	ld a,[hli]
 	ld h,[hl]
@@ -113826,7 +113097,7 @@ PlayAnimation: ; 780f1 (1e:40f1)
 	jp [hl] ; jump to special effect function
 .playSubanimation
 	ld c,a
-	and a,63
+	and a,%00111111
 	ld [W_SUBANIMFRAMEDELAY],a
 	xor a
 	sla c
@@ -113842,7 +113113,7 @@ PlayAnimation: ; 780f1 (1e:40f1)
 	ld l,a
 	ld h,0
 	add hl,hl
-	ld de,Unknown_7a76d  ; $676d ; subanimation pointer table
+	ld de,SubanimationPointers
 	add hl,de
 	ld a,l
 	ld [W_SUBANIMADDRPTR],a
@@ -114174,7 +113445,7 @@ PlaySubanimation: ; 78e53 (1e:4e53)
 	push hl
 	ld c,[hl] ; frame block ID
 	ld b,0
-	ld hl,PointerTable_7af74
+	ld hl,FrameBlockPointers
 	add hl,bc
 	add hl,bc
 	ld a,[hli]
@@ -114186,7 +113457,7 @@ PlaySubanimation: ; 78e53 (1e:4e53)
 	push hl
 	ld e,[hl] ; base coordinate ID
 	ld d,0
-	ld hl,Unknown_7bc85  ; $7c85 ; base coordinate table
+	ld hl,FrameBlockBaseCoords  ; $7c85 ; base coordinate table
 	add hl,de
 	add hl,de
 	ld a,[hli]
@@ -114605,79 +113876,79 @@ SpecialEffectPointers: ; 790da (1e:50da)
 	db $FE
 	dw AnimationFlashScreen
 	db $FD
-	dw $51D6
+	dw Func_791d6
 	db $FC
-	dw $51EA
+	dw Func_791ea
 	db $FB
-	dw $520E
+	dw Func_7920e
 	db $FA
-	dw $5215
+	dw Func_79215
 	db $F9
-	dw $51DB
+	dw Func_791db
 	db $F8
 	dw AnimationFlashScreenLong
 	db $F7
-	dw $527A
+	dw Func_7927a
 	db $F6
-	dw $5297
+	dw Func_79297
 	db $F5
-	dw $5389
+	dw Func_79389
 	db $F4
-	dw $52AF
+	dw Func_792af
 	db $F3
-	dw $536F
+	dw Func_7936f
 	db $F2
 	dw Func_793f9
 	db $F1
-	dw $5415
+	dw Func_79415
 	db $F0
-	dw $51F4
+	dw Func_791f4
 	db $EF
-	dw $5801
+	dw Func_79801
 	db $EE
-	dw $54A1
+	dw Func_794a1
 	db $ED
-	dw $54F9
+	dw Func_794f9
 	db $EC
 	dw Func_79566
 	db $EB
-	dw $577A
+	dw Func_7977a
 	db $EA
-	dw $559F
+	dw Func_7959f
 	db $E9
-	dw $55C9
+	dw Func_795c9
 	db $E8
-	dw $5787
+	dw Func_79787
 	db $E7
-	dw $5C74
+	dw Func_79c74
 	db $E6
-	dw $5C8A
+	dw Func_79c8a
 	db $E5
 	dw Func_79645
 	db $E4
-	dw $5D77
+	dw Func_79d77
 	db $E3
-	dw $5D77
+	dw Func_79d77
 	db $E2
-	dw $5424
+	dw Func_79424
 	db $E1
 	dw AnimationDelay10
 	db $E0
-	dw $5398
+	dw Func_79398
 	db $DF
-	dw $57D8
+	dw Func_797d8
 	db $DE
-	dw $5369
+	dw Func_79369
 	db $DD
-	dw $539E
+	dw Func_7939e
 	db $DC
-	dw $53AB
+	dw Func_793ab
 	db $DB
-	dw $52B9
+	dw Func_792b9
 	db $DA
 	dw Func_793b1
 	db $D9
-	dw $56E0
+	dw Func_796e0
 	db $D8
 	dw Func_79666
 	db $FF
@@ -114789,29 +114060,38 @@ AnimationFlashScreen: ; 791be (1e:51be)
 	ld [rBGP],a ; restore initial palette
 	ret
 
-	ld bc, Unknown_7af6f
-	jr .asm_791fc
+Func_791d6: ; 791d6 (1e:51d6)
+	ld bc, $6f6f
+	jr Func_791fc
 
+Func_791db: ; 791db (1e:51db)
 	ld bc, $f9f4
-	jr .asm_791fc
+	jr Func_791fc
 
+Func_791e0: ; 791e0 (1e:51e0)
 	ld bc, $fef8
-	jr .asm_791fc
+	jr Func_791fc
 
+Func_791e5: ; 791e5 (1e:51e5)
 	ld bc, $ffff
-	jr .asm_791fc
+	jr Func_791fc
 
+Func_791ea: ; 791ea (1e:51ea)
 	ld bc, $e4e4
-	jr .asm_791fc
+	jr Func_791fc
 
+Func_791ef: ; 791ef (1e:51ef)
 	ld bc, $0000
-	jr .asm_791fc
+	jr Func_791fc
 
+Func_791f4: ; 791f4 (1e:51f4)
 	ld bc, $9090
-	jr .asm_791fc
+	jr Func_791fc
 
+Func_791f9: ; 791f9 (1e:51f9)
 	ld bc, $4040
-.asm_791fc
+	
+Func_791fc: ; 791fc (1e:51fc)
 	ld a, [$cf1b]
 	and a
 	ld a, b
@@ -114826,11 +114106,15 @@ AnimationFlashScreen: ; 791be (1e:51be)
 Func_79209: ; 79209 (1e:5209)
 	ld a, $21
 	jp Predef ; indirect jump to Func_480ff (480ff (12:40ff))
+
+Func_7920e: ; 7920e (1e:520e)
 	ld b, $8
 
 Func_79210: ; 79210 (1e:5210)
 	ld a, $24
 	jp Predef ; indirect jump to Func_48125 (48125 (12:4125))
+
+Func_79215: ; 79215 (1e:5215)
 	xor a
 	ld [$d09f], a
 	call LoadAnimationTileset
@@ -115086,7 +114370,9 @@ Func_7939e: ; 7939e (1e:539e)
 	call Func_79820
 	call Func_79aae
 	jp Delay3
-	ld hl, Func_7939e ; $539e
+
+Func_793ab: ; 793ab (1e:53ab)
+	ld hl, Func_7939e
 	jp CallWithTurnFlipped
 
 Func_793b1: ; 793b1 (1e:53b1)
@@ -115151,6 +114437,8 @@ Func_793f9: ; 793f9 (1e:53f9)
 	call Func_79aae
 	ld c, $3
 	jp DelayFrames
+
+Func_79415: ; 79415 (1e:5415)
 	ld a, [H_WHOSETURN] ; $FF00+$f3
 	and a
 	ld a, $66
@@ -115159,6 +114447,8 @@ Func_793f9: ; 793f9 (1e:53f9)
 .asm_7941e
 	call Func_7980c
 	jp Func_7939e
+
+Func_79424: ; 79424 (1e:5424)
 	ld a, [H_WHOSETURN] ; $FF00+$f3
 	and a
 	jr z, .asm_79435
@@ -115212,6 +114502,8 @@ Func_793f9: ; 793f9 (1e:53f9)
 
 Unknown_79476: ; 79476 (1e:5476)
 INCBIN "baserom.gbc",$79476,$794a1 - $79476
+
+Func_794a1: ; 794a1 (1e:54a1)
 	ld c, $4
 .asm_794a3
 	push bc
@@ -115268,6 +114560,8 @@ Func_794d4: ; 794d4 (1e:54d4)
 	dec c
 	jr nz, .asm_794d6
 	jp Delay3
+
+Func_794f9: ; 794f9 (1e:54f9)
 	ld a, [H_WHOSETURN] ; $FF00+$f3
 	and a
 	jr z, .asm_79503
@@ -115385,7 +114679,33 @@ Func_7959f: ; 7959f (1e:559f)
 	jp Func_7939e
 
 Unknown_795c4: ; 795c4 (1e:55c4)
-INCBIN "baserom.gbc",$795c4,$795f8 - $795c4
+INCBIN "baserom.gbc",$795c4,$795c9 - $795c4
+
+Func_795c9: ; 795c9 (1e:55c9)
+	ld a, $1
+	ld c, $2
+.asm_795cd
+	push bc
+	push af
+	call Func_79801
+	pop af
+	push af
+	call Func_79842
+	call Func_79820
+	call Func_79aae
+	ld c, $8
+	call DelayFrames
+	pop af
+	inc a
+	pop bc
+	dec c
+	jr nz, .asm_795cd
+	call Func_79801
+	ld hl, $c6e8
+	ld bc, $0310
+	xor a
+	call FillMemory
+	jp Func_79652
 
 Func_795f8: ; 795f8 (1e:55f8)
 	ld a, [H_WHOSETURN] ; $FF00+$f3
@@ -115641,6 +114961,8 @@ Func_79793: ; 79793 (1e:5793)
 .asm_797d3
 	ld b, $1
 	jp GoPAL_SET
+
+Func_797d8: ; 797d8 (1e:57d8)
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
 	ld hl, Func_79801 ; $5801
@@ -115799,6 +115121,7 @@ Func_7986f: ; 7986f (1e:586f)
 .done
 	ld a,b
 	ret
+
 IsCryMove: ; 798ad (1e:58ad)
 ; set carry if the move animation involves playing a monster cry
 	ld a,[W_ANIMATIONID]
@@ -116029,28 +115352,242 @@ Func_79ace: ; 79ace (1e:5ace)
 	ret
 
 PointerTable_79aea: ; 79aea (1e:5aea)
-	dw $5b24
+	dw Unknown_79b24
 	db $77
-	dw $5b55
+	dw Unknown_79b55
 	db $57
-	dw $5b78
+	dw Unknown_79b78
 	db $37
-	dw $5b8D
+	dw Unknown_79b8d
 	db $77
-	dw $5bBE
+	dw Unknown_79bbe
 	db $77
-	dw $5bEF
+	dw Unknown_79bef
 	db $77
-	dw $5c20
+	dw Unknown_79c20
 	db $86
-	dw $5c50
+	dw Unknown_79c50
 	db $3C
 
 Unknown_79b02: ; 79b02 (1e:5b02)
-INCBIN "baserom.gbc",$79b02,$79b1b - $79b02
+	db $31,$38,$46,$54,$5B,$32,$39,$47,$55,$5C,$34,$3B,$49,$57,$5E,$36,$3D,$4B,$59,$60,$37,$3E,$4C,$5A,$61
 
 Unknown_79b1b: ; 79b1b (1e:5b1b)
-INCBIN "baserom.gbc",$79b1b,$79dda - $79b1b
+	db $31,$46,$5B,$34,$49,$5E,$37,$4C,$61
+
+Unknown_79b24: ; 79b24 (1e:5b24)
+	db $00,$07,$0E,$15,$1C,$23,$2A,$01,$08,$0F,$16,$1D,$24,$2B,$02,$09,$10,$17,$1E,$25,$2C,$03,$0A,$11,$18,$1F,$26,$2D,$04,$0B,$12,$19,$20,$27,$2E,$05,$0C,$13,$1A,$21,$28,$2F,$06,$0D,$14,$1B,$22,$29,$30
+
+Unknown_79b55: ; 79b55 (1e:5b55)
+	db $00,$07,$0E,$15,$1C,$23,$2A,$01,$08,$0F,$16,$1D,$24,$2B,$03,$0A,$11,$18,$1F,$26,$2D,$04,$0B,$12,$19,$20,$27,$2E,$05,$0C,$13,$1A,$21,$28,$2F
+
+Unknown_79b78: ; 79b78 (1e:5b78)
+	db $00,$07,$0E,$15,$1C,$23,$2A,$02,$09,$10,$17,$1E,$25,$2C,$04,$0B,$12,$19,$20,$27,$2E
+
+Unknown_79b8d: ; 79b8d (1e:5b8d)
+	db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$19,$00,$02,$06,$0B,$10,$14,$1A,$00,$00,$07,$0C,$11,$15,$1B,$00,$03,$08,$0D,$12,$16,$1C,$00,$04,$09,$0E,$13,$17,$1D,$1F,$05,$0A,$0F,$01,$18,$1E,$20
+
+Unknown_79bbe: ; 79bbe (1e:5bbe)
+	db $00,$00,$00,$30,$00,$37,$00,$00,$00,$2B,$31,$34,$38,$3D,$21,$26,$2C,$01,$35,$39,$3E,$22,$27,$2D,$32,$36,$01,$00,$23,$28,$2E,$33,$01,$3A,$00,$24,$29,$2F,$01,$01,$3B,$00,$25,$2A,$01,$01,$01,$3C,$00
+
+Unknown_79bef: ; 79bef (1e:5bef)
+	db $00,$00,$00,$00,$00,$00,$00,$00,$00,$47,$4D,$00,$00,$00,$00,$00,$48,$4E,$52,$56,$5B,$3F,$43,$49,$4F,$53,$57,$5C,$40,$44,$4A,$50,$54,$58,$00,$41,$45,$4B,$51,$4C,$59,$5D,$42,$46,$4C,$4C,$55,$5A,$5E
+
+Unknown_79c20: ; 79c20 (1e:5c20)
+	db $31,$32,$32,$32,$32,$33,$34,$35,$36,$36,$37,$38,$34,$39,$3A,$3A,$3B,$38,$3C,$3D,$3E,$3E,$3F,$40,$41,$42,$43,$43,$44,$45,$46,$47,$43,$48,$49,$4A,$41,$43,$4B,$4C,$4D,$4E,$4F,$50,$50,$50,$51,$52
+
+Unknown_79c50: ; 79c50 (1e:5c50)
+	db $43,$55,$56,$53,$53,$53,$53,$53,$53,$53,$53,$53,$43,$57,$58,$54,$54,$54,$54,$54,$54,$54,$54,$54,$43,$59,$5A,$43,$43,$43,$43,$43,$43,$43,$43,$43
+
+Func_79c74: ; 79c74 (1e:5c74)
+	ld a, [$ff48]
+	push af
+	ld a, [$cc79]
+	ld [$ff48], a
+	ld d, $37
+	ld a, $3
+	ld [W_SUBANIMTRANSFORM], a
+	call Func_79c97
+	pop af
+	ld [$ff48], a
+	ret
+
+Func_79c8a: ; 79c8a (1e:5c8a)
+	ld d, $71
+	ld a, $14
+	ld [W_SUBANIMTRANSFORM], a
+	call Func_79c97
+	jp CleanLCD_OAM
+
+Func_79c97: ; 79c97 (1e:5c97)
+	ld c, a
+	ld a, $1
+	call Func_797e8
+	call Func_79d2a
+	call Func_79d52
+	ld hl, wOAMBuffer
+	ld [hl], $0
+.asm_79ca8
+	ld hl, wTrainerSpriteOffset
+	ld de, $0000
+	ld a, [W_SUBANIMTRANSFORM]
+	ld c, a
+.asm_79cb2
+	push bc
+	push hl
+	push de
+	ld a, [hl]
+	ld [$d08a], a
+	call Func_79d16
+	call Func_79cdb
+	pop de
+	ld hl, $0004
+	add hl, de
+	ld e, l
+	ld d, h
+	pop hl
+	ld a, [$d08a]
+	ld [hli], a
+	pop bc
+	dec c
+	jr nz, .asm_79cb2
+	call Delay3
+	ld hl, wOAMBuffer
+	ld a, [hl]
+	cp $68
+	jr nz, .asm_79ca8
+	ret
+
+Func_79cdb: ; 79cdb (1e:5cdb)
+	ld hl, wOAMBuffer
+	add hl, de
+	ld a, [hl]
+	inc a
+	inc a
+	cp $70
+	jr c, .asm_79ce8
+	ld a, $a0
+.asm_79ce8
+	ld [hli], a
+	ld a, [$d08a]
+	ld b, a
+	ld de, Unknown_79d0d
+	and $7f
+	add e
+	jr nc, .asm_79cf6
+	inc d
+.asm_79cf6
+	ld e, a
+	ld a, b
+	and $80
+	jr nz, .asm_79d03
+	ld a, [de]
+	add [hl]
+	ld [hli], a
+	inc hl
+	xor a
+	jr .asm_79d0b
+.asm_79d03
+	ld a, [de]
+	ld b, a
+	ld a, [hl]
+	sub b
+	ld [hli], a
+	inc hl
+	ld a, $20
+.asm_79d0b
+	ld [hl], a
+	ret
+
+Unknown_79d0d: ; 79d0d (1e:5d0d)
+	db $00,$01,$03,$05,$07,$09,$0B,$0D,$0F
+
+Func_79d16: ; 79d16 (1e:5d16)
+	ld a, [$d08a]
+	inc a
+	ld b, a
+	and $7f
+	cp $9
+	ld a, b
+	jr nz, .asm_79d26
+	and $80
+	xor $80
+.asm_79d26
+	ld [$d08a], a
+	ret
+Func_79d2a: ; 79d2a (1e:5d2a)
+	ld hl, $c301
+	ld de, Unknown_79d3e
+	ld a, [W_SUBANIMTRANSFORM]
+	ld c, a
+.asm_79d34
+	ld a, [de]
+	ld [hli], a
+	inc hl
+	inc hl
+	inc hl
+	inc de
+	dec c
+	jr nz, .asm_79d34
+	ret
+
+Unknown_79d3e: ; 79d3e (1e:5d3e)
+	db $38,$40,$50,$60,$70,$88,$90,$56,$67,$4A,$77,$84,$98,$32,$22,$5C,$6C,$7D,$8E,$99
+
+Func_79d52: ; 79d52 (1e:5d52)
+	ld hl, wTrainerSpriteOffset
+	ld de, Unknown_79d63
+	ld a, [W_SUBANIMTRANSFORM]
+	ld c, a
+.asm_79d5c
+	ld a, [de]
+	ld [hli], a
+	inc de
+	dec c
+	jr nz, .asm_79d5c
+	ret
+
+Unknown_79d63: ; 79d63 (1e:5d63)
+	db $00,$84,$06,$81,$02,$88,$01,$83,$05,$89,$09,$80,$07,$87,$03,$82,$04,$85,$08,$86
+
+Func_79d77: ; 79d77 (1e:5d77)
+	ld de, $9310
+	ld hl, $8000
+	ld bc, $0031
+	call CopyVideoData
+	xor a
+	ld [$ffae], a
+	ld hl, $9800
+	call Func_79e0d
+	ld a, $90
+	ld [$ffb0], a
+	ld hl, $9b20
+	call Func_79e0d
+	ld a, $38
+	ld [$ffb0], a
+	call Func_792fd
+	ld hl, $9800
+	call Func_79e0d
+	call Func_79801
+	call Delay3
+	ld de, $0208
+	call Func_79de9
+	call Func_7939e
+	call CleanLCD_OAM
+	ld a, $90
+	ld [$ffb0], a
+	ld hl, $9c00
+	call Func_79e0d
+	xor a
+	ld [$ffb0], a
+	call SaveScreenTilesToBuffer1
+	ld hl, $9800
+	call Func_79e0d
+	call ClearScreen
+	call Delay3
+	call LoadScreenTilesFromBuffer1
+	ld hl, $9c00
+	jp Func_79e0d
 
 Func_79dda: ; 79dda (1e:5dda)
 	call Load16BitRegisters
@@ -116350,143 +115887,3626 @@ Func_79fd4: ; 79fd4 (1e:5fd4)
 RedFishingTiles: ; 79fdd (1e:5fdd)
 	INCBIN "gfx/red_fishing.2bpp"
 
-Unknown_7a07d: ; 7a07d (1e:607d)
-INCBIN "baserom.gbc",$7a07d,$7a76d - $7a07d
+AttackAnimationPointers: ; 7a07d (1e:607d)
+	dw PoundAnim
+	dw KarateChopAnim
+	dw DoubleSlapAnim
+	dw CometPunchAnim
+	dw MegaPunchAnim
+	dw PayDayAnim
+	dw FirePunchAnim
+	dw IcePunchAnim
+	dw ThunderPunchAnim
+	dw ScratchAnim
+	dw VicegripAnim
+	dw GuillotineAnim
+	dw RazorWindAnim
+	dw SwordsDanceAnim
+	dw CutAnim
+	dw GustAnim
+	dw WingAttackAnim
+	dw WhirlwindAnim
+	dw FlyAnim
+	dw BindAnim
+	dw SlamAnim
+	dw VineWhipAnim
+	dw StompAnim
+	dw DoubleKickAnim
+	dw MegaKickAnim
+	dw JumpKickAnim
+	dw RollingKickAnim
+	dw SandAttackAnim
+	dw HeatButtAnim
+	dw HornAttackAnim
+	dw FuryAttackAnim
+	dw HornDrillAnim
+	dw TackleAnim
+	dw BodySlamAnim
+	dw WrapAnim
+	dw TakeDownAnim
+	dw ThrashAnim
+	dw DoubleEdgeAnim
+	dw TailWhipAnim
+	dw PoisonStingAnim
+	dw TwineedleAnim
+	dw PinMissileAnim
+	dw LeerAnim
+	dw BiteAnim
+	dw GrowlAnim
+	dw RoarAnim
+	dw SingAnim
+	dw SupersonicAnim
+	dw SonicBoomAnim
+	dw DisableAnim
+	dw AcidAnim
+	dw EmberAnim
+	dw FlamethrowerAnim
+	dw MistAnim
+	dw WaterGunAnim
+	dw HydroPumpAnim
+	dw SurfAnim
+	dw IceBeamAnim
+	dw BlizzardAnim
+	dw PsyBeamAnim
+	dw BubbleBeamAnim
+	dw AuroraBeamAnim
+	dw HyperBeamAnim
+	dw PeckAnim
+	dw DrillPeckAnim
+	dw SubmissionAnim
+	dw LowKickAnim
+	dw CounterAnim
+	dw SeismicTossAnim
+	dw StrengthAnim
+	dw AbsorbAnim
+	dw MegaDrainAnim
+	dw LeechSeedAnim
+	dw GrowthAnim
+	dw RazorLearAnim
+	dw SolarBeamAnim
+	dw PoisonPowderAnim
+	dw StunSporeAnim
+	dw SleepPowderAnim
+	dw PedalDanceAnim
+	dw StringShotAnim
+	dw DragonRageAnim
+	dw FireSpinAnim
+	dw ThunderShockAnim
+	dw ThunderBoldAnim
+	dw ThunderWaveAnim
+	dw ThunderAnim
+	dw RockThrowAnim
+	dw EarthquakeAnim
+	dw FissureAnim
+	dw DigAnim
+	dw ToxicAnim
+	dw ConfusionAnim
+	dw PsychicAnim
+	dw HypnosisAnim
+	dw MeditateAnim
+	dw AgilityAnim
+	dw QuickAttackAnim
+	dw RageAnim
+	dw TeleportAnim
+	dw NightShadeAnim
+	dw MimicAnim
+	dw ScreechAnim
+	dw DoubleTeamAnim
+	dw RecoverAnim
+	dw HardenAnim
+	dw MinimizeAnim
+	dw SmokeScreenAnim
+	dw ConfuseRayAnim
+	dw WithdrawAnim
+	dw DefenseCurlAnim
+	dw BarrierAnim
+	dw LightScreenAnim
+	dw HazeAnim
+	dw ReflectAnim
+	dw FocusEnergyAnim
+	dw BideAnim
+	dw MetronomeAnim
+	dw MirrorMoveAnim
+	dw SelfdestructAnim
+	dw EggBombAnim
+	dw LickAnim
+	dw SmogAnim
+	dw SludgeAnim
+	dw BoneClubAnim
+	dw FireBlastAnim
+	dw WaterfallAnim
+	dw ClampAnim
+	dw SwiftAnim
+	dw SkullBashAnim
+	dw SpikeCannonAnim
+	dw ConstrictAnim
+	dw AmnesiaAnim
+	dw KinesisAnim
+	dw SoftboiledAnim
+	dw HiJumpKickAnim
+	dw GlareAnim
+	dw DreamEaterAnim
+	dw PoisonGasAnim
+	dw BarrageAnim
+	dw LeechLifeAnim
+	dw LovelyKissAnim
+	dw SkyAttackAnim
+	dw TransformAnim
+	dw BubbleAnim
+	dw DizzyPunchAnim
+	dw SporeAnim
+	dw FlashAnim
+	dw PsywaveAnim
+	dw SplashAnim
+	dw AcidArmorAnim
+	dw CrabHammerAnim
+	dw ExplosionAnim
+	dw FurySwipesAnim
+	dw BonemerangAnim
+	dw RestAnim
+	dw RockSlideAnim
+	dw HyperFangAnim
+	dw SharpenAnim
+	dw ConversionAnim
+	dw TriAttackAnim
+	dw SuperFangAnim
+	dw SlashAnim
+	dw SubstituteAnim
+	dw StruggleAnim
+	dw ShowPicAnim
+	dw EnemyFlashAnim
+	dw PlayerFlashAnim
+	dw EnemyHUDShakeAnim
+	dw TradeBallDropAnim
+	dw TradeBallAppear1Anim
+	dw TradeBallAppear2Anim
+	dw TradeBallPoofAnim
+	dw XStatItemAnim
+	dw XStatItemAnim
+	dw ShrinkingSquareAnim
+	dw ShrinkingSquareAnim
+	dw XStatItemBlackAnim
+	dw XStatItemBlackAnim
+	dw ShrinkingSquareBlackAnim
+	dw ShrinkingSquareBlackAnim
+	dw UnusedAnim
+	dw UnusedAnim
+	dw ParalyzeAnim
+	dw ParalyzeAnim
+	dw PoisonAnim
+	dw PoisonAnim
+	dw SleepPlayerAnim
+	dw SleepEnemyAnim
+	dw ConfusedPlayerAnim
+	dw ConfusedEnemyAnim
+	dw FaintAnim
+	dw BallTossAnim
+	dw BallShakeAnim
+	dw BallPoofAnim
+	dw BallBlockAnim
+	dw GreatTossAnim
+	dw UltraTossAnim
+	dw ShakeScreenAnim
+	dw HidePicAnim
+	dw ThrowRockAnim
+	dw ThrowBaitAnim
+	dw ZigZagScreenAnim
 
-Unknown_7a76d: ; 7a76d (1e:676d)
-INCBIN "baserom.gbc",$7a76d,$7af6f - $7a76d
+; each animation is a list of subanimations and special effects
+; if first byte < $56
+;	db tileset_and_delay, sound_id, subanimation_id
+; if first byte >= $D8
+;	db special_effect_id, sound_id
+; $FF terminated
+ZigZagScreenAnim: ; 7a213 (1e:6213)
+	db $D8,$FF
+	db $FF
 
-Unknown_7af6f: ; 7af6f (1e:6f6f)
-INCBIN "baserom.gbc",$7af6f,$7af74 - $7af6f
+PoundAnim: ; 7a216 (1e:6216)
+StruggleAnim: ; 7a216 (1e:6216)
+	db $08,$00,$01
+	db $FF
 
-PointerTable_7af74: ; 7af74 (1e:6f74)
-	dw $7de7
-	dw $7068
-	dw $708d
-	dw $70ce
-	dw $70df
-	dw $70f0
-	dw $7101
-	dw $7132
-	dw $7173
-	dw $71b4
-	dw $71e5
-	dw $7216
-	dw $7227
-	dw $7238
-	dw $7259
-	dw $726a
-	dw $727b
-	dw $729c
-	dw $72bd
-	dw $72ca
-	dw $72db
-	dw $72fc
-	dw $732d
-	dw $734e
-	dw $735f
-	dw $7364
-	dw $736d
-	dw $7376
-	dw $737f
-	dw $7388
-	dw $7391
-	dw $73ab
-	dw $73b4
-	dw $73cd
-	dw $73fe
-	dw $744b
-	dw $745c
-	dw $7465
-	dw $7496
-	dw $74a7
-	dw $74bc
-	dw $74d5
-	dw $74e6
-	dw $74f7
-	dw $7500
-	dw $7505
-	dw $7526
-	dw $7547
-	dw $7558
-	dw $7569
-	dw $756e
-	dw $758b
-	dw $75a8
-	dw $75ad
-	dw $75c6
-	dw $75d7
-	dw $75e8
-	dw $75f9
-	dw $760a
-	dw $761b
-	dw $7630
-	dw $7649
-	dw $7666
-	dw $7687
-	dw $76a8
-	dw $76b5
-	dw $76c6
-	dw $76f3
-	dw $7720
-	dw $7731
-	dw $7742
-	dw $7753
-	dw $7764
-	dw $7775
-	dw $785a
-	dw $786b
-	dw $787c
-	dw $788d
-	dw $789e
-	dw $78bf
-	dw $78f0
-	dw $7911
-	dw $7932
-	dw $7943
-	dw $7950
-	dw $7961
-	dw $796e
-	dw $7987
-	dw $79ac
-	dw $79c9
-	dw $79ce
-	dw $79ff
-	dw $7a10
-	dw $7a31
-	dw $7a5e
-	dw $7a9b
-	dw $7aac
-	dw $7acd
-	dw $7afe
-	dw $7b3f
-	dw $7b58
-	dw $7b71
-	dw $7b8a
-	dw $7b93
-	dw $7b98
-	dw $7ba9
-	dw $7bae
-	dw $7bcf
-	dw $7bf0
-	dw $7c11
-	dw $7c1a
-	dw $7c2b
-	dw $7c3c
-	dw $77b6
-	dw $77f7
-	dw $7828
-	dw $7849
-	dw $739a
-	dw $7c4d
-	dw $7c6a
-	dw $7c7b
-	dw $7c80
+KarateChopAnim: ; 7a21a (1e:621a)
+	db $08,$01,$03
+	db $FF
 
-INCBIN "baserom.gbc",$7b068,$7bc85 - $7b068
+DoubleSlapAnim: ; 7a21e (1e:621e)
+	db $05,$02,$01
+	db $05,$02,$01
+	db $FF
 
-Unknown_7bc85: ; 7bc85 (1e:7c85)
-INCBIN "baserom.gbc",$7bc85,$7bde9 - $7bc85
+CometPunchAnim: ; 7a225 (1e:6225)
+	db $04,$03,$02
+	db $04,$03,$02
+	db $FF
+
+MegaPunchAnim: ; 7a22c (1e:622c)
+	db $46,$04,$04
+	db $FF
+
+PayDayAnim: ; 7a230 (1e:6230)
+	db $08,$00,$01
+	db $04,$05,$52
+	db $FF
+
+FirePunchAnim: ; 7a237 (1e:6237)
+	db $06,$06,$02
+	db $46,$FF,$11
+	db $FF
+
+IcePunchAnim: ; 7a23e (1e:623e)
+	db $06,$07,$02
+	db $10,$FF,$2F
+	db $FF
+
+ThunderPunchAnim: ; 7a245 (1e:6245)
+	db $06,$08,$02
+	db $FD,$FF
+	db $46,$FF,$2B
+	db $FC,$FF
+	db $FF
+
+ScratchAnim: ; 7a250 (1e:6250)
+	db $06,$09,$0F
+	db $FF
+
+VicegripAnim: ; 7a254 (1e:6254)
+	db $08,$0A,$2A
+	db $FF
+
+GuillotineAnim: ; 7a258 (1e:6258)
+	db $06,$0B,$2A
+	db $FF
+
+RazorWindAnim: ; 7a25c (1e:625c)
+	db $04,$0C,$16
+	db $FF
+
+SwordsDanceAnim: ; 7a260 (1e:6260)
+	db $46,$0D,$18
+	db $46,$0D,$18
+	db $46,$0D,$18
+	db $FF
+
+CutAnim: ; 7a26a (1e:626a)
+	db $FE,$0E
+	db $04,$FF,$16
+	db $FF
+
+GustAnim: ; 7a270 (1e:6270)
+	db $46,$0F,$10
+	db $06,$FF,$02
+	db $FF
+
+WingAttackAnim: ; 7a277 (1e:6277)
+	db $46,$10,$04
+	db $FF
+
+WhirlwindAnim: ; 7a27b (1e:627b)
+	db $46,$11,$10
+	db $DB,$FF
+	db $FF
+
+FlyAnim: ; 7a281 (1e:6281)
+	db $46,$12,$04
+	db $DD,$FF
+	db $FF
+
+BindAnim: ; 7a287 (1e:6287)
+	db $04,$13,$23
+	db $04,$13,$23
+	db $FF
+
+SlamAnim: ; 7a28e (1e:628e)
+	db $06,$14,$02
+	db $FF
+
+VineWhipAnim: ; 7a292 (1e:6292)
+	db $01,$15,$16
+	db $08,$FF,$01
+	db $FF
+
+StompAnim: ; 7a299 (1e:6299)
+	db $48,$16,$05
+	db $FF
+
+DoubleKickAnim: ; 7a29d (1e:629d)
+	db $08,$17,$01
+	db $08,$17,$01
+	db $FF
+
+MegaKickAnim: ; 7a2a4 (1e:62a4)
+	db $46,$18,$04
+	db $FF
+
+JumpKickAnim: ; 7a2a8 (1e:62a8)
+	db $46,$19,$04
+	db $FF
+
+RollingKickAnim: ; 7a2ac (1e:62ac)
+	db $FE,$1A
+	db $46,$FF,$04
+	db $FF
+
+SandAttackAnim: ; 7a2b2 (1e:62b2)
+	db $46,$1B,$28
+	db $FF
+
+HeatButtAnim: ; 7a2b6 (1e:62b6)
+	db $46,$1C,$05
+	db $FF
+
+HornAttackAnim: ; 7a2ba (1e:62ba)
+	db $06,$1D,$45
+	db $46,$FF,$05
+	db $FF
+
+FuryAttackAnim: ; 7a2c1 (1e:62c1)
+	db $02,$1E,$46
+	db $02,$FF,$46
+	db $FF
+
+HornDrillAnim: ; 7a2c8 (1e:62c8)
+	db $42,$1F,$05
+	db $42,$FF,$05
+	db $42,$FF,$05
+	db $42,$FF,$05
+	db $42,$FF,$05
+	db $FF
+
+TackleAnim: ; 7a2d8 (1e:62d8)
+	db $F2,$48
+	db $F1,$FF
+	db $FF
+
+BodySlamAnim: ; 7a2dd (1e:62dd)
+	db $F2,$48
+	db $FE,$FF
+	db $FE,$FF
+	db $F1,$FF
+	db $FF
+
+WrapAnim: ; 7a2e6 (1e:62e6)
+	db $04,$22,$23
+	db $04,$22,$23
+	db $04,$22,$23
+	db $FF
+
+TakeDownAnim: ; 7a2f0 (1e:62f0)
+	db $F2,$48
+	db $FE,$23
+	db $F1,$FF
+	db $FF
+
+ThrashAnim: ; 7a2f7 (1e:62f7)
+	db $46,$24,$04
+	db $FF
+
+DoubleEdgeAnim: ; 7a2fb (1e:62fb)
+	db $F0,$48
+	db $06,$FF,$2D
+	db $FC,$FF
+	db $F2,$FF
+	db $FE,$25
+	db $F1,$FF
+	db $FF
+
+TailWhipAnim: ; 7a309 (1e:6309)
+	db $F2,$84
+	db $E1,$FF
+	db $F1,$84
+	db $E1,$FF
+	db $F2,$84
+	db $E1,$FF
+	db $F1,$84
+	db $FF
+
+PoisonStingAnim: ; 7a318 (1e:6318)
+	db $06,$27,$00
+	db $FF
+
+TwineedleAnim: ; 7a31c (1e:631c)
+	db $05,$28,$01
+	db $05,$28,$01
+	db $FF
+
+PinMissileAnim: ; 7a323 (1e:6323)
+	db $03,$29,$01
+	db $FF
+
+LeerAnim: ; 7a327 (1e:6327)
+	db $FD,$48
+	db $FE,$2A
+	db $FE,$2A
+	db $FC,$FF
+	db $FF
+
+BiteAnim: ; 7a330 (1e:6330)
+	db $08,$2B,$02
+	db $FF
+
+GrowlAnim: ; 7a334 (1e:6334)
+	db $46,$2C,$12
+	db $FF
+
+RoarAnim: ; 7a338 (1e:6338)
+	db $46,$2D,$15
+	db $46,$2D,$15
+	db $46,$2D,$15
+	db $FF
+
+SingAnim: ; 7a342 (1e:6342)
+	db $46,$2E,$12
+	db $50,$FF,$40
+	db $50,$FF,$40
+	db $FF
+
+SupersonicAnim: ; 7a34c (1e:634c)
+	db $06,$2F,$31
+	db $FF
+
+SonicBoomAnim: ; 7a350 (1e:6350)
+	db $46,$2D,$15
+	db $46,$2D,$15
+	db $46,$0F,$10
+	db $46,$FF,$05
+	db $FF
+
+DisableAnim: ; 7a35d (1e:635d)
+	db $FD,$48
+	db $FE,$2A
+	db $FE,$2A
+	db $FC,$FF
+	db $FF
+
+AcidAnim: ; 7a366 (1e:6366)
+	db $46,$32,$13
+	db $46,$32,$14
+	db $FF
+
+EmberAnim: ; 7a36d (1e:636d)
+	db $46,$33,$11
+	db $FF
+
+FlamethrowerAnim: ; 7a371 (1e:6371)
+	db $46,$34,$1F
+	db $46,$34,$0C
+	db $46,$34,$0D
+	db $FF
+
+MistAnim: ; 7a37b (1e:637b)
+	db $F0,$FF
+	db $FA,$38
+	db $FC,$FF
+	db $FF
+
+WaterGunAnim: ; 7a382 (1e:6382)
+	db $06,$36,$2C
+	db $FF
+
+HydroPumpAnim: ; 7a386 (1e:6386)
+	db $06,$37,$1A
+	db $06,$37,$1A
+	db $FF
+
+SurfAnim: ; 7a38d (1e:638d)
+	db $FA,$38
+	db $06,$37,$1A
+	db $FF
+
+IceBeamAnim: ; 7a393 (1e:6393)
+	db $03,$39,$2E
+	db $10,$FF,$2F
+	db $FF
+
+BlizzardAnim: ; 7a39a (1e:639a)
+	db $04,$3A,$38
+	db $04,$37,$38
+	db $FF
+
+PsyBeamAnim: ; 7a3a1 (1e:63a1)
+	db $03,$3B,$2E
+	db $F8,$FF
+	db $FF
+
+BubbleBeamAnim: ; 7a3a7 (1e:63a7)
+	db $12,$3C,$35
+	db $FF
+
+AuroraBeamAnim: ; 7a3ab (1e:63ab)
+	db $03,$3D,$2E
+	db $E1,$FF
+	db $E1,$FF
+	db $FF
+
+HyperBeamAnim: ; 7a3b3 (1e:63b3)
+	db $FD,$48
+	db $E2,$FF
+	db $02,$3E,$2E
+	db $FE,$FF
+	db $FE,$FF
+	db $46,$04,$04
+	db $FC,$FF
+	db $FF
+
+PeckAnim: ; 7a3c4 (1e:63c4)
+	db $08,$3F,$01
+	db $FF
+
+DrillPeckAnim: ; 7a3c8 (1e:63c8)
+	db $46,$40,$04
+	db $FF
+
+SubmissionAnim: ; 7a3cc (1e:63cc)
+	db $F4,$41
+	db $06,$FF,$01
+	db $DD,$FF
+	db $FF
+
+LowKickAnim: ; 7a3d4 (1e:63d4)
+	db $F4,$42
+	db $46,$FF,$04
+	db $DD,$FF
+	db $FF
+
+CounterAnim: ; 7a3dc (1e:63dc)
+	db $F4,$43
+	db $46,$FF,$04
+	db $DD,$FF
+	db $FF
+
+SeismicTossAnim: ; 7a3e4 (1e:63e4)
+	db $DE,$FF
+	db $41,$8B,$4E
+	db $DF,$FF
+	db $F4,$FF
+	db $42,$44,$4F
+	db $E1,$FF
+	db $E1,$FF
+	db $DD,$FF
+	db $41,$44,$50
+	db $DC,$FF
+	db $FB,$FF
+	db $FF
+
+StrengthAnim: ; 7a3fe (1e:63fe)
+	db $F2,$48
+	db $F1,$FF
+	db $46,$06,$04
+	db $FF
+
+AbsorbAnim: ; 7a406 (1e:6406)
+	db $F0,$46
+	db $06,$FF,$21
+	db $06,$FF,$22
+	db $FC,$FF
+	db $FF
+
+MegaDrainAnim: ; 7a411 (1e:6411)
+	db $F0,$47
+	db $FE,$FF
+	db $06,$FF,$21
+	db $06,$FF,$22
+	db $FE,$FF
+	db $FC,$FF
+	db $FF
+
+LeechSeedAnim: ; 7a420 (1e:6420)
+	db $46,$48,$1B
+	db $55,$4D,$1C
+	db $FF
+
+GrowthAnim: ; 7a427 (1e:6427)
+	db $F0,$49
+	db $E2,$FF
+	db $FC,$FF
+	db $FF
+
+RazorLearAnim: ; 7a42e (1e:642e)
+	db $E7,$4A
+	db $41,$80,$44
+	db $01,$0C,$16
+	db $FF
+
+SolarBeamAnim: ; 7a437 (1e:6437)
+	db $06,$4B,$2E
+	db $06,$FF,$01
+	db $FF
+
+PoisonPowderAnim: ; 7a43e (1e:643e)
+	db $06,$4C,$36
+	db $FF
+
+StunSporeAnim: ; 7a442 (1e:6442)
+	db $06,$4D,$36
+	db $FF
+
+SleepPowderAnim: ; 7a446 (1e:6446)
+	db $06,$4E,$36
+	db $FF
+
+PedalDanceAnim: ; 7a44a (1e:644a)
+	db $F0,$4F
+	db $E6,$FF
+	db $FC,$FF
+	db $FF
+
+StringShotAnim: ; 7a451 (1e:6451)
+	db $08,$50,$37
+	db $FF
+
+DragonRageAnim: ; 7a455 (1e:6455)
+	db $46,$51,$1F
+	db $46,$FF,$0C
+	db $46,$FF,$0D
+	db $46,$FF,$0E
+	db $FF
+
+FireSpinAnim: ; 7a462 (1e:6462)
+	db $46,$52,$0C
+	db $46,$FF,$0D
+	db $46,$FF,$0E
+	db $FF
+
+ThunderShockAnim: ; 7a46c (1e:646c)
+	db $42,$53,$29
+	db $FF
+
+ThunderBoldAnim: ; 7a470 (1e:6470)
+	db $41,$54,$29
+	db $41,$54,$29
+	db $FF
+
+ThunderWaveAnim: ; 7a477 (1e:6477)
+	db $42,$55,$29
+	db $02,$FF,$23
+	db $04,$FF,$23
+	db $FF
+
+ThunderAnim: ; 7a481 (1e:6481)
+	db $FD,$56
+	db $FE,$FF
+	db $46,$FF,$2B
+	db $FE,$FF
+	db $42,$54,$29
+	db $FC,$FF
+	db $FF
+
+RockThrowAnim: ; 7a490 (1e:6490)
+	db $04,$57,$30
+	db $FF
+
+EarthquakeAnim: ; 7a494 (1e:6494)
+	db $FB,$58
+	db $FB,$58
+	db $FF
+
+FissureAnim: ; 7a499 (1e:6499)
+	db $FE,$59
+	db $FB,$FF
+	db $FE,$59
+	db $FB,$FF
+	db $FF
+
+DigAnim: ; 7a4a2 (1e:64a2)
+	db $46,$5A,$04
+	db $F7,$FF
+	db $FF
+
+ToxicAnim: ; 7a4a8 (1e:64a8)
+	db $FA,$38
+	db $46,$5B,$14
+	db $FF
+
+ConfusionAnim: ; 7a4ae (1e:64ae)
+	db $F8,$5C
+	db $FF
+
+PsychicAnim: ; 7a4b1 (1e:64b1)
+	db $F8,$5D
+	db $D8,$FF
+	db $FF
+
+HypnosisAnim: ; 7a4b6 (1e:64b6)
+	db $F8,$5E
+	db $FF
+
+MeditateAnim: ; 7a4b9 (1e:64b9)
+	db $F0,$5F
+	db $46,$FF,$43
+	db $FE,$FF
+	db $FC,$FF
+	db $FF
+
+AgilityAnim: ; 7a4c3 (1e:64c3)
+	db $F0,$60
+	db $FC,$FF
+	db $FF
+
+QuickAttackAnim: ; 7a4c8 (1e:64c8)
+	db $F4,$61
+	db $46,$FF,$04
+	db $DD,$FF
+	db $FF
+
+RageAnim: ; 7a4d0 (1e:64d0)
+	db $06,$62,$01
+	db $FF
+
+TeleportAnim: ; 7a4d4 (1e:64d4)
+	db $EE,$63
+	db $ED,$FF
+	db $FF
+
+NightShadeAnim: ; 7a4d9 (1e:64d9)
+	db $F8,$5C
+	db $D8,$FF
+	db $FF
+
+MimicAnim: ; 7a4de (1e:64de)
+	db $46,$65,$21
+	db $46,$65,$22
+	db $FF
+
+ScreechAnim: ; 7a4e5 (1e:64e5)
+	db $46,$66,$12
+	db $FF
+
+DoubleTeamAnim: ; 7a4e9 (1e:64e9)
+	db $FD,$FF
+	db $E1,$FF
+	db $E1,$FF
+	db $FE,$FF
+	db $FE,$FF
+	db $FC,$FF
+	db $DA,$67
+	db $DD,$FF
+	db $46,$6F,$33
+	db $FF
+
+RecoverAnim: ; 7a4fd (1e:64fd)
+	db $F3,$68
+	db $F0,$FF
+	db $E2,$FF
+	db $FC,$FF
+	db $FF
+
+HardenAnim: ; 7a506 (1e:6506)
+	db $F0,$69
+	db $46,$FF,$43
+	db $FE,$FF
+	db $FC,$FF
+	db $FF
+
+MinimizeAnim: ; 7a510 (1e:6510)
+	db $F0,$6A
+	db $E2,$FF
+	db $EA,$FF
+	db $FC,$FF
+	db $FF
+
+SmokeScreenAnim: ; 7a519 (1e:6519)
+	db $46,$6B,$28
+	db $04,$FF,$0A
+	db $F9,$FF
+	db $E1,$FF
+	db $E1,$FF
+	db $FD,$FF
+	db $E1,$FF
+	db $E1,$FF
+	db $E1,$FF
+	db $E1,$FF
+	db $E1,$FF
+	db $E1,$FF
+	db $F9,$FF
+	db $E1,$FF
+	db $FC,$FF
+	db $FF
+
+ConfuseRayAnim: ; 7a53a (1e:653a)
+	db $FD,$6C
+	db $46,$FF,$3E
+	db $FC,$FF
+	db $FF
+
+WithdrawAnim: ; 7a542 (1e:6542)
+	db $F0,$6E
+	db $F6,$FF
+	db $06,$FF,$51
+	db $FC,$FF
+	db $DD,$FF
+	db $FF
+
+DefenseCurlAnim: ; 7a54e (1e:654e)
+	db $F0,$6E
+	db $06,$FF,$43
+	db $FE,$FF
+	db $FC,$FF
+	db $FF
+
+BarrierAnim: ; 7a558 (1e:6558)
+	db $46,$6F,$33
+	db $46,$6F,$33
+	db $FF
+
+LightScreenAnim: ; 7a55f (1e:655f)
+	db $F0,$FF
+	db $46,$70,$33
+	db $46,$70,$33
+	db $FC,$FF
+	db $FF
+
+HazeAnim: ; 7a56a (1e:656a)
+	db $F9,$FF
+	db $FA,$38
+	db $FC,$FF
+	db $FF
+
+ReflectAnim: ; 7a571 (1e:6571)
+	db $FD,$FF
+	db $46,$72,$33
+	db $46,$72,$33
+	db $FC,$FF
+	db $FF
+
+FocusEnergyAnim: ; 7a57c (1e:657c)
+	db $E2,$73
+	db $FF
+
+BideAnim: ; 7a57f (1e:657f)
+	db $46,$74,$04
+	db $FF
+
+MetronomeAnim: ; 7a583 (1e:6583)
+	db $F2,$84
+	db $E1,$FF
+	db $F1,$84
+	db $E1,$FF
+	db $F2,$84
+	db $E1,$FF
+	db $F1,$84
+	db $FF
+
+MirrorMoveAnim: ; 7a592 (1e:6592)
+	db $08,$76,$01
+	db $FF
+
+SelfdestructAnim: ; 7a596 (1e:6596)
+	db $43,$77,$34
+	db $FF
+
+EggBombAnim: ; 7a59a (1e:659a)
+	db $44,$78,$41
+	db $44,$78,$42
+	db $FF
+
+LickAnim: ; 7a5a1 (1e:65a1)
+	db $46,$7B,$14
+	db $FF
+
+SmogAnim: ; 7a5a5 (1e:65a5)
+	db $F9,$48
+	db $46,$7A,$19
+	db $FC,$FF
+	db $FF
+
+SludgeAnim: ; 7a5ad (1e:65ad)
+	db $46,$7B,$13
+	db $46,$7B,$14
+	db $FF
+
+BoneClubAnim: ; 7a5b4 (1e:65b4)
+	db $08,$7C,$02
+	db $FF
+
+FireBlastAnim: ; 7a5b8 (1e:65b8)
+	db $46,$7D,$1F
+	db $46,$FF,$20
+	db $46,$FF,$20
+	db $46,$FF,$0C
+	db $46,$FF,$0D
+	db $FF
+
+WaterfallAnim: ; 7a5c8 (1e:65c8)
+	db $F6,$48
+	db $06,$37,$1A
+	db $08,$FF,$02
+	db $F7,$FF
+	db $FF
+
+ClampAnim: ; 7a5d3 (1e:65d3)
+	db $08,$7F,$2A
+	db $06,$83,$23
+	db $06,$83,$23
+	db $FF
+
+SwiftAnim: ; 7a5dd (1e:65dd)
+	db $43,$80,$3F
+	db $FF
+
+SkullBashAnim: ; 7a5e1 (1e:65e1)
+	db $46,$81,$05
+	db $FF
+
+SpikeCannonAnim: ; 7a5e5 (1e:65e5)
+	db $44,$82,$04
+	db $FF
+
+ConstrictAnim: ; 7a5e9 (1e:65e9)
+	db $06,$83,$23
+	db $06,$83,$23
+	db $06,$83,$23
+	db $FF
+
+AmnesiaAnim: ; 7a5f3 (1e:65f3)
+	db $08,$84,$25
+	db $08,$84,$25
+	db $FF
+
+KinesisAnim: ; 7a5fa (1e:65fa)
+	db $08,$85,$01
+	db $FF
+
+SoftboiledAnim: ; 7a5fe (1e:65fe)
+	db $E5,$48
+	db $08,$86,$4C
+	db $F0,$FF
+	db $E2,$FF
+	db $FC,$FF
+	db $DD,$FF
+	db $FF
+
+HiJumpKickAnim: ; 7a6 (1e:660c)
+	db $46,$87,$04
+	db $FF
+
+GlareAnim: ; 7a610 (1e:6610)
+	db $FD,$48
+	db $FE,$88
+	db $FE,$FF
+	db $FC,$FF
+	db $FF
+
+DreamEaterAnim: ; 7a619 (1e:6619)
+	db $F8,$89
+	db $FD,$89
+	db $08,$89,$02
+	db $FC,$FF
+	db $FF
+
+PoisonGasAnim: ; 7a623 (1e:6623)
+	db $46,$8A,$19
+	db $FF
+
+BarrageAnim: ; 7a627 (1e:6627)
+	db $43,$8B,$41
+	db $05,$FF,$55
+	db $FF
+
+LeechLifeAnim: ; 7a62e (1e:662e)
+	db $08,$8C,$02
+	db $FE,$FF
+	db $06,$FF,$21
+	db $06,$FF,$22
+	db $FE,$FF
+	db $FF
+
+LovelyKissAnim: ; 7a63c (1e:663c)
+	db $06,$8D,$12
+	db $FF
+
+SkyAttackAnim: ; 7a640 (1e:6640)
+	db $EE,$8E
+	db $ED,$FF
+	db $46,$87,$04
+	db $DD,$FF
+	db $FF
+
+TransformAnim: ; 7a64a (1e:664a)
+	db $46,$8F,$21
+	db $44,$8F,$22
+	db $08,$FF,$47
+	db $E8,$FF
+	db $FF
+
+BubbleAnim: ; 7a656 (1e:6656)
+	db $16,$90,$35
+	db $FF
+
+DizzyPunchAnim: ; 7a65a (1e:665a)
+	db $06,$91,$17
+	db $06,$91,$17
+	db $06,$91,$17
+	db $06,$02,$02
+	db $FF
+
+SporeAnim: ; 7a667 (1e:6667)
+	db $06,$92,$36
+	db $FF
+
+FlashAnim: ; 7a66b (1e:666b)
+	db $F0,$48
+	db $FE,$88
+	db $FE,$FF
+	db $FC,$FF
+	db $FF
+
+PsywaveAnim: ; 7a674 (1e:6674)
+	db $06,$2F,$31
+	db $D8,$5C
+	db $FF
+
+SplashAnim: ; 7a67a (1e:667a)
+	db $EB,$95
+	db $FF
+
+AcidArmorAnim: ; 7a67d (1e:667d)
+	db $E9,$96
+	db $FF
+
+CrabHammerAnim: ; 7a680 (1e:6680)
+	db $46,$97,$05
+	db $06,$FF,$2A
+	db $FF
+
+ExplosionAnim: ; 7a687 (1e:6687)
+	db $43,$98,$34
+	db $FF
+
+FurySwipesAnim: ; 7a68b (1e:668b)
+	db $04,$99,$0F
+	db $FF
+
+BonemerangAnim: ; 7a68f (1e:668f)
+	db $06,$9A,$02
+	db $FF
+
+RestAnim: ; 7a693 (1e:6693)
+	db $10,$9B,$3A
+	db $10,$9B,$3A
+	db $FF
+
+RockSlideAnim: ; 7a69a (1e:669a)
+	db $04,$9C,$1D
+	db $03,$9C,$1E
+	db $46,$9D,$04
+	db $FF
+
+HyperFangAnim: ; 7a6a4 (1e:66a4)
+	db $06,$9D,$02
+	db $FF
+
+SharpenAnim: ; 7a6a8 (1e:66a8)
+	db $F0,$9E
+	db $46,$FF,$43
+	db $FE,$FF
+	db $FC,$FF
+	db $FF
+
+ConversionAnim: ; 7a6b2 (1e:66b2)
+	db $FE,$9F
+	db $46,$FF,$21
+	db $46,$FF,$22
+	db $FE,$FF
+	db $FF
+
+TriAttackAnim: ; 7a6bd (1e:66bd)
+	db $FE,$A0
+	db $46,$FF,$4D
+	db $FE,$FF
+	db $FF
+
+SuperFangAnim: ; 7a6c5 (1e:66c5)
+	db $FD,$48
+	db $46,$A1,$04
+	db $FC,$FF
+	db $FF
+
+SlashAnim: ; 7a6cd (1e:66cd)
+	db $06,$A2,$0F
+	db $FF
+
+SubstituteAnim: ; 7a6d1 (1e:66d1)
+	db $F4,$A3
+	db $08,$FF,$47
+	db $D9,$FF
+	db $FF
+
+BallTossAnim: ; 7a6d9 (1e:66d9)
+	db $03,$FF,$06
+	db $FF
+
+GreatTossAnim: ; 7a6dd (1e:66dd)
+	db $03,$FF,$07
+	db $FF
+
+UltraTossAnim: ; 7a6e1 (1e:66e1)
+	db $02,$FF,$08
+	db $FF
+
+BallShakeAnim: ; 7a6e5 (1e:66e5)
+	db $04,$FF,$09
+	db $FF
+
+BallPoofAnim: ; 7a6e9 (1e:66e9)
+	db $04,$FF,$0A
+	db $FF
+
+ShowPicAnim: ; 7a6ed (1e:66ed)
+	db $DC,$FF
+	db $FF
+
+HidePicAnim: ; 7a6f0 (1e:66f0)
+	db $DF,$FF
+	db $FF
+
+EnemyFlashAnim: ; 7a6f3 (1e:66f3)
+	db $DD,$FF
+	db $FF
+
+PlayerFlashAnim: ; 7a6f6 (1e:66f6)
+	db $F5,$FF
+	db $FF
+
+EnemyHUDShakeAnim: ; 7a6f9 (1e:66f9)
+	db $E4,$FF
+	db $FF
+
+TradeBallDropAnim: ; 7a6fc (1e:66fc)
+	db $86,$FF,$48
+	db $FF
+
+TradeBallAppear1Anim: ; 7a700 (1e:6700)
+	db $84,$FF,$49
+	db $FF
+
+TradeBallAppear2Anim: ; 7a704 (1e:6704)
+	db $86,$FF,$4A
+	db $FF
+
+TradeBallPoofAnim: ; 7a708 (1e:6708)
+	db $86,$FF,$4B
+	db $FF
+
+XStatItemAnim: ; 7a7c0 (1e:670c)
+	db $F0,$FF
+	db $E2,$FF
+	db $FC,$FF
+	db $FF
+
+ShrinkingSquareAnim: ; 7a713 (1e:6713)
+	db $F0,$FF
+	db $46,$FF,$43
+	db $FC,$FF
+	db $FF
+
+XStatItemBlackAnim: ; 7a71b (1e:671b)
+	db $F9,$FF
+	db $E2,$FF
+	db $FC,$FF
+	db $FF
+
+ShrinkingSquareBlackAnim: ; 7a722 (1e:6722)
+	db $F9,$FF
+	db $46,$FF,$43
+	db $FC,$FF
+	db $FF
+
+UnusedAnim: ; 7a72a (1e:672a)
+	db $F0,$FF
+	db $EC,$FF
+	db $FC,$FF
+	db $FF
+
+ParalyzeAnim: ; 7a731 (1e:6731)
+	db $04,$13,$24
+	db $04,$13,$24
+	db $FF
+
+PoisonAnim: ; 7a738 (1e:6738)
+	db $08,$13,$27
+	db $08,$13,$27
+	db $FF
+
+SleepPlayerAnim: ; 7a73f (1e:673f)
+	db $10,$9B,$3A
+	db $10,$9B,$3A
+	db $FF
+
+SleepEnemyAnim: ; 7a746 (1e:6746)
+	db $10,$9B,$3B
+	db $10,$9B,$3B
+	db $FF
+
+ConfusedPlayerAnim: ; 7a74d (1e:674d)
+	db $08,$84,$25
+	db $08,$84,$25
+	db $FF
+
+ConfusedEnemyAnim: ; 7a754 (1e:6754)
+	db $08,$84,$26
+	db $08,$84,$26
+	db $FF
+
+BallBlockAnim: ; 7a75b (1e:675b)
+	db $03,$FF,$0B
+	db $FF
+
+FaintAnim: ; 7a75f (1e:675f)
+	db $F6,$5A
+	db $FF
+
+ShakeScreenAnim: ; 7a762 (1e:6762)
+	db $FB,$FF
+	db $FF
+
+ThrowRockAnim: ; 7a765 (1e:6765)
+	db $03,$8B,$53
+	db $FF
+
+ThrowBaitAnim: ; 7a769 (1e:6769)
+	db $03,$8B,$54
+	db $FF
+
+SubanimationPointers: ; 7a76d (1e:676d)
+	dw Subanimation00
+	dw Subanimation01
+	dw Subanimation02
+	dw Subanimation03
+	dw Subanimation04
+	dw Subanimation05
+	dw Subanimation06
+	dw Subanimation07
+	dw Subanimation08
+	dw Subanimation09
+	dw Subanimation0a
+	dw Subanimation0b
+	dw Subanimation0c
+	dw Subanimation0d
+	dw Subanimation0e
+	dw Subanimation0f
+	dw Subanimation10
+	dw Subanimation11
+	dw Subanimation12
+	dw Subanimation13
+	dw Subanimation14
+	dw Subanimation15
+	dw Subanimation16
+	dw Subanimation17
+	dw Subanimation18
+	dw Subanimation19
+	dw Subanimation1a
+	dw Subanimation1b
+	dw Subanimation1c
+	dw Subanimation1d
+	dw Subanimation1e
+	dw Subanimation1f
+	dw Subanimation20
+	dw Subanimation21
+	dw Subanimation22
+	dw Subanimation23
+	dw Subanimation24
+	dw Subanimation25
+	dw Subanimation26
+	dw Subanimation27
+	dw Subanimation28
+	dw Subanimation29
+	dw Subanimation2a
+	dw Subanimation2b
+	dw Subanimation2c
+	dw Subanimation2d
+	dw Subanimation2e
+	dw Subanimation2f
+	dw Subanimation30
+	dw Subanimation31
+	dw Subanimation32
+	dw Subanimation33
+	dw Subanimation34
+	dw Subanimation35
+	dw Subanimation36
+	dw Subanimation37
+	dw Subanimation38
+	dw Subanimation39
+	dw Subanimation3a
+	dw Subanimation3b
+	dw Subanimation3c
+	dw Subanimation3d
+	dw Subanimation3e
+	dw Subanimation3f
+	dw Subanimation40
+	dw Subanimation41
+	dw Subanimation42
+	dw Subanimation43
+	dw Subanimation44
+	dw Subanimation45
+	dw Subanimation46
+	dw Subanimation47
+	dw Subanimation48
+	dw Subanimation49
+	dw Subanimation4a
+	dw Subanimation4b
+	dw Subanimation4c
+	dw Subanimation4d
+	dw Subanimation4e
+	dw Subanimation4f
+	dw Subanimation50
+	dw Subanimation51
+	dw Subanimation52
+	dw Subanimation53
+	dw Subanimation54
+	dw Subanimation55
+
+Subanimation04: ; 7a819 (1e:6819)
+	db $43
+	db $02,$1a,$00
+	db $02,$10,$00
+	db $02,$03,$00
+
+Subanimation05: ; 7a823 (1e:6823)
+	db $41
+	db $02,$10,$00
+
+Subanimation08: ; 7a827 (1e:6827)
+	db $0b
+	db $03,$30,$00
+	db $03,$44,$00
+	db $03,$94,$00
+	db $03,$60,$00
+	db $03,$76,$00
+	db $03,$9f,$00
+	db $03,$8d,$00
+	db $03,$a0,$00
+	db $03,$1a,$00
+	db $03,$a1,$00
+	db $03,$34,$00
+
+Subanimation07: ; 7a849 (1e:6849)
+	db $0b
+	db $03,$30,$00
+	db $03,$a2,$00
+	db $03,$31,$00
+	db $03,$a3,$00
+	db $03,$32,$00
+	db $03,$a4,$00
+	db $03,$92,$00
+	db $03,$a5,$00
+	db $03,$15,$00
+	db $03,$a6,$00
+	db $03,$34,$00
+
+Subanimation06: ; 7a86b (1e:686b)
+	db $0b
+	db $03,$30,$00
+	db $03,$a2,$00
+	db $03,$93,$00
+	db $03,$61,$00
+	db $03,$73,$00
+	db $03,$a7,$00
+	db $03,$33,$00
+	db $03,$a8,$00
+	db $03,$0e,$00
+	db $03,$a9,$00
+	db $03,$34,$00
+
+Subanimation09: ; 7a88d (1e:688d)
+	db $04
+	db $03,$21,$04
+	db $04,$21,$04
+	db $03,$21,$04
+	db $05,$21,$04
+
+Subanimation0a: ; 7a89a (1e:689a)
+	db $46
+	db $06,$1b,$00
+	db $07,$1b,$00
+	db $08,$36,$00
+	db $09,$36,$00
+	db $0a,$15,$00
+	db $0a,$15,$00
+
+Subanimation0b: ; 7a8ad (1e:68ad)
+	db $04
+	db $01,$2d,$00
+	db $03,$2f,$00
+	db $03,$35,$00
+	db $03,$4d,$00
+
+Subanimation55: ; 7a8ba (1e:68ba)
+	db $41
+	db $01,$9d,$00
+
+Subanimation11: ; 7a8be (1e:68be)
+	db $4c
+	db $0b,$26,$00
+	db $0c,$26,$00
+	db $0b,$26,$00
+	db $0c,$26,$00
+	db $0b,$28,$00
+	db $0c,$28,$00
+	db $0b,$28,$00
+	db $0c,$28,$00
+	db $0b,$27,$00
+	db $0c,$27,$00
+	db $0b,$27,$00
+	db $0c,$27,$00
+
+Subanimation2b: ; 7a8e3 (1e:68e3)
+	db $4b
+	db $0d,$03,$03
+	db $0e,$03,$03
+	db $0f,$03,$00
+	db $0d,$11,$00
+	db $0d,$11,$00
+	db $0d,$37,$00
+	db $0d,$37,$00
+	db $10,$21,$00
+	db $10,$21,$00
+	db $11,$1b,$00
+	db $11,$1b,$00
+
+Subanimation2c: ; 7a905 (1e:6905)
+	db $4c
+	db $12,$01,$00
+	db $12,$0f,$00
+	db $12,$1b,$00
+	db $12,$25,$00
+	db $13,$38,$00
+	db $13,$38,$02
+	db $14,$38,$00
+	db $14,$38,$02
+	db $15,$38,$00
+	db $15,$38,$00
+	db $16,$38,$00
+	db $16,$38,$00
+
+Subanimation12: ; 7a92a (1e:692a)
+	db $69
+	db $17,$30,$00
+	db $17,$39,$00
+	db $17,$3a,$00
+	db $17,$3b,$00
+	db $17,$3c,$00
+	db $17,$3d,$00
+	db $17,$3e,$00
+	db $17,$3f,$00
+	db $17,$1f,$00
+
+Subanimation00: ; 7a946 (1e:6946)
+	db $41
+	db $01,$17,$00
+
+Subanimation01: ; 7a94a (1e:694a)
+	db $42
+	db $01,$0f,$00
+	db $01,$1d,$00
+
+Subanimation02: ; 7a951 (1e:6951)
+	db $43
+	db $01,$12,$00
+	db $01,$15,$00
+	db $01,$1c,$00
+
+Subanimation03: ; 7a95b (1e:695b)
+	db $44
+	db $01,$0b,$00
+	db $01,$11,$00
+	db $01,$18,$00
+	db $01,$1d,$00
+
+Subanimation0c: ; 7a968 (1e:6968)
+	db $43
+	db $0c,$20,$00
+	db $0c,$21,$00
+	db $0c,$23,$00
+
+Subanimation0d: ; 7a972 (1e:6972)
+	db $46
+	db $0c,$20,$02
+	db $0c,$15,$00
+	db $0c,$21,$02
+	db $0c,$17,$00
+	db $0c,$23,$02
+	db $0c,$19,$00
+
+Subanimation0e: ; 7a985 (1e:6985)
+	db $49
+	db $0c,$20,$02
+	db $0c,$15,$02
+	db $0c,$07,$00
+	db $0c,$21,$02
+	db $0c,$17,$02
+	db $0c,$09,$00
+	db $0c,$23,$02
+	db $0c,$19,$02
+	db $0c,$0c,$00
+
+Subanimation1f: ; 7a9a1 (1e:69a1)
+	db $85
+	db $0c,$30,$03
+	db $0c,$40,$03
+	db $0c,$41,$03
+	db $0c,$42,$03
+	db $0c,$21,$00
+
+Subanimation2e: ; 7a9b1 (1e:69b1)
+	db $2e
+	db $18,$43,$02
+	db $75,$52,$04
+	db $19,$43,$02
+	db $75,$63,$04
+	db $1a,$43,$02
+	db $75,$4d,$04
+	db $1b,$43,$02
+	db $75,$97,$04
+	db $1c,$43,$02
+	db $75,$98,$04
+	db $1d,$43,$02
+	db $75,$58,$04
+	db $1e,$43,$02
+	db $75,$1b,$00
+
+Subanimation2f: ; 7a9dc (1e:69dc)
+	db $44
+	db $1f,$24,$00
+	db $20,$20,$00
+	db $21,$1a,$00
+	db $22,$15,$00
+
+Subanimation30: ; 7a9e9 (1e:69e9)
+	db $52
+	db $23,$00,$02
+	db $23,$02,$02
+	db $23,$04,$00
+	db $23,$07,$02
+	db $23,$02,$02
+	db $23,$04,$00
+	db $23,$0e,$02
+	db $23,$02,$02
+	db $23,$0c,$00
+	db $25,$07,$00
+	db $25,$0e,$00
+	db $25,$15,$00
+	db $24,$24,$02
+	db $23,$1c,$02
+	db $23,$23,$00
+	db $23,$21,$02
+	db $24,$28,$00
+	db $24,$28,$00
+
+Subanimation0f: ; 7aa20 (1e:6a20)
+	db $4c
+	db $26,$0e,$02
+	db $26,$16,$02
+	db $26,$1c,$00
+	db $27,$0e,$02
+	db $27,$16,$02
+	db $27,$1c,$00
+	db $28,$0e,$02
+	db $28,$16,$02
+	db $28,$1c,$00
+	db $29,$0e,$02
+	db $29,$16,$02
+	db $29,$1c,$00
+
+Subanimation16: ; 7aa45 (1e:6a45)
+	db $4c
+	db $2a,$05,$00
+	db $2b,$05,$02
+	db $2b,$0c,$02
+	db $2a,$11,$04
+	db $2b,$11,$02
+	db $2b,$17,$02
+	db $2a,$1b,$04
+	db $2b,$1b,$02
+	db $2b,$20,$02
+	db $2a,$2f,$04
+	db $2c,$00,$02
+	db $2c,$00,$00
+
+Subanimation10: ; 7aa6a (1e:6a6a)
+	db $88
+	db $2d,$44,$00
+	db $2e,$45,$00
+	db $2d,$46,$00
+	db $2e,$47,$00
+	db $2d,$48,$00
+	db $2e,$49,$00
+	db $2d,$2f,$00
+	db $2e,$1a,$00
+
+Subanimation31: ; 7aa83 (1e:6a83)
+	db $2a
+	db $2f,$46,$00
+	db $2f,$4a,$00
+	db $2f,$4b,$00
+	db $2f,$4c,$00
+	db $2f,$4d,$00
+	db $2f,$4e,$00
+	db $2f,$4f,$00
+	db $2f,$50,$00
+	db $2f,$2e,$00
+	db $2f,$51,$00
+
+Subanimation13: ; 7aaa2 (1e:6aa2)
+	db $86
+	db $30,$31,$00
+	db $30,$32,$00
+	db $30,$92,$00
+	db $30,$0e,$00
+	db $30,$0f,$00
+	db $30,$10,$00
+
+Subanimation14: ; 7aab5 (1e:6ab5)
+	db $49
+	db $30,$10,$00
+	db $30,$10,$03
+	db $31,$1c,$04
+	db $31,$21,$04
+	db $31,$26,$00
+	db $30,$10,$02
+	db $31,$1d,$04
+	db $31,$22,$04
+	db $31,$27,$00
+
+Subanimation41: ; 7aad1 (1e:6ad1)
+	db $85
+	db $03,$31,$00
+	db $03,$32,$00
+	db $03,$92,$00
+	db $03,$0e,$00
+	db $03,$10,$00
+
+Subanimation42: ; 7aae1 (1e:6ae1)
+	db $43
+	db $48,$08,$00
+	db $49,$08,$00
+	db $5a,$08,$00
+
+Subanimation15: ; 7aaeb (1e:6aeb)
+	db $22
+	db $35,$52,$00
+	db $35,$53,$00
+
+Subanimation17: ; 7aaf2 (1e:6af2)
+	db $44
+	db $36,$54,$00
+	db $36,$55,$00
+	db $37,$56,$00
+	db $37,$57,$00
+
+Subanimation18: ; 7aaff (1e:6aff)
+	db $a4
+	db $36,$54,$00
+	db $36,$55,$00
+	db $37,$56,$00
+	db $37,$57,$00
+
+Subanimation40: ; 7ab0c (1e:6b0c)
+	db $46
+	db $17,$54,$00
+	db $17,$55,$00
+	db $17,$0e,$00
+	db $17,$56,$00
+	db $17,$57,$00
+	db $17,$13,$00
+
+Subanimation19: ; 7ab1f (1e:6b1f)
+	db $8c
+	db $38,$31,$00
+	db $39,$31,$00
+	db $38,$32,$00
+	db $39,$32,$00
+	db $38,$92,$00
+	db $39,$92,$00
+	db $38,$0e,$00
+	db $39,$0e,$00
+	db $38,$0f,$00
+	db $39,$0f,$00
+	db $38,$10,$00
+	db $39,$10,$00
+
+Subanimation1a: ; 7ab44 (1e:6b44)
+	db $50
+	db $3a,$08,$00
+	db $3b,$08,$00
+	db $3c,$08,$00
+	db $3d,$08,$00
+	db $3e,$08,$00
+	db $3f,$08,$00
+	db $3e,$08,$00
+	db $3f,$08,$00
+	db $3a,$0b,$00
+	db $3b,$0b,$00
+	db $3c,$0b,$00
+	db $3d,$0b,$00
+	db $3e,$0b,$00
+	db $3f,$0b,$00
+	db $3e,$0b,$00
+	db $3f,$0b,$00
+
+Subanimation1b: ; 7ab75 (1e:6b75)
+	db $84
+	db $40,$31,$00
+	db $40,$32,$00
+	db $40,$92,$00
+	db $40,$15,$00
+
+Subanimation1c: ; 7ab82 (1e:6b82)
+	db $43
+	db $41,$58,$00
+	db $41,$59,$00
+	db $41,$21,$00
+
+Subanimation1d: ; 7ab8c (1e:6b8c)
+	db $af
+	db $24,$9a,$00
+	db $23,$1b,$02
+	db $24,$22,$00
+	db $23,$16,$02
+	db $23,$1d,$02
+	db $24,$98,$00
+	db $25,$2c,$04
+	db $25,$2a,$04
+	db $25,$99,$04
+	db $25,$62,$04
+	db $25,$99,$04
+	db $25,$62,$04
+	db $25,$99,$04
+	db $25,$62,$04
+	db $25,$99,$03
+
+Subanimation1e: ; 7abba (1e:6bba)
+	db $01
+	db $25,$75,$00
+
+Subanimation20: ; 7abbe (1e:6bbe)
+	db $42
+	db $42,$07,$00
+	db $43,$07,$00
+
+Subanimation21: ; 7abc5 (1e:6bc5)
+	db $43
+	db $44,$00,$00
+	db $45,$08,$00
+	db $46,$10,$02
+
+Subanimation22: ; 7abcf (1e:6bcf)
+	db $8b
+	db $47,$10,$00
+	db $47,$56,$00
+	db $47,$07,$00
+	db $47,$aa,$00
+	db $47,$ab,$00
+	db $47,$ac,$00
+	db $47,$ad,$00
+	db $47,$ae,$00
+	db $47,$af,$00
+	db $47,$89,$00
+	db $47,$b0,$00
+
+Subanimation2d: ; 7abf1 (1e:6bf1)
+	db $66
+	db $44,$64,$00
+	db $45,$65,$00
+	db $46,$66,$00
+	db $47,$66,$00
+	db $47,$66,$00
+	db $47,$66,$00
+
+Subanimation39: ; 7ac04 (1e:6c04)
+	db $61
+	db $47,$67,$00
+
+Subanimation4e: ; 7ac08 (1e:6c08)
+	db $41
+	db $71,$0f,$03
+
+Subanimation4f: ; 7ac0c (1e:6c0c)
+	db $47
+	db $71,$0f,$00
+	db $71,$08,$00
+	db $71,$01,$00
+	db $71,$95,$00
+	db $72,$95,$00
+	db $73,$95,$00
+	db $74,$95,$00
+
+Subanimation50: ; 7ac22 (1e:6c22)
+	db $48
+	db $74,$95,$00
+	db $73,$95,$00
+	db $72,$95,$00
+	db $71,$95,$00
+	db $71,$01,$00
+	db $71,$08,$00
+	db $71,$0f,$00
+	db $71,$16,$00
+
+Subanimation29: ; 7ac3b (1e:6c3b)
+	db $5d
+	db $48,$0f,$00
+	db $4a,$68,$03
+	db $4b,$2a,$03
+	db $49,$0f,$00
+	db $4a,$68,$03
+	db $4b,$2a,$00
+	db $4c,$6a,$03
+	db $4d,$69,$03
+	db $49,$6b,$00
+	db $4c,$6a,$03
+	db $4d,$69,$00
+	db $4a,$68,$03
+	db $4b,$2a,$03
+	db $49,$6c,$00
+	db $4a,$68,$03
+	db $4b,$2a,$00
+	db $4c,$6a,$03
+	db $4d,$69,$03
+	db $49,$6d,$00
+	db $4c,$6a,$03
+	db $4d,$2a,$00
+	db $4a,$68,$03
+	db $4b,$2a,$03
+	db $49,$0f,$00
+	db $4a,$68,$03
+	db $4b,$2a,$00
+	db $4c,$6a,$03
+	db $4d,$2a,$03
+	db $49,$6b,$00
+
+Subanimation2a: ; 7ac93 (1e:6c93)
+	db $44
+	db $4e,$2b,$00
+	db $4f,$2b,$00
+	db $50,$2b,$00
+	db $50,$2b,$00
+
+Subanimation23: ; 7aca0 (1e:6ca0)
+	db $42
+	db $51,$2d,$00
+	db $51,$6e,$00
+
+Subanimation24: ; 7aca7 (1e:6ca7)
+	db $a2
+	db $51,$2d,$00
+	db $51,$6e,$00
+
+Subanimation25: ; 7acae (1e:6cae)
+	db $62
+	db $52,$71,$00
+	db $52,$72,$00
+
+Subanimation26: ; 7acb5 (1e:6cb5)
+	db $02
+	db $52,$01,$00
+	db $52,$2c,$00
+
+Subanimation3a: ; 7acbc (1e:6cbc)
+	db $63
+	db $53,$71,$00
+	db $53,$7f,$00
+	db $53,$81,$00
+
+Subanimation3b: ; 7acc6 (1e:6cc6)
+	db $03
+	db $53,$01,$00
+	db $53,$15,$00
+	db $53,$2c,$00
+
+Subanimation27: ; 7acd0 (1e:6cd0)
+	db $a2
+	db $54,$01,$00
+	db $54,$2c,$00
+
+Subanimation28: ; 7acd7 (1e:6cd7)
+	db $23
+	db $55,$73,$03
+	db $56,$73,$03
+	db $57,$73,$00
+
+Subanimation32: ; 7ace1 (1e:6ce1)
+	db $63
+	db $47,$74,$00
+	db $47,$43,$00
+	db $47,$75,$00
+
+Subanimation33: ; 7aceb (1e:6ceb)
+	db $26
+	db $58,$76,$00
+	db $34,$76,$00
+	db $58,$76,$00
+	db $34,$76,$00
+	db $58,$76,$00
+	db $34,$76,$00
+
+Subanimation3c: ; 7acfe (1e:6cfe)
+	db $67
+	db $59,$79,$03
+	db $59,$7b,$03
+	db $59,$77,$03
+	db $59,$7a,$03
+	db $59,$78,$03
+	db $59,$7c,$03
+	db $59,$76,$00
+
+Subanimation3d: ; 7ad14 (1e:6d14)
+	db $08
+	db $3a,$4d,$00
+	db $3b,$4d,$00
+	db $3c,$4d,$00
+	db $3d,$4d,$00
+	db $3e,$4d,$00
+	db $3f,$4d,$00
+	db $3e,$4d,$00
+	db $3f,$4d,$00
+
+Subanimation34: ; 7ad2d (1e:6d2d)
+	db $35
+	db $48,$7d,$00
+	db $49,$7d,$00
+	db $5a,$7d,$00
+	db $48,$30,$00
+	db $49,$30,$00
+	db $5a,$30,$00
+	db $48,$7e,$00
+	db $49,$7e,$00
+	db $5a,$7e,$00
+	db $48,$7f,$00
+	db $49,$7f,$00
+	db $5a,$7f,$00
+	db $48,$80,$00
+	db $49,$80,$00
+	db $5a,$80,$00
+	db $48,$81,$00
+	db $49,$81,$00
+	db $5a,$81,$00
+	db $48,$82,$00
+	db $49,$82,$00
+	db $5a,$82,$00
+
+Subanimation35: ; 7ad6d (1e:6d6d)
+	db $24
+	db $5b,$83,$03
+	db $5c,$84,$03
+	db $5d,$85,$03
+	db $5e,$09,$00
+
+Subanimation36: ; 7ad7a (1e:6d7a)
+	db $48
+	db $5f,$2a,$00
+	db $5f,$00,$00
+	db $60,$2a,$00
+	db $60,$00,$00
+	db $61,$2a,$00
+	db $61,$00,$00
+	db $62,$2a,$00
+	db $62,$00,$00
+
+Subanimation37: ; 7ad93 (1e:6d93)
+	db $2a
+	db $63,$89,$00
+	db $64,$75,$00
+	db $63,$76,$00
+	db $65,$0d,$00
+	db $65,$86,$00
+	db $65,$12,$00
+	db $65,$87,$00
+	db $65,$17,$00
+	db $65,$88,$00
+	db $65,$1a,$00
+
+Subanimation38: ; 7adb2 (1e:6db2)
+	db $50
+	db $66,$8a,$00
+	db $66,$33,$00
+	db $66,$2e,$00
+	db $67,$24,$03
+	db $66,$01,$04
+	db $66,$10,$04
+	db $66,$1d,$04
+	db $67,$28,$03
+	db $66,$2a,$04
+	db $66,$0e,$04
+	db $66,$1b,$04
+	db $67,$26,$03
+	db $66,$03,$04
+	db $66,$12,$04
+	db $66,$1e,$04
+	db $67,$29,$00
+
+Subanimation3e: ; 7ade3 (1e:6de3)
+	db $92
+	db $02,$31,$00
+	db $34,$31,$00
+	db $02,$31,$00
+	db $02,$32,$00
+	db $34,$32,$00
+	db $02,$32,$00
+	db $02,$92,$00
+	db $34,$92,$00
+	db $02,$92,$00
+	db $02,$0e,$00
+	db $34,$0e,$00
+	db $02,$0e,$00
+	db $02,$0f,$00
+	db $34,$0f,$00
+	db $02,$0f,$00
+	db $02,$10,$00
+	db $34,$10,$00
+	db $02,$10,$00
+
+Subanimation3f: ; 7ae1a (1e:6e1a)
+	db $72
+	db $68,$4b,$00
+	db $68,$8c,$00
+	db $68,$20,$00
+	db $68,$1c,$00
+	db $68,$19,$00
+	db $68,$14,$00
+	db $68,$76,$00
+	db $68,$8d,$00
+	db $68,$15,$00
+	db $68,$10,$00
+	db $68,$0c,$00
+	db $68,$06,$00
+	db $68,$8e,$00
+	db $68,$8f,$00
+	db $68,$90,$00
+	db $68,$26,$00
+	db $68,$23,$00
+	db $68,$1f,$00
+
+Subanimation44: ; 7ae51 (1e:6e51)
+	db $2c
+	db $69,$4b,$00
+	db $69,$8c,$00
+	db $69,$20,$00
+	db $69,$1c,$00
+	db $69,$19,$00
+	db $69,$14,$00
+	db $69,$76,$00
+	db $69,$8d,$00
+	db $69,$15,$00
+	db $69,$10,$00
+	db $69,$0c,$00
+	db $69,$06,$00
+
+Subanimation43: ; 7ae76 (1e:6e76)
+	db $a3
+	db $6a,$07,$00
+	db $6b,$0f,$00
+	db $6c,$17,$00
+
+Subanimation45: ; 7ae80 (1e:6e80)
+	db $24
+	db $6d,$8b,$00
+	db $6d,$84,$00
+	db $6d,$63,$00
+	db $6d,$8c,$00
+
+Subanimation46: ; 7ae8d (1e:6e8d)
+	db $26
+	db $6d,$8b,$00
+	db $6d,$84,$00
+	db $6d,$63,$00
+	db $6d,$8c,$00
+	db $6d,$0a,$00
+	db $6d,$89,$00
+
+Subanimation47: ; 7aea0 (1e:6ea0)
+	db $23
+	db $06,$82,$00
+	db $07,$82,$00
+	db $08,$96,$00
+
+Subanimation48: ; 7aeaa (1e:6eaa)
+	db $06
+	db $03,$41,$04
+	db $03,$48,$04
+	db $04,$48,$04
+	db $03,$48,$04
+	db $05,$48,$04
+	db $03,$48,$03
+
+Subanimation49: ; 7aebd (1e:6ebd)
+	db $04
+	db $04,$48,$04
+	db $03,$48,$04
+	db $05,$48,$04
+	db $03,$48,$03
+
+Subanimation4a: ; 7aeca (1e:6eca)
+	db $01
+	db $04,$84,$03
+
+Subanimation4b: ; 7aece (1e:6ece)
+	db $03
+	db $06,$72,$00
+	db $07,$72,$00
+	db $08,$72,$00
+
+Subanimation4c: ; 7aed8 (1e:6ed8)
+	db $68
+	db $6f,$30,$00
+	db $6e,$30,$00
+	db $70,$30,$00
+	db $6e,$30,$00
+	db $6f,$30,$00
+	db $6e,$30,$00
+	db $70,$30,$00
+	db $6e,$30,$00
+
+Subanimation4d: ; 7aef1 (1e:6ef1)
+	db $26
+	db $32,$4b,$00
+	db $33,$4f,$00
+	db $32,$20,$00
+	db $33,$16,$00
+	db $32,$19,$00
+	db $33,$0d,$00
+
+Subanimation51: ; 7af04 (1e:6f04)
+	db $a6
+	db $76,$1b,$00
+	db $34,$1b,$00
+	db $76,$1b,$00
+	db $34,$1b,$00
+	db $76,$1b,$00
+	db $34,$1b,$00
+
+Subanimation52: ; 7af17 (1e:6f17)
+	db $47
+	db $77,$25,$00
+	db $77,$9b,$00
+	db $77,$1a,$00
+	db $77,$9c,$00
+	db $77,$2f,$00
+	db $77,$50,$00
+	db $77,$8c,$00
+
+Subanimation53: ; 7af2d (1e:6f2d)
+	db $0c
+	db $78,$30,$00
+	db $78,$a2,$00
+	db $78,$93,$00
+	db $78,$61,$00
+	db $78,$73,$00
+	db $78,$a7,$00
+	db $78,$33,$00
+	db $78,$a8,$00
+	db $78,$0e,$00
+	db $78,$a9,$00
+	db $78,$34,$00
+	db $01,$9e,$00
+
+Subanimation54: ; 7af52 (1e:6f52)
+	db $0b
+	db $79,$30,$00
+	db $79,$a2,$00
+	db $79,$93,$00
+	db $79,$61,$00
+	db $79,$73,$00
+	db $79,$a7,$00
+	db $79,$33,$00
+	db $79,$a8,$00
+	db $79,$0e,$00
+	db $79,$a9,$00
+	db $79,$34,$00
+
+FrameBlockPointers: ; 7af74 (1e:6f74)
+	dw FrameBlock00
+	dw FrameBlock01
+	dw FrameBlock02
+	dw FrameBlock03
+	dw FrameBlock04
+	dw FrameBlock05
+	dw FrameBlock06
+	dw FrameBlock07
+	dw FrameBlock08
+	dw FrameBlock09
+	dw FrameBlock0a
+	dw FrameBlock0b
+	dw FrameBlock0c
+	dw FrameBlock0d
+	dw FrameBlock0e
+	dw FrameBlock0f
+	dw FrameBlock10
+	dw FrameBlock11
+	dw FrameBlock12
+	dw FrameBlock13
+	dw FrameBlock14
+	dw FrameBlock15
+	dw FrameBlock16
+	dw FrameBlock17
+	dw FrameBlock18
+	dw FrameBlock19
+	dw FrameBlock1a
+	dw FrameBlock1b
+	dw FrameBlock1c
+	dw FrameBlock1d
+	dw FrameBlock1e
+	dw FrameBlock1f
+	dw FrameBlock20
+	dw FrameBlock21
+	dw FrameBlock22
+	dw FrameBlock23
+	dw FrameBlock24
+	dw FrameBlock25
+	dw FrameBlock26
+	dw FrameBlock27
+	dw FrameBlock28
+	dw FrameBlock29
+	dw FrameBlock2a
+	dw FrameBlock2b
+	dw FrameBlock2c
+	dw FrameBlock2d
+	dw FrameBlock2e
+	dw FrameBlock2f
+	dw FrameBlock30
+	dw FrameBlock31
+	dw FrameBlock32
+	dw FrameBlock33
+	dw FrameBlock34
+	dw FrameBlock35
+	dw FrameBlock36
+	dw FrameBlock37
+	dw FrameBlock38
+	dw FrameBlock39
+	dw FrameBlock3a
+	dw FrameBlock3b
+	dw FrameBlock3c
+	dw FrameBlock3d
+	dw FrameBlock3e
+	dw FrameBlock3f
+	dw FrameBlock40
+	dw FrameBlock41
+	dw FrameBlock42
+	dw FrameBlock43
+	dw FrameBlock44
+	dw FrameBlock45
+	dw FrameBlock46
+	dw FrameBlock47
+	dw FrameBlock48
+	dw FrameBlock49
+	dw FrameBlock4a
+	dw FrameBlock4b
+	dw FrameBlock4c
+	dw FrameBlock4d
+	dw FrameBlock4e
+	dw FrameBlock4f
+	dw FrameBlock50
+	dw FrameBlock51
+	dw FrameBlock52
+	dw FrameBlock53
+	dw FrameBlock54
+	dw FrameBlock55
+	dw FrameBlock56
+	dw FrameBlock57
+	dw FrameBlock58
+	dw FrameBlock59
+	dw FrameBlock5a
+	dw FrameBlock5b
+	dw FrameBlock5c
+	dw FrameBlock5d
+	dw FrameBlock5e
+	dw FrameBlock5f
+	dw FrameBlock60
+	dw FrameBlock61
+	dw FrameBlock62
+	dw FrameBlock63
+	dw FrameBlock64
+	dw FrameBlock65
+	dw FrameBlock66
+	dw FrameBlock67
+	dw FrameBlock68
+	dw FrameBlock69
+	dw FrameBlock6a
+	dw FrameBlock6b
+	dw FrameBlock6c
+	dw FrameBlock6d
+	dw FrameBlock6e
+	dw FrameBlock6f
+	dw FrameBlock70
+	dw FrameBlock71
+	dw FrameBlock72
+	dw FrameBlock73
+	dw FrameBlock74
+	dw FrameBlock75
+	dw FrameBlock76
+	dw FrameBlock77
+	dw FrameBlock78
+	dw FrameBlock79
+
+FrameBlock01: ; 7b068 (1e:7068)
+	db $09
+	db $00,$00,$2c,$00
+	db $00,$08,$2d,$00
+	db $00,$10,$2c,$20
+	db $08,$00,$3c,$00
+	db $08,$08,$3d,$00
+	db $08,$10,$3c,$20
+	db $10,$00,$2c,$40
+	db $10,$08,$2d,$40
+	db $10,$10,$2c,$60
+
+FrameBlock02: ; 7b08d (1e:708d)
+	db $10
+	db $00,$00,$20,$00
+	db $00,$08,$21,$00
+	db $00,$10,$21,$20
+	db $00,$18,$20,$20
+	db $08,$00,$30,$00
+	db $08,$08,$31,$00
+	db $08,$10,$31,$20
+	db $08,$18,$30,$20
+	db $10,$00,$30,$40
+	db $10,$08,$31,$40
+	db $10,$10,$31,$60
+	db $10,$18,$30,$60
+	db $18,$00,$20,$40
+	db $18,$08,$21,$40
+	db $18,$10,$21,$60
+	db $18,$18,$20,$60
+
+FrameBlock03: ; 7b0ce (1e:70ce)
+	db $04
+	db $00,$00,$02,$00
+	db $00,$08,$02,$20
+	db $08,$00,$12,$00
+	db $08,$08,$12,$20
+
+FrameBlock04: ; 7b0df (1e:70df)
+	db $04
+	db $00,$00,$06,$00
+	db $00,$08,$07,$00
+	db $08,$00,$16,$00
+	db $08,$08,$17,$00
+
+FrameBlock05: ; 7b0f0 (1e:70f0)
+	db $04
+	db $00,$00,$07,$20
+	db $00,$08,$06,$20
+	db $08,$00,$17,$20
+	db $08,$08,$16,$20
+
+FrameBlock06: ; 7b101 (1e:7101)
+	db $0c
+	db $00,$08,$23,$00
+	db $08,$00,$32,$00
+	db $08,$08,$33,$00
+	db $00,$10,$23,$20
+	db $08,$10,$33,$20
+	db $08,$18,$32,$20
+	db $10,$00,$32,$40
+	db $10,$08,$33,$40
+	db $18,$08,$23,$40
+	db $10,$10,$33,$60
+	db $10,$18,$32,$60
+	db $18,$10,$23,$60
+
+FrameBlock07: ; 7b132 (1e:7132)
+	db $10
+	db $00,$00,$20,$00
+	db $00,$08,$21,$00
+	db $08,$00,$30,$00
+	db $08,$08,$31,$00
+	db $00,$10,$21,$20
+	db $00,$18,$20,$20
+	db $08,$10,$31,$20
+	db $08,$18,$30,$20
+	db $10,$00,$30,$40
+	db $10,$08,$31,$40
+	db $18,$00,$20,$40
+	db $18,$08,$21,$40
+	db $10,$10,$31,$60
+	db $10,$18,$30,$60
+	db $18,$10,$21,$60
+	db $18,$18,$20,$60
+
+FrameBlock08: ; 7b173 (1e:7173)
+	db $10
+	db $00,$00,$20,$00
+	db $00,$08,$21,$00
+	db $08,$00,$30,$00
+	db $08,$08,$31,$00
+	db $00,$18,$21,$20
+	db $00,$20,$20,$20
+	db $08,$18,$31,$20
+	db $08,$20,$30,$20
+	db $18,$00,$30,$40
+	db $18,$08,$31,$40
+	db $20,$00,$20,$40
+	db $20,$08,$21,$40
+	db $18,$18,$31,$60
+	db $18,$20,$30,$60
+	db $20,$18,$21,$60
+	db $20,$20,$20,$60
+
+FrameBlock09: ; 7b1b4 (1e:71b4)
+	db $0c
+	db $00,$00,$24,$00
+	db $00,$08,$25,$00
+	db $08,$00,$34,$00
+	db $00,$18,$25,$20
+	db $00,$20,$24,$20
+	db $08,$20,$34,$20
+	db $18,$00,$34,$40
+	db $20,$00,$24,$40
+	db $20,$08,$25,$40
+	db $18,$20,$34,$60
+	db $20,$18,$25,$60
+	db $20,$20,$24,$60
+
+FrameBlock0a: ; 7b1e5 (1e:71e5)
+	db $0c
+	db $00,$00,$24,$00
+	db $00,$08,$25,$00
+	db $08,$00,$34,$00
+	db $00,$20,$25,$20
+	db $00,$28,$24,$20
+	db $08,$28,$34,$20
+	db $20,$00,$34,$40
+	db $28,$00,$24,$40
+	db $28,$08,$25,$40
+	db $20,$28,$34,$60
+	db $28,$20,$25,$60
+	db $28,$28,$24,$60
+
+FrameBlock0b: ; 7b216 (1e:7216)
+	db $04
+	db $00,$00,$05,$00
+	db $00,$08,$05,$20
+	db $08,$00,$15,$00
+	db $08,$08,$15,$20
+
+FrameBlock0c: ; 7b227 (1e:7227)
+	db $04
+	db $00,$00,$04,$00
+	db $00,$08,$04,$20
+	db $08,$00,$14,$00
+	db $08,$08,$14,$20
+
+FrameBlock0d: ; 7b238 (1e:7238)
+	db $08
+	db $00,$00,$0c,$00
+	db $00,$08,$0d,$00
+	db $08,$00,$1c,$00
+	db $08,$08,$1d,$00
+	db $10,$00,$1d,$60
+	db $10,$08,$1c,$60
+	db $18,$00,$0d,$60
+	db $18,$08,$0c,$60
+
+FrameBlock0e: ; 7b259 (1e:7259)
+	db $04
+	db $20,$00,$0c,$00
+	db $20,$08,$0d,$00
+	db $28,$00,$1c,$00
+	db $28,$08,$1d,$00
+
+FrameBlock0f: ; 7b26a (1e:726a)
+	db $04
+	db $30,$00,$1d,$60
+	db $30,$08,$1c,$60
+	db $38,$00,$0d,$60
+	db $38,$08,$0c,$60
+
+FrameBlock10: ; 7b27b (1e:727b)
+	db $08
+	db $00,$00,$0e,$00
+	db $00,$08,$0f,$00
+	db $08,$00,$1e,$00
+	db $08,$08,$1f,$00
+	db $00,$10,$0f,$20
+	db $00,$18,$0e,$20
+	db $08,$10,$1f,$20
+	db $08,$18,$1e,$20
+
+FrameBlock11: ; 7b29c (1e:729c)
+	db $08
+	db $00,$00,$0e,$00
+	db $00,$08,$0f,$00
+	db $08,$00,$1e,$00
+	db $08,$08,$1f,$00
+	db $00,$20,$0f,$20
+	db $00,$28,$0e,$20
+	db $08,$20,$1f,$20
+	db $08,$28,$1e,$20
+
+FrameBlock12: ; 7b2bd (1e:72bd)
+	db $03
+	db $00,$00,$37,$00
+	db $08,$10,$37,$00
+	db $00,$20,$37,$00
+
+FrameBlock13: ; 7b2ca (1e:72ca)
+	db $04
+	db $00,$00,$36,$00
+	db $00,$08,$36,$20
+	db $08,$00,$36,$40
+	db $08,$08,$36,$60
+
+FrameBlock14: ; 7b2db (1e:72db)
+	db $08
+	db $00,$10,$28,$00
+	db $00,$18,$28,$20
+	db $08,$10,$38,$00
+	db $08,$18,$38,$20
+	db $00,$20,$36,$00
+	db $00,$28,$36,$20
+	db $08,$20,$36,$40
+	db $08,$28,$36,$60
+
+FrameBlock15: ; 7b2fc (1e:72fc)
+	db $0c
+	db $00,$00,$28,$00
+	db $00,$08,$28,$20
+	db $08,$00,$38,$00
+	db $08,$08,$38,$20
+	db $00,$10,$29,$00
+	db $00,$18,$29,$20
+	db $08,$10,$39,$00
+	db $08,$18,$39,$20
+	db $00,$20,$28,$00
+	db $00,$28,$28,$20
+	db $08,$20,$38,$00
+	db $08,$28,$38,$20
+
+FrameBlock16: ; 7b32d (1e:732d)
+	db $08
+	db $00,$00,$29,$00
+	db $00,$08,$29,$20
+	db $08,$00,$39,$00
+	db $08,$08,$39,$20
+	db $00,$20,$29,$00
+	db $00,$28,$29,$20
+	db $08,$20,$39,$00
+	db $08,$28,$39,$20
+
+FrameBlock17: ; 7b34e (1e:734e)
+	db $04
+	db $00,$00,$08,$00
+	db $00,$08,$09,$00
+	db $08,$00,$18,$00
+	db $08,$08,$19,$00
+
+FrameBlock18: ; 7b35f (1e:735f)
+	db $01
+	db $18,$00,$45,$60
+
+FrameBlock19: ; 7b364 (1e:7364)
+	db $02
+	db $18,$08,$45,$00
+	db $10,$08,$46,$60
+
+FrameBlock1a: ; 7b36d (1e:736d)
+	db $02
+	db $10,$10,$45,$60
+	db $18,$10,$46,$00
+
+FrameBlock1b: ; 7b376 (1e:7376)
+	db $02
+	db $10,$18,$45,$00
+	db $08,$18,$46,$60
+
+FrameBlock1c: ; 7b37f (1e:737f)
+	db $02
+	db $08,$20,$45,$60
+	db $10,$20,$46,$00
+
+FrameBlock1d: ; 7b388 (1e:7388)
+	db $02
+	db $08,$28,$45,$00
+	db $00,$28,$46,$60
+
+FrameBlock1e: ; 7b391 (1e:7391)
+	db $02
+	db $00,$30,$45,$60
+	db $08,$30,$46,$00
+
+FrameBlock75: ; 7b39a (1e:739a)
+	db $04
+	db $00,$00,$43,$00
+	db $00,$08,$43,$20
+	db $08,$00,$22,$00
+	db $08,$08,$43,$60
+
+FrameBlock1f: ; 7b3ab (1e:73ab)
+	db $02
+	db $00,$00,$03,$00
+	db $00,$30,$03,$20
+
+FrameBlock20: ; 7b3b4 (1e:73b4)
+	db $06
+	db $00,$00,$03,$00
+	db $00,$30,$03,$20
+	db $08,$08,$03,$00
+	db $08,$28,$03,$20
+	db $08,$00,$13,$00
+	db $08,$30,$13,$20
+
+FrameBlock21: ; 7b3cd (1e:73cd)
+	db $0c
+	db $00,$00,$03,$00
+	db $00,$30,$03,$20
+	db $08,$08,$03,$00
+	db $08,$28,$03,$20
+	db $08,$00,$13,$00
+	db $08,$30,$13,$20
+	db $10,$10,$03,$00
+	db $10,$20,$03,$20
+	db $10,$08,$13,$00
+	db $10,$28,$13,$20
+	db $10,$00,$03,$00
+	db $10,$30,$03,$20
+
+FrameBlock22: ; 7b3fe (1e:73fe)
+	db $13
+	db $00,$00,$03,$00
+	db $08,$00,$13,$00
+	db $10,$00,$03,$00
+	db $18,$00,$13,$00
+	db $08,$08,$03,$00
+	db $10,$08,$13,$00
+	db $18,$08,$03,$00
+	db $10,$10,$03,$00
+	db $18,$10,$13,$00
+	db $18,$18,$03,$00
+	db $10,$20,$03,$20
+	db $18,$20,$13,$20
+	db $08,$28,$03,$20
+	db $10,$28,$13,$20
+	db $18,$28,$03,$20
+	db $00,$30,$03,$20
+	db $08,$30,$13,$20
+	db $10,$30,$03,$20
+	db $18,$30,$13,$20
+
+FrameBlock23: ; 7b44b (1e:744b)
+	db $04
+	db $00,$00,$0a,$00
+	db $00,$08,$0b,$00
+	db $08,$00,$1a,$00
+	db $08,$08,$1b,$00
+
+FrameBlock24: ; 7b45c (1e:745c)
+	db $02
+	db $08,$00,$0a,$00
+	db $08,$08,$0b,$00
+
+FrameBlock25: ; 7b465 (1e:7465)
+	db $0c
+	db $10,$00,$0a,$00
+	db $10,$08,$0b,$00
+	db $18,$00,$1a,$00
+	db $18,$08,$1b,$00
+	db $00,$10,$0a,$00
+	db $00,$18,$0b,$00
+	db $08,$10,$1a,$00
+	db $08,$18,$1b,$00
+	db $08,$20,$0a,$00
+	db $08,$28,$0b,$00
+	db $10,$20,$1a,$00
+	db $10,$28,$1b,$00
+
+FrameBlock26: ; 7b496 (1e:7496)
+	db $04
+	db $00,$10,$44,$00
+	db $00,$18,$44,$20
+	db $08,$10,$44,$40
+	db $08,$18,$44,$60
+
+FrameBlock27: ; 7b4a7 (1e:74a7)
+	db $05
+	db $08,$08,$44,$00
+	db $08,$10,$44,$20
+	db $10,$08,$44,$40
+	db $10,$10,$44,$60
+	db $00,$18,$47,$00
+
+FrameBlock28: ; 7b4bc (1e:74bc)
+	db $06
+	db $10,$00,$44,$00
+	db $10,$08,$44,$20
+	db $18,$00,$44,$40
+	db $18,$08,$44,$60
+	db $08,$10,$47,$00
+	db $02,$16,$47,$00
+
+FrameBlock29: ; 7b4d5 (1e:74d5)
+	db $04
+	db $18,$00,$47,$00
+	db $12,$06,$47,$00
+	db $0c,$0c,$47,$00
+	db $06,$12,$47,$00
+
+FrameBlock2a: ; 7b4e6 (1e:74e6)
+	db $04
+	db $00,$00,$44,$00
+	db $00,$08,$44,$20
+	db $08,$00,$44,$40
+	db $08,$08,$44,$60
+
+FrameBlock2b: ; 7b4f7 (1e:74f7)
+	db $02
+	db $06,$02,$47,$00
+	db $00,$08,$47,$00
+
+FrameBlock2c: ; 7b500 (1e:7500)
+	db $01
+	db $a0,$00,$4d,$00
+
+FrameBlock2d: ; 7b505 (1e:7505)
+	db $08
+	db $00,$00,$26,$00
+	db $00,$08,$27,$00
+	db $08,$00,$36,$00
+	db $08,$08,$37,$00
+	db $10,$00,$28,$00
+	db $10,$08,$29,$00
+	db $18,$00,$38,$00
+	db $18,$08,$39,$00
+
+FrameBlock2e: ; 7b526 (1e:7526)
+	db $08
+	db $00,$00,$27,$20
+	db $00,$08,$26,$20
+	db $08,$00,$37,$20
+	db $08,$08,$36,$20
+	db $10,$00,$29,$20
+	db $10,$08,$28,$20
+	db $18,$00,$39,$20
+	db $18,$08,$38,$20
+
+FrameBlock2f: ; 7b547 (1e:7547)
+	db $04
+	db $00,$00,$0c,$00
+	db $00,$08,$0d,$00
+	db $08,$00,$0c,$40
+	db $08,$08,$0d,$40
+
+FrameBlock30: ; 7b558 (1e:7558)
+	db $04
+	db $00,$00,$44,$00
+	db $00,$08,$44,$20
+	db $08,$00,$44,$40
+	db $08,$08,$44,$60
+
+FrameBlock31: ; 7b569 (1e:7569)
+	db $01
+	db $00,$00,$45,$00
+
+FrameBlock32: ; 7b56e (1e:756e)
+	db $07
+	db $00,$00,$4d,$00
+	db $00,$08,$2f,$00
+	db $00,$10,$4d,$20
+	db $08,$00,$4e,$00
+	db $08,$08,$07,$00
+	db $08,$10,$4e,$20
+	db $10,$08,$3f,$00
+
+FrameBlock33: ; 7b58b (1e:758b)
+	db $07
+	db $00,$08,$3f,$40
+	db $08,$00,$4e,$40
+	db $08,$08,$07,$40
+	db $08,$10,$4e,$60
+	db $10,$00,$4d,$40
+	db $10,$08,$2f,$40
+	db $10,$10,$4d,$60
+
+FrameBlock34: ; 7b5a8 (1e:75a8)
+	db $01
+	db $a0,$00,$00,$10
+
+FrameBlock35: ; 7b5ad (1e:75ad)
+	db $06
+	db $00,$00,$2a,$00
+	db $00,$08,$2b,$00
+	db $08,$00,$3a,$00
+	db $10,$00,$3a,$40
+	db $18,$00,$2a,$40
+	db $18,$08,$2b,$40
+
+FrameBlock36: ; 7b5c6 (1e:75c6)
+	db $04
+	db $00,$00,$00,$00
+	db $00,$08,$01,$00
+	db $08,$00,$10,$00
+	db $08,$08,$11,$00
+
+FrameBlock37: ; 7b5d7 (1e:75d7)
+	db $04
+	db $00,$00,$01,$a0
+	db $00,$08,$00,$a0
+	db $08,$00,$11,$a0
+	db $08,$08,$10,$a0
+
+FrameBlock38: ; 7b5e8 (1e:75e8)
+	db $04
+	db $00,$00,$0a,$00
+	db $00,$08,$0b,$00
+	db $08,$00,$1a,$00
+	db $08,$08,$1b,$00
+
+FrameBlock39: ; 7b5f9 (1e:75f9)
+	db $04
+	db $00,$00,$0b,$20
+	db $00,$08,$0a,$20
+	db $08,$00,$1b,$20
+	db $08,$08,$1a,$20
+
+FrameBlock3a: ; 7b60a (1e:760a)
+	db $04
+	db $20,$00,$05,$00
+	db $20,$08,$05,$20
+	db $28,$00,$15,$00
+	db $28,$08,$15,$20
+
+FrameBlock3b: ; 7b61b (1e:761b)
+	db $05
+	db $18,$00,$04,$00
+	db $18,$08,$04,$20
+	db $20,$00,$14,$00
+	db $20,$08,$14,$20
+	db $28,$04,$41,$00
+
+FrameBlock3c: ; 7b630 (1e:7630)
+	db $06
+	db $10,$00,$05,$00
+	db $10,$08,$05,$20
+	db $18,$00,$15,$00
+	db $18,$08,$15,$20
+	db $20,$04,$42,$00
+	db $28,$04,$42,$00
+
+FrameBlock3d: ; 7b649 (1e:7649)
+	db $07
+	db $08,$00,$04,$00
+	db $08,$08,$04,$20
+	db $10,$00,$14,$00
+	db $10,$08,$14,$20
+	db $18,$04,$41,$00
+	db $20,$04,$41,$00
+	db $28,$04,$41,$00
+
+FrameBlock3e: ; 7b666 (1e:7666)
+	db $08
+	db $00,$00,$05,$00
+	db $00,$08,$05,$20
+	db $08,$00,$15,$00
+	db $08,$08,$15,$20
+	db $10,$04,$42,$00
+	db $18,$04,$42,$00
+	db $20,$04,$42,$00
+	db $28,$04,$42,$00
+
+FrameBlock3f: ; 7b687 (1e:7687)
+	db $08
+	db $00,$00,$04,$00
+	db $00,$08,$04,$20
+	db $08,$00,$14,$00
+	db $08,$08,$14,$20
+	db $10,$04,$41,$00
+	db $18,$04,$41,$00
+	db $20,$04,$41,$00
+	db $28,$04,$41,$00
+
+FrameBlock40: ; 7b6a8 (1e:76a8)
+	db $03
+	db $00,$00,$3d,$00
+	db $00,$08,$3d,$00
+	db $08,$08,$3d,$00
+
+FrameBlock41: ; 7b6b5 (1e:76b5)
+	db $04
+	db $00,$00,$06,$00
+	db $00,$08,$06,$20
+	db $08,$00,$16,$00
+	db $08,$08,$17,$00
+
+FrameBlock42: ; 7b6c6 (1e:76c6)
+	db $0b
+	db $00,$10,$42,$00
+	db $08,$00,$42,$00
+	db $08,$08,$42,$00
+	db $08,$10,$42,$00
+	db $08,$18,$42,$00
+	db $08,$20,$42,$00
+	db $10,$10,$42,$00
+	db $18,$08,$42,$00
+	db $18,$18,$42,$00
+	db $20,$00,$42,$00
+	db $20,$20,$42,$00
+
+FrameBlock43: ; 7b6f3 (1e:76f3)
+	db $0b
+	db $00,$10,$41,$00
+	db $08,$00,$41,$00
+	db $08,$08,$41,$00
+	db $08,$10,$41,$00
+	db $08,$18,$41,$00
+	db $08,$20,$41,$00
+	db $10,$10,$41,$00
+	db $18,$08,$41,$00
+	db $18,$18,$41,$00
+	db $20,$00,$41,$00
+	db $20,$20,$41,$00
+
+FrameBlock44: ; 7b720 (1e:7720)
+	db $04
+	db $00,$00,$49,$00
+	db $00,$28,$49,$00
+	db $28,$00,$49,$00
+	db $28,$28,$49,$00
+
+FrameBlock45: ; 7b731 (1e:7731)
+	db $04
+	db $00,$00,$49,$00
+	db $00,$18,$49,$00
+	db $18,$00,$49,$00
+	db $18,$18,$49,$00
+
+FrameBlock46: ; 7b742 (1e:7742)
+	db $04
+	db $00,$00,$49,$00
+	db $00,$08,$49,$00
+	db $08,$00,$49,$00
+	db $08,$08,$49,$00
+
+FrameBlock47: ; 7b753 (1e:7753)
+	db $04
+	db $00,$00,$43,$00
+	db $00,$08,$43,$20
+	db $08,$00,$43,$40
+	db $08,$08,$43,$60
+
+FrameBlock48: ; 7b764 (1e:7764)
+	db $04
+	db $08,$08,$33,$00
+	db $08,$10,$33,$20
+	db $10,$08,$33,$40
+	db $10,$10,$33,$60
+
+FrameBlock49: ; 7b775 (1e:7775)
+	db $10
+	db $00,$00,$22,$00
+	db $00,$08,$23,$00
+	db $00,$10,$23,$20
+	db $00,$18,$22,$20
+	db $08,$00,$32,$00
+	db $08,$08,$43,$00
+	db $08,$10,$43,$20
+	db $08,$18,$32,$20
+	db $10,$00,$32,$40
+	db $10,$08,$43,$40
+	db $10,$10,$43,$60
+	db $10,$18,$32,$60
+	db $18,$00,$22,$40
+	db $18,$08,$23,$40
+	db $18,$10,$23,$60
+	db $18,$18,$22,$60
+
+FrameBlock71: ; 7b7b6 (1e:77b6)
+	db $10
+	db $00,$00,$22,$00
+	db $00,$08,$3b,$00
+	db $00,$10,$23,$20
+	db $00,$18,$22,$20
+	db $08,$00,$32,$00
+	db $08,$08,$43,$00
+	db $08,$10,$43,$20
+	db $08,$18,$32,$20
+	db $10,$00,$32,$40
+	db $10,$08,$43,$40
+	db $10,$10,$43,$60
+	db $10,$18,$32,$60
+	db $18,$00,$22,$40
+	db $18,$08,$23,$40
+	db $18,$10,$23,$60
+	db $18,$18,$22,$60
+
+FrameBlock72: ; 7b7f7 (1e:77f7)
+	db $0c
+	db $00,$00,$32,$00
+	db $00,$08,$43,$00
+	db $00,$10,$43,$20
+	db $00,$18,$32,$20
+	db $08,$00,$32,$40
+	db $08,$08,$43,$40
+	db $08,$10,$43,$60
+	db $08,$18,$32,$60
+	db $10,$00,$22,$40
+	db $10,$08,$23,$40
+	db $10,$10,$23,$60
+	db $10,$18,$22,$60
+
+FrameBlock73: ; 7b828 (1e:7828)
+	db $08
+	db $00,$00,$32,$40
+	db $00,$08,$43,$40
+	db $00,$10,$43,$60
+	db $00,$18,$32,$60
+	db $08,$00,$22,$40
+	db $08,$08,$23,$40
+	db $08,$10,$23,$60
+	db $08,$18,$22,$60
+
+FrameBlock74: ; 7b849 (1e:7849)
+	db $04
+	db $00,$00,$22,$40
+	db $00,$08,$23,$40
+	db $00,$10,$23,$60
+	db $00,$18,$22,$60
+
+FrameBlock4a: ; 7b85a (1e:785a)
+	db $04
+	db $08,$18,$4c,$20
+	db $20,$08,$4b,$00
+	db $30,$20,$4c,$00
+	db $18,$30,$4b,$40
+
+FrameBlock4b: ; 7b86b (1e:786b)
+	db $04
+	db $00,$18,$4c,$00
+	db $20,$00,$4b,$40
+	db $38,$20,$4c,$20
+	db $18,$38,$4b,$00
+
+FrameBlock4c: ; 7b87c (1e:787c)
+	db $04
+	db $10,$08,$4a,$40
+	db $30,$10,$4a,$00
+	db $28,$30,$4a,$20
+	db $08,$28,$4a,$60
+
+FrameBlock4d: ; 7b88d (1e:788d)
+	db $04
+	db $08,$00,$4a,$20
+	db $38,$08,$4a,$60
+	db $30,$38,$4a,$40
+	db $00,$30,$4a,$00
+
+FrameBlock4e: ; 7b89e (1e:789e)
+	db $08
+	db $00,$30,$44,$00
+	db $00,$38,$44,$20
+	db $08,$30,$44,$40
+	db $08,$38,$44,$60
+	db $26,$0a,$44,$00
+	db $26,$12,$44,$20
+	db $2e,$0a,$44,$40
+	db $2e,$12,$44,$60
+
+FrameBlock4f: ; 7b8bf (1e:78bf)
+	db $0c
+	db $0e,$22,$44,$00
+	db $0e,$2a,$44,$20
+	db $16,$22,$44,$40
+	db $16,$2a,$44,$60
+	db $06,$32,$47,$00
+	db $00,$38,$47,$00
+	db $1a,$16,$44,$00
+	db $1a,$1e,$44,$20
+	db $22,$16,$44,$40
+	db $22,$1e,$44,$60
+	db $30,$08,$47,$00
+	db $2a,$0e,$47,$00
+
+FrameBlock50: ; 7b8f0 (1e:78f0)
+	db $08
+	db $06,$32,$47,$00
+	db $00,$38,$47,$00
+	db $12,$26,$47,$00
+	db $0c,$2c,$47,$00
+	db $1e,$1a,$47,$00
+	db $18,$20,$47,$00
+	db $2a,$0e,$47,$00
+	db $24,$14,$47,$00
+
+FrameBlock51: ; 7b911 (1e:7911)
+	db $08
+	db $00,$00,$35,$20
+	db $08,$00,$35,$40
+	db $10,$00,$35,$00
+	db $18,$00,$35,$60
+	db $00,$40,$35,$00
+	db $08,$40,$35,$60
+	db $10,$40,$35,$20
+	db $18,$40,$35,$40
+
+FrameBlock52: ; 7b932 (1e:7932)
+	db $04
+	db $00,$00,$2a,$00
+	db $00,$08,$2b,$00
+	db $08,$00,$3a,$00
+	db $08,$08,$3b,$00
+
+FrameBlock53: ; 7b943 (1e:7943)
+	db $03
+	db $00,$00,$3f,$00
+	db $00,$08,$3f,$00
+	db $08,$06,$3f,$00
+
+FrameBlock54: ; 7b950 (1e:7950)
+	db $04
+	db $00,$00,$0e,$00
+	db $00,$08,$0e,$20
+	db $08,$00,$0f,$00
+	db $08,$08,$0f,$20
+
+FrameBlock55: ; 7b961 (1e:7961)
+	db $03
+	db $10,$00,$2c,$00
+	db $10,$08,$3c,$00
+	db $10,$10,$2d,$00
+
+FrameBlock56: ; 7b96e (1e:796e)
+	db $06
+	db $10,$10,$31,$00
+	db $10,$18,$31,$00
+	db $08,$10,$2c,$00
+	db $08,$18,$3c,$00
+	db $08,$20,$2d,$00
+	db $10,$20,$2d,$00
+
+FrameBlock57: ; 7b987 (1e:7987)
+	db $09
+	db $08,$20,$31,$00
+	db $10,$20,$31,$00
+	db $08,$28,$31,$00
+	db $10,$28,$31,$00
+	db $00,$20,$2c,$00
+	db $00,$28,$3c,$00
+	db $00,$30,$2d,$00
+	db $08,$30,$2d,$00
+	db $10,$30,$2d,$00
+
+FrameBlock58: ; 7b9ac (1e:79ac)
+	db $07
+	db $00,$00,$46,$00
+	db $08,$02,$47,$00
+	db $10,$03,$48,$00
+	db $18,$04,$48,$00
+	db $20,$05,$48,$00
+	db $28,$05,$48,$00
+	db $30,$05,$48,$00
+
+FrameBlock59: ; 7b9c9 (1e:79c9)
+	db $01
+	db $00,$00,$42,$00
+
+FrameBlock5a: ; 7b9ce (1e:79ce)
+	db $0c
+	db $00,$00,$24,$00
+	db $00,$08,$25,$00
+	db $08,$00,$34,$00
+	db $00,$10,$25,$20
+	db $00,$18,$24,$20
+	db $08,$18,$34,$20
+	db $10,$00,$34,$40
+	db $18,$00,$24,$40
+	db $18,$08,$25,$40
+	db $10,$18,$34,$60
+	db $18,$10,$25,$60
+	db $18,$18,$24,$60
+
+FrameBlock5b: ; 7b9ff (1e:79ff)
+	db $04
+	db $00,$00,$43,$00
+	db $00,$08,$43,$20
+	db $08,$00,$43,$40
+	db $08,$08,$43,$60
+
+FrameBlock5c: ; 7ba10 (1e:7a10)
+	db $08
+	db $00,$00,$49,$00
+	db $02,$08,$49,$00
+	db $18,$00,$49,$00
+	db $10,$10,$49,$00
+	db $08,$00,$43,$00
+	db $08,$08,$43,$20
+	db $10,$00,$43,$40
+	db $10,$08,$43,$60
+
+FrameBlock5d: ; 7ba31 (1e:7a31)
+	db $0b
+	db $00,$00,$49,$00
+	db $18,$02,$49,$00
+	db $14,$10,$49,$00
+	db $08,$00,$43,$00
+	db $00,$08,$43,$20
+	db $10,$00,$43,$40
+	db $10,$08,$43,$60
+	db $04,$08,$43,$00
+	db $04,$10,$43,$20
+	db $0c,$08,$43,$40
+	db $0c,$10,$43,$60
+
+FrameBlock5e: ; 7ba5e (1e:7a5e)
+	db $0f
+	db $00,$08,$49,$00
+	db $08,$10,$49,$00
+	db $20,$00,$49,$00
+	db $08,$00,$43,$00
+	db $08,$08,$43,$20
+	db $10,$00,$43,$40
+	db $10,$08,$43,$60
+	db $10,$10,$43,$00
+	db $10,$18,$43,$20
+	db $18,$10,$43,$40
+	db $18,$18,$43,$60
+	db $20,$08,$43,$00
+	db $20,$10,$43,$20
+	db $28,$08,$43,$40
+	db $28,$10,$43,$60
+
+FrameBlock5f: ; 7ba9b (1e:7a9b)
+	db $04
+	db $00,$00,$49,$00
+	db $00,$10,$49,$00
+	db $00,$20,$49,$00
+	db $00,$30,$49,$00
+
+FrameBlock60: ; 7baac (1e:7aac)
+	db $08
+	db $00,$00,$49,$00
+	db $00,$10,$49,$00
+	db $00,$20,$49,$00
+	db $00,$30,$49,$00
+	db $08,$08,$49,$00
+	db $08,$18,$49,$00
+	db $08,$28,$49,$00
+	db $08,$38,$49,$00
+
+FrameBlock61: ; 7bacd (1e:7acd)
+	db $0c
+	db $00,$00,$49,$00
+	db $00,$10,$49,$00
+	db $00,$20,$49,$00
+	db $00,$30,$49,$00
+	db $08,$08,$49,$00
+	db $08,$18,$49,$00
+	db $08,$28,$49,$00
+	db $08,$38,$49,$00
+	db $10,$00,$49,$00
+	db $10,$10,$49,$00
+	db $10,$20,$49,$00
+	db $10,$30,$49,$00
+
+FrameBlock62: ; 7bafe (1e:7afe)
+	db $0f
+	db $00,$00,$49,$00
+	db $00,$10,$49,$00
+	db $00,$20,$49,$00
+	db $00,$30,$49,$00
+	db $08,$08,$49,$00
+	db $08,$18,$49,$00
+	db $08,$28,$49,$00
+	db $08,$38,$49,$00
+	db $10,$00,$49,$00
+	db $10,$10,$49,$00
+	db $10,$20,$49,$00
+	db $10,$30,$49,$00
+	db $18,$08,$49,$00
+	db $18,$18,$49,$00
+	db $18,$28,$49,$00
+	db $18,$38,$49,$00 ; unused
+
+FrameBlock63: ; 7bb3f (1e:7b3f)
+	db $06
+	db $10,$00,$26,$00
+	db $10,$08,$27,$00
+	db $08,$10,$26,$00
+	db $08,$18,$27,$00
+	db $00,$20,$26,$00
+	db $00,$28,$27,$00
+
+FrameBlock64: ; 7bb58 (1e:7b58)
+	db $06
+	db $18,$00,$27,$00
+	db $10,$08,$26,$00
+	db $10,$10,$27,$00
+	db $08,$18,$26,$00
+	db $08,$20,$27,$00
+	db $00,$28,$26,$00
+
+FrameBlock65: ; 7bb71 (1e:7b71)
+	db $06
+	db $00,$00,$1c,$00
+	db $00,$08,$1d,$00
+	db $10,$00,$1c,$00
+	db $10,$08,$1d,$00
+	db $20,$00,$1c,$00
+	db $20,$08,$1d,$00
+
+FrameBlock66: ; 7bb8a (1e:7b8a)
+	db $02
+	db $00,$00,$03,$00
+	db $08,$00,$13,$00
+
+FrameBlock67: ; 7bb93 (1e:7b93)
+	db $01
+	db $00,$00,$03,$00
+
+FrameBlock68: ; 7bb98 (1e:7b98)
+	db $04
+	db $00,$00,$03,$00
+	db $00,$08,$03,$20
+	db $08,$00,$13,$00
+	db $08,$08,$13,$20
+
+FrameBlock69: ; 7bba9 (1e:7ba9)
+	db $01
+	db $00,$00,$06,$00
+
+FrameBlock6a: ; 7bbae (1e:7bae)
+	db $08
+	db $00,$00,$2e,$00
+	db $00,$30,$2e,$20
+	db $30,$00,$2e,$40
+	db $30,$30,$2e,$60
+	db $00,$18,$2f,$00
+	db $30,$18,$2f,$40
+	db $18,$00,$3e,$00
+	db $18,$30,$3e,$20
+
+FrameBlock6b: ; 7bbcf (1e:7bcf)
+	db $08
+	db $00,$00,$2e,$00
+	db $00,$20,$2e,$20
+	db $20,$00,$2e,$40
+	db $20,$20,$2e,$60
+	db $00,$10,$2f,$00
+	db $20,$10,$2f,$40
+	db $10,$00,$3e,$00
+	db $10,$20,$3e,$20
+
+FrameBlock6c: ; 7bbf0 (1e:7bf0)
+	db $08
+	db $00,$00,$2e,$00
+	db $00,$10,$2e,$20
+	db $10,$00,$2e,$40
+	db $10,$10,$2e,$60
+	db $00,$08,$2f,$00
+	db $10,$08,$2f,$40
+	db $08,$00,$3e,$00
+	db $08,$10,$3e,$20
+
+FrameBlock6d: ; 7bc11 (1e:7c11)
+	db $02
+	db $00,$00,$1e,$00
+	db $00,$08,$1f,$00
+
+FrameBlock6e: ; 7bc1a (1e:7c1a)
+	db $04
+	db $00,$00,$48,$00
+	db $00,$08,$48,$20
+	db $08,$00,$12,$00
+	db $08,$08,$12,$20
+
+FrameBlock6f: ; 7bc2b (1e:7c2b)
+	db $04
+	db $00,$00,$4a,$00
+	db $00,$08,$07,$00
+	db $08,$00,$16,$00
+	db $08,$08,$17,$00
+
+FrameBlock70: ; 7bc3c (1e:7c3c)
+	db $04
+	db $00,$00,$07,$20
+	db $00,$08,$4a,$20
+	db $08,$00,$17,$20
+	db $08,$08,$16,$20
+
+FrameBlock76: ; 7bc4d (1e:7c4d)
+	db $07
+	db $00,$10,$2f,$00
+	db $01,$08,$2f,$00
+	db $01,$18,$2f,$00
+	db $02,$00,$2e,$00
+	db $02,$20,$2e,$20
+	db $0a,$00,$3e,$00
+	db $0a,$20,$3e,$20
+
+FrameBlock77: ; 7bc6a (1e:7c6a)
+	db $04
+	db $00,$02,$4b,$00
+	db $00,$0a,$4c,$00
+	db $08,$00,$4c,$60
+	db $08,$08,$4b,$60
+
+FrameBlock78: ; 7bc7b (1e:7c7b)
+	db $01
+	db $00,$00,$4d,$00
+
+FrameBlock79: ; 7bc80 (1e:7c80)
+	db $01
+	db $00,$00,$4e,$00
+
+FrameBlockBaseCoords: ; 7bc85 (1e:7c85)
+	db $10,$68
+	db $10,$70
+	db $10,$78
+	db $10,$80
+	db $10,$88
+	db $10,$90
+	db $10,$98
+	db $18,$68
+	db $18,$70
+	db $18,$78
+	db $34,$28
+	db $18,$80
+	db $18,$88
+	db $18,$98
+	db $20,$68
+	db $20,$70
+	db $20,$78
+	db $20,$80
+	db $20,$88
+	db $20,$90
+	db $20,$98
+	db $28,$68
+	db $28,$70
+	db $28,$78
+	db $28,$80
+	db $28,$88
+	db $30,$68
+	db $30,$70
+	db $30,$78
+	db $30,$80
+	db $30,$90
+	db $30,$98
+	db $38,$68
+	db $38,$78
+	db $38,$80
+	db $38,$88
+	db $40,$68
+	db $40,$70
+	db $40,$78
+	db $40,$80
+	db $40,$88
+	db $40,$98
+	db $10,$60
+	db $18,$60
+	db $20,$60
+	db $28,$60
+	db $30,$60
+	db $40,$60
+	db $58,$28
+	db $43,$38
+	db $33,$48
+	db $20,$58
+	db $32,$78
+	db $58,$58
+	db $2C,$6C
+	db $34,$80
+	db $48,$70
+	db $42,$36
+	db $38,$44
+	db $40,$52
+	db $48,$60
+	db $3E,$6E
+	db $28,$7C
+	db $28,$8A
+	db $50,$3C
+	db $48,$50
+	db $40,$64
+	db $38,$38
+	db $50,$30
+	db $50,$38
+	db $50,$40
+	db $50,$48
+	db $50,$50
+	db $48,$58
+	db $50,$44
+	db $48,$48
+	db $48,$4C
+	db $40,$50
+	db $40,$54
+	db $38,$58
+	db $38,$5C
+	db $30,$64
+	db $48,$40
+	db $48,$39
+	db $24,$88
+	db $24,$70
+	db $1C,$70
+	db $1C,$88
+	db $34,$68
+	db $34,$88
+	db $68,$50
+	db $60,$50
+	db $68,$60
+	db $58,$50
+	db $60,$60
+	db $68,$40
+	db $40,$40
+	db $38,$40
+	db $0B,$60
+	db $44,$48
+	db $40,$14
+	db $48,$1C
+	db $50,$24
+	db $4C,$24
+	db $10,$62
+	db $12,$62
+	db $12,$60
+	db $20,$72
+	db $22,$72
+	db $22,$70
+	db $28,$62
+	db $50,$0A
+	db $52,$0A
+	db $38,$30
+	db $40,$48
+	db $30,$48
+	db $40,$30
+	db $30,$40
+	db $38,$48
+	db $40,$4A
+	db $48,$4B
+	db $50,$4C
+	db $58,$4D
+	db $60,$4D
+	db $68,$4D
+	db $38,$10
+	db $50,$10
+	db $38,$28
+	db $48,$18
+	db $40,$20
+	db $48,$20
+	db $40,$3C
+	db $38,$50
+	db $28,$64
+	db $1C,$90
+	db $24,$80
+	db $2C,$70
+	db $30,$38
+	db $10,$50
+	db $3C,$40
+	db $40,$58
+	db $30,$58
+	db $58,$48
+	db $50,$58
+	db $48,$68
+	db $40,$18
+	db $28,$58
+	db $40,$38
+	db $48,$38
+	db $08,$70
+	db $44,$1C
+	db $3C,$58
+	db $38,$60
+	db $08,$60
+	db $38,$70
+	db $38,$6C
+	db $38,$64
+	db $1C,$74
+	db $2E,$74
+	db $34,$50
+	db $2F,$60
+	db $31,$70
+	db $4C,$30
+	db $3B,$40
+	db $2D,$50
+	db $26,$60
+	db $2D,$70
+	db $28,$50
+	db $1E,$60
+	db $29,$70
+	db $16,$60
+	db $14,$58
+	db $12,$54
+	db $14,$50
+	db $18,$4C
+	db $1C,$48
+	db $48,$28
+
+FrameBlock00: ; 7bde7 (1e:7de7)
+	db $00,$00
 
 Func_7bde9: ; 7bde9 (1e:7de9)
 	push hl
@@ -116773,31 +119793,37 @@ INCLUDE "music/sfx/sfx_1f_12.asm"
 INCLUDE "music/sfx/sfx_1f_13.asm"
 
 Music1f_Channel3DutyPointers: ; 7c361 (1f:4361)
+	dw Music1f_Channel3Duty0
 	dw Music1f_Channel3Duty1
 	dw Music1f_Channel3Duty2
 	dw Music1f_Channel3Duty3
 	dw Music1f_Channel3Duty4
-	dw Music1f_Channel3Duty5
+	dw Music1f_Channel3Duty5 ; used in the Pokemon Tower theme
 	dw SFX_1f_3f_Ch1 ; unused
 	dw SFX_1f_3f_Ch1 ; unused
 	dw SFX_1f_3f_Ch1 ; unused
-	dw SFX_1f_3f_Ch1 ; unused
-	
-Music1f_Channel3Duty1: ; 7c373 (1f:4373)
+
+; these are the definitions for the channel 3 instruments
+; each instrument definition is made up of 32 points (nibbles) that form
+; the graph of the wave
+; the current instrument is copied to $FF30
+Music1f_Channel3Duty0: ; 7c373 (1f:4373)
 	db $02,$46,$8A,$CE,$FF,$FE,$ED,$DC,$CB,$A9,$87,$65,$44,$33,$22,$11
 
-Music1f_Channel3Duty2: ; 7c383 (1f:4383)
+Music1f_Channel3Duty1: ; 7c383 (1f:4383)
 	db $02,$46,$8A,$CE,$EF,$FF,$FE,$EE,$DD,$CB,$A9,$87,$65,$43,$22,$11
 
-Music1f_Channel3Duty3: ; 7c393 (1f:4393)
+Music1f_Channel3Duty2: ; 7c393 (1f:4393)
 	db $13,$69,$BD,$EE,$EE,$FF,$FF,$ED,$DE,$FF,$FF,$EE,$EE,$DB,$96,$31
 
-Music1f_Channel3Duty4: ; 7c3a3 (1f:43a3)
+Music1f_Channel3Duty3: ; 7c3a3 (1f:43a3)
 	db $02,$46,$8A,$CD,$EF,$FE,$DE,$FF,$EE,$DC,$BA,$98,$76,$54,$32,$10
 
-Music1f_Channel3Duty5: ; 7c3b3 (1f:43b3)
+Music1f_Channel3Duty4: ; 7c3b3 (1f:43b3)
 	db $01,$23,$45,$67,$8A,$CD,$EE,$F7,$7F,$EE,$DC,$A8,$76,$54,$32,$10
 
+; duty 5 reads from sfx data
+Music1f_Channel3Duty5: ; 7c3c3 (1f:43c3)
 INCLUDE "music/sfx/sfx_1f_3f.asm"
 INCLUDE "music/sfx/sfx_1f_56.asm"
 INCLUDE "music/sfx/sfx_1f_57.asm"
@@ -117287,7 +120313,7 @@ Music1f_notetype: ; 7d358 (1f:5358)
 	sla a
 	ld d, a
 	; fall through
-	
+
 	; if channel 3, store high nibble as volume
 	; else, store volume (high nibble) and fade (low nibble)
 .notChannel3
@@ -117309,7 +120335,7 @@ Music1f_togglecall: ; 7d397 (1f:5397)
 	xor $1
 	ld [hl], a ; flip bit 0 of $c02e (toggle returning from call)
 	jp Music1f_endchannel
-	
+
 Music1f_vibrato: ; 7d3a9 (1f:53a9)
 	cp $ea ; is this command a vibrato?
 	jr nz, Music1f_pitchbend ; no
@@ -117343,7 +120369,7 @@ Music1f_vibrato: ; 7d3a9 (1f:53a9)
 	or d
 	ld [hl], a ; store depth as both high and low nibbles
 	jp Music1f_endchannel
-	
+
 Music1f_pitchbend: ; 7d3e1 (1f:53e1)
 	cp $eb ; is this command a pitchbend?
 	jr nz, Music1f_duty ; no
@@ -117374,7 +120400,7 @@ Music1f_pitchbend: ; 7d3e1 (1f:53e1)
 	call Music1f_GetNextMusicByte
 	ld d, a
 	jp Music1f_notelength
-	
+
 Music1f_duty: ; 7d419 (1f:5419)
 	cp $ec ; is this command a duty?
 	jr nz, Music1f_tempo ; no
@@ -117387,7 +120413,7 @@ Music1f_duty: ; 7d419 (1f:5419)
 	add hl, bc
 	ld [hl], a ; store duty
 	jp Music1f_endchannel
-	
+
 Music1f_tempo: ; 7d42e (1f:542e)
 	cp $ed ; is this command a tempo?
 	jr nz, Music1f_unknownmusic0xee ; no
@@ -117416,14 +120442,14 @@ Music1f_tempo: ; 7d42e (1f:542e)
 	ld [$c0d5], a
 .musicChannelDone
 	jp Music1f_endchannel
-	
+
 Music1f_unknownmusic0xee: ; 7d46e (1f:546e)
 	cp $ee ; is this command an unknownmusic0xee?
 	jr nz, Music1f_unknownmusic0xef ; no
 	call Music1f_GetNextMusicByte ; yes
 	ld [$c004], a ; store first param
 	jp Music1f_endchannel
-	
+
 ; this appears to never be used
 Music1f_unknownmusic0xef: ; 7d47b (1f:547b)
 	cp $ef ; is this command an unknownmusic0xef?
@@ -117441,7 +120467,7 @@ Music1f_unknownmusic0xef: ; 7d47b (1f:547b)
 	ld [$c02d], a
 .skip
 	jp Music1f_endchannel
-	
+
 Music1f_dutycycle: ; 7d49a (1f:549a)
 	cp $fc ; is this command a dutycycle?
 	jr nz, Music1f_stereopanning ; no
@@ -117458,14 +120484,14 @@ Music1f_dutycycle: ; 7d49a (1f:549a)
 	add hl, bc
 	set 6, [hl] ; set duty flag
 	jp Music1f_endchannel
-	
+
 Music1f_stereopanning: ; 7d4b8 (1f:54b8)
 	cp $f0 ; is this command a stereopanning?
 	jr nz, Music1f_executemusic ; no
 	call Music1f_GetNextMusicByte ; yes
 	ld [$FF00+$24], a ; store stereopanning
 	jp Music1f_endchannel
-	
+
 Music1f_executemusic: ; 7d4c4 (1f:54c4)
 	cp $f8 ; is this command an executemusic?
 	jr nz, Music1f_octave ; no
@@ -117474,7 +120500,7 @@ Music1f_executemusic: ; 7d4c4 (1f:54c4)
 	add hl, bc
 	set 0, [hl]
 	jp Music1f_endchannel
-	
+
 Music1f_octave: ; 7d4d3 (1f:54d3)
 	and $f0
 	cp $e0 ; is this command an octave?
@@ -117486,7 +120512,7 @@ Music1f_octave: ; 7d4d3 (1f:54d3)
 	and $f
 	ld [hl], a ; store low nibble as octave
 	jp Music1f_endchannel
-	
+
 Music1f_unknownsfx0x20: ; 7d4e6 (1f:54e6)
 	cp $20 ; is this command an unknownsfx0x20?
 	jr nz, Music1f_unknownsfx0x10 ; no
@@ -117531,7 +120557,7 @@ Music1f_unknownsfx0x20: ; 7d4e6 (1f:54e6)
 	pop de
 	call Func_7d6bf
 	ret
-	
+
 Music1f_unknownsfx0x10 ; 7d533 (1f:5533)
 	ld a, c
 	cp CH4
@@ -117547,7 +120573,7 @@ Music1f_unknownsfx0x10 ; 7d533 (1f:5533)
 	call Music1f_GetNextMusicByte ; yes
 	ld [$FF00+$10], a
 	jp Music1f_endchannel
-	
+
 Music1f_note: ; 7d54f (1f:554f)
 	ld a, c
 	cp CH3
@@ -117566,7 +120592,7 @@ Music1f_note: ; 7d54f (1f:554f)
 	push de
 	push bc
 	jr asm_7d571
-	
+
 Music1f_dnote: ; 7d569 (1f:5569)
 	ld a, d
 	and $f
@@ -117641,7 +120667,7 @@ Music1f_notelength: ; 7d57e (1f:557e)
 	jr z, Music1f_notepitch
 	pop hl
 	ret
-	
+
 Music1f_notepitch: ; 7d5dc (1f:55dc)
 	pop af
 	and $f0
@@ -118633,15 +121659,15 @@ INCLUDE "music/credits.asm"
 
 SECTION "bank20",ROMX,BANK[$20]
 
-_UnnamedText_526ee: ; 80000 (20:4000)
+_CardKeySuccessText1: ; 80000 (20:4000)
 	db $0, "Bingo!@@"
 
-_UnnamedText_526f3: ; 80009 (20:4009)
+_CardKeySuccessText2: ; 80009 (20:4009)
 	db $0, $4f
 	db "The CARD KEY", $55
 	db "opened the door!", $57
 
-_UnnamedText_526f8: ; 80029 (20:4029)
+_CardKeyFailText: ; 80029 (20:4029)
 	db $0, "Darn! It needs a", $4f
 	db "CARD KEY!", $57
 
@@ -118782,7 +121808,7 @@ _ViridianForestEndBattleText1: ; 80387 (20:4387)
 	db "CATERPIE can't", $55
 	db "cut it!", $58
 
-_ViridianForestAfterBattleText1: ; 803a2 (20:43a2)
+_ViridianFrstAfterBattleText1: ; 803a2 (20:43a2)
 	db $0, "Ssh! You'll scare", $4f
 	db "the bugs away!", $57
 
@@ -118796,7 +121822,7 @@ _ViridianForestEndBattleText2: ; 803f2 (20:43f2)
 	db "I ran out of", $55
 	db "#MON!", $58
 
-_ViridianForestAfterBattleText2: ; 8040b (20:440b)
+_ViridianFrstAfterBattleText2: ; 8040b (20:440b)
 	db $0, "Darn! I'm going", $4f
 	db "to catch some", $55
 	db "stronger ones!", $57
@@ -118810,7 +121836,7 @@ _ViridianForestEndBattleText3: ; 80458 (20:4458)
 	db "give! You're good", $55
 	db "at this!", $58
 
-_ViridianForestAfterBattleText3: ; 80475 (20:4475)
+_ViridianFrstAfterBattleText3: ; 80475 (20:4475)
 	db $0, "Sometimes, you", $4f
 	db "can find stuff on", $55
 	db "the ground!", $51
@@ -119705,7 +122731,7 @@ _RocketHideout3EndBattleText3: ; 821e9 (20:61e9)
 	db $0, "What?", $4f
 	db "I lost? No!", $58
 
-_RocketHideout3AfterBattleText3: ; 821fc (20:61fc)
+_RocketHide3AfterBattleText3: ; 821fc (20:61fc)
 	db $0, "Go ahead and go!", $4f
 	db "But, you need the", $55
 	db "LIFT KEY to run", $55
@@ -119742,7 +122768,7 @@ _RocketHideout4EndBattleText2: ; 82354 (20:6354)
 	db $0, "Burned", $4f
 	db "again!", $58
 
-_RocketHideout4AfterBattleText2: ; 82363 (20:6363)
+_RocketHide4AfterBattleText2: ; 82363 (20:6363)
 	db $0, "Do you have", $4f
 	db "something against", $55
 	db "TEAM ROCKET?", $57
@@ -119755,7 +122781,7 @@ _RocketHideout4BattleText3: ; 8238f (20:638f)
 _RocketHideout4EndBattleText3: ; 823bc (20:63bc)
 	db $0, "Ayaya!", $58
 
-_RocketHideout4AfterBattleText3: ; 823c4 (20:63c4)
+_RocketHide4AfterBattleText3: ; 823c4 (20:63c4)
 	db $0, "BOSS! I'm sorry I", $4f
 	db "failed you!", $57
 
@@ -121230,13 +124256,13 @@ _SeafoamIslands5Text5: ; 880a8 (22:40a8)
 
 _AIBattleWithdrawText: ; 880be (22:40be)
 	db 1
-	dw $D04A
+	dw W_TRAINERNAME
 	db 0," with-",$4F,"drew @",1
 	dw W_ENEMYMONNAME
 	db 0,"!",$58
 _AIBattleUseItemText: ; 880d5 (22:40d5)
 	db 1
-	dw $D04A
+	dw W_TRAINERNAME
 	db 0,$4F,"used @",1
 	dw $CD6D
 	db 0,$55,"on @",1
@@ -121346,38 +124372,34 @@ UnnamedText_8824c: ; 8824c (22:424c)
 _UnnamedText_703ff: ; 88267 (22:4267)
 	db $0, "#DEX Rating", $6d, $57
 
-_UnnamedText_62453: ; 88275 (22:4275)
+_GymStatueText1: ; 88275 (22:4275)
 	TX_RAM wGymCityName
 	db $0, $4f
 	db "#MON GYM", $55
 	db "LEADER: @"
-
-UnnamedText_8828c: ; 8828c (22:428c)
 	TX_RAM wGymLeaderName
 	db $0, $51
 	db "WINNING TRAINERS:", $4f
 	db $53, $57
 
-_UnnamedText_62458: ; 882a5 (22:42a5)
+_GymStatueText2: ; 882a5 (22:42a5)
 	TX_RAM wGymCityName
 	db $0, $4f
 	db "#MON GYM", $55
 	db "LEADER: @"
-
-UnnamedText_882bc: ; 882bc (22:42bc)
 	TX_RAM wGymLeaderName
 	db $0, $51
 	db "WINNING TRAINERS:", $4f
 	db $53, $55
 	db $52, $57
 
-_UnnamedText_624a3: ; 882d7 (22:42d7)
+_ViridianCityPokecenterGuyText: ; 882d7 (22:42d7)
 	db $0, "#MON CENTERs", $4f
 	db "heal your tired,", $55
 	db "hurt or fainted", $55
 	db "#MON!", $57
 
-_UnnamedText_624a8: ; 8830c (22:430c)
+_PewterCityPokecenterGuyText: ; 8830c (22:430c)
 	db $0, "Yawn!", $51
 	db "When JIGGLYPUFF", $4f
 	db "sings, #MON", $55
@@ -121385,25 +124407,25 @@ _UnnamedText_624a8: ; 8830c (22:430c)
 	db "...Me too...", $4f
 	db "Snore...", $57
 
-_UnnamedText_624ad: ; 88353 (22:4353)
+_CeruleanPokecenterGuyText: ; 88353 (22:4353)
 	db $0, "BILL has lots of", $4f
 	db "#MON!", $51
 	db "He collects rare", $4f
 	db "ones too!", $57
 
-_UnnamedText_624b2: ; 88386 (22:4386)
+_LavenderPokecenterGuyText: ; 88386 (22:4386)
 	db $0, "CUBONEs wear", $4f
 	db "skulls, right?", $51
 	db "People will pay a", $4f
 	db "lot for one!", $57
 
-_UnnamedText_624b7: ; 883c2 (22:43c2)
+_MtMoonPokecenterBenchGuyText: ; 883c2 (22:43c2)
 	db $0, "If you have too", $4f
 	db "many #MON, you", $55
 	db "should store them", $55
 	db "via PC!", $57
 
-_UnnamedText_624bc: ; 883fc (22:43fc)
+_RockTunnelPokecenterGuyText: ; 883fc (22:43fc)
 	db $0, "I heard that", $4f
 	db "GHOSTs haunt", $55
 	db "LAVENDER TOWN!", $57
@@ -121421,7 +124443,7 @@ _UnnamedText_624cb: ; 88460 (22:4460)
 	db "is hiding in the", $55
 	db "SAFARI ZONE.", $57
 
-_UnnamedText_624d0: ; 8848e (22:448e)
+_VermilionPokecenterGuyText: ; 8848e (22:448e)
 	db $0, "It is true that a", $4f
 	db "higher level", $55
 	db "#MON will be", $55
@@ -121434,19 +124456,19 @@ _UnnamedText_624d0: ; 8848e (22:448e)
 	db "universally", $55
 	db "strong #MON.", $57
 
-_UnnamedText_624d5: ; 88531 (22:4531)
+_CeladonCityPokecenterGuyText: ; 88531 (22:4531)
 	db $0, "If I had a BIKE,", $4f
 	db "I would go to", $55
 	db "CYCLING ROAD!", $57
 
-_UnnamedText_624da: ; 8855f (22:455f)
+_FuchsiaCityPokecenterGuyText: ; 8855f (22:455f)
 	db $0, "If you're studying ", $4f
 	db "#MON, visit", $55
 	db "the SAFARI ZONE.", $51
 	db "It has all sorts", $4f
 	db "of rare #MON.", $57
 
-_UnnamedText_624df: ; 885af (22:45af)
+_CinnabarPokecenterGuyText: ; 885af (22:45af)
 	db $0, "#MON can still", $4f
 	db "learn techniques", $55
 	db "after canceling", $55
@@ -121455,27 +124477,27 @@ _UnnamedText_624df: ; 885af (22:45af)
 	db "until new moves", $55
 	db "have been learned.", $57
 
-_UnnamedText_624f8: ; 88621 (22:4621)
+_SaffronCityPokecenterGuyText1: ; 88621 (22:4621)
 	db $0, "It would be great", $4f
 	db "if the ELITE FOUR", $55
 	db "came and stomped", $55
 	db "TEAM ROCKET!", $57
 
-_UnnamedText_624fd: ; 88664 (22:4664)
+_SaffronCityPokecenterGuyText2: ; 88664 (22:4664)
 	db $0, "TEAM ROCKET took", $4f
 	db "off! We can go", $55
 	db "out safely again!", $55
 	db "That's great!", $57
 
-_UnnamedText_62502: ; 886a4 (22:46a4)
+_CeladonCityHotelText: ; 886a4 (22:46a4)
 	db $0, "My sis brought me", $4f
 	db "on this vacation!", $57
 
-_UnnamedText_62511: ; 886c9 (22:46c9)
+_BookcaseText: ; 886c9 (22:46c9)
 	db $0, "Crammed full of", $4f
 	db "#MON books!", $57
 
-_UnnamedText_1e953: ; 886e6 (22:46e6)
+_NewBicycleText: ; 886e6 (22:46e6)
 	db $0, "A shiny new", $4f
 	db "BICYCLE!", $57
 
@@ -121502,7 +124524,7 @@ _UnnamedText_1ea12: ; 88798 (22:4798)
 	db $0, "PA: Your SAFARI", $4f
 	db "GAME is over!", $57
 
-_UnnamedText_1ea5b: ; 887b7 (22:47b7)
+_CinnabarGymQuizIntroText: ; 887b7 (22:47b7)
 	db $0, "#MON Quiz!", $51
 	db "Get it right and", $4f
 	db "the door opens to", $55
@@ -121516,41 +124538,41 @@ _UnnamedText_1ea5b: ; 887b7 (22:47b7)
 	db "Then get it right!", $4f
 	db "Here we go!", $58
 
-_UnnamedText_1ea6c: ; 8886d (22:486d)
+_CinnabarQuizQuestionsText1: ; 8886d (22:486d)
 	db $0, "CATERPIE evolves", $4f
 	db "into BUTTERFREE?", $57
 
-_UnnamedText_1ea71: ; 88890 (22:4890)
+_CinnabarQuizQuestionsText2: ; 88890 (22:4890)
 	db $0, "There are 9", $4f
 	db "certified #MON", $55
 	db "LEAGUE BADGEs?", $57
 
-_UnnamedText_1ea76: ; 888bb (22:48bb)
+_CinnabarQuizQuestionsText3: ; 888bb (22:48bb)
 	db $0, "POLIWAG evolves 3", $4f
 	db "times?", $57
 
-_UnnamedText_1ea7b: ; 888d5 (22:48d5)
+_CinnabarQuizQuestionsText4: ; 888d5 (22:48d5)
 	db $0, "Are thunder moves", $4f
 	db "effective against", $55
 	db "ground element-", $55
 	db "type #MON?", $57
 
-_UnnamedText_1ea80: ; 88915 (22:4915)
+_CinnabarQuizQuestionsText5: ; 88915 (22:4915)
 	db $0, "#MON of the", $4f
 	db "same kind and", $55
 	db "level are not", $55
 	db "identical?", $57
 
-_UnnamedText_1ea85: ; 88949 (22:4949)
+_CinnabarQuizQuestionsText6: ; 88949 (22:4949)
 	db $0, "TM28 contains", $4f
 	db "TOMBSTONER?", $57
 
-_UnnamedText_1eae3: ; 88964 (22:4964)
+_CinnabarGymQuizCorrectText: ; 88964 (22:4964)
 	db $0, "You're absolutely", $4f
 	db "correct!", $51
 	db "Go on through!@@"
 
-_UnnamedText_1eb05: ; 8898f (22:498f)
+_CinnabarGymQuizIncorrectText: ; 8898f (22:498f)
 	db $0, "Sorry! Bad call!", $58
 
 _UnnamedText_1eb69: ; 889a1 (22:49a1)
@@ -121558,25 +124580,25 @@ _UnnamedText_1eb69: ; 889a1 (22:49a1)
 	db "#MON notebooks!", $51
 	db "#MON graphs!", $57
 
-_UnnamedText_1ebdd: ; 889cf (22:49cf)
+_BillsHouseMonitorText: ; 889cf (22:49cf)
 	db $0, "TELEPORTER is", $4f
 	db "displayed on the", $55
 	db "PC monitor.", $57
 
-_UnnamedText_1ebe2: ; 889fb (22:49fb)
+_BillsHouseInitiatedText: ; 889fb (22:49fb)
 	db $0, $52, " initiated", $4f
 	db "TELEPORTER's Cell", $55
 	db "Separator!@@"
 
-_UnnamedText_1ec7f: ; 88a25 (22:4a25)
+_BillsHousePokemonListText1: ; 88a25 (22:4a25)
 	db $0, "BILL's favorite", $4f
 	db "#MON list!", $58
 
-_UnnamedText_1ecaa: ; 88a40 (22:4a40)
+_BillsHousePokemonListText2: ; 88a40 (22:4a40)
 	db $0, "Which #MON do", $4f
 	db "you want to see?", $57
 
-_UnnamedText_1ecbd: ; 88a60 (22:4a60)
+_OakLabEmailText: ; 88a60 (22:4a60)
 	db $0, "There's an e-mail", $4f
 	db "message here!", $51
 	db "...", $51
@@ -121596,30 +124618,30 @@ _UnnamedText_1ecbd: ; 88a60 (22:4a60)
 	db "please visit us!", $55
 	db "...", $57
 
-_UnnamedText_2ff32: ; 88b5b (22:4b5b)
+_GameCornerCoinCaseText: ; 88b5b (22:4b5b)
 	db $0, "A COIN CASE is", $4f
 	db "required!", $57
 
-_UnnamedText_2ff37: ; 88b75 (22:4b75)
+_GameCornerNoCoinsText: ; 88b75 (22:4b75)
 	db $0, "You don't have", $4f
 	db "any coins!", $57
 
-_UnnamedText_37e79: ; 88b8f (22:4b8f)
+_GameCornerOutOfOrderText: ; 88b8f (22:4b8f)
 	db $0, "OUT OF ORDER", $4f
 	db "This is broken.", $57
 
-_UnnamedText_37e7e: ; 88bad (22:4bad)
+_GameCornerOutToLunchText: ; 88bad (22:4bad)
 	db $0, "OUT TO LUNCH", $4f
 	db "This is reserved.", $57
 
-_UnnamedText_37e83: ; 88bcd (22:4bcd)
+_GameCornerSomeonesKeysText: ; 88bcd (22:4bcd)
 	db $0, "Someone's keys!", $4f
 	db "They'll be back.", $57
 
 _UnnamedText_21865: ; 88bed (22:4bed)
 	db $0, "Just a moment.", $57
 
-UnnamedText_88bfd: ; 88bfd (22:4bfd)
+TMNotebookText: ; 88bfd (22:4bfd)
 	db $0, "It's a pamphlet", $4f
 	db "on TMs.", $51
 	db "...", $51
@@ -121630,14 +124652,14 @@ UnnamedText_88bfd: ; 88bfd (22:4bfd)
 	db "used repeatedly.", $51
 	db "SILPH CO.@@"
 
-_UnnamedText_529e9: ; 88c6f (22:4c6f)
+_TurnPageText: ; 88c6f (22:4c6f)
 	db $0, "Turn the page?", $57
 
-_UnnamedText_529ee: ; 88c7f (22:4c7f)
+_ViridianSchoolNotebookText5: ; 88c7f (22:4c7f)
 	db $0, "GIRL: Hey! Don't", $4f
 	db "look at my notes!@@"
 
-_UnnamedText_529f4: ; 88ca3 (22:4ca3)
+_ViridianSchoolNotebookText1: ; 88ca3 (22:4ca3)
 	db $0, "Looked at the", $4f
 	db "notebook!", $51
 	db "First page...", $51
@@ -121651,7 +124673,7 @@ _UnnamedText_529f4: ; 88ca3 (22:4ca3)
 	db "fight are called", $55
 	db "#MON trainers.", $58
 
-_UnnamedText_529f9: ; 88d46 (22:4d46)
+_ViridianSchoolNotebookText2: ; 88d46 (22:4d46)
 	db $0, "Second page...", $51
 	db "A healthy #MON", $4f
 	db "may be hard to", $55
@@ -121661,7 +124683,7 @@ _UnnamedText_529f9: ; 88d46 (22:4d46)
 	db "other damage are", $55
 	db "effective!", $58
 
-_UnnamedText_529fe: ; 88dbd (22:4dbd)
+_ViridianSchoolNotebookText3: ; 88dbd (22:4dbd)
 	db $0, "Third page...", $51
 	db "#MON trainers", $4f
 	db "seek others to", $55
@@ -121671,7 +124693,7 @@ _UnnamedText_529fe: ; 88dbd (22:4dbd)
 	db "constantly fought", $55
 	db "at #MON GYMs.", $58
 
-_UnnamedText_52a03: ; 88e2c (22:4e2c)
+_ViridianSchoolNotebookText4: ; 88e2c (22:4e2c)
 	db $0, "Fourth page...", $51
 	db "The goal for", $4f
 	db "#MON trainers", $55
@@ -121691,46 +124713,46 @@ _UnnamedText_52a1d: ; 88ed9 (22:4ed9)
 	db $0, "What goes around", $4f
 	db "comes around!", $57
 
-_UnnamedText_52a2a: ; 88ef9 (22:4ef9)
+_FightingDojoText: ; 88ef9 (22:4ef9)
 	db $0, "FIGHTING DOJO", $57
 
-_UnnamedText_52a3d: ; 88f08 (22:4f08)
+_IndigoPlateauHQText: ; 88f08 (22:4f08)
 	db $0, "INDIGO PLATEAU", $4f
 	db "#MON LEAGUE HQ", $57
 
-_UnnamedText_5db81: ; 88f27 (22:4f27)
+_RedBedroomSNESText: ; 88f27 (22:4f27)
 	db $0, $52, " is", $4f
 	db "playing the SNES!", $55
 	db "...Okay!", $55
 	db "It's time to go!", $57
 
-_UnnamedText_5dba8: ; 88f58 (22:4f58)
+_Route15UpstairsBinocularsText: ; 88f58 (22:4f58)
 	db $0, "Looked into the", $4f
 	db "binoculars...", $51
 	db "A large, shining", $4f
 	db "bird is flying", $55
 	db "toward the sea.", $57
 
-_UnnamedText_5dbbe: ; 88fa7 (22:4fa7)
+_AerodactylFossilText: ; 88fa7 (22:4fa7)
 	db $0, "AERODACTYL Fossil", $4f
 	db "A primitive and", $55
 	db "rare #MON.", $57
 
-_UnnamedText_5dbd4: ; 88fd5 (22:4fd5)
+_KabutopsFossilText: ; 88fd5 (22:4fd5)
 	db $0, "KABUTOPS Fossil", $4f
 	db "A primitive and", $55
 	db "rare #MON.", $57
 
-_UnnamedText_5dc9e: ; 89001 (22:5001)
+_LinkCableHelpText1: ; 89001 (22:5001)
 	db $0, "TRAINER TIPS", $51
 	db "Using a Game Link", $4f
 	db "Cable", $58
 
-_UnnamedText_5dca3: ; 89027 (22:5027)
+_LinkCableHelpText2: ; 89027 (22:5027)
 	db $0, "Which heading do", $4f
 	db "you want to read?", $57
 
-_UnnamedText_5dcde: ; 8904b (22:504b)
+_LinkCableInfoText1: ; 8904b (22:504b)
 	db $0, "When you have", $4f
 	db "linked your GAME", $55
 	db "BOY with another", $55
@@ -121739,27 +124761,27 @@ _UnnamedText_5dcde: ; 8904b (22:504b)
 	db "the right in any", $55
 	db "#MON CENTER.", $58
 
-_UnnamedText_5dce3: ; 890bd (22:50bd)
+_LinkCableInfoText2: ; 890bd (22:50bd)
 	db $0, "COLOSSEUM lets", $4f
 	db "you play against", $55
 	db "a friend.", $58
 
-_UnnamedText_5dce8: ; 890e8 (22:50e8)
+_LinkCableInfoText3: ; 890e8 (22:50e8)
 	db $0, "TRADE CENTER is", $4f
 	db "used for trading", $55
 	db "#MON.", $58
 
-_UnnamedText_5dda2: ; 89110 (22:5110)
+_ViridianSchoolBlackboardText1: ; 89110 (22:5110)
 	db $0, "The blackboard", $4f
 	db "describes #MON", $55
 	db "STATUS changes", $55
 	db "during battles.", $58
 
-_UnnamedText_5dda7: ; 8914e (22:514e)
+_ViridianSchoolBlackboardText2: ; 8914e (22:514e)
 	db $0, "Which heading do", $4f
 	db "you want to read?", $57
 
-_UnnamedText_5ddd6: ; 89172 (22:5172)
+_ViridianBlackboardSleepText: ; 89172 (22:5172)
 	db $0, "A #MON can't", $4f
 	db "attack if it's", $55
 	db "asleep!", $51
@@ -121769,7 +124791,7 @@ _UnnamedText_5ddd6: ; 89172 (22:5172)
 	db "Use AWAKENING to", $4f
 	db "wake them up!", $58
 
-_UnnamedText_5dddb: ; 891de (22:51de)
+_ViridianBlackboardPoisonText: ; 891de (22:51de)
 	db $0, "When poisoned, a", $4f
 	db "#MON's health", $55
 	db "steadily drops.", $51
@@ -121778,7 +124800,7 @@ _UnnamedText_5dddb: ; 891de (22:51de)
 	db "Use an ANTIDOTE", $4f
 	db "to cure poison!", $58
 
-_UnnamedText_5dde0: ; 8924b (22:524b)
+_ViridianBlackbaordPrlzText: ; 8924b (22:524b)
 	db $0, "Paralysis could", $4f
 	db "make #MON", $55
 	db "moves misfire!", $51
@@ -121787,7 +124809,7 @@ _UnnamedText_5dde0: ; 8924b (22:524b)
 	db "Use PARLYZ HEAL", $4f
 	db "for treatment!", $58
 
-_UnnamedText_5dde5: ; 892b5 (22:52b5)
+_ViridianBlackboardBurnText: ; 892b5 (22:52b5)
 	db $0, "A burn reduces", $4f
 	db "power and speed.", $55
 	db "It also causes", $55
@@ -121797,7 +124819,7 @@ _UnnamedText_5dde5: ; 892b5 (22:52b5)
 	db "Use BURN HEAL to", $4f
 	db "cure a burn!", $58
 
-_UnnamedText_5ddea: ; 8932f (22:532f)
+_ViridianBlackboardFrozenText: ; 8932f (22:532f)
 	db $0, "If frozen, a", $4f
 	db "#MON becomes", $55
 	db "totally immobile!", $51
@@ -121807,11 +124829,11 @@ _UnnamedText_5ddea: ; 8932f (22:532f)
 	db "Use ICE HEAL to", $4f
 	db "thaw out #MON!", $58
 
-_UnnamedText_5ddf7: ; 893a7 (22:53a7)
+_VermilionGymTrashText: ; 893a7 (22:53a7)
 	db $0, "Nope, there's", $4f
 	db "only trash here.", $57
 
-_UnnamedText_5dec8: ; 893c6 (22:53c6)
+_VermilionGymTrashSuccesText1: ; 893c6 (22:53c6)
 	db $0, "Hey! There's a", $4f
 	db "switch under the", $55
 	db "trash!", $55
@@ -121819,19 +124841,19 @@ _UnnamedText_5dec8: ; 893c6 (22:53c6)
 	db "The 1st electric", $4f
 	db "lock opened!@@"
 
-_UnnamedText_5dedb: ; 89418 (22:5418)
+_VermilionGymTrashSuccesText2: ; 89418 (22:5418)
 	db $0, "Hey! There's", $4f
 	db "another switch", $55
 	db "under the trash!", $55
 	db "Turn it on!", $58
 
-_UnnamedText_5deef: ; 89451 (22:5451)
+_VermilionGymTrashSuccesText3: ; 89451 (22:5451)
 	db $0, "The 2nd electric", $4f
 	db "lock opened!", $51
 	db "The motorized door", $4f
 	db "opened!@@"
 
-_UnnamedText_5df02: ; 8948c (22:548c)
+_VermilionGymTrashFailText: ; 8948c (22:548c)
 	db $0, "Nope! There's", $4f
 	db "only trash here.", $55
 	db "Hey! The electric", $55
@@ -121865,15 +124887,15 @@ _DroppedHiddenCoinsText: ; 8953b (22:553b)
 	db "Oops! Dropped", $4f
 	db "some coins!", $57
 
-_UnnamedText_fbd9: ; 89557 (22:5557)
+_IndigoPlateauStatuesText1: ; 89557 (22:5557)
 	db $0, "INDIGO PLATEAU", $58
 
-_UnnamedText_fbde: ; 89567 (22:5567)
+_IndigoPlateauStatuesText2: ; 89567 (22:5567)
 	db $0, "The ultimate goal", $4f
 	db "of trainers!", $55
 	db "#MON LEAGUE HQ", $57
 
-_UnnamedText_fbe3: ; 89596 (22:5596)
+_IndigoPlateauStatuesText3: ; 89596 (22:5596)
 	db $0, "The highest", $4f
 	db "#MON authority", $55
 	db "#MON LEAGUE HQ", $57
@@ -121942,7 +124964,7 @@ _MoneyForWinningText: ; 896dd (22:56dd)
 _TrainerDefeatedText: ; 896f9 (22:56f9)
 	db $0, $52, " defeated", $4f
 	db "@"
-	TX_RAM $d04a ; 0x89706
+	TX_RAM W_TRAINERNAME ; 0x89706
 	db $0, "!", $58
 
 _PlayerMonFaintedText: ; 8970c (22:570c)
@@ -121966,12 +124988,12 @@ _PlayerBlackedOutText2: ; 89748 (22:5748)
 _LinkBattleLostText: ; 89772 (22:5772)
 	db $0, $52, " lost to", $4f
 	db "@"
-	TX_RAM $d04a ; 0x8977e
+	TX_RAM W_TRAINERNAME ; 0x8977e
 	db $0, "!", $58
 
 _TrainerAboutToUseText: ; 89784 (22:5784)
 	db 1
-	dw $D04A
+	dw W_TRAINERNAME
 	db 0," is",$4F
 	db "about to use",$55,"@",1
 	dw W_ENEMYMONNAME
@@ -121981,7 +125003,7 @@ _TrainerAboutToUseText: ; 89784 (22:5784)
 
 _TrainerSentOutText: ; 897b4 (22:57b4)
 	db 1
-	dw $D04A
+	dw W_TRAINERNAME
 	db 0," sent",$4F
 	db "out @",1
 	dw W_ENEMYMONNAME
@@ -122255,7 +125277,7 @@ _UnnamedText_58e45: ; 89c4f (22:5c4f)
 	db "appeared!", $58
 
 _UnnamedText_58e4a: ; 89c5e (22:5c5e)
-	TX_RAM $d04a
+	TX_RAM W_TRAINERNAME
 	db $0, " wants", $4f
 	db "to fight!", $58
 
@@ -122270,7 +125292,7 @@ _UnnamedText_58e54: ; 89c9e (22:5c9e)
 
 _UnnamedText_58eae: ; 89cbc (22:5cbc)
 	db $0, "Go! @@"
-	
+
 _UnnamedText_58eb5: ; 89cc3 (22:5cc3)
 	db $0, "Do it! @@"
 
@@ -122875,12 +125897,12 @@ _UnnamedText_56454: ; 8c0ad (23:40ad)
 	db $0, "Hey, you don't", $4f
 	db "have enough ¥!", $57
 
-_UndergroundTunnelEntranceRoute6Text1: ; 8c0cb (23:40cb)
+_UndergrdTunnelEntRoute6Text1: ; 8c0cb (23:40cb)
 	db $0, "People often lose", $4f
 	db "things in that", $55
 	db "UNDERGROUND PATH.", $57
 
-_UndergroundPathEntranceRoute7Text1: ; 8c0ff (23:40ff)
+_UndergroundPathEntRoute7Text1: ; 8c0ff (23:40ff)
 	db $0, "I heard a sleepy", $4f
 	db "#MON appeared", $55
 	db "near CELADON CITY.", $57
@@ -122914,7 +125936,7 @@ _UnnamedText_5d782: ; 8c209 (23:4209)
 	db "to the building", $55
 	db "across the road.", $57
 
-_UndergroundPathEntranceRoute8Text1: ; 8c28d (23:428d)
+_UndergroundPathEntRoute8Text1: ; 8c28d (23:428d)
 	db $0, "The dept. store", $4f
 	db "in CELADON has a", $55
 	db "great selection!", $57
@@ -123075,7 +126097,7 @@ _UnnamedText_494d5: ; 8c78b (23:478b)
 	db "is by way of the", $55
 	db "ROCK TUNNEL.", $57
 
-_DiglettsCaveEntranceRoute11Text1: ; 8c7f9 (23:47f9)
+_DiglettsCaveEntRoute11Text1: ; 8c7f9 (23:47f9)
 	db $0, "What a surprise!", $4f
 	db "DIGLETTs dug this", $55
 	db "long tunnel!", $51
