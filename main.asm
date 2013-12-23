@@ -10555,72 +10555,72 @@ Func_3f0f: ; 3f0f (0:3f0f)
 	ret
 
 PointerTable_3f22: ; 3f22 (0:3f22)
-	dw $66ee
-	dw $66f8
+	dw UnnamedText_526ee
+	dw UnnamedText_526f8
 	dw $5b8e
-	dw $5b81
-	dw $6960
-	dw $697e
-	dw $6983
-	dw $6cbd
-	dw $5bbe
-	dw $5ba8
-	dw $5bd4
-	dw $6453
-	dw $6458
-	dw $6511
-	dw $64a3
-	dw $64a8
-	dw $64ad
-	dw $64b2
-	dw $64d0
-	dw $64d5
-	dw $6502
-	dw $64da
-	dw $64df
-	dw $64e4
-	dw $64b7
-	dw $64bc
-	dw $64c1
-	dw $64c6
-	dw $64cb
+	dw UnnamedText_5db81
+	dw UnnamedText_1e960
+	dw UnnamedText_1e97e
+	dw UnnamedText_1e983
+	dw UnnamedText_1ecbd
+	dw UnnamedText_5dbbe
+	dw UnnamedText_5dba8
+	dw UnnamedText_5dbd4
+	dw UnnamedText_62453
+	dw UnnamedText_62458
+	dw UnnamedText_62511
+	dw UnnamedText_624a3
+	dw UnnamedText_624a8
+	dw UnnamedText_624ad
+	dw UnnamedText_624b2
+	dw UnnamedText_624d0
+	dw UnnamedText_624d5
+	dw UnnamedText_62502
+	dw UnnamedText_624da
+	dw UnnamedText_624df
+	dw UnnamedText_624e4
+	dw UnnamedText_624b7
+	dw UnnamedText_624bc
+	dw UnnamedText_624c1
+	dw UnnamedText_624c6
+	dw UnnamedText_624cb
 	dw $6508
 	dw $6529
-	dw $69aa
-	dw $5ced
-	dw $5865
+	dw UnnamedText_529aa
+	dw UnnamedText_5dced
+	dw UnnamedText_21865
 	dw $5878
 	dw FoundHiddenItemText
 	dw HiddenItemBagFullText
-	dw $5df7
-	dw $6a3d
-	dw $7e79
-	dw $7e7e
-	dw $7e83
+	dw UnnamedText_5ddf7
+	dw UnnamedText_52a3d
+	dw UnnamedText_37e79
+	dw UnnamedText_37e7e
+	dw UnnamedText_37e83
 	dw FoundHiddenCoinsText
 	dw DroppedHiddenCoinsText
-	dw $6bdd
-	dw $6be2
-	dw $6c05
-	dw $6b69
-	dw $6a25
-	dw $7f37
-	dw $7f32
-	dw $5c29
-	dw $69a4
-	dw $6a2a
-	dw $6a10
-	dw $6a1d
-	dw $6953
-	dw $7bbf
-	dw $5ec8
-	dw $5edb
-	dw $5eef
-	dw $5f02
-	dw $7c12
-	dw $7be8
-	dw $7c0d
-	dw $7c45
+	dw UnnamedText_1ebdd
+	dw UnnamedText_1ebe2
+	dw UnnamedText_1ec05
+	dw UnnamedText_1eb69
+	dw UnnamedText_1ea25
+	dw UnnamedText_2ff37
+	dw UnnamedText_2ff32
+	dw UnnamedText_5dc29
+	dw UnnamedText_529a4
+	dw UnnamedText_52a2a
+	dw UnnamedText_52a10
+	dw UnnamedText_52a1d
+	dw UnnamedText_1e953
+	dw UnnamedText_fbbf
+	dw UnnamedText_5dec8
+	dw UnnamedText_5dedb
+	dw UnnamedText_5deef
+	dw UnnamedText_5df02
+	dw TownMapText
+	dw UnnamedText_fbe8
+	dw UnnamedText_fc0d
+	dw UnnamedText_fc45
 
 SECTION "bank1",ROMX,BANK[$1]
 
@@ -44419,7 +44419,7 @@ Func_1eb0a: ; 1eb0a (7:6b0a)
 	ret
 
 CinnabarGymGateCoords: ; 1eb48 (7:6b48)
-	; format: x-coord, y-coord, direction, buffer
+	; format: x-coord, y-coord, direction, padding
 	; direction: $54 = horizontal gate, $5f = vertical gate
 	db $09,$03,$54,$00
 	db $06,$03,$54,$00
@@ -101091,7 +101091,7 @@ SSAnne2Script: ; 6139f (18:539f)
 	ld a, [W_SSANNE2CURSCRIPT]
 	jp CallFunctionInTable
 
-Func_613ab: ; 613ab (18:53ab)
+SSAnne2Script_613ab: ; 613ab (18:53ab)
 	xor a
 	ld [wJoypadForbiddenButtonsMask], a
 	ld [W_SSANNE2CURSCRIPT], a
@@ -101207,7 +101207,7 @@ SSAnne2Script1: ; 61430 (18:5430)
 SSAnne2Script2: ; 6146d (18:546d)
 	ld a, [$d057]
 	cp $ff
-	jp z, Func_613ab
+	jp z, SSAnne2Script_613ab
 	call Func_61416
 	ld a, $f0
 	ld [wJoypadForbiddenButtonsMask], a
@@ -103091,7 +103091,7 @@ UnnamedText_624df: ; 624df (18:64df)
 	db "@"
 
 UnnamedText_624e4: ; 624e4 (18:64e4)
-	db $8
+	db $8 ; asm
 	ld a, [$d838]
 	bit 7, a
 	ld hl, UnnamedText_624fd
@@ -114591,79 +114591,79 @@ SpecialEffectPointers: ; 790da (1e:50da)
 	db $FE
 	dw AnimationFlashScreen
 	db $FD
-	dw $51D6
+	dw Func_791d6
 	db $FC
-	dw $51EA
+	dw Func_791ea
 	db $FB
-	dw $520E
+	dw Func_7920e
 	db $FA
-	dw $5215
+	dw Func_79215
 	db $F9
-	dw $51DB
+	dw Func_791db
 	db $F8
 	dw AnimationFlashScreenLong
 	db $F7
-	dw $527A
+	dw Func_7927a
 	db $F6
-	dw $5297
+	dw Func_79297
 	db $F5
-	dw $5389
+	dw Func_79389
 	db $F4
-	dw $52AF
+	dw Func_792af
 	db $F3
-	dw $536F
+	dw Func_7936f
 	db $F2
 	dw Func_793f9
 	db $F1
-	dw $5415
+	dw Func_79415
 	db $F0
-	dw $51F4
+	dw Func_791f4
 	db $EF
-	dw $5801
+	dw Func_79801
 	db $EE
-	dw $54A1
+	dw Func_794a1
 	db $ED
-	dw $54F9
+	dw Func_794f9
 	db $EC
 	dw Func_79566
 	db $EB
-	dw $577A
+	dw Func_7977a
 	db $EA
-	dw $559F
+	dw Func_7959f
 	db $E9
-	dw $55C9
+	dw Func_795c9
 	db $E8
-	dw $5787
+	dw Func_79787
 	db $E7
-	dw $5C74
+	dw Func_79c74
 	db $E6
-	dw $5C8A
+	dw Func_79c8a
 	db $E5
 	dw Func_79645
 	db $E4
-	dw $5D77
+	dw Func_79d77
 	db $E3
-	dw $5D77
+	dw Func_79d77
 	db $E2
-	dw $5424
+	dw Func_79424
 	db $E1
 	dw AnimationDelay10
 	db $E0
-	dw $5398
+	dw Func_79398
 	db $DF
-	dw $57D8
+	dw Func_797d8
 	db $DE
-	dw $5369
+	dw Func_79369
 	db $DD
-	dw $539E
+	dw Func_7939e
 	db $DC
-	dw $53AB
+	dw Func_793ab
 	db $DB
-	dw $52B9
+	dw Func_792b9
 	db $DA
 	dw Func_793b1
 	db $D9
-	dw $56E0
+	dw Func_796e0
 	db $D8
 	dw Func_79666
 	db $FF
@@ -114775,29 +114775,38 @@ AnimationFlashScreen: ; 791be (1e:51be)
 	ld [rBGP],a ; restore initial palette
 	ret
 
+Func_791d6: ; 791d6 (1e:51d6)
 	ld bc, $6f6f
-	jr .asm_791fc
+	jr Func_791fc
 
+Func_791db: ; 791db (1e:51db)
 	ld bc, $f9f4
-	jr .asm_791fc
+	jr Func_791fc
 
+Func_791e0: ; 791e0 (1e:51e0)
 	ld bc, $fef8
-	jr .asm_791fc
+	jr Func_791fc
 
+Func_791e5: ; 791e5 (1e:51e5)
 	ld bc, $ffff
-	jr .asm_791fc
+	jr Func_791fc
 
+Func_791ea: ; 791ea (1e:51ea)
 	ld bc, $e4e4
-	jr .asm_791fc
+	jr Func_791fc
 
+Func_791ef: ; 791ef (1e:51ef)
 	ld bc, $0000
-	jr .asm_791fc
+	jr Func_791fc
 
+Func_791f4: ; 791f4 (1e:51f4)
 	ld bc, $9090
-	jr .asm_791fc
+	jr Func_791fc
 
+Func_791f9: ; 791f9 (1e:51f9)
 	ld bc, $4040
-.asm_791fc
+	
+Func_791fc: ; 791fc (1e:51fc)
 	ld a, [$cf1b]
 	and a
 	ld a, b
@@ -114812,11 +114821,15 @@ AnimationFlashScreen: ; 791be (1e:51be)
 Func_79209: ; 79209 (1e:5209)
 	ld a, $21
 	jp Predef ; indirect jump to Func_480ff (480ff (12:40ff))
+
+Func_7920e: ; 7920e (1e:520e)
 	ld b, $8
 
 Func_79210: ; 79210 (1e:5210)
 	ld a, $24
 	jp Predef ; indirect jump to Func_48125 (48125 (12:4125))
+
+Func_79215: ; 79215 (1e:5215)
 	xor a
 	ld [$d09f], a
 	call LoadAnimationTileset
@@ -115072,7 +115085,9 @@ Func_7939e: ; 7939e (1e:539e)
 	call Func_79820
 	call Func_79aae
 	jp Delay3
-	ld hl, Func_7939e ; $539e
+
+Func_793ab: ; 793ab (1e:53ab)
+	ld hl, Func_7939e
 	jp CallWithTurnFlipped
 
 Func_793b1: ; 793b1 (1e:53b1)
@@ -115137,6 +115152,8 @@ Func_793f9: ; 793f9 (1e:53f9)
 	call Func_79aae
 	ld c, $3
 	jp DelayFrames
+
+Func_79415: ; 79415 (1e:5415)
 	ld a, [H_WHOSETURN] ; $FF00+$f3
 	and a
 	ld a, $66
@@ -115145,6 +115162,8 @@ Func_793f9: ; 793f9 (1e:53f9)
 .asm_7941e
 	call Func_7980c
 	jp Func_7939e
+
+Func_79424: ; 79424 (1e:5424)
 	ld a, [H_WHOSETURN] ; $FF00+$f3
 	and a
 	jr z, .asm_79435
@@ -115198,6 +115217,8 @@ Func_793f9: ; 793f9 (1e:53f9)
 
 Unknown_79476: ; 79476 (1e:5476)
 INCBIN "baserom.gbc",$79476,$794a1 - $79476
+
+Func_794a1: ; 794a1 (1e:54a1)
 	ld c, $4
 .asm_794a3
 	push bc
@@ -115254,6 +115275,8 @@ Func_794d4: ; 794d4 (1e:54d4)
 	dec c
 	jr nz, .asm_794d6
 	jp Delay3
+
+Func_794f9: ; 794f9 (1e:54f9)
 	ld a, [H_WHOSETURN] ; $FF00+$f3
 	and a
 	jr z, .asm_79503
@@ -115371,7 +115394,33 @@ Func_7959f: ; 7959f (1e:559f)
 	jp Func_7939e
 
 Unknown_795c4: ; 795c4 (1e:55c4)
-INCBIN "baserom.gbc",$795c4,$795f8 - $795c4
+INCBIN "baserom.gbc",$795c4,$795c9 - $795c4
+
+Func_795c9: ; 795c9 (1e:55c9)
+	ld a, $1
+	ld c, $2
+.asm_795cd
+	push bc
+	push af
+	call Func_79801
+	pop af
+	push af
+	call Func_79842
+	call Func_79820
+	call Func_79aae
+	ld c, $8
+	call DelayFrames
+	pop af
+	inc a
+	pop bc
+	dec c
+	jr nz, .asm_795cd
+	call Func_79801
+	ld hl, $c6e8
+	ld bc, $0310
+	xor a
+	call FillMemory
+	jp Func_79652
 
 Func_795f8: ; 795f8 (1e:55f8)
 	ld a, [H_WHOSETURN] ; $FF00+$f3
@@ -115627,6 +115676,8 @@ Func_79793: ; 79793 (1e:5793)
 .asm_797d3
 	ld b, $1
 	jp GoPAL_SET
+
+Func_797d8: ; 797d8 (1e:57d8)
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
 	ld hl, Func_79801 ; $5801
@@ -116016,28 +116067,242 @@ Func_79ace: ; 79ace (1e:5ace)
 	ret
 
 PointerTable_79aea: ; 79aea (1e:5aea)
-	dw $5b24
+	dw Unknown_79b24
 	db $77
-	dw $5b55
+	dw Unknown_79b55
 	db $57
-	dw $5b78
+	dw Unknown_79b78
 	db $37
-	dw $5b8D
+	dw Unknown_79b8d
 	db $77
-	dw $5bBE
+	dw Unknown_79bbe
 	db $77
-	dw $5bEF
+	dw Unknown_79bef
 	db $77
-	dw $5c20
+	dw Unknown_79c20
 	db $86
-	dw $5c50
+	dw Unknown_79c50
 	db $3C
 
 Unknown_79b02: ; 79b02 (1e:5b02)
-INCBIN "baserom.gbc",$79b02,$79b1b - $79b02
+	db $31,$38,$46,$54,$5B,$32,$39,$47,$55,$5C,$34,$3B,$49,$57,$5E,$36,$3D,$4B,$59,$60,$37,$3E,$4C,$5A,$61
 
 Unknown_79b1b: ; 79b1b (1e:5b1b)
-INCBIN "baserom.gbc",$79b1b,$79dda - $79b1b
+	db $31,$46,$5B,$34,$49,$5E,$37,$4C,$61
+
+Unknown_79b24: ; 79b24 (1e:5b24)
+	db $00,$07,$0E,$15,$1C,$23,$2A,$01,$08,$0F,$16,$1D,$24,$2B,$02,$09,$10,$17,$1E,$25,$2C,$03,$0A,$11,$18,$1F,$26,$2D,$04,$0B,$12,$19,$20,$27,$2E,$05,$0C,$13,$1A,$21,$28,$2F,$06,$0D,$14,$1B,$22,$29,$30
+
+Unknown_79b55: ; 79b55 (1e:5b55)
+	db $00,$07,$0E,$15,$1C,$23,$2A,$01,$08,$0F,$16,$1D,$24,$2B,$03,$0A,$11,$18,$1F,$26,$2D,$04,$0B,$12,$19,$20,$27,$2E,$05,$0C,$13,$1A,$21,$28,$2F
+
+Unknown_79b78: ; 79b78 (1e:5b78)
+	db $00,$07,$0E,$15,$1C,$23,$2A,$02,$09,$10,$17,$1E,$25,$2C,$04,$0B,$12,$19,$20,$27,$2E
+
+Unknown_79b8d: ; 79b8d (1e:5b8d)
+	db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$19,$00,$02,$06,$0B,$10,$14,$1A,$00,$00,$07,$0C,$11,$15,$1B,$00,$03,$08,$0D,$12,$16,$1C,$00,$04,$09,$0E,$13,$17,$1D,$1F,$05,$0A,$0F,$01,$18,$1E,$20
+
+Unknown_79bbe: ; 79bbe (1e:5bbe)
+	db $00,$00,$00,$30,$00,$37,$00,$00,$00,$2B,$31,$34,$38,$3D,$21,$26,$2C,$01,$35,$39,$3E,$22,$27,$2D,$32,$36,$01,$00,$23,$28,$2E,$33,$01,$3A,$00,$24,$29,$2F,$01,$01,$3B,$00,$25,$2A,$01,$01,$01,$3C,$00
+
+Unknown_79bef: ; 79bef (1e:5bef)
+	db $00,$00,$00,$00,$00,$00,$00,$00,$00,$47,$4D,$00,$00,$00,$00,$00,$48,$4E,$52,$56,$5B,$3F,$43,$49,$4F,$53,$57,$5C,$40,$44,$4A,$50,$54,$58,$00,$41,$45,$4B,$51,$4C,$59,$5D,$42,$46,$4C,$4C,$55,$5A,$5E
+
+Unknown_79c20: ; 79c20 (1e:5c20)
+	db $31,$32,$32,$32,$32,$33,$34,$35,$36,$36,$37,$38,$34,$39,$3A,$3A,$3B,$38,$3C,$3D,$3E,$3E,$3F,$40,$41,$42,$43,$43,$44,$45,$46,$47,$43,$48,$49,$4A,$41,$43,$4B,$4C,$4D,$4E,$4F,$50,$50,$50,$51,$52
+
+Unknown_79c50: ; 79c50 (1e:5c50)
+	db $43,$55,$56,$53,$53,$53,$53,$53,$53,$53,$53,$53,$43,$57,$58,$54,$54,$54,$54,$54,$54,$54,$54,$54,$43,$59,$5A,$43,$43,$43,$43,$43,$43,$43,$43,$43
+
+Func_79c74: ; 79c74 (1e:5c74)
+	ld a, [$ff48]
+	push af
+	ld a, [$cc79]
+	ld [$ff48], a
+	ld d, $37
+	ld a, $3
+	ld [W_SUBANIMTRANSFORM], a
+	call Func_79c97
+	pop af
+	ld [$ff48], a
+	ret
+
+Func_79c8a: ; 79c8a (1e:5c8a)
+	ld d, $71
+	ld a, $14
+	ld [W_SUBANIMTRANSFORM], a
+	call Func_79c97
+	jp CleanLCD_OAM
+
+Func_79c97: ; 79c97 (1e:5c97)
+	ld c, a
+	ld a, $1
+	call Func_797e8
+	call Func_79d2a
+	call Func_79d52
+	ld hl, wOAMBuffer
+	ld [hl], $0
+.asm_79ca8
+	ld hl, wTrainerSpriteOffset
+	ld de, $0000
+	ld a, [W_SUBANIMTRANSFORM]
+	ld c, a
+.asm_79cb2
+	push bc
+	push hl
+	push de
+	ld a, [hl]
+	ld [$d08a], a
+	call Func_79d16
+	call Func_79cdb
+	pop de
+	ld hl, $0004
+	add hl, de
+	ld e, l
+	ld d, h
+	pop hl
+	ld a, [$d08a]
+	ld [hli], a
+	pop bc
+	dec c
+	jr nz, .asm_79cb2
+	call Delay3
+	ld hl, wOAMBuffer
+	ld a, [hl]
+	cp $68
+	jr nz, .asm_79ca8
+	ret
+
+Func_79cdb: ; 79cdb (1e:5cdb)
+	ld hl, wOAMBuffer
+	add hl, de
+	ld a, [hl]
+	inc a
+	inc a
+	cp $70
+	jr c, .asm_79ce8
+	ld a, $a0
+.asm_79ce8
+	ld [hli], a
+	ld a, [$d08a]
+	ld b, a
+	ld de, Unknown_79d0d
+	and $7f
+	add e
+	jr nc, .asm_79cf6
+	inc d
+.asm_79cf6
+	ld e, a
+	ld a, b
+	and $80
+	jr nz, .asm_79d03
+	ld a, [de]
+	add [hl]
+	ld [hli], a
+	inc hl
+	xor a
+	jr .asm_79d0b
+.asm_79d03
+	ld a, [de]
+	ld b, a
+	ld a, [hl]
+	sub b
+	ld [hli], a
+	inc hl
+	ld a, $20
+.asm_79d0b
+	ld [hl], a
+	ret
+
+Unknown_79d0d: ; 79d0d (1e:5d0d)
+	db $00,$01,$03,$05,$07,$09,$0B,$0D,$0F
+
+Func_79d16: ; 79d16 (1e:5d16)
+	ld a, [$d08a]
+	inc a
+	ld b, a
+	and $7f
+	cp $9
+	ld a, b
+	jr nz, .asm_79d26
+	and $80
+	xor $80
+.asm_79d26
+	ld [$d08a], a
+	ret
+Func_79d2a: ; 79d2a (1e:5d2a)
+	ld hl, $c301
+	ld de, Unknown_79d3e
+	ld a, [W_SUBANIMTRANSFORM]
+	ld c, a
+.asm_79d34
+	ld a, [de]
+	ld [hli], a
+	inc hl
+	inc hl
+	inc hl
+	inc de
+	dec c
+	jr nz, .asm_79d34
+	ret
+
+Unknown_79d3e: ; 79d3e (1e:5d3e)
+	db $38,$40,$50,$60,$70,$88,$90,$56,$67,$4A,$77,$84,$98,$32,$22,$5C,$6C,$7D,$8E,$99
+
+Func_79d52: ; 79d52 (1e:5d52)
+	ld hl, wTrainerSpriteOffset
+	ld de, Unknown_79d63
+	ld a, [W_SUBANIMTRANSFORM]
+	ld c, a
+.asm_79d5c
+	ld a, [de]
+	ld [hli], a
+	inc de
+	dec c
+	jr nz, .asm_79d5c
+	ret
+
+Unknown_79d63: ; 79d63 (1e:5d63)
+	db $00,$84,$06,$81,$02,$88,$01,$83,$05,$89,$09,$80,$07,$87,$03,$82,$04,$85,$08,$86
+
+Func_79d77: ; 79d77 (1e:5d77)
+	ld de, $9310
+	ld hl, $8000
+	ld bc, $0031
+	call CopyVideoData
+	xor a
+	ld [$ffae], a
+	ld hl, $9800
+	call Func_79e0d
+	ld a, $90
+	ld [$ffb0], a
+	ld hl, $9b20
+	call Func_79e0d
+	ld a, $38
+	ld [$ffb0], a
+	call Func_792fd
+	ld hl, $9800
+	call Func_79e0d
+	call Func_79801
+	call Delay3
+	ld de, $0208
+	call Func_79de9
+	call Func_7939e
+	call CleanLCD_OAM
+	ld a, $90
+	ld [$ffb0], a
+	ld hl, $9c00
+	call Func_79e0d
+	xor a
+	ld [$ffb0], a
+	call SaveScreenTilesToBuffer1
+	ld hl, $9800
+	call Func_79e0d
+	call ClearScreen
+	call Delay3
+	call LoadScreenTilesFromBuffer1
+	ld hl, $9c00
+	jp Func_79e0d
 
 Func_79dda: ; 79dda (1e:5dda)
 	call Load16BitRegisters
