@@ -17126,14 +17126,11 @@ GetAddressOfScreenCoords: ; 7375 (1:7375)
 ; 01-02: function address
 TextBoxFunctionTable: ; 7387 (1:7387)
 	db $13
-	dw $74ba
-
+	dw Func_74ba
 	db $15
-	dw $74ea
-
+	dw Func_74ea
 	db $04
-	dw $76e1
-
+	dw Func_76e1
 	db $ff ; terminator
 
 ; Format:
@@ -17268,6 +17265,7 @@ JapanesePokedexMenu: ; 74a1 (1:74a1)
 	db "ぶんぷをみる",$4E
 	db "キャンセル@"
 
+Func_74ba: ; 74ba (1:74ba)
 	ld hl, $d730
 	set 6, [hl]
 	ld a, $f
@@ -34171,7 +34169,7 @@ Func_13a58: ; 13a58 (4:7a58)
 	call GetName
 	ld hl, $cd6d
 .asm_13a86
-	ld de, $d04a
+	ld de, W_TRAINERNAME
 	ld bc, $d
 	jp CopyData
 
@@ -38065,11 +38063,8 @@ BluesHouseObject: ; 19bce (6:5bce)
 	db $41,4+3,4+3,$FF,$FF,ITEM|3,0 ; Daisy, walking around
 
 	; warp-to
-	dw $C712
-	db 7,2
-
-	dw $C712
-	db 7,3
+	EVENT_DISP BLUES_HOUSE_WIDTH, 7, 2
+	EVENT_DISP BLUES_HOUSE_WIDTH, 7, 3
 
 BluesHouseBlocks: ; 19bf6 (6:5bf6)
 	INCBIN "maps/blueshouse.blk"
@@ -38109,8 +38104,8 @@ VermilionHouse3Object: ; 0x19c25 (size=26)
 	db SPRITE_LITTLE_GIRL, $5 + 4, $3 + 4, $ff, $d1, $1 ; person
 
 	; warp-to
-	EVENT_DISP $4, $7, $2
-	EVENT_DISP $4, $7, $3
+	EVENT_DISP VERMILION_HOUSE_3_WIDTH, $7, $2
+	EVENT_DISP VERMILION_HOUSE_3_WIDTH, $7, $3
 
 VermilionHouse3Blocks: ; 19c3f (6:5c3f)
 	INCBIN "maps/vermilionhouse3.blk"
@@ -43264,10 +43259,8 @@ UndergroundPathEntranceRoute8Script: ; 1e289 (7:6289)
 UndergroundPathEntranceRoute8TextPointers: ; 1e291 (7:6291)
 	dw UndergroundPathEntranceRoute8Text1
 
-;XXX wtf? syntax error
 UndergroundPathEntranceRoute8Text1: ; 1e293 (7:6293)
-	db $17, $8d, $42, $23
-	;TX_FAR _UndergroundPathEntranceRoute8Text1
+	TX_FAR _UndergroundPathEntRoute8Text1
 	db "@"
 
 UndergroundPathEntranceRoute8Object: ; 0x1e298 (size=34)
@@ -43524,10 +43517,8 @@ DiglettsCaveEntranceRoute11Script: ; 1e5ba (7:65ba)
 DiglettsCaveEntranceRoute11TextPointers: ; 1e5c3 (7:65c3)
 	dw DiglettsCaveEntranceRoute11Text1
 
-; XXX wtf? syntax error
 DiglettsCaveEntranceRoute11Text1: ; 1e5c5 (7:65c5)
-	db $17, $f9, $47, $23
-	;TX_FAR _DiglettsCaveEntranceRoute11Text1
+	TX_FAR _DiglettsCaveEntRoute11Text1
 	db "@"
 
 DiglettsCaveEntranceRoute11Object: ; 0x1e5ca (size=34)
@@ -47288,50 +47279,50 @@ TrainerNamePointers: ; 27e64 (9:7e64)
 	dw YoungsterName
 	dw BugCatcherName
 	dw LassName
-	dw $D04A
+	dw W_TRAINERNAME
 	dw JrTrainerMName
 	dw JrTrainerFName
 	dw PokemaniacName
 	dw SuperNerdName
-	dw $D04A
-	dw $D04A
+	dw W_TRAINERNAME
+	dw W_TRAINERNAME
 	dw BurglarName
 	dw EngineerName
 	dw JugglerXName
-	dw $D04A
+	dw W_TRAINERNAME
 	dw SwimmerName
-	dw $D04A
-	dw $D04A
+	dw W_TRAINERNAME
+	dw W_TRAINERNAME
 	dw BeautyName
-	dw $D04A
+	dw W_TRAINERNAME
 	dw RockerName
 	dw JugglerName
-	dw $D04A
-	dw $D04A
+	dw W_TRAINERNAME
+	dw W_TRAINERNAME
 	dw BlackbeltName
-	dw $D04A
+	dw W_TRAINERNAME
 	dw ProfOakName
 	dw ChiefName
 	dw ScientistName
-	dw $D04A
+	dw W_TRAINERNAME
 	dw RocketName
 	dw CooltrainerMName
 	dw CooltrainerFName
-	dw $D04A
-	dw $D04A
-	dw $D04A
-	dw $D04A
-	dw $D04A
-	dw $D04A
-	dw $D04A
-	dw $D04A
-	dw $D04A
-	dw $D04A
-	dw $D04A
-	dw $D04A
-	dw $D04A
-	dw $D04A
-	dw $D04A
+	dw W_TRAINERNAME
+	dw W_TRAINERNAME
+	dw W_TRAINERNAME
+	dw W_TRAINERNAME
+	dw W_TRAINERNAME
+	dw W_TRAINERNAME
+	dw W_TRAINERNAME
+	dw W_TRAINERNAME
+	dw W_TRAINERNAME
+	dw W_TRAINERNAME
+	dw W_TRAINERNAME
+	dw W_TRAINERNAME
+	dw W_TRAINERNAME
+	dw W_TRAINERNAME
+	dw W_TRAINERNAME
 
 YoungsterName: ; 27ec2 (9:7ec2)
 	db "YOUNGSTER@"
@@ -74929,10 +74920,7 @@ RocketHideout3EndBattleText3: ; 45343 (11:5343)
 	db "@"
 
 RocketHideout3AfterBattleText3: ; 45348 (11:5348)
-	;TX_FAR _RocketHideout3AfterBattleText3
-	db $17
-	dw _RocketHideout3AfterBattleText3
-	db BANK(_RocketHideout3AfterBattleText3)
+	TX_FAR _RocketHide3AfterBattleText3
 	db "@"
 
 RocketHideout3Object: ; 0x4534d (size=50)
@@ -75144,10 +75132,7 @@ RocketHideout4EndBattleText2: ; 45598 (11:5598)
 	db "@"
 
 RocketHideout4AfterBattleText2: ; 4559d (11:559d)
-	;TX_FAR _RocketHideout4AfterBattleText2
-	db $17
-	dw _RocketHideout4AfterBattleText2
-	db BANK(_RocketHideout4AfterBattleText2)
+	TX_FAR _RocketHide4AfterBattleText2
 	db "@"
 
 RocketHideout4Text3: ; 455a2 (11:55a2)
@@ -75165,10 +75150,7 @@ RocketHideout4EndBattleText3: ; 455b1 (11:55b1)
 	db "@"
 
 RocketHideout4AfterBattleText3: ; 455b6 (11:55b6)
-	;TX_FAR _RocketHideout4AfterBattleText3
-	db $17
-	dw _RocketHideout4AfterBattleText3
-	db BANK(_RocketHideout4AfterBattleText3)
+	TX_FAR _RocketHide4AfterBattleText3
 	db "@"
 
 RocketHideout4Text4: ; 455bb (11:55bb)
@@ -75675,7 +75657,7 @@ SafariZoneRestHouse1Object: ; 0x45cfe (size=32)
 SafariZoneRestHouse2_h: ; 0x45d1e to 0x45d2a (12 bytes) (bank=11) (id=223)
 	db $0c ; tileset
 	db SAFARI_ZONE_REST_HOUSE_2_HEIGHT, SAFARI_ZONE_REST_HOUSE_2_WIDTH ; dimensions (y, x)
-	dw $40fb, SafariZoneRestHouse2TextPointers, SafariZoneRestHouse2Script ; blocks, texts, scripts
+	dw SafariZoneRestHouse1Blocks, SafariZoneRestHouse2TextPointers, SafariZoneRestHouse2Script ; blocks, texts, scripts
 	db $00 ; connections
 
 	dw SafariZoneRestHouse2Object ; objects
@@ -75722,7 +75704,7 @@ SafariZoneRestHouse2Object: ; 0x45d43 (size=38)
 SafariZoneRestHouse3_h: ; 0x45d69 to 0x45d75 (12 bytes) (bank=11) (id=224)
 	db $0c ; tileset
 	db SAFARI_ZONE_REST_HOUSE_3_HEIGHT, SAFARI_ZONE_REST_HOUSE_3_WIDTH ; dimensions (y, x)
-	dw $40fb, SafariZoneRestHouse3TextPointers, SafariZoneRestHouse3Script ; blocks, texts, scripts
+	dw SafariZoneRestHouse1Blocks, SafariZoneRestHouse3TextPointers, SafariZoneRestHouse3Script ; blocks, texts, scripts
 	db $00 ; connections
 
 	dw SafariZoneRestHouse3Object ; objects
@@ -75769,7 +75751,7 @@ SafariZoneRestHouse3Object: ; 0x45d8e (size=38)
 SafariZoneRestHouse4_h: ; 0x45db4 to 0x45dc0 (12 bytes) (bank=11) (id=225)
 	db $0c ; tileset
 	db SAFARI_ZONE_REST_HOUSE_4_HEIGHT, SAFARI_ZONE_REST_HOUSE_4_WIDTH ; dimensions (y, x)
-	dw $40fb, SafariZoneRestHouse4TextPointers, SafariZoneRestHouse4Script ; blocks, texts, scripts
+	dw SafariZoneRestHouse1Blocks, SafariZoneRestHouse4TextPointers, SafariZoneRestHouse4Script ; blocks, texts, scripts
 	db $00 ; connections
 
 	dw SafariZoneRestHouse4Object ; objects
@@ -77829,7 +77811,7 @@ Route7Text1: ; 48157 (12:4157)
 
 RedsHouse1F_h: ; 4815c (12:415c)
 	db $01 ; tileset
-	db $04,$04 ; dimensions
+	db REDS_HOUSE_1F_HEIGHT, REDS_HOUSE_1F_WIDTH ; dimensions
 	dw RedsHouse1FBlocks, RedsHouse1FTextPointers, RedsHouse1FScript
 	db 0 ; no connections
 	dw RedsHouse1FObject
@@ -77919,15 +77901,9 @@ RedsHouse1FObject: ; 481e4 (12:41e4)
 	db $33,4+4,5+4,$FF,$D2,1 ; Mom
 
 	; warp-to
-
-	dw $C6EF + 4 + (4 + 6) * (3) + 1
-	db 7,2
-
-	dw $C6EF + 4 + (4 + 6) * (3) + 1
-	db 7,3
-
-	dw $C6EF + 4 + (4 + 6) * (0) + 3
-	db 1,7
+	EVENT_DISP REDS_HOUSE_1F_WIDTH, 7, 2
+	EVENT_DISP REDS_HOUSE_1F_WIDTH, 7, 3
+	EVENT_DISP REDS_HOUSE_1F_WIDTH, 1, 7
 
 RedsHouse1FBlocks: ; 48209 (12:4209)
 	INCBIN "maps/redshouse1f.blk"
@@ -83208,7 +83184,7 @@ Route22ScriptPointers: ; 50ebe (14:4ebe)
 	dw Route22Script4
 	dw Route22Script5
 	dw Route22Script6
-	dw $4Ed5
+	dw Route22Script7
 
 Func_50ece: ; 50ece (14:4ece)
 	xor a
@@ -94878,14 +94854,14 @@ RedsHouse2FObject: ; 0x5c0d0 ?
 	db $0A ; border tile
 
 	db 1 ; warps
-	db 1,7,2,$25
+	db 1, 7, 2, REDS_HOUSE_1F
 
 	db 0 ; signs
 
 	db 0 ; people
 
-	dw $C6EF + 4 + (4 + 6) * 0 + 3
-	db 1,7
+	; warp-to
+	EVENT_DISP REDS_HOUSE_2F_WIDTH, 1, 7
 
 Func_5c0dc: ; 5c0dc (17:40dc)
 	ld a, $4b
@@ -97806,10 +97782,8 @@ UndergroundTunnelEntranceRoute6Script: ; 5d6ef (17:56ef)
 UndergroundTunnelEntranceRoute6TextPointers: ; 5d6f7 (17:56f7)
 	dw UndergroundTunnelEntranceRoute6Text1
 
-;XXX wtf? syntax error on TX_FAR?
 UndergroundTunnelEntranceRoute6Text1: ; 5d6f9 (17:56f9)
-	db $17, $cb, $40, $23
-	;TX_FAR _UndergroundTunnelEntranceRoute6Text1 ; $cb, $40, $23
+	TX_FAR _UndergrdTunnelEntRoute6Text1
 	db "@"
 
 UndergroundTunnelEntranceRoute6Object: ; 0x5d6fe (size=34)
@@ -97847,8 +97821,7 @@ UndergroundPathEntranceRoute7TextPointers: ; 5d734 (17:5734)
 	dw UndergroundPathEntranceRoute7Text1
 
 UndergroundPathEntranceRoute7Text1: ; 5d736 (17:5736)
-	db $17, $ff, $40, $23
-	;TX_FAR _UndergroundPathEntranceRoute7Text1
+	TX_FAR _UndergroundPathEntRoute7Text1
 	db "@"
 
 UndergroundPathEntranceRoute7Object: ; 0x5d73b (size=34)
@@ -98796,7 +98769,7 @@ ViridianForestBlocks: ; 60000 (18:4000)
 
 UndergroundPathNSBlocks: ; 60198 (18:4198)
 	INCBIN "maps/undergroundpathns.blk"
-
+UndergroundPathWEBlocks: ; 601f8 (18:41f8)
 	INCBIN "maps/unusedblocks601f8.blk"
 
 SSAnne10Blocks: ; 603c0 (18:43c0)
@@ -100404,10 +100377,7 @@ ViridianForestEndBattleText1: ; 6118f (18:518f)
 	db "@"
 
 ViridianForestAfterBattleText1: ; 61194 (18:5194)
-	;TX_FAR _ViridianForestAfterBattleText1
-	db $17
-	dw _ViridianForestAfterBattleText1
-	db BANK(_ViridianForestAfterBattleText1)
+	TX_FAR _ViridianFrstAfterBattleText1
 	db "@"
 
 ViridianForestBattleText2: ; 61199 (18:5199)
@@ -100419,10 +100389,7 @@ ViridianForestEndBattleText2: ; 6119e (18:519e)
 	db "@"
 
 ViridianForestAfterBattleText2: ; 611a3 (18:51a3)
-	;TX_FAR _ViridianForestAfterBattleText2
-	db $17
-	dw _ViridianForestAfterBattleText2
-	db BANK(_ViridianForestAfterBattleText2)
+	TX_FAR _ViridianFrstAfterBattleText2
 	db "@"
 
 ViridianForestBattleText3: ; 611a8 (18:51a8)
@@ -100434,10 +100401,7 @@ ViridianForestEndBattleText3: ; 611ad (18:51ad)
 	db "@"
 
 ViridianForestAfterBattleText3: ; 611b2 (18:51b2)
-	;TX_FAR _ViridianForestAfterBattleText3
-	db $17
-	dw _ViridianForestAfterBattleText3
-	db BANK(_ViridianForestAfterBattleText3)
+	TX_FAR _ViridianFrstAfterBattleText3
 	db "@"
 
 ViridianForestText8: ; 611b7 (18:51b7)
@@ -101977,7 +101941,7 @@ UndergroundPathNSObject: ; 0x61f2a (size=20)
 UndergroundPathWE_h: ; 0x61f3e to 0x61f4a (12 bytes) (id=121)
 	db $0b ; tileset
 	db UNDERGROUND_PATH_WE_HEIGHT, UNDERGROUND_PATH_WE_WIDTH ; dimensions (y, x)
-	dw $41f4, UndergroundPathWETextPointers, UndergroundPathWEScript ; blocks, texts, scripts
+	dw UndergroundPathWEBlocks - 4, UndergroundPathWETextPointers, UndergroundPathWEScript ; blocks, texts, scripts
 	db $00 ; connections
 
 	dw UndergroundPathWEObject ; objects
@@ -118268,7 +118232,7 @@ _ViridianForestEndBattleText1: ; 80387 (20:4387)
 	db "CATERPIE can't", $55
 	db "cut it!", $58
 
-_ViridianForestAfterBattleText1: ; 803a2 (20:43a2)
+_ViridianFrstAfterBattleText1: ; 803a2 (20:43a2)
 	db $0, "Ssh! You'll scare", $4f
 	db "the bugs away!", $57
 
@@ -118282,7 +118246,7 @@ _ViridianForestEndBattleText2: ; 803f2 (20:43f2)
 	db "I ran out of", $55
 	db "#MON!", $58
 
-_ViridianForestAfterBattleText2: ; 8040b (20:440b)
+_ViridianFrstAfterBattleText2: ; 8040b (20:440b)
 	db $0, "Darn! I'm going", $4f
 	db "to catch some", $55
 	db "stronger ones!", $57
@@ -118296,7 +118260,7 @@ _ViridianForestEndBattleText3: ; 80458 (20:4458)
 	db "give! You're good", $55
 	db "at this!", $58
 
-_ViridianForestAfterBattleText3: ; 80475 (20:4475)
+_ViridianFrstAfterBattleText3: ; 80475 (20:4475)
 	db $0, "Sometimes, you", $4f
 	db "can find stuff on", $55
 	db "the ground!", $51
@@ -119191,7 +119155,7 @@ _RocketHideout3EndBattleText3: ; 821e9 (20:61e9)
 	db $0, "What?", $4f
 	db "I lost? No!", $58
 
-_RocketHideout3AfterBattleText3: ; 821fc (20:61fc)
+_RocketHide3AfterBattleText3: ; 821fc (20:61fc)
 	db $0, "Go ahead and go!", $4f
 	db "But, you need the", $55
 	db "LIFT KEY to run", $55
@@ -119228,7 +119192,7 @@ _RocketHideout4EndBattleText2: ; 82354 (20:6354)
 	db $0, "Burned", $4f
 	db "again!", $58
 
-_RocketHideout4AfterBattleText2: ; 82363 (20:6363)
+_RocketHide4AfterBattleText2: ; 82363 (20:6363)
 	db $0, "Do you have", $4f
 	db "something against", $55
 	db "TEAM ROCKET?", $57
@@ -119241,7 +119205,7 @@ _RocketHideout4BattleText3: ; 8238f (20:638f)
 _RocketHideout4EndBattleText3: ; 823bc (20:63bc)
 	db $0, "Ayaya!", $58
 
-_RocketHideout4AfterBattleText3: ; 823c4 (20:63c4)
+_RocketHide4AfterBattleText3: ; 823c4 (20:63c4)
 	db $0, "BOSS! I'm sorry I", $4f
 	db "failed you!", $57
 
@@ -120716,13 +120680,13 @@ _SeafoamIslands5Text5: ; 880a8 (22:40a8)
 
 _AIBattleWithdrawText: ; 880be (22:40be)
 	db 1
-	dw $D04A
+	dw W_TRAINERNAME
 	db 0," with-",$4F,"drew @",1
 	dw W_ENEMYMONNAME
 	db 0,"!",$58
 _AIBattleUseItemText: ; 880d5 (22:40d5)
 	db 1
-	dw $D04A
+	dw W_TRAINERNAME
 	db 0,$4F,"used @",1
 	dw $CD6D
 	db 0,$55,"on @",1
@@ -121424,7 +121388,7 @@ _MoneyForWinningText: ; 896dd (22:56dd)
 _TrainerDefeatedText: ; 896f9 (22:56f9)
 	db $0, $52, " defeated", $4f
 	db "@"
-	TX_RAM $d04a ; 0x89706
+	TX_RAM W_TRAINERNAME ; 0x89706
 	db $0, "!", $58
 
 _PlayerMonFaintedText: ; 8970c (22:570c)
@@ -121448,12 +121412,12 @@ _PlayerBlackedOutText2: ; 89748 (22:5748)
 _LinkBattleLostText: ; 89772 (22:5772)
 	db $0, $52, " lost to", $4f
 	db "@"
-	TX_RAM $d04a ; 0x8977e
+	TX_RAM W_TRAINERNAME ; 0x8977e
 	db $0, "!", $58
 
 _TrainerAboutToUseText: ; 89784 (22:5784)
 	db 1
-	dw $D04A
+	dw W_TRAINERNAME
 	db 0," is",$4F
 	db "about to use",$55,"@",1
 	dw W_ENEMYMONNAME
@@ -121463,7 +121427,7 @@ _TrainerAboutToUseText: ; 89784 (22:5784)
 
 _TrainerSentOutText: ; 897b4 (22:57b4)
 	db 1
-	dw $D04A
+	dw W_TRAINERNAME
 	db 0," sent",$4F
 	db "out @",1
 	dw W_ENEMYMONNAME
@@ -121737,7 +121701,7 @@ _UnnamedText_58e45: ; 89c4f (22:5c4f)
 	db "appeared!", $58
 
 _UnnamedText_58e4a: ; 89c5e (22:5c5e)
-	TX_RAM $d04a
+	TX_RAM W_TRAINERNAME
 	db $0, " wants", $4f
 	db "to fight!", $58
 
@@ -122357,12 +122321,12 @@ _UnnamedText_56454: ; 8c0ad (23:40ad)
 	db $0, "Hey, you don't", $4f
 	db "have enough ¥!", $57
 
-_UndergroundTunnelEntranceRoute6Text1: ; 8c0cb (23:40cb)
+_UndergrdTunnelEntRoute6Text1: ; 8c0cb (23:40cb)
 	db $0, "People often lose", $4f
 	db "things in that", $55
 	db "UNDERGROUND PATH.", $57
 
-_UndergroundPathEntranceRoute7Text1: ; 8c0ff (23:40ff)
+_UndergroundPathEntRoute7Text1: ; 8c0ff (23:40ff)
 	db $0, "I heard a sleepy", $4f
 	db "#MON appeared", $55
 	db "near CELADON CITY.", $57
@@ -122396,7 +122360,7 @@ _UnnamedText_5d782: ; 8c209 (23:4209)
 	db "to the building", $55
 	db "across the road.", $57
 
-_UndergroundPathEntranceRoute8Text1: ; 8c28d (23:428d)
+_UndergroundPathEntRoute8Text1: ; 8c28d (23:428d)
 	db $0, "The dept. store", $4f
 	db "in CELADON has a", $55
 	db "great selection!", $57
@@ -122557,7 +122521,7 @@ _UnnamedText_494d5: ; 8c78b (23:478b)
 	db "is by way of the", $55
 	db "ROCK TUNNEL.", $57
 
-_DiglettsCaveEntranceRoute11Text1: ; 8c7f9 (23:47f9)
+_DiglettsCaveEntRoute11Text1: ; 8c7f9 (23:47f9)
 	db $0, "What a surprise!", $4f
 	db "DIGLETTs dug this", $55
 	db "long tunnel!", $51
