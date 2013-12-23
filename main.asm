@@ -38074,7 +38074,6 @@ VermilionHouse3_h: ; 0x19c06 to 0x19c12 (12 bytes) (bank=6) (id=196)
 	db VERMILION_HOUSE_3_HEIGHT, VERMILION_HOUSE_3_WIDTH ; dimensions (y, x)
 	dw VermilionHouse3Blocks, VermilionHouse3TextPointers, VermilionHouse3Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw VermilionHouse3Object ; objects
 
 VermilionHouse3Script: ; 19c12 (6:5c12)
@@ -38115,7 +38114,6 @@ IndigoPlateauLobby_h: ; 0x19c4f to 0x19c5b (12 bytes) (bank=6) (id=174)
 	db INDIGO_PLATEAU_LOBBY_HEIGHT, INDIGO_PLATEAU_LOBBY_WIDTH ; dimensions (y, x)
 	dw IndigoPlateauLobbyBlocks, IndigoPlateauLobbyTextPointers, IndigoPlateauLobbyScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw IndigoPlateauLobbyObject ; objects
 
 IndigoPlateauLobbyScript: ; 19c5b (6:5c5b)
@@ -38190,7 +38188,6 @@ SilphCo4_h: ; 0x19cff to 0x19d0b (12 bytes) (bank=6) (id=209)
 	db SILPH_CO_4F_HEIGHT, SILPH_CO_4F_WIDTH ; dimensions (y, x)
 	dw SilphCo4Blocks, SilphCo4TextPointers, SilphCo4Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw SilphCo4Object ; objects
 
 SilphCo4Script: ; 19d0b (6:5d0b)
@@ -38435,7 +38432,6 @@ SilphCo5_h: ; 0x19f2b to 0x19f37 (12 bytes) (bank=6) (id=210)
 	db SILPH_CO_5F_HEIGHT, SILPH_CO_5F_WIDTH ; dimensions (y, x)
 	dw SilphCo5Blocks, SilphCo5TextPointers, SilphCo5Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw SilphCo5Object ; objects
 
 SilphCo5Script: ; 19f37 (6:5f37)
@@ -38706,7 +38702,6 @@ SilphCo6_h: ; 0x1a19d to 0x1a1a9 (12 bytes) (bank=6) (id=211)
 	db SILPH_CO_6F_HEIGHT, SILPH_CO_6F_WIDTH ; dimensions (y, x)
 	dw SilphCo6Blocks, SilphCo6TextPointers, SilphCo6Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw SilphCo6Object ; objects
 
 SilphCo6Script: ; 1a1a9 (6:61a9)
@@ -39486,9 +39481,6 @@ Route1_h: ; 0x1c0c3 to 0x1c0e5 (34 bytes) (bank=7) (id=12)
 	db NORTH | SOUTH ; connections
 	NORTH_MAP_CONNECTION VIRIDIAN_CITY, VIRIDIAN_CITY_WIDTH, VIRIDIAN_CITY_HEIGHT, -3, 2, VIRIDIAN_CITY_WIDTH - 4, ViridianCityBlocks
 	SOUTH_MAP_CONNECTION PALLET_TOWN, PALLET_TOWN_WIDTH, 0, 0, PALLET_TOWN_WIDTH, PalletTownBlocks, ROUTE_1_WIDTH, ROUTE_1_HEIGHT
-
-	; end connections data
-
 	dw Route1Object ; objects
 
 Route1Object: ; 0x1c0e5 (size=19)
@@ -39956,7 +39948,6 @@ OaksLab_h: ; 0x1cb02 to 0x1cb0e (12 bytes) (bank=7) (id=40)
 	db OAKS_LAB_HEIGHT, OAKS_LAB_WIDTH ; dimensions (y, x)
 	dw OaksLabBlocks, OaksLabTextPointers, OaksLabScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw OaksLabObject ; objects
 
 OaksLabScript: ; 1cb0e (7:4b0e)
@@ -41235,7 +41226,6 @@ ViridianMart_h: ; 0x1d462 to 0x1d46e (12 bytes) (bank=7) (id=42)
 	db VIRIDIAN_MART_HEIGHT, VIRIDIAN_MART_WIDTH ; dimensions (y, x)
 	dw ViridianMartBlocks, ViridianMartTextPointers, ViridianMartScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw ViridianMartObject ; objects
 
 ViridianMartScript: ; 1d46e (7:546e)
@@ -41360,7 +41350,6 @@ School_h: ; 0x1d540 to 0x1d54c (12 bytes) (bank=7) (id=43)
 	db VIRIDIAN_SCHOOL_HEIGHT, VIRIDIAN_SCHOOL_WIDTH ; dimensions (y, x)
 	dw SchoolBlocks, SchoolTextPointers, SchoolScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw SchoolObject ; objects
 
 SchoolScript: ; 1d54c (7:554c)
@@ -41400,7 +41389,6 @@ ViridianHouse_h: ; 0x1d57d to 0x1d589 (12 bytes) (bank=7) (id=44)
 	db VIRIDIAN_HOUSE_HEIGHT, VIRIDIAN_HOUSE_WIDTH ; dimensions (y, x)
 	dw ViridianHouseBlocks, ViridianHouseTextPointers, ViridianHouseScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw ViridianHouseObject ; objects
 
 	db $0
@@ -41463,7 +41451,6 @@ PewterHouse1_h: ; 0x1d5e7 to 0x1d5f3 (12 bytes) (bank=7) (id=55)
 	db PEWTER_HOUSE_1_HEIGHT, PEWTER_HOUSE_1_WIDTH ; dimensions (y, x)
 	dw PewterHouse1Blocks, PewterHouse1TextPointers, PewterHouse1Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw PewterHouse1Object ; objects
 
 PewterHouse1Script: ; 1d5f3 (7:55f3)
@@ -41513,7 +41500,6 @@ PewterHouse2_h: ; 0x1d63c to 0x1d648 (12 bytes) (bank=7) (id=57)
 	db PEWTER_HOUSE_2_HEIGHT, PEWTER_HOUSE_2_WIDTH ; dimensions (y, x)
 	dw PewterHouse2Blocks, PewterHouse2TextPointers, PewterHouse2Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw PewterHouse2Object ; objects
 
 PewterHouse2Script: ; 1d648 (7:5648)
@@ -41553,7 +41539,6 @@ CeruleanHouseTrashed_h: ; 0x1d679 to 0x1d685 (12 bytes) (bank=7) (id=62)
 	db TRASHED_HOUSE_HEIGHT, TRASHED_HOUSE_WIDTH ; dimensions (y, x)
 	dw CeruleanHouseTrashedBlocks, CeruleanHouseTrashedTextPointers, CeruleanHouseTrashedScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw CeruleanHouseTrashedObject ; objects
 
 CeruleanHouseTrashedScript: ; 1d685 (7:5685)
@@ -41622,7 +41607,6 @@ CeruleanHouse_h: ; 0x1d6ea to 0x1d6f6 (12 bytes) (bank=7) (id=63)
 	db CERULEAN_HOUSE_HEIGHT, CERULEAN_HOUSE_WIDTH ; dimensions (y, x)
 	dw CeruleanHouseBlocks, CeruleanHouseTextPointers, CeruleanHouseScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw CeruleanHouseObject ; objects
 
 CeruleanHouseScript: ; 1d6f6 (7:56f6)
@@ -41666,7 +41650,6 @@ BikeShop_h: ; 0x1d730 to 0x1d73c (12 bytes) (bank=7) (id=66)
 	db BIKE_SHOP_HEIGHT, BIKE_SHOP_WIDTH ; dimensions (y, x)
 	dw BikeShopBlocks, BikeShopTextPointers, BikeShopScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw BikeShopObject ; objects
 
 BikeShopScript: ; 1d73c (7:573c)
@@ -41849,7 +41832,6 @@ LavenderHouse1_h: ; 0x1d89c to 0x1d8a8 (12 bytes) (bank=7) (id=149)
 	db LAVENDER_HOUSE_1_HEIGHT, LAVENDER_HOUSE_1_WIDTH ; dimensions (y, x)
 	dw LavenderHouse1Blocks, LavenderHouse1TextPointers, LavenderHouse1Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw LavenderHouse1Object ; objects
 
 LavenderHouse1Script: ; 1d8a8 (7:58a8)
@@ -41995,7 +41977,6 @@ LavenderHouse2_h: ; 0x1d9a2 to 0x1d9ae (12 bytes) (bank=7) (id=151)
 	db LAVENDER_HOUSE_2_HEIGHT, LAVENDER_HOUSE_2_WIDTH ; dimensions (y, x)
 	dw LavenderHouse2Blocks, LavenderHouse2TextPointers, LavenderHouse2Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw LavenderHouse2Object ; objects
 
 LavenderHouse2Script: ; 1d9ae (7:59ae)
@@ -42057,7 +42038,6 @@ NameRater_h: ; 0x1da06 to 0x1da12 (12 bytes) (bank=7) (id=229)
 	db NAME_RATERS_HOUSE_HEIGHT, NAME_RATERS_HOUSE_WIDTH ; dimensions (y, x)
 	dw NameRaterBlocks, NameRaterTextPointers, NameRaterScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw NameRaterObject ; objects
 
 NameRaterScript: ; 1da12 (7:5a12)
@@ -42191,7 +42171,6 @@ VermilionHouse1_h: ; 0x1daf0 to 0x1dafc (12 bytes) (bank=7) (id=93)
 	db VERMILION_HOUSE_1_HEIGHT, VERMILION_HOUSE_1_WIDTH ; dimensions (y, x)
 	dw VermilionHouse1Blocks, VermilionHouse1TextPointers, VermilionHouse1Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw VermilionHouse1Object ; objects
 
 VermilionHouse1Script: ; 1dafc (7:5afc)
@@ -42242,7 +42221,6 @@ VermilionDock_h: ; 0x1db46 to 0x1db52 (12 bytes) (bank=7) (id=94)
 	db VERMILION_DOCK_HEIGHT, VERMILION_DOCK_WIDTH ; dimensions (y, x)
 	dw VermilionDockBlocks, VermilionDockTextPointers, VermilionDockScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw VermilionDockObject ; objects
 
 VermilionDockScript: ; 1db52 (7:5b52)
@@ -42479,7 +42457,6 @@ CeladonMansion5_h: ; 0x1dd2e to 0x1dd3a (12 bytes) (bank=7) (id=132)
 	db CELADON_MANSION_5_HEIGHT, CELADON_MANSION_5_WIDTH ; dimensions (y, x)
 	dw CeladonMansion5Blocks, CeladonMansion5TextPointers, CeladonMansion5Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw CeladonMansion5Object ; objects
 
 CeladonMansion5Script: ; 1dd3a (7:5d3a)
@@ -42527,7 +42504,6 @@ FuchsiaMart_h: ; 0x1dd7c to 0x1dd88 (12 bytes) (bank=7) (id=152)
 	db FUCHSIA_MART_HEIGHT, FUCHSIA_MART_WIDTH ; dimensions (y, x)
 	dw FuchsiaMartBlocks, FuchsiaMartTextPointers, FuchsiaMartScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw FuchsiaMartObject ; objects
 
 FuchsiaMartScript: ; 1dd88 (7:5d88)
@@ -42572,7 +42548,6 @@ SaffronHouse1_h: ; 0x1ddd1 to 0x1dddd (12 bytes) (bank=7) (id=179)
 	db SAFFRON_HOUSE_1_HEIGHT, SAFFRON_HOUSE_1_WIDTH ; dimensions (y, x)
 	dw SaffronHouse1Blocks, SaffronHouse1TextPointers, SaffronHouse1Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw SaffronHouse1Object ; objects
 
 SaffronHouse1Script: ; 1dddd (7:5ddd)
@@ -42627,7 +42602,6 @@ SaffronHouse2_h: ; 0x1de30 to 0x1de3c (12 bytes) (bank=7) (id=183)
 	db SAFFRON_HOUSE_2_HEIGHT, SAFFRON_HOUSE_2_WIDTH ; dimensions (y, x)
 	dw SaffronHouse2Blocks, SaffronHouse2TextPointers, SaffronHouse2Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw SaffronHouse2Object ; objects
 
 SaffronHouse2Script: ; 1de3c (7:5e3c)
@@ -42698,7 +42672,6 @@ DiglettsCaveRoute2_h: ; 0x1dea4 to 0x1deb0 (12 bytes) (bank=7) (id=46)
 	db DIGLETTS_CAVE_EXIT_HEIGHT, DIGLETTS_CAVE_EXIT_WIDTH ; dimensions (y, x)
 	dw DiglettsCaveRoute2Blocks, DiglettsCaveRoute2TextPointers, DiglettsCaveRoute2Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw DiglettsCaveRoute2Object ; objects
 
 DiglettsCaveRoute2Script: ; 1deb0 (7:5eb0)
@@ -42736,7 +42709,6 @@ Route2House_h: ; 0x1dee1 to 0x1deed (12 bytes) (bank=7) (id=48)
 	db ROUTE_2_HOUSE_HEIGHT, ROUTE_2_HOUSE_WIDTH ; dimensions (y, x)
 	dw Route2HouseBlocks, Route2HouseTextPointers, Route2HouseScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw Route2HouseObject ; objects
 
 Route2HouseScript: ; 1deed (7:5eed)
@@ -42780,7 +42752,6 @@ Route5Gate_h: ; 0x1df27 to 0x1df33 (12 bytes) (bank=7) (id=70)
 	db ROUTE_5_GATE_HEIGHT, ROUTE_5_GATE_WIDTH ; dimensions (y, x)
 	dw Route5GateBlocks, Route5GateTextPointers, Route5GateScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw Route5GateObject ; objects
 
 Route5GateScript: ; 1df33 (7:5f33)
@@ -42933,7 +42904,6 @@ Route6Gate_h: ; 0x1e031 to 0x1e03d (12 bytes) (bank=7) (id=73)
 	db ROUTE_6_GATE_HEIGHT, ROUTE_6_GATE_WIDTH ; dimensions (y, x)
 	dw Route6GateBlocks, Route6GateTextPointers, Route6GateScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw Route6GateObject ; objects
 
 Route6GateScript: ; 1e03d (7:603d)
@@ -43037,7 +43007,6 @@ Route7Gate_h: ; 0x1e0f4 to 0x1e100 (12 bytes) (bank=7) (id=76)
 	db ROUTE_7_GATE_HEIGHT, ROUTE_7_GATE_WIDTH ; dimensions (y, x)
 	dw Route7GateBlocks, Route7GateTextPointers, Route7GateScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw Route7GateObject ; objects
 
 Route7GateScript: ; 1e100 (7:6100)
@@ -43144,7 +43113,6 @@ Route8Gate_h: ; 0x1e1bb to 0x1e1c7 (12 bytes) (bank=7) (id=79)
 	db ROUTE_8_GATE_HEIGHT, ROUTE_8_GATE_WIDTH ; dimensions (y, x)
 	dw Route8GateBlocks, Route8GateTextPointers, Route8GateScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw Route8GateObject ; objects
 
 Route8GateScript: ; 1e1c7 (7:61c7)
@@ -43248,7 +43216,6 @@ UndergroundPathEntranceRoute8_h: ; 0x1e27d to 0x1e289 (12 bytes) (bank=7) (id=80
 	db PATH_ENTRANCE_ROUTE_8_HEIGHT, PATH_ENTRANCE_ROUTE_8_WIDTH ; dimensions (y, x)
 	dw UndergroundPathEntranceRoute8Blocks, UndergroundPathEntranceRoute8TextPointers, UndergroundPathEntranceRoute8Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw UndergroundPathEntranceRoute8Object ; objects
 
 UndergroundPathEntranceRoute8Script: ; 1e289 (7:6289)
@@ -43286,7 +43253,6 @@ PowerPlant_h: ; 0x1e2ba to 0x1e2c6 (12 bytes) (bank=7) (id=83)
 	db POWER_PLANT_HEIGHT, POWER_PLANT_WIDTH ; dimensions (y, x)
 	dw PowerPlantBlocks, PowerPlantTextPointers, PowerPlantScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw PowerPlantObject ; objects
 
 PowerPlantScript: ; 1e2c6 (7:62c6)
@@ -43505,7 +43471,6 @@ DiglettsCaveEntranceRoute11_h: ; 0x1e5ae to 0x1e5ba (12 bytes) (bank=7) (id=85)
 	db DIGLETTS_CAVE_ENTRANCE_HEIGHT, DIGLETTS_CAVE_ENTRANCE_WIDTH ; dimensions (y, x)
 	dw DiglettsCaveEntranceRoute11Blocks, DiglettsCaveEntranceRoute11TextPointers, DiglettsCaveEntranceRoute11Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw DiglettsCaveEntranceRoute11Object ; objects
 
 DiglettsCaveEntranceRoute11Script: ; 1e5ba (7:65ba)
@@ -43544,7 +43509,6 @@ Route16House_h: ; 0x1e5ec to 0x1e5f8 (12 bytes) (bank=7) (id=188)
 	db ROUTE_16_HOUSE_HEIGHT, ROUTE_16_HOUSE_WIDTH ; dimensions (y, x)
 	dw Route16HouseBlocks, Route16HouseTextPointers, Route16HouseScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw Route16HouseObject ; objects
 
 Route16HouseScript: ; 1e5f8 (7:65f8)
@@ -43626,7 +43590,6 @@ Route22Gate_h: ; 0x1e677 to 0x1e683 (12 bytes) (bank=7) (id=193)
 	db ROUTE_22_GATE_HEIGHT, ROUTE_22_GATE_WIDTH ; dimensions (y, x)
 	dw Route22GateBlocks, Route22GateTextPointers, Route22GateScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw Route22GateObject ; objects
 
 Route22GateScript: ; 1e683 (7:6683)
@@ -43750,7 +43713,6 @@ BillsHouse_h: ; 0x1e75e to 0x1e76a (12 bytes) (bank=7) (id=88)
 	db BILLS_HOUSE_HEIGHT, BILLS_HOUSE_WIDTH ; dimensions (y, x)
 	dw BillsHouseBlocks, BillsHouseTextPointers, BillsHouseScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw BillsHouseObject ; objects
 
 BillsHouseScript: ; 1e76a (7:676a)
@@ -73070,10 +73032,9 @@ UnnamedText_4424c: ; 4424c (11:424c)
 
 ViridianPokecenter_h: ; 0x44251 to 0x4425d (12 bytes) (bank=11) (id=41)
 	db $06 ; tileset
-	db $04, $07 ; dimensions (y, x)
+	db VIRIDIAN_POKECENTER_HEIGHT, VIRIDIAN_POKECENTER_WIDTH ; dimensions (y, x)
 	dw ViridianPokecenterBlocks, ViridianPokecenterTextPointers, ViridianPokeCenterScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw ViridianPokecenterObject ; objects
 
 ViridianPokeCenterScript: ; 4425d (11:425d)
@@ -73124,7 +73085,6 @@ Mansion1_h: ; 0x442a3 to 0x442af (12 bytes) (bank=11) (id=165)
 	db MANSION_1_HEIGHT, MANSION_1_WIDTH ; dimensions (y, x)
 	dw Mansion1Blocks, Mansion1TextPointers, Mansion1Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw Mansion1Object ; objects
 
 Mansion1Script: ; 442af (11:42af)
@@ -73305,7 +73265,6 @@ RockTunnel1_h: ; 0x444d0 to 0x444dc (12 bytes) (bank=11) (id=82)
 	db ROCK_TUNNEL_1_HEIGHT, ROCK_TUNNEL_1_WIDTH ; dimensions (y, x)
 	dw RockTunnel1Blocks, RockTunnel1TextPointers, RockTunnel1Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw RockTunnel1Object ; objects
 
 RockTunnel1Script: ; 444dc (11:44dc)
@@ -73566,7 +73525,6 @@ SeafoamIslands1_h: ; 0x447dd to 0x447e9 (12 bytes) (bank=11) (id=192)
 	db SEAFOAM_ISLANDS_1_HEIGHT, SEAFOAM_ISLANDS_1_WIDTH ; dimensions (y, x)
 	dw SeafoamIslands1Blocks, SeafoamIslands1TextPointers, SeafoamIslands1Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw SeafoamIslands1Object ; objects
 
 SeafoamIslands1Script: ; 447e9 (11:47e9)
@@ -73659,7 +73617,6 @@ SSAnne3_h: ; 0x44926 to 0x44932 (12 bytes) (bank=11) (id=97)
 	db SS_ANNE_3_HEIGHT, SS_ANNE_3_WIDTH ; dimensions (y, x)
 	dw SSAnne3Blocks, SSAnne3TextPointers, SSAnne3Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw SSAnne3Object ; objects
 
 SSAnne3Script: ; 44932 (11:4932)
@@ -73696,7 +73653,6 @@ VictoryRoad3_h: ; 0x44974 to 0x44980 (12 bytes) (bank=11) (id=198)
 	db VICTORY_ROAD_3_HEIGHT, VICTORY_ROAD_3_WIDTH ; dimensions (y, x)
 	dw VictoryRoad3Blocks, VictoryRoad3TextPointers, VictoryRoad3Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw VictoryRoad3Object ; objects
 
 VictoryRoad3Script: ; 44980 (11:4980)
@@ -73942,7 +73898,6 @@ RocketHideout1_h: ; 0x44bbe to 0x44bca (12 bytes) (bank=11) (id=199)
 	db ROCKET_HIDEOUT_1_HEIGHT, ROCKET_HIDEOUT_1_WIDTH ; dimensions (y, x)
 	dw RocketHideout1Blocks, RocketHideout1TextPointers, RocketHideout1Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw RocketHideout1Object ; objects
 
 RocketHideout1Script: ; 44bca (11:4bca)
@@ -74175,7 +74130,6 @@ RocketHideout2_h: ; 0x44e1b to 0x44e27 (12 bytes) (bank=11) (id=200)
 	db ROCKET_HIDEOUT_2_HEIGHT, ROCKET_HIDEOUT_2_WIDTH ; dimensions (y, x)
 	dw RocketHideout2Blocks, RocketHideout2TextPointers, RocketHideout2Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw RocketHideout2Object ; objects
 
 RocketHideout2Script: ; 44e27 (11:4e27)
@@ -74708,7 +74662,6 @@ RocketHideout3_h: ; 0x45219 to 0x45225 (12 bytes) (bank=11) (id=201)
 	db ROCKET_HIDEOUT_3_HEIGHT, ROCKET_HIDEOUT_3_WIDTH ; dimensions (y, x)
 	dw RocketHideout3Blocks, RocketHideout3TextPointers, RocketHideout3Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw RocketHideout3Object ; objects
 
 RocketHideout3Script: ; 45225 (11:5225)
@@ -74950,7 +74903,6 @@ RocketHideout4_h: ; 0x45451 to 0x4545d (12 bytes) (bank=11) (id=202)
 	db ROCKET_HIDEOUT_4_HEIGHT, ROCKET_HIDEOUT_4_WIDTH ; dimensions (y, x)
 	dw RocketHideout4Blocks, RocketHideout4TextPointers, RocketHideout4Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw RocketHideout4Object ; objects
 
 RocketHideout4Script: ; 4545d (11:545d)
@@ -75220,7 +75172,6 @@ RocketHideoutElevator_h: ; 0x45704 to 0x45710 (12 bytes) (bank=11) (id=203)
 	db ROCKET_HIDEOUT_ELEVATOR_HEIGHT, ROCKET_HIDEOUT_ELEVATOR_WIDTH ; dimensions (y, x)
 	dw RocketHideoutElevatorBlocks, RocketHideoutElevatorTextPointers, RocketHideoutElevatorScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw RocketHideoutElevatorObject ; objects
 
 RocketHideoutElevatorScript: ; 45710 (11:5710)
@@ -75325,7 +75276,6 @@ SilphCoElevator_h: ; 0x457b4 to 0x457c0 (12 bytes) (bank=11) (id=236)
 	db SILPH_CO_ELEVATOR_HEIGHT, SILPH_CO_ELEVATOR_WIDTH ; dimensions (y, x)
 	dw SilphCoElevatorBlocks, SilphCoElevatorTextPointers, SilphCoElevatorScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw SilphCoElevatorObject ; objects
 
 SilphCoElevatorScript: ; 457c0 (11:57c0)
@@ -75418,7 +75368,6 @@ SafariZoneEast_h: ; 0x4585f to 0x4586b (12 bytes) (bank=11) (id=217)
 	db SAFARI_ZONE_EAST_HEIGHT, SAFARI_ZONE_EAST_WIDTH ; dimensions (y, x)
 	dw SafariZoneEastBlocks, SafariZoneEastTextPointers, SafariZoneEastScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw SafariZoneEastObject ; objects
 
 SafariZoneEastScript: ; 4586b (11:586b)
@@ -75481,7 +75430,6 @@ SafariZoneNorth_h: ; 0x4599f to 0x459ab (12 bytes) (bank=11) (id=218)
 	db SAFARI_ZONE_NORTH_HEIGHT, SAFARI_ZONE_NORTH_WIDTH ; dimensions (y, x)
 	dw SafariZoneNorthBlocks, SafariZoneNorthTextPointers, SafariZoneNorthScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw SafariZoneNorthObject ; objects
 
 SafariZoneNorthScript: ; 459ab (11:59ab)
@@ -75560,7 +75508,6 @@ SafariZoneCenter_h: ; 0x45ba6 to 0x45bb2 (12 bytes) (bank=11) (id=220)
 	db SAFARI_ZONE_CENTER_HEIGHT, SAFARI_ZONE_CENTER_WIDTH ; dimensions (y, x)
 	dw SafariZoneCenterBlocks, SafariZoneCenterTextPointers, SafariZoneCenterScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw SafariZoneCenterObject ; objects
 
 SafariZoneCenterScript: ; 45bb2 (11:5bb2)
@@ -75619,7 +75566,6 @@ SafariZoneRestHouse1_h: ; 0x45ce1 to 0x45ced (12 bytes) (bank=11) (id=221)
 	db SAFARI_ZONE_REST_HOUSE_1_HEIGHT, SAFARI_ZONE_REST_HOUSE_1_WIDTH ; dimensions (y, x)
 	dw SafariZoneRestHouse1Blocks, SafariZoneRestHouse1TextPointers, SafariZoneRestHouse1Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw SafariZoneRestHouse1Object ; objects
 
 SafariZoneRestHouse1Script: ; 45ced (11:5ced)
@@ -75659,7 +75605,6 @@ SafariZoneRestHouse2_h: ; 0x45d1e to 0x45d2a (12 bytes) (bank=11) (id=223)
 	db SAFARI_ZONE_REST_HOUSE_2_HEIGHT, SAFARI_ZONE_REST_HOUSE_2_WIDTH ; dimensions (y, x)
 	dw SafariZoneRestHouse1Blocks, SafariZoneRestHouse2TextPointers, SafariZoneRestHouse2Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw SafariZoneRestHouse2Object ; objects
 
 SafariZoneRestHouse2Script: ; 45d2a (11:5d2a)
@@ -75706,7 +75651,6 @@ SafariZoneRestHouse3_h: ; 0x45d69 to 0x45d75 (12 bytes) (bank=11) (id=224)
 	db SAFARI_ZONE_REST_HOUSE_3_HEIGHT, SAFARI_ZONE_REST_HOUSE_3_WIDTH ; dimensions (y, x)
 	dw SafariZoneRestHouse1Blocks, SafariZoneRestHouse3TextPointers, SafariZoneRestHouse3Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw SafariZoneRestHouse3Object ; objects
 
 SafariZoneRestHouse3Script: ; 45d75 (11:5d75)
@@ -75753,7 +75697,6 @@ SafariZoneRestHouse4_h: ; 0x45db4 to 0x45dc0 (12 bytes) (bank=11) (id=225)
 	db SAFARI_ZONE_REST_HOUSE_4_HEIGHT, SAFARI_ZONE_REST_HOUSE_4_WIDTH ; dimensions (y, x)
 	dw SafariZoneRestHouse1Blocks, SafariZoneRestHouse4TextPointers, SafariZoneRestHouse4Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw SafariZoneRestHouse4Object ; objects
 
 SafariZoneRestHouse4Script: ; 45dc0 (11:5dc0)
@@ -75800,7 +75743,6 @@ UnknownDungeon2_h: ; 0x45dff to 0x45e0b (12 bytes) (bank=11) (id=226)
 	db UNKNOWN_DUNGEON_2_HEIGHT, UNKNOWN_DUNGEON_2_WIDTH ; dimensions (y, x)
 	dw UnknownDungeon2Blocks, UnknownDungeon2TextPointers, UnknownDungeon2Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw UnknownDungeon2Object ; objects
 
 UnknownDungeon2Script: ; 45e0b (11:5e0b)
@@ -75845,7 +75787,6 @@ UnknownDungeon3_h: ; 0x45ee4 to 0x45ef0 (12 bytes) (bank=11) (id=227)
 	db UNKNOWN_DUNGEON_3_HEIGHT, UNKNOWN_DUNGEON_3_WIDTH ; dimensions (y, x)
 	dw UnknownDungeon3Blocks, UnknownDungeon3TextPointers, UnknownDungeon3Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw UnknownDungeon3Object ; objects
 
 UnknownDungeon3Script: ; 45ef0 (11:5ef0)
@@ -75917,7 +75858,6 @@ RockTunnel2_h: ; 0x45fdf to 0x45feb (12 bytes) (bank=11) (id=232)
 	db ROCK_TUNNEL_2_HEIGHT, ROCK_TUNNEL_2_WIDTH ; dimensions (y, x)
 	dw RockTunnel2Blocks, RockTunnel2TextPointers, RockTunnel2Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw RockTunnel2Object ; objects
 
 RockTunnel2Script: ; 45feb (11:5feb)
@@ -76198,7 +76138,6 @@ SeafoamIslands2_h: ; 0x46309 to 0x46315 (12 bytes) (bank=11) (id=159)
 	db SEAFOAM_ISLANDS_2_HEIGHT, SEAFOAM_ISLANDS_2_WIDTH ; dimensions (y, x)
 	dw SeafoamIslands2Blocks, SeafoamIslands2TextPointers, SeafoamIslands2Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw SeafoamIslands2Object ; objects
 
 SeafoamIslands2Script: ; 46315 (11:6315)
@@ -76285,7 +76224,6 @@ SeafoamIslands3_h: ; 0x46445 to 0x46451 (12 bytes) (bank=11) (id=160)
 	db SEAFOAM_ISLANDS_3_HEIGHT, SEAFOAM_ISLANDS_3_WIDTH ; dimensions (y, x)
 	dw SeafoamIslands3Blocks, SeafoamIslands3TextPointers, SeafoamIslands3Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw SeafoamIslands3Object ; objects
 
 SeafoamIslands3Script: ; 46451 (11:6451)
@@ -76372,7 +76310,6 @@ SeafoamIslands4_h: ; 0x46581 to 0x4658d (12 bytes) (bank=11) (id=161)
 	db SEAFOAM_ISLANDS_4_HEIGHT, SEAFOAM_ISLANDS_4_WIDTH ; dimensions (y, x)
 	dw SeafoamIslands4Blocks, SeafoamIslands4TextPointers, SeafoamIslands4Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw SeafoamIslands4Object ; objects
 
 SeafoamIslands4Script: ; 4658d (11:658d)
@@ -76563,7 +76500,6 @@ SeafoamIslands5_h: ; 0x4678d to 0x46799 (12 bytes) (bank=11) (id=162)
 	db SEAFOAM_ISLANDS_5_HEIGHT, SEAFOAM_ISLANDS_5_WIDTH ; dimensions (y, x)
 	dw SeafoamIslands5Blocks, SeafoamIslands5TextPointers, SeafoamIslands5Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw SeafoamIslands5Object ; objects
 
 SeafoamIslands5Script: ; 46799 (11:6799)
@@ -77686,7 +77622,7 @@ SECTION "bank12",ROMX,BANK[$12]
 Route7_h: ; 0x48000 to 0x48022 (34 bytes) (bank=12) (id=18)
 	db $00 ; tileset
 	db ROUTE_7_HEIGHT, ROUTE_7_WIDTH ; dimensions (y, x)
-	dw Route7Blocks, $4155, Route7Script ; blocks, texts, scripts
+	dw Route7Blocks, Route7TextPointers, Route7Script ; blocks, texts, scripts
 	db WEST | EAST ; connections
 	WEST_MAP_CONNECTION CELADON_CITY, CELADON_CITY_WIDTH, -3, 1, CELADON_CITY_HEIGHT - 3, CeladonCityBlocks, ROUTE_7_WIDTH
 	EAST_MAP_CONNECTION SAFFRON_CITY, SAFFRON_CITY_WIDTH, -3, 1, SAFFRON_CITY_HEIGHT - 3, SaffronCityBlocks, ROUTE_7_WIDTH
@@ -77802,8 +77738,8 @@ Func_4813f: ; 4813f (12:413f)
 Route7Script: ; 48152 (12:4152)
 	jp EnableAutoTextBoxDrawing
 
-; XXX
-	db $57, $41
+Route7TextPointers: ; 48155 (12:4155)
+	dw Route7Text1
 
 Route7Text1: ; 48157 (12:4157)
 	TX_FAR _Route7Text1
@@ -77913,7 +77849,6 @@ CeladonMart3_h: ; 0x48219 to 0x48225 (12 bytes) (bank=12) (id=124)
 	db CELADON_MART_3_HEIGHT, CELADON_MART_3_WIDTH ; dimensions (y, x)
 	dw CeladonMart3Blocks, CeladonMart3TextPointers, CeladonMart3Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw CeladonMart3Object ; objects
 
 CeladonMart3Script: ; 48225 (12:4225)
@@ -78068,7 +78003,6 @@ CeladonMart4_h: ; 0x4834a to 0x48356 (12 bytes) (bank=12) (id=125)
 	db CELADON_MART_4_HEIGHT, CELADON_MART_4_WIDTH ; dimensions (y, x)
 	dw CeladonMart4Blocks, CeladonMart4TextPointers, CeladonMart4Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw CeladonMart4Object ; objects
 
 CeladonMart4Script: ; 48356 (12:4356)
@@ -78121,7 +78055,6 @@ CeladonMartRoof_h: ; 0x483c9 to 0x483d5 (12 bytes) (bank=12) (id=126)
 	db CELADON_MART_ROOF_HEIGHT, CELADON_MART_ROOF_WIDTH ; dimensions (y, x)
 	dw CeladonMartRoofBlocks, CeladonMartRoofTextPointers, CeladonMartRoofScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw CeladonMartRoofObject ; objects
 
 CeladonMartRoofScript: ; 483d5 (12:43d5)
@@ -78415,7 +78348,6 @@ CeladonMartElevator_h: ; 0x485f4 to 0x48600 (12 bytes) (bank=12) (id=127)
 	db CELADON_MART_ELEVATOR_HEIGHT, CELADON_MART_ELEVATOR_WIDTH ; dimensions (y, x)
 	dw CeladonMartElevatorBlocks, CeladonMartElevatorTextPointers, CeladonMartElevatorScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw CeladonMartElevatorObject ; objects
 
 CeladonMartElevatorScript: ; 48600 (12:4600)
@@ -78505,7 +78437,6 @@ CeladonMansion1_h: ; 0x48688 to 0x48694 (12 bytes) (bank=12) (id=128)
 	db CELADON_MANSION_1_HEIGHT, CELADON_MANSION_1_WIDTH ; dimensions (y, x)
 	dw CeladonMansion1Blocks, CeladonMansion1TextPointers, CeladonMansion1Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw CeladonMansion1Object ; objects
 
 CeladonMansion1Script: ; 48694 (12:4694)
@@ -78582,7 +78513,6 @@ CeladonMansion2_h: ; 0x4872e to 0x4873a (12 bytes) (bank=12) (id=129)
 	db CELADON_MANSION_2_HEIGHT, CELADON_MANSION_2_WIDTH ; dimensions (y, x)
 	dw CeladonMansion2Blocks, CeladonMansion2TextPointers, CeladonMansion2Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw CeladonMansion2Object ; objects
 
 CeladonMansion2Script: ; 4873a (12:473a)
@@ -78624,7 +78554,6 @@ CeladonMansion3_h: ; 0x48784 to 0x48790 (12 bytes) (bank=12) (id=130)
 	db CELADON_MANSION_3_HEIGHT, CELADON_MANSION_3_WIDTH ; dimensions (y, x)
 	dw CeladonMansion3Blocks, CeladonMansion3TextPointers, CeladonMansion3Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw CeladonMansion3Object ; objects
 
 CeladonMansion3Script: ; 48790 (12:4790)
@@ -78736,7 +78665,6 @@ CeladonMansion4_h: ; 0x4885f to 0x4886b (12 bytes) (bank=12) (id=131)
 	db CELADON_MANSION_4_HEIGHT, CELADON_MANSION_4_WIDTH ; dimensions (y, x)
 	dw CeladonMansion4Blocks, CeladonMansion4TextPointers, CeladonMansion4Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw CeladonMansion4Object ; objects
 
 CeladonMansion4Script: ; 4886b (12:486b)
@@ -78775,7 +78703,6 @@ CeladonPokecenter_h: ; 0x488ac to 0x488b8 (12 bytes) (bank=12) (id=133)
 	db CELADON_POKECENTER_HEIGHT, CELADON_POKECENTER_WIDTH ; dimensions (y, x)
 	dw CeladonPokecenterBlocks, CeladonPokecenterTextPointers, CeladonPokecenterScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw CeladonPokecenterObject ; objects
 
 CeladonPokecenterScript: ; 488b8 (12:48b8)
@@ -78826,7 +78753,6 @@ CeladonGym_h: ; 0x488fe to 0x4890a (12 bytes) (bank=12) (id=134)
 	db CELADON_GYM_HEIGHT, CELADON_GYM_WIDTH ; dimensions (y, x)
 	dw CeladonGymBlocks, CeladonGymTextPointers, CeladonGymScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw CeladonGymObject ; objects
 
 CeladonGymScript: ; 4890a (12:490a)
@@ -79202,7 +79128,6 @@ CeladonGameCorner_h: ; 0x48bb1 to 0x48bbd (12 bytes) (bank=12) (id=135)
 	db GAME_CORNER_HEIGHT, GAME_CORNER_WIDTH ; dimensions (y, x)
 	dw CeladonGameCornerBlocks, CeladonGameCornerTextPointers, CeladonGameCornerScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw CeladonGameCornerObject ; objects
 
 CeladonGameCornerScript: ; 48bbd (12:4bbd)
@@ -79779,7 +79704,6 @@ CeladonMart5_h: ; 0x4905d to 0x49069 (12 bytes) (bank=12) (id=136)
 	db CELADON_MART_5_HEIGHT, CELADON_MART_5_WIDTH ; dimensions (y, x)
 	dw CeladonMart5Blocks, CeladonMart5TextPointers, CeladonMart5Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw CeladonMart5Object ; objects
 
 CeladonMart5Script: ; 49069 (12:5069)
@@ -79834,7 +79758,6 @@ CeladonPrizeRoom_h: ; 0x490e4 to 0x490f0 (12 bytes) (bank=12) (id=137)
 	db CELADONPRIZE_ROOM_HEIGHT, CELADONPRIZE_ROOM_WIDTH ; dimensions (y, x)
 	dw CeladonPrizeRoomBlocks, CeladonPrizeRoomTextPointers, CeladonPrizeRoomScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw CeladonPrizeRoomObject ; objects
 
 CeladonPrizeRoomScript: ; 490f0 (12:50f0)
@@ -79886,7 +79809,6 @@ CeladonDiner_h: ; 0x49145 to 0x49151 (12 bytes) (bank=12) (id=138)
 	db CELADON_DINER_HEIGHT, CELADON_DINER_WIDTH ; dimensions (y, x)
 	dw CeladonDinerBlocks, CeladonDinerTextPointers, CeladonDinerScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw CeladonDinerObject ; objects
 
 CeladonDinerScript: ; 49151 (12:5151)
@@ -79985,7 +79907,6 @@ CeladonHouse_h: ; 0x49202 to 0x4920e (12 bytes) (bank=12) (id=139)
 	db CELADON_HOUSE_HEIGHT, CELADON_HOUSE_WIDTH ; dimensions (y, x)
 	dw CeladonHouseBlocks, CeladonHouseTextPointers, CeladonHouseScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw CeladonHouseObject ; objects
 
 CeladonHouseScript: ; 4920e (12:520e)
@@ -80035,7 +79956,6 @@ CeladonHotel_h: ; 0x4925d to 0x49269 (12 bytes) (bank=12) (id=140)
 	db CELADONHOTEL_HEIGHT, CELADONHOTEL_WIDTH ; dimensions (y, x)
 	dw CeladonHotelBlocks, CeladonHotelTextPointers, CeladonHotelScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw CeladonHotelObject ; objects
 
 CeladonHotelScript: ; 49269 (12:5269)
@@ -80084,7 +80004,6 @@ MtMoonPokecenter_h: ; 0x492c3 to 0x492cf (12 bytes) (bank=12) (id=68)
 	db MT_MOON_POKECENTER_HEIGHT, MT_MOON_POKECENTER_WIDTH ; dimensions (y, x)
 	dw MtMoonPokecenterBlocks, MtMoonPokecenterTextPointers, MtMoonPokecenterScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw MtMoonPokecenterObject ; objects
 
 MtMoonPokecenterScript: ; 492cf (12:52cf)
@@ -80211,7 +80130,6 @@ RockTunnelPokecenter_h: ; 0x493ae to 0x493ba (12 bytes) (id=81)
 	db ROCK_TUNNEL_POKECENTER_HEIGHT, ROCK_TUNNEL_POKECENTER_WIDTH ; dimensions (y, x)
 	dw RockTunnelPokecenterBlocks, RockTunnelPokecenterTextPointers, RockTunnelPokecenterScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw RockTunnelPokecenterObject ; objects
 
 RockTunnelPokecenterScript: ; 493ba (12:53ba)
@@ -80262,7 +80180,6 @@ Route11Gate_h: ; 0x49400 to 0x4940c (12 bytes) (id=84)
 	db ROUTE_11_GATE_1F_HEIGHT, ROUTE_11_GATE_1F_WIDTH ; dimensions (y, x)
 	dw Route11GateBlocks, Route11GateTextPointers, Route11GateScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw Route11GateObject ; objects
 
 Route11GateScript: ; 4940c (12:540c)
@@ -80302,7 +80219,6 @@ Route11GateUpstairs_h: ; 0x49448 to 0x49454 (12 bytes) (id=86)
 	db ROUTE_11_GATE_2F_HEIGHT, ROUTE_11_GATE_2F_WIDTH ; dimensions (y, x)
 	dw Route11GateUpstairsBlocks, Route11GateUpstairsTextPointers, Route11GateUpstairsScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw Route11GateUpstairsObject ; objects
 
 Route11GateUpstairsScript: ; 49454 (12:5454)
@@ -80409,7 +80325,6 @@ Route12Gate_h: ; 0x494f8 to 0x49504 (12 bytes) (id=87)
 	db ROUTE_12_GATE_HEIGHT, ROUTE_12_GATE_WIDTH ; dimensions (y, x)
 	dw Route12GateBlocks, Route12GateTextPointers, Route12GateScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw Route12GateObject ; objects
 
 Route12GateScript: ; 49504 (12:5504)
@@ -80452,7 +80367,6 @@ Route12GateUpstairs_h: ; 0x49554 to 0x49560 (12 bytes) (id=195)
 	db ROUTE_12_GATE_2F_HEIGHT, ROUTE_12_GATE_2F_WIDTH ; dimensions (y, x)
 	dw Route12GateUpstairsBlocks, Route12GateUpstairsTextPointers, Route12GateUpstairsScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw Route12GateUpstairsObject ; objects
 
 Route12GateUpstairsScript: ; 49560 (12:5560)
@@ -80556,7 +80470,6 @@ Route15Gate_h: ; 0x495f6 to 0x49602 (12 bytes) (id=184)
 	db ROUTE_15_GATE_1F_HEIGHT, ROUTE_15_GATE_1F_WIDTH ; dimensions (y, x)
 	dw Route15GateBlocks, Route15GateTextPointers, Route15GateScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw Route15GateObject ; objects
 
 Route15GateScript: ; 49602 (12:5602)
@@ -80595,7 +80508,6 @@ Route15GateUpstairs_h: ; 4963e (12:563e)
 	db $0c ; tileset
 	db ROUTE_15_GATE_2F_HEIGHT, ROUTE_15_GATE_2F_WIDTH ; dimensions (y, x)
 	dw Route15GateUpstairsBlocks, Route15GateUpstairsTextPointers, Route15GateUpstairsScript ; blocks, texts, scripts
-	;dw 40db, 564d, 564a ; blocks, texts, scripts
 	db $00 ; connections
 	dw Route15GateUpstairsObject ; objects
 
@@ -80667,7 +80579,6 @@ Route16GateMap_h: ; 0x496b2 to 0x496be (12 bytes) (id=186)
 	db ROUTE_16_GATE_1F_HEIGHT, ROUTE_16_GATE_1F_WIDTH ; dimensions (y, x)
 	dw Route16GateMapBlocks, Route16GateMapTextPointers, Route16GateMapScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw Route16GateMapObject ; objects
 
 Route16GateMapScript: ; 496be (12:56be)
@@ -80831,7 +80742,6 @@ Route16GateUpstairs_h: ; 0x497ff to 0x4980b (12 bytes) (id=187)
 	db ROUTE_16_GATE_2F_HEIGHT, ROUTE_16_GATE_2F_WIDTH ; dimensions (y, x)
 	dw Route16GateUpstairsBlocks, Route16GateUpstairsTextPointers, Route16GateUpstairsScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw Route16GateUpstairsObject ; objects
 
 Route16GateUpstairsScript: ; 4980b (12:580b)
@@ -80903,7 +80813,6 @@ Route18Gate_h: ; 0x4986a to 0x49876 (12 bytes) (id=190)
 	db ROUTE_18_GATE_1F_HEIGHT, ROUTE_18_GATE_1F_WIDTH ; dimensions (y, x)
 	dw Route18GateBlocks, Route18GateTextPointers, Route18GateScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw Route18GateObject ; objects
 
 Route18GateScript: ; 49876 (12:5876)
@@ -81046,7 +80955,6 @@ Route18GateUpstairs_h: ; 0x49969 to 0x49975 (12 bytes) (id=191)
 	db ROUTE_18_GATE_2F_HEIGHT, ROUTE_18_GATE_2F_WIDTH ; dimensions (y, x)
 	dw Route18GateUpstairsBlocks, Route18GateUpstairsTextPointers, Route18GateUpstairsScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw Route18GateUpstairsObject ; objects
 
 Route18GateUpstairsScript: ; 49975 (12:5975)
@@ -81104,7 +81012,6 @@ MtMoon1_h: ; 0x499bc to 0x499c8 (12 bytes) (id=59)
 	db MT_MOON_1_HEIGHT, MT_MOON_1_WIDTH ; dimensions (y, x)
 	dw MtMoon1Blocks, MtMoon1TextPointers, MtMoon1Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw MtMoon1Object ; objects
 
 MtMoon1Script: ; 499c8 (12:59c8)
@@ -81376,7 +81283,6 @@ MtMoon3_h: ; 0x49cff to 0x49d0b (12 bytes) (id=61)
 	db MT_MOON_3_HEIGHT, MT_MOON_3_WIDTH ; dimensions (y, x)
 	dw MtMoon3Blocks, MtMoon3TextPointers, MtMoon3Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw MtMoon3Object ; objects
 
 MtMoon3Script: ; 49d0b (12:5d0b)
@@ -81830,7 +81736,6 @@ SafariZoneWest_h: ; 0x4a1a9 to 0x4a1b5 (12 bytes) (id=219)
 	db SAFARI_ZONE_WEST_HEIGHT, SAFARI_ZONE_WEST_WIDTH ; dimensions (y, x)
 	dw SafariZoneWestBlocks, SafariZoneWestTextPointers, SafariZoneWestScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw SafariZoneWestObject ; objects
 
 SafariZoneWestScript: ; 4a1b5 (12:61b5)
@@ -81905,7 +81810,6 @@ SafariZoneSecretHouse_h: ; 0x4a30b to 0x4a317 (12 bytes) (id=222)
 	db SAFARI_ZONE_SECRET_HOUSE_HEIGHT, SAFARI_ZONE_SECRET_HOUSE_WIDTH ; dimensions (y, x)
 	dw SafariZoneSecretHouseBlocks, SafariZoneSecretHouseTextPointers, SafariZoneSecretHouseScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw SafariZoneSecretHouseObject ; objects
 
 SafariZoneSecretHouseScript: ; 4a317 (12:6317)
@@ -82073,7 +81977,6 @@ BattleCenterM_h: ; 0x4fd04 to 0x4fd10 (12 bytes) (id=239)
 	db BATTLE_CENTER_HEIGHT, BATTLE_CENTER_WIDTH ; dimensions (y, x)
 	dw BattleCenterMBlocks, BattleCenterMTextPointers, BattleCenterMScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw BattleCenterMObject ; objects
 
 BattleCenterMScript: ; 4fd10 (13:7d10)
@@ -82133,7 +82036,6 @@ TradeCenterM_h: ; 0x4fd71 to 0x4fd7d (12 bytes) (id=240)
 	db TRADE_CENTER_HEIGHT, TRADE_CENTER_WIDTH ; dimensions (y, x)
 	dw TradeCenterMBlocks, TradeCenterMTextPointers, TradeCenterMScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw TradeCenterMObject ; objects
 
 TradeCenterMScript: ; 4fd7d (13:7d7d)
@@ -84499,7 +84401,6 @@ VictoryRoad2_h: ; 0x51791 to 0x5179d (12 bytes) (id=194)
 	db VICTORY_ROAD_2_HEIGHT, VICTORY_ROAD_2_WIDTH ; dimensions (y, x)
 	dw VictoryRoad2Blocks, VictoryRoad2TextPointers, VictoryRoad2Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw VictoryRoad2Object ; objects
 
 VictoryRoad2Script: ; 5179d (14:579d)
@@ -84797,7 +84698,6 @@ MtMoon2_h: ; 0x51a36 to 0x51a42 (12 bytes) (id=60)
 	db MT_MOON_2_HEIGHT, MT_MOON_2_WIDTH ; dimensions (y, x)
 	dw MtMoon2Blocks, MtMoon2TextPointers, MtMoon2Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw MtMoon2Object ; objects
 
 MtMoon2Script: ; 51a42 (14:5a42)
@@ -84846,7 +84746,6 @@ SilphCo7_h: ; 0x51b55 to 0x51b61 (12 bytes) (id=212)
 	db SILPH_CO_7F_HEIGHT, SILPH_CO_7F_WIDTH ; dimensions (y, x)
 	dw SilphCo7Blocks, SilphCo7TextPointers, SilphCo7Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw SilphCo7Object ; objects
 
 SilphCo7Script: ; 51b61 (14:5b61)
@@ -85416,7 +85315,6 @@ Mansion2_h: ; 0x51fcc to 0x51fd8 (12 bytes) (id=214)
 	db MANSION_2_HEIGHT, MANSION_2_WIDTH ; dimensions (y, x)
 	dw Mansion2Blocks, Mansion2TextPointers, Mansion2Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw Mansion2Object ; objects
 
 Mansion2Script: ; 51fd8 (14:5fd8)
@@ -85596,7 +85494,6 @@ Mansion3_h: ; 0x521e2 to 0x521ee (12 bytes) (id=215)
 	db MANSION_3_HEIGHT, MANSION_3_WIDTH ; dimensions (y, x)
 	dw Mansion3Blocks, Mansion3TextPointers, Mansion3Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw Mansion3Object ; objects
 
 Mansion3Script: ; 521ee (14:61ee)
@@ -85781,7 +85678,6 @@ Mansion4_h: ; 0x523ad to 0x523b9 (12 bytes) (id=216)
 	db MANSION_4_HEIGHT, MANSION_4_WIDTH ; dimensions (y, x)
 	dw Mansion4Blocks, Mansion4TextPointers, Mansion4Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw Mansion4Object ; objects
 
 Mansion4Script: ; 523b9 (14:63b9)
@@ -86662,9 +86558,7 @@ SECTION "bank15",ROMX,BANK[$15]
 Route2_h: ; 54000 (15:4000)
 	db 00 ; Tileset
 	db ROUTE_2_HEIGHT,ROUTE_2_WIDTH ;Height,Width blocks (1 block = 4x4 tiles)
-	dw Route2Blocks ;Map-Pointer
-	dw Route2TextPointers ;Maps text pointer
-	dw Route2Script ;Maps script pointer
+	dw Route2Blocks, Route2TextPointers, Route2Script
 	db NORTH | SOUTH ;Connection Byte
 	NORTH_MAP_CONNECTION PEWTER_CITY, PEWTER_CITY_WIDTH, PEWTER_CITY_HEIGHT, -3, 2, PEWTER_CITY_WIDTH - 4, PewterCityBlocks
 	SOUTH_MAP_CONNECTION VIRIDIAN_CITY, VIRIDIAN_CITY_WIDTH, -3, 2, VIRIDIAN_CITY_WIDTH - 4, ViridianCityBlocks, ROUTE_2_WIDTH, ROUTE_2_HEIGHT
@@ -89536,7 +89430,6 @@ VermilionHouse2_h: ; 0x56064 to 0x56070 (12 bytes) (id=163)
 	db VERMILION_HOUSE_2_HEIGHT, VERMILION_HOUSE_2_WIDTH ; dimensions (y, x)
 	dw VermilionHouse2Blocks, VermilionHouse2TextPointers, VermilionHouse2Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw VermilionHouse2Object ; objects
 
 VermilionHouse2Script: ; 56070 (15:6070)
@@ -89618,7 +89511,6 @@ CeladonMart2_h: ; 0x560e9 to 0x560f5 (12 bytes) (id=123)
 	db CELADON_MART_2_HEIGHT, CELADON_MART_2_WIDTH ; dimensions (y, x)
 	dw CeladonMart2Blocks, CeladonMart2TextPointers, CeladonMart2Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw CeladonMart2Object ; objects
 
 CeladonMart2Script: ; 560f5 (15:60f5)
@@ -89673,7 +89565,6 @@ FuchsiaHouse3_h: ; 0x56170 to 0x5617c (12 bytes) (id=164)
 	db FUCHSIA_HOUSE_3_HEIGHT, FUCHSIA_HOUSE_3_WIDTH ; dimensions (y, x)
 	dw FuchsiaHouse3Blocks, FuchsiaHouse3TextPointers, FuchsiaHouse3Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw FuchsiaHouse3Object ; objects
 
 FuchsiaHouse3Script: ; 5617c (15:617c)
@@ -89757,7 +89648,6 @@ DayCareM_h: ; 0x56243 to 0x5624f (12 bytes) (id=72)
 	db DAYCAREM_HEIGHT, DAYCAREM_WIDTH ; dimensions (y, x)
 	dw DayCareMBlocks, DayCareMTextPointers, DayCareMScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw DayCareMObject ; objects
 
 DayCareMScript: ; 5624f (15:624f)
@@ -90056,7 +89946,6 @@ Route12House_h: ; 0x56473 to 0x5647f (12 bytes) (id=189)
 	db ROUTE_12_HOUSE_HEIGHT, ROUTE_12_HOUSE_WIDTH ; dimensions (y, x)
 	dw Route12HouseBlocks, Route12HouseTextPointers, Route12HouseScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw Route12HouseObject ; objects
 
 Route12HouseScript: ; 5647f (15:647f)
@@ -90138,7 +90027,6 @@ SilphCo8_h: ; 0x564f8 to 0x56504 (12 bytes) (id=213)
 	db SILPH_CO_8F_HEIGHT, SILPH_CO_8F_WIDTH ; dimensions (y, x)
 	dw SilphCo8Blocks, SilphCo8TextPointers, SilphCo8Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw SilphCo8Object ; objects
 
 SilphCo8Script: ; 56504 (15:6504)
@@ -93578,7 +93466,6 @@ FanClub_h: ; 0x59b64 to 0x59b70 (12 bytes) (id=90)
 	db POKEMON_FAN_CLUB_HEIGHT, POKEMON_FAN_CLUB_WIDTH ; dimensions (y, x)
 	dw FanClubBlocks, FanClubTextPointers, FanClubScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw FanClubObject ; objects
 
 FanClubScript: ; 59b70 (16:5b70)
@@ -93785,7 +93672,6 @@ SilphCo2_h: ; 0x59ce5 to 0x59cf1 (12 bytes) (id=207)
 	db SILPH_CO_2F_HEIGHT, SILPH_CO_2F_WIDTH ; dimensions (y, x)
 	dw SilphCo2Blocks, SilphCo2TextPointers, SilphCo2Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw SilphCo2Object ; objects
 
 SilphCo2Script: ; 59cf1 (16:5cf1)
@@ -94075,7 +93961,6 @@ SilphCo3_h: ; 0x59f4f to 0x59f5b (12 bytes) (id=208)
 	db SILPH_CO_3F_HEIGHT, SILPH_CO_3F_WIDTH ; dimensions (y, x)
 	dw SilphCo3Blocks, SilphCo3TextPointers, SilphCo3Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw SilphCo3Object ; objects
 
 SilphCo3Script: ; 59f5b (16:5f5b)
@@ -94261,7 +94146,6 @@ SilphCo10_h: ; 0x5a12d to 0x5a139 (12 bytes) (id=234)
 	db SILPH_CO_10F_HEIGHT, SILPH_CO_10F_WIDTH ; dimensions (y, x)
 	dw SilphCo10Blocks, SilphCo10TextPointers, SilphCo10Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw SilphCo10Object ; objects
 
 SilphCo10Script: ; 5a139 (16:6139)
@@ -94428,7 +94312,6 @@ Lance_h: ; 0x5a2a2 to 0x5a2ae (12 bytes) (id=113)
 	db LANCES_ROOM_HEIGHT, LANCES_ROOM_WIDTH ; dimensions (y, x)
 	dw LanceBlocks, LanceTextPointers, LanceScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw LanceObject ; objects
 
 LanceScript: ; 5a2ae (16:62ae)
@@ -94624,7 +94507,6 @@ HallofFameRoom_h: ; 0x5a492 to 0x5a49e (12 bytes) (id=118)
 	db HALL_OF_FAME_HEIGHT, HALL_OF_FAME_WIDTH ; dimensions (y, x)
 	dw HallofFameRoomBlocks, HallofFameRoomTextPointers, HallofFameRoomScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw HallofFameRoomObject ; objects
 
 HallofFameRoomScript: ; 5a49e (16:649e)
@@ -94820,9 +94702,9 @@ ViridianForestexitBlocks: ; 5c090 (17:4090)
 
 RedsHouse2F_h: ; 5c0a4 (17:40a4)
 	db $04 ; tileset
-	db $04,$04 ; dimensions
+	db REDS_HOUSE_2F_HEIGHT, REDS_HOUSE_2F_WIDTH ; dimensions
 	dw RedsHouse2FBlocks, RedsHouse2FTextPointers, RedsHouse2FScript
-	db 0 ; no connections
+	db $00 ; no connections
 	dw RedsHouse2FObject
 
 RedsHouse2FScript: ; 5c0b0 (17:40b0)
@@ -94877,7 +94759,6 @@ MuseumF1_h: ; 0x5c0eb to 0x5c0f7 (12 bytes) (id=52)
 	db MUSEUM_1F_HEIGHT, MUSEUM_1F_WIDTH ; dimensions (y, x)
 	dw MuseumF1Blocks, MuseumF1TextPointers, MuseumF1Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw MuseumF1Object ; objects
 
 MuseumF1Script: ; 5c0f7 (17:40f7)
@@ -95165,7 +95046,6 @@ MuseumF2_h: ; 0x5c30b to 0x5c317 (12 bytes) (id=53)
 	db MUSEUM_2F_HEIGHT, MUSEUM_2F_WIDTH ; dimensions (y, x)
 	dw MuseumF2Blocks, MuseumF2TextPointers, MuseumF2Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw MuseumF2Object ; objects
 
 MuseumF2Script: ; 5c317 (17:4317)
@@ -95233,7 +95113,6 @@ PewterGym_h: ; 0x5c37b to 0x5c387 (12 bytes) (id=54)
 	db PEWTER_GYM_HEIGHT, PEWTER_GYM_WIDTH ; dimensions (y, x)
 	dw PewterGymBlocks, PewterGymTextPointers, PewterGymScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw PewterGymObject ; objects
 
 PewterGymScript: ; 5c387 (17:4387)
@@ -95495,7 +95374,6 @@ PewterPokecenter_h: ; 0x5c57b to 0x5c587 (12 bytes) (id=58)
 	db PEWTER_POKECENTER_HEIGHT, PEWTER_POKECENTER_WIDTH ; dimensions (y, x)
 	dw PewterPokecenterBlocks, PewterPokecenterTextPointers, PewterPokecenterScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw PewterPokecenterObject ; objects
 
 PewterPokecenterScript: ; 5c587 (17:4587)
@@ -95598,7 +95476,6 @@ CeruleanPokecenter_h: ; 0x5c639 to 0x5c645 (12 bytes) (id=64)
 	db CERULEAN_POKECENTER_HEIGHT, CERULEAN_POKECENTER_WIDTH ; dimensions (y, x)
 	dw CeruleanPokecenterBlocks, CeruleanPokecenterTextPointers, CeruleanPokecenterScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw CeruleanPokecenterObject ; objects
 
 CeruleanPokecenterScript: ; 5c645 (17:4645)
@@ -95652,7 +95529,6 @@ CeruleanGym_h: ; 0x5c6a7 to 0x5c6b3 (12 bytes) (id=65)
 	db CERULEAN_GYM_HEIGHT, CERULEAN_GYM_WIDTH ; dimensions (y, x)
 	dw CeruleanGymBlocks, CeruleanGymTextPointers, CeruleanGymScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw CeruleanGymObject ; objects
 
 CeruleanGymScript: ; 5c6b3 (17:46b3)
@@ -95904,7 +95780,6 @@ CeruleanMart_h: ; 0x5c889 to 0x5c895 (12 bytes) (id=67)
 	db CERULEAN_MART_HEIGHT, CERULEAN_MART_WIDTH ; dimensions (y, x)
 	dw CeruleanMartBlocks, CeruleanMartTextPointers, CeruleanMartScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw CeruleanMartObject ; objects
 
 CeruleanMartScript: ; 5c895 (17:4895)
@@ -95946,7 +95821,6 @@ LavenderPokecenter_h: ; 0x5c8ce to 0x5c8da (12 bytes) (id=141)
 	db LAVENDER_POKECENTER_HEIGHT, LAVENDER_POKECENTER_WIDTH ; dimensions (y, x)
 	dw LavenderPokecenterBlocks, LavenderPokecenterTextPointers, LavenderPokecenterScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw LavenderPokecenterObject ; objects
 
 LavenderPokecenterScript: ; 5c8da (17:48da)
@@ -95997,7 +95871,6 @@ LavenderMart_h: ; 0x5c920 to 0x5c92c (12 bytes) (id=150)
 	db LAVENDER_MART_HEIGHT, LAVENDER_MART_WIDTH ; dimensions (y, x)
 	dw LavenderMartBlocks, LavenderMartTextPointers, LavenderMartScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw LavenderMartObject ; objects
 
 LavenderMartScript: ; 5c92c (17:492c)
@@ -96057,7 +95930,6 @@ VermilionPokecenter_h: ; 0x5c983 to 0x5c98f (12 bytes) (id=89)
 	db VERMILION_POKECENTER_HEIGHT, VERMILION_POKECENTER_WIDTH ; dimensions (y, x)
 	dw VermilionPokecenterBlocks, VermilionPokecenterTextPointers, VermilionPokecenterScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw VermilionPokecenterObject ; objects
 
 VermilionPokecenterScript: ; 5c98f (17:498f)
@@ -96108,7 +95980,6 @@ VermilionMart_h: ; 0x5c9d5 to 0x5c9e1 (12 bytes) (id=91)
 	db VERMILION_MART_HEIGHT, VERMILION_MART_WIDTH ; dimensions (y, x)
 	dw VermilionMartBlocks, VermilionMartTextPointers, VermilionMartScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw VermilionMartObject ; objects
 
 VermilionMartScript: ; 5c9e1 (17:49e1)
@@ -96150,7 +96021,6 @@ VermilionGym_h: ; 0x5ca1a to 0x5ca26 (12 bytes) (id=92)
 	db VERMILION_GYM_HEIGHT, VERMILION_GYM_WIDTH ; dimensions (y, x)
 	dw VermilionGymBlocks, VermilionGymTextPointers, VermilionGymScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw VermilionGymObject ; objects
 
 VermilionGymScript: ; 5ca26 (17:4a26)
@@ -96454,7 +96324,6 @@ CopycatsHouseF2_h: ; 0x5cc65 to 0x5cc71 (12 bytes) (id=176)
 	db COPYCATS_HOUSE_2F_HEIGHT, COPYCATS_HOUSE_2F_WIDTH ; dimensions (y, x)
 	dw CopycatsHouseF2Blocks, CopycatsHouseF2TextPointers, CopycatsHouseF2Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw CopycatsHouseF2Object ; objects
 
 CopycatsHouseF2Script: ; 5cc71 (17:4c71)
@@ -96587,7 +96456,6 @@ FightingDojo_h: ; 0x5cd51 to 0x5cd5d (12 bytes) (id=177)
 	db FIGHTINGDOJO_HEIGHT, FIGHTINGDOJO_WIDTH ; dimensions (y, x)
 	dw FightingDojoBlocks, FightingDojoTextPointers, FightingDojoScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw FightingDojoObject ; objects
 
 FightingDojoScript: ; 5cd5d (17:4d5d)
@@ -96958,7 +96826,6 @@ SaffronGym_h: ; 0x5d001 to 0x5d00d (12 bytes) (id=178)
 	db SAFFRON_GYM_HEIGHT, SAFFRON_GYM_WIDTH ; dimensions (y, x)
 	dw SaffronGymBlocks, SaffronGymTextPointers, SaffronGymScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw SaffronGymObject ; objects
 
 SaffronGymScript: ; 5d00d (17:500d)
@@ -97418,7 +97285,6 @@ SaffronMart_h: ; 0x5d3fd to 0x5d409 (12 bytes) (id=180)
 	db SAFFRON_MART_HEIGHT, SAFFRON_MART_WIDTH ; dimensions (y, x)
 	dw SaffronMartBlocks, SaffronMartTextPointers, SaffronMartScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw SaffronMartObject ; objects
 
 SaffronMartScript: ; 5d409 (17:5409)
@@ -97460,7 +97326,6 @@ SilphCo1_h: ; 0x5d442 to 0x5d44e (12 bytes) (id=181)
 	db SILPH_CO_1F_HEIGHT, SILPH_CO_1F_WIDTH ; dimensions (y, x)
 	dw SilphCo1Blocks, SilphCo1TextPointers, SilphCo1Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw SilphCo1Object ; objects
 
 SilphCo1Script: ; 5d44e (17:544e)
@@ -97514,7 +97379,6 @@ SaffronPokecenter_h: ; 0x5d529 to 0x5d535 (12 bytes) (id=182)
 	db SAFFRON_POKECENTER_HEIGHT, SAFFRON_POKECENTER_WIDTH ; dimensions (y, x)
 	dw SaffronPokecenterBlocks, SaffronPokecenterTextPointers, SaffronPokecenterScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw SaffronPokecenterObject ; objects
 
 SaffronPokecenterScript: ; 5d535 (17:5535)
@@ -97565,7 +97429,6 @@ ViridianForestexit_h: ; 0x5d57b to 0x5d587 (12 bytes) (id=47)
 	db VIRIDIAN_FOREST_EXIT_HEIGHT, VIRIDIAN_FOREST_EXIT_WIDTH ; dimensions (y, x)
 	dw ViridianForestexitBlocks, ViridianForestexitTextPointers, ViridianForestexitScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw ViridianForestexitObject ; objects
 
 ViridianForestexitScript: ; 5d587 (17:5587)
@@ -97609,7 +97472,6 @@ Route2Gate_h: ; 0x5d5c8 to 0x5d5d4 (12 bytes) (id=49)
 	db ROUTE_2_GATE_HEIGHT, ROUTE_2_GATE_WIDTH ; dimensions (y, x)
 	dw Route2GateBlocks, Route2GateTextPointers, Route2GateScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw Route2GateObject ; objects
 
 Route2GateScript: ; 5d5d4 (17:55d4)
@@ -97681,7 +97543,6 @@ ViridianForestEntrance_h: ; 0x5d650 to 0x5d65c (12 bytes) (id=50)
 	db VIRIDIAN_FOREST_ENTRANCE_HEIGHT, VIRIDIAN_FOREST_ENTRANCE_WIDTH ; dimensions (y, x)
 	dw ViridianForestEntranceBlocks, ViridianForestEntranceTextPointers, ViridianForestEntranceScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw ViridianForestEntranceObject ; objects
 
 ViridianForestEntranceScript: ; 5d65c (17:565c)
@@ -97725,7 +97586,6 @@ UndergroundTunnelEntranceRoute5_h: ; 0x5d69d to 0x5d6a9 (12 bytes) (id=71)
 	db PATH_ENTRANCE_ROUTE_5_HEIGHT, PATH_ENTRANCE_ROUTE_5_WIDTH ; dimensions (y, x)
 	dw UndergroundTunnelEntranceRoute5Blocks, UndergroundTunnelEntranceRoute5TextPointers, UndergroundTunnelEntranceRoute5Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw UndergroundTunnelEntranceRoute5Object ; objects
 
 UndergroundTunnelEntranceRoute5Script: ; 5d6a9 (17:56a9)
@@ -97771,7 +97631,6 @@ UndergroundTunnelEntranceRoute6_h: ; 0x5d6e3 to 0x5d6ef (12 bytes) (id=74)
 	db PATH_ENTRANCE_ROUTE_6_HEIGHT, PATH_ENTRANCE_ROUTE_6_WIDTH ; dimensions (y, x)
 	dw UndergroundTunnelEntranceRoute6Blocks, UndergroundTunnelEntranceRoute6TextPointers, UndergroundTunnelEntranceRoute6Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw UndergroundTunnelEntranceRoute6Object ; objects
 
 UndergroundTunnelEntranceRoute6Script: ; 5d6ef (17:56ef)
@@ -97809,7 +97668,6 @@ UndergroundPathEntranceRoute7_h: ; 0x5d720 to 0x5d72c (12 bytes) (id=77)
 	db PATH_ENTRANCE_ROUTE_7_HEIGHT, PATH_ENTRANCE_ROUTE_7_WIDTH ; dimensions (y, x)
 	dw UndergroundTunnelEntranceRoute7Blocks, UndergroundPathEntranceRoute7TextPointers, UndergroundPathEntranceRoute7Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw UndergroundPathEntranceRoute7Object ; objects
 
 UndergroundPathEntranceRoute7Script: ; 5d72c (17:572c)
@@ -97847,7 +97705,6 @@ UndergroundPathEntranceRoute7Copy_h: ; 5d75d (17:575d)
 	db PATH_ENTRANCE_ROUTE_7_HEIGHT, PATH_ENTRANCE_ROUTE_7_WIDTH ; dimensions (y, x)
 	dw UndergroundTunnelEntranceRoute7CopyBlocks, UndergroundPathEntranceRoute7CopyTextPointers, UndergroundPathEntranceRoute7CopyScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw UndergroundPathEntranceRoute7CopyObject ; objects
 
 UndergroundPathEntranceRoute7CopyScript: ; 5d769 (17:5769)
@@ -97899,7 +97756,6 @@ SilphCo9_h: ; 0x5d7af to 0x5d7bb (12 bytes) (id=233)
 	db SILPH_CO_9F_HEIGHT, SILPH_CO_9F_WIDTH ; dimensions (y, x)
 	dw SilphCo9Blocks, SilphCo9TextPointers, SilphCo9Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw SilphCo9Object ; objects
 
 SilphCo9Script: ; 5d7bb (17:57bb)
@@ -98184,7 +98040,6 @@ VictoryRoad1_h: ; 0x5d9fe to 0x5da0a (12 bytes) (id=108)
 	db VICTORY_ROAD_1_HEIGHT, VICTORY_ROAD_1_WIDTH ; dimensions (y, x)
 	dw VictoryRoad1Blocks, VictoryRoad1TextPointers, VictoryRoad1Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw VictoryRoad1Object ; objects
 
 VictoryRoad1Script: ; 5da0a (17:5a0a)
@@ -98781,7 +98636,6 @@ PokemonTower1_h: ; 0x60420 to 0x6042c (12 bytes) (id=142)
 	db POKEMONTOWER_1_HEIGHT, POKEMONTOWER_1_WIDTH ; dimensions (y, x)
 	dw PokemonTower1Blocks, PokemonTower1TextPointers, PokemonTower1Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw PokemonTower1Object ; objects
 
 PokemonTower1Script: ; 6042c (18:442c)
@@ -98844,7 +98698,6 @@ PokemonTower2_h: ; 0x604e6 to 0x604f2 (12 bytes) (id=143)
 	db POKEMONTOWER_2_HEIGHT, POKEMONTOWER_2_WIDTH ; dimensions (y, x)
 	dw PokemonTower2Blocks, PokemonTower2TextPointers, PokemonTower2Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw PokemonTower2Object ; objects
 
 PokemonTower2Script: ; 604f2 (18:44f2)
@@ -99053,7 +98906,6 @@ PokemonTower3_h: ; 0x606c0 to 0x606cc (12 bytes) (id=144)
 	db POKEMONTOWER_3_HEIGHT, POKEMONTOWER_3_WIDTH ; dimensions (y, x)
 	dw PokemonTower3Blocks, PokemonTower3TextPointers, PokemonTower3Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw PokemonTower3Object ; objects
 
 PokemonTower3Script: ; 606cc (18:46cc)
@@ -99186,7 +99038,6 @@ PokemonTower4_h: ; 0x607ea to 0x607f6 (12 bytes) (id=145)
 	db POKEMONTOWER_4_HEIGHT, POKEMONTOWER_4_WIDTH ; dimensions (y, x)
 	dw PokemonTower4Blocks, PokemonTower4TextPointers, PokemonTower4Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw PokemonTower4Object ; objects
 
 PokemonTower4Script: ; 607f6 (18:47f6)
@@ -99324,7 +99175,6 @@ PokemonTower5_h: ; 0x60926 to 0x60932 (12 bytes) (id=146)
 	db POKEMONTOWER_5_HEIGHT, POKEMONTOWER_5_WIDTH ; dimensions (y, x)
 	dw PokemonTower5Blocks, PokemonTower5TextPointers, PokemonTower5Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw PokemonTower5Object ; objects
 
 PokemonTower5Script: ; 60932 (18:4932)
@@ -99538,7 +99388,6 @@ PokemonTower6_h: ; 0x60ae3 to 0x60aef (12 bytes) (id=147)
 	db POKEMONTOWER_6_HEIGHT, POKEMONTOWER_6_WIDTH ; dimensions (y, x)
 	dw PokemonTower6Blocks, PokemonTower6TextPointers, PokemonTower6Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw PokemonTower6Object ; objects
 
 PokemonTower6Script: ; 60aef (18:4aef)
@@ -99787,7 +99636,6 @@ PokemonTower7_h: ; 0x60cf9 to 0x60d05 (12 bytes) (id=148)
 	db POKEMONTOWER_7_HEIGHT, POKEMONTOWER_7_WIDTH ; dimensions (y, x)
 	dw PokemonTower7Blocks, PokemonTower7TextPointers, PokemonTower7Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw PokemonTower7Object ; objects
 
 PokemonTower7Script: ; 60d05 (18:4d05)
@@ -100098,7 +99946,6 @@ CeladonMart1_h: ; 0x60f7a to 0x60f86 (12 bytes) (id=122)
 	db CELADON_MART_1_HEIGHT, CELADON_MART_1_WIDTH ; dimensions (y, x)
 	dw CeladonMart1Blocks, CeladonMart1TextPointers, CeladonMart1Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw CeladonMart1Object ; objects
 
 CeladonMart1Script: ; 60f86 (18:4f86)
@@ -100283,7 +100130,6 @@ ViridianForest_h: ; 0x61101 to 0x6110d (12 bytes) (id=51)
 	db VIRIDIAN_FOREST_HEIGHT, VIRIDIAN_FOREST_WIDTH ; dimensions (y, x)
 	dw ViridianForestBlocks, ViridianForestTextPointers, ViridianForestScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw ViridianForestObject ; objects
 
 ViridianForestScript: ; 6110d (18:510d)
@@ -100474,7 +100320,6 @@ SSAnne1_h: ; 0x61259 to 0x61265 (12 bytes) (id=95)
 	db SS_ANNE_1_HEIGHT, SS_ANNE_1_WIDTH ; dimensions (y, x)
 	dw SSAnne1Blocks, SSAnne1TextPointers, SSAnne1Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw SSAnne1Object ; objects
 
 SSAnne1Script: ; 61265 (18:5265)
@@ -100536,7 +100381,6 @@ SSAnne2_h: ; 0x61393 to 0x6139f (12 bytes) (id=96)
 	db SS_ANNE_2_HEIGHT, SS_ANNE_2_WIDTH ; dimensions (y, x)
 	dw SSAnne2Blocks, SSAnne2TextPointers, SSAnne2Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw SSAnne2Object ; objects
 
 SSAnne2Script: ; 6139f (18:539f)
@@ -100789,7 +100633,6 @@ SSAnne4_h: ; 0x61622 to 0x6162e (12 bytes) (id=98)
 	db SS_ANNE_4_HEIGHT, SS_ANNE_4_WIDTH ; dimensions (y, x)
 	dw SSAnne4Blocks, SSAnne4TextPointers, SSAnne4Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw SSAnne4Object ; objects
 
 SSAnne4Script: ; 6162e (18:562e)
@@ -100829,7 +100672,6 @@ SSAnne5_h: ; 0x616a2 to 0x616ae (12 bytes) (id=99)
 	db SS_ANNE_5_HEIGHT, SS_ANNE_5_WIDTH ; dimensions (y, x)
 	dw SSAnne5Blocks, SSAnne5TextPointers, SSAnne5Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw SSAnne5Object ; objects
 
 SSAnne5Script: ; 616ae (18:56ae)
@@ -100950,7 +100792,6 @@ SSAnne6_h: ; 0x617a7 to 0x617b3 (12 bytes) (id=100)
 	db SS_ANNE_6_HEIGHT, SS_ANNE_6_WIDTH ; dimensions (y, x)
 	dw SSAnne6Blocks, SSAnne6TextPointers, SSAnne6Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw SSAnne6Object ; objects
 
 SSAnne6Script: ; 617b3 (18:57b3)
@@ -101054,7 +100895,6 @@ SSAnne7_h: ; 0x61889 to 0x61895 (12 bytes) (id=101)
 	db SS_ANNE_7_HEIGHT, SS_ANNE_7_WIDTH ; dimensions (y, x)
 	dw SSAnne7Blocks, SSAnne7TextPointers, SSAnne7Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw SSAnne7Object ; objects
 
 SSAnne7Script: ; 61895 (18:5895)
@@ -101178,7 +101018,6 @@ SSAnne8_h: ; 0x6196a to 0x61976 (12 bytes) (id=102)
 	db SS_ANNE_8_HEIGHT, SS_ANNE_8_WIDTH ; dimensions (y, x)
 	dw SSAnne8Blocks, SSAnne8TextPointers, SSAnne8Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw SSAnne8Object ; objects
 
 SSAnne8Script: ; 61976 (18:5976)
@@ -101388,7 +101227,6 @@ SSAnne9_h: ; 0x61b3f to 0x61b4b (12 bytes) (id=103)
 	db SS_ANNE_9_HEIGHT, SS_ANNE_9_WIDTH ; dimensions (y, x)
 	dw SSAnne9Blocks, SSAnne9TextPointers, SSAnne9Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw SSAnne9Object ; objects
 
 SSAnne9Script: ; 61b4b (18:5b4b)
@@ -101661,7 +101499,6 @@ SSAnne10_h: ; 0x61d49 to 0x61d55 (12 bytes) (id=104)
 	db SS_ANNE_10_HEIGHT, SS_ANNE_10_WIDTH ; dimensions (y, x)
 	dw SSAnne10Blocks, SSAnne10TextPointers, SSAnne10Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw SSAnne10Object ; objects
 
 SSAnne10Script: ; 61d55 (18:5d55)
@@ -101914,7 +101751,6 @@ UndergroundPathNS_h: ; 0x61f1a to 0x61f26 (12 bytes) (id=119)
 	db UNDERGROUND_PATH_NS_HEIGHT, UNDERGROUND_PATH_NS_WIDTH ; dimensions (y, x)
 	dw UndergroundPathNSBlocks, UndergroundPathNSTextPointers, UndergroundPathNSScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw UndergroundPathNSObject ; objects
 
 UndergroundPathNSScript: ; 61f26 (18:5f26)
@@ -101943,7 +101779,6 @@ UndergroundPathWE_h: ; 0x61f3e to 0x61f4a (12 bytes) (id=121)
 	db UNDERGROUND_PATH_WE_HEIGHT, UNDERGROUND_PATH_WE_WIDTH ; dimensions (y, x)
 	dw UndergroundPathWEBlocks - 4, UndergroundPathWETextPointers, UndergroundPathWEScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw UndergroundPathWEObject ; objects
 
 UndergroundPathWEScript: ; 61f4a (18:5f4a)
@@ -101972,7 +101807,6 @@ DiglettsCave_h: ; 0x61f62 to 0x61f6e (12 bytes) (id=197)
 	db DIGLETTS_CAVE_HEIGHT, DIGLETTS_CAVE_WIDTH ; dimensions (y, x)
 	dw DiglettsCaveBlocks, DiglettsCaveTextPointers, DiglettsCaveScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw DiglettsCaveObject ; objects
 
 DiglettsCaveScript: ; 61f6e (18:5f6e)
@@ -102004,7 +101838,6 @@ SilphCo11_h: ; 0x620ee to 0x620fa (12 bytes) (id=235)
 	db SILPH_CO_11F_HEIGHT, SILPH_CO_11F_WIDTH ; dimensions (y, x)
 	dw SilphCo11Blocks, SilphCo11TextPointers, SilphCo11Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw SilphCo11Object ; objects
 
 SilphCo11Script: ; 620fa (18:60fa)
@@ -108851,7 +108684,6 @@ ViridianGym_h: ; 0x74897 to 0x748a3 (12 bytes) (id=45)
 	db VIRIDIAN_GYM_HEIGHT, VIRIDIAN_GYM_WIDTH ; dimensions (y, x)
 	dw ViridianGymBlocks, ViridianGymTextPointers, ViridianGymScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw ViridianGymObject ; objects
 
 ViridianGymScript: ; 748a3 (1d:48a3)
@@ -109400,7 +109232,6 @@ PewterMart_h: ; 0x74ca1 to 0x74cad (12 bytes) (id=56)
 	db PEWTER_MART_HEIGHT, PEWTER_MART_WIDTH ; dimensions (y, x)
 	dw PewterMartBlocks, PewterMartTextPointers, PewterMartScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw PewterMartObject ; objects
 
 PewterMartScript: ; 74cad (1d:4cad)
@@ -109457,7 +109288,6 @@ UnknownDungeon1_h: ; 0x74d00 to 0x74d0c (12 bytes) (id=228)
 	db UNKNOWN_DUNGEON_1_HEIGHT, UNKNOWN_DUNGEON_1_WIDTH ; dimensions (y, x)
 	dw UnknownDungeon1Blocks, UnknownDungeon1TextPointers, UnknownDungeon1Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw UnknownDungeon1Object ; objects
 
 UnknownDungeon1Script: ; 74d0c (1d:4d0c)
@@ -109508,7 +109338,6 @@ CeruleanHouse2_h: ; 0x74dfd to 0x74e09 (12 bytes) (id=230)
 	db CERULEAN_HOUSE_2_HEIGHT, CERULEAN_HOUSE_2_WIDTH ; dimensions (y, x)
 	dw CeruleanHouse2Blocks, CeruleanHouse2TextPointers, CeruleanHouse2Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw CeruleanHouse2Object ; objects
 
 CeruleanHouse2Script: ; 74e09 (1d:4e09)
@@ -109783,7 +109612,6 @@ FuchsiaHouse1_h: ; 0x7500c to 0x75018 (12 bytes) (id=153)
 	db FUCHSIA_HOUSE_1_HEIGHT, FUCHSIA_HOUSE_1_WIDTH ; dimensions (y, x)
 	dw FuchsiaHouse1Blocks, FuchsiaHouse1TextPointers, FuchsiaHouse1Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw FuchsiaHouse1Object ; objects
 
 FuchsiaHouse1Script: ; 75018 (1d:5018)
@@ -109830,7 +109658,6 @@ FuchsiaPokecenter_h: ; 0x75057 to 0x75063 (12 bytes) (id=154)
 	db FUCHSIA_POKECENTER_HEIGHT, FUCHSIA_POKECENTER_WIDTH ; dimensions (y, x)
 	dw FuchsiaPokecenterBlocks, FuchsiaPokecenterTextPointers, FuchsiaPokecenterScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw FuchsiaPokecenterObject ; objects
 
 FuchsiaPokecenterScript: ; 75063 (1d:5063)
@@ -109881,7 +109708,6 @@ FuchsiaHouse2_h: ; 0x750a9 to 0x750b5 (12 bytes) (id=155)
 	db FUCHSIA_HOUSE_2_HEIGHT, FUCHSIA_HOUSE_2_WIDTH ; dimensions (y, x)
 	dw FuchsiaHouse2Blocks, FuchsiaHouse2TextPointers, FuchsiaHouse2Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw FuchsiaHouse2Object ; objects
 
 FuchsiaHouse2Script: ; 750b5 (1d:50b5)
@@ -110031,7 +109857,6 @@ SafariZoneEntrance_h: ; 0x751c1 to 0x751cd (12 bytes) (id=156)
 	db SAFARIZONEENTRANCE_HEIGHT, SAFARIZONEENTRANCE_WIDTH ; dimensions (y, x)
 	dw SafariZoneEntranceBlocks, SafariZoneEntranceTextPointers, SafariZoneEntranceScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw SafariZoneEntranceObject ; objects
 
 SafariZoneEntranceScript: ; 751cd (1d:51cd)
@@ -110364,7 +110189,6 @@ FuchsiaGym_h: ; 0x75431 to 0x7543d (12 bytes) (id=157)
 	db FUCHSIA_GYM_HEIGHT, FUCHSIA_GYM_WIDTH ; dimensions (y, x)
 	dw FuchsiaGymBlocks, FuchsiaGymTextPointers, FuchsiaGymScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw FuchsiaGymObject ; objects
 
 FuchsiaGymScript: ; 7543d (1d:543d)
@@ -110732,7 +110556,6 @@ FuchsiaMeetingRoom_h: ; 0x756d7 to 0x756e3 (12 bytes) (id=158)
 	db FUCHSIAMEETINGROOM_HEIGHT, FUCHSIAMEETINGROOM_WIDTH ; dimensions (y, x)
 	dw FuchsiaMeetingRoomBlocks, FuchsiaMeetingRoomTextPointers, FuchsiaMeetingRoomScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw FuchsiaMeetingRoomObject ; objects
 
 FuchsiaMeetingRoomScript: ; 756e3 (1d:56e3)
@@ -110782,7 +110605,6 @@ CinnabarGym_h: ; 0x7573e to 0x7574a (12 bytes) (id=166)
 	db CINNABAR_GYM_HEIGHT, CINNABAR_GYM_WIDTH ; dimensions (y, x)
 	dw CinnabarGymBlocks, CinnabarGymTextPointers, CinnabarGymScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw CinnabarGymObject ; objects
 
 CinnabarGymScript: ; 7574a (1d:574a)
@@ -111297,7 +111119,6 @@ Lab1_h: ; 0x75b80 to 0x75b8c (12 bytes) (id=167)
 	db CINNABAR_LAB_1_HEIGHT, CINNABAR_LAB_1_WIDTH ; dimensions (y, x)
 	dw Lab1Blocks, Lab1TextPointers, Lab1Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw Lab1Object ; objects
 
 Lab1Script: ; 75b8c (1d:5b8c)
@@ -111365,7 +111186,6 @@ Lab2_h: ; 0x75c15 to 0x75c21 (12 bytes) (id=168)
 	db CINNABAR_LAB_2_HEIGHT, CINNABAR_LAB_2_WIDTH ; dimensions (y, x)
 	dw Lab2Blocks, Lab2TextPointers, Lab2Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw Lab2Object ; objects
 
 Lab2Script: ; 75c21 (1d:5c21)
@@ -111421,7 +111241,6 @@ Lab3_h: ; 0x75c7b to 0x75c87 (12 bytes) (id=169)
 	db CINNABAR_LAB_3_HEIGHT, CINNABAR_LAB_3_WIDTH ; dimensions (y, x)
 	dw Lab3Blocks, Lab3TextPointers, Lab3Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw Lab3Object ; objects
 
 Lab3Script: ; 75c87 (1d:5c87)
@@ -111516,7 +111335,6 @@ Lab4_h: ; 0x75d25 to 0x75d31 (12 bytes) (id=170)
 	db CINNABAR_LAB_4_HEIGHT, CINNABAR_LAB_4_WIDTH ; dimensions (y, x)
 	dw Lab4Blocks, Lab4TextPointers, Lab4Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw Lab4Object ; objects
 
 Lab4Script: ; 75d31 (1d:5d31)
@@ -111662,7 +111480,6 @@ CinnabarPokecenter_h: ; 0x75e20 to 0x75e2c (12 bytes) (id=171)
 	db CINNABAR_POKECENTER_HEIGHT, CINNABAR_POKECENTER_WIDTH ; dimensions (y, x)
 	dw CinnabarPokecenterBlocks, CinnabarPokecenterTextPointers, CinnabarPokecenterScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw CinnabarPokecenterObject ; objects
 
 CinnabarPokecenterScript: ; 75e2c (1d:5e2c)
@@ -111713,7 +111530,6 @@ CinnabarMart_h: ; 0x75e72 to 0x75e7e (12 bytes) (id=172)
 	db CINNABAR_MART_HEIGHT, CINNABAR_MART_WIDTH ; dimensions (y, x)
 	dw CinnabarMartBlocks, CinnabarMartTextPointers, CinnabarMartScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw CinnabarMartObject ; objects
 
 CinnabarMartScript: ; 75e7e (1d:5e7e)
@@ -111755,7 +111571,6 @@ CopycatsHouseF1_h: ; 0x75eb7 to 0x75ec3 (12 bytes) (id=175)
 	db COPYCATS_HOUSE_1F_HEIGHT, COPYCATS_HOUSE_1F_WIDTH ; dimensions (y, x)
 	dw CopycatsHouseF1Blocks, CopycatsHouseF1TextPointers, CopycatsHouseF1Script ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw CopycatsHouseF1Object ; objects
 
 CopycatsHouseF1Script: ; 75ec3 (1d:5ec3)
@@ -111803,10 +111618,9 @@ CopycatsHouseF1Object: ; 0x75ee3 (size=46)
 
 Gary_h: ; 75f11 (1d:5f11)
 	db $7 ;tileset
-	db $4, $4 ;Height, Width
+	db CHAMPIONS_ROOM_HEIGHT, CHAMPIONS_ROOM_WIDTH ; Height, Width
 	dw GaryBlocks, GaryTextPointers, GaryScript
 	db $0 ;No Connections
-
 	dw GaryObject
 
 GaryScript: ; 75f1d (1d:5f1d)
@@ -112136,7 +111950,6 @@ Lorelei_h: ; 0x7616f to 0x7617b (12 bytes) (id=245)
 	db LORELEIS_ROOM_HEIGHT, LORELEIS_ROOM_WIDTH ; dimensions (y, x)
 	dw LoreleiBlocks, LoreleiTextPointers, LoreleiScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw LoreleiObject ; objects
 
 LoreleiScript: ; 7617b (1d:617b)
@@ -112321,7 +112134,6 @@ Bruno_h: ; 0x762ca to 0x762d6 (12 bytes) (id=246)
 	db BRUNOS_ROOM_HEIGHT, BRUNOS_ROOM_WIDTH ; dimensions (y, x)
 	dw BrunoBlocks, BrunoTextPointers, BrunoScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw BrunoObject ; objects
 
 BrunoScript: ; 762d6 (1d:62d6)
@@ -112507,7 +112319,6 @@ Agatha_h: ; 0x76421 to 0x7642d (12 bytes) (id=247)
 	db AGATHAS_ROOM_HEIGHT, AGATHAS_ROOM_WIDTH ; dimensions (y, x)
 	dw AgathaBlocks, AgathaTextPointers, AgathaScript ; blocks, texts, scripts
 	db $00 ; connections
-
 	dw AgathaObject ; objects
 
 AgathaScript: ; 7642d (1d:642d)
