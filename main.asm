@@ -103448,7 +103448,7 @@ Func_706ef: ; 706ef (1c:46ef)
 	ld [$cd50], a
 	ld a, [$c104]
 	ld [$cd4f], a
-	ld hl, Unknown_70713 ; $4713
+	ld hl, PlayerSpinningFacingOrder ; $4713
 	ld de, $cd48
 	ld bc, $4
 	call CopyData
@@ -103461,8 +103461,10 @@ Func_706ef: ; 706ef (1c:46ef)
 	dec hl
 	ret
 
-Unknown_70713: ; 70713 (1c:4713)
-INCBIN "baserom.gbc",$70713,$70717 - $70713
+PlayerSpinningFacingOrder: ; 70713 (1c:4713)
+; The order of the direction the player's sprite is facing when teleporting
+; away. Creates a spinning effect.
+	db $00, $08, $04, $0C ; down, left, up, right
 
 Func_70717: ; 70717 (1c:4717)
 	ld a, [hl]
