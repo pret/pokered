@@ -77128,37 +77128,37 @@ VermilionGymHiddenObjects: ; 46c18 (11:6c18)
 	db $0e,$06,$04 ; XXX, y, x
 	dbw BANK(GymStatues),GymStatues
 	db $01,$06,$00 ; XXX, y, x
-	dbw $17,$5def
+	dbw $17, Func_5ddef
 	db $07,$01,$00 ; XXX, y, x
-	dbw $17,$5dfc
+	dbw $17, GymTrashScript
 	db $09,$01,$01 ; XXX, y, x
-	dbw $17,$5dfc
+	dbw $17, GymTrashScript
 	db $0b,$01,$02 ; XXX, y, x
-	dbw $17,$5dfc
+	dbw $17, GymTrashScript
 	db $07,$03,$03 ; XXX, y, x
-	dbw $17,$5dfc
+	dbw $17, GymTrashScript
 	db $09,$03,$04 ; XXX, y, x
-	dbw $17,$5dfc
+	dbw $17, GymTrashScript
 	db $0b,$03,$05 ; XXX, y, x
-	dbw $17,$5dfc
+	dbw $17, GymTrashScript
 	db $07,$05,$06 ; XXX, y, x
-	dbw $17,$5dfc
+	dbw $17, GymTrashScript
 	db $09,$05,$07 ; XXX, y, x
-	dbw $17,$5dfc
+	dbw $17, GymTrashScript
 	db $0b,$05,$08 ; XXX, y, x
-	dbw $17,$5dfc
+	dbw $17, GymTrashScript
 	db $07,$07,$09 ; XXX, y, x
-	dbw $17,$5dfc
+	dbw $17, GymTrashScript
 	db $09,$07,$0a ; XXX, y, x
-	dbw $17,$5dfc
+	dbw $17, GymTrashScript
 	db $0b,$07,$0b ; XXX, y, x
-	dbw $17,$5dfc
+	dbw $17, GymTrashScript
 	db $07,$09,$0c ; XXX, y, x
-	dbw $17,$5dfc
+	dbw $17, GymTrashScript
 	db $09,$09,$0d ; XXX, y, x
-	dbw $17,$5dfc
+	dbw $17, GymTrashScript
 	db $0b,$09,$0e ; XXX, y, x
-	dbw $17,$5dfc
+	dbw $17, GymTrashScript
 	db $FF
 CeladonMansion2HiddenObjects: ; 46c85 (11:6c85)
 	db $05,$00,$04 ; XXX, y, x
@@ -77360,9 +77360,9 @@ Route9HiddenObjects: ; 46e7b (11:6e7b)
 	db $FF
 SSAnne6HiddenObjects: ; 46e82 (11:6e82)
 	db $05,$0d,$00 ; XXX, y, x
-	dbw $17,$5def
+	dbw $17, Func_5ddef
 	db $07,$0d,$00 ; XXX, y, x
-	dbw $17,$5def
+	dbw $17, Func_5ddef
 	db $09,$0d,GREAT_BALL
 	dbw BANK(HiddenItems),HiddenItems
 	db $FF
@@ -98513,6 +98513,7 @@ VermilionGymTrashText: ; 5ddf7 (17:5df7)
 	TX_FAR _VermilionGymTrashText
 	db "@"
 
+GymTrashScript: ; 5ddfc (17:5dfc)
 	call EnableAutoTextBoxDrawing
 	ld a, [wWhichTrade] ; $cd3d
 	ld [$cd5b], a
