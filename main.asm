@@ -103262,13 +103262,27 @@ Func_70510: ; 70510 (1c:4510)
 	ld a, $c
 	ld [hli], a
 	ld [hl], $8
-	ld de, Unknown_70592 ; $4592
+	ld de, FlyAnimationEnterScreenCoords ; $4592
 	call Func_706ae
 	call LoadPlayerSpriteGraphics
 	jr .asm_70558
 
-Unknown_70592: ; 70592 (1c:4592)
-INCBIN "baserom.gbc",$70592,$705aa - $70592
+FlyAnimationEnterScreenCoords: ; 70592 (1c:4592)
+; y, x pairs
+; This is the sequence of screen coordinates used by the overworld
+; Fly animation when the player is entering a map.
+	db $05, $98
+	db $0F, $90
+	db $18, $88
+	db $20, $80
+	db $27, $78
+	db $2D, $70
+	db $32, $68
+	db $36, $60
+	db $39, $58
+	db $3B, $50
+	db $3C, $48
+	db $3C, $40 
 
 Func_705aa: ; 705aa (1c:45aa)
 	ld hl, wWhichTrade ; $cd3d
