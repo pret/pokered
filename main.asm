@@ -114495,7 +114495,7 @@ AnimationSpiralBallsInward: ; 79424 (1e:5424)
 	ld c, $3
 	xor a
 	call Func_797e8
-	ld hl, Unknown_79476 ; $5476
+	ld hl, SpiralBallAnimationCoordinates ; $5476
 .asm_79447
 	push hl
 	ld c, $3
@@ -114529,8 +114529,32 @@ AnimationSpiralBallsInward: ; 79424 (1e:5424)
 	call AnimationCleanOAM
 	jp AnimationFlashScreen
 
-Unknown_79476: ; 79476 (1e:5476)
-INCBIN "baserom.gbc",$79476,$794a1 - $79476
+SpiralBallAnimationCoordinates: ; 79476 (1e:5476)
+; y, x pairs
+; This is the sequence of screen coordinates that the spiraling
+; balls are positioned at.
+	db $38, $28
+	db $40, $18
+	db $50, $10
+	db $60, $18
+	db $68, $28
+	db $60, $38
+	db $50, $40
+	db $40, $38
+	db $40, $28
+	db $46, $1E
+	db $50, $18
+	db $5B, $1E
+	db $60, $28
+	db $5B, $32
+	db $50, $38
+	db $46, $32
+	db $48, $28
+	db $50, $20
+	db $58, $28
+	db $50, $30
+	db $50, $28
+	db $FF ; list terminator 
 
 AnimationSquishMonPic: ; 794a1 (1e:54a1)
 ; Squishes the mon's sprite horizontally making it
@@ -114664,11 +114688,11 @@ AnimationShootManyBallsUpward: ; 79566 (1e:5566)
 ; Shoots several pillars of "energy" balls upward.
 	ld a, [H_WHOSETURN]
 	and a
-	ld hl, Unknown_79591
-	ld a, $50
+	ld hl, UpwardBallsAnimXCoordinatesPlayerTurn
+	ld a, $50 ; y coordinate for "energy" ball pillar
 	jr z, .player
-	ld hl, Unknown_79598
-	ld a, $28
+	ld hl, UpwardBallsAnimXCoordinatesEnemyTurn
+	ld a, $28 ; y coordinate for "energy" ball pillar
 .player
 	ld [wTrainerSpriteOffset], a
 .loop
@@ -114684,11 +114708,17 @@ AnimationShootManyBallsUpward: ; 79566 (1e:5566)
 	pop hl
 	jr .loop
 
-Unknown_79591: ; 79591 (1e:5591)
-INCBIN "baserom.gbc",$79591,$79598 - $79591
+UpwardBallsAnimXCoordinatesPlayerTurn: ; 79591 (1e:5591)
+; List of x coordinates for each pillar of "energy" balls in the 
+; AnimationShootManyBallsUpward animation. It's unused in the game.
+	db $10, $40, $28, $18, $38, $30 
+	db $FF ; list terminator
 
-Unknown_79598: ; 79598 (1e:5598)
-INCBIN "baserom.gbc",$79598,$7959f - $79598
+UpwardBallsAnimXCoordinatesEnemyTurn: ; 79598 (1e:5598)
+; List of x coordinates for each pillar of "energy" balls in the 
+; AnimationShootManyBallsUpward animation. It's unused in the game.
+	db $60, $90, $78, $68, $88, $80
+	db $FF ; list terminator 
 
 AnimationMinimizeMon: ; 7959f (1e:559f)
 ; Changes the mon's sprite to a mini black sprite. Used by the
