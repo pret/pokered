@@ -103574,7 +103574,7 @@ Func_707b6: ; 707b6 (1c:47b6)
 	ld bc, (BANK(RedSprite) << 8) + $0c
 	call CopyVideoData
 	ld a, $4
-	ld hl, Unknown_70866 ; $4866
+	ld hl, RedFishingTiles ; $4866
 	call Func_71771
 	ld a, [$c102]
 	ld c, a
@@ -103657,8 +103657,22 @@ FishingRodGfxProperties: ; 70856 (1c:4856)
 	db $50, $40, $FE, $00 ; player facing left
 	db $50, $58, $FE, $20 ; player facing right ($20 means "horizontally flip the tile")
 
-Unknown_70866: ; 70866 (1c:4866)
-INCBIN "baserom.gbc",$70866,$7087e - $70866
+RedFishingTiles: ; 70866 (1c:4866)
+	dw RedFishingTilesFront
+	db $02, $1E
+	dw $8020
+
+	dw RedFishingTilesBack
+	db $02, $1E
+	dw $8060
+
+	dw RedFishingTilesSide
+	db $02, $1E
+	dw $80A0
+
+	dw RedFishingRodTiles
+	db $03, $1E
+	dw $8FD0
 
 _HandleMidJump: ; 7087e (1c:487e)
 	ld a, [$d714]
@@ -115994,12 +116008,24 @@ Func_79fc0: ; 79fc0 (1e:5fc0)
 	ret
 
 Func_79fd4: ; 79fd4 (1e:5fd4)
-	ld de, RedFishingTiles ; $5fdd
-	ld bc, (BANK(RedFishingTiles) << 8) + $01
+	ld de, SSAnneSmokePuffTile ; $5fdd
+	ld bc, (BANK(SSAnneSmokePuffTile) << 8) + $01
 	jp CopyVideoData
 
-RedFishingTiles: ; 79fdd (1e:5fdd)
-	INCBIN "gfx/red_fishing.2bpp"
+SSAnneSmokePuffTile: ; 79fdd (1e:5fdd)
+	INCBIN "gfx/ss_anne_smoke_puff.2bpp"
+
+RedFishingTilesFront: ; 79fed (1e:5fed)
+	INCBIN "gfx/red_fishing_tile_front.2bpp"
+
+RedFishingTilesBack: ; 7a00d (1e:600d)
+	INCBIN "gfx/red_fishing_tile_back.2bpp"
+
+RedFishingTilesSide: ; 7a02d (1e:602d)
+	INCBIN "gfx/red_fishing_tile_side.2bpp"
+
+RedFishingRodTiles: ; 7a04d (1e:604d)
+	INCBIN "gfx/red_fishingrod_tiles.2bpp"
 
 AttackAnimationPointers: ; 7a07d (1e:607d)
 	dw PoundAnim
