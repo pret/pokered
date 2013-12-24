@@ -263,3 +263,75 @@ endchannel: MACRO
 	db $FF
 ENDM
 
+;\1 (byte) = connected map id
+;\2 (byte) = connected map width
+;\3 (byte) = connected map height
+;\4 (byte) = x movement of connection strip
+;\5 (byte) = connection strip offset
+;\6 (byte) = width of connection strip
+;\7 (word) = connected map blocks pointer
+NORTH_MAP_CONNECTION: MACRO
+	db \1 ; map id
+	dw \7 + (\2 * (\3 - 3)) + \5; "Connection Strip" location
+	dw $C6EB + \4 ; current map position
+	db \6 ; width of connection strip
+	db \2 ; map width
+	db (\3 * 2) - 1 ; y alignment (y coordinate of player when entering map)
+	db (\4 - \5) * -2 ; x alignment (x coordinate of player when entering map)
+	dw $C6E9 + (\3 * (\2 + 6)) ; window (position of the upper left block after entering the map)
+ENDM
+
+;\1 (byte)  = connected map id
+;\2 (byte)  = connected map width
+;\3 (byte)  = x movement of connection strip
+;\4 (byte)  = connection strip offset
+;\5 (byte)  = width of connection strip
+;\6 (word)  = connected map blocks pointer
+;\7 (byte)  = current map width
+;\8 (byte) = current map height
+SOUTH_MAP_CONNECTION: MACRO
+	db \1 ; map id
+	dw \6 + \4 ; "Conection Strip" location
+	dw $C6EB + (\8 + 3) * (\7 + 6) + \3 ; current map positoin
+	db \5 ; width of connection strip
+	db \2 ; map width
+	db 0  ; y alignment (y coordinate of player when entering map)
+	db (\3 - \4) * -2 ; x alignment (x coordinate of player when entering map)
+	dw $C6EF + \2 ; window (position of the upper left block after entering the map)
+ENDM
+
+;\1 (byte)  = connected map id
+;\2 (byte)  = connected map width
+;\3 (byte)  = y movement of connection strip
+;\4 (byte)  = connection strip offset
+;\5 (byte)  = height of connection strip
+;\6 (word)  = connected map blocks pointer
+;\7 (byte)  = current map width
+EAST_MAP_CONNECTION: MACRO
+	db \1 ; map id
+	dw \6 + (\2 * \4) ; "Connection Strip" location
+	dw $C6E5 + (\7 + 6) * (\3 + 4) ; current map position
+	db \5 ; height of connection strip
+	db \2 ; map width
+	db (\3 - \4) * -2 ; y alignment
+	db 0 ; x alignment
+	dw $C6EF + \2 ; window (position of the upper left block after entering the map)
+ENDM
+
+;\1 (byte)  = connected map id
+;\2 (byte)  = connected map width
+;\3 (byte)  = y movement of connection strip
+;\4 (byte)  = connection strip offset
+;\5 (byte)  = height of connection strip
+;\6 (word)  = connected map blocks pointer
+;\7 (byte)  = current map width
+WEST_MAP_CONNECTION: MACRO
+	db \1 ; map id
+	dw \6 + (\2 * \4) + \2 - 3 ; "Connection Strip" location
+	dw $C6E8 + (\7 + 6) * (\3 + 3) ; current map position
+	db \5 ; height of connection strip
+	db \2 ; map width
+	db (\3 - \4) * -2 ; y alignment
+	db (\2 * 2) - 1 ; x alignment
+	dw $C6EE + (2 * \2) ; window (position of the upper left block after entring the map)
+ENDM

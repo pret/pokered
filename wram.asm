@@ -450,7 +450,13 @@ W_PLAYERMONPP: ; d02d
 W_TRAINERCLASS: ; d031
 	ds 1
 
-	ds 37
+	ds 24
+
+W_TRAINERNAME: ; d04a
+; 13 bytes for the letters of the opposing trainer
+; the name is terminated with $50 with possible
+; unused trailing letters
+	ds 13
 
 W_ISINBATTLE: ; d057
 ; no battle, this is 0
