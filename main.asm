@@ -114701,7 +114701,7 @@ AnimationMinimizeMon: ; 7959f (1e:559f)
 	pop hl
 	ld de, $194
 	add hl, de
-	ld de, Unknown_795c4 ; $55c4
+	ld de, MinimizedMonSprite ; $55c4
 	ld c, $5
 .asm_795b4
 	ld a, [de]
@@ -114714,8 +114714,8 @@ AnimationMinimizeMon: ; 7959f (1e:559f)
 	call Delay3
 	jp AnimationShowMonPic
 
-Unknown_795c4: ; 795c4 (1e:55c4)
-INCBIN "baserom.gbc",$795c4,$795c9 - $795c4
+MinimizedMonSprite: ; 795c4 (1e:55c4)
+	INCBIN "gfx/minimized_mon_sprite.1bpp"
 
 AnimationSlideMonDownAndHide: ; 795c9 (1e:55c9)
 ; Slides the mon's sprite down and disappears. Used in Acid Armor.
