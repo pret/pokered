@@ -35416,8 +35416,8 @@ SubstituteEffectHandler: ; 17dad (5:7dad)
 	ld hl, Func_3fba8    ; $7ba8 ;animation enabled: 0F:7BA8
 	ld b, BANK(Func_3fba8)
 	jr z, .animationEnabled
-	ld hl, Func_796e0   ;animation disabled: 1E:56E0
-	ld b, BANK(Func_796e0)
+	ld hl, AnimationSubstitute   ;animation disabled: 1E:56E0
+	ld b, BANK(AnimationSubstitute)
 .animationEnabled
 	call Bankswitch           ;jump to routine depending on animation setting
 	ld hl, UnnamedText_17e1d  ;"it created a substitute"
@@ -60649,8 +60649,8 @@ Func_3bab1: ; 3bab1 (e:7ab1)
 	ld hl, Func_3fba8 ; $7ba8
 	ld b, BANK(Func_3fba8)
 	jr nc, .asm_3baff
-	ld hl, Func_79787
-	ld b, BANK(Func_79787)
+	ld hl, AnimationTransformMon
+	ld b, BANK(AnimationTransformMon)
 .asm_3baff
 	call Bankswitch
 	ld hl, Func_79771
@@ -61076,9 +61076,9 @@ asm_3c202: ; 3c202 (f:4202)
 	call PlaySoundWaitForCurrent
 	xor a
 	ld [H_WHOSETURN], a ; $FF00+$f3
-	ld hl, Func_792b9
-	ld b, BANK(Func_792b9)
-	jp Bankswitch ; indirect jump to Func_792b9 (792b9 (1e:52b9))
+	ld hl, AnimationSlideEnemyMonOut
+	ld b, BANK(AnimationSlideEnemyMonOut)
+	jp Bankswitch ; indirect jump to AnimationSlideEnemyMonOut (792b9 (1e:52b9))
 
 UnnamedText_3c229: ; 3c229 (f:4229)
 	TX_FAR _UnnamedText_3c229
@@ -63137,11 +63137,11 @@ Func_3d119: ; 3d119 (f:5119)
 	call Predef ; indirect jump to StatusScreen2 (12b57 (4:6b57))
 	ld a, [W_ENEMYBATTSTATUS2] ; $d068
 	bit 4, a
-	ld hl, Func_796e0
+	ld hl, AnimationSubstitute
 	jr nz, .asm_3d182
 	ld a, [$ccf3]
 	and a
-	ld hl, Func_7959f
+	ld hl, AnimationMinimizeMon
 	jr nz, .asm_3d182
 	ld a, [$cfe5]
 	ld [$cf91], a
@@ -113362,7 +113362,7 @@ Func_78deb: ; 78deb (1e:4deb)
 
 Func_78df0: ; 78df0 (1e:4df0)
 	call Func_79e6a
-	jp Func_79369
+	jp AnimationBlinkEnemyMon
 
 Func_78df6: ; 78df6 (1e:4df6)
 	call Func_79e6a
@@ -113739,7 +113739,7 @@ DoExplodeSpecialEffects: ; 79009 (1e:5009)
 ; if it's the end of the subanimation, make the attacking pokemon disappear
 	FuncCoord 1, 5 ; $c405
 	ld hl,Coord
-	jp Func_79801 ; make pokemon disappear
+	jp AnimationHideMonPic ; make pokemon disappear
 
 ; flashes the screen when subanimation counter is 1 modulo 4
 DoBlizzardSpecialEffects: ; 79016 (1e:5016)
@@ -113873,84 +113873,84 @@ Func_790d0: ; 790d0 (1e:50d0)
 
 ; Format: Special Effect ID (1 byte), Address (2 bytes)
 SpecialEffectPointers: ; 790da (1e:50da)
-	db $FE
+	db SE_DARK_SCREEN_FLASH ; $FE
 	dw AnimationFlashScreen
-	db $FD
-	dw Func_791d6
-	db $FC
-	dw Func_791ea
-	db $FB
-	dw Func_7920e
-	db $FA
-	dw Func_79215
-	db $F9
-	dw Func_791db
-	db $F8
+	db SE_DARK_SCREEN_PALETTE ; $FD
+	dw AnimationDarkScreenPalette
+	db SE_RESET_SCREEN_PALETTE ; $FC
+	dw AnimationResetScreenPalette
+	db SE_SHAKE_SCREEN ; $FB
+	dw AnimationShakeScreen
+	db SE_WATER_DROPLETS_EVERYWHERE ; $FA
+	dw AnimationWaterDropletsEverywhere
+	db SE_DARKEN_MON_PALETTE ; $F9
+	dw AnimationDarkenMonPalette
+	db SE_FLASH_SCREEN_LONG ; $F8
 	dw AnimationFlashScreenLong
-	db $F7
-	dw Func_7927a
-	db $F6
-	dw Func_79297
-	db $F5
-	dw Func_79389
-	db $F4
-	dw Func_792af
-	db $F3
-	dw Func_7936f
-	db $F2
-	dw Func_793f9
-	db $F1
-	dw Func_79415
-	db $F0
-	dw Func_791f4
-	db $EF
-	dw Func_79801
-	db $EE
-	dw Func_794a1
-	db $ED
-	dw Func_794f9
-	db $EC
-	dw Func_79566
-	db $EB
-	dw Func_7977a
-	db $EA
-	dw Func_7959f
-	db $E9
-	dw Func_795c9
-	db $E8
-	dw Func_79787
-	db $E7
-	dw Func_79c74
-	db $E6
-	dw Func_79c8a
-	db $E5
-	dw Func_79645
-	db $E4
-	dw Func_79d77
-	db $E3
-	dw Func_79d77
-	db $E2
-	dw Func_79424
-	db $E1
+	db SE_SLIDE_MON_UP ; $F7
+	dw AnimationSlideMonUp
+	db SE_SLIDE_MON_DOWN ; $F6
+	dw AnimationSlideMonDown
+	db SE_FLASH_MON_PIC ; $F5
+	dw AnimationFlashMonPic
+	db SE_SLIDE_MON_OUT ; $F4
+	dw AnimationSlideMonOut
+	db SE_BLINK_MON ; $F3
+	dw AnimationBlinkMon
+	db SE_MOVE_MON_HORIZONTALLY ; $F2
+	dw AnimationMoveMonHorizontally
+	db SE_RESET_MON_POSITION ; $F1
+	dw AnimationResetMonPosition
+	db SE_LIGHT_SCREEN_PALETTE ; $F0
+	dw AnimationLightScreenPalette
+	db SE_HIDE_MON_PIC ; $EF
+	dw AnimationHideMonPic
+	db SE_SQUISH_MON_PIC ; $EE
+	dw AnimationSquishMonPic
+	db SE_SHOOT_BALLS_UPWARD ; $ED
+	dw AnimationShootBallsUpward
+	db SE_SHOOT_MANY_BALLS_UPWARD ; $EC
+	dw AnimationShootManyBallsUpward
+	db SE_BOUNCE_UP_AND_DOWN ; $EB
+	dw AnimationBoundUpAndDown
+	db SE_MINIMIZE_MON ; $EA
+	dw AnimationMinimizeMon
+	db SE_SLIDE_MON_DOWN_AND_HIDE ; $E9
+	dw AnimationSlideMonDownAndHide
+	db SE_TRANSFORM_MON ; $E8
+	dw AnimationTransformMon
+	db SE_LEAVES_FALLING ; $E7
+	dw AnimationLeavesFalling
+	db SE_PETALS_FALLING ; $E6
+	dw AnimationPetalsFalling
+	db SE_SLIDE_MON_HALF_LEFT ; $E5
+	dw AnimationSlideMonHalfLeft
+	db SE_SHAKE_ENEMY_HUD ; $E4
+	dw AnimationShakeEnemyHUD
+	db SE_SHAKE_ENEMY_HUD_2 ; unused--same pointer as SE_SHAKE_ENEMY_HUD ($E4)
+	dw AnimationShakeEnemyHUD
+	db SE_SPIRAL_BALLS_INWARD ; $E2
+	dw AnimationSpiralBallsInward
+	db SE_DELAY_ANIMATION_10 ; $E1
 	dw AnimationDelay10
-	db $E0
-	dw Func_79398
-	db $DF
-	dw Func_797d8
-	db $DE
-	dw Func_79369
-	db $DD
-	dw Func_7939e
-	db $DC
-	dw Func_793ab
-	db $DB
-	dw Func_792b9
-	db $DA
-	dw Func_793b1
-	db $D9
-	dw Func_796e0
-	db $D8
-	dw Func_79666
+	db SE_FLASH_ENEMY_MON_PIC ; unused--same as SE_FLASH_MON_PIC ($F5), but for the enemy mon
+	dw AnimationFlashEnemyMonPic
+	db SE_HIDE_ENEMY_MON_PIC ; $DF
+	dw AnimationHideEnemyMonPic
+	db SE_BLINK_ENEMY_MON ; $DE
+	dw AnimationBlinkEnemyMon
+	db SE_SHOW_MON_PIC ; $DD
+	dw AnimationShowMonPic
+	db SE_SHOW_ENEMY_MON_PIC ; $DC
+	dw AnimationShowEnemyMonPic
+	db SE_SLIDE_ENEMY_MON_OUT ; $DB
+	dw AnimationSlideEnemyMonOut
+	db SE_SHAKE_BACK_AND_FORTH ; $DA
+	dw AnimationShakeBackAndForth
+	db SE_SUBSTITUTE_MON ; $D9
+	dw AnimationSubstitute
+	db SE_WAVY_SCREEN ; $D8
+	dw AnimationWavyScreen
 	db $FF
 
 AnimationDelay10: ; 79150 (1e:5150)
@@ -114060,11 +114060,13 @@ AnimationFlashScreen: ; 791be (1e:51be)
 	ld [rBGP],a ; restore initial palette
 	ret
 
-Func_791d6: ; 791d6 (1e:51d6)
+AnimationDarkScreenPalette: ; 791d6 (1e:51d6)
+; Changes the screen's palette to a dark palette.
 	ld bc, $6f6f
 	jr Func_791fc
 
-Func_791db: ; 791db (1e:51db)
+AnimationDarkenMonPalette: ; 791db (1e:51db)
+; Darkens the mon sprite's palette.
 	ld bc, $f9f4
 	jr Func_791fc
 
@@ -114076,7 +114078,8 @@ Func_791e5: ; 791e5 (1e:51e5)
 	ld bc, $ffff
 	jr Func_791fc
 
-Func_791ea: ; 791ea (1e:51ea)
+AnimationResetScreenPalette: ; 791ea (1e:51ea)
+; Restores the screen's palette to the normal palette.
 	ld bc, $e4e4
 	jr Func_791fc
 
@@ -114084,7 +114087,8 @@ Func_791ef: ; 791ef (1e:51ef)
 	ld bc, $0000
 	jr Func_791fc
 
-Func_791f4: ; 791f4 (1e:51f4)
+AnimationLightScreenPalette: ; 791f4 (1e:51f4)
+; Changes the screen to use a palette with light colors.
 	ld bc, $9090
 	jr Func_791fc
 
@@ -114107,14 +114111,18 @@ Func_79209: ; 79209 (1e:5209)
 	ld a, $21
 	jp Predef ; indirect jump to Func_480ff (480ff (12:40ff))
 
-Func_7920e: ; 7920e (1e:520e)
+AnimationShakeScreen: ; 7920e (1e:520e)
+; Shakes the screen for a while. Used in Earthquake/Fissure/etc. animations.
 	ld b, $8
 
 Func_79210: ; 79210 (1e:5210)
 	ld a, $24
 	jp Predef ; indirect jump to Func_48125 (48125 (12:4125))
 
-Func_79215: ; 79215 (1e:5215)
+AnimationWaterDropletsEverywhere: ; 79215 (1e:5215)
+; Draws water droplets all over the screen and makes them
+; scroll. It's hard to describe, but it's the main animation
+; in Surf/Mist/Toxic.
 	xor a
 	ld [$d09f], a
 	call LoadAnimationTileset
@@ -114164,7 +114172,8 @@ Func_79246: ; 79246 (1e:5246)
 	call AnimationCleanOAM
 	jp DelayFrame
 
-Func_7927a: ; 7927a (1e:527a)
+AnimationSlideMonUp: ; 7927a (1e:527a)
+; Slides the mon's sprite upwards.
 	ld c, $7
 	ld a, [H_WHOSETURN]
 	and a
@@ -114179,7 +114188,8 @@ Func_7927a: ; 7927a (1e:527a)
 	ld [$d09f], a
 	jp Func_792bf
 
-Func_79297: ; 79297 (1e:5297)
+AnimationSlideMonDown: ; 79297 (1e:5297)
+; Slides the mon's sprite down out of the screen.
 	xor a
 	call Func_79842
 .asm_7929b
@@ -114188,21 +114198,23 @@ Func_79297: ; 79297 (1e:5297)
 	push de
 	call Func_79aae
 	call Delay3
-	call Func_79801
+	call AnimationHideMonPic
 	pop de
 	pop bc
 	dec b
 	jr nz, .asm_7929b
 	ret
 
-Func_792af: ; 792af (1e:52af)
+AnimationSlideMonOut: ; 792af (1e:52af)
+; Slides the mon's sprite out of the screen horizontally.
 	ld e, $8
 	ld a, $3
 	ld [W_SUBANIMTRANSFORM], a ; $d08b
 	jp Func_795f8
 
-Func_792b9: ; 792b9 (1e:52b9)
-	ld hl, Func_792af ; $52af
+AnimationSlideEnemyMonOut: ; 792b9 (1e:52b9)
+; Slides the enemy mon out of the screen horizontally.
+	ld hl, AnimationSlideMonOut ; $52af
 	jp CallWithTurnFlipped
 
 Func_792bf: ; 792bf (1e:52bf)
@@ -114332,19 +114344,21 @@ Func_79352: ; 79352 (1e:5352)
 	jr nz, .asm_79355
 	ret
 
-Func_79369: ; 79369 (1e:5369)
-	ld hl, Func_7936f ; $536f
+AnimationBlinkEnemyMon: ; 79369 (1e:5369)
+; Make the enemy mon's sprite blink on and off for a second or two
+	ld hl, AnimationBlinkMon ; $536f
 	jp CallWithTurnFlipped
 
-Func_7936f: ; 7936f (1e:536f)
+AnimationBlinkMon: ; 7936f (1e:536f)
+; Make the mon's sprite blink on and off for a second or two.
 	push af
 	ld c, $6
 .asm_79372
 	push bc
-	call Func_79801
+	call AnimationHideMonPic
 	ld c, $5
 	call DelayFrames
-	call Func_7939e
+	call AnimationShowMonPic
 	ld c, $5
 	call DelayFrames
 	pop bc
@@ -114353,29 +114367,35 @@ Func_7936f: ; 7936f (1e:536f)
 	pop af
 	ret
 
-Func_79389: ; 79389 (1e:5389)
+AnimationFlashMonPic: ; 79389 (1e:5389)
+; Flashes the mon's sprite on and off
 	ld a, [W_PLAYERMONID]
 	ld [$ceea], a
 	ld a, [$cfe5]
 	ld [$cee9], a
 	jp Func_79793
 
-Func_79398: ; 79398 (1e:5398)
-	ld hl, Func_79389
+AnimationFlashEnemyMonPic: ; 79398 (1e:5398)
+; Flashes the enemy mon's sprite on and off
+	ld hl, AnimationFlashMonPic
 	jp CallWithTurnFlipped
 
-Func_7939e: ; 7939e (1e:539e)
+AnimationShowMonPic: ; 7939e (1e:539e)
 	xor a
 	call Func_79842
 	call Func_79820
 	call Func_79aae
 	jp Delay3
 
-Func_793ab: ; 793ab (1e:53ab)
-	ld hl, Func_7939e
+AnimationShowEnemyMonPic: ; 793ab (1e:53ab)
+; Shows the emenmy mon's front sprite. Used in animations like Seismic Toss
+; to make the mon's sprite reappear after disappears offscreen.
+	ld hl, AnimationShowMonPic
 	jp CallWithTurnFlipped
 
-Func_793b1: ; 793b1 (1e:53b1)
+AnimationShakeBackAndForth: ; 793b1 (1e:53b1)
+; Shakes the mon's sprite back and forth rapidly. This is used in Double Team.
+; The mon's sprite disappears after this animation.
 	ld a, [H_WHOSETURN]
 	and a
 	ld hl, $c404
@@ -114420,8 +114440,10 @@ Func_793b1: ; 793b1 (1e:53b1)
 	jr nz, .asm_793c5
 	ret
 
-Func_793f9: ; 793f9 (1e:53f9)
-	call Func_79801
+AnimationMoveMonHorizontally: ; 793f9 (1e:53f9)
+; Shifts the mon's sprite horizontally to a fixed location. Used by lots of
+; animations like Tackle/Body Slam.
+	call AnimationHideMonPic
 	ld a, [H_WHOSETURN] ; $FF00+$f3
 	and a
 	FuncCoord 2, 5 ; $c406
@@ -114438,7 +114460,8 @@ Func_793f9: ; 793f9 (1e:53f9)
 	ld c, $3
 	jp DelayFrames
 
-Func_79415: ; 79415 (1e:5415)
+AnimationResetMonPosition: ; 79415 (1e:5415)
+; Resets the mon's sprites to be located at the normal coordinates.
 	ld a, [H_WHOSETURN] ; $FF00+$f3
 	and a
 	ld a, $66
@@ -114446,9 +114469,11 @@ Func_79415: ; 79415 (1e:5415)
 	ld a, $b
 .asm_7941e
 	call Func_7980c
-	jp Func_7939e
+	jp AnimationShowMonPic
 
-Func_79424: ; 79424 (1e:5424)
+AnimationSpiralBallsInward: ; 79424 (1e:5424)
+; Creates an effect that looks like energy balls sprialing into the
+; player mon's sprite.  Used in Focus Energy, for example.
 	ld a, [H_WHOSETURN] ; $FF00+$f3
 	and a
 	jr z, .asm_79435
@@ -114503,7 +114528,9 @@ Func_79424: ; 79424 (1e:5424)
 Unknown_79476: ; 79476 (1e:5476)
 INCBIN "baserom.gbc",$79476,$794a1 - $79476
 
-Func_794a1: ; 794a1 (1e:54a1)
+AnimationSquishMonPic: ; 794a1 (1e:54a1)
+; Squishes the mon's sprite horizontally making it
+; disappear. Used by Teleport/Sky Attack animations.
 	ld c, $4
 .asm_794a3
 	push bc
@@ -114532,7 +114559,7 @@ Func_794a1: ; 794a1 (1e:54a1)
 	pop bc
 	dec c
 	jr nz, .asm_794a3
-	call Func_79801
+	call AnimationHideMonPic
 	ld c, $2
 	jp DelayFrame
 
@@ -114561,7 +114588,9 @@ Func_794d4: ; 794d4 (1e:54d4)
 	jr nz, .asm_794d6
 	jp Delay3
 
-Func_794f9: ; 794f9 (1e:54f9)
+AnimationShootBallsUpward: ; 794f9 (1e:54f9)
+; Shoots one pillar of "energy" balls upwards. Used in Teleport/Sky Attack
+; animations.
 	ld a, [H_WHOSETURN] ; $FF00+$f3
 	and a
 	jr z, .asm_79503
@@ -114627,7 +114656,8 @@ Func_79517: ; 79517 (1e:5517)
 	jr nz, .asm_79538
 	ret
 
-Func_79566: ; 79566 (1e:5566)
+AnimationShootManyBallsUpward: ; 79566 (1e:5566)
+; Shoots several pillars of "energy" balls upward.
 	ld a, [H_WHOSETURN]
 	and a
 	ld hl, Unknown_79591
@@ -114656,7 +114686,9 @@ INCBIN "baserom.gbc",$79591,$79598 - $79591
 Unknown_79598: ; 79598 (1e:5598)
 INCBIN "baserom.gbc",$79598,$7959f - $79598
 
-Func_7959f: ; 7959f (1e:559f)
+AnimationMinimizeMon: ; 7959f (1e:559f)
+; Changes the mon's sprite to a mini black sprite. Used by the
+; Minimize animation.
 	ld hl, $c6e8
 	push hl
 	xor a
@@ -114676,18 +114708,19 @@ Func_7959f: ; 7959f (1e:559f)
 	jr nz, .asm_795b4
 	call Func_79652
 	call Delay3
-	jp Func_7939e
+	jp AnimationShowMonPic
 
 Unknown_795c4: ; 795c4 (1e:55c4)
 INCBIN "baserom.gbc",$795c4,$795c9 - $795c4
 
-Func_795c9: ; 795c9 (1e:55c9)
+AnimationSlideMonDownAndHide: ; 795c9 (1e:55c9)
+; Slides the mon's sprite down and disappears. Used in Acid Armor.
 	ld a, $1
 	ld c, $2
 .asm_795cd
 	push bc
 	push af
-	call Func_79801
+	call AnimationHideMonPic
 	pop af
 	push af
 	call Func_79842
@@ -114700,7 +114733,7 @@ Func_795c9: ; 795c9 (1e:55c9)
 	pop bc
 	dec c
 	jr nz, .asm_795cd
-	call Func_79801
+	call AnimationHideMonPic
 	ld hl, $c6e8
 	ld bc, $0310
 	xor a
@@ -114767,7 +114800,8 @@ Func_7963c: ; 7963c (1e:563c)
 	ld a, $7f
 	ret
 
-Func_79645: ; 79645 (1e:5645)
+AnimationSlideMonHalfLeft: ; 79645 (1e:5645)
+; Slides the mon's sprite halfway out of the screen. It's used in Softboiled.
 	ld e, $4
 	ld a, $4
 	ld [W_SUBANIMTRANSFORM], a
@@ -114785,7 +114819,8 @@ Func_79652: ; 79652 (1e:5652)
 	ld bc, $31
 	jp CopyVideoData
 
-Func_79666: ; 79666 (1e:5666)
+AnimationWavyScreen: ; 79666 (1e:5666)
+; used in Psywave/Psychic etc.
 	ld hl, $9800
 	call Func_79e0d
 	call Delay3
@@ -114841,7 +114876,8 @@ Func_796ae: ; 796ae (1e:56ae)
 Unknown_796bf: ; 796bf (1e:56bf)
 INCBIN "baserom.gbc",$796bf,$796e0 - $796bf
 
-Func_796e0: ; 796e0 (1e:56e0)
+AnimationSubstitute: ; 796e0 (1e:56e0)
+; Changes the pokemon's sprite to the mini sprite
 	ld hl, $c6e8
 	xor a
 	ld bc, $0310
@@ -114877,7 +114913,7 @@ Func_796e0: ; 796e0 (1e:56e0)
 	call CopySlowbroSpriteData
 .asm_79739
 	call Func_79652
-	jp Func_7939e
+	jp AnimationShowMonPic
 
 CopySlowbroSpriteData: ; 7973f (1e:573f)
 	ld bc, $0010
@@ -114896,34 +114932,38 @@ Func_79747: ; 79747 (1e:5747)
 	push hl
 	bit 4, a
 	jr nz, .asm_79762
-	call Func_79297
+	call AnimationSlideMonDown
 	jr .asm_79765
 .asm_79762
-	call Func_792af
+	call AnimationSlideMonOut
 .asm_79765
 	pop hl
 	ld a, [hl]
 	and a
-	jp nz, Func_7959f
-	call Func_79389
-	jp Func_7939e
+	jp nz, AnimationMinimizeMon
+	call AnimationFlashMonPic
+	jp AnimationShowMonPic
 
 Func_79771: ; 79771 (1e:5771)
-	call Func_792af
-	call Func_796e0
-	jp Func_7939e
+	call AnimationSlideMonOut
+	call AnimationSubstitute
+	jp AnimationShowMonPic
 
-Func_7977a: ; 7977a (1e:577a)
+AnimationBoundUpAndDown: ; 7977a (1e:577a)
+; Bounces the mon's sprite up and down several times. It is used
+; by Splash's animation.
 	ld c, $5
 .asm_7977c
 	push bc
-	call Func_79297
+	call AnimationSlideMonDown
 	pop bc
 	dec c
 	jr nz, .asm_7977c ; 0x79782 $f8
-	jp Func_7939e
+	jp AnimationShowMonPic
 
-Func_79787: ; 79787 (1e:5787)
+AnimationTransformMon: ; 79787 (1e:5787)
+; Redraws this mon's sprite as the back/front sprite of the opposing mon.
+; Used in Transform.
 	ld a, [$cfe5]
 	ld [$ceea], a
 	ld a, [W_PLAYERMONID]
@@ -114962,10 +115002,11 @@ Func_79793: ; 79793 (1e:5793)
 	ld b, $1
 	jp GoPAL_SET
 
-Func_797d8: ; 797d8 (1e:57d8)
+AnimationHideEnemyMonPic: ; 797d8 (1e:57d8)
+; Hides the enemy mon's sprite
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
-	ld hl, Func_79801 ; $5801
+	ld hl, AnimationHideMonPic ; $5801
 	call CallWithTurnFlipped
 	ld a, $1
 	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
@@ -114988,7 +115029,8 @@ Func_797e8: ; 797e8 (1e:57e8)
 	jr nz, .asm_797fa
 	ret
 
-Func_79801: ; 79801 (1e:5801)
+AnimationHideMonPic: ; 79801 (1e:5801)
+; Hides the mon's sprite.
 	ld a, [H_WHOSETURN] ; $FF00+$f3
 	and a
 	jr z, .asm_7980a
@@ -115399,7 +115441,9 @@ Unknown_79c20: ; 79c20 (1e:5c20)
 Unknown_79c50: ; 79c50 (1e:5c50)
 	db $43,$55,$56,$53,$53,$53,$53,$53,$53,$53,$53,$53,$43,$57,$58,$54,$54,$54,$54,$54,$54,$54,$54,$54,$43,$59,$5A,$43,$43,$43,$43,$43,$43,$43,$43,$43
 
-Func_79c74: ; 79c74 (1e:5c74)
+AnimationLeavesFalling: ; 79c74 (1e:5c74)
+; Makes leaves float down from the top of the screen. This is used 
+; in Razor Leaf's animation.
 	ld a, [$ff48]
 	push af
 	ld a, [$cc79]
@@ -115412,7 +115456,9 @@ Func_79c74: ; 79c74 (1e:5c74)
 	ld [$ff48], a
 	ret
 
-Func_79c8a: ; 79c8a (1e:5c8a)
+AnimationPetalsFalling: ; 79c8a (1e:5c8a)
+; Makes lots of petals fall down from the top of the screen. It's used in 
+; the animation for Petal Dance.
 	ld d, $71
 	ld a, $14
 	ld [W_SUBANIMTRANSFORM], a
@@ -115550,7 +115596,7 @@ Func_79d52: ; 79d52 (1e:5d52)
 Unknown_79d63: ; 79d63 (1e:5d63)
 	db $00,$84,$06,$81,$02,$88,$01,$83,$05,$89,$09,$80,$07,$87,$03,$82,$04,$85,$08,$86
 
-Func_79d77: ; 79d77 (1e:5d77)
+AnimationShakeEnemyHUD: ; 79d77 (1e:5d77)
 	ld de, $9310
 	ld hl, $8000
 	ld bc, $0031
@@ -115568,11 +115614,11 @@ Func_79d77: ; 79d77 (1e:5d77)
 	call Func_792fd
 	ld hl, $9800
 	call Func_79e0d
-	call Func_79801
+	call AnimationHideMonPic
 	call Delay3
 	ld de, $0208
 	call Func_79de9
-	call Func_7939e
+	call AnimationShowMonPic
 	call CleanLCD_OAM
 	ld a, $90
 	ld [$ffb0], a
@@ -115962,7 +116008,7 @@ AttackAnimationPointers: ; 7a07d (1e:607d)
 	dw MegaDrainAnim
 	dw LeechSeedAnim
 	dw GrowthAnim
-	dw RazorLearAnim
+	dw RazorLeafAnim
 	dw SolarBeamAnim
 	dw PoisonPowderAnim
 	dw StunSporeAnim
@@ -116099,7 +116145,7 @@ AttackAnimationPointers: ; 7a07d (1e:607d)
 ;	db special_effect_id, sound_id
 ; $FF terminated
 ZigZagScreenAnim: ; 7a213 (1e:6213)
-	db $D8,$FF
+	db SE_WAVY_SCREEN, $FF
 	db $FF
 
 PoundAnim: ; 7a216 (1e:6216)
@@ -116142,9 +116188,9 @@ IcePunchAnim: ; 7a23e (1e:623e)
 
 ThunderPunchAnim: ; 7a245 (1e:6245)
 	db $06,$08,$02
-	db $FD,$FF
+	db SE_DARK_SCREEN_PALETTE, $FF
 	db $46,$FF,$2B
-	db $FC,$FF
+	db SE_RESET_SCREEN_PALETTE, $FF
 	db $FF
 
 ScratchAnim: ; 7a250 (1e:6250)
@@ -116170,7 +116216,7 @@ SwordsDanceAnim: ; 7a260 (1e:6260)
 	db $FF
 
 CutAnim: ; 7a26a (1e:626a)
-	db $FE,$0E
+	db SE_DARK_SCREEN_FLASH, $0E
 	db $04,$FF,$16
 	db $FF
 
@@ -116185,12 +116231,12 @@ WingAttackAnim: ; 7a277 (1e:6277)
 
 WhirlwindAnim: ; 7a27b (1e:627b)
 	db $46,$11,$10
-	db $DB,$FF
+	db SE_SLIDE_ENEMY_MON_OUT, $FF
 	db $FF
 
 FlyAnim: ; 7a281 (1e:6281)
 	db $46,$12,$04
-	db $DD,$FF
+	db SE_SHOW_MON_PIC, $FF
 	db $FF
 
 BindAnim: ; 7a287 (1e:6287)
@@ -116225,7 +116271,7 @@ JumpKickAnim: ; 7a2a8 (1e:62a8)
 	db $FF
 
 RollingKickAnim: ; 7a2ac (1e:62ac)
-	db $FE,$1A
+	db SE_DARK_SCREEN_FLASH, $1A
 	db $46,$FF,$04
 	db $FF
 
@@ -116256,15 +116302,15 @@ HornDrillAnim: ; 7a2c8 (1e:62c8)
 	db $FF
 
 TackleAnim: ; 7a2d8 (1e:62d8)
-	db $F2,$48
-	db $F1,$FF
+	db SE_MOVE_MON_HORIZONTALLY, $48
+	db SE_RESET_MON_POSITION, $FF
 	db $FF
 
 BodySlamAnim: ; 7a2dd (1e:62dd)
-	db $F2,$48
-	db $FE,$FF
-	db $FE,$FF
-	db $F1,$FF
+	db SE_MOVE_MON_HORIZONTALLY, $48
+	db SE_DARK_SCREEN_FLASH, $FF
+	db SE_DARK_SCREEN_FLASH, $FF
+	db SE_RESET_MON_POSITION, $FF
 	db $FF
 
 WrapAnim: ; 7a2e6 (1e:62e6)
@@ -116274,9 +116320,9 @@ WrapAnim: ; 7a2e6 (1e:62e6)
 	db $FF
 
 TakeDownAnim: ; 7a2f0 (1e:62f0)
-	db $F2,$48
-	db $FE,$23
-	db $F1,$FF
+	db SE_MOVE_MON_HORIZONTALLY, $48
+	db SE_DARK_SCREEN_FLASH, $23
+	db SE_RESET_MON_POSITION, $FF
 	db $FF
 
 ThrashAnim: ; 7a2f7 (1e:62f7)
@@ -116284,22 +116330,22 @@ ThrashAnim: ; 7a2f7 (1e:62f7)
 	db $FF
 
 DoubleEdgeAnim: ; 7a2fb (1e:62fb)
-	db $F0,$48
+	db SE_LIGHT_SCREEN_PALETTE, $48
 	db $06,$FF,$2D
-	db $FC,$FF
-	db $F2,$FF
-	db $FE,$25
-	db $F1,$FF
+	db SE_RESET_SCREEN_PALETTE, $FF
+	db SE_MOVE_MON_HORIZONTALLY, $FF
+	db SE_DARK_SCREEN_FLASH, $25
+	db SE_RESET_MON_POSITION, $FF
 	db $FF
 
 TailWhipAnim: ; 7a309 (1e:6309)
-	db $F2,$84
-	db $E1,$FF
-	db $F1,$84
-	db $E1,$FF
-	db $F2,$84
-	db $E1,$FF
-	db $F1,$84
+	db SE_MOVE_MON_HORIZONTALLY, $84
+	db SE_DELAY_ANIMATION_10, $FF
+	db SE_RESET_MON_POSITION, $84
+	db SE_DELAY_ANIMATION_10, $FF
+	db SE_MOVE_MON_HORIZONTALLY, $84
+	db SE_DELAY_ANIMATION_10, $FF
+	db SE_RESET_MON_POSITION, $84
 	db $FF
 
 PoisonStingAnim: ; 7a318 (1e:6318)
@@ -116316,10 +116362,10 @@ PinMissileAnim: ; 7a323 (1e:6323)
 	db $FF
 
 LeerAnim: ; 7a327 (1e:6327)
-	db $FD,$48
-	db $FE,$2A
-	db $FE,$2A
-	db $FC,$FF
+	db SE_DARK_SCREEN_PALETTE, $48
+	db SE_DARK_SCREEN_FLASH, $2A
+	db SE_DARK_SCREEN_FLASH, $2A
+	db SE_RESET_SCREEN_PALETTE, $FF
 	db $FF
 
 BiteAnim: ; 7a330 (1e:6330)
@@ -116354,10 +116400,10 @@ SonicBoomAnim: ; 7a350 (1e:6350)
 	db $FF
 
 DisableAnim: ; 7a35d (1e:635d)
-	db $FD,$48
-	db $FE,$2A
-	db $FE,$2A
-	db $FC,$FF
+	db SE_DARK_SCREEN_PALETTE, $48
+	db SE_DARK_SCREEN_FLASH, $2A
+	db SE_DARK_SCREEN_FLASH, $2A
+	db SE_RESET_SCREEN_PALETTE, $FF
 	db $FF
 
 AcidAnim: ; 7a366 (1e:6366)
@@ -116376,9 +116422,9 @@ FlamethrowerAnim: ; 7a371 (1e:6371)
 	db $FF
 
 MistAnim: ; 7a37b (1e:637b)
-	db $F0,$FF
-	db $FA,$38
-	db $FC,$FF
+	db SE_LIGHT_SCREEN_PALETTE, $FF
+	db SE_WATER_DROPLETS_EVERYWHERE, $38
+	db SE_RESET_SCREEN_PALETTE, $FF
 	db $FF
 
 WaterGunAnim: ; 7a382 (1e:6382)
@@ -116391,7 +116437,7 @@ HydroPumpAnim: ; 7a386 (1e:6386)
 	db $FF
 
 SurfAnim: ; 7a38d (1e:638d)
-	db $FA,$38
+	db SE_WATER_DROPLETS_EVERYWHERE, $38
 	db $06,$37,$1A
 	db $FF
 
@@ -116407,7 +116453,7 @@ BlizzardAnim: ; 7a39a (1e:639a)
 
 PsyBeamAnim: ; 7a3a1 (1e:63a1)
 	db $03,$3B,$2E
-	db $F8,$FF
+	db SE_FLASH_SCREEN_LONG, $FF
 	db $FF
 
 BubbleBeamAnim: ; 7a3a7 (1e:63a7)
@@ -116416,18 +116462,18 @@ BubbleBeamAnim: ; 7a3a7 (1e:63a7)
 
 AuroraBeamAnim: ; 7a3ab (1e:63ab)
 	db $03,$3D,$2E
-	db $E1,$FF
-	db $E1,$FF
+	db SE_DELAY_ANIMATION_10, $FF
+	db SE_DELAY_ANIMATION_10, $FF
 	db $FF
 
 HyperBeamAnim: ; 7a3b3 (1e:63b3)
-	db $FD,$48
-	db $E2,$FF
+	db SE_DARK_SCREEN_PALETTE, $48
+	db SE_SPIRAL_BALLS_INWARD, $FF
 	db $02,$3E,$2E
-	db $FE,$FF
-	db $FE,$FF
+	db SE_DARK_SCREEN_FLASH, $FF
+	db SE_DARK_SCREEN_FLASH, $FF
 	db $46,$04,$04
-	db $FC,$FF
+	db SE_RESET_SCREEN_PALETTE, $FF
 	db $FF
 
 PeckAnim: ; 7a3c4 (1e:63c4)
@@ -116439,57 +116485,57 @@ DrillPeckAnim: ; 7a3c8 (1e:63c8)
 	db $FF
 
 SubmissionAnim: ; 7a3cc (1e:63cc)
-	db $F4,$41
+	db SE_SLIDE_MON_OUT, $41
 	db $06,$FF,$01
-	db $DD,$FF
+	db SE_SHOW_MON_PIC, $FF
 	db $FF
 
 LowKickAnim: ; 7a3d4 (1e:63d4)
-	db $F4,$42
+	db SE_SLIDE_MON_OUT, $42
 	db $46,$FF,$04
-	db $DD,$FF
+	db SE_SHOW_MON_PIC, $FF
 	db $FF
 
 CounterAnim: ; 7a3dc (1e:63dc)
-	db $F4,$43
+	db SE_SLIDE_MON_OUT, $43
 	db $46,$FF,$04
-	db $DD,$FF
+	db SE_SHOW_MON_PIC, $FF
 	db $FF
 
 SeismicTossAnim: ; 7a3e4 (1e:63e4)
-	db $DE,$FF
+	db SE_BLINK_ENEMY_MON, $FF
 	db $41,$8B,$4E
-	db $DF,$FF
-	db $F4,$FF
+	db SE_HIDE_ENEMY_MON_PIC, $FF
+	db SE_SLIDE_MON_OUT, $FF
 	db $42,$44,$4F
-	db $E1,$FF
-	db $E1,$FF
-	db $DD,$FF
+	db SE_DELAY_ANIMATION_10, $FF
+	db SE_DELAY_ANIMATION_10, $FF
+	db SE_SHOW_MON_PIC, $FF
 	db $41,$44,$50
-	db $DC,$FF
-	db $FB,$FF
+	db SE_SHOW_ENEMY_MON_PIC, $FF
+	db SE_SHAKE_SCREEN, $FF
 	db $FF
 
 StrengthAnim: ; 7a3fe (1e:63fe)
-	db $F2,$48
-	db $F1,$FF
+	db SE_MOVE_MON_HORIZONTALLY, $48
+	db SE_RESET_MON_POSITION, $FF
 	db $46,$06,$04
 	db $FF
 
 AbsorbAnim: ; 7a406 (1e:6406)
-	db $F0,$46
+	db SE_LIGHT_SCREEN_PALETTE, $46
 	db $06,$FF,$21
 	db $06,$FF,$22
-	db $FC,$FF
+	db SE_RESET_SCREEN_PALETTE, $FF
 	db $FF
 
 MegaDrainAnim: ; 7a411 (1e:6411)
-	db $F0,$47
-	db $FE,$FF
+	db SE_LIGHT_SCREEN_PALETTE, $47
+	db SE_DARK_SCREEN_FLASH, $FF
 	db $06,$FF,$21
 	db $06,$FF,$22
-	db $FE,$FF
-	db $FC,$FF
+	db SE_DARK_SCREEN_FLASH, $FF
+	db SE_RESET_SCREEN_PALETTE, $FF
 	db $FF
 
 LeechSeedAnim: ; 7a420 (1e:6420)
@@ -116498,13 +116544,13 @@ LeechSeedAnim: ; 7a420 (1e:6420)
 	db $FF
 
 GrowthAnim: ; 7a427 (1e:6427)
-	db $F0,$49
-	db $E2,$FF
-	db $FC,$FF
+	db SE_LIGHT_SCREEN_PALETTE, $49
+	db SE_SPIRAL_BALLS_INWARD, $FF
+	db SE_RESET_SCREEN_PALETTE, $FF
 	db $FF
 
-RazorLearAnim: ; 7a42e (1e:642e)
-	db $E7,$4A
+RazorLeafAnim: ; 7a42e (1e:642e)
+	db SE_LEAVES_FALLING, $4A
 	db $41,$80,$44
 	db $01,$0C,$16
 	db $FF
@@ -116527,9 +116573,9 @@ SleepPowderAnim: ; 7a446 (1e:6446)
 	db $FF
 
 PedalDanceAnim: ; 7a44a (1e:644a)
-	db $F0,$4F
-	db $E6,$FF
-	db $FC,$FF
+	db SE_LIGHT_SCREEN_PALETTE, $4F
+	db SE_PETALS_FALLING, $FF
+	db SE_RESET_SCREEN_PALETTE, $FF
 	db $FF
 
 StringShotAnim: ; 7a451 (1e:6451)
@@ -116565,12 +116611,12 @@ ThunderWaveAnim: ; 7a477 (1e:6477)
 	db $FF
 
 ThunderAnim: ; 7a481 (1e:6481)
-	db $FD,$56
-	db $FE,$FF
+	db SE_DARK_SCREEN_PALETTE, $56
+	db SE_DARK_SCREEN_FLASH, $FF
 	db $46,$FF,$2B
-	db $FE,$FF
+	db SE_DARK_SCREEN_FLASH, $FF
 	db $42,$54,$29
-	db $FC,$FF
+	db SE_RESET_SCREEN_PALETTE, $FF
 	db $FF
 
 RockThrowAnim: ; 7a490 (1e:6490)
@@ -116578,56 +116624,56 @@ RockThrowAnim: ; 7a490 (1e:6490)
 	db $FF
 
 EarthquakeAnim: ; 7a494 (1e:6494)
-	db $FB,$58
-	db $FB,$58
+	db SE_SHAKE_SCREEN, $58
+	db SE_SHAKE_SCREEN, $58
 	db $FF
 
 FissureAnim: ; 7a499 (1e:6499)
-	db $FE,$59
-	db $FB,$FF
-	db $FE,$59
-	db $FB,$FF
+	db SE_DARK_SCREEN_FLASH, $59
+	db SE_SHAKE_SCREEN, $FF
+	db SE_DARK_SCREEN_FLASH, $59
+	db SE_SHAKE_SCREEN, $FF
 	db $FF
 
 DigAnim: ; 7a4a2 (1e:64a2)
 	db $46,$5A,$04
-	db $F7,$FF
+	db SE_SLIDE_MON_UP, $FF
 	db $FF
 
 ToxicAnim: ; 7a4a8 (1e:64a8)
-	db $FA,$38
+	db SE_WATER_DROPLETS_EVERYWHERE, $38
 	db $46,$5B,$14
 	db $FF
 
 ConfusionAnim: ; 7a4ae (1e:64ae)
-	db $F8,$5C
+	db SE_FLASH_SCREEN_LONG, $5C
 	db $FF
 
 PsychicAnim: ; 7a4b1 (1e:64b1)
-	db $F8,$5D
-	db $D8,$FF
+	db SE_FLASH_SCREEN_LONG, $5D
+	db SE_WAVY_SCREEN, $FF
 	db $FF
 
 HypnosisAnim: ; 7a4b6 (1e:64b6)
-	db $F8,$5E
+	db SE_FLASH_SCREEN_LONG, $5E
 	db $FF
 
 MeditateAnim: ; 7a4b9 (1e:64b9)
-	db $F0,$5F
+	db SE_LIGHT_SCREEN_PALETTE, $5F
 	db $46,$FF,$43
-	db $FE,$FF
-	db $FC,$FF
+	db SE_DARK_SCREEN_FLASH, $FF
+	db SE_RESET_SCREEN_PALETTE, $FF
 	db $FF
 
 AgilityAnim: ; 7a4c3 (1e:64c3)
-	db $F0,$60
-	db $FC,$FF
+	db SE_LIGHT_SCREEN_PALETTE, $60
+	db SE_RESET_SCREEN_PALETTE, $FF
 	db $FF
 
 QuickAttackAnim: ; 7a4c8 (1e:64c8)
-	db $F4,$61
+	db SE_SLIDE_MON_OUT, $61
 	db $46,$FF,$04
-	db $DD,$FF
+	db SE_SHOW_MON_PIC, $FF
 	db $FF
 
 RageAnim: ; 7a4d0 (1e:64d0)
@@ -116635,13 +116681,13 @@ RageAnim: ; 7a4d0 (1e:64d0)
 	db $FF
 
 TeleportAnim: ; 7a4d4 (1e:64d4)
-	db $EE,$63
-	db $ED,$FF
+	db SE_SQUISH_MON_PIC, $63
+	db SE_SHOOT_BALLS_UPWARD, $FF
 	db $FF
 
 NightShadeAnim: ; 7a4d9 (1e:64d9)
-	db $F8,$5C
-	db $D8,$FF
+	db SE_FLASH_SCREEN_LONG, $5C
+	db SE_WAVY_SCREEN, $FF
 	db $FF
 
 MimicAnim: ; 7a4de (1e:64de)
@@ -116654,75 +116700,75 @@ ScreechAnim: ; 7a4e5 (1e:64e5)
 	db $FF
 
 DoubleTeamAnim: ; 7a4e9 (1e:64e9)
-	db $FD,$FF
-	db $E1,$FF
-	db $E1,$FF
-	db $FE,$FF
-	db $FE,$FF
-	db $FC,$FF
-	db $DA,$67
-	db $DD,$FF
+	db SE_DARK_SCREEN_PALETTE, $FF
+	db SE_DELAY_ANIMATION_10, $FF
+	db SE_DELAY_ANIMATION_10, $FF
+	db SE_DARK_SCREEN_FLASH, $FF
+	db SE_DARK_SCREEN_FLASH, $FF
+	db SE_RESET_SCREEN_PALETTE, $FF
+	db SE_SHAKE_BACK_AND_FORTH, $67
+	db SE_SHOW_MON_PIC, $FF
 	db $46,$6F,$33
 	db $FF
 
 RecoverAnim: ; 7a4fd (1e:64fd)
-	db $F3,$68
-	db $F0,$FF
-	db $E2,$FF
-	db $FC,$FF
+	db SE_BLINK_MON, $68
+	db SE_LIGHT_SCREEN_PALETTE, $FF
+	db SE_SPIRAL_BALLS_INWARD, $FF
+	db SE_RESET_SCREEN_PALETTE, $FF
 	db $FF
 
 HardenAnim: ; 7a506 (1e:6506)
-	db $F0,$69
+	db SE_LIGHT_SCREEN_PALETTE, $69
 	db $46,$FF,$43
-	db $FE,$FF
-	db $FC,$FF
+	db SE_DARK_SCREEN_FLASH, $FF
+	db SE_RESET_SCREEN_PALETTE, $FF
 	db $FF
 
 MinimizeAnim: ; 7a510 (1e:6510)
-	db $F0,$6A
-	db $E2,$FF
-	db $EA,$FF
-	db $FC,$FF
+	db SE_LIGHT_SCREEN_PALETTE, $6A
+	db SE_SPIRAL_BALLS_INWARD, $FF
+	db SE_MINIMIZE_MON, $FF
+	db SE_RESET_SCREEN_PALETTE, $FF
 	db $FF
 
 SmokeScreenAnim: ; 7a519 (1e:6519)
 	db $46,$6B,$28
 	db $04,$FF,$0A
-	db $F9,$FF
-	db $E1,$FF
-	db $E1,$FF
-	db $FD,$FF
-	db $E1,$FF
-	db $E1,$FF
-	db $E1,$FF
-	db $E1,$FF
-	db $E1,$FF
-	db $E1,$FF
-	db $F9,$FF
-	db $E1,$FF
-	db $FC,$FF
+	db SE_DARKEN_MON_PALETTE, $FF
+	db SE_DELAY_ANIMATION_10, $FF
+	db SE_DELAY_ANIMATION_10, $FF
+	db SE_DARK_SCREEN_PALETTE, $FF
+	db SE_DELAY_ANIMATION_10, $FF
+	db SE_DELAY_ANIMATION_10, $FF
+	db SE_DELAY_ANIMATION_10, $FF
+	db SE_DELAY_ANIMATION_10, $FF
+	db SE_DELAY_ANIMATION_10, $FF
+	db SE_DELAY_ANIMATION_10, $FF
+	db SE_DARKEN_MON_PALETTE, $FF
+	db SE_DELAY_ANIMATION_10, $FF
+	db SE_RESET_SCREEN_PALETTE, $FF
 	db $FF
 
 ConfuseRayAnim: ; 7a53a (1e:653a)
-	db $FD,$6C
+	db SE_DARK_SCREEN_PALETTE, $6C
 	db $46,$FF,$3E
-	db $FC,$FF
+	db SE_RESET_SCREEN_PALETTE, $FF
 	db $FF
 
 WithdrawAnim: ; 7a542 (1e:6542)
-	db $F0,$6E
-	db $F6,$FF
+	db SE_LIGHT_SCREEN_PALETTE, $6E
+	db SE_SLIDE_MON_DOWN, $FF
 	db $06,$FF,$51
-	db $FC,$FF
-	db $DD,$FF
+	db SE_RESET_SCREEN_PALETTE, $FF
+	db SE_SHOW_MON_PIC, $FF
 	db $FF
 
 DefenseCurlAnim: ; 7a54e (1e:654e)
-	db $F0,$6E
+	db SE_LIGHT_SCREEN_PALETTE, $6E
 	db $06,$FF,$43
-	db $FE,$FF
-	db $FC,$FF
+	db SE_DARK_SCREEN_FLASH, $FF
+	db SE_RESET_SCREEN_PALETTE, $FF
 	db $FF
 
 BarrierAnim: ; 7a558 (1e:6558)
@@ -116731,27 +116777,27 @@ BarrierAnim: ; 7a558 (1e:6558)
 	db $FF
 
 LightScreenAnim: ; 7a55f (1e:655f)
-	db $F0,$FF
+	db SE_LIGHT_SCREEN_PALETTE, $FF
 	db $46,$70,$33
 	db $46,$70,$33
-	db $FC,$FF
+	db SE_RESET_SCREEN_PALETTE, $FF
 	db $FF
 
 HazeAnim: ; 7a56a (1e:656a)
-	db $F9,$FF
-	db $FA,$38
-	db $FC,$FF
+	db SE_DARKEN_MON_PALETTE, $FF
+	db SE_WATER_DROPLETS_EVERYWHERE, $38
+	db SE_RESET_SCREEN_PALETTE, $FF
 	db $FF
 
 ReflectAnim: ; 7a571 (1e:6571)
-	db $FD,$FF
+	db SE_DARK_SCREEN_PALETTE, $FF
 	db $46,$72,$33
 	db $46,$72,$33
-	db $FC,$FF
+	db SE_RESET_SCREEN_PALETTE, $FF
 	db $FF
 
 FocusEnergyAnim: ; 7a57c (1e:657c)
-	db $E2,$73
+	db SE_SPIRAL_BALLS_INWARD, $73
 	db $FF
 
 BideAnim: ; 7a57f (1e:657f)
@@ -116759,13 +116805,13 @@ BideAnim: ; 7a57f (1e:657f)
 	db $FF
 
 MetronomeAnim: ; 7a583 (1e:6583)
-	db $F2,$84
-	db $E1,$FF
-	db $F1,$84
-	db $E1,$FF
-	db $F2,$84
-	db $E1,$FF
-	db $F1,$84
+	db SE_MOVE_MON_HORIZONTALLY, $84
+	db SE_DELAY_ANIMATION_10, $FF
+	db SE_RESET_MON_POSITION, $84
+	db SE_DELAY_ANIMATION_10, $FF
+	db SE_MOVE_MON_HORIZONTALLY, $84
+	db SE_DELAY_ANIMATION_10, $FF
+	db SE_RESET_MON_POSITION, $84
 	db $FF
 
 MirrorMoveAnim: ; 7a592 (1e:6592)
@@ -116786,9 +116832,9 @@ LickAnim: ; 7a5a1 (1e:65a1)
 	db $FF
 
 SmogAnim: ; 7a5a5 (1e:65a5)
-	db $F9,$48
+	db SE_DARKEN_MON_PALETTE, $48
 	db $46,$7A,$19
-	db $FC,$FF
+	db SE_RESET_SCREEN_PALETTE, $FF
 	db $FF
 
 SludgeAnim: ; 7a5ad (1e:65ad)
@@ -116809,10 +116855,10 @@ FireBlastAnim: ; 7a5b8 (1e:65b8)
 	db $FF
 
 WaterfallAnim: ; 7a5c8 (1e:65c8)
-	db $F6,$48
+	db SE_SLIDE_MON_DOWN, $48
 	db $06,$37,$1A
 	db $08,$FF,$02
-	db $F7,$FF
+	db SE_SLIDE_MON_UP, $FF
 	db $FF
 
 ClampAnim: ; 7a5d3 (1e:65d3)
@@ -116849,12 +116895,12 @@ KinesisAnim: ; 7a5fa (1e:65fa)
 	db $FF
 
 SoftboiledAnim: ; 7a5fe (1e:65fe)
-	db $E5,$48
+	db SE_SLIDE_MON_HALF_LEFT, $48
 	db $08,$86,$4C
-	db $F0,$FF
-	db $E2,$FF
-	db $FC,$FF
-	db $DD,$FF
+	db SE_LIGHT_SCREEN_PALETTE, $FF
+	db SE_SPIRAL_BALLS_INWARD, $FF
+	db SE_RESET_SCREEN_PALETTE, $FF
+	db SE_SHOW_MON_PIC, $FF
 	db $FF
 
 HiJumpKickAnim: ; 7a6 (1e:660c)
@@ -116862,17 +116908,17 @@ HiJumpKickAnim: ; 7a6 (1e:660c)
 	db $FF
 
 GlareAnim: ; 7a610 (1e:6610)
-	db $FD,$48
-	db $FE,$88
-	db $FE,$FF
-	db $FC,$FF
+	db SE_DARK_SCREEN_PALETTE, $48
+	db SE_DARK_SCREEN_FLASH, $88
+	db SE_DARK_SCREEN_FLASH, $FF
+	db SE_RESET_SCREEN_PALETTE, $FF
 	db $FF
 
 DreamEaterAnim: ; 7a619 (1e:6619)
-	db $F8,$89
-	db $FD,$89
+	db SE_FLASH_SCREEN_LONG, $89
+	db SE_DARK_SCREEN_PALETTE, $89
 	db $08,$89,$02
-	db $FC,$FF
+	db SE_RESET_SCREEN_PALETTE, $FF
 	db $FF
 
 PoisonGasAnim: ; 7a623 (1e:6623)
@@ -116886,10 +116932,10 @@ BarrageAnim: ; 7a627 (1e:6627)
 
 LeechLifeAnim: ; 7a62e (1e:662e)
 	db $08,$8C,$02
-	db $FE,$FF
+	db SE_DARK_SCREEN_FLASH, $FF
 	db $06,$FF,$21
 	db $06,$FF,$22
-	db $FE,$FF
+	db SE_DARK_SCREEN_FLASH, $FF
 	db $FF
 
 LovelyKissAnim: ; 7a63c (1e:663c)
@@ -116897,17 +116943,17 @@ LovelyKissAnim: ; 7a63c (1e:663c)
 	db $FF
 
 SkyAttackAnim: ; 7a640 (1e:6640)
-	db $EE,$8E
-	db $ED,$FF
+	db SE_SQUISH_MON_PIC, $8E
+	db SE_SHOOT_BALLS_UPWARD, $FF
 	db $46,$87,$04
-	db $DD,$FF
+	db SE_SHOW_MON_PIC, $FF
 	db $FF
 
 TransformAnim: ; 7a64a (1e:664a)
 	db $46,$8F,$21
 	db $44,$8F,$22
 	db $08,$FF,$47
-	db $E8,$FF
+	db SE_TRANSFORM_MON, $FF
 	db $FF
 
 BubbleAnim: ; 7a656 (1e:6656)
@@ -116926,23 +116972,23 @@ SporeAnim: ; 7a667 (1e:6667)
 	db $FF
 
 FlashAnim: ; 7a66b (1e:666b)
-	db $F0,$48
-	db $FE,$88
-	db $FE,$FF
-	db $FC,$FF
+	db SE_LIGHT_SCREEN_PALETTE, $48
+	db SE_DARK_SCREEN_FLASH, $88
+	db SE_DARK_SCREEN_FLASH, $FF
+	db SE_RESET_SCREEN_PALETTE, $FF
 	db $FF
 
 PsywaveAnim: ; 7a674 (1e:6674)
 	db $06,$2F,$31
-	db $D8,$5C
+	db SE_WAVY_SCREEN, $5C
 	db $FF
 
 SplashAnim: ; 7a67a (1e:667a)
-	db $EB,$95
+	db SE_BOUNCE_UP_AND_DOWN, $95
 	db $FF
 
 AcidArmorAnim: ; 7a67d (1e:667d)
-	db $E9,$96
+	db SE_SLIDE_MON_DOWN_AND_HIDE, $96
 	db $FF
 
 CrabHammerAnim: ; 7a680 (1e:6680)
@@ -116978,29 +117024,29 @@ HyperFangAnim: ; 7a6a4 (1e:66a4)
 	db $FF
 
 SharpenAnim: ; 7a6a8 (1e:66a8)
-	db $F0,$9E
+	db SE_LIGHT_SCREEN_PALETTE, $9E
 	db $46,$FF,$43
-	db $FE,$FF
-	db $FC,$FF
+	db SE_DARK_SCREEN_FLASH, $FF
+	db SE_RESET_SCREEN_PALETTE, $FF
 	db $FF
 
 ConversionAnim: ; 7a6b2 (1e:66b2)
-	db $FE,$9F
+	db SE_DARK_SCREEN_FLASH, $9F
 	db $46,$FF,$21
 	db $46,$FF,$22
-	db $FE,$FF
+	db SE_DARK_SCREEN_FLASH, $FF
 	db $FF
 
 TriAttackAnim: ; 7a6bd (1e:66bd)
-	db $FE,$A0
+	db SE_DARK_SCREEN_FLASH, $A0
 	db $46,$FF,$4D
-	db $FE,$FF
+	db SE_DARK_SCREEN_FLASH, $FF
 	db $FF
 
 SuperFangAnim: ; 7a6c5 (1e:66c5)
-	db $FD,$48
+	db SE_DARK_SCREEN_PALETTE, $48
 	db $46,$A1,$04
-	db $FC,$FF
+	db SE_RESET_SCREEN_PALETTE, $FF
 	db $FF
 
 SlashAnim: ; 7a6cd (1e:66cd)
@@ -117008,9 +117054,9 @@ SlashAnim: ; 7a6cd (1e:66cd)
 	db $FF
 
 SubstituteAnim: ; 7a6d1 (1e:66d1)
-	db $F4,$A3
+	db SE_SLIDE_MON_OUT, $A3
 	db $08,$FF,$47
-	db $D9,$FF
+	db SE_SUBSTITUTE_MON, $FF
 	db $FF
 
 BallTossAnim: ; 7a6d9 (1e:66d9)
@@ -117034,23 +117080,23 @@ BallPoofAnim: ; 7a6e9 (1e:66e9)
 	db $FF
 
 ShowPicAnim: ; 7a6ed (1e:66ed)
-	db $DC,$FF
+	db SE_SHOW_ENEMY_MON_PIC, $FF
 	db $FF
 
 HidePicAnim: ; 7a6f0 (1e:66f0)
-	db $DF,$FF
+	db SE_HIDE_ENEMY_MON_PIC, $FF
 	db $FF
 
 EnemyFlashAnim: ; 7a6f3 (1e:66f3)
-	db $DD,$FF
+	db SE_SHOW_MON_PIC, $FF
 	db $FF
 
 PlayerFlashAnim: ; 7a6f6 (1e:66f6)
-	db $F5,$FF
+	db SE_FLASH_MON_PIC, $FF
 	db $FF
 
 EnemyHUDShakeAnim: ; 7a6f9 (1e:66f9)
-	db $E4,$FF
+	db SE_SHAKE_ENEMY_HUD, $FF
 	db $FF
 
 TradeBallDropAnim: ; 7a6fc (1e:66fc)
@@ -117070,33 +117116,33 @@ TradeBallPoofAnim: ; 7a708 (1e:6708)
 	db $FF
 
 XStatItemAnim: ; 7a7c0 (1e:670c)
-	db $F0,$FF
-	db $E2,$FF
-	db $FC,$FF
+	db SE_LIGHT_SCREEN_PALETTE, $FF
+	db SE_SPIRAL_BALLS_INWARD, $FF
+	db SE_RESET_SCREEN_PALETTE, $FF
 	db $FF
 
 ShrinkingSquareAnim: ; 7a713 (1e:6713)
-	db $F0,$FF
+	db SE_LIGHT_SCREEN_PALETTE, $FF
 	db $46,$FF,$43
-	db $FC,$FF
+	db SE_RESET_SCREEN_PALETTE, $FF
 	db $FF
 
 XStatItemBlackAnim: ; 7a71b (1e:671b)
-	db $F9,$FF
-	db $E2,$FF
-	db $FC,$FF
+	db SE_DARKEN_MON_PALETTE, $FF
+	db SE_SPIRAL_BALLS_INWARD, $FF
+	db SE_RESET_SCREEN_PALETTE, $FF
 	db $FF
 
 ShrinkingSquareBlackAnim: ; 7a722 (1e:6722)
-	db $F9,$FF
+	db SE_DARKEN_MON_PALETTE, $FF
 	db $46,$FF,$43
-	db $FC,$FF
+	db SE_RESET_SCREEN_PALETTE, $FF
 	db $FF
 
 UnusedAnim: ; 7a72a (1e:672a)
-	db $F0,$FF
-	db $EC,$FF
-	db $FC,$FF
+	db SE_LIGHT_SCREEN_PALETTE, $FF
+	db SE_SHOOT_MANY_BALLS_UPWARD, $FF
+	db SE_RESET_SCREEN_PALETTE, $FF
 	db $FF
 
 ParalyzeAnim: ; 7a731 (1e:6731)
@@ -117134,11 +117180,11 @@ BallBlockAnim: ; 7a75b (1e:675b)
 	db $FF
 
 FaintAnim: ; 7a75f (1e:675f)
-	db $F6,$5A
+	db SE_SLIDE_MON_DOWN, $5A
 	db $FF
 
 ShakeScreenAnim: ; 7a762 (1e:6762)
-	db $FB,$FF
+	db SE_SHAKE_SCREEN, $FF
 	db $FF
 
 ThrowRockAnim: ; 7a765 (1e:6765)
