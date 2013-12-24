@@ -114865,7 +114865,7 @@ AnimationWavyScreen: ; 79666 (1e:5666)
 	ld d, $80
 	ld e, $8f
 	ld c, $ff
-	ld hl, Unknown_796bf
+	ld hl, WavyScreenLineOffsets
 .asm_7967f
 	push hl
 .asm_79680
@@ -114878,7 +114878,7 @@ AnimationWavyScreen: ; 79666 (1e:5666)
 	ld a, [hl]
 	cp d
 	jr nz, .asm_79691
-	ld hl, Unknown_796bf
+	ld hl, WavyScreenLineOffsets
 .asm_79691
 	dec c
 	jr nz, .asm_7967f
@@ -114904,11 +114904,15 @@ Func_796ae: ; 796ae (1e:56ae)
 	ld a, [hl]
 	cp d
 	ret nz
-	ld hl, Unknown_796bf
+	ld hl, WavyScreenLineOffsets
 	ret
 
-Unknown_796bf: ; 796bf (1e:56bf)
-INCBIN "baserom.gbc",$796bf,$796e0 - $796bf
+WavyScreenLineOffsets: ; 796bf (1e:56bf)
+; Sequence of horizontal line pixel offsets for the wavy screen animation.
+; This sequence vaguely resembles a sine wave.
+	db 0, 0, 0, 0, 0,  1,  1,  1,  2,  2,  2,  2,  2,  1,  1,  1
+	db 0, 0, 0, 0, 0, -1, -1, -1, -2, -2, -2, -2, -2, -1, -1, -1
+	db $80 ; terminator
 
 AnimationSubstitute: ; 796e0 (1e:56e0)
 ; Changes the pokemon's sprite to the mini sprite
