@@ -10584,12 +10584,12 @@ PointerTable_3f22: ; 3f22 (0:3f22)
 	dw UnnamedText_624c1                    ; id = 1B
 	dw UnnamedText_624c6                    ; id = 1C
 	dw UnnamedText_624cb                    ; id = 1D
-	dw $6508
-	dw $6529
+	dw Unknown_62508                        ; id = 1E
+	dw Unknown_62529                        ; id = 1F
 	dw ViridianSchoolNotebook               ; id = 20
 	dw ViridianSchoolBlackboard             ; id = 21
 	dw UnnamedText_21865                    ; id = 22
-	dw $5878
+	dw Unknown_21878                        ; id = 23
 	dw FoundHiddenItemText                  ; id = 24
 	dw HiddenItemBagFullText                ; id = 25
 	dw VermilionGymTrashText                ; id = 26
@@ -45234,7 +45234,8 @@ UnnamedText_21865: ; 21865 (8:5865)
 	ld a, $23
 	jp Func_3ef5
 
-INCBIN "baserom.gbc",$21878,$21879 - $21878
+Unknown_21878: ; 21878 (8:5878)
+	db $FD
 
 Func_21879: ; 21879 (8:5879)
 	ld c, CH0
@@ -102411,6 +102412,8 @@ CeladonCityHotelText: ; 62502 (18:6502)
 	db "@"
 
 	ret
+
+Unknown_62508: ; 62508 (18:6508)
 	db "@"
 
 	call EnableAutoTextBoxDrawing
@@ -102430,7 +102433,8 @@ BookcaseText: ; 62511 (18:6511)
 	ld a, $1f
 	jp Func_3ef5
 
-INCBIN "baserom.gbc",$62529,$6252a - $62529
+Unknown_62529: ; 62529 (18:6529)
+	db $F9
 
 SECTION "bank19",ROMX,BANK[$19]
 
