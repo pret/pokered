@@ -103342,7 +103342,7 @@ _DoFlyOrTeleportAwayGraphics: ; 705ba (1c:45ba)
 	ld a, $c
 	ld [hli], a
 	ld [hl], $c
-	ld de, Unknown_7064f ; $464f
+	ld de, FlyAnimationScreenCoords1 ; $464f
 	call Func_706ae
 	ld c, $28
 	call DelayFrames
@@ -103350,16 +103350,44 @@ _DoFlyOrTeleportAwayGraphics: ; 705ba (1c:45ba)
 	ld a, $b
 	ld [hli], a
 	ld [hl], $8
-	ld de, Unknown_70667 ; $4667
+	ld de, FlyAnimationScreenCoords2 ; $4667
 	call Func_706ae
 	call GBFadeOut2
 	jp Func_70772
 
-Unknown_7064f: ; 7064f (1c:464f)
-INCBIN "baserom.gbc",$7064f,$70667 - $7064f
+FlyAnimationScreenCoords1: ; 7064f (1c:464f)
+; y, x pairs
+; This is the sequence of screen coordinates used by the first part
+; of the Fly overworld animation.
+	db $3C, $48
+	db $3C, $50
+	db $3B, $58
+	db $3A, $60
+	db $39, $68
+	db $37, $70
+	db $37, $78
+	db $33, $80
+	db $30, $88
+	db $2D, $90
+	db $2A, $98
+	db $27, $A0 
 
-Unknown_70667: ; 70667 (1c:4667)
-INCBIN "baserom.gbc",$70667,$7067d - $70667
+FlyAnimationScreenCoords2: ; 70667 (1c:4667)
+; y, x pairs
+; This is the sequence of screen coordinates used by the second part
+; of the Fly overworld animation.
+	db $1A, $90
+	db $19, $80
+	db $17, $70
+	db $15, $60
+	db $12, $50
+	db $0F, $40
+	db $0C, $30
+	db $09, $20
+	db $05, $10
+	db $00, $00 
+
+	db $F0, $00 
 
 Func_7067d: ; 7067d (1c:467d)
 	ld a, $ff
