@@ -75216,19 +75216,26 @@ RocketHideoutElevatorScript_4573a: ; 4573a (11:573a)
 	ret
 
 RocketHideoutElevatorScript_45741: ; 45741 (11:5741)
-	ld hl, Unknown_45754 ; $5754
+	ld hl, RocketHideoutElavatorFloors ; $5754
 	call LoadItemList
-	ld hl, Unknown_45759 ; $5759
+	ld hl, RocketHideoutElevatorWarpMaps ; $5759
 	ld de, $cc5b
 	ld bc, $0006
 	call CopyData
 	ret
 
-Unknown_45754: ; 45754 (11:5754)
-INCBIN "baserom.gbc",$45754,$45759 - $45754
+RocketHideoutElavatorFloors: ; 45754 (11:5754)
+	db $03 ; num elements in list
+	db $55, $54, $61 ; "B1F", "B2F", "B4F"
+	db $FF ; terminator
 
-Unknown_45759: ; 45759 (11:5759)
-INCBIN "baserom.gbc",$45759,$4575f - $45759
+RocketHideoutElevatorWarpMaps: ; 45759 (11:5759)
+; first byte is warp number
+; second byte is map number
+; These specify where the player goes after getting out of the elevator.
+	db $04, ROCKET_HIDEOUT_1
+	db $04, ROCKET_HIDEOUT_2
+	db $02, ROCKET_HIDEOUT_4
 
 Func_4575f: ; 4575f (11:575f)
 	call Delay3
@@ -75246,7 +75253,7 @@ RocketHideoutElevatorText1: ; 4576d (11:576d)
 	call IsItemInBag
 	jr z, .asm_8d8f0 ; 0x45773
 	call RocketHideoutElevatorScript_45741
-	ld hl, Unknown_45759 ; $5759
+	ld hl, RocketHideoutElevatorWarpMaps ; $5759
 	ld a, $61
 	call Predef
 	jr .asm_46c43 ; 0x45780
