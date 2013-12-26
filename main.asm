@@ -74463,7 +74463,7 @@ Func_44fd7: ; 44fd7 (11:4fd7)
 	ld a, [$c102]
 	srl a
 	srl a
-	ld hl, Unknown_45083 ; $5083
+	ld hl, SpinnerPlayerFacingDirections ; $5083
 	ld c, a
 	ld b, $0
 	add hl, bc
@@ -74592,8 +74592,14 @@ SpinnerArrowTilePointers2: ; 45053 (11:5053)
 	db BANK(Tset16_GFX)
 	dw $94D0
 
-Unknown_45083: ; 45083 (11:5083)
-INCBIN "baserom.gbc",$45083,$45087 - $45083
+SpinnerPlayerFacingDirections: ; 45083 (11:5083)
+; This isn't the order of the facing directions.  Rather, it's a list of
+; the facing directions that come next. For example, when the player is
+; facing down (00), the next facing direction is left (08).
+	db $08 ; down -> left
+	db $0C ; up -> right
+	db $04 ; left -> up
+	db $00 ; right -> down
 
 ; these tiles are the animation for the tiles that push the player in dungeons like Rocket HQ
 SpinnerArrowAnimTiles: ; 45087 (11:5087)
