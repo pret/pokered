@@ -3212,7 +3212,7 @@ HandlePartyMenuInput: ; 145a (0:145a)
 	jr HandlePartyMenuInput
 
 DrawPartyMenu: ; 14d4 (0:14d4)
-	ld hl,$6cd2
+	ld hl, DrawPartyMenu_
 	jr DrawPartyMenuCommon
 
 RedrawPartyMenu: ; 14d9 (0:14d9)
@@ -77577,7 +77577,7 @@ FightingDojoHiddenObjects: ; 46fe8 (11:6fe8)
 	db $09,$06,$04 ; XXX, y, x
 	dbw Bank(Func_52a22), Func_52a22
 	db $00,$04,$04 ; XXX, y, x
-	dbw Bank(Func_52a22), Func_52a22
+	dbw Bank(Func_52a08), Func_52a08
 	db $00,$05,$04 ; XXX, y, x
 	dbw Bank(Func_52a15), Func_52a15
 	db $FF
