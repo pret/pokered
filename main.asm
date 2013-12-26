@@ -98520,19 +98520,19 @@ GymTrashScript: ; 5ddfc (17:5dfc)
 	ld a, [$d773]
 	bit 0, a
 	jr z, .asm_5de11
-	ld a, $26
+	ld a, $26 ; DisplayTextID $26 = VermilionGymTrashText (nothing in the trash)
 	jp Func_3ef5
 .asm_5de11
 	bit 1, a
-	jr nz, .asm_5de53
+	jr nz, .resetOrOpenLocks
 	ld a, [$d743]
 	ld b, a
 	ld a, [$cd5b]
 	cp b
-	jr z, .asm_5de23
-	ld a, $26
-	jr .asm_5de7a
-.asm_5de23
+	jr z, .openFirstLock
+	ld a, $26 ; DisplayTextID $26 = VermilionGymTrashText (nothing in the trash)
+	jr .endTrashScript
+.openFirstLock
 	ld hl, $d773
 	set 1, [hl]
 	ld hl, Unknown_5de7d ; $5e7d
@@ -98560,28 +98560,28 @@ GymTrashScript: ; 5ddfc (17:5dfc)
 	ld a, [hl]
 	and $f
 	ld [$d744], a
-	ld a, $3b
-	jr .asm_5de7a
-.asm_5de53
+	ld a, $3b ; DisplayTextID $3b = VermilionGymTrashSuccesText1 (first lock opened!)
+	jr .endTrashScript
+.resetOrOpenLocks
 	ld a, [$d744]
 	ld b, a
 	ld a, [$cd5b]
 	cp b
-	jr z, .asm_5de6e
+	jr z, .openSecondLock
 	ld hl, $d773
 	res 1, [hl]
 	call GenRandom
 	and $e
 	ld [$d743], a
-	ld a, $3e
-	jr .asm_5de7a
-.asm_5de6e
+	ld a, $3e ; DisplayTextID $3e = VermilionGymTrashFailText (locks reset!)
+	jr .endTrashScript
+.openSecondLock
 	ld hl, $d773
 	set 0, [hl]
 	ld hl, $d126
 	set 6, [hl]
-	ld a, $3d
-.asm_5de7a
+	ld a, $3d ; DisplayTextID $3d = VermilionGymTrashSuccesText3 (2nd lock opened!)
+.endTrashScript
 	jp Func_3ef5
 
 Unknown_5de7d: ; 5de7d (17:5e7d)
@@ -103697,10 +103697,10 @@ _HandleMidJump: ; 7087e (1c:487e)
 	jr nc, .asm_70895
 	ld [$d714], a
 	ld b, $0
-	ld hl, Unknown_708ba ; $48ba
+	ld hl, PlayerJumpingYScreenCoords ; $48ba
 	add hl, bc
 	ld a, [hl]
-	ld [$c104], a
+	ld [$c104], a ; player's sprite y coordinate
 	ret
 .asm_70895
 	ld a, [wWalkCounter] ; $cfc5
@@ -103721,8 +103721,10 @@ _HandleMidJump: ; 7087e (1c:487e)
 	ld [wJoypadForbiddenButtonsMask], a
 	ret
 
-Unknown_708ba: ; 708ba (1c:48ba)
-INCBIN "baserom.gbc",$708ba,$708ca - $708ba
+PlayerJumpingYScreenCoords: ; 708ba (1c:48ba)
+; Sequence of y screen coordinates for player's sprite when jumping over a ledge.
+	db $38, $36, $34, $32, $31, $30, $30, $30, $31, $32, $33, $34, $36, $38, $3C, $3C
+
 
 Func_708ca: ; 708ca (1c:48ca)
 	ld a, $e4
