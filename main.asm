@@ -8732,7 +8732,7 @@ Func_3566: ; 3566 (0:3566)
 	call BankswitchHome
 	ld a, [W_TRAINERCLASS] ; $d031
 	dec a
-	ld hl, $5914
+	ld hl, TrainerPicAndMoneyPointers
 	ld bc, $5
 	call AddNTimes
 	ld de, $d033
@@ -8750,7 +8750,7 @@ Func_3566: ; 3566 (0:3566)
 	jp BankswitchBack
 .asm_3594
 	ld hl, $d033
-	ld de, $6ede
+	ld de, RedPicFront
 	ld [hl], e
 	inc hl
 	ld [hl], d
@@ -13759,9 +13759,9 @@ Func_5849:
 	ld a, $2f
 	call Predef
 .asm_59de
-	ld hl, $6d0e
-	ld b, $e
-	call Bankswitch
+	ld hl, Func_3ad0e
+	ld b, Bank(Func_3ad0e)
+	call Bankswitch ; Indirect jump to Func_3ad0e
 	call ClearScreen
 	call Func_5ae6
 	call Func_226e
@@ -13787,7 +13787,7 @@ Func_5a18:
 	call DelayFrames
 	xor a
 	ld [$cc38], a
-	jp $551c
+	jp Func_551c
 
 SSAnne8AfterBattleText2: ; 5a24 (1:5a24)
 	TX_FAR _SSAnne8AfterBattleText2
@@ -13816,12 +13816,12 @@ Func_5a5f: ; 5a5f (1:5a5f)
 	jp InitGame
 .asm_5a75
 	call Func_5317
-	ld hl, $7670
+	ld hl, Tset15_GFX
 	ld a, h
 	ld [$d52f], a
 	ld a, l
 	ld [$d52e], a
-	ld a, $1b
+	ld a, Bank(Tset15_GFX)
 	ld [$d52b], a
 	ld hl, $17d1
 	ld a, h
@@ -39421,7 +39421,7 @@ Func_1a6f0: ; 1a6f0 (6:66f0)
 	ld bc, (BANK(LedgeHoppingShadow) << 8) + $01
 	call CopyVideoDataDouble
 	ld a, $9
-	ld bc, $5448
+	ld bc, $5448 ; b, c = y, x coordinates of shadow
 	ld de, LedgeHoppingShadowOAM ; $6710
 	call WriteOAMBlock
 	ret
@@ -43974,6 +43974,7 @@ UnnamedText_1e946: ; 1e946 (7:6946)
 	TX_FAR _UnnamedText_1e946
 	db "@"
 
+Func_1e94b: ; 1e94b (7:694b)
 	call EnableAutoTextBoxDrawing
 	ld a, $39
 	jp Func_3ef5
@@ -43982,6 +43983,7 @@ NewBicycleText: ; 1e953 (7:6953)
 	TX_FAR _NewBicycleText
 	db "@"
 
+Func_1e958: ; 1e958 (7:6958)
 	call EnableAutoTextBoxDrawing
 	ld a, $05
 	jp Func_3ef5
@@ -43990,6 +43992,7 @@ UnnamedText_1e960: ; 1e960 (7:6960)
 	TX_FAR _UnnamedText_1e960
 	db "@"
 
+Func_1e965: ; 1e965 (7:6965)
 	call EnableAutoTextBoxDrawing
     ld hl, $d2f7
     ld b, $13
@@ -44091,6 +44094,7 @@ UnnamedText_1ea12: ; 1ea12 (7:6a12)
 	TX_FAR _UnnamedText_1ea12
 	db "@"
 
+Func_1eaa17: ; 1ea17 (7:6a17)
 	ld a, [$c109]
 	cp $4
 	ret nz
@@ -44282,6 +44286,7 @@ CinnabarGymGateCoords: ; 1eb48 (7:6b48)
 	db $02,$06,$54,$00
 	db $02,$03,$54,$00
 
+Func_1eb60: ; 1eb60 (7:6b60)
 	call EnableAutoTextBoxDrawing
     ld a, $30
     call Func_3ef5
@@ -44291,6 +44296,7 @@ UnnamedText_1eb69: ; 1eb69 (7:6b69)
 	TX_FAR _UnnamedText_1eb69
 	db "@"
 
+Func_1eb6e: ; 1eb6e (7:6b6e)
 	call EnableAutoTextBoxDrawing
 	ld a, [$c109]
 	cp $4
@@ -45189,6 +45195,7 @@ MonWasReleasedText: ; 0x21820
 	TX_FAR _MonWasReleasedText
 	db "@"
 
+Func_21825: ; 5824 (8:5825)
 	ld a, [$ff00+$aa]
 	cp $1
 	ret z
@@ -45206,6 +45213,7 @@ MonWasReleasedText: ; 0x21820
 	ld a, $22
 	jp Func_3ef5
 
+Func_21845: ; 5845 (8:5845)
 	ld a, [$ff00+$aa]
 	cp $2
 	ret z
@@ -55853,6 +55861,7 @@ TrainerClassMoveChoiceModifications: ; 3989b (e:589b)
 	db 1,0    ; AGATHA
 	db 1,3,0  ; LANCE
 
+TrainerPicAndMoneyPointers: ; 39914 (e:5914)
 ; trainer pic pointers and base money.
 ; money received after battle = base money × level of highest-level enemy mon
 	dw YoungsterPic
@@ -77050,53 +77059,53 @@ HiddenObjectPointers: ; 46a96 (11:6a96)
 
 BattleCenterHiddenObjects: ; 46b40 (11:6b40)
 	db $04,$05,$d0 ; XXX, y, x
-	dbw $08,$5845
+	dbw Bank(Func_21845), Func_21845
 	db $04,$04,$d0 ; XXX, y, x
-	dbw $08,$5825
+	dbw Bank(Func_21825), Func_21825
 	db $FF
 TradeCenterHiddenObjects: ; 46b4d (11:6b4d)
 	db $04,$05,$d0 ; XXX, y, x
-	dbw $08,$5845
+	dbw Bank(Func_21845), Func_21845
 	db $04,$04,$d0 ; XXX, y, x
-	dbw $08,$5825
+	dbw Bank(Func_21825), Func_21825
 	db $FF
 RedsHouse2FHiddenObjects: ; 46b5a (11:6b5a)
 	db $01,$00,$04 ; XXX, y, x
-	dbw $17,$5b86
+	dbw Bank(Func_5db86), Func_5db86
 	db $05,$03,$d0 ; XXX, y, x
-	dbw $17,$5b79
+	dbw Bank(Func_5db79), Func_5db79
 	db $FF
 BluesHouseHiddenObjects: ; 46b67 (11:6b67)
 	db $01,$00,$04 ; XXX, y, x
-	dbw $18,$6509
+	dbw Bank(Func_62509), Func_62509
 	db $01,$01,$04 ; XXX, y, x
-	dbw $18,$6509
+	dbw Bank(Func_62509), Func_62509
 	db $01,$07,$04 ; XXX, y, x
-	dbw $18,$6509
+	dbw Bank(Func_62509), Func_62509
 	db $FF
 OaksLabHiddenObjects: ; 46b7a (11:6b7a)
 	db $00,$04,$04 ; XXX, y, x
-	dbw $07,$6958
+	dbw Bank(Func_1e958), Func_1e958
 	db $00,$05,$04 ; XXX, y, x
-	dbw $07,$6965
+	dbw Bank(Func_1e965), Func_1e965
 	db $01,$00,$04 ; XXX, y, x
-	dbw $07,$6caf
+	dbw Bank(Func_1ecaf), Func_1ecaf
 	db $01,$01,$04 ; XXX, y, x
-	dbw $07,$6caf
+	dbw Bank(Func_1ecaf), Func_1ecaf
 	db $FF
 ViridianPokecenterHiddenObjects: ; 46b93 (11:6b93)
 	db $04,$00,$08 ; XXX, y, x
-	dbw $18,$645d
+	dbw Bank(Func_6245d), Func_6245d
 	db $03,$0d,$04 ; XXX, y, x
-	dbw $18,$6516
+	dbw Bank(Func_62516), Func_62516
 	db $FF
 ViridianMartHiddenObjects: ; 46ba0 (11:6ba0)
 	db $FF
 ViridianSchoolHiddenObjects: ; 46ba1 (11:6ba1)
 	db $04,$03,$20 ; XXX, y, x
-	dbw $14,$6996
+	dbw Bank(Func_52996), Func_52996
 	db $00,$03,$21 ; XXX, y, x
-	dbw $17,$5c1a
+	dbw Bank(Func_5dc1a), Func_5dc1a
 	db $FF
 ViridianGymHiddenObjects: ; 46bae (11:6bae)
 	db $0f,$0f,$04 ; XXX, y, x
@@ -77106,9 +77115,9 @@ ViridianGymHiddenObjects: ; 46bae (11:6bae)
 	db $FF
 Museum1FHiddenObjects: ; 46bbb (11:6bbb)
 	db $03,$02,$04 ; XXX, y, x
-	dbw $17,$5bad
+	dbw Bank(AerodactylFossil), AerodactylFossil
 	db $06,$02,$04 ; XXX, y, x
-	dbw $17,$5bc3
+	dbw Bank(KabutopsFossil), KabutopsFossil
 	db $FF
 PewterGymHiddenObjects: ; 46bc8 (11:6bc8)
 	db $0a,$03,$04 ; XXX, y, x
@@ -77120,15 +77129,15 @@ PewterMartHiddenObjects: ; 46bd5 (11:6bd5)
 	db $FF
 PewterPokecenterHiddenObjects: ; 46bd6 (11:6bd6)
 	db $04,$00,$08 ; XXX, y, x
-	dbw $18,$645d
+	dbw Bank(Func_6245d), Func_6245d
 	db $03,$0d,$04 ; XXX, y, x
-	dbw $18,$6516
+	dbw Bank(Func_62516), Func_62516
 	db $FF
 CeruleanPokecenterHiddenObjects: ; 46be3 (11:6be3)
 	db $04,$00,$08 ; XXX, y, x
-	dbw $18,$645d
+	dbw Bank(Func_6245d), Func_6245d
 	db $03,$0d,$04 ; XXX, y, x
-	dbw $18,$6516
+	dbw Bank(Func_62516), Func_62516
 	db $FF
 CeruleanGymHiddenObjects: ; 46bf0 (11:6bf0)
 	db $0b,$03,$04 ; XXX, y, x
@@ -77140,63 +77149,63 @@ CeruleanMartHiddenObjects: ; 46bfd (11:6bfd)
 	db $FF
 LavenderPokecenterHiddenObjects: ; 46bfe (11:6bfe)
 	db $04,$00,$08 ; XXX, y, x
-	dbw $18,$645d
+	dbw Bank(Func_6245d), Func_6245d
 	db $03,$0d,$04 ; XXX, y, x
-	dbw $18,$6516
+	dbw Bank(Func_62516), Func_62516
 	db $FF
 VermilionPokecenterHiddenObjects: ; 46c0b (11:6c0b)
 	db $03,$0d,$04 ; XXX, y, x
-	dbw $18,$6516
+	dbw Bank(Func_62516), Func_62516
 	db $04,$00,$04 ; XXX, y, x
-	dbw $18,$645d
+	dbw Bank(Func_6245d), Func_6245d
 	db $FF
 VermilionGymHiddenObjects: ; 46c18 (11:6c18)
 	db $0e,$03,$04 ; XXX, y, x
-	dbw BANK(GymStatues),GymStatues
+	dbw BANK(GymStatues), GymStatues
 	db $0e,$06,$04 ; XXX, y, x
-	dbw BANK(GymStatues),GymStatues
+	dbw BANK(GymStatues), GymStatues
 	db $01,$06,$00 ; XXX, y, x
-	dbw $17, Func_5ddef
+	dbw Bank(Func_5ddef), Func_5ddef
 	db $07,$01,$00 ; XXX, y, x
-	dbw $17, GymTrashScript
+	dbw Bank(GymTrashScript), GymTrashScript
 	db $09,$01,$01 ; XXX, y, x
-	dbw $17, GymTrashScript
+	dbw Bank(GymTrashScript), GymTrashScript
 	db $0b,$01,$02 ; XXX, y, x
-	dbw $17, GymTrashScript
+	dbw Bank(GymTrashScript), GymTrashScript
 	db $07,$03,$03 ; XXX, y, x
-	dbw $17, GymTrashScript
+	dbw Bank(GymTrashScript), GymTrashScript
 	db $09,$03,$04 ; XXX, y, x
-	dbw $17, GymTrashScript
+	dbw Bank(GymTrashScript), GymTrashScript
 	db $0b,$03,$05 ; XXX, y, x
-	dbw $17, GymTrashScript
+	dbw Bank(GymTrashScript), GymTrashScript
 	db $07,$05,$06 ; XXX, y, x
-	dbw $17, GymTrashScript
+	dbw Bank(GymTrashScript), GymTrashScript
 	db $09,$05,$07 ; XXX, y, x
-	dbw $17, GymTrashScript
+	dbw Bank(GymTrashScript), GymTrashScript
 	db $0b,$05,$08 ; XXX, y, x
-	dbw $17, GymTrashScript
+	dbw Bank(GymTrashScript), GymTrashScript
 	db $07,$07,$09 ; XXX, y, x
-	dbw $17, GymTrashScript
+	dbw Bank(GymTrashScript), GymTrashScript
 	db $09,$07,$0a ; XXX, y, x
-	dbw $17, GymTrashScript
+	dbw Bank(GymTrashScript), GymTrashScript
 	db $0b,$07,$0b ; XXX, y, x
-	dbw $17, GymTrashScript
+	dbw Bank(GymTrashScript), GymTrashScript
 	db $07,$09,$0c ; XXX, y, x
-	dbw $17, GymTrashScript
+	dbw Bank(GymTrashScript), GymTrashScript
 	db $09,$09,$0d ; XXX, y, x
-	dbw $17, GymTrashScript
+	dbw Bank(GymTrashScript), GymTrashScript
 	db $0b,$09,$0e ; XXX, y, x
-	dbw $17, GymTrashScript
+	dbw Bank(GymTrashScript), GymTrashScript
 	db $FF
 CeladonMansion2HiddenObjects: ; 46c85 (11:6c85)
 	db $05,$00,$04 ; XXX, y, x
-	dbw $18,$6516
+	dbw Bank(Func_62516), Func_62516
 	db $FF
 CeladonPokecenterHiddenObjects: ; 46c8c (11:6c8c)
 	db $04,$00,$08 ; XXX, y, x
-	dbw $18,$645d
+	dbw Bank(Func_6245d), Func_6245d
 	db $03,$0d,$04 ; XXX, y, x
-	dbw $18,$6516
+	dbw Bank(Func_62516), Func_62516
 	db $FF
 CeladonGymHiddenObjects: ; 46c99 (11:6c99)
 	db $0f,$03,$04 ; XXX, y, x
@@ -77206,77 +77215,77 @@ CeladonGymHiddenObjects: ; 46c99 (11:6c99)
 	db $FF
 GameCornerHiddenObjects: ; 46ca6 (11:6ca6)
 	db $0f,$12,$d0 ; XXX, y, x
-	dbw $0d,$7e2d
+	dbw Bank(Func_37e2d), Func_37e2d
 	db $0e,$12,$d0 ; XXX, y, x
-	dbw $0d,$7e2d
+	dbw Bank(Func_37e2d), Func_37e2d
 	db $0d,$12,$d0 ; XXX, y, x
-	dbw $0d,$7e2d
+	dbw Bank(Func_37e2d), Func_37e2d
 	db $0c,$12,$d0 ; XXX, y, x
-	dbw $0d,$7e2d
+	dbw Bank(Func_37e2d), Func_37e2d
 	db $0b,$12,$d0 ; XXX, y, x
-	dbw $0d,$7e2d
+	dbw Bank(Func_37e2d), Func_37e2d
 	db $0a,$12,$ff ; XXX, y, x
-	dbw $0d,$7e2d
+	dbw Bank(Func_37e2d), Func_37e2d
 	db $0a,$0d,$d0 ; XXX, y, x
-	dbw $0d,$7e2d
+	dbw Bank(Func_37e2d), Func_37e2d
 	db $0b,$0d,$d0 ; XXX, y, x
-	dbw $0d,$7e2d
+	dbw Bank(Func_37e2d), Func_37e2d
 	db $0c,$0d,$fe ; XXX, y, x
-	dbw $0d,$7e2d
+	dbw Bank(Func_37e2d), Func_37e2d
 	db $0d,$0d,$d0 ; XXX, y, x
-	dbw $0d,$7e2d
+	dbw Bank(Func_37e2d), Func_37e2d
 	db $0e,$0d,$d0 ; XXX, y, x
-	dbw $0d,$7e2d
+	dbw Bank(Func_37e2d), Func_37e2d
 	db $0f,$0d,$d0 ; XXX, y, x
-	dbw $0d,$7e2d
+	dbw Bank(Func_37e2d), Func_37e2d
 	db $0f,$0c,$d0 ; XXX, y, x
-	dbw $0d,$7e2d
+	dbw Bank(Func_37e2d), Func_37e2d
 	db $0e,$0c,$d0 ; XXX, y, x
-	dbw $0d,$7e2d
+	dbw Bank(Func_37e2d), Func_37e2d
 	db $0d,$0c,$d0 ; XXX, y, x
-	dbw $0d,$7e2d
+	dbw Bank(Func_37e2d), Func_37e2d
 	db $0c,$0c,$d0 ; XXX, y, x
-	dbw $0d,$7e2d
+	dbw Bank(Func_37e2d), Func_37e2d
 	db $0b,$0c,$d0 ; XXX, y, x
-	dbw $0d,$7e2d
+	dbw Bank(Func_37e2d), Func_37e2d
 	db $0a,$0c,$d0 ; XXX, y, x
-	dbw $0d,$7e2d
+	dbw Bank(Func_37e2d), Func_37e2d
 	db $0a,$07,$d0 ; XXX, y, x
-	dbw $0d,$7e2d
+	dbw Bank(Func_37e2d), Func_37e2d
 	db $0b,$07,$d0 ; XXX, y, x
-	dbw $0d,$7e2d
+	dbw Bank(Func_37e2d), Func_37e2d
 	db $0c,$07,$d0 ; XXX, y, x
-	dbw $0d,$7e2d
+	dbw Bank(Func_37e2d), Func_37e2d
 	db $0d,$07,$d0 ; XXX, y, x
-	dbw $0d,$7e2d
+	dbw Bank(Func_37e2d), Func_37e2d
 	db $0e,$07,$d0 ; XXX, y, x
-	dbw $0d,$7e2d
+	dbw Bank(Func_37e2d), Func_37e2d
 	db $0f,$07,$d0 ; XXX, y, x
-	dbw $0d,$7e2d
+	dbw Bank(Func_37e2d), Func_37e2d
 	db $0f,$06,$d0 ; XXX, y, x
-	dbw $0d,$7e2d
+	dbw Bank(Func_37e2d), Func_37e2d
 	db $0e,$06,$d0 ; XXX, y, x
-	dbw $0d,$7e2d
+	dbw Bank(Func_37e2d), Func_37e2d
 	db $0d,$06,$d0 ; XXX, y, x
-	dbw $0d,$7e2d
+	dbw Bank(Func_37e2d), Func_37e2d
 	db $0c,$06,$fd ; XXX, y, x
-	dbw $0d,$7e2d
+	dbw Bank(Func_37e2d), Func_37e2d
 	db $0b,$06,$d0 ; XXX, y, x
-	dbw $0d,$7e2d
+	dbw Bank(Func_37e2d), Func_37e2d
 	db $0a,$06,$d0 ; XXX, y, x
-	dbw $0d,$7e2d
+	dbw Bank(Func_37e2d), Func_37e2d
 	db $0a,$01,$d0 ; XXX, y, x
-	dbw $0d,$7e2d
+	dbw Bank(Func_37e2d), Func_37e2d
 	db $0b,$01,$d0 ; XXX, y, x
-	dbw $0d,$7e2d
+	dbw Bank(Func_37e2d), Func_37e2d
 	db $0c,$01,$d0 ; XXX, y, x
-	dbw $0d,$7e2d
+	dbw Bank(Func_37e2d), Func_37e2d
 	db $0d,$01,$d0 ; XXX, y, x
-	dbw $0d,$7e2d
+	dbw Bank(Func_37e2d), Func_37e2d
 	db $0e,$01,$d0 ; XXX, y, x
-	dbw $0d,$7e2d
+	dbw Bank(Func_37e2d), Func_37e2d
 	db $0f,$01,$d0 ; XXX, y, x
-	dbw $0d,$7e2d
+	dbw Bank(Func_37e2d), Func_37e2d
 	db $08,$00,COIN+10
 	dbw BANK(HiddenCoins),HiddenCoins
 	db $10,$01,COIN+10
@@ -77304,15 +77313,15 @@ GameCornerHiddenObjects: ; 46ca6 (11:6ca6)
 	db $FF
 CeladonHotelHiddenObjects: ; 46dc7 (11:6dc7)
 	db $03,$0d,$04 ; XXX, y, x
-	dbw $18,$6516
+	dbw Bank(Func_62516), Func_62516
 	db $04,$00,$08 ; XXX, y, x
-	dbw $18,$645d
+	dbw Bank(Func_6245d), Func_6245d
 	db $FF
 FuchsiaPokecenterHiddenObjects: ; 46dd4 (11:6dd4)
 	db $03,$0d,$04 ; XXX, y, x
-	dbw $18,$6516
+	dbw Bank(Func_62516), Func_62516
 	db $04,$00,$04 ; XXX, y, x
-	dbw $18,$645d
+	dbw Bank(Func_6245d), Func_6245d
 	db $FF
 FuchsiaGymHiddenObjects: ; 46de1 (11:6de1)
 	db $0f,$03,$04 ; XXX, y, x
@@ -77324,23 +77333,23 @@ CinnabarGymHiddenObjects: ; 46dee (11:6dee)
 	db $0d,$11,$04 ; XXX, y, x
 	dbw BANK(GymStatues),GymStatues
 	db $07,$0f,$01 ; XXX, y, x
-	dbw $07,$6a17
+	dbw Bank(Func_1eaa17), Func_1eaa17
 	db $01,$0a,$12 ; XXX, y, x
-	dbw $07,$6a17
+	dbw Bank(Func_1eaa17), Func_1eaa17
 	db $07,$09,$13 ; XXX, y, x
-	dbw $07,$6a17
+	dbw Bank(Func_1eaa17), Func_1eaa17
 	db $0d,$09,$14 ; XXX, y, x
-	dbw $07,$6a17
+	dbw Bank(Func_1eaa17), Func_1eaa17
 	db $0d,$01,$05 ; XXX, y, x
-	dbw $07,$6a17
+	dbw Bank(Func_1eaa17), Func_1eaa17
 	db $07,$01,$16 ; XXX, y, x
-	dbw $07,$6a17
+	dbw Bank(Func_1eaa17), Func_1eaa17
 	db $FF
 CinnabarPokecenterHiddenObjects: ; 46e19 (11:6e19)
 	db $04,$00,$04 ; XXX, y, x
-	dbw $18,$645d
+	dbw Bank(Func_6245d), Func_6245d
 	db $03,$0d,$04 ; XXX, y, x
-	dbw $18,$6516
+	dbw Bank(Func_62516), Func_62516
 	db $FF
 SaffronGymHiddenObjects: ; 46e26 (11:6e26)
 	db $0f,$09,$04 ; XXX, y, x
@@ -77348,15 +77357,15 @@ SaffronGymHiddenObjects: ; 46e26 (11:6e26)
 	db $FF
 MtMoonPokecenterHiddenObjects: ; 46e2d (11:6e2d)
 	db $04,$00,$08 ; XXX, y, x
-	dbw $18,$645d
+	dbw Bank(Func_6245d), Func_6245d
 	db $03,$0d,$04 ; XXX, y, x
-	dbw $18,$6516
+	dbw Bank(Func_62516), Func_62516
 	db $FF
 RockTunnelPokecenterHiddenObjects: ; 46e3a (11:6e3a)
 	db $04,$00,$08 ; XXX, y, x
-	dbw $18,$645d
+	dbw Bank(Func_6245d), Func_6245d
 	db $03,$0d,$04 ; XXX, y, x
-	dbw $18,$6516
+	dbw Bank(Func_62516), Func_62516
 	db $FF
 ViridianForestHiddenObjects: ; 46e47 (11:6e47)
 	db $12,$01,POTION
@@ -77372,9 +77381,9 @@ MtMoon3HiddenObjects: ; 46e54 (11:6e54)
 	db $FF
 IndigoPlateauHiddenObjects: ; 46e61 (11:6e61)
 	db $0d,$08,$ff ; XXX, y, x
-	dbw $14,$6a2f
+	dbw Bank(Func_52a2f), Func_52a2f
 	db $0d,$0b,$00 ; XXX, y, x
-	dbw $14,$6a2f
+	dbw Bank(Func_52a2f), Func_52a2f
 	db $FF
 Route25HiddenObjects: ; 46e6e (11:6e6e)
 	db $03,$26,ETHER
@@ -77388,9 +77397,9 @@ Route9HiddenObjects: ; 46e7b (11:6e7b)
 	db $FF
 SSAnne6HiddenObjects: ; 46e82 (11:6e82)
 	db $05,$0d,$00 ; XXX, y, x
-	dbw $17, Func_5ddef
+	dbw Bank(Func_5ddef), Func_5ddef
 	db $07,$0d,$00 ; XXX, y, x
-	dbw $17, Func_5ddef
+	dbw Bank(Func_5ddef), Func_5ddef
 	db $09,$0d,GREAT_BALL
 	dbw BANK(HiddenItems),HiddenItems
 	db $FF
@@ -77418,9 +77427,9 @@ RocketHideout4HiddenObjects: ; 46eb7 (11:6eb7)
 	db $FF
 SaffronPokecenterHiddenObjects: ; 46ebe (11:6ebe)
 	db $04,$00,$04 ; XXX, y, x
-	dbw $18,$645d
+	dbw Bank(Func_6245d), Func_6245d
 	db $03,$0d,$04 ; XXX, y, x
-	dbw $18,$6516
+	dbw Bank(Func_62516), Func_62516
 	db $FF
 PokemonTower5HiddenObjects: ; 46ecb (11:6ecb)
 	db $0c,$04,ELIXER
@@ -77482,21 +77491,21 @@ Mansion1HiddenObjects: ; 46f2b (11:6f2b)
 	db $FF
 Mansion2HiddenObjects: ; 46f38 (11:6f38)
 	db $0b,$02,$04 ; XXX, y, x
-	dbw $14,$6037
+	dbw Bank(Func_52037), Func_52037
 	db $FF
 Mansion3HiddenObjects: ; 46f3f (11:6f3f)
 	db $09,$01,MAX_REVIVE
 	dbw BANK(HiddenItems),HiddenItems
 	db $05,$0a,$04 ; XXX, y, x
-	dbw $14,$627a
+	dbw Bank(Func_5227a), Func_5227a
 	db $FF
 Mansion4HiddenObjects: ; 46f4c (11:6f4c)
 	db $09,$01,RARE_CANDY
 	dbw BANK(HiddenItems),HiddenItems
 	db $03,$14,$04 ; XXX, y, x
-	dbw $14,$6420
+	dbw Bank(Func_52420), Func_52420
 	db $19,$12,$04 ; XXX, y, x
-	dbw $14,$6420
+	dbw Bank(Func_52420), Func_52420
 	db $FF
 Route23HiddenObjects: ; 46f5f (11:6f5f)
 	db $2c,$09,FULL_RESTORE
@@ -77518,7 +77527,7 @@ Unused6FHiddenObjects: ; 46f7f (11:6f7f)
 	db $FF
 BillsHouseHiddenObjects: ; 46f86 (11:6f86)
 	db $04,$01,$04 ; XXX, y, x
-	dbw $07,$6b6e
+	dbw Bank(Func_1eb6e), Func_1eb6e
 	db $FF
 ViridianCityHiddenObjects: ; 46f8d (11:6f8d)
 	db $04,$0e,POTION
@@ -77526,75 +77535,75 @@ ViridianCityHiddenObjects: ; 46f8d (11:6f8d)
 	db $FF
 SafariZoneRestHouse2HiddenObjects: ; 46f94 (11:6f94)
 	db $04,$00,$08 ; XXX, y, x
-	dbw $18,$645d
+	dbw Bank(Func_6245d), Func_6245d
 	db $03,$0d,$04 ; XXX, y, x
-	dbw $18,$6516
+	dbw Bank(Func_62516), Func_62516
 	db $FF
 SafariZoneRestHouse3HiddenObjects: ; 46fa1 (11:6fa1)
 	db $04,$00,$08 ; XXX, y, x
-	dbw $18,$645d
+	dbw Bank(Func_6245d), Func_6245d
 	db $03,$0d,$04 ; XXX, y, x
-	dbw $18,$6516
+	dbw Bank(Func_62516), Func_62516
 	db $FF
 SafariZoneRestHouse4HiddenObjects: ; 46fae (11:6fae)
 	db $04,$00,$08 ; XXX, y, x
-	dbw $18,$645d
+	dbw Bank(Func_6245d), Func_6245d
 	db $03,$0d,$04 ; XXX, y, x
-	dbw $18,$6516
+	dbw Bank(Func_62516), Func_62516
 	db $FF
 UnusedB9HiddenObjects: ; 46fbb (11:6fbb)
 	db $02,$01,$04 ; XXX, y, x
-	dbw $17,$5b8f
+	dbw Bank(Func_5db8f), Func_5db8f
 	db $FF
 LavenderHouse1HiddenObjects: ; 46fc2 (11:6fc2)
 	db $01,$00,$00 ; XXX, y, x
-	dbw $07,$6b60
+	dbw Bank(Func_1eb60), Func_1eb60
 	db $01,$01,$00 ; XXX, y, x
-	dbw $07,$6b60
+	dbw Bank(Func_1eb60), Func_1eb60
 	db $01,$07,$00 ; XXX, y, x
-	dbw $07,$6b60
+	dbw Bank(Func_1eb60), Func_1eb60
 	db $FF
 CeladonMansion5HiddenObjects: ; 46fd5 (11:6fd5)
 	db $00,$03,$34 ; XXX, y, x
-	dbw $17,$5c1a
+	dbw Bank(Func_5dc1a), Func_5dc1a
 	db $00,$04,$34 ; XXX, y, x
-	dbw $17,$5c1a
+	dbw Bank(Func_5dc1a), Func_5dc1a
 	db $04,$03,$35 ; XXX, y, x
-	dbw $14,$6996
+	dbw Bank(Func_52996), Func_52996
 	db $FF
 FightingDojoHiddenObjects: ; 46fe8 (11:6fe8)
 	db $09,$03,$04 ; XXX, y, x
-	dbw $14,$6a22
+	dbw Bank(Func_52a22), Func_52a22
 	db $09,$06,$04 ; XXX, y, x
-	dbw $14,$6a22
+	dbw Bank(Func_52a22), Func_52a22
 	db $00,$04,$04 ; XXX, y, x
-	dbw $14,$6a08
+	dbw Bank(Func_52a22), Func_52a22
 	db $00,$05,$04 ; XXX, y, x
-	dbw $14,$6a15
+	dbw Bank(Func_52a15), Func_52a15
 	db $FF
 IndigoPlateauLobbyHiddenObjects: ; 47001 (11:7001)
 	db $07,$0f,$04 ; XXX, y, x
-	dbw $18,$6516
+	dbw Bank(Func_62516), Func_62516
 	db $FF
 CinnabarLab4HiddenObjects: ; 47008 (11:7008)
 	db $04,$00,$04 ; XXX, y, x
-	dbw $18,$6516
+	dbw Bank(Func_62516), Func_62516
 	db $04,$02,$04 ; XXX, y, x
-	dbw $18,$6516
+	dbw Bank(Func_62516), Func_62516
 	db $FF
 BikeShopHiddenObjects: ; 47015 (11:7015)
 	db $00,$01,$d0 ; XXX, y, x
-	dbw $07,$694b
+	dbw Bank(Func_1e94b), Func_1e94b
 	db $01,$02,$d0 ; XXX, y, x
-	dbw $07,$694b
+	dbw Bank(Func_1e94b), Func_1e94b
 	db $02,$01,$d0 ; XXX, y, x
-	dbw $07,$694b
+	dbw Bank(Func_1e94b), Func_1e94b
 	db $02,$03,$d0 ; XXX, y, x
-	dbw $07,$694b
+	dbw Bank(Func_1e94b), Func_1e94b
 	db $04,$00,$d0 ; XXX, y, x
-	dbw $07,$694b
+	dbw Bank(Func_1e94b), Func_1e94b
 	db $05,$01,$d0 ; XXX, y, x
-	dbw $07,$694b
+	dbw Bank(Func_1e94b), Func_1e94b
 	db $FF
 Route11HiddenObjects: ; 4703a (11:703a)
 	db $05,$30,ESCAPE_ROPE
@@ -77606,7 +77615,7 @@ Route12HiddenObjects: ; 47041 (11:7041)
 	db $FF
 SilphCo11FHiddenObjects: ; 47048 (11:7048)
 	db $0c,$0a,$04 ; XXX, y, x
-	dbw $18,$6516
+	dbw Bank(Func_62516), Func_62516
 	db $FF
 Route17HiddenObjects: ; 4704f (11:704f)
 	db $0e,$0f,RARE_CANDY
@@ -79241,17 +79250,17 @@ CeladonGameCornerScript1: ; 48c19 (12:4c19)
 	ld a, $b
 	ld [H_SPRITEHEIGHT], a
 	call SetSpriteMovementBytesToFF
-	ld de, $4c5a
+	ld de, MovementData_48c5a
 	ld a, [$d361]
 	cp $6
 	jr nz, .asm_48c43
-	ld de, $4c63
+	ld de, MovementData_48c63
 	jr .asm_48c4d
 .asm_48c43
 	ld a, [$d362]
 	cp $8
 	jr nz, .asm_48c4d
-	ld de, $4c63
+	ld de, MovementData_48c63
 .asm_48c4d
 	ld a, $b
 	ld [H_DOWNARROWBLINKCNT2], a
@@ -85615,6 +85624,8 @@ Func_5225b: ; 5225b (14:625b)
 	ld hl, $d732
 	set 4, [hl]
 	ret
+
+Func_5227a: ; 5227a (14:627a)
 	ld a, [$c109]
 	cp $4
 	ret nz
@@ -85770,6 +85781,8 @@ Mansion4Script_523cf: ; 523cf (14:63cf)
 	ld bc, $808
 	call Func_5202f
 	ret
+
+Func_52420: ; 52420 (14:6420)
 	ld a, [$c109]
 	cp $4
 	ret nz
@@ -96562,7 +96575,7 @@ FightingDojoScript1: ; 5cd83 (17:4d83)
 FightingDojoScript3: ; 5cdc6 (17:4dc6)
 	ld a, [$d057]
 	cp $ff
-	jp z, $4d70
+	jp z, FightingDojoScript_5cd70
 	ld a, [$cf0d]
 	and a
 	jr z, .asm_5cde4
@@ -98255,6 +98268,7 @@ Func_5db86: ; 5db86 (17:5b86)
 
 Route15UpstairsLeftBinoculars: ; 5db8e (17:5b8e)
 	db $fc
+Func_5db8f: ; 5db8f (17:5b8f)
 	ld a, [$c109]
 	cp $4 ; i
 	ret nz
@@ -98270,7 +98284,8 @@ Route15UpstairsBinocularsText: ; 5dba8 (17:5ba8)
 	TX_FAR _Route15UpstairsBinocularsText
 	db "@"
 
-	ld a, $b7
+AerodactylFossil: ; 5dbad (17:5bad)
+	ld a, FOSSIL_AERODACTYL
 	ld [$cf91], a
 	call DisplayMonFrontSpriteInBox
 	call EnableAutoTextBoxDrawing
@@ -98282,7 +98297,8 @@ AerodactylFossilText: ; 5dbbe (17:5bbe)
 	TX_FAR _AerodactylFossilText
 	db "@"
 
-	ld a, $b6
+KabutopsFossil: ; 5bdc3 (17:5bc3)
+	ld a, FOSSIL_KABUTOPS
 	ld [$cf91], a
 	call DisplayMonFrontSpriteInBox
 	call EnableAutoTextBoxDrawing
@@ -102454,6 +102470,7 @@ CeladonCityHotelText: ; 62502 (18:6502)
 Unknown_62508: ; 62508 (18:6508)
 	db "@"
 
+Func_62509: ; 6509 (18:6509)
 	call EnableAutoTextBoxDrawing
 	ld a, $e
 	jp Func_3ef5
@@ -102462,6 +102479,7 @@ BookcaseText: ; 62511 (18:6511)
 	TX_FAR _BookcaseText
 	db "@"
 
+Func_62516: ; 62516 (18:6516)
 	ld a, [$c109]
 	cp $4 ; check to see if player is facing up
 	ret nz
@@ -115996,10 +116014,11 @@ Func_79f54: ; 79f54 (1e:5f54)
 .asm_79f73
 	push bc
 	call Func_79f92
-	ld bc, $5f7e
+	ld bc, .asm_79f7e
 	push bc
 	ld c, $4
 	jp [hl]
+.asm_79f7e
 	ld a, [rOBP1] ; $FF00+$49
 	xor $64
 	ld [rOBP1], a ; $FF00+$49
