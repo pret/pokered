@@ -107626,7 +107626,7 @@ Func_73701: ; 0x73701
 
 SaveSAV: ;$770a
 	ld b,1
-	ld hl,$5def ; LoadGameMenuInGame
+	ld hl,Func_5def ; LoadGameMenuInGame
 	call Bankswitch
 	ld hl,WouldYouLikeToSaveText
 	call SaveSAVConfirm
@@ -108258,11 +108258,11 @@ Func_740ba: ; 740ba (1d:40ba)
 	jr nz, .asm_740bf
 	ret
 
-Func_740cb: ; 740cb (1d:40cb)
+DisplayCreditsMon: ; 740cb (1d:40cb)
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED],a
 	call SaveScreenTilesToBuffer1
-	call Func_74183
+	call FillMiddleOfScreenWithWhite
 
 	; display the next monster from CreditsMons
 	ld hl,$CD3E
@@ -108289,7 +108289,7 @@ Func_740cb: ; 740cb (1d:40cb)
 	ld [$FF4B],a
 	ld hl,$9C00
 	call Func_74164
-	call Func_74183
+	call FillMiddleOfScreenWithWhite
 	ld a,$FC
 	ld [$FF47],a
 	ld bc,7
@@ -108379,22 +108379,22 @@ Func_7417b: ; 7417b (1d:417b)
 	ld a, $7e
 	jp FillMemory
 
-Func_74183: ; 74183 (1d:4183)
+FillMiddleOfScreenWithWhite: ; 74183 (1d:4183)
 	FuncCoord 0, 4 ; $c3f0
 	ld hl, Coord
-	ld bc, $c8
-	ld a, $7f
+	ld bc, $c8 ; 10 rows of 20 tiles each
+	ld a, $7f ; blank white tile
 	jp FillMemory
 
 Func_7418e: ; 7418e (1d:418e)
-	ld de, Unknown_74243 ; $4243
+	ld de, CreditsOrder ; $4243
 	push de
 .asm_74192
 	pop de
 	FuncCoord 9, 6 ; $c421
 	ld hl, Coord
 	push hl
-	call Func_74183
+	call FillMiddleOfScreenWithWhite
 	pop hl
 .asm_7419b
 	ld a, [de]
@@ -108411,7 +108411,7 @@ Func_7418e: ; 7418e (1d:418e)
 	cp $fb
 	jr z, .asm_741f4
 	cp $fa
-	jr z, .asm_74201
+	jr z, .showTheEnd
 	push hl
 	push hl
 	ld hl, CreditsTextPointers ; $42c3
@@ -108442,7 +108442,7 @@ Func_7418e: ; 7418e (1d:418e)
 	ld c, $6e
 .asm_741de
 	call DelayFrames
-	call Func_740cb
+	call DisplayCreditsMon
 	jr .asm_74192
 .asm_741e6
 	call Func_740ba
@@ -108461,10 +108461,10 @@ Func_7418e: ; 7418e (1d:418e)
 	pop de
 	pop de
 	jr .asm_7419b
-.asm_74201
+.showTheEnd
 	ld c, $10
 	call DelayFrames
-	call Func_74183
+	call FillMiddleOfScreenWithWhite
 	pop de
 	ld de, TheEndGfx
 	ld hl, $9600
@@ -108484,8 +108484,46 @@ UnnamedText_74229: ; 74229 (1d:4229)
 	db $60," ",$62," ",$64,"  ",$64," ",$66," ",$68,"@"
 	db $61," ",$63," ",$65,"  ",$65," ",$67," ",$69,"@"
 
-Unknown_74243: ; 74243 (1d:4243)
-INCBIN "baserom.gbc",$74243,$742c3 - $74243
+CreditsOrder: ; 74243 (1d:4243)
+; subsequent credits elements will be displayed on separate lines.
+; $FF, $FE, $FD, $FC, $FB, and $FA are commands that are used
+; to go to the next set of credits texts.
+	db CRED_MON, CRED_VERSION, $FF
+	db CRED_DIRECTOR, CRED_TAJIRI, $FF
+	db CRED_PROGRAMMERS, CRED_TA_OOTA, CRED_MORIMOTO, $FD
+	db CRED_PROGRAMMERS, CRED_WATANABE, CRED_MASUDE, CRED_TAMADA, $FE
+	db CRED_CHAR_DESIGN, CRED_SUGIMORI, CRED_NISHIDA, $FF
+	db CRED_MUSIC, CRED_MASUDE, $FD
+	db CRED_SOUND_EFFECTS, CRED_MASUDE, $FE
+	db CRED_GAME_DESIGN, CRED_TAJIRI, $FF
+	db CRED_MONSTER_DESIGN, CRED_SUGIMORI, CRED_NISHIDA, CRED_FUZIWARA, $FD
+	db CRED_MONSTER_DESIGN, CRED_MORIMOTO, CRED_SA_OOTA, CRED_YOSHIKAWA, $FE
+	db CRED_GAME_SCENE, CRED_TAJIRI, $FD
+	db CRED_GAME_SCENE, CRED_TANIGUCHI, CRED_NONOMURA, CRED_ZINNAI, $FE
+	db CRED_PARAM, CRED_NISINO, CRED_TA_NAKAMURA, $FF
+	db CRED_MAP, CRED_TAJIRI, CRED_NISINO, $FD
+	db CRED_MAP, CRED_MATSUSIMA, CRED_NONOMURA, CRED_TANIGUCHI, $FE
+	db CRED_TEST, CRED_KAKEI, CRED_TSUCHIYA, $FD
+	db CRED_TEST, CRED_TA_NAKAMURA, CRED_YUDA, $FE
+	db CRED_SPECIAL, CRED_HISHIDA, CRED_SAKAI, $FD
+	db CRED_SPECIAL, CRED_YAMAGUCHI, CRED_YAMAMOTO, $FC
+	db CRED_SPECIAL, CRED_TOMISAWA, CRED_KAWAMOTO, CRED_TO_OOTA, $FE
+	db CRED_PRODUCERS, CRED_MIYAMOTO, $FD
+	db CRED_PRODUCERS, CRED_KAWAGUCHI, $FC
+	db CRED_PRODUCERS, CRED_ISHIHARA, $FE
+	db CRED_US_STAFF, $FD
+	db CRED_US_COORD, CRED_TILDEN, $FD
+	db CRED_US_COORD, CRED_KAWAKAMI, CRED_HI_NAKAMURA, $FC
+	db CRED_US_COORD, CRED_GIESE, CRED_OSBORNE, $FC
+	db CRED_TRANS, CRED_OGASAWARA, $FD
+	db CRED_PROGRAMMERS, CRED_MURAKAWA, CRED_FUKUI, $FD
+	db CRED_SPECIAL, CRED_IWATA, $FD
+	db CRED_SPECIAL, CRED_HARADA, $FC
+	db CRED_TEST, CRED_PAAD, CRED_CLUB, $FD
+	db CRED_PRODUCER, CRED_IZUSHI, $FD
+	db CRED_EXECUTIVE, CRED_YAMAUCHI, $FF
+	db $FB, $FF, $FA
+
 
 CreditsTextPointers: ; 742c3 (1d:42c3)
 	dw CredVersion
