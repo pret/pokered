@@ -15345,7 +15345,7 @@ Func_6596: ; 6596 (1:6596)
 	dw .asm_65ed
 	dw .asm_6683
 	dw .asm_65f3
-	dw .asm_66f6
+	dw .deleteLetter
 	dw .asm_65f3
 	dw .asm_6692
 
@@ -15394,15 +15394,15 @@ Func_6596: ; 6596 (1:6596)
 	jr z, .asm_66e3
 	ld a, [$d07d]
 	cp $2
-	jr nc, .asm_66db
+	jr nc, .checkMonNameLength
 	ld a, [$cee9]
-	cp $7
-	jr .asm_66e0
-.asm_66db
+	cp $7 ; max length of player/rival names
+	jr .checkNameLength
+.checkMonNameLength
 	ld a, [$cee9]
-	cp $a
-.asm_66e0
-	jr c, .asm_66ea
+	cp $a ; max length of pokemon nicknames
+.checkNameLength
+	jr c, .addLetter
 	ret
 .asm_66e3
 	push hl
@@ -15410,14 +15410,14 @@ Func_6596: ; 6596 (1:6596)
 	pop hl
 	ret nc
 	dec hl
-.asm_66ea
+.addLetter
 	ld a, [$ceed]
 	ld [hli], a
 	ld [hl], $50
 	ld a, $90
 	call PlaySound
 	ret
-.asm_66f6
+.deleteLetter
 	ld a, [$cee9]
 	and a
 	ret z
@@ -64562,7 +64562,7 @@ Func_3db85: ; 3db85 (f:5b85)
 	ld a, [$d11e] ; move number
 	ld c, a
 	ld b, $0
-	ld hl, Unknown_3dba3 ; $5ba3
+	ld hl, UnknownMovesList_3dba3 ; $5ba3
 .asm_3db8f
 	ld a, [hli]
 	cp $ff
@@ -64579,8 +64579,20 @@ Func_3db85: ; 3db85 (f:5b85)
 	pop bc
 	ret
 
-Unknown_3dba3: ; 3dba3 (f:5ba3)
-INCBIN "baserom.gbc",$3dba3,$3dbe2 - $3dba3
+UnknownMovesList_3dba3: ; 3dba3 (f:5ba3)
+	db SWORDS_DANCE, GROWTH
+	db $00
+	db RECOVER, BIDE, SELFDESTRUCT, AMNESIA
+	db $00
+	db MEDITATE, AGILITY, TELEPORT, MIMIC, DOUBLE_TEAM, BARRAGE
+	db $00
+	db POUND, SCRATCH, VICEGRIP, WING_ATTACK, FLY, BIND, SLAM, HORN_ATTACK, BODY_SLAM
+	db WRAP, THRASH, TAIL_WHIP, LEER, BITE, GROWL, ROAR, SING, PECK, COUNTER
+	db STRENGTH, ABSORB, STRING_SHOT, EARTHQUAKE, FISSURE, DIG, TOXIC, SCREECH, HARDEN
+	db MINIMIZE, WITHDRAW, DEFENSE_CURL, METRONOME, LICK, CLAMP, CONSTRICT, POISON_GAS
+	db LEECH_LIFE, BUBBLE, FLASH, SPLASH, ACID_ARMOR, FURY_SWIPES, REST, SHARPEN, SLASH, SUBSTITUTE
+	db $00 
+	db $FF ; terminator
 
 Func_3dbe2: ; 3dbe2 (f:5be2)
 	ld de, W_PLAYERMOVEEFFECT ; $cfd3
