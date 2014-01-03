@@ -65144,124 +65144,161 @@ Func_3df1c: ; 3df1c (f:5f1c)
 	ret
 
 MoreCalculateDamage: ; 3df65 (f:5f65)
-	ld a, [$ff00+$f3]  ;FFF3 decides which address to use
+; input:
+;	b: attack
+;	c: opponent defense
+;	d: base power
+;	e: level
+
+	ld a, [$ff00+$f3] ; whose turn?
 	and a
 	ld a, [W_PLAYERMOVEEFFECT]
-	jr z, .next
+	jr z, .effect
 	ld a, [$cfcd]
-.next
-	cp a, 7  ;effect to halve opponent defense [suicide moves]
-	jr nz, .next2
-.halveDefense
-	srl c  ;explosion and selfdestruct will halve the defense...
-	jr nz, .next2
-	inc c  ;...with a minimum value of 1 [it is used as a divisor later on]
-.next2
-	cp a, $1d
-	jr z, .next3
+.effect
+
+; EXPLODE_EFFECT halves defense.
+	cp a, EXPLODE_EFFECT
+	jr nz, .ok
+	srl c
+	jr nz, .ok
+	inc c ; ...with a minimum value of 1 (used as a divisor later on)
+.ok
+
+; Multi-hit attacks may or may not have 0 bp.
+	cp a, TWO_TO_FIVE_ATTACKS_EFFECT
+	jr z, .skipbp
 	cp a, $1e
-	jr z, .next3
-	cp a, $26    ;OHKO?
+	jr z, .skipbp
+
+; Calculate OHKO damage based on remaining HP.
+	cp a, OHKO_EFFECT
 	jp z, Func_3e016
-	ld a, d      ;if attack base power zero then do nothing
+
+; Don't calculate damage for moves that don't do any.
+	ld a, d ; base power
 	and a
 	ret z
-.next3
+.skipbp
+
 	xor a
-	ld hl, $ff95  ;multiplication address
-	ldi [hl], a   ;init to zero
+	ld hl, H_DIVIDEND
+	ldi [hl], a
 	ldi [hl], a
 	ld [hl], a
-	ld a, e
-	add a         ;A = level *2
-	jr nc, .noCarry
-.carry
+
+; Multiply level by 2
+	ld a, e ; level
+	add a
+	jr nc, .nc
 	push af
-	ld a, 1     ;add carry for level if needed
-	ld [hl], a  ;level high byte [previously zero]
+	ld a, 1
+	ld [hl], a
 	pop af
-.noCarry
+.nc
 	inc hl
-	ldi [hl], a  ;level low byte
-	ld a, 5      ;[divisor] = 5
+	ldi [hl], a
+
+; Divide by 5
+	ld a, 5
 	ldd [hl], a
 	push bc
 	ld b, 4
-	call Divide  ;divide level by 5
+	call Divide
 	pop bc
-	inc [hl]  ;+2 [?]
+
+; Add 2
 	inc [hl]
-	inc hl    ;8bit multiplier
+	inc [hl]
+
+	inc hl ; multiplier
+
+; Multiply by attack base power
 	ld [hl], d
-	call Multiply  ;*multiply by attack base power
+	call Multiply
+
+; Multiply by attack stat
 	ld [hl], b
-	call Multiply  ;*multiply by attacker attack stat
+	call Multiply
+
+; Divide by defender's defense stat
 	ld [hl], c
 	ld b, 4
-	call Divide    ;*divide by defender defense stat
-	ld [hl], $32
-	ld b, 4
-	call Divide      ;divide above result by 50
-	ld hl, W_DAMAGE  ;[stuff below I never got to, was only interested in stuff above]
+	call Divide
 
+; Divide by 50
+	ld [hl], 50
+	ld b, 4
+	call Divide
+
+	ld hl, W_DAMAGE
 	ld b, [hl]
-	ld a, [$FF00+$98]
+	ld a, [H_QUOTIENT + 3]
 	add b
-	ld [$FF00+$98], a
+	ld [H_QUOTIENT + 3], a
 	jr nc, .asm_3dfd0
-	ld a, [$FF00+$97]
+
+	ld a, [H_QUOTIENT + 2]
 	inc a
-	ld [$FF00+$97], a
+	ld [H_QUOTIENT + 2], a
 	and a
 	jr z, .asm_3e004
+
 .asm_3dfd0
-	ld a, [H_DIVIDEND] ; $FF00+$95 (aliases: H_PRODUCT, H_PASTLEADINGZEROES, H_QUOTIENT)
+	ld a, [H_QUOTIENT]
 	ld b, a
-	ld a, [H_NUMTOPRINT] ; $FF00+$96 (aliases: H_MULTIPLICAND)
+	ld a, [H_QUOTIENT + 1]
 	or a
 	jr nz, .asm_3e004
-	ld a, [$FF00+$97]
-	cp $3
+
+	ld a, [H_QUOTIENT + 2]
+	cp 998 / $100
 	jr c, .asm_3dfe8
-	cp $4
+	cp 998 / $100 + 1
 	jr nc, .asm_3e004
-	ld a, [$FF00+$98]
-	cp $e6
+	ld a, [H_QUOTIENT + 3]
+	cp 998 % $100
 	jr nc, .asm_3e004
+
 .asm_3dfe8
 	inc hl
-	ld a, [$FF00+$98]
+	ld a, [H_QUOTIENT + 3]
 	ld b, [hl]
 	add b
 	ld [hld], a
-	ld a, [$FF00+$97]
+
+	ld a, [H_QUOTIENT + 2]
 	ld b, [hl]
 	adc b
 	ld [hl], a
 	jr c, .asm_3e004
+
 	ld a, [hl]
-	cp $3
+	cp 998 / $100
 	jr c, .asm_3e00a
-	cp $4
+	cp 998 / $100 + 1
 	jr nc, .asm_3e004
 	inc hl
 	ld a, [hld]
-	cp $e6
+	cp 998 % $100
 	jr c, .asm_3e00a
+
 .asm_3e004
-	ld a, $3
+	ld a, 997 / $100
 	ld [hli], a
-	ld a, $e5
+	ld a, 997 % $100
 	ld [hld], a
+
 .asm_3e00a
 	inc hl
 	ld a, [hl]
-	add $2
+	add 2
 	ld [hld], a
-	jr nc, .asm_3e012
+	jr nc, .done
 	inc [hl]
-.asm_3e012
-	ld a, $1
+.done
+
+	ld a, 1
 	and a
 	ret
 
@@ -65271,7 +65308,14 @@ Func_3e016: ; 3e016 (f:6016)
 	dec a
 	ret
 
-INCBIN "baserom.gbc",$3e01e,$3e023 - $3e01e
+
+UnusedHighCriticalMoves: ; 3e01e (f:601e)
+	db KARATE_CHOP
+	db RAZOR_LEAF
+	db CRABHAMMER
+	db SLASH
+	db $FF
+; 3e023
 
 ; determines if attack is a critical hit
 ; azure heights claims "the fastest pokémon (who are,not coincidentally,
@@ -65349,6 +65393,7 @@ HighCriticalMoves: ; 3e08e (f:608e)
 	db CRABHAMMER
 	db SLASH
 	db $FF
+
 
 ; function to determine if Counter hits and if so, how much damage it does
 HandleCounterMove: ; 3e093 (f:6093)
