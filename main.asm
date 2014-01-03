@@ -12934,12 +12934,14 @@ Func_5317: ; 5317 (1:5317)
 	call Func_5ab3
 	FuncCoord 4, 10 ; $c46c
 	ld hl, Coord
-	ld de, .pleaseWait ; $550f
+	ld de, PleaseWaitString ; $550f
 	call PlaceString
 	ld hl, W_NUMHITS ; $d074
 	xor a
 	ld [hli], a
 	ld [hl], $50
+
+Func_5345: ; 5345
 	ld hl, $d152
 	ld a, $fd
 	ld b, $6
@@ -13203,7 +13205,7 @@ Func_5317: ; 5317 (1:5317)
 	call PlayMusic
 	jr Func_551c
 
-.pleaseWait: ; 550f (1:550f)
+PleaseWaitString: ; 550f (1:550f)
 	db "PLEASE WAIT!@"
 
 Func_551c:
@@ -13563,9 +13565,11 @@ Func_57f2:
 	call PlaceString
 	ld hl, $c3b6
 	ld de, $d164
-	call $5827
+	call Func_5827
 	ld hl, $c456
 	ld de, $d89d
+
+Func_5827:
 	ld c, $0
 .asm_5829
 	ld a, [de]
@@ -13780,7 +13784,7 @@ Func_5849:
 	call DelayFrames
 	xor a
 	ld [$cc38], a
-	jp $5345
+	jp Func_5345
 
 Func_5a18:
 	ld c, $64
@@ -73953,7 +73957,7 @@ Func_44be0: ; 44be0 (11:4be0)
 	jr .asm_44c03
 .asm_44bf7
 	ld a, $ad
-	call $23b1
+	call PlaySound
 	ld hl, $d815
 	bit 7, [hl]
 .asm_44c01
@@ -96578,7 +96582,7 @@ FightingDojoScript1: ; 5cd83 (17:4d83)
 	ld [$ff8c], a
 	ld a, $8
 	ld [$ff8d], a
-	call $34a6
+	call Func_34a6
 	ld a, $1
 	ld [$ff8c], a
 	call DisplayTextID
@@ -96597,7 +96601,7 @@ FightingDojoScript3: ; 5cdc6 (17:4dc6)
 	ld [$ff8c], a
 	ld a, $8
 	ld [$ff8d], a
-	call $34a6
+	call Func_34a6
 
 .asm_5cde4
 	ld a, $f0
@@ -107658,11 +107662,11 @@ SaveSAV: ;$770a
 	FuncCoord 1,13
 	ld hl,Coord
 	ld bc,$0412
-	call $18c4      ;clear area 4x12 starting at 13,1
+	call ClearScreenArea ; clear area 4x12 starting at 13,1
 	FuncCoord 1,14
 	ld hl,Coord
 	ld de,NowSavingString
-	call $1955
+	call PlaceString
 	ld c,$78
 	call DelayFrames
 	ld hl,GameSavedText
