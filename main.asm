@@ -89868,7 +89868,14 @@ UnnamedText_561c2: ; 561c2 (15:61c2)
 	TX_FAR _UnnamedText_561c2 ; 0xa06e8
 	db $0B, "@"
 
-INCBIN "baserom.gbc",$561c8,$56212 - $561c8
+UnnamedText_561c8: ; 561c8
+	db $51
+	db "つり こそ", $4f
+	db "おとこの ロマン だ!", $51
+	db "へぼいつりざおは", $4f
+	db "コイキングしか つれ なんだが", $4f
+	db "この いいつりざおなら", $4f
+	db "もっと いいもんが つれるんじゃ!", $57
 
 UnnamedText_56212: ; 56212 (15:6212)
 	TX_FAR _UnnamedText_56212
