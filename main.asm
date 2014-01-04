@@ -49296,7 +49296,7 @@ Func_37ca1: ; 37ca1 (d:7ca1)
 	ld a, [$cd38]
 	dec a
 	ld [$cd38], a
-	ld d, $0
+	ld d, 0
 	ld e, a
 	add hl, de
 	ld d, h
@@ -49304,7 +49304,7 @@ Func_37ca1: ; 37ca1 (d:7ca1)
 	ld hl, PointerTable_37ce6
 	ld a, [$d12f]
 	add a
-	ld b, $0
+	ld b, 0
 	ld c, a
 	add hl, bc
 	ld a, [hli]
@@ -49346,10 +49346,47 @@ PointerTable_37ce6: ; 37ce6 (d:7ce6)
 	dw Unknown_37d06
 
 Unknown_37cea: ; 37cea (d:7cea)
-INCBIN "baserom.gbc",$37cea,$37d06 - $37cea
+	db 18, 27
+	dw .down
+	db 16, 27
+	dw .up
+	db 17, 26
+	dw .left
+	db 17, 28
+	dw .right
+
+.down
+	db $40, $40, $ff
+.up
+	db $10, $20, $ff
+.left
+	db $40, $10, $ff
+.right
+	db $40, $20, $ff
 
 Unknown_37d06: ; 37d06 (d:7d06)
-INCBIN "baserom.gbc",$37d06,$37d41 - $37d06
+	db 16, 34
+	dw .one
+	db 17, 35
+	dw .two
+	db 18, 37
+	dw .three
+	db 19, 37
+	dw .four
+	db 17, 36
+	dw .five
+
+.one
+	db $20, $80, $80, $10, $ff
+.two
+	db $20, $80, $10, $20, $ff
+.three
+	db $20, $20, $20, $00, $00, $00, $00, $00, $00, $00, $00, $ff
+.four
+	db $20, $20, $40, $20, $ff
+.five
+	db $20, $80, $20, $00, $00, $00, $00, $00, $00, $00, $00, $ff
+
 
 _Multiply: ; 37d41 (d:7d41)
 	ld a, $8
