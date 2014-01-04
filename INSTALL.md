@@ -1,11 +1,3 @@
-# Getting Started
-
-A base rom of Pokémon Red is required to assemble **pokered.gbc**.
-
-	Pokemon Red (UE) [S][!].gb
-	(MD5: 3d45c1ee9abd5738df46d2bdda8b57dc)
-
-
 # Linux
 
 Linux dependencies. OSX users already have these after installing Xcode.
@@ -20,7 +12,6 @@ Set up the **pokered** repository:
 
 	./init.sh
 
-Copy the Pokémon Red rom to this directory. Name it **baserom.gbc**.
 
 Now **pokered.gbc** can be built from source.
 
