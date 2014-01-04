@@ -72753,7 +72753,12 @@ Func_418e9: ; 418e9 (10:58e9)
 	ld c, $80
 	jp Func_41807
 
-INCBIN "baserom.gbc",$4190c,$41910 - $4190c
+Func_4190c: ; 4190c (10:590c)
+	ret
+
+IntroNidorinoAnimation0: ; 4190d (10:590d)
+	db 0, 0
+	db $50
 
 IntroNidorinoAnimation1: ; 41910 (10:5910)
 ; This is a sequence of pixel movements for part of the Nidorino animation. This 
