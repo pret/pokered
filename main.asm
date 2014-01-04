@@ -15607,10 +15607,60 @@ Func_6871: ; 6871 (1:6871)
 	ret
 
 Unknown_6885: ; 6885 (1:6885)
-INCBIN "baserom.gbc",$6885,$68d6 - $6885
+	db $b6, $26
+	db $b7, $27
+	db $b8, $28
+	db $b9, $29
+	db $ba, $2a
+	db $bb, $2b
+	db $bc, $2c
+	db $bd, $2d
+	db $be, $2e
+	db $bf, $2f
+	db $c0, $30
+	db $c1, $31
+	db $c2, $32
+	db $c3, $33
+	db $c4, $34
+	db $ca, $3a
+	db $cb, $3b
+	db $cc, $3c
+	db $cd, $3d
+	db $ce, $3e
+	db $85, $05
+	db $86, $06
+	db $87, $07
+	db $88, $08
+	db $89, $09
+	db $8a, $0a
+	db $8b, $0b
+	db $8c, $0c
+	db $8d, $0d
+	db $8e, $0e
+	db $8f, $0f
+	db $90, $10
+	db $91, $11
+	db $92, $12
+	db $93, $13
+	db $99, $19
+	db $9a, $1a
+	db $9b, $1b
+	db $cd, $3d
+	db $9c, $1c
+	db $ff
 
 Unknown_68d6: ; 68d6 (1:68d6)
-INCBIN "baserom.gbc",$68d6,$68eb - $68d6
+	db $ca, $44
+	db $cb, $45
+	db $cc, $46
+	db $cd, $47
+	db $ce, $48
+	db $99, $40
+	db $9a, $41
+	db $9b, $42
+	db $cd, $47
+	db $9c, $43
+	db $ff
 
 Func_68eb: ; 68eb (1:68eb)
 	ld hl, $cf4b
