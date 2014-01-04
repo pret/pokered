@@ -89825,29 +89825,38 @@ FuchsiaHouse3Text1: ; 56181 (15:6181)
 	db $08 ; asm
 	ld a, [$d728]
 	bit 4, a
-	jr nz, asm_6084e ; 0x56187
+	jr nz, .after
+
 	ld hl, UnnamedText_561bd
 	call PrintText
+
 	call YesNoChoice
 	ld a, [$cc26]
 	and a
-	jr nz, asm_3ace4 ; 0x56196
+	jr nz, .refused
+
 	ld bc, (GOOD_ROD << 8) | 1
 	call GiveItem
-	jr nc, .BagFull
+	jr nc, .full
+
 	ld hl, $d728
 	set 4, [hl]
+
 	ld hl, UnnamedText_561c2
-	jr asm_1b09c ; 0x561a8
-.BagFull
+	jr .talk
+
+.full
 	ld hl, UnnamedText_5621c
-	jr asm_1b09c ; 0x561ad
-asm_3ace4 ; 0x561af
+	jr .talk
+
+.refused
 	ld hl, UnnamedText_56212
-	jr asm_1b09c ; 0x561b2
-asm_6084e ; 0x561b4
+	jr .talk
+
+.after
 	ld hl, UnnamedText_56217
-asm_1b09c ; 0x561b7
+
+.talk
 	call PrintText
 	jp TextScriptEnd
 
