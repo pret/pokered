@@ -106327,7 +106327,7 @@ Func_71cc1: ; 71cc1 (1c:5cc1)
 	ld de, $cd41
 	ld bc, $b
 	call Func_71d11
-	ld hl, Unknown_71d59 ; $5d59
+	ld hl, String_71d59 ; $5d59
 	ld de, $cd4e
 	call Func_71d11
 	ld de, W_GRASSRATE ; $d887
@@ -106362,7 +106362,7 @@ Func_71d19: ; 71d19 (1c:5d19)
 	ld hl, W_PARTYMON1OT ; $d273
 	ld bc, $b
 	call Func_71d4f
-	ld hl, Unknown_71d59 ; $5d59
+	ld hl, String_71d59 ; $5d59
 	ld bc, $b
 	call CopyData
 	ld hl, W_PARTYMON1_OTID ; $d177
@@ -106380,8 +106380,9 @@ Func_71d4f: ; 71d4f (1c:5d4f)
 	ld d, h
 	ret
 
-Unknown_71d59: ; 71d59 (1c:5d59)
-INCBIN "baserom.gbc",$71d59,$71d64 - $71d59
+String_71d59: ; 71d59 (1c:5d59)
+	; "TRAINER@@@@@@@@@@"
+	db $5d, "@@@@@@@@@@"
 
 InGameTradeTextPointers: ; 71d64 (1c:5d64)
 	dw TradeTextPointers1
