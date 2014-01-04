@@ -11061,46 +11061,55 @@ Func_448e: ; 448e (1:448e)
 Func_4496: ; 4496 (1:4496)
 	ld a, $98
 	call Func_4533
-.asm_449b
+
+.new
+; Generate a new TitleMon.
 	call GenRandom
 	and $f
 	ld c, a
-	ld b, $0
-	ld hl, TitleMons ; $4588
+	ld b, 0
+	ld hl, TitleMons
 	add hl, bc
 	ld a, [hl]
 	ld hl, wWhichTrade ; $cd3d
+
+; Can't be the same as before.
 	cp [hl]
-	jr z, .asm_449b
+	jr z, .new
+
 	ld [hl], a
 	call Func_4524
+
 	ld a, $90
 	ld [$FF00+$b0], a
-	ld d, $1
-	ld b, BANK(LoadScreenTilesFromBuffer18)
-	ld hl, LoadScreenTilesFromBuffer18
-	call Bankswitch ; indirect jump to LoadScreenTilesFromBuffer18 (37258 (d:7258))
+	ld d, 1 ; scroll out
+	ld b, BANK(TitleScroll)
+	ld hl, TitleScroll
+	call Bankswitch ; indirect jump to TitleScroll (37258 (d:7258))
 	ret
 
 Func_44c1: ; 44c1 (1:44c1)
-	ld d, $0
-	ld b, BANK(LoadScreenTilesFromBuffer18)
-	ld hl, LoadScreenTilesFromBuffer18
-	call Bankswitch ; indirect jump to LoadScreenTilesFromBuffer18 (37258 (d:7258))
+	ld d, 0 ; scroll in
+	ld b, BANK(TitleScroll)
+	ld hl, TitleScroll
+	call Bankswitch ; indirect jump to TitleScroll (37258 (d:7258))
 	xor a
 	ld [$FF00+$b0], a
 	ret
 
 Func_44cf: ; 44cf (1:44cf)
-	ld a, [$FF00+$44]
+.wait
+	ld a, [$FF00+$44] ; rLY
 	cp l
-	jr nz, Func_44cf
+	jr nz, .wait
+
 	ld a, h
 	ld [rSCX], a ; $FF00+$43
-.asm_44d7
-	ld a, [$FF00+$44]
+
+.wait2
+	ld a, [$FF00+$44] ; rLY
 	cp h
-	jr z, .asm_44d7
+	jr z, .wait2
 	ret
 
 Func_44dd: ; 44dd (1:44dd)
@@ -48201,32 +48210,48 @@ VictreebelPicFront: ; 36fea (d:6fea)
 VictreebelPicBack: ; 371b2 (d:71b2)
 	INCBIN "pic/monback/victreebelb.pic"
 
-Unknown_37244: ; 37244 (d:7244)
-INCBIN "baserom.gbc",$37244,$37247 - $37244
 
-Unknown_37247: ; 37247 (d:7247)
-INCBIN "baserom.gbc",$37247,$3724f - $37247
+TitleScroll_WaitBall: ; 37244 (d:7244)
+; Wait around for the TitleBall animation to play out.
+; hi: speed
+; lo: duration
+	db $05, $05, 0
 
-Unknown_3724f: ; 3724f (d:724f)
-INCBIN "baserom.gbc",$3724f,$37258 - $3724f
+TitleScroll_In: ; 37247 (d:7247)
+; Scroll a TitleMon in from the right.
+; hi: speed
+; lo: duration
+	db $a2, $94, $84, $63, $52, $31, $11, 0
 
-LoadScreenTilesFromBuffer18: ; 37258 (d:7258)
+TitleScroll_Out: ; 3724f (d:724f)
+; Scroll a TitleMon out to the left.
+; hi: speed
+; lo: duration
+	db $12, $22, $32, $42, $52, $62, $83, $93, 0
+
+TitleScroll: ; 37258 (d:7258)
 	ld a, d
-	ld bc, Unknown_37247 ; $7247
-	ld d, $88
-	ld e, $0
-	and a
-	jr nz, Func_3726a
-	ld bc, Unknown_3724f ; $724f
-	ld d, $0
-	ld e, $0
 
-Func_3726a: ; 3726a (d:726a)
+	ld bc, TitleScroll_In
+	ld d, $88
+	ld e, 0 ; don't animate titleball
+
+	and a
+	jr nz, .ok
+
+	ld bc, TitleScroll_Out
+	ld d, $00
+	ld e, 0 ; don't animate titleball
+.ok
+
+_TitleScroll: ; 3726a (d:726a)
 	ld a, [bc]
 	and a
 	ret z
+
 	inc bc
 	push bc
+
 	ld b, a
 	and $f
 	ld c, a
@@ -48234,57 +48259,69 @@ Func_3726a: ; 3726a (d:726a)
 	and $f0
 	swap a
 	ld b, a
+
 .loop
 	ld h, d
 	ld l, $48
-	call Func_37292
-	ld h, $0
+	call .ScrollBetween
+
+	ld h, $00
 	ld l, $88
-	call Func_37292
+	call .ScrollBetween
+
 	ld a, d
 	add b
 	ld d, a
-	call Func_372c4
+
+	call GetTitleBallY
 	dec c
 	jr nz, .loop
-	pop bc
-	jr Func_3726a
 
-Func_37292: ; 37292 (d:7292)
-	ld a, [$FF00+$44]
+	pop bc
+	jr _TitleScroll
+
+.ScrollBetween ; 37292 (d:7292)
+.wait
+	ld a, [$FF00+$44] ; rLY
 	cp l
-	jr nz, Func_37292
+	jr nz, .wait
+
 	ld a, h
 	ld [rSCX], a ; $FF00+$43
-.loop
-	ld a, [$FF00+$44]
+
+.wait2
+	ld a, [$FF00+$44] ; rLY
 	cp h
-	jr z, .loop
+	jr z, .wait2
 	ret
 
-Unknown_372a0: ; 372a0 (d:72a0)
-INCBIN "baserom.gbc",$372a0,$372ac - $372a0
+TitleBallYTable: ; 372a0 (d:72a0)
+; OBJ y-positions for the Poke Ball held by Red in the title screen.
+; This is really two 0-terminated lists. Initiated with an index of 1.
+	db 0, $71, $6f, $6e, $6d, $6c, $6d, $6e, $6f, $71, $74, 0
 
 Func_372ac: ; 372ac (d:72ac)
+; Animate the TitleBall if a starter just got scrolled out.
 	ld a, [wWhichTrade] ; $cd3d
-	cp $b0
-	jr z, .skip
-	cp $b1
-	jr z, .skip
-	cp $99
+	cp CHARMANDER
+	jr z, .ok
+	cp SQUIRTLE
+	jr z, .ok
+	cp BULBASAUR
 	ret nz
-.skip
-	ld e, $1
-	ld bc, Unknown_37244 ; $7244
-	ld d, $0
-	jp Func_3726a
+.ok
+	ld e, 1 ; animate titleball
+	ld bc, TitleScroll_WaitBall
+	ld d, 0
+	jp _TitleScroll
 
-Func_372c4: ; 372c4 (d:72c4)
+GetTitleBallY: ; 372c4 (d:72c4)
+; Get position e from TitleBallYTable
 	push de
 	push hl
 	xor a
 	ld d, a
-	ld hl, Unknown_372a0 ; $72a0
+	ld hl, TitleBallYTable
 	add hl, de
 	ld a, [hl]
 	pop hl
