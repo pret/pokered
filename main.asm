@@ -98631,34 +98631,46 @@ GymTrashScript: ; 5ddfc (17:5dfc)
 	call EnableAutoTextBoxDrawing
 	ld a, [wWhichTrade] ; $cd3d
 	ld [$cd5b], a
+
+; Don't do the trash can puzzle if it's already been done.
 	ld a, [$d773]
 	bit 0, a
-	jr z, .asm_5de11
+	jr z, .ok
+
 	ld a, $26 ; DisplayTextID $26 = VermilionGymTrashText (nothing in the trash)
 	jp Func_3ef5
-.asm_5de11
+
+.ok
 	bit 1, a
-	jr nz, .resetOrOpenLocks
+	jr nz, .trySecondLock
+
 	ld a, [$d743]
 	ld b, a
 	ld a, [$cd5b]
 	cp b
 	jr z, .openFirstLock
+
 	ld a, $26 ; DisplayTextID $26 = VermilionGymTrashText (nothing in the trash)
-	jr .endTrashScript
+	jr .done
+
 .openFirstLock
+; Next can is trying for the second switch.
 	ld hl, $d773
 	set 1, [hl]
-	ld hl, Unknown_5de7d ; $5e7d
+
+	ld hl, GymTrashCans ; $5e7d
 	ld a, [$cd5b]
+	; * 5
 	ld b, a
 	add a
 	add a
 	add b
-	ld d, $0
+
+	ld d, 0
 	ld e, a
 	add hl, de
 	ld a, [hli]
+
 	ld [$FF00+$db], a
 	push hl
 	call GenRandom
@@ -98668,38 +98680,64 @@ GymTrashScript: ; 5ddfc (17:5dfc)
 	and b
 	dec a
 	pop hl
-	ld d, $0
+
+	ld d, 0
 	ld e, a
 	add hl, de
 	ld a, [hl]
 	and $f
 	ld [$d744], a
+
 	ld a, $3b ; DisplayTextID $3b = VermilionGymTrashSuccesText1 (first lock opened!)
-	jr .endTrashScript
-.resetOrOpenLocks
+	jr .done
+
+.trySecondLock
 	ld a, [$d744]
 	ld b, a
 	ld a, [$cd5b]
 	cp b
 	jr z, .openSecondLock
+
+; Reset the cans.
 	ld hl, $d773
 	res 1, [hl]
 	call GenRandom
+
 	and $e
 	ld [$d743], a
+
 	ld a, $3e ; DisplayTextID $3e = VermilionGymTrashFailText (locks reset!)
-	jr .endTrashScript
+	jr .done
+
 .openSecondLock
+; Completed the trash can puzzle.
 	ld hl, $d773
 	set 0, [hl]
 	ld hl, $d126
 	set 6, [hl]
+
 	ld a, $3d ; DisplayTextID $3d = VermilionGymTrashSuccesText3 (2nd lock opened!)
-.endTrashScript
+
+.done
 	jp Func_3ef5
 
-Unknown_5de7d: ; 5de7d (17:5e7d)
-INCBIN "baserom.gbc",$5de7d,$5dec8 - $5de7d
+GymTrashCans: ; 5de7d (17:5e7d)
+	db 2,  1,  3,  0,  0 ; 0
+	db 3,  0,  2,  4,  0 ; 1
+	db 2,  1,  5,  0,  0 ; 2
+	db 3,  0,  4,  6,  0 ; 3
+	db 4,  1,  3,  5,  7 ; 4
+	db 3,  2,  4,  8,  0 ; 5
+	db 3,  3,  7,  9,  0 ; 6
+	db 4,  4,  6,  8, 10 ; 7
+	db 3,  5,  7, 11,  0 ; 8
+	db 3,  6, 10, 12,  0 ; 9
+	db 4,  7,  9, 11, 13 ; 10
+	db 3,  8, 10, 14,  0 ; 11
+	db 2,  9, 13,  0,  0 ; 12
+	db 3, 10, 12, 14,  0 ; 13
+	db 2, 11, 13,  0,  0 ; 14
+; 5dec8
 
 VermilionGymTrashSuccesText1: ; 5dec8 (17:5ec8)
 	TX_FAR _VermilionGymTrashSuccesText1
