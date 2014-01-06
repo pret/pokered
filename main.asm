@@ -3176,7 +3176,7 @@ HandlePartyMenuInput: ; 145a (0:145a)
 	and a
 	jr z,.noPokemonChosen
 	ld a,[wCurrentMenuItem]
-	ld [$cf92],a
+	ld [wWhichPokemon],a
 	ld hl,W_PARTYMON1
 	ld b,0
 	ld c,a
@@ -3205,7 +3205,7 @@ HandlePartyMenuInput: ; 145a (0:145a)
 	jr HandlePartyMenuInput
 .handleSwap
 	ld a,[wCurrentMenuItem]
-	ld [$cf92],a
+	ld [wWhichPokemon],a
 	ld b, BANK(Func_13613)
 	ld hl, Func_13613
 	call Bankswitch
@@ -3367,7 +3367,7 @@ GetMonHeader: ; 1537 (0:1537)
 
 ; copy party pokemon's name to $CD6D
 GetPartyMonName2: ; 15b4 (0:15b4)
-	ld a,[$cf92] ; index within party
+	ld a,[wWhichPokemon] ; index within party
 	ld hl,W_PARTYMON1NAME
 
 ; this is called more often
@@ -7276,7 +7276,7 @@ DisplayListMenuIDLoop: ; 2c53 (0:2c53)
 	cp c ; did the player select Cancel?
 	jp c,ExitListMenu ; if so, exit the menu
 	ld a,c
-	ld [$cf92],a
+	ld [wWhichPokemon],a
 	ld a,[wListMenuID]
 	cp a,ITEMLISTMENU
 	jr nz,.skipMultiplying
@@ -7320,7 +7320,7 @@ DisplayListMenuIDLoop: ; 2c53 (0:2c53)
 	jr z,.getPokemonName
 	ld hl, W_BOXMON1NAME ; box pokemon names
 .getPokemonName
-	ld a,[$cf92]
+	ld a,[wWhichPokemon]
 	call GetPartyMonName
 .storeChosenEntry ; store the menu entry that the player chose and return
 	ld de,$cd6d
@@ -7541,7 +7541,7 @@ PrintListMenuEntries: ; 2e5a (0:2e5a)
 	ld b,4 ; print 4 names
 .loop
 	ld a,b
-	ld [$cf92],a
+	ld [wWhichPokemon],a
 	ld a,[de]
 	ld [$d11e],a
 	cp a,$ff
@@ -7568,7 +7568,7 @@ PrintListMenuEntries: ; 2e5a (0:2e5a)
 	jr z,.getPokemonName
 	ld hl, W_BOXMON1NAME ; box pokemon names
 .getPokemonName
-	ld a,[$cf92]
+	ld a,[wWhichPokemon]
 	ld b,a
 	ld a,4
 	sub b
@@ -7614,7 +7614,7 @@ PrintListMenuEntries: ; 2e5a (0:2e5a)
 	ld a,$02
 .next
 	ld [$cc49],a
-	ld hl,$cf92
+	ld hl,wWhichPokemon
 	ld a,[hl]
 	ld b,a
 	ld a,$04
@@ -10618,9 +10618,9 @@ PointerTable_3f22: ; 3f22 (0:3f22)
 	dw VermilionGymTrashSuccesText3         ; id = 3D
 	dw VermilionGymTrashFailText            ; id = 3E
 	dw TownMapText                          ; id = 3F
-	dw UnnamedText_fbe8                     ; id = 40
-	dw UnnamedText_fc0d                     ; id = 41
-	dw UnnamedText_fc45                     ; id = 42
+	dw BookOrSculptureText                  ; id = 40
+	dw ElevatorText                         ; id = 41
+	dw PokemonStuffText                     ; id = 42
 
 SECTION "bank1",ROMX,BANK[$1]
 
@@ -11286,7 +11286,7 @@ LoadMonData_: ; 45b6 (1:45b6)
 	ld a,[$cc49]
 	cp a,$03
 	jr z,.GetMonHeader
-	ld a,[$cf92]
+	ld a,[wWhichPokemon]
 	ld e,a
 	ld hl, Func_39c37
 	ld b, BANK(Func_39c37)
@@ -11309,7 +11309,7 @@ LoadMonData_: ; 45b6 (1:45b6)
 	ld hl, W_DAYCAREMONDATA ; daycare pokemon data
 	jr .copyMonData
 .getMonEntry ; add the product of the index and the size of each entry
-	ld a,[$cf92]
+	ld a,[wWhichPokemon]
 	call AddNTimes
 .copyMonData
 	ld de,$cf98
@@ -13547,7 +13547,7 @@ Func_57c7:
 
 Func_57d6:
 	ld a, [$cc26]
-	ld [$cf92], a
+	ld [wWhichPokemon], a
 	ld a, $36
 	call Predef
 	ld a, $37
@@ -13710,7 +13710,7 @@ Func_5849:
 	ld a, [hl]
 	ld [$cd5a], a
 	ld a, [$cd3d]
-	ld [$cf92], a
+	ld [wWhichPokemon], a
 	ld hl, $d164
 	ld b, $0
 	ld c, a
@@ -13722,7 +13722,7 @@ Func_5849:
 	call RemovePokemon
 	ld a, [$cd3e]
 	ld c, a
-	ld [$cf92], a
+	ld [wWhichPokemon], a
 	ld hl, $d89d
 	ld d, $0
 	ld e, a
@@ -13739,7 +13739,7 @@ Func_5849:
 	call AddEnemyMonToPlayerParty
 	ld a, [$d163]
 	dec a
-	ld [$cf92], a
+	ld [wWhichPokemon], a
 	ld a, $1
 	ld [$ccd4], a
 	ld a, [$cd3e]
@@ -21124,7 +21124,7 @@ CheckForceBikeOrSurf: ; c38b (3:438b)
 	ld a, $2
 	ld [W_SEAFOAMISLANDS4CURSCRIPT], a
 	jr z, .forceSurfing
-	ld a, [$d35e]
+	ld a, [W_CURMAP]
 	cp SEAFOAM_ISLANDS_5
 	ld a, $2
 	ld [W_SEAFOAMISLANDS5CURSCRIPT], a
@@ -22580,7 +22580,7 @@ AddItemToInventory_: ; ce04 (3:4e04)
 RemoveItemFromInventory_: ; ce74 (3:4e74)
 	push hl
 	inc hl
-	ld a,[$cf92] ; index (within the inventory) of the item being removed
+	ld a,[wWhichPokemon] ; index (within the inventory) of the item being removed
 	sla a
 	add l
 	ld l,a
@@ -26800,7 +26800,7 @@ ItemUseBall: ; d687 (3:5687)
 	ld [$fff3],a
 	ld [$cc5b],a
 	ld [$d05b],a
-	ld a,[$cf92]
+	ld a,[wWhichPokemon]
 	push af
 	ld a,[$cf91]
 	push af
@@ -26809,7 +26809,7 @@ ItemUseBall: ; d687 (3:5687)
 	pop af
 	ld [$cf91],a
 	pop af
-	ld [$cf92],a
+	ld [wWhichPokemon],a
 	ld a,[$d11e]
 	cp a,$10
 	ld hl,ItemUseBallText00
@@ -26984,8 +26984,8 @@ ItemUseTownMap: ; d968 (3:5968)
 	ld a,[W_ISINBATTLE]
 	and a
 	jp nz,ItemUseNotTime
-	ld b, BANK(Func_70e3e)
-	ld hl, Func_70e3e
+	ld b, BANK(DisplayTownMap)
+	ld hl, DisplayTownMap
 	jp Bankswitch ; display Town Map
 
 ItemUseBicycle: ; d977 (3:5977)
@@ -27114,7 +27114,7 @@ ItemUseEvoStone: ; da5b (3:5a5b)
 	ld a,[W_ISINBATTLE]
 	and a
 	jp nz,ItemUseNotTime
-	ld a,[$cf92]
+	ld a,[wWhichPokemon]
 	push af
 	ld a,[$cf91]
 	ld [$d156],a
@@ -27140,7 +27140,7 @@ ItemUseEvoStone: ; da5b (3:5a5b)
 	and a
 	jr z,.noEffect
 	pop af
-	ld [$cf92],a
+	ld [wWhichPokemon],a
 	ld hl,wNumBagItems
 	ld a,1 ; remove 1 stone
 	ld [$cf96],a
@@ -27162,7 +27162,7 @@ ItemUseMedicine: ; dabb (3:5abb)
 	ld a,[W_NUMINPARTY]
 	and a
 	jp z,.emptyParty
-	ld a,[$cf92]
+	ld a,[wWhichPokemon]
 	push af
 	ld a,[$cf91]
 	push af
@@ -27190,9 +27190,9 @@ ItemUseMedicine: ; dabb (3:5abb)
 	jp c,.canceledItemUse
 	ld hl,W_PARTYMON1DATA
 	ld bc,44
-	ld a,[$cf92]
+	ld a,[wWhichPokemon]
 	call AddNTimes
-	ld a,[$cf92]
+	ld a,[wWhichPokemon]
 	ld [$cf06],a
 	ld d,a
 	ld a,[$cf91]
@@ -27201,12 +27201,12 @@ ItemUseMedicine: ; dabb (3:5abb)
 	pop af
 	ld [$cf91],a
 	pop af
-	ld [$cf92],a
+	ld [wWhichPokemon],a
 	ld a,[$d152]
 	and a ; using Softboiled?
 	jr z,.checkItemType
 ; if using softboiled
-	ld a,[$cf92]
+	ld a,[wWhichPokemon]
 	cp d ; is the pokemon trying to use softboiled on itself?
 	jr z,ItemUseMedicine ; if so, force another choice
 .checkItemType
@@ -27372,7 +27372,7 @@ ItemUseMedicine: ; dabb (3:5abb)
 	ld a,[hl]
 	push af
 	ld hl,W_PARTYMON1_MAXHP
-	ld a,[$cf92]
+	ld a,[wWhichPokemon]
 	ld bc,44
 	call AddNTimes
 	ld a,[hli]
@@ -27405,7 +27405,7 @@ ItemUseMedicine: ; dabb (3:5abb)
 	ld [wHPBarNewHP+1],a
 	FuncCoord 4, 1 ; $c3b8
 	ld hl,Coord
-	ld a,[$cf92]
+	ld a,[wWhichPokemon]
 	ld bc,2 * 20
 	call AddNTimes ; calculate coordinates of HP bar of pokemon that used Softboiled
 	ld a,$8d
@@ -27718,7 +27718,7 @@ ItemUseMedicine: ; dabb (3:5abb)
 	ld a,[$ff98]
 	ld [hl],a
 	pop hl
-	ld a,[$cf92]
+	ld a,[wWhichPokemon]
 	push af
 	ld a,[$cf91]
 	push af
@@ -27757,7 +27757,7 @@ ItemUseMedicine: ; dabb (3:5abb)
 	call RedrawPartyMenu
 	pop de
 	ld a,d
-	ld [$cf92],a
+	ld [wWhichPokemon],a
 	ld a,e
 	ld [$d11e],a
 	xor a
@@ -27782,7 +27782,7 @@ ItemUseMedicine: ; dabb (3:5abb)
 	pop af
 	ld [$cf91],a
 	pop af
-	ld [$cf92],a
+	ld [wWhichPokemon],a
 	jp RemoveUsedItem
 
 VitaminStatRoseText: ; df24 (3:5f24)
@@ -28351,8 +28351,8 @@ ItemUseItemfinder: ; e2e1 (3:62e1)
 	and a
 	jp nz,ItemUseNotTime
 	call ItemUseReloadOverworldData
-	ld b,BANK(Func_7481f)
-	ld hl,Func_7481f
+	ld b,BANK(HiddenItemNear)
+	ld hl,HiddenItemNear
 	call Bankswitch ; check for hidden items
 	ld hl,ItemfinderFoundNothingText
 	jr nc,.printText ; if no hidden items
@@ -28382,7 +28382,7 @@ ItemUsePPUp: ; e317 (3:6317)
 	jp nz,ItemUseNotTime
 
 ItemUsePPRestore: ; e31e (3:631e)
-	ld a,[$cf92]
+	ld a,[wWhichPokemon]
 	push af
 	ld a,[$cf91]
 	ld [$cd3d],a
@@ -28447,12 +28447,12 @@ ItemUsePPRestore: ; e31e (3:631e)
 	call PrintText
 .done
 	pop af
-	ld [$cf92],a
+	ld [wWhichPokemon],a
 	call GBPalWhiteOut
 	call GoPAL_SET_CF1C
 	jp RemoveUsedItem
 .afterRestoringPP ; after using a (Max) Ether/Elixir
-	ld a,[$cf92]
+	ld a,[wWhichPokemon]
 	ld b,a
 	ld a,[wPlayerMonNumber]
 	cp b ; is the pokemon whose PP was restored active in battle?
@@ -28622,7 +28622,7 @@ ItemUseTMHM: ; e479 (3:6479)
 	ld [$cd6a],a ; item not used
 	ret
 .useMachine
-	ld a,[$cf92]
+	ld a,[wWhichPokemon]
 	push af
 	ld a,[$cf91]
 	push af
@@ -28654,7 +28654,7 @@ ItemUseTMHM: ; e479 (3:6479)
 	ld a,$43
 	call Predef ; check if the pokemon can learn the move
 	push bc
-	ld a,[$cf92]
+	ld a,[wWhichPokemon]
 	ld hl,W_PARTYMON1NAME
 	call GetPartyMonName
 	pop bc
@@ -28677,7 +28677,7 @@ ItemUseTMHM: ; e479 (3:6479)
 	pop af
 	ld [$cf91],a
 	pop af
-	ld [$cf92],a
+	ld [wWhichPokemon],a
 	ld a,b
 	and a
 	ret z
@@ -28810,7 +28810,7 @@ GotOffBicycleText: ; e5fc (3:65fc)
 ; restores bonus PP (from PP Ups) when healing at a pokemon center
 ; also, when a PP Up is used, it increases the current PP by one PP Up bonus
 ; INPUT:
-; [$cf92] = index of pokemon in party
+; [wWhichPokemon] = index of pokemon in party
 ; [$d11e] = mode
 ; 0: Pokemon Center healing
 ; 1: using a PP Up
@@ -28818,7 +28818,7 @@ GotOffBicycleText: ; e5fc (3:65fc)
 RestoreBonusPP: ; e606 (3:6606)
 	ld hl,W_PARTYMON1_MOVE1
 	ld bc,44
-	ld a,[$cf92]
+	ld a,[wWhichPokemon]
 	call AddNTimes
 	push hl
 	ld de,$cd78 - 1
@@ -28899,7 +28899,7 @@ AddBonusPP: ; e642 (3:6642)
 
 ; gets max PP of a pokemon's move (including PP from PP Ups)
 ; INPUT:
-; [$cf92] = index of pokemon within party/box
+; [wWhichPokemon] = index of pokemon within party/box
 ; [$cc49] = pokemon source
 ; 00: player's party
 ; 01: enemy's party
@@ -28970,7 +28970,7 @@ GetMaxPP: ; e677 (3:6677)
 	ret
 
 GetSelectedMoveOffset: ; e6e3 (3:66e3)
-	ld a,[$cf92]
+	ld a,[wWhichPokemon]
 	call AddNTimes
 
 GetSelectedMoveOffset2: ; e6e9 (3:66e9)
@@ -28984,7 +28984,7 @@ GetSelectedMoveOffset2: ; e6e9 (3:66e9)
 ; INPUT:
 ; hl = address of inventory (either wNumBagItems or wNumBoxItems)
 ; [$cf91] = item ID
-; [$cf92] = index of item within inventory
+; [wWhichPokemon] = index of item within inventory
 ; [$cf96] = quantity to toss
 ; OUTPUT:
 ; clears carry flag if the item is tossed, sets carry flag if not
@@ -29020,7 +29020,7 @@ TossItem_: ; e6f1 (3:66f1)
 	ret z
 ; if the player chose Yes
 	push hl
-	ld a,[$cf92]
+	ld a,[wWhichPokemon]
 	call RemoveItemFromInventory
 	ld a,[$cf91]
 	ld [$d11e],a
@@ -30627,7 +30627,7 @@ _AddEnemyMonToPlayerParty: ; f49d (3:749d)
 	ld d, h
 	ld e, l
 	ld hl, W_ENEMYMON1OT
-	ld a, [$cf92]
+	ld a, [wWhichPokemon]
 	call SkipFixedLengthTextEntries
 	ld bc, $000b
 	call CopyData    ; write new mon's OT name (from an enemy mon)
@@ -30638,7 +30638,7 @@ _AddEnemyMonToPlayerParty: ; f49d (3:749d)
 	ld d, h
 	ld e, l
 	ld hl, W_ENEMYMON1NAME
-	ld a, [$cf92]
+	ld a, [wWhichPokemon]
 	call SkipFixedLengthTextEntries
 	ld bc, $000b
 	call CopyData    ; write new mon's nickname (from an enemy mon)
@@ -30966,7 +30966,7 @@ HealParty: ; f6a5 (3:76a5)
 	jr .HealPokemon ; Next Pokémon
 .DoneHealing
 	xor a
-	ld [$cf92], a
+	ld [wWhichPokemon], a
 	ld [$d11e], a
 	ld a, [W_NUMINPARTY]
 	ld b, a
@@ -30974,7 +30974,7 @@ HealParty: ; f6a5 (3:76a5)
 	push bc
 	call RestoreBonusPP
 	pop bc
-	ld hl, $cf92
+	ld hl, wWhichPokemon
 	inc [hl]
 	dec b
 	jr nz,.restoreBonusPPLoop
@@ -31797,30 +31797,30 @@ IndigoPlateauStatuesText3: ; fbe3 (3:7be3)
 	TX_FAR _IndigoPlateauStatuesText3
 	db "@"
 
-UnnamedText_fbe8: ; fbe8 (3:7be8)
+BookOrSculptureText: ; fbe8 (3:7be8)
 	db $08 ; asm
-	ld hl, UnnamedText_fc03
+	ld hl, PokemonBooksText
 	ld a, [W_CURMAPTILESET]
 	cp $13 ; Celadon Mansion tileset
 	jr nz, .asm_fbfd
 	ld a, [$c420]
 	cp $38
 	jr nz, .asm_fbfd
-	ld hl, UnnamedText_fc08
+	ld hl, DiglettSculptureText
 .asm_fbfd
 	call PrintText
 	jp TextScriptEnd
 
-UnnamedText_fc03: ; fc03 (3:7c03)
-	TX_FAR _UnnamedText_fc03
+PokemonBooksText: ; fc03 (3:7c03)
+	TX_FAR _PokemonBooksText
 	db "@"
 
-UnnamedText_fc08: ; fc08 (3:7c08)
-	TX_FAR _UnnamedText_fc08
+DiglettSculptureText: ; fc08 (3:7c08)
+	TX_FAR _DiglettSculptureText
 	db "@"
 
-UnnamedText_fc0d: ; fc0d (3:7c0d)
-	TX_FAR _UnnamedText_fc0d
+ElevatorText: ; fc0d (3:7c0d)
+	TX_FAR _ElevatorText
 	db "@"
 
 TownMapText: ; fc12 (3:7c12)
@@ -31837,8 +31837,8 @@ TownMapText: ; fc12 (3:7c12)
 	inc a
 	ld [H_AUTOBGTRANSFERENABLED], a
 	call LoadFontTilePatterns
-	ld b, BANK(Func_70e3e)
-	ld hl, Func_70e3e
+	ld b, BANK(DisplayTownMap)
+	ld hl, DisplayTownMap
 	call Bankswitch
 	ld hl, $d730
 	res 6, [hl]
@@ -31848,8 +31848,8 @@ TownMapText: ; fc12 (3:7c12)
 	push af
 	jp CloseTextDisplay
 
-UnnamedText_fc45: ; fc45 (3:7c45)
-	TX_FAR _UnnamedText_fc45
+PokemonStuffText: ; fc45 (3:7c45)
+	TX_FAR _PokemonStuffText
 	db "@"
 
 SECTION "bank4",ROMX,BANK[$4]
@@ -32539,7 +32539,7 @@ RedrawPartyMenu_: ; 12ce3 (4:6ce3)
 	ld hl, Func_71868
 	call Bankswitch ; place the appropriate pokemon icon
 	ld a,[$FF8C] ; loop counter
-	ld [$CF92],a
+	ld [wWhichPokemon],a
 	inc a
 	ld [$FF8C],a
 	call LoadMonData
@@ -32551,7 +32551,7 @@ RedrawPartyMenu_: ; 12ce3 (4:6ce3)
 ; if the player is swapping pokemon positions
 	dec a
 	ld b,a
-	ld a,[$CF92]
+	ld a,[wWhichPokemon]
 	cp b ; is the player swapping the current pokemon in the list?
 	jr nz,.skipUnfilledRightArrow
 ; the player is swapping the current pokemon in the list
@@ -32955,7 +32955,7 @@ StartMenu_Pokemon: ; 130a9 (4:70a9)
 	jp StartMenu_Pokemon
 .choseOutOfBattleMove
 	push hl
-	ld a,[$cf92]
+	ld a,[wWhichPokemon]
 	ld hl,W_PARTYMON1NAME
 	call GetPartyMonName
 	pop hl
@@ -32986,7 +32986,7 @@ StartMenu_Pokemon: ; 130a9 (4:70a9)
 	jp z,.newBadgeRequired
 	call CheckIfInOutsideMap
 	jr z,.canFly
-	ld a,[$cf92]
+	ld a,[wWhichPokemon]
 	ld hl,W_PARTYMON1NAME
 	call GetPartyMonName
 	ld hl,.cannotFlyHereText
@@ -33061,7 +33061,7 @@ StartMenu_Pokemon: ; 130a9 (4:70a9)
 .teleport
 	call CheckIfInOutsideMap
 	jr z,.canTeleport
-	ld a,[$cf92]
+	ld a,[wWhichPokemon]
 	ld hl,W_PARTYMON1NAME
 	call GetPartyMonName
 	ld hl,.cannotUseTeleportNowText
@@ -33091,7 +33091,7 @@ StartMenu_Pokemon: ; 130a9 (4:70a9)
 	db "@"
 .softboiled
 	ld hl,W_PARTYMON1_MAXHP
-	ld a,[$cf92]
+	ld a,[wWhichPokemon]
 	ld bc,44
 	call AddNTimes
 	ld a,[hli]
@@ -40674,7 +40674,7 @@ OaksLabScript_1d00a: ; 1d00a (7:500a)
 .GotParcel
 	ld hl, $d31d
 	ld a, c
-	ld [$cf92], a
+	ld [wWhichPokemon], a
 	ld a, $1
 	ld [$cf96], a
 	jp RemoveItemFromInventory
@@ -42116,7 +42116,7 @@ Func_1da15: ; 1da15 (7:5a15)
 Func_1da20: ; 1da20 (7:5a20)
 	ld hl, W_PARTYMON1OT
 	ld bc, $000b
-	ld a, [$cf92]
+	ld a, [wWhichPokemon]
 	call AddNTimes
 	ld de, $d158
 	ld c, $b
@@ -42124,7 +42124,7 @@ Func_1da20: ; 1da20 (7:5a20)
 	jr c, .asm_1da52 ; 0x1da34 $1c
 	ld hl, $d177
 	ld bc, $002c
-	ld a, [$cf92]
+	ld a, [wWhichPokemon]
 	call AddNTimes
 	ld de, $d359
 	ld c, $2
@@ -45103,7 +45103,7 @@ Func_2171b: ; 2171b (8:571b)
 	ld hl, $da9e
 	ld bc, $0021
 .asm_21729
-	ld a, [$cf92]
+	ld a, [wWhichPokemon]
 	call AddNTimes
 	ld b, $4
 .asm_21731
@@ -45265,7 +45265,7 @@ Func_21825: ; 5824 (8:5825)
 	ld a, [$c109]
 	cp $c
 	ret nz
-	ld a, [$d35e]
+	ld a, [W_CURMAP]
 	cp $ef
 	ld a, $2
 	jr z, .asm_2183a
@@ -45283,7 +45283,7 @@ Func_21845: ; 5845 (8:5845)
 	ld a, [$c109]
 	cp $8
 	ret nz
-	ld a, [$d35e]
+	ld a, [W_CURMAP]
 	cp $ef
 	ld a, $2
 	jr z, .asm_2185a
@@ -48417,7 +48417,7 @@ Func_3730e: ; 3730e (d:730e)
 	ld b, a
 	ld hl, DisplayTextIDInit
 	call Bankswitch
-	ld hl, UnnamedText_37390
+	ld hl, PlaySlotMachineText
 	call PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
@@ -48465,8 +48465,8 @@ Func_3730e: ; 3730e (d:730e)
 	push af
 	jp CloseTextDisplay
 
-UnnamedText_37390: ; 37390 (d:7390)
-	TX_FAR _UnnamedText_37390
+PlaySlotMachineText: ; 37390 (d:7390)
+	TX_FAR _PlaySlotMachineText
 	db "@"
 
 Func_37395: ; 37395 (d:7395)
@@ -48476,7 +48476,7 @@ Func_37395: ; 37395 (d:7395)
 	ld [hli], a
 	ld [hl], a
 	call Func_3775f
-	ld hl, UnnamedText_3746c
+	ld hl, BetHowManySlotMachineText
 	call PrintText
 	call SaveScreenTilesToBuffer1
 .loop
@@ -48497,7 +48497,7 @@ Func_37395: ; 37395 (d:7395)
 	ld c, $4
 	call TextBoxBorder
 	ld hl, $c4a0
-	ld de, UnnamedText_3745e
+	ld de, CoinMultiplierSlotMachineText
 	call PlaceString
 	call HandleMenuInput
 	and $2
@@ -48515,7 +48515,7 @@ Func_37395: ; 37395 (d:7395)
 	ld a, [hl]
 	cp c
 	jr nc, .skip1
-	ld hl, UnnamedText_37476
+	ld hl, NotEnoughCoinsSlotMachineText
 	call PrintText
 	jr .loop
 .skip1
@@ -48531,7 +48531,7 @@ Func_37395: ; 37395 (d:7395)
 	call WaitForSoundToFinish
 	ld a, $c0
 	call PlaySound
-	ld hl, UnnamedText_37471
+	ld hl, StartSlotMachineText
 	call PrintText
 	call Func_374ad
 	call Func_37588
@@ -48539,12 +48539,12 @@ Func_37395: ; 37395 (d:7395)
 	ld a, [hli]
 	or [hl]
 	jr nz, .skip2
-	ld hl, UnnamedText_37467
+	ld hl, OutOfCoinsSlotMachineText
 	call PrintText
 	ld c, $3c
 	jp DelayFrames
 .skip2
-	ld hl, UnnamedText_3747b
+	ld hl, OneMoreGoSlotMachineText
 	call PrintText
 	ld hl, $c49e
 	ld bc, $0d0f
@@ -48559,29 +48559,29 @@ Func_37395: ; 37395 (d:7395)
 	call Func_377ce
 	jp Func_37395
 
-UnnamedText_3745e: ; 3745e (d:745e)
+CoinMultiplierSlotMachineText: ; 3745e (d:745e)
 	db "×3",$4e
 	db "×2",$4e
 	db "×1@"
 
-UnnamedText_37467: ; 37467 (d:7467)
-	TX_FAR _UnnamedText_37467
+OutOfCoinsSlotMachineText: ; 37467 (d:7467)
+	TX_FAR _OutOfCoinsSlotMachineText
 	db "@"
 
-UnnamedText_3746c: ; 3746c (d:746c)
-	TX_FAR _UnnamedText_3746c
+BetHowManySlotMachineText: ; 3746c (d:746c)
+	TX_FAR _BetHowManySlotMachineText
 	db "@"
 
-UnnamedText_37471: ; 37471 (d:7471)
-	TX_FAR _UnnamedText_37471
+StartSlotMachineText: ; 37471 (d:7471)
+	TX_FAR _StartSlotMachineText
 	db "@"
 
-UnnamedText_37476: ; 37476 (d:7476)
-	TX_FAR _UnnamedText_37476
+NotEnoughCoinsSlotMachineText: ; 37476 (d:7476)
+	TX_FAR _NotEnoughCoinsSlotMachineText
 	db "@"
 
-UnnamedText_3747b: ; 3747b (d:747b)
-	TX_FAR _UnnamedText_3747b
+OneMoreGoSlotMachineText: ; 3747b (d:747b)
+	TX_FAR _OneMoreGoSlotMachineText
 	db "@"
 
 Func_37480: ; 37480 (d:7480)
@@ -62233,7 +62233,7 @@ Func_3c92a: ; 3c92a (f:492a)
 	jr nz,.next
 	ld a,[$CC3E]
 	sub 4
-	ld [$CF92],a
+	ld [wWhichPokemon],a
 	jr .next3
 .next
 	ld b,$FF
@@ -62244,7 +62244,7 @@ Func_3c92a: ; 3c92a (f:492a)
 	jr z,.next2
 	ld hl,$D8A4
 	ld a,b
-	ld [$CF92],a
+	ld [wWhichPokemon],a
 	push bc
 	ld bc,$2C
 	call AddNTimes
@@ -62256,13 +62256,13 @@ Func_3c92a: ; 3c92a (f:492a)
 	or c
 	jr z,.next2
 .next3
-	ld a,[$CF92]
+	ld a,[wWhichPokemon]
 	ld hl,$D8C5
 	ld bc,$2C
 	call AddNTimes
 	ld a,[hl]
 	ld [$D127],a
-	ld a,[$CF92]
+	ld a,[wWhichPokemon]
 	inc a
 	ld hl,$D89C
 	ld c,a
@@ -62310,7 +62310,7 @@ Func_3c92a: ; 3c92a (f:492a)
 	ld [$CC26],a
 	jr c,.next7
 	ld hl,$CC2F
-	ld a,[$CF92]
+	ld a,[wWhichPokemon]
 	cp [hl]
 	jr nz,.next6
 	ld hl,UnnamedText_3d1f5 ; $51f5
@@ -89958,7 +89958,7 @@ DayCareMText1: ; 56254 (15:6254)
 	jp c, Func_56409
 	xor a
 	ld [$cc2b], a
-	ld a, [$cf92]
+	ld a, [wWhichPokemon]
 	ld hl, $d2b5
 	call GetPartyMonName
 	ld hl, UnnamedText_56419
@@ -104939,7 +104939,7 @@ Unknown_70e20: ; 70e20 (1c:4e20)
 Unknown_70e2e: ; 70e2e (1c:4e2e)
 	db $04,$00,$03,$00,$03,$00,$02,$00,$02,$00,$01,$00,$01,$00,$01,$FF
 
-Func_70e3e: ; 70e3e (1c:4e3e)
+DisplayTownMap: ; 70e3e (1c:4e3e)
 	call Func_7109b
 	ld hl, $cfcb
 	ld a, [hl]
@@ -106393,7 +106393,7 @@ Func_71c07: ; 71c07 (1c:5c07)
 	cp b
 	ld a,$2
 	jr nz,.asm_c4bc2 ; 0x71c26 $75
-	ld a,[$cf92]
+	ld a,[wWhichPokemon]
 	ld hl,$d18c
 	ld bc,$002c
 	call AddNTimes
@@ -106407,7 +106407,7 @@ Func_71c07: ; 71c07 (1c:5c07)
 	call Predef
 	ld hl, UnnamedText_71d88
 	call PrintText
-	ld a,[$cf92]
+	ld a,[wWhichPokemon]
 	push af
 	ld a,[$d127]
 	push af
@@ -106418,7 +106418,7 @@ Func_71c07: ; 71c07 (1c:5c07)
 	pop af
 	ld [$d127],a
 	pop af
-	ld [$cf92],a
+	ld [wWhichPokemon],a
 	ld a,[$cd34]
 	ld [$cf91],a
 	xor a
@@ -109055,21 +109055,21 @@ PrintStatusAilment: ; 747de (1d:47de)
 	ld [hl], "R"
 	ret
 
-Func_7481f: ; 7481f (1d:481f)
+HiddenItemNear: ; 7481f (1d:481f)
 	ld hl, HiddenItemCoords
 	ld b, $0
 .asm_74824
 	ld de, $0003
-	ld a, [$d35e]
+	ld a, [W_CURMAP]
 	call IsInArrayCummulativeCount
-	ret nc
+	ret nc ; return if current map has no hidden items
 	push bc
 	push hl
 	ld hl, $d6f0
 	ld c, b
 	ld b, $2
 	ld a, $10
-	call Predef
+	call Predef ; indirect jump to HandleBitArray (f666 (3:7666))
 	ld a, c
 	pop hl
 	pop bc
@@ -116033,6 +116033,7 @@ Func_79d16: ; 79d16 (1e:5d16)
 .asm_79d26
 	ld [$d08a], a
 	ret
+
 Func_79d2a: ; 79d2a (1e:5d2a)
 	ld hl, $c301
 	ld de, Unknown_79d3e
@@ -124853,26 +124854,26 @@ _UnnamedText_41671: ; 88180 (22:4180)
 	TX_RAM $cf4b
 	db $0, ".", $57
 
-_UnnamedText_37390: ; 8818f (22:418f)
+_PlaySlotMachineText: ; 8818f (22:418f)
 	db $0, "A slot machine!", $4f
 	db "Want to play?", $57
 
-_UnnamedText_37467: ; 881ae (22:41ae)
+_OutOfCoinsSlotMachineText: ; 881ae (22:41ae)
 	db $0, "Darn!", $4f
 	db "Ran out of coins!", $57
 
-_UnnamedText_3746c: ; 881c7 (22:41c7)
+_BetHowManySlotMachineText: ; 881c7 (22:41c7)
 	db $0, "Bet how many", $4f
 	db "coins?", $57
 
-_UnnamedText_37471: ; 881dc (22:41dc)
+_StartSlotMachineText: ; 881dc (22:41dc)
 	db $0, "Start!", $57
 
-_UnnamedText_37476: ; 881e4 (22:41e4)
+_NotEnoughCoinsSlotMachineText: ; 881e4 (22:41e4)
 	db $0, "Not enough", $4f
 	db "coins!", $58
 
-_UnnamedText_3747b: ; 881f7 (22:41f7)
+_OneMoreGoSlotMachineText: ; 881f7 (22:41f7)
 	db $0, "One more ", $4f
 	db "go?", $57
 
@@ -125431,22 +125432,22 @@ _IndigoPlateauStatuesText3: ; 89596 (22:5596)
 	db "#MON authority", $55
 	db "#MON LEAGUE HQ", $57
 
-_UnnamedText_fc03: ; 895c1 (22:55c1)
+_PokemonBooksText: ; 895c1 (22:55c1)
 	db $0, "Crammed full of", $4f
 	db "#MON books!", $57
 
-_UnnamedText_fc08: ; 895de (22:55de)
+_DiglettSculptureText: ; 895de (22:55de)
 	db $0, "It's a sculpture", $4f
 	db "of DIGLETT.", $57
 
-_UnnamedText_fc0d: ; 895fb (22:55fb)
+_ElevatorText: ; 895fb (22:55fb)
 	db $0, "This is an", $4f
 	db "elevator.", $57
 
 _TownMapText: ; 89611 (22:5611)
 	db $0, "A TOWN MAP.@@"
 
-_UnnamedText_fc45: ; 8961f (22:561f)
+_PokemonStuffText: ; 8961f (22:561f)
 	db $0, "Wow! Tons of", $4f
 	db "#MON stuff!", $57
 
