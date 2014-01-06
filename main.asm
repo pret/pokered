@@ -7318,7 +7318,7 @@ DisplayListMenuIDLoop: ; 2c53 (0:2c53)
 	cp l ; is it a list of party pokemon or box pokemon?
 	ld hl,W_PARTYMON1NAME
 	jr z,.getPokemonName
-	ld hl,$de06 ; box pokemon names
+	ld hl, W_BOXMON1NAME ; box pokemon names
 .getPokemonName
 	ld a,[$cf92]
 	call GetPartyMonName
@@ -7566,7 +7566,7 @@ PrintListMenuEntries: ; 2e5a (0:2e5a)
 	cp l ; is it a list of party pokemon or box pokemon?
 	ld hl,W_PARTYMON1NAME
 	jr z,.getPokemonName
-	ld hl,$de06 ; box pokemon names
+	ld hl, W_BOXMON1NAME ; box pokemon names
 .getPokemonName
 	ld a,[$cf92]
 	ld b,a
@@ -11281,7 +11281,7 @@ SonyText: ; 45b1 (1:45b1)
 ; $cf98 = base address of pokemon data
 ; $d0b8 = base address of base stats
 LoadMonData_: ; 45b6 (1:45b6)
-	ld a,[$da5f] ; daycare pokemon ID
+	ld a,[W_DAYCAREMONDATA] ; daycare pokemon ID
 	ld [$cf91],a
 	ld a,[$cc49]
 	cp a,$03
@@ -11306,7 +11306,7 @@ LoadMonData_: ; 45b6 (1:45b6)
 	ld hl,W_BOXMON1DATA ; box pokemon 1 data
 	ld bc,33
 	jr z,.getMonEntry
-	ld hl,$da5f ; daycare pokemon data
+	ld hl, W_DAYCAREMONDATA ; daycare pokemon data
 	jr .copyMonData
 .getMonEntry ; add the product of the index and the size of each entry
 	ld a,[$cf92]
@@ -18228,7 +18228,7 @@ _RemovePokemon: ; 7b68 (1:7b68)
 	ld a, [$cf95]
 	and a
 	jr z, .asm_7b97
-	ld hl, $dd2a
+	ld hl, W_BOXMON1OT
 	ld d, $13
 .asm_7b97
 	ld a, [wWhichPokemon] ; $cf92
@@ -18247,7 +18247,7 @@ _RemovePokemon: ; 7b68 (1:7b68)
 	ld a, [$cf95]
 	and a
 	jr z, .asm_7bb8
-	ld bc, $de06
+	ld bc, W_BOXMON1NAME
 .asm_7bb8
 	call CopyDataUntil
 	ld hl, W_PARTYMON1_NUM ; $d16b (aliases: W_PARTYMON1DATA)
@@ -18267,7 +18267,7 @@ _RemovePokemon: ; 7b68 (1:7b68)
 	jr z, .asm_7be4
 	ld bc, $21
 	add hl, bc
-	ld bc, $dd2a
+	ld bc, W_BOXMON1OT
 	jr .asm_7beb
 .asm_7be4
 	ld bc, $2c
@@ -18279,7 +18279,7 @@ _RemovePokemon: ; 7b68 (1:7b68)
 	ld a, [$cf95]
 	and a
 	jr z, .asm_7bfa
-	ld hl, $de06
+	ld hl, W_BOXMON1NAME
 .asm_7bfa
 	ld bc, $b
 	ld a, [wWhichPokemon] ; $cf92
@@ -21825,7 +21825,7 @@ TilesetsHeadPtr: ; c7be (3:47be)
 	TSETHEAD Tset17_Block,Tset17_GFX,Tset17_Coll,$FF,$FF,$FF,$45,1
 
 Func_c8de: ; c8de (3:48de)
-	ld a, [$da48]
+	ld a, [W_DAYCARE_IN_USE]
 	and a
 	ret z
 	ld hl, $da6f
@@ -29119,7 +29119,7 @@ Func_e7a4: ; e7a4 (3:67a4)
 	cp $ff
 	jr nz, .asm_e7b1
 	call GetMonHeader
-	ld hl, $dd2a
+	ld hl, W_BOXMON1OT
 	ld bc, $b
 	ld a, [W_NUMINBOX] ; $da80
 	dec a
@@ -29150,13 +29150,13 @@ Func_e7a4: ; e7a4 (3:67a4)
 	jr nz, .asm_e7db
 .asm_e7ee
 	ld hl, W_PLAYERNAME ; $d158
-	ld de, $dd2a
+	ld de, W_BOXMON1OT
 	ld bc, $b
 	call CopyData
 	ld a, [W_NUMINBOX] ; $da80
 	dec a
 	jr z, .asm_e82a
-	ld hl, $de06
+	ld hl, W_BOXMON1NAME
 	ld bc, $b
 	dec a
 	call AddNTimes
@@ -29183,7 +29183,7 @@ Func_e7a4: ; e7a4 (3:67a4)
 	dec b
 	jr nz, .asm_e817
 .asm_e82a
-	ld hl, $de06
+	ld hl, W_BOXMON1NAME
 	ld a, $2
 	ld [$d07d], a
 	ld a, $4e
@@ -30666,7 +30666,7 @@ Func_f51e: ; f51e (3:751e)
 	cp $2
 	jr z, .checkPartyMonSlots
 	cp $3
-	ld hl, $da5f
+	ld hl, W_DAYCAREMONDATA
 	jr z, .asm_f575
 	ld hl, W_NUMINBOX ; $da80
 	ld a, [hl]
@@ -30689,7 +30689,7 @@ Func_f51e: ; f51e (3:751e)
 	add hl, bc
 	ld a, [$cf95]
 	cp $2
-	ld a, [$da5f]
+	ld a, [W_DAYCAREMONDATA]
 	jr z, .asm_f556
 	ld a, [$cf91]
 .asm_f556
@@ -30717,7 +30717,7 @@ Func_f51e: ; f51e (3:751e)
 	ld bc, W_BOXMON2DATA - W_BOXMON1DATA ; $21
 	jr z, .asm_f591
 	cp $2
-	ld hl, $da5f
+	ld hl, W_DAYCAREMONDATA
 	jr z, .asm_f597
 	ld hl, W_PARTYMON1DATA ; $d16b
 	ld bc, W_PARTYMON2DATA - W_PARTYMON1DATA ; $2c
@@ -30746,13 +30746,13 @@ Func_f51e: ; f51e (3:751e)
 .asm_f5b4
 	ld a, [$cf95]
 	cp $3
-	ld de, $da54
+	ld de, W_DAYCAREMONOT
 	jr z, .asm_f5d3
 	dec a
 	ld hl, W_PARTYMON1OT ; $d273
 	ld a, [W_NUMINPARTY] ; $d163
 	jr nz, .asm_f5cd
-	ld hl, $dd2a
+	ld hl, W_BOXMON1OT
 	ld a, [W_NUMINBOX] ; $da80
 .asm_f5cd
 	dec a
@@ -30760,11 +30760,11 @@ Func_f51e: ; f51e (3:751e)
 	ld d, h
 	ld e, l
 .asm_f5d3
-	ld hl, $dd2a
+	ld hl, W_BOXMON1OT
 	ld a, [$cf95]
 	and a
 	jr z, .asm_f5e6
-	ld hl, $da54
+	ld hl, W_DAYCAREMONOT
 	cp $2
 	jr z, .asm_f5ec
 	ld hl, W_PARTYMON1OT ; $d273
@@ -30776,13 +30776,13 @@ Func_f51e: ; f51e (3:751e)
 	call CopyData
 	ld a, [$cf95]
 	cp $3
-	ld de, $da49
+	ld de, W_DAYCAREMONNAME
 	jr z, .asm_f611
 	dec a
 	ld hl, W_PARTYMON1NAME ; $d2b5
 	ld a, [W_NUMINPARTY] ; $d163
 	jr nz, .asm_f60b
-	ld hl, $de06
+	ld hl, W_BOXMON1NAME
 	ld a, [W_NUMINBOX] ; $da80
 .asm_f60b
 	dec a
@@ -30790,11 +30790,11 @@ Func_f51e: ; f51e (3:751e)
 	ld d, h
 	ld e, l
 .asm_f611
-	ld hl, $de06
+	ld hl, W_BOXMON1NAME
 	ld a, [$cf95]
 	and a
 	jr z, .asm_f624
-	ld hl, $da49
+	ld hl, W_DAYCAREMONNAME
 	cp $2
 	jr z, .asm_f62a
 	ld hl, W_PARTYMON1NAME ; $d2b5
@@ -32123,14 +32123,14 @@ StatusScreen: ; 12953 (4:6953)
 	ld hl, Coord
 	ld a, $4b
 	call Predef ; Prints the type (?)
-	ld hl, Unknown_12a9d ; $6a9d
+	ld hl, NamePointers2 ; $6a9d
 	call .unk_12a7e
 	ld d, h
 	ld e, l
 	FuncCoord 9,1
 	ld hl, Coord
 	call PlaceString ; Pokémon name
-	ld hl, Unknown_12a95 ; $6a95
+	ld hl, OTPointers ; $6a95
 	call .unk_12a7e
 	ld d, h
 	ld e, l
@@ -32170,17 +32170,17 @@ StatusScreen: ; 12953 (4:6953)
 	ld a, [wWhichPokemon]
 	jp SkipFixedLengthTextEntries
 
-Unknown_12a95: ; 12a95 (4:6a95)
+OTPointers: ; 12a95 (4:6a95)
 	dw W_PARTYMON1OT
 	dw W_ENEMYMON1OT
-	dw $DD2A
-	dw $DA54
+	dw W_BOXMON1OT
+	dw W_DAYCAREMONOT
 
-Unknown_12a9d: ; 12a9d (4:6a9d)
+NamePointers2: ; 12a9d (4:6a9d)
 	dw W_PARTYMON1NAME
 	dw W_ENEMYMON1NAME
-	dw $DE06
-	dw $DA49
+	dw W_BOXMON1NAME
+	dw W_DAYCAREMONNAME
 
 Type1Text: ; 12aa5 (4:6aa5)
 	db "TYPE1/", $4e
@@ -45024,7 +45024,7 @@ Func_21618: ; 21618 (8:5618)
 	call Func_2174b
 	jp nc, Func_214e8
 	ld a, [wWhichPokemon] ; $cf92
-	ld hl, $de06
+	ld hl, W_BOXMON1NAME
 	call GetPartyMonName
 	ld a, [$cf91]
 	call GetCryData
@@ -89923,7 +89923,7 @@ DayCareMTextPointers: ; 56252 (15:6252)
 DayCareMText1: ; 56254 (15:6254)
 	db $8
 	call SaveScreenTilesToBuffer2
-	ld a, [$da48]
+	ld a, [W_DAYCARE_IN_USE]
 	and a
 	jp nz, Func_562e1
 	ld hl, UnnamedText_5640f
@@ -89964,7 +89964,7 @@ DayCareMText1: ; 56254 (15:6254)
 	ld hl, UnnamedText_56419
 	call PrintText
 	ld a, $1
-	ld [$da48], a
+	ld [W_DAYCARE_IN_USE], a
 	ld a, $3
 	ld [$cf95], a
 	call Func_3a68
@@ -89978,7 +89978,7 @@ DayCareMText1: ; 56254 (15:6254)
 
 Func_562e1: ; 562e1 (15:62e1)
 	xor a
-	ld hl, $da49
+	ld hl, W_DAYCAREMONNAME
 	call GetPartyMonName
 	ld a, $3
 	ld [$cc49], a
@@ -90072,7 +90072,7 @@ Func_562e1: ; 562e1 (15:62e1)
 
 .asm_56396
 	xor a
-	ld [$da48], a
+	ld [W_DAYCARE_IN_USE], a
 	ld hl, wTrainerEngageDistance
 	ld [hli], a
 	inc hl
@@ -90090,7 +90090,7 @@ Func_562e1: ; 562e1 (15:62e1)
 	ld a, $2
 	ld [$cf95], a
 	call Func_3a68
-	ld a, [$da5f]
+	ld a, [W_DAYCAREMONDATA]
 	ld [$cf91], a
 	ld a, [W_NUMINPARTY]
 	dec a
@@ -126385,7 +126385,7 @@ _UnnamedText_5642d: ; 8acae (22:6cae)
 	db "@"
 
 UnnamedText_8acb6: ; 8acb6 (22:6cb6)
-	TX_RAM $da49
+	TX_RAM W_DAYCAREMONNAME
 	db $0, " back!", $57
 
 _UnnamedText_56432: ; 8acc1 (22:6cc1)
@@ -134104,7 +134104,7 @@ _UnnamedText_4fe3f: ; a418f (29:418f)
 	db $0, "There's no more", $4f
 	db "room for #MON!", $55
 	db "@"
-	TX_RAM $de06
+	TX_RAM W_BOXMON1NAME
 	db $0, " was", $55
 	db "sent to #MON", $55
 	db "BOX @"
@@ -135099,14 +135099,14 @@ _ItemUseBallText05: ; a67cf (29:67cf)
 
 _ItemUseBallText07: ; a67ee (29:67ee)
 	db 1
-	dw $DE06
+	dw W_BOXMON1NAME
 	db 0," was",$4F
 	db "transferred to",$55
 	db "BILL's PC!",$58
 
 _ItemUseBallText08: ; a6810 (29:6810)
 	db 1
-	dw $DE06
+	dw W_BOXMON1NAME
 	db 0," was",$4F
 	db "transferred to",$55
 	db "someone's PC!",$58
