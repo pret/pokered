@@ -13567,7 +13567,7 @@ Func_57f2:
 	ld c, $12
 	call Func_5ab3
 	ld hl, $c3a5
-	ld de, $d158
+	ld de, W_PLAYERNAME
 	call PlaceString
 	ld hl, $c445
 	ld de, $d887
@@ -16846,7 +16846,7 @@ DrawStartMenu: ; 710b (1:710b)
 	call PrintStartMenuItem
 	ld de,StartMenuItemText
 	call PrintStartMenuItem
-	ld de,$d158 ; player's name
+	ld de,W_PLAYERNAME ; player's name
 	call PrintStartMenuItem
 	ld a,[$d72e]
 	bit 6,a ; is the player using the link feature?
@@ -42118,7 +42118,7 @@ Func_1da20: ; 1da20 (7:5a20)
 	ld bc, $000b
 	ld a, [wWhichPokemon]
 	call AddNTimes
-	ld de, $d158
+	ld de, W_PLAYERNAME
 	ld c, $b
 	call .asm_1da47
 	jr c, .asm_1da52 ; 0x1da34 $1c
@@ -73396,7 +73396,7 @@ Mansion1AfterBattleText2: ; 44355 (11:4355)
 
 Mansion1Text4: ; 4435a (11:435a)
 	db $8
-	ld hl, UnnamedText_44395
+	ld hl, MansionSwitchText
 	call PrintText
 	call YesNoChoice
 	ld a, [$cc26]
@@ -73406,7 +73406,7 @@ Mansion1Text4: ; 4435a (11:435a)
 	ld [$cc3c], a
 	ld hl, $d126
 	set 5, [hl]
-	ld hl, UnnamedText_4439a
+	ld hl, MansionSwitchPressedText
 	call PrintText
 	ld a, $ad
 	call PlaySound
@@ -73417,21 +73417,21 @@ Mansion1Text4: ; 4435a (11:435a)
 	res 0, [hl]
 	jr .asm_44392 ; 0x4438a $6
 .asm_4438c
-	ld hl, UnnamedText_4439f
+	ld hl, MansionSwitchNotPressedText
 	call PrintText
 .asm_44392
 	jp TextScriptEnd
 
-UnnamedText_44395: ; 44395 (11:4395)
-	TX_FAR _UnnamedText_44395
+MansionSwitchText: ; 44395 (11:4395)
+	TX_FAR _MansionSwitchText
 	db "@"
 
-UnnamedText_4439a: ; 4439a (11:439a)
-	TX_FAR _UnnamedText_4439a
+MansionSwitchPressedText: ; 4439a (11:439a)
+	TX_FAR _MansionSwitchPressedText
 	db "@"
 
-UnnamedText_4439f: ; 4439f (11:439f)
-	TX_FAR _UnnamedText_4439f
+MansionSwitchNotPressedText: ; 4439f (11:439f)
+	TX_FAR _MansionSwitchNotPressedText
 	db "@"
 
 Mansion1Object: ; 0x443a4 (size=90)
@@ -90551,7 +90551,7 @@ DisplayDiploma: ; 566e2 (15:66e2)
 	jr nz, .asm_56715 ; 0x56725 $ee
 	FuncCoord 10, 4 ; $c3fa
 	ld hl, Coord
-	ld de, $d158
+	ld de, W_PLAYERNAME
 	call PlaceString
 	ld b, BANK(Func_44dd)
 	ld hl, Func_44dd
@@ -90587,7 +90587,7 @@ DisplayDiploma: ; 566e2 (15:66e2)
 	jp GBPalNormal
 
 Func_56777: ; 56777 (15:6777)
-	ld hl, $d158
+	ld hl, W_PLAYERNAME
 	ld bc, $ff00
 .asm_5677d
 	ld a, [hli]
@@ -111235,7 +111235,7 @@ CinnabarGymTextPointers: ; 7589f (1d:589f)
 	dw CinnabarGymText7
 	dw CinnabarGymText8
 	dw CinnabarGymText9
-	dw UnnamedText_75925
+	dw BlaineBadgeText
 	dw ReceivedTM38Text
 	dw TM38NoRoomText
 
@@ -111270,35 +111270,35 @@ CinnabarGymText1: ; 758df (1d:58df)
 	call DisableWaitingAfterTextDisplay
 	jp TextScriptEnd
 .asm_3012f ; 0x758f4
-	ld hl, UnnamedText_75920
+	ld hl, BlaineFireBlastText
 	call PrintText
 	jp TextScriptEnd
 .asm_d9332 ; 0x758fd
-	ld hl, UnnamedText_75914
+	ld hl, BlaineBattleText
 	call PrintText
-	ld hl, UnnamedText_75919
-	ld de, UnnamedText_75919 ; $5919 XXX
+	ld hl, BlaineEndBattleText
+	ld de, BlaineEndBattleText
 	call PreBattleSaveRegisters
 	ld a, $7
 	ld [$d05c], a
 	jp Func_758b7
 
-UnnamedText_75914: ; 75914 (1d:5914)
-	TX_FAR _UnnamedText_75914
+BlaineBattleText: ; 75914 (1d:5914)
+	TX_FAR _BlaineBattleText
 	db "@"
 
-UnnamedText_75919: ; 75919 (1d:5919)
-	TX_FAR UnnamedText_a08c7
+BlaineEndBattleText: ; 75919 (1d:5919)
+	TX_FAR _BlaineEndBattleText
 	db $11
 	db $d
 	db "@"
 
-UnnamedText_75920: ; 75920 (1d:5920)
-	TX_FAR _UnnamedText_75920
+BlaineFireBlastText: ; 75920 (1d:5920)
+	TX_FAR _BlaineFireBlastText
 	db "@"
 
-UnnamedText_75925: ; 75925 (1d:5925)
-	TX_FAR _UnnamedText_75925
+BlaineBadgeText: ; 75925 (1d:5925)
+	TX_FAR _BlaineBadgeText
 	db "@"
 
 ReceivedTM38Text: ; 7592a (1d:592a)
@@ -116504,7 +116504,7 @@ AttackAnimationPointers: ; 7a07d (1e:607d)
 	dw DragonRageAnim
 	dw FireSpinAnim
 	dw ThunderShockAnim
-	dw ThunderBoldAnim
+	dw ThunderBoltAnim
 	dw ThunderWaveAnim
 	dw ThunderAnim
 	dw RockThrowAnim
@@ -117085,7 +117085,7 @@ ThunderShockAnim: ; 7a46c (1e:646c)
 	db $42,$53,$29
 	db $FF
 
-ThunderBoldAnim: ; 7a470 (1e:6470)
+ThunderBoltAnim: ; 7a470 (1e:6470)
 	db $41,$54,$29
 	db $41,$54,$29
 	db $FF
@@ -118699,8 +118699,8 @@ FrameBlockPointers: ; 7af74 (1e:6f74)
 	dw FrameBlock45
 	dw FrameBlock46
 	dw FrameBlock47
-	dw FrameBlock48
-	dw FrameBlock49
+	dw SmallBlackCircleFrameBlock
+	dw LargeBlockCircleFrameBlock
 	dw FrameBlock4a
 	dw FrameBlock4b
 	dw FrameBlock4c
@@ -118750,6 +118750,14 @@ FrameBlockPointers: ; 7af74 (1e:6f74)
 	dw FrameBlock78
 	dw FrameBlock79
 
+; FrameBlock format is as follows:
+; first byte = number of tiles in FrameBlock
+;
+; Next, each group of 4 bytes describes a tile in the FrameBlock
+; first byte = y offset
+; second byte = x offset
+; third byte = tile id (it's actually tile id - $31)
+; fourth byte = tile properties (xflip/yflip/etc.)
 FrameBlock01: ; 7b068 (1e:7068)
 	db $09
 	db $00,$00,$2c,$00
@@ -119395,14 +119403,14 @@ FrameBlock47: ; 7b753 (1e:7753)
 	db $08,$00,$43,$40
 	db $08,$08,$43,$60
 
-FrameBlock48: ; 7b764 (1e:7764)
+SmallBlackCircleFrameBlock: ; 7b764 (1e:7764)
 	db $04
 	db $08,$08,$33,$00
 	db $08,$10,$33,$20
 	db $10,$08,$33,$40
 	db $10,$10,$33,$60
 
-FrameBlock49: ; 7b775 (1e:7775)
+LargeBlockCircleFrameBlock: ; 7b775 (1e:7775)
 	db $10
 	db $00,$00,$22,$00
 	db $00,$08,$23,$00
@@ -133009,17 +133017,17 @@ _Mansion1AfterBattleText2: ; a07dc (28:47dc)
 	db "know what you're", $55
 	db "talking about.", $57
 
-_UnnamedText_44395: ; a080a (28:480a)
+_MansionSwitchText: ; a080a (28:480a)
 	db $0, "A secret switch!", $51
 	db "Press it?", $57
 
-_UnnamedText_4439a: ; a0826 (28:4826)
+_MansionSwitchPressedText: ; a0826 (28:4826)
 	db $0, "Who wouldn't?", $58
 
-_UnnamedText_4439f: ; a0834 (28:4834)
+_MansionSwitchNotPressedText: ; a0834 (28:4834)
 	db $0, "Not quite yet!", $57
 
-_UnnamedText_75914: ; a0844 (28:4844)
+_BlaineBattleText: ; a0844 (28:4844)
 	db $0, "Hah!", $51
 	db "I am BLAINE! I", $4f
 	db "am the LEADER of", $55
@@ -133030,20 +133038,20 @@ _UnnamedText_75914: ; a0844 (28:4844)
 	db "Hah! You better", $4f
 	db "have BURN HEAL!", $57
 
-UnnamedText_a08c7: ; a08c7 (28:48c7)
+_BlaineEndBattleText: ; a08c7 (28:48c7)
 	db $0, "I have", $4f
 	db "burnt out!", $51
 	db "You have earned", $4f
 	db "the VOLCANOBADGE!@@"
 
-_UnnamedText_75920: ; a08fd (28:48fd)
+_BlaineFireBlastText: ; a08fd (28:48fd)
 	db $0, "FIRE BLAST is the", $4f
 	db "ultimate fire", $55
 	db "technique!", $51
 	db "Don't waste it on", $4f
 	db "water #MON!", $57
 
-_UnnamedText_75925: ; a0946 (28:4946)
+_BlaineBadgeText: ; a0946 (28:4946)
 	db $0, "Hah!", $51
 	db "The VOLCANOBADGE", $4f
 	db "heightens the", $55
