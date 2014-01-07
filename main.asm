@@ -172,7 +172,7 @@ ReadJoypadRegister: ; 015f (0:015f)
 GetJoypadState: ; 019a (0:019a)
 	ld a, [H_LOADEDROMBANK]
 	push af
-	ld a,$3
+	ld a,Bank(_GetJoypadState)
 	ld [H_LOADEDROMBANK],a
 	ld [$2000],a
 	call _GetJoypadState
@@ -1205,7 +1205,7 @@ HandleBlackOut: ; 0931 (0:0931)
 	call StopMusic
 	ld hl,$d72e
 	res 5,[hl]
-	ld a,$01
+	ld a,Bank(Func_40b0) ; Bank(Func_40b0) and Bank(Func_62ce) need to be equal.
 	ld [H_LOADEDROMBANK],a
 	ld [$2000],a
 	call Func_40b0
@@ -1236,7 +1236,7 @@ HandleFlyOrTeleportAway: ; 0965 (0:0965)
 	set 2,[hl]
 	res 5,[hl]
 	call DoFlyOrTeleportAwayGraphics
-	ld a,$01
+	ld a,Bank(Func_62ce)
 	ld [H_LOADEDROMBANK],a
 	ld [$2000],a
 	call Func_62ce
@@ -3044,7 +3044,7 @@ LoadFrontSpriteByMonIndex: ; 1389 (0:1389)
 	pop hl
 	ld a, [H_LOADEDROMBANK]
 	push af
-	ld a, $f
+	ld a, Bank(asm_3f0d0)
 	ld [H_LOADEDROMBANK], a
 	ld [$2000], a
 	xor a
@@ -5207,7 +5207,7 @@ InitGame: ; 1f54 (0:1f54)
 	ld bc,$007f
 	call FillMemory ; zero HRAM
 	call CleanLCD_OAM ; this is unnecessary since it was already cleared above
-	ld a,$01
+	ld a,Bank(WriteDMACodeToHRAM)
 	ld [H_LOADEDROMBANK],a
 	ld [$2000],a
 	call WriteDMACodeToHRAM ; copy DMA code to HRAM
@@ -5266,7 +5266,7 @@ ZeroVram: ; 2004 (0:2004)
 
 ; immediately stops all sounds
 StopAllSounds: ; 200e (0:200e)
-	ld a, $2
+	ld a, Bank(Func_9876)
 	ld [$c0ef], a
 	ld [$c0f0], a
 	xor a
@@ -5300,7 +5300,7 @@ VBlankHandler: ; 2024 (0:2024)
 	call VBlankCopyDouble
 	call UpdateMovingBgTiles
 	call $ff80 ; OAM DMA
-	ld a,$01
+	ld a,Bank(PrepareOAMData)
 	ld [H_LOADEDROMBANK],a
 	ld [$2000],a
 	call PrepareOAMData ; update OAM buffer with current sprite data
@@ -5806,7 +5806,7 @@ asm_2324: ; 2324 (0:2324)
 	ld b, a
 	ld a, d
 	and a
-	ld a, $1f
+	ld a, Bank(Func_7d8ea)
 	jr nz, .asm_233e
 	ld [$c0ef], a
 .asm_233e
@@ -5964,7 +5964,7 @@ UpdateSprites: ; 2429 (0:2429)
 	ret nz
 	ld a, [H_LOADEDROMBANK]
 	push af
-	ld a, $1
+	ld a, Bank(_UpdateSprites)
 	ld [H_LOADEDROMBANK], a
 	ld [$2000], a
 	call _UpdateSprites
@@ -6908,7 +6908,7 @@ DisplayPokemartDialogue: ; 2a2e (0:2a2e)
 	ld [$cf94],a ; selects between subtypes of menus
 	ld a,[H_LOADEDROMBANK]
 	push af
-	ld a,$01
+	ld a,Bank(DisplayPokemartDialogue_)
 	ld [H_LOADEDROMBANK],a
 	ld [$2000],a
 	call DisplayPokemartDialogue_
@@ -6945,7 +6945,7 @@ DisplayPokemonCenterDialogue: ; 2a72 (0:2a72)
 	inc hl
 	ld a,[H_LOADEDROMBANK]
 	push af
-	ld a,$01
+	ld a,Bank(DisplayPokemonCenterDialogue_)
 	ld [H_LOADEDROMBANK],a
 	ld [$2000],a
 	call DisplayPokemonCenterDialogue_
@@ -6991,7 +6991,7 @@ RepelWoreOffText: ; 2ac8 (0:2ac8)
 	db "@"
 
 DisplayStartMenu: ; 2acd (0:2acd)
-	ld a,$04
+	ld a,$04 ; hardcoded Bank, not sure what's it refers to
 	ld [H_LOADEDROMBANK],a
 	ld [$2000],a ; ROM bank 4
 	ld a,[$d700] ; walking/biking/surfing
@@ -8990,6 +8990,7 @@ FillMemory: ; 36e0 (0:36e0)
 	ret
 
 ; loads sprite that de points to
+; bank of sprite is given in a
 UncompressSpriteFromDE: ; 36eb (0:36eb)
 	ld hl, W_SPRITEINPUTPTR
 	ld [hl], e
@@ -9164,9 +9165,9 @@ GetItemPrice: ; 37df (0:37df)
 	push af
 	ld a, [wListMenuID] ; $cf94
 	cp $1
-	ld a, $1
+	ld a, $1 ; hardcoded Bank
 	jr nz, .asm_37ed
-	ld a, $f
+	ld a, $f ; hardcoded Bank
 .asm_37ed
 	ld [H_LOADEDROMBANK], a
 	ld [$2000], a
@@ -9191,7 +9192,7 @@ GetItemPrice: ; 37df (0:37df)
 	ld [H_DOWNARROWBLINKCNT1], a ; $FF00+$8b
 	jr .asm_381c
 .asm_3812
-	ld a, $1e
+	ld a, Bank(GetMachinePrice)
 	ld [H_LOADEDROMBANK], a
 	ld [$2000], a
 	call GetMachinePrice
@@ -9346,7 +9347,7 @@ Divide: ; 38b9 (0:38b9)
 	push bc
 	ld a,[H_LOADEDROMBANK]
 	push af
-	ld a,$0d
+	ld a,Bank(_Divide)
 	ld [H_LOADEDROMBANK],a
 	ld [$2000],a
 	call _Divide
@@ -10496,7 +10497,7 @@ Func_3eb5: ; 3eb5 (0:3eb5)
 	ld a, [H_CURRENTPRESSEDBUTTONS]
 	bit 0, a
 	jr z, .asm_3eea
-	ld a, $11
+	ld a, Bank(Func_469a0)
 	ld [$2000], a
 	ld [H_LOADEDROMBANK], a
 	call Func_469a0
@@ -10622,7 +10623,7 @@ PointerTable_3f22: ; 3f22 (0:3f22)
 	dw ElevatorText                         ; id = 41
 	dw PokemonStuffText                     ; id = 42
 
-SECTION "bank1",ROMX,BANK[$1]
+SECTION "bank1",ROMX,Bank[$1]
 
 SpriteFacingAndAnimationTable: ; 4000 (1:4000)
 	dw SpriteFacingDownAndStanding, SpriteOAMParameters        ; facing down, walk animation frame 0
@@ -10823,7 +10824,7 @@ Func_42b7: ; 42b7 (1:42b7)
 	ld [hli], a
 	ld [hli], a
 	ld [hl], a
-	ld a, $1f
+	ld a, Bank(Func_7d8ea)
 	ld [$c0ef], a
 	ld [$c0f0], a
 
@@ -14664,7 +14665,7 @@ Func_60ca: ; 60ca (1:60ca)
 OakSpeech: ; 6115 (1:6115)
 	ld a,$FF
 	call PlaySound ; stop music
-	ld a, BANK(Music_Routes2) ; bank of song
+	ld a, BANK(Func_9876)
 	ld c,a
 	ld a, (Music_Routes2 - $4000) / 3 ; song #
 	call PlayMusic  ; plays music
@@ -14688,7 +14689,7 @@ OakSpeech: ; 6115 (1:6115)
 	bit 1,a ; XXX when is bit 1 set?
 	jp nz,Func_61bc ; easter egg: skip the intro
 	ld de,ProfOakPic
-	ld bc,$1300
+	ld bc, (Bank(ProfOakPic) << 8) | $00
 	call IntroPredef3B   ; displays Oak pic?
 	call FadeInIntroPic
 	ld hl,OakSpeechText1
@@ -14708,7 +14709,7 @@ OakSpeech: ; 6115 (1:6115)
 	call GBFadeOut2
 	call ClearScreen
 	ld de,RedPicFront
-	ld bc,$0400     ; affects the position of the player pic
+	ld bc,(Bank(RedPicFront) << 8) | $00
 	call IntroPredef3B      ; displays player pic?
 	call MovePicLeft
 	ld hl,IntroducePlayerText
@@ -14717,7 +14718,7 @@ OakSpeech: ; 6115 (1:6115)
 	call GBFadeOut2
 	call ClearScreen
 	ld de,Rival1Pic
-	ld bc,$1300
+	ld bc,(Bank(Rival1Pic) << 8) | $00
 	call IntroPredef3B ; displays rival pic
 	call FadeInIntroPic
 	ld hl,IntroduceRivalText
@@ -14728,7 +14729,7 @@ Func_61bc: ; 61bc (1:61bc)
 	call GBFadeOut2
 	call ClearScreen
 	ld de,RedPicFront
-	ld bc,$0400
+	ld bc,(Bank(RedPicFront) << 8) | $00
 	call IntroPredef3B
 	call GBFadeIn2
 	ld a,[$D72D]
@@ -14747,15 +14748,15 @@ Func_61bc: ; 61bc (1:61bc)
 	call DelayFrames
 	ld de,RedSprite ; $4180
 	ld hl,$8000
-	ld bc,(BANK(RedSprite) << 8) +$0C
+	ld bc,(BANK(RedSprite) << 8) | $0C
 	call CopyVideoData
 	ld de,ShrinkPic1
-	ld bc,$0400
+	ld bc,(BANK(ShrinkPic1) << 8) | $00
 	call IntroPredef3B
 	ld c,4
 	call DelayFrames
 	ld de,ShrinkPic2
-	ld bc,$0400
+	ld bc,(BANK(ShrinkPic2) << 8) | $00
 	call IntroPredef3B
 	call ResetPlayerSpriteData
 	ld a,[H_LOADEDROMBANK]
@@ -14842,6 +14843,7 @@ MovePicLeft: ; 6288 (1:6288)
 Predef3B: ; 62a1 (1:62a1)
 	call Load16BitRegisters
 IntroPredef3B: ; 62a4 (1:62a4)
+; bank of sprite given in b
 	push bc
 	ld a,b
 	call UncompressSpriteFromDE
@@ -18319,7 +18321,7 @@ Func_7c18: ; 7c18 (1:7c18)
 	ld [$cc3c], a
 	ret
 
-SECTION "bank2",ROMX,BANK[$2]
+SECTION "bank2",ROMX,Bank[$2]
 
 INCLUDE "music/headers/sfxheaders02.asm"
 INCLUDE "music/headers/musicheaders02.asm"
@@ -39188,7 +39190,7 @@ PointerTable_1a510: ; 1a510 (6:6510)
 	dw Func_1a56b
 
 Func_1a514: ; 1a514 (6:6514)
-	ld a, $2
+	ld a, Bank(Func_9876)
 	ld [$c0ef], a
 	ld [$c0f0], a
 	ld a, $e1
@@ -39245,7 +39247,7 @@ PointerTable_1a57d: ; 1a57d (6:657d)
 	dw Func_1a56b
 
 Func_1a581: ; 1a581 (6:6581)
-	ld a, $2
+	ld a, Bank(Func_9876)
 	ld [$c0ef], a
 	ld [$c0f0], a
 	ld a, $e1
@@ -71768,7 +71770,7 @@ Func_41186: ; 41186 (10:5186)
 	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
 	ret
 
-Func_41191: ; 41191 (10:5191)
+Delay50: ; 41191 (10:5191)
 	ld c, $50
 	jp DelayFrames
 
@@ -71881,7 +71883,7 @@ Func_41245: ; 41245 (10:5245)
 	dec a
 	and a
 	jr nz, .asm_41273
-	call Func_41191
+	call Delay50
 	ld a, $ad
 	call Func_41676
 	ld a, $aa
@@ -72387,10 +72389,10 @@ UnnamedText_4160c: ; 4160c (10:560c)
 Func_41611: ; 41611 (10:5611)
 	ld hl, UnnamedText_41623 ; $5623
 	call PrintText
-	call Func_41191
+	call Delay50
 	ld hl, UnnamedText_41628 ; $5628
 	call PrintText
-	jp Func_41191
+	jp Delay50
 
 UnnamedText_41623: ; 41623 (10:5623)
 	TX_FAR _UnnamedText_41623
@@ -72403,10 +72405,10 @@ UnnamedText_41628: ; 41628 (10:5628)
 Func_4162d: ; 4162d (10:562d)
 	ld hl, UnnamedText_41642 ; $5642
 	call PrintText
-	call Func_41191
+	call Delay50
 	ld hl, UnnamedText_41647 ; $5647
 	call PrintText
-	call Func_41191
+	call Delay50
 	jp Func_415df
 
 UnnamedText_41642: ; 41642 (10:5642)
@@ -72420,7 +72422,7 @@ UnnamedText_41647: ; 41647 (10:5647)
 Func_4164c: ; 4164c (10:564c)
 	ld hl, UnnamedText_41655 ; $5655
 	call PrintText
-	jp Func_41191
+	jp Delay50
 
 UnnamedText_41655: ; 41655 (10:5655)
 	TX_FAR _UnnamedText_41655
@@ -72429,10 +72431,10 @@ UnnamedText_41655: ; 41655 (10:5655)
 Func_4165a: ; 4165a (10:565a)
 	ld hl, UnnamedText_4166c
 	call PrintText
-	call Func_41191
+	call Delay50
 	ld hl, UnnamedText_41671
 	call PrintText
-	jp Func_41191
+	jp Delay50
 
 UnnamedText_4166c: ; 4166c (10:566c)
 	TX_FAR _UnnamedText_4166c
@@ -72777,7 +72779,7 @@ Func_4188a: ; 4188a (10:588a)
 	ld c, $28
 	call DelayFrames
 .asm_418d0
-	ld a, $1f
+	ld a, Bank(Func_7d8ea)
 	ld [$c0ef], a
 	ld [$c0f0], a
 	ld a, $dc
@@ -101262,7 +101264,7 @@ SSAnne7RubText: ; 618ec (18:58ec)
 	ld a, $ff
 	ld [$c0ee], a
 	call PlaySound
-	ld a, $2
+	ld a, Bank(Func_9876)
 	ld [$c0ef], a
 .asm_61908
 	ld a, $e8
@@ -103443,7 +103445,7 @@ Func_70433: ; 70433 (1c:4433)
 	ld a, $ff
 	ld [$c0ee], a
 	call PlaySound
-	ld a, $2
+	ld a, Bank(Func_9876)
 	ld [$c0ef], a
 .asm_70495
 	ld a, $e8
