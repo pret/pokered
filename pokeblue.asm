@@ -1,5 +1,4 @@
-_RED EQU 0
-_BLUE EQU 1
+INCLUDE "blue.asm"
 INCLUDE "globals.asm"
 INCLUDE "wram.asm"
 INCLUDE "main.asm"
