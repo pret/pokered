@@ -11061,46 +11061,55 @@ Func_448e: ; 448e (1:448e)
 Func_4496: ; 4496 (1:4496)
 	ld a, $98
 	call Func_4533
-.asm_449b
+
+.new
+; Generate a new TitleMon.
 	call GenRandom
 	and $f
 	ld c, a
-	ld b, $0
-	ld hl, TitleMons ; $4588
+	ld b, 0
+	ld hl, TitleMons
 	add hl, bc
 	ld a, [hl]
 	ld hl, wWhichTrade ; $cd3d
+
+; Can't be the same as before.
 	cp [hl]
-	jr z, .asm_449b
+	jr z, .new
+
 	ld [hl], a
 	call Func_4524
+
 	ld a, $90
 	ld [$FF00+$b0], a
-	ld d, $1
-	ld b, BANK(LoadScreenTilesFromBuffer18)
-	ld hl, LoadScreenTilesFromBuffer18
-	call Bankswitch
+	ld d, 1 ; scroll out
+	ld b, BANK(TitleScroll)
+	ld hl, TitleScroll
+	call Bankswitch ; indirect jump to TitleScroll (37258 (d:7258))
 	ret
 
 Func_44c1: ; 44c1 (1:44c1)
-	ld d, $0
-	ld b, BANK(LoadScreenTilesFromBuffer18)
-	ld hl, LoadScreenTilesFromBuffer18
-	call Bankswitch
+	ld d, 0 ; scroll in
+	ld b, BANK(TitleScroll)
+	ld hl, TitleScroll
+	call Bankswitch ; indirect jump to TitleScroll (37258 (d:7258))
 	xor a
 	ld [$FF00+$b0], a
 	ret
 
 Func_44cf: ; 44cf (1:44cf)
-	ld a, [$FF00+$44]
+.wait
+	ld a, [$FF00+$44] ; rLY
 	cp l
-	jr nz, Func_44cf
+	jr nz, .wait
+
 	ld a, h
 	ld [rSCX], a ; $FF00+$43
-.asm_44d7
-	ld a, [$FF00+$44]
+
+.wait2
+	ld a, [$FF00+$44] ; rLY
 	cp h
-	jr z, .asm_44d7
+	jr z, .wait2
 	ret
 
 Func_44dd: ; 44dd (1:44dd)
@@ -12934,12 +12943,14 @@ Func_5317: ; 5317 (1:5317)
 	call Func_5ab3
 	FuncCoord 4, 10 ; $c46c
 	ld hl, Coord
-	ld de, .pleaseWait ; $550f
+	ld de, PleaseWaitString ; $550f
 	call PlaceString
 	ld hl, W_NUMHITS ; $d074
 	xor a
 	ld [hli], a
 	ld [hl], $50
+
+Func_5345: ; 5345
 	ld hl, $d152
 	ld a, $fd
 	ld b, $6
@@ -13203,7 +13214,7 @@ Func_5317: ; 5317 (1:5317)
 	call PlayMusic
 	jr Func_551c
 
-.pleaseWait: ; 550f (1:550f)
+PleaseWaitString: ; 550f (1:550f)
 	db "PLEASE WAIT!@"
 
 Func_551c:
@@ -13563,9 +13574,11 @@ Func_57f2:
 	call PlaceString
 	ld hl, $c3b6
 	ld de, $d164
-	call $5827
+	call Func_5827
 	ld hl, $c456
 	ld de, $d89d
+
+Func_5827:
 	ld c, $0
 .asm_5829
 	ld a, [de]
@@ -13780,7 +13793,7 @@ Func_5849:
 	call DelayFrames
 	xor a
 	ld [$cc38], a
-	jp $5345
+	jp Func_5345
 
 Func_5a18:
 	ld c, $64
@@ -15345,7 +15358,7 @@ Func_6596: ; 6596 (1:6596)
 	dw .asm_65ed
 	dw .asm_6683
 	dw .asm_65f3
-	dw .asm_66f6
+	dw .deleteLetter
 	dw .asm_65f3
 	dw .asm_6692
 
@@ -15394,15 +15407,15 @@ Func_6596: ; 6596 (1:6596)
 	jr z, .asm_66e3
 	ld a, [$d07d]
 	cp $2
-	jr nc, .asm_66db
+	jr nc, .checkMonNameLength
 	ld a, [$cee9]
-	cp $7
-	jr .asm_66e0
-.asm_66db
+	cp $7 ; max length of player/rival names
+	jr .checkNameLength
+.checkMonNameLength
 	ld a, [$cee9]
-	cp $a
-.asm_66e0
-	jr c, .asm_66ea
+	cp $a ; max length of pokemon nicknames
+.checkNameLength
+	jr c, .addLetter
 	ret
 .asm_66e3
 	push hl
@@ -15410,14 +15423,14 @@ Func_6596: ; 6596 (1:6596)
 	pop hl
 	ret nc
 	dec hl
-.asm_66ea
+.addLetter
 	ld a, [$ceed]
 	ld [hli], a
 	ld [hl], $50
 	ld a, $90
 	call PlaySound
 	ret
-.asm_66f6
+.deleteLetter
 	ld a, [$cee9]
 	and a
 	ret z
@@ -15594,10 +15607,60 @@ Func_6871: ; 6871 (1:6871)
 	ret
 
 Unknown_6885: ; 6885 (1:6885)
-INCBIN "baserom.gbc",$6885,$68d6 - $6885
+	db $b6, $26
+	db $b7, $27
+	db $b8, $28
+	db $b9, $29
+	db $ba, $2a
+	db $bb, $2b
+	db $bc, $2c
+	db $bd, $2d
+	db $be, $2e
+	db $bf, $2f
+	db $c0, $30
+	db $c1, $31
+	db $c2, $32
+	db $c3, $33
+	db $c4, $34
+	db $ca, $3a
+	db $cb, $3b
+	db $cc, $3c
+	db $cd, $3d
+	db $ce, $3e
+	db $85, $05
+	db $86, $06
+	db $87, $07
+	db $88, $08
+	db $89, $09
+	db $8a, $0a
+	db $8b, $0b
+	db $8c, $0c
+	db $8d, $0d
+	db $8e, $0e
+	db $8f, $0f
+	db $90, $10
+	db $91, $11
+	db $92, $12
+	db $93, $13
+	db $99, $19
+	db $9a, $1a
+	db $9b, $1b
+	db $cd, $3d
+	db $9c, $1c
+	db $ff
 
 Unknown_68d6: ; 68d6 (1:68d6)
-INCBIN "baserom.gbc",$68d6,$68eb - $68d6
+	db $ca, $44
+	db $cb, $45
+	db $cc, $46
+	db $cd, $47
+	db $ce, $48
+	db $99, $40
+	db $9a, $41
+	db $9b, $42
+	db $cd, $47
+	db $9c, $43
+	db $ff
 
 Func_68eb: ; 68eb (1:68eb)
 	ld hl, $cf4b
@@ -48197,32 +48260,48 @@ VictreebelPicFront: ; 36fea (d:6fea)
 VictreebelPicBack: ; 371b2 (d:71b2)
 	INCBIN "pic/monback/victreebelb.pic"
 
-Unknown_37244: ; 37244 (d:7244)
-INCBIN "baserom.gbc",$37244,$37247 - $37244
 
-Unknown_37247: ; 37247 (d:7247)
-INCBIN "baserom.gbc",$37247,$3724f - $37247
+TitleScroll_WaitBall: ; 37244 (d:7244)
+; Wait around for the TitleBall animation to play out.
+; hi: speed
+; lo: duration
+	db $05, $05, 0
 
-Unknown_3724f: ; 3724f (d:724f)
-INCBIN "baserom.gbc",$3724f,$37258 - $3724f
+TitleScroll_In: ; 37247 (d:7247)
+; Scroll a TitleMon in from the right.
+; hi: speed
+; lo: duration
+	db $a2, $94, $84, $63, $52, $31, $11, 0
 
-LoadScreenTilesFromBuffer18: ; 37258 (d:7258)
+TitleScroll_Out: ; 3724f (d:724f)
+; Scroll a TitleMon out to the left.
+; hi: speed
+; lo: duration
+	db $12, $22, $32, $42, $52, $62, $83, $93, 0
+
+TitleScroll: ; 37258 (d:7258)
 	ld a, d
-	ld bc, Unknown_37247 ; $7247
-	ld d, $88
-	ld e, $0
-	and a
-	jr nz, Func_3726a
-	ld bc, Unknown_3724f ; $724f
-	ld d, $0
-	ld e, $0
 
-Func_3726a: ; 3726a (d:726a)
+	ld bc, TitleScroll_In
+	ld d, $88
+	ld e, 0 ; don't animate titleball
+
+	and a
+	jr nz, .ok
+
+	ld bc, TitleScroll_Out
+	ld d, $00
+	ld e, 0 ; don't animate titleball
+.ok
+
+_TitleScroll: ; 3726a (d:726a)
 	ld a, [bc]
 	and a
 	ret z
+
 	inc bc
 	push bc
+
 	ld b, a
 	and $f
 	ld c, a
@@ -48230,57 +48309,69 @@ Func_3726a: ; 3726a (d:726a)
 	and $f0
 	swap a
 	ld b, a
+
 .loop
 	ld h, d
 	ld l, $48
-	call Func_37292
-	ld h, $0
+	call .ScrollBetween
+
+	ld h, $00
 	ld l, $88
-	call Func_37292
+	call .ScrollBetween
+
 	ld a, d
 	add b
 	ld d, a
-	call Func_372c4
+
+	call GetTitleBallY
 	dec c
 	jr nz, .loop
-	pop bc
-	jr Func_3726a
 
-Func_37292: ; 37292 (d:7292)
-	ld a, [$FF00+$44]
+	pop bc
+	jr _TitleScroll
+
+.ScrollBetween ; 37292 (d:7292)
+.wait
+	ld a, [$FF00+$44] ; rLY
 	cp l
-	jr nz, Func_37292
+	jr nz, .wait
+
 	ld a, h
 	ld [rSCX], a ; $FF00+$43
-.loop
-	ld a, [$FF00+$44]
+
+.wait2
+	ld a, [$FF00+$44] ; rLY
 	cp h
-	jr z, .loop
+	jr z, .wait2
 	ret
 
-Unknown_372a0: ; 372a0 (d:72a0)
-INCBIN "baserom.gbc",$372a0,$372ac - $372a0
+TitleBallYTable: ; 372a0 (d:72a0)
+; OBJ y-positions for the Poke Ball held by Red in the title screen.
+; This is really two 0-terminated lists. Initiated with an index of 1.
+	db 0, $71, $6f, $6e, $6d, $6c, $6d, $6e, $6f, $71, $74, 0
 
 Func_372ac: ; 372ac (d:72ac)
+; Animate the TitleBall if a starter just got scrolled out.
 	ld a, [wWhichTrade] ; $cd3d
-	cp $b0
-	jr z, .skip
-	cp $b1
-	jr z, .skip
-	cp $99
+	cp CHARMANDER
+	jr z, .ok
+	cp SQUIRTLE
+	jr z, .ok
+	cp BULBASAUR
 	ret nz
-.skip
-	ld e, $1
-	ld bc, Unknown_37244 ; $7244
-	ld d, $0
-	jp Func_3726a
+.ok
+	ld e, 1 ; animate titleball
+	ld bc, TitleScroll_WaitBall
+	ld d, 0
+	jp _TitleScroll
 
-Func_372c4: ; 372c4 (d:72c4)
+GetTitleBallY: ; 372c4 (d:72c4)
+; Get position e from TitleBallYTable
 	push de
 	push hl
 	xor a
 	ld d, a
-	ld hl, Unknown_372a0 ; $72a0
+	ld hl, TitleBallYTable
 	add hl, de
 	ld a, [hl]
 	pop hl
@@ -49255,7 +49346,7 @@ Func_37ca1: ; 37ca1 (d:7ca1)
 	ld a, [$cd38]
 	dec a
 	ld [$cd38], a
-	ld d, $0
+	ld d, 0
 	ld e, a
 	add hl, de
 	ld d, h
@@ -49263,7 +49354,7 @@ Func_37ca1: ; 37ca1 (d:7ca1)
 	ld hl, PointerTable_37ce6
 	ld a, [$d12f]
 	add a
-	ld b, $0
+	ld b, 0
 	ld c, a
 	add hl, bc
 	ld a, [hli]
@@ -49305,10 +49396,47 @@ PointerTable_37ce6: ; 37ce6 (d:7ce6)
 	dw Unknown_37d06
 
 Unknown_37cea: ; 37cea (d:7cea)
-INCBIN "baserom.gbc",$37cea,$37d06 - $37cea
+	db 18, 27
+	dw .down
+	db 16, 27
+	dw .up
+	db 17, 26
+	dw .left
+	db 17, 28
+	dw .right
+
+.down
+	db $40, $40, $ff
+.up
+	db $10, $20, $ff
+.left
+	db $40, $10, $ff
+.right
+	db $40, $20, $ff
 
 Unknown_37d06: ; 37d06 (d:7d06)
-INCBIN "baserom.gbc",$37d06,$37d41 - $37d06
+	db 16, 34
+	dw .one
+	db 17, 35
+	dw .two
+	db 18, 37
+	dw .three
+	db 19, 37
+	dw .four
+	db 17, 36
+	dw .five
+
+.one
+	db $20, $80, $80, $10, $ff
+.two
+	db $20, $80, $10, $20, $ff
+.three
+	db $20, $20, $20, $00, $00, $00, $00, $00, $00, $00, $00, $ff
+.four
+	db $20, $20, $40, $20, $ff
+.five
+	db $20, $80, $20, $00, $00, $00, $00, $00, $00, $00, $00, $ff
+
 
 _Multiply: ; 37d41 (d:7d41)
 	ld a, $8
@@ -64562,7 +64690,7 @@ Func_3db85: ; 3db85 (f:5b85)
 	ld a, [$d11e] ; move number
 	ld c, a
 	ld b, $0
-	ld hl, Unknown_3dba3 ; $5ba3
+	ld hl, UnknownMovesList_3dba3 ; $5ba3
 .asm_3db8f
 	ld a, [hli]
 	cp $ff
@@ -64579,8 +64707,20 @@ Func_3db85: ; 3db85 (f:5b85)
 	pop bc
 	ret
 
-Unknown_3dba3: ; 3dba3 (f:5ba3)
-INCBIN "baserom.gbc",$3dba3,$3dbe2 - $3dba3
+UnknownMovesList_3dba3: ; 3dba3 (f:5ba3)
+	db SWORDS_DANCE, GROWTH
+	db $00
+	db RECOVER, BIDE, SELFDESTRUCT, AMNESIA
+	db $00
+	db MEDITATE, AGILITY, TELEPORT, MIMIC, DOUBLE_TEAM, BARRAGE
+	db $00
+	db POUND, SCRATCH, VICEGRIP, WING_ATTACK, FLY, BIND, SLAM, HORN_ATTACK, BODY_SLAM
+	db WRAP, THRASH, TAIL_WHIP, LEER, BITE, GROWL, ROAR, SING, PECK, COUNTER
+	db STRENGTH, ABSORB, STRING_SHOT, EARTHQUAKE, FISSURE, DIG, TOXIC, SCREECH, HARDEN
+	db MINIMIZE, WITHDRAW, DEFENSE_CURL, METRONOME, LICK, CLAMP, CONSTRICT, POISON_GAS
+	db LEECH_LIFE, BUBBLE, FLASH, SPLASH, ACID_ARMOR, FURY_SWIPES, REST, SHARPEN, SLASH, SUBSTITUTE
+	db $00 
+	db $FF ; terminator
 
 Func_3dbe2: ; 3dbe2 (f:5be2)
 	ld de, W_PLAYERMOVEEFFECT ; $cfd3
@@ -65128,124 +65268,161 @@ Func_3df1c: ; 3df1c (f:5f1c)
 	ret
 
 MoreCalculateDamage: ; 3df65 (f:5f65)
-	ld a, [$ff00+$f3]  ;FFF3 decides which address to use
+; input:
+;	b: attack
+;	c: opponent defense
+;	d: base power
+;	e: level
+
+	ld a, [$ff00+$f3] ; whose turn?
 	and a
 	ld a, [W_PLAYERMOVEEFFECT]
-	jr z, .next
+	jr z, .effect
 	ld a, [$cfcd]
-.next
-	cp a, 7  ;effect to halve opponent defense [suicide moves]
-	jr nz, .next2
-.halveDefense
-	srl c  ;explosion and selfdestruct will halve the defense...
-	jr nz, .next2
-	inc c  ;...with a minimum value of 1 [it is used as a divisor later on]
-.next2
-	cp a, $1d
-	jr z, .next3
+.effect
+
+; EXPLODE_EFFECT halves defense.
+	cp a, EXPLODE_EFFECT
+	jr nz, .ok
+	srl c
+	jr nz, .ok
+	inc c ; ...with a minimum value of 1 (used as a divisor later on)
+.ok
+
+; Multi-hit attacks may or may not have 0 bp.
+	cp a, TWO_TO_FIVE_ATTACKS_EFFECT
+	jr z, .skipbp
 	cp a, $1e
-	jr z, .next3
-	cp a, $26    ;OHKO?
+	jr z, .skipbp
+
+; Calculate OHKO damage based on remaining HP.
+	cp a, OHKO_EFFECT
 	jp z, Func_3e016
-	ld a, d      ;if attack base power zero then do nothing
+
+; Don't calculate damage for moves that don't do any.
+	ld a, d ; base power
 	and a
 	ret z
-.next3
+.skipbp
+
 	xor a
-	ld hl, $ff95  ;multiplication address
-	ldi [hl], a   ;init to zero
+	ld hl, H_DIVIDEND
+	ldi [hl], a
 	ldi [hl], a
 	ld [hl], a
-	ld a, e
-	add a         ;A = level *2
-	jr nc, .noCarry
-.carry
+
+; Multiply level by 2
+	ld a, e ; level
+	add a
+	jr nc, .nc
 	push af
-	ld a, 1     ;add carry for level if needed
-	ld [hl], a  ;level high byte [previously zero]
+	ld a, 1
+	ld [hl], a
 	pop af
-.noCarry
+.nc
 	inc hl
-	ldi [hl], a  ;level low byte
-	ld a, 5      ;[divisor] = 5
+	ldi [hl], a
+
+; Divide by 5
+	ld a, 5
 	ldd [hl], a
 	push bc
 	ld b, 4
-	call Divide  ;divide level by 5
+	call Divide
 	pop bc
-	inc [hl]  ;+2 [?]
+
+; Add 2
 	inc [hl]
-	inc hl    ;8bit multiplier
+	inc [hl]
+
+	inc hl ; multiplier
+
+; Multiply by attack base power
 	ld [hl], d
-	call Multiply  ;*multiply by attack base power
+	call Multiply
+
+; Multiply by attack stat
 	ld [hl], b
-	call Multiply  ;*multiply by attacker attack stat
+	call Multiply
+
+; Divide by defender's defense stat
 	ld [hl], c
 	ld b, 4
-	call Divide    ;*divide by defender defense stat
-	ld [hl], $32
-	ld b, 4
-	call Divide      ;divide above result by 50
-	ld hl, W_DAMAGE  ;[stuff below I never got to, was only interested in stuff above]
+	call Divide
 
+; Divide by 50
+	ld [hl], 50
+	ld b, 4
+	call Divide
+
+	ld hl, W_DAMAGE
 	ld b, [hl]
-	ld a, [$FF00+$98]
+	ld a, [H_QUOTIENT + 3]
 	add b
-	ld [$FF00+$98], a
+	ld [H_QUOTIENT + 3], a
 	jr nc, .asm_3dfd0
-	ld a, [$FF00+$97]
+
+	ld a, [H_QUOTIENT + 2]
 	inc a
-	ld [$FF00+$97], a
+	ld [H_QUOTIENT + 2], a
 	and a
 	jr z, .asm_3e004
+
 .asm_3dfd0
-	ld a, [H_DIVIDEND] ; $FF00+$95 (aliases: H_PRODUCT, H_PASTLEADINGZEROES, H_QUOTIENT)
+	ld a, [H_QUOTIENT]
 	ld b, a
-	ld a, [H_NUMTOPRINT] ; $FF00+$96 (aliases: H_MULTIPLICAND)
+	ld a, [H_QUOTIENT + 1]
 	or a
 	jr nz, .asm_3e004
-	ld a, [$FF00+$97]
-	cp $3
+
+	ld a, [H_QUOTIENT + 2]
+	cp 998 / $100
 	jr c, .asm_3dfe8
-	cp $4
+	cp 998 / $100 + 1
 	jr nc, .asm_3e004
-	ld a, [$FF00+$98]
-	cp $e6
+	ld a, [H_QUOTIENT + 3]
+	cp 998 % $100
 	jr nc, .asm_3e004
+
 .asm_3dfe8
 	inc hl
-	ld a, [$FF00+$98]
+	ld a, [H_QUOTIENT + 3]
 	ld b, [hl]
 	add b
 	ld [hld], a
-	ld a, [$FF00+$97]
+
+	ld a, [H_QUOTIENT + 2]
 	ld b, [hl]
 	adc b
 	ld [hl], a
 	jr c, .asm_3e004
+
 	ld a, [hl]
-	cp $3
+	cp 998 / $100
 	jr c, .asm_3e00a
-	cp $4
+	cp 998 / $100 + 1
 	jr nc, .asm_3e004
 	inc hl
 	ld a, [hld]
-	cp $e6
+	cp 998 % $100
 	jr c, .asm_3e00a
+
 .asm_3e004
-	ld a, $3
+	ld a, 997 / $100
 	ld [hli], a
-	ld a, $e5
+	ld a, 997 % $100
 	ld [hld], a
+
 .asm_3e00a
 	inc hl
 	ld a, [hl]
-	add $2
+	add 2
 	ld [hld], a
-	jr nc, .asm_3e012
+	jr nc, .done
 	inc [hl]
-.asm_3e012
-	ld a, $1
+.done
+
+	ld a, 1
 	and a
 	ret
 
@@ -65255,7 +65432,14 @@ Func_3e016: ; 3e016 (f:6016)
 	dec a
 	ret
 
-INCBIN "baserom.gbc",$3e01e,$3e023 - $3e01e
+
+UnusedHighCriticalMoves: ; 3e01e (f:601e)
+	db KARATE_CHOP
+	db RAZOR_LEAF
+	db CRABHAMMER
+	db SLASH
+	db $FF
+; 3e023
 
 ; determines if attack is a critical hit
 ; azure heights claims "the fastest pokémon (who are,not coincidentally,
@@ -65333,6 +65517,7 @@ HighCriticalMoves: ; 3e08e (f:608e)
 	db CRABHAMMER
 	db SLASH
 	db $FF
+
 
 ; function to determine if Counter hits and if so, how much damage it does
 HandleCounterMove: ; 3e093 (f:6093)
@@ -72618,7 +72803,12 @@ Func_418e9: ; 418e9 (10:58e9)
 	ld c, $80
 	jp Func_41807
 
-INCBIN "baserom.gbc",$4190c,$41910 - $4190c
+Func_4190c: ; 4190c (10:590c)
+	ret
+
+IntroNidorinoAnimation0: ; 4190d (10:590d)
+	db 0, 0
+	db $50
 
 IntroNidorinoAnimation1: ; 41910 (10:5910)
 ; This is a sequence of pixel movements for part of the Nidorino animation. This 
@@ -73941,7 +74131,7 @@ Func_44be0: ; 44be0 (11:4be0)
 	jr .asm_44c03
 .asm_44bf7
 	ld a, $ad
-	call $23b1
+	call PlaySound
 	ld hl, $d815
 	bit 7, [hl]
 .asm_44c01
@@ -89635,29 +89825,38 @@ FuchsiaHouse3Text1: ; 56181 (15:6181)
 	db $08 ; asm
 	ld a, [$d728]
 	bit 4, a
-	jr nz, asm_6084e ; 0x56187
+	jr nz, .after
+
 	ld hl, UnnamedText_561bd
 	call PrintText
+
 	call YesNoChoice
 	ld a, [$cc26]
 	and a
-	jr nz, asm_3ace4 ; 0x56196
+	jr nz, .refused
+
 	ld bc, (GOOD_ROD << 8) | 1
 	call GiveItem
-	jr nc, .BagFull
+	jr nc, .full
+
 	ld hl, $d728
 	set 4, [hl]
+
 	ld hl, UnnamedText_561c2
-	jr asm_1b09c ; 0x561a8
-.BagFull
+	jr .talk
+
+.full
 	ld hl, UnnamedText_5621c
-	jr asm_1b09c ; 0x561ad
-asm_3ace4 ; 0x561af
+	jr .talk
+
+.refused
 	ld hl, UnnamedText_56212
-	jr asm_1b09c ; 0x561b2
-asm_6084e ; 0x561b4
+	jr .talk
+
+.after
 	ld hl, UnnamedText_56217
-asm_1b09c ; 0x561b7
+
+.talk
 	call PrintText
 	jp TextScriptEnd
 
@@ -89669,7 +89868,14 @@ UnnamedText_561c2: ; 561c2 (15:61c2)
 	TX_FAR _UnnamedText_561c2 ; 0xa06e8
 	db $0B, "@"
 
-INCBIN "baserom.gbc",$561c8,$56212 - $561c8
+UnnamedText_561c8: ; 561c8
+	db $51
+	db "つり こそ", $4f
+	db "おとこの ロマン だ!", $51
+	db "へぼいつりざおは", $4f
+	db "コイキングしか つれ なんだが", $4f
+	db "この いいつりざおなら", $4f
+	db "もっと いいもんが つれるんじゃ!", $57
 
 UnnamedText_56212: ; 56212 (15:6212)
 	TX_FAR _UnnamedText_56212
@@ -96566,7 +96772,7 @@ FightingDojoScript1: ; 5cd83 (17:4d83)
 	ld [$ff8c], a
 	ld a, $8
 	ld [$ff8d], a
-	call $34a6
+	call Func_34a6
 	ld a, $1
 	ld [$ff8c], a
 	call DisplayTextID
@@ -96585,7 +96791,7 @@ FightingDojoScript3: ; 5cdc6 (17:4dc6)
 	ld [$ff8c], a
 	ld a, $8
 	ld [$ff8d], a
-	call $34a6
+	call Func_34a6
 
 .asm_5cde4
 	ld a, $f0
@@ -98570,34 +98776,46 @@ GymTrashScript: ; 5ddfc (17:5dfc)
 	call EnableAutoTextBoxDrawing
 	ld a, [wWhichTrade] ; $cd3d
 	ld [$cd5b], a
+
+; Don't do the trash can puzzle if it's already been done.
 	ld a, [$d773]
 	bit 0, a
-	jr z, .asm_5de11
+	jr z, .ok
+
 	ld a, $26 ; DisplayTextID $26 = VermilionGymTrashText (nothing in the trash)
 	jp Func_3ef5
-.asm_5de11
+
+.ok
 	bit 1, a
-	jr nz, .resetOrOpenLocks
+	jr nz, .trySecondLock
+
 	ld a, [$d743]
 	ld b, a
 	ld a, [$cd5b]
 	cp b
 	jr z, .openFirstLock
+
 	ld a, $26 ; DisplayTextID $26 = VermilionGymTrashText (nothing in the trash)
-	jr .endTrashScript
+	jr .done
+
 .openFirstLock
+; Next can is trying for the second switch.
 	ld hl, $d773
 	set 1, [hl]
-	ld hl, Unknown_5de7d ; $5e7d
+
+	ld hl, GymTrashCans ; $5e7d
 	ld a, [$cd5b]
+	; * 5
 	ld b, a
 	add a
 	add a
 	add b
-	ld d, $0
+
+	ld d, 0
 	ld e, a
 	add hl, de
 	ld a, [hli]
+
 	ld [$FF00+$db], a
 	push hl
 	call GenRandom
@@ -98607,38 +98825,64 @@ GymTrashScript: ; 5ddfc (17:5dfc)
 	and b
 	dec a
 	pop hl
-	ld d, $0
+
+	ld d, 0
 	ld e, a
 	add hl, de
 	ld a, [hl]
 	and $f
 	ld [$d744], a
+
 	ld a, $3b ; DisplayTextID $3b = VermilionGymTrashSuccesText1 (first lock opened!)
-	jr .endTrashScript
-.resetOrOpenLocks
+	jr .done
+
+.trySecondLock
 	ld a, [$d744]
 	ld b, a
 	ld a, [$cd5b]
 	cp b
 	jr z, .openSecondLock
+
+; Reset the cans.
 	ld hl, $d773
 	res 1, [hl]
 	call GenRandom
+
 	and $e
 	ld [$d743], a
+
 	ld a, $3e ; DisplayTextID $3e = VermilionGymTrashFailText (locks reset!)
-	jr .endTrashScript
+	jr .done
+
 .openSecondLock
+; Completed the trash can puzzle.
 	ld hl, $d773
 	set 0, [hl]
 	ld hl, $d126
 	set 6, [hl]
+
 	ld a, $3d ; DisplayTextID $3d = VermilionGymTrashSuccesText3 (2nd lock opened!)
-.endTrashScript
+
+.done
 	jp Func_3ef5
 
-Unknown_5de7d: ; 5de7d (17:5e7d)
-INCBIN "baserom.gbc",$5de7d,$5dec8 - $5de7d
+GymTrashCans: ; 5de7d (17:5e7d)
+	db 2,  1,  3,  0,  0 ; 0
+	db 3,  0,  2,  4,  0 ; 1
+	db 2,  1,  5,  0,  0 ; 2
+	db 3,  0,  4,  6,  0 ; 3
+	db 4,  1,  3,  5,  7 ; 4
+	db 3,  2,  4,  8,  0 ; 5
+	db 3,  3,  7,  9,  0 ; 6
+	db 4,  4,  6,  8, 10 ; 7
+	db 3,  5,  7, 11,  0 ; 8
+	db 3,  6, 10, 12,  0 ; 9
+	db 4,  7,  9, 11, 13 ; 10
+	db 3,  8, 10, 14,  0 ; 11
+	db 2,  9, 13,  0,  0 ; 12
+	db 3, 10, 12, 14,  0 ; 13
+	db 2, 11, 13,  0,  0 ; 14
+; 5dec8
 
 VermilionGymTrashSuccesText1: ; 5dec8 (17:5ec8)
 	TX_FAR _VermilionGymTrashSuccesText1
@@ -106228,7 +106472,7 @@ Func_71cc1: ; 71cc1 (1c:5cc1)
 	ld de, $cd41
 	ld bc, $b
 	call Func_71d11
-	ld hl, Unknown_71d59 ; $5d59
+	ld hl, String_71d59 ; $5d59
 	ld de, $cd4e
 	call Func_71d11
 	ld de, W_GRASSRATE ; $d887
@@ -106263,7 +106507,7 @@ Func_71d19: ; 71d19 (1c:5d19)
 	ld hl, W_PARTYMON1OT ; $d273
 	ld bc, $b
 	call Func_71d4f
-	ld hl, Unknown_71d59 ; $5d59
+	ld hl, String_71d59 ; $5d59
 	ld bc, $b
 	call CopyData
 	ld hl, W_PARTYMON1_OTID ; $d177
@@ -106281,8 +106525,9 @@ Func_71d4f: ; 71d4f (1c:5d4f)
 	ld d, h
 	ret
 
-Unknown_71d59: ; 71d59 (1c:5d59)
-INCBIN "baserom.gbc",$71d59,$71d64 - $71d59
+String_71d59: ; 71d59 (1c:5d59)
+	; "TRAINER@@@@@@@@@@"
+	db $5d, "@@@@@@@@@@"
 
 InGameTradeTextPointers: ; 71d64 (1c:5d64)
 	dw TradeTextPointers1
@@ -106401,7 +106646,7 @@ Func_71ddf: ; 71ddf (1c:5ddf)
 
 Func_71dff: ; 71dff (1c:5dff)
 	ld hl, PalPacket_72448
-	ld de, Unknown_721b5
+	ld de, BlkPacket_721b5
 	ret
 
 Func_71e06: ; 71e06 (1c:5e06)
@@ -106432,14 +106677,14 @@ Func_71e06: ; 71e06 (1c:5e06)
 	ld a, c
 	ld [hl], a
 	ld hl, $cf2d
-	ld de, Unknown_721b5
+	ld de, BlkPacket_721b5
 	ld a, $1
 	ld [$cf1c], a
 	ret
 
 Func_71e48: ; 71e48 (1c:5e48)
 	ld hl, PalPacket_72458
-	ld de, Unknown_7219e
+	ld de, BlkPacket_7219e
 	ret
 
 Func_71e4f: ; 71e4f (1c:5e4f)
@@ -106462,7 +106707,7 @@ Func_71e4f: ; 71e4f (1c:5e4f)
 	pop af
 	ld [hl], a
 	ld hl, $cf2d
-	ld de, Unknown_721fa
+	ld de, BlkPacket_721fa
 	ret
 
 Func_71e7b: ; 71e7b (1c:5e7b)
@@ -106480,32 +106725,32 @@ Func_71e82: ; 71e82 (1c:5e82)
 	ld hl, $cf30
 	ld [hl], a
 	ld hl, $cf2d
-	ld de, Unknown_72222
+	ld de, BlkPacket_72222
 	ret
 
 Func_71e9f: ; 71e9f (1c:5e9f)
 	ld hl, PalPacket_72478
-	ld de, Unknown_7224f
+	ld de, BlkPacket_7224f
 	ret
 
 Func_71ea6: ; 71ea6 (1c:5ea6)
 	ld hl, PalPacket_72488
-	ld de, Unknown_7228e
+	ld de, BlkPacket_7228e
 	ret
 
 Func_71ead: ; 71ead (1c:5ead)
 	ld hl, PalPacket_724a8
-	ld de, Unknown_7219e
+	ld de, BlkPacket_7219e
 	ret
 
 Func_71eb4: ; 71eb4 (1c:5eb4)
 	ld hl, PalPacket_724b8
-	ld de, Unknown_722c1
+	ld de, BlkPacket_722c1
 	ret
 
 Func_71ebb: ; 71ebb (1c:5ebb)
 	ld hl, PalPacket_724c8
-	ld de, Unknown_723dd
+	ld de, BlkPacket_723dd
 	ld a, $8
 	ld [$cf1c], a
 	ret
@@ -106541,7 +106786,7 @@ GetMapPaletteID: ; 71ec7 (1c:5ec7)
 	inc a ; a town's pallete ID is its map ID + 1
 	ld hl, $cf2e
 	ld [hld], a
-	ld de, Unknown_7219e
+	ld de, BlkPacket_7219e
 	ld a, $9
 	ld [$cf1c], a
 	ret
@@ -106571,11 +106816,11 @@ Func_71f17: ; 71f17 (1c:5f17)
 .asm_71f31
 	ld [$cf2e], a
 	ld hl, $cf2d
-	ld de, Unknown_7219e
+	ld de, BlkPacket_7219e
 	ret
 
 LoadTrainerCardBadgePalettes: ; 71f3b (1c:5f3b)
-	ld hl, Unknown_72360
+	ld hl, BlkPacket_72360
 	ld de, $cc5b
 	ld bc, $40
 	call CopyData
@@ -106655,7 +106900,7 @@ DeterminePaletteIDOoutOfBattle: ; 71f9d (1c:5f9d)
 	ret
 
 Func_71fb6: ; 71fb6 (1c:5fb6)
-	ld hl, Unknown_722f4 ; $62f4
+	ld hl, BlkPacket_722f4 ; $62f4
 	ld de, $cf2e
 	ld bc, $30
 	jp CopyData
@@ -106985,35 +107230,70 @@ Func_72188: ; 72188 (1c:6188)
 	jr nz, .asm_7218a
 	ret
 
-Unknown_7219e: ; 7219e (1c:619e)
-INCBIN "baserom.gbc",$7219e,$721b5 - $7219e
+BlkPacket_7219e: ; 7219e (1c:619e)
+	db $21,$01,$03,$00,$00,$00,$13,$11,$00,$00,$00,$00,$00,$00,$00,$00
+	db $03,$00,$00,$13,$11,$00,$00
 
-Unknown_721b5: ; 721b5 (1c:61b5)
-INCBIN "baserom.gbc",$721b5,$721fa - $721b5
+BlkPacket_721b5: ; 721b5 (1c:61b5)
+	db $22,$05,$07,$0a,$00,$0c,$13,$11,$03,$05,$01,$00,$0a,$03,$03,$00
+	db $0a,$07,$13,$0a,$03,$0a,$00,$04,$08,$0b,$03,$0f,$0b,$00,$13,$06
+	db $03,$00,$00,$13,$0b,$00,$03,$00,$0c,$13,$11,$02,$03,$01,$00,$0a
+	db $03,$01,$03,$0a,$08,$13,$0a,$00,$03,$00,$04,$08,$0b,$02,$03,$0b
+	db $00,$13,$07,$03,$00
 
-Unknown_721fa: ; 721fa (1c:61fa)
-INCBIN "baserom.gbc",$721fa,$72222 - $721fa
+BlkPacket_721fa: ; 721fa (1c:61fa)
+	db $21,$01,$07,$05,$01,$00,$07,$06,$00,$00,$00,$00,$00,$00,$00,$00
+	db $02,$00,$00,$11,$00,$03,$01,$00,$07,$06,$01,$03,$01,$07,$13,$11
+	db $00,$03,$08,$00,$13,$06,$00,$00
 
-Unknown_72222: ; 72222 (1c:6222)
-INCBIN "baserom.gbc",$72222,$7224f - $72222
+BlkPacket_72222: ; 72222 (1c:6222)
+	db $21,$01,$07,$05,$01,$01,$08,$08,$00,$00,$00,$00,$00,$00,$00,$00
+	db $02,$00,$00,$11,$00,$01,$00,$01,$13,$00,$03,$01,$01,$08,$08,$01
+	db $03,$01,$09,$08,$11,$00,$03,$09,$01,$13,$11,$00,$00
 
-Unknown_7224f: ; 7224f (1c:624f)
-INCBIN "baserom.gbc",$7224f,$7228e - $7224f
+BlkPacket_7224f: ; 7224f (1c:624f)
+	db $22,$05,$03,$05,$00,$00,$13,$0b,$03,$0a,$00,$04,$13,$09,$02,$0f
+	db $00,$06,$13,$07,$03,$00,$04,$04,$0f,$09,$03,$00,$00,$0c,$13,$11
+	db $03,$00,$00,$13,$0b,$01,$03,$00,$04,$13,$09,$02,$03,$00,$06,$13
+	db $07,$03,$03,$04,$04,$0f,$09,$00,$03,$00,$0c,$13,$11,$00,$00
 
-Unknown_7228e: ; 7228e (1c:628e)
-INCBIN "baserom.gbc",$7228e,$722c1 - $7228e
+BlkPacket_7228e: ; 7228e (1c:628e)
+	db $22,$03,$03,$00,$00,$00,$13,$07,$02,$05,$00,$08,$13,$09,$03,$0a
+	db $00,$0a,$13,$11,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00
+	db $03,$00,$00,$13,$07,$00,$03,$00,$08,$13,$09,$01,$03,$00,$0a,$13
+	db $11,$02,$00
 
-Unknown_722c1: ; 722c1 (1c:62c1)
-INCBIN "baserom.gbc",$722c1,$722f4 - $722c1
+BlkPacket_722c1: ; 722c1 (1c:62c1)
+	db $22,$03,$03,$05,$00,$00,$13,$03,$03,$00,$00,$04,$13,$0d,$03,$05
+	db $00,$0e,$13,$11,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00
+	db $03,$00,$00,$13,$03,$01,$03,$00,$04,$13,$0d,$00,$03,$00,$0e,$13
+	db $11,$01,$00
 
-Unknown_722f4: ; 722f4 (1c:62f4)
-INCBIN "baserom.gbc",$722f4,$72360 - $722f4
+BlkPacket_722f4: ; 722f4 (1c:62f4)
+	db $23,$07,$06,$10,$01,$00,$02,$0c,$02,$00,$05,$01,$0b,$01,$02,$00
+	db $05,$03,$0b,$03,$02,$00,$05,$05,$0b,$05,$02,$00,$05,$07,$0b,$07
+	db $02,$00,$05,$09,$0b,$09,$02,$00,$05,$0b,$0b,$0b,$00,$00,$00,$00
+	db $02,$00,$00,$11,$01,$03,$01,$00,$02,$0c,$00,$03,$01,$0d,$02,$11
+	db $01,$03,$03,$00,$13,$11,$01,$03,$0c,$00,$12,$01,$00,$03,$0c,$02
+	db $12,$03,$00,$03,$0c,$04,$12,$05,$00,$03,$0c,$06,$12,$07,$00,$03
+	db $0c,$08,$12,$09,$00,$03,$0c,$0a,$12,$0b,$00,$00
 
-Unknown_72360: ; 72360 (1c:6360)
-INCBIN "baserom.gbc",$72360,$723dd - $72360
+BlkPacket_72360: ; 72360 (1c:6360)
+	db $24,$0a,$02,$00,$03,$0c,$04,$0d,$02,$05,$07,$0c,$08,$0d,$02,$0f
+	db $0b,$0c,$0c,$0d,$02,$0a,$10,$0b,$11,$0c,$02,$05,$0e,$0d,$0f,$0e
+	db $02,$0f,$10,$0d,$11,$0e,$02,$0a,$03,$0f,$04,$10,$02,$0f,$07,$0f
+	db $08,$10,$02,$0a,$0b,$0f,$0c,$10,$02,$05,$0f,$0f,$10,$10,$00,$00
+	db $03,$03,$0c,$04,$0d,$00,$03,$07,$0c,$08,$0d,$01,$03,$0b,$0c,$0c
+	db $0d,$03,$03,$10,$0b,$11,$0c,$02,$03,$0e,$0d,$0f,$0e,$01,$03,$10
+	db $0d,$11,$0e,$03,$03,$03,$0f,$04,$10,$02,$03,$07,$0f,$08,$10,$03
+	db $03,$0b,$0f,$0c,$10,$02,$03,$0f,$0f,$10,$10,$01,$00
 
-Unknown_723dd: ; 723dd (1c:63dd)
-INCBIN "baserom.gbc",$723dd,$72428 - $723dd
+BlkPacket_723dd: ; 723dd (1c:63dd)
+	db $22,$03,$07,$05,$05,$0b,$07,$0d,$02,$0a,$08,$0b,$09,$0d,$03,$0f
+	db $0c,$0b,$0e,$0d,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00
+	db $03,$00,$00,$13,$0a,$00,$03,$00,$0b,$04,$0d,$00,$03,$05,$0b,$07
+	db $0d,$01,$03,$08,$0b,$13,$0d,$00,$03,$00,$0e,$13,$11,$00,$03,$08
+	db $0b,$09,$0d,$02,$03,$0c,$0b,$0e,$0d,$03,$00
 
 PalPacket_72428: ; 72428 (1c:6428)
 	db $51,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00 
@@ -107646,11 +107926,11 @@ SaveSAV: ;$770a
 	FuncCoord 1,13
 	ld hl,Coord
 	ld bc,$0412
-	call $18c4      ;clear area 4x12 starting at 13,1
+	call ClearScreenArea ; clear area 4x12 starting at 13,1
 	FuncCoord 1,14
 	ld hl,Coord
 	ld de,NowSavingString
-	call $1955
+	call PlaceString
 	ld c,$78
 	call DelayFrames
 	ld hl,GameSavedText
