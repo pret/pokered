@@ -2840,7 +2840,7 @@ SwitchToMapRomBank: ; 12bc (0:12bc)
 	push bc
 	ld c,a
 	ld b,$00
-	ld a,$03
+	ld a,Bank(MapHeaderBanks)
 	call BankswitchHome ; switch to ROM bank 3
 	ld hl,MapHeaderBanks
 	add hl,bc
@@ -7178,10 +7178,10 @@ DisplayListMenuID: ; 2be6 (0:2be6)
 	ld a,[W_BATTLETYPE]
 	and a ; is it the Old Man battle?
 	jr nz,.specialBattleType
-	ld a,$01
+	ld a,$01 ; hardcoded bank
 	jr .bankswitch
 .specialBattleType ; Old Man battle
-	ld a,$0f
+	ld a, Bank(OldManItemList)
 .bankswitch
 	call BankswitchHome
 	ld hl,$d730
@@ -8728,7 +8728,7 @@ Func_3566: ; 3566 (0:3566)
 	ld a, [W_ISLINKBATTLE] ; $d12b
 	and a
 	jr nz, .asm_3594
-	ld a, $e
+	ld a, Bank(TrainerPicAndMoneyPointers)
 	call BankswitchHome
 	ld a, [W_TRAINERCLASS] ; $d031
 	dec a
@@ -63118,24 +63118,24 @@ asm_3d00e: ; 3d00e (f:500e)
 .asm_3d01a
 	ld a, [W_BATTLETYPE] ; $d05a
 	dec a
-	jr nz, .asm_3d031
-	ld hl, .list
+	jr nz, Func_3d031
+	ld hl, OldManItemList
 	ld a, l
 	ld [$cf8b], a
 	ld a, h
 	ld [$cf8c], a
-	jr .asm_3d03c
+	jr Func_3d03c
 
-.list
-	db $01, $04, $32, $ff
+OldManItemList: ; 3d02d (f:502d)
+	db $01, POKE_BALL, 50, $ff
 
-.asm_3d031
+Func_3d031
 	ld hl, wNumBagItems ; $d31d
 	ld a, l
 	ld [$cf8b], a
 	ld a, h
 	ld [$cf8c], a
-.asm_3d03c
+Func_3d03c
 	xor a
 	ld [$cf93], a
 	ld a, $3
