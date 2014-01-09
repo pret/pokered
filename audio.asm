@@ -14,13 +14,25 @@ INCLUDE "constants/move_constants.asm"
 
 
 SECTION "Sound Effect Headers 1", ROMX, BANK[AUDIO_1]
-
 INCLUDE "music/headers/sfxheaders02.asm"
+
+SECTION "Sound Effect Headers 2", ROMX, BANK[AUDIO_2]
+INCLUDE "music/headers/sfxheaders08.asm"
+
+SECTION "Sound Effect Headers 3", ROMX, BANK[AUDIO_3]
+INCLUDE "music/headers/sfxheaders1f.asm"
+
 
 
 SECTION "Music Headers 1", ROMX, BANK[AUDIO_1]
-
 INCLUDE "music/headers/musicheaders02.asm"
+
+SECTION "Music Headers 2", ROMX, BANK[AUDIO_2]
+INCLUDE "music/headers/musicheaders08.asm"
+
+SECTION "Music Headers 3", ROMX, BANK[AUDIO_3]
+INCLUDE "music/headers/musicheaders1f.asm"
+
 
 
 SECTION "Sound Effects 1", ROMX, BANK[AUDIO_1]
@@ -120,139 +132,6 @@ INCLUDE "music/sfx/sfx_02_33.asm"
 INCLUDE "music/sfx/sfx_02_34.asm"
 INCLUDE "music/sfx/sfx_02_35.asm"
 INCLUDE "music/sfx/sfx_02_36.asm"
-
-
-SECTION "Audio Engine 1", ROMX, BANK[AUDIO_1]
-
-PlayBattleMusic:: ; 0x90c6
-	xor a
-	ld [wMusicHeaderPointer], a
-	ld [$d083], a
-	dec a
-	ld [$c0ee], a
-	call PlaySound ; stop music
-	call DelayFrame
-	ld c, BANK(Music_GymLeaderBattle)
-	ld a, [W_GYMLEADERNO]
-	and a
-	jr z, .notGymLeaderBattle
-	ld a, (Music_GymLeaderBattle - $4000) / 3
-	jr .playSong
-.notGymLeaderBattle
-	ld a, [W_CUROPPONENT]
-	cp $c8
-	jr c, .wildBattle
-	cp SONY3 + $c8
-	jr z, .finalBattle
-	cp LANCE + $c8
-	jr nz, .normalTrainerBattle
-	ld a, (Music_GymLeaderBattle - $4000) / 3 ; lance also plays gym leader theme
-	jr .playSong
-.normalTrainerBattle
-	ld a, (Music_TrainerBattle - $4000) / 3
-	jr .playSong
-.finalBattle
-	ld a, (Music_FinalBattle - $4000) / 3
-	jr .playSong
-.wildBattle
-	ld a, (Music_WildBattle - $4000) / 3
-.playSong
-	jp PlayMusic
-
-
-INCLUDE "audio/engine_1.asm"
-
-
-; an alternate start for MeetRival which has a different first measure
-Music_RivalAlternateStart:: ; 0x9b47
-	ld c, BANK(Music_MeetRival)
-	ld a, (Music_MeetRival - $4000) / 3
-	call PlayMusic
-	ld hl, $c006
-	ld de, Music_MeetRival_branch_b1a2
-	call Music2_OverwriteChannelPointer
-	ld de, Music_MeetRival_branch_b21d
-	call Music2_OverwriteChannelPointer
-	ld de, Music_MeetRival_branch_b2b5
-
-Music2_OverwriteChannelPointer: ; 0x9b60
-	ld a, e
-	ld [hli], a
-	ld a, d
-	ld [hli], a
-	ret
-
-; an alternate tempo for MeetRival which is slightly slower
-Music_RivalAlternateTempo:: ; 0x9b65
-	ld c, BANK(Music_MeetRival)
-	ld a, (Music_MeetRival - $4000) / 3
-	call PlayMusic
-	ld hl, $c006
-	ld de, Music_MeetRival_branch_b119
-	jp Music2_OverwriteChannelPointer
-
-; applies both the alternate start and alternate tempo
-Music_RivalAlternateStartAndTempo:: ; 0x9b75
-	call Music_RivalAlternateStart
-	ld hl, $c006
-	ld de, Music_MeetRival_branch_b19b
-	jp Music2_OverwriteChannelPointer
-
-; an alternate tempo for Cities1 which is used for the Hall of Fame room
-Music_Cities1AlternateTempo:: ; 0x9b81
-	ld a, $a
-	ld [$cfc8], a
-	ld [$cfc9], a
-	ld a, $ff
-	ld [wMusicHeaderPointer], a
-	ld c, $64
-	call DelayFrames
-	ld c, BANK(Music_Cities1)
-	ld a, (Music_Cities1 - $4000) / 3
-	call PlayMusic
-	ld hl, $c006
-	ld de, Music_Cities1_branch_aa6f
-	jp Music2_OverwriteChannelPointer
-
-
-SECTION "Music 1", ROMX, BANK[AUDIO_1]
-
-INCLUDE "music/pkmnhealed.asm"
-INCLUDE "music/routes1.asm"
-INCLUDE "music/routes2.asm"
-INCLUDE "music/routes3.asm"
-INCLUDE "music/routes4.asm"
-INCLUDE "music/indigoplateau.asm"
-INCLUDE "music/pallettown.asm"
-INCLUDE "music/unusedsong.asm"
-INCLUDE "music/cities1.asm"
-INCLUDE "music/sfx/sfx_02_3a.asm"
-INCLUDE "music/museumguy.asm"
-INCLUDE "music/meetprofoak.asm"
-INCLUDE "music/meetrival.asm"
-INCLUDE "music/sfx/sfx_02_41.asm"
-INCLUDE "music/sfx/sfx_02_3b.asm"
-INCLUDE "music/sfx/sfx_02_42.asm"
-INCLUDE "music/ssanne.asm"
-INCLUDE "music/cities2.asm"
-INCLUDE "music/celadon.asm"
-INCLUDE "music/cinnabar.asm"
-INCLUDE "music/vermilion.asm"
-INCLUDE "music/lavender.asm"
-INCLUDE "music/safarizone.asm"
-INCLUDE "music/gym.asm"
-INCLUDE "music/pokecenter.asm"
-
-
-
-SECTION "Sound Effect Headers 2", ROMX, BANK[AUDIO_2]
-
-INCLUDE "music/headers/sfxheaders08.asm"
-
-
-SECTION "Music Headers 2", ROMX, BANK[AUDIO_2]
-
-INCLUDE "music/headers/musicheaders08.asm"
 
 
 SECTION "Sound Effects 2", ROMX, BANK[AUDIO_2]
@@ -380,119 +259,6 @@ INCLUDE "music/sfx/sfx_08_35.asm"
 INCLUDE "music/sfx/sfx_08_36.asm"
 
 
-
-SECTION "Audio Engine 2", ROMX, BANK[AUDIO_2]
-
-Func_2136e: ; 2136e (8:536e)
-	ld a, [$d083]
-	cp $ff
-	jr z, .asm_2139b
-	bit 7, a
-	ret z
-	and $7f
-	jr nz, .asm_21383
-	call Func_213a7
-	ld a, $1e
-	jr .asm_21395
-.asm_21383
-	cp $14
-	jr nz, .asm_2138a
-	call Func_213ac
-.asm_2138a
-	ld a, $86
-	ld [$c02a], a
-	ld a, [$d083]
-	and $7f
-	dec a
-.asm_21395
-	set 7, a
-	ld [$d083], a
-	ret
-.asm_2139b
-	xor a
-	ld [$d083], a
-	ld [$c02a], a
-	ld de, Unknown_213c4 ; $53c4
-	jr asm_213af
-
-Func_213a7: ; 213a7 (8:53a7)
-	ld de, Unknown_213bc ; $53bc
-	jr asm_213af
-
-Func_213ac: ; 213ac (8:53ac)
-	ld de, Unknown_213c0 ; $53c0
-asm_213af: ; 213af (8:53af)
-	ld hl, $ff10
-	ld c, $5
-	xor a
-.asm_213b5
-	ld [hli], a
-	ld a, [de]
-	inc de
-	dec c
-	jr nz, .asm_213b5
-	ret
-
-Unknown_213bc: ; 213bc (8:53bc)
-	db $A0,$E2,$50,$87
-
-Unknown_213c0: ; 213c0 (8:53c0)
-	db $B0,$E2,$EE,$86
-
-Unknown_213c4: ; 213c4 (8:53c4)
-	db $00,$00,$00,$80
-
-
-INCLUDE "menu/pc.asm"
-
-INCLUDE "audio/engine_2.asm"
-
-
-Music_PokeFluteInBattle: ; 22306 (8:6306)
-	ld a, (SFX_08_46 - $4000) / 3 ; PokeFlute outside of battle
-	call PlaySoundWaitForCurrent
-	ld hl, $c00e
-	ld de, SFX_08_PokeFlute_Ch1
-	call Music8_OverwriteChannelPointer
-	ld de, SFX_08_PokeFlute_Ch2
-	call Music8_OverwriteChannelPointer
-	ld de, SFX_08_PokeFlute_Ch3
-
-Music8_OverwriteChannelPointer: ; 2231d (8:631d)
-	ld a, e
-	ld [hli], a
-	ld a, d
-	ld [hli], a
-	ret
-
-
-SECTION "Music 2", ROMX, BANK[AUDIO_2]
-
-INCLUDE "music/sfx/sfx_08_pokeflute.asm"
-INCLUDE "music/sfx/sfx_08_unused2.asm"
-INCLUDE "music/gymleaderbattle.asm"
-INCLUDE "music/trainerbattle.asm"
-INCLUDE "music/wildbattle.asm"
-INCLUDE "music/finalbattle.asm"
-INCLUDE "music/sfx/sfx_08_3a.asm"
-INCLUDE "music/sfx/sfx_08_3b.asm"
-INCLUDE "music/sfx/sfx_08_46.asm"
-INCLUDE "music/defeatedtrainer.asm"
-INCLUDE "music/defeatedwildmon.asm"
-INCLUDE "music/defeatedgymleader.asm"
-
-
-
-SECTION "Sound Effect Headers 3", ROMX, BANK[AUDIO_3]
-
-INCLUDE "music/headers/sfxheaders1f.asm"
-
-
-SECTION "Music Headers 3", ROMX, BANK[AUDIO_3]
-
-INCLUDE "music/headers/musicheaders1f.asm"
-
-
 SECTION "Sound Effects 3", ROMX, BANK[AUDIO_3]
 
 INCLUDE "music/sfx/sfx_1f_01.asm"
@@ -600,6 +366,185 @@ INCLUDE "music/sfx/sfx_1f_35.asm"
 INCLUDE "music/sfx/sfx_1f_36.asm"
 
 
+
+SECTION "Audio Engine 1", ROMX, BANK[AUDIO_1]
+
+PlayBattleMusic:: ; 0x90c6
+	xor a
+	ld [wMusicHeaderPointer], a
+	ld [$d083], a
+	dec a
+	ld [$c0ee], a
+	call PlaySound ; stop music
+	call DelayFrame
+	ld c, BANK(Music_GymLeaderBattle)
+	ld a, [W_GYMLEADERNO]
+	and a
+	jr z, .notGymLeaderBattle
+	ld a, (Music_GymLeaderBattle - $4000) / 3
+	jr .playSong
+.notGymLeaderBattle
+	ld a, [W_CUROPPONENT]
+	cp $c8
+	jr c, .wildBattle
+	cp SONY3 + $c8
+	jr z, .finalBattle
+	cp LANCE + $c8
+	jr nz, .normalTrainerBattle
+	ld a, (Music_GymLeaderBattle - $4000) / 3 ; lance also plays gym leader theme
+	jr .playSong
+.normalTrainerBattle
+	ld a, (Music_TrainerBattle - $4000) / 3
+	jr .playSong
+.finalBattle
+	ld a, (Music_FinalBattle - $4000) / 3
+	jr .playSong
+.wildBattle
+	ld a, (Music_WildBattle - $4000) / 3
+.playSong
+	jp PlayMusic
+
+
+INCLUDE "audio/engine_1.asm"
+
+
+; an alternate start for MeetRival which has a different first measure
+Music_RivalAlternateStart:: ; 0x9b47
+	ld c, BANK(Music_MeetRival)
+	ld a, (Music_MeetRival - $4000) / 3
+	call PlayMusic
+	ld hl, $c006
+	ld de, Music_MeetRival_branch_b1a2
+	call Music2_OverwriteChannelPointer
+	ld de, Music_MeetRival_branch_b21d
+	call Music2_OverwriteChannelPointer
+	ld de, Music_MeetRival_branch_b2b5
+
+Music2_OverwriteChannelPointer: ; 0x9b60
+	ld a, e
+	ld [hli], a
+	ld a, d
+	ld [hli], a
+	ret
+
+; an alternate tempo for MeetRival which is slightly slower
+Music_RivalAlternateTempo:: ; 0x9b65
+	ld c, BANK(Music_MeetRival)
+	ld a, (Music_MeetRival - $4000) / 3
+	call PlayMusic
+	ld hl, $c006
+	ld de, Music_MeetRival_branch_b119
+	jp Music2_OverwriteChannelPointer
+
+; applies both the alternate start and alternate tempo
+Music_RivalAlternateStartAndTempo:: ; 0x9b75
+	call Music_RivalAlternateStart
+	ld hl, $c006
+	ld de, Music_MeetRival_branch_b19b
+	jp Music2_OverwriteChannelPointer
+
+; an alternate tempo for Cities1 which is used for the Hall of Fame room
+Music_Cities1AlternateTempo:: ; 0x9b81
+	ld a, $a
+	ld [$cfc8], a
+	ld [$cfc9], a
+	ld a, $ff
+	ld [wMusicHeaderPointer], a
+	ld c, $64
+	call DelayFrames
+	ld c, BANK(Music_Cities1)
+	ld a, (Music_Cities1 - $4000) / 3
+	call PlayMusic
+	ld hl, $c006
+	ld de, Music_Cities1_branch_aa6f
+	jp Music2_OverwriteChannelPointer
+
+
+SECTION "Audio Engine 2", ROMX, BANK[AUDIO_2]
+
+Func_2136e: ; 2136e (8:536e)
+	ld a, [$d083]
+	cp $ff
+	jr z, .asm_2139b
+	bit 7, a
+	ret z
+	and $7f
+	jr nz, .asm_21383
+	call Func_213a7
+	ld a, $1e
+	jr .asm_21395
+.asm_21383
+	cp $14
+	jr nz, .asm_2138a
+	call Func_213ac
+.asm_2138a
+	ld a, $86
+	ld [$c02a], a
+	ld a, [$d083]
+	and $7f
+	dec a
+.asm_21395
+	set 7, a
+	ld [$d083], a
+	ret
+.asm_2139b
+	xor a
+	ld [$d083], a
+	ld [$c02a], a
+	ld de, Unknown_213c4 ; $53c4
+	jr asm_213af
+
+Func_213a7: ; 213a7 (8:53a7)
+	ld de, Unknown_213bc ; $53bc
+	jr asm_213af
+
+Func_213ac: ; 213ac (8:53ac)
+	ld de, Unknown_213c0 ; $53c0
+asm_213af: ; 213af (8:53af)
+	ld hl, $ff10
+	ld c, $5
+	xor a
+.asm_213b5
+	ld [hli], a
+	ld a, [de]
+	inc de
+	dec c
+	jr nz, .asm_213b5
+	ret
+
+Unknown_213bc: ; 213bc (8:53bc)
+	db $A0,$E2,$50,$87
+
+Unknown_213c0: ; 213c0 (8:53c0)
+	db $B0,$E2,$EE,$86
+
+Unknown_213c4: ; 213c4 (8:53c4)
+	db $00,$00,$00,$80
+
+
+INCLUDE "menu/pc.asm"
+
+INCLUDE "audio/engine_2.asm"
+
+
+Music_PokeFluteInBattle: ; 22306 (8:6306)
+	ld a, (SFX_08_46 - $4000) / 3 ; PokeFlute outside of battle
+	call PlaySoundWaitForCurrent
+	ld hl, $c00e
+	ld de, SFX_08_PokeFlute_Ch1
+	call Music8_OverwriteChannelPointer
+	ld de, SFX_08_PokeFlute_Ch2
+	call Music8_OverwriteChannelPointer
+	ld de, SFX_08_PokeFlute_Ch3
+
+Music8_OverwriteChannelPointer: ; 2231d (8:631d)
+	ld a, e
+	ld [hli], a
+	ld a, d
+	ld [hli], a
+	ret
+
+
 SECTION "Audio Engine 3", ROMX, BANK[AUDIO_3]
 
 Func_7d13b:: ; 7d13b (1f:513b)
@@ -648,6 +593,52 @@ OwnedMonValues: ; 7d170 (1f:5170)
 
 
 INCLUDE "audio/engine_3.asm"
+
+
+
+SECTION "Music 1", ROMX, BANK[AUDIO_1]
+
+INCLUDE "music/pkmnhealed.asm"
+INCLUDE "music/routes1.asm"
+INCLUDE "music/routes2.asm"
+INCLUDE "music/routes3.asm"
+INCLUDE "music/routes4.asm"
+INCLUDE "music/indigoplateau.asm"
+INCLUDE "music/pallettown.asm"
+INCLUDE "music/unusedsong.asm"
+INCLUDE "music/cities1.asm"
+INCLUDE "music/sfx/sfx_02_3a.asm"
+INCLUDE "music/museumguy.asm"
+INCLUDE "music/meetprofoak.asm"
+INCLUDE "music/meetrival.asm"
+INCLUDE "music/sfx/sfx_02_41.asm"
+INCLUDE "music/sfx/sfx_02_3b.asm"
+INCLUDE "music/sfx/sfx_02_42.asm"
+INCLUDE "music/ssanne.asm"
+INCLUDE "music/cities2.asm"
+INCLUDE "music/celadon.asm"
+INCLUDE "music/cinnabar.asm"
+INCLUDE "music/vermilion.asm"
+INCLUDE "music/lavender.asm"
+INCLUDE "music/safarizone.asm"
+INCLUDE "music/gym.asm"
+INCLUDE "music/pokecenter.asm"
+
+
+SECTION "Music 2", ROMX, BANK[AUDIO_2]
+
+INCLUDE "music/sfx/sfx_08_pokeflute.asm"
+INCLUDE "music/sfx/sfx_08_unused2.asm"
+INCLUDE "music/gymleaderbattle.asm"
+INCLUDE "music/trainerbattle.asm"
+INCLUDE "music/wildbattle.asm"
+INCLUDE "music/finalbattle.asm"
+INCLUDE "music/sfx/sfx_08_3a.asm"
+INCLUDE "music/sfx/sfx_08_3b.asm"
+INCLUDE "music/sfx/sfx_08_46.asm"
+INCLUDE "music/defeatedtrainer.asm"
+INCLUDE "music/defeatedwildmon.asm"
+INCLUDE "music/defeatedgymleader.asm"
 
 
 SECTION "Music 3", ROMX, BANK[AUDIO_3]
