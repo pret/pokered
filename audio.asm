@@ -623,12 +623,7 @@ INCLUDE "music/sfx/sfx_1f_5a.asm"
 INCLUDE "music/sfx/sfx_1f_5b.asm"
 INCLUDE "music/sfx/sfx_1f_5c.asm"
 INCLUDE "music/sfx/sfx_1f_40.asm"
-IF _RED
-	INCLUDE "music/sfx/sfx_1f_5d.asm"
-ENDC
-IF _BLUE
-	INCLUDE "music/blue/sfx_1f_5d.asm"
-ENDC
+INCLUDE "music/sfx/sfx_1f_5d.asm"
 INCLUDE "music/sfx/sfx_1f_3d.asm"
 INCLUDE "music/sfx/sfx_1f_43.asm"
 INCLUDE "music/sfx/sfx_1f_3e.asm"
