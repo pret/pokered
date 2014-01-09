@@ -5,9 +5,9 @@ Music1f_Channel3DutyPointers: ; 7c361 (1f:4361)
 	dw Music1f_Channel3Duty3
 	dw Music1f_Channel3Duty4
 	dw Music1f_Channel3Duty5 ; used in the Pokemon Tower theme
-	dw SFX_1f_3f_Ch1 ; unused
-	dw SFX_1f_3f_Ch1 ; unused
-	dw SFX_1f_3f_Ch1 ; unused
+	dw Music1f_Channel3Duty5 ; unused
+	dw Music1f_Channel3Duty5 ; unused
+	dw Music1f_Channel3Duty5 ; unused
 
 ; these are the definitions for the channel 3 instruments
 ; each instrument definition is made up of 32 points (nibbles) that form

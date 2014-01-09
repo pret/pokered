@@ -5,9 +5,9 @@ Music2_Channel3DutyPointers: ; 0x8361
 	dw Music2_Channel3Duty3
 	dw Music2_Channel3Duty4
 	dw Music2_Channel3Duty5 ; used in the Lavender Town theme
-	dw SFX_02_3f_Ch1 ; unused
-	dw SFX_02_3f_Ch1 ; unused
-	dw SFX_02_3f_Ch1 ; unused
+	dw Music2_Channel3Duty5 ; unused
+	dw Music2_Channel3Duty5 ; unused
+	dw Music2_Channel3Duty5 ; unused
 
 ; these are the definitions for the channel 3 instruments
 ; each instrument definition is made up of 32 points (nibbles) that form

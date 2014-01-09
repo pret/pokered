@@ -4,10 +4,10 @@ Music8_Channel3DutyPointers: ; 20361 (8:4361)
 	dw Music8_Channel3Duty2
 	dw Music8_Channel3Duty3
 	dw Music8_Channel3Duty4
-	dw SFX_08_40_Ch1 ; unused
-	dw SFX_08_40_Ch1 ; unused
-	dw SFX_08_40_Ch1 ; unused
-	dw SFX_08_40_Ch1 ; unused
+	dw Music8_Channel3Duty5 ; unused
+	dw Music8_Channel3Duty5 ; unused
+	dw Music8_Channel3Duty5 ; unused
+	dw Music8_Channel3Duty5 ; unused
 
 ; these are the definitions for the channel 3 instruments
 ; each instrument definition is made up of 32 points (nibbles) that form
@@ -27,4 +27,6 @@ Music8_Channel3Duty3: ; 203a3 (8:43a3)
 
 Music8_Channel3Duty4: ; 203b3 (8:43b3)
 	db $01,$23,$45,$67,$8A,$CD,$EE,$F7,$7F,$EE,$DC,$A8,$76,$54,$32,$10
+
+Music8_Channel3Duty5:
 
