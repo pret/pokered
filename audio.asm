@@ -45,40 +45,7 @@ INCLUDE "music/sfx/sfx_02_11.asm"
 INCLUDE "music/sfx/sfx_02_12.asm"
 INCLUDE "music/sfx/sfx_02_13.asm"
 
-
-Music2_Channel3DutyPointers: ; 0x8361
-	dw Music2_Channel3Duty0
-	dw Music2_Channel3Duty1
-	dw Music2_Channel3Duty2
-	dw Music2_Channel3Duty3
-	dw Music2_Channel3Duty4
-	dw Music2_Channel3Duty5 ; used in the Lavender Town theme
-	dw SFX_02_3f_Ch1 ; unused
-	dw SFX_02_3f_Ch1 ; unused
-	dw SFX_02_3f_Ch1 ; unused
-
-; these are the definitions for the channel 3 instruments
-; each instrument definition is made up of 32 points (nibbles) that form
-; the graph of the wave
-; the current instrument is copied to $FF30
-Music2_Channel3Duty0: ; 0x8373
-	db $02,$46,$8A,$CE,$FF,$FE,$ED,$DC,$CB,$A9,$87,$65,$44,$33,$22,$11
-
-Music2_Channel3Duty1: ; 0x8383
-	db $02,$46,$8A,$CE,$EF,$FF,$FE,$EE,$DD,$CB,$A9,$87,$65,$43,$22,$11
-
-Music2_Channel3Duty2: ; 0x8393
-	db $13,$69,$BD,$EE,$EE,$FF,$FF,$ED,$DE,$FF,$FF,$EE,$EE,$DB,$96,$31
-
-Music2_Channel3Duty3: ; 0x83a3
-	db $02,$46,$8A,$CD,$EF,$FE,$DE,$FF,$EE,$DC,$BA,$98,$76,$54,$32,$10
-
-Music2_Channel3Duty4: ; 0x83b3
-	db $01,$23,$45,$67,$8A,$CD,$EE,$F7,$7F,$EE,$DC,$A8,$76,$54,$32,$10
-
-; duty 5 reads from sfx data
-Music2_Channel3Duty5: ; 0x83c3
-
+INCLUDE "audio/duty_1.asm"
 
 INCLUDE "music/sfx/sfx_02_3f.asm"
 INCLUDE "music/sfx/sfx_02_5e.asm"
@@ -310,37 +277,7 @@ INCLUDE "music/sfx/sfx_08_11.asm"
 INCLUDE "music/sfx/sfx_08_12.asm"
 INCLUDE "music/sfx/sfx_08_13.asm"
 
-
-Music8_Channel3DutyPointers: ; 20361 (8:4361)
-	dw Music8_Channel3Duty0
-	dw Music8_Channel3Duty1
-	dw Music8_Channel3Duty2
-	dw Music8_Channel3Duty3
-	dw Music8_Channel3Duty4
-	dw SFX_08_40_Ch1 ; unused
-	dw SFX_08_40_Ch1 ; unused
-	dw SFX_08_40_Ch1 ; unused
-	dw SFX_08_40_Ch1 ; unused
-
-; these are the definitions for the channel 3 instruments
-; each instrument definition is made up of 32 points (nibbles) that form
-; the graph of the wave
-; the current instrument is copied to $FF30
-Music8_Channel3Duty0: ; 20373 (8:4373)
-	db $02,$46,$8A,$CE,$FF,$FE,$ED,$DC,$CB,$A9,$87,$65,$44,$33,$22,$11
-
-Music8_Channel3Duty1: ; 20383 (8:4383)
-	db $02,$46,$8A,$CE,$EF,$FF,$FE,$EE,$DD,$CB,$A9,$87,$65,$43,$22,$11
-
-Music8_Channel3Duty2: ; 20393 (8:4393)
-	db $13,$69,$BD,$EE,$EE,$FF,$FF,$ED,$DE,$FF,$FF,$EE,$EE,$DB,$96,$31
-
-Music8_Channel3Duty3: ; 203a3 (8:43a3)
-	db $02,$46,$8A,$CD,$EF,$FE,$DE,$FF,$EE,$DC,$BA,$98,$76,$54,$32,$10
-
-Music8_Channel3Duty4: ; 203b3 (8:43b3)
-	db $01,$23,$45,$67,$8A,$CD,$EE,$F7,$7F,$EE,$DC,$A8,$76,$54,$32,$10
-
+INCLUDE "audio/duty_2.asm"
 
 INCLUDE "music/sfx/sfx_08_40.asm"
 INCLUDE "music/sfx/sfx_08_3f.asm"
@@ -578,40 +515,7 @@ INCLUDE "music/sfx/sfx_1f_11.asm"
 INCLUDE "music/sfx/sfx_1f_12.asm"
 INCLUDE "music/sfx/sfx_1f_13.asm"
 
-
-Music1f_Channel3DutyPointers: ; 7c361 (1f:4361)
-	dw Music1f_Channel3Duty0
-	dw Music1f_Channel3Duty1
-	dw Music1f_Channel3Duty2
-	dw Music1f_Channel3Duty3
-	dw Music1f_Channel3Duty4
-	dw Music1f_Channel3Duty5 ; used in the Pokemon Tower theme
-	dw SFX_1f_3f_Ch1 ; unused
-	dw SFX_1f_3f_Ch1 ; unused
-	dw SFX_1f_3f_Ch1 ; unused
-
-; these are the definitions for the channel 3 instruments
-; each instrument definition is made up of 32 points (nibbles) that form
-; the graph of the wave
-; the current instrument is copied to $FF30
-Music1f_Channel3Duty0: ; 7c373 (1f:4373)
-	db $02,$46,$8A,$CE,$FF,$FE,$ED,$DC,$CB,$A9,$87,$65,$44,$33,$22,$11
-
-Music1f_Channel3Duty1: ; 7c383 (1f:4383)
-	db $02,$46,$8A,$CE,$EF,$FF,$FE,$EE,$DD,$CB,$A9,$87,$65,$43,$22,$11
-
-Music1f_Channel3Duty2: ; 7c393 (1f:4393)
-	db $13,$69,$BD,$EE,$EE,$FF,$FF,$ED,$DE,$FF,$FF,$EE,$EE,$DB,$96,$31
-
-Music1f_Channel3Duty3: ; 7c3a3 (1f:43a3)
-	db $02,$46,$8A,$CD,$EF,$FE,$DE,$FF,$EE,$DC,$BA,$98,$76,$54,$32,$10
-
-Music1f_Channel3Duty4: ; 7c3b3 (1f:43b3)
-	db $01,$23,$45,$67,$8A,$CD,$EE,$F7,$7F,$EE,$DC,$A8,$76,$54,$32,$10
-
-; duty 5 reads from sfx data
-Music1f_Channel3Duty5: ; 7c3c3 (1f:43c3)
-
+INCLUDE "audio/duty_3.asm"
 
 INCLUDE "music/sfx/sfx_1f_3f.asm"
 INCLUDE "music/sfx/sfx_1f_56.asm"
