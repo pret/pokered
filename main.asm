@@ -41334,8 +41334,8 @@ ViridianMartScript0: ; 1d49b (7:549b)
 	ret
 
 RLEMovement1d4bb: ; 1d4bb (7:54bb)
-	db $20
-	TX_RAM $0240
+	db $20, $01
+	db $40, $02
 	db $ff
 
 ViridianMartScript1: ; 1d4c0 (7:54c0)
