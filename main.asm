@@ -36745,13 +36745,13 @@ PewterCityScript1: ; 19280 (6:5280)
 	call Func_32f9
 	ld a, $3
 	ld [$ff00+$8c], a
-	ld de, MovementData_192ce ; $52ce
+	ld de, MovementData_PewterMuseumGuyExit ; $52ce
 	call MoveSprite
 	ld a, $2
 	ld [W_PEWTERCITYCURSCRIPT], a
 	ret
 
-MovementData_192ce: ; 192ce (6:52ce)
+MovementData_PewterMuseumGuyExit: ; 192ce (6:52ce)
 	db $00,$00,$00,$00,$FF
 
 PewterCityScript2: ; 192d3 (6:52d3)
@@ -36811,13 +36811,13 @@ PewterCityScript4: ; 19305 (6:5305)
 	call Func_32f9
 	ld a, $5
 	ld [$ff00+$8c], a
-	ld de, MovementData_19353
+	ld de, MovementData_PewterGymGuyExit
 	call MoveSprite
 	ld a, $5
 	ld [W_PEWTERCITYCURSCRIPT], a
 	ret
 
-MovementData_19353: ; 19353 (6:5353)
+MovementData_PewterGymGuyExit: ; 19353 (6:5353)
 	db $C0,$C0,$C0,$C0,$C0,$FF
 
 PewterCityScript5: ; 19359 (6:5359)
@@ -39199,7 +39199,7 @@ Func_1a514: ; 1a514 (6:6514)
 	ld [$cf17], a
 	call Func_3486
 	ld hl, $ccd3
-	ld de, RLEList_1a559
+	ld de, RLEList_PewterMuseumPlayer
 	call DecodeRLEList
 	dec a
 	ld [$cd38], a
@@ -39208,7 +39208,7 @@ Func_1a514: ; 1a514 (6:6514)
 	ld a, $4f
 	call Predef
 	ld hl, $cc97
-	ld de, RLEList_1a562
+	ld de, RLEList_PewterMuseumGuy
 	call DecodeRLEList
 	ld hl, $d72e
 	res 7, [hl]
@@ -39216,14 +39216,14 @@ Func_1a514: ; 1a514 (6:6514)
 	ld [$cf10], a
 	ret
 
-RLEList_1a559: ; 1a559 (6:6559)
+RLEList_PewterMuseumPlayer: ; 1a559 (6:6559)
 	db $00, $01
 	db $40, $03
 	db $20, $0D
 	db $40, $06
 	db $FF
 
-RLEList_1a562: ; 1a562 (6:6562)
+RLEList_PewterMuseumGuy: ; 1a562 (6:6562)
 	db $40, $06
 	db $80, $0D
 	db $40, $03
@@ -39257,7 +39257,7 @@ Func_1a581: ; 1a581 (6:6581)
 	xor a
 	ld [$c206], a
 	ld hl, $ccd3
-	ld de, RLEList_1a5cd
+	ld de, RLEList_PewterGymPlayer
 	call DecodeRLEList
 	dec a
 	ld [$cd38], a
@@ -39266,7 +39266,7 @@ Func_1a581: ; 1a581 (6:6581)
 	ld a, $4f
 	call Predef
 	ld hl, $cc97
-	ld de, RLEList_1a5da
+	ld de, RLEList_PewterGymGuy
 	call DecodeRLEList
 	ld hl, $d72e
 	res 7, [hl]
@@ -39276,7 +39276,7 @@ Func_1a581: ; 1a581 (6:6581)
 	ld [$cf10], a
 	ret
 
-RLEList_1a5cd: ; 1a5cd (6:65cd)
+RLEList_PewterGymPlayer: ; 1a5cd (6:65cd)
 	db $00, $01
 	db $10, $02
 	db $80, $05
@@ -39285,7 +39285,7 @@ RLEList_1a5cd: ; 1a5cd (6:65cd)
 	db $20, $0F
 	db $FF
 
-RLEList_1a5da: ; 1a5da (6:65da)
+RLEList_PewterGymGuy: ; 1a5da (6:65da)
 	db $00, $02
 	db $80, $0F
 	db $40, $05
@@ -49392,10 +49392,13 @@ Func_37ca1: ; 37ca1 (d:7ca1)
 	jr .asm_37cc7
 
 PointerTable_37ce6: ; 37ce6 (d:7ce6)
-	dw Unknown_37cea
-	dw Unknown_37d06
+	dw PewterMuseumGuyCoords
+	dw PewterGymGuyCoords
 
-Unknown_37cea: ; 37cea (d:7cea)
+; these are the four coordinates of the spaces below, above, to the left and
+; to the right of the museum guy, and pointers to different movements for
+; the player to make to get positioned before the main movement.
+PewterMuseumGuyCoords: ; 37cea (d:7cea)
 	db 18, 27
 	dw .down
 	db 16, 27
@@ -49414,7 +49417,10 @@ Unknown_37cea: ; 37cea (d:7cea)
 .right
 	db $40, $20, $ff
 
-Unknown_37d06: ; 37d06 (d:7d06)
+; these are the five coordinates which trigger the gym guy and pointers to
+; different movements for the player to make to get positioned before the
+; main movement
+PewterGymGuyCoords: ; 37d06 (d:7d06)
 	db 16, 34
 	dw .one
 	db 17, 35
