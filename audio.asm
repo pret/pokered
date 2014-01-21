@@ -5,6 +5,7 @@ AUDIO_2 EQU $8
 AUDIO_3 EQU $1f
 
 INCLUDE "macros.asm"
+INCLUDE "constants/music_constants.asm"
 INCLUDE "constants/trainer_constants.asm"
 
 ; PC
