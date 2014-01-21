@@ -5798,10 +5798,10 @@ asm_2324: ; 2324 (0:2324)
 	jr z, .asm_2343
 	cp $2
 	jr z, .asm_2332
-	ld a, (Music_BikeRiding - $4000) / 3
+	ld a, MUSIC_BIKE_RIDING
 	jr .asm_2334
 .asm_2332
-	ld a, (Music_Surfing - $4000) / 3
+	ld a, MUSIC_SURFING
 .asm_2334
 	ld b, a
 	ld a, d
@@ -8440,7 +8440,7 @@ PlayTrainerMusic: ; 33e8 (0:33e8)
 	jr z, .noEvilTrainer
 	cp b
 	jr nz, .evilTrainerListLoop
-	ld a, (Music_MeetEvilTrainer - $4000) / 3
+	ld a, MUSIC_MEET_EVIL_TRAINER
 	jr .PlaySound
 .noEvilTrainer
 	ld hl, FemaleTrainerList
@@ -8450,10 +8450,10 @@ PlayTrainerMusic: ; 33e8 (0:33e8)
 	jr z, .maleTrainer
 	cp b
 	jr nz, .femaleTrainerListLoop
-	ld a, (Music_MeetFemaleTrainer - $4000) / 3
+	ld a, MUSIC_MEET_FEMALE_TRAINER
 	jr .PlaySound
 .maleTrainer
-	ld a, (Music_MeetMaleTrainer - $4000) / 3
+	ld a, MUSIC_MEET_MALE_TRAINER
 .PlaySound
 	ld [$c0ee], a
 	jp PlaySound
@@ -11011,7 +11011,7 @@ ENDC
 	call PrintGameVersionOnTitleScreen
 	call Delay3
 	call WaitForSoundToFinish
-	ld a, (Music_TitleScreen - $4000) / 3
+	ld a, MUSIC_TITLE_SCREEN
 	ld [$c0ee], a
 	call PlaySound
 	xor a
@@ -13210,7 +13210,7 @@ Func_5345: ; 5345
 	jp Func_577d
 .asm_5506
 	ld c, BANK(Music_GameCorner)
-	ld a, (Music_GameCorner - $4000) / 3
+	ld a, MUSIC_GAME_CORNER
 	call PlayMusic
 	jr Func_551c
 
@@ -13850,7 +13850,7 @@ Func_5a5f: ; 5a5f (1:5a5f)
 	ld [wMusicHeaderPointer], a
 	ld a, BANK(Music_Celadon)
 	ld [$c0f0], a
-	ld a, (Music_Celadon - $4000) / 3
+	ld a, MUSIC_CELADON
 	ld [$c0ee], a
 	jp PlaySound
 
@@ -14666,7 +14666,7 @@ OakSpeech: ; 6115 (1:6115)
 	call PlaySound ; stop music
 	ld a, BANK(Music_Routes2) ; bank of song
 	ld c,a
-	ld a, (Music_Routes2 - $4000) / 3 ; song #
+	ld a, MUSIC_ROUTES2 ; song #
 	call PlayMusic  ; plays music
 	call ClearScreen
 	call LoadTextBoxTilePatterns
@@ -18374,501 +18374,501 @@ HandleJoypadResetButtons: ; c03c (3:403c)
 	jp GetJoypadState
 
 MapSongBanks: ; c04d (3:404d)
-	db (Music_PalletTown - $4000) / 3
+	db MUSIC_PALLET_TOWN
 	db BANK(Music_PalletTown) ;PALLET_TOWN
-	db (Music_Cities1 - $4000) / 3
+	db MUSIC_CITIES1
 	db BANK(Music_Cities1) ; VIRIDIAN_CITY
-	db (Music_Cities1 - $4000) / 3
+	db MUSIC_CITIES1
 	db BANK(Music_Cities1) ; PEWTER_CITY
-	db (Music_Cities2 - $4000) / 3
+	db MUSIC_CITIES2
 	db BANK(Music_Cities2) ; CERULEAN_CITY
-	db (Music_Lavender - $4000) / 3
+	db MUSIC_LAVENDER
 	db BANK(Music_Lavender) ; LAVENDER_TOWN
-	db (Music_Vermilion - $4000) / 3
+	db MUSIC_VERMILION
 	db BANK(Music_Vermilion) ; VERMILION_CITY
-	db (Music_Celadon - $4000) / 3
+	db MUSIC_CELADON
 	db BANK(Music_Celadon) ; CELADON_CITY
-	db (Music_Cities2 - $4000) / 3
+	db MUSIC_CITIES2
 	db BANK(Music_Cities2) ; FUCHSIA_CITY
-	db (Music_Cinnabar - $4000) / 3
+	db MUSIC_CINNABAR
 	db BANK(Music_Cinnabar) ; CINNABAR_ISLAND
-	db (Music_IndigoPlateau - $4000) / 3
+	db MUSIC_INDIGO_PLATEAU
 	db BANK(Music_IndigoPlateau) ; INDIGO_PLATEAU
-	db (Music_Cities1 - $4000) / 3
+	db MUSIC_CITIES1
 	db BANK(Music_Cities1) ; SAFFRON_CITY
-	db (Music_Cities1 - $4000) / 3
+	db MUSIC_CITIES1
 	db BANK(Music_Cities1) ; unused
-	db (Music_Routes1 - $4000) / 3
+	db MUSIC_ROUTES1
 	db BANK(Music_Routes1) ; ROUTE_1
-	db (Music_Routes1 - $4000) / 3
+	db MUSIC_ROUTES1
 	db BANK(Music_Routes1) ; ROUTE_2
-	db (Music_Routes3 - $4000) / 3
+	db MUSIC_ROUTES3
 	db BANK(Music_Routes3) ; ROUTE_3
-	db (Music_Routes3 - $4000) / 3
+	db MUSIC_ROUTES3
 	db BANK(Music_Routes3) ; ROUTE_4
-	db (Music_Routes3 - $4000) / 3
+	db MUSIC_ROUTES3
 	db BANK(Music_Routes3) ; ROUTE_5
-	db (Music_Routes3 - $4000) / 3
+	db MUSIC_ROUTES3
 	db BANK(Music_Routes3) ; ROUTE_6
-	db (Music_Routes3 - $4000) / 3
+	db MUSIC_ROUTES3
 	db BANK(Music_Routes3) ; ROUTE_7
-	db (Music_Routes3 - $4000) / 3
+	db MUSIC_ROUTES3
 	db BANK(Music_Routes3) ; ROUTE_8
-	db (Music_Routes3 - $4000) / 3
+	db MUSIC_ROUTES3
 	db BANK(Music_Routes3) ; ROUTE_9
-	db (Music_Routes3 - $4000) / 3
+	db MUSIC_ROUTES3
 	db BANK(Music_Routes3) ; ROUTE_10
-	db (Music_Routes4 - $4000) / 3
+	db MUSIC_ROUTES4
 	db BANK(Music_Routes4) ; ROUTE_11
-	db (Music_Routes4 - $4000) / 3
+	db MUSIC_ROUTES4
 	db BANK(Music_Routes4) ; ROUTE_12
-	db (Music_Routes4 - $4000) / 3
+	db MUSIC_ROUTES4
 	db BANK(Music_Routes4) ; ROUTE_13
-	db (Music_Routes4 - $4000) / 3
+	db MUSIC_ROUTES4
 	db BANK(Music_Routes4) ; ROUTE_14
-	db (Music_Routes4 - $4000) / 3
+	db MUSIC_ROUTES4
 	db BANK(Music_Routes4) ; ROUTE_15
-	db (Music_Routes3 - $4000) / 3
+	db MUSIC_ROUTES3
 	db BANK(Music_Routes3) ; ROUTE_16
-	db (Music_Routes3 - $4000) / 3
+	db MUSIC_ROUTES3
 	db BANK(Music_Routes3) ; ROUTE_17
-	db (Music_Routes3 - $4000) / 3
+	db MUSIC_ROUTES3
 	db BANK(Music_Routes3) ; ROUTE_18
-	db (Music_Routes3 - $4000) / 3
+	db MUSIC_ROUTES3
 	db BANK(Music_Routes3) ; ROUTE_19
-	db (Music_Routes3 - $4000) / 3
+	db MUSIC_ROUTES3
 	db BANK(Music_Routes3) ; ROUTE_20
-	db (Music_Routes3 - $4000) / 3
+	db MUSIC_ROUTES3
 	db BANK(Music_Routes3) ; ROUTE_21
-	db (Music_Routes3 - $4000) / 3
+	db MUSIC_ROUTES3
 	db BANK(Music_Routes3) ; ROUTE_22
-	db (Music_IndigoPlateau - $4000) / 3
+	db MUSIC_INDIGO_PLATEAU
 	db BANK(Music_IndigoPlateau) ; ROUTE_23
-	db (Music_Routes2 - $4000) / 3
+	db MUSIC_ROUTES2
 	db BANK(Music_Routes2) ; ROUTE_24
-	db (Music_Routes2 - $4000) / 3
+	db MUSIC_ROUTES2
 	db BANK(Music_Routes2) ; ROUTE_25
-	db (Music_PalletTown - $4000) / 3
+	db MUSIC_PALLET_TOWN
 	db BANK(Music_PalletTown) ; RedsHouse1F
-	db (Music_PalletTown - $4000) / 3
+	db MUSIC_PALLET_TOWN
 	db BANK(Music_PalletTown) ; RedsHouse2F
-	db (Music_PalletTown - $4000) / 3
+	db MUSIC_PALLET_TOWN
 	db BANK(Music_PalletTown) ; BluesHouse
-	db (Music_OaksLab - $4000) / 3
+	db MUSIC_OAKS_LAB
 	db BANK(Music_OaksLab) ; OaksLab
-	db (Music_Pokecenter - $4000) / 3
+	db MUSIC_POKECENTER
 	db BANK(Music_Pokecenter) ; ViridianPokecenter
-	db (Music_Pokecenter - $4000) / 3
+	db MUSIC_POKECENTER
 	db BANK(Music_Pokecenter) ; ViridianMart
-	db (Music_Cities1 - $4000) / 3
+	db MUSIC_CITIES1
 	db BANK(Music_Cities1) ; School
-	db (Music_Cities1 - $4000) / 3
+	db MUSIC_CITIES1
 	db BANK(Music_Cities1) ; ViridianHouse
-	db (Music_Gym - $4000) / 3
+	db MUSIC_GYM
 	db BANK(Music_Gym) ; ViridianGym
-	db (Music_Dungeon2 - $4000) / 3
+	db MUSIC_DUNGEON2
 	db BANK(Music_Dungeon2) ; DiglettsCaveRoute2
-	db (Music_Cities1 - $4000) / 3
+	db MUSIC_CITIES1
 	db BANK(Music_Cities1) ; ViridianForestexit
-	db (Music_Cities1 - $4000) / 3
+	db MUSIC_CITIES1
 	db BANK(Music_Cities1) ; Route2House
-	db (Music_Cities1 - $4000) / 3
+	db MUSIC_CITIES1
 	db BANK(Music_Cities1) ; Route2Gate
-	db (Music_Cities1 - $4000) / 3
+	db MUSIC_CITIES1
 	db BANK(Music_Cities1) ; ViridianForestEntrance
-	db (Music_Dungeon2 - $4000) / 3
+	db MUSIC_DUNGEON2
 	db BANK(Music_Dungeon2) ; ViridianForest
-	db (Music_Cities1 - $4000) / 3
+	db MUSIC_CITIES1
 	db BANK(Music_Cities1) ; MuseumF1
-	db (Music_Cities1 - $4000) / 3
+	db MUSIC_CITIES1
 	db BANK(Music_Cities1) ; MuseumF2
-	db (Music_Gym - $4000) / 3
+	db MUSIC_GYM
 	db BANK(Music_Gym) ; PewterGym
-	db (Music_Cities1 - $4000) / 3
+	db MUSIC_CITIES1
 	db BANK(Music_Cities1) ; PewterHouse1
-	db (Music_Pokecenter - $4000) / 3
+	db MUSIC_POKECENTER
 	db BANK(Music_Pokecenter) ; PewterMart
-	db (Music_Cities1 - $4000) / 3
+	db MUSIC_CITIES1
 	db BANK(Music_Cities1) ; PewterHouse2
-	db (Music_Pokecenter - $4000) / 3
+	db MUSIC_POKECENTER
 	db BANK(Music_Pokecenter) ; PewterPokecenter
-	db (Music_Dungeon3 - $4000) / 3
+	db MUSIC_DUNGEON3
 	db BANK(Music_Dungeon3) ; MtMoon1
-	db (Music_Dungeon3 - $4000) / 3
+	db MUSIC_DUNGEON3
 	db BANK(Music_Dungeon3) ; MtMoon2
-	db (Music_Dungeon3 - $4000) / 3
+	db MUSIC_DUNGEON3
 	db BANK(Music_Dungeon3) ; MtMoon3
-	db (Music_Cities2 - $4000) / 3
+	db MUSIC_CITIES2
 	db BANK(Music_Cities2) ; CeruleanHouseTrashed
-	db (Music_Cities2 - $4000) / 3
+	db MUSIC_CITIES2
 	db BANK(Music_Cities2) ; CeruleanHouse
-	db (Music_Pokecenter - $4000) / 3
+	db MUSIC_POKECENTER
 	db BANK(Music_Pokecenter) ; CeruleanPokecenter
-	db (Music_Gym - $4000) / 3
+	db MUSIC_GYM
 	db BANK(Music_Gym) ; CeruleanGym
-	db (Music_Cities2 - $4000) / 3
+	db MUSIC_CITIES2
 	db BANK(Music_Cities2) ; BikeShop
-	db (Music_Pokecenter - $4000) / 3
+	db MUSIC_POKECENTER
 	db BANK(Music_Pokecenter) ; CeruleanMart
-	db (Music_Pokecenter - $4000) / 3
+	db MUSIC_POKECENTER
 	db BANK(Music_Pokecenter) ; MtMoonPokecenter
-	db (Music_Dungeon3 - $4000) / 3
+	db MUSIC_DUNGEON3
 	db BANK(Music_Dungeon3) ; CeruleanHouseTrashed
-	db (Music_Cities1 - $4000) / 3
+	db MUSIC_CITIES1
 	db BANK(Music_Cities1) ; Route5Gate
-	db (Music_Cities1 - $4000) / 3
+	db MUSIC_CITIES1
 	db BANK(Music_Cities1) ; UndergroundTunnelEntranceRoute5
-	db (Music_Cities1 - $4000) / 3
+	db MUSIC_CITIES1
 	db BANK(Music_Cities1) ; DayCareM
-	db (Music_Cities1 - $4000) / 3
+	db MUSIC_CITIES1
 	db BANK(Music_Cities1) ; Route6Gate
-	db (Music_Cities1 - $4000) / 3
+	db MUSIC_CITIES1
 	db BANK(Music_Cities1) ; UndergroundTunnelEntranceRoute6
-	db (Music_Vermilion - $4000) / 3
+	db MUSIC_VERMILION
 	db BANK(Music_Vermilion) ; FREEZE
-	db (Music_Cities1 - $4000) / 3
+	db MUSIC_CITIES1
 	db BANK(Music_Cities1) ; Route7Gate
-	db (Music_Cities1 - $4000) / 3
+	db MUSIC_CITIES1
 	db BANK(Music_Cities1) ; UndergroundPathEntranceRoute7
-	db (Music_Celadon - $4000) / 3
+	db MUSIC_CELADON
 	db BANK(Music_Celadon) ;FREEZE
-	db (Music_Cities1 - $4000) / 3
+	db MUSIC_CITIES1
 	db BANK(Music_Cities1) ; Route8Gate
-	db (Music_Cities1 - $4000) / 3
+	db MUSIC_CITIES1
 	db BANK(Music_Cities1) ; UndergroundPathEntranceRoute8
-	db (Music_Pokecenter - $4000) / 3
+	db MUSIC_POKECENTER
 	db BANK(Music_Pokecenter) ; RockTunnelPokecenter
-	db (Music_Dungeon3 - $4000) / 3
+	db MUSIC_DUNGEON3
 	db BANK(Music_Dungeon3) ; RockTunnel1
-	db (Music_Dungeon1 - $4000) / 3
+	db MUSIC_DUNGEON1
 	db BANK(Music_Dungeon1) ; PowerPlant
-	db (Music_Vermilion - $4000) / 3
+	db MUSIC_VERMILION
 	db BANK(Music_Vermilion) ; Route11Gate
-	db (Music_Dungeon2 - $4000) / 3
+	db MUSIC_DUNGEON2
 	db BANK(Music_Dungeon2) ; DiglettsCaveEntranceRoute11
-	db (Music_Vermilion - $4000) / 3
+	db MUSIC_VERMILION
 	db BANK(Music_Vermilion) ; Route11GateUpstairs
-	db (Music_Cities1 - $4000) / 3
+	db MUSIC_CITIES1
 	db BANK(Music_Cities1) ; Route12Gate
-	db (Music_Cities2 - $4000) / 3
+	db MUSIC_CITIES2
 	db BANK(Music_Cities2) ; BillsHouse
-	db (Music_Pokecenter - $4000) / 3
+	db MUSIC_POKECENTER
 	db BANK(Music_Pokecenter) ; VermilionPokecenter
-	db (Music_Vermilion - $4000) / 3
+	db MUSIC_VERMILION
 	db BANK(Music_Vermilion) ; FanClub
-	db (Music_Pokecenter - $4000) / 3
+	db MUSIC_POKECENTER
 	db BANK(Music_Pokecenter) ; VermilionMart
-	db (Music_Gym - $4000) / 3
+	db MUSIC_GYM
 	db BANK(Music_Gym) ; VermilionGym
-	db (Music_Vermilion - $4000) / 3
+	db MUSIC_VERMILION
 	db BANK(Music_Vermilion) ; VermilionHouse1
-	db (Music_SSAnne - $4000) / 3
+	db MUSIC_SS_ANNE
 	db BANK(Music_SSAnne) ; VermilionDock
-	db (Music_SSAnne - $4000) / 3
+	db MUSIC_SS_ANNE
 	db BANK(Music_SSAnne) ; SSAnne1
-	db (Music_SSAnne - $4000) / 3
+	db MUSIC_SS_ANNE
 	db BANK(Music_SSAnne) ; SSAnne2
-	db (Music_SSAnne - $4000) / 3
+	db MUSIC_SS_ANNE
 	db BANK(Music_SSAnne) ; SSAnne3
-	db (Music_SSAnne - $4000) / 3
+	db MUSIC_SS_ANNE
 	db BANK(Music_SSAnne) ; SSAnne4
-	db (Music_SSAnne - $4000) / 3
+	db MUSIC_SS_ANNE
 	db BANK(Music_SSAnne) ; SSAnne5
-	db (Music_SSAnne - $4000) / 3
+	db MUSIC_SS_ANNE
 	db BANK(Music_SSAnne) ; SSAnne6
-	db (Music_SSAnne - $4000) / 3
+	db MUSIC_SS_ANNE
 	db BANK(Music_SSAnne) ; SSAnne7
-	db (Music_SSAnne - $4000) / 3
+	db MUSIC_SS_ANNE
 	db BANK(Music_SSAnne) ; SSAnne8
-	db (Music_SSAnne - $4000) / 3
+	db MUSIC_SS_ANNE
 	db BANK(Music_SSAnne) ; SSAnne9
-	db (Music_SSAnne - $4000) / 3
+	db MUSIC_SS_ANNE
 	db BANK(Music_SSAnne) ; SSAnne10
-	db (Music_Dungeon2 - $4000) / 3
+	db MUSIC_DUNGEON2
 	db BANK(Music_Dungeon2) ;unused
-	db (Music_Dungeon2 - $4000) / 3
+	db MUSIC_DUNGEON2
 	db BANK(Music_Dungeon2) ;unused
-	db (Music_SSAnne - $4000) / 3
+	db MUSIC_SS_ANNE
 	db BANK(Music_SSAnne) ;unused
-	db (Music_Dungeon3 - $4000) / 3
+	db MUSIC_DUNGEON3
 	db BANK(Music_Dungeon3) ; VictoryRoad1
-	db (Music_PokemonTower - $4000) / 3
+	db MUSIC_POKEMON_TOWER
 	db BANK(Music_PokemonTower) ;unused
-	db (Music_Dungeon1 - $4000) / 3
+	db MUSIC_DUNGEON1
 	db BANK(Music_Dungeon1) ;unused
-	db (Music_SilphCo - $4000) / 3
+	db MUSIC_SILPH_CO
 	db BANK(Music_SilphCo) ;unused
-	db (Music_SilphCo - $4000) / 3
+	db MUSIC_SILPH_CO
 	db BANK(Music_SilphCo) ;unused
-	db (Music_IndigoPlateau - $4000) / 3
+	db MUSIC_INDIGO_PLATEAU
 	db BANK(Music_IndigoPlateau) ; Lance
-	db (Music_SSAnne - $4000) / 3
+	db MUSIC_SS_ANNE
 	db BANK(Music_SSAnne) ;unused
-	db (Music_SSAnne - $4000) / 3
+	db MUSIC_SS_ANNE
 	db BANK(Music_SSAnne) ;unused
-	db (Music_SSAnne - $4000) / 3
+	db MUSIC_SS_ANNE
 	db BANK(Music_SSAnne) ;unused
-	db (Music_SSAnne - $4000) / 3
+	db MUSIC_SS_ANNE
 	db BANK(Music_SSAnne) ;unused
-	db (Music_PalletTown - $4000) / 3
+	db MUSIC_PALLET_TOWN
 	db BANK(Music_PalletTown) ; HallofFameRoom
-	db (Music_Routes1 - $4000) / 3
+	db MUSIC_ROUTES1
 	db BANK(Music_Routes1) ; UndergroundPathNS
-	db (Music_IndigoPlateau - $4000) / 3
+	db MUSIC_INDIGO_PLATEAU
 	db BANK(Music_IndigoPlateau) ; Gary
-	db (Music_Routes1 - $4000) / 3
+	db MUSIC_ROUTES1
 	db BANK(Music_Routes1) ; UndergroundPathWE
-	db (Music_Pokecenter - $4000) / 3
+	db MUSIC_POKECENTER
 	db BANK(Music_Pokecenter) ; CeladonMart1
-	db (Music_Pokecenter - $4000) / 3
+	db MUSIC_POKECENTER
 	db BANK(Music_Pokecenter) ; CeladonMart2
-	db (Music_Pokecenter - $4000) / 3
+	db MUSIC_POKECENTER
 	db BANK(Music_Pokecenter) ; CeladonMart3
-	db (Music_Pokecenter - $4000) / 3
+	db MUSIC_POKECENTER
 	db BANK(Music_Pokecenter) ; CeladonMart4
-	db (Music_Pokecenter - $4000) / 3
+	db MUSIC_POKECENTER
 	db BANK(Music_Pokecenter) ; CeladonMartRoof
-	db (Music_Pokecenter - $4000) / 3
+	db MUSIC_POKECENTER
 	db BANK(Music_Pokecenter) ; CeladonMartElevator
-	db (Music_Celadon - $4000) / 3
+	db MUSIC_CELADON
 	db BANK(Music_Celadon) ; CeladonMansion1
-	db (Music_Celadon - $4000) / 3
+	db MUSIC_CELADON
 	db BANK(Music_Celadon) ; CeladonMansion2
-	db (Music_Celadon - $4000) / 3
+	db MUSIC_CELADON
 	db BANK(Music_Celadon) ; CeladonMansion3
-	db (Music_Celadon - $4000) / 3
+	db MUSIC_CELADON
 	db BANK(Music_Celadon) ; CeladonMansion4
-	db (Music_Celadon - $4000) / 3
+	db MUSIC_CELADON
 	db BANK(Music_Celadon) ; CeladonMansion5
-	db (Music_Pokecenter - $4000) / 3
+	db MUSIC_POKECENTER
 	db BANK(Music_Pokecenter) ; CeladonPokecenter
-	db (Music_Gym - $4000) / 3
+	db MUSIC_GYM
 	db BANK(Music_Gym) ; CeladonGym
-	db (Music_GameCorner - $4000) / 3
+	db MUSIC_GAME_CORNER
 	db BANK(Music_GameCorner) ; CeladonGameCorner
-	db (Music_Pokecenter - $4000) / 3
+	db MUSIC_POKECENTER
 	db BANK(Music_Pokecenter) ; CeladonMart5
-	db (Music_Celadon - $4000) / 3
+	db MUSIC_CELADON
 	db BANK(Music_Celadon) ; CeladonPrizeRoom
-	db (Music_Celadon - $4000) / 3
+	db MUSIC_CELADON
 	db BANK(Music_Celadon) ; CeladonDiner
-	db (Music_Celadon - $4000) / 3
+	db MUSIC_CELADON
 	db BANK(Music_Celadon) ; CeladonHouse
-	db (Music_Celadon - $4000) / 3
+	db MUSIC_CELADON
 	db BANK(Music_Celadon) ; CeladonHotel
-	db (Music_Pokecenter - $4000) / 3
+	db MUSIC_POKECENTER
 	db BANK(Music_Pokecenter) ; LavenderPokecenter
-	db (Music_PokemonTower - $4000) / 3
+	db MUSIC_POKEMON_TOWER
 	db BANK(Music_PokemonTower) ; PokemonTower1
-	db (Music_PokemonTower - $4000) / 3
+	db MUSIC_POKEMON_TOWER
 	db BANK(Music_PokemonTower) ; PokemonTower2
-	db (Music_PokemonTower - $4000) / 3
+	db MUSIC_POKEMON_TOWER
 	db BANK(Music_PokemonTower) ; PokemonTower3
-	db (Music_PokemonTower - $4000) / 3
+	db MUSIC_POKEMON_TOWER
 	db BANK(Music_PokemonTower) ; PokemonTower4
-	db (Music_PokemonTower - $4000) / 3
+	db MUSIC_POKEMON_TOWER
 	db BANK(Music_PokemonTower) ; PokemonTower5
-	db (Music_PokemonTower - $4000) / 3
+	db MUSIC_POKEMON_TOWER
 	db BANK(Music_PokemonTower) ; PokemonTower6
-	db (Music_PokemonTower - $4000) / 3
+	db MUSIC_POKEMON_TOWER
 	db BANK(Music_PokemonTower) ; PokemonTower7
-	db (Music_Lavender - $4000) / 3
+	db MUSIC_LAVENDER
 	db BANK(Music_Lavender) ; LavenderHouse1
-	db (Music_Pokecenter - $4000) / 3
+	db MUSIC_POKECENTER
 	db BANK(Music_Pokecenter) ; LavenderMart
-	db (Music_Lavender - $4000) / 3
+	db MUSIC_LAVENDER
 	db BANK(Music_Lavender) ; LavenderHouse2
-	db (Music_Pokecenter - $4000) / 3
+	db MUSIC_POKECENTER
 	db BANK(Music_Pokecenter) ; FuchsiaMart
-	db (Music_Cities2 - $4000) / 3
+	db MUSIC_CITIES2
 	db BANK(Music_Cities2) ; FuchsiaHouse1
-	db (Music_Pokecenter - $4000) / 3
+	db MUSIC_POKECENTER
 	db BANK(Music_Pokecenter) ; FuchsiaPokecenter
-	db (Music_Cities2 - $4000) / 3
+	db MUSIC_CITIES2
 	db BANK(Music_Cities2) ; FuchsiaHouse2
-	db (Music_Cities2 - $4000) / 3
+	db MUSIC_CITIES2
 	db BANK(Music_Cities2) ; SafariZoneEntrance
-	db (Music_Gym - $4000) / 3
+	db MUSIC_GYM
 	db BANK(Music_Gym) ; FuchsiaGym
-	db (Music_Cities2 - $4000) / 3
+	db MUSIC_CITIES2
 	db BANK(Music_Cities2) ; FuchsiaMeetingRoom
-	db (Music_Dungeon2 - $4000) / 3
+	db MUSIC_DUNGEON2
 	db BANK(Music_Dungeon2) ; SeafoamIslands2
-	db (Music_Dungeon2 - $4000) / 3
+	db MUSIC_DUNGEON2
 	db BANK(Music_Dungeon2) ; SeafoamIslands3
-	db (Music_Dungeon2 - $4000) / 3
+	db MUSIC_DUNGEON2
 	db BANK(Music_Dungeon2) ; SeafoamIslands4
-	db (Music_Dungeon2 - $4000) / 3
+	db MUSIC_DUNGEON2
 	db BANK(Music_Dungeon2) ; SeafoamIslands5
-	db (Music_Cities2 - $4000) / 3
+	db MUSIC_CITIES2
 	db BANK(Music_Cities2) ; VermilionHouse2
-	db (Music_Cities2 - $4000) / 3
+	db MUSIC_CITIES2
 	db BANK(Music_Cities2) ; FuchsiaHouse3
-	db (Music_CinnabarMansion - $4000) / 3
+	db MUSIC_CINNABAR_MANSION
 	db BANK(Music_CinnabarMansion) ; Mansion1
-	db (Music_Gym - $4000) / 3
+	db MUSIC_GYM
 	db BANK(Music_Gym) ; CinnabarGym
-	db (Music_Cinnabar - $4000) / 3
+	db MUSIC_CINNABAR
 	db BANK(Music_Cinnabar) ; Lab1
-	db (Music_Cinnabar - $4000) / 3
+	db MUSIC_CINNABAR
 	db BANK(Music_Cinnabar) ; Lab2
-	db (Music_Cinnabar - $4000) / 3
+	db MUSIC_CINNABAR
 	db BANK(Music_Cinnabar) ; Lab3
-	db (Music_Cinnabar - $4000) / 3
+	db MUSIC_CINNABAR
 	db BANK(Music_Cinnabar) ; Lab4
-	db (Music_Pokecenter - $4000) / 3
+	db MUSIC_POKECENTER
 	db BANK(Music_Pokecenter) ; CinnabarPokecenter
-	db (Music_Pokecenter - $4000) / 3
+	db MUSIC_POKECENTER
 	db BANK(Music_Pokecenter) ; CinnabarMart
-	db (Music_Cinnabar - $4000) / 3
+	db MUSIC_CINNABAR
 	db BANK(Music_Cinnabar)
-	db (Music_IndigoPlateau - $4000) / 3
+	db MUSIC_INDIGO_PLATEAU
 	db BANK(Music_IndigoPlateau) ; IndigoPlateauLobby
-	db (Music_Cities1 - $4000) / 3
+	db MUSIC_CITIES1
 	db BANK(Music_Cities1) ; CopycatsHouseF1
-	db (Music_Cities1 - $4000) / 3
+	db MUSIC_CITIES1
 	db BANK(Music_Cities1) ; CopycatsHouseF2
-	db (Music_Cities1 - $4000) / 3
+	db MUSIC_CITIES1
 	db BANK(Music_Cities1) ; FightingDojo
-	db (Music_Gym - $4000) / 3
+	db MUSIC_GYM
 	db BANK(Music_Gym) ; SaffronGym
-	db (Music_Cities1 - $4000) / 3
+	db MUSIC_CITIES1
 	db BANK(Music_Cities1) ; SaffronHouse1
-	db (Music_Pokecenter - $4000) / 3
+	db MUSIC_POKECENTER
 	db BANK(Music_Pokecenter) ; SaffronMart
-	db (Music_SilphCo - $4000) / 3
+	db MUSIC_SILPH_CO
 	db BANK(Music_SilphCo) ; SilphCo1
-	db (Music_Pokecenter - $4000) / 3
+	db MUSIC_POKECENTER
 	db BANK(Music_Pokecenter) ; SaffronPokecenter
-	db (Music_Cities1 - $4000) / 3
+	db MUSIC_CITIES1
 	db BANK(Music_Cities1) ; SaffronHouse2
-	db (Music_Cities1 - $4000) / 3
+	db MUSIC_CITIES1
 	db BANK(Music_Cities1) ; Route15Gate
-	db (Music_Cities1 - $4000) / 3
+	db MUSIC_CITIES1
 	db BANK(Music_Cities1) ; Route15GateUpstairs
-	db (Music_Cities1 - $4000) / 3
+	db MUSIC_CITIES1
 	db BANK(Music_Cities1) ; Route16GateMap
-	db (Music_Cities1 - $4000) / 3
+	db MUSIC_CITIES1
 	db BANK(Music_Cities1) ; Route16GateUpstairs
-	db (Music_Celadon - $4000) / 3
+	db MUSIC_CELADON
 	db BANK(Music_Celadon) ; Route16House
-	db (Music_Celadon - $4000) / 3
+	db MUSIC_CELADON
 	db BANK(Music_Celadon) ; Route12House
-	db (Music_Cities1 - $4000) / 3
+	db MUSIC_CITIES1
 	db BANK(Music_Cities1) ; Route18Gate
-	db (Music_Cities1 - $4000) / 3
+	db MUSIC_CITIES1
 	db BANK(Music_Cities1) ; Route18GateUpstairs
-	db (Music_Dungeon2 - $4000) / 3
+	db MUSIC_DUNGEON2
 	db BANK(Music_Dungeon2) ; SeafoamIslands1
-	db (Music_Dungeon2 - $4000) / 3
+	db MUSIC_DUNGEON2
 	db BANK(Music_Dungeon2) ; Route22Gate
-	db (Music_Dungeon3 - $4000) / 3
+	db MUSIC_DUNGEON3
 	db BANK(Music_Dungeon3) ; VictoryRoad2
-	db (Music_Cities1 - $4000) / 3
+	db MUSIC_CITIES1
 	db BANK(Music_Cities1) ; Route12GateUpstairs
-	db (Music_Vermilion - $4000) / 3
+	db MUSIC_VERMILION
 	db BANK(Music_Vermilion) ; VermilionHouse3
-	db (Music_Dungeon2 - $4000) / 3
+	db MUSIC_DUNGEON2
 	db BANK(Music_Dungeon2) ; DiglettsCave
-	db (Music_Dungeon3 - $4000) / 3
+	db MUSIC_DUNGEON3
 	db BANK(Music_Dungeon3) ; VictoryRoad3
-	db (Music_Dungeon1 - $4000) / 3
+	db MUSIC_DUNGEON1
 	db BANK(Music_Dungeon1) ; RocketHideout1
-	db (Music_Dungeon1 - $4000) / 3
+	db MUSIC_DUNGEON1
 	db BANK(Music_Dungeon1) ; RocketHideout2
-	db (Music_Dungeon1 - $4000) / 3
+	db MUSIC_DUNGEON1
 	db BANK(Music_Dungeon1) ; RocketHideout3
-	db (Music_Dungeon1 - $4000) / 3
+	db MUSIC_DUNGEON1
 	db BANK(Music_Dungeon1) ; RocketHideout4
-	db (Music_Dungeon1 - $4000) / 3
+	db MUSIC_DUNGEON1
 	db BANK(Music_Dungeon1) ; RocketHideoutElevator
-	db (Music_Dungeon1 - $4000) / 3
+	db MUSIC_DUNGEON1
 	db BANK(Music_Dungeon1)
-	db (Music_Dungeon1 - $4000) / 3
+	db MUSIC_DUNGEON1
 	db BANK(Music_Dungeon1)
-	db (Music_Dungeon1 - $4000) / 3
+	db MUSIC_DUNGEON1
 	db BANK(Music_Dungeon1)
-	db (Music_SilphCo - $4000) / 3
+	db MUSIC_SILPH_CO
 	db BANK(Music_SilphCo) ; SilphCo2
-	db (Music_SilphCo - $4000) / 3
+	db MUSIC_SILPH_CO
 	db BANK(Music_SilphCo) ; SilphCo3
-	db (Music_SilphCo - $4000) / 3
+	db MUSIC_SILPH_CO
 	db BANK(Music_SilphCo) ; SilphCo4
-	db (Music_SilphCo - $4000) / 3
+	db MUSIC_SILPH_CO
 	db BANK(Music_SilphCo) ; SilphCo5
-	db (Music_SilphCo - $4000) / 3
+	db MUSIC_SILPH_CO
 	db BANK(Music_SilphCo) ; SilphCo6
-	db (Music_SilphCo - $4000) / 3
+	db MUSIC_SILPH_CO
 	db BANK(Music_SilphCo) ; SilphCo7
-	db (Music_SilphCo - $4000) / 3
+	db MUSIC_SILPH_CO
 	db BANK(Music_SilphCo) ; SilphCo8
-	db (Music_CinnabarMansion - $4000) / 3
+	db MUSIC_CINNABAR_MANSION
 	db BANK(Music_CinnabarMansion) ; Mansion2
-	db (Music_CinnabarMansion - $4000) / 3
+	db MUSIC_CINNABAR_MANSION
 	db BANK(Music_CinnabarMansion) ; Mansion3
-	db (Music_CinnabarMansion - $4000) / 3
+	db MUSIC_CINNABAR_MANSION
 	db BANK(Music_CinnabarMansion) ; Mansion4
-	db (Music_SafariZone - $4000) / 3
+	db MUSIC_SAFARI_ZONE
 	db BANK(Music_SafariZone) ; SafariZoneEast
-	db (Music_SafariZone - $4000) / 3
+	db MUSIC_SAFARI_ZONE
 	db BANK(Music_SafariZone) ; SafariZoneNorth
-	db (Music_SafariZone - $4000) / 3
+	db MUSIC_SAFARI_ZONE
 	db BANK(Music_SafariZone) ; SafariZoneWest
-	db (Music_SafariZone - $4000) / 3
+	db MUSIC_SAFARI_ZONE
 	db BANK(Music_SafariZone) ; SafariZoneCenter
-	db (Music_SafariZone - $4000) / 3
+	db MUSIC_SAFARI_ZONE
 	db BANK(Music_SafariZone) ; SafariZoneRestHouse1
-	db (Music_SafariZone - $4000) / 3
+	db MUSIC_SAFARI_ZONE
 	db BANK(Music_SafariZone) ; SafariZoneSecretHouse
-	db (Music_SafariZone - $4000) / 3
+	db MUSIC_SAFARI_ZONE
 	db BANK(Music_SafariZone) ; SafariZoneRestHouse2
-	db (Music_SafariZone - $4000) / 3
+	db MUSIC_SAFARI_ZONE
 	db BANK(Music_SafariZone) ; SafariZoneRestHouse3
-	db (Music_SafariZone - $4000) / 3
+	db MUSIC_SAFARI_ZONE
 	db BANK(Music_SafariZone) ; SafariZoneRestHouse4
-	db (Music_Dungeon1 - $4000) / 3
+	db MUSIC_DUNGEON1
 	db BANK(Music_Dungeon1) ; UnknownDungeon2
-	db (Music_Dungeon1 - $4000) / 3
+	db MUSIC_DUNGEON1
 	db BANK(Music_Dungeon1) ; UnknownDungeon3
-	db (Music_Dungeon1 - $4000) / 3
+	db MUSIC_DUNGEON1
 	db BANK(Music_Dungeon1) ; UnknownDungeon1
-	db (Music_Cities2 - $4000) / 3
+	db MUSIC_CITIES2
 	db BANK(Music_Cities2) ; NameRater
-	db (Music_Cities1 - $4000) / 3
+	db MUSIC_CITIES1
 	db BANK(Music_Cities1) ; CeruleanHouse2
-	db (Music_Cinnabar - $4000) / 3
+	db MUSIC_CINNABAR
 	db BANK(Music_Cinnabar)
-	db (Music_Dungeon3 - $4000) / 3
+	db MUSIC_DUNGEON3
 	db BANK(Music_Dungeon3) ; RockTunnel2
-	db (Music_SilphCo - $4000) / 3
+	db MUSIC_SILPH_CO
 	db BANK(Music_SilphCo) ; SilphCo9
-	db (Music_SilphCo - $4000) / 3
+	db MUSIC_SILPH_CO
 	db BANK(Music_SilphCo) ; SilphCo10
-	db (Music_SilphCo - $4000) / 3
+	db MUSIC_SILPH_CO
 	db BANK(Music_SilphCo) ; SilphCo11
-	db (Music_SilphCo - $4000) / 3
+	db MUSIC_SILPH_CO
 	db BANK(Music_SilphCo) ; SilphCoElevator
-	db (Music_SilphCo - $4000) / 3
+	db MUSIC_SILPH_CO
 	db BANK(Music_SilphCo)
-	db (Music_SilphCo - $4000) / 3
+	db MUSIC_SILPH_CO
 	db BANK(Music_SilphCo)
-	db (Music_Celadon - $4000) / 3
+	db MUSIC_CELADON
 	db BANK(Music_Celadon) ; BattleCenterM
-	db (Music_Celadon - $4000) / 3
+	db MUSIC_CELADON
 	db BANK(Music_Celadon) ; TradeCenterM
-	db (Music_SilphCo - $4000) / 3
+	db MUSIC_SILPH_CO
 	db BANK(Music_SilphCo)
-	db (Music_SilphCo - $4000) / 3
+	db MUSIC_SILPH_CO
 	db BANK(Music_SilphCo)
-	db (Music_SilphCo - $4000) / 3
+	db MUSIC_SILPH_CO
 	db BANK(Music_SilphCo)
-	db (Music_SilphCo - $4000) / 3
+	db MUSIC_SILPH_CO
 	db BANK(Music_SilphCo)
-	db (Music_Gym - $4000) / 3
+	db MUSIC_GYM
 	db BANK(Music_Gym) ; Lorelei
-	db (Music_Dungeon1 - $4000) / 3
+	db MUSIC_DUNGEON1
 	db BANK(Music_Dungeon1) ; Bruno
-	db (Music_PokemonTower - $4000) / 3
+	db MUSIC_POKEMON_TOWER
 	db BANK(Music_PokemonTower) ; Agatha
 
 ; see also MapHeaderPointers
@@ -34223,7 +34223,7 @@ PalletTownScript0: ; 18e81 (6:4e81)
 	call PlaySound ; stop music
 	ld a, BANK(Music_MeetProfOak)
 	ld c,a ; song bank
-	ld a, (Music_MeetProfOak - $4000) / 3 ; “oak appears” music
+	ld a, MUSIC_MEET_PROF_OAK ; “oak appears” music
 	call PlayMusic ; plays music
 	ld a,$FC
 	ld [wJoypadForbiddenButtonsMask],a
@@ -35147,7 +35147,7 @@ CeruleanCityScript0: ; 194c8 (6:54c8)
 	call PlaySound
 .asm_19512
 	ld c, BANK(Music_MeetRival)
-	ld a, (Music_MeetRival - $4000) / 3
+	ld a, MUSIC_MEET_RIVAL
 	call PlayMusic
 	xor a
 	ld [H_CURRENTPRESSEDBUTTONS], a
@@ -38425,7 +38425,7 @@ OaksLabScript10: ; 1cd6d (7:4d6d)
 	ld a, $8
 	ld [$d528], a
 	ld c, BANK(Music_MeetRival)
-	ld a, (Music_MeetRival - $4000) / 3
+	ld a, MUSIC_MEET_RIVAL
 	call PlayMusic ; play music
 	ld a, $f
 	ld [$ff00+$8c], a
@@ -40411,7 +40411,7 @@ VermilionDock_1db9b: ; 1db9b (7:5b9b)
 	ld [$c0ee], a
 	call PlaySound
 	ld c, BANK(Music_Surfing)
-	ld a, (Music_Surfing - $4000) / 3
+	ld a, MUSIC_SURFING
 	call PlayMusic
 	ld b, BANK(Func_79fc0)
 	ld hl, Func_79fc0
@@ -57253,7 +57253,7 @@ FaintEnemyPokemon ; 0x3c567
 	jr .sfxplayed
 .wild_win
 	call Func_3c643
-	ld a, (Music_DefeatedWildMon - $4000) / 3
+	ld a, MUSIC_DEFEATED_WILD_MON
 	call Func_3c6ee
 .sfxplayed
 	ld hl, W_PLAYERMONCURHP ; $d015
@@ -57364,16 +57364,16 @@ Func_3c664: ; 3c664 (f:4664)
 
 TrainerBattleVictory: ; 3c696 (f:4696)
 	call Func_3c643
-	ld b, (Music_DefeatedGymLeader - $4000) / 3
+	ld b, MUSIC_DEFEATED_GYM_LEADER
 	ld a, [W_GYMLEADERNO] ; $d05c
 	and a
 	jr nz, .gymleader
-	ld b, (Music_DefeatedTrainer - $4000) / 3
+	ld b, MUSIC_DEFEATED_TRAINER
 .gymleader
 	ld a, [W_TRAINERCLASS] ; $d031
 	cp SONY3 ; final battle against rival
 	jr nz, .notrival
-	ld b, (Music_DefeatedGymLeader - $4000) / 3
+	ld b, MUSIC_DEFEATED_GYM_LEADER
 	ld hl, W_FLAGS_D733
 	set 1, [hl]
 .notrival
@@ -78931,7 +78931,7 @@ Route22Script0: ; 50f00 (14:4f00)
 	call PlaySound
 .asm_50f4e
 	ld c, BANK(Music_MeetRival)
-	ld a, (Music_MeetRival - $4000) / 3
+	ld a, MUSIC_MEET_RIVAL
 	call PlayMusic
 	ld a, $1
 	ld [$ff00+$8c], a
@@ -80651,7 +80651,7 @@ SilphCo7Script0: ; 51c23 (14:5c23)
 	ld [$c0ee], a
 	call PlaySound
 	ld c, BANK(Music_MeetRival)
-	ld a, (Music_MeetRival - $4000) / 3
+	ld a, MUSIC_MEET_RIVAL
 	call PlayMusic
 	ld a, $9
 	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
@@ -91201,7 +91201,7 @@ PewterPokecenterText3: ; 5c59b (17:459b)
 	dec hl
 	push hl
 	ld c, BANK(Music_JigglypuffSong)
-	ld a, (Music_JigglypuffSong - $4000) / 3
+	ld a, MUSIC_JIGGLYPUFF_SONG
 	call PlayMusic
 	pop hl
 .asm_5c5d1
@@ -94559,7 +94559,7 @@ PokemonTower2Script0: ; 6050f (18:450f)
 	ld [$c0ee], a
 	call PlaySound
 	ld c, BANK(Music_MeetRival)
-	ld a, (Music_MeetRival - $4000) / 3
+	ld a, MUSIC_MEET_RIVAL
 	call PlayMusic
 	ld hl, $d764
 	res 6, [hl]
@@ -96243,7 +96243,7 @@ SSAnne2Script0: ; 613be (18:53be)
 	ld [$c0ee], a
 	call PlaySound
 	ld c, BANK(Music_MeetRival)
-	ld a, (Music_MeetRival - $4000) / 3
+	ld a, MUSIC_MEET_RIVAL
 	call PlayMusic
 	ld a, [$cd3d]
 	ld [$ff00+$db], a
@@ -98652,7 +98652,7 @@ Func_701a0: ; 701a0 (1c:41a0)
 	ld a, $90
 	ld [$FF00+$b0], a
 	ld c, BANK(Music_HallOfFame)
-	ld a, (Music_HallOfFame - $4000) / 3
+	ld a, MUSIC_HALL_OF_FAME
 	call PlayMusic
 	ld hl, W_PARTYMON1 ; $d164
 	ld c, $ff
@@ -104038,7 +104038,7 @@ Func_7405c: ; 7405c (1d:405c)
 	ld a, $ff
 	call PlaySoundWaitForCurrent
 	ld c, BANK(Music_Credits)
-	ld a, (Music_Credits - $4000) / 3
+	ld a, MUSIC_CREDITS
 	call PlayMusic
 	ld c, $80
 	call DelayFrames
@@ -115604,7 +115604,7 @@ Func_7bde9: ; 7bde9 (1e:7de9)
 	call PlayCry
 	call WaitForSoundToFinish
 	ld c, BANK(Music_SafariZone)
-	ld a, (Music_SafariZone - $4000) / 3
+	ld a, MUSIC_SAFARI_ZONE
 	call PlayMusic
 	ld c, $50
 	call DelayFrames

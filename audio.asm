@@ -382,7 +382,7 @@ PlayBattleMusic:: ; 0x90c6
 	ld a, [W_GYMLEADERNO]
 	and a
 	jr z, .notGymLeaderBattle
-	ld a, (Music_GymLeaderBattle - $4000) / 3
+	ld a, MUSIC_GYM_LEADER_BATTLE
 	jr .playSong
 .notGymLeaderBattle
 	ld a, [W_CUROPPONENT]
@@ -392,16 +392,16 @@ PlayBattleMusic:: ; 0x90c6
 	jr z, .finalBattle
 	cp LANCE + $c8
 	jr nz, .normalTrainerBattle
-	ld a, (Music_GymLeaderBattle - $4000) / 3 ; lance also plays gym leader theme
+	ld a, MUSIC_GYM_LEADER_BATTLE ; lance also plays gym leader theme
 	jr .playSong
 .normalTrainerBattle
-	ld a, (Music_TrainerBattle - $4000) / 3
+	ld a, MUSIC_TRAINER_BATTLE
 	jr .playSong
 .finalBattle
-	ld a, (Music_FinalBattle - $4000) / 3
+	ld a, MUSIC_FINAL_BATTLE
 	jr .playSong
 .wildBattle
-	ld a, (Music_WildBattle - $4000) / 3
+	ld a, MUSIC_WILD_BATTLE
 .playSong
 	jp PlayMusic
 
@@ -412,7 +412,7 @@ INCLUDE "audio/engine_1.asm"
 ; an alternate start for MeetRival which has a different first measure
 Music_RivalAlternateStart:: ; 0x9b47
 	ld c, BANK(Music_MeetRival)
-	ld a, (Music_MeetRival - $4000) / 3
+	ld a, MUSIC_MEET_RIVAL
 	call PlayMusic
 	ld hl, $c006
 	ld de, Music_MeetRival_branch_b1a2
@@ -431,7 +431,7 @@ Music2_OverwriteChannelPointer: ; 0x9b60
 ; an alternate tempo for MeetRival which is slightly slower
 Music_RivalAlternateTempo:: ; 0x9b65
 	ld c, BANK(Music_MeetRival)
-	ld a, (Music_MeetRival - $4000) / 3
+	ld a, MUSIC_MEET_RIVAL
 	call PlayMusic
 	ld hl, $c006
 	ld de, Music_MeetRival_branch_b119
@@ -454,7 +454,7 @@ Music_Cities1AlternateTempo:: ; 0x9b81
 	ld c, $64
 	call DelayFrames
 	ld c, BANK(Music_Cities1)
-	ld a, (Music_Cities1 - $4000) / 3
+	ld a, MUSIC_CITIES1
 	call PlayMusic
 	ld hl, $c006
 	ld de, Music_Cities1_branch_aa6f
