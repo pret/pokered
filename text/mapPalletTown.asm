@@ -1,44 +1,56 @@
 _OakAppearsText:
-	db 0,"OAK: Hey! Wait!",$4F
-	db "Don't go out!@@"
+	text "OAK: Hey! Wait!"
+	line "Don't go out!@@"
 
 _OakWalksUpText:
-	db 0,"OAK: It's unsafe!",$4F
-	db "Wild #MON live",$55
-	db "in tall grass!",$51
-	db "You need your own",$4F
-	db "#MON for your",$55
-	db "protection.",$55
-	db "I know!",$51
-	db "Here, come with",$4F
-	db "me!",$57
+	text "OAK: It's unsafe!"
+	line "Wild #MON live"
+	next "in tall grass!"
+
+	page "You need your own"
+	line "#MON for your"
+	next "protection."
+	next "I know!"
+
+	page "Here, come with"
+	line "me!"
+	done
 
 _PalletTownText2:
-	db 0,"I",$E5," raising",$4F
-	db "#MON too!",$51
-	db "When they get",$4F
-	db "strong, they can",$55
-	db "protect me!",$57
+	text "I'm raising"
+	line "#MON too!"
+
+	page "When they get"
+	line "strong, they can"
+	next "protect me!"
+	done
 
 _PalletTownText3:
-	db 0,"Technology is",$4F
-	db "incredible!",$51
-	db "You can now store",$4F
-	db "and recall items",$55
-	db "and #MON as",$55
-	db "data via PC!",$57
+	text "Technology is"
+	line "incredible!"
+
+	page "You can now store"
+	line "and recall items"
+	next "and #MON as"
+	next "data via PC!"
+	done
 
 _PalletTownText4:
-	db 0,"OAK #MON",$4F
-	db "RESEARCH LAB",$57
+	text "OAK #MON"
+	line "RESEARCH LAB"
+	done
 
 _PalletTownText5:
-	db 0,"PALLET TOWN",$4F
-	db "Shades of your",$55
-	db "journey await!",$57
+	text "PALLET TOWN"
+	line "Shades of your"
+	next "journey await!"
+	done
 
 _PalletTownText6:
-	db 0,$52,"'s house ",$57
+	text $52,"'s house "
+	done
 
 _PalletTownText7:
-	db 0,$53,"'s house ",$57
+	text $53,"'s house "
+	done
+

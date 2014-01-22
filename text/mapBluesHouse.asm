@@ -1,34 +1,42 @@
 _DaisyInitialText:
-	db 0,"Hi ",$52,"!",$4F
-	db $53," is out at",$55
-	db "Grandpa's lab.",$57
+	text "Hi ",$52,"!"
+	line $53," is out at"
+	next "Grandpa's lab."
+	done
 
 _DaisyOfferMapText:
-	db 0,"Grandpa asked you",$4F
-	db "to run an errand?",$55
-	db "Here, this will",$55
-	db "help you!",$58
+	text "Grandpa asked you"
+	line "to run an errand?"
+	next "Here, this will"
+	next "help you!"
+	prompt
 
 _GotMapText:
-	db 0,$52," got a",$4F,"@",1
-	dw $CF4B
-	db 0,"!@@"
+	text $52," got a"
+	line "@"
+	TX_RAM $CF4B
+	text "!@@"
 
 _DaisyBagFullText:
-	db 0,"You have too much",$4F
-	db "stuff with you.",$57
+	text "You have too much"
+	line "stuff with you."
+	done
 
 _DaisyUseMapText:
-	db 0,"Use the TOWN MAP",$4F
-	db "to find out where",$55
-	db "you are.",$57
+	text "Use the TOWN MAP"
+	line "to find out where"
+	next "you are."
+	done
 
 _BluesHouseText2:
-	db 0,"#MON are living",$4F
-	db "things! If they",$55
-	db "get tired, give",$55
-	db "them a rest!",$57
+	text "#MON are living"
+	line "things! If they"
+	next "get tired, give"
+	next "them a rest!"
+	done
 
 _BluesHouseText3:
-	db 0,"It's a big map!",$4F
-	db "This is useful!",$57
+	text "It's a big map!"
+	line "This is useful!"
+	done
+

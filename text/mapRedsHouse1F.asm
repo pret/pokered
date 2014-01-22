@@ -1,30 +1,38 @@
 _MomWakeUpText:
-	db 0,"MOM: Right.",$4F
-	db "All boys leave",$55
-	db "home some day.",$55
-	db "It said so on TV.",$51
-	db "PROF.OAK, next",$4F
-	db "door, is looking",$55
-	db "for you.",$57
+	text "MOM: Right."
+	line "All boys leave"
+	next "home some day."
+	next "It said so on TV."
+
+	page "PROF.OAK, next"
+	line "door, is looking"
+	next "for you."
+	done
 
 _MomHealText1:
-	db 0,"MOM: ",$52,"!",$4F
-	db "You should take a",$55
-	db "quick rest.",$58
+	text "MOM: ",$52,"!"
+	line "You should take a"
+	next "quick rest."
+	prompt
 
 _MomHealText2:
-	db 0,"MOM: Oh good!",$4F
-	db "You and your",$55
-	db "#MON are",$55
-	db "looking great!",$55
-	db "Take care now!",$57
+	text "MOM: Oh good!"
+	line "You and your"
+	next "#MON are"
+	next "looking great!"
+	next "Take care now!"
+	done
 
 _StandByMeText:
-	db 0,"There's a movie",$4F
-	db "on TV. Four boys",$55
-	db "are walking on",$55
-	db "railroad tracks.",$51
-	db "I better go too.",$57
+	text "There's a movie"
+	line "on TV. Four boys"
+	next "are walking on"
+	next "railroad tracks."
+
+	page "I better go too."
+	done
 
 _TVWrongSideText:
-	db 0,"Oops, wrong side.",$57
+	text "Oops, wrong side."
+	done
+
