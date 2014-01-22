@@ -25013,8 +25013,9 @@ ItemUseMedicine: ; dabb (3:5abb)
 	ld [$cd6a],a ; item use failed
 	jp PrintText
 .emptyPartyText
-	db $0,"You don't have",$4F
-	db "any #MON!",$58
+	text "You don't have"
+	line "any #MON!"
+	prompt
 .notUsingSoftboiled
 	call DisplayPartyMenu
 .getPartyMonDataAddress
@@ -85139,16 +85140,18 @@ UnnamedText_561bd: ; 561bd (15:61bd)
 
 UnnamedText_561c2: ; 561c2 (15:61c2)
 	TX_FAR _UnnamedText_561c2 ; 0xa06e8
-	db $0B, "@"
+	db $0B
+	db "@"
 
 UnnamedText_561c8: ; 561c8
-	db $51
-	db "つり こそ", $4f
-	db "おとこの ロマン だ!", $51
-	db "へぼいつりざおは", $4f
-	db "コイキングしか つれ なんだが", $4f
-	db "この いいつりざおなら", $4f
-	db "もっと いいもんが つれるんじゃ!", $57
+	page "つり こそ"
+	line "おとこの ロマン だ!"
+
+	page "へぼいつりざおは"
+	line "コイキングしか つれ なんだが"
+	line "この いいつりざおなら"
+	line "もっと いいもんが つれるんじゃ!"
+	done
 
 UnnamedText_56212: ; 56212 (15:6212)
 	TX_FAR _UnnamedText_56212
@@ -115590,7 +115593,7 @@ _CardKeyFailText: ; 80029 (20:4029)
 
 _UnnamedText_33cf: ; 80045 (20:4045)
 	TX_RAM $cd6d
-	db $0, ": @@"
+	text ": @@"
 
 _UnnamedText_70847: ; 8004d (20:404d)
 	text "Not even a nibble!"
@@ -115643,12 +115646,11 @@ _NoMoreRoomForItemText: ; 8012a (20:412a)
 	done
 
 _UnnamedText_59091: ; 80143 (20:4143)
-	db $0, "Hi! Remember me?", $4f
-	db "I'm PROF.OAK's", $55
-	db "AIDE!", $51
-	db "If you caught @"
+	text "Hi! Remember me?"
+	line "I'm PROF.OAK's"
+	next "AIDE!"
 
-UnnamedText_80177: ; 80177 (20:4177)
+	page "If you caught @"
 	TX_NUM $ffdb, 1, 3
 	db $0
 	line "kinds of #MON,"
@@ -115667,14 +115669,14 @@ UnnamedText_80177: ; 80177 (20:4177)
 	done
 
 _UnnamedText_59096: ; 801e4 (20:41e4)
-	db $0, "Let's see...", $4f
-	db "Uh-oh! You have", $55
-	db "caught only @"
+	text "Let's see..."
+	line "Uh-oh! You have"
+	next "caught only @"
 
 UnnamedText_8020e: ; 8020e (20:420e)
 	TX_NUM $ffdd, 1, 3
-	text $55
-	db "kinds of #MON!"
+	db $0
+	next "kinds of #MON!"
 
 	page "You need @"
 	TX_NUM $ffdb, 1, 3
@@ -115698,10 +115700,8 @@ _UnnamedText_5909b: ; 80250 (20:4250)
 	done
 
 _UnnamedText_590a0: ; 8028c (20:428c)
-	db $0, "Great! You have", $4f
-	db "caught @"
-
-UnnamedText_802a5: ; 802a5 (20:42a5)
+	text "Great! You have"
+	line "caught @"
 	TX_NUM $ffdd, 1, 3
 	text " kinds "
 	next "of #MON!"
@@ -115717,12 +115717,10 @@ _UnnamedText_590a5: ; 802d9 (20:42d9)
 	text "!@@"
 
 _UnnamedText_590ab: ; 802ec (20:42ec)
-	db $0, "Oh! I see you", $4f
-	db "don't have any", $55
-	db "room for the", $55
-	db "@"
-
-UnnamedText_80317: ; 80317 (20:4317)
+	text "Oh! I see you"
+	line "don't have any"
+	next "room for the"
+	next "@"
 	TX_RAM $cc5b
 	text "."
 	done
@@ -115972,7 +115970,8 @@ _MtMoon1Text14: ; 8093a (20:493a)
 	done
 
 _UnnamedText_51a48: ; 8095c (20:495c)
-	db $0, $57
+	db $0
+	done
 
 _UnnamedText_49f24: ; 8095e (20:495e)
 	text "You want the"
@@ -116130,20 +116129,27 @@ _SSAnne2Text1: ; 80d34 (20:4d34)
 	done
 
 _SSAnneRivalBeforeBattleText: ; 80d9a (20:4d9a)
-	db $0, $53, ": Bonjour!", $4f
-	db $52, "!", $51
-	db "Imagine seeing", $4f
-	db "you here!", $51
-	db $52, ", were you", $4f
-	db "really invited?", $51
-	db "So how's your", $4f
-	db "#DEX coming?", $51
-	db "I already caught", $4f
-	db "40 kinds, pal!", $51
-	db "Different kinds", $4f
-	db "are everywhere!", $51
-	db "Crawl around in", $4f
-	db "grassy areas!", $57
+	text $53, ": Bonjour!"
+	line $52, "!"
+
+	page "Imagine seeing"
+	line "you here!"
+
+	page $52, ", were you"
+	line "really invited?"
+
+	page "So how's your"
+	line "#DEX coming?"
+
+	page "I already caught"
+	line "40 kinds, pal!"
+
+	page "Different kinds"
+	line "are everywhere!"
+
+	page "Crawl around in"
+	line "grassy areas!"
+	done
 
 _SSAnneRivalDefeatedText: ; 80e57 (20:4e57)
 	text "Humph!"
@@ -116162,15 +116168,19 @@ _SSAnneRivalWonText: ; 80e81 (20:4e81)
 	prompt
 
 _SSAnneRivalCaptainText: ; 80eb6 (20:4eb6)
-	db $0, $53, ": I heard", $4f
-	db "there was a CUT", $55
-	db "master on board.", $51
-	db "But, he was just a", $4f
-	db "seasick, old man!", $51
-	db "But, CUT itself is", $4f
-	db "really useful!", $51
-	db "You should go see", $4f
-	db "him! Smell ya!", $57
+	text $53, ": I heard"
+	line "there was a CUT"
+	next "master on board."
+
+	page "But, he was just a"
+	line "seasick, old man!"
+
+	page "But, CUT itself is"
+	line "really useful!"
+
+	page "You should go see"
+	line "him! Smell ya!"
+	done
 
 _SSAnne3Text1: ; 80f4b (20:4f4b)
 	text "Our CAPTAIN is a"
@@ -116304,29 +116314,36 @@ _UnnamedText_61816: ; 812a6 (20:52a6)
 	done
 
 _SSAnne7RubText: ; 812dd (20:52dd)
-	db $0, "CAPTAIN: Ooargh...", $4f
-	db "I feel hideous...", $55
-	db "Urrp! Seasick...", $51
-	db $52, " rubbed", $4f
-	db "the CAPTAIN's", $55
-	db "back!", $51
-	db "Rub-rub...", $4f
-	db "Rub-rub...@@"
+	text "CAPTAIN: Ooargh..."
+	line "I feel hideous..."
+	next "Urrp! Seasick..."
+
+	page $52, " rubbed"
+	line "the CAPTAIN's"
+	next "back!"
+
+	page "Rub-rub..."
+	line "Rub-rub...@@"
 
 _ReceivingHM01Text: ; 81347 (20:5347)
-	db $0, "CAPTAIN: Whew!", $4f
-	db "Thank you! I", $55
-	db "feel much better!", $51
-	db "You want to see", $4f
-	db "my CUT technique?", $51
-	db "I could show you", $4f
-	db "if I wasn't ill...", $51
-	db "I know! You can", $4f
-	db "have this!", $51
-	db "Teach it to your", $4f
-	db "#MON and you", $55
-	db "can see it CUT", $55
-	db "any time!", $58
+	text "CAPTAIN: Whew!"
+	line "Thank you! I"
+	next "feel much better!"
+
+	page "You want to see"
+	line "my CUT technique?"
+
+	page "I could show you"
+	line "if I wasn't ill..."
+
+	page "I know! You can"
+	line "have this!"
+
+	page "Teach it to your"
+	line "#MON and you"
+	next "can see it CUT"
+	next "any time!"
+	prompt
 
 _ReceivedHM01Text: ; 8140d (20:540d)
 	text $52, " got"
@@ -116335,10 +116352,12 @@ _ReceivedHM01Text: ; 8140d (20:540d)
 	text "!@@"
 
 _UnnamedText_61932: ; 8141c (20:541c)
-	db $0, "CAPTAIN: Whew!", $51
-	db "Now that I'm not", $4f
-	db "sick any more, I", $55
-	db "guess it's time.", $57
+	text "CAPTAIN: Whew!"
+
+	page "Now that I'm not"
+	line "sick any more, I"
+	next "guess it's time."
+	done
 
 _HM01NoRoomText: ; 8145d (20:545d)
 	text "Oh no! You have"
@@ -116358,8 +116377,8 @@ _SSAnne7Text3: ; 8149d (20:549d)
 	done
 
 _SSAnne8Text8: ; 814d7 (20:54d7)
-	db $0, "WIGGLYTUFF: Puup", $4f
-	db "pupuu!@@"
+	text "WIGGLYTUFF: Puup"
+	line "pupuu!@@"
 
 _SSAnne8BattleText1: ; 814f1 (20:54f1)
 	text "I travel alone"
@@ -116577,8 +116596,8 @@ _SSAnne9AfterBattleText4: ; 81a8b (20:5a8b)
 	done
 
 _SSAnne10Text8: ; 81aaa (20:5aaa)
-	db $0, "MACHOKE: Gwoh!", $4f
-	db "Goggoh!@@"
+	text "MACHOKE: Gwoh!"
+	line "Goggoh!@@"
 
 _SSAnne10BattleText1: ; 81ac3 (20:5ac3)
 	text "You know what they"
@@ -117526,22 +117545,26 @@ _SilphCo7AfterBattleText4: ; 84861 (21:4861)
 	done
 
 _UnnamedText_51ebe: ; 8488d (21:488d)
-	db $0, $53, ": What", $4f
-	db "kept you ", $52, "?", $57
+	text $53, ": What"
+	line "kept you ", $52, "?"
+	done
 
 _UnnamedText_51ec3: ; 848a2 (21:48a2)
-	db $0, $53, ": Hahaha!", $4f
-	db "I thought you'd", $55
-	db "turn up if I", $55
-	db "waited here!", $51
-	db "I guess TEAM", $4f
-	db "ROCKET slowed you", $55
-	db "down! Not that I", $55
-	db "care!", $51
-	db "I saw you in", $4f
-	db "SAFFRON, so I", $55
-	db "decided to see if", $55
-	db "you got better!", $57
+	text $53, ": Hahaha!"
+	line "I thought you'd"
+	next "turn up if I"
+	next "waited here!"
+
+	page "I guess TEAM"
+	line "ROCKET slowed you"
+	next "down! Not that I"
+	next "care!"
+
+	page "I saw you in"
+	line "SAFFRON, so I"
+	next "decided to see if"
+	next "you got better!"
+	done
 
 _UnnamedText_51ec8: ; 8494a (21:494a)
 	text "Oh ho!"
@@ -117550,11 +117573,13 @@ _UnnamedText_51ec8: ; 8494a (21:494a)
 	prompt
 
 _UnnamedText_51ecd: ; 84975 (21:4975)
-	db $0, $53, ": How can", $4f
-	db "I put this?", $51
-	db "You're not good", $4f
-	db "enough to play", $55
-	db "with us big boys!", $58
+	text $53, ": How can"
+	line "I put this?"
+
+	page "You're not good"
+	line "enough to play"
+	next "with us big boys!"
+	prompt
 
 _UnnamedText_51ed2: ; 849bd (21:49bd)
 	text "Well, ", $52, "!"
@@ -117747,20 +117772,25 @@ _SilphCo10AfterBattleText2: ; 84e66 (21:4e66)
 	done
 
 _SilphCoPresidentText: ; 84e9b (21:4e9b)
-	db $0, "PRESIDENT: Thank", $4f
-	db "you for saving", $55
-	db "SILPH!", $51
-	db "I will never", $4f
-	db "forget you saved", $55
-	db "us in our moment", $55
-	db "of peril!", $51
-	db "I have to thank", $4f
-	db "you in some way!", $51
-	db "Because I am rich,", $4f
-	db "I can give you", $55
-	db "anything!", $51
-	db "Here, maybe this", $4f
-	db "will do!", $58
+	text "PRESIDENT: Thank"
+	line "you for saving"
+	next "SILPH!"
+
+	page "I will never"
+	line "forget you saved"
+	next "us in our moment"
+	next "of peril!"
+
+	page "I have to thank"
+	line "you in some way!"
+
+	page "Because I am rich,"
+	line "I can give you"
+	next "anything!"
+
+	page "Here, maybe this"
+	line "will do!"
+	prompt
 
 _ReceivedSilphCoMasterBallText: ; 84f63 (21:4f63)
 	text $52, " got a"
@@ -117769,18 +117799,22 @@ _ReceivedSilphCoMasterBallText: ; 84f63 (21:4f63)
 	text "!@@"
 
 _UnnamedText_6231c: ; 84f74 (21:4f74)
-	db $0, "PRESIDENT: You", $4f
-	db "can't buy that", $55
-	db "anywhere!", $51
-	db "It's our secret", $4f
-	db "prototype MASTER", $55
-	db "BALL!", $51
-	db "It will catch any", $4f
-	db "#MON without", $55
-	db "fail!", $51
-	db "You should be", $4f
-	db "quiet about using", $55
-	db "it, though.", $57
+	text "PRESIDENT: You"
+	line "can't buy that"
+	next "anywhere!"
+
+	page "It's our secret"
+	line "prototype MASTER"
+	next "BALL!"
+
+	page "It will catch any"
+	line "#MON without"
+	next "fail!"
+
+	page "You should be"
+	line "quiet about using"
+	next "it, though."
+	done
 
 _SilphCoMasterBallNoRoomText: ; 85013 (21:5013)
 	text "You have no"
@@ -117788,11 +117822,13 @@ _SilphCoMasterBallNoRoomText: ; 85013 (21:5013)
 	done
 
 _SilphCo11Text2: ; 8502f (21:502f)
-	db $0, "SECRETARY: Thank", $4f
-	db "you for rescuing", $55
-	db "all of us!", $51
-	db "We admire your", $4f
-	db "courage.", $57
+	text "SECRETARY: Thank"
+	line "you for rescuing"
+	next "all of us!"
+
+	page "We admire your"
+	line "courage."
+	done
 
 _SilphCo11Text3: ; 85075 (21:5075)
 	text "Ah ", $52, "!"
@@ -117888,18 +117924,21 @@ _Mansion2AfterBattleText1: ; 85302 (21:5302)
 	done
 
 _Mansion2Text3: ; 85336 (21:5336)
-	db $0, "Diary: July 5", $4f
-	db "Guyana,", $55
-	db "South America", $51
-	db "A new #MON was", $4f
-	db "discovered deep", $55
-	db "in the jungle.", $57
+	text "Diary: July 5"
+	line "Guyana,"
+	next "South America"
+
+	page "A new #MON was"
+	line "discovered deep"
+	next "in the jungle."
+	done
 
 _Mansion2Text4: ; 85389 (21:5389)
-	db $0, "Diary: July 10", $4f
-	db "We christened the", $55
-	db "newly discovered", $55
-	db "#MON, MEW.", $57
+	text "Diary: July 10"
+	line "We christened the"
+	next "newly discovered"
+	next "#MON, MEW."
+	done
 
 _UnnamedText_520c2: ; 853c7 (21:53c7)
 	text "A secret switch!"
@@ -117946,10 +117985,12 @@ _Mansion3AfterBattleText2: ; 85475 (21:5475)
 	done
 
 _Mansion3Text5: ; 854a3 (21:54a3)
-	db $0, "Diary: Feb. 6", $4f
-	db "MEW gave birth.", $51
-	db "We named the", $4f
-	db "newborn MEWTWO.", $57
+	text "Diary: Feb. 6"
+	line "MEW gave birth."
+
+	page "We named the"
+	line "newborn MEWTWO."
+	done
 
 _Mansion4BattleText1: ; 854df (21:54df)
 	text "Uh-oh. Where am"
@@ -118004,8 +118045,9 @@ _SafariZoneEastText6: ; 855ec (21:55ec)
 	done
 
 _SafariZoneEastText7: ; 8562b (21:562b)
-	db $0, "CENTER AREA", $4f
-	db "NORTH: AREA 2", $57
+	text "CENTER AREA"
+	line "NORTH: AREA 2"
+	done
 
 _SafariZoneNorthText3: ; 85646 (21:5646)
 	text "REST HOUSE"
@@ -118046,14 +118088,17 @@ _SafariZoneWestText5: ; 85719 (21:5719)
 	done
 
 _SafariZoneWestText6: ; 85725 (21:5725)
-	db $0, "REQUEST NOTICE", $51
-	db "Please find the", $4f
-	db "SAFARI WARDEN's", $55
-	db "lost GOLD TEETH.", $55
-	db "They're around", $55
-	db "here somewhere.", $51
-	db "Reward offered!", $4f
-	db "Contact: WARDEN", $57
+	text "REQUEST NOTICE"
+
+	page "Please find the"
+	line "SAFARI WARDEN's"
+	next "lost GOLD TEETH."
+	next "They're around"
+	next "here somewhere."
+
+	page "Reward offered!"
+	line "Contact: WARDEN"
+	done
 
 _SafariZoneWestText7: ; 857a3 (21:57a3)
 	text "TRAINER TIPS"
@@ -118066,8 +118111,9 @@ _SafariZoneWestText7: ; 857a3 (21:57a3)
 	done
 
 _SafariZoneWestText8: ; 857ed (21:57ed)
-	db $0, "AREA 3", $4f
-	db "EAST: CENTER AREA", $57
+	text "AREA 3"
+	line "EAST: CENTER AREA"
+	done
 
 _SafariZoneCenterText2: ; 85807 (21:5807)
 	text "REST HOUSE"
@@ -118082,9 +118128,10 @@ _SafariZoneCenterText3: ; 85813 (21:5813)
 	done
 
 _SafariZoneRestHouse1Text1: ; 85851 (21:5851)
-	db $0, "SARA: Where did", $4f
-	db "my boy friend,", $55
-	db "ERIK, go?", $57
+	text "SARA: Where did"
+	line "my boy friend,"
+	next "ERIK, go?"
+	done
 
 _SafariZoneRestHouse1Text2: ; 8587b (21:587b)
 	text "I'm catching"
@@ -118304,54 +118351,70 @@ _LanceAfterBattleText: ; 85e9e (21:5e9e)
 	next "champion!@@"
 
 _HallofFameRoomText1: ; 85fb5 (21:5fb5)
-	db $0, "OAK: Er-hem!", $4f
-	db "Congratulations", $55
-	db $52, "!", $51
-	db "This floor is the", $4f
-	db "#MON HALL OF", $55
-	db "FAME!", $51
-	db "#MON LEAGUE", $4f
-	db "champions are", $55
-	db "honored for their", $55
-	db "exploits here!", $51
-	db "Their #MON are", $4f
-	db "also recorded in", $55
-	db "the HALL OF FAME!", $51
-	db $52, "! You have", $4f
-	db "endeavored hard", $55
-	db "to become the new", $55
-	db "LEAGUE champion!", $51
-	db "Congratulations,", $4f
-	db $52, ", you and", $55
-	db "your #MON are", $55
-	db "HALL OF FAMERs!", $57
+	text "OAK: Er-hem!"
+	line "Congratulations"
+	next $52, "!"
+
+	page "This floor is the"
+	line "#MON HALL OF"
+	next "FAME!"
+
+	page "#MON LEAGUE"
+	line "champions are"
+	next "honored for their"
+	next "exploits here!"
+
+	page "Their #MON are"
+	line "also recorded in"
+	next "the HALL OF FAME!"
+
+	page $52, "! You have"
+	line "endeavored hard"
+	next "to become the new"
+	next "LEAGUE champion!"
+
+	page "Congratulations,"
+	line $52, ", you and"
+	next "your #MON are"
+	next "HALL OF FAMERs!"
+	done
 
 _UnnamedText_760f4: ; 860e1 (21:60e1)
-	db $0, $53, ": Hey!", $51
-	db "I was looking", $4f
-	db "forward to seeing", $55
-	db "you, ", $52, "!", $51
-	db "My rival should", $4f
-	db "be strong to keep", $55
-	db "me sharp!", $51
-	db "While working on", $4f
-	db "#DEX, I looked", $55
-	db "all over for", $55
-	db "powerful #MON!", $51
-	db "Not only that, I", $4f
-	db "assembled teams", $55
-	db "that would beat", $55
-	db "any #MON type!", $51
-	db "And now!", $51
-	db "I'm the #MON", $4f
-	db "LEAGUE champion!", $51
-	db $52, "! Do you", $4f
-	db "know what that", $55
-	db "means?", $51
-	db "I'll tell you!", $51
-	db "I am the most", $4f
-	db "powerful trainer", $55
-	db "in the world!", $57
+	text $53, ": Hey!"
+
+	page "I was looking"
+	line "forward to seeing"
+	next "you, ", $52, "!"
+
+	page "My rival should"
+	line "be strong to keep"
+	next "me sharp!"
+
+	page "While working on"
+	line "#DEX, I looked"
+	next "all over for"
+	next "powerful #MON!"
+
+	page "Not only that, I"
+	line "assembled teams"
+	next "that would beat"
+	next "any #MON type!"
+
+	page "And now!"
+
+	page "I'm the #MON"
+	line "LEAGUE champion!"
+
+	page $52, "! Do you"
+	line "know what that"
+	next "means?"
+
+	page "I'll tell you!"
+
+	page "I am the most"
+	line "powerful trainer"
+	next "in the world!"
+	done
 
 _UnnamedText_760f9: ; 8623b (21:623b)
 	text "NO!"
@@ -118400,18 +118463,20 @@ _UnnamedText_76103: ; 8632f (21:632f)
 	done
 
 _GaryText2: ; 863c1 (21:63c1)
-	db $0, "OAK: ", $52, "!", $57
+	text "OAK: ", $52, "!"
+	done
 
 _UnnamedText_76120: ; 863ca (21:63ca)
-	db $0, "OAK: So, you won!", $4f
-	db "Congratulations!", $55
-	db "You're the new", $55
-	db "#MON LEAGUE", $55
-	db "champion!", $51
-	db "You've grown up so", $4f
-	db "much since you", $55
-	db "first left with", $55
-	db "@"
+	text "OAK: So, you won!"
+	line "Congratulations!"
+	next "You're the new"
+	next "#MON LEAGUE"
+	next "champion!"
+
+	page "You've grown up so"
+	line "much since you"
+	next "first left with"
+	next "@"
 	TX_RAM $cd6d
 	text "!"
 
@@ -118420,36 +118485,46 @@ _UnnamedText_76120: ; 863ca (21:63ca)
 	done
 
 _UnnamedText_76125: ; 86463 (21:6463)
-	db $0, "OAK: ", $53, "! I'm", $4f
-	db "disappointed!", $51
-	db "I came when I", $4f
-	db "heard you beat", $55
-	db "the ELITE FOUR!", $51
-	db "But, when I got", $4f
-	db "here, you had", $55
-	db "already lost!", $51
-	db $53, "! Do you", $4f
-	db "understand why", $55
-	db "you lost?", $51
-	db "You have forgotten", $4f
-	db "to treat your", $55
-	db "#MON with", $55
-	db "trust and love!", $51
-	db "Without them, you", $4f
-	db "will never become", $55
-	db "a champ again!", $57
+	text "OAK: ", $53, "! I'm"
+	line "disappointed!"
+
+	page "I came when I"
+	line "heard you beat"
+	next "the ELITE FOUR!"
+
+	page "But, when I got"
+	line "here, you had"
+	next "already lost!"
+
+	page $53, "! Do you"
+	line "understand why"
+	next "you lost?"
+
+	page "You have forgotten"
+	line "to treat your"
+	next "#MON with"
+	next "trust and love!"
+
+	page "Without them, you"
+	line "will never become"
+	next "a champ again!"
+	done
 
 _UnnamedText_7612a: ; 86567 (21:6567)
-	db $0, "OAK: ", $52, "!", $51
-	db "You understand", $4f
-	db "that your victory", $55
-	db "was not just your", $55
-	db "own doing!", $51
-	db "The bond you share", $4f
-	db "with your #MON", $55
-	db "is marvelous!", $51
-	db $52, "!", $4f
-	db "Come with me!", $57
+	text "OAK: ", $52, "!"
+
+	page "You understand"
+	line "that your victory"
+	next "was not just your"
+	next "own doing!"
+
+	page "The bond you share"
+	line "with your #MON"
+	next "is marvelous!"
+
+	page $52, "!"
+	line "Come with me!"
+	done
 
 _LoreleiBeforeBattleText: ; 865ef (21:65ef)
 	text "Welcome to"
@@ -118490,8 +118565,9 @@ _LoreleiAfterBattleText: ; 866d3 (21:66d3)
 	done
 
 _UnnamedText_7627b: ; 86729 (21:6729)
-	db $0, "Someone's voice:", $4f
-	db "Don't run away!", $57
+	text "Someone's voice:"
+	line "Don't run away!"
+	done
 
 _BrunoBeforeBattleText: ; 86749 (21:6749)
 	text "I am BRUNO of"
@@ -118527,8 +118603,9 @@ _BrunoAfterBattleText: ; 8681d (21:681d)
 	done
 
 _UnnamedText_763d2: ; 8684b (21:684b)
-	db $0, "Someone's voice:", $4f
-	db "Don't run away!", $57
+	text "Someone's voice:"
+	line "Don't run away!"
+	done
 
 _AgathaBeforeBattleText: ; 8686b (21:686b)
 	text "I am AGATHA of"
@@ -118571,8 +118648,9 @@ _AgathaAfterBattleText: ; 86998 (21:6998)
 	done
 
 _AgathaText2: ; 869fd (21:69fd)
-	db $0, "Someone's voice:", $4f
-	db "Don't run away!", $57
+	text "Someone's voice:"
+	line "Don't run away!"
+	done
 
 _RockTunnel2BattleText2: ; 86a1d (21:6a1d)
 	text "Hikers leave twigs"
@@ -118721,19 +118799,23 @@ _SeafoamIslands5Text5: ; 880a8 (22:40a8)
 	done
 
 _AIBattleWithdrawText: ; 880be (22:40be)
-	db 1
-	dw W_TRAINERNAME
-	db 0," with-",$4F,"drew @",1
-	dw W_ENEMYMONNAME
-	db 0,"!",$58
+	TX_RAM W_TRAINERNAME
+	text " with-"
+	line "drew @"
+	TX_RAM W_ENEMYMONNAME
+	text "!"
+	prompt
+
 _AIBattleUseItemText: ; 880d5 (22:40d5)
-	db 1
-	dw W_TRAINERNAME
-	db 0,$4F,"used @",1
-	dw $CD6D
-	db 0,$55,"on @",1
-	dw W_ENEMYMONNAME
-	db 0,"!",$58
+	TX_RAM W_TRAINERNAME
+	db $0
+	line "used @"
+	TX_RAM $CD6D
+	db $0
+	next "on @"
+	TX_RAM W_ENEMYMONNAME
+	text "!"
+	prompt
 
 _UnnamedText_4160c: ; 880ef (22:40ef)
 	TX_RAM $cf4b
@@ -118771,22 +118853,19 @@ _UnnamedText_41647: ; 8813b (22:413b)
 	done
 
 _UnnamedText_41655: ; 88150 (22:4150)
-	db $0, "Take good care of", $4f
-	db "@"
-
-UnnamedText_88164: ; 88164 (22:4164)
+	text "Take good care of"
+	line "@"
 	TX_RAM $cd6d
 	text "."
 	done
 
 _UnnamedText_4166c: ; 8816a (22:416a)
 	TX_RAM $d887
-	db $0, " will", $4f
-	db "trade @"
-
-UnnamedText_8817b: ; 8817b (22:417b)
+	text " will"
+	line "trade @"
 	TX_RAM $cd6d
-	db $0, $57
+	db $0
+	done
 
 _UnnamedText_41671: ; 88180 (22:4180)
 	text "for ", $52, "'s"
@@ -118825,10 +118904,8 @@ _UnnamedText_3747b: ; 881f7 (22:41f7)
 	done
 
 _UnnamedText_37673: ; 88206 (22:4206)
-	db $0, " lined up!", $4f
-	db "Scored @"
-
-UnnamedText_8821a: ; 8821a (22:421a)
+	text " lined up!"
+	line "Scored @"
 	TX_RAM $cf4b
 	text " coins!"
 	done
@@ -118841,12 +118918,10 @@ _UnnamedText_37722: ; 88236 (22:4236)
 	text "Yeah!@@"
 
 _UnnamedText_703fa: ; 8823e (22:423e)
-	db $0, "#DEX   Seen:@"
-
-UnnamedText_8824c: ; 8824c (22:424c)
+	text "#DEX   Seen:@"
 	TX_NUM $cc5b, 1, 3
-	db $0, $4f
-	db "         Owned:@"
+	db $0
+	line "         Owned:@"
 	TX_NUM $cc5c, 1, 3
 	db "@"
 
@@ -118856,24 +118931,28 @@ _UnnamedText_703ff: ; 88267 (22:4267)
 
 _GymStatueText1: ; 88275 (22:4275)
 	TX_RAM wGymCityName
-	db $0, $4f
-	db "#MON GYM", $55
-	db "LEADER: @"
+	db $0
+	line "#MON GYM"
+	next "LEADER: @"
 	TX_RAM wGymLeaderName
-	db $0, $51
-	db "WINNING TRAINERS:", $4f
-	db $53, $57
+	db $0
+
+	page "WINNING TRAINERS:"
+	line $53
+	done
 
 _GymStatueText2: ; 882a5 (22:42a5)
 	TX_RAM wGymCityName
-	db $0, $4f
-	db "#MON GYM", $55
-	db "LEADER: @"
+	db $0
+	line "#MON GYM"
+	next "LEADER: @"
 	TX_RAM wGymLeaderName
-	db $0, $51
-	db "WINNING TRAINERS:", $4f
-	db $53, $55
-	db $52, $57
+	db $0
+
+	page "WINNING TRAINERS:"
+	line $53
+	next $52
+	done
 
 _ViridianCityPokecenterGuyText: ; 882d7 (22:42d7)
 	text "#MON CENTERs"
@@ -119028,12 +119107,15 @@ _UnnamedText_1e983: ; 88742 (22:4742)
 	done
 
 _UnnamedText_1ea0d: ; 8877e (22:477e)
-	db $0, "PA: Ding-dong!", $51
-	db "Time's up!", $58
+	text "PA: Ding-dong!"
+
+	page "Time's up!"
+	prompt
 
 _UnnamedText_1ea12: ; 88798 (22:4798)
-	db $0, "PA: Your SAFARI", $4f
-	db "GAME is over!", $57
+	text "PA: Your SAFARI"
+	line "GAME is over!"
+	done
 
 _CinnabarGymQuizIntroText: ; 887b7 (22:47b7)
 	text "#MON Quiz!"
@@ -119129,24 +119211,31 @@ _BillsHousePokemonListText2: ; 88a40 (22:4a40)
 	done
 
 _OakLabEmailText: ; 88a60 (22:4a60)
-	db $0, "There's an e-mail", $4f
-	db "message here!", $51
-	db "...", $51
-	db "Calling all", $4f
-	db "#MON trainers!", $51
-	db "The elite trainers", $4f
-	db "of #MON LEAGUE", $55
-	db "are ready to take", $55
-	db "on all comers!", $51
-	db "Bring your best", $4f
-	db "#MON and see", $55
-	db "how you rate as a", $55
-	db "trainer!", $51
-	db "#MON LEAGUE HQ", $4f
-	db "INDIGO PLATEAU", $51
-	db "PS: PROF.OAK,", $4f
-	db "please visit us!", $55
-	db "...", $57
+	text "There's an e-mail"
+	line "message here!"
+
+	page "..."
+
+	page "Calling all"
+	line "#MON trainers!"
+
+	page "The elite trainers"
+	line "of #MON LEAGUE"
+	next "are ready to take"
+	next "on all comers!"
+
+	page "Bring your best"
+	line "#MON and see"
+	next "how you rate as a"
+	next "trainer!"
+
+	page "#MON LEAGUE HQ"
+	line "INDIGO PLATEAU"
+
+	page "PS: PROF.OAK,"
+	line "please visit us!"
+	next "..."
+	done
 
 _GameCornerCoinCaseText: ; 88b5b (22:4b5b)
 	text "A COIN CASE is"
@@ -119197,8 +119286,8 @@ _TurnPageText: ; 88c6f (22:4c6f)
 	done
 
 _ViridianSchoolNotebookText5: ; 88c7f (22:4c7f)
-	db $0, "GIRL: Hey! Don't", $4f
-	db "look at my notes!@@"
+	text "GIRL: Hey! Don't"
+	line "look at my notes!@@"
 
 _ViridianSchoolNotebookText1: ; 88ca3 (22:4ca3)
 	text "Looked at the"
@@ -119476,8 +119565,8 @@ _FoundHiddenCoins2Text: ; 89523 (22:5523)
 	text " coins!@@"
 
 _DroppedHiddenCoinsText: ; 8953b (22:553b)
-	text $51
-	db "Oops! Dropped"
+	db $0
+	page "Oops! Dropped"
 	line "some coins!"
 	done
 
@@ -119521,9 +119610,11 @@ _UnnamedText_fc45: ; 8961f (22:561f)
 	done
 
 _UnnamedText_3c1a8: ; 89639 (22:5639)
-	db $0, "PA: Ding-dong!", $51
-	db "You are out of", $4f
-	db "SAFARI BALLs!", $58
+	text "PA: Ding-dong!"
+
+	page "You are out of"
+	line "SAFARI BALLs!"
+	prompt
 
 _UnnamedText_3c229: ; 89666 (22:5666)
 	text "Wild @"
@@ -119587,8 +119678,9 @@ _UnnamedText_3c7d3: ; 8971a (22:571a)
 	done
 
 _Sony1WinText: ; 8972a (22:572a)
-	db $0, $53, ": Yeah! Am", $4f
-	db "I great or what?", $58
+	text $53, ": Yeah! Am"
+	line "I great or what?"
+	prompt
 
 _PlayerBlackedOutText2: ; 89748 (22:5748)
 	text $52, " is out of"
@@ -119606,22 +119698,23 @@ _LinkBattleLostText: ; 89772 (22:5772)
 	prompt
 
 _TrainerAboutToUseText: ; 89784 (22:5784)
-	db 1
-	dw W_TRAINERNAME
-	db 0," is",$4F
-	db "about to use",$55,"@",1
+	TX_RAM W_TRAINERNAME
+	text " is"
+	line "about to use",$55,"@",1
 	dw W_ENEMYMONNAME
-	db 0,"!",$51
-	db "Will ",$52,$4F
-	db "change #MON?",$57
+	text "!"
+
+	page "Will ",$52
+	line "change #MON?"
+	done
 
 _TrainerSentOutText: ; 897b4 (22:57b4)
-	db 1
-	dw W_TRAINERNAME
-	db 0," sent",$4F
-	db "out @",1
-	dw W_ENEMYMONNAME
-	db 0,"!",$57
+	TX_RAM W_TRAINERNAME
+	text " sent"
+	line "out @"
+	TX_RAM W_ENEMYMONNAME
+	text "!"
+	done
 
 _UnnamedText_3cab4: ; 897c9 (22:57c9)
 	text "There's no will"
@@ -119670,85 +119763,101 @@ _UnnamedText_3d430: ; 89892 (22:5892)
 	done
 
 _MultiHitText: ; 898aa (22:58aa)
-	db 0,"Hit the enemy",$4F,"@"
+	text "Hit the enemy"
+	line "@"
 	TX_NUM W_NUMHITS,1,1
-	db 0," times!",$58
+	text " times!"
+	prompt
 
 _ScaredText: ; 898c7 (22:58c7)
-	db 1
-	dw W_PLAYERMONNAME
-	db 0," is too",$4F
-	db "scared to move!",$58
+	TX_RAM W_PLAYERMONNAME
+	text " is too"
+	line "scared to move!"
+	prompt
 
 _GetOutText: ; 898e3 (22:58e3)
-	db 0,"GHOST: Get out...",$4F
-	db "Get out...",$58
+	text "GHOST: Get out..."
+	line "Get out..."
+	prompt
 
 _FastAsleepText: ; 89901 (22:5901)
-	db 0,$5A,$4F
-	db "is fast asleep!",$58
+	text $5A
+	line "is fast asleep!"
+	prompt
 
 _WokeUpText: ; 89914 (22:5914)
-	db 0,$5A,$4F
-	db "woke up!",$58
+	text $5A
+	line "woke up!"
+	prompt
 
 _FrozenText: ; 89920 (22:5920)
-	db 0,$5A,$4F
-	db "is frozen solid!",$58
+	text $5A
+	line "is frozen solid!"
+	prompt
 
 _FullyParalyzedText: ; 89934 (22:5934)
-	db 0,$5A,"'s",$4F
-	db "fully paralyzed!",$58
+	text $5A,"'s"
+	line "fully paralyzed!"
+	prompt
 
 _FlinchedText: ; 89949 (22:5949)
-	db 0,$5A,$4F
-	db "flinched!",$58
+	text $5A
+	line "flinched!"
+	prompt
 
 _MustRechargeText: ; 89956 (22:5956)
-	db 0,$5A,$4F
-	db "must recharge!",$58
+	text $5A
+	line "must recharge!"
+	prompt
 
 _DisabledNoMoreText: ; 89968 (22:5968)
-	db 0,$5A,"'s",$4F
-	db "disabled no more!",$58
+	text $5A,"'s"
+	line "disabled no more!"
+	prompt
 
 _IsConfusedText: ; 8997e (22:597e)
-	db 0,$5A,$4F
-	db "is confused!",$58
+	text $5A
+	line "is confused!"
+	prompt
 
 _HurtItselfText: ; 8998e (22:598e)
-	db 0,"It hurt itself in",$4F
-	db "its confusion!",$58
+	text "It hurt itself in"
+	line "its confusion!"
+	prompt
 
 _ConfusedNoMoreText: ; 899b0 (22:59b0)
-	db 0,$5A,"'s",$4F
-	db "confused no more!",$58
+	text $5A,"'s"
+	line "confused no more!"
+	prompt
 
 _SavingEnergyText: ; 899c6 (22:59c6)
-	db 0,$5A,$4F
-	db "is saving energy!",$58
+	text $5A
+	line "is saving energy!"
+	prompt
 
 _UnleashedEnergyText: ; 899db (22:59db)
-	db 0,$5A,$4F
-	db "unleashed energy!",$58
+	text $5A
+	line "unleashed energy!"
+	prompt
 
 _ThrashingAboutText: ; 899f0 (22:59f0)
-	db 0,$5A,"'s",$4F
-	db "thrashing about!",$57
+	text $5A,"'s"
+	line "thrashing about!"
+	done
 
 _AttackContinuesText: ; 89a05 (22:5a05)
-	db 0,$5A,"'s",$4F
-	db "attack continues!",$57
+	text $5A,"'s"
+	line "attack continues!"
+	done
 
 _CantMoveText: ; 89a1b (22:5a1b)
-	db 0,$5A,$4F
-	db "can't move!",$58
+	text $5A
+	line "can't move!"
+	prompt
 
 _UnnamedText_3daa8: ; 89a29 (22:5a29)
-	db $0, $5a, "'s", $4f
-	db "@"
-
-UnnamedText_89a2e: ; 89a2e (22:5a2e)
+	text $5a, "'s"
+	line "@"
 	TX_RAM $cd6d
 	text " is"
 	next "disabled!"
@@ -119771,7 +119880,7 @@ _UnnamedText_3db43: ; 89a56 (22:5a56)
 
 _UnnamedText_3db4c: ; 89a62 (22:5a62)
 	TX_RAM $cf4b
-	db $0, "@"
+	text "@"
 
 _UnnamedText_3db6c: ; 89a67 (22:5a67)
 	text "!"
@@ -119873,9 +119982,7 @@ _MirrorMoveFailedText: ; 89b96 (22:5b96)
 	prompt
 
 _UnnamedText_3e887: ; 89baf (22:5baf)
-	db $0, "Hit @"
-
-UnnamedText_89bb5: ; 89bb5 (22:5bb5)
+	text "Hit @"
 	TX_NUM $cd05, 1, 1
 	text " times!"
 	prompt
@@ -120242,10 +120349,9 @@ _BoxFullText: ; 0x8a198
 
 _MonIsTakenOutText: ; 0x8a1b9
 	TX_RAM $cf4b
-	db $0, " is", $4f
-	db "taken out.", $55
-	db "Got @"
-UnnamedText_8a1d1: ; 8a1d1 (22:61d1)
+	text " is"
+	line "taken out."
+	next "Got @"
 	TX_RAM $cf4b
 	text "."
 	prompt
@@ -120269,10 +120375,8 @@ _ReleaseWhichMonText: ; 0x8a228
 	done
 
 _OnceReleasedText: ; 0x8a23d
-	db $0, "Once released,", $4f
-	db "@"
-
-MonIsGoneForeverText: ; 0x8a24e
+	text "Once released,"
+	line "@"
 	TX_RAM $cf4b
 	text " is"
 	next "gone forever. OK?"
@@ -120280,9 +120384,9 @@ MonIsGoneForeverText: ; 0x8a24e
 
 _MonWasReleasedText: ; 0x8a268
 	TX_RAM $cf4b
-	db $0, " was", $4f
-	db "released outside.", $55
-	db "Bye @"
+	text " was"
+	line "released outside."
+	next "Bye @"
 
 _UnnamedText_8a288: ; 8a288 (22:6288)
 	TX_RAM $cf4b
@@ -120290,37 +120394,39 @@ _UnnamedText_8a288: ; 8a288 (22:6288)
 	prompt
 
 _RequireCoinCaseText: ; 8a28e (22:628e)
-	db 0,"A COIN CASE is",$4F
-	db "required!@@"
+	text "A COIN CASE is"
+	line "required!@@"
 
 _ExchangeCoinsForPrizesText: ; 8a2a9 (22:62a9)
-	db 0,"We exchange your",$4F
-	db "coins for prizes.",$58
+	text "We exchange your"
+	line "coins for prizes."
+	prompt
 
 _WhichPrizeText: ; 8a2cd (22:62cd)
-	db 0,"Which prize do",$4F
-	db "you want?",$57
+	text "Which prize do"
+	line "you want?"
+	done
 
 _HereYouGoText: ; 8a2e7 (22:62e7)
-	db 0,"Here you go!@@"
+	text "Here you go!@@"
 
 _SoYouWantPrizeText: ; 8a2f6 (22:62f6)
-	db 0,"So, you want",$4F
-	db "@"
-	db 1
-	dw $CD6D
-	db 0,"?",$57
+	text "So, you want"
+	line "@"
+	TX_RAM $CD6D
+	text "?"
+	done
 
 _SorryNeedMoreCoins: ; 8a30b (22:630b)
-	db 0,"Sorry, you need",$4F
-	db "more coins.@@"
+	text "Sorry, you need"
+	line "more coins.@@"
 
 _OopsYouDontHaveEnoughRoomText: ; 8a329 (22:6329)
-	db 0,"Oops! You don't",$4F
-	db "have enough room.@@"
+	text "Oops! You don't"
+	line "have enough room.@@"
 
 _OhFineThenText: ; 8a34c (22:634c)
-	db 0,"Oh, fine then.@@"
+	text "Oh, fine then.@@"
 
 _UnnamedText_1e93b: ; 8a35d (22:635d)
 	text "Want to get your"
@@ -120357,9 +120463,9 @@ _UnnamedText_5d4d: ; 8a40d (22:640d)
 INCLUDE "text/oakspeech.asm"
 
 _DoYouWantToNicknameText: ; 0x8a605
-	db $0, "Do you want to", $4f
-	db "give a nickname", $55
-	db "to @"
+	text "Do you want to"
+	line "give a nickname"
+	next "to @"
 
 UnnamedText_8a629: ; 8a629 (22:6629)
 	TX_RAM $cd6d
@@ -120379,10 +120485,8 @@ _UnnamedText_69e7: ; 8a64a (22:664a)
 
 _SSAnne8AfterBattleText2: ; 8a677 (22:6677)
 	TX_RAM $cd3f
-	db $0, " and", $4f
-	db "@"
-
-UnnamedText_8a681: ; 8a681 (22:6681)
+	text " and"
+	line "@"
 	TX_RAM $cd6d
 	text " will"
 	next "be traded."
@@ -120390,10 +120494,11 @@ UnnamedText_8a681: ; 8a681 (22:6681)
 
 _Char00Text: ; 8a696 (22:6696)
 	TX_NUM $FF8C,1,2
-	db 0," ERROR.",$57
+	text " ERROR."
+	done
 
 _Char55Text: ; 8a6a3 (22:66a3)
-	db 0,$4B,"@@"
+	text $4B,"@@"
 
 _DiglettsCaveRoute2Text1: ; 8a6a7 (22:66a7)
 	text "I went to ROCK"
@@ -120478,13 +120583,15 @@ _MtMoonPokecenterText3: ; 8a929 (22:6929)
 	done
 
 _UnnamedText_4935c: ; 8a976 (22:6976)
-	db $0, "MAN: Hello, there!", $4f
-	db "Have I got a deal", $55
-	db "just for you!", $51
-	db "I'll let you have", $4f
-	db "a swell MAGIKARP", $55
-	db "for just ¥500!", $55
-	db "What do you say?", $57
+	text "MAN: Hello, there!"
+	line "Have I got a deal"
+	next "just for you!"
+
+	page "I'll let you have"
+	line "a swell MAGIKARP"
+	next "for just ¥500!"
+	next "What do you say?"
+	done
 
 _UnnamedText_49361: ; 8a9ec (22:69ec)
 	text "No? I'm only"
@@ -120498,11 +120605,13 @@ _UnnamedText_49366: ; 8aa17 (22:6a17)
 	done
 
 _UnnamedText_4936b: ; 8aa39 (22:6a39)
-	db $0, "MAN: Well, I don't", $4f
-	db "give refunds!", $57
+	text "MAN: Well, I don't"
+	line "give refunds!"
+	done
 
 _MtMoonPokecenterText5: ; 8aa5a (22:6a5a)
-	db $0, $57
+	db $0
+	done
 
 _UnnamedText_1dfe7: ; 8aa5c (22:6a5c)
 	text "I'm on guard duty."
@@ -120554,13 +120663,11 @@ _UnnamedText_56414: ; 8abd4 (22:6bd4)
 	prompt
 
 _UnnamedText_56419: ; 8abf0 (22:6bf0)
-	db $0, "Fine, I'll look", $4f
-	db "after @"
-
-UnnamedText_8ac07: ; 8ac07 (22:6c07)
+	text "Fine, I'll look"
+	line "after @"
 	TX_RAM $cd6d
-	text $55
-	db "for a while."
+	db $0
+	next "for a while."
 	prompt
 
 _UnnamedText_5641e: ; 8ac19 (22:6c19)
@@ -120569,14 +120676,13 @@ _UnnamedText_5641e: ; 8ac19 (22:6c19)
 	done
 
 _UnnamedText_56423: ; 8ac32 (22:6c32)
-	db $0, "Your @"
-
-UnnamedText_8ac39: ; 8ac39 (22:6c39)
+	text "Your @"
 	TX_RAM $cd6d
-	db $0, $4f
-	db "has grown a lot!", $51
-	db "By level, it's", $4f
-	db "grown by @"
+	db $0
+	line "has grown a lot!"
+
+	page "By level, it's"
+	line "grown by @"
 
 UnnamedText_8ac67: ; 8ac67 (22:6c67)
 	TX_NUM $cd3e,$1,$3
@@ -120586,34 +120692,26 @@ UnnamedText_8ac67: ; 8ac67 (22:6c67)
 	prompt
 
 _UnnamedText_56428: ; 8ac7d (22:6c7d)
-	db $0, "You owe me ¥@"
-
-;XXX
+	text "You owe me ¥@"
 	db $2, $3f, $cd, $c2
-
-UnnamedText_8ac8f: ; 8ac8f (22:6c8f)
 	db $0
 	line "for the return"
 	next "of this #MON."
 	done
 
 _UnnamedText_5642d: ; 8acae (22:6cae)
-	db $0, $52, " got", $4f
-	db "@"
-
-UnnamedText_8acb6: ; 8acb6 (22:6cb6)
+	text $52, " got"
+	line "@"
 	TX_RAM $da49
 	text " back!"
 	done
 
 _UnnamedText_56432: ; 8acc1 (22:6cc1)
-	db $0, "Back already?", $4f
-	db "Your @"
-
-UnnamedText_8acd6: ; 8acd6 (22:6cd6)
+	text "Back already?"
+	line "Your @"
 	TX_RAM $cd6d
-	text $55
-	db "needs some more"
+	db $0
+	next "needs some more"
 	next "time with me."
 	prompt
 
@@ -120969,14 +121067,14 @@ _UnnamedText_564c0: ; 8c9b3 (23:49b3)
 	done
 
 _UnnamedText_564c5: ; 8ca00 (23:4a00)
-	db $0, "Grand! I like", $4f
-	db "your style!", $51
-	db "Take this and", $4f
-	db "fish, young one!", $51
-	db $52, " received", $4f
-	db "a @"
+	text "Grand! I like"
+	line "your style!"
 
-UnnamedText_8ca48: ; 8ca48 (23:4a48)
+	page "Take this and"
+	line "fish, young one!"
+
+	page $52, " received"
+	line "a @"
 	TX_RAM $cf4b
 	text "!@@"
 
@@ -121130,7 +121228,8 @@ _HM02NoRoomText: ; 8cebe (23:4ebe)
 	done
 
 _UnnamedText_1e652: ; 8cee0 (23:4ee0)
-	db $0, "FEAROW: Kyueen!", $57
+	text "FEAROW: Kyueen!"
+	done
 
 _UnnamedText_49928: ; 8cef1 (23:4ef1)
 	text "You need a BICYCLE"
@@ -121172,8 +121271,8 @@ _UnnamedText_1e704: ; 8cfbb (23:4fbb)
 	line "BOULDERBADGE yet!@@"
 
 _UnnamedText_1e715: ; 8d012 (23:5012)
-	text $51
-	db "The rules are"
+	db $0
+	page "The rules are"
 	line "rules. I can't"
 	next "let you pass."
 	done
@@ -121309,17 +121408,20 @@ _UnnamedText_1e86f: ; 8d391 (23:5391)
 	prompt
 
 _BillThankYouText: ; 8d3f5 (23:53f5)
-	db $0, "BILL: Yeehah!", $4f
-	db "Thanks, bud! I", $55
-	db "owe you one!", $51
-	db "So, did you come", $4f
-	db "to see my #MON", $55
-	db "collection?", $55
-	db "You didn't?", $55
-	db "That's a bummer.", $51
-	db "I've got to thank", $4f
-	db "you... Oh here,", $55
-	db "maybe this'll do.", $58
+	text "BILL: Yeehah!"
+	line "Thanks, bud! I"
+	next "owe you one!"
+
+	page "So, did you come"
+	line "to see my #MON"
+	next "collection?"
+	next "You didn't?"
+	next "That's a bummer."
+
+	page "I've got to thank"
+	line "you... Oh here,"
+	next "maybe this'll do."
+	prompt
 
 _SSTicketReceivedText: ; 8d499 (23:5499)
 	text $52, " received"
@@ -121348,10 +121450,11 @@ _UnnamedText_1e8cb: ; 8d4d0 (23:54d0)
 	done
 
 _UnnamedText_1e8da: ; 8d57f (23:557f)
-	db $0, "BILL: Look, bud,", $4f
-	db "just check out", $55
-	db "some of my rare", $55
-	db "#MON on my PC!", $57
+	text "BILL: Look, bud,"
+	line "just check out"
+	next "some of my rare"
+	next "#MON on my PC!"
+	done
 
 _Route1ViridianMartSampleText: ; 8d5bf (23:55bf)
 	text "Hi! I work at a"
@@ -121368,10 +121471,8 @@ _Route1ViridianMartSampleText: ; 8d5bf (23:55bf)
 	prompt
 
 _UnnamedText_1cae8: ; 8d643 (23:5643)
-	db $0, $52, " got", $4f
-	db "@"
-
-UnnamedText_8d64b: ; 8d64b (23:564b)
+	text $52, " got"
+	line "@"
 	TX_RAM $cf4b
 	text "!@@"
 
@@ -123791,18 +123892,23 @@ _Route21AfterBattleText9: ; 922af (24:62af)
 	done
 
 _UnnamedText_511ad: ; 922cd (24:62cd)
-	db $0, $53, ": Hey!", $4f
-	db $52, "!", $51
-	db "You're going to", $4f
-	db "#MON LEAGUE?", $51
-	db "Forget it! You", $4f
-	db "probably don't", $55
-	db "have any BADGEs!", $51
-	db "The guard won't", $4f
-	db "let you through!", $51
-	db "By the way, did", $4f
-	db "your #MON", $55
-	db "get any stronger?", $57
+	text $53, ": Hey!"
+	line $52, "!"
+
+	page "You're going to"
+	line "#MON LEAGUE?"
+
+	page "Forget it! You"
+	line "probably don't"
+	next "have any BADGEs!"
+
+	page "The guard won't"
+	line "let you through!"
+
+	page "By the way, did"
+	line "your #MON"
+	next "get any stronger?"
+	done
 
 _UnnamedText_511b2: ; 9236f (24:636f)
 	text "I heard #MON"
@@ -123825,27 +123931,34 @@ _UnnamedText_511b7: ; 923f4 (24:63f4)
 	prompt
 
 _UnnamedText_511bc: ; 92410 (24:6410)
-	db $0, $53, ": What?", $4f
-	db "Why do I have 2", $55
-	db "#MON?", $51
-	db "You should catch", $55
-	db "some more too!", $58
+	text $53, ": What?"
+	line "Why do I have 2"
+	next "#MON?"
+
+	page "You should catch"
+	next "some more too!"
+	prompt
 
 _UnnamedText_511c1: ; 92450 (24:6450)
-	db $0, $53, ": What?", $4f
-	db $52, "! What a", $55
-	db "surprise to see", $55
-	db "you here!", $51
-	db "So you're going to", $4f
-	db "#MON LEAGUE?", $51
-	db "You collected all", $4f
-	db "the BADGEs too?", $55
-	db "That's cool!", $51
-	db "Then I'll whip you", $4f
-	db $52, " as a", $55
-	db "warm up for", $55
-	db "#MON LEAGUE!", $51
-	db "Come on!", $57
+	text $53, ": What?"
+	line $52, "! What a"
+	next "surprise to see"
+	next "you here!"
+
+	page "So you're going to"
+	line "#MON LEAGUE?"
+
+	page "You collected all"
+	line "the BADGEs too?"
+	next "That's cool!"
+
+	page "Then I'll whip you"
+	line $52, " as a"
+	next "warm up for"
+	next "#MON LEAGUE!"
+
+	page "Come on!"
+	done
 
 _UnnamedText_511c6: ; 92506 (24:6506)
 	text "That loosened me"
@@ -123868,13 +123981,15 @@ _UnnamedText_511cb: ; 92583 (24:6583)
 	prompt
 
 _UnnamedText_511d0: ; 925a0 (24:65a0)
-	db $0, $53, ": Hahaha!", $4f
-	db $52, "! That's", $55
-	db "your best? You're", $55
-	db "nowhere near as", $55
-	db "good as me, pal!", $51
-	db "Go train some", $4f
-	db "more! You loser!", $58
+	text $53, ": Hahaha!"
+	line $52, "! That's"
+	next "your best? You're"
+	next "nowhere near as"
+	next "good as me, pal!"
+
+	page "Go train some"
+	line "more! You loser!"
+	prompt
 
 _Route22Text3: ; 92606 (24:6606)
 	text "#MON LEAGUE"
@@ -123882,17 +123997,14 @@ _Route22Text3: ; 92606 (24:6606)
 	done
 
 _VictoryRoadGuardText1: ; 9261e (24:661e)
-	db $0, "You can pass here", $4f
-	db "only if you have", $55
-	db "the @"
-
-UnnamedText_92647: ; 92647 (24:6647)
+	text "You can pass here"
+	line "only if you have"
+	next "the @"
 	TX_RAM $cd6d
-	db $0, "!", $51
-	db "You don't have the", $4f
-	db "@"
+	text "!"
 
-UnnamedText_92660: ; 92660 (24:6660)
+	page "You don't have the"
+	line "@"
 	TX_RAM $cd6d
 	text " yet!"
 
@@ -123901,23 +124013,20 @@ UnnamedText_92660: ; 92660 (24:6660)
 	next "#MON LEAGUE!@@"
 
 _VictoryRoadGuardText2: ; 92696 (24:6696)
-	db $0, "You can pass here", $4f
-	db "only if you have", $55
-	db "the @"
-
-UnnamedText_926bf: ; 926bf (24:66bf)
+	text "You can pass here"
+	line "only if you have"
+	next "the @"
 	TX_RAM $cd6d
-	db $0, "!", $51
-	db "Oh! That is the", $4f
-	db "@"
+	text "!"
 
-UnnamedText_926d6: ; 926d6 (24:66d6)
+	page "Oh! That is the"
+	line "@"
 	TX_RAM $cd6d
 	text "!@@"
 
 _UnnamedText_513a3: ; 926dd (24:66dd)
-	text $51
-	db "OK then! Please,"
+	db $0
+	page "OK then! Please,"
 	line "go right ahead!"
 	done
 
@@ -123932,16 +124041,14 @@ _UnnamedText_51510: ; 92721 (24:6721)
 	next "contest trainers!@@"
 
 _UnnamedText_51515: ; 92755 (24:6755)
-	text $51
-	db "You just earned a"
+	db $0
+	page "You just earned a"
 	line "fabulous prize!"
 	prompt
 
 _UnnamedText_5151a: ; 92779 (24:6779)
-	db $0, $52, " received", $4f
-	db "a @"
-
-UnnamedText_92788: ; 92788 (24:6788)
+	text $52, " received"
+	line "a @"
 	TX_RAM $cf4b
 	text "!@@"
 
@@ -124282,27 +124389,21 @@ _UnnamedText_3af3e: ; 946c2 (25:46c2)
 	done
 
 _UnnamedText_3af43: ; 946cf (25:46cf)
-	db $0, $4f
-	db "into @"
-
-UnnamedText_946d7: ; 946d7 (25:46d7)
+	db $0
+	line "into @"
 	TX_RAM $cd6d
 	text "!"
 	done
 
 _UnnamedText_3af48: ; 946dd (25:46dd)
-	db $0, "Huh? @"
-
-UnnamedText_946e4: ; 946e4 (25:46e4)
+	text "Huh? @"
 	TX_RAM $cf4b
 	db $0
 	line "stopped evolving!"
 	prompt
 
 _UnnamedText_3af4d: ; 946fb (25:46fb)
-	db $0, "What? @"
-
-UnnamedText_94703: ; 94703 (25:4703)
+	text "What? @"
 	TX_RAM $cf4b
 	db $0
 	line "is evolving!"
@@ -124344,10 +124445,8 @@ _UnnamedText_3f423: ; 94782 (25:4782)
 	prompt
 
 _UnnamedText_3f528: ; 94795 (25:4795)
-	db $0, $5a, "'s", $4f
-	db "@"
-
-UnnamedText_9479a: ; 9479a (25:479a)
+	text $5a, "'s"
+	line "@"
 	TX_RAM $cf4b
 	text "@@"
 
@@ -124359,10 +124458,8 @@ _UnnamedText_3f547: ; 947ab (25:47ab)
 	prompt
 
 _UnnamedText_3f661: ; 947b3 (25:47b3)
-	db $0, $59, "'s", $4f
-	db "@"
-
-UnnamedText_947b8: ; 947b8 (25:47b8)
+	text $59, "'s"
+	line "@"
 	TX_RAM $cf4b
 	text "@@"
 
@@ -124427,20 +124524,16 @@ _UnnamedText_3f9a1: ; 94878 (25:4878)
 	prompt
 
 _UnnamedText_3fa77: ; 9488c (25:488c)
-	db $0, $5a, $4f
-	db "learned", $55
-	db "@"
-
-UnnamedText_94898: ; 94898 (25:4898)
+	text $5a
+	line "learned"
+	next "@"
 	TX_RAM $cd6d
 	text "!"
 	prompt
 
 _UnnamedText_3fb09: ; 9489e (25:489e)
-	db $0, $59, "'s", $4f
-	db "@"
-
-UnnamedText_948a3: ; 948a3 (25:48a3)
+	text $59, "'s"
+	line "@"
 	TX_RAM $cd6d
 	text " was"
 	next "disabled!"
@@ -124541,11 +124634,9 @@ _UnnamedText_3baac: ; 94a58 (25:4a58)
 	prompt
 
 _UnnamedText_3bb92: ; 94a6c (25:4a6c)
-	db $0, $5a, $4f
-	db "transformed into", $55
-	db "@"
-
-UnnamedText_94a81: ; 94a81 (25:4a81)
+	text $5a
+	line "transformed into"
+	next "@"
 	TX_RAM $cd6d
 	text "!"
 	prompt
@@ -124588,21 +124679,25 @@ INCLUDE "text/mapRedsHouse1F.asm"
 INCLUDE "text/mapBluesHouse.asm"
 
 _OaksLabGaryText1: ; 94d5b (25:4d5b)
-	db $0, $53, ": Yo", $4f
-	db $52, "! Gramps", $55
-	db "isn't around!", $57
+	text $53, ": Yo"
+	line $52, "! Gramps"
+	next "isn't around!"
+	done
 
 _OaksLabText40: ; 94d79 (25:4d79)
-	db $0, $53, ": Heh, I", $4f
-	db "don't need to be", $55
-	db "greedy like you!", $51
-	db "Go ahead and", $4f
-	db "choose, ", $52, "!", $57
+	text $53, ": Heh, I"
+	line "don't need to be"
+	next "greedy like you!"
+
+	page "Go ahead and"
+	line "choose, ", $52, "!"
+	done
 
 _OaksLabText41: ; 94dbd (25:4dbd)
-	db $0, $53, ": My", $4f
-	db "#MON looks a", $55
-	db "lot stronger.", $57
+	text $53, ": My"
+	line "#MON looks a"
+	next "lot stronger."
+	done
 
 _OaksLabText39: ; 94ddf (25:4ddf)
 	db $0
@@ -124645,35 +124740,43 @@ _OaksLabLastMonText: ; 94eb6 (25:4eb6)
 	done
 
 _UnnamedText_1d2f0: ; 94ed2 (25:4ed2)
-	db $0, "OAK: Now, ", $52, ",", $4f
-	db "which #MON do", $55
-	db "you want?", $57
+	text "OAK: Now, ", $52, ","
+	line "which #MON do"
+	next "you want?"
+	done
 
 _UnnamedText_1d2f5: ; 94ef8 (25:4ef8)
-	db $0, "OAK: If a wild", $4f
-	db "#MON appears,", $55
-	db "your #MON can", $55
-	db "fight against it!", $57
+	text "OAK: If a wild"
+	line "#MON appears,"
+	next "your #MON can"
+	next "fight against it!"
+	done
 
 _UnnamedText_1d2fa: ; 94f36 (25:4f36)
-	db $0, "OAK: ", $52, ",", $4f
-	db "raise your young", $55
-	db "#MON by making", $55
-	db "it fight!", $57
+	text "OAK: ", $52, ","
+	line "raise your young"
+	next "#MON by making"
+	next "it fight!"
+	done
 
 _OaksLabDeliverParcelText1: ; 94f69 (25:4f69)
-	db $0, "OAK: Oh, ", $52, "!", $51
-	db "How is my old", $4f
-	db "#MON?", $51
-	db "Well, it seems to", $4f
-	db "like you a lot.", $51
-	db "You must be", $4f
-	db "talented as a", $55
-	db "#MON trainer!", $51
-	db "What? You have", $4f
-	db "something for me?", $51
-	db $52, " delivered", $4f
-	db "OAK's PARCEL.@@"
+	text "OAK: Oh, ", $52, "!"
+
+	page "How is my old"
+	line "#MON?"
+
+	page "Well, it seems to"
+	line "like you a lot."
+
+	page "You must be"
+	line "talented as a"
+	next "#MON trainer!"
+
+	page "What? You have"
+	line "something for me?"
+
+	page $52, " delivered"
+	line "OAK's PARCEL.@@"
 
 _OaksLabDeliverParcelText2: ; 9500f (25:500f)
 	text $51
@@ -124690,16 +124793,18 @@ _OaksLabAroundWorldText: ; 95045 (25:5045)
 	done
 
 _OaksLabGivePokeballsText1: ; 9506d (25:506d)
-	db $0, "OAK: You can't get", $4f
-	db "detailed data on", $55
-	db "#MON by just", $55
-	db "seeing them.", $51
-	db "You must catch", $4f
-	db "them! Use these", $55
-	db "to capture wild", $55
-	db "#MON.", $51
-	db $52, " got 5", $4f
-	db "# BALLs!@@"
+	text "OAK: You can't get"
+	line "detailed data on"
+	next "#MON by just"
+	next "seeing them."
+
+	page "You must catch"
+	line "them! Use these"
+	next "to capture wild"
+	next "#MON."
+
+	page $52, " got 5"
+	line "# BALLs!@@"
 
 _OaksLabGivePokeballsText2: ; 950f2 (25:50f2)
 	text $51
@@ -124720,18 +124825,21 @@ _OaksLabGivePokeballsText2: ; 950f2 (25:50f2)
 	done
 
 _OaksLabPleaseVisitText: ; 9519e (25:519e)
-	db $0, "OAK: Come see me", $4f
-	db "sometimes.", $51
-	db "I want to know how", $4f
-	db "your #DEX is", $55
-	db "coming along.", $57
+	text "OAK: Come see me"
+	line "sometimes."
+
+	page "I want to know how"
+	line "your #DEX is"
+	next "coming along."
+	done
 
 _UnnamedText_1d31d: ; 951e9 (25:51e9)
-	db $0, "OAK: Good to see ", $4f
-	db "you! How is your ", $55
-	db "#DEX coming? ", $55
-	db "Here, let me take", $55
-	db "a look!", $58
+	text "OAK: Good to see "
+	line "you! How is your "
+	next "#DEX coming? "
+	next "Here, let me take"
+	next "a look!"
+	prompt
 
 _UnnamedText_1d32c: ; 95236 (25:5236)
 	text "It's encyclopedia-"
@@ -124754,63 +124862,76 @@ _UnnamedText_1d340: ; 9526b (25:526b)
 	done
 
 _OaksLabRivalWaitingText: ; 952bb (25:52bb)
-	db $0, $53, ": Gramps!", $4f
-	db "I'm fed up with", $55
-	db "waiting!", $57
+	text $53, ": Gramps!"
+	line "I'm fed up with"
+	next "waiting!"
+	done
 
 _OaksLabChooseMonText: ; 952df (25:52df)
-	db $0, "OAK: ", $53, "?", $4f
-	db "Let me think...", $51
-	db "Oh, that's right,", $4f
-	db "I told you to", $55
-	db "come! Just wait!", $51
-	db "Here, ", $52, "!", $51
-	db "There are 3", $4f
-	db "#MON here!", $51
-	db "Haha!", $51
-	db "They are inside", $4f
-	db "the # BALLs.", $51
-	db "When I was young,", $4f
-	db "I was a serious", $55
-	db "#MON trainer!", $51
-	db "In my old age, I", $4f
-	db "have only 3 left,", $55
-	db "but you can have", $55
-	db "one! Choose!", $57
+	text "OAK: ", $53, "?"
+	line "Let me think..."
+
+	page "Oh, that's right,"
+	line "I told you to"
+	next "come! Just wait!"
+
+	page "Here, ", $52, "!"
+
+	page "There are 3"
+	line "#MON here!"
+
+	page "Haha!"
+
+	page "They are inside"
+	line "the # BALLs."
+
+	page "When I was young,"
+	line "I was a serious"
+	next "#MON trainer!"
+
+	page "In my old age, I"
+	line "have only 3 left,"
+	next "but you can have"
+	next "one! Choose!"
+	done
 
 _OaksLabRivalInterjectionText: ; 953dc (25:53dc)
-	db $0, $53, ": Hey!", $4f
-	db "Gramps! What", $55
-	db "about me?", $57
+	text $53, ": Hey!"
+	line "Gramps! What"
+	next "about me?"
+	done
 
 _OaksLabBePatientText: ; 953fc (25:53fc)
-	db $0, "OAK: Be patient!", $4f
-	db $53, ", you can", $55
-	db "have one too!", $57
+	text "OAK: Be patient!"
+	line $53, ", you can"
+	next "have one too!"
+	done
 
 _OaksLabLeavingText: ; 95427 (25:5427)
-	db $0, "OAK: Hey! Don't go", $4f
-	db "away yet!", $57
+	text "OAK: Hey! Don't go"
+	line "away yet!"
+	done
 
 _OaksLabRivalPickingMonText: ; 95444 (25:5444)
-	db $0, $53, ": I'll take", $4f
-	db "this one, then!", $57
+	text $53, ": I'll take"
+	line "this one, then!"
+	done
 
 _OaksLabRivalReceivedMonText: ; 95461 (25:5461)
-	db $0, $53, " received", $4f
-	db "a @"
-
-UnnamedText_95470: ; 95470 (25:5470)
+	text $53, " received"
+	line "a @"
 	TX_RAM $cd6d
 	text "!@@"
 
 _OaksLabRivalChallengeText: ; 95477 (25:5477)
-	db $0, $53, ": Wait", $4f
-	db $52, "!", $55
-	db "Let's check out", $55
-	db "our #MON!", $51
-	db "Come on, I'll take", $4f
-	db "you on!", $57
+	text $53, ": Wait"
+	line $52, "!"
+	next "Let's check out"
+	next "our #MON!"
+
+	page "Come on, I'll take"
+	line "you on!"
+	done
 
 _UnnamedText_1d3be: ; 954b6 (25:54b6)
 	text "WHAT?"
@@ -124820,28 +124941,34 @@ _UnnamedText_1d3be: ; 954b6 (25:54b6)
 	prompt
 
 _UnnamedText_1d3c3: ; 954e4 (25:54e4)
-	db $0, $53, ": Yeah! Am", $4f
-	db "I great or what?", $58
+	text $53, ": Yeah! Am"
+	line "I great or what?"
+	prompt
 
 _OaksLabRivalToughenUpText: ; 95502 (25:5502)
-	db $0, $53, ": Okay!", $4f
-	db "I'll make my", $55
-	db "#MON fight to", $55
-	db "toughen it up!", $51
-	db $52, "! Gramps!", $4f
-	db "Smell you later!", $57
+	text $53, ": Okay!"
+	line "I'll make my"
+	next "#MON fight to"
+	next "toughen it up!"
+
+	page $52, "! Gramps!"
+	line "Smell you later!"
+	done
 
 _OaksLabText21: ; 95551 (25:5551)
-	db $0, $53, ": Gramps!", $57
+	text $53, ": Gramps!"
+	done
 
 _OaksLabText22: ; 9555d (25:555d)
-	db $0, $53, ": What did", $4f
-	db "you call me for?", $57
+	text $53, ": What did"
+	line "you call me for?"
+	done
 
 _OaksLabText23: ; 9557b (25:557b)
-	db $0, "OAK: Oh right! I", $4f
-	db "have a request", $55
-	db "of you two.", $57
+	text "OAK: Oh right! I"
+	line "have a request"
+	next "of you two."
+	done
 
 _OaksLabText24: ; 955a8 (25:55a8)
 	text "On the desk there"
@@ -124858,11 +124985,12 @@ _OaksLabText24: ; 955a8 (25:55a8)
 	done
 
 _OaksLabText25: ; 9562a (25:562a)
-	db $0, "OAK: ", $52, " and", $4f
-	db $53, "! Take", $55
-	db "these with you!", $51
-	db $52, " got", $4f
-	db "#DEX from OAK!@@"
+	text "OAK: ", $52, " and"
+	line $53, "! Take"
+	next "these with you!"
+
+	page $52, " got"
+	line "#DEX from OAK!@@"
 
 _OaksLabText26: ; 95664 (25:5664)
 	text "To make a complete"
@@ -124888,18 +125016,22 @@ _OaksLabText26: ; 95664 (25:5664)
 	done
 
 _OaksLabText27: ; 95741 (25:5741)
-	db $0, $53, ": Alright", $4f
-	db "Gramps! Leave it", $55
-	db "all to me!", $51
-	db $52, ", I hate to", $4f
-	db "say it, but I", $55
-	db "don't need you!", $51
-	db "I know! I'll", $4f
-	db "borrow a TOWN MAP", $55
-	db "from my sis!", $51
-	db "I'll tell her not", $4f
-	db "to lend you one,", $55
-	db $52, "! Hahaha!", $57
+	text $53, ": Alright"
+	line "Gramps! Leave it"
+	next "all to me!"
+
+	page $52, ", I hate to"
+	line "say it, but I"
+	next "don't need you!"
+
+	page "I know! I'll"
+	line "borrow a TOWN MAP"
+	next "from my sis!"
+
+	page "I'll tell her not"
+	line "to lend you one,"
+	next $52, "! Hahaha!"
+	done
 
 _UnnamedText_1d405: ; 957eb (25:57eb)
 	text "I study #MON as"
@@ -124907,20 +125039,20 @@ _UnnamedText_1d405: ; 957eb (25:57eb)
 	done
 
 _UnnamedText_441cc: ; 9580c (25:580c)
-	db $0, "#DEX comp-", $4f
+	text "#DEX comp-", $4f
 	db "letion is:", $51
 	db "@"
 
 UnnamedText_95824: ; 95824 (25:5824)
 	TX_NUM $ffdb, 1, 3
-	db $0, " #MON seen", $4f
-	db "@"
-
-UnnamedText_95835: ; 95835 (25:5835)
+	text " #MON seen"
+	line "@"
 	TX_NUM $ffdc, 1, 3
-	db $0, " #MON owned", $51
-	db "PROF.OAK's", $4f
-	db "Rating:", $58
+	text " #MON owned"
+
+	page "PROF.OAK's"
+	line "Rating:"
+	prompt
 
 _UnnamedText_44201: ; 95858 (25:5858)
 	text "You still have"
@@ -125104,11 +125236,13 @@ _ViridianHouseText2: ; 95dc7 (25:5dc7)
 	done
 
 _UnnamedText_1d5b1: ; 95de1 (25:5de1)
-	db $0, "SPEARY: Tetweet!", $57
+	text "SPEARY: Tetweet!"
+	done
 
 _ViridianHouseText4: ; 95df3 (25:5df3)
-	db $0, "SPEAROW", $4f
-	db "Name: SPEARY", $57
+	text "SPEAROW"
+	line "Name: SPEARY"
+	done
 
 _UnnamedText_74ace: ; 95e09 (25:5e09)
 	text "Fwahahaha! This is"
@@ -125666,7 +125800,7 @@ _UnnamedText_5c529: ; 9849f (26:449f)
 	done
 
 _PewterHouse1Text1: ; 984ce (26:44ce)
-	db $0, "NIDORAN: Bowbow!@@"
+	text "NIDORAN: Bowbow!@@"
 
 _PewterHouse1Text2: ; 984e1 (26:44e1)
 	text "NIDORAN sit!"
@@ -125739,8 +125873,9 @@ _PewterPokecenterText1: ; 98704 (26:4704)
 	done
 
 _PewterPokecenterText5: ; 98744 (26:4744)
-	db $0, "JIGGLYPUFF: Puu", $4f
-	db "pupuu!", $57
+	text "JIGGLYPUFF: Puu"
+	line "pupuu!"
+	done
 
 _UnnamedText_1d6ab: ; 9875c (26:475c)
 	text "Those miserable"
@@ -126183,14 +126318,16 @@ _PokemonTower1Text5: ; 99546 (26:5546)
 	done
 
 _UnnamedText_6062d: ; 9957b (26:557b)
-	db $0, $53, ": Hey,", $4f
-	db $52, "! What", $55
-	db "brings you here?", $55
-	db "Your #MON", $55
-	db "don't look dead!", $51
-	db "I can at least", $4f
-	db "make them faint!", $55
-	db "Let's go, pal!", $57
+	text $53, ": Hey,"
+	line $52, "! What"
+	next "brings you here?"
+	next "Your #MON"
+	next "don't look dead!"
+
+	page "I can at least"
+	line "make them faint!"
+	next "Let's go, pal!"
+	done
 
 _UnnamedText_60632: ; 995e5 (26:55e5)
 	text "What?"
@@ -126201,11 +126338,13 @@ _UnnamedText_60632: ; 995e5 (26:55e5)
 	prompt
 
 _UnnamedText_60637: ; 99614 (26:5614)
-	db $0, $53, ": Well,", $4f
-	db "look at all your", $55
-	db "wimpy #MON!", $51
-	db "Toughen them up a", $4f
-	db "bit more!", $58
+	text $53, ": Well,"
+	line "look at all your"
+	next "wimpy #MON!"
+
+	page "Toughen them up a"
+	line "bit more!"
+	prompt
 
 _UnnamedText_6063c: ; 99657 (26:5657)
 	text "How's your #DEX"
@@ -126463,24 +126602,30 @@ _UnnamedText_60c56: ; 99c01 (26:5c01)
 	done
 
 _UnnamedText_60ec4: ; 99c1a (26:5c1a)
-	db $0, "MR.FUJI: Heh? You", $4f
-	db "came to save me?", $51
-	db "Thank you. But, I", $4f
-	db "came here of my", $55
-	db "own free will.", $51
-	db "I came to calm", $4f
-	db "the soul of", $55
-	db "CUBONE's mother.", $51
-	db "I think MAROWAK's", $4f
-	db "spirit has gone", $55
-	db "to the afterlife.", $51
-	db "I must thank you", $4f
-	db "for your kind", $55
-	db "concern!", $51
-	db "Follow me to my", $4f
-	db "home, #MON", $55
-	db "HOUSE at the foot", $55
-	db "of this tower.", $57
+	text "MR.FUJI: Heh? You"
+	line "came to save me?"
+
+	page "Thank you. But, I"
+	line "came here of my"
+	next "own free will."
+
+	page "I came to calm"
+	line "the soul of"
+	next "CUBONE's mother."
+
+	page "I think MAROWAK's"
+	line "spirit has gone"
+	next "to the afterlife."
+
+	page "I must thank you"
+	line "for your kind"
+	next "concern!"
+
+	page "Follow me to my"
+	line "home, #MON"
+	next "HOUSE at the foot"
+	next "of this tower."
+	done
 
 _PokemonTower7BattleText1: ; 99d31 (26:5d31)
 	text "What do you want?"
@@ -126565,19 +126710,22 @@ _UnnamedText_1d8f9: ; 99f4b (26:5f4b)
 	done
 
 _LavenderHouse1Text3: ; 99f72 (26:5f72)
-	db $0, "PSYDUCK: Gwappa!@@"
+	text "PSYDUCK: Gwappa!@@"
 
 _LavenderHouse1Text4: ; 99f85 (26:5f85)
-	db $0, "NIDORINO: Gaoo!@@"
+	text "NIDORINO: Gaoo!@@"
 
 _UnnamedText_1d94c: ; 99f97 (26:5f97)
-	db $0, "MR.FUJI: ", $52, ".", $51
-	db "Your #DEX quest", $4f
-	db "may fail without", $55
-	db "love for your", $55
-	db "#MON.", $51
-	db "I think this may", $4f
-	db "help your quest.", $58
+	text "MR.FUJI: ", $52, "."
+
+	page "Your #DEX quest"
+	line "may fail without"
+	next "love for your"
+	next "#MON."
+
+	page "I think this may"
+	line "help your quest."
+	prompt
 
 _ReceivedFluteText: ; 99ffb (26:5ffb)
 	text $52, " received"
@@ -126602,8 +126750,9 @@ _FluteNoRoomText: ; 9a069 (26:6069)
 	done
 
 _MrFujiAfterFluteText: ; 9a087 (26:6087)
-	db $0, "MR.FUJI: Has my", $4f
-	db "FLUTE helped you?", $57
+	text "MR.FUJI: Has my"
+	line "FLUTE helped you?"
+	done
 
 _LavenderHouse1Text6: ; 9a0aa (26:60aa)
 	text "#MON Monthly"
@@ -126649,7 +126798,7 @@ _UnnamedText_5c958: ; 9a1e3 (26:61e3)
 	done
 
 _LavenderHouse2Text1: ; 9a238 (26:6238)
-	db $0, "CUBONE: Kyarugoo!@@"
+	text "CUBONE: Kyarugoo!@@"
 
 _UnnamedText_1d9dc: ; 9a24c (26:624c)
 	text "I hate those"
@@ -126707,11 +126856,9 @@ _UnnamedText_1dac2: ; 9a3e5 (26:63e5)
 	prompt
 
 _UnnamedText_1dac7: ; 9a404 (26:6404)
-	db $0, "OK! This #MON", $4f
-	db "has been renamed", $55
-	db "@"
-
-UnnamedText_9a425: ; 9a425 (26:6425)
+	text "OK! This #MON"
+	line "has been renamed"
+	next "@"
 	TX_RAM $cee9
 	text "!"
 
@@ -126785,11 +126932,13 @@ _UnnamedText_59be9: ; 9a5ff (26:65ff)
 	done
 
 _UnnamedText_59c00: ; 9a629 (26:6629)
-	db $0, "PIKACHU: Chu!", $4f
-	db "Pikachu!", $57
+	text "PIKACHU: Chu!"
+	line "Pikachu!"
+	done
 
 _UnnamedText_59c17: ; 9a641 (26:6641)
-	db $0, "SEEL: Kyuoo!", $57
+	text "SEEL: Kyuoo!"
+	done
 
 _UnnamedText_59c65: ; 9a64f (26:664f)
 	text "I chair the"
@@ -127099,7 +127248,7 @@ _VermilionHouse1Text1: ; 9c449 (27:4449)
 	done
 
 _VermilionHouse1Text2: ; 9c488 (27:4488)
-	db $0, "PIDGEY: Kurukkoo!@@"
+	text "PIDGEY: Kurukkoo!@@"
 
 _VermilionHouse1Text3: ; 9c49c (27:449c)
 	text "Dear PIPPI, I hope"
@@ -127181,19 +127330,26 @@ _CeladonMart1Text1: ; 9c672 (27:4672)
 	done
 
 _CeladonMart1Text2: ; 9c6cd (27:46cd)
-	db $0, "1F: SERVICE", $4f
-	db "    COUNTER", $51
-	db "2F: TRAINER'S", $4f
-	db "    MARKET", $51
-	db "3F: TV GAME SHOP", $51
-	db "4F: WISEMAN GIFTS", $51
-	db "5F: DRUG STORE", $51
-	db "ROOFTOP SQUARE:", $4f
-	db "VENDING MACHINES", $57
+	text "1F: SERVICE"
+	line "    COUNTER"
+
+	page "2F: TRAINER'S"
+	line "    MARKET"
+
+	page "3F: TV GAME SHOP"
+
+	page "4F: WISEMAN GIFTS"
+
+	page "5F: DRUG STORE"
+
+	page "ROOFTOP SQUARE:"
+	line "VENDING MACHINES"
+	done
 
 _CeladonMart1Text3: ; 9c752 (27:4752)
-	db $0, "1F: SERVICE", $4f
-	db "    COUNTER", $57
+	text "1F: SERVICE"
+	line "    COUNTER"
+	done
 
 _CeladonMart2Text3: ; 9c76b (27:476b)
 	text "SUPER REPEL keeps"
@@ -127211,10 +127367,12 @@ _CeladonMart2Text4: ; 9c7b2 (27:47b2)
 	done
 
 _CeladonMart2Text5: ; 9c7dc (27:47dc)
-	db $0, "Top Grade Items", $4f
-	db "for Trainers!", $51
-	db "2F: TRAINER'S", $4f
-	db "    MARKET", $57
+	text "Top Grade Items"
+	line "for Trainers!"
+
+	page "2F: TRAINER'S"
+	line "    MARKET"
+	done
 
 _TM18PreReceiveText: ; 9c814 (27:4814)
 	text "Oh, hi! I finally"
@@ -127307,7 +127465,8 @@ _CeladonMart3Text13: ; 9ca85 (27:4a85)
 	done
 
 _CeladonMart3Text14: ; 9caa4 (27:4aa4)
-	db $0, "3F: TV GAME SHOP", $57
+	text "3F: TV GAME SHOP"
+	done
 
 _CeladonMart3Text15: ; 9cab6 (27:4ab6)
 	text "Red and Blue!"
@@ -127331,12 +127490,15 @@ _CeladonMart4Text3: ; 9cafd (27:4afd)
 	done
 
 _CeladonMart4Text4: ; 9cb56 (27:4b56)
-	db $0, "Express yourself", $4f
-	db "with gifts!", $51
-	db "4F: WISEMAN GIFTS", $51
-	db "Evolution Special!", $4f
-	db "Element STONEs on", $55
-	db "sale now!", $57
+	text "Express yourself"
+	line "with gifts!"
+
+	page "4F: WISEMAN GIFTS"
+
+	page "Evolution Special!"
+	line "Element STONEs on"
+	next "sale now!"
+	done
 
 _UnnamedText_484ee: ; 9cbb5 (27:4bb5)
 	text "Give her which"
@@ -127448,8 +127610,9 @@ _CeladonMartRoofText4: ; 9ce16 (27:4e16)
 	done
 
 _CeladonMartRoofText6: ; 9ce50 (27:4e50)
-	db $0, "ROOFTOP SQUARE:", $4f
-	db "VENDING MACHINES", $57
+	text "ROOFTOP SQUARE:"
+	line "VENDING MACHINES"
+	done
 
 _VendingMachineText1: ; 9ce72 (27:4e72)
 	text "A vending machine!"
@@ -127477,7 +127640,7 @@ _VendingMachineText7: ; 9cee0 (27:4ee0)
 	done
 
 _CeladonMansion1Text1: ; 9ceee (27:4eee)
-	db $0, "MEOWTH: Meow!@@"
+	text "MEOWTH: Meow!@@"
 
 _CeladonMansion1Text2: ; 9cefe (27:4efe)
 	text "My dear #MON"
@@ -127488,12 +127651,12 @@ _CeladonMansion1Text2: ; 9cefe (27:4efe)
 	done
 
 _CeladonMansion1Text3: ; 9cf3c (27:4f3c)
-	db $0, "CLEFAIRY: Pi", $4f
-	db "pippippi!@@"
+	text "CLEFAIRY: Pi"
+	line "pippippi!@@"
 
 _CeladonMansion1Text4: ; 9cf55 (27:4f55)
-	db $0, "NIDORAN: Kya", $4f
-	db "kyaoo!@@"
+	text "NIDORAN: Kya"
+	line "kyaoo!@@"
 
 _CeladonMansion1Text5: ; 9cf6b (27:4f6b)
 	text "CELADON MANSION"
@@ -128032,7 +128195,8 @@ _CeladonMart5Text2: ; 9de79 (27:5e79)
 	done
 
 _CeladonMart5Text5: ; 9ded6 (27:5ed6)
-	db $0, "5F: DRUG STORE", $57
+	text "5F: DRUG STORE"
+	done
 
 _CeladonPrizeRoomText1: ; 9dee6 (27:5ee6)
 	text "I sure do fancy"
@@ -128217,11 +128381,13 @@ _FuchsiaPokecenterText3: ; 9e3de (27:63de)
 	done
 
 _WardenGibberishText1: ; 9e444 (27:6444)
-	db $0, "WARDEN: Hif fuff", $4f
-	db "hefifoo!", $51
-	db "Ha lof ha feef ee", $4f
-	db "hafahi ho. Heff", $55
-	db "hee fwee!", $57
+	text "WARDEN: Hif fuff"
+	line "hefifoo!"
+
+	page "Ha lof ha feef ee"
+	line "hafahi ho. Heff"
+	next "hee fwee!"
+	done
 
 _WardenGibberishText2: ; 9e48b (27:648b)
 	text "Ah howhee ho hoo!"
@@ -128245,15 +128411,17 @@ _WardenTeethText2: ; 9e4f9 (27:64f9)
 	prompt
 
 _WardenThankYouText: ; 9e51b (27:651b)
-	db $0, "WARDEN: Thanks,", $4f
-	db "kid! No one could", $55
-	db "understand a word", $55
-	db "that I said.", $51
-	db "I couldn't work", $4f
-	db "that way.", $55
-	db "Let me give you", $55
-	db "something for", $55
-	db "your trouble.", $58
+	text "WARDEN: Thanks,"
+	line "kid! No one could"
+	next "understand a word"
+	next "that I said."
+
+	page "I couldn't work"
+	line "that way."
+	next "Let me give you"
+	next "something for"
+	next "your trouble."
+	prompt
 
 _ReceivedHM04Text: ; 9e5a2 (27:65a2)
 	text $52, " received"
@@ -128262,19 +128430,24 @@ _ReceivedHM04Text: ; 9e5a2 (27:65a2)
 	text "!@@"
 
 _HM04ExplanationText: ; 9e5b6 (27:65b6)
-	db $0, "WARDEN: HM04", $4f
-	db "teaches STRENGTH!", $51
-	db "It lets #MON", $4f
-	db "move boulders", $55
-	db "when you're out-", $55
-	db "side of battle.", $51
-	db "Oh yes, did you", $4f
-	db "find SECRET HOUSE", $55
-	db "in SAFARI ZONE?", $51
-	db "If you do, you", $4f
-	db "win an HM!", $51
-	db "I hear it's the", $4f
-	db "rare SURF HM.", $57
+	text "WARDEN: HM04"
+	line "teaches STRENGTH!"
+
+	page "It lets #MON"
+	line "move boulders"
+	next "when you're out-"
+	next "side of battle."
+
+	page "Oh yes, did you"
+	line "find SECRET HOUSE"
+	next "in SAFARI ZONE?"
+
+	page "If you do, you"
+	line "win an HM!"
+
+	page "I hear it's the"
+	line "rare SURF HM."
+	done
 
 _HM04NoRoomText: ; 9e67a (27:667a)
 	text "Your pack is"
@@ -128317,8 +128490,8 @@ UnnamedText_9e747: ; 9e747 (27:6747)
 	line "30 SAFARI BALLs!@@"
 
 _UnnamedText_75360: ; 9e79f (27:679f)
-	text $51
-	db "We'll call you on"
+	db $0
+	page "We'll call you on"
 	line "the PA when you"
 	next "run out of time"
 	next "or SAFARI BALLs!"
@@ -128386,18 +128559,22 @@ _UnnamedText_753f0: ; 9e993 (27:6993)
 	done
 
 _UnnamedText_75581: ; 9e9b1 (27:69b1)
-	db $0, "KOGA: Fwahahaha!", $51
-	db "A mere child like", $4f
-	db "you dares to", $55
-	db "challenge me?", $51
-	db "Very well, I", $4f
-	db "shall show you", $55
-	db "true terror as a", $55
-	db "ninja master!", $51
-	db "You shall feel", $4f
-	db "the despair of", $55
-	db "poison and sleep", $55
-	db "techniques!", $57
+	text "KOGA: Fwahahaha!"
+
+	page "A mere child like"
+	line "you dares to"
+	next "challenge me?"
+
+	page "Very well, I"
+	line "shall show you"
+	next "true terror as a"
+	next "ninja master!"
+
+	page "You shall feel"
+	line "the despair of"
+	next "poison and sleep"
+	next "techniques!"
+	done
 
 _UnnamedText_75586: ; 9ea66 (27:6a66)
 	text "Humph!"
@@ -128992,21 +129169,28 @@ _Lab3Text2: ; a0fe3 (28:4fe3)
 	done
 
 _Lab3Text3: ; a1010 (28:5010)
-	db $0, "There's an e-mail", $4f
-	db "message!", $51
-	db "...", $51
-	db "The 3 legendary", $4f
-	db "bird #MON are", $55
-	db "ARTICUNO, ZAPDOS", $55
-	db "and MOLTRES.", $51
-	db "Their whereabouts", $4f
-	db "are unknown.", $51
-	db "We plan to explore", $4f
-	db "the cavern close", $55
-	db "to CERULEAN.", $51
-	db "From: #MON", $4f
-	db "RESEARCH TEAM", $51
-	db "...", $57
+	text "There's an e-mail"
+	line "message!"
+
+	page "..."
+
+	page "The 3 legendary"
+	line "bird #MON are"
+	next "ARTICUNO, ZAPDOS"
+	next "and MOLTRES."
+
+	page "Their whereabouts"
+	line "are unknown."
+
+	page "We plan to explore"
+	line "the cavern close"
+	next "to CERULEAN."
+
+	page "From: #MON"
+	line "RESEARCH TEAM"
+
+	page "..."
+	done
 
 _Lab3Text5: ; a10d8 (28:50d8)
 	text "An amber pipe!"
@@ -129038,22 +129222,20 @@ _UnnamedText_75dd0: ; a1156 (28:5156)
 	done
 
 _UnnamedText_75dd5: ; a118d (28:518d)
-	db $0, "Where were you?", $51
-	db "Your fossil is", $4f
-	db "back to life!", $51
-	db "It was @"
+	text "Where were you?"
 
-UnnamedText_a11c3: ; a11c3 (28:51c3)
+	page "Your fossil is"
+	line "back to life!"
+
+	page "It was @"
 	TX_RAM $cf4b
 	db $0
 	line "like I think!"
 	prompt
 
 _UnnamedText_610ae: ; a11d6 (28:51d6)
-	db $0, "Oh! That is", $4f
-	db "@"
-
-UnnamedText_a11e4: ; a11e4 (28:51e4)
+	text "Oh! That is"
+	line "@"
 	TX_RAM $cd6d
 	text "!"
 
@@ -129171,20 +129353,25 @@ _CopycatsHouseF1Text2: ; a1535 (28:5535)
 	done
 
 _CopycatsHouseF1Text3: ; a1596 (28:5596)
-	db $0, "CHANSEY: Chaan!", $4f
-	db "Sii!@@"
+	text "CHANSEY: Chaan!"
+	line "Sii!@@"
 
 _UnnamedText_5ccd4: ; a15ad (28:55ad)
-	db $0, $52, ": Hi! Do", $4f
-	db "you like #MON?", $51
-	db $52, ": Uh no, I", $4f
-	db "just asked you.", $51
-	db $52, ": Huh?", $4f
-	db "You're strange!", $51
-	db "COPYCAT: Hmm?", $4f
-	db "Quit mimicking?", $51
-	db "But, that's my", $4f
-	db "favorite hobby!", $58
+	text $52, ": Hi! Do"
+	line "you like #MON?"
+
+	page $52, ": Uh no, I"
+	line "just asked you."
+
+	page $52, ": Huh?"
+	line "You're strange!"
+
+	page "COPYCAT: Hmm?"
+	line "Quit mimicking?"
+
+	page "But, that's my"
+	line "favorite hobby!"
+	prompt
 
 _TM31PreReceiveText: ; a1636 (28:5636)
 	text "Oh wow!"
@@ -129212,25 +129399,31 @@ _TM31ExplanationText1: ; a1689 (28:5689)
 	line "#MON!@@"
 
 _TM31ExplanationText2: ; a16c5 (28:56c5)
-	db $0, $52, ": Hi!", $4f
-	db "Thanks for TM31!", $51
-	db $52, ": Pardon?", $51
-	db $52, ": Is it", $4f
-	db "that fun to mimic", $55
-	db "my every move?", $51
-	db "COPYCAT: You bet!", $4f
-	db "It's a scream!", $57
+	text $52, ": Hi!"
+	line "Thanks for TM31!"
+
+	page $52, ": Pardon?"
+
+	page $52, ": Is it"
+	line "that fun to mimic"
+	next "my every move?"
+
+	page "COPYCAT: You bet!"
+	line "It's a scream!"
+	done
 
 _TM31NoRoomText: ; a1733 (28:5733)
 	text "Don't you want"
 	line "this?@@"
 
 _CopycatsHouseF2Text2: ; a1749 (28:5749)
-	db $0, "DODUO: Giiih!", $51
-	db "MIRROR MIRROR ON", $4f
-	db "THE WALL, WHO IS", $55
-	db "THE FAIREST ONE", $55
-	db "OF ALL?", $57
+	text "DODUO: Giiih!"
+
+	page "MIRROR MIRROR ON"
+	line "THE WALL, WHO IS"
+	next "THE FAIREST ONE"
+	next "OF ALL?"
+	done
 
 _CopycatsHouseF2Text3: ; a1792 (28:5792)
 	text "This is a rare"
@@ -129245,13 +129438,16 @@ _CopycatsHouseF2Text6: ; a17be (28:57be)
 	done
 
 _UnnamedText_5cd17: ; a17ef (28:57ef)
-	db $0, "...", $51
-	db "My Secrets!", $51
-	db "Skill: Mimicry!", $4f
-	db "Hobby: Collecting", $55
-	db "dolls!", $55
-	db "Favorite #MON:", $55
-	db "CLEFAIRY!", $57
+	text "..."
+
+	page "My Secrets!"
+
+	page "Skill: Mimicry!"
+	line "Hobby: Collecting"
+	next "dolls!"
+	next "Favorite #MON:"
+	next "CLEFAIRY!"
+	done
 
 _UnnamedText_5cd1c: ; a1842 (28:5842)
 	text "Huh? Can't see!"
@@ -129635,7 +129831,7 @@ _SaffronHouse1Text1: ; a2305 (28:6305)
 	done
 
 _SaffronHouse1Text2: ; a2352 (28:6352)
-	db $0, "PIDGEY: Kurukkoo!@@"
+	text "PIDGEY: Kurukkoo!@@"
 
 _SaffronHouse1Text3: ; a2366 (28:6366)
 	text "The COPYCAT is"
@@ -129797,20 +129993,19 @@ _PokemartAnythingElseText: ; a2719 (28:6719)
 
 UnnamedText_a273b: ; a273b (28:673b)
 	TX_RAM $d036
-	db $0, " learned", $4f
-	db "@"
-
-UnnamedText_a2749: ; a2749 (28:6749)
+	text " learned"
+	line "@"
 	TX_RAM $cf4b
 	text "!@@"
 
 _UnnamedText_6fb4: ; a2750 (28:6750)
-	text "Which move should", $4e, "be forgotten?"
+	text "Which move should"
+	db $4e, "be forgotten?"
 	done
 
 _UnnamedText_6fb9: ; a2771 (28:6771)
-	db $0, "Abandon learning", $4f
-	db "@"
+	text "Abandon learning"
+	line "@"
 
 UnnamedText_a2784: ; a2784 (28:6784)
 	TX_RAM $cf4b
@@ -129819,34 +130014,30 @@ UnnamedText_a2784: ; a2784 (28:6784)
 
 _UnnamedText_6fbe: ; a278a (28:678a)
 	TX_RAM $d036
-	db $0, $4f
-	db "did not learn", $55
-	db "@"
-
-UnnamedText_a279e: ; a279e (28:679e)
+	db $0
+	line "did not learn"
+	next "@"
 	TX_RAM $cf4b
 	text "!"
 	prompt
 
 _UnnamedText_6fc3: ; a27a4 (28:67a4)
 	TX_RAM $d036
-	db $0, " is", $4f
-	db "trying to learn", $55
-	db "@"
-
-UnnamedText_a27bd: ; a27bd (28:67bd)
+	text " is"
+	line "trying to learn"
+	next "@"
 	TX_RAM $cf4b
-	db $0, "!", $51
-	db "But, @"
-	TX_RAM $d036
-	db $0, $4f
-	db "can't learn more", $55
-	db "than 4 moves!", $51
-	db "Delete an older", $4f
-	db "move to make room", $55
-	db "for @"
+	text "!"
 
-UnnamedText_a2813: ; a2813 (28:6813)
+	page "But, @"
+	TX_RAM $d036
+	db $0
+	line "can't learn more"
+	next "than 4 moves!"
+
+	page "Delete an older"
+	line "move to make room"
+	next "for @"
 	TX_RAM $cf4b
 	text "?"
 	done
@@ -129858,10 +130049,8 @@ _UnnamedText_6fd7: ; a2827 (28:6827)
 	text " Poof!@@"
 
 _UnnamedText_6fdc: ; a2830 (28:6830)
-	db $0, $51
-	db "@"
-
-UnnamedText_a2833: ; a2833 (28:6833)
+	db $0
+	page "@"
 	TX_RAM $d036
 	text " forgot"
 	line "@"
@@ -130331,11 +130520,13 @@ _PewterCityText10: ; a4cb1 (29:4cb1)
 	done
 
 _PewterCityText11: ; a4ccb (29:4ccb)
-	db $0, "PEWTER CITY", $4f
-	db "#MON GYM", $55
-	db "LEADER: BROCK", $51
-	db "The Rock Solid", $4f
-	db "#MON Trainer!", $57
+	text "PEWTER CITY"
+	line "#MON GYM"
+	next "LEADER: BROCK"
+
+	page "The Rock Solid"
+	line "#MON Trainer!"
+	done
 
 _PewterCityText12: ; a4d0c (29:4d0c)
 	text "PEWTER CITY"
@@ -130344,18 +130535,22 @@ _PewterCityText12: ; a4d0c (29:4d0c)
 	done
 
 _UnnamedText_19668: ; a4d2b (29:4d2b)
-	db $0, $53, ": Yo!", $4f
-	db $52, "!", $51
-	db "You're still", $4f
-	db "struggling along", $55
-	db "back here?", $51
-	db "I'm doing great!", $4f
-	db "I caught a bunch", $55
-	db "of strong and", $55
-	db "smart #MON!", $51
-	db "Here, let me see", $4f
-	db "what you caught,", $55
-	db $52, "!", $57
+	text $53, ": Yo!"
+	line $52, "!"
+
+	page "You're still"
+	line "struggling along"
+	next "back here?"
+
+	page "I'm doing great!"
+	line "I caught a bunch"
+	next "of strong and"
+	next "smart #MON!"
+
+	page "Here, let me see"
+	line "what you caught,"
+	next $52, "!"
+	done
 
 _UnnamedText_1966d: ; a4dbe (29:4dbe)
 	text "Hey!"
@@ -130370,27 +130565,34 @@ _UnnamedText_19672: ; a4de3 (29:4de3)
 	prompt
 
 _UnnamedText_19677: ; a4e07 (29:4e07)
-	db $0, $53, ": Hey,", $4f
-	db "guess what?", $51
-	db "I went to BILL's", $4f
-	db "and got him to", $55
-	db "show me his rare", $55
-	db "#MON!", $51
-	db "That added a lot", $4f
-	db "of pages to my", $55
-	db "#DEX!", $51
-	db "After all, BILL's", $4f
-	db "world famous as a", $55
-	db "#MANIAC!", $51
-	db "He invented the", $4f
-	db "#MON Storage", $55
-	db "System on PC!", $51
-	db "Since you're using", $4f
-	db "his system, go", $55
-	db "thank him!", $51
-	db "Well, I better", $4f
-	db "get rolling!", $55
-	db "Smell ya later!", $57
+	text $53, ": Hey,"
+	line "guess what?"
+
+	page "I went to BILL's"
+	line "and got him to"
+	next "show me his rare"
+	next "#MON!"
+
+	page "That added a lot"
+	line "of pages to my"
+	next "#DEX!"
+
+	page "After all, BILL's"
+	line "world famous as a"
+	next "#MANIAC!"
+
+	page "He invented the"
+	line "#MON Storage"
+	next "System on PC!"
+
+	page "Since you're using"
+	line "his system, go"
+	next "thank him!"
+
+	page "Well, I better"
+	line "get rolling!"
+	next "Smell ya later!"
+	done
 
 _UnnamedText_196d9: ; a4f27 (29:4f27)
 	text "Hey! Stay out!"
@@ -130557,11 +130759,13 @@ _CeruleanCityText16: ; a541a (29:541a)
 	done
 
 _CeruleanCityText17: ; a5445 (29:5445)
-	db $0, "CERULEAN CITY", $4f
-	db "#MON GYM", $55
-	db "LEADER: MISTY", $51
-	db "The Tomboyish", $4f
-	db "Mermaid!", $57
+	text "CERULEAN CITY"
+	line "#MON GYM"
+	next "LEADER: MISTY"
+
+	page "The Tomboyish"
+	line "Mermaid!"
+	done
 
 _UnnamedText_4413c: ; a5482 (29:5482)
 	text "Do you believe in"
@@ -130697,8 +130901,8 @@ _VermilionCityText4: ; a5805 (29:5805)
 	done
 
 _VermilionCityText5: ; a5852 (29:5852)
-	db $0, "MACHOP: Guoh!", $4f
-	db "Gogogoh!@@"
+	text "MACHOP: Guoh!"
+	line "Gogogoh!@@"
 
 _VermilionCityText14: ; a586b (29:586b)
 	text $51
@@ -130743,11 +130947,13 @@ _VermilionCityText11: ; a5980 (29:5980)
 	done
 
 _VermilionCityText12: ; a59a6 (29:59a6)
-	db $0, "VERMILION CITY", $4f
-	db "#MON GYM", $55
-	db "LEADER: LT.SURGE", $51
-	db "The Lightning ", $4f
-	db "American!", $57
+	text "VERMILION CITY"
+	line "#MON GYM"
+	next "LEADER: LT.SURGE"
+
+	page "The Lightning "
+	line "American!"
+	done
 
 _VermilionCityText13: ; a59e9 (29:59e9)
 	text "VERMILION HARBOR"
@@ -130826,8 +131032,8 @@ _CeladonCityText6: ; a5bd9 (29:5bd9)
 	done
 
 _CeladonCityText7: ; a5c30 (29:5c30)
-	db $0, "POLIWRATH: Ribi", $4f
-	db "ribit!@@"
+	text "POLIWRATH: Ribi"
+	line "ribit!@@"
 
 _CeladonCityText8: ; a5c49 (29:5c49)
 	text "What are you"
@@ -130862,11 +131068,13 @@ _CeladonCityText11: ; a5d18 (29:5d18)
 	done
 
 _CeladonCityText13: ; a5d41 (29:5d41)
-	db $0, "CELADON CITY", $4f
-	db "#MON GYM", $55
-	db "LEADER: ERIKA", $51
-	db "The Nature Loving", $4f
-	db "Princess!", $57
+	text "CELADON CITY"
+	line "#MON GYM"
+	next "LEADER: ERIKA"
+
+	page "The Nature Loving"
+	line "Princess!"
+	done
 
 _CeladonCityText14: ; a5d82 (29:5d82)
 	text "CELADON MANSION"
@@ -130922,9 +131130,10 @@ _FuchsiaCityText2: ; a5ede (29:5ede)
 	done
 
 _FuchsiaCityText3: ; a5f3e (29:5f3e)
-	db $0, "ERIK: Where's", $4f
-	db "SARA? I said I'd", $55
-	db "meet her here.", $57
+	text "ERIK: Where's"
+	line "SARA? I said I'd"
+	next "meet her here."
+	done
 
 _FuchsiaCityText4: ; a5f6b (29:5f6b)
 	text "That item ball in"
@@ -130958,50 +131167,66 @@ _FuchsiaCityText17: ; a5ff6 (29:5ff6)
 	done
 
 _FuchsiaCityText18: ; a6011 (29:6011)
-	db $0, "FUCHSIA CITY", $4f
-	db "#MON GYM", $55
-	db "LEADER: KOGA", $51
-	db "The Poisonous", $4f
-	db "Ninja Master", $57
+	text "FUCHSIA CITY"
+	line "#MON GYM"
+	next "LEADER: KOGA"
+
+	page "The Poisonous"
+	line "Ninja Master"
+	done
 
 _FuchsiaCityChanseyText: ; a6050 (29:6050)
-	db $0, "Name: CHANSEY", $51
-	db "Catching one is", $4f
-	db "all up to chance.", $58
+	text "Name: CHANSEY"
+
+	page "Catching one is"
+	line "all up to chance."
+	prompt
 
 _FuchsiaCityVoltorbText: ; a6081 (29:6081)
-	db $0, "Name: VOLTORB", $51
-	db "The very image of", $4f
-	db "a # BALL.", $58
+	text "Name: VOLTORB"
+
+	page "The very image of"
+	line "a # BALL."
+	prompt
 
 _FuchsiaCityKangaskhanText: ; a60ac (29:60ac)
-	db $0, "Name: KANGASKHAN", $51
-	db "A maternal #MON", $4f
-	db "that raises its", $55
-	db "young in a pouch", $55
-	db "on its belly.", $58
+	text "Name: KANGASKHAN"
+
+	page "A maternal #MON"
+	line "that raises its"
+	next "young in a pouch"
+	next "on its belly."
+	prompt
 
 _FuchsiaCitySlowpokeText: ; a60fd (29:60fd)
-	db $0, "Name: SLOWPOKE", $51
-	db "Friendly and very", $4f
-	db "slow moving.", $58
+	text "Name: SLOWPOKE"
+
+	page "Friendly and very"
+	line "slow moving."
+	prompt
 
 _FuchsiaCityLaprasText: ; a612c (29:612c)
-	db $0, "Name: LAPRAS", $51
-	db "A.K.A. the king", $4f
-	db "of the seas.", $58
+	text "Name: LAPRAS"
+
+	page "A.K.A. the king"
+	line "of the seas."
+	prompt
 
 _FuchsiaCityOmanyteText: ; a6157 (29:6157)
-	db $0, "Name: OMANYTE", $51
-	db "A #MON that", $4f
-	db "was resurrected", $55
-	db "from a fossil.", $58
+	text "Name: OMANYTE"
+
+	page "A #MON that"
+	line "was resurrected"
+	next "from a fossil."
+	prompt
 
 _FuchsiaCityKabutoText: ; a6191 (29:6191)
-	db $0, "Name: KABUTO", $51
-	db "A #MON that", $4f
-	db "was resurrected", $55
-	db "from a fossil.", $58
+	text "Name: KABUTO"
+
+	page "A #MON that"
+	line "was resurrected"
+	next "from a fossil."
+	prompt
 
 _UnnamedText_19b2a: ; a61ca (29:61ca)
 	text "..."
@@ -131037,11 +131262,13 @@ _CinnabarIslandText6: ; a6298 (29:6298)
 	done
 
 _CinnabarIslandText7: ; a62a2 (29:62a2)
-	db $0, "CINNABAR ISLAND", $4f
-	db "#MON GYM", $55
-	db "LEADER: BLAINE", $51
-	db "The Hot-Headed", $4f
-	db "Quiz Master!", $57
+	text "CINNABAR ISLAND"
+	line "#MON GYM"
+	next "LEADER: BLAINE"
+
+	page "The Hot-Headed"
+	line "Quiz Master!"
+	done
 
 _SaffronCityText1: ; a62e7 (29:62e7)
 	text "What do you want?"
@@ -131110,7 +131337,7 @@ _SaffronCityText11: ; a6475 (29:6475)
 	done
 
 _SaffronCityText12: ; a64d6 (29:64d6)
-	db $0, "PIDGEOT: Bi bibii!@@"
+	text "PIDGEOT: Bi bibii!@@"
 
 _SaffronCityText13: ; a64eb (29:64eb)
 	text "I saw ROCKET"
@@ -131145,11 +131372,13 @@ _SaffronCityText17: ; a65a6 (29:65a6)
 	done
 
 _SaffronCityText18: ; a65b5 (29:65b5)
-	db $0, "SAFFRON CITY", $4f
-	db "#MON GYM", $55
-	db "LEADER: SABRINA", $51
-	db "The Master of", $4f
-	db "Psychic #MON!", $57
+	text "SAFFRON CITY"
+	line "#MON GYM"
+	next "LEADER: SABRINA"
+
+	page "The Master of"
+	line "Psychic #MON!"
+	done
 
 _SaffronCityText20: ; a65f8 (29:65f8)
 	text "TRAINER TIPS"
@@ -131194,52 +131423,60 @@ _SaffronCityText25: ; a66f5 (29:66f5)
 	done
 
 _ItemUseBallText00: ; a6729 (29:6729)
-	db 0,"It dodged the",$4F
-	db "thrown BALL!",$51
-	db "This #MON",$4F
-	db "can't be caught!",$58
+	text "It dodged the"
+	line "thrown BALL!"
+
+	page "This #MON"
+	line "can't be caught!"
+	prompt
 
 _ItemUseBallText01: ; a675f (29:675f)
-	db 0,"You missed the",$4F
-	db "#MON!",$58
+	text "You missed the"
+	line "#MON!"
+	prompt
 
 _ItemUseBallText02: ; a6775 (29:6775)
-	db 0,"Darn! The #MON",$4F
-	db "broke free!",$58
+	text "Darn! The #MON"
+	line "broke free!"
+	prompt
 
 _ItemUseBallText03: ; a6791 (29:6791)
-	db 0,"Aww! It appeared",$4F
-	db "to be caught! ",$58
+	text "Aww! It appeared"
+	line "to be caught! "
+	prompt
 
 _ItemUseBallText04: ; a67b2 (29:67b2)
-	db 0,"Shoot! It was so",$4F
-	db "close too!",$58
+	text "Shoot! It was so"
+	line "close too!"
+	prompt
 
 _ItemUseBallText05: ; a67cf (29:67cf)
-	db 0,"All right!",$4F,"@",1
+	text "All right!",$4F,"@",1
 	dw W_ENEMYMONNAME
-	db 0," was",$55
-	db "caught!@@"
+	text " was"
+	next "caught!@@"
 
 _ItemUseBallText07: ; a67ee (29:67ee)
 	db 1
 	dw $DE06
-	db 0," was",$4F
-	db "transferred to",$55
-	db "BILL's PC!",$58
+	text " was"
+	line "transferred to"
+	next "BILL's PC!"
+	prompt
 
 _ItemUseBallText08: ; a6810 (29:6810)
 	db 1
 	dw $DE06
-	db 0," was",$4F
-	db "transferred to",$55
-	db "someone's PC!",$58
+	text " was"
+	line "transferred to"
+	next "someone's PC!"
+	prompt
 
 _ItemUseBallText06: ; a6835 (29:6835)
-	db 0,"New #DEX data",$4F
-	db "will be added for",$55,"@"
+	text "New #DEX data"
+	line "will be added for",$55,"@"
 	TX_RAM W_ENEMYMONNAME
-	db 0,"!@@"
+	text "!@@"
 
 _SurfingGotOnText: ; a685e (29:685e)
 	text $52, " got on"
@@ -131372,9 +131609,10 @@ _MonCannotLearnMachineMoveText: ; a6a6e (29:6a6e)
 	prompt
 
 _ItemUseNotTimeText: ; a6aa6 (29:6aa6)
-	db $0, "OAK: ", $52, "!", $4f
-	db "This isn't the", $55
-	db "time to use that! ", $58
+	text "OAK: ", $52, "!"
+	line "This isn't the"
+	next "time to use that! "
+	prompt
 
 _ItemUseNotYoursToUseText: ; a6ad0 (29:6ad0)
 	text "This isn't yours"
@@ -131415,7 +131653,7 @@ _BoxFullCannotThrowBallText: ; a6b69 (29:6b69)
 SECTION "bank2A",ROMX,BANK[$2A]
 
 _ItemUseText001: ; a8000 (2a:4000)
-	db 0,$52," used@@"
+	text $52," used@@"
 
 _ItemUseText002: ; a8009 (2a:4009)
 	TX_RAM $cf4b
@@ -131440,8 +131678,8 @@ _GotOffBicycleText2: ; a8030 (2a:4030)
 	prompt
 
 _ThrewAwayItemText: ; a803c (2a:403c)
-	db $0, "Threw away", $4f
-	db "@"
+	text "Threw away"
+	line "@"
 
 UnnamedText_a8049: ; a8049 (2a:4049)
 	TX_RAM $cd6d
@@ -131500,8 +131738,8 @@ _UnnamedText_71d99: ; a810b (2a:410b)
 	done
 
 _UnnamedText_71d9e: ; a811d (2a:411d)
-	db $0, "What? That's not", $4f
-	db "@"
+	text "What? That's not"
+	line "@"
 
 UnnamedText_a812f: ; a812f (2a:412f)
 	TX_RAM $cd13
