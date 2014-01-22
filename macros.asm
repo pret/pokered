@@ -1,4 +1,12 @@
 
+text   EQUS "db $00," ; Start writing text.
+line   EQUS "db $4f," ; Start writing at the bottom line.
+page   EQUS "db $51," ; Start a new page.
+next   EQUS "db $55," ; Scroll to the next line.
+done   EQUS "db $57"  ; End a text box.
+prompt EQUS "db $58"  ; Prompt the player to end a text box (initiating some other event).
+
+
 ;\1 = X
 ;\2 = Y
 FuncCoord: MACRO
