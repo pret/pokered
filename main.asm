@@ -119747,11 +119747,12 @@ _LinkBattleLostText: ; 89772 (22:5772)
 _TrainerAboutToUseText: ; 89784 (22:5784)
 	TX_RAM W_TRAINERNAME
 	text " is"
-	line "about to use",$55,"@",1
-	dw W_ENEMYMONNAME
+	line "about to use"
+	cont"@"
+	TX_RAM W_ENEMYMONNAME
 	text "!"
 
-	para "Will ",$52
+	para "Will ", $52
 	line "change #MON?"
 	done
 
@@ -120025,7 +120026,8 @@ _BuildingRageText: ; 89b80 (22:5b80)
 	prompt
 
 _MirrorMoveFailedText: ; 89b96 (22:5b96)
-	text "The MIRROR MOVE", $4e, "failed!"
+	text "The MIRROR MOVE"
+	next "failed!"
 	prompt
 
 _UnnamedText_3e887: ; 89baf (22:5baf)
@@ -120069,8 +120071,8 @@ _UnnamedText_58e40: ; 89c33 (22:5c33)
 	text "The hooked"
 	line "@"
 	TX_RAM W_ENEMYMONNAME
-	text $55
-	db "attacked!"
+	db $0
+	cont "attacked!"
 	prompt
 
 _UnnamedText_58e45: ; 89c4f (22:5c4f)
@@ -120678,8 +120680,8 @@ _UnnamedText_8aaa9: ; 8aaa9 (22:6aa9)
 	cont "Gee, thanks!@@"
 
 _UnnamedText_1dff1: ; 8aaef (22:6aef)
-	text $51
-	db "..."
+	db $0
+	para "..."
 	line "Glug glug..."
 	cont "..."
 	cont "Gulp..."
@@ -121126,8 +121128,8 @@ _UnnamedText_564c5: ; 8ca00 (23:4a00)
 	text "!@@"
 
 _UnnamedText_564ca: ; 8ca4f (23:4a4f)
-	text $51
-	db "Fishing is a way"
+	db $0
+	para "Fishing is a way"
 	line "of life!"
 
 	para "From the seas to"
@@ -124747,10 +124749,10 @@ _OaksLabText41: ; 94dbd (25:4dbd)
 	done
 
 _OaksLabText39: ; 94ddf (25:4ddf)
-	db $0
-	db "Those are #", $4f
-	db "BALLs. They", $55
-	db "contain #MON!", $57
+	text "Those are #"
+	line "BALLs. They"
+	cont "contain #MON!"
+	done
 
 _OaksLabCharmanderText: ; 94e06 (25:4e06)
 	text "So! You want the"
@@ -124826,8 +124828,8 @@ _OaksLabDeliverParcelText1: ; 94f69 (25:4f69)
 	line "OAK's PARCEL.@@"
 
 _OaksLabDeliverParcelText2: ; 9500f (25:500f)
-	text $51
-	db "Ah! This is the"
+	db $0
+	para "Ah! This is the"
 	line "custom # BALL"
 	cont "I ordered!"
 	cont "Thank you!"
@@ -124854,8 +124856,8 @@ _OaksLabGivePokeballsText1: ; 9506d (25:506d)
 	line "# BALLs!@@"
 
 _OaksLabGivePokeballsText2: ; 950f2 (25:50f2)
-	text $51
-	db "When a wild"
+	db $0
+	para "When a wild"
 	line "#MON appears,"
 	cont "it's fair game."
 
@@ -125086,11 +125088,10 @@ _UnnamedText_1d405: ; 957eb (25:57eb)
 	done
 
 _UnnamedText_441cc: ; 9580c (25:580c)
-	text "#DEX comp-", $4f
-	db "letion is:", $51
-	db "@"
+	text "#DEX comp-"
+	line "letion is:"
 
-UnnamedText_95824: ; 95824 (25:5824)
+	para "@"
 	TX_NUM $ffdb, 1, 3
 	text " #MON seen"
 	line "@"
@@ -125357,8 +125358,8 @@ _ReceivedTM27Text: ; 96082 (25:6082)
 	line "TM27!@@"
 
 _TM27ExplanationText: ; 96095 (25:6095)
-	text $51
-	db "TM27 is FISSURE!"
+	db $0
+	para "TM27 is FISSURE!"
 	line "It will take out"
 	cont "#MON with just"
 	cont "one hit!"
@@ -125727,8 +125728,8 @@ _ReceivedTM34Text: ; 980ad (26:40ad)
 	line "TM34!@@"
 
 _TM34ExplanationText: ; 980c0 (26:40c0)
-	text $51
-	db "A TM contains a"
+	db $0
+	para "A TM contains a"
 	line "technique that"
 	cont "can be taught to"
 	cont "#MON!"
@@ -125766,8 +125767,8 @@ _UnnamedText_5c4bc: ; 981c9 (26:41c9)
 	line "the BOULDERBADGE!@@"
 
 _UnnamedText_5c4c1: ; 98232 (26:4232)
-	text $51
-	db "That's an official"
+	db $0
+	para "That's an official"
 	line "#MON LEAGUE"
 	cont "BADGE!"
 
@@ -126781,8 +126782,8 @@ _ReceivedFluteText: ; 99ffb (26:5ffb)
 	text "!@@"
 
 _FluteExplanationText: ; 9a011 (26:6011)
-	text $51
-	db "Upon hearing #"
+	db $0
+	para "Upon hearing #"
 	line "FLUTE, sleeping"
 	cont "#MON will"
 	cont "spring awake."
@@ -127042,8 +127043,8 @@ _ReceivedBikeVoucherText: ; 9a82e (26:682e)
 	text "!@@"
 
 _UnnamedText_59c74: ; 9a844 (26:6844)
-	text $51
-	db "Exchange that for"
+	db $0
+	para "Exchange that for"
 	line "a BICYCLE!"
 
 	para "Don't worry, my"
@@ -127175,8 +127176,8 @@ _ReceivedTM24Text: ; 9c0e0 (27:40e0)
 	text "!@@"
 
 _TM24ExplanationText: ; 9c0f5 (27:40f5)
-	text $51
-	db "TM24 contains"
+	db $0
+	para "TM24 contains"
 	line "THUNDERBOLT!"
 
 	para "Teach it to an"
@@ -127336,8 +127337,8 @@ _UnnamedText_560b6: ; 9c554 (27:4554)
 	text "!@@"
 
 _UnnamedText_560bb: ; 9c5a4 (27:45a4)
-	text $51
-	db "Fishing is a way"
+	db $0
+	para "Fishing is a way"
 	line "of life!"
 
 	para "From the seas to"
@@ -127569,8 +127570,8 @@ _UnnamedText_484f9: ; 9cc06 (27:4c06)
 	text "!@@"
 
 _UnnamedText_484fe: ; 9cc1a (27:4c1a)
-	text $51
-	db "@"
+	db $0
+	para "@"
 	TX_RAM $cf4b
 	text " contains"
 	line "ICE BEAM!"
@@ -127595,8 +127596,8 @@ _UnnamedText_4850a: ; 9cc91 (27:4c91)
 	text "!@@"
 
 _UnnamedText_4850f: ; 9cca5 (27:4ca5)
-	text $51
-	db "@"
+	db $0
+	para "@"
 	TX_RAM $cf4b
 	text " contains"
 	line "ROCK SLIDE!"
@@ -127619,8 +127620,8 @@ _ReceivedTM49Text: ; 9cd1d (27:4d1d)
 	line "TM49!@@"
 
 _UnnamedText_48520: ; 9cd30 (27:4d30)
-	text $51
-	db "TM49 contains"
+	db $0
+	para "TM49 contains"
 	line "TRI ATTACK!@@"
 
 _UnnamedText_48526: ; 9cd4d (27:4d4d)
@@ -127880,8 +127881,8 @@ _ReceivedTM21Text: ; 9d50c (27:550c)
 	text "!@@"
 
 _TM21ExplanationText: ; 9d520 (27:5520)
-	text $51
-	db "TM21 contains"
+	db $0
+	para "TM21 contains"
 	line "MEGA DRAIN."
 
 	para "Half the damage"
@@ -128452,8 +128453,8 @@ _WardenTeethText1: ; 9e4d2 (27:64d2)
 	cont "WARDEN!@@"
 
 _WardenTeethText2: ; 9e4f9 (27:64f9)
-	text $51
-	db "The WARDEN popped"
+	db $0
+	para "The WARDEN popped"
 	line "in his teeth!"
 	prompt
 
@@ -128667,8 +128668,8 @@ _ReceivedTM06Text: ; a00eb (28:40eb)
 	text "!@@"
 
 _TM06ExplanationText: ; a00ff (28:40ff)
-	text $51
-	db "TM06 contains"
+	db $0
+	para "TM06 contains"
 	line "TOXIC!"
 
 	para "It is a secret"
@@ -128979,8 +128980,8 @@ _ReceivedTM38Text: ; a09a8 (28:49a8)
 	text "!@@"
 
 _TM38ExplanationText: ; a09bc (28:49bc)
-	text $51
-	db "TM38 contains"
+	db $0
+	para "TM38 contains"
 	line "FIRE BLAST!"
 
 	para "Teach it to fire-"
@@ -129438,8 +129439,8 @@ _ReceivedTM31Text: ; a1675 (28:5675)
 	text "!@@"
 
 _TM31ExplanationText1: ; a1689 (28:5689)
-	text $51
-	db "TM31 contains my"
+	db $0
+	para "TM31 contains my"
 	line "favorite, MIMIC!"
 
 	para "Use it on a good"
@@ -129692,8 +129693,8 @@ ReceivedTM46Text: ; a1dcd (28:5dcd)
 	line "TM46!@@"
 
 _TM46ExplanationText: ; a1de0 (28:5de0)
-	text $51
-	db "TM46 is PSYWAVE!"
+	db $0
+	para "TM46 is PSYWAVE!"
 	line "It uses powerful"
 	cont "psychic waves to"
 	cont "inflict damage!"
@@ -129957,7 +129958,8 @@ _TM29NoRoomText: ; a257c (28:657c)
 	done
 
 _PokemartGreetingText: ; a259c (28:659c)
-	text "Hi there!", $4e, "May I help you?"
+	text "Hi there!"
+	next "May I help you?"
 	done
 
 _PokemonFaintedText: ; a25b7 (28:65b7)
@@ -130047,7 +130049,7 @@ UnnamedText_a273b: ; a273b (28:673b)
 
 _UnnamedText_6fb4: ; a2750 (28:6750)
 	text "Which move should"
-	db $4e, "be forgotten?"
+	next "be forgotten?"
 	done
 
 _UnnamedText_6fb9: ; a2771 (28:6771)
@@ -130656,8 +130658,8 @@ _ReceivedTM28Text: ; a4f82 (29:4f82)
 	line "TM28!@@"
 
 _ReceivedTM28Text2: ; a4f96 (29:4f96)
-	text $51
-	db "I better get"
+	db $0
+	para "I better get"
 	line "moving! Bye!@@"
 
 _TM28NoRoomText: ; a4fb3 (29:4fb3)
@@ -130952,8 +130954,8 @@ _VermilionCityText5: ; a5852 (29:5852)
 	line "Gogogoh!@@"
 
 _VermilionCityText14: ; a586b (29:586b)
-	text $51
-	db "A MACHOP is"
+	db $0
+	para "A MACHOP is"
 	line "stomping the land"
 	cont "flat."
 	done
@@ -131498,22 +131500,21 @@ _ItemUseBallText04: ; a67b2 (29:67b2)
 	prompt
 
 _ItemUseBallText05: ; a67cf (29:67cf)
-	text "All right!",$4F,"@",1
-	dw W_ENEMYMONNAME
+	text "All right!"
+	line "@"
+	TX_RAM W_ENEMYMONNAME
 	text " was"
 	cont "caught!@@"
 
 _ItemUseBallText07: ; a67ee (29:67ee)
-	db 1
-	dw W_BOXMON1NAME
+	TX_RAM W_BOXMON1NAME
 	text " was"
 	line "transferred to"
 	cont "BILL's PC!"
 	prompt
 
 _ItemUseBallText08: ; a6810 (29:6810)
-	db 1
-	dw W_BOXMON1NAME
+	TX_RAM W_BOXMON1NAME
 	text " was"
 	line "transferred to"
 	cont "someone's PC!"
@@ -131521,7 +131522,8 @@ _ItemUseBallText08: ; a6810 (29:6810)
 
 _ItemUseBallText06: ; a6835 (29:6835)
 	text "New #DEX data"
-	line "will be added for",$55,"@"
+	line "will be added for"
+	cont "@"
 	TX_RAM W_ENEMYMONNAME
 	text "!@@"
 
@@ -131681,7 +131683,8 @@ _ThrowBallAtTrainerMonText2: ; a6b22 (29:6b22)
 	prompt
 
 _NoCyclingAllowedHereText: ; a6b34 (29:6b34)
-	text "No cycling", $4e, "allowed here."
+	text "No cycling"
+	next "allowed here."
 	prompt
 
 _NoSurfingHereText: ; a6b4e (29:6b4e)
