@@ -6,8 +6,13 @@ PYTHON := python
 
 TEXTQUEUE :=
 
-RED_OBJS  := pokered.o
-BLUE_OBJS := pokeblue.o
+RED_OBJS  := \
+pokered.o \
+audio_red.o
+
+BLUE_OBJS := \
+pokeblue.o \
+audio_blue.o
 
 OBJS := $(RED_OBJS) $(BLUE_OBJS)
 
