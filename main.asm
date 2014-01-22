@@ -11184,9 +11184,10 @@ Func_4541: ; 4541 (1:4541)
 	jp PlaceString
 
 CopyrightTextString: ; 4556 (1:4556)
-	db $60,$61,$62,$61,$63,$61,$64,$7F,$65,$66,$67,$68,$69,$6A,$4E             ; ©'95.'96.'98 Nintendo
-	db $60,$61,$62,$61,$63,$61,$64,$7F,$6B,$6C,$6D,$6E,$6F,$70,$71,$72,$4E     ; ©'95.'96.'98 Creatures inc.
-	db $60,$61,$62,$61,$63,$61,$64,$7F,$73,$74,$75,$76,$77,$78,$79,$7A,$7B,"@" ; ©'95.'96.'98 GAME FREAK inc.
+	db   $60,$61,$62,$61,$63,$61,$64,$7F,$65,$66,$67,$68,$69,$6A             ; ©'95.'96.'98 Nintendo
+	next $60,$61,$62,$61,$63,$61,$64,$7F,$6B,$6C,$6D,$6E,$6F,$70,$71,$72     ; ©'95.'96.'98 Creatures inc.
+	next $60,$61,$62,$61,$63,$61,$64,$7F,$73,$74,$75,$76,$77,$78,$79,$7A,$7B ; ©'95.'96.'98 GAME FREAK inc.
+	db   "@"
 
 TitleMons: ; 4588 (1:4588)
 ; mons on the title screen are randomly chosen from here
@@ -13810,7 +13811,8 @@ TradeCompleted:
 	db "Trade completed!@"
 
 TradeCanceled:
-	db "Too bad! The trade",$4E,"was canceled!@"
+	db   "Too bad! The trade"
+	next "was canceled!@"
 
 PointerTable_5a5b: ; 5a5b (1:5a5b)
 	dw Func_5530
@@ -14236,13 +14238,16 @@ Func_5d5f: ; 5d5f (1:5d5f)
 	jp EnterMap
 
 ContinueText: ; 5d7e (1:5d7e)
-	db "CONTINUE",$4e
+	db "CONTINUE", $4e
 
 NewGameText: ; 5d87 (1:5d87)
-	db "NEW GAME",$4e,"OPTION@"
+	db "NEW GAME", $4e
+	db "OPTION@"
 
 TradeCenterText: ; 5d97 (1:5d97)
-	db "TRADE CENTER",$4e,"COLOSSEUM",$4e,"CANCEL@"
+	db "TRADE CENTER", $4e
+	db "COLOSSEUM",    $4e
+	db "CANCEL@"
 
 Func_5db5: ; 5db5 (1:5db5)
 	xor a
@@ -14331,10 +14336,10 @@ Func_5e55: ; 5e55 (1:5e55)
 	jp PrintNumber
 
 SaveScreenInfoText: ; 5e6a (1:5e6a)
-	db "PLAYER",$4e
-	db "BADGES    ",$4e
-	db "#DEX    ",$4e
-	db "TIME@"
+	db   "PLAYER"
+	next "BADGES    "
+	next "#DEX    "
+	next "TIME@"
 
 DisplayOptionMenu: ; 5e8a (1:5e8a)
 	FuncCoord 0,0
@@ -14496,16 +14501,16 @@ DisplayOptionMenu: ; 5e8a (1:5e8a)
 	jp .eraseOldMenuCursor
 
 TextSpeedOptionText: ; 5fc0 (1:5fc0)
-	db "TEXT SPEED",$4E
-	db " FAST  MEDIUM SLOW@"
+	db   "TEXT SPEED"
+	next " FAST  MEDIUM SLOW@"
 
 BattleAnimationOptionText: ; 5fde (1:5fde)
-	db "BATTLE ANIMATION",$4E
-	db " ON       OFF@"
+	db   "BATTLE ANIMATION"
+	next " ON       OFF@"
 
 BattleStyleOptionText: ; 5ffd (1:5ffd)
-	db "BATTLE STYLE",$4E
-	db " SHIFT    SET@"
+	db   "BATTLE STYLE"
+	next " SHIFT    SET@"
 
 OptionMenuCancelText: ; 6018 (1:6018)
 	db "CANCEL@"
@@ -15911,15 +15916,34 @@ Func_6a6c: ; 6a6c (1:6a6c)
 
 IF _RED
 DefaultNamesPlayer: ; 6aa8 (1:6aa8)
-	db "NEW NAME",$4E,"RED",$4E,"ASH",$4E,"JACK@"
+	db   "NEW NAME"
+	next "RED"
+	next "ASH"
+	next "JACK"
+	db   "@"
+
 DefaultNamesRival: ; 6abe (1:6abe)
-	db "NEW NAME",$4E,"BLUE",$4E,"GARY",$4E,"JOHN@"
+	db   "NEW NAME"
+	next "BLUE"
+	next "GARY"
+	next "JOHN"
+	db   "@"
 ENDC
+
 IF _BLUE
 DefaultNamesPlayer: ; 6aa8 (1:6aa8)
-	db "NEW NAME",$4E,"BLUE",$4E,"GARY",$4E,"JOHN@"
+	db   "NEW NAME"
+	next "BLUE"
+	next "GARY"
+	next "JOHN"
+	db   "@"
+
 DefaultNamesRival: ; 6abe (1:6abe)
-	db "NEW NAME",$4E,"RED",$4E,"ASH",$4E,"JACK@"
+	db   "NEW NAME"
+	next "RED"
+	next "ASH"
+	next "JACK"
+	db   "@"
 ENDC
 
 Func_6ad6: ; 6ad6 (1:6ad6)
@@ -17275,21 +17299,21 @@ TextBoxTextAndCoordTable: ; 73b0 (1:73b0)
 ; note that there is no terminator
 
 BuySellQuitText: ; 7413 (1:7413)
-	db "BUY",$4E
-	db "SELL",$4E
-	db "QUIT@@"
+	db   "BUY"
+	next "SELL"
+	next "QUIT@@"
 
 UseTossText: ; 7422 (1:7422)
-	db "USE",$4E
-	db "TOSS@"
+	db   "USE"
+	next "TOSS@"
 
 JapaneseSaveMessageText: ; 742b (1:742b)
-	db "きろく",$4E
-	db "メッセージ@"
+	db   "きろく"
+	next "メッセージ@"
 
 JapaneseSpeedOptionsText: ; 7435 (1:7435)
-	db "はやい",$4E
-	db "おそい@"
+	db   "はやい"
+	next "おそい@"
 
 MoneyText: ; 743d (1:743d)
 	db "MONEY@"
@@ -17298,30 +17322,30 @@ JapaneseMochimonoText: ; 7443 (1:7443)
 	db "もちもの@"
 
 JapaneseMainMenuText: ; 7448 (1:7448)
-	db "つづきから",$4E
-	db "さいしょから@"
+	db   "つづきから"
+	next "さいしょから@"
 
 BattleMenuText: ; 7455 (1:7455)
-	db "FIGHT ",$E1,$E2,$4E
-	db "ITEM  RUN@"
+	db   "FIGHT ",$E1,$E2
+	next "ITEM  RUN@"
 
 SafariZoneBattleMenuText: ; 7468 (1:7468)
-	db "BALL×       BAIT",$4E
-	db "THROW ROCK  RUN@"
+	db   "BALL×       BAIT"
+	next "THROW ROCK  RUN@"
 
 SwitchStatsCancelText: ; 7489 (1:7489)
-	db "SWITCH",$4E
-	db "STATS",$4E
-	db "CANCEL@"
+	db   "SWITCH"
+	next "STATS"
+	next "CANCEL@"
 
 JapaneseAhText: ; 749d (1:749d)
 	db "アッ!@"
 
 JapanesePokedexMenu: ; 74a1 (1:74a1)
-	db "データをみる",$4E
-	db "なきごえ",$4E
-	db "ぶんぷをみる",$4E
-	db "キャンセル@"
+	db   "データをみる"
+	next "なきごえ"
+	next "ぶんぷをみる"
+	next "キャンセル@"
 
 Func_74ba: ; 74ba (1:74ba)
 	ld hl, $d730
@@ -17714,9 +17738,9 @@ FieldMoveNames: ; 778d (1:778d)
 	db "SOFTBOILED@"
 
 PokemonMenuEntries: ; 77c2 (1:77c2)
-	db "STATS",$4E
-	db "SWITCH",$4E
-	db "CANCEL@"
+	db   "STATS"
+	next "SWITCH"
+	next "CANCEL@"
 
 GetMonFieldMoves: ; 77d6 (1:77d6)
 	ld a, [wWhichPokemon] ; $cf92
@@ -18139,10 +18163,10 @@ Func_7aa5: ; 7aa5 (1:7aa5)
 	jp Func_7aa5
 
 PlayersPCMenuEntries: ; 7af5 (1:7af5)
-	db "WITHDRAW ITEM",$4E
-	db "DEPOSIT ITEM",$4E
-	db "TOSS ITEM",$4E
-	db "LOG OFF@"
+	db   "WITHDRAW ITEM"
+	next "DEPOSIT ITEM"
+	next "TOSS ITEM"
+	next "LOG OFF@"
 
 UnnamedText_7b22: ; 7b22 (1:7b22)
 	TX_FAR _UnnamedText_7b22
@@ -30101,10 +30125,10 @@ PrintStat
 	ret
 
 StatsText: ; 12b3a (4:6b3a)
-	db "ATTACK", $4e
-	db "DEFENSE", $4e
-	db "SPEED", $4e
-	db "SPECIAL@"
+	db   "ATTACK"
+	next "DEFENSE"
+	next "SPEED"
+	next "SPECIAL@"
 
 StatusScreen2: ; 12b57 (4:6b57)
 	ld a, [$ff00+$d7]
@@ -31321,9 +31345,9 @@ TrainerInfo_FarCopyData: ; 1357f (4:757f)
 	jp FarCopyData2
 
 TrainerInfo_NameMoneyTimeText: ; 13584 (4:7584)
-	db "NAME/",$4E
-	db "MONEY/",$4E
-	db "TIME/@"
+	db   "NAME/"
+	next "MONEY/"
+	next "TIME/@"
 
 ; $76 is a circle tile
 TrainerInfo_BadgesText: ; 13597 (4:7597)
@@ -39634,8 +39658,8 @@ BikeShopText1: ; 1d745 (7:5745)
 	jp TextScriptEnd
 
 BikeShopMenuText: ; 1d7f8 (7:57f8)
-	db "BICYCLE", $4e
-	db "CANCEL@"
+	db   "BICYCLE"
+	next "CANCEL@"
 
 BikeShopMenuPrice: ; 1d807 (7:5807)
 	db "¥1000000@"
@@ -42321,7 +42345,11 @@ BillsHousePokemonListText1: ; 1ec7f (7:6c7f)
 	db "@"
 
 BillsMonListText: ; 1ec84 (7:6c84)
-	db "EEVEE",$4e,"FLAREON",$4e,"JOLTEON",$4e,"VAPOREON",$4e,"CANCEL@"
+	db   "EEVEE"
+	next "FLAREON"
+	next "JOLTEON"
+	next "VAPOREON"
+	next "CANCEL@"
 
 BillsHousePokemonListText2: ; 1ecaa (7:6caa)
 	TX_FAR _BillsHousePokemonListText2
@@ -43833,9 +43861,9 @@ Func_37395: ; 37395 (d:7395)
 	jp Func_37395
 
 UnnamedText_3745e: ; 3745e (d:745e)
-	db "×3",$4e
-	db "×2",$4e
-	db "×1@"
+	db   "×3"
+	next "×2"
+	next "×1@"
 
 UnnamedText_37467: ; 37467 (d:7467)
 	TX_FAR _UnnamedText_37467
@@ -65202,10 +65230,10 @@ PokedexContentsText: ; 402a6 (10:42a6)
 	db "CONTENTS@"
 
 PokedexMenuItemsText: ; 402af (10:42af)
-	db "DATA",$4E
-	db "CRY",$4E
-	db "AREA",$4E
-	db "QUIT@"
+	db   "DATA"
+	next "CRY"
+	next "AREA"
+	next "QUIT@"
 
 ; tests if a pokemon's bit is set in the seen or owned pokemon bit fields
 ; INPUT:
@@ -85894,7 +85922,11 @@ DiplomaEmptyText:
 	db "@"
 
 DiplomaCongrats:
-	db "Congrats! This",$4e,"diploma certifies",$4e,"that you have",$4e,"completed your",$4e,"#DEX.@"
+	db   "Congrats! This"
+	next "diploma certifies"
+	next "that you have"
+	next "completed your"
+	next "#DEX.@"
 
 DiplomaGameFreak:
 	db "GAME FREAK@"
@@ -93893,7 +93925,10 @@ LinkCableHelpText2: ; 5dca3 (17:5ca3)
 	db "@"
 
 HowToLinkText: ; 5dca8 (17:5ca8)
-	db "HOW TO LINK",$4e,"COLOSSEUM",$4e,"TRADE CENTER",$4e,"STOP READING@"
+	db   "HOW TO LINK"
+	next "COLOSSEUM"
+	next "TRADE CENTER"
+	next "STOP READING@"
 
 LinkCableInfoTexts: ; 5dcd8 (17:5cd8)
 	dw LinkCableInfoText1
@@ -94003,14 +94038,14 @@ ViridianSchoolBlackboardText2: ; 5dda7 (17:5da7)
 	db "@"
 
 StatusAilmentText1: ; 5ddac (17:5dac)
-	db " SLP",$4e
-	db " PSN",$4e
-	db " PAR@"
+	db   " SLP"
+	next " PSN"
+	next " PAR@"
 
 StatusAilmentText2: ; 5ddbb (17:5dbb)
-	db " BRN",$4e
-	db " FRZ",$4e
-	db " QUIT@@"
+	db   " BRN"
+	next " FRZ"
+	next " QUIT@@"
 
 ViridianBlackboardStatusPointers: ; 5ddcc (17:5ddc)
 	dw ViridianBlackboardSleepText
@@ -98558,7 +98593,9 @@ Func_702f0: ; 702f0 (1c:42f0)
 	jp PlayCry
 
 HoFMonInfoText: ; 70329 (1c:4329)
-	db "LEVEL/",$4e,"TYPE1/",$4e,"TYPE2/@"
+	db   "LEVEL/"
+	next "TYPE1/"
+	next "TYPE2/@"
 
 Func_7033e: ; 7033e (1c:433e)
 	ld de, Unknown_72ede ; $6ede
@@ -103542,18 +103579,18 @@ UnnamedText_739d4: ; 739d4 (1c:79d4)
 	db "@"
 
 BoxNames: ; 739d9 (1c:79d9)
-	db "BOX 1",$4e
-	db "BOX 2",$4e
-	db "BOX 3",$4e
-	db "BOX 4",$4e
-	db "BOX 5",$4e
-	db "BOX 6",$4e
-	db "BOX 7",$4e
-	db "BOX 8",$4e
-	db "BOX 9",$4e
-	db "BOX10",$4e
-	db "BOX11",$4e
-	db "BOX12@"
+	db   "BOX 1"
+	next "BOX 2"
+	next "BOX 3"
+	next "BOX 4"
+	next "BOX 5"
+	next "BOX 6"
+	next "BOX 7"
+	next "BOX 8"
+	next "BOX 9"
+	next "BOX10"
+	next "BOX11"
+	next "BOX12@"
 
 BoxNoText: ; 73a21 (1c:7a21)
 	db "BOX No.@"
@@ -105282,15 +105319,15 @@ VendingMachineText1: ; 74f99 (1d:4f99)
 	db "@"
 
 DrinkText: ; 74f9e (1d:4f9e)
-	db "FRESH WATER",$4E
-	db "SODA POP",$4E
-	db "LEMONADE",$4E
-	db "CANCEL@"
+	db   "FRESH WATER"
+	next "SODA POP"
+	next "LEMONADE"
+	next "CANCEL@"
 
 DrinkPriceText: ; 74fc3 (1d:4fc3)
-	db "¥200",$4E
-	db "¥300",$4E
-	db "¥350",$4E,"@"
+	db   "¥200"
+	next "¥300"
+	next "¥350",$4E,"@"
 
 VendingMachineText4: ; 74fd3 (1d:4fd3)
 	TX_FAR _VendingMachineText4
