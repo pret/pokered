@@ -124722,8 +124722,8 @@ _TradeCenterMText1: ; 94b04 (25:4b04)
 	text "!"
 	done
 
-INCLUDE "text/mapRedsHouse1F.asm"
-INCLUDE "text/mapBluesHouse.asm"
+INCLUDE "text/maps/reds_house_1f.asm"
+INCLUDE "text/maps/blues_house.asm"
 
 _OaksLabGaryText1: ; 94d5b (25:4d5b)
 	text $53, ": Yo"
@@ -130280,7 +130280,7 @@ _UnnamedText_4fe44: ; a41d6 (29:41d6)
 	line "a #MON CENTER!"
 	done
 
-INCLUDE "text/mapPalletTown.asm"
+INCLUDE "text/maps/pallet_town.asm"
 
 _ViridianCityText1: ; a43cc (29:43cc)
 	text "Those # BALLs"
