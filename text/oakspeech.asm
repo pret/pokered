@@ -1,28 +1,28 @@
 _OakSpeechText1:
 	text "Hello there!"
 	line "Welcome to the"
-	next "world of #MON!"
+	cont "world of #MON!"
 
-	page "My name is OAK!"
+	para "My name is OAK!"
 	line "People call me"
-	next "the #MON PROF!"
+	cont "the #MON PROF!"
 	prompt
 
 _OakSpeechText2A:
 	text "This world is"
 	line "inhabited by"
-	next "creatures called"
-	next "#MON!@@"
+	cont "creatures called"
+	cont "#MON!@@"
 
 _OakSpeechText2B:
 	text $51,"For some people,"
 	line "#MON are"
-	next "pets. Others use"
-	next "them for fights."
+	cont "pets. Others use"
+	cont "them for fights."
 
-	page "Myself..."
+	para "Myself..."
 
-	page "I study #MON"
+	para "I study #MON"
 	line "as a profession."
 	prompt
 
@@ -34,23 +34,23 @@ _IntroducePlayerText:
 _IntroduceRivalText:
 	text "This is my grand-"
 	line "son. He's been"
-	next "your rival since"
-	next "you were a baby."
+	cont "your rival since"
+	cont "you were a baby."
 
-	page "...Erm, what is"
+	para "...Erm, what is"
 	line "his name again?"
 	prompt
 
 _OakSpeechText3:
 	text $52,"!"
 
-	page "Your very own"
+	para "Your very own"
 	line "#MON legend is"
-	next "about to unfold!"
+	cont "about to unfold!"
 
-	page "A world of dreams"
+	para "A world of dreams"
 	line "and adventures"
-	next "with #MON"
-	next "awaits! Let's go!"
+	cont "with #MON"
+	cont "awaits! Let's go!"
 	done
 

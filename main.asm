@@ -85144,10 +85144,10 @@ UnnamedText_561c2: ; 561c2 (15:61c2)
 	db "@"
 
 UnnamedText_561c8: ; 561c8
-	page "つり こそ"
+	para "つり こそ"
 	line "おとこの ロマン だ!"
 
-	page "へぼいつりざおは"
+	para "へぼいつりざおは"
 	line "コイキングしか つれ なんだが"
 	line "この いいつりざおなら"
 	line "もっと いいもんが つれるんじゃ!"
@@ -115583,7 +115583,7 @@ _CardKeySuccessText1: ; 80000 (20:4000)
 _CardKeySuccessText2: ; 80009 (20:4009)
 	db $0
 	line "The CARD KEY"
-	next "opened the door!"
+	cont "opened the door!"
 	done
 
 _CardKeyFailText: ; 80029 (20:4029)
@@ -115626,7 +115626,7 @@ _BoulderText: ; 800b1 (20:40b1)
 _MartSignText: ; 800d2 (20:40d2)
 	text "All your item"
 	line "needs fulfilled!"
-	next "#MON MART"
+	cont "#MON MART"
 	done
 
 _PokeCenterSignText: ; 800fc (20:40fc)
@@ -115648,41 +115648,41 @@ _NoMoreRoomForItemText: ; 8012a (20:412a)
 _UnnamedText_59091: ; 80143 (20:4143)
 	text "Hi! Remember me?"
 	line "I'm PROF.OAK's"
-	next "AIDE!"
+	cont "AIDE!"
 
-	page "If you caught @"
+	para "If you caught @"
 	TX_NUM $ffdb, 1, 3
 	db $0
 	line "kinds of #MON,"
-	next "I'm supposed to"
-	next "give you an"
-	next "@"
+	cont "I'm supposed to"
+	cont "give you an"
+	cont "@"
 	TX_RAM $cc5b
 	text "!"
 
-	page "So, ", $52, "! Have"
+	para "So, ", $52, "! Have"
 	line "you caught at"
-	next "least @"
+	cont "least @"
 	TX_NUM $ffdb, 1, 3
 	text " kinds of"
-	next "#MON?"
+	cont "#MON?"
 	done
 
 _UnnamedText_59096: ; 801e4 (20:41e4)
 	text "Let's see..."
 	line "Uh-oh! You have"
-	next "caught only @"
+	cont "caught only @"
 
 UnnamedText_8020e: ; 8020e (20:420e)
 	TX_NUM $ffdd, 1, 3
 	db $0
-	next "kinds of #MON!"
+	cont "kinds of #MON!"
 
-	page "You need @"
+	para "You need @"
 	TX_NUM $ffdb, 1, 3
 	text " kinds"
 	line "if you want the"
-	next "@"
+	cont "@"
 	TX_RAM $cc5b
 	text "."
 	done
@@ -115690,11 +115690,11 @@ UnnamedText_8020e: ; 8020e (20:420e)
 _UnnamedText_5909b: ; 80250 (20:4250)
 	text "Oh. I see."
 
-	page "When you get @"
+	para "When you get @"
 	TX_NUM $ffdb, 1, 3
 	db $0
 	line "kinds, come back"
-	next "for @"
+	cont "for @"
 	TX_RAM $cc5b
 	text "."
 	done
@@ -115704,10 +115704,10 @@ _UnnamedText_590a0: ; 8028c (20:428c)
 	line "caught @"
 	TX_NUM $ffdd, 1, 3
 	text " kinds "
-	next "of #MON!"
-	next "Congratulations!"
+	cont "of #MON!"
+	cont "Congratulations!"
 
-	page "Here you go!"
+	para "Here you go!"
 	prompt
 
 _UnnamedText_590a5: ; 802d9 (20:42d9)
@@ -115719,8 +115719,8 @@ _UnnamedText_590a5: ; 802d9 (20:42d9)
 _UnnamedText_590ab: ; 802ec (20:42ec)
 	text "Oh! I see you"
 	line "don't have any"
-	next "room for the"
-	next "@"
+	cont "room for the"
+	cont "@"
 	TX_RAM $cc5b
 	text "."
 	done
@@ -115729,20 +115729,20 @@ _ViridianForestText1: ; 8031d (20:431d)
 	text "I came here with"
 	line "some friends!"
 
-	page "They're out for"
+	para "They're out for"
 	line "#MON fights!"
 	done
 
 _ViridianForestBattleText1: ; 80359 (20:4359)
 	text "Hey! You have"
 	line "#MON! Come on!"
-	next "Let's battle'em!"
+	cont "Let's battle'em!"
 	done
 
 _ViridianForestEndBattleText1: ; 80387 (20:4387)
 	text "No!"
 	line "CATERPIE can't"
-	next "cut it!"
+	cont "cut it!"
 	prompt
 
 _ViridianFrstAfterBattleText1: ; 803a2 (20:43a2)
@@ -115753,19 +115753,19 @@ _ViridianFrstAfterBattleText1: ; 803a2 (20:43a2)
 _ViridianForestBattleText2: ; 803c3 (20:43c3)
 	text "Yo! You can't jam"
 	line "out if you're a"
-	next "#MON trainer!"
+	cont "#MON trainer!"
 	done
 
 _ViridianForestEndBattleText2: ; 803f2 (20:43f2)
 	text "Huh?"
 	line "I ran out of"
-	next "#MON!"
+	cont "#MON!"
 	prompt
 
 _ViridianFrstAfterBattleText2: ; 8040b (20:440b)
 	text "Darn! I'm going"
 	line "to catch some"
-	next "stronger ones!"
+	cont "stronger ones!"
 	done
 
 _ViridianForestBattleText3: ; 80438 (20:4438)
@@ -115776,83 +115776,83 @@ _ViridianForestBattleText3: ; 80438 (20:4438)
 _ViridianForestEndBattleText3: ; 80458 (20:4458)
 	text "I"
 	line "give! You're good"
-	next "at this!"
+	cont "at this!"
 	prompt
 
 _ViridianFrstAfterBattleText3: ; 80475 (20:4475)
 	text "Sometimes, you"
 	line "can find stuff on"
-	next "the ground!"
+	cont "the ground!"
 
-	page "I'm looking for"
+	para "I'm looking for"
 	line "the stuff I"
-	next "dropped!"
+	cont "dropped!"
 	done
 
 _ViridianForestText8: ; 804c7 (20:44c7)
 	text "I ran out of #"
 	line "BALLs to catch"
-	next "#MON with!"
+	cont "#MON with!"
 
-	page "You should carry"
+	para "You should carry"
 	line "extras!"
 	done
 
 _ViridianForestText9: ; 8050a (20:450a)
 	text "TRAINER TIPS"
 
-	page "If you want to"
+	para "If you want to"
 	line "avoid battles,"
-	next "stay away from"
-	next "grassy areas!"
+	cont "stay away from"
+	cont "grassy areas!"
 	done
 
 _ViridianForestText10: ; 80553 (20:4553)
 	text "For poison, use"
 	line "ANTIDOTE! Get it"
-	next "at #MON MARTs!"
+	cont "at #MON MARTs!"
 	done
 
 _ViridianForestText11: ; 80584 (20:4584)
 	text "TRAINER TIPS"
 
-	page "Contact PROF.OAK"
+	para "Contact PROF.OAK"
 	line "via PC to get"
-	next "your #DEX"
-	next "evaluated!"
+	cont "your #DEX"
+	cont "evaluated!"
 	done
 
 _ViridianForestText12: ; 805c6 (20:45c6)
 	text "TRAINER TIPS"
 
-	page "No stealing of"
+	para "No stealing of"
 	line "#MON from"
-	next "other trainers!"
-	next "Catch only wild"
-	next "#MON!"
+	cont "other trainers!"
+	cont "Catch only wild"
+	cont "#MON!"
 	done
 
 _ViridianForestText13: ; 80613 (20:4613)
 	text "TRAINER TIPS"
 
-	page "Weaken #MON"
+	para "Weaken #MON"
 	line "before attempting"
-	next "capture!"
+	cont "capture!"
 
-	page "When healthy,"
+	para "When healthy,"
 	line "they may escape!"
 	done
 
 _ViridianForestText14: ; 80667 (20:4667)
 	text "LEAVING"
 	line "VIRIDIAN FOREST"
-	next "PEWTER CITY AHEAD"
+	cont "PEWTER CITY AHEAD"
 	done
 
 _MtMoon1BattleText2: ; 80692 (20:4692)
 	text "WHOA! You shocked"
 	line "me! Oh, you're"
-	next "just a kid!"
+	cont "just a kid!"
 	done
 
 _MtMoon1EndBattleText2: ; 806bf (20:46bf)
@@ -115863,7 +115863,7 @@ _MtMoon1EndBattleText2: ; 806bf (20:46bf)
 _MtMoon1AfterBattleText2: ; 806d4 (20:46d4)
 	text "Kids like you"
 	line "shouldn't be"
-	next "here!"
+	cont "here!"
 	done
 
 _MtMoon1BattleText3: ; 806f5 (20:46f5)
@@ -115879,13 +115879,13 @@ _MtMoon1EndBattleText3: ; 80713 (20:4713)
 _MtMoon1AfterBattleText3: ; 80723 (20:4723)
 	text "I came down here"
 	line "to show off to"
-	next "girls."
+	cont "girls."
 	done
 
 _MtMoon1BattleText4: ; 8074b (20:474b)
 	text "Wow! It's way"
 	line "bigger in here"
-	next "than I thought!"
+	cont "than I thought!"
 	done
 
 _MtMoon1EndBattleText4: ; 80778 (20:4778)
@@ -115916,7 +115916,7 @@ _MtMoon1AfterBattleText5: ; 807d3 (20:47d3)
 _MtMoon1BattleText6: ; 807f2 (20:47f2)
 	text "What? I'm waiting"
 	line "for my friends to"
-	next "find me here."
+	cont "find me here."
 	done
 
 _MtMoon1EndBattleText6: ; 80824 (20:4824)
@@ -115926,13 +115926,13 @@ _MtMoon1EndBattleText6: ; 80824 (20:4824)
 _MtMoon1AfterBattleText6: ; 8082d (20:482d)
 	text "I heard there are"
 	line "some very rare"
-	next "fossils here."
+	cont "fossils here."
 	done
 
 _MtMoon1BattleText7: ; 8085d (20:485d)
 	text "Suspicious men"
 	line "are in the cave."
-	next "What about you?"
+	cont "What about you?"
 	done
 
 _MtMoon1EndBattleText7: ; 8088e (20:488e)
@@ -115943,13 +115943,13 @@ _MtMoon1EndBattleText7: ; 8088e (20:488e)
 _MtMoon1AfterBattleText7: ; 8089b (20:489b)
 	text "I saw them! I'm"
 	line "sure they're from"
-	next "TEAM ROCKET!"
+	cont "TEAM ROCKET!"
 	done
 
 _MtMoon1BattleText8: ; 808c9 (20:48c9)
 	text "Go through this"
 	line "cave to get to"
-	next "CERULEAN CITY!"
+	cont "CERULEAN CITY!"
 	done
 
 _MtMoon1EndBattleText8: ; 808f8 (20:48f8)
@@ -115960,8 +115960,8 @@ _MtMoon1EndBattleText8: ; 808f8 (20:48f8)
 _MtMoon1AfterBattleText8: ; 80901 (20:4901)
 	text "ZUBAT is tough!"
 	line "But, it can be"
-	next "useful if you"
-	next "catch one."
+	cont "useful if you"
+	cont "catch one."
 	done
 
 _MtMoon1Text14: ; 8093a (20:493a)
@@ -115996,9 +115996,9 @@ _UnnamedText_49f7f: ; 809a8 (20:49a8)
 _UnnamedText_49f85: ; 809cc (20:49cc)
 	text "Hey, stop!"
 
-	page "I found these"
+	para "I found these"
 	line "fossils! They're"
-	next "both mine!"
+	cont "both mine!"
 	done
 
 _UnnamedText_49f8a: ; 80a01 (20:4a01)
@@ -116009,18 +116009,18 @@ _UnnamedText_49f8a: ; 80a01 (20:4a01)
 _UnnamedText_49f8f: ; 80a11 (20:4a11)
 	text "We'll each take"
 	line "one!"
-	next "No being greedy!"
+	cont "No being greedy!"
 	done
 
 _UnnamedText_49f94: ; 80a37 (20:4a37)
 	text "Far away, on"
 	line "CINNABAR ISLAND,"
-	next "there's a #MON"
-	next "LAB."
+	cont "there's a #MON"
+	cont "LAB."
 
-	page "They do research"
+	para "They do research"
 	line "on regenerating"
-	next "fossils."
+	cont "fossils."
 	done
 
 _UnnamedText_49f99: ; 80a93 (20:4a93)
@@ -116030,8 +116030,8 @@ _UnnamedText_49f99: ; 80a93 (20:4a93)
 _MtMoon3BattleText2: ; 80ab3 (20:4ab3)
 	text "TEAM ROCKET will"
 	line "find the fossils,"
-	next "revive and sell"
-	next "them for cash!"
+	cont "revive and sell"
+	cont "them for cash!"
 	done
 
 _MtMoon3EndBattleText2: ; 80af6 (20:4af6)
@@ -116042,13 +116042,13 @@ _MtMoon3EndBattleText2: ; 80af6 (20:4af6)
 _MtMoon3AfterBattleText2: ; 80b09 (20:4b09)
 	text "You made me mad!"
 	line "TEAM ROCKET will"
-	next "blacklist you!"
+	cont "blacklist you!"
 	done
 
 _MtMoon3BattleText3: ; 80b3b (20:4b3b)
 	text "We, TEAM ROCKET,"
 	line "are #MON"
-	next "gangsters!"
+	cont "gangsters!"
 	done
 
 _MtMoon3EndBattleText3: ; 80b61 (20:4b61)
@@ -116059,13 +116059,13 @@ _MtMoon3EndBattleText3: ; 80b61 (20:4b61)
 _MtMoon3AfterBattleText3: ; 80b6d (20:4b6d)
 	text "Darn it all! My"
 	line "associates won't"
-	next "stand for this!"
+	cont "stand for this!"
 	done
 
 _MtMoon3BattleText4: ; 80b9e (20:4b9e)
 	text "We're pulling a"
 	line "big job here!"
-	next "Get lost, kid!"
+	cont "Get lost, kid!"
 	done
 
 _MtMoon3EndBattleText4: ; 80bcb (20:4bcb)
@@ -116076,13 +116076,13 @@ _MtMoon3EndBattleText4: ; 80bcb (20:4bcb)
 _MtMoon3AfterBattleText4: ; 80bde (20:4bde)
 	text "If you find a"
 	line "fossil, give it"
-	next "to me and scram!"
+	cont "to me and scram!"
 	done
 
 _MtMoon3BattleText5: ; 80c0e (20:4c0e)
 	text "Little kids"
 	line "should leave"
-	next "grown-ups alone!"
+	cont "grown-ups alone!"
 	done
 
 _MtMoon3EndBattleText5: ; 80c39 (20:4c39)
@@ -116093,19 +116093,19 @@ _MtMoon3EndBattleText5: ; 80c39 (20:4c39)
 _MtMoon3AfterBattleText5: ; 80c46 (20:4c46)
 	text "#MON lived"
 	line "here long before"
-	next "people came."
+	cont "people came."
 	done
 
 _SSAnne1Text1: ; 80c70 (20:4c70)
 	text "Bonjour!"
 	line "I am le waiter on"
-	next "this ship!"
+	cont "this ship!"
 
-	page "I will be happy"
+	para "I will be happy"
 	line "to serve you any-"
-	next "thing you please!"
+	cont "thing you please!"
 
-	page "Ah! Le strong"
+	para "Ah! Le strong"
 	line "silent type!"
 	done
 
@@ -116113,72 +116113,72 @@ _SSAnne1Text2: ; 80ce6 (20:4ce6)
 	text "The passengers"
 	line "are restless!"
 
-	page "You might be"
+	para "You might be"
 	line "challenged by the"
-	next "more bored ones!"
+	cont "more bored ones!"
 	done
 
 _SSAnne2Text1: ; 80d34 (20:4d34)
 	text "This ship, she is"
 	line "a luxury liner"
-	next "for trainers!"
+	cont "for trainers!"
 
-	page "At every port, we"
+	para "At every port, we"
 	line "hold parties with"
-	next "invited trainers!"
+	cont "invited trainers!"
 	done
 
 _SSAnneRivalBeforeBattleText: ; 80d9a (20:4d9a)
 	text $53, ": Bonjour!"
 	line $52, "!"
 
-	page "Imagine seeing"
+	para "Imagine seeing"
 	line "you here!"
 
-	page $52, ", were you"
+	para $52, ", were you"
 	line "really invited?"
 
-	page "So how's your"
+	para "So how's your"
 	line "#DEX coming?"
 
-	page "I already caught"
+	para "I already caught"
 	line "40 kinds, pal!"
 
-	page "Different kinds"
+	para "Different kinds"
 	line "are everywhere!"
 
-	page "Crawl around in"
+	para "Crawl around in"
 	line "grassy areas!"
 	done
 
 _SSAnneRivalDefeatedText: ; 80e57 (20:4e57)
 	text "Humph!"
 
-	page "At least you're"
+	para "At least you're"
 	line "raising your"
-	next "#MON!"
+	cont "#MON!"
 	prompt
 
 _SSAnneRivalWonText: ; 80e81 (20:4e81)
 	text $52, "! What are"
 	line "you, seasick?"
 
-	page "You should shape"
+	para "You should shape"
 	line "up, pal!"
 	prompt
 
 _SSAnneRivalCaptainText: ; 80eb6 (20:4eb6)
 	text $53, ": I heard"
 	line "there was a CUT"
-	next "master on board."
+	cont "master on board."
 
-	page "But, he was just a"
+	para "But, he was just a"
 	line "seasick, old man!"
 
-	page "But, CUT itself is"
+	para "But, CUT itself is"
 	line "really useful!"
 
-	page "You should go see"
+	para "You should go see"
 	line "him! Smell ya!"
 	done
 
@@ -116186,14 +116186,14 @@ _SSAnne3Text1: ; 80f4b (20:4f4b)
 	text "Our CAPTAIN is a"
 	line "sword master!"
 
-	page "He even teaches"
+	para "He even teaches"
 	line "CUT to #MON!"
 	done
 
 _SSAnne5Text1: ; 80f88 (20:4f88)
 	text "The party's over."
 	line "The ship will be"
-	next "departing soon."
+	cont "departing soon."
 	done
 
 _SSAnne5Text2: ; 80fbb (20:4fbb)
@@ -116204,14 +116204,14 @@ _SSAnne5Text2: ; 80fbb (20:4fbb)
 _SSAnne5Text3: ; 80fda (20:4fda)
 	text "Urf. I feel ill."
 
-	page "I stepped out to"
+	para "I stepped out to"
 	line "get some air."
 	done
 
 _SSAnneBattleText1: ; 8100b (20:500b)
 	text "Hey matey!"
 
-	page "Let's do a little"
+	para "Let's do a little"
 	line "jig!"
 	done
 
@@ -116223,7 +116223,7 @@ _SSAnneEndBattleText1: ; 8102d (20:502d)
 _SSAnneAfterBattleText1: ; 81040 (20:5040)
 	text "How many kinds of"
 	line "#MON do you"
-	next "think there are?"
+	cont "think there are?"
 	done
 
 _SSAnneBattleText2: ; 81070 (20:5070)
@@ -116239,14 +116239,14 @@ _SSAnneEndBattleText2: ; 8108e (20:508e)
 _SSAnneAfterBattleText2: ; 810a4 (20:50a4)
 	text "My Pa said there"
 	line "are 100 kinds of"
-	next "#MON. I think"
-	next "there are more."
+	cont "#MON. I think"
+	cont "there are more."
 	done
 
 _SSAnne6Text1: ; 810e5 (20:50e5)
 	text "You, mon petit!"
 	line "We're busy here!"
-	next "Out of the way!"
+	cont "Out of the way!"
 	done
 
 _SSAnne6Text2: ; 81116 (20:5116)
@@ -116263,86 +116263,86 @@ _SSAnne6Text4: ; 81155 (20:5155)
 	text "Hum-de-hum-de-"
 	line "ho..."
 
-	page "I peel spuds"
+	para "I peel spuds"
 	line "every day!"
-	next "Hum-hum..."
+	cont "Hum-hum..."
 	done
 
 _SSAnne6Text5: ; 8118e (20:518e)
 	text "Did you hear about"
 	line "SNORLAX?"
 
-	page "All it does is"
+	para "All it does is"
 	line "eat and sleep!"
 	done
 
 _SSAnne6Text6: ; 811c9 (20:51c9)
 	text "Snivel...Sniff..."
 
-	page "I only get to"
+	para "I only get to"
 	line "peel onions..."
-	next "Snivel..."
+	cont "Snivel..."
 	done
 
 _UnnamedText_61807: ; 81203 (20:5203)
 	text "Er-hem! Indeed I"
 	line "am le CHEF!"
 
-	page "Le main course is"
+	para "Le main course is"
 	prompt
 
 _UnnamedText_6180c: ; 81233 (20:5233)
 	text "Salmon du Salad!"
 
-	page "Les guests may"
+	para "Les guests may"
 	line "gripe it's fish"
-	next "again, however!"
+	cont "again, however!"
 	done
 
 _UnnamedText_61811: ; 81273 (20:5273)
 	text "Eels au Barbecue!"
 
-	page "Les guests will"
+	para "Les guests will"
 	line "mutiny, I fear."
 	done
 
 _UnnamedText_61816: ; 812a6 (20:52a6)
 	text "Prime Beef Steak!"
 
-	page "But, have I enough"
+	para "But, have I enough"
 	line "fillets du beef?"
 	done
 
 _SSAnne7RubText: ; 812dd (20:52dd)
 	text "CAPTAIN: Ooargh..."
 	line "I feel hideous..."
-	next "Urrp! Seasick..."
+	cont "Urrp! Seasick..."
 
-	page $52, " rubbed"
+	para $52, " rubbed"
 	line "the CAPTAIN's"
-	next "back!"
+	cont "back!"
 
-	page "Rub-rub..."
+	para "Rub-rub..."
 	line "Rub-rub...@@"
 
 _ReceivingHM01Text: ; 81347 (20:5347)
 	text "CAPTAIN: Whew!"
 	line "Thank you! I"
-	next "feel much better!"
+	cont "feel much better!"
 
-	page "You want to see"
+	para "You want to see"
 	line "my CUT technique?"
 
-	page "I could show you"
+	para "I could show you"
 	line "if I wasn't ill..."
 
-	page "I know! You can"
+	para "I know! You can"
 	line "have this!"
 
-	page "Teach it to your"
+	para "Teach it to your"
 	line "#MON and you"
-	next "can see it CUT"
-	next "any time!"
+	cont "can see it CUT"
+	cont "any time!"
 	prompt
 
 _ReceivedHM01Text: ; 8140d (20:540d)
@@ -116354,9 +116354,9 @@ _ReceivedHM01Text: ; 8140d (20:540d)
 _UnnamedText_61932: ; 8141c (20:541c)
 	text "CAPTAIN: Whew!"
 
-	page "Now that I'm not"
+	para "Now that I'm not"
 	line "sick any more, I"
-	next "guess it's time."
+	cont "guess it's time."
 	done
 
 _HM01NoRoomText: ; 8145d (20:545d)
@@ -116372,8 +116372,8 @@ _SSAnne7Text2: ; 81480 (20:5480)
 _SSAnne7Text3: ; 8149d (20:549d)
 	text "How to Conquer"
 	line "Seasickness..."
-	next "The CAPTAIN's"
-	next "reading this!"
+	cont "The CAPTAIN's"
+	cont "reading this!"
 	done
 
 _SSAnne8Text8: ; 814d7 (20:54d7)
@@ -116384,7 +116384,7 @@ _SSAnne8BattleText1: ; 814f1 (20:54f1)
 	text "I travel alone"
 	line "on my journeys!"
 
-	page "My #MON are my"
+	para "My #MON are my"
 	line "only friends!"
 	done
 
@@ -116427,35 +116427,35 @@ _SSAnne8AfterBattleText3: ; 815e7 (20:55e7)
 	text "Let me be your"
 	line "friend, OK?"
 
-	page "Then we can trade"
+	para "Then we can trade"
 	line "#MON!"
 	done
 
 _SSAnne8BattleText4: ; 8161b (20:561b)
 	text "I collected these"
 	line "#MON from all"
-	next "around the world!"
+	cont "around the world!"
 	done
 
 _SSAnne8EndBattleText4: ; 8164e (20:564e)
 	text "Oh no!"
 	line "I went around the"
-	next "world for these!"
+	cont "world for these!"
 	prompt
 
 _SSAnne8AfterBattleText4: ; 81679 (20:5679)
 	text "You hurt my poor"
 	line "worldly #MON!"
 
-	page "I demand that you"
+	para "I demand that you"
 	line "heal them at a"
-	next "#MON CENTER!"
+	cont "#MON CENTER!"
 	done
 
 _SSAnne8Text5: ; 816c7 (20:56c7)
 	text "Waiter, I would"
 	line "like a cherry pie"
-	next "please!"
+	cont "please!"
 	done
 
 _SSAnne8Text6: ; 816f2 (20:56f2)
@@ -116477,25 +116477,25 @@ _SSAnne8Text11: ; 81759 (20:5759)
 	text "Ssh! I'm a GLOBAL"
 	line "POLICE agent!"
 
-	page "I'm on the trail"
+	para "I'm on the trail"
 	line "of TEAM ROCKET!"
 	done
 
 _UnnamedText_61bf2: ; 81799 (20:5799)
 	text "In all my travels"
 	line "I've never seen"
-	next "any #MON sleep"
-	next "like this one!"
+	cont "any #MON sleep"
+	cont "like this one!"
 
-	page "It was something"
+	para "It was something"
 	line "like this!"
 	prompt
 
 _UnnamedText_61c01: ; 817f5 (20:57f5)
 	text "Ah yes, I have"
 	line "seen some #MON"
-	next "ferry people"
-	next "across the water!"
+	cont "ferry people"
+	cont "across the water!"
 	done
 
 _UnnamedText_61c10: ; 81833 (20:5833)
@@ -116506,22 +116506,22 @@ _UnnamedText_61c10: ; 81833 (20:5833)
 _UnnamedText_61c1f: ; 81854 (20:5854)
 	text "Have you gone to"
 	line "the SAFARI ZONE"
-	next "in FUCHSIA CITY?"
+	cont "in FUCHSIA CITY?"
 
-	page "It had many rare"
+	para "It had many rare"
 	line "kinds of #MON!!"
 	done
 
 _UnnamedText_61c2e: ; 818a8 (20:58a8)
 	text "Me and my Daddy"
 	line "think the SAFARI"
-	next "ZONE is awesome!"
+	cont "ZONE is awesome!"
 	done
 
 _UnnamedText_61c3d: ; 818db (20:58db)
 	text "The CAPTAIN looked"
 	line "really sick and"
-	next "pale!"
+	cont "pale!"
 	done
 
 _UnnamedText_61c4c: ; 81905 (20:5905)
@@ -116532,13 +116532,13 @@ _UnnamedText_61c4c: ; 81905 (20:5905)
 _SSAnne9BattleText1: ; 81926 (20:5926)
 	text "Competing against"
 	line "the young keeps"
-	next "me youthful."
+	cont "me youthful."
 	done
 
 _SSAnne9EndBattleText1: ; 81956 (20:5956)
 	text "Good"
 	line "fight! Ah, I feel"
-	next "young again!"
+	cont "young again!"
 	prompt
 
 _SSAnne9AfterBattleText1: ; 8197b (20:597b)
@@ -116559,15 +116559,15 @@ _SSAnne9EndBattleText2: ; 819b9 (20:59b9)
 _SSAnne9AfterBattleText2: ; 819c6 (20:59c6)
 	text "Party?"
 
-	page "The cruise ship's"
+	para "The cruise ship's"
 	line "party should be"
-	next "over by now."
+	cont "over by now."
 	done
 
 _SSAnne9BattleText3: ; 819fc (20:59fc)
 	text "Which do you like,"
 	line "a strong or a"
-	next "rare #MON?"
+	cont "rare #MON?"
 	done
 
 _SSAnne9EndBattleText3: ; 81a29 (20:5a29)
@@ -116602,7 +116602,7 @@ _SSAnne10Text8: ; 81aaa (20:5aaa)
 _SSAnne10BattleText1: ; 81ac3 (20:5ac3)
 	text "You know what they"
 	line "say about sailors"
-	next "and fighting!"
+	cont "and fighting!"
 	done
 
 _SSAnne10EndBattleText1: ; 81af7 (20:5af7)
@@ -116628,7 +116628,7 @@ _SSAnne10EndBattleText2: ; 81b52 (20:5b52)
 _SSAnne10AfterBattleText2: ; 81b68 (20:5b68)
 	text "Did you see the"
 	line "FISHING GURU in"
-	next "VERMILION CITY?"
+	cont "VERMILION CITY?"
 	done
 
 _SSAnne10BattleText3: ; 81b99 (20:5b99)
@@ -116644,7 +116644,7 @@ _SSAnne10EndBattleText3: ; 81bb4 (20:5bb4)
 _SSAnne10AfterBattleText3: ; 81bc9 (20:5bc9)
 	text "We caught all our"
 	line "#MON while"
-	next "out at sea!"
+	cont "out at sea!"
 	done
 
 _SSAnne10BattleText4: ; 81bf3 (20:5bf3)
@@ -116659,13 +116659,13 @@ _SSAnne10EndBattleText4: ; 81c12 (20:5c12)
 _SSAnne10AfterBattleText4: ; 81c22 (20:5c22)
 	text "Sea #MON live"
 	line "in deep water."
-	next "You'll need a ROD!"
+	cont "You'll need a ROD!"
 	done
 
 _SSAnne10BattleText5: ; 81c52 (20:5c52)
 	text "Matey, you're"
 	line "walking the plank"
-	next "if you lose!"
+	cont "if you lose!"
 	done
 
 _SSAnne10EndBattleText5: ; 81c7f (20:5c7f)
@@ -116676,36 +116676,36 @@ _SSAnne10EndBattleText5: ; 81c7f (20:5c7f)
 _SSAnne10AfterBattleText5: ; 81c97 (20:5c97)
 	text "Jellyfish some-"
 	line "times drift into"
-	next "the ship."
+	cont "the ship."
 	done
 
 _SSAnne10BattleText6: ; 81cc3 (20:5cc3)
 	text "Hello stranger!"
 	line "Stop and chat!"
 
-	page "All my #MON"
+	para "All my #MON"
 	line "are from the sea!"
 	done
 
 _SSAnne10EndBattleText6: ; 81d01 (20:5d01)
 	text "Darn!"
 	line "I let that one"
-	next "get away!"
+	cont "get away!"
 	prompt
 
 _SSAnne10AfterBattleText6: ; 81d21 (20:5d21)
 	text "I was going to"
 	line "make you my"
-	next "assistant too!"
+	cont "assistant too!"
 	done
 
 _SSAnne10Text7: ; 81d4c (20:5d4c)
 	text "My buddy, MACHOKE,"
 	line "is super strong!"
 
-	page "He has enough"
+	para "He has enough"
 	line "STRENGTH to move"
-	next "big rocks!"
+	cont "big rocks!"
 	done
 
 _VictoryRoad3BattleText2: ; 81d9b (20:5d9b)
@@ -116751,14 +116751,14 @@ _VictoryRoad3EndBattleText4: ; 81e6f (20:5e6f)
 _VictoryRoad3AfterBattleText4: ; 81e83 (20:5e83)
 	text "All trainers here"
 	line "are headed to the"
-	next "#MON LEAGUE!"
-	next "Be careful!"
+	cont "#MON LEAGUE!"
+	cont "Be careful!"
 	done
 
 _VictoryRoad3BattleText5: ; 81ec1 (20:5ec1)
 	text "Trainers live to"
 	line "seek stronger"
-	next "opponents!"
+	cont "opponents!"
 	done
 
 _VictoryRoad3EndBattleText5: ; 81eec (20:5eec)
@@ -116769,7 +116769,7 @@ _VictoryRoad3EndBattleText5: ; 81eec (20:5eec)
 _VictoryRoad3AfterBattleText5: ; 81efc (20:5efc)
 	text "By fighting tough"
 	line "battles, you get"
-	next "stronger!"
+	cont "stronger!"
 	done
 
 _RocketHideout1EndBattleText6: ; 81f2a (20:5f2a)
@@ -116802,7 +116802,7 @@ _RocketHideout1EndBattleText3: ; 81fa3 (20:5fa3)
 _RocketHideout1AfterBattleTxt3: ; 81fab (20:5fab)
 	text "You're not going"
 	line "to get away with"
-	next "this, brat!"
+	cont "this, brat!"
 	done
 
 _RocketHideout1BattleText4: ; 81fd9 (20:5fd9)
@@ -116817,7 +116817,7 @@ _RocketHideout1EndBattleText4: ; 81fea (20:5fea)
 _RocketHideout1AfterBattleTxt4: ; 81ff9 (20:5ff9)
 	text "SILPH SCOPE?"
 	line "I don't know"
-	next "where it is!"
+	cont "where it is!"
 	done
 
 _RocketHideout1BattleText5: ; 82020 (20:6020)
@@ -116833,7 +116833,7 @@ _RocketHideout1EndBattleText5: ; 82038 (20:6038)
 _RocketHideout1AfterBattleTxt5: ; 82047 (20:6047)
 	text "OK, I'll talk!"
 	line "Take the elevator"
-	next "to see my BOSS!"
+	cont "to see my BOSS!"
 	done
 
 _RocketHideout1BattleText6: ; 82078 (20:6078)
@@ -116849,7 +116849,7 @@ _RocketHideout1AfterBattleTxt6: ; 82097 (20:6097)
 _RocketHideout2BattleText2: ; 820bb (20:60bb)
 	text "BOSS said you can"
 	line "see GHOSTs with"
-	next "the SILPH SCOPE!"
+	cont "the SILPH SCOPE!"
 	done
 
 _RocketHideout2EndBattleText2: ; 820ef (20:60ef)
@@ -116860,14 +116860,14 @@ _RocketHideout2EndBattleText2: ; 820ef (20:60ef)
 _RocketHideout2AfterBattleTxt2: ; 820fd (20:60fd)
 	text "The TEAM ROCKET"
 	line "HQ has 4 basement"
-	next "floors. Can you"
-	next "reach the BOSS?"
+	cont "floors. Can you"
+	cont "reach the BOSS?"
 	done
 
 _RocketHideout3BattleText2: ; 82140 (20:6140)
 	text "Stop meddling in"
 	line "TEAM ROCKET's"
-	next "affairs!"
+	cont "affairs!"
 	done
 
 _RocketHideout3EndBattleText2: ; 82168 (20:6168)
@@ -116878,14 +116878,14 @@ _RocketHideout3EndBattleText2: ; 82168 (20:6168)
 _RocketHideout3AfterBattleTxt2: ; 8217a (20:617a)
 	text "SILPH SCOPE?"
 	line "The machine the"
-	next "BOSS stole. It's"
-	next "here somewhere."
+	cont "BOSS stole. It's"
+	cont "here somewhere."
 	done
 
 _RocketHideout3BattleTxt: ; 821b8 (20:61b8)
 	text "We got word from"
 	line "upstairs that you"
-	next "were coming!"
+	cont "were coming!"
 	done
 
 _RocketHideout3EndBattleText3: ; 821e9 (20:61e9)
@@ -116896,14 +116896,14 @@ _RocketHideout3EndBattleText3: ; 821e9 (20:61e9)
 _RocketHide3AfterBattleText3: ; 821fc (20:61fc)
 	text "Go ahead and go!"
 	line "But, you need the"
-	next "LIFT KEY to run"
-	next "the elevator!"
+	cont "LIFT KEY to run"
+	cont "the elevator!"
 	done
 
 _UnnamedText_4557a: ; 8223e (20:623e)
 	text "So! I must say, I"
 	line "am impressed you"
-	next "got here!"
+	cont "got here!"
 	done
 
 _UnnamedText_4557f: ; 8226c (20:626c)
@@ -116914,24 +116914,24 @@ _UnnamedText_4557f: ; 8226c (20:626c)
 _UnnamedText_45584: ; 82283 (20:6283)
 	text "I see that you"
 	line "raise #MON"
-	next "with utmost care."
+	cont "with utmost care."
 
-	page "A child like you"
+	para "A child like you"
 	line "would never"
-	next "understand what I"
-	next "hope to achieve."
+	cont "understand what I"
+	cont "hope to achieve."
 
-	page "I shall step"
+	para "I shall step"
 	line "aside this time!"
 
-	page "I hope we meet"
+	para "I hope we meet"
 	line "again..."
 	done
 
 _RocketHideout4BattleText2: ; 82326 (20:6326)
 	text "I know you! You"
 	line "ruined our plans"
-	next "at MT.MOON!"
+	cont "at MT.MOON!"
 	done
 
 _RocketHideout4EndBattleText2: ; 82354 (20:6354)
@@ -116942,13 +116942,13 @@ _RocketHideout4EndBattleText2: ; 82354 (20:6354)
 _RocketHide4AfterBattleText2: ; 82363 (20:6363)
 	text "Do you have"
 	line "something against"
-	next "TEAM ROCKET?"
+	cont "TEAM ROCKET?"
 	done
 
 _RocketHideout4BattleText3: ; 8238f (20:638f)
 	text "How can you not"
 	line "see the beauty of"
-	next "our evil?"
+	cont "our evil?"
 	done
 
 _RocketHideout4EndBattleText3: ; 823bc (20:63bc)
@@ -116963,7 +116963,7 @@ _RocketHide4AfterBattleText3: ; 823c4 (20:63c4)
 _RocketHideout4BattleText4: ; 823e2 (20:63e2)
 	text "The elevator"
 	line "doesn't work? Who"
-	next "has the LIFT KEY?"
+	cont "has the LIFT KEY?"
 	done
 
 _RocketHideout4EndBattleText4: ; 82413 (20:6413)
@@ -116983,11 +116983,11 @@ _UnnamedText_59ded: ; 82454 (20:6454)
 	text "Eeek!"
 	line "No! Stop! Help!"
 
-	page "Oh, you're not"
+	para "Oh, you're not"
 	line "with TEAM ROCKET."
-	next "I thought..."
-	next "I'm sorry. Here,"
-	next "please take this!"
+	cont "I thought..."
+	cont "I'm sorry. Here,"
+	cont "please take this!"
 	prompt
 
 _ReceivedTM36Text: ; 824ba (20:64ba)
@@ -117000,10 +117000,10 @@ _TM36ExplanationText: ; 824c9 (20:64c9)
 	text "TM36 is"
 	line "SELFDESTRUCT!"
 
-	page "It's powerful, but"
+	para "It's powerful, but"
 	line "the #MON that"
-	next "uses it faints!"
-	next "Be careful."
+	cont "uses it faints!"
+	cont "Be careful."
 	done
 
 _TM36NoRoomText: ; 8251c (20:651c)
@@ -117019,13 +117019,13 @@ _SilphCo2BattleText1: ; 8253e (20:653e)
 _SilphCo2EndBattleText1: ; 8255a (20:655a)
 	text "How"
 	line "did you know I"
-	next "was a ROCKET?"
+	cont "was a ROCKET?"
 	prompt
 
 _SilphCo2AfterBattleText1: ; 8257c (20:657c)
 	text "I work for both"
 	line "SILPH and TEAM"
-	next "ROCKET!"
+	cont "ROCKET!"
 	done
 
 _SilphCo2BattleText2: ; 825a4 (20:65a4)
@@ -117055,9 +117055,9 @@ _SilphCo2EndBattleText3: ; 8260f (20:660f)
 _SilphCo2AfterBattleText3: ; 82617 (20:6617)
 	text "Diamond shaped"
 	line "tiles are"
-	next "teleport blocks!"
+	cont "teleport blocks!"
 
-	page "They're hi-tech"
+	para "They're hi-tech"
 	line "transporters!"
 	done
 
@@ -117073,7 +117073,7 @@ _SilphCo2EndBattleText4: ; 82682 (20:6682)
 _SilphCo2AfterBattleText4: ; 8268d (20:668d)
 	text "SILPH CO. will"
 	line "be merged with"
-	next "TEAM ROCKET!"
+	cont "TEAM ROCKET!"
 	done
 
 _UnnamedText_59ff9: ; 826b9 (20:66b9)
@@ -117084,7 +117084,7 @@ _UnnamedText_59ff9: ; 826b9 (20:66b9)
 _UnnamedText_59ffe: ; 826de (20:66de)
 	text $52, "! You and"
 	line "your #MON"
-	next "saved us!"
+	cont "saved us!"
 	done
 
 _SilphCo3BattleText1: ; 826fe (20:66fe)
@@ -117100,13 +117100,13 @@ _SilphCo3EndBattleText1: ; 8271a (20:671a)
 _SilphCo3AfterBattleText1: ; 82726 (20:6726)
 	text "A hint? You can"
 	line "open doors with a"
-	next "CARD KEY!"
+	cont "CARD KEY!"
 	done
 
 _SilphCo3BattleText2: ; 82753 (20:6753)
 	text "I support TEAM"
 	line "ROCKET more than"
-	next "I support SILPH!"
+	cont "I support SILPH!"
 	done
 
 _SilphCo3EndBattleText2: ; 82785 (20:6785)
@@ -117117,10 +117117,10 @@ _SilphCo3EndBattleText2: ; 82785 (20:6785)
 _SilphCo3AfterBattleText2: ; 82799 (20:6799)
 	text "Humph..."
 
-	page "TEAM ROCKET said"
+	para "TEAM ROCKET said"
 	line "that if I helped"
-	next "them, they'd let"
-	next "me study #MON!"
+	cont "them, they'd let"
+	cont "me study #MON!"
 	done
 
 _UnnamedText_19de0: ; 827e4 (20:67e4)
@@ -117136,7 +117136,7 @@ _UnnamedText_19de5: ; 82803 (20:6803)
 _SilphCo4BattleText2: ; 8281e (20:681e)
 	text "TEAM ROCKET has"
 	line "taken command of"
-	next "SILPH CO.!"
+	cont "SILPH CO.!"
 	done
 
 _SilphCo4EndBattleText2: ; 8284b (20:684b)
@@ -117146,7 +117146,7 @@ _SilphCo4EndBattleText2: ; 8284b (20:684b)
 _SilphCo4AfterBattleText2: ; 82853 (20:6853)
 	text "Fwahahaha!"
 	line "My BOSS has been"
-	next "after this place!"
+	cont "after this place!"
 	done
 
 _SilphCo4BattleText3: ; 82882 (20:6882)
@@ -117162,8 +117162,8 @@ _SilphCo4EndBattleText3: ; 828a2 (20:68a2)
 _SilphCo4AfterBattleText3: ; 828b8 (20:68b8)
 	text "The doors are"
 	line "electronically"
-	next "locked! A CARD"
-	next "KEY opens them!"
+	cont "locked! A CARD"
+	cont "KEY opens them!"
 	done
 
 _SilphCo4BattleText4: ; 828f5 (20:68f5)
@@ -117183,14 +117183,14 @@ _SilphCo4AfterBattleText4: ; 82916 (20:6916)
 _UnnamedText_1a010: ; 82936 (20:6936)
 	text "TEAM ROCKET is"
 	line "in an uproar over"
-	next "some intruder."
-	next "That's you right?"
+	cont "some intruder."
+	cont "That's you right?"
 	done
 
 _UnnamedText_1a015: ; 82978 (20:6978)
 	text "TEAM ROCKET took"
 	line "off! You're our"
-	next "hero! Thank you!"
+	cont "hero! Thank you!"
 	done
 
 _SilphCo5BattleText2: ; 829aa (20:69aa)
@@ -117205,13 +117205,13 @@ _SilphCo5EndBattleText2: ; 829cf (20:69cf)
 _SilphCo5AfterBattleText2: ; 829d6 (20:69d6)
 	text "It's not smart"
 	line "to pick a fight"
-	next "with TEAM ROCKET!"
+	cont "with TEAM ROCKET!"
 	done
 
 _SilphCo5BattleText3: ; 82a07 (20:6a07)
 	text "We study #"
 	line "BALL technology"
-	next "on this floor!"
+	cont "on this floor!"
 	done
 
 _SilphCo5EndBattleText3: ; 82a32 (20:6a32)
@@ -117222,14 +117222,14 @@ _SilphCo5EndBattleText3: ; 82a32 (20:6a32)
 _SilphCo5AfterBattleText3: ; 82a43 (20:6a43)
 	text "We worked on the"
 	line "ultimate #"
-	next "BALL which would"
-	next "catch anything!"
+	cont "BALL which would"
+	cont "catch anything!"
 	done
 
 _SilphCo5BattleText4: ; 82a81 (20:6a81)
 	text "Whaaat? There"
 	line "shouldn't be any"
-	next "children here?"
+	cont "children here?"
 	done
 
 SECTION "bank21",ROMX,BANK[$21]
@@ -117242,7 +117242,7 @@ _SilphCo5EndBattleText4: ; 84000 (21:4000)
 _SilphCo5AfterBattleText4: ; 8400e (21:400e)
 	text "You're only on 5F."
 	line "It's a long way"
-	next "to my BOSS!"
+	cont "to my BOSS!"
 	done
 
 _SilphCo5BattleText5: ; 8403c (21:403c)
@@ -117258,7 +117258,7 @@ _SilphCo5EndBattleText5: ; 84060 (21:4060)
 _SilphCo5AfterBattleText5: ; 84073 (21:4073)
 	text "Which reminds me."
 
-	page "KOFFING evolves"
+	para "KOFFING evolves"
 	line "into WEEZING!"
 	done
 
@@ -117266,34 +117266,34 @@ _SilphCo5Text9: ; 840a4 (21:40a4)
 	text "It's a #MON"
 	line "REPORT!"
 
-	page "#MON LAB"
+	para "#MON LAB"
 	line "created PORYGON,"
-	next "the first virtual"
-	next "reality #MON."
+	cont "the first virtual"
+	cont "reality #MON."
 	done
 
 _SilphCo5Text10: ; 840f2 (21:40f2)
 	text "It's a #MON"
 	line "REPORT!"
 
-	page "Over 160 #MON"
+	para "Over 160 #MON"
 	line "techniques have"
-	next "been confirmed."
+	cont "been confirmed."
 	done
 
 _SilphCo5Text11: ; 84134 (21:4134)
 	text "It's a #MON"
 	line "REPORT!"
 
-	page "4 #MON evolve"
+	para "4 #MON evolve"
 	line "only when traded"
-	next "by link-cable."
+	cont "by link-cable."
 	done
 
 _UnnamedText_1a24a: ; 84176 (21:4176)
 	text "The ROCKETs came"
 	line "and took over the"
-	next "building!"
+	cont "building!"
 	done
 
 _UnnamedText_1a24f: ; 841a4 (21:41a4)
@@ -117319,14 +117319,14 @@ _UnnamedText_1a278: ; 841ff (21:41ff)
 _UnnamedText_1a27d: ; 84220 (21:4220)
 	text "I feel so sorry"
 	line "for him, I have"
-	next "to marry him!"
+	cont "to marry him!"
 	done
 
 _UnnamedText_1a28f: ; 8424f (21:424f)
 	text "TEAM ROCKET is"
 	line "trying to conquer"
-	next "the world with"
-	next "#MON!"
+	cont "the world with"
+	cont "#MON!"
 	done
 
 _UnnamedText_1a294: ; 84286 (21:4286)
@@ -117337,14 +117337,14 @@ _UnnamedText_1a294: ; 84286 (21:4286)
 _UnnamedText_1a2a6: ; 842a7 (21:42a7)
 	text "They must have"
 	line "targeted SILPH"
-	next "for our #MON"
-	next "products."
+	cont "for our #MON"
+	cont "products."
 	done
 
 _UnnamedText_1a2ab: ; 842dd (21:42dd)
 	text "Come work for"
 	line "SILPH when you"
-	next "get older!"
+	cont "get older!"
 	done
 
 _SilphCo6BattleText2: ; 84306 (21:4306)
@@ -117360,16 +117360,16 @@ _SilphCo6EndBattleText2: ; 8432a (21:432a)
 _SilphCo6AfterBattleText2: ; 84336 (21:4336)
 	text "No matter!"
 	line "My brothers will"
-	next "avenge me!"
+	cont "avenge me!"
 	done
 
 _SilphCo6BattleText3: ; 8435e (21:435e)
 	text "That rotten"
 	line "PRESIDENT!"
 
-	page "He shouldn't have"
+	para "He shouldn't have"
 	line "sent me to the"
-	next "TIKSI BRANCH!"
+	cont "TIKSI BRANCH!"
 	done
 
 _SilphCo6EndBattleText3: ; 843a4 (21:43a4)
@@ -117379,7 +117379,7 @@ _SilphCo6EndBattleText3: ; 843a4 (21:43a4)
 _SilphCo6AfterBattleText3: ; 843ac (21:43ac)
 	text "TIKSI BRANCH?"
 	line "It's in Russian"
-	next "no man's land!"
+	cont "no man's land!"
 	done
 
 _SilphCo6BattleText4: ; 843d8 (21:43d8)
@@ -117395,43 +117395,43 @@ _SilphCo6EndBattleText4: ; 843f6 (21:43f6)
 _SilphCo6AfterBattleText4: ; 84404 (21:4404)
 	text "If you stand for"
 	line "justice, you"
-	next "betray evil!"
+	cont "betray evil!"
 	done
 
 _UnnamedText_51dd3: ; 84430 (21:4430)
 	text "Oh! Hi! You're"
 	line "not a ROCKET! You"
-	next "came to save us?"
-	next "Why, thank you!"
+	cont "came to save us?"
+	cont "Why, thank you!"
 
-	page "I want you to"
+	para "I want you to"
 	line "have this #MON"
-	next "for saving us."
+	cont "for saving us."
 	prompt
 
 _UnnamedText_51dd8: ; 8449e (21:449e)
 	text "It's LAPRAS. It's"
 	line "very intelligent."
 
-	page "We kept it in our"
+	para "We kept it in our"
 	line "lab, but it will"
-	next "be much better"
-	next "off with you!"
+	cont "be much better"
+	cont "off with you!"
 
-	page "I think you will"
+	para "I think you will"
 	line "be a good trainer"
-	next "for LAPRAS!"
+	cont "for LAPRAS!"
 
-	page "It's a good"
+	para "It's a good"
 	line "swimmer. It'll"
-	next "give you a lift!"
+	cont "give you a lift!"
 	done
 
 _UnnamedText_51ddd: ; 8455a (21:455a)
 	text "TEAM ROCKET's"
 	line "BOSS went to the"
-	next "boardroom! Is our"
-	next "PRESIDENT OK?"
+	cont "boardroom! Is our"
+	cont "PRESIDENT OK?"
 	done
 
 _UnnamedText_51de2: ; 84599 (21:4599)
@@ -117442,35 +117442,35 @@ _UnnamedText_51de2: ; 84599 (21:4599)
 _UnnamedText_51e00: ; 845b4 (21:45b4)
 	text "TEAM ROCKET was"
 	line "after the MASTER"
-	next "BALL which will"
-	next "catch any #MON!"
+	cont "BALL which will"
+	cont "catch any #MON!"
 	done
 
 _UnnamedText_51e05: ; 845f6 (21:45f6)
 	text "We canceled the"
 	line "MASTER BALL"
-	next "project because"
-	next "of TEAM ROCKET."
+	cont "project because"
+	cont "of TEAM ROCKET."
 	done
 
 _UnnamedText_51e23: ; 84633 (21:4633)
 	text "It would be bad"
 	line "if TEAM ROCKET"
-	next "took over SILPH"
-	next "or our #MON!"
+	cont "took over SILPH"
+	cont "or our #MON!"
 	done
 
 _UnnamedText_51e28: ; 84670 (21:4670)
 	text "Wow! You chased"
 	line "off TEAM ROCKET"
-	next "all by yourself?"
+	cont "all by yourself?"
 	done
 
 _UnnamedText_51e46: ; 846a2 (21:46a2)
 	text "You! It's really"
 	line "dangerous here!"
-	next "You came to save"
-	next "me? You can't!"
+	cont "You came to save"
+	cont "me? You can't!"
 	done
 
 _UnnamedText_51e4b: ; 846e2 (21:46e2)
@@ -117491,13 +117491,13 @@ _SilphCo7EndBattleText1: ; 8471d (21:471d)
 _SilphCo7AfterBattleText1: ; 8472a (21:472a)
 	text "You won't find my"
 	line "BOSS by just"
-	next "scurrying around!"
+	cont "scurrying around!"
 	done
 
 _SilphCo7BattleText2: ; 8475b (21:475b)
 	text "Heheh!"
 
-	page "You mistook me for"
+	para "You mistook me for"
 	line "a SILPH worker?"
 	done
 
@@ -117509,7 +117509,7 @@ _SilphCo7EndBattleText2: ; 84786 (21:4786)
 _SilphCo7AfterBattleText2: ; 84790 (21:4790)
 	text "Despite your age,"
 	line "you are a skilled"
-	next "trainer!"
+	cont "trainer!"
 	done
 
 _SilphCo7BattleText3: ; 847be (21:47be)
@@ -117525,7 +117525,7 @@ _SilphCo7EndBattleText3: ; 847e2 (21:47e2)
 _SilphCo7AfterBattleText3: ; 847fb (21:47fb)
 	text "Doesn't matter."
 	line "My brothers will"
-	next "repay the favor!"
+	cont "repay the favor!"
 	done
 
 _SilphCo7BattleText4: ; 8482d (21:482d)
@@ -117541,7 +117541,7 @@ _SilphCo7EndBattleText4: ; 84852 (21:4852)
 _SilphCo7AfterBattleText4: ; 84861 (21:4861)
 	text "Go on home"
 	line "before my BOSS"
-	next "gets ticked off!"
+	cont "gets ticked off!"
 	done
 
 _UnnamedText_51ebe: ; 8488d (21:488d)
@@ -117552,60 +117552,60 @@ _UnnamedText_51ebe: ; 8488d (21:488d)
 _UnnamedText_51ec3: ; 848a2 (21:48a2)
 	text $53, ": Hahaha!"
 	line "I thought you'd"
-	next "turn up if I"
-	next "waited here!"
+	cont "turn up if I"
+	cont "waited here!"
 
-	page "I guess TEAM"
+	para "I guess TEAM"
 	line "ROCKET slowed you"
-	next "down! Not that I"
-	next "care!"
+	cont "down! Not that I"
+	cont "care!"
 
-	page "I saw you in"
+	para "I saw you in"
 	line "SAFFRON, so I"
-	next "decided to see if"
-	next "you got better!"
+	cont "decided to see if"
+	cont "you got better!"
 	done
 
 _UnnamedText_51ec8: ; 8494a (21:494a)
 	text "Oh ho!"
 	line "So, you are ready"
-	next "for BOSS ROCKET!"
+	cont "for BOSS ROCKET!"
 	prompt
 
 _UnnamedText_51ecd: ; 84975 (21:4975)
 	text $53, ": How can"
 	line "I put this?"
 
-	page "You're not good"
+	para "You're not good"
 	line "enough to play"
-	next "with us big boys!"
+	cont "with us big boys!"
 	prompt
 
 _UnnamedText_51ed2: ; 849bd (21:49bd)
 	text "Well, ", $52, "!"
 
-	page "I'm moving on up"
+	para "I'm moving on up"
 	line "and ahead!"
 
-	page "By checking my"
+	para "By checking my"
 	line "#DEX, I'm"
-	next "starting to see"
-	next "what's strong and"
-	next "how they evolve!"
+	cont "starting to see"
+	cont "what's strong and"
+	cont "how they evolve!"
 
-	page "I'm going to the"
+	para "I'm going to the"
 	line "#MON LEAGUE"
-	next "to boot out the"
-	next "ELITE FOUR!"
+	cont "to boot out the"
+	cont "ELITE FOUR!"
 
-	page "I'll become the"
+	para "I'll become the"
 	line "world's most"
-	next "powerful trainer!"
+	cont "powerful trainer!"
 
-	page $52, ", well"
+	para $52, ", well"
 	line "good luck to you!"
-	next "Don't sweat it!"
-	next "Smell ya!"
+	cont "Don't sweat it!"
+	cont "Smell ya!"
 	done
 
 _UnnamedText_565be: ; 84ac4 (21:4ac4)
@@ -117631,7 +117631,7 @@ _SilphCo8EndBattleText1: ; 84b18 (21:4b18)
 _SilphCo8AfterBattleText1: ; 84b2a (21:4b2a)
 	text "If you don't turn"
 	line "back, I'll call"
-	next "for backup!"
+	cont "for backup!"
 	done
 
 _SilphCo8BattleText2: ; 84b57 (21:4b57)
@@ -117647,7 +117647,7 @@ _SilphCo8EndBattleText2: ; 84b73 (21:4b73)
 _SilphCo8AfterBattleText2: ; 84b81 (21:4b81)
 	text "So, what do you"
 	line "think of SILPH"
-	next "BUILDING's maze?"
+	cont "BUILDING's maze?"
 	done
 
 _SilphCo8BattleText3: ; 84bb1 (21:4bb1)
@@ -117668,7 +117668,7 @@ _SilphCo8AfterBattleText3: ; 84be9 (21:4be9)
 _UnnamedText_5d8e5: ; 84c0b (21:4c0b)
 	text "You look tired!"
 	line "You should take a"
-	next "quick nap!"
+	cont "quick nap!"
 	prompt
 
 _UnnamedText_5d8ea: ; 84c39 (21:4c39)
@@ -117692,13 +117692,13 @@ _SilphCo9EndBattleText1: ; 84c7f (21:4c7f)
 _SilphCo9AfterBattleText1: ; 84c88 (21:4c88)
 	text "If I had started"
 	line "as a trainer at"
-	next "your age..."
+	cont "your age..."
 	done
 
 _SilphCo9BattleText2: ; 84cb6 (21:4cb6)
 	text "Your #MON have"
 	line "weak points! I"
-	next "can nail them!"
+	cont "can nail them!"
 	done
 
 _SilphCo9EndBattleText2: ; 84ce4 (21:4ce4)
@@ -117709,8 +117709,8 @@ _SilphCo9EndBattleText2: ; 84ce4 (21:4ce4)
 _SilphCo9AfterBattleText2: ; 84cf6 (21:4cf6)
 	text "Exploiting weak"
 	line "spots does work!"
-	next "Think about"
-	next "element types!"
+	cont "Think about"
+	cont "element types!"
 	done
 
 _SilphCo9BattleText3: ; 84d33 (21:4d33)
@@ -117730,7 +117730,7 @@ _SilphCo9AfterBattleText3: ; 84d70 (21:4d70)
 
 _UnnamedText_5a1d3: ; 84d8d (21:4d8d)
 	text "Waaaaa!"
-	next "I'm scared!"
+	cont "I'm scared!"
 	done
 
 _UnnamedText_5a1d8: ; 84da1 (21:4da1)
@@ -117741,7 +117741,7 @@ _UnnamedText_5a1d8: ; 84da1 (21:4da1)
 _SilphCo10BattleText1: ; 84dc5 (21:4dc5)
 	text "Welcome to the"
 	line "10F! So good of"
-	next "you to join me!"
+	cont "you to join me!"
 	done
 
 _SilphCo10EndBattleText1: ; 84df5 (21:4df5)
@@ -117752,7 +117752,7 @@ _SilphCo10EndBattleText1: ; 84df5 (21:4df5)
 _SilphCo10AfterBattleText1: ; 84e02 (21:4e02)
 	text "Nice try, but the"
 	line "boardroom is up"
-	next "one more floor!"
+	cont "one more floor!"
 	done
 
 _SilphCo10BattleText2: ; 84e35 (21:4e35)
@@ -117768,27 +117768,27 @@ _SilphCo10EndBattleText2: ; 84e52 (21:4e52)
 _SilphCo10AfterBattleText2: ; 84e66 (21:4e66)
 	text "Are you satisfied"
 	line "with beating me?"
-	next "Then go on home!"
+	cont "Then go on home!"
 	done
 
 _SilphCoPresidentText: ; 84e9b (21:4e9b)
 	text "PRESIDENT: Thank"
 	line "you for saving"
-	next "SILPH!"
+	cont "SILPH!"
 
-	page "I will never"
+	para "I will never"
 	line "forget you saved"
-	next "us in our moment"
-	next "of peril!"
+	cont "us in our moment"
+	cont "of peril!"
 
-	page "I have to thank"
+	para "I have to thank"
 	line "you in some way!"
 
-	page "Because I am rich,"
+	para "Because I am rich,"
 	line "I can give you"
-	next "anything!"
+	cont "anything!"
 
-	page "Here, maybe this"
+	para "Here, maybe this"
 	line "will do!"
 	prompt
 
@@ -117801,19 +117801,19 @@ _ReceivedSilphCoMasterBallText: ; 84f63 (21:4f63)
 _UnnamedText_6231c: ; 84f74 (21:4f74)
 	text "PRESIDENT: You"
 	line "can't buy that"
-	next "anywhere!"
+	cont "anywhere!"
 
-	page "It's our secret"
+	para "It's our secret"
 	line "prototype MASTER"
-	next "BALL!"
+	cont "BALL!"
 
-	page "It will catch any"
+	para "It will catch any"
 	line "#MON without"
-	next "fail!"
+	cont "fail!"
 
-	page "You should be"
+	para "You should be"
 	line "quiet about using"
-	next "it, though."
+	cont "it, though."
 	done
 
 _SilphCoMasterBallNoRoomText: ; 85013 (21:5013)
@@ -117824,9 +117824,9 @@ _SilphCoMasterBallNoRoomText: ; 85013 (21:5013)
 _SilphCo11Text2: ; 8502f (21:502f)
 	text "SECRETARY: Thank"
 	line "you for rescuing"
-	next "all of us!"
+	cont "all of us!"
 
-	page "We admire your"
+	para "We admire your"
 	line "courage."
 	done
 
@@ -117834,16 +117834,16 @@ _SilphCo11Text3: ; 85075 (21:5075)
 	text "Ah ", $52, "!"
 	line "So we meet again!"
 
-	page "The PRESIDENT and"
+	para "The PRESIDENT and"
 	line "I are discussing"
-	next "a vital business"
-	next "proposition."
+	cont "a vital business"
+	cont "proposition."
 
-	page "Keep your nose"
+	para "Keep your nose"
 	line "out of grown-up"
-	next "matters..."
+	cont "matters..."
 
-	page "Or, experience a"
+	para "Or, experience a"
 	line "world of pain!"
 	done
 
@@ -117855,17 +117855,17 @@ _UnnamedText_62330: ; 85119 (21:5119)
 _UnnamedText_62335: ; 85131 (21:5131)
 	text "Blast it all!"
 	line "You ruined our"
-	next "plans for SILPH!"
+	cont "plans for SILPH!"
 
-	page "But, TEAM ROCKET"
+	para "But, TEAM ROCKET"
 	line "will never fall!"
 
-	page $52, "! Never"
+	para $52, "! Never"
 	line "forget that all"
-	next "#MON exist"
-	next "for TEAM ROCKET!"
+	cont "#MON exist"
+	cont "for TEAM ROCKET!"
 
-	page "I must go, but I"
+	para "I must go, but I"
 	line "shall return!"
 	done
 
@@ -117887,7 +117887,7 @@ _SilphCo11AfterBattleText1: ; 85209 (21:5209)
 _SilphCo11BattleText2: ; 85227 (21:5227)
 	text "Halt! Do you have"
 	line "an appointment"
-	next "with my BOSS?"
+	cont "with my BOSS?"
 	done
 
 _SilphCo11EndBattleText2: ; 85257 (21:5257)
@@ -117898,7 +117898,7 @@ _SilphCo11EndBattleText2: ; 85257 (21:5257)
 _SilphCo11AfterBattleText2: ; 8526a (21:526a)
 	text "Watch your step,"
 	line "my BOSS likes his"
-	next "#MON tough!"
+	cont "#MON tough!"
 	done
 
 _UnnamedText_6237b: ; 8529a (21:529a)
@@ -117909,7 +117909,7 @@ _UnnamedText_6237b: ; 8529a (21:529a)
 _Mansion2BattleText1: ; 852b7 (21:52b7)
 	text "I can't get out!"
 	line "This old place is"
-	next "one big puzzle!"
+	cont "one big puzzle!"
 	done
 
 _Mansion2EndBattleText1: ; 852ea (21:52ea)
@@ -117920,30 +117920,30 @@ _Mansion2EndBattleText1: ; 852ea (21:52ea)
 _Mansion2AfterBattleText1: ; 85302 (21:5302)
 	text "Switches open and"
 	line "close alternating"
-	next "sets of doors!"
+	cont "sets of doors!"
 	done
 
 _Mansion2Text3: ; 85336 (21:5336)
 	text "Diary: July 5"
 	line "Guyana,"
-	next "South America"
+	cont "South America"
 
-	page "A new #MON was"
+	para "A new #MON was"
 	line "discovered deep"
-	next "in the jungle."
+	cont "in the jungle."
 	done
 
 _Mansion2Text4: ; 85389 (21:5389)
 	text "Diary: July 10"
 	line "We christened the"
-	next "newly discovered"
-	next "#MON, MEW."
+	cont "newly discovered"
+	cont "#MON, MEW."
 	done
 
 _UnnamedText_520c2: ; 853c7 (21:53c7)
 	text "A secret switch!"
 
-	page "Press it?"
+	para "Press it?"
 	done
 
 _UnnamedText_520c7: ; 853e3 (21:53e3)
@@ -117981,14 +117981,14 @@ _Mansion3EndBattleText2: ; 85460 (21:5460)
 _Mansion3AfterBattleText2: ; 85475 (21:5475)
 	text "So, you're stuck?"
 	line "Try jumping off"
-	next "over there!"
+	cont "over there!"
 	done
 
 _Mansion3Text5: ; 854a3 (21:54a3)
 	text "Diary: Feb. 6"
 	line "MEW gave birth."
 
-	page "We named the"
+	para "We named the"
 	line "newborn MEWTWO."
 	done
 
@@ -118019,17 +118019,17 @@ _Mansion4EndBattleText2: ; 85541 (21:5541)
 _Mansion4AfterBattleText2: ; 85555 (21:5555)
 	text "I like it here!"
 	line "It's conducive to"
-	next "my studies!"
+	cont "my studies!"
 	done
 
 _Mansion4Text7: ; 85583 (21:5583)
 	text "Diary; Sept. 1"
 	line "MEWTWO is far too"
-	next "powerful."
+	cont "powerful."
 
-	page "We have failed to"
+	para "We have failed to"
 	line "curb its vicious"
-	next "tendencies..."
+	cont "tendencies..."
 	done
 
 _SafariZoneEastText5: ; 855e0 (21:55e0)
@@ -118039,9 +118039,9 @@ _SafariZoneEastText5: ; 855e0 (21:55e0)
 _SafariZoneEastText6: ; 855ec (21:55ec)
 	text "TRAINER TIPS"
 
-	page "The remaining time"
+	para "The remaining time"
 	line "declines only"
-	next "while you walk!"
+	cont "while you walk!"
 	done
 
 _SafariZoneEastText7: ; 8562b (21:562b)
@@ -118056,7 +118056,7 @@ _SafariZoneNorthText3: ; 85646 (21:5646)
 _SafariZoneNorthText4: ; 85652 (21:5652)
 	text "TRAINER TIPS"
 
-	page "The SECRET HOUSE"
+	para "The SECRET HOUSE"
 	line "is still ahead!"
 	done
 
@@ -118067,20 +118067,20 @@ _SafariZoneNorthText5: ; 85681 (21:5681)
 _SafariZoneNorthText6: ; 85689 (21:5689)
 	text "TRAINER TIPS"
 
-	page "#MON hide in"
+	para "#MON hide in"
 	line "tall grass!"
 
-	page "Zigzag through"
+	para "Zigzag through"
 	line "grassy areas to"
-	next "flush them out."
+	cont "flush them out."
 	done
 
 _SafariZoneNorthText7: ; 856df (21:56df)
 	text "TRAINER TIPS"
 
-	page "Win a free HM for"
+	para "Win a free HM for"
 	line "finding the"
-	next "SECRET HOUSE!"
+	cont "SECRET HOUSE!"
 	done
 
 _SafariZoneWestText5: ; 85719 (21:5719)
@@ -118090,23 +118090,23 @@ _SafariZoneWestText5: ; 85719 (21:5719)
 _SafariZoneWestText6: ; 85725 (21:5725)
 	text "REQUEST NOTICE"
 
-	page "Please find the"
+	para "Please find the"
 	line "SAFARI WARDEN's"
-	next "lost GOLD TEETH."
-	next "They're around"
-	next "here somewhere."
+	cont "lost GOLD TEETH."
+	cont "They're around"
+	cont "here somewhere."
 
-	page "Reward offered!"
+	para "Reward offered!"
 	line "Contact: WARDEN"
 	done
 
 _SafariZoneWestText7: ; 857a3 (21:57a3)
 	text "TRAINER TIPS"
 
-	page "Zone Exploration"
+	para "Zone Exploration"
 	line "Campaign!"
 
-	page "The Search for"
+	para "The Search for"
 	line "the SECRET HOUSE!"
 	done
 
@@ -118122,36 +118122,36 @@ _SafariZoneCenterText2: ; 85807 (21:5807)
 _SafariZoneCenterText3: ; 85813 (21:5813)
 	text "TRAINER TIPS"
 
-	page "Press the START"
+	para "Press the START"
 	line "Button to check"
-	next "remaining time!"
+	cont "remaining time!"
 	done
 
 _SafariZoneRestHouse1Text1: ; 85851 (21:5851)
 	text "SARA: Where did"
 	line "my boy friend,"
-	next "ERIK, go?"
+	cont "ERIK, go?"
 	done
 
 _SafariZoneRestHouse1Text2: ; 8587b (21:587b)
 	text "I'm catching"
 	line "#MON to take"
-	next "home as gifts!"
+	cont "home as gifts!"
 	done
 
 _UnnamedText_4a350: ; 858a4 (21:58a4)
 	text "Ah! Finally!"
 
-	page "You're the first"
+	para "You're the first"
 	line "person to reach"
-	next "the SECRET HOUSE!"
+	cont "the SECRET HOUSE!"
 
-	page "I was getting"
+	para "I was getting"
 	line "worried that no"
-	next "one would win our"
-	next "campaign prize."
+	cont "one would win our"
+	cont "campaign prize."
 
-	page "Congratulations!"
+	para "Congratulations!"
 	line "You have won!"
 	prompt
 
@@ -118164,57 +118164,57 @@ _ReceivedHM03Text: ; 85943 (21:5943)
 _HM03ExplanationText: ; 85957 (21:5957)
 	text "HM03 is SURF!"
 
-	page "#MON will be"
+	para "#MON will be"
 	line "able to ferry you"
-	next "across water!"
+	cont "across water!"
 
-	page "And, this HM isn't"
+	para "And, this HM isn't"
 	line "disposable! You"
-	next "can use it over"
-	next "and over!"
+	cont "can use it over"
+	cont "and over!"
 
-	page "You're super lucky"
+	para "You're super lucky"
 	line "for winning this"
-	next "fabulous prize!"
+	cont "fabulous prize!"
 	done
 
 _HM03NoRoomText: ; 85a02 (21:5a02)
 	text "You don't have"
 	line "room for this"
-	next "fabulous prize!"
+	cont "fabulous prize!"
 	done
 
 _SafariZoneRestHouse2Text1: ; 85a2f (21:5a2f)
 	text "Tossing ROCKs at"
 	line "#MON might"
-	next "make them run,"
-	next "but they'll be"
-	next "easier to catch."
+	cont "make them run,"
+	cont "but they'll be"
+	cont "easier to catch."
 	done
 
 _SafariZoneRestHouse2Text2: ; 85a7a (21:5a7a)
 	text "Using BAIT will"
 	line "make #MON"
-	next "easier to catch."
+	cont "easier to catch."
 	done
 
 _SafariZoneRestHouse2Text3: ; 85aa6 (21:5aa6)
 	text "I hiked a lot, but"
 	line "I didn't see any"
-	next "#MON I wanted."
+	cont "#MON I wanted."
 	done
 
 _SafariZoneRestHouse3Text1: ; 85ad9 (21:5ad9)
 	text "How many did you"
 	line "catch? I'm bushed"
-	next "from the work!"
+	cont "from the work!"
 	done
 
 _SafariZoneRestHouse3Text2: ; 85b0b (21:5b0b)
 	text "I caught a"
 	line "CHANSEY!"
 
-	page "That makes this"
+	para "That makes this"
 	line "all worthwhile!"
 	done
 
@@ -118226,29 +118226,29 @@ _SafariZoneRestHouse3Text3: ; 85b40 (21:5b40)
 _SafariZoneRestHouse4Text1: ; 85b62 (21:5b62)
 	text "You can keep any"
 	line "item you find on"
-	next "the ground here."
+	cont "the ground here."
 
-	page "But, you'll run"
+	para "But, you'll run"
 	line "out of time if"
-	next "you try for all"
-	next "of them at once!"
+	cont "you try for all"
+	cont "of them at once!"
 	done
 
 _SafariZoneRestHouse4Text2: ; 85bd5 (21:5bd5)
 	text "Go to the deepest"
 	line "part of the"
-	next "SAFARI ZONE. You"
-	next "will win a prize!"
+	cont "SAFARI ZONE. You"
+	cont "will win a prize!"
 	done
 
 _SafariZoneRestHouse4Text3: ; 85c17 (21:5c17)
 	text "My EEVEE evolved"
 	line "into FLAREON!"
 
-	page "But, a friend's"
+	para "But, a friend's"
 	line "EEVEE turned into"
-	next "a VAPOREON!"
-	next "I wonder why?"
+	cont "a VAPOREON!"
+	cont "I wonder why?"
 	done
 
 _UnknownDungeon3MewtwoText: ; 85c72 (21:5c72)
@@ -118257,7 +118257,7 @@ _UnknownDungeon3MewtwoText: ; 85c72 (21:5c72)
 _VictoryRoad1BattleText1: ; 85c79 (21:5c79)
 	text "I wonder if you"
 	line "are good enough"
-	next "for me!"
+	cont "for me!"
 	done
 
 _VictoryRoad1EndBattleText1: ; 85ca2 (21:5ca2)
@@ -118273,7 +118273,7 @@ _VictoryRoad1AfterBattleText1: ; 85caf (21:5caf)
 _VictoryRoad1BattleText2: ; 85cd3 (21:5cd3)
 	text "I can see you're"
 	line "good! Let me see"
-	next "exactly how good!"
+	cont "exactly how good!"
 	done
 
 _VictoryRoad1EndBattleText2: ; 85d07 (21:5d07)
@@ -118290,159 +118290,159 @@ _LanceBeforeBattleText: ; 85d3c (21:5d3c)
 	text "Ah! I heard about"
 	line "you ", $52, "!"
 
-	page "I lead the ELITE"
+	para "I lead the ELITE"
 	line "FOUR! You can"
-	next "call me LANCE the"
-	next "dragon trainer!"
+	cont "call me LANCE the"
+	cont "dragon trainer!"
 
-	page "You know that"
+	para "You know that"
 	line "dragons are"
-	next "mythical #MON!"
+	cont "mythical #MON!"
 
-	page "They're hard to"
+	para "They're hard to"
 	line "catch and raise,"
-	next "but their powers"
-	next "are superior!"
+	cont "but their powers"
+	cont "are superior!"
 
-	page "They're virtually"
+	para "They're virtually"
 	line "indestructible!"
 
-	page "Well, are you"
+	para "Well, are you"
 	line "ready to lose?"
 
-	page "Your LEAGUE"
+	para "Your LEAGUE"
 	line "challenge ends"
-	next "with me, ", $52, "!"
+	cont "with me, ", $52, "!"
 	done
 
 _LanceEndBattleText: ; 85e64 (21:5e64)
 	text "That's it!"
 
-	page "I hate to admit"
+	para "I hate to admit"
 	line "it, but you are a"
-	next "#MON master!"
+	cont "#MON master!"
 	prompt
 
 _LanceAfterBattleText: ; 85e9e (21:5e9e)
 	text "I still can't"
 	line "believe my"
-	next "dragons lost to"
-	next "you, ", $52, "!"
+	cont "dragons lost to"
+	cont "you, ", $52, "!"
 
-	page "You are now the"
+	para "You are now the"
 	line "#MON LEAGUE"
-	next "champion!"
+	cont "champion!"
 
-	page "...Or, you would"
+	para "...Or, you would"
 	line "have been, but"
-	next "you have one more"
-	next "challenge ahead."
+	cont "you have one more"
+	cont "challenge ahead."
 
-	page "You have to face"
+	para "You have to face"
 	line "another trainer!"
-	next "His name is..."
+	cont "His name is..."
 
-	page $53, "!"
+	para $53, "!"
 	line "He beat the ELITE"
-	next "FOUR before you!"
+	cont "FOUR before you!"
 
-	page "He is the real"
+	para "He is the real"
 	line "#MON LEAGUE"
-	next "champion!@@"
+	cont "champion!@@"
 
 _HallofFameRoomText1: ; 85fb5 (21:5fb5)
 	text "OAK: Er-hem!"
 	line "Congratulations"
-	next $52, "!"
+	cont $52, "!"
 
-	page "This floor is the"
+	para "This floor is the"
 	line "#MON HALL OF"
-	next "FAME!"
+	cont "FAME!"
 
-	page "#MON LEAGUE"
+	para "#MON LEAGUE"
 	line "champions are"
-	next "honored for their"
-	next "exploits here!"
+	cont "honored for their"
+	cont "exploits here!"
 
-	page "Their #MON are"
+	para "Their #MON are"
 	line "also recorded in"
-	next "the HALL OF FAME!"
+	cont "the HALL OF FAME!"
 
-	page $52, "! You have"
+	para $52, "! You have"
 	line "endeavored hard"
-	next "to become the new"
-	next "LEAGUE champion!"
+	cont "to become the new"
+	cont "LEAGUE champion!"
 
-	page "Congratulations,"
+	para "Congratulations,"
 	line $52, ", you and"
-	next "your #MON are"
-	next "HALL OF FAMERs!"
+	cont "your #MON are"
+	cont "HALL OF FAMERs!"
 	done
 
 _UnnamedText_760f4: ; 860e1 (21:60e1)
 	text $53, ": Hey!"
 
-	page "I was looking"
+	para "I was looking"
 	line "forward to seeing"
-	next "you, ", $52, "!"
+	cont "you, ", $52, "!"
 
-	page "My rival should"
+	para "My rival should"
 	line "be strong to keep"
-	next "me sharp!"
+	cont "me sharp!"
 
-	page "While working on"
+	para "While working on"
 	line "#DEX, I looked"
-	next "all over for"
-	next "powerful #MON!"
+	cont "all over for"
+	cont "powerful #MON!"
 
-	page "Not only that, I"
+	para "Not only that, I"
 	line "assembled teams"
-	next "that would beat"
-	next "any #MON type!"
+	cont "that would beat"
+	cont "any #MON type!"
 
-	page "And now!"
+	para "And now!"
 
-	page "I'm the #MON"
+	para "I'm the #MON"
 	line "LEAGUE champion!"
 
-	page $52, "! Do you"
+	para $52, "! Do you"
 	line "know what that"
-	next "means?"
+	cont "means?"
 
-	page "I'll tell you!"
+	para "I'll tell you!"
 
-	page "I am the most"
+	para "I am the most"
 	line "powerful trainer"
-	next "in the world!"
+	cont "in the world!"
 	done
 
 _UnnamedText_760f9: ; 8623b (21:623b)
 	text "NO!"
 	line "That can't be!"
-	next "You beat my best!"
+	cont "You beat my best!"
 
-	page "After all that"
+	para "After all that"
 	line "work to become"
-	next "LEAGUE champ?"
+	cont "LEAGUE champ?"
 
-	page "My reign is over"
+	para "My reign is over"
 	line "already?"
-	next "It's not fair!"
+	cont "It's not fair!"
 	prompt
 
 _UnnamedText_760fe: ; 862b4 (21:62b4)
 	text "Hahaha!"
 	line "I won, I won!"
 
-	page "I'm too good for"
+	para "I'm too good for"
 	line "you, ", $52, "!"
 
-	page "You did well to"
+	para "You did well to"
 	line "even reach me,"
-	next $53, ", the"
-	next "#MON genius!"
+	cont $53, ", the"
+	cont "#MON genius!"
 
-	page "Nice try, loser!"
+	para "Nice try, loser!"
 	line "Hahaha!"
 	prompt
 
@@ -118450,15 +118450,15 @@ _UnnamedText_76103: ; 8632f (21:632f)
 	text "Why?"
 	line "Why did I lose?"
 
-	page "I never made any"
+	para "I never made any"
 	line "mistakes raising"
-	next "my #MON..."
+	cont "my #MON..."
 
-	page "Darn it! You're"
+	para "Darn it! You're"
 	line "the new #MON"
-	next "LEAGUE champion!"
+	cont "LEAGUE champion!"
 
-	page "Although I don't"
+	para "Although I don't"
 	line "like to admit it."
 	done
 
@@ -118469,18 +118469,18 @@ _GaryText2: ; 863c1 (21:63c1)
 _UnnamedText_76120: ; 863ca (21:63ca)
 	text "OAK: So, you won!"
 	line "Congratulations!"
-	next "You're the new"
-	next "#MON LEAGUE"
-	next "champion!"
+	cont "You're the new"
+	cont "#MON LEAGUE"
+	cont "champion!"
 
-	page "You've grown up so"
+	para "You've grown up so"
 	line "much since you"
-	next "first left with"
-	next "@"
+	cont "first left with"
+	cont "@"
 	TX_RAM $cd6d
 	text "!"
 
-	page $52, ", you have"
+	para $52, ", you have"
 	line "come of age!"
 	done
 
@@ -118488,41 +118488,41 @@ _UnnamedText_76125: ; 86463 (21:6463)
 	text "OAK: ", $53, "! I'm"
 	line "disappointed!"
 
-	page "I came when I"
+	para "I came when I"
 	line "heard you beat"
-	next "the ELITE FOUR!"
+	cont "the ELITE FOUR!"
 
-	page "But, when I got"
+	para "But, when I got"
 	line "here, you had"
-	next "already lost!"
+	cont "already lost!"
 
-	page $53, "! Do you"
+	para $53, "! Do you"
 	line "understand why"
-	next "you lost?"
+	cont "you lost?"
 
-	page "You have forgotten"
+	para "You have forgotten"
 	line "to treat your"
-	next "#MON with"
-	next "trust and love!"
+	cont "#MON with"
+	cont "trust and love!"
 
-	page "Without them, you"
+	para "Without them, you"
 	line "will never become"
-	next "a champ again!"
+	cont "a champ again!"
 	done
 
 _UnnamedText_7612a: ; 86567 (21:6567)
 	text "OAK: ", $52, "!"
 
-	page "You understand"
+	para "You understand"
 	line "that your victory"
-	next "was not just your"
-	next "own doing!"
+	cont "was not just your"
+	cont "own doing!"
 
-	page "The bond you share"
+	para "The bond you share"
 	line "with your #MON"
-	next "is marvelous!"
+	cont "is marvelous!"
 
-	page $52, "!"
+	para $52, "!"
 	line "Come with me!"
 	done
 
@@ -118530,22 +118530,22 @@ _LoreleiBeforeBattleText: ; 865ef (21:65ef)
 	text "Welcome to"
 	line "#MON LEAGUE!"
 
-	page "I am LORELEI of"
+	para "I am LORELEI of"
 	line "the ELITE FOUR!"
 
-	page "No one can best"
+	para "No one can best"
 	line "me when it comes"
-	next "to icy #MON!"
+	cont "to icy #MON!"
 
-	page "Freezing moves"
+	para "Freezing moves"
 	line "are powerful!"
 
-	page "Your #MON will"
+	para "Your #MON will"
 	line "be at my mercy"
-	next "when they are"
-	next "frozen solid!"
+	cont "when they are"
+	cont "frozen solid!"
 
-	page "Hahaha!"
+	para "Hahaha!"
 	line "Are you ready?"
 	done
 
@@ -118557,11 +118557,11 @@ _LoreleiEndBattleText: ; 866c4 (21:66c4)
 _LoreleiAfterBattleText: ; 866d3 (21:66d3)
 	text "You're better"
 	line "than I thought!"
-	next "Go on ahead!"
+	cont "Go on ahead!"
 
-	page "You only got a"
+	para "You only got a"
 	line "taste of #MON"
-	next "LEAGUE power!"
+	cont "LEAGUE power!"
 	done
 
 _UnnamedText_7627b: ; 86729 (21:6729)
@@ -118573,22 +118573,22 @@ _BrunoBeforeBattleText: ; 86749 (21:6749)
 	text "I am BRUNO of"
 	line "the ELITE FOUR!"
 
-	page "Through rigorous"
+	para "Through rigorous"
 	line "training, people"
-	next "and #MON can"
-	next "become stronger!"
+	cont "and #MON can"
+	cont "become stronger!"
 
-	page "I've weight"
+	para "I've weight"
 	line "trained with"
-	next "my #MON!"
+	cont "my #MON!"
 
-	page $52, "!"
+	para $52, "!"
 
-	page "We will grind you"
+	para "We will grind you"
 	line "down with our"
-	next "superior power!"
+	cont "superior power!"
 
-	page "Hoo hah!"
+	para "Hoo hah!"
 	done
 
 _BrunoEndBattleText: ; 86805 (21:6805)
@@ -118599,7 +118599,7 @@ _BrunoEndBattleText: ; 86805 (21:6805)
 _BrunoAfterBattleText: ; 8681d (21:681d)
 	text "My job is done!"
 	line "Go face your next"
-	next "challenge!"
+	cont "challenge!"
 	done
 
 _UnnamedText_763d2: ; 8684b (21:684b)
@@ -118611,40 +118611,40 @@ _AgathaBeforeBattleText: ; 8686b (21:686b)
 	text "I am AGATHA of"
 	line "the ELITE FOUR!"
 
-	page "OAK's taken a lot"
+	para "OAK's taken a lot"
 	line "of interest in"
-	next "you, child!"
+	cont "you, child!"
 
-	page "That old duff was"
+	para "That old duff was"
 	line "once tough and"
-	next "handsome! That"
-	next "was decades ago!"
+	cont "handsome! That"
+	cont "was decades ago!"
 
-	page "Now he just wants"
+	para "Now he just wants"
 	line "to fiddle with"
-	next "his #DEX! He's"
-	next "wrong! #MON"
-	next "are for fighting!"
+	cont "his #DEX! He's"
+	cont "wrong! #MON"
+	cont "are for fighting!"
 
-	page $52, "! I'll show"
+	para $52, "! I'll show"
 	line "you how a real"
-	next "trainer fights!"
+	cont "trainer fights!"
 	done
 
 _AgathaEndBattleText: ; 86970 (21:6970)
 	text "Oh ho!"
 	line "You're something"
-	next "special, child!"
+	cont "special, child!"
 	prompt
 
 _AgathaAfterBattleText: ; 86998 (21:6998)
 	text "You win! I see"
 	line "what the old duff"
-	next "sees in you now!"
+	cont "sees in you now!"
 
-	page "I have nothing"
+	para "I have nothing"
 	line "else to say! Run"
-	next "along now, child!"
+	cont "along now, child!"
 	done
 
 _AgathaText2: ; 869fd (21:69fd)
@@ -118680,13 +118680,13 @@ _RockTunnel2EndBattleText3: ; 86a8e (21:6a8e)
 _RockTunnel2AfterBattleText3: ; 86aa2 (21:6aa2)
 	text "I go for power"
 	line "because I hate"
-	next "thinking!"
+	cont "thinking!"
 	done
 
 _RockTunnel2BattleText4: ; 86acb (21:6acb)
 	text "You have a"
 	line "#DEX?"
-	next "I want one too!"
+	cont "I want one too!"
 	done
 
 _RockTunnel2EndBattleText4: ; 86aed (21:6aed)
@@ -118697,7 +118697,7 @@ _RockTunnel2EndBattleText4: ; 86aed (21:6aed)
 _RockTunnel2AfterBattleText4: ; 86b04 (21:6b04)
 	text "When you finish"
 	line "your #DEX, can"
-	next "I have it?"
+	cont "I have it?"
 	done
 
 _RockTunnel2BattleText5: ; 86b2f (21:6b2f)
@@ -118713,31 +118713,31 @@ _RockTunnel2EndBattleText5: ; 86b53 (21:6b53)
 _RockTunnel2AfterBattleText5: ; 86b66 (21:6b66)
 	text "Costume players"
 	line "dress up as"
-	next "#MON for fun."
+	cont "#MON for fun."
 	done
 
 _RockTunnel2BattleText6: ; 86b91 (21:6b91)
 	text "My #MON"
 	line "techniques will"
-	next "leave you crying!"
+	cont "leave you crying!"
 	done
 
 _RockTunnel2EndBattleText6: ; 86bbc (21:6bbc)
 	text "I give!"
 	line "You're a better"
-	next "technician!"
+	cont "technician!"
 	prompt
 
 _RockTunnel2AfterBattleText6: ; 86be0 (21:6be0)
 	text "In mountains,"
 	line "you'll often find"
-	next "rock-type #MON."
+	cont "rock-type #MON."
 	done
 
 _RockTunnel2BattleText7: ; 86c10 (21:6c10)
 	text "I don't often"
 	line "come here, but I"
-	next "will fight you."
+	cont "will fight you."
 	done
 
 _RockTunnel2EndBattleText7: ; 86c3f (21:6c3f)
@@ -118748,7 +118748,7 @@ _RockTunnel2EndBattleText7: ; 86c3f (21:6c3f)
 _RockTunnel2AfterBattleText7: ; 86c4c (21:6c4c)
 	text "I like tiny"
 	line "#MON, big ones"
-	next "are too scary!"
+	cont "are too scary!"
 	done
 
 _RockTunnel2BattleText8: ; 86c77 (21:6c77)
@@ -118766,7 +118766,7 @@ SECTION "bank22",ROMX,BANK[$22]
 _RockTunnel2AfterBattleText8: ; 88000 (22:4000)
 	text "I'll raise my"
 	line "#MON to beat"
-	next "yours, kid!"
+	cont "yours, kid!"
 	done
 
 _RockTunnel2BattleText9: ; 88027 (22:4027)
@@ -118790,7 +118790,7 @@ _SeafoamIslands5BattleText2: ; 88075 (22:4075)
 _SeafoamIslands5Text4: ; 8807e (22:407e)
 	text "Boulders might"
 	line "change the flow"
-	next "of water!"
+	cont "of water!"
 	done
 
 _SeafoamIslands5Text5: ; 880a8 (22:40a8)
@@ -118812,7 +118812,7 @@ _AIBattleUseItemText: ; 880d5 (22:40d5)
 	line "used @"
 	TX_RAM $CD6D
 	db $0
-	next "on @"
+	cont "on @"
 	TX_RAM W_ENEMYMONNAME
 	text "!"
 	prompt
@@ -118933,11 +118933,11 @@ _GymStatueText1: ; 88275 (22:4275)
 	TX_RAM wGymCityName
 	db $0
 	line "#MON GYM"
-	next "LEADER: @"
+	cont "LEADER: @"
 	TX_RAM wGymLeaderName
 	db $0
 
-	page "WINNING TRAINERS:"
+	para "WINNING TRAINERS:"
 	line $53
 	done
 
@@ -118945,30 +118945,30 @@ _GymStatueText2: ; 882a5 (22:42a5)
 	TX_RAM wGymCityName
 	db $0
 	line "#MON GYM"
-	next "LEADER: @"
+	cont "LEADER: @"
 	TX_RAM wGymLeaderName
 	db $0
 
-	page "WINNING TRAINERS:"
+	para "WINNING TRAINERS:"
 	line $53
-	next $52
+	cont $52
 	done
 
 _ViridianCityPokecenterGuyText: ; 882d7 (22:42d7)
 	text "#MON CENTERs"
 	line "heal your tired,"
-	next "hurt or fainted"
-	next "#MON!"
+	cont "hurt or fainted"
+	cont "#MON!"
 	done
 
 _PewterCityPokecenterGuyText: ; 8830c (22:430c)
 	text "Yawn!"
 
-	page "When JIGGLYPUFF"
+	para "When JIGGLYPUFF"
 	line "sings, #MON"
-	next "get drowsy..."
+	cont "get drowsy..."
 
-	page "...Me too..."
+	para "...Me too..."
 	line "Snore..."
 	done
 
@@ -118976,7 +118976,7 @@ _CeruleanPokecenterGuyText: ; 88353 (22:4353)
 	text "BILL has lots of"
 	line "#MON!"
 
-	page "He collects rare"
+	para "He collects rare"
 	line "ones too!"
 	done
 
@@ -118984,21 +118984,21 @@ _LavenderPokecenterGuyText: ; 88386 (22:4386)
 	text "CUBONEs wear"
 	line "skulls, right?"
 
-	page "People will pay a"
+	para "People will pay a"
 	line "lot for one!"
 	done
 
 _MtMoonPokecenterBenchGuyText: ; 883c2 (22:43c2)
 	text "If you have too"
 	line "many #MON, you"
-	next "should store them"
-	next "via PC!"
+	cont "should store them"
+	cont "via PC!"
 	done
 
 _RockTunnelPokecenterGuyText: ; 883fc (22:43fc)
 	text "I heard that"
 	line "GHOSTs haunt"
-	next "LAVENDER TOWN!"
+	cont "LAVENDER TOWN!"
 	done
 
 _UnnamedText_624c1: ; 88426 (22:4426)
@@ -119014,63 +119014,63 @@ _UnnamedText_624c6: ; 88442 (22:4442)
 _UnnamedText_624cb: ; 88460 (22:4460)
 	text "SILPH's manager"
 	line "is hiding in the"
-	next "SAFARI ZONE."
+	cont "SAFARI ZONE."
 	done
 
 _VermilionPokecenterGuyText: ; 8848e (22:448e)
 	text "It is true that a"
 	line "higher level"
-	next "#MON will be"
-	next "more powerful..."
+	cont "#MON will be"
+	cont "more powerful..."
 
-	page "But, all #MON"
+	para "But, all #MON"
 	line "will have weak"
-	next "points against"
-	next "specific types."
+	cont "points against"
+	cont "specific types."
 
-	page "So, there is no"
+	para "So, there is no"
 	line "universally"
-	next "strong #MON."
+	cont "strong #MON."
 	done
 
 _CeladonCityPokecenterGuyText: ; 88531 (22:4531)
 	text "If I had a BIKE,"
 	line "I would go to"
-	next "CYCLING ROAD!"
+	cont "CYCLING ROAD!"
 	done
 
 _FuchsiaCityPokecenterGuyText: ; 8855f (22:455f)
 	text "If you're studying "
 	line "#MON, visit"
-	next "the SAFARI ZONE."
+	cont "the SAFARI ZONE."
 
-	page "It has all sorts"
+	para "It has all sorts"
 	line "of rare #MON."
 	done
 
 _CinnabarPokecenterGuyText: ; 885af (22:45af)
 	text "#MON can still"
 	line "learn techniques"
-	next "after canceling"
-	next "evolution."
+	cont "after canceling"
+	cont "evolution."
 
-	page "Evolution can wait"
+	para "Evolution can wait"
 	line "until new moves"
-	next "have been learned."
+	cont "have been learned."
 	done
 
 _SaffronCityPokecenterGuyText1: ; 88621 (22:4621)
 	text "It would be great"
 	line "if the ELITE FOUR"
-	next "came and stomped"
-	next "TEAM ROCKET!"
+	cont "came and stomped"
+	cont "TEAM ROCKET!"
 	done
 
 _SaffronCityPokecenterGuyText2: ; 88664 (22:4664)
 	text "TEAM ROCKET took"
 	line "off! We can go"
-	next "out safely again!"
-	next "That's great!"
+	cont "out safely again!"
+	cont "That's great!"
 	done
 
 _CeladonCityHotelText: ; 886a4 (22:46a4)
@@ -119096,20 +119096,20 @@ _UnnamedText_1e960: ; 886fc (22:46fc)
 _UnnamedText_1e97e: ; 8871a (22:471a)
 	text "The SAVE option is"
 	line "on the MENU"
-	next "screen."
+	cont "screen."
 	done
 
 _UnnamedText_1e983: ; 88742 (22:4742)
 	text "All #MON types"
 	line "have strong and"
-	next "weak points"
-	next "against others."
+	cont "weak points"
+	cont "against others."
 	done
 
 _UnnamedText_1ea0d: ; 8877e (22:477e)
 	text "PA: Ding-dong!"
 
-	page "Time's up!"
+	para "Time's up!"
 	prompt
 
 _UnnamedText_1ea12: ; 88798 (22:4798)
@@ -119120,19 +119120,19 @@ _UnnamedText_1ea12: ; 88798 (22:4798)
 _CinnabarGymQuizIntroText: ; 887b7 (22:47b7)
 	text "#MON Quiz!"
 
-	page "Get it right and"
+	para "Get it right and"
 	line "the door opens to"
-	next "the next room!"
+	cont "the next room!"
 
-	page "Get it wrong and"
+	para "Get it wrong and"
 	line "face a trainer!"
 
-	page "If you want to"
+	para "If you want to"
 	line "conserve your"
-	next "#MON for the"
-	next "GYM LEADER..."
+	cont "#MON for the"
+	cont "GYM LEADER..."
 
-	page "Then get it right!"
+	para "Then get it right!"
 	line "Here we go!"
 	prompt
 
@@ -119144,7 +119144,7 @@ _CinnabarQuizQuestionsText1: ; 8886d (22:486d)
 _CinnabarQuizQuestionsText2: ; 88890 (22:4890)
 	text "There are 9"
 	line "certified #MON"
-	next "LEAGUE BADGEs?"
+	cont "LEAGUE BADGEs?"
 	done
 
 _CinnabarQuizQuestionsText3: ; 888bb (22:48bb)
@@ -119155,15 +119155,15 @@ _CinnabarQuizQuestionsText3: ; 888bb (22:48bb)
 _CinnabarQuizQuestionsText4: ; 888d5 (22:48d5)
 	text "Are thunder moves"
 	line "effective against"
-	next "ground element-"
-	next "type #MON?"
+	cont "ground element-"
+	cont "type #MON?"
 	done
 
 _CinnabarQuizQuestionsText5: ; 88915 (22:4915)
 	text "#MON of the"
 	line "same kind and"
-	next "level are not"
-	next "identical?"
+	cont "level are not"
+	cont "identical?"
 	done
 
 _CinnabarQuizQuestionsText6: ; 88949 (22:4949)
@@ -119175,7 +119175,7 @@ _CinnabarGymQuizCorrectText: ; 88964 (22:4964)
 	text "You're absolutely"
 	line "correct!"
 
-	page "Go on through!@@"
+	para "Go on through!@@"
 
 _CinnabarGymQuizIncorrectText: ; 8898f (22:498f)
 	text "Sorry! Bad call!"
@@ -119184,21 +119184,21 @@ _CinnabarGymQuizIncorrectText: ; 8898f (22:498f)
 _UnnamedText_1eb69: ; 889a1 (22:49a1)
 	text "#MON magazines!"
 
-	page "#MON notebooks!"
+	para "#MON notebooks!"
 
-	page "#MON graphs!"
+	para "#MON graphs!"
 	done
 
 _BillsHouseMonitorText: ; 889cf (22:49cf)
 	text "TELEPORTER is"
 	line "displayed on the"
-	next "PC monitor."
+	cont "PC monitor."
 	done
 
 _BillsHouseInitiatedText: ; 889fb (22:49fb)
 	text $52, " initiated"
 	line "TELEPORTER's Cell"
-	next "Separator!@@"
+	cont "Separator!@@"
 
 _BillsHousePokemonListText1: ; 88a25 (22:4a25)
 	text "BILL's favorite"
@@ -119214,27 +119214,27 @@ _OakLabEmailText: ; 88a60 (22:4a60)
 	text "There's an e-mail"
 	line "message here!"
 
-	page "..."
+	para "..."
 
-	page "Calling all"
+	para "Calling all"
 	line "#MON trainers!"
 
-	page "The elite trainers"
+	para "The elite trainers"
 	line "of #MON LEAGUE"
-	next "are ready to take"
-	next "on all comers!"
+	cont "are ready to take"
+	cont "on all comers!"
 
-	page "Bring your best"
+	para "Bring your best"
 	line "#MON and see"
-	next "how you rate as a"
-	next "trainer!"
+	cont "how you rate as a"
+	cont "trainer!"
 
-	page "#MON LEAGUE HQ"
+	para "#MON LEAGUE HQ"
 	line "INDIGO PLATEAU"
 
-	page "PS: PROF.OAK,"
+	para "PS: PROF.OAK,"
 	line "please visit us!"
-	next "..."
+	cont "..."
 	done
 
 _GameCornerCoinCaseText: ; 88b5b (22:4b5b)
@@ -119270,16 +119270,16 @@ TMNotebookText: ; 88bfd (22:4bfd)
 	text "It's a pamphlet"
 	line "on TMs."
 
-	page "..."
+	para "..."
 
-	page "There are 50 TMs"
+	para "There are 50 TMs"
 	line "in all."
 
-	page "There are also 5"
+	para "There are also 5"
 	line "HMs that can be"
-	next "used repeatedly."
+	cont "used repeatedly."
 
-	page "SILPH CO.@@"
+	para "SILPH CO.@@"
 
 _TurnPageText: ; 88c6f (22:4c6f)
 	text "Turn the page?"
@@ -119293,60 +119293,60 @@ _ViridianSchoolNotebookText1: ; 88ca3 (22:4ca3)
 	text "Looked at the"
 	line "notebook!"
 
-	page "First page..."
+	para "First page..."
 
-	page "# BALLs are"
+	para "# BALLs are"
 	line "used to catch"
-	next "#MON."
+	cont "#MON."
 
-	page "Up to 6 #MON"
+	para "Up to 6 #MON"
 	line "can be carried."
 
-	page "People who raise"
+	para "People who raise"
 	line "and make #MON"
-	next "fight are called"
-	next "#MON trainers."
+	cont "fight are called"
+	cont "#MON trainers."
 	prompt
 
 _ViridianSchoolNotebookText2: ; 88d46 (22:4d46)
 	text "Second page..."
 
-	page "A healthy #MON"
+	para "A healthy #MON"
 	line "may be hard to"
-	next "catch, so weaken"
-	next "it first!"
+	cont "catch, so weaken"
+	cont "it first!"
 
-	page "Poison, burns and"
+	para "Poison, burns and"
 	line "other damage are"
-	next "effective!"
+	cont "effective!"
 	prompt
 
 _ViridianSchoolNotebookText3: ; 88dbd (22:4dbd)
 	text "Third page..."
 
-	page "#MON trainers"
+	para "#MON trainers"
 	line "seek others to"
-	next "engage in #MON"
-	next "fights."
+	cont "engage in #MON"
+	cont "fights."
 
-	page "Battles are"
+	para "Battles are"
 	line "constantly fought"
-	next "at #MON GYMs."
+	cont "at #MON GYMs."
 	prompt
 
 _ViridianSchoolNotebookText4: ; 88e2c (22:4e2c)
 	text "Fourth page..."
 
-	page "The goal for"
+	para "The goal for"
 	line "#MON trainers"
-	next "is to beat the "
-	next "top 8 #MON"
-	next "GYM LEADERs."
+	cont "is to beat the "
+	cont "top 8 #MON"
+	cont "GYM LEADERs."
 
-	page "Do so to earn the"
+	para "Do so to earn the"
 	line "right to face..."
 
-	page "The ELITE FOUR of"
+	para "The ELITE FOUR of"
 	line "#MON LEAGUE!"
 	prompt
 
@@ -119372,35 +119372,35 @@ _IndigoPlateauHQText: ; 88f08 (22:4f08)
 _RedBedroomSNESText: ; 88f27 (22:4f27)
 	text $52, " is"
 	line "playing the SNES!"
-	next "...Okay!"
-	next "It's time to go!"
+	cont "...Okay!"
+	cont "It's time to go!"
 	done
 
 _Route15UpstairsBinocularsText: ; 88f58 (22:4f58)
 	text "Looked into the"
 	line "binoculars..."
 
-	page "A large, shining"
+	para "A large, shining"
 	line "bird is flying"
-	next "toward the sea."
+	cont "toward the sea."
 	done
 
 _AerodactylFossilText: ; 88fa7 (22:4fa7)
 	text "AERODACTYL Fossil"
 	line "A primitive and"
-	next "rare #MON."
+	cont "rare #MON."
 	done
 
 _KabutopsFossilText: ; 88fd5 (22:4fd5)
 	text "KABUTOPS Fossil"
 	line "A primitive and"
-	next "rare #MON."
+	cont "rare #MON."
 	done
 
 _LinkCableHelpText1: ; 89001 (22:5001)
 	text "TRAINER TIPS"
 
-	page "Using a Game Link"
+	para "Using a Game Link"
 	line "Cable"
 	prompt
 
@@ -119412,30 +119412,30 @@ _LinkCableHelpText2: ; 89027 (22:5027)
 _LinkCableInfoText1: ; 8904b (22:504b)
 	text "When you have"
 	line "linked your GAME"
-	next "BOY with another"
-	next "GAME BOY, talk to"
-	next "the attendant on"
-	next "the right in any"
-	next "#MON CENTER."
+	cont "BOY with another"
+	cont "GAME BOY, talk to"
+	cont "the attendant on"
+	cont "the right in any"
+	cont "#MON CENTER."
 	prompt
 
 _LinkCableInfoText2: ; 890bd (22:50bd)
 	text "COLOSSEUM lets"
 	line "you play against"
-	next "a friend."
+	cont "a friend."
 	prompt
 
 _LinkCableInfoText3: ; 890e8 (22:50e8)
 	text "TRADE CENTER is"
 	line "used for trading"
-	next "#MON."
+	cont "#MON."
 	prompt
 
 _ViridianSchoolBlackboardText1: ; 89110 (22:5110)
 	text "The blackboard"
 	line "describes #MON"
-	next "STATUS changes"
-	next "during battles."
+	cont "STATUS changes"
+	cont "during battles."
 	prompt
 
 _ViridianSchoolBlackboardText2: ; 8914e (22:514e)
@@ -119446,63 +119446,63 @@ _ViridianSchoolBlackboardText2: ; 8914e (22:514e)
 _ViridianBlackboardSleepText: ; 89172 (22:5172)
 	text "A #MON can't"
 	line "attack if it's"
-	next "asleep!"
+	cont "asleep!"
 
-	page "#MON will stay"
+	para "#MON will stay"
 	line "asleep even after"
-	next "battles."
+	cont "battles."
 
-	page "Use AWAKENING to"
+	para "Use AWAKENING to"
 	line "wake them up!"
 	prompt
 
 _ViridianBlackboardPoisonText: ; 891de (22:51de)
 	text "When poisoned, a"
 	line "#MON's health"
-	next "steadily drops."
+	cont "steadily drops."
 
-	page "Poison lingers"
+	para "Poison lingers"
 	line "after battles."
 
-	page "Use an ANTIDOTE"
+	para "Use an ANTIDOTE"
 	line "to cure poison!"
 	prompt
 
 _ViridianBlackbaordPrlzText: ; 8924b (22:524b)
 	text "Paralysis could"
 	line "make #MON"
-	next "moves misfire!"
+	cont "moves misfire!"
 
-	page "Paralysis remains"
+	para "Paralysis remains"
 	line "after battles."
 
-	page "Use PARLYZ HEAL"
+	para "Use PARLYZ HEAL"
 	line "for treatment!"
 	prompt
 
 _ViridianBlackboardBurnText: ; 892b5 (22:52b5)
 	text "A burn reduces"
 	line "power and speed."
-	next "It also causes"
-	next "ongoing damage."
+	cont "It also causes"
+	cont "ongoing damage."
 
-	page "Burns remain"
+	para "Burns remain"
 	line "after battles."
 
-	page "Use BURN HEAL to"
+	para "Use BURN HEAL to"
 	line "cure a burn!"
 	prompt
 
 _ViridianBlackboardFrozenText: ; 8932f (22:532f)
 	text "If frozen, a"
 	line "#MON becomes"
-	next "totally immobile!"
+	cont "totally immobile!"
 
-	page "It stays frozen"
+	para "It stays frozen"
 	line "even after the"
-	next "battle ends."
+	cont "battle ends."
 
-	page "Use ICE HEAL to"
+	para "Use ICE HEAL to"
 	line "thaw out #MON!"
 	prompt
 
@@ -119514,31 +119514,31 @@ _VermilionGymTrashText: ; 893a7 (22:53a7)
 _VermilionGymTrashSuccesText1: ; 893c6 (22:53c6)
 	text "Hey! There's a"
 	line "switch under the"
-	next "trash!"
-	next "Turn it on!"
+	cont "trash!"
+	cont "Turn it on!"
 
-	page "The 1st electric"
+	para "The 1st electric"
 	line "lock opened!@@"
 
 _VermilionGymTrashSuccesText2: ; 89418 (22:5418)
 	text "Hey! There's"
 	line "another switch"
-	next "under the trash!"
-	next "Turn it on!"
+	cont "under the trash!"
+	cont "Turn it on!"
 	prompt
 
 _VermilionGymTrashSuccesText3: ; 89451 (22:5451)
 	text "The 2nd electric"
 	line "lock opened!"
 
-	page "The motorized door"
+	para "The motorized door"
 	line "opened!@@"
 
 _VermilionGymTrashFailText: ; 8948c (22:548c)
 	text "Nope! There's"
 	line "only trash here."
-	next "Hey! The electric"
-	next "locks were reset!@@"
+	cont "Hey! The electric"
+	cont "locks were reset!@@"
 
 UnnamedText_894d0: ; 894d0 (22:54d0)
 	text $52, " found"
@@ -119549,7 +119549,7 @@ UnnamedText_894d0: ; 894d0 (22:54d0)
 _UnnamedText_76794: ; 894e1 (22:54e1)
 	text "But, ", $52, " has"
 	line "no more room for"
-	next "other items!"
+	cont "other items!"
 	done
 
 _FoundHiddenCoinsText: ; 8950b (22:550b)
@@ -119566,7 +119566,7 @@ _FoundHiddenCoins2Text: ; 89523 (22:5523)
 
 _DroppedHiddenCoinsText: ; 8953b (22:553b)
 	db $0
-	page "Oops! Dropped"
+	para "Oops! Dropped"
 	line "some coins!"
 	done
 
@@ -119577,13 +119577,13 @@ _IndigoPlateauStatuesText1: ; 89557 (22:5557)
 _IndigoPlateauStatuesText2: ; 89567 (22:5567)
 	text "The ultimate goal"
 	line "of trainers!"
-	next "#MON LEAGUE HQ"
+	cont "#MON LEAGUE HQ"
 	done
 
 _IndigoPlateauStatuesText3: ; 89596 (22:5596)
 	text "The highest"
 	line "#MON authority"
-	next "#MON LEAGUE HQ"
+	cont "#MON LEAGUE HQ"
 	done
 
 _UnnamedText_fc03: ; 895c1 (22:55c1)
@@ -119612,7 +119612,7 @@ _UnnamedText_fc45: ; 8961f (22:561f)
 _UnnamedText_3c1a8: ; 89639 (22:5639)
 	text "PA: Ding-dong!"
 
-	page "You are out of"
+	para "You are out of"
 	line "SAFARI BALLs!"
 	prompt
 
@@ -119686,7 +119686,7 @@ _PlayerBlackedOutText2: ; 89748 (22:5748)
 	text $52, " is out of"
 	line "useable #MON!"
 
-	page $52, " blacked"
+	para $52, " blacked"
 	line "out!"
 	prompt
 
@@ -119704,7 +119704,7 @@ _TrainerAboutToUseText: ; 89784 (22:5784)
 	dw W_ENEMYMONNAME
 	text "!"
 
-	page "Will ",$52
+	para "Will ",$52
 	line "change #MON?"
 	done
 
@@ -119728,7 +119728,7 @@ _UnnamedText_3cb97: ; 897e3 (22:57e3)
 _UnnamedText_3cb9c: ; 897f1 (22:57f1)
 	text "No! There's no"
 	line "running from a"
-	next "trainer battle!"
+	cont "trainer battle!"
 	prompt
 
 _UnnamedText_3cba1: ; 8981f (22:581f)
@@ -119860,7 +119860,7 @@ _UnnamedText_3daa8: ; 89a29 (22:5a29)
 	line "@"
 	TX_RAM $cd6d
 	text " is"
-	next "disabled!"
+	cont "disabled!"
 	prompt
 
 _UnnamedText_3dafb: ; 89a40 (22:5a40)
@@ -119876,7 +119876,7 @@ _UnnamedText_3db34: ; 89a4d (22:5a4d)
 
 _UnnamedText_3db43: ; 89a56 (22:5a56)
 	text "instead,"
-	next "@@"
+	cont "@@"
 
 _UnnamedText_3db4c: ; 89a62 (22:5a62)
 	TX_RAM $cf4b
@@ -119910,7 +119910,7 @@ _UnnamedText_3dc42: ; 89a76 (22:5a76)
 _UnnamedText_3dc47: ; 89a89 (22:5a89)
 	text $5a
 	line "kept going and"
-	next "crashed!"
+	cont "crashed!"
 	prompt
 
 _UnnamedText_3dc4c: ; 89aa4 (22:5aa4)
@@ -119964,7 +119964,7 @@ _UnnamedText_3ddca: ; 89b32 (22:5b32)
 _SubstituteTookDamageText: ; 89b47 (22:5b47)
 	text "The SUBSTITUTE"
 	line "took damage for"
-	next $59, "!"
+	cont $59, "!"
 	prompt
 
 _SubstituteBrokeText: ; 89b6a (22:5b6a)
@@ -119994,11 +119994,11 @@ _UnnamedText_554b2: ; 89bc2 (22:5bc2)
 
 _UnnamedText_554cb: ; 89bd0 (22:5bd0)
 	text "with EXP.ALL,"
-	next "@@"
+	cont "@@"
 
 _UnnamedText_554d4: ; 89be1 (22:5be1)
 	text "a boosted"
-	next "@@"
+	cont "@@"
 _UnnamedText_554d8: ; 89bee (22:5bee)
 	TX_NUM $cf4b, 2, 4
 	text " EXP. Points!"
@@ -120041,7 +120041,7 @@ _UnnamedText_58e4a: ; 89c5e (22:5c5e)
 _UnnamedText_58e4f: ; 89c73 (22:5c73)
 	text "SILPH SCOPE"
 	line "unveiled the"
-	next "GHOST's identity!"
+	cont "GHOST's identity!"
 	prompt
 
 _UnnamedText_58e54: ; 89c9e (22:5c9e)
@@ -120219,7 +120219,7 @@ _UnnamedText_17f28: ; 89f13 (22:5f13)
 	text "Accessed BILL's"
 	line "PC."
 
-	page "Accessed #MON"
+	para "Accessed #MON"
 	line "Storage System."
 	prompt
 
@@ -120227,14 +120227,14 @@ _UnnamedText_17f2d: ; 89f45 (22:5f45)
 	text "Accessed someone's"
 	line "PC."
 
-	page "Accessed #MON"
+	para "Accessed #MON"
 	line "Storage System."
 	prompt
 
 _UnnamedText_17f32: ; 89f7a (22:5f7a)
 	text "Accessed my PC."
 
-	page "Accessed Item"
+	para "Accessed Item"
 	line "Storage System."
 	prompt
 
@@ -120312,7 +120312,7 @@ _UnnamedText_76683: ; 8a0f4 (22:60f4)
 	text "Accessed #MON"
 	line "LEAGUE's site."
 
-	page "Accessed the HALL"
+	para "Accessed the HALL"
 	line "OF FAME List."
 	prompt
 
@@ -120351,7 +120351,7 @@ _MonIsTakenOutText: ; 0x8a1b9
 	TX_RAM $cf4b
 	text " is"
 	line "taken out."
-	next "Got @"
+	cont "Got @"
 	TX_RAM $cf4b
 	text "."
 	prompt
@@ -120365,7 +120365,7 @@ _CantTakeMonText: ; 0x8a1f6
 	text "You can't take"
 	line "any more #MON."
 
-	page "Deposit #MON"
+	para "Deposit #MON"
 	line "first."
 	prompt
 
@@ -120379,14 +120379,14 @@ _OnceReleasedText: ; 0x8a23d
 	line "@"
 	TX_RAM $cf4b
 	text " is"
-	next "gone forever. OK?"
+	cont "gone forever. OK?"
 	done
 
 _MonWasReleasedText: ; 0x8a268
 	TX_RAM $cf4b
 	text " was"
 	line "released outside."
-	next "Bye @"
+	cont "Bye @"
 
 _UnnamedText_8a288: ; 8a288 (22:6288)
 	TX_RAM $cf4b
@@ -120441,7 +120441,7 @@ _UnnamedText_1e946: ; 8a39a (22:639a)
 	text "Accessed PROF."
 	line "OAK's PC."
 
-	page "Accessed #DEX"
+	para "Accessed #DEX"
 	line "Rating System."
 	prompt
 
@@ -120465,7 +120465,7 @@ INCLUDE "text/oakspeech.asm"
 _DoYouWantToNicknameText: ; 0x8a605
 	text "Do you want to"
 	line "give a nickname"
-	next "to @"
+	cont "to @"
 
 UnnamedText_8a629: ; 8a629 (22:6629)
 	TX_RAM $cd6d
@@ -120480,7 +120480,7 @@ _UnnamedText_699f: ; 8a62f (22:662f)
 _UnnamedText_69e7: ; 8a64a (22:664a)
 	text "That's right! I"
 	line "remember now! His"
-	next "name is ", $53, "!"
+	cont "name is ", $53, "!"
 	prompt
 
 _SSAnne8AfterBattleText2: ; 8a677 (22:6677)
@@ -120489,7 +120489,7 @@ _SSAnne8AfterBattleText2: ; 8a677 (22:6677)
 	line "@"
 	TX_RAM $cd6d
 	text " will"
-	next "be traded."
+	cont "be traded."
 	done
 
 _Char00Text: ; 8a696 (22:6696)
@@ -120503,100 +120503,100 @@ _Char55Text: ; 8a6a3 (22:66a3)
 _DiglettsCaveRoute2Text1: ; 8a6a7 (22:66a7)
 	text "I went to ROCK"
 	line "TUNNEL, but it's"
-	next "dark and scary."
+	cont "dark and scary."
 
-	page "If a #MON's"
+	para "If a #MON's"
 	line "FLASH could light"
-	next "it up..."
+	cont "it up..."
 	done
 
 _ViridianForestexitText1: ; 8a6fd (22:66fd)
 	text "Many #MON live"
 	line "only in forests "
-	next "and caves."
+	cont "and caves."
 
-	page "You need to look"
+	para "You need to look"
 	line "everywhere to get"
-	next "different kinds!"
+	cont "different kinds!"
 	done
 
 _ViridianForestexitText2: ; 8a75d (22:675d)
 	text "Have you noticed"
 	line "the bushes on the"
-	next "roadside?"
+	cont "roadside?"
 
-	page "They can be cut"
+	para "They can be cut"
 	line "down by a special"
-	next "#MON move."
+	cont "#MON move."
 	done
 
 _Route2HouseText1: ; 8a7b8 (22:67b8)
 	text "A fainted #MON"
 	line "can't fight. But, "
-	next "it can still use "
-	next "moves like CUT!"
+	cont "it can still use "
+	cont "moves like CUT!"
 	done
 
 _UnnamedText_5d616: ; 8a7fc (22:67fc)
 	text "The HM FLASH"
 	line "lights even the"
-	next "darkest dungeons."
+	cont "darkest dungeons."
 	done
 
 _Route2GateText2: ; 8a82c (22:682c)
 	text "Once a #MON"
 	line "learns FLASH, you"
-	next "can get through"
-	next "ROCK TUNNEL."
+	cont "can get through"
+	cont "ROCK TUNNEL."
 	done
 
 _ViridianForestEntranceText1: ; 8a868 (22:6868)
 	text "Are you going to"
 	line "VIRIDIAN FOREST?"
-	next "Be careful, it's"
-	next "a natural maze!"
+	cont "Be careful, it's"
+	cont "a natural maze!"
 	done
 
 _ViridianForestEntranceText2: ; 8a8ab (22:68ab)
 	text "RATTATA may be"
 	line "small, but its"
-	next "bite is wicked!"
-	next "Did you get one?"
+	cont "bite is wicked!"
+	cont "Did you get one?"
 	done
 
 _MtMoonPokecenterText1: ; 8a8eb (22:68eb)
 	text "I've 6 # BALLs"
 	line "set in my belt."
 
-	page "At most, you can"
+	para "At most, you can"
 	line "carry 6 #MON."
 	done
 
 _MtMoonPokecenterText3: ; 8a929 (22:6929)
 	text "TEAM ROCKET"
 	line "attacks CERULEAN"
-	next "citizens..."
+	cont "citizens..."
 
-	page "TEAM ROCKET is"
+	para "TEAM ROCKET is"
 	line "always in the"
-	next "news!"
+	cont "news!"
 	done
 
 _UnnamedText_4935c: ; 8a976 (22:6976)
 	text "MAN: Hello, there!"
 	line "Have I got a deal"
-	next "just for you!"
+	cont "just for you!"
 
-	page "I'll let you have"
+	para "I'll let you have"
 	line "a swell MAGIKARP"
-	next "for just ¥500!"
-	next "What do you say?"
+	cont "for just ¥500!"
+	cont "What do you say?"
 	done
 
 _UnnamedText_49361: ; 8a9ec (22:69ec)
 	text "No? I'm only"
 	line "doing this as a"
-	next "favor to you!"
+	cont "favor to you!"
 	done
 
 _UnnamedText_49366: ; 8aa17 (22:6a17)
@@ -120616,33 +120616,33 @@ _MtMoonPokecenterText5: ; 8aa5a (22:6a5a)
 _UnnamedText_1dfe7: ; 8aa5c (22:6a5c)
 	text "I'm on guard duty."
 	line "Gee, I'm thirsty,"
-	next "though!"
+	cont "though!"
 
-	page "Oh wait there,"
+	para "Oh wait there,"
 	line "the road's closed."
 	done
 
 _UnnamedText_8aaa9: ; 8aaa9 (22:6aa9)
 	text "Whoa, boy!"
 	line "I'm parched!"
-	next "..."
-	next "Huh? I can have"
-	next "this drink?"
-	next "Gee, thanks!@@"
+	cont "..."
+	cont "Huh? I can have"
+	cont "this drink?"
+	cont "Gee, thanks!@@"
 
 _UnnamedText_1dff1: ; 8aaef (22:6aef)
 	text $51
 	db "..."
 	line "Glug glug..."
-	next "..."
-	next "Gulp..."
-	next "If you want to go"
-	next "to SAFFRON CITY..."
-	next "..."
-	next "You can go on"
-	next "through. I'll"
-	next "share this with"
-	next "the other guards!"
+	cont "..."
+	cont "Gulp..."
+	cont "If you want to go"
+	cont "to SAFFRON CITY..."
+	cont "..."
+	cont "You can go on"
+	cont "through. I'll"
+	cont "share this with"
+	cont "the other guards!"
 	done
 
 _UnnamedText_1dff6: ; 8ab74 (22:6b74)
@@ -120653,8 +120653,8 @@ _UnnamedText_1dff6: ; 8ab74 (22:6b74)
 _UnnamedText_5640f: ; 8ab95 (22:6b95)
 	text "I run a DAYCARE."
 	line "Would you like me"
-	next "to raise one of"
-	next "your #MON?"
+	cont "to raise one of"
+	cont "your #MON?"
 	done
 
 _UnnamedText_56414: ; 8abd4 (22:6bd4)
@@ -120667,7 +120667,7 @@ _UnnamedText_56419: ; 8abf0 (22:6bf0)
 	line "after @"
 	TX_RAM $cd6d
 	db $0
-	next "for a while."
+	cont "for a while."
 	prompt
 
 _UnnamedText_5641e: ; 8ac19 (22:6c19)
@@ -120681,14 +120681,14 @@ _UnnamedText_56423: ; 8ac32 (22:6c32)
 	db $0
 	line "has grown a lot!"
 
-	page "By level, it's"
+	para "By level, it's"
 	line "grown by @"
 
 UnnamedText_8ac67: ; 8ac67 (22:6c67)
 	TX_NUM $cd3e,$1,$3
 	text "!"
 
-	page "Aren't I great?"
+	para "Aren't I great?"
 	prompt
 
 _UnnamedText_56428: ; 8ac7d (22:6c7d)
@@ -120696,7 +120696,7 @@ _UnnamedText_56428: ; 8ac7d (22:6c7d)
 	db $2, $3f, $cd, $c2
 	db $0
 	line "for the return"
-	next "of this #MON."
+	cont "of this #MON."
 	done
 
 _UnnamedText_5642d: ; 8acae (22:6cae)
@@ -120711,8 +120711,8 @@ _UnnamedText_56432: ; 8acc1 (22:6cc1)
 	line "Your @"
 	TX_RAM $cd6d
 	db $0
-	next "needs some more"
-	next "time with me."
+	cont "needs some more"
+	cont "time with me."
 	prompt
 
 SECTION "bank23",ROMX,BANK[$23]
@@ -120738,7 +120738,7 @@ _UnnamedText_56445: ; 8c041 (23:4041)
 _UnnamedText_5644a: ; 8c063 (23:4063)
 	text "I can't accept a"
 	line "#MON that"
-	next "knows an HM move."
+	cont "knows an HM move."
 	done
 
 _UnnamedText_5644f: ; 8c090 (23:4090)
@@ -120754,64 +120754,64 @@ _UnnamedText_56454: ; 8c0ad (23:40ad)
 _UndergrdTunnelEntRoute6Text1: ; 8c0cb (23:40cb)
 	text "People often lose"
 	line "things in that"
-	next "UNDERGROUND PATH."
+	cont "UNDERGROUND PATH."
 	done
 
 _UndergroundPathEntRoute7Text1: ; 8c0ff (23:40ff)
 	text "I heard a sleepy"
 	line "#MON appeared"
-	next "near CELADON CITY."
+	cont "near CELADON CITY."
 	done
 
 _UnnamedText_5d773: ; 8c132 (23:4132)
 	text "I want to shop at"
 	line "the dept. store"
-	next "in CELADON but..."
+	cont "in CELADON but..."
 
-	page "There are so many"
+	para "There are so many"
 	line "rough looking"
-	next "people there."
+	cont "people there."
 	done
 
 _UnnamedText_5d778: ; 8c195 (23:4195)
 	text "TEAM ROCKET had a"
 	line "secret hideout in"
-	next "CELADON CITY?"
+	cont "CELADON CITY?"
 	done
 
 _UnnamedText_5d77d: ; 8c1c8 (23:41c8)
 	text "You're here to"
 	line "shop in CELADON?"
 
-	page "Just step outside"
+	para "Just step outside"
 	line "and head west!"
 	done
 
 _UnnamedText_5d782: ; 8c209 (23:4209)
 	text "The UNDERGROUND"
 	line "PATH goes beneath"
-	next "SAFFRON and leads"
-	next "to LAVENDER."
+	cont "SAFFRON and leads"
+	cont "to LAVENDER."
 
-	page "If you're heading"
+	para "If you're heading"
 	line "to CERULEAN, go"
-	next "to the building"
-	next "across the road."
+	cont "to the building"
+	cont "across the road."
 	done
 
 _UndergroundPathEntRoute8Text1: ; 8c28d (23:428d)
 	text "The dept. store"
 	line "in CELADON has a"
-	next "great selection!"
+	cont "great selection!"
 	done
 
 _RockTunnelPokecenterText1: ; 8c2c0 (23:42c0)
 	text "The element types"
 	line "of #MON make"
-	next "them stronger"
-	next "than some types"
-	next "and weaker than"
-	next "others!"
+	cont "them stronger"
+	cont "than some types"
+	cont "and weaker than"
+	cont "others!"
 	done
 
 _RockTunnelPokecenterText3: ; 8c316 (23:4316)
@@ -120832,7 +120832,7 @@ _RockTunnel1EndBattleText1: ; 8c35d (23:435d)
 _RockTunnel1AfterBattleText1: ; 8c36c (23:436c)
 	text "Watch for ONIX!"
 	line "It can put the"
-	next "squeeze on you!"
+	cont "squeeze on you!"
 	done
 
 _RockTunnel1BattleText2: ; 8c39c (23:439c)
@@ -120843,20 +120843,20 @@ _RockTunnel1BattleText2: ; 8c39c (23:439c)
 _RockTunnel1EndBattleText2: ; 8c3bb (23:43bb)
 	text "Ease up!"
 	line "What am I doing?"
-	next "Which way is out?"
+	cont "Which way is out?"
 	prompt
 
 _RockTunnel1AfterBattleText2: ; 8c3e8 (23:43e8)
 	text "That sleeping"
 	line "#MON on ROUTE"
-	next "12 forced me to"
-	next "take this detour."
+	cont "12 forced me to"
+	cont "take this detour."
 	done
 
 _RockTunnel1BattleText3: ; 8c427 (23:4427)
 	text "Outsiders like"
 	line "you need to show"
-	next "me some respect!"
+	cont "me some respect!"
 	done
 
 _RockTunnel1EndBattleText3: ; 8c459 (23:4459)
@@ -120886,7 +120886,7 @@ _RockTunnel1AfterBattleText4: ; 8c4a6 (23:44a6)
 _RockTunnel1BattleText5: ; 8c4c9 (23:44c9)
 	text "Eek! Don't try"
 	line "anything funny in"
-	next "the dark!"
+	cont "the dark!"
 	done
 
 _RockTunnel1EndBattleText5: ; 8c4f4 (23:44f4)
@@ -120932,7 +120932,7 @@ _RockTunnel1AfterBattleText7: ; 8c59d (23:459d)
 _RockTunnel1Text8: ; 8c5b7 (23:45b7)
 	text "ROCK TUNNEL"
 	line "CERULEAN CITY -"
-	next "LAVENDER TOWN"
+	cont "LAVENDER TOWN"
 	done
 
 _VoltorbBattleText: ; 8c5e2 (23:45e2)
@@ -120945,37 +120945,37 @@ _ZapdosBattleText: ; 8c5ea (23:45ea)
 _Route11GateText1: ; 8c5f3 (23:45f3)
 	text "When you catch"
 	line "lots of #MON,"
-	next "isn't it hard to"
-	next "think up names?"
+	cont "isn't it hard to"
+	cont "think up names?"
 
-	page "In LAVENDER TOWN,"
+	para "In LAVENDER TOWN,"
 	line "there's a man who"
-	next "rates #MON"
-	next "nicknames."
+	cont "rates #MON"
+	cont "nicknames."
 
-	page "He'll help you"
+	para "He'll help you"
 	line "rename them too!"
 	done
 
 _UnnamedText_494a3: ; 8c689 (23:4689)
 	text "There are items on"
 	line "the ground that"
-	next "can't be seen."
+	cont "can't be seen."
 
-	page "ITEMFINDER will"
+	para "ITEMFINDER will"
 	line "detect an item"
-	next "close to you."
+	cont "close to you."
 
-	page "It can't pinpoint"
+	para "It can't pinpoint"
 	line "it, so you have"
-	next "to look yourself!"
+	cont "to look yourself!"
 	done
 
 _UnnamedText_494c4: ; 8c71b (23:471b)
 	text "Looked into the"
 	line "binoculars."
 
-	page "A big #MON is"
+	para "A big #MON is"
 	line "asleep on a road!"
 	done
 
@@ -120983,7 +120983,7 @@ _UnnamedText_494c9: ; 8c758 (23:4758)
 	text "Looked into the"
 	line "binoculars."
 
-	page "It's a beautiful"
+	para "It's a beautiful"
 	line "view!"
 	done
 
@@ -120991,19 +120991,19 @@ _UnnamedText_494d5: ; 8c78b (23:478b)
 	text "Looked into the"
 	line "binoculars."
 
-	page "The only way to"
+	para "The only way to"
 	line "get from CERULEAN"
-	next "CITY to LAVENDER"
-	next "is by way of the"
-	next "ROCK TUNNEL."
+	cont "CITY to LAVENDER"
+	cont "is by way of the"
+	cont "ROCK TUNNEL."
 	done
 
 _DiglettsCaveEntRoute11Text1: ; 8c7f9 (23:47f9)
 	text "What a surprise!"
 	line "DIGLETTs dug this"
-	next "long tunnel!"
+	cont "long tunnel!"
 
-	page "It goes right to"
+	para "It goes right to"
 	line "VIRIDIAN CITY!"
 	done
 
@@ -121015,11 +121015,11 @@ _Route12GateText1: ; 8c84a (23:484a)
 _TM39PreReceiveText: ; 8c86b (23:486b)
 	text "My #MON's"
 	line "ashes are stored"
-	next "in #MON TOWER."
+	cont "in #MON TOWER."
 
-	page "You can have this"
+	para "You can have this"
 	line "TM. I don't need"
-	next "it any more..."
+	cont "it any more..."
 	prompt
 
 _ReceivedTM39Text: ; 8c8c6 (23:48c6)
@@ -121030,10 +121030,10 @@ _TM39ExplanationText: ; 8c8d9 (23:48d9)
 	text "TM39 is a move"
 	line "called SWIFT."
 
-	page "It's very accurate,"
+	para "It's very accurate,"
 	line "so use it during"
-	next "battles you can't"
-	next "afford to lose."
+	cont "battles you can't"
+	cont "afford to lose."
 	done
 
 _TM39NoRoomText: ; 8c93c (23:493c)
@@ -121045,24 +121045,24 @@ _UnnamedText_495b8: ; 8c95a (23:495a)
 	text "Looked into the"
 	line "binoculars."
 
-	page "A man fishing!"
+	para "A man fishing!"
 	done
 
 _UnnamedText_495c4: ; 8c986 (23:4986)
 	text "Looked into the"
 	line "binoculars."
 
-	page "It's #MON TOWER!"
+	para "It's #MON TOWER!"
 	done
 
 _UnnamedText_564c0: ; 8c9b3 (23:49b3)
 	text "I'm the FISHING"
 	line "GURU's brother!"
 
-	page "I simply Looove"
+	para "I simply Looove"
 	line "fishing!"
 
-	page "Do you like to"
+	para "Do you like to"
 	line "fish?"
 	done
 
@@ -121070,10 +121070,10 @@ _UnnamedText_564c5: ; 8ca00 (23:4a00)
 	text "Grand! I like"
 	line "your style!"
 
-	page "Take this and"
+	para "Take this and"
 	line "fish, young one!"
 
-	page $52, " received"
+	para $52, " received"
 	line "a @"
 	TX_RAM $cf4b
 	text "!@@"
@@ -121083,10 +121083,10 @@ _UnnamedText_564ca: ; 8ca4f (23:4a4f)
 	db "Fishing is a way"
 	line "of life!"
 
-	page "From the seas to"
+	para "From the seas to"
 	line "rivers, go out"
-	next "and land the big"
-	next "one!"
+	cont "and land the big"
+	cont "one!"
 	done
 
 _UnnamedText_564cf: ; 8caa1 (23:4aa1)
@@ -121098,68 +121098,68 @@ _UnnamedText_564d4: ; 8cac2 (23:4ac2)
 	text "Hello there,"
 	line $52, "!"
 
-	page "Use the SUPER ROD"
+	para "Use the SUPER ROD"
 	line "in any water!"
-	next "You can catch"
-	next "different kinds"
-	next "of #MON."
+	cont "You can catch"
+	cont "different kinds"
+	cont "of #MON."
 
-	page "Try fishing"
+	para "Try fishing"
 	line "wherever you can!"
 	done
 
 _UnnamedText_564d9: ; 8cb38 (23:4b38)
 	text "Oh no!"
 
-	page "I had a gift for"
+	para "I had a gift for"
 	line "you, but you have"
-	next "no room for it!"
+	cont "no room for it!"
 	done
 
 _Route15GateText1: ; 8cb73 (23:4b73)
 	text "Are you working"
 	line "on a #DEX?"
 
-	page "PROF.OAK's AIDE"
+	para "PROF.OAK's AIDE"
 	line "came by here."
 	done
 
 _UnnamedText_4968c: ; 8cbac (23:4bac)
 	text "EXP.ALL gives"
 	line "EXP points to all"
-	next "the #MON with"
-	next "you, even if they"
-	next "don't fight."
+	cont "the #MON with"
+	cont "you, even if they"
+	cont "don't fight."
 
-	page "It does, however,"
+	para "It does, however,"
 	line "reduce the amount"
-	next "of EXP for each"
-	next "#MON."
+	cont "of EXP for each"
+	cont "#MON."
 
-	page "If you don't need"
+	para "If you don't need"
 	line "it, you should "
-	next "store it via PC."
+	cont "store it via PC."
 	done
 
 _UnnamedText_49698: ; 8cc65 (23:4c65)
 	text "Looked into the"
 	line "binoculars."
 
-	page "It looks like a"
+	para "It looks like a"
 	line "small island!"
 	done
 
 _UnnamedText_49777: ; 8cca0 (23:4ca0)
 	text "No pedestrians"
 	line "are allowed on"
-	next "CYCLING ROAD!"
+	cont "CYCLING ROAD!"
 	done
 
 _UnnamedText_4977c: ; 8cccd (23:4ccd)
 	text "CYCLING ROAD is a"
 	line "downhill course"
-	next "by the sea. It's"
-	next "a great ride."
+	cont "by the sea. It's"
+	cont "a great ride."
 	done
 
 _UnnamedText_49781: ; 8cd0e (23:4d0e)
@@ -121175,7 +121175,7 @@ _Route16GateMapText2: ; 8cd2a (23:4d2a)
 _UnnamedText_49820: ; 8cd49 (23:4d49)
 	text "I'm going for a"
 	line "ride with my girl"
-	next "friend!"
+	cont "friend!"
 	done
 
 _UnnamedText_4982f: ; 8cd73 (23:4d73)
@@ -121187,7 +121187,7 @@ _UnnamedText_4983b: ; 8cd90 (23:4d90)
 	text "Looked into the"
 	line "binoculars."
 
-	page "It's CELADON DEPT."
+	para "It's CELADON DEPT."
 	line "STORE!"
 	done
 
@@ -121195,7 +121195,7 @@ _UnnamedText_49847: ; 8cdc6 (23:4dc6)
 	text "Looked into the"
 	line "binoculars."
 
-	page "There's a long"
+	para "There's a long"
 	line "path over water!"
 	done
 
@@ -121203,10 +121203,10 @@ _Route16HouseText3: ; 8ce02 (23:4e02)
 	text "Oh, you found my"
 	line "secret retreat!"
 
-	page "Please don't tell"
+	para "Please don't tell"
 	line "anyone I'm here."
-	next "I'll make it up"
-	next "to you with this!"
+	cont "I'll make it up"
+	cont "to you with this!"
 	prompt
 
 _ReceivedHM02Text: ; 8ce66 (23:4e66)
@@ -121216,9 +121216,9 @@ _ReceivedHM02Text: ; 8ce66 (23:4e66)
 _HM02ExplanationText: ; 8ce79 (23:4e79)
 	text "HM02 is FLY."
 	line "It will take you"
-	next "back to any town."
+	cont "back to any town."
 
-	page "Put it to good"
+	para "Put it to good"
 	line "use!"
 	done
 
@@ -121239,7 +121239,7 @@ _UnnamedText_49928: ; 8cef1 (23:4ef1)
 _UnnamedText_4992d: ; 8cf17 (23:4f17)
 	text "CYCLING ROAD is"
 	line "all uphill from"
-	next "here."
+	cont "here."
 	done
 
 _UnnamedText_49932: ; 8cf3e (23:4f3e)
@@ -121250,7 +121250,7 @@ _UnnamedText_49993: ; 8cf4a (23:4f4a)
 	text "Looked into the"
 	line "binoculars."
 
-	page "PALLET TOWN is in"
+	para "PALLET TOWN is in"
 	line "the west!"
 	done
 
@@ -121258,29 +121258,29 @@ _UnnamedText_4999f: ; 8cf83 (23:4f83)
 	text "Looked into the"
 	line "binoculars."
 
-	page "There are people"
+	para "There are people"
 	line "swimming!"
 	done
 
 _UnnamedText_1e704: ; 8cfbb (23:4fbb)
 	text "Only truly skilled"
 	line "trainers are"
-	next "allowed through."
+	cont "allowed through."
 
-	page "You don't have the"
+	para "You don't have the"
 	line "BOULDERBADGE yet!@@"
 
 _UnnamedText_1e715: ; 8d012 (23:5012)
 	db $0
-	page "The rules are"
+	para "The rules are"
 	line "rules. I can't"
-	next "let you pass."
+	cont "let you pass."
 	done
 
 _UnnamedText_1e71a: ; 8d03e (23:503e)
 	text "Oh! That is the"
 	line "BOULDERBADGE!"
-	next "Go right ahead!@@"
+	cont "Go right ahead!@@"
 
 _VictoryRoad2BattleText6: ; 8d06e (23:506e)
 	text "Gyaoo!@@"
@@ -121288,7 +121288,7 @@ _VictoryRoad2BattleText6: ; 8d06e (23:506e)
 _VictoryRoad2BattleText1: ; 8d077 (23:5077)
 	text "VICTORY ROAD is"
 	line "the final test"
-	next "for trainers!"
+	cont "for trainers!"
 	done
 
 _VictoryRoad2EndBattleText1: ; 8d0a5 (23:50a5)
@@ -121298,13 +121298,13 @@ _VictoryRoad2EndBattleText1: ; 8d0a5 (23:50a5)
 _VictoryRoad2AfterBattleText1: ; 8d0ad (23:50ad)
 	text "If you get stuck,"
 	line "try moving some"
-	next "boulders around!"
+	cont "boulders around!"
 	done
 
 _VictoryRoad2BattleText2: ; 8d0e1 (23:50e1)
 	text "Ah, so you wish"
 	line "to challenge the"
-	next "ELITE FOUR?"
+	cont "ELITE FOUR?"
 	done
 
 _VictoryRoad2EndBattleText2: ; 8d10f (23:510f)
@@ -121330,14 +121330,14 @@ _VictoryRoad2EndBattleText3: ; 8d14f (23:514f)
 _VictoryRoad2AfterBattleText3: ; 8d15f (23:515f)
 	text "You earned the"
 	line "right to be on"
-	next "VICTORY ROAD!"
+	cont "VICTORY ROAD!"
 	done
 
 _VictoryRoad2BattleText4: ; 8d18c (23:518c)
 	text "If you can get"
 	line "through here, you"
-	next "can go meet the"
-	next "ELITE FOUR!"
+	cont "can go meet the"
+	cont "ELITE FOUR!"
 	done
 
 _VictoryRoad2EndBattleText4: ; 8d1ca (23:51ca)
@@ -121348,8 +121348,8 @@ _VictoryRoad2EndBattleText4: ; 8d1ca (23:51ca)
 _VictoryRoad2AfterBattleText4: ; 8d1dd (23:51dd)
 	text "I can beat you"
 	line "when it comes to"
-	next "knowledge about"
-	next "#MON!"
+	cont "knowledge about"
+	cont "#MON!"
 	done
 
 _VictoryRoad2BattleText5: ; 8d214 (23:5214)
@@ -121365,62 +121365,62 @@ _VictoryRoad2EndBattleText5: ; 8d230 (23:5230)
 _VictoryRoad2AfterBattleText5: ; 8d23c (23:523c)
 	text "Many trainers give"
 	line "up the challenge"
-	next "here."
+	cont "here."
 	done
 
 _UnnamedText_1e865: ; 8d267 (23:5267)
 	text "Hiya! I'm a"
 	line "#MON..."
-	next "...No I'm not!"
+	cont "...No I'm not!"
 
-	page "Call me BILL!"
+	para "Call me BILL!"
 	line "I'm a true blue"
-	next "#MANIAC! Hey!"
-	next "What's with that"
-	next "skeptical look?"
+	cont "#MANIAC! Hey!"
+	cont "What's with that"
+	cont "skeptical look?"
 
-	page "I'm not joshing"
+	para "I'm not joshing"
 	line "you, I screwed up"
-	next "an experiment and"
-	next "got combined with"
-	next "a #MON!"
+	cont "an experiment and"
+	cont "got combined with"
+	cont "a #MON!"
 
-	page "So, how about it?"
+	para "So, how about it?"
 	line "Help me out here!"
 	done
 
 _UnnamedText_1e86a: ; 8d345 (23:5345)
 	text "When I'm in the"
 	line "TELEPORTER, go to"
-	next "my PC and run the"
-	next "Cell Separation"
-	next "System!"
+	cont "my PC and run the"
+	cont "Cell Separation"
+	cont "System!"
 	done
 
 _UnnamedText_1e86f: ; 8d391 (23:5391)
 	text "No!? Come on, you"
 	line "gotta help a guy"
-	next "in deep trouble!"
+	cont "in deep trouble!"
 
-	page "What do you say,"
+	para "What do you say,"
 	line "chief? Please?"
-	next "OK? All right!"
+	cont "OK? All right!"
 	prompt
 
 _BillThankYouText: ; 8d3f5 (23:53f5)
 	text "BILL: Yeehah!"
 	line "Thanks, bud! I"
-	next "owe you one!"
+	cont "owe you one!"
 
-	page "So, did you come"
+	para "So, did you come"
 	line "to see my #MON"
-	next "collection?"
-	next "You didn't?"
-	next "That's a bummer."
+	cont "collection?"
+	cont "You didn't?"
+	cont "That's a bummer."
 
-	page "I've got to thank"
+	para "I've got to thank"
 	line "you... Oh here,"
-	next "maybe this'll do."
+	cont "maybe this'll do."
 	prompt
 
 _SSTicketReceivedText: ; 8d499 (23:5499)
@@ -121437,37 +121437,37 @@ _SSTicketNoRoomText: ; 8d4b0 (23:54b0)
 _UnnamedText_1e8cb: ; 8d4d0 (23:54d0)
 	text "That cruise ship,"
 	line "S.S.ANNE, is in"
-	next "VERMILION CITY."
-	next "Its passengers"
-	next "are all trainers!"
+	cont "VERMILION CITY."
+	cont "Its passengers"
+	cont "are all trainers!"
 
-	page "They invited me"
+	para "They invited me"
 	line "to their party,"
-	next "but I can't stand"
-	next "fancy do's. Why"
-	next "don't you go"
-	next "instead of me?"
+	cont "but I can't stand"
+	cont "fancy do's. Why"
+	cont "don't you go"
+	cont "instead of me?"
 	done
 
 _UnnamedText_1e8da: ; 8d57f (23:557f)
 	text "BILL: Look, bud,"
 	line "just check out"
-	next "some of my rare"
-	next "#MON on my PC!"
+	cont "some of my rare"
+	cont "#MON on my PC!"
 	done
 
 _Route1ViridianMartSampleText: ; 8d5bf (23:55bf)
 	text "Hi! I work at a"
 	line "#MON MART."
 
-	page "It's a convenient"
+	para "It's a convenient"
 	line "shop, so please"
-	next "visit us in"
-	next "VIRIDIAN CITY."
+	cont "visit us in"
+	cont "VIRIDIAN CITY."
 
-	page "I know, I'll give"
+	para "I know, I'll give"
 	line "you a sample!"
-	next "Here you go!"
+	cont "Here you go!"
 	prompt
 
 _UnnamedText_1cae8: ; 8d643 (23:5643)
@@ -121479,7 +121479,7 @@ _UnnamedText_1cae8: ; 8d643 (23:5643)
 _UnnamedText_1caee: ; 8d652 (23:5652)
 	text "We also carry"
 	line "# BALLs for"
-	next "catching #MON!"
+	cont "catching #MON!"
 	done
 
 _UnnamedText_1caf3: ; 8d67c (23:567c)
@@ -121491,25 +121491,25 @@ _Route1Text2: ; 8d69f (23:569f)
 	text "See those ledges"
 	line "along the road?"
 
-	page "It's a bit scary,"
+	para "It's a bit scary,"
 	line "but you can jump"
-	next "from them."
+	cont "from them."
 
-	page "You can get back"
+	para "You can get back"
 	line "to PALLET TOWN"
-	next "quicker that way."
+	cont "quicker that way."
 	done
 
 _Route1Text3: ; 8d720 (23:5720)
 	text "ROUTE 1"
 	line "PALLET TOWN -"
-	next "VIRIDIAN CITY"
+	cont "VIRIDIAN CITY"
 	done
 
 _Route2Text3: ; 8d745 (23:5745)
 	text "ROUTE 2"
 	line "VIRIDIAN CITY -"
-	next "PEWTER CITY"
+	cont "PEWTER CITY"
 	done
 
 _Route2Text4: ; 8d76a (23:576a)
@@ -121519,11 +121519,11 @@ _Route2Text4: ; 8d76a (23:576a)
 _Route3Text1: ; 8d779 (23:5779)
 	text "Whew... I better"
 	line "take a rest..."
-	next "Groan..."
+	cont "Groan..."
 
-	page "That tunnel from"
+	para "That tunnel from"
 	line "CERULEAN takes a"
-	next "lot out of you!"
+	cont "lot out of you!"
 	done
 
 _Route3BattleText1: ; 8d7d5 (23:57d5)
@@ -121539,14 +121539,14 @@ _Route3EndBattleText1: ; 8d7f9 (23:57f9)
 _Route3AfterBattleText1: ; 8d80d (23:580d)
 	text "There are other"
 	line "kinds of #MON"
-	next "than those found"
-	next "in the forest!"
+	cont "than those found"
+	cont "in the forest!"
 	done
 
 _Route3BattleText2: ; 8d84c (23:584c)
 	text "Hi! I like shorts!"
 	line "They're comfy and"
-	next "easy to wear!"
+	cont "easy to wear!"
 	done
 
 _Route3EndBattleText2: ; 8d87f (23:587f)
@@ -121557,8 +121557,8 @@ _Route3EndBattleText2: ; 8d87f (23:587f)
 _Route3AfterBattleText2: ; 8d893 (23:5893)
 	text "Are you storing"
 	line "your #MON on"
-	next "PC? Each BOX can"
-	next "hold 20 #MON!"
+	cont "PC? Each BOX can"
+	cont "hold 20 #MON!"
 	done
 
 _Route3BattleText3: ; 8d8d0 (23:58d0)
@@ -121574,7 +121574,7 @@ _Route3EndBattleText3: ; 8d8ee (23:58ee)
 _Route3AfterBattleText3: ; 8d8fb (23:58fb)
 	text "Quit staring if"
 	line "you don't want to"
-	next "fight!"
+	cont "fight!"
 	done
 
 _Route3BattleText4: ; 8d924 (23:5924)
@@ -121585,20 +121585,20 @@ _Route3BattleText4: ; 8d924 (23:5924)
 _Route3EndBattleText4: ; 8d944 (23:5944)
 	text "If I"
 	line "had new #MON I"
-	next "would've won!"
+	cont "would've won!"
 	prompt
 
 _Route3AfterBattleText4: ; 8d966 (23:5966)
 	text "If a #MON BOX"
 	line "on the PC gets"
-	next "full, just switch"
-	next "to another BOX!"
+	cont "full, just switch"
+	cont "to another BOX!"
 	done
 
 _Route3BattleText5: ; 8d9a6 (23:59a6)
 	text "That look you"
 	line "gave me, it's so"
-	next "intriguing!"
+	cont "intriguing!"
 	done
 
 _Route3EndBattleText5: ; 8d9d1 (23:59d1)
@@ -121608,7 +121608,7 @@ _Route3EndBattleText5: ; 8d9d1 (23:59d1)
 _Route3AfterBattleText5: ; 8d9db (23:59db)
 	text "Avoid fights by"
 	line "not letting"
-	next "people see you!"
+	cont "people see you!"
 	done
 
 _Route3BattleText6: ; 8da08 (23:5a08)
@@ -121624,7 +121624,7 @@ _Route3EndBattleText6: ; 8da28 (23:5a28)
 _Route3AfterBattleText6: ; 8da3b (23:5a3b)
 	text "I always wear"
 	line "shorts, even in"
-	next "winter!"
+	cont "winter!"
 	done
 
 _Route3BattleText7: ; 8da62 (23:5a62)
@@ -121640,7 +121640,7 @@ _Route3EndBattleText7: ; 8da7e (23:5a7e)
 _Route3AfterBattleText7: ; 8da91 (23:5a91)
 	text "Trained #MON"
 	line "are stronger than"
-	next "the wild ones!"
+	cont "the wild ones!"
 	done
 
 _Route3BattleText8: ; 8dac0 (23:5ac0)
@@ -121665,7 +121665,7 @@ _Route3Text10: ; 8db07 (23:5b07)
 _Route4Text1: ; 8db1e (23:5b1e)
 	text "Ouch! I tripped"
 	line "over a rocky"
-	next "#MON, GEODUDE!"
+	cont "#MON, GEODUDE!"
 	done
 
 _Route4BattleText1: ; 8db4b (23:5b4b)
@@ -121681,9 +121681,9 @@ _Route4EndBattleText1: ; 8db6c (23:5b6c)
 _Route4AfterBattleText1: ; 8db88 (23:5b88)
 	text "There might not"
 	line "be any more"
-	next "mushrooms here."
+	cont "mushrooms here."
 
-	page "I think I got"
+	para "I think I got"
 	line "them all."
 	done
 
@@ -121695,19 +121695,19 @@ _Route4Text5: ; 8dbcd (23:5bcd)
 _Route4Text6: ; 8dbe6 (23:5be6)
 	text "ROUTE 4"
 	line "MT.MOON -"
-	next "CERULEAN CITY"
+	cont "CERULEAN CITY"
 	done
 
 _Route5Text1: ; 8dc07 (23:5c07)
 	text "UNDERGROUND PATH"
 	line "CERULEAN CITY -"
-	next "VERMILION CITY"
+	cont "VERMILION CITY"
 	done
 
 _Route6BattleText1: ; 8dc38 (23:5c38)
 	text "Who's there?"
 	line "Quit listening in"
-	next "on us!"
+	cont "on us!"
 	done
 
 _Route6EndBattleText1: ; 8dc5e (23:5c5e)
@@ -121723,7 +121723,7 @@ _Route6AfterBattleText1: ; 8dc70 (23:5c70)
 _Route6BattleText2: ; 8dc87 (23:5c87)
 	text "Excuse me! This"
 	line "is a private"
-	next "conversation!"
+	cont "conversation!"
 	done
 
 _Route6EndBattleText2: ; 8dcb3 (23:5cb3)
@@ -121744,7 +121744,7 @@ _Route6EndBattleText3: ; 8dce9 (23:5ce9)
 _Route6AfterBattleText3: ; 8dcfd (23:5cfd)
 	text "I like bugs, so"
 	line "I'm going back to"
-	next "VIRIDIAN FOREST."
+	cont "VIRIDIAN FOREST."
 	done
 
 _Route6BattleText4: ; 8dd30 (23:5d30)
@@ -121760,7 +121760,7 @@ _Route6EndBattleText4: ; 8dd4e (23:5d4e)
 _Route6AfterBattleText4: ; 8dd61 (23:5d61)
 	text "I should carry"
 	line "more #MON with"
-	next "me for safety."
+	cont "me for safety."
 	done
 
 _Route6BattleText5: ; 8dd8f (23:5d8f)
@@ -121776,13 +121776,13 @@ _Route6EndBattleText5: ; 8dda8 (23:5da8)
 _Route6AfterBattleText5: ; 8ddba (23:5dba)
 	text "I want to get"
 	line "stronger! What's"
-	next "your secret?"
+	cont "your secret?"
 	done
 
 _Route6BattleText6: ; 8dde6 (23:5de6)
 	text "I've never seen"
 	line "you around!"
-	next "Are you good?"
+	cont "Are you good?"
 	done
 
 _Route6EndBattleText6: ; 8de10 (23:5e10)
@@ -121793,25 +121793,25 @@ _Route6EndBattleText6: ; 8de10 (23:5e10)
 _Route6AfterBattleText6: ; 8de23 (23:5e23)
 	text "Are my #MON"
 	line "weak? Or, am I"
-	next "just bad?"
+	cont "just bad?"
 	done
 
 _Route6Text7: ; 8de49 (23:5e49)
 	text "UNDERGROUND PATH"
 	line "CERULEAN CITY -"
-	next "VERMILION CITY"
+	cont "VERMILION CITY"
 	done
 
 _Route7Text1: ; 8de7a (23:5e7a)
 	text "UNDERGROUND PATH"
 	line "CELADON CITY -"
-	next "LAVENDER TOWN"
+	cont "LAVENDER TOWN"
 	done
 
 _Route8BattleText1: ; 8dea9 (23:5ea9)
 	text "You look good at"
 	line "#MON, but"
-	next "how's your chem?"
+	cont "how's your chem?"
 	done
 
 _Route8EndBattleText1: ; 8ded5 (23:5ed5)
@@ -121852,7 +121852,7 @@ _Route8EndBattleText3: ; 8df7e (23:5f7e)
 _Route8AfterBattleText3: ; 8df90 (23:5f90)
 	text "Go with GRIMER"
 	line "first...and..."
-	next "...and...then..."
+	cont "...and...then..."
 	done
 
 _Route8BattleText4: ; 8dfc0 (23:5fc0)
@@ -121867,8 +121867,8 @@ _Route8EndBattleText4: ; 8dfe4 (23:5fe4)
 _Route8AfterBattleText4: ; 8dff0 (23:5ff0)
 	text "When #MON grow"
 	line "up they get ugly!"
-	next "They shouldn't"
-	next "evolve!"
+	cont "They shouldn't"
+	cont "evolve!"
 	done
 
 _Route8BattleText5: ; 8e028 (23:6028)
@@ -121884,7 +121884,7 @@ _Route8EndBattleText5: ; 8e049 (23:6049)
 _Route8AfterBattleText5: ; 8e060 (23:6060)
 	text "We're stuck here"
 	line "because of the"
-	next "gates at SAFFRON."
+	cont "gates at SAFFRON."
 	done
 
 _Route8BattleText6: ; 8e092 (23:6092)
@@ -121899,13 +121899,13 @@ _Route8EndBattleText6: ; 8e0b8 (23:60b8)
 _Route8AfterBattleText6: ; 8e0bf (23:60bf)
 	text "I think PIDGEY"
 	line "and RATTATA"
-	next "are cute too!"
+	cont "are cute too!"
 	done
 
 _Route8BattleText7: ; 8e0e9 (23:60e9)
 	text "We must look"
 	line "silly standing"
-	next "here like this!"
+	cont "here like this!"
 	done
 
 _Route8EndBattleText7: ; 8e116 (23:6116)
@@ -121916,8 +121916,8 @@ _Route8EndBattleText7: ; 8e116 (23:6116)
 _Route8AfterBattleText7: ; 8e12a (23:612a)
 	text "SAFFRON's gate"
 	line "keeper won't let"
-	next "us through."
-	next "He's so mean!"
+	cont "us through."
+	cont "He's so mean!"
 	done
 
 _Route8BattleText8: ; 8e162 (23:6162)
@@ -121933,40 +121933,40 @@ _Route8EndBattleText8: ; 8e181 (23:6181)
 _Route8AfterBattleText8: ; 8e198 (23:6198)
 	text "Gambling and"
 	line "#MON are like"
-	next "eating peanuts!"
-	next "Just can't stop!"
+	cont "eating peanuts!"
+	cont "Just can't stop!"
 	done
 
 _Route8BattleText9: ; 8e1d4 (23:61d4)
 	text "What's a cute,"
 	line "round and fluffy"
-	next "#MON?"
+	cont "#MON?"
 	done
 
 _Route8EndBattleText9: ; 8e1fa (23:61fa)
 	text "Stop!"
 
-	page "Don't be so mean"
+	para "Don't be so mean"
 	line "to my CLEFAIRY!"
 	prompt
 
 _Route8AfterBattleText9: ; 8e221 (23:6221)
 	text "I heard that"
 	line "CLEFAIRY evolves"
-	next "when it's exposed"
-	next "to a MOON STONE."
+	cont "when it's exposed"
+	cont "to a MOON STONE."
 	done
 
 _Route8Text10: ; 8e262 (23:6262)
 	text "UNDERGROUND PATH"
 	line "CELADON CITY -"
-	next "LAVENDER TOWN"
+	cont "LAVENDER TOWN"
 	done
 
 _Route9BattleText1: ; 8e291 (23:6291)
 	text "You have #MON"
 	line "with you!"
-	next "You're mine!"
+	cont "You're mine!"
 	done
 
 _Route9EndBattleText1: ; 8e2b6 (23:62b6)
@@ -121977,13 +121977,13 @@ _Route9EndBattleText1: ; 8e2b6 (23:62b6)
 _Route9AfterBattleText1: ; 8e2c8 (23:62c8)
 	text "You need light to"
 	line "get through that"
-	next "dark tunnel ahead."
+	cont "dark tunnel ahead."
 	done
 
 _Route9BattleText2: ; 8e2ff (23:62ff)
 	text "Who's that walking"
 	line "with those good"
-	next "looking #MON?"
+	cont "looking #MON?"
 	done
 
 _Route9EndBattleText2: ; 8e330 (23:6330)
@@ -121998,7 +121998,7 @@ _Route9AfterBattleText2: ; 8e343 (23:6343)
 _Route9BattleText3: ; 8e352 (23:6352)
 	text "I'm taking ROCK"
 	line "TUNNEL to go to"
-	next "LAVENDER..."
+	cont "LAVENDER..."
 	done
 
 _Route9EndBattleText3: ; 8e37e (23:637e)
@@ -122024,33 +122024,33 @@ _Route9EndBattleText4: ; 8e3cf (23:63cf)
 _Route9AfterBattleText4: ; 8e3e4 (23:63e4)
 	text "You're obviously"
 	line "talented! Good"
-	next "luck to you!"
+	cont "luck to you!"
 	done
 
 _Route9BattleText5: ; 8e411 (23:6411)
 	text "Bwahaha!"
 	line "Great! I was"
-	next "bored, eh!"
+	cont "bored, eh!"
 	done
 
 _Route9EndBattleText5: ; 8e433 (23:6433)
 	text "Keep it"
 	line "coming, eh!"
 
-	page "Oh wait. I'm out"
+	para "Oh wait. I'm out"
 	line "of #MON!"
 	prompt
 
 _Route9AfterBattleText5: ; 8e461 (23:6461)
 	text "You sure had guts"
 	line "standing up to me"
-	next "there, eh?"
+	cont "there, eh?"
 	done
 
 _Route9BattleText6: ; 8e491 (23:6491)
 	text "Hahaha!"
 	line "Aren't you a"
-	next "little toughie!"
+	cont "little toughie!"
 	done
 
 _Route9EndBattleText6: ; 8e4b6 (23:64b6)
@@ -122066,21 +122066,21 @@ _Route9AfterBattleText6: ; 8e4c3 (23:64c3)
 _Route9BattleText7: ; 8e4e2 (23:64e2)
 	text "I got up early"
 	line "every day to"
-	next "raise my #MON"
-	next "from cocoons!"
+	cont "raise my #MON"
+	cont "from cocoons!"
 	done
 
 _Route9EndBattleText7: ; 8e51b (23:651b)
 	text "WHAT?"
 
-	page "What a total"
+	para "What a total"
 	line "waste of time!"
 	prompt
 
 _Route9AfterBattleText7: ; 8e53e (23:653e)
 	text "I have to collect"
 	line "more than bugs to"
-	next "get stronger..."
+	cont "get stronger..."
 	done
 
 _Route9BattleText8: ; 8e573 (23:6573)
@@ -122096,7 +122096,7 @@ _Route9EndBattleText8: ; 8e58d (23:658d)
 _Route9AfterBattleText8: ; 8e5aa (23:65aa)
 	text "Hahahaha!"
 	line "Us hearty guys"
-	next "always laugh!"
+	cont "always laugh!"
 	done
 
 _Route9BattleText9: ; 8e5d2 (23:65d2)
@@ -122112,20 +122112,20 @@ _Route9EndBattleText9: ; 8e5ea (23:65ea)
 _Route9AfterBattleText9: ; 8e5f6 (23:65f6)
 	text "If you don't like"
 	line "bug #MON, you"
-	next "bug me!"
+	cont "bug me!"
 	done
 
 _Route9Text11: ; 8e61e (23:661e)
 	text "ROUTE 9"
 	line "CERULEAN CITY-"
-	next "ROCK TUNNEL"
+	cont "ROCK TUNNEL"
 	done
 
 _Route10BattleText1: ; 8e642 (23:6642)
 	text "Wow, are you a"
 	line "#MANIAC too?"
-	next "Want to see my"
-	next "collection?"
+	cont "Want to see my"
+	cont "collection?"
 	done
 
 _Route10EndBattleText1: ; 8e67a (23:667a)
@@ -122145,14 +122145,14 @@ _Route10BattleText2: ; 8e6b0 (23:66b0)
 _Route10EndBattleText2: ; 8e6c1 (23:66c1)
 	text "Ha-haha!"
 	line "Not laughing!"
-	next "Ha-hay fever!"
-	next "Haha-ha-choo!"
+	cont "Ha-hay fever!"
+	cont "Haha-ha-choo!"
 	prompt
 
 _Route10AfterBattleText2: ; 8e6f5 (23:66f5)
 	text "Haha-ha-choo!"
 	line "Ha-choo!"
-	next "Snort! Snivel!"
+	cont "Snort! Snivel!"
 	done
 
 _Route10BattleText3: ; 8e71c (23:671c)
@@ -122173,8 +122173,8 @@ _Route10AfterBattleText3: ; 8e74b (23:674b)
 _Route10BattleText4: ; 8e76c (23:676c)
 	text "I've been to a"
 	line "#MON GYM a few"
-	next "times. But, I"
-	next "lost each time."
+	cont "times. But, I"
+	cont "lost each time."
 	done
 
 _Route10EndBattleText4: ; 8e7a8 (23:67a8)
@@ -122185,7 +122185,7 @@ _Route10EndBattleText4: ; 8e7a8 (23:67a8)
 _Route10AfterBattleText4: ; 8e7bd (23:67bd)
 	text "I noticed some"
 	line "#MANIACs"
-	next "prowling around."
+	cont "prowling around."
 	done
 
 _Route10BattleText5: ; 8e7e7 (23:67e7)
@@ -122206,7 +122206,7 @@ _Route10AfterBattleText5: ; 8e823 (23:6823)
 _Route10BattleText6: ; 8e844 (23:6844)
 	text "I'm feeling a bit"
 	line "faint from this"
-	next "tough hike."
+	cont "tough hike."
 	done
 
 _Route10EndBattleText6: ; 8e872 (23:6872)
@@ -122217,9 +122217,9 @@ _Route10EndBattleText6: ; 8e872 (23:6872)
 _Route10AfterBattleText6: ; 8e884 (23:6884)
 	text "The #MON here"
 	line "are so chunky!"
-	next "There should be a"
-	next "pink one with a"
-	next "floral pattern!"
+	cont "There should be a"
+	cont "pink one with a"
+	cont "floral pattern!"
 	done
 
 _Route10Text9: ; 8e8d4 (23:68d4)
@@ -122243,7 +122243,7 @@ _Route11EndBattleText1: ; 8e902 (23:6902)
 _Route11AfterBattleText1: ; 8e91b (23:691b)
 	text "#MON is life!"
 	line "And to live is to"
-	next "gamble!"
+	cont "gamble!"
 	done
 
 _Route11BattleText2: ; 8e944 (23:6944)
@@ -122259,7 +122259,7 @@ _Route11EndBattleText2: ; 8e965 (23:6965)
 _Route11AfterBattleText2: ; 8e976 (23:6976)
 	text "You can't be a"
 	line "coward in the"
-	next "world of #MON!"
+	cont "world of #MON!"
 	done
 
 _Route11BattleText3: ; 8e9a2 (23:69a2)
@@ -122280,7 +122280,7 @@ _Route11AfterBattleText3: ; 8e9d3 (23:69d3)
 _Route11BattleText4: ; 8e9f6 (23:69f6)
 	text "Careful!"
 	line "I'm laying down"
-	next "some cables!"
+	cont "some cables!"
 	done
 
 _Route11EndBattleText4: ; 8ea1c (23:6a1c)
@@ -122296,7 +122296,7 @@ _Route11AfterBattleText4: ; 8ea30 (23:6a30)
 _Route11BattleText5: ; 8ea51 (23:6a51)
 	text "I just became a"
 	line "trainer! But, I"
-	next "think I can win!"
+	cont "think I can win!"
 	done
 
 _Route11EndBattleText5: ; 8ea83 (23:6a83)
@@ -122347,16 +122347,16 @@ _Route11BattleText8: ; 8eb57 (23:6b57)
 _Route11EndBattleText8: ; 8eb71 (23:6b71)
 	text "Darn!"
 	line "I need to make my"
-	next "#MON stronger!"
+	cont "#MON stronger!"
 	prompt
 
 _Route11AfterBattleText8: ; 8eb99 (23:6b99)
 	text "There's a fat"
 	line "#MON that"
-	next "comes down from"
-	next "the mountains."
+	cont "comes down from"
+	cont "the mountains."
 
-	page "It's strong if"
+	para "It's strong if"
 	line "you can get it."
 	done
 
@@ -122404,15 +122404,15 @@ _Route12Text1: ; 9009e (24:409e)
 _UnnamedText_596eb: ; 900bf (24:40bf)
 	text "SNORLAX woke up!"
 
-	page "It attacked in a"
+	para "It attacked in a"
 	line "grumpy rage!"
 	done
 
 _UnnamedText_596f0: ; 900ef (24:40ef)
 	text "SNORLAX calmed"
 	line "down! With a big"
-	next "yawn, it returned"
-	next "to the mountains!"
+	cont "yawn, it returned"
+	cont "to the mountains!"
 	done
 
 _Route12BattleText1: ; 90134 (24:4134)
@@ -122433,7 +122433,7 @@ _Route12AfterBattleText1: ; 90167 (24:4167)
 _Route12BattleText2: ; 90183 (24:4183)
 	text "Be patient!"
 	line "Fishing is a"
-	next "waiting game!"
+	cont "waiting game!"
 	done
 
 _Route12EndBattleText2: ; 901ab (24:41ab)
@@ -122444,7 +122444,7 @@ _Route12EndBattleText2: ; 901ab (24:41ab)
 _Route12AfterBattleText2: ; 901bf (24:41bf)
 	text "With a better ROD,"
 	line "I could catch"
-	next "better #MON!"
+	cont "better #MON!"
 	done
 
 _Route12BattleText3: ; 901ee (24:41ee)
@@ -122459,7 +122459,7 @@ _Route12EndBattleText3: ; 9020c (24:420c)
 _Route12AfterBattleText3: ; 90212 (24:4212)
 	text "I could have made"
 	line "my #MON evolve"
-	next "with MOON STONE!"
+	cont "with MOON STONE!"
 	done
 
 _Route12BattleText4: ; 90245 (24:4245)
@@ -122474,8 +122474,8 @@ _Route12EndBattleText4: ; 90263 (24:4263)
 _Route12AfterBattleText4: ; 9026f (24:426f)
 	text "Water conducts"
 	line "electricity, so"
-	next "you should zap"
-	next "sea #MON!"
+	cont "you should zap"
+	cont "sea #MON!"
 	done
 
 _Route12BattleText5: ; 902a8 (24:42a8)
@@ -122491,7 +122491,7 @@ _Route12EndBattleText5: ; 902c8 (24:42c8)
 _Route12AfterBattleText5: ; 902d3 (24:42d3)
 	text "You beat me at"
 	line "#MON, but I'm"
-	next "good at fishing!"
+	cont "good at fishing!"
 	done
 
 _Route12BattleText6: ; 90301 (24:4301)
@@ -122507,13 +122507,13 @@ _Route12EndBattleText6: ; 90318 (24:4318)
 _Route12AfterBattleText6: ; 90329 (24:4329)
 	text "It's all right."
 	line "Losing doesn't"
-	next "bug me any more."
+	cont "bug me any more."
 	done
 
 _Route12BattleText7: ; 90358 (24:4358)
 	text "You never know"
 	line "what you could"
-	next "catch!"
+	cont "catch!"
 	done
 
 _Route12EndBattleText7: ; 9037e (24:437e)
@@ -122524,7 +122524,7 @@ _Route12EndBattleText7: ; 9037e (24:437e)
 _Route12AfterBattleText7: ; 90388 (24:4388)
 	text "I catch MAGIKARP"
 	line "all the time, but"
-	next "they're so weak!"
+	cont "they're so weak!"
 	done
 
 _Route12Text11: ; 903bc (24:43bc)
@@ -122549,7 +122549,7 @@ _Route13EndBattleText2: ; 9040a (24:440a)
 _Route13AfterBattleText2: ; 9041f (24:441f)
 	text "My #MON look"
 	line "happy even though"
-	next "they lost."
+	cont "they lost."
 	done
 
 _Route13BattleText3: ; 9044a (24:444a)
@@ -122565,7 +122565,7 @@ _Route13EndBattleText3: ; 90466 (24:4466)
 _Route13AfterBattleText3: ; 90474 (24:4474)
 	text "I want to become"
 	line "a good trainer."
-	next "I'll train hard."
+	cont "I'll train hard."
 	done
 
 _Route13BattleText4: ; 904a6 (24:44a6)
@@ -122581,13 +122581,13 @@ _Route13EndBattleText4: ; 904c6 (24:44c6)
 _Route13AfterBattleText4: ; 904d3 (24:44d3)
 	text "You got those"
 	line "BADGEs from GYM"
-	next "LEADERs. I know!"
+	cont "LEADERs. I know!"
 	done
 
 _Route13BattleText5: ; 90503 (24:4503)
 	text "My cute #MON"
 	line "wish to make your"
-	next "acquaintance."
+	cont "acquaintance."
 	done
 
 _Route13EndBattleText5: ; 90531 (24:4531)
@@ -122598,7 +122598,7 @@ _Route13EndBattleText5: ; 90531 (24:4531)
 _Route13AfterBattleText5: ; 90548 (24:4548)
 	text "You have to make"
 	line "#MON fight to"
-	next "toughen them up!"
+	cont "toughen them up!"
 	done
 
 _Route13BattleText6: ; 90579 (24:4579)
@@ -122614,7 +122614,7 @@ _Route13EndBattleText6: ; 90599 (24:4599)
 _Route13AfterBattleText6: ; 905aa (24:45aa)
 	text "CARBOS boosted"
 	line "the SPEED of my"
-	next "#MON."
+	cont "#MON."
 	done
 
 _Route13BattleText7: ; 905d0 (24:45d0)
@@ -122645,7 +122645,7 @@ _Route13EndBattleText8: ; 90637 (24:4637)
 _Route13AfterBattleText8: ; 9064e (24:464e)
 	text "I wonder which is"
 	line "stronger, male or"
-	next "female #MON?"
+	cont "female #MON?"
 	done
 
 _Route13BattleText9: ; 90680 (24:4680)
@@ -122661,8 +122661,8 @@ _Route13EndBattleText9: ; 9069e (24:469e)
 _Route13AfterBattleText9: ; 906b1 (24:46b1)
 	text "I don't know"
 	line "anything about"
-	next "#MON. I just"
-	next "like cool ones!"
+	cont "#MON. I just"
+	cont "like cool ones!"
 	done
 
 _Route13BattleText10: ; 906ea (24:46ea)
@@ -122692,34 +122692,34 @@ _Route13EndBattleText11: ; 90741 (24:4741)
 _Route13AfterBattleText11: ; 90750 (24:4750)
 	text "I wish I could"
 	line "fly like PIDGEY"
-	next "and PIDGEOTTO..."
+	cont "and PIDGEOTTO..."
 	done
 
 _Route13Text11: ; 90781 (24:4781)
 	text "TRAINER TIPS"
 
-	page "Look to the left"
+	para "Look to the left"
 	line "of that post!"
 	done
 
 _Route13Text12: ; 907ae (24:47ae)
 	text "TRAINER TIPS"
 
-	page "Use SELECT to"
+	para "Use SELECT to"
 	line "switch items in"
-	next "the ITEM window!"
+	cont "the ITEM window!"
 	done
 
 _Route13Text13: ; 907eb (24:47eb)
 	text "ROUTE 13"
 	line "North to SILENCE"
-	next "BRIDGE"
+	cont "BRIDGE"
 	done
 
 _Route14BattleText1: ; 9080d (24:480d)
 	text "You need to use"
 	line "TMs to teach good"
-	next "moves to #MON!"
+	cont "moves to #MON!"
 	done
 
 _Route14EndBattleText1: ; 9083f (24:483f)
@@ -122730,14 +122730,14 @@ _Route14EndBattleText1: ; 9083f (24:483f)
 _Route14AfterBattleText1: ; 90851 (24:4851)
 	text "You have some HMs"
 	line "right? #MON"
-	next "can't ever forget"
-	next "those moves."
+	cont "can't ever forget"
+	cont "those moves."
 	done
 
 _Route14BattleText2: ; 9088e (24:488e)
 	text "My bird #MON"
 	line "should be ready"
-	next "for battle."
+	cont "for battle."
 	done
 
 _Route14EndBattleText2: ; 908b8 (24:48b8)
@@ -122753,8 +122753,8 @@ _Route14AfterBattleText2: ; 908c8 (24:48c8)
 _Route14BattleText3: ; 908ea (24:48ea)
 	text "TMs are on sale"
 	line "in CELADON!"
-	next "But, only a few"
-	next "people have HMs!"
+	cont "But, only a few"
+	cont "people have HMs!"
 	done
 
 _Route14EndBattleText3: ; 90928 (24:4928)
@@ -122765,14 +122765,14 @@ _Route14EndBattleText3: ; 90928 (24:4928)
 _Route14AfterBattleText3: ; 90936 (24:4936)
 	text "Teach #MON"
 	line "moves of the same"
-	next "element type for"
-	next "more power."
+	cont "element type for"
+	cont "more power."
 	done
 
 _Route14BattleText4: ; 90971 (24:4971)
 	text "Have you taught"
 	line "your bird #MON"
-	next "how to FLY?"
+	cont "how to FLY?"
 	done
 
 _Route14EndBattleText4: ; 9099d (24:499d)
@@ -122788,7 +122788,7 @@ _Route14AfterBattleText4: ; 909b3 (24:49b3)
 _Route14BattleText5: ; 909d0 (24:49d0)
 	text "Have you heard of"
 	line "the legendary"
-	next "#MON?"
+	cont "#MON?"
 	done
 
 _Route14EndBattleText5: ; 909f7 (24:49f7)
@@ -122799,7 +122799,7 @@ _Route14EndBattleText5: ; 909f7 (24:49f7)
 _Route14AfterBattleText5: ; 90a0a (24:4a0a)
 	text "The 3 legendary"
 	line "#MON are all"
-	next "birds of prey."
+	cont "birds of prey."
 	done
 
 _Route14BattleText6: ; 90a37 (24:4a37)
@@ -122815,13 +122815,13 @@ _Route14EndBattleText6: ; 90a59 (24:4a59)
 _Route14AfterBattleText6: ; 90a65 (24:4a65)
 	text "Winning, losing,"
 	line "it doesn't matter"
-	next "in the long run!"
+	cont "in the long run!"
 	done
 
 _Route14BattleText7: ; 90a99 (24:4a99)
 	text "C'mon, c'mon."
 	line "Let's go, let's"
-	next "go, let's go!"
+	cont "go, let's go!"
 	done
 
 _Route14EndBattleText7: ; 90ac1 (24:4ac1)
@@ -122852,7 +122852,7 @@ _Route14AfterBattleText8: ; 90b2e (24:4b2e)
 _Route14BattleText9: ; 90b4c (24:4b4c)
 	text "We ride out here"
 	line "because there's"
-	next "more room!"
+	cont "more room!"
 	done
 
 _Route14EndBattleText9: ; 90b78 (24:4b78)
@@ -122862,9 +122862,9 @@ _Route14EndBattleText9: ; 90b78 (24:4b78)
 _Route14AfterBattleText9: ; 90b83 (24:4b83)
 	text "It's cool you"
 	line "made your #MON"
-	next "so strong!"
+	cont "so strong!"
 
-	page "Might is right!"
+	para "Might is right!"
 	line "And you know it!"
 	done
 
@@ -122881,19 +122881,19 @@ _Route14EndBattleText10: ; 90be7 (24:4be7)
 _Route14AfterBattleText10: ; 90bf4 (24:4bf4)
 	text "You know who'd"
 	line "win, you and me"
-	next "one on one!"
+	cont "one on one!"
 	done
 
 _Route14Text11: ; 90c1f (24:4c1f)
 	text "ROUTE 14"
 	line "West to FUCHSIA"
-	next "CITY"
+	cont "CITY"
 	done
 
 _Route15BattleText1: ; 90c3e (24:4c3e)
 	text "Let me try out the"
 	line "#MON I just"
-	next "got in a trade!"
+	cont "got in a trade!"
 	done
 
 _Route15EndBattleText1: ; 90c6e (24:4c6e)
@@ -122904,17 +122904,17 @@ _Route15EndBattleText1: ; 90c6e (24:4c6e)
 _Route15AfterBattleText1: ; 90c80 (24:4c80)
 	text "You can't change"
 	line "the nickname of"
-	next "any #MON you"
-	next "get in a trade."
+	cont "any #MON you"
+	cont "get in a trade."
 
-	page "Only the Original"
+	para "Only the Original"
 	line "Trainer can."
 	done
 
 _Route15BattleText2: ; 90cdd (24:4cdd)
 	text "You look gentle,"
 	line "so I think I can"
-	next "beat you!"
+	cont "beat you!"
 	done
 
 _Route15EndBattleText2: ; 90d0a (24:4d0a)
@@ -122925,13 +122925,13 @@ _Route15EndBattleText2: ; 90d0a (24:4d0a)
 _Route15AfterBattleText2: ; 90d16 (24:4d16)
 	text "I'm afraid of"
 	line "BIKERs, they look"
-	next "so ugly and mean!"
+	cont "so ugly and mean!"
 	done
 
 _Route15BattleText3: ; 90d48 (24:4d48)
 	text "When I whistle, I"
 	line "can summon bird"
-	next "#MON!"
+	cont "#MON!"
 	done
 
 _Route15EndBattleText3: ; 90d71 (24:4d71)
@@ -122947,7 +122947,7 @@ _Route15AfterBattleText3: ; 90d84 (24:4d84)
 _Route15BattleText4: ; 90da7 (24:4da7)
 	text "Hmm? My birds are"
 	line "shivering! You're"
-	next "good, aren't you?"
+	cont "good, aren't you?"
 	done
 
 _Route15EndBattleText4: ; 90ddc (24:4ddc)
@@ -122958,8 +122958,8 @@ _Route15EndBattleText4: ; 90ddc (24:4ddc)
 _Route15AfterBattleText4: ; 90df0 (24:4df0)
 	text "Did you know moves"
 	line "like EARTHQUAKE"
-	next "don't have any"
-	next "effect on birds?"
+	cont "don't have any"
+	cont "effect on birds?"
 	done
 
 _Route15BattleText5: ; 90e33 (24:4e33)
@@ -122980,7 +122980,7 @@ _Route15AfterBattleText5: ; 90e67 (24:4e67)
 _Route15BattleText6: ; 90e86 (24:4e86)
 	text "I raise #MON"
 	line "because I live"
-	next "alone!"
+	cont "alone!"
 	done
 
 _Route15EndBattleText6: ; 90eaa (24:4eaa)
@@ -122991,7 +122991,7 @@ _Route15EndBattleText6: ; 90eaa (24:4eaa)
 _Route15AfterBattleText6: ; 90ec1 (24:4ec1)
 	text "I just like going"
 	line "home to be with"
-	next "my #MON!"
+	cont "my #MON!"
 	done
 
 _Route15BattleText7: ; 90eed (24:4eed)
@@ -123007,14 +123007,14 @@ _Route15EndBattleText7: ; 90f0f (24:4f0f)
 _Route15AfterBattleText7: ; 90f19 (24:4f19)
 	text "You only live"
 	line "once, so I live"
-	next "as an outlaw!"
-	next "TEAM ROCKET RULES!"
+	cont "as an outlaw!"
+	cont "TEAM ROCKET RULES!"
 	done
 
 _Route15BattleText8: ; 90f59 (24:4f59)
 	text "Fork over all your"
 	line "cash when you"
-	next "lose to me, kid!"
+	cont "lose to me, kid!"
 	done
 
 _Route15EndBattleText8: ; 90f8c (24:4f8c)
@@ -123059,7 +123059,7 @@ _Route15AfterBattleText10: ; 9103f (24:503f)
 _Route15Text12: ; 91062 (24:5062)
 	text "ROUTE 15"
 	line "West to FUCHSIA"
-	next "CITY"
+	cont "CITY"
 	done
 
 _Route16BattleText1: ; 91081 (24:5081)
@@ -123074,7 +123074,7 @@ _Route16EndBattleText1: ; 91094 (24:5094)
 _Route16AfterBattleText1: ; 910aa (24:50aa)
 	text "We like just"
 	line "hanging here,"
-	next "what's it to you?"
+	cont "what's it to you?"
 	done
 
 _Route16BattleText2: ; 910d7 (24:50d7)
@@ -123119,8 +123119,8 @@ _Route16EndBattleText4: ; 9118d (24:518d)
 _Route16AfterBattleText4: ; 91196 (24:5196)
 	text "You can also get"
 	line "to FUCHSIA from"
-	next "VERMILION using a"
-	next "coastal road."
+	cont "VERMILION using a"
+	cont "coastal road."
 	done
 
 _Route16BattleText5: ; 911d8 (24:51d8)
@@ -123136,7 +123136,7 @@ _Route16EndBattleText5: ; 911f5 (24:51f5)
 _Route16AfterBattleText5: ; 91205 (24:5205)
 	text "I like my #MON"
 	line "ferocious! They"
-	next "tear up enemies!"
+	cont "tear up enemies!"
 	done
 
 _Route16BattleText6: ; 91236 (24:5236)
@@ -123151,7 +123151,7 @@ _Route16EndBattleText6: ; 91245 (24:5245)
 _Route16AfterBattleText6: ; 91258 (24:5258)
 	text "I like harassing"
 	line "people with my"
-	next "vicious #MON!"
+	cont "vicious #MON!"
 	done
 
 _Route16Text7: ; 91287 (24:5287)
@@ -123162,14 +123162,14 @@ _Route16Text7: ; 91287 (24:5287)
 _UnnamedText_59ab3: ; 912a8 (24:52a8)
 	text "SNORLAX woke up!"
 
-	page "It attacked in a"
+	para "It attacked in a"
 	line "grumpy rage!"
 	done
 
 _UnnamedText_59ab8: ; 912d8 (24:52d8)
 	text "With a big yawn,"
 	line "SNORLAX returned"
-	next "to the mountains!"
+	cont "to the mountains!"
 	done
 
 _Route16Text8: ; 9130d (24:530d)
@@ -123180,7 +123180,7 @@ _Route16Text8: ; 9130d (24:530d)
 _Route16Text9: ; 9132c (24:532c)
 	text "ROUTE 16"
 	line "CELADON CITY -"
-	next "FUCHSIA CITY"
+	cont "FUCHSIA CITY"
 	done
 
 _Route17BattleText1: ; 91352 (24:5352)
@@ -123196,7 +123196,7 @@ _Route17EndBattleText1: ; 91375 (24:5375)
 _Route17AfterBattleText1: ; 91382 (24:5382)
 	text "Good stuff is"
 	line "lying around on"
-	next "CYCLING ROAD!"
+	cont "CYCLING ROAD!"
 	done
 
 _Route17BattleText2: ; 913af (24:53af)
@@ -123211,7 +123211,7 @@ _Route17EndBattleText2: ; 913c9 (24:53c9)
 _Route17AfterBattleText2: ; 913d0 (24:53d0)
 	text "I could belly-"
 	line "bump you outta"
-	next "here!"
+	cont "here!"
 	done
 
 _Route17BattleText3: ; 913f5 (24:53f5)
@@ -123256,7 +123256,7 @@ _Route17EndBattleText5: ; 9149a (24:549a)
 _Route17AfterBattleText5: ; 914a9 (24:54a9)
 	text "I got my VOLTORB"
 	line "at the abandoned"
-	next "POWER PLANT."
+	cont "POWER PLANT."
 	done
 
 _Route17BattleText6: ; 914d9 (24:54d9)
@@ -123272,7 +123272,7 @@ _Route17EndBattleText6: ; 914f4 (24:54f4)
 _Route17AfterBattleText6: ; 914ff (24:54ff)
 	text "Maybe some #MON"
 	line "need element"
-	next "STONEs to evolve."
+	cont "STONEs to evolve."
 	done
 
 _Route17BattleText7: ; 9152f (24:552f)
@@ -123335,43 +123335,43 @@ _Route17AfterBattleText10: ; 9162e (24:562e)
 _Route17Text11: ; 91649 (24:5649)
 	text "It's a notice!"
 
-	page "Watch out for"
+	para "Watch out for"
 	line "discarded items!"
 	done
 
 _Route17Text12: ; 91677 (24:5677)
 	text "TRAINER TIPS"
 
-	page "All #MON are"
+	para "All #MON are"
 	line "unique."
 
-	page "Even #MON of"
+	para "Even #MON of"
 	line "the same type and"
-	next "level grow at"
-	next "different rates."
+	cont "level grow at"
+	cont "different rates."
 	done
 
 _Route17Text13: ; 916d8 (24:56d8)
 	text "TRAINER TIPS"
 
-	page "Press the A or B"
+	para "Press the A or B"
 	line "Button to stay in"
-	next "place while on a"
-	next "slope."
+	cont "place while on a"
+	cont "slope."
 	done
 
 _Route17Text14: ; 91721 (24:5721)
 	text "ROUTE 17"
 	line "CELADON CITY -"
-	next "FUCHSIA CITY"
+	cont "FUCHSIA CITY"
 	done
 
 _Route17Text15: ; 91747 (24:5747)
 	text "It's a notice!"
 
-	page "Don't throw the"
+	para "Don't throw the"
 	line "game, throw #"
-	next "BALLs instead!"
+	cont "BALLs instead!"
 	done
 
 _Route17Text16: ; 91782 (24:5782)
@@ -123382,7 +123382,7 @@ _Route17Text16: ; 91782 (24:5782)
 _Route18BattleText1: ; 917a1 (24:57a1)
 	text "I always check"
 	line "every grassy area"
-	next "for new #MON."
+	cont "for new #MON."
 	done
 
 _Route18EndBattleText1: ; 917d1 (24:57d1)
@@ -123397,7 +123397,7 @@ _Route18AfterBattleText1: ; 917d7 (24:57d7)
 _Route18BattleText2: ; 917ed (24:57ed)
 	text "Kurukkoo!"
 	line "How do you like"
-	next "my bird call?"
+	cont "my bird call?"
 	done
 
 _Route18EndBattleText2: ; 91816 (24:5816)
@@ -123408,7 +123408,7 @@ _Route18EndBattleText2: ; 91816 (24:5816)
 _Route18AfterBattleText2: ; 91829 (24:5829)
 	text "I also collect sea"
 	line "#MON on"
-	next "weekends!"
+	cont "weekends!"
 	done
 
 _Route18BattleText3: ; 9184f (24:584f)
@@ -123423,19 +123423,19 @@ _Route18EndBattleText3: ; 91872 (24:5872)
 _Route18AfterBattleText3: ; 91879 (24:5879)
 	text "This is my fave"
 	line "#MON hunting"
-	next "area!"
+	cont "area!"
 	done
 
 _Route18Text4: ; 9189d (24:589d)
 	text "ROUTE 18"
 	line "CELADON CITY -"
-	next "FUCHSIA CITY"
+	cont "FUCHSIA CITY"
 	done
 
 _Route18Text5: ; 918c3 (24:58c3)
 	text "CYCLING ROAD"
 	line "No pedestrians"
-	next "permitted!"
+	cont "permitted!"
 	done
 
 _Route19BattleText1: ; 918eb (24:58eb)
@@ -123500,7 +123500,7 @@ _Route19AfterBattleText4: ; 919fe (24:59fe)
 _Route19BattleText5: ; 91a1a (24:5a1a)
 	text "I tried diving"
 	line "for #MON, but"
-	next "it was a no go!"
+	cont "it was a no go!"
 	done
 
 _Route19EndBattleText5: ; 91a48 (24:5a48)
@@ -123530,7 +123530,7 @@ _Route19AfterBattleText6: ; 91a9e (24:5a9e)
 _Route19BattleText7: ; 91ac0 (24:5ac0)
 	text "Oh, I just love"
 	line "your ride! Can I"
-	next "have it if I win?"
+	cont "have it if I win?"
 	done
 
 _Route19EndBattleText7: ; 91af4 (24:5af4)
@@ -123541,7 +123541,7 @@ _Route19EndBattleText7: ; 91af4 (24:5af4)
 _Route19AfterBattleText7: ; 91b01 (24:5b01)
 	text "It's still a long"
 	line "way to go to"
-	next "SEAFOAM ISLANDS."
+	cont "SEAFOAM ISLANDS."
 	done
 
 _Route19BattleText8: ; 91b31 (24:5b31)
@@ -123556,7 +123556,7 @@ _Route19EndBattleText8: ; 91b53 (24:5b53)
 _Route19AfterBattleText8: ; 91b5d (24:5b5d)
 	text "My boy friend"
 	line "wanted to swim to"
-	next "SEAFOAM ISLANDS."
+	cont "SEAFOAM ISLANDS."
 	done
 
 _Route19BattleText9: ; 91b8f (24:5b8f)
@@ -123587,13 +123587,13 @@ _Route19EndBattleText10: ; 91bf9 (24:5bf9)
 _Route19AfterBattleText10: ; 91c0a (24:5c0a)
 	text "LAPRAS is so big,"
 	line "it must keep you"
-	next "dry on water."
+	cont "dry on water."
 	done
 
 _Route19Text11: ; 91c3c (24:5c3c)
 	text "SEA ROUTE 19"
 	line "FUCHSIA CITY -"
-	next "SEAFOAM ISLANDS"
+	cont "SEAFOAM ISLANDS"
 	done
 
 _Route20BattleText1: ; 91c69 (24:5c69)
@@ -123622,7 +123622,7 @@ _Route20EndBattleText2: ; 91cc9 (24:5cc9)
 _Route20AfterBattleText2: ; 91cd3 (24:5cd3)
 	text "There's a huge"
 	line "cavern underneath"
-	next "this island."
+	cont "this island."
 	done
 
 _Route20BattleText3: ; 91d01 (24:5d01)
@@ -123666,13 +123666,13 @@ _Route20EndBattleText5: ; 91dac (24:5dac)
 _Route20AfterBattleText5: ; 91db4 (24:5db4)
 	text "I should've been"
 	line "buffing up my"
-	next "#MON, not me!"
+	cont "#MON, not me!"
 	done
 
 _Route20BattleText6: ; 91de1 (24:5de1)
 	text "Why are you"
 	line "riding a #MON?"
-	next "Can't you swim?"
+	cont "Can't you swim?"
 	done
 
 _Route20EndBattleText6: ; 91e0c (24:5e0c)
@@ -123713,7 +123713,7 @@ _Route20EndBattleText8: ; 91e9f (24:5e9f)
 _Route20AfterBattleText8: ; 91eb6 (24:5eb6)
 	text "Will my pearls"
 	line "grow bigger"
-	next "inside CLOYSTER?"
+	cont "inside CLOYSTER?"
 	done
 
 _Route20BattleText9: ; 91ee3 (24:5ee3)
@@ -123729,14 +123729,14 @@ _Route20EndBattleText9: ; 91f06 (24:5f06)
 _Route20AfterBattleText9: ; 91f1b (24:5f1b)
 	text "#MON have"
 	line "taken over an"
-	next "abandoned mansion"
-	next "on CINNABAR!"
+	cont "abandoned mansion"
+	cont "on CINNABAR!"
 	done
 
 _Route20BattleText10: ; 91f53 (24:5f53)
 	text "CINNABAR, in the"
 	line "west, has a LAB"
-	next "for #MON."
+	cont "for #MON."
 	done
 
 _Route20EndBattleText10: ; 91f7f (24:5f7f)
@@ -123756,7 +123756,7 @@ _Route20Text11: ; 91fa7 (24:5fa7)
 _Route21BattleText1: ; 91fb8 (24:5fb8)
 	text "You want to know"
 	line "if the fish are"
-	next "biting?"
+	cont "biting?"
 	done
 
 _Route21EndBattleText1: ; 91fe2 (24:5fe2)
@@ -123810,7 +123810,7 @@ _Route21EndBattleText4: ; 920bf (24:60bf)
 _Route21AfterBattleText4: ; 920cc (24:60cc)
 	text "I look like what?"
 	line "A studded inner"
-	next "tube? Get lost!"
+	cont "tube? Get lost!"
 	done
 
 _Route21BattleText5: ; 920ff (24:60ff)
@@ -123841,8 +123841,8 @@ _Route21EndBattleText6: ; 9216e (24:616e)
 _Route21AfterBattleText6: ; 92186 (24:6186)
 	text "I'm beat!"
 	line "But, I still have"
-	next "the bike race and"
-	next "marathon left!"
+	cont "the bike race and"
+	cont "marathon left!"
 	done
 
 _Route21BattleText7: ; 921c3 (24:61c3)
@@ -123873,7 +123873,7 @@ _Route21EndBattleText8: ; 9222b (24:622b)
 _Route21AfterBattleText8: ; 92244 (24:6244)
 	text "I was just angry"
 	line "that I couldn't"
-	next "catch anything."
+	cont "catch anything."
 	done
 
 _Route21BattleText9: ; 92275 (24:6275)
@@ -123895,99 +123895,99 @@ _UnnamedText_511ad: ; 922cd (24:62cd)
 	text $53, ": Hey!"
 	line $52, "!"
 
-	page "You're going to"
+	para "You're going to"
 	line "#MON LEAGUE?"
 
-	page "Forget it! You"
+	para "Forget it! You"
 	line "probably don't"
-	next "have any BADGEs!"
+	cont "have any BADGEs!"
 
-	page "The guard won't"
+	para "The guard won't"
 	line "let you through!"
 
-	page "By the way, did"
+	para "By the way, did"
 	line "your #MON"
-	next "get any stronger?"
+	cont "get any stronger?"
 	done
 
 _UnnamedText_511b2: ; 9236f (24:636f)
 	text "I heard #MON"
 	line "LEAGUE has many"
-	next "tough trainers!"
+	cont "tough trainers!"
 
-	page "I have to figure"
+	para "I have to figure"
 	line "out how to get"
-	next "past them!"
+	cont "past them!"
 
-	page "You should quit"
+	para "You should quit"
 	line "dawdling and get"
-	next "a move on!"
+	cont "a move on!"
 	done
 
 _UnnamedText_511b7: ; 923f4 (24:63f4)
 	text "Awww!"
 	line "You just lucked"
-	next "out!"
+	cont "out!"
 	prompt
 
 _UnnamedText_511bc: ; 92410 (24:6410)
 	text $53, ": What?"
 	line "Why do I have 2"
-	next "#MON?"
+	cont "#MON?"
 
-	page "You should catch"
-	next "some more too!"
+	para "You should catch"
+	cont "some more too!"
 	prompt
 
 _UnnamedText_511c1: ; 92450 (24:6450)
 	text $53, ": What?"
 	line $52, "! What a"
-	next "surprise to see"
-	next "you here!"
+	cont "surprise to see"
+	cont "you here!"
 
-	page "So you're going to"
+	para "So you're going to"
 	line "#MON LEAGUE?"
 
-	page "You collected all"
+	para "You collected all"
 	line "the BADGEs too?"
-	next "That's cool!"
+	cont "That's cool!"
 
-	page "Then I'll whip you"
+	para "Then I'll whip you"
 	line $52, " as a"
-	next "warm up for"
-	next "#MON LEAGUE!"
+	cont "warm up for"
+	cont "#MON LEAGUE!"
 
-	page "Come on!"
+	para "Come on!"
 	done
 
 _UnnamedText_511c6: ; 92506 (24:6506)
 	text "That loosened me"
 	line "up! I'm ready for"
-	next "#MON LEAGUE!"
+	cont "#MON LEAGUE!"
 
-	page $52, ", you need"
+	para $52, ", you need"
 	line "more practice!"
 
-	page "But hey, you know"
+	para "But hey, you know"
 	line "that! I'm out of"
-	next "here. Smell ya!"
+	cont "here. Smell ya!"
 	done
 
 _UnnamedText_511cb: ; 92583 (24:6583)
 	text "What!?"
 
-	page "I was just"
+	para "I was just"
 	line "careless!"
 	prompt
 
 _UnnamedText_511d0: ; 925a0 (24:65a0)
 	text $53, ": Hahaha!"
 	line $52, "! That's"
-	next "your best? You're"
-	next "nowhere near as"
-	next "good as me, pal!"
+	cont "your best? You're"
+	cont "nowhere near as"
+	cont "good as me, pal!"
 
-	page "Go train some"
+	para "Go train some"
 	line "more! You loser!"
 	prompt
 
@@ -123999,34 +123999,34 @@ _Route22Text3: ; 92606 (24:6606)
 _VictoryRoadGuardText1: ; 9261e (24:661e)
 	text "You can pass here"
 	line "only if you have"
-	next "the @"
+	cont "the @"
 	TX_RAM $cd6d
 	text "!"
 
-	page "You don't have the"
+	para "You don't have the"
 	line "@"
 	TX_RAM $cd6d
 	text " yet!"
 
-	page "You have to have"
+	para "You have to have"
 	line "it to get to"
-	next "#MON LEAGUE!@@"
+	cont "#MON LEAGUE!@@"
 
 _VictoryRoadGuardText2: ; 92696 (24:6696)
 	text "You can pass here"
 	line "only if you have"
-	next "the @"
+	cont "the @"
 	TX_RAM $cd6d
 	text "!"
 
-	page "Oh! That is the"
+	para "Oh! That is the"
 	line "@"
 	TX_RAM $cd6d
 	text "!@@"
 
 _UnnamedText_513a3: ; 926dd (24:66dd)
 	db $0
-	page "OK then! Please,"
+	para "OK then! Please,"
 	line "go right ahead!"
 	done
 
@@ -124038,11 +124038,11 @@ _Route23Text8: ; 92700 (24:6700)
 _UnnamedText_51510: ; 92721 (24:6721)
 	text "Congratulations!"
 	line "You beat our 5"
-	next "contest trainers!@@"
+	cont "contest trainers!@@"
 
 _UnnamedText_51515: ; 92755 (24:6755)
 	db $0
-	page "You just earned a"
+	para "You just earned a"
 	line "fabulous prize!"
 	prompt
 
@@ -124060,27 +124060,27 @@ _UnnamedText_51521: ; 9278f (24:678f)
 _UnnamedText_51526: ; 927a8 (24:67a8)
 	text "By the way, would"
 	line "you like to join"
-	next "TEAM ROCKET?"
+	cont "TEAM ROCKET?"
 
-	page "We're a group"
+	para "We're a group"
 	line "dedicated to evil"
-	next "using #MON!"
+	cont "using #MON!"
 
-	page "Want to join?"
+	para "Want to join?"
 
-	page "Are you sure?"
+	para "Are you sure?"
 
-	page "Come on, join us!"
+	para "Come on, join us!"
 
-	page "I'm telling you"
+	para "I'm telling you"
 	line "to join!"
 
-	page "OK, you need"
+	para "OK, you need"
 	line "convincing!"
 
-	page "I'll make you an"
+	para "I'll make you an"
 	line "offer you can't"
-	next "refuse!"
+	cont "refuse!"
 	done
 
 _UnnamedText_5152b: ; 9288a (24:688a)
@@ -124091,8 +124091,8 @@ _UnnamedText_5152b: ; 9288a (24:688a)
 _UnnamedText_51530: ; 928a0 (24:68a0)
 	text "With your ability,"
 	line "you could become"
-	next "a top leader in"
-	next "TEAM ROCKET!"
+	cont "a top leader in"
+	cont "TEAM ROCKET!"
 	done
 
 _Route24BattleText1: ; 928e2 (24:68e2)
@@ -124110,7 +124110,7 @@ _Route24EndBattleText1: ; 94000 (25:4000)
 _Route24AfterBattleText1: ; 94010 (25:4010)
 	text "I hid because the"
 	line "people on the"
-	next "bridge scared me!"
+	cont "bridge scared me!"
 	done
 
 _Route24BattleText2: ; 94043 (25:4043)
@@ -124176,10 +124176,10 @@ _Route24AfterBattleText5: ; 94163 (25:4163)
 _Route24BattleText6: ; 94186 (25:4186)
 	text "This is NUGGET"
 	line "BRIDGE! Beat us 5"
-	next "trainers and win"
-	next "a fabulous prize!"
+	cont "trainers and win"
+	cont "a fabulous prize!"
 
-	page "Think you got"
+	para "Think you got"
 	line "what it takes?"
 	done
 
@@ -124196,7 +124196,7 @@ _Route24AfterBattleText6: ; 941fb (25:41fb)
 _Route25BattleText1: ; 9421e (25:421e)
 	text "Local trainers"
 	line "come here to"
-	next "practice!"
+	cont "practice!"
 	done
 
 _Route25EndBattleText1: ; 94245 (25:4245)
@@ -124207,15 +124207,15 @@ _Route25EndBattleText1: ; 94245 (25:4245)
 _Route25AfterBattleText1: ; 94254 (25:4254)
 	text "All #MON have"
 	line "weaknesses. It's"
-	next "best to raise"
-	next "different kinds."
+	cont "best to raise"
+	cont "different kinds."
 	done
 
 _Route25BattleText2: ; 94292 (25:4292)
 	text "Dad took me to a"
 	line "great party on"
-	next "S.S.ANNE at"
-	next "VERMILION CITY!"
+	cont "S.S.ANNE at"
+	cont "VERMILION CITY!"
 	done
 
 _Route25EndBattleText2: ; 942cf (25:42cf)
@@ -124226,13 +124226,13 @@ _Route25EndBattleText2: ; 942cf (25:42cf)
 _Route25AfterBattleText2: ; 942dc (25:42dc)
 	text "On S.S.ANNE, I"
 	line "saw trainers from"
-	next "around the world."
+	cont "around the world."
 	done
 
 _Route25BattleText3: ; 94310 (25:4310)
 	text "I'm a cool guy."
 	line "I've got a girl"
-	next "friend!"
+	cont "friend!"
 	done
 
 _Route25EndBattleText3: ; 94337 (25:4337)
@@ -124273,14 +124273,14 @@ _Route25EndBattleText5: ; 943dd (25:43dd)
 _Route25AfterBattleText5: ; 943f2 (25:43f2)
 	text "If your #MON"
 	line "gets confused or"
-	next "falls asleep,"
-	next "switch it!"
+	cont "falls asleep,"
+	cont "switch it!"
 	done
 
 _Route25BattleText6: ; 9442a (25:442a)
 	text "My friend has a"
 	line "cute #MON."
-	next "I'm so jealous!"
+	cont "I'm so jealous!"
 	done
 
 _Route25EndBattleText6: ; 94455 (25:4455)
@@ -124291,13 +124291,13 @@ _Route25EndBattleText6: ; 94455 (25:4455)
 _Route25AfterBattleText6: ; 94469 (25:4469)
 	text "You came from MT."
 	line "MOON? May I have"
-	next "a CLEFAIRY?"
+	cont "a CLEFAIRY?"
 	done
 
 _Route25BattleText7: ; 94499 (25:4499)
 	text "I just got down"
 	line "from MT.MOON,"
-	next "but I'm ready!"
+	cont "but I'm ready!"
 	done
 
 _Route25EndBattleText7: ; 944c6 (25:44c6)
@@ -124308,13 +124308,13 @@ _Route25EndBattleText7: ; 944c6 (25:44c6)
 _Route25AfterBattleText7: ; 944d8 (25:44d8)
 	text "Drat!"
 	line "A ZUBAT bit me"
-	next "back in there."
+	cont "back in there."
 	done
 
 _Route25BattleText8: ; 944fd (25:44fd)
 	text "I'm off to see a"
 	line "#MON collector"
-	next "at the cape!"
+	cont "at the cape!"
 	done
 
 _Route25EndBattleText8: ; 9452a (25:452a)
@@ -124325,13 +124325,13 @@ _Route25EndBattleText8: ; 9452a (25:452a)
 _Route25AfterBattleText8: ; 94537 (25:4537)
 	text "The collector has"
 	line "many rare kinds"
-	next "of #MON."
+	cont "of #MON."
 	done
 
 _Route25BattleText9: ; 94563 (25:4563)
 	text "You're going to"
 	line "see BILL? First,"
-	next "let's fight!"
+	cont "let's fight!"
 	done
 
 _Route25EndBattleText9: ; 94590 (25:4590)
@@ -124342,7 +124342,7 @@ _Route25EndBattleText9: ; 94590 (25:4590)
 _Route25AfterBattleText9: ; 945a2 (25:45a2)
 	text "The trail below"
 	line "is a shortcut to"
-	next "CERULEAN CITY."
+	cont "CERULEAN CITY."
 	done
 
 _Route25Text11: ; 945d3 (25:45d3)
@@ -124368,15 +124368,15 @@ _GameSavedText: ; 94630 (25:4630)
 _OlderFileWillBeErasedText: ; 94643 (25:4643)
 	text "The older file"
 	line "will be erased to"
-	next "save. Okay?"
+	cont "save. Okay?"
 	done
 
 _UnnamedText_73909: ; 94671 (25:4671)
 	text "When you change a"
 	line "#MON BOX, data"
-	next "will be saved."
+	cont "will be saved."
 
-	page "Is that okay?"
+	para "Is that okay?"
 	done
 
 _UnnamedText_739d4: ; 946b0 (25:46b0)
@@ -124526,7 +124526,7 @@ _UnnamedText_3f9a1: ; 94878 (25:4878)
 _UnnamedText_3fa77: ; 9488c (25:488c)
 	text $5a
 	line "learned"
-	next "@"
+	cont "@"
 	TX_RAM $cd6d
 	text "!"
 	prompt
@@ -124536,7 +124536,7 @@ _UnnamedText_3fb09: ; 9489e (25:489e)
 	line "@"
 	TX_RAM $cd6d
 	text " was"
-	next "disabled!"
+	cont "disabled!"
 	prompt
 
 _UnnamedText_3fb3e: ; 948b6 (25:48b6)
@@ -124564,7 +124564,7 @@ _UnnamedText_3fb69: ; 948fb (25:48fb)
 _UnnamedText_3fb74: ; 9490d (25:490d)
 	text $59, "'s"
 	line "paralyzed! It may"
-	next "not attack!"
+	cont "not attack!"
 	prompt
 
 _UnnamedText_17e1d: ; 9492f (25:492f)
@@ -124625,7 +124625,7 @@ _UnnamedText_3baa2: ; 94a20 (25:4a20)
 _UnnamedText_3baa7: ; 94a35 (25:4a35)
 	text $5a
 	line "fell asleep and"
-	next "became healthy!"
+	cont "became healthy!"
 	done
 
 _UnnamedText_3baac: ; 94a58 (25:4a58)
@@ -124636,7 +124636,7 @@ _UnnamedText_3baac: ; 94a58 (25:4a58)
 _UnnamedText_3bb92: ; 94a6c (25:4a6c)
 	text $5a
 	line "transformed into"
-	next "@"
+	cont "@"
 	TX_RAM $cd6d
 	text "!"
 	prompt
@@ -124644,7 +124644,7 @@ _UnnamedText_3bb92: ; 94a6c (25:4a6c)
 _UnnamedText_3bbd7: ; 94a87 (25:4a87)
 	text $5a, "'s"
 	line "protected against"
-	next "special attacks!"
+	cont "special attacks!"
 	prompt
 
 _UnnamedText_3bbdc: ; 94aae (25:4aae)
@@ -124681,22 +124681,22 @@ INCLUDE "text/mapBluesHouse.asm"
 _OaksLabGaryText1: ; 94d5b (25:4d5b)
 	text $53, ": Yo"
 	line $52, "! Gramps"
-	next "isn't around!"
+	cont "isn't around!"
 	done
 
 _OaksLabText40: ; 94d79 (25:4d79)
 	text $53, ": Heh, I"
 	line "don't need to be"
-	next "greedy like you!"
+	cont "greedy like you!"
 
-	page "Go ahead and"
+	para "Go ahead and"
 	line "choose, ", $52, "!"
 	done
 
 _OaksLabText41: ; 94dbd (25:4dbd)
 	text $53, ": My"
 	line "#MON looks a"
-	next "lot stronger."
+	cont "lot stronger."
 	done
 
 _OaksLabText39: ; 94ddf (25:4ddf)
@@ -124708,19 +124708,19 @@ _OaksLabText39: ; 94ddf (25:4ddf)
 _OaksLabCharmanderText: ; 94e06 (25:4e06)
 	text "So! You want the"
 	line "fire #MON,"
-	next "CHARMANDER?"
+	cont "CHARMANDER?"
 	done
 
 _OaksLabSquirtleText: ; 94e2f (25:4e2f)
 	text "So! You want the"
 	line "water #MON,"
-	next "SQUIRTLE?"
+	cont "SQUIRTLE?"
 	done
 
 _OaksLabBulbasaurText: ; 94e57 (25:4e57)
 	text "So! You want the"
 	line "plant #MON,"
-	next "BULBASAUR?"
+	cont "BULBASAUR?"
 	done
 
 _OaksLabMonEnergeticText: ; 94e80 (25:4e80)
@@ -124742,109 +124742,109 @@ _OaksLabLastMonText: ; 94eb6 (25:4eb6)
 _UnnamedText_1d2f0: ; 94ed2 (25:4ed2)
 	text "OAK: Now, ", $52, ","
 	line "which #MON do"
-	next "you want?"
+	cont "you want?"
 	done
 
 _UnnamedText_1d2f5: ; 94ef8 (25:4ef8)
 	text "OAK: If a wild"
 	line "#MON appears,"
-	next "your #MON can"
-	next "fight against it!"
+	cont "your #MON can"
+	cont "fight against it!"
 	done
 
 _UnnamedText_1d2fa: ; 94f36 (25:4f36)
 	text "OAK: ", $52, ","
 	line "raise your young"
-	next "#MON by making"
-	next "it fight!"
+	cont "#MON by making"
+	cont "it fight!"
 	done
 
 _OaksLabDeliverParcelText1: ; 94f69 (25:4f69)
 	text "OAK: Oh, ", $52, "!"
 
-	page "How is my old"
+	para "How is my old"
 	line "#MON?"
 
-	page "Well, it seems to"
+	para "Well, it seems to"
 	line "like you a lot."
 
-	page "You must be"
+	para "You must be"
 	line "talented as a"
-	next "#MON trainer!"
+	cont "#MON trainer!"
 
-	page "What? You have"
+	para "What? You have"
 	line "something for me?"
 
-	page $52, " delivered"
+	para $52, " delivered"
 	line "OAK's PARCEL.@@"
 
 _OaksLabDeliverParcelText2: ; 9500f (25:500f)
 	text $51
 	db "Ah! This is the"
 	line "custom # BALL"
-	next "I ordered!"
-	next "Thank you!"
+	cont "I ordered!"
+	cont "Thank you!"
 	done
 
 _OaksLabAroundWorldText: ; 95045 (25:5045)
 	text "#MON around the"
 	line "world wait for"
-	next "you, ", $52, "!"
+	cont "you, ", $52, "!"
 	done
 
 _OaksLabGivePokeballsText1: ; 9506d (25:506d)
 	text "OAK: You can't get"
 	line "detailed data on"
-	next "#MON by just"
-	next "seeing them."
+	cont "#MON by just"
+	cont "seeing them."
 
-	page "You must catch"
+	para "You must catch"
 	line "them! Use these"
-	next "to capture wild"
-	next "#MON."
+	cont "to capture wild"
+	cont "#MON."
 
-	page $52, " got 5"
+	para $52, " got 5"
 	line "# BALLs!@@"
 
 _OaksLabGivePokeballsText2: ; 950f2 (25:50f2)
 	text $51
 	db "When a wild"
 	line "#MON appears,"
-	next "it's fair game."
+	cont "it's fair game."
 
-	page "Just throw a #"
+	para "Just throw a #"
 	line "BALL at it and try"
 	line "to catch it!"
 
-	page "This won't always"
+	para "This won't always"
 	line "work, though."
 
-	page "A healthy #MON"
+	para "A healthy #MON"
 	line "could escape. You"
-	next "have to be lucky!"
+	cont "have to be lucky!"
 	done
 
 _OaksLabPleaseVisitText: ; 9519e (25:519e)
 	text "OAK: Come see me"
 	line "sometimes."
 
-	page "I want to know how"
+	para "I want to know how"
 	line "your #DEX is"
-	next "coming along."
+	cont "coming along."
 	done
 
 _UnnamedText_1d31d: ; 951e9 (25:51e9)
 	text "OAK: Good to see "
 	line "you! How is your "
-	next "#DEX coming? "
-	next "Here, let me take"
-	next "a look!"
+	cont "#DEX coming? "
+	cont "Here, let me take"
+	cont "a look!"
 	prompt
 
 _UnnamedText_1d32c: ; 95236 (25:5236)
 	text "It's encyclopedia-"
 	line "like, but the"
-	next "pages are blank!"
+	cont "pages are blank!"
 	done
 
 _OaksLabText8: ; 95268 (25:5268)
@@ -124854,57 +124854,57 @@ _OaksLabText8: ; 95268 (25:5268)
 _UnnamedText_1d340: ; 9526b (25:526b)
 	text "PROF.OAK is the"
 	line "authority on"
-	next "#MON!"
+	cont "#MON!"
 
-	page "Many #MON"
+	para "Many #MON"
 	line "trainers hold him"
-	next "in high regard!"
+	cont "in high regard!"
 	done
 
 _OaksLabRivalWaitingText: ; 952bb (25:52bb)
 	text $53, ": Gramps!"
 	line "I'm fed up with"
-	next "waiting!"
+	cont "waiting!"
 	done
 
 _OaksLabChooseMonText: ; 952df (25:52df)
 	text "OAK: ", $53, "?"
 	line "Let me think..."
 
-	page "Oh, that's right,"
+	para "Oh, that's right,"
 	line "I told you to"
-	next "come! Just wait!"
+	cont "come! Just wait!"
 
-	page "Here, ", $52, "!"
+	para "Here, ", $52, "!"
 
-	page "There are 3"
+	para "There are 3"
 	line "#MON here!"
 
-	page "Haha!"
+	para "Haha!"
 
-	page "They are inside"
+	para "They are inside"
 	line "the # BALLs."
 
-	page "When I was young,"
+	para "When I was young,"
 	line "I was a serious"
-	next "#MON trainer!"
+	cont "#MON trainer!"
 
-	page "In my old age, I"
+	para "In my old age, I"
 	line "have only 3 left,"
-	next "but you can have"
-	next "one! Choose!"
+	cont "but you can have"
+	cont "one! Choose!"
 	done
 
 _OaksLabRivalInterjectionText: ; 953dc (25:53dc)
 	text $53, ": Hey!"
 	line "Gramps! What"
-	next "about me?"
+	cont "about me?"
 	done
 
 _OaksLabBePatientText: ; 953fc (25:53fc)
 	text "OAK: Be patient!"
 	line $53, ", you can"
-	next "have one too!"
+	cont "have one too!"
 	done
 
 _OaksLabLeavingText: ; 95427 (25:5427)
@@ -124926,18 +124926,18 @@ _OaksLabRivalReceivedMonText: ; 95461 (25:5461)
 _OaksLabRivalChallengeText: ; 95477 (25:5477)
 	text $53, ": Wait"
 	line $52, "!"
-	next "Let's check out"
-	next "our #MON!"
+	cont "Let's check out"
+	cont "our #MON!"
 
-	page "Come on, I'll take"
+	para "Come on, I'll take"
 	line "you on!"
 	done
 
 _UnnamedText_1d3be: ; 954b6 (25:54b6)
 	text "WHAT?"
 	line "Unbelievable!"
-	next "I picked the"
-	next "wrong #MON!"
+	cont "I picked the"
+	cont "wrong #MON!"
 	prompt
 
 _UnnamedText_1d3c3: ; 954e4 (25:54e4)
@@ -124948,10 +124948,10 @@ _UnnamedText_1d3c3: ; 954e4 (25:54e4)
 _OaksLabRivalToughenUpText: ; 95502 (25:5502)
 	text $53, ": Okay!"
 	line "I'll make my"
-	next "#MON fight to"
-	next "toughen it up!"
+	cont "#MON fight to"
+	cont "toughen it up!"
 
-	page $52, "! Gramps!"
+	para $52, "! Gramps!"
 	line "Smell you later!"
 	done
 
@@ -124967,70 +124967,70 @@ _OaksLabText22: ; 9555d (25:555d)
 _OaksLabText23: ; 9557b (25:557b)
 	text "OAK: Oh right! I"
 	line "have a request"
-	next "of you two."
+	cont "of you two."
 	done
 
 _OaksLabText24: ; 955a8 (25:55a8)
 	text "On the desk there"
 	line "is my invention,"
-	next "#DEX!"
+	cont "#DEX!"
 
-	page "It automatically"
+	para "It automatically"
 	line "records data on"
-	next "#MON you've"
-	next "seen or caught!"
+	cont "#MON you've"
+	cont "seen or caught!"
 
-	page "It's a hi-tech"
+	para "It's a hi-tech"
 	line "encyclopedia!"
 	done
 
 _OaksLabText25: ; 9562a (25:562a)
 	text "OAK: ", $52, " and"
 	line $53, "! Take"
-	next "these with you!"
+	cont "these with you!"
 
-	page $52, " got"
+	para $52, " got"
 	line "#DEX from OAK!@@"
 
 _OaksLabText26: ; 95664 (25:5664)
 	text "To make a complete"
 	line "guide on all the"
-	next "#MON in the"
-	next "world..."
+	cont "#MON in the"
+	cont "world..."
 
-	page "That was my dream!"
+	para "That was my dream!"
 
-	page "But, I'm too old!"
+	para "But, I'm too old!"
 	line "I can't do it!"
 
-	page "So, I want you two"
+	para "So, I want you two"
 	line "to fulfill my"
-	next "dream for me!"
+	cont "dream for me!"
 
-	page "Get moving, you"
+	para "Get moving, you"
 	line "two!"
 
-	page "This is a great"
+	para "This is a great"
 	line "undertaking in"
-	next "#MON history!"
+	cont "#MON history!"
 	done
 
 _OaksLabText27: ; 95741 (25:5741)
 	text $53, ": Alright"
 	line "Gramps! Leave it"
-	next "all to me!"
+	cont "all to me!"
 
-	page $52, ", I hate to"
+	para $52, ", I hate to"
 	line "say it, but I"
-	next "don't need you!"
+	cont "don't need you!"
 
-	page "I know! I'll"
+	para "I know! I'll"
 	line "borrow a TOWN MAP"
-	next "from my sis!"
+	cont "from my sis!"
 
-	page "I'll tell her not"
+	para "I'll tell her not"
 	line "to lend you one,"
-	next $52, "! Hahaha!"
+	cont $52, "! Hahaha!"
 	done
 
 _UnnamedText_1d405: ; 957eb (25:57eb)
@@ -125050,50 +125050,50 @@ UnnamedText_95824: ; 95824 (25:5824)
 	TX_NUM $ffdc, 1, 3
 	text " #MON owned"
 
-	page "PROF.OAK's"
+	para "PROF.OAK's"
 	line "Rating:"
 	prompt
 
 _UnnamedText_44201: ; 95858 (25:5858)
 	text "You still have"
 	line "lots to do."
-	next "Look for #MON"
-	next "in grassy areas!"
+	cont "Look for #MON"
+	cont "in grassy areas!"
 	done
 
 _UnnamedText_44206: ; 95893 (25:5893)
 	text "You're on the"
 	line "right track! "
-	next "Get a FLASH HM"
-	next "from my AIDE!"
+	cont "Get a FLASH HM"
+	cont "from my AIDE!"
 	done
 
 _UnnamedText_4420b: ; 958cc (25:58cc)
 	text "You still need"
 	line "more #MON!"
-	next "Try to catch"
-	next "other species!"
+	cont "Try to catch"
+	cont "other species!"
 	done
 
 _UnnamedText_44210: ; 95903 (25:5903)
 	text "Good, you're"
 	line "trying hard!"
-	next "Get an ITEMFINDER"
-	next "from my AIDE!"
+	cont "Get an ITEMFINDER"
+	cont "from my AIDE!"
 	done
 
 _UnnamedText_44215: ; 9593d (25:593d)
 	text "Looking good!"
 	line "Go find my AIDE"
-	next "when you get 50!"
+	cont "when you get 50!"
 	done
 
 _UnnamedText_4421a: ; 9596d (25:596d)
 	text "You finally got at"
 	line "least 50 species!"
-	next "Be sure to get"
-	next "EXP.ALL from my"
-	next "AIDE!"
+	cont "Be sure to get"
+	cont "EXP.ALL from my"
+	cont "AIDE!"
 	done
 
 _UnnamedText_4421f: ; 959b8 (25:59b8)
@@ -125104,57 +125104,57 @@ _UnnamedText_4421f: ; 959b8 (25:59b8)
 _UnnamedText_44224: ; 959d9 (25:59d9)
 	text "Very good!"
 	line "Go fish for some"
-	next "marine #MON!"
+	cont "marine #MON!"
 	done
 
 _UnnamedText_44229: ; 95a03 (25:5a03)
 	text "Wonderful!"
 	line "Do you like to"
-	next "collect things?"
+	cont "collect things?"
 	done
 
 _UnnamedText_4422e: ; 95a2e (25:5a2e)
 	text "I'm impressed!"
 	line "It must have been"
-	next "difficult to do!"
+	cont "difficult to do!"
 	done
 
 _UnnamedText_44233: ; 95a60 (25:5a60)
 	text "You finally got at"
 	line "least 100 species!"
-	next "I can't believe"
-	next "how good you are!"
+	cont "I can't believe"
+	cont "how good you are!"
 	done
 
 _UnnamedText_44238: ; 95aa8 (25:5aa8)
 	text "You even have the"
 	line "evolved forms of"
-	next "#MON! Super!"
+	cont "#MON! Super!"
 	done
 
 _UnnamedText_4423d: ; 95ad9 (25:5ad9)
 	text "Excellent! Trade"
 	line "with friends to"
-	next "get some more!"
+	cont "get some more!"
 	done
 
 _UnnamedText_44242: ; 95b0a (25:5b0a)
 	text "Outstanding!"
 	line "You've become a"
-	next "real pro at this!"
+	cont "real pro at this!"
 	done
 
 _UnnamedText_44247: ; 95b39 (25:5b39)
 	text "I have nothing"
 	line "left to say!"
-	next "You're the"
-	next "authority now!"
+	cont "You're the"
+	cont "authority now!"
 	done
 
 _UnnamedText_4424c: ; 95b6f (25:5b6f)
 	text "Your #DEX is"
 	line "entirely complete!"
-	next "Congratulations!"
+	cont "Congratulations!"
 	done
 
 _ViridianPokeCenterText2: ; 95ba1 (25:5ba1)
@@ -125162,16 +125162,16 @@ _ViridianPokeCenterText1: ; 95ba1 (25:5ba1)
 	text "You can use that"
 	line "PC in the corner."
 
-	page "The receptionist"
+	para "The receptionist"
 	line "told me. So kind!"
 	done
 
 _ViridianPokeCenterText3: ; 95be8 (25:5be8)
 	text "There's a #MON"
 	line "CENTER in every"
-	next "town ahead."
+	cont "town ahead."
 
-	page "They don't charge"
+	para "They don't charge"
 	line "any money either!"
 	done
 
@@ -125189,11 +125189,11 @@ ViridianMartParcelQuestText: ; 95c79 (25:5c79)
 	text "You know PROF."
 	line "OAK, right?"
 
-	page "His order came in."
+	para "His order came in."
 	line "Will you take it"
-	next "to him?"
+	cont "to him?"
 
-	page $52, " got"
+	para $52, " got"
 	line "OAK's PARCEL!@@"
 
 _ViridianMartText2: ; 95cd5 (25:5cd5)
@@ -125209,25 +125209,25 @@ _ViridianMartText3: ; 95cf6 (25:5cf6)
 _SchoolText1: ; 95d15 (25:5d15)
 	text "Whew! I'm trying"
 	line "to memorize all"
-	next "my notes."
+	cont "my notes."
 	done
 
 _SchoolText2: ; 95d40 (25:5d40)
 	text "Okay!"
 
-	page "Be sure to read"
+	para "Be sure to read"
 	line "the blackboard"
-	next "carefully!"
+	cont "carefully!"
 	done
 
 _ViridianHouseText1: ; 95d71 (25:5d71)
 	text "Coming up with"
 	line "nicknames is fun,"
-	next "but hard."
+	cont "but hard."
 
-	page "Simple names are"
+	para "Simple names are"
 	line "the easiest to"
-	next "remember."
+	cont "remember."
 	done
 
 _ViridianHouseText2: ; 95dc7 (25:5dc7)
@@ -125248,61 +125248,61 @@ _UnnamedText_74ace: ; 95e09 (25:5e09)
 	text "Fwahahaha! This is"
 	line "my hideout!"
 
-	page "I planned to"
+	para "I planned to"
 	line "resurrect TEAM"
-	next "ROCKET here!"
+	cont "ROCKET here!"
 
-	page "But, you have"
+	para "But, you have"
 	line "caught me again!"
-	next "So be it! This"
-	next "time, I'm not"
-	next "holding back!"
+	cont "So be it! This"
+	cont "time, I'm not"
+	cont "holding back!"
 
-	page "Once more, you"
+	para "Once more, you"
 	line "shall face"
-	next "GIOVANNI, the"
-	next "greatest trainer!"
+	cont "GIOVANNI, the"
+	cont "greatest trainer!"
 	done
 
 _UnnamedText_74ad3: ; 95ed5 (25:5ed5)
 	text "Ha!"
 	line "That was a truly"
-	next "intense fight!"
-	next "You have won!"
-	next "As proof, here is"
-	next "the EARTHBADGE!@@"
+	cont "intense fight!"
+	cont "You have won!"
+	cont "As proof, here is"
+	cont "the EARTHBADGE!@@"
 
 _UnnamedText_74ad9: ; 95f2b (25:5f2b)
 	text "Having lost, I"
 	line "cannot face my"
-	next "underlings!"
-	next "TEAM ROCKET is"
-	next "finished forever!"
+	cont "underlings!"
+	cont "TEAM ROCKET is"
+	cont "finished forever!"
 
-	page "I will dedicate my"
+	para "I will dedicate my"
 	line "life to the study"
-	next "of #MON!"
+	cont "of #MON!"
 
-	page "Let us meet again"
+	para "Let us meet again"
 	line "some day!"
-	next "Farewell!@@"
+	cont "Farewell!@@"
 
 _ViridianGymText12: ; 95fcc (25:5fcc)
 	text "The EARTHBADGE"
 	line "makes #MON of"
-	next "any level obey!"
+	cont "any level obey!"
 
-	page "It is evidence of"
+	para "It is evidence of"
 	line "your mastery as a"
-	next "#MON trainer!"
+	cont "#MON trainer!"
 
-	page "With it, you can"
+	para "With it, you can"
 	line "enter the #MON"
-	next "LEAGUE!"
+	cont "LEAGUE!"
 
-	page "It is my gift for"
+	para "It is my gift for"
 	line "your #MON"
-	next "LEAGUE challenge!"
+	cont "LEAGUE challenge!"
 	done
 
 _ReceivedTM27Text: ; 96082 (25:6082)
@@ -125313,12 +125313,12 @@ _TM27ExplanationText: ; 96095 (25:6095)
 	text $51
 	db "TM27 is FISSURE!"
 	line "It will take out"
-	next "#MON with just"
-	next "one hit!"
+	cont "#MON with just"
+	cont "one hit!"
 
-	page "I made it when I"
+	para "I made it when I"
 	line "ran the GYM here,"
-	next "too long ago..."
+	cont "too long ago..."
 	done
 
 _TM27NoRoomText: ; 96104 (25:6104)
@@ -125329,7 +125329,7 @@ _TM27NoRoomText: ; 96104 (25:6104)
 _ViridianGymBattleText1: ; 96125 (25:6125)
 	text "Heh! You must be"
 	line "running out of"
-	next "steam by now!"
+	cont "steam by now!"
 	done
 
 _ViridianGymEndBattleText1: ; 96154 (25:6154)
@@ -125340,13 +125340,13 @@ _ViridianGymEndBattleText1: ; 96154 (25:6154)
 _ViridianGymAfterBattleText1: ; 96167 (25:6167)
 	text "You need power to"
 	line "keep up with our"
-	next "GYM LEADER!"
+	cont "GYM LEADER!"
 	done
 
 _ViridianGymBattleText2: ; 96197 (25:6197)
 	text "Rrrroar! I'm"
 	line "working myself"
-	next "into a rage!"
+	cont "into a rage!"
 	done
 
 _ViridianGymEndBattleText2: ; 961c0 (25:61c0)
@@ -125361,7 +125361,7 @@ _ViridianGymAfterBattleText2: ; 961c8 (25:61c8)
 _ViridianGymBattleText3: ; 961de (25:61de)
 	text "#MON and I, we"
 	line "make wonderful"
-	next "music together!"
+	cont "music together!"
 	done
 
 _ViridianGymEndBattleText3: ; 9620d (25:620d)
@@ -125372,13 +125372,13 @@ _ViridianGymEndBattleText3: ; 9620d (25:620d)
 _ViridianGymAfterBattleText3: ; 9622a (25:622a)
 	text "Do you know the"
 	line "identity of our"
-	next "GYM LEADER?"
+	cont "GYM LEADER?"
 	done
 
 _ViridianGymBattleText4: ; 96257 (25:6257)
 	text "Karate is the"
 	line "ultimate form of"
-	next "martial arts!"
+	cont "martial arts!"
 	done
 
 _ViridianGymEndBattleText4: ; 96285 (25:6285)
@@ -125388,7 +125388,7 @@ _ViridianGymEndBattleText4: ; 96285 (25:6285)
 _ViridianGymAfterBattleText4: ; 9628d (25:628d)
 	text "If my #MON"
 	line "were as good at"
-	next "Karate as I..."
+	cont "Karate as I..."
 	done
 
 _ViridianGymBattleText5: ; 962b8 (25:62b8)
@@ -125409,7 +125409,7 @@ _ViridianGymAfterBattleText5: ; 962ed (25:62ed)
 _ViridianGymBattleText6: ; 96308 (25:6308)
 	text "I'm the KARATE"
 	line "KING! Your fate"
-	next "rests with me!"
+	cont "rests with me!"
 	done
 
 _ViridianGymEndBattleText6: ; 96336 (25:6336)
@@ -125419,13 +125419,13 @@ _ViridianGymEndBattleText6: ; 96336 (25:6336)
 _ViridianGymAfterBattleText6: ; 9633d (25:633d)
 	text "#MON LEAGUE?"
 	line "You? Don't get"
-	next "cocky!"
+	cont "cocky!"
 	done
 
 _ViridianGymBattleText7: ; 96360 (25:6360)
 	text "Your #MON will"
 	line "cower at the"
-	next "crack of my whip!"
+	cont "crack of my whip!"
 	done
 
 _ViridianGymEndBattleText7: ; 9638f (25:638f)
@@ -125441,8 +125441,8 @@ _ViridianGymAfterBattleText7: ; 963a1 (25:63a1)
 _ViridianGymBattleText8: ; 963bd (25:63bd)
 	text "VIRIDIAN GYM was"
 	line "closed for a long"
-	next "time, but now our"
-	next "LEADER is back!"
+	cont "time, but now our"
+	cont "LEADER is back!"
 	done
 
 _ViridianGymEndBattleText8: ; 96403 (25:6403)
@@ -125453,32 +125453,32 @@ _ViridianGymEndBattleText8: ; 96403 (25:6403)
 _ViridianGymAfterBattleText8: ; 96412 (25:6412)
 	text "You can go onto"
 	line "#MON LEAGUE"
-	next "only by defeating"
-	next "our GYM LEADER!"
+	cont "only by defeating"
+	cont "our GYM LEADER!"
 	done
 
 _UnnamedText_74bd4: ; 96451 (25:6451)
 	text "Yo! Champ in"
 	line "making!"
 
-	page "Even I don't know"
+	para "Even I don't know"
 	line "VIRIDIAN LEADER's"
-	next "identity!"
+	cont "identity!"
 
-	page "This will be the"
+	para "This will be the"
 	line "toughest of all"
-	next "the GYM LEADERs!"
+	cont "the GYM LEADERs!"
 
-	page "I heard that the"
+	para "I heard that the"
 	line "trainers here"
-	next "like ground-type"
-	next "#MON!"
+	cont "like ground-type"
+	cont "#MON!"
 	done
 
 _UnnamedText_74bd9: ; 964fb (25:64fb)
 	text "Blow me away!"
 	line "GIOVANNI was the"
-	next "GYM LEADER here?"
+	cont "GYM LEADER here?"
 	done
 
 _UnnamedText_5c21a: ; 9652c (25:652c)
@@ -125489,7 +125489,7 @@ _UnnamedText_5c21f: ; 96539 (25:6539)
 	text "It's ¥50 for a"
 	line "child's ticket."
 
-	page "Would you like to"
+	para "Would you like to"
 	line "come in?"
 	done
 
@@ -125507,17 +125507,17 @@ _UnnamedText_5c22e: ; 965a7 (25:65a7)
 	text "You can't sneak"
 	line "in the back way!"
 
-	page "Oh, whatever!"
+	para "Oh, whatever!"
 	line "Do you know what"
-	next "AMBER is?"
+	cont "AMBER is?"
 	done
 
 _UnnamedText_5c233: ; 965f1 (25:65f1)
 	text "There's a lab"
 	line "somewhere trying"
-	next "to resurrect"
-	next "ancient #MON"
-	next "from AMBER."
+	cont "to resurrect"
+	cont "ancient #MON"
+	cont "from AMBER."
 	done
 
 _UnnamedText_5c238: ; 96636 (25:6636)
@@ -125538,29 +125538,29 @@ _UnnamedText_5c242: ; 96675 (25:6675)
 _UnnamedText_5c251: ; 96693 (25:6693)
 	text "That is one"
 	line "magnificent"
-	next "fossil!"
+	cont "fossil!"
 	done
 
 _UnnamedText_5c28e: ; 966b4 (25:66b4)
 	text "Ssh! I think that"
 	line "this chunk of"
-	next "AMBER contains"
-	next "#MON DNA!"
+	cont "AMBER contains"
+	cont "#MON DNA!"
 
-	page "It would be great"
+	para "It would be great"
 	line "if #MON could"
-	next "be resurrected"
-	next "from it!"
+	cont "be resurrected"
+	cont "from it!"
 
-	page "But, my colleagues"
+	para "But, my colleagues"
 	line "just ignore me!"
 
-	page "So I have a favor"
+	para "So I have a favor"
 	line "to ask!"
 
-	page "Take this to a"
+	para "Take this to a"
 	line "#MON LAB and"
-	next "get it examined!"
+	cont "get it examined!"
 	prompt
 
 _ReceivedOldAmberText: ; 96790 (25:6790)
@@ -125580,8 +125580,8 @@ _UnnamedText_5c29e: ; 967c9 (25:67c9)
 _UnnamedText_5c2ad: ; 967e8 (25:67e8)
 	text "We are proud of 2"
 	line "fossils of very"
-	next "rare, prehistoric"
-	next "#MON!"
+	cont "rare, prehistoric"
+	cont "#MON!"
 	done
 
 _UnnamedText_5c2bc: ; 96823 (25:6823)
@@ -125592,17 +125592,17 @@ _UnnamedText_5c2bc: ; 96823 (25:6823)
 _MuseumF2Text1: ; 96841 (25:6841)
 	text "MOON STONE?"
 
-	page "What's so special"
+	para "What's so special"
 	line "about it?"
 	done
 
 _MuseumF2Text2: ; 96869 (25:6869)
 	text "July 20, 1969!"
 
-	page "The 1st lunar"
+	para "The 1st lunar"
 	line "landing!"
 
-	page "I bought a color"
+	para "I bought a color"
 	line "TV to watch it!"
 	done
 
@@ -125615,7 +125615,7 @@ _MuseumF2Text4: ; 968cf (25:68cf)
 	text "I want a PIKACHU!"
 	line "It's so cute!"
 
-	page "I asked my Daddy"
+	para "I asked my Daddy"
 	line "to catch me one!"
 	done
 
@@ -125632,26 +125632,26 @@ _MuseumF2Text6: ; 96933 (25:6933)
 _MuseumF2Text7: ; 9694b (25:694b)
 	text "Meteorite that"
 	line "fell on MT.MOON."
-	next "(MOON STONE?)"
+	cont "(MOON STONE?)"
 	done
 
 _UnnamedText_5c49e: ; 9697a (25:697a)
 	text "I'm BROCK!"
 	line "I'm PEWTER's GYM"
-	next "LEADER!"
+	cont "LEADER!"
 
-	page "I believe in rock"
+	para "I believe in rock"
 	line "hard defense and"
-	next "determination!"
+	cont "determination!"
 
-	page "That's why my"
+	para "That's why my"
 	line "#MON are all"
-	next "the rock-type!"
+	cont "the rock-type!"
 
-	page "Do you still want"
+	para "Do you still want"
 	line "to challenge me?"
-	next "Fine then! Show"
-	next "me your best!"
+	cont "Fine then! Show"
+	cont "me your best!"
 	done
 
 SECTION "bank26",ROMX,BANK[$26]
@@ -125659,15 +125659,15 @@ SECTION "bank26",ROMX,BANK[$26]
 _UnnamedText_5c4a3: ; 98000 (26:4000)
 	text "There are all"
 	line "kinds of trainers"
-	next "in the world!"
+	cont "in the world!"
 
-	page "You appear to be"
+	para "You appear to be"
 	line "very gifted as a"
-	next "#MON trainer!"
+	cont "#MON trainer!"
 
-	page "Go to the GYM in"
+	para "Go to the GYM in"
 	line "CERULEAN and test"
-	next "your abilities!"
+	cont "your abilities!"
 	done
 
 _TM34PreReceiveText: ; 98092 (26:4092)
@@ -125683,23 +125683,23 @@ _TM34ExplanationText: ; 980c0 (26:40c0)
 	text $51
 	db "A TM contains a"
 	line "technique that"
-	next "can be taught to"
-	next "#MON!"
+	cont "can be taught to"
+	cont "#MON!"
 
-	page "A TM is good only"
+	para "A TM is good only"
 	line "once! So when you"
-	next "use one to teach"
-	next "a new technique,"
-	next "pick the #MON"
-	next "carefully!"
+	cont "use one to teach"
+	cont "a new technique,"
+	cont "pick the #MON"
+	cont "carefully!"
 
-	page "TM34 contains"
+	para "TM34 contains"
 	line "BIDE!"
 
-	page "Your #MON will"
+	para "Your #MON will"
 	line "absorb damage in"
-	next "battle then pay"
-	next "it back double!"
+	cont "battle then pay"
+	cont "it back double!"
 	done
 
 _TM34NoRoomText: ; 981ab (26:41ab)
@@ -125711,62 +125711,62 @@ _UnnamedText_5c4bc: ; 981c9 (26:41c9)
 	text "I took"
 	line "you for granted."
 
-	page "As proof of your"
+	para "As proof of your"
 	line "victory, here's"
-	next "the BOULDERBADGE!"
+	cont "the BOULDERBADGE!"
 
-	page $52, " received"
+	para $52, " received"
 	line "the BOULDERBADGE!@@"
 
 _UnnamedText_5c4c1: ; 98232 (26:4232)
 	text $51
 	db "That's an official"
 	line "#MON LEAGUE"
-	next "BADGE!"
+	cont "BADGE!"
 
-	page "Its bearer's"
+	para "Its bearer's"
 	line "#MON become"
-	next "more powerful!"
+	cont "more powerful!"
 
-	page "The technique"
+	para "The technique"
 	line "FLASH can now be"
-	next "used any time!"
+	cont "used any time!"
 	prompt
 
 _PewterGymBattleText1: ; 982ae (26:42ae)
 	text "Stop right there,"
 	line "kid!"
 
-	page "You're still light"
+	para "You're still light"
 	line "years from facing"
-	next "BROCK!"
+	cont "BROCK!"
 	done
 
 _PewterGymEndBattleText1: ; 982f1 (26:42f1)
 	text "Darn!"
 
-	page "Light years isn't"
+	para "Light years isn't"
 	line "time! It measures"
-	next "distance!"
+	cont "distance!"
 	prompt
 
 _PewterGymAfterBattleText1: ; 98325 (26:4325)
 	text "You're pretty hot,"
 	line "but not as hot"
-	next "as BROCK!"
+	cont "as BROCK!"
 	done
 
 _UnnamedText_5c515: ; 98351 (26:4351)
 	text "Hiya! I can tell"
 	line "you have what it"
-	next "takes to become a"
-	next "#MON champ!"
+	cont "takes to become a"
+	cont "#MON champ!"
 
-	page "I'm no trainer,"
+	para "I'm no trainer,"
 	line "but I can tell"
-	next "you how to win!"
+	cont "you how to win!"
 
-	page "Let me take you"
+	para "Let me take you"
 	line "to the top!"
 	done
 
@@ -125778,25 +125778,25 @@ _UnnamedText_5c51a: ; 983dc (26:43dc)
 _UnnamedText_5c51f: ; 983fc (26:43fc)
 	text "The 1st #MON"
 	line "out in a match is"
-	next "at the top of the"
-	next "#MON LIST!"
+	cont "at the top of the"
+	cont "#MON LIST!"
 
-	page "By changing the"
+	para "By changing the"
 	line "order of #MON,"
-	next "matches could be"
-	next "made easier!"
+	cont "matches could be"
+	cont "made easier!"
 	done
 
 _UnnamedText_5c524: ; 98476 (26:4476)
 	text "It's a free"
 	line "service! Let's"
-	next "get happening!"
+	cont "get happening!"
 	prompt
 
 _UnnamedText_5c529: ; 9849f (26:449f)
 	text "Just as I thought!"
 	line "You're #MON"
-	next "champ material!"
+	cont "champ material!"
 	done
 
 _PewterHouse1Text1: ; 984ce (26:44ce)
@@ -125809,67 +125809,67 @@ _PewterHouse1Text2: ; 984e1 (26:44e1)
 _PewterHouse1Text3: ; 984ef (26:44ef)
 	text "Our #MON's an"
 	line "outsider, so it's"
-	next "hard to handle."
+	cont "hard to handle."
 
-	page "An outsider is a"
+	para "An outsider is a"
 	line "#MON that you"
-	next "get in a trade."
+	cont "get in a trade."
 
-	page "It grows fast, but"
+	para "It grows fast, but"
 	line "it may ignore an"
-	next "unskilled trainer"
-	next "in battle!"
+	cont "unskilled trainer"
+	cont "in battle!"
 
-	page "If only we had"
+	para "If only we had"
 	line "some BADGEs..."
 	done
 
 _UnnamedText_74cc6: ; 985ac (26:45ac)
 	text "A shady, old man"
 	line "got me to buy"
-	next "this really weird"
-	next "fish #MON!"
+	cont "this really weird"
+	cont "fish #MON!"
 
-	page "It's totally weak"
+	para "It's totally weak"
 	line "and it cost ¥500!"
 	done
 
 _UnnamedText_74cd5: ; 9860c (26:460c)
 	text "Good things can"
 	line "happen if you"
-	next "raise #MON"
-	next "diligently, even"
-	next "the weak ones!"
+	cont "raise #MON"
+	cont "diligently, even"
+	cont "the weak ones!"
 	done
 
 _PewterHouse2Text1: ; 98656 (26:4656)
 	text "#MON learn new"
 	line "techniques as"
-	next "they grow!"
+	cont "they grow!"
 
-	page "But, some moves"
+	para "But, some moves"
 	line "must be taught by"
-	next "the trainer!"
+	cont "the trainer!"
 	done
 
 _PewterHouse2Text2: ; 986ae (26:46ae)
 	text "#MON become"
 	line "easier to catch"
-	next "when they are"
-	next "hurt or asleep!"
+	cont "when they are"
+	cont "hurt or asleep!"
 
-	page "But, it's not a"
+	para "But, it's not a"
 	line "sure thing!"
 	done
 
 _PewterPokecenterText1: ; 98704 (26:4704)
 	text "What!?"
 
-	page "TEAM ROCKET is"
+	para "TEAM ROCKET is"
 	line "at MT.MOON? Huh?"
-	next "I'm on the phone!"
+	cont "I'm on the phone!"
 
-	page "Scram!"
+	para "Scram!"
 	done
 
 _PewterPokecenterText5: ; 98744 (26:4744)
@@ -125881,15 +125881,15 @@ _UnnamedText_1d6ab: ; 9875c (26:475c)
 	text "Those miserable"
 	line "ROCKETs!"
 
-	page "Look what they"
+	para "Look what they"
 	line "did here!"
 
-	page "They stole a TM"
+	para "They stole a TM"
 	line "for teaching"
-	next "#MON how to"
-	next "DIG holes!"
+	cont "#MON how to"
+	cont "DIG holes!"
 
-	page "That cost me a"
+	para "That cost me a"
 	line "bundle, it did!"
 	done
 
@@ -125897,16 +125897,16 @@ _UnnamedText_1d6b0: ; 987e2 (26:47e2)
 	text "I figure what's"
 	line "lost is lost!"
 
-	page "I decided to teach"
+	para "I decided to teach"
 	line "DIGLETT how to"
-	next "DIG without a TM!"
+	cont "DIG without a TM!"
 	done
 
 _CeruleanHouseTrashedText2: ; 98834 (26:4834)
 	text "TEAM ROCKET must"
 	line "be trying to DIG"
-	next "their way into no"
-	next "good!"
+	cont "their way into no"
+	cont "good!"
 	done
 
 _CeruleanHouseTrashedText3: ; 9886f (26:486f)
@@ -125918,81 +125918,81 @@ _CeruleanHouseText1: ; 9888c (26:488c)
 	text "My husband likes"
 	line "trading #MON."
 
-	page "If you are a"
+	para "If you are a"
 	line "collector, would"
-	next "you please trade"
-	next "with him?"
+	cont "you please trade"
+	cont "with him?"
 	done
 
 _CeruleanPokecenterText1: ; 988e5 (26:48e5)
 	text "That BILL!"
 
-	page "I heard that"
+	para "I heard that"
 	line "he'll do whatever"
-	next "it takes to get"
-	next "rare #MON!"
+	cont "it takes to get"
+	cont "rare #MON!"
 	done
 
 _CeruleanPokecenterText3: ; 9892a (26:492a)
 	text "Have you heard"
 	line "about BILL?"
 
-	page "Everyone calls"
+	para "Everyone calls"
 	line "him a #MANIAC!"
 
-	page "I think people"
+	para "I think people"
 	line "are just jealous"
-	next "of BILL, though."
+	cont "of BILL, though."
 
-	page "Who wouldn't want"
+	para "Who wouldn't want"
 	line "to boast about"
-	next "their #MON?"
+	cont "their #MON?"
 	done
 
 _UnnamedText_5c7be: ; 989c1 (26:49c1)
 	text "Hi, you're a new"
 	line "face!"
 
-	page "Trainers who want"
+	para "Trainers who want"
 	line "to turn pro have"
-	next "to have a policy"
-	next "about #MON!"
+	cont "to have a policy"
+	cont "about #MON!"
 
-	page "What is your"
+	para "What is your"
 	line "approach when you"
-	next "catch #MON?"
+	cont "catch #MON?"
 
-	page "My policy is an"
+	para "My policy is an"
 	line "all-out offensive"
-	next "with water-type"
-	next "#MON!"
+	cont "with water-type"
+	cont "#MON!"
 	done
 
 _UnnamedText_5c7c3: ; 98a7b (26:4a7b)
 	text "TM11 teaches"
 	line "BUBBLEBEAM!"
 
-	page "Use it on an"
+	para "Use it on an"
 	line "aquatic #MON!"
 	done
 
 _UnnamedText_5c7c8: ; 98ab0 (26:4ab0)
 	text "The CASCADEBADGE"
 	line "makes all #MON"
-	next "up to L30 obey!"
+	cont "up to L30 obey!"
 
-	page "That includes"
+	para "That includes"
 	line "even outsiders!"
 
-	page "There's more, you"
+	para "There's more, you"
 	line "can now use CUT"
-	next "any time!"
+	cont "any time!"
 
-	page "You can CUT down"
+	para "You can CUT down"
 	line "small bushes to"
-	next "open new paths!"
+	cont "open new paths!"
 
-	page "You can also have"
+	para "You can also have"
 	line "my favorite TM!"
 	done
 
@@ -126009,17 +126009,17 @@ _UnnamedText_5c7d8: ; 98bb0 (26:4bb0)
 	text "Wow!"
 	line "You're too much!"
 
-	page "All right!"
+	para "All right!"
 
-	page "You can have the"
+	para "You can have the"
 	line "CASCADEBADGE to"
-	next "show you beat me!@@"
+	cont "show you beat me!@@"
 
 _CeruleanGymBattleText1: ; 98c05 (26:4c05)
 	text "I'm more than good"
 	line "enough for you!"
 
-	page "MISTY can wait!"
+	para "MISTY can wait!"
 	done
 
 _CeruleanGymEndBattleText1: ; 98c38 (26:4c38)
@@ -126030,14 +126030,14 @@ _CeruleanGymEndBattleText1: ; 98c38 (26:4c38)
 _CeruleanGymAfterBattleText1: ; 98c4d (26:4c4d)
 	text "You have to face"
 	line "other trainers to"
-	next "find out how good"
-	next "you really are."
+	cont "find out how good"
+	cont "you really are."
 	done
 
 _CeruleanGymBattleText2: ; 98c93 (26:4c93)
 	text "Splash!"
 
-	page "I'm first up!"
+	para "I'm first up!"
 	line "Let's do it!"
 	done
 
@@ -126050,7 +126050,7 @@ _CeruleanGymAfterBattleText2: ; 98cc4 (26:4cc4)
 	text "MISTY is going to"
 	line "keep improving!"
 
-	page "She won't lose to"
+	para "She won't lose to"
 	line "someone like you!"
 	done
 
@@ -126058,17 +126058,17 @@ _UnnamedText_5c82a: ; 98d0a (26:4d0a)
 	text "Yo! Champ in"
 	line "making!"
 
-	page "Here's my advice!"
+	para "Here's my advice!"
 
-	page "The LEADER, MISTY,"
+	para "The LEADER, MISTY,"
 	line "is a pro who uses"
-	next "water #MON!"
+	cont "water #MON!"
 
-	page "You can drain all"
+	para "You can drain all"
 	line "their water with"
-	next "plant #MON!"
+	cont "plant #MON!"
 
-	page "Or, zap them with"
+	para "Or, zap them with"
 	line "electricity!"
 	done
 
@@ -126076,16 +126076,16 @@ _UnnamedText_5c82f: ; 98db0 (26:4db0)
 	text "You beat MISTY!"
 	line "What'd I tell ya?"
 
-	page "You and me kid,"
+	para "You and me kid,"
 	line "we make a pretty"
-	next "darn good team!"
+	cont "darn good team!"
 	done
 
 _UnnamedText_1d810: ; 98e03 (26:4e03)
 	text "Hi! Welcome to"
 	line "our BIKE SHOP."
 
-	page "Have we got just"
+	para "Have we got just"
 	line "the BIKE for you!"
 	prompt
 
@@ -126102,15 +126102,15 @@ _UnnamedText_1d81a: ; 98e67 (26:4e67)
 _UnnamedText_1d81f: ; 98e83 (26:4e83)
 	text "Oh, that's..."
 
-	page "A BIKE VOUCHER!"
+	para "A BIKE VOUCHER!"
 
-	page "OK! Here you go!"
+	para "OK! Here you go!"
 	prompt
 
 _UnnamedText_1d824: ; 98eb2 (26:4eb2)
 	text $52, " exchanged"
 	line "the BIKE VOUCHER"
-	next "for a BICYCLE.@@"
+	cont "for a BICYCLE.@@"
 
 _UnnamedText_1d82a: ; 98ee0 (26:4ee0)
 	text "Come back again"
@@ -126121,9 +126121,9 @@ _UnnamedText_1d82f: ; 98efc (26:4efc)
 	text "How do you like"
 	line "your new BICYCLE?"
 
-	page "You can take it"
+	para "You can take it"
 	line "on CYCLING ROAD"
-	next "and in caves!"
+	cont "and in caves!"
 	done
 
 _UnnamedText_1d834: ; 98f4d (26:4f4d)
@@ -126134,17 +126134,17 @@ _UnnamedText_1d834: ; 98f4d (26:4f4d)
 _UnnamedText_1d843: ; 98f6d (26:4f6d)
 	text "A plain city BIKE"
 	line "is good enough"
-	next "for me!"
+	cont "for me!"
 
-	page "You can't put a"
+	para "You can't put a"
 	line "shopping basket"
-	next "on an MTB!"
+	cont "on an MTB!"
 	done
 
 _UnnamedText_1d85c: ; 98fc1 (26:4fc1)
 	text "These BIKEs are"
 	line "cool, but they're"
-	next "way expensive!"
+	cont "way expensive!"
 	done
 
 _UnnamedText_1d861: ; 98ff2 (26:4ff2)
@@ -126155,41 +126155,41 @@ _UnnamedText_1d861: ; 98ff2 (26:4ff2)
 _CeruleanMartText2: ; 99012 (26:5012)
 	text "Use REPEL to keep"
 	line "bugs and weak"
-	next "#MON away."
+	cont "#MON away."
 
-	page "Put your strongest"
+	para "Put your strongest"
 	line "#MON at the"
-	next "top of the list"
-	next "for best results!"
+	cont "top of the list"
+	cont "for best results!"
 	done
 
 _CeruleanMartText3: ; 9907f (26:507f)
 	text "Have you seen any"
 	line "RARE CANDY?"
 
-	page "It's supposed to"
+	para "It's supposed to"
 	line "make #MON go"
-	next "up one level!"
+	cont "up one level!"
 	done
 
 _UnnamedText_74e77: ; 990c9 (26:50c9)
 	text "#MON BADGEs"
 	line "are owned only by"
-	next "skilled trainers."
+	cont "skilled trainers."
 
-	page "I see you have"
+	para "I see you have"
 	line "at least one."
 
-	page "Those BADGEs have"
+	para "Those BADGEs have"
 	line "amazing secrets!"
 	prompt
 
 _UnnamedText_74e7c: ; 9913a (26:513a)
 	text "Now then..."
 
-	page "Which of the 8"
+	para "Which of the 8"
 	line "BADGEs should I"
-	next "describe?"
+	cont "describe?"
 	done
 
 _UnnamedText_74e81: ; 99170 (26:5170)
@@ -126200,69 +126200,69 @@ _UnnamedText_74e81: ; 99170 (26:5170)
 _UnnamedText_74e96: ; 99192 (26:5192)
 	text "The ATTACK of all"
 	line "#MON increases"
-	next "a little bit."
+	cont "a little bit."
 
-	page "It also lets you"
+	para "It also lets you"
 	line "use FLASH any"
-	next "time you desire."
+	cont "time you desire."
 	prompt
 
 _UnnamedText_74e9b: ; 991f2 (26:51f2)
 	text "#MON up to L30"
 	line "will obey you."
 
-	page "Any higher, they"
+	para "Any higher, they"
 	line "become unruly!"
 
-	page "It also lets you"
+	para "It also lets you"
 	line "use CUT outside"
-	next "of battle."
+	cont "of battle."
 	prompt
 
 _UnnamedText_74ea0: ; 9925d (26:525d)
 	text "The SPEED of all"
 	line "#MON increases"
-	next "a little bit."
+	cont "a little bit."
 
-	page "It also lets you"
+	para "It also lets you"
 	line "use FLY outside"
-	next "of battle."
+	cont "of battle."
 	prompt
 
 _UnnamedText_74ea5: ; 992b8 (26:52b8)
 	text "#MON up to L50"
 	line "will obey you."
 
-	page "Any higher, they"
+	para "Any higher, they"
 	line "become unruly!"
 
-	page "It also lets you"
+	para "It also lets you"
 	line "use STRENGTH out-"
-	next "side of battle."
+	cont "side of battle."
 	prompt
 
 _UnnamedText_74eaa: ; 9932a (26:532a)
 	text "The DEFENSE of all"
 	line "#MON increases"
-	next "a little bit."
+	cont "a little bit."
 
-	page "It also lets you"
+	para "It also lets you"
 	line "use SURF outside"
-	next "of battle."
+	cont "of battle."
 	prompt
 
 _UnnamedText_74eaf: ; 99388 (26:5388)
 	text "#MON up to L70"
 	line "will obey you."
 
-	page "Any higher, they"
+	para "Any higher, they"
 	line "become unruly!"
 	prompt
 
 _UnnamedText_74eb4: ; 993c7 (26:53c7)
 	text "Your #MON's"
 	line "SPECIAL abilities"
-	next "increase a bit."
+	cont "increase a bit."
 	prompt
 
 _UnnamedText_74eb9: ; 993f5 (26:53f5)
@@ -126275,34 +126275,34 @@ _LavenderPokecenterText2: ; 9940e (26:540e)
 _LavenderPokecenterText1: ; 9940e (26:540e)
 	text "TEAM ROCKET will"
 	line "do anything for"
-	next "the sake of gold!"
+	cont "the sake of gold!"
 	done
 
 _LavenderPokecenterText3: ; 99442 (26:5442)
 	text "I saw CUBONE's"
 	line "mother die trying"
-	next "to escape from"
-	next "TEAM ROCKET!"
+	cont "to escape from"
+	cont "TEAM ROCKET!"
 	done
 
 _PokemonTower1Text1: ; 9947f (26:547f)
 	text "#MON TOWER was"
 	line "erected in the"
-	next "memory of #MON"
-	next "that had died."
+	cont "memory of #MON"
+	cont "that had died."
 	done
 
 _PokemonTower1Text2: ; 994bc (26:54bc)
 	text "Did you come to"
 	line "pay respects?"
-	next "Bless you!"
+	cont "Bless you!"
 	done
 
 _PokemonTower1Text3: ; 994e6 (26:54e6)
 	text "I came to pray"
 	line "for my CLEFAIRY."
 
-	page "Sniff! I can't"
+	para "Sniff! I can't"
 	line "stop crying..."
 	done
 
@@ -126314,65 +126314,65 @@ _PokemonTower1Text4: ; 99524 (26:5524)
 _PokemonTower1Text5: ; 99546 (26:5546)
 	text "I am a CHANNELER!"
 	line "There are spirits"
-	next "up to mischief!"
+	cont "up to mischief!"
 	done
 
 _UnnamedText_6062d: ; 9957b (26:557b)
 	text $53, ": Hey,"
 	line $52, "! What"
-	next "brings you here?"
-	next "Your #MON"
-	next "don't look dead!"
+	cont "brings you here?"
+	cont "Your #MON"
+	cont "don't look dead!"
 
-	page "I can at least"
+	para "I can at least"
 	line "make them faint!"
-	next "Let's go, pal!"
+	cont "Let's go, pal!"
 	done
 
 _UnnamedText_60632: ; 995e5 (26:55e5)
 	text "What?"
 	line "You stinker!"
 
-	page "I took it easy on"
+	para "I took it easy on"
 	line "you too!"
 	prompt
 
 _UnnamedText_60637: ; 99614 (26:5614)
 	text $53, ": Well,"
 	line "look at all your"
-	next "wimpy #MON!"
+	cont "wimpy #MON!"
 
-	page "Toughen them up a"
+	para "Toughen them up a"
 	line "bit more!"
 	prompt
 
 _UnnamedText_6063c: ; 99657 (26:5657)
 	text "How's your #DEX"
 	line "coming, pal?"
-	next "I just caught a"
-	next "CUBONE!"
+	cont "I just caught a"
+	cont "CUBONE!"
 
-	page "I can't find the"
+	para "I can't find the"
 	line "grown-up MAROWAK"
-	next "yet!"
+	cont "yet!"
 
-	page "I doubt there are"
+	para "I doubt there are"
 	line "any left! Well, I"
-	next "better get going!"
-	next "I've got a lot to"
-	next "accomplish, pal!"
+	cont "better get going!"
+	cont "I've got a lot to"
+	cont "accomplish, pal!"
 
-	page "Smell ya later!"
+	para "Smell ya later!"
 	done
 
 _PokemonTower2Text2: ; 9971a (26:571a)
 	text "Even we could not"
 	line "identify the"
-	next "wayward GHOSTs!"
+	cont "wayward GHOSTs!"
 
-	page "A SILPH SCOPE"
+	para "A SILPH SCOPE"
 	line "might be able to"
-	next "unmask them."
+	cont "unmask them."
 	done
 
 _PokemonTower3BattleText1: ; 99776 (26:5776)
@@ -126388,7 +126388,7 @@ _PokemonTower3EndBattleText1: ; 99794 (26:5794)
 _PokemonTower3AfterBattleText1: ; 997a4 (26:57a4)
 	text "The GHOSTs can be"
 	line "identified by the"
-	next "SILPH SCOPE."
+	cont "SILPH SCOPE."
 	done
 
 _PokemonTower3BattleText2: ; 997d6 (26:57d6)
@@ -126448,7 +126448,7 @@ _PokemonTower4EndBattleText2: ; 998cc (26:58cc)
 _PokemonTower4AfterBattleText2: ; 998d3 (26:58d3)
 	text "We can't crack"
 	line "the identity of"
-	next "the GHOSTs."
+	cont "the GHOSTs."
 	done
 
 _PokemonTower4BattleText3: ; 998fe (26:58fe)
@@ -126464,15 +126464,15 @@ _PokemonTower4EndBattleText3: ; 99916 (26:5916)
 _PokemonTower4AfterBattleText3: ; 99927 (26:5927)
 	text "May the departed"
 	line "souls of #MON"
-	next "rest in peace..."
+	cont "rest in peace..."
 	done
 
 _PokemonTower5Text1: ; 99958 (26:5958)
 	text "Come, child! I"
 	line "sealed this space"
-	next "with white magic!"
+	cont "with white magic!"
 
-	page "You can rest here!"
+	para "You can rest here!"
 	done
 
 _PokemonTower5BattleText1: ; 9999f (26:599f)
@@ -126528,28 +126528,28 @@ _PokemonTower5EndBattleText4: ; 99a57 (26:5a57)
 _PokemonTower5AfterBattleText4: ; 99a5e (26:5a5e)
 	text "I fell to evil"
 	line "spirits despite"
-	next "my training!"
+	cont "my training!"
 	done
 
 _UnnamedText_60a43: ; 99a8b (26:5a8b)
 	text "Entered purified,"
 	line "protected zone!"
 
-	page $52, "'s #MON"
+	para $52, "'s #MON"
 	line "are fully healed!"
 	done
 
 _UnnamedText_60c1f: ; 99ac8 (26:5ac8)
 	text "The GHOST was the"
 	line "restless soul of"
-	next "CUBONE's mother!"
+	cont "CUBONE's mother!"
 	done
 
 _UnnamedText_60c24: ; 99afc (26:5afc)
 	text "The mother's soul"
 	line "was calmed."
 
-	page "It departed to"
+	para "It departed to"
 	line "the afterlife!"
 	done
 
@@ -126579,7 +126579,7 @@ _PokemonTower6EndBattleText2: ; 99b82 (26:5b82)
 _PokemonTower6AfterBattleText2: ; 99b99 (26:5b99)
 	text "Hair didn't fall"
 	line "out! It was an"
-	next "evil spirit!"
+	cont "evil spirit!"
 	done
 
 _PokemonTower6BattleText3: ; 99bc6 (26:5bc6)
@@ -126605,26 +126605,26 @@ _UnnamedText_60ec4: ; 99c1a (26:5c1a)
 	text "MR.FUJI: Heh? You"
 	line "came to save me?"
 
-	page "Thank you. But, I"
+	para "Thank you. But, I"
 	line "came here of my"
-	next "own free will."
+	cont "own free will."
 
-	page "I came to calm"
+	para "I came to calm"
 	line "the soul of"
-	next "CUBONE's mother."
+	cont "CUBONE's mother."
 
-	page "I think MAROWAK's"
+	para "I think MAROWAK's"
 	line "spirit has gone"
-	next "to the afterlife."
+	cont "to the afterlife."
 
-	page "I must thank you"
+	para "I must thank you"
 	line "for your kind"
-	next "concern!"
+	cont "concern!"
 
-	page "Follow me to my"
+	para "Follow me to my"
 	line "home, #MON"
-	next "HOUSE at the foot"
-	next "of this tower."
+	cont "HOUSE at the foot"
+	cont "of this tower."
 	done
 
 _PokemonTower7BattleText1: ; 99d31 (26:5d31)
@@ -126644,10 +126644,10 @@ _PokemonTower7AfterBattleText1: ; 99d62 (26:5d62)
 _PokemonTower7BattleText2: ; 99d80 (26:5d80)
 	text "This old guy came"
 	line "and complained"
-	next "about us harming"
-	next "useless #MON!"
+	cont "about us harming"
+	cont "useless #MON!"
 
-	page "We're talking it"
+	para "We're talking it"
 	line "over as adults!"
 	done
 
@@ -126659,9 +126659,9 @@ _PokemonTower7EndBattleText2: ; 99de1 (26:5de1)
 _PokemonTower7AfterBattleText2: ; 99df3 (26:5df3)
 	text "#MON are only"
 	line "good for making"
-	next "money!"
+	cont "money!"
 
-	page "Stay out of our"
+	para "Stay out of our"
 	line "business!"
 	done
 
@@ -126683,30 +126683,30 @@ _PokemonTower7AfterBattleText3: ; 99e6a (26:5e6a)
 _UnnamedText_1d8d1: ; 99e8d (26:5e8d)
 	text "That's odd, MR.FUJI"
 	line "isn't here."
-	next "Where'd he go?"
+	cont "Where'd he go?"
 	done
 
 _UnnamedText_1d8d6: ; 99eba (26:5eba)
 	text "MR.FUJI had been"
 	line "praying alone for"
-	next "CUBONE's mother."
+	cont "CUBONE's mother."
 	done
 
 _UnnamedText_1d8f4: ; 99eee (26:5eee)
 	text "This is really"
 	line "MR.FUJI's house."
 
-	page "He's really kind!"
+	para "He's really kind!"
 
-	page "He looks after"
+	para "He looks after"
 	line "abandoned and"
-	next "orphaned #MON!"
+	cont "orphaned #MON!"
 	done
 
 _UnnamedText_1d8f9: ; 99f4b (26:5f4b)
 	text "It's so warm!"
 	line "#MON are so"
-	next "nice to hug!"
+	cont "nice to hug!"
 	done
 
 _LavenderHouse1Text3: ; 99f72 (26:5f72)
@@ -126718,12 +126718,12 @@ _LavenderHouse1Text4: ; 99f85 (26:5f85)
 _UnnamedText_1d94c: ; 99f97 (26:5f97)
 	text "MR.FUJI: ", $52, "."
 
-	page "Your #DEX quest"
+	para "Your #DEX quest"
 	line "may fail without"
-	next "love for your"
-	next "#MON."
+	cont "love for your"
+	cont "#MON."
 
-	page "I think this may"
+	para "I think this may"
 	line "help your quest."
 	prompt
 
@@ -126737,10 +126737,10 @@ _FluteExplanationText: ; 9a011 (26:6011)
 	text $51
 	db "Upon hearing #"
 	line "FLUTE, sleeping"
-	next "#MON will"
-	next "spring awake."
+	cont "#MON will"
+	cont "spring awake."
 
-	page "It works on all"
+	para "It works on all"
 	line "sleeping #MON."
 	done
 
@@ -126757,44 +126757,44 @@ _MrFujiAfterFluteText: ; 9a087 (26:6087)
 _LavenderHouse1Text6: ; 9a0aa (26:60aa)
 	text "#MON Monthly"
 	line "Grand Prize"
-	next "Drawing!"
+	cont "Drawing!"
 
-	page "The application"
+	para "The application"
 	line "form is..."
 
-	page "Gone! It's been"
+	para "Gone! It's been"
 	line "clipped out!"
 	done
 
 _LavenderMartText2: ; 9a104 (26:6104)
 	text "I'm searching for"
 	line "items that raise"
-	next "the abilities of"
-	next "#MON during a"
-	next "single battle."
+	cont "the abilities of"
+	cont "#MON during a"
+	cont "single battle."
 
-	page "X ATTACK, X"
+	para "X ATTACK, X"
 	line "DEFEND, X SPEED"
-	next "and X SPECIAL are"
-	next "what I'm after."
+	cont "and X SPECIAL are"
+	cont "what I'm after."
 
-	page "Do you know where"
+	para "Do you know where"
 	line "I can get them?"
 	done
 
 _UnnamedText_5c953: ; 9a1b4 (26:61b4)
 	text "You know REVIVE?"
 	line "It revives any"
-	next "fainted #MON!"
+	cont "fainted #MON!"
 	done
 
 _UnnamedText_5c958: ; 9a1e3 (26:61e3)
 	text "I found a NUGGET"
 	line "in the mountains."
 
-	page "I thought it was"
+	para "I thought it was"
 	line "useless, but it"
-	next "sold for ¥5000!"
+	cont "sold for ¥5000!"
 	done
 
 _LavenderHouse2Text1: ; 9a238 (26:6238)
@@ -126804,32 +126804,32 @@ _UnnamedText_1d9dc: ; 9a24c (26:624c)
 	text "I hate those"
 	line "horrible ROCKETs!"
 
-	page "That poor CUBONE's"
+	para "That poor CUBONE's"
 	line "mother..."
 
-	page "It was killed"
+	para "It was killed"
 	line "trying to escape"
-	next "from TEAM ROCKET!"
+	cont "from TEAM ROCKET!"
 	done
 
 _UnnamedText_1d9e1: ; 9a2b9 (26:62b9)
 	text "The GHOST of"
 	line "#MON TOWER is"
-	next "gone!"
+	cont "gone!"
 
-	page "Someone must have"
+	para "Someone must have"
 	line "soothed its"
-	next "restless soul!"
+	cont "restless soul!"
 	done
 
 _UnnamedText_1dab3: ; 9a308 (26:6308)
 	text "Hello, hello!"
 	line "I am the official"
-	next "NAME RATER!"
+	cont "NAME RATER!"
 
-	page "Want me to rate"
+	para "Want me to rate"
 	line "the nicknames of"
-	next "your #MON?"
+	cont "your #MON?"
 	done
 
 _UnnamedText_1dab8: ; 9a361 (26:6361)
@@ -126841,13 +126841,13 @@ _UnnamedText_1dabd: ; 9a37f (26:637f)
 	TX_RAM $cd6d
 	text ", is it?"
 	line "That is a decent"
-	next "nickname!"
+	cont "nickname!"
 
-	page "But, would you"
+	para "But, would you"
 	line "like me to give"
-	next "it a nicer name?"
+	cont "it a nicer name?"
 
-	page "How about it?"
+	para "How about it?"
 	done
 
 _UnnamedText_1dac2: ; 9a3e5 (26:63e5)
@@ -126858,11 +126858,11 @@ _UnnamedText_1dac2: ; 9a3e5 (26:63e5)
 _UnnamedText_1dac7: ; 9a404 (26:6404)
 	text "OK! This #MON"
 	line "has been renamed"
-	next "@"
+	cont "@"
 	TX_RAM $cee9
 	text "!"
 
-	page "That's a better"
+	para "That's a better"
 	line "name than before!"
 	done
 
@@ -126875,9 +126875,9 @@ _UnnamedText_1dad1: ; 9a46b (26:646b)
 	TX_RAM $cd6d
 	text ", is it?"
 	line "That is a truly"
-	next "impeccable name!"
+	cont "impeccable name!"
 
-	page "Take good care of"
+	para "Take good care of"
 	line "@"
 	TX_RAM $cd6d
 	text "!"
@@ -126887,47 +126887,47 @@ _VermilionPokecenterText2: ; 9a4b2 (26:64b2)
 _VermilionPokecenterText1: ; 9a4b2 (26:64b2)
 	text "Even if they are"
 	line "the same level,"
-	next "#MON can have"
-	next "very different"
-	next "abilities."
+	cont "#MON can have"
+	cont "very different"
+	cont "abilities."
 
-	page "A #MON raised"
+	para "A #MON raised"
 	line "by a trainer is"
-	next "stronger than one"
-	next "in the wild."
+	cont "stronger than one"
+	cont "in the wild."
 	done
 
 _VermilionPokecenterText3: ; 9a539 (26:6539)
 	text "My #MON was"
 	line "poisoned! It"
-	next "fainted while we"
-	next "were walking!"
+	cont "fainted while we"
+	cont "were walking!"
 	done
 
 _UnnamedText_59bb7: ; 9a572 (26:6572)
 	text "Won't you admire"
 	line "my PIKACHU's"
-	next "adorable tail?"
+	cont "adorable tail?"
 	done
 
 _UnnamedText_59bbc: ; 9a59e (26:659e)
 	text "Humph! My PIKACHU"
 	line "is twice as cute"
-	next "as that one!"
+	cont "as that one!"
 	done
 
 _UnnamedText_59be4: ; 9a5cf (26:65cf)
 	text "I just love my"
 	line "SEEL!"
 
-	page "It squeals when I"
+	para "It squeals when I"
 	line "hug it!"
 	done
 
 _UnnamedText_59be9: ; 9a5ff (26:65ff)
 	text "Oh dear!"
 
-	page "My SEEL is far"
+	para "My SEEL is far"
 	line "more attractive!"
 	done
 
@@ -126944,48 +126944,48 @@ _UnnamedText_59c65: ; 9a64f (26:664f)
 	text "I chair the"
 	line "#MON Fan Club!"
 
-	page "I have collected"
+	para "I have collected"
 	line "over 100 #MON!"
 
-	page "I'm very fussy"
+	para "I'm very fussy"
 	line "when it comes to"
-	next "#MON!"
+	cont "#MON!"
 
-	page "So..."
+	para "So..."
 
-	page "Did you come"
+	para "Did you come"
 	line "visit to hear"
-	next "about my #MON?"
+	cont "about my #MON?"
 	done
 
 _UnnamedText_59c6a: ; 9a6e0 (26:66e0)
 	text "Good!"
 	line "Then listen up!"
 
-	page "My favorite"
+	para "My favorite"
 	line "RAPIDASH..."
 
-	page "It...cute..."
+	para "It...cute..."
 	line "lovely...smart..."
-	next "plus...amazing..."
-	next "you think so?..."
-	next "oh yes...it..."
-	next "stunning..."
-	next "kindly..."
-	next "love it!"
+	cont "plus...amazing..."
+	cont "you think so?..."
+	cont "oh yes...it..."
+	cont "stunning..."
+	cont "kindly..."
+	cont "love it!"
 
-	page "Hug it...when..."
-	next "sleeping...warm"
-	next "and cuddly..."
-	next "spectacular..."
-	next "ravishing..."
-	next "...Oops! Look at"
-	next "the time! I kept"
-	next "you too long!"
+	para "Hug it...when..."
+	cont "sleeping...warm"
+	cont "and cuddly..."
+	cont "spectacular..."
+	cont "ravishing..."
+	cont "...Oops! Look at"
+	cont "the time! I kept"
+	cont "you too long!"
 
-	page "Thanks for hearing"
+	para "Thanks for hearing"
 	line "me out! I want"
-	next "you to have this!"
+	cont "you to have this!"
 	prompt
 
 _ReceivedBikeVoucherText: ; 9a82e (26:682e)
@@ -126999,31 +126999,31 @@ _UnnamedText_59c74: ; 9a844 (26:6844)
 	db "Exchange that for"
 	line "a BICYCLE!"
 
-	page "Don't worry, my"
+	para "Don't worry, my"
 	line "FEAROW will FLY"
-	next "me anywhere!"
+	cont "me anywhere!"
 
-	page "So, I don't need a"
+	para "So, I don't need a"
 	line "BICYCLE!"
 
-	page "I hope you like"
+	para "I hope you like"
 	line "cycling!"
 	done
 
 _UnnamedText_59c79: ; 9a8c3 (26:68c3)
 	text "Oh. Come back"
 	line "when you want to"
-	next "hear my story!"
+	cont "hear my story!"
 	done
 
 _UnnamedText_59c7e: ; 9a8f2 (26:68f2)
 	text "Hello, ", $52, "!"
 
-	page "Did you come see"
+	para "Did you come see"
 	line "me about my"
-	next "#MON again?"
+	cont "#MON again?"
 
-	page "No? Too bad!"
+	para "No? Too bad!"
 	done
 
 _UnnamedText_59c83: ; 9a933 (26:6933)
@@ -127034,13 +127034,13 @@ _UnnamedText_59c83: ; 9a933 (26:6933)
 _FanClubText6: ; 9a948 (26:6948)
 	text "Our Chairman is"
 	line "very vocal about"
-	next "#MON."
+	cont "#MON."
 	done
 
 _FanClubText7: ; 9a970 (26:6970)
 	text "Let's all listen"
 	line "politely to other"
-	next "trainers!"
+	cont "trainers!"
 	done
 
 _FanClubText8: ; 9a99d (26:699d)
@@ -127051,46 +127051,46 @@ _FanClubText8: ; 9a99d (26:699d)
 _VermilionMartText2: ; 9a9c1 (26:69c1)
 	text "There are evil"
 	line "people who will"
-	next "use #MON for"
-	next "criminal acts."
+	cont "use #MON for"
+	cont "criminal acts."
 
-	page "TEAM ROCKET"
+	para "TEAM ROCKET"
 	line "traffics in rare"
-	next "#MON."
+	cont "#MON."
 
-	page "They also abandon"
+	para "They also abandon"
 	line "#MON that they"
-	next "consider not to"
-	next "be popular or"
-	next "useful."
+	cont "consider not to"
+	cont "be popular or"
+	cont "useful."
 	done
 
 _VermilionMartText3: ; 9aa67 (26:6a67)
 	text "I think #MON"
 	line "can be good or"
-	next "evil. It depends"
-	next "on the trainer."
+	cont "evil. It depends"
+	cont "on the trainer."
 	done
 
 _UnnamedText_5cb6d: ; 9aaa5 (26:6aa5)
 	text "Hey, kid! What do"
 	line "you think you're"
-	next "doing here?"
+	cont "doing here?"
 
-	page "You won't live"
+	para "You won't live"
 	line "long in combat!"
-	next "That's for sure!"
+	cont "That's for sure!"
 
-	page "I tell you kid,"
+	para "I tell you kid,"
 	line "electric #MON"
-	next "saved me during"
-	next "the war!"
+	cont "saved me during"
+	cont "the war!"
 
-	page "They zapped my"
+	para "They zapped my"
 	line "enemies into"
-	next "paralysis!"
+	cont "paralysis!"
 
-	page "The same as I'll"
+	para "The same as I'll"
 	line "do to you!"
 	done
 
@@ -127100,24 +127100,24 @@ _UnnamedText_5cb72: ; 9c000 (27:4000)
 	text "A little word of"
 	line "advice, kid!"
 
-	page "Electricity is"
+	para "Electricity is"
 	line "sure powerful!"
 
-	page "But, it's useless"
+	para "But, it's useless"
 	line "against ground-"
-	next "type #MON!"
+	cont "type #MON!"
 	done
 
 _UnnamedText_5cb77: ; 9c069 (27:4069)
 	text "The THUNDERBADGE"
 	line "cranks up your"
-	next "#MON's SPEED!"
+	cont "#MON's SPEED!"
 
-	page "It also lets your"
+	para "It also lets your"
 	line "#MON FLY any"
-	next "time, kid!"
+	cont "time, kid!"
 
-	page "You're special,"
+	para "You're special,"
 	line "kid! Take this!"
 	done
 
@@ -127132,7 +127132,7 @@ _TM24ExplanationText: ; 9c0f5 (27:40f5)
 	db "TM24 contains"
 	line "THUNDERBOLT!"
 
-	page "Teach it to an"
+	para "Teach it to an"
 	line "electric #MON!"
 	done
 
@@ -127144,17 +127144,17 @@ _TM24NoRoomText: ; 9c130 (27:4130)
 _ReceivedThunderbadgeText: ; 9c151 (27:4151)
 	text "Whoa!"
 
-	page "You're the real"
+	para "You're the real"
 	line "deal, kid!"
 
-	page "Fine then, take"
+	para "Fine then, take"
 	line "the THUNDERBADGE!"
 	prompt
 
 _VermilionGymBattleText1: ; 9c194 (27:4194)
 	text "When I was in the"
 	line "Army, LT.SURGE"
-	next "was my strict CO!"
+	cont "was my strict CO!"
 	done
 
 _VermilionGymEndBattleText1: ; 9c1c8 (27:41c8)
@@ -127166,14 +127166,14 @@ _VermilionGymAfterBattleText1: ; 9c1e0 (27:41e0)
 	text "The door won't"
 	line "open?"
 
-	page "LT.SURGE always"
+	para "LT.SURGE always"
 	line "was cautious!"
 	done
 
 _VermilionGymBattleText2: ; 9c213 (27:4213)
 	text "I'm a lightweight,"
 	line "but I'm good with"
-	next "electricity!"
+	cont "electricity!"
 	done
 
 _VermilionGymEndBattleText2: ; 9c244 (27:4244)
@@ -127183,9 +127183,9 @@ _VermilionGymEndBattleText2: ; 9c244 (27:4244)
 _VermilionGymAfterBattleText2: ; 9c24c (27:424c)
 	text "OK, I'll talk!"
 
-	page "LT.SURGE said he"
+	para "LT.SURGE said he"
 	line "hid door switches"
-	next "inside something!"
+	cont "inside something!"
 	done
 
 _VermilionGymBattleText3: ; 9c290 (27:4290)
@@ -127201,38 +127201,38 @@ _VermilionGymEndBattleText3: ; 9c2ac (27:42ac)
 _VermilionGymAfterBattleText3: ; 9c2c0 (27:42c0)
 	text "LT.SURGE set up"
 	line "double locks!"
-	next "Here's a hint!"
+	cont "Here's a hint!"
 
-	page "When you open the"
+	para "When you open the"
 	line "1st lock, the 2nd"
-	next "lock is right"
-	next "next to it!"
+	cont "lock is right"
+	cont "next to it!"
 	done
 
 _UnnamedText_5cbf4: ; 9c32b (27:432b)
 	text "Yo! Champ in"
 	line "making!"
 
-	page "LT.SURGE has a"
+	para "LT.SURGE has a"
 	line "nickname. People"
-	next "refer to him as"
-	next "the Lightning"
-	next "American!"
+	cont "refer to him as"
+	cont "the Lightning"
+	cont "American!"
 
-	page "He's an expert on"
+	para "He's an expert on"
 	line "electric #MON!"
 
-	page "Birds and water"
+	para "Birds and water"
 	line "#MON are at"
-	next "risk! Beware of"
-	next "paralysis too!"
+	cont "risk! Beware of"
+	cont "paralysis too!"
 
-	page "LT.SURGE is very"
+	para "LT.SURGE is very"
 	line "cautious!"
 
-	page "You'll have to"
+	para "You'll have to"
 	line "break a code to"
-	next "get to him!"
+	cont "get to him!"
 	done
 
 _UnnamedText_5cbf9: ; 9c429 (27:4429)
@@ -127243,8 +127243,8 @@ _UnnamedText_5cbf9: ; 9c429 (27:4429)
 _VermilionHouse1Text1: ; 9c449 (27:4449)
 	text "I'm getting my"
 	line "PIDGEY to fly a"
-	next "letter to SAFFRON"
-	next "in the north!"
+	cont "letter to SAFFRON"
+	cont "in the north!"
 	done
 
 _VermilionHouse1Text2: ; 9c488 (27:4488)
@@ -127254,11 +127254,11 @@ _VermilionHouse1Text3: ; 9c49c (27:449c)
 	text "Dear PIPPI, I hope"
 	line "to see you soon."
 
-	page "I heard SAFFRON"
+	para "I heard SAFFRON"
 	line "has problems with"
-	next "TEAM ROCKET."
+	cont "TEAM ROCKET."
 
-	page "VERMILION appears"
+	para "VERMILION appears"
 	line "to be safe."
 	done
 
@@ -127269,10 +127269,10 @@ _UnnamedText_560b1: ; 9c510 (27:4510)
 	text "I'm the FISHING"
 	line "GURU!"
 
-	page "I simply Looove"
+	para "I simply Looove"
 	line "fishing!"
 
-	page "Do you like to"
+	para "Do you like to"
 	line "fish?"
 	done
 
@@ -127280,10 +127280,10 @@ _UnnamedText_560b6: ; 9c554 (27:4554)
 	text "Grand! I like"
 	line "your style!"
 
-	page "Take this and"
+	para "Take this and"
 	line "fish, young one!"
 
-	page $52, " received"
+	para $52, " received"
 	line "an @"
 	TX_RAM $cf4b
 	text "!@@"
@@ -127293,10 +127293,10 @@ _UnnamedText_560bb: ; 9c5a4 (27:45a4)
 	db "Fishing is a way"
 	line "of life!"
 
-	page "From the seas to"
+	para "From the seas to"
 	line "rivers, go out"
-	next "and land the big"
-	next "one, young one!"
+	cont "and land the big"
+	cont "one, young one!"
 	done
 
 _UnnamedText_560c0: ; 9c601 (27:4601)
@@ -127308,41 +127308,41 @@ _UnnamedText_560c5: ; 9c622 (27:4622)
 	text "Hello there,"
 	line $52, "!"
 
-	page "How are the fish"
+	para "How are the fish"
 	line "biting?"
 	done
 
 _UnnamedText_560ca: ; 9c64c (27:464c)
 	text "Oh no!"
 
-	page "You have no room"
+	para "You have no room"
 	line "for my gift!"
 	done
 
 _CeladonMart1Text1: ; 9c672 (27:4672)
 	text "Hello! Welcome to"
 	line "CELADON DEPT."
-	next "STORE."
+	cont "STORE."
 
-	page "The board on the"
+	para "The board on the"
 	line "right describes"
-	next "the store layout."
+	cont "the store layout."
 	done
 
 _CeladonMart1Text2: ; 9c6cd (27:46cd)
 	text "1F: SERVICE"
 	line "    COUNTER"
 
-	page "2F: TRAINER'S"
+	para "2F: TRAINER'S"
 	line "    MARKET"
 
-	page "3F: TV GAME SHOP"
+	para "3F: TV GAME SHOP"
 
-	page "4F: WISEMAN GIFTS"
+	para "4F: WISEMAN GIFTS"
 
-	page "5F: DRUG STORE"
+	para "5F: DRUG STORE"
 
-	page "ROOFTOP SQUARE:"
+	para "ROOFTOP SQUARE:"
 	line "VENDING MACHINES"
 	done
 
@@ -127354,23 +127354,23 @@ _CeladonMart1Text3: ; 9c752 (27:4752)
 _CeladonMart2Text3: ; 9c76b (27:476b)
 	text "SUPER REPEL keeps"
 	line "weak #MON at"
-	next "bay..."
+	cont "bay..."
 
-	page "Hmm, it's a more"
+	para "Hmm, it's a more"
 	line "powerful REPEL!"
 	done
 
 _CeladonMart2Text4: ; 9c7b2 (27:47b2)
 	text "For long outings,"
 	line "you should buy"
-	next "REVIVE."
+	cont "REVIVE."
 	done
 
 _CeladonMart2Text5: ; 9c7dc (27:47dc)
 	text "Top Grade Items"
 	line "for Trainers!"
 
-	page "2F: TRAINER'S"
+	para "2F: TRAINER'S"
 	line "    MARKET"
 	done
 
@@ -127378,9 +127378,9 @@ _TM18PreReceiveText: ; 9c814 (27:4814)
 	text "Oh, hi! I finally"
 	line "finished #MON!"
 
-	page "Not done yet?"
+	para "Not done yet?"
 	line "This might be"
-	next "useful!"
+	cont "useful!"
 	prompt
 
 _ReceivedTM18Text: ; 9c85a (27:485a)
@@ -127392,8 +127392,8 @@ _ReceivedTM18Text: ; 9c85a (27:485a)
 _TM18ExplanationText: ; 9c86e (27:486e)
 	text "TM18 is COUNTER!"
 	line "Not like the one"
-	next "I'm leaning on,"
-	next "mind you!"
+	cont "I'm leaning on,"
+	cont "mind you!"
 	done
 
 _TM18NoRoomText: ; 9c8aa (27:48aa)
@@ -127404,40 +127404,40 @@ _TM18NoRoomText: ; 9c8aa (27:48aa)
 _CeladonMart3Text2: ; 9c8c7 (27:48c7)
 	text "Captured #MON"
 	line "are registered"
-	next "with an ID No."
-	next "and OT, the name"
-	next "of the Original"
-	next "Trainer that"
-	next "caught it!"
+	cont "with an ID No."
+	cont "and OT, the name"
+	cont "of the Original"
+	cont "Trainer that"
+	cont "caught it!"
 	done
 
 _CeladonMart3Text3: ; 9c92d (27:492d)
 	text "All right!"
 
-	page "My buddy's going"
+	para "My buddy's going"
 	line "to trade me his"
-	next "KANGASKHAN for my"
-	next "GRAVELER!"
+	cont "KANGASKHAN for my"
+	cont "GRAVELER!"
 	done
 
 _CeladonMart3Text4: ; 9c975 (27:4975)
 	text "Come on GRAVELER!"
 
-	page "I love GRAVELER!"
+	para "I love GRAVELER!"
 	line "I collect them!"
 
-	page "Huh?"
+	para "Huh?"
 
-	page "GRAVELER turned"
+	para "GRAVELER turned"
 	line "into a different"
-	next "#MON!"
+	cont "#MON!"
 	done
 
 _CeladonMart3Text5: ; 9c9d5 (27:49d5)
 	text "You can identify"
 	line "#MON you got"
-	next "in trades by"
-	next "their ID Numbers!"
+	cont "in trades by"
+	cont "their ID Numbers!"
 	done
 
 _CeladonMart3Text6: ; 9ca13 (27:4a13)
@@ -127476,28 +127476,28 @@ _CeladonMart3Text15: ; 9cab6 (27:4ab6)
 _CeladonMart4Text2: ; 9cad4 (27:4ad4)
 	text "I'm getting a"
 	line "# DOLL for my"
-	next "girl friend!"
+	cont "girl friend!"
 	done
 
 _CeladonMart4Text3: ; 9cafd (27:4afd)
 	text "I heard something"
 	line "useful."
 
-	page "You can run from"
+	para "You can run from"
 	line "wild #MON by"
-	next "distracting them"
-	next "with a # DOLL!"
+	cont "distracting them"
+	cont "with a # DOLL!"
 	done
 
 _CeladonMart4Text4: ; 9cb56 (27:4b56)
 	text "Express yourself"
 	line "with gifts!"
 
-	page "4F: WISEMAN GIFTS"
+	para "4F: WISEMAN GIFTS"
 
-	page "Evolution Special!"
+	para "Evolution Special!"
 	line "Element STONEs on"
-	next "sale now!"
+	cont "sale now!"
 	done
 
 _UnnamedText_484ee: ; 9cbb5 (27:4bb5)
@@ -127508,11 +127508,11 @@ _UnnamedText_484ee: ; 9cbb5 (27:4bb5)
 _UnnamedText_484f3: ; 9cbcc (27:4bcc)
 	text "Yay!"
 
-	page "FRESH WATER!"
+	para "FRESH WATER!"
 
-	page "Thank you!"
+	para "Thank you!"
 
-	page "You can have this"
+	para "You can have this"
 	line "from me!@@"
 
 _UnnamedText_484f9: ; 9cc06 (27:4c06)
@@ -127528,17 +127528,17 @@ _UnnamedText_484fe: ; 9cc1a (27:4c1a)
 	text " contains"
 	line "ICE BEAM!"
 
-	page "It can freeze the"
+	para "It can freeze the"
 	line "target sometimes!@@"
 
 _UnnamedText_48504: ; 9cc5a (27:4c5a)
 	text "Yay!"
 
-	page "SODA POP!"
+	para "SODA POP!"
 
-	page "Thank you!"
+	para "Thank you!"
 
-	page "You can have this"
+	para "You can have this"
 	line "from me!@@"
 
 _UnnamedText_4850a: ; 9cc91 (27:4c91)
@@ -127554,17 +127554,17 @@ _UnnamedText_4850f: ; 9cca5 (27:4ca5)
 	text " contains"
 	line "ROCK SLIDE!"
 
-	page "It can spook the"
+	para "It can spook the"
 	line "target sometimes!@@"
 
 _UnnamedText_48515: ; 9cce6 (27:4ce6)
 	text "Yay!"
 
-	page "LEMONADE!"
+	para "LEMONADE!"
 
-	page "Thank you!"
+	para "Thank you!"
 
-	page "You can have this"
+	para "You can have this"
 	line "from me!@@"
 
 _ReceivedTM49Text: ; 9cd1d (27:4d1d)
@@ -127583,30 +127583,30 @@ _UnnamedText_48526: ; 9cd4d (27:4d4d)
 _UnnamedText_4852c: ; 9cd6d (27:4d6d)
 	text "No thank you!"
 	line "I'm not thirsty"
-	next "after all!@@"
+	cont "after all!@@"
 
 _CeladonMartRoofText1: ; 9cd97 (27:4d97)
 	text "My sister is a"
 	line "trainer, believe"
-	next "it or not."
+	cont "it or not."
 
-	page "But, she's so"
+	para "But, she's so"
 	line "immature, she"
-	next "drives me nuts!"
+	cont "drives me nuts!"
 	done
 
 _UnnamedText_48598: ; 9cdee (27:4dee)
 	text "I'm thirsty!"
 	line "I want something"
-	next "to drink!"
+	cont "to drink!"
 	done
 
 _CeladonMartRoofText4: ; 9ce16 (27:4e16)
 	text "I'm thirsty!"
 	line "I want something"
-	next "to drink!"
+	cont "to drink!"
 
-	page "Give her a drink?"
+	para "Give her a drink?"
 	done
 
 _CeladonMartRoofText6: ; 9ce50 (27:4e50)
@@ -127646,7 +127646,7 @@ _CeladonMansion1Text2: ; 9cefe (27:4efe)
 	text "My dear #MON"
 	line "keep me company."
 
-	page "MEOWTH even brings"
+	para "MEOWTH even brings"
 	line "money home!"
 	done
 
@@ -127676,58 +127676,58 @@ _ProgrammerText: ; 9cfa4 (27:4fa4)
 _GraphicArtistText: ; 9cfbc (27:4fbc)
 	text "I'm the graphic"
 	line "artist!"
-	next "I drew you!"
+	cont "I drew you!"
 	done
 
 _WriterText: ; 9cfe0 (27:4fe0)
 	text "I wrote the story!"
 	line "Isn't ERIKA cute?"
 
-	page "I like MISTY a"
+	para "I like MISTY a"
 	line "lot too!"
 
-	page "Oh, and SABRINA,"
+	para "Oh, and SABRINA,"
 	line "I like her!"
 	done
 
 _GameDesignerText: ; 9d03a (27:503a)
 	text "Is that right?"
 
-	page "I'm the game"
+	para "I'm the game"
 	line "designer!"
 
-	page "Filling up your"
+	para "Filling up your"
 	line "#DEX is tough,"
-	next "but don't quit!"
+	cont "but don't quit!"
 
-	page "When you finish,"
+	para "When you finish,"
 	line "come tell me!"
 	done
 
 _CompletedDexText: ; 9d0ad (27:50ad)
 	text "Wow! Excellent!"
 	line "You completed"
-	next "your #DEX!"
-	next "Congratulations!"
-	next "...@@"
+	cont "your #DEX!"
+	cont "Congratulations!"
+	cont "...@@"
 
 _CeladonMansion3Text5: ; 9d0ed (27:50ed)
 	text "It's the game"
 	line "program! Messing"
-	next "with it could bug"
-	next "out the game!"
+	cont "with it could bug"
+	cont "out the game!"
 	done
 
 _CeladonMansion3Text6: ; 9d12c (27:512c)
 	text "Someone's playing"
 	line "a game instead of"
-	next "working!"
+	cont "working!"
 	done
 
 _CeladonMansion3Text7: ; 9d159 (27:5159)
 	text "It's the script!"
 	line "Better not look"
-	next "at the ending!"
+	cont "at the ending!"
 	done
 
 _CeladonMansion3Text8: ; 9d189 (27:5189)
@@ -127742,51 +127742,51 @@ _CeladonMansion4Text1: ; 9d1a6 (27:51a6)
 _CeladonMansion5Text1: ; 9d1ba (27:51ba)
 	text "I know everything"
 	line "about the world"
-	next "of #MON in"
-	next "your GAME BOY!"
+	cont "of #MON in"
+	cont "your GAME BOY!"
 
-	page "Get together with"
+	para "Get together with"
 	line "your friends and"
-	next "trade #MON!"
+	cont "trade #MON!"
 	done
 
 _CeladonPokecenterText2: ; 9d226 (27:5226)
 	text "# FLUTE awakens"
 	line "#MON with a"
-	next "sound that only"
-	next "they can hear!"
+	cont "sound that only"
+	cont "they can hear!"
 	done
 
 _CeladonPokecenterText3: ; 9d262 (27:5262)
 	text "I rode uphill on"
 	line "CYCLING ROAD from"
-	next "FUCHSIA!"
+	cont "FUCHSIA!"
 	done
 
 _UnnamedText_48a5e: ; 9d28f (27:528f)
 	text "Hello. Lovely"
 	line "weather isn't it?"
-	next "It's so pleasant."
+	cont "It's so pleasant."
 
-	page "...Oh dear..."
+	para "...Oh dear..."
 	line "I must have dozed"
-	next "off. Welcome."
+	cont "off. Welcome."
 
-	page "My name is ERIKA."
+	para "My name is ERIKA."
 	line "I am the LEADER"
-	next "of CELADON GYM."
+	cont "of CELADON GYM."
 
-	page "I teach the art of"
+	para "I teach the art of"
 	line "flower arranging."
-	next "My #MON are of"
-	next "the grass-type."
+	cont "My #MON are of"
+	cont "the grass-type."
 
-	page "Oh, I'm sorry, I"
+	para "Oh, I'm sorry, I"
 	line "had no idea that"
-	next "you wished to"
-	next "challenge me."
+	cont "you wished to"
+	cont "challenge me."
 
-	page "Very well, but I"
+	para "Very well, but I"
 	line "shall not lose."
 	done
 
@@ -127794,35 +127794,35 @@ _UnnamedText_48a63: ; 9d3c2 (27:53c2)
 	text "Oh!"
 	line "I concede defeat."
 
-	page "You are remarkably"
+	para "You are remarkably"
 	line "strong."
 
-	page "I must confer you"
+	para "I must confer you"
 	line "the RAINBOWBADGE."
 	prompt
 
 _UnnamedText_48a68: ; 9d418 (27:5418)
 	text "You are cataloging"
 	line "#MON? I must"
-	next "say I'm impressed."
+	cont "say I'm impressed."
 
-	page "I would never"
+	para "I would never"
 	line "collect #MON"
-	next "if they were"
-	next "unattractive."
+	cont "if they were"
+	cont "unattractive."
 	done
 
 _UnnamedText_48a6d: ; 9d481 (27:5481)
 	text "The RAINBOWBADGE"
 	line "will make #MON"
-	next "up to L50 obey."
+	cont "up to L50 obey."
 
-	page "It also allows"
+	para "It also allows"
 	line "#MON to use"
-	next "STRENGTH in and"
-	next "out of battle."
+	cont "STRENGTH in and"
+	cont "out of battle."
 
-	page "Please also take"
+	para "Please also take"
 	line "this with you."
 	done
 
@@ -127837,10 +127837,10 @@ _TM21ExplanationText: ; 9d520 (27:5520)
 	db "TM21 contains"
 	line "MEGA DRAIN."
 
-	page "Half the damage"
+	para "Half the damage"
 	line "it inflicts is"
-	next "drained to heal"
-	next "your #MON!"
+	cont "drained to heal"
+	cont "your #MON!"
 	done
 
 _TM21NoRoomText: ; 9d576 (27:5576)
@@ -127851,7 +127851,7 @@ _TM21NoRoomText: ; 9d576 (27:5576)
 _CeladonGymBattleText2: ; 9d596 (27:5596)
 	text "Hey!"
 
-	page "You are not"
+	para "You are not"
 	line "allowed in here!"
 	done
 
@@ -127863,7 +127863,7 @@ _CeladonGymEndBattleText2: ; 9d5b9 (27:55b9)
 _CeladonGymAfterBattleText2: ; 9d5cb (27:55cb)
 	text "Bleaah!"
 	line "I hope ERIKA"
-	next "wipes you out!"
+	cont "wipes you out!"
 	done
 
 _CeladonGymBattleText3: ; 9d5f0 (27:55f0)
@@ -127879,11 +127879,11 @@ _CeladonGymEndBattleText3: ; 9d606 (27:5606)
 _CeladonGymAfterBattleText3: ; 9d612 (27:5612)
 	text "Grass-type #MON"
 	line "are tough against"
-	next "the water-type!"
+	cont "the water-type!"
 
-	page "They also have an"
+	para "They also have an"
 	line "edge on rock and"
-	next "ground #MON!"
+	cont "ground #MON!"
 	done
 
 _CeladonGymBattleText4: ; 9d675 (27:5675)
@@ -127899,14 +127899,14 @@ _CeladonGymEndBattleText4: ; 9d691 (27:5691)
 _CeladonGymAfterBattleText4: ; 9d69f (27:569f)
 	text "Oh, you weren't"
 	line "peeping? We get a"
-	next "lot of gawkers!"
+	cont "lot of gawkers!"
 	done
 
 _CeladonGymBattleText5: ; 9d6d1 (27:56d1)
 	text "Look at my grass"
 	line "#MON!"
 
-	page "They're so easy"
+	para "They're so easy"
 	line "to raise!"
 	done
 
@@ -127917,17 +127917,17 @@ _CeladonGymEndBattleText5: ; 9d702 (27:5702)
 _CeladonGymAfterBattleText5: ; 9d707 (27:5707)
 	text "We only use grass-"
 	line "type #MON at"
-	next "our GYM!"
+	cont "our GYM!"
 
-	page "We also use them"
+	para "We also use them"
 	line "for making flower"
-	next "arrangements!"
+	cont "arrangements!"
 	done
 
 _CeladonGymBattleText6: ; 9d762 (27:5762)
 	text "Don't bring any"
 	line "bugs or fire"
-	next "#MON in here!"
+	cont "#MON in here!"
 	done
 
 _CeladonGymEndBattleText6: ; 9d78d (27:578d)
@@ -127938,14 +127938,14 @@ _CeladonGymEndBattleText6: ; 9d78d (27:578d)
 _CeladonGymAfterBattleText6: ; 9d797 (27:5797)
 	text "Our LEADER, ERIKA,"
 	line "might be quiet,"
-	next "but she's also"
-	next "very skilled!"
+	cont "but she's also"
+	cont "very skilled!"
 	done
 
 _CeladonGymBattleText7: ; 9d7d7 (27:57d7)
 	text "Pleased to meet"
 	line "you. My hobby is"
-	next "#MON training."
+	cont "#MON training."
 	done
 
 _CeladonGymEndBattleText7: ; 9d808 (27:5808)
@@ -127956,17 +127956,17 @@ _CeladonGymEndBattleText7: ; 9d808 (27:5808)
 _CeladonGymAfterBattleText7: ; 9d817 (27:5817)
 	text "I have a blind"
 	line "date coming up."
-	next "I have to learn"
-	next "to be polite."
+	cont "I have to learn"
+	cont "to be polite."
 	done
 
 _CeladonGymBattleText8: ; 9d855 (27:5855)
 	text "Welcome to"
 	line "CELADON GYM!"
 
-	page "You better not"
+	para "You better not"
 	line "underestimate"
-	next "girl power!"
+	cont "girl power!"
 	done
 
 _CeladonGymEndBattleText8: ; 9d897 (27:5897)
@@ -127978,29 +127978,29 @@ _CeladonGymAfterBattleText8: ; 9d8a4 (27:58a4)
 	text "I didn't bring my"
 	line "best #MON!"
 
-	page "Wait 'til next"
+	para "Wait 'til next"
 	line "time!"
 	done
 
 _CeladonGameCornerText1: ; 9d8d5 (27:58d5)
 	text "Welcome!"
 
-	page "You can exchange"
+	para "You can exchange"
 	line "your coins for"
-	next "fabulous prizes"
-	next "next door."
+	cont "fabulous prizes"
+	cont "next door."
 	done
 
 _UnnamedText_48d22: ; 9d91a (27:591a)
 	text "Welcome to ROCKET"
 	line "GAME CORNER!"
 
-	page "Do you need some"
+	para "Do you need some"
 	line "game coins?"
 
-	page "It's ¥1000 for 50"
+	para "It's ¥1000 for 50"
 	line "coins. Would you"
-	next "like some?"
+	cont "like some?"
 	done
 
 _UnnamedText_48d27: ; 9d984 (27:5984)
@@ -128031,15 +128031,15 @@ _UnnamedText_48d3b: ; 9da00 (27:5a00)
 _CeladonGameCornerText3: ; 9da1c (27:5a1c)
 	text "Keep this quiet."
 
-	page "It's rumored that"
+	para "It's rumored that"
 	line "this place is run"
-	next "by TEAM ROCKET."
+	cont "by TEAM ROCKET."
 	done
 
 _CeladonGameCornerText4: ; 9da61 (27:5a61)
 	text "I think these"
 	line "machines have"
-	next "different odds."
+	cont "different odds."
 	done
 
 _UnnamedText_48d9c: ; 9da8e (27:5a8e)
@@ -128069,34 +128069,34 @@ _CeladonGameCornerText6: ; 9daf4 (27:5af4)
 _UnnamedText_48dca: ; 9db11 (27:5b11)
 	text "Hey!"
 
-	page "You have better"
+	para "You have better"
 	line "things to do,"
-	next "champ in making!"
+	cont "champ in making!"
 
-	page "CELADON GYM's"
+	para "CELADON GYM's"
 	line "LEADER is ERIKA!"
-	next "She uses grass-"
-	next "type #MON!"
+	cont "She uses grass-"
+	cont "type #MON!"
 
-	page "She might appear"
+	para "She might appear"
 	line "docile, but don't"
-	next "be fooled!"
+	cont "be fooled!"
 	done
 
 _UnnamedText_48dcf: ; 9dbac (27:5bac)
 	text "They offer rare"
 	line "#MON that can"
-	next "be exchanged for"
-	next "your coins."
+	cont "be exchanged for"
+	cont "your coins."
 
-	page "But, I just can't"
+	para "But, I just can't"
 	line "seem to win!"
 	done
 
 _CeladonGameCornerText8: ; 9dc06 (27:5c06)
 	text "Games are scary!"
 	line "It's so easy to"
-	next "get hooked!"
+	cont "get hooked!"
 	done
 
 _UnnamedText_48e26: ; 9dc33 (27:5c33)
@@ -128116,14 +128116,14 @@ _UnnamedText_48e31: ; 9dc66 (27:5c66)
 _UnnamedText_48e36: ; 9dc7f (27:5c7f)
 	text "Darn! I need more"
 	line "coins for the"
-	next "#MON I want!"
+	cont "#MON I want!"
 	done
 
 _UnnamedText_48e88: ; 9dcad (27:5cad)
 	text "Hey, what? You're"
 	line "throwing me off!"
-	next "Here are some"
-	next "coins, shoo!"
+	cont "Here are some"
+	cont "coins, shoo!"
 	prompt
 
 _UnnamedText_48e8d: ; 9dceb (27:5ceb)
@@ -128138,13 +128138,13 @@ _UnnamedText_48e93: ; 9dd02 (27:5d02)
 _UnnamedText_48e98: ; 9dd1d (27:5d1d)
 	text "The trick is to"
 	line "watch the reels"
-	next "closely!"
+	cont "closely!"
 	done
 
 _UnnamedText_48ece: ; 9dd47 (27:5d47)
 	text "I'm guarding this"
 	line "poster!"
-	next "Go away, or else!"
+	cont "Go away, or else!"
 	done
 
 _UnnamedText_48ed3: ; 9dd73 (27:5d73)
@@ -128154,15 +128154,15 @@ _UnnamedText_48ed3: ; 9dd73 (27:5d73)
 _UnnamedText_48ed8: ; 9dd7a (27:5d7a)
 	text "Our hideout might"
 	line "be discovered! I"
-	next "better tell BOSS!"
+	cont "better tell BOSS!"
 	done
 
 _UnnamedText_48f09: ; 9ddb0 (27:5db0)
 	text "Hey!"
 
-	page "A switch behind"
+	para "A switch behind"
 	line "the poster!?"
-	next "Let's push it!@@"
+	cont "Let's push it!@@"
 
 _UnnamedText_48f19: ; 9dde2 (27:5de2)
 	text "Oops! Forgot the"
@@ -128172,25 +128172,25 @@ _UnnamedText_48f19: ; 9dde2 (27:5de2)
 _CeladonMart5Text1: ; 9ddff (27:5dff)
 	text "#MON ability"
 	line "enhancers can be"
-	next "bought only here."
+	cont "bought only here."
 
-	page "Use CALCIUM to"
+	para "Use CALCIUM to"
 	line "increase SPECIAL"
-	next "abilities."
+	cont "abilities."
 
-	page "Use CARBOS to"
+	para "Use CARBOS to"
 	line "increase SPEED."
 	done
 
 _CeladonMart5Text2: ; 9de79 (27:5e79)
 	text "I'm here for"
 	line "#MON ability"
-	next "enhancers."
+	cont "enhancers."
 
-	page "PROTEIN increases"
+	para "PROTEIN increases"
 	line "ATTACK power."
 
-	page "IRON increases"
+	para "IRON increases"
 	line "DEFENSE!"
 	done
 
@@ -128202,7 +128202,7 @@ _CeladonPrizeRoomText1: ; 9dee6 (27:5ee6)
 	text "I sure do fancy"
 	line "that PORYGON!"
 
-	page "But, it's hard to"
+	para "But, it's hard to"
 	line "win at slots!"
 	done
 
@@ -128214,44 +128214,44 @@ _CeladonPrizeRoomText2: ; 9df24 (27:5f24)
 _CeladonDinerText1: ; 9df3f (27:5f3f)
 	text "Hi!"
 
-	page "We're taking a"
+	para "We're taking a"
 	line "break now."
 	done
 
 _CeladonDinerText2: ; 9df5d (27:5f5d)
 	text "My #MON are"
 	line "weak, so I often"
-	next "have to go to the"
-	next "DRUG STORE."
+	cont "have to go to the"
+	cont "DRUG STORE."
 	done
 
 _CeladonDinerText3: ; 9df99 (27:5f99)
 	text "Psst! There's a"
 	line "basement under"
-	next "the GAME CORNER."
+	cont "the GAME CORNER."
 	done
 
 _CeladonDinerText4: ; 9dfc9 (27:5fc9)
 	text "Munch..."
 
-	page "The man at that"
+	para "The man at that"
 	line "table lost it all"
-	next "at the slots."
+	cont "at the slots."
 	done
 
 _UnnamedText_491a7: ; 9e003 (27:6003)
 	text "Go ahead! Laugh!"
 
-	page "I'm flat out"
+	para "I'm flat out"
 	line "busted!"
 
-	page "No more slots for"
+	para "No more slots for"
 	line "me! I'm going"
-	next "straight!"
+	cont "straight!"
 
-	page "Here! I won't be"
+	para "Here! I won't be"
 	line "needing this any-"
-	next "more!"
+	cont "more!"
 	prompt
 
 _ReceivedCoinCaseText: ; 9e07a (27:607a)
@@ -128268,46 +128268,46 @@ _CoinCaseNoRoomText: ; 9e090 (27:6090)
 _UnnamedText_491b7: ; 9e0a5 (27:60a5)
 	text "I always thought"
 	line "I was going to"
-	next "win it back..."
+	cont "win it back..."
 	done
 
 _CeladonHouseText1: ; 9e0d5 (27:60d5)
 	text "Hehehe! The slots"
 	line "just reel in the"
-	next "dough, big time!"
+	cont "dough, big time!"
 	done
 
 _CeladonHouseText2: ; 9e10a (27:610a)
 	text "CHIEF!"
 
-	page "We just shipped"
+	para "We just shipped"
 	line "2000 #MON as"
-	next "slot prizes!"
+	cont "slot prizes!"
 	done
 
 _CeladonHouseText3: ; 9e13c (27:613c)
 	text "Don't touch the"
 	line "poster at the"
-	next "GAME CORNER!"
+	cont "GAME CORNER!"
 
-	page "There's no secret"
+	para "There's no secret"
 	line "switch behind it!"
 	done
 
 _CeladonHotelText1: ; 9e18a (27:618a)
 	text "#MON? No, this"
 	line "is a hotel for"
-	next "people."
+	cont "people."
 
-	page "We're full up."
+	para "We're full up."
 	done
 
 _CeladonHotelText2: ; 9e1bf (27:61bf)
 	text "I'm on vacation"
 	line "with my brother"
-	next "and boy friend."
+	cont "and boy friend."
 
-	page "CELADON is such a"
+	para "CELADON is such a"
 	line "pretty city!"
 	done
 
@@ -128320,23 +128320,23 @@ _FuchsiaMartText2: ; 9e22e (27:622e)
 	text "Do you have a"
 	line "SAFARI ZONE flag?"
 
-	page "What about cards"
+	para "What about cards"
 	line "or calendars?"
 	done
 
 _FuchsiaMartText3: ; 9e26e (27:626e)
 	text "Did you try X"
 	line "SPEED? It speeds"
-	next "up a #MON in"
-	next "battle!"
+	cont "up a #MON in"
+	cont "battle!"
 	done
 
 _FuchsiaHouse1Text1: ; 9e2a3 (27:62a3)
 	text "SAFARI ZONE's"
 	line "WARDEN is old,"
-	next "but still active!"
+	cont "but still active!"
 
-	page "All his teeth are"
+	para "All his teeth are"
 	line "false, though."
 	done
 
@@ -128344,49 +128344,49 @@ _FuchsiaHouse1Text2: ; 9e2f3 (27:62f3)
 	text "Hmm? You've met"
 	line "BILL?"
 
-	page "He's my grandson!"
+	para "He's my grandson!"
 
-	page "He always liked"
+	para "He always liked"
 	line "collecting things"
-	next "even as a child!"
+	cont "even as a child!"
 	done
 
 _FuchsiaHouse1Text3: ; 9e34d (27:634d)
 	text "BILL files his"
 	line "own #MON data"
-	next "on his PC!"
+	cont "on his PC!"
 
-	page "Did he show you?"
+	para "Did he show you?"
 	done
 
 _FuchsiaPokecenterText1: ; 9e387 (27:6387)
 	text "You can't win"
 	line "with just one"
-	next "strong #MON."
+	cont "strong #MON."
 
-	page "It's tough, but"
+	para "It's tough, but"
 	line "you have to raise"
-	next "them evenly."
+	cont "them evenly."
 	done
 
 _FuchsiaPokecenterText3: ; 9e3de (27:63de)
 	text "There's a narrow"
 	line "trail west of"
-	next "VIRIDIAN CITY."
+	cont "VIRIDIAN CITY."
 
-	page "It goes to #MON"
+	para "It goes to #MON"
 	line "LEAGUE HQ."
-	next "The HQ governs"
-	next "all trainers."
+	cont "The HQ governs"
+	cont "all trainers."
 	done
 
 _WardenGibberishText1: ; 9e444 (27:6444)
 	text "WARDEN: Hif fuff"
 	line "hefifoo!"
 
-	page "Ha lof ha feef ee"
+	para "Ha lof ha feef ee"
 	line "hafahi ho. Heff"
-	next "hee fwee!"
+	cont "hee fwee!"
 	done
 
 _WardenGibberishText2: ; 9e48b (27:648b)
@@ -128402,7 +128402,7 @@ _WardenGibberishText3: ; 9e4b0 (27:64b0)
 _WardenTeethText1: ; 9e4d2 (27:64d2)
 	text $52, " gave the"
 	line "GOLD TEETH to the"
-	next "WARDEN!@@"
+	cont "WARDEN!@@"
 
 _WardenTeethText2: ; 9e4f9 (27:64f9)
 	text $51
@@ -128413,14 +128413,14 @@ _WardenTeethText2: ; 9e4f9 (27:64f9)
 _WardenThankYouText: ; 9e51b (27:651b)
 	text "WARDEN: Thanks,"
 	line "kid! No one could"
-	next "understand a word"
-	next "that I said."
+	cont "understand a word"
+	cont "that I said."
 
-	page "I couldn't work"
+	para "I couldn't work"
 	line "that way."
-	next "Let me give you"
-	next "something for"
-	next "your trouble."
+	cont "Let me give you"
+	cont "something for"
+	cont "your trouble."
 	prompt
 
 _ReceivedHM04Text: ; 9e5a2 (27:65a2)
@@ -128433,19 +128433,19 @@ _HM04ExplanationText: ; 9e5b6 (27:65b6)
 	text "WARDEN: HM04"
 	line "teaches STRENGTH!"
 
-	page "It lets #MON"
+	para "It lets #MON"
 	line "move boulders"
-	next "when you're out-"
-	next "side of battle."
+	cont "when you're out-"
+	cont "side of battle."
 
-	page "Oh yes, did you"
+	para "Oh yes, did you"
 	line "find SECRET HOUSE"
-	next "in SAFARI ZONE?"
+	cont "in SAFARI ZONE?"
 
-	page "If you do, you"
+	para "If you do, you"
 	line "win an HM!"
 
-	page "I hear it's the"
+	para "I hear it's the"
 	line "rare SURF HM."
 	done
 
@@ -128472,29 +128472,29 @@ _SafariZoneEntranceText1: ; 9e6c7 (27:66c7)
 UnnamedText_9e6e4: ; 9e6e4 (27:66e4)
 	text "For just ¥500,"
 	line "you can catch all"
-	next "the #MON you"
-	next "want in the park!"
+	cont "the #MON you"
+	cont "want in the park!"
 
-	page "Would you like to"
+	para "Would you like to"
 	line "join the hunt?@@"
 
 UnnamedText_9e747: ; 9e747 (27:6747)
 	text "That'll be ¥500"
 	line "please!"
 
-	page "We only use a"
+	para "We only use a"
 	line "special # BALL"
-	next "here."
+	cont "here."
 
-	page $52, " received"
+	para $52, " received"
 	line "30 SAFARI BALLs!@@"
 
 _UnnamedText_75360: ; 9e79f (27:679f)
 	db $0
-	page "We'll call you on"
+	para "We'll call you on"
 	line "the PA when you"
-	next "run out of time"
-	next "or SAFARI BALLs!"
+	cont "run out of time"
+	cont "or SAFARI BALLs!"
 	done
 
 _UnnamedText_75365: ; 9e7e3 (27:67e3)
@@ -128513,7 +128513,7 @@ UnnamedText_9e814: ; 9e814 (27:6814)
 _UnnamedText_753bb: ; 9e825 (27:6825)
 	text "Please return any"
 	line "SAFARI BALLs you"
-	next "have left."
+	cont "have left."
 	done
 
 _UnnamedText_753c0: ; 9e854 (27:6854)
@@ -128523,7 +128523,7 @@ _UnnamedText_753c0: ; 9e854 (27:6854)
 _UnnamedText_753c5: ; 9e860 (27:6860)
 	text "Did you get a"
 	line "good haul?"
-	next "Come again!"
+	cont "Come again!"
 	done
 
 _UnnamedText_753e6: ; 9e886 (27:6886)
@@ -128535,22 +128535,22 @@ _UnnamedText_753eb: ; 9e8a7 (27:68a7)
 	text "SAFARI ZONE has 4"
 	line "zones in it."
 
-	page "Each zone has"
+	para "Each zone has"
 	line "different kinds"
-	next "of #MON. Use"
-	next "SAFARI BALLs to"
-	next "catch them!"
+	cont "of #MON. Use"
+	cont "SAFARI BALLs to"
+	cont "catch them!"
 
-	page "When you run out"
+	para "When you run out"
 	line "of time or SAFARI"
-	next "BALLs, it's game"
-	next "over for you!"
+	cont "BALLs, it's game"
+	cont "over for you!"
 
-	page "Before you go,"
+	para "Before you go,"
 	line "open an unused"
-	next "#MON BOX so"
-	next "there's room for"
-	next "new #MON!"
+	cont "#MON BOX so"
+	cont "there's room for"
+	cont "new #MON!"
 	done
 
 _UnnamedText_753f0: ; 9e993 (27:6993)
@@ -128561,27 +128561,27 @@ _UnnamedText_753f0: ; 9e993 (27:6993)
 _UnnamedText_75581: ; 9e9b1 (27:69b1)
 	text "KOGA: Fwahahaha!"
 
-	page "A mere child like"
+	para "A mere child like"
 	line "you dares to"
-	next "challenge me?"
+	cont "challenge me?"
 
-	page "Very well, I"
+	para "Very well, I"
 	line "shall show you"
-	next "true terror as a"
-	next "ninja master!"
+	cont "true terror as a"
+	cont "ninja master!"
 
-	page "You shall feel"
+	para "You shall feel"
 	line "the despair of"
-	next "poison and sleep"
-	next "techniques!"
+	cont "poison and sleep"
+	cont "techniques!"
 	done
 
 _UnnamedText_75586: ; 9ea66 (27:6a66)
 	text "Humph!"
 	line "You have proven"
-	next "your worth!"
+	cont "your worth!"
 
-	page "Here! Take the"
+	para "Here! Take the"
 	line "SOULBADGE!"
 	prompt
 
@@ -128590,26 +128590,26 @@ SECTION "bank28",ROMX,BANK[$28]
 _UnnamedText_7558b: ; a0000 (28:4000)
 	text "When afflicted by"
 	line "TOXIC, #MON"
-	next "suffer more and"
-	next "more as battle"
-	next "progresses!"
+	cont "suffer more and"
+	cont "more as battle"
+	cont "progresses!"
 
-	page "It will surely"
+	para "It will surely"
 	line "terrorize foes!"
 	done
 
 _UnnamedText_75590: ; a0069 (28:4069)
 	text "Now that you have"
 	line "the SOULBADGE,"
-	next "the DEFENSE of"
-	next "your #MON"
-	next "increases!"
+	cont "the DEFENSE of"
+	cont "your #MON"
+	cont "increases!"
 
-	page "It also lets you"
+	para "It also lets you"
 	line "SURF outside of"
-	next "battle!"
+	cont "battle!"
 
-	page "Ah! Take this"
+	para "Ah! Take this"
 	line "too!"
 	done
 
@@ -128624,9 +128624,9 @@ _TM06ExplanationText: ; a00ff (28:40ff)
 	db "TM06 contains"
 	line "TOXIC!"
 
-	page "It is a secret"
+	para "It is a secret"
 	line "technique over"
-	next "400 years old!"
+	cont "400 years old!"
 	done
 
 _TM06NoRoomText: ; a0143 (28:4143)
@@ -128637,13 +128637,13 @@ _TM06NoRoomText: ; a0143 (28:4143)
 _FuchsiaGymBattleText1: ; a0160 (28:4160)
 	text "Strength isn't"
 	line "the key for"
-	next "#MON!"
+	cont "#MON!"
 
-	page "It's strategy!"
+	para "It's strategy!"
 
-	page "I'll show you how"
+	para "I'll show you how"
 	line "strategy can beat"
-	next "brute strength!"
+	cont "brute strength!"
 	done
 
 _FuchsiaGymEndBattleText1: ; a01c2 (28:41c2)
@@ -128654,13 +128654,13 @@ _FuchsiaGymEndBattleText1: ; a01c2 (28:41c2)
 _FuchsiaGymAfterBattleText1: ; a01d8 (28:41d8)
 	text "So, you mix brawn"
 	line "with brains?"
-	next "Good strategy!"
+	cont "Good strategy!"
 	done
 
 _FuchsiaGymBattleText2: ; a0207 (28:4207)
 	text "I wanted to become"
 	line "a ninja, so I"
-	next "joined this GYM!"
+	cont "joined this GYM!"
 	done
 
 _FuchsiaGymEndBattleText2: ; a023a (28:423a)
@@ -128671,14 +128671,14 @@ _FuchsiaGymEndBattleText2: ; a023a (28:423a)
 _FuchsiaGymAfterBattleText2: ; a0248 (28:4248)
 	text "I will keep on"
 	line "training under"
-	next "KOGA, my ninja"
-	next "master!"
+	cont "KOGA, my ninja"
+	cont "master!"
 	done
 
 _FuchsiaGymBattleText3: ; a027e (28:427e)
 	text "Let's see you"
 	line "beat my special"
-	next "techniques!"
+	cont "techniques!"
 	done
 
 _FuchsiaGymEndBattleText3: ; a02a8 (28:42a8)
@@ -128689,16 +128689,16 @@ _FuchsiaGymEndBattleText3: ; a02a8 (28:42a8)
 _FuchsiaGymAfterBattleText3: ; a02bc (28:42bc)
 	text "I like poison and"
 	line "sleep techniques,"
-	next "as they linger"
-	next "after battle!"
+	cont "as they linger"
+	cont "after battle!"
 	done
 
 _FuchsiaGymBattleText4: ; a02fe (28:42fe)
 	text "Stop right there!"
 
-	page "Our invisible"
+	para "Our invisible"
 	line "walls have you"
-	next "frustrated?"
+	cont "frustrated?"
 	done
 
 _FuchsiaGymEndBattleText4: ; a033a (28:433a)
@@ -128710,19 +128710,19 @@ _FuchsiaGymAfterBattleText4: ; a034d (28:434d)
 	text "You impressed me!"
 	line "Here's a hint!"
 
-	page "Look very closely"
+	para "Look very closely"
 	line "for gaps in the"
-	next "invisible walls!"
+	cont "invisible walls!"
 	done
 
 _FuchsiaGymBattleText5: ; a03a1 (28:43a1)
 	text "I also study the"
 	line "way of the ninja"
-	next "with master KOGA!"
+	cont "with master KOGA!"
 
-	page "Ninja have a long"
+	para "Ninja have a long"
 	line "history of using"
-	next "animals!"
+	cont "animals!"
 	done
 
 _FuchsiaGymEndBattleText5: ; a0402 (28:4402)
@@ -128737,9 +128737,9 @@ _FuchsiaGymAfterBattleText5: ; a0409 (28:4409)
 _FuchsiaGymBattleText6: ; a0426 (28:4426)
 	text "Master KOGA comes"
 	line "from a long line"
-	next "of ninjas!"
+	cont "of ninjas!"
 
-	page "What did you"
+	para "What did you"
 	line "descend from?"
 	done
 
@@ -128751,72 +128751,72 @@ _FuchsiaGymEndBattleText6: ; a0470 (28:4470)
 _FuchsiaGymAfterBattleText6: ; a0483 (28:4483)
 	text "Where there is"
 	line "light, there is"
-	next "shadow!"
+	cont "shadow!"
 
-	page "Light and shadow!"
+	para "Light and shadow!"
 	line "Which do you"
-	next "choose?"
+	cont "choose?"
 	done
 
 _UnnamedText_7564e: ; a04d2 (28:44d2)
 	text "Yo! Champ in"
 	line "making!"
 
-	page "FUCHSIA GYM is"
+	para "FUCHSIA GYM is"
 	line "riddled with"
-	next "invisible walls!"
+	cont "invisible walls!"
 
-	page "KOGA might appear"
+	para "KOGA might appear"
 	line "close, but he's"
-	next "blocked off!"
+	cont "blocked off!"
 
-	page "You have to find"
+	para "You have to find"
 	line "gaps in the walls"
-	next "to reach him!"
+	cont "to reach him!"
 	done
 
 _UnnamedText_75653: ; a0574 (28:4574)
 	text "It's amazing how"
 	line "ninja can terrify"
-	next "even now!"
+	cont "even now!"
 	done
 
 _FuchsiaMeetingRoomText1: ; a05a1 (28:45a1)
 	text "We nicknamed the"
 	line "WARDEN SLOWPOKE."
 
-	page "He and SLOWPOKE"
+	para "He and SLOWPOKE"
 	line "both look vacant!"
 	done
 
 _FuchsiaMeetingRoomText2: ; a05e6 (28:45e6)
 	text "SLOWPOKE is very"
 	line "knowledgeable"
-	next "about #MON!"
+	cont "about #MON!"
 
-	page "He even has some"
+	para "He even has some"
 	line "fossils of rare,"
-	next "extinct #MON!"
+	cont "extinct #MON!"
 	done
 
 _FuchsiaMeetingRoomText3: ; a0642 (28:4642)
 	text "SLOWPOKE came in,"
 	line "but I couldn't"
-	next "understand him."
+	cont "understand him."
 
-	page "I think he's got"
+	para "I think he's got"
 	line "a speech problem!"
 	done
 
 _UnnamedText_561bd: ; a0695 (28:4695)
 	text "I'm the FISHING"
 	line "GURU's older"
-	next "brother!"
+	cont "brother!"
 
-	page "I simply Looove"
+	para "I simply Looove"
 	line "fishing!"
 
-	page "Do you like to"
+	para "Do you like to"
 	line "fish?"
 	done
 
@@ -128824,10 +128824,10 @@ _UnnamedText_561c2: ; a06e8 (28:46e8)
 	text "Grand! I like"
 	line "your style!"
 
-	page "Take this and"
+	para "Take this and"
 	line "fish, young one!"
 
-	page $52, " received"
+	para $52, " received"
 	line "a @"
 	TX_RAM $cf4b
 	text "!@@"
@@ -128841,21 +128841,21 @@ _UnnamedText_56217: ; a0758 (28:4758)
 	text "Hello there,"
 	line $52, "!"
 
-	page "How are the fish"
+	para "How are the fish"
 	line "biting?"
 	done
 
 _UnnamedText_5621c: ; a0782 (28:4782)
 	text "Oh no!"
 
-	page "You have no room"
+	para "You have no room"
 	line "for my gift!"
 	done
 
 _Mansion1BattleText2: ; a07a8 (28:47a8)
 	text "Who are you? There"
 	line "shouldn't be"
-	next "anyone here."
+	cont "anyone here."
 	done
 
 _Mansion1EndBattleText2: ; a07d5 (28:47d5)
@@ -128865,13 +128865,13 @@ _Mansion1EndBattleText2: ; a07d5 (28:47d5)
 _Mansion1AfterBattleText2: ; a07dc (28:47dc)
 	text "A key? I don't"
 	line "know what you're"
-	next "talking about."
+	cont "talking about."
 	done
 
 _UnnamedText_44395: ; a080a (28:480a)
 	text "A secret switch!"
 
-	page "Press it?"
+	para "Press it?"
 	done
 
 _UnnamedText_4439a: ; a0826 (28:4826)
@@ -128885,15 +128885,15 @@ _UnnamedText_4439f: ; a0834 (28:4834)
 _UnnamedText_75914: ; a0844 (28:4844)
 	text "Hah!"
 
-	page "I am BLAINE! I"
+	para "I am BLAINE! I"
 	line "am the LEADER of"
-	next "CINNABAR GYM!"
+	cont "CINNABAR GYM!"
 
-	page "My fiery #MON"
+	para "My fiery #MON"
 	line "will incinerate"
-	next "all challengers!"
+	cont "all challengers!"
 
-	page "Hah! You better"
+	para "Hah! You better"
 	line "have BURN HEAL!"
 	done
 
@@ -128901,27 +128901,27 @@ UnnamedText_a08c7: ; a08c7 (28:48c7)
 	text "I have"
 	line "burnt out!"
 
-	page "You have earned"
+	para "You have earned"
 	line "the VOLCANOBADGE!@@"
 
 _UnnamedText_75920: ; a08fd (28:48fd)
 	text "FIRE BLAST is the"
 	line "ultimate fire"
-	next "technique!"
+	cont "technique!"
 
-	page "Don't waste it on"
+	para "Don't waste it on"
 	line "water #MON!"
 	done
 
 _UnnamedText_75925: ; a0946 (28:4946)
 	text "Hah!"
 
-	page "The VOLCANOBADGE"
+	para "The VOLCANOBADGE"
 	line "heightens the"
-	next "SPECIAL abilities"
-	next "of your #MON!"
+	cont "SPECIAL abilities"
+	cont "of your #MON!"
 
-	page "Here, you can"
+	para "Here, you can"
 	line "have this too!"
 	done
 
@@ -128936,12 +128936,12 @@ _TM38ExplanationText: ; a09bc (28:49bc)
 	db "TM38 contains"
 	line "FIRE BLAST!"
 
-	page "Teach it to fire-"
+	para "Teach it to fire-"
 	line "type #MON!"
 
-	page "CHARMELEON or"
+	para "CHARMELEON or"
 	line "PONYTA would be"
-	next "good bets!"
+	cont "good bets!"
 	done
 
 _TM38NoRoomText: ; a0a1e (28:4a1e)
@@ -128952,7 +128952,7 @@ _TM38NoRoomText: ; a0a1e (28:4a1e)
 _UnnamedText_7595f: ; a0a36 (28:4a36)
 	text "Do you know how"
 	line "hot #MON fire"
-	next "breath can get?"
+	cont "breath can get?"
 	done
 
 _UnnamedText_75964: ; a0a65 (28:4a65)
@@ -128963,16 +128963,16 @@ _UnnamedText_75964: ; a0a65 (28:4a65)
 _UnnamedText_75969: ; a0a7a (28:4a7a)
 	text "Fire, or to be"
 	line "more precise,"
-	next "combustion..."
+	cont "combustion..."
 
-	page "Blah, blah, blah,"
+	para "Blah, blah, blah,"
 	line "blah..."
 	done
 
 _UnnamedText_75994: ; a0ac0 (28:4ac0)
 	text "I was a thief, but"
 	line "I became straight"
-	next "as a trainer!"
+	cont "as a trainer!"
 	done
 
 _UnnamedText_75999: ; a0af4 (28:4af4)
@@ -128983,13 +128983,13 @@ _UnnamedText_75999: ; a0af4 (28:4af4)
 _UnnamedText_7599e: ; a0b02 (28:4b02)
 	text "I can't help"
 	line "stealing other"
-	next "people's #MON!"
+	cont "people's #MON!"
 	done
 
 _UnnamedText_759c9: ; a0b2c (28:4b2c)
 	text "You can't win!"
 	line "I have studied"
-	next "#MON totally!"
+	cont "#MON totally!"
 	done
 
 _UnnamedText_759ce: ; a0b58 (28:4b58)
@@ -129000,7 +129000,7 @@ _UnnamedText_759ce: ; a0b58 (28:4b58)
 _UnnamedText_759d3: ; a0b6b (28:4b6b)
 	text "My theories are"
 	line "too complicated"
-	next "for you!"
+	cont "for you!"
 	done
 
 _UnnamedText_759fe: ; a0b95 (28:4b95)
@@ -129016,7 +129016,7 @@ _UnnamedText_75a03: ; a0bb3 (28:4bb3)
 _UnnamedText_75a08: ; a0bc7 (28:4bc7)
 	text "I wish there was"
 	line "a thief #MON!"
-	next "I'd use that!"
+	cont "I'd use that!"
 	done
 
 _UnnamedText_75a33: ; a0bf4 (28:4bf4)
@@ -129031,18 +129031,18 @@ _UnnamedText_75a38: ; a0c19 (28:4c19)
 _UnnamedText_75a3d: ; a0c1e (28:4c1e)
 	text "BLAINE was lost"
 	line "in the mountains"
-	next "when a fiery bird"
-	next "#MON appeared."
+	cont "when a fiery bird"
+	cont "#MON appeared."
 
-	page "Its light enabled"
+	para "Its light enabled"
 	line "BLAINE to find"
-	next "his way down!"
+	cont "his way down!"
 	done
 
 _UnnamedText_75a68: ; a0c90 (28:4c90)
 	text "I've been to many"
 	line "GYMs, but this is"
-	next "my favorite!"
+	cont "my favorite!"
 	done
 
 _UnnamedText_75a6d: ; a0cc1 (28:4cc1)
@@ -129053,7 +129053,7 @@ _UnnamedText_75a6d: ; a0cc1 (28:4cc1)
 _UnnamedText_75a72: ; a0cd2 (28:4cd2)
 	text "Us fire #MON"
 	line "fans like PONYTA"
-	next "and NINETALES!"
+	cont "and NINETALES!"
 	done
 
 _UnnamedText_75a9d: ; a0d00 (28:4d00)
@@ -129069,21 +129069,21 @@ _UnnamedText_75aa2: ; a0d1b (28:4d1b)
 _UnnamedText_75aa7: ; a0d2d (28:4d2d)
 	text "Water beats fire!"
 	line "But, fire melts"
-	next "ice #MON!"
+	cont "ice #MON!"
 	done
 
 _UnnamedText_75ac2: ; a0d5a (28:4d5a)
 	text "Yo! Champ in"
 	line "making!"
 
-	page "The hot-headed"
+	para "The hot-headed"
 	line "BLAINE is a fire"
-	next "#MON pro!"
+	cont "#MON pro!"
 
-	page "Douse his spirits"
+	para "Douse his spirits"
 	line "with water!"
 
-	page "You better take"
+	para "You better take"
 	line "some BURN HEALs!"
 	done
 
@@ -129096,15 +129096,15 @@ _Lab1Text1: ; a0df7 (28:4df7)
 	text "We study #MON"
 	line "extensively here."
 
-	page "People often bring"
+	para "People often bring"
 	line "us rare #MON"
-	next "for examination."
+	cont "for examination."
 	done
 
 _Lab1Text2: ; a0e49 (28:4e49)
 	text "A photo of the"
 	line "LAB's founder,"
-	next "DR.FUJI!"
+	cont "DR.FUJI!"
 	done
 
 _Lab1Text3: ; a0e70 (28:4e70)
@@ -129125,18 +129125,18 @@ _Lab1Text5: ; a0e9e (28:4e9e)
 _Lab2Text1: ; a0eb5 (28:4eb5)
 	text "I found this very"
 	line "strange fossil in"
-	next "MT.MOON!"
+	cont "MT.MOON!"
 
-	page "I think it's a"
+	para "I think it's a"
 	line "rare, prehistoric"
-	next "#MON!"
+	cont "#MON!"
 	done
 
 _TM35PreReceiveText: ; a0f09 (28:4f09)
 	text "Tch-tch-tch!"
 	line "I made a cool TM!"
 
-	page "It can cause all"
+	para "It can cause all"
 	line "kinds of fun!"
 	prompt
 
@@ -129149,12 +129149,12 @@ _ReceivedTM35Text: ; a0f48 (28:4f48)
 _TM35ExplanationText: ; a0f5d (28:4f5d)
 	text "Tch-tch-tch!"
 	line "That's the sound"
-	next "of a METRONOME!"
+	cont "of a METRONOME!"
 
-	page "It tweaks your"
+	para "It tweaks your"
 	line "#MON's brain"
-	next "into using moves"
-	next "it doesn't know!"
+	cont "into using moves"
+	cont "it doesn't know!"
 	done
 
 _TM35NoRoomText: ; a0fc7 (28:4fc7)
@@ -129165,31 +129165,31 @@ _TM35NoRoomText: ; a0fc7 (28:4fc7)
 _Lab3Text2: ; a0fe3 (28:4fe3)
 	text "EEVEE can evolve"
 	line "into 1 of 3 kinds"
-	next "of #MON."
+	cont "of #MON."
 	done
 
 _Lab3Text3: ; a1010 (28:5010)
 	text "There's an e-mail"
 	line "message!"
 
-	page "..."
+	para "..."
 
-	page "The 3 legendary"
+	para "The 3 legendary"
 	line "bird #MON are"
-	next "ARTICUNO, ZAPDOS"
-	next "and MOLTRES."
+	cont "ARTICUNO, ZAPDOS"
+	cont "and MOLTRES."
 
-	page "Their whereabouts"
+	para "Their whereabouts"
 	line "are unknown."
 
-	page "We plan to explore"
+	para "We plan to explore"
 	line "the cavern close"
-	next "to CERULEAN."
+	cont "to CERULEAN."
 
-	page "From: #MON"
+	para "From: #MON"
 	line "RESEARCH TEAM"
 
-	page "..."
+	para "..."
 	done
 
 _Lab3Text5: ; a10d8 (28:50d8)
@@ -129199,13 +129199,13 @@ _Lab3Text5: ; a10d8 (28:50d8)
 _UnnamedText_75dc6: ; a10e8 (28:50e8)
 	text "Hiya!"
 
-	page "I am important"
+	para "I am important"
 	line "doctor!"
 
-	page "I study here rare"
+	para "I study here rare"
 	line "#MON fossils!"
 
-	page "You! Have you a"
+	para "You! Have you a"
 	line "fossil for me?"
 	prompt
 
@@ -129217,17 +129217,17 @@ _UnnamedText_75dd0: ; a1156 (28:5156)
 	text "I take a little"
 	line "time!"
 
-	page "You go for walk a"
+	para "You go for walk a"
 	line "little while!"
 	done
 
 _UnnamedText_75dd5: ; a118d (28:518d)
 	text "Where were you?"
 
-	page "Your fossil is"
+	para "Your fossil is"
 	line "back to life!"
 
-	page "It was @"
+	para "It was @"
 	TX_RAM $cf4b
 	db $0
 	line "like I think!"
@@ -129239,24 +129239,24 @@ _UnnamedText_610ae: ; a11d6 (28:51d6)
 	TX_RAM $cd6d
 	text "!"
 
-	page "It is fossil of"
+	para "It is fossil of"
 	line "@"
 	TX_RAM $cf4b
 	text ", a"
-	next "#MON that is"
-	next "already extinct!"
+	cont "#MON that is"
+	cont "already extinct!"
 
-	page "My Resurrection"
+	para "My Resurrection"
 	line "Machine will make"
-	next "that #MON live"
-	next "again!"
+	cont "that #MON live"
+	cont "again!"
 	done
 
 _UnnamedText_610b3: ; a1259 (28:5259)
 	text "So! You hurry and"
 	line "give me that!"
 
-	page $52, " handed"
+	para $52, " handed"
 	line "over @"
 	TX_RAM $cd6d
 	text "!"
@@ -129266,7 +129266,7 @@ _UnnamedText_610b8: ; a128f (28:528f)
 	text "I take a little"
 	line "time!"
 
-	page "You go for walk a"
+	para "You go for walk a"
 	line "little while!"
 	done
 
@@ -129280,28 +129280,28 @@ _CinnabarPokecenterText1: ; a12de (28:52de)
 	text "You can cancel"
 	line "evolution."
 
-	page "When a #MON is"
+	para "When a #MON is"
 	line "evolving, you can"
-	next "stop it and leave"
-	next "it the way it is."
+	cont "stop it and leave"
+	cont "it the way it is."
 	done
 
 _CinnabarPokecenterText3: ; a133e (28:533e)
 	text "Do you have any"
 	line "friends?"
 
-	page "#MON you get"
+	para "#MON you get"
 	line "in trades grow"
-	next "very quickly."
+	cont "very quickly."
 
-	page "I think it's"
+	para "I think it's"
 	line "worth a try!"
 	done
 
 _CinnabarMartText2: ; a139b (28:539b)
 	text "Don't they have X"
 	line "ATTACK? It's good"
-	next "for battles!"
+	cont "for battles!"
 	done
 
 _CinnabarMartText3: ; a13cb (28:53cb)
@@ -129313,43 +129313,43 @@ _IndigoPlateauLobbyText1: ; a13f0 (28:53f0)
 	text "Yo! Champ in"
 	line "making!"
 
-	page "At #MON LEAGUE,"
+	para "At #MON LEAGUE,"
 	line "you have to face"
-	next "the ELITE FOUR in"
-	next "succession."
+	cont "the ELITE FOUR in"
+	cont "succession."
 
-	page "If you lose, you"
+	para "If you lose, you"
 	line "have to start all"
-	next "over again! This"
-	next "is it! Go for it!"
+	cont "over again! This"
+	cont "is it! Go for it!"
 	done
 
 _IndigoPlateauLobbyText3: ; a148b (28:548b)
 	text "From here on, you"
 	line "face the ELITE"
-	next "FOUR one by one!"
+	cont "FOUR one by one!"
 
-	page "If you win, a"
+	para "If you win, a"
 	line "door opens to the"
-	next "next trainer!"
-	next "Good luck!"
+	cont "next trainer!"
+	cont "Good luck!"
 	done
 
 _CopycatsHouseF1Text1: ; a14f7 (28:54f7)
 	text "My daughter is so"
 	line "self-centered."
-	next "She only has a"
-	next "few friends."
+	cont "She only has a"
+	cont "few friends."
 	done
 
 _CopycatsHouseF1Text2: ; a1535 (28:5535)
 	text "My daughter likes"
 	line "to mimic people."
 
-	page "Her mimicry has"
+	para "Her mimicry has"
 	line "earned her the"
-	next "nickname COPYCAT"
-	next "around here!"
+	cont "nickname COPYCAT"
+	cont "around here!"
 	done
 
 _CopycatsHouseF1Text3: ; a1596 (28:5596)
@@ -129360,16 +129360,16 @@ _UnnamedText_5ccd4: ; a15ad (28:55ad)
 	text $52, ": Hi! Do"
 	line "you like #MON?"
 
-	page $52, ": Uh no, I"
+	para $52, ": Uh no, I"
 	line "just asked you."
 
-	page $52, ": Huh?"
+	para $52, ": Huh?"
 	line "You're strange!"
 
-	page "COPYCAT: Hmm?"
+	para "COPYCAT: Hmm?"
 	line "Quit mimicking?"
 
-	page "But, that's my"
+	para "But, that's my"
 	line "favorite hobby!"
 	prompt
 
@@ -129377,10 +129377,10 @@ _TM31PreReceiveText: ; a1636 (28:5636)
 	text "Oh wow!"
 	line "A # DOLL!"
 
-	page "For me?"
+	para "For me?"
 	line "Thank you!"
 
-	page "You can have"
+	para "You can have"
 	line "this, then!"
 	prompt
 
@@ -129395,20 +129395,20 @@ _TM31ExplanationText1: ; a1689 (28:5689)
 	db "TM31 contains my"
 	line "favorite, MIMIC!"
 
-	page "Use it on a good"
+	para "Use it on a good"
 	line "#MON!@@"
 
 _TM31ExplanationText2: ; a16c5 (28:56c5)
 	text $52, ": Hi!"
 	line "Thanks for TM31!"
 
-	page $52, ": Pardon?"
+	para $52, ": Pardon?"
 
-	page $52, ": Is it"
+	para $52, ": Is it"
 	line "that fun to mimic"
-	next "my every move?"
+	cont "my every move?"
 
-	page "COPYCAT: You bet!"
+	para "COPYCAT: You bet!"
 	line "It's a scream!"
 	done
 
@@ -129419,34 +129419,34 @@ _TM31NoRoomText: ; a1733 (28:5733)
 _CopycatsHouseF2Text2: ; a1749 (28:5749)
 	text "DODUO: Giiih!"
 
-	page "MIRROR MIRROR ON"
+	para "MIRROR MIRROR ON"
 	line "THE WALL, WHO IS"
-	next "THE FAIREST ONE"
-	next "OF ALL?"
+	cont "THE FAIREST ONE"
+	cont "OF ALL?"
 	done
 
 _CopycatsHouseF2Text3: ; a1792 (28:5792)
 	text "This is a rare"
 	line "#MON! Huh?"
-	next "It's only a doll!"
+	cont "It's only a doll!"
 	done
 
 _CopycatsHouseF2Text6: ; a17be (28:57be)
 	text "A game with MARIO"
 	line "wearing a bucket"
-	next "on his head!"
+	cont "on his head!"
 	done
 
 _UnnamedText_5cd17: ; a17ef (28:57ef)
 	text "..."
 
-	page "My Secrets!"
+	para "My Secrets!"
 
-	page "Skill: Mimicry!"
+	para "Skill: Mimicry!"
 	line "Hobby: Collecting"
-	next "dolls!"
-	next "Favorite #MON:"
-	next "CLEFAIRY!"
+	cont "dolls!"
+	cont "Favorite #MON:"
+	cont "CLEFAIRY!"
 	done
 
 _UnnamedText_5cd1c: ; a1842 (28:5842)
@@ -129456,15 +129456,15 @@ _UnnamedText_5cd1c: ; a1842 (28:5842)
 _UnnamedText_5ce8e: ; a1852 (28:5852)
 	text "Grunt!"
 
-	page "I am the KARATE"
+	para "I am the KARATE"
 	line "MASTER! I am the"
-	next "LEADER here!"
+	cont "LEADER here!"
 
-	page "You wish to"
+	para "You wish to"
 	line "challenge us?"
-	next "Expect no mercy!"
+	cont "Expect no mercy!"
 
-	page "Fwaaa!"
+	para "Fwaaa!"
 	done
 
 _UnnamedText_5ce93: ; a18ba (28:58ba)
@@ -129476,23 +129476,23 @@ _UnnamedText_5ce98: ; a18cf (28:58cf)
 	text "Indeed, I have"
 	line "lost!"
 
-	page "But, I beseech"
+	para "But, I beseech"
 	line "you, do not take"
-	next "our emblem as"
-	next "your trophy!"
+	cont "our emblem as"
+	cont "your trophy!"
 
-	page "In return, I will"
+	para "In return, I will"
 	line "give you a prized"
-	next "fighting #MON!"
+	cont "fighting #MON!"
 
-	page "Choose whichever"
+	para "Choose whichever"
 	line "one you like!"
 	done
 
 _UnnamedText_5ce9d: ; a1972 (28:5972)
 	text "Ho!"
 
-	page "Stay and train at"
+	para "Stay and train at"
 	line "Karate with us!"
 	done
 
@@ -129510,7 +129510,7 @@ _FightingDojoAfterBattleText1: ; a19c3 (28:59c3)
 	text "You wait 'til you"
 	line "see our Master!"
 
-	page "I'm a small fry"
+	para "I'm a small fry"
 	line "compared to him!"
 	done
 
@@ -129533,7 +129533,7 @@ _FightingDojoBattleText3: ; a1a51 (28:5a51)
 	text "Nothing tough"
 	line "frightens me!"
 
-	page "I break boulders"
+	para "I break boulders"
 	line "for training!"
 	done
 
@@ -129545,15 +129545,15 @@ _FightingDojoEndBattleText3: ; a1a8d (28:5a8d)
 _FightingDojoAfterBattleText3: ; a1aa4 (28:5aa4)
 	text "The only thing"
 	line "that frightens us"
-	next "is psychic power!"
+	cont "is psychic power!"
 	done
 
 _FightingDojoBattleText4: ; a1ad8 (28:5ad8)
 	text "Hoohah!"
 
-	page "You're trespassing"
+	para "You're trespassing"
 	line "in our FIGHTING"
-	next "DOJO!"
+	cont "DOJO!"
 	done
 
 _FightingDojoEndBattleText4: ; a1b09 (28:5b09)
@@ -129564,19 +129564,19 @@ _FightingDojoEndBattleText4: ; a1b09 (28:5b09)
 _FightingDojoAfterBattleText4: ; a1b1a (28:5b1a)
 	text "The prime fighters"
 	line "across the land"
-	next "train here."
+	cont "train here."
 	done
 
 _WantHitmonleeText: ; a1b4a (28:5b4a)
 	text "You want the"
 	line "hard kicking"
-	next "HITMONLEE?"
+	cont "HITMONLEE?"
 	done
 
 _WantHitmonchanText: ; a1b70 (28:5b70)
 	text "You want the"
 	line "piston punching"
-	next "HITMONCHAN?"
+	cont "HITMONCHAN?"
 	done
 
 _OtherHitmonText: ; a1b9a (28:5b9a)
@@ -129588,55 +129588,55 @@ _UnnamedText_5d162: ; a1bb4 (28:5bb4)
 	text "I had a vision of"
 	line "your arrival!"
 
-	page "I have had psychic"
+	para "I have had psychic"
 	line "powers since I"
-	next "was a child."
+	cont "was a child."
 
-	page "I first learned"
+	para "I first learned"
 	line "to bend spoons"
-	next "with my mind."
+	cont "with my mind."
 
-	page "I dislike fight-"
+	para "I dislike fight-"
 	line "ing, but if you"
-	next "wish, I will show"
-	next "you my powers!"
+	cont "wish, I will show"
+	cont "you my powers!"
 	done
 
 _UnnamedText_5d167: ; a1c73 (28:5c73)
 	text "I'm"
 	line "shocked!"
-	next "But, a loss is a"
-	next "loss."
+	cont "But, a loss is a"
+	cont "loss."
 
-	page "I admit I didn't"
+	para "I admit I didn't"
 	line "work hard enough"
-	next "to win!"
+	cont "to win!"
 
-	page "You earned the"
+	para "You earned the"
 	line "MARSHBADGE!@@"
 
 _UnnamedText_5d16e: ; a1cdc (28:5cdc)
 	text "Everyone has"
 	line "psychic power!"
-	next "People just don't"
-	next "realize it!"
+	cont "People just don't"
+	cont "realize it!"
 	done
 
 _UnnamedText_5d173: ; a1d16 (28:5d16)
 	text "The MARSHBADGE"
 	line "makes #MON up"
-	next "to L70 obey you!"
+	cont "to L70 obey you!"
 
-	page "Stronger #MON"
+	para "Stronger #MON"
 	line "will become wild,"
-	next "ignoring your"
-	next "orders in battle!"
+	cont "ignoring your"
+	cont "orders in battle!"
 
-	page "Just don't raise"
+	para "Just don't raise"
 	line "your #MON too"
-	next "much!"
+	cont "much!"
 
-	page "Wait, please take"
+	para "Wait, please take"
 	line "this TM with you!"
 	done
 
@@ -129648,8 +129648,8 @@ _TM46ExplanationText: ; a1de0 (28:5de0)
 	text $51
 	db "TM46 is PSYWAVE!"
 	line "It uses powerful"
-	next "psychic waves to"
-	next "inflict damage!"
+	cont "psychic waves to"
+	cont "inflict damage!"
 	done
 
 _TM46NoRoomText: ; a1e25 (28:5e25)
@@ -129661,32 +129661,32 @@ _UnnamedText_5d1e6: ; a1e48 (28:5e48)
 	text "Yo! Champ in"
 	line "making!"
 
-	page "SABRINA's #MON"
+	para "SABRINA's #MON"
 	line "use psychic power"
-	next "instead of force!"
+	cont "instead of force!"
 
-	page "Fighting #MON"
+	para "Fighting #MON"
 	line "are weak against"
-	next "psychic #MON!"
+	cont "psychic #MON!"
 
-	page "They get creamed"
+	para "They get creamed"
 	line "before they can"
-	next "even aim a punch!"
+	cont "even aim a punch!"
 	done
 
 _UnnamedText_5d1eb: ; a1ef0 (28:5ef0)
 	text "Psychic power,"
 	line "huh?"
 
-	page "If I had that,"
+	para "If I had that,"
 	line "I'd make a bundle"
-	next "at the slots!"
+	cont "at the slots!"
 	done
 
 _SaffronGymBattleText1: ; a1f33 (28:5f33)
 	text "SABRINA is younger"
 	line "than I, but I"
-	next "respect her!"
+	cont "respect her!"
 	done
 
 _SaffronGymEndBattleText1: ; a1f62 (28:5f62)
@@ -129697,12 +129697,12 @@ _SaffronGymEndBattleText1: ; a1f62 (28:5f62)
 _SaffronGymAfterBattleText1: ; a1f74 (28:5f74)
 	text "In a battle of"
 	line "equals, the one"
-	next "with the stronger"
-	next "will wins!"
+	cont "with the stronger"
+	cont "will wins!"
 
-	page "If you wish"
+	para "If you wish"
 	line "to beat SABRINA,"
-	next "focus on winning!"
+	cont "focus on winning!"
 	done
 
 _SaffronGymBattleText2: ; a1fe0 (28:5fe0)
@@ -129718,15 +129718,15 @@ _SaffronGymEndBattleText2: ; a2002 (28:6002)
 _SaffronGymAfterBattleText2: ; a2019 (28:6019)
 	text "Psychic #MON"
 	line "fear only ghosts"
-	next "and bugs!"
+	cont "and bugs!"
 	done
 
 _SaffronGymBattleText3: ; a2042 (28:6042)
 	text "#MON take on"
 	line "the appearance of"
-	next "their trainers."
+	cont "their trainers."
 
-	page "Your #MON must"
+	para "Your #MON must"
 	line "be tough, then!"
 	done
 
@@ -129738,13 +129738,13 @@ _SaffronGymEndBattleText3: ; a2091 (28:6091)
 _SaffronGymAfterBattleText3: ; a209d (28:609d)
 	text "I must teach"
 	line "better techniques"
-	next "to my #MON!"
+	cont "to my #MON!"
 	done
 
 _SaffronGymBattleText4: ; a20c9 (28:60c9)
 	text "You know that"
 	line "power alone isn't"
-	next "enough!"
+	cont "enough!"
 	done
 
 _SaffronGymEndBattleText4: ; a20f1 (28:60f1)
@@ -129755,13 +129755,13 @@ _SaffronGymEndBattleText4: ; a20f1 (28:60f1)
 _SaffronGymAfterBattleText4: ; a2107 (28:6107)
 	text "SABRINA just wiped"
 	line "out the KARATE"
-	next "MASTER next door!"
+	cont "MASTER next door!"
 	done
 
 _SaffronGymBattleText5: ; a213c (28:613c)
 	text "You and I, our"
 	line "#MON shall"
-	next "fight!"
+	cont "fight!"
 	done
 
 _SaffronGymEndBattleText5: ; a215e (28:615e)
@@ -129772,15 +129772,15 @@ _SaffronGymEndBattleText5: ; a215e (28:615e)
 _SaffronGymAfterBattleText5: ; a2171 (28:6171)
 	text "I knew that this"
 	line "was going to take"
-	next "place."
+	cont "place."
 	done
 
 _SaffronGymBattleText6: ; a219c (28:619c)
 	text "SABRINA is young,"
 	line "but she's also"
-	next "our LEADER!"
+	cont "our LEADER!"
 
-	page "You won't reach"
+	para "You won't reach"
 	line "her easily!"
 	done
 
@@ -129792,23 +129792,23 @@ _SaffronGymEndBattleText6: ; a21e4 (28:61e4)
 _SaffronGymAfterBattleText6: ; a21fe (28:61fe)
 	text "There used to be"
 	line "2 #MON GYMs in"
-	next "SAFFRON."
+	cont "SAFFRON."
 
-	page "The FIGHTING DOJO"
+	para "The FIGHTING DOJO"
 	line "next door lost"
-	next "its GYM status"
-	next "when we went and"
-	next "creamed them!"
+	cont "its GYM status"
+	cont "when we went and"
+	cont "creamed them!"
 	done
 
 _SaffronGymBattleText7: ; a2277 (28:6277)
 	text "SAFFRON #MON"
 	line "GYM is famous for"
-	next "its psychics!"
+	cont "its psychics!"
 
-	page "You want to see"
+	para "You want to see"
 	line "SABRINA!"
-	next "I can tell!"
+	cont "I can tell!"
 	done
 
 _SaffronGymEndBattleText7: ; a22ca (28:62ca)
@@ -129818,15 +129818,15 @@ _SaffronGymEndBattleText7: ; a22ca (28:62ca)
 _SaffronGymAfterBattleText7: ; a22d3 (28:62d3)
 	text "That's right! I"
 	line "used telepathy to"
-	next "read your mind!"
+	cont "read your mind!"
 	done
 
 _SaffronHouse1Text1: ; a2305 (28:6305)
 	text "Thank you for"
 	line "writing. I hope"
-	next "to see you soon!"
+	cont "to see you soon!"
 
-	page "Hey! Don't look"
+	para "Hey! Don't look"
 	line "at my letter!"
 	done
 
@@ -129836,58 +129836,58 @@ _SaffronHouse1Text2: ; a2352 (28:6352)
 _SaffronHouse1Text3: ; a2366 (28:6366)
 	text "The COPYCAT is"
 	line "cute! I'm getting"
-	next "her a # DOLL!"
+	cont "her a # DOLL!"
 	done
 
 _SaffronHouse1Text4: ; a2395 (28:6395)
 	text "I was given a PP"
 	line "UP as a gift."
 
-	page "It's used for"
+	para "It's used for"
 	line "increasing the PP"
-	next "of techniques!"
+	cont "of techniques!"
 	done
 
 _SaffronMartText2: ; a23e3 (28:63e3)
 	text "MAX REPEL lasts"
 	line "longer than SUPER"
-	next "REPEL for keeping"
-	next "weaker #MON"
-	next "away!"
+	cont "REPEL for keeping"
+	cont "weaker #MON"
+	cont "away!"
 	done
 
 _SaffronMartText3: ; a242a (28:642a)
 	text "REVIVE is costly,"
 	line "but it revives"
-	next "fainted #MON!"
+	cont "fainted #MON!"
 	done
 
 _SilphCo1Text1: ; a245a (28:645a)
 	text "Welcome!"
 
-	page "The PRESIDENT is"
+	para "The PRESIDENT is"
 	line "in the boardroom"
-	next "on 11F!"
+	cont "on 11F!"
 	done
 
 _SaffronPokecenterText1: ; a248e (28:648e)
 	text "#MON growth"
 	line "rates differ from"
-	next "specie to specie."
+	cont "specie to specie."
 	done
 
 _SaffronPokecenterText3: ; a24bf (28:64bf)
 	text "SILPH CO. is very"
 	line "famous. That's"
-	next "why it attracted"
-	next "TEAM ROCKET!"
+	cont "why it attracted"
+	cont "TEAM ROCKET!"
 	done
 
 _TM29PreReceiveText: ; a24fe (28:64fe)
 	text "...Wait! Don't"
 	line "say a word!"
 
-	page "You wanted this!"
+	para "You wanted this!"
 	prompt
 
 _ReceivedTM29Text: ; a252a (28:652a)
@@ -129899,9 +129899,9 @@ _ReceivedTM29Text: ; a252a (28:652a)
 _TM29ExplanationText: ; a253e (28:653e)
 	text "TM29 is PSYCHIC!"
 
-	page "It can lower the"
+	para "It can lower the"
 	line "target's SPECIAL"
-	next "abilities."
+	cont "abilities."
 	done
 
 _TM29NoRoomText: ; a257c (28:657c)
@@ -129923,7 +129923,7 @@ _PlayerBlackedOutText: ; a25c5 (28:65c5)
 	text $52, " is out of"
 	line "useable #MON!"
 
-	page $52, " blacked"
+	para $52, " blacked"
 	line "out!"
 	prompt
 
@@ -129940,7 +129940,7 @@ _PokemartTellBuyPrice: ; a2619 (28:6619)
 	TX_RAM $cf4b
 	text "?"
 	line "That will be"
-	next "¥@"
+	cont "¥@"
 	db $2, $9f, $ff, $c3
 	text ". OK?"
 	done
@@ -130016,7 +130016,7 @@ _UnnamedText_6fbe: ; a278a (28:678a)
 	TX_RAM $d036
 	db $0
 	line "did not learn"
-	next "@"
+	cont "@"
 	TX_RAM $cf4b
 	text "!"
 	prompt
@@ -130025,19 +130025,19 @@ _UnnamedText_6fc3: ; a27a4 (28:67a4)
 	TX_RAM $d036
 	text " is"
 	line "trying to learn"
-	next "@"
+	cont "@"
 	TX_RAM $cf4b
 	text "!"
 
-	page "But, @"
+	para "But, @"
 	TX_RAM $d036
 	db $0
 	line "can't learn more"
-	next "than 4 moves!"
+	cont "than 4 moves!"
 
-	page "Delete an older"
+	para "Delete an older"
 	line "move to make room"
-	next "for @"
+	cont "for @"
 	TX_RAM $cf4b
 	text "?"
 	done
@@ -130050,14 +130050,14 @@ _UnnamedText_6fd7: ; a2827 (28:6827)
 
 _UnnamedText_6fdc: ; a2830 (28:6830)
 	db $0
-	page "@"
+	para "@"
 	TX_RAM $d036
 	text " forgot"
 	line "@"
 	TX_RAM $cd6d
 	text "!"
 
-	page "And..."
+	para "And..."
 	prompt
 
 _UnnamedText_6fe1: ; a284d (28:684d)
@@ -130069,9 +130069,9 @@ _PokemonCenterWelcomeText: ; a286d (28:686d)
 	text "Welcome to our"
 	line "#MON CENTER!"
 
-	page "We heal your"
+	para "We heal your"
 	line "#MON back to"
-	next "perfect health!"
+	cont "perfect health!"
 	prompt
 
 _ShallWeHealYourPokemonText: ; a28b4 (28:68b4)
@@ -130087,7 +130087,7 @@ _NeedYourPokemonText: ; a28ce (28:68ce)
 _PokemonFightingFitText: ; a28e8 (28:68e8)
 	text "Thank you!"
 	line "Your #MON are"
-	next "fighting fit!"
+	cont "fighting fit!"
 	prompt
 
 _PokemonCenterFarewellText: ; a2910 (28:6910)
@@ -130098,8 +130098,8 @@ _PokemonCenterFarewellText: ; a2910 (28:6910)
 _CableClubNPCText7: ; a292b (28:692b)
 	text "This area is"
 	line "reserved for 2"
-	next "friends who are"
-	next "linked by cable."
+	cont "friends who are"
+	cont "linked by cable."
 	done
 
 _CableClubNPCText1: ; a2969 (28:6969)
@@ -130110,9 +130110,9 @@ _CableClubNPCText1: ; a2969 (28:6969)
 _CableClubNPCText2: ; a2985 (28:6985)
 	text "Please apply here."
 
-	page "Before opening"
+	para "Before opening"
 	line "the link, we have"
-	next "to save the game."
+	cont "to save the game."
 	done
 
 _CableClubNPCText3: ; a29cc (28:69cc)
@@ -130121,11 +130121,11 @@ _CableClubNPCText3: ; a29cc (28:69cc)
 _CableClubNPCText4: ; a29db (28:69db)
 	text "The link has been"
 	line "closed because of"
-	next "inactivity."
+	cont "inactivity."
 
-	page "Please contact"
+	para "Please contact"
 	line "your friend and"
-	next "come again!"
+	cont "come again!"
 	done
 
 SECTION "bank29",ROMX,BANK[$29]
@@ -130137,7 +130137,7 @@ _CableClubNPCText5: ; a4000 (29:4000)
 _CableClubNPCText6: ; a4014 (29:4014)
 	text "We're making"
 	line "preparations."
-	next "Please wait."
+	cont "Please wait."
 	done
 
 _UsedStrengthText: ; a403c (29:403c)
@@ -130212,11 +130212,11 @@ _UnnamedText_4fe39: ; a4180 (29:4180)
 _UnnamedText_4fe3f: ; a418f (29:418f)
 	text "There's no more"
 	line "room for #MON!"
-	next "@"
+	cont "@"
 	TX_RAM $de06
 	text " was"
-	next "sent to #MON"
-	next "BOX @"
+	cont "sent to #MON"
+	cont "BOX @"
 	TX_RAM $cf4b
 	text " on PC!"
 	done
@@ -130225,11 +130225,11 @@ _UnnamedText_4fe44: ; a41d6 (29:41d6)
 	text "There's no more"
 	line "room for #MON!"
 
-	page "The #MON BOX"
+	para "The #MON BOX"
 	line "is full and can't"
-	next "accept any more!"
+	cont "accept any more!"
 
-	page "Change the BOX at"
+	para "Change the BOX at"
 	line "a #MON CENTER!"
 	done
 
@@ -130238,19 +130238,19 @@ INCLUDE "text/mapPalletTown.asm"
 _ViridianCityText1: ; a43cc (29:43cc)
 	text "Those # BALLs"
 	line "at your waist!"
-	next "You have #MON!"
+	cont "You have #MON!"
 
-	page "It's great that"
+	para "It's great that"
 	line "you can carry and"
-	next "use #MON any"
-	next "time, anywhere!"
+	cont "use #MON any"
+	cont "time, anywhere!"
 	done
 
 _UnnamedText_19122: ; a4437 (29:4437)
 	text "This #MON GYM"
 	line "is always closed."
 
-	page "I wonder who the"
+	para "I wonder who the"
 	line "LEADER is?"
 	done
 
@@ -130262,8 +130262,8 @@ _UnnamedText_19127: ; a4474 (29:4474)
 _UnnamedText_1914d: ; a4494 (29:4494)
 	text "You want to know"
 	line "about the 2 kinds"
-	next "of caterpillar"
-	next "#MON?"
+	cont "of caterpillar"
+	cont "#MON?"
 	done
 
 _UnnamedText_19152: ; a44cd (29:44cd)
@@ -130273,50 +130273,50 @@ _UnnamedText_19152: ; a44cd (29:44cd)
 _UnnamedText_19157: ; a44db (29:44db)
 	text "CATERPIE has no"
 	line "poison, but"
-	next "WEEDLE does."
+	cont "WEEDLE does."
 
-	page "Watch out for its"
+	para "Watch out for its"
 	line "POISON STING!"
 	done
 
 _UnnamedText_19175: ; a4525 (29:4525)
 	text "Oh Grandpa! Don't"
 	line "be so mean!"
-	next "He hasn't had his"
-	next "coffee yet."
+	cont "He hasn't had his"
+	cont "coffee yet."
 	done
 
 _UnnamedText_1917a: ; a4560 (29:4560)
 	text "When I go shop in"
 	line "PEWTER CITY, I"
-	next "have to take the"
-	next "winding trail in"
-	next "VIRIDIAN FOREST."
+	cont "have to take the"
+	cont "winding trail in"
+	cont "VIRIDIAN FOREST."
 	done
 
 _UnnamedText_19191: ; a45b5 (29:45b5)
 	text "You can't go"
 	line "through here!"
 
-	page "This is private"
+	para "This is private"
 	line "property!"
 	done
 
 _UnnamedText_191ca: ; a45ea (29:45ea)
 	text "Yawn!"
 	line "I must have dozed"
-	next "off in the sun."
+	cont "off in the sun."
 
-	page "I had this dream"
+	para "I had this dream"
 	line "about a DROWZEE"
-	next "eating my dream."
-	next "What's this?"
-	next "Where did this TM"
-	next "come from?"
+	cont "eating my dream."
+	cont "What's this?"
+	cont "Where did this TM"
+	cont "come from?"
 
-	page "This is spooky!"
+	para "This is spooky!"
 	line "Here, you can"
-	next "have this TM."
+	cont "have this TM."
 	prompt
 
 _ReceivedTM42Text: ; a469a (29:469a)
@@ -130326,7 +130326,7 @@ _ReceivedTM42Text: ; a469a (29:469a)
 _TM42Explanation: ; a46ad (29:46ad)
 	text "TM42 contains"
 	line "DREAM EATER..."
-	next "...Snore..."
+	cont "...Snore..."
 	done
 
 _TM42NoRoomText: ; a46d7 (29:46d7)
@@ -130337,12 +130337,12 @@ _TM42NoRoomText: ; a46d7 (29:46d7)
 _UnnamedText_1920a: ; a46f9 (29:46f9)
 	text "Ahh, I've had my"
 	line "coffee now and I"
-	next "feel great!"
+	cont "feel great!"
 
-	page "Sure you can go"
+	para "Sure you can go"
 	line "through!"
 
-	page "Are you in a"
+	para "Are you in a"
 	line "hurry?"
 	done
 
@@ -130350,16 +130350,16 @@ _UnnamedText_1920f: ; a4754 (29:4754)
 	text "I see you're using"
 	line "a #DEX."
 
-	page "When you catch a"
+	para "When you catch a"
 	line "#MON, #DEX"
-	next "is automatically"
-	next "updated."
+	cont "is automatically"
+	cont "updated."
 
-	page "What? Don't you"
+	para "What? Don't you"
 	line "know how to catch"
-	next "#MON?"
+	cont "#MON?"
 
-	page "I'll show you"
+	para "I'll show you"
 	line "how to then."
 	done
 
@@ -130371,39 +130371,39 @@ _UnnamedText_19214: ; a47e6 (29:47e6)
 _UnnamedText_19219: ; a4807 (29:4807)
 	text "First, you need"
 	line "to weaken the"
-	next "target #MON."
+	cont "target #MON."
 	done
 
 _ViridianCityText8: ; a4833 (29:4833)
 	text "VIRIDIAN CITY "
 	line "The Eternally"
-	next "Green Paradise"
+	cont "Green Paradise"
 	done
 
 _ViridianCityText9: ; a4860 (29:4860)
 	text "TRAINER TIPS"
 
-	page "Catch #MON"
+	para "Catch #MON"
 	line "and expand your"
-	next "collection!"
+	cont "collection!"
 
-	page "The more you have,"
+	para "The more you have,"
 	line "the easier it is"
-	next "to fight!"
+	cont "to fight!"
 	done
 
 _ViridianCityText10: ; a48c3 (29:48c3)
 	text "TRAINER TIPS"
 
-	page "The battle moves"
+	para "The battle moves"
 	line "of #MON are"
-	next "limited by their"
-	next "POWER POINTs, PP."
+	cont "limited by their"
+	cont "POWER POINTs, PP."
 
-	page "To replenish PP,"
+	para "To replenish PP,"
 	line "rest your tired"
-	next "#MON at a"
-	next "#MON CENTER!"
+	cont "#MON at a"
+	cont "#MON CENTER!"
 	done
 
 _ViridianCityText13: ; a4949 (29:4949)
@@ -130419,23 +130419,23 @@ _ViridianCityText14: ; a4961 (29:4961)
 _PewterCityText1: ; a497f (29:497f)
 	text "It's rumored that"
 	line "CLEFAIRYs came"
-	next "from the moon!"
+	cont "from the moon!"
 
-	page "They appeared "
+	para "They appeared "
 	line "after MOON STONE"
-	next "fell on MT.MOON."
+	cont "fell on MT.MOON."
 	done
 
 _PewterCityText2: ; a49e0 (29:49e0)
 	text "There aren't many"
 	line "serious #MON"
-	next "trainers here!"
+	cont "trainers here!"
 
-	page "They're all like"
+	para "They're all like"
 	line "BUG CATCHERs,"
-	next "but PEWTER GYM's"
-	next "BROCK is totally"
-	next "into it!"
+	cont "but PEWTER GYM's"
+	cont "BROCK is totally"
+	cont "into it!"
 	done
 
 _UnnamedText_193f1: ; a4a56 (29:4a56)
@@ -130446,27 +130446,27 @@ _UnnamedText_193f1: ; a4a56 (29:4a56)
 _UnnamedText_193f6: ; a4a75 (29:4a75)
 	text "Weren't those"
 	line "fossils from MT."
-	next "MOON amazing?"
+	cont "MOON amazing?"
 	done
 
 _UnnamedText_193fb: ; a4aa2 (29:4aa2)
 	text "Really?"
 	line "You absolutely"
-	next "have to go!"
+	cont "have to go!"
 	done
 
 _PewterCityText13: ; a4ac6 (29:4ac6)
 	text "It's right here!"
 	line "You have to pay"
-	next "to get in, but"
-	next "it's worth it!"
-	next "See you around!"
+	cont "to get in, but"
+	cont "it's worth it!"
+	cont "See you around!"
 	done
 
 _UnnamedText_19427: ; a4b14 (29:4b14)
 	text "Psssst!"
 	line "Do you know what"
-	next "I'm doing?"
+	cont "I'm doing?"
 	done
 
 _UnnamedText_1942c: ; a4b38 (29:4b38)
@@ -130477,41 +130477,41 @@ _UnnamedText_1942c: ; a4b38 (29:4b38)
 _UnnamedText_19431: ; a4b55 (29:4b55)
 	text "I'm spraying REPEL"
 	line "to keep #MON"
-	next "out of my garden!"
+	cont "out of my garden!"
 	done
 
 _UnnamedText_1945d: ; a4b87 (29:4b87)
 	text "You're a trainer"
 	line "right? BROCK's"
-	next "looking for new"
-	next "challengers!"
-	next "Follow me!"
+	cont "looking for new"
+	cont "challengers!"
+	cont "Follow me!"
 	done
 
 _UnnamedText_19462: ; a4bce (29:4bce)
 	text "If you have the"
 	line "right stuff, go"
-	next "take on BROCK!"
+	cont "take on BROCK!"
 	done
 
 _PewterCityText6: ; a4bfe (29:4bfe)
 	text "TRAINER TIPS"
 
-	page "Any #MON that"
+	para "Any #MON that"
 	line "takes part in"
-	next "battle, however"
-	next "short, earns EXP!"
+	cont "battle, however"
+	cont "short, earns EXP!"
 	done
 
 _PewterCityText7: ; a4c4a (29:4c4a)
 	text "NOTICE!"
 
-	page "Thieves have been"
+	para "Thieves have been"
 	line "stealing #MON"
-	next "fossils at MT."
-	next "MOON! Please call"
-	next "PEWTER POLICE"
-	next "with any info!"
+	cont "fossils at MT."
+	cont "MOON! Please call"
+	cont "PEWTER POLICE"
+	cont "with any info!"
 	done
 
 _PewterCityText10: ; a4cb1 (29:4cb1)
@@ -130522,86 +130522,86 @@ _PewterCityText10: ; a4cb1 (29:4cb1)
 _PewterCityText11: ; a4ccb (29:4ccb)
 	text "PEWTER CITY"
 	line "#MON GYM"
-	next "LEADER: BROCK"
+	cont "LEADER: BROCK"
 
-	page "The Rock Solid"
+	para "The Rock Solid"
 	line "#MON Trainer!"
 	done
 
 _PewterCityText12: ; a4d0c (29:4d0c)
 	text "PEWTER CITY"
 	line "A Stone Gray"
-	next "City"
+	cont "City"
 	done
 
 _UnnamedText_19668: ; a4d2b (29:4d2b)
 	text $53, ": Yo!"
 	line $52, "!"
 
-	page "You're still"
+	para "You're still"
 	line "struggling along"
-	next "back here?"
+	cont "back here?"
 
-	page "I'm doing great!"
+	para "I'm doing great!"
 	line "I caught a bunch"
-	next "of strong and"
-	next "smart #MON!"
+	cont "of strong and"
+	cont "smart #MON!"
 
-	page "Here, let me see"
+	para "Here, let me see"
 	line "what you caught,"
-	next $52, "!"
+	cont $52, "!"
 	done
 
 _UnnamedText_1966d: ; a4dbe (29:4dbe)
 	text "Hey!"
 	line "Take it easy!"
-	next "You won already!"
+	cont "You won already!"
 	prompt
 
 _UnnamedText_19672: ; a4de3 (29:4de3)
 	text "Heh!"
 	line "You're no match"
-	next "for my genius!"
+	cont "for my genius!"
 	prompt
 
 _UnnamedText_19677: ; a4e07 (29:4e07)
 	text $53, ": Hey,"
 	line "guess what?"
 
-	page "I went to BILL's"
+	para "I went to BILL's"
 	line "and got him to"
-	next "show me his rare"
-	next "#MON!"
+	cont "show me his rare"
+	cont "#MON!"
 
-	page "That added a lot"
+	para "That added a lot"
 	line "of pages to my"
-	next "#DEX!"
+	cont "#DEX!"
 
-	page "After all, BILL's"
+	para "After all, BILL's"
 	line "world famous as a"
-	next "#MANIAC!"
+	cont "#MANIAC!"
 
-	page "He invented the"
+	para "He invented the"
 	line "#MON Storage"
-	next "System on PC!"
+	cont "System on PC!"
 
-	page "Since you're using"
+	para "Since you're using"
 	line "his system, go"
-	next "thank him!"
+	cont "thank him!"
 
-	page "Well, I better"
+	para "Well, I better"
 	line "get rolling!"
-	next "Smell ya later!"
+	cont "Smell ya later!"
 	done
 
 _UnnamedText_196d9: ; a4f27 (29:4f27)
 	text "Hey! Stay out!"
 	line "It's not your"
-	next "yard! Huh? Me?"
+	cont "yard! Huh? Me?"
 
-	page "I'm an innocent"
+	para "I'm an innocent"
 	line "bystander! Don't"
-	next "you believe me?"
+	cont "you believe me?"
 	done
 
 _ReceivedTM28Text: ; a4f82 (29:4f82)
@@ -130617,14 +130617,14 @@ _TM28NoRoomText: ; a4fb3 (29:4fb3)
 	text "Make room for"
 	line "this!"
 
-	page "I can't run until"
+	para "I can't run until"
 	line "I give it to you!"
 	done
 
 _UnnamedText_196ee: ; a4feb (29:4feb)
 	text "Stop!"
 	line "I give up! I'll"
-	next "leave quietly!"
+	cont "leave quietly!"
 	prompt
 
 _UnnamedText_196f3: ; a5010 (29:5010)
@@ -130635,64 +130635,64 @@ _UnnamedText_196f3: ; a5010 (29:5010)
 _CeruleanCityText3: ; a5030 (29:5030)
 	text "You're a trainer"
 	line "too? Collecting,"
-	next "fighting, it's a"
-	next "tough life."
+	cont "fighting, it's a"
+	cont "tough life."
 	done
 
 _CeruleanCityText4: ; a506e (29:506e)
 	text "That bush in"
 	line "front of the shop"
-	next "is in the way."
+	cont "is in the way."
 
-	page "There might be a"
+	para "There might be a"
 	line "way around."
 	done
 
 _CeruleanCityText5: ; a50ba (29:50ba)
 	text "You're making an"
 	line "encyclopedia on"
-	next "#MON? That"
-	next "sounds amusing."
+	cont "#MON? That"
+	cont "sounds amusing."
 	done
 
 _CeruleanCityText6: ; a50f6 (29:50f6)
 	text "The people here"
 	line "were robbed."
 
-	page "It's obvious that"
+	para "It's obvious that"
 	line "TEAM ROCKET is"
-	next "behind this most"
-	next "heinous crime!"
+	cont "behind this most"
+	cont "heinous crime!"
 
-	page "Even our POLICE"
+	para "Even our POLICE"
 	line "force has trouble"
-	next "with the ROCKETs!"
+	cont "with the ROCKETs!"
 	done
 
 _UnnamedText_19730: ; a5188 (29:5188)
 	text "OK! SLOWBRO!"
 	line "Use SONICBOOM!"
-	next "Come on, SLOWBRO"
-	next "pay attention!"
+	cont "Come on, SLOWBRO"
+	cont "pay attention!"
 	done
 
 _UnnamedText_19735: ; a51c5 (29:51c5)
 	text "SLOWBRO punch!"
 	line "No! You blew it"
-	next "again!"
+	cont "again!"
 	done
 
 _UnnamedText_1973a: ; a51ec (29:51ec)
 	text "SLOWBRO, WITHDRAW!"
 	line "No! That's wrong!"
 
-	page "It's so hard to"
+	para "It's so hard to"
 	line "control #MON!"
 
-	page "Your #MON's"
+	para "Your #MON's"
 	line "obedience depends"
-	next "on your abilities"
-	next "as a trainer!"
+	cont "on your abilities"
+	cont "as a trainer!"
 	done
 
 _UnnamedText_1976f: ; a526b (29:526b)
@@ -130719,51 +130719,51 @@ _CeruleanCityText9: ; a52d6 (29:52d6)
 	text "I want a bright"
 	line "red BICYCLE!"
 
-	page "I'll keep it at"
+	para "I'll keep it at"
 	line "home, so it won't"
-	next "get dirty!"
+	cont "get dirty!"
 	done
 
 _CeruleanCityText10: ; a531f (29:531f)
 	text "This is CERULEAN"
 	line "CAVE! Horribly"
-	next "strong #MON"
-	next "live in there!"
+	cont "strong #MON"
+	cont "live in there!"
 
-	page "The #MON LEAGUE"
+	para "The #MON LEAGUE"
 	line "champion is the"
-	next "only person who"
-	next "is allowed in!"
+	cont "only person who"
+	cont "is allowed in!"
 	done
 
 _CeruleanCityText12: ; a539a (29:539a)
 	text "CERULEAN CITY"
 	line "A Mysterious,"
-	next "Blue Aura"
-	next "Surrounds It"
+	cont "Blue Aura"
+	cont "Surrounds It"
 	done
 
 _CeruleanCityText13: ; a53ce (29:53ce)
 	text "TRAINER TIPS"
 
-	page "Pressing B Button"
+	para "Pressing B Button"
 	line "during evolution"
-	next "cancels the whole"
-	next "process."
+	cont "cancels the whole"
+	cont "process."
 	done
 
 _CeruleanCityText16: ; a541a (29:541a)
 	text "Grass and caves"
 	line "handled easily!"
-	next "BIKE SHOP"
+	cont "BIKE SHOP"
 	done
 
 _CeruleanCityText17: ; a5445 (29:5445)
 	text "CERULEAN CITY"
 	line "#MON GYM"
-	next "LEADER: MISTY"
+	cont "LEADER: MISTY"
 
-	page "The Tomboyish"
+	para "The Tomboyish"
 	line "Mermaid!"
 	done
 
@@ -130781,44 +130781,44 @@ _UnnamedText_44146: ; a54c0 (29:54c0)
 	text "Hahaha, I guess"
 	line "not."
 
-	page "That white hand"
+	para "That white hand"
 	line "on your shoulder,"
-	next "it's not real."
+	cont "it's not real."
 	done
 
 _LavenderTownText2: ; a5506 (29:5506)
 	text "This town is known"
 	line "as the grave site"
-	next "of #MON."
+	cont "of #MON."
 
-	page "Memorial services"
+	para "Memorial services"
 	line "are held in"
-	next "#MON TOWER."
+	cont "#MON TOWER."
 	done
 
 _LavenderTownText3: ; a555f (29:555f)
 	text "GHOSTs appeared"
 	line "in #MON TOWER."
 
-	page "I think they're"
+	para "I think they're"
 	line "the spirits of"
-	next "#MON that the"
-	next "ROCKETs killed."
+	cont "#MON that the"
+	cont "ROCKETs killed."
 	done
 
 _LavenderTownText4: ; a55bb (29:55bb)
 	text "LAVENDER TOWN"
 	line "The Noble Purple"
-	next "Town"
+	cont "Town"
 	done
 
 _LavenderTownText5: ; a55e0 (29:55e0)
 	text "New SILPH SCOPE!"
 
-	page "Make the Invisible"
+	para "Make the Invisible"
 	line "Plain to See!"
 
-	page "SILPH CO."
+	para "SILPH CO."
 	done
 
 _LavenderTownText8: ; a561d (29:561d)
@@ -130829,29 +130829,29 @@ _LavenderTownText8: ; a561d (29:561d)
 _LavenderTownText9: ; a563c (29:563c)
 	text "May the Souls of"
 	line "#MON Rest Easy"
-	next "#MON TOWER"
+	cont "#MON TOWER"
 	done
 
 _VermilionCityText1: ; a5668 (29:5668)
 	text "We're careful"
 	line "about pollution!"
 
-	page "We've heard GRIMER"
+	para "We've heard GRIMER"
 	line "multiplies in"
-	next "toxic sludge!"
+	cont "toxic sludge!"
 	done
 
 _UnnamedText_198a7: ; a56b5 (29:56b5)
 	text "Did you see S.S."
 	line "ANNE moored in"
-	next "the harbor?"
+	cont "the harbor?"
 	done
 
 _UnnamedText_198ac: ; a56e2 (29:56e2)
 	text "So, S.S.ANNE has"
 	line "departed!"
 
-	page "She'll be back in"
+	para "She'll be back in"
 	line "about a year."
 	done
 
@@ -130864,7 +130864,7 @@ _SSAnneWelcomeText9: ; a5734 (29:5734)
 	text "Welcome to S.S."
 	line "ANNE!"
 
-	page "Excuse me, do you"
+	para "Excuse me, do you"
 	line "have a ticket?"
 	prompt
 
@@ -130872,18 +130872,18 @@ _SSAnneFlashedTicketText: ; a576c (29:576c)
 	text $52, " flashed"
 	line "the S.S.TICKET!"
 
-	page "Great! Welcome to"
+	para "Great! Welcome to"
 	line "S.S.ANNE!"
 	done
 
 _SSAnneNoTicketText: ; a57a3 (29:57a3)
 	text $52, " doesn't"
 	line "have the needed"
-	next "S.S.TICKET."
+	cont "S.S.TICKET."
 
-	page "Sorry!"
+	para "Sorry!"
 
-	page "You need a ticket"
+	para "You need a ticket"
 	line "to get aboard."
 	done
 
@@ -130894,9 +130894,9 @@ _SSAnneNotHereText: ; a57f1 (29:57f1)
 _VermilionCityText4: ; a5805 (29:5805)
 	text "I'm putting up a"
 	line "building on this"
-	next "plot of land."
+	cont "plot of land."
 
-	page "My #MON is"
+	para "My #MON is"
 	line "tamping the land."
 	done
 
@@ -130908,50 +130908,50 @@ _VermilionCityText14: ; a586b (29:586b)
 	text $51
 	db "A MACHOP is"
 	line "stomping the land"
-	next "flat."
+	cont "flat."
 	done
 
 _VermilionCityText6: ; a5891 (29:5891)
 	text "S.S.ANNE is a"
 	line "famous luxury"
-	next "cruise ship."
+	cont "cruise ship."
 
-	page "We visit VERMILION"
+	para "We visit VERMILION"
 	line "once a year."
 	done
 
 _VermilionCityText7: ; a58db (29:58db)
 	text "VERMILION CITY"
 	line "The Port of"
-	next "Exquisite Sunsets"
+	cont "Exquisite Sunsets"
 	done
 
 _VermilionCityText8: ; a5909 (29:5909)
 	text "NOTICE!"
 
-	page "ROUTE 12 may be"
+	para "ROUTE 12 may be"
 	line "blocked off by a"
-	next "sleeping #MON."
+	cont "sleeping #MON."
 
-	page "Detour through"
+	para "Detour through"
 	line "ROCK TUNNEL to"
-	next "LAVENDER TOWN."
+	cont "LAVENDER TOWN."
 
-	page "VERMILION POLICE"
+	para "VERMILION POLICE"
 	done
 
 _VermilionCityText11: ; a5980 (29:5980)
 	text "#MON FAN CLUB"
 	line "All #MON fans"
-	next "welcome!"
+	cont "welcome!"
 	done
 
 _VermilionCityText12: ; a59a6 (29:59a6)
 	text "VERMILION CITY"
 	line "#MON GYM"
-	next "LEADER: LT.SURGE"
+	cont "LEADER: LT.SURGE"
 
-	page "The Lightning "
+	para "The Lightning "
 	line "American!"
 	done
 
@@ -130963,40 +130963,40 @@ _CeladonCityText1: ; a59fb (29:59fb)
 	text "I got my KOFFING"
 	line "in CINNABAR!"
 
-	page "It's nice, but it"
+	para "It's nice, but it"
 	line "breathes poison"
-	next "when it's angry!"
+	cont "when it's angry!"
 	done
 
 _CeladonCityText2: ; a5a4b (29:5a4b)
 	text "Heheh! This GYM"
 	line "is great! It's"
-	next "full of women!"
+	cont "full of women!"
 	done
 
 _CeladonCityText3: ; a5a79 (29:5a79)
 	text "The GAME CORNER"
 	line "is bad for our"
-	next "city's image!"
+	cont "city's image!"
 	done
 
 _CeladonCityText4: ; a5aa6 (29:5aa6)
 	text "Moan! I blew it"
 	line "all at the slots!"
 
-	page "I knew I should"
+	para "I knew I should"
 	line "have cashed in my"
-	next "coins for prizes!"
+	cont "coins for prizes!"
 	done
 
 _TM41PreText: ; a5afd (29:5afd)
 	text "Hello, there!"
 
-	page "I've seen you,"
+	para "I've seen you,"
 	line "but I never had a"
-	next "chance to talk!"
+	cont "chance to talk!"
 
-	page "Here's a gift for"
+	para "Here's a gift for"
 	line "dropping by!"
 	prompt
 
@@ -131010,10 +131010,10 @@ _TM41ExplanationText: ; a5b6e (29:5b6e)
 	text "TM41 teaches"
 	line "SOFTBOILED!"
 
-	page "Only one #MON"
+	para "Only one #MON"
 	line "can use it!"
 
-	page "That #MON is"
+	para "That #MON is"
 	line "CHANSEY!"
 	done
 
@@ -131026,9 +131026,9 @@ _CeladonCityText6: ; a5bd9 (29:5bd9)
 	text "This is my trusted"
 	line "pal, POLIWRATH!"
 
-	page "It evolved from"
+	para "It evolved from"
 	line "POLIWHIRL when I"
-	next "used WATER STONE!"
+	cont "used WATER STONE!"
 	done
 
 _CeladonCityText7: ; a5c30 (29:5c30)
@@ -131048,31 +131048,31 @@ _CeladonCityText9: ; a5c63 (29:5c63)
 _CeladonCityText10: ; a5c82 (29:5c82)
 	text "TRAINER TIPS"
 
-	page "X ACCURACY boosts"
+	para "X ACCURACY boosts"
 	line "the accuracy of"
-	next "techniques!"
+	cont "techniques!"
 
-	page "DIRE HIT jacks up"
+	para "DIRE HIT jacks up"
 	line "the likelihood of"
-	next "critical hits!"
+	cont "critical hits!"
 
-	page "Get your items at"
+	para "Get your items at"
 	line "CELADON DEPT."
-	next "STORE!"
+	cont "STORE!"
 	done
 
 _CeladonCityText11: ; a5d18 (29:5d18)
 	text "CELADON CITY"
 	line "The City of"
-	next "Rainbow Dreams"
+	cont "Rainbow Dreams"
 	done
 
 _CeladonCityText13: ; a5d41 (29:5d41)
 	text "CELADON CITY"
 	line "#MON GYM"
-	next "LEADER: ERIKA"
+	cont "LEADER: ERIKA"
 
-	page "The Nature Loving"
+	para "The Nature Loving"
 	line "Princess!"
 	done
 
@@ -131083,62 +131083,62 @@ _CeladonCityText14: ; a5d82 (29:5d82)
 _CeladonCityText15: ; a5d93 (29:5d93)
 	text "Find what you"
 	line "need at CELADON"
-	next "DEPT. STORE!"
+	cont "DEPT. STORE!"
 	done
 
 _CeladonCityText16: ; a5dbf (29:5dbf)
 	text "TRAINER TIPS"
 
-	page "GUARD SPEC."
+	para "GUARD SPEC."
 	line "protects #MON"
-	next "against SPECIAL"
-	next "attacks such as"
-	next "fire and water!"
+	cont "against SPECIAL"
+	cont "attacks such as"
+	cont "fire and water!"
 
-	page "Get your items at"
+	para "Get your items at"
 	line "CELADON DEPT."
-	next "STORE!"
+	cont "STORE!"
 	done
 
 _CeladonCityText17: ; a5e3e (29:5e3e)
 	text "Coins exchanged"
 	line "for prizes!"
-	next "PRIZE EXCHANGE"
+	cont "PRIZE EXCHANGE"
 	done
 
 _CeladonCityText18: ; a5e6a (29:5e6a)
 	text "ROCKET GAME CORNER"
 	line "The playground"
-	next "for grown-ups!"
+	cont "for grown-ups!"
 	done
 
 _FuchsiaCityText1: ; a5e9c (29:5e9c)
 	text "Did you try the"
 	line "SAFARI GAME? Some"
-	next "#MON can only"
-	next "be caught there."
+	cont "#MON can only"
+	cont "be caught there."
 	done
 
 _FuchsiaCityText2: ; a5ede (29:5ede)
 	text "SAFARI ZONE has a"
 	line "zoo in front of"
-	next "the entrance."
+	cont "the entrance."
 
-	page "Out back is the"
+	para "Out back is the"
 	line "SAFARI GAME for"
-	next "catching #MON."
+	cont "catching #MON."
 	done
 
 _FuchsiaCityText3: ; a5f3e (29:5f3e)
 	text "ERIK: Where's"
 	line "SARA? I said I'd"
-	next "meet her here."
+	cont "meet her here."
 	done
 
 _FuchsiaCityText4: ; a5f6b (29:5f6b)
 	text "That item ball in"
 	line "there is really a"
-	next "#MON."
+	cont "#MON."
 	done
 
 _FuchsiaCityText5: ; a5f96 (29:5f96)
@@ -131148,7 +131148,7 @@ _FuchsiaCityText5: ; a5f96 (29:5f96)
 _FuchsiaCityText11: ; a5f99 (29:5f99)
 	text "FUCHSIA CITY"
 	line "Behold! It's"
-	next "Passion Pink!"
+	cont "Passion Pink!"
 	done
 
 _FuchsiaCityText13: ; a5fc1 (29:5fc1)
@@ -131169,63 +131169,63 @@ _FuchsiaCityText17: ; a5ff6 (29:5ff6)
 _FuchsiaCityText18: ; a6011 (29:6011)
 	text "FUCHSIA CITY"
 	line "#MON GYM"
-	next "LEADER: KOGA"
+	cont "LEADER: KOGA"
 
-	page "The Poisonous"
+	para "The Poisonous"
 	line "Ninja Master"
 	done
 
 _FuchsiaCityChanseyText: ; a6050 (29:6050)
 	text "Name: CHANSEY"
 
-	page "Catching one is"
+	para "Catching one is"
 	line "all up to chance."
 	prompt
 
 _FuchsiaCityVoltorbText: ; a6081 (29:6081)
 	text "Name: VOLTORB"
 
-	page "The very image of"
+	para "The very image of"
 	line "a # BALL."
 	prompt
 
 _FuchsiaCityKangaskhanText: ; a60ac (29:60ac)
 	text "Name: KANGASKHAN"
 
-	page "A maternal #MON"
+	para "A maternal #MON"
 	line "that raises its"
-	next "young in a pouch"
-	next "on its belly."
+	cont "young in a pouch"
+	cont "on its belly."
 	prompt
 
 _FuchsiaCitySlowpokeText: ; a60fd (29:60fd)
 	text "Name: SLOWPOKE"
 
-	page "Friendly and very"
+	para "Friendly and very"
 	line "slow moving."
 	prompt
 
 _FuchsiaCityLaprasText: ; a612c (29:612c)
 	text "Name: LAPRAS"
 
-	page "A.K.A. the king"
+	para "A.K.A. the king"
 	line "of the seas."
 	prompt
 
 _FuchsiaCityOmanyteText: ; a6157 (29:6157)
 	text "Name: OMANYTE"
 
-	page "A #MON that"
+	para "A #MON that"
 	line "was resurrected"
-	next "from a fossil."
+	cont "from a fossil."
 	prompt
 
 _FuchsiaCityKabutoText: ; a6191 (29:6191)
 	text "Name: KABUTO"
 
-	page "A #MON that"
+	para "A #MON that"
 	line "was resurrected"
-	next "from a fossil."
+	cont "from a fossil."
 	prompt
 
 _UnnamedText_19b2a: ; a61ca (29:61ca)
@@ -131240,21 +131240,21 @@ _CinnabarIslandText8: ; a61cf (29:61cf)
 _CinnabarIslandText1: ; a61e6 (29:61e6)
 	text "CINNABAR GYM's"
 	line "BLAINE is an odd"
-	next "man who has lived"
-	next "here for decades."
+	cont "man who has lived"
+	cont "here for decades."
 	done
 
 _CinnabarIslandText2: ; a622a (29:622a)
 	text "Scientists conduct"
 	line "experiments in"
-	next "the burned out"
-	next "building."
+	cont "the burned out"
+	cont "building."
 	done
 
 _CinnabarIslandText3: ; a6266 (29:6266)
 	text "CINNABAR ISLAND"
 	line "The Fiery Town of"
-	next "Burning Desire"
+	cont "Burning Desire"
 	done
 
 _CinnabarIslandText6: ; a6298 (29:6298)
@@ -131264,9 +131264,9 @@ _CinnabarIslandText6: ; a6298 (29:6298)
 _CinnabarIslandText7: ; a62a2 (29:62a2)
 	text "CINNABAR ISLAND"
 	line "#MON GYM"
-	next "LEADER: BLAINE"
+	cont "LEADER: BLAINE"
 
-	page "The Hot-Headed"
+	para "The Hot-Headed"
 	line "Quiz Master!"
 	done
 
@@ -131303,37 +131303,37 @@ _SaffronCityText6: ; a637e (29:637e)
 _SaffronCityText7: ; a639e (29:639e)
 	text "With SILPH under"
 	line "control, we can"
-	next "exploit #MON"
-	next "around the world!"
+	cont "exploit #MON"
+	cont "around the world!"
 	done
 
 _SaffronCityText8: ; a63df (29:63df)
 	text "You beat TEAM"
 	line "ROCKET all alone?"
-	next "That's amazing!"
+	cont "That's amazing!"
 	done
 
 _SaffronCityText9: ; a640f (29:640f)
 	text "Yeah! TEAM ROCKET"
 	line "is gone!"
-	next "It's safe to go"
-	next "out again!"
+	cont "It's safe to go"
+	cont "out again!"
 	done
 
 _SaffronCityText10: ; a6445 (29:6445)
 	text "People should be"
 	line "flocking back to"
-	next "SAFFRON now."
+	cont "SAFFRON now."
 	done
 
 _SaffronCityText11: ; a6475 (29:6475)
 	text "I flew here on my"
 	line "PIDGEOT when I"
-	next "read about SILPH."
+	cont "read about SILPH."
 
-	page "It's already over?"
+	para "It's already over?"
 	line "I missed the"
-	next "media action."
+	cont "media action."
 	done
 
 _SaffronCityText12: ; a64d6 (29:64d6)
@@ -131342,14 +131342,14 @@ _SaffronCityText12: ; a64d6 (29:64d6)
 _SaffronCityText13: ; a64eb (29:64eb)
 	text "I saw ROCKET"
 	line "BOSS escaping"
-	next "SILPH's building."
+	cont "SILPH's building."
 	done
 
 _SaffronCityText14: ; a6518 (29:6518)
 	text "I'm a security"
 	line "guard."
 
-	page "Suspicious kids I"
+	para "Suspicious kids I"
 	line "don't allow in!"
 	done
 
@@ -131357,14 +131357,14 @@ _SaffronCityText15: ; a654f (29:654f)
 	text "..."
 	line "Snore..."
 
-	page "Hah! He's taking"
+	para "Hah! He's taking"
 	line "a snooze!"
 	done
 
 _SaffronCityText16: ; a6577 (29:6577)
 	text "SAFFRON CITY"
 	line "Shining, Golden"
-	next "Land of Commerce"
+	cont "Land of Commerce"
 	done
 
 _SaffronCityText17: ; a65a6 (29:65a6)
@@ -131374,34 +131374,34 @@ _SaffronCityText17: ; a65a6 (29:65a6)
 _SaffronCityText18: ; a65b5 (29:65b5)
 	text "SAFFRON CITY"
 	line "#MON GYM"
-	next "LEADER: SABRINA"
+	cont "LEADER: SABRINA"
 
-	page "The Master of"
+	para "The Master of"
 	line "Psychic #MON!"
 	done
 
 _SaffronCityText20: ; a65f8 (29:65f8)
 	text "TRAINER TIPS"
 
-	page "FULL HEAL cures"
+	para "FULL HEAL cures"
 	line "all ailments like"
-	next "sleep and burns."
+	cont "sleep and burns."
 
-	page "It costs a bit"
+	para "It costs a bit"
 	line "more, but it's"
-	next "more convenient."
+	cont "more convenient."
 	done
 
 _SaffronCityText21: ; a6667 (29:6667)
 	text "TRAINER TIPS"
 
-	page "New GREAT BALL"
+	para "New GREAT BALL"
 	line "offers improved"
-	next "capture rates."
+	cont "capture rates."
 
-	page "Try it on those"
+	para "Try it on those"
 	line "hard-to-catch"
-	next "#MON."
+	cont "#MON."
 	done
 
 _SaffronCityText22: ; a66c7 (29:66c7)
@@ -131418,7 +131418,7 @@ _SaffronCityText25: ; a66f5 (29:66f5)
 	text "SILPH's latest"
 	line "product!"
 
-	page "Release to be"
+	para "Release to be"
 	line "determined..."
 	done
 
@@ -131426,7 +131426,7 @@ _ItemUseBallText00: ; a6729 (29:6729)
 	text "It dodged the"
 	line "thrown BALL!"
 
-	page "This #MON"
+	para "This #MON"
 	line "can't be caught!"
 	prompt
 
@@ -131454,14 +131454,14 @@ _ItemUseBallText05: ; a67cf (29:67cf)
 	text "All right!",$4F,"@",1
 	dw W_ENEMYMONNAME
 	text " was"
-	next "caught!@@"
+	cont "caught!@@"
 
 _ItemUseBallText07: ; a67ee (29:67ee)
 	db 1
 	dw $DE06
 	text " was"
 	line "transferred to"
-	next "BILL's PC!"
+	cont "BILL's PC!"
 	prompt
 
 _ItemUseBallText08: ; a6810 (29:6810)
@@ -131469,7 +131469,7 @@ _ItemUseBallText08: ; a6810 (29:6810)
 	dw $DE06
 	text " was"
 	line "transferred to"
-	next "someone's PC!"
+	cont "someone's PC!"
 	prompt
 
 _ItemUseBallText06: ; a6835 (29:6835)
@@ -131517,7 +131517,7 @@ _PlayedFluteNoEffectText: ; a68dd (29:68dd)
 	text "Played the #"
 	line "FLUTE."
 
-	page "Now, that's a"
+	para "Now, that's a"
 	line "catchy tune!"
 	prompt
 
@@ -131540,7 +131540,7 @@ _CoinCaseNumCoinsText: ; a6940 (29:6940)
 _ItemfinderFoundItemText: ; a694f (29:694f)
 	text "Yes! ITEMFINDER"
 	line "indicates there's"
-	next "an item nearby."
+	cont "an item nearby."
 	prompt
 
 _ItemfinderFoundNothingText: ; a6981 (29:6981)
@@ -131588,7 +131588,7 @@ _TeachMachineMoveText: ; a6a42 (29:6a42)
 	TX_RAM $cf4b
 	text "!"
 
-	page "Teach @"
+	para "Teach @"
 	TX_RAM $cf4b
 	db $0
 	line "to a #MON?"
@@ -131598,11 +131598,11 @@ _MonCannotLearnMachineMoveText: ; a6a6e (29:6a6e)
 	TX_RAM $cd6d
 	text " is not"
 	line "compatible with"
-	next "@"
+	cont "@"
 	TX_RAM $cf4b
 	text "."
 
-	page "It can't learn"
+	para "It can't learn"
 	line "@"
 	TX_RAM $cf4b
 	text "."
@@ -131611,7 +131611,7 @@ _MonCannotLearnMachineMoveText: ; a6a6e (29:6a6e)
 _ItemUseNotTimeText: ; a6aa6 (29:6aa6)
 	text "OAK: ", $52, "!"
 	line "This isn't the"
-	next "time to use that! "
+	cont "time to use that! "
 	prompt
 
 _ItemUseNotYoursToUseText: ; a6ad0 (29:6ad0)
@@ -131647,7 +131647,7 @@ _NoSurfingHereText: ; a6b4e (29:6b4e)
 _BoxFullCannotThrowBallText: ; a6b69 (29:6b69)
 	text "The #MON BOX"
 	line "is full! Can't"
-	next "use that item!"
+	cont "use that item!"
 	prompt
 
 SECTION "bank2A",ROMX,BANK[$2A]
@@ -131716,7 +131716,7 @@ _UnnamedText_71d8d: ; a80bc (2a:40bc)
 	line "@"
 	TX_RAM $cd13
 	text " for"
-	next "@"
+	cont "@"
 	TX_RAM $cd1e
 	text "!@@"
 
@@ -131726,7 +131726,7 @@ _UnnamedText_71d94: ; a80d8 (2a:40d8)
 	TX_RAM $cd13
 	text "! Wanna"
 
-	page "trade one for"
+	para "trade one for"
 	line "@"
 	TX_RAM $cd1e
 	text "? "
@@ -131745,7 +131745,7 @@ UnnamedText_a812f: ; a812f (2a:412f)
 	TX_RAM $cd13
 	text "!"
 
-	page "If you get one,"
+	para "If you get one,"
 	line "come back here!"
 	done
 
@@ -131764,7 +131764,7 @@ _UnnamedText_71dad: ; a817c (2a:417c)
 	text "Hello there! Do"
 	line "you want to trade"
 
-	page "your @"
+	para "your @"
 	TX_RAM $cd13
 	db $0
 	line "for @"
@@ -131783,7 +131783,7 @@ _UnnamedText_71db7: ; a81d3 (2a:41d3)
 	TX_RAM $cd13
 	text "."
 
-	page "Think of me when"
+	para "Think of me when"
 	line "you get one."
 	done
 
@@ -131797,7 +131797,7 @@ _UnnamedText_71dc1: ; a8212 (2a:4212)
 	text " you"
 	line "traded to me"
 
-	page "went and evolved!"
+	para "went and evolved!"
 	done
 
 _UnnamedText_71dc6: ; a8240 (2a:4240)
@@ -131806,7 +131806,7 @@ _UnnamedText_71dc6: ; a8240 (2a:4240)
 	TX_RAM $cd13
 	text "?"
 
-	page "Want to trade it"
+	para "Want to trade it"
 	line "for @"
 	TX_RAM $cd1e
 	text "?"
@@ -131822,7 +131822,7 @@ _UnnamedText_71dd0: ; a8284 (2a:4284)
 	TX_RAM $cd13
 	text "."
 
-	page "If you get one,"
+	para "If you get one,"
 	line "trade it with me!"
 	done
 
@@ -131836,7 +131836,7 @@ _UnnamedText_71dda: ; a82c9 (2a:42c9)
 	TX_RAM $cd1e
 	text "?"
 
-	page "My @"
+	para "My @"
 	TX_RAM $cd13
 	text " is"
 	line "doing great!"

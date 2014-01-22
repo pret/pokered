@@ -1,14 +1,14 @@
 _DaisyInitialText:
 	text "Hi ",$52,"!"
 	line $53," is out at"
-	next "Grandpa's lab."
+	cont "Grandpa's lab."
 	done
 
 _DaisyOfferMapText:
 	text "Grandpa asked you"
 	line "to run an errand?"
-	next "Here, this will"
-	next "help you!"
+	cont "Here, this will"
+	cont "help you!"
 	prompt
 
 _GotMapText:
@@ -25,14 +25,14 @@ _DaisyBagFullText:
 _DaisyUseMapText:
 	text "Use the TOWN MAP"
 	line "to find out where"
-	next "you are."
+	cont "you are."
 	done
 
 _BluesHouseText2:
 	text "#MON are living"
 	line "things! If they"
-	next "get tired, give"
-	next "them a rest!"
+	cont "get tired, give"
+	cont "them a rest!"
 	done
 
 _BluesHouseText3:
