@@ -1,3 +1,5 @@
+INCLUDE "globals.asm"
+
 TEXT_1  EQU $20
 TEXT_2  EQU $21
 TEXT_3  EQU $22
@@ -12,6 +14,9 @@ TEXT_11 EQU $2a
 
 POKEDEX_TEXT EQU $2b
 MOVE_NAMES   EQU $2c
+
+INCLUDE "macros.asm"
+
 
 
 SECTION "Text 1", ROMX, BANK[TEXT_1]

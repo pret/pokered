@@ -115622,5 +115622,3 @@ TechnicalMachinePrices: ; 7bfa7 (1e:7fa7)
 	db $22, $52, $24, $34, $42
 
 
-INCLUDE "text.asm"
-
