@@ -1421,7 +1421,19 @@ W_PLAYTIMEFRAMES: ; da45
 W_NUMSAFARIBALLS: ; da47
 	ds 1
 
-	ds 56
+W_DAYCARE_IN_USE: ; da48
+; 0 if no pokemon is in the daycare
+; 1 if pokemon is in the daycare
+	ds 1
+
+W_DAYCAREMONNAME: ; da49
+	ds 11
+
+W_DAYCAREMONOT: ; da54
+	ds 11
+
+W_DAYCAREMONDATA: ; da5f
+	ds 33
 
 W_NUMINBOX: ; da80
 ; number of mons in current box
@@ -1432,5 +1444,14 @@ W_BOXMON1DATA: ; da96
 W_BOXMON2DATA: ; dab7
 	ds 33 * 19
 
-; dd2a
+W_BOXMON1OT: ; dd2a
+	ds 11
+W_BOXMON2OT: ; dd35
+	ds 11 * 19
 
+W_BOXMON1NAME: ; de06
+	ds 11
+W_BOXMON2NAME: ; de11
+	ds 11 * 19
+
+; dee2
