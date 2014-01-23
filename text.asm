@@ -3199,7 +3199,7 @@ _UnnamedText_71dda: ; a82c9 (2a:42c9)
 	line "doing great!"
 	done
 
-_UnnamedText_ef7d ; a82f8 (2a:42f8)
+_UnnamedText_ef7d: ; a82f8 (2a:42f8)
 	text "There isn't"
 	line "anything to CUT!"
 	prompt
