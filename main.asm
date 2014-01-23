@@ -115792,7 +115792,6 @@ INCLUDE "text/maps/rocket_hideout_b2f.asm"
 INCLUDE "text/maps/rocket_hideout_b3f.asm"
 INCLUDE "text/maps/rocket_hideout_b4f.asm"
 INCLUDE "text/maps/rocket_hideout_elevator.asm"
-INCLUDE "text/maps/silph_co_1f.asm"
 INCLUDE "text/maps/silph_co_2f.asm"
 INCLUDE "text/maps/silph_co_3f.asm"
 INCLUDE "text/maps/silph_co_4f.asm"
@@ -125958,13 +125957,7 @@ _SaffronMartText3: ; a242a (28:642a)
 	cont "fainted #MON!"
 	done
 
-_SilphCo1Text1: ; a245a (28:645a)
-	text "Welcome!"
-
-	para "The PRESIDENT is"
-	line "in the boardroom"
-	cont "on 11F!"
-	done
+INCLUDE "text/maps/silph_co_1f.asm"
 
 _SaffronPokecenterText1: ; a248e (28:648e)
 	text "#MON growth"
