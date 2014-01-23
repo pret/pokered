@@ -17,6 +17,7 @@ audio_blue.o \
 text.o
 
 OBJS := $(RED_OBJS) $(BLUE_OBJS)
+OBJS := $(sort $(OBJS))
 
 ROMS := pokered.gbc pokeblue.gbc
 
