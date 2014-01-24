@@ -116,8 +116,6 @@ _UnnamedText_59096: ; 801e4 (20:41e4)
 	text "Let's see..."
 	line "Uh-oh! You have"
 	cont "caught only @"
-
-UnnamedText_8020e: ; 8020e (20:420e)
 	TX_NUM $ffdd, 1, 3
 	db $0
 	cont "kinds of #MON!"
@@ -1908,8 +1906,6 @@ _DoYouWantToNicknameText: ; 0x8a605
 	text "Do you want to"
 	line "give a nickname"
 	cont "to @"
-
-UnnamedText_8a629: ; 8a629 (22:6629)
 	TX_RAM $cd6d
 	text "?"
 	done
@@ -2538,8 +2534,6 @@ _UnnamedText_6fb4: ; a2750 (28:6750)
 _UnnamedText_6fb9: ; a2771 (28:6771)
 	text "Abandon learning"
 	line "@"
-
-UnnamedText_a2784: ; a2784 (28:6784)
 	TX_RAM $cf4b
 	text "?"
 	done
@@ -3037,8 +3031,6 @@ _GotOffBicycleText2: ; a8030 (2a:4030)
 _ThrewAwayItemText: ; a803c (2a:403c)
 	text "Threw away"
 	line "@"
-
-UnnamedText_a8049: ; a8049 (2a:4049)
 	TX_RAM $cd6d
 	text "."
 	prompt
@@ -3097,8 +3089,6 @@ _UnnamedText_71d99: ; a810b (2a:410b)
 _UnnamedText_71d9e: ; a811d (2a:411d)
 	text "What? That's not"
 	line "@"
-
-UnnamedText_a812f: ; a812f (2a:412f)
 	TX_RAM $cd13
 	text "!"
 
