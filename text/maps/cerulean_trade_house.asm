@@ -1,4 +1,4 @@
-_CeruleanHouseText1: ; 9888c (26:488c)
+_CeruleanHouseText1:: ; 9888c (26:488c)
 	text "My husband likes"
 	line "trading #MON."
 

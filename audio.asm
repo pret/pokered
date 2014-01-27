@@ -1,4 +1,3 @@
-INCLUDE "globals.asm"
 
 AUDIO_1 EQU $2
 AUDIO_2 EQU $8
@@ -463,7 +462,7 @@ Music_Cities1AlternateTempo:: ; 0x9b81
 
 SECTION "Audio Engine 2", ROMX, BANK[AUDIO_2]
 
-Func_2136e: ; 2136e (8:536e)
+Func_2136e:: ; 2136e (8:536e)
 	ld a, [$d083]
 	cp $ff
 	jr z, .asm_2139b
@@ -528,7 +527,7 @@ INCLUDE "menu/pc.asm"
 INCLUDE "audio/engine_2.asm"
 
 
-Music_PokeFluteInBattle: ; 22306 (8:6306)
+Music_PokeFluteInBattle:: ; 22306 (8:6306)
 	ld a, (SFX_08_46 - $4000) / 3 ; PokeFlute outside of battle
 	call PlaySoundWaitForCurrent
 	ld hl, $c00e

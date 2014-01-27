@@ -280,7 +280,6 @@ def setup_processor():
 def main():
     processor = setup_processor()
     output = processor.preprocess()
-    processor.update_globals()
     return output
 
 if __name__ == '__main__':

@@ -1,11 +1,11 @@
-Music_Pokecenter_Ch1: ; be56 (2:7e56)
+Music_Pokecenter_Ch1:: ; be56 (2:7e56)
 	tempo 0, 144
 	stereopanning 119
 	duty 3
 	vibrato 10, 2, 2
 	togglecall
 
-Music_Pokecenter_branch_be61:
+Music_Pokecenter_branch_be61::
 	notetype 12, 10, 3
 	octave 3
 	note F#, 2
@@ -149,10 +149,10 @@ Music_Pokecenter_branch_be61:
 	loopchannel 0, Music_Pokecenter_branch_be61
 
 
-Music_Pokecenter_Ch2: ; bef9 (2:7ef9)
+Music_Pokecenter_Ch2:: ; bef9 (2:7ef9)
 	vibrato 8, 2, 5
 
-Music_Pokecenter_branch_befc:
+Music_Pokecenter_branch_befc::
 	callchannel Music_Pokecenter_branch_bf4e
 	duty 3
 	notetype 12, 10, 5
@@ -215,7 +215,7 @@ Music_Pokecenter_branch_befc:
 	note D_, 8
 	loopchannel 0, Music_Pokecenter_branch_befc
 
-Music_Pokecenter_branch_bf4e:
+Music_Pokecenter_branch_bf4e::
 	duty 2
 	notetype 12, 12, 2
 	octave 4
@@ -232,7 +232,7 @@ Music_Pokecenter_branch_bf4e:
 	note C#, 6
 	endchannel
 
-Music_Pokecenter_branch_bf60:
+Music_Pokecenter_branch_bf60::
 	duty 2
 	notetype 12, 12, 2
 	octave 4
@@ -248,10 +248,10 @@ Music_Pokecenter_branch_bf60:
 	endchannel
 
 
-Music_Pokecenter_Ch3: ; bf70 (2:7f70)
+Music_Pokecenter_Ch3:: ; bf70 (2:7f70)
 	notetype 12, 1, 0
 
-Music_Pokecenter_branch_bf72:
+Music_Pokecenter_branch_bf72::
 	octave 4
 	note D_, 2
 	note F#, 2
@@ -341,7 +341,7 @@ Music_Pokecenter_branch_bf72:
 	note E_, 2
 	loopchannel 0, Music_Pokecenter_branch_bf72
 
-Music_Pokecenter_branch_bfd9:
+Music_Pokecenter_branch_bfd9::
 	note E_, 2
 	note A_, 2
 	note E_, 2
@@ -352,7 +352,7 @@ Music_Pokecenter_branch_bfd9:
 	note A_, 2
 	endchannel
 
-Music_Pokecenter_branch_bfe2:
+Music_Pokecenter_branch_bfe2::
 	note E_, 2
 	note A_, 2
 	note E_, 2
@@ -363,7 +363,7 @@ Music_Pokecenter_branch_bfe2:
 	note A_, 2
 	endchannel
 
-Music_Pokecenter_branch_bfeb:
+Music_Pokecenter_branch_bfeb::
 	note F#, 2
 	note A_, 2
 	note F#, 2

@@ -1,4 +1,4 @@
-_LanceBeforeBattleText: ; 85d3c (21:5d3c)
+_LanceBeforeBattleText:: ; 85d3c (21:5d3c)
 	text "Ah! I heard about"
 	line "you ", $52, "!"
 
@@ -27,7 +27,7 @@ _LanceBeforeBattleText: ; 85d3c (21:5d3c)
 	cont "with me, ", $52, "!"
 	done
 
-_LanceEndBattleText: ; 85e64 (21:5e64)
+_LanceEndBattleText:: ; 85e64 (21:5e64)
 	text "That's it!"
 
 	para "I hate to admit"
@@ -35,7 +35,7 @@ _LanceEndBattleText: ; 85e64 (21:5e64)
 	cont "#MON master!"
 	prompt
 
-_LanceAfterBattleText: ; 85e9e (21:5e9e)
+_LanceAfterBattleText:: ; 85e9e (21:5e9e)
 	text "I still can't"
 	line "believe my"
 	cont "dragons lost to"

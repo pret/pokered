@@ -1,4 +1,4 @@
-Music_GymLeaderBattle: ; 202be (8:42be)
+Music_GymLeaderBattle:: ; 202be (8:42be)
 	db ( $80 | CH0 )
 	dw Music_GymLeaderBattle_Ch1
 	db CH1
@@ -6,7 +6,7 @@ Music_GymLeaderBattle: ; 202be (8:42be)
 	db CH2
 	dw Music_GymLeaderBattle_Ch3
 
-Music_TrainerBattle: ; 202c7 (8:42c7)
+Music_TrainerBattle:: ; 202c7 (8:42c7)
 	db ( $80 | CH0 )
 	dw Music_TrainerBattle_Ch1
 	db CH1
@@ -14,7 +14,7 @@ Music_TrainerBattle: ; 202c7 (8:42c7)
 	db CH2
 	dw Music_TrainerBattle_Ch3
 
-Music_WildBattle: ; 202d0 (8:42d0)
+Music_WildBattle:: ; 202d0 (8:42d0)
 	db ( $80 | CH0 )
 	dw Music_WildBattle_Ch1
 	db CH1
@@ -22,7 +22,7 @@ Music_WildBattle: ; 202d0 (8:42d0)
 	db CH2
 	dw Music_WildBattle_Ch3
 
-Music_FinalBattle: ; 202d9 (8:42d9)
+Music_FinalBattle:: ; 202d9 (8:42d9)
 	db ( $80 | CH0 )
 	dw Music_FinalBattle_Ch1
 	db CH1
@@ -30,7 +30,7 @@ Music_FinalBattle: ; 202d9 (8:42d9)
 	db CH2
 	dw Music_FinalBattle_Ch3
 
-Music_DefeatedTrainer: ; 202e2 (8:42e2)
+Music_DefeatedTrainer:: ; 202e2 (8:42e2)
 	db ( $80 | CH0 )
 	dw Music_DefeatedTrainer_Ch1
 	db CH1
@@ -38,7 +38,7 @@ Music_DefeatedTrainer: ; 202e2 (8:42e2)
 	db CH2
 	dw Music_DefeatedTrainer_Ch3
 
-Music_DefeatedWildMon: ; 202eb (8:42eb)
+Music_DefeatedWildMon:: ; 202eb (8:42eb)
 	db ( $80 | CH0 )
 	dw Music_DefeatedWildMon_Ch1
 	db CH1
@@ -46,7 +46,7 @@ Music_DefeatedWildMon: ; 202eb (8:42eb)
 	db CH2
 	dw Music_DefeatedWildMon_Ch3
 
-Music_DefeatedGymLeader: ; 202f4 (8:42f4)
+Music_DefeatedGymLeader:: ; 202f4 (8:42f4)
 	db ( $80 | CH0 )
 	dw Music_DefeatedGymLeader_Ch1
 	db CH1

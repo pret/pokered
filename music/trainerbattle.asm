@@ -1,4 +1,4 @@
-Music_TrainerBattle_Ch1: ; 22919 (8:6919)
+Music_TrainerBattle_Ch1:: ; 22919 (8:6919)
 	tempo 0, 112
 	stereopanning 119
 	duty 3
@@ -66,7 +66,7 @@ Music_TrainerBattle_Ch1: ; 22919 (8:6919)
 	note C_, 2
 	note C#, 2
 
-Music_TrainerBattle_branch_22962:
+Music_TrainerBattle_branch_22962::
 	notetype 12, 11, 5
 	note D_, 2
 	note E_, 4
@@ -649,7 +649,7 @@ Music_TrainerBattle_branch_22962:
 	loopchannel 0, Music_TrainerBattle_branch_22962
 
 
-Music_TrainerBattle_Ch2: ; 22bae (8:6bae)
+Music_TrainerBattle_Ch2:: ; 22bae (8:6bae)
 	duty 3
 	vibrato 10, 2, 5
 	notetype 12, 12, 2
@@ -722,7 +722,7 @@ Music_TrainerBattle_Ch2: ; 22bae (8:6bae)
 	octave 4
 	note A_, 4
 
-Music_TrainerBattle_branch_22bfc:
+Music_TrainerBattle_branch_22bfc::
 	notetype 12, 12, 7
 	octave 3
 	note B_, 6
@@ -953,7 +953,7 @@ Music_TrainerBattle_branch_22bfc:
 	loopchannel 0, Music_TrainerBattle_branch_22bfc
 
 
-Music_TrainerBattle_Ch3: ; 22d10 (8:6d10)
+Music_TrainerBattle_Ch3:: ; 22d10 (8:6d10)
 	vibrato 0, 2, 0
 	notetype 12, 1, 4
 	octave 3
@@ -1092,7 +1092,7 @@ Music_TrainerBattle_Ch3: ; 22d10 (8:6d10)
 	octave 3
 	note C_, 2
 
-Music_TrainerBattle_branch_22d9c:
+Music_TrainerBattle_branch_22d9c::
 	octave 2
 	note A#, 1
 	note B_, 1

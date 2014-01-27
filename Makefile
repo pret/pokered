@@ -9,11 +9,13 @@ TEXTQUEUE :=
 RED_OBJS  := \
 pokered.o \
 audio_red.o \
+wram.o \
 text.o
 
 BLUE_OBJS := \
 pokeblue.o \
 audio_blue.o \
+wram.o \
 text.o
 
 OBJS := $(RED_OBJS) $(BLUE_OBJS)
@@ -23,9 +25,7 @@ ROMS := pokered.gbc pokeblue.gbc
 
 # generate dependencies for each object
 $(shell $(foreach obj, $(OBJS), \
-	$(eval $(obj:.o=)_DEPENDENCIES := $(shell $(PYTHON) extras/pokemontools/scan_includes.py $(obj:.o=.asm) | sed s/globals.asm//g)) \
-))
-$(shell $(foreach obj, $(OBJS), \
+	$(eval $(obj:.o=)_DEPENDENCIES := $(shell $(PYTHON) extras/pokemontools/scan_includes.py $(obj:.o=.asm))) \
 	$(eval ALL_DEPENDENCIES += $($(obj:.o=)_DEPENDENCIES)) \
 ))
 
@@ -41,33 +41,28 @@ redrle: extras/redtools/redrle.c
 clean:
 	rm -f $(ROMS)
 	rm -f $(OBJS)
-	rm -f globals.asm
-	@echo "removing *.tx" && find . -iname '*.tx' -exec rm {} +
+	find . -iname '*.tx' -exec rm {} +
 	rm -f redrle
 
 
 baserom.gbc: ;
-	@echo "Wait! Need baserom.gbc first. Check README and INSTALL for details." && false
+	@echo "Wait! Need baserom.gbc first. Check README for details." && false
 
 %.asm: ;
 .asm.tx:
-	$(eval TEXTQUEUE := $(TEXTQUEUE) $<)
+	$(eval TEXTQUEUE += $<)
 	@rm -f $@
 
-globals.asm: $(ALL_DEPENDENCIES:.asm=.tx) $(OBJS:.o=.tx)
-	@touch $@
-	@$(PYTHON) prequeue.py $(TEXTQUEUE)
-globals.tx: globals.asm
-	@cp $< $@
-
 $(OBJS): $$*.tx $$(patsubst %.asm, %.tx, $$($$*_DEPENDENCIES))
+	@$(PYTHON) prequeue.py $(TEXTQUEUE)
+	@$(eval TEXTQUEUE :=)
 	rgbasm -o $@ $*.tx
 
-pokered.gbc: globals.tx $(RED_OBJS)
-	rgblink -n $*.sym -m $*.map -o $@ $(RED_OBJS)
+pokered.gbc: $(RED_OBJS)
+	rgblink -n $*.sym -m $*.map -o $@ $^
 	rgbfix -jsv -k 01 -l 0x33 -m 0x13 -p 0 -r 03 -t "POKEMON RED" $@
 
-pokeblue.gbc: globals.tx $(BLUE_OBJS)
-	rgblink -n $*.sym -m $*.map -o $@ $(BLUE_OBJS)
+pokeblue.gbc: $(BLUE_OBJS)
+	rgblink -n $*.sym -m $*.map -o $@ $^
 	rgbfix -jsv -k 01 -l 0x33 -m 0x13 -p 0 -r 03 -t "POKEMON BLUE" $@
 

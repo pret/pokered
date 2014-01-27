@@ -1,4 +1,4 @@
-Music_FinalBattle_Ch1: ; 233a6 (8:73a6)
+Music_FinalBattle_Ch1:: ; 233a6 (8:73a6)
 	tempo 0, 112
 	stereopanning 119
 	duty 3
@@ -104,7 +104,7 @@ Music_FinalBattle_Ch1: ; 233a6 (8:73a6)
 	notetype 12, 11, 7
 	note D#, 4
 
-Music_FinalBattle_branch_23429:
+Music_FinalBattle_branch_23429::
 	notetype 12, 11, 7
 	octave 3
 	note E_, 4
@@ -381,7 +381,7 @@ Music_FinalBattle_branch_23429:
 	loopchannel 0, Music_FinalBattle_branch_23429
 
 
-Music_FinalBattle_Ch2: ; 2356a (8:756a)
+Music_FinalBattle_Ch2:: ; 2356a (8:756a)
 	duty 3
 	vibrato 8, 2, 5
 	notetype 12, 12, 2
@@ -479,7 +479,7 @@ Music_FinalBattle_Ch2: ; 2356a (8:756a)
 	octave 3
 	note G#, 4
 
-Music_FinalBattle_branch_235e6:
+Music_FinalBattle_branch_235e6::
 	notetype 12, 13, 7
 	octave 4
 	note E_, 8
@@ -709,7 +709,7 @@ Music_FinalBattle_branch_235e6:
 	note B_, 12
 	loopchannel 0, Music_FinalBattle_branch_235e6
 
-Music_FinalBattle_branch_23704:
+Music_FinalBattle_branch_23704::
 	octave 4
 	note E_, 1
 	note E_, 1
@@ -723,7 +723,7 @@ Music_FinalBattle_branch_23704:
 	note F_, 1
 	endchannel
 
-Music_FinalBattle_branch_23710:
+Music_FinalBattle_branch_23710::
 	octave 4
 	note D_, 2
 	note C#, 2
@@ -738,7 +738,7 @@ Music_FinalBattle_branch_23710:
 	endchannel
 
 
-Music_FinalBattle_Ch3: ; 2371c (8:771c)
+Music_FinalBattle_Ch3:: ; 2371c (8:771c)
 	notetype 12, 1, 1
 	octave 4
 	note E_, 4
@@ -836,7 +836,7 @@ Music_FinalBattle_Ch3: ; 2371c (8:771c)
 	note E_, 1
 	note G_, 1
 
-Music_FinalBattle_branch_2377d:
+Music_FinalBattle_branch_2377d::
 	octave 4
 	note E_, 1
 	octave 3
@@ -1305,7 +1305,7 @@ Music_FinalBattle_branch_2377d:
 	note B_, 4
 	loopchannel 0, Music_FinalBattle_branch_2377d
 
-Music_FinalBattle_branch_2395b:
+Music_FinalBattle_branch_2395b::
 	octave 4
 	note F#, 2
 	octave 5
@@ -1324,7 +1324,7 @@ Music_FinalBattle_branch_2395b:
 	note C#, 2
 	endchannel
 
-Music_FinalBattle_branch_2396c:
+Music_FinalBattle_branch_2396c::
 	octave 4
 	note A_, 2
 	octave 5

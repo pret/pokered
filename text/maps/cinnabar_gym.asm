@@ -1,4 +1,4 @@
-_BlaineBattleText: ; a0844 (28:4844)
+_BlaineBattleText:: ; a0844 (28:4844)
 	text "Hah!"
 
 	para "I am BLAINE! I"
@@ -13,14 +13,14 @@ _BlaineBattleText: ; a0844 (28:4844)
 	line "have BURN HEAL!"
 	done
 
-_BlaineEndBattleText: ; a08c7 (28:48c7)
+_BlaineEndBattleText:: ; a08c7 (28:48c7)
 	text "I have"
 	line "burnt out!"
 
 	para "You have earned"
 	line "the VOLCANOBADGE!@@"
 
-_BlaineFireBlastText: ; a08fd (28:48fd)
+_BlaineFireBlastText:: ; a08fd (28:48fd)
 	text "FIRE BLAST is the"
 	line "ultimate fire"
 	cont "technique!"
@@ -29,7 +29,7 @@ _BlaineFireBlastText: ; a08fd (28:48fd)
 	line "water #MON!"
 	done
 
-_BlaineBadgeText: ; a0946 (28:4946)
+_BlaineBadgeText:: ; a0946 (28:4946)
 	text "Hah!"
 
 	para "The VOLCANOBADGE"
@@ -41,13 +41,13 @@ _BlaineBadgeText: ; a0946 (28:4946)
 	line "have this too!"
 	done
 
-_ReceivedTM38Text: ; a09a8 (28:49a8)
+_ReceivedTM38Text:: ; a09a8 (28:49a8)
 	text $52, " received"
 	line "@"
 	TX_RAM $cf4b
 	text "!@@"
 
-_TM38ExplanationText: ; a09bc (28:49bc)
+_TM38ExplanationText:: ; a09bc (28:49bc)
 	db $0
 	para "TM38 contains"
 	line "FIRE BLAST!"
@@ -60,23 +60,23 @@ _TM38ExplanationText: ; a09bc (28:49bc)
 	cont "good bets!"
 	done
 
-_TM38NoRoomText: ; a0a1e (28:4a1e)
+_TM38NoRoomText:: ; a0a1e (28:4a1e)
 	text "Make room for my"
 	line "gift!"
 	done
 
-_UnnamedText_7595f: ; a0a36 (28:4a36)
+_UnnamedText_7595f:: ; a0a36 (28:4a36)
 	text "Do you know how"
 	line "hot #MON fire"
 	cont "breath can get?"
 	done
 
-_UnnamedText_75964: ; a0a65 (28:4a65)
+_UnnamedText_75964:: ; a0a65 (28:4a65)
 	text "Yow!"
 	line "Hot, hot, hot!"
 	prompt
 
-_UnnamedText_75969: ; a0a7a (28:4a7a)
+_UnnamedText_75969:: ; a0a7a (28:4a7a)
 	text "Fire, or to be"
 	line "more precise,"
 	cont "combustion..."
@@ -85,66 +85,66 @@ _UnnamedText_75969: ; a0a7a (28:4a7a)
 	line "blah..."
 	done
 
-_UnnamedText_75994: ; a0ac0 (28:4ac0)
+_UnnamedText_75994:: ; a0ac0 (28:4ac0)
 	text "I was a thief, but"
 	line "I became straight"
 	cont "as a trainer!"
 	done
 
-_UnnamedText_75999: ; a0af4 (28:4af4)
+_UnnamedText_75999:: ; a0af4 (28:4af4)
 	text "I"
 	line "surrender!"
 	prompt
 
-_UnnamedText_7599e: ; a0b02 (28:4b02)
+_UnnamedText_7599e:: ; a0b02 (28:4b02)
 	text "I can't help"
 	line "stealing other"
 	cont "people's #MON!"
 	done
 
-_UnnamedText_759c9: ; a0b2c (28:4b2c)
+_UnnamedText_759c9:: ; a0b2c (28:4b2c)
 	text "You can't win!"
 	line "I have studied"
 	cont "#MON totally!"
 	done
 
-_UnnamedText_759ce: ; a0b58 (28:4b58)
+_UnnamedText_759ce:: ; a0b58 (28:4b58)
 	text "Waah!"
 	line "My studies!"
 	prompt
 
-_UnnamedText_759d3: ; a0b6b (28:4b6b)
+_UnnamedText_759d3:: ; a0b6b (28:4b6b)
 	text "My theories are"
 	line "too complicated"
 	cont "for you!"
 	done
 
-_UnnamedText_759fe: ; a0b95 (28:4b95)
+_UnnamedText_759fe:: ; a0b95 (28:4b95)
 	text "I just like using"
 	line "fire #MON!"
 	done
 
-_UnnamedText_75a03: ; a0bb3 (28:4bb3)
+_UnnamedText_75a03:: ; a0bb3 (28:4bb3)
 	text "Too hot"
 	line "to handle!"
 	prompt
 
-_UnnamedText_75a08: ; a0bc7 (28:4bc7)
+_UnnamedText_75a08:: ; a0bc7 (28:4bc7)
 	text "I wish there was"
 	line "a thief #MON!"
 	cont "I'd use that!"
 	done
 
-_UnnamedText_75a33: ; a0bf4 (28:4bf4)
+_UnnamedText_75a33:: ; a0bf4 (28:4bf4)
 	text "I know why BLAINE"
 	line "became a trainer!"
 	done
 
-_UnnamedText_75a38: ; a0c19 (28:4c19)
+_UnnamedText_75a38:: ; a0c19 (28:4c19)
 	text "Ow!"
 	prompt
 
-_UnnamedText_75a3d: ; a0c1e (28:4c1e)
+_UnnamedText_75a3d:: ; a0c1e (28:4c1e)
 	text "BLAINE was lost"
 	line "in the mountains"
 	cont "when a fiery bird"
@@ -155,40 +155,40 @@ _UnnamedText_75a3d: ; a0c1e (28:4c1e)
 	cont "his way down!"
 	done
 
-_UnnamedText_75a68: ; a0c90 (28:4c90)
+_UnnamedText_75a68:: ; a0c90 (28:4c90)
 	text "I've been to many"
 	line "GYMs, but this is"
 	cont "my favorite!"
 	done
 
-_UnnamedText_75a6d: ; a0cc1 (28:4cc1)
+_UnnamedText_75a6d:: ; a0cc1 (28:4cc1)
 	text "Yowza!"
 	line "Too hot!"
 	prompt
 
-_UnnamedText_75a72: ; a0cd2 (28:4cd2)
+_UnnamedText_75a72:: ; a0cd2 (28:4cd2)
 	text "Us fire #MON"
 	line "fans like PONYTA"
 	cont "and NINETALES!"
 	done
 
-_UnnamedText_75a9d: ; a0d00 (28:4d00)
+_UnnamedText_75a9d:: ; a0d00 (28:4d00)
 	text "Fire is weak"
 	line "against H2O!"
 	done
 
-_UnnamedText_75aa2: ; a0d1b (28:4d1b)
+_UnnamedText_75aa2:: ; a0d1b (28:4d1b)
 	text "Oh!"
 	line "Snuffed out!"
 	prompt
 
-_UnnamedText_75aa7: ; a0d2d (28:4d2d)
+_UnnamedText_75aa7:: ; a0d2d (28:4d2d)
 	text "Water beats fire!"
 	line "But, fire melts"
 	cont "ice #MON!"
 	done
 
-_UnnamedText_75ac2: ; a0d5a (28:4d5a)
+_UnnamedText_75ac2:: ; a0d5a (28:4d5a)
 	text "Yo! Champ in"
 	line "making!"
 
@@ -203,7 +203,7 @@ _UnnamedText_75ac2: ; a0d5a (28:4d5a)
 	line "some BURN HEALs!"
 	done
 
-_UnnamedText_75ac7: ; a0dd9 (28:4dd9)
+_UnnamedText_75ac7:: ; a0dd9 (28:4dd9)
 	text $52, "! You beat"
 	line "that fire brand!"
 	done

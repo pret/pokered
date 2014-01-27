@@ -1,4 +1,4 @@
-_UnnamedText_1d6ab: ; 9875c (26:475c)
+_UnnamedText_1d6ab:: ; 9875c (26:475c)
 	text "Those miserable"
 	line "ROCKETs!"
 
@@ -14,7 +14,7 @@ _UnnamedText_1d6ab: ; 9875c (26:475c)
 	line "bundle, it did!"
 	done
 
-_UnnamedText_1d6b0: ; 987e2 (26:47e2)
+_UnnamedText_1d6b0:: ; 987e2 (26:47e2)
 	text "I figure what's"
 	line "lost is lost!"
 
@@ -23,14 +23,14 @@ _UnnamedText_1d6b0: ; 987e2 (26:47e2)
 	cont "DIG without a TM!"
 	done
 
-_CeruleanHouseTrashedText2: ; 98834 (26:4834)
+_CeruleanHouseTrashedText2:: ; 98834 (26:4834)
 	text "TEAM ROCKET must"
 	line "be trying to DIG"
 	cont "their way into no"
 	cont "good!"
 	done
 
-_CeruleanHouseTrashedText3: ; 9886f (26:486f)
+_CeruleanHouseTrashedText3:: ; 9886f (26:486f)
 	text "TEAM ROCKET left"
 	line "a way out!"
 	done

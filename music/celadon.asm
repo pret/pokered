@@ -1,4 +1,4 @@
-Music_Celadon_Ch1: ; b6c7 (2:76c7)
+Music_Celadon_Ch1:: ; b6c7 (2:76c7)
 	tempo 0, 144
 	stereopanning 119
 	duty 3
@@ -8,7 +8,7 @@ Music_Celadon_Ch1: ; b6c7 (2:76c7)
 	octave 3
 	note D_, 8
 
-Music_Celadon_branch_b6d4:
+Music_Celadon_branch_b6d4::
 	duty 2
 	notetype 12, 11, 2
 	note G_, 4
@@ -107,7 +107,7 @@ Music_Celadon_branch_b6d4:
 	loopchannel 0, Music_Celadon_branch_b6d4
 
 
-Music_Celadon_Ch2: ; b73a (2:773a)
+Music_Celadon_Ch2:: ; b73a (2:773a)
 	duty 3
 	notetype 12, 12, 2
 	octave 4
@@ -122,7 +122,7 @@ Music_Celadon_Ch2: ; b73a (2:773a)
 	notetype 12, 10, 0
 	note A_, 8
 
-Music_Celadon_branch_b74a:
+Music_Celadon_branch_b74a::
 	duty 2
 	notetype 12, 12, 2
 	octave 4
@@ -226,7 +226,7 @@ Music_Celadon_branch_b74a:
 	loopchannel 0, Music_Celadon_branch_b74a
 
 
-Music_Celadon_Ch3: ; b7b5 (2:77b5)
+Music_Celadon_Ch3:: ; b7b5 (2:77b5)
 	notetype 12, 1, 3
 	rest 8
 	octave 5
@@ -239,7 +239,7 @@ Music_Celadon_Ch3: ; b7b5 (2:77b5)
 	note F#, 1
 	note G_, 1
 
-Music_Celadon_branch_b7c1:
+Music_Celadon_branch_b7c1::
 	octave 4
 	note D_, 2
 	note B_, 2

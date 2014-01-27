@@ -32,7 +32,7 @@ SECTION "joypad",ROM0[$60]
 
 SECTION "bank0",ROM0[$61]
 
-DisableLCD: ; 0061 (0:0061)
+DisableLCD:: ; 0061 (0:0061)
 	xor a
 	ld [$ff0f],a
 	ld a,[$ffff]
@@ -50,13 +50,13 @@ DisableLCD: ; 0061 (0:0061)
 	ld [$ffff],a
 	ret
 
-EnableLCD: ; 007b (0:007b)
+EnableLCD:: ; 007b (0:007b)
 	ld a,[$ff40]
 	set 7,a
 	ld [$ff40],a
 	ret
 
-CleanLCD_OAM: ; 0082 (0:0082)
+CleanLCD_OAM:: ; 0082 (0:0082)
 	xor a
 	ld hl,wOAMBuffer
 	ld b,$a0
@@ -66,7 +66,7 @@ CleanLCD_OAM: ; 0082 (0:0082)
 	jr nz,.loop
 	ret
 
-ResetLCD_OAM: ; 008d (0:008d)
+ResetLCD_OAM:: ; 008d (0:008d)
 	ld a,$a0
 	ld hl,wOAMBuffer
 	ld de,$0004
@@ -78,7 +78,7 @@ ResetLCD_OAM: ; 008d (0:008d)
 	jr nz,.loop
 	ret
 
-FarCopyData: ; 009d (0:009d)
+FarCopyData:: ; 009d (0:009d)
 ; copy bc bytes of data from a:hl to de
 	ld [$CEE9],a ; save future bank # for later
 	ld a,[H_LOADEDROMBANK] ; get current bank #
@@ -91,7 +91,7 @@ FarCopyData: ; 009d (0:009d)
 	ld [H_LOADEDROMBANK],a
 	ld [$2000],a
 	ret
-CopyData: ; 00b5 (0:00b5)
+CopyData:: ; 00b5 (0:00b5)
 ; copy bc bytes of data from hl to de
 	ld a,[hli]
 	ld [de],a
@@ -107,7 +107,7 @@ nop
 jp Start
 
 SECTION "start",ROM0[$150]
-Start: ; 0150 (0:0150)
+Start:: ; 0150 (0:0150)
 	cp $11 ; value that indicates Gameboy Color
 	jr z,.gbcDetected
 	xor a
@@ -130,7 +130,7 @@ Start: ; 0150 (0:0150)
 ; bit 5 - Left
 ; bit 6 - Up
 ; bit 7 - Down
-ReadJoypadRegister: ; 015f (0:015f)
+ReadJoypadRegister:: ; 015f (0:015f)
 	ld a,%00100000 ; select direction keys
 	ld c,$00
 	ld [rJOYP],a
@@ -169,7 +169,7 @@ ReadJoypadRegister: ; 015f (0:015f)
 ; [H_NEWLYRELEASEDBUTTONS] = keys released since last time
 ; [H_NEWLYPRESSEDBUTTONS] = keys pressed since last time
 ; [H_CURRENTPRESSEDBUTTONS] = currently pressed keys
-GetJoypadState: ; 019a (0:019a)
+GetJoypadState:: ; 019a (0:019a)
 	ld a, [H_LOADEDROMBANK]
 	push af
 	ld a,Bank(_GetJoypadState)
@@ -182,7 +182,7 @@ GetJoypadState: ; 019a (0:019a)
 	ret
 
 ; see also MapHeaderBanks
-MapHeaderPointers: ; 01ae (0:01ae)
+MapHeaderPointers:: ; 01ae (0:01ae)
 	dw PalletTown_h
 	dw ViridianCity_h
 	dw PewterCity_h
@@ -436,13 +436,13 @@ MapHeaderPointers: ; 01ae (0:01ae)
 ; at the beginning of each overworld loop iteration as the player jumps
 ; down a ledge
 ; it also ends the jump when it's completed
-HandleMidJump: ; 039e (0:039e)
+HandleMidJump:: ; 039e (0:039e)
 	ld b, BANK(_HandleMidJump)
 	ld hl, _HandleMidJump
 	jp Bankswitch
 
 ; this is jumped to immediately after loading a save / starting a new game / loading a new map
-EnterMap: ; 03a6 (0:03a6)
+EnterMap:: ; 03a6 (0:03a6)
 	ld a,$ff
 	ld [wJoypadForbiddenButtonsMask],a
 	call LoadMapData ; load map data
@@ -482,9 +482,9 @@ EnterMap: ; 03a6 (0:03a6)
 	xor a
 	ld [wJoypadForbiddenButtonsMask],a
 
-OverworldLoop: ; 03ff (0:03ff)
+OverworldLoop:: ; 03ff (0:03ff)
 	call DelayFrame
-OverworldLoopLessDelay: ; 0402 (0:0402)
+OverworldLoopLessDelay:: ; 0402 (0:0402)
 	call DelayFrame
 	call LoadGBPal
 	ld a,[$d736]
@@ -798,7 +798,7 @@ OverworldLoopLessDelay: ; 0402 (0:0402)
 
 ; function to determine if there will be a battle and execute it (either a trainer battle or wild battle)
 ; sets carry if a battle occurred and unsets carry if not
-NewBattle: ; 0683 (0:0683)
+NewBattle:: ; 0683 (0:0683)
 	ld a,[$d72d]
 	bit 4,a
 	jr nz,.noBattle
@@ -815,7 +815,7 @@ NewBattle: ; 0683 (0:0683)
 	ret
 
 ; function to make bikes twice as fast as walking
-BikeSpeedup: ; 06a0 (0:06a0)
+BikeSpeedup:: ; 06a0 (0:06a0)
 	ld a,[$cc57]
 	and a
 	ret nz
@@ -829,7 +829,7 @@ BikeSpeedup: ; 06a0 (0:06a0)
 	jp AdvancePlayerSprite
 
 ; check if the player has stepped onto a warp after having not collided
-CheckWarpsNoCollision: ; 06b4 (0:06b4)
+CheckWarpsNoCollision:: ; 06b4 (0:06b4)
 	ld a,[$d3ae] ; number of warps
 	and a
 	jp z,CheckMapConnections
@@ -841,7 +841,7 @@ CheckWarpsNoCollision: ; 06b4 (0:06b4)
 	ld a,[W_XCOORD]
 	ld e,a
 	ld hl,$d3af ; start of warp entries
-CheckWarpsNoCollisionLoop: ; 06cc (0:06cc)
+CheckWarpsNoCollisionLoop:: ; 06cc (0:06cc)
 	ld a,[hli] ; check if the warp's Y position matches
 	cp d
 	jr nz,CheckWarpsNoCollisionRetry1
@@ -880,7 +880,7 @@ CheckWarpsNoCollisionLoop: ; 06cc (0:06cc)
 	jr WarpFound1
 
 ; check if the player has stepped onto a warp after having collided
-CheckWarpsCollision: ; 0706 (0:0706)
+CheckWarpsCollision:: ; 0706 (0:0706)
 	ld a,[$d3ae] ; number of warps
 	ld c,a
 	ld hl,$d3af ; start of warp entries
@@ -909,20 +909,20 @@ CheckWarpsCollision: ; 0706 (0:0706)
 	jr nz,.loop
 	jp OverworldLoop
 
-CheckWarpsNoCollisionRetry1: ; 072f (0:072f)
+CheckWarpsNoCollisionRetry1:: ; 072f (0:072f)
 	inc hl
-CheckWarpsNoCollisionRetry2: ; 0730 (0:0730)
+CheckWarpsNoCollisionRetry2:: ; 0730 (0:0730)
 	inc hl
 	inc hl
 	jp ContinueCheckWarpsNoCollisionLoop
 
-WarpFound1: ; 0735 (0:0735)
+WarpFound1:: ; 0735 (0:0735)
 	ld a,[hli]
 	ld [$d42f],a ; save target warp ID
 	ld a,[hli]
 	ld [$ff8b],a ; save target map
 
-WarpFound2: ; 073c (0:073c)
+WarpFound2:: ; 073c (0:073c)
 	ld a,[$d3ae] ; number of warps
 	sub c
 	ld [$d73b],a ; save ID of used warp
@@ -982,13 +982,13 @@ WarpFound2: ; 073c (0:073c)
 	call Func_12da
 	jp EnterMap
 
-ContinueCheckWarpsNoCollisionLoop: ; 07b5 (0:07b5)
+ContinueCheckWarpsNoCollisionLoop:: ; 07b5 (0:07b5)
 	inc b ; increment warp number
 	dec c ; decrement number of warps
 	jp nz,CheckWarpsNoCollisionLoop
 
 ; if no matching warp was found
-CheckMapConnections: ; 07ba (0:07ba)
+CheckMapConnections:: ; 07ba (0:07ba)
 .checkWestMap
 	ld a,[W_XCOORD]
 	cp a,$ff
@@ -1128,7 +1128,7 @@ CheckMapConnections: ; 07ba (0:07ba)
 	jp OverworldLoop
 
 ; function to play a sound when changing maps
-PlayMapChangeSound: ; 08c9 (0:08c9)
+PlayMapChangeSound:: ; 08c9 (0:08c9)
 	FuncCoord 8, 8 ; $c448
 	ld a,[Coord] ; upper left tile of the 4x4 square the player's sprite is standing on
 	cp a,$0b ; door tile in tileset 0
@@ -1144,7 +1144,7 @@ PlayMapChangeSound: ; 08c9 (0:08c9)
 	ret nz
 	jp GBFadeIn1
 
-CheckIfInOutsideMap: ; 08e1 (0:08e1)
+CheckIfInOutsideMap:: ; 08e1 (0:08e1)
 ; If the player is in an outside map (a town or route), set the z flag
 	ld a,[W_CURMAPTILESET]
 	and a ; most towns/routes have tileset 0
@@ -1158,7 +1158,7 @@ CheckIfInOutsideMap: ; 08e1 (0:08e1)
 ; "function 1" passes when the player is at the edge of the map and is facing towards the outside of the map
 ; "function 2" passes when the the tile in front of the player is among a certain set
 ; sets carry if the check passes, otherwise clears carry
-ExtraWarpCheck: ; 08e9 (0:08e9)
+ExtraWarpCheck:: ; 08e9 (0:08e9)
 	ld a,[W_CURMAP]
 	cp a,SS_ANNE_3
 	jr z,.useFunction1
@@ -1188,7 +1188,7 @@ ExtraWarpCheck: ; 08e9 (0:08e9)
 	ld b, BANK(Func_c44e)
 	jp Bankswitch
 
-MapEntryAfterBattle: ; 091f (0:091f)
+MapEntryAfterBattle:: ; 091f (0:091f)
 	ld b, BANK(Func_c35f)
 	ld hl, Func_c35f
 	call Bankswitch ; function that appears to disable warp testing after collisions if the player is standing on a warp
@@ -1199,7 +1199,7 @@ MapEntryAfterBattle: ; 091f (0:091f)
 
 ; for when all the player's pokemon faint
 ; other code prints the "you blacked out" message before this is called
-HandleBlackOut: ; 0931 (0:0931)
+HandleBlackOut:: ; 0931 (0:0931)
 	call GBFadeIn1
 	ld a,$08
 	call StopMusic
@@ -1213,7 +1213,7 @@ HandleBlackOut: ; 0931 (0:0931)
 	call Func_2312
 	jp Func_5d5f
 
-StopMusic: ; 0951 (0:0951)
+StopMusic:: ; 0951 (0:0951)
 	ld [wMusicHeaderPointer],a
 	ld a,$ff
 	ld [$c0ee],a
@@ -1224,7 +1224,7 @@ StopMusic: ; 0951 (0:0951)
 	jr nz,.waitLoop
 	jp StopAllSounds
 
-HandleFlyOrTeleportAway: ; 0965 (0:0965)
+HandleFlyOrTeleportAway:: ; 0965 (0:0965)
 	call UpdateSprites ; move sprites
 	call Delay3
 	xor a
@@ -1243,13 +1243,13 @@ HandleFlyOrTeleportAway: ; 0965 (0:0965)
 	jp Func_5d5f
 
 ; function that calls a function to do fly away or teleport away graphics
-DoFlyOrTeleportAwayGraphics: ; 098f (0:098f)
+DoFlyOrTeleportAwayGraphics:: ; 098f (0:098f)
 	ld b, BANK(_DoFlyOrTeleportAwayGraphics)
 	ld hl, _DoFlyOrTeleportAwayGraphics
 	jp Bankswitch
 
 ; load sprite graphics based on whether the player is standing, biking, or surfing
-LoadPlayerSpriteGraphics: ; 0997 (0:0997)
+LoadPlayerSpriteGraphics:: ; 0997 (0:0997)
 	ld a,[$d700]
 	dec a
 	jr z,.ridingBike
@@ -1277,7 +1277,7 @@ LoadPlayerSpriteGraphics: ; 0997 (0:0997)
 
 ; function to check if bike riding is allowed on the current map
 ; sets carry if bike is allowed, clears carry otherwise
-IsBikeRidingAllowed: ; 09c5 (0:09c5)
+IsBikeRidingAllowed:: ; 09c5 (0:09c5)
 	ld a,[W_CURMAP]
 	cp a,ROUTE_23
 	jr z,.allowed
@@ -1298,11 +1298,11 @@ IsBikeRidingAllowed: ; 09c5 (0:09c5)
 	scf
 	ret
 
-BikeRidingTilesets: ; 09e2 (0:09e2)
+BikeRidingTilesets:: ; 09e2 (0:09e2)
 	db $00, $03, $0B, $0E, $11, $FF
 
 ; load the tile pattern data of the current tileset into VRAM
-LoadTilesetTilePatternData: ; 09e8 (0:09e8)
+LoadTilesetTilePatternData:: ; 09e8 (0:09e8)
 	ld a,[$d52e]
 	ld l,a
 	ld a,[$d52f]
@@ -1314,7 +1314,7 @@ LoadTilesetTilePatternData: ; 09e8 (0:09e8)
 
 ; this loads the current maps complete tile map (which references blocks, not individual tiles) to C6E8
 ; it can also load partial tile maps of connected maps into a border of length 3 around the current map
-LoadTileBlockMap: ; 09fc (0:09fc)
+LoadTileBlockMap:: ; 09fc (0:09fc)
 ; fill C6E8-CBFB with the background tile
 	ld hl,$c6e8
 	ld a,[$d3ad] ; background tile number
@@ -1443,7 +1443,7 @@ LoadTileBlockMap: ; 09fc (0:09fc)
 .done
 	ret
 
-LoadNorthSouthConnectionsTileMap: ; 0ade (0:0ade)
+LoadNorthSouthConnectionsTileMap:: ; 0ade (0:0ade)
 	ld c,$03
 .loop
 	push de
@@ -1475,7 +1475,7 @@ LoadNorthSouthConnectionsTileMap: ; 0ade (0:0ade)
 	jr nz,.loop
 	ret
 
-LoadEastWestConnectionsTileMap: ; 0b02 (0:0b02)
+LoadEastWestConnectionsTileMap:: ; 0b02 (0:0b02)
 	push hl
 	push de
 	ld c,$03
@@ -1507,7 +1507,7 @@ LoadEastWestConnectionsTileMap: ; 0b02 (0:0b02)
 ; function to check if there is a sign or sprite in front of the player
 ; if so, it is stored in [$FF8C]
 ; if not, [$FF8C] is set to 0
-IsSpriteOrSignInFrontOfPlayer: ; 0b23 (0:0b23)
+IsSpriteOrSignInFrontOfPlayer:: ; 0b23 (0:0b23)
 	xor a
 	ld [$ff8c],a
 	ld a,[$d4b0] ; number of signs in the map
@@ -1563,9 +1563,9 @@ IsSpriteOrSignInFrontOfPlayer: ; 0b23 (0:0b23)
 
 ; part of the above function, but sometimes its called on its own, when signs are irrelevant
 ; the caller must zero [$FF8C]
-IsSpriteInFrontOfPlayer: ; 0b6b (0:0b6b)
+IsSpriteInFrontOfPlayer:: ; 0b6b (0:0b6b)
 	ld d,$10 ; talking range in pixels (normal range)
-IsSpriteInFrontOfPlayer2: ; 0b6d (0:0b6d)
+IsSpriteInFrontOfPlayer2:: ; 0b6d (0:0b6d)
 	ld bc,$3c40 ; Y and X position of player sprite
 	ld a,[$c109] ; direction the player is facing
 .checkIfPlayerFacingUp
@@ -1649,7 +1649,7 @@ IsSpriteInFrontOfPlayer2: ; 0b6d (0:0b6d)
 
 ; function to check if the player will jump down a ledge and check if the tile ahead is passable (when not surfing)
 ; sets the carry flag if there is a collision, and unsets it if there isn't a collision
-CollisionCheckOnLand: ; 0bd1 (0:0bd1)
+CollisionCheckOnLand:: ; 0bd1 (0:0bd1)
 	ld a,[$d736]
 	bit 6,a ; is the player jumping?
 	jr nz,.noCollision
@@ -1689,7 +1689,7 @@ CollisionCheckOnLand: ; 0bd1 (0:0bd1)
 
 ; function that checks if the tile in front of the player is passable
 ; clears carry if it is, sets carry if not
-CheckTilePassable: ; 0c10 (0:0c10)
+CheckTilePassable:: ; 0c10 (0:0c10)
 	ld a,$35
 	call Predef ; get tile in front of player
 	ld a,[$cfc6] ; tile in front of player
@@ -1713,7 +1713,7 @@ CheckTilePassable: ; 0c10 (0:0c10)
 ; and check for collisions that only occur between certain pairs of tiles
 ; Input: hl - address of directional collision data
 ; sets carry if there is a collision and unsets carry if not
-CheckForJumpingAndTilePairCollisions: ; 0c2a (0:0c2a)
+CheckForJumpingAndTilePairCollisions:: ; 0c2a (0:0c2a)
 	push hl
 	ld a,$35
 	call Predef ; get the tile in front of the player
@@ -1731,12 +1731,12 @@ CheckForJumpingAndTilePairCollisions: ; 0c2a (0:0c2a)
 	ret nz
 ; if not jumping
 
-Func_c44: ; 0c44 (0:0c44)
+Func_c44:: ; 0c44 (0:0c44)
 	FuncCoord 8, 9 ; $c45c
 	ld a,[Coord] ; tile the player is on
 	ld [$cf0e],a
 
-CheckForTilePairCollisions: ; 0c4a (0:0c4a)
+CheckForTilePairCollisions:: ; 0c4a (0:0c4a)
 	ld a,[$cfc6] ; tile in front of the player
 	ld c,a
 .tilePairCollisionLoop
@@ -1786,7 +1786,7 @@ CheckForTilePairCollisions: ; 0c4a (0:0c4a)
 ; these entries indicate that the player may not cross between tile 1 and tile 2
 ; it's mainly used to simulate differences in elevation
 
-TilePairCollisionsLand: ; 0c7e (0:0c7e)
+TilePairCollisionsLand:: ; 0c7e (0:0c7e)
 	db $11, $20, $05;
 	db $11, $41, $05;
 	db $03, $30, $2E;
@@ -1800,14 +1800,14 @@ TilePairCollisionsLand: ; 0c7e (0:0c7e)
 	db $03, $5F, $2E;
 	db $FF;
 
-TilePairCollisionsWater: ; 0ca0 (0:0ca0)
+TilePairCollisionsWater:: ; 0ca0 (0:0ca0)
 	db $03, $14, $2E;
 	db $03, $48, $2E;
 	db $11, $14, $05;
 	db $FF;
 
 ; this builds a tile map from the tile block map based on the current X/Y coordinates of the player's character
-LoadCurrentMapView: ; 0caa (0:0caa)
+LoadCurrentMapView:: ; 0caa (0:0caa)
 	ld a,[H_LOADEDROMBANK]
 	push af
 	ld a,[$d52b] ; tile data ROM bank
@@ -1897,7 +1897,7 @@ LoadCurrentMapView: ; 0caa (0:0caa)
 	ld [$2000],a ; restore previous ROM bank
 	ret
 
-AdvancePlayerSprite: ; 0d27 (0:0d27)
+AdvancePlayerSprite:: ; 0d27 (0:0d27)
 	ld a,[$c103] ; delta Y
 	ld b,a
 	ld a,[$c105] ; delta X
@@ -2095,7 +2095,7 @@ AdvancePlayerSprite: ; 0d27 (0:0d27)
 ; the following four functions are used to move the pointer to the upper left
 ; corner of the tile block map in the direction of motion
 
-MoveTileBlockMapPointerEast: ; 0e65 (0:0e65)
+MoveTileBlockMapPointerEast:: ; 0e65 (0:0e65)
 	ld a,[de]
 	add a,$01
 	ld [de],a
@@ -2106,7 +2106,7 @@ MoveTileBlockMapPointerEast: ; 0e65 (0:0e65)
 	ld [de],a
 	ret
 
-MoveTileBlockMapPointerWest: ; 0e6f (0:0e6f)
+MoveTileBlockMapPointerWest:: ; 0e6f (0:0e6f)
 	ld a,[de]
 	sub a,$01
 	ld [de],a
@@ -2117,7 +2117,7 @@ MoveTileBlockMapPointerWest: ; 0e6f (0:0e6f)
 	ld [de],a
 	ret
 
-MoveTileBlockMapPointerSouth: ; 0e79 (0:0e79)
+MoveTileBlockMapPointerSouth:: ; 0e79 (0:0e79)
 	add a,$06
 	ld b,a
 	ld a,[de]
@@ -2130,7 +2130,7 @@ MoveTileBlockMapPointerSouth: ; 0e79 (0:0e79)
 	ld [de],a
 	ret
 
-MoveTileBlockMapPointerNorth: ; 0e85 (0:0e85)
+MoveTileBlockMapPointerNorth:: ; 0e85 (0:0e85)
 	add a,$06
 	ld b,a
 	ld a,[de]
@@ -2146,7 +2146,7 @@ MoveTileBlockMapPointerNorth: ; 0e85 (0:0e85)
 ; the following 6 functions are used to tell the V-blank handler to redraw
 ; the portion of the map that was newly exposed due to the player's movement
 
-ScheduleNorthRowRedraw: ; 0e91 (0:0e91)
+ScheduleNorthRowRedraw:: ; 0e91 (0:0e91)
 	FuncCoord 0, 0
 	ld hl,Coord
 	call ScheduleRowRedrawHelper
@@ -2158,7 +2158,7 @@ ScheduleNorthRowRedraw: ; 0e91 (0:0e91)
 	ld [H_SCREENEDGEREDRAW],a
 	ret
 
-ScheduleRowRedrawHelper: ; 0ea6 (0:0ea6)
+ScheduleRowRedrawHelper:: ; 0ea6 (0:0ea6)
 	ld de,wScreenEdgeTiles
 	ld c,$28
 .loop
@@ -2169,7 +2169,7 @@ ScheduleRowRedrawHelper: ; 0ea6 (0:0ea6)
 	jr nz,.loop
 	ret
 
-ScheduleSouthRowRedraw: ; 0eb2 (0:0eb2)
+ScheduleSouthRowRedraw:: ; 0eb2 (0:0eb2)
 	FuncCoord 0,16
 	ld hl,Coord
 	call ScheduleRowRedrawHelper
@@ -2189,7 +2189,7 @@ ScheduleSouthRowRedraw: ; 0eb2 (0:0eb2)
 	ld [H_SCREENEDGEREDRAW],a
 	ret
 
-ScheduleEastColumnRedraw: ; 0ed3 (0:0ed3)
+ScheduleEastColumnRedraw:: ; 0ed3 (0:0ed3)
 	FuncCoord 18,0
 	ld hl,Coord
 	call ScheduleColumnRedrawHelper
@@ -2208,7 +2208,7 @@ ScheduleEastColumnRedraw: ; 0ed3 (0:0ed3)
 	ld [H_SCREENEDGEREDRAW],a
 	ret
 
-ScheduleColumnRedrawHelper: ; 0ef2 (0:0ef2)
+ScheduleColumnRedrawHelper:: ; 0ef2 (0:0ef2)
 	ld de,wScreenEdgeTiles
 	ld c,$12
 .loop
@@ -2228,7 +2228,7 @@ ScheduleColumnRedrawHelper: ; 0ef2 (0:0ef2)
 	jr nz,.loop
 	ret
 
-ScheduleWestColumnRedraw: ; 0f08 (0:0f08)
+ScheduleWestColumnRedraw:: ; 0f08 (0:0f08)
 	FuncCoord 0,0
 	ld hl,Coord
 	call ScheduleColumnRedrawHelper
@@ -2242,7 +2242,7 @@ ScheduleWestColumnRedraw: ; 0f08 (0:0f08)
 
 ; function to write the tiles that make up a tile block to memory
 ; Input: c = tile block ID, hl = destination address
-DrawTileBlock: ; 0f1d (0:0f1d)
+DrawTileBlock:: ; 0f1d (0:0f1d)
 	push hl
 	ld a,[$d52c] ; pointer to tiles
 	ld l,a
@@ -2283,7 +2283,7 @@ DrawTileBlock: ; 0f1d (0:0f1d)
 	ret
 
 ; function to update joypad state and simulate button presses
-GetJoypadStateOverworld: ; 0f4d (0:0f4d)
+GetJoypadStateOverworld:: ; 0f4d (0:0f4d)
 	xor a
 	ld [$c103],a
 	ld [$c105],a
@@ -2354,7 +2354,7 @@ GetJoypadStateOverworld: ; 0f4d (0:0f4d)
 ; so the old value of c is used. 2429 is always called before this function,
 ; and 2429 always sets c to 0xF0. There is no 0xF0 background tile, so it
 ; is considered impassable and it is detected as a collision.
-CollisionCheckOnWater: ; 0fb7 (0:0fb7)
+CollisionCheckOnWater:: ; 0fb7 (0:0fb7)
 	ld a,[$d730]
 	bit 7,a
 	jp nz,.noCollision ; return and clear carry if button presses are being simulated
@@ -2414,7 +2414,7 @@ CollisionCheckOnWater: ; 0fb7 (0:0fb7)
 	jr .stopSurfing ; if it is the boarding platform tile, stop surfing
 
 ; function to run the current map's script
-RunMapScript: ; 101b (0:101b)
+RunMapScript:: ; 101b (0:101b)
 	push hl
 	push de
 	push bc
@@ -2444,21 +2444,21 @@ RunMapScript: ; 101b (0:101b)
 .return
 	ret
 
-LoadWalkingPlayerSpriteGraphics: ; 104d (0:104d)
+LoadWalkingPlayerSpriteGraphics:: ; 104d (0:104d)
 	ld de,RedSprite ; $4180
 	ld hl,$8000
 	jr LoadPlayerSpriteGraphicsCommon
 
-LoadSurfingPlayerSpriteGraphics: ; 1055 (0:1055)
+LoadSurfingPlayerSpriteGraphics:: ; 1055 (0:1055)
 	ld de,SeelSprite
 	ld hl,$8000
 	jr LoadPlayerSpriteGraphicsCommon
 
-LoadBikePlayerSpriteGraphics: ; 105d (0:105d)
+LoadBikePlayerSpriteGraphics:: ; 105d (0:105d)
 	ld de,RedCyclingSprite
 	ld hl,$8000
 
-LoadPlayerSpriteGraphicsCommon: ; 1063 (0:1063)
+LoadPlayerSpriteGraphicsCommon:: ; 1063 (0:1063)
 	push de
 	push hl
 	ld bc,(BANK(RedSprite) << 8) + $0c
@@ -2476,7 +2476,7 @@ LoadPlayerSpriteGraphicsCommon: ; 1063 (0:1063)
 	jp CopyVideoData
 
 ; function to load data from the map header
-LoadMapHeader: ; 107c (0:107c)
+LoadMapHeader:: ; 107c (0:107c)
 	ld b, BANK(Func_f113)
 	ld hl, Func_f113
 	call Bankswitch
@@ -2760,7 +2760,7 @@ LoadMapHeader: ; 107c (0:107c)
 
 ; function to copy map connection data from ROM to WRAM
 ; Input: hl = source, de = destination
-CopyMapConnectionHeader: ; 1238 (0:1238)
+CopyMapConnectionHeader:: ; 1238 (0:1238)
 	ld c,$0b
 .loop
 	ld a,[hli]
@@ -2771,7 +2771,7 @@ CopyMapConnectionHeader: ; 1238 (0:1238)
 	ret
 
 ; function to load map data
-LoadMapData: ; 1241 (0:1241)
+LoadMapData:: ; 1241 (0:1241)
 	ld a,[H_LOADEDROMBANK]
 	push af
 	call DisableLCD
@@ -2835,7 +2835,7 @@ LoadMapData: ; 1241 (0:1241)
 
 ; function to switch to the ROM bank that a map is stored in
 ; Input: a = map number
-SwitchToMapRomBank: ; 12bc (0:12bc)
+SwitchToMapRomBank:: ; 12bc (0:12bc)
 	push hl
 	push bc
 	ld c,a
@@ -2854,7 +2854,7 @@ SwitchToMapRomBank: ; 12bc (0:12bc)
 	pop hl
 	ret
 
-Func_12da: ; 12da (0:12da)
+Func_12da:: ; 12da (0:12da)
 	ld a, $1e
 	ld [$d13a], a
 	ld hl, $d730
@@ -2863,7 +2863,7 @@ Func_12da: ; 12da (0:12da)
 	ld [hl], a
 	ret
 
-Func_12e7: ; 12e7 (0:12e7)
+Func_12e7:: ; 12e7 (0:12e7)
 	ld hl, $d728
 	res 0, [hl]
 	ret
@@ -2871,7 +2871,7 @@ Func_12e7: ; 12e7 (0:12e7)
 ;appears to be called twice inside function $C38B
 ;if $d700,$d11a == $1 then biking
 ;if $d700,$d11a == $2 then surfing
-ForceBikeOrSurf: ; 12ed (0:12ed)
+ForceBikeOrSurf:: ; 12ed (0:12ed)
 	ld b,5 ;graphics bank 5
 	ld hl,LoadPlayerSpriteGraphics ;load player sprite graphics
 	call Bankswitch ;loads bank 5 and then calls LoadPlayerSpriteGraphics
@@ -2883,7 +2883,7 @@ ForceBikeOrSurf: ; 12ed (0:12ed)
 ; c = number of frames to wait
 ; sets carry if Up+Select+B, Start, or A is pressed within c frames
 ; unsets carry otherwise
-CheckForUserInterruption: ; 12f8 (0:12f8)
+CheckForUserInterruption:: ; 12f8 (0:12f8)
 	call DelayFrame
 	push bc
 	call GetJoypadStateLowSensitivity
@@ -2906,7 +2906,7 @@ CheckForUserInterruption: ; 12f8 (0:12f8)
 ; function to load position data for destination warp when switching maps
 ; INPUT:
 ; a = ID of destination warp within destination map
-LoadDestinationWarpPosition: ; 1313 (0:1313)
+LoadDestinationWarpPosition:: ; 1313 (0:1313)
 	ld b,a
 	ld a,[H_LOADEDROMBANK]
 	push af
@@ -2931,7 +2931,7 @@ LoadDestinationWarpPosition: ; 1313 (0:1313)
 ; c: if nonzero, show at least a sliver of health
 ; d = number of HP bar sections (normally 6)
 ; e = health (in eighths of bar sections) (normally out of 48)
-DrawHPBar: ; 1336 (0:1336)
+DrawHPBar:: ; 1336 (0:1336)
 	push hl
 	push de
 	push bc
@@ -2997,13 +2997,13 @@ DrawHPBar: ; 1336 (0:1336)
 ; [$cf91] = pokemon ID
 ; $cf98 = base address of pokemon data
 ; $d0b8 = base address of base stats
-LoadMonData: ; 1372 (0:1372)
+LoadMonData:: ; 1372 (0:1372)
 	ld hl,LoadMonData_
 	ld b,BANK(LoadMonData_)
 	jp Bankswitch
 
 ; writes c to $d0dc+b
-Func_137a: ; 137a (0:137a)
+Func_137a:: ; 137a (0:137a)
 	ld hl, $d0dc
 	ld e, b
 	ld d, $0
@@ -3012,11 +3012,11 @@ Func_137a: ; 137a (0:137a)
 	ld [hl], a
 	ret
 
-LoadFlippedFrontSpriteByMonIndex: ; 1384 (0:1384)
+LoadFlippedFrontSpriteByMonIndex:: ; 1384 (0:1384)
 	ld a, $1
 	ld [W_SPRITEFLIPPED], a
 
-LoadFrontSpriteByMonIndex: ; 1389 (0:1389)
+LoadFrontSpriteByMonIndex:: ; 1389 (0:1389)
 	push hl
 	ld a, [$d11e]
 	push af
@@ -3060,7 +3060,7 @@ LoadFrontSpriteByMonIndex: ; 1389 (0:1389)
 ; plays the cry of a pokemon
 ; INPUT:
 ; a = pokemon ID
-PlayCry: ; 13d0 (0:13d0)
+PlayCry:: ; 13d0 (0:13d0)
 	call GetCryData
 	call PlaySound ; play cry
 	jp WaitForSoundToFinish ; wait for sound to be done playing
@@ -3068,7 +3068,7 @@ PlayCry: ; 13d0 (0:13d0)
 ; gets a pokemon's cry data
 ; INPUT:
 ; a = pokemon ID
-GetCryData: ; 13d9 (0:13d9)
+GetCryData:: ; 13d9 (0:13d9)
 	dec a
 	ld c,a
 	ld b,0
@@ -3092,7 +3092,7 @@ GetCryData: ; 13d9 (0:13d9)
 	add c ; a = $14 + cryID * 3
 	ret
 
-DisplayPartyMenu: ; 13fc (0:13fc)
+DisplayPartyMenu:: ; 13fc (0:13fc)
 	ld a,[$ffd7]
 	push af
 	xor a
@@ -3103,7 +3103,7 @@ DisplayPartyMenu: ; 13fc (0:13fc)
 	call DrawPartyMenu
 	jp HandlePartyMenuInput
 
-GoBackToPartyMenu: ; 1411 (0:1411)
+GoBackToPartyMenu:: ; 1411 (0:1411)
 	ld a,[$ffd7]
 	push af
 	xor a
@@ -3112,7 +3112,7 @@ GoBackToPartyMenu: ; 1411 (0:1411)
 	call RedrawPartyMenu
 	jp HandlePartyMenuInput
 
-PartyMenuInit: ; 1420 (0:1420)
+PartyMenuInit:: ; 1420 (0:1420)
 	ld a,$01
 	call BankswitchHome
 	call LoadHpBarAndStatusTilePatterns
@@ -3151,7 +3151,7 @@ PartyMenuInit: ; 1420 (0:1420)
 	ld [hl],a ; old menu item ID
 	ret
 
-HandlePartyMenuInput: ; 145a (0:145a)
+HandlePartyMenuInput:: ; 145a (0:145a)
 	ld a,1
 	ld [$cc4a],a
 	ld a,$40
@@ -3211,14 +3211,14 @@ HandlePartyMenuInput: ; 145a (0:145a)
 	call Bankswitch
 	jr HandlePartyMenuInput
 
-DrawPartyMenu: ; 14d4 (0:14d4)
+DrawPartyMenu:: ; 14d4 (0:14d4)
 	ld hl, DrawPartyMenu_
 	jr DrawPartyMenuCommon
 
-RedrawPartyMenu: ; 14d9 (0:14d9)
+RedrawPartyMenu:: ; 14d9 (0:14d9)
 	ld hl, RedrawPartyMenu_
 
-DrawPartyMenuCommon: ; 14dc (0:14dc)
+DrawPartyMenuCommon:: ; 14dc (0:14dc)
 	ld b, BANK(RedrawPartyMenu_)
 	jp Bankswitch
 
@@ -3226,7 +3226,7 @@ DrawPartyMenuCommon: ; 14dc (0:14dc)
 ; INPUT:
 ; de = address of status condition
 ; hl = destination address
-PrintStatusCondition: ; 14e1 (0:14e1)
+PrintStatusCondition:: ; 14e1 (0:14e1)
 	push de
 	dec de
 	dec de ; de = address of current HP
@@ -3262,7 +3262,7 @@ PrintStatusConditionNotFainted ; 14f6
 ; INPUT:
 ; hl = destination address
 ; [$cfb9] = level
-PrintLevel: ; 150b (0:150b)
+PrintLevel:: ; 150b (0:150b)
 	ld a,$6e ; ":L" tile ID
 	ld [hli],a
 	ld c,2 ; number of digits
@@ -3278,19 +3278,19 @@ PrintLevel: ; 150b (0:150b)
 ; INPUT:
 ; hl = destination address
 ; [$cfb9] = level
-PrintLevelFull: ; 151b (0:151b)
+PrintLevelFull:: ; 151b (0:151b)
 	ld a,$6e ; ":L" tile ID
 	ld [hli],a
 	ld c,3 ; number of digits
 	ld a,[$cfb9] ; level
 
-PrintLevelCommon: ; 1523 (0:1523)
+PrintLevelCommon:: ; 1523 (0:1523)
 	ld [$d11e],a
 	ld de,$d11e
 	ld b,$41 ; no leading zeroes, left-aligned, one byte
 	jp PrintNumber
 
-Func_152e: ; 152e (0:152e)
+Func_152e:: ; 152e (0:152e)
 	ld hl,$d0dc
 	ld c,a
 	ld b,0
@@ -3301,7 +3301,7 @@ Func_152e: ; 152e (0:152e)
 ; copies the base stat data of a pokemon to $D0B8 (W_MONHEADER)
 ; INPUT:
 ; [$D0B5] = pokemon ID
-GetMonHeader: ; 1537 (0:1537)
+GetMonHeader:: ; 1537 (0:1537)
 	ld a,[H_LOADEDROMBANK]
 	push af
 	ld a,BANK(BulbasaurBaseStats)
@@ -3366,12 +3366,12 @@ GetMonHeader: ; 1537 (0:1537)
 	ret
 
 ; copy party pokemon's name to $CD6D
-GetPartyMonName2: ; 15b4 (0:15b4)
+GetPartyMonName2:: ; 15b4 (0:15b4)
 	ld a,[wWhichPokemon] ; index within party
 	ld hl,W_PARTYMON1NAME
 
 ; this is called more often
-GetPartyMonName: ; 15ba (0:15ba)
+GetPartyMonName:: ; 15ba (0:15ba)
 	push hl
 	push bc
 	call SkipFixedLengthTextEntries ; add 11 to hl, a times
@@ -3397,7 +3397,7 @@ GetPartyMonName: ; 15ba (0:15ba)
 ; bits 0-4: length of BCD number in bytes
 ; Note that bits 5 and 7 are modified during execution. The above reflects
 ; their meaning at the beginning of the functions's execution.
-PrintBCDNumber: ; 15cd (0:15cd)
+PrintBCDNumber:: ; 15cd (0:15cd)
 	ld b,c ; save flags in b
 	res 7,c
 	res 6,c
@@ -3435,7 +3435,7 @@ PrintBCDNumber: ; 15cd (0:15cd)
 .done
 	ret
 
-PrintBCDDigit: ; 1604 (0:1604)
+PrintBCDDigit:: ; 1604 (0:1604)
 	and a,%00001111
 	and a
 	jr z,.zeroDigit
@@ -3465,7 +3465,7 @@ PrintBCDDigit: ; 1604 (0:1604)
 ; uncompresses the front or back sprite of the specified mon
 ; assumes the corresponding mon header is already loaded
 ; hl contains offset to sprite pointer ($b for front or $d for back)
-UncompressMonSprite: ; 1627 (0:1627)
+UncompressMonSprite:: ; 1627 (0:1627)
 	ld bc,W_MONHEADER
 	add hl,bc
 	ld a,[hli]
@@ -3510,7 +3510,7 @@ UncompressMonSprite: ; 1627 (0:1627)
 	jp UncompressSpriteData
 
 ; de: destination location
-LoadMonFrontSprite: ; 1665 (0:1665)
+LoadMonFrontSprite:: ; 1665 (0:1665)
 	push de
 	ld hl, W_MONHFRONTSPRITE - W_MONHEADER
 	call UncompressMonSprite
@@ -3524,7 +3524,7 @@ LoadMonFrontSprite: ; 1665 (0:1665)
 ; calculates alignment parameters to place both sprite chunks in the center of the 7*7 tile sprite buffers
 ; de: destination location
 ; a,c:  sprite dimensions (in tiles of 8x8 each)
-LoadUncompressedSpriteData: ; 1672 (0:1672)
+LoadUncompressedSpriteData:: ; 1672 (0:1672)
 	push de
 	and $f
 	ld [H_SPRITEWIDTH], a ; each byte contains 8 pixels (in 1bpp), so tiles=bytes for width
@@ -3573,7 +3573,7 @@ LoadUncompressedSpriteData: ; 1672 (0:1672)
 
 ; copies and aligns the sprite data properly inside the sprite buffer
 ; sprite buffers are 7*7 tiles in size, the loaded sprite is centered within this area
-AlignSpriteDataCentered: ; 16c2 (0:16c2)
+AlignSpriteDataCentered:: ; 16c2 (0:16c2)
 	ld a, [H_SPRITEOFFSET]
 	ld b, $0
 	ld c, a
@@ -3599,7 +3599,7 @@ AlignSpriteDataCentered: ; 16c2 (0:16c2)
 	ret
 
 ; fills the sprite buffer (pointed to in hl) with zeros
-ZeroSpriteBuffer: ; 16df (0:16df)
+ZeroSpriteBuffer:: ; 16df (0:16df)
 	ld bc, SPRITEBUFFERSIZE
 .nextByteLoop
 	xor a
@@ -3613,7 +3613,7 @@ ZeroSpriteBuffer: ; 16df (0:16df)
 ; combines the (7*7 tiles, 1bpp) sprite chunks in buffer 0 and 1 into a 2bpp sprite located in buffer 1 through 2
 ; in the resulting sprite, the rows of the two source sprites are interlaced
 ; de: output address
-InterlaceMergeSpriteBuffers: ; 16ea (0:16ea)
+InterlaceMergeSpriteBuffers:: ; 16ea (0:16ea)
 	xor a
 	ld [$4000], a
 	push de
@@ -3659,50 +3659,50 @@ InterlaceMergeSpriteBuffers: ; 16ea (0:16ea)
 	ld b, a
 	jp CopyVideoData
 
-Tset0B_Coll: ; 172f (0:172f)
+Tset0B_Coll:: ; 172f (0:172f)
 	INCBIN "gfx/tilesets/0b.tilecoll"
-Tset00_Coll: ; 1735 (0:1735)
+Tset00_Coll:: ; 1735 (0:1735)
 	INCBIN "gfx/tilesets/00.tilecoll"
-Tset01_Coll: ; 1749 (0:1749)
+Tset01_Coll:: ; 1749 (0:1749)
 	INCBIN "gfx/tilesets/01.tilecoll"
-Tset02_Coll: ; 1753 (0:1753)
+Tset02_Coll:: ; 1753 (0:1753)
 	INCBIN "gfx/tilesets/02.tilecoll"
-Tset05_Coll: ; 1759 (0:1759)
+Tset05_Coll:: ; 1759 (0:1759)
 	INCBIN "gfx/tilesets/05.tilecoll"
-Tset03_Coll: ; 1765 (0:1765)
+Tset03_Coll:: ; 1765 (0:1765)
 	INCBIN "gfx/tilesets/03.tilecoll"
-Tset08_Coll: ; 1775 (0:1775)
+Tset08_Coll:: ; 1775 (0:1775)
 	INCBIN "gfx/tilesets/08.tilecoll"
-Tset09_Coll: ; 177f (0:177f)
+Tset09_Coll:: ; 177f (0:177f)
 	INCBIN "gfx/tilesets/09.tilecoll"
-Tset0D_Coll: ; 178a (0:178a)
+Tset0D_Coll:: ; 178a (0:178a)
 	INCBIN "gfx/tilesets/0d.tilecoll"
-Tset0E_Coll: ; 1795 (0:1795)
+Tset0E_Coll:: ; 1795 (0:1795)
 	INCBIN "gfx/tilesets/0e.tilecoll"
-Tset0F_Coll: ; 179a (0:179a)
+Tset0F_Coll:: ; 179a (0:179a)
 	INCBIN "gfx/tilesets/0f.tilecoll"
-Tset10_Coll: ; 17a2 (0:17a2)
+Tset10_Coll:: ; 17a2 (0:17a2)
 	INCBIN "gfx/tilesets/10.tilecoll"
-Tset11_Coll: ; 17ac (0:17ac)
+Tset11_Coll:: ; 17ac (0:17ac)
 	INCBIN "gfx/tilesets/11.tilecoll"
-Tset12_Coll: ; 17b8 (0:17b8)
+Tset12_Coll:: ; 17b8 (0:17b8)
 	INCBIN "gfx/tilesets/12.tilecoll"
-Tset13_Coll: ; 17c0 (0:17c0)
+Tset13_Coll:: ; 17c0 (0:17c0)
 	INCBIN "gfx/tilesets/13.tilecoll"
-Tset14_Coll: ; 17ca (0:17ca)
+Tset14_Coll:: ; 17ca (0:17ca)
 	INCBIN "gfx/tilesets/14.tilecoll"
-Tset15_Coll: ; 17d1 (0:17d1)
+Tset15_Coll:: ; 17d1 (0:17d1)
 	INCBIN "gfx/tilesets/15.tilecoll"
-Tset16_Coll: ; 17dd (0:17dd)
+Tset16_Coll:: ; 17dd (0:17dd)
 	INCBIN "gfx/tilesets/16.tilecoll"
-Tset17_Coll: ; 17f0 (0:17f0)
+Tset17_Coll:: ; 17f0 (0:17f0)
 	INCBIN "gfx/tilesets/17.tilecoll"
 ;Tile Collision ends 0x17f7
 
 ; does the same thing as FarCopyData at 009D
 ; only difference is that it uses [$ff8b] instead of [$cee9] for a temp value
 ; copy bc bytes of data from a:hl to de
-FarCopyData2: ; 17f7 (0:17f7)
+FarCopyData2:: ; 17f7 (0:17f7)
 	ld [$ff8b],a
 	ld a,[H_LOADEDROMBANK]
 	push af
@@ -3717,7 +3717,7 @@ FarCopyData2: ; 17f7 (0:17f7)
 
 ; does a far copy but the source is de and the destination is hl
 ; copy bc bytes of data from a:de to hl
-FarCopyData3: ; 180d (0:180d)
+FarCopyData3:: ; 180d (0:180d)
 	ld [$ff8b],a
 	ld a,[H_LOADEDROMBANK]
 	push af
@@ -3740,7 +3740,7 @@ FarCopyData3: ; 180d (0:180d)
 
 ; copies each source byte to the destination twice (next to each other)
 ; copy bc source bytes from a:hl to de
-FarCopyDataDouble: ; 182b (0:182b)
+FarCopyDataDouble:: ; 182b (0:182b)
 	ld [$ff8b],a
 	ld a,[H_LOADEDROMBANK]
 	push af
@@ -3764,7 +3764,7 @@ FarCopyDataDouble: ; 182b (0:182b)
 
 ; copy (c * 16) bytes from b:de to hl during V-blank
 ; transfers up to 128 bytes per V-blank
-CopyVideoData: ; 1848 (0:1848)
+CopyVideoData:: ; 1848 (0:1848)
 	ld a,[H_AUTOBGTRANSFERENABLED] ; save auto-transfer enabled flag
 	push af
 	xor a
@@ -3807,7 +3807,7 @@ CopyVideoData: ; 1848 (0:1848)
 ; copy (c * 8) source bytes from b:de to hl during V-blank
 ; copies each source byte to the destination twice (next to each other)
 ; transfers up to 64 source bytes per V-blank
-CopyVideoDataDouble: ; 1886 (0:1886)
+CopyVideoDataDouble:: ; 1886 (0:1886)
 	ld a,[H_AUTOBGTRANSFERENABLED] ; save auto-transfer enabled flag
 	push af
 	xor a
@@ -3852,7 +3852,7 @@ CopyVideoDataDouble: ; 1886 (0:1886)
 ; hl = address of upper left corner of the area
 ; b = height
 ; c = width
-ClearScreenArea: ; 18c4 (0:18c4)
+ClearScreenArea:: ; 18c4 (0:18c4)
 	ld   a,$7F ; blank tile
 	ld   de,20 ; screen width
 .loop
@@ -3872,7 +3872,7 @@ ClearScreenArea: ; 18c4 (0:18c4)
 ; copies the screen tile buffer from WRAM to VRAM
 ; copying is done in 3 chunks of 6 rows each
 ; b: high byte of VRAM destination address ($98 or $9c for window tile map 0 or 1 resp.)
-CopyScreenTileBufferToVRAM: ; 18d6 (0:18d6)
+CopyScreenTileBufferToVRAM:: ; 18d6 (0:18d6)
 	ld c, $6
 	ld hl, $0000
 	ld de, wTileMap
@@ -3887,7 +3887,7 @@ CopyScreenTileBufferToVRAM: ; 18d6 (0:18d6)
 	call InitScreenTileBufferTransferParameters
 	jp DelayFrame
 
-InitScreenTileBufferTransferParameters: ; 18fc (0:18fc)
+InitScreenTileBufferTransferParameters:: ; 18fc (0:18fc)
 	ld a, d
 	ld [H_VBCOPYBGSRC+1], a
 	call GetRowColAddressBgMap
@@ -3901,7 +3901,7 @@ InitScreenTileBufferTransferParameters: ; 18fc (0:18fc)
 	ld [H_VBCOPYBGSRC], a ; $FF00+$c1
 	ret
 
-ClearScreen: ; 190f (0:190f)
+ClearScreen:: ; 190f (0:190f)
 ; clears all tiles in the tilemap,
 ; then wait three frames
 	ld bc,$0168 ; tilemap size
@@ -3916,7 +3916,7 @@ ClearScreen: ; 190f (0:190f)
 	jr nz,.loop
 	jp Delay3
 
-TextBoxBorder: ; 1922 (0:1922)
+TextBoxBorder:: ; 1922 (0:1922)
 ; draw a text box
 ; upper-left corner at coordinates hl
 ; height b
@@ -3958,7 +3958,7 @@ TextBoxBorder: ; 1922 (0:1922)
 	ld [hl],"┘"
 	ret
 ;
-NPlaceChar: ; 194f (0:194f)
+NPlaceChar:: ; 194f (0:194f)
 ; place a row of width c of identical characters
 	ld d,c
 .loop
@@ -3967,9 +3967,9 @@ NPlaceChar: ; 194f (0:194f)
 	jr nz,.loop
 	ret
 
-PlaceString: ; 1955 (0:1955)
+PlaceString:: ; 1955 (0:1955)
 	push hl
-PlaceNextChar: ; 1956 (0:1956)
+PlaceNextChar:: ; 1956 (0:1956)
 	ld a,[de]
 
 	cp "@"
@@ -4045,11 +4045,11 @@ PlaceNextChar: ; 1956 (0:1956)
 	jp z,Char5A
 	ld [hli],a
 	call PrintLetterDelay
-Next19E8: ; 19e8 (0:19e8)
+Next19E8:: ; 19e8 (0:19e8)
 	inc de
 	jp PlaceNextChar
 
-Char00: ; 19ec (0:19ec)
+Char00:: ; 19ec (0:19ec)
 	ld b,h
 	ld c,l
 	pop hl
@@ -4057,56 +4057,56 @@ Char00: ; 19ec (0:19ec)
 	dec de
 	ret
 
-Char00Text: ; 0x19f4 “%d ERROR.”
+Char00Text:: ; 0x19f4 “%d ERROR.”
 	TX_FAR _Char00Text
 	db "@"
 
-Char52: ; 0x19f9 player’s name
+Char52:: ; 0x19f9 player’s name
 	push de
 	ld de,W_PLAYERNAME
 	jr FinishDTE
 
-Char53: ; 19ff (0:19ff) ; rival’s name
+Char53:: ; 19ff (0:19ff) ; rival’s name
 	push de
 	ld de,W_RIVALNAME
 	jr FinishDTE
 
-Char5D: ; 1a05 (0:1a05) ; TRAINER
+Char5D:: ; 1a05 (0:1a05) ; TRAINER
 	push de
 	ld de,Char5DText
 	jr FinishDTE
 
-Char5C: ; 1a0b (0:1a0b) ; TM
+Char5C:: ; 1a0b (0:1a0b) ; TM
 	push de
 	ld de,Char5CText
 	jr FinishDTE
 
-Char5B: ; 1a11 (0:1a11) ; PC
+Char5B:: ; 1a11 (0:1a11) ; PC
 	push de
 	ld de,Char5BText
 	jr FinishDTE
 
-Char5E: ; 1a17 (0:1a17) ; ROCKET
+Char5E:: ; 1a17 (0:1a17) ; ROCKET
 	push de
 	ld de,Char5EText
 	jr FinishDTE
 
-Char54: ; 1a1d (0:1a1d) ; POKé
+Char54:: ; 1a1d (0:1a1d) ; POKé
 	push de
 	ld de,Char54Text
 	jr FinishDTE
 
-Char56: ; 1a23 (0:1a23) ; ……
+Char56:: ; 1a23 (0:1a23) ; ……
 	push de
 	ld de,Char56Text
 	jr FinishDTE
 
-Char4A: ; 1a29 (0:1a29) ; PKMN
+Char4A:: ; 1a29 (0:1a29) ; PKMN
 	push de
 	ld de,Char4AText
 	jr FinishDTE
 
-Char59: ; 1a2f (0:1a2f)
+Char59:: ; 1a2f (0:1a2f)
 ; depending on whose turn it is, print
 ; enemy active monster’s name, prefixed with “Enemy ”
 ; or
@@ -4116,13 +4116,13 @@ Char59: ; 1a2f (0:1a2f)
 	xor 1
 	jr MonsterNameCharsCommon
 
-Char5A: ; 1a35 (0:1a35)
+Char5A:: ; 1a35 (0:1a35)
 ; depending on whose turn it is, print
 ; player active monster’s name
 ; or
 ; enemy active monster’s name, prefixed with “Enemy ”
 	ld a,[H_WHOSETURN]
-MonsterNameCharsCommon: ; 1a37 (0:1a37)
+MonsterNameCharsCommon:: ; 1a37 (0:1a37)
 	push de
 	and a
 	jr nz,.Enemy
@@ -4138,7 +4138,7 @@ MonsterNameCharsCommon: ; 1a37 (0:1a37)
 	ld l,c
 	ld de,W_ENEMYMONNAME ; enemy active monster name
 
-FinishDTE: ; 1a4b (0:1a4b)
+FinishDTE:: ; 1a4b (0:1a4b)
 	call PlaceString
 	ld h,b
 	ld l,c
@@ -4146,24 +4146,24 @@ FinishDTE: ; 1a4b (0:1a4b)
 	inc de
 	jp PlaceNextChar
 
-Char5CText: ; 1a55 (0:1a55)
+Char5CText:: ; 1a55 (0:1a55)
 	db "TM@"
-Char5DText: ; 1a58 (0:1a58)
+Char5DText:: ; 1a58 (0:1a58)
 	db "TRAINER@"
-Char5BText: ; 1a60 (0:1a60)
+Char5BText:: ; 1a60 (0:1a60)
 	db "PC@"
-Char5EText: ; 1a63 (0:1a63)
+Char5EText:: ; 1a63 (0:1a63)
 	db "ROCKET@"
-Char54Text: ; 1a6a (0:1a6a)
+Char54Text:: ; 1a6a (0:1a6a)
 	db "POKé@"
-Char56Text: ; 1a6f (0:1a6f)
+Char56Text:: ; 1a6f (0:1a6f)
 	db "……@"
-Char5AText: ; 1a72 (0:1a72)
+Char5AText:: ; 1a72 (0:1a72)
 	db "Enemy @"
-Char4AText: ; 1a79 (0:1a79)
+Char4AText:: ; 1a79 (0:1a79)
 	db $E1,$E2,"@" ; PKMN
 
-Char55: ; 1a7c (0:1a7c)
+Char55:: ; 1a7c (0:1a7c)
 	push de
 	ld b,h
 	ld c,l
@@ -4175,40 +4175,40 @@ Char55: ; 1a7c (0:1a7c)
 	inc de
 	jp PlaceNextChar
 
-Char55Text: ; 1a8c (0:1a8c)
+Char55Text:: ; 1a8c (0:1a8c)
 ; equivalent to Char4B
 	TX_FAR _Char55Text
 	db "@"
 
-Char5F: ; 1a91 (0:1a91)
+Char5F:: ; 1a91 (0:1a91)
 ; ends a Pokédex entry
 	ld [hl],"."
 	pop hl
 	ret
 
-Char58: ; 1a95 (0:1a95)
+Char58:: ; 1a95 (0:1a95)
 	ld a,[$D12B]
 	cp 4
 	jp z,Next1AA2
 	ld a,$EE
 	FuncCoord 18, 16 ; $c4f2
 	ld [Coord],a
-Next1AA2: ; 1aa2 (0:1aa2)
+Next1AA2:: ; 1aa2 (0:1aa2)
 	call ProtectedDelay3
 	call ManualTextScroll
 	ld a,$7F
 	FuncCoord 18, 16 ; $c4f2
 	ld [Coord],a
-Char57: ; 1aad (0:1aad)
+Char57:: ; 1aad (0:1aad)
 	pop hl
 	ld de,Char58Text
 	dec de
 	ret
 
-Char58Text: ; 1ab3 (0:1ab3)
+Char58Text:: ; 1ab3 (0:1ab3)
 	db "@"
 
-Char51: ; 1ab4 (0:1ab4)
+Char51:: ; 1ab4 (0:1ab4)
 	push de
 	ld a,$EE
 	FuncCoord 18, 16 ; $c4f2
@@ -4226,7 +4226,7 @@ Char51: ; 1ab4 (0:1ab4)
 	ld hl,Coord
 	jp Next19E8
 
-Char49: ; 1ad5 (0:1ad5)
+Char49:: ; 1ad5 (0:1ad5)
 	push de
 	ld a,$EE
 	FuncCoord 18, 16 ; $c4f2
@@ -4246,7 +4246,7 @@ Char49: ; 1ad5 (0:1ad5)
 	push hl
 	jp Next19E8
 
-Char4B: ; 1af8 (0:1af8)
+Char4B:: ; 1af8 (0:1af8)
 	ld a,$EE
 	FuncCoord 18, 16 ; $c4f2
 	ld [Coord],a
@@ -4258,7 +4258,7 @@ Char4B: ; 1af8 (0:1af8)
 	FuncCoord 18, 16 ; $c4f2
 	ld [Coord],a
 	;fall through
-Char4C: ; 1b0a (0:1b0a)
+Char4C:: ; 1b0a (0:1b0a)
 	push de
 	call Next1B18
 	call Next1B18
@@ -4267,7 +4267,7 @@ Char4C: ; 1b0a (0:1b0a)
 	pop de
 	jp Next19E8
 
-Next1B18: ; 1b18 (0:1b18)
+Next1B18:: ; 1b18 (0:1b18)
 	FuncCoord 0, 14 ; $c4b8
 	ld hl,Coord
 	FuncCoord 0, 13 ; $c4a4
@@ -4297,13 +4297,13 @@ Next1B18: ; 1b18 (0:1b18)
 
 	ret
 
-ProtectedDelay3: ; 1b3a (0:1b3a)
+ProtectedDelay3:: ; 1b3a (0:1b3a)
 	push bc
 	call Delay3
 	pop bc
 	ret
 
-TextCommandProcessor: ; 1b40 (0:1b40)
+TextCommandProcessor:: ; 1b40 (0:1b40)
 	ld a,[$d358]
 	push af
 	set 1,a
@@ -4316,7 +4316,7 @@ TextCommandProcessor: ; 1b40 (0:1b40)
 	ld a,b
 	ld [$cc3b],a
 
-NextTextCommand: ; 1b55 (0:1b55)
+NextTextCommand:: ; 1b55 (0:1b55)
 	ld a,[hli]
 	cp a, "@" ; terminator
 	jr nz,.doTextCommand
@@ -4347,7 +4347,7 @@ NextTextCommand: ; 1b55 (0:1b55)
 ; AAAA = address of upper left corner
 ; BB = height
 ; CC = width
-TextCommand04: ; 1b78 (0:1b78)
+TextCommand04:: ; 1b78 (0:1b78)
 	pop hl
 	ld a,[hli]
 	ld e,a
@@ -4366,7 +4366,7 @@ TextCommand04: ; 1b78 (0:1b78)
 
 ; place string inline
 ; 00{string}
-TextCommand00: ; 1b8a (0:1b8a)
+TextCommand00:: ; 1b8a (0:1b8a)
 	pop hl
 	ld d,h
 	ld e,l
@@ -4381,7 +4381,7 @@ TextCommand00: ; 1b8a (0:1b8a)
 ; place string from RAM
 ; 01AAAA
 ; AAAA = address of string
-TextCommand01: ; 1b97 (0:1b97)
+TextCommand01:: ; 1b97 (0:1b97)
 	pop hl
 	ld a,[hli]
 	ld e,a
@@ -4400,7 +4400,7 @@ TextCommand01: ; 1b97 (0:1b97)
 ; BB
 ; bits 0-4 = length in bytes
 ; bits 5-7 = unknown flags
-TextCommand02: ; 1ba5 (0:1ba5)
+TextCommand02:: ; 1ba5 (0:1ba5)
 	pop hl
 	ld a,[hli]
 	ld e,a
@@ -4420,7 +4420,7 @@ TextCommand02: ; 1ba5 (0:1ba5)
 ; repoint destination address
 ; 03AAAA
 ; AAAA = new destination address
-TextCommand03: ; 1bb7 (0:1bb7)
+TextCommand03:: ; 1bb7 (0:1bb7)
 	pop hl
 	ld a,[hli]
 	ld [$cc3a],a
@@ -4433,7 +4433,7 @@ TextCommand03: ; 1bb7 (0:1bb7)
 ; repoint destination to second line of dialogue text box
 ; 05
 ; (no arguments)
-TextCommand05: ; 1bc5 (0:1bc5)
+TextCommand05:: ; 1bc5 (0:1bc5)
 	pop hl
 	FuncCoord 1, 16 ; $c4e1
 	ld bc,Coord ; address of second line of dialogue text box
@@ -4442,7 +4442,7 @@ TextCommand05: ; 1bc5 (0:1bc5)
 ; blink arrow and wait for A or B to be pressed
 ; 06
 ; (no arguments)
-TextCommand06: ; 1bcc (0:1bcc)
+TextCommand06:: ; 1bcc (0:1bcc)
 	ld a,[W_ISLINKBATTLE]
 	cp a,$04
 	jp z,TextCommand0D
@@ -4461,7 +4461,7 @@ TextCommand06: ; 1bcc (0:1bcc)
 ; scroll text up one line
 ; 07
 ; (no arguments)
-TextCommand07: ; 1be7 (0:1be7)
+TextCommand07:: ; 1be7 (0:1be7)
 	ld a," "
 	FuncCoord 18, 16 ; $c4f2
 	ld [Coord],a ; place blank space in lower right corner of dialogue text box
@@ -4474,7 +4474,7 @@ TextCommand07: ; 1be7 (0:1be7)
 
 ; execute asm inline
 ; 08{code}
-TextCommand08: ; 1bf9 (0:1bf9)
+TextCommand08:: ; 1bf9 (0:1bf9)
 	pop hl
 	ld de,NextTextCommand
 	push de ; return address
@@ -4486,7 +4486,7 @@ TextCommand08: ; 1bf9 (0:1bf9)
 ; BB
 ; bits 0-3 = how many digits to display
 ; bits 4-7 = how long the number is in bytes
-TextCommand09: ; 1bff (0:1bff)
+TextCommand09:: ; 1bff (0:1bff)
 	pop hl
 	ld a,[hli]
 	ld e,a
@@ -4513,7 +4513,7 @@ TextCommand09: ; 1bff (0:1bff)
 ; wait half a second if the user doesn't hold A or B
 ; 0A
 ; (no arguments)
-TextCommand0A: ; 1c1d (0:1c1d)
+TextCommand0A:: ; 1c1d (0:1c1d)
 	push bc
 	call GetJoypadState
 	ld a,[H_CURRENTPRESSEDBUTTONS]
@@ -4529,7 +4529,7 @@ TextCommand0A: ; 1c1d (0:1c1d)
 ; plays sounds
 ; this actually handles various command ID's, not just 0B
 ; (no arguments)
-TextCommand0B: ; 1c31 (0:1c31)
+TextCommand0B:: ; 1c31 (0:1c31)
 	pop hl
 	push bc
 	dec hl
@@ -4566,7 +4566,7 @@ TextCommand0B: ; 1c31 (0:1c31)
 	jp NextTextCommand
 
 ; format: text command ID, sound ID or cry ID
-TextCommandSounds: ; 1c64 (0:1c64)
+TextCommandSounds:: ; 1c64 (0:1c64)
 	db $0B,$86
 	db $12,$9A
 	db $0E,$91
@@ -4581,7 +4581,7 @@ TextCommandSounds: ; 1c64 (0:1c64)
 ; draw ellipses
 ; 0CAA
 ; AA = number of ellipses to draw
-TextCommand0C: ; 1c78 (0:1c78)
+TextCommand0C:: ; 1c78 (0:1c78)
 	pop hl
 	ld a,[hli]
 	ld d,a
@@ -4610,7 +4610,7 @@ TextCommand0C: ; 1c78 (0:1c78)
 ; wait for A or B to be pressed
 ; 0D
 ; (no arguments)
-TextCommand0D: ; 1c9a (0:1c9a)
+TextCommand0D:: ; 1c9a (0:1c9a)
 	push bc
 	call ManualTextScroll ; wait for A or B to be pressed
 	pop bc
@@ -4621,7 +4621,7 @@ TextCommand0D: ; 1c9a (0:1c9a)
 ; 17AAAABB
 ; AAAA = address of text commands
 ; BB = bank
-TextCommand17: ; 1ca3 (0:1ca3)
+TextCommand17:: ; 1ca3 (0:1ca3)
 	pop hl
 	ld a,[H_LOADEDROMBANK]
 	push af
@@ -4642,7 +4642,7 @@ TextCommand17: ; 1ca3 (0:1ca3)
 	ld [$2000],a
 	jp NextTextCommand
 
-TextCommandJumpTable: ; 1cc1 (0:1cc1)
+TextCommandJumpTable:: ; 1cc1 (0:1cc1)
 	dw TextCommand00
 	dw TextCommand01
 	dw TextCommand02
@@ -4661,7 +4661,7 @@ TextCommandJumpTable: ; 1cc1 (0:1cc1)
 ; this function seems to be used only once
 ; it store the address of a row and column of the VRAM background map in hl
 ; INPUT: h - row, l - column, b - high byte of background tile map address in VRAM
-GetRowColAddressBgMap: ; 1cdd (0:1cdd)
+GetRowColAddressBgMap:: ; 1cdd (0:1cdd)
 	xor a
 	srl h
 	rr a
@@ -4678,7 +4678,7 @@ GetRowColAddressBgMap: ; 1cdd (0:1cdd)
 
 ; clears a VRAM background map with blank space tiles
 ; INPUT: h - high byte of background tile map address in VRAM
-ClearBgMap: ; 1cf0 (0:1cf0)
+ClearBgMap:: ; 1cf0 (0:1cf0)
 	ld a," "
 	jr .next
 	ld a,l
@@ -4696,7 +4696,7 @@ ClearBgMap: ; 1cf0 (0:1cf0)
 ; When the player takes a step, a row or column of 2x2 tile blocks at the edge
 ; of the screen toward which they moved is exposed and has to be redrawn.
 ; This function does the redrawing.
-RedrawExposedScreenEdge: ; 1d01 (0:1d01)
+RedrawExposedScreenEdge:: ; 1d01 (0:1d01)
 	ld a,[H_SCREENEDGEREDRAW]
 	and a
 	ret z
@@ -4775,7 +4775,7 @@ RedrawExposedScreenEdge: ; 1d01 (0:1d01)
 ; on when talking to sprites, battling, using menus, etc. This is because
 ; the above function, RedrawExposedScreenEdge, is used when walking to
 ; improve efficiency.
-AutoBgMapTransfer: ; 1d57 (0:1d57)
+AutoBgMapTransfer:: ; 1d57 (0:1d57)
 	ld a,[H_AUTOBGTRANSFERENABLED]
 	and a
 	ret z
@@ -4827,7 +4827,7 @@ AutoBgMapTransfer: ; 1d57 (0:1d57)
 	ld b,6
 
 ; unrolled loop and using pop for speed
-TransferBgRows: ; 1d9e (0:1d9e)
+TransferBgRows:: ; 1d9e (0:1d9e)
 	pop de
 	ld [hl],e
 	inc l
@@ -4894,7 +4894,7 @@ TransferBgRows: ; 1d9e (0:1d9e)
 
 ; Copies [H_VBCOPYBGNUMROWS] rows from H_VBCOPYBGSRC to H_VBCOPYBGDEST.
 ; If H_VBCOPYBGSRC is XX00, the transfer is disabled.
-VBlankCopyBgMap: ; 1de1 (0:1de1)
+VBlankCopyBgMap:: ; 1de1 (0:1de1)
 	ld a,[H_VBCOPYBGSRC] ; doubles as enabling byte
 	and a
 	ret z
@@ -4923,7 +4923,7 @@ VBlankCopyBgMap: ; 1de1 (0:1de1)
 ; It copies each source byte to the destination twice (next to each other).
 ; The function updates the source and destination addresses, so the transfer
 ; can be continued easily by repeatingly calling this function.
-VBlankCopyDouble: ; 1e02 (0:1e02)
+VBlankCopyDouble:: ; 1e02 (0:1e02)
 	ld a,[H_VBCOPYDOUBLESIZE]
 	and a ; are there any bytes to copy?
 	ret z
@@ -5003,7 +5003,7 @@ VBlankCopyDouble: ; 1e02 (0:1e02)
 ; Copies ([H_VBCOPYSIZE] * 16) bytes from H_VBCOPYSRC to H_VBCOPYDEST.
 ; The function updates the source and destination addresses, so the transfer
 ; can be continued easily by repeatingly calling this function.
-VBlankCopy: ; 1e5e (0:1e5e)
+VBlankCopy:: ; 1e5e (0:1e5e)
 	ld a,[H_VBCOPYSIZE]
 	and a ; are there any bytes to copy?
 	ret z
@@ -5085,7 +5085,7 @@ VBlankCopy: ; 1e5e (0:1e5e)
 	ret
 
 ; This function updates the moving water and flower background tiles.
-UpdateMovingBgTiles: ; 1ebe (0:1ebe)
+UpdateMovingBgTiles:: ; 1ebe (0:1ebe)
 	ld a,[$ffd7]
 	and a
 	ret z
@@ -5146,16 +5146,16 @@ UpdateMovingBgTiles: ; 1ebe (0:1ebe)
 	jr nz,.flowerTileLoop
 	ret
 
-FlowerTilePattern1: ; 1f19 (0:1f19)
+FlowerTilePattern1:: ; 1f19 (0:1f19)
 	INCBIN "gfx/tilesets/flower/flower1.2bpp"
 
-FlowerTilePattern2: ; 1f29 (0:1f29)
+FlowerTilePattern2:: ; 1f29 (0:1f29)
 	INCBIN "gfx/tilesets/flower/flower2.2bpp"
 
-FlowerTilePattern3: ; 1f39 (0:1f39)
+FlowerTilePattern3:: ; 1f39 (0:1f39)
 	INCBIN "gfx/tilesets/flower/flower3.2bpp"
 
-SoftReset: ; 1f49 (0:1f49)
+SoftReset:: ; 1f49 (0:1f49)
 	call StopAllSounds
 	call GBPalWhiteOut
 	ld c, $20
@@ -5172,7 +5172,7 @@ SoftReset: ; 1f49 (0:1f49)
 ; * 8x8 OBJ size
 ; * OBJ display enabled
 ; * BG display enabled
-InitGame: ; 1f54 (0:1f54)
+InitGame:: ; 1f54 (0:1f54)
 	di
 ; zero I/O registers
 	xor a
@@ -5258,14 +5258,14 @@ InitGame: ; 1f54 (0:1f54)
 	jp Func_42b7
 
 ; zeroes all VRAM
-ZeroVram: ; 2004 (0:2004)
+ZeroVram:: ; 2004 (0:2004)
 	ld hl,$8000
 	ld bc,$2000
 	xor a
 	jp FillMemory
 
 ; immediately stops all sounds
-StopAllSounds: ; 200e (0:200e)
+StopAllSounds:: ; 200e (0:200e)
 	ld a, Bank(Func_9876)
 	ld [$c0ef], a
 	ld [$c0f0], a
@@ -5276,7 +5276,7 @@ StopAllSounds: ; 200e (0:200e)
 	dec a
 	jp PlaySound
 
-VBlankHandler: ; 2024 (0:2024)
+VBlankHandler:: ; 2024 (0:2024)
 	push af
 	push bc
 	push de
@@ -5351,7 +5351,7 @@ VBlankHandler: ; 2024 (0:2024)
 	pop af
 	reti
 
-DelayFrame: ; 20af (0:20af)
+DelayFrame:: ; 20af (0:20af)
 ; delay for one frame
 	ld a,1
 	ld [H_VBLANKOCCURRED],a
@@ -5366,7 +5366,7 @@ DelayFrame: ; 20af (0:20af)
 
 ; These routines manage gradual fading
 ; (e.g., entering a doorway)
-LoadGBPal: ; 20ba (0:20ba)
+LoadGBPal:: ; 20ba (0:20ba)
 	ld a,[$d35d] ;tells if cur.map is dark (requires HM5_FLASH?)
 	ld b,a
 	ld hl,GBPalTable_00	;16
@@ -5384,16 +5384,16 @@ LoadGBPal: ; 20ba (0:20ba)
 	ld [rOBP1],a
 	ret
 
-GBFadeOut1: ; 20d1 (0:20d1)
+GBFadeOut1:: ; 20d1 (0:20d1)
 	ld hl,IncGradGBPalTable_01	;0d
 	ld b,$04
 	jr GBFadeOutCommon
 
-GBFadeOut2: ; 20d8 (0:20d8)
+GBFadeOut2:: ; 20d8 (0:20d8)
 	ld hl,IncGradGBPalTable_02	;1c
 	ld b,$03
 
-GBFadeOutCommon: ; 20dd (0:20dd)
+GBFadeOutCommon:: ; 20dd (0:20dd)
 	ld a,[hli]
 	ld [rBGP],a
 	ld a,[hli]
@@ -5406,16 +5406,16 @@ GBFadeOutCommon: ; 20dd (0:20dd)
 	jr nz,GBFadeOutCommon
 	ret
 
-GBFadeIn1: ; 20ef (0:20ef)
+GBFadeIn1:: ; 20ef (0:20ef)
 	ld hl,DecGradGBPalTable_01	;18
 	ld b,$04
 	jr GBFadeInCommon
 
-GBFadeIn2: ; 20f6 (0:20f6)
+GBFadeIn2:: ; 20f6 (0:20f6)
 	ld hl,DecGradGBPalTable_02	;21
 	ld b,$03
 
-GBFadeInCommon: ; 20fb (0:20fb)
+GBFadeInCommon:: ; 20fb (0:20fb)
 	ld a,[hld]
 	ld [rOBP1],a
 	ld a,[hld]
@@ -5428,7 +5428,7 @@ GBFadeInCommon: ; 20fb (0:20fb)
 	jr nz,GBFadeInCommon
 	ret
 
-IncGradGBPalTable_01: ; 210d (0:210d)
+IncGradGBPalTable_01:: ; 210d (0:210d)
 	db %11111111 ;BG Pal
 	db %11111111 ;OBJ Pal 1
 	db %11111111 ;OBJ Pal 2
@@ -5440,30 +5440,30 @@ IncGradGBPalTable_01: ; 210d (0:210d)
 	db %11111001
 	db %11100100
 	db %11100100
-GBPalTable_00: ; 2116 (0:2116)
+GBPalTable_00:: ; 2116 (0:2116)
 	db %11100100
 	db %11010000
-DecGradGBPalTable_01: ; 2118 (0:2118)
+DecGradGBPalTable_01:: ; 2118 (0:2118)
 	db %11100000
 	;19
 	db %11100100
 	db %11010000
 	db %11100000
-IncGradGBPalTable_02: ; 211c (0:211c)
+IncGradGBPalTable_02:: ; 211c (0:211c)
 	db %10010000
 	db %10000000
 	db %10010000
 
 	db %01000000
 	db %01000000
-DecGradGBPalTable_02: ; 2121 (0:2121)
+DecGradGBPalTable_02:: ; 2121 (0:2121)
 	db %01000000
 
 	db %00000000
 	db %00000000
 	db %00000000
 
-SerialInterruptHandler: ; 2125 (0:2125)
+SerialInterruptHandler:: ; 2125 (0:2125)
 	push af
 	push bc
 	push de
@@ -5512,7 +5512,7 @@ SerialInterruptHandler: ; 2125 (0:2125)
 	pop af
 	reti
 
-Func_216f: ; 216f (0:216f)
+Func_216f:: ; 216f (0:216f)
 	ld a, $1
 	ld [$FF00+$ab], a
 .asm_2173
@@ -5546,7 +5546,7 @@ Func_216f: ; 216f (0:216f)
 	jr nz, .asm_2173
 	ret
 
-Func_219a: ; 219a (0:219a)
+Func_219a:: ; 219a (0:219a)
 	xor a
 	ld [$FF00+$a9], a
 	ld a, [$FF00+$aa]
@@ -5634,14 +5634,14 @@ Func_219a: ; 219a (0:219a)
 	call DelayFrame
 	jp Func_219a
 
-Func_2231: ; 2231 (0:2231)
+Func_2231:: ; 2231 (0:2231)
 	ld a, $f
 .asm_2233
 	dec a
 	jr nz, .asm_2233
 	ret
 
-Func_2237: ; 2237 (0:2237)
+Func_2237:: ; 2237 (0:2237)
 	push hl
 	ld hl, $cc47
 	ld a, [hli]
@@ -5649,13 +5649,13 @@ Func_2237: ; 2237 (0:2237)
 	pop hl
 	ret
 
-Func_223f: ; 223f (0:223f)
+Func_223f:: ; 223f (0:223f)
 	dec a
 	ld [$cc47], a
 	ld [$cc48], a
 	ret
 
-Func_2247: ; 2247 (0:2247)
+Func_2247:: ; 2247 (0:2247)
 	ld hl, $cc42
 	ld de, $cc3d
 	ld c, $2
@@ -5680,7 +5680,7 @@ Func_2247: ; 2247 (0:2247)
 	jr nz, .asm_2253
 	ret
 
-Func_226e: ; 226e (0:226e)
+Func_226e:: ; 226e (0:226e)
 	call SaveScreenTilesToBuffer1
 	ld hl, Func_4c05
 	ld b, BANK(Func_4c05)
@@ -5688,7 +5688,7 @@ Func_226e: ; 226e (0:226e)
 	call Func_227f
 	jp LoadScreenTilesFromBuffer1
 
-Func_227f: ; 227f (0:227f)
+Func_227f:: ; 227f (0:227f)
 	ld a, $ff
 	ld [$cc3e], a
 .asm_2284
@@ -5728,7 +5728,7 @@ Func_227f: ; 227f (0:227f)
 	ld [$cc3d], a
 	ret
 
-Func_22c3: ; 22c3 (0:22c3)
+Func_22c3:: ; 22c3 (0:22c3)
 	call asm_22d7
 	ld a, [$cc42]
 	add $60
@@ -5738,7 +5738,7 @@ Func_22c3: ; 22c3 (0:22c3)
 	jr nz, asm_22d7
 	ld a, $81
 	ld [$FF00+$2], a
-asm_22d7: ; 22d7 (0:22d7)
+asm_22d7:: ; 22d7 (0:22d7)
 	ld a, [$FF00+$ad]
 	ld [$cc3d], a
 	and $f0
@@ -5751,7 +5751,7 @@ asm_22d7: ; 22d7 (0:22d7)
 	ld [$cc3e], a
 	ret
 
-Func_22ed: ; 22ed (0:22ed)
+Func_22ed:: ; 22ed (0:22ed)
 	xor a
 	ld [$FF00+$ac], a
 	ld a, [$FF00+$aa]
@@ -5761,7 +5761,7 @@ Func_22ed: ; 22ed (0:22ed)
 	ld [$FF00+$2], a
 	ret
 
-Func_22fa: ; 22fa (0:22fa)
+Func_22fa:: ; 22fa (0:22fa)
 	ld a, $2
 	ld [$FF00+$1], a
 	xor a
@@ -5771,10 +5771,10 @@ Func_22fa: ; 22fa (0:22fa)
 	ret
 
 ; timer interrupt is apparently not invoked anyway
-TimerHandler: ; 2306 (0:2306)
+TimerHandler:: ; 2306 (0:2306)
 	reti
 
-Func_2307: ; 2307 (0:2307)
+Func_2307:: ; 2307 (0:2307)
 	call WaitForSoundToFinish
 	xor a
 	ld c, a
@@ -5782,7 +5782,7 @@ Func_2307: ; 2307 (0:2307)
 	ld [$cfca], a
 	jr asm_2324
 
-Func_2312: ; 2312 (0:2312)
+Func_2312:: ; 2312 (0:2312)
 	ld c, $a
 	ld d, $0
 	ld a, [$d72e]
@@ -5792,7 +5792,7 @@ Func_2312: ; 2312 (0:2312)
 	ld [$cfca], a
 	ld c, $8
 	ld d, c
-asm_2324: ; 2324 (0:2324)
+asm_2324:: ; 2324 (0:2324)
 	ld a, [$d700]
 	and a
 	jr z, .asm_2343
@@ -5829,7 +5829,7 @@ asm_2324: ; 2324 (0:2324)
 	ld [$c0ee], a
 	jp PlaySound
 
-Func_235f: ; 235f (0:235f)
+Func_235f:: ; 235f (0:235f)
 	ld a, [$c0ef]
 	ld b, a
 	cp $2
@@ -5857,7 +5857,7 @@ Func_235f: ; 235f (0:235f)
 	jr nz, .asm_237a
 	ret
 
-Func_2385: ; 2385 (0:2385)
+Func_2385:: ; 2385 (0:2385)
 	ld a, [$d35c]
 	ld e, a
 	ld a, [$c0ef]
@@ -5877,7 +5877,7 @@ Func_2385: ; 2385 (0:2385)
 	scf
 	ret
 
-PlayMusic: ; 23a1 (0:23a1)
+PlayMusic:: ; 23a1 (0:23a1)
 	ld b, a
 	ld [$c0ee], a
 	xor a
@@ -5888,7 +5888,7 @@ PlayMusic: ; 23a1 (0:23a1)
 	ld a, b
 
 ; plays music specified by a. If value is $ff, music is stopped
-PlaySound: ; 23b1 (0:23b1)
+PlaySound:: ; 23b1 (0:23b1)
 	push hl
 	push de
 	push bc
@@ -5958,7 +5958,7 @@ PlaySound: ; 23b1 (0:23b1)
 	pop hl
 	ret
 
-UpdateSprites: ; 2429 (0:2429)
+UpdateSprites:: ; 2429 (0:2429)
 	ld a, [$cfcb]
 	dec a
 	ret nz
@@ -5978,16 +5978,16 @@ UpdateSprites: ; 2429 (0:2429)
 ; first byte $FE, next byte # of items, last byte $FF
 
 ; Viridian
-ViridianMartText6: ; 2442 (0:2442)
+ViridianMartText6:: ; 2442 (0:2442)
 	db $FE,4,POKE_BALL,ANTIDOTE,PARLYZ_HEAL,BURN_HEAL,$FF
 
 ; Pewter
-PewterMartText1: ; 2449 (0:2449)
+PewterMartText1:: ; 2449 (0:2449)
 	db $FE,7,POKE_BALL,POTION,ESCAPE_ROPE,ANTIDOTE,BURN_HEAL,AWAKENING
 	db PARLYZ_HEAL,$FF
 
 ; Cerulean
-CeruleanMartText1: ; 2453 (0:2453)
+CeruleanMartText1:: ; 2453 (0:2453)
 	db $FE,7,POKE_BALL,POTION,REPEL,ANTIDOTE,BURN_HEAL,AWAKENING
 	db PARLYZ_HEAL,$FF
 
@@ -5995,39 +5995,39 @@ CeruleanMartText1: ; 2453 (0:2453)
 	db $FE,1,BICYCLE,$FF
 
 ; Vermilion
-VermilionMartText1: ; 2461 (0:2461)
+VermilionMartText1:: ; 2461 (0:2461)
 	db $FE,6,POKE_BALL,SUPER_POTION,ICE_HEAL,AWAKENING,PARLYZ_HEAL
 	db REPEL,$FF
 
 ; Lavender
-LavenderMartText1: ; 246a (0:246a)
+LavenderMartText1:: ; 246a (0:246a)
 	db $FE,9,GREAT_BALL,SUPER_POTION,REVIVE,ESCAPE_ROPE,SUPER_REPEL
 	db ANTIDOTE,BURN_HEAL,ICE_HEAL,PARLYZ_HEAL,$FF
 
 ; Celadon Dept. Store 2F (1)
-CeladonMart2Text1: ; 2476 (0:2476)
+CeladonMart2Text1:: ; 2476 (0:2476)
 	db $FE,9,GREAT_BALL,SUPER_POTION,REVIVE,SUPER_REPEL,ANTIDOTE
 	db BURN_HEAL,ICE_HEAL,AWAKENING,PARLYZ_HEAL,$FF
 
 ; Celadon Dept. Store 2F (2)
-CeladonMart2Text2: ; 2482 (0:2482)
+CeladonMart2Text2:: ; 2482 (0:2482)
 	db $FE,9,TM_32,TM_33,TM_02,TM_07,TM_37,TM_01,TM_05,TM_09,TM_17,$FF
 
 ; Celadon Dept. Store 4F
-CeladonMart4Text1: ; 248e (0:248e)
+CeladonMart4Text1:: ; 248e (0:248e)
 	db $FE,5,POKE_DOLL,FIRE_STONE,THUNDER_STONE,WATER_STONE,LEAF_STONE,$FF
 
 ; Celadon Dept. Store 5F (1)
-CeladonMart5Text3: ; 2496 (0:2496)
+CeladonMart5Text3:: ; 2496 (0:2496)
 	db $FE,7,X_ACCURACY,GUARD_SPEC_,DIRE_HIT,X_ATTACK,X_DEFEND,X_SPEED
 	db X_SPECIAL,$FF
 
 ; Celadon Dept. Store 5F (2)
-CeladonMart5Text4: ; 24a0 (0:24a0)
+CeladonMart5Text4:: ; 24a0 (0:24a0)
 	db $FE,5,HP_UP,PROTEIN,IRON,CARBOS,CALCIUM,$FF
 
 ; Fuchsia
-FuchsiaMartText1: ; 24a8 (0:24a8)
+FuchsiaMartText1:: ; 24a8 (0:24a8)
 	db $FE,6,ULTRA_BALL,GREAT_BALL,SUPER_POTION,REVIVE,FULL_HEAL
 	db SUPER_REPEL,$FF
 
@@ -6035,47 +6035,47 @@ FuchsiaMartText1: ; 24a8 (0:24a8)
 	db $FE,5,GREAT_BALL,HYPER_POTION,SUPER_POTION,FULL_HEAL,REVIVE,$FF
 
 ; Cinnabar
-CinnabarMartText1: ; 24b9 (0:24b9)
+CinnabarMartText1:: ; 24b9 (0:24b9)
 	db $FE,7,ULTRA_BALL,GREAT_BALL,HYPER_POTION,MAX_REPEL,ESCAPE_ROPE
 	db FULL_HEAL,REVIVE,$FF
 
 ; Saffron
-SaffronMartText1: ; 24c3 (0:24c3)
+SaffronMartText1:: ; 24c3 (0:24c3)
 	db $FE,6,GREAT_BALL,HYPER_POTION,MAX_REPEL,ESCAPE_ROPE,FULL_HEAL
 	db REVIVE,$FF
 
 ; Indigo
-IndigoPlateauLobbyText4: ; 24cc (0:24cc)
+IndigoPlateauLobbyText4:: ; 24cc (0:24cc)
 	db $FE,7,ULTRA_BALL,GREAT_BALL,FULL_RESTORE,MAX_POTION,FULL_HEAL
 	db REVIVE,MAX_REPEL,$FF
 
-TextScriptEndingChar: ; 24d6 (0:24d6)
+TextScriptEndingChar:: ; 24d6 (0:24d6)
 	db "@"
-TextScriptEnd: ; 24d7 (0:24d7)
+TextScriptEnd:: ; 24d7 (0:24d7)
 	ld hl,TextScriptEndingChar
 	ret
 
-UnnamedText_24db: ; 24db (0:24db)
+UnnamedText_24db:: ; 24db (0:24db)
 	TX_FAR _UnnamedText_24db
 	db "@"
 
-UnnamedText_24e0: ; 24e0 (0:24e0)
+UnnamedText_24e0:: ; 24e0 (0:24e0)
 	TX_FAR _UnnamedText_24e0
 	db "@"
 
-BoulderText: ; 24e5 (0:24e5)
+BoulderText:: ; 24e5 (0:24e5)
 	TX_FAR _BoulderText
 	db "@"
 
-MartSignText: ; 24ea (0:24ea)
+MartSignText:: ; 24ea (0:24ea)
 	TX_FAR _MartSignText
 	db "@"
 
-PokeCenterSignText: ; 24ef (0:24ef)
+PokeCenterSignText:: ; 24ef (0:24ef)
 	TX_FAR _PokeCenterSignText
 	db "@"
 
-Predef5CText: ; 24f4 (0:24f4)
+Predef5CText:: ; 24f4 (0:24f4)
 ; XXX better label (what does predef $5C do?)
 	db $08 ; asm
 	ld a, $5c
@@ -6084,7 +6084,7 @@ Predef5CText: ; 24f4 (0:24f4)
 
 ; bankswitches and runs _UncompressSpriteData
 ; bank is given in a, sprite input stream is pointed to in W_SPRITEINPUTPTR
-UncompressSpriteData: ; 24fd (0:24fd)
+UncompressSpriteData:: ; 24fd (0:24fd)
 	ld b, a
 	ld a, [H_LOADEDROMBANK]
 	push af
@@ -6102,7 +6102,7 @@ UncompressSpriteData: ; 24fd (0:24fd)
 	ret
 
 ; initializes necessary data to load a sprite and runs UncompressSpriteDataLoop
-_UncompressSpriteData: ; 251a (0:251a)
+_UncompressSpriteData:: ; 251a (0:251a)
 	ld hl, S_SPRITEBUFFER1
 	ld c, (2*SPRITEBUFFERSIZE) % $100
 	ld b, (2*SPRITEBUFFERSIZE) / $100
@@ -6139,7 +6139,7 @@ _UncompressSpriteData: ; 251a (0:251a)
 ; uncompresses a chunk from the sprite input data stream (pointed to at $d0da) into S_SPRITEBUFFER1 or S_SPRITEBUFFER2
 ; each chunk is a 1bpp sprite. A 2bpp sprite consist of two chunks which are merged afterwards
 ; note that this is an endless loop which is terminated during a call to MoveToNextBufferPosition by manipulating the stack
-UncompressSpriteDataLoop: ; 2556 (0:2556)
+UncompressSpriteDataLoop:: ; 2556 (0:2556)
 	ld hl, S_SPRITEBUFFER1
 	ld a, [W_SPRITELOADFLAGS]  ; $d0a8
 	bit 0, a
@@ -6229,7 +6229,7 @@ UncompressSpriteDataLoop: ; 2556 (0:2556)
 ; moves output pointer to next position
 ; also cancels the calling function if the all output is done (by removing the return pointer from stack)
 ; and calls postprocessing functions according to the unpack mode
-MoveToNextBufferPosition: ; 25d8 (0:25d8)
+MoveToNextBufferPosition:: ; 25d8 (0:25d8)
 	ld a, [W_SPRITEHEIGHT]
 	ld b, a
 	ld a, [W_SPRITECURPOSY]
@@ -6290,7 +6290,7 @@ MoveToNextBufferPosition: ; 25d8 (0:25d8)
 	jp UnpackSprite
 
 ; writes 2 bits (from a) to the output buffer (pointed to from W_SPRITEOUTPUTPTR)
-WriteSpriteBitsToBuffer: ; 2649 (0:2649)
+WriteSpriteBitsToBuffer:: ; 2649 (0:2649)
 	ld e, a
 	ld a, [W_SPRITEOUTPUTBITOFFSET]
 	and a
@@ -6318,7 +6318,7 @@ WriteSpriteBitsToBuffer: ; 2649 (0:2649)
 	ret
 
 ; reads next bit from input stream and returns it in a
-ReadNextInputBit: ; 2670 (0:2670)
+ReadNextInputBit:: ; 2670 (0:2670)
 	ld a, [W_SPRITEINPUTBITCOUNTER]
 	dec a
 	jr nz, .curByteHasMoreBitsToRead
@@ -6334,7 +6334,7 @@ ReadNextInputBit: ; 2670 (0:2670)
 	ret
 
 ; reads next byte from input stream and returns it in a
-ReadNextInputByte: ; 268b (0:268b)
+ReadNextInputByte:: ; 268b (0:268b)
 	ld a, [W_SPRITEINPUTPTR]
 	ld l, a
 	ld a, [W_SPRITEINPUTPTR+1]
@@ -6349,7 +6349,7 @@ ReadNextInputByte: ; 268b (0:268b)
 	ret
 
 ; the nth item is 2^n - 1
-LengthEncodingOffsetList: ; 269f (0:269f)
+LengthEncodingOffsetList:: ; 269f (0:269f)
 	dw %0000000000000001
 	dw %0000000000000011
 	dw %0000000000000111
@@ -6368,7 +6368,7 @@ LengthEncodingOffsetList: ; 269f (0:269f)
 	dw %1111111111111111
 
 ; unpacks the sprite data depending on the unpack mode
-UnpackSprite: ; 26bf (0:26bf)
+UnpackSprite:: ; 26bf (0:26bf)
 	ld a, [W_SPRITEUNPACKMODE]
 	cp $2
 	jp z, UnpackSpriteMode2
@@ -6381,7 +6381,7 @@ UnpackSprite: ; 26bf (0:26bf)
 
 ; decodes differential encoded sprite data
 ; input bit value 0 preserves the current bit value and input bit value 1 toggles it (starting from initial value 0).
-SpriteDifferentialDecode: ; 26d4 (0:26d4)
+SpriteDifferentialDecode:: ; 26d4 (0:26d4)
 	xor a
 	ld [W_SPRITECURPOSX], a
 	ld [W_SPRITECURPOSY], a
@@ -6466,7 +6466,7 @@ SpriteDifferentialDecode: ; 26d4 (0:26d4)
 	ret
 
 ; decodes the nybble stored in a. Last decoded data is assumed to be in e (needed to determine if initial value is 0 or 1)
-DifferentialDecodeNybble: ; 276d (0:276d)
+DifferentialDecodeNybble:: ; 276d (0:276d)
 	srl a               ; c=a%2, a/=2
 	ld c, $0
 	jr nc, .evenNumber
@@ -6508,7 +6508,7 @@ DifferentialDecodeNybble: ; 276d (0:276d)
 	ld e, a ; update last decoded data
 	ret
 
-DecodeNybble0Table: ; 27a7 (0:27a7)
+DecodeNybble0Table:: ; 27a7 (0:27a7)
 	dn $0, $1
 	dn $3, $2
 	dn $7, $6
@@ -6517,7 +6517,7 @@ DecodeNybble0Table: ; 27a7 (0:27a7)
 	dn $c, $d
 	dn $8, $9
 	dn $b, $a
-DecodeNybble1Table: ; 27af (0:27af)
+DecodeNybble1Table:: ; 27af (0:27af)
 	dn $f, $e
 	dn $c, $d
 	dn $8, $9
@@ -6526,7 +6526,7 @@ DecodeNybble1Table: ; 27af (0:27af)
 	dn $3, $2
 	dn $7, $6
 	dn $4, $5
-DecodeNybble0TableFlipped: ; 27b7 (0:27b7)
+DecodeNybble0TableFlipped:: ; 27b7 (0:27b7)
 	dn $0, $8
 	dn $c, $4
 	dn $e, $6
@@ -6535,7 +6535,7 @@ DecodeNybble0TableFlipped: ; 27b7 (0:27b7)
 	dn $3, $b
 	dn $1, $9
 	dn $d, $5
-DecodeNybble1TableFlipped: ; 27bf (0:27bf)
+DecodeNybble1TableFlipped:: ; 27bf (0:27bf)
 	dn $f, $7
 	dn $3, $b
 	dn $1, $9
@@ -6546,7 +6546,7 @@ DecodeNybble1TableFlipped: ; 27bf (0:27bf)
 	dn $2, $a
 
 ; combines the two loaded chunks with xor (the chunk loaded second is the destination). The source chunk is differeintial decoded beforehand.
-XorSpriteChunks: ; 27c7 (0:27c7)
+XorSpriteChunks:: ; 27c7 (0:27c7)
 	xor a
 	ld [W_SPRITECURPOSX], a
 	ld [W_SPRITECURPOSY], a
@@ -6611,7 +6611,7 @@ XorSpriteChunks: ; 27c7 (0:27c7)
 	ret
 
 ; reverses the bits in the nybble given in register a
-ReverseNybble: ; 2837 (0:2837)
+ReverseNybble:: ; 2837 (0:2837)
 	ld de, NybbleReverseTable
 	add e
 	ld e, a
@@ -6622,7 +6622,7 @@ ReverseNybble: ; 2837 (0:2837)
 	ret
 
 ; resets sprite buffer pointers to buffer 1 and 2, depending on W_SPRITELOADFLAGS
-ResetSpriteBufferPointers: ; 2841 (0:2841)
+ResetSpriteBufferPointers:: ; 2841 (0:2841)
 	ld a, [W_SPRITELOADFLAGS] ; $d0a8
 	bit 0, a
 	jr nz, .buffer2Selected
@@ -6644,11 +6644,11 @@ ResetSpriteBufferPointers: ; 2841 (0:2841)
 	ret
 
 ; maps each nybble to its reverse
-NybbleReverseTable: ; 2867 (0:2867)
+NybbleReverseTable:: ; 2867 (0:2867)
 	db $0, $8, $4, $c, $2, $a, $6 ,$e, $1, $9, $5, $d, $3, $b, $7 ,$f
 
 ; combines the two loaded chunks with xor (the chunk loaded second is the destination). Both chunks are differeintial decoded beforehand.
-UnpackSpriteMode2: ; 2877 (0:2877)
+UnpackSpriteMode2:: ; 2877 (0:2877)
 	call ResetSpriteBufferPointers
 	ld a, [W_SPRITEFLIPPED]
 	push af
@@ -6665,7 +6665,7 @@ UnpackSpriteMode2: ; 2877 (0:2877)
 	jp XorSpriteChunks
 
 ; stores hl into the output pointers
-StoreSpriteOutputPointer: ; 2897 (0:2897)
+StoreSpriteOutputPointer:: ; 2897 (0:2897)
 	ld a, l
 	ld [W_SPRITEOUTPUTPTR], a
 	ld [W_SPRITEOUTPUTPTRCACHED], a
@@ -6674,7 +6674,7 @@ StoreSpriteOutputPointer: ; 2897 (0:2897)
 	ld [W_SPRITEOUTPUTPTRCACHED+1], a
 	ret
 
-ResetPlayerSpriteData: ; 28a6 (0:28a6)
+ResetPlayerSpriteData:: ; 28a6 (0:28a6)
 	ld hl, wSpriteStateData1
 	call ResetPlayerSpriteData_ClearSpriteData
 	ld hl, wSpriteStateData2
@@ -6690,12 +6690,12 @@ ResetPlayerSpriteData: ; 28a6 (0:28a6)
 	ret
 
 ; overwrites sprite data with zeroes
-ResetPlayerSpriteData_ClearSpriteData: ; 28c4 (0:28c4)
+ResetPlayerSpriteData_ClearSpriteData:: ; 28c4 (0:28c4)
 	ld bc, $10
 	xor a
 	jp FillMemory
 
-Func_28cb: ; 28cb (0:28cb)
+Func_28cb:: ; 28cb (0:28cb)
 	ld a, [wMusicHeaderPointer]
 	and a
 	jr nz, .asm_28dc
@@ -6746,7 +6746,7 @@ Func_28cb: ; 28cb (0:28cb)
 
 ; this function is used to display sign messages, sprite dialog, etc.
 ; INPUT: [$ff8c] = sprite ID or text ID
-DisplayTextID: ; 2920 (0:2920)
+DisplayTextID:: ; 2920 (0:2920)
 	ld a,[H_LOADEDROMBANK]
 	push af
 	ld b,BANK(DisplayTextIDInit)
@@ -6848,20 +6848,20 @@ DisplayTextID: ; 2920 (0:2920)
 	and a
 	jr nz,HoldTextDisplayOpen
 
-AfterDisplayingTextID: ; 29d6 (0:29d6)
+AfterDisplayingTextID:: ; 29d6 (0:29d6)
 	ld a,[$cc47]
 	and a
 	jr nz,HoldTextDisplayOpen
 	call WaitForTextScrollButtonPress ; wait for a button press after displaying all the text
 
 ; loop to hold the dialogue box open as long as the player keeps holding down the A button
-HoldTextDisplayOpen: ; 29df (0:29df)
+HoldTextDisplayOpen:: ; 29df (0:29df)
 	call GetJoypadState
 	ld a,[H_CURRENTPRESSEDBUTTONS]
 	bit 0,a ; is the A button being pressed?
 	jr nz,HoldTextDisplayOpen
 
-CloseTextDisplay: ; 29e8 (0:29e8)
+CloseTextDisplay:: ; 29e8 (0:29e8)
 	ld a,[W_CURMAP]
 	call SwitchToMapRomBank
 	ld a,$90
@@ -6897,7 +6897,7 @@ CloseTextDisplay: ; 29e8 (0:29e8)
 	ld [$2000],a
 	jp UpdateSprites ; move sprites
 
-DisplayPokemartDialogue: ; 2a2e (0:2a2e)
+DisplayPokemartDialogue:: ; 2a2e (0:2a2e)
 	push hl
 	ld hl,PokemartGreetingText
 	call PrintText
@@ -6917,11 +6917,11 @@ DisplayPokemartDialogue: ; 2a2e (0:2a2e)
 	ld [$2000],a
 	jp AfterDisplayingTextID
 
-PokemartGreetingText: ; 2a55 (0:2a55)
+PokemartGreetingText:: ; 2a55 (0:2a55)
 	TX_FAR _PokemartGreetingText
 	db "@"
 
-LoadItemList: ; 2a5a (0:2a5a)
+LoadItemList:: ; 2a5a (0:2a5a)
 	ld a,$01
 	ld [$cfcb],a
 	ld a,h
@@ -6937,7 +6937,7 @@ LoadItemList: ; 2a5a (0:2a5a)
 	jr nz,.loop
 	ret
 
-DisplayPokemonCenterDialogue: ; 2a72 (0:2a72)
+DisplayPokemonCenterDialogue:: ; 2a72 (0:2a72)
 	xor a
 	ld [$ff8b],a
 	ld [$ff8c],a
@@ -6954,22 +6954,22 @@ DisplayPokemonCenterDialogue: ; 2a72 (0:2a72)
 	ld [$2000],a
 	jp AfterDisplayingTextID
 
-DisplaySafariGameOverText: ; 2a90 (0:2a90)
+DisplaySafariGameOverText:: ; 2a90 (0:2a90)
 	ld hl, Func_1e9ed
 	ld b, BANK(Func_1e9ed)
 	call Bankswitch
 	jp AfterDisplayingTextID
 
-DisplayPokemonFaintedText: ; 2a9b (0:2a9b)
+DisplayPokemonFaintedText:: ; 2a9b (0:2a9b)
 	ld hl,PokemonFaintedText
 	call PrintText
 	jp AfterDisplayingTextID
 
-PokemonFaintedText: ; 2aa4 (0:2aa4)
+PokemonFaintedText:: ; 2aa4 (0:2aa4)
 	TX_FAR _PokemonFaintedText
 	db "@"
 
-DisplayPlayerBlackedOutText: ; 2aa9 (0:2aa9)
+DisplayPlayerBlackedOutText:: ; 2aa9 (0:2aa9)
 	ld hl,PlayerBlackedOutText
 	call PrintText
 	ld a,[$d732]
@@ -6977,20 +6977,20 @@ DisplayPlayerBlackedOutText: ; 2aa9 (0:2aa9)
 	ld [$d732],a
 	jp HoldTextDisplayOpen
 
-PlayerBlackedOutText: ; 2aba (0:2aba)
+PlayerBlackedOutText:: ; 2aba (0:2aba)
 	TX_FAR _PlayerBlackedOutText
 	db "@"
 
-DisplayRepelWoreOffText: ; 2abf (0:2abf)
+DisplayRepelWoreOffText:: ; 2abf (0:2abf)
 	ld hl,RepelWoreOffText
 	call PrintText
 	jp AfterDisplayingTextID
 
-RepelWoreOffText: ; 2ac8 (0:2ac8)
+RepelWoreOffText:: ; 2ac8 (0:2ac8)
 	TX_FAR _RepelWoreOffText
 	db "@"
 
-DisplayStartMenu: ; 2acd (0:2acd)
+DisplayStartMenu:: ; 2acd (0:2acd)
 	ld a,$04 ; hardcoded Bank, not sure what's it refers to
 	ld [H_LOADEDROMBANK],a
 	ld [$2000],a ; ROM bank 4
@@ -6999,7 +6999,7 @@ DisplayStartMenu: ; 2acd (0:2acd)
 	ld a, (SFX_02_3f - $4000) / 3 ; Start menu sound
 	call PlaySound
 
-RedisplayStartMenu: ; 2adf (0:2adf)
+RedisplayStartMenu:: ; 2adf (0:2adf)
 	ld b,BANK(DrawStartMenu)
 	ld hl,DrawStartMenu
 	call Bankswitch
@@ -7075,7 +7075,7 @@ RedisplayStartMenu: ; 2adf (0:2adf)
 	jp z,StartMenu_Option
 
 ; EXIT falls through to here
-CloseStartMenu: ; 2b70 (0:2b70)
+CloseStartMenu:: ; 2b70 (0:2b70)
 	call GetJoypadState
 	ld a,[H_NEWLYPRESSEDBUTTONS]
 	bit 0,a ; was A button newly pressed?
@@ -7089,7 +7089,7 @@ CloseStartMenu: ; 2b70 (0:2b70)
 ; b = length of string of bytes
 ; OUTPUT:
 ; [$D11E] = number of set bits
-CountSetBits: ; 2b7f (0:2b7f)
+CountSetBits:: ; 2b7f (0:2b7f)
 	ld c,0
 .loop
 	ld a,[hli]
@@ -7110,13 +7110,13 @@ CountSetBits: ; 2b7f (0:2b7f)
 
 ; subtracts the amount the player paid from their money
 ; sets carry flag if there is enough money and unsets carry flag if not
-SubtractAmountPaidFromMoney: ; 2b96 (0:2b96)
+SubtractAmountPaidFromMoney:: ; 2b96 (0:2b96)
 	ld b,BANK(SubtractAmountPaidFromMoney_)
 	ld hl,SubtractAmountPaidFromMoney_
 	jp Bankswitch
 
 ; adds the amount the player sold to their money
-AddAmountSoldToMoney: ; 2b9e (0:2b9e)
+AddAmountSoldToMoney:: ; 2b9e (0:2b9e)
 	ld de,wPlayerMoney + 2
 	ld hl,$ffa1 ; total price of items
 	ld c,3 ; length of money in bytes
@@ -7134,7 +7134,7 @@ AddAmountSoldToMoney: ; 2b9e (0:2b9e)
 ; HL = address of inventory (either wNumBagItems or wNumBoxItems)
 ; [$CF92] = index (within the inventory) of the item to remove
 ; [$CF96] = quantity to remove
-RemoveItemFromInventory: ; 2bbb (0:2bbb)
+RemoveItemFromInventory:: ; 2bbb (0:2bbb)
 	ld a,[H_LOADEDROMBANK]
 	push af
 	ld a,BANK(RemoveItemFromInventory_)
@@ -7152,7 +7152,7 @@ RemoveItemFromInventory: ; 2bbb (0:2bbb)
 ; [$CF91] = item ID
 ; [$CF96] = item quantity
 ; sets carry flag if successful, unsets carry flag if unsuccessful
-AddItemToInventory: ; 2bcf (0:2bcf)
+AddItemToInventory:: ; 2bcf (0:2bcf)
 	push bc
 	ld a,[H_LOADEDROMBANK]
 	push af
@@ -7170,7 +7170,7 @@ AddItemToInventory: ; 2bcf (0:2bcf)
 ; INPUT:
 ; [wListMenuID] = list menu ID
 ; [$cf8b] = address of the list (2 bytes)
-DisplayListMenuID: ; 2be6 (0:2be6)
+DisplayListMenuID:: ; 2be6 (0:2be6)
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED],a ; disable auto-transfer
 	ld a,1
@@ -7224,7 +7224,7 @@ DisplayListMenuID: ; 2be6 (0:2be6)
 	ld c,10
 	call DelayFrames
 
-DisplayListMenuIDLoop: ; 2c53 (0:2c53)
+DisplayListMenuIDLoop:: ; 2c53 (0:2c53)
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED],a ; disable transfer
 	call PrintListMenuEntries
@@ -7359,7 +7359,7 @@ DisplayListMenuIDLoop: ; 2c53 (0:2c53)
 	dec [hl]
 	jp DisplayListMenuIDLoop
 
-DisplayChooseQuantityMenu: ; 2d57 (0:2d57)
+DisplayChooseQuantityMenu:: ; 2d57 (0:2d57)
 ; text box dimensions/coordinates for just quantity
 	FuncCoord 15,9
 	ld hl,Coord
@@ -7487,13 +7487,13 @@ DisplayChooseQuantityMenu: ; 2d57 (0:2d57)
 	ld a,$ff
 	ret
 
-InitialQuantityText: ; 2e30 (0:2e30)
+InitialQuantityText:: ; 2e30 (0:2e30)
 	db "×01@"
 
-SpacesBetweenQuantityAndPriceText: ; 2e34 (0:2e34)
+SpacesBetweenQuantityAndPriceText:: ; 2e34 (0:2e34)
 	db "      @"
 
-ExitListMenu: ; 2e3b (0:2e3b)
+ExitListMenu:: ; 2e3b (0:2e3b)
 	ld a,[wCurrentMenuItem]
 	ld [$d12d],a
 	ld a,$02
@@ -7509,7 +7509,7 @@ ExitListMenu: ; 2e3b (0:2e3b)
 	scf
 	ret
 
-PrintListMenuEntries: ; 2e5a (0:2e5a)
+PrintListMenuEntries:: ; 2e5a (0:2e5a)
 	FuncCoord 5, 3 ; $c3e1
 	ld hl,Coord
 	ld b,$09
@@ -7700,10 +7700,10 @@ PrintListMenuEntries: ; 2e5a (0:2e5a)
 	ld de,ListMenuCancelText
 	jp PlaceString
 
-ListMenuCancelText: ; 2f97 (0:2f97)
+ListMenuCancelText:: ; 2f97 (0:2f97)
 	db "CANCEL@"
 
-GetMonName: ; 2f9e (0:2f9e)
+GetMonName:: ; 2f9e (0:2f9e)
 	push hl
 	ld a,[H_LOADEDROMBANK]
 	push af
@@ -7729,7 +7729,7 @@ GetMonName: ; 2f9e (0:2f9e)
 	pop hl
 	ret
 
-GetItemName: ; 2fcf (0:2fcf)
+GetItemName:: ; 2fcf (0:2fcf)
 ; given an item ID at [$D11E], store the name of the item into a string
 ;     starting at $CD6D
 	push hl
@@ -7754,7 +7754,7 @@ GetItemName: ; 2fcf (0:2fcf)
 	pop hl
 	ret
 
-GetMachineName: ; 2ff3 (0:2ff3)
+GetMachineName:: ; 2ff3 (0:2ff3)
 ; copies the name of the TM/HM in [$D11E] to $CD6D
 	push hl
 	push de
@@ -7807,14 +7807,14 @@ GetMachineName: ; 2ff3 (0:2ff3)
 	pop hl
 	ret
 
-TechnicalPrefix: ; 303c (0:303c)
+TechnicalPrefix:: ; 303c (0:303c)
 	db "TM"
-HiddenPrefix: ; 303e (0:303e)
+HiddenPrefix:: ; 303e (0:303e)
 	db "HM"
 
 ; sets carry if item is HM, clears carry if item is not HM
 ; Input: a = item ID
-IsItemHM: ; 3040 (0:3040)
+IsItemHM:: ; 3040 (0:3040)
 	cp a,HM_01
 	jr c,.notHM
 	cp a,TM_01
@@ -7825,16 +7825,16 @@ IsItemHM: ; 3040 (0:3040)
 
 ; sets carry if move is an HM, clears carry if move is not an HM
 ; Input: a = move ID
-IsMoveHM: ; 3049 (0:3049)
+IsMoveHM:: ; 3049 (0:3049)
 	ld hl,HMMoves
 	ld de,1
 	jp IsInArray
 
-HMMoves: ; 3052 (0:3052)
+HMMoves:: ; 3052 (0:3052)
 	db CUT,FLY,SURF,STRENGTH,FLASH
 	db $ff ; terminator
 
-GetMoveName: ; 3058 (0:3058)
+GetMoveName:: ; 3058 (0:3058)
 	push hl
 	ld a,MOVE_NAME
 	ld [W_LISTTYPE],a
@@ -7848,7 +7848,7 @@ GetMoveName: ; 3058 (0:3058)
 	ret
 
 ; reloads text box tile patterns, current map view, and tileset tile patterns
-ReloadMapData: ; 3071 (0:3071)
+ReloadMapData:: ; 3071 (0:3071)
 	ld a,[H_LOADEDROMBANK]
 	push af
 	ld a,[W_CURMAP]
@@ -7864,7 +7864,7 @@ ReloadMapData: ; 3071 (0:3071)
 	ret
 
 ; reloads tileset tile patterns
-ReloadTilesetTilePatterns: ; 3090 (0:3090)
+ReloadTilesetTilePatterns:: ; 3090 (0:3090)
 	ld a,[H_LOADEDROMBANK]
 	push af
 	ld a,[W_CURMAP]
@@ -7878,7 +7878,7 @@ ReloadTilesetTilePatterns: ; 3090 (0:3090)
 	ret
 
 ; shows the town map and lets the player choose a destination to fly to
-ChooseFlyDestination: ; 30a9 (0:30a9)
+ChooseFlyDestination:: ; 30a9 (0:30a9)
 	ld hl,$d72e
 	res 4,[hl]
 	ld b, BANK(Func_70f90)
@@ -7886,7 +7886,7 @@ ChooseFlyDestination: ; 30a9 (0:30a9)
 	jp Bankswitch
 
 ; causes the text box to close waithout waiting for a button press after displaying text
-DisableWaitingAfterTextDisplay: ; 30b6 (0:30b6)
+DisableWaitingAfterTextDisplay:: ; 30b6 (0:30b6)
 	ld a,$01
 	ld [$cc3c],a
 	ret
@@ -7900,7 +7900,7 @@ DisableWaitingAfterTextDisplay: ; 30b6 (0:30b6)
 ; 00: unsucessful
 ; 01: successful
 ; 02: not able to be used right now, no extra menu displayed (only certain items use this)
-UseItem: ; 30bc (0:30bc)
+UseItem:: ; 30bc (0:30bc)
 	ld b,BANK(UseItem_)
 	ld hl,UseItem_
 	jp Bankswitch
@@ -7913,7 +7913,7 @@ UseItem: ; 30bc (0:30bc)
 ; [$cf96] = quantity to toss
 ; OUTPUT:
 ; clears carry flag if the item is tossed, sets carry flag if not
-TossItem: ; 30c4 (0:30c4)
+TossItem:: ; 30c4 (0:30c4)
 	ld a,[H_LOADEDROMBANK]
 	push af
 	ld a,BANK(TossItem_)
@@ -7933,7 +7933,7 @@ TossItem: ; 30c4 (0:30c4)
 ; [$d124] = result
 ; 00: item is not key item
 ; 01: item is key item
-IsKeyItem: ; 30d9 (0:30d9)
+IsKeyItem:: ; 30d9 (0:30d9)
 	push hl
 	push de
 	push bc
@@ -7948,7 +7948,7 @@ IsKeyItem: ; 30d9 (0:30d9)
 ; function to draw various text boxes
 ; INPUT:
 ; [$D125] = text box ID
-DisplayTextBoxID: ; 30e8 (0:30e8)
+DisplayTextBoxID:: ; 30e8 (0:30e8)
 	ld a,[H_LOADEDROMBANK]
 	push af
 	ld a,BANK(DisplayTextBoxID_)
@@ -7961,7 +7961,7 @@ DisplayTextBoxID: ; 30e8 (0:30e8)
 	ld [$2000],a
 	ret
 
-Func_30fd: ; 30fd (0:30fd)
+Func_30fd:: ; 30fd (0:30fd)
 	ld a, [$cc57]
 	and a
 	ret nz
@@ -7972,7 +7972,7 @@ Func_30fd: ; 30fd (0:30fd)
 	and $80
 	ret
 
-Func_310e: ; 310e (0:310e)
+Func_310e:: ; 310e (0:310e)
 	ld hl, $d736
 	bit 0, [hl]
 	res 0, [hl]
@@ -8009,16 +8009,16 @@ Func_310e: ; 310e (0:310e)
 	ld hl, Func_1a3e0
 	jp Bankswitch ; indirect jump to Func_1a3e0 (1a3e0 (6:63e0))
 
-Func_314e: ; 314e (0:314e)
+Func_314e:: ; 314e (0:314e)
 	ld b, BANK(Func_1a41d)
 	ld hl, Func_1a41d
 	jp Bankswitch ; indirect jump to Func_1a41d (1a41d (6:641d))
 
-Func_3156: ; 3156 (0:3156)
+Func_3156:: ; 3156 (0:3156)
 	ret
 
 ; stores hl in [W_TRAINERHEADERPTR]
-StoreTrainerHeaderPointer: ; 3157 (0:3157)
+StoreTrainerHeaderPointer:: ; 3157 (0:3157)
 	ld a, h
 	ld [W_TRAINERHEADERPTR], a
 	ld a, l
@@ -8027,7 +8027,7 @@ StoreTrainerHeaderPointer: ; 3157 (0:3157)
 
 ; executes the current map script from the function pointer array provided in hl.
 ; a: map script index to execute (unless overridden by [$d733] bit 4)
-ExecuteCurMapScriptInTable: ; 3160 (0:3160)
+ExecuteCurMapScriptInTable:: ; 3160 (0:3160)
 	push af
 	push de
 	call StoreTrainerHeaderPointer
@@ -8046,7 +8046,7 @@ ExecuteCurMapScriptInTable: ; 3160 (0:3160)
 	ld a, [W_CURMAPSCRIPT]
 	ret
 
-LoadGymLeaderAndCityName: ; 317f (0:317f)
+LoadGymLeaderAndCityName:: ; 317f (0:317f)
 	push de
 	ld de, wGymCityName
 	ld bc, $11
@@ -8063,7 +8063,7 @@ LoadGymLeaderAndCityName: ; 317f (0:317f)
 ;    4 -> before battle text (into hl)
 ;    6 -> after battle text (into hl)
 ;    8 -> end battle text (into hl)
-ReadTrainerHeaderInfo: ; 3193 (0:3193)
+ReadTrainerHeaderInfo:: ; 3193 (0:3193)
 	push de
 	push af
 	ld d, $0
@@ -8103,12 +8103,12 @@ ReadTrainerHeaderInfo: ; 3193 (0:3193)
 	ret
 
 ; calls HandleBitArray
-HandleBitArray_Bank0: ; 31c7 (0:31c7)
+HandleBitArray_Bank0:: ; 31c7 (0:31c7)
 	ld a, $10
 	jp Predef ; indirect jump to HandleBitArray (f666 (3:7666))
 
 ; direct talking to a trainer (rather than getting seen by one)
-TalkToTrainer: ; 31cc (0:31cc)
+TalkToTrainer:: ; 31cc (0:31cc)
 	call StoreTrainerHeaderPointer
 	xor a
 	call ReadTrainerHeaderInfo     ; read flag's bit
@@ -8146,7 +8146,7 @@ TalkToTrainer: ; 31cc (0:31cc)
 	jp Func_325d
 
 ; checks if any trainers are seeing the player and wanting to fight
-CheckFightingMapTrainers: ; 3219 (0:3219)
+CheckFightingMapTrainers:: ; 3219 (0:3219)
 	call CheckForEngagingTrainers
 	ld a, [$cf13]
 	cp $ff
@@ -8172,7 +8172,7 @@ CheckFightingMapTrainers: ; 3219 (0:3219)
 	inc [hl]      ; progress to battle phase 1 (engaging)
 	ret
 
-Func_324c: ; 324c (0:324c)
+Func_324c:: ; 324c (0:324c)
 	ld a, [$d730]
 	and $1
 	ret nz
@@ -8181,7 +8181,7 @@ Func_324c: ; 324c (0:324c)
 	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
 	call DisplayTextID
 
-Func_325d: ; 325d (0:325d)
+Func_325d:: ; 325d (0:325d)
 	xor a
 	ld [wJoypadForbiddenButtonsMask], a
 	call InitBattleEnemyParameters
@@ -8194,7 +8194,7 @@ Func_325d: ; 325d (0:325d)
 	inc [hl]        ; progress to battle phase 2 (battling)
 	ret
 
-EndTrainerBattle: ; 3275 (0:3275)
+EndTrainerBattle:: ; 3275 (0:3275)
 	ld hl, $d126
 	set 5, [hl]
 	set 6, [hl]
@@ -8229,7 +8229,7 @@ EndTrainerBattle: ; 3275 (0:3275)
 	res 4, [hl]
 	ret nz
 
-ResetButtonPressedAndMapScript: ; 32c1 (0:32c1)
+ResetButtonPressedAndMapScript:: ; 32c1 (0:32c1)
 	xor a
 	ld [wJoypadForbiddenButtonsMask], a
 	ld [H_CURRENTPRESSEDBUTTONS], a
@@ -8239,13 +8239,13 @@ ResetButtonPressedAndMapScript: ; 32c1 (0:32c1)
 	ret
 
 ; calls TrainerWalkUpToPlayer
-TrainerWalkUpToPlayer_Bank0: ; 32cf (0:32cf)
+TrainerWalkUpToPlayer_Bank0:: ; 32cf (0:32cf)
 	ld b, BANK(TrainerWalkUpToPlayer)
 	ld hl, TrainerWalkUpToPlayer
 	jp Bankswitch ; indirect jump to TrainerWalkUpToPlayer (56881 (15:6881))
 
 ; sets opponent type and mon set/lvl based on the engaging trainer data
-InitBattleEnemyParameters: ; 32d7 (0:32d7)
+InitBattleEnemyParameters:: ; 32d7 (0:32d7)
 	ld a, [wEngagedTrainerClass]
 	ld [W_CUROPPONENT], a ; $d059
 	ld [W_ENEMYMONORTRAINERCLASS], a
@@ -8258,25 +8258,25 @@ InitBattleEnemyParameters: ; 32d7 (0:32d7)
 	ld [W_CURENEMYLVL], a ; $d127
 	ret
 
-Func_32ef: ; 32ef (0:32ef)
+Func_32ef:: ; 32ef (0:32ef)
 	ld hl, Func_567f9
 	jr asm_3301
 
-Func_32f4: ; 32f4 (0:32f4)
+Func_32f4:: ; 32f4 (0:32f4)
 	ld hl, Func_56819
 	jr asm_3301 ; 0x32f7 $8
 
-Func_32f9: ; 32f9 (0:32f9)
+Func_32f9:: ; 32f9 (0:32f9)
 	ld hl, Func_5683d
 	jr asm_3301
 
-Func_32fe: ; 32fe (0:32fe)
+Func_32fe:: ; 32fe (0:32fe)
 	ld hl, Func_5685d
-asm_3301: ; 3301 (0:3301)
+asm_3301:: ; 3301 (0:3301)
 	ld b, $15
 	jp Bankswitch ; indirect jump to one of the four functions
 
-CheckForEngagingTrainers: ; 3306 (0:3306)
+CheckForEngagingTrainers:: ; 3306 (0:3306)
 	xor a
 	call ReadTrainerHeaderInfo       ; read trainer flag's bit (unused)
 	ld d, h                          ; store trainer header address in de
@@ -8324,7 +8324,7 @@ CheckForEngagingTrainers: ; 3306 (0:3306)
 	jr .trainerLoop
 
 ; saves loaded rom bank and hl as well as de registers
-PreBattleSaveRegisters: ; 3354 (0:3354)
+PreBattleSaveRegisters:: ; 3354 (0:3354)
 	ld a, [H_LOADEDROMBANK]
 	ld [W_PBSTOREDROMBANK], a
 	ld a, h
@@ -8339,7 +8339,7 @@ PreBattleSaveRegisters: ; 3354 (0:3354)
 
 ; loads data of some trainer on the current map and plays pre-battle music
 ; [$cf13]: sprite ID of trainer who is engaged
-EngageMapTrainer: ; 336a (0:336a)
+EngageMapTrainer:: ; 336a (0:336a)
 	ld hl, W_MAPSPRITEEXTRADATA
 	ld d, $0
 	ld a, [$cf13]
@@ -8353,7 +8353,7 @@ EngageMapTrainer: ; 336a (0:336a)
 	ld [wEnemyMonAttackMod], a ; $cd2e
 	jp PlayTrainerMusic
 
-Func_3381: ; 3381 (0:3381)
+Func_3381:: ; 3381 (0:3381)
 	push hl
 	ld hl, $d72d
 	bit 7, [hl]
@@ -8380,7 +8380,7 @@ Func_3381: ; 3381 (0:3381)
 	call Bankswitch ; indirect jump to Func_1a5e7 (1a5e7 (6:65e7))
 	jp WaitForSoundToFinish
 
-Func_33b7: ; 33b7 (0:33b7)
+Func_33b7:: ; 33b7 (0:33b7)
 	ld a, [$cf0b]
 	and a
 	jr nz, .asm_33c6
@@ -8396,16 +8396,16 @@ Func_33b7: ; 33b7 (0:33b7)
 	ld l, a
 	ret
 
-UnnamedText_33cf: ; 33cf (0:33cf)
+UnnamedText_33cf:: ; 33cf (0:33cf)
 	TX_FAR _UnnamedText_33cf
 	db $08
 
-Func_33d4: ; 33d4 (0:33d4)
+Func_33d4:: ; 33d4 (0:33d4)
 	call Func_33b7
 	call TextCommandProcessor
 	jp TextScriptEnd
 
-Func_33dd: ; 33dd (0:33dd)
+Func_33dd:: ; 33dd (0:33dd)
 	ld a, [wFlags_0xcd60]
 	bit 0, a
 	ret nz
@@ -8413,7 +8413,7 @@ Func_33dd: ; 33dd (0:33dd)
 	xor a
 	ret
 
-PlayTrainerMusic: ; 33e8 (0:33e8)
+PlayTrainerMusic:: ; 33e8 (0:33e8)
 	ld a, [wEngagedTrainerClass]
 	cp $c8 + SONY1
 	ret z
@@ -8458,14 +8458,14 @@ PlayTrainerMusic: ; 33e8 (0:33e8)
 	ld [$c0ee], a
 	jp PlaySound
 
-FemaleTrainerList: ; 3434 (0:3434)
+FemaleTrainerList:: ; 3434 (0:3434)
 	db $c8+LASS
 	db $c8+JR__TRAINER_F
 	db $c8+BEAUTY
 	db $c8+COOLTRAINER_F
 	db $FF
 
-EvilTrainerList: ; 3439 (0:3439)
+EvilTrainerList:: ; 3439 (0:3439)
 	db $c8+JUGGLER_X
 	db $c8+GAMBLER
 	db $c8+ROCKER
@@ -8476,7 +8476,7 @@ EvilTrainerList: ; 3439 (0:3439)
 	db $c8+ROCKET
 	db $FF
 
-Func_3442: ; 3442 (0:3442)
+Func_3442:: ; 3442 (0:3442)
 	ld a, [hli]
 	cp $ff
 	ret z
@@ -8500,33 +8500,33 @@ Func_3442: ; 3442 (0:3442)
 	inc hl
 	jr Func_3442
 
-FuncTX_ItemStoragePC: ; 3460 (0:3460)
+FuncTX_ItemStoragePC:: ; 3460 (0:3460)
 	call SaveScreenTilesToBuffer2
 	ld b, BANK(Func_78e6)
 	ld hl, Func_78e6
 	jr bankswitchAndContinue
 
-FuncTX_BillsPC: ; 346a (0:346a)
+FuncTX_BillsPC:: ; 346a (0:346a)
 	call SaveScreenTilesToBuffer2
 	ld b, BANK(Func_214c2)
 	ld hl, Func_214c2
 	jr bankswitchAndContinue
 
-FuncTX_SlotMachine: ; 3474 (0:3474)
+FuncTX_SlotMachine:: ; 3474 (0:3474)
 ; XXX find a better name for this function
 ; special_F7
 	ld b,BANK(CeladonPrizeMenu)
 	ld hl,CeladonPrizeMenu
-bankswitchAndContinue: ; 3479 (0:3479)
+bankswitchAndContinue:: ; 3479 (0:3479)
 	call Bankswitch
 	jp HoldTextDisplayOpen        ; continue to main text-engine function
 
-FuncTX_PokemonCenterPC: ; 347f (0:347f)
+FuncTX_PokemonCenterPC:: ; 347f (0:347f)
 	ld b, BANK(ActivatePC)
 	ld hl, ActivatePC
 	jr bankswitchAndContinue
 
-Func_3486: ; 3486 (0:3486)
+Func_3486:: ; 3486 (0:3486)
 	xor a
 	ld [$cd3b], a
 	ld [$c206], a
@@ -8534,7 +8534,7 @@ Func_3486: ; 3486 (0:3486)
 	set 7, [hl]
 	ret
 
-IsItemInBag: ; 3493 (0:3493)
+IsItemInBag:: ; 3493 (0:3493)
 ; given an item_id in b
 ; set zero flag if item isn't in player's bag
 ; else reset zero flag
@@ -8545,18 +8545,18 @@ IsItemInBag: ; 3493 (0:3493)
 	and a
 	ret
 
-DisplayPokedex: ; 349b (0:349b)
+DisplayPokedex:: ; 349b (0:349b)
 	ld [$d11e], a
 	ld b, BANK(Func_7c18)
 	ld hl, Func_7c18
 	jp Bankswitch
 
-Func_34a6: ; 34a6 (0:34a6)
+Func_34a6:: ; 34a6 (0:34a6)
 	call Func_34ae
 	ld c, $6
 	jp DelayFrames
 
-Func_34ae: ; 34ae (0:34ae)
+Func_34ae:: ; 34ae (0:34ae)
 	ld a, $9
 	ld [H_DOWNARROWBLINKCNT1], a ; $FF00+$8b
 	call Func_34fc
@@ -8564,7 +8564,7 @@ Func_34ae: ; 34ae (0:34ae)
 	ld [hl], a
 	ret
 
-Func_34b9: ; 34b9 (0:34b9)
+Func_34b9:: ; 34b9 (0:34b9)
 	ld de, $fff9
 	add hl, de
 	ld [hl], a
@@ -8576,14 +8576,14 @@ Func_34b9: ; 34b9 (0:34b9)
 ; OUTPUT:
 ; [$cd3d] = if there is match, the matching array index
 ; sets carry if the coordinates are in the array, clears carry if not
-ArePlayerCoordsInArray: ; 34bf (0:34bf)
+ArePlayerCoordsInArray:: ; 34bf (0:34bf)
 	ld a,[W_YCOORD]
 	ld b,a
 	ld a,[W_XCOORD]
 	ld c,a
 	; fallthrough
 
-CheckCoords: ; 34c7 (0:34c7)
+CheckCoords:: ; 34c7 (0:34c7)
 	xor a
 	ld [$cd3d],a
 .loop
@@ -8617,7 +8617,7 @@ CheckCoords: ; 34c7 (0:34c7)
 ; OUTPUT:
 ; [$cd3d] = if there is match, the matching array index
 ; sets carry if the coordinates are in the array, clears carry if not
-CheckBoulderCoords: ; 34e4 (0:34e4)
+CheckBoulderCoords:: ; 34e4 (0:34e4)
 	push hl
 	ld hl, $c204
 	ld a, [$ff00+$8c]
@@ -8634,13 +8634,13 @@ CheckBoulderCoords: ; 34e4 (0:34e4)
 	pop hl
 	jp CheckCoords
 
-Func_34fc: ; 34fc (0:34fc)
+Func_34fc:: ; 34fc (0:34fc)
 	ld h, $c1
 	jr asm_3502
 
-Func_3500: ; 3500 (0:3500)
+Func_3500:: ; 3500 (0:3500)
 	ld h, $c2
-asm_3502: ; 3502 (0:3502)
+asm_3502:: ; 3502 (0:3502)
 	ld a, [H_DOWNARROWBLINKCNT1] ; $FF00+$8b
 	ld b, a
 	ld a, [H_DOWNARROWBLINKCNT2] ; $FF00+$8c
@@ -8654,7 +8654,7 @@ asm_3502: ; 3502 (0:3502)
 ; the final $ff will be replicated in the output list and a contains the number of bytes written
 ; de: input list
 ; hl: output list
-DecodeRLEList: ; 350c (0:350c)
+DecodeRLEList:: ; 350c (0:350c)
 	xor a
 	ld [wRLEByteCount], a     ; count written bytes here
 .listLoop
@@ -8681,7 +8681,7 @@ DecodeRLEList: ; 350c (0:350c)
 	ret
 
 ; sets movement byte 1 for sprite [$FF8C] to $FE and byte 2 to [$FF8D]
-SetSpriteMovementBytesToFE: ; 3533 (0:3533)
+SetSpriteMovementBytesToFE:: ; 3533 (0:3533)
 	push hl
 	call GetSpriteMovementByte1Pointer
 	ld [hl], $fe
@@ -8692,7 +8692,7 @@ SetSpriteMovementBytesToFE: ; 3533 (0:3533)
 	ret
 
 ; sets both movement bytes for sprite [$FF8C] to $FF
-SetSpriteMovementBytesToFF: ; 3541 (0:3541)
+SetSpriteMovementBytesToFF:: ; 3541 (0:3541)
 	push hl
 	call GetSpriteMovementByte1Pointer
 	ld [hl],$FF
@@ -8702,7 +8702,7 @@ SetSpriteMovementBytesToFF: ; 3541 (0:3541)
 	ret
 
 ; returns the sprite movement byte 1 pointer for sprite [$FF8C] in hl
-GetSpriteMovementByte1Pointer: ; 354e (0:354e)
+GetSpriteMovementByte1Pointer:: ; 354e (0:354e)
 	ld h,$C2
 	ld a,[$FF8C] ; the sprite to move
 	swap a
@@ -8711,7 +8711,7 @@ GetSpriteMovementByte1Pointer: ; 354e (0:354e)
 	ret
 
 ; returns the sprite movement byte 2 pointer for sprite [$FF8C] in hl
-GetSpriteMovementByte2Pointer: ; 3558 (0:3558)
+GetSpriteMovementByte2Pointer:: ; 3558 (0:3558)
 	push de
 	ld hl,W_MAPSPRITEDATA
 	ld a,[$FF8C] ; the sprite to move
@@ -8723,7 +8723,7 @@ GetSpriteMovementByte2Pointer: ; 3558 (0:3558)
 	pop de
 	ret
 
-Func_3566: ; 3566 (0:3566)
+Func_3566:: ; 3566 (0:3566)
 	call Func_359e
 	ld a, [W_ISLINKBATTLE] ; $d12b
 	and a
@@ -8756,7 +8756,7 @@ Func_3566: ; 3566 (0:3566)
 	ld [hl], d
 	ret
 
-Func_359e: ; 359e (0:359e)
+Func_359e:: ; 359e (0:359e)
 	ld b, BANK(Func_13a58)
 	ld hl, Func_13a58
 	jp Bankswitch ; indirect jump to Func_13a58 (13a58 (4:7a58))
@@ -8764,7 +8764,7 @@ Func_359e: ; 359e (0:359e)
 ; tests if player's money are at least as much as [$ff9f]
 ; sets carry flag if not enough money
 ; sets zero flag if amounts match exactly
-HasEnoughMoney: ; 35a6 (0:35a6)
+HasEnoughMoney:: ; 35a6 (0:35a6)
 	ld de, wPlayerMoney ; $d347
 	ld hl, $ff9f
 	ld c, $3
@@ -8773,13 +8773,13 @@ HasEnoughMoney: ; 35a6 (0:35a6)
 ; tests if player's game corner coins are at least as many as [$ffa0]
 ; sets carry flag if not enough coins
 ; sets zero flag if amounts match exactly
-HasEnoughCoins: ; 35b1 (0:35b1)
+HasEnoughCoins:: ; 35b1 (0:35b1)
 	ld de, wPlayerCoins
 	ld hl, $ffa0
 	ld c, $2
 	jp StringCmp
 
-BankswitchHome: ; 35bc (0:35bc)
+BankswitchHome:: ; 35bc (0:35bc)
 ; switches to bank # in a
 ; Only use this when in the home bank!
 	ld [$CF09],a
@@ -8790,14 +8790,14 @@ BankswitchHome: ; 35bc (0:35bc)
 	ld [$2000],a
 	ret
 
-BankswitchBack: ; 35cd (0:35cd)
+BankswitchBack:: ; 35cd (0:35cd)
 ; returns from BankswitchHome
 	ld a,[$CF08]
 	ld [H_LOADEDROMBANK],a
 	ld [$2000],a
 	ret
 
-Bankswitch: ; 35d6 (0:35d6)
+Bankswitch:: ; 35d6 (0:35d6)
 ; self-contained bankswitch, use this when not in the home bank
 ; switches to the bank in b
 	ld a,[H_LOADEDROMBANK]
@@ -8817,18 +8817,18 @@ Bankswitch: ; 35d6 (0:35d6)
 
 ; displays yes/no choice
 ; yes -> set carry
-YesNoChoice: ; 35ec (0:35ec)
+YesNoChoice:: ; 35ec (0:35ec)
 	call SaveScreenTilesToBuffer1
 	call InitYesNoTextBoxParameters
 	jr DisplayYesNoChoice
 
-Func_35f4: ; 35f4 (0:35f4)
+Func_35f4:: ; 35f4 (0:35f4)
 	ld a, $14
 	ld [$d125], a
 	call InitYesNoTextBoxParameters
 	jp DisplayTextBoxID
 
-InitYesNoTextBoxParameters: ; 35ff (0:35ff)
+InitYesNoTextBoxParameters:: ; 35ff (0:35ff)
 	xor a
 	ld [$d12c], a
 	FuncCoord 14, 7 ; $c43a
@@ -8836,7 +8836,7 @@ InitYesNoTextBoxParameters: ; 35ff (0:35ff)
 	ld bc, $80f
 	ret
 
-YesNoChoicePokeCenter: ; 360a (0:360a)
+YesNoChoicePokeCenter:: ; 360a (0:360a)
 	call SaveScreenTilesToBuffer1
 	ld a, $6
 	ld [$d12c], a
@@ -8845,21 +8845,21 @@ YesNoChoicePokeCenter: ; 360a (0:360a)
 	ld bc, $80c
 	jr DisplayYesNoChoice
 
-Func_361a: ; 361a (0:361a)
+Func_361a:: ; 361a (0:361a)
 	call SaveScreenTilesToBuffer1
 	ld a, $3
 	ld [$d12c], a
 	FuncCoord 12, 7 ; $c438
 	ld hl, Coord
 	ld bc, $080d
-DisplayYesNoChoice: ; 3628 (0:3628)
+DisplayYesNoChoice:: ; 3628 (0:3628)
 	ld a, $14
 	ld [$d125], a
 	call DisplayTextBoxID
 	jp LoadScreenTilesFromBuffer1
 
 ; calculates the difference |a-b|, setting carry flag if a<b
-CalcDifference: ; 3633 (0:3633)
+CalcDifference:: ; 3633 (0:3633)
 	sub b
 	ret nc
 	cpl
@@ -8867,11 +8867,11 @@ CalcDifference: ; 3633 (0:3633)
 	scf
 	ret
 
-MoveSprite: ; 363a (0:363a)
+MoveSprite:: ; 363a (0:363a)
 ; move the sprite [$FF8C] with the movement pointed to by de
 ; actually only copies the movement data to $CC5B for later
 	call SetSpriteMovementBytesToFF
-MoveSprite_: ; 363d (0:363d)
+MoveSprite_:: ; 363d (0:363d)
 	push hl
 	push bc
 	call GetSpriteMovementByte1Pointer
@@ -8903,7 +8903,7 @@ MoveSprite_: ; 363d (0:363d)
 	ld [$CD3A],a
 	ret
 
-Func_366b: ; 366b (0:366b)
+Func_366b:: ; 366b (0:366b)
 	push hl
 	ld hl, $ffe7
 	xor a
@@ -8924,7 +8924,7 @@ Func_366b: ; 366b (0:366b)
 	ret
 
 ; copies the tile patterns for letters and numbers into VRAM
-LoadFontTilePatterns: ; 3680 (0:3680)
+LoadFontTilePatterns:: ; 3680 (0:3680)
 	ld a,[rLCDC]
 	bit 7,a ; is the LCD enabled?
 	jr nz,.lcdEnabled
@@ -8941,7 +8941,7 @@ LoadFontTilePatterns: ; 3680 (0:3680)
 	jp CopyVideoDataDouble ; if LCD is on, transfer during V-blank
 
 ; copies the text box tile patterns into VRAM
-LoadTextBoxTilePatterns: ; 36a0 (0:36a0)
+LoadTextBoxTilePatterns:: ; 36a0 (0:36a0)
 	ld a,[rLCDC]
 	bit 7,a ; is the LCD enabled?
 	jr nz,.lcdEnabled
@@ -8958,7 +8958,7 @@ LoadTextBoxTilePatterns: ; 36a0 (0:36a0)
 	jp CopyVideoData ; if LCD is on, transfer during V-blank
 
 ; copies HP bar and status display tile patterns into VRAM
-LoadHpBarAndStatusTilePatterns: ; 36c0 (0:36c0)
+LoadHpBarAndStatusTilePatterns:: ; 36c0 (0:36c0)
 	ld a,[rLCDC]
 	bit 7,a ; is the LCD enabled?
 	jr nz,.lcdEnabled
@@ -8976,7 +8976,7 @@ LoadHpBarAndStatusTilePatterns: ; 36c0 (0:36c0)
 
 ;Fills memory range with the specified byte.
 ;input registers a = fill_byte, bc = length, hl = address
-FillMemory: ; 36e0 (0:36e0)
+FillMemory:: ; 36e0 (0:36e0)
 	push de
 	ld d, a
 .loop
@@ -8991,28 +8991,28 @@ FillMemory: ; 36e0 (0:36e0)
 
 ; loads sprite that de points to
 ; bank of sprite is given in a
-UncompressSpriteFromDE: ; 36eb (0:36eb)
+UncompressSpriteFromDE:: ; 36eb (0:36eb)
 	ld hl, W_SPRITEINPUTPTR
 	ld [hl], e
 	inc hl
 	ld [hl], d
 	jp UncompressSpriteData
 
-SaveScreenTilesToBuffer2: ; 36f4 (0:36f4)
+SaveScreenTilesToBuffer2:: ; 36f4 (0:36f4)
 	ld hl, wTileMap
 	ld de, wTileMapBackup2
 	ld bc, $168
 	call CopyData
 	ret
 
-LoadScreenTilesFromBuffer2: ; 3701 (0:3701)
+LoadScreenTilesFromBuffer2:: ; 3701 (0:3701)
 	call LoadScreenTilesFromBuffer2DisableBGTransfer
 	ld a, $1
 	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
 	ret
 
 ; loads screen tiles stored in wTileMapBackup2 but leaves H_AUTOBGTRANSFERENABLED disabled
-LoadScreenTilesFromBuffer2DisableBGTransfer: ; 3709 (0:3709)
+LoadScreenTilesFromBuffer2DisableBGTransfer:: ; 3709 (0:3709)
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
 	ld hl, wTileMapBackup2
@@ -9021,13 +9021,13 @@ LoadScreenTilesFromBuffer2DisableBGTransfer: ; 3709 (0:3709)
 	call CopyData
 	ret
 
-SaveScreenTilesToBuffer1: ; 3719 (0:3719)
+SaveScreenTilesToBuffer1:: ; 3719 (0:3719)
 	ld hl, wTileMap
 	ld de, wTileMapBackup
 	ld bc, $168
 	jp CopyData
 
-LoadScreenTilesFromBuffer1: ; 3725 (0:3725)
+LoadScreenTilesFromBuffer1:: ; 3725 (0:3725)
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
 	ld hl, wTileMapBackup
@@ -9038,21 +9038,21 @@ LoadScreenTilesFromBuffer1: ; 3725 (0:3725)
 	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
 	ret
 
-DelayFrames: ; 3739 (0:3739)
+DelayFrames:: ; 3739 (0:3739)
 ; wait n frames, where n is the value in c
 	call DelayFrame
 	dec c
 	jr nz,DelayFrames
 	ret
 
-PlaySoundWaitForCurrent: ; 3740 (0:3740)
+PlaySoundWaitForCurrent:: ; 3740 (0:3740)
 	push af
 	call WaitForSoundToFinish
 	pop af
 	jp PlaySound
 
 ; Wait for sound to finish playing
-WaitForSoundToFinish: ; 3748 (0:3748)
+WaitForSoundToFinish:: ; 3748 (0:3748)
 	ld a, [$d083]
 	and $80
 	ret nz
@@ -9070,7 +9070,7 @@ WaitForSoundToFinish: ; 3748 (0:3748)
 	pop hl
 	ret
 
-NamePointers: ; 375d (0:375d)
+NamePointers:: ; 375d (0:375d)
 	dw MonsterNames
 	dw MoveNames
 	dw UnusedNames
@@ -9079,7 +9079,7 @@ NamePointers: ; 375d (0:375d)
 	dw W_ENEMYMON1OT ; enemy's OT names list
 	dw TrainerNames
 
-GetName: ; 376b (0:376b)
+GetName:: ; 376b (0:376b)
 ; arguments:
 ; [$D0B5] = which name
 ; [$D0B6] = which list (W_LISTTYPE)
@@ -9160,7 +9160,7 @@ GetName: ; 376b (0:376b)
 	ld [$2000],a
 	ret
 
-GetItemPrice: ; 37df (0:37df)
+GetItemPrice:: ; 37df (0:37df)
 	ld a, [H_LOADEDROMBANK]
 	push af
 	ld a, [wListMenuID] ; $cf94
@@ -9204,12 +9204,12 @@ GetItemPrice: ; 37df (0:37df)
 	ret
 
 ; copies a string from [de] to [$cf4b]
-CopyStringToCF4B: ; 3826 (0:3826)
+CopyStringToCF4B:: ; 3826 (0:3826)
 	ld hl, $cf4b
 	; fall through
 
 ; copies a string from [de] to [hl]
-CopyString: ; 3829 (0:3829)
+CopyString:: ; 3829 (0:3829)
 	ld a, [de]
 	inc de
 	ld [hli], a
@@ -9232,7 +9232,7 @@ CopyString: ; 3829 (0:3829)
 ;    report only one button press.
 ; 3. Same as 2, but report no buttons as pressed if A or B is held down.
 ;    ([$ffb7] == 1, [$ffb6] == 0)
-GetJoypadStateLowSensitivity: ; 3831 (0:3831)
+GetJoypadStateLowSensitivity:: ; 3831 (0:3831)
 	call GetJoypadState
 	ld a,[$ffb7] ; flag
 	and a ; get all currently pressed buttons or only newly pressed buttons?
@@ -9271,7 +9271,7 @@ GetJoypadStateLowSensitivity: ; 3831 (0:3831)
 	ld [H_FRAMECOUNTER],a
 	ret
 
-WaitForTextScrollButtonPress: ; 3865 (0:3865)
+WaitForTextScrollButtonPress:: ; 3865 (0:3865)
 	ld a, [H_DOWNARROWBLINKCNT1] ; $FF00+$8b
 	push af
 	ld a, [H_DOWNARROWBLINKCNT2] ; $FF00+$8c
@@ -9304,7 +9304,7 @@ WaitForTextScrollButtonPress: ; 3865 (0:3865)
 	ret
 
 ; (unlass in link battle) waits for A or B being pressed and outputs the scrolling sound effect
-ManualTextScroll: ; 3898 (0:3898)
+ManualTextScroll:: ; 3898 (0:3898)
 	ld a, [W_ISLINKBATTLE] ; $d12b
 	cp $4
 	jr z, .inLinkBattle
@@ -9322,7 +9322,7 @@ ManualTextScroll: ; 3898 (0:3898)
 ; FF99 = multiplier
 ; OUTPUT
 ; FF95-FF98 = product
-Multiply: ; 38ac (0:38ac)
+Multiply:: ; 38ac (0:38ac)
 	push hl
 	push bc
 	ld hl, _Multiply
@@ -9341,7 +9341,7 @@ Multiply: ; 38ac (0:38ac)
 ; OUTPUT
 ; FF95-FF98 = quotient
 ; FF99 = remainder
-Divide: ; 38b9 (0:38b9)
+Divide:: ; 38b9 (0:38b9)
 	push hl
 	push de
 	push bc
@@ -9362,7 +9362,7 @@ Divide: ; 38b9 (0:38b9)
 ; This function is used to wait a short period after printing a letter to the
 ; screen unless the player presses the A/B button or the delay is turned off
 ; through the [$d730] or [$d358] flags.
-PrintLetterDelay: ; 38d3 (0:38d3)
+PrintLetterDelay:: ; 38d3 (0:38d3)
 	ld a,[$d730]
 	bit 6,a
 	ret nz
@@ -9408,7 +9408,7 @@ PrintLetterDelay: ; 38d3 (0:38d3)
 ; Copies [hl, bc) to [de, bc - hl).
 ; In other words, the source data is from hl up to but not including bc,
 ; and the destination is de.
-CopyDataUntil: ; 3913 (0:3913)
+CopyDataUntil:: ; 3913 (0:3913)
 	ld a,[hli]
 	ld [de],a
 	inc de
@@ -9424,12 +9424,12 @@ CopyDataUntil: ; 3913 (0:3913)
 ; wWhichPokemon determines the pokemon.
 ; [$cf95] == 0 specifies the party.
 ; [$cf95] != 0 specifies the current box.
-RemovePokemon: ; 391f (0:391f)
+RemovePokemon:: ; 391f (0:391f)
 	ld hl, _RemovePokemon
 	ld b, BANK(_RemovePokemon)
 	jp Bankswitch
 
-AddPokemonToParty: ; 3927 (0:3927)
+AddPokemonToParty:: ; 3927 (0:3927)
 	push hl
 	push de
 	push bc
@@ -9442,7 +9442,7 @@ AddPokemonToParty: ; 3927 (0:3927)
 	ret
 
 ; calculates all 5 stats of current mon and writes them to [de]
-CalcStats: ; 3936 (0:3936)
+CalcStats:: ; 3936 (0:3936)
 	ld c, $0
 .statsLoop
 	inc c
@@ -9462,7 +9462,7 @@ CalcStats: ; 3936 (0:3936)
 ; c: stat to calc (HP=1,Atk=2,Def=3,Spd=4,Spc=5)
 ; b: consider stat exp?
 ; hl: base ptr to stat exp values ([hl + 2*c - 1] and [hl + 2*c])
-CalcStat: ; 394a (0:394a)
+CalcStat:: ; 394a (0:394a)
 	push hl
 	push de
 	push bc
@@ -9641,7 +9641,7 @@ CalcStat: ; 394a (0:394a)
 	pop hl
 	ret
 
-AddEnemyMonToPlayerParty: ; 3a53 (0:3a53)
+AddEnemyMonToPlayerParty:: ; 3a53 (0:3a53)
 	ld a, [H_LOADEDROMBANK]
 	push af
 	ld a, BANK(_AddEnemyMonToPlayerParty)
@@ -9654,7 +9654,7 @@ AddEnemyMonToPlayerParty: ; 3a53 (0:3a53)
 	ld [$2000], a
 	ret
 
-Func_3a68: ; 3a68 (0:3a68)
+Func_3a68:: ; 3a68 (0:3a68)
 	ld a, [H_LOADEDROMBANK]
 	push af
 	ld a, BANK(Func_f51e)
@@ -9669,7 +9669,7 @@ Func_3a68: ; 3a68 (0:3a68)
 
 ; skips a text entries, each of size $b (like trainer name, OT name, rival name, ...)
 ; hl: base pointer, will be incremented by $b * a
-SkipFixedLengthTextEntries: ; 3a7d (0:3a7d)
+SkipFixedLengthTextEntries:: ; 3a7d (0:3a7d)
 	and a
 	ret z
 	ld bc, $b
@@ -9679,7 +9679,7 @@ SkipFixedLengthTextEntries: ; 3a7d (0:3a7d)
 	jr nz, .skipLoop
 	ret
 
-AddNTimes: ; 3a87 (0:3a87)
+AddNTimes:: ; 3a87 (0:3a87)
 ; add bc to hl a times
 	and a
 	ret z
@@ -9691,7 +9691,7 @@ AddNTimes: ; 3a87 (0:3a87)
 
 ; Compare strings, c bytes in length, at de and hl.
 ; Often used to compare big endian numbers in battle calculations.
-StringCmp: ; 3a8e (0:3a8e)
+StringCmp:: ; 3a8e (0:3a8e)
 	ld a,[de]
 	cp [hl]
 	ret nz
@@ -9706,7 +9706,7 @@ StringCmp: ; 3a8e (0:3a8e)
 ; b = Y coordinate of upper left corner of sprite
 ; c = X coordinate of upper left corner of sprite
 ; de = base address of 4 tile number and attribute pairs
-WriteOAMBlock: ; 3a97 (0:3a97)
+WriteOAMBlock:: ; 3a97 (0:3a97)
 	ld h,$c3
 	swap a ; multiply by 16
 	ld l,a
@@ -9738,11 +9738,11 @@ WriteOAMBlock: ; 3a97 (0:3a97)
 	ld [hli],a
 	ret
 
-HandleMenuInput: ; 3abe (0:3abe)
+HandleMenuInput:: ; 3abe (0:3abe)
 	xor a
 	ld [$d09b],a
 
-HandleMenuInputPokemonSelection: ; 3ac2 (0:3ac2)
+HandleMenuInputPokemonSelection:: ; 3ac2 (0:3ac2)
 	ld a,[H_DOWNARROWBLINKCNT1]
 	push af
 	ld a,[H_DOWNARROWBLINKCNT2]
@@ -9859,7 +9859,7 @@ HandleMenuInputPokemonSelection: ; 3ac2 (0:3ac2)
 	jr z,.checkOtherKeys
 	jr .checkIfAButtonOrBButtonPressed
 
-PlaceMenuCursor: ; 3b7c (0:3b7c)
+PlaceMenuCursor:: ; 3b7c (0:3b7c)
 	ld a,[wTopMenuItemY]
 	and a ; is the y coordinate 0?
 	jr z,.adjustForXCoord
@@ -9938,7 +9938,7 @@ PlaceMenuCursor: ; 3b7c (0:3b7c)
 ; manipulated. In the case of submenus, this is used to show the location of
 ; the menu cursor in the parent menu. In the case of swapping items in list,
 ; this is used to mark the item that was first chosen to be swapped.
-PlaceUnfilledArrowMenuCursor: ; 3bec (0:3bec)
+PlaceUnfilledArrowMenuCursor:: ; 3bec (0:3bec)
 	ld b,a
 	ld a,[wMenuCursorLocation]
 	ld l,a
@@ -9949,7 +9949,7 @@ PlaceUnfilledArrowMenuCursor: ; 3bec (0:3bec)
 	ret
 
 ; Replaces the menu cursor with a blank space.
-EraseMenuCursor: ; 3bf9 (0:3bf9)
+EraseMenuCursor:: ; 3bf9 (0:3bf9)
 	ld a,[wMenuCursorLocation]
 	ld l,a
 	ld a,[wMenuCursorLocation + 1]
@@ -9965,7 +9965,7 @@ EraseMenuCursor: ; 3bf9 (0:3bf9)
 ; initliazed with a down arrow, this function does nothing.
 ; That allows this to be called without worrying about if a down arrow should
 ; be blinking.
-HandleDownArrowBlinkTiming: ; 3c04 (0:3c04)
+HandleDownArrowBlinkTiming:: ; 3c04 (0:3c04)
 	ld a,[hl]
 	ld b,a
 	ld a,$ee ; down arrow
@@ -10010,20 +10010,20 @@ HandleDownArrowBlinkTiming: ; 3c04 (0:3c04)
 ; text boxes by DisplayTextID. Both functions cause DisplayTextID to wait
 ; for a button press after displaying text (unless [$cc47] is set).
 
-EnableAutoTextBoxDrawing: ; 3c3c (0:3c3c)
+EnableAutoTextBoxDrawing:: ; 3c3c (0:3c3c)
 	xor a
 	jr AutoTextBoxDrawingCommon
 
-DisableAutoTextBoxDrawing: ; 3c3f (0:3c3f)
+DisableAutoTextBoxDrawing:: ; 3c3f (0:3c3f)
 	ld a,$01
 
-AutoTextBoxDrawingCommon: ; 3c41 (0:3c41)
+AutoTextBoxDrawingCommon:: ; 3c41 (0:3c41)
 	ld [$cf0c],a ; control text box drawing
 	xor a
 	ld [$cc3c],a ; make DisplayTextID wait for button press
 	ret
 
-PrintText: ; 3c49 (0:3c49)
+PrintText:: ; 3c49 (0:3c49)
 ; given a pointer in hl, print the text there
 	push hl
 	ld a,1
@@ -10032,7 +10032,7 @@ PrintText: ; 3c49 (0:3c49)
 	call UpdateSprites
 	call Delay3
 	pop hl
-Func_3c59: ; 3c59 (0:3c59)
+Func_3c59:: ; 3c59 (0:3c59)
 	FuncCoord 1,14
 	ld bc,Coord ;$C4B9
 	jp TextCommandProcessor
@@ -10048,7 +10048,7 @@ Func_3c59: ; 3c59 (0:3c59)
 ; bits 0-3: number of bytes (only 1 - 3 bytes supported)
 ; c = number of decimal digits
 ; de = address of the number (big-endian)
-PrintNumber: ; 3c5f (0:3c5f)
+PrintNumber:: ; 3c5f (0:3c5f)
 	push bc
 	xor a
 	ld [H_PASTLEADINGZEROES],a
@@ -10181,7 +10181,7 @@ PrintNumber: ; 3c5f (0:3c5f)
 ; The last value that the number had before becoming negative is kept as the new value of the number.
 ; A more succinct description is that the number is divided by a power of ten
 ; and the quotient becomes the digit while the remainder is stored as the new value of the number.
-PrintNumber_PrintDigit: ; 3d25 (0:3d25)
+PrintNumber_PrintDigit:: ; 3d25 (0:3d25)
 	ld c,0 ; counts number of loop iterations to determine the decimal digit
 .loop
 	ld a,[H_POWEROFTEN]
@@ -10251,7 +10251,7 @@ PrintNumber_PrintDigit: ; 3d25 (0:3d25)
 	ret
 
 ; prints a leading zero unless they are turned off in the flags
-PrintNumber_PrintLeadingZero: ; 3d83 (0:3d83)
+PrintNumber_PrintLeadingZero:: ; 3d83 (0:3d83)
 	bit 7,d ; print leading zeroes?
 	ret z
 	ld [hl],"0"
@@ -10259,7 +10259,7 @@ PrintNumber_PrintLeadingZero: ; 3d83 (0:3d83)
 
 ; increments the pointer unless leading zeroes are not being printed,
 ; the number is left-aligned, and no nonzero digits have been printed yet
-PrintNumber_AdvancePointer: ; 3d89 (0:3d89)
+PrintNumber_AdvancePointer:: ; 3d89 (0:3d89)
 	bit 7,d ; print leading zeroes?
 	jr nz,.incrementPointer
 	bit 6,d ; left alignment or right alignment?
@@ -10275,7 +10275,7 @@ PrintNumber_AdvancePointer: ; 3d89 (0:3d89)
 ; INPUT:
 ; a = index within table
 ; hl = address of function pointer table
-CallFunctionInTable: ; 3d97 (0:3d97)
+CallFunctionInTable:: ; 3d97 (0:3d97)
 	push hl
 	push de
 	push bc
@@ -10298,11 +10298,11 @@ CallFunctionInTable: ; 3d97 (0:3d97)
 ; searches an array at hl for the value in a.
 ; skips (de − 1) bytes between reads, so to check every byte, de should be 1.
 ; if found, returns count in b and sets carry.
-IsInArray: ; 3dab (0:3dab)
+IsInArray:: ; 3dab (0:3dab)
 	ld b,0
 	; fall through
 
-IsInArrayCummulativeCount: ; 3dad (0:3dad)
+IsInArrayCummulativeCount:: ; 3dad (0:3dad)
 	ld c,a
 .loop
 	ld a,[hl]
@@ -10320,7 +10320,7 @@ IsInArrayCummulativeCount: ; 3dad (0:3dad)
 	scf
 	ret
 
-Func_3dbe: ; 3dbe (0:3dbe)
+Func_3dbe:: ; 3dbe (0:3dbe)
 	call CleanLCD_OAM
 	ld a, $1
 	ld [$cfcb], a
@@ -10331,16 +10331,16 @@ Func_3dbe: ; 3dbe (0:3dbe)
 	jr Delay3
 
 ; calls GBPalWhiteOut and then Delay3
-GBPalWhiteOutWithDelay3: ; 3dd4 (0:3dd4)
+GBPalWhiteOutWithDelay3:: ; 3dd4 (0:3dd4)
 	call GBPalWhiteOut
 
-Delay3: ; 3dd7 (0:3dd7)
+Delay3:: ; 3dd7 (0:3dd7)
 ; call Delay with a parameter of 3
 	ld c,3
 	jp DelayFrames
 
 ; resets BGP and OBP0 to their usual colors
-GBPalNormal: ; 3ddc (0:3ddc)
+GBPalNormal:: ; 3ddc (0:3ddc)
 	ld a,%11100100
 	ld [rBGP],a
 	ld a,%11010000
@@ -10348,23 +10348,23 @@ GBPalNormal: ; 3ddc (0:3ddc)
 	ret
 
 ; makes all palette colors white
-GBPalWhiteOut: ; 3de5 (0:3de5)
+GBPalWhiteOut:: ; 3de5 (0:3de5)
 	xor a
 	ld [rBGP],a
 	ld [rOBP0],a
 	ld [rOBP1],a
 	ret
 
-GoPAL_SET_CF1C: ; 3ded (0:3ded)
+GoPAL_SET_CF1C:: ; 3ded (0:3ded)
 	ld b,$ff
-GoPAL_SET: ; 3def (0:3def)
+GoPAL_SET:: ; 3def (0:3def)
 	ld a,[$cf1b]
 	and a
 	ret z
 	ld a,$45
 	jp Predef
 
-Func_3df9: ; 3df9 (0:3df9)
+Func_3df9:: ; 3df9 (0:3df9)
 	ld a, e
 	cp $1b
 	ld d, $0
@@ -10377,7 +10377,7 @@ Func_3df9: ; 3df9 (0:3df9)
 	ld [hl], d
 	ret
 
-Func_3e08: ; 3e08 (0:3e08)
+Func_3e08:: ; 3e08 (0:3e08)
 	ld hl, $cfc4
 	ld a, [hl]
 	push af
@@ -10397,7 +10397,7 @@ Func_3e08: ; 3e08 (0:3e08)
 	call LoadFontTilePatterns
 	jp UpdateSprites
 
-GiveItem: ; 3e2e (0:3e2e)
+GiveItem:: ; 3e2e (0:3e2e)
 ; Give player quantity c of item b, and copy item name to $cf4b.
 ; Set carry on success. If no room in bag, reset carry.
 	ld a, b
@@ -10413,7 +10413,7 @@ GiveItem: ; 3e2e (0:3e2e)
 	scf
 	ret
 
-GivePokemon: ; 3e48 (0:3e48)
+GivePokemon:: ; 3e48 (0:3e48)
 	ld a, b
 	ld [$cf91], a
 	ld a, c
@@ -10424,7 +10424,7 @@ GivePokemon: ; 3e48 (0:3e48)
 	ld hl, Func_4fda5
 	jp Bankswitch
 
-GenRandom: ; 3e5c (0:3e5c)
+GenRandom:: ; 3e5c (0:3e5c)
 ; store a random 8-bit value in a
 	push hl
 	push de
@@ -10438,7 +10438,7 @@ GenRandom: ; 3e5c (0:3e5c)
 	pop hl
 	ret
 
-Predef: ; 3e6d (0:3e6d)
+Predef:: ; 3e6d (0:3e6d)
 ; runs a predefined ASM command, where the command ID is read from $D0B7
 ; $3E6D grabs the ath pointer from PredefPointers and executes it
 
@@ -10471,7 +10471,7 @@ Predef: ; 3e6d (0:3e6d)
 
 ;loads hl from cc4f, de from cc51, and bc from cc53
 
-Load16BitRegisters: ; 3e94 (0:3e94)
+Load16BitRegisters:: ; 3e94 (0:3e94)
 	ld a, [$cc4f]
 	ld h, a
 	ld a, [$cc50]
@@ -10486,12 +10486,12 @@ Load16BitRegisters: ; 3e94 (0:3e94)
 	ld c, a
 	ret
 
-Func_3ead: ; 3ead (0:3ead)
+Func_3ead:: ; 3ead (0:3ead)
 	ld b, BANK(Func_1eb0a)
 	ld hl, Func_1eb0a
 	jp Bankswitch ; indirect jump to Func_1eb0a (1eb0a (7:6b0a))
 
-Func_3eb5: ; 3eb5 (0:3eb5)
+Func_3eb5:: ; 3eb5 (0:3eb5)
 	ld a, [H_LOADEDROMBANK]
 	push af
 	ld a, [H_CURRENTPRESSEDBUTTONS]
@@ -10528,7 +10528,7 @@ Func_3eb5: ; 3eb5 (0:3eb5)
 	ld [H_LOADEDROMBANK], a
 	ret
 
-Func_3ef5: ; 3ef5 (0:3ef5)
+Func_3ef5:: ; 3ef5 (0:3ef5)
 	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
 	ld hl, PointerTable_3f22
 	call Func_3f0f
@@ -10536,7 +10536,7 @@ Func_3ef5: ; 3ef5 (0:3ef5)
 	set 0, [hl]
 	call DisplayTextID
 
-Func_3f05: ; 3f05 (0:3f05)
+Func_3f05:: ; 3f05 (0:3f05)
 	ld hl, W_MAPTEXTPTR ; $d36c
 	ld a, [$FF00+$ec]
 	ld [hli], a
@@ -10544,7 +10544,7 @@ Func_3f05: ; 3f05 (0:3f05)
 	ld [hl], a
 	ret
 
-Func_3f0f: ; 3f0f (0:3f0f)
+Func_3f0f:: ; 3f0f (0:3f0f)
 	ld a, [W_MAPTEXTPTR] ; $d36c
 	ld [$FF00+$ec], a
 	ld a, [$d36d]
@@ -10555,7 +10555,7 @@ Func_3f0f: ; 3f0f (0:3f0f)
 	ld [$d36d], a
 	ret
 
-PointerTable_3f22: ; 3f22 (0:3f22)
+PointerTable_3f22:: ; 3f22 (0:3f22)
 	dw CardKeySuccessText                   ; id = 01
 	dw CardKeyFailText                      ; id = 02
 	dw Route15UpstairsLeftBinoculars        ; id = 03
@@ -53255,7 +53255,7 @@ Func_3a948: ; 3a948 (e:6948)
 	jp Func_3a8e1
 
 ; four tiles: pokeball, black pokeball (status ailment), crossed out pokeball (faited) and pokeball slot (no mon)
-PokeballTileGraphics: ; 3a97e (e:697e)
+PokeballTileGraphics:: ; 3a97e (e:697e)
 	INCBIN "gfx/pokeball.2bpp"
 
 ; tiles for gameboy and link cable graphics used for trading sequence animation
@@ -103423,7 +103423,7 @@ PointerTable_73895: ; 73895 (1c:7895)
 	dw $B188
 	dw $B5EA
 
-Func_738a1: ; 738a1 (1c:78a1)
+Func_738a1:: ; 738a1 (1c:78a1)
 	ld hl, UnnamedText_73909 ; $7909
 	call PrintText
 	call YesNoChoice

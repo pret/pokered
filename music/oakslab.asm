@@ -1,4 +1,4 @@
-Music_OaksLab_Ch1: ; 7eeb9 (1f:6eb9)
+Music_OaksLab_Ch1:: ; 7eeb9 (1f:6eb9)
 	tempo 0, 140
 	stereopanning 119
 	duty 3
@@ -16,7 +16,7 @@ Music_OaksLab_Ch1: ; 7eeb9 (1f:6eb9)
 	note A_, 1
 	note B_, 1
 
-Music_OaksLab_branch_7eed0:
+Music_OaksLab_branch_7eed0::
 	octave 4
 	note C#, 4
 	octave 3
@@ -69,7 +69,7 @@ Music_OaksLab_branch_7eed0:
 	loopchannel 0, Music_OaksLab_branch_7eed0
 
 
-Music_OaksLab_Ch2: ; 7ef05 (1f:6f05)
+Music_OaksLab_Ch2:: ; 7ef05 (1f:6f05)
 	duty 3
 	vibrato 10, 2, 5
 	notetype 12, 12, 4
@@ -84,7 +84,7 @@ Music_OaksLab_Ch2: ; 7ef05 (1f:6f05)
 	note F#, 1
 	note G#, 1
 
-Music_OaksLab_branch_7ef16:
+Music_OaksLab_branch_7ef16::
 	note A_, 6
 	note G#, 1
 	note F#, 1
@@ -144,7 +144,7 @@ Music_OaksLab_branch_7ef16:
 	loopchannel 0, Music_OaksLab_branch_7ef16
 
 
-Music_OaksLab_Ch3: ; 7ef52 (1f:6f52)
+Music_OaksLab_Ch3:: ; 7ef52 (1f:6f52)
 	notetype 12, 1, 1
 	rest 2
 	octave 4
@@ -155,7 +155,7 @@ Music_OaksLab_Ch3: ; 7ef52 (1f:6f52)
 	note E_, 1
 	rest 1
 
-Music_OaksLab_branch_7ef5c:
+Music_OaksLab_branch_7ef5c::
 	note C#, 1
 	rest 1
 	note A_, 1

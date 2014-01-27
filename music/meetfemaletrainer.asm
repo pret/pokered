@@ -1,4 +1,4 @@
-Music_MeetFemaleTrainer_Ch1: ; 7f6f9 (1f:76f9)
+Music_MeetFemaleTrainer_Ch1:: ; 7f6f9 (1f:76f9)
 	tempo 0, 124
 	stereopanning 119
 	duty 1
@@ -13,7 +13,7 @@ Music_MeetFemaleTrainer_Ch1: ; 7f6f9 (1f:76f9)
 	note C_, 2
 	notetype 12, 8, 1
 
-Music_MeetFemaleTrainer_branch_7f70c:
+Music_MeetFemaleTrainer_branch_7f70c::
 	octave 3
 	note E_, 4
 	loopchannel 12, Music_MeetFemaleTrainer_branch_7f70c
@@ -26,7 +26,7 @@ Music_MeetFemaleTrainer_branch_7f70c:
 	loopchannel 0, Music_MeetFemaleTrainer_branch_7f70c
 
 
-Music_MeetFemaleTrainer_Ch2: ; 7f71c (1f:771c)
+Music_MeetFemaleTrainer_Ch2:: ; 7f71c (1f:771c)
 	duty 2
 	notetype 12, 12, 2
 	octave 3
@@ -35,7 +35,7 @@ Music_MeetFemaleTrainer_Ch2: ; 7f71c (1f:771c)
 	octave 4
 	note B_, 12
 
-Music_MeetFemaleTrainer_branch_7f726:
+Music_MeetFemaleTrainer_branch_7f726::
 	notetype 12, 12, 2
 	octave 3
 	note B_, 4
@@ -71,7 +71,7 @@ Music_MeetFemaleTrainer_branch_7f726:
 	loopchannel 0, Music_MeetFemaleTrainer_branch_7f726
 
 
-Music_MeetFemaleTrainer_Ch3: ; 7f74b (1f:774b)
+Music_MeetFemaleTrainer_Ch3:: ; 7f74b (1f:774b)
 	notetype 12, 1, 0
 	rest 8
 	octave 5
@@ -83,7 +83,7 @@ Music_MeetFemaleTrainer_Ch3: ; 7f74b (1f:774b)
 	note A_, 1
 	rest 1
 
-Music_MeetFemaleTrainer_branch_7f756:
+Music_MeetFemaleTrainer_branch_7f756::
 	callchannel Music_MeetFemaleTrainer_branch_7f770
 	note G#, 1
 	rest 3
@@ -104,7 +104,7 @@ Music_MeetFemaleTrainer_branch_7f756:
 	rest 3
 	loopchannel 0, Music_MeetFemaleTrainer_branch_7f756
 
-Music_MeetFemaleTrainer_branch_7f770:
+Music_MeetFemaleTrainer_branch_7f770::
 	note G#, 1
 	rest 3
 	note E_, 1

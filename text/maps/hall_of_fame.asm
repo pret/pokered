@@ -1,4 +1,4 @@
-_HallofFameRoomText1: ; 85fb5 (21:5fb5)
+_HallofFameRoomText1:: ; 85fb5 (21:5fb5)
 	text "OAK: Er-hem!"
 	line "Congratulations"
 	cont $52, "!"

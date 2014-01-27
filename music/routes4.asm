@@ -1,4 +1,4 @@
-Music_Routes4_Ch1: ; a26a (2:626a)
+Music_Routes4_Ch1:: ; a26a (2:626a)
 	tempo 0, 148
 	stereopanning 119
 	duty 3
@@ -22,7 +22,7 @@ Music_Routes4_Ch1: ; a26a (2:626a)
 	note F#, 1
 	note B_, 1
 
-Music_Routes4_branch_a28a:
+Music_Routes4_branch_a28a::
 	notetype 12, 11, 7
 	note B_, 6
 	note E_, 2
@@ -138,7 +138,7 @@ Music_Routes4_branch_a28a:
 	loopchannel 0, Music_Routes4_branch_a28a
 
 
-Music_Routes4_Ch2: ; a304 (2:6304)
+Music_Routes4_Ch2:: ; a304 (2:6304)
 	vibrato 12, 2, 4
 	duty 1
 	notetype 12, 9, 2
@@ -164,7 +164,7 @@ Music_Routes4_Ch2: ; a304 (2:6304)
 	octave 4
 	note D#, 1
 
-Music_Routes4_branch_a325:
+Music_Routes4_branch_a325::
 	notetype 12, 12, 7
 	note E_, 6
 	octave 3
@@ -288,7 +288,7 @@ Music_Routes4_branch_a325:
 	loopchannel 0, Music_Routes4_branch_a325
 
 
-Music_Routes4_Ch3: ; a3c4 (2:63c4)
+Music_Routes4_Ch3:: ; a3c4 (2:63c4)
 	notetype 12, 1, 0
 	octave 4
 	note E_, 1
@@ -308,7 +308,7 @@ Music_Routes4_Ch3: ; a3c4 (2:63c4)
 	note D#, 1
 	rest 3
 
-Music_Routes4_branch_a3d7:
+Music_Routes4_branch_a3d7::
 	note E_, 1
 	rest 3
 	note E_, 1
@@ -506,7 +506,7 @@ Music_Routes4_branch_a3d7:
 	loopchannel 0, Music_Routes4_branch_a3d7
 
 
-Music_Routes4_Ch4: ; a49d (2:649d)
+Music_Routes4_Ch4:: ; a49d (2:649d)
 	dspeed 12
 	rest 16
 	rest 12
@@ -515,7 +515,7 @@ Music_Routes4_Ch4: ; a49d (2:649d)
 	dnote 1, mutedsnare3
 	dnote 1, mutedsnare3
 
-Music_Routes4_branch_a4a8:
+Music_Routes4_branch_a4a8::
 	dnote 4, mutedsnare2
 	dnote 1, mutedsnare4
 	dnote 1, mutedsnare4

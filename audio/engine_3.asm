@@ -1,6 +1,6 @@
 ; The third of three duplicated sound engines.
 
-Func_7d177: ; 7d177 (1f:5177)
+Func_7d177:: ; 7d177 (1f:5177)
 	ld c, CH0
 .loop
 	ld b, $0
@@ -1273,7 +1273,7 @@ Func_7d8cc: ; 7d8cc (1f:58cc)
 	ld d, a
 	ret
 
-Func_7d8ea: ; 7d8ea (1f:58ea)
+Func_7d8ea:: ; 7d8ea (1f:58ea)
 	ld [$c001], a
 	cp $ff
 	jp z, Func_7daa8

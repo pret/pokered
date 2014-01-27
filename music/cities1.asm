@@ -1,16 +1,16 @@
-Music_Cities1_branch_aa6f:
+Music_Cities1_branch_aa6f::
 	tempo 0, 232
 	loopchannel 0, Music_Cities1_branch_aa79
 
-Music_Cities1_Ch1: ; aa76 (2:6a76)
+Music_Cities1_Ch1:: ; aa76 (2:6a76)
 	tempo 0, 144
 
-Music_Cities1_branch_aa79:
+Music_Cities1_branch_aa79::
 	stereopanning 119
 	vibrato 8, 2, 4
 	duty 3
 
-Music_Cities1_branch_aa80:
+Music_Cities1_branch_aa80::
 	notetype 12, 12, 5
 	octave 3
 	note G#, 4
@@ -143,7 +143,7 @@ Music_Cities1_branch_aa80:
 	note B_, 2
 	octave 3
 
-Music_Cities1_branch_ab12:
+Music_Cities1_branch_ab12::
 	note C#, 2
 	note D#, 2
 	note C#, 2
@@ -242,7 +242,7 @@ Music_Cities1_branch_ab12:
 	note F#, 2
 	loopchannel 0, Music_Cities1_branch_aa80
 
-Music_Cities1_branch_ab7d:
+Music_Cities1_branch_ab7d::
 	octave 3
 	note F#, 2
 	note D#, 4
@@ -257,7 +257,7 @@ Music_Cities1_branch_ab7d:
 	note C#, 2
 	endchannel
 
-Music_Cities1_branch_ab8a:
+Music_Cities1_branch_ab8a::
 	note A_, 2
 	note E_, 2
 	note C#, 2
@@ -268,7 +268,7 @@ Music_Cities1_branch_ab8a:
 	endchannel
 
 
-Music_Cities1_Ch2: ; ab92 (2:6b92)
+Music_Cities1_Ch2:: ; ab92 (2:6b92)
 	vibrato 5, 1, 5
 	callchannel Music_Cities1_branch_ac00
 	octave 4
@@ -359,7 +359,7 @@ Music_Cities1_Ch2: ; ab92 (2:6b92)
 	note A_, 1
 	loopchannel 0, Music_Cities1_Ch2
 
-Music_Cities1_branch_ac00:
+Music_Cities1_branch_ac00::
 	duty 2
 	notetype 12, 12, 3
 	octave 4
@@ -401,11 +401,11 @@ Music_Cities1_branch_ac00:
 	endchannel
 
 
-Music_Cities1_Ch3: ; ac32 (2:6c32)
+Music_Cities1_Ch3:: ; ac32 (2:6c32)
 	notetype 12, 1, 1
 	togglecall
 
-Music_Cities1_branch_ac35:
+Music_Cities1_branch_ac35::
 	vibrato 0, 0, 0
 	octave 4
 	callchannel Music_Cities1_branch_acc5
@@ -532,7 +532,7 @@ Music_Cities1_branch_ac35:
 	note F#, 2
 	loopchannel 0, Music_Cities1_branch_ac35
 
-Music_Cities1_branch_acc5:
+Music_Cities1_branch_acc5::
 	rest 2
 	note E_, 2
 	note F#, 2
@@ -543,7 +543,7 @@ Music_Cities1_branch_acc5:
 	note G#, 2
 	endchannel
 
-Music_Cities1_branch_acce:
+Music_Cities1_branch_acce::
 	note A_, 2
 	note F#, 2
 	note G#, 2
@@ -579,11 +579,11 @@ Music_Cities1_branch_acce:
 	endchannel
 
 
-Music_Cities1_Ch4: ; acef (2:6cef)
+Music_Cities1_Ch4:: ; acef (2:6cef)
 	dspeed 12
 	callchannel Music_Cities1_branch_ad36
 
-Music_Cities1_branch_acf3:
+Music_Cities1_branch_acf3::
 	callchannel Music_Cities1_branch_ad36
 	callchannel Music_Cities1_branch_ad45
 	callchannel Music_Cities1_branch_ad45
@@ -611,7 +611,7 @@ Music_Cities1_branch_acf3:
 	dnote 4, snare6
 	loopchannel 0, Music_Cities1_Ch4
 
-Music_Cities1_branch_ad36:
+Music_Cities1_branch_ad36::
 	dnote 6, snare6
 	dnote 6, snare6
 	dnote 4, snare6
@@ -621,7 +621,7 @@ Music_Cities1_branch_ad36:
 	dnote 2, snare6
 	endchannel
 
-Music_Cities1_branch_ad45:
+Music_Cities1_branch_ad45::
 	dnote 6, snare6
 	dnote 6, snare6
 	dnote 4, snare6
@@ -630,7 +630,7 @@ Music_Cities1_branch_ad45:
 	dnote 4, snare6
 	endchannel
 
-Music_Cities1_branch_ad52:
+Music_Cities1_branch_ad52::
 	dnote 6, triangle1
 	dnote 6, triangle1
 	dnote 4, triangle2
@@ -639,7 +639,7 @@ Music_Cities1_branch_ad52:
 	dnote 4, triangle2
 	endchannel
 
-Music_Cities1_branch_ad5f:
+Music_Cities1_branch_ad5f::
 	dnote 6, triangle1
 	dnote 6, triangle1
 	dnote 4, triangle2
@@ -649,7 +649,7 @@ Music_Cities1_branch_ad5f:
 	dnote 2, triangle1
 	endchannel
 
-Music_Cities1_branch_ad6e:
+Music_Cities1_branch_ad6e::
 	dnote 6, triangle1
 	dnote 6, triangle1
 	dnote 2, triangle2

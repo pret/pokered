@@ -1,4 +1,4 @@
-_UnnamedText_511ad: ; 922cd (24:62cd)
+_UnnamedText_511ad:: ; 922cd (24:62cd)
 	text $53, ": Hey!"
 	line $52, "!"
 
@@ -17,7 +17,7 @@ _UnnamedText_511ad: ; 922cd (24:62cd)
 	cont "get any stronger?"
 	done
 
-_UnnamedText_511b2: ; 9236f (24:636f)
+_UnnamedText_511b2:: ; 9236f (24:636f)
 	text "I heard #MON"
 	line "LEAGUE has many"
 	cont "tough trainers!"
@@ -31,13 +31,13 @@ _UnnamedText_511b2: ; 9236f (24:636f)
 	cont "a move on!"
 	done
 
-_UnnamedText_511b7: ; 923f4 (24:63f4)
+_UnnamedText_511b7:: ; 923f4 (24:63f4)
 	text "Awww!"
 	line "You just lucked"
 	cont "out!"
 	prompt
 
-_UnnamedText_511bc: ; 92410 (24:6410)
+_UnnamedText_511bc:: ; 92410 (24:6410)
 	text $53, ": What?"
 	line "Why do I have 2"
 	cont "#MON?"
@@ -46,7 +46,7 @@ _UnnamedText_511bc: ; 92410 (24:6410)
 	cont "some more too!"
 	prompt
 
-_UnnamedText_511c1: ; 92450 (24:6450)
+_UnnamedText_511c1:: ; 92450 (24:6450)
 	text $53, ": What?"
 	line $52, "! What a"
 	cont "surprise to see"
@@ -67,7 +67,7 @@ _UnnamedText_511c1: ; 92450 (24:6450)
 	para "Come on!"
 	done
 
-_UnnamedText_511c6: ; 92506 (24:6506)
+_UnnamedText_511c6:: ; 92506 (24:6506)
 	text "That loosened me"
 	line "up! I'm ready for"
 	cont "#MON LEAGUE!"
@@ -80,14 +80,14 @@ _UnnamedText_511c6: ; 92506 (24:6506)
 	cont "here. Smell ya!"
 	done
 
-_UnnamedText_511cb: ; 92583 (24:6583)
+_UnnamedText_511cb:: ; 92583 (24:6583)
 	text "What!?"
 
 	para "I was just"
 	line "careless!"
 	prompt
 
-_UnnamedText_511d0: ; 925a0 (24:65a0)
+_UnnamedText_511d0:: ; 925a0 (24:65a0)
 	text $53, ": Hahaha!"
 	line $52, "! That's"
 	cont "your best? You're"
@@ -98,7 +98,7 @@ _UnnamedText_511d0: ; 925a0 (24:65a0)
 	line "more! You loser!"
 	prompt
 
-_Route22Text3: ; 92606 (24:6606)
+_Route22Text3:: ; 92606 (24:6606)
 	text "#MON LEAGUE"
 	line "Front Gate"
 	done

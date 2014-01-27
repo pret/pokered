@@ -1,4 +1,4 @@
-Music_Cities2_Ch1: ; b504 (2:7504)
+Music_Cities2_Ch1:: ; b504 (2:7504)
 	tempo 0, 148
 	stereopanning 119
 	duty 3
@@ -15,7 +15,7 @@ Music_Cities2_Ch1: ; b504 (2:7504)
 	note B_, 2
 	rest 14
 
-Music_Cities2_branch_b51a:
+Music_Cities2_branch_b51a::
 	octave 3
 	note B_, 4
 	octave 4
@@ -94,7 +94,7 @@ Music_Cities2_branch_b51a:
 	loopchannel 0, Music_Cities2_branch_b51a
 
 
-Music_Cities2_Ch2: ; b569 (2:7569)
+Music_Cities2_Ch2:: ; b569 (2:7569)
 	duty 3
 	vibrato 8, 2, 3
 	notetype 12, 12, 2
@@ -124,7 +124,7 @@ Music_Cities2_Ch2: ; b569 (2:7569)
 	note G#, 1
 	note A_, 1
 
-Music_Cities2_branch_b58b:
+Music_Cities2_branch_b58b::
 	notetype 12, 10, 6
 	note G#, 6
 	notetype 12, 12, 2
@@ -280,7 +280,7 @@ Music_Cities2_branch_b58b:
 	loopchannel 0, Music_Cities2_branch_b58b
 
 
-Music_Cities2_Ch3: ; b640 (2:7640)
+Music_Cities2_Ch3:: ; b640 (2:7640)
 	notetype 12, 1, 1
 	rest 16
 	octave 4
@@ -293,7 +293,7 @@ Music_Cities2_Ch3: ; b640 (2:7640)
 	note E_, 2
 	note G#, 2
 
-Music_Cities2_branch_b64c:
+Music_Cities2_branch_b64c::
 	note F#, 2
 	note A_, 2
 	note F#, 2
