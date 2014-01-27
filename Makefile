@@ -9,11 +9,13 @@ TEXTQUEUE :=
 RED_OBJS  := \
 pokered.o \
 audio_red.o \
+wram.o \
 text.o
 
 BLUE_OBJS := \
 pokeblue.o \
 audio_blue.o \
+wram.o \
 text.o
 
 OBJS := $(RED_OBJS) $(BLUE_OBJS)

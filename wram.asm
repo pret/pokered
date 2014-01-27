@@ -1,4 +1,6 @@
 
+INCLUDE "constants/wram_constants.asm"
+
 
 SECTION "WRAM Bank 0", WRAM0
 
@@ -189,7 +191,7 @@ SECTION "Stat Modifiers", WRAM0[$cd1a]
 ; value can range from 1 - 13 ($1 to $D)
 ; 7 is normal
 
-wPlayerMonStatMods:
+wPlayerMonStatMods::
 wPlayerMonAttackMod:: ; cd1a
 	ds 1
 wPlayerMonDefenseMod:: ; cd1b
@@ -214,7 +216,7 @@ wEngagedTrainerSet:: ; cd2e
 ; value can range from 1 - 13 ($1 to $D)
 ; 7 is normal
 
-wEnemyMonStatMods:
+wEnemyMonStatMods::
 wEnemyMonAttackMod:: ; cd2e
 	ds 1
 wEnemyMonDefenseMod:: ; cd2f
@@ -643,8 +645,6 @@ W_FBMODE:: ; d09e
 
 SECTION "Sprite Buffers", SRAM
 
-SPRITEBUFFERSIZE EQU 7*7 * 8 ; 7 * 7 (tiles) * 8 (bytes per tile)
-
 S_SPRITEBUFFER0:: ; a000
 	ds SPRITEBUFFERSIZE
 S_SPRITEBUFFER1:: ; a188
@@ -903,11 +903,11 @@ SECTION "Pokedex", WRAMX[$d2f7], BANK[1]
 
 wPokedexOwned:: ; d2f7
 	ds (150 / 8) + 1
-wPokedexOwnedEnd:
+wPokedexOwnedEnd::
 
 wPokedexSeen:: ; d30a
 	ds (150 / 8) + 1
-wPokedexSeenEnd:
+wPokedexSeenEnd::
 
 
 wNumBagItems:: ; d31d
@@ -1342,11 +1342,8 @@ wEnemyPartyMons:: ; d89d
 	ds 6
 	ds 1 ; end
 
-; Overload enemy party data
-W_WATERRATE EQU $d8a4
-W_WATERMONS EQU $d8a5
 
-wEnemyMons:
+wEnemyMons::
 
 wEnemyMon1:: ; d8a4
 wEnemyMon1Species:: ; d8a4
