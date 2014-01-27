@@ -8,13 +8,16 @@ TEXTQUEUE :=
 
 RED_OBJS  := \
 pokered.o \
-audio_red.o
+audio_red.o \
+text.o
 
 BLUE_OBJS := \
 pokeblue.o \
-audio_blue.o
+audio_blue.o \
+text.o
 
 OBJS := $(RED_OBJS) $(BLUE_OBJS)
+OBJS := $(sort $(OBJS))
 
 ROMS := pokered.gbc pokeblue.gbc
 
