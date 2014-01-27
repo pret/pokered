@@ -41,12 +41,12 @@ redrle: extras/redtools/redrle.c
 clean:
 	rm -f $(ROMS)
 	rm -f $(OBJS)
-	@echo "removing *.tx" && find . -iname '*.tx' -exec rm {} +
+	find . -iname '*.tx' -exec rm {} +
 	rm -f redrle
 
 
 baserom.gbc: ;
-	@echo "Wait! Need baserom.gbc first. Check README and INSTALL for details." && false
+	@echo "Wait! Need baserom.gbc first. Check README for details." && false
 
 %.asm: ;
 .asm.tx:
@@ -59,10 +59,10 @@ $(OBJS): $$*.tx $$(patsubst %.asm, %.tx, $$($$*_DEPENDENCIES))
 	rgbasm -o $@ $*.tx
 
 pokered.gbc: $(RED_OBJS)
-	rgblink -n $*.sym -m $*.map -o $@ $(RED_OBJS)
+	rgblink -n $*.sym -m $*.map -o $@ $^
 	rgbfix -jsv -k 01 -l 0x33 -m 0x13 -p 0 -r 03 -t "POKEMON RED" $@
 
 pokeblue.gbc: $(BLUE_OBJS)
-	rgblink -n $*.sym -m $*.map -o $@ $(BLUE_OBJS)
+	rgblink -n $*.sym -m $*.map -o $@ $^
 	rgbfix -jsv -k 01 -l 0x33 -m 0x13 -p 0 -r 03 -t "POKEMON BLUE" $@
 
