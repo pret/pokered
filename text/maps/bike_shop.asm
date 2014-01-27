@@ -1,4 +1,4 @@
-_UnnamedText_1d810: ; 98e03 (26:4e03)
+_UnnamedText_1d810:: ; 98e03 (26:4e03)
 	text "Hi! Welcome to"
 	line "our BIKE SHOP."
 
@@ -6,17 +6,17 @@ _UnnamedText_1d810: ; 98e03 (26:4e03)
 	line "the BIKE for you!"
 	prompt
 
-_UnnamedText_1d815: ; 98e45 (26:4e45)
+_UnnamedText_1d815:: ; 98e45 (26:4e45)
 	text "It's a cool BIKE!"
 	line "Do you want it?"
 	done
 
-_UnnamedText_1d81a: ; 98e67 (26:4e67)
+_UnnamedText_1d81a:: ; 98e67 (26:4e67)
 	text "Sorry! You can't"
 	line "afford it!"
 	prompt
 
-_UnnamedText_1d81f: ; 98e83 (26:4e83)
+_UnnamedText_1d81f:: ; 98e83 (26:4e83)
 	text "Oh, that's..."
 
 	para "A BIKE VOUCHER!"
@@ -24,17 +24,17 @@ _UnnamedText_1d81f: ; 98e83 (26:4e83)
 	para "OK! Here you go!"
 	prompt
 
-_UnnamedText_1d824: ; 98eb2 (26:4eb2)
+_UnnamedText_1d824:: ; 98eb2 (26:4eb2)
 	text $52, " exchanged"
 	line "the BIKE VOUCHER"
 	cont "for a BICYCLE.@@"
 
-_UnnamedText_1d82a: ; 98ee0 (26:4ee0)
+_UnnamedText_1d82a:: ; 98ee0 (26:4ee0)
 	text "Come back again"
 	line "some time!"
 	done
 
-_UnnamedText_1d82f: ; 98efc (26:4efc)
+_UnnamedText_1d82f:: ; 98efc (26:4efc)
 	text "How do you like"
 	line "your new BICYCLE?"
 
@@ -43,12 +43,12 @@ _UnnamedText_1d82f: ; 98efc (26:4efc)
 	cont "and in caves!"
 	done
 
-_UnnamedText_1d834: ; 98f4d (26:4f4d)
+_UnnamedText_1d834:: ; 98f4d (26:4f4d)
 	text "You better make"
 	line "room for this!"
 	done
 
-_UnnamedText_1d843: ; 98f6d (26:4f6d)
+_UnnamedText_1d843:: ; 98f6d (26:4f6d)
 	text "A plain city BIKE"
 	line "is good enough"
 	cont "for me!"
@@ -58,13 +58,13 @@ _UnnamedText_1d843: ; 98f6d (26:4f6d)
 	cont "on an MTB!"
 	done
 
-_UnnamedText_1d85c: ; 98fc1 (26:4fc1)
+_UnnamedText_1d85c:: ; 98fc1 (26:4fc1)
 	text "These BIKEs are"
 	line "cool, but they're"
 	cont "way expensive!"
 	done
 
-_UnnamedText_1d861: ; 98ff2 (26:4ff2)
+_UnnamedText_1d861:: ; 98ff2 (26:4ff2)
 	text "Wow. Your BIKE is"
 	line "really cool!"
 	done

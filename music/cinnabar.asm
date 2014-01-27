@@ -1,11 +1,11 @@
-Music_Cinnabar_Ch1: ; b86d (2:786d)
+Music_Cinnabar_Ch1:: ; b86d (2:786d)
 	tempo 0, 144
 	stereopanning 119
 	duty 3
 	vibrato 12, 3, 4
 	togglecall
 
-Music_Cinnabar_branch_b878:
+Music_Cinnabar_branch_b878::
 	notetype 12, 11, 5
 	rest 4
 	octave 3
@@ -85,11 +85,11 @@ Music_Cinnabar_branch_b878:
 	loopchannel 0, Music_Cinnabar_branch_b878
 
 
-Music_Cinnabar_Ch2: ; b8d4 (2:78d4)
+Music_Cinnabar_Ch2:: ; b8d4 (2:78d4)
 	duty 3
 	vibrato 10, 2, 3
 
-Music_Cinnabar_branch_b8d9:
+Music_Cinnabar_branch_b8d9::
 	notetype 12, 12, 7
 	octave 3
 	note G_, 6
@@ -179,10 +179,10 @@ Music_Cinnabar_branch_b8d9:
 	loopchannel 0, Music_Cinnabar_branch_b8d9
 
 
-Music_Cinnabar_Ch3: ; b93d (2:793d)
+Music_Cinnabar_Ch3:: ; b93d (2:793d)
 	notetype 12, 1, 0
 
-Music_Cinnabar_branch_b93f:
+Music_Cinnabar_branch_b93f::
 	octave 4
 	note G_, 1
 	rest 3

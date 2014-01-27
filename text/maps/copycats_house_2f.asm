@@ -1,4 +1,4 @@
-_UnnamedText_5ccd4: ; a15ad (28:55ad)
+_UnnamedText_5ccd4:: ; a15ad (28:55ad)
 	text $52, ": Hi! Do"
 	line "you like #MON?"
 
@@ -15,7 +15,7 @@ _UnnamedText_5ccd4: ; a15ad (28:55ad)
 	line "favorite hobby!"
 	prompt
 
-_TM31PreReceiveText: ; a1636 (28:5636)
+_TM31PreReceiveText:: ; a1636 (28:5636)
 	text "Oh wow!"
 	line "A # DOLL!"
 
@@ -26,13 +26,13 @@ _TM31PreReceiveText: ; a1636 (28:5636)
 	line "this, then!"
 	prompt
 
-_ReceivedTM31Text: ; a1675 (28:5675)
+_ReceivedTM31Text:: ; a1675 (28:5675)
 	text $52, " received"
 	line "@"
 	TX_RAM $cf4b
 	text "!@@"
 
-_TM31ExplanationText1: ; a1689 (28:5689)
+_TM31ExplanationText1:: ; a1689 (28:5689)
 	db $0
 	para "TM31 contains my"
 	line "favorite, MIMIC!"
@@ -40,7 +40,7 @@ _TM31ExplanationText1: ; a1689 (28:5689)
 	para "Use it on a good"
 	line "#MON!@@"
 
-_TM31ExplanationText2: ; a16c5 (28:56c5)
+_TM31ExplanationText2:: ; a16c5 (28:56c5)
 	text $52, ": Hi!"
 	line "Thanks for TM31!"
 
@@ -54,11 +54,11 @@ _TM31ExplanationText2: ; a16c5 (28:56c5)
 	line "It's a scream!"
 	done
 
-_TM31NoRoomText: ; a1733 (28:5733)
+_TM31NoRoomText:: ; a1733 (28:5733)
 	text "Don't you want"
 	line "this?@@"
 
-_CopycatsHouseF2Text2: ; a1749 (28:5749)
+_CopycatsHouseF2Text2:: ; a1749 (28:5749)
 	text "DODUO: Giiih!"
 
 	para "MIRROR MIRROR ON"
@@ -67,19 +67,19 @@ _CopycatsHouseF2Text2: ; a1749 (28:5749)
 	cont "OF ALL?"
 	done
 
-_CopycatsHouseF2Text3: ; a1792 (28:5792)
+_CopycatsHouseF2Text3:: ; a1792 (28:5792)
 	text "This is a rare"
 	line "#MON! Huh?"
 	cont "It's only a doll!"
 	done
 
-_CopycatsHouseF2Text6: ; a17be (28:57be)
+_CopycatsHouseF2Text6:: ; a17be (28:57be)
 	text "A game with MARIO"
 	line "wearing a bucket"
 	cont "on his head!"
 	done
 
-_UnnamedText_5cd17: ; a17ef (28:57ef)
+_UnnamedText_5cd17:: ; a17ef (28:57ef)
 	text "..."
 
 	para "My Secrets!"
@@ -91,7 +91,7 @@ _UnnamedText_5cd17: ; a17ef (28:57ef)
 	cont "CLEFAIRY!"
 	done
 
-_UnnamedText_5cd1c: ; a1842 (28:5842)
+_UnnamedText_5cd1c:: ; a1842 (28:5842)
 	text "Huh? Can't see!"
 	done
 

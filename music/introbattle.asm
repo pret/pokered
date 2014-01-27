@@ -1,4 +1,4 @@
-Music_IntroBattle_Ch1: ; 7f844 (1f:7844)
+Music_IntroBattle_Ch1:: ; 7f844 (1f:7844)
 	tempo 0, 98
 	stereopanning 119
 	duty 3
@@ -90,7 +90,7 @@ Music_IntroBattle_Ch1: ; 7f844 (1f:7844)
 	endchannel
 
 
-Music_IntroBattle_Ch2: ; 7f8bc (1f:78bc)
+Music_IntroBattle_Ch2:: ; 7f8bc (1f:78bc)
 	duty 3
 	vibrato 8, 2, 5
 	notetype 12, 12, 2
@@ -165,7 +165,7 @@ Music_IntroBattle_Ch2: ; 7f8bc (1f:78bc)
 	endchannel
 
 
-Music_IntroBattle_Ch3: ; 7f91d (1f:791d)
+Music_IntroBattle_Ch3:: ; 7f91d (1f:791d)
 	notetype 12, 1, 0
 	rest 8
 	octave 4
@@ -229,7 +229,7 @@ Music_IntroBattle_Ch3: ; 7f91d (1f:791d)
 	endchannel
 
 
-Music_IntroBattle_Ch4: ; 7f95b (1f:795b)
+Music_IntroBattle_Ch4:: ; 7f95b (1f:795b)
 	dspeed 6
 	dnote 1, mutedsnare4
 	dnote 1, mutedsnare4

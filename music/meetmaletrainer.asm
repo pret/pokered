@@ -1,4 +1,4 @@
-Music_MeetMaleTrainer_Ch1: ; 7f77b (1f:777b)
+Music_MeetMaleTrainer_Ch1:: ; 7f77b (1f:777b)
 	tempo 0, 112
 	stereopanning 119
 	duty 3
@@ -13,7 +13,7 @@ Music_MeetMaleTrainer_Ch1: ; 7f77b (1f:777b)
 	note F_, 12
 	rest 16
 
-Music_MeetMaleTrainer_branch_7f78f:
+Music_MeetMaleTrainer_branch_7f78f::
 	octave 3
 	note B_, 4
 	note A_, 4
@@ -32,7 +32,7 @@ Music_MeetMaleTrainer_branch_7f78f:
 	loopchannel 0, Music_MeetMaleTrainer_branch_7f78f
 
 
-Music_MeetMaleTrainer_Ch2: ; 7f7a2 (1f:77a2)
+Music_MeetMaleTrainer_Ch2:: ; 7f7a2 (1f:77a2)
 	duty 3
 	vibrato 24, 2, 2
 	notetype 12, 12, 4
@@ -49,7 +49,7 @@ Music_MeetMaleTrainer_Ch2: ; 7f7a2 (1f:77a2)
 	note E_, 1
 	rest 9
 
-Music_MeetMaleTrainer_branch_7f7b5:
+Music_MeetMaleTrainer_branch_7f7b5::
 	notetype 12, 12, 4
 	octave 4
 	note E_, 6
@@ -75,7 +75,7 @@ Music_MeetMaleTrainer_branch_7f7b5:
 	loopchannel 0, Music_MeetMaleTrainer_branch_7f7b5
 
 
-Music_MeetMaleTrainer_Ch3: ; 7f7d2 (1f:77d2)
+Music_MeetMaleTrainer_Ch3:: ; 7f7d2 (1f:77d2)
 	notetype 12, 1, 0
 	rest 6
 	octave 4
@@ -100,7 +100,7 @@ Music_MeetMaleTrainer_Ch3: ; 7f7d2 (1f:77d2)
 	note F#, 1
 	rest 1
 
-Music_MeetMaleTrainer_branch_7f7ea:
+Music_MeetMaleTrainer_branch_7f7ea::
 	note E_, 1
 	rest 1
 	note B_, 1

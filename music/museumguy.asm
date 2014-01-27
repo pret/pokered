@@ -1,4 +1,4 @@
-Music_MuseumGuy_Ch1: ; adae (2:6dae)
+Music_MuseumGuy_Ch1:: ; adae (2:6dae)
 	tempo 0, 128
 	stereopanning 119
 	duty 2
@@ -29,7 +29,7 @@ Music_MuseumGuy_Ch1: ; adae (2:6dae)
 	note E_, 2
 	note E_, 6
 
-Music_MuseumGuy_branch_add6:
+Music_MuseumGuy_branch_add6::
 	callchannel Music_MuseumGuy_branch_ade7
 	callchannel Music_MuseumGuy_branch_adec
 	callchannel Music_MuseumGuy_branch_ade7
@@ -39,14 +39,14 @@ Music_MuseumGuy_branch_add6:
 	note E_, 6
 	loopchannel 0, Music_MuseumGuy_branch_add6
 
-Music_MuseumGuy_branch_ade7:
+Music_MuseumGuy_branch_ade7::
 	note E_, 2
 	note E_, 6
 	note F#, 2
 	note F#, 6
 	endchannel
 
-Music_MuseumGuy_branch_adec:
+Music_MuseumGuy_branch_adec::
 	note E_, 2
 	note E_, 6
 	note D_, 2
@@ -54,7 +54,7 @@ Music_MuseumGuy_branch_adec:
 	endchannel
 
 
-Music_MuseumGuy_Ch2: ; adf1 (2:6df1)
+Music_MuseumGuy_Ch2:: ; adf1 (2:6df1)
 	duty 2
 	notetype 12, 12, 1
 	octave 4
@@ -107,7 +107,7 @@ Music_MuseumGuy_Ch2: ; adf1 (2:6df1)
 	note A_, 2
 	note A_, 4
 
-Music_MuseumGuy_branch_ae26:
+Music_MuseumGuy_branch_ae26::
 	octave 3
 	note A_, 2
 	octave 4
@@ -165,7 +165,7 @@ Music_MuseumGuy_branch_ae26:
 	loopchannel 0, Music_MuseumGuy_branch_ae26
 
 
-Music_MuseumGuy_Ch3: ; ae6e (2:6e6e)
+Music_MuseumGuy_Ch3:: ; ae6e (2:6e6e)
 	notetype 12, 1, 0
 	rest 16
 	octave 4
@@ -194,7 +194,7 @@ Music_MuseumGuy_Ch3: ; ae6e (2:6e6e)
 	note A_, 1
 	rest 3
 
-Music_MuseumGuy_branch_ae8e:
+Music_MuseumGuy_branch_ae8e::
 	callchannel Music_MuseumGuy_branch_aec1
 	rest 3
 	octave 6
@@ -231,7 +231,7 @@ Music_MuseumGuy_branch_ae8e:
 	rest 3
 	loopchannel 0, Music_MuseumGuy_branch_ae8e
 
-Music_MuseumGuy_branch_aeb8:
+Music_MuseumGuy_branch_aeb8::
 	note A_, 1
 	rest 1
 	note A_, 1
@@ -242,7 +242,7 @@ Music_MuseumGuy_branch_aeb8:
 	rest 5
 	endchannel
 
-Music_MuseumGuy_branch_aec1:
+Music_MuseumGuy_branch_aec1::
 	octave 6
 	note C#, 1
 	rest 1
@@ -261,7 +261,7 @@ Music_MuseumGuy_branch_aec1:
 	endchannel
 
 
-Music_MuseumGuy_Ch4: ; aed1 (2:6ed1)
+Music_MuseumGuy_Ch4:: ; aed1 (2:6ed1)
 	dspeed 12
 	rest 16
 	rest 16
@@ -275,7 +275,7 @@ Music_MuseumGuy_Ch4: ; aed1 (2:6ed1)
 	dnote 1, mutedsnare3
 	dnote 1, mutedsnare3
 
-Music_MuseumGuy_branch_aee1:
+Music_MuseumGuy_branch_aee1::
 	dnote 4, mutedsnare2
 	dnote 6, mutedsnare2
 	dnote 2, mutedsnare2

@@ -1,4 +1,4 @@
-_VictoryRoadGuardText1: ; 9261e (24:661e)
+_VictoryRoadGuardText1:: ; 9261e (24:661e)
 	text "You can pass here"
 	line "only if you have"
 	cont "the @"
@@ -14,7 +14,7 @@ _VictoryRoadGuardText1: ; 9261e (24:661e)
 	line "it to get to"
 	cont "#MON LEAGUE!@@"
 
-_VictoryRoadGuardText2: ; 92696 (24:6696)
+_VictoryRoadGuardText2:: ; 92696 (24:6696)
 	text "You can pass here"
 	line "only if you have"
 	cont "the @"
@@ -26,13 +26,13 @@ _VictoryRoadGuardText2: ; 92696 (24:6696)
 	TX_RAM $cd6d
 	text "!@@"
 
-_UnnamedText_513a3: ; 926dd (24:66dd)
+_UnnamedText_513a3:: ; 926dd (24:66dd)
 	db $0
 	para "OK then! Please,"
 	line "go right ahead!"
 	done
 
-_Route23Text8: ; 92700 (24:6700)
+_Route23Text8:: ; 92700 (24:6700)
 	text "VICTORY ROAD GATE"
 	line "- #MON LEAGUE"
 	done

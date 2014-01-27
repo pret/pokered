@@ -1,4 +1,4 @@
-Music_Gym_Ch1: ; bcbb (2:7cbb)
+Music_Gym_Ch1:: ; bcbb (2:7cbb)
 	tempo 0, 138
 	stereopanning 119
 	duty 3
@@ -22,7 +22,7 @@ Music_Gym_Ch1: ; bcbb (2:7cbb)
 	note F_, 4
 	note G_, 4
 
-Music_Gym_branch_bcd8:
+Music_Gym_branch_bcd8::
 	note E_, 4
 	note F_, 2
 	note G_, 2
@@ -165,7 +165,7 @@ Music_Gym_branch_bcd8:
 	loopchannel 0, Music_Gym_branch_bcd8
 
 
-Music_Gym_Ch2: ; bd6b (2:7d6b)
+Music_Gym_Ch2:: ; bd6b (2:7d6b)
 	duty 3
 	vibrato 10, 2, 5
 	notetype 12, 12, 7
@@ -184,7 +184,7 @@ Music_Gym_Ch2: ; bd6b (2:7d6b)
 	notetype 12, 12, 7
 	note B_, 4
 
-Music_Gym_branch_bd82:
+Music_Gym_branch_bd82::
 	octave 4
 	note C_, 12
 	octave 3
@@ -288,7 +288,7 @@ Music_Gym_branch_bd82:
 	loopchannel 0, Music_Gym_branch_bd82
 
 
-Music_Gym_Ch3: ; bdfa (2:7dfa)
+Music_Gym_Ch3:: ; bdfa (2:7dfa)
 	notetype 12, 1, 1
 	rest 16
 	rest 10
@@ -297,7 +297,7 @@ Music_Gym_Ch3: ; bdfa (2:7dfa)
 	note F_, 2
 	note D_, 2
 
-Music_Gym_branch_be02:
+Music_Gym_branch_be02::
 	callchannel Music_Gym_branch_be3b
 	callchannel Music_Gym_branch_be44
 	callchannel Music_Gym_branch_be3b
@@ -323,7 +323,7 @@ Music_Gym_branch_be02:
 	note F_, 2
 	loopchannel 0, Music_Gym_branch_be02
 
-Music_Gym_branch_be3b:
+Music_Gym_branch_be3b::
 	note E_, 2
 	note G_, 2
 	note E_, 2
@@ -334,7 +334,7 @@ Music_Gym_branch_be3b:
 	note G_, 2
 	endchannel
 
-Music_Gym_branch_be44:
+Music_Gym_branch_be44::
 	note D_, 2
 	note F_, 2
 	note D_, 2
@@ -345,7 +345,7 @@ Music_Gym_branch_be44:
 	note F_, 2
 	endchannel
 
-Music_Gym_branch_be4d:
+Music_Gym_branch_be4d::
 	note F_, 2
 	note A#, 2
 	note F_, 2

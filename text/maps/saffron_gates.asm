@@ -1,4 +1,4 @@
-_UnnamedText_1dfe7: ; 8aa5c (22:6a5c)
+_UnnamedText_1dfe7:: ; 8aa5c (22:6a5c)
 	text "I'm on guard duty."
 	line "Gee, I'm thirsty,"
 	cont "though!"
@@ -7,7 +7,7 @@ _UnnamedText_1dfe7: ; 8aa5c (22:6a5c)
 	line "the road's closed."
 	done
 
-_UnnamedText_8aaa9: ; 8aaa9 (22:6aa9)
+_UnnamedText_8aaa9:: ; 8aaa9 (22:6aa9)
 	text "Whoa, boy!"
 	line "I'm parched!"
 	cont "..."
@@ -15,7 +15,7 @@ _UnnamedText_8aaa9: ; 8aaa9 (22:6aa9)
 	cont "this drink?"
 	cont "Gee, thanks!@@"
 
-_UnnamedText_1dff1: ; 8aaef (22:6aef)
+_UnnamedText_1dff1:: ; 8aaef (22:6aef)
 	db $0
 	para "..."
 	line "Glug glug..."
@@ -30,7 +30,7 @@ _UnnamedText_1dff1: ; 8aaef (22:6aef)
 	cont "the other guards!"
 	done
 
-_UnnamedText_1dff6: ; 8ab74 (22:6b74)
+_UnnamedText_1dff6:: ; 8ab74 (22:6b74)
 	text "Hi, thanks for"
 	line "the cool drinks!"
 	done

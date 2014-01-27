@@ -1,4 +1,4 @@
-Music_MeetEvilTrainer_Ch1: ; 7f69d (1f:769d)
+Music_MeetEvilTrainer_Ch1:: ; 7f69d (1f:769d)
 	tempo 0, 124
 	stereopanning 119
 	duty 2
@@ -11,7 +11,7 @@ Music_MeetEvilTrainer_Ch1: ; 7f69d (1f:769d)
 	notetype 12, 4, 15
 	note D_, 4
 
-Music_MeetEvilTrainer_branch_7f6ae:
+Music_MeetEvilTrainer_branch_7f6ae::
 	notetype 12, 10, 1
 	note D_, 4
 	note D_, 4
@@ -21,7 +21,7 @@ Music_MeetEvilTrainer_branch_7f6ae:
 	loopchannel 0, Music_MeetEvilTrainer_branch_7f6ae
 
 
-Music_MeetEvilTrainer_Ch2: ; 7f6ba (1f:76ba)
+Music_MeetEvilTrainer_Ch2:: ; 7f6ba (1f:76ba)
 	duty 1
 	notetype 12, 11, 6
 	octave 3
@@ -29,7 +29,7 @@ Music_MeetEvilTrainer_Ch2: ; 7f6ba (1f:76ba)
 	note A#, 2
 	note B_, 8
 
-Music_MeetEvilTrainer_branch_7f6c2:
+Music_MeetEvilTrainer_branch_7f6c2::
 	notetype 12, 12, 2
 	octave 4
 	note D#, 2
@@ -60,7 +60,7 @@ Music_MeetEvilTrainer_branch_7f6c2:
 	loopchannel 0, Music_MeetEvilTrainer_branch_7f6c2
 
 
-Music_MeetEvilTrainer_Ch3: ; 7f6e6 (1f:76e6)
+Music_MeetEvilTrainer_Ch3:: ; 7f6e6 (1f:76e6)
 	notetype 12, 1, 0
 	rest 8
 	octave 4
@@ -69,7 +69,7 @@ Music_MeetEvilTrainer_Ch3: ; 7f6e6 (1f:76e6)
 	note F_, 1
 	rest 1
 
-Music_MeetEvilTrainer_branch_7f6ee:
+Music_MeetEvilTrainer_branch_7f6ee::
 	note F#, 1
 	rest 3
 	note F#, 1

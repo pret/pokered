@@ -1,11 +1,11 @@
-Music_SSAnne_Ch1: ; b3a7 (2:73a7)
+Music_SSAnne_Ch1:: ; b3a7 (2:73a7)
 	tempo 0, 128
 	stereopanning 119
 	duty 1
 	vibrato 8, 3, 4
 	togglecall
 
-Music_SSAnne_branch_b3b2:
+Music_SSAnne_branch_b3b2::
 	notetype 12, 10, 4
 	rest 12
 	octave 3
@@ -107,11 +107,11 @@ Music_SSAnne_branch_b3b2:
 	loopchannel 0, Music_SSAnne_branch_b3b2
 
 
-Music_SSAnne_Ch2: ; b419 (2:7419)
+Music_SSAnne_Ch2:: ; b419 (2:7419)
 	duty 0
 	vibrato 12, 2, 4
 
-Music_SSAnne_branch_b41e:
+Music_SSAnne_branch_b41e::
 	notetype 12, 12, 5
 	octave 3
 	note A_, 2
@@ -282,7 +282,7 @@ Music_SSAnne_branch_b41e:
 	loopchannel 0, Music_SSAnne_branch_b41e
 
 
-Music_SSAnne_Ch3: ; b4cb (2:74cb)
+Music_SSAnne_Ch3:: ; b4cb (2:74cb)
 	notetype 12, 1, 3
 	rest 16
 	rest 12

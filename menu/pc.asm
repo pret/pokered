@@ -1,5 +1,5 @@
 
-Func_213c8: ; 213c8 (8:53c8)
+Func_213c8:: ; 213c8 (8:53c8)
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
 	call SaveScreenTilesToBuffer2
@@ -115,8 +115,8 @@ PKMNLeaguePCText: ; 214b2 (8:54b2)
 LogOffPCText: ; 214ba (8:54ba)
 	db "LOG OFF@"
 
-Func_214c2: ; 214c2 (8:54c2)
-BillsPC_: ; 0x214c2
+Func_214c2:: ; 214c2 (8:54c2)
+BillsPC_:: ; 0x214c2
 	ld hl, $d730
 	set 6, [hl]
 	xor a
@@ -374,7 +374,7 @@ BillsPCMenuText: ; 216e1 (8:56e1)
 BoxNoPCText: ; 21713 (8:5713)
 	db "BOX No.@"
 
-Func_2171b: ; 2171b (8:571b)
+Func_2171b:: ; 2171b (8:571b)
 	ld hl, $d173
 	ld bc, $002c
 	jr .asm_21729 ; 0x21721 $6
@@ -536,7 +536,7 @@ MonWasReleasedText: ; 0x21820
 	TX_FAR _MonWasReleasedText
 	db "@"
 
-Func_21825: ; 5824 (8:5825)
+Func_21825:: ; 5824 (8:5825)
 	ld a, [$ff00+$aa]
 	cp $1
 	ret z
@@ -554,7 +554,7 @@ Func_21825: ; 5824 (8:5825)
 	ld a, $22
 	jp Func_3ef5
 
-Func_21845: ; 5845 (8:5845)
+Func_21845:: ; 5845 (8:5845)
 	ld a, [$ff00+$aa]
 	cp $2
 	ret z
@@ -572,7 +572,7 @@ Func_21845: ; 5845 (8:5845)
 	ld a, $22
 	jp Func_3ef5
 
-UnnamedText_21865: ; 21865 (8:5865)
+UnnamedText_21865:: ; 21865 (8:5865)
 	TX_FAR _UnnamedText_21865
 	db "@"
 
@@ -583,6 +583,6 @@ UnnamedText_21865: ; 21865 (8:5865)
 	ld a, $23
 	jp Func_3ef5
 
-Unknown_21878: ; 21878 (8:5878)
+Unknown_21878:: ; 21878 (8:5878)
 	db $FD
 

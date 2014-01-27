@@ -1,4 +1,4 @@
-Music_PokemonTower_Ch1: ; 7f04a (1f:704a)
+Music_PokemonTower_Ch1:: ; 7f04a (1f:704a)
 	tempo 0, 152
 	stereopanning 119
 	duty 3
@@ -9,7 +9,7 @@ Music_PokemonTower_Ch1: ; 7f04a (1f:704a)
 	octave 4
 	note B_, 12
 
-Music_PokemonTower_branch_7f05a:
+Music_PokemonTower_branch_7f05a::
 	notetype 12, 11, 4
 	octave 4
 	note G_, 1
@@ -140,7 +140,7 @@ Music_PokemonTower_branch_7f05a:
 	loopchannel 0, Music_PokemonTower_branch_7f05a
 
 
-Music_PokemonTower_Ch2: ; 7f0e3 (1f:70e3)
+Music_PokemonTower_Ch2:: ; 7f0e3 (1f:70e3)
 	vibrato 20, 3, 4
 	duty 3
 	notetype 12, 10, 0
@@ -149,7 +149,7 @@ Music_PokemonTower_Ch2: ; 7f0e3 (1f:70e3)
 	octave 4
 	note E_, 4
 
-Music_PokemonTower_branch_7f0ee:
+Music_PokemonTower_branch_7f0ee::
 	notetype 12, 12, 1
 	octave 5
 	note C_, 8
@@ -292,14 +292,14 @@ Music_PokemonTower_branch_7f0ee:
 	loopchannel 0, Music_PokemonTower_branch_7f0ee
 
 
-Music_PokemonTower_Ch3: ; 7f19a (1f:719a)
+Music_PokemonTower_Ch3:: ; 7f19a (1f:719a)
 	vibrato 4, 1, 1
 	notetype 12, 1, 3
 	rest 8
 	octave 5
 	note G_, 8
 
-Music_PokemonTower_branch_7f1a2:
+Music_PokemonTower_branch_7f1a2::
 	note E_, 1
 	rest 7
 	note E_, 1

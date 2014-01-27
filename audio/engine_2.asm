@@ -1,6 +1,6 @@
 ; The second of three duplicated sound engines.
 
-Func_21879: ; 21879 (8:5879)
+Func_21879:: ; 21879 (8:5879)
 	ld c, CH0
 .loop
 	ld b, $0
@@ -1324,7 +1324,7 @@ Func_22017: ; 22017 (8:6017)
 	ld d, a
 	ret
 
-Func_22035: ; 22035 (8:6035)
+Func_22035:: ; 22035 (8:6035)
 	ld [$c001], a
 	cp $ff
 	jp z, Func_221f3

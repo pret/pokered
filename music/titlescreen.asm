@@ -1,4 +1,4 @@
-Music_TitleScreen_Ch1: ; 7e4c0 (1f:64c0)
+Music_TitleScreen_Ch1:: ; 7e4c0 (1f:64c0)
 	tempo 0, 144
 	stereopanning 119
 	vibrato 9, 3, 4
@@ -26,7 +26,7 @@ Music_TitleScreen_Ch1: ; 7e4c0 (1f:64c0)
 	note A_, 2
 	note F#, 2
 
-Music_TitleScreen_branch_7e4e2:
+Music_TitleScreen_branch_7e4e2::
 	callchannel Music_TitleScreen_branch_7e541
 	callchannel Music_TitleScreen_branch_7e54a
 	callchannel Music_TitleScreen_branch_7e541
@@ -96,7 +96,7 @@ Music_TitleScreen_branch_7e4e2:
 	note C#, 4
 	loopchannel 0, Music_TitleScreen_branch_7e4e2
 
-Music_TitleScreen_branch_7e541:
+Music_TitleScreen_branch_7e541::
 	notetype 12, 12, 6
 	octave 3
 	note D_, 6
@@ -106,7 +106,7 @@ Music_TitleScreen_branch_7e541:
 	note D_, 8
 	endchannel
 
-Music_TitleScreen_branch_7e54a:
+Music_TitleScreen_branch_7e54a::
 	note C_, 6
 	note F_, 6
 	note C_, 4
@@ -124,7 +124,7 @@ Music_TitleScreen_branch_7e54a:
 	note C_, 4
 	endchannel
 
-Music_TitleScreen_branch_7e55c:
+Music_TitleScreen_branch_7e55c::
 	notetype 12, 12, 1
 	note D_, 1
 	rest 1
@@ -154,7 +154,7 @@ Music_TitleScreen_branch_7e55c:
 	endchannel
 
 
-Music_TitleScreen_Ch2: ; 7e578 (1f:6578)
+Music_TitleScreen_Ch2:: ; 7e578 (1f:6578)
 	vibrato 16, 4, 6
 	duty 1
 	notetype 12, 14, 1
@@ -179,7 +179,7 @@ Music_TitleScreen_Ch2: ; 7e578 (1f:6578)
 	note F_, 2
 	note F#, 2
 
-Music_TitleScreen_branch_7e594:
+Music_TitleScreen_branch_7e594::
 	vibrato 16, 4, 6
 	callchannel Music_TitleScreen_branch_7e622
 	octave 2
@@ -286,7 +286,7 @@ Music_TitleScreen_branch_7e594:
 	note B_, 4
 	loopchannel 0, Music_TitleScreen_branch_7e594
 
-Music_TitleScreen_branch_7e622:
+Music_TitleScreen_branch_7e622::
 	notetype 12, 14, 7
 	octave 3
 	note G_, 6
@@ -296,7 +296,7 @@ Music_TitleScreen_branch_7e622:
 	notetype 12, 9, 5
 	endchannel
 
-Music_TitleScreen_branch_7e62c:
+Music_TitleScreen_branch_7e62c::
 	notetype 12, 14, 7
 	octave 4
 	note F_, 6
@@ -306,7 +306,7 @@ Music_TitleScreen_branch_7e62c:
 	notetype 12, 9, 5
 	endchannel
 
-Music_TitleScreen_branch_7e636:
+Music_TitleScreen_branch_7e636::
 	notetype 12, 14, 1
 	note D_, 1
 	rest 2
@@ -321,7 +321,7 @@ Music_TitleScreen_branch_7e636:
 	endchannel
 
 
-Music_TitleScreen_Ch3: ; 7e643 (1f:6643)
+Music_TitleScreen_Ch3:: ; 7e643 (1f:6643)
 	notetype 12, 1, 0
 	octave 3
 	note G_, 1
@@ -348,11 +348,11 @@ Music_TitleScreen_Ch3: ; 7e643 (1f:6643)
 	note F_, 2
 	note A_, 2
 
-Music_TitleScreen_branch_7e65e:
+Music_TitleScreen_branch_7e65e::
 	callchannel Music_TitleScreen_branch_7e6c9
 	callchannel Music_TitleScreen_branch_7e6d0
 
-Music_TitleScreen_branch_7e664:
+Music_TitleScreen_branch_7e664::
 	callchannel Music_TitleScreen_branch_7e6c9
 	callchannel Music_TitleScreen_branch_7e6c9
 	callchannel Music_TitleScreen_branch_7e6c9
@@ -415,7 +415,7 @@ Music_TitleScreen_branch_7e664:
 	note B_, 4
 	loopchannel 0, Music_TitleScreen_branch_7e65e
 
-Music_TitleScreen_branch_7e6c9:
+Music_TitleScreen_branch_7e6c9::
 	note G_, 6
 	note D_, 3
 	note G_, 6
@@ -424,7 +424,7 @@ Music_TitleScreen_branch_7e6c9:
 	note D_, 3
 	endchannel
 
-Music_TitleScreen_branch_7e6d0:
+Music_TitleScreen_branch_7e6d0::
 	note F_, 6
 	note C_, 3
 	note F_, 6
@@ -433,14 +433,14 @@ Music_TitleScreen_branch_7e6d0:
 	note C_, 3
 	endchannel
 
-Music_TitleScreen_branch_7e6d7:
+Music_TitleScreen_branch_7e6d7::
 	note A#, 6
 	note F_, 3
 	note A#, 6
 	note F_, 3
 	endchannel
 
-Music_TitleScreen_branch_7e6dc:
+Music_TitleScreen_branch_7e6dc::
 	octave 4
 	note C_, 6
 	octave 3
@@ -451,7 +451,7 @@ Music_TitleScreen_branch_7e6dc:
 	note G_, 3
 	endchannel
 
-Music_TitleScreen_branch_7e6e5:
+Music_TitleScreen_branch_7e6e5::
 	notetype 12, 1, 0
 	octave 4
 	note D_, 1
@@ -459,7 +459,7 @@ Music_TitleScreen_branch_7e6e5:
 	endchannel
 
 
-Music_TitleScreen_Ch4: ; 7e6eb (1f:66eb)
+Music_TitleScreen_Ch4:: ; 7e6eb (1f:66eb)
 	dspeed 6
 	rest 4
 	dnote 1, snare3
@@ -487,7 +487,7 @@ Music_TitleScreen_Ch4: ; 7e6eb (1f:66eb)
 	dnote 2, snare2
 	dnote 2, snare1
 
-Music_TitleScreen_branch_7e716:
+Music_TitleScreen_branch_7e716::
 	dspeed 12
 	dnote 1, snare2
 	rest 3
@@ -654,7 +654,7 @@ Music_TitleScreen_branch_7e716:
 	dnote 4, snare2
 	loopchannel 0, Music_TitleScreen_branch_7e716
 
-Music_TitleScreen_branch_7e834:
+Music_TitleScreen_branch_7e834::
 	dnote 1, snare2
 	rest 3
 	dnote 1, snare2
@@ -665,7 +665,7 @@ Music_TitleScreen_branch_7e834:
 	rest 3
 	endchannel
 
-Music_TitleScreen_branch_7e842:
+Music_TitleScreen_branch_7e842::
 	dnote 1, snare2
 	rest 3
 	dnote 1, snare2

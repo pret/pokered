@@ -1,10 +1,10 @@
-Music_PalletTown_Ch1: ; a7c5 (2:67c5)
+Music_PalletTown_Ch1:: ; a7c5 (2:67c5)
 	tempo 0, 160
 	stereopanning 119
 	duty 2
 	notetype 12, 12, 3
 
-Music_PalletTown_branch_a7ce:
+Music_PalletTown_branch_a7ce::
 	octave 3
 	note B_, 4
 	octave 4
@@ -148,10 +148,10 @@ Music_PalletTown_branch_a7ce:
 	endchannel
 
 
-Music_PalletTown_Ch2: ; a85f (2:685f)
+Music_PalletTown_Ch2:: ; a85f (2:685f)
 	duty 2
 
-Music_PalletTown_branch_a861:
+Music_PalletTown_branch_a861::
 	notetype 12, 13, 3
 	octave 5
 	note D_, 2
@@ -262,11 +262,11 @@ Music_PalletTown_branch_a861:
 	endchannel
 
 
-Music_PalletTown_Ch3: ; a8de (2:68de)
+Music_PalletTown_Ch3:: ; a8de (2:68de)
 	vibrato 24, 2, 8
 	notetype 12, 1, 2
 
-Music_PalletTown_branch_a8e3:
+Music_PalletTown_branch_a8e3::
 	octave 4
 	note G_, 6
 	note E_, 6

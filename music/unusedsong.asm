@@ -1,9 +1,9 @@
-Music_UnusedSong_Ch1: ; a913 (2:6913)
+Music_UnusedSong_Ch1:: ; a913 (2:6913)
 	tempo 0, 144
 	stereopanning 119
 	vibrato 5, 1, 6
 
-Music_UnusedSong_branch_a91b:
+Music_UnusedSong_branch_a91b::
 	notetype 12, 1, 0
 	octave 6
 	note E_, 1
@@ -182,13 +182,13 @@ Music_UnusedSong_branch_a91b:
 	endchannel
 
 
-Music_UnusedSong_Ch2: ; a9cf (2:69cf)
+Music_UnusedSong_Ch2:: ; a9cf (2:69cf)
 	tempo 0, 144
 	stereopanning 119
 	togglecall
 	vibrato 6, 1, 5
 
-Music_UnusedSong_branch_a9d8:
+Music_UnusedSong_branch_a9d8::
 	notetype 12, 1, 0
 	octave 6
 	note E_, 1

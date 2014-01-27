@@ -1,11 +1,11 @@
-Music_MeetRival_branch_b119:
+Music_MeetRival_branch_b119::
 	tempo 0, 100
 	loopchannel 0, Music_MeetRival_branch_b123
 
-Music_MeetRival_Ch1: ; b120 (2:7120)
+Music_MeetRival_Ch1:: ; b120 (2:7120)
 	tempo 0, 112
 
-Music_MeetRival_branch_b123:
+Music_MeetRival_branch_b123::
 	stereopanning 119
 	duty 3
 	vibrato 6, 3, 4
@@ -31,7 +31,7 @@ Music_MeetRival_branch_b123:
 	note G_, 2
 	note A_, 2
 
-Music_MeetRival_branch_b140:
+Music_MeetRival_branch_b140::
 	note B_, 4
 	note A#, 2
 	note A_, 4
@@ -119,14 +119,14 @@ Music_MeetRival_branch_b140:
 	note A_, 2
 	loopchannel 0, Music_MeetRival_branch_b140
 
-Music_MeetRival_branch_b19b:
+Music_MeetRival_branch_b19b::
 	tempo 0, 100
 	loopchannel 0, Music_MeetRival_branch_b1a5
 
-Music_MeetRival_branch_b1a2:
+Music_MeetRival_branch_b1a2::
 	tempo 0, 112
 
-Music_MeetRival_branch_b1a5:
+Music_MeetRival_branch_b1a5::
 	stereopanning 119
 	duty 3
 	vibrato 6, 3, 4
@@ -143,7 +143,7 @@ Music_MeetRival_branch_b1a5:
 	loopchannel 0, Music_MeetRival_branch_b140
 
 
-Music_MeetRival_Ch2: ; b1bb (2:71bb)
+Music_MeetRival_Ch2:: ; b1bb (2:71bb)
 	duty 3
 	vibrato 10, 2, 6
 	notetype 12, 12, 7
@@ -170,7 +170,7 @@ Music_MeetRival_Ch2: ; b1bb (2:71bb)
 	note F_, 2
 	note F#, 2
 
-Music_MeetRival_branch_b1d8:
+Music_MeetRival_branch_b1d8::
 	notetype 12, 12, 7
 	note G_, 4
 	note D_, 2
@@ -230,7 +230,7 @@ Music_MeetRival_branch_b1d8:
 	note F#, 2
 	loopchannel 0, Music_MeetRival_branch_b1d8
 
-Music_MeetRival_branch_b21d:
+Music_MeetRival_branch_b21d::
 	duty 3
 	vibrato 10, 2, 6
 	notetype 12, 12, 7
@@ -248,7 +248,7 @@ Music_MeetRival_branch_b21d:
 	loopchannel 0, Music_MeetRival_branch_b1d8
 
 
-Music_MeetRival_Ch3: ; b233 (2:7233)
+Music_MeetRival_Ch3:: ; b233 (2:7233)
 	notetype 12, 1, 4
 	octave 5
 	note D_, 2
@@ -273,7 +273,7 @@ Music_MeetRival_Ch3: ; b233 (2:7233)
 	note G_, 1
 	rest 1
 
-Music_MeetRival_branch_b24b:
+Music_MeetRival_branch_b24b::
 	note G_, 2
 	octave 5
 	note D_, 2
@@ -378,7 +378,7 @@ Music_MeetRival_branch_b24b:
 	note D_, 2
 	loopchannel 0, Music_MeetRival_branch_b24b
 
-Music_MeetRival_branch_b2b5:
+Music_MeetRival_branch_b2b5::
 	notetype 12, 1, 4
 	octave 4
 	note G_, 1

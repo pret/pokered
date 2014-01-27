@@ -1,26 +1,26 @@
-_UnnamedText_51510: ; 92721 (24:6721)
+_UnnamedText_51510:: ; 92721 (24:6721)
 	text "Congratulations!"
 	line "You beat our 5"
 	cont "contest trainers!@@"
 
-_UnnamedText_51515: ; 92755 (24:6755)
+_UnnamedText_51515:: ; 92755 (24:6755)
 	db $0
 	para "You just earned a"
 	line "fabulous prize!"
 	prompt
 
-_UnnamedText_5151a: ; 92779 (24:6779)
+_UnnamedText_5151a:: ; 92779 (24:6779)
 	text $52, " received"
 	line "a @"
 	TX_RAM $cf4b
 	text "!@@"
 
-_UnnamedText_51521: ; 9278f (24:678f)
+_UnnamedText_51521:: ; 9278f (24:678f)
 	text "You don't have"
 	line "any room!"
 	done
 
-_UnnamedText_51526: ; 927a8 (24:67a8)
+_UnnamedText_51526:: ; 927a8 (24:67a8)
 	text "By the way, would"
 	line "you like to join"
 	cont "TEAM ROCKET?"
@@ -46,19 +46,19 @@ _UnnamedText_51526: ; 927a8 (24:67a8)
 	cont "refuse!"
 	done
 
-_UnnamedText_5152b: ; 9288a (24:688a)
+_UnnamedText_5152b:: ; 9288a (24:688a)
 	text "Arrgh!"
 	line "You are good!"
 	prompt
 
-_UnnamedText_51530: ; 928a0 (24:68a0)
+_UnnamedText_51530:: ; 928a0 (24:68a0)
 	text "With your ability,"
 	line "you could become"
 	cont "a top leader in"
 	cont "TEAM ROCKET!"
 	done
 
-_Route24BattleText1: ; 928e2 (24:68e2)
+_Route24BattleText1:: ; 928e2 (24:68e2)
 	text "I saw your feat"
 	line "from the grass!"
 	done

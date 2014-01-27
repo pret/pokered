@@ -1,4 +1,4 @@
-Music_BikeRiding_Ch1: ; 7dbbb (1f:5bbb)
+Music_BikeRiding_Ch1:: ; 7dbbb (1f:5bbb)
 	tempo 0, 144
 	stereopanning 119
 	duty 3
@@ -7,7 +7,7 @@ Music_BikeRiding_Ch1: ; 7dbbb (1f:5bbb)
 	octave 3
 	note G_, 2
 
-Music_BikeRiding_branch_7dbc9:
+Music_BikeRiding_branch_7dbc9::
 	octave 4
 	note C_, 4
 	note D_, 4
@@ -153,14 +153,14 @@ Music_BikeRiding_branch_7dbc9:
 	loopchannel 0, Music_BikeRiding_branch_7dbc9
 
 
-Music_BikeRiding_Ch2: ; 7dc6c (1f:5c6c)
+Music_BikeRiding_Ch2:: ; 7dc6c (1f:5c6c)
 	duty 2
 	vibrato 6, 1, 5
 	notetype 12, 12, 3
 	octave 4
 	note C_, 2
 
-Music_BikeRiding_branch_7dc75:
+Music_BikeRiding_branch_7dc75::
 	note E_, 4
 	note F_, 4
 	note G_, 4
@@ -302,11 +302,11 @@ Music_BikeRiding_branch_7dc75:
 	loopchannel 0, Music_BikeRiding_branch_7dc75
 
 
-Music_BikeRiding_Ch3: ; 7dd14 (1f:5d14)
+Music_BikeRiding_Ch3:: ; 7dd14 (1f:5d14)
 	notetype 12, 1, 3
 	rest 2
 
-Music_BikeRiding_branch_7dd17:
+Music_BikeRiding_branch_7dd17::
 	octave 4
 	note C_, 1
 	rest 1
@@ -643,11 +643,11 @@ Music_BikeRiding_branch_7dd17:
 	loopchannel 0, Music_BikeRiding_branch_7dd17
 
 
-Music_BikeRiding_Ch4: ; 7de68 (1f:5e68)
+Music_BikeRiding_Ch4:: ; 7de68 (1f:5e68)
 	dspeed 12
 	rest 2
 
-Music_BikeRiding_branch_7de6a:
+Music_BikeRiding_branch_7de6a::
 	callchannel Music_BikeRiding_branch_7dea7
 	callchannel Music_BikeRiding_branch_7deb4
 	callchannel Music_BikeRiding_branch_7dea7
@@ -669,7 +669,7 @@ Music_BikeRiding_branch_7de6a:
 	callchannel Music_BikeRiding_branch_7dea7
 	loopchannel 0, Music_BikeRiding_branch_7de6a
 
-Music_BikeRiding_branch_7dea7:
+Music_BikeRiding_branch_7dea7::
 	rest 2
 	dnote 2, triangle3
 	rest 2
@@ -680,7 +680,7 @@ Music_BikeRiding_branch_7dea7:
 	dnote 2, triangle3
 	endchannel
 
-Music_BikeRiding_branch_7deb4:
+Music_BikeRiding_branch_7deb4::
 	rest 2
 	dnote 2, triangle3
 	rest 2
@@ -691,7 +691,7 @@ Music_BikeRiding_branch_7deb4:
 	dnote 2, triangle3
 	endchannel
 
-Music_BikeRiding_branch_7dec2:
+Music_BikeRiding_branch_7dec2::
 	rest 2
 	dnote 2, triangle3
 	rest 2
