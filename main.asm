@@ -31753,7 +31753,7 @@ Func_fb50: ; fb50 (3:7b50)
 	ld hl, Func_52673
 	jp Bankswitch
 
-; format: db tileset id, bookshelf tile id, unknown
+; format: db tileset id, bookshelf tile id, text id
 BookshelfTileIDs: ; fb8b (3:7b8b)
 	db $17,$30,$3A
 	db $08,$3D,$3F
