@@ -25,5 +25,3 @@ MoonMonsB2:
 		db 13,CLEFAIRY
 	ENDC
 	db $00
-	
-	

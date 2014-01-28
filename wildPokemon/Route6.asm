@@ -12,6 +12,7 @@ Route6Mons:
 		db 16,PIDGEY
 		db 14,MANKEY
 		db 16,MANKEY
+		db $00
 	ENDC
 	
 	IF _GREEN || !_JAPAN && _BLUE
@@ -25,6 +26,7 @@ Route6Mons:
 		db 16,PIDGEY
 		db 14,MEOWTH
 		db 16,MEOWTH
+		db $00
 	ENDC
 	
 	IF _JAPAN && _BLUE
@@ -38,6 +40,7 @@ Route6Mons:
 		db 16,PIDGEY
 		db 14,MEOWTH
 		db 16,MEOWTH
+		db $00
 	ENDC
 	
 	IF _YELLOW
@@ -64,5 +67,3 @@ Route6Mons:
 		db 15,GOLDUCK
 		db 20,GOLDUCK
 	ENDC
-	
-	db $00

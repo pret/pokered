@@ -25,5 +25,3 @@ Route3Mons:
 		db 12,SPEAROW
 	ENDC
 	db $00
-	
-	
