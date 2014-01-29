@@ -14169,9 +14169,9 @@ Func_5c0a: ; 5c0a (1:5c0a)
 	ld [$d700], a
 	ld a, [wCurrentMenuItem] ; $cc26
 	and a
-	ld a, $f0
+	ld a, TRADE_CENTER
 	jr nz, .asm_5cfc
-	ld a, $ef
+	ld a, BATTLE_CENTER
 .asm_5cfc
 	ld [$d72d], a
 	ld hl, UnnamedText_5d48 ; $5d48
@@ -14903,7 +14903,7 @@ Func_62ce: ; 62ce (1:62ce)
 
 Func_62ff: ; 62ff (1:62ff)
 	ld a, [$d72d]
-	cp $ef
+	cp BATTLE_CENTER
 	jr nz, .asm_6314
 	ld hl, BattleCenterSpec1 ; $6428
 	ld a, [$FF00+$aa]
@@ -14912,7 +14912,7 @@ Func_62ff: ; 62ff (1:62ff)
 	ld hl, BattleCenterSpec2 ; $6430
 	jr .asm_6334
 .asm_6314
-	cp $f0
+	cp TRADE_CENTER
 	jr nz, .asm_6326
 	ld hl, TradeCenterSpec1 ; $6438
 	ld a, [$FF00+$aa]
