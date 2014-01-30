@@ -18,3 +18,4 @@ LavenderHouse1Object: ; 0x1d96a (size=56)
 	; warp-to
 	EVENT_DISP $4, $7, $2
 	EVENT_DISP $4, $7, $3
+

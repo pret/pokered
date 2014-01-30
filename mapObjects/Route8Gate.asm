@@ -17,3 +17,4 @@ Route8GateObject: ; 0x1e247 (size=42)
 	EVENT_DISP $3, $4, $0
 	EVENT_DISP $3, $3, $5
 	EVENT_DISP $3, $4, $5
+

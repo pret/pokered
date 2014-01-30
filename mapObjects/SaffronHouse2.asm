@@ -13,3 +13,4 @@ SaffronHouse2Object: ; 0x1de8a (size=26)
 	; warp-to
 	EVENT_DISP $4, $7, $2
 	EVENT_DISP $4, $7, $3
+

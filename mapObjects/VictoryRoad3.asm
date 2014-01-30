@@ -26,3 +26,4 @@ VictoryRoad3Object: ; 0x44acd (size=106)
 	EVENT_DISP $f, $8, $1a ; VICTORY_ROAD_2
 	EVENT_DISP $f, $f, $1b ; VICTORY_ROAD_2
 	EVENT_DISP $f, $0, $2 ; VICTORY_ROAD_2
+

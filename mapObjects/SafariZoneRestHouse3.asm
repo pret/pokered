@@ -15,3 +15,4 @@ SafariZoneRestHouse3Object: ; 0x45d8e (size=38)
 	; warp-to
 	EVENT_DISP $4, $7, $2 ; SAFARI_ZONE_EAST
 	EVENT_DISP $4, $7, $3 ; SAFARI_ZONE_EAST
+

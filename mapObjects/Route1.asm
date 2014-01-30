@@ -12,3 +12,4 @@ Route1Object: ; 0x1c0e5 (size=19)
 
 	; warp-to (unused)
 	EVENT_DISP $4, $7, $2
+

@@ -32,3 +32,4 @@ RockTunnel1Object: ; 0x445f6 (size=127)
 	EVENT_DISP $14, $3, $5 ; ROCK_TUNNEL_2
 	EVENT_DISP $14, $b, $11 ; ROCK_TUNNEL_2
 	EVENT_DISP $14, $11, $25 ; ROCK_TUNNEL_2
+

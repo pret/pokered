@@ -39,3 +39,4 @@ VermilionCityObject: ; 0x189ba (size=133)
 	EVENT_DISP $14, $1f, $13 ; VERMILION_DOCK
 	EVENT_DISP $14, $d, $f ; VERMILION_HOUSE_3
 	EVENT_DISP $14, $3, $7 ; VERMILION_HOUSE_2
+

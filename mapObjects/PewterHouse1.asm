@@ -15,3 +15,4 @@ PewterHouse1Object: ; 0x1d616 (size=38)
 	; warp-to
 	EVENT_DISP $4, $7, $2
 	EVENT_DISP $4, $7, $3
+

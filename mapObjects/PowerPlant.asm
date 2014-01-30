@@ -28,3 +28,4 @@ PowerPlantObject: ; 0x1e3bf (size=135)
 	EVENT_DISP $14, $23, $4
 	EVENT_DISP $14, $23, $5
 	EVENT_DISP $14, $b, $0
+

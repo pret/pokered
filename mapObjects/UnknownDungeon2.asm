@@ -23,3 +23,4 @@ UnknownDungeon2Object: ; 0x45e14 (size=73)
 	EVENT_DISP $f, $1, $9 ; UNKNOWN_DUNGEON_1
 	EVENT_DISP $f, $3, $1 ; UNKNOWN_DUNGEON_1
 	EVENT_DISP $f, $b, $3 ; UNKNOWN_DUNGEON_1
+

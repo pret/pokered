@@ -14,3 +14,4 @@ CeladonMansion5Object: ; 0x1dd5c (size=32)
 	; warp-to
 	EVENT_DISP $4, $7, $2 ; CELADON_MANSION_4
 	EVENT_DISP $4, $7, $3 ; CELADON_MANSION_4
+

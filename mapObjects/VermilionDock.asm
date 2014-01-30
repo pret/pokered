@@ -12,3 +12,4 @@ VermilionDockObject: ; 0x1dcc6 (size=20)
 	; warp-to
 	EVENT_DISP $e, $0, $e
 	EVENT_DISP $e, $2, $e ; SS_ANNE_1
+

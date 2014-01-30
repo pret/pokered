@@ -13,3 +13,4 @@ SilphCoElevatorObject: ; 0x45844 (size=23)
 	; warp-to
 	EVENT_DISP $2, $3, $1
 	EVENT_DISP $2, $3, $2
+

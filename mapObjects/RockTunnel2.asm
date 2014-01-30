@@ -24,3 +24,4 @@ RockTunnel2Object: ; 0x4613d (size=100)
 	EVENT_DISP $14, $3, $1b ; ROCK_TUNNEL_1
 	EVENT_DISP $14, $b, $17 ; ROCK_TUNNEL_1
 	EVENT_DISP $14, $3, $3 ; ROCK_TUNNEL_1
+

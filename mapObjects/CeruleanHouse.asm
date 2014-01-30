@@ -14,3 +14,4 @@ CeruleanHouseObject: ; 0x1d710 (size=32)
 	; warp-to
 	EVENT_DISP $4, $7, $2
 	EVENT_DISP $4, $7, $3
+

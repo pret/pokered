@@ -16,3 +16,4 @@ ViridianPokecenterObject: ; 0x44277 (size=44)
 	; warp-to
 	EVENT_DISP $7, $7, $3
 	EVENT_DISP $7, $7, $4
+

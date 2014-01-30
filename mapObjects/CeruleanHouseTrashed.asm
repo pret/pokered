@@ -17,3 +17,4 @@ CeruleanHouseTrashedObject: ; 0x1d6bf (size=43)
 	EVENT_DISP $4, $7, $2
 	EVENT_DISP $4, $7, $3
 	EVENT_DISP $4, $0, $3
+

@@ -28,3 +28,4 @@ SilphCo6Object: ; 0x1a2fb (size=112)
 	EVENT_DISP $d, $0, $12 ; SILPH_CO_ELEVATOR
 	EVENT_DISP $d, $3, $3 ; SILPH_CO_4F
 	EVENT_DISP $d, $3, $17 ; SILPH_CO_2F
+

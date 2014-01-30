@@ -33,3 +33,4 @@ SilphCo5Object: ; 0x1a08d (size=137)
 	EVENT_DISP $f, $f, $9 ; SILPH_CO_9F
 	EVENT_DISP $f, $5, $b ; SILPH_CO_3F
 	EVENT_DISP $f, $f, $3 ; SILPH_CO_3F
+

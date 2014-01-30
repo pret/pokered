@@ -18,3 +18,4 @@ Route7GateObject: ; 0x1e185 (size=42)
 	EVENT_DISP $3, $3, $5
 	EVENT_DISP $3, $4, $5
 
+

@@ -15,3 +15,4 @@ Route16HouseObject: ; 0x1e657 (size=32)
 	EVENT_DISP $4, $7, $2
 	EVENT_DISP $4, $7, $3
 
+

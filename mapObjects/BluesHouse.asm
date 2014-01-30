@@ -15,3 +15,4 @@ BluesHouseObject: ; 19bce (6:5bce)
 	; warp-to
 	EVENT_DISP BLUES_HOUSE_WIDTH, 7, 2
 	EVENT_DISP BLUES_HOUSE_WIDTH, 7, 3
+

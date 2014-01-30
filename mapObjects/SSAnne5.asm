@@ -17,3 +17,4 @@ SSAnne5Object: ; 0x6172b (size=54)
 	; warp-to
 	EVENT_DISP $a, $6, $d ; SS_ANNE_3
 	EVENT_DISP $a, $7, $d ; SS_ANNE_3
+

@@ -31,3 +31,4 @@ SSAnne8Object: ; 0x61a60 (size=127)
 	EVENT_DISP $c, $a, $0 ; SS_ANNE_1
 	EVENT_DISP $c, $a, $a ; SS_ANNE_1
 	EVENT_DISP $c, $a, $14 ; SS_ANNE_1
+

@@ -15,3 +15,4 @@ ViridianMartObject: ; 0x1d50a (size=38)
 	; warp-to
 	EVENT_DISP $4, $7, $3
 	EVENT_DISP $4, $7, $4
+

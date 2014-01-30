@@ -45,3 +45,4 @@ SSAnne9Object: ; 0x61c8d (size=188)
 	EVENT_DISP $c, $f, $d ; SS_ANNE_2
 	EVENT_DISP $c, $f, $16 ; SS_ANNE_2
 	EVENT_DISP $c, $f, $17 ; SS_ANNE_2
+

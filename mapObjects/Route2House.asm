@@ -14,3 +14,4 @@ Route2HouseObject: ; 0x1df07 (size=32)
 	; warp-to
 	EVENT_DISP $4, $7, $2
 	EVENT_DISP $4, $7, $3
+

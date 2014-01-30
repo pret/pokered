@@ -19,3 +19,4 @@ IndigoPlateauLobbyObject: ; 0x19c95 (size=58)
 	EVENT_DISP $8, $b, $7
 	EVENT_DISP $8, $b, $8
 	EVENT_DISP $8, $0, $8 ; LORELEIS_ROOM
+

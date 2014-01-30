@@ -27,3 +27,4 @@ Mansion1Object: ; 0x443a4 (size=90)
 	EVENT_DISP $f, $17, $15 ; MANSION_4
 	EVENT_DISP $f, $1b, $1a
 	EVENT_DISP $f, $1b, $1b
+

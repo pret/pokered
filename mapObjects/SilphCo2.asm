@@ -27,3 +27,4 @@ SilphCo2Object: ; 0x59e66 (size=98)
 	EVENT_DISP $f, $3, $d ; SILPH_CO_8F
 	EVENT_DISP $f, $f, $1b ; SILPH_CO_8F
 	EVENT_DISP $f, $f, $9 ; SILPH_CO_6F
+

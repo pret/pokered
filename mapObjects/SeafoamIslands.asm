@@ -28,3 +28,4 @@ SeafoamIslands1Object: ; 0x4484f (size=72)
 	; holes
 	EVENT_DISP $f, $6, $11
 	EVENT_DISP $f, $6, $18
+

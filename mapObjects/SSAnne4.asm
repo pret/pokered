@@ -20,3 +20,4 @@ SSAnne4Object: ; 0x61632 (size=52)
 	EVENT_DISP $f, $3, $b ; SS_ANNE_10
 	EVENT_DISP $f, $3, $7 ; SS_ANNE_10
 	EVENT_DISP $f, $5, $1b ; SS_ANNE_1
+

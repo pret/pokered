@@ -21,3 +21,4 @@ PalletTownObject: ; 0x182c3 (size=58)
 	EVENT_DISP $a, $5, $5 ; REDS_HOUSE_1F
 	EVENT_DISP $a, $5, $d ; BLUES_HOUSE
 	EVENT_DISP $a, $b, $c ; OAKS_LAB
+

@@ -17,3 +17,4 @@ Route22GateObject: ; 0x1e720 (size=42)
 	EVENT_DISP $5, $7, $5
 	EVENT_DISP $5, $0, $4
 	EVENT_DISP $5, $0, $5
+

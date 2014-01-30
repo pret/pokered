@@ -15,3 +15,4 @@ DiglettsCaveRoute2Object: ; 0x1debf (size=34)
 	EVENT_DISP $4, $7, $2
 	EVENT_DISP $4, $7, $3
 	EVENT_DISP $4, $4, $4 ; DIGLETTS_CAVE
+

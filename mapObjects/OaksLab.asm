@@ -23,3 +23,4 @@ OaksLabObject: ; 0x1d40a (size=88)
 	; warp-to
 	EVENT_DISP $5, $b, $4
 	EVENT_DISP $5, $b, $5
+

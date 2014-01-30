@@ -15,3 +15,4 @@ UndergroundPathEntranceRoute8Object: ; 0x1e298 (size=34)
 	EVENT_DISP $4, $7, $3
 	EVENT_DISP $4, $7, $4
 	EVENT_DISP $4, $4, $4 ; UNDERGROUND_PATH_WE
+

@@ -25,3 +25,4 @@ CinnabarIslandObject: ; 0x1c022 (size=71)
 	EVENT_DISP $a, $9, $6 ; CINNABAR_LAB_1
 	EVENT_DISP $a, $b, $b ; CINNABAR_POKECENTER
 	EVENT_DISP $a, $b, $f ; CINNABAR_MART
+

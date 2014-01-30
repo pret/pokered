@@ -13,3 +13,4 @@ RocketHideoutElevatorObject: ; 0x45791 (size=23)
 	; warp-to
 	EVENT_DISP $3, $1, $2 ; ROCKET_HIDEOUT_1
 	EVENT_DISP $3, $1, $3 ; ROCKET_HIDEOUT_1
+

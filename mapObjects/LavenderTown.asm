@@ -29,3 +29,4 @@ LavenderTownObject: ; 0x4402d (size=88)
 	EVENT_DISP $a, $d, $f ; LAVENDER_MART
 	EVENT_DISP $a, $d, $3 ; LAVENDER_HOUSE_2
 	EVENT_DISP $a, $d, $7 ; NAME_RATERS_HOUSE
+

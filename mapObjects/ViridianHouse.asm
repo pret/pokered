@@ -16,3 +16,4 @@ ViridianHouseObject: ; 0x1d5bb (size=44)
 	; warp-to
 	EVENT_DISP $4, $7, $2
 	EVENT_DISP $4, $7, $3
+

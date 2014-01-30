@@ -19,3 +19,4 @@ Route7Object: ; 0x48022 (size=47)
 	EVENT_DISP $a, $9, $b ; ROUTE_7_GATE
 	EVENT_DISP $a, $a, $b ; ROUTE_7_GATE
 	EVENT_DISP $a, $d, $5 ; PATH_ENTRANCE_ROUTE_7
+

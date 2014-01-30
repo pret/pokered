@@ -29,3 +29,4 @@ SafariZoneCenterObject: ; 0x45bc5 (size=89)
 	EVENT_DISP $f, $a, $1d ; SAFARI_ZONE_EAST
 	EVENT_DISP $f, $b, $1d ; SAFARI_ZONE_EAST
 	EVENT_DISP $f, $13, $11 ; SAFARI_ZONE_REST_HOUSE_1
+

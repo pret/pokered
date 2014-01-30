@@ -13,3 +13,4 @@ UnknownDungeon3Object: ; 0x45f36 (size=34)
 
 	; warp-to
 	EVENT_DISP $f, $6, $3 ; UNKNOWN_DUNGEON_1
+

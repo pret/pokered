@@ -26,3 +26,4 @@ SilphCo8Object: ; 0x56613 (size=90)
 	EVENT_DISP $d, $f, $3 ; SILPH_CO_2F
 	EVENT_DISP $d, $5, $b ; SILPH_CO_2F
 	EVENT_DISP $d, $9, $b ; SILPH_CO_8F
+

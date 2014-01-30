@@ -24,3 +24,4 @@ SeafoamIslands3Object: ; 0x464b2 (size=72)
 	EVENT_DISP $f, $3, $19 ; SEAFOAM_ISLANDS_4
 	EVENT_DISP $f, $b, $19 ; SEAFOAM_ISLANDS_2
 	EVENT_DISP $f, $e, $19 ; SEAFOAM_ISLANDS_4
+

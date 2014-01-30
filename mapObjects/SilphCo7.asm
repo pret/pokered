@@ -31,3 +31,4 @@ SilphCo7Object: ; 0x51ed7 (size=128)
 	EVENT_DISP $d, $7, $5 ; SILPH_CO_11F
 	EVENT_DISP $d, $3, $5 ; SILPH_CO_3F
 	EVENT_DISP $d, $f, $15 ; SILPH_CO_5F
+

@@ -14,3 +14,4 @@ SchoolObject: ; 0x1d55d (size=32)
 	; warp-to
 	EVENT_DISP $4, $7, $2
 	EVENT_DISP $4, $7, $3
+

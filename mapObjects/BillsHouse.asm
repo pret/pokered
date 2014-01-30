@@ -15,3 +15,4 @@ BillsHouseObject: ; 0x1e8df (size=38)
 	; warp-to
 	EVENT_DISP $4, $7, $2
 	EVENT_DISP $4, $7, $3
+

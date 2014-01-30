@@ -32,3 +32,4 @@ SSAnne1Object: ; 0x61277 (size=104)
 	EVENT_DISP $14, $6, $2 ; SS_ANNE_2
 	EVENT_DISP $14, $f, $25 ; SS_ANNE_4
 	EVENT_DISP $14, $10, $3 ; SS_ANNE_6
+

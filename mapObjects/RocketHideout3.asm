@@ -16,3 +16,4 @@ RocketHideout3Object: ; 0x4534d (size=50)
 	; warp-to
 	EVENT_DISP $f, $6, $19 ; ROCKET_HIDEOUT_2
 	EVENT_DISP $f, $12, $13 ; ROCKET_HIDEOUT_4
+

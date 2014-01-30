@@ -17,3 +17,4 @@ SSAnne6Object: ; 0x6181b (size=54)
 
 	; warp-to
 	EVENT_DISP $7, $0, $6 ; SS_ANNE_1
+
