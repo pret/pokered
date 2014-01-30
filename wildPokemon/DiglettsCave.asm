@@ -11,3 +11,4 @@ CaveMons:
 	db 29,DUGTRIO
 	db 31,DUGTRIO
 	db $00
+

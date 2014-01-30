@@ -25,3 +25,4 @@ MoonMons1:
 		db 11,CLEFAIRY
 	ENDC
 	db $00
+

@@ -53,3 +53,4 @@ IslandMonsB1:
 	ENDC
 	
 	db $00
+

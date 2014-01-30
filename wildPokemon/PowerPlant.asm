@@ -34,3 +34,4 @@ PowerPlantMons:
 	ENDC
 	
 	db $00
+

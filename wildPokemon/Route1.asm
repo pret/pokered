@@ -25,3 +25,4 @@ Route1Mons:
 		db 7,PIDGEY
 	ENDC
 	db $00
+

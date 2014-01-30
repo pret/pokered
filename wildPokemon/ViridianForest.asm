@@ -41,3 +41,4 @@ ForestMons: ;
 	ENDC
 
 	db $00
+

@@ -53,3 +53,4 @@ ZoneMonsCenter:
 	ENDC
 	
 	db $00
+

@@ -37,3 +37,4 @@ Route22Mons:
 		db 6,SPEAROW
 	ENDC
 	db $00
+

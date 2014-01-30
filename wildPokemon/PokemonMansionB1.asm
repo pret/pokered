@@ -53,3 +53,4 @@ MansionMonsB1:
 	ENDC
 	
 	db $00
+

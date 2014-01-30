@@ -67,3 +67,4 @@ Route6Mons:
 		db 15,GOLDUCK
 		db 20,GOLDUCK
 	ENDC
+

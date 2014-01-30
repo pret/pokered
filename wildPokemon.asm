@@ -319,3 +319,4 @@ INCLUDE "wildPokemon/VictoryRoad2.asm"
 INCLUDE "wildPokemon/VictoryRoad3.asm"
 INCLUDE "wildPokemon/VictoryRoad1.asm"
 INCLUDE "wildPokemon/DiglettsCave.asm"
+

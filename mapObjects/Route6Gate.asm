@@ -17,3 +17,4 @@ Route6GateObject: ; 0x1e0be (size=42)
 	EVENT_DISP $4, $5, $4
 	EVENT_DISP $4, $0, $3
 	EVENT_DISP $4, $0, $4
+

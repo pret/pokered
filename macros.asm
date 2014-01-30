@@ -347,3 +347,4 @@ WEST_MAP_CONNECTION: MACRO
 	db (\2 * 2) - 1 ; x alignment
 	dw $C6EE + (2 * \2) ; window (position of the upper left block after entring the map)
 ENDM
+

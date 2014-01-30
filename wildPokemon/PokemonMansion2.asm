@@ -53,3 +53,4 @@ MansionMons2:
 	ENDC
 	
 	db $00
+

@@ -13,3 +13,4 @@ VermilionHouse3Object: ; 0x19c25 (size=26)
 	; warp-to
 	EVENT_DISP VERMILION_HOUSE_3_WIDTH, $7, $2
 	EVENT_DISP VERMILION_HOUSE_3_WIDTH, $7, $3
+

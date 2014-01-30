@@ -37,3 +37,4 @@ Route2Mons:
 		db 7,PIDGEY
 	ENDC
 	db $00
+

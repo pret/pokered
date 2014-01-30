@@ -32,3 +32,4 @@ DungeonMonsB1:
 	ENDC
 	
 	db $00
+
